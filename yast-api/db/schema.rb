@@ -9,10 +9,10 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20080701094617) do
+ActiveRecord::Schema.define(:version => 20080701135047) do
 
   create_table "system_times", :force => true do |t|
-    t.datetime "system_time"
+    t.datetime "systemtime"
     t.string   "timezone"
     t.boolean  "is_utc"
     t.datetime "created_at"
