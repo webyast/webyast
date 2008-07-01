@@ -1,0 +1,11 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  system_time: 2008-07-01 11:46:17
+  timezone: MyString
+  is_utc: false
+
+two:
+  system_time: 2008-07-01 11:46:17
+  timezone: MyString
+  is_utc: false
