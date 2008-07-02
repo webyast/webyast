@@ -9,7 +9,16 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20080701135047) do
+ActiveRecord::Schema.define(:version => 20080702105600) do
+
+  create_table "service_ntps", :force => true do |t|
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "services", :force => true do |t|
+    t.string "name"
+  end
 
   create_table "system_times", :force => true do |t|
     t.datetime "systemtime"
