@@ -17,9 +17,9 @@ class ServicesController < ApplicationController
         format.json do
           render :json => @services.to_json
         end
-#        format.html do
-#          render :html => @services.to_html
-#        end
+        format.html do
+          render
+        end
       end
   end
 end
