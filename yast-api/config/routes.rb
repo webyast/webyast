@@ -1,4 +1,5 @@
 ActionController::Routing::Routes.draw do |map|
+  map.resources :sysconfigs
 
   map.resources :services do |service|
     service.resource :ntp
