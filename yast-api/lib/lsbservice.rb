@@ -8,18 +8,28 @@ class Lsbservice
   PREFIX = '/etc/init.d/'
   
   #
+  # iterates over all service names
+  #
+  def self.each
+    Dir.entries(PREFIX).each do |d|
+      next if d[0,1] == '.'
+      next if d == "README"
+      next if File.directory?( PREFIX+d )
+      yield d
+    end
+  end
+    
+  #
   # Lsbservice.all -> Array of string
   #  returns array of all available services
   #
   
   def Lsbservice.all
     result = []
-    Dir.foreach( PREFIX ) do |d|
-      next if d[0,1] == '.'
-      next if d == "README"
-      next if File.directory?( PREFIX+d )
+    Lsbservice::each do |d|
       result << d
     end
+    return result
   end
 
   # 0 - success
