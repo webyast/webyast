@@ -8,18 +8,28 @@ class Lsbservice
   PREFIX = '/etc/init.d/'
   
   #
+  # iterates over all service names
+  #
+  def self.each
+    Dir.entries(PREFIX).each do |d|
+      next if d[0,1] == '.'
+      next if d == "README"
+      next if File.directory?( PREFIX+d )
+      yield d
+    end
+  end
+    
+  #
   # Lsbservice.all -> Array of string
   #  returns array of all available services
   #
   
   def Lsbservice.all
     result = []
-    Dir.foreach( PREFIX ) do |d|
-      next if d[0,1] == '.'
-      next if d == "README"
-      next if File.directory?( PREFIX+d )
+    Lsbservice::each do |d|
       result << d
     end
+    result
   end
 
   # 0 - success
@@ -37,31 +47,46 @@ class Lsbservice
   #   Creates a new instance of Lsbservice for service <name>
   #
   # Attributes
+  #  name: name of the service
   #  path: path to init script
   #  functions: available functions as array of strings, typically "start", "stop", ...
   #
   
-  attr_reader :path, :functions
+  attr_reader :name, :path, :functions
+  
   def initialize name
     name = name.to_s unless name.is_a? String
-    IO.popen( PREFIX+name, 'r+' ) do |pipe|
-      loop do
-	break if pipe.eof?
-	l = pipe.read
-        case l
-	when /Usage:\s*(\S*)\s*{([^}]*)}/
-#	  STDERR.puts "USAGE: #{$1}, #{$2}"
-	  @path = $1
-	  @functions = $2.split "|"
-	  break
+    @name = name
+    
+    path = PREFIX+name
+    raise "Unexisting service" unless File.exists?( path )
+    
+    if File.executable?( path )
+      # run init script to get its 'Usage' line
+      IO.popen( path, 'r+' ) do |pipe|
+	loop do
+	  break if pipe.eof?
+	  l = pipe.read
+	  case l
+	  when /Usage:\s*(\S*)\s*\{([^\}]*)\}/
+	    #	  STDERR.puts "USAGE: #{$1}, #{$2}"
+	    @path = $1
+	    @functions = $2.split "|"
+	    break
+	  end
 	end
       end
+    else # non-executable
+      @path = path
+      @functions = []
     end
   end
   
   def method_missing( method, *args )
     raise "Unknown method #{method}" unless @functions.include?( method.to_s )
-    system( PREFIX + @name, method.to_s, *args )
-    @@states[ $? ]
+#    puts "Running '#{@path} #{method}'"
+    system("#{@path} #{method} #{args.join(' ')} > /dev/null 2>&1")
+#    puts "Returned #{$?.class}, #{$?.inspect}, #{$?.exitstatus}"
+    @@states[ $?.exitstatus ]
   end
 end
