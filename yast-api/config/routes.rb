@@ -36,7 +36,7 @@ ActionController::Routing::Routes.draw do |map|
     service.resource :ntp, :controller => 'ntp'
   end
   map.resources :services
- 
+
 
   # You can have the root of your site routed with map.root -- just remember to delete public/index.html.
   # map.root :controller => "welcome"
@@ -44,7 +44,7 @@ ActionController::Routing::Routes.draw do |map|
   # See how all your routes lay out with "rake routes"
 
   # Install the default routes as the lowest priority.
-  #map.connect ':controller/:action.:format'
+  map.connect ':controller/:action.:format'
   map.connect ':controller/:action/:id'
   map.connect ':controller/:action/:id.:format'
 end
