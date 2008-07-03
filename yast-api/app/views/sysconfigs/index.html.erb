@@ -1,0 +1,5 @@
+Found <%= @sysconfigs.size -%> Sysconfig files<hr/>
+<% @sysconfigs.sort{|l,r|l.name<=>r.name}.each do |s| -%>
+<%= link_to s.name, :action => s.name %><br/>
+<% end -%>
+

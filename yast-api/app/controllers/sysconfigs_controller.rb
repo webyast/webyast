@@ -15,9 +15,10 @@ class SysconfigsController < ApplicationController
       format.json do
         render :json => @sysconfigs.to_json
       end
-#        format.html do
-#          render :html => @sysconfigs.to_html
-#        end
+      format.html do
+        #render :html => @sysconfigs.to_html
+        render
+      end
     end
   end
 end

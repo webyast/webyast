@@ -12,7 +12,7 @@ class ServicesController < ApplicationController
     end
       respond_to do |format|
         format.xml do
-          render :xml => @services.to_xml 
+          render :xml => @services.to_xml
         end
         format.json do
           render :json => @services.to_json
