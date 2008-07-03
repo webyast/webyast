@@ -59,7 +59,7 @@ class Lsbservice
 	break if pipe.eof?
 	l = pipe.read
         case l
-	when /Usage:\s*(\S*)\s*{([^}]*)}/
+	when /Usage:\s*(\S*)\s*\{([^\}]*)\}/
 #	  STDERR.puts "USAGE: #{$1}, #{$2}"
 	  @path = $1
 	  @functions = $2.split "|"
