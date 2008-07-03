@@ -29,7 +29,7 @@ class Lsbservice
     Lsbservice::each do |d|
       result << d
     end
-    return result
+    result
   end
 
   # 0 - success
