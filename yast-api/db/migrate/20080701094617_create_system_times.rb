@@ -4,8 +4,6 @@ class CreateSystemTimes < ActiveRecord::Migration
       t.datetime :system_time
       t.string :timezone
       t.boolean :is_utc
-
-      t.timestamps
     end
   end
 
