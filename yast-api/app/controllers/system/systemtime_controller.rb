@@ -8,9 +8,9 @@ class System::SystemtimeController < ApplicationController
 		#element = xmldoc.root
 		#system ("date -s", request.raw_post )
 		respond_to do |format|
-      format.html { render :text => request.path_parameters.to_s }
-			format.json { render :json => request.to_json }
-			format.xml { render :xml => request }
+      format.html { redirect_to :action => "show" }
+			format.json { head :ok }
+			format.xml { head :ok }
 		end
   end
 
