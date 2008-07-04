@@ -59,8 +59,8 @@ class Lsbservice
     name = name.to_s unless name.is_a? String
     @name = name
     @functions = []
-    
-    path = PREFIX+name
+    @path = PREFIX+name
+
     raise "Unexisting service" unless File.exists?( path )
     
     if File.executable?( path )
@@ -78,8 +78,6 @@ class Lsbservice
 	  end
 	end
       end
-    else # non-executable
-      @path = path
     end
   end
   
@@ -91,5 +89,24 @@ class Lsbservice
     s = $?.exitstatus
     return @@states[ s ] if s < @@states.size
     :unknown
+  end
+  
+  #
+  # See 'The Rails Way', page 510
+  #
+  
+  def to_xml( options = {} )
+    STDERR.puts "#{self}.to_xml"
+    xml = options[:builder] ||= Builder::XmlMarkup.new(options)
+    xml.instruct! unless options[:skip_instruct]
+    xml.service do
+      xml.tag!(:name, @name )
+      xml.tag!(:path, @path )
+      xml.links do
+	@functions.each do |f|
+	  xml.tag!(f.to_sym, @name+"/"+f)
+	end
+      end
+    end  
   end
 end

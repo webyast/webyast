@@ -10,16 +10,21 @@ class ServicesController < ApplicationController
     session['services'] = services
   end
   def respond data
+    STDERR.puts "Respond #{data.class}"
+    if data
       respond_to do |format|
-      format.xml do
-	render :xml => data.to_xml
+	format.xml do
+	  render :xml => data.to_xml
+	end
+	format.json do
+	  render :json => data.to_json
+	end
+	format.html do
+	  render
+	end
       end
-      format.json do
-	render :json => data.to_json
-      end
-      format.html do
-	render
-      end
+    else
+      render :nothing => true, :status => 404 unless @service # not found
     end
   end
   public
@@ -34,11 +39,6 @@ class ServicesController < ApplicationController
     init_services unless session['services']
     @service = session['services'][id]
 #    STDERR.puts "@service #{@service}"
-    if @service.nil?
-#      STDERR.puts "NIL"
-      render :nothing => true, :status => 404 unless @service # not found
-      return
-    end
     respond @service
   end
 end
