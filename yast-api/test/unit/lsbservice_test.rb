@@ -1,3 +1,4 @@
+#require File.dirname(__FILE__) + '/../unit_test_helper'
 require 'test_helper'
 
 class LsbserviceTest < ActiveSupport::TestCase

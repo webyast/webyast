@@ -11,9 +11,11 @@ class Lsbservice
   # iterates over all service names
   #
   def self.each
-    Dir.entries(PREFIX).each do |d|
+#    Dir.entries(PREFIX).each do |d|
+     ["cron", "cups", "gpm", "ntp", "random", "smbfs", "sshd" ].each do |d|
       next if d[0,1] == '.'
       next if d == "README"
+      next if d == "reboot"
       next if File.directory?( PREFIX+d )
       yield d
     end
@@ -57,8 +59,9 @@ class Lsbservice
   def initialize name
     name = name.to_s unless name.is_a? String
     @name = name
-    
-    path = PREFIX+name
+    @functions = []
+    @path = PREFIX+name
+
     raise "Unexisting service" unless File.exists?( path )
     
     if File.executable?( path )
@@ -76,9 +79,6 @@ class Lsbservice
 	  end
 	end
       end
-    else # non-executable
-      @path = path
-      @functions = []
     end
   end
   
@@ -90,5 +90,24 @@ class Lsbservice
     s = $?.exitstatus
     return @@states[ s ] if s < @@states.size
     :unknown
+  end
+  
+  #
+  # See 'The Rails Way', page 510
+  #
+  
+  def to_xml( options = {} )
+    STDERR.puts "#{self}.to_xml"
+    xml = options[:builder] ||= Builder::XmlMarkup.new(options)
+    xml.instruct! unless options[:skip_instruct]
+    xml.service do
+      xml.tag!(:name, @name )
+      xml.tag!(:path, @path )
+      xml.links do
+	@functions.each do |f|
+	  xml.tag!(f.to_sym, @name+"/"+f)
+	end
+      end
+    end  
   end
 end

@@ -1,23 +1,44 @@
 class ServicesController < ApplicationController
   require 'lsbservice'
-  require 'service'
-  def index
-    @services = Array.new
+  private
+  def init_services
+    services = Hash.new
     Lsbservice.all.each do |d|
-      service = Service.new
-      service.name = d
-      @services << service
+      service = Lsbservice.new d
+      services[service.name] = service
     end
-    respond_to do |format|
-      format.xml do
-	render :xml => @services.to_xml
+    session['services'] = services
+  end
+  def respond data
+    STDERR.puts "Respond #{data.class}"
+    if data
+      respond_to do |format|
+	format.xml do
+	  render :xml => data.to_xml
+	end
+	format.json do
+	  render :json => data.to_json
+	end
+	format.html do
+	  render
+	end
       end
-      format.json do
-	render :json => @services.to_json
-      end
-      format.html do
-	render
-      end
+    else
+      render :nothing => true, :status => 404 unless @service # not found
     end
+  end
+  public
+  def index
+    init_services unless session['services']
+    @services ||= session['services']
+    respond @services
+  end
+  def show
+    id = params[:id]
+#    STDERR.puts "services/show #{id}"
+    init_services unless session['services']
+    @service = session['services'][id]
+#    STDERR.puts "@service #{@service}"
+    respond @service
   end
 end
