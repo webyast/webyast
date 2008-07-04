@@ -1,21 +1,24 @@
 class System::SystemtimeController < ApplicationController
+  require 'rexml/document'
   require 'system/systemtime'
 	def update
-    #systemtime = System::Systemtime.new(params[:system])
-		#system ("date -s", @systemtime.systemtime)
-		#xmldoc = REXML::Document.new(request)
-		#systemtime = ActiveResource::Base.find(params[:systemtime])
-		#element = xmldoc.root
-		#system ("date -s", request.raw_post )
+		
+		#system("date -s ", params[:systemtime][:time])
 		respond_to do |format|
-      format.html { render :text => request.path_parameters.to_s }
-			format.json { render :json => request.to_json }
-			format.xml { render :xml => request }
+      format.html { redirect_to :action => "show" }
+			format.json { head :ok }
+			format.xml { head :ok }
 		end
   end
 
+	# Workaround for put-problem
+	def create
+		logger.error ("TTTTEEEEEESSSSSSST", params[:systemtime][:time])	
+	end
+
   def show
 			@systemtime = System::Systemtime.new
+			@systemtime.id = "systemtime"
 			@systemtime.time = `date +%r`
 			temp = `date +%Z`
 			if temp == "UTC" then
