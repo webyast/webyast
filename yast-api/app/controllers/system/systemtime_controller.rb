@@ -16,7 +16,7 @@ class System::SystemtimeController < ApplicationController
 
   def show
 			@systemtime = System::Systemtime.new
-			@systemtime.time = `date +%m%e%H%M%Y`
+			@systemtime.time = `date +%r`
 			temp = `date +%Z`
 			if temp == "UTC" then
 				@systemtime.isUTC = true
