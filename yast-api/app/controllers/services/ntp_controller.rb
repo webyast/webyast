@@ -10,7 +10,12 @@ class Services::NtpController < ApplicationController
 
   def config
     @config = Parsers::Ntp::NtpConf.new
-    @config.parse( '/etc/ntp.conf' )
+    begin
+      @config.parse( '/etc/ntp.conf' )
+    rescue
+      render :nothing => true, :status => 404
+      return
+    end
     respond_to do |format|
       format.xml do
         render :xml => @config
