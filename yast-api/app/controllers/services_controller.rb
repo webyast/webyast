@@ -1,5 +1,4 @@
 class ServicesController < ApplicationController
-  require 'lsbservice'
   private
   def init_services
     services = Hash.new
