@@ -4,8 +4,11 @@ class ServicesController < ApplicationController
   def init_services
     services = Hash.new
     Lsbservice.all.each do |d|
-      service = Lsbservice.new d
-      services[service.name] = service
+      begin
+        service = Lsbservice.new d
+        services[service.name] = service
+      rescue # Don't fail on non-existing service. Should be more specific.
+      end
     end
     session['services'] = services
   end
