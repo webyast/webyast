@@ -5,7 +5,7 @@ class LsbserviceTest < ActiveSupport::TestCase
   def test_all
     services = Lsbservice.all
     assert services.size > 0
-    assert services[0].is_a? String
+    assert services[0].is_a?( String )
   end
 
   def test_first
