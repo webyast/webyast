@@ -1,2 +1,2 @@
-class Services < ActiveRecord::Base
+class Services < ActiveResource::Base
 end
