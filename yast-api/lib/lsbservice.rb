@@ -84,9 +84,11 @@ class Lsbservice
   
   def method_missing( method, *args )
     raise "Unknown method #{method}" unless @functions.include?( method.to_s )
-#    puts "Running '#{@path} #{method}'"
+    puts "Running '#{@path} #{method}'"
     system("#{@path} #{method} #{args.join(' ')} > /dev/null 2>&1")
-#    puts "Returned #{$?.class}, #{$?.inspect}, #{$?.exitstatus}"
-    @@states[ $?.exitstatus ]
+    puts "Returned #{$?.class}, #{$?.inspect}, #{$?.exitstatus}"
+    s = $?.exitstatus
+    return @@states[ s ] if s < @@states.size
+    :unknown
   end
 end
