@@ -15,6 +15,7 @@ class Lsbservice
      ["cron", "cups", "gpm", "ntp", "random", "smbfs", "sshd" ].each do |d|
       next if d[0,1] == '.'
       next if d == "README"
+      next if d == "reboot"
       next if File.directory?( PREFIX+d )
       yield d
     end
