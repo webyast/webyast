@@ -11,7 +11,8 @@ class Lsbservice
   # iterates over all service names
   #
   def self.each
-    Dir.entries(PREFIX).each do |d|
+#    Dir.entries(PREFIX).each do |d|
+     ["cron", "cups", "gpm", "ntp", "random", "smbfs", "sshd" ].each do |d|
       next if d[0,1] == '.'
       next if d == "README"
       next if File.directory?( PREFIX+d )
@@ -57,6 +58,7 @@ class Lsbservice
   def initialize name
     name = name.to_s unless name.is_a? String
     @name = name
+    @functions = []
     
     path = PREFIX+name
     raise "Unexisting service" unless File.exists?( path )
@@ -78,7 +80,6 @@ class Lsbservice
       end
     else # non-executable
       @path = path
-      @functions = []
     end
   end
   
