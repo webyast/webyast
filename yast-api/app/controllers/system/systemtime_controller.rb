@@ -1,5 +1,7 @@
 require "dbus"
 
+include ApplicationHelper
+
 class System::SystemtimeController < ApplicationController
 	
   def update
@@ -7,19 +9,6 @@ class System::SystemtimeController < ApplicationController
       systemtime = System::SystemTime.new
       if systemtime.update_attributes(params[:system_time])
         logger.debug "UPDATED: #{systemtime.inspect}"
-        system_bus = DBus::SystemBus.instance
-
-        # Get the yast service
-        yast = system_bus.service("org.opensuse.yast.SCR")
-
-        # Get the object from this service
-        objYast = yast.object("/SCR")
-        poiSCR = DBus::ProxyObjectInterface.new(objYast, 
-                                                "org.opensuse.yast.SCR.Methods")
-        poiSCR.define_method("Write", 
-                             "in path:(bsv), in arg:(bsv), in opt:(bsv), out ret:(bsv)")
-        poiSCR.define_method("Execute", 
-                             "in path:(bsv), in arg:(bsv), in opt:(bsv), out ret:(bsv)")
 
         #set hwclock
 	if systemtime.is_utc
@@ -27,14 +16,10 @@ class System::SystemtimeController < ApplicationController
         else
           hwclock = "--localtime"
         end
-        poiSCR.Write([false, "path", ["s",".sysconfig.clock.HWCLOCK"] ], 
-                     [false, "string", ["s",hwclock] ], 
-                     [false, "", ["s",""] ])
+        SCRWrite(".sysconfig.clock.HWCLOCK", hwclock)
 
         #set timezone
-        poiSCR.Write([false, "path", ["s",".sysconfig.clock.TIMEZONE"] ], 
-                     [false, "string", ["s",systemtime.timezone] ], 
-                     [false, "", ["s",""] ])
+        SCRWrite(".sysconfig.clock.TIMEZONE",systemtime.timezone)
 
         #set time
 	cmd = "";
@@ -47,16 +32,12 @@ class System::SystemtimeController < ApplicationController
               " #{systemtime.systemtime.hour}:#{systemtime.systemtime.min}:#{systemtime.systemtime.sec}\""
 
 	logger.debug "SetTime cmd #{cmd}"
-        poiSCR.Execute([false, "path", ["s",".target.bash_output"] ], 
-                       [false, "string", ["s",cmd] ], 
-                       [false, "", ["s",""] ])
+        SCRExecute(".target.bash_output",cmd)
 
 	cmd = "/sbin/hwclock --hctosys " + hwclock;
 
 	logger.debug "SetTime cmd #{cmd}"
-        poiSCR.Execute([false, "path", ["s",".target.bash_output"] ], 
-                       [false, "string", ["s",cmd] ], 
-                       [false, "", ["s",""] ])
+        SCRExecute(".target.bash_output",cmd)
 
         format.html { redirect_to :action => "show" }
 	format.json { head :ok }
@@ -75,42 +56,18 @@ class System::SystemtimeController < ApplicationController
 #  end
 
   def show
-    system_bus = DBus::SystemBus.instance
-
-    # Get the yast service
-    yast = system_bus.service("org.opensuse.yast.SCR")
-
-    # Get the object from this service
-    objYast = yast.object("/SCR")
-    poiSCR = DBus::ProxyObjectInterface.new(objYast, 
-                                            "org.opensuse.yast.SCR.Methods")
-    poiSCR.define_method("Read", 
-                         "in path:(bsv), in arg:(bsv), in opt:(bsv), out ret:(bsv)")
-    poiSCR.define_method("Execute", 
-                         "in path:(bsv), in arg:(bsv), in opt:(bsv), out ret:(bsv)")
 
     @systemtime = System::SystemTime.new
 
-    ret = poiSCR.Execute([false, "path", ["s",".target.bash_output"] ], 
-              [false, "string", ["s","/bin/date"] ], 
-              [false, "", ["s",""] ])
+    @systemtime.systemtime = SCRExecute(".target.bash_output", "/bin/date")
 
-    @systemtime.systemtime = ret[0][2]["stdout"][2]
-
-    ret = poiSCR.Read([false, "path", ["s",".sysconfig.clock.HWCLOCK"] ],
-              [false, "", ["s",""] ], 
-              [false, "", ["s",""] ])
-
-    if ret[0][2] == "-u" then
+    if SCRRead(".sysconfig.clock.HWCLOCK") == "-u" then
       @systemtime.is_utc = true
     else
       @systemtime.is_utc = false
     end
 
-    ret = poiSCR.Read([false, "path", ["s",".sysconfig.clock.TIMEZONE"] ],
-              [false, "", ["s",""] ], 
-              [false, "", ["s",""] ])
-    @systemtime.timezone = ret[0][2]
+    @systemtime.timezone = SCRRead(".sysconfig.clock.TIMEZONE")
 
     respond_to do |format|
       format.xml do
