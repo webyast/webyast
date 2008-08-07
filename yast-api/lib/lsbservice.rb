@@ -72,7 +72,7 @@ class Lsbservice
 	  l = pipe.read
 	  case l
 	  when /Usage:\s*(\S*)\s*\{([^\}]*)\}/
-	    #	  STDERR.puts "USAGE: #{$1}, #{$2}"
+	   # 	  STDERR.puts "USAGE: #{$1}, #{$2}"
 	    @path = $1
 	    @functions = $2.split "|"
 	    break
@@ -105,7 +105,7 @@ class Lsbservice
       xml.tag!(:path, @path )
       xml.links do
 	@functions.each do |f|
-	  xml.tag!(f.to_sym, @name+"/"+f)
+	  xml.tag!(f.to_sym, f)
 	end
       end
     end  

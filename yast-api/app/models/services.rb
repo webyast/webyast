@@ -1,2 +1,3 @@
-class Services < ActiveResource::Base
+class Services < ActiveRecord::Base
+  has_many :commands
 end

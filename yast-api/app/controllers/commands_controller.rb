@@ -1,4 +1,4 @@
-class ServicesController < ApplicationController
+class CommandsController < ApplicationController
   private
   def init_services
     services = Hash.new
@@ -30,28 +30,24 @@ class ServicesController < ApplicationController
     end
   end
   public
+
   def index
+    id = params[:service_id]
+#    STDERR.puts "services/show #{id}"
     init_services unless session['services']
-    @services ||= session['services']
-    respond @services
+    @service = session['services'][id]
+#    STDERR.puts "@service #{@service}"
+    respond @service
   end
-  def show
+
+  def update
     id = params[:id]
-    @service = Service.new
-    @service.name = id
-    @service.commands = "commands"
-    @service.configs = "configs"
+    STDERR.puts "calling services/command #{id}"
     respond_to do |format|
-      format.xml do
-        render :xml => @service.to_xml( :root => "services",
-          :dasherize => false )
-      end
-      format.json do
-        render :json => @service.to_json
-      end
-      format.html do
-        respond @service
-      end
+        format.html { redirect_to :back, :action => "show" }
+	format.json { head :ok }
+	format.xml { head :ok }
     end
   end
+
 end

@@ -1,5 +1,4 @@
 <% name = @service.name -%>
-<h3><%= name -%> with <%= @service.functions.size -%> functions</h3>
-<% @service.functions.each do |f| -%>
-<%= link_to "#{name}/#{f}", :action => name, :id => f %><br/>
-<% end -%>
+<h3><%= name %></h3>
+<%= link_to "commands", :action => name, :id => "commands" %><br/>
+<%= link_to "configs", :action => name, :id => "configs" %><br/>

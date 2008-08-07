@@ -1,0 +1,6 @@
+<% name = @service.name -%>
+<h3><%= name -%> with <%= @service.functions.size -%> functions</h3>
+<% @service.functions.each do |f| -%>
+<%= link_to "#{f}", service_command_path(name,f), :method =>:put %><br/>
+<% end -%>
+

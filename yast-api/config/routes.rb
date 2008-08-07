@@ -33,10 +33,14 @@ ActionController::Routing::Routes.draw do |map|
   #     admin.resources :products
   #   end
 
+
   map.namespace :services do |service|
-    service.resource :ntp, :controller => 'ntp'
+      service.resource :dummy
   end
-  map.resources :services
+
+  map.resources :services do |service|
+     service.resources :commands
+  end 
 
   map.namespace :system do |system|
     system.resource :systemtime, :controller => 'systemtime'
