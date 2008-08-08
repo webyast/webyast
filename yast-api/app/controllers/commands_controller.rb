@@ -1,3 +1,5 @@
+include ApplicationHelper
+
 class CommandsController < ApplicationController
   private
   def init_services
@@ -42,11 +44,26 @@ class CommandsController < ApplicationController
 
   def update
     id = params[:id]
-    STDERR.puts "calling services/command #{id}"
-    respond_to do |format|
+    logger.debug "calling services/command #{id}"
+
+    cmd = "/usr/sbin/rc" + params[:service_id] + " " + id
+		logger.debug "SetTime cmd #{cmd}"
+    ret = SCRExecute(".target.bash_output",cmd)
+
+    if ret[:exit] == 0
+      respond_to do |format|
+        flash[:notice] = 'Command has been run successfully'
         format.html { redirect_to :back, :action => "show" }
 	format.json { head :ok }
 	format.xml { head :ok }
+      end
+    else
+      respond_to do |format|
+        flash[:notice] = 'Command has NOT been run successfully'
+        format.html { redirect_to :back, :action => "show" }
+	format.json { head :error }
+	format.xml { head :error }
+      end
     end
   end
 

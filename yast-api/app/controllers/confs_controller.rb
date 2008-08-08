@@ -1,0 +1,2 @@
+class ConfsController < ApplicationController
+end

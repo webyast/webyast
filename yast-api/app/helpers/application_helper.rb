@@ -57,7 +57,9 @@ def SCRExecute (path, command)
   ret = poiSCR.Execute([false, "path", ["s",path] ],
                  [false, "", ["s",command] ], 
                  [false, "", ["s",""] ])
-  return ret[0][2]["stdout"][2]
+  logger.debug " SCRExecute (" + command + ") => " + if ret[0][2]["exit"][2] == 1 then "1"; else "0"; end
+
+  return { :stdout => ret[0][2]["stdout"][2], :exit => ret[0][2]["exit"][2]}
 end
 
 end

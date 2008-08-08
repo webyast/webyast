@@ -1,0 +1,2 @@
+module ConfsHelper
+end

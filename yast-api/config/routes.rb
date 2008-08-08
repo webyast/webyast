@@ -40,6 +40,7 @@ ActionController::Routing::Routes.draw do |map|
 
   map.resources :services do |service|
      service.resources :commands
+     service.resources :confs
   end 
 
   map.namespace :system do |system|
