@@ -59,7 +59,8 @@ class System::SystemtimeController < ApplicationController
 
     @systemtime = System::SystemTime.new
 
-    @systemtime.systemtime = SCRExecute(".target.bash_output", "/bin/date")
+    ret = SCRExecute(".target.bash_output", "/bin/date")
+    @systemtime.systemtime = ret[:stdout]
 
     if SCRRead(".sysconfig.clock.HWCLOCK") == "-u" then
       @systemtime.is_utc = true
