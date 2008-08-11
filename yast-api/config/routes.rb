@@ -1,6 +1,4 @@
 ActionController::Routing::Routes.draw do |map|
-  map.resources :config_ntp
-
 
   map.resources :sysconfigs
 
@@ -35,6 +33,9 @@ ActionController::Routing::Routes.draw do |map|
   #     admin.resources :products
   #   end
 
+  map.resources :config,
+         :controller => 'config_ntp',
+         :path_prefix => "/services/ntp"
 
   map.namespace :services do |service|
       service.resource :dummy

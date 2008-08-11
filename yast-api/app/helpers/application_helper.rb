@@ -59,7 +59,7 @@ def SCRExecute (path, command)
                  [false, "", ["s",""] ])
   logger.debug " SCRExecute (" + command + ") => " + if ret[0][2]["exit"][2] == 1 then "1"; else "0"; end
 
-  return { :stdout => ret[0][2]["stdout"][2], :exit => ret[0][2]["exit"][2]}
+  return { :stdout => ret[0][2]["stdout"][2], :stderr => ret[0][2]["stderr"][2], :exit => ret[0][2]["exit"][2]}
 end
 
 end

@@ -1,0 +1,2 @@
+module ConfigNtpHelper
+end
