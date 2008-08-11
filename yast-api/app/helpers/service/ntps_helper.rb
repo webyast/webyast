@@ -1,2 +1,0 @@
-module Service::NtpsHelper
-end
