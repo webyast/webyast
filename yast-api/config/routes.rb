@@ -40,8 +40,7 @@ ActionController::Routing::Routes.draw do |map|
 
   map.resources :services do |service|
      service.resources :commands
-     service.resources :confs
-  end 
+  end
 
   map.namespace :system do |system|
     system.resource :systemtime, :controller => 'systemtime'
