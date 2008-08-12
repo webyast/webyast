@@ -63,7 +63,6 @@ class Lsbservice
     @path = PREFIX+name
 
     raise "Unexisting service" unless File.exists?( path )
-    
     if File.executable?( path )
       # run init script to get its 'Usage' line
       IO.popen( path, 'r+' ) do |pipe|
@@ -72,12 +71,16 @@ class Lsbservice
 	  l = pipe.read
 	  case l
 	  when /Usage:\s*(\S*)\s*\{([^\}]*)\}/
-	   # 	  STDERR.puts "USAGE: #{$1}, #{$2}"
+	    	  STDERR.puts "USAGE: #{$1}, #{$2}"
 	    @path = $1
 	    @functions = $2.split "|"
 	    break
 	  end
 	end
+      end
+      if @functions.length == 0
+        #put at least run|stop|status|restart
+        @functions = ["run","stop","status","restart"]
       end
     end
   end
