@@ -146,8 +146,38 @@ class ConfigNtpController < ApplicationController
 
   def singleValue
     if request.get?
-      logger.debug "xxxxxx get "
+      # GET
+      @value = SingleValue.new
+      @value.name = params[:id]
+      case @value.name
+        when "manual_server", "use_random_server"
+          server = manualServer
+          if @value.name == "manual_server"
+            @value.value = server
+          else
+            if server == ""
+              @value.value = true
+            else
+              @value.value = false
+            end
+          end
+        when "enabled"
+          @value.value = enabled
+      end
+      respond_to do |format|
+        format.xml do
+          render :xml => @value.to_xml( :root => "single_value",
+            :dasherize => false )
+        end
+        format.json do
+	  render :json => @value.to_json
+        end
+        format.html do
+          render
+        end
+      end      
     else
+      #PUT
       logger.debug "xxxxxsss put"
     end
   end
