@@ -72,7 +72,7 @@ class System::SystemtimeController < ApplicationController
 
     respond_to do |format|
       format.xml do
-        render :xml => @systemtime.to_xml( :root => "systemtime",
+        render :xml => @systemtime.to_xml( :root => "system_time",
           :dasherize => false )
       end
       format.json do

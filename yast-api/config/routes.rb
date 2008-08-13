@@ -33,9 +33,8 @@ ActionController::Routing::Routes.draw do |map|
   #     admin.resources :products
   #   end
 
-  map.resources :config,
-         :controller => 'config_ntp',
-         :path_prefix => "/services/ntp"
+  map.resource :config, :controller => 'config_ntp', :path_prefix => "/services/ntp"
+  map.connect "/services/ntp/config/:id", :controller => 'config_ntp', :action => 'singleValue'
 
   map.namespace :services do |service|
       service.resource :dummy
