@@ -178,7 +178,44 @@ class ConfigNtpController < ApplicationController
       end      
     else
       #PUT
-      logger.debug "xxxxxsss put"
+      respond_to do |format|
+      value = SingleValue.new
+      if value.update_attributes(params[:single_value])
+        logger.debug "UPDATED: #{value.inspect}"
+        ok = true
+        case value.name
+          when "manual_server", "use_random_server"
+            server = manualServer
+            if value.name == "manual_server"
+              writeNTPConf ([value.value])
+            else
+              if (value.value == "true")
+                writeNTPConf(["0.pool.ntp.org", "1.pool.ntp.org", "2.pool.ntp.org"])
+              else
+                logger.debug "use_random_server:false. You will have to setup a manual_server too."
+              end
+            end
+          when "enabled"
+            enable(value.value == "true")
+          else
+            logger.error "Wrong ID: #{value.name}"
+            ok = false
+        end
+
+        format.html { redirect_to :action => "show" }
+        if ok
+          format.json { head :ok }
+          format.xml { head :ok }
+        else
+          format.json { head :error }
+          format.xml { head :error }
+        end
+      else
+        format.html { render :action => "edit" }
+        format.xml  { render :xml => ntp.errors,
+          :status => :unprocessable_entity }
+      end
+    end
     end
   end
 

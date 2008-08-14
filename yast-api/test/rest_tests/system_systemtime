@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<system_time>
+  <is_utc type="boolean">true</is_utc>
+  <systemtime type="datetime">Wed Aug 13 10:18:52 UTC 2008</systemtime>
+  <timezone>Europe/Berlin</timezone>
+  <id>systemtime</id>
+</system_time>
