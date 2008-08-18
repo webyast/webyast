@@ -78,10 +78,10 @@ class Lsbservice
 	  end
 	end
       end
-      if @functions.length == 0
-        #put at least run|stop|status|restart
-        @functions = ["run","stop","status","restart"]
-      end
+    end
+    if @functions.length == 0
+      #put at least run|stop|status|restart
+      @functions = ["run","stop","status","restart"]
     end
   end
   
@@ -104,11 +104,11 @@ class Lsbservice
     xml = options[:builder] ||= Builder::XmlMarkup.new(options)
     xml.instruct! unless options[:skip_instruct]
     xml.service do
-      xml.tag!(:name, @name )
+      xml.tag!(:link, "services/#{@name}" )
       xml.tag!(:path, @path )
-      xml.links do
+      xml.commands do
 	@functions.each do |f|
-	  xml.tag!(f.to_sym, f)
+	  xml.tag!(:link, "services/commands/#{f}")
 	end
       end
     end  
