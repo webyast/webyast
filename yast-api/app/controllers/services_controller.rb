@@ -5,7 +5,7 @@ class ServicesController < ApplicationController
     Lsbservice.all.each do |d|
       begin
         service = Lsbservice.new d
-        services[service.name] = service
+        services[service.link] = service
       rescue # Don't fail on non-existing service. Should be more specific.
       end
     end
@@ -30,28 +30,18 @@ class ServicesController < ApplicationController
     end
   end
   public
+
   def index
     init_services unless session['services']
     @services ||= session['services']
     respond @services
   end
+
   def show
     id = params[:id]
-    @service = Service.new
-    @service.name = id
-    @service.commands = "commands"
-    @service.configs = "configs"
-    respond_to do |format|
-      format.xml do
-        render :xml => @service.to_xml( :root => "services",
-          :dasherize => false )
-      end
-      format.json do
-        render :json => @service.to_json
-      end
-      format.html do
-        respond @service
-      end
-    end
-  end
+    init_services unless session['services']
+    @service = session['services'][id]
+    STDERR.puts "show@service #{@service}"
+    respond @service
+   end
 end

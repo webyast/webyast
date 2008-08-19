@@ -1,5 +1,5 @@
 #
-# This provides generic functions for
+# This provides generic commands for
 # LSB compatible services
 #
 #
@@ -8,7 +8,7 @@ class Lsbservice
   PREFIX = '/etc/init.d/'
   
   #
-  # iterates over all service names
+  # iterates over all service links
   #
   def self.each
 #    Dir.entries(PREFIX).each do |d|
@@ -45,23 +45,22 @@ class Lsbservice
   @@states = [ :success, :error, :badargs, :unimplemented, :noperm, :notinstalled, :notconfigured, :notrunning ]
   
   #
-  # Lsbservice.new name
-  #   Creates a new instance of Lsbservice for service <name>
+  # Lsbservice.new link
+  #   Creates a new instance of Lsbservice for service <link>
   #
   # Attributes
-  #  name: name of the service
+  #  link: link of the service
   #  path: path to init script
-  #  functions: available functions as array of strings, typically "start", "stop", ...
+  #  commands: available commands as array of strings, typically "start", "stop", ...
   #
   
-  attr_reader :name, :path, :functions
+  attr_reader :link, :path, :commands
   
-  def initialize name
-    name = name.to_s unless name.is_a? String
-    @name = name
-    @functions = []
-    @path = PREFIX+name
-
+  def initialize link
+    link = link.to_s unless link.is_a? String
+    @link = link
+    @commands = []
+    @path = PREFIX+link
     raise "Unexisting service" unless File.exists?( path )
     if File.executable?( path )
       # run init script to get its 'Usage' line
@@ -73,20 +72,23 @@ class Lsbservice
 	  when /Usage:\s*(\S*)\s*\{([^\}]*)\}/
 	    	  STDERR.puts "USAGE: #{$1}, #{$2}"
 	    @path = $1
-	    @functions = $2.split "|"
+	    @commands = $2.split("|")
 	    break
 	  end
 	end
       end
     end
-    if @functions.length == 0
+    if @commands.length == 0
       #put at least run|stop|status|restart
-      @functions = ["run","stop","status","restart"]
+      @commands = ["run",
+                   "stop",
+                   "status",
+                   "restart"]
     end
   end
   
   def method_missing( method, *args )
-    raise "Unknown method #{method}" unless @functions.include?( method.to_s )
+    raise "Unknown method #{method}" unless @commands.include?( method.to_s )
     puts "Running '#{@path} #{method}'"
     system("#{@path} #{method} #{args.join(' ')} > /dev/null 2>&1")
     puts "Returned #{$?.class}, #{$?.inspect}, #{$?.exitstatus}"
@@ -100,15 +102,15 @@ class Lsbservice
   #
   
   def to_xml( options = {} )
-    STDERR.puts "#{self}.to_xml"
+#    STDERR.puts "#{self}.to_xml"
     xml = options[:builder] ||= Builder::XmlMarkup.new(options)
     xml.instruct! unless options[:skip_instruct]
     xml.service do
-      xml.tag!(:link, "services/#{@name}" )
+      xml.tag!(:link, @link )
       xml.tag!(:path, @path )
       xml.commands do
-	@functions.each do |f|
-	  xml.tag!(:link, "services/commands/#{f}")
+	@commands.each do |f|
+	  xml.tag!(:link, f)
 	end
       end
     end  

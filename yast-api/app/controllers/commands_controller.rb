@@ -7,7 +7,7 @@ class CommandsController < ApplicationController
     Lsbservice.all.each do |d|
       begin
         service = Lsbservice.new d
-        services[service.name] = service
+        services[service.link] = service
       rescue # Don't fail on non-existing service. Should be more specific.
       end
     end
@@ -35,10 +35,10 @@ class CommandsController < ApplicationController
 
   def index
     id = params[:service_id]
-#    STDERR.puts "services/show #{id}"
+    STDERR.puts "services/show #{id}"
     init_services unless session['services']
     @service = session['services'][id]
-#    STDERR.puts "@service #{@service}"
+    STDERR.puts "@service #{@service}"
     respond @service
   end
 
