@@ -173,7 +173,7 @@ class ConfigNtpController < ApplicationController
 	  render :json => @value.to_json
         end
         format.html do
-          render
+          render :file => "#{RAILS_ROOT}/app/views/single_values/singleValue.html.erb"
         end
       end      
     else

@@ -50,8 +50,13 @@ ActionController::Routing::Routes.draw do |map|
   end
 
   map.namespace :system do |system|
-    system.resource :systemtime, :controller => 'systemtime'
+   system.resource :systemtime, :controller => 'systemtime'
+   system.connect "systemtime/:id", :controller => 'systemtime', :action => 'singleValue'
+   system.connect "systemtime/:id.xml", :controller => 'systemtime', :action => 'singleValue', :format =>'xml'
+   system.connect "systemtime/:id.html", :controller => 'systemtime', :action => 'singleValue', :format =>'html'
+   system.connect "systemtime/:id.json", :controller => 'systemtime', :action => 'singleValue', :format =>'json'
   end
+
 
   # You can have the root of your site routed with map.root -- just remember to delete public/index.html.
   # map.root :controller => "welcome"
