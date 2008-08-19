@@ -16,7 +16,7 @@ class System::SystemtimeController < ApplicationController
 #
 
   def get_is_utc
-    if SCRRead(".sysconfig.clock.HWCLOCK") == "-u" then
+    if scrRead(".sysconfig.clock.HWCLOCK") == "-u" then
       return true
     else
       return false
@@ -24,12 +24,12 @@ class System::SystemtimeController < ApplicationController
   end
 
   def get_time
-    ret = SCRExecute(".target.bash_output", "/bin/date")
+    ret = scrExecute(".target.bash_output", "/bin/date")
     ret[:stdout]
   end
 
   def get_timezone
-    return SCRRead(".sysconfig.clock.TIMEZONE")
+    return scrRead(".sysconfig.clock.TIMEZONE")
   end
 
 #
@@ -43,13 +43,13 @@ class System::SystemtimeController < ApplicationController
     else
       hwclock = "--localtime"
     end
-    SCRWrite(".sysconfig.clock.HWCLOCK", hwclock)
+    scrWrite(".sysconfig.clock.HWCLOCK", hwclock)
   end
 
   def set_time (time)
     #set time
     cmd = "";
-    hwclock = SCRRead(".sysconfig.clock.HWCLOCK");
+    hwclock = scrRead(".sysconfig.clock.HWCLOCK");
     timezone = get_timezone.length
     if (timezone.length >0 &&  hwclock!= "--localtime")
       cmd = "TZ=" + timezone + " "
@@ -60,17 +60,17 @@ class System::SystemtimeController < ApplicationController
               " #{systemtime.systemtime.hour}:#{systemtime.systemtime.min}:#{systemtime.systemtime.sec}\""
 
     logger.debug "SetTime cmd #{cmd}"
-    SCRExecute(".target.bash_output",cmd)
+    scrExecute(".target.bash_output",cmd)
 
     cmd = "/sbin/hwclock --hctosys " + hwclock;
 
     logger.debug "SetTime cmd #{cmd}"
-    SCRExecute(".target.bash_output",cmd)
+    scrExecute(".target.bash_output",cmd)
   end
 
   def set_timezone (timezone)
     #set timezone
-    SCRWrite(".sysconfig.clock.TIMEZONE",timezone)
+    scrWrite(".sysconfig.clock.TIMEZONE",timezone)
   end
 
 #--------------------------------------------------------------------------------

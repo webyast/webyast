@@ -4,7 +4,7 @@ require "dbus"
 
 module ApplicationHelper
 
-def SCRRead (path)
+def scrRead (path)
   system_bus = DBus::SystemBus.instance
 
   # Get the yast service
@@ -23,7 +23,7 @@ def SCRRead (path)
   return  ret[0][2]
 end
 
-def SCRWrite (path, value)
+def scrWrite (path, value)
   system_bus = DBus::SystemBus.instance
 
   # Get the yast service
@@ -41,7 +41,7 @@ def SCRWrite (path, value)
                [false, "", ["s",""] ])
 end
 
-def SCRExecute (path, command)
+def scrExecute (path, command)
   system_bus = DBus::SystemBus.instance
 
   # Get the yast service

@@ -7,7 +7,7 @@ class ConfigNtpController < ApplicationController
    def manualServer
 
      manual_server = ""
-     ret = SCRExecute(".target.bash_output", "/sbin/yast2  ntp-client list")
+     ret = scrExecute(".target.bash_output", "/sbin/yast2  ntp-client list")
      servers = ret[:stderr].split "\n"
      servers::each do |s|
        column = s.split (" ")
@@ -30,7 +30,7 @@ class ConfigNtpController < ApplicationController
 
    def enabled
 
-     ret = SCRExecute(".target.bash_output", "LANG=en.UTF-8 /sbin/yast2  ntp-client status")
+     ret = scrExecute(".target.bash_output", "LANG=en.UTF-8 /sbin/yast2  ntp-client status")
      if ret[:stderr]=="NTP daemon is enabled.\n"
        return true
      else      
@@ -40,7 +40,7 @@ class ConfigNtpController < ApplicationController
 
    def writeNTPConf (requestedServers)
      #remove evtl.old server if requested
-     ret = SCRExecute(".target.bash_output", "/sbin/yast2  ntp-client list")
+     ret = scrExecute(".target.bash_output", "/sbin/yast2  ntp-client list")
      servers = ret[:stderr].split "\n"
      servers::each do |s|
        column = s.split " "
@@ -68,20 +68,20 @@ class ConfigNtpController < ApplicationController
      if updateRequired
        servers::each do |server|
          command = "/sbin/yast2  ntp-client delete #{server}"
-         SCRExecute(".target.bash_output",command)
+         scrExecute(".target.bash_output",command)
        end
        requestedServers::each do |reqServer|
          command = "/sbin/yast2  ntp-client add #{reqServer}"
-         SCRExecute(".target.bash_output",command)
+         scrExecute(".target.bash_output",command)
        end
      end
    end
 
    def enable (enabled)
      if enabled == true
-       SCRExecute(".target.bash_output", "/sbin/yast2  ntp-client enable")
+       scrExecute(".target.bash_output", "/sbin/yast2  ntp-client enable")
      else
-       SCRExecute(".target.bash_output", "/sbin/yast2  ntp-client disable")
+       scrExecute(".target.bash_output", "/sbin/yast2  ntp-client disable")
      end
    end
 
