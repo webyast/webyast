@@ -1,6 +1,6 @@
 ActionController::Routing::Routes.draw do |map|
-  map.resources :single_values
 
+  map.resources :single_values
 
   map.resources :sysconfigs
 
@@ -54,6 +54,13 @@ ActionController::Routing::Routes.draw do |map|
   map.connect "/systemtime/:id.xml", :controller => 'systemtime', :action => 'singleValue', :format =>'xml'
   map.connect "/systemtime/:id.html", :controller => 'systemtime', :action => 'singleValue', :format =>'html'
   map.connect "/systemtime/:id.json", :controller => 'systemtime', :action => 'singleValue', :format =>'json'
+
+  map.resource :language, :controller => 'language'
+  map.connect "/language/:id", :controller => 'language', :action => 'singleValue'
+  map.connect "/language/:id.xml", :controller => 'language', :action => 'singleValue', :format =>'xml'
+  map.connect "/language/:id.html", :controller => 'language', :action => 'singleValue', :format =>'html'
+  map.connect "/language/:id.json", :controller => 'language', :action => 'singleValue', :format =>'json'
+
 
   # You can have the root of your site routed with map.root -- just remember to delete public/index.html.
   # map.root :controller => "welcome"

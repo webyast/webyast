@@ -212,7 +212,7 @@ class ConfigNtpController < ApplicationController
         end
       else
         format.html { render :action => "edit" }
-        format.xml  { render :xml => ntp.errors,
+        format.xml  { render :xml => value.errors,
           :status => :unprocessable_entity }
       end
     end
