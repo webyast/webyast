@@ -1,8 +1,7 @@
-require "dbus"
 
 include ApplicationHelper
 
-class System::SystemtimeController < ApplicationController
+class SystemtimeController < ApplicationController
 
 
 #--------------------------------------------------------------------------------
