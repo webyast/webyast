@@ -121,6 +121,10 @@ class SystemtimeController < ApplicationController
     end
   end
 
+  def index
+    show
+  end
+
   def singleValue
     if request.get?
       # GET
