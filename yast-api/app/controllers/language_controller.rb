@@ -102,8 +102,8 @@ class LanguageController < ApplicationController
       case @value.name
         when "firstLanguage"
           @value.value = @language.firstLanguage
-        when "secondLanguage"
-          @value.value = @language.secondLanguage
+        when "secondLanguages"
+          @value.value = @language.secondLanguages
       end
       respond_to do |format|
         format.xml do
@@ -127,8 +127,8 @@ class LanguageController < ApplicationController
           case value.name
             when "firstLanguage"
               set_firstLanguage value.value
-            when "secondLanguage"
-              set_secondLanguage value.value
+            when "secondLanguages"
+              set_secondLanguages value.value
             else
               logger.error "Wrong ID: #{value.name}"
               ok = false
