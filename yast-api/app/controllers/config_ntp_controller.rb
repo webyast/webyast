@@ -147,58 +147,51 @@ class ConfigNtpController < ApplicationController
   def singleValue
     if request.get?
       # GET
-      @value = SingleValue.new
-      @value.name = params[:id]
-      case @value.name
-        when "manual_server", "use_random_server"
-          server = manualServer
-          if @value.name == "manual_server"
-            @value.value = server
+      @ntp = ConfigNtp.new
+      case params[:id]
+        when "manual_server"
+          @ntp.manualServer = manualServer
+        when "use_random_server"
+          if manualServer == ""
+            @ntp.use_random_server = true
           else
-            if server == ""
-              @value.value = true
-            else
-              @value.value = false
-            end
+            @ntp.use_random_server = false
           end
         when "enabled"
-          @value.value = enabled
+          @ntp.enabled = enabled
       end
       respond_to do |format|
         format.xml do
-          render :xml => @value.to_xml( :root => "single_value",
+          render :xml => @ntp.to_xml( :root => "config_ntp",
             :dasherize => false )
         end
         format.json do
-	  render :json => @value.to_json
+	  render :json => @ntp.to_json
         end
         format.html do
-          render :file => "#{RAILS_ROOT}/app/views/single_values/singleValue.html.erb"
+          render :file => "#{RAILS_ROOT}/app/views/config_ntp/show.html.erb"
         end
       end      
     else
       #PUT
       respond_to do |format|
-      value = SingleValue.new
-      if value.update_attributes(params[:single_value])
-        logger.debug "UPDATED: #{value.inspect}"
+      @ntp = ConfigNtp.new
+      if @ntp.update_attributes(params[:config_ntp])
+        logger.debug "UPDATED: #{@ntp.inspect}"
         ok = true
-        case value.name
-          when "manual_server", "use_random_server"
-            server = manualServer
-            if value.name == "manual_server"
-              writeNTPConf ([value.value])
+        case params[:id]
+          when "manual_server"
+            writeNTPConf ([@ntp.manualServer])
+          when "use_random_server"
+            if (@ntp.use_random_server == true)
+              writeNTPConf(["0.pool.ntp.org", "1.pool.ntp.org", "2.pool.ntp.org"])
             else
-              if (value.value == "true")
-                writeNTPConf(["0.pool.ntp.org", "1.pool.ntp.org", "2.pool.ntp.org"])
-              else
-                logger.debug "use_random_server:false. You will have to setup a manual_server too."
-              end
+              logger.debug "use_random_server:false. You will have to setup a manual_server too."
             end
           when "enabled"
-            enable(value.value == "true")
+            enable(@ntp.enabled == true)
           else
-            logger.error "Wrong ID: #{value.name}"
+            logger.error "Wrong ID: #{params[:id]}"
             ok = false
         end
 
@@ -212,7 +205,7 @@ class ConfigNtpController < ApplicationController
         end
       else
         format.html { render :action => "edit" }
-        format.xml  { render :xml => value.errors,
+        format.xml  { render :xml => @ntp.errors,
           :status => :unprocessable_entity }
       end
     end

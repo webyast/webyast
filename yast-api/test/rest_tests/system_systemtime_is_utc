@@ -1,6 +1,4 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <systemtime>
-  <currenttime type="datetime">2008-08-22T14:50:40Z</currenttime>
   <is_utc type="boolean">true</is_utc>
-  <timezone>Europe/Berlin</timezone>
 </systemtime>

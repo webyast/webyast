@@ -64,7 +64,7 @@ class LanguageController < ApplicationController
 	format.xml { head :ok }
       else
         format.html { render :action => "edit" }
-        format.xml  { render :xml => systemtime.errors,
+        format.xml  { render :xml => language.errors,
           :status => :unprocessable_entity }
       end
     end
@@ -97,40 +97,39 @@ class LanguageController < ApplicationController
       # GET
       @language = Language.new
       get_languages
-      @value = SingleValue.new
-      @value.name = params[:id]
-      case @value.name
+      #initialize not needed stuff (perhaps no permissions available)
+      case params[:id]
         when "firstLanguage"
-          @value.value = @language.firstLanguage
+          @language.secondLanguages=nil
         when "secondLanguages"
-          @value.value = @language.secondLanguages
+          @language.firstLanguage=nil
       end
       respond_to do |format|
         format.xml do
-          render :xml => @value.to_xml( :root => "single_value",
+          render :xml => @language.to_xml( :root => "language",
             :dasherize => false )
         end
         format.json do
-	  render :json => @value.to_json
+	  render :json => @language.to_json
         end
         format.html do
-          render :file => "#{RAILS_ROOT}/app/views/single_values/singleValue.html.erb"
+          render :file => "#{RAILS_ROOT}/app/views/language/index.html.erb"
         end
       end      
     else
       #PUT
       respond_to do |format|
-        value = SingleValue.new
-        if value.update_attributes(params[:single_value])
-          logger.debug "UPDATED: #{value.inspect}"
+        @language = Language.new
+        if @language.update_attributes(params[:language])
+          logger.debug "UPDATED: #{@language.inspect}"
           ok = true
-          case value.name
+          case params[:id]
             when "firstLanguage"
-              set_firstLanguage value.value
+              set_firstLanguage @language.fistLanguage
             when "secondLanguages"
-              set_secondLanguages value.value
+              set_secondLanguages @language.secondLanguages
             else
-              logger.error "Wrong ID: #{value.name}"
+              logger.error "Wrong ID: #{params[:id]}"
               ok = false
           end
 
@@ -144,7 +143,7 @@ class LanguageController < ApplicationController
           end
         else
           format.html { render :action => "edit" }
-          format.xml  { render :xml => value.errors,
+          format.xml  { render :xml => @language.errors,
             :status => :unprocessable_entity }
         end
       end

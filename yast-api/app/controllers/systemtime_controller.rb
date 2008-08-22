@@ -55,8 +55,8 @@ class SystemtimeController < ApplicationController
     end
 
     cmd = cmd + "/sbin/hwclock --set " + hwclock + 
-              " --date=\"#{systemtime.systemtime.month}/#{systemtime.systemtime.day}/#{systemtime.systemtime.year}" +
-              " #{systemtime.systemtime.hour}:#{systemtime.systemtime.min}:#{systemtime.systemtime.sec}\""
+              " --date=\"#{systemtime.currenttime.month}/#{systemtime.currenttime.day}/#{systemtime.currenttime.year}" +
+              " #{systemtime.currenttime.hour}:#{systemtime.currenttime.min}:#{systemtime.currenttime.sec}\""
 
     logger.debug "SetTime cmd #{cmd}"
     scrExecute(".target.bash_output",cmd)
@@ -81,12 +81,12 @@ class SystemtimeController < ApplicationController
   def update
     respond_to do |format|
       systemtime = System::SystemTime.new
-      if systemtime.update_attributes(params[:system_time])
+      if systemtime.update_attributes(params[:systemtime])
         logger.debug "UPDATED: #{systemtime.inspect}"
 
         set_is_utc systemtime.is_utc
         set_timezone systemtime.timezone
-        set_time systemtime.systemtime
+        set_time systemtime.currenttime
 
         format.html { redirect_to :action => "show" }
 	format.json { head :ok }
@@ -103,13 +103,13 @@ class SystemtimeController < ApplicationController
 
     @systemtime = System::SystemTime.new
 
-    @systemtime.systemtime = get_time
+    @systemtime.currenttime = get_time
     @systemtime.is_utc = get_is_utc
     @systemtime.timezone = get_timezone
 
     respond_to do |format|
       format.xml do
-        render :xml => @systemtime.to_xml( :root => "system_time",
+        render :xml => @systemtime.to_xml( :root => "systemtime",
           :dasherize => false )
       end
       format.json do
@@ -128,44 +128,44 @@ class SystemtimeController < ApplicationController
   def singleValue
     if request.get?
       # GET
-      @value = SingleValue.new
-      @value.name = params[:id]
-      case @value.name
+      @systemtime = System::SystemTime.new
+
+      case params[:id]
         when "is_utc"
-          @value.value = get_is_utc
-        when "time"
-          @value.value = get_time
+          @systemtime.is_utc = get_is_utc
+        when "currenttime"
+          @systemtime.currenttime = get_time
         when "timezone"
-          @value.value = get_timezone
+          @systemtime.timezone = get_timezone
       end
       respond_to do |format|
         format.xml do
-          render :xml => @value.to_xml( :root => "single_value",
+          render :xml => @systemtime.to_xml( :root => "systemtime",
             :dasherize => false )
         end
         format.json do
-	  render :json => @value.to_json
+	  render :json => @systemtime.to_json
         end
         format.html do
-          render :file => "#{RAILS_ROOT}/app/views/single_values/singleValue.html.erb"
+          render :file => "#{RAILS_ROOT}/app/views/systemtime/show.html.erb"
         end
       end      
     else
       #PUT
       respond_to do |format|
-        value = SingleValue.new
-        if value.update_attributes(params[:single_value])
-          logger.debug "UPDATED: #{value.inspect}"
+        @systemtime = System::SystemTime.new
+        if @systemtime.update_attributes(params[:systemtime])
+          logger.debug "UPDATED: #{@systemtime.inspect}"
           ok = true
-          case value.name
+          case params[:id]
             when "is_utc"
-              set_is_utc value.value
-            when "time"
-              set_time value.value
+              set_is_utc @systemtime.is_utc
+            when "currenttime"
+              set_time @systemtime.currenttime
             when "timezone"
-              set_timezone value.value
+              set_timezone @systemtime.timezone
             else
-              logger.error "Wrong ID: #{value.name}"
+              logger.error "Wrong ID: #{params[:id]}"
               ok = false
           end
 
@@ -179,7 +179,7 @@ class SystemtimeController < ApplicationController
           end
         else
           format.html { render :action => "edit" }
-          format.xml  { render :xml => ntp.errors,
+          format.xml  { render :xml => @systemtime.errors,
             :status => :unprocessable_entity }
         end
       end

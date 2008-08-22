@@ -1,4 +1,4 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <config_ntp>
-  <enabled type="boolean">true</enabled>
+  <use_random_server type="boolean">true</use_random_server>
 </config_ntp>

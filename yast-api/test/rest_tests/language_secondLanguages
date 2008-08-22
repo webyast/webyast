@@ -1,5 +1,4 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<single_value>
-  <name>secondLanguages</name>
-  <value>en_US</value>
-</single_value>
+<language>
+  <secondLanguages>en_US</secondLanguages>
+</language>
