@@ -1,0 +1,38 @@
+<p>
+  <b>Fullname:</b>
+  <%=h @user.fullName %>
+</p>
+
+<p>
+  <b>Groups:</b>
+  <%=h @user.groups %>
+</p>
+
+<p>
+  <b>Defaultgroup:</b>
+  <%=h @user.defaultGroup %>
+</p>
+
+<p>
+  <b>Homedirectory:</b>
+  <%=h @user.homeDirectory %>
+</p>
+
+<p>
+  <b>Loginshell:</b>
+  <%=h @user.loginShell %>
+</p>
+
+<p>
+  <b>Loginname:</b>
+  <%=h @user.loginName %>
+</p>
+
+<p>
+  <b>Uid:</b>
+  <%=h @user.uid %>
+</p>
+
+
+<%= link_to 'Edit', edit_user_path(@user.loginName) %> |
+<%= link_to 'Back', users_path %>

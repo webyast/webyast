@@ -1,3 +1,0 @@
-enables: <%=@ntp.enabled %><BR/>
-manual_server: <%=@ntp.manual_server %><BR/>
-use_random_server: <%=@ntp.use_random_server %><BR/>
