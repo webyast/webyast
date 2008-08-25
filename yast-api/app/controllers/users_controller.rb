@@ -90,7 +90,6 @@ class UsersController < ApplicationController
     if @user.type && @user.type.length > 0
       command += "type=#{@user.type} "
     end
-
     ret = scrExecute(".target.bash_output", command)
     if ret[:exit] == 0
       return true
@@ -255,7 +254,6 @@ class UsersController < ApplicationController
   # GET /users/1/edit
   def edit
     get_user params[:id]
-    @user.id = @user.loginName
   end
 
   # POST /users
@@ -318,4 +316,102 @@ class UsersController < ApplicationController
       format.json  { head :ok }
     end
   end
+
+
+  # GET/PUT /users/1/<single-value>
+  def singleValue
+    if request.get?
+      # GET
+      @user = User.new
+      @retUser = User.new
+      get_user params[:users_id]
+      #initialize not needed stuff (perhaps no permissions available)
+      case params[:id]
+        when "defaultGroup"
+          @retUser.defaultGroup = @user.defaultGroup
+        when "fullName"
+          @retUser.fullName = @user.fullName
+        when "groups"
+          @retUser.groups = @user.groups
+        when "homeDirectory"
+          @retUser.homeDirectory = @user.homeDirectory
+        when "loginName"
+          @retUser.loginName = @user.loginName
+        when "loginShell"
+          @retUser.loginShell = @user.loginShell
+        when "uid"
+          @retUser.uid = @user.uid
+      end
+      @user = @retUser
+      respond_to do |format|
+        format.xml do
+          render :xml => @user.to_xml( :root => "users",
+            :dasherize => false )
+        end
+        format.json do
+	  render :json => @user.to_json
+        end
+        format.html do
+          render :file => "#{RAILS_ROOT}/app/views/users/show.html.erb"
+        end
+      end      
+    else
+      #PUT
+      respond_to do |format|
+        @setUser = User.new
+        @user = User.new
+        if @setUser.update_attributes(params[:user])
+          logger.debug "UPDATED: #{@setUser.inspect}"
+          ok = true
+          #setting which are clear
+          @user.loginName = params[:users_id]
+          @user.ldapPassword = @setUser.ldapPassword
+          case params[:id]
+            when "defaultGroup"
+              @user.defaultGroup = @setUser.defaultGroup
+            when "fullName"
+              @user.fullName = @setUser.fullName
+            when "groups"
+              @user.groups = @setUser.groups
+            when "homeDirectory"
+              @user.homeDirectory = @setUser.homeDirectory
+            when "newLoginName"
+              @user.newLoginName = @setUser.newLoginName
+            when "loginShell"
+              @user.loginShell = @setUser.loginShell
+            when "newUid"
+              @user.newUid = @setUser.newUid
+            when "password"
+              @user.password = @setUser.password
+            when "type"
+              @user.type = @setUser.type
+            else
+              logger.error "Wrong ID: #{params[:id]}"
+              ok = false
+          end
+
+          if ok
+            ok = udate_user
+          end
+
+          format.html { redirect_to :action => "show" }
+          if ok
+            format.json { head :ok }
+            format.xml { head :ok }
+          else
+            format.json { head :error }
+            format.xml { head :error }
+          end
+        else
+          format.html { render :action => "edit" }
+          format.xml  { render :xml => @setUsers.errors,
+            :status => :unprocessable_entity }
+        end
+      end
+    end
+  end
+
+
 end
+
+
