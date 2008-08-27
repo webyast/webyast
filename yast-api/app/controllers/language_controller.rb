@@ -14,6 +14,11 @@ class LanguageController < ApplicationController
 #
 
 
+  def get_available
+     ret = scrExecute(".target.bash_output", "LANG=en.UTF-8 /sbin/yast2 language list")
+     @language.available = ret[:stderr].split "\n"
+  end
+
   def get_languages
      ret = scrExecute(".target.bash_output", "LANG=en.UTF-8 /sbin/yast2 language summary")
      lines = ret[:stderr].split "\n"
@@ -73,6 +78,7 @@ class LanguageController < ApplicationController
   def index
     @language = Language.new
     get_languages
+    get_available
 
     respond_to do |format|
       format.xml do
@@ -96,14 +102,19 @@ class LanguageController < ApplicationController
     if request.get?
       # GET
       @language = Language.new
-      get_languages
+      
       #initialize not needed stuff (perhaps no permissions available)
       case params[:id]
         when "firstLanguage"
+          get_languages
           @language.secondLanguages=nil
         when "secondLanguages"
+          get_languages  
           @language.firstLanguage=nil
+        when "available"
+          get_available
       end
+
       respond_to do |format|
         format.xml do
           render :xml => @language.to_xml( :root => "language",
