@@ -66,6 +66,10 @@ ActionController::Routing::Routes.draw do |map|
   map.connect "/users/:users_id/:id.html", :controller => 'users', :action => 'singleValue', :format =>'html'
   map.connect "/users/:users_id/:id.json", :controller => 'users', :action => 'singleValue', :format =>'json'
 
+  map.resources :patch_updates
+  map.connect "/patch_updates/:id", :controller => 'patch_updates', :action => 'install'
+
+
   # You can have the root of your site routed with map.root -- just remember to delete public/index.html.
   # map.root :controller => "welcome"
 

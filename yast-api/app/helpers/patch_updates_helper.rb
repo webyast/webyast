@@ -1,0 +1,2 @@
+module PatchUpdatesHelper
+end

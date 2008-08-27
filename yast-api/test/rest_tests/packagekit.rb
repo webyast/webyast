@@ -84,7 +84,6 @@ objTid.on_signal("Package") do |u1,u2,u3|
   	puts u1
   	puts u2
   	puts u3
-        @finished = true
 end
 
 objTid.on_signal("Errorcode") do |u1,u2|

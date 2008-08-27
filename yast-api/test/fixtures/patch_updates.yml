@@ -1,0 +1,17 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  ResId: 1
+  kind: MyString
+  name: MyString
+  arch: MyString
+  repo: MyString
+  summary: MyString
+
+two:
+  ResId: 1
+  kind: MyString
+  name: MyString
+  arch: MyString
+  repo: MyString
+  summary: MyString

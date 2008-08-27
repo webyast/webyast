@@ -1,0 +1,27 @@
+<h1>Available Patches</h1>
+
+<table>
+  <tr>
+    <th>resolvableId</th>
+    <th>Kind</th>
+    <th>Name</th>
+    <th>Arch</th>
+    <th>Repo</th>
+    <th>Summary</th>
+  </tr>
+
+<% for patch_update in @patch_updates %>
+  <tr>
+    <td><%=h patch_update.resolvableId %></td>
+    <td><%=h patch_update.kind %></td>
+    <td><%=h patch_update.name %></td>
+    <td><%=h patch_update.arch %></td>
+    <td><%=h patch_update.repo %></td>
+    <td><%=h patch_update.summary %></td>
+    <td><%= link_to 'Install', patch_update_path(patch_update.resolvableId), :confirm => 'Are you sure?', :method => :post, :action => "install" %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
