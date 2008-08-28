@@ -11,6 +11,7 @@
     <td><%= link_to 'Show', user_path(user.loginName) %></td>
     <td><%= link_to 'Edit', edit_user_path(user.loginName) %></td>
     <td><%= link_to 'Destroy', user_path(user.loginName), :confirm => 'Are you sure?', :method => :delete %></td>
+    <td><%= link_to 'export SSH-key', exportssh_user_path(user.loginName) %></td>
   </tr>
 <% end %>
 </table>

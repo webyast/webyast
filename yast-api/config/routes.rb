@@ -59,8 +59,9 @@ ActionController::Routing::Routes.draw do |map|
   map.connect "/language/:id.html", :controller => 'language', :action => 'singleValue', :format =>'html'
   map.connect "/language/:id.json", :controller => 'language', :action => 'singleValue', :format =>'json'
 
-
+  map.resources :users, :member => { :exportssh => :get }
   map.resources :users, :controller => 'users'
+  map.connect "/users/:users_id/exportssh", :controller => 'users', :action => 'exportssh'
   map.connect "/users/:users_id/:id", :controller => 'users', :action => 'singleValue'
   map.connect "/users/:users_id/:id.xml", :controller => 'users', :action => 'singleValue', :format =>'xml'
   map.connect "/users/:users_id/:id.html", :controller => 'users', :action => 'singleValue', :format =>'html'

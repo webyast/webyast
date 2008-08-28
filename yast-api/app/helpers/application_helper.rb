@@ -23,6 +23,25 @@ def scrRead (path)
   return  ret[0][2]
 end
 
+def scrRead (path,argument)
+  system_bus = DBus::SystemBus.instance
+
+  # Get the yast service
+  yast = system_bus.service("org.opensuse.yast.SCR")
+
+  # Get the object from this service
+  objYast = yast.object("/SCR")
+  poiSCR = DBus::ProxyObjectInterface.new(objYast, 
+                                          "org.opensuse.yast.SCR.Methods")
+  poiSCR.define_method("Read", 
+                       "in path:(bsv), in arg:(bsv), in opt:(bsv), out ret:(bsv)")
+
+  ret = poiSCR.Read([false, "path", ["s",path] ],
+                    [false, "string", ["s",argument] ], 
+                    [false, "", ["s",""] ])
+  return  ret[0][2]
+end
+
 def scrWrite (path, value)
   system_bus = DBus::SystemBus.instance
 

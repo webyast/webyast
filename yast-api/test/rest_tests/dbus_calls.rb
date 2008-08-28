@@ -39,14 +39,14 @@ r = poiSCR.Read([false, "path", ["s",".sysconfig.clock.DEFAULT_TIMEZONE"] ],
               [false, "", ["s",""] ])
 puts r[0][2]
 
-#p poiSCR.Read([false, "path", ["s",".etc.ntp_conf.all"] ],
-#              [false, "", ["s",""] ], 
-#              [false, "", ["s",""] ])
+p poiSCR.Read([false, "path", ["s",".target.stat"] ],
+              [false, "string", ["s","/suse/schubi/.ssh/authorized_keys"] ], 
+              [false, "", ["s",""] ])
 
 
-p = poiSCR.Execute([false, "path", ["s",".target.bash_output"] ], 
-              [false, "string", ["s","LANG=en.UTF-8 /sbin/yast2 ntp-client status"] ], 
-              [false, "map", ["s","LANG","en.UTF-8"] ])
+#p = poiSCR.Execute([false, "path", ["s",".target.bash_output"] ], 
+#              [false, "string", ["s","LANG=en.UTF-8 /sbin/yast2 ntp-client status"] ], 
+#              [false, "map", ["s","LANG","en.UTF-8"] ])
 
 
 #main = DBus::Main.new

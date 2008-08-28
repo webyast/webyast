@@ -21,6 +21,11 @@ class UsersController < ApplicationController
   end
 
   def get_user (id)
+    if @user
+      saveKey = @user.sshkey
+    else
+      saveKey = nil
+    end
     ret = scrExecute(".target.bash_output", "LANG=en.UTF-8 /sbin/yast2 users show username=#{id}")
      lines = ret[:stderr].split "\n"
      counter = 0
@@ -50,9 +55,41 @@ class UsersController < ApplicationController
        end
        counter += 1
      end
+     @user.sshkey = saveKey
+  end
+
+  def createSSH
+    if @user.homeDirectory == nil || @user.homeDirectory.length == 0
+      saveKey = @user.sshkey
+      get_user @user.loginName
+      @user.sshkey = saveKey
+    end
+
+    ret = scrRead(".target.stat", "#{@user.homeDirectory}/.ssh/authorized_keys")
+    if ret.length == 0
+      logger.debug "Create: #{@user.homeDirectory}/.ssh/authorized_keys"
+      scrExecute(".target.bash_output", "/bin/mkdir #{@user.homeDirectory}/.ssh")      
+      scrExecute(".target.bash_output", "/bin/chown #{@user.loginName} #{@user.homeDirectory}/.ssh}")      
+      scrExecute(".target.bash_output", "/bin/chmod 755 #{@user.homeDirectory}/.ssh}")
+      scrExecute(".target.bash_output", "/usr/bin/touch #{@user.homeDirectory}/.ssh/authorized_keys")      
+      scrExecute(".target.bash_output", "/bin/chown #{@user.loginName} #{@user.homeDirectory}/.ssh/authorized_keys}")      
+      scrExecute(".target.bash_output", "/bin/chmod 644 #{@user.homeDirectory}/.ssh/authorized_keys}")
+    end
+    ret =  scrExecute(".target.bash_output", "echo \"#{@user.sshkey}\"  >> #{@user.homeDirectory}/.ssh/authorized_keys")
+    if ret[:exit] != 0
+      return false
+    else 
+      return true
+    end
   end
 
   def udate_user
+    ok = true
+
+    if @user.sshkey && @user.sshkey.length > 0
+      ok = createSSH
+    end
+
     command = "LANG=en.UTF-8 /sbin/yast2 users edit "
     if @user.fullName && @user.fullName.length > 0
       command = command + 'cn="' + @user.fullName + '" '
@@ -91,55 +128,10 @@ class UsersController < ApplicationController
       command += "type=#{@user.type} "
     end
     ret = scrExecute(".target.bash_output", command)
-    if ret[:exit] == 0
-      return true
-    else
-      return false
+    if ret[:exit] != 0
+      ok = false
     end
-  end
-
-  def add_user
-    command = "LANG=en.UTF-8 /sbin/yast2 users add "
-    if @user.fullName && @user.fullName.length > 0
-      command = command + 'cn="' + @user.fullName + '" '
-    end
-    if @user.groups && @user.groups.length > 0
-      command += "grouplist=#{@user.groups} "
-    end
-    if @user.defaultGroup && @user.defaultGroup.length > 0
-      command += "gid=#{@user.defaultGroup} "
-    end
-    if @user.homeDirectory && @user.homeDirectory.length > 0
-      command += "home=#{@user.homeDirectory} "
-    end
-    if @user.loginShell && @user.loginShell.length > 0
-      command += "shell=#{@user.loginShell} "
-    end
-    if @user.loginName && @user.loginName.length > 0
-      command += "username=#{@user.loginName} "
-    end
-    if @user.uid && @user.uid.length > 0
-      command += "uid=#{@user.uid} "
-    end
-    if @user.password && @user.password.length > 0
-      command += "password=#{@user.password} "
-    end
-    if @user.ldapPassword && @user.ldapPassword.length > 0
-      command += "ldap_password=#{@user.ldapPassword} "
-    end
-    if @user.noHome && @user.noHome = "true"
-      command += "no_home "
-    end
-    if @user.type && @user.type.length > 0
-      command += "type=#{@user.type} "
-    end
-
-    ret = scrExecute(".target.bash_output", command)
-    if ret[:exit] == 0
-      return true
-    else
-      return false
-    end
+    return ok
   end
 
   def add_user
@@ -309,11 +301,21 @@ class UsersController < ApplicationController
     get_user params[:id]
     @user.destroy
     delete_user
-
+    logger.debug "DELETE: #{@user.inspect}"
     respond_to do |format|
       format.html { redirect_to(users_url) }
       format.xml  { head :ok }
       format.json  { head :ok }
+    end
+  end
+
+  # GET /users/1/edit/exportssh
+  def exportssh
+    get_user params[:id]
+    logger.debug "exportssh: #{@user.inspect}"
+    respond_to do |format|
+      format.html # new.html.erb
+      format.xml  { render :xml => @user }
     end
   end
 
@@ -366,6 +368,7 @@ class UsersController < ApplicationController
           #setting which are clear
           @user.loginName = params[:users_id]
           @user.ldapPassword = @setUser.ldapPassword
+          exportSSH = false
           case params[:id]
             when "defaultGroup"
               @user.defaultGroup = @setUser.defaultGroup
@@ -385,13 +388,20 @@ class UsersController < ApplicationController
               @user.password = @setUser.password
             when "type"
               @user.type = @setUser.type
+            when "sshkey"
+              @user.sshkey = @setUser.sshkey
+              exportSSH = true
             else
               logger.error "Wrong ID: #{params[:id]}"
               ok = false
           end
 
           if ok
-            ok = udate_user
+            if exportSSH
+              ok = createSSH
+            else
+              ok = udate_user
+            end
           end
 
           format.html { redirect_to :action => "show" }
