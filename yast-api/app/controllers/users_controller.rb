@@ -65,7 +65,7 @@ class UsersController < ApplicationController
       @user.sshkey = saveKey
     end
 
-    ret = scrRead(".target.stat", "#{@user.homeDirectory}/.ssh/authorized_keys")
+    ret = scrReadArg(".target.stat", "#{@user.homeDirectory}/.ssh/authorized_keys")
     if ret.length == 0
       logger.debug "Create: #{@user.homeDirectory}/.ssh/authorized_keys"
       scrExecute(".target.bash_output", "/bin/mkdir #{@user.homeDirectory}/.ssh")      

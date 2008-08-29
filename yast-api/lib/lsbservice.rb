@@ -102,7 +102,7 @@ class Lsbservice
   #
   
   def to_xml( options = {} )
-#    STDERR.puts "#{self}.to_xml"
+    STDERR.puts "#{self}.to_xml"
     xml = options[:builder] ||= Builder::XmlMarkup.new(options)
     xml.instruct! unless options[:skip_instruct]
     xml.service do
@@ -115,4 +115,5 @@ class Lsbservice
       end
     end  
   end
+
 end

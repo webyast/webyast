@@ -1,10 +1,9 @@
-# Methods added to this helper will be available to all templates in the application.
+class Scr
+  require "dbus"
+  require "logger"
 
-require "dbus"
+def Scr.read (path)
 
-module ApplicationHelper
-
-def scrRead (path)
   system_bus = DBus::SystemBus.instance
 
   # Get the yast service
@@ -23,7 +22,7 @@ def scrRead (path)
   return  ret[0][2]
 end
 
-def scrReadArg (path,argument)
+def Scr.readArg (path,argument)
   system_bus = DBus::SystemBus.instance
 
   # Get the yast service
@@ -42,7 +41,7 @@ def scrReadArg (path,argument)
   return  ret[0][2]
 end
 
-def scrWrite (path, value)
+def Scr.write (path, value)
   system_bus = DBus::SystemBus.instance
 
   # Get the yast service
@@ -60,7 +59,7 @@ def scrWrite (path, value)
                [false, "", ["s",""] ])
 end
 
-def scrExecute (path, command)
+def Scr.execute (command)
   system_bus = DBus::SystemBus.instance
 
   # Get the yast service
@@ -73,10 +72,11 @@ def scrExecute (path, command)
   poiSCR.define_method("Execute", 
                        "in path:(bsv), in arg:(bsv), in opt:(bsv), out ret:(bsv)")
 
-  ret = poiSCR.Execute([false, "path", ["s",path] ],
+  ret = poiSCR.Execute([false, "path", ["s",".target.bash_output"] ],
                  [false, "", ["s",command] ], 
                  [false, "", ["s",""] ])
-  logger.debug " SCRExecute (" + command + ") => " + if ret[0][2]["exit"][2] == 1 then "1"; else "0"; end
+
+  STDERR.puts " SCRExecute (" + command + ") => " + if ret[0][2]["exit"][2] == 1 then "1"; else "0"; end
 
   return { :stdout => ret[0][2]["stdout"][2], :stderr => ret[0][2]["stderr"][2], :exit => ret[0][2]["exit"][2]}
 end
