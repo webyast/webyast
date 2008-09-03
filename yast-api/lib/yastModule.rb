@@ -1,3 +1,5 @@
+require "rexml/document"
+
 #
 # This provides generic commands for
 # YaST modules in the command line mode
@@ -38,12 +40,28 @@ class YastModule
     tmpfile = tmpdir + "/yastOptions" 
     path = "LANG=en.UTF-8 /sbin/yast2 " + link + " xmlhelp xmlfile=#{tmpfile}"
     Scr.execute (path)
+    Scr.execute ("/bin/chmod -R 755 #{tmpdir}")
 
-#    @commands = Hash.from_xml(tmpfile)
-STDERR.puts "xxxxxxxxxxxxxxx /usr/local/src/rails/rest-service/yast-api/test/rest_tests/users_tux_sshkey"
-#@commands = Hash.from_xml("/usr/local/src/rails/rest-service/yast-api/test/rest_tests/users_tux_sshkey")
- Hash.from_xml("/usr/local/src/rails/rest-service/yast-api/test/rest_tests/users_tux_sshkey")
-STDERR.puts "xxxxxxxxxxxxxxx#{@commands.inspect}"
+    file = File.new( tmpfile )
+    doc = REXML::Document.new file
+    @commands = Hash.new
+    doc.elements.each("commandline/commands/command") { |commandElement| 
+      command = Hash.new
+      command['help'] = commandElement.elements['help'].to_a[0]
+      optionsElement = commandElement.elements['options']
+      options = Hash.new
+      optionsElement.each() { |optionElement| 
+        if optionElement.to_s.lstrip.length > 0
+          option = Hash.new
+          option["help"] = optionElement.elements['help'].to_a[0]
+          option["type"] = optionElement.elements['type'].to_a[0]
+          options[optionElement.elements['name'].to_a[0]] = option
+        end
+      }
+      command['options'] = options
+      @commands[commandElement.elements['name'].to_a[0]] = command
+    }
+    puts "Founded command options/calls #{@commands.inspect}"
 
     Scr.execute ("/bin/rm -rf #{tmpdir}")
     return @commands
