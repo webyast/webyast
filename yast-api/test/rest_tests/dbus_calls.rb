@@ -48,6 +48,21 @@ p poiSCR.Read([false, "path", ["s",".target.stat"] ],
 #              [false, "string", ["s","LANG=en.UTF-8 /sbin/yast2 ntp-client status"] ], 
 #              [false, "map", ["s","LANG","en.UTF-8"] ])
 
+puts "xxxxxxxxxxxxxxxxxx"
+p poiSCR.Execute([false, "path", ["s",".target.bash_output"] ], 
+              [false, "string", ["s","LANG=en.UTF-8 /sbin/yast2 --list"] ], 
+              [false, "", ["s",""] ])
+
+
+p  poiSCR.Execute([false, "path", ["s",".target.bash_output"] ], 
+              [false, "string", ["s","LANG=en.UTF-8 /sbin/yast2 ntp-client status"] ], 
+              [false, "map", ["s","LANG","en.UTF-8"] ])
+puts "yyyyyyyyyyyyxxxxxxxxxxxxxxxxxx"
+p poiSCR.Read([false, "path", ["s",".target.string"] ],
+              [false, "string", ["s","/tmp/YaST2-26169-ewn2Rc/yastOptions"] ], 
+              [false, "", ["s",""] ])
+
+
 
 #main = DBus::Main.new
 #main << system_bus

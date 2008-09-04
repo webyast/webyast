@@ -259,7 +259,7 @@ class UsersController < ApplicationController
         flash[:notice] = 'User was successfully created.'
         format.html { redirect_to(users_url) }
         format.xml  { render :xml => @user, :status => :created, :location => @user }
-        format.xml  { head :ok }
+        format.json { head :ok }
       else
         format.html { render :action => "new" }
         format.xml  { render :xml => @user.errors, :status => :unprocessable_entity }
