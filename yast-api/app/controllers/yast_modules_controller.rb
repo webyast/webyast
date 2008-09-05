@@ -30,7 +30,7 @@ class YastModulesController < ApplicationController
 	end
       end
     else
-      render :nothing => true, :status => 404 unless @service # not found
+      render :nothing => true, :status => 404 unless @yast_modules # not found
     end
   end
   public
@@ -39,6 +39,15 @@ class YastModulesController < ApplicationController
     init_modules
     respond @yastModules
   end
+
+  def show
+    init_modules
+    id = params[:id]
+    @yastModule = @yastModules[id]
+    @yastModule.commands #evaluate commands
+    respond @yastModule
+  end
+
 
   def run
     id = params[:id]
@@ -57,16 +66,32 @@ class YastModulesController < ApplicationController
           if command != nil
             command["options"].each do |name,option|
               if params[name.to_s] != nil
-                if option["kind"] == "string"
-                  cmdLine += " #{name}=\"#{params[name.to_s]}\""
-                else
-                  cmdLine += " #{name}=#{params[name.to_s]}"
+                if option["type"] == "string" 
+                  if !params[name.to_s].empty? 
+                    cmdLine += " #{name}=\"#{params[name.to_s]}\""
+                  end
+                else 
+                  if option["type"] == nil
+                    cmdLine += " #{name}"
+                  else
+                     cmdLine += " #{name}=#{params[name.to_s]}"
+                  end
                 end
               end
             end
           end
           @cmdRet = Scr.execute(cmdLine)
-          render :file => "#{RAILS_ROOT}/app/views/yast_modules/results.html.erb"
+          respond_to do |format|
+	    format.xml do
+	      render :xml => @cmdRet.to_xml
+            end
+            format.json do
+              render :json => @cmdRet.to_json
+            end
+            format.html do
+              render :file => "#{RAILS_ROOT}/app/views/yast_modules/results.html.erb"
+            end
+          end
         end
       end
       if !found

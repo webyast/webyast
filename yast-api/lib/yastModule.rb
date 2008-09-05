@@ -98,17 +98,35 @@ class YastModule
   #
 
   def to_xml( options = {} )
-    STDERR.puts "#{self}.to_xml"
     xml = options[:builder] ||= Builder::XmlMarkup.new(options)
     xml.instruct! unless options[:skip_instruct]
-#    xml.modules do
-#      xml.tag!(:link, @link )
-#      xml.commands do
-#	@commands.each do |f|
-#	  xml.tag!(:link, f)
-#	end
-#      end
-#    end  
+    xml.module do
+       xml.tag!(:id, @id )
+       if @commands != nil
+         xml.commands do
+	   @commands.each do |name,descr|
+             xml.command do
+               xml.tag!(:name, name)
+               xml.tag!(:help, descr["help"])
+               xml.options do
+                 descr["options"].each do |nameOption,option|
+                   xml.option do
+                     xml.tag!(:name, nameOption)
+                     xml.tag!(:type, option["type"])
+                     xml.tag!(:help, option["help"])
+                   end
+                 end
+               end
+             end
+           end
+         end
+       end
+    end  
   end  
+
+  def to_json( options = {} )
+    hash = Hash.from_xml(to_xml())
+    return hash.to_json
+  end
 
 end
