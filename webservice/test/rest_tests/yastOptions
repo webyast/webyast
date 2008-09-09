@@ -1,0 +1,100 @@
+<?xml version="1.0"?>
+<!DOCTYPE commandline SYSTEM "/usr/share/YaST2/schema/commandline.dtd">
+<commandline xmlns:config="http://www.suse.com/1.0/configns">
+  <commands config:type="list">
+    <command>
+      <help>Change the global settings of the LDAP client</help>
+      <name>configure</name>
+      <options config:type="list">
+        <option>
+          <help>The LDAP server name</help>
+          <name>server</name>
+          <type>string</type>
+        </option>
+        <option>
+          <help>Distinguished name (DN) of the search base</help>
+          <name>base</name>
+          <type>string</type>
+        </option>
+        <option>
+          <help>Create default configuration objects.</help>
+          <name>createconfig</name>
+        </option>
+        <option>
+          <help>LDAP Server Password</help>
+          <name>ldappw</name>
+          <type>string</type>
+        </option>
+        <option>
+          <help>Start or stop automounter</help>
+          <name>automounter</name>
+          <type>enum</type>
+        </option>
+        <option>
+          <help>Create Home Directory on Login</help>
+          <name>mkhomedir</name>
+          <type>enum</type>
+        </option>
+        <option>
+          <help>Encrypted connection (StartTLS)</help>
+          <name>tls</name>
+          <type>enum</type>
+        </option>
+      </options>
+    </command>
+    <command>
+      <help>Enable or disable authentication with LDAP</help>
+      <name>pam</name>
+      <options config:type="list">
+        <option>
+          <help>Enable the service</help>
+          <name>enable</name>
+        </option>
+        <option>
+          <help>Disable the service</help>
+          <name>disable</name>
+        </option>
+        <option>
+          <help>The LDAP server name</help>
+          <name>server</name>
+          <type>string</type>
+        </option>
+        <option>
+          <help>Distinguished name (DN) of the search base</help>
+          <name>base</name>
+          <type>string</type>
+        </option>
+        <option>
+          <help>Create default configuration objects.</help>
+          <name>createconfig</name>
+        </option>
+        <option>
+          <help>LDAP Server Password</help>
+          <name>ldappw</name>
+          <type>string</type>
+        </option>
+        <option>
+          <help>Start or stop automounter</help>
+          <name>automounter</name>
+          <type>enum</type>
+        </option>
+        <option>
+          <help>Create Home Directory on Login</help>
+          <name>mkhomedir</name>
+          <type>enum</type>
+        </option>
+        <option>
+          <help>Encrypted connection (StartTLS)</help>
+          <name>tls</name>
+          <type>enum</type>
+        </option>
+      </options>
+    </command>
+    <command>
+      <help>Configuration summary of the LDAP client</help>
+      <name>summary</name>
+      <options config:type="list"/>
+    </command>
+  </commands>
+  <module>ldap</module>
+</commandline>

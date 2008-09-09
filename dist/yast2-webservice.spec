@@ -17,7 +17,7 @@ Autoreqprov:    on
 Version:        1.0.0
 Release:        0
 Summary:        YaST2 - Webservice. 
-Source:         webservice-%version.tar.bz2
+Source:         webservice.tar.bz2
 Source1:        yast.conf
 Source2:        rails.include
 Source3:        cleanurl-v5.lua
@@ -30,7 +30,7 @@ Authors:
     Stefan Schubert <schubi@opensuse.org>
 
 %prep
-%setup -q -n webservice-%version
+%setup -q -n webservice
 
 
 %install

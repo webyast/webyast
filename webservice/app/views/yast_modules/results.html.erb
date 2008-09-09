@@ -1,0 +1,19 @@
+<h1>Result</h1>
+
+<p>
+  <b>exit:</b>
+  <%=h @cmdRet[:exit] %>
+</p>
+
+<p>
+  <b>stdout:</b>
+  <%=h @cmdRet[:stout] %>
+</p>
+
+<p>
+  <b>stderr:</b>
+  <%=h @cmdRet[:stderr] %>
+</p>
+
+
+<%= link_to 'Back', yast_modules_path %>
