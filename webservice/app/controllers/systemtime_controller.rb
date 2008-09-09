@@ -2,7 +2,7 @@
 include ApplicationHelper
 
 class SystemtimeController < ApplicationController
-
+require "scr"
 
 #--------------------------------------------------------------------------------
 #
@@ -15,7 +15,7 @@ class SystemtimeController < ApplicationController
 #
 
   def get_is_utc
-    if scrRead(".sysconfig.clock.HWCLOCK") == "-u" then
+    if Scr.read(".sysconfig.clock.HWCLOCK") == "-u" then
       return true
     else
       return false
@@ -23,12 +23,12 @@ class SystemtimeController < ApplicationController
   end
 
   def get_time
-    ret = scrExecute(".target.bash_output", "/bin/date")
+    ret = Scr.execute("/bin/date")
     ret[:stdout]
   end
 
   def get_timezone
-    return scrRead(".sysconfig.clock.TIMEZONE")
+    return Scr.read(".sysconfig.clock.TIMEZONE")
   end
 
 #
@@ -42,13 +42,13 @@ class SystemtimeController < ApplicationController
     else
       hwclock = "--localtime"
     end
-    scrWrite(".sysconfig.clock.HWCLOCK", hwclock)
+    Scr.write(".sysconfig.clock.HWCLOCK", hwclock)
   end
 
   def set_time (time)
     #set time
     cmd = "";
-    hwclock = scrRead(".sysconfig.clock.HWCLOCK");
+    hwclock = Scr.read(".sysconfig.clock.HWCLOCK");
     timezone = get_timezone.length
     if (timezone.length >0 &&  hwclock!= "--localtime")
       cmd = "TZ=" + timezone + " "
@@ -59,17 +59,17 @@ class SystemtimeController < ApplicationController
               " #{systemtime.currenttime.hour}:#{systemtime.currenttime.min}:#{systemtime.currenttime.sec}\""
 
     logger.debug "SetTime cmd #{cmd}"
-    scrExecute(".target.bash_output",cmd)
+    Scr.execute(cmd)
 
     cmd = "/sbin/hwclock --hctosys " + hwclock;
 
     logger.debug "SetTime cmd #{cmd}"
-    scrExecute(".target.bash_output",cmd)
+    Scr.execute(cmd)
   end
 
   def set_timezone (timezone)
     #set timezone
-    scrWrite(".sysconfig.clock.TIMEZONE",timezone)
+    Scr.write(".sysconfig.clock.TIMEZONE",timezone)
   end
 
 #--------------------------------------------------------------------------------

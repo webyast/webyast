@@ -1,13 +1,14 @@
 include ApplicationHelper
 
 class ConfigNtpController < ApplicationController
+require "scr"
 #
 #local functions
 #
    def manualServer
 
      manual_server = ""
-     ret = scrExecute(".target.bash_output", "/sbin/yast2  ntp-client list")
+     ret = Scr.execute("/sbin/yast2  ntp-client list")
      servers = ret[:stderr].split "\n"
      servers::each do |s|
        column = s.split (" ")
@@ -30,7 +31,7 @@ class ConfigNtpController < ApplicationController
 
    def enabled
 
-     ret = scrExecute(".target.bash_output", "LANG=en.UTF-8 /sbin/yast2  ntp-client status")
+     ret = Scr.execute("LANG=en.UTF-8 /sbin/yast2  ntp-client status")
      if ret[:stderr]=="NTP daemon is enabled.\n"
        return true
      else      
@@ -40,7 +41,7 @@ class ConfigNtpController < ApplicationController
 
    def writeNTPConf (requestedServers)
      #remove evtl.old server if requested
-     ret = scrExecute(".target.bash_output", "/sbin/yast2  ntp-client list")
+     ret = Scr.execute("/sbin/yast2  ntp-client list")
      servers = ret[:stderr].split "\n"
      servers::each do |s|
        column = s.split " "
@@ -68,20 +69,20 @@ class ConfigNtpController < ApplicationController
      if updateRequired
        servers::each do |server|
          command = "/sbin/yast2  ntp-client delete #{server}"
-         scrExecute(".target.bash_output",command)
+         Scr.execute(command)
        end
        requestedServers::each do |reqServer|
          command = "/sbin/yast2  ntp-client add #{reqServer}"
-         scrExecute(".target.bash_output",command)
+         Scr.execute(command)
        end
      end
    end
 
    def enable (enabled)
      if enabled == true
-       scrExecute(".target.bash_output", "/sbin/yast2  ntp-client enable")
+       Scr.execute("/sbin/yast2  ntp-client enable")
      else
-       scrExecute(".target.bash_output", "/sbin/yast2  ntp-client disable")
+       Scr.execute("/sbin/yast2  ntp-client disable")
      end
    end
 

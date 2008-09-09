@@ -2,6 +2,7 @@ include ApplicationHelper
 
 class LanguageController < ApplicationController
 
+require "scr"
 
 #--------------------------------------------------------------------------------
 #
@@ -15,12 +16,12 @@ class LanguageController < ApplicationController
 
 
   def get_available
-     ret = scrExecute(".target.bash_output", "LANG=en.UTF-8 /sbin/yast2 language list")
+     ret = Scr.execute("LANG=en.UTF-8 /sbin/yast2 language list")
      @language.available = ret[:stderr].split "\n"
   end
 
   def get_languages
-     ret = scrExecute(".target.bash_output", "LANG=en.UTF-8 /sbin/yast2 language summary")
+     ret = Scr.execute("LANG=en.UTF-8 /sbin/yast2 language summary")
      lines = ret[:stderr].split "\n"
      lines::each do |s|    	
        column = s.split (" ")
@@ -39,12 +40,12 @@ class LanguageController < ApplicationController
 
   def set_firstLanguage (language)
     command = "/sbin/yast2  language set lang=#{language}"
-    scrExecute(".target.bash_output",command)
+    Scr.execute(command)
   end
 
   def set_secondLanguages (languages)
     command = "/sbin/yast2  language set languages=#{languages}"
-    scrExecute(".target.bash_output",command)
+    Scr.execute(command)
   end
 
 

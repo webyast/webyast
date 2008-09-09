@@ -1,6 +1,7 @@
 include ApplicationHelper
 
 class CommandsController < ApplicationController
+  require "scr" 
   private
   def init_services
     services = Hash.new
@@ -48,7 +49,7 @@ class CommandsController < ApplicationController
 
     cmd = "/usr/sbin/rc" + params[:service_id] + " " + id
 		logger.debug "SetTime cmd #{cmd}"
-    ret = scrExecute(".target.bash_output",cmd)
+    ret = Scr.execute(cmd)
 
     if ret[:exit] == 0
       respond_to do |format|

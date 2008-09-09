@@ -1,7 +1,7 @@
 include ApplicationHelper
 
 class UsersController < ApplicationController
-
+require "scr"
 #--------------------------------------------------------------------------------
 #
 #local methods
@@ -10,7 +10,7 @@ class UsersController < ApplicationController
 
 
   def get_userList
-    ret = scrExecute(".target.bash_output", "LANG=en.UTF-8 /sbin/yast2 users list")
+    ret = Scr.execute("LANG=en.UTF-8 /sbin/yast2 users list")
      lines = ret[:stderr].split "\n"
      @users = []
      lines::each do |s|   
@@ -26,7 +26,7 @@ class UsersController < ApplicationController
     else
       saveKey = nil
     end
-    ret = scrExecute(".target.bash_output", "LANG=en.UTF-8 /sbin/yast2 users show username=#{id}")
+    ret = Scr.execute("LANG=en.UTF-8 /sbin/yast2 users show username=#{id}")
      lines = ret[:stderr].split "\n"
      counter = 0
      @user = User.find(:first)
@@ -65,17 +65,17 @@ class UsersController < ApplicationController
       @user.sshkey = saveKey
     end
 
-    ret = scrReadArg(".target.stat", "#{@user.homeDirectory}/.ssh/authorized_keys")
+    ret = Scr.readArg(".target.stat", "#{@user.homeDirectory}/.ssh/authorized_keys")
     if ret.length == 0
       logger.debug "Create: #{@user.homeDirectory}/.ssh/authorized_keys"
-      scrExecute(".target.bash_output", "/bin/mkdir #{@user.homeDirectory}/.ssh")      
-      scrExecute(".target.bash_output", "/bin/chown #{@user.loginName} #{@user.homeDirectory}/.ssh}")      
-      scrExecute(".target.bash_output", "/bin/chmod 755 #{@user.homeDirectory}/.ssh}")
-      scrExecute(".target.bash_output", "/usr/bin/touch #{@user.homeDirectory}/.ssh/authorized_keys")      
-      scrExecute(".target.bash_output", "/bin/chown #{@user.loginName} #{@user.homeDirectory}/.ssh/authorized_keys}")      
-      scrExecute(".target.bash_output", "/bin/chmod 644 #{@user.homeDirectory}/.ssh/authorized_keys}")
+      Scr.execute("/bin/mkdir #{@user.homeDirectory}/.ssh")      
+      Scr.execute("/bin/chown #{@user.loginName} #{@user.homeDirectory}/.ssh}")      
+      Scr.execute("/bin/chmod 755 #{@user.homeDirectory}/.ssh}")
+      Scr.execute("/usr/bin/touch #{@user.homeDirectory}/.ssh/authorized_keys")      
+      Scr.execute("/bin/chown #{@user.loginName} #{@user.homeDirectory}/.ssh/authorized_keys}")      
+      Scr.execute("/bin/chmod 644 #{@user.homeDirectory}/.ssh/authorized_keys}")
     end
-    ret =  scrExecute(".target.bash_output", "echo \"#{@user.sshkey}\"  >> #{@user.homeDirectory}/.ssh/authorized_keys")
+    ret =  Scr.execute("echo \"#{@user.sshkey}\"  >> #{@user.homeDirectory}/.ssh/authorized_keys")
     if ret[:exit] != 0
       return false
     else 
@@ -127,7 +127,7 @@ class UsersController < ApplicationController
     if @user.type && @user.type.length > 0
       command += "type=#{@user.type} "
     end
-    ret = scrExecute(".target.bash_output", command)
+    ret = Scr.execute(command)
     if ret[:exit] != 0
       ok = false
     end
@@ -170,7 +170,7 @@ class UsersController < ApplicationController
       command += "type=#{@user.type} "
     end
 
-    ret = scrExecute(".target.bash_output", command)
+    ret = Scr.execute(command)
     if ret[:exit] == 0
       return true
     else
@@ -193,7 +193,7 @@ class UsersController < ApplicationController
       command += "type=#{@user.type} "
     end
 
-    ret = scrExecute(".target.bash_output", command)
+    ret = Scr.execute(command)
     if ret[:exit] == 0
       return true
     else

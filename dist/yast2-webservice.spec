@@ -10,13 +10,14 @@
 
 
 Name:           yast2-webservice
-Requires:       PackageKit, yast2-core, lighttpd, lighttpd-mod-magnet, ruby-fcgi, rubygem-rake
+Requires:       PackageKit, yast2-core, lighttpd-mod-magnet, ruby-fcgi, rubygem-rake
+PreReq:         lighttpd
 License:        GPL
 Group:          Productivity/Networking/Web/Utilities
 Autoreqprov:    on
 Version:        1.0.0
 Release:        0
-Summary:        YaST2 - Webservice. 
+Summary:        YaST2 - Webservice 
 Source:         webservice.tar.bz2
 Source1:        yast.conf
 Source2:        rails.include
@@ -25,6 +26,7 @@ BuildRoot:      %{_tmppath}/%{name}-%{version}-build
 BuildArchitectures: noarch
 
 %description
+YaST2 - Webservice - REST based interface of YaST.
 Authors:
 --------
     Stefan Schubert <schubi@opensuse.org>
@@ -32,6 +34,7 @@ Authors:
 %prep
 %setup -q -n webservice
 
+%build
 
 %install
 #
