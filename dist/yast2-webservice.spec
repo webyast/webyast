@@ -10,7 +10,7 @@
 
 
 Name:           yast2-webservice
-Requires:       PackageKit, yast2-core, lighttpd-mod-magnet, ruby-fcgi, rubygem-rake
+Requires:       PackageKit, yast2-core, lighttpd-mod_magnet, ruby-fcgi, rubygem-rake
 PreReq:         lighttpd
 License:        GPL
 Group:          Productivity/Networking/Web/Utilities
