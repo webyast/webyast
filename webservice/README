@@ -237,7 +237,7 @@ Note: Each single value can be get or set explicity.
 e.G. GET <hostname>/services/ntp/config/enabled returns this value only.
 
 == <hostname>/systemtime ==
-------------------------------------
+---------------------------
 Managing time, timezone,....
 
 GET <hostname>/systemtime
@@ -257,6 +257,291 @@ returned values of the GET request.
 
 Note: Each single value can be get or set explicity.
 
-e.G. GET <hostname>/systemtime/timezone returns this value only.
+e.g. GET <hostname>/systemtime/timezone returns this value only.
 
+== <hostname>/language ==
+-------------------------
+
+Managing language settings.
+
+GET <hostname>/language
+
+returns
+
+<language>
+  <firstLanguage>de_DE</firstLanguage>
+  <secondLanguages>en_US</secondLanguages>
+  <available>af_ZA (Afrikaans)ar_EG (Arabic)bg_BG (Bulgarian)bn_BD (Bengali)bs_BA (Bosanski)ca_ES (Catala)cs_CZ (Cestina)cy_GB (Cymraeg)da_DK (Dansk)de_DE (Deutsch)el_GR (Greek)en_GB (English (UK))en_US (English (US))es_ES (Espanol)et_EE (Eesti)fi_FI (Suomi)fr_FR (Francais)gu_IN (Gujarati)he_IL (Ivrit)hi_IN (Hindi)hr_HR (Hrvatski)hu_HU (Magyar)id_ID (Bahasa Indonesia)it_IT (Italiano)ja_JP (Japanese)km_KH (Khmer)ko_KR (Korean)lt_LT (Lithuanian)mk_MK (Makedonski)mr_IN (Marathi)nb_NO (Norsk)nl_NL (Nederlands)pa_IN (Punjabi)pl_PL (Polski)pt_BR (Portugues brasileiro)pt_PT (Portugues)ro_RO (Romana)ru_RU (Russian)si_LK (Sinhala)sk_SK (Slovencina)sl_SI (Slovenscina)sr_CS (Srpski)sv_SE (Svenska)ta_IN (Tamil)th_TH (phasa thai)tr_TR (Turkce)uk_UA (Ukrainian)vi_VN (Vietnamese)wa_BE (Walon)xh_ZA (isiXhosa)zh_CN (Simplified Chinese)zh_TW (Traditional Chinese (Taiwan))zu_ZA (isiZulu)</available>
+</language>
+
+firstLanguage:   primary language
+secondLanguages: a list of languages separeted by commas
+available:       languages which are available on the system
+
+
+PUT <hostname>/language with values: 
+
+<language>
+  <firstLanguage>de_DE</firstLanguage>
+  <secondLanguages>en_US,zu_ZA</secondLanguages>
+</language>
+
+Note: Each single value can be get or set explicity.
+
+e.g. GET <hostname>/language/available returns the list of available languages only.
+
+== <hostname>/users ==
+----------------------
+
+User management like create/edit/delete a user login or exporting SSH's.
+
+GET <hostname>/users
+
+returns 
+
+<users type="array">
+  <user>
+    <loginName>nnw</loginName>
+  </user>
+  <user>
+    <loginName>tux</loginName>
+  </user>
+  <user>
+    <loginName>tux2</loginName>
+  </user>
+</users>
+
+There are some other tags which are nil cause they have not been avaluated while this run. 
+It would take too much time to get these values for e.g. all ldap users of a big company.
+If you want more information about an user just call:
+
+== <hostname>/users/<loginname> ==
+----------------------------------
+This call returns additional information about an user account.
+
+GET <hostname>/users/tux returns
+
+<user>
+  <defaultGroup>users</defaultGroup>
+  <fullName>tux tux</fullName>
+  <groups>users</groups>
+  <homeDirectory>/home/tux</homeDirectory>
+  <loginName>tux</loginName>
+  <loginShell>/bin/bash</loginShell>
+  <uid>1001</uid>
+</user>
+
+PUT <hostname>/users/tux update the user tux
+
+<user>
+  <defaultGroup>users</defaultGroup>
+  <fullName>tux2 tux2</fullName>
+  <groups>users</groups>
+  <homeDirectory>/home/tux2</homeDirectory>
+  <loginShell>/bin/bash</loginShell>
+  <password>tuxtux</password>
+  <newUid>1002</newUid>
+  <newLoginName>tux2</newLoginName>
+</user>
+
+Not all tags are required. So, you have tag changed values only.
+
+Additional optional tags:
+
+ldapPassword: Ldap password if the user will created with Ldap.
+type:         valid values: local, system, nis, ldap
+
+Note: Each single value can be get or set explicity.
+
+e.g. GET <hostname>/users/tux/uid returns the UID of of the user tux only.
+
+POST <hostname>/users creates a new user account with the values:
+
+<user>
+  <defaultGroup>users</defaultGroup>
+  <fullName>tux2 tux2</fullName>
+  <groups>users</groups>
+  <homeDirectory>/home/tux2</homeDirectory>
+  <loginName>tux2</loginName>
+  <loginShell>/bin/bash</loginShell>
+  <noHome type="boolean">false</noHome>
+  <password>tuxtux</password>
+  <uid>1002</uid>
+</user>
+
+noHome:  do not create the home directory
+
+Additional optional tags:
+
+ldapPassword: Ldap password if the user will created with Ldap.
+type:         valid values: local, system, nis, ldap
+
+DELETE <hostname>/users/tux delete the user account tux
+
+== <hostname>/users/<loginname>/sshkey ==
+-----------------------------------------
+Exporting a SSH key to the home directory of the given user.
+
+PUT <hostname>/users/<loginname>/sshkey with the value:
+
+<user>
+  <sshkey>This should be the key</sshkey>
+</user>
+
+== <hostname>/patch_updates ==
+------------------------------
+Evaluate and install needed patches.
+
+GET <hostname>/patch_updates returns
+
+<patch-updates type="array">
+  <patch-update>
+    <arch>noarch</arch>
+    <kind>important</kind>
+    <name>PackageKit</name>
+    <repo>openSUSE-11.0-Updates</repo>
+    <resolvableId type="integer">139</resolvableId>
+    <summary></summary>
+  </patch-update>
+  <patch-update>
+    <arch>noarch</arch>
+    <kind>important</kind>
+    <name>zypper</name>
+    <repo>openSUSE-11.0-Updates</repo>
+    <resolvableId type="integer">114</resolvableId>
+    <summary></summary>
+  </patch-update>
+  <patch-update>
+    <arch>noarch</arch>
+    <kind>important</kind>
+    <name>yast2-ncurses-pkg</name>
+    <repo>openSUSE-11.0-Updates</repo>
+    <resolvableId type="integer">83</resolvableId>
+    <summary></summary>
+  </patch-update>
+</patch-updates>
+
+arch:         Architecture
+kind:         important(recommded), security, low(optional)
+name:         Patchname
+repo:         Concerning repository
+resolvableId: internal patch ID
+summary:      description
+
+POST <hostname>/patch_updates/<resolvableId> Install the patch with the internal patch ID.
+
+== <hostname>/yast_modules ==
+-----------------------------
+Almost each YaST module has a commond line interface which can be used with HTTP/REST.
+
+GET <hostname>/yast_modules returns a list of all available YaST modules
+
+<hash>
+  <module>
+    <id>dns-server</id>
+  </module>
+  <module>
+    <id>update</id>
+  </module>
+  <module>
+    <id>remote</id>
+  </module>
+  <module>
+    <id>dirinstall</id>
+  </module>
+  <module>
+    <id>restore</id>
+  </module>
+  <module>
+    ....
+  </module>
+<hash>
+
+
+== <hostname>/yast_modules/<yast_module> ==
+-------------------------------------------
+Evaluate all possible commands and options of a YaST module
+
+GET <hostname>/yast_modules/nis returns all commands and options of the nis module
+
+<module>
+  <id>nis</id>
+  <commands>
+    <command>
+      <name>disable</name>
+      <help>Disable the NIS client</help>
+      <options/>
+    </command>
+    <command>
+      <name>find</name>
+      <help>Show available NIS servers for given domain</help>
+      <options>
+        <option>
+          <name>domain</name>
+          <type>string</type>
+          <help>NIS domain</help>
+        </option>
+      </options>
+    </command>
+    <command>
+      <name>enable</name>
+      <help>Enable your machine as NIS client</help>
+      <options>
+        <option>
+          <name>automounter</name>
+          <type>enum</type>
+          <help>Start or stop automounter</help>
+        </option>
+        <option>
+          <name>domain</name>
+          <type>string</type>
+          <help>NIS domain</help>
+        </option>
+        <option>
+          <name>server</name>
+          <type>string</type>
+          <help>NIS server name or address</help>
+        </option>
+        <option>
+          <name>broadcast</name>
+          <type>enum</type>
+          <help>Set or unset broadcast search</help>
+        </option>
+      </options>
+    </command>
+    <command>
+      <name>configure</name>
+      <help>Change the global settings of NIS client</help>
+      <options>
+        <option>
+          <name>broadcast</name>
+          <type>enum</type>
+          <help>Set or unset broadcast search</help>
+        </option>
+        <option>
+          <name>automounter</name>
+          <type>enum</type>
+          <help>Start or stop automounter</help>
+        </option>
+        <option>
+          <name>domain</name>
+          <type>string</type>
+          <help>NIS domain</help>
+        </option>
+        <option>
+          <name>server</name>
+          <type>string</type>
+          <help>NIS server name or address</help>
+        </option>
+      </options>
+    </command>
+    <command>
+      <name>summary</name>
+      <help>Configuration summary of NIS client</help>
+      <options/>
+    </command>
+  </commands>
+</module>
+
+POST <hostname>/yast_modules/nis run the nis module with the commands:
 

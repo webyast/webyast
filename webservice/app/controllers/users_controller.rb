@@ -83,7 +83,7 @@ require "scr"
     end
   end
 
-  def udate_user
+  def udate_user userId
     ok = true
 
     if @user.sshkey && @user.sshkey.length > 0
@@ -106,8 +106,8 @@ require "scr"
     if @user.loginShell && @user.loginShell.length > 0
       command += "shell=#{@user.loginShell} "
     end
-    if @user.loginName && @user.loginName.length > 0
-      command += "username=#{@user.loginName} "
+    if userId && userId.length > 0
+      command += "username=#{userId} "
     end
     if @user.uid && @user.uid.length > 0
       command += "uid=#{@user.uid} "
@@ -275,7 +275,7 @@ require "scr"
 
     respond_to do |format|
       if @user.update_attributes(params[:user])
-        if udate_user
+        if udate_user params[:id]
           flash[:notice] = 'User was successfully updated.'
           format.html { redirect_to(users_url) }
           format.xml  { head :ok }
@@ -400,7 +400,7 @@ require "scr"
             if exportSSH
               ok = createSSH
             else
-              ok = udate_user
+              ok = udate_user params[:users_id]
             end
           end
 
