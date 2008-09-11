@@ -20,8 +20,8 @@ the HTTP protocol has four mothods:
 
 GET    - Retrive a value 
 PUT    - Overwrite a value
-POST   - Create a new value. Anything else like starting a system service/program
-DELETE - Delete a value. E.g. delete a user login
+POST   - Create a new value.
+DELETE - Delete a value. E.g. delete a user account
 
 === General Structure of the HTTP Requests ===
 ----------------------------------------------
@@ -79,7 +79,7 @@ Put requests are taken for OVERWRITING existing values.
 Multi values can be overwritten at once in a block or each entry of the block
 can be set explicity in an extra HTTP call:
 
-http://<name_of_the_host>/language with a block of data
+http://<name_of_the_host>/language with a block of XML data
 
 <?xml version="1.0" encoding="UTF-8"?>
 <language>
@@ -89,7 +89,7 @@ http://<name_of_the_host>/language with a block of data
 
 whereas 
 
-http://0.0.0.0:3001/systemtime/language/secondLanguages with a single value
+http://0.0.0.0:3001/systemtime/language/secondLanguages with a single XML value
 
 <?xml version="1.0" encoding="UTF-8"?>
 <language>
@@ -98,6 +98,8 @@ http://0.0.0.0:3001/systemtime/language/secondLanguages with a single value
 
 So only the required value has been set.
 
+Note: Also HTML and JSON format is a valid format for values which have to be changed.
+
 Put calls can be generated on the command line with the call:
 
 curl -v -H "Content-Type: application/xml; charset=utf-8" -T <data-file> http://0.0.0.0:3001/systemtime/language/secondLanguages
@@ -105,10 +107,156 @@ curl -v -H "Content-Type: application/xml; charset=utf-8" -T <data-file> http://
 == POST ==
 ----------
 
-Post requests are used for either generating new entries/data or for something other stuff like starting a system service,...
+Post requests are used for creating new entries e.g. adding a new user account:
+
+http://0.0.0.0:3001/users with the XML values:
+
+<?xml version="1.0" encoding="UTF-8"?>
+<user>
+  <defaultGroup>users</defaultGroup>
+  <fullName>tux2 tux2</fullName>
+  <groups>users</groups>
+  <homeDirectory>/home/tux2</homeDirectory>
+  <loginName>tux2</loginName>
+  <loginShell>/bin/bash</loginShell>
+  <noHome type="boolean">false</noHome>
+  <password>tuxtux</password>
+  <uid>1002</uid>
+</user>
+
+
+Post calls can be generated on the command line with the call:
+
+curl -X POST -v -H "Content-Type: application/xml; charset=utf-8" -T <data-file> http://0.0.0.0:3001/users
+
+(<data-file> is a file which contains the XML values described above)
+
+Note: Also HTML and JSON format is a valid format for values which have to be created.
 
 == DELETE ==
 ------------
 
+Delete requests are used for deleting entries e.g. an user account:
+
+http://0.0.0.0:3001/users/tux2
+
+Post calls can be generated on the command line with the call:
+
+curl -X DELETE http://0.0.0.0:3001/users/tux2
+
+=== YaST webservice API ===
+---------------------------
+
+== <hostname>/services ==
+-------------------------
+Managing system services like cron, smbfs, gpm, sshd, random, cups, ntp
+
+GET <hostname>/services
+
+returns:
+
+<hash> 
+  <service>
+    <link>smbfs</link>
+    <path>/etc/init.d/smbfs</path>
+    <commands>
+      <link>run</link>
+       <link>stop</link>
+       <link>status</link>
+       <link>restart</link>
+     </commands>
+  </service>
+  <service>
+    <link>sshd</link>
+    <path>/etc/init.d/sshd</path>
+    <commands>
+      <link>start</link>
+      <link>stop</link>
+      <link>status</link>
+      <link>try-restart</link>
+      <link>restart</link>
+      <link>force-reload</link>
+      <link>reload</link>
+      <link>probe</link>
+    </commands>
+  </service>
+  <service>
+...
+  </service>
+</hash> 
+
+== <hostname>/services/<servicename> ==
+---------------------------------------
+
+GET <hostname>/services/smbfs
+
+returns
+
+<hash> 
+  <service>
+    <link>smbfs</link>
+    <path>/etc/init.d/smbfs</path>
+    <commands>
+      <link>run</link>
+       <link>stop</link>
+       <link>status</link>
+       <link>restart</link>
+     </commands>
+  </service>
+</hash> 
+
+== <hostname>/services/<servicename>/<command> ==
+-------------------------------------------------
+
+PUT <hostname>/services/ntp/restart
+
+== <hostname>/services/ntp/config ==
+------------------------------------
+
+GET <hostname>/services/ntp/config 
+
+returns
+
+<config_ntp>
+  <enabled type="boolean">true</enabled>
+  <manual_server></manual_server>
+  <use_random_server type="boolean">true</use_random_server>
+</config_ntp>
+
+enabled:           the service will be automatically enabled while booting
+manual_server:     user selected ntp server
+use_random_server: server will be selected from pool.ntp.org
+
+PUT <hostname>/services/ntp/config 
+
+Writes ntp settings to the system. The given parameters are the same as the
+returned values of the GET request.
+
+Note: Each single value can be get or set explicity.
+
+e.G. GET <hostname>/services/ntp/config/enabled returns this value only.
+
+== <hostname>/systemtime ==
+------------------------------------
+Managing time, timezone,....
+
+GET <hostname>/systemtime
+
+returns
+
+<systemtime>
+  <currenttime type="datetime">2008-09-11T11:29:21Z</currenttime>
+  <is_utc type="boolean">false</is_utc>
+  <timezone>Europe/Berlin</timezone>
+</systemtime>
+
+GET <hostname>/systemtime
+
+Writes time settings to the system. The given parameters are the same as the
+returned values of the GET request.
+
+Note: Each single value can be get or set explicity.
+
+e.G. GET <hostname>/systemtime/timezone returns this value only.
 
 

@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<user>
+  <defaultGroup>users</defaultGroup>
+  <fullName>tux2 tux2</fullName>
+  <groups>users</groups>
+  <homeDirectory>/home/tux2</homeDirectory>
+  <loginName>tux2</loginName>
+  <loginShell>/bin/bash</loginShell>
+  <noHome type="boolean">false</noHome>
+  <password>tuxtux</password>
+  <uid>1002</uid>
+</user>
