@@ -57,6 +57,13 @@ class YastModulesController < ApplicationController
 
     if request.post?
       #execute command
+
+      #checking if the command is hosted in a own Hash
+      params["hash"].each do |name,value|
+         puts "Split hash #{name}:#{value}"
+         params[name] = value
+      end
+      
       cmdLine = "LANG=en.UTF-8 /sbin/yast2 #{params[:id]} #{params[:command]}"
       found = false
       @yastModule.commands.each do |cname,option|
@@ -96,6 +103,21 @@ class YastModulesController < ApplicationController
       end
       if !found
         STDERR.puts "command #{params[:command]} not found"
+        @cmdRet = Hash.new
+        @cmdRet["exit"] = 1
+        @cmdRet["stderr"] = "wrong parameter"
+	@cmdRet["stdout"] = ""
+        respond_to do |format|
+	  format.xml do
+	    render :xml => @cmdRet.to_xml
+          end
+          format.json do
+            render :json => @cmdRet.to_json
+          end
+          format.html do
+            render :file => "#{RAILS_ROOT}/app/views/yast_modules/results.html.erb"
+          end
+        end
       end
     else
       #edit options

@@ -3,7 +3,7 @@
 
 === General ===
 ---------------
-Yast2-webservice provides an interface to YaST environment of the
+Yast2-webservice provides an interface to the YaST environment of the
 concerning host machine. This service is running with an installed
 webserver (e.g. lighthttp) and provides an API which is based on
 the REST (Representational state transfer) architecture.
@@ -11,14 +11,14 @@ Please have a look to
 http://en.wikipedia.org/wiki/Representational_State_Transfer
 for more information about REST.
 
-E.g.  getting or setting the systemtime you can use
+E.g. in order to get or set the systemtime you can use the HTTP URL:
 
 http://<name_of_the_host>/systemtime/currenttime
 
 In order to identify if this value has to be set or has to be get
-the HTTP protocol has four mothods:
+the HTTP protocol has four methods:
 
-GET    - Retrive a value 
+GET    - Retrieve a value 
 PUT    - Overwrite a value
 POST   - Create a new value.
 DELETE - Delete a value. E.g. delete a user account
@@ -26,7 +26,7 @@ DELETE - Delete a value. E.g. delete a user account
 === General Structure of the HTTP Requests ===
 ----------------------------------------------
 
-Information can be get/set in 3 different formats:
+Information can be get/set in/with 3 different formats:
 
 http://<name_of_the_host>/systemtime
 Returns the systemtime in HTML format. Calling this URL not via a 
@@ -41,10 +41,10 @@ Returns the systemtime in JSON format
 == GET ==
 ---------
 
-Infomation can be get in a block or each entry of the block can be get
+Information can be get in a block or each entry of the block can be get
 in an extra HTTP call:
 
-http://<name_of_the_host>/systemtime.xml
+GET http://<name_of_the_host>/systemtime.xml
 
 returns
 
@@ -56,7 +56,7 @@ returns
 
 whereas 
 
-http://0.0.0.0:3001/systemtime/timezone.xml
+GET http://0.0.0.0:3001/systemtime/timezone.xml
 
 returns
 
@@ -66,9 +66,9 @@ returns
 <timezone>Europe/Berlin</timezone>
 </systemtime>
 
-So only the required value has been set in the return value.
+So, only the required value has been set in the return value.
 
-Get calls can be generated on the command line with the call:
+GET calls can be generated on the command line with the call:
 
 curl -X GET http://0.0.0.0:3001/systemtime/timezone.xml
 
@@ -77,9 +77,9 @@ curl -X GET http://0.0.0.0:3001/systemtime/timezone.xml
 
 Put requests are taken for OVERWRITING existing values.
 Multi values can be overwritten at once in a block or each entry of the block
-can be set explicity in an extra HTTP call:
+can be set explicit in an extra HTTP call:
 
-http://<name_of_the_host>/language with a block of XML data
+PUT http://<name_of_the_host>/language with a block of XML data
 
 <?xml version="1.0" encoding="UTF-8"?>
 <language>
@@ -89,7 +89,7 @@ http://<name_of_the_host>/language with a block of XML data
 
 whereas 
 
-http://0.0.0.0:3001/systemtime/language/secondLanguages with a single XML value
+PUT http://0.0.0.0:3001/systemtime/language/secondLanguages with a single XML value
 
 <?xml version="1.0" encoding="UTF-8"?>
 <language>
@@ -102,14 +102,14 @@ Note: Also HTML and JSON format is a valid format for values which have to be ch
 
 Put calls can be generated on the command line with the call:
 
-curl -v -H "Content-Type: application/xml; charset=utf-8" -T <data-file> http://0.0.0.0:3001/systemtime/language/secondLanguages
+curl -v -H "Content-Type: application/xml; charset=utf-8" -T <data-file> http://0.0.0.0:3001/systemtime/language/secondLanguages.xml
 
 == POST ==
 ----------
 
 Post requests are used for creating new entries e.g. adding a new user account:
 
-http://0.0.0.0:3001/users with the XML values:
+POST http://0.0.0.0:3001/users.xml with the XML values:
 
 <?xml version="1.0" encoding="UTF-8"?>
 <user>
@@ -125,9 +125,9 @@ http://0.0.0.0:3001/users with the XML values:
 </user>
 
 
-Post calls can be generated on the command line with the call:
+POST calls can be generated on the command line with the call:
 
-curl -X POST -v -H "Content-Type: application/xml; charset=utf-8" -T <data-file> http://0.0.0.0:3001/users
+curl -X POST -v -H "Content-Type: application/xml; charset=utf-8" -T <data-file> http://0.0.0.0:3001/users.xml
 
 (<data-file> is a file which contains the XML values described above)
 
@@ -138,9 +138,9 @@ Note: Also HTML and JSON format is a valid format for values which have to be cr
 
 Delete requests are used for deleting entries e.g. an user account:
 
-http://0.0.0.0:3001/users/tux2
+DELETE http://0.0.0.0:3001/users/tux2
 
-Post calls can be generated on the command line with the call:
+DELETE calls can be generated on the command line with the call:
 
 curl -X DELETE http://0.0.0.0:3001/users/tux2
 
@@ -151,7 +151,7 @@ curl -X DELETE http://0.0.0.0:3001/users/tux2
 -------------------------
 Managing system services like cron, smbfs, gpm, sshd, random, cups, ntp
 
-GET <hostname>/services
+GET <hostname>/services.xml
 
 returns:
 
@@ -188,7 +188,7 @@ returns:
 == <hostname>/services/<servicename> ==
 ---------------------------------------
 
-GET <hostname>/services/smbfs
+GET <hostname>/services/smbfs.xml
 
 returns
 
@@ -205,15 +205,15 @@ returns
   </service>
 </hash> 
 
-== <hostname>/services/<servicename>/<command> ==
--------------------------------------------------
+== <hostname>/services/<servicename>/commands/<command> ==
+----------------------------------------------------------
 
-PUT <hostname>/services/ntp/restart
+PUT <hostname>/services/ntp/commands/restart.xml
 
 == <hostname>/services/ntp/config ==
 ------------------------------------
 
-GET <hostname>/services/ntp/config 
+GET <hostname>/services/ntp/config.xml
 
 returns
 
@@ -227,20 +227,20 @@ enabled:           the service will be automatically enabled while booting
 manual_server:     user selected ntp server
 use_random_server: server will be selected from pool.ntp.org
 
-PUT <hostname>/services/ntp/config 
+PUT <hostname>/services/ntp/config.xml
 
 Writes ntp settings to the system. The given parameters are the same as the
 returned values of the GET request.
 
-Note: Each single value can be get or set explicity.
+Note: Each single value can be get or set explicit.
 
-e.G. GET <hostname>/services/ntp/config/enabled returns this value only.
+e.G. GET <hostname>/services/ntp/config/enabled.xml returns this value only.
 
 == <hostname>/systemtime ==
 ---------------------------
 Managing time, timezone,....
 
-GET <hostname>/systemtime
+GET <hostname>/systemtime.xml
 
 returns
 
@@ -250,21 +250,21 @@ returns
   <timezone>Europe/Berlin</timezone>
 </systemtime>
 
-GET <hostname>/systemtime
+GET <hostname>/systemtime.xml
 
 Writes time settings to the system. The given parameters are the same as the
 returned values of the GET request.
 
-Note: Each single value can be get or set explicity.
+Note: Each single value can be get or set explicit.
 
-e.g. GET <hostname>/systemtime/timezone returns this value only.
+e.g. GET <hostname>/systemtime/timezone.xml returns this value only.
 
 == <hostname>/language ==
 -------------------------
 
 Managing language settings.
 
-GET <hostname>/language
+GET <hostname>/language.xml
 
 returns
 
@@ -279,23 +279,23 @@ secondLanguages: a list of languages separeted by commas
 available:       languages which are available on the system
 
 
-PUT <hostname>/language with values: 
+PUT <hostname>/language.xml with values: 
 
 <language>
   <firstLanguage>de_DE</firstLanguage>
   <secondLanguages>en_US,zu_ZA</secondLanguages>
 </language>
 
-Note: Each single value can be get or set explicity.
+Note: Each single value can be get or set explicit.
 
-e.g. GET <hostname>/language/available returns the list of available languages only.
+e.g. GET <hostname>/language/available.xml returns the list of available languages only.
 
 == <hostname>/users ==
 ----------------------
 
-User management like create/edit/delete a user login or exporting SSH's.
+User management like create/edit/delete a user login or exporting SSH-keys.
 
-GET <hostname>/users
+GET <hostname>/users.xml
 
 returns 
 
@@ -311,15 +311,15 @@ returns
   </user>
 </users>
 
-There are some other tags which are nil cause they have not been avaluated while this run. 
-It would take too much time to get these values for e.g. all ldap users of a big company.
+There are some other tags which are nil cause they have not been evaluated while this run. 
+It would take too much time to get these values of e.g. all ldap users of a big company.
 If you want more information about an user just call:
 
 == <hostname>/users/<loginname> ==
 ----------------------------------
 This call returns additional information about an user account.
 
-GET <hostname>/users/tux returns
+GET <hostname>/users/tux.xml returns
 
 <user>
   <defaultGroup>users</defaultGroup>
@@ -331,7 +331,7 @@ GET <hostname>/users/tux returns
   <uid>1001</uid>
 </user>
 
-PUT <hostname>/users/tux update the user tux
+PUT <hostname>/users/tux.xml update the user account of tux
 
 <user>
   <defaultGroup>users</defaultGroup>
@@ -344,18 +344,18 @@ PUT <hostname>/users/tux update the user tux
   <newLoginName>tux2</newLoginName>
 </user>
 
-Not all tags are required. So, you have tag changed values only.
+Not all tags are required. So, you have to "tag" changed values only.
 
 Additional optional tags:
 
-ldapPassword: Ldap password if the user will created with Ldap.
+ldapPassword: Ldap password if the user account will created with Ldap.
 type:         valid values: local, system, nis, ldap
 
-Note: Each single value can be get or set explicity.
+Note: Each single value can be get or set explicit.
 
-e.g. GET <hostname>/users/tux/uid returns the UID of of the user tux only.
+e.g. GET <hostname>/users/tux/uid.xml returns the UID of of the user tux only.
 
-POST <hostname>/users creates a new user account with the values:
+POST <hostname>/users.xml creates a new user account with the values:
 
 <user>
   <defaultGroup>users</defaultGroup>
@@ -373,7 +373,7 @@ noHome:  do not create the home directory
 
 Additional optional tags:
 
-ldapPassword: Ldap password if the user will created with Ldap.
+ldapPassword: Ldap password if the user account will created with Ldap.
 type:         valid values: local, system, nis, ldap
 
 DELETE <hostname>/users/tux delete the user account tux
@@ -382,7 +382,7 @@ DELETE <hostname>/users/tux delete the user account tux
 -----------------------------------------
 Exporting a SSH key to the home directory of the given user.
 
-PUT <hostname>/users/<loginname>/sshkey with the value:
+PUT <hostname>/users/<loginname>/sshkey.xml with the value:
 
 <user>
   <sshkey>This should be the key</sshkey>
@@ -392,7 +392,7 @@ PUT <hostname>/users/<loginname>/sshkey with the value:
 ------------------------------
 Evaluate and install needed patches.
 
-GET <hostname>/patch_updates returns
+GET <hostname>/patch_updates.xml returns
 
 <patch-updates type="array">
   <patch-update>
@@ -432,9 +432,9 @@ POST <hostname>/patch_updates/<resolvableId> Install the patch with the internal
 
 == <hostname>/yast_modules ==
 -----------------------------
-Almost each YaST module has a commond line interface which can be used with HTTP/REST.
+Almost each YaST module has a command line interface which can be used with HTTP/REST.
 
-GET <hostname>/yast_modules returns a list of all available YaST modules
+GET <hostname>/yast_modules.xml returns a list of all available YaST modules
 
 <hash>
   <module>
@@ -460,9 +460,9 @@ GET <hostname>/yast_modules returns a list of all available YaST modules
 
 == <hostname>/yast_modules/<yast_module> ==
 -------------------------------------------
-Evaluate all possible commands and options of a YaST module
+Evaluate all possible commands and options of a YaST module.
 
-GET <hostname>/yast_modules/nis returns all commands and options of the nis module
+GET <hostname>/yast_modules/nis.xml returns all commands and options of the nis module
 
 <module>
   <id>nis</id>
@@ -543,5 +543,21 @@ GET <hostname>/yast_modules/nis returns all commands and options of the nis modu
   </commands>
 </module>
 
-POST <hostname>/yast_modules/nis run the nis module with the commands:
+POST <hostname>/yast_modules/nis.xml run the nis module with the commands:
+
+<hash>
+  <command>find</command>
+  <domain>suse.de</domain>
+</hash>
+
+This returns:
+
+<hash>
+  <stdout></stdout>
+  <exit type="integer">16</exit>
+  <stderr>10.10.0.1
+10.10.0.10
+</stderr>
+</hash>
+
 
