@@ -74,10 +74,12 @@ rm -rf $RPM_BUILD_ROOT
 /srv/www/yast/lib
 /srv/www/yast/public
 /srv/www/yast/Rakefile
-/srv/www/yast/README
+/srv/www/yast/README*
+/srv/www/yast/COPYING
 /srv/www/yast/script
 /srv/www/yast/test
 /srv/www/yast/config
+%doc README* COPYING
 %attr(-,lighttpd,lighttpd) /srv/www/yast/log
 %attr(-,lighttpd,lighttpd) /srv/www/yast/tmp
 %config(noreplace) /etc/lighttpd/vhosts.d/yast.conf
