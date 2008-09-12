@@ -1,0 +1,69 @@
+Configuration
+==============
+
+After you have installed this package you have to setup the database:
+
+cd /srv/www/yast/
+rake
+
+You can run the YaST webservice with two different web servers:
+
+--------------------------------------------------------------------------
+webrick
+--------------------------------------------------------------------------
+ROR provides an own webserver called webrick. It is nice for testing but
+should not used for "realtime".
+
+starting
+- - - - -
+
+cd /srv/www/yast
+script/server -p 3001
+
+Logs are written to /srv/www/yast/log
+
+first test
+- - - - - - 
+Use the webbrowser with the URL http://0.0.0.0:3001
+
+--------------------------------------------------------------------------
+lighttpd
+--------------------------------------------------------------------------
+Lighttpd is a quite simple HTTP server which fulfill all requirements
+for YaST-webservice. It has only the disadvantage that it does not run
+"out of the box". So some changes in the configuration files are needed:
+
+/etc/lighttpd/lighttpd.conf
+- - - - - - - - - - - - - - -
+AKTIVATE following entries
+
+424c424
+< include_shell "cat /etc/lighttpd/vhosts.d/*.conf"
+---
+> #include_shell "cat /etc/lighttpd/vhosts.d/*.conf"
+
+/etc/lighttpd/modules.conf
+- - - - - - - - - - - - - -
+AKTIVATE following entries
+
+48c48
+<   "mod_rewrite",
+---
+> #  "mod_rewrite",
+89c89
+< include "conf.d/magnet.conf"
+---
+> #include "conf.d/magnet.conf"
+132c132
+< include "conf.d/fastcgi.conf"
+---
+> #include "conf.d/fastcgi.conf"
+
+
+Start the server: rclighttpd start
+
+Logs are written to /srv/www/yast/log
+
+first test
+- - - - - - 
+Use the webbrowser with the URL http://<your_hostname>
