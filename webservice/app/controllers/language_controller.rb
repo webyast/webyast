@@ -39,12 +39,12 @@ require "scr"
 #
 
   def set_firstLanguage (language)
-    command = "/sbin/yast2  language set lang=#{language}"
+    command = "/sbin/yast2  language set lang=#{language} no_packages"
     Scr.execute(command)
   end
 
   def set_secondLanguages (languages)
-    command = "/sbin/yast2  language set languages=#{languages}"
+    command = "/sbin/yast2  language set languages=#{languages} no_packages"
     Scr.execute(command)
   end
 
