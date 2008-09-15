@@ -58,10 +58,12 @@ class YastModulesController < ApplicationController
     if request.post?
       #execute command
 
-      #checking if the command is hosted in a own Hash
-      params["hash"].each do |name,value|
-         puts "Split hash #{name}:#{value}"
-         params[name] = value
+      if params["hash"] != nil
+        #checking if the command is hosted in a own Hash
+        params["hash"].each do |name,value|
+           puts "Split hash #{name}:#{value}"
+           params[name] = value
+        end
       end
       
       cmdLine = "LANG=en.UTF-8 /sbin/yast2 #{params[:id]} #{params[:command]}"
