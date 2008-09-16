@@ -6,6 +6,34 @@ After you have installed this package you have to setup the database:
 cd /srv/www/yast/
 rake
 
+-------------------------------------------------------------------------
+PolicyKit
+-------------------------------------------------------------------------
+
+For testing you can grant all permissions to you and lighttp by adding
+
+- - - - - - -
+
+"http://hal.freedesktop.org/releases/PolicyKit/1.0/config.dtd">
+
+<!-- See the manual page PolicyKit.conf(5) for file format -->
+
+<config version="0.1">
+<match user="schubi|lighttpd">
+  <match action="org.opensuse.yast.scr.*">
+      <return result="yes"/>
+  </match>
+</match> 
+
+</config>
+
+- - - - - - -
+
+to /etc/PolicyKit/PolicyKit.conf
+
+Please exchange "schubi" by the requested user account with which 
+you are running the web server.
+
 You can run the YaST webservice with two different web servers:
 
 --------------------------------------------------------------------------
