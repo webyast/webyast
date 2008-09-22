@@ -7,6 +7,29 @@ cd /srv/www/yast/
 rake
 
 -------------------------------------------------------------------------
+DBUS
+-------------------------------------------------------------------------
+
+Add following entry (e.g. for using lightttp) in 
+/etc/dbus-1/system.d/org.opensuse.yast.SCR.conf
+
+<busconfig>
+    <policy user="root">
+        <allow own="org.opensuse.yast.SCR"/>
+        <allow send_interface="org.opensuse.yast.SCR.Methods"/>
+    </policy>
+    <policy user="lighttpd">
+        <allow own="org.opensuse.yast.SCR"/>
+        <allow send_interface="org.opensuse.yast.SCR.Methods"/>
+    </policy>
+    <policy context="default">
+        <deny own="org.opensuse.yast.SCR"/>
+        <deny send_interface="org.opensuse.yast.SCR.Methods"/>
+    </policy>
+</busconfig>
+
+
+-------------------------------------------------------------------------
 PolicyKit
 -------------------------------------------------------------------------
 
