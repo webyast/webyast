@@ -4,6 +4,11 @@ all:
 	make; \
 	sudo make install; \
 	cd ..; \
+	cd rpam/ext/Rpam; \
+	ruby extconf.rb; \
+	make; \
+	sudo make install; \
+	cd ../../..; \
 	rm -rf package; \
         rm webservice/log/development.log; \
         find . -name "*.bak" -exec rm {} \; ;\
