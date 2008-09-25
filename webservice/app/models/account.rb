@@ -21,12 +21,13 @@ class Account < ActiveRecord::Base
   # Authenticates a user by their login name and unencrypted password.  Returns the user or nil.
   def self.authenticate(login, passwd)
      if authpam(login,passwd) == true
-        @password = passwd
 	acc = find_by_login(login)
 	if !acc
           acc = Account.new
           acc.login = login
         end
+        @password = passwd
+        acc.password = passwd
 	puts "Authenticate Successful"
         return acc
      else
