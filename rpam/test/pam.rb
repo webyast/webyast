@@ -3,7 +3,7 @@
   require "rpam"
   include Rpam
 
-  if authpam("username","password") == true
+  if authpam("user","password") == true
 	puts "Authenticate Successful"
   else
   	puts "Authenticate Failure"
