@@ -53,13 +53,15 @@ int auth_pam_talker(int num_msg,
 	struct pam_response *response = 0;
 
      /* parameter sanity checking */
-    if (!resp || !msg || !userinfo)
-        return PAM_CONV_ERR;
+	if (!resp || !msg || !userinfo) {
+	    return PAM_CONV_ERR;
+	}
 	
    	/* allocate memory to store response */
 	response = malloc(num_msg * sizeof(struct pam_response));
-	if (!response)
+	if (!response) {
 		return PAM_CONV_ERR;
+	}
 
 	/* copy values */
 	for (i = 0; i < num_msg; i++) {
@@ -76,6 +78,12 @@ int auth_pam_talker(int num_msg,
 			case PAM_PROMPT_ECHO_OFF:
 				response[i].resp = strdup(userinfo->pw);
 				break;
+		        case PAM_ERROR_MSG:
+			       printf("`PAM Error: %s'\n", msg[i]->msg);
+                               break;				
+		        case PAM_TEXT_INFO:
+			       printf("`PAM Message: %s'\n", msg[i]->msg);
+                               break;				
 			default:
 				if (response)
 				free(response);
@@ -89,7 +97,7 @@ int auth_pam_talker(int num_msg,
 }
 
 /* Authenticates a user and returns TRUE on success, FALSE on failure */
-VALUE method_authpam(VALUE self, VALUE username, VALUE password) {	
+VALUE method_authpam(VALUE self, VALUE username, VALUE password) {
     pam_auth_t userinfo = {NULL, NULL};
 	struct pam_conv conv_info = {&auth_pam_talker, (void *) &userinfo};
 	pam_handle_t *pamh = NULL;
