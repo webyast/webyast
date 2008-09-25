@@ -1,7 +1,10 @@
 include ApplicationHelper
 
 class UsersController < ApplicationController
-require "scr"
+
+  before_filter :login_required
+
+  require "scr"
 #--------------------------------------------------------------------------------
 #
 #local methods

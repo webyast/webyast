@@ -1,6 +1,9 @@
 require "scr"
 
 class YastModulesController < ApplicationController
+
+  before_filter :login_required
+
   require 'yastModule'
   private
 

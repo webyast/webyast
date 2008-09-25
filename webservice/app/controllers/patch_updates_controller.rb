@@ -41,6 +41,7 @@ end # class MainPkg
 
 class PatchUpdatesController < ApplicationController
 
+   before_filter :login_required
 
 #--------------------------------------------------------------------------------
 #

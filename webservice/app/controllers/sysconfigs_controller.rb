@@ -1,5 +1,6 @@
 class SysconfigsController < ApplicationController
   require 'sysconfig'
+  before_filter :login_required
   def index
     @sysconfigs = Array.new
     Dir.foreach( '/etc/sysconfig' ) do |d|

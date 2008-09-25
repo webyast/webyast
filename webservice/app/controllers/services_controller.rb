@@ -1,4 +1,6 @@
 class ServicesController < ApplicationController
+  before_filter :login_required
+
   private
   def init_services
     services = Hash.new

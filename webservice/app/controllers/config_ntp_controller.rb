@@ -1,7 +1,9 @@
 include ApplicationHelper
 
 class ConfigNtpController < ApplicationController
-require "scr"
+  before_filter :login_required
+
+  require "scr"
 #
 #local functions
 #

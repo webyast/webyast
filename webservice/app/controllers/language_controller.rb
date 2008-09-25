@@ -2,7 +2,9 @@ include ApplicationHelper
 
 class LanguageController < ApplicationController
 
-require "scr"
+   before_filter :login_required
+
+   require "scr"
 
 #--------------------------------------------------------------------------------
 #
@@ -137,7 +139,7 @@ require "scr"
           ok = true
           case params[:id]
             when "firstLanguage"
-              set_firstLanguage @language.fistLanguage
+              set_firstLanguage @language.firstLanguage
             when "secondLanguages"
               set_secondLanguages @language.secondLanguages
             else

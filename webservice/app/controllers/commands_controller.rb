@@ -1,6 +1,9 @@
 include ApplicationHelper
 
 class CommandsController < ApplicationController
+
+  before_filter :login_required
+
   require "scr" 
   private
   def init_services
