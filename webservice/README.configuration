@@ -28,6 +28,18 @@ Add following entry (e.g. for using lightttp) in
     </policy>
 </busconfig>
 
+-------------------------------------------------------------------------
+PAM
+-------------------------------------------------------------------------
+
+Create a file /etc/pam.d/rpam with the entries:
+
+#%PAM-1.0
+auth     include        common-auth
+account  include        common-account
+password include        common-password
+session  include        common-session
+
 
 -------------------------------------------------------------------------
 PolicyKit
