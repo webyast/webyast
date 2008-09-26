@@ -70,7 +70,10 @@ So, only the required value has been set in the return value.
 
 GET calls can be generated on the command line with the call:
 
-curl -X GET http://0.0.0.0:3001/systemtime/timezone.xml
+curl -X GET -b <cookie_file> http://0.0.0.0:3001/systemtime/timezone.xml
+
+("-b <cookie_file>" describes a cookie with the filename "cookie_file". This
+ cookie contains the login information of the current session.)
 
 == PUT ==
 ---------
@@ -102,7 +105,10 @@ Note: Also HTML and JSON format is a valid format for values which have to be ch
 
 Put calls can be generated on the command line with the call:
 
-curl -v -H "Content-Type: application/xml; charset=utf-8" -T <data-file> http://0.0.0.0:3001/systemtime/language/secondLanguages.xml
+curl -v -H "Content-Type: application/xml; charset=utf-8" -T <data-file> -b <cookie_file> http://0.0.0.0:3001/systemtime/language/secondLanguages.xml
+
+("-b <cookie_file>" describes a cookie with the filename "cookie_file". This
+ cookie contains the login information of the current session.)
 
 == POST ==
 ----------
@@ -127,9 +133,11 @@ POST http://0.0.0.0:3001/users.xml with the XML values:
 
 POST calls can be generated on the command line with the call:
 
-curl -X POST -v -H "Content-Type: application/xml; charset=utf-8" -T <data-file> http://0.0.0.0:3001/users.xml
+curl -X POST -v -H "Content-Type: application/xml; charset=utf-8" -T <data-file> -b <cookie_file> http://0.0.0.0:3001/users.xml
 
-(<data-file> is a file which contains the XML values described above)
+(<data-file> is a file which contains the XML values described above.
+ "-b <cookie_file>" describes a cookie with the filename "cookie_file". This
+ cookie contains the login information of the current session.)
 
 Note: Also HTML and JSON format is a valid format for values which have to be created.
 
@@ -142,10 +150,58 @@ DELETE http://0.0.0.0:3001/users/tux2
 
 DELETE calls can be generated on the command line with the call:
 
-curl -X DELETE http://0.0.0.0:3001/users/tux2
+curl -X DELETE -b <cookie_file> http://0.0.0.0:3001/users/tux2
+
+("-b <cookie_file>" describes a cookie with the filename "cookie_file". This
+ cookie contains the login information of the current session.)
 
 === YaST webservice API ===
 ---------------------------
+
+== <hostname>/login ==
+----------------------
+Login and creates a session. An additional login cookie will be generated if it is required.
+The user account will be checked with PAM. So SYSTEM users can login only.
+
+POST <hostname>/login checks an SYSTEM accout and creates a session with the given values:
+
+<hash>
+  <login>tuxtux</login>
+  <password>password_tuxtux</password>
+  <remember_me>1</remember_me>
+</hash>
+
+remember_me: Generates a cookie with a valid time period of 1 day.
+
+This returns:
+
+<hash>
+  <login>granted</login>
+</hash>
+
+OR in the error case:
+
+<hash>
+  <login>denied</login>
+</hash>
+
+If you are using "curl" for testing you will have to generate a session cookie with the call:
+
+curl -X POST -v -H "Content-Type: application/xml; charset=utf-8" -T <login_xml_file> -c <cookie_file> http://0.0.0.0:3001/login.xml
+
+This call will generate a cookie file with login data described in <login_xml_file>.
+
+== <hostname>/logout ==
+-----------------------
+Destroys the current session and invalidates the concerning cookie (if there is one).
+
+POST <hostname>/logout
+
+This returns:
+
+<hash>
+  <logout>Goodbye!</logout>
+</hash>
 
 == <hostname>/services ==
 -------------------------
