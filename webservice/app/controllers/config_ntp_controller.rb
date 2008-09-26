@@ -13,7 +13,7 @@ class ConfigNtpController < ApplicationController
      ret = Scr.execute("/sbin/yast2  ntp-client list")
      servers = ret[:stderr].split "\n"
      servers::each do |s|
-       column = s.split (" ")
+       column = s.split(" ")
        column::each do |l|
          if l=="Server"
            if column[1] != "0.pool.ntp.org" && column[1] != "1.pool.ntp.org" && column[1] != "2.pool.ntp.org"

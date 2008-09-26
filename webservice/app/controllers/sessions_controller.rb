@@ -6,16 +6,48 @@ class SessionsController < ApplicationController
   end
 
   def create
+    if params["hash"] != nil
+      #checking if the session description is hosted in a own Hash
+      params["hash"].each do |name,value|
+         params[name] = value
+      end
+    end
+
     self.current_account = Account.authenticate(params[:login], params[:password])
     if logged_in?
       if params[:remember_me] == "1"
         current_account.remember_me unless current_account.remember_token?
         cookies[:auth_token] = { :value => self.current_account.remember_token , :expires => self.current_account.remember_token_expires_at }
       end
-      redirect_back_or_default('/')
-      flash[:notice] = "Logged in successfully"
+
+      @cmdRet = Hash.new
+      @cmdRet["login"] = "granted"
+      respond_to do |format|
+        format.xml do
+	  render :xml => @cmdRet.to_xml
+        end
+        format.json do
+          render :json => @cmdRet.to_json
+        end
+        format.html do
+          redirect_back_or_default('/')
+          flash[:notice] = "Logged in successfully"
+        end
+      end
     else
-      render :action => 'new'
+      @cmdRet = Hash.new
+      @cmdRet["login"] = "denied"
+      respond_to do |format|
+        format.xml do
+	  render :xml => @cmdRet.to_xml
+        end
+        format.json do
+          render :json => @cmdRet.to_json
+        end
+        format.html do
+          render :action => 'new'
+        end
+      end
     end
   end
 
@@ -23,7 +55,19 @@ class SessionsController < ApplicationController
     self.current_account.forget_me if logged_in?
     cookies.delete :auth_token
     reset_session
-    flash[:notice] = "You have been logged out."
-    redirect_back_or_default('/')
+    @cmdRet = Hash.new
+    @cmdRet["logout"] = "Goodbye!"
+    respond_to do |format|
+      format.xml do
+	render :xml => @cmdRet.to_xml
+      end
+      format.json do
+        render :json => @cmdRet.to_json
+      end
+      format.html do
+        flash[:notice] = "You have been logged out."
+        redirect_back_or_default('/')
+      end
+    end
   end
 end

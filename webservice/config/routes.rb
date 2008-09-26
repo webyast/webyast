@@ -79,7 +79,11 @@ ActionController::Routing::Routes.draw do |map|
   map.connect "/yast_modules/:id.json", :controller => 'yast_modules', :action => 'run', :format =>'json'
 
   map.login '/login', :controller => 'sessions', :action => 'new'
+  map.login '/login.xml', :controller => 'sessions', :action => 'create', :format =>'xml'
+  map.login '/login.json', :controller => 'sessions', :action => 'create', :format =>'json'
   map.logout '/logout', :controller => 'sessions', :action => 'destroy'
+  map.logout '/logout.xml', :controller => 'sessions', :action => 'destroy', :format =>'xml'
+  map.logout '/logout.json', :controller => 'sessions', :action => 'destroy', :format =>'json'
 
   # You can have the root of your site routed with map.root -- just remember to delete public/index.html.
   # map.root :controller => "welcome"
