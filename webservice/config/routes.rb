@@ -80,10 +80,12 @@ ActionController::Routing::Routes.draw do |map|
 
   map.login '/login', :controller => 'sessions', :action => 'new'
   map.login '/login.xml', :controller => 'sessions', :action => 'create', :format =>'xml'
+  map.login '/login.html', :controller => 'sessions', :action => 'create', :format =>'html'
   map.login '/login.json', :controller => 'sessions', :action => 'create', :format =>'json'
   map.logout '/logout', :controller => 'sessions', :action => 'destroy'
   map.logout '/logout.xml', :controller => 'sessions', :action => 'destroy', :format =>'xml'
   map.logout '/logout.json', :controller => 'sessions', :action => 'destroy', :format =>'json'
+  map.logout '/logout.html', :controller => 'sessions', :action => 'destroy', :format =>'html'
 
   # You can have the root of your site routed with map.root -- just remember to delete public/index.html.
   # map.root :controller => "welcome"

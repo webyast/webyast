@@ -28,6 +28,7 @@ class Account < ActiveRecord::Base
         end
         @password = passwd
         acc.password = passwd
+        acc.save
 	puts "Authenticate Successful"
         return acc
      else
