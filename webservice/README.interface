@@ -617,3 +617,118 @@ This returns:
 </hash>
 
 
+=== Security ===
+----------------
+
+
++-----------------------------------------------------------------------------+
+|  Web Application                                                            |
+|                                                                             |
+|  e.g. command line program "curl"                                           |
++-----------------------------------------------------------------------------+
+         /\                                          ||          /\
+         ||                                          || login    || deny
+         || Http(s) protocol                         || request  || OR session
+         || (REST)                                   || (REST)   || OR cookie
+         ||                                          ||          || 
+         ||                                          ||          ||
++-----------------------------------------------------------------------------+
+|        ||                                          ||          ||           |
+|        ||                         HOST             ||          ||           |
+|        ||                                          ||          ||           |
+|        \/                                          ||          ||           |
+|    +-------------------------------------------------------------------+    |
+|    |                 YaST Webservice               ||          ||      |    |
+|    |                                               \/          ||      |    |
+|    |                                          +---------------------+  |    |
+|    |                                          |                     |  |    |
+|    |                                          |         PAM         |  |    |  
+|    |                                          |   authentifcation   |  |    |
+|    |                                          |                     |  |    |
+|    |                                          |         OR          |  |    |
+|    |                                          |                     |  |    |
+|    |                                          | auth. User managed  |  |    |
+|    |                                          | by YaST Webservice  |  |    |
+|    |                                          |                     |  |    |
+|    |                                          +---------------------+  |    |
+|    |                                                                   |    |
+|    |  USER: lighttpd                                                   |    |
+|    +-------------------------------------------------------------------+    |
+|         ^                       ^                       ^                   |
+|         |                       |                       |                   |
+|         | DBUS                  | DBUS                  | DBUS              |
+|         | access right          |                       |                   |
+|         |                       |                       |                   |
+|         v                       v                       v                   |
+|    +-------------------+   +-------------------+   +-------------------+    |
+|    |  PolicyKit        |   |  PackageKit       |   |  SCR - Agent      |    |
+|    |                   |   |  (DBUS-Server)    |   |  (DBUS-Server)    |    |
+|    |                   |   |                   |   |                   |    |
+|    |  USER: root       |   |  USER: root       |   |  USER: root       |    |
+|    +-------------------+   +-------------------+   +-------------------+    |
+|         ^                       ^                       ^                   |
+|         |                       |                       |                   |
+|         |                       |                       |                   |
+|         |  DBUS access right    |                       |                   |
+|         +-----------------------------------------------+                   |
+|                                                                             |
+|                                                                             |
++-----------------------------------------------------------------------------+
+
+
+login
+-------
+
+The user (Web Application) starts a login request with user/password via 
+Http(s)/REST to the YaST Webservice. This request will be checked with PAM
+OR with local user account handled in the YaST Webservice database (currently
+not implemented). The access will be granted or denied. If the request has
+been successfully finished a session will be created and (on demand) a cookie will
+be send to the Web Application.
+
+Single task e.g. getting system time settings
+------------------------------------------------
+
+The user "tux" (Web Application) with a valid session sends the Http(s) request:
+
+GET http://<name_of_the_host>/systemtime.xml
+
+The YaST Webservice checks if "tux" has the right for reading these settings:
+
+policyKit_check ("tux", "read.systemtime")
+
+If the permission has been granted the YaST Webservice starts the needed commands
+to the SCR - Agent in order to get all needed information:
+
+Scr.read(".sysconfig.clock.HWCLOCK")
+Scr.execute("/bin/date")
+Scr.read(".sysconfig.clock.TIMEZONE")
+
+These requests will be sent to the SCR - Agent with the user account "lighttpd". 
+The SCR - Agent checks with policyKit if "lighttpd" has the right for these calls:
+
+policyKit_check ("lighttpd", "read.sysconfig.clock.HWCLOCK")
+policyKit_check ("lighttpd", "execute.bin.date")
+policyKit_check ("lighttpd", "read.sysconfig.clock.TIMEZONE")
+
+This additional policy check will be done in order to give the YaST-Webservice ONLY rights
+for calls which reflect the YaST-Webservice interface.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                  
+                                                                        
+
