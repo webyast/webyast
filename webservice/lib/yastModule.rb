@@ -75,14 +75,16 @@ class YastModule
         command['help'] = commandElement.elements['help'].to_a[0]
         optionsElement = commandElement.elements['options']
         options = Hash.new
-        optionsElement.each() { |optionElement| 
-          if optionElement.to_s.lstrip.length > 0
-            option = Hash.new
-            option["help"] = optionElement.elements['help'].to_a[0]
-            option["type"] = optionElement.elements['type'].to_a[0]
-            options[optionElement.elements['name'].to_a[0]] = option
-          end
-        }
+        if optionsElement
+           optionsElement.each() { |optionElement| 
+             if optionElement.to_s.lstrip.length > 0
+               option = Hash.new
+               option["help"] = optionElement.elements['help'].to_a[0]
+               option["type"] = optionElement.elements['type'].to_a[0]
+               options[optionElement.elements['name'].to_a[0]] = option
+             end
+           }
+        end
         command['options'] = options
         @commands[commandElement.elements['name'].to_a[0]] = command
       }
