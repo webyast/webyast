@@ -2,6 +2,9 @@
 include ApplicationHelper
 
 class SystemtimeController < ApplicationController
+
+before_filter :login_required
+
 require "scr"
 
 #--------------------------------------------------------------------------------
@@ -23,7 +26,7 @@ require "scr"
   end
 
   def get_time
-    ret = Scr.execute("/bin/date")
+    ret = Scr.execute("LANG=en.UTF-8 /bin/date")
     ret[:stdout]
   end
 
@@ -49,14 +52,14 @@ require "scr"
     #set time
     cmd = "";
     hwclock = Scr.read(".sysconfig.clock.HWCLOCK");
-    timezone = get_timezone.length
+    timezone = get_timezone
     if (timezone.length >0 &&  hwclock!= "--localtime")
       cmd = "TZ=" + timezone + " "
     end
 
     cmd = cmd + "/sbin/hwclock --set " + hwclock + 
-              " --date=\"#{systemtime.currenttime.month}/#{systemtime.currenttime.day}/#{systemtime.currenttime.year}" +
-              " #{systemtime.currenttime.hour}:#{systemtime.currenttime.min}:#{systemtime.currenttime.sec}\""
+              " --date=\"#{time.month}/#{time.day}/#{time.year}" +
+              " #{time.hour}:#{time.min}:#{time.sec}\""
 
     logger.debug "SetTime cmd #{cmd}"
     Scr.execute(cmd)
@@ -81,20 +84,34 @@ require "scr"
   def update
     respond_to do |format|
       systemtime = System::SystemTime.new
-      if systemtime.update_attributes(params[:systemtime])
-        logger.debug "UPDATED: #{systemtime.inspect}"
+      if polkit_check( "org.opensuse.yast.webservice.write-systemtime", self.current_account.login) == 0
+         if systemtime.update_attributes(params[:systemtime])
+           logger.debug "UPDATED: #{systemtime.inspect}"
 
-        set_is_utc systemtime.is_utc
-        set_timezone systemtime.timezone
-        set_time systemtime.currenttime
+           set_is_utc systemtime.is_utc
+           set_timezone systemtime.timezone
+           set_time systemtime.currenttime
+         else
+           systemtime.error_id = 2
+           systemtime.error_string = "format or internal error"
+         end
+      else #no permissions
+         systemtime.error_id = 1
+         systemtime.error_string = "no permission"
+      end
 
+      if systemtime.error_id == 0
         format.html { redirect_to :action => "show" }
-	format.json { head :ok }
-	format.xml { head :ok }
       else
         format.html { render :action => "edit" }
-        format.xml  { render :xml => systemtime.errors,
-          :status => :unprocessable_entity }
+      end
+
+      format.xml do
+        render :xml => systemtime.to_xml( :root => "systemtime",
+          :dasherize => false )
+      end
+      format.json do
+	render :json => systemtime.to_json
       end
     end
   end
@@ -103,9 +120,14 @@ require "scr"
 
     @systemtime = System::SystemTime.new
 
-    @systemtime.currenttime = get_time
-    @systemtime.is_utc = get_is_utc
-    @systemtime.timezone = get_timezone
+    if polkit_check( "org.opensuse.yast.webservice.read-systemtime", self.current_account.login) == 0
+       @systemtime.currenttime = get_time
+       @systemtime.is_utc = get_is_utc
+       @systemtime.timezone = get_timezone
+    else
+       @systemtime.error_id = 1
+       @systemtime.error_string = "no permission"
+    end
 
     respond_to do |format|
       format.xml do
@@ -132,11 +154,29 @@ require "scr"
 
       case params[:id]
         when "is_utc"
-          @systemtime.is_utc = get_is_utc
+          if ( polkit_check( "org.opensuse.yast.webservice.read-systemtime", self.current_account.login) == 0 or
+               polkit_check( "org.opensuse.yast.webservice.read-systemtime-isutc", self.current_account.login) == 0 ) then
+             @systemtime.is_utc = get_is_utc
+          else
+             @systemtime.error_id = 1
+             @systemtime.error_string = "no permission"
+          end
         when "currenttime"
-          @systemtime.currenttime = get_time
+          if ( polkit_check( "org.opensuse.yast.webservice.read-systemtime", self.current_account.login) == 0 or
+               polkit_check( "org.opensuse.yast.webservice.read-systemtime-currenttime", self.current_account.login) == 0 )
+             @systemtime.currenttime = get_time
+          else
+             @systemtime.error_id = 1
+             @systemtime.error_string = "no permission"
+          end
         when "timezone"
-          @systemtime.timezone = get_timezone
+          if ( polkit_check( "org.opensuse.yast.webservice.read-systemtime", self.current_account.login) == 0 or
+               polkit_check( "org.opensuse.yast.webservice.read-systemtime-timezone", self.current_account.login) == 0 )
+             @systemtime.timezone = get_timezone
+          else
+             @systemtime.error_id = 1
+             @systemtime.error_string = "no permission"
+          end
       end
       respond_to do |format|
         format.xml do
@@ -156,34 +196,55 @@ require "scr"
         @systemtime = System::SystemTime.new
         if @systemtime.update_attributes(params[:systemtime])
           logger.debug "UPDATED: #{@systemtime.inspect}"
-          ok = true
           case params[:id]
             when "is_utc"
-              set_is_utc @systemtime.is_utc
+              if ( polkit_check( "org.opensuse.yast.webservice.write-systemtime", self.current_account.login) == 0 or
+                   polkit_check( "org.opensuse.yast.webservice.write-systemtime-isutc", self.current_account.login) == 0 ) then
+                 set_is_utc @systemtime.is_utc
+              else
+                 @systemtime.error_id = 1
+                 @systemtime.error_string = "no permission"
+              end
             when "currenttime"
-              set_time @systemtime.currenttime
+              if ( polkit_check( "org.opensuse.yast.webservice.write-systemtime", self.current_account.login) == 0 or
+                   polkit_check( "org.opensuse.yast.webservice.write-systemtime-currenttime", self.current_account.login) == 0 )
+                 set_time @systemtime.currenttime
+              else
+                 @systemtime.error_id = 1
+                 @systemtime.error_string = "no permission"
+              end
             when "timezone"
-              set_timezone @systemtime.timezone
+              if ( polkit_check( "org.opensuse.yast.webservice.write-systemtime", self.current_account.login) == 0 or
+                   polkit_check( "org.opensuse.yast.webservice.write-systemtime-timezone", self.current_account.login) == 0 )
+                 set_timezone @systemtime.timezone
+              else
+                 @systemtime.error_id = 1
+                 @systemtime.error_string = "no permission"
+              end
             else
               logger.error "Wrong ID: #{params[:id]}"
-              ok = false
-          end
-
-          format.html { redirect_to :action => "show" }
-          if ok
-            format.json { head :ok }
-            format.xml { head :ok }
-          else
-            format.json { head :error }
-            format.xml { head :error }
+              @systemtime.error_id = 2
+              @systemtime.error_string = "Wrong ID: #{params[:id]}"
           end
         else
-          format.html { render :action => "edit" }
-          format.xml  { render :xml => @systemtime.errors,
-            :status => :unprocessable_entity }
+           @systemtime.error_id = 2
+           @systemtime.error_string = "format or internal error"
+        end
+
+        if @systemtime.error_id == 0
+           format.html { redirect_to :action => "show" }
+        else
+           format.html { render :action => "edit" }
+        end
+
+        format.xml do
+            render :xml => @systemtime.to_xml( :root => "systemtime",
+                   :dasherize => false )
+        end
+        format.json do
+           render :json => @systemtime.to_json
         end
       end
-    end
+    end #put
   end
-
 end

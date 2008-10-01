@@ -5,6 +5,9 @@ class ApplicationController < ActionController::Base
 
   include AuthenticatedSystem
 
+  require 'polKit'
+  include PolKit
+
   helper :all # include all helpers, all the time
 
   # See ActionController::RequestForgeryProtection for details
