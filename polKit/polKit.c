@@ -126,7 +126,7 @@ VALUE method_polkit_check(VALUE self, VALUE act, VALUE usr) {
 	goto finish;
     }
     
-    printf("Action: %s Result: %s\n", action_id, polkit_result_to_string_representation(polkit_result));
+    printf("Action: %s User: %s Result: %s\n", action_id, user, polkit_result_to_string_representation(polkit_result));
 
     switch (polkit_result)
     {

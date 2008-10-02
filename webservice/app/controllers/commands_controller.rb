@@ -42,7 +42,6 @@ class CommandsController < ApplicationController
     STDERR.puts "services/show #{id}"
     init_services unless session['services']
     @service = session['services'][id]
-    STDERR.puts "@service #{@service}"
     respond @service
   end
 
@@ -50,24 +49,42 @@ class CommandsController < ApplicationController
     id = params[:id]
     logger.debug "calling services/command #{id}"
 
-    cmd = "/usr/sbin/rc" + params[:service_id] + " " + id
-		logger.debug "SetTime cmd #{cmd}"
-    ret = Scr.execute(cmd)
+    init_services unless session['services']
+    @service = session['services'][params[:service_id]]
 
-    if ret[:exit] == 0
-      respond_to do |format|
-        flash[:notice] = 'Command has been run successfully'
-        format.html { redirect_to :back, :action => "show" }
-	format.json { head :ok }
-	format.xml { head :ok }
-      end
+    @service.error_id = 0
+    @service.error_string = ""
+
+    single_policy = "org.opensuse.yast.webservice.execute-services-commands-" + params[:service_id]
+    if ( polkit_check( "org.opensuse.yast.webservice.write-services", self.current_account.login) == 0 or
+         polkit_check( "org.opensuse.yast.webservice.execute-services-commands", self.current_account.login) == 0 or
+         polkit_check( single_policy, self.current_account.login) == 0 )
+
+       cmd = "/usr/sbin/rc" + params[:service_id] + " " + id
+       logger.debug "SetTime cmd #{cmd}"
+       ret = Scr.execute(cmd)
+       @service.error_id = ret[:exit].to_i
+       @service.error_string = ret[:stderr]
     else
-      respond_to do |format|
-        flash[:notice] = 'Command has NOT been run successfully'
-        format.html { redirect_to :back, :action => "show" }
-	format.json { head :error }
-	format.xml { head :error }
-      end
+       @service.error_id = 1
+       @service.error_string = "no permission"
+    end       
+
+    respond_to do |format|
+       if @service.error_id  == 0
+          flash[:notice] = 'Command has been run successfully'
+          format.html { redirect_to :back, :action => "show" }
+       else
+          flash[:notice] = 'Command has NOT been run successfully'
+          format.html { redirect_to :back, :action => "show" }
+       end
+       format.xml do
+          render :xml => @service.to_xml( :root => "systemtime",
+                 :dasherize => false )
+       end
+       format.json do
+          render :json => @service.to_json
+       end
     end
   end
 
