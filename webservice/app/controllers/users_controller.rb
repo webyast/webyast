@@ -559,10 +559,11 @@ class UsersController < ApplicationController
               @user.error_string = "Wrong ID: #{params[:id]}"
               ok = false
           end
-
           if ok
             if exportSSH
-              ok = createSSH
+              saveUser = @user
+              ok = createSSH #reads @user again
+              @user = saveUser
             else
               ok = udate_user params[:users_id]
             end
