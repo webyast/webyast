@@ -95,15 +95,22 @@ class ConfigNtpController < ApplicationController
   def show
 
     @ntp = ConfigNtp.new
-    @ntp.manual_server = ""
-    @ntp.use_random_server = true
-    @ntp.manual_server = manualServer
-    @ntp.enabled = enabled
 
-    if @ntp.manual_server == ""
-      @ntp.use_random_server = true
+    if ( polkit_check( "org.opensuse.yast.webservice.read-services", self.current_account.login) == 0 or
+         polkit_check( "org.opensuse.yast.webservice.read-services-config", self.current_account.login) == 0 or
+         polkit_check( "org.opensuse.yast.webservice.read-services-config-ntp", self.current_account.login) == 0 )
+       @ntp.manual_server = ""
+       @ntp.use_random_server = true
+       @ntp.manual_server = manualServer
+       @ntp.enabled = enabled
+       if @ntp.manual_server == ""
+         @ntp.use_random_server = true
+       else
+         @ntp.use_random_server = false
+       end
     else
-      @ntp.use_random_server = false
+       @ntp.error_id = 1
+       @ntp.error_string = "no permission"
     end
 
     respond_to do |format|
@@ -123,26 +130,41 @@ class ConfigNtpController < ApplicationController
   def update
     respond_to do |format|
       ntp = ConfigNtp.new
-      if ntp.update_attributes(params[:config_ntp])
-        logger.debug "UPDATED: #{ntp.inspect}"
+      if ( polkit_check( "org.opensuse.yast.webservice.write-services", self.current_account.login) == 0 or
+           polkit_check( "org.opensuse.yast.webservice.write-services-config", self.current_account.login) == 0 or
+           polkit_check( "org.opensuse.yast.webservice.write-services-config-ntp", self.current_account.login) == 0 )
+         if ntp.update_attributes(params[:config_ntp])
+            logger.debug "UPDATED: #{ntp.inspect}"
        
-        requestedServers = []
-        if ntp.use_random_server = false
-          requestedServers << ntp.manual_server
-        else
-          requestedServers = ["0.pool.ntp.org", "1.pool.ntp.org", "2.pool.ntp.org"]
-        end
-        writeNTPConf(requestedServers)
+            requestedServers = []
+            if ntp.use_random_server = false
+              requestedServers << ntp.manual_server
+            else
+              requestedServers = ["0.pool.ntp.org", "1.pool.ntp.org", "2.pool.ntp.org"]
+            end
+            writeNTPConf(requestedServers)
+            enable(ntp.enabled) 
+         else
+           ntp.error_id = 2
+           ntp.error_string = "format or internal error"
+         end  
+      else #no permissions
+         ntp.error_id = 1
+         ntp.error_string = "no permission"
+      end
 
-        enable(ntp.enabled) 
-
+      if ntp.error_id == 0
         format.html { redirect_to :action => "show" }
-	format.json { head :ok }
-	format.xml { head :ok }
       else
         format.html { render :action => "edit" }
-        format.xml  { render :xml => ntp.errors,
-          :status => :unprocessable_entity }
+      end
+
+      format.xml do
+        render :xml => ntp.to_xml( :root => "config_ntp",
+          :dasherize => false )
+      end
+      format.json do
+	render :json => ntp.to_json
       end
     end
   end
@@ -153,15 +175,39 @@ class ConfigNtpController < ApplicationController
       @ntp = ConfigNtp.new
       case params[:id]
         when "manual_server"
-          @ntp.manualServer = manualServer
-        when "use_random_server"
-          if manualServer == ""
-            @ntp.use_random_server = true
+          if ( polkit_check( "org.opensuse.yast.webservice.read-services", self.current_account.login) == 0 or
+               polkit_check( "org.opensuse.yast.webservice.read-services-config", self.current_account.login) == 0 or
+               polkit_check( "org.opensuse.yast.webservice.read-services-config-ntp", self.current_account.login) == 0 or
+               polkit_check( "org.opensuse.yast.webservice.read-services-config-ntp-manualserver", self.current_account.login) == 0)
+             @ntp.manualServer = manualServer
           else
-            @ntp.use_random_server = false
+             @ntp.error_id = 1
+             @ntp.error_string = "no permission"
+          end
+        when "use_random_server"
+          if ( polkit_check( "org.opensuse.yast.webservice.read-services", self.current_account.login) == 0 or
+               polkit_check( "org.opensuse.yast.webservice.read-services-config", self.current_account.login) == 0 or
+               polkit_check( "org.opensuse.yast.webservice.read-services-config-ntp", self.current_account.login) == 0 or
+               polkit_check( "org.opensuse.yast.webservice.read-services-config-ntp-userandomserver", self.current_account.login) == 0)
+             if manualServer == ""
+               @ntp.use_random_server = true
+             else
+               @ntp.use_random_server = false
+             end
+          else
+             @ntp.error_id = 1
+             @ntp.error_string = "no permission"
           end
         when "enabled"
-          @ntp.enabled = enabled
+          if ( polkit_check( "org.opensuse.yast.webservice.read-services", self.current_account.login) == 0 or
+               polkit_check( "org.opensuse.yast.webservice.read-services-config", self.current_account.login) == 0 or
+               polkit_check( "org.opensuse.yast.webservice.read-services-config-ntp", self.current_account.login) == 0 or
+               polkit_check( "org.opensuse.yast.webservice.read-services-config-ntp-enabled", self.current_account.login) == 0)
+             @ntp.enabled = enabled
+          else
+             @ntp.error_id = 1
+             @ntp.error_string = "no permission"
+          end
       end
       respond_to do |format|
         format.xml do
@@ -178,40 +224,69 @@ class ConfigNtpController < ApplicationController
     else
       #PUT
       respond_to do |format|
-      @ntp = ConfigNtp.new
-      if @ntp.update_attributes(params[:config_ntp])
-        logger.debug "UPDATED: #{@ntp.inspect}"
-        ok = true
-        case params[:id]
-          when "manual_server"
-            writeNTPConf ([@ntp.manualServer])
-          when "use_random_server"
-            if (@ntp.use_random_server == true)
-              writeNTPConf(["0.pool.ntp.org", "1.pool.ntp.org", "2.pool.ntp.org"])
-            else
-              logger.debug "use_random_server:false. You will have to setup a manual_server too."
+         @ntp = ConfigNtp.new
+         if @ntp.update_attributes(params[:config_ntp])
+            logger.debug "UPDATED: #{@ntp.inspect}"
+            case params[:id]
+              when "manual_server"
+                 if ( polkit_check( "org.opensuse.yast.webservice.write-services", self.current_account.login) == 0 or
+                      polkit_check( "org.opensuse.yast.webservice.write-services-config", self.current_account.login) == 0 or
+                      polkit_check( "org.opensuse.yast.webservice.write-services-config-ntp", self.current_account.login) == 0 or
+                      polkit_check( "org.opensuse.yast.webservice.write-services-config-ntp-manualserver", self.current_account.login) == 0)
+                    writeNTPConf ([@ntp.manualServer])
+                 else
+                    @ntp.error_id = 1
+                    @ntp.error_string = "no permission"
+                 end
+              when "use_random_server"
+                 if ( polkit_check( "org.opensuse.yast.webservice.write-services", self.current_account.login) == 0 or
+                      polkit_check( "org.opensuse.yast.webservice.write-services-config", self.current_account.login) == 0 or
+                      polkit_check( "org.opensuse.yast.webservice.write-services-config-ntp", self.current_account.login) == 0 or
+                      polkit_check( "org.opensuse.yast.webservice.write-services-config-ntp-userandomserver", self.current_account.login) == 0)
+                    if (@ntp.use_random_server == true)
+                       writeNTPConf(["0.pool.ntp.org", "1.pool.ntp.org", "2.pool.ntp.org"])
+                    else
+                       logger.debug "use_random_server:false. You will have to setup a manual_server too."
+                       @ntp.error_string = "use_random_server:false. You will have to setup a manual_server too."
+                    end
+                 else
+                   @ntp.error_id = 1
+                   @ntp.error_string = "no permission"
+                 end
+              when "enabled"
+                 if ( polkit_check( "org.opensuse.yast.webservice.write-services", self.current_account.login) == 0 or
+                      polkit_check( "org.opensuse.yast.webservice.write-services-config", self.current_account.login) == 0 or
+                      polkit_check( "org.opensuse.yast.webservice.write-services-config-ntp", self.current_account.login) == 0 or
+                      polkit_check( "org.opensuse.yast.webservice.write-services-config-ntp-enabled", self.current_account.login) == 0)
+                   enable(@ntp.enabled == true)
+                 else
+                   @ntp.error_id = 1
+                   @ntp.error_string = "no permission"
+                 end
+              else
+                 logger.error "Wrong ID: #{params[:id]}"
+                 @ntp.error_id = 2
+                 @ntp.error_string = "Wrong ID: #{params[:id]}"
             end
-          when "enabled"
-            enable(@ntp.enabled == true)
-          else
-            logger.error "Wrong ID: #{params[:id]}"
-            ok = false
-        end
+         else
+            @ntp.error_id = 2
+            @ntp.error_string = "format or internal error"
+         end
 
-        format.html { redirect_to :action => "show" }
-        if ok
-          format.json { head :ok }
-          format.xml { head :ok }
-        else
-          format.json { head :error }
-          format.xml { head :error }
-        end
-      else
-        format.html { render :action => "edit" }
-        format.xml  { render :xml => @ntp.errors,
-          :status => :unprocessable_entity }
+         if @ntp.error_id == 0
+            format.html { redirect_to :action => "show" }
+         else
+            format.html { render :action => "edit" }
+         end
+
+         format.xml do
+             render :xml => @ntp.to_xml( :root => "config_ntp",
+                    :dasherize => false )
+         end
+         format.json do
+            render :json => @ntp.to_json
+         end
       end
-    end
     end
   end
 
