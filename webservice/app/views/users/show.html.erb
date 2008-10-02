@@ -33,6 +33,12 @@
   <%=h @user.uid %>
 </p>
 
+<% if @user.error_id != 0 %>
+<p>
+   Error ID: <%= @user.error_id -%>
+   Error: <%= @user.error_string -%>
+</p>
+<% end %>
 
 <%= link_to 'Edit', edit_user_path(@user.loginName) %> |
 <%= link_to 'Back', users_path %>

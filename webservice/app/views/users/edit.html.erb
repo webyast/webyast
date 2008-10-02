@@ -1,5 +1,14 @@
 <h1>Editing user</h1>
 
+<% if @user.error_id != 0 %>
+<p>
+   Error ID: <%= @user.error_id -%>
+   Error: <%= @user.error_string -%>
+</p>
+<% end %>
+
+<% if @user.error_id == 0 or @user.error_id != 1 %>
+
 <% form_for(@user) do |f| %>
   <%= f.error_messages %>
 
@@ -55,6 +64,8 @@
     <%= f.submit "Update" %>
   </p>
 <% end %>
+<% end %>
+
 
 <%= link_to 'Show', user_path(@user.loginName) %> |
 <%= link_to 'Back', users_path %>
