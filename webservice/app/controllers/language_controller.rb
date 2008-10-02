@@ -61,27 +61,46 @@ class LanguageController < ApplicationController
   def update
     respond_to do |format|
       language = Language.new
-      if language.update_attributes(params[:language])
-        logger.debug "UPDATED: #{language.inspect}"
+      if polkit_check( "org.opensuse.yast.webservice.write-language", self.current_account.login) == 0
+         if language.update_attributes(params[:language])
+           logger.debug "UPDATED: #{language.inspect}"
 
-        set_firstLanguage language.firstLanguage
-        set_secondLanguages language.secondLanguages
+           set_firstLanguage language.firstLanguage
+           set_secondLanguages language.secondLanguages
+         else
+           language.error_id = 2
+           language.error_string = "format or internal error"
+         end
+      else #no permissions
+         language.error_id = 1
+         language.error_string = "no permission"
+      end
 
+      if language.error_id == 0
         format.html { redirect_to :action => "show" }
-	format.json { head :ok }
-	format.xml { head :ok }
       else
         format.html { render :action => "edit" }
-        format.xml  { render :xml => language.errors,
-          :status => :unprocessable_entity }
+      end
+
+      format.xml do
+        render :xml => language.to_xml( :root => "language",
+          :dasherize => false )
+      end
+      format.json do
+	render :json => language.to_json
       end
     end
   end
 
   def index
     @language = Language.new
-    get_languages
-    get_available
+    if polkit_check( "org.opensuse.yast.webservice.read-language", self.current_account.login) == 0
+       get_languages
+       get_available
+    else
+       @language.error_id = 1
+       @language.error_string = "no permission"
+    end
 
     respond_to do |format|
       format.xml do
@@ -109,13 +128,31 @@ class LanguageController < ApplicationController
       #initialize not needed stuff (perhaps no permissions available)
       case params[:id]
         when "firstLanguage"
-          get_languages
-          @language.secondLanguages=nil
+          if ( polkit_check( "org.opensuse.yast.webservice.read-language", self.current_account.login) == 0 or
+               polkit_check( "org.opensuse.yast.webservice.read-language-firstlanguage", self.current_account.login) == 0 ) then
+             get_languages
+             @language.secondLanguages=nil
+          else
+             @language.error_id = 1
+             @language.error_string = "no permission"
+          end
         when "secondLanguages"
-          get_languages  
-          @language.firstLanguage=nil
+          if ( polkit_check( "org.opensuse.yast.webservice.read-language", self.current_account.login) == 0 or
+               polkit_check( "org.opensuse.yast.webservice.read-language-secondlanguages", self.current_account.login) == 0 ) then
+             get_languages  
+             @language.firstLanguage=nil
+          else
+             @language.error_id = 1
+             @language.error_string = "no permission"
+          end
         when "available"
-          get_available
+          if ( polkit_check( "org.opensuse.yast.webservice.read-language", self.current_account.login) == 0 or
+               polkit_check( "org.opensuse.yast.webservice.read-language-available", self.current_account.login) == 0 ) then
+             get_available
+          else
+             @language.error_id = 1
+             @language.error_string = "no permission"
+          end
       end
 
       respond_to do |format|
@@ -136,29 +173,44 @@ class LanguageController < ApplicationController
         @language = Language.new
         if @language.update_attributes(params[:language])
           logger.debug "UPDATED: #{@language.inspect}"
-          ok = true
           case params[:id]
             when "firstLanguage"
-              set_firstLanguage @language.firstLanguage
+              if ( polkit_check( "org.opensuse.yast.webservice.write-language", self.current_account.login) == 0 or
+                   polkit_check( "org.opensuse.yast.webservice.write-language-firstlanguage", self.current_account.login) == 0 ) then
+                 set_firstLanguage @language.firstLanguage
+              else
+                 @language.error_id = 1
+                 @language.error_string = "no permission"
+              end              
             when "secondLanguages"
-              set_secondLanguages @language.secondLanguages
+              if ( polkit_check( "org.opensuse.yast.webservice.write-language", self.current_account.login) == 0 or
+                   polkit_check( "org.opensuse.yast.webservice.write-language-secondlanguages", self.current_account.login) == 0 ) then
+                 set_secondLanguages @language.secondLanguages
+              else
+                 @language.error_id = 1
+                 @language.error_string = "no permission"
+              end              
             else
               logger.error "Wrong ID: #{params[:id]}"
-              ok = false
-          end
-
-          format.html { redirect_to :action => "show" }
-          if ok
-            format.json { head :ok }
-            format.xml { head :ok }
-          else
-            format.json { head :error }
-            format.xml { head :error }
+              @language.error_id = 2
+              @language.error_string = "Wrong ID: #{params[:id]}"
           end
         else
-          format.html { render :action => "edit" }
-          format.xml  { render :xml => @language.errors,
-            :status => :unprocessable_entity }
+           @language.error_id = 2
+           @language.error_string = "format or internal error"
+        end
+        if @language.error_id == 0
+           format.html { redirect_to :action => "show" }
+        else
+           format.html { render :action => "edit" }
+        end
+
+        format.xml do
+            render :xml => @language.to_xml( :root => "language",
+                   :dasherize => false )
+        end
+        format.json do
+           render :json => @language.to_json
         end
       end
     end
