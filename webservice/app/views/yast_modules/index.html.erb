@@ -1,5 +1,10 @@
 Found <%= @yastModules.size -%> YaST Modules<hr/>
 <% @yastModules.each_key do |name| -%>
-<%= link_to name, :controller => "yast_modules", :action => "run", :id => name %><br/>
+
+<% if @yastModules[name].error_id != 0 %>
+  Error ID: <%= @yastModules[name].error_id -%> Error: <%= @yastModules[name].error_string -%></td>
+<% else -%>
+  <%= link_to name, :controller => "yast_modules", :action => "run", :id => name %><br/>
+<% end -%>
 <% end -%>
 

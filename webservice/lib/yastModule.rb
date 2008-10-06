@@ -43,11 +43,14 @@ class YastModule
   #
   
   attr_reader :id, :commands
+  attr_accessor :error_id, :error_string
   
   def initialize id
     id = id.to_s unless id.is_a? String
     @id = id
     @commands = nil
+    @error_id = 0
+    @error_string = ""
   end
 
   
@@ -123,6 +126,8 @@ class YastModule
            end
          end
        end
+       xml.tag!(:error_id, @error_id )
+       xml.tag!(:error_string, @error_sting )
     end  
   end  
 
