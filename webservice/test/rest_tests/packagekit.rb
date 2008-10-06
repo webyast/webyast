@@ -79,29 +79,33 @@ objTid_with_iface = objTid["org.freedesktop.PackageKit.Transaction"]
 objTid.default_iface = "org.freedesktop.PackageKit.Transaction"
 
 @finished = false
-
+puts "xxxxxxxxx"
 objTid.on_signal("Package") do |u1,u2,u3|
   	puts u1
   	puts u2
   	puts u3
+puts "xxxxxxxxx1"
 end
 
 objTid.on_signal("Errorcode") do |u1,u2|
   	puts u1
   	puts u2
         @finished = true
+puts "xxxxxxxxx2"
 end
 
 objTid.on_signal("Finished") do |u1,u2|
+puts "xxxxxxxxx3"
   	puts u1
   	puts u2
         @finished = true
+puts "xxxxxxxxx3"
 end
 
 p objTid_with_iface.GetUpdates("NONE")
 
 if !@finished
-  @main = MainPkgss.new
+  @main = MainPkg.new
   @main << system_bus
   @main.run
 end

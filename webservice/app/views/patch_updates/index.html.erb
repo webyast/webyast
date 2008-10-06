@@ -11,15 +11,21 @@
   </tr>
 
 <% for patch_update in @patch_updates %>
-  <tr>
-    <td><%=h patch_update.resolvableId %></td>
-    <td><%=h patch_update.kind %></td>
-    <td><%=h patch_update.name %></td>
-    <td><%=h patch_update.arch %></td>
-    <td><%=h patch_update.repo %></td>
-    <td><%=h patch_update.summary %></td>
-    <td><%= link_to 'Install', patch_update_path(patch_update.resolvableId), :confirm => 'Are you sure?', :method => :post, :action => "install" %></td>
-  </tr>
+  <% if patch_update.error_id != 0 %>
+    <tr>
+     <td>Error ID: <%= patch_update.error_id -%> Error: <%= patch_update.error_string -%></td>
+    </tr>
+  <% else %>
+    <tr>
+      <td><%=h patch_update.resolvableId %></td>
+      <td><%=h patch_update.kind %></td>
+      <td><%=h patch_update.name %></td>
+      <td><%=h patch_update.arch %></td>
+      <td><%=h patch_update.repo %></td>
+      <td><%=h patch_update.summary %></td>
+      <td><%= link_to 'Install', patch_update_path(patch_update.resolvableId), :confirm => 'Are you sure?', :method => :post, :action => "install" %></td>
+    </tr>
+  <% end %>
 <% end %>
 </table>
 

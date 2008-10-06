@@ -21,6 +21,7 @@ class MainPkg
 
   # Run the main loop. This is a blocking call!
   def run
+    ok = true
     finished = false
     while !finished do
       ready, dum, dum = IO.select(@buses.keys)
@@ -31,10 +32,14 @@ class MainPkg
           b.process(m)
 	  if m.member = "Finished" || m.member = "Error"
             finished = true
+            if m.member == "Error" 
+               ok = false
+            end
           end
         end
       end
     end
+    return ok
   end
 end # class MainPkg
 
@@ -50,46 +55,53 @@ class PatchUpdatesController < ApplicationController
 #--------------------------------------------------------------------------------
 
   def get_updateList
-    system_bus = DBus::SystemBus.instance
-    packageKit = system_bus.service("org.freedesktop.PackageKit")
-    obj = packageKit.object("/org/freedesktop/PackageKit")
-    obj.introspect
-    obj_with_iface = obj["org.freedesktop.PackageKit"]
-    tid = obj_with_iface.GetTid
-    objTid = packageKit.object(tid[0])
-    objTid.introspect
-    objTid_with_iface = objTid["org.freedesktop.PackageKit.Transaction"]
-    objTid.default_iface = "org.freedesktop.PackageKit.Transaction"
-
-    @finished = false
     @patch_updates = [] 
-    objTid.on_signal("Package") do |line1,line2,line3|
-      update = PatchUpdate.new
-      update.kind = line1
-      update.summary = line3
-      columns = line2.split ";"
-      update.name = columns[0]
-      update.resolvableId = columns[1]
-      update.arch = columns[2]
-      update.repo = columns[3]
-      @patch_updates << update
-    end
+    if polkit_check( "org.opensuse.yast.webservice.read-patch", self.current_account.login) == 0
+       system_bus = DBus::SystemBus.instance
+       packageKit = system_bus.service("org.freedesktop.PackageKit")
+       obj = packageKit.object("/org/freedesktop/PackageKit")
+       obj.introspect
+       obj_with_iface = obj["org.freedesktop.PackageKit"]
+       tid = obj_with_iface.GetTid
+       objTid = packageKit.object(tid[0])
+       objTid.introspect
+       objTid_with_iface = objTid["org.freedesktop.PackageKit.Transaction"]
+       objTid.default_iface = "org.freedesktop.PackageKit.Transaction"
 
-    objTid.on_signal("Error") do |u1,u2|
-      @finished = true
-    end
-    objTid.on_signal("Finished") do |u1,u2|
-      @finished = true
-    end
-    objTid_with_iface.GetUpdates("NONE")
+       @finished = false
+       objTid.on_signal("Package") do |line1,line2,line3|
+         update = PatchUpdate.new
+         update.kind = line1
+         update.summary = line3
+         columns = line2.split ";"
+         update.name = columns[0]
+         update.resolvableId = columns[1]
+         update.arch = columns[2]
+         update.repo = columns[3]
+         @patch_updates << update
+       end
 
-    if !@finished
-      @main = MainPkg.new
-      @main << system_bus
-      @main.run
-    end
+       objTid.on_signal("Error") do |u1,u2|
+         @finished = true
+       end
+       objTid.on_signal("Finished") do |u1,u2|
+         @finished = true
+       end
+       objTid_with_iface.GetUpdates("NONE")
 
-    obj_with_iface.SuggestDaemonQuit
+       if !@finished
+         @main = MainPkg.new
+         @main << system_bus
+         @main.run
+       end
+ 
+       obj_with_iface.SuggestDaemonQuit
+    else
+       update = PatchUpdate.new
+       update.error_id = 1
+       update.error_string = "no permission"
+       @patch_updates << update
+    end
   end
 
   def get_update (id)
@@ -105,10 +117,11 @@ class PatchUpdatesController < ApplicationController
   end
 
   def install_update (id)
+    ret = "ok"
     get_update (id)
     if @patch_update == nil
       logger.error "Patch: #{id} not found."
-      return
+      return "Patch: #{id} not found."
     end
 
     updateId = "#{@patch_update.name};#{@patch_update.resolvableId};#{@patch_update.arch};#{@patch_update.repo}"
@@ -132,6 +145,7 @@ class PatchUpdatesController < ApplicationController
 
     objTid.on_signal("Error") do |u1,u2|
       @finished = true
+      ret = "packageKit Error"
     end
     objTid.on_signal("Finished") do |u1,u2|
       @finished = true
@@ -141,10 +155,14 @@ class PatchUpdatesController < ApplicationController
     if !@finished
       @main = MainPkg.new
       @main << system_bus
-      @main.run
+      if (!@main.run)
+         ret = "packageKit Error"
+      end
     end
 
     obj_with_iface.SuggestDaemonQuit
+
+    return ret
   end
 
 
@@ -182,11 +200,22 @@ class PatchUpdatesController < ApplicationController
   # POST /patch_updates/1
   # POST /patch_updates/1.xml
   def install
-    install_update params[:id]
+    update = PatchUpdate.new
+    if polkit_check( "org.opensuse.yast.webservice.install-patch", self.current_account.login) == 0
+       ret = install_update params[:id]
+       if (ret != "ok")
+          update.error_id = 1
+          update.error_string = ret
+       end
+    else
+       update.error_id = 1
+       update.error_string = "no permission"
+    end
 
     respond_to do |format|
       format.html { redirect_to(patch_updates_url) }
-      format.xml  { head :ok }
+      format.xml  { render :xml => update }
+      format.json { render :json => update.to_json }
     end
   end
 
