@@ -6,6 +6,10 @@ After you have installed this package you have to setup the database:
 cd /srv/www/yast/
 rake
 
+And install "session"
+
+sudo gem install session
+
 -------------------------------------------------------------------------
 DBUS
 -------------------------------------------------------------------------

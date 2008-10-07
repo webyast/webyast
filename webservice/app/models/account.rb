@@ -1,3 +1,5 @@
+require 'rubygems'
+require 'session'
 require "rpam"
 include Rpam
 
@@ -18,9 +20,22 @@ class Account < ActiveRecord::Base
   # anything else you want your user to change should be added here.
   attr_accessible :login, :password
 
+  # Authenticates a user by their login name and unencrypted password with unix2_chkpwd
+  def self.unix2_chkpwd(login, passwd)
+     cmd = "/sbin/unix2_chkpwd rpam " + login
+     se = Session.new
+     result, err = se.execute cmd, :stdin => passwd
+     if (se.get_status == 0)
+        return true
+     else
+        return false
+     end
+  end
+
   # Authenticates a user by their login name and unencrypted password.  Returns the user or nil.
   def self.authenticate(login, passwd)
-     if authpam(login,passwd) == true
+     if authpam(login,passwd) == true or    #much more faster
+        unix2_chkpwd(login,passwd)          #slowly but need no more additional PAM rights
 	acc = find_by_login(login)
 	if !acc
           acc = Account.new
