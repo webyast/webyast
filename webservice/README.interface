@@ -64,6 +64,8 @@ returns
 <currenttime type="datetime" nil="true"/>
 <is_utc type="boolean" nil="true"/>
 <timezone>Europe/Berlin</timezone>
+<error_id type="integer">0</error_id>
+<error_string/>
 </systemtime>
 
 So, only the required value has been set in the return value.
@@ -239,6 +241,8 @@ returns:
        <link>status</link>
        <link>restart</link>
      </commands>
+     <error_id type="integer">0</error_id>
+     <error_string/>
   </service>
   <service>
     <link>sshd</link>
@@ -253,6 +257,8 @@ returns:
       <link>reload</link>
       <link>probe</link>
     </commands>
+    <error_id type="integer">0</error_id>
+    <error_string/>
   </service>
   <service>
 ...
@@ -276,6 +282,8 @@ returns
        <link>status</link>
        <link>restart</link>
      </commands>
+     <error_id type="integer">0</error_id>
+     <error_string/>
   </service>
 </hash> 
 
@@ -295,6 +303,8 @@ returns
   <enabled type="boolean">true</enabled>
   <manual_server></manual_server>
   <use_random_server type="boolean">true</use_random_server>
+  <error_id type="integer">0</error_id>
+  <error_string/>
 </config_ntp>
 
 enabled:           the service will be automatically enabled while booting
@@ -322,6 +332,8 @@ returns
   <currenttime type="datetime">2008-09-11T11:29:21Z</currenttime>
   <is_utc type="boolean">false</is_utc>
   <timezone>Europe/Berlin</timezone>
+  <error_id type="integer">0</error_id>
+  <error_string/>
 </systemtime>
 
 GET <hostname>/systemtime.xml
@@ -346,6 +358,8 @@ returns
   <firstLanguage>de_DE</firstLanguage>
   <secondLanguages>en_US</secondLanguages>
   <available>af_ZA (Afrikaans)ar_EG (Arabic)bg_BG (Bulgarian)bn_BD (Bengali)bs_BA (Bosanski)ca_ES (Catala)cs_CZ (Cestina)cy_GB (Cymraeg)da_DK (Dansk)de_DE (Deutsch)el_GR (Greek)en_GB (English (UK))en_US (English (US))es_ES (Espanol)et_EE (Eesti)fi_FI (Suomi)fr_FR (Francais)gu_IN (Gujarati)he_IL (Ivrit)hi_IN (Hindi)hr_HR (Hrvatski)hu_HU (Magyar)id_ID (Bahasa Indonesia)it_IT (Italiano)ja_JP (Japanese)km_KH (Khmer)ko_KR (Korean)lt_LT (Lithuanian)mk_MK (Makedonski)mr_IN (Marathi)nb_NO (Norsk)nl_NL (Nederlands)pa_IN (Punjabi)pl_PL (Polski)pt_BR (Portugues brasileiro)pt_PT (Portugues)ro_RO (Romana)ru_RU (Russian)si_LK (Sinhala)sk_SK (Slovencina)sl_SI (Slovenscina)sr_CS (Srpski)sv_SE (Svenska)ta_IN (Tamil)th_TH (phasa thai)tr_TR (Turkce)uk_UA (Ukrainian)vi_VN (Vietnamese)wa_BE (Walon)xh_ZA (isiXhosa)zh_CN (Simplified Chinese)zh_TW (Traditional Chinese (Taiwan))zu_ZA (isiZulu)</available>
+<error_id type="integer">0</error_id>
+<error_string/>
 </language>
 
 firstLanguage:   primary language
@@ -376,12 +390,18 @@ returns
 <users type="array">
   <user>
     <loginName>nnw</loginName>
+    <error_id type="integer">0</error_id>
+    <error_string/>
   </user>
   <user>
     <loginName>tux</loginName>
+    <error_id type="integer">0</error_id>
+    <error_string/>
   </user>
   <user>
     <loginName>tux2</loginName>
+    <error_id type="integer">0</error_id>
+    <error_string/>
   </user>
 </users>
 
@@ -403,6 +423,8 @@ GET <hostname>/users/tux.xml returns
   <loginName>tux</loginName>
   <loginShell>/bin/bash</loginShell>
   <uid>1001</uid>
+  <error_id type="integer">0</error_id>
+  <error_string/>
 </user>
 
 PUT <hostname>/users/tux.xml update the user account of tux
@@ -476,6 +498,8 @@ GET <hostname>/patch_updates.xml returns
     <repo>openSUSE-11.0-Updates</repo>
     <resolvableId type="integer">139</resolvableId>
     <summary></summary>
+    <error_id type="integer">0</error_id>
+    <error_string/>
   </patch-update>
   <patch-update>
     <arch>noarch</arch>
@@ -484,6 +508,8 @@ GET <hostname>/patch_updates.xml returns
     <repo>openSUSE-11.0-Updates</repo>
     <resolvableId type="integer">114</resolvableId>
     <summary></summary>
+    <error_id type="integer">0</error_id>
+    <error_string/>
   </patch-update>
   <patch-update>
     <arch>noarch</arch>
@@ -492,6 +518,8 @@ GET <hostname>/patch_updates.xml returns
     <repo>openSUSE-11.0-Updates</repo>
     <resolvableId type="integer">83</resolvableId>
     <summary></summary>
+    <error_id type="integer">0</error_id>
+    <error_string/>
   </patch-update>
 </patch-updates>
 
@@ -513,18 +541,28 @@ GET <hostname>/yast_modules.xml returns a list of all available YaST modules
 <hash>
   <module>
     <id>dns-server</id>
+    <error_id type="integer">0</error_id>
+    <error_string/>
   </module>
   <module>
     <id>update</id>
+    <error_id type="integer">0</error_id>
+    <error_string/>
   </module>
   <module>
     <id>remote</id>
+    <error_id type="integer">0</error_id>
+    <error_string/>
   </module>
   <module>
     <id>dirinstall</id>
+    <error_id type="integer">0</error_id>
+    <error_string/>
   </module>
   <module>
     <id>restore</id>
+    <error_id type="integer">0</error_id>
+    <error_string/>
   </module>
   <module>
     ....
@@ -615,6 +653,8 @@ GET <hostname>/yast_modules/nis.xml returns all commands and options of the nis 
       <options/>
     </command>
   </commands>
+  <error_id type="integer">0</error_id>
+  <error_string/>
 </module>
 
 POST <hostname>/yast_modules/nis.xml run the nis module with the commands:
