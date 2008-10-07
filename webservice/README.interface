@@ -191,6 +191,24 @@ curl -X POST -v -H "Content-Type: application/xml; charset=utf-8" -T <login_xml_
 
 This call will generate a cookie file with login data described in <login_xml_file>.
 
+== <hostname>/permission/<policyKitRule> ==
+-------------------------------------------
+Checking if the user of the current session has the permission of the given rule <policyKitRule>.
+This call is useful for applications which have to check the permissions BEFORE they generate a
+e.g. menue entry or input frame.
+
+GET <hostname>/permission/<policyKitRule> checks the permission and returns:
+
+<hash>
+  <permission>granted</permission>
+</hash>
+
+OR
+
+<hash>
+  <permission>denied</permission>
+</hash>
+
 == <hostname>/logout ==
 -----------------------
 Destroys the current session and invalidates the concerning cookie (if there is one).
@@ -620,6 +638,8 @@ This returns:
 === Security ===
 ----------------
 
+== General ==
+-------------
 
 +-----------------------------------------------------------------------------+
 |  Web Application                                                            |
@@ -716,19 +736,37 @@ for calls which reflect the YaST-Webservice interface.
 
 
 
+== API Policies ==
+------------------
+Each YaST webservice call has concerning access permissions which can be defined for each user.
 
+These permissions are handled by PolicyKit in the file:
 
+/usr/share/PolicyKit/policy/org.opensuse.yast.webservice.policy
 
+If you are getting a permission error while using the API just have a look to the webserver logfile
+in order to get the information which permissions are missed:
 
+Action: org.opensuse.yast.webservice.run-yastmodule User: schubi Result: no
+Action: org.opensuse.yast.webservice.run-yastmodule-lan User: schubi Result: yes
 
+These permissions can be set with the call "polkit-auth" like:
 
+polkit-auth --user schubi --grant org.opensuse.yast.webservice.run-yastmodule-lan
 
+Or can be reset by:
 
+polkit-auth --user schubi --revoke org.opensuse.yast.webservice.run-yastmodule-lan
 
+In order to cleanup or to grant ALL permissions you can use the ruby script policyKit-rights.rb
+delivered with this package:
 
+   Usage: policyKit-right.rb --user <user> --action (show|grant|revoke)
+   NOTE: This programm should be run by user root
 
+   This call grant/revoke ALL permission for YaST Webservice.
+   In order to grant/revoke single rights use:
+   polkit-auth --user <user> (--grant|-revoke) <policyname>
 
-
-                  
-                                                                        
-
+   In order to show all possible permissions use:
+   polkit-action

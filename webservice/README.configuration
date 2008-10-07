@@ -45,6 +45,11 @@ session  include        common-session
 PolicyKit
 -------------------------------------------------------------------------
 
+Webserver rights
+================
+These rights are neede for the communication between your webserver and the
+SCR agent.
+
 For testing you can grant all permissions to you and lighttp by adding
 
 - - - - - - -
@@ -68,6 +73,45 @@ to /etc/PolicyKit/PolicyKit.conf
 
 Please exchange "schubi" by the requested user account with which 
 you are running the web server.
+
+
+API Policies
+============
+Each YaST webservice call has concerning access permissions which can be defined for each user.
+
+These permissions are handled by PolicyKit in the file:
+
+/usr/share/PolicyKit/policy/org.opensuse.yast.webservice.policy
+
+If you are getting a permission error while using the API just have a look to the webserver logfile
+in order to get the information which permissions are missed:
+
+Action: org.opensuse.yast.webservice.run-yastmodule User: schubi Result: no
+Action: org.opensuse.yast.webservice.run-yastmodule-lan User: schubi Result: yes
+
+These permissions can be set with the call "polkit-auth" like:
+
+polkit-auth --user schubi --grant org.opensuse.yast.webservice.run-yastmodule-lan
+
+Or can be reset by:
+
+polkit-auth --user schubi --revoke org.opensuse.yast.webservice.run-yastmodule-lan
+
+In order to cleanup or to grant ALL permissions you can use the ruby script policyKit-rights.rb
+delivered with this package:
+
+   Usage: policyKit-right.rb --user <user> --action (show|grant|revoke)
+   NOTE: This programm should be run by user root
+
+   This call grant/revoke ALL permission for YaST Webservice.
+   In order to grant/revoke single rights use:
+   polkit-auth --user <user> (--grant|-revoke) <policyname>
+
+   In order to show all possible permissions use:
+   polkit-action
+
+
+
 
 You can run the YaST webservice with two different web servers:
 
