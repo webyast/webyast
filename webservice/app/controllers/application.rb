@@ -8,6 +8,10 @@ class ApplicationController < ActionController::Base
   require 'polKit'
   include PolKit
 
+  def permissionCheck(action)
+    return polkit_check( action, self.current_account.login) == 0
+  end
+
   helper :all # include all helpers, all the time
 
   # See ActionController::RequestForgeryProtection for details

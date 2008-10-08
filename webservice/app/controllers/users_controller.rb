@@ -13,7 +13,7 @@ class UsersController < ApplicationController
 
 
   def get_userList
-    if polkit_check( "org.opensuse.yast.webservice.read-userlist", self.current_account.login) == 0
+    if permissionCheck( "org.opensuse.yast.webservice.read-userlist")
        ret = Scr.execute("LANG=en.UTF-8 /sbin/yast2 users list")
        lines = ret[:stderr].split "\n"
        @users = []
@@ -242,7 +242,7 @@ class UsersController < ApplicationController
   # GET /users/1
   # GET /users/1.xml
   def show
-    if polkit_check( "org.opensuse.yast.webservice.read-user", self.current_account.login) == 0
+    if permissionCheck( "org.opensuse.yast.webservice.read-user")
        get_user params[:id]
     else
        @user = User.new
@@ -261,7 +261,7 @@ class UsersController < ApplicationController
   # GET /users/new.xml
   def new
     @user = User.new
-    if polkit_check( "org.opensuse.yast.webservice.new-user", self.current_account.login) != 0
+    if !permissionCheck( "org.opensuse.yast.webservice.new-user")
        @user.error_id = 1
        @user.error_string = "no permission"
     end
@@ -274,7 +274,7 @@ class UsersController < ApplicationController
 
   # GET /users/1/edit
   def edit
-    if polkit_check( "org.opensuse.yast.webservice.write-user", self.current_account.login) != 0
+    if !permissionCheck( "org.opensuse.yast.webservice.write-user")
        @user = User.new
        @user.error_id = 1
        @user.error_string = "no permission"
@@ -288,7 +288,7 @@ class UsersController < ApplicationController
   # POST /users.json
   def create
     @user = User.new(params[:user])
-    if polkit_check( "org.opensuse.yast.webservice.new-user", self.current_account.login) != 0
+    if !permissionCheck( "org.opensuse.yast.webservice.new-user")
        @user.error_id = 1
        @user.error_string = "no permission"
     else
@@ -310,7 +310,7 @@ class UsersController < ApplicationController
   # PUT /users/1
   # PUT /users/1.xml
   def update
-    if polkit_check( "org.opensuse.yast.webservice.write-user", self.current_account.login) != 0
+    if !permissionCheck( "org.opensuse.yast.webservice.write-user")
        @user = User.new(params[:user])
        @user.error_id = 1
        @user.error_string = "no permission"
@@ -345,7 +345,7 @@ class UsersController < ApplicationController
   # DELETE /users/1.xml
   # DELETE /users/1.json
   def destroy
-    if polkit_check( "org.opensuse.yast.webservice.delete-user", self.current_account.login) != 0
+    if !permissionCheck( "org.opensuse.yast.webservice.delete-user")
        @user = User.new
        @user.error_id = 1
        @user.error_string = "no permission"
@@ -365,7 +365,8 @@ class UsersController < ApplicationController
 
   # GET /users/1/edit/exportssh
   def exportssh
-    if polkit_check( "org.opensuse.yast.webservice.write-user-sshkey", self.current_account.login) != 0
+    if (!permissionCheck( "org.opensuse.yast.webservice.write-user") and
+        !permissionCheck( "org.opensuse.yast.webservice.write-user-sshkey"))
        @user = User.new
        @user.error_id = 1
        @user.error_string = "no permission"
@@ -390,56 +391,56 @@ class UsersController < ApplicationController
       #initialize not needed stuff (perhaps no permissions available)
       case params[:id]
         when "defaultGroup"
-          if ( polkit_check( "org.opensuse.yast.webservice.read-user", self.current_account.login) == 0 or
-               polkit_check( "org.opensuse.yast.webservice.read-user-defaultgroup", self.current_account.login) == 0 ) then
+          if ( permissionCheck( "org.opensuse.yast.webservice.read-user") or
+               permissionCheck( "org.opensuse.yast.webservice.read-user-defaultgroup"))
              @retUser.defaultGroup = @user.defaultGroup
           else
              @retUser.error_id = 1
              @retUser.error_string = "no permission"
           end         
         when "fullName"
-          if ( polkit_check( "org.opensuse.yast.webservice.read-user", self.current_account.login) == 0 or
-               polkit_check( "org.opensuse.yast.webservice.read-user-fullname", self.current_account.login) == 0 ) then
+          if ( permissionCheck( "org.opensuse.yast.webservice.read-user") or
+               permissionCheck( "org.opensuse.yast.webservice.read-user-fullname"))
              @retUser.fullName = @user.fullName
           else
              @retUser.error_id = 1
              @retUser.error_string = "no permission"
           end         
         when "groups"
-          if ( polkit_check( "org.opensuse.yast.webservice.read-user", self.current_account.login) == 0 or
-               polkit_check( "org.opensuse.yast.webservice.read-user-groups", self.current_account.login) == 0 ) then
+          if ( permissionCheck( "org.opensuse.yast.webservice.read-user") or
+               permissionCheck( "org.opensuse.yast.webservice.read-user-groups")) then
              @retUser.groups = @user.groups
           else
              @retUser.error_id = 1
              @retUser.error_string = "no permission"
           end         
         when "homeDirectory"
-          if ( polkit_check( "org.opensuse.yast.webservice.read-user", self.current_account.login) == 0 or
-               polkit_check( "org.opensuse.yast.webservice.read-user-homedirectory", self.current_account.login) == 0 ) then
+          if ( permissionCheck( "org.opensuse.yast.webservice.read-user") or
+               permissionCheck( "org.opensuse.yast.webservice.read-user-homedirectory")) then
              @retUser.homeDirectory = @user.homeDirectory
           else
              @retUser.error_id = 1
              @retUser.error_string = "no permission"
           end         
         when "loginName"
-          if ( polkit_check( "org.opensuse.yast.webservice.read-user", self.current_account.login) == 0 or
-               polkit_check( "org.opensuse.yast.webservice.read-user-loginname", self.current_account.login) == 0 ) then
+          if ( permissionCheck( "org.opensuse.yast.webservice.read-user") or
+               permissionCheck( "org.opensuse.yast.webservice.read-user-loginname")) then
              @retUser.loginName = @user.loginName
           else
              @retUser.error_id = 1
              @retUser.error_string = "no permission"
           end         
         when "loginShell"
-          if ( polkit_check( "org.opensuse.yast.webservice.read-user", self.current_account.login) == 0 or
-               polkit_check( "org.opensuse.yast.webservice.read-user-loginshell", self.current_account.login) == 0 ) then
+          if ( permissionCheck( "org.opensuse.yast.webservice.read-user") or
+               permissionCheck( "org.opensuse.yast.webservice.read-user-loginshell")) then
              @retUser.loginShell = @user.loginShell
           else
              @retUser.error_id = 1
              @retUser.error_string = "no permission"
           end         
         when "uid"
-          if ( polkit_check( "org.opensuse.yast.webservice.read-user", self.current_account.login) == 0 or
-               polkit_check( "org.opensuse.yast.webservice.read-user-uid", self.current_account.login) == 0 ) then
+          if ( permissionCheck( "org.opensuse.yast.webservice.read-user") or
+               permissionCheck( "org.opensuse.yast.webservice.read-user-uid")) then
              @retUser.uid = @user.uid
           else
              @retUser.error_id = 1
@@ -473,80 +474,80 @@ class UsersController < ApplicationController
           exportSSH = false
           case params[:id]
             when "defaultGroup"
-              if ( polkit_check( "org.opensuse.yast.webservice.write-user", self.current_account.login) == 0 or
-                  polkit_check( "org.opensuse.yast.webservice.write-user-defaultgroup", self.current_account.login) == 0 ) then
+              if ( permissionCheck( "org.opensuse.yast.webservice.write-user") or
+                  permissionCheck( "org.opensuse.yast.webservice.write-user-defaultgroup")) then
                  @user.defaultGroup = @setUser.defaultGroup
               else
                  @user.error_id = 1
                  @user.error_string = "no permission"
               end         
             when "fullName"
-              if ( polkit_check( "org.opensuse.yast.webservice.write-user", self.current_account.login) == 0 or
-                   polkit_check( "org.opensuse.yast.webservice.write-user-fullname", self.current_account.login) == 0 ) then
+              if ( permissionCheck( "org.opensuse.yast.webservice.write-user") or
+                   permissionCheck( "org.opensuse.yast.webservice.write-user-fullname")) then
                  @user.fullName = @setUser.fullName
               else
                  @user.error_id = 1
                  @user.error_string = "no permission"
               end         
             when "groups"
-              if ( polkit_check( "org.opensuse.yast.webservice.write-user", self.current_account.login) == 0 or
-                   polkit_check( "org.opensuse.yast.webservice.write-user-groups", self.current_account.login) == 0 ) then
+              if ( permissionCheck( "org.opensuse.yast.webservice.write-user") or
+                   permissionCheck( "org.opensuse.yast.webservice.write-user-groups")) then
                  @user.groups = @setUser.groups
               else
                  @user.error_id = 1
                  @user.error_string = "no permission"
               end         
             when "homeDirectory"
-              if ( polkit_check( "org.opensuse.yast.webservice.write-user", self.current_account.login) == 0 or
-                   polkit_check( "org.opensuse.yast.webservice.write-user-homedirectory", self.current_account.login) == 0 ) then
+              if ( permissionCheck( "org.opensuse.yast.webservice.write-user") or
+                   permissionCheck( "org.opensuse.yast.webservice.write-user-homedirectory")) then
                  @user.homeDirectory = @setUser.homeDirectory
               else
                  @user.error_id = 1
                  @user.error_string = "no permission"
               end         
             when "newLoginName"
-              if ( polkit_check( "org.opensuse.yast.webservice.write-user", self.current_account.login) == 0 or
-                   polkit_check( "org.opensuse.yast.webservice.write-user-loginname", self.current_account.login) == 0 ) then
+              if ( permissionCheck( "org.opensuse.yast.webservice.write-user") or
+                   permissionCheck( "org.opensuse.yast.webservice.write-user-loginname")) then
                  @user.newLoginName = @setUser.newLoginName
               else
                  @user..error_id = 1
                  @user.error_string = "no permission"
               end         
             when "loginShell"
-              if ( polkit_check( "org.opensuse.yast.webservice.write-user", self.current_account.login) == 0 or
-                   polkit_check( "org.opensuse.yast.webservice.write-user-loginshell", self.current_account.login) == 0 ) then
+              if ( permissionCheck( "org.opensuse.yast.webservice.write-user") or
+                   permissionCheck( "org.opensuse.yast.webservice.write-user-loginshell")) then
                  @user.loginShell = @setUser.loginShell
               else
                  @user.error_id = 1
                  @user.error_string = "no permission"
               end         
             when "newUid"
-              if ( polkit_check( "org.opensuse.yast.webservice.write-user", self.current_account.login) == 0 or
-                   polkit_check( "org.opensuse.yast.webservice.write-user-uid", self.current_account.login) == 0 ) then
+              if ( permissionCheck( "org.opensuse.yast.webservice.write-user") or
+                   permissionCheck( "org.opensuse.yast.webservice.write-user-uid")) then
                  @user.newUid = @setUser.newUid
               else
                  @user.error_id = 1
                  @user.error_string = "no permission"
               end         
             when "password"
-              if ( polkit_check( "org.opensuse.yast.webservice.write-user", self.current_account.login) == 0 or
-                   polkit_check( "org.opensuse.yast.webservice.write-user-password", self.current_account.login) == 0 ) then
+              if ( permissionCheck( "org.opensuse.yast.webservice.write-user") or
+                   permissionCheck( "org.opensuse.yast.webservice.write-user-password")) then
                  @user.password = @setUser.password
               else
                  @user.error_id = 1
                  @user.error_string = "no permission"
               end         
             when "type"
-              if ( polkit_check( "org.opensuse.yast.webservice.write-user", self.current_account.login) == 0 or
-                   polkit_check( "org.opensuse.yast.webservice.write-user-type", self.current_account.login) == 0 ) then
+              if ( permissionCheck( "org.opensuse.yast.webservice.write-user") or
+                   permissionCheck( "org.opensuse.yast.webservice.write-user-type")) then
                  @user.type = @setUser.type
               else
                  @user.error_id = 1
                  @user.error_string = "no permission"
               end         
             when "sshkey"
-              if ( polkit_check( "org.opensuse.yast.webservice.write-user", self.current_account.login) == 0 or
-                   polkit_check( "org.opensuse.yast.webservice.write-user-sshkey", self.current_account.login) == 0 ) then
+              if ( permissionCheck( "org.opensuse.yast.webservice.write-user")  or
+                   permissionCheck( "org.opensuse.yast.webservice.write-user-sshkey")) then
                  @user.sshkey = @setUser.sshkey
                  exportSSH = true
               else

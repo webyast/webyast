@@ -84,7 +84,7 @@ require "scr"
   def update
     respond_to do |format|
       systemtime = System::SystemTime.new
-      if polkit_check( "org.opensuse.yast.webservice.write-systemtime", self.current_account.login) == 0
+      if permissionCheck( "org.opensuse.yast.webservice.write-systemtime")
          if systemtime.update_attributes(params[:systemtime])
            logger.debug "UPDATED: #{systemtime.inspect}"
 
@@ -120,7 +120,7 @@ require "scr"
 
     @systemtime = System::SystemTime.new
 
-    if polkit_check( "org.opensuse.yast.webservice.read-systemtime", self.current_account.login) == 0
+    if permissionCheck( "org.opensuse.yast.webservice.read-systemtime")
        @systemtime.currenttime = get_time
        @systemtime.is_utc = get_is_utc
        @systemtime.timezone = get_timezone
@@ -154,24 +154,24 @@ require "scr"
 
       case params[:id]
         when "is_utc"
-          if ( polkit_check( "org.opensuse.yast.webservice.read-systemtime", self.current_account.login) == 0 or
-               polkit_check( "org.opensuse.yast.webservice.read-systemtime-isutc", self.current_account.login) == 0 ) then
+          if ( permissionCheck( "org.opensuse.yast.webservice.read-systemtime") or
+               permissionCheck( "org.opensuse.yast.webservice.read-systemtime-isutc") ) then
              @systemtime.is_utc = get_is_utc
           else
              @systemtime.error_id = 1
              @systemtime.error_string = "no permission"
           end
         when "currenttime"
-          if ( polkit_check( "org.opensuse.yast.webservice.read-systemtime", self.current_account.login) == 0 or
-               polkit_check( "org.opensuse.yast.webservice.read-systemtime-currenttime", self.current_account.login) == 0 )
+          if ( permissionCheck( "org.opensuse.yast.webservice.read-systemtime") or
+               permissionCheck( "org.opensuse.yast.webservice.read-systemtime-currenttime") )
              @systemtime.currenttime = get_time
           else
              @systemtime.error_id = 1
              @systemtime.error_string = "no permission"
           end
         when "timezone"
-          if ( polkit_check( "org.opensuse.yast.webservice.read-systemtime", self.current_account.login) == 0 or
-               polkit_check( "org.opensuse.yast.webservice.read-systemtime-timezone", self.current_account.login) == 0 )
+          if ( permissionCheck( "org.opensuse.yast.webservice.read-systemtime") or
+               permissionCheck( "org.opensuse.yast.webservice.read-systemtime-timezone") )
              @systemtime.timezone = get_timezone
           else
              @systemtime.error_id = 1
@@ -198,24 +198,24 @@ require "scr"
           logger.debug "UPDATED: #{@systemtime.inspect}"
           case params[:id]
             when "is_utc"
-              if ( polkit_check( "org.opensuse.yast.webservice.write-systemtime", self.current_account.login) == 0 or
-                   polkit_check( "org.opensuse.yast.webservice.write-systemtime-isutc", self.current_account.login) == 0 ) then
+              if ( permissionCheck( "org.opensuse.yast.webservice.write-systemtime") or
+                   permissionCheck( "org.opensuse.yast.webservice.write-systemtime-isutc")) then
                  set_is_utc @systemtime.is_utc
               else
                  @systemtime.error_id = 1
                  @systemtime.error_string = "no permission"
               end
             when "currenttime"
-              if ( polkit_check( "org.opensuse.yast.webservice.write-systemtime", self.current_account.login) == 0 or
-                   polkit_check( "org.opensuse.yast.webservice.write-systemtime-currenttime", self.current_account.login) == 0 )
+              if ( permissionCheck( "org.opensuse.yast.webservice.write-systemtime") or
+                   permissionCheck( "org.opensuse.yast.webservice.write-systemtime-currenttime") )
                  set_time @systemtime.currenttime
               else
                  @systemtime.error_id = 1
                  @systemtime.error_string = "no permission"
               end
             when "timezone"
-              if ( polkit_check( "org.opensuse.yast.webservice.write-systemtime", self.current_account.login) == 0 or
-                   polkit_check( "org.opensuse.yast.webservice.write-systemtime-timezone", self.current_account.login) == 0 )
+              if ( permissionCheck( "org.opensuse.yast.webservice.write-systemtime") or
+                   permissionCheck( "org.opensuse.yast.webservice.write-systemtime-timezone") )
                  set_timezone @systemtime.timezone
               else
                  @systemtime.error_id = 1

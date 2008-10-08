@@ -10,7 +10,7 @@ class YastModulesController < ApplicationController
   def init_modules (checkPolicy)
     @yastModules = Hash.new
     if (!checkPolicy or
-        polkit_check( "org.opensuse.yast.webservice.read-yastmodulelist", self.current_account.login) == 0 )
+        permissionCheck( "org.opensuse.yast.webservice.read-yastmodulelist"))
        YastModule.all.each do |d|
          begin
             yastModule = YastModule.new d
@@ -57,8 +57,8 @@ class YastModulesController < ApplicationController
     idPolicy = idPolicy.chomp
     idPolicy = idPolicy.downcase
     idPolicy = "org.opensuse.yast.webservice.read-yastmodule-" + idPolicy
-    if (polkit_check( "org.opensuse.yast.webservice.read-yastmodule", self.current_account.login) == 0 or
-        polkit_check( idPolicy, self.current_account.login) == 0 )
+    if (permissionCheck( "org.opensuse.yast.webservice.read-yastmodule") or
+        permissionCheck( idPolicy))
        init_modules false #check no policy
        @yastModule = @yastModules[id]
        @yastModule.commands #evaluate commands
@@ -79,8 +79,8 @@ class YastModulesController < ApplicationController
     idPolicy = idPolicy.chomp
     idPolicy = idPolicy.downcase
     idPolicy = "org.opensuse.yast.webservice.run-yastmodule-" + idPolicy
-    if (polkit_check( "org.opensuse.yast.webservice.run-yastmodule", self.current_account.login) == 0 or
-        polkit_check( idPolicy, self.current_account.login) == 0 )
+    if (permissionCheck( "org.opensuse.yast.webservice.run-yastmodule") or
+        permissionCheck( idPolicy))
        init_modules false #check no policy
        @yastModule = @yastModules[id]
        @yastModule.commands #evaluate commands
@@ -132,8 +132,8 @@ class YastModulesController < ApplicationController
          # no POST request
 
          idPolicy = "org.opensuse.yast.webservice.read-yastmodule-" + idPolicy
-         if (polkit_check( "org.opensuse.yast.webservice.read-yastmodule", self.current_account.login) == 0 or
-             polkit_check( idPolicy, self.current_account.login) == 0 )
+         if (permissionCheck( "org.opensuse.yast.webservice.read-yastmodule") or
+             permissionCheck( idPolicy))
             respond @yastModule
             return
          else

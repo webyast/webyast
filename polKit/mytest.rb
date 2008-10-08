@@ -5,5 +5,5 @@ require 'polKit'
 include PolKit
 
 # Call and print the result from the polkit_check method
-puts polkit_check( "opensuse.yast.scr.read.sysconfig.clock.timezone", "schubi")
+puts PolKit::polkit_check( "opensuse.yast.scr.read.sysconfig.clock.timezone", "schubi")
 

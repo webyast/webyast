@@ -61,7 +61,7 @@ class LanguageController < ApplicationController
   def update
     respond_to do |format|
       language = Language.new
-      if polkit_check( "org.opensuse.yast.webservice.write-language", self.current_account.login) == 0
+      if permissionCheck( "org.opensuse.yast.webservice.write-language" )
          if language.update_attributes(params[:language])
            logger.debug "UPDATED: #{language.inspect}"
 
@@ -94,7 +94,7 @@ class LanguageController < ApplicationController
 
   def index
     @language = Language.new
-    if polkit_check( "org.opensuse.yast.webservice.read-language", self.current_account.login) == 0
+    if permissionCheck( "org.opensuse.yast.webservice.read-language" )
        get_languages
        get_available
     else
@@ -128,8 +128,8 @@ class LanguageController < ApplicationController
       #initialize not needed stuff (perhaps no permissions available)
       case params[:id]
         when "firstLanguage"
-          if ( polkit_check( "org.opensuse.yast.webservice.read-language", self.current_account.login) == 0 or
-               polkit_check( "org.opensuse.yast.webservice.read-language-firstlanguage", self.current_account.login) == 0 ) then
+          if ( permissionCheck( "org.opensuse.yast.webservice.read-language" ) or
+               permissionCheck( "org.opensuse.yast.webservice.read-language-firstlanguage" )) then
              get_languages
              @language.secondLanguages=nil
           else
@@ -137,8 +137,8 @@ class LanguageController < ApplicationController
              @language.error_string = "no permission"
           end
         when "secondLanguages"
-          if ( polkit_check( "org.opensuse.yast.webservice.read-language", self.current_account.login) == 0 or
-               polkit_check( "org.opensuse.yast.webservice.read-language-secondlanguages", self.current_account.login) == 0 ) then
+          if ( permissionCheck( "org.opensuse.yast.webservice.read-language" ) or
+               permissionCheck( "org.opensuse.yast.webservice.read-language-secondlanguages" )) then
              get_languages  
              @language.firstLanguage=nil
           else
@@ -146,8 +146,8 @@ class LanguageController < ApplicationController
              @language.error_string = "no permission"
           end
         when "available"
-          if ( polkit_check( "org.opensuse.yast.webservice.read-language", self.current_account.login) == 0 or
-               polkit_check( "org.opensuse.yast.webservice.read-language-available", self.current_account.login) == 0 ) then
+          if ( permissionCheck( "org.opensuse.yast.webservice.read-language" ) or
+               permissionCheck( "org.opensuse.yast.webservice.read-language-available" )) then
              get_available
           else
              @language.error_id = 1
@@ -175,16 +175,16 @@ class LanguageController < ApplicationController
           logger.debug "UPDATED: #{@language.inspect}"
           case params[:id]
             when "firstLanguage"
-              if ( polkit_check( "org.opensuse.yast.webservice.write-language", self.current_account.login) == 0 or
-                   polkit_check( "org.opensuse.yast.webservice.write-language-firstlanguage", self.current_account.login) == 0 ) then
+              if ( permissionCheck( "org.opensuse.yast.webservice.write-language" ) or
+                   permissionCheck( "org.opensuse.yast.webservice.write-language-firstlanguage" )) then
                  set_firstLanguage @language.firstLanguage
               else
                  @language.error_id = 1
                  @language.error_string = "no permission"
               end              
             when "secondLanguages"
-              if ( polkit_check( "org.opensuse.yast.webservice.write-language", self.current_account.login) == 0 or
-                   polkit_check( "org.opensuse.yast.webservice.write-language-secondlanguages", self.current_account.login) == 0 ) then
+              if ( permissionCheck( "org.opensuse.yast.webservice.write-language" ) or
+                   permissionCheck( "org.opensuse.yast.webservice.write-language-secondlanguages" )) then
                  set_secondLanguages @language.secondLanguages
               else
                  @language.error_id = 1

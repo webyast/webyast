@@ -96,9 +96,9 @@ class ConfigNtpController < ApplicationController
 
     @ntp = ConfigNtp.new
 
-    if ( polkit_check( "org.opensuse.yast.webservice.read-services", self.current_account.login) == 0 or
-         polkit_check( "org.opensuse.yast.webservice.read-services-config", self.current_account.login) == 0 or
-         polkit_check( "org.opensuse.yast.webservice.read-services-config-ntp", self.current_account.login) == 0 )
+    if ( permissionCheck( "org.opensuse.yast.webservice.read-services") or
+         permissionCheck( "org.opensuse.yast.webservice.read-services-config") or
+         permissionCheck( "org.opensuse.yast.webservice.read-services-config-ntp"))
        @ntp.manual_server = ""
        @ntp.use_random_server = true
        @ntp.manual_server = manualServer
@@ -130,9 +130,9 @@ class ConfigNtpController < ApplicationController
   def update
     respond_to do |format|
       ntp = ConfigNtp.new
-      if ( polkit_check( "org.opensuse.yast.webservice.write-services", self.current_account.login) == 0 or
-           polkit_check( "org.opensuse.yast.webservice.write-services-config", self.current_account.login) == 0 or
-           polkit_check( "org.opensuse.yast.webservice.write-services-config-ntp", self.current_account.login) == 0 )
+      if ( permissionCheck( "org.opensuse.yast.webservice.write-services") or
+           permissionCheck( "org.opensuse.yast.webservice.write-services-config") or
+           permissionCheck( "org.opensuse.yast.webservice.write-services-config-ntp"))
          if ntp.update_attributes(params[:config_ntp])
             logger.debug "UPDATED: #{ntp.inspect}"
        
@@ -175,20 +175,20 @@ class ConfigNtpController < ApplicationController
       @ntp = ConfigNtp.new
       case params[:id]
         when "manual_server"
-          if ( polkit_check( "org.opensuse.yast.webservice.read-services", self.current_account.login) == 0 or
-               polkit_check( "org.opensuse.yast.webservice.read-services-config", self.current_account.login) == 0 or
-               polkit_check( "org.opensuse.yast.webservice.read-services-config-ntp", self.current_account.login) == 0 or
-               polkit_check( "org.opensuse.yast.webservice.read-services-config-ntp-manualserver", self.current_account.login) == 0)
+          if ( permissionCheck( "org.opensuse.yast.webservice.read-services") or
+               permissionCheck( "org.opensuse.yast.webservice.read-services-config") or
+               permissionCheck( "org.opensuse.yast.webservice.read-services-config-ntp") or
+               permissionCheck( "org.opensuse.yast.webservice.read-services-config-ntp-manualserver"))
              @ntp.manualServer = manualServer
           else
              @ntp.error_id = 1
              @ntp.error_string = "no permission"
           end
         when "use_random_server"
-          if ( polkit_check( "org.opensuse.yast.webservice.read-services", self.current_account.login) == 0 or
-               polkit_check( "org.opensuse.yast.webservice.read-services-config", self.current_account.login) == 0 or
-               polkit_check( "org.opensuse.yast.webservice.read-services-config-ntp", self.current_account.login) == 0 or
-               polkit_check( "org.opensuse.yast.webservice.read-services-config-ntp-userandomserver", self.current_account.login) == 0)
+          if ( permissionCheck( "org.opensuse.yast.webservice.read-services") or
+               permissionCheck( "org.opensuse.yast.webservice.read-services-config") or
+               permissionCheck( "org.opensuse.yast.webservice.read-services-config-ntp") or
+               permissionCheck( "org.opensuse.yast.webservice.read-services-config-ntp-userandomserver"))
              if manualServer == ""
                @ntp.use_random_server = true
              else
@@ -199,10 +199,10 @@ class ConfigNtpController < ApplicationController
              @ntp.error_string = "no permission"
           end
         when "enabled"
-          if ( polkit_check( "org.opensuse.yast.webservice.read-services", self.current_account.login) == 0 or
-               polkit_check( "org.opensuse.yast.webservice.read-services-config", self.current_account.login) == 0 or
-               polkit_check( "org.opensuse.yast.webservice.read-services-config-ntp", self.current_account.login) == 0 or
-               polkit_check( "org.opensuse.yast.webservice.read-services-config-ntp-enabled", self.current_account.login) == 0)
+          if ( permissionCheck( "org.opensuse.yast.webservice.read-services") or
+               permissionCheck( "org.opensuse.yast.webservice.read-services-config") or
+               permissionCheck( "org.opensuse.yast.webservice.read-services-config-ntp") or
+               permissionCheck( "org.opensuse.yast.webservice.read-services-config-ntp-enabled"))
              @ntp.enabled = enabled
           else
              @ntp.error_id = 1
@@ -229,20 +229,20 @@ class ConfigNtpController < ApplicationController
             logger.debug "UPDATED: #{@ntp.inspect}"
             case params[:id]
               when "manual_server"
-                 if ( polkit_check( "org.opensuse.yast.webservice.write-services", self.current_account.login) == 0 or
-                      polkit_check( "org.opensuse.yast.webservice.write-services-config", self.current_account.login) == 0 or
-                      polkit_check( "org.opensuse.yast.webservice.write-services-config-ntp", self.current_account.login) == 0 or
-                      polkit_check( "org.opensuse.yast.webservice.write-services-config-ntp-manualserver", self.current_account.login) == 0)
+                 if ( permissionCheck( "org.opensuse.yast.webservice.write-services") or
+                      permissionCheck( "org.opensuse.yast.webservice.write-services-config") or
+                      permissionCheck( "org.opensuse.yast.webservice.write-services-config-ntp") or
+                      permissionCheck( "org.opensuse.yast.webservice.write-services-config-ntp-manualserver"))
                     writeNTPConf ([@ntp.manualServer])
                  else
                     @ntp.error_id = 1
                     @ntp.error_string = "no permission"
                  end
               when "use_random_server"
-                 if ( polkit_check( "org.opensuse.yast.webservice.write-services", self.current_account.login) == 0 or
-                      polkit_check( "org.opensuse.yast.webservice.write-services-config", self.current_account.login) == 0 or
-                      polkit_check( "org.opensuse.yast.webservice.write-services-config-ntp", self.current_account.login) == 0 or
-                      polkit_check( "org.opensuse.yast.webservice.write-services-config-ntp-userandomserver", self.current_account.login) == 0)
+                 if ( permissionCheck( "org.opensuse.yast.webservice.write-services") or
+                      permissionCheck( "org.opensuse.yast.webservice.write-services-config") or
+                      permissionCheck( "org.opensuse.yast.webservice.write-services-config-ntp") or
+                      permissionCheck( "org.opensuse.yast.webservice.write-services-config-ntp-userandomserver"))
                     if (@ntp.use_random_server == true)
                        writeNTPConf(["0.pool.ntp.org", "1.pool.ntp.org", "2.pool.ntp.org"])
                     else
@@ -254,10 +254,10 @@ class ConfigNtpController < ApplicationController
                    @ntp.error_string = "no permission"
                  end
               when "enabled"
-                 if ( polkit_check( "org.opensuse.yast.webservice.write-services", self.current_account.login) == 0 or
-                      polkit_check( "org.opensuse.yast.webservice.write-services-config", self.current_account.login) == 0 or
-                      polkit_check( "org.opensuse.yast.webservice.write-services-config-ntp", self.current_account.login) == 0 or
-                      polkit_check( "org.opensuse.yast.webservice.write-services-config-ntp-enabled", self.current_account.login) == 0)
+                 if ( permissionCheck( "org.opensuse.yast.webservice.write-services") or
+                      permissionCheck( "org.opensuse.yast.webservice.write-services-config") or
+                      permissionCheck( "org.opensuse.yast.webservice.write-services-config-ntp") or
+                      permissionCheck( "org.opensuse.yast.webservice.write-services-config-ntp-enabled"))
                    enable(@ntp.enabled == true)
                  else
                    @ntp.error_id = 1

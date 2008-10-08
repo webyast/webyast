@@ -56,9 +56,9 @@ class CommandsController < ApplicationController
     @service.error_string = ""
 
     single_policy = "org.opensuse.yast.webservice.execute-services-commands-" + params[:service_id]
-    if ( polkit_check( "org.opensuse.yast.webservice.write-services", self.current_account.login) == 0 or
-         polkit_check( "org.opensuse.yast.webservice.execute-services-commands", self.current_account.login) == 0 or
-         polkit_check( single_policy, self.current_account.login) == 0 )
+    if ( permissionCheck( "org.opensuse.yast.webservice.write-services") or
+         permissionCheck( "org.opensuse.yast.webservice.execute-services-commands") or
+         permissionCheck( single_policy))
 
        cmd = "/usr/sbin/rc" + params[:service_id] + " " + id
        logger.debug "SetTime cmd #{cmd}"
