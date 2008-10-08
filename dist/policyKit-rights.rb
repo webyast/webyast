@@ -15,9 +15,9 @@ $debug = 0
 def usage why
 	STDERR.puts why
 	STDERR.puts "Usage: policyKit-right.rb --user <user> --action (show|grant|revoke)"
-        STDERR.puts "NOTE: This programm should be run by user root"
+        STDERR.puts "NOTE: This program should be run by user root"
         STDERR.puts ""
-        STDERR.puts "This call grant/revoke ALL permission for YaST Webservice."
+        STDERR.puts "This call grant/revoke ALL permissions for the YaST Webservice."
         STDERR.puts "In order to grant/revoke single rights use:"
         STDERR.puts "polkit-auth --user <user> (--grant|-revoke) <policyname>"
         STDERR.puts ""
