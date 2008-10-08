@@ -8,8 +8,42 @@ class ApplicationController < ActionController::Base
   require 'polKit'
   include PolKit
 
+private
+  def userRoles(user)
+    if session['userRoles'] == nil
+       IO.foreach( "/etc/yast_user_roles" ) { |line|
+          line = line.chomp
+          if (line.size >= 1 and
+              line[0] != "#" ) #no comment
+             roles = line.split(/[\s,]+/)
+             if ( roles.size > 1 and
+                  roles[0] == user )
+                return roles
+             end
+          end
+       }
+       return []
+    else
+       return session['services']
+    end
+  end
+
+public
+
   def permissionCheck(action)
-    return polkit_check( action, self.current_account.login) == 0
+    if polkit_check( action, self.current_account.login) == 0
+       return true
+    else
+       #checking roles
+       roles = userRoles(self.current_account.login)
+       roles.each do |role|
+          if ( role != self.current_account.login and
+               polkit_check( action, role) == 0)
+             return true
+          end
+       end
+    end
+    return false
   end
 
   helper :all # include all helpers, all the time

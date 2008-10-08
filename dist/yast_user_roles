@@ -1,0 +1,11 @@
+#
+# file : /etc/yast_user_roles
+#
+# This file describes roles of a user accounts for the YaST Webservice
+# "user accounts": are real system accounts which are accessable e.g. via PAM
+# "roles"        : describes real user accounts too for which policies have
+#                  been generated
+#
+# Format: <user>   <role 1>,<role 2>,...<role n>
+#
+root		schubi
