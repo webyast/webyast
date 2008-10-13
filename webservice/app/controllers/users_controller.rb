@@ -37,7 +37,7 @@ class UsersController < ApplicationController
     else
       saveKey = nil
     end
-    ret = Scr.execute("LANG=en.UTF-8 /sbin/yast2 users show username=#{id}")
+    ret = Scr.execute("LANG=en.UTF-8 /sbin/yast2 users show username=#{id} batchmode")
      lines = ret[:stderr].split "\n"
      counter = 0
      @user = User.find(:first)
@@ -140,6 +140,7 @@ class UsersController < ApplicationController
     if @user.type && @user.type.length > 0
       command += "type=#{@user.type} "
     end
+    command += " batchmode"
     ret = Scr.execute(command)
     if ret[:exit] != 0
       ok = false
@@ -184,6 +185,7 @@ class UsersController < ApplicationController
     if @user.type && @user.type.length > 0
       command += "type=#{@user.type} "
     end
+    command += " batchmode"
 
     ret = Scr.execute(command)
     if ret[:exit] == 0
@@ -209,6 +211,8 @@ class UsersController < ApplicationController
     if @user.type && @user.type.length > 0
       command += "type=#{@user.type} "
     end
+
+    command += " batchmode"
 
     ret = Scr.execute(command)
     if ret[:exit] == 0
