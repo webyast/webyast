@@ -1,5 +1,6 @@
 # This controller handles the login/logout function of the site.  
 class SessionsController < ApplicationController
+  before_filter :login_required , :except => :create
 
   # render new.rhtml
   def new
@@ -22,12 +23,13 @@ class SessionsController < ApplicationController
 
       @cmdRet = Hash.new
       @cmdRet["login"] = "granted"
+      @cmdRet["auth_token"] = { :value => self.current_account.remember_token , :expires => self.current_account.remember_token_expires_at }
       respond_to do |format|
         format.xml do
-	  render :xml => @cmdRet.to_xml
+	  render :xml => @cmdRet.to_xml, :location => "none"
         end
         format.json do
-          render :json => @cmdRet.to_json
+          render :json => @cmdRet.to_json, :location => "none"
         end
         format.html do
           redirect_back_or_default('/')
@@ -39,10 +41,10 @@ class SessionsController < ApplicationController
       @cmdRet["login"] = "denied"
       respond_to do |format|
         format.xml do
-	  render :xml => @cmdRet.to_xml
+	  render :xml => @cmdRet.to_xml, :location => "none"
         end
         format.json do
-          render :json => @cmdRet.to_json
+          render :json => @cmdRet.to_json, :location => "none"
         end
         format.html do
           render :action => 'new'
@@ -59,10 +61,10 @@ class SessionsController < ApplicationController
     @cmdRet["logout"] = "Goodbye!"
     respond_to do |format|
       format.xml do
-	render :xml => @cmdRet.to_xml
+	render :xml => @cmdRet.to_xml, :location => "none"
       end
       format.json do
-        render :json => @cmdRet.to_json
+        render :json => @cmdRet.to_json, :location => "none"
       end
       format.html do
         flash[:notice] = "You have been logged out."

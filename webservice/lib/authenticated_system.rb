@@ -100,7 +100,15 @@ module AuthenticatedSystem
     # Called from #current_account.  Now, attempt to login by basic authentication information.
     def login_from_basic_auth
       authenticate_with_http_basic do |username, password|
-        self.current_account = Account.authenticate(username, password)
+        if username.length > 0
+           self.current_account = Account.authenticate(username, password)
+        else # try it with auth_token
+           account = password && Account.find_by_remember_token(password)
+           if account && account.remember_token?
+              cookies[:auth_token] = { :value => account.remember_token, :expires => account.remember_token_expires_at }
+              self.current_account = account
+           end
+        end 
       end
     end
 
