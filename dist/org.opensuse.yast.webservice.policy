@@ -75,6 +75,14 @@ Rights for systemtime
       <allow_active>no</allow_active>
     </defaults>
   </action>
+  <action id="org.opensuse.yast.webservice.read-systemtime-validtimezones">
+    <description>Reading valid timezones</description>
+    <message>Authentication is required to read valid timezones</message>
+    <defaults>
+      <allow_inactive>no</allow_inactive>
+      <allow_active>no</allow_active>
+    </defaults>
+  </action>
 
 <!--
 Rights for services

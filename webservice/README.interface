@@ -52,6 +52,7 @@ returns
 <currenttime type="datetime">2008-09-10T17:13:37Z</currenttime>
 <is_utc type="boolean">false</is_utc>
 <timezone>Europe/Berlin</timezone>
+<validtimezones> Africa/Abidjan Africa/Accra...</validtimezones>
 </systemtime>
 
 whereas 
@@ -332,6 +333,7 @@ returns
   <currenttime type="datetime">2008-09-11T11:29:21Z</currenttime>
   <is_utc type="boolean">false</is_utc>
   <timezone>Europe/Berlin</timezone>
+  <validtimezones> Africa/Abidjan Africa/Accra...</validtimezones>
   <error_id type="integer">0</error_id>
   <error_string/>
 </systemtime>

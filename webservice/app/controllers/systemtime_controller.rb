@@ -17,6 +17,20 @@ require "scr"
 # get
 #
 
+  def get_validtimezones
+     ret = Scr.execute("LANG=en.UTF-8 /sbin/yast2 timezone list")
+     puts ret[:stderr]
+     lines = ret[:stderr].split "\n"
+     ret = []
+     lines::each do |l|   
+       if l.length > 0 && l.casecmp("Region: ") == -1
+          lang = l.split " "
+          ret << " " << lang[0]
+       end
+     end
+     ret
+  end
+
   def get_is_utc
     if Scr.read(".sysconfig.clock.HWCLOCK") == "-u" then
       return true
@@ -128,6 +142,7 @@ require "scr"
        @systemtime.currenttime = get_time
        @systemtime.is_utc = get_is_utc
        @systemtime.timezone = get_timezone
+       @systemtime.validtimezones = get_validtimezones
     else
        @systemtime.error_id = 1
        @systemtime.error_string = "no permission"
@@ -177,6 +192,14 @@ require "scr"
           if ( permissionCheck( "org.opensuse.yast.webservice.read-systemtime") or
                permissionCheck( "org.opensuse.yast.webservice.read-systemtime-timezone") )
              @systemtime.timezone = get_timezone
+          else
+             @systemtime.error_id = 1
+             @systemtime.error_string = "no permission"
+          end
+        when "validtimezones"
+          if ( permissionCheck( "org.opensuse.yast.webservice.read-systemtime") or
+               permissionCheck( "org.opensuse.yast.webservice.read-systemtime-validtimezones") )
+             @systemtime.validtimezones = get_validtimezones
           else
              @systemtime.error_id = 1
              @systemtime.error_string = "no permission"
