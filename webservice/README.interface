@@ -336,7 +336,7 @@ returns
   <error_string/>
 </systemtime>
 
-PUT <hostname>/systemtime.xml
+PUT or POST <hostname>/systemtime.xml
 
 Writes time settings to the system. The given parameters are the same as the
 returned values of the GET request.

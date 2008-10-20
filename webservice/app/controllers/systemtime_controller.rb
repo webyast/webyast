@@ -108,12 +108,16 @@ require "scr"
 
       format.xml do
         render :xml => systemtime.to_xml( :root => "systemtime",
-          :dasherize => false )
+          :dasherize => false ), :location => "none"
       end
       format.json do
-	render :json => systemtime.to_json
+	render :json => systemtime.to_json , :location => "none"
       end
     end
+  end
+
+  def create
+     update
   end
 
   def show
