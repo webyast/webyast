@@ -19,7 +19,6 @@ require "scr"
 
   def get_validtimezones
      ret = Scr.execute("LANG=en.UTF-8 /sbin/yast2 timezone list")
-     puts ret[:stderr]
      lines = ret[:stderr].split "\n"
      ret = []
      lines::each do |l|   

@@ -108,6 +108,7 @@ class Lsbservice
     STDERR.puts "#{self}.to_xml"
     xml = options[:builder] ||= Builder::XmlMarkup.new(options)
     xml.instruct! unless options[:skip_instruct]
+
     xml.service do
       xml.tag!(:link, @link )
       xml.tag!(:path, @path )
