@@ -16,12 +16,15 @@ License:        GPL
 Group:          Productivity/Networking/Web/Utilities
 Autoreqprov:    on
 Version:        1.0.0
-Release:        0
+Release:        1
 Summary:        YaST2 - Webservice 
 Source:         webservice.tar.bz2
 Source1:        yast.conf
 Source2:        rails.include
 Source3:        cleanurl-v5.lua
+Source4:        org.opensuse.yast.webservice.policy
+Source5:        policyKit-rights.rb  
+Source6:        yast_user_roles
 BuildRoot:      %{_tmppath}/%{name}-%{version}-build
 BuildArchitectures: noarch
 
@@ -48,6 +51,12 @@ mkdir -p $RPM_BUILD_ROOT/etc/lighttpd/vhosts.d/
 install -m 0644 %SOURCE1 $RPM_BUILD_ROOT/etc/lighttpd/vhosts.d/
 install -m 0644 %SOURCE2 $RPM_BUILD_ROOT/etc/lighttpd/vhosts.d/rails.inc
 install -m 0644 %SOURCE3 $RPM_BUILD_ROOT/etc/lighttpd/
+
+# Policies
+mkdir -p $RPM_BUILD_ROOT/usr/share/PolicyKit/policy
+install -m 0644 %SOURCE4 $RPM_BUILD_ROOT/usr/share/PolicyKit/policy/
+install -m 0644 %SOURCE5 $RPM_BUILD_ROOT/srv/www/yast/
+install -m 0644 %SOURCE6 $RPM_BUILD_ROOT/etc/
 #
 #set default api on localhost for the webclient
 # 
@@ -79,9 +88,12 @@ rm -rf $RPM_BUILD_ROOT
 /srv/www/yast/script
 /srv/www/yast/test
 /srv/www/yast/config
+/srv/www/yast/policyKit-rights.rb
 %doc README* COPYING
 %attr(-,lighttpd,lighttpd) /srv/www/yast/log
 %attr(-,lighttpd,lighttpd) /srv/www/yast/tmp
 %config(noreplace) /etc/lighttpd/vhosts.d/yast.conf
 %config /etc/lighttpd/vhosts.d/rails.inc
 %config /etc/lighttpd/cleanurl-v5.lua
+%config /usr/share/PolicyKit/policy/org.opensuse.yast.webservice.policy
+%config(noreplace) /etc/yast_user_roles
