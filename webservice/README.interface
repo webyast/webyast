@@ -232,23 +232,18 @@ GET <hostname>/services.xml
 
 returns:
 
-<services> 
+<services type="array"> 
   <service>
     <link>smbfs</link>
     <path>/etc/init.d/smbfs</path>
-    <commands>
-      <link>run</link>
-       <link>stop</link>
-       <link>status</link>
-       <link>restart</link>
-     </commands>
-     <error_id type="integer">0</error_id>
-     <error_string/>
+    <commands>run,stop,status,restart</commands>
+    <error_id type="integer">0</error_id>
+    <error_string/>
   </service>
   <service>
     <link>sshd</link>
     <path>/etc/init.d/sshd</path>
-    <commands>["run", "stop", "status", "restart"]</commands>
+    <commands>run,stop,status,restart</commands>
     <error_id type="integer">0</error_id>
     <error_string/>
   </service>
@@ -264,20 +259,13 @@ GET <hostname>/services/smbfs.xml
 
 returns
 
-<services> 
-  <service>
+<service>
     <link>smbfs</link>
     <path>/etc/init.d/smbfs</path>
-    <commands>
-      <link>run</link>
-       <link>stop</link>
-       <link>status</link>
-       <link>restart</link>
-    </commands>
+    <commands>run,stop,status,restart</commands>
     <error_id type="integer">0</error_id>
     <error_string/>
-  </service>
-</services> 
+</service>
 
 == <hostname>/services/<servicename>/commands/<command> ==
 ----------------------------------------------------------

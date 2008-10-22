@@ -38,7 +38,7 @@ class ServicesController < ApplicationController
       #converting to an array for xml and json
       serviceArray = []
       @services.each {|key, value| 
-        serviceArray << {:link => key, :path =>value.path, :commands => value.commands.inspect, 
+        serviceArray << {:link => key, :path =>value.path, :commands => value.commands.join(","), 
                          :error_id => value.error_id, :error_string => value.error_string}
       }
 

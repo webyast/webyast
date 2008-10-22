@@ -112,11 +112,7 @@ class Lsbservice
     xml.service do
       xml.tag!(:link, @link )
       xml.tag!(:path, @path )
-      xml.commands do
-	@commands.each do |f|
-	  xml.tag!(:link, f)
-	end
-      end
+      xml.tag!(:commands, @commands.join(","))
       xml.tag!(:error_id, @error_id )
       xml.tag!(:error_string, @error_sting )
     end  
