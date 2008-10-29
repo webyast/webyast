@@ -17,10 +17,10 @@ class ServicesController < ApplicationController
     if data
       respond_to do |format|
 	format.xml do
-	  render :xml => data.to_xml (:root => "services")
+	  render :xml => data.to_xml(:root => "services")
 	end
 	format.json do
-	  render :json => data.to_json (:root => "services")
+	  render :json => data.to_json(:root => "services")
 	end
 	format.html do
 	  render
@@ -44,10 +44,10 @@ class ServicesController < ApplicationController
 
       respond_to do |format|
 	format.xml do
-	  render :xml => serviceArray.to_xml (:root => "services")
+	  render :xml => serviceArray.to_xml(:root => "services")
         end
 	format.json do
-	  render :json => serviceArray.to_json (:root => "services")
+	  render :json => serviceArray.to_json(:root => "services")
 	end
 	format.html do
 	  render

@@ -61,7 +61,7 @@ class CommandsController < ApplicationController
          permissionCheck( single_policy))
 
        cmd = "/usr/sbin/rc" + params[:service_id] + " " + id
-       logger.debug "SetTime cmd #{cmd}"
+       logger.debug "Service cmd #{cmd}"
        ret = Scr.execute(cmd)
        @service.error_id = ret[:exit].to_i
        @service.error_string = ret[:stderr]

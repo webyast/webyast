@@ -4,11 +4,11 @@ Configuration
 After you have installed this package you have to setup the database:
 
 cd /srv/www/yast/
-rake
+rake db:migrate
 
-And install "session"
+And install "session" with:
 
-sudo gem install session
+gem install session
 
 -------------------------------------------------------------------------
 DBUS
