@@ -408,7 +408,8 @@ GET <hostname>/users/tux.xml returns
   <error_string/>
 </user>
 
-PUT <hostname>/users/tux.xml update the user account of tux
+PUT <hostname>/users/tux.xml 
+or PUT <hostname>/users/tux/update.xml update the user account of tux
 
 <user>
   <defaultGroup>users</defaultGroup>
@@ -432,7 +433,8 @@ Note: Each single value can be get or set explicit.
 
 e.g. GET <hostname>/users/tux/uid.xml returns the UID of of the user tux only.
 
-POST <hostname>/users.xml creates a new user account with the values:
+POST <hostname>/users.xml 
+or POST <hostname>/users/new/create.xml creates a new user account with the values:
 
 <user>
   <defaultGroup>users</defaultGroup>

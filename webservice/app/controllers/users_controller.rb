@@ -19,7 +19,7 @@ class UsersController < ApplicationController
        @users = []
        lines::each do |s|   
           user = User.new 	
-          user.loginName = s
+          user.loginName = s.rstrip
           @users << user
        end
     else
@@ -37,7 +37,7 @@ class UsersController < ApplicationController
     else
       saveKey = nil
     end
-    ret = Scr.execute("LANG=en.UTF-8 /sbin/yast2 users show username=#{id} batchmode")
+    ret = Scr.execute("LANG=en.UTF-8 /sbin/yast2 users show username=#{id}")
      lines = ret[:stderr].split "\n"
      counter = 0
      @user = User.find(:first)
@@ -238,8 +238,8 @@ class UsersController < ApplicationController
 
     respond_to do |format|
       format.html # index.html.erb
-      format.xml  { render :xml => @users }
-      format.json { render :json => @users.to_json }
+      format.xml  { render :xml => @users, :location => "none" }
+      format.json { render :json => @users.to_json, :location => "none" }
     end
   end
 
@@ -256,8 +256,8 @@ class UsersController < ApplicationController
 
     respond_to do |format|
       format.html # show.html.erb
-      format.xml  { render :xml => @user }
-      format.json { render :json => @user.to_json }
+      format.xml  { render :xml => @user, :location => "none" }
+      format.json { render :json => @user.to_json, :location => "none" }
     end
   end
 
@@ -271,8 +271,8 @@ class UsersController < ApplicationController
     end
     respond_to do |format|
       format.html # new.html.erb
-      format.xml  { render :xml => @user }
-      format.json  { render :json => @user }
+      format.xml  { render :xml => @user, :location => "none" }
+      format.json  { render :json => @user, :location => "none" }
     end
   end
 
@@ -305,9 +305,9 @@ class UsersController < ApplicationController
       else
          format.html { render :action => "new" }
       end
-      format.xml  { render :xml => @user.to_xml( :root => "systemtime",
-                    :dasherize => false) }
-      format.json  { render :json => @user.to_json }
+      format.xml  { render :xml => @user.to_xml( :root => "user",
+                    :dasherize => false), :location => "none" }
+      format.json  { render :json => @user.to_json, :location => "none" }
     end
   end
 
@@ -339,9 +339,9 @@ class UsersController < ApplicationController
           flash[:notice] = @user.error_string
           format.html { redirect_to :back, :action => "show" }
        end
-       format.xml  { render :xml => @user.to_xml( :root => "systemtime",
-                     :dasherize => false) }
-       format.json  { render :json => @user.to_json }
+       format.xml  { render :xml => @user.to_xml( :root => "user",
+                     :dasherize => false), :location => "none" }
+       format.json  { render :json => @user.to_json, :location => "none" }
     end
   end
 
@@ -361,9 +361,9 @@ class UsersController < ApplicationController
     end
     respond_to do |format|
        format.html { redirect_to(users_url) }
-       format.xml  { render :xml => @user.to_xml( :root => "systemtime",
-                     :dasherize => false) }
-       format.json  { render :json => @user.to_json }
+       format.xml  { render :xml => @user.to_xml( :root => "user",
+                     :dasherize => false), :location => "none" }
+       format.json  { render :json => @user.to_json, :location => "none" }
     end
   end
 
@@ -380,7 +380,7 @@ class UsersController < ApplicationController
     logger.debug "exportssh: #{@user.inspect}"
     respond_to do |format|
       format.html # new.html.erb
-      format.xml  { render :xml => @user }
+      format.xml  { render :xml => @user, :location => "none" }
     end
   end
 
@@ -455,10 +455,10 @@ class UsersController < ApplicationController
       respond_to do |format|
         format.xml do
           render :xml => @user.to_xml( :root => "users",
-            :dasherize => false )
+            :dasherize => false ), :location => "none"
         end
         format.json do
-	  render :json => @user.to_json
+	  render :json => @user.to_json, :location => "none"
         end
         format.html do
           render :file => "#{RAILS_ROOT}/app/views/users/show.html.erb"
@@ -586,10 +586,10 @@ class UsersController < ApplicationController
 
         format.xml do
             render :xml => @user.to_xml( :root => "user",
-                     :dasherize => false )
+                     :dasherize => false ), :location => "none"
         end
         format.json do
-           render :json => @user.to_json
+           render :json => @user.to_json, :location => "none"
         end
       end
     end
