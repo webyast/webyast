@@ -348,7 +348,7 @@ secondLanguages: a list of languages separeted by commas
 available:       languages which are available on the system
 
 
-PUT <hostname>/language.xml with values: 
+PUT or POST <hostname>/language.xml with values: 
 
 <language>
   <firstLanguage>de_DE</firstLanguage>

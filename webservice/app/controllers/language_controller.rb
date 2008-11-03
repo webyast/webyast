@@ -19,14 +19,14 @@ class LanguageController < ApplicationController
 
   def get_available
      ret = Scr.execute("LANG=en.UTF-8 /sbin/yast2 language list")
-     @language.available = ret[:stderr].split "\n"
+     @language.available = ret[:stderr]
   end
 
   def get_languages
      ret = Scr.execute("LANG=en.UTF-8 /sbin/yast2 language summary")
      lines = ret[:stderr].split "\n"
      lines::each do |s|    	
-       column = s.split (" ")
+       column = s.split(" ")
        case column[0]
          when "Current"
            @language.firstLanguage = column[2] 
@@ -84,12 +84,16 @@ class LanguageController < ApplicationController
 
       format.xml do
         render :xml => language.to_xml( :root => "language",
-          :dasherize => false )
+          :dasherize => false), :location => "none"
       end
       format.json do
-	render :json => language.to_json
+	render :json => language.to_json, :location => "none"
       end
     end
+  end
+
+  def create
+     update
   end
 
   def index
@@ -105,10 +109,10 @@ class LanguageController < ApplicationController
     respond_to do |format|
       format.xml do
         render :xml => @language.to_xml( :root => "language",
-          :dasherize => false )
+          :dasherize => false), :location => "none"
       end
       format.json do
-	render :json => @language.to_json
+	render :json => @language.to_json, :location => "none"
       end
       format.html do
         render 

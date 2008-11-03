@@ -367,7 +367,7 @@ class UsersController < ApplicationController
     end
   end
 
-  # GET /users/1/edit/exportssh
+  # GET /users/1/exportssh
   def exportssh
     if (!permissionCheck( "org.opensuse.yast.webservice.write-user") and
         !permissionCheck( "org.opensuse.yast.webservice.write-user-sshkey"))
@@ -379,7 +379,7 @@ class UsersController < ApplicationController
     end
     logger.debug "exportssh: #{@user.inspect}"
     respond_to do |format|
-      format.html # new.html.erb
+      format.html # exportssh.html.erb
       format.xml  { render :xml => @user, :location => "none" }
     end
   end
