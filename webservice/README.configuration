@@ -68,6 +68,11 @@ For testing you can grant all permissions to you and lighttp by adding
       <return result="yes"/>
   </match>
 </match> 
+<match user="lighttpd|schubi">
+  <match action="org.freedesktop.packagekit.package-install">
+      <return result="yes"/>
+  </match>
+</match>
 
 </config>
 
