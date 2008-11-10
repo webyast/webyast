@@ -1,4 +1,4 @@
-
+require "dbus"
 require 'socket'
 require 'thread'
 require 'singleton'
@@ -30,7 +30,7 @@ class MainPkg
         b.update_buffer
         while m = b.pop_message
           b.process(m)
-	  if m.member = "Finished" || m.member = "Error"
+	  if m.member == "Finished" || m.member == "Errorcode"
             finished = true
             if m.member == "Error" 
                ok = false
@@ -79,6 +79,7 @@ class PatchUpdatesController < ApplicationController
          update.arch = columns[2]
          update.repo = columns[3]
          @patch_updates << update
+         @finished = true
        end
 
        objTid.on_signal("Error") do |u1,u2|

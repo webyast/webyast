@@ -32,7 +32,7 @@ class MainPkg
         b.update_buffer
         while m = b.pop_message
           b.process(m)
-	  if m.member = "Finished" || m.member = "Errorcode"
+	  if m.member == "Finished" || m.member == "Errorcode"
             finished = true
           end
         end
@@ -79,31 +79,25 @@ objTid_with_iface = objTid["org.freedesktop.PackageKit.Transaction"]
 objTid.default_iface = "org.freedesktop.PackageKit.Transaction"
 
 @finished = false
-puts "xxxxxxxxx"
 objTid.on_signal("Package") do |u1,u2,u3|
+        puts "PATCH"
+        puts "====="
   	puts u1
   	puts u2
   	puts u3
-puts "xxxxxxxxx1"
+  @finished= true
 end
-
 objTid.on_signal("Errorcode") do |u1,u2|
   	puts u1
   	puts u2
         @finished = true
-puts "xxxxxxxxx2"
 end
-
 objTid.on_signal("Finished") do |u1,u2|
-puts "xxxxxxxxx3"
   	puts u1
   	puts u2
         @finished = true
-puts "xxxxxxxxx3"
 end
-
 p objTid_with_iface.GetUpdates("NONE")
-
 if !@finished
   @main = MainPkg.new
   @main << system_bus
