@@ -14,9 +14,8 @@ class ConfigNtpController < ApplicationController
      servers = ret[:stderr].split "\n"
      servers::each do |s|
        column = s.split(" ")
-       column::each do |l|
-         if l=="Server"
-           if column[1] != "0.pool.ntp.org" && column[1] != "1.pool.ntp.org" && column[1] != "2.pool.ntp.org"
+       if column.size == 2 && column[0] == "Server"
+          if column[1] != "0.pool.ntp.org" && column[1] != "1.pool.ntp.org" && column[1] != "2.pool.ntp.org"
              if manual_server == "" 
 	        # Thats one user defined ntp-server
                 manual_server = column[1]
@@ -24,8 +23,7 @@ class ConfigNtpController < ApplicationController
                 #There are more than one user defined server --> do not use it
                 manual_server = "No single configured ntp server"
              end
-           end
-         end
+          end
        end
      end
      return manual_server
@@ -43,28 +41,26 @@ class ConfigNtpController < ApplicationController
 
    def writeNTPConf (requestedServers)
      #remove evtl.old server if requested
+     servers = []
      ret = Scr.execute("/sbin/yast2  ntp-client list")
-     servers = ret[:stderr].split "\n"
-     servers::each do |s|
+     serversLine = ret[:stderr].split "\n"
+     serversLine::each do |s|
        column = s.split " "
-       column::each do |l|
-         if l=="Server"
-	   servers << column[1]
-         end
+       if column.size == 2 && column[0] == "Server"
+	  servers << column[1]
        end
      end
-
      updateRequired = false
      requestedServers::each do |reqServer|
        found = false
-         servers::each do |server|
-          if server=reqServer
-            found = true
+       servers::each do |server|
+          if server==reqServer
+             found = true
           end
-        end
-        if !found
+       end
+       if !found
           updateRequired = true
-        end
+       end
      end
 
      #update required
@@ -137,7 +133,7 @@ class ConfigNtpController < ApplicationController
             logger.debug "UPDATED: #{ntp.inspect}"
        
             requestedServers = []
-            if ntp.use_random_server = false
+            if ntp.use_random_server == false
               requestedServers << ntp.manual_server
             else
               requestedServers = ["0.pool.ntp.org", "1.pool.ntp.org", "2.pool.ntp.org"]
