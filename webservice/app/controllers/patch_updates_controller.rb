@@ -152,7 +152,7 @@ class PatchUpdatesController < ApplicationController
     objTid.on_signal("Finished") do |u1,u2|
       @finished = true
     end
-    objTid_with_iface.InstallPackages([updateId])
+    objTid_with_iface.UpdatePackages([updateId])
 
     if !@finished
       @main = MainPkg.new
