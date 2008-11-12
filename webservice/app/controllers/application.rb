@@ -32,6 +32,7 @@ public
 
   def permissionCheck(action)
     if polkit_check( action, self.current_account.login) == 0
+       logger.debug "Action: #{action} User: #{self.current_account.login} Result: ok"
        return true
     else
        #checking roles
@@ -39,10 +40,12 @@ public
        roles.each do |role|
           if ( role != self.current_account.login and
                polkit_check( action, role) == 0)
+             logger.debug "Action: #{action} User: #{self.current_account.login} WITH role #{role} Result: ok"
              return true
           end
        end
     end
+    logger.debug "Action: #{action} User: #{self.current_account.login} Result: NOT granted"
     return false
   end
 
