@@ -237,7 +237,7 @@ class UsersController < ApplicationController
     get_userList
 
     respond_to do |format|
-      format.html # index.html.erb
+      format.html { render :xml => @users, :location => "none" } #return xml only
       format.xml  { render :xml => @users, :location => "none" }
       format.json { render :json => @users.to_json, :location => "none" }
     end
@@ -255,7 +255,7 @@ class UsersController < ApplicationController
     end       
 
     respond_to do |format|
-      format.html # show.html.erb
+      format.html { render :xml => @user, :location => "none" } #return xml only
       format.xml  { render :xml => @user, :location => "none" }
       format.json { render :json => @user.to_json, :location => "none" }
     end
@@ -270,7 +270,7 @@ class UsersController < ApplicationController
        @user.error_string = "no permission"
     end
     respond_to do |format|
-      format.html # new.html.erb
+      format.html { render :xml => @user, :location => "none" } #return xml only
       format.xml  { render :xml => @user, :location => "none" }
       format.json  { render :json => @user, :location => "none" }
     end
@@ -299,12 +299,8 @@ class UsersController < ApplicationController
        add_user
     end
     respond_to do |format|
-      if @user.error_id == 0
-         flash[:notice] = 'User was successfully created.'
-         format.html { redirect_to(users_url) }
-      else
-         format.html { render :action => "new" }
-      end
+      format.html  { render :xml => @user.to_xml( :root => "user",
+                    :dasherize => false), :location => "none" } #return xml only
       format.xml  { render :xml => @user.to_xml( :root => "user",
                     :dasherize => false), :location => "none" }
       format.json  { render :json => @user.to_json, :location => "none" }
@@ -332,13 +328,8 @@ class UsersController < ApplicationController
        end
     end
     respond_to do |format|
-       if @user.error_id == 0
-          flash[:notice] = 'User was successfully updated.'
-          format.html { redirect_to(users_url) }
-       else
-          flash[:notice] = @user.error_string
-          format.html { redirect_to :back, :action => "show" }
-       end
+       format.html  { render :xml => @user.to_xml( :root => "user",
+                     :dasherize => false), :location => "none" }
        format.xml  { render :xml => @user.to_xml( :root => "user",
                      :dasherize => false), :location => "none" }
        format.json  { render :json => @user.to_json, :location => "none" }
@@ -360,7 +351,8 @@ class UsersController < ApplicationController
        logger.debug "DELETE: #{@user.inspect}"
     end
     respond_to do |format|
-       format.html { redirect_to(users_url) }
+       format.html { render :xml => @user.to_xml( :root => "user",
+                     :dasherize => false), :location => "none" } #return xml only
        format.xml  { render :xml => @user.to_xml( :root => "user",
                      :dasherize => false), :location => "none" }
        format.json  { render :json => @user.to_json, :location => "none" }
@@ -379,8 +371,9 @@ class UsersController < ApplicationController
     end
     logger.debug "exportssh: #{@user.inspect}"
     respond_to do |format|
-      format.html # exportssh.html.erb
+      format.html { render :xml => @user, :location => "none" } #return xml only
       format.xml  { render :xml => @user, :location => "none" }
+      format.json { render :json => @user, :location => "none" }
     end
   end
 
@@ -461,7 +454,8 @@ class UsersController < ApplicationController
 	  render :json => @user.to_json, :location => "none"
         end
         format.html do
-          render :file => "#{RAILS_ROOT}/app/views/users/show.html.erb"
+          render :xml => @user.to_xml( :root => "users",
+            :dasherize => false ), :location => "none" #return xml only
         end
       end      
     else
@@ -578,12 +572,10 @@ class UsersController < ApplicationController
            @user.error_string = "format or internal error"
         end
 
-        if @user.error_id == 0
-           format.html { redirect_to :action => "show" }
-        else
-           format.html { render :action => "edit" }
+        format.html do
+            render :xml => @user.to_xml( :root => "user",
+                     :dasherize => false ), :location => "none" #return xml only
         end
-
         format.xml do
             render :xml => @user.to_xml( :root => "user",
                      :dasherize => false ), :location => "none"
