@@ -113,12 +113,10 @@ require "scr"
          systemtime.error_string = "no permission"
       end
 
-      if systemtime.error_id == 0
-        format.html { redirect_to :action => "show" }
-      else
-        format.html { render :action => "edit" }
+      format.html do
+        render :xml => systemtime.to_xml( :root => "systemtime",
+          :dasherize => false ), :location => "none" #return xml value only
       end
-
       format.xml do
         render :xml => systemtime.to_xml( :root => "systemtime",
           :dasherize => false ), :location => "none"
@@ -156,7 +154,8 @@ require "scr"
 	render :json => @systemtime.to_json
       end
       format.html do
-        render
+        render :xml => @systemtime.to_xml( :root => "systemtime",
+          :dasherize => false ) #return xml only
       end
     end
   end
@@ -213,7 +212,8 @@ require "scr"
 	  render :json => @systemtime.to_json
         end
         format.html do
-          render :file => "#{RAILS_ROOT}/app/views/systemtime/show.html.erb"
+          render :xml => @systemtime.to_xml( :root => "systemtime",
+            :dasherize => false ) #return xml only
         end
       end      
     else
@@ -257,12 +257,10 @@ require "scr"
            @systemtime.error_string = "format or internal error"
         end
 
-        if @systemtime.error_id == 0
-           format.html { redirect_to :action => "show" }
-        else
-           format.html { render :action => "edit" }
+        format.html do
+            render :xml => @systemtime.to_xml( :root => "systemtime",
+                   :dasherize => false ) #return xml only
         end
-
         format.xml do
             render :xml => @systemtime.to_xml( :root => "systemtime",
                    :dasherize => false )
