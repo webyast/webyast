@@ -76,12 +76,10 @@ class LanguageController < ApplicationController
          language.error_string = "no permission"
       end
 
-      if language.error_id == 0
-        format.html { redirect_to :action => "show" }
-      else
-        format.html { render :action => "edit" }
+      format.html do
+        render :xml => language.to_xml( :root => "language",
+          :dasherize => false), :location => "none" #return xml only
       end
-
       format.xml do
         render :xml => language.to_xml( :root => "language",
           :dasherize => false), :location => "none"
@@ -115,7 +113,8 @@ class LanguageController < ApplicationController
 	render :json => @language.to_json, :location => "none"
       end
       format.html do
-        render 
+        render :xml => @language.to_xml( :root => "language",
+          :dasherize => false), :location => "none" #return xml only
       end
     end
   end
@@ -168,7 +167,8 @@ class LanguageController < ApplicationController
 	  render :json => @language.to_json
         end
         format.html do
-          render :file => "#{RAILS_ROOT}/app/views/language/index.html.erb"
+          render :xml => @language.to_xml( :root => "language",
+            :dasherize => false ) #return xml only
         end
       end      
     else
@@ -203,12 +203,10 @@ class LanguageController < ApplicationController
            @language.error_id = 2
            @language.error_string = "format or internal error"
         end
-        if @language.error_id == 0
-           format.html { redirect_to :action => "show" }
-        else
-           format.html { render :action => "edit" }
+        format.xml do
+            render :xml => @language.to_xml( :root => "language",
+                   :dasherize => false ) #return xml only
         end
-
         format.xml do
             render :xml => @language.to_xml( :root => "language",
                    :dasherize => false )
