@@ -23,7 +23,7 @@ class ServicesController < ApplicationController
 	  render :json => data.to_json(:root => "services")
 	end
 	format.html do
-	  render
+	  render :xml => data.to_xml(:root => "services") #return xml only
 	end
       end
     else
@@ -50,7 +50,7 @@ class ServicesController < ApplicationController
 	  render :json => serviceArray.to_json(:root => "services")
 	end
 	format.html do
-	  render
+	  render :xml => serviceArray.to_xml(:root => "services") #return xml only
 	end
       end
   end
@@ -59,7 +59,7 @@ class ServicesController < ApplicationController
     id = params[:id]
     init_services unless session['services']
     @service = session['services'][id]
-    STDERR.puts "show@service #{@service}"
+    logger.debug "show@service #{@service.inspect}"
     respond @service
    end
 end

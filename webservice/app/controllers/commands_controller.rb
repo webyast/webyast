@@ -18,7 +18,7 @@ class CommandsController < ApplicationController
     session['services'] = services
   end
   def respond data
-    STDERR.puts "Respond #{data.class}"
+    logger.debug "Respond #{data.class}"
     if data
       respond_to do |format|
 	format.xml do
@@ -28,7 +28,7 @@ class CommandsController < ApplicationController
 	  render :json => data.to_json
 	end
 	format.html do
-	  render
+	  render :xml => data.to_xml #return xml only
 	end
       end
     else
@@ -39,7 +39,7 @@ class CommandsController < ApplicationController
 
   def index
     id = params[:service_id]
-    STDERR.puts "services/show #{id}"
+    logger.debug "services/show #{id}"
     init_services unless session['services']
     @service = session['services'][id]
     respond @service
@@ -71,12 +71,9 @@ class CommandsController < ApplicationController
     end       
 
     respond_to do |format|
-       if @service.error_id  == 0
-          flash[:notice] = 'Command has been run successfully'
-          format.html { redirect_to :back, :action => "show" }
-       else
-          flash[:notice] = 'Command has NOT been run successfully'
-          format.html { redirect_to :back, :action => "show" }
+       format.html do
+          render :xml => @service.to_xml( :root => "systemtime", 
+                 :dasherize => false ) #return xml only
        end
        format.xml do
           render :xml => @service.to_xml( :root => "systemtime",
