@@ -118,7 +118,8 @@ class ConfigNtpController < ApplicationController
 	render :json => @ntp.to_json
       end
       format.html do
-        render
+        render :xml => @ntp.to_xml( :root => "config_ntp",
+          :dasherize => false ) #return xml only
       end
     end
   end
@@ -149,12 +150,10 @@ class ConfigNtpController < ApplicationController
          ntp.error_string = "no permission"
       end
 
-      if ntp.error_id == 0
-        format.html { redirect_to :action => "show" }
-      else
-        format.html { render :action => "edit" }
+      format.html do
+        render :xml => ntp.to_xml( :root => "config_ntp",
+          :dasherize => false ) #return xml only
       end
-
       format.xml do
         render :xml => ntp.to_xml( :root => "config_ntp",
           :dasherize => false )
@@ -214,7 +213,8 @@ class ConfigNtpController < ApplicationController
 	  render :json => @ntp.to_json
         end
         format.html do
-          render :file => "#{RAILS_ROOT}/app/views/config_ntp/show.html.erb"
+          render :xml => @ntp.to_xml( :root => "config_ntp",
+            :dasherize => false ) #return xml only
         end
       end      
     else
@@ -269,12 +269,10 @@ class ConfigNtpController < ApplicationController
             @ntp.error_string = "format or internal error"
          end
 
-         if @ntp.error_id == 0
-            format.html { redirect_to :action => "show" }
-         else
-            format.html { render :action => "edit" }
+         format.html do
+             render :xml => @ntp.to_xml( :root => "config_ntp",
+                    :dasherize => false ) #return xml only
          end
-
          format.xml do
              render :xml => @ntp.to_xml( :root => "config_ntp",
                     :dasherize => false )

@@ -18,8 +18,7 @@ class PermissionController < ApplicationController
          render :json => @cmdRet.to_json
        end
        format.html do
-         redirect_back_or_default('/')
-         flash[:notice] = @cmdRet["permission"]
+	 render :xml => @cmdRet.to_xml #return xml onl
        end
      end
   end
