@@ -188,6 +188,9 @@ class UsersController < ApplicationController
     command += " batchmode"
 
     ret = Scr.execute(command)
+
+    logger.debug "Command returns: #{ret.inspect}"
+
     if ret[:exit] == 0
       return true
     else
