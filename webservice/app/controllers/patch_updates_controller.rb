@@ -180,7 +180,7 @@ class PatchUpdatesController < ApplicationController
   def index
     get_updateList
     respond_to do |format|
-      format.html # index.html.erb
+      format.html { render :xml => @patch_updates } #return xml only
       format.xml  { render :xml => @patch_updates }
       format.json { render :json => @patch_updates.to_json }
     end
@@ -192,7 +192,7 @@ class PatchUpdatesController < ApplicationController
     get_update params[:id]
 
     respond_to do |format|
-      format.html # show.html.erb
+      format.html { render :xml => @patch_update } #return xml only
       format.xml  { render :xml => @patch_update }
       format.json { render :json => @patch_update.to_json }
     end
@@ -214,7 +214,7 @@ class PatchUpdatesController < ApplicationController
     end
 
     respond_to do |format|
-      format.html { redirect_to(patch_updates_url) }
+      format.html { render :xml => update } #return xml only
       format.xml  { render :xml => update }
       format.json { render :json => update.to_json }
     end
