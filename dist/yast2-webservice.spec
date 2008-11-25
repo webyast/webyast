@@ -28,8 +28,8 @@ Source6:        yast_user_roles
 Source7:        lighttpd.conf
 Source8:        modules.conf
 Source9:        yastwebd
+Source10:       rpam
 BuildRoot:      %{_tmppath}/%{name}-%{version}-build
-BuildArchitectures: noarch
 
 #
 %define pkg_user yastwebd
@@ -84,6 +84,10 @@ mkdir -p $RPM_BUILD_ROOT/etc/yastwebd/tools
 install -m 0644 %SOURCE5 $RPM_BUILD_ROOT/etc/yastwebd/tools
 install -m 0644 %SOURCE6 $RPM_BUILD_ROOT/etc/
 
+#PAM configuration
+mkdir -p $RPM_BUILD_ROOT/etc/pam.d
+install -m 0644 %SOURCE10 $RPM_BUILD_ROOT/etc/pam.d/
+
 
 %clean
 #rm -rf $RPM_BUILD_ROOT
@@ -114,6 +118,8 @@ install -m 0644 %SOURCE6 $RPM_BUILD_ROOT/etc/
 %dir /etc/yastwebd/vhosts.d
 %dir /usr/share/PolicyKit
 %dir /usr/share/PolicyKit/policy
+%dir /etc/pam.d
+%config /etc/pam.d/rpam
 %config /etc/yastwebd/www/app
 %config /etc/yastwebd/www/db
 %config /etc/yastwebd/www/doc
