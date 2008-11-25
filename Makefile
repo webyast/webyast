@@ -19,5 +19,5 @@ all:
         find www -name "*.auto" -exec rm {} \;; \
         find www -name ".gitignore" -exec rm {} \;; \
 	tar cvfj package/www.tar.bz2 www; \
-        chmod 644 package/www.tar.bz2
+        chmod 644 package/www.tar.bz2; \
         rm -rf www

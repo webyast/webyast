@@ -125,7 +125,7 @@ install -m 0644 %SOURCE6 $RPM_BUILD_ROOT/etc/
 %config /etc/yastwebd/www/script
 %config /etc/yastwebd/www/test
 %config /etc/yastwebd/www/config
-%config /etc/yastwebd/tools/policyKit-rights.rb
+%attr(755,root,root) %config /etc/yastwebd/tools/policyKit-rights.rb
 %doc README* COPYING
 %attr(-,lighttpd,lighttpd) /etc/yastwebd/www/log
 %attr(-,lighttpd,lighttpd) /etc/yastwebd/www/tmp
