@@ -15,6 +15,8 @@ all:
 	mkdir package; \
 	cp dist/* package; \
         cp -R webservice www; \
+        cp -R polKit www; \
+        cp -R rpam www; \
         find www -name "*.auto" -exec rm {} \;; \
         find www -name "*.auto" -exec rm {} \;; \
         find www -name ".gitignore" -exec rm {} \;; \

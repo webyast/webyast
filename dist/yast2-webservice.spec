@@ -10,8 +10,8 @@
 
 
 Name:           yast2-webservice
-Requires:       PackageKit, yast2-core, lighttpd-mod_magnet, ruby-fcgi, rubygem-rake, ruby-dbus, sqlite, rubygem-sqlite3
-PreReq:         lighttpd
+Requires:       yast2-core, lighttpd-mod_magnet, ruby-fcgi, rubygem-rake, ruby-dbus, sqlite, rubygem-sqlite3
+PreReq:         lighttpd, PolicyKit, PackageKit 
 License:        GPL
 Group:          Productivity/Networking/Web/Utilities
 Autoreqprov:    on
@@ -30,6 +30,7 @@ Source8:        modules.conf
 Source9:        yastwebd
 Source10:       rpam
 BuildRoot:      %{_tmppath}/%{name}-%{version}-build
+BuildRequires:  ruby-devel
 
 #
 %define pkg_user yastwebd
@@ -48,7 +49,31 @@ Authors:
 
 %build
 
+#
+# Building PolicyKit and PAM bindings
+#
+cd polKit
+ruby extconf.rb
+make
+cd ..
+cd rpam/ext/Rpam
+ruby extconf.rb
+make
+cd ../../..
+
 %install
+
+#
+# Install PolicyKit and PAM bindings
+#
+cd polKit
+make install DESTDIR=%{buildroot}
+cd ..
+cd rpam/ext/Rpam
+make install DESTDIR=%{buildroot}
+cd ../../..
+rm -rf rpam polKit
+
 #
 # Install all web and frontend parts.
 #
@@ -144,4 +169,5 @@ install -m 0644 %SOURCE10 $RPM_BUILD_ROOT/etc/pam.d/
 %config(noreplace) /etc/yast_user_roles
 %config(noreplace)  %{_sysconfdir}/init.d/%{pkg_user}
 %{_sbindir}/rc%{pkg_user}
-
+%{_libdir}/ruby/site_ruby/1.8/i586-linux/polKit.so
+%{_libdir}/ruby/site_ruby/1.8/i586-linux/rpam.so
