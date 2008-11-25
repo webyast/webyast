@@ -14,4 +14,10 @@ all:
         find . -name "*.bak" -exec rm {} \; ;\
 	mkdir package; \
 	cp dist/* package; \
-	tar cvfj package/webservice.tar.bz2 webservice
+        cp -R webservice www; \
+        find www -name "*.auto" -exec rm {} \;; \
+        find www -name "*.auto" -exec rm {} \;; \
+        find www -name ".gitignore" -exec rm {} \;; \
+	tar cvfj package/www.tar.bz2 www; \
+        chmod 644 package/www.tar.bz2
+        rm -rf www
