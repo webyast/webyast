@@ -136,13 +136,13 @@ else
    echo "Permission for yastwebd in PolicyKit.conf granted"
    perl -p -i.orig -e 's|</config>|<match user="yastwebd">\n  <match action="org.opensuse.yast.scr.*">\n   <return result="yes"/>\n  </match>\n</match>\n</config>|' /etc/PolicyKit/PolicyKit.conf
 fi
-/usr/bin/polkit-auth --user yastwebd --grant org.freedesktop.packagekit.system-update
-/usr/bin/polkit-auth --user yastwebd --grant org.freedesktop.policykit.read
+/usr/bin/polkit-auth --user yastwebd --grant org.freedesktop.packagekit.system-update >& /dev/null || :
+/usr/bin/polkit-auth --user yastwebd --grant org.freedesktop.policykit.read >& /dev/null || :
 
 #
 # granting all permissions for root 
 #
-/etc/yastwebd/tools/policyKit-rights.rb --user root --action grant
+/etc/yastwebd/tools/policyKit-rights.rb --user root --action grant >& /dev/null || :
 
 %preun
 %stop_on_removal %{pkg_user}
