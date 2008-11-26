@@ -17,7 +17,7 @@ class UsersController < ApplicationController
        ret = Scr.execute("LANG=en.UTF-8 /sbin/yast2 users list")
        lines = ret[:stderr].split "\n"
        @users = []
-       lines::each do |s|   
+       lines.each do |s|   
           user = User.new 	
           user.loginName = s.rstrip
           @users << user
@@ -45,7 +45,7 @@ class UsersController < ApplicationController
        @user = User.new
        @user.save
      end
-     lines::each do |s|   
+     lines.each do |s|   
        if counter+1 <= lines.length
          case s
          when "Full Name:"

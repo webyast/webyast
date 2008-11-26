@@ -21,7 +21,7 @@ require "scr"
      ret = Scr.execute("LANG=en.UTF-8 /sbin/yast2 timezone list")
      lines = ret[:stderr].split "\n"
      ret = []
-     lines::each do |l|   
+     lines.each do |l|   
        if l.length > 0 && l.casecmp("Region: ") == -1
           lang = l.split " "
           ret << " " << lang[0]

@@ -25,7 +25,7 @@ class LanguageController < ApplicationController
   def get_languages
      ret = Scr.execute("LANG=en.UTF-8 /sbin/yast2 language summary")
      lines = ret[:stderr].split "\n"
-     lines::each do |s|    	
+     lines.each do |s|    	
        column = s.split(" ")
        case column[0]
          when "Current"

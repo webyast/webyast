@@ -20,6 +20,7 @@ all:
         find www -name "*.auto" -exec rm {} \;; \
         find www -name "*.auto" -exec rm {} \;; \
         find www -name ".gitignore" -exec rm {} \;; \
+        rm www/db/*.sqlite3; \
 	tar cvfj package/www.tar.bz2 www; \
         chmod 644 package/www.tar.bz2; \
         rm -rf www

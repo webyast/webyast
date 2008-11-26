@@ -10,8 +10,8 @@
 
 
 Name:           yast2-webservice
-Requires:       yast2-core, lighttpd-mod_magnet, ruby-fcgi, rubygem-rake, ruby-dbus, sqlite, rubygem-sqlite3
-PreReq:         lighttpd, PolicyKit, PackageKit 
+Requires:       yast2-core, lighttpd-mod_magnet, ruby-fcgi, ruby-dbus, sqlite
+PreReq:         lighttpd, PolicyKit, PackageKit, rubygem-rake, rubygem-sqlite3, rubygem-rails
 License:        GPL
 Group:          Productivity/Networking/Web/Utilities
 Autoreqprov:    on
@@ -126,7 +126,6 @@ rm -rf $RPM_BUILD_ROOT
 
 %post
 %fillup_and_insserv %{pkg_user}
-
 #
 #granting permissions for yastwebd
 #
@@ -138,11 +137,15 @@ else
 fi
 /usr/bin/polkit-auth --user yastwebd --grant org.freedesktop.packagekit.system-update >& /dev/null || :
 /usr/bin/polkit-auth --user yastwebd --grant org.freedesktop.policykit.read >& /dev/null || :
-
 #
 # granting all permissions for root 
 #
 /etc/yastwebd/tools/policyKit-rights.rb --user root --action grant >& /dev/null || :
+#
+# create database 
+#
+cd etc/yastwebd/www
+rake db:migrate
 
 %preun
 %stop_on_removal %{pkg_user}

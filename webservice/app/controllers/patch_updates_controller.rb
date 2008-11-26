@@ -110,7 +110,7 @@ class PatchUpdatesController < ApplicationController
     if @patch_updates == nil || @patch_updates.length == 0
       get_updateList
     end
-    @patch_updates::each do |p|   
+    @patch_updates.each do |p|   
        if p.resolvableId.to_s == id.to_s
          @patch_update = p
          break

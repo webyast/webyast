@@ -12,7 +12,7 @@ class ConfigNtpController < ApplicationController
      manual_server = ""
      ret = Scr.execute("/sbin/yast2  ntp-client list")
      servers = ret[:stderr].split "\n"
-     servers::each do |s|
+     servers.each do |s|
        column = s.split(" ")
        if column.size == 2 && column[0] == "Server"
           if column[1] != "0.pool.ntp.org" && column[1] != "1.pool.ntp.org" && column[1] != "2.pool.ntp.org"
@@ -44,16 +44,16 @@ class ConfigNtpController < ApplicationController
      servers = []
      ret = Scr.execute("/sbin/yast2  ntp-client list")
      serversLine = ret[:stderr].split "\n"
-     serversLine::each do |s|
+     serversLine.each do |s|
        column = s.split " "
        if column.size == 2 && column[0] == "Server"
 	  servers << column[1]
        end
      end
      updateRequired = false
-     requestedServers::each do |reqServer|
+     requestedServers.each do |reqServer|
        found = false
-       servers::each do |server|
+       servers.each do |server|
           if server==reqServer
              found = true
           end
@@ -65,11 +65,11 @@ class ConfigNtpController < ApplicationController
 
      #update required
      if updateRequired
-       servers::each do |server|
+       servers.each do |server|
          command = "/sbin/yast2  ntp-client delete #{server}"
          Scr.execute(command)
        end
-       requestedServers::each do |reqServer|
+       requestedServers.each do |reqServer|
          command = "/sbin/yast2  ntp-client add #{reqServer}"
          Scr.execute(command)
        end
