@@ -115,7 +115,7 @@ install -m 0644 %SOURCE10 $RPM_BUILD_ROOT/etc/pam.d/
 
 
 %clean
-#rm -rf $RPM_BUILD_ROOT
+rm -rf $RPM_BUILD_ROOT
 
 %pre
 #
@@ -126,6 +126,23 @@ install -m 0644 %SOURCE10 $RPM_BUILD_ROOT/etc/pam.d/
 
 %post
 %fillup_and_insserv %{pkg_user}
+
+#
+#granting permissions for yastwebd
+#
+if grep yastwebd /etc/PolicyKit/PolicyKit.conf > /dev/null; then
+   echo "Permission for yastwebd already granted in PolicyKit.conf"
+else
+   echo "Permission for yastwebd in PolicyKit.conf granted"
+   perl -p -i.orig -e 's|</config>|<match user="yastwebd">\n  <match action="org.opensuse.yast.scr.*">\n   <return result="yes"/>\n  </match>\n</match>\n</config>|' /etc/PolicyKit/PolicyKit.conf
+fi
+/usr/bin/polkit-auth --user yastwebd --grant org.freedesktop.packagekit.system-update
+/usr/bin/polkit-auth --user yastwebd --grant org.freedesktop.policykit.read
+
+#
+# granting all permissions for root 
+#
+/etc/yastwebd/tools/policyKit-rights.rb --user root --action grant
 
 %preun
 %stop_on_removal %{pkg_user}
