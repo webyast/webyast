@@ -164,6 +164,11 @@ rake db:migrate
 %dir /usr/share/PolicyKit
 %dir /usr/share/PolicyKit/policy
 %dir /etc/pam.d
+%attr(-,%{pkg_user},%{pkg_user}) %dir %{pkg_home}
+%attr(-,%{pkg_user},%{pkg_user}) %dir %{pkg_home}/sockets
+%attr(-,%{pkg_user},%{pkg_user}) %dir %{pkg_home}/cache
+%attr(-,%{pkg_user},%{pkg_user}) %dir %{_var}/log/%{pkg_user}
+
 %config /etc/pam.d/rpam
 %config /etc/yastwebd/www/app
 %config /etc/yastwebd/www/db
@@ -178,8 +183,8 @@ rake db:migrate
 %config /etc/yastwebd/www/config
 %attr(755,root,root) %config /etc/yastwebd/tools/policyKit-rights.rb
 %doc README* COPYING
-%attr(-,lighttpd,lighttpd) /etc/yastwebd/www/log
-%attr(-,lighttpd,lighttpd) /etc/yastwebd/www/tmp
+%attr(-,%{pkg_user},%{pkg_user}) /etc/yastwebd/www/log
+%attr(-,%{pkg_user},%{pkg_user}) /etc/yastwebd/www/tmp
 %config(noreplace) /etc/yastwebd/vhosts.d/yast.conf
 %config(noreplace) /etc/yastwebd/lighttpd.conf
 %config /etc/yastwebd/vhosts.d/rails.inc
