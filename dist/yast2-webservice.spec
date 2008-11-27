@@ -146,6 +146,8 @@ fi
 #
 cd etc/yastwebd/www
 rake db:migrate
+chgrp yastwebd db db/*.sqlite*
+chown yastwebd db db/*.sqlite*
 
 %preun
 %stop_on_removal %{pkg_user}

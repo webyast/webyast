@@ -1,93 +1,21 @@
 Configuration
 ==============
 
-After you have installed this package you have to setup the database:
+All configurations should be done in the POST install section of the package.
 
-cd /srv/www/yast/
-rake db:migrate
+After you have installed the package an own lighttpd server with the 
+YaST-Webservice has been configured which is running with the 
+system account "yastwebd".
+This HTTP server is configured as "localhost" only which has the port 8080.
+This can be changed in the file /etc/yastwebd/lighttpd.conf
 
-And install "session" with:
+So, you can start the server with: "rcyastwebd start"
 
-gem install session
+Use the webbrowser with the URL http://localhost:8080
 
--------------------------------------------------------------------------
-DBUS
--------------------------------------------------------------------------
-
-Add following entry (e.g. for using lightttp) in 
-/etc/dbus-1/system.d/org.opensuse.yast.SCR.conf
-
-<busconfig>
-    <policy user="root">
-        <allow own="org.opensuse.yast.SCR"/>
-        <allow send_interface="org.opensuse.yast.SCR.Methods"/>
-    </policy>
-    <policy user="lighttpd">
-        <allow own="org.opensuse.yast.SCR"/>
-        <allow send_interface="org.opensuse.yast.SCR.Methods"/>
-    </policy>
-    <policy context="default">
-        <deny own="org.opensuse.yast.SCR"/>
-        <deny send_interface="org.opensuse.yast.SCR.Methods"/>
-    </policy>
-</busconfig>
-
--------------------------------------------------------------------------
-PAM
--------------------------------------------------------------------------
-
-Create a file /etc/pam.d/rpam with the entries:
-
-#%PAM-1.0
-auth     include        common-auth
-account  include        common-account
-password include        common-password
-session  include        common-session
-
-
--------------------------------------------------------------------------
-PolicyKit
--------------------------------------------------------------------------
-
-Webserver rights
-================
-These rights are needed for the communication between your webserver and the
-SCR agent.
-
-For testing you can grant all permissions to you and lighttp by adding
-
-- - - - - - -
-
-"http://hal.freedesktop.org/releases/PolicyKit/1.0/config.dtd">
-
-<!-- See the manual page PolicyKit.conf(5) for file format -->
-
-<config version="0.1">
-<match user="schubi|lighttpd">
-  <match action="org.opensuse.yast.scr.*">
-      <return result="yes"/>
-  </match>
-</match> 
-<match user="lighttpd|schubi">
-  <match action="org.freedesktop.packagekit.system-update">
-      <return result="yes"/>
-  </match>
-</match>
-<match user="lighttpd">
-  <match action="org.freedesktop.policykit.read">
-      <return result="yes"/>
-  </match>
-</match>
-
-
-</config>
-
-- - - - - - -
-
-to /etc/PolicyKit/PolicyKit.conf
-
-Please exchange "schubi" by the requested user account with which 
-you are running the web server.
+Login as "root". While the package installation all access rights has been
+granted to "root". For another users you will have to grant permission as
+descibed in the following sections:
 
 
 API Policies
@@ -153,65 +81,61 @@ This is a very simple way to store this information. Much more elegant would be 
 store it to another place e.g. via ldap. Make a proposal :-)
 
 
+Starting YaST webservice with webrick (not required)
+====================================================
 
-You can run the YaST webservice with two different web servers:
-
---------------------------------------------------------------------------
-webrick
---------------------------------------------------------------------------
 ROR provides an own webserver called webrick. It is nice for testing but
 should not used for "realtime".
+
+Please start this server with the root account.
+
+Configuration of Webserver rights
+------------------------------------
+These rights are needed for the communication between your webserver and the
+SCR agent.
+
+For testing you can grant all permissions to root by adding
+
+- - - snip - - -
+
+"http://hal.freedesktop.org/releases/PolicyKit/1.0/config.dtd">
+
+<!-- See the manual page PolicyKit.conf(5) for file format -->
+
+<config version="0.1">
+<match user="root">
+  <match action="org.opensuse.yast.scr.*">
+      <return result="yes"/>
+  </match>
+</match> 
+<match user="root">
+  <match action="org.freedesktop.packagekit.system-update">
+      <return result="yes"/>
+  </match>
+</match>
+<match user="root">
+  <match action="org.freedesktop.policykit.read">
+      <return result="yes"/>
+  </match>
+</match>
+
+
+</config>
+
+- - - snip end - - -
+
+to /etc/PolicyKit/PolicyKit.conf
+
 
 starting
 - - - - -
 
-cd /srv/www/yast
+cd /etc/yastwebd/www/
 script/server -p 3001
 
-Logs are written to /srv/www/yast/log
+Logs are written to /etc/yastwebd/www/log
 
 first test
 - - - - - - 
 Use the webbrowser with the URL http://0.0.0.0:3001
 
---------------------------------------------------------------------------
-lighttpd
---------------------------------------------------------------------------
-Lighttpd is a quite simple HTTP server which fulfill all requirements
-for YaST-webservice. It has only the disadvantage that it does not run
-"out of the box". So some changes in the configuration files are needed:
-
-/etc/lighttpd/lighttpd.conf
-- - - - - - - - - - - - - - -
-AKTIVATE following entries
-
-424c424
-< include_shell "cat /etc/lighttpd/vhosts.d/*.conf"
----
-> #include_shell "cat /etc/lighttpd/vhosts.d/*.conf"
-
-/etc/lighttpd/modules.conf
-- - - - - - - - - - - - - -
-AKTIVATE following entries
-
-48c48
-<   "mod_rewrite",
----
-> #  "mod_rewrite",
-89c89
-< include "conf.d/magnet.conf"
----
-> #include "conf.d/magnet.conf"
-132c132
-< include "conf.d/fastcgi.conf"
----
-> #include "conf.d/fastcgi.conf"
-
-
-Start the server: rclighttpd start
-
-Logs are written to /srv/www/yast/log
-
-first test
-- - - - - - 
-Use the webbrowser with the URL http://<your_hostname>
