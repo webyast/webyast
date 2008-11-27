@@ -1,6 +1,7 @@
 # Author "Ara T. Howard"
 # Email  "ara.t.howard@noaa.gov"
-# Homepage "http://raa.ruby-lang.org/project/session"
+# Homepage http://raa.ruby-lang.org/project/session
+# licence http://www.ruby-lang.org/en/LICENSE.txt
 
 
 require 'open3'
