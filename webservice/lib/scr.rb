@@ -60,6 +60,7 @@ def Scr.write (path, value)
 end
 
 def Scr.execute (command)
+  command = "LANG=en.UTF-8 /usr/lib/YaST2/bin/tty_wrapper " + command + " </dev/null"
   system_bus = DBus::SystemBus.instance
 
   # Get the yast service

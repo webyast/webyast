@@ -14,7 +14,7 @@ class UsersController < ApplicationController
 
   def get_userList
     if permissionCheck( "org.opensuse.yast.webservice.read-userlist")
-       ret = Scr.execute("LANG=en.UTF-8 /sbin/yast2 users list")
+       ret = Scr.execute("/sbin/yast2 users list")
        lines = ret[:stderr].split "\n"
        @users = []
        lines.each do |s|   
@@ -37,7 +37,7 @@ class UsersController < ApplicationController
     else
       saveKey = nil
     end
-    ret = Scr.execute("LANG=en.UTF-8 /sbin/yast2 users show username=#{id}")
+    ret = Scr.execute("/sbin/yast2 users show username=#{id}")
      lines = ret[:stderr].split "\n"
      counter = 0
      @user = User.find(:first)
@@ -103,7 +103,7 @@ class UsersController < ApplicationController
       ok = createSSH
     end
 
-    command = "LANG=en.UTF-8 /sbin/yast2 users edit "
+    command = "/sbin/yast2 users edit "
     if @user.fullName && @user.fullName.length > 0
       command = command + 'cn="' + @user.fullName + '" '
     end
@@ -151,7 +151,7 @@ class UsersController < ApplicationController
   end
 
   def add_user
-    command = "LANG=en.UTF-8 /sbin/yast2 users add "
+    command = "/sbin/yast2 users add "
     if @user.fullName && @user.fullName.length > 0
       command = command + 'cn="' + @user.fullName + '" '
     end
@@ -201,7 +201,7 @@ class UsersController < ApplicationController
   end
 
   def delete_user
-    command = "LANG=en.UTF-8 /sbin/yast2 users delete delete_home "
+    command = "/sbin/yast2 users delete delete_home "
     if @user.uid && @user.uid.length > 0
       command += "uid=#{@user.uid} "
     end

@@ -18,12 +18,12 @@ class LanguageController < ApplicationController
 
 
   def get_available
-     ret = Scr.execute("LANG=en.UTF-8 /sbin/yast2 language list")
+     ret = Scr.execute("/sbin/yast2 language list")
      @language.available = ret[:stderr]
   end
 
   def get_languages
-     ret = Scr.execute("LANG=en.UTF-8 /sbin/yast2 language summary")
+     ret = Scr.execute("/sbin/yast2 language summary")
      lines = ret[:stderr].split "\n"
      lines.each do |s|    	
        column = s.split(" ")

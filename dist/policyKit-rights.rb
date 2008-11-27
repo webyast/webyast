@@ -14,7 +14,7 @@ $debug = 0
 
 def usage why
 	STDERR.puts why
-	STDERR.puts "Usage: policyKit-right.rb --user <user> --action (show|grant|revoke)"
+	STDERR.puts "Usage: policyKit-rights.rb --user <user> --action (show|grant|revoke)"
         STDERR.puts "NOTE: This program should be run by user root"
         STDERR.puts ""
         STDERR.puts "This call grant/revoke ALL permissions for the YaST Webservice."
@@ -67,7 +67,8 @@ begin
                   policySplit = policy.split("-")
                   if policySplit.size >= 2
                      command = "polkit-auth --user " + user + " --explicit |grep -s " + policySplit[0] + "-" + policySplit[1] + " >>/dev/null"
-                     if !system(command) # has not already been set
+                     if ( !system(command)  or # has not already been set
+                          policy == "org.opensuse.yast.webservice.read-yastmodule" ) #special case
                        STDERR.puts "granting: #{policy}"
                        command = "polkit-auth --user " + user + " --grant " + policySplit[0] + "-" + policySplit[1]
                        system (command)

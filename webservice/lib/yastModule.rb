@@ -11,10 +11,11 @@ class YastModule
   #
   def self.each
     # run YaST to get a list of modules
-    ret = Scr.execute("LANG=en.UTF-8 /sbin/yast2 --list")
+    ret = Scr.execute("/sbin/yast2 --list")
     lines = ret[:stdout].split "\n"
     lines = lines.sort
     lines::each do |l|   
+      l = l.chomp
       if l.length > 0 && l != "Available modules:"
           yield l
       end
@@ -68,7 +69,7 @@ class YastModule
     tmpdir = Scr.read( ".target.tmpdir" );
     Scr.execute("/bin/mkdir #{tmpdir}")
     tmpfile = tmpdir + "/yastOptions" 
-    path = "LANG=en.UTF-8 /sbin/yast2 " + @id + " xmlhelp xmlfile=#{tmpfile}"
+    path = "/sbin/yast2 " + @id + " xmlhelp xmlfile=#{tmpfile}"
     Scr.execute (path)
     file = Scr.readArg(".target.string",tmpfile)
     if file != false

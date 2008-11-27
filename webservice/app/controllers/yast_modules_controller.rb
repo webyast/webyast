@@ -78,9 +78,9 @@ class YastModulesController < ApplicationController
     idPolicy = id.tr_s('_', '-')
     idPolicy = idPolicy.chomp
     idPolicy = idPolicy.downcase
-    idPolicy = "org.opensuse.yast.webservice.run-yastmodule-" + idPolicy
+    idPolicyLong = "org.opensuse.yast.webservice.run-yastmodule-" + idPolicy
     if (permissionCheck( "org.opensuse.yast.webservice.run-yastmodule") or
-        permissionCheck( idPolicy))
+        permissionCheck( idPolicyLong))
        init_modules false #check no policy
        @yastModule = @yastModules[id]
        @yastModule.commands #evaluate commands
@@ -96,7 +96,7 @@ class YastModulesController < ApplicationController
            end
          end
       
-         cmdLine = "LANG=en.UTF-8 /sbin/yast2 #{params[:id]} #{params[:command]}"
+         cmdLine = "/sbin/yast2 #{params[:id]} #{params[:command]}"
          found = false
          @yastModule.commands.each do |cname,option|
            if cname == params["command"]
@@ -131,15 +131,14 @@ class YastModulesController < ApplicationController
        else
          # no POST request
 
-         idPolicy = "org.opensuse.yast.webservice.read-yastmodule-" + idPolicy
+         idPolicyLong = "org.opensuse.yast.webservice.read-yastmodule-" + idPolicy
          if (permissionCheck( "org.opensuse.yast.webservice.read-yastmodule") or
-             permissionCheck( idPolicy))
+             permissionCheck( idPolicyLong))
             respond @yastModule
             return
          else
-            STDERR.puts "no POST request"
-            @cmdRet[:exit] = 2
-            @cmdRet[:stderr] = "no POST request"
+            @cmdRet[:exit] = 1
+            @cmdRet[:stderr] = "no permission"
             @cmdRet[:stdout] = ""
          end
        end

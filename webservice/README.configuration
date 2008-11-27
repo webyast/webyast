@@ -51,7 +51,7 @@ PolicyKit
 
 Webserver rights
 ================
-These rights are neede for the communication between your webserver and the
+These rights are needed for the communication between your webserver and the
 SCR agent.
 
 For testing you can grant all permissions to you and lighttp by adding

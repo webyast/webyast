@@ -31,7 +31,7 @@ class ConfigNtpController < ApplicationController
 
    def enabled
 
-     ret = Scr.execute("LANG=en.UTF-8 /sbin/yast2  ntp-client status")
+     ret = Scr.execute("/sbin/yast2  ntp-client status")
      if ret[:stderr]=="NTP daemon is enabled.\n"
        return true
      else      
