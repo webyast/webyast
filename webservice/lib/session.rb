@@ -1,3 +1,8 @@
+# Author "Ara T. Howard"
+# Email  "ara.t.howard@noaa.gov"
+# Homepage "http://raa.ruby-lang.org/project/session"
+
+
 require 'open3'
 require 'tmpdir'
 require 'thread'
