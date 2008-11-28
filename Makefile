@@ -17,7 +17,6 @@ all:
         cp -R polKit www; \
         cp -R rpam www; \
         find www -name "*.auto" -exec rm {} \;; \
-        find www -name "*.auto" -exec rm {} \;; \
         find www -name ".gitignore" -exec rm {} \;; \
         rm www/db/*.sqlite3; \
         rm www/log/development.log; \
