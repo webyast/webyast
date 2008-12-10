@@ -2,14 +2,14 @@
 require 'mkmf'
 
 # Give it a name
-extension_name = 'polKit'
+extension_name = 'polkit'
 
 # The destination
 dir_config(extension_name)
 
-$CFLAGS << " -I /usr/include/PolicyKit -I /usr/include/dbus-1.0 -I /usr/lib/dbus-1.0/include/"
+$CFLAGS +=  " " + `pkg-config polkit-dbus --cflags`
 
-$LDFLAGS << " -L/lib -lpolkit-dbus -lpolkit -ldbus-1 "
+$LDFLAGS +=  " " + `pkg-config polkit-dbus --libs`
              
 # Do the work
 create_makefile(extension_name)
