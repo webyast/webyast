@@ -36,9 +36,9 @@
 ### BEGIN INIT INFO
 # Provides:          yastwebd
 # Required-Start:    $syslog $remote_fs
-# Should-Start: $time ypbind sendmail
+# Should-Start: $time ypbind sendmail yastwebc
 # Required-Stop:     $syslog $remote_fs
-# Should-Stop: $time ypbind sendmail
+# Should-Stop: $time ypbind sendmail yastwebc
 # Default-Start:     3 5
 # Default-Stop:      0 1 2 6
 # Short-Description: yastwebd 
@@ -114,7 +114,7 @@
 
 # Check for missing binaries (stale symlinks should not happen)
 # Note: Special treatment of stop for LSB conformance
-LIGHTTPD_BIN=/usr/sbin/lighttpd
+LIGHTTPD_BIN=/usr/sbin/yastwebd
 test -x $LIGHTTPD_BIN || { echo "$LIGHTTPD_BIN not installed"; 
 	if [ "$1" = "stop" ]; then exit 0;
 	else exit 5; fi; }
@@ -124,6 +124,49 @@ LIGHTTPD_CONFIG=/etc/yastwebd/lighttpd.conf
 test -r $LIGHTTPD_CONFIG || { echo "$LIGHTTPD_CONFIG not existing";
 	if [ "$1" = "stop" ]; then exit 0;
 	else exit 6; fi; }
+
+PID_FILE=/var/run/yastwebd.pid
+IGNORE_FILE=/var/run/yastwebc.pid
+
+#only for beeing sure....
+if ps -C yastwebc >/dev/null; then
+   ps -C yastwebc|grep yastwebc|cut -c -6 >$IGNORE_FILE
+   IGNORE_FILE_SIZE="$(stat -c "%s" $IGNORE_FILE)"
+   IGNORE_FILE_ENTRIES="$(wc -l $IGNORE_FILE|cut -c -1)"
+   while [ $IGNORE_FILE_ENTRIES -gt 1 ]; do
+       # only one entry is valid
+       ps -C yastwebc|grep yastwebc|cut -c -6 >$IGNORE_FILE
+       IGNORE_FILE_SIZE="$(stat -c "%s" $IGNORE_FILE)"
+       IGNORE_FILE_ENTRIES="$(wc -l $IGNORE_FILE|cut -c -1)"
+   done
+   if [ $IGNORE_FILE_SIZE -eq 0 ]; then
+       echo "$IGNORE_FILE has no entry --> removing"
+       rm $IGNORE_FILE
+   fi
+else
+   if test -s $IGNORE_FILE ; then
+     rm $IGNORE_FILE
+   fi
+fi
+if ps -C yastwebd >/dev/null; then
+   ps -C yastwebd|grep yastwebd|cut -c -6 >$PID_FILE
+   PID_FILE_SIZE="$(stat -c "%s" $PID_FILE)"
+   PID_FILE_ENTRIES="$(wc -l $PID_FILE|cut -c -1)"
+   while [ $PID_FILE_ENTRIES -gt 1 ]; do
+       # only one entry is valid
+       ps -C yastwebd|grep yastwebd|cut -c -6 >$PID_FILE
+       PID_FILE_SIZE="$(stat -c "%s" $PID_FILE)"
+       PID_FILE_ENTRIES="$(wc -l $PID_FILE|cut -c -1)"
+   done
+   if [ $PID_FILE_SIZE -eq 0 ]; then
+       echo "$PID_FILE has no entry --> removing"
+       rm $PID_FILE
+   fi
+else
+   if test -s $PID_FILE ; then
+      rm $PID_FILE
+   fi
+fi
 
 
 # Source LSB init functions
@@ -169,20 +212,26 @@ rc_reset
 
 case "$1" in
     start)
-	echo -n "Starting yastwebd "
-	## Start daemon with startproc(8). If this fails
-	## the return value is set appropriately by startproc.
-	startproc $LIGHTTPD_BIN -f /etc/yastwebd/lighttpd.conf
-
-	# Remember status and be verbose
-	rc_status -v
+   	if test -s $PID_FILE ; then
+           #already running
+           echo ""
+        else
+  	   ## Start daemon with startproc(8). If this fails
+	   ## the return value is set appropriately by startproc.
+  	   if test -s $IGNORE_FILE ; then
+ 	      startproc -i $IGNORE_FILE $LIGHTTPD_BIN -f $LIGHTTPD_CONFIG 
+           else
+ 	      startproc $LIGHTTPD_BIN -f $LIGHTTPD_CONFIG
+           fi
+	   # Remember status and be verbose
+	   rc_status -v
+	fi
 	;;
     stop)
 	echo -n "Shutting down yastwebd "
 	## Stop daemon with killproc(8) and if this fails
 	## killproc sets the return value according to LSB.
-
-	killproc -TERM $LIGHTTPD_BIN
+	killproc -TERM -p $PID_FILE -i $IGNORE_FILE $LIGHTTPD_BIN
 
 	# Remember status and be verbose
 	rc_status -v
@@ -219,7 +268,7 @@ case "$1" in
 
 	echo -n "Reload service yastwebd "
 	## if it supports it:
-	killproc -HUP $LIGHTTPD_BIN
+	killproc -HUP -p $PID_FILE -i $IGNORE_FILE $LIGHTTPD_BIN
 	#touch /var/run/lighttpd.pid
 	rc_status -v
 
@@ -233,7 +282,7 @@ case "$1" in
 
 	# If it supports signaling:
 	echo -n "Reload service yastwebd "
-	killproc -HUP $LIGHTTPD_BIN
+	killproc -HUP -p $PID_FILE -i $IGNORE_FILE $LIGHTTPD_BIN
 	#touch /var/run/lighttpd.pid
 	rc_status -v
 	
@@ -255,7 +304,7 @@ case "$1" in
 	# 5--199 reserved (5--99 LSB, 100--149 distro, 150--199 appl.)
 	
 	# NOTE: checkproc returns LSB compliant status values.
-	checkproc $LIGHTTPD_BIN
+	checkproc -p $PID_FILE -i $IGNORE_FILE $LIGHTTPD_BIN
 	# NOTE: rc_status knows that we called this init script with
 	# "status" option and adapts its messages accordingly.
 	rc_status -v

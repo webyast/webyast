@@ -125,6 +125,9 @@ rm -rf $RPM_BUILD_ROOT
 /usr/sbin/useradd  -g %{pkg_user} -s /bin/false -r -c "User for YaST-Webservice" -d %{pkg_home} %{pkg_user} &>/dev/null ||:
 
 %post
+#installing lighttpd server
+test -r /usr/sbin/yastwebd || { echo "Creating link /usr/sbin/yastwebd";
+        ln -s /usr/sbin/lighttpd /usr/sbin/yastwebd; }
 %fillup_and_insserv %{pkg_user}
 #
 #granting permissions for yastwebd
@@ -155,7 +158,13 @@ chown yastwebd db db/*.sqlite*
 %postun
 %restart_on_update %{pkg_user}
 %{insserv_cleanup}
-
+#remove link
+if test -r /usr/sbin/yastwebd ; then
+  echo "/usr/sbin/yastwebd already removed"
+else
+  echo "Removing link /usr/sbin/yastwebd";
+  rm /usr/sbin/yastwebd
+fi
 
 %files 
 %defattr(-,root,root)
