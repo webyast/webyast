@@ -1,3 +1,11 @@
+/*
+ * polkit.c
+ *
+ * Minimal Ruby extension to check if a specific action
+ * is allowed through PolicyKit
+ * 
+ */
+ 
 #include <stdlib.h>
 #include <stdio.h>
 #include <unistd.h>
@@ -8,53 +16,31 @@
 #include <sys/types.h>
 #include <pwd.h>
 
-// Include the Ruby headers and goodies
-#include "ruby.h"
 
-#define MAXLEN 256
+#include <ruby.h>
 
-// Defining a space for information and references about the module to be stored internally
-VALUE PolKit = Qnil;
-
-// Prototype for the initialization method - Ruby calls this, not you
-void Init_polKit();
-
-// Prototype for our method 'polkit_check' - methods are prefixed by 'method_' here
-VALUE method_polkit_check(VALUE self, VALUE action_id, VALUE user);
-
-// The initialization method for this module
-void Init_polKit() {
-	PolKit = rb_define_module("PolKit");
-	rb_define_method(PolKit, "polkit_check", method_polkit_check, 2);	
-}
+/* Ruby module */
+static VALUE mPolKit = Qnil;
 
 
 /**
- * checks if user can provide action
- * \param action action which user want do
- * \return 0 if user have permision, -1 if error occured, -2 if authorization required and -3 if permision denied
+ * checks if user can perform action
+ * \param action:string action (dbus-style resource string) which user wants do
+ * \param user:string id of user
+ * \return symbol
+ *         :yes if user has permission
+ *         :auth if authorization required
+ *         :no if permision denied
+ *         raises exception on error
  */
-VALUE method_polkit_check(VALUE self, VALUE act, VALUE usr) {
+VALUE
+method_polkit_check(VALUE self, VALUE act_v, VALUE usr_v)
+{
+    const char *action_s = StringValuePtr(act_v);
+    const char *user_s = StringValuePtr(usr_v);
+    const char *error = NULL;
+    VALUE ret = Qnil;
 
-    char action_id[MAXLEN];
-    char user[MAXLEN];
-
-   action_id[0] = 0;
-    user[0] = 0;
-
-    if (RSTRING(act)->len+1 < 256)
-    {
-	strncpy (action_id, RSTRING(act)->ptr, RSTRING(act)->len);
-	action_id[RSTRING(act)->len] = 0;
-    }
-
-    if (RSTRING(usr)->len+1 < 256)
-    {
-	strncpy (user, RSTRING(usr)->ptr, RSTRING(usr)->len);
-	user[RSTRING(usr)->len] = 0;
-    }
-
-    int ret = -1;
     DBusError dbus_error;
     DBusConnection *bus = NULL;
     PolKitCaller *caller = NULL;
@@ -63,45 +49,63 @@ VALUE method_polkit_check(VALUE self, VALUE act, VALUE usr) {
     PolKitError *polkit_error = NULL;
     PolKitResult polkit_result;
 
+    struct passwd *passwd;
+    uid_t uid;
+  
+    /*
+     * Connect to PolicyKit via DBus
+     */
     dbus_error_init(&dbus_error);
     if (!(bus = dbus_bus_get(DBUS_BUS_SYSTEM, &dbus_error))) {
+        error = "DBus connect failed";
         goto finish;
     }
     if (!(caller = polkit_caller_new_from_pid(bus, getpid(), &dbus_error))) {
+        error = "PolicyKit connect failed";
         goto finish;
     }
 
+    /*
+     * get user id
+     */
+  
+    passwd = getpwnam(user_s);
 
-    struct passwd *passwd = getpwnam(user);
-
-    if (passwd == NULL) {
+    if (!passwd) {
+        error = "User does not exist";
 	goto finish;
     }
 
-    uid_t uid = passwd->pw_uid;
+    uid = passwd->pw_uid;
     if (!(polkit_caller_set_uid(caller, uid))) {
+        error = "Can't set PolicyKit caller uid";
         goto finish;
     } 
 
     if (!(action = polkit_action_new())) {
+        error = "Can't create PolicyKit action";
         goto finish;
     }
 
-    if (!polkit_action_set_action_id(action, action_id)) {
+    if (!polkit_action_set_action_id(action, action_s)) {
+        error = "Can't set PolicyKit action";
         goto finish;
     }
 
     if (!(context = polkit_context_new())) {
+        error = "Can't create PolicyKit context";
         goto finish;
     }
 
     if (!polkit_context_init(context, &polkit_error)) {
+        error = "Can't initialize PolicyKit context";
         goto finish;
     }
 
     polkit_result = polkit_context_is_caller_authorized(context, action, caller, FALSE, &polkit_error);
 
     if (polkit_error_is_set(polkit_error)) {
+        error = "PolicyKit failed";
 	goto finish;
     }
     
@@ -115,16 +119,16 @@ VALUE method_polkit_check(VALUE self, VALUE act, VALUE usr) {
 	case POLKIT_RESULT_ONLY_VIA_SELF_AUTH_KEEP_SESSION:
 	case POLKIT_RESULT_ONLY_VIA_SELF_AUTH_KEEP_ALWAYS:
 	case POLKIT_RESULT_ONLY_VIA_SELF_AUTH_ONE_SHOT:
-            ret = -2;
+            ret = ID2SYM(rb_intern("auth"));
             break;
 	case POLKIT_RESULT_YES:
-	    ret = 0;
+            ret = ID2SYM(rb_intern("yes"));
     	    break;
 	case POLKIT_RESULT_NO:
-	    ret = -3;
+            ret = ID2SYM(rb_intern("no"));
 	    break;
 	default:
-	    ; //handle new value in polkit
+	    error = "Unhandled PolicyKit value";
 	    break;
     }
 
@@ -147,5 +151,17 @@ VALUE method_polkit_check(VALUE self, VALUE act, VALUE usr) {
     if (polkit_error)
         polkit_error_free(polkit_error);
 
-    return INT2NUM(ret);
+    if (error)
+      rb_raise(rb_eRuntimeError, error);
+
+    return ret;
+}
+
+
+/* The initialization method for this module */
+void
+Init_polkit()
+{
+    mPolKit = rb_define_module("PolKit");
+    rb_define_module_function(mPolKit, "polkit_check", method_polkit_check, 2);	
 }
