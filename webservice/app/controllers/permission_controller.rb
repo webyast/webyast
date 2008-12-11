@@ -5,7 +5,7 @@ class PermissionController < ApplicationController
   def show
      right = "org.opensuse.yast.webservice." + params[:id]
      @cmdRet = Hash.new
-     if polkit_check( right, self.current_account.login) == 0
+     if polkit_check( right, self.current_account.login) == :yes
         @cmdRet["permission"] = "granted"
      else
         @cmdRet["permission"] = "denied"
