@@ -1,0 +1,13 @@
+REST-style access to YaST
+-------------------------
+
+Prerequisites:
+
+- YaST
+- PolicyKit
+- ruby
+- ruby-dbus
+  (http://raa.ruby-lang.org/project/ruby-dbus/)
+- Rpam
+  (http://rubyforge.org/projects/rpam)
+  
