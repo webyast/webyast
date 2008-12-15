@@ -125,6 +125,35 @@ test -r $LIGHTTPD_CONFIG || { echo "$LIGHTTPD_CONFIG not existing";
 	if [ "$1" = "stop" ]; then exit 0;
 	else exit 6; fi; }
 
+#
+# Activate/Deactivate AVAHI
+#
+HOSTNAME="$(hostname)"
+
+function avahi_stop () {
+   RUNNING=$(ps ux | grep avahi-publish-service | grep yastwebd | grep $HOSTNAME >/dev/null)
+   if [ $? = 0 ]; then
+      kill $(ps ux | grep avahi-publish-service | grep yastwebd | grep $HOSTNAME | awk '" " { print $2 }') >/dev/null
+   fi
+}
+function avahi_announce () {
+   PORT="$(netstat -npl|grep yastwebd| grep tcp| awk '{print $4}'| awk -F : '{print $NF}')"
+   HTTPS="$(grep -v '#' /etc/yastwebd/lighttpd.conf|grep ssl.engine|grep enable )"
+   PROTOCOL="https"
+   if [ "$HTTPS" = "" ]; then
+      PROTOCOL="http"
+   fi
+   RUNNING=$(netstat -ap|grep yastwebd|grep localhost >/dev/null)
+   if [ $? = 1 ]; then
+      if [ -x /usr/bin/avahi-publish-service ]; then
+	 if [ -f /var/run/avahi-daemon/pid ]; then
+            avahi-publish-service "YaST Webservice $PROTOCOL://$HOSTNAME:$PORT" _yastwebd._tcp $PORT >/dev/null 2>/dev/null & 
+         fi
+      fi
+   fi
+}
+
+
 PID_FILE=/var/run/yastwebd.pid
 IGNORE_FILE=/var/run/yastwebc.pid
 
@@ -225,6 +254,9 @@ case "$1" in
            fi
 	   # Remember status and be verbose
 	   rc_status -v
+
+           # Make it public if it is needed (AVAHI)
+           avahi_announce
 	fi
 	;;
     stop)
@@ -238,6 +270,9 @@ case "$1" in
 
         # Kill /usr/lib/YaST2/bin/SCR_dbus_server cause it is not needed anymore
         killproc /usr/lib/YaST2/bin/SCR_dbus_server
+
+        #Stopping AVAHI
+        avahi_stop
 	;;
     try-restart|condrestart)
 	## Do a restart only if the service was active before.
