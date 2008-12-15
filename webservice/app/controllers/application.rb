@@ -5,7 +5,7 @@ class ApplicationController < ActionController::Base
 
   include AuthenticatedSystem
 
-  require 'polKit'
+  require 'polkit'
   include PolKit
 
 private
@@ -31,7 +31,7 @@ private
 public
 
   def permissionCheck(action)
-    if polkit_check( action, self.current_account.login) == 0
+    if polkit_check( action, self.current_account.login) == :yes
        logger.debug "Action: #{action} User: #{self.current_account.login} Result: ok"
        return true
     else
@@ -39,7 +39,7 @@ public
        roles = userRoles(self.current_account.login)
        roles.each do |role|
           if ( role != self.current_account.login and
-               polkit_check( action, role) == 0)
+               polkit_check( action, role) == :yes)
              logger.debug "Action: #{action} User: #{self.current_account.login} WITH role #{role} Result: ok"
              return true
           end
