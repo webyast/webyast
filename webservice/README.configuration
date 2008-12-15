@@ -124,9 +124,27 @@ ssl.pemfile        = "/etc/ssl/certs/host.pem"
 
 and restart the server with
 
-rcyastwebc restart
+rcyastws restart
 
 Now you can login with HTTPS protocol.
+
+
+Make it "public" via "avahi"
+==============================
+
+Avahi is a system which facilitates service discovery on a local network. So if it is enabled YaST Webclient 
+evaluate all available YaST Webservices on a local network automatically and the user can select a service.
+
+In order to make your YaST Webservice "public" you only have to comment out the entry
+
+server.bind = "localhost"
+
+in /etc/yastws/lighttpd.conf and restart the server.
+
+The startscript rcyastws make the service public while the starting procedure.
+
+Note: Please be aware that your YaST Webservice is available from outside now. So you should
+switch to HTTPS-protocol.
 
 
 
