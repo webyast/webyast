@@ -27,13 +27,13 @@ Source5:        policyKit-rights.rb
 Source6:        yast_user_roles
 Source7:        lighttpd.conf
 Source8:        modules.conf
-Source9:        yastwebs
+Source9:        yastws
 Source10:       rpam
 BuildRoot:      %{_tmppath}/%{name}-%{version}-build
 BuildRequires:  ruby-devel
 
 #
-%define pkg_user yastwebs
+%define pkg_user yastws
 %define pkg_home /var/lib/%{pkg_user}
 #
 
@@ -95,18 +95,18 @@ rm $RPM_BUILD_ROOT/etc/%{pkg_user}/www/log/*
 #
 
 # configure lighttpd web service
-mkdir -p $RPM_BUILD_ROOT/etc/yastwebs/vhosts.d/
-install -m 0644 %SOURCE1 $RPM_BUILD_ROOT/etc/yastwebs/vhosts.d/
-install -m 0644 %SOURCE2 $RPM_BUILD_ROOT/etc/yastwebs/vhosts.d/rails.inc
-install -m 0644 %SOURCE3 $RPM_BUILD_ROOT/etc/yastwebs/
-install -m 0644 %SOURCE7 $RPM_BUILD_ROOT/etc/yastwebs/
-install -m 0644 %SOURCE8 $RPM_BUILD_ROOT/etc/yastwebs/
+mkdir -p $RPM_BUILD_ROOT/etc/yastws/vhosts.d/
+install -m 0644 %SOURCE1 $RPM_BUILD_ROOT/etc/yastws/vhosts.d/
+install -m 0644 %SOURCE2 $RPM_BUILD_ROOT/etc/yastws/vhosts.d/rails.inc
+install -m 0644 %SOURCE3 $RPM_BUILD_ROOT/etc/yastws/
+install -m 0644 %SOURCE7 $RPM_BUILD_ROOT/etc/yastws/
+install -m 0644 %SOURCE8 $RPM_BUILD_ROOT/etc/yastws/
 
 # Policies
 mkdir -p $RPM_BUILD_ROOT/usr/share/PolicyKit/policy
 install -m 0644 %SOURCE4 $RPM_BUILD_ROOT/usr/share/PolicyKit/policy/
-mkdir -p $RPM_BUILD_ROOT/etc/yastwebs/tools
-install -m 0644 %SOURCE5 $RPM_BUILD_ROOT/etc/yastwebs/tools
+mkdir -p $RPM_BUILD_ROOT/etc/yastws/tools
+install -m 0644 %SOURCE5 $RPM_BUILD_ROOT/etc/yastws/tools
 install -m 0644 %SOURCE6 $RPM_BUILD_ROOT/etc/
 
 #PAM configuration
@@ -126,31 +126,31 @@ rm -rf $RPM_BUILD_ROOT
 
 %post
 #installing lighttpd server
-test -r /usr/sbin/yastwebs || { echo "Creating link /usr/sbin/yastwebs";
-        ln -s /usr/sbin/lighttpd /usr/sbin/yastwebs; }
+test -r /usr/sbin/yastws || { echo "Creating link /usr/sbin/yastws";
+        ln -s /usr/sbin/lighttpd /usr/sbin/yastws; }
 %fillup_and_insserv %{pkg_user}
 #
-#granting permissions for yastwebs
+#granting permissions for yastws
 #
-if grep yastwebs /etc/PolicyKit/PolicyKit.conf > /dev/null; then
-   echo "Permission for yastwebs already granted in PolicyKit.conf"
+if grep yastws /etc/PolicyKit/PolicyKit.conf > /dev/null; then
+   echo "Permission for yastws already granted in PolicyKit.conf"
 else
-   echo "Permission for yastwebs in PolicyKit.conf granted"
-   perl -p -i.orig -e 's|</config>|<match user="yastwebs">\n  <match action="org.opensuse.yast.scr.*">\n   <return result="yes"/>\n  </match>\n</match>\n</config>|' /etc/PolicyKit/PolicyKit.conf
+   echo "Permission for yastws in PolicyKit.conf granted"
+   perl -p -i.orig -e 's|</config>|<match user="yastws">\n  <match action="org.opensuse.yast.scr.*">\n   <return result="yes"/>\n  </match>\n</match>\n</config>|' /etc/PolicyKit/PolicyKit.conf
 fi
-/usr/bin/polkit-auth --user yastwebs --grant org.freedesktop.packagekit.system-update >& /dev/null || :
-/usr/bin/polkit-auth --user yastwebs --grant org.freedesktop.policykit.read >& /dev/null || :
+/usr/bin/polkit-auth --user yastws --grant org.freedesktop.packagekit.system-update >& /dev/null || :
+/usr/bin/polkit-auth --user yastws --grant org.freedesktop.policykit.read >& /dev/null || :
 #
 # granting all permissions for root 
 #
-/etc/yastwebs/tools/policyKit-rights.rb --user root --action grant >& /dev/null || :
+/etc/yastws/tools/policyKit-rights.rb --user root --action grant >& /dev/null || :
 #
 # create database 
 #
-cd etc/yastwebs/www
+cd etc/yastws/www
 rake db:migrate
-chgrp yastwebs db db/*.sqlite*
-chown yastwebs db db/*.sqlite*
+chgrp yastws db db/*.sqlite*
+chown yastws db db/*.sqlite*
 
 %preun
 %stop_on_removal %{pkg_user}
@@ -159,19 +159,19 @@ chown yastwebs db db/*.sqlite*
 %restart_on_update %{pkg_user}
 %{insserv_cleanup}
 #remove link
-if test -r /usr/sbin/yastwebs ; then
-  echo "/usr/sbin/yastwebs already removed"
+if test -r /usr/sbin/yastws ; then
+  echo "/usr/sbin/yastws already removed"
 else
-  echo "Removing link /usr/sbin/yastwebs";
-  rm /usr/sbin/yastwebs
+  echo "Removing link /usr/sbin/yastws";
+  rm /usr/sbin/yastws
 fi
 
 %files 
 %defattr(-,root,root)
-%dir /etc/yastwebs
-%dir /etc/yastwebs/www
-%dir /etc/yastwebs/tools
-%dir /etc/yastwebs/vhosts.d
+%dir /etc/yastws
+%dir /etc/yastws/www
+%dir /etc/yastws/tools
+%dir /etc/yastws/vhosts.d
 %dir /usr/share/PolicyKit
 %dir /usr/share/PolicyKit/policy
 %dir /etc/pam.d
@@ -181,26 +181,26 @@ fi
 %attr(-,%{pkg_user},%{pkg_user}) %dir %{_var}/log/%{pkg_user}
 
 %config /etc/pam.d/rpam
-%config /etc/yastwebs/www/app
-%config /etc/yastwebs/www/db
-%config /etc/yastwebs/www/doc
-%config /etc/yastwebs/www/lib
-%config /etc/yastwebs/www/public
-%config /etc/yastwebs/www/Rakefile
-%config /etc/yastwebs/www/README*
-%config /etc/yastwebs/www/COPYING
-%config /etc/yastwebs/www/script
-%config /etc/yastwebs/www/test
-%config /etc/yastwebs/www/config
-%attr(755,root,root) %config /etc/yastwebs/tools/policyKit-rights.rb
+%config /etc/yastws/www/app
+%config /etc/yastws/www/db
+%config /etc/yastws/www/doc
+%config /etc/yastws/www/lib
+%config /etc/yastws/www/public
+%config /etc/yastws/www/Rakefile
+%config /etc/yastws/www/README*
+%config /etc/yastws/www/COPYING
+%config /etc/yastws/www/script
+%config /etc/yastws/www/test
+%config /etc/yastws/www/config
+%attr(755,root,root) %config /etc/yastws/tools/policyKit-rights.rb
 %doc README* COPYING
-%attr(-,%{pkg_user},%{pkg_user}) /etc/yastwebs/www/log
-%attr(-,%{pkg_user},%{pkg_user}) /etc/yastwebs/www/tmp
-%config(noreplace) /etc/yastwebs/vhosts.d/yast.conf
-%config(noreplace) /etc/yastwebs/lighttpd.conf
-%config /etc/yastwebs/vhosts.d/rails.inc
-%config /etc/yastwebs/cleanurl-v5.lua
-%config /etc/yastwebs/modules.conf
+%attr(-,%{pkg_user},%{pkg_user}) /etc/yastws/www/log
+%attr(-,%{pkg_user},%{pkg_user}) /etc/yastws/www/tmp
+%config(noreplace) /etc/yastws/vhosts.d/yast.conf
+%config(noreplace) /etc/yastws/lighttpd.conf
+%config /etc/yastws/vhosts.d/rails.inc
+%config /etc/yastws/cleanurl-v5.lua
+%config /etc/yastws/modules.conf
 %config /usr/share/PolicyKit/policy/org.opensuse.yast.webservice.policy
 %config(noreplace) /etc/yast_user_roles
 %config(noreplace)  %{_sysconfdir}/init.d/%{pkg_user}

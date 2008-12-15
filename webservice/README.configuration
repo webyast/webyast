@@ -5,11 +5,11 @@ All configurations should be done in the POST install section of the package.
 
 After you have installed the package an own lighttpd server with the 
 YaST-Webservice has been configured which is running with the 
-system account "yastwebs".
+system account "yastws".
 This HTTP server is configured as "localhost" only which has the port 8080.
-This can be changed in the file /etc/yastwebs/lighttpd.conf
+This can be changed in the file /etc/yastws/lighttpd.conf
 
-So, you can start the server with: "rcyastwebs start"
+So, you can start the server with: "rcyastws start"
 
 Use the webbrowser with the URL http://localhost:8080
 
@@ -83,7 +83,7 @@ store it to another place e.g. via ldap. Make a proposal :-)
 Hostname and Port
 ==================
 
-This settings can be changed in /etc/yastwebs/lighttpd.conf
+This settings can be changed in /etc/yastws/lighttpd.conf
 
 #######################################################################
 ##
@@ -117,7 +117,7 @@ Normally certificates are stored in /etc/ssl/certs.
 Configure lighttpd
 --------------------
 
-Add these two entries to /etc/yastwebs/lighttpd.conf
+Add these two entries to /etc/yastws/lighttpd.conf
 
 ssl.engine         = "enable"
 ssl.pemfile        = "/etc/ssl/certs/host.pem"
@@ -179,10 +179,10 @@ to /etc/PolicyKit/PolicyKit.conf
 starting
 - - - - -
 
-cd /etc/yastwebs/www/
+cd /etc/yastws/www/
 script/server -p 3001
 
-Logs are written to /etc/yastwebs/www/log
+Logs are written to /etc/yastws/www/log
 
 first test
 - - - - - - 
