@@ -52,7 +52,7 @@ Authors:
 #
 # Building PolicyKit and PAM bindings
 #
-cd polKit
+cd ruby-polkit
 ruby extconf.rb
 make
 cd ..
@@ -66,13 +66,13 @@ cd ../../..
 #
 # Install PolicyKit and PAM bindings
 #
-cd polKit
+cd ruby-polkit
 make install DESTDIR=%{buildroot}
 cd ..
 cd rpam/ext/Rpam
 make install DESTDIR=%{buildroot}
 cd ../../..
-rm -rf rpam polKit
+rm -rf rpam ruby-polkit
 
 #
 # Install all web and frontend parts.
@@ -205,5 +205,5 @@ fi
 %config(noreplace) /etc/yast_user_roles
 %config(noreplace)  %{_sysconfdir}/init.d/%{pkg_user}
 %{_sbindir}/rc%{pkg_user}
-%{_libdir}/ruby/site_ruby/1.8/i586-linux/polKit.so
+%{_libdir}/ruby/site_ruby/1.8/i586-linux/polkit.so
 %{_libdir}/ruby/site_ruby/1.8/i586-linux/rpam.so

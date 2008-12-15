@@ -1,5 +1,5 @@
 all:
-	cd polKit; \
+	cd ruby-polkit; \
 	ruby extconf.rb; \
 	make; \
 	sudo make install; \
@@ -14,7 +14,7 @@ all:
 	mkdir package; \
 	cp dist/* package; \
         cp -R webservice www; \
-        cp -R polKit www; \
+        cp -R ruby-polkit www; \
         cp -R rpam www; \
         find www -name "*.auto" -exec rm {} \;; \
         find www -name ".gitignore" -exec rm {} \;; \
