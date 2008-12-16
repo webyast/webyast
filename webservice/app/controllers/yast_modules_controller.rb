@@ -37,7 +37,7 @@ class YastModulesController < ApplicationController
 	  render :json => data.to_json
 	end
 	format.html do
-	  render
+	  render :xml => data.to_xml #return xml only
 	end
       end
     else
@@ -156,7 +156,7 @@ class YastModulesController < ApplicationController
           render :json => @cmdRet.to_json
        end
        format.html do
-          render :file => "#{RAILS_ROOT}/app/views/yast_modules/results.html.erb"
+          render :xml => @cmdRet.to_xml #return xml only
        end
     end
   end
