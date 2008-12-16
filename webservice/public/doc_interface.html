@@ -1,0 +1,944 @@
+<!doctype html public "-//w3c//dtd html 4.0 transitional//en">
+<html>
+<head>
+   <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+   <meta name="GENERATOR">
+   <title>YaST-webservice REST Interface</title>
+</head>
+<body text="#000000" bgcolor="#FFFFFF" link="#0000EE" vlink="#551A8B" alink="#FF0000">
+
+
+<h1>YaST-webservice REST Interface</h1>
+
+<h2>General</h2>
+
+<p>Yast2-webservice provides an interface to the YaST environment of the
+concerning host machine. This service is running with an installed
+webserver (e.g. lighthttp) and provides an API which is based on
+the REST (Representational state transfer) architecture.
+Please have a look to 
+
+<p><a href="http://en.wikipedia.org/wiki/Representational_State_Transfer">http://en.wikipedia.org/wiki/Representational_State_Transfer</a>
+<p>for more information about REST.
+
+<p>E.g. in order to get or set the systemtime you can use the HTTP URL:
+
+<br>http://&lt;name_of_the_host&gt;/systemtime/currenttime
+
+<p>In order to identify if this value has to be set or has to be get
+the HTTP protocol has four methods:
+
+<table>
+<tr>
+<td>GET</td>
+<td>Retrieve a value</td>
+</tr>
+<td>PUT</td>
+<td>Overwrite a value</td>
+</tr>
+<td>POST</td>
+<td>Create a new value</td>
+</tr>
+<td>DELETE</td>
+<td>Delete a value. E.g. delete a user account</td>
+</tr>
+</table>
+
+<hr WIDTH="100%">
+
+<h2>General Structure of the HTTP Requests</h2>
+
+<p><br>Information can be get/set in/with 3 different formats:
+
+<p>http://&lt;name_of_the_host&gt;/systemtime
+<br>Returns the systemtime in HTML format. Calling this URL not via a 
+browser the values will be retunred in XML format.
+
+<p>http://&lt;name_of_the_host&gt;/systemtime.xml
+<br>Returns the systemtime in XML format
+
+<p>http://&lt;name_of_the_host&gt;/systemtime.json
+<br>Returns the systemtime in JSON format
+
+<h3>GET</h3>
+
+<p><br>Information can be get in a block or each entry of the block can be get
+in an extra HTTP call:
+
+<p>GET http://&lt;name_of_the_host&gt;/systemtime.xml
+
+<p>returns
+
+<p>&lt;systemtime&gt;
+<blockquote>
+&lt;currenttime type="datetime"&gt;2008-09-10T17:13:37Z&lt;/currenttime&gt;
+<br>&lt;is_utc type="boolean"&gt;false&lt;/is_utc&gt;
+<br>&lt;timezone&gt;Europe/Berlin&lt;/timezone&gt;
+<br>&lt;validtimezones&gt; Africa/Abidjan
+Africa/Accra...&lt;/validtimezones&gt;
+</blockquote>
+&lt;/systemtime&gt;
+
+<p>whereas 
+
+<p>GET http://0.0.0.0:3001/systemtime/timezone.xml
+
+<p>returns
+
+<p>&lt;systemtime&gt;
+<blockquote>
+&lt;currenttime type="datetime" nil="true"/&gt;
+<br>&lt;is_utc type="boolean" nil="true"/&gt;
+<br>&lt;timezone&gt;Europe/Berlin&lt;/timezone&gt;
+<br>&lt;error_id type="integer"&gt;0&lt;/error_id&gt;
+<br>&lt;error_string/&gt;
+</blockquote>
+&lt;/systemtime&gt;
+
+<p>So, only the required value has been set in the return value.
+
+<p>GET calls can be generated on the command line with the call:
+
+<p>curl -X GET -b &lt;cookie_file&gt; http://0.0.0.0:3001/systemtime/timezone.xml
+
+<p>("-b &lt;cookie_file&gt;" describes a cookie with the filename "cookie_file". This
+ cookie contains the login information of the current session.)
+
+<h3>PUT</h3>
+
+<p><br>Put requests are taken for OVERWRITING existing values.
+Multi values can be overwritten at once in a block or each entry of the block
+can be set explicit in an extra HTTP call:
+
+<p>PUT http://&lt;name_of_the_host&gt;/language with a block of XML data
+
+<p>&lt;?xml version="1.0" encoding="UTF-8"?&gt;
+<br>&lt;language&gt;
+<blockquote>
+  &lt;firstLanguage&gt;de_DE&lt;/firstLanguage&gt;
+  <br>&lt;secondLanguages&gt;en_US,zu_ZA&lt;/secondLanguages&gt;
+</blockquote>
+&lt;/language&gt;
+</blockquote>
+
+<p>whereas 
+
+<p>PUT http://0.0.0.0:3001/language/secondLanguages with a single XML value
+
+<p>&lt;?xml version="1.0" encoding="UTF-8"?&gt;
+<br>&lt;language&gt;
+<blockquote>
+  &lt;secondLanguages&gt;en_US&lt;/secondLanguages&gt;
+</blockquote>
+&lt;/language&gt;
+
+<p>So only the required value has been set.
+
+<p>Note: Also HTML and JSON format is a valid format for values which have to be changed.
+
+<p>Put calls can be generated on the command line with the call:
+
+<p>curl -v -H "Content-Type: application/xml; charset=utf-8" -T &lt;data-file&gt; -b &lt;cookie_file&gt; http://0.0.0.0:3001/language/secondLanguages.xml
+
+<p>("-b &lt;cookie_file&gt;" describes a cookie with the filename "cookie_file". This
+ cookie contains the login information of the current session.)
+
+<h3>POST</h3>
+
+<p><br>Post requests are used for creating new entries e.g. adding a new user account:
+
+<p>POST http://0.0.0.0:3001/users.xml with the XML values:
+
+<p>&lt;?xml version="1.0" encoding="UTF-8"?&gt;
+<br>&lt;user&gt;
+<blockquote>
+  &lt;defaultGroup&gt;users&lt;/defaultGroup&gt;
+  <br>&lt;fullName&gt;tux2 tux2&lt;/fullName&gt;
+  <br>&lt;groups&gt;users&lt;/groups&gt;
+  <br>&lt;homeDirectory&gt;/home/tux2&lt;/homeDirectory&gt;
+  <br>&lt;loginName&gt;tux2&lt;/loginName&gt;
+  <br>&lt;loginShell&gt;/bin/bash&lt;/loginShell&gt;
+  <br>&lt;noHome type="boolean"&gt;false&lt;/noHome&gt;
+  <br>&lt;password&gt;tuxtux&lt;/password&gt;
+  <br>&lt;uid&gt;1002&lt;/uid&gt;
+</blockquote>
+&lt;/user&gt;
+
+
+<p>POST calls can be generated on the command line with the call:
+
+<p>curl -X POST -v -H "Content-Type: application/xml; charset=utf-8" -T &lt;data-file&gt; -b &lt;cookie_file&gt; http://0.0.0.0:3001/users.xml
+
+<p>(&lt;data-file&gt; is a file which contains the XML values described above.
+ "-b &lt;cookie_file&gt;" describes a cookie with the filename "cookie_file". This
+ cookie contains the login information of the current session.)
+
+<p>Note: Also HTML and JSON format is a valid format for values which have to be created.
+
+<h3>DELETE</h3>
+
+<p>Delete requests are used for deleting entries e.g. an user account:
+
+<p>DELETE http://0.0.0.0:3001/users/tux2
+
+<p>DELETE calls can be generated on the command line with the call:
+
+<p>curl -X DELETE -b &lt;cookie_file&gt; http://0.0.0.0:3001/users/tux2
+
+<p>("-b &lt;cookie_file&gt;" describes a cookie with the filename "cookie_file". This
+ cookie contains the login information of the current session.)
+
+<hr WIDTH="100%">
+
+<h2>YaST webservice API<h2>
+
+<h3>&lt;hostname&gt;/login</h3>
+
+<p><br>Login and creates a session. An additional login cookie will be generated if it is required.
+The user account will be checked with PAM. So SYSTEM users can login only.
+
+<p>POST &lt;hostname&gt;/login checks an SYSTEM accout and creates a session with the given values:
+
+<p>&lt;hash&gt;
+<blockquote>
+  &lt;login&gt;tuxtux&lt;/login&gt;
+  <br>&lt;password&gt;password_tuxtux&lt;/password&gt;
+  <br>&lt;remember_me&gt;1&lt;/remember_me&gt;
+</blockquote>
+&lt;/hash&gt;
+
+<p>remember_me: Generates a cookie with a valid time period of 1 day.
+
+<p>This returns:
+
+<p>&lt;hash&gt;
+<blockquote>
+  &lt;login&gt;granted&lt;/login&gt;
+</blockquote>
+&lt;/hash&gt;
+
+<p>OR in the error case:
+
+<p>&lt;hash&gt;
+<blockquote>
+  &lt;login&gt;denied&lt;/login&gt;
+</blockquote>
+&lt;/hash&gt;
+
+<p>If you are using "curl" for testing you will have to generate a session cookie with the call:
+
+<p>curl -X POST -v -H "Content-Type: application/xml; charset=utf-8" -T &lt;login_xml_file&gt; -c &lt;cookie_file&gt; http://0.0.0.0:3001/login.xml
+
+<p>This call will generate a cookie file with login data described in &lt;login_xml_file&gt;.
+
+<h3>&lt;hostname&gt;/permission/&lt;policyKitRule&gt;</h3>
+
+<p><br>Checking if the user of the current session has the permission of the given rule &lt;policyKitRule&gt;.
+This call is useful for applications which have to check the permissions BEFORE they generate a
+e.g. menue entry or input frame.
+
+<p>GET &lt;hostname&gt;/permission/&lt;policyKitRule&gt; checks the permission and returns:
+
+<p>&lt;hash&gt;
+<blockquote>
+  &lt;permission&gt;granted&lt;/permission&gt;
+</blockquote>
+&lt;/hash&gt;
+
+<p>OR
+
+<p>&lt;hash&gt;
+<blockquote>
+  &lt;permission&gt;denied&lt;/permission&gt;
+</blockquote>
+&lt;/hash&gt;
+
+<h3>&lt;hostname&gt;/logout</h3>
+
+<p><br>Destroys the current session and invalidates the concerning cookie (if there is one).
+
+<p>POST &lt;hostname&gt;/logout
+
+<p>This returns:
+
+<p>&lt;hash&gt;
+<blockquote>
+  &lt;logout&gt;Goodbye!&lt;/logout&gt;
+</blockquote>
+&lt;/hash&gt;
+
+<h3>&lt;hostname&gt;/services</h3>
+
+<p><br>Managing system services like cron, smbfs, gpm, sshd, random, cups, ntp
+
+<p>GET &lt;hostname&gt;/services.xml
+
+<p>returns:
+
+<p>&lt;services type="array"&gt; 
+<br>&lt;service&gt;
+  <blockquote>
+    &lt;link&gt;smbfs&lt;/link&gt;
+    <br>&lt;path&gt;/etc/init.d/smbfs&lt;/path&gt;
+    <br>&lt;commands&gt;run,stop,status,restart&lt;/commands&gt;
+    <br>&lt;error_id type="integer"&gt;0&lt;/error_id&gt;
+    <br>&lt;error_string/&gt;
+  </blockquote>
+  &lt;/service&gt;
+  <br>&lt;service&gt;
+  <blockquote>
+    &lt;link&gt;sshd&lt;/link&gt;
+    <br>&lt;path&gt;/etc/init.d/sshd&lt;/path&gt;
+    <br>&lt;commands&gt;run,stop,status,restart&lt;/commands&gt;
+    <br>&lt;error_id type="integer"&gt;0&lt;/error_id&gt;
+    <br>&lt;error_string/&gt;
+   </blockquote>
+  &lt;/service&gt;
+  <br>&lt;service&gt;
+  <br>...
+  <br>  &lt;/service&gt;
+  <br>&lt;/services&gt; 
+
+<h3>&lt;hostname&gt;/services/&lt;servicename&gt;</h3>
+
+<p><br>GET &lt;hostname&gt;/services/smbfs.xml
+
+<p>returns
+
+<p>&lt;service&gt;
+  <blockquote>
+    &lt;link&gt;smbfs&lt;/link&gt;
+    <br>&lt;path&gt;/etc/init.d/smbfs&lt;/path&gt;
+    <br>&lt;commands&gt;run,stop,status,restart&lt;/commands&gt;
+    <br>&lt;error_id type="integer"&gt;0&lt;/error_id&gt;
+    <br>&lt;error_string/&gt;
+  </blockquote>
+&lt;/service&gt;
+
+<h3>&lt;hostname&gt;/services/&lt;servicename&gt;/commands/&lt;command&gt;</h3>
+
+<p><br>PUT &lt;hostname&gt;/services/ntp/commands/restart.xml
+
+<h3>&lt;hostname&gt;/services/ntp/config</h3>
+
+<p><br>GET &lt;hostname&gt;/services/ntp/config.xml
+
+<p>returns
+
+<p>&lt;config_ntp&gt;
+  <blockquote>
+  &lt;enabled type="boolean"&gt;true&lt;/enabled&gt;
+  <br>&lt;manual_server&gt;&lt;/manual_server&gt;
+  <br>&lt;use_random_server type="boolean"&gt;true&lt;/use_random_server&gt;
+  <br>&lt;error_id type="integer"&gt;0&lt;/error_id&gt;
+  <br>&lt;error_string/&gt;
+  </blockquote>
+&lt;/config_ntp&gt;
+
+<p><table>
+<tr>
+<td>enabled:</td>
+<td>the service will be automatically enabled while booting</td>
+</tr>
+<td>manual_server:</td>
+<td>user selected ntp server</td>
+</tr>
+<td>use_random_server:</td>
+<td>server will be selected from pool.ntp.org</td>
+</tr>
+</table>
+
+<p>PUT &lt;hostname&gt;/services/ntp/config.xml
+
+<p>Writes ntp settings to the system. The given parameters are the same as the
+returned values of the GET request.
+
+<p>Note: Each single value can be get or set explicit.
+
+<p>e.G. GET &lt;hostname&gt;/services/ntp/config/enabled.xml returns this value only.
+
+<h3>&lt;hostname&gt;/systemtime</h3>
+
+<p><br>Managing time, timezone,....
+
+<p>GET &lt;hostname&gt;/systemtime.xml
+
+<p>returns
+
+<p>&lt;systemtime&gt;
+  <blockquote>
+  &lt;currenttime type="datetime"&gt;2008-09-11T11:29:21Z&lt;/currenttime&gt;
+  <br>&lt;is_utc type="boolean"&gt;false&lt;/is_utc&gt;
+  <br>&lt;timezone&gt;Europe/Berlin&lt;/timezone&gt;
+  <br>&lt;validtimezones&gt; Africa/Abidjan Africa/Accra...&lt;/validtimezones&gt;
+  <br>&lt;error_id type="integer"&gt;0&lt;/error_id&gt;
+  <br>&lt;error_string/&gt;
+  </blockquote>
+&lt;/systemtime&gt;
+
+<p>PUT or POST &lt;hostname&gt;/systemtime.xml
+
+<p>Writes time settings to the system. The given parameters are the same as the
+returned values of the GET request.
+
+<p>Note: Each single value can be get or set explicit.
+
+<p>e.g. GET &lt;hostname&gt;/systemtime/timezone.xml returns this value only.
+
+<h3>&lt;hostname&gt;/language</h3>
+
+<p><br>Managing language settings.
+
+<p>GET &lt;hostname&gt;/language.xml
+
+<p>returns
+
+<p>&lt;language&gt;
+<blockquote>
+  &lt;firstLanguage&gt;de_DE&lt;/firstLanguage&gt;
+  <br>&lt;secondLanguages&gt;en_US&lt;/secondLanguages&gt;
+  <br>&lt;available&gt;af_ZA (Afrikaans)ar_EG (Arabic)bg_BG (Bulgarian)bn_BD (Bengali)bs_BA (Bosanski)ca_ES (Catala)cs_CZ (Cestina)cy_GB (Cymraeg)da_DK (Dansk)de_DE (Deutsch)el_GR (Greek)en_GB (English (UK))en_US (English (US))es_ES (Espanol)et_EE (Eesti)fi_FI (Suomi)fr_FR (Francais)gu_IN (Gujarati)he_IL (Ivrit)hi_IN (Hindi)hr_HR (Hrvatski)hu_HU (Magyar)id_ID (Bahasa Indonesia)it_IT (Italiano)ja_JP (Japanese)km_KH (Khmer)ko_KR (Korean)lt_LT (Lithuanian)mk_MK (Makedonski)mr_IN (Marathi)nb_NO (Norsk)nl_NL (Nederlands)pa_IN (Punjabi)pl_PL (Polski)pt_BR (Portugues brasileiro)pt_PT (Portugues)ro_RO (Romana)ru_RU (Russian)si_LK (Sinhala)sk_SK (Slovencina)sl_SI (Slovenscina)sr_CS (Srpski)sv_SE (Svenska)ta_IN (Tamil)th_TH (phasa thai)tr_TR (Turkce)uk_UA (Ukrainian)vi_VN (Vietnamese)wa_BE (Walon)xh_ZA (isiXhosa)zh_CN (Simplified Chinese)zh_TW (Traditional Chinese (Taiwan))zu_ZA (isiZulu)&lt;/available&gt;
+<br>&lt;error_id type="integer"&gt;0&lt;/error_id&gt;
+<br>&lt;error_string/&gt;
+</blockquote>
+&lt;/language&gt;
+
+
+<p><table>
+<tr>
+<td>firstLanguage:</td>
+<td>primary language</td>
+</tr>
+<td>secondLanguages:</td>
+<td>a list of languages separeted by commas</td>
+</tr>
+<td>available:</td>
+<td>languages which are available on the system</td>
+</tr>
+<table>
+
+
+<p>PUT or POST &lt;hostname&gt;/language.xml with values: 
+
+<p>&lt;language&gt;
+<blockquote>
+  &lt;firstLanguage&gt;de_DE&lt;/firstLanguage&gt;
+  <br>&lt;secondLanguages&gt;en_US,zu_ZA&lt;/secondLanguages&gt;
+</blockquote>
+&lt;/language&gt;
+
+<p>Note: Each single value can be get or set explicit.
+
+<p>e.g. GET &lt;hostname&gt;/language/available.xml returns the list of available languages only.
+
+<h3>&lt;hostname&gt;/users</h3>
+
+<p><br>User management like create/edit/delete a user login or exporting SSH-keys.
+
+<p>GET &lt;hostname&gt;/users.xml
+
+<p>returns 
+
+<p>&lt;users type="array"&gt;
+<br>  &lt;user&gt;
+<blockquote>
+    &lt;loginName&gt;nnw&lt;/loginName&gt;
+    <br>&lt;error_id type="integer"&gt;0&lt;/error_id&gt;
+    <br>&lt;error_string/&gt;
+</blockquote>
+  &lt;/user&gt;
+  <br>&lt;user&gt;
+  <blockquote>
+    &lt;loginName&gt;tux&lt;/loginName&gt;
+    <br>&lt;error_id type="integer"&gt;0&lt;/error_id&gt;
+    <br>&lt;error_string/&gt;
+  </blockquote>
+  &lt;/user&gt;
+  <br>&lt;user&gt;
+  <blockquote>
+    &lt;loginName&gt;tux2&lt;/loginName&gt;
+    <br>&lt;error_id type="integer"&gt;0&lt;/error_id&gt;
+    <br>&lt;error_string/&gt;
+  </blockquote>
+  &lt;/user&gt;
+<br>&lt;/users&gt;
+
+<p>There are some other tags which are nil cause they have not been evaluated while this run. 
+It would take too much time to get these values of e.g. all ldap users of a big company.
+If you want more information about an user just call:
+
+<h3>&lt;hostname&gt;/users/&lt;loginname&gt;</h3>
+
+<p><br>This call returns additional information about an user account.
+
+<p>GET &lt;hostname&gt;/users/tux.xml returns
+
+<p>&lt;user&gt;
+  <blockquote>
+  &lt;defaultGroup&gt;users&lt;/defaultGroup&gt;
+  <br>&lt;fullName&gt;tux tux&lt;/fullName&gt;
+  <br>&lt;groups&gt;users&lt;/groups&gt;
+  <br>&lt;homeDirectory&gt;/home/tux&lt;/homeDirectory&gt;
+  <br>&lt;loginName&gt;tux&lt;/loginName&gt;
+  <br>&lt;loginShell&gt;/bin/bash&lt;/loginShell&gt;
+  <br>&lt;uid&gt;1001&lt;/uid&gt;
+  <br>&lt;error_id type="integer"&gt;0&lt;/error_id&gt;
+  <br>&lt;error_string/&gt;
+  </blockquote>
+&lt;/user&gt;
+
+<p>PUT &lt;hostname&gt;/users/tux.xml 
+<br>or PUT &lt;hostname&gt;/users/tux/update.xml update the user account of tux
+
+<p>&lt;user&gt;
+  <blockquote>
+  &lt;defaultGroup&gt;users&lt;/defaultGroup&gt;
+  <br>&lt;fullName&gt;tux2 tux2&lt;/fullName&gt;
+  <br>&lt;groups&gt;users&lt;/groups&gt;
+  <br>&lt;homeDirectory&gt;/home/tux2&lt;/homeDirectory&gt;
+  <br>&lt;loginShell&gt;/bin/bash&lt;/loginShell&gt;
+  <br>&lt;password&gt;tuxtux&lt;/password&gt;
+  <br>&lt;newUid&gt;1002&lt;/newUid&gt;
+  <br>&lt;newLoginName&gt;tux2&lt;/newLoginName&gt;
+  </blockquote>
+&lt;/user&gt;
+
+<p>Not all tags are required. So, you have to "tag" changed values only.
+
+<p>Additional optional tags:
+
+<table>
+<tr>
+<td>ldapPassword:</td>
+<td>Ldap password if the user account will created with Ldap.</td>
+</tr>
+<td>type:</td>
+<td>valid values: local, system, nis, ldap</td>
+</tr>
+</table>
+
+<p>Note: Each single value can be get or set explicit.
+
+<p>e.g. GET &lt;hostname&gt;/users/tux/uid.xml returns the UID of of the user tux only.
+
+<p>POST &lt;hostname&gt;/users.xml 
+<br>or POST &lt;hostname&gt;/users/new/create.xml creates a new user account with the values:
+
+<p>&lt;user&gt;
+  <blockquote>
+  &lt;defaultGroup&gt;users&lt;/defaultGroup&gt;
+  <br>&lt;fullName&gt;tux2 tux2&lt;/fullName&gt;
+  <br>&lt;groups&gt;users&lt;/groups&gt;
+  <br>&lt;homeDirectory&gt;/home/tux2&lt;/homeDirectory&gt;
+  <br>&lt;loginName&gt;tux2&lt;/loginName&gt;
+  <br>&lt;loginShell&gt;/bin/bash&lt;/loginShell&gt;
+  <br>&lt;noHome type="boolean"&gt;false&lt;/noHome&gt;
+  <br>&lt;password&gt;tuxtux&lt;/password&gt;
+  <br>&lt;uid&gt;1002&lt;/uid&gt;
+  </blockquote>
+&lt;/user&gt;
+
+<table>
+<tr>
+<td>noHome:</td>
+<td>do not create the home directory</td>
+</tr>
+</table>
+
+<p>Additional optional tags:
+
+<table>
+<tr>
+<td>ldapPassword:</td>
+<td>Ldap password if the user account will created with Ldap.</td>
+</tr>
+<td>type:</td>
+<td>valid values: local, system, nis, ldap</td>
+</tr>
+</tr>
+</table>
+
+<p>DELETE &lt;hostname&gt;/users/tux delete the user account tux
+
+<h3>&lt;hostname&gt;/users/&lt;loginname&gt;/sshkey</h3>
+
+<p>Exporting a SSH key to the home directory of the given user.
+
+<p>PUT &lt;hostname&gt;/users/&lt;loginname&gt;/sshkey.xml with the value:
+
+<p>&lt;user&gt;
+  <blockquote>
+  &lt;sshkey&gt;This should be the key&lt;/sshkey&gt;
+  </blockquote>
+&lt;/user&gt;
+
+<h3>&lt;hostname&gt;/patch_updates</h3>
+
+<p>Evaluate and install needed patches.
+
+<p>GET &lt;hostname&gt;/patch_updates.xml returns
+
+<p>&lt;patch-updates type="array"&gt;
+  <br>&lt;patch-update&gt;
+  <blockquote>
+    &lt;arch&gt;noarch&lt;/arch&gt;
+    <br>&lt;kind&gt;important&lt;/kind&gt;
+    <br>&lt;name&gt;PackageKit&lt;/name&gt;
+    <br>&lt;repo&gt;openSUSE-11.0-Updates&lt;/repo&gt;
+    <br>&lt;resolvableId type="integer"&gt;139&lt;/resolvableId&gt;
+    <br>&lt;summary&gt;&lt;/summary&gt;
+    <br>&lt;error_id type="integer"&gt;0&lt;/error_id&gt;
+    <br>&lt;error_string/&gt;
+  </blockquote>
+  &lt;/patch-update&gt;
+  <br>&lt;patch-update&gt;
+  <blockquote>
+    &lt;arch&gt;noarch&lt;/arch&gt;
+    <br>&lt;kind&gt;important&lt;/kind&gt;
+    <br>&lt;name&gt;zypper&lt;/name&gt;
+    <br>&lt;repo&gt;openSUSE-11.0-Updates&lt;/repo&gt;
+    <br>&lt;resolvableId type="integer"&gt;114&lt;/resolvableId&gt;
+    <br>&lt;summary&gt;&lt;/summary&gt;
+    <br>&lt;error_id type="integer"&gt;0&lt;/error_id&gt;
+    <br>&lt;error_string/&gt;
+  </blockquote>
+  &lt;/patch-update&gt;
+  <br>&lt;patch-update&gt;
+  <blockquote>
+    &lt;arch&gt;noarch&lt;/arch&gt;
+    <br>&lt;kind&gt;important&lt;/kind&gt;
+    <br>&lt;name&gt;yast2-ncurses-pkg&lt;/name&gt;
+    <br>&lt;repo&gt;openSUSE-11.0-Updates&lt;/repo&gt;
+    <br>&lt;resolvableId type="integer"&gt;83&lt;/resolvableId&gt;
+    <br>&lt;summary&gt;&lt;/summary&gt;
+    <br>&lt;error_id type="integer"&gt;0&lt;/error_id&gt;
+    <br>&lt;error_string/&gt;
+  </blockquote>
+  &lt;/patch-update&gt;
+<br>&lt;/patch-updates&gt;
+
+<p><table>
+<tr>
+<td>arch:</td>
+<td>Architecture</td>
+</tr>
+<tr>
+<td>kind:</td>
+<td>important(recommded), security, low(optional)</td>
+</tr>
+<tr>
+<td>name:</td>
+<td>Patchname</td>
+</tr>
+<tr>
+<td>repo:</td>
+<td>Concerning repository</td>
+</tr>
+<tr>
+<td>resolvableId:</td>
+<td>internal patch ID</td>
+</tr>
+<tr>
+<td>summary:</td>
+<td>description</td>
+</tr>
+</table>
+
+<p>POST &lt;hostname&gt;/patch_updates/&lt;resolvableId&gt; Install the patch with the internal patch ID.
+
+<h3>&lt;hostname&gt;/yast_modules</h3>
+
+<p><br>Almost each YaST module has a command line interface which can be used with HTTP/REST.
+
+<p>GET &lt;hostname&gt;/yast_modules.xml returns a list of all available YaST modules
+
+<p>&lt;hash&gt;
+<br>&lt;module&gt;
+    <blockquote>
+    &lt;id&gt;dns-server&lt;/id&gt;
+    <br>&lt;error_id type="integer"&gt;0&lt;/error_id&gt;
+    <br>&lt;error_string/&gt;
+   </blockquote>
+  &lt;/module&gt;
+  <br>&lt;module&gt;
+    <blockquote>
+    &lt;id&gt;update&lt;/id&gt;
+    <br>&lt;error_id type="integer"&gt;0&lt;/error_id&gt;
+    <br>&lt;error_string/&gt;
+    </blockquote>
+  &lt;/module&gt;
+  <br>&lt;module&gt;
+    <blockquote>
+    &lt;id&gt;remote&lt;/id&gt;
+    <br>&lt;error_id type="integer"&gt;0&lt;/error_id&gt;
+    <br>&lt;error_string/&gt;
+    </blockquote>
+  &lt;/module&gt;
+  <br>&lt;module&gt;
+    <blockquote>
+    &lt;id&gt;dirinstall&lt;/id&gt;
+    <br>&lt;error_id type="integer"&gt;0&lt;/error_id&gt;
+    <br>&lt;error_string/&gt;
+    </blockquote>
+  &lt;/module&gt;
+  <br>&lt;module&gt;
+    <blockquote>
+    &lt;id&gt;restore&lt;/id&gt;
+    <br>&lt;error_id type="integer"&gt;0&lt;/error_id&gt;
+    <br>&lt;error_string/&gt;
+    </blockquote>
+  &lt;/module&gt;
+  <br>&lt;module&gt;
+   <blockquote>
+    ....
+   </blockquote>
+  &lt;/module&gt;
+<br>&lt;hash&gt;
+
+
+<h3>&lt;hostname&gt;/yast_modules/&lt;yast_module&gt;</h3>
+
+<p><br>Evaluate all possible commands and options of a YaST module.
+
+<p>GET &lt;hostname&gt;/yast_modules/nis.xml returns all commands and options of the nis module
+
+<p>&lt;module&gt;
+     <br>&lt;id&gt;nis&lt;/id&gt;
+     <br>&lt;commands&gt;
+      <blockquote>
+      &lt;command&gt;
+       <blockquote>
+        &lt;name&gt;disable&lt;/name&gt;
+        <br>&lt;help&gt;Disable the NIS client&lt;/help&gt;
+        <br>&lt;options/&gt;
+       </blockquote>
+      &lt;/command&gt;
+      <br>&lt;command&gt;
+     <blockquote>
+      &lt;name&gt;find&lt;/name&gt;
+      <br>&lt;help&gt;Show available NIS servers for given domain&lt;/help&gt;
+      <br>&lt;options&gt;
+      <br>&lt;option&gt;
+      <blockquote>
+          &lt;name&gt;domain&lt;/name&gt;
+          <br>&lt;type&gt;string&lt;/type&gt;
+          <br>&lt;help&gt;NIS domain&lt;/help&gt;
+       </blockquote>
+        &lt;/option&gt;
+      <br>&lt;/options&gt;
+    </blockquote>
+    &lt;/command&gt;
+    <br>&lt;command&gt;
+    <blockquote>
+      &lt;name&gt;enable&lt;/name&gt;
+      <br>&lt;help&gt;Enable your machine as NIS client&lt;/help&gt;
+      <br>&lt;options&gt;
+      <br>&lt;option&gt;
+      <blockquote>
+          &lt;name&gt;automounter&lt;/name&gt;
+          <br>&lt;type&gt;enum&lt;/type&gt;
+          <br>&lt;help&gt;Start or stop automounter&lt;/help&gt;
+      </blockquote>
+      &lt;/option&gt;
+      <br>&lt;option&gt;
+      <blockquote>
+          &lt;name&gt;domain&lt;/name&gt;
+          <br>&lt;type&gt;string&lt;/type&gt;
+          <br>&lt;help&gt;NIS domain&lt;/help&gt;
+      </blockquote>
+      &lt;/option&gt;
+      <br>&lt;option&gt;
+      <blockquote>
+          &lt;name&gt;server&lt;/name&gt;
+          <br>&lt;type&gt;string&lt;/type&gt;
+          <br>&lt;help&gt;NIS server name or address&lt;/help&gt;
+      </blockquote>
+      &lt;/option&gt;
+      <br>&lt;option&gt;
+      <blockquote>
+          &lt;name&gt;broadcast&lt;/name&gt;
+          <br>&lt;type&gt;enum&lt;/type&gt;
+          <br>&lt;help&gt;Set or unset broadcast search&lt;/help&gt;
+      </blockquote>
+      &lt;/option&gt;
+      <br>&lt;/options&gt;
+    </blockquote>
+    &lt;/command&gt;
+    <br>&lt;command&gt;
+    <blockquote>
+      &lt;name&gt;configure&lt;/name&gt;
+      <br>&lt;help&gt;Change the global settings of NIS client&lt;/help&gt;
+      <br>&lt;options&gt;
+      <br>&lt;option&gt;
+      <blockquote>
+          &lt;name&gt;broadcast&lt;/name&gt;
+          <br>&lt;type&gt;enum&lt;/type&gt;
+          <br>&lt;help&gt;Set or unset broadcast search&lt;/help&gt;
+      </blockquote>
+      &lt;/option&gt;
+      <br>&lt;option&gt;
+      <blockquote>
+          &lt;name&gt;automounter&lt;/name&gt;
+          <br>&lt;type&gt;enum&lt;/type&gt;
+          <br>&lt;help&gt;Start or stop automounter&lt;/help&gt;
+      </blockquote>
+      &lt;/option&gt;
+      <br>&lt;option&gt;
+      <blockquote>
+          &lt;name&gt;domain&lt;/name&gt;
+          <br>&lt;type&gt;string&lt;/type&gt;
+          <br>&lt;help&gt;NIS domain&lt;/help&gt;
+      </blockquote>
+      &lt;/option&gt;
+      <br>&lt;option&gt;
+      <blockquote>
+          &lt;name&gt;server&lt;/name&gt;
+          <br>&lt;type&gt;string&lt;/type&gt;
+          <br>&lt;help&gt;NIS server name or address&lt;/help&gt;
+      </blockquote>
+      &lt;/option&gt;
+      <br>&lt;/options&gt;
+    <blockquote>
+    &lt;/command&gt;
+    <br>&lt;command&gt;
+    <blockquote>
+      &lt;name&gt;summary&lt;/name&gt;
+      <br>&lt;help&gt;Configuration summary of NIS client&lt;/help&gt;
+      <br>&lt;options/&gt;
+    </blockquote>
+    &lt;/command&gt;
+  </blockquote>
+  &lt;/commands&gt;
+  <br>&lt;error_id type="integer"&gt;0&lt;/error_id&gt;
+  <br>&lt;error_string/&gt;
+<br>&lt;/module&gt;
+
+<p>POST &lt;hostname&gt;/yast_modules/nis.xml run the nis module with the commands:
+
+<p>&lt;hash&gt;
+  <br>&lt;command&gt;find&lt;/command&gt;
+  <br>&lt;domain&gt;suse.de&lt;/domain&gt;
+<br>&lt;/hash&gt;
+
+<p>This returns:
+
+<p>&lt;hash&gt;
+<br>  &lt;stdout&gt;&lt;/stdout&gt;
+<br>  &lt;exit type="integer"&gt;16&lt;/exit&gt;
+<br>  &lt;stderr&gt;10.10.0.1
+<br>10.10.0.10
+<br>&lt;/stderr&gt;
+<br>&lt;/hash&gt;
+
+<hr WIDTH="100%">
+
+<h2>Security</h2>
+
+<h3>General</h3>
+
+<object data="./graphic.txt" type="text/plain" width="90%" height="1100">
+  <param name="src" value="uhr.svg">
+</object>
+
+<h4>login</h4>
+
+<p>The user (Web Application) starts a login request with user/password via 
+Http(s)/REST to the YaST Webservice. This request will be checked with PAM
+OR with local user account handled in the YaST Webservice database (currently
+not implemented). The access will be granted or denied. If the request has
+been successfully finished a session will be created and (on demand) a cookie will
+be send to the Web Application.
+
+<h4>Single task e.g. getting system time settings</h4>
+
+<p>The user "tux" (Web Application) with a valid session sends the Http(s) request:
+
+<p>GET http://&lt;name_of_the_host&gt;/systemtime.xml
+
+<p>The YaST Webservice checks if "tux" has the right for reading these settings:
+
+<p>policyKit_check ("tux", "read.systemtime")
+
+<p>If the permission has been granted the YaST Webservice starts the needed commands
+to the SCR - Agent in order to get all needed information:
+
+<p>Scr.read(".sysconfig.clock.HWCLOCK")
+<br>Scr.execute("/bin/date")
+<br>Scr.read(".sysconfig.clock.TIMEZONE")
+
+<p>These requests will be sent to the SCR - Agent with the user account "yastws". 
+<p>The SCR - Agent checks with policyKit if "yastws" has the right for these calls:
+
+<p>policyKit_check ("yastws", "read.sysconfig.clock.HWCLOCK")
+<br>policyKit_check ("yastws", "execute.bin.date")
+<br>policyKit_check ("yastws", "read.sysconfig.clock.TIMEZONE")
+
+<p>This additional policy check will be done in order to give the YaST-Webservice ONLY rights
+for calls which reflect the YaST-Webservice interface.
+
+
+
+<h3>API Policies</h3>
+
+<p><br>Each YaST Webservice call has concerning access permissions which can be defined for each user.
+
+<p>These permissions are handled by PolicyKit in the file:
+
+<p>/usr/share/PolicyKit/policy/org.opensuse.yast.webservice.policy
+
+<p>If you are getting a permission error while using the API just have a look to the webserver logfile
+in order to get the information which permissions are missed:
+
+<p>Action: org.opensuse.yast.webservice.run-yastmodule User: schubi Result: no
+<br>Action: org.opensuse.yast.webservice.run-yastmodule-lan User: schubi Result: yes
+
+<p>These permissions can be set with the call "polkit-auth" like:
+
+<p>polkit-auth --user schubi --grant org.opensuse.yast.webservice.run-yastmodule-lan
+
+<p>Or can be reset by:
+
+<p>polkit-auth --user schubi --revoke org.opensuse.yast.webservice.run-yastmodule-lan
+
+<p>In order to cleanup or to grant ALL permissions you can use the ruby script policyKit-rights.rb
+delivered with this package:
+
+<blockquote>
+
+   Usage: policyKit-right.rb --user &lt;user&gt; --action (show|grant|revoke)
+   <br>NOTE: This program should be run by user root
+
+   <p>This call grant/revoke ALL permissions for YaST the Webservice.
+   <br>In order to grant/revoke single rights use:
+   <br>polkit-auth --user &lt;user&gt; (--grant|-revoke) &lt;policyname&gt;
+
+   <p>In order to show all possible permissions use:
+   <br>polkit-action
+
+</blockquote>
+
+<h3>Roles</h3>
+
+<p><br>In order to avoid declaring permissions for each user there is the possibility to define roles for
+each user like: administrator, secretary, ...
+
+<p>The definition which roles belong to a user are defined in file /etc/yast_user_roles:
+
+<p>#
+<br># file : /etc/yast_user_roles
+<br>#
+<br># This file describes roles of a user accounts for the YaST Webservice
+<br># "user accounts": System account which is accessible e.g. via PAM.
+<br># "roles"        : Describes user accounts for which policies have
+<br>#                  been generated
+<br>#
+<br># Format: &lt;user&gt;   &lt;role 1&gt;,&lt;role 2&gt;,...&lt;role n&gt;
+<br>#
+
+<p>So, you have to generate a system user e.g. "secretary" and define special right for
+that user (described above).
+<br>For getting "secretary" rights you have to add the concerning user in the file 
+/etc/yast_user_roles only.
+
+<br>This is a very simple way to store this information. Much more elegant would be to
+store it to another place e.g. via ldap. Make a proposal :-)
