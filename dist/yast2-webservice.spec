@@ -187,13 +187,14 @@ fi
 %config /etc/yastws/www/lib
 %config /etc/yastws/www/public
 %config /etc/yastws/www/Rakefile
-%config /etc/yastws/www/README*
 %config /etc/yastws/www/COPYING
 %config /etc/yastws/www/script
 %config /etc/yastws/www/test
 %config /etc/yastws/www/config
 %attr(755,root,root) %config /etc/yastws/tools/policyKit-rights.rb
-%doc README* COPYING
+%doc /etc/yastws/www/public/doc_config.html 
+%doc /etc/yastws/www/public/doc_interface.html
+%doc COPYING
 %attr(-,%{pkg_user},%{pkg_user}) /etc/yastws/www/log
 %attr(-,%{pkg_user},%{pkg_user}) /etc/yastws/www/tmp
 %config(noreplace) /etc/yastws/vhosts.d/yast.conf
