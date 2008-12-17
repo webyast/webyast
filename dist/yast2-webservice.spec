@@ -10,7 +10,7 @@
 
 
 Name:           yast2-webservice
-Requires:       yast2-core, lighttpd-mod_magnet, ruby-fcgi, ruby-dbus, sqlite
+Requires:       yast2-core, lighttpd-mod_magnet, ruby-fcgi, ruby-dbus, sqlite, avahi-utils
 PreReq:         lighttpd, PolicyKit, PackageKit, rubygem-rake, rubygem-sqlite3, rubygem-rails
 License:        GPL
 Group:          Productivity/Networking/Web/Utilities
