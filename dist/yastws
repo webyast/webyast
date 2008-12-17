@@ -128,7 +128,12 @@ test -r $LIGHTTPD_CONFIG || { echo "$LIGHTTPD_CONFIG not existing";
 #
 # Activate/Deactivate AVAHI
 #
-HOSTNAME="$(hostname)"
+DOMAIN="$(domainname)"
+if [ "$DOMAIN" = "" ]; then
+   HOSTNAME="$(hostname)"
+else
+   HOSTNAME="$(hostname).$DOMAIN"
+fi
 
 function avahi_stop () {
    RUNNING=$(ps ux | grep avahi-publish-service | grep yastws | grep $HOSTNAME >/dev/null)

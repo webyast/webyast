@@ -109,5 +109,9 @@ ActionController::Routing::Routes.draw do |map|
   map.connect ':controller/:action/:id'
   map.connect ':controller/:action/:id.:format'
 
+  map.resource :yast, :controller => 'yast'
+
+  map.connect "/.xml", :controller => 'yast', :action => 'index', :format =>'xml'
+  map.connect "/.json", :controller => 'yast', :action => 'index', :format =>'json'
   map.root :controller => "yast"
 end

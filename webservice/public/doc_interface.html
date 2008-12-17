@@ -267,6 +267,60 @@ e.g. menue entry or input frame.
 </blockquote>
 &lt;/hash&gt;
 
+<h3>&lt;hostname&gt;/.xml or &lt;hostname&gt;/yast.xml</h3>
+
+<p><br>Returns a list of all available modules.
+
+<p>GET &lt;hostname&gt;/.xml
+
+<p>returns:
+
+<p>&lt;links type="array"&gt;
+<br>&lt;link&gt;
+  <blockquote>
+  &lt;description&gt;Creating a YaST Webservice session&lt;/description&gt;
+  <br>&lt;path&gt;login&lt;/path&gt;
+  </blockquote>
+&lt;/link&gt;
+<br>&lt;link&gt;
+  <blockquote>
+  &lt;description&gt;Closing YaST Webservice session&lt;/description&gt;
+  <br>&lt;path&gt;logout&lt;/path&gt;
+  </blockquote>
+&lt;/link&gt;
+<br>&lt;link&gt;
+  <blockquote>
+  &lt;description&gt;Managing Linux services like samba, ntp,...&lt;/description&gt;
+  <br>&lt;path&gt;services&lt;/path&gt;
+  </blockquote>
+&lt;/link&gt;
+<br>&lt;link&gt;
+  <blockquote>
+  &lt;description&gt;Setting system time&lt;/description&gt;
+  <br>&lt;path&gt;systemtime&lt;/path&gt;
+  </blockquote>
+&lt;/link&gt;
+<br>&lt;link&gt;
+  <blockquote>
+  &lt;description&gt;Setting language&lt;/description&gt;
+  <br>&lt;path&gt;language&lt;/path&gt;
+  </blockquote>
+&lt;/link&gt;
+<br>&lt;link&gt;
+  <blockquote>
+  &lt;description&gt;Checking access rights&lt;/description&gt;
+  <br>&lt;path&gt;users&lt;/path&gt;
+  </blockquote>
+&lt;/link&gt;
+<br>&lt;link&gt;
+  <blockquote>
+  &lt;description&gt;Updating System&lt;/description&gt;
+  <br>&lt;path&gt;patch_updates&lt;/path&gt;
+  </blockquote>
+&lt;/link&gt;
+<br>&lt;/links&gt;
+
+
 <h3>&lt;hostname&gt;/services</h3>
 
 <p><br>Managing system services like cron, smbfs, gpm, sshd, random, cups, ntp
