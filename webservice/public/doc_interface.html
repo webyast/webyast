@@ -231,13 +231,16 @@ The user account will be checked with PAM. So SYSTEM users can login only.
 
 <p>This call will generate a cookie file with login data described in &lt;login_xml_file&gt;.
 
-<h3>&lt;hostname&gt;/permission/&lt;policyKitRule&gt;</h3>
+<h3>&lt;hostname&gt;/checkpermission/&lt;policyKitRule&gt;</h3>
 
-<p><br>Checking if the user of the current session has the permission of the given rule &lt;policyKitRule&gt;.
-This call is useful for applications which have to check the permissions BEFORE they generate a
+<p><br>Checking if the user of the current session has the permission of the
+given rule &lt;policyKitRule&gt;.
+<br>&lt;policyKitRule&gt; is given <b>without</b> the "pre" string
+"org.opensuse.yast.webservice.".
+<br>This call is useful for applications which have to check the permissions BEFORE they generate a
 e.g. menue entry or input frame.
 
-<p>GET &lt;hostname&gt;/permission/&lt;policyKitRule&gt; checks the permission and returns:
+<p>GET &lt;hostname&gt;/checkpermission/&lt;policyKitRule&gt; checks the permission and returns:
 
 <p>&lt;hash&gt;
 <blockquote>

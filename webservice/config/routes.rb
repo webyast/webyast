@@ -85,10 +85,10 @@ ActionController::Routing::Routes.draw do |map|
   map.connect "/yast_modules/:id.html", :controller => 'yast_modules', :action => 'run', :format =>'html'
   map.connect "/yast_modules/:id.json", :controller => 'yast_modules', :action => 'run', :format =>'json'
 
-  map.connect "/permission/:id", :controller => 'permission', :action => 'show'
-  map.connect "/permission/:id.xml", :controller => 'permission', :action => 'show', :format =>'xml'
-  map.connect "/permission/:id.html", :controller => 'permission', :action => 'show', :format =>'html'
-  map.connect "/permission/:id.json", :controller => 'permission', :action => 'show', :format =>'json'
+  map.connect "/checkpermission/:id", :controller => 'check_permission', :action => 'show'
+  map.connect "/checkpermission/:id.xml", :controller => 'check_permission', :action => 'show', :format =>'xml'
+  map.connect "/checkpermission/:id.html", :controller => 'check_permission', :action => 'show', :format =>'html'
+  map.connect "/checkpermission/:id.json", :controller => 'check_permission', :action => 'show', :format =>'json'
 
   map.login '/login', :controller => 'sessions', :action => 'new'
   map.login '/login.xml', :controller => 'sessions', :action => 'create', :format =>'xml'

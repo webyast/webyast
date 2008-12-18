@@ -1,4 +1,4 @@
-class PermissionController < ApplicationController
+class CheckPermissionController < ApplicationController
 
   before_filter :login_required
 
