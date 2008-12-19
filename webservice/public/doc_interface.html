@@ -629,6 +629,63 @@ If you want more information about an user just call:
   </blockquote>
 &lt;/user&gt;
 
+
+<h3>&lt;hostname&gt;/users/&lt;loginname&gt;/permissions</h3>
+
+<p><br>PolicyKit user Permissions.
+
+<p>GET &lt;hostname&gt;/users/&lt;loginname&gt;/permissions returns an array of policies:
+
+<p>&lt;permissions type="array"&gt;
+<br>&lt;permission&gt;
+<blockquote>
+    &lt;error-id type="integer"&gt;0&lt;/error-id&gt;
+    <br>&lt;error-string&gt;&lt;/error-string&gt;
+    <br>&lt;grant type="boolean"&gt;true&lt;/grant&gt;
+    <br>&lt;name&gt;read-systemtime&lt;/name&gt;
+</blockquote>
+  &lt;/permission&gt;
+<br>&lt;permission&gt;
+<blockquote>
+    &lt;error-id type="integer"&gt;0&lt;/error-id&gt;
+    <br>&lt;error-string&gt;&lt;/error-string&gt;
+    <br>&lt;grant type="boolean"&gt;true&lt;/grant&gt;
+    <br>&lt;name&gt;write-systemtime&lt;/name&gt;
+</blockquote>
+&lt;/permission&gt;
+<br>&lt;/permissions&gt;
+
+
+<h3>&lt;hostname&gt;/users/&lt;loginname&gt;/permissions/&lt;policyKitRule&gt;</h3>
+
+<p><br>Checking if the user has the permission of the given rule &lt;policyKitRule&gt;.
+<br>&lt;policyKitRule&gt; is given <b>without</b> the "pre" string
+"org.opensuse.yast.webservice.".
+
+<p>GET
+&lt;hostname&gt;/users/&lt;loginname&gt;/permissions/&lt;policyKitRule&gt;
+
+<p>returns the  permission:
+
+<p>&lt;permission&gt;
+<blockquote>
+    &lt;error-id type="integer"&gt;0&lt;/error-id&gt;
+    <br>&lt;error-string&gt;&lt;/error-string&gt;
+    <br>&lt;grant type="boolean"&gt;true&lt;/grant&gt;
+    <br>&lt;name&gt;write-systemtime&lt;/name&gt;
+</blockquote>
+&lt;/permission&gt;
+
+<p>PUT
+&lt;hostname&gt;/users/&lt;loginname&gt;/permissions/&lt;policyKitRule&gt; with
+the value:
+
+<p>&lt;permission&gt;
+<blockquote>
+   &lt;grant type="boolean"&gt;true&lt;/grant&gt;
+</blockquote>
+&lt;/permission&gt;
+
 <h3>&lt;hostname&gt;/patch_updates</h3>
 
 <p>Evaluate and install needed patches.
