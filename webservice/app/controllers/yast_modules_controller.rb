@@ -78,8 +78,8 @@ class YastModulesController < ApplicationController
     idPolicy = id.tr_s('_', '-')
     idPolicy = idPolicy.chomp
     idPolicy = idPolicy.downcase
-    idPolicyLong = "org.opensuse.yast.webservice.run-yastmodule-" + idPolicy
-    if (permissionCheck( "org.opensuse.yast.webservice.run-yastmodule") or
+    idPolicyLong = "org.opensuse.yast.webservice.execute-yastmodule-" + idPolicy
+    if (permissionCheck( "org.opensuse.yast.webservice.execute-yastmodule") or
         permissionCheck( idPolicyLong))
        init_modules false #check no policy
        @yastModule = @yastModules[id]

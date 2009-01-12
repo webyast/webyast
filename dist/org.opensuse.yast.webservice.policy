@@ -548,7 +548,7 @@ Rights for YaST command line interface
       <allow_active>no</allow_active>
     </defaults>
   </action>
-  <action id="org.opensuse.yast.webservice.run-yastmodule">
+  <action id="org.opensuse.yast.webservice.execute-yastmodule">
     <description>Permission to run ALL YaST modules</description>
     <message>Authentication is required to run ALL YaST modules</message>
     <defaults>
@@ -565,7 +565,7 @@ Rights for YaST command line interface
       <allow_active>no</allow_active>
     </defaults>
   </action>
-  <action id="org.opensuse.yast.webservice.run-yastmodule-nfs-server">
+  <action id="org.opensuse.yast.webservice.execute-yastmodule-nfs-server">
     <description>Permission to run YaST module "nfs_server"</description>
     <message>Authentication is required to run YaST module "nfs_server"</message>
     <defaults>
@@ -581,7 +581,7 @@ Rights for YaST command line interface
       <allow_active>no</allow_active>
     </defaults>
   </action>
-  <action id="org.opensuse.yast.webservice.run-yastmodule-squidguard">
+  <action id="org.opensuse.yast.webservice.execute-yastmodule-squidguard">
     <description>Permission to run YaST module "squidguard"</description>
     <message>Authentication is required to run YaST module "squidguard"</message>
     <defaults>
@@ -597,7 +597,7 @@ Rights for YaST command line interface
       <allow_active>no</allow_active>
     </defaults>
   </action>
-  <action id="org.opensuse.yast.webservice.run-yastmodule-hwinfo">
+  <action id="org.opensuse.yast.webservice.execute-yastmodule-hwinfo">
     <description>Permission to run YaST module "hwinfo"</description>
     <message>Authentication is required to run YaST module "hwinfo"</message>
     <defaults>
@@ -613,7 +613,7 @@ Rights for YaST command line interface
       <allow_active>no</allow_active>
     </defaults>
   </action>
-  <action id="org.opensuse.yast.webservice.run-yastmodule-modem">
+  <action id="org.opensuse.yast.webservice.execute-yastmodule-modem">
     <description>Permission to run YaST module "modem"</description>
     <message>Authentication is required to run YaST module "modem"</message>
     <defaults>
@@ -629,7 +629,7 @@ Rights for YaST command line interface
       <allow_active>no</allow_active>
     </defaults>
   </action>
-  <action id="org.opensuse.yast.webservice.run-yastmodule-kdump">
+  <action id="org.opensuse.yast.webservice.execute-yastmodule-kdump">
     <description>Permission to run YaST module "kdump"</description>
     <message>Authentication is required to run YaST module "kdump"</message>
     <defaults>
@@ -645,7 +645,7 @@ Rights for YaST command line interface
       <allow_active>no</allow_active>
     </defaults>
   </action>
-  <action id="org.opensuse.yast.webservice.run-yastmodule-samba-client">
+  <action id="org.opensuse.yast.webservice.execute-yastmodule-samba-client">
     <description>Permission to run YaST module "samba-client"</description>
     <message>Authentication is required to run YaST module "samba-client"</message>
     <defaults>
@@ -661,7 +661,7 @@ Rights for YaST command line interface
       <allow_active>no</allow_active>
     </defaults>
   </action>
-  <action id="org.opensuse.yast.webservice.run-yastmodule-dhcp-server">
+  <action id="org.opensuse.yast.webservice.execute-yastmodule-dhcp-server">
     <description>Permission to run YaST module "dhcp-server"</description>
     <message>Authentication is required to run YaST module "dhcp-server"</message>
     <defaults>
@@ -677,7 +677,7 @@ Rights for YaST command line interface
       <allow_active>no</allow_active>
     </defaults>
   </action>
-  <action id="org.opensuse.yast.webservice.run-yastmodule-autofs">
+  <action id="org.opensuse.yast.webservice.execute-yastmodule-autofs">
     <description>Permission to run YaST module "autofs"</description>
     <message>Authentication is required to run YaST module "autofs"</message>
     <defaults>
@@ -693,7 +693,7 @@ Rights for YaST command line interface
       <allow_active>no</allow_active>
     </defaults>
   </action>
-  <action id="org.opensuse.yast.webservice.run-yastmodule-provider">
+  <action id="org.opensuse.yast.webservice.execute-yastmodule-provider">
     <description>Permission to run YaST module "provider"</description>
     <message>Authentication is required to run YaST module "provider"</message>
     <defaults>
@@ -709,7 +709,7 @@ Rights for YaST command line interface
       <allow_active>no</allow_active>
     </defaults>
   </action>
-  <action id="org.opensuse.yast.webservice.run-yastmodule-joystick">
+  <action id="org.opensuse.yast.webservice.execute-yastmodule-joystick">
     <description>Permission to run YaST module "joystick"</description>
     <message>Authentication is required to run YaST module "joystick"</message>
     <defaults>
@@ -725,7 +725,7 @@ Rights for YaST command line interface
       <allow_active>no</allow_active>
     </defaults>
   </action>
-  <action id="org.opensuse.yast.webservice.run-yastmodule-profile-manager">
+  <action id="org.opensuse.yast.webservice.execute-yastmodule-profile-manager">
     <description>Permission to run YaST module "profile-manager"</description>
     <message>Authentication is required to run YaST module "profile-manager"</message>
     <defaults>
@@ -741,7 +741,7 @@ Rights for YaST command line interface
       <allow_active>no</allow_active>
     </defaults>
   </action>
-  <action id="org.opensuse.yast.webservice.run-yastmodule-kerberos-client">
+  <action id="org.opensuse.yast.webservice.execute-yastmodule-kerberos-client">
     <description>Permission to run YaST module "kerberos-client"</description>
     <message>Authentication is required to run YaST module "kerberos-client"</message>
     <defaults>
@@ -757,7 +757,7 @@ Rights for YaST command line interface
       <allow_active>no</allow_active>
     </defaults>
   </action>
-  <action id="org.opensuse.yast.webservice.run-yastmodule-disk">
+  <action id="org.opensuse.yast.webservice.execute-yastmodule-disk">
     <description>Permission to run YaST module "disk"</description>
     <message>Authentication is required to run YaST module "disk"</message>
     <defaults>
@@ -773,7 +773,7 @@ Rights for YaST command line interface
       <allow_active>no</allow_active>
     </defaults>
   </action>
-  <action id="org.opensuse.yast.webservice.run-yastmodule-sd-editprofile">
+  <action id="org.opensuse.yast.webservice.execute-yastmodule-sd-editprofile">
     <description>Permission to run YaST module "SD_EditProfile"</description>
     <message>Authentication is required to run YaST module "SD_EditProfile"</message>
     <defaults>
@@ -789,7 +789,7 @@ Rights for YaST command line interface
       <allow_active>no</allow_active>
     </defaults>
   </action>
-  <action id="org.opensuse.yast.webservice.run-yastmodule-remote">
+  <action id="org.opensuse.yast.webservice.execute-yastmodule-remote">
     <description>Permission to run YaST module "remote"</description>
     <message>Authentication is required to run YaST module "remote"</message>
     <defaults>
@@ -805,7 +805,7 @@ Rights for YaST command line interface
       <allow_active>no</allow_active>
     </defaults>
   </action>
-  <action id="org.opensuse.yast.webservice.run-yastmodule-inetd">
+  <action id="org.opensuse.yast.webservice.execute-yastmodule-inetd">
     <description>Permission to run YaST module "inetd"</description>
     <message>Authentication is required to run YaST module "inetd"</message>
     <defaults>
@@ -821,7 +821,7 @@ Rights for YaST command line interface
       <allow_active>no</allow_active>
     </defaults>
   </action>
-  <action id="org.opensuse.yast.webservice.run-yastmodule-lvm-config">
+  <action id="org.opensuse.yast.webservice.execute-yastmodule-lvm-config">
     <description>Permission to run YaST module "lvm_config"</description>
     <message>Authentication is required to run YaST module "lvm_config"</message>
     <defaults>
@@ -837,7 +837,7 @@ Rights for YaST command line interface
       <allow_active>no</allow_active>
     </defaults>
   </action>
-  <action id="org.opensuse.yast.webservice.run-yastmodule-multipath">
+  <action id="org.opensuse.yast.webservice.execute-yastmodule-multipath">
     <description>Permission to run YaST module "multipath"</description>
     <message>Authentication is required to run YaST module "multipath"</message>
     <defaults>
@@ -853,7 +853,7 @@ Rights for YaST command line interface
       <allow_active>no</allow_active>
     </defaults>
   </action>
-  <action id="org.opensuse.yast.webservice.run-yastmodule-ldap">
+  <action id="org.opensuse.yast.webservice.execute-yastmodule-ldap">
     <description>Permission to run YaST module "ldap"</description>
     <message>Authentication is required to run YaST module "ldap"</message>
     <defaults>
@@ -869,7 +869,7 @@ Rights for YaST command line interface
       <allow_active>no</allow_active>
     </defaults>
   </action>
-  <action id="org.opensuse.yast.webservice.run-yastmodule-certify">
+  <action id="org.opensuse.yast.webservice.execute-yastmodule-certify">
     <description>Permission to run YaST module "certify"</description>
     <message>Authentication is required to run YaST module "certify"</message>
     <defaults>
@@ -885,7 +885,7 @@ Rights for YaST command line interface
       <allow_active>no</allow_active>
     </defaults>
   </action>
-  <action id="org.opensuse.yast.webservice.run-yastmodule-answering-machine">
+  <action id="org.opensuse.yast.webservice.execute-yastmodule-answering-machine">
     <description>Permission to run YaST module "answering_machine"</description>
     <message>Authentication is required to run YaST module "answering_machine"</message>
     <defaults>
@@ -901,7 +901,7 @@ Rights for YaST command line interface
       <allow_active>no</allow_active>
     </defaults>
   </action>
-  <action id="org.opensuse.yast.webservice.run-yastmodule-common-cert">
+  <action id="org.opensuse.yast.webservice.execute-yastmodule-common-cert">
     <description>Permission to run YaST module "common_cert"</description>
     <message>Authentication is required to run YaST module "common_cert"</message>
     <defaults>
@@ -917,7 +917,7 @@ Rights for YaST command line interface
       <allow_active>no</allow_active>
     </defaults>
   </action>
-  <action id="org.opensuse.yast.webservice.run-yastmodule-pervasive-postgres">
+  <action id="org.opensuse.yast.webservice.execute-yastmodule-pervasive-postgres">
     <description>Permission to run YaST module "pervasive_postgres"</description>
     <message>Authentication is required to run YaST module "pervasive_postgres"</message>
     <defaults>
@@ -933,7 +933,7 @@ Rights for YaST command line interface
       <allow_active>no</allow_active>
     </defaults>
   </action>
-  <action id="org.opensuse.yast.webservice.run-yastmodule-ntsutils">
+  <action id="org.opensuse.yast.webservice.execute-yastmodule-ntsutils">
     <description>Permission to run YaST module "ntsutils"</description>
     <message>Authentication is required to run YaST module "ntsutils"</message>
     <defaults>
@@ -949,7 +949,7 @@ Rights for YaST command line interface
       <allow_active>no</allow_active>
     </defaults>
   </action>
-  <action id="org.opensuse.yast.webservice.run-yastmodule-sshd">
+  <action id="org.opensuse.yast.webservice.execute-yastmodule-sshd">
     <description>Permission to run YaST module "sshd"</description>
     <message>Authentication is required to run YaST module "sshd"</message>
     <defaults>
@@ -965,7 +965,7 @@ Rights for YaST command line interface
       <allow_active>no</allow_active>
     </defaults>
   </action>
-  <action id="org.opensuse.yast.webservice.run-yastmodule-sudo">
+  <action id="org.opensuse.yast.webservice.execute-yastmodule-sudo">
     <description>Permission to run YaST module "sudo"</description>
     <message>Authentication is required to run YaST module "sudo"</message>
     <defaults>
@@ -981,7 +981,7 @@ Rights for YaST command line interface
       <allow_active>no</allow_active>
     </defaults>
   </action>
-  <action id="org.opensuse.yast.webservice.run-yastmodule-you-server">
+  <action id="org.opensuse.yast.webservice.execute-yastmodule-you-server">
     <description>Permission to run YaST module "you_server"</description>
     <message>Authentication is required to run YaST module "you_server"</message>
     <defaults>
@@ -997,7 +997,7 @@ Rights for YaST command line interface
       <allow_active>no</allow_active>
     </defaults>
   </action>
-  <action id="org.opensuse.yast.webservice.run-yastmodule-network">
+  <action id="org.opensuse.yast.webservice.execute-yastmodule-network">
     <description>Permission to run YaST module "network"</description>
     <message>Authentication is required to run YaST module "network"</message>
     <defaults>
@@ -1013,7 +1013,7 @@ Rights for YaST command line interface
       <allow_active>no</allow_active>
     </defaults>
   </action>
-  <action id="org.opensuse.yast.webservice.run-yastmodule-mail-server">
+  <action id="org.opensuse.yast.webservice.execute-yastmodule-mail-server">
     <description>Permission to run YaST module "mail-server"</description>
     <message>Authentication is required to run YaST module "mail-server"</message>
     <defaults>
@@ -1029,7 +1029,7 @@ Rights for YaST command line interface
       <allow_active>no</allow_active>
     </defaults>
   </action>
-  <action id="org.opensuse.yast.webservice.run-yastmodule-ca-mgm">
+  <action id="org.opensuse.yast.webservice.execute-yastmodule-ca-mgm">
     <description>Permission to run YaST module "ca_mgm"</description>
     <message>Authentication is required to run YaST module "ca_mgm"</message>
     <defaults>
@@ -1045,7 +1045,7 @@ Rights for YaST command line interface
       <allow_active>no</allow_active>
     </defaults>
   </action>
-  <action id="org.opensuse.yast.webservice.run-yastmodule-mail">
+  <action id="org.opensuse.yast.webservice.execute-yastmodule-mail">
     <description>Permission to run YaST module "mail"</description>
     <message>Authentication is required to run YaST module "mail"</message>
     <defaults>
@@ -1061,7 +1061,7 @@ Rights for YaST command line interface
       <allow_active>no</allow_active>
     </defaults>
   </action>
-  <action id="org.opensuse.yast.webservice.run-yastmodule-repositories">
+  <action id="org.opensuse.yast.webservice.execute-yastmodule-repositories">
     <description>Permission to run YaST module "repositories"</description>
     <message>Authentication is required to run YaST module "repositories"</message>
     <defaults>
@@ -1077,7 +1077,7 @@ Rights for YaST command line interface
       <allow_active>no</allow_active>
     </defaults>
   </action>
-  <action id="org.opensuse.yast.webservice.run-yastmodule-isdn">
+  <action id="org.opensuse.yast.webservice.execute-yastmodule-isdn">
     <description>Permission to run YaST module "isdn"</description>
     <message>Authentication is required to run YaST module "isdn"</message>
     <defaults>
@@ -1093,7 +1093,7 @@ Rights for YaST command line interface
       <allow_active>no</allow_active>
     </defaults>
   </action>
-  <action id="org.opensuse.yast.webservice.run-yastmodule-timezone">
+  <action id="org.opensuse.yast.webservice.execute-yastmodule-timezone">
     <description>Permission to run YaST module "timezone"</description>
     <message>Authentication is required to run YaST module "timezone"</message>
     <defaults>
@@ -1109,7 +1109,7 @@ Rights for YaST command line interface
       <allow_active>no</allow_active>
     </defaults>
   </action>
-  <action id="org.opensuse.yast.webservice.run-yastmodule-hpc">
+  <action id="org.opensuse.yast.webservice.execute-yastmodule-hpc">
     <description>Permission to run YaST module "hpc"</description>
     <message>Authentication is required to run YaST module "hpc"</message>
     <defaults>
@@ -1125,7 +1125,7 @@ Rights for YaST command line interface
       <allow_active>no</allow_active>
     </defaults>
   </action>
-  <action id="org.opensuse.yast.webservice.run-yastmodule-online-update-setup">
+  <action id="org.opensuse.yast.webservice.execute-yastmodule-online-update-setup">
     <description>Permission to run YaST module "online_update_setup"</description>
     <message>Authentication is required to run YaST module "online_update_setup"</message>
     <defaults>
@@ -1141,7 +1141,7 @@ Rights for YaST command line interface
       <allow_active>no</allow_active>
     </defaults>
   </action>
-  <action id="org.opensuse.yast.webservice.run-yastmodule-update">
+  <action id="org.opensuse.yast.webservice.execute-yastmodule-update">
     <description>Permission to run YaST module "update"</description>
     <message>Authentication is required to run YaST module "update"</message>
     <defaults>
@@ -1157,7 +1157,7 @@ Rights for YaST command line interface
       <allow_active>no</allow_active>
     </defaults>
   </action>
-  <action id="org.opensuse.yast.webservice.run-yastmodule-scanner">
+  <action id="org.opensuse.yast.webservice.execute-yastmodule-scanner">
     <description>Permission to run YaST module "scanner"</description>
     <message>Authentication is required to run YaST module "scanner"</message>
     <defaults>
@@ -1173,7 +1173,7 @@ Rights for YaST command line interface
       <allow_active>no</allow_active>
     </defaults>
   </action>
-  <action id="org.opensuse.yast.webservice.run-yastmodule-sd-deleteprofile">
+  <action id="org.opensuse.yast.webservice.execute-yastmodule-sd-deleteprofile">
     <description>Permission to run YaST module "SD_DeleteProfile"</description>
     <message>Authentication is required to run YaST module "SD_DeleteProfile"</message>
     <defaults>
@@ -1189,7 +1189,7 @@ Rights for YaST command line interface
       <allow_active>no</allow_active>
     </defaults>
   </action>
-  <action id="org.opensuse.yast.webservice.run-yastmodule-wol">
+  <action id="org.opensuse.yast.webservice.execute-yastmodule-wol">
     <description>Permission to run YaST module "wol"</description>
     <message>Authentication is required to run YaST module "wol"</message>
     <defaults>
@@ -1205,7 +1205,7 @@ Rights for YaST command line interface
       <allow_active>no</allow_active>
     </defaults>
   </action>
-  <action id="org.opensuse.yast.webservice.run-yastmodule-ntp-client">
+  <action id="org.opensuse.yast.webservice.execute-yastmodule-ntp-client">
     <description>Permission to run YaST module "ntp-client"</description>
     <message>Authentication is required to run YaST module "ntp-client"</message>
     <defaults>
@@ -1221,7 +1221,7 @@ Rights for YaST command line interface
       <allow_active>no</allow_active>
     </defaults>
   </action>
-  <action id="org.opensuse.yast.webservice.run-yastmodule-http-server">
+  <action id="org.opensuse.yast.webservice.execute-yastmodule-http-server">
     <description>Permission to run YaST module "http-server"</description>
     <message>Authentication is required to run YaST module "http-server"</message>
     <defaults>
@@ -1237,7 +1237,7 @@ Rights for YaST command line interface
       <allow_active>no</allow_active>
     </defaults>
   </action>
-  <action id="org.opensuse.yast.webservice.run-yastmodule-kiwi">
+  <action id="org.opensuse.yast.webservice.execute-yastmodule-kiwi">
     <description>Permission to run YaST module "kiwi"</description>
     <message>Authentication is required to run YaST module "kiwi"</message>
     <defaults>
@@ -1253,7 +1253,7 @@ Rights for YaST command line interface
       <allow_active>no</allow_active>
     </defaults>
   </action>
-  <action id="org.opensuse.yast.webservice.run-yastmodule-dirinstall">
+  <action id="org.opensuse.yast.webservice.execute-yastmodule-dirinstall">
     <description>Permission to run YaST module "dirinstall"</description>
     <message>Authentication is required to run YaST module "dirinstall"</message>
     <defaults>
@@ -1269,7 +1269,7 @@ Rights for YaST command line interface
       <allow_active>no</allow_active>
     </defaults>
   </action>
-  <action id="org.opensuse.yast.webservice.run-yastmodule-ldap-server">
+  <action id="org.opensuse.yast.webservice.execute-yastmodule-ldap-server">
     <description>Permission to run YaST module "ldap-server"</description>
     <message>Authentication is required to run YaST module "ldap-server"</message>
     <defaults>
@@ -1285,7 +1285,7 @@ Rights for YaST command line interface
       <allow_active>no</allow_active>
     </defaults>
   </action>
-  <action id="org.opensuse.yast.webservice.run-yastmodule-security">
+  <action id="org.opensuse.yast.webservice.execute-yastmodule-security">
     <description>Permission to run YaST module "security"</description>
     <message>Authentication is required to run YaST module "security"</message>
     <defaults>
@@ -1301,7 +1301,7 @@ Rights for YaST command line interface
       <allow_active>no</allow_active>
     </defaults>
   </action>
-  <action id="org.opensuse.yast.webservice.run-yastmodule-keyboard">
+  <action id="org.opensuse.yast.webservice.execute-yastmodule-keyboard">
     <description>Permission to run YaST module "keyboard"</description>
     <message>Authentication is required to run YaST module "keyboard"</message>
     <defaults>
@@ -1317,7 +1317,7 @@ Rights for YaST command line interface
       <allow_active>no</allow_active>
     </defaults>
   </action>
-  <action id="org.opensuse.yast.webservice.run-yastmodule-irda">
+  <action id="org.opensuse.yast.webservice.execute-yastmodule-irda">
     <description>Permission to run YaST module "irda"</description>
     <message>Authentication is required to run YaST module "irda"</message>
     <defaults>
@@ -1333,7 +1333,7 @@ Rights for YaST command line interface
       <allow_active>no</allow_active>
     </defaults>
   </action>
-  <action id="org.opensuse.yast.webservice.run-yastmodule-printer">
+  <action id="org.opensuse.yast.webservice.execute-yastmodule-printer">
     <description>Permission to run YaST module "printer"</description>
     <message>Authentication is required to run YaST module "printer"</message>
     <defaults>
@@ -1349,7 +1349,7 @@ Rights for YaST command line interface
       <allow_active>no</allow_active>
     </defaults>
   </action>
-  <action id="org.opensuse.yast.webservice.run-yastmodule-restore">
+  <action id="org.opensuse.yast.webservice.execute-yastmodule-restore">
     <description>Permission to run YaST module "restore"</description>
     <message>Authentication is required to run YaST module "restore"</message>
     <defaults>
@@ -1365,7 +1365,7 @@ Rights for YaST command line interface
       <allow_active>no</allow_active>
     </defaults>
   </action>
-  <action id="org.opensuse.yast.webservice.run-yastmodule-backup">
+  <action id="org.opensuse.yast.webservice.execute-yastmodule-backup">
     <description>Permission to run YaST module "backup"</description>
     <message>Authentication is required to run YaST module "backup"</message>
     <defaults>
@@ -1381,7 +1381,7 @@ Rights for YaST command line interface
       <allow_active>no</allow_active>
     </defaults>
   </action>
-  <action id="org.opensuse.yast.webservice.run-yastmodule-subdomain">
+  <action id="org.opensuse.yast.webservice.execute-yastmodule-subdomain">
     <description>Permission to run YaST module "subdomain"</description>
     <message>Authentication is required to run YaST module "subdomain"</message>
     <defaults>
@@ -1397,7 +1397,7 @@ Rights for YaST command line interface
       <allow_active>no</allow_active>
     </defaults>
   </action>
-  <action id="org.opensuse.yast.webservice.run-yastmodule-instserver">
+  <action id="org.opensuse.yast.webservice.execute-yastmodule-instserver">
     <description>Permission to run YaST module "instserver"</description>
     <message>Authentication is required to run YaST module "instserver"</message>
     <defaults>
@@ -1413,7 +1413,7 @@ Rights for YaST command line interface
       <allow_active>no</allow_active>
     </defaults>
   </action>
-  <action id="org.opensuse.yast.webservice.run-yastmodule-dsl">
+  <action id="org.opensuse.yast.webservice.execute-yastmodule-dsl">
     <description>Permission to run YaST module "dsl"</description>
     <message>Authentication is required to run YaST module "dsl"</message>
     <defaults>
@@ -1429,7 +1429,7 @@ Rights for YaST command line interface
       <allow_active>no</allow_active>
     </defaults>
   </action>
-  <action id="org.opensuse.yast.webservice.run-yastmodule-cd-creator">
+  <action id="org.opensuse.yast.webservice.execute-yastmodule-cd-creator">
     <description>Permission to run YaST module "cd-creator"</description>
     <message>Authentication is required to run YaST module "cd-creator"</message>
     <defaults>
@@ -1445,7 +1445,7 @@ Rights for YaST command line interface
       <allow_active>no</allow_active>
     </defaults>
   </action>
-  <action id="org.opensuse.yast.webservice.run-yastmodule-image-creator">
+  <action id="org.opensuse.yast.webservice.execute-yastmodule-image-creator">
     <description>Permission to run YaST module "image-creator"</description>
     <message>Authentication is required to run YaST module "image-creator"</message>
     <defaults>
@@ -1461,7 +1461,7 @@ Rights for YaST command line interface
       <allow_active>no</allow_active>
     </defaults>
   </action>
-  <action id="org.opensuse.yast.webservice.run-yastmodule-autoyast">
+  <action id="org.opensuse.yast.webservice.execute-yastmodule-autoyast">
     <description>Permission to run YaST module "autoyast"</description>
     <message>Authentication is required to run YaST module "autoyast"</message>
     <defaults>
@@ -1477,7 +1477,7 @@ Rights for YaST command line interface
       <allow_active>no</allow_active>
     </defaults>
   </action>
-  <action id="org.opensuse.yast.webservice.run-yastmodule-xen">
+  <action id="org.opensuse.yast.webservice.execute-yastmodule-xen">
     <description>Permission to run YaST module "xen"</description>
     <message>Authentication is required to run YaST module "xen"</message>
     <defaults>
@@ -1493,7 +1493,7 @@ Rights for YaST command line interface
       <allow_active>no</allow_active>
     </defaults>
   </action>
-  <action id="org.opensuse.yast.webservice.run-yastmodule-casa">
+  <action id="org.opensuse.yast.webservice.execute-yastmodule-casa">
     <description>Permission to run YaST module "CASA"</description>
     <message>Authentication is required to run YaST module "CASA"</message>
     <defaults>
@@ -1509,7 +1509,7 @@ Rights for YaST command line interface
       <allow_active>no</allow_active>
     </defaults>
   </action>
-  <action id="org.opensuse.yast.webservice.run-yastmodule-sd-addprofile">
+  <action id="org.opensuse.yast.webservice.execute-yastmodule-sd-addprofile">
     <description>Permission to run YaST module "SD_AddProfile"</description>
     <message>Authentication is required to run YaST module "SD_AddProfile"</message>
     <defaults>
@@ -1525,7 +1525,7 @@ Rights for YaST command line interface
       <allow_active>no</allow_active>
     </defaults>
   </action>
-  <action id="org.opensuse.yast.webservice.run-yastmodule-iscsi-server">
+  <action id="org.opensuse.yast.webservice.execute-yastmodule-iscsi-server">
     <description>Permission to run YaST module "iscsi-server"</description>
     <message>Authentication is required to run YaST module "iscsi-server"</message>
     <defaults>
@@ -1541,7 +1541,7 @@ Rights for YaST command line interface
       <allow_active>no</allow_active>
     </defaults>
   </action>
-  <action id="org.opensuse.yast.webservice.run-yastmodule-live-installer">
+  <action id="org.opensuse.yast.webservice.execute-yastmodule-live-installer">
     <description>Permission to run YaST module "live-installer"</description>
     <message>Authentication is required to run YaST module "live-installer"</message>
     <defaults>
@@ -1557,7 +1557,7 @@ Rights for YaST command line interface
       <allow_active>no</allow_active>
     </defaults>
   </action>
-  <action id="org.opensuse.yast.webservice.run-yastmodule-dns-server">
+  <action id="org.opensuse.yast.webservice.execute-yastmodule-dns-server">
     <description>Permission to run YaST module "dns-server"</description>
     <message>Authentication is required to run YaST module "dns-server"</message>
     <defaults>
@@ -1573,7 +1573,7 @@ Rights for YaST command line interface
       <allow_active>no</allow_active>
     </defaults>
   </action>
-  <action id="org.opensuse.yast.webservice.run-yastmodule-nfs">
+  <action id="org.opensuse.yast.webservice.execute-yastmodule-nfs">
     <description>Permission to run YaST module "nfs"</description>
     <message>Authentication is required to run YaST module "nfs"</message>
     <defaults>
@@ -1589,7 +1589,7 @@ Rights for YaST command line interface
       <allow_active>no</allow_active>
     </defaults>
   </action>
-  <action id="org.opensuse.yast.webservice.run-yastmodule-host">
+  <action id="org.opensuse.yast.webservice.execute-yastmodule-host">
     <description>Permission to run YaST module "host"</description>
     <message>Authentication is required to run YaST module "host"</message>
     <defaults>
@@ -1605,7 +1605,7 @@ Rights for YaST command line interface
       <allow_active>no</allow_active>
     </defaults>
   </action>
-  <action id="org.opensuse.yast.webservice.run-yastmodule-x11">
+  <action id="org.opensuse.yast.webservice.execute-yastmodule-x11">
     <description>Permission to run YaST module "x11"</description>
     <message>Authentication is required to run YaST module "x11"</message>
     <defaults>
@@ -1621,7 +1621,7 @@ Rights for YaST command line interface
       <allow_active>no</allow_active>
     </defaults>
   </action>
-  <action id="org.opensuse.yast.webservice.run-yastmodule-lan">
+  <action id="org.opensuse.yast.webservice.execute-yastmodule-lan">
     <description>Permission to run YaST module "lan"</description>
     <message>Authentication is required to run YaST module "lan"</message>
     <defaults>
@@ -1637,7 +1637,7 @@ Rights for YaST command line interface
       <allow_active>no</allow_active>
     </defaults>
   </action>
-  <action id="org.opensuse.yast.webservice.run-yastmodule-online-update">
+  <action id="org.opensuse.yast.webservice.execute-yastmodule-online-update">
     <description>Permission to run YaST module "online_update"</description>
     <message>Authentication is required to run YaST module "online_update"</message>
     <defaults>
@@ -1653,7 +1653,7 @@ Rights for YaST command line interface
       <allow_active>no</allow_active>
     </defaults>
   </action>
-  <action id="org.opensuse.yast.webservice.run-yastmodule-fax">
+  <action id="org.opensuse.yast.webservice.execute-yastmodule-fax">
     <description>Permission to run YaST module "fax"</description>
     <message>Authentication is required to run YaST module "fax"</message>
     <defaults>
@@ -1669,7 +1669,7 @@ Rights for YaST command line interface
       <allow_active>no</allow_active>
     </defaults>
   </action>
-  <action id="org.opensuse.yast.webservice.run-yastmodule-nis">
+  <action id="org.opensuse.yast.webservice.execute-yastmodule-nis">
     <description>Permission to run YaST module "nis"</description>
     <message>Authentication is required to run YaST module "nis"</message>
     <defaults>
@@ -1685,7 +1685,7 @@ Rights for YaST command line interface
       <allow_active>no</allow_active>
     </defaults>
   </action>
-  <action id="org.opensuse.yast.webservice.run-yastmodule-uml">
+  <action id="org.opensuse.yast.webservice.execute-yastmodule-uml">
     <description>Permission to run YaST module "uml"</description>
     <message>Authentication is required to run YaST module "uml"</message>
     <defaults>
@@ -1701,7 +1701,7 @@ Rights for YaST command line interface
       <allow_active>no</allow_active>
     </defaults>
   </action>
-  <action id="org.opensuse.yast.webservice.run-yastmodule-ipsec">
+  <action id="org.opensuse.yast.webservice.execute-yastmodule-ipsec">
     <description>Permission to run YaST module "ipsec"</description>
     <message>Authentication is required to run YaST module "ipsec"</message>
     <defaults>
@@ -1717,7 +1717,7 @@ Rights for YaST command line interface
       <allow_active>no</allow_active>
     </defaults>
   </action>
-  <action id="org.opensuse.yast.webservice.run-yastmodule-power-management">
+  <action id="org.opensuse.yast.webservice.execute-yastmodule-power-management">
     <description>Permission to run YaST module "power-management"</description>
     <message>Authentication is required to run YaST module "power-management"</message>
     <defaults>
@@ -1733,7 +1733,7 @@ Rights for YaST command line interface
       <allow_active>no</allow_active>
     </defaults>
   </action>
-  <action id="org.opensuse.yast.webservice.run-yastmodule-reipl">
+  <action id="org.opensuse.yast.webservice.execute-yastmodule-reipl">
     <description>Permission to run YaST module "reipl"</description>
     <message>Authentication is required to run YaST module "reipl"</message>
     <defaults>
@@ -1749,7 +1749,7 @@ Rights for YaST command line interface
       <allow_active>no</allow_active>
     </defaults>
   </action>
-  <action id="org.opensuse.yast.webservice.run-yastmodule-tftp-server">
+  <action id="org.opensuse.yast.webservice.execute-yastmodule-tftp-server">
     <description>Permission to run YaST module "tftp-server"</description>
     <message>Authentication is required to run YaST module "tftp-server"</message>
     <defaults>
@@ -1765,7 +1765,7 @@ Rights for YaST command line interface
       <allow_active>no</allow_active>
     </defaults>
   </action>
-  <action id="org.opensuse.yast.webservice.run-yastmodule-language">
+  <action id="org.opensuse.yast.webservice.execute-yastmodule-language">
     <description>Permission to run YaST module "language"</description>
     <message>Authentication is required to run YaST module "language"</message>
     <defaults>
@@ -1781,7 +1781,7 @@ Rights for YaST command line interface
       <allow_active>no</allow_active>
     </defaults>
   </action>
-  <action id="org.opensuse.yast.webservice.run-yastmodule-dasd">
+  <action id="org.opensuse.yast.webservice.execute-yastmodule-dasd">
     <description>Permission to run YaST module "dasd"</description>
     <message>Authentication is required to run YaST module "dasd"</message>
     <defaults>
@@ -1797,7 +1797,7 @@ Rights for YaST command line interface
       <allow_active>no</allow_active>
     </defaults>
   </action>
-  <action id="org.opensuse.yast.webservice.run-yastmodule-sysconfig">
+  <action id="org.opensuse.yast.webservice.execute-yastmodule-sysconfig">
     <description>Permission to run YaST module "sysconfig"</description>
     <message>Authentication is required to run YaST module "sysconfig"</message>
     <defaults>
@@ -1813,7 +1813,7 @@ Rights for YaST command line interface
       <allow_active>no</allow_active>
     </defaults>
   </action>
-  <action id="org.opensuse.yast.webservice.run-yastmodule-ldap-browser">
+  <action id="org.opensuse.yast.webservice.execute-yastmodule-ldap-browser">
     <description>Permission to run YaST module "ldap_browser"</description>
     <message>Authentication is required to run YaST module "ldap_browser"</message>
     <defaults>
@@ -1829,7 +1829,7 @@ Rights for YaST command line interface
       <allow_active>no</allow_active>
     </defaults>
   </action>
-  <action id="org.opensuse.yast.webservice.run-yastmodule-xpram">
+  <action id="org.opensuse.yast.webservice.execute-yastmodule-xpram">
     <description>Permission to run YaST module "xpram"</description>
     <message>Authentication is required to run YaST module "xpram"</message>
     <defaults>
@@ -1845,7 +1845,7 @@ Rights for YaST command line interface
       <allow_active>no</allow_active>
     </defaults>
   </action>
-  <action id="org.opensuse.yast.webservice.run-yastmodule-proxy">
+  <action id="org.opensuse.yast.webservice.execute-yastmodule-proxy">
     <description>Permission to run YaST module "proxy"</description>
     <message>Authentication is required to run YaST module "proxy"</message>
     <defaults>
@@ -1861,7 +1861,7 @@ Rights for YaST command line interface
       <allow_active>no</allow_active>
     </defaults>
   </action>
-  <action id="org.opensuse.yast.webservice.run-yastmodule-add-on">
+  <action id="org.opensuse.yast.webservice.execute-yastmodule-add-on">
     <description>Permission to run YaST module "add-on"</description>
     <message>Authentication is required to run YaST module "add-on"</message>
     <defaults>
@@ -1877,7 +1877,7 @@ Rights for YaST command line interface
       <allow_active>no</allow_active>
     </defaults>
   </action>
-  <action id="org.opensuse.yast.webservice.run-yastmodule-sound">
+  <action id="org.opensuse.yast.webservice.execute-yastmodule-sound">
     <description>Permission to run YaST module "sound"</description>
     <message>Authentication is required to run YaST module "sound"</message>
     <defaults>
@@ -1893,7 +1893,7 @@ Rights for YaST command line interface
       <allow_active>no</allow_active>
     </defaults>
   </action>
-  <action id="org.opensuse.yast.webservice.run-yastmodule-dump">
+  <action id="org.opensuse.yast.webservice.execute-yastmodule-dump">
     <description>Permission to run YaST module "dump"</description>
     <message>Authentication is required to run YaST module "dump"</message>
     <defaults>
@@ -1909,7 +1909,7 @@ Rights for YaST command line interface
       <allow_active>no</allow_active>
     </defaults>
   </action>
-  <action id="org.opensuse.yast.webservice.run-yastmodule-slp-server">
+  <action id="org.opensuse.yast.webservice.execute-yastmodule-slp-server">
     <description>Permission to run YaST module "slp-server"</description>
     <message>Authentication is required to run YaST module "slp-server"</message>
     <defaults>
@@ -1925,7 +1925,7 @@ Rights for YaST command line interface
       <allow_active>no</allow_active>
     </defaults>
   </action>
-  <action id="org.opensuse.yast.webservice.run-yastmodule-nis-server">
+  <action id="org.opensuse.yast.webservice.execute-yastmodule-nis-server">
     <description>Permission to run YaST module "nis_server"</description>
     <message>Authentication is required to run YaST module "nis_server"</message>
     <defaults>
@@ -1941,7 +1941,7 @@ Rights for YaST command line interface
       <allow_active>no</allow_active>
     </defaults>
   </action>
-  <action id="org.opensuse.yast.webservice.run-yastmodule-fingerprint-reader">
+  <action id="org.opensuse.yast.webservice.execute-yastmodule-fingerprint-reader">
     <description>Permission to run YaST module "fingerprint-reader"</description>
     <message>Authentication is required to run YaST module "fingerprint-reader"</message>
     <defaults>
@@ -1957,7 +1957,7 @@ Rights for YaST command line interface
       <allow_active>no</allow_active>
     </defaults>
   </action>
-  <action id="org.opensuse.yast.webservice.run-yastmodule-product-creator">
+  <action id="org.opensuse.yast.webservice.execute-yastmodule-product-creator">
     <description>Permission to run YaST module "product-creator"</description>
     <message>Authentication is required to run YaST module "product-creator"</message>
     <defaults>
@@ -1973,7 +1973,7 @@ Rights for YaST command line interface
       <allow_active>no</allow_active>
     </defaults>
   </action>
-  <action id="org.opensuse.yast.webservice.run-yastmodule-iscsi-client">
+  <action id="org.opensuse.yast.webservice.execute-yastmodule-iscsi-client">
     <description>Permission to run YaST module "iscsi-client"</description>
     <message>Authentication is required to run YaST module "iscsi-client"</message>
     <defaults>
@@ -1989,7 +1989,7 @@ Rights for YaST command line interface
       <allow_active>no</allow_active>
     </defaults>
   </action>
-  <action id="org.opensuse.yast.webservice.run-yastmodule-support">
+  <action id="org.opensuse.yast.webservice.execute-yastmodule-support">
     <description>Permission to run YaST module "support"</description>
     <message>Authentication is required to run YaST module "support"</message>
     <defaults>
@@ -2005,7 +2005,7 @@ Rights for YaST command line interface
       <allow_active>no</allow_active>
     </defaults>
   </action>
-  <action id="org.opensuse.yast.webservice.run-yastmodule-sw-single">
+  <action id="org.opensuse.yast.webservice.execute-yastmodule-sw-single">
     <description>Permission to run YaST module "sw_single"</description>
     <message>Authentication is required to run YaST module "sw_single"</message>
     <defaults>
@@ -2021,7 +2021,7 @@ Rights for YaST command line interface
       <allow_active>no</allow_active>
     </defaults>
   </action>
-  <action id="org.opensuse.yast.webservice.run-yastmodule-add-on-creator">
+  <action id="org.opensuse.yast.webservice.execute-yastmodule-add-on-creator">
     <description>Permission to run YaST module "add-on-creator"</description>
     <message>Authentication is required to run YaST module "add-on-creator"</message>
     <defaults>
@@ -2037,7 +2037,7 @@ Rights for YaST command line interface
       <allow_active>no</allow_active>
     </defaults>
   </action>
-  <action id="org.opensuse.yast.webservice.run-yastmodule-vendor">
+  <action id="org.opensuse.yast.webservice.execute-yastmodule-vendor">
     <description>Permission to run YaST module "vendor"</description>
     <message>Authentication is required to run YaST module "vendor"</message>
     <defaults>
@@ -2053,7 +2053,7 @@ Rights for YaST command line interface
       <allow_active>no</allow_active>
     </defaults>
   </action>
-  <action id="org.opensuse.yast.webservice.run-yastmodule-sd-report">
+  <action id="org.opensuse.yast.webservice.execute-yastmodule-sd-report">
     <description>Permission to run YaST module "SD_Report"</description>
     <message>Authentication is required to run YaST module "SD_Report"</message>
     <defaults>
@@ -2069,7 +2069,7 @@ Rights for YaST command line interface
       <allow_active>no</allow_active>
     </defaults>
   </action>
-  <action id="org.opensuse.yast.webservice.run-yastmodule-zfcp">
+  <action id="org.opensuse.yast.webservice.execute-yastmodule-zfcp">
     <description>Permission to run YaST module "zfcp"</description>
     <message>Authentication is required to run YaST module "zfcp"</message>
     <defaults>
@@ -2085,7 +2085,7 @@ Rights for YaST command line interface
       <allow_active>no</allow_active>
     </defaults>
   </action>
-  <action id="org.opensuse.yast.webservice.run-yastmodule-ftpd">
+  <action id="org.opensuse.yast.webservice.execute-yastmodule-ftpd">
     <description>Permission to run YaST module "ftpd"</description>
     <message>Authentication is required to run YaST module "ftpd"</message>
     <defaults>
@@ -2101,7 +2101,7 @@ Rights for YaST command line interface
       <allow_active>no</allow_active>
     </defaults>
   </action>
-  <action id="org.opensuse.yast.webservice.run-yastmodule-online-update-configuration">
+  <action id="org.opensuse.yast.webservice.execute-yastmodule-online-update-configuration">
     <description>Permission to run YaST module "online_update_configuration"</description>
     <message>Authentication is required to run YaST module "online_update_configuration"</message>
     <defaults>
@@ -2117,7 +2117,7 @@ Rights for YaST command line interface
       <allow_active>no</allow_active>
     </defaults>
   </action>
-  <action id="org.opensuse.yast.webservice.run-yastmodule-squid">
+  <action id="org.opensuse.yast.webservice.execute-yastmodule-squid">
     <description>Permission to run YaST module "squid"</description>
     <message>Authentication is required to run YaST module "squid"</message>
     <defaults>
@@ -2133,7 +2133,7 @@ Rights for YaST command line interface
       <allow_active>no</allow_active>
     </defaults>
   </action>
-  <action id="org.opensuse.yast.webservice.run-yastmodule-system-settings">
+  <action id="org.opensuse.yast.webservice.execute-yastmodule-system-settings">
     <description>Permission to run YaST module "system_settings"</description>
     <message>Authentication is required to run YaST module "system_settings"</message>
     <defaults>
@@ -2149,7 +2149,7 @@ Rights for YaST command line interface
       <allow_active>no</allow_active>
     </defaults>
   </action>
-  <action id="org.opensuse.yast.webservice.run-yastmodule-firewall">
+  <action id="org.opensuse.yast.webservice.execute-yastmodule-firewall">
     <description>Permission to run YaST module "firewall"</description>
     <message>Authentication is required to run YaST module "firewall"</message>
     <defaults>
@@ -2165,7 +2165,7 @@ Rights for YaST command line interface
       <allow_active>no</allow_active>
     </defaults>
   </action>
-  <action id="org.opensuse.yast.webservice.run-yastmodule-users">
+  <action id="org.opensuse.yast.webservice.execute-yastmodule-users">
     <description>Permission to run YaST module "users"</description>
     <message>Authentication is required to run YaST module "users"</message>
     <defaults>
@@ -2181,7 +2181,7 @@ Rights for YaST command line interface
       <allow_active>no</allow_active>
     </defaults>
   </action>
-  <action id="org.opensuse.yast.webservice.run-yastmodule-slepos-system-manager">
+  <action id="org.opensuse.yast.webservice.execute-yastmodule-slepos-system-manager">
     <description>Permission to run YaST module "slepos-system-manager"</description>
     <message>Authentication is required to run YaST module "slepos-system-manager"</message>
     <defaults>
@@ -2197,7 +2197,7 @@ Rights for YaST command line interface
       <allow_active>no</allow_active>
     </defaults>
   </action>
-  <action id="org.opensuse.yast.webservice.run-yastmodule-audit-laf">
+  <action id="org.opensuse.yast.webservice.execute-yastmodule-audit-laf">
     <description>Permission to run YaST module "audit-laf"</description>
     <message>Authentication is required to run YaST module "audit-laf"</message>
     <defaults>
@@ -2213,7 +2213,7 @@ Rights for YaST command line interface
       <allow_active>no</allow_active>
     </defaults>
   </action>
-  <action id="org.opensuse.yast.webservice.run-yastmodule-inst-release-notes">
+  <action id="org.opensuse.yast.webservice.execute-yastmodule-inst-release-notes">
     <description>Permission to run YaST module "inst_release_notes"</description>
     <message>Authentication is required to run YaST module "inst_release_notes"</message>
     <defaults>
@@ -2229,7 +2229,7 @@ Rights for YaST command line interface
       <allow_active>no</allow_active>
     </defaults>
   </action>
-  <action id="org.opensuse.yast.webservice.run-yastmodule-runlevel">
+  <action id="org.opensuse.yast.webservice.execute-yastmodule-runlevel">
     <description>Permission to run YaST module "runlevel"</description>
     <message>Authentication is required to run YaST module "runlevel"</message>
     <defaults>
@@ -2245,7 +2245,7 @@ Rights for YaST command line interface
       <allow_active>no</allow_active>
     </defaults>
   </action>
-  <action id="org.opensuse.yast.webservice.run-yastmodule-kerberos-server">
+  <action id="org.opensuse.yast.webservice.execute-yastmodule-kerberos-server">
     <description>Permission to run YaST module "kerberos-server"</description>
     <message>Authentication is required to run YaST module "kerberos-server"</message>
     <defaults>
@@ -2261,7 +2261,7 @@ Rights for YaST command line interface
       <allow_active>no</allow_active>
     </defaults>
   </action>
-  <action id="org.opensuse.yast.webservice.run-yastmodule-view-anymsg">
+  <action id="org.opensuse.yast.webservice.execute-yastmodule-view-anymsg">
     <description>Permission to run YaST module "view_anymsg"</description>
     <message>Authentication is required to run YaST module "view_anymsg"</message>
     <defaults>
@@ -2277,7 +2277,7 @@ Rights for YaST command line interface
       <allow_active>no</allow_active>
     </defaults>
   </action>
-  <action id="org.opensuse.yast.webservice.run-yastmodule-bootloader">
+  <action id="org.opensuse.yast.webservice.execute-yastmodule-bootloader">
     <description>Permission to run YaST module "bootloader"</description>
     <message>Authentication is required to run YaST module "bootloader"</message>
     <defaults>
@@ -2293,7 +2293,7 @@ Rights for YaST command line interface
       <allow_active>no</allow_active>
     </defaults>
   </action>
-  <action id="org.opensuse.yast.webservice.run-yastmodule-mouse">
+  <action id="org.opensuse.yast.webservice.execute-yastmodule-mouse">
     <description>Permission to run YaST module "mouse"</description>
     <message>Authentication is required to run YaST module "mouse"</message>
     <defaults>
@@ -2309,7 +2309,7 @@ Rights for YaST command line interface
       <allow_active>no</allow_active>
     </defaults>
   </action>
-  <action id="org.opensuse.yast.webservice.run-yastmodule-checkmedia">
+  <action id="org.opensuse.yast.webservice.execute-yastmodule-checkmedia">
     <description>Permission to run YaST module "checkmedia"</description>
     <message>Authentication is required to run YaST module "checkmedia"</message>
     <defaults>
@@ -2325,7 +2325,7 @@ Rights for YaST command line interface
       <allow_active>no</allow_active>
     </defaults>
   </action>
-  <action id="org.opensuse.yast.webservice.run-yastmodule-genprof">
+  <action id="org.opensuse.yast.webservice.execute-yastmodule-genprof">
     <description>Permission to run YaST module "GenProf"</description>
     <message>Authentication is required to run YaST module "GenProf"</message>
     <defaults>
@@ -2341,7 +2341,7 @@ Rights for YaST command line interface
       <allow_active>no</allow_active>
     </defaults>
   </action>
-  <action id="org.opensuse.yast.webservice.run-yastmodule-logprof">
+  <action id="org.opensuse.yast.webservice.execute-yastmodule-logprof">
     <description>Permission to run YaST module "LogProf"</description>
     <message>Authentication is required to run YaST module "LogProf"</message>
     <defaults>
@@ -2357,7 +2357,7 @@ Rights for YaST command line interface
       <allow_active>no</allow_active>
     </defaults>
   </action>
-  <action id="org.opensuse.yast.webservice.run-yastmodule-heartbeat">
+  <action id="org.opensuse.yast.webservice.execute-yastmodule-heartbeat">
     <description>Permission to run YaST module "heartbeat"</description>
     <message>Authentication is required to run YaST module "heartbeat"</message>
     <defaults>
@@ -2373,7 +2373,7 @@ Rights for YaST command line interface
       <allow_active>no</allow_active>
     </defaults>
   </action>
-  <action id="org.opensuse.yast.webservice.run-yastmodule-samba-server">
+  <action id="org.opensuse.yast.webservice.execute-yastmodule-samba-server">
     <description>Permission to run YaST module "samba-server"</description>
     <message>Authentication is required to run YaST module "samba-server"</message>
     <defaults>
@@ -2389,7 +2389,7 @@ Rights for YaST command line interface
       <allow_active>no</allow_active>
     </defaults>
   </action>
-  <action id="org.opensuse.yast.webservice.run-yastmodule-tv">
+  <action id="org.opensuse.yast.webservice.execute-yastmodule-tv">
     <description>Permission to run YaST module "tv"</description>
     <message>Authentication is required to run YaST module "tv"</message>
     <defaults>
@@ -2405,7 +2405,7 @@ Rights for YaST command line interface
       <allow_active>no</allow_active>
     </defaults>
   </action>
-  <action id="org.opensuse.yast.webservice.run-yastmodule-ftp-server">
+  <action id="org.opensuse.yast.webservice.execute-yastmodule-ftp-server">
     <description>Permission to run YaST module "ftp-server"</description>
     <message>Authentication is required to run YaST module "ftp-server"</message>
     <defaults>
@@ -2421,7 +2421,7 @@ Rights for YaST command line interface
       <allow_active>no</allow_active>
     </defaults>
   </action>
-  <action id="org.opensuse.yast.webservice.run-yastmodule-inst-suse-register">
+  <action id="org.opensuse.yast.webservice.execute-yastmodule-inst-suse-register">
     <description>Permission to run YaST module "inst_suse_register"</description>
     <message>Authentication is required to run YaST module "inst_suse_register"</message>
     <defaults>
