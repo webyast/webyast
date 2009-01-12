@@ -117,8 +117,12 @@ class PermissionsController < ApplicationController
   # PUT /users/<uid>/permissions/<id>.json
 
   def update
-    if params[:permission].empty? == false
+    if ( params[:permission] &&
+         params[:permission].empty? == false )
        permission = Permission.new(params[:permission])
+    elsif (params[:users] &&
+           params[:users].empty? == false )
+       permission = Permission.new(params[:users])
     else
        permission = Permission.new
     end
