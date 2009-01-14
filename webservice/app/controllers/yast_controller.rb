@@ -30,6 +30,11 @@ class YastController < ApplicationController
 
      link = Links.new 	
      link.path = "users"
+     link.description = "Managing local users"
+     @links << link
+
+     link = Links.new 	
+     link.path = "permissions"
      link.description = "Checking access rights"
      @links << link
 
