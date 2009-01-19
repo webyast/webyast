@@ -12,7 +12,8 @@ class Lsbservice
   #
   def self.each
 #    Dir.entries(PREFIX).each do |d|
-     ["cron", "cups", "gpm", "ntp", "random", "smbfs", "sshd" ].each do |d|
+     ["cron", "cups", "gpm", "ntp", "random", "smbfs", "sshd", "nfs",
+      "autofs", "apache2", "avahi-daemon", "SuSEfirewall2" ].each do |d|
       next if d[0,1] == '.'
       next if d == "README"
       next if d == "reboot"
@@ -105,7 +106,6 @@ class Lsbservice
   #
   
   def to_xml( options = {} )
-    STDERR.puts "#{self}.to_xml"
     xml = options[:builder] ||= Builder::XmlMarkup.new(options)
     xml.instruct! unless options[:skip_instruct]
 
@@ -114,7 +114,7 @@ class Lsbservice
       xml.tag!(:path, @path )
       xml.tag!(:commands, @commands.join(","))
       xml.tag!(:error_id, @error_id )
-      xml.tag!(:error_string, @error_sting )
+      xml.tag!(:error_string, @error_string )
     end  
   end
 

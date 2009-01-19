@@ -65,18 +65,23 @@ class CommandsController < ApplicationController
        ret = Scr.execute(cmd)
        @service.error_id = ret[:exit].to_i
        @service.error_string = ret[:stderr]
+       if ret[:stdout].size > 0
+          if @service.error_string.size > 0
+             @service.error_string += "; "
+          end
+          @service.error_string +=ret[:stdout]
+       end
     else
        @service.error_id = 1
        @service.error_string = "no permission"
     end       
-
     respond_to do |format|
        format.html do
-          render :xml => @service.to_xml( :root => "systemtime", 
+          render :xml => @service.to_xml( :root => "service", 
                  :dasherize => false ) #return xml only
        end
        format.xml do
-          render :xml => @service.to_xml( :root => "systemtime",
+          render :xml => @service.to_xml( :root => "service",
                  :dasherize => false )
        end
        format.json do
