@@ -31,6 +31,9 @@ private
 public
 
   def permissionCheck(action)
+    if self.current_account.login.size == 0
+       return false
+    end
     if polkit_check( action, self.current_account.login) == :yes
        logger.debug "Action: #{action} User: #{self.current_account.login} Result: ok"
        return true
