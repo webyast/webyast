@@ -272,7 +272,8 @@ e.g. menue entry or input frame.
 
 <h3>&lt;hostname&gt;/.xml or &lt;hostname&gt;/yast.xml</h3>
 
-<p><br>Returns a list of all available modules.
+<p><br>Returns a list of all available modules. The permissions are set if the
+user has logged in.
 
 <p>GET &lt;hostname&gt;/.xml
 
@@ -283,42 +284,77 @@ e.g. menue entry or input frame.
   <blockquote>
   &lt;description&gt;Creating a YaST Webservice session&lt;/description&gt;
   <br>&lt;path&gt;login&lt;/path&gt;
+  <br>&lt;install_permission&gt;false&lt;/install_permission&gt;
+  <br>&lt;read_permission&gt;false&lt;/read_permission&gt;
+  <br>&lt;write_permission&gt;false&lt;/write_permission&gt;
+  <br>&lt;new_permission&gt;false&lt;/new_permission&gt;
+  <br>&lt;execute_permission&gt;false&lt;/execute_permission&gt;
   </blockquote>
 &lt;/link&gt;
 <br>&lt;link&gt;
   <blockquote>
   &lt;description&gt;Closing YaST Webservice session&lt;/description&gt;
   <br>&lt;path&gt;logout&lt;/path&gt;
+  <br>&lt;install_permission&gt;false&lt;/install_permission&gt;
+  <br>&lt;read_permission&gt;false&lt;/read_permission&gt;
+  <br>&lt;write_permission&gt;false&lt;/write_permission&gt;
+  <br>&lt;new_permission&gt;false&lt;/new_permission&gt;
+  <br>&lt;execute_permission&gt;false&lt;/execute_permission&gt;
   </blockquote>
 &lt;/link&gt;
 <br>&lt;link&gt;
   <blockquote>
   &lt;description&gt;Managing Linux services like samba, ntp,...&lt;/description&gt;
   <br>&lt;path&gt;services&lt;/path&gt;
+  <br>&lt;install_permission&gt;false&lt;/install_permission&gt;
+  <br>&lt;read_permission&gt;false&lt;/read_permission&gt;
+  <br>&lt;write_permission&gt;false&lt;/write_permission&gt;
+  <br>&lt;new_permission&gt;false&lt;/new_permission&gt;
+  <br>&lt;execute_permission&gt;false&lt;/execute_permission&gt;
   </blockquote>
 &lt;/link&gt;
 <br>&lt;link&gt;
   <blockquote>
   &lt;description&gt;Setting system time&lt;/description&gt;
   <br>&lt;path&gt;systemtime&lt;/path&gt;
+  <br>&lt;install_permission&gt;false&lt;/install_permission&gt;
+  <br>&lt;read_permission&gt;false&lt;/read_permission&gt;
+  <br>&lt;write_permission&gt;false&lt;/write_permission&gt;
+  <br>&lt;new_permission&gt;false&lt;/new_permission&gt;
+  <br>&lt;execute_permission&gt;false&lt;/execute_permission&gt;
   </blockquote>
 &lt;/link&gt;
 <br>&lt;link&gt;
   <blockquote>
   &lt;description&gt;Setting language&lt;/description&gt;
   <br>&lt;path&gt;language&lt;/path&gt;
+  <br>&lt;install_permission&gt;false&lt;/install_permission&gt;
+  <br>&lt;read_permission&gt;false&lt;/read_permission&gt;
+  <br>&lt;write_permission&gt;false&lt;/write_permission&gt;
+  <br>&lt;new_permission&gt;false&lt;/new_permission&gt;
+  <br>&lt;execute_permission&gt;false&lt;/execute_permission&gt;
   </blockquote>
 &lt;/link&gt;
 <br>&lt;link&gt;
   <blockquote>
   &lt;description&gt;Checking access rights&lt;/description&gt;
   <br>&lt;path&gt;users&lt;/path&gt;
+  <br>&lt;install_permission&gt;false&lt;/install_permission&gt;
+  <br>&lt;read_permission&gt;false&lt;/read_permission&gt;
+  <br>&lt;write_permission&gt;false&lt;/write_permission&gt;
+  <br>&lt;new_permission&gt;false&lt;/new_permission&gt;
+  <br>&lt;execute_permission&gt;false&lt;/execute_permission&gt;
   </blockquote>
 &lt;/link&gt;
 <br>&lt;link&gt;
   <blockquote>
   &lt;description&gt;Updating System&lt;/description&gt;
   <br>&lt;path&gt;patch_updates&lt;/path&gt;
+  <br>&lt;install_permission&gt;false&lt;/install_permission&gt;
+  <br>&lt;read_permission&gt;false&lt;/read_permission&gt;
+  <br>&lt;write_permission&gt;false&lt;/write_permission&gt;
+  <br>&lt;new_permission&gt;false&lt;/new_permission&gt;
+  <br>&lt;execute_permission&gt;false&lt;/execute_permission&gt;
   </blockquote>
 &lt;/link&gt;
 <br>&lt;/links&gt;
