@@ -115,6 +115,25 @@ class YastController < ApplicationController
      @links << link
 
      link = Links.new 	
+     link.path = "permissions"
+     link.description = "Managing user permissions. Usage: users/<user>/permissions.xml"
+     if permissionCheck("org.opensuse.yast.webservice.read-permission")
+        link.read_permission = true
+     else
+        link.read_permission = false
+     end
+     if permissionCheck("org.opensuse.yast.webservice.write-permission")
+        link.write_permission = true
+     else
+        link.write_permission = false
+     end
+     link.execute_permission = false
+     link.delete_permission = false
+     link.new_permission = false
+     link.install_permission = false
+     @links << link
+
+     link = Links.new 	
      link.path = "patch_updates"
      link.description = "Updating System"
      if permissionCheck("org.opensuse.yast.webservice.read-patch")

@@ -31,7 +31,7 @@ private
 public
 
   def permissionCheck(action)
-    if self.current_account.login.size == 0
+    if self.current_account==nil || self.current_account.login.size == 0
        return false
     end
     if polkit_check( action, self.current_account.login) == :yes
