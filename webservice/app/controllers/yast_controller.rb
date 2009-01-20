@@ -117,12 +117,12 @@ class YastController < ApplicationController
      link = Links.new 	
      link.path = "permissions"
      link.description = "Managing user permissions. Usage: users/<user>/permissions.xml"
-     if permissionCheck("org.opensuse.yast.webservice.read-permission")
+     if permissionCheck("org.opensuse.yast.webservice.read-permissions")
         link.read_permission = true
      else
         link.read_permission = false
      end
-     if permissionCheck("org.opensuse.yast.webservice.write-permission")
+     if permissionCheck("org.opensuse.yast.webservice.write-permissions")
         link.write_permission = true
      else
         link.write_permission = false
