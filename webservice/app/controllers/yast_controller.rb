@@ -39,7 +39,7 @@ class YastController < ApplicationController
      else
         link.write_permission = false
      end
-     if permissionCheck("org.opensuse.yast.webservice.execute-services")
+     if permissionCheck("org.opensuse.yast.webservice.execute-services-commands")
         link.execute_permission = true
      else
         link.execute_permission = false

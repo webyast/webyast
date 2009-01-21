@@ -32,8 +32,7 @@ class SessionsController < ApplicationController
           render :json => @cmdRet.to_json, :location => "none"
         end
         format.html do
-          redirect_back_or_default('/')
-          flash[:notice] = "Logged in successfully"
+	  render :xml => @cmdRet.to_xml, :location => "none"
         end
       end
     else
@@ -47,7 +46,7 @@ class SessionsController < ApplicationController
           render :json => @cmdRet.to_json, :location => "none"
         end
         format.html do
-          render :action => 'new'
+	  render :xml => @cmdRet.to_xml, :location => "none" #only XML will be returned
         end
       end
     end
@@ -67,8 +66,7 @@ class SessionsController < ApplicationController
         render :json => @cmdRet.to_json, :location => "none"
       end
       format.html do
-        flash[:notice] = "You have been logged out."
-        redirect_back_or_default('/')
+	render :xml => @cmdRet.to_xml, :location => "none" #only XML will be returned
       end
     end
   end
