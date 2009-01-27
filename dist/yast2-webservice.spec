@@ -206,5 +206,5 @@ fi
 %config(noreplace) /etc/yast_user_roles
 %config(noreplace)  %{_sysconfdir}/init.d/%{pkg_user}
 %{_sbindir}/rc%{pkg_user}
-%{_libdir}/ruby/site_ruby/1.8/i586-linux/polkit.so
-%{_libdir}/ruby/site_ruby/1.8/i586-linux/rpam.so
+%{_libdir}/ruby/site_ruby/%{rb_ver}/%{rb_arch}/polkit.so
+%{_libdir}/ruby/site_ruby/%{rb_ver}/%{rb_arch}/rpam.so
