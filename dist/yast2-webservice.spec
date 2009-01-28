@@ -113,6 +113,9 @@ install -m 0644 %SOURCE6 $RPM_BUILD_ROOT/etc/
 mkdir -p $RPM_BUILD_ROOT/etc/pam.d
 install -m 0644 %SOURCE10 $RPM_BUILD_ROOT/etc/pam.d/
 
+#  create empty tmp directory
+mkdir -p $RPM_BUILD_ROOT/etc/yastws/www/tmp
+
 
 %clean
 rm -rf $RPM_BUILD_ROOT
@@ -191,6 +194,7 @@ fi
 %config /etc/yastws/www/script
 %config /etc/yastws/www/test
 %config /etc/yastws/www/config
+%config /etc/yastws/www/tmp
 %attr(755,root,root) %config /etc/yastws/tools/policyKit-rights.rb
 %doc /etc/yastws/www/public/doc_config.html 
 %doc /etc/yastws/www/public/doc_interface.html
