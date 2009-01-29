@@ -56,7 +56,7 @@ class CommandsController < ApplicationController
     @service.error_string = ""
 
     single_policy = "org.opensuse.yast.webservice.execute-services-commands-" + params[:service_id]
-    if ( permissionCheck( "org.opensuse.yast.webservice.write-services") or
+    if ( permissionCheck( "org.opensuse.yast.webservice.execute-services") or
          permissionCheck( "org.opensuse.yast.webservice.execute-services-commands") or
          permissionCheck( single_policy))
 

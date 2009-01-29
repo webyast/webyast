@@ -67,8 +67,9 @@ begin
                   policySplit = policy.split("-")
                   if policySplit.size >= 2
                      command = "polkit-auth --user " + user + " --explicit |grep -s " + policySplit[0] + "-" + policySplit[1] + " >>/dev/null"
-                     if ( !system(command)  or # has not already been set
-                          policy == "org.opensuse.yast.webservice.read-yastmodule" ) #special case
+                     if ( !system(command) or # has not already been set
+                          policy == "org.opensuse.yast.webservice.read-userlist" or  #special cases
+                          policy == "org.opensuse.yast.webservice.read-user" )
                        STDERR.puts "granting: #{policy}"
                        command = "polkit-auth --user " + user + " --grant " + policySplit[0] + "-" + policySplit[1]
                        system (command)

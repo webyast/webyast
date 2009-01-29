@@ -104,6 +104,14 @@ Rights for services
       <allow_active>no</allow_active>
     </defaults>
   </action>
+  <action id="org.opensuse.yast.webservice.execute-services">
+    <description>Starting/stopping/... services</description>
+    <message>Authentication is required to handle services</message>
+    <defaults>
+      <allow_inactive>no</allow_inactive>
+      <allow_active>no</allow_active>
+    </defaults>
+  </action>
   <action id="org.opensuse.yast.webservice.execute-services-commands">
     <description>Starting/stopping/... services</description>
     <message>Authentication is required to handle services</message>
