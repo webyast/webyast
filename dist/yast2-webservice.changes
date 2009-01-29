@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Thu Jan 29 18:09:45 CET 2009 - schubi@suse.de
+
+- removed old layout stuff, bugfixes, update doc
+- version 1.0.0-2 
+
+-------------------------------------------------------------------
 Wed Oct 22 17:04:50 CEST 2008 - schubi@suse.de
 
 - added policies
