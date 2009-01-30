@@ -3,11 +3,13 @@ all:
 	ruby extconf.rb; \
 	make; \
 	sudo make install; \
+	make clean; \
 	cd ..; \
 	cd rpam/ext/Rpam; \
 	ruby extconf.rb; \
 	make; \
 	sudo make install; \
+	make clean; \
 	cd ../../..; \
 	rm -rf package; \
         find . -name "*.bak" -exec rm {} \; ;\

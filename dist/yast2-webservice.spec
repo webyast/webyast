@@ -30,7 +30,7 @@ Source8:        modules.conf
 Source9:        yastws
 Source10:       rpam
 BuildRoot:      %{_tmppath}/%{name}-%{version}-build
-BuildRequires:  ruby-devel
+BuildRequires:  ruby-devel, pkg-config, dbus-1-devel, PolicyKit-devel, pam-devel 
 
 #
 %define pkg_user yastws
