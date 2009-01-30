@@ -990,20 +990,38 @@ the value:
   <param name="src" value="uhr.svg">
 </object>
 
-<h4>login</h4>
+<h4>Login</h4>
 
 <p>The user (Web Application) starts a login request with user/password via 
 Http(s)/REST to the YaST Webservice. This request will be checked with PAM
-OR with local user account handled in the YaST Webservice database (currently
-not implemented). The access will be granted or denied. If the request has
-been successfully finished a session will be created and (on demand) a cookie will
+. The access will be granted or denied. If the request has been successfully 
+finished a session will be created and (on demand) a cookie will
 be send to the Web Application.
 
 <h4>Single task e.g. getting system time settings</h4>
 
-<p>The user "tux" (Web Application) with a valid session sends the Http(s) request:
+<p>The user "tux" (Web Application) sends the Http(s) request:
 
 <p>GET http://&lt;name_of_the_host&gt;/systemtime.xml
+
+<h5>Authentification</h5>
+<p>The YaST Webservice uses Basic Authentification (Digest Auth. and Kerberos
+Auth. are planned). This means that the username and the password are included
+in the HTTP header.</p>
+
+<p>The YaST Webservice has different levels of checking the authentification in
+the following order:</p>
+<ul>
+  <li>The "user" and "password" in the HTTP header (Basic Auth.) will be checked with PAM.</li>
+  <li>The field "password" contains a session ID (from a former login request)
+  which will be compared with the current session.</li>
+  <li>If the request includes a cookie with the session information (can be
+  generated while the login request) this cookie will be compared whith the
+  current session.</li>
+</ul>
+<p>If ALL these checks fail an HTTP error 401 will be returned to the sender.</p>
+
+<h5>Request Process</h5>
 
 <p>The YaST Webservice checks if "tux" has the right for reading these settings:
 
@@ -1016,17 +1034,8 @@ to the SCR - Agent in order to get all needed information:
 <br>Scr.execute("/bin/date")
 <br>Scr.read(".sysconfig.clock.TIMEZONE")
 
-<p>These requests will be sent to the SCR - Agent with the user account "yastws". 
-<p>The SCR - Agent checks with policyKit if "yastws" has the right for these calls:
-
-<p>policyKit_check ("yastws", "read.sysconfig.clock.HWCLOCK")
-<br>policyKit_check ("yastws", "execute.bin.date")
-<br>policyKit_check ("yastws", "read.sysconfig.clock.TIMEZONE")
-
-<p>This additional policy check will be done in order to give the YaST-Webservice ONLY rights
-for calls which reflect the YaST-Webservice interface.
-
-
+<p>These requests will be sent to the SCR - Agent with the user account "root". 
+<p>The SCR - Agent checks with policyKit if "yastws" has the rights for these calls.
 
 <h3>API Policies</h3>
 
