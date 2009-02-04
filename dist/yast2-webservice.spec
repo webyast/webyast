@@ -28,7 +28,6 @@ Source6:        yast_user_roles
 Source7:        lighttpd.conf
 Source8:        modules.conf
 Source9:        yastws
-Source10:       rpam
 BuildRoot:      %{_tmppath}/%{name}-%{version}-build
 BuildRequires:  ruby-devel, pkg-config, dbus-1-devel, PolicyKit-devel, pam-devel 
 
@@ -56,10 +55,9 @@ cd ruby-polkit
 ruby extconf.rb
 make
 cd ..
-cd rpam/ext/Rpam
-ruby extconf.rb
+cd rpam
 make
-cd ../../..
+cd ..
 
 %install
 
@@ -69,9 +67,9 @@ cd ../../..
 cd ruby-polkit
 make install DESTDIR=%{buildroot}
 cd ..
-cd rpam/ext/Rpam
+cd rpam
 make install DESTDIR=%{buildroot}
-cd ../../..
+cd ..
 rm -rf rpam ruby-polkit
 
 #
