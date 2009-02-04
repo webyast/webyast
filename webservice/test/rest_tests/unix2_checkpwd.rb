@@ -5,7 +5,7 @@ require 'session'
 puts "Starting /sbin/unix2_chkpwd"
 
 cmd = "/sbin/unix2_chkpwd rpam root"
-text = "asdfasdf"
+text = "llllll"
 
 se = Session.new
 result, err = se.execute cmd, :stdin => text

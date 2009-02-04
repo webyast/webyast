@@ -59,8 +59,17 @@ def Scr.write (path, value)
                [false, "", ["s",""] ])
 end
 
-def Scr.execute (command)
-  command = "LANG=en.UTF-8 /usr/lib/YaST2/bin/tty_wrapper " + command + " </dev/null"
+def Scr.execute (argument, environment=[] )
+  command = "LANG=en.UTF-8"
+  environment.each do |env|
+    command += " #{env}"
+  end
+  command += " /usr/lib/YaST2/bin/tty_wrapper "
+  argument.each do |arg|
+    command += " #{arg}"
+  end
+
+  command += " </dev/null"
   system_bus = DBus::SystemBus.instance
 
   # Get the yast service

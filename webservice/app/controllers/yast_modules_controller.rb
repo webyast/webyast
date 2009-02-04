@@ -96,7 +96,7 @@ class YastModulesController < ApplicationController
            end
          end
       
-         cmdLine = "/sbin/yast2 #{params[:id]} #{params[:command]}"
+         cmd = ["/sbin/yast2", params[:id], params[:command]]
          found = false
          @yastModule.commands.each do |cname,option|
            if cname == params["command"]
@@ -107,19 +107,19 @@ class YastModulesController < ApplicationController
                  if params[name.to_s] != nil
                    if option["type"] == "string" 
                      if !params[name.to_s].empty? 
-                       cmdLine += " #{name}=\"#{params[name.to_s]}\""
+                       cmd << "#{name}=\"#{params[name.to_s]}\""
                      end
                    else 
                      if option["type"] == nil
-                       cmdLine += " #{name}"
+                       cmd << name
                      else
-                        cmdLine += " #{name}=#{params[name.to_s]}"
+                        cmd << "#{name}=#{params[name.to_s]}"
                      end
                    end
                  end
                end
              end
-             @cmdRet = Scr.execute(cmdLine)
+             @cmdRet = Scr.execute(cmd)
            end
          end
          if !found
