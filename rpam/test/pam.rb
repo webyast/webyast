@@ -6,7 +6,7 @@ $:.unshift("../ext/Rpam")
 require "rpam"
 include Rpam
 
-res = authpam("root","novell")
+res = authpam("tux","tuxtux")
 if res
   puts "Authenticate Successful"
 else
