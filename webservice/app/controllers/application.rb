@@ -5,8 +5,13 @@ class ApplicationController < ActionController::Base
 
   include AuthenticatedSystem
 
+begin
   require 'polkit'
   include PolKit
+rescue Exception => e
+  $stderr.puts "ruby-polkit not found!"
+  exit
+end
 
 private
   def userRoles(user)
