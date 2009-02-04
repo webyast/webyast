@@ -1,0 +1,17 @@
+Simple PolicyKit extension for Ruby
+
+
+Prerequisites:
+
+	dbus-1-devel
+	PolicyKit-devel
+
+
+Compile:
+
+	make
+
+
+Install:
+
+	sudo make install
