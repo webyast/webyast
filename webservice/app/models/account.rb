@@ -1,9 +1,16 @@
 require 'rubygems'
 require 'session'
-require "rpam"
-include Rpam
+
+begin
+  require "rpam"
+  include Rpam
+rescue
+  $stderr.puts "ruby-rpam not found!"
+  exit
+end
 
 require 'digest/sha1'
+
 class Account < ActiveRecord::Base
   # Virtual attribute for the unencrypted password
   attr_accessor :password
