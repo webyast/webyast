@@ -1,0 +1,14 @@
+REST-style web service for YaST
+
+Prerequisites:
+	ruby-rpam
+	ruby-polkit
+	rails
+
+
+Install:
+	rake db:migrate
+
+Run:
+	ruby script/server --port=8080
+
