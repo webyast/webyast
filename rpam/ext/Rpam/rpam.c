@@ -132,5 +132,5 @@ VALUE method_authpam(VALUE self, VALUE username, VALUE password) {
 /* initialize */
 void Init_rpam() {
 	Rpam = rb_define_module("Rpam");
-	rb_define_method(Rpam, "authpam", method_authpam, 2);	
+	rb_define_module_function(Rpam, "authpam", method_authpam, 2);	
 }
