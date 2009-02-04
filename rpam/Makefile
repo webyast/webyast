@@ -7,5 +7,5 @@ all:
 
 install: all
 	(cd ext/Rpam; make install)
-	mkdir -f $(DESTDIR)/etc/pam.d
+	mkdir -p $(DESTDIR)/etc/pam.d
 	install -c -m 0755 rpam.pam $(DESTDIR)/etc/pam.d/rpam
