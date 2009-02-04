@@ -1,10 +1,16 @@
 #!/usr/bin/ruby
 
-  require "rpam"
-  include Rpam
+# load the local copy, not the installed rpam.so
+$:.unshift("../ext/Rpam")
 
-  if authpam("tuxtux","tuxtux") == true
-	puts "Authenticate Successful"
-  else
-  	puts "Authenticate Failure"
-  end
+require "rpam"
+include Rpam
+
+res = authpam("root","novell")
+if res
+  puts "Authenticate Successful"
+else
+  puts "Authenticate Failure"
+end
+
+exit res
