@@ -14,7 +14,7 @@ class UsersController < ApplicationController
 
   def get_userList
     if permissionCheck( "org.opensuse.yast.webservice.read-userlist")
-       ret = Scr.execute("/sbin/yast2 users list")
+       ret = Scr.execute(["/sbin/yast2", "users", "list"])
        lines = ret[:stderr].split "\n"
        @users = []
        lines.each do |s|   
@@ -37,7 +37,7 @@ class UsersController < ApplicationController
     else
       saveKey = nil
     end
-    ret = Scr.execute("/sbin/yast2 users show username=#{id}")
+    ret = Scr.execute(["/sbin/yast2", "users", "show", "username=#{id}"])
      lines = ret[:stderr].split "\n"
      counter = 0
      @user = User.find(:first)
@@ -81,14 +81,14 @@ class UsersController < ApplicationController
     ret = Scr.readArg(".target.stat", "#{@user.homeDirectory}/.ssh/authorized_keys")
     if ret.length == 0
       logger.debug "Create: #{@user.homeDirectory}/.ssh/authorized_keys"
-      Scr.execute("/bin/mkdir #{@user.homeDirectory}/.ssh")      
-      Scr.execute("/bin/chown #{@user.loginName} #{@user.homeDirectory}/.ssh}")      
-      Scr.execute("/bin/chmod 755 #{@user.homeDirectory}/.ssh}")
-      Scr.execute("/usr/bin/touch #{@user.homeDirectory}/.ssh/authorized_keys")      
-      Scr.execute("/bin/chown #{@user.loginName} #{@user.homeDirectory}/.ssh/authorized_keys}")      
-      Scr.execute("/bin/chmod 644 #{@user.homeDirectory}/.ssh/authorized_keys}")
+      Scr.execute(["/bin/mkdir", "#{@user.homeDirectory}/.ssh"])      
+      Scr.execute(["/bin/chown", "#{@user.loginName}", "#{@user.homeDirectory}/.ssh"])      
+      Scr.execute(["/bin/chmod", "755", "#{@user.homeDirectory}/.ssh"])
+      Scr.execute(["/usr/bin/touch", "#{@user.homeDirectory}/.ssh/authorized_keys"])      
+      Scr.execute(["/bin/chown", "#{@user.loginName}", "#{@user.homeDirectory}/.ssh/authorized_keys"])      
+      Scr.execute(["/bin/chmod", "644", "#{@user.homeDirectory}/.ssh/authorized_keys"])
     end
-    ret =  Scr.execute("echo \"#{@user.sshkey}\"  >> #{@user.homeDirectory}/.ssh/authorized_keys")
+    ret =  Scr.execute(["echo", "\"#{@user.sshkey}\"", ">>", "#{@user.homeDirectory}/.ssh/authorized_keys"])
     if ret[:exit] != 0
       return false
     else 
@@ -103,44 +103,44 @@ class UsersController < ApplicationController
       ok = createSSH
     end
 
-    command = "/sbin/yast2 users edit "
+    command = ["/sbin/yast2", "users", "edit"]
     if @user.fullName && @user.fullName.length > 0
-      command = command + 'cn="' + @user.fullName + '" '
+      command <<  "cn=\"#{@user.fullName}\""
     end
     if @user.groups && @user.groups.length > 0
-      command += "grouplist=#{@user.groups} "
+      command << "grouplist=#{@user.groups}"
     end
     if @user.defaultGroup && @user.defaultGroup.length > 0
-      command += "gid=#{@user.defaultGroup} "
+      command << "gid=#{@user.defaultGroup}"
     end
     if @user.homeDirectory && @user.homeDirectory.length > 0
-      command += "home=#{@user.homeDirectory} "
+      command << "home=#{@user.homeDirectory}"
     end
     if @user.loginShell && @user.loginShell.length > 0
-      command += "shell=#{@user.loginShell} "
+      command << "shell=#{@user.loginShell}"
     end
     if userId && userId.length > 0
-      command += "username=#{userId} "
+      command << "username=#{userId}"
     end
     if @user.uid && @user.uid.length > 0
-      command += "uid=#{@user.uid} "
+      command << "uid=#{@user.uid}"
     end
     if @user.password && @user.password.length > 0
-      command += "password=#{@user.password} "
+      command << "password=#{@user.password}"
     end
     if @user.ldapPassword && @user.ldapPassword.length > 0
-      command += "ldap_password=#{@user.ldapPassword} "
+      command << "ldap_password=#{@user.ldapPassword}"
     end
     if @user.newUid && @user.newUid.length > 0
-      command += "new_uid=#{@user.newUid} "
+      command << "new_uid=#{@user.newUid}"
     end
     if @user.newLoginName && @user.newLoginName.length > 0
-      command += "new_username=#{@user.newLoginName} "
+      command << "new_username=#{@user.newLoginName}"
     end
     if @user.type && @user.type.length > 0
-      command += "type=#{@user.type} "
+      command << "type=#{@user.type}"
     end
-    command += " batchmode"
+    command << "batchmode"
     ret = Scr.execute(command)
     if ret[:exit] != 0
       ok = false
@@ -151,41 +151,41 @@ class UsersController < ApplicationController
   end
 
   def add_user
-    command = "/sbin/yast2 users add "
+    command = ["/sbin/yast2", "users", "add"]
     if @user.fullName && @user.fullName.length > 0
-      command = command + 'cn="' + @user.fullName + '" '
+      command << "cn=\"@user.fullName\""
     end
     if @user.groups && @user.groups.length > 0
-      command += "grouplist=#{@user.groups} "
+      command << "grouplist=#{@user.groups}"
     end
     if @user.defaultGroup && @user.defaultGroup.length > 0
-      command += "gid=#{@user.defaultGroup} "
+      command << "gid=#{@user.defaultGroup}"
     end
     if @user.homeDirectory && @user.homeDirectory.length > 0
-      command += "home=#{@user.homeDirectory} "
+      command << "home=#{@user.homeDirectory}"
     end
     if @user.loginShell && @user.loginShell.length > 0
-      command += "shell=#{@user.loginShell} "
+      command << "shell=#{@user.loginShell}"
     end
     if @user.loginName && @user.loginName.length > 0
-      command += "username=#{@user.loginName} "
+      command << "username=#{@user.loginName}"
     end
     if @user.uid && @user.uid.length > 0
-      command += "uid=#{@user.uid} "
+      command << "uid=#{@user.uid}"
     end
     if @user.password && @user.password.length > 0
-      command += "password=#{@user.password} "
+      command << "password=#{@user.password}"
     end
     if @user.ldapPassword && @user.ldapPassword.length > 0
-      command += "ldap_password=#{@user.ldapPassword} "
+      command << "ldap_password=#{@user.ldapPassword}"
     end
     if @user.noHome && @user.noHome = "true"
-      command += "no_home "
+      command << "no_home"
     end
     if @user.type && @user.type.length > 0
-      command += "type=#{@user.type} "
+      command << "type=#{@user.type}"
     end
-    command += " batchmode"
+    command << "batchmode"
 
     ret = Scr.execute(command)
 
@@ -201,21 +201,21 @@ class UsersController < ApplicationController
   end
 
   def delete_user
-    command = "/sbin/yast2 users delete delete_home "
+    command = ["/sbin/yast2", "users",  "delete", "delete_home"]
     if @user.uid && @user.uid.length > 0
-      command += "uid=#{@user.uid} "
+      command << "uid=#{@user.uid}"
     end
     if @user.loginName && @user.loginName.length > 0
-      command += "username=#{@user.loginName} "
+      command << "username=#{@user.loginName}"
     end
     if @user.ldapPassword && @user.ldapPassword.length > 0
-      command += "ldap_password=#{@user.ldapPassword} "
+      command << "ldap_password=#{@user.ldapPassword}"
     end
     if @user.type && @user.type.length > 0
-      command += "type=#{@user.type} "
+      command << "type=#{@user.type}"
     end
 
-    command += " batchmode"
+    command << "batchmode"
 
     ret = Scr.execute(command)
     if ret[:exit] == 0

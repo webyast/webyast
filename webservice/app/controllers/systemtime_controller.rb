@@ -18,7 +18,7 @@ require "scr"
 #
 
   def get_validtimezones
-     ret = Scr.execute("/sbin/yast2 timezone list")
+     ret = Scr.execute(["/sbin/yast2", "timezone", "list"])
      lines = ret[:stderr].split "\n"
      ret = []
      lines.each do |l|   
@@ -39,7 +39,7 @@ require "scr"
   end
 
   def get_time
-    ret = Scr.execute("/bin/date")
+    ret = Scr.execute(["/bin/date"])
     ret[:stdout]
   end
 
@@ -63,23 +63,23 @@ require "scr"
 
   def set_time (time)
     #set time
-    cmd = "";
+    environment = [];
     hwclock = Scr.read(".sysconfig.clock.HWCLOCK");
     timezone = get_timezone
     if (timezone.length >0 &&  hwclock!= "--localtime")
-      cmd = "TZ=" + timezone + " "
+       environment = ["TZ=#{timezone}"]
     end
 
-    cmd = cmd + "/sbin/hwclock --set " + hwclock + 
-              " --date=\"#{time.month}/#{time.day}/#{time.year}" +
-              " #{time.hour}:#{time.min}:#{time.sec}\""
+    cmd = [ "/sbin/hwclock", "--set", hwclock,
+              "--date=\"#{time.month}/#{time.day}/#{time.year}",
+              "#{time.hour}:#{time.min}:#{time.sec}\""]
 
-    logger.debug "SetTime cmd #{cmd}"
-    Scr.execute(cmd)
+    logger.debug "SetTime cmd #{cmd.inspect}"
+    Scr.execute(cmd, environment)
 
-    cmd = "/sbin/hwclock --hctosys " + hwclock;
+    cmd = ["/sbin/hwclock", "--hctosys",  hwclock]
 
-    logger.debug "SetTime cmd #{cmd}"
+    logger.debug "SetTime cmd #{cmd.inspect}"
     Scr.execute(cmd)
   end
 

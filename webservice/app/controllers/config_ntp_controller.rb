@@ -10,7 +10,7 @@ class ConfigNtpController < ApplicationController
    def manualServer
 
      manual_server = ""
-     ret = Scr.execute("/sbin/yast2  ntp-client list")
+     ret = Scr.execute(["/sbin/yast2",  "ntp-client",  "list"])
      servers = ret[:stderr].split "\n"
      servers.each do |s|
        column = s.split(" ")
@@ -31,7 +31,7 @@ class ConfigNtpController < ApplicationController
 
    def enabled
 
-     ret = Scr.execute("/sbin/yast2  ntp-client status")
+     ret = Scr.execute(["/sbin/yast2", "ntp-client", "status"])
      if ret[:stderr]=="NTP daemon is enabled.\n"
        return true
      else      
@@ -42,7 +42,7 @@ class ConfigNtpController < ApplicationController
    def writeNTPConf (requestedServers)
      #remove evtl.old server if requested
      servers = []
-     ret = Scr.execute("/sbin/yast2  ntp-client list")
+     ret = Scr.execute(["/sbin/yast2", "ntp-client", "list"])
      serversLine = ret[:stderr].split "\n"
      serversLine.each do |s|
        column = s.split " "
@@ -66,21 +66,19 @@ class ConfigNtpController < ApplicationController
      #update required
      if updateRequired
        servers.each do |server|
-         command = "/sbin/yast2  ntp-client delete #{server}"
-         Scr.execute(command)
+         Scr.execute(["/sbin/yast2", "ntp-client", "delete", server])
        end
        requestedServers.each do |reqServer|
-         command = "/sbin/yast2  ntp-client add #{reqServer}"
-         Scr.execute(command)
+         Scr.execute(["/sbin/yast2", "ntp-client", "add", reqServer])
        end
      end
    end
 
    def enable (enabled)
      if enabled == true
-       Scr.execute("/sbin/yast2  ntp-client enable")
+       Scr.execute(["/sbin/yast2", "ntp-client", "enable"])
      else
-       Scr.execute("/sbin/yast2  ntp-client disable")
+       Scr.execute(["/sbin/yast2", "ntp-client", "disable"])
      end
    end
 
