@@ -79,11 +79,13 @@ int auth_pam_talker(int num_msg,
 				response[i].resp = strdup(userinfo->pw);
 				break;
 		        case PAM_ERROR_MSG:
-			       fprintf(stderr, "`PAM Error: %s'\n", msg[i]->msg);
-                               break;				
+				if (response) free(response);
+				rb_raise(rb_eRuntimeError, msg[i]->msg);
+				break;
 		        case PAM_TEXT_INFO:
-			       fprintf(stderr, "`PAM Message: %s'\n", msg[i]->msg);
-                               break;				
+				if (response) free(response);
+				rb_raise(rb_eSecurityError, msg[i]->msg);
+				break;
 			default:
 				if (response)
 				free(response);
