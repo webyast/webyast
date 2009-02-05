@@ -98,7 +98,15 @@ int auth_pam_talker(int num_msg,
 
 }
 
-/* Authenticates a user and returns TRUE on success, FALSE on failure */
+/*
+ * Authenticates a user and returns TRUE on success, FALSE on failure
+ * 
+ * authpam(username, password) -> boolean
+ * 
+ * raises RuntimeError in case of PAM error
+ * raises SecurityError in case of missing rights (e.g. run as non-root)
+ */
+
 VALUE method_authpam(VALUE self, VALUE username, VALUE password) {
     pam_auth_t userinfo = {NULL, NULL};
 	struct pam_conv conv_info = {&auth_pam_talker, (void *) &userinfo};

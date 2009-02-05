@@ -6,11 +6,17 @@ $:.unshift("../ext/Rpam")
 require "rpam"
 include Rpam
 
-res = authpam("tux","tuxtux")
-if res
-  puts "Authenticate Successful"
-else
-  puts "Authenticate Failure"
-end
+user = "root"
+password = "password"
 
-exit res
+begin
+  res = authpam(user,password)
+  if res
+    puts "Authenticate Successful"
+  else
+    puts "Authenticate Failure"
+  end
+rescue
+  $stderr.puts "Please edit pam.rb and choose a different user name"
+  exit
+end

@@ -7,3 +7,8 @@ check:
 	ruby badarg.rb
 	ruby fail.rb
 	ruby pam.rb
+
+clean:
+	rm -f *~
+	rm -f core
+
