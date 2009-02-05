@@ -34,7 +34,7 @@ Ruby bindings for PAM
 %setup -n rpam
 
 %build
-%{__make} CFLAGS="-fPIC $RPM_OPT_FLAGS"
+%{__make} DEFS="$RPM_OPT_FLAGS"
 %{__make} doc
 
 %check
