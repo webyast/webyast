@@ -29,7 +29,7 @@ distclean: clean
 	rm -f ext/Rpam/*o
 	rm -rf ext/Rpam/rdoc
 	rm -f ext/Rpam/Makefile
+	rm -rf package/*bz2
 	
 dist: distclean
-	rm -rf package/*bz2
 	(cd ..; tar -cj --exclude=rpam/package -f rpam/package/ruby-rpam-1.0.1.tar.bz2 rpam)
