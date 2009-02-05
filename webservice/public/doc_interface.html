@@ -99,7 +99,7 @@ Africa/Accra...&lt;/validtimezones&gt;
 
 <p>GET calls can be generated on the command line with the call:
 
-<p>curl -X GET -b &lt;cookie_file&gt; http://0.0.0.0:3001/systemtime/timezone.xml
+<p>curl -0 -X GET -b &lt;cookie_file&gt; http://0.0.0.0:3001/systemtime/timezone.xml
 
 <p>("-b &lt;cookie_file&gt;" describes a cookie with the filename "cookie_file". This
  cookie contains the login information of the current session.)
@@ -138,7 +138,7 @@ can be set explicit in an extra HTTP call:
 
 <p>Put calls can be generated on the command line with the call:
 
-<p>curl -v -H "Content-Type: application/xml; charset=utf-8" -T &lt;data-file&gt; -b &lt;cookie_file&gt; http://0.0.0.0:3001/language/secondLanguages.xml
+<p>curl -0 -v -H "Content-Type: application/xml; charset=utf-8" -T &lt;data-file&gt; -b &lt;cookie_file&gt; http://0.0.0.0:3001/language/secondLanguages.xml
 
 <p>("-b &lt;cookie_file&gt;" describes a cookie with the filename "cookie_file". This
  cookie contains the login information of the current session.)
@@ -167,7 +167,7 @@ can be set explicit in an extra HTTP call:
 
 <p>POST calls can be generated on the command line with the call:
 
-<p>curl -X POST -v -H "Content-Type: application/xml; charset=utf-8" -T &lt;data-file&gt; -b &lt;cookie_file&gt; http://0.0.0.0:3001/users.xml
+<p>curl -0 -X POST -v -H "Content-Type: application/xml; charset=utf-8" -T &lt;data-file&gt; -b &lt;cookie_file&gt; http://0.0.0.0:3001/users.xml
 
 <p>(&lt;data-file&gt; is a file which contains the XML values described above.
  "-b &lt;cookie_file&gt;" describes a cookie with the filename "cookie_file". This
@@ -183,7 +183,7 @@ can be set explicit in an extra HTTP call:
 
 <p>DELETE calls can be generated on the command line with the call:
 
-<p>curl -X DELETE -b &lt;cookie_file&gt; http://0.0.0.0:3001/users/tux2
+<p>curl -0 -X DELETE -b &lt;cookie_file&gt; http://0.0.0.0:3001/users/tux2
 
 <p>("-b &lt;cookie_file&gt;" describes a cookie with the filename "cookie_file". This
  cookie contains the login information of the current session.)
@@ -227,7 +227,7 @@ The user account will be checked with PAM. So SYSTEM users can login only.
 
 <p>If you are using "curl" for testing you will have to generate a session cookie with the call:
 
-<p>curl -X POST -v -H "Content-Type: application/xml; charset=utf-8" -T &lt;login_xml_file&gt; -c &lt;cookie_file&gt; http://0.0.0.0:3001/login.xml
+<p>curl -0 -X POST -v -H "Content-Type: application/xml; charset=utf-8" -T &lt;login_xml_file&gt; -c &lt;cookie_file&gt; http://0.0.0.0:3001/login.xml
 
 <p>This call will generate a cookie file with login data described in &lt;login_xml_file&gt;.
 
