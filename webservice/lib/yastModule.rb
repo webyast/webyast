@@ -69,7 +69,7 @@ class YastModule
     tmpdir = Scr.read( ".target.tmpdir" );
     Scr.execute(["/bin/mkdir", tmpdir])
     tmpfile = tmpdir + "/yastOptions" 
-    Scr.execute (["/sbin/yast2", @id, "xmlhelp", "xmlfile=#{tmpfile}"])
+    Scr.execute(["/sbin/yast2", @id, "xmlhelp", "xmlfile=#{tmpfile}"])
     file = Scr.readArg(".target.string",tmpfile)
     if file != false
       doc = REXML::Document.new file
