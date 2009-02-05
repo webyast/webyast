@@ -13,8 +13,9 @@ class SessionsController < ApplicationController
          params[name] = value
       end
     end
-
-    self.current_account = Account.authenticate(params[:login], params[:password])
+    if params.has_key?(:login) && params[:password]
+       self.current_account = Account.authenticate(params[:login], params[:password])
+    end
     if logged_in?
       if params[:remember_me] == "1"
         current_account.remember_me unless current_account.remember_token?
