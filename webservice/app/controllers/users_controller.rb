@@ -89,6 +89,7 @@ class UsersController < ApplicationController
       Scr.execute(["/bin/chmod", "644", "#{@user.homeDirectory}/.ssh/authorized_keys"])
     end
     ret =  Scr.execute(["echo", "\"#{@user.sshkey}\"", ">>", "#{@user.homeDirectory}/.ssh/authorized_keys"])
+
     if ret[:exit] != 0
       return false
     else 
@@ -467,7 +468,7 @@ class UsersController < ApplicationController
         @setUser = User.new
         @user = User.new
         if @setUser.update_attributes(params[:user])
-          logger.debug "UPDATED: #{@setUser.inspect}"
+          logger.debug "UPDATED: #{@setUser.inspect} ID: #{params[:id]}"
           ok = true
           #setting which are clear
           @user.loginName = params[:users_id]
@@ -564,6 +565,8 @@ class UsersController < ApplicationController
           if ok
             if exportSSH
               saveUser = @user
+logger.debug "xxxxxxxxxxxxxxxxxxx"
+
               ok = createSSH #reads @user again
               @user = saveUser
             else

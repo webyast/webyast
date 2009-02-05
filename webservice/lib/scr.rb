@@ -59,13 +59,31 @@ def Scr.write (path, value)
                [false, "", ["s",""] ])
 end
 
-def Scr.execute (argument, environment=[] )
+def Scr.execute (arguments, environment=[] )
+
+  #sanitize arguments
+  whitelist = ("a".."z").to_a.to_s + ("A".."Z").to_a.to_s + ("0".."9").to_a.to_s + "_-/=:.,\"<>"
+  arguments.each do |arg|
+    wrongArguments = false
+    for i in (0..arg.size-1) do
+       if whitelist.index(arg[i]) == nil
+	  wrongArguments = true
+          break
+       end
+    end
+    if wrongArguments
+       return { :stdout =>"", :stderr => "#{arg}: only a..z A..Z 0..9,_-/=.:<> are allowed", :exit => 2}       
+    end
+  end
+
+  #note environment array will not be set by the user. So no check is needed.
+
   command = "LANG=en.UTF-8"
   environment.each do |env|
     command += " #{env}"
   end
   command += " /usr/lib/YaST2/bin/tty_wrapper "
-  argument.each do |arg|
+  arguments.each do |arg|
     command += " #{arg}"
   end
 
