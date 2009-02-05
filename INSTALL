@@ -8,6 +8,9 @@ Prerequisites:
 - ruby
 - ruby-dbus
   (http://raa.ruby-lang.org/project/ruby-dbus/)
-- Rpam
-  (http://rubyforge.org/projects/rpam)
+- ruby-rpam
+  (OpenSUSE factory
+  or http://rubyforge.org/projects/rpam)
+- ruby-polkit
+  (OpenSUSE factory)
   
