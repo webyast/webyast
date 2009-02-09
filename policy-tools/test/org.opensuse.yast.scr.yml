@@ -1,0 +1,71 @@
+--- 
+org.opensuse.yast.scr.execute: 
+  defaults: 
+    allow_inactive: "no"
+    allow_any: "no"
+    allow_active: auth_admin_keep_session
+  description: Yast SCR Execute Method
+  message: System policy prevents the Yast SCR service from executing system calls.
+org.opensuse.yast.scr.read: 
+  defaults: 
+    allow_inactive: "no"
+    allow_any: "no"
+    allow_active: auth_admin_keep_session
+  description: Yast SCR Read Method
+  message: System policy prevents the Yast SCR service from reading any value from the system.
+org.opensuse.yast.scr.registernewagents: 
+  defaults: 
+    allow_inactive: "no"
+    allow_any: "no"
+    allow_active: auth_admin_keep_session
+  description: Yast SCR RegisterNewAgents Method
+  message: System policy prevents the Yast SCR service from registering new unloaded agents.
+org.opensuse.yast.scr.dir: 
+  defaults: 
+    allow_inactive: "no"
+    allow_any: "no"
+    allow_active: auth_admin_keep_session
+  description: Yast SCR Dir Method
+  message: System policy prevents the Yast SCR service from listing agent properties.
+org.opensuse.yast.scr.registeragent: 
+  defaults: 
+    allow_inactive: "no"
+    allow_any: "no"
+    allow_active: auth_admin_keep_session
+  description: Yast SCR RegisterAgent Method
+  message: System policy prevents the Yast SCR service from registering a new agent.
+org.opensuse.yast.scr.error: 
+  defaults: 
+    allow_inactive: "no"
+    allow_any: "no"
+    allow_active: auth_admin_keep_session
+  description: Yast SCR Error Method
+  message: System policy prevents the Yast SCR service from reading error status.
+org.opensuse.yast.scr.unmountagent: 
+  defaults: 
+    allow_inactive: "no"
+    allow_any: "no"
+    allow_active: auth_admin_keep_session
+  description: Yast SCR UnmountAgent Method
+  message: System policy prevents the Yast SCR service from unmounting an agent.
+org.opensuse.yast.scr.write: 
+  defaults: 
+    allow_inactive: "no"
+    allow_any: "no"
+    allow_active: auth_admin_keep_session
+  description: Yast SCR Write Method
+  message: System policy prevents the Yast SCR service from writing any value to the system.
+org.opensuse.yast.scr.unregisterallagents: 
+  defaults: 
+    allow_inactive: "no"
+    allow_any: "no"
+    allow_active: auth_admin_keep_session
+  description: Yast SCR UnregisterAllAgents Method
+  message: System policy prevents the Yast SCR service from unregistering all agents.
+org.opensuse.yast.scr.unregisteragent: 
+  defaults: 
+    allow_inactive: "no"
+    allow_any: "no"
+    allow_active: auth_admin_keep_session
+  description: Yast SCR UnregisterAgent Method
+  message: System policy prevents the Yast SCR service from unregistering an agent.
