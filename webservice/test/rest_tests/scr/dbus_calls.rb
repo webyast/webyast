@@ -2,17 +2,18 @@
 
 require "dbus"
 
+# Get the system bus
 system_bus = DBus::SystemBus.instance
 
 # Get the yast service
 yast = system_bus.service("org.opensuse.yast.SCR")
 
-# Get the object from this service
-objYast = yast.object("/SCR")
+# Get the root object from this service
+objYast = yast.object("/#{yast.root}")
 objYast.introspect
 puts objYast.interfaces
 
-poiSCR = DBus::ProxyObjectInterface.new(objYast, "org.opensuse.yast.SCR.Methods")
+poiSCR = objYast.object "org.opensuse.yast.SCR.Methods"
 poiSCR.define_method("Execute", "in path:(bsv), in arg:(bsv), in opt:(bsv), out ret:(bsv)")
 
 r = poiSCR.Execute([false, "path", ["s",".target.bash_output"] ], 
