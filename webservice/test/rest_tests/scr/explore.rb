@@ -29,6 +29,8 @@ def type2s t
     "bool"
   when "i"
     "int"
+  when "o"
+    "objectpath"
   when "s"
     "string"
   when "v"
@@ -76,10 +78,25 @@ end
 # Get the system bus
 bus = DBus::SystemBus.instance
 
-raise "Usage: explore <service>" if ARGV.empty?
+if ARGV.empty?
+  $stderr.puts "Usage: ruby explore <service>"
+  $stderr.puts "  where <service> is one of"
+  i = 0
+  bus.proxy.ListNames[0].each do |service|
+    $stderr.print "#{service}"
+    if i % 3 == 0
+      $stderr.puts
+    else
+      $stderr.print ", "
+    end
+  end
+  exit
+end
+
+service = ARGV.shift
 
 # Connect to the SCR service at the root object path
-proxy = bus.introspect ARGV.shift, "/"
+proxy = bus.introspect service, "/"
 
 puts "Proxy <#{proxy}>"
 puts "path  <#{proxy.path}>"
@@ -87,4 +104,3 @@ puts "destination  <#{proxy.destination}>"
 puts "default_iface  <#{proxy.default_iface}>" if proxy.default_iface
 
 explore_subnodes proxy
-
