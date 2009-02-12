@@ -29,7 +29,9 @@ raise "Can't obtain /SCR object" unless scr
 raise "Oops, no Methods interface" unless scr.interfaces.include? "org.opensuse.yast.SCR.Methods"
 
 interface = scr["org.opensuse.yast.SCR.Methods"]
-  
+
+# should be: interface.Execute(".target.bash_output", "ls", "/abuild")
+
 res = interface.Execute([false, "path", ["s", ".target.bash_output"]], [false, "string", ["s", "ls"]], [false,"string",["s","/abuild"]])
 puts "ls gives #{res[0].to_ruby}"
 
