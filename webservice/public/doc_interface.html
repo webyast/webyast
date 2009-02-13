@@ -115,20 +115,20 @@ can be set explicit in an extra HTTP call:
 <p>&lt;?xml version="1.0" encoding="UTF-8"?&gt;
 <br>&lt;language&gt;
 <blockquote>
-  &lt;firstLanguage&gt;de_DE&lt;/firstLanguage&gt;
-  <br>&lt;secondLanguages&gt;en_US,zu_ZA&lt;/secondLanguages&gt;
+  &lt;first_language&gt;de_DE&lt;/first_language&gt;
+  <br>&lt;second_languages&gt;en_US,zu_ZA&lt;/second_languages&gt;
 </blockquote>
 &lt;/language&gt;
 </blockquote>
 
 <p>whereas 
 
-<p>PUT http://0.0.0.0:3001/language/secondLanguages with a single XML value
+<p>PUT http://0.0.0.0:3001/language/second_languages with a single XML value
 
 <p>&lt;?xml version="1.0" encoding="UTF-8"?&gt;
 <br>&lt;language&gt;
 <blockquote>
-  &lt;secondLanguages&gt;en_US&lt;/secondLanguages&gt;
+  &lt;second_languages&gt;en_US&lt;/second_languages&gt;
 </blockquote>
 &lt;/language&gt;
 
@@ -138,7 +138,7 @@ can be set explicit in an extra HTTP call:
 
 <p>Put calls can be generated on the command line with the call:
 
-<p>curl -0 -v -H "Content-Type: application/xml; charset=utf-8" -T &lt;data-file&gt; -b &lt;cookie_file&gt; http://0.0.0.0:3001/language/secondLanguages.xml
+<p>curl -0 -v -H "Content-Type: application/xml; charset=utf-8" -T &lt;data-file&gt; -b &lt;cookie_file&gt; http://0.0.0.0:3001/language/second_languages.xml
 
 <p>("-b &lt;cookie_file&gt;" describes a cookie with the filename "cookie_file". This
  cookie contains the login information of the current session.)
@@ -488,8 +488,8 @@ returned values of the GET request.
 
 <p>&lt;language&gt;
 <blockquote>
-  &lt;firstLanguage&gt;de_DE&lt;/firstLanguage&gt;
-  <br>&lt;secondLanguages&gt;en_US&lt;/secondLanguages&gt;
+  &lt;first_language&gt;de_DE&lt;/first_language&gt;
+  <br>&lt;second_languages&gt;en_US&lt;/second_languages&gt;
   <br>&lt;available&gt;af_ZA (Afrikaans)ar_EG (Arabic)bg_BG (Bulgarian)bn_BD (Bengali)bs_BA (Bosanski)ca_ES (Catala)cs_CZ (Cestina)cy_GB (Cymraeg)da_DK (Dansk)de_DE (Deutsch)el_GR (Greek)en_GB (English (UK))en_US (English (US))es_ES (Espanol)et_EE (Eesti)fi_FI (Suomi)fr_FR (Francais)gu_IN (Gujarati)he_IL (Ivrit)hi_IN (Hindi)hr_HR (Hrvatski)hu_HU (Magyar)id_ID (Bahasa Indonesia)it_IT (Italiano)ja_JP (Japanese)km_KH (Khmer)ko_KR (Korean)lt_LT (Lithuanian)mk_MK (Makedonski)mr_IN (Marathi)nb_NO (Norsk)nl_NL (Nederlands)pa_IN (Punjabi)pl_PL (Polski)pt_BR (Portugues brasileiro)pt_PT (Portugues)ro_RO (Romana)ru_RU (Russian)si_LK (Sinhala)sk_SK (Slovencina)sl_SI (Slovenscina)sr_CS (Srpski)sv_SE (Svenska)ta_IN (Tamil)th_TH (phasa thai)tr_TR (Turkce)uk_UA (Ukrainian)vi_VN (Vietnamese)wa_BE (Walon)xh_ZA (isiXhosa)zh_CN (Simplified Chinese)zh_TW (Traditional Chinese (Taiwan))zu_ZA (isiZulu)&lt;/available&gt;
 <br>&lt;error_id type="integer"&gt;0&lt;/error_id&gt;
 <br>&lt;error_string/&gt;
@@ -499,10 +499,10 @@ returned values of the GET request.
 
 <p><table>
 <tr>
-<td>firstLanguage:</td>
+<td>first_language:</td>
 <td>primary language</td>
 </tr>
-<td>secondLanguages:</td>
+<td>second_languages:</td>
 <td>a list of languages separeted by commas</td>
 </tr>
 <td>available:</td>
@@ -515,8 +515,8 @@ returned values of the GET request.
 
 <p>&lt;language&gt;
 <blockquote>
-  &lt;firstLanguage&gt;de_DE&lt;/firstLanguage&gt;
-  <br>&lt;secondLanguages&gt;en_US,zu_ZA&lt;/secondLanguages&gt;
+  &lt;first_language&gt;de_DE&lt;/first_language&gt;
+  <br>&lt;second_languages&gt;en_US,zu_ZA&lt;/second_languages&gt;
 </blockquote>
 &lt;/language&gt;
 
@@ -735,7 +735,7 @@ the value:
     <br>&lt;kind&gt;important&lt;/kind&gt;
     <br>&lt;name&gt;PackageKit&lt;/name&gt;
     <br>&lt;repo&gt;openSUSE-11.0-Updates&lt;/repo&gt;
-    <br>&lt;resolvableId type="integer"&gt;139&lt;/resolvableId&gt;
+    <br>&lt;resolvable_id type="integer"&gt;139&lt;/resolvable_id&gt;
     <br>&lt;summary&gt;&lt;/summary&gt;
     <br>&lt;error_id type="integer"&gt;0&lt;/error_id&gt;
     <br>&lt;error_string/&gt;
@@ -747,7 +747,7 @@ the value:
     <br>&lt;kind&gt;important&lt;/kind&gt;
     <br>&lt;name&gt;zypper&lt;/name&gt;
     <br>&lt;repo&gt;openSUSE-11.0-Updates&lt;/repo&gt;
-    <br>&lt;resolvableId type="integer"&gt;114&lt;/resolvableId&gt;
+    <br>&lt;resolvable_id type="integer"&gt;114&lt;/resolvable_id&gt;
     <br>&lt;summary&gt;&lt;/summary&gt;
     <br>&lt;error_id type="integer"&gt;0&lt;/error_id&gt;
     <br>&lt;error_string/&gt;
@@ -759,7 +759,7 @@ the value:
     <br>&lt;kind&gt;important&lt;/kind&gt;
     <br>&lt;name&gt;yast2-ncurses-pkg&lt;/name&gt;
     <br>&lt;repo&gt;openSUSE-11.0-Updates&lt;/repo&gt;
-    <br>&lt;resolvableId type="integer"&gt;83&lt;/resolvableId&gt;
+    <br>&lt;resolvable_id type="integer"&gt;83&lt;/resolvable_id&gt;
     <br>&lt;summary&gt;&lt;/summary&gt;
     <br>&lt;error_id type="integer"&gt;0&lt;/error_id&gt;
     <br>&lt;error_string/&gt;
@@ -785,7 +785,7 @@ the value:
 <td>Concerning repository</td>
 </tr>
 <tr>
-<td>resolvableId:</td>
+<td>resolvable_id:</td>
 <td>internal patch ID</td>
 </tr>
 <tr>
@@ -794,7 +794,7 @@ the value:
 </tr>
 </table>
 
-<p>POST &lt;hostname&gt;/patch_updates/&lt;resolvableId&gt; Install the patch with the internal patch ID.
+<p>POST &lt;hostname&gt;/patch_updates/&lt;resolvable_id&gt; Install the patch with the internal patch ID.
 
 <h3>&lt;hostname&gt;/yast_modules</h3>
 

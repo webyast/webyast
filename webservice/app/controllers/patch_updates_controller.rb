@@ -75,7 +75,7 @@ class PatchUpdatesController < ApplicationController
          update.summary = line3
          columns = line2.split ";"
          update.name = columns[0]
-         update.resolvableId = columns[1]
+         update.resolvable_id = columns[1]
          update.arch = columns[2]
          update.repo = columns[3]
          @patch_updates << update
@@ -111,7 +111,7 @@ class PatchUpdatesController < ApplicationController
       get_updateList
     end
     @patch_updates.each do |p|   
-       if p.resolvableId.to_s == id.to_s
+       if p.resolvable_id.to_s == id.to_s
          @patch_update = p
          break
        end
@@ -126,7 +126,7 @@ class PatchUpdatesController < ApplicationController
       return "Patch: #{id} not found."
     end
 
-    updateId = "#{@patch_update.name};#{@patch_update.resolvableId};#{@patch_update.arch};#{@patch_update.repo}"
+    updateId = "#{@patch_update.name};#{@patch_update.resolvable_id};#{@patch_update.arch};#{@patch_update.repo}"
     logger.debug "Install Update: #{updateId}"
    
     system_bus = DBus::SystemBus.instance

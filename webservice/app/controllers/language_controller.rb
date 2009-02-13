@@ -29,9 +29,9 @@ class LanguageController < ApplicationController
        column = s.split(" ")
        case column[0]
          when "Current"
-           @language.firstLanguage = column[2] 
+           @language.first_language = column[2] 
          when "Additional"
-           @language.secondLanguages = column[2] 
+           @language.second_languages = column[2] 
        end
      end
   end
@@ -40,11 +40,11 @@ class LanguageController < ApplicationController
 # set
 #
 
-  def set_firstLanguage (language)
+  def set_first_language (language)
     Scr.execute(["/sbin/yast2", "language", "set",  "lang=#{language}", "no_packages"])
   end
 
-  def set_secondLanguages (languages)
+  def set_second_languages (languages)
     Scr.execute(["/sbin/yast2", "language", "set", "languages=#{languages}", "no_packages"])
   end
 
@@ -63,8 +63,8 @@ class LanguageController < ApplicationController
          if language.update_attributes(params[:language])
            logger.debug "UPDATED: #{language.inspect}"
 
-           set_firstLanguage language.firstLanguage
-           set_secondLanguages language.secondLanguages
+           set_first_language language.first_language
+           set_second_languages language.second_languages
          else
            language.error_id = 2
            language.error_string = "format or internal error"
@@ -128,20 +128,20 @@ class LanguageController < ApplicationController
       
       #initialize not needed stuff (perhaps no permissions available)
       case params[:id]
-        when "firstLanguage"
+        when "first_language"
           if ( permissionCheck( "org.opensuse.yast.webservice.read-language" ) or
                permissionCheck( "org.opensuse.yast.webservice.read-language-firstlanguage" )) then
              get_languages
-             @language.secondLanguages=nil
+             @language.second_languages=nil
           else
              @language.error_id = 1
              @language.error_string = "no permission"
           end
-        when "secondLanguages"
+        when "second_languages"
           if ( permissionCheck( "org.opensuse.yast.webservice.read-language" ) or
                permissionCheck( "org.opensuse.yast.webservice.read-language-secondlanguages" )) then
              get_languages  
-             @language.firstLanguage=nil
+             @language.first_language=nil
           else
              @language.error_id = 1
              @language.error_string = "no permission"
@@ -176,18 +176,18 @@ class LanguageController < ApplicationController
         if @language.update_attributes(params[:language])
           logger.debug "UPDATED: #{@language.inspect}"
           case params[:id]
-            when "firstLanguage"
+            when "first_language"
               if ( permissionCheck( "org.opensuse.yast.webservice.write-language" ) or
                    permissionCheck( "org.opensuse.yast.webservice.write-language-firstlanguage" )) then
-                 set_firstLanguage @language.firstLanguage
+                 set_first_language @language.first_language
               else
                  @language.error_id = 1
                  @language.error_string = "no permission"
               end              
-            when "secondLanguages"
+            when "second_languages"
               if ( permissionCheck( "org.opensuse.yast.webservice.write-language" ) or
                    permissionCheck( "org.opensuse.yast.webservice.write-language-secondlanguages" )) then
-                 set_secondLanguages @language.secondLanguages
+                 set_second_languages @language.second_languages
               else
                  @language.error_id = 1
                  @language.error_string = "no permission"
