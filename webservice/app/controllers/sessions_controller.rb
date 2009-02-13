@@ -17,37 +17,37 @@ class SessionsController < ApplicationController
        self.current_account = Account.authenticate(params[:login], params[:password])
     end
     if logged_in?
-      if params[:remember_me] == "1"
+      if params.has_key?(:remember_me) && params[:remember_me] == true
         current_account.remember_me unless current_account.remember_token?
         cookies[:auth_token] = { :value => self.current_account.remember_token , :expires => self.current_account.remember_token_expires_at }
       end
 
-      @cmdRet = Hash.new
-      @cmdRet["login"] = "granted"
-      @cmdRet["auth_token"] = { :value => self.current_account.remember_token , :expires => self.current_account.remember_token_expires_at }
+      @cmd_ret = Hash.new
+      @cmd_ret["login"] = "granted"
+      @cmd_ret["auth_token"] = { :value => self.current_account.remember_token , :expires => self.current_account.remember_token_expires_at }
       respond_to do |format|
         format.xml do
-	  render :xml => @cmdRet.to_xml, :location => "none"
+	  render :xml => @cmd_ret.to_xml, :location => "none"
         end
         format.json do
-          render :json => @cmdRet.to_json, :location => "none"
+          render :json => @cmd_ret.to_json, :location => "none"
         end
         format.html do
-	  render :xml => @cmdRet.to_xml, :location => "none"
+	  render :xml => @cmd_ret.to_xml, :location => "none"
         end
       end
     else
-      @cmdRet = Hash.new
-      @cmdRet["login"] = "denied"
+      @cmd_ret = Hash.new
+      @cmd_ret["login"] = "denied"
       respond_to do |format|
         format.xml do
-	  render :xml => @cmdRet.to_xml, :location => "none"
+	  render :xml => @cmd_ret.to_xml, :location => "none"
         end
         format.json do
-          render :json => @cmdRet.to_json, :location => "none"
+          render :json => @cmd_ret.to_json, :location => "none"
         end
         format.html do
-	  render :xml => @cmdRet.to_xml, :location => "none" #only XML will be returned
+	  render :xml => @cmd_ret.to_xml, :location => "none" #only XML will be returned
         end
       end
     end
@@ -57,17 +57,17 @@ class SessionsController < ApplicationController
     self.current_account.forget_me if logged_in?
     cookies.delete :auth_token
     reset_session
-    @cmdRet = Hash.new
-    @cmdRet["logout"] = "Goodbye!"
+    @cmd_ret = Hash.new
+    @cmd_ret["logout"] = "Goodbye!"
     respond_to do |format|
       format.xml do
-	render :xml => @cmdRet.to_xml, :location => "none"
+	render :xml => @cmd_ret.to_xml, :location => "none"
       end
       format.json do
-        render :json => @cmdRet.to_json, :location => "none"
+        render :json => @cmd_ret.to_json, :location => "none"
       end
       format.html do
-	render :xml => @cmdRet.to_xml, :location => "none" #only XML will be returned
+	render :xml => @cmd_ret.to_xml, :location => "none" #only XML will be returned
       end
     end
   end

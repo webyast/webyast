@@ -7,22 +7,22 @@ class YastModulesController < ApplicationController
   require 'yastModule'
   private
 
-  def init_modules (checkPolicy)
-    @yastModules = Hash.new
-    if (!checkPolicy or
-        permissionCheck( "org.opensuse.yast.webservice.read-yastmodulelist"))
+  def init_modules (check_policy)
+    @yast_modules = Hash.new
+    if (!check_policy or
+        permission_check( "org.opensuse.yast.webservice.read-yastmodulelist"))
        YastModule.all.each do |d|
          begin
-            yastModule = YastModule.new d
-            @yastModules[yastModule.id] = yastModule
+            yast_module = YastModule.new d
+            @yast_modules[yast_module.id] = yast_module
          rescue # Don't fail on non-existing service. Should be more specific.
          end
        end
     else
-       yastModule = YastModule.new ""
-       yastModule.error_id = 1
-       yastModule.error_string = "no permission"
-       @yastModules[yastModule.id] = yastModule
+       yast_module = YastModule.new ""
+       yast_module.error_id = 1
+       yast_module.error_string = "no permission"
+       @yast_modules[yast_module.id] = yast_module
     end
   end
 
@@ -48,42 +48,42 @@ class YastModulesController < ApplicationController
 
   def index
     init_modules true #check policy
-    respond @yastModules
+    respond @yast_modules
   end
 
   def show
     id = params[:id]
-    idPolicy = id.tr_s('_', '-')
-    idPolicy = idPolicy.chomp
-    idPolicy = idPolicy.downcase
-    idPolicy = "org.opensuse.yast.webservice.read-yastmodule-" + idPolicy
-    if (permissionCheck( "org.opensuse.yast.webservice.read-yastmodule") or
-        permissionCheck( idPolicy))
+    id_policy = id.tr_s('_', '-')
+    id_policy = id_policy.chomp
+    id_policy = id_policy.downcase
+    id_policy = "org.opensuse.yast.webservice.read-yastmodule-" + id_policy
+    if (permission_check( "org.opensuse.yast.webservice.read-yastmodule") or
+        permission_check( id_policy))
        init_modules false #check no policy
-       @yastModule = @yastModules[id]
-       @yastModule.commands #evaluate commands
+       @yast_module = @yast_modules[id]
+       @yast_module.commands #evaluate commands
     else
-       @yastModule = YastModule.new ""
-       @yastModule.error_id = 1
-       @yastModule.error_string = "no permission"
+       @yast_module = YastModule.new ""
+       @yast_module.error_id = 1
+       @yast_module.error_string = "no permission"
     end
 
-    respond @yastModule
+    respond @yast_module
   end
 
 
   def run
     id = params[:id]
-    @cmdRet = Hash.new
-    idPolicy = id.tr_s('_', '-')
-    idPolicy = idPolicy.chomp
-    idPolicy = idPolicy.downcase
-    idPolicyLong = "org.opensuse.yast.webservice.execute-yastmodule-" + idPolicy
-    if (permissionCheck( "org.opensuse.yast.webservice.execute-yastmodule") or
-        permissionCheck( idPolicyLong))
+    @cmd_ret = Hash.new
+    id_policy = id.tr_s('_', '-')
+    id_policy = id_policy.chomp
+    id_policy = id_policy.downcase
+    id_policy_long = "org.opensuse.yast.webservice.execute-yastmodule-" + id_policy
+    if (permission_check( "org.opensuse.yast.webservice.execute-yastmodule") or
+        permission_check( id_policy_long))
        init_modules false #check no policy
-       @yastModule = @yastModules[id]
-       @yastModule.commands #evaluate commands
+       @yast_module = @yast_modules[id]
+       @yast_module.commands #evaluate commands
 
        if request.post?
          #execute command
@@ -98,10 +98,10 @@ class YastModulesController < ApplicationController
       
          cmd = ["/sbin/yast2", params[:id], params[:command]]
          found = false
-         @yastModule.commands.each do |cname,option|
+         @yast_module.commands.each do |cname,option|
            if cname == params["command"]
              found = true
-             command = @yastModule.commands[cname]
+             command = @yast_module.commands[cname]
              if command != nil
                command["options"].each do |name,option|
                  if params[name.to_s] != nil
@@ -119,44 +119,44 @@ class YastModulesController < ApplicationController
                  end
                end
              end
-             @cmdRet = Scr.execute(cmd)
+             @cmd_ret = Scr.execute(cmd)
            end
          end
          if !found
            STDERR.puts "command #{params[:command]} not found"
-           @cmdRet["exit"] = 2
-           @cmdRet["stderr"] = "command #{params[:command]} not found"
-           @cmdRet["stdout"] = ""
+           @cmd_ret["exit"] = 2
+           @cmd_ret["stderr"] = "command #{params[:command]} not found"
+           @cmd_ret["stdout"] = ""
          end
        else
          # no POST request
 
-         idPolicyLong = "org.opensuse.yast.webservice.read-yastmodule-" + idPolicy
-         if (permissionCheck( "org.opensuse.yast.webservice.read-yastmodule") or
-             permissionCheck( idPolicyLong))
-            respond @yastModule
+         id_policy_long = "org.opensuse.yast.webservice.read-yastmodule-" + id_policy
+         if (permission_check( "org.opensuse.yast.webservice.read-yastmodule") or
+             permission_check( id_policy_long))
+            respond @yast_module
             return
          else
-            @cmdRet[:exit] = 1
-            @cmdRet[:stderr] = "no permission"
-            @cmdRet[:stdout] = ""
+            @cmd_ret[:exit] = 1
+            @cmd_ret[:stderr] = "no permission"
+            @cmd_ret[:stdout] = ""
          end
        end
     else #no right
-       @cmdRet[:exit] = 1
-       @cmdRet[:stderr] = "no permission"
-       @cmdRet[:stdout] = ""
+       @cmd_ret[:exit] = 1
+       @cmd_ret[:stderr] = "no permission"
+       @cmd_ret[:stdout] = ""
     end
 
     respond_to do |format|
        format.xml do
-          render :xml => @cmdRet.to_xml
+          render :xml => @cmd_ret.to_xml
        end
        format.json do
-          render :json => @cmdRet.to_json
+          render :json => @cmd_ret.to_json
        end
        format.html do
-          render :xml => @cmdRet.to_xml #return xml only
+          render :xml => @cmd_ret.to_xml #return xml only
        end
     end
   end

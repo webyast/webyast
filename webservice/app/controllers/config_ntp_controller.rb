@@ -7,7 +7,7 @@ class ConfigNtpController < ApplicationController
 #
 #local functions
 #
-   def manualServer
+   def get_manual_server
 
      manual_server = ""
      ret = Scr.execute(["/sbin/yast2",  "ntp-client",  "list"])
@@ -39,37 +39,38 @@ class ConfigNtpController < ApplicationController
      end
    end
 
-   def writeNTPConf (requestedServers)
+   def write_ntp_conf (requested_servers)
+     update_required = false
      #remove evtl.old server if requested
      servers = []
      ret = Scr.execute(["/sbin/yast2", "ntp-client", "list"])
-     serversLine = ret[:stderr].split "\n"
-     serversLine.each do |s|
+     servers_line = ret[:stderr].split "\n"
+     servers_line.each do |s|
        column = s.split " "
        if column.size == 2 && column[0] == "Server"
 	  servers << column[1]
        end
      end
-     updateRequired = false
-     requestedServers.each do |reqServer|
+     update_required = false
+     requested_servers.each do |req_server|
        found = false
        servers.each do |server|
-          if server==reqServer
+          if server==req_server
              found = true
           end
        end
        if !found
-          updateRequired = true
+          update_required = true
        end
      end
 
      #update required
-     if updateRequired
+     if update_required
        servers.each do |server|
          Scr.execute(["/sbin/yast2", "ntp-client", "delete", server])
        end
-       requestedServers.each do |reqServer|
-         Scr.execute(["/sbin/yast2", "ntp-client", "add", reqServer])
+       requested_servers.each do |req_server|
+         Scr.execute(["/sbin/yast2", "ntp-client", "add", req_server])
        end
      end
    end
@@ -90,12 +91,12 @@ class ConfigNtpController < ApplicationController
 
     @ntp = ConfigNtp.new
 
-    if ( permissionCheck( "org.opensuse.yast.webservice.read-services") or
-         permissionCheck( "org.opensuse.yast.webservice.read-services-config") or
-         permissionCheck( "org.opensuse.yast.webservice.read-services-config-ntp"))
+    if ( permission_check( "org.opensuse.yast.webservice.read-services") or
+         permission_check( "org.opensuse.yast.webservice.read-services-config") or
+         permission_check( "org.opensuse.yast.webservice.read-services-config-ntp"))
        @ntp.manual_server = ""
        @ntp.use_random_server = true
-       @ntp.manual_server = manualServer
+       @ntp.manual_server = get_manual_server
        @ntp.enabled = enabled
        if @ntp.manual_server == ""
          @ntp.use_random_server = true
@@ -125,19 +126,19 @@ class ConfigNtpController < ApplicationController
   def update
     respond_to do |format|
       ntp = ConfigNtp.new
-      if ( permissionCheck( "org.opensuse.yast.webservice.write-services") or
-           permissionCheck( "org.opensuse.yast.webservice.write-services-config") or
-           permissionCheck( "org.opensuse.yast.webservice.write-services-config-ntp"))
+      if ( permission_check( "org.opensuse.yast.webservice.write-services") or
+           permission_check( "org.opensuse.yast.webservice.write-services-config") or
+           permission_check( "org.opensuse.yast.webservice.write-services-config-ntp"))
          if ntp.update_attributes(params[:config_ntp])
             logger.debug "UPDATED: #{ntp.inspect}"
        
-            requestedServers = []
+            requested_servers = []
             if ntp.use_random_server == false
-              requestedServers << ntp.manual_server
+              requested_servers << ntp.manual_server
             else
-              requestedServers = ["0.pool.ntp.org", "1.pool.ntp.org", "2.pool.ntp.org"]
+              requested_servers = ["0.pool.ntp.org", "1.pool.ntp.org", "2.pool.ntp.org"]
             end
-            writeNTPConf(requestedServers)
+            write_ntp_conf(requested_servers)
             enable(ntp.enabled) 
          else
            ntp.error_id = 2
@@ -162,27 +163,27 @@ class ConfigNtpController < ApplicationController
     end
   end
 
-  def singleValue
+  def singlevalue
     if request.get?
       # GET
       @ntp = ConfigNtp.new
       case params[:id]
         when "manual_server"
-          if ( permissionCheck( "org.opensuse.yast.webservice.read-services") or
-               permissionCheck( "org.opensuse.yast.webservice.read-services-config") or
-               permissionCheck( "org.opensuse.yast.webservice.read-services-config-ntp") or
-               permissionCheck( "org.opensuse.yast.webservice.read-services-config-ntp-manualserver"))
-             @ntp.manualServer = manualServer
+          if ( permission_check( "org.opensuse.yast.webservice.read-services") or
+               permission_check( "org.opensuse.yast.webservice.read-services-config") or
+               permission_check( "org.opensuse.yast.webservice.read-services-config-ntp") or
+               permission_check( "org.opensuse.yast.webservice.read-services-config-ntp-manualserver"))
+             @ntp.manual_server = get_manual_server
           else
              @ntp.error_id = 1
              @ntp.error_string = "no permission"
           end
         when "use_random_server"
-          if ( permissionCheck( "org.opensuse.yast.webservice.read-services") or
-               permissionCheck( "org.opensuse.yast.webservice.read-services-config") or
-               permissionCheck( "org.opensuse.yast.webservice.read-services-config-ntp") or
-               permissionCheck( "org.opensuse.yast.webservice.read-services-config-ntp-userandomserver"))
-             if manualServer == ""
+          if ( permission_check( "org.opensuse.yast.webservice.read-services") or
+               permission_check( "org.opensuse.yast.webservice.read-services-config") or
+               permission_check( "org.opensuse.yast.webservice.read-services-config-ntp") or
+               permission_check( "org.opensuse.yast.webservice.read-services-config-ntp-userandomserver"))
+             if manual_server == ""
                @ntp.use_random_server = true
              else
                @ntp.use_random_server = false
@@ -192,10 +193,10 @@ class ConfigNtpController < ApplicationController
              @ntp.error_string = "no permission"
           end
         when "enabled"
-          if ( permissionCheck( "org.opensuse.yast.webservice.read-services") or
-               permissionCheck( "org.opensuse.yast.webservice.read-services-config") or
-               permissionCheck( "org.opensuse.yast.webservice.read-services-config-ntp") or
-               permissionCheck( "org.opensuse.yast.webservice.read-services-config-ntp-enabled"))
+          if ( permission_check( "org.opensuse.yast.webservice.read-services") or
+               permission_check( "org.opensuse.yast.webservice.read-services-config") or
+               permission_check( "org.opensuse.yast.webservice.read-services-config-ntp") or
+               permission_check( "org.opensuse.yast.webservice.read-services-config-ntp-enabled"))
              @ntp.enabled = enabled
           else
              @ntp.error_id = 1
@@ -223,22 +224,22 @@ class ConfigNtpController < ApplicationController
             logger.debug "UPDATED: #{@ntp.inspect}"
             case params[:id]
               when "manual_server"
-                 if ( permissionCheck( "org.opensuse.yast.webservice.write-services") or
-                      permissionCheck( "org.opensuse.yast.webservice.write-services-config") or
-                      permissionCheck( "org.opensuse.yast.webservice.write-services-config-ntp") or
-                      permissionCheck( "org.opensuse.yast.webservice.write-services-config-ntp-manualserver"))
-                    writeNTPConf ([@ntp.manualServer])
+                 if ( permission_check( "org.opensuse.yast.webservice.write-services") or
+                      permission_check( "org.opensuse.yast.webservice.write-services-config") or
+                      permission_check( "org.opensuse.yast.webservice.write-services-config-ntp") or
+                      permission_check( "org.opensuse.yast.webservice.write-services-config-ntp-manualserver"))
+                    write_ntp_conf ([@ntp.manual_server])
                  else
                     @ntp.error_id = 1
                     @ntp.error_string = "no permission"
                  end
               when "use_random_server"
-                 if ( permissionCheck( "org.opensuse.yast.webservice.write-services") or
-                      permissionCheck( "org.opensuse.yast.webservice.write-services-config") or
-                      permissionCheck( "org.opensuse.yast.webservice.write-services-config-ntp") or
-                      permissionCheck( "org.opensuse.yast.webservice.write-services-config-ntp-userandomserver"))
+                 if ( permission_check( "org.opensuse.yast.webservice.write-services") or
+                      permission_check( "org.opensuse.yast.webservice.write-services-config") or
+                      permission_check( "org.opensuse.yast.webservice.write-services-config-ntp") or
+                      permission_check( "org.opensuse.yast.webservice.write-services-config-ntp-userandomserver"))
                     if (@ntp.use_random_server == true)
-                       writeNTPConf(["0.pool.ntp.org", "1.pool.ntp.org", "2.pool.ntp.org"])
+                       write_ntp_conf(["0.pool.ntp.org", "1.pool.ntp.org", "2.pool.ntp.org"])
                     else
                        logger.debug "use_random_server:false. You will have to setup a manual_server too."
                        @ntp.error_string = "use_random_server:false. You will have to setup a manual_server too."
@@ -248,10 +249,10 @@ class ConfigNtpController < ApplicationController
                    @ntp.error_string = "no permission"
                  end
               when "enabled"
-                 if ( permissionCheck( "org.opensuse.yast.webservice.write-services") or
-                      permissionCheck( "org.opensuse.yast.webservice.write-services-config") or
-                      permissionCheck( "org.opensuse.yast.webservice.write-services-config-ntp") or
-                      permissionCheck( "org.opensuse.yast.webservice.write-services-config-ntp-enabled"))
+                 if ( permission_check( "org.opensuse.yast.webservice.write-services") or
+                      permission_check( "org.opensuse.yast.webservice.write-services-config") or
+                      permission_check( "org.opensuse.yast.webservice.write-services-config-ntp") or
+                      permission_check( "org.opensuse.yast.webservice.write-services-config-ntp-enabled"))
                    enable(@ntp.enabled == true)
                  else
                    @ntp.error_id = 1

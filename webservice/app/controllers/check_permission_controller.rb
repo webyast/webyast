@@ -4,21 +4,21 @@ class CheckPermissionController < ApplicationController
 
   def show
      right = "org.opensuse.yast.webservice." + params[:id]
-     @cmdRet = Hash.new
+     @cmd_ret = Hash.new
      if polkit_check( right, self.current_account.login) == :yes
-        @cmdRet["permission"] = "granted"
+        @cmd_ret["permission"] = "granted"
      else
-        @cmdRet["permission"] = "denied"
+        @cmd_ret["permission"] = "denied"
      end
      respond_to do |format|
        format.xml do
-	 render :xml => @cmdRet.to_xml
+	 render :xml => @cmd_ret.to_xml
        end
        format.json do
-         render :json => @cmdRet.to_json
+         render :json => @cmd_ret.to_json
        end
        format.html do
-	 render :xml => @cmdRet.to_xml #return xml onl
+	 render :xml => @cmd_ret.to_xml #return xml onl
        end
      end
   end

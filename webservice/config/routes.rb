@@ -35,10 +35,10 @@ ActionController::Routing::Routes.draw do |map|
   #   end
 
   map.resource :config, :controller => 'config_ntp', :path_prefix => "/services/ntp"
-  map.connect "/services/ntp/config/:id", :controller => 'config_ntp', :action => 'singleValue'
-  map.connect "/services/ntp/config/:id.xml", :controller => 'config_ntp', :action => 'singleValue', :format =>'xml'
-  map.connect "/services/ntp/config/:id.html", :controller => 'config_ntp', :action => 'singleValue', :format =>'html'
-  map.connect "/services/ntp/config/:id.json", :controller => 'config_ntp', :action => 'singleValue', :format =>'json'
+  map.connect "/services/ntp/config/:id", :controller => 'config_ntp', :action => 'singlevalue'
+  map.connect "/services/ntp/config/:id.xml", :controller => 'config_ntp', :action => 'singlevalue', :format =>'xml'
+  map.connect "/services/ntp/config/:id.html", :controller => 'config_ntp', :action => 'singlevalue', :format =>'html'
+  map.connect "/services/ntp/config/:id.json", :controller => 'config_ntp', :action => 'singlevalue', :format =>'json'
 
   map.namespace :services do |service|
       service.resource :dummy
@@ -49,16 +49,16 @@ ActionController::Routing::Routes.draw do |map|
   end
 
   map.resource :systemtime, :controller => 'systemtime'
-  map.connect "/systemtime/:id", :controller => 'systemtime', :action => 'singleValue'
-  map.connect "/systemtime/:id.xml", :controller => 'systemtime', :action => 'singleValue', :format =>'xml'
-  map.connect "/systemtime/:id.html", :controller => 'systemtime', :action => 'singleValue', :format =>'html'
-  map.connect "/systemtime/:id.json", :controller => 'systemtime', :action => 'singleValue', :format =>'json'
+  map.connect "/systemtime/:id", :controller => 'systemtime', :action => 'singlevalue'
+  map.connect "/systemtime/:id.xml", :controller => 'systemtime', :action => 'singlevalue', :format =>'xml'
+  map.connect "/systemtime/:id.html", :controller => 'systemtime', :action => 'singlevalue', :format =>'html'
+  map.connect "/systemtime/:id.json", :controller => 'systemtime', :action => 'singlevalue', :format =>'json'
 
   map.resource :language, :controller => 'language'
-  map.connect "/language/:id", :controller => 'language', :action => 'singleValue'
-  map.connect "/language/:id.xml", :controller => 'language', :action => 'singleValue', :format =>'xml'
-  map.connect "/language/:id.html", :controller => 'language', :action => 'singleValue', :format =>'html'
-  map.connect "/language/:id.json", :controller => 'language', :action => 'singleValue', :format =>'json'
+  map.connect "/language/:id", :controller => 'language', :action => 'singlevalue'
+  map.connect "/language/:id.xml", :controller => 'language', :action => 'singlevalue', :format =>'xml'
+  map.connect "/language/:id.html", :controller => 'language', :action => 'singlevalue', :format =>'html'
+  map.connect "/language/:id.json", :controller => 'language', :action => 'singlevalue', :format =>'json'
 
   map.resources :users do |users|
     users.resources :permissions
@@ -74,10 +74,10 @@ ActionController::Routing::Routes.draw do |map|
   map.connect "/users/new/create.json", :controller => 'users', :action => 'create', :format =>'json'
 
   map.connect "/users/:users_id/exportssh", :controller => 'users', :action => 'exportssh'
-  map.connect "/users/:users_id/:id", :controller => 'users', :action => 'singleValue'
-  map.connect "/users/:users_id/:id.xml", :controller => 'users', :action => 'singleValue', :format =>'xml'
-  map.connect "/users/:users_id/:id.html", :controller => 'users', :action => 'singleValue', :format =>'html'
-  map.connect "/users/:users_id/:id.json", :controller => 'users', :action => 'singleValue', :format =>'json'
+  map.connect "/users/:users_id/:id", :controller => 'users', :action => 'singlevalue'
+  map.connect "/users/:users_id/:id.xml", :controller => 'users', :action => 'singlevalue', :format =>'xml'
+  map.connect "/users/:users_id/:id.html", :controller => 'users', :action => 'singlevalue', :format =>'html'
+  map.connect "/users/:users_id/:id.json", :controller => 'users', :action => 'singlevalue', :format =>'json'
 
   map.resources :patch_updates
   map.connect "/patch_updates/:id", :controller => 'patch_updates', :action => 'install'

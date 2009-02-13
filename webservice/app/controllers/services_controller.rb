@@ -36,21 +36,21 @@ class ServicesController < ApplicationController
     init_services unless session['services']
     @services ||= session['services']
       #converting to an array for xml and json
-      serviceArray = []
+      service_array = []
       @services.each {|key, value| 
-        serviceArray << {:link => key, :path =>value.path, :commands => value.commands.join(","), 
+        service_array << {:link => key, :path =>value.path, :commands => value.commands.join(","), 
                          :error_id => value.error_id, :error_string => value.error_string}
       }
 
       respond_to do |format|
 	format.xml do
-	  render :xml => serviceArray.to_xml(:root => "services")
+	  render :xml => service_array.to_xml(:root => "services")
         end
 	format.json do
-	  render :json => serviceArray.to_json(:root => "services")
+	  render :json => service_array.to_json(:root => "services")
 	end
 	format.html do
-	  render :xml => serviceArray.to_xml(:root => "services") #return xml only
+	  render :xml => service_array.to_xml(:root => "services") #return xml only
 	end
       end
   end

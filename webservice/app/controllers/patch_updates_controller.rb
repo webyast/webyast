@@ -56,20 +56,20 @@ class PatchUpdatesController < ApplicationController
 
   def get_updateList
     @patch_updates = [] 
-    if permissionCheck( "org.opensuse.yast.webservice.read-patch")
+    if permission_check( "org.opensuse.yast.webservice.read-patch")
        system_bus = DBus::SystemBus.instance
-       packageKit = system_bus.service("org.freedesktop.PackageKit")
-       obj = packageKit.object("/org/freedesktop/PackageKit")
+       package_kit = system_bus.service("org.freedesktop.PackageKit")
+       obj = package_kit.object("/org/freedesktop/PackageKit")
        obj.introspect
        obj_with_iface = obj["org.freedesktop.PackageKit"]
        tid = obj_with_iface.GetTid
-       objTid = packageKit.object(tid[0])
-       objTid.introspect
-       objTid_with_iface = objTid["org.freedesktop.PackageKit.Transaction"]
-       objTid.default_iface = "org.freedesktop.PackageKit.Transaction"
+       obj_tid = package_kit.object(tid[0])
+       obj_tid.introspect
+       obj_tid_with_iface = obj_tid["org.freedesktop.PackageKit.Transaction"]
+       obj_tid.default_iface = "org.freedesktop.PackageKit.Transaction"
 
        @finished = false
-       objTid.on_signal("Package") do |line1,line2,line3|
+       obj_tid.on_signal("Package") do |line1,line2,line3|
          update = PatchUpdate.new
          update.kind = line1
          update.summary = line3
@@ -82,13 +82,13 @@ class PatchUpdatesController < ApplicationController
          @finished = true
        end
 
-       objTid.on_signal("Error") do |u1,u2|
+       obj_tid.on_signal("Error") do |u1,u2|
          @finished = true
        end
-       objTid.on_signal("Finished") do |u1,u2|
+       obj_tid.on_signal("Finished") do |u1,u2|
          @finished = true
        end
-       objTid_with_iface.GetUpdates("NONE")
+       obj_tid_with_iface.GetUpdates("NONE")
 
        if !@finished
          @main = MainPkg.new
@@ -130,29 +130,29 @@ class PatchUpdatesController < ApplicationController
     logger.debug "Install Update: #{updateId}"
    
     system_bus = DBus::SystemBus.instance
-    packageKit = system_bus.service("org.freedesktop.PackageKit")
-    obj = packageKit.object("/org/freedesktop/PackageKit")
+    package_kit = system_bus.service("org.freedesktop.PackageKit")
+    obj = package_kit.object("/org/freedesktop/PackageKit")
     obj.introspect
     obj_with_iface = obj["org.freedesktop.PackageKit"]
     tid = obj_with_iface.GetTid
-    objTid = packageKit.object(tid[0])
-    objTid.introspect
-    objTid_with_iface = objTid["org.freedesktop.PackageKit.Transaction"]
-    objTid.default_iface = "org.freedesktop.PackageKit.Transaction"
+    obj_tid = package_kit.object(tid[0])
+    obj_tid.introspect
+    obj_tid_with_iface = obj_tid["org.freedesktop.PackageKit.Transaction"]
+    obj_tid.default_iface = "org.freedesktop.PackageKit.Transaction"
 
     @finished = false
-    objTid.on_signal("Package") do |line1,line2,line3|
+    obj_tid.on_signal("Package") do |line1,line2,line3|
       logger.debug "  update package: #{line2}"
     end
 
-    objTid.on_signal("Error") do |u1,u2|
+    obj_tid.on_signal("Error") do |u1,u2|
       @finished = true
       ret = "packageKit Error"
     end
-    objTid.on_signal("Finished") do |u1,u2|
+    obj_tid.on_signal("Finished") do |u1,u2|
       @finished = true
     end
-    objTid_with_iface.UpdatePackages([updateId])
+    obj_tid_with_iface.UpdatePackages([updateId])
 
     if !@finished
       @main = MainPkg.new
@@ -202,7 +202,7 @@ class PatchUpdatesController < ApplicationController
   # POST /patch_updates/1.xml
   def install
     update = PatchUpdate.new
-    if permissionCheck( "org.opensuse.yast.webservice.install-patch")
+    if permission_check( "org.opensuse.yast.webservice.install-patch")
        ret = install_update params[:id]
        if (ret != "ok")
           update.error_id = 1

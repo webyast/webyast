@@ -59,7 +59,7 @@ class LanguageController < ApplicationController
   def update
     respond_to do |format|
       language = Language.new
-      if permissionCheck( "org.opensuse.yast.webservice.write-language" )
+      if permission_check( "org.opensuse.yast.webservice.write-language" )
          if language.update_attributes(params[:language])
            logger.debug "UPDATED: #{language.inspect}"
 
@@ -94,7 +94,7 @@ class LanguageController < ApplicationController
 
   def index
     @language = Language.new
-    if permissionCheck( "org.opensuse.yast.webservice.read-language" )
+    if permission_check( "org.opensuse.yast.webservice.read-language" )
        get_languages
        get_available
     else
@@ -121,7 +121,7 @@ class LanguageController < ApplicationController
     index
   end
 
-  def singleValue
+  def singlevalue
     if request.get?
       # GET
       @language = Language.new
@@ -129,8 +129,8 @@ class LanguageController < ApplicationController
       #initialize not needed stuff (perhaps no permissions available)
       case params[:id]
         when "first_language"
-          if ( permissionCheck( "org.opensuse.yast.webservice.read-language" ) or
-               permissionCheck( "org.opensuse.yast.webservice.read-language-firstlanguage" )) then
+          if ( permission_check( "org.opensuse.yast.webservice.read-language" ) or
+               permission_check( "org.opensuse.yast.webservice.read-language-firstlanguage" )) then
              get_languages
              @language.second_languages=nil
           else
@@ -138,8 +138,8 @@ class LanguageController < ApplicationController
              @language.error_string = "no permission"
           end
         when "second_languages"
-          if ( permissionCheck( "org.opensuse.yast.webservice.read-language" ) or
-               permissionCheck( "org.opensuse.yast.webservice.read-language-secondlanguages" )) then
+          if ( permission_check( "org.opensuse.yast.webservice.read-language" ) or
+               permission_check( "org.opensuse.yast.webservice.read-language-secondlanguages" )) then
              get_languages  
              @language.first_language=nil
           else
@@ -147,8 +147,8 @@ class LanguageController < ApplicationController
              @language.error_string = "no permission"
           end
         when "available"
-          if ( permissionCheck( "org.opensuse.yast.webservice.read-language" ) or
-               permissionCheck( "org.opensuse.yast.webservice.read-language-available" )) then
+          if ( permission_check( "org.opensuse.yast.webservice.read-language" ) or
+               permission_check( "org.opensuse.yast.webservice.read-language-available" )) then
              get_available
           else
              @language.error_id = 1
@@ -177,16 +177,16 @@ class LanguageController < ApplicationController
           logger.debug "UPDATED: #{@language.inspect}"
           case params[:id]
             when "first_language"
-              if ( permissionCheck( "org.opensuse.yast.webservice.write-language" ) or
-                   permissionCheck( "org.opensuse.yast.webservice.write-language-firstlanguage" )) then
+              if ( permission_check( "org.opensuse.yast.webservice.write-language" ) or
+                   permission_check( "org.opensuse.yast.webservice.write-language-firstlanguage" )) then
                  set_first_language @language.first_language
               else
                  @language.error_id = 1
                  @language.error_string = "no permission"
               end              
             when "second_languages"
-              if ( permissionCheck( "org.opensuse.yast.webservice.write-language" ) or
-                   permissionCheck( "org.opensuse.yast.webservice.write-language-secondlanguages" )) then
+              if ( permission_check( "org.opensuse.yast.webservice.write-language" ) or
+                   permission_check( "org.opensuse.yast.webservice.write-language-secondlanguages" )) then
                  set_second_languages @language.second_languages
               else
                  @language.error_id = 1

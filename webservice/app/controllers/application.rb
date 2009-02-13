@@ -14,8 +14,8 @@ rescue Exception => e
 end
 
 private
-  def userRoles(user)
-    if session['userRoles'] == nil
+  def user_roles(user)
+    if session['user_roles'] == nil
        IO.foreach( "/etc/yast_user_roles" ) { |line|
           line = line.chomp
           if (line.size >= 1 and
@@ -35,7 +35,7 @@ private
 
 public
 
-  def permissionCheck(action)
+  def permission_check(action)
     if self.current_account==nil || self.current_account.login.size == 0
        return false
     end
@@ -44,7 +44,7 @@ public
        return true
     else
        #checking roles
-       roles = userRoles(self.current_account.login)
+       roles = user_roles(self.current_account.login)
        roles.each do |role|
           if ( role != self.current_account.login and
                polkit_check( action, role) == :yes)

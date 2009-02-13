@@ -11,16 +11,16 @@ class PermissionsController < ApplicationController
 #--------------------------------------------------------------------------------
 
 
-  def get_permissionList(user_id)
+  def get_permission_list(user_id)
      @permissions = []
-     if permissionCheck( "org.opensuse.yast.webservice.read-permissions")
+     if permission_check( "org.opensuse.yast.webservice.read-permissions")
        ret = Scr.execute(["polkit-action"])
        if ret[:exit] == 0
-          suseString = "org.opensuse.yast.webservice."
+          suse_string = "org.opensuse.yast.webservice."
           lines = ret[:stdout].split "\n"
           lines.each do |s|   
-             if s.include? suseString
-                perm = s.slice( suseString.size, s.size-1)
+             if s.include? suse_string
+                perm = s.slice( suse_string.size, s.size-1)
                 permission = Permission.new 	
                 permission.name = perm
                 permission.grant = false
@@ -33,8 +33,8 @@ class PermissionsController < ApplicationController
           if ret[:exit] == 0
              lines = ret[:stdout].split "\n"
              lines.each do |s|   
-                   if s.include? suseString
-                   perm = s.slice( suseString.size, s.size-1)
+                   if s.include? suse_string
+                   perm = s.slice( suse_string.size, s.size-1)
                    for i in 0..@permissions.size-1
                       if @permissions[i].name == perm
                          @permissions[i].grant = true
@@ -76,7 +76,7 @@ class PermissionsController < ApplicationController
   # GET /users/<uid>/permissions.json
 
   def index
-    get_permissionList(params[:user_id])
+    get_permission_list(params[:user_id])
 
     respond_to do |format|
       format.html { render :xml => @permissions, :location => "none" } #return xml only
@@ -91,8 +91,8 @@ class PermissionsController < ApplicationController
 
   def show
     permission = Permission.new 	
-    if permissionCheck( "org.opensuse.yast.webservice.read-permissions")
-       get_permissionList(params[:user_id])
+    if permission_check( "org.opensuse.yast.webservice.read-permissions")
+       get_permission_list(params[:user_id])
 
        for i in 0..@permissions.size-1
           if @permissions[i].name == params[:id]
@@ -126,7 +126,7 @@ class PermissionsController < ApplicationController
     else
        permission = Permission.new
     end
-    if permissionCheck( "org.opensuse.yast.webservice.read-permissions")
+    if permission_check( "org.opensuse.yast.webservice.read-permissions")
        permission.error_id = 0
        permission.error_string = ""     
        if permission.grant == true
