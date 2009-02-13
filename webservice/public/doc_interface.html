@@ -152,13 +152,13 @@ can be set explicit in an extra HTTP call:
 <p>&lt;?xml version="1.0" encoding="UTF-8"?&gt;
 <br>&lt;user&gt;
 <blockquote>
-  &lt;defaultGroup&gt;users&lt;/defaultGroup&gt;
-  <br>&lt;fullName&gt;tux2 tux2&lt;/fullName&gt;
+  &lt;default_group&gt;users&lt;/default_group&gt;
+  <br>&lt;full_name&gt;tux2 tux2&lt;/full_name&gt;
   <br>&lt;groups&gt;users&lt;/groups&gt;
-  <br>&lt;homeDirectory&gt;/home/tux2&lt;/homeDirectory&gt;
-  <br>&lt;loginName&gt;tux2&lt;/loginName&gt;
-  <br>&lt;loginShell&gt;/bin/bash&lt;/loginShell&gt;
-  <br>&lt;noHome type="boolean"&gt;false&lt;/noHome&gt;
+  <br>&lt;home_directory&gt;/home/tux2&lt;/home_directory&gt;
+  <br>&lt;login_name&gt;tux2&lt;/login_name&gt;
+  <br>&lt;login_shell&gt;/bin/bash&lt;/login_shell&gt;
+  <br>&lt;no_home type="boolean"&gt;false&lt;/no_home&gt;
   <br>&lt;password&gt;tuxtux&lt;/password&gt;
   <br>&lt;uid&gt;1002&lt;/uid&gt;
 </blockquote>
@@ -535,21 +535,21 @@ returned values of the GET request.
 <p>&lt;users type="array"&gt;
 <br>  &lt;user&gt;
 <blockquote>
-    &lt;loginName&gt;nnw&lt;/loginName&gt;
+    &lt;login_name&gt;nnw&lt;/login_name&gt;
     <br>&lt;error_id type="integer"&gt;0&lt;/error_id&gt;
     <br>&lt;error_string/&gt;
 </blockquote>
   &lt;/user&gt;
   <br>&lt;user&gt;
   <blockquote>
-    &lt;loginName&gt;tux&lt;/loginName&gt;
+    &lt;login_name&gt;tux&lt;/login_name&gt;
     <br>&lt;error_id type="integer"&gt;0&lt;/error_id&gt;
     <br>&lt;error_string/&gt;
   </blockquote>
   &lt;/user&gt;
   <br>&lt;user&gt;
   <blockquote>
-    &lt;loginName&gt;tux2&lt;/loginName&gt;
+    &lt;login_name&gt;tux2&lt;/login_name&gt;
     <br>&lt;error_id type="integer"&gt;0&lt;/error_id&gt;
     <br>&lt;error_string/&gt;
   </blockquote>
@@ -568,12 +568,12 @@ If you want more information about an user just call:
 
 <p>&lt;user&gt;
   <blockquote>
-  &lt;defaultGroup&gt;users&lt;/defaultGroup&gt;
-  <br>&lt;fullName&gt;tux tux&lt;/fullName&gt;
+  &lt;default_group&gt;users&lt;/default_group&gt;
+  <br>&lt;full_name&gt;tux tux&lt;/full_name&gt;
   <br>&lt;groups&gt;users&lt;/groups&gt;
-  <br>&lt;homeDirectory&gt;/home/tux&lt;/homeDirectory&gt;
-  <br>&lt;loginName&gt;tux&lt;/loginName&gt;
-  <br>&lt;loginShell&gt;/bin/bash&lt;/loginShell&gt;
+  <br>&lt;home_directory&gt;/home/tux&lt;/home_directory&gt;
+  <br>&lt;login_name&gt;tux&lt;/login_name&gt;
+  <br>&lt;login_shell&gt;/bin/bash&lt;/login_shell&gt;
   <br>&lt;uid&gt;1001&lt;/uid&gt;
   <br>&lt;error_id type="integer"&gt;0&lt;/error_id&gt;
   <br>&lt;error_string/&gt;
@@ -585,14 +585,14 @@ If you want more information about an user just call:
 
 <p>&lt;user&gt;
   <blockquote>
-  &lt;defaultGroup&gt;users&lt;/defaultGroup&gt;
-  <br>&lt;fullName&gt;tux2 tux2&lt;/fullName&gt;
+  &lt;default_group&gt;users&lt;/default_group&gt;
+  <br>&lt;full_name&gt;tux2 tux2&lt;/full_name&gt;
   <br>&lt;groups&gt;users&lt;/groups&gt;
-  <br>&lt;homeDirectory&gt;/home/tux2&lt;/homeDirectory&gt;
-  <br>&lt;loginShell&gt;/bin/bash&lt;/loginShell&gt;
+  <br>&lt;home_directory&gt;/home/tux2&lt;/home_directory&gt;
+  <br>&lt;login_shell&gt;/bin/bash&lt;/login_shell&gt;
   <br>&lt;password&gt;tuxtux&lt;/password&gt;
-  <br>&lt;newUid&gt;1002&lt;/newUid&gt;
-  <br>&lt;newLoginName&gt;tux2&lt;/newLoginName&gt;
+  <br>&lt;new_uid&gt;1002&lt;/new_uid&gt;
+  <br>&lt;new_login_name&gt;tux2&lt;/new_login_name&gt;
   </blockquote>
 &lt;/user&gt;
 
@@ -602,7 +602,7 @@ If you want more information about an user just call:
 
 <table>
 <tr>
-<td>ldapPassword:</td>
+<td>ldap_password:</td>
 <td>Ldap password if the user account will created with Ldap.</td>
 </tr>
 <td>type:</td>
@@ -619,13 +619,13 @@ If you want more information about an user just call:
 
 <p>&lt;user&gt;
   <blockquote>
-  &lt;defaultGroup&gt;users&lt;/defaultGroup&gt;
-  <br>&lt;fullName&gt;tux2 tux2&lt;/fullName&gt;
+  &lt;default_group&gt;users&lt;/default_group&gt;
+  <br>&lt;full_name&gt;tux2 tux2&lt;/full_name&gt;
   <br>&lt;groups&gt;users&lt;/groups&gt;
-  <br>&lt;homeDirectory&gt;/home/tux2&lt;/homeDirectory&gt;
-  <br>&lt;loginName&gt;tux2&lt;/loginName&gt;
-  <br>&lt;loginShell&gt;/bin/bash&lt;/loginShell&gt;
-  <br>&lt;noHome type="boolean"&gt;false&lt;/noHome&gt;
+  <br>&lt;home_directory&gt;/home/tux2&lt;/home_directory&gt;
+  <br>&lt;login_name&gt;tux2&lt;/login_name&gt;
+  <br>&lt;login_shell&gt;/bin/bash&lt;/login_shell&gt;
+  <br>&lt;no_home type="boolean"&gt;false&lt;/no_home&gt;
   <br>&lt;password&gt;tuxtux&lt;/password&gt;
   <br>&lt;uid&gt;1002&lt;/uid&gt;
   </blockquote>
@@ -633,7 +633,7 @@ If you want more information about an user just call:
 
 <table>
 <tr>
-<td>noHome:</td>
+<td>no_home:</td>
 <td>do not create the home directory</td>
 </tr>
 </table>
@@ -642,7 +642,7 @@ If you want more information about an user just call:
 
 <table>
 <tr>
-<td>ldapPassword:</td>
+<td>ldap_password:</td>
 <td>Ldap password if the user account will created with Ldap.</td>
 </tr>
 <td>type:</td>

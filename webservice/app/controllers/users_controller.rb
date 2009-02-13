@@ -19,7 +19,7 @@ class UsersController < ApplicationController
        @users = []
        lines.each do |s|   
           user = User.new 	
-          user.loginName = s.rstrip
+          user.login_name = s.rstrip
           @users << user
        end
     else
@@ -49,17 +49,17 @@ class UsersController < ApplicationController
        if counter+1 <= lines.length
          case s
          when "Full Name:"
-           @user.fullName = lines[counter+1].strip
+           @user.full_name = lines[counter+1].strip
          when "List of Groups:"
            @user.groups = lines[counter+1].strip
          when "Default Group:"
-           @user.defaultGroup = lines[counter+1].strip
+           @user.default_group = lines[counter+1].strip
          when "Home Directory:"
-           @user.homeDirectory = lines[counter+1].strip
+           @user.home_directory = lines[counter+1].strip
          when "Login Shell:"
-           @user.loginShell = lines[counter+1].strip
+           @user.login_shell = lines[counter+1].strip
          when "Login Name:"
-           @user.loginName = lines[counter+1].strip
+           @user.login_name = lines[counter+1].strip
          when "UID:"
            @user.uid = lines[counter+1].strip
          end
@@ -72,25 +72,25 @@ class UsersController < ApplicationController
   end
 
   def createSSH
-    if @user.homeDirectory == nil || @user.homeDirectory.length == 0
+    if @user.home_directory == nil || @user.home_directory.length == 0
       saveKey = @user.sshkey
-      get_user @user.loginName
+      get_user @user.login_name
       @user.sshkey = saveKey
     end
-
-    ret = Scr.readArg(".target.stat", "#{@user.homeDirectory}/.ssh/authorized_keys")
+    ret = Scr.readArg(".target.stat", "#{@user.home_directory}/.ssh/authorized_keys")
     if ret.length == 0
-      logger.debug "Create: #{@user.homeDirectory}/.ssh/authorized_keys"
-      Scr.execute(["/bin/mkdir", "#{@user.homeDirectory}/.ssh"])      
-      Scr.execute(["/bin/chown", "#{@user.loginName}", "#{@user.homeDirectory}/.ssh"])      
-      Scr.execute(["/bin/chmod", "755", "#{@user.homeDirectory}/.ssh"])
-      Scr.execute(["/usr/bin/touch", "#{@user.homeDirectory}/.ssh/authorized_keys"])      
-      Scr.execute(["/bin/chown", "#{@user.loginName}", "#{@user.homeDirectory}/.ssh/authorized_keys"])      
-      Scr.execute(["/bin/chmod", "644", "#{@user.homeDirectory}/.ssh/authorized_keys"])
+      logger.debug "Create: #{@user.home_directory}/.ssh/authorized_keys"
+      Scr.execute(["/bin/mkdir", "#{@user.home_directory}/.ssh"])      
+      Scr.execute(["/bin/chown", "#{@user.login_name}", "#{@user.home_directory}/.ssh"])      
+      Scr.execute(["/bin/chmod", "755", "#{@user.home_directory}/.ssh"])
+      Scr.execute(["/usr/bin/touch", "#{@user.home_directory}/.ssh/authorized_keys"])      
+      Scr.execute(["/bin/chown", "#{@user.login_name}", "#{@user.home_directory}/.ssh/authorized_keys"])      
+      Scr.execute(["/bin/chmod", "644", "#{@user.home_directory}/.ssh/authorized_keys"])
     end
-    ret =  Scr.execute(["echo", "\"#{@user.sshkey}\"", ">>", "#{@user.homeDirectory}/.ssh/authorized_keys"])
-
+    ret =  Scr.execute(["echo", "\"#{@user.sshkey}\"", ">>", "#{@user.home_directory}/.ssh/authorized_keys"])
     if ret[:exit] != 0
+      @user.error_id = ret[:exit]
+      @user.error_string = ret[:stderr]
       return false
     else 
       return true
@@ -105,20 +105,20 @@ class UsersController < ApplicationController
     end
 
     command = ["/sbin/yast2", "users", "edit"]
-    if @user.fullName && @user.fullName.length > 0
-      command <<  "cn=\"#{@user.fullName}\""
+    if @user.full_name && @user.full_name.length > 0
+      command <<  "cn=\"#{@user.full_name}\""
     end
     if @user.groups && @user.groups.length > 0
       command << "grouplist=#{@user.groups}"
     end
-    if @user.defaultGroup && @user.defaultGroup.length > 0
-      command << "gid=#{@user.defaultGroup}"
+    if @user.default_group && @user.default_group.length > 0
+      command << "gid=#{@user.default_group}"
     end
-    if @user.homeDirectory && @user.homeDirectory.length > 0
-      command << "home=#{@user.homeDirectory}"
+    if @user.home_directory && @user.home_directory.length > 0
+      command << "home=#{@user.home_directory}"
     end
-    if @user.loginShell && @user.loginShell.length > 0
-      command << "shell=#{@user.loginShell}"
+    if @user.login_shell && @user.login_shell.length > 0
+      command << "shell=#{@user.login_shell}"
     end
     if userId && userId.length > 0
       command << "username=#{userId}"
@@ -129,14 +129,14 @@ class UsersController < ApplicationController
     if @user.password && @user.password.length > 0
       command << "password=#{@user.password}"
     end
-    if @user.ldapPassword && @user.ldapPassword.length > 0
-      command << "ldap_password=#{@user.ldapPassword}"
+    if @user.ldap_password && @user.ldap_password.length > 0
+      command << "ldap_password=#{@user.ldap_password}"
     end
-    if @user.newUid && @user.newUid.length > 0
-      command << "new_uid=#{@user.newUid}"
+    if @user.new_uid && @user.new_uid.length > 0
+      command << "new_uid=#{@user.new_uid}"
     end
-    if @user.newLoginName && @user.newLoginName.length > 0
-      command << "new_username=#{@user.newLoginName}"
+    if @user.new_login_name && @user.new_login_name.length > 0
+      command << "new_username=#{@user.new_login_name}"
     end
     if @user.type && @user.type.length > 0
       command << "type=#{@user.type}"
@@ -153,23 +153,23 @@ class UsersController < ApplicationController
 
   def add_user
     command = ["/sbin/yast2", "users", "add"]
-    if @user.fullName && @user.fullName.length > 0
-      command << "cn=\"@user.fullName\""
+    if @user.full_name && @user.full_name.length > 0
+      command << "cn=\"@user.full_name\""
     end
     if @user.groups && @user.groups.length > 0
       command << "grouplist=#{@user.groups}"
     end
-    if @user.defaultGroup && @user.defaultGroup.length > 0
-      command << "gid=#{@user.defaultGroup}"
+    if @user.default_group && @user.default_group.length > 0
+      command << "gid=#{@user.default_group}"
     end
-    if @user.homeDirectory && @user.homeDirectory.length > 0
-      command << "home=#{@user.homeDirectory}"
+    if @user.home_directory && @user.home_directory.length > 0
+      command << "home=#{@user.home_directory}"
     end
-    if @user.loginShell && @user.loginShell.length > 0
-      command << "shell=#{@user.loginShell}"
+    if @user.login_shell && @user.login_shell.length > 0
+      command << "shell=#{@user.login_shell}"
     end
-    if @user.loginName && @user.loginName.length > 0
-      command << "username=#{@user.loginName}"
+    if @user.login_name && @user.login_name.length > 0
+      command << "username=#{@user.login_name}"
     end
     if @user.uid && @user.uid.length > 0
       command << "uid=#{@user.uid}"
@@ -177,10 +177,10 @@ class UsersController < ApplicationController
     if @user.password && @user.password.length > 0
       command << "password=#{@user.password}"
     end
-    if @user.ldapPassword && @user.ldapPassword.length > 0
-      command << "ldap_password=#{@user.ldapPassword}"
+    if @user.ldap_password && @user.ldap_password.length > 0
+      command << "ldap_password=#{@user.ldap_password}"
     end
-    if @user.noHome && @user.noHome = "true"
+    if @user.no_home && @user.no_home = "true"
       command << "no_home"
     end
     if @user.type && @user.type.length > 0
@@ -206,11 +206,11 @@ class UsersController < ApplicationController
     if @user.uid && @user.uid.length > 0
       command << "uid=#{@user.uid}"
     end
-    if @user.loginName && @user.loginName.length > 0
-      command << "username=#{@user.loginName}"
+    if @user.login_name && @user.login_name.length > 0
+      command << "username=#{@user.login_name}"
     end
-    if @user.ldapPassword && @user.ldapPassword.length > 0
-      command << "ldap_password=#{@user.ldapPassword}"
+    if @user.ldap_password && @user.ldap_password.length > 0
+      command << "ldap_password=#{@user.ldap_password}"
     end
     if @user.type && @user.type.length > 0
       command << "type=#{@user.type}"
@@ -320,8 +320,8 @@ class UsersController < ApplicationController
        @user.error_string = "no permission"
     else
 
-       if params[:user] && params[:user][:loginName]
-          params[:id] = params[:user][:loginName] #for sync only
+       if params[:user] && params[:user][:login_name]
+          params[:id] = params[:user][:login_name] #for sync only
        end
        get_user params[:id]
        if @user.update_attributes(params[:user])
@@ -391,18 +391,18 @@ class UsersController < ApplicationController
       get_user params[:users_id]
       #initialize not needed stuff (perhaps no permissions available)
       case params[:id]
-        when "defaultGroup"
+        when "default_group"
           if ( permissionCheck( "org.opensuse.yast.webservice.read-user") or
                permissionCheck( "org.opensuse.yast.webservice.read-user-defaultgroup"))
-             @retUser.defaultGroup = @user.defaultGroup
+             @retUser.default_group = @user.default_group
           else
              @retUser.error_id = 1
              @retUser.error_string = "no permission"
           end         
-        when "fullName"
+        when "full_name"
           if ( permissionCheck( "org.opensuse.yast.webservice.read-user") or
                permissionCheck( "org.opensuse.yast.webservice.read-user-fullname"))
-             @retUser.fullName = @user.fullName
+             @retUser.full_name = @user.full_name
           else
              @retUser.error_id = 1
              @retUser.error_string = "no permission"
@@ -415,26 +415,26 @@ class UsersController < ApplicationController
              @retUser.error_id = 1
              @retUser.error_string = "no permission"
           end         
-        when "homeDirectory"
+        when "home_directory"
           if ( permissionCheck( "org.opensuse.yast.webservice.read-user") or
                permissionCheck( "org.opensuse.yast.webservice.read-user-homedirectory")) then
-             @retUser.homeDirectory = @user.homeDirectory
+             @retUser.home_directory = @user.home_directory
           else
              @retUser.error_id = 1
              @retUser.error_string = "no permission"
           end         
-        when "loginName"
+        when "login_name"
           if ( permissionCheck( "org.opensuse.yast.webservice.read-user") or
                permissionCheck( "org.opensuse.yast.webservice.read-user-loginname")) then
-             @retUser.loginName = @user.loginName
+             @retUser.login_name = @user.login_name
           else
              @retUser.error_id = 1
              @retUser.error_string = "no permission"
           end         
-        when "loginShell"
+        when "login_shell"
           if ( permissionCheck( "org.opensuse.yast.webservice.read-user") or
                permissionCheck( "org.opensuse.yast.webservice.read-user-loginshell")) then
-             @retUser.loginShell = @user.loginShell
+             @retUser.login_shell = @user.login_shell
           else
              @retUser.error_id = 1
              @retUser.error_string = "no permission"
@@ -471,22 +471,22 @@ class UsersController < ApplicationController
           logger.debug "UPDATED: #{@setUser.inspect} ID: #{params[:id]}"
           ok = true
           #setting which are clear
-          @user.loginName = params[:users_id]
-          @user.ldapPassword = @setUser.ldapPassword
+          @user.login_name = params[:users_id]
+          @user.ldap_password = @setUser.ldap_password
           exportSSH = false
           case params[:id]
-            when "defaultGroup"
+            when "default_group"
               if ( permissionCheck( "org.opensuse.yast.webservice.write-user") or
                   permissionCheck( "org.opensuse.yast.webservice.write-user-defaultgroup")) then
-                 @user.defaultGroup = @setUser.defaultGroup
+                 @user.default_group = @setUser.default_group
               else
                  @user.error_id = 1
                  @user.error_string = "no permission"
               end         
-            when "fullName"
+            when "full_name"
               if ( permissionCheck( "org.opensuse.yast.webservice.write-user") or
                    permissionCheck( "org.opensuse.yast.webservice.write-user-fullname")) then
-                 @user.fullName = @setUser.fullName
+                 @user.full_name = @setUser.full_name
               else
                  @user.error_id = 1
                  @user.error_string = "no permission"
@@ -499,34 +499,34 @@ class UsersController < ApplicationController
                  @user.error_id = 1
                  @user.error_string = "no permission"
               end         
-            when "homeDirectory"
+            when "home_directory"
               if ( permissionCheck( "org.opensuse.yast.webservice.write-user") or
                    permissionCheck( "org.opensuse.yast.webservice.write-user-homedirectory")) then
-                 @user.homeDirectory = @setUser.homeDirectory
+                 @user.home_directory = @setUser.home_directory
               else
                  @user.error_id = 1
                  @user.error_string = "no permission"
               end         
-            when "newLoginName"
+            when "new_login_name"
               if ( permissionCheck( "org.opensuse.yast.webservice.write-user") or
                    permissionCheck( "org.opensuse.yast.webservice.write-user-loginname")) then
-                 @user.newLoginName = @setUser.newLoginName
+                 @user.new_login_name = @setUser.new_login_name
               else
                  @user..error_id = 1
                  @user.error_string = "no permission"
               end         
-            when "loginShell"
+            when "login_shell"
               if ( permissionCheck( "org.opensuse.yast.webservice.write-user") or
                    permissionCheck( "org.opensuse.yast.webservice.write-user-loginshell")) then
-                 @user.loginShell = @setUser.loginShell
+                 @user.login_shell = @setUser.login_shell
               else
                  @user.error_id = 1
                  @user.error_string = "no permission"
               end         
-            when "newUid"
+            when "new_uid"
               if ( permissionCheck( "org.opensuse.yast.webservice.write-user") or
                    permissionCheck( "org.opensuse.yast.webservice.write-user-uid")) then
-                 @user.newUid = @setUser.newUid
+                 @user.new_uid = @setUser.new_uid
               else
                  @user.error_id = 1
                  @user.error_string = "no permission"
@@ -565,9 +565,9 @@ class UsersController < ApplicationController
           if ok
             if exportSSH
               saveUser = @user
-logger.debug "xxxxxxxxxxxxxxxxxxx"
-
               ok = createSSH #reads @user again
+              saveUser.error_id = @user.error_id
+              saveUser.error_string = @user.error_string
               @user = saveUser
             else
               ok = udate_user params[:users_id]
