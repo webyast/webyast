@@ -1,3 +1,6 @@
+class Commands
+end
+
 #
 # This provides generic commands for
 # LSB compatible services
@@ -91,15 +94,6 @@ class Lsbservice
     end
   end
   
-  def method_missing( method, *args )
-    raise "Unknown method #{method}" unless @commands.include?( method.to_s )
-    puts "Running '#{@path} #{method}'"
-    system("#{@path} #{method} #{args.join(' ')} > /dev/null 2>&1")
-    puts "Returned #{$?.class}, #{$?.inspect}, #{$?.exitstatus}"
-    s = $?.exitstatus
-    return @@states[ s ] if s < @@states.size
-    :unknown
-  end
   
   #
   # See 'The Rails Way', page 510
@@ -112,9 +106,13 @@ class Lsbservice
     xml.service do
       xml.tag!(:link, @link )
       xml.tag!(:path, @path )
-#      xml.tag!(:commands, @commands.join(","))
-      xml.tag!(:commands, @commands.to_xml(:root => "commands"))
-      xml.tag!(:stefan, "xxxxxxxxxxxxxxxxxxxxxxxxxxx" )
+      xml.commands do 
+         @commands.each do |c|
+            xml.command do 
+              xml.tag!(:name, c)
+            end
+         end
+      end
       xml.tag!(:error_id, @error_id )
       xml.tag!(:error_string, @error_string )
     end  
