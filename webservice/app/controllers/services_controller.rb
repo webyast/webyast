@@ -14,6 +14,7 @@ class ServicesController < ApplicationController
     session['services'] = services
   end
   def respond data
+logger.debug"xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
     if data
       respond_to do |format|
 	format.xml do
@@ -33,6 +34,7 @@ class ServicesController < ApplicationController
   public
 
   def index
+logger.debug"xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
     init_services unless session['services']
     @services ||= session['services']
       #converting to an array for xml and json
