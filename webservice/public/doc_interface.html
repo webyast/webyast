@@ -116,7 +116,22 @@ can be set explicit in an extra HTTP call:
 <br>&lt;language&gt;
 <blockquote>
   &lt;first_language&gt;de_DE&lt;/first_language&gt;
-  <br>&lt;second_languages&gt;en_US,zu_ZA&lt;/second_languages&gt;
+  <br>&lt;second_languages type="array"&gt;
+  <blockquote>
+     &lt;language&gt;
+     <blockquote>
+        &lt;id&gt;en_US&lt;/id&gt;
+     </blockquote>
+     &lt;/language&gt;
+  </blockquote>
+  <blockquote>
+     &lt;language&gt;
+     <blockquote>
+        &lt;id&gt;en_GB&lt;/id&gt;
+     </blockquote>
+     &lt;/language&gt;
+  </blockquote>
+  &lt;/second_languages&gt;
 </blockquote>
 &lt;/language&gt;
 </blockquote>
@@ -128,7 +143,22 @@ can be set explicit in an extra HTTP call:
 <p>&lt;?xml version="1.0" encoding="UTF-8"?&gt;
 <br>&lt;language&gt;
 <blockquote>
-  &lt;second_languages&gt;en_US&lt;/second_languages&gt;
+  &lt;second_languages type="array"&gt;
+  <blockquote>
+     &lt;language&gt;
+     <blockquote>
+        &lt;id&gt;en_US&lt;/id&gt;
+     </blockquote>
+     &lt;/language&gt;
+  </blockquote>
+  <blockquote>
+     &lt;language&gt;
+     <blockquote>
+        &lt;id&gt;en_GB&lt;/id&gt;
+     </blockquote>
+     &lt;/language&gt;
+  </blockquote>
+  &lt;/second_languages&gt;
 </blockquote>
 &lt;/language&gt;
 
@@ -558,8 +588,43 @@ returned values of the GET request.
 <p>&lt;language&gt;
 <blockquote>
   &lt;first_language&gt;de_DE&lt;/first_language&gt;
-  <br>&lt;second_languages&gt;en_US&lt;/second_languages&gt;
-  <br>&lt;available&gt;af_ZA (Afrikaans)ar_EG (Arabic)bg_BG (Bulgarian)bn_BD (Bengali)bs_BA (Bosanski)ca_ES (Catala)cs_CZ (Cestina)cy_GB (Cymraeg)da_DK (Dansk)de_DE (Deutsch)el_GR (Greek)en_GB (English (UK))en_US (English (US))es_ES (Espanol)et_EE (Eesti)fi_FI (Suomi)fr_FR (Francais)gu_IN (Gujarati)he_IL (Ivrit)hi_IN (Hindi)hr_HR (Hrvatski)hu_HU (Magyar)id_ID (Bahasa Indonesia)it_IT (Italiano)ja_JP (Japanese)km_KH (Khmer)ko_KR (Korean)lt_LT (Lithuanian)mk_MK (Makedonski)mr_IN (Marathi)nb_NO (Norsk)nl_NL (Nederlands)pa_IN (Punjabi)pl_PL (Polski)pt_BR (Portugues brasileiro)pt_PT (Portugues)ro_RO (Romana)ru_RU (Russian)si_LK (Sinhala)sk_SK (Slovencina)sl_SI (Slovenscina)sr_CS (Srpski)sv_SE (Svenska)ta_IN (Tamil)th_TH (phasa thai)tr_TR (Turkce)uk_UA (Ukrainian)vi_VN (Vietnamese)wa_BE (Walon)xh_ZA (isiXhosa)zh_CN (Simplified Chinese)zh_TW (Traditional Chinese (Taiwan))zu_ZA (isiZulu)&lt;/available&gt;
+  <br>&lt;second_languages type="array"&gt;
+  <blockquote>
+     &lt;language&gt;
+     <blockquote>
+        &lt;id&gt;en_US&lt;/id&gt;
+     </blockquote>
+     &lt;/language&gt;
+  </blockquote>
+  <blockquote>
+     &lt;language&gt;
+     <blockquote>
+        &lt;id&gt;en_GB&lt;/id&gt;
+     </blockquote>
+     &lt;/language&gt;
+  </blockquote>
+  &lt;/second_languages&gt;
+  <br>&lt;available type="array"&gt;
+  <blockquote>
+     &lt;language&gt;
+     <blockquote>
+        &lt;id&gt;af_ZA&lt;/id&gt;
+        <br>&lt;name&gt;Afrikaans&lt;/name&gt;
+     </blockquote>
+     &lt;/language&gt;
+  </blockquote>
+  <blockquote>
+     &lt;language&gt;
+     <blockquote>
+        &lt;id&gt;ar_EG&lt;/id&gt;
+        <br>&lt;name&gt;Arabic&lt;/name&gt;
+     </blockquote>
+     &lt;/language&gt;
+     <br>......
+     <br>....
+     <br>..
+  </blockquote>
+  &lt;/available&gt;
 <br>&lt;error_id type="integer"&gt;0&lt;/error_id&gt;
 <br>&lt;error_string/&gt;
 </blockquote>
@@ -585,7 +650,22 @@ returned values of the GET request.
 <p>&lt;language&gt;
 <blockquote>
   &lt;first_language&gt;de_DE&lt;/first_language&gt;
-  <br>&lt;second_languages&gt;en_US,zu_ZA&lt;/second_languages&gt;
+  <br>&lt;second_languages type="array"&gt;
+  <blockquote>
+     &lt;language&gt;
+     <blockquote>
+        &lt;id&gt;en_US&lt;/id&gt;
+     </blockquote>
+     &lt;/language&gt;
+  </blockquote>
+  <blockquote>
+     &lt;language&gt;
+     <blockquote>
+        &lt;id&gt;en_GB&lt;/id&gt;
+     </blockquote>
+     &lt;/language&gt;
+  </blockquote>
+  &lt;/second_languages&gt;
 </blockquote>
 &lt;/language&gt;
 

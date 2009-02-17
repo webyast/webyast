@@ -60,11 +60,16 @@ class LanguageController < ApplicationController
     respond_to do |format|
       language = Language.new
       if permission_check( "org.opensuse.yast.webservice.write-language" )
-         if language.update_attributes(params[:language])
-           logger.debug "UPDATED: #{language.inspect}"
+         if params[:language] != nil 
+           second_languages = []
+           first_language = params[:language][:first_language]
+           params[:language][:second_languages].each do |lang|
+             second_languages << lang[:id]
+           end
+           logger.debug "UPDATED: #{first_language}, #{second_languages.inspect}"
 
-           set_first_language language.first_language
-           set_second_languages language.second_languages
+           set_first_language first_language
+           set_second_languages second_languages.join(",")
          else
            language.error_id = 2
            language.error_string = "format or internal error"
@@ -75,12 +80,10 @@ class LanguageController < ApplicationController
       end
 
       format.html do
-        render :xml => language.to_xml( :root => "language",
-          :dasherize => false), :location => "none" #return xml only
+        render :xml => language.to_xml( :dasherize => false), :location => "none" #return xml only
       end
       format.xml do
-        render :xml => language.to_xml( :root => "language",
-          :dasherize => false), :location => "none"
+        render :xml => language.to_xml( :dasherize => false), :location => "none"
       end
       format.json do
 	render :json => language.to_json, :location => "none"
@@ -104,15 +107,13 @@ class LanguageController < ApplicationController
 
     respond_to do |format|
       format.xml do
-        render :xml => @language.to_xml( :root => "language",
-          :dasherize => false), :location => "none"
+        render :xml => @language.to_xml( :dasherize => false), :location => "none"
       end
       format.json do
 	render :json => @language.to_json, :location => "none"
       end
       format.html do
-        render :xml => @language.to_xml( :root => "language",
-          :dasherize => false), :location => "none" #return xml only
+        render :xml => @language.to_xml( :dasherize => false), :location => "none" #return xml only
       end
     end
   end
@@ -158,28 +159,32 @@ class LanguageController < ApplicationController
 
       respond_to do |format|
         format.xml do
-          render :xml => @language.to_xml( :root => "language",
-            :dasherize => false )
+          render :xml => @language.to_xml( :dasherize => false )
         end
         format.json do
 	  render :json => @language.to_json
         end
         format.html do
-          render :xml => @language.to_xml( :root => "language",
-            :dasherize => false ) #return xml only
+          render :xml => @language.to_xml( :dasherize => false ) #return xml only
         end
       end      
     else
       #PUT
       respond_to do |format|
         @language = Language.new
-        if @language.update_attributes(params[:language])
-          logger.debug "UPDATED: #{@language.inspect}"
+        if params[:language] != nil 
+          second_languages = []
+          first_language = params[:language][:first_language]
+          params[:language][:second_languages].each do |lang|
+            second_languages << lang[:id]
+          end
+          logger.debug "UPDATED: #{first_language}, #{second_languages.inspect}"
+
           case params[:id]
             when "first_language"
               if ( permission_check( "org.opensuse.yast.webservice.write-language" ) or
                    permission_check( "org.opensuse.yast.webservice.write-language-firstlanguage" )) then
-                 set_first_language @language.first_language
+                 set_first_language first_language
               else
                  @language.error_id = 1
                  @language.error_string = "no permission"
@@ -187,7 +192,7 @@ class LanguageController < ApplicationController
             when "second_languages"
               if ( permission_check( "org.opensuse.yast.webservice.write-language" ) or
                    permission_check( "org.opensuse.yast.webservice.write-language-secondlanguages" )) then
-                 set_second_languages @language.second_languages
+                 set_second_languages second_languages
               else
                  @language.error_id = 1
                  @language.error_string = "no permission"
@@ -202,12 +207,10 @@ class LanguageController < ApplicationController
            @language.error_string = "format or internal error"
         end
         format.xml do
-            render :xml => @language.to_xml( :root => "language",
-                   :dasherize => false ) #return xml only
+            render :xml => @language.to_xml( :dasherize => false ) #return xml only
         end
         format.xml do
-            render :xml => @language.to_xml( :root => "language",
-                   :dasherize => false )
+            render :xml => @language.to_xml( :dasherize => false )
         end
         format.json do
            render :json => @language.to_json
