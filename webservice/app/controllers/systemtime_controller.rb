@@ -98,7 +98,10 @@ require "scr"
     respond_to do |format|
       systemtime = System::SystemTime.new
       if permission_check( "org.opensuse.yast.webservice.write-systemtime")
-         if systemtime.update_attributes(params[:systemtime])
+         if params[:systemtime] != nil
+           systemtime.timezone = params[:systemtime][:timezone]
+           systemtime.is_utc = params[:systemtime][:is_utc]
+           systemtime.currenttime = params[:systemtime][:currenttime]
            logger.debug "UPDATED: #{systemtime.inspect}"
 
            set_is_utc systemtime.is_utc
@@ -220,7 +223,10 @@ require "scr"
       #PUT
       respond_to do |format|
         @systemtime = System::SystemTime.new
-        if @systemtime.update_attributes(params[:systemtime])
+        if params[:systemtime] != nil
+          @systemtime.timezone = params[:systemtime][:timezone]
+          @systemtime.is_utc = params[:systemtime][:is_utc]
+          @systemtime.currenttime = params[:systemtime][:currenttime]
           logger.debug "UPDATED: #{@systemtime.inspect}"
           case params[:id]
             when "is_utc"

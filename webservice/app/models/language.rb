@@ -1,7 +1,9 @@
 class Language 
 
-  attr_accessor :error_id, :error_string,
-                :first_language, :second_languages,
+  attr_accessor :error_id, 
+                :error_string,
+                :first_language, 
+                :second_languages,
                 :available
 
   def initialize 
@@ -32,7 +34,7 @@ class Language
            end
          end
       end
-      xml.tag!(:error_id, @error_id )
+      xml.tag!(:error_id, @error_id, {:type => "integer"} )
       xml.tag!(:error_string, @error_string )
     end  
   end

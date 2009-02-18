@@ -181,7 +181,7 @@ class PatchUpdatesController < ApplicationController
     get_updateList
     respond_to do |format|
       format.html { render :xml => @patch_updates } #return xml only
-      format.xml  { render :xml => @patch_updates }
+      format.xml  { render :xml => @patch_updates.to_xml(:dasherize => false) }
       format.json { render :json => @patch_updates.to_json }
     end
   end
@@ -190,7 +190,6 @@ class PatchUpdatesController < ApplicationController
   # GET /patch_updates/1.xml
   def show
     get_update params[:id]
-
     respond_to do |format|
       format.html { render :xml => @patch_update } #return xml only
       format.xml  { render :xml => @patch_update }

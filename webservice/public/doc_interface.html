@@ -74,8 +74,25 @@ in an extra HTTP call:
 &lt;currenttime type="datetime"&gt;2008-09-10T17:13:37Z&lt;/currenttime&gt;
 <br>&lt;is_utc type="boolean"&gt;false&lt;/is_utc&gt;
 <br>&lt;timezone&gt;Europe/Berlin&lt;/timezone&gt;
-<br>&lt;validtimezones&gt; Africa/Abidjan
-Africa/Accra...&lt;/validtimezones&gt;
+<br>&lt;validtimezones type="array"&gt;
+  <blockquote>
+     &lt;timezone&gt;
+     <blockquote>
+        &lt;id&gt;Africa/Abidjan&lt;/id&gt;
+     </blockquote>
+     &lt;/timezone&gt;
+  </blockquote>
+  <blockquote>
+     &lt;timezone&gt;
+     <blockquote>
+        &lt;id&gt;Africa/Accra&lt;/id&gt;
+     </blockquote>
+     &lt;/timezone&gt;
+     <br>....
+     <br>..
+     <br>.
+  </blockquote>
+  &lt;/validtimezones&gt;
 </blockquote>
 &lt;/systemtime&gt;
 
@@ -314,77 +331,77 @@ user has logged in.
   <blockquote>
   &lt;description&gt;Creating a YaST Webservice session&lt;/description&gt;
   <br>&lt;path&gt;login&lt;/path&gt;
-  <br>&lt;install_permission&gt;false&lt;/install_permission&gt;
-  <br>&lt;read_permission&gt;false&lt;/read_permission&gt;
-  <br>&lt;write_permission&gt;false&lt;/write_permission&gt;
-  <br>&lt;new_permission&gt;false&lt;/new_permission&gt;
-  <br>&lt;execute_permission&gt;false&lt;/execute_permission&gt;
+  <br>&lt;install_permission type="boolean"&gt;false&lt;/install_permission&gt;
+  <br>&lt;read_permission type="boolean"&gt;false&lt;/read_permission&gt;
+  <br>&lt;write_permission type="boolean"&gt;false&lt;/write_permission&gt;
+  <br>&lt;new_permission type="boolean"&gt;false&lt;/new_permission&gt;
+  <br>&lt;execute_permission type="boolean"&gt;false&lt;/execute_permission&gt;
   </blockquote>
 &lt;/link&gt;
 <br>&lt;link&gt;
   <blockquote>
   &lt;description&gt;Closing YaST Webservice session&lt;/description&gt;
   <br>&lt;path&gt;logout&lt;/path&gt;
-  <br>&lt;install_permission&gt;false&lt;/install_permission&gt;
-  <br>&lt;read_permission&gt;false&lt;/read_permission&gt;
-  <br>&lt;write_permission&gt;false&lt;/write_permission&gt;
-  <br>&lt;new_permission&gt;false&lt;/new_permission&gt;
-  <br>&lt;execute_permission&gt;false&lt;/execute_permission&gt;
+  <br>&lt;install_permission type="boolean"&gt;false&lt;/install_permission&gt;
+  <br>&lt;read_permission type="boolean"&gt;false&lt;/read_permission&gt;
+  <br>&lt;write_permission type="boolean"&gt;false&lt;/write_permission&gt;
+  <br>&lt;new_permission type="boolean"&gt;false&lt;/new_permission&gt;
+  <br>&lt;execute_permission type="boolean"&gt;false&lt;/execute_permission&gt;
   </blockquote>
 &lt;/link&gt;
 <br>&lt;link&gt;
   <blockquote>
   &lt;description&gt;Managing Linux services like samba, ntp,...&lt;/description&gt;
   <br>&lt;path&gt;services&lt;/path&gt;
-  <br>&lt;install_permission&gt;false&lt;/install_permission&gt;
-  <br>&lt;read_permission&gt;false&lt;/read_permission&gt;
-  <br>&lt;write_permission&gt;false&lt;/write_permission&gt;
-  <br>&lt;new_permission&gt;false&lt;/new_permission&gt;
-  <br>&lt;execute_permission&gt;false&lt;/execute_permission&gt;
+  <br>&lt;install_permission type="boolean"&gt;false&lt;/install_permission&gt;
+  <br>&lt;read_permission type="boolean"&gt;false&lt;/read_permission&gt;
+  <br>&lt;write_permission type="boolean"&gt;false&lt;/write_permission&gt;
+  <br>&lt;new_permission type="boolean"&gt;false&lt;/new_permission&gt;
+  <br>&lt;execute_permission type="boolean"&gt;false&lt;/execute_permission&gt;
   </blockquote>
 &lt;/link&gt;
 <br>&lt;link&gt;
   <blockquote>
   &lt;description&gt;Setting system time&lt;/description&gt;
   <br>&lt;path&gt;systemtime&lt;/path&gt;
-  <br>&lt;install_permission&gt;false&lt;/install_permission&gt;
-  <br>&lt;read_permission&gt;false&lt;/read_permission&gt;
-  <br>&lt;write_permission&gt;false&lt;/write_permission&gt;
-  <br>&lt;new_permission&gt;false&lt;/new_permission&gt;
-  <br>&lt;execute_permission&gt;false&lt;/execute_permission&gt;
+  <br>&lt;install_permission type="boolean"&gt;false&lt;/install_permission&gt;
+  <br>&lt;read_permission type="boolean"&gt;false&lt;/read_permission&gt;
+  <br>&lt;write_permission type="boolean"&gt;false&lt;/write_permission&gt;
+  <br>&lt;new_permission type="boolean"&gt;false&lt;/new_permission&gt;
+  <br>&lt;execute_permission type="boolean"&gt;false&lt;/execute_permission&gt;
   </blockquote>
 &lt;/link&gt;
 <br>&lt;link&gt;
   <blockquote>
   &lt;description&gt;Setting language&lt;/description&gt;
   <br>&lt;path&gt;language&lt;/path&gt;
-  <br>&lt;install_permission&gt;false&lt;/install_permission&gt;
-  <br>&lt;read_permission&gt;false&lt;/read_permission&gt;
-  <br>&lt;write_permission&gt;false&lt;/write_permission&gt;
-  <br>&lt;new_permission&gt;false&lt;/new_permission&gt;
-  <br>&lt;execute_permission&gt;false&lt;/execute_permission&gt;
+  <br>&lt;install_permission type="boolean"&gt;false&lt;/install_permission&gt;
+  <br>&lt;read_permission type="boolean"&gt;false&lt;/read_permission&gt;
+  <br>&lt;write_permission type="boolean"&gt;false&lt;/write_permission&gt;
+  <br>&lt;new_permission type="boolean"&gt;false&lt;/new_permission&gt;
+  <br>&lt;execute_permission type="boolean"&gt;false&lt;/execute_permission&gt;
   </blockquote>
 &lt;/link&gt;
 <br>&lt;link&gt;
   <blockquote>
   &lt;description&gt;Checking access rights&lt;/description&gt;
   <br>&lt;path&gt;users&lt;/path&gt;
-  <br>&lt;install_permission&gt;false&lt;/install_permission&gt;
-  <br>&lt;read_permission&gt;false&lt;/read_permission&gt;
-  <br>&lt;write_permission&gt;false&lt;/write_permission&gt;
-  <br>&lt;new_permission&gt;false&lt;/new_permission&gt;
-  <br>&lt;execute_permission&gt;false&lt;/execute_permission&gt;
+  <br>&lt;install_permission type="boolean"&gt;false&lt;/install_permission&gt;
+  <br>&lt;read_permission type="boolean"&gt;false&lt;/read_permission&gt;
+  <br>&lt;write_permission type="boolean"&gt;false&lt;/write_permission&gt;
+  <br>&lt;new_permission type="boolean"&gt;false&lt;/new_permission&gt;
+  <br>&lt;execute_permission type="boolean"&gt;false&lt;/execute_permission&gt;
   </blockquote>
 &lt;/link&gt;
 <br>&lt;link&gt;
   <blockquote>
   &lt;description&gt;Updating System&lt;/description&gt;
   <br>&lt;path&gt;patch_updates&lt;/path&gt;
-  <br>&lt;install_permission&gt;false&lt;/install_permission&gt;
-  <br>&lt;read_permission&gt;false&lt;/read_permission&gt;
-  <br>&lt;write_permission&gt;false&lt;/write_permission&gt;
-  <br>&lt;new_permission&gt;false&lt;/new_permission&gt;
-  <br>&lt;execute_permission&gt;false&lt;/execute_permission&gt;
+  <br>&lt;install_permission type="boolean"&gt;false&lt;/install_permission&gt;
+  <br>&lt;read_permission type="boolean"&gt;false&lt;/read_permission&gt;
+  <br>&lt;write_permission type="boolean"&gt;false&lt;/write_permission&gt;
+  <br>&lt;new_permission type="boolean"&gt;false&lt;/new_permission&gt;
+  <br>&lt;execute_permission type="boolean"&gt;false&lt;/execute_permission&gt;
   </blockquote>
 &lt;/link&gt;
 <br>&lt;/links&gt;
@@ -562,7 +579,25 @@ returned values of the GET request.
   &lt;currenttime type="datetime"&gt;2008-09-11T11:29:21Z&lt;/currenttime&gt;
   <br>&lt;is_utc type="boolean"&gt;false&lt;/is_utc&gt;
   <br>&lt;timezone&gt;Europe/Berlin&lt;/timezone&gt;
-  <br>&lt;validtimezones&gt; Africa/Abidjan Africa/Accra...&lt;/validtimezones&gt;
+  <br>&lt;validtimezones type="array"&gt;
+  <blockquote>
+     &lt;timezone&gt;
+     <blockquote>
+        &lt;id&gt;Africa/Abidjan&lt;/id&gt;
+     </blockquote>
+     &lt;/timezone&gt;
+  </blockquote>
+  <blockquote>
+     &lt;timezone&gt;
+     <blockquote>
+        &lt;id&gt;Africa/Accra&lt;/id&gt;
+     </blockquote>
+     &lt;/timezone&gt;
+     <br>....
+     <br>..
+     <br>.
+  </blockquote>
+  &lt;/validtimezones&gt;
   <br>&lt;error_id type="integer"&gt;0&lt;/error_id&gt;
   <br>&lt;error_string/&gt;
   </blockquote>

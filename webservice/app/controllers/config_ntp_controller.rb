@@ -129,7 +129,10 @@ class ConfigNtpController < ApplicationController
       if ( permission_check( "org.opensuse.yast.webservice.write-services") or
            permission_check( "org.opensuse.yast.webservice.write-services-config") or
            permission_check( "org.opensuse.yast.webservice.write-services-config-ntp"))
-         if ntp.update_attributes(params[:config_ntp])
+         if params[:config_ntp] != nil
+            ntp.use_random_server = params[:config_ntp][:use_random_server]
+            ntp.enabled = params[:config_ntp][:enabled]
+            ntp.manual_server = params[:config_ntp][:manual_server]
             logger.debug "UPDATED: #{ntp.inspect}"
        
             requested_servers = []
@@ -220,7 +223,10 @@ class ConfigNtpController < ApplicationController
       #PUT
       respond_to do |format|
          @ntp = ConfigNtp.new
-         if @ntp.update_attributes(params[:config_ntp])
+         if params[:config_ntp] != nil
+            ntp.use_random_server = params[:config_ntp][:use_random_server]
+            ntp.enabled = params[:config_ntp][:enabled]
+            ntp.manual_server = params[:config_ntp][:manual_server]
             logger.debug "UPDATED: #{@ntp.inspect}"
             case params[:id]
               when "manual_server"

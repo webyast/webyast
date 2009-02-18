@@ -119,10 +119,10 @@ class PermissionsController < ApplicationController
   def update
     if ( params[:permission] &&
          params[:permission].empty? == false )
-       permission = Permission.new(params[:permission])
+       permission = Permission.new(params[:permission][:name], params[:permission][:grant] )
     elsif (params[:users] &&
            params[:users].empty? == false )
-       permission = Permission.new(params[:users])
+       permission = Permission.new(params[:users][:name], params[:users][:grant] )
     else
        permission = Permission.new
     end

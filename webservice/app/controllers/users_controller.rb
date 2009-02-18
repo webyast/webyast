@@ -32,19 +32,15 @@ class UsersController < ApplicationController
   end
 
   def get_user (id)
-    if @user
-      saveKey = @user.sshkey
-    else
-      saveKey = nil
-    end
-    ret = Scr.execute(["/sbin/yast2", "users", "show", "username=#{id}"])
+     if @user
+       saveKey = @user.sshkey
+     else
+       saveKey = nil
+     end
+     ret = Scr.execute(["/sbin/yast2", "users", "show", "username=#{id}"])
      lines = ret[:stderr].split "\n"
      counter = 0
-     @user = User.find(:first)
-     if @user == nil
-       @user = User.new
-       @user.save
-     end
+     @user = User.new
      lines.each do |s|   
        if counter+1 <= lines.length
          case s
@@ -109,7 +105,17 @@ class UsersController < ApplicationController
       command <<  "cn=\"#{@user.full_name}\""
     end
     if @user.groups && @user.groups.length > 0
-      command << "grouplist=#{@user.groups}"
+      counter = 0
+      grp_string = ""
+      @user.groups.each do |group|
+         if counter == 0
+            grp_string = group[:id]
+         else
+            grp_string += ",#{group[:id]}"
+         end
+         counter += 1
+      end
+      command << "grouplist=#{grp_string}"
     end
     if @user.default_group && @user.default_group.length > 0
       command << "gid=#{@user.default_group}"
@@ -123,7 +129,7 @@ class UsersController < ApplicationController
     if userId && userId.length > 0
       command << "username=#{userId}"
     end
-    if @user.uid && @user.uid.length > 0
+    if @user.uid && @user.uid > 0
       command << "uid=#{@user.uid}"
     end
     if @user.password && @user.password.length > 0
@@ -295,12 +301,17 @@ class UsersController < ApplicationController
   # POST /users.xml
   # POST /users.json
   def create
-    @user = User.new(params[:user])
+    @user = User.new
     if !permission_check( "org.opensuse.yast.webservice.new-user")
        @user.error_id = 1
        @user.error_string = "no permission"
     else
-       add_user
+       if @user.update_attributes(params[:user])
+          add_user
+       else
+          @user.error_id = 2
+          @user.error_string = "wrong parameter"
+       end
     end
     respond_to do |format|
       format.html  { render :xml => @user.to_xml( :root => "user",
@@ -314,12 +325,11 @@ class UsersController < ApplicationController
   # PUT /users/1
   # PUT /users/1.xml
   def update
+    @user = User.new
     if !permission_check( "org.opensuse.yast.webservice.write-user")
-       @user = User.new(params[:user])
        @user.error_id = 1
        @user.error_string = "no permission"
     else
-
        if params[:user] && params[:user][:login_name]
           params[:id] = params[:user][:login_name] #for sync only
        end
