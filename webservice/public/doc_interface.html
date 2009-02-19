@@ -201,13 +201,28 @@ can be set explicit in an extra HTTP call:
 <blockquote>
   &lt;default_group&gt;users&lt;/default_group&gt;
   <br>&lt;full_name&gt;tux2 tux2&lt;/full_name&gt;
-  <br>&lt;groups&gt;users&lt;/groups&gt;
+  <br>&lt;groups type="array"&gt;
+  <blockquote>
+     &lt;group&gt;
+     <blockquote>
+        &lt;id&gt;users&lt;/id&gt;
+     </blockquote>
+     &lt;/group&gt;
+  </blockquote>
+  <blockquote>
+     &lt;group&gt;
+     <blockquote>
+        &lt;id&gt;dialout&lt;/id&gt;
+     </blockquote>
+     &lt;/group&gt;
+  </blockquote>
+  &lt;/groups&gt;
   <br>&lt;home_directory&gt;/home/tux2&lt;/home_directory&gt;
   <br>&lt;login_name&gt;tux2&lt;/login_name&gt;
   <br>&lt;login_shell&gt;/bin/bash&lt;/login_shell&gt;
   <br>&lt;no_home type="boolean"&gt;false&lt;/no_home&gt;
   <br>&lt;password&gt;tuxtux&lt;/password&gt;
-  <br>&lt;uid&gt;1002&lt;/uid&gt;
+  <br>&lt;uid type="integer"&gt;1002&lt;/uid&gt;
 </blockquote>
 &lt;/user&gt;
 
@@ -754,11 +769,26 @@ If you want more information about an user just call:
   <blockquote>
   &lt;default_group&gt;users&lt;/default_group&gt;
   <br>&lt;full_name&gt;tux tux&lt;/full_name&gt;
-  <br>&lt;groups&gt;users&lt;/groups&gt;
+  <br>&lt;groups type="array"&gt;
+  <blockquote>
+     &lt;group&gt;
+     <blockquote>
+        &lt;id&gt;users&lt;/id&gt;
+     </blockquote>
+     &lt;/group&gt;
+  </blockquote>
+  <blockquote>
+     &lt;group&gt;
+     <blockquote>
+        &lt;id&gt;dialout&lt;/id&gt;
+     </blockquote>
+     &lt;/group&gt;
+  </blockquote>
+  &lt;/groups&gt;
   <br>&lt;home_directory&gt;/home/tux&lt;/home_directory&gt;
   <br>&lt;login_name&gt;tux&lt;/login_name&gt;
   <br>&lt;login_shell&gt;/bin/bash&lt;/login_shell&gt;
-  <br>&lt;uid&gt;1001&lt;/uid&gt;
+  <br>&lt;uid type="integer"&gt;1001&lt;/uid&gt;
   <br>&lt;error_id type="integer"&gt;0&lt;/error_id&gt;
   <br>&lt;error_string/&gt;
   </blockquote>
@@ -771,7 +801,22 @@ If you want more information about an user just call:
   <blockquote>
   &lt;default_group&gt;users&lt;/default_group&gt;
   <br>&lt;full_name&gt;tux2 tux2&lt;/full_name&gt;
-  <br>&lt;groups&gt;users&lt;/groups&gt;
+  <br>&lt;groups type="array"&gt;
+  <blockquote>
+     &lt;group&gt;
+     <blockquote>
+        &lt;id&gt;users&lt;/id&gt;
+     </blockquote>
+     &lt;/group&gt;
+  </blockquote>
+  <blockquote>
+     &lt;group&gt;
+     <blockquote>
+        &lt;id&gt;dialout&lt;/id&gt;
+     </blockquote>
+     &lt;/group&gt;
+  </blockquote>
+  &lt;/groups&gt;
   <br>&lt;home_directory&gt;/home/tux2&lt;/home_directory&gt;
   <br>&lt;login_shell&gt;/bin/bash&lt;/login_shell&gt;
   <br>&lt;password&gt;tuxtux&lt;/password&gt;
@@ -805,13 +850,28 @@ If you want more information about an user just call:
   <blockquote>
   &lt;default_group&gt;users&lt;/default_group&gt;
   <br>&lt;full_name&gt;tux2 tux2&lt;/full_name&gt;
-  <br>&lt;groups&gt;users&lt;/groups&gt;
+  <br>&lt;groups type="array"&gt;
+  <blockquote>
+     &lt;group&gt;
+     <blockquote>
+        &lt;id&gt;users&lt;/id&gt;
+     </blockquote>
+     &lt;/group&gt;
+  </blockquote>
+  <blockquote>
+     &lt;group&gt;
+     <blockquote>
+        &lt;id&gt;dialout&lt;/id&gt;
+     </blockquote>
+     &lt;/group&gt;
+  </blockquote>
+  &lt;/groups&gt;
   <br>&lt;home_directory&gt;/home/tux2&lt;/home_directory&gt;
   <br>&lt;login_name&gt;tux2&lt;/login_name&gt;
   <br>&lt;login_shell&gt;/bin/bash&lt;/login_shell&gt;
   <br>&lt;no_home type="boolean"&gt;false&lt;/no_home&gt;
   <br>&lt;password&gt;tuxtux&lt;/password&gt;
-  <br>&lt;uid&gt;1002&lt;/uid&gt;
+  <br>&lt;uid type="integer"&gt;1002&lt;/uid&gt;
   </blockquote>
 &lt;/user&gt;
 
