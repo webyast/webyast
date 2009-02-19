@@ -160,10 +160,20 @@ class UsersController < ApplicationController
   def add_user
     command = ["/sbin/yast2", "users", "add"]
     if @user.full_name && @user.full_name.length > 0
-      command << "cn=\"@user.full_name\""
+      command << "cn=\"#{@user.full_name}\""
     end
     if @user.groups && @user.groups.length > 0
-      command << "grouplist=#{@user.groups}"
+      counter = 0
+      grp_string = ""
+      @user.groups.each do |group|
+         if counter == 0
+            grp_string = group[:id]
+         else
+            grp_string += ",#{group[:id]}"
+         end
+         counter += 1
+      end
+      command << "grouplist=#{grp_string}"
     end
     if @user.default_group && @user.default_group.length > 0
       command << "gid=#{@user.default_group}"
@@ -271,31 +281,6 @@ class UsersController < ApplicationController
     end
   end
 
-  # GET /users/new
-  # GET /users/new.xml
-  def new
-    @user = User.new
-    if !permission_check( "org.opensuse.yast.webservice.new-user")
-       @user.error_id = 1
-       @user.error_string = "no permission"
-    end
-    respond_to do |format|
-      format.html { render :xml => @user, :location => "none" } #return xml only
-      format.xml  { render :xml => @user, :location => "none" }
-      format.json  { render :json => @user, :location => "none" }
-    end
-  end
-
-  # GET /users/1/edit
-  def edit
-    if !permission_check( "org.opensuse.yast.webservice.write-user")
-       @user = User.new
-       @user.error_id = 1
-       @user.error_string = "no permission"
-    else
-       get_user params[:id]
-    end
-  end
 
   # POST /users
   # POST /users.xml
@@ -360,7 +345,6 @@ class UsersController < ApplicationController
        @user.error_string = "no permission"
     else
        get_user params[:id]
-       @user.destroy
        delete_user
        logger.debug "DELETE: #{@user.inspect}"
     end

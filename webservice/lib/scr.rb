@@ -62,7 +62,7 @@ end
 def Scr.execute (arguments, environment=[] )
 
   #sanitize arguments
-  whitelist = ("a".."z").to_a.to_s + ("A".."Z").to_a.to_s + ("0".."9").to_a.to_s + "_-/=:.,\"<>"
+  whitelist = ("a".."z").to_a.to_s + ("A".."Z").to_a.to_s + ("0".."9").to_a.to_s + "_-/=:.,\"<> "
   arguments.each do |arg|
     wrongArguments = false
     for i in (0..arg.size-1) do
