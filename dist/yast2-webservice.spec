@@ -10,13 +10,13 @@
 
 
 Name:           yast2-webservice
-Requires:       yast2-core, lighttpd-mod_magnet, ruby-fcgi, ruby-dbus, sqlite, avahi-utils
-PreReq:         lighttpd, PolicyKit, PackageKit, rubygem-rake, rubygem-sqlite3, rubygem-rails
+Requires:       yast2-core >= 2.17.25, lighttpd-mod_magnet, ruby-fcgi, ruby-dbus, sqlite, avahi-utils
+PreReq:         lighttpd, PolicyKit, PackageKit, rubygem-rake, rubygem-sqlite3, rubygem-rails, ruby-rpam, ruby-polkit
 License:        GPL
 Group:          Productivity/Networking/Web/Utilities
 Autoreqprov:    on
-Version:        1.0.0
-Release:        2
+Version:        1.0.1
+Release:        0
 Summary:        YaST2 - Webservice 
 Source:         www.tar.bz2
 Source1:        yast.conf
@@ -29,7 +29,8 @@ Source7:        lighttpd.conf
 Source8:        modules.conf
 Source9:        yastws
 BuildRoot:      %{_tmppath}/%{name}-%{version}-build
-BuildRequires:  ruby-devel, pkg-config, dbus-1-devel, PolicyKit-devel, pam-devel 
+BuildRequires:  ruby-devel, pkg-config
+BuildArch:      noarch
 
 #
 %define pkg_user yastws
@@ -48,36 +49,14 @@ Authors:
 
 %build
 
-#
-# Building PolicyKit and PAM bindings
-#
-cd ruby-polkit
-ruby extconf.rb
-make
-cd ..
-cd rpam
-make
-cd ..
-
 %install
-
-#
-# Install PolicyKit and PAM bindings
-#
-cd ruby-polkit
-make install DESTDIR=%{buildroot}
-cd ..
-cd rpam
-make install DESTDIR=%{buildroot}
-cd ..
-rm -rf rpam ruby-polkit
 
 #
 # Install all web and frontend parts.
 #
-mkdir -p $RPM_BUILD_ROOT/etc/%{pkg_user}/www/
-cp -a * $RPM_BUILD_ROOT/etc/%{pkg_user}/www/
-rm $RPM_BUILD_ROOT/etc/%{pkg_user}/www/log/*
+mkdir -p $RPM_BUILD_ROOT/srv/www/%{pkg_user}/
+cp -a * $RPM_BUILD_ROOT/srv/www/%{pkg_user}/
+rm $RPM_BUILD_ROOT/srv/www/%{pkg_user}/log/*
 
 %{__install} -d -m 0755                            \
     %{buildroot}%{pkg_home}/sockets/               \
@@ -107,12 +86,8 @@ mkdir -p $RPM_BUILD_ROOT/etc/yastws/tools
 install -m 0644 %SOURCE5 $RPM_BUILD_ROOT/etc/yastws/tools
 install -m 0644 %SOURCE6 $RPM_BUILD_ROOT/etc/
 
-#PAM configuration
-mkdir -p $RPM_BUILD_ROOT/etc/pam.d
-install -m 0644 %SOURCE10 $RPM_BUILD_ROOT/etc/pam.d/
-
 #  create empty tmp directory
-mkdir -p $RPM_BUILD_ROOT/etc/yastws/www/tmp
+mkdir -p $RPM_BUILD_ROOT/srv/www/%{pkg_user}/tmp
 
 
 %clean
@@ -148,7 +123,7 @@ fi
 #
 # create database 
 #
-cd etc/yastws/www
+cd srv/www/%{pkg_user}
 rake db:migrate
 chgrp yastws db db/*.sqlite*
 chown yastws db db/*.sqlite*
@@ -170,35 +145,34 @@ fi
 %files 
 %defattr(-,root,root)
 %dir /etc/yastws
-%dir /etc/yastws/www
+%dir /srv/www/yastws
 %dir /etc/yastws/tools
 %dir /etc/yastws/vhosts.d
 %dir /usr/share/PolicyKit
 %dir /usr/share/PolicyKit/policy
-%dir /etc/pam.d
 %attr(-,%{pkg_user},%{pkg_user}) %dir %{pkg_home}
 %attr(-,%{pkg_user},%{pkg_user}) %dir %{pkg_home}/sockets
 %attr(-,%{pkg_user},%{pkg_user}) %dir %{pkg_home}/cache
 %attr(-,%{pkg_user},%{pkg_user}) %dir %{_var}/log/%{pkg_user}
 
-%config /etc/pam.d/rpam
-%config /etc/yastws/www/app
-%config /etc/yastws/www/db
-%config /etc/yastws/www/doc
-%config /etc/yastws/www/lib
-%config /etc/yastws/www/public
-%config /etc/yastws/www/Rakefile
-%config /etc/yastws/www/COPYING
-%config /etc/yastws/www/script
-%config /etc/yastws/www/test
-%config /etc/yastws/www/config
-%config /etc/yastws/www/tmp
+%config /srv/www/yastws/app
+%config /srv/www/yastws/db
+%config /srv/www/yastws/doc
+%config /srv/www/yastws/lib
+%config /srv/www/yastws/public
+%config /srv/www/yastws/Rakefile
+%config /srv/www/yastws/COPYING
+%config /srv/www/yastws/script
+%config /srv/www/yastws/test
+%config /srv/www/yastws/config
 %attr(755,root,root) %config /etc/yastws/tools/policyKit-rights.rb
-%doc /etc/yastws/www/public/doc_config.html 
-%doc /etc/yastws/www/public/doc_interface.html
+%attr(755,root,root) %config /srv/www/yastws/start.sh
+%doc /srv/www/yastws/doc_config.html 
+%doc /srv/www/yastws/doc_interface.html
 %doc COPYING
-%attr(-,%{pkg_user},%{pkg_user}) /etc/yastws/www/log
-%attr(-,%{pkg_user},%{pkg_user}) /etc/yastws/www/tmp
+%doc /srv/www/yastws/README
+%attr(-,%{pkg_user},%{pkg_user}) /srv/www/yastws/log
+%attr(-,%{pkg_user},%{pkg_user}) /srv/www/yastws/tmp
 %config(noreplace) /etc/yastws/vhosts.d/yast.conf
 %config(noreplace) /etc/yastws/lighttpd.conf
 %config /etc/yastws/vhosts.d/rails.inc
@@ -208,5 +182,3 @@ fi
 %config(noreplace) /etc/yast_user_roles
 %config(noreplace)  %{_sysconfdir}/init.d/%{pkg_user}
 %{_sbindir}/rc%{pkg_user}
-%{_libdir}/ruby/site_ruby/%{rb_ver}/%{rb_arch}/polkit.so
-%{_libdir}/ruby/site_ruby/%{rb_ver}/%{rb_arch}/rpam.so

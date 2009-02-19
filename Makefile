@@ -1,23 +1,15 @@
 all:
-	cd ruby-polkit; \
-	ruby extconf.rb; \
-	make; \
-	sudo make install; \
-	make clean; \
-	cd ..; \
-	cd rpam/ext/Rpam; \
-	ruby extconf.rb; \
-	make; \
-	sudo make install; \
-	make clean; \
-	cd ../../..; \
+	(cd webservice; rake db:migrate)
+
+distclean: 
 	rm -rf package; \
         find . -name "*.bak" -exec rm {} \; ;\
+
+dist: distclean
 	mkdir package; \
 	cp dist/* package; \
         cp -R webservice www; \
-        cp -R ruby-polkit www; \
-        cp -R rpam www; \
+        cp webservice/public/doc*.html www; \
         find www -name "*.auto" -exec rm {} \;; \
         find www -name ".gitignore" -exec rm {} \;; \
         rm www/db/*.sqlite3; \
