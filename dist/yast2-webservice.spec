@@ -10,7 +10,7 @@
 
 
 Name:           yast2-webservice
-Requires:       yast2-core >= 2.17.25, lighttpd-mod_magnet, ruby-fcgi, ruby-dbus, sqlite, avahi-utils
+Requires:       yast2-core >= 2.18.3, lighttpd-mod_magnet, ruby-fcgi, ruby-dbus, sqlite, avahi-utils
 PreReq:         lighttpd, PolicyKit, PackageKit, rubygem-rake, rubygem-sqlite3, rubygem-rails, ruby-rpam, ruby-polkit
 License:        GPL
 Group:          Productivity/Networking/Web/Utilities
@@ -108,14 +108,18 @@ test -r /usr/sbin/yastws || { echo "Creating link /usr/sbin/yastws";
 #
 #granting permissions for yastws
 #
-if grep yastws /etc/PolicyKit/PolicyKit.conf > /dev/null; then
-   echo "Permission for yastws already granted in PolicyKit.conf"
-else
-   echo "Permission for yastws in PolicyKit.conf granted"
-   perl -p -i.orig -e 's|</config>|<match user="yastws">\n  <match action="org.opensuse.yast.scr.*">\n   <return result="yes"/>\n  </match>\n</match>\n</config>|' /etc/PolicyKit/PolicyKit.conf
-fi
 /usr/bin/polkit-auth --user yastws --grant org.freedesktop.packagekit.system-update >& /dev/null || :
 /usr/bin/polkit-auth --user yastws --grant org.freedesktop.policykit.read >& /dev/null || :
+/usr/bin/polkit-auth --user yastws --grant org.opensuse.yast.scr.read >& /dev/null || :
+/usr/bin/polkit-auth --user yastws --grant org.opensuse.yast.scr.write >& /dev/null || :
+/usr/bin/polkit-auth --user yastws --grant org.opensuse.yast.scr.execute >& /dev/null || :
+/usr/bin/polkit-auth --user yastws --grant org.opensuse.yast.scr.dir >& /dev/null || :
+/usr/bin/polkit-auth --user yastws --grant org.opensuse.yast.scr.registeragent >& /dev/null || :
+/usr/bin/polkit-auth --user yastws --grant org.opensuse.yast.scr.unregisteragent >& /dev/null || :
+/usr/bin/polkit-auth --user yastws --grant org.opensuse.yast.scr.unmountagent >& /dev/null || :
+/usr/bin/polkit-auth --user yastws --grant org.opensuse.yast.scr.error >& /dev/null || :
+/usr/bin/polkit-auth --user yastws --grant org.opensuse.yast.scr.unregisterallagents >& /dev/null || :
+/usr/bin/polkit-auth --user yastws --grant org.opensuse.yast.scr.registernewagents >& /dev/null || :
 #
 # granting all permissions for root 
 #
