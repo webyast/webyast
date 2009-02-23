@@ -41,8 +41,19 @@ class Account < ActiveRecord::Base
 
   # Authenticates a user by their login name and unencrypted password.  Returns the user or nil.
   def self.authenticate(login, passwd)
-     if authpam(login,passwd) == true or    #much more faster
-        unix2_chkpwd(login,passwd)          #slowly but need no more additional PAM rights
+     granted = false
+     begin
+       granted = false
+       if authpam(login,passwd) == true or    #much more faster
+          unix2_chkpwd(login,passwd)          #slowly but need no more additional PAM rights
+          granted = true
+       end
+     rescue #caused by authpam
+       if unix2_chkpwd(login,passwd)          #slowly but need no more additional PAM rights
+          granted = true
+       end
+     end
+     if granted
 	acc = find_by_login(login)
 	if !acc
           acc = Account.new
@@ -51,10 +62,8 @@ class Account < ActiveRecord::Base
         @password = passwd
         acc.password = passwd
         acc.save
-	puts "Authenticate Successful"
         return acc
      else
-  	puts "Authenticate Failure"
         return nil
      end
   end
