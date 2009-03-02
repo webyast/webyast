@@ -88,6 +88,10 @@ install -m 0644 %SOURCE6 $RPM_BUILD_ROOT/etc/
 
 #  create empty tmp directory
 mkdir -p $RPM_BUILD_ROOT/srv/www/%{pkg_user}/tmp
+mkdir -p $RPM_BUILD_ROOT/srv/www/%{pkg_user}/tmp/cache
+mkdir -p $RPM_BUILD_ROOT/srv/www/%{pkg_user}/tmp/pids
+mkdir -p $RPM_BUILD_ROOT/srv/www/%{pkg_user}/tmp/sessions
+mkdir -p $RPM_BUILD_ROOT/srv/www/%{pkg_user}/tmp/sockets
 
 
 %clean
@@ -177,6 +181,10 @@ fi
 %doc /srv/www/yastws/README
 %attr(-,%{pkg_user},%{pkg_user}) /srv/www/yastws/log
 %attr(-,%{pkg_user},%{pkg_user}) /srv/www/yastws/tmp
+%attr(-,%{pkg_user},%{pkg_user}) /srv/www/yastws/tmp/cache
+%attr(-,%{pkg_user},%{pkg_user}) /srv/www/yastws/tmp/pids
+%attr(-,%{pkg_user},%{pkg_user}) /srv/www/yastws/tmp/sessions
+%attr(-,%{pkg_user},%{pkg_user}) /srv/www/yastws/tmp/sockets
 %config(noreplace) /etc/yastws/vhosts.d/yast.conf
 %config(noreplace) /etc/yastws/lighttpd.conf
 %config /etc/yastws/vhosts.d/rails.inc
