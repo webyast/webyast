@@ -1,6 +1,29 @@
 all:
 	(cd webservice; rake db:migrate)
 
+install:
+	cp dist/yast_user_roles /etc ; \
+	cp dist/org.opensuse.yast.webservice.policy /usr/share/PolicyKit/policy/ ; \
+        /usr/bin/polkit-auth --user root --grant org.freedesktop.packagekit.system-update ; \
+        /usr/bin/polkit-auth --user root --grant org.freedesktop.policykit.read ; \
+        /usr/bin/polkit-auth --user root --grant org.opensuse.yast.scr.read ; \
+        /usr/bin/polkit-auth --user root --grant org.opensuse.yast.scr.write ; \
+        /usr/bin/polkit-auth --user root --grant org.opensuse.yast.scr.execute ; \
+        /usr/bin/polkit-auth --user root --grant org.opensuse.yast.scr.dir ; \
+        /usr/bin/polkit-auth --user root --grant org.opensuse.yast.scr.registeragent ; \
+        /usr/bin/polkit-auth --user root --grant org.opensuse.yast.scr.unregisteragent ; \
+        /usr/bin/polkit-auth --user root --grant org.opensuse.yast.scr.unmountagent ; \
+        /usr/bin/polkit-auth --user root --grant org.opensuse.yast.scr.error ; \
+        /usr/bin/polkit-auth --user root --grant org.opensuse.yast.scr.unregisterallagents ; \
+        /usr/bin/polkit-auth --user root --grant org.opensuse.yast.scr.registernewagents ; \
+        ruby dist/policyKit-rights.rb --user root --action grant ; \
+        echo "NOTE:"; \
+        echo "NOTE: Please take care that all needed packages with the correct version are installed !"; \
+        echo "NOTE: Have a look to the requirements defined in dist/yast2-webservice.spec."; \
+        echo "NOTE:"; \
+        echo "NOTE: You can start the server with root privileges by calling start.sh in webservice directory." ; \
+        echo "NOTE:"; \
+
 distclean: 
 	rm -rf package; \
         find . -name "*.bak" -exec rm {} \; ;\
