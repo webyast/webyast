@@ -23,7 +23,7 @@ Please have a look to
 
 <p>E.g. in order to get or set the systemtime you can use the HTTP URL:
 
-<br>http://&lt;name_of_the_host&gt;/systemtime/currenttime
+<br>http://&lt;name_of_the_host&gt;/yast/&lt;protocol_version&gt;/systemtime/currenttime
 
 <p>In order to identify if this value has to be set or has to be get
 the HTTP protocol has four methods:
@@ -50,14 +50,14 @@ the HTTP protocol has four methods:
 
 <p><br>Information can be get/set in/with 3 different formats:
 
-<p>http://&lt;name_of_the_host&gt;/systemtime
+<p>http://&lt;name_of_the_host&gt;/yast/&lt;protocol_version&gt;/systemtime
 <br>Returns the systemtime in HTML format. Calling this URL not via a 
 browser the values will be retunred in XML format.
 
-<p>http://&lt;name_of_the_host&gt;/systemtime.xml
+<p>http://&lt;name_of_the_host&gt;/yast/&lt;protocol_version&gt;/systemtime.xml
 <br>Returns the systemtime in XML format
 
-<p>http://&lt;name_of_the_host&gt;/systemtime.json
+<p>http://&lt;name_of_the_host&gt;/yast/&lt;protocol_version&gt;/systemtime.json
 <br>Returns the systemtime in JSON format
 
 <h3>GET</h3>
@@ -65,7 +65,7 @@ browser the values will be retunred in XML format.
 <p><br>Information can be get in a block or each entry of the block can be get
 in an extra HTTP call:
 
-<p>GET http://&lt;name_of_the_host&gt;/systemtime.xml
+<p>GET http://&lt;name_of_the_host&gt;/yast/&lt;protocol_version&gt;/systemtime.xml
 
 <p>returns
 
@@ -98,7 +98,7 @@ in an extra HTTP call:
 
 <p>whereas 
 
-<p>GET http://0.0.0.0:3001/systemtime/timezone.xml
+<p>GET http://0.0.0.0:3001/yast/&lt;protocol_version&gt;/systemtime/timezone.xml
 
 <p>returns
 
@@ -116,7 +116,7 @@ in an extra HTTP call:
 
 <p>GET calls can be generated on the command line with the call:
 
-<p>curl -0 -X GET -b &lt;cookie_file&gt; http://0.0.0.0:3001/systemtime/timezone.xml
+<p>curl -0 -X GET -b &lt;cookie_file&gt; http://0.0.0.0:3001/yast/v1/systemtime/timezone.xml
 
 <p>("-b &lt;cookie_file&gt;" describes a cookie with the filename "cookie_file". This
  cookie contains the login information of the current session.)
@@ -127,7 +127,7 @@ in an extra HTTP call:
 Multi values can be overwritten at once in a block or each entry of the block
 can be set explicit in an extra HTTP call:
 
-<p>PUT http://&lt;name_of_the_host&gt;/language with a block of XML data
+<p>PUT http://&lt;name_of_the_host&gt;/yast/&lt;protocol_version&gt;/language with a block of XML data
 
 <p>&lt;?xml version="1.0" encoding="UTF-8"?&gt;
 <br>&lt;language&gt;
@@ -155,7 +155,7 @@ can be set explicit in an extra HTTP call:
 
 <p>whereas 
 
-<p>PUT http://0.0.0.0:3001/language/second_languages with a single XML value
+<p>PUT http://0.0.0.0:3001/yast/v1/language/second_languages with a single XML value
 
 <p>&lt;?xml version="1.0" encoding="UTF-8"?&gt;
 <br>&lt;language&gt;
@@ -185,7 +185,7 @@ can be set explicit in an extra HTTP call:
 
 <p>Put calls can be generated on the command line with the call:
 
-<p>curl -0 -v -H "Content-Type: application/xml; charset=utf-8" -T &lt;data-file&gt; -b &lt;cookie_file&gt; http://0.0.0.0:3001/language/second_languages.xml
+<p>curl -0 -v -H "Content-Type: application/xml; charset=utf-8" -T &lt;data-file&gt; -b &lt;cookie_file&gt; http://0.0.0.0:3001/yast/v1/language/second_languages.xml
 
 <p>("-b &lt;cookie_file&gt;" describes a cookie with the filename "cookie_file". This
  cookie contains the login information of the current session.)
@@ -194,7 +194,7 @@ can be set explicit in an extra HTTP call:
 
 <p><br>Post requests are used for creating new entries e.g. adding a new user account:
 
-<p>POST http://0.0.0.0:3001/users.xml with the XML values:
+<p>POST http://0.0.0.0:3001/yast/v1/users.xml with the XML values:
 
 <p>&lt;?xml version="1.0" encoding="UTF-8"?&gt;
 <br>&lt;user&gt;
@@ -229,7 +229,7 @@ can be set explicit in an extra HTTP call:
 
 <p>POST calls can be generated on the command line with the call:
 
-<p>curl -0 -X POST -v -H "Content-Type: application/xml; charset=utf-8" -T &lt;data-file&gt; -b &lt;cookie_file&gt; http://0.0.0.0:3001/users.xml
+<p>curl -0 -X POST -v -H "Content-Type: application/xml; charset=utf-8" -T &lt;data-file&gt; -b &lt;cookie_file&gt; http://0.0.0.0:3001/yast/v1/users.xml
 
 <p>(&lt;data-file&gt; is a file which contains the XML values described above.
  "-b &lt;cookie_file&gt;" describes a cookie with the filename "cookie_file". This
@@ -241,11 +241,11 @@ can be set explicit in an extra HTTP call:
 
 <p>Delete requests are used for deleting entries e.g. an user account:
 
-<p>DELETE http://0.0.0.0:3001/users/tux2
+<p>DELETE http://0.0.0.0:3001/yast/v1/users/tux2
 
 <p>DELETE calls can be generated on the command line with the call:
 
-<p>curl -0 -X DELETE -b &lt;cookie_file&gt; http://0.0.0.0:3001/users/tux2
+<p>curl -0 -X DELETE -b &lt;cookie_file&gt; http://0.0.0.0:3001/yast/v1/users/tux2
 
 <p>("-b &lt;cookie_file&gt;" describes a cookie with the filename "cookie_file". This
  cookie contains the login information of the current session.)
@@ -254,12 +254,12 @@ can be set explicit in an extra HTTP call:
 
 <h2>YaST webservice API<h2>
 
-<h3>&lt;hostname&gt;/login</h3>
+<h3>&lt;hostname&gt;/yast/&lt;protocol_version&gt;/login</h3>
 
 <p><br>Login and creates a session. An additional login cookie will be generated if it is required.
 The user account will be checked with PAM. So SYSTEM users can login only.
 
-<p>POST &lt;hostname&gt;/login checks an SYSTEM accout and creates a session with the given values:
+<p>POST &lt;hostname&gt;/yast/&lt;protocol_version&gt;/login checks an SYSTEM accout and creates a session with the given values:
 
 <p>&lt;hash&gt;
 <blockquote>
@@ -289,11 +289,11 @@ The user account will be checked with PAM. So SYSTEM users can login only.
 
 <p>If you are using "curl" for testing you will have to generate a session cookie with the call:
 
-<p>curl -0 -X POST -v -H "Content-Type: application/xml; charset=utf-8" -T &lt;login_xml_file&gt; -c &lt;cookie_file&gt; http://0.0.0.0:3001/login.xml
+<p>curl -0 -X POST -v -H "Content-Type: application/xml; charset=utf-8" -T &lt;login_xml_file&gt; -c &lt;cookie_file&gt; http://0.0.0.0:3001/yast/v1/login.xml
 
 <p>This call will generate a cookie file with login data described in &lt;login_xml_file&gt;.
 
-<h3>&lt;hostname&gt;/checkpermission/&lt;policyKitRule&gt;</h3>
+<h3>&lt;hostname&gt;/yast/&lt;protocol_version&gt;/checkpermission/&lt;policyKitRule&gt;</h3>
 
 <p><br>Checking if the user of the current session has the permission of the
 given rule &lt;policyKitRule&gt;.
@@ -302,7 +302,7 @@ given rule &lt;policyKitRule&gt;.
 <br>This call is useful for applications which have to check the permissions BEFORE they generate a
 e.g. menue entry or input frame.
 
-<p>GET &lt;hostname&gt;/checkpermission/&lt;policyKitRule&gt; checks the permission and returns:
+<p>GET &lt;hostname&gt;/yast/&lt;protocol_version&gt;/checkpermission/&lt;policyKitRule&gt; checks the permission and returns:
 
 <p>&lt;hash&gt;
 <blockquote>
@@ -318,11 +318,11 @@ e.g. menue entry or input frame.
 </blockquote>
 &lt;/hash&gt;
 
-<h3>&lt;hostname&gt;/logout</h3>
+<h3>&lt;hostname&gt;/yast/&lt;protocol_version&gt;/logout</h3>
 
 <p><br>Destroys the current session and invalidates the concerning cookie (if there is one).
 
-<p>POST &lt;hostname&gt;/logout
+<p>POST &lt;hostname&gt;/yast/&lt;protocol_version&gt;/logout
 
 <p>This returns:
 
@@ -332,12 +332,12 @@ e.g. menue entry or input frame.
 </blockquote>
 &lt;/hash&gt;
 
-<h3>&lt;hostname&gt;/.xml or &lt;hostname&gt;/yast.xml</h3>
+<h3>&lt;hostname&gt;/yast/&lt;protocol_version&gt;/.xml or &lt;hostname&gt;/yast/&lt;protocol_version&gt;/yast.xml</h3>
 
 <p><br>Returns a list of all available modules. The permissions are set if the
 user has logged in.
 
-<p>GET &lt;hostname&gt;/.xml
+<p>GET &lt;hostname&gt;/yast/&lt;protocol_version&gt;/.xml
 
 <p>returns:
 
@@ -422,11 +422,11 @@ user has logged in.
 <br>&lt;/links&gt;
 
 
-<h3>&lt;hostname&gt;/services</h3>
+<h3>&lt;hostname&gt;/yast/&lt;protocol_version&gt;/services</h3>
 
 <p><br>Managing system services like cron, smbfs, gpm, sshd, random, cups, ntp
 
-<p>GET &lt;hostname&gt;/services.xml
+<p>GET &lt;hostname&gt;/yast/&lt;protocol_version&gt;/services.xml
 
 <p>returns:
 
@@ -500,9 +500,9 @@ user has logged in.
   <br>  &lt;/service&gt;
   <br>&lt;/services&gt; 
 
-<h3>&lt;hostname&gt;/services/&lt;servicename&gt;</h3>
+<h3>&lt;hostname&gt;/yast/&lt;protocol_version&gt;/services/&lt;servicename&gt;</h3>
 
-<p><br>GET &lt;hostname&gt;/services/smbfs.xml
+<p><br>GET &lt;hostname&gt;/yast/&lt;protocol_version&gt;/services/smbfs.xml
 
 <p>returns
 
@@ -539,13 +539,13 @@ user has logged in.
   </blockquote>
 &lt;/service&gt;
 
-<h3>&lt;hostname&gt;/services/&lt;servicename&gt;/commands/&lt;command&gt;</h3>
+<h3>&lt;hostname&gt;/yast/&lt;protocol_version&gt;/services/&lt;servicename&gt;/commands/&lt;command&gt;</h3>
 
-<p><br>PUT &lt;hostname&gt;/services/ntp/commands/restart.xml
+<p><br>PUT &lt;hostname&gt;/yast/&lt;protocol_version&gt;/services/ntp/commands/restart.xml
 
-<h3>&lt;hostname&gt;/services/ntp/config</h3>
+<h3>&lt;hostname&gt;/yast/&lt;protocol_version&gt;/services/ntp/config</h3>
 
-<p><br>GET &lt;hostname&gt;/services/ntp/config.xml
+<p><br>GET &lt;hostname&gt;/yast/&lt;protocol_version&gt;/services/ntp/config.xml
 
 <p>returns
 
@@ -572,20 +572,20 @@ user has logged in.
 </tr>
 </table>
 
-<p>PUT &lt;hostname&gt;/services/ntp/config.xml
+<p>PUT &lt;hostname&gt;/yast/&lt;protocol_version&gt;/services/ntp/config.xml
 
 <p>Writes ntp settings to the system. The given parameters are the same as the
 returned values of the GET request.
 
 <p>Note: Each single value can be get or set explicit.
 
-<p>e.G. GET &lt;hostname&gt;/services/ntp/config/enabled.xml returns this value only.
+<p>e.G. GET &lt;hostname&gt;/yast/&lt;protocol_version&gt;/services/ntp/config/enabled.xml returns this value only.
 
-<h3>&lt;hostname&gt;/systemtime</h3>
+<h3>&lt;hostname&gt;/yast/&lt;protocol_version&gt;/systemtime</h3>
 
 <p><br>Managing time, timezone,....
 
-<p>GET &lt;hostname&gt;/systemtime.xml
+<p>GET &lt;hostname&gt;/yast/&lt;protocol_version&gt;/systemtime.xml
 
 <p>returns
 
@@ -618,20 +618,20 @@ returned values of the GET request.
   </blockquote>
 &lt;/systemtime&gt;
 
-<p>PUT or POST &lt;hostname&gt;/systemtime.xml
+<p>PUT or POST &lt;hostname&gt;/yast/&lt;protocol_version&gt;/systemtime.xml
 
 <p>Writes time settings to the system. The given parameters are the same as the
 returned values of the GET request.
 
 <p>Note: Each single value can be get or set explicit.
 
-<p>e.g. GET &lt;hostname&gt;/systemtime/timezone.xml returns this value only.
+<p>e.g. GET &lt;hostname&gt;/yast/&lt;protocol_version&gt;/systemtime/timezone.xml returns this value only.
 
-<h3>&lt;hostname&gt;/language</h3>
+<h3>&lt;hostname&gt;/yast/&lt;protocol_version&gt;/language</h3>
 
 <p><br>Managing language settings.
 
-<p>GET &lt;hostname&gt;/language.xml
+<p>GET &lt;hostname&gt;/yast/&lt;protocol_version&gt;/language.xml
 
 <p>returns
 
@@ -695,7 +695,7 @@ returned values of the GET request.
 <table>
 
 
-<p>PUT or POST &lt;hostname&gt;/language.xml with values: 
+<p>PUT or POST &lt;hostname&gt;/yast/&lt;protocol_version&gt;/language.xml with values: 
 
 <p>&lt;language&gt;
 <blockquote>
@@ -721,13 +721,13 @@ returned values of the GET request.
 
 <p>Note: Each single value can be get or set explicit.
 
-<p>e.g. GET &lt;hostname&gt;/language/available.xml returns the list of available languages only.
+<p>e.g. GET &lt;hostname&gt;/yast/&lt;protocol_version&gt;/language/available.xml returns the list of available languages only.
 
-<h3>&lt;hostname&gt;/users</h3>
+<h3>&lt;hostname&gt;/yast/&lt;protocol_version&gt;/users</h3>
 
 <p><br>User management like create/edit/delete a user login or exporting SSH-keys.
 
-<p>GET &lt;hostname&gt;/users.xml
+<p>GET &lt;hostname&gt;/yast/&lt;protocol_version&gt;/users.xml
 
 <p>returns 
 
@@ -759,11 +759,11 @@ returned values of the GET request.
 It would take too much time to get these values of e.g. all ldap users of a big company.
 If you want more information about an user just call:
 
-<h3>&lt;hostname&gt;/users/&lt;loginname&gt;</h3>
+<h3>&lt;hostname&gt;/yast/&lt;protocol_version&gt;/users/&lt;loginname&gt;</h3>
 
 <p><br>This call returns additional information about an user account.
 
-<p>GET &lt;hostname&gt;/users/tux.xml returns
+<p>GET &lt;hostname&gt;/yast/&lt;protocol_version&gt;/users/tux.xml returns
 
 <p>&lt;user&gt;
   <blockquote>
@@ -794,8 +794,8 @@ If you want more information about an user just call:
   </blockquote>
 &lt;/user&gt;
 
-<p>PUT &lt;hostname&gt;/users/tux.xml 
-<br>or PUT &lt;hostname&gt;/users/tux/update.xml update the user account of tux
+<p>PUT &lt;hostname&gt;/yast/&lt;protocol_version&gt;/users/tux.xml 
+<br>or PUT &lt;hostname&gt;/yast/&lt;protocol_version&gt;/users/tux/update.xml update the user account of tux
 
 <p>&lt;user&gt;
   <blockquote>
@@ -841,10 +841,10 @@ If you want more information about an user just call:
 
 <p>Note: Each single value can be get or set explicit.
 
-<p>e.g. GET &lt;hostname&gt;/users/tux/uid.xml returns the UID of of the user tux only.
+<p>e.g. GET &lt;hostname&gt;/yast/&lt;protocol_version&gt;/users/tux/uid.xml returns the UID of of the user tux only.
 
-<p>POST &lt;hostname&gt;/users.xml 
-<br>or POST &lt;hostname&gt;/users/new/create.xml creates a new user account with the values:
+<p>POST &lt;hostname&gt;/yast/&lt;protocol_version&gt;/users.xml 
+<br>or POST &lt;hostname&gt;/yast/&lt;protocol_version&gt;/users/new/create.xml creates a new user account with the values:
 
 <p>&lt;user&gt;
   <blockquote>
@@ -895,13 +895,13 @@ If you want more information about an user just call:
 </tr>
 </table>
 
-<p>DELETE &lt;hostname&gt;/users/tux delete the user account tux
+<p>DELETE &lt;hostname&gt;/yast/&lt;protocol_version&gt;/users/tux delete the user account tux
 
-<h3>&lt;hostname&gt;/users/&lt;loginname&gt;/sshkey</h3>
+<h3>&lt;hostname&gt;/yast/&lt;protocol_version&gt;/users/&lt;loginname&gt;/sshkey</h3>
 
 <p>Exporting a SSH key to the home directory of the given user.
 
-<p>PUT &lt;hostname&gt;/users/&lt;loginname&gt;/sshkey.xml with the value:
+<p>PUT &lt;hostname&gt;/yast/&lt;protocol_version&gt;/users/&lt;loginname&gt;/sshkey.xml with the value:
 
 <p>&lt;user&gt;
   <blockquote>
@@ -910,11 +910,11 @@ If you want more information about an user just call:
 &lt;/user&gt;
 
 
-<h3>&lt;hostname&gt;/users/&lt;loginname&gt;/permissions</h3>
+<h3>&lt;hostname&gt;/yast/&lt;protocol_version&gt;/users/&lt;loginname&gt;/permissions</h3>
 
 <p><br>PolicyKit user Permissions.
 
-<p>GET &lt;hostname&gt;/users/&lt;loginname&gt;/permissions returns an array of policies:
+<p>GET &lt;hostname&gt;/yast/&lt;protocol_version&gt;/users/&lt;loginname&gt;/permissions returns an array of policies:
 
 <p>&lt;permissions type="array"&gt;
 <br>&lt;permission&gt;
@@ -936,14 +936,14 @@ If you want more information about an user just call:
 <br>&lt;/permissions&gt;
 
 
-<h3>&lt;hostname&gt;/users/&lt;loginname&gt;/permissions/&lt;policyKitRule&gt;</h3>
+<h3>&lt;hostname&gt;/yast/&lt;protocol_version&gt;/users/&lt;loginname&gt;/permissions/&lt;policyKitRule&gt;</h3>
 
 <p><br>Checking if the user has the permission of the given rule &lt;policyKitRule&gt;.
 <br>&lt;policyKitRule&gt; is given <b>without</b> the "pre" string
 "org.opensuse.yast.webservice.".
 
 <p>GET
-&lt;hostname&gt;/users/&lt;loginname&gt;/permissions/&lt;policyKitRule&gt;
+&lt;hostname&gt;/yast/&lt;protocol_version&gt;/users/&lt;loginname&gt;/permissions/&lt;policyKitRule&gt;
 
 <p>returns the  permission:
 
@@ -957,7 +957,7 @@ If you want more information about an user just call:
 &lt;/permission&gt;
 
 <p>PUT
-&lt;hostname&gt;/users/&lt;loginname&gt;/permissions/&lt;policyKitRule&gt; with
+&lt;hostname&gt;/yast/&lt;protocol_version&gt;/users/&lt;loginname&gt;/permissions/&lt;policyKitRule&gt; with
 the value:
 
 <p>&lt;permission&gt;
@@ -966,11 +966,11 @@ the value:
 </blockquote>
 &lt;/permission&gt;
 
-<h3>&lt;hostname&gt;/patch_updates</h3>
+<h3>&lt;hostname&gt;/yast/&lt;protocol_version&gt;/patch_updates</h3>
 
 <p>Evaluate and install needed patches.
 
-<p>GET &lt;hostname&gt;/patch_updates.xml returns
+<p>GET &lt;hostname&gt;/yast/&lt;protocol_version&gt;/patch_updates.xml returns
 
 <p>&lt;patch-updates type="array"&gt;
   <br>&lt;patch-update&gt;
@@ -1038,13 +1038,13 @@ the value:
 </tr>
 </table>
 
-<p>POST &lt;hostname&gt;/patch_updates/&lt;resolvable_id&gt; Install the patch with the internal patch ID.
+<p>POST &lt;hostname&gt;/yast/&lt;protocol_version&gt;/patch_updates/&lt;resolvable_id&gt; Install the patch with the internal patch ID.
 
-<h3>&lt;hostname&gt;/yast_modules</h3>
+<h3>&lt;hostname&gt;/yast/&lt;protocol_version&gt;/yast_modules</h3>
 
 <p><br>Almost each YaST module has a command line interface which can be used with HTTP/REST.
 
-<p>GET &lt;hostname&gt;/yast_modules.xml returns a list of all available YaST modules
+<p>GET &lt;hostname&gt;/yast/&lt;protocol_version&gt;/yast_modules.xml returns a list of all available YaST modules
 
 <p>&lt;hash&gt;
 <br>&lt;module&gt;
@@ -1090,11 +1090,11 @@ the value:
 <br>&lt;hash&gt;
 
 
-<h3>&lt;hostname&gt;/yast_modules/&lt;yast_module&gt;</h3>
+<h3>&lt;hostname&gt;/yast/&lt;protocol_version&gt;/yast_modules/&lt;yast_module&gt;</h3>
 
 <p><br>Evaluate all possible commands and options of a YaST module.
 
-<p>GET &lt;hostname&gt;/yast_modules/nis.xml returns all commands and options of the nis module
+<p>GET &lt;hostname&gt;/yast/&lt;protocol_version&gt;/yast_modules/nis.xml returns all commands and options of the nis module
 
 <p>&lt;module&gt;
      <br>&lt;id&gt;nis&lt;/id&gt;
@@ -1207,7 +1207,7 @@ the value:
   <br>&lt;error_string/&gt;
 <br>&lt;/module&gt;
 
-<p>POST &lt;hostname&gt;/yast_modules/nis.xml run the nis module with the commands:
+<p>POST &lt;hostname&gt;/yast/&lt;protocol_version&gt;/yast_modules/nis.xml run the nis module with the commands:
 
 <p>&lt;hash&gt;
   <br>&lt;command&gt;find&lt;/command&gt;
@@ -1244,7 +1244,7 @@ be send to the Web Application.
 
 <p>The user "tux" (Web Application) sends the Http(s) request:
 
-<p>GET http://&lt;name_of_the_host&gt;/systemtime.xml
+<p>GET http://&lt;name_of_the_host&gt;/yast/&lt;protocol_version&gt;/systemtime.xml
 
 <h5>Authentification</h5>
 <p>The YaST Webservice uses Basic Authentification (Digest Auth. and Kerberos
