@@ -13,6 +13,10 @@ install: all
 	mkdir -p $(DESTDIR)/etc/pam.d
 	install -c -m 0644 rpam.pam $(DESTDIR)/etc/pam.d/rpam
 
+uninstall:
+	rm -f $(shell ruby -r rbconfig -e "print Config::CONFIG['vendorarchdir']")/rpam.so
+	rm -f $(DESTDIR)/etc/pam.d/rpam
+
 doc: ext/Rpam/Makefile
 	(cd ext/Rpam; rdoc --all --line-numbers --charset=UTF-8 --fmt=html -p --inline-source --op=rdoc)
 
