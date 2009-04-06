@@ -11,6 +11,9 @@ src/Makefile: src/extconf.rb
 install: all
 	(cd src; make install)
 
+uninstall:
+	rm -f $(shell ruby -r rbconfig -e "print Config::CONFIG['vendorarchdir']")/polkit.so
+
 doc: src/Makefile
 	(cd src; rdoc --all --line-numbers --charset=UTF-8 --fmt=html -p --inline-source --op=rdoc)
 
