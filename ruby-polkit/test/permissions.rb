@@ -37,7 +37,7 @@ class PolKitTest < Test::Unit::TestCase
       user = "user"
       assert PolKit::polkit_check( "opensuse.yast.scr.read.sysconfig.clock.timezone", user)
     rescue RuntimeError
-      $stderr.puts "Please edit and set local user"
+      $stderr.puts "\n*** Please edit and set local user"
       assert false
     end
   end
