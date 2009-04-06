@@ -22,7 +22,8 @@ Source:         %{name}-%{version}.tar.bz2
 #Source1:        %{name}-%{version}-rpmlintrc
 Summary:        Ruby bindings for PolicyKit
 %description
-Ruby bindings for PolicyKit
+Ruby bindings for PolicyKit. This allows to determine policy settings
+from within Ruby.
 
  Authors:
 ----------
