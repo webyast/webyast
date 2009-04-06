@@ -29,12 +29,13 @@ BuildRequires:  gcc pam-devel ruby-devel
 Requires:       ruby
 Source:         %{name}-%{version}.tar.bz2
 #Source1:        %{name}-%{version}-rpmlintrc
-Summary:        PAM (Pluggable Authentication Modules) integration with ruby.
+Summary:        PAM (Pluggable Authentication Modules) integration with Ruby
 
 %description
 This extension provides PAM (Pluggable Authentication Modules)
-integration. The library provides a stable API for applications to
-defer to for authentication tasks.
+integration for the Ruby language.
+The library provides a stable API for applications to defer to for
+authentication tasks.
 
 
 
