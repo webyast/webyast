@@ -167,12 +167,6 @@ if ps -C yastwc >/dev/null; then
    ps -C yastwc|grep yastwc|cut -c -6 >$IGNORE_FILE
    IGNORE_FILE_SIZE="$(stat -c "%s" $IGNORE_FILE)"
    IGNORE_FILE_ENTRIES="$(wc -l $IGNORE_FILE|cut -c -1)"
-   while [ $IGNORE_FILE_ENTRIES -gt 1 ]; do
-       # only one entry is valid
-       ps -C yastwc|grep yastwc|cut -c -6 >$IGNORE_FILE
-       IGNORE_FILE_SIZE="$(stat -c "%s" $IGNORE_FILE)"
-       IGNORE_FILE_ENTRIES="$(wc -l $IGNORE_FILE|cut -c -1)"
-   done
    if [ $IGNORE_FILE_SIZE -eq 0 ]; then
        echo "$IGNORE_FILE has no entry --> removing"
        rm $IGNORE_FILE
@@ -186,12 +180,6 @@ if ps -C yastws >/dev/null; then
    ps -C yastws|grep yastws|cut -c -6 >$PID_FILE
    PID_FILE_SIZE="$(stat -c "%s" $PID_FILE)"
    PID_FILE_ENTRIES="$(wc -l $PID_FILE|cut -c -1)"
-   while [ $PID_FILE_ENTRIES -gt 1 ]; do
-       # only one entry is valid
-       ps -C yastws|grep yastws|cut -c -6 >$PID_FILE
-       PID_FILE_SIZE="$(stat -c "%s" $PID_FILE)"
-       PID_FILE_ENTRIES="$(wc -l $PID_FILE|cut -c -1)"
-   done
    if [ $PID_FILE_SIZE -eq 0 ]; then
        echo "$PID_FILE has no entry --> removing"
        rm $PID_FILE
