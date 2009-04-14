@@ -44,6 +44,7 @@ module Rails
     def load_initializer
       require "#{RAILS_ROOT}/vendor/rails/railties/lib/initializer"
       Rails::Initializer.run(:install_gem_spec_stubs)
+      Rails::GemDependency.add_frozen_gem_path
     end
   end
 
@@ -57,6 +58,8 @@ module Rails
     def load_rails_gem
       if version = self.class.gem_version
         gem 'rails', version
+      else
+        gem 'rails'
       end
     rescue Gem::LoadError => load_error
       $stderr.puts %(Missing the Rails #{version} gem. Please `gem install -v=#{version} rails`, update your RAILS_GEM_VERSION setting in config/environment.rb for the Rails version you do have installed, or comment out RAILS_GEM_VERSION to use the latest version installed.)
@@ -65,7 +68,7 @@ module Rails
 
     class << self
       def rubygems_version
-        Gem::RubyGemsVersion if defined? Gem::RubyGemsVersion
+        Gem::RubyGemsVersion rescue nil
       end
 
       def gem_version
@@ -80,14 +83,14 @@ module Rails
 
       def load_rubygems
         require 'rubygems'
-
-        unless rubygems_version >= '0.9.4'
-          $stderr.puts %(Rails requires RubyGems >= 0.9.4 (you have #{rubygems_version}). Please `gem update --system` and try again.)
+        min_version = '1.2.0'
+        unless rubygems_version >= min_version
+          $stderr.puts %Q(Rails requires RubyGems >= #{min_version} (you have #{rubygems_version}). Please `gem update --system` and try again.)
           exit 1
         end
 
       rescue LoadError
-        $stderr.puts %(Rails requires RubyGems >= 0.9.4. Please install RubyGems and try again: http://rubygems.rubyforge.org)
+        $stderr.puts %Q(Rails requires RubyGems >= #{min_version}. Please install RubyGems and try again: http://rubygems.rubyforge.org)
         exit 1
       end
 
