@@ -37,6 +37,7 @@ dist: distclean
         find www -name ".gitignore" -exec rm {} \;; \
         rm www/db/*.sqlite3; \
         rm www/log/development.log; \
+        (for i in `ls www/vendor/plugins`; do if test -L www/vendor/plugins/$$i; then rm www/vendor/plugins/$$i; fi; done); \
 	tar cvfj package/www.tar.bz2 www; \
         chmod 644 package/www.tar.bz2; \
-        rm -rf www
+	rm -rf www

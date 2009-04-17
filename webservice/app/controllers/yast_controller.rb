@@ -53,12 +53,12 @@ class YastController < ApplicationController
      link = Links.new 	
      link.path = "systemtime"
      link.description = "Setting system time"
-     if permission_check("org.opensuse.yast.webservice.read-systemtime")
+     if permission_check("org.opensuse.yast.systemtime.read")
         link.read_permission = true
      else
         link.read_permission = false
      end
-     if permission_check("org.opensuse.yast.webservice.write-systemtime")
+     if permission_check("org.opensuse.yast.systemtime.write")
         link.write_permission = true
      else
         link.write_permission = false
