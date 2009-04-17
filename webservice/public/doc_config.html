@@ -4,8 +4,12 @@
    <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
    <meta name="GENERATOR" >
    <title>YaST Webservice Configuration</title>
+   <script src="javascripts/prettify.js" type="text/javascript" onerror="alert('Error: failed to load ' + this.src)"></script>
+   <link rel="stylesheet" type="text/css" href="stylesheets/prettify.css" />
+
+
 </head>
-<body text="#000000" bgcolor="#FFFFFF" link="#0000EE" vlink="#551A8B" alink="#FF0000">
+<body onload="prettyPrint()" text="#000000" bgcolor="#FFFFFF" link="#0000EE" vlink="#551A8B" alink="#FF0000">
 
 <h1>YaST Webservice Configuration</h1>
 
@@ -19,217 +23,222 @@
 YaST-Webservice has been configured which is running with the 
 system account "yastws".
 This HTTP server is configured as "localhost" only which has the port 8080.
-This can be changed in the file /etc/yastws/lighttpd.conf
+This can be changed in the file /etc/yastws/lighttpd.conf</p>
 
-<p>So, you can start the server with: "rcyastws start"
+<p>So, you can start the server with:
+
+<pre class="prettyprint">
+rcyastws start
+</pre>
 
 <p>Use the webbrowser with the URL <a href="http://localhost:8080"> http://localhost:8080</a>
 
 <p>Login as "root". While the package installation all access rights has been
 granted to "root". For another users you will have to grant permission as
-descibed in the following sections:
+descibed in the following sections:</p>
 
-<hr WIDTH="100%">
+<hr/>
 
 <h3>API Policies</h3>
 
-<p><br>Each YaST Webservice call has concerning access permissions which can be defined for each user.
-<br>These permissions are handled by PolicyKit in the file:
+<p>Each YaST Webservice call has concerning access permissions which can be defined for each user.</p>
+<p>These permissions are handled by PolicyKit in the file:</p>
 
-<p>/usr/share/PolicyKit/policy/org.opensuse.yast.webservice.policy
+<p>/usr/share/PolicyKit/policy/org.opensuse.yast.webservice.policy</p>
 
-<p>If you are getting a permission error while using the API just have a look to the webserver logfile
-in order to get the information which permissions are missed:
+<p>If you are getting a permission error while using the API just have a look to the webserver logfile in order to get the information which permissions are missed:</p>
 
-<p>Action: org.opensuse.yast.webservice.run-yastmodule User: schubi Result: no
-<br>Action: org.opensuse.yast.webservice.run-yastmodule-lan User: schubi Result: yes
+<pre class="prettyprint">
+Action: org.opensuse.yast.webservice.run-yastmodule User: schubi Result: no
+Action: org.opensuse.yast.webservice.run-yastmodule-lan User: schubi Result: yes
+</pre>
 
 <p>These permissions can be set with the call "polkit-auth" like:
 
-<p>polkit-auth --user schubi --grant org.opensuse.yast.webservice.run-yastmodule-lan
+<pre class="prettyprint">
+polkit-auth --user schubi --grant org.opensuse.yast.webservice.run-yastmodule-lan
+</pre>
 
-<p>Or can be reset by:
+Or can be reset by:
 
-<p>polkit-auth --user schubi --revoke org.opensuse.yast.webservice.run-yastmodule-lan
+<pre class="prettyprint">
+polkit-auth --user schubi --revoke org.opensuse.yast.webservice.run-yastmodule-lan
+</pre>
 
-<p>In order to cleanup or to grant ALL permissions you can use the ruby script policyKit-rights.rb
-delivered with this package:
+In order to cleanup or to grant ALL permissions you can use the ruby script policyKit-rights.rb delivered with this package:</p>
 
-<blockquote>
+<pre class="prettyprint">
+> policyKit-right.rb
+Usage: policyKit-right.rb --user <user> --action (show|grant|revoke)
+NOTE: This programm should be run by user root
 
-   <br>Usage: policyKit-right.rb --user <user> --action (show|grant|revoke)
-   <br>NOTE: This programm should be run by user root
+This call grant/revoke ALL permissions for the YaST Webservice.
+In order to grant/revoke single rights use:
+polkit-auth --user <user> (--grant|-revoke) <policyname>
 
-   <p>This call grant/revoke ALL permissions for the YaST Webservice.
-   <br>In order to grant/revoke single rights use:
-   <br>polkit-auth --user <user> (--grant|-revoke) <policyname>
+In order to show all possible permissions use:
+polkit-action
+</pre>
 
-   <p>In order to show all possible permissions use:
-   <br>polkit-action
-</blockquote>
-
-<hr WIDTH="100%">
+<hr/>
 
 <h3>Roles</h3>
 
-<p><br>In order to avoid declaring permissions for each user there is the possibility to define roles for
-each user like: administrator, secretary, ...
+<p>In order to avoid declaring permissions for each user there is the possibility to define roles for each user like: administrator, secretary, ...</p>
 
-<p>The definition which roles belong to a user are defined in file /etc/yast_user_roles:
+<p>The definition which roles belong to a user are defined in file /etc/yast_user_roles:</p>
 
-<blockquote>
-<p>#
-<br># file : /etc/yast_user_roles
-<br>#
-<br># This file describes roles of a user accounts for the YaST Webservice
-<br># "user accounts": System account which is accessible e.g. via PAM.
-<br># "roles"        : Describes user accounts for which policies have
-<br>#                  been generated
-<br>#
-<br># Format: <user>   <role 1>,<role 2>,...<role n>
-<br>#
-</blockquote>
+<pre class="prettyprint">
+#
+# file : /etc/yast_user_roles
+#
+# This file describes roles of a user accounts for the YaST Webservice
+# "user accounts": System account which is accessible e.g. via PAM.
+# "roles"        : Describes user accounts for which policies have
+#                  been generated
+#
+# Format: <user>   <role 1>,<role 2>,...<role n>
+#
+</pre>
 
 <p>So, you have to generate a system user e.g. "secretary" and define special right for
-that user (described above).
+that user (described above).</p>
 <p>For getting "secretary" rights you have to add the concerning user in the file 
-/etc/yast_user_roles only.
+/etc/yast_user_roles only.</p>
 
 <p>This is a very simple way to store this information. Much more elegant would be to
-store it to another place e.g. via ldap. Make a proposal :-)
+store it to another place e.g. via ldap. Make a proposal :-)</p>
 
-<hr WIDTH="100%">
+<hr/>
 
 <h3>Hostname and Port</h3>
 
-<p><br>This settings can be changed in /etc/yastws/lighttpd.conf
-<blockquote>
-<p>#######################################################################
-<br>##
-<br>##  Basic Configuration
-<br>## ---------------------
-<br>##
-<br>#server.port = 80
-<br>server.bind = "localhost"
-<br>server.port = 8080
-</blockquote>
+<p>This settings can be changed in /etc/yastws/lighttpd.conf
 
-<hr WIDTH="100%">
+<pre class="prettyprint">
+#######################################################################
+##
+##  Basic Configuration
+## ---------------------
+##
+#server.port = 80
+server.bind = "localhost"
+server.port = 8080
+</pre>
+</p>
+
+<hr/>
 
 <h3>HTTPS Protocol</h3>
 
 <h4>SSL</h4>
 
-<p><br>Before we start configuring lighttpd for the YaST-webclient, we’ve got to get an SSL certificate. If you’re creating your own, 
-you can follow the instructions from the lighttpd web site:
+<p>Before we start configuring lighttpd for the YaST-webclient, we need to get an SSL certificate. If you are creating your own, you can follow the instructions from the lighttpd web site:
 
-<p>openssl req -new -x509 -keyout host.pem -out host.pem -days 365 -nodes
+<pre class="prettyprint">
+openssl req -new -x509 -keyout host.pem -out host.pem -days 365 -nodes
+</pre>
 
-<p>If you already have a certificate that’s a .crt and a .key file, you have to make them snuggle up into a single .pem file:
+If you already have a certificate that’s a .crt and a .key file, you have to make them snuggle up into a single .pem file:
 
-<p>cat host.key host.crt > host.pem
+<pre class="prettyprint">
+cat host.key host.crt > host.pem
+</pre>
 
-<p>Both of these methods result in a single .pem file, usually named ΄host.pem‘ where ΄host‘ is the name of the server you’re using 
+Both of these methods result in a single .pem file, usually named host.pem where "host" is the name of the server you’re using 
 the certificate for. This file can be stored anywhere you want on your system, since the lighttpd configuration takes an explicit path to it.
-Normally certificates are stored in /etc/ssl/certs.
+Normally certificates are stored in /etc/ssl/certs.</p>
 
 <h4>Configure lighttpd</h4>
 
-<p><br>Add these two entries to /etc/yastws/lighttpd.conf
+<p>Add these two entries to /etc/yastws/lighttpd.conf
 
-<p>ssl.engine         = "enable"
-<br>ssl.pemfile        = "/etc/ssl/certs/host.pem"
+<pre class="prettyprint">
+ssl.engine         = "enable"
+ssl.pemfile        = "/etc/ssl/certs/host.pem"
+</pre>
 
-<p>and restart the server with:
+and restart the server with:
+<pre class="prettyprint">
+rcyastws restart
+</pre>
+</p>
 
-<p>rcyastws restart
+<p>Now you can login with HTTPS protocol.</p>
 
-<p>Now you can login with HTTPS protocol.
-
-<hr WIDTH="100%">
+<hr/>
 
 <h3>Make it "public" via "avahi"</h3>
 
-<p><br>Avahi is a system which facilitates service discovery on a local network. So if it is enabled YaST Webclient 
-evaluate all available YaST Webservices on a local network automatically and the user can select a service.
+<p>Avahi is a system which facilitates service discovery on a local network. So if it is enabled YaST Webclient 
+evaluate all available YaST Webservices on a local network automatically and the user can select a service.</p>
 
-<p>In order to make your YaST Webservice "public" you only have to comment out the entry
-<blockquote>
-<p>server.bind = "localhost"
-</blockquote>
-<p>in /etc/yastws/lighttpd.conf and restart the server.
+<p>
+In order to make your YaST Webservice "public" you only have to comment out the entry
+<pre class="prettyprint">
+server.bind = "localhost"
+</pre>
+</p>
 
-<p>The startscript rcyastws make the service public while the starting procedure.
+<p>in /etc/yastws/lighttpd.conf and restart the server.</p>
 
-<p>Note: Please be aware that your YaST Webservice is available from outside now. So you should
-switch to HTTPS-protocol.
+<p>The startscript rcyastws make the service public while the starting procedure.</p>
 
-<hr WIDTH="100%">
+<p>Note: Please be aware that your YaST Webservice is available from outside now. So you should switch to HTTPS-protocol.</p>
+
+<hr/>
 
 <h3>Starting YaST webservice with webrick (not required)</h3>
 
-<p><br>ROR provides an own webserver called webrick. It is nice for testing but
-should not used for "realtime".
+<p>ROR provides an own webserver called webrick. It is nice for testing but
+should not used for "realtime".</p>
 
-<p>Please start this server with the root account.
+<p>Please start this server with the root account.</p>
 
 <h4>Configuration of Webserver rights</h4>
 
-<p><br>These rights are needed for the communication between your webserver and the
-SCR agent.
+<p>These rights are needed for the communication between your webserver and the
+SCR agent.</p>
 
 <p>For testing you can grant all permissions to root by adding
 
-<blockquote>
-<br>- - - snip - - -
-
-<br>&lt;"http://hal.freedesktop.org/releases/PolicyKit/1.0/config.dtd"&gt;
-
-<br>&lt;!-- See the manual page PolicyKit.conf(5) for file format --&gt;
-
-<br>&lt;config version="0.1"&gt;
-<br>&lt;match user="root"&gt;
-<blockquote>
-  &lt;match action="org.opensuse.yast.scr.*"&gt;
-<blockquote>
+<pre class="prettyprint" id="xml">
+&lt;?xml version="1.0"?&gt;
+&lt;!DOCTYPE pkconfig PUBLIC "-//freedesktop//DTD PolicyKit Configuration 1.0//EN" "http://hal.freedesktop.org/releases/PolicyKit/1.0/config.dtd"&gt;
+&lt;!-- See the manual page PolicyKit.conf(5) for file format --&gt;
+&lt;config version="0.1"&gt;
+  &lt;match user="root"&gt;
+    &lt;match action="org.opensuse.yast.scr.*"&gt;
       &lt;return result="yes"/&gt;
-</blockquote>
+    &lt;/match&gt;
   &lt;/match&gt;
-</blockquote>
-<br>&lt;/match&gt; 
-<br>&lt;match user="root"&gt;
-<blockquote>
-  &lt;match action="org.freedesktop.packagekit.system-update"&gt;
-<blockquote>
+  &lt;match user="root"&gt;
+    &lt;match action="org.freedesktop.packagekit.system-update"&gt;
       &lt;return result="yes"/&gt;
-</blockquote>
-<br>  &lt;/match&gt;
-</blockquote>
-<br>&lt;/match&gt;
-<br>&lt;match user="root"&gt;
-<blockquote>
-  &lt;match action="org.freedesktop.policykit.read"&gt;
-<blockquote>
-     &lt;return result="yes"/&gt;
-</blockquote>
-<br>  &lt;/match&gt;
-</blockquote>
-<br>&lt;/match&gt;
-<br>&lt;/config&gt;
-<br>- - - snip end - - -
-</blockquote>
+    &lt;/match&gt;
+  &lt;/match&gt;
+  &lt;match user="root"&gt;
+    &lt;match action="org.freedesktop.policykit.read"&gt;
+      &lt;return result="yes"/&gt;
+    &lt;/match&gt;
+  &lt;/match&gt;
+&lt;/config&gt;
 
-<p><br>to /etc/PolicyKit/PolicyKit.conf
+</pre>
+
+to /etc/PolicyKit/PolicyKit.conf</p>
 
 
 <h4>starting</h4>
 
-<p>cd /etc/yastws/www/
-<br>script/server -p 3001
+<pre class="prettyprint">
+cd /etc/yastws/www/
+script/server -p 3001
+</pre>
 
-<p><br>Logs are written to /etc/yastws/www/log
+<p>Logs are written to /etc/yastws/www/log</p>
 
 <h4>first test</h4>
 
-<p>Use the webbrowser with the URL http://0.0.0.0:3001
+<p>Use the webbrowser with the URL http://0.0.0.0:3001</p>
 
