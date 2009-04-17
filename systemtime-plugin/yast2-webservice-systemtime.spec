@@ -63,16 +63,16 @@ rm -rf $RPM_BUILD_ROOT
 %dir /srv/www/yastws/vendor/plugins/%{plugin_name}
 %dir /usr/share/PolicyKit
 %dir /usr/share/PolicyKit/policy
-%config /srv/www/yastws/vendor/plugins/%{plugin_name}/MIT-LICENSE
-%config /srv/www/yastws/vendor/plugins/%{plugin_name}/README
-%config /srv/www/yastws/vendor/plugins/%{plugin_name}/Rakefile
-%config /srv/www/yastws/vendor/plugins/%{plugin_name}/init.rb
-%config /srv/www/yastws/vendor/plugins/%{plugin_name}/install.rb
-%config /srv/www/yastws/vendor/plugins/%{plugin_name}/uninstall.rb
-%config /srv/www/yastws/vendor/plugins/%{plugin_name}/app
-%config /srv/www/yastws/vendor/plugins/%{plugin_name}/config
-%config /srv/www/yastws/vendor/plugins/%{plugin_name}/lib
-%config /srv/www/yastws/vendor/plugins/%{plugin_name}/tasks
-%config /srv/www/yastws/vendor/plugins/%{plugin_name}/test
+%config /srv/www/%{pkg_user}/vendor/plugins/%{plugin_name}/MIT-LICENSE
+%config /srv/www/%{pkg_user}/vendor/plugins/%{plugin_name}/README
+%config /srv/www/%{pkg_user}/vendor/plugins/%{plugin_name}/Rakefile
+%config /srv/www/%{pkg_user}/vendor/plugins/%{plugin_name}/init.rb
+%config /srv/www/%{pkg_user}/vendor/plugins/%{plugin_name}/install.rb
+%config /srv/www/%{pkg_user}/vendor/plugins/%{plugin_name}/uninstall.rb
+%config /srv/www/%{pkg_user}/vendor/plugins/%{plugin_name}/app
+%config /srv/www/%{pkg_user}/vendor/plugins/%{plugin_name}/config
+%config /srv/www/%{pkg_user}/vendor/plugins/%{plugin_name}/lib
+%config /srv/www/%{pkg_user}/vendor/plugins/%{plugin_name}/tasks
+%config /srv/www/%{pkg_user}/vendor/plugins/%{plugin_name}/test
 %config /usr/share/PolicyKit/policy/org.opensuse.yast.systemtime.policy
 
