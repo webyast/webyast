@@ -96,7 +96,7 @@ require "scr"
 	
   def update
     respond_to do |format|
-      systemtime = System::SystemTime.new
+      systemtime = SystemTime.new
       if permission_check( "org.opensuse.yast.webservice.write-systemtime")
          if params[:systemtime] != nil
            systemtime.timezone = params[:systemtime][:timezone]
@@ -136,7 +136,7 @@ require "scr"
 
   def show
 
-    @systemtime = System::SystemTime.new
+    @systemtime = SystemTime.new
 
     if permission_check( "org.opensuse.yast.webservice.read-systemtime")
        @systemtime.currenttime = get_time
@@ -170,7 +170,7 @@ require "scr"
   def singlevalue
     if request.get?
       # GET
-      @systemtime = System::SystemTime.new
+      @systemtime = SystemTime.new
 
       case params[:id]
         when "is_utc"
@@ -222,7 +222,7 @@ require "scr"
     else
       #PUT
       respond_to do |format|
-        @systemtime = System::SystemTime.new
+        @systemtime = SystemTime.new
         if params[:systemtime] != nil
           @systemtime.timezone = params[:systemtime][:timezone]
           @systemtime.is_utc = params[:systemtime][:is_utc]

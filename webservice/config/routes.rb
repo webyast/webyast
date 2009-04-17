@@ -47,12 +47,6 @@ ActionController::Routing::Routes.draw do |map|
      service.resources :commands
   end
 
-  map.resource :systemtime, :controller => 'systemtime'
-  map.connect "/systemtime/:id", :controller => 'systemtime', :action => 'singlevalue'
-  map.connect "/systemtime/:id.xml", :controller => 'systemtime', :action => 'singlevalue', :format =>'xml'
-  map.connect "/systemtime/:id.html", :controller => 'systemtime', :action => 'singlevalue', :format =>'html'
-  map.connect "/systemtime/:id.json", :controller => 'systemtime', :action => 'singlevalue', :format =>'json'
-
   map.resource :language, :controller => 'language'
   map.connect "/language/:id", :controller => 'language', :action => 'singlevalue'
   map.connect "/language/:id.xml", :controller => 'language', :action => 'singlevalue', :format =>'xml'
@@ -102,10 +96,6 @@ ActionController::Routing::Routes.draw do |map|
   map.logout '/logout.json', :controller => 'sessions', :action => 'destroy', :format =>'json'
   map.logout '/logout.html', :controller => 'sessions', :action => 'destroy', :format =>'html'
 
-  # You can have the root of your site routed with map.root -- just remember to delete public/index.html.
-  # map.root :controller => "welcome"
-
-  # See how all your routes lay out with "rake routes"
 
   # Install the default routes as the lowest priority.
   map.connect ':controller/:action.:format'
@@ -116,5 +106,11 @@ ActionController::Routing::Routes.draw do |map|
 
   map.connect "/.xml", :controller => 'yast', :action => 'index', :format =>'xml'
   map.connect "/.json", :controller => 'yast', :action => 'index', :format =>'json'
+
+  # You can have the root of your site routed with map.root -- just remember to delete public/index.html.
+  # map.root :controller => "welcome"
+
+  # See how all your routes lay out with "rake routes"
+
   map.root :controller => "yast"
 end

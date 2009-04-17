@@ -3,4 +3,4 @@
 #
 # Set the version of the REST interface.
 #
-ActionController::AbstractRequest.relative_url_root = '/yast/v1' 
+ActionController::Base.relative_url_root = "/yast/v1"
