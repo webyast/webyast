@@ -57,10 +57,10 @@ rm -rf $RPM_BUILD_ROOT
 
 %files 
 %defattr(-,root,root)
-%dir /srv/www/yastws
-%dir /srv/www/yastws/vendor
-%dir /srv/www/yastws/vendor/plugins
-%dir /srv/www/yastws/vendor/plugins/%{plugin_name}
+%dir /srv/www/%{pkg_user}
+%dir /srv/www/%{pkg_user}/vendor
+%dir /srv/www/%{pkg_user}/vendor/plugins
+%dir /srv/www/%{pkg_user}/vendor/plugins/%{plugin_name}
 %dir /usr/share/PolicyKit
 %dir /usr/share/PolicyKit/policy
 %config /srv/www/%{pkg_user}/vendor/plugins/%{plugin_name}/MIT-LICENSE
