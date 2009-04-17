@@ -1,0 +1,4 @@
+<h1><%= @node -%> resources</h1>
+<% @resources.each do |name,url| -%>
+ <%= link_to name, url -%><br/>
+<% end -%>

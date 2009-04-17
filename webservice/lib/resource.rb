@@ -77,6 +77,8 @@ class ResourceRegistration
   
   def self.route_all
 
+    uri_prefix = "resource" # should be 'yast'
+
     resources = Resource.find(:all)
     domains = Domain.find(:all)
 
@@ -91,7 +93,7 @@ class ResourceRegistration
 
       domains.each do |ns|
 	domain = ns.name
-	map.with_options(:path_prefix => "yast") do |path|
+	map.with_options(:path_prefix => uri_prefix) do |path|
 	  path.namespace(domain) do |name|
 	    $stderr.puts "Mapping #{domain}"
 	    name.resources domain, :only => :index
@@ -101,13 +103,13 @@ class ResourceRegistration
       
       resources.each do |resource|
 	domain = resource.domain.name
-	prefix = "yast/#{domain}"
+	prefix = "#{uri_prefix}/#{domain}"
 	
 	#
 	# doing .with_options(:domain => "...", :path_prefix => "...") assembles the controller domain without a slash :-(
 	#															  
 															  
-	# create yast/<ns> routes
+	# create uri_prefix/<ns> routes
 	map.with_options(:path_prefix => prefix) do |path|
 	  # put the controller below <ns>
 	  path.namespace(domain) do |yast|
@@ -116,8 +118,8 @@ class ResourceRegistration
 	  end
 	end
       end # resources.each
-      # /yast
-      map.connect "/yast.:format", :controller => "yast", :action => "index"
+
+      map.connect "/resource.:format", :controller => "resource", :action => "index"
     end # Routes.draw 
   
   end
