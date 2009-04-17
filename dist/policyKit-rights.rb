@@ -58,14 +58,14 @@ begin
    if action == "grant"
       IO.popen( "polkit-action", 'r+' ) do |pipe|
          loop do
-            suseString = "org.opensuse.yast.webservice."
+            suseString = "org.opensuse.yast."
             break if pipe.eof?
             l = pipe.read
             policies = l.split("\n")
             policies.each do |policy|
                if policy.include? suseString
                   policySplit = policy.split("-")
-                  if policySplit.size >= 2
+                  if policySplit.size >= 2 
                      command = "polkit-auth --user " + user + " --explicit |grep -s " + policySplit[0] + "-" + policySplit[1] + " >>/dev/null"
                      if ( !system(command) or # has not already been set
                           policy == "org.opensuse.yast.webservice.read-userlist" or  #special cases
@@ -74,6 +74,10 @@ begin
                        command = "polkit-auth --user " + user + " --grant " + policySplit[0] + "-" + policySplit[1]
                        system (command)
                      end
+                  elsif policySplit.size == 1 #only root available
+                       STDERR.puts "granting: #{policy}"
+                       command = "polkit-auth --user " + user + " --grant " + policy
+                       system (command)
                   end
                end
             end
