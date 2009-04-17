@@ -1,3 +1,9 @@
+if false
+  require "lib/resource"
+  ResourceRegistration.init
+  ResourceRegistration.register_all "vendor/plugins", "config/resources"
+  ResourceRegistration.route_all
+else
 ActionController::Routing::Routes.draw do |map|
 
   map.resource :session
@@ -114,3 +120,6 @@ ActionController::Routing::Routes.draw do |map|
 
   map.root :controller => "yast"
 end
+end
+
+$stderr.puts ActionController::Routing::Routes.routes
