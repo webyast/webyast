@@ -173,6 +173,7 @@ fi
 %config /srv/www/yastws/script
 %config /srv/www/yastws/test
 %config /srv/www/yastws/config
+%config /srv/www/yastws/vendor
 %attr(755,root,root) %config /etc/yastws/tools/policyKit-rights.rb
 %attr(755,root,root) %config /srv/www/yastws/start.sh
 %doc /srv/www/yastws/doc_config.html 
@@ -181,10 +182,6 @@ fi
 %doc /srv/www/yastws/README
 %attr(-,%{pkg_user},%{pkg_user}) /srv/www/yastws/log
 %attr(-,%{pkg_user},%{pkg_user}) /srv/www/yastws/tmp
-%attr(-,%{pkg_user},%{pkg_user}) /srv/www/yastws/tmp/cache
-%attr(-,%{pkg_user},%{pkg_user}) /srv/www/yastws/tmp/pids
-%attr(-,%{pkg_user},%{pkg_user}) /srv/www/yastws/tmp/sessions
-%attr(-,%{pkg_user},%{pkg_user}) /srv/www/yastws/tmp/sockets
 %config(noreplace) /etc/yastws/vhosts.d/yast.conf
 %config(noreplace) /etc/yastws/lighttpd.conf
 %config /etc/yastws/vhosts.d/rails.inc
