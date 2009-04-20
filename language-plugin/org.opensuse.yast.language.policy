@@ -11,7 +11,7 @@
 Rights for languages
 -->
 
-  <action id="org.opensuse.yast.webservice.read-language">
+  <action id="org.opensuse.yast.language.read">
     <description>Reading language settings</description>
     <message>Authentication is required to read language settings</message>
     <defaults>
@@ -19,7 +19,7 @@ Rights for languages
       <allow_active>no</allow_active>
     </defaults>
   </action>
-  <action id="org.opensuse.yast.webservice.write-language">
+  <action id="org.opensuse.yast.language.write">
     <description>Writing language settings</description>
     <message>Authentication is required to write language settings</message>
     <defaults>
@@ -27,7 +27,7 @@ Rights for languages
       <allow_active>no</allow_active>
     </defaults>
   </action>
-  <action id="org.opensuse.yast.webservice.read-language-firstlanguage">
+  <action id="org.opensuse.yast.language.read-firstlanguage">
     <description>Reading primary language</description>
     <message>Authentication is required to read primary language</message>
     <defaults>
@@ -35,7 +35,7 @@ Rights for languages
       <allow_active>no</allow_active>
     </defaults>
   </action>
-  <action id="org.opensuse.yast.webservice.write-language-firstlanguage">
+  <action id="org.opensuse.yast.language.write-firstlanguage">
     <description>Writing primary language</description>
     <message>Authentication is required to write primary language</message>
     <defaults>
@@ -43,7 +43,7 @@ Rights for languages
       <allow_active>no</allow_active>
     </defaults>
   </action>
-  <action id="org.opensuse.yast.webservice.read-language-secondlanguages">
+  <action id="org.opensuse.yast.language.read-secondlanguages">
     <description>Reading second languages</description>
     <message>Authentication is required to read second languages</message>
     <defaults>
@@ -51,7 +51,7 @@ Rights for languages
       <allow_active>no</allow_active>
     </defaults>
   </action>
-  <action id="org.opensuse.yast.webservice.write-language-secondlanguages">
+  <action id="org.opensuse.yast.language.write-secondlanguages">
     <description>Writing secconed languages</description>
     <message>Authentication is required to write second languages</message>
     <defaults>
@@ -59,7 +59,7 @@ Rights for languages
       <allow_active>no</allow_active>
     </defaults>
   </action>
-  <action id="org.opensuse.yast.webservice.read-language-available">
+  <action id="org.opensuse.yast.language.read-available">
     <description>Reading available languages</description>
     <message>Authentication is required to read available languages</message>
     <defaults>
