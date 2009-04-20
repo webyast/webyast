@@ -63,7 +63,8 @@ begin
             l = pipe.read
             policies = l.split("\n")
             policies.each do |policy|
-               if policy.include? suseString
+               if policy.include? suseString and
+                  !policy.include?(suseString + "scr.") # do not grant SCR rights
                   policySplit = policy.split("-")
                   if policySplit.size >= 2 
                      command = "polkit-auth --user " + user + " --explicit |grep -s " + policySplit[0] + "-" + policySplit[1] + " >>/dev/null"
