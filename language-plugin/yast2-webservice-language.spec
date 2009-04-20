@@ -1,5 +1,5 @@
 #
-# spec file for package yast2-webservice-systemtime (Version 0.1)
+# spec file for package yast2-webservice-language (Version 0.1)
 #
 # Copyright (c) 2008 SUSE LINUX Products GmbH, Nuernberg, Germany.
 # This file and all modifications and additions to the pristine
@@ -9,28 +9,28 @@
 #
 
 
-Name:           yast2-webservice-systemtime
+Name:           yast2-webservice-language
 PreReq:         yast2-webservice
-Provides:       yast2-webservice:/srv/www/yastws/app/controllers/systemtime_controller.rb
+Provides:       yast2-webservice:/srv/www/yastws/app/controllers/language_controller.rb
 License:        GPL
 Group:          Productivity/Networking/Web/Utilities
 Autoreqprov:    on
 Version:        1.0.0
 Release:        0
-Summary:        YaST2 - Webservice - SystemTime
+Summary:        YaST2 - Webservice - Language
 Source:         www.tar.bz2
-Source1:        org.opensuse.yast.systemtime.policy
+Source1:        org.opensuse.yast.language.policy
 BuildRoot:      %{_tmppath}/%{name}-%{version}-build
 BuildArch:      noarch
 
 #
 %define pkg_user yastws
-%define plugin_name systemtime
+%define plugin_name language
 #
 
 
 %description
-YaST2 - Webservice - REST based interface of YaST in order to handle time and date.
+YaST2 - Webservice - REST based interface of YaST in order to handle language settings.
 Authors:
 --------
     Stefan Schubert <schubi@opensuse.org>

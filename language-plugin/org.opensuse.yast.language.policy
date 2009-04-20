@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE policyconfig PUBLIC
+ "-//freedesktop//DTD PolicyKit Policy Configuration 1.0//EN"
+ "http://www.freedesktop.org/standards/PolicyKit/1.0/policyconfig.dtd">
+<policyconfig>
+
+  <vendor>YaST Webservice Project</vendor>
+  <vendor_url>http://en.opensuse.org/YAST</vendor_url>
+
+<!--
+Rights for languages
+-->
+
+  <action id="org.opensuse.yast.webservice.read-language">
+    <description>Reading language settings</description>
+    <message>Authentication is required to read language settings</message>
+    <defaults>
+      <allow_inactive>no</allow_inactive>
+      <allow_active>no</allow_active>
+    </defaults>
+  </action>
+  <action id="org.opensuse.yast.webservice.write-language">
+    <description>Writing language settings</description>
+    <message>Authentication is required to write language settings</message>
+    <defaults>
+      <allow_inactive>no</allow_inactive>
+      <allow_active>no</allow_active>
+    </defaults>
+  </action>
+  <action id="org.opensuse.yast.webservice.read-language-firstlanguage">
+    <description>Reading primary language</description>
+    <message>Authentication is required to read primary language</message>
+    <defaults>
+      <allow_inactive>no</allow_inactive>
+      <allow_active>no</allow_active>
+    </defaults>
+  </action>
+  <action id="org.opensuse.yast.webservice.write-language-firstlanguage">
+    <description>Writing primary language</description>
+    <message>Authentication is required to write primary language</message>
+    <defaults>
+      <allow_inactive>no</allow_inactive>
+      <allow_active>no</allow_active>
+    </defaults>
+  </action>
+  <action id="org.opensuse.yast.webservice.read-language-secondlanguages">
+    <description>Reading second languages</description>
+    <message>Authentication is required to read second languages</message>
+    <defaults>
+      <allow_inactive>no</allow_inactive>
+      <allow_active>no</allow_active>
+    </defaults>
+  </action>
+  <action id="org.opensuse.yast.webservice.write-language-secondlanguages">
+    <description>Writing secconed languages</description>
+    <message>Authentication is required to write second languages</message>
+    <defaults>
+      <allow_inactive>no</allow_inactive>
+      <allow_active>no</allow_active>
+    </defaults>
+  </action>
+  <action id="org.opensuse.yast.webservice.read-language-available">
+    <description>Reading available languages</description>
+    <message>Authentication is required to read available languages</message>
+    <defaults>
+      <allow_inactive>no</allow_inactive>
+      <allow_active>no</allow_active>
+    </defaults>
+  </action>
+
+</policyconfig>
