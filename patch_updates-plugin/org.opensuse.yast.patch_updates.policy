@@ -11,7 +11,7 @@
 Rights for patches
 -->
 
-  <action id="org.opensuse.yast.webservice.read-patch">
+  <action id="org.opensuse.yast.patch.read">
     <description>Reading patch information</description>
     <message>Authentication is required to read patch information</message>
     <defaults>
@@ -19,7 +19,7 @@ Rights for patches
       <allow_active>no</allow_active>
     </defaults>
   </action>
-  <action id="org.opensuse.yast.webservice.install-patch">
+  <action id="org.opensuse.yast.patch.install">
     <description>Installing a patch</description>
     <message>Authentication is required to install a patch</message>
     <defaults>
