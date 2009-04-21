@@ -1,0 +1,14 @@
+#
+# test/fixtures/domains.yml
+#
+network:
+  id: 1
+  name: network
+  
+printer:
+  id: 2
+  name: printer
+  
+storage:
+  id: 3
+  name: storage
