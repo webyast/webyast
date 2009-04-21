@@ -29,18 +29,18 @@ class YastController < ApplicationController
      link = Links.new 	
      link.path = "services"
      link.description = "Managing Linux services like samba, ntp,..."
-     if permission_check("org.opensuse.yast.webservice.read-services")
+     if permission_check("org.opensuse.yast.services.read")
         link.read_permission = true
      else
         link.read_permission = false
      end
-     if permission_check("org.opensuse.yast.webservice.write-services")
+     if permission_check("org.opensuse.yast.services.write")
         link.write_permission = true
      else
         link.write_permission = false
      end
-     if permission_check("org.opensuse.yast.webservice.execute-services-commands") ||
-        permission_check("org.opensuse.yast.webservice.execute-services")
+     if permission_check("org.opensuse.yast.services.execute-commands") ||
+        permission_check("org.opensuse.yast.services.execute")
         link.execute_permission = true
      else
         link.execute_permission = false
@@ -72,12 +72,12 @@ class YastController < ApplicationController
      link = Links.new 	
      link.path = "language"
      link.description = "Setting language"
-     if permission_check("org.opensuse.yast.webservice.read-language")
+     if permission_check("org.opensuse.yast.language.read")
         link.read_permission = true
      else
         link.read_permission = false
      end
-     if permission_check("org.opensuse.yast.webservice.write-language")
+     if permission_check("org.opensuse.yast.language.write")
         link.write_permission = true
      else
         link.write_permission = false
@@ -91,23 +91,23 @@ class YastController < ApplicationController
      link = Links.new 	
      link.path = "users"
      link.description = "Managing local user"
-     if permission_check("org.opensuse.yast.webservice.read-user")
+     if permission_check("org.opensuse.yast.users.read")
         link.read_permission = true
      else
         link.read_permission = false
      end
-     if permission_check("org.opensuse.yast.webservice.write-user")
+     if permission_check("org.opensuse.yast.users.write")
         link.write_permission = true
      else
         link.write_permission = false
      end
      link.execute_permission = false
-     if permission_check("org.opensuse.yast.webservice.delete-user")
+     if permission_check("org.opensuse.yast.users.delete")
         link.delete_permission = true
      else
         link.delete_permission = false
      end
-     if permission_check("org.opensuse.yast.webservice.new-user")
+     if permission_check("org.opensuse.yast.users.new")
         link.new_permission = true
      else
         link.new_permission = false
@@ -137,7 +137,7 @@ class YastController < ApplicationController
      link = Links.new 	
      link.path = "patch_updates"
      link.description = "Updating System"
-     if permission_check("org.opensuse.yast.webservice.read-patch")
+     if permission_check("org.opensuse.yast.patch.read")
         link.read_permission = true
      else
         link.read_permission = false
@@ -146,7 +146,7 @@ class YastController < ApplicationController
      link.execute_permission = false
      link.delete_permission = false
      link.new_permission = false
-     if permission_check("org.opensuse.yast.webservice.install-patch")
+     if permission_check("org.opensuse.yast.patch.install")
         link.install_permission = true
      else
         link.install_permission = false
