@@ -1,0 +1,8 @@
+#
+# test/fixtures/resources/network/routes.yaml
+#
+# Consistent domain override
+#
+
+domain: network
+tags: test fixtures

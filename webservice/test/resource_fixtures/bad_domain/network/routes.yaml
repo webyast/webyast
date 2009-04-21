@@ -1,0 +1,8 @@
+#
+# test/fixtures/resources/network/routes.yaml
+#
+# Warn about inconsistent domain override
+#
+
+domain: networks
+tags: test fixtures

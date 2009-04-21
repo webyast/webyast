@@ -1,0 +1,7 @@
+#
+# test/fixtures/resources/network/devices.yaml
+#
+# domain is defined by parent directory
+# name is defined by filename
+
+tags: test fixtures
