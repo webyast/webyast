@@ -1,0 +1,208 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE policyconfig PUBLIC
+ "-//freedesktop//DTD PolicyKit Policy Configuration 1.0//EN"
+ "http://www.freedesktop.org/standards/PolicyKit/1.0/policyconfig.dtd">
+<policyconfig>
+
+  <vendor>YaST Webservice Project</vendor>
+  <vendor_url>http://en.opensuse.org/YAST</vendor_url>
+
+
+<!--
+Rights for users
+-->
+
+  <action id="org.opensuse.yast.users.readlist">
+    <description>Reading a user list</description>
+    <message>Authentication is required to read a user list</message>
+    <defaults>
+      <allow_inactive>no</allow_inactive>
+      <allow_active>no</allow_active>
+    </defaults>
+  </action>
+  <action id="org.opensuse.yast.users.read">
+    <description>Reading user settings</description>
+    <message>Authentication is required to read user settings</message>
+    <defaults>
+      <allow_inactive>no</allow_inactive>
+      <allow_active>no</allow_active>
+    </defaults>
+  </action>
+  <action id="org.opensuse.yast.users.write">
+    <description>Update user settings</description>
+    <message>Authentication is required to update user settings</message>
+    <defaults>
+      <allow_inactive>no</allow_inactive>
+      <allow_active>no</allow_active>
+    </defaults>
+  </action>
+  <action id="org.opensuse.yast.users.new">
+    <description>Add a new user account</description>
+    <message>Authentication is required to add a new user account</message>
+    <defaults>
+      <allow_inactive>no</allow_inactive>
+      <allow_active>no</allow_active>
+    </defaults>
+  </action>
+  <action id="org.opensuse.yast.users.delete">
+    <description>Delete a new account</description>
+    <message>Authentication is required to delete a user account</message>
+    <defaults>
+      <allow_inactive>no</allow_inactive>
+      <allow_active>no</allow_active>
+    </defaults>
+  </action>
+  <action id="org.opensuse.yast.users.read-defaultgroup">
+    <description>Reading user setting defaultGroup</description>
+    <message>Authentication is required to read user setting defaultGroup</message>
+    <defaults>
+      <allow_inactive>no</allow_inactive>
+      <allow_active>no</allow_active>
+    </defaults>
+  </action>
+  <action id="org.opensuse.yast.users.write-defaultgroup">
+    <description>Update user setting defaultGroup</description>
+    <message>Authentication is required to update user setting defaultGroup</message>
+    <defaults>
+      <allow_inactive>no</allow_inactive>
+      <allow_active>no</allow_active>
+    </defaults>
+  </action>
+  <action id="org.opensuse.yast.users.read-fullname">
+    <description>Reading user setting fullName</description>
+    <message>Authentication is required to read user setting fullName</message>
+    <defaults>
+      <allow_inactive>no</allow_inactive>
+      <allow_active>no</allow_active>
+    </defaults>
+  </action>
+  <action id="org.opensuse.yast.users.write-fullname">
+    <description>Update user setting fullName</description>
+    <message>Authentication is required to update user setting fullName</message>
+    <defaults>
+      <allow_inactive>no</allow_inactive>
+      <allow_active>no</allow_active>
+    </defaults>
+  </action>
+  <action id="org.opensuse.yast.users.read-groups">
+    <description>Reading user setting groups</description>
+    <message>Authentication is required to read user setting groups</message>
+    <defaults>
+      <allow_inactive>no</allow_inactive>
+      <allow_active>no</allow_active>
+    </defaults>
+  </action>
+  <action id="org.opensuse.yast.users.write-groups">
+    <description>Update user setting groups</description>
+    <message>Authentication is required to update user setting groups</message>
+    <defaults>
+      <allow_inactive>no</allow_inactive>
+      <allow_active>no</allow_active>
+    </defaults>
+  </action>
+  <action id="org.opensuse.yast.users.read-homedirectory">
+    <description>Reading user setting homeDirectory</description>
+    <message>Authentication is required to read user setting homeDirectory</message>
+    <defaults>
+      <allow_inactive>no</allow_inactive>
+      <allow_active>no</allow_active>
+    </defaults>
+  </action>
+  <action id="org.opensuse.yast.users.write-homedirectory">
+    <description>Update user setting homeDirectory</description>
+    <message>Authentication is required to update user setting homeDirectory</message>
+    <defaults>
+      <allow_inactive>no</allow_inactive>
+      <allow_active>no</allow_active>
+    </defaults>
+  </action>
+  <action id="org.opensuse.yast.users.read-loginname">
+    <description>Reading user setting newLoginName</description>
+    <message>Authentication is required to read user setting newLoginName</message>
+    <defaults>
+      <allow_inactive>no</allow_inactive>
+      <allow_active>no</allow_active>
+    </defaults>
+  </action>
+  <action id="org.opensuse.yast.users.write-loginname">
+    <description>Update user setting newLoginName</description>
+    <message>Authentication is required to update user setting newLoginName</message>
+    <defaults>
+      <allow_inactive>no</allow_inactive>
+      <allow_active>no</allow_active>
+    </defaults>
+  </action>
+  <action id="org.opensuse.yast.users.read-loginshell">
+    <description>Reading user setting loginShell</description>
+    <message>Authentication is required to read user setting loginShell</message>
+    <defaults>
+      <allow_inactive>no</allow_inactive>
+      <allow_active>no</allow_active>
+    </defaults>
+  </action>
+  <action id="org.opensuse.yast.users.write-loginshell">
+    <description>Update user setting loginShell</description>
+    <message>Authentication is required to update user setting loginShell</message>
+    <defaults>
+      <allow_inactive>no</allow_inactive>
+      <allow_active>no</allow_active>
+    </defaults>
+  </action>
+  <action id="org.opensuse.yast.users.read-uid">
+    <description>Reading user setting newUid</description>
+    <message>Authentication is required to read user setting newUid</message>
+    <defaults>
+      <allow_inactive>no</allow_inactive>
+      <allow_active>no</allow_active>
+    </defaults>
+  </action>
+  <action id="org.opensuse.yast.users.write-uid">
+    <description>Update user setting newUid</description>
+    <message>Authentication is required to update user setting newUid</message>
+    <defaults>
+      <allow_inactive>no</allow_inactive>
+      <allow_active>no</allow_active>
+    </defaults>
+  </action>
+  <action id="org.opensuse.yast.users.read-password">
+    <description>Reading user setting password</description>
+    <message>Authentication is required to read user setting password</message>
+    <defaults>
+      <allow_inactive>no</allow_inactive>
+      <allow_active>no</allow_active>
+    </defaults>
+  </action>
+  <action id="org.opensuse.yast.users.write-password">
+    <description>Update user setting password</description>
+    <message>Authentication is required to update user setting password</message>
+    <defaults>
+      <allow_inactive>no</allow_inactive>
+      <allow_active>no</allow_active>
+    </defaults>
+  </action>
+  <action id="org.opensuse.yast.users.read-type">
+    <description>Reading user setting type</description>
+    <message>Authentication is required to read user setting type</message>
+    <defaults>
+      <allow_inactive>no</allow_inactive>
+      <allow_active>no</allow_active>
+    </defaults>
+  </action>
+  <action id="org.opensuse.yast.users.write-type">
+    <description>Update user setting type</description>
+    <message>Authentication is required to update user setting type</message>
+    <defaults>
+      <allow_inactive>no</allow_inactive>
+      <allow_active>no</allow_active>
+    </defaults>
+  </action>
+  <action id="org.opensuse.yast.users.write-sshkey">
+    <description>Update user setting sshkey</description>
+    <message>Authentication is required to update user setting sshkey</message>
+    <defaults>
+      <allow_inactive>no</allow_inactive>
+      <allow_active>no</allow_active>
+    </defaults>
+  </action>
+
+</policyconfig>
