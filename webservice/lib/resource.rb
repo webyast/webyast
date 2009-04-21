@@ -9,23 +9,26 @@ class ResourceRegistration
   
   # register a (.yaml) resource description
 
-  def self.register file
+  def self.register file, name = nil, domain = nil
     require 'yaml'
     
-    $stderr.puts "ResourceRegistration.register #{file}"
-    name = File.basename(file, ".*")
+    name = name || File.basename(file, ".*")
     begin
       resource = YAML.load(File.open(file))
     rescue Exception => e
       $stderr.puts "#{file} failed to load"
       raise
     end
-    $stderr.puts "Found #{resource.inspect}"      
+
     # name: can override
     name = resource["name"] || name
       
     # domain: must be given
-    domain = resource["domain"]
+    d = resource["domain"] 
+    if d
+      raise "#{file} has inconsistent domain to parent dir" if domain and domain != d
+      domain = d unless domain
+    end
     raise "#{file} does not specify domain" unless domain
 
     # tags:, optional
@@ -61,17 +64,16 @@ class ResourceRegistration
     r_resource.tag_list = tags
     r_resource.save
 
-    $stderr.puts "Resource #{domain}::#{name} registered"
   end
   
   # register all resources below <topdir>/*/<subdir>/*.yaml
   def self.register_all topdir, subdir
     require 'find'
-    $stderr.puts "Register all resources in #{topdir}/*/#{subdir}"
+#    $stderr.puts "Register all resources in #{topdir}/*/#{subdir}"
     Find.find(topdir) do |path|
-      next unless path =~ %r{#{subdir}/(\w+)\.yaml$}
-      $stderr.puts "  #{path} !"
-      self.register path
+      next unless path =~ %r{#{subdir}/((\w+)/)?(\w+)\.ya?ml$}
+#      $stderr.puts "  #{path}, (domain #{$2}, name #{$3}) !"
+      self.register path, $3, $2
     end
   end
   
@@ -95,7 +97,7 @@ class ResourceRegistration
 	domain = ns.name
 	map.with_options(:path_prefix => uri_prefix) do |path|
 	  path.namespace(domain) do |name|
-	    $stderr.puts "Mapping #{domain}"
+#	    $stderr.puts "Mapping #{domain}"
 	    name.resources domain, :only => :index
 	  end
 	end
@@ -113,7 +115,7 @@ class ResourceRegistration
 	map.with_options(:path_prefix => prefix) do |path|
 	  # put the controller below <ns>
 	  path.namespace(domain) do |yast|
-	    $stderr.puts "Mapping #{domain}/#{resource.name}"
+#	    $stderr.puts "Mapping #{domain}/#{resource.name}"
 	    yast.resources resource.name
 	  end
 	end
