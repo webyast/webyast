@@ -39,9 +39,6 @@ ActionController::Routing::Routes.draw do |map|
   #     admin.resources :products
   #   end
 
-  map.resources :patch_updates
-  map.connect "/patch_updates/:id", :controller => 'patch_updates', :action => 'install'
-
   map.resources :yast_modules
   map.connect "/yast_modules/:action/:id", :controller => 'yast_modules', :action => 'run'
   map.connect "/yast_modules/:id", :controller => 'yast_modules', :action => 'run'

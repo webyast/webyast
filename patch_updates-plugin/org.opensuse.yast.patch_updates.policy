@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE policyconfig PUBLIC
+ "-//freedesktop//DTD PolicyKit Policy Configuration 1.0//EN"
+ "http://www.freedesktop.org/standards/PolicyKit/1.0/policyconfig.dtd">
+<policyconfig>
+
+  <vendor>YaST Webservice Project</vendor>
+  <vendor_url>http://en.opensuse.org/YAST</vendor_url>
+
+<!--
+Rights for patches
+-->
+
+  <action id="org.opensuse.yast.webservice.read-patch">
+    <description>Reading patch information</description>
+    <message>Authentication is required to read patch information</message>
+    <defaults>
+      <allow_inactive>no</allow_inactive>
+      <allow_active>no</allow_active>
+    </defaults>
+  </action>
+  <action id="org.opensuse.yast.webservice.install-patch">
+    <description>Installing a patch</description>
+    <message>Authentication is required to install a patch</message>
+    <defaults>
+      <allow_inactive>no</allow_inactive>
+      <allow_active>no</allow_active>
+    </defaults>
+  </action>
+
+
+</policyconfig>
