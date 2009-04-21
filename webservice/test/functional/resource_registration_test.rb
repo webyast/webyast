@@ -1,5 +1,9 @@
 #
-# test/functional/resource_registration_tests.rb
+# test/functional/resource_registration_test.rb
+#
+# This tests the mapping from resource descriptions (yaml files) to the database
+#
+# See resource_route_test.rb for resource route tests.
 #
 require 'test_helper'
 
