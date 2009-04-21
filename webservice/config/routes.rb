@@ -103,4 +103,4 @@ ActionController::Routing::Routes.draw do |map|
 end
 end
 
-$stderr.puts ActionController::Routing::Routes.routes
+$stderr.puts ActionController::Routing::Routes.routes if ENV["RAILS_ENV"] == "development"
