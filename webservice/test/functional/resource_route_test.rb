@@ -14,14 +14,11 @@ class ResourceRouteTest < ActiveSupport::TestCase
   
   fixtures :domains, :resources
   
-  # ResourceRegistration.init drops all database content
+  # config/initializers/resource_registration.rb sets it up
   
   test "resource route initialization" do
-    ResourceRegistration.init
-    ResourceRegistration.register_all ".", "resource_fixtures/good"
-    ResourceRegistration.route_all
     
-#    $stderr.puts ActionController::Routing::Routes.routes
+    $stderr.puts ActionController::Routing::Routes.routes
     
     prefix = "yast"
     
