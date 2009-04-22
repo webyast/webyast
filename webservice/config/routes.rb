@@ -1,4 +1,4 @@
-require "lib/resource"
+require "lib/resource_registration"
   
 # routing is generated from the 'resources' database table
 # see config/initializers/resource_registration.rb for populating the database

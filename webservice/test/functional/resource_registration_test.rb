@@ -9,7 +9,7 @@ require 'test_helper'
 
 class ResourceRegistrationTest < ActiveSupport::TestCase
 
-  require "lib/resource"
+  require "lib/resource_registration"
   
   fixtures :domains, :resources
   
