@@ -1,0 +1,1912 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE policyconfig PUBLIC
+ "-//freedesktop//DTD PolicyKit Policy Configuration 1.0//EN"
+ "http://www.freedesktop.org/standards/PolicyKit/1.0/policyconfig.dtd">
+<policyconfig>
+
+  <vendor>YaST Webservice Project</vendor>
+  <vendor_url>http://en.opensuse.org/YAST</vendor_url>
+
+<!--
+Rights for YaST command line interface
+-->
+
+  <action id="org.opensuse.yast.commandline.read-yastmodulelist">
+    <description>Reading a list of all available YaST modules</description>
+    <message>Authentication is required to read the list of available YaST modules.</message>
+    <defaults>
+      <allow_inactive>no</allow_inactive>
+      <allow_active>no</allow_active>
+    </defaults>
+  </action>
+  <action id="org.opensuse.yast.commandline.read">
+    <description>Reading parameters of ALL YaST modules</description>
+    <message>Authentication is required to read YaST module parameters</message>
+    <defaults>
+      <allow_inactive>no</allow_inactive>
+      <allow_active>no</allow_active>
+    </defaults>
+  </action>
+  <action id="org.opensuse.yast.commandline.execute">
+    <description>Permission to run ALL YaST modules</description>
+    <message>Authentication is required to run ALL YaST modules</message>
+    <defaults>
+      <allow_inactive>no</allow_inactive>
+      <allow_active>no</allow_active>
+    </defaults>
+  </action>
+
+  <action id="org.opensuse.yast.commandline.read-nfs-server">
+    <description>Reading parameters of YaST module "nfs_server"</description>
+    <message>Authentication is required to get YaST nfs_server parameters</message>
+    <defaults>
+      <allow_inactive>no</allow_inactive>
+      <allow_active>no</allow_active>
+    </defaults>
+  </action>
+  <action id="org.opensuse.yast.commandline.execute-nfs-server">
+    <description>Permission to run YaST module "nfs_server"</description>
+    <message>Authentication is required to run YaST module "nfs_server"</message>
+    <defaults>
+      <allow_inactive>no</allow_inactive>
+      <allow_active>no</allow_active>
+    </defaults>
+  </action>
+  <action id="org.opensuse.yast.commandline.read-squidguard">
+    <description>Reading parameters of YaST module "squidguard"</description>
+    <message>Authentication is required to get YaST squidguard parameters</message>
+    <defaults>
+      <allow_inactive>no</allow_inactive>
+      <allow_active>no</allow_active>
+    </defaults>
+  </action>
+  <action id="org.opensuse.yast.commandline.execute-squidguard">
+    <description>Permission to run YaST module "squidguard"</description>
+    <message>Authentication is required to run YaST module "squidguard"</message>
+    <defaults>
+      <allow_inactive>no</allow_inactive>
+      <allow_active>no</allow_active>
+    </defaults>
+  </action>
+  <action id="org.opensuse.yast.commandline.read-hwinfo">
+    <description>Reading parameters of YaST module "hwinfo"</description>
+    <message>Authentication is required to get YaST hwinfo parameters</message>
+    <defaults>
+      <allow_inactive>no</allow_inactive>
+      <allow_active>no</allow_active>
+    </defaults>
+  </action>
+  <action id="org.opensuse.yast.commandline.execute-hwinfo">
+    <description>Permission to run YaST module "hwinfo"</description>
+    <message>Authentication is required to run YaST module "hwinfo"</message>
+    <defaults>
+      <allow_inactive>no</allow_inactive>
+      <allow_active>no</allow_active>
+    </defaults>
+  </action>
+  <action id="org.opensuse.yast.commandline.read-modem">
+    <description>Reading parameters of YaST module "modem"</description>
+    <message>Authentication is required to get YaST modem parameters</message>
+    <defaults>
+      <allow_inactive>no</allow_inactive>
+      <allow_active>no</allow_active>
+    </defaults>
+  </action>
+  <action id="org.opensuse.yast.commandline.execute-modem">
+    <description>Permission to run YaST module "modem"</description>
+    <message>Authentication is required to run YaST module "modem"</message>
+    <defaults>
+      <allow_inactive>no</allow_inactive>
+      <allow_active>no</allow_active>
+    </defaults>
+  </action>
+  <action id="org.opensuse.yast.commandline.read-kdump">
+    <description>Reading parameters of YaST module "kdump"</description>
+    <message>Authentication is required to get YaST kdump parameters</message>
+    <defaults>
+      <allow_inactive>no</allow_inactive>
+      <allow_active>no</allow_active>
+    </defaults>
+  </action>
+  <action id="org.opensuse.yast.commandline.execute-kdump">
+    <description>Permission to run YaST module "kdump"</description>
+    <message>Authentication is required to run YaST module "kdump"</message>
+    <defaults>
+      <allow_inactive>no</allow_inactive>
+      <allow_active>no</allow_active>
+    </defaults>
+  </action>
+  <action id="org.opensuse.yast.commandline.read-samba-client">
+    <description>Reading parameters of YaST module "samba-client"</description>
+    <message>Authentication is required to get YaST samba-client parameters</message>
+    <defaults>
+      <allow_inactive>no</allow_inactive>
+      <allow_active>no</allow_active>
+    </defaults>
+  </action>
+  <action id="org.opensuse.yast.commandline.execute-samba-client">
+    <description>Permission to run YaST module "samba-client"</description>
+    <message>Authentication is required to run YaST module "samba-client"</message>
+    <defaults>
+      <allow_inactive>no</allow_inactive>
+      <allow_active>no</allow_active>
+    </defaults>
+  </action>
+  <action id="org.opensuse.yast.commandline.read-dhcp-server">
+    <description>Reading parameters of YaST module "dhcp-server"</description>
+    <message>Authentication is required to get YaST dhcp-server parameters</message>
+    <defaults>
+      <allow_inactive>no</allow_inactive>
+      <allow_active>no</allow_active>
+    </defaults>
+  </action>
+  <action id="org.opensuse.yast.commandline.execute-dhcp-server">
+    <description>Permission to run YaST module "dhcp-server"</description>
+    <message>Authentication is required to run YaST module "dhcp-server"</message>
+    <defaults>
+      <allow_inactive>no</allow_inactive>
+      <allow_active>no</allow_active>
+    </defaults>
+  </action>
+  <action id="org.opensuse.yast.commandline.read-autofs">
+    <description>Reading parameters of YaST module "autofs"</description>
+    <message>Authentication is required to get YaST autofs parameters</message>
+    <defaults>
+      <allow_inactive>no</allow_inactive>
+      <allow_active>no</allow_active>
+    </defaults>
+  </action>
+  <action id="org.opensuse.yast.commandline.execute-autofs">
+    <description>Permission to run YaST module "autofs"</description>
+    <message>Authentication is required to run YaST module "autofs"</message>
+    <defaults>
+      <allow_inactive>no</allow_inactive>
+      <allow_active>no</allow_active>
+    </defaults>
+  </action>
+  <action id="org.opensuse.yast.commandline.read-provider">
+    <description>Reading parameters of YaST module "provider"</description>
+    <message>Authentication is required to get YaST provider parameters</message>
+    <defaults>
+      <allow_inactive>no</allow_inactive>
+      <allow_active>no</allow_active>
+    </defaults>
+  </action>
+  <action id="org.opensuse.yast.commandline.execute-provider">
+    <description>Permission to run YaST module "provider"</description>
+    <message>Authentication is required to run YaST module "provider"</message>
+    <defaults>
+      <allow_inactive>no</allow_inactive>
+      <allow_active>no</allow_active>
+    </defaults>
+  </action>
+  <action id="org.opensuse.yast.commandline.read-joystick">
+    <description>Reading parameters of YaST module "joystick"</description>
+    <message>Authentication is required to get YaST joystick parameters</message>
+    <defaults>
+      <allow_inactive>no</allow_inactive>
+      <allow_active>no</allow_active>
+    </defaults>
+  </action>
+  <action id="org.opensuse.yast.commandline.execute-joystick">
+    <description>Permission to run YaST module "joystick"</description>
+    <message>Authentication is required to run YaST module "joystick"</message>
+    <defaults>
+      <allow_inactive>no</allow_inactive>
+      <allow_active>no</allow_active>
+    </defaults>
+  </action>
+  <action id="org.opensuse.yast.commandline.read-profile-manager">
+    <description>Reading parameters of YaST module "profile-manager"</description>
+    <message>Authentication is required to get YaST profile-manager parameters</message>
+    <defaults>
+      <allow_inactive>no</allow_inactive>
+      <allow_active>no</allow_active>
+    </defaults>
+  </action>
+  <action id="org.opensuse.yast.commandline.execute-profile-manager">
+    <description>Permission to run YaST module "profile-manager"</description>
+    <message>Authentication is required to run YaST module "profile-manager"</message>
+    <defaults>
+      <allow_inactive>no</allow_inactive>
+      <allow_active>no</allow_active>
+    </defaults>
+  </action>
+  <action id="org.opensuse.yast.commandline.read-kerberos-client">
+    <description>Reading parameters of YaST module "kerberos-client"</description>
+    <message>Authentication is required to get YaST kerberos-client parameters</message>
+    <defaults>
+      <allow_inactive>no</allow_inactive>
+      <allow_active>no</allow_active>
+    </defaults>
+  </action>
+  <action id="org.opensuse.yast.commandline.execute-kerberos-client">
+    <description>Permission to run YaST module "kerberos-client"</description>
+    <message>Authentication is required to run YaST module "kerberos-client"</message>
+    <defaults>
+      <allow_inactive>no</allow_inactive>
+      <allow_active>no</allow_active>
+    </defaults>
+  </action>
+  <action id="org.opensuse.yast.commandline.read-disk">
+    <description>Reading parameters of YaST module "disk"</description>
+    <message>Authentication is required to get YaST disk parameters</message>
+    <defaults>
+      <allow_inactive>no</allow_inactive>
+      <allow_active>no</allow_active>
+    </defaults>
+  </action>
+  <action id="org.opensuse.yast.commandline.execute-disk">
+    <description>Permission to run YaST module "disk"</description>
+    <message>Authentication is required to run YaST module "disk"</message>
+    <defaults>
+      <allow_inactive>no</allow_inactive>
+      <allow_active>no</allow_active>
+    </defaults>
+  </action>
+  <action id="org.opensuse.yast.commandline.read-sd-editprofile">
+    <description>Reading parameters of YaST module "SD_EditProfile"</description>
+    <message>Authentication is required to get YaST SD_EditProfile parameters</message>
+    <defaults>
+      <allow_inactive>no</allow_inactive>
+      <allow_active>no</allow_active>
+    </defaults>
+  </action>
+  <action id="org.opensuse.yast.commandline.execute-sd-editprofile">
+    <description>Permission to run YaST module "SD_EditProfile"</description>
+    <message>Authentication is required to run YaST module "SD_EditProfile"</message>
+    <defaults>
+      <allow_inactive>no</allow_inactive>
+      <allow_active>no</allow_active>
+    </defaults>
+  </action>
+  <action id="org.opensuse.yast.commandline.read-remote">
+    <description>Reading parameters of YaST module "remote"</description>
+    <message>Authentication is required to get YaST remote parameters</message>
+    <defaults>
+      <allow_inactive>no</allow_inactive>
+      <allow_active>no</allow_active>
+    </defaults>
+  </action>
+  <action id="org.opensuse.yast.commandline.execute-remote">
+    <description>Permission to run YaST module "remote"</description>
+    <message>Authentication is required to run YaST module "remote"</message>
+    <defaults>
+      <allow_inactive>no</allow_inactive>
+      <allow_active>no</allow_active>
+    </defaults>
+  </action>
+  <action id="org.opensuse.yast.commandline.read-inetd">
+    <description>Reading parameters of YaST module "inetd"</description>
+    <message>Authentication is required to get YaST inetd parameters</message>
+    <defaults>
+      <allow_inactive>no</allow_inactive>
+      <allow_active>no</allow_active>
+    </defaults>
+  </action>
+  <action id="org.opensuse.yast.commandline.execute-inetd">
+    <description>Permission to run YaST module "inetd"</description>
+    <message>Authentication is required to run YaST module "inetd"</message>
+    <defaults>
+      <allow_inactive>no</allow_inactive>
+      <allow_active>no</allow_active>
+    </defaults>
+  </action>
+  <action id="org.opensuse.yast.commandline.read-lvm-config">
+    <description>Reading parameters of YaST module "lvm_config"</description>
+    <message>Authentication is required to get YaST lvm_config parameters</message>
+    <defaults>
+      <allow_inactive>no</allow_inactive>
+      <allow_active>no</allow_active>
+    </defaults>
+  </action>
+  <action id="org.opensuse.yast.commandline.execute-lvm-config">
+    <description>Permission to run YaST module "lvm_config"</description>
+    <message>Authentication is required to run YaST module "lvm_config"</message>
+    <defaults>
+      <allow_inactive>no</allow_inactive>
+      <allow_active>no</allow_active>
+    </defaults>
+  </action>
+  <action id="org.opensuse.yast.commandline.read-multipath">
+    <description>Reading parameters of YaST module "multipath"</description>
+    <message>Authentication is required to get YaST multipath parameters</message>
+    <defaults>
+      <allow_inactive>no</allow_inactive>
+      <allow_active>no</allow_active>
+    </defaults>
+  </action>
+  <action id="org.opensuse.yast.commandline.execute-multipath">
+    <description>Permission to run YaST module "multipath"</description>
+    <message>Authentication is required to run YaST module "multipath"</message>
+    <defaults>
+      <allow_inactive>no</allow_inactive>
+      <allow_active>no</allow_active>
+    </defaults>
+  </action>
+  <action id="org.opensuse.yast.commandline.read-ldap">
+    <description>Reading parameters of YaST module "ldap"</description>
+    <message>Authentication is required to get YaST ldap parameters</message>
+    <defaults>
+      <allow_inactive>no</allow_inactive>
+      <allow_active>no</allow_active>
+    </defaults>
+  </action>
+  <action id="org.opensuse.yast.commandline.execute-ldap">
+    <description>Permission to run YaST module "ldap"</description>
+    <message>Authentication is required to run YaST module "ldap"</message>
+    <defaults>
+      <allow_inactive>no</allow_inactive>
+      <allow_active>no</allow_active>
+    </defaults>
+  </action>
+  <action id="org.opensuse.yast.commandline.read-certify">
+    <description>Reading parameters of YaST module "certify"</description>
+    <message>Authentication is required to get YaST certify parameters</message>
+    <defaults>
+      <allow_inactive>no</allow_inactive>
+      <allow_active>no</allow_active>
+    </defaults>
+  </action>
+  <action id="org.opensuse.yast.commandline.execute-certify">
+    <description>Permission to run YaST module "certify"</description>
+    <message>Authentication is required to run YaST module "certify"</message>
+    <defaults>
+      <allow_inactive>no</allow_inactive>
+      <allow_active>no</allow_active>
+    </defaults>
+  </action>
+  <action id="org.opensuse.yast.commandline.read-answering-machine">
+    <description>Reading parameters of YaST module "answering_machine"</description>
+    <message>Authentication is required to get YaST answering_machine parameters</message>
+    <defaults>
+      <allow_inactive>no</allow_inactive>
+      <allow_active>no</allow_active>
+    </defaults>
+  </action>
+  <action id="org.opensuse.yast.commandline.execute-answering-machine">
+    <description>Permission to run YaST module "answering_machine"</description>
+    <message>Authentication is required to run YaST module "answering_machine"</message>
+    <defaults>
+      <allow_inactive>no</allow_inactive>
+      <allow_active>no</allow_active>
+    </defaults>
+  </action>
+  <action id="org.opensuse.yast.commandline.read-common-cert">
+    <description>Reading parameters of YaST module "common_cert"</description>
+    <message>Authentication is required to get YaST common_cert parameters</message>
+    <defaults>
+      <allow_inactive>no</allow_inactive>
+      <allow_active>no</allow_active>
+    </defaults>
+  </action>
+  <action id="org.opensuse.yast.commandline.execute-common-cert">
+    <description>Permission to run YaST module "common_cert"</description>
+    <message>Authentication is required to run YaST module "common_cert"</message>
+    <defaults>
+      <allow_inactive>no</allow_inactive>
+      <allow_active>no</allow_active>
+    </defaults>
+  </action>
+  <action id="org.opensuse.yast.commandline.read-pervasive-postgres">
+    <description>Reading parameters of YaST module "pervasive_postgres"</description>
+    <message>Authentication is required to get YaST pervasive_postgres parameters</message>
+    <defaults>
+      <allow_inactive>no</allow_inactive>
+      <allow_active>no</allow_active>
+    </defaults>
+  </action>
+  <action id="org.opensuse.yast.commandline.execute-pervasive-postgres">
+    <description>Permission to run YaST module "pervasive_postgres"</description>
+    <message>Authentication is required to run YaST module "pervasive_postgres"</message>
+    <defaults>
+      <allow_inactive>no</allow_inactive>
+      <allow_active>no</allow_active>
+    </defaults>
+  </action>
+  <action id="org.opensuse.yast.commandline.read-ntsutils">
+    <description>Reading parameters of YaST module "ntsutils"</description>
+    <message>Authentication is required to get YaST ntsutils parameters</message>
+    <defaults>
+      <allow_inactive>no</allow_inactive>
+      <allow_active>no</allow_active>
+    </defaults>
+  </action>
+  <action id="org.opensuse.yast.commandline.execute-ntsutils">
+    <description>Permission to run YaST module "ntsutils"</description>
+    <message>Authentication is required to run YaST module "ntsutils"</message>
+    <defaults>
+      <allow_inactive>no</allow_inactive>
+      <allow_active>no</allow_active>
+    </defaults>
+  </action>
+  <action id="org.opensuse.yast.commandline.read-sshd">
+    <description>Reading parameters of YaST module "sshd"</description>
+    <message>Authentication is required to get YaST sshd parameters</message>
+    <defaults>
+      <allow_inactive>no</allow_inactive>
+      <allow_active>no</allow_active>
+    </defaults>
+  </action>
+  <action id="org.opensuse.yast.commandline.execute-sshd">
+    <description>Permission to run YaST module "sshd"</description>
+    <message>Authentication is required to run YaST module "sshd"</message>
+    <defaults>
+      <allow_inactive>no</allow_inactive>
+      <allow_active>no</allow_active>
+    </defaults>
+  </action>
+  <action id="org.opensuse.yast.commandline.read-sudo">
+    <description>Reading parameters of YaST module "sudo"</description>
+    <message>Authentication is required to get YaST sudo parameters</message>
+    <defaults>
+      <allow_inactive>no</allow_inactive>
+      <allow_active>no</allow_active>
+    </defaults>
+  </action>
+  <action id="org.opensuse.yast.commandline.execute-sudo">
+    <description>Permission to run YaST module "sudo"</description>
+    <message>Authentication is required to run YaST module "sudo"</message>
+    <defaults>
+      <allow_inactive>no</allow_inactive>
+      <allow_active>no</allow_active>
+    </defaults>
+  </action>
+  <action id="org.opensuse.yast.commandline.read-you-server">
+    <description>Reading parameters of YaST module "you_server"</description>
+    <message>Authentication is required to get YaST you_server parameters</message>
+    <defaults>
+      <allow_inactive>no</allow_inactive>
+      <allow_active>no</allow_active>
+    </defaults>
+  </action>
+  <action id="org.opensuse.yast.commandline.execute-you-server">
+    <description>Permission to run YaST module "you_server"</description>
+    <message>Authentication is required to run YaST module "you_server"</message>
+    <defaults>
+      <allow_inactive>no</allow_inactive>
+      <allow_active>no</allow_active>
+    </defaults>
+  </action>
+  <action id="org.opensuse.yast.commandline.read-network">
+    <description>Reading parameters of YaST module "network"</description>
+    <message>Authentication is required to get YaST network parameters</message>
+    <defaults>
+      <allow_inactive>no</allow_inactive>
+      <allow_active>no</allow_active>
+    </defaults>
+  </action>
+  <action id="org.opensuse.yast.commandline.execute-network">
+    <description>Permission to run YaST module "network"</description>
+    <message>Authentication is required to run YaST module "network"</message>
+    <defaults>
+      <allow_inactive>no</allow_inactive>
+      <allow_active>no</allow_active>
+    </defaults>
+  </action>
+  <action id="org.opensuse.yast.commandline.read-mail-server">
+    <description>Reading parameters of YaST module "mail-server"</description>
+    <message>Authentication is required to get YaST mail-server parameters</message>
+    <defaults>
+      <allow_inactive>no</allow_inactive>
+      <allow_active>no</allow_active>
+    </defaults>
+  </action>
+  <action id="org.opensuse.yast.commandline.execute-mail-server">
+    <description>Permission to run YaST module "mail-server"</description>
+    <message>Authentication is required to run YaST module "mail-server"</message>
+    <defaults>
+      <allow_inactive>no</allow_inactive>
+      <allow_active>no</allow_active>
+    </defaults>
+  </action>
+  <action id="org.opensuse.yast.commandline.read-ca-mgm">
+    <description>Reading parameters of YaST module "ca_mgm"</description>
+    <message>Authentication is required to get YaST ca_mgm parameters</message>
+    <defaults>
+      <allow_inactive>no</allow_inactive>
+      <allow_active>no</allow_active>
+    </defaults>
+  </action>
+  <action id="org.opensuse.yast.commandline.execute-ca-mgm">
+    <description>Permission to run YaST module "ca_mgm"</description>
+    <message>Authentication is required to run YaST module "ca_mgm"</message>
+    <defaults>
+      <allow_inactive>no</allow_inactive>
+      <allow_active>no</allow_active>
+    </defaults>
+  </action>
+  <action id="org.opensuse.yast.commandline.read-mail">
+    <description>Reading parameters of YaST module "mail"</description>
+    <message>Authentication is required to get YaST mail parameters</message>
+    <defaults>
+      <allow_inactive>no</allow_inactive>
+      <allow_active>no</allow_active>
+    </defaults>
+  </action>
+  <action id="org.opensuse.yast.commandline.execute-mail">
+    <description>Permission to run YaST module "mail"</description>
+    <message>Authentication is required to run YaST module "mail"</message>
+    <defaults>
+      <allow_inactive>no</allow_inactive>
+      <allow_active>no</allow_active>
+    </defaults>
+  </action>
+  <action id="org.opensuse.yast.commandline.read-repositories">
+    <description>Reading parameters of YaST module "repositories"</description>
+    <message>Authentication is required to get YaST repositories parameters</message>
+    <defaults>
+      <allow_inactive>no</allow_inactive>
+      <allow_active>no</allow_active>
+    </defaults>
+  </action>
+  <action id="org.opensuse.yast.commandline.execute-repositories">
+    <description>Permission to run YaST module "repositories"</description>
+    <message>Authentication is required to run YaST module "repositories"</message>
+    <defaults>
+      <allow_inactive>no</allow_inactive>
+      <allow_active>no</allow_active>
+    </defaults>
+  </action>
+  <action id="org.opensuse.yast.commandline.read-isdn">
+    <description>Reading parameters of YaST module "isdn"</description>
+    <message>Authentication is required to get YaST isdn parameters</message>
+    <defaults>
+      <allow_inactive>no</allow_inactive>
+      <allow_active>no</allow_active>
+    </defaults>
+  </action>
+  <action id="org.opensuse.yast.commandline.execute-isdn">
+    <description>Permission to run YaST module "isdn"</description>
+    <message>Authentication is required to run YaST module "isdn"</message>
+    <defaults>
+      <allow_inactive>no</allow_inactive>
+      <allow_active>no</allow_active>
+    </defaults>
+  </action>
+  <action id="org.opensuse.yast.commandline.read-timezone">
+    <description>Reading parameters of YaST module "timezone"</description>
+    <message>Authentication is required to get YaST timezone parameters</message>
+    <defaults>
+      <allow_inactive>no</allow_inactive>
+      <allow_active>no</allow_active>
+    </defaults>
+  </action>
+  <action id="org.opensuse.yast.commandline.execute-timezone">
+    <description>Permission to run YaST module "timezone"</description>
+    <message>Authentication is required to run YaST module "timezone"</message>
+    <defaults>
+      <allow_inactive>no</allow_inactive>
+      <allow_active>no</allow_active>
+    </defaults>
+  </action>
+  <action id="org.opensuse.yast.commandline.read-hpc">
+    <description>Reading parameters of YaST module "hpc"</description>
+    <message>Authentication is required to get YaST hpc parameters</message>
+    <defaults>
+      <allow_inactive>no</allow_inactive>
+      <allow_active>no</allow_active>
+    </defaults>
+  </action>
+  <action id="org.opensuse.yast.commandline.execute-hpc">
+    <description>Permission to run YaST module "hpc"</description>
+    <message>Authentication is required to run YaST module "hpc"</message>
+    <defaults>
+      <allow_inactive>no</allow_inactive>
+      <allow_active>no</allow_active>
+    </defaults>
+  </action>
+  <action id="org.opensuse.yast.commandline.read-online-update-setup">
+    <description>Reading parameters of YaST module "online_update_setup"</description>
+    <message>Authentication is required to get YaST online_update_setup parameters</message>
+    <defaults>
+      <allow_inactive>no</allow_inactive>
+      <allow_active>no</allow_active>
+    </defaults>
+  </action>
+  <action id="org.opensuse.yast.commandline.execute-online-update-setup">
+    <description>Permission to run YaST module "online_update_setup"</description>
+    <message>Authentication is required to run YaST module "online_update_setup"</message>
+    <defaults>
+      <allow_inactive>no</allow_inactive>
+      <allow_active>no</allow_active>
+    </defaults>
+  </action>
+  <action id="org.opensuse.yast.commandline.read-update">
+    <description>Reading parameters of YaST module "update"</description>
+    <message>Authentication is required to get YaST update parameters</message>
+    <defaults>
+      <allow_inactive>no</allow_inactive>
+      <allow_active>no</allow_active>
+    </defaults>
+  </action>
+  <action id="org.opensuse.yast.commandline.execute-update">
+    <description>Permission to run YaST module "update"</description>
+    <message>Authentication is required to run YaST module "update"</message>
+    <defaults>
+      <allow_inactive>no</allow_inactive>
+      <allow_active>no</allow_active>
+    </defaults>
+  </action>
+  <action id="org.opensuse.yast.commandline.read-scanner">
+    <description>Reading parameters of YaST module "scanner"</description>
+    <message>Authentication is required to get YaST scanner parameters</message>
+    <defaults>
+      <allow_inactive>no</allow_inactive>
+      <allow_active>no</allow_active>
+    </defaults>
+  </action>
+  <action id="org.opensuse.yast.commandline.execute-scanner">
+    <description>Permission to run YaST module "scanner"</description>
+    <message>Authentication is required to run YaST module "scanner"</message>
+    <defaults>
+      <allow_inactive>no</allow_inactive>
+      <allow_active>no</allow_active>
+    </defaults>
+  </action>
+  <action id="org.opensuse.yast.commandline.read-sd-deleteprofile">
+    <description>Reading parameters of YaST module "SD_DeleteProfile"</description>
+    <message>Authentication is required to get YaST SD_DeleteProfile parameters</message>
+    <defaults>
+      <allow_inactive>no</allow_inactive>
+      <allow_active>no</allow_active>
+    </defaults>
+  </action>
+  <action id="org.opensuse.yast.commandline.execute-sd-deleteprofile">
+    <description>Permission to run YaST module "SD_DeleteProfile"</description>
+    <message>Authentication is required to run YaST module "SD_DeleteProfile"</message>
+    <defaults>
+      <allow_inactive>no</allow_inactive>
+      <allow_active>no</allow_active>
+    </defaults>
+  </action>
+  <action id="org.opensuse.yast.commandline.read-wol">
+    <description>Reading parameters of YaST module "wol"</description>
+    <message>Authentication is required to get YaST wol parameters</message>
+    <defaults>
+      <allow_inactive>no</allow_inactive>
+      <allow_active>no</allow_active>
+    </defaults>
+  </action>
+  <action id="org.opensuse.yast.commandline.execute-wol">
+    <description>Permission to run YaST module "wol"</description>
+    <message>Authentication is required to run YaST module "wol"</message>
+    <defaults>
+      <allow_inactive>no</allow_inactive>
+      <allow_active>no</allow_active>
+    </defaults>
+  </action>
+  <action id="org.opensuse.yast.commandline.read-ntp-client">
+    <description>Reading parameters of YaST module "ntp-client"</description>
+    <message>Authentication is required to get YaST ntp-client parameters</message>
+    <defaults>
+      <allow_inactive>no</allow_inactive>
+      <allow_active>no</allow_active>
+    </defaults>
+  </action>
+  <action id="org.opensuse.yast.commandline.execute-ntp-client">
+    <description>Permission to run YaST module "ntp-client"</description>
+    <message>Authentication is required to run YaST module "ntp-client"</message>
+    <defaults>
+      <allow_inactive>no</allow_inactive>
+      <allow_active>no</allow_active>
+    </defaults>
+  </action>
+  <action id="org.opensuse.yast.commandline.read-http-server">
+    <description>Reading parameters of YaST module "http-server"</description>
+    <message>Authentication is required to get YaST http-server parameters</message>
+    <defaults>
+      <allow_inactive>no</allow_inactive>
+      <allow_active>no</allow_active>
+    </defaults>
+  </action>
+  <action id="org.opensuse.yast.commandline.execute-http-server">
+    <description>Permission to run YaST module "http-server"</description>
+    <message>Authentication is required to run YaST module "http-server"</message>
+    <defaults>
+      <allow_inactive>no</allow_inactive>
+      <allow_active>no</allow_active>
+    </defaults>
+  </action>
+  <action id="org.opensuse.yast.commandline.read-kiwi">
+    <description>Reading parameters of YaST module "kiwi"</description>
+    <message>Authentication is required to get YaST kiwi parameters</message>
+    <defaults>
+      <allow_inactive>no</allow_inactive>
+      <allow_active>no</allow_active>
+    </defaults>
+  </action>
+  <action id="org.opensuse.yast.commandline.execute-kiwi">
+    <description>Permission to run YaST module "kiwi"</description>
+    <message>Authentication is required to run YaST module "kiwi"</message>
+    <defaults>
+      <allow_inactive>no</allow_inactive>
+      <allow_active>no</allow_active>
+    </defaults>
+  </action>
+  <action id="org.opensuse.yast.commandline.read-dirinstall">
+    <description>Reading parameters of YaST module "dirinstall"</description>
+    <message>Authentication is required to get YaST dirinstall parameters</message>
+    <defaults>
+      <allow_inactive>no</allow_inactive>
+      <allow_active>no</allow_active>
+    </defaults>
+  </action>
+  <action id="org.opensuse.yast.commandline.execute-dirinstall">
+    <description>Permission to run YaST module "dirinstall"</description>
+    <message>Authentication is required to run YaST module "dirinstall"</message>
+    <defaults>
+      <allow_inactive>no</allow_inactive>
+      <allow_active>no</allow_active>
+    </defaults>
+  </action>
+  <action id="org.opensuse.yast.commandline.read-ldap-server">
+    <description>Reading parameters of YaST module "ldap-server"</description>
+    <message>Authentication is required to get YaST ldap-server parameters</message>
+    <defaults>
+      <allow_inactive>no</allow_inactive>
+      <allow_active>no</allow_active>
+    </defaults>
+  </action>
+  <action id="org.opensuse.yast.commandline.execute-ldap-server">
+    <description>Permission to run YaST module "ldap-server"</description>
+    <message>Authentication is required to run YaST module "ldap-server"</message>
+    <defaults>
+      <allow_inactive>no</allow_inactive>
+      <allow_active>no</allow_active>
+    </defaults>
+  </action>
+  <action id="org.opensuse.yast.commandline.read-security">
+    <description>Reading parameters of YaST module "security"</description>
+    <message>Authentication is required to get YaST security parameters</message>
+    <defaults>
+      <allow_inactive>no</allow_inactive>
+      <allow_active>no</allow_active>
+    </defaults>
+  </action>
+  <action id="org.opensuse.yast.commandline.execute-security">
+    <description>Permission to run YaST module "security"</description>
+    <message>Authentication is required to run YaST module "security"</message>
+    <defaults>
+      <allow_inactive>no</allow_inactive>
+      <allow_active>no</allow_active>
+    </defaults>
+  </action>
+  <action id="org.opensuse.yast.commandline.read-keyboard">
+    <description>Reading parameters of YaST module "keyboard"</description>
+    <message>Authentication is required to get YaST keyboard parameters</message>
+    <defaults>
+      <allow_inactive>no</allow_inactive>
+      <allow_active>no</allow_active>
+    </defaults>
+  </action>
+  <action id="org.opensuse.yast.commandline.execute-keyboard">
+    <description>Permission to run YaST module "keyboard"</description>
+    <message>Authentication is required to run YaST module "keyboard"</message>
+    <defaults>
+      <allow_inactive>no</allow_inactive>
+      <allow_active>no</allow_active>
+    </defaults>
+  </action>
+  <action id="org.opensuse.yast.commandline.read-irda">
+    <description>Reading parameters of YaST module "irda"</description>
+    <message>Authentication is required to get YaST irda parameters</message>
+    <defaults>
+      <allow_inactive>no</allow_inactive>
+      <allow_active>no</allow_active>
+    </defaults>
+  </action>
+  <action id="org.opensuse.yast.commandline.execute-irda">
+    <description>Permission to run YaST module "irda"</description>
+    <message>Authentication is required to run YaST module "irda"</message>
+    <defaults>
+      <allow_inactive>no</allow_inactive>
+      <allow_active>no</allow_active>
+    </defaults>
+  </action>
+  <action id="org.opensuse.yast.commandline.read-printer">
+    <description>Reading parameters of YaST module "printer"</description>
+    <message>Authentication is required to get YaST printer parameters</message>
+    <defaults>
+      <allow_inactive>no</allow_inactive>
+      <allow_active>no</allow_active>
+    </defaults>
+  </action>
+  <action id="org.opensuse.yast.commandline.execute-printer">
+    <description>Permission to run YaST module "printer"</description>
+    <message>Authentication is required to run YaST module "printer"</message>
+    <defaults>
+      <allow_inactive>no</allow_inactive>
+      <allow_active>no</allow_active>
+    </defaults>
+  </action>
+  <action id="org.opensuse.yast.commandline.read-restore">
+    <description>Reading parameters of YaST module "restore"</description>
+    <message>Authentication is required to get YaST restore parameters</message>
+    <defaults>
+      <allow_inactive>no</allow_inactive>
+      <allow_active>no</allow_active>
+    </defaults>
+  </action>
+  <action id="org.opensuse.yast.commandline.execute-restore">
+    <description>Permission to run YaST module "restore"</description>
+    <message>Authentication is required to run YaST module "restore"</message>
+    <defaults>
+      <allow_inactive>no</allow_inactive>
+      <allow_active>no</allow_active>
+    </defaults>
+  </action>
+  <action id="org.opensuse.yast.commandline.read-backup">
+    <description>Reading parameters of YaST module "backup"</description>
+    <message>Authentication is required to get YaST backup parameters</message>
+    <defaults>
+      <allow_inactive>no</allow_inactive>
+      <allow_active>no</allow_active>
+    </defaults>
+  </action>
+  <action id="org.opensuse.yast.commandline.execute-backup">
+    <description>Permission to run YaST module "backup"</description>
+    <message>Authentication is required to run YaST module "backup"</message>
+    <defaults>
+      <allow_inactive>no</allow_inactive>
+      <allow_active>no</allow_active>
+    </defaults>
+  </action>
+  <action id="org.opensuse.yast.commandline.read-subdomain">
+    <description>Reading parameters of YaST module "subdomain"</description>
+    <message>Authentication is required to get YaST subdomain parameters</message>
+    <defaults>
+      <allow_inactive>no</allow_inactive>
+      <allow_active>no</allow_active>
+    </defaults>
+  </action>
+  <action id="org.opensuse.yast.commandline.execute-subdomain">
+    <description>Permission to run YaST module "subdomain"</description>
+    <message>Authentication is required to run YaST module "subdomain"</message>
+    <defaults>
+      <allow_inactive>no</allow_inactive>
+      <allow_active>no</allow_active>
+    </defaults>
+  </action>
+  <action id="org.opensuse.yast.commandline.read-instserver">
+    <description>Reading parameters of YaST module "instserver"</description>
+    <message>Authentication is required to get YaST instserver parameters</message>
+    <defaults>
+      <allow_inactive>no</allow_inactive>
+      <allow_active>no</allow_active>
+    </defaults>
+  </action>
+  <action id="org.opensuse.yast.commandline.execute-instserver">
+    <description>Permission to run YaST module "instserver"</description>
+    <message>Authentication is required to run YaST module "instserver"</message>
+    <defaults>
+      <allow_inactive>no</allow_inactive>
+      <allow_active>no</allow_active>
+    </defaults>
+  </action>
+  <action id="org.opensuse.yast.commandline.read-dsl">
+    <description>Reading parameters of YaST module "dsl"</description>
+    <message>Authentication is required to get YaST dsl parameters</message>
+    <defaults>
+      <allow_inactive>no</allow_inactive>
+      <allow_active>no</allow_active>
+    </defaults>
+  </action>
+  <action id="org.opensuse.yast.commandline.execute-dsl">
+    <description>Permission to run YaST module "dsl"</description>
+    <message>Authentication is required to run YaST module "dsl"</message>
+    <defaults>
+      <allow_inactive>no</allow_inactive>
+      <allow_active>no</allow_active>
+    </defaults>
+  </action>
+  <action id="org.opensuse.yast.commandline.read-cd-creator">
+    <description>Reading parameters of YaST module "cd-creator"</description>
+    <message>Authentication is required to get YaST cd-creator parameters</message>
+    <defaults>
+      <allow_inactive>no</allow_inactive>
+      <allow_active>no</allow_active>
+    </defaults>
+  </action>
+  <action id="org.opensuse.yast.commandline.execute-cd-creator">
+    <description>Permission to run YaST module "cd-creator"</description>
+    <message>Authentication is required to run YaST module "cd-creator"</message>
+    <defaults>
+      <allow_inactive>no</allow_inactive>
+      <allow_active>no</allow_active>
+    </defaults>
+  </action>
+  <action id="org.opensuse.yast.commandline.read-image-creator">
+    <description>Reading parameters of YaST module "image-creator"</description>
+    <message>Authentication is required to get YaST image-creator parameters</message>
+    <defaults>
+      <allow_inactive>no</allow_inactive>
+      <allow_active>no</allow_active>
+    </defaults>
+  </action>
+  <action id="org.opensuse.yast.commandline.execute-image-creator">
+    <description>Permission to run YaST module "image-creator"</description>
+    <message>Authentication is required to run YaST module "image-creator"</message>
+    <defaults>
+      <allow_inactive>no</allow_inactive>
+      <allow_active>no</allow_active>
+    </defaults>
+  </action>
+  <action id="org.opensuse.yast.commandline.read-autoyast">
+    <description>Reading parameters of YaST module "autoyast"</description>
+    <message>Authentication is required to get YaST autoyast parameters</message>
+    <defaults>
+      <allow_inactive>no</allow_inactive>
+      <allow_active>no</allow_active>
+    </defaults>
+  </action>
+  <action id="org.opensuse.yast.commandline.execute-autoyast">
+    <description>Permission to run YaST module "autoyast"</description>
+    <message>Authentication is required to run YaST module "autoyast"</message>
+    <defaults>
+      <allow_inactive>no</allow_inactive>
+      <allow_active>no</allow_active>
+    </defaults>
+  </action>
+  <action id="org.opensuse.yast.commandline.read-xen">
+    <description>Reading parameters of YaST module "xen"</description>
+    <message>Authentication is required to get YaST xen parameters</message>
+    <defaults>
+      <allow_inactive>no</allow_inactive>
+      <allow_active>no</allow_active>
+    </defaults>
+  </action>
+  <action id="org.opensuse.yast.commandline.execute-xen">
+    <description>Permission to run YaST module "xen"</description>
+    <message>Authentication is required to run YaST module "xen"</message>
+    <defaults>
+      <allow_inactive>no</allow_inactive>
+      <allow_active>no</allow_active>
+    </defaults>
+  </action>
+  <action id="org.opensuse.yast.commandline.read-casa">
+    <description>Reading parameters of YaST module "CASA"</description>
+    <message>Authentication is required to get YaST CASA parameters</message>
+    <defaults>
+      <allow_inactive>no</allow_inactive>
+      <allow_active>no</allow_active>
+    </defaults>
+  </action>
+  <action id="org.opensuse.yast.commandline.execute-casa">
+    <description>Permission to run YaST module "CASA"</description>
+    <message>Authentication is required to run YaST module "CASA"</message>
+    <defaults>
+      <allow_inactive>no</allow_inactive>
+      <allow_active>no</allow_active>
+    </defaults>
+  </action>
+  <action id="org.opensuse.yast.commandline.read-sd-addprofile">
+    <description>Reading parameters of YaST module "SD_AddProfile"</description>
+    <message>Authentication is required to get YaST SD_AddProfile parameters</message>
+    <defaults>
+      <allow_inactive>no</allow_inactive>
+      <allow_active>no</allow_active>
+    </defaults>
+  </action>
+  <action id="org.opensuse.yast.commandline.execute-sd-addprofile">
+    <description>Permission to run YaST module "SD_AddProfile"</description>
+    <message>Authentication is required to run YaST module "SD_AddProfile"</message>
+    <defaults>
+      <allow_inactive>no</allow_inactive>
+      <allow_active>no</allow_active>
+    </defaults>
+  </action>
+  <action id="org.opensuse.yast.commandline.read-iscsi-server">
+    <description>Reading parameters of YaST module "iscsi-server"</description>
+    <message>Authentication is required to get YaST iscsi-server parameters</message>
+    <defaults>
+      <allow_inactive>no</allow_inactive>
+      <allow_active>no</allow_active>
+    </defaults>
+  </action>
+  <action id="org.opensuse.yast.commandline.execute-iscsi-server">
+    <description>Permission to run YaST module "iscsi-server"</description>
+    <message>Authentication is required to run YaST module "iscsi-server"</message>
+    <defaults>
+      <allow_inactive>no</allow_inactive>
+      <allow_active>no</allow_active>
+    </defaults>
+  </action>
+  <action id="org.opensuse.yast.commandline.read-live-installer">
+    <description>Reading parameters of YaST module "live-installer"</description>
+    <message>Authentication is required to get YaST live-installer parameters</message>
+    <defaults>
+      <allow_inactive>no</allow_inactive>
+      <allow_active>no</allow_active>
+    </defaults>
+  </action>
+  <action id="org.opensuse.yast.commandline.execute-live-installer">
+    <description>Permission to run YaST module "live-installer"</description>
+    <message>Authentication is required to run YaST module "live-installer"</message>
+    <defaults>
+      <allow_inactive>no</allow_inactive>
+      <allow_active>no</allow_active>
+    </defaults>
+  </action>
+  <action id="org.opensuse.yast.commandline.read-dns-server">
+    <description>Reading parameters of YaST module "dns-server"</description>
+    <message>Authentication is required to get YaST dns-server parameters</message>
+    <defaults>
+      <allow_inactive>no</allow_inactive>
+      <allow_active>no</allow_active>
+    </defaults>
+  </action>
+  <action id="org.opensuse.yast.commandline.execute-dns-server">
+    <description>Permission to run YaST module "dns-server"</description>
+    <message>Authentication is required to run YaST module "dns-server"</message>
+    <defaults>
+      <allow_inactive>no</allow_inactive>
+      <allow_active>no</allow_active>
+    </defaults>
+  </action>
+  <action id="org.opensuse.yast.commandline.read-nfs">
+    <description>Reading parameters of YaST module "nfs"</description>
+    <message>Authentication is required to get YaST nfs parameters</message>
+    <defaults>
+      <allow_inactive>no</allow_inactive>
+      <allow_active>no</allow_active>
+    </defaults>
+  </action>
+  <action id="org.opensuse.yast.commandline.execute-nfs">
+    <description>Permission to run YaST module "nfs"</description>
+    <message>Authentication is required to run YaST module "nfs"</message>
+    <defaults>
+      <allow_inactive>no</allow_inactive>
+      <allow_active>no</allow_active>
+    </defaults>
+  </action>
+  <action id="org.opensuse.yast.commandline.read-host">
+    <description>Reading parameters of YaST module "host"</description>
+    <message>Authentication is required to get YaST host parameters</message>
+    <defaults>
+      <allow_inactive>no</allow_inactive>
+      <allow_active>no</allow_active>
+    </defaults>
+  </action>
+  <action id="org.opensuse.yast.commandline.execute-host">
+    <description>Permission to run YaST module "host"</description>
+    <message>Authentication is required to run YaST module "host"</message>
+    <defaults>
+      <allow_inactive>no</allow_inactive>
+      <allow_active>no</allow_active>
+    </defaults>
+  </action>
+  <action id="org.opensuse.yast.commandline.read-x11">
+    <description>Reading parameters of YaST module "x11"</description>
+    <message>Authentication is required to get YaST x11 parameters</message>
+    <defaults>
+      <allow_inactive>no</allow_inactive>
+      <allow_active>no</allow_active>
+    </defaults>
+  </action>
+  <action id="org.opensuse.yast.commandline.execute-x11">
+    <description>Permission to run YaST module "x11"</description>
+    <message>Authentication is required to run YaST module "x11"</message>
+    <defaults>
+      <allow_inactive>no</allow_inactive>
+      <allow_active>no</allow_active>
+    </defaults>
+  </action>
+  <action id="org.opensuse.yast.commandline.read-lan">
+    <description>Reading parameters of YaST module "lan"</description>
+    <message>Authentication is required to get YaST lan parameters</message>
+    <defaults>
+      <allow_inactive>no</allow_inactive>
+      <allow_active>no</allow_active>
+    </defaults>
+  </action>
+  <action id="org.opensuse.yast.commandline.execute-lan">
+    <description>Permission to run YaST module "lan"</description>
+    <message>Authentication is required to run YaST module "lan"</message>
+    <defaults>
+      <allow_inactive>no</allow_inactive>
+      <allow_active>no</allow_active>
+    </defaults>
+  </action>
+  <action id="org.opensuse.yast.commandline.read-online-update">
+    <description>Reading parameters of YaST module "online_update"</description>
+    <message>Authentication is required to get YaST online_update parameters</message>
+    <defaults>
+      <allow_inactive>no</allow_inactive>
+      <allow_active>no</allow_active>
+    </defaults>
+  </action>
+  <action id="org.opensuse.yast.commandline.execute-online-update">
+    <description>Permission to run YaST module "online_update"</description>
+    <message>Authentication is required to run YaST module "online_update"</message>
+    <defaults>
+      <allow_inactive>no</allow_inactive>
+      <allow_active>no</allow_active>
+    </defaults>
+  </action>
+  <action id="org.opensuse.yast.commandline.read-fax">
+    <description>Reading parameters of YaST module "fax"</description>
+    <message>Authentication is required to get YaST fax parameters</message>
+    <defaults>
+      <allow_inactive>no</allow_inactive>
+      <allow_active>no</allow_active>
+    </defaults>
+  </action>
+  <action id="org.opensuse.yast.commandline.execute-fax">
+    <description>Permission to run YaST module "fax"</description>
+    <message>Authentication is required to run YaST module "fax"</message>
+    <defaults>
+      <allow_inactive>no</allow_inactive>
+      <allow_active>no</allow_active>
+    </defaults>
+  </action>
+  <action id="org.opensuse.yast.commandline.read-nis">
+    <description>Reading parameters of YaST module "nis"</description>
+    <message>Authentication is required to get YaST nis parameters</message>
+    <defaults>
+      <allow_inactive>no</allow_inactive>
+      <allow_active>no</allow_active>
+    </defaults>
+  </action>
+  <action id="org.opensuse.yast.commandline.execute-nis">
+    <description>Permission to run YaST module "nis"</description>
+    <message>Authentication is required to run YaST module "nis"</message>
+    <defaults>
+      <allow_inactive>no</allow_inactive>
+      <allow_active>no</allow_active>
+    </defaults>
+  </action>
+  <action id="org.opensuse.yast.commandline.read-uml">
+    <description>Reading parameters of YaST module "uml"</description>
+    <message>Authentication is required to get YaST uml parameters</message>
+    <defaults>
+      <allow_inactive>no</allow_inactive>
+      <allow_active>no</allow_active>
+    </defaults>
+  </action>
+  <action id="org.opensuse.yast.commandline.execute-uml">
+    <description>Permission to run YaST module "uml"</description>
+    <message>Authentication is required to run YaST module "uml"</message>
+    <defaults>
+      <allow_inactive>no</allow_inactive>
+      <allow_active>no</allow_active>
+    </defaults>
+  </action>
+  <action id="org.opensuse.yast.commandline.read-ipsec">
+    <description>Reading parameters of YaST module "ipsec"</description>
+    <message>Authentication is required to get YaST ipsec parameters</message>
+    <defaults>
+      <allow_inactive>no</allow_inactive>
+      <allow_active>no</allow_active>
+    </defaults>
+  </action>
+  <action id="org.opensuse.yast.commandline.execute-ipsec">
+    <description>Permission to run YaST module "ipsec"</description>
+    <message>Authentication is required to run YaST module "ipsec"</message>
+    <defaults>
+      <allow_inactive>no</allow_inactive>
+      <allow_active>no</allow_active>
+    </defaults>
+  </action>
+  <action id="org.opensuse.yast.commandline.read-power-management">
+    <description>Reading parameters of YaST module "power-management"</description>
+    <message>Authentication is required to get YaST power-management parameters</message>
+    <defaults>
+      <allow_inactive>no</allow_inactive>
+      <allow_active>no</allow_active>
+    </defaults>
+  </action>
+  <action id="org.opensuse.yast.commandline.execute-power-management">
+    <description>Permission to run YaST module "power-management"</description>
+    <message>Authentication is required to run YaST module "power-management"</message>
+    <defaults>
+      <allow_inactive>no</allow_inactive>
+      <allow_active>no</allow_active>
+    </defaults>
+  </action>
+  <action id="org.opensuse.yast.commandline.read-reipl">
+    <description>Reading parameters of YaST module "reipl"</description>
+    <message>Authentication is required to get YaST reipl parameters</message>
+    <defaults>
+      <allow_inactive>no</allow_inactive>
+      <allow_active>no</allow_active>
+    </defaults>
+  </action>
+  <action id="org.opensuse.yast.commandline.execute-reipl">
+    <description>Permission to run YaST module "reipl"</description>
+    <message>Authentication is required to run YaST module "reipl"</message>
+    <defaults>
+      <allow_inactive>no</allow_inactive>
+      <allow_active>no</allow_active>
+    </defaults>
+  </action>
+  <action id="org.opensuse.yast.commandline.read-tftp-server">
+    <description>Reading parameters of YaST module "tftp-server"</description>
+    <message>Authentication is required to get YaST tftp-server parameters</message>
+    <defaults>
+      <allow_inactive>no</allow_inactive>
+      <allow_active>no</allow_active>
+    </defaults>
+  </action>
+  <action id="org.opensuse.yast.commandline.execute-tftp-server">
+    <description>Permission to run YaST module "tftp-server"</description>
+    <message>Authentication is required to run YaST module "tftp-server"</message>
+    <defaults>
+      <allow_inactive>no</allow_inactive>
+      <allow_active>no</allow_active>
+    </defaults>
+  </action>
+  <action id="org.opensuse.yast.commandline.read-language">
+    <description>Reading parameters of YaST module "language"</description>
+    <message>Authentication is required to get YaST language parameters</message>
+    <defaults>
+      <allow_inactive>no</allow_inactive>
+      <allow_active>no</allow_active>
+    </defaults>
+  </action>
+  <action id="org.opensuse.yast.commandline.execute-language">
+    <description>Permission to run YaST module "language"</description>
+    <message>Authentication is required to run YaST module "language"</message>
+    <defaults>
+      <allow_inactive>no</allow_inactive>
+      <allow_active>no</allow_active>
+    </defaults>
+  </action>
+  <action id="org.opensuse.yast.commandline.read-dasd">
+    <description>Reading parameters of YaST module "dasd"</description>
+    <message>Authentication is required to get YaST dasd parameters</message>
+    <defaults>
+      <allow_inactive>no</allow_inactive>
+      <allow_active>no</allow_active>
+    </defaults>
+  </action>
+  <action id="org.opensuse.yast.commandline.execute-dasd">
+    <description>Permission to run YaST module "dasd"</description>
+    <message>Authentication is required to run YaST module "dasd"</message>
+    <defaults>
+      <allow_inactive>no</allow_inactive>
+      <allow_active>no</allow_active>
+    </defaults>
+  </action>
+  <action id="org.opensuse.yast.commandline.read-sysconfig">
+    <description>Reading parameters of YaST module "sysconfig"</description>
+    <message>Authentication is required to get YaST sysconfig parameters</message>
+    <defaults>
+      <allow_inactive>no</allow_inactive>
+      <allow_active>no</allow_active>
+    </defaults>
+  </action>
+  <action id="org.opensuse.yast.commandline.execute-sysconfig">
+    <description>Permission to run YaST module "sysconfig"</description>
+    <message>Authentication is required to run YaST module "sysconfig"</message>
+    <defaults>
+      <allow_inactive>no</allow_inactive>
+      <allow_active>no</allow_active>
+    </defaults>
+  </action>
+  <action id="org.opensuse.yast.commandline.read-ldap-browser">
+    <description>Reading parameters of YaST module "ldap_browser"</description>
+    <message>Authentication is required to get YaST ldap_browser parameters</message>
+    <defaults>
+      <allow_inactive>no</allow_inactive>
+      <allow_active>no</allow_active>
+    </defaults>
+  </action>
+  <action id="org.opensuse.yast.commandline.execute-ldap-browser">
+    <description>Permission to run YaST module "ldap_browser"</description>
+    <message>Authentication is required to run YaST module "ldap_browser"</message>
+    <defaults>
+      <allow_inactive>no</allow_inactive>
+      <allow_active>no</allow_active>
+    </defaults>
+  </action>
+  <action id="org.opensuse.yast.commandline.read-xpram">
+    <description>Reading parameters of YaST module "xpram"</description>
+    <message>Authentication is required to get YaST xpram parameters</message>
+    <defaults>
+      <allow_inactive>no</allow_inactive>
+      <allow_active>no</allow_active>
+    </defaults>
+  </action>
+  <action id="org.opensuse.yast.commandline.execute-xpram">
+    <description>Permission to run YaST module "xpram"</description>
+    <message>Authentication is required to run YaST module "xpram"</message>
+    <defaults>
+      <allow_inactive>no</allow_inactive>
+      <allow_active>no</allow_active>
+    </defaults>
+  </action>
+  <action id="org.opensuse.yast.commandline.read-proxy">
+    <description>Reading parameters of YaST module "proxy"</description>
+    <message>Authentication is required to get YaST proxy parameters</message>
+    <defaults>
+      <allow_inactive>no</allow_inactive>
+      <allow_active>no</allow_active>
+    </defaults>
+  </action>
+  <action id="org.opensuse.yast.commandline.execute-proxy">
+    <description>Permission to run YaST module "proxy"</description>
+    <message>Authentication is required to run YaST module "proxy"</message>
+    <defaults>
+      <allow_inactive>no</allow_inactive>
+      <allow_active>no</allow_active>
+    </defaults>
+  </action>
+  <action id="org.opensuse.yast.commandline.read-add-on">
+    <description>Reading parameters of YaST module "add-on"</description>
+    <message>Authentication is required to get YaST add-on parameters</message>
+    <defaults>
+      <allow_inactive>no</allow_inactive>
+      <allow_active>no</allow_active>
+    </defaults>
+  </action>
+  <action id="org.opensuse.yast.commandline.execute-add-on">
+    <description>Permission to run YaST module "add-on"</description>
+    <message>Authentication is required to run YaST module "add-on"</message>
+    <defaults>
+      <allow_inactive>no</allow_inactive>
+      <allow_active>no</allow_active>
+    </defaults>
+  </action>
+  <action id="org.opensuse.yast.commandline.read-sound">
+    <description>Reading parameters of YaST module "sound"</description>
+    <message>Authentication is required to get YaST sound parameters</message>
+    <defaults>
+      <allow_inactive>no</allow_inactive>
+      <allow_active>no</allow_active>
+    </defaults>
+  </action>
+  <action id="org.opensuse.yast.commandline.execute-sound">
+    <description>Permission to run YaST module "sound"</description>
+    <message>Authentication is required to run YaST module "sound"</message>
+    <defaults>
+      <allow_inactive>no</allow_inactive>
+      <allow_active>no</allow_active>
+    </defaults>
+  </action>
+  <action id="org.opensuse.yast.commandline.read-dump">
+    <description>Reading parameters of YaST module "dump"</description>
+    <message>Authentication is required to get YaST dump parameters</message>
+    <defaults>
+      <allow_inactive>no</allow_inactive>
+      <allow_active>no</allow_active>
+    </defaults>
+  </action>
+  <action id="org.opensuse.yast.commandline.execute-dump">
+    <description>Permission to run YaST module "dump"</description>
+    <message>Authentication is required to run YaST module "dump"</message>
+    <defaults>
+      <allow_inactive>no</allow_inactive>
+      <allow_active>no</allow_active>
+    </defaults>
+  </action>
+  <action id="org.opensuse.yast.commandline.read-slp-server">
+    <description>Reading parameters of YaST module "slp-server"</description>
+    <message>Authentication is required to get YaST slp-server parameters</message>
+    <defaults>
+      <allow_inactive>no</allow_inactive>
+      <allow_active>no</allow_active>
+    </defaults>
+  </action>
+  <action id="org.opensuse.yast.commandline.execute-slp-server">
+    <description>Permission to run YaST module "slp-server"</description>
+    <message>Authentication is required to run YaST module "slp-server"</message>
+    <defaults>
+      <allow_inactive>no</allow_inactive>
+      <allow_active>no</allow_active>
+    </defaults>
+  </action>
+  <action id="org.opensuse.yast.commandline.read-nis-server">
+    <description>Reading parameters of YaST module "nis_server"</description>
+    <message>Authentication is required to get YaST nis_server parameters</message>
+    <defaults>
+      <allow_inactive>no</allow_inactive>
+      <allow_active>no</allow_active>
+    </defaults>
+  </action>
+  <action id="org.opensuse.yast.commandline.execute-nis-server">
+    <description>Permission to run YaST module "nis_server"</description>
+    <message>Authentication is required to run YaST module "nis_server"</message>
+    <defaults>
+      <allow_inactive>no</allow_inactive>
+      <allow_active>no</allow_active>
+    </defaults>
+  </action>
+  <action id="org.opensuse.yast.commandline.read-fingerprint-reader">
+    <description>Reading parameters of YaST module "fingerprint-reader"</description>
+    <message>Authentication is required to get YaST fingerprint-reader parameters</message>
+    <defaults>
+      <allow_inactive>no</allow_inactive>
+      <allow_active>no</allow_active>
+    </defaults>
+  </action>
+  <action id="org.opensuse.yast.commandline.execute-fingerprint-reader">
+    <description>Permission to run YaST module "fingerprint-reader"</description>
+    <message>Authentication is required to run YaST module "fingerprint-reader"</message>
+    <defaults>
+      <allow_inactive>no</allow_inactive>
+      <allow_active>no</allow_active>
+    </defaults>
+  </action>
+  <action id="org.opensuse.yast.commandline.read-product-creator">
+    <description>Reading parameters of YaST module "product-creator"</description>
+    <message>Authentication is required to get YaST product-creator parameters</message>
+    <defaults>
+      <allow_inactive>no</allow_inactive>
+      <allow_active>no</allow_active>
+    </defaults>
+  </action>
+  <action id="org.opensuse.yast.commandline.execute-product-creator">
+    <description>Permission to run YaST module "product-creator"</description>
+    <message>Authentication is required to run YaST module "product-creator"</message>
+    <defaults>
+      <allow_inactive>no</allow_inactive>
+      <allow_active>no</allow_active>
+    </defaults>
+  </action>
+  <action id="org.opensuse.yast.commandline.read-iscsi-client">
+    <description>Reading parameters of YaST module "iscsi-client"</description>
+    <message>Authentication is required to get YaST iscsi-client parameters</message>
+    <defaults>
+      <allow_inactive>no</allow_inactive>
+      <allow_active>no</allow_active>
+    </defaults>
+  </action>
+  <action id="org.opensuse.yast.commandline.execute-iscsi-client">
+    <description>Permission to run YaST module "iscsi-client"</description>
+    <message>Authentication is required to run YaST module "iscsi-client"</message>
+    <defaults>
+      <allow_inactive>no</allow_inactive>
+      <allow_active>no</allow_active>
+    </defaults>
+  </action>
+  <action id="org.opensuse.yast.commandline.read-support">
+    <description>Reading parameters of YaST module "support"</description>
+    <message>Authentication is required to get YaST support parameters</message>
+    <defaults>
+      <allow_inactive>no</allow_inactive>
+      <allow_active>no</allow_active>
+    </defaults>
+  </action>
+  <action id="org.opensuse.yast.commandline.execute-support">
+    <description>Permission to run YaST module "support"</description>
+    <message>Authentication is required to run YaST module "support"</message>
+    <defaults>
+      <allow_inactive>no</allow_inactive>
+      <allow_active>no</allow_active>
+    </defaults>
+  </action>
+  <action id="org.opensuse.yast.commandline.read-sw-single">
+    <description>Reading parameters of YaST module "sw_single"</description>
+    <message>Authentication is required to get YaST sw_single parameters</message>
+    <defaults>
+      <allow_inactive>no</allow_inactive>
+      <allow_active>no</allow_active>
+    </defaults>
+  </action>
+  <action id="org.opensuse.yast.commandline.execute-sw-single">
+    <description>Permission to run YaST module "sw_single"</description>
+    <message>Authentication is required to run YaST module "sw_single"</message>
+    <defaults>
+      <allow_inactive>no</allow_inactive>
+      <allow_active>no</allow_active>
+    </defaults>
+  </action>
+  <action id="org.opensuse.yast.commandline.read-add-on-creator">
+    <description>Reading parameters of YaST module "add-on-creator"</description>
+    <message>Authentication is required to get YaST add-on-creator parameters</message>
+    <defaults>
+      <allow_inactive>no</allow_inactive>
+      <allow_active>no</allow_active>
+    </defaults>
+  </action>
+  <action id="org.opensuse.yast.commandline.execute-add-on-creator">
+    <description>Permission to run YaST module "add-on-creator"</description>
+    <message>Authentication is required to run YaST module "add-on-creator"</message>
+    <defaults>
+      <allow_inactive>no</allow_inactive>
+      <allow_active>no</allow_active>
+    </defaults>
+  </action>
+  <action id="org.opensuse.yast.commandline.read-vendor">
+    <description>Reading parameters of YaST module "vendor"</description>
+    <message>Authentication is required to get YaST vendor parameters</message>
+    <defaults>
+      <allow_inactive>no</allow_inactive>
+      <allow_active>no</allow_active>
+    </defaults>
+  </action>
+  <action id="org.opensuse.yast.commandline.execute-vendor">
+    <description>Permission to run YaST module "vendor"</description>
+    <message>Authentication is required to run YaST module "vendor"</message>
+    <defaults>
+      <allow_inactive>no</allow_inactive>
+      <allow_active>no</allow_active>
+    </defaults>
+  </action>
+  <action id="org.opensuse.yast.commandline.read-sd-report">
+    <description>Reading parameters of YaST module "SD_Report"</description>
+    <message>Authentication is required to get YaST SD_Report parameters</message>
+    <defaults>
+      <allow_inactive>no</allow_inactive>
+      <allow_active>no</allow_active>
+    </defaults>
+  </action>
+  <action id="org.opensuse.yast.commandline.execute-sd-report">
+    <description>Permission to run YaST module "SD_Report"</description>
+    <message>Authentication is required to run YaST module "SD_Report"</message>
+    <defaults>
+      <allow_inactive>no</allow_inactive>
+      <allow_active>no</allow_active>
+    </defaults>
+  </action>
+  <action id="org.opensuse.yast.commandline.read-zfcp">
+    <description>Reading parameters of YaST module "zfcp"</description>
+    <message>Authentication is required to get YaST zfcp parameters</message>
+    <defaults>
+      <allow_inactive>no</allow_inactive>
+      <allow_active>no</allow_active>
+    </defaults>
+  </action>
+  <action id="org.opensuse.yast.commandline.execute-zfcp">
+    <description>Permission to run YaST module "zfcp"</description>
+    <message>Authentication is required to run YaST module "zfcp"</message>
+    <defaults>
+      <allow_inactive>no</allow_inactive>
+      <allow_active>no</allow_active>
+    </defaults>
+  </action>
+  <action id="org.opensuse.yast.commandline.read-ftpd">
+    <description>Reading parameters of YaST module "ftpd"</description>
+    <message>Authentication is required to get YaST ftpd parameters</message>
+    <defaults>
+      <allow_inactive>no</allow_inactive>
+      <allow_active>no</allow_active>
+    </defaults>
+  </action>
+  <action id="org.opensuse.yast.commandline.execute-ftpd">
+    <description>Permission to run YaST module "ftpd"</description>
+    <message>Authentication is required to run YaST module "ftpd"</message>
+    <defaults>
+      <allow_inactive>no</allow_inactive>
+      <allow_active>no</allow_active>
+    </defaults>
+  </action>
+  <action id="org.opensuse.yast.commandline.read-online-update-configuration">
+    <description>Reading parameters of YaST module "online_update_configuration"</description>
+    <message>Authentication is required to get YaST online_update_configuration parameters</message>
+    <defaults>
+      <allow_inactive>no</allow_inactive>
+      <allow_active>no</allow_active>
+    </defaults>
+  </action>
+  <action id="org.opensuse.yast.commandline.execute-online-update-configuration">
+    <description>Permission to run YaST module "online_update_configuration"</description>
+    <message>Authentication is required to run YaST module "online_update_configuration"</message>
+    <defaults>
+      <allow_inactive>no</allow_inactive>
+      <allow_active>no</allow_active>
+    </defaults>
+  </action>
+  <action id="org.opensuse.yast.commandline.read-squid">
+    <description>Reading parameters of YaST module "squid"</description>
+    <message>Authentication is required to get YaST squid parameters</message>
+    <defaults>
+      <allow_inactive>no</allow_inactive>
+      <allow_active>no</allow_active>
+    </defaults>
+  </action>
+  <action id="org.opensuse.yast.commandline.execute-squid">
+    <description>Permission to run YaST module "squid"</description>
+    <message>Authentication is required to run YaST module "squid"</message>
+    <defaults>
+      <allow_inactive>no</allow_inactive>
+      <allow_active>no</allow_active>
+    </defaults>
+  </action>
+  <action id="org.opensuse.yast.commandline.read-system-settings">
+    <description>Reading parameters of YaST module "system_settings"</description>
+    <message>Authentication is required to get YaST system_settings parameters</message>
+    <defaults>
+      <allow_inactive>no</allow_inactive>
+      <allow_active>no</allow_active>
+    </defaults>
+  </action>
+  <action id="org.opensuse.yast.commandline.execute-system-settings">
+    <description>Permission to run YaST module "system_settings"</description>
+    <message>Authentication is required to run YaST module "system_settings"</message>
+    <defaults>
+      <allow_inactive>no</allow_inactive>
+      <allow_active>no</allow_active>
+    </defaults>
+  </action>
+  <action id="org.opensuse.yast.commandline.read-firewall">
+    <description>Reading parameters of YaST module "firewall"</description>
+    <message>Authentication is required to get YaST firewall parameters</message>
+    <defaults>
+      <allow_inactive>no</allow_inactive>
+      <allow_active>no</allow_active>
+    </defaults>
+  </action>
+  <action id="org.opensuse.yast.commandline.execute-firewall">
+    <description>Permission to run YaST module "firewall"</description>
+    <message>Authentication is required to run YaST module "firewall"</message>
+    <defaults>
+      <allow_inactive>no</allow_inactive>
+      <allow_active>no</allow_active>
+    </defaults>
+  </action>
+  <action id="org.opensuse.yast.commandline.read-users">
+    <description>Reading parameters of YaST module "users"</description>
+    <message>Authentication is required to get YaST users parameters</message>
+    <defaults>
+      <allow_inactive>no</allow_inactive>
+      <allow_active>no</allow_active>
+    </defaults>
+  </action>
+  <action id="org.opensuse.yast.commandline.execute-users">
+    <description>Permission to run YaST module "users"</description>
+    <message>Authentication is required to run YaST module "users"</message>
+    <defaults>
+      <allow_inactive>no</allow_inactive>
+      <allow_active>no</allow_active>
+    </defaults>
+  </action>
+  <action id="org.opensuse.yast.commandline.read-slepos-system-manager">
+    <description>Reading parameters of YaST module "slepos-system-manager"</description>
+    <message>Authentication is required to get YaST slepos-system-manager parameters</message>
+    <defaults>
+      <allow_inactive>no</allow_inactive>
+      <allow_active>no</allow_active>
+    </defaults>
+  </action>
+  <action id="org.opensuse.yast.commandline.execute-slepos-system-manager">
+    <description>Permission to run YaST module "slepos-system-manager"</description>
+    <message>Authentication is required to run YaST module "slepos-system-manager"</message>
+    <defaults>
+      <allow_inactive>no</allow_inactive>
+      <allow_active>no</allow_active>
+    </defaults>
+  </action>
+  <action id="org.opensuse.yast.commandline.read-audit-laf">
+    <description>Reading parameters of YaST module "audit-laf"</description>
+    <message>Authentication is required to get YaST audit-laf parameters</message>
+    <defaults>
+      <allow_inactive>no</allow_inactive>
+      <allow_active>no</allow_active>
+    </defaults>
+  </action>
+  <action id="org.opensuse.yast.commandline.execute-audit-laf">
+    <description>Permission to run YaST module "audit-laf"</description>
+    <message>Authentication is required to run YaST module "audit-laf"</message>
+    <defaults>
+      <allow_inactive>no</allow_inactive>
+      <allow_active>no</allow_active>
+    </defaults>
+  </action>
+  <action id="org.opensuse.yast.commandline.read-inst-release-notes">
+    <description>Reading parameters of YaST module "inst_release_notes"</description>
+    <message>Authentication is required to get YaST inst_release_notes parameters</message>
+    <defaults>
+      <allow_inactive>no</allow_inactive>
+      <allow_active>no</allow_active>
+    </defaults>
+  </action>
+  <action id="org.opensuse.yast.commandline.execute-inst-release-notes">
+    <description>Permission to run YaST module "inst_release_notes"</description>
+    <message>Authentication is required to run YaST module "inst_release_notes"</message>
+    <defaults>
+      <allow_inactive>no</allow_inactive>
+      <allow_active>no</allow_active>
+    </defaults>
+  </action>
+  <action id="org.opensuse.yast.commandline.read-runlevel">
+    <description>Reading parameters of YaST module "runlevel"</description>
+    <message>Authentication is required to get YaST runlevel parameters</message>
+    <defaults>
+      <allow_inactive>no</allow_inactive>
+      <allow_active>no</allow_active>
+    </defaults>
+  </action>
+  <action id="org.opensuse.yast.commandline.execute-runlevel">
+    <description>Permission to run YaST module "runlevel"</description>
+    <message>Authentication is required to run YaST module "runlevel"</message>
+    <defaults>
+      <allow_inactive>no</allow_inactive>
+      <allow_active>no</allow_active>
+    </defaults>
+  </action>
+  <action id="org.opensuse.yast.commandline.read-kerberos-server">
+    <description>Reading parameters of YaST module "kerberos-server"</description>
+    <message>Authentication is required to get YaST kerberos-server parameters</message>
+    <defaults>
+      <allow_inactive>no</allow_inactive>
+      <allow_active>no</allow_active>
+    </defaults>
+  </action>
+  <action id="org.opensuse.yast.commandline.execute-kerberos-server">
+    <description>Permission to run YaST module "kerberos-server"</description>
+    <message>Authentication is required to run YaST module "kerberos-server"</message>
+    <defaults>
+      <allow_inactive>no</allow_inactive>
+      <allow_active>no</allow_active>
+    </defaults>
+  </action>
+  <action id="org.opensuse.yast.commandline.read-view-anymsg">
+    <description>Reading parameters of YaST module "view_anymsg"</description>
+    <message>Authentication is required to get YaST view_anymsg parameters</message>
+    <defaults>
+      <allow_inactive>no</allow_inactive>
+      <allow_active>no</allow_active>
+    </defaults>
+  </action>
+  <action id="org.opensuse.yast.commandline.execute-view-anymsg">
+    <description>Permission to run YaST module "view_anymsg"</description>
+    <message>Authentication is required to run YaST module "view_anymsg"</message>
+    <defaults>
+      <allow_inactive>no</allow_inactive>
+      <allow_active>no</allow_active>
+    </defaults>
+  </action>
+  <action id="org.opensuse.yast.commandline.read-bootloader">
+    <description>Reading parameters of YaST module "bootloader"</description>
+    <message>Authentication is required to get YaST bootloader parameters</message>
+    <defaults>
+      <allow_inactive>no</allow_inactive>
+      <allow_active>no</allow_active>
+    </defaults>
+  </action>
+  <action id="org.opensuse.yast.commandline.execute-bootloader">
+    <description>Permission to run YaST module "bootloader"</description>
+    <message>Authentication is required to run YaST module "bootloader"</message>
+    <defaults>
+      <allow_inactive>no</allow_inactive>
+      <allow_active>no</allow_active>
+    </defaults>
+  </action>
+  <action id="org.opensuse.yast.commandline.read-mouse">
+    <description>Reading parameters of YaST module "mouse"</description>
+    <message>Authentication is required to get YaST mouse parameters</message>
+    <defaults>
+      <allow_inactive>no</allow_inactive>
+      <allow_active>no</allow_active>
+    </defaults>
+  </action>
+  <action id="org.opensuse.yast.commandline.execute-mouse">
+    <description>Permission to run YaST module "mouse"</description>
+    <message>Authentication is required to run YaST module "mouse"</message>
+    <defaults>
+      <allow_inactive>no</allow_inactive>
+      <allow_active>no</allow_active>
+    </defaults>
+  </action>
+  <action id="org.opensuse.yast.commandline.read-checkmedia">
+    <description>Reading parameters of YaST module "checkmedia"</description>
+    <message>Authentication is required to get YaST checkmedia parameters</message>
+    <defaults>
+      <allow_inactive>no</allow_inactive>
+      <allow_active>no</allow_active>
+    </defaults>
+  </action>
+  <action id="org.opensuse.yast.commandline.execute-checkmedia">
+    <description>Permission to run YaST module "checkmedia"</description>
+    <message>Authentication is required to run YaST module "checkmedia"</message>
+    <defaults>
+      <allow_inactive>no</allow_inactive>
+      <allow_active>no</allow_active>
+    </defaults>
+  </action>
+  <action id="org.opensuse.yast.commandline.read-genprof">
+    <description>Reading parameters of YaST module "GenProf"</description>
+    <message>Authentication is required to get YaST GenProf parameters</message>
+    <defaults>
+      <allow_inactive>no</allow_inactive>
+      <allow_active>no</allow_active>
+    </defaults>
+  </action>
+  <action id="org.opensuse.yast.commandline.execute-genprof">
+    <description>Permission to run YaST module "GenProf"</description>
+    <message>Authentication is required to run YaST module "GenProf"</message>
+    <defaults>
+      <allow_inactive>no</allow_inactive>
+      <allow_active>no</allow_active>
+    </defaults>
+  </action>
+  <action id="org.opensuse.yast.commandline.read-logprof">
+    <description>Reading parameters of YaST module "LogProf"</description>
+    <message>Authentication is required to get YaST LogProf parameters</message>
+    <defaults>
+      <allow_inactive>no</allow_inactive>
+      <allow_active>no</allow_active>
+    </defaults>
+  </action>
+  <action id="org.opensuse.yast.commandline.execute-logprof">
+    <description>Permission to run YaST module "LogProf"</description>
+    <message>Authentication is required to run YaST module "LogProf"</message>
+    <defaults>
+      <allow_inactive>no</allow_inactive>
+      <allow_active>no</allow_active>
+    </defaults>
+  </action>
+  <action id="org.opensuse.yast.commandline.read-heartbeat">
+    <description>Reading parameters of YaST module "heartbeat"</description>
+    <message>Authentication is required to get YaST heartbeat parameters</message>
+    <defaults>
+      <allow_inactive>no</allow_inactive>
+      <allow_active>no</allow_active>
+    </defaults>
+  </action>
+  <action id="org.opensuse.yast.commandline.execute-heartbeat">
+    <description>Permission to run YaST module "heartbeat"</description>
+    <message>Authentication is required to run YaST module "heartbeat"</message>
+    <defaults>
+      <allow_inactive>no</allow_inactive>
+      <allow_active>no</allow_active>
+    </defaults>
+  </action>
+  <action id="org.opensuse.yast.commandline.read-samba-server">
+    <description>Reading parameters of YaST module "samba-server"</description>
+    <message>Authentication is required to get YaST samba-server parameters</message>
+    <defaults>
+      <allow_inactive>no</allow_inactive>
+      <allow_active>no</allow_active>
+    </defaults>
+  </action>
+  <action id="org.opensuse.yast.commandline.execute-samba-server">
+    <description>Permission to run YaST module "samba-server"</description>
+    <message>Authentication is required to run YaST module "samba-server"</message>
+    <defaults>
+      <allow_inactive>no</allow_inactive>
+      <allow_active>no</allow_active>
+    </defaults>
+  </action>
+  <action id="org.opensuse.yast.commandline.read-tv">
+    <description>Reading parameters of YaST module "tv"</description>
+    <message>Authentication is required to get YaST tv parameters</message>
+    <defaults>
+      <allow_inactive>no</allow_inactive>
+      <allow_active>no</allow_active>
+    </defaults>
+  </action>
+  <action id="org.opensuse.yast.commandline.execute-tv">
+    <description>Permission to run YaST module "tv"</description>
+    <message>Authentication is required to run YaST module "tv"</message>
+    <defaults>
+      <allow_inactive>no</allow_inactive>
+      <allow_active>no</allow_active>
+    </defaults>
+  </action>
+  <action id="org.opensuse.yast.commandline.read-ftp-server">
+    <description>Reading parameters of YaST module "ftp-server"</description>
+    <message>Authentication is required to get YaST ftp-server parameters</message>
+    <defaults>
+      <allow_inactive>no</allow_inactive>
+      <allow_active>no</allow_active>
+    </defaults>
+  </action>
+  <action id="org.opensuse.yast.commandline.execute-ftp-server">
+    <description>Permission to run YaST module "ftp-server"</description>
+    <message>Authentication is required to run YaST module "ftp-server"</message>
+    <defaults>
+      <allow_inactive>no</allow_inactive>
+      <allow_active>no</allow_active>
+    </defaults>
+  </action>
+  <action id="org.opensuse.yast.commandline.read-inst-suse-register">
+    <description>Reading parameters of YaST module "inst_suse_register"</description>
+    <message>Authentication is required to get YaST inst_suse_register parameters</message>
+    <defaults>
+      <allow_inactive>no</allow_inactive>
+      <allow_active>no</allow_active>
+    </defaults>
+  </action>
+  <action id="org.opensuse.yast.commandline.execute-inst-suse-register">
+    <description>Permission to run YaST module "inst_suse_register"</description>
+    <message>Authentication is required to run YaST module "inst_suse_register"</message>
+    <defaults>
+      <allow_inactive>no</allow_inactive>
+      <allow_active>no</allow_active>
+    </defaults>
+  </action>
+
+</policyconfig>
