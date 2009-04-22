@@ -56,7 +56,7 @@ class PatchUpdatesController < ApplicationController
 
   def get_updateList
     @patch_updates = [] 
-    if permission_check( "org.opensuse.yast.webservice.read-patch")
+    if permission_check( "org.opensuse.yast.patch.read")
        system_bus = DBus::SystemBus.instance
        package_kit = system_bus.service("org.freedesktop.PackageKit")
        obj = package_kit.object("/org/freedesktop/PackageKit")
@@ -201,7 +201,7 @@ class PatchUpdatesController < ApplicationController
   # POST /patch_updates/1.xml
   def install
     update = PatchUpdate.new
-    if permission_check( "org.opensuse.yast.webservice.install-patch")
+    if permission_check( "org.opensuse.yast.patch.install")
        ret = install_update params[:id]
        if (ret != "ok")
           update.error_id = 1
