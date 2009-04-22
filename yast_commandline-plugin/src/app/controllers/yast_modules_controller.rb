@@ -10,7 +10,7 @@ class YastModulesController < ApplicationController
   def init_modules (check_policy)
     @yast_modules = Hash.new
     if (!check_policy or
-        permission_check( "org.opensuse.yast.webservice.read-yastmodulelist"))
+        permission_check( "org.opensuse.yast.commandline.read-yastmodulelist"))
        YastModule.all.each do |d|
          begin
             yast_module = YastModule.new d
@@ -56,8 +56,8 @@ class YastModulesController < ApplicationController
     id_policy = id.tr_s('_', '-')
     id_policy = id_policy.chomp
     id_policy = id_policy.downcase
-    id_policy = "org.opensuse.yast.webservice.read-yastmodule-" + id_policy
-    if (permission_check( "org.opensuse.yast.webservice.read-yastmodule") or
+    id_policy = "org.opensuse.yast.commandline.read-" + id_policy
+    if (permission_check( "org.opensuse.yast.commandline.read") or
         permission_check( id_policy))
        init_modules false #check no policy
        @yast_module = @yast_modules[id]
@@ -78,8 +78,8 @@ class YastModulesController < ApplicationController
     id_policy = id.tr_s('_', '-')
     id_policy = id_policy.chomp
     id_policy = id_policy.downcase
-    id_policy_long = "org.opensuse.yast.webservice.execute-yastmodule-" + id_policy
-    if (permission_check( "org.opensuse.yast.webservice.execute-yastmodule") or
+    id_policy_long = "org.opensuse.yast.commandline.execute-" + id_policy
+    if (permission_check( "org.opensuse.yast.commandline.execute") or
         permission_check( id_policy_long))
        init_modules false #check no policy
        @yast_module = @yast_modules[id]
@@ -131,8 +131,8 @@ class YastModulesController < ApplicationController
        else
          # no POST request
 
-         id_policy_long = "org.opensuse.yast.webservice.read-yastmodule-" + id_policy
-         if (permission_check( "org.opensuse.yast.webservice.read-yastmodule") or
+         id_policy_long = "org.opensuse.yast.commandline.read-" + id_policy
+         if (permission_check( "org.opensuse.yast.commandline.read") or
              permission_check( id_policy_long))
             respond @yast_module
             return
