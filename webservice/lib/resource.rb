@@ -63,7 +63,7 @@ class ResourceRegistration
     r_resource.singular = singular
     r_resource.tag_list = tags
     r_resource.save
-
+ 
   end
   
   # register all resources below <topdir>/*/<subdir>/*.yaml
@@ -79,8 +79,6 @@ class ResourceRegistration
   
   def self.route_all
 
-    uri_prefix = "resource" # should be 'yast'
-
     resources = Resource.find(:all)
     domains = Domain.find(:all)
 
@@ -95,17 +93,15 @@ class ResourceRegistration
 
       domains.each do |ns|
 	domain = ns.name
-	map.with_options(:path_prefix => uri_prefix) do |path|
-	  path.namespace(domain) do |name|
+	map.namespace(domain) do |name|
 #	    $stderr.puts "Mapping #{domain}"
-	    name.resources domain, :only => :index
-	  end
+	  name.resources domain, :only => :index
 	end
       end
       
       resources.each do |resource|
 	domain = resource.domain.name
-	prefix = "#{uri_prefix}/#{domain}"
+	prefix = "#{domain}"
 	
 	#
 	# doing .with_options(:domain => "...", :path_prefix => "...") assembles the controller domain without a slash :-(
@@ -121,7 +117,7 @@ class ResourceRegistration
 	end
       end # resources.each
 
-      map.connect "/resource.:format", :controller => "resource", :action => "index"
+      map.connect "/", :controller => "resource", :action => "index"
     end # Routes.draw 
   
   end
