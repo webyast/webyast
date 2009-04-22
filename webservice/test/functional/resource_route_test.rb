@@ -14,13 +14,16 @@ class ResourceRouteTest < ActiveSupport::TestCase
   
   fixtures :domains, :resources
   
-  # ResourceRegistration.init drops all database content
+  # test routing
+  # /yast -> links to all domains
+  # /yast/<domain> -> links to all resources within this domain
+  # /yast/<domain>/<resource> -> RESTful resource
   
   test "resource initialization" do
     ResourceRegistration.init
     ResourceRegistration.register_all ".", "resource_fixtures/good"
     ResourceRegistration.route_all
-    assert_generates "/yast", :controller => "yast", :action => "index"
+    assert_generates "/", :controller => "resource", :action => "index"
   end
   
 end
