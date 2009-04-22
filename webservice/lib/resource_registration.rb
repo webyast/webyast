@@ -79,49 +79,30 @@ class ResourceRegistration
   
   def self.route_all
 
-    uri_prefix = "resource" # should be 'yast'
-
+    prefix = "yast"
+    
     resources = Resource.find(:all)
     domains = Domain.find(:all)
 
     ActionController::Routing::Routes.draw do |map|
-      # The priority is based upon order of creation: first created -> highest priority.
-      #
-      # YaST resource routing
-      #
-      # - prefix 'yast'
-      # - resources are grouped in domains
-      #
 
-      domains.each do |ns|
-	domain = ns.name
-	map.with_options(:path_prefix => uri_prefix) do |path|
-	  path.namespace(domain) do |name|
-#	    $stderr.puts "Mapping #{domain}"
-	    name.resources domain, :only => :index
-	  end
-	end
-      end
-      
+      map.resources prefix, :controller => "resource", :only => :index
+
       resources.each do |resource|
-	domain = resource.domain.name
-	prefix = "#{uri_prefix}/#{domain}"
+	domain = resource.domain
 	
 	#
 	# doing .with_options(:domain => "...", :path_prefix => "...") assembles the controller domain without a slash :-(
 	#															  
-															  
-	# create uri_prefix/<ns> routes
-	map.with_options(:path_prefix => prefix) do |path|
+
+	map.with_options(:path_prefix => "#{prefix}/#{domain}") do |path|
 	  # put the controller below <ns>
-	  path.namespace(domain) do |yast|
-#	    $stderr.puts "Mapping #{domain}/#{resource.name}"
+	  path.namespace(domain.name) do |yast|
 	    yast.resources resource.name
 	  end
 	end
       end # resources.each
-
-      map.connect "/resource.:format", :controller => "resource", :action => "index"
+      
     end # Routes.draw 
   
   end
