@@ -45,7 +45,7 @@ class ResourceRegistrationTest < ActiveSupport::TestCase
     resources = Resource.find(:all)
     assert resources
     assert resources.size == 1
-    assert resources[0].name == "resource"
+    assert resources[0].name == "resources"
   end
   
   # Check if parent dir name sets domain name
@@ -62,7 +62,7 @@ class ResourceRegistrationTest < ActiveSupport::TestCase
     resources = Resource.find(:all)
     assert resources
     assert resources.size == 1
-    assert resources[0].name == "resource"
+    assert resources[0].name == "resources"
   end
   
   # Catch errors in bad_domain
@@ -71,6 +71,15 @@ class ResourceRegistrationTest < ActiveSupport::TestCase
     ResourceRegistration.init
     assert_raise RuntimeError do
       ResourceRegistration.register_all ".", "test/resource_fixtures/bad_domain"
+    end
+  end
+  
+  # Catch errors in bad_plural
+  
+  test "file is plurar, name is singular" do
+    ResourceRegistration.init
+    assert_raise RuntimeError do
+      ResourceRegistration.register_all ".", "test/resource_fixtures/bad_plural"
     end
   end
 end
