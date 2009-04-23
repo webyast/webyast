@@ -22,7 +22,7 @@ class ResourceRegistration
     in_production = (ENV["RAILS_ENV"] == "production")
     name = name || File.basename(file, ".*")
     begin
-      resource = YAML.load(File.open(file))
+      resource = YAML.load(File.open(file)) || Hash.new
     rescue Exception => e
       $stderr.puts "#{file} failed to load"
       raise
