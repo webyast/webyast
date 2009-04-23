@@ -29,10 +29,28 @@ class ResourceControllerTest < ActionController::TestCase
     assert_response :success
     assert @response.headers['Content-Type'] =~ %r{application/xml}
   end
+  
   test "output html format" do
     get :index, :format => "html"
     assert_response :success
     assert @response.headers['Content-Type'] =~ %r{text/html}
+  end
+  
+  test "by domain query" do
+    get :index, :params => { "domain" => "network" }
+    assert_response :success
+  end
+  
+  test "by name query" do
+    get :index, :params => { "name" => "devices" }
+    assert_response :success
+  end
+  
+  test "by tags query" do
+    get :index, :params => { "tags" => "test" }
+    assert_response :success
+    get :index, :params => { "tags" => "test,fixture" }
+    assert_response :success
   end
   
 end
