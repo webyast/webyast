@@ -1,0 +1,7 @@
+#
+# test/fixtures/resources/network/connections.yml
+#
+# override name
+
+name: interfaces
+tags: test fixtures
