@@ -24,4 +24,15 @@ class ResourceControllerTest < ActionController::TestCase
     assert_response :success
   end
   
+  test "output xml format" do
+    get :index, :format => "xml"
+    assert_response :success
+    assert @response.headers['Content-Type'] =~ %r{application/xml}
+  end
+  test "output html format" do
+    get :index, :format => "html"
+    assert_response :success
+    assert @response.headers['Content-Type'] =~ %r{text/html}
+  end
+  
 end

@@ -1,7 +1,7 @@
 class ResourceController < ApplicationController
 
   def index
-    $stderr.puts "Params #{params.inspect}"
+#    $stderr.puts "Params #{params.inspect}"
     resources = Array.new
     
     if params[:tags]
@@ -12,7 +12,7 @@ class ResourceController < ApplicationController
       domain = Domain.find(:first, :conditions => ["name = ?", params[:domain]])
       resources = Resource.find(:all, :conditions => ["domain_id = ?", domain]) if domain
     else
-      resources = Domain.find(:all)
+      resources = Resource.find(:all)
     end
     @node = "Yast"
     @resources = Array.new
@@ -25,7 +25,7 @@ class ResourceController < ApplicationController
     # -> index.erb.<format>
     resources.each do |res|
       n = res.name
-      ns = res.domain rescue n
+      ns = res.domain
       c = "#{ns}/#{n}"
       route = routes.find { |r| r.requirements[:controller] == c and r.requirements[:action] == "index" }
       if route
