@@ -1,5 +1,5 @@
 class ResourceController < ApplicationController
-  include ActionController::UrlWriter
+
   def index
     $stderr.puts "Params #{params.inspect}"
     resources = Array.new
