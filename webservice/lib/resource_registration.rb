@@ -52,7 +52,7 @@ class ResourceRegistration
 	log.error
 	return
       else
-	raise 
+	raise error
       end
     end
     
