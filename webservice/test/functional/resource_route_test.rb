@@ -18,7 +18,7 @@ class ResourceRouteTest < ActiveSupport::TestCase
   
   test "resource route initialization" do
     
-    $stderr.puts ActionController::Routing::Routes.routes
+#    $stderr.puts ActionController::Routing::Routes.routes
     
     prefix = "yast"
     
