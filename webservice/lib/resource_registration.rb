@@ -3,8 +3,16 @@ class ResourceRegistration
 
   # start by cleaning Domain and Resource tables
   def self.init
-    Resource.delete_all
-    Domain.delete_all
+    begin
+       Resource.delete_all
+    rescue
+       $stderr.puts "Table resources does not exist."
+    end
+    begin
+       Domain.delete_all
+    rescue
+       $stderr.puts "Table rescues does not exist."
+    end
   end
   
   # register a (.yaml) resource description
