@@ -5,5 +5,4 @@ require "lib/resource_registration"
 
 
 # Don't route outside full Rails (e.g. when just running db:migrate)
-ResourceRegistration.route_all
-
+ResourceRegistration.route_all if ENV['RAILS_ENV']
