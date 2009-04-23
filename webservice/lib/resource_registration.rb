@@ -14,7 +14,7 @@ class ResourceRegistration
     in_production = (ENV["RAILS_ENV"] == "production")
     name = name || File.basename(file, ".*")
     begin
-      resource = YAML.load(File.open(file))
+      resource = YAML.load(File.open(file)) || Hash.new
     rescue Exception => e
       $stderr.puts "#{file} failed to load"
       raise
@@ -44,7 +44,7 @@ class ResourceRegistration
 	log.error
 	return
       else
-	raise 
+	raise error
       end
     end
     
@@ -109,20 +109,9 @@ class ResourceRegistration
       Find.find(plugin_resource_path) do |path|
         #$stderr.puts path
         next unless path =~ %r{#{subdir}/((\w+)/)?(\w+)\.ya?ml$}
-        $stderr.puts "  #{path}, (domain #{$2}, name #{$3}) !"
+#        $stderr.puts "  #{path}, (domain #{$2}, name #{$3}) !"
         self.register path, $3, $2
       end
-    end
-    return
-          
-    require 'find'
-    $stderr.puts "Register all resources in #{topdir}/*/#{subdir}"
-    
-    Find.find(topdir) do |path|
-      $stderr.puts path
-      next unless path =~ %r{#{subdir}/((\w+)/)?(\w+)\.ya?ml$}
-      $stderr.puts "  #{path}, (domain #{$2}, name #{$3}) !"
-      self.register path, $3, $2
     end
   end
   

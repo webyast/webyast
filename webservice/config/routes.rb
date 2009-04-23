@@ -3,7 +3,6 @@ require "lib/resource_registration"
 # routing is generated from the 'resources' database table
 # see config/initializers/resource_registration.rb for populating the database
 
-
 # Don't route outside full Rails (e.g. when just running db:migrate)
 ResourceRegistration.route_all
 
@@ -11,3 +10,4 @@ ResourceRegistration.route_all
 ActionController::Routing::Routes.draw do |map|
   map.resource :session
 end
+
