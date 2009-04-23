@@ -1,7 +1,9 @@
 
 include ApplicationHelper
 
-class SystemtimeController < ApplicationController
+module System
+
+class TimeController < ApplicationController
 
 before_filter :login_required
 
@@ -277,4 +279,6 @@ require "scr"
       end
     end #put
   end
+end
+
 end

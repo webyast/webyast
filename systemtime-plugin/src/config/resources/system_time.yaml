@@ -1,3 +1,5 @@
 domain: system
 name: time
 tags: config setting systemtime
+singular: true
+

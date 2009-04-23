@@ -1,7 +1,9 @@
 include ApplicationHelper
 
-class UsersController < ApplicationController
+module System
 
+class UsersController < ApplicationController
+  
   before_filter :login_required
 
   require "scr"
@@ -590,4 +592,4 @@ class UsersController < ApplicationController
 
 end
 
-
+end

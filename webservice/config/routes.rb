@@ -5,6 +5,5 @@ require "lib/resource_registration"
 
 
 # Don't route outside full Rails (e.g. when just running db:migrate)
-ResourceRegistration.route_all if ENV["RAILS_ENV"]
+ResourceRegistration.route_all
 
-#$stderr.puts ActionController::Routing::Routes.routes if ENV["RAILS_ENV"] == "development"
