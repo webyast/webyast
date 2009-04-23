@@ -117,20 +117,9 @@ class ResourceRegistration
       Find.find(plugin_resource_path) do |path|
         #$stderr.puts path
         next unless path =~ %r{#{subdir}/((\w+)/)?(\w+)\.ya?ml$}
-        $stderr.puts "  #{path}, (domain #{$2}, name #{$3}) !"
+#        $stderr.puts "  #{path}, (domain #{$2}, name #{$3}) !"
         self.register path, $3, $2
       end
-    end
-    return
-          
-    require 'find'
-    $stderr.puts "Register all resources in #{topdir}/*/#{subdir}"
-    
-    Find.find(topdir) do |path|
-      $stderr.puts path
-      next unless path =~ %r{#{subdir}/((\w+)/)?(\w+)\.ya?ml$}
-      $stderr.puts "  #{path}, (domain #{$2}, name #{$3}) !"
-      self.register path, $3, $2
     end
   end
   
