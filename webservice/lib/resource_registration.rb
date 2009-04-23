@@ -3,16 +3,8 @@ class ResourceRegistration
 
   # start by cleaning Domain and Resource tables
   def self.init
-    begin
-       Resource.delete_all
-    rescue
-       $stderr.puts "Table resources does not exist."
-    end
-    begin
-       Domain.delete_all
-    rescue
-       $stderr.puts "Table rescues does not exist."
-    end
+    Resource.delete_all if Resource.table_exists?
+    Domain.delete_all if Domain.table_exists?
   end
   
   # register a (.yaml) resource description
@@ -136,6 +128,12 @@ class ResourceRegistration
   
   def self.route_all
 
+    if not Resource.table_exists? or
+       not Domain.table_exists?
+      Rails.logger.debug "routes not ready because db:migrate not done"
+      return
+    end
+    
     prefix = "yast"
     
     resources = Resource.find(:all)
