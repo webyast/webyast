@@ -3,7 +3,7 @@ class CheckPermissionController < ApplicationController
   before_filter :login_required
 
   def show
-     right = "org.opensuse.yast.webservice." + params[:id]
+     right = "org.opensuse.yast." + params[:id]
      @cmd_ret = Hash.new
      if polkit_check( right, self.current_account.login) == :yes
         @cmd_ret["permission"] = "granted"
