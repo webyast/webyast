@@ -1,7 +1,0 @@
-#
-# test/resource_fixtures/check_domain/domain/resource.yaml
-#
-# name = 'resource' (implied by file name)
-# domain = 'domain' (implied by parent dir)
-#
-tags: test fixtures

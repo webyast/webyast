@@ -28,7 +28,7 @@ class ResourceRouteTest < ActiveSupport::TestCase
     
     # Ensure there is a route for every resource
     Resource.find(:all).each do |resource|
-#      assert_routing "/#{prefix}/#{resource.domain}/#{resource}", { :path => "#{resource.domain}/#{resource}", :method => :get }
+      assert_generates "/#{prefix}/#{resource.domain}/#{resource}", { :controller => "#{resource.domain}/#{resource}", :action => :index }
     end
   end
   

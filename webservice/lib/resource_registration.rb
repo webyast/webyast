@@ -11,7 +11,7 @@ class ResourceRegistration
 
   def self.register file, name = nil, domain = nil
     require 'yaml'
-    
+    in_production = (ENV["RAILS_ENV"] == "production")
     name = name || File.basename(file, ".*")
     begin
       resource = YAML.load(File.open(file))
@@ -26,11 +26,28 @@ class ResourceRegistration
     # domain: must be given
     d = resource["domain"] 
     if d
-      raise "#{file} has inconsistent domain to parent dir" if domain and domain != d
+      if domain and domain != d
+	error = "#{file} has inconsistent domain to parent dir"
+	if in_production
+	  logger.error error
+	  return
+	else
+	  raise error
+	end
+      end
       domain = d unless domain
     end
-    raise "#{file} does not specify domain" unless domain
-
+    
+    unless domain
+      error = "#{file} does not specify domain" 
+      if in_production
+	log.error
+	return
+      else
+	raise 
+      end
+    end
+    
     # tags:, optional
     tags = resource["tags"] || ""
     tags = tags.split " "
@@ -40,6 +57,16 @@ class ResourceRegistration
     # singular: is optional, defaults to false
     singular = resource["singular"] || false
       
+    if !singular and name != name.pluralize
+      error = "#{file}: has non-plural name without being flagged as singular"
+      if in_production
+	log.error error
+	return
+      else
+	raise error
+      end
+    end
+    
     # -------- database, r_ == record
 
     # Create/Find domain
@@ -55,7 +82,13 @@ class ResourceRegistration
     # should be:    r_resource = Resource.find_by_name_and_domain(name, r_domain)
     r_resource = Resource.find(:first, :conditions => ["name = ? and domain_id = ?", name, r_domain])
     if r_resource
-      raise "Resource #{domain}::#{name} already exists"
+      error = "Resource #{domain}::#{name} already exists"
+      if in_production
+	log.error error
+	return
+      else
+	raise error
+      end
     end
     r_resource = Resource.new
     r_resource.name = name
