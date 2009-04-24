@@ -6,6 +6,17 @@ class SessionsController < ApplicationController
     redirect_back_or_default('/')
   end
 
+  def show
+    ret = Hash.new
+    ret[:hash] = Hash.new
+    ret[:hash][:login] = 'foo'
+    respond_to do |format|
+      format.xml { render :xml => ret.to_xml, :location => "none" }
+      format.json { render :json => ret.to_json, :location => "none" }
+      format.html { render :html => ret.to_xml, :location => "none" }
+    end
+  end
+  
   def create
     if params["hash"] != nil
       #checking if the session description is hosted in a own Hash
