@@ -9,6 +9,7 @@ ResourceRegistration.route_all
 # route sessions statically, it is a singleton controller
 ActionController::Routing::Routes.draw do |map|
   map.resource :session
+  map.resource :check_permission
   # login uses POST for both
   map.login "/login.:format", :controller => 'sessions', :action => 'create'
   map.logout "/logout.:format", :controller => 'sessions', :action => 'destroy'

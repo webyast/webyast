@@ -1,4 +1,4 @@
-  # load resources and populate database
+# load resources and populate database
 class ResourceRegistration
 
   # start by cleaning Domain and Resource tables
@@ -8,8 +8,11 @@ class ResourceRegistration
   end
   
   # register a (.yaml) resource description
-
-  def self.register file, name = nil, domain = nil
+  #
+  # optionally the name and domain can be passed
+  # otherwise they are read from the yml file
+  def self.register(file, name = nil, domain = nil)
+    $stderr.puts "register #{file}"
     require 'yaml'
     in_production = (ENV["RAILS_ENV"] == "production")
     name = name || File.basename(file, ".*")
@@ -21,10 +24,10 @@ class ResourceRegistration
     end
 
     # name: can override
-    name = resource["name"] || name
+    name = resource['name'] || name
       
     # domain: must be given
-    d = resource["domain"] 
+    d = resource['domain'] 
     if d
       if domain and domain != d
 	error = "#{file} has inconsistent domain to parent dir"
@@ -98,25 +101,18 @@ class ResourceRegistration
     r_resource.save
 
   end
-  
-  # register all resources below <topdir>/*/<subdir>/*.yaml
-  def self.register_all topdir, subdir
 
-    # for each plugin
-    require 'find'
-    Dir.entries(topdir).each do |entry|
-      plugin_resource_path = File.join(topdir, entry, subdir)
-      Find.find(plugin_resource_path) do |path|
-        #$stderr.puts path
-        next unless path =~ %r{#{subdir}/((\w+)/)?(\w+)\.ya?ml$}
-#        $stderr.puts "  #{path}, (domain #{$2}, name #{$3}) !"
-        self.register path, $3, $2
-      end
+  # register routes from a plugin
+  def self.register_plugin(plugin)
+    res_path = File.join(plugin.directory, 'config', 'resources')
+    Dir.glob(File.join(res_path, '**/*.yml')).each do |descriptor|
+      next unless descriptor =~ %r{#{res_path}/((\w+)/)?(\w+)\.yml$}
+      self.register(descriptor, $3, $2)
     end
   end
-  
-  def self.route_all
 
+  # routes all registered plugins
+  def self.route_all
     if not Resource.table_exists? or
        not Domain.table_exists?
       Rails.logger.debug "routes not ready because db:migrate not done"
@@ -129,17 +125,22 @@ class ResourceRegistration
     domains = Domain.find(:all)
 
     ActionController::Routing::Routes.draw do |map|
-
       map.resources prefix, :controller => "resource", :only => :index
-
       resources.each do |resource|
+
+        # make the old routes still valid
+        if resource.singular?
+          map.resource resource.name
+        else
+          map.resources resource.name
+        end
+        
 	domain = resource.domain
 	
-	#
 	# doing .with_options(:domain => "...", :path_prefix => "...") assembles the controller domain without a slash :-(
-	#															  
-
-	map.with_options(:path_prefix => "#{prefix}/#{domain}") do |path|
+	#
+        #map.with_options(:path_prefix => "#{prefix}/#{domain}") do |path|
+        map.with_options(:path_prefix => "#{prefix}") do |path|
 	  # put the controller below <ns>
 	  path.namespace(domain.name) do |yast|
 	    yast.resources resource.name

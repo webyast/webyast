@@ -4,8 +4,10 @@
    <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
    <meta name="GENERATOR">
    <title>YaST-webservice REST Interface</title>
+   <script src="javascripts/prettify.js" type="text/javascript" onerror="alert('Error: failed to load ' + this.src)"></script>
+   <link rel="stylesheet" type="text/css" href="stylesheets/prettify.css" />
 </head>
-<body text="#000000" bgcolor="#FFFFFF" link="#0000EE" vlink="#551A8B" alink="#FF0000">
+<body onload="prettyPrint()" text="#000000" bgcolor="#FFFFFF" link="#0000EE" vlink="#551A8B" alink="#FF0000">
 
 
 <h1>YaST-webservice REST Interface</h1>
@@ -23,7 +25,9 @@ Please have a look to
 
 <p>E.g. in order to get or set the systemtime you can use the HTTP URL:
 
-<br>http://&lt;name_of_the_host&gt;/yast/&lt;protocol_version&gt;/systemtime/currenttime
+<pre class="prettyprint">
+http://&lt;name_of_the_host&gt;/yast/&lt;protocol_version&gt;/systemtime/currenttime
+</pre>
 
 <p>In order to identify if this value has to be set or has to be get
 the HTTP protocol has four methods:
@@ -48,78 +52,74 @@ the HTTP protocol has four methods:
 
 <h2>General Structure of the HTTP Requests</h2>
 
-<p><br>Information can be get/set in/with 3 different formats:
+<p>
+Information can be get/set in/with 3 different formats:
 
-<p>http://&lt;name_of_the_host&gt;/yast/&lt;protocol_version&gt;/systemtime
-<br>Returns the systemtime in HTML format. Calling this URL not via a 
+<pre  class="prettyprint">http://&lt;name_of_the_host&gt;/yast/&lt;protocol_version&gt;/systemtime</pre>
+
+Returns the systemtime in HTML format. Calling this URL not via a 
 browser the values will be retunred in XML format.
 
-<p>http://&lt;name_of_the_host&gt;/yast/&lt;protocol_version&gt;/systemtime.xml
-<br>Returns the systemtime in XML format
+<pre  class="prettyprint">http://&lt;name_of_the_host&gt;/yast/&lt;protocol_version&gt;/systemtime.xml</pre>
+Returns the systemtime in XML format
 
-<p>http://&lt;name_of_the_host&gt;/yast/&lt;protocol_version&gt;/systemtime.json
-<br>Returns the systemtime in JSON format
+<pre  class="prettyprint">http://&lt;name_of_the_host&gt;/yast/&lt;protocol_version&gt;/systemtime.json</pre>
+Returns the systemtime in JSON format
 
 <h3>GET</h3>
 
-<p><br>Information can be get in a block or each entry of the block can be get
+<p>Information can be get in a block or each entry of the block can be get
 in an extra HTTP call:
 
-<p>GET http://&lt;name_of_the_host&gt;/yast/&lt;protocol_version&gt;/systemtime.xml
+<pre  class="prettyprint">GET http://&lt;name_of_the_host&gt;/yast/&lt;protocol_version&gt;/systemtime.xml</pre>
 
-<p>returns
+returns
 
 <p>&lt;systemtime&gt;
-<blockquote>
+<pre class="prettyprint">
 &lt;currenttime type="datetime"&gt;2008-09-10T17:13:37Z&lt;/currenttime&gt;
-<br>&lt;is_utc type="boolean"&gt;false&lt;/is_utc&gt;
-<br>&lt;timezone&gt;Europe/Berlin&lt;/timezone&gt;
-<br>&lt;validtimezones type="array"&gt;
-  <blockquote>
+  &lt;is_utc type="boolean"&gt;false&lt;/is_utc&gt;
+  &lt;timezone&gt;Europe/Berlin&lt;/timezone&gt;
+  &lt;validtimezones type="array"&gt;
      &lt;timezone&gt;
-     <blockquote>
         &lt;id&gt;Africa/Abidjan&lt;/id&gt;
-     </blockquote>
      &lt;/timezone&gt;
-  </blockquote>
-  <blockquote>
      &lt;timezone&gt;
-     <blockquote>
         &lt;id&gt;Africa/Accra&lt;/id&gt;
-     </blockquote>
      &lt;/timezone&gt;
-     <br>....
-     <br>..
-     <br>.
-  </blockquote>
+     ....
+     ..
+     .
   &lt;/validtimezones&gt;
-</blockquote>
 &lt;/systemtime&gt;
+</pre>
 
-<p>whereas 
+whereas 
 
-<p>GET http://0.0.0.0:3001/yast/&lt;protocol_version&gt;/systemtime/timezone.xml
+<pre class="prettyprint">GET http://0.0.0.0:3001/yast/&lt;protocol_version&gt;/systemtime/timezone.xml</pre>
 
-<p>returns
+returns
 
-<p>&lt;systemtime&gt;
-<blockquote>
+<pre class="prettyprint">
+&lt;systemtime&gt;
 &lt;currenttime type="datetime" nil="true"/&gt;
-<br>&lt;is_utc type="boolean" nil="true"/&gt;
-<br>&lt;timezone&gt;Europe/Berlin&lt;/timezone&gt;
-<br>&lt;error_id type="integer"&gt;0&lt;/error_id&gt;
-<br>&lt;error_string/&gt;
-</blockquote>
+    &lt;is_utc type="boolean" nil="true"/&gt;
+    &lt;timezone&gt;Europe/Berlin&lt;/timezone&gt;
+    &lt;error_id type="integer"&gt;0&lt;/error_id&gt;
+    &lt;error_string/&gt;
 &lt;/systemtime&gt;
+</pre>
 
-<p>So, only the required value has been set in the return value.
+So, only the required value has been set in the return value.</p>
 
 <p>GET calls can be generated on the command line with the call:
 
-<p>curl -0 -X GET -b &lt;cookie_file&gt; http://0.0.0.0:3001/yast/v1/systemtime/timezone.xml
+<pre class="prettyprint">
+curl -0 -X GET -b &lt;cookie_file&gt; http://0.0.0.0:3001/yast/v1/systemtime/timezone.xml
+</pre>
 
-<p>("-b &lt;cookie_file&gt;" describes a cookie with the filename "cookie_file". This
- cookie contains the login information of the current session.)
+("-b &lt;cookie_file&gt;" describes a cookie with the filename "cookie_file". This
+ cookie contains the login information of the current session.)</p>
 
 <h3>PUT</h3>
 
@@ -129,113 +129,87 @@ can be set explicit in an extra HTTP call:
 
 <p>PUT http://&lt;name_of_the_host&gt;/yast/&lt;protocol_version&gt;/language with a block of XML data
 
-<p>&lt;?xml version="1.0" encoding="UTF-8"?&gt;
-<br>&lt;language&gt;
-<blockquote>
-  &lt;first_language&gt;de_DE&lt;/first_language&gt;
-  <br>&lt;second_languages type="array"&gt;
-  <blockquote>
+<pre class="prettyprint">
+&lt;?xml version="1.0" encoding="UTF-8"?&gt;
+  &lt;language&gt;
+    &lt;first_language&gt;de_DE&lt;/first_language&gt;
+      &lt;second_languages type="array"&gt;
      &lt;language&gt;
-     <blockquote>
         &lt;id&gt;en_US&lt;/id&gt;
-     </blockquote>
      &lt;/language&gt;
-  </blockquote>
-  <blockquote>
      &lt;language&gt;
-     <blockquote>
         &lt;id&gt;en_GB&lt;/id&gt;
-     </blockquote>
      &lt;/language&gt;
-  </blockquote>
   &lt;/second_languages&gt;
-</blockquote>
 &lt;/language&gt;
-</blockquote>
+</pre>
 
-<p>whereas 
+whereas 
 
-<p>PUT http://0.0.0.0:3001/yast/v1/language/second_languages with a single XML value
+<pre class="prettyprint">PUT http://0.0.0.0:3001/yast/v1/language/second_languages with a single XML value</pre>
 
-<p>&lt;?xml version="1.0" encoding="UTF-8"?&gt;
-<br>&lt;language&gt;
-<blockquote>
+<pre class="prettyprint">
+&lt;?xml version="1.0" encoding="UTF-8"?&gt;
+&lt;language&gt;
   &lt;second_languages type="array"&gt;
-  <blockquote>
      &lt;language&gt;
-     <blockquote>
         &lt;id&gt;en_US&lt;/id&gt;
-     </blockquote>
      &lt;/language&gt;
-  </blockquote>
-  <blockquote>
      &lt;language&gt;
-     <blockquote>
         &lt;id&gt;en_GB&lt;/id&gt;
-     </blockquote>
      &lt;/language&gt;
-  </blockquote>
   &lt;/second_languages&gt;
-</blockquote>
 &lt;/language&gt;
+</pre>
 
-<p>So only the required value has been set.
+So only the required value has been set.</p>
 
-<p>Note: Also HTML and JSON format is a valid format for values which have to be changed.
+<p>Note: Also HTML and JSON format is a valid format for values which have to be changed.</p>
 
-<p>Put calls can be generated on the command line with the call:
+<p>Put calls can be generated on the command line with the call:</p>
 
-<p>curl -0 -v -H "Content-Type: application/xml; charset=utf-8" -T &lt;data-file&gt; -b &lt;cookie_file&gt; http://0.0.0.0:3001/yast/v1/language/second_languages.xml
+<pre class="prettyprint">curl -0 -v -H "Content-Type: application/xml; charset=utf-8" -T &lt;data-file&gt; -b &lt;cookie_file&gt; http://0.0.0.0:3001/yast/v1/language/second_languages.xml</pre>
 
 <p>("-b &lt;cookie_file&gt;" describes a cookie with the filename "cookie_file". This
- cookie contains the login information of the current session.)
+ cookie contains the login information of the current session.)</p>
 
 <h3>POST</h3>
 
-<p><br>Post requests are used for creating new entries e.g. adding a new user account:
+<p>Post requests are used for creating new entries e.g. adding a new user account:</p>
 
 <p>POST http://0.0.0.0:3001/yast/v1/users.xml with the XML values:
 
-<p>&lt;?xml version="1.0" encoding="UTF-8"?&gt;
-<br>&lt;user&gt;
-<blockquote>
+<pre class="prettyprint">
+&lt;?xml version="1.0" encoding="UTF-8"?&gt;
+&lt;user&gt;
   &lt;default_group&gt;users&lt;/default_group&gt;
-  <br>&lt;full_name&gt;tux2 tux2&lt;/full_name&gt;
-  <br>&lt;groups type="array"&gt;
-  <blockquote>
+      &lt;full_name&gt;tux2 tux2&lt;/full_name&gt;
+      &lt;groups type="array"&gt;
      &lt;group&gt;
-     <blockquote>
         &lt;id&gt;users&lt;/id&gt;
-     </blockquote>
      &lt;/group&gt;
-  </blockquote>
-  <blockquote>
      &lt;group&gt;
-     <blockquote>
         &lt;id&gt;dialout&lt;/id&gt;
-     </blockquote>
      &lt;/group&gt;
-  </blockquote>
   &lt;/groups&gt;
-  <br>&lt;home_directory&gt;/home/tux2&lt;/home_directory&gt;
-  <br>&lt;login_name&gt;tux2&lt;/login_name&gt;
-  <br>&lt;login_shell&gt;/bin/bash&lt;/login_shell&gt;
-  <br>&lt;no_home type="boolean"&gt;false&lt;/no_home&gt;
-  <br>&lt;password&gt;tuxtux&lt;/password&gt;
-  <br>&lt;uid type="integer"&gt;1002&lt;/uid&gt;
-</blockquote>
+  &lt;home_directory&gt;/home/tux2&lt;/home_directory&gt;
+  &lt;login_name&gt;tux2&lt;/login_name&gt;
+  &lt;login_shell&gt;/bin/bash&lt;/login_shell&gt;
+  &lt;no_home type="boolean"&gt;false&lt;/no_home&gt;
+  &lt;password&gt;tuxtux&lt;/password&gt;
+  &lt;uid type="integer"&gt;1002&lt;/uid&gt;
 &lt;/user&gt;
+</pre>
 
+<p>POST calls can be generated on the command line with the call:</p>
 
-<p>POST calls can be generated on the command line with the call:
-
-<p>curl -0 -X POST -v -H "Content-Type: application/xml; charset=utf-8" -T &lt;data-file&gt; -b &lt;cookie_file&gt; http://0.0.0.0:3001/yast/v1/users.xml
+<pre class="prettyprint">curl -0 -X POST -v -H "Content-Type: application/xml; charset=utf-8" -T &lt;data-file&gt; -b &lt;cookie_file&gt; http://0.0.0.0:3001/yast/v1/users.xml</pre>
 
 <p>(&lt;data-file&gt; is a file which contains the XML values described above.
  "-b &lt;cookie_file&gt;" describes a cookie with the filename "cookie_file". This
- cookie contains the login information of the current session.)
+ cookie contains the login information of the current session.)</p>
 
-<p>Note: Also HTML and JSON format is a valid format for values which have to be created.
+<p>Note: Also HTML and JSON format is a valid format for values which have to be created.</p>
 
 <h3>DELETE</h3>
 
@@ -256,170 +230,179 @@ can be set explicit in an extra HTTP call:
 
 <h3>&lt;hostname&gt;/yast/&lt;protocol_version&gt;/login</h3>
 
-<p><br>Login and creates a session. An additional login cookie will be generated if it is required.
-The user account will be checked with PAM. So SYSTEM users can login only.
+<p>Login and creates a session. An additional login cookie will be generated if it is required.
+The user account will be checked with PAM. So SYSTEM users can login only.</p>
 
-<p>POST &lt;hostname&gt;/yast/&lt;protocol_version&gt;/login checks an SYSTEM accout and creates a session with the given values:
+<p>POST &lt;hostname&gt;/yast/&lt;protocol_version&gt;/login checks an SYSTEM accout and creates a session with the given values:</p>
 
-<p>&lt;hash&gt;
-<blockquote>
+<pre class="prettyprint">
+&lt;hash&gt;
   &lt;login&gt;tuxtux&lt;/login&gt;
-  <br>&lt;password&gt;password_tuxtux&lt;/password&gt;
-  <br>&lt;remember_me type="boolean"&gt;true&lt;/remember_me&gt;
-</blockquote>
+  &lt;password&gt;password_tuxtux&lt;/password&gt;
+  &lt;remember_me type="boolean"&gt;true&lt;/remember_me&gt;
 &lt;/hash&gt;
+</pre>
 
-<p>remember_me: Generates a cookie with a valid time period of 1 day.
+<p>remember_me: Generates a cookie with a valid time period of 1 day.</p>
 
-<p>This returns:
+<p>This returns:</p>
 
-<p>&lt;hash&gt;
-<blockquote>
+<pre class="prettyprint">
+&lt;hash&gt;
   &lt;login&gt;granted&lt;/login&gt;
-</blockquote>
 &lt;/hash&gt;
+</pre>
 
-<p>OR in the error case:
+OR in the error case:
 
-<p>&lt;hash&gt;
-<blockquote>
+<pre class="prettyprint">
+&lt;hash&gt;
   &lt;login&gt;denied&lt;/login&gt;
-</blockquote>
 &lt;/hash&gt;
+</pre>
 
-<p>If you are using "curl" for testing you will have to generate a session cookie with the call:
+<p>If you are using "curl" for testing you will have to generate a session cookie with the call:</p>
 
-<p>curl -0 -X POST -v -H "Content-Type: application/xml; charset=utf-8" -T &lt;login_xml_file&gt; -c &lt;cookie_file&gt; http://0.0.0.0:3001/yast/v1/login.xml
+<pre class="prettyprint">
+curl -0 -X POST -v -H "Content-Type: application/xml; charset=utf-8" -T &lt;login_xml_file&gt; -c &lt;cookie_file&gt; http://0.0.0.0:3001/yast/v1/login.xml
+</pre>
 
-<p>This call will generate a cookie file with login data described in &lt;login_xml_file&gt;.
+<p>This call will generate a cookie file with login data described in &lt;login_xml_file&gt;.</p>
 
 <h3>&lt;hostname&gt;/yast/&lt;protocol_version&gt;/checkpermission/&lt;policyKitRule&gt;</h3>
 
-<p><br>Checking if the user of the current session has the permission of the
-given rule &lt;policyKitRule&gt;.
-<br>&lt;policyKitRule&gt; is given <b>without</b> the "pre" string
-"org.opensuse.yast.webservice.".
-<br>This call is useful for applications which have to check the permissions BEFORE they generate a
-e.g. menue entry or input frame.
+<p>Checking if the user of the current session has the permission of the
+given rule &lt;policyKitRule&gt;.</p>
+</p>&lt;policyKitRule&gt; is given <b>without</b> the "pre" string
+"org.opensuse.yast.webservice.".</p>
+<p>This call is useful for applications which have to check the permissions BEFORE they generate a
+e.g. menue entry or input frame.</p>
 
-<p>GET &lt;hostname&gt;/yast/&lt;protocol_version&gt;/checkpermission/&lt;policyKitRule&gt; checks the permission and returns:
+<pre class="prettyprint">
+GET &lt;hostname&gt;/yast/&lt;protocol_version&gt;/checkpermission/&lt;policyKitRule&gt;
+</pre>
+checks the permission and returns:
 
-<p>&lt;hash&gt;
-<blockquote>
+<pre class="prettyprint">
+&lt;hash&gt;
   &lt;permission&gt;granted&lt;/permission&gt;
-</blockquote>
 &lt;/hash&gt;
+</pre>
 
-<p>OR
+OR
 
-<p>&lt;hash&gt;
-<blockquote>
+<pre class="prettyprint">
+&lt;hash&gt;
   &lt;permission&gt;denied&lt;/permission&gt;
-</blockquote>
 &lt;/hash&gt;
+</pre>
 
 <h3>&lt;hostname&gt;/yast/&lt;protocol_version&gt;/logout</h3>
 
-<p><br>Destroys the current session and invalidates the concerning cookie (if there is one).
+<p>Destroys the current session and invalidates the concerning cookie (if there is one).</p>
 
-<p>POST &lt;hostname&gt;/yast/&lt;protocol_version&gt;/logout
+<pre class="prettyprint">POST &lt;hostname&gt;/yast/&lt;protocol_version&gt;/logout</pre>
 
-<p>This returns:
+<p>This returns:</p>
 
-<p>&lt;hash&gt;
-<blockquote>
+<pre class="prettyprint">
+&lt;hash&gt;
   &lt;logout&gt;Goodbye!&lt;/logout&gt;
-</blockquote>
 &lt;/hash&gt;
+</pre>
 
 <h3>&lt;hostname&gt;/yast/&lt;protocol_version&gt;/.xml or &lt;hostname&gt;/yast/&lt;protocol_version&gt;/yast.xml</h3>
 
-<p><br>Returns a list of all available modules. The permissions are set if the
+<p>Returns a list of all available modules. The permissions are set if the
 user has logged in.
 
-<p>GET &lt;hostname&gt;/yast/&lt;protocol_version&gt;/.xml
+<pre class="prettyprint">
+GET &lt;hostname&gt;/yast/&lt;protocol_version&gt;/.xml
+</pre>
 
-<p>returns:
+<p>returns:</p>
 
-<p>&lt;links type="array"&gt;
-<br>&lt;link&gt;
-  <blockquote>
+<pre class="prettyprint">
+&lt;links type="array"&gt;
+&lt;link&gt;
+  
   &lt;description&gt;Creating a YaST Webservice session&lt;/description&gt;
-  <br>&lt;path&gt;login&lt;/path&gt;
-  <br>&lt;install_permission type="boolean"&gt;false&lt;/install_permission&gt;
-  <br>&lt;read_permission type="boolean"&gt;false&lt;/read_permission&gt;
-  <br>&lt;write_permission type="boolean"&gt;false&lt;/write_permission&gt;
-  <br>&lt;new_permission type="boolean"&gt;false&lt;/new_permission&gt;
-  <br>&lt;execute_permission type="boolean"&gt;false&lt;/execute_permission&gt;
-  </blockquote>
+  &lt;path&gt;login&lt;/path&gt;
+  &lt;install_permission type="boolean"&gt;false&lt;/install_permission&gt;
+  &lt;read_permission type="boolean"&gt;false&lt;/read_permission&gt;
+  &lt;write_permission type="boolean"&gt;false&lt;/write_permission&gt;
+  &lt;new_permission type="boolean"&gt;false&lt;/new_permission&gt;
+  &lt;execute_permission type="boolean"&gt;false&lt;/execute_permission&gt;
+  
 &lt;/link&gt;
-<br>&lt;link&gt;
-  <blockquote>
+&lt;link&gt;
+  
   &lt;description&gt;Closing YaST Webservice session&lt;/description&gt;
-  <br>&lt;path&gt;logout&lt;/path&gt;
-  <br>&lt;install_permission type="boolean"&gt;false&lt;/install_permission&gt;
-  <br>&lt;read_permission type="boolean"&gt;false&lt;/read_permission&gt;
-  <br>&lt;write_permission type="boolean"&gt;false&lt;/write_permission&gt;
-  <br>&lt;new_permission type="boolean"&gt;false&lt;/new_permission&gt;
-  <br>&lt;execute_permission type="boolean"&gt;false&lt;/execute_permission&gt;
-  </blockquote>
+  &lt;path&gt;logout&lt;/path&gt;
+  &lt;install_permission type="boolean"&gt;false&lt;/install_permission&gt;
+  &lt;read_permission type="boolean"&gt;false&lt;/read_permission&gt;
+  &lt;write_permission type="boolean"&gt;false&lt;/write_permission&gt;
+  &lt;new_permission type="boolean"&gt;false&lt;/new_permission&gt;
+  &lt;execute_permission type="boolean"&gt;false&lt;/execute_permission&gt;
+  
 &lt;/link&gt;
-<br>&lt;link&gt;
-  <blockquote>
+&lt;link&gt;
+  
   &lt;description&gt;Managing Linux services like samba, ntp,...&lt;/description&gt;
-  <br>&lt;path&gt;services&lt;/path&gt;
-  <br>&lt;install_permission type="boolean"&gt;false&lt;/install_permission&gt;
-  <br>&lt;read_permission type="boolean"&gt;false&lt;/read_permission&gt;
-  <br>&lt;write_permission type="boolean"&gt;false&lt;/write_permission&gt;
-  <br>&lt;new_permission type="boolean"&gt;false&lt;/new_permission&gt;
-  <br>&lt;execute_permission type="boolean"&gt;false&lt;/execute_permission&gt;
-  </blockquote>
+  &lt;path&gt;services&lt;/path&gt;
+  &lt;install_permission type="boolean"&gt;false&lt;/install_permission&gt;
+  &lt;read_permission type="boolean"&gt;false&lt;/read_permission&gt;
+  &lt;write_permission type="boolean"&gt;false&lt;/write_permission&gt;
+  &lt;new_permission type="boolean"&gt;false&lt;/new_permission&gt;
+  &lt;execute_permission type="boolean"&gt;false&lt;/execute_permission&gt;
+  
 &lt;/link&gt;
-<br>&lt;link&gt;
-  <blockquote>
+&lt;link&gt;
+  
   &lt;description&gt;Setting system time&lt;/description&gt;
-  <br>&lt;path&gt;systemtime&lt;/path&gt;
-  <br>&lt;install_permission type="boolean"&gt;false&lt;/install_permission&gt;
-  <br>&lt;read_permission type="boolean"&gt;false&lt;/read_permission&gt;
-  <br>&lt;write_permission type="boolean"&gt;false&lt;/write_permission&gt;
-  <br>&lt;new_permission type="boolean"&gt;false&lt;/new_permission&gt;
-  <br>&lt;execute_permission type="boolean"&gt;false&lt;/execute_permission&gt;
-  </blockquote>
+  &lt;path&gt;systemtime&lt;/path&gt;
+  &lt;install_permission type="boolean"&gt;false&lt;/install_permission&gt;
+  &lt;read_permission type="boolean"&gt;false&lt;/read_permission&gt;
+  &lt;write_permission type="boolean"&gt;false&lt;/write_permission&gt;
+  &lt;new_permission type="boolean"&gt;false&lt;/new_permission&gt;
+  &lt;execute_permission type="boolean"&gt;false&lt;/execute_permission&gt;
+  
 &lt;/link&gt;
-<br>&lt;link&gt;
-  <blockquote>
+&lt;link&gt;
+  
   &lt;description&gt;Setting language&lt;/description&gt;
-  <br>&lt;path&gt;language&lt;/path&gt;
-  <br>&lt;install_permission type="boolean"&gt;false&lt;/install_permission&gt;
-  <br>&lt;read_permission type="boolean"&gt;false&lt;/read_permission&gt;
-  <br>&lt;write_permission type="boolean"&gt;false&lt;/write_permission&gt;
-  <br>&lt;new_permission type="boolean"&gt;false&lt;/new_permission&gt;
-  <br>&lt;execute_permission type="boolean"&gt;false&lt;/execute_permission&gt;
-  </blockquote>
+  &lt;path&gt;language&lt;/path&gt;
+  &lt;install_permission type="boolean"&gt;false&lt;/install_permission&gt;
+  &lt;read_permission type="boolean"&gt;false&lt;/read_permission&gt;
+  &lt;write_permission type="boolean"&gt;false&lt;/write_permission&gt;
+  &lt;new_permission type="boolean"&gt;false&lt;/new_permission&gt;
+  &lt;execute_permission type="boolean"&gt;false&lt;/execute_permission&gt;
+  
 &lt;/link&gt;
-<br>&lt;link&gt;
-  <blockquote>
+&lt;link&gt;
+  
   &lt;description&gt;Checking access rights&lt;/description&gt;
-  <br>&lt;path&gt;users&lt;/path&gt;
-  <br>&lt;install_permission type="boolean"&gt;false&lt;/install_permission&gt;
-  <br>&lt;read_permission type="boolean"&gt;false&lt;/read_permission&gt;
-  <br>&lt;write_permission type="boolean"&gt;false&lt;/write_permission&gt;
-  <br>&lt;new_permission type="boolean"&gt;false&lt;/new_permission&gt;
-  <br>&lt;execute_permission type="boolean"&gt;false&lt;/execute_permission&gt;
-  </blockquote>
+  &lt;path&gt;users&lt;/path&gt;
+  &lt;install_permission type="boolean"&gt;false&lt;/install_permission&gt;
+  &lt;read_permission type="boolean"&gt;false&lt;/read_permission&gt;
+  &lt;write_permission type="boolean"&gt;false&lt;/write_permission&gt;
+  &lt;new_permission type="boolean"&gt;false&lt;/new_permission&gt;
+  &lt;execute_permission type="boolean"&gt;false&lt;/execute_permission&gt;
+  
 &lt;/link&gt;
-<br>&lt;link&gt;
-  <blockquote>
+&lt;link&gt;
+  
   &lt;description&gt;Updating System&lt;/description&gt;
-  <br>&lt;path&gt;patch_updates&lt;/path&gt;
-  <br>&lt;install_permission type="boolean"&gt;false&lt;/install_permission&gt;
-  <br>&lt;read_permission type="boolean"&gt;false&lt;/read_permission&gt;
-  <br>&lt;write_permission type="boolean"&gt;false&lt;/write_permission&gt;
-  <br>&lt;new_permission type="boolean"&gt;false&lt;/new_permission&gt;
-  <br>&lt;execute_permission type="boolean"&gt;false&lt;/execute_permission&gt;
-  </blockquote>
+  &lt;path&gt;patch_updates&lt;/path&gt;
+  &lt;install_permission type="boolean"&gt;false&lt;/install_permission&gt;
+  &lt;read_permission type="boolean"&gt;false&lt;/read_permission&gt;
+  &lt;write_permission type="boolean"&gt;false&lt;/write_permission&gt;
+  &lt;new_permission type="boolean"&gt;false&lt;/new_permission&gt;
+  &lt;execute_permission type="boolean"&gt;false&lt;/execute_permission&gt;
+
 &lt;/link&gt;
-<br>&lt;/links&gt;
+&lt;/links&gt;
+</pre>
 
 
 <h3>&lt;hostname&gt;/yast/&lt;protocol_version&gt;/services</h3>
@@ -430,134 +413,105 @@ user has logged in.
 
 <p>returns:
 
-<p>&lt;services type="array"&gt; 
-<br>&lt;service&gt;
-  <blockquote>
+<pre class="prettyprint">
+&lt;services type="array"&gt; 
+&lt;service&gt;
     &lt;link&gt;smbfs&lt;/link&gt;
-    <br>&lt;path&gt;/etc/init.d/smbfs&lt;/path&gt;
-    <br>&lt;commands&gt;
-       <blockquote>
+        &lt;path&gt;/etc/init.d/smbfs&lt;/path&gt;
+        &lt;commands&gt;
        &lt;command&gt; 
-          <blockquote>
           &lt;name&gt;run&lt;/name&gt;
-          </blockquote>
        &lt;/command&gt; 
        &lt;command&gt; 
-          <blockquote>
           &lt;name&gt;stop&lt;/name&gt;
-          </blockquote>
        &lt;/command&gt; 
        &lt;command&gt; 
-          <blockquote>
           &lt;name&gt;status&lt;/name&gt;
-          </blockquote>
        &lt;/command&gt; 
        &lt;command&gt; 
-          <blockquote>
           &lt;name&gt;restart&lt;/name&gt;
-          </blockquote>
        &lt;/command&gt; 
-       </blockquote>
     &lt;/commands&gt;
-    <br>&lt;error_id type="integer"&gt;0&lt;/error_id&gt;
-    <br>&lt;error_string/&gt;
-  </blockquote>
+    &lt;error_id type="integer"&gt;0&lt;/error_id&gt;
+    &lt;error_string/&gt;
   &lt;/service&gt;
-  <br>&lt;service&gt;
-  <blockquote>
+  &lt;service&gt;
     &lt;link&gt;sshd&lt;/link&gt;
-    <br>&lt;path&gt;/etc/init.d/sshd&lt;/path&gt;
-    <br>&lt;commands&gt;
-       <blockquote>
+    &lt;path&gt;/etc/init.d/sshd&lt;/path&gt;
+    &lt;commands&gt;
        &lt;command&gt; 
-          <blockquote>
           &lt;name&gt;run&lt;/name&gt;
-          </blockquote>
        &lt;/command&gt; 
        &lt;command&gt; 
-          <blockquote>
           &lt;name&gt;stop&lt;/name&gt;
-          </blockquote>
        &lt;/command&gt; 
        &lt;command&gt; 
-          <blockquote>
           &lt;name&gt;status&lt;/name&gt;
-          </blockquote>
        &lt;/command&gt; 
        &lt;command&gt; 
-          <blockquote>
           &lt;name&gt;restart&lt;/name&gt;
-          </blockquote>
        &lt;/command&gt; 
-       </blockquote>
     &lt;/commands&gt;
-    <br>&lt;error_id type="integer"&gt;0&lt;/error_id&gt;
-    <br>&lt;error_string/&gt;
-   </blockquote>
+    &lt;error_id type="integer"&gt;0&lt;/error_id&gt;
+    &lt;error_string/&gt;
   &lt;/service&gt;
-  <br>&lt;service&gt;
-  <br>...
-  <br>  &lt;/service&gt;
-  <br>&lt;/services&gt; 
+  &lt;service&gt;
+  ...
+    &lt;/service&gt;
+  &lt;/services&gt; 
+</pre>
 
 <h3>&lt;hostname&gt;/yast/&lt;protocol_version&gt;/services/&lt;servicename&gt;</h3>
 
-<p><br>GET &lt;hostname&gt;/yast/&lt;protocol_version&gt;/services/smbfs.xml
+<pre class="prettyprint">
+GET &lt;hostname&gt;/yast/&lt;protocol_version&gt;/services/smbfs.xml
+</pre>
 
-<p>returns
+returns
 
-<p>&lt;service&gt;
-  <blockquote>
+<pre class="prettyprint">
+&lt;service&gt;
     &lt;link&gt;smbfs&lt;/link&gt;
-    <br>&lt;path&gt;/etc/init.d/smbfs&lt;/path&gt;
-    <br>&lt;commands&gt;
-       <blockquote>
-       &lt;command&gt; 
-          <blockquote>
-          &lt;name&gt;run&lt;/name&gt;
-          </blockquote>
-       &lt;/command&gt; 
-       &lt;command&gt; 
-          <blockquote>
-          &lt;name&gt;stop&lt;/name&gt;
-          </blockquote>
-       &lt;/command&gt; 
-       &lt;command&gt; 
-          <blockquote>
-          &lt;name&gt;status&lt;/name&gt;
-          </blockquote>
-       &lt;/command&gt; 
-       &lt;command&gt; 
-          <blockquote>
-          &lt;name&gt;restart&lt;/name&gt;
-          </blockquote>
-       &lt;/command&gt; 
-       </blockquote>
+    &lt;path&gt;/etc/init.d/smbfs&lt;/path&gt;
+    &lt;commands&gt;
+        &lt;command&gt;
+            &lt;name&gt;run&lt;/name&gt; 
+        &lt;/command&gt; &lt;command&gt;
+            &lt;name&gt;stop&lt;/name&gt; 
+        &lt;/command&gt; &lt;command&gt;
+            &lt;name&gt;status&lt;/name&gt; 
+        &lt;/command&gt; &lt;command&gt;
+            &lt;name&gt;restart&lt;/name&gt; 
+        &lt;/command&gt; 
     &lt;/commands&gt;
-    <br>&lt;error_id type="integer"&gt;0&lt;/error_id&gt;
-    <br>&lt;error_string/&gt;
-  </blockquote>
-&lt;/service&gt;
+    &lt;error_id type=&quot;integer&quot;&gt;0&lt;/error_id&gt;
+    &lt;error_string/&gt; 
+&lt;/service&gt; 
+</pre>
 
 <h3>&lt;hostname&gt;/yast/&lt;protocol_version&gt;/services/&lt;servicename&gt;/commands/&lt;command&gt;</h3>
 
-<p><br>PUT &lt;hostname&gt;/yast/&lt;protocol_version&gt;/services/ntp/commands/restart.xml
+<pre class="prettyprint">
+PUT &lt;hostname&gt;/yast/&lt;protocol_version&gt;/services/ntp/commands/restart.xml
+</pre>
 
 <h3>&lt;hostname&gt;/yast/&lt;protocol_version&gt;/services/ntp/config</h3>
 
-<p><br>GET &lt;hostname&gt;/yast/&lt;protocol_version&gt;/services/ntp/config.xml
+<pre class="prettyprint">
+GET &lt;hostname&gt;/yast/&lt;protocol_version&gt;/services/ntp/config.xml
+</pre>
 
-<p>returns
+returns
 
-<p>&lt;config_ntp&gt;
-  <blockquote>
-  &lt;enabled type="boolean"&gt;true&lt;/enabled&gt;
-  <br>&lt;manual_server&gt;&lt;/manual_server&gt;
-  <br>&lt;use_random_server type="boolean"&gt;true&lt;/use_random_server&gt;
-  <br>&lt;error_id type="integer"&gt;0&lt;/error_id&gt;
-  <br>&lt;error_string/&gt;
-  </blockquote>
-&lt;/config_ntp&gt;
+<pre class="prettyprint">
+&lt;config_ntp&gt;
+    &lt;enabled type=&quot;boolean&quot;&gt;true&lt;/enabled&gt;
+    &lt;manual_server&gt;&lt;/manual_server&gt;
+    &lt;use_random_server type=&quot;boolean&quot;&gt;true&lt;/use_random_server&gt;
+    &lt;error_id type=&quot;integer&quot;&gt;0&lt;/error_id&gt;
+    &lt;error_string/&gt; 
+&lt;/config_ntp&gt; 
+</pre>
 
 <p><table>
 <tr>
@@ -572,116 +526,101 @@ user has logged in.
 </tr>
 </table>
 
-<p>PUT &lt;hostname&gt;/yast/&lt;protocol_version&gt;/services/ntp/config.xml
+<pre class="prettyprint">
+PUT &lt;hostname&gt;/yast/&lt;protocol_version&gt;/services/ntp/config.xml
+</pre>
 
 <p>Writes ntp settings to the system. The given parameters are the same as the
-returned values of the GET request.
+returned values of the GET request.</p>
 
-<p>Note: Each single value can be get or set explicit.
+<p>Note: Each single value can be get or set explicit.</p>
 
-<p>e.G. GET &lt;hostname&gt;/yast/&lt;protocol_version&gt;/services/ntp/config/enabled.xml returns this value only.
+<p>e.G. GET &lt;hostname&gt;/yast/&lt;protocol_version&gt;/services/ntp/config/enabled.xml returns this value only.</p>
 
 <h3>&lt;hostname&gt;/yast/&lt;protocol_version&gt;/systemtime</h3>
 
-<p><br>Managing time, timezone,....
+<p>Managing time, timezone,....</p>
 
-<p>GET &lt;hostname&gt;/yast/&lt;protocol_version&gt;/systemtime.xml
+<pre class="prettyprint">
+GET &lt;hostname&gt;/yast/&lt;protocol_version&gt;/systemtime.xml
+</pre
 
-<p>returns
+returns
 
-<p>&lt;systemtime&gt;
-  <blockquote>
-  &lt;currenttime type="datetime"&gt;2008-09-11T11:29:21Z&lt;/currenttime&gt;
-  <br>&lt;is_utc type="boolean"&gt;false&lt;/is_utc&gt;
-  <br>&lt;timezone&gt;Europe/Berlin&lt;/timezone&gt;
-  <br>&lt;validtimezones type="array"&gt;
-  <blockquote>
-     &lt;timezone&gt;
-     <blockquote>
-        &lt;id&gt;Africa/Abidjan&lt;/id&gt;
-     </blockquote>
-     &lt;/timezone&gt;
-  </blockquote>
-  <blockquote>
-     &lt;timezone&gt;
-     <blockquote>
-        &lt;id&gt;Africa/Accra&lt;/id&gt;
-     </blockquote>
-     &lt;/timezone&gt;
-     <br>....
-     <br>..
-     <br>.
-  </blockquote>
-  &lt;/validtimezones&gt;
-  <br>&lt;error_id type="integer"&gt;0&lt;/error_id&gt;
-  <br>&lt;error_string/&gt;
-  </blockquote>
-&lt;/systemtime&gt;
+<pre class="prettyprint">
+&lt;systemtime&gt;
+    &lt;currenttime type=&quot;datetime&quot;&gt;2008-09-11T11:29:21Z&lt;/currenttime&gt;
+    &lt;is_utc type=&quot;boolean&quot;&gt;false&lt;/is_utc&gt;
+    &lt;timezone&gt;Europe/Berlin&lt;/timezone&gt;
+    &lt;validtimezones type=&quot;array&quot;&gt;
+        &lt;timezone&gt;
+            &lt;id&gt;Africa/Abidjan&lt;/id&gt; 
+        &lt;/timezone&gt; 
+        &lt;timezone&gt;
+            &lt;id&gt;Africa/Accra&lt;/id&gt; 
+        &lt;/timezone&gt;
+        ....
+        ..
+        . 
+    &lt;/validtimezones&gt;
+    &lt;error_id type=&quot;integer&quot;&gt;0&lt;/error_id&gt;
+    &lt;error_string/&gt; 
+&lt;/systemtime&gt; 
+</pre>
 
-<p>PUT or POST &lt;hostname&gt;/yast/&lt;protocol_version&gt;/systemtime.xml
+<pre class="prettyprint">
+PUT or POST &lt;hostname&gt;/yast/&lt;protocol_version&gt;/systemtime.xml
+</pre>
 
 <p>Writes time settings to the system. The given parameters are the same as the
-returned values of the GET request.
+returned values of the GET request.</p  >
 
-<p>Note: Each single value can be get or set explicit.
+<p>Note: Each single value can be get or set explicit.</p>
 
-<p>e.g. GET &lt;hostname&gt;/yast/&lt;protocol_version&gt;/systemtime/timezone.xml returns this value only.
+<pre class="prettyprint">
+GET &lt;hostname&gt;/yast/&lt;protocol_version&gt;/systemtime/timezone.xml returns this value only.
+</pre>
 
 <h3>&lt;hostname&gt;/yast/&lt;protocol_version&gt;/language</h3>
 
-<p><br>Managing language settings.
+<p>Managing language settings.</p>
 
-<p>GET &lt;hostname&gt;/yast/&lt;protocol_version&gt;/language.xml
+<pre class="prettyprint">
+GET &lt;hostname&gt;/yast/&lt;protocol_version&gt;/language.xml
+</pre>
 
-<p>returns
+<p>returns</p>
 
-<p>&lt;language&gt;
-<blockquote>
-  &lt;first_language&gt;de_DE&lt;/first_language&gt;
-  <br>&lt;second_languages type="array"&gt;
-  <blockquote>
-     &lt;language&gt;
-     <blockquote>
-        &lt;id&gt;en_US&lt;/id&gt;
-     </blockquote>
-     &lt;/language&gt;
-  </blockquote>
-  <blockquote>
-     &lt;language&gt;
-     <blockquote>
-        &lt;id&gt;en_GB&lt;/id&gt;
-     </blockquote>
-     &lt;/language&gt;
-  </blockquote>
-  &lt;/second_languages&gt;
-  <br>&lt;available type="array"&gt;
-  <blockquote>
-     &lt;language&gt;
-     <blockquote>
-        &lt;id&gt;af_ZA&lt;/id&gt;
-        <br>&lt;name&gt;Afrikaans&lt;/name&gt;
-     </blockquote>
-     &lt;/language&gt;
-  </blockquote>
-  <blockquote>
-     &lt;language&gt;
-     <blockquote>
-        &lt;id&gt;ar_EG&lt;/id&gt;
-        <br>&lt;name&gt;Arabic&lt;/name&gt;
-     </blockquote>
-     &lt;/language&gt;
-     <br>......
-     <br>....
-     <br>..
-  </blockquote>
-  &lt;/available&gt;
-<br>&lt;error_id type="integer"&gt;0&lt;/error_id&gt;
-<br>&lt;error_string/&gt;
-</blockquote>
-&lt;/language&gt;
+<pre class="prettyprint">
+&lt;language&gt;
+    &lt;first_language&gt;de_DE&lt;/first_language&gt;
+    &lt;second_languages type=&quot;array&quot;&gt;
+        &lt;language&gt;
+            &lt;id&gt;en_US&lt;/id&gt; 
+        &lt;/language&gt; 
+        &lt;language&gt;
+            &lt;id&gt;en_GB&lt;/id&gt; 
+        &lt;/language&gt; 
+    &lt;/second_languages&gt;
+    &lt;available type=&quot;array&quot;&gt;
+        &lt;language&gt;
+            &lt;id&gt;af_ZA&lt;/id&gt;
+            &lt;name&gt;Afrikaans&lt;/name&gt; 
+        &lt;/language&gt; 
+        &lt;language&gt;
+            &lt;id&gt;ar_EG&lt;/id&gt;
+            &lt;name&gt;Arabic&lt;/name&gt; 
+        &lt;/language&gt;
+        ......
+        ....
+        .. 
+    &lt;/available&gt;
+    &lt;error_id type=&quot;integer&quot;&gt;0&lt;/error_id&gt;
+    &lt;error_string/&gt; 
+&lt;/language&gt; 
+</pre>
 
-
-<p><table>
+<table>
 <tr>
 <td>first_language:</td>
 <td>primary language</td>
@@ -692,142 +631,126 @@ returned values of the GET request.
 <td>available:</td>
 <td>languages which are available on the system</td>
 </tr>
-<table>
+</table>
 
+<pre class="prettyprint">
+PUT or POST &lt;hostname&gt;/yast/&lt;protocol_version&gt;/language.xml with values: 
+</pre>
 
-<p>PUT or POST &lt;hostname&gt;/yast/&lt;protocol_version&gt;/language.xml with values: 
+<pre class="prettyprint">
+&lt;language&gt;
+    &lt;first_language&gt;de_DE&lt;/first_language&gt;
+    &lt;second_languages type=&quot;array&quot;&gt;
+        &lt;language&gt;
+            &lt;id&gt;en_US&lt;/id&gt; 
+        &lt;/language&gt; 
+        &lt;language&gt;
+            &lt;id&gt;en_GB&lt;/id&gt; 
+        &lt;/language&gt; 
+    &lt;/second_languages&gt; 
+&lt;/language&gt; 
+</pre>
 
-<p>&lt;language&gt;
-<blockquote>
-  &lt;first_language&gt;de_DE&lt;/first_language&gt;
-  <br>&lt;second_languages type="array"&gt;
-  <blockquote>
-     &lt;language&gt;
-     <blockquote>
-        &lt;id&gt;en_US&lt;/id&gt;
-     </blockquote>
-     &lt;/language&gt;
-  </blockquote>
-  <blockquote>
-     &lt;language&gt;
-     <blockquote>
-        &lt;id&gt;en_GB&lt;/id&gt;
-     </blockquote>
-     &lt;/language&gt;
-  </blockquote>
-  &lt;/second_languages&gt;
-</blockquote>
-&lt;/language&gt;
+<p>Note: Each single value can be get or set explicit.</p>
 
-<p>Note: Each single value can be get or set explicit.
-
-<p>e.g. GET &lt;hostname&gt;/yast/&lt;protocol_version&gt;/language/available.xml returns the list of available languages only.
+e.g.
+<pre class="prettypring">
+GET &lt;hostname&gt;/yast/&lt;protocol_version&gt;/language/available.xml returns the list of available languages only.
+</pre>
 
 <h3>&lt;hostname&gt;/yast/&lt;protocol_version&gt;/users</h3>
 
-<p><br>User management like create/edit/delete a user login or exporting SSH-keys.
+<p>User management like create/edit/delete a user login or exporting SSH-keys.
 
-<p>GET &lt;hostname&gt;/yast/&lt;protocol_version&gt;/users.xml
+<pre class="prettyprint">
+GET &lt;hostname&gt;/yast/&lt;protocol_version&gt;/users.xml
+</pre>
 
-<p>returns 
+returns 
 
-<p>&lt;users type="array"&gt;
-<br>  &lt;user&gt;
-<blockquote>
+<pre class="prettyprint">
+&lt;users type=&quot;array&quot;&gt;
+&lt;user&gt;
     &lt;login_name&gt;nnw&lt;/login_name&gt;
-    <br>&lt;error_id type="integer"&gt;0&lt;/error_id&gt;
-    <br>&lt;error_string/&gt;
-</blockquote>
-  &lt;/user&gt;
-  <br>&lt;user&gt;
-  <blockquote>
+    &lt;error_id type=&quot;integer&quot;&gt;0&lt;/error_id&gt;
+    &lt;error_string/&gt; 
+&lt;/user&gt;
+&lt;user&gt;
     &lt;login_name&gt;tux&lt;/login_name&gt;
-    <br>&lt;error_id type="integer"&gt;0&lt;/error_id&gt;
-    <br>&lt;error_string/&gt;
-  </blockquote>
-  &lt;/user&gt;
-  <br>&lt;user&gt;
-  <blockquote>
+    &lt;error_id type=&quot;integer&quot;&gt;0&lt;/error_id&gt;
+    &lt;error_string/&gt; 
+&lt;/user&gt;
+&lt;user&gt;
     &lt;login_name&gt;tux2&lt;/login_name&gt;
-    <br>&lt;error_id type="integer"&gt;0&lt;/error_id&gt;
-    <br>&lt;error_string/&gt;
-  </blockquote>
-  &lt;/user&gt;
-<br>&lt;/users&gt;
+    &lt;error_id type=&quot;integer&quot;&gt;0&lt;/error_id&gt;
+    &lt;error_string/&gt; 
+&lt;/user&gt;
+&lt;/users&gt; 
+</pre>
 
 <p>There are some other tags which are nil cause they have not been evaluated while this run. 
 It would take too much time to get these values of e.g. all ldap users of a big company.
-If you want more information about an user just call:
+If you want more information about an user just call:</p>
 
 <h3>&lt;hostname&gt;/yast/&lt;protocol_version&gt;/users/&lt;loginname&gt;</h3>
 
 <p><br>This call returns additional information about an user account.
 
-<p>GET &lt;hostname&gt;/yast/&lt;protocol_version&gt;/users/tux.xml returns
+<pre class="prettyprint">
+GET &lt;hostname&gt;/yast/&lt;protocol_version&gt;/users/tux.xml returns
+</pre>
 
-<p>&lt;user&gt;
-  <blockquote>
-  &lt;default_group&gt;users&lt;/default_group&gt;
-  <br>&lt;full_name&gt;tux tux&lt;/full_name&gt;
-  <br>&lt;groups type="array"&gt;
-  <blockquote>
-     &lt;group&gt;
-     <blockquote>
-        &lt;id&gt;users&lt;/id&gt;
-     </blockquote>
-     &lt;/group&gt;
-  </blockquote>
-  <blockquote>
-     &lt;group&gt;
-     <blockquote>
-        &lt;id&gt;dialout&lt;/id&gt;
-     </blockquote>
-     &lt;/group&gt;
-  </blockquote>
-  &lt;/groups&gt;
-  <br>&lt;home_directory&gt;/home/tux&lt;/home_directory&gt;
-  <br>&lt;login_name&gt;tux&lt;/login_name&gt;
-  <br>&lt;login_shell&gt;/bin/bash&lt;/login_shell&gt;
-  <br>&lt;uid type="integer"&gt;1001&lt;/uid&gt;
-  <br>&lt;error_id type="integer"&gt;0&lt;/error_id&gt;
-  <br>&lt;error_string/&gt;
-  </blockquote>
+<pre class="prettyprint">
+&lt;users type=&quot;array&quot;&gt;
+&lt;user&gt;
+    &lt;login_name&gt;nnw&lt;/login_name&gt;
+    &lt;error_id type=&quot;integer&quot;&gt;0&lt;/error_id&gt;
+    &lt;error_string/&gt; 
 &lt;/user&gt;
-
-<p>PUT &lt;hostname&gt;/yast/&lt;protocol_version&gt;/users/tux.xml 
-<br>or PUT &lt;hostname&gt;/yast/&lt;protocol_version&gt;/users/tux/update.xml update the user account of tux
-
-<p>&lt;user&gt;
-  <blockquote>
-  &lt;default_group&gt;users&lt;/default_group&gt;
-  <br>&lt;full_name&gt;tux2 tux2&lt;/full_name&gt;
-  <br>&lt;groups type="array"&gt;
-  <blockquote>
-     &lt;group&gt;
-     <blockquote>
-        &lt;id&gt;users&lt;/id&gt;
-     </blockquote>
-     &lt;/group&gt;
-  </blockquote>
-  <blockquote>
-     &lt;group&gt;
-     <blockquote>
-        &lt;id&gt;dialout&lt;/id&gt;
-     </blockquote>
-     &lt;/group&gt;
-  </blockquote>
-  &lt;/groups&gt;
-  <br>&lt;home_directory&gt;/home/tux2&lt;/home_directory&gt;
-  <br>&lt;login_shell&gt;/bin/bash&lt;/login_shell&gt;
-  <br>&lt;password&gt;tuxtux&lt;/password&gt;
-  <br>&lt;new_uid&gt;1002&lt;/new_uid&gt;
-  <br>&lt;new_login_name&gt;tux2&lt;/new_login_name&gt;
-  </blockquote>
+&lt;user&gt;
+    &lt;login_name&gt;tux&lt;/login_name&gt;
+    &lt;error_id type=&quot;integer&quot;&gt;0&lt;/error_id&gt;
+    &lt;error_string/&gt; 
 &lt;/user&gt;
+&lt;user&gt;
+    &lt;login_name&gt;tux2&lt;/login_name&gt;
+    &lt;error_id type=&quot;integer&quot;&gt;0&lt;/error_id&gt;
+    &lt;error_string/&gt; 
+&lt;/user&gt;
+&lt;/users&gt; 
+</pre>
 
-<p>Not all tags are required. So, you have to "tag" changed values only.
+<pre class="prettyprint">
+PUT &lt;hostname&gt;/yast/&lt;protocol_version&gt;/users/tux.xml 
+</pre>
 
-<p>Additional optional tags:
+<pre class="prettyprint">
+or PUT &lt;hostname&gt;/yast/&lt;protocol_version&gt;/users/tux/update.xml update the user account of tux
+</pre>
+
+<pre class="prettyprint">
+&lt;user&gt;
+    &lt;default_group&gt;users&lt;/default_group&gt;
+    &lt;full_name&gt;tux2 tux2&lt;/full_name&gt;
+    &lt;groups type=&quot;array&quot;&gt;
+        &lt;group&gt;
+            &lt;id&gt;users&lt;/id&gt; 
+        &lt;/group&gt; 
+        &lt;group&gt;
+            &lt;id&gt;dialout&lt;/id&gt; 
+        &lt;/group&gt; 
+    &lt;/groups&gt;
+    &lt;home_directory&gt;/home/tux2&lt;/home_directory&gt;
+    &lt;login_shell&gt;/bin/bash&lt;/login_shell&gt;
+    &lt;password&gt;tuxtux&lt;/password&gt;
+    &lt;new_uid&gt;1002&lt;/new_uid&gt;
+    &lt;new_login_name&gt;tux2&lt;/new_login_name&gt; 
+&lt;/user&gt; 
+</pre>
+
+<p>Not all tags are required. So, you have to "tag" changed values only.</p>
+
+<p>Additional optional tags:</p>
 
 <table>
 <tr>
@@ -839,7 +762,7 @@ If you want more information about an user just call:
 </tr>
 </table>
 
-<p>Note: Each single value can be get or set explicit.
+<p>Note: Each single value can be get or set explicit.</p>
 
 <p>e.g. GET &lt;hostname&gt;/yast/&lt;protocol_version&gt;/users/tux/uid.xml returns the UID of of the user tux only.
 

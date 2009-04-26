@@ -10,8 +10,9 @@
 # Bootstrap the Rails environment, frameworks, and default configuration
 require File.join(File.dirname(__FILE__), 'boot')
 
+require "lib/resource_registration"
 
-Rails::Initializer.run do |config|
+init = Rails::Initializer.run do |config|
   # Settings in config/environments/* take precedence over those specified here.
   # Application configuration should go into files in config/initializers
   # -- all .rb files in that directory are automatically loaded.
@@ -69,5 +70,17 @@ Rails::Initializer.run do |config|
   # In order to prevent unloading of AuthenticatedSystem
   config.load_once_paths += %W( #{RAILS_ROOT}/lib )
 
+  # allows to find plugin in development tree locations
+  # avoiding installing plugins to see them
+  config.plugin_paths << File.join(RAILS_ROOT, '..', 'plugins')
 end
 
+if ENV["RAILS_ENV"] == "test"
+  ResourceRegistration.init
+  ResourceRegistration.register_all "test", "resource_fixtures/good"
+elsif ENV["RAILS_ENV"] == "development" or ENV["RAILS_ENV"] == "production"
+  ResourceRegistration.init
+  init.loaded_plugins.each do |plugin|
+    ResourceRegistration.register_plugin(plugin)
+  end
+end

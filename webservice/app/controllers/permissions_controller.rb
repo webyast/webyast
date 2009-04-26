@@ -129,16 +129,11 @@ class PermissionsController < ApplicationController
     if permission_check( "org.opensuse.yast.webservice.read-permissions")
        permission.error_id = 0
        permission.error_string = ""     
-       if permission.grant == true
-          action = "--grant"
-       else
-          action = "--revoke"
-       end
-       ret = Scr.execute(["polkit-auth", "--user", params[:user_id], action, "org.opensuse.yast.webservice.#{params[:id]}"])
+       ret = Scr.execute(["polkit-auth", "--user", params[:user_id], permission.grant ? "--grant" : "--revoke", "org.opensuse.yast.webservice.#{params[:id]}"])
        if ret[:exit] != 0
           permission.error_id = 2
           permission.error_string = ret[:stderr]
-          if permission.error_string.length == 0
+          if permission.error_string.empty?
             permission.error_string = "user not found"
           end
        end

@@ -1,0 +1,5 @@
+domain: system
+name: systemtime
+tags: [config, setting, systemtime]
+singular: true
+

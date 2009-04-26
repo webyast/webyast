@@ -15,7 +15,7 @@ end
 
 private
   def user_roles(user)
-    if session['user_roles'] == nil
+    if session['user_roles'].nil?
        IO.foreach( "/etc/yast_user_roles" ) { |line|
           line = line.chomp
           if (line.size >= 1 and
