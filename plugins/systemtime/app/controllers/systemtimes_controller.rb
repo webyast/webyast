@@ -22,7 +22,7 @@ require "scr"
      lines = ret[:stderr].split "\n"
      ret = []
      lines.each do |l|   
-       if not l.empty? > 0 && l.casecmp("Region: ") == -1
+       if not l.empty? && l.casecmp("Region: ") == -1
           lang = l.split " "
           ret << " " << lang[0]
        end
