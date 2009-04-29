@@ -1,4 +1,4 @@
-class ResourceController < ApplicationController
+class ResourcesController < ApplicationController
   require "lib/resource_registration"
   
   def index

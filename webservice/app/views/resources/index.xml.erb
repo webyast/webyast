@@ -1,4 +1,4 @@
-<resources>
+<resources type="array">
 <% @resources.each do |interface,implementations|
      implementations.each do |implementation|
        action = (implementation[:singular] ? :show : :index)
