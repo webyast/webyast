@@ -3,6 +3,6 @@
      implementations.each do |implementation|
        action = (implementation[:singular] ? :show : :index)
        controller = implementation[:controller] -%>
-   <%= link_to :controller => controller, :action => action -%><br/>
+   <%= link_to interface, :controller => controller, :action => action -%><br/>
 <%   end
    end -%>
