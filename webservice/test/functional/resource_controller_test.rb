@@ -5,6 +5,13 @@
 #
 require 'test_helper'
 
+class TestPlugin
+  attr_reader :directory
+  def initialize path
+    @directory = path
+  end
+end
+
 class ResourceControllerTest < ActionController::TestCase
 
   require "lib/resource_registration"
@@ -14,9 +21,8 @@ class ResourceControllerTest < ActionController::TestCase
   def setup
     @prefix = "yast"
     # set up test routing
-    ResourceRegistration.init
-    ResourceRegistration.register_all ".", "resource_fixtures/good"
-    ResourceRegistration.route_all
+    plugin = TestPlugin.new "test/resource_fixtures/good"
+    ResourceRegistration.register_plugin plugin
   end
   
   test "access root" do
@@ -36,21 +42,11 @@ class ResourceControllerTest < ActionController::TestCase
     assert @response.headers['Content-Type'] =~ %r{text/html}
   end
   
-  test "by domain query" do
-    get :index, :params => { "domain" => "network" }
-    assert_response :success
-  end
-  
-  test "by name query" do
-    get :index, :params => { "name" => "devices" }
-    assert_response :success
-  end
-  
-  test "by tags query" do
-    get :index, :params => { "tags" => "test" }
-    assert_response :success
-    get :index, :params => { "tags" => "test,fixture" }
-    assert_response :success
-  end
+  test "by interfaces query" do
+    ResourceRegistration.resources.each do |interface,implementations|
+      get :index, :params => { "interface" => interface }
+      assert_response :success
+    end
+  end  
   
 end

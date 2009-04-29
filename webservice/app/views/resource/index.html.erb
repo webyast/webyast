@@ -1,4 +1,8 @@
 <h1><%= @node -%> resources</h1>
-<% @resources.each do |name,url| -%>
- <%= link_to name, url -%><br/>
-<% end -%>
+<% @resources.each do |interface,implementations|
+     implementations.each do |implementation|
+       action = (implementation[:singular] ? :show : :index)
+       controller = implementation[:controller] -%>
+   <%= link_to :controller => controller, :action => action -%><br/>
+<%   end
+   end -%>

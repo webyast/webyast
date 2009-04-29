@@ -1,7 +1,12 @@
-<yast>
- <resources>
-  <% @resources.each do |n,u| -%>
-   <%= link_to n, u -%>
-  <% end -%>
- </resources>
-</yast>
+<resources>
+<% @resources.each do |interface,implementations|
+     implementations.each do |implementation|
+       action = (implementation[:singular] ? :show : :index)
+       controller = implementation[:controller] -%>
+   <resource>
+     <interface> <%= interface %> </interface>
+     <href> <%= link_to :controller => controller, :action => action-%></href>
+   </resource>
+<%   end
+   end -%>
+</resources>
