@@ -5,6 +5,13 @@
 #
 require 'test_helper'
 
+class TestPlugin
+  attr_reader :directory
+  def initialize path
+    @directory = path
+  end
+end
+
 class ResourceRouteTest < ActiveSupport::TestCase
 
   # See http://pennysmalls.com/2009/03/04/rails-23-breakage-and-fixage/
@@ -18,17 +25,26 @@ class ResourceRouteTest < ActiveSupport::TestCase
   
   test "resource route initialization" do
     
-#    $stderr.puts ActionController::Routing::Routes.routes
-    
     prefix = "yast"
+    
+    plugin = TestPlugin.new "test/resource_fixtures/good"
+    ResourceRegistration.register_plugin plugin
+
+#    $stderr.puts ActionController::Routing::Routes.routes
     
     # root URI links to ResourceController.index
     assert_generates "/#{prefix}", :controller => "resource", :action => "index"
     assert_routing( { :path => "/#{prefix}", :method => :get }, { :controller => "resource", :action => "index" } )
     
     # Ensure there is a route for every resource
-    Resource.find(:all).each do |resource|
-      assert_generates "/#{prefix}/#{resource.domain}/#{resource}", { :controller => "#{resource.domain}/#{resource}", :action => :index }
+    ResourceRegistration.resources.each do |interface,implementations|
+      implementations.each do |implementation|
+	if implementation[:singular]
+	  assert_generates "#{implementation[:controller]}", { :controller => "#{implementation[:controller]}", :action => :show }
+	else
+	  assert_generates "#{implementation[:controller]}", { :controller => "#{implementation[:controller]}", :action => :index }
+	end
+      end
     end
   end
   

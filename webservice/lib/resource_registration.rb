@@ -98,7 +98,7 @@ public
 	  end
 	
 	  if implementation[:singular]
-	    toplevel.resource name
+	    toplevel.resource name, :controller => namespaces.join("/")
 	  else
 	    toplevel.resources name
 	  end
