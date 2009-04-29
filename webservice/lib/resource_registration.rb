@@ -42,7 +42,7 @@ public
     # controller: must be given
     controller = resource['controller'] || controller
     error "#{file} does not specify controller" unless controller
-    error "#{file}: controller is not a path name" unless controller =~ %r{((\w+)/)+(\w+)}
+#    error "#{file}: controller is not a path name" unless controller =~ %r{((\w+)/)+(\w+)}
     
     # singular: is optional, defaults to false
     singular = resource["singular"] || false

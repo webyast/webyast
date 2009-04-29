@@ -1,5 +1,5 @@
-domain: system
-name: language
-tags: config setting
+
+interface: org.opensuse.yast.system.language
+controller: language
 singular: true
 

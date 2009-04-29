@@ -1,5 +1,4 @@
-domain: system
-name: systemtime
-tags: [config, setting, systemtime]
+interface: org.opensuse.yast.system.time
+controller: systemtimes
 singular: true
 

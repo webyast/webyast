@@ -1,3 +1,2 @@
-domain: system
-name: services
-tags: config setting command
+interface: org.opensuse.yast.system.services
+controller: services

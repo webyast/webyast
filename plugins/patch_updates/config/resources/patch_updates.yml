@@ -1,3 +1,2 @@
-domain: system
-name: patch_updates
-tags: updates patch patches
+interface: org.opensuse.yast.system.patch_updates
+controller: patch_updates
