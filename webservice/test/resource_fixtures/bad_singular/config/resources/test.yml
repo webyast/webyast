@@ -1,0 +1,4 @@
+# interface is singular but not flagged
+
+interface: foo.bar
+controller: foo/bar

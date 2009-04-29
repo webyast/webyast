@@ -1,0 +1,6 @@
+#
+# test/fixtures/resources/printer_devices.yaml
+#
+
+interface: org.opensuse.yast.printer.devices
+controller: yast/printer/devices

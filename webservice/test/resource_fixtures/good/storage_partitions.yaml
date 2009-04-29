@@ -1,7 +1,0 @@
-#
-# test/fixtures/resources/storage_partitions.yaml
-#
-
-domain: storage
-tags: test fixtures
-name: partitions

@@ -1,7 +1,0 @@
-#
-# test/fixtures/resources/printer_devices.yaml
-#
-
-domain: printer
-name: devices
-tags: test fixtures

@@ -1,155 +1,110 @@
 # load resources and populate database
 class ResourceRegistration
-
-  # start by cleaning Domain and Resource tables
-  def self.init
-    Resource.delete_all if Resource.table_exists?
-    Domain.delete_all if Domain.table_exists?
-  end
   
+  @@resources = Hash.new
+  def self.resources
+    @@resources
+  end
+private
+  def self.error msg
+    if @@in_production
+      log.error msg
+      return
+    else
+      raise msg
+    end
+  end
   # register a (.yaml) resource description
   #
-  # optionally the name and domain can be passed
+  # optionally the interface and controller can be passed
   # otherwise they are read from the yml file
-  def self.register(file, name = nil, domain = nil)
-    $stderr.puts "register #{file}"
+  #
+public  
+  def self.register(file, interface = nil, controller = nil)
+#    $stderr.puts "register #{file}"
     require 'yaml'
-    in_production = (ENV["RAILS_ENV"] == "production")
+    @@in_production = (RAILS_ENV == "production")
     name = name || File.basename(file, ".*")
     begin
       resource = YAML.load(File.open(file)) || Hash.new
     rescue Exception => e
       $stderr.puts "#{file} failed to load"
-      raise
+      raise # re-raise
     end
 
-    # name: can override
-    name = resource['name'] || name
-      
-    # domain: must be given
-    d = resource['domain'] 
-    if d
-      if domain and domain != d
-	error = "#{file} has inconsistent domain to parent dir"
-	if in_production
-	  logger.error error
-	  return
-	else
-	  raise error
-	end
-      end
-      domain = d unless domain
-    end
+    # interface: can override
+    interface = resource['interface'] || interface
+    error "#{file} does not specify interface" unless interface
+    error "#{file}: interface is not a qualified name" unless interface =~ %r{((\w+)\.)+(\w+)}
+   
+    name = interface.split(".").pop
     
-    unless domain
-      error = "#{file} does not specify domain" 
-      if in_production
-	log.error
-	return
-      else
-	raise error
-      end
-    end
-    
-    # tags:, optional
-    tags = resource["tags"] || ""
-    tags = tags.split " "
-    tags << name
-    tags << domain
+    # controller: must be given
+    controller = resource['controller'] || controller
+    error "#{file} does not specify controller" unless controller
+    error "#{file}: controller is not a path name" unless controller =~ %r{((\w+)/)+(\w+)}
     
     # singular: is optional, defaults to false
     singular = resource["singular"] || false
-      
-    if !singular and name != name.pluralize
-      error = "#{file}: has non-plural name without being flagged as singular"
-      if in_production
-	log.error error
-	return
-      else
-	raise error
-      end
-    end
-    
-    # -------- database, r_ == record
 
-    # Create/Find domain
-    r_domain = Domain.find_by_name(domain)
-    unless r_domain
-      r_domain = Domain.new
-      r_domain.name = domain
-      r_domain.save
-    end
-      
-    # Create/Find resource
-    
-    # should be:    r_resource = Resource.find_by_name_and_domain(name, r_domain)
-    r_resource = Resource.find(:first, :conditions => ["name = ? and domain_id = ?", name, r_domain])
-    if r_resource
-      error = "Resource #{domain}::#{name} already exists"
-      if in_production
-	log.error error
-	return
-      else
-	raise error
-      end
-    end
-    r_resource = Resource.new
-    r_resource.name = name
-    r_resource.domain = r_domain
-    r_resource.singular = singular
-    r_resource.tag_list = tags
-    r_resource.save
+    error "#{file}: has non-plural interface #{interface} without being flagged as singular" if !singular and name != name.pluralize
 
+    resources[interface] ||= Array.new
+    resources[interface] << { :controller => controller, :singular => singular }
   end
 
   # register routes from a plugin
+  #
   def self.register_plugin(plugin)
     res_path = File.join(plugin.directory, 'config', 'resources')
+#    $stderr.puts "self.register_plugin #{res_path}"
     Dir.glob(File.join(res_path, '**/*.yml')).each do |descriptor|
       next unless descriptor =~ %r{#{res_path}/((\w+)/)?(\w+)\.yml$}
-      self.register(descriptor, $3, $2)
+      self.register(descriptor)
     end
   end
 
-  # routes all registered plugins
-  def self.route_all
-    if not Resource.table_exists? or
-       not Domain.table_exists?
-      Rails.logger.debug "routes not ready because db:migrate not done"
-      return
-    end
+  # routes resources
+  #
+  def self.route resources
+    return unless resources
+    return if resources.empty?
     
     prefix = "yast"
     
-    resources = Resource.find(:all)
-    domains = Domain.find(:all)
-
     ActionController::Routing::Routes.draw do |map|
       map.resources prefix, :controller => "resource", :only => :index
-      resources.each do |resource|
-
-        # make the old routes still valid
-        if resource.singular?
-          map.resource resource.name
-        else
-          map.resources resource.name
-        end
-        
-	domain = resource.domain
+      resources.each do |interface,implementations|
 	
-	# doing .with_options(:domain => "...", :path_prefix => "...") assembles the controller domain without a slash :-(
-	#
-        #map.with_options(:path_prefix => "#{prefix}/#{domain}") do |path|
-        map.with_options(:path_prefix => "#{prefix}") do |path|
-	  # put the controller below <ns>
-	  path.namespace(domain.name) do |yast|
-	    yast.resources resource.name
+	qualifiers = interface.split "."
+	name = qualifiers.pop
+	
+	implementations.each do |implementation|
+	
+	  # url and controller are closely coupled
+	
+	  # so we split the controller path and use every path element but the last one as routing namespaces
+	  # the last one specifies the resource name and thus the controller name
+	  #
+	  namespaces = implementation[:controller].split "/"
+	
+	  # the .namespace call affects the URI _and_ the controller path (!)
+	
+	  toplevel = map
+	  while namespaces.size > 1
+	    toplevel.namespace(namespaces.shift) do |ns|
+	      toplevel = ns
+	    end
 	  end
-	end
-      end # resources.each
-      
-    end # Routes.draw 
-  
+	
+	  if implementation[:singular]
+	    toplevel.resource name
+	  else
+	    toplevel.resources name
+	  end
+        end
+      end
+    end  
   end
 
 end # class ResourceRegistration

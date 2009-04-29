@@ -1,7 +1,0 @@
-#
-# test/fixtures/resources/printer_queues.yml
-#
-
-domain: printer
-name: queues
-tags: test fixtures

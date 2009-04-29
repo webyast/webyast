@@ -7,79 +7,66 @@
 #
 require 'test_helper'
 
+class TestPlugin
+  attr_reader :directory
+  def initialize path
+    @directory = path
+  end
+end
+
 class ResourceRegistrationTest < ActiveSupport::TestCase
 
   require "lib/resource_registration"
   
   fixtures :domains, :resources
   
-  # ResourceRegistration.init drops all database content
-  
-  test "resource initialization" do
-    ResourceRegistration.init
-    assert Domain.find(:all).empty?
-    assert Resource.find(:all).empty?
-  end
-  
-  # Create resources from .yaml file
+  # Create resources from .yml file
   
   test "resource creation" do
-    ResourceRegistration.init
-    ResourceRegistration.register_all ".", "resource_fixtures/good"
+    plugin = TestPlugin.new "test/resource_fixtures/good"
+    ResourceRegistration.register_plugin plugin
       
-    assert !Domain.find(:all).empty?
-    assert !Resource.find(:all).empty?
+    assert !ResourceRegistration.resources.empty?
   end
   
-  # Check if file name sets resource name
+  # Catch errors in interface
   
-  test "resource name creation" do
-    ResourceRegistration.init
-    ResourceRegistration.register_all ".", "resource_fixtures/check_name"
-      
-    domains = Domain.find(:all)
-    assert domains
-    assert domains.size == 1
-    assert domains[0].name == "domain"
-    
-    resources = Resource.find(:all)
-    assert resources
-    assert resources.size == 1
-    assert resources[0].name == "resources"
-  end
-  
-  # Check if parent dir name sets domain name
-  
-  test "resource domain creation" do
-    ResourceRegistration.init
-    ResourceRegistration.register_all ".", "resource_fixtures/check_domain"
-      
-    domains = Domain.find(:all)
-    assert domains
-    assert domains.size == 1
-    assert domains[0].name == "domain"
-    
-    resources = Resource.find(:all)
-    assert resources
-    assert resources.size == 1
-    assert resources[0].name == "resources"
-  end
-  
-  # Catch errors in bad_domain
-  
-  test "resource exception" do
-    ResourceRegistration.init
+  test "bad interface" do
+    plugin = TestPlugin.new "test/resource_fixtures/bad_interface"
     assert_raise RuntimeError do
-      ResourceRegistration.register_all ".", "test/resource_fixtures/bad_domain"
+      ResourceRegistration.register_plugin plugin
     end
   end
   
-  # Catch errors in bad_plural
-  
-  test "file is plurar, name is singular" do
-    ResourceRegistration.init
+  test "no interface" do
+    plugin = TestPlugin.new "test/resource_fixtures/no_interface"
     assert_raise RuntimeError do
-      ResourceRegistration.register_all ".", "test/resource_fixtures/bad_plural"
+      ResourceRegistration.register_plugin plugin
+    end
+  end
+  
+  # Catch errors in controller
+  
+  test "no controller" do
+    plugin = TestPlugin.new "test/resource_fixtures/no_controller"
+    assert_raise RuntimeError do
+      ResourceRegistration.register_plugin plugin
+    end
+  end
+  
+  test "bad controller" do
+    plugin = TestPlugin.new "test/resource_fixtures/bad_controller"
+    assert_raise RuntimeError do
+      ResourceRegistration.register_plugin plugin
+    end
+  end
+  
+  # Catch pluralization error
+  
+  test "interface is singular but not flagged as such" do
+    plugin = TestPlugin.new "test/resource_fixtures/bad_singular"
+    assert_raise RuntimeError do
+      ResourceRegistration.register_plugin plugin
     end
   end
 end

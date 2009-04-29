@@ -1,0 +1,5 @@
+# singular
+
+interface: network.config
+controller: network/config
+singular: true

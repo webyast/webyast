@@ -1,7 +1,0 @@
-#
-# test/fixtures/resources/network/interfaces.yml
-#
-# override name
-
-name: interface
-tags: test fixtures

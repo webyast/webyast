@@ -1,7 +1,0 @@
-#
-# test/fixtures/resources/storage_decices.yml
-#
-
-domain: storage
-name: devices
-tags: test fixtures

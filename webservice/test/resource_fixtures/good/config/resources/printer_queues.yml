@@ -1,0 +1,6 @@
+#
+# test/fixtures/resources/printer_queues.yml
+#
+
+interface: org.opensuse.yast.printer.queues
+controller: yast/printer/queues

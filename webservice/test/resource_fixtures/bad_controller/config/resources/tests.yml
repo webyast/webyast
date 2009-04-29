@@ -1,0 +1,4 @@
+# bad controller specified
+
+interface: foo.bars
+controller: foo.bar

@@ -1,0 +1,4 @@
+# bad interface specified
+
+interface: foo/bar
+controller: foo/bar

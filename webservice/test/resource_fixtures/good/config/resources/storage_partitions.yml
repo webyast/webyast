@@ -1,0 +1,6 @@
+#
+# test/fixtures/resources/storage_partitions.yaml
+#
+
+interface: org.opensuse.yast.storage.partitions
+controller: yast/storage/partitions

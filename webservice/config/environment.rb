@@ -72,15 +72,23 @@ init = Rails::Initializer.run do |config|
 
   # allows to find plugin in development tree locations
   # avoiding installing plugins to see them
-  config.plugin_paths << File.join(RAILS_ROOT, '..', 'plugins')
+  config.plugin_paths << File.join(RAILS_ROOT, '..', 'plugins') if RAILS_ENV == "development"
 end
 
-if ENV["RAILS_ENV"] == "test"
-  ResourceRegistration.init
-  ResourceRegistration.register_all "test", "resource_fixtures/good"
-elsif ENV["RAILS_ENV"] == "development" or ENV["RAILS_ENV"] == "production"
-  ResourceRegistration.init
+$stderr.puts __FILE__
+
+if RAILS_ENV == "test"
+  class TestPlugin
+    def directory
+      "test/resource_fixtures/good"
+    end
+  end
+  ResourceRegistration.register_plugin TestPlugin.new
+  ResourceRegistration.route ResourceRegistration.resources
+elsif RAILS_ENV == "development" or RAILS_ENV == "production"
+  $stderr.puts "Registering plugin resources"
   init.loaded_plugins.each do |plugin|
     ResourceRegistration.register_plugin(plugin)
   end
+  ResourceRegistration.route ResourceRegistration.resources
 end
