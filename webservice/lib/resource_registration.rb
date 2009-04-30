@@ -20,6 +20,10 @@ private
   # otherwise they are read from the yml file
   #
 public  
+  def self.reset
+    @@resources = Hash.new
+  end
+  
   def self.register(file, interface = nil, controller = nil)
 #    $stderr.puts "register #{file}"
     require 'yaml'
