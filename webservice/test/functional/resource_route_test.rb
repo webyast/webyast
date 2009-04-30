@@ -27,6 +27,7 @@ class ResourceRouteTest < ActiveSupport::TestCase
     
     prefix = "yast"
     
+    ResourceRegistration.reset
     plugin = TestPlugin.new "test/resource_fixtures/good"
     ResourceRegistration.register_plugin plugin
 
