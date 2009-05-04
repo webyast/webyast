@@ -14,12 +14,20 @@ private
       raise msg
     end
   end
+public  
+  #
+  # reset registered resources
+  # useful for testing
+  #
+  def self.reset
+    @@resources = Hash.new
+  end
+
   # register a (.yaml) resource description
   #
   # optionally the interface and controller can be passed
   # otherwise they are read from the yml file
   #
-public  
   def self.register(file, interface = nil, controller = nil)
 #    $stderr.puts "register #{file}"
     require 'yaml'
@@ -70,10 +78,8 @@ public
     return unless resources
     return if resources.empty?
     
-    prefix = "yast"
-    
     ActionController::Routing::Routes.draw do |map|
-      map.resources prefix, :controller => "resource", :only => :index
+      map.root :controller => "resources", :action => "index"
       resources.each do |interface,implementations|
 	
 	qualifiers = interface.split "."
