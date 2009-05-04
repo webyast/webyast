@@ -54,7 +54,7 @@ class ResourceRegistrationTest < ActiveSupport::TestCase
     end
   end
   
-  test "bad controller" do
+  test "bad controller, go fix web-client to use modules" do
     plugin = TestPlugin.new "test/resource_fixtures/bad_controller"
     assert_raise RuntimeError do
       ResourceRegistration.register_plugin plugin
