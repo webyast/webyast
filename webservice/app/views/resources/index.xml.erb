@@ -5,7 +5,7 @@
        controller = implementation[:controller] -%>
    <resource>
      <interface><%= interface %></interface>
-     <href> <%= url_for :only_path => true, :controller => controller, :action => action -%></href>
+     <href><%= url_for :only_path => true, :controller => controller, :action => action -%></href>
    </resource>
 <%   end
    end -%>
