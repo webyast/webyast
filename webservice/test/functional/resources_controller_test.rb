@@ -19,8 +19,8 @@ class ResourcesControllerTest < ActionController::TestCase
   fixtures :domains, :resources
   
   def setup
-    @prefix = "yast"
     # set up test routing
+    ResourceRegistration.reset
     plugin = TestPlugin.new "test/resource_fixtures/good"
     ResourceRegistration.register_plugin plugin
   end
