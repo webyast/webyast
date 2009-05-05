@@ -11,18 +11,18 @@ class PermissionsController < ApplicationController
 #--------------------------------------------------------------------------------
 
 
-  def get_permission_list(user_id)
+  def get_permission_list(user_id, filter = nil)
      @permissions = []
      if permission_check( "org.opensuse.yast.webservice.read-permissions")
        ret = Scr.execute(["polkit-action"])
        if ret[:exit] == 0
-          suse_string = "org.opensuse.yast.webservice."
+          suse_string = "org.opensuse.yast."
           lines = ret[:stdout].split "\n"
           lines.each do |s|   
-             if s.include? suse_string
-                perm = s.slice( suse_string.size, s.size-1)
+             if (s.include?( suse_string )) &&
+                (filter.blank? || s.include?( filter ))
                 permission = Permission.new 	
-                permission.name = perm
+                permission.name = s
                 permission.grant = false
                 permission.error_id = 0
                 permission.error_string = ""
@@ -34,9 +34,8 @@ class PermissionsController < ApplicationController
              lines = ret[:stdout].split "\n"
              lines.each do |s|   
                    if s.include? suse_string
-                   perm = s.slice( suse_string.size, s.size-1)
                    for i in 0..@permissions.size-1
-                      if @permissions[i].name == perm
+                      if @permissions[i].name == s
                          @permissions[i].grant = true
                          break
                       end
@@ -71,12 +70,12 @@ class PermissionsController < ApplicationController
 #
 #--------------------------------------------------------------------------------
 
-  # GET /users/<uid>/permissions
-  # GET /users/<uid>/permissions.xml
-  # GET /users/<uid>/permissions.json
+  # GET /permissions?user_id=<user_id>&filter=<filter>
+  # GET /permissions.xml?user_id=<user_id>&filter=<filter>
+  # GET /permissions.json?user_id=<user_id>&filter=<filter>
 
   def index
-    get_permission_list(params[:user_id])
+    get_permission_list(params[:user_id], params[:filter])
 
     respond_to do |format|
       format.html { render :xml => @permissions, :location => "none" } #return xml only
@@ -85,9 +84,9 @@ class PermissionsController < ApplicationController
     end
   end
 
-  # GET /users/<uid>/permissions/<id>
-  # GET /users/<uid>/permissions/<id>.xml
-  # GET /users/<uid>/permissions/<id>.json
+  # GET /users/<uid>/permissions/<id>?user_id=<user_id>
+  # GET /users/<uid>/permissions/<id>.xml?user_id=<user_id>
+  # GET /users/<uid>/permissions/<id>.json?user_id=<user_id>
 
   def show
     permission = Permission.new 	
@@ -112,9 +111,9 @@ class PermissionsController < ApplicationController
     end
   end
 
-  # PUT /users/<uid>/permissions/<id>
-  # PUT /users/<uid>/permissions/<id>.xml
-  # PUT /users/<uid>/permissions/<id>.json
+  # PUT /permissions?user_id=<user_id>
+  # PUT /permissions/<id>.xml?user_id=<user_id>
+  # PUT /permissions/<id>.json?user_id=<user_id>
 
   def update
     if ( params[:permission] &&
