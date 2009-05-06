@@ -25,17 +25,16 @@ class ResourceRouteTest < ActiveSupport::TestCase
   
   test "resource route initialization" do
     
-    prefix = "yast"
-    
-    ResourceRegistration.reset
     plugin = TestPlugin.new "test/resource_fixtures/good"
+    ResourceRegistration.reset
     ResourceRegistration.register_plugin plugin
 
 #    $stderr.puts ActionController::Routing::Routes.routes
     
-    # root URI links to ResourceController.index
-    assert_generates "/#{prefix}", :controller => "resource", :action => "index"
-    assert_routing( { :path => "/#{prefix}", :method => :get }, { :controller => "resource", :action => "index" } )
+    # root URI links to ResourcesController.index
+    assert_recognizes( { :controller => "resources", :action => "index" }, "/" )
+    # as does /resources
+    assert_routing( { :path => "/resources", :method => :get }, { :controller => "resources", :action => "index" } )
     
     # Ensure there is a route for every resource
     ResourceRegistration.resources.each do |interface,implementations|

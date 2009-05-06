@@ -1,5 +1,5 @@
 #
-# test/functional/resource_controller_test.rb
+# test/functional/resources_controller_test.rb
 #
 # This tests proper returns for resource inspection
 #
@@ -12,15 +12,15 @@ class TestPlugin
   end
 end
 
-class ResourceControllerTest < ActionController::TestCase
+class ResourcesControllerTest < ActionController::TestCase
 
   require "lib/resource_registration"
   
   fixtures :domains, :resources
   
   def setup
-    @prefix = "yast"
     # set up test routing
+    ResourceRegistration.reset
     plugin = TestPlugin.new "test/resource_fixtures/good"
     ResourceRegistration.register_plugin plugin
   end
