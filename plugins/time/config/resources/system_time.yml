@@ -1,0 +1,4 @@
+interface: org.opensuse.yast.system.time
+controller: systemtimes
+singular: true
+

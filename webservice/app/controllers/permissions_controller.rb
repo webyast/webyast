@@ -13,7 +13,7 @@ class PermissionsController < ApplicationController
 
   def get_permission_list(user_id, filter = nil)
      @permissions = []
-     if permission_check( "org.opensuse.yast.webservice.read-permissions")
+     if permission_check( "org.opensuse.yast.permissions.read")
        ret = Scr.execute(["polkit-action"])
        if ret[:exit] == 0
           suse_string = "org.opensuse.yast."
@@ -102,7 +102,7 @@ class PermissionsController < ApplicationController
        right = params[:id].slice(0..-5) if params[:id].end_with?(".xml")
     end
     permission = Permission.new 	
-    if permission_check( "org.opensuse.yast.webservice.read-permissions")
+    if permission_check( "org.opensuse.yast.permissions.read")
        get_permission_list(params[:user_id])
 
        for i in 0..@permissions.size-1
@@ -143,7 +143,7 @@ class PermissionsController < ApplicationController
     else
        permission = Permission.new
     end
-    if permission_check( "org.opensuse.yast.webservice.read-permissions")
+    if permission_check( "org.opensuse.yast.permissions.write")
        permission.error_id = 0
        permission.error_string = ""     
        if params[:user_id].blank?

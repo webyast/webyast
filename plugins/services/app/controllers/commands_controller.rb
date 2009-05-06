@@ -55,11 +55,7 @@ class CommandsController < ApplicationController
     @service.error_id = 0
     @service.error_string = ""
 
-    single_policy = "org.opensuse.yast.webservice.execute-services-commands-" + params[:service_id]
-    if ( permission_check( "org.opensuse.yast.webservice.execute-services") or
-         permission_check( "org.opensuse.yast.webservice.execute-services-commands") or
-         permission_check( single_policy))
-
+    if permission_check( "org.opensuse.yast.system.services.execute") 
        cmd = "/usr/sbin/rc" + params[:service_id] 
        logger.debug "Service cmd #{cmd} #{id}"
        ret = Scr.execute([cmd, id])

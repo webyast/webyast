@@ -21,3 +21,16 @@ Rake::RDocTask.new(:rdoc) do |rdoc|
   rdoc.rdoc_files.include('README')
   rdoc.rdoc_files.include('lib/**/*.rb')
 end
+
+desc "install policies"
+task :install do |t|
+  Dir.glob("**/*.policy").each do |policy|
+    sudo "cp #{policy} /usr/share/PolicyKit/policy"
+  end
+end
+
+def sudo(cmd)
+  puts "#{cmd}"
+  %x[sudo -p "Password: " #{cmd}]
+end
+

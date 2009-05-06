@@ -22,7 +22,7 @@ Source:         www.tar.bz2
 Source1:        yast.conf
 Source2:        rails.include
 Source3:        cleanurl-v5.lua
-Source4:        org.opensuse.yast.webservice.policy
+Source4:        org.opensuse.yast.permissions.policy
 Source5:        policyKit-rights.rb  
 Source6:        yast_user_roles
 Source7:        lighttpd.conf
@@ -187,7 +187,7 @@ fi
 %config /etc/yastws/vhosts.d/rails.inc
 %config /etc/yastws/cleanurl-v5.lua
 %config /etc/yastws/modules.conf
-%config /usr/share/PolicyKit/policy/org.opensuse.yast.webservice.policy
+%config /usr/share/PolicyKit/policy/org.opensuse.yast.permissions.policy
 %config(noreplace) /etc/yast_user_roles
 %config(noreplace)  %{_sysconfdir}/init.d/%{pkg_user}
 %{_sbindir}/rc%{pkg_user}
