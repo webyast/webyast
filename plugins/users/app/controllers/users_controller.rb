@@ -5,6 +5,8 @@ class UsersController < ApplicationController
   before_filter :login_required
 
   require "scr"
+  @scr = Scr.instance
+  
 #--------------------------------------------------------------------------------
 #
 #local methods
@@ -14,7 +16,7 @@ class UsersController < ApplicationController
 
   def get_user_list
     if permission_check( "org.opensuse.yast.users.readlist")
-       ret = Scr.execute(["/sbin/yast2", "users", "list"])
+       ret = @scr.execute(["/sbin/yast2", "users", "list"])
        lines = ret[:stderr].split "\n"
        @users = []
        lines.each do |s|   
@@ -37,7 +39,7 @@ class UsersController < ApplicationController
      else
        saveKey = nil
      end
-     ret = Scr.execute(["/sbin/yast2", "users", "show", "username=#{id}"])
+     ret = @scr.execute(["/sbin/yast2", "users", "show", "username=#{id}"])
      lines = ret[:stderr].split "\n"
      counter = 0
      @user = User.new
@@ -73,17 +75,17 @@ class UsersController < ApplicationController
       get_user @user.login_name
       @user.sshkey = save_key
     end
-    ret = Scr.readArg(".target.stat", "#{@user.home_directory}/.ssh/authorized_keys")
+    ret = @scr.read_arg(".target.stat", "#{@user.home_directory}/.ssh/authorized_keys")
     if ret.empty?
       logger.debug "Create: #{@user.home_directory}/.ssh/authorized_keys"
-      Scr.execute(["/bin/mkdir", "#{@user.home_directory}/.ssh"])      
-      Scr.execute(["/bin/chown", "#{@user.login_name}", "#{@user.home_directory}/.ssh"])      
-      Scr.execute(["/bin/chmod", "755", "#{@user.home_directory}/.ssh"])
-      Scr.execute(["/usr/bin/touch", "#{@user.home_directory}/.ssh/authorized_keys"])      
-      Scr.execute(["/bin/chown", "#{@user.login_name}", "#{@user.home_directory}/.ssh/authorized_keys"])      
-      Scr.execute(["/bin/chmod", "644", "#{@user.home_directory}/.ssh/authorized_keys"])
+      @scr.execute(["/bin/mkdir", "#{@user.home_directory}/.ssh"])      
+      @scr.execute(["/bin/chown", "#{@user.login_name}", "#{@user.home_directory}/.ssh"])      
+      @scr.execute(["/bin/chmod", "755", "#{@user.home_directory}/.ssh"])
+      @scr.execute(["/usr/bin/touch", "#{@user.home_directory}/.ssh/authorized_keys"])      
+      @scr.execute(["/bin/chown", "#{@user.login_name}", "#{@user.home_directory}/.ssh/authorized_keys"])      
+      @scr.execute(["/bin/chmod", "644", "#{@user.home_directory}/.ssh/authorized_keys"])
     end
-    ret =  Scr.execute(["echo", "\"#{@user.sshkey}\"", ">>", "#{@user.home_directory}/.ssh/authorized_keys"])
+    ret = @scr.execute(["echo", "\"#{@user.sshkey}\"", ">>", "#{@user.home_directory}/.ssh/authorized_keys"])
     if ret[:exit] != 0
       @user.error_id = ret[:exit]
       @user.error_string = ret[:stderr]
@@ -119,7 +121,7 @@ class UsersController < ApplicationController
     command << "new_username=#{@user.new_login_name}" if not @user.new_login_name.blank?
     command << "type=#{@user.type}" if not @user.type.blank?
     command << "batchmode"
-    ret = Scr.execute(command)
+    ret = @scr.execute(command)
     if ret[:exit] != 0
       ok = false
       @user.error_id = ret[:exit]
@@ -146,17 +148,15 @@ class UsersController < ApplicationController
     command << "type=#{@user.type}" if not @user.type.blank?
     command << "batchmode"
 
-    ret = Scr.execute(command)
+    ret = @scr.execute(command)
 
     logger.debug "Command returns: #{ret.inspect}"
 
-    if ret[:exit] == 0
-      return true
-    else
-      @user.error_id = ret[:exit]
-      @user.error_string = ret[:stderr]
-      return false
-    end
+    return true if ret[:exit] == 0
+
+    @user.error_id = ret[:exit]
+    @user.error_string = ret[:stderr]
+    return false
   end
 
   def delete_user
@@ -168,14 +168,13 @@ class UsersController < ApplicationController
 
     command << "batchmode"
 
-    ret = Scr.execute(command)
-    if ret[:exit] == 0
-      return true
-    else
-      @user.error_id = ret[:exit]
-      @user.error_string = ret[:stderr]
-      return false
-    end
+    ret = @scr.execute(command)
+    return true if ret[:exit] == 0
+
+    @user.error_id = ret[:exit]
+    @user.error_string = ret[:stderr]
+    return false
+
   end
 
 #--------------------------------------------------------------------------------
