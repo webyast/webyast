@@ -4,7 +4,6 @@ class CommandsController < ApplicationController
 
   before_filter :login_required
 
-  require "scr" 
   private
   def init_services
     services = Hash.new
@@ -59,17 +58,16 @@ class CommandsController < ApplicationController
     if ( permission_check( "org.opensuse.yast.webservice.execute-services") or
          permission_check( "org.opensuse.yast.webservice.execute-services-commands") or
          permission_check( single_policy))
+      require "scr" 
 
        cmd = "/usr/sbin/rc" + params[:service_id] 
        logger.debug "Service cmd #{cmd} #{id}"
-       ret = Scr.execute([cmd, id])
+       ret = Scr.instance.execute([cmd, id])
        @service.error_id = ret[:exit].to_i
        @service.error_string = ret[:stderr]
        if ret[:stdout].size > 0
-          if @service.error_string.size > 0
-             @service.error_string += "; "
-          end
-          @service.error_string +=ret[:stdout]
+         @service.error_string += "; " @service.error_string.size > 0
+	 @service.error_string +=ret[:stdout]
        end
     else
        @service.error_id = 1
