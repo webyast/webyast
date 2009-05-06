@@ -5,6 +5,7 @@
        controller = implementation[:controller] -%>
    <resource>
      <interface><%= interface %></interface>
+     <singular type="boolean"><%= implementation[:singular].to_s %></singular>
      <href><%= url_for :only_path => true, :controller => controller, :action => action -%></href>
    </resource>
 <%   end
