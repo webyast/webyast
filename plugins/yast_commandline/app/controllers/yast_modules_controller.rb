@@ -119,7 +119,8 @@ class YastModulesController < ApplicationController
                  end
                end
              end
-             @cmd_ret = Scr.execute(cmd)
+	     require "scr"
+             @cmd_ret = Scr.instance.execute(cmd)
            end
          end
          if !found
