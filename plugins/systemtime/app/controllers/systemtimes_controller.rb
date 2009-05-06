@@ -3,9 +3,10 @@ include ApplicationHelper
 
 class SystemtimesController < ApplicationController
 
-before_filter :login_required
+  before_filter :login_required
 
-require "scr"
+  require "scr"
+  @scr = Scr.instance
 
 #--------------------------------------------------------------------------------
 #
@@ -18,7 +19,7 @@ require "scr"
 #
 
   def get_validtimezones
-     ret = Scr.execute(["/sbin/yast2", "timezone", "list"])
+     ret = @scr.execute(["/sbin/yast2", "timezone", "list"])
      lines = ret[:stderr].split "\n"
      ret = []
      lines.each do |l|   
@@ -31,20 +32,16 @@ require "scr"
   end
 
   def get_is_utc
-    if Scr.read(".sysconfig.clock.HWCLOCK") == "-u" then
-      return true
-    else
-      return false
-    end
+    @scr.read(".sysconfig.clock.HWCLOCK") == "-u"
   end
 
   def get_time
-    ret = Scr.execute(["/bin/date"])
+    ret = @scr.execute(["/bin/date"])
     ret[:stdout]
   end
 
   def get_timezone
-    return Scr.read(".sysconfig.clock.TIMEZONE")
+    @scr.read(".sysconfig.clock.TIMEZONE")
   end
 
 #
@@ -58,13 +55,13 @@ require "scr"
     else
       hwclock = "--localtime"
     end
-    Scr.write(".sysconfig.clock.HWCLOCK", hwclock)
+    @scr.write(".sysconfig.clock.HWCLOCK", hwclock)
   end
 
   def set_time (time)
     #set time
     environment = [];
-    hwclock = Scr.read(".sysconfig.clock.HWCLOCK");
+    hwclock = @scr.read(".sysconfig.clock.HWCLOCK");
     timezone = get_timezone
     if ( not timezone.empty? && hwclock!= "--localtime")
        environment = ["TZ=#{timezone}"]
@@ -75,17 +72,17 @@ require "scr"
               "#{time.hour}:#{time.min}:#{time.sec}\""]
 
     logger.debug "SetTime cmd #{cmd.inspect}"
-    Scr.execute(cmd, environment)
+    @scr.execute(cmd, environment)
 
     cmd = ["/sbin/hwclock", "--hctosys",  hwclock]
 
     logger.debug "SetTime cmd #{cmd.inspect}"
-    Scr.execute(cmd)
+    @scr.execute(cmd)
   end
 
   def set_timezone (timezone)
     #set timezone
-    Scr.write(".sysconfig.clock.TIMEZONE",timezone)
+    @scr.write(".sysconfig.clock.TIMEZONE",timezone)
   end
 
 #--------------------------------------------------------------------------------
