@@ -10,7 +10,8 @@
 # Bootstrap the Rails environment, frameworks, and default configuration
 require File.join(File.dirname(__FILE__), 'boot')
 
-require "lib/resource_registration"
+# load lib/resource_registration.rb
+require "resource_registration"
 
 init = Rails::Initializer.run do |config|
   # Settings in config/environments/* take precedence over those specified here.
