@@ -5,13 +5,13 @@ require "rexml/document"
 # YaST modules in the command line mode
 #
 class YastModule
-  require "scr"  
+  require "scr"
   #
   # iterates over all yast module links
   #
   def self.each
     # run YaST to get a list of modules
-    ret = Scr.execute(["/sbin/yast2", "--list"])
+    ret = Scr.instance.execute(["/sbin/yast2", "--list"])
     lines = ret[:stdout].split "\n"
     lines = lines.sort
     lines::each do |l|   
@@ -62,15 +62,15 @@ class YastModule
   
 
   def commands ()
-    if @commands != nil
-       return @commands
-    end
+    return @commands unless @commands.nil?
+
     @commands = Hash.new
-    tmpdir = Scr.read( ".target.tmpdir" );
-    Scr.execute(["/bin/mkdir", tmpdir])
+    scr = Scr.instance
+    tmpdir = scr.read( ".target.tmpdir" );
+    scr.execute(["/bin/mkdir", tmpdir])
     tmpfile = tmpdir + "/yastOptions" 
-    Scr.execute(["/sbin/yast2", @id, "xmlhelp", "xmlfile=#{tmpfile}"])
-    file = Scr.readArg(".target.string",tmpfile)
+    scr.execute(["/sbin/yast2", @id, "xmlhelp", "xmlfile=#{tmpfile}"])
+    file = scr.readArg(".target.string",tmpfile)
     if file != false
       doc = REXML::Document.new file
       doc.elements.each("commandline/commands/command") { |commandElement| 
@@ -94,7 +94,7 @@ class YastModule
     end
     puts "Founded command options/calls #{@commands.inspect}"
 
-    Scr.execute(["/bin/rm", tmpfile])
+    scr.execute(["/bin/rm", tmpfile])
     return @commands
   end
 
