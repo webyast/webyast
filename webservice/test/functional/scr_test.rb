@@ -7,10 +7,14 @@ require 'test_helper'
 
 class ScrTest < ActiveSupport::TestCase
 
-  require "lib/scr"
+  require "scr"
 
   test "instanciating the scr singleton" do
     assert Scr.instance
+  end
+
+  test "scr read" do
+    assert Scr.instance.read ".proc.modules"
   end
 
 end
