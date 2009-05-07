@@ -97,7 +97,7 @@ require "scr"
   def update
     respond_to do |format|
       systemtime = SystemTime.new
-      if permission_check( "org.opensuse.yast.systemtime.write")
+      if permission_check( "org.opensuse.yast.system.time.write")
          if params[:systemtime] != nil
            systemtime.timezone = params[:systemtime][:timezone]
            systemtime.is_utc = params[:systemtime][:is_utc]
@@ -138,7 +138,7 @@ require "scr"
 
     @systemtime = SystemTime.new
 
-    if permission_check( "org.opensuse.yast.systemtime.read")
+    if permission_check( "org.opensuse.yast.system.time.read")
        @systemtime.currenttime = get_time
        @systemtime.is_utc = get_is_utc
        @systemtime.timezone = get_timezone
@@ -167,115 +167,6 @@ require "scr"
     show
   end
 
-  def singlevalue
-    if request.get?
-      # GET
-      @systemtime = SystemTime.new
 
-      case params[:id]
-        when "is_utc"
-          if ( permission_check( "org.opensuse.yast.systemtime.read") or
-               permission_check( "org.opensuse.yast.systemtime.read-isutc") ) then
-             @systemtime.is_utc = get_is_utc
-          else
-             @systemtime.error_id = 1
-             @systemtime.error_string = "no permission"
-          end
-        when "currenttime"
-          if ( permission_check( "org.opensuse.yast.systemtime.read") or
-               permission_check( "org.opensuse.yast.systemtime.read-currenttime") )
-             @systemtime.currenttime = get_time
-          else
-             @systemtime.error_id = 1
-             @systemtime.error_string = "no permission"
-          end
-        when "timezone"
-          if ( permission_check( "org.opensuse.yast.systemtime.read") or
-               permission_check( "org.opensuse.yast.systemtime.read-timezone") )
-             @systemtime.timezone = get_timezone
-          else
-             @systemtime.error_id = 1
-             @systemtime.error_string = "no permission"
-          end
-        when "validtimezones"
-          if ( permission_check( "org.opensuse.yast.systemtime.read") or
-               permission_check( "org.opensuse.yast.systemtime.read-validtimezones") )
-             @systemtime.validtimezones = get_validtimezones
-          else
-             @systemtime.error_id = 1
-             @systemtime.error_string = "no permission"
-          end
-      end
-      respond_to do |format|
-        format.xml do
-          render :xml => @systemtime.to_xml( :root => "systemtime",
-            :dasherize => false )
-        end
-        format.json do
-	  render :json => @systemtime.to_json
-        end
-        format.html do
-          render :xml => @systemtime.to_xml( :root => "systemtime",
-            :dasherize => false ) #return xml only
-        end
-      end      
-    else
-      #PUT
-      respond_to do |format|
-        @systemtime = SystemTime.new
-        if params[:systemtime] != nil
-          @systemtime.timezone = params[:systemtime][:timezone]
-          @systemtime.is_utc = params[:systemtime][:is_utc]
-          @systemtime.currenttime = params[:systemtime][:currenttime]
-          logger.debug "UPDATED: #{@systemtime.inspect}"
-          case params[:id]
-            when "is_utc"
-              if ( permission_check( "org.opensuse.yast.systemtime.write") or
-                   permission_check( "org.opensuse.yast.systemtime.write-isutc")) then
-                 set_is_utc @systemtime.is_utc
-              else
-                 @systemtime.error_id = 1
-                 @systemtime.error_string = "no permission"
-              end
-            when "currenttime"
-              if ( permission_check( "org.opensuse.yast.systemtime.write") or
-                   permission_check( "org.opensuse.yast.systemtime.write-currenttime") )
-                 set_time @systemtime.currenttime
-              else
-                 @systemtime.error_id = 1
-                 @systemtime.error_string = "no permission"
-              end
-            when "timezone"
-              if ( permission_check( "org.opensuse.yast.systemtime.write") or
-                   permission_check( "org.opensuse.yast.systemtime.write-timezone") )
-                 set_timezone @systemtime.timezone
-              else
-                 @systemtime.error_id = 1
-                 @systemtime.error_string = "no permission"
-              end
-            else
-              logger.error "Wrong ID: #{params[:id]}"
-              @systemtime.error_id = 2
-              @systemtime.error_string = "Wrong ID: #{params[:id]}"
-          end
-        else
-           @systemtime.error_id = 2
-           @systemtime.error_string = "format or internal error"
-        end
-
-        format.html do
-            render :xml => @systemtime.to_xml( :root => "systemtime",
-                   :dasherize => false ) #return xml only
-        end
-        format.xml do
-            render :xml => @systemtime.to_xml( :root => "systemtime",
-                   :dasherize => false )
-        end
-        format.json do
-           render :json => @systemtime.to_json
-        end
-      end
-    end #put
-  end
 end
 

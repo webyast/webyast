@@ -19,7 +19,7 @@ Version:        1.0.0
 Release:        0
 Summary:        YaST2 - Webservice - Yast Commandline interface
 Source:         www.tar.bz2
-Source1:        org.opensuse.yast.system.commandline.policy
+Source1:        org.opensuse.yast.commandline.policy
 BuildRoot:      %{_tmppath}/%{name}-%{version}-build
 BuildArch:      noarch
 
@@ -74,5 +74,5 @@ rm -rf $RPM_BUILD_ROOT
 %config /srv/www/%{pkg_user}/vendor/plugins/%{plugin_name}/lib
 %config /srv/www/%{pkg_user}/vendor/plugins/%{plugin_name}/tasks
 %config /srv/www/%{pkg_user}/vendor/plugins/%{plugin_name}/test
-%config /usr/share/PolicyKit/policy/org.opensuse.yast.%{plugin_name}.policy
+%attr(644,root,root) %config /usr/share/PolicyKit/policy/org.opensuse.yast.%{plugin_name}.policy
 

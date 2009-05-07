@@ -19,7 +19,7 @@ Version:        1.0.0
 Release:        0
 Summary:        YaST2 - Webservice - SystemTime
 Source:         www.tar.bz2
-Source1:        org.opensuse.yast.systemtime.policy
+Source1:        org.opensuse.yast.system.time.policy
 BuildRoot:      %{_tmppath}/%{name}-%{version}-build
 BuildArch:      noarch
 
@@ -71,8 +71,7 @@ rm -rf $RPM_BUILD_ROOT
 %config /srv/www/%{pkg_user}/vendor/plugins/%{plugin_name}/uninstall.rb
 %config /srv/www/%{pkg_user}/vendor/plugins/%{plugin_name}/app
 %config /srv/www/%{pkg_user}/vendor/plugins/%{plugin_name}/config
-%config /srv/www/%{pkg_user}/vendor/plugins/%{plugin_name}/lib
 %config /srv/www/%{pkg_user}/vendor/plugins/%{plugin_name}/tasks
 %config /srv/www/%{pkg_user}/vendor/plugins/%{plugin_name}/test
-%config /usr/share/PolicyKit/policy/org.opensuse.yast.%{plugin_name}.policy
+%attr(644,root,root)  %config /usr/share/PolicyKit/policy/org.opensuse.yast.system.time.policy
 
