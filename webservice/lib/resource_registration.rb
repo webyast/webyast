@@ -116,9 +116,9 @@ public
 	  end
 	
 	  if implementation[:singular]
-	    toplevel.resource name, :controller => namespaces.join("/")
+	    toplevel.resource name, :controller => namespaces.join("/"), :except => [ :new, :edit ]
 	  else
-	    toplevel.resources name
+	    toplevel.resources name, :except => [ :new, :edit ]
 	  end
         end
       end
