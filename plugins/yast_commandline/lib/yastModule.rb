@@ -70,7 +70,7 @@ class YastModule
     scr.execute(["/bin/mkdir", tmpdir])
     tmpfile = tmpdir + "/yastOptions" 
     scr.execute(["/sbin/yast2", @id, "xmlhelp", "xmlfile=#{tmpfile}"])
-    file = scr.readArg(".target.string",tmpfile)
+    file = scr.read_arg(".target.string",tmpfile)
     if file != false
       doc = REXML::Document.new file
       doc.elements.each("commandline/commands/command") { |commandElement| 
