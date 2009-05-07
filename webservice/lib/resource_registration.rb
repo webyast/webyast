@@ -70,13 +70,16 @@ public
   #
   def self.register_plugin(plugin)
     res_path = File.join(plugin.directory, 'config')
+#    $stderr.puts "checking #{res_path}"
     Dir.glob(File.join(res_path, 'routes.rb')).each do |route|
       $stderr.puts "***Error: Plugin #{File.basename(plugin.directory)} does private routing"
     end
     res_path = File.join(res_path, 'resources')
 #    $stderr.puts "self.register_plugin #{res_path}"
-    Dir.glob(File.join(res_path, '**/*.ya?ml')).each do |descriptor|
-      next unless descriptor =~ %r{#{res_path}/((\w+)/)?(\w+)\.yml$}
+    Dir.glob(File.join(res_path, '**/*.y*ml')).each do |descriptor|
+      $stderr.puts "checking #{descriptor}"
+      next unless descriptor =~ %r{#{res_path}/((\w+)/)?(\w+)\.y(a)?ml$}
+#      $stderr.puts "registering #{descriptor}"
       self.register(descriptor)
     end
   end
