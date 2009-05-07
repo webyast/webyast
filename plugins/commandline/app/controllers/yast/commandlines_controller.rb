@@ -1,6 +1,5 @@
 
-module Yast
-class CommandlinesController < ApplicationController
+class Yast::CommandlinesController < ApplicationController
 
   before_filter :login_required
 
@@ -149,4 +148,3 @@ class CommandlinesController < ApplicationController
     end
   end
 end
-end # module Yast
