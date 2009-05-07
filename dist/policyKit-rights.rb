@@ -55,16 +55,15 @@ usage "--user parameter missing" unless user
 usage "--action parameter (show|grant|revoke) missing" unless action
 
 begin
+   SuseString = "org.opensuse.yast.webservice."
    if action == "grant"
       IO.popen( "polkit-action", 'r+' ) do |pipe|
          loop do
-            suseString = "org.opensuse.yast."
             break if pipe.eof?
             l = pipe.read
             policies = l.split("\n")
             policies.each do |policy|
-               if policy.include? suseString and
-                  !policy.include?(suseString + "scr.") # do not grant SCR rights
+               if policy.include? SuseString
                   STDERR.puts "granting: #{policy}"
                   command = "polkit-auth --user " + user + " --grant " + policy
                   system (command)
@@ -84,9 +83,11 @@ begin
                when "revoke"
                   policies = l.split("\n")
                   policies.each do |policy|
-                    STDERR.puts "revoking: #{policy}"
-                    command = "polkit-auth --user " + user + " --revoke " + policy
-                    system (command)
+                    if policy.include? SuseString
+                      STDERR.puts "revoking: #{policy}"
+                      command = "polkit-auth --user " + user + " --revoke " + policy
+                      system (command)
+                    end
                  end
             end
          end
