@@ -1,6 +1,6 @@
 require "scr"
 
-class CommandlineController < ApplicationController
+class CommandlinesController < ApplicationController
 
   before_filter :login_required
 
@@ -66,8 +66,8 @@ class CommandlineController < ApplicationController
     respond @yast_module
   end
 
-
-  def run
+  # Hide running a command behind HTTP POST (aka create)
+  def create
     id = params[:id]
     @cmd_ret = Hash.new
     if permission_check( "org.opensuse.yast.commandline.execute")
