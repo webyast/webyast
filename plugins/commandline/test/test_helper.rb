@@ -1,10 +1,12 @@
-ENV["RAILS_ENV"] = "test"
 rails_parent = ENV["RAILS_PARENT"]
 unless rails_parent
   $stderr.puts "Please set RAILS_PARENT environment"
   exit
 end
+# first config rails
 require File.expand_path(rails_parent + "/config/environment")
+# then enable testing, this will get the routing right
+ENV["RAILS_ENV"] = "test"
 require 'test_help'
 
 class ActiveSupport::TestCase
