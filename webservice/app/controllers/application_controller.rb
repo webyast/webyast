@@ -5,40 +5,31 @@ class ApplicationController < ActionController::Base
 
   include AuthenticatedSystem
 
-begin
+  USER_ROLES_CONFIG = "/etc/yast_user_roles"
+
   require 'polkit'
   include PolKit
-rescue Exception => e
-  $stderr.puts "ruby-polkit not found!"
-  exit
-end
 
 private
   def user_roles(user)
-    if session['user_roles'].nil?
-       IO.foreach( "/etc/yast_user_roles" ) { |line|
-          line = line.chomp
-          if (line.size >= 1 and
-              line[0] != "#" ) #no comment
-             roles = line.split(/[\s,]+/)
-             if ( roles.size > 1 and
-                  roles[0] == user )
-                return roles
-             end
-          end
-       }
-       return []
-    else
-       return session['services']
+    return session['services'] unless session['user_roles'].nil?
+      
+    return [] unless File.exists?(USER_ROLES_CONFIG)
+    
+    IO.foreach( USER_ROLES_CONFIG ) do |line|
+      line = line.chomp
+      next if line[0] == "#"
+      roles = line.split(/[\s,]+/)
+      return roles if ( roles.size > 1 and roles[0] == user )
     end
+    return []
   end
 
 public
 
   def permission_check(action)
-    if self.current_account==nil || self.current_account.login.size == 0
-       return false
-    end
+    return false if self.current_account==nil || self.current_account.login.size == 0
+
     begin
        if polkit_check( action, self.current_account.login) == :yes
           logger.debug "Action: #{action} User: #{self.current_account.login} Result: ok"
