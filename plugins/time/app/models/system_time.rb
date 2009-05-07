@@ -26,8 +26,10 @@ class SystemTime
       xml.tag!(:is_utc, @is_utc, {:type => "boolean"} )
       xml.validtimezones({:type => "array"}) do
          @validtimezones.split( " " ).each do |timezone| 
-            xml.timezone do
-               xml.tag!(:id, timezone)
+            if not timezone.blank?
+               xml.timezone do
+                  xml.tag!(:id, timezone)
+               end
             end
          end
       end

@@ -18,13 +18,13 @@ require "scr"
 #
 
   def get_validtimezones
-     ret = Scr.execute(["/sbin/yast2", "timezone", "list"])
-     lines = ret[:stderr].split "\n"
+     retValue = Scr.execute(["/sbin/yast2", "timezone", "list"])
+     lines = retValue[:stderr].split "\n"
      ret = []
      lines.each do |l|   
-       if not l.empty? && l.casecmp("Region: ") == -1
+       if not l.empty?
           lang = l.split " "
-          ret << " " << lang[0]
+          ret << " " << lang[0] if lang[0]!="Region:"
        end
      end
      ret
