@@ -4,6 +4,8 @@ class Yast::CommandlinesController < ApplicationController
   before_filter :login_required
 
   require 'commandline'
+  
+  ################################
   private
 
   def init_modules (check_policy)
@@ -18,7 +20,7 @@ class Yast::CommandlinesController < ApplicationController
          end
        end
     else
-       yast_module = Commandline.new ""
+       yast_module = Commandline.new
        yast_module.error_id = 1
        yast_module.error_string = "no permission"
        @yast_modules[yast_module.id] = yast_module
@@ -26,7 +28,6 @@ class Yast::CommandlinesController < ApplicationController
   end
 
   def respond data
-    STDERR.puts "Respond #{data.class}"
     if data
       respond_to do |format|
 	format.xml do
@@ -43,6 +44,9 @@ class Yast::CommandlinesController < ApplicationController
       render :nothing => true, :status => 404 unless @yast_modules # not found
     end
   end
+  
+  
+  ################################
   public
 
   def index
@@ -80,7 +84,6 @@ class Yast::CommandlinesController < ApplicationController
          if params["hash"] != nil
            #checking if the command is hosted in a own Hash
            params["hash"].each do |name,value|
-              puts "Split hash #{name}:#{value}"
               params[name] = value
            end
          end
@@ -113,7 +116,7 @@ class Yast::CommandlinesController < ApplicationController
            end
          end
          if !found
-           STDERR.puts "command #{params[:command]} not found"
+           Rails.logger.error "command #{params[:command]} not found"
            @cmd_ret["exit"] = 2
            @cmd_ret["stderr"] = "command #{params[:command]} not found"
            @cmd_ret["stdout"] = ""

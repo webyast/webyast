@@ -46,9 +46,8 @@ class Commandline
   attr_reader :id, :commands
   attr_accessor :error_id, :error_string
   
-  def initialize id
-    id = id.to_s unless id.is_a? String
-    @id = id
+  def initialize id = ""
+    @id = id.to_s
     @commands = nil
     @error_id = 0
     @error_string = ""
@@ -74,26 +73,26 @@ class Commandline
     file = scr.read(".target.string",tmpfile)
     if file != false
       doc = REXML::Document.new file
-      doc.elements.each("commandline/commands/command") { |commandElement| 
+      doc.elements.each("commandline/commands/command") do |commandElement| 
         command = Hash.new
         command['help'] = commandElement.elements['help'].to_a[0]
         optionsElement = commandElement.elements['options']
         options = Hash.new
         if optionsElement
-           optionsElement.each() { |optionElement| 
+           optionsElement.each do |optionElement| 
              if optionElement.to_s.lstrip.length > 0
                option = Hash.new
                option["help"] = optionElement.elements['help'].to_a[0]
                option["type"] = optionElement.elements['type'].to_a[0]
                options[optionElement.elements['name'].to_a[0]] = option
              end
-           }
+           end
         end
         command['options'] = options
         @commands[commandElement.elements['name'].to_a[0]] = command
-      }
+      end
     end
-    puts "Founded command options/calls #{@commands.inspect}"
+    puts "Found command options/calls #{@commands.inspect}"
 
     scr.execute(["/bin/rm", tmpfile])
     return @commands

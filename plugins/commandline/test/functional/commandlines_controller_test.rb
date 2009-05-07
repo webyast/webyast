@@ -9,9 +9,23 @@ class CommandlinesControllerTest < ActionController::TestCase
     @request.session[:account_id] = 1 # defined in fixtures
   end
   
-  # Replace this with your real tests.
   test "access index" do
     get :index
     assert_response :success
+  end
+
+  test "access index xml" do
+    mime = Mime::XML
+    @request.accept = mime.to_s
+    get :index
+    assert_equal @response.content_type, mime
+  end
+  
+  test "access index json" do
+    mime = Mime::JSON
+    @request.accept = mime.to_s
+    get :index
+    assert_equal @response.content_type, mime
+    puts @response.body
   end
 end
