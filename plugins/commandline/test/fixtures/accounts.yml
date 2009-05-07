@@ -1,0 +1,4 @@
+test:
+ id: 1
+ login: test
+ salt: xyzzy
