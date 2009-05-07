@@ -4,14 +4,14 @@ require "rexml/document"
 # This provides generic commands for
 # YaST modules in the command line mode
 #
-class YastModule
-  require "scr"  
+class Commandline
+  require "scr"
   #
   # iterates over all yast module links
   #
   def self.each
     # run YaST to get a list of modules
-    ret = Scr.execute(["/sbin/yast2", "--list"])
+    ret = Scr.instance.execute(["/sbin/yast2", "--list"])
     lines = ret[:stdout].split "\n"
     lines = lines.sort
     lines::each do |l|   
@@ -23,20 +23,20 @@ class YastModule
   end
     
   #
-  # YastModule.all -> Array of string
+  # self.all -> Array of string
   #  returns array of all available YaST modules
   #
 
-  def YastModule.all
+  def self.all
     result = []
-    YastModule::each do |d|
+    self.each do |d|
       result << d
     end
     result
   end
   
   #
-  # YastModule.new id
+  # self.new id
   #   Creates a new instance of YaST module <id>
   #
   # Attributes
@@ -66,11 +66,12 @@ class YastModule
        return @commands
     end
     @commands = Hash.new
-    tmpdir = Scr.read( ".target.tmpdir" );
-    Scr.execute(["/bin/mkdir", tmpdir])
+    scr = Scr.instance
+    tmpdir = scr.read( ".target.tmpdir" );
+    scr.execute(["/bin/mkdir", tmpdir])
     tmpfile = tmpdir + "/yastOptions" 
-    Scr.execute(["/sbin/yast2", @id, "xmlhelp", "xmlfile=#{tmpfile}"])
-    file = Scr.readArg(".target.string",tmpfile)
+    scr.execute(["/sbin/yast2", @id, "xmlhelp", "xmlfile=#{tmpfile}"])
+    file = scr.read(".target.string",tmpfile)
     if file != false
       doc = REXML::Document.new file
       doc.elements.each("commandline/commands/command") { |commandElement| 
@@ -94,7 +95,7 @@ class YastModule
     end
     puts "Founded command options/calls #{@commands.inspect}"
 
-    Scr.execute(["/bin/rm", tmpfile])
+    scr.execute(["/bin/rm", tmpfile])
     return @commands
   end
 

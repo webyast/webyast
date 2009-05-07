@@ -1,2 +1,2 @@
 interface: org.opensuse.yast.commandlines
-controller: commandlines
+controller: yast/commandlines

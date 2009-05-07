@@ -1,5 +1,5 @@
-require "scr"
 
+module Yast
 class CommandlinesController < ApplicationController
 
   before_filter :login_required
@@ -109,7 +109,8 @@ class CommandlinesController < ApplicationController
                  end
                end
              end
-             @cmd_ret = Scr.execute(cmd)
+	     require "scr"
+             @cmd_ret = Scr.instance.execute(cmd)
            end
          end
          if !found
@@ -148,3 +149,4 @@ class CommandlinesController < ApplicationController
     end
   end
 end
+end # module Yast
