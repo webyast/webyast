@@ -36,6 +36,12 @@ end
 #
 
 #
+# rpam
+#
+test_module "rpam", "ruby-rpam"
+
+
+#
 # ruby-polkit
 #
 test_module "polkit", "ruby-polkit"

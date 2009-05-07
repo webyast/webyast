@@ -1,14 +1,7 @@
 require 'rubygems'
 require 'session'
 
-begin
-  require "rpam"
-  include Rpam
-rescue
-  $stderr.puts "ruby-rpam not found!"
-  exit
-end
-
+require "rpam"
 require 'digest/sha1'
 
 class Account < ActiveRecord::Base
