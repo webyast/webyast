@@ -3,7 +3,7 @@ all:
 
 install:
 	cp dist/yast_user_roles /etc ; \
-	cp dist/org.opensuse.yast.webservice.policy /usr/share/PolicyKit/policy/ ; \
+	cp dist/org.opensuse.yast.permissions.policy /usr/share/PolicyKit/policy/ ; \
         /usr/bin/polkit-auth --user root --grant org.freedesktop.packagekit.system-update ; \
         /usr/bin/polkit-auth --user root --grant org.freedesktop.policykit.read ; \
         /usr/bin/polkit-auth --user root --grant org.opensuse.yast.scr.read ; \

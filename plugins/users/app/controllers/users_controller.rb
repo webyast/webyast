@@ -13,7 +13,7 @@ class UsersController < ApplicationController
 
 
   def get_user_list
-    if permission_check( "org.opensuse.yast.users.readlist")
+    if permission_check( "org.opensuse.yast.system.users.read")
        ret = Scr.execute(["/sbin/yast2", "users", "list"])
        lines = ret[:stderr].split "\n"
        @users = []
@@ -200,7 +200,7 @@ class UsersController < ApplicationController
   # GET /users/1
   # GET /users/1.xml
   def show
-    if permission_check( "org.opensuse.yast.users.read")
+    if permission_check( "org.opensuse.yast.system.users.read")
        get_user params[:id]
     else
        @user = User.new
@@ -221,7 +221,7 @@ class UsersController < ApplicationController
   # POST /users.json
   def create
     @user = User.new
-    if !permission_check( "org.opensuse.yast.users.new")
+    if !permission_check( "org.opensuse.yast.system.users.new")
        @user.error_id = 1
        @user.error_string = "no permission"
     else
@@ -245,7 +245,7 @@ class UsersController < ApplicationController
   # PUT /users/1.xml
   def update
     @user = User.new
-    if !permission_check( "org.opensuse.yast.users.write")
+    if !permission_check( "org.opensuse.yast.system.users.write")
        @user.error_id = 1
        @user.error_string = "no permission"
     else
@@ -273,7 +273,7 @@ class UsersController < ApplicationController
   # DELETE /users/1.xml
   # DELETE /users/1.json
   def destroy
-    if !permission_check( "org.opensuse.yast.users.delete")
+    if !permission_check( "org.opensuse.yast.system.users.delete")
        @user = User.new
        @user.error_id = 1
        @user.error_string = "no permission"
@@ -293,8 +293,8 @@ class UsersController < ApplicationController
 
   # GET /users/1/exportssh
   def exportssh
-    if (!permission_check( "org.opensuse.yast.users.write") and
-        !permission_check( "org.opensuse.yast.users.write-sshkey"))
+    if (!permission_check( "org.opensuse.yast.system.users.write") and
+        !permission_check( "org.opensuse.yast.system.users.write-sshkey"))
        @user = User.new
        @user.error_id = 1
        @user.error_string = "no permission"
@@ -309,217 +309,6 @@ class UsersController < ApplicationController
     end
   end
 
-
-  # GET/PUT /users/1/<single-value>
-  def singlevalue
-    if request.get?
-      # GET
-      @user = User.new
-      @ret_user = User.new
-      get_user params[:users_id]
-      #initialize not needed stuff (perhaps no permissions available)
-      case params[:id]
-        when "default_group"
-          if ( permission_check( "org.opensuse.yast.users.read") or
-               permission_check( "org.opensuse.yast.users.read-defaultgroup"))
-             @ret_user.default_group = @user.default_group
-          else
-             @ret_user.error_id = 1
-             @ret_user.error_string = "no permission"
-          end         
-        when "full_name"
-          if ( permission_check( "org.opensuse.yast.users.read") or
-               permission_check( "org.opensuse.yast.users.read-fullname"))
-             @ret_user.full_name = @user.full_name
-          else
-             @ret_user.error_id = 1
-             @ret_user.error_string = "no permission"
-          end         
-        when "groups"
-          if ( permission_check( "org.opensuse.yast.users.read") or
-               permission_check( "org.opensuse.yast.users.read-groups")) then
-             @ret_user.groups = @user.groups
-          else
-             @ret_user.error_id = 1
-             @ret_user.error_string = "no permission"
-          end         
-        when "home_directory"
-          if ( permission_check( "org.opensuse.yast.users.read") or
-               permission_check( "org.opensuse.yast.users.read-homedirectory")) then
-             @ret_user.home_directory = @user.home_directory
-          else
-             @ret_user.error_id = 1
-             @ret_user.error_string = "no permission"
-          end         
-        when "login_name"
-          if ( permission_check( "org.opensuse.yast.users.read") or
-               permission_check( "org.opensuse.yast.users.read-loginname")) then
-             @ret_user.login_name = @user.login_name
-          else
-             @ret_user.error_id = 1
-             @ret_user.error_string = "no permission"
-          end         
-        when "login_shell"
-          if ( permission_check( "org.opensuse.yast.users.read") or
-               permission_check( "org.opensuse.yast.users.read-loginshell")) then
-             @ret_user.login_shell = @user.login_shell
-          else
-             @ret_user.error_id = 1
-             @ret_user.error_string = "no permission"
-          end         
-        when "uid"
-          if ( permission_check( "org.opensuse.yast.users.read") or
-               permission_check( "org.opensuse.yast.users.read-uid")) then
-             @ret_user.uid = @user.uid
-          else
-             @ret_user.error_id = 1
-             @ret_user.error_string = "no permission"
-          end         
-      end
-      @user = @ret_user
-      respond_to do |format|
-        format.xml do
-          render :xml => @user.to_xml( :root => "users",
-            :dasherize => false ), :location => "none"
-        end
-        format.json do
-	  render :json => @user.to_json, :location => "none"
-        end
-        format.html do
-          render :xml => @user.to_xml( :root => "users",
-            :dasherize => false ), :location => "none" #return xml only
-        end
-      end      
-    else
-      #PUT
-      respond_to do |format|
-        @set_user = User.new
-        @user = User.new
-        if @set_user.update_attributes(params[:user])
-          logger.debug "UPDATED: #{@set_user.inspect} ID: #{params[:id]}"
-          ok = true
-          #setting which are clear
-          @user.login_name = params[:users_id]
-          @user.ldap_password = @set_user.ldap_password
-          export_ssh = false
-          case params[:id]
-            when "default_group"
-              if ( permission_check( "org.opensuse.yast.users.write") or
-                  permission_check( "org.opensuse.yast.users.write-defaultgroup")) then
-                 @user.default_group = @set_user.default_group
-              else
-                 @user.error_id = 1
-                 @user.error_string = "no permission"
-              end         
-            when "full_name"
-              if ( permission_check( "org.opensuse.yast.users.write") or
-                   permission_check( "org.opensuse.yast.users.write-fullname")) then
-                 @user.full_name = @set_user.full_name
-              else
-                 @user.error_id = 1
-                 @user.error_string = "no permission"
-              end         
-            when "groups"
-              if ( permission_check( "org.opensuse.yast.users.write") or
-                   permission_check( "org.opensuse.yast.users.write-groups")) then
-                 @user.groups = @set_user.groups
-              else
-                 @user.error_id = 1
-                 @user.error_string = "no permission"
-              end         
-            when "home_directory"
-              if ( permission_check( "org.opensuse.yast.users.write") or
-                   permission_check( "org.opensuse.yast.users.write-homedirectory")) then
-                 @user.home_directory = @set_user.home_directory
-              else
-                 @user.error_id = 1
-                 @user.error_string = "no permission"
-              end         
-            when "new_login_name"
-              if ( permission_check( "org.opensuse.yast.users.write") or
-                   permission_check( "org.opensuse.yast.users.write-loginname")) then
-                 @user.new_login_name = @set_user.new_login_name
-              else
-                 @user.error_id = 1
-                 @user.error_string = "no permission"
-              end         
-            when "login_shell"
-              if ( permission_check( "org.opensuse.yast.users.write") or
-                   permission_check( "org.opensuse.yast.users.write-loginshell")) then
-                 @user.login_shell = @set_user.login_shell
-              else
-                 @user.error_id = 1
-                 @user.error_string = "no permission"
-              end         
-            when "new_uid"
-              if ( permission_check( "org.opensuse.yast.users.write") or
-                   permission_check( "org.opensuse.yast.users.write-uid")) then
-                 @user.new_uid = @set_user.new_uid
-              else
-                 @user.error_id = 1
-                 @user.error_string = "no permission"
-              end         
-            when "password"
-              if ( permission_check( "org.opensuse.yast.users.write") or
-                   permission_check( "org.opensuse.yast.users.write-password")) then
-                 @user.password = @set_user.password
-              else
-                 @user.error_id = 1
-                 @user.error_string = "no permission"
-              end         
-            when "type"
-              if ( permission_check( "org.opensuse.yast.users.write") or
-                   permission_check( "org.opensuse.yast.users.write-type")) then
-                 @user.type = @set_user.type
-              else
-                 @user.error_id = 1
-                 @user.error_string = "no permission"
-              end         
-            when "sshkey"
-              if ( permission_check( "org.opensuse.yast.users.write")  or
-                   permission_check( "org.opensuse.yast.users.write-sshkey")) then
-                 @user.sshkey = @set_user.sshkey
-                 export_ssh = true
-              else
-                 @user.error_id = 1
-                 @user.error_string = "no permission"
-              end         
-            else
-              logger.error "Wrong ID: #{params[:id]}"
-              @user.error_id = 2
-              @user.error_string = "Wrong ID: #{params[:id]}"
-              ok = false
-          end
-          if ok
-            if export_ssh
-              save_user = @user
-              ok = createSSH #reads @user again
-              save_user.error_id = @user.error_id
-              save_user.error_string = @user.error_string
-              @user = save_user
-            else
-              ok = udate_user params[:users_id]
-            end
-          end
-        else
-           @user.error_id = 2
-           @user.error_string = "format or internal error"
-        end
-
-        format.html do
-            render :xml => @user.to_xml( :root => "user",
-                     :dasherize => false ), :location => "none" #return xml only
-        end
-        format.xml do
-            render :xml => @user.to_xml( :root => "user",
-                     :dasherize => false ), :location => "none"
-        end
-        format.json do
-           render :json => @user.to_json, :location => "none"
-        end
-      end
-    end
-  end
 
 
 end

@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE policyconfig PUBLIC
+ "-//freedesktop//DTD PolicyKit Policy Configuration 1.0//EN"
+ "http://www.freedesktop.org/standards/PolicyKit/1.0/policyconfig.dtd">
+<policyconfig>
+
+  <vendor>YaST Webservice Project</vendor>
+  <vendor_url>http://en.opensuse.org/YAST</vendor_url>
+
+
+<!--
+Rights for users
+-->
+  <action id="org.opensuse.yast.system.users.read">
+    <description>Reading user settings</description>
+    <message>Authentication is required to read user settings</message>
+    <defaults>
+      <allow_inactive>no</allow_inactive>
+      <allow_active>no</allow_active>
+    </defaults>
+  </action>
+  <action id="org.opensuse.yast.system.users.write">
+    <description>Update user settings</description>
+    <message>Authentication is required to update user settings</message>
+    <defaults>
+      <allow_inactive>no</allow_inactive>
+      <allow_active>no</allow_active>
+    </defaults>
+  </action>
+  <action id="org.opensuse.yast.system.users.new">
+    <description>Add a new user account</description>
+    <message>Authentication is required to add a new user account</message>
+    <defaults>
+      <allow_inactive>no</allow_inactive>
+      <allow_active>no</allow_active>
+    </defaults>
+  </action>
+  <action id="org.opensuse.yast.system.users.delete">
+    <description>Delete a new account</description>
+    <message>Authentication is required to delete a user account</message>
+    <defaults>
+      <allow_inactive>no</allow_inactive>
+      <allow_active>no</allow_active>
+    </defaults>
+  </action>
+
+  <action id="org.opensuse.yast.system.users.write-sshkey">
+    <description>Update user setting sshkey</description>
+    <message>Authentication is required to update user setting sshkey</message>
+    <defaults>
+      <allow_inactive>no</allow_inactive>
+      <allow_active>no</allow_active>
+    </defaults>
+  </action>
+
+</policyconfig>

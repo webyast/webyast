@@ -65,19 +65,9 @@ begin
             policies.each do |policy|
                if policy.include? suseString and
                   !policy.include?(suseString + "scr.") # do not grant SCR rights
-                  policySplit = policy.split("-")
-                  if policySplit.size >= 2 
-                     command = "polkit-auth --user " + user + " --explicit |grep -s " + policySplit[0] + "-" + policySplit[1] + " >>/dev/null"
-                     if ( !system(command) )  # has not already been set
-                       STDERR.puts "granting: #{policy}"
-                       command = "polkit-auth --user " + user + " --grant " + policySplit[0] + "-" + policySplit[1]
-                       system (command)
-                     end
-                  elsif policySplit.size == 1 #only root available
-                       STDERR.puts "granting: #{policy}"
-                       command = "polkit-auth --user " + user + " --grant " + policy
-                       system (command)
-                  end
+                  STDERR.puts "granting: #{policy}"
+                  command = "polkit-auth --user " + user + " --grant " + policy
+                  system (command)
                end
             end
          end
