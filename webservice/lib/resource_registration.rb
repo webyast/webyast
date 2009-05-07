@@ -77,7 +77,7 @@ public
     res_path = File.join(res_path, 'resources')
 #    $stderr.puts "self.register_plugin #{res_path}"
     Dir.glob(File.join(res_path, '**/*.y*ml')).each do |descriptor|
-      $stderr.puts "checking #{descriptor}"
+#      $stderr.puts "checking #{descriptor}"
       next unless descriptor =~ %r{#{res_path}/((\w+)/)?(\w+)\.y(a)?ml$}
 #      $stderr.puts "registering #{descriptor}"
       self.register(descriptor)
