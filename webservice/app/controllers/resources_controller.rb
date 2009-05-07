@@ -1,5 +1,5 @@
 class ResourcesController < ApplicationController
-  require "lib/resource_registration"
+  require "resource_registration"
   
   def index
     if params[:interface]

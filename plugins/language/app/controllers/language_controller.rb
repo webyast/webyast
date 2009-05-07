@@ -18,12 +18,12 @@ class LanguageController < ApplicationController
 
 
   def get_available
-     ret = Scr.execute(["/sbin/yast2", "language", "list"])
+     ret = Scr.instance.execute(["/sbin/yast2", "language", "list"])
      @language.available = ret[:stderr]
   end
 
   def get_languages
-     ret = Scr.execute(["/sbin/yast2", "language", "summary"])
+     ret = Scr.instance.execute(["/sbin/yast2", "language", "summary"])
      lines = ret[:stderr].split "\n"
      lines.each do |s|    	
        column = s.split(" ")
@@ -41,11 +41,11 @@ class LanguageController < ApplicationController
 #
 
   def set_first_language (language)
-    Scr.execute(["/sbin/yast2", "language", "set",  "lang=#{language}", "no_packages"])
+    Scr.instance.execute(["/sbin/yast2", "language", "set",  "lang=#{language}", "no_packages"])
   end
 
   def set_second_languages (languages)
-    Scr.execute(["/sbin/yast2", "language", "set", "languages=#{languages}", "no_packages"])
+    Scr.instance.execute(["/sbin/yast2", "language", "set", "languages=#{languages}", "no_packages"])
   end
 
 

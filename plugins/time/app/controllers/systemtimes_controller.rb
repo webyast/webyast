@@ -3,10 +3,11 @@ include ApplicationHelper
 
 class SystemtimesController < ApplicationController
 
-before_filter :login_required
-
-require "scr"
-
+  before_filter :login_required
+  
+  require "scr"
+  @scr = Scr.instance
+  
 #--------------------------------------------------------------------------------
 #
 #local methods
@@ -18,7 +19,7 @@ require "scr"
 #
 
   def get_validtimezones
-     retValue = Scr.execute(["/sbin/yast2", "timezone", "list"])
+     retValue = @scr.execute(["/sbin/yast2", "timezone", "list"])
      lines = retValue[:stderr].split "\n"
      ret = []
      lines.each do |l|   
@@ -31,7 +32,7 @@ require "scr"
   end
 
   def get_is_utc
-    if Scr.read(".sysconfig.clock.HWCLOCK") == "-u" then
+    if @scr.read(".sysconfig.clock.HWCLOCK") == "-u" then
       return true
     else
       return false
@@ -39,12 +40,12 @@ require "scr"
   end
 
   def get_time
-    ret = Scr.execute(["/bin/date"])
+    ret = @scr.execute(["/bin/date"])
     ret[:stdout]
   end
 
   def get_timezone
-    return Scr.read(".sysconfig.clock.TIMEZONE")
+    return @scr.read(".sysconfig.clock.TIMEZONE")
   end
 
 #
@@ -58,13 +59,13 @@ require "scr"
     else
       hwclock = "--localtime"
     end
-    Scr.write(".sysconfig.clock.HWCLOCK", hwclock)
+    @scr.write(".sysconfig.clock.HWCLOCK", hwclock)
   end
 
   def set_time (time)
     #set time
     environment = [];
-    hwclock = Scr.read(".sysconfig.clock.HWCLOCK");
+    hwclock = @scr.read(".sysconfig.clock.HWCLOCK");
     timezone = get_timezone
     if ( not timezone.empty? && hwclock!= "--localtime")
        environment = ["TZ=#{timezone}"]
@@ -75,17 +76,17 @@ require "scr"
               "#{time.hour}:#{time.min}:#{time.sec}\""]
 
     logger.debug "SetTime cmd #{cmd.inspect}"
-    Scr.execute(cmd, environment)
+    @scr.execute(cmd, environment)
 
     cmd = ["/sbin/hwclock", "--hctosys",  hwclock]
 
     logger.debug "SetTime cmd #{cmd.inspect}"
-    Scr.execute(cmd)
+    @scr.execute(cmd)
   end
 
   def set_timezone (timezone)
     #set timezone
-    Scr.write(".sysconfig.clock.TIMEZONE",timezone)
+    @scr.write(".sysconfig.clock.TIMEZONE",timezone)
   end
 
 #--------------------------------------------------------------------------------

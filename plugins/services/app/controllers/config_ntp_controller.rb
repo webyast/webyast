@@ -4,13 +4,15 @@ class ConfigNtpController < ApplicationController
   before_filter :login_required
 
   require "scr"
+  
+  @scr = Scr.instance
 #
 #local functions
 #
    def get_manual_server
 
      manual_server = ""
-     ret = Scr.execute(["/sbin/yast2",  "ntp-client",  "list"])
+     ret = @scr.execute(["/sbin/yast2",  "ntp-client",  "list"])
      servers = ret[:stderr].split "\n"
      servers.each do |s|
        column = s.split(" ")
@@ -31,19 +33,15 @@ class ConfigNtpController < ApplicationController
 
    def enabled
 
-     ret = Scr.execute(["/sbin/yast2", "ntp-client", "status"])
-     if ret[:stderr]=="NTP daemon is enabled.\n"
-       return true
-     else      
-       return false
-     end
+     ret = @scr.execute(["/sbin/yast2", "ntp-client", "status"])
+     return (ret[:stderr]=="NTP daemon is enabled.\n")
    end
 
    def write_ntp_conf (requested_servers)
      update_required = false
      #remove evtl.old server if requested
      servers = []
-     ret = Scr.execute(["/sbin/yast2", "ntp-client", "list"])
+     ret = @scr.execute(["/sbin/yast2", "ntp-client", "list"])
      servers_line = ret[:stderr].split "\n"
      servers_line.each do |s|
        column = s.split " "
@@ -51,36 +49,29 @@ class ConfigNtpController < ApplicationController
 	  servers << column[1]
        end
      end
-     update_required = false
+     update_required = true
      requested_servers.each do |req_server|
-       found = false
        servers.each do |server|
           if server==req_server
-             found = true
+             update_required = false
+	     break
           end
-       end
-       if !found
-          update_required = true
        end
      end
 
      #update required
      if update_required
        servers.each do |server|
-         Scr.execute(["/sbin/yast2", "ntp-client", "delete", server])
+         @scr.execute(["/sbin/yast2", "ntp-client", "delete", server])
        end
        requested_servers.each do |req_server|
-         Scr.execute(["/sbin/yast2", "ntp-client", "add", req_server])
+         @scr.execute(["/sbin/yast2", "ntp-client", "add", req_server])
        end
      end
    end
 
    def enable (enabled)
-     if enabled == true
-       Scr.execute(["/sbin/yast2", "ntp-client", "enable"])
-     else
-       Scr.execute(["/sbin/yast2", "ntp-client", "disable"])
-     end
+     @scr.execute(["/sbin/yast2", "ntp-client", enabled ? "enable" : "disable" ])
    end
 
 #
