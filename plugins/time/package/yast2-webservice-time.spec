@@ -9,7 +9,7 @@
 #
 
 
-Name:           yast2-webservice-systemtime
+Name:           yast2-webservice-time
 PreReq:         yast2-webservice
 Provides:       yast2-webservice:/srv/www/yastws/app/controllers/systemtime_controller.rb
 License:        GPL
@@ -17,7 +17,7 @@ Group:          Productivity/Networking/Web/Utilities
 Autoreqprov:    on
 Version:        1.0.0
 Release:        0
-Summary:        YaST2 - Webservice - SystemTime
+Summary:        YaST2 - Webservice - Time
 Source:         www.tar.bz2
 Source1:        org.opensuse.yast.system.time.policy
 BuildRoot:      %{_tmppath}/%{name}-%{version}-build
@@ -25,7 +25,7 @@ BuildArch:      noarch
 
 #
 %define pkg_user yastws
-%define plugin_name systemtime
+%define plugin_name time
 #
 
 
@@ -71,8 +71,7 @@ rm -rf $RPM_BUILD_ROOT
 %config /srv/www/%{pkg_user}/vendor/plugins/%{plugin_name}/uninstall.rb
 %config /srv/www/%{pkg_user}/vendor/plugins/%{plugin_name}/app
 %config /srv/www/%{pkg_user}/vendor/plugins/%{plugin_name}/config
-%config /srv/www/%{pkg_user}/vendor/plugins/%{plugin_name}/lib
 %config /srv/www/%{pkg_user}/vendor/plugins/%{plugin_name}/tasks
 %config /srv/www/%{pkg_user}/vendor/plugins/%{plugin_name}/test
-%config /usr/share/PolicyKit/policy/org.opensuse.yast.%{plugin_name}.policy
+%config /usr/share/PolicyKit/policy/org.opensuse.yast.system.%{plugin_name}.policy
 
