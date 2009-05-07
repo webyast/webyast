@@ -1,6 +1,6 @@
 # load resources and populate database
 class ResourceRegistration
-  
+ 
   @@resources = Hash.new
   def self.resources
     @@resources
@@ -69,9 +69,13 @@ public
   # register routes from a plugin
   #
   def self.register_plugin(plugin)
-    res_path = File.join(plugin.directory, 'config', 'resources')
+    res_path = File.join(plugin.directory, 'config')
+    Dir.glob(File.join(res_path, 'routes.rb')).each do |route|
+      $stderr.puts "***Error: Plugin #{File.basename(plugin.directory)} does private routing"
+    end
+    res_path = File.join(res_path, 'resources')
 #    $stderr.puts "self.register_plugin #{res_path}"
-    Dir.glob(File.join(res_path, '**/*.yml')).each do |descriptor|
+    Dir.glob(File.join(res_path, '**/*.ya?ml')).each do |descriptor|
       next unless descriptor =~ %r{#{res_path}/((\w+)/)?(\w+)\.yml$}
       self.register(descriptor)
     end
