@@ -28,4 +28,10 @@ class CommandlinesControllerTest < ActionController::TestCase
     assert_equal @response.content_type, mime
     puts @response.body
   end
+  
+  test "return html request with xml" do
+    get :index, :format => "html"
+    assert_equal @response.content_type, Mime::XML.to_s
+  end
+  
 end
