@@ -75,7 +75,7 @@ class UsersController < ApplicationController
       get_user @user.login_name
       @user.sshkey = save_key
     end
-    ret = @scr.read_arg(".target.stat", "#{@user.home_directory}/.ssh/authorized_keys")
+    ret = @scr.read(".target.stat", "#{@user.home_directory}/.ssh/authorized_keys")
     if ret.empty?
       logger.debug "Create: #{@user.home_directory}/.ssh/authorized_keys"
       @scr.execute(["/bin/mkdir", "#{@user.home_directory}/.ssh"])      

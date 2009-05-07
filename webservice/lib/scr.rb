@@ -21,25 +21,18 @@ class Scr
     raise "/SCR object does not provide org.opensuse.yast.SCR.Methods interface" unless @scr    
   end
   
-  def read (path)
+  def read (path, arg = "")
 
     ret = @scr.Read([false, "path", ["s",path] ],
-                    [false, "", ["s",""] ], 
+                    [false, (arg.empty? ? "" : "string"), ["s",arg] ], 
                     [false, "", ["s",""] ])
     return  ret[0][2]
   end
 
-  def read_arg (path,argument)
-    ret = @scr.Read([false, "path", ["s",path] ],
-                    [false, "string", ["s",argument] ], 
-                    [false, "", ["s",""] ])
-    return  ret[0][2]
-  end
-
-  def write (path, value)
-    @src.Write([false, "path", ["s",path] ],
+  def write (path, value, arg = "")
+    @scr.Write([false, "path", ["s",path] ],
                [false, "", ["s",value] ], 
-               [false, "", ["s",""] ])
+               [false, "", ["s",arg] ])
   end
 
   def execute (arguments, environment=[] )
@@ -65,7 +58,7 @@ class Scr
 		       [false, "", ["s",command] ], 
 		       [false, "", ["s",""] ])
 
-    log.error " SCRExecute (" + command + ") => " + if ret[0][2]["exit"][2] == 1 then "1"; else "0"; end
+    Rails.logger.error " SCRExecute (" + command + ") => " + if ret[0][2]["exit"][2] == 1 then "1"; else "0"; end
 
     return { :stdout => ret[0][2]["stdout"][2], :stderr => ret[0][2]["stderr"][2], :exit => ret[0][2]["exit"][2]}
   end
