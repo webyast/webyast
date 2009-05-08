@@ -14,7 +14,7 @@ class PermissionsController < ApplicationController
   def get_permission_list(user_id, filter = nil)
      @permissions = []
      if permission_check( "org.opensuse.yast.permissions.read")
-       ret = Scr.execute(["polkit-action"])
+       ret = Scr.instance.execute(["polkit-action"])
        if ret[:exit] == 0
           suse_string = "org.opensuse.yast."
           lines = ret[:stdout].split "\n"
@@ -32,7 +32,7 @@ class PermissionsController < ApplicationController
           if user_id.blank?
              ret[:exit] = -1
           else
-             ret = Scr.execute(["polkit-auth", "--user", user_id, "--explicit"])
+             ret = Scr.instance.execute(["polkit-auth", "--user", user_id, "--explicit"])
           end
           if ret[:exit] == 0
              lines = ret[:stdout].split "\n"
@@ -149,7 +149,7 @@ class PermissionsController < ApplicationController
        if params[:user_id].blank?
           ret[:exit] = -1
        else
-          ret = Scr.execute(["polkit-auth", "--user", params[:user_id], permission.grant ? "--grant" : "--revoke", "org.opensuse.yast.webservice.#{params[:id]}"])
+          ret = Scr.instance.execute(["polkit-auth", "--user", params[:user_id], permission.grant ? "--grant" : "--revoke", "org.opensuse.yast.webservice.#{params[:id]}"])
        end
        if ret[:exit] != 0
           permission.error_id = 2
