@@ -164,10 +164,5 @@ class SystemtimesController < ApplicationController
     end
   end
 
-  def index
-    show
-  end
-
-
 end
 
