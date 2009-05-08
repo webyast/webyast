@@ -17,21 +17,14 @@ class CommandlinesControllerTest < ActionController::TestCase
   test "access index xml" do
     mime = Mime::XML
     @request.accept = mime.to_s
-    get :index
-    assert_equal @response.content_type, mime
+    get :index, :format => :xml
+    assert_equal mime.to_s, @response.content_type
   end
   
   test "access index json" do
     mime = Mime::JSON
     @request.accept = mime.to_s
-    get :index
-    assert_equal @response.content_type, mime
-    puts @response.body
+    get :index, :format => :json
+    assert_equal mime.to_s, @response.content_type
   end
-  
-  test "return html request with xml" do
-    get :index, :format => "html"
-    assert_equal @response.content_type, Mime::XML.to_s
-  end
-  
 end
