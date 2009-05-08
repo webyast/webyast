@@ -1,11 +1,14 @@
+require "scr"
+
 include ApplicationHelper
 
 class UsersController < ApplicationController
   
   before_filter :login_required
 
-  require "scr"
-  @scr = Scr.instance
+  def initialize
+    @scr = Scr.instance
+  end
   
 #--------------------------------------------------------------------------------
 #

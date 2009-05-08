@@ -1,3 +1,5 @@
+require "scr"
+
 include ApplicationHelper
 
 class CommandsController < ApplicationController
@@ -55,7 +57,6 @@ class CommandsController < ApplicationController
     @service.error_string = ""
 
     if permission_check( "org.opensuse.yast.system.services.execute") 
-       require "scr"
        cmd = "/usr/sbin/rc" + params[:service_id] 
        logger.debug "Service cmd #{cmd} #{id}"
        ret = Scr.instance.execute([cmd, id])
