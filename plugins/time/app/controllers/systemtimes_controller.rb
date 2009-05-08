@@ -4,9 +4,11 @@ include ApplicationHelper
 class SystemtimesController < ApplicationController
 
   before_filter :login_required
-  
-  require "scr"
-  @scr = Scr.instance
+
+  def initialize
+    require "scr"
+    @scr = Scr.instance
+  end
   
 #--------------------------------------------------------------------------------
 #
