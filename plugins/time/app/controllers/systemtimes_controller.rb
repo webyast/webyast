@@ -142,7 +142,7 @@ class SystemtimesController < ApplicationController
     @systemtime = SystemTime.new
 
     unless permission_check( "org.opensuse.yast.system.time.read")      
-      render ErrorResult.error( 401, 1, "no permission" )
+      render ErrorResult.error( 403, 1, "no permission" ) and return
     else
       @systemtime.currenttime = get_time
       @systemtime.is_utc = get_is_utc
