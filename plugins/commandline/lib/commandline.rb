@@ -16,8 +16,8 @@ class Commandline
     lines = lines.sort
     lines::each do |l|   
       l = l.chomp
-      if not l.empty? > 0 && l != "Available modules:"
-          yield l
+      unless l.empty? || l == "Available modules:"
+	yield l
       end
     end
   end
