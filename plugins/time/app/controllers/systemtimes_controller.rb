@@ -5,8 +5,10 @@ class SystemtimesController < ApplicationController
 
   before_filter :login_required
   
-  require "scr"
-  @scr = Scr.instance
+  def initialize
+    require "scr"
+    @scr = Scr.instance
+  end
   
 #--------------------------------------------------------------------------------
 #
@@ -139,27 +141,16 @@ class SystemtimesController < ApplicationController
 
     @systemtime = SystemTime.new
 
-    if permission_check( "org.opensuse.yast.system.time.read")
-       @systemtime.currenttime = get_time
-       @systemtime.is_utc = get_is_utc
-       @systemtime.timezone = get_timezone
-       @systemtime.validtimezones = get_validtimezones
+    unless permission_check( "org.opensuse.yast.system.time.read")      
+      render ErrorResult.error( 401, 1, "no permission" )
     else
-       @systemtime.error_id = 1
-       @systemtime.error_string = "no permission"
-    end
+      @systemtime.currenttime = get_time
+      @systemtime.is_utc = get_is_utc
+      @systemtime.timezone = get_timezone
+      @systemtime.validtimezones = get_validtimezones
 
-    respond_to do |format|
-      format.xml do
-        render :xml => @systemtime.to_xml( :root => "systemtime",
-          :dasherize => false )
-      end
-      format.json do
-	render :json => @systemtime.to_json
-      end
-      format.html do
-        render :xml => @systemtime.to_xml( :root => "systemtime",
-          :dasherize => false ) #return xml only
+      respond_to do |format|
+	render @systemtime, :format => format
       end
     end
   end
