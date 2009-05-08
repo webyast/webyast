@@ -148,10 +148,6 @@ class SystemtimesController < ApplicationController
       @systemtime.is_utc = get_is_utc
       @systemtime.timezone = get_timezone
       @systemtime.validtimezones = get_validtimezones
-
-      respond_to do |format|
-	render @systemtime, :format => format
-      end
     end
   end
 
