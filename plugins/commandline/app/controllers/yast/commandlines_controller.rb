@@ -12,18 +12,18 @@ class Yast::CommandlinesController < ApplicationController
     @yast_modules = Hash.new
     if (!check_policy or
         permission_check( "org.opensuse.yast.commandline.read"))
-       Commandline.all.each do |d|
-         begin
-            yast_module = Commandline.new d
-            @yast_modules[yast_module.id] = yast_module
-         rescue # Don't fail on non-existing service. Should be more specific.
-         end
-       end
+      Commandline.all.each do |d|
+	begin
+	  yast_module = Commandline.new d
+	  @yast_modules[yast_module.id] = yast_module
+	rescue # Don't fail on non-existing service. Should be more specific.
+	end
+      end
     else
-       yast_module = Commandline.new
-       yast_module.error_id = 1
-       yast_module.error_string = "no permission"
-       @yast_modules[yast_module.id] = yast_module
+      yast_module = Commandline.new
+      yast_module.error_id = 1
+      yast_module.error_string = "no permission"
+      @yast_modules[yast_module.id] = yast_module
     end
   end
 
