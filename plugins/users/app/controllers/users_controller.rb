@@ -18,7 +18,7 @@ class UsersController < ApplicationController
 
 
   def get_user_list
-    if permission_check( "org.opensuse.yast.users.readlist")
+    if permission_check( "org.opensuse.yast.system.users.read")
        ret = @scr.execute(["/sbin/yast2", "users", "list"])
        lines = ret[:stderr].split "\n"
        @users = []
