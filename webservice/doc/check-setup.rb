@@ -36,10 +36,7 @@ def test_version package, version
   nvr = v.split "-"
   rel = nvr.pop
   ver = nvr.pop
-  if ver < version
-    escape "#{package} not up-to-date", "upgrade to #{package}-#{version}"
-  end
-  puts "Version #{ver}"
+  escape "#{package} not up-to-date", "upgrade to #{package}-#{version}"  if ver < version
 end
 
 ###
@@ -88,13 +85,18 @@ test "YaST D-Bus service available" do
     proxy = bus.introspect( "org.opensuse.yast.SCR", "/SCR" )
   rescue Exception => e
   end
-  test_version "yast2-core", "2.18.10"
-  escape "YaST D-Bus service not available", "install yast-core >= 2.18.10" unless proxy
+  package = "yast2-core"
+  version = "2.18.10"
+  unless proxy
+    $stderr.puts "YaST D-Bus service not available"
+    test_version package, version
+    escape "#{package} not correctly installed", "reinstall #{package}-#{version}"
+  end
   begin
     scr = proxy["org.opensuse.yast.SCR.Methods"]
   rescue Exception => e
   end
-  escape "YaST D-Bus does not provide the right data", "install yast-core >= 2.18.10" unless scr
+  escape "YaST D-Bus does not provide the right data", "reinstall #{package}-#{version}" unless scr
 end
 
 
