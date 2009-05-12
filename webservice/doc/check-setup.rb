@@ -30,6 +30,17 @@ def test_module name, package
   end
 end
 
+def test_version package, version
+  v = `rpm -q #{package}`
+  escape v, "install #{package} >= #{version}" if v =~ /is not installed/
+  nvr = v.split "-"
+  rel = nvr.pop
+  ver = nvr.pop
+  if ver < version
+    escape "#{package} not up-to-date", "upgrade to #{package}-#{version}"
+  end
+  puts "Version #{ver}"
+end
 
 ###
 # Tests
@@ -77,6 +88,7 @@ test "YaST D-Bus service available" do
     proxy = bus.introspect( "org.opensuse.yast.SCR", "/SCR" )
   rescue Exception => e
   end
+  test_version "yast2-core", "2.18.10"
   escape "YaST D-Bus service not available", "install yast-core >= 2.18.10" unless proxy
   begin
     scr = proxy["org.opensuse.yast.SCR.Methods"]
