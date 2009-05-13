@@ -19,12 +19,10 @@ class SecuritiesController < ApplicationController
   # PUT /security/1
   # PUT /security/1.xml
   def update
-
-logger.debug "UPDATE"
     respond_to do |format|
       @security = Security.new
 
-      if permission_check("org.opensuse.yast.webservice.securities.write")
+      if permission_check("org.opensuse.yast.system.security.write")
         if params[:security] != nil
           @security.write(params[:security][:firewall], params[:security][:firewall_after_startup], params[:security][:ssh])
         else
@@ -59,9 +57,8 @@ logger.debug "UPDATE"
   # GET /security/1
   # GET /security/1.xml
   def show
-    logger.debug "SHOW"
     @security = Security.new
-    if permission_check("org.opensuse.yast.webservice.securities.read")
+    if permission_check("org.opensuse.yast.system.security.read")
       @security.update
     else
       @security.error_id = 1
