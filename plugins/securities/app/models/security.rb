@@ -95,10 +95,9 @@ class Security #< ActiveRecord::Base
       break if pipe.eof?
       retval = pipe.read.to_str
       if retval.include? "done" #success
-        return true
-      end
+        return param
+      end #FIXME else raise ..
     end
-    return false
   end
 
   # returns true for success and false for failure
@@ -116,11 +115,10 @@ class Security #< ActiveRecord::Base
     lines.each do |l|
       if l.length > 0
         if l.include? "#{verify}"
-          return true
-        end
+          return param
+        end #FIXME else raise ..
       end
     end
-    return false
   end
 
   # returns true for success and false for failure
@@ -134,9 +132,8 @@ class Security #< ActiveRecord::Base
       break if pipe.eof?
       retval = pipe.read.to_str
       if retval.include? "done" #success
-        return true
-      end
+        return param
+      end #FIXME else raise ..
     end
-    return false
   end
 end
