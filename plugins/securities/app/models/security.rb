@@ -2,20 +2,16 @@ class Security #< ActiveRecord::Base
 
   require "scr"
 
-
-#    @scr = Scr.instance
   attr_accessor :error_id,
-                :error_string,
-                :firewall,
+                :error_string
+
+  attr_reader   :firewall,
                 :firewall_after_startup,
                 :ssh
 
   public
 
   def initialize
-    @firewall = ""
-    @firewall_after_startup = ""
-    @ssh = ""
     @error_string = ""
     @error_id = 0
     @scr = Scr.instance
@@ -27,7 +23,7 @@ class Security #< ActiveRecord::Base
     @ssh = ssh?
   end
 
-  def write(a, b, c)
+  def write(a, b, c) #(a=firewall?, ..)
     @firewall = firewall(a)
     @firewall_after_startup = firewall_after_startup(b)
     @ssh = ssh(c)
@@ -64,7 +60,6 @@ class Security #< ActiveRecord::Base
   end
 
   def firewall_after_startup?
-#=begin
     cmd = @scr.execute(["/sbin/yast2", "firewall", "startup", "show"])
     lines = cmd[:stderr].split "\n"
     lines.each do |l|
@@ -76,7 +71,6 @@ class Security #< ActiveRecord::Base
         end
       end
     end
-#=end
   end
 
   def ssh?
