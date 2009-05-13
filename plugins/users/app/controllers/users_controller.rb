@@ -23,7 +23,7 @@ class UsersController < ApplicationController
        lines = ret[:stderr].split "\n"
        @users = []
        lines.each do |s|   
-          user = User.new 	
+          user = User.new
           user.login_name = s.rstrip
           @users << user
        end
@@ -37,39 +37,39 @@ class UsersController < ApplicationController
   end
 
   def get_user (id)
-     if @user
-       saveKey = @user.sshkey
-     else
-       saveKey = nil
-     end
-     ret = @scr.execute(["/sbin/yast2", "users", "show", "username=#{id}"])
-     lines = ret[:stderr].split "\n"
-     counter = 0
-     @user = User.new
-     lines.each do |s|   
-       if counter+1 <= lines.length
-         case s
-         when "Full Name:"
-           @user.full_name = lines[counter+1].strip
-         when "List of Groups:"
-           @user.groups = lines[counter+1].strip
-         when "Default Group:"
-           @user.default_group = lines[counter+1].strip
-         when "Home Directory:"
-           @user.home_directory = lines[counter+1].strip
-         when "Login Shell:"
-           @user.login_shell = lines[counter+1].strip
-         when "Login Name:"
-           @user.login_name = lines[counter+1].strip
-         when "UID:"
-           @user.uid = lines[counter+1].strip
-         end
-       end
-       counter += 1
-     end
-     @user.sshkey = saveKey
-     @user.error_id = 0
-     @user.error_string = ""
+    if @user
+      saveKey = @user.sshkey
+    else
+      saveKey = nil
+    end
+    ret = @scr.execute(["/sbin/yast2", "users", "show", "username=#{id}"])
+    lines = ret[:stderr].split "\n"
+    counter = 0
+    @user = User.new
+    lines.each do |s|   
+      if counter+1 <= lines.length
+        case s
+        when "Full Name:"
+          @user.full_name = lines[counter+1].strip
+        when "List of Groups:"
+          @user.groups = lines[counter+1].strip
+        when "Default Group:"
+          @user.default_group = lines[counter+1].strip
+        when "Home Directory:"
+          @user.home_directory = lines[counter+1].strip
+        when "Login Shell:"
+          @user.login_shell = lines[counter+1].strip
+        when "Login Name:"
+          @user.login_name = lines[counter+1].strip
+        when "UID:"
+          @user.uid = lines[counter+1].strip
+        end
+      end
+      counter += 1
+    end
+    @user.sshkey = saveKey
+    @user.error_id = 0
+    @user.error_string = ""
   end
 
   def createSSH
