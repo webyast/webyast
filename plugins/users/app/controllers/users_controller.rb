@@ -100,7 +100,6 @@ class UsersController < ApplicationController
 
   def udate_user userId
     ok = true
-
     if @user.sshkey and not @user.sshkey.empty?
       ok = createSSH
     end
@@ -109,7 +108,7 @@ class UsersController < ApplicationController
 
     command << "cn=\"#{@user.full_name}\"" if not @user.full_name.blank?
     if not @user.groups.blank?
-      grp_string = groups.map { |group| group[:id] }.join(',')
+      grp_string = @user.groups.map { |group| group[:id] }.join(',')
       command << "grouplist=#{grp_string}"
     end
     
@@ -118,7 +117,7 @@ class UsersController < ApplicationController
     command << "shell=#{@user.login_shell}" if not @user.login_shell.blank?
     command << "username=#{userId}" if not userId.blank?
     command << "uid=#{@user.uid}" if not @user.uid.blank?
-    command << "password=#{@user.password}" if not user.password.blank?
+    command << "password=#{@user.password}" if not @user.password.blank?
     command << "ldap_password=#{@user.ldap_password}" if not @user.ldap_password.blank?
     command << "new_uid=#{@user.new_uid}" if not @user.new_uid.blank?
     command << "new_username=#{@user.new_login_name}" if not @user.new_login_name.blank?
@@ -137,7 +136,7 @@ class UsersController < ApplicationController
     command = ["/sbin/yast2", "users", "add"]
     command << "cn=\"#{@user.full_name}\""  if not @user.full_name.blank?
     if not @user.groups.blank?
-      grp_string = groups.map { |group| group[:id] }.join(',')
+      grp_string = @user.groups.map { |group| group[:id] }.join(',')
       command << "grouplist=#{grp_string}"
     end
     command << "gid=#{@user.default_group}" if not @user.default_group.blank?
@@ -147,7 +146,7 @@ class UsersController < ApplicationController
     command << "uid=#{@user.uid}" if not @user.uid.blank?
     command << "password=#{@user.password}" if not @user.password.blank?
     command << "ldap_password=#{@user.ldap_password}" if not @user.ldap_password.blank?
-    command << "no_home" if not @user.no_home.blank? and @user.no_home.blank.eql?('true')
+    command << "no_home" if not @user.no_home.blank? and @user.no_home.eql?('true')
     command << "type=#{@user.type}" if not @user.type.blank?
     command << "batchmode"
 
@@ -227,7 +226,7 @@ class UsersController < ApplicationController
        @user.error_id = 1
        @user.error_string = "no permission"
     else
-       if @user.update_attributes(params[:user])
+       if @user.update_attributes(params[:users])
           add_user
        else
           @user.error_id = 2
@@ -251,11 +250,11 @@ class UsersController < ApplicationController
        @user.error_id = 1
        @user.error_string = "no permission"
     else
-       if params[:user] && params[:user][:login_name]
-          params[:id] = params[:user][:login_name] #for sync only
+       if params[:users] && params[:users][:login_name]
+          params[:id] = params[:users][:login_name] #for sync only
        end
        get_user params[:id]
-       if @user.update_attributes(params[:user])
+       if @user.update_attributes(params[:users])
           udate_user params[:id]
        else
           @user.error_id = 2
