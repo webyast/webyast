@@ -36,7 +36,69 @@ end
 # Tests
 #
 
+desc "install policies"
+task :install_policies do |t|
+  Dir.glob(File.join(Dir.pwd, '..', "**/*.policy")).each do |policy|
+    puts "copying #{policy} -> /usr/share/PolicyKit/policy"
+    `cp #{policy} /usr/share/PolicyKit/policy`
+  end
+end
+
 task :system_check do
+  # check that policies are all installed
+  Dir.glob(File.join(File.dirname(__FILE__), '..', "**/*.policy")).each do |policy|
+    dest_policy = File.join('/usr/share/PolicyKit/policy', File.basename(policy))
+    if not File.exists?(dest_policy)
+      raise "* Policy '#{policy}' is not installed into '#{dest_policy}'. Run rake install_policies"
+      exit(1)
+    end
+  end
+
+  user = ENV['USER']
+  policykit_conf = <<EOF
+<match user="#{user}">
+    <match action="org.opensuse.yast.scr.*">
+      <return result="yes"/>
+    </match>
+  </match>
+  <match user="#{user}">
+    <match action="org.freedesktop.packagekit.system-update">
+      <return result="yes"/>
+    </match>
+  </match>
+  <match user="#{user}">
+    <match action="org.freedesktop.policykit.read">
+      <return result="yes"/>
+    </match>
+  </match>
+EOF
+
+  # check policykit.conf
+  require 'rexml/document'
+  doc = REXML::Document.new(File.open("/etc/PolicyKit/PolicyKit.conf"))
+  elements =[]
+  doc.elements.each("config/match[@user='#{user}']") do |el|
+    elements << el
+  end
+  
+  if elements.empty?
+     escape("PolicyKit is not configured for running user.", "Please add the following to /etc/PolicyKit/PolicyKit.conf config tag section:\n#{policykit_conf}\n")
+  end
+
+  # get all granted policies
+  granted = `polkit-auth --user #{user}`.split
+
+  # now check that all permission in each policy is granted
+  Dir.glob(File.join(Dir.pwd, '..', "**/*.policy")).each do |policy|
+    doc = REXML::Document.new(File.open(policy))
+    doc.elements.each("/policyconfig/action") do |action|
+      id = action.attributes['id']
+      if not granted.include?(id)
+        escape "policy #{id} is not granted.", "Run 'polkit-auth --user #{user} --grant #{id}'\nTo grant it, or use utility script policyKit-rights.rb to grant them all.\nSee http://en.opensuse.org/YaST/Web/Development"
+      end
+    end
+  end
+
   #
   # rpam        
   # 
