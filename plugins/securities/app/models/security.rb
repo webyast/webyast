@@ -1,21 +1,19 @@
 class Security #< ActiveRecord::Base
-
   require "scr"
 
-
-#    @scr = Scr.instance
   attr_accessor :error_id,
-                :error_string,
-                :firewall,
+                :error_string
+
+  attr_reader   :firewall,
                 :firewall_after_startup,
                 :ssh
 
   public
 
   def initialize
-    @firewall = ""
-    @firewall_after_startup = ""
-    @ssh = ""
+    @firewall
+    @firewall_after_startup
+    @ssh
     @error_string = ""
     @error_id = 0
     @scr = Scr.instance
@@ -27,7 +25,7 @@ class Security #< ActiveRecord::Base
     @ssh = ssh?
   end
 
-  def write(a, b, c)
+  def write(a, b, c) #(a=firewall?, ..)
     @firewall = firewall(a)
     @firewall_after_startup = firewall_after_startup(b)
     @ssh = ssh(c)
@@ -64,7 +62,6 @@ class Security #< ActiveRecord::Base
   end
 
   def firewall_after_startup?
-#=begin
     cmd = @scr.execute(["/sbin/yast2", "firewall", "startup", "show"])
     lines = cmd[:stderr].split "\n"
     lines.each do |l|
@@ -76,7 +73,6 @@ class Security #< ActiveRecord::Base
         end
       end
     end
-#=end
   end
 
   def ssh?
@@ -92,28 +88,27 @@ class Security #< ActiveRecord::Base
 
   # returns true for success and false for failure
   def firewall(param)
-    if param == true   # start firewall
+    if param # == true   # start firewall
       action = "restart"
-    else               # stop firewall
+    else #if param == false        # stop firewall
       action = "stop"
     end
     IO.popen("rcSuSEfirewall2 #{action}", 'r+') do |pipe|
       break if pipe.eof?
       retval = pipe.read.to_str
       if retval.include? "done" #success
-        return true
-      end
+        return param
+      end #FIXME else raise ..
     end
-    return false
   end
 
   # returns true for success and false for failure
   def firewall_after_startup(param)
     @scr = Scr.instance
-    if param == true    # enable
+    if param    # enable
       action = "atboot"
       verify = "Enabling"
-    else                # disable
+    else        # disable
       action = "manual"
       verify = "Removing"
     end
@@ -122,27 +117,25 @@ class Security #< ActiveRecord::Base
     lines.each do |l|
       if l.length > 0
         if l.include? "#{verify}"
-          return true
-        end
+          return param
+        end #FIXME else raise ..
       end
     end
-    return false
   end
 
   # returns true for success and false for failure
   def ssh(param)
-    if param == true   # start sshd
+    if param    # start sshd
       action = "restart"
-    else
-      action = "stop"  # stop sshd
+    else        # stop sshd
+      action = "stop"
     end
     IO.popen("rcsshd #{action}", 'r+') do |pipe|
       break if pipe.eof?
       retval = pipe.read.to_str
       if retval.include? "done" #success
-        return true
-      end
+        return param
+      end #FIXME else raise ..
     end
-    return false
   end
 end
