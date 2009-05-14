@@ -1,5 +1,4 @@
 class Security #< ActiveRecord::Base
-
   require "scr"
 
   attr_accessor :error_id,
@@ -12,6 +11,9 @@ class Security #< ActiveRecord::Base
   public
 
   def initialize
+    @firewall
+    @firewall_after_startup
+    @ssh
     @error_string = ""
     @error_id = 0
     @scr = Scr.instance
@@ -86,9 +88,9 @@ class Security #< ActiveRecord::Base
 
   # returns true for success and false for failure
   def firewall(param)
-    if param == true   # start firewall
+    if param # == true   # start firewall
       action = "restart"
-    else               # stop firewall
+    else #if param == false        # stop firewall
       action = "stop"
     end
     IO.popen("rcSuSEfirewall2 #{action}", 'r+') do |pipe|
@@ -103,10 +105,10 @@ class Security #< ActiveRecord::Base
   # returns true for success and false for failure
   def firewall_after_startup(param)
     @scr = Scr.instance
-    if param == true    # enable
+    if param    # enable
       action = "atboot"
       verify = "Enabling"
-    else                # disable
+    else        # disable
       action = "manual"
       verify = "Removing"
     end
@@ -123,10 +125,10 @@ class Security #< ActiveRecord::Base
 
   # returns true for success and false for failure
   def ssh(param)
-    if param == true   # start sshd
+    if param    # start sshd
       action = "restart"
-    else
-      action = "stop"  # stop sshd
+    else        # stop sshd
+      action = "stop"
     end
     IO.popen("rcsshd #{action}", 'r+') do |pipe|
       break if pipe.eof?

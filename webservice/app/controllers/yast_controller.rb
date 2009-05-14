@@ -4,7 +4,7 @@ class YastController < ApplicationController
   def index
      @links = []
 
-     link = Links.new 	
+     link = Links.new
      link.path = "login"
      link.description = "Creating a YaST Webservice session"
      link.read_permission = true
@@ -15,7 +15,7 @@ class YastController < ApplicationController
      link.install_permission = true
      @links << link
 
-     link = Links.new 	
+     link = Links.new
      link.path = "logout"
      link.description = "Closing YaST Webservice session"
      link.read_permission = true
@@ -26,7 +26,7 @@ class YastController < ApplicationController
      link.install_permission = true
      @links << link
 
-     link = Links.new 	
+     link = Links.new
      link.path = "services"
      link.description = "Managing Linux services like samba, ntp,..."
      if permission_check("org.opensuse.yast.services.read")
@@ -50,7 +50,7 @@ class YastController < ApplicationController
      link.install_permission = false
      @links << link
 
-     link = Links.new 	
+     link = Links.new
      link.path = "systemtime"
      link.description = "Setting system time"
      if permission_check("org.opensuse.yast.systemtime.read")
@@ -69,7 +69,7 @@ class YastController < ApplicationController
      link.install_permission = false
      @links << link
 
-     link = Links.new 	
+     link = Links.new
      link.path = "language"
      link.description = "Setting language"
      if permission_check("org.opensuse.yast.language.read")
@@ -88,7 +88,7 @@ class YastController < ApplicationController
      link.install_permission = false
      @links << link
 
-     link = Links.new 	
+     link = Links.new
      link.path = "users"
      link.description = "Managing local user"
      if permission_check("org.opensuse.yast.users.read")
@@ -115,7 +115,7 @@ class YastController < ApplicationController
      link.install_permission = false
      @links << link
 
-     link = Links.new 	
+     link = Links.new
      link.path = "permissions"
      link.description = "Managing user permissions. Usage: users/<user>/permissions.xml"
      if permission_check("org.opensuse.yast.webservice.read-permissions")
@@ -134,7 +134,7 @@ class YastController < ApplicationController
      link.install_permission = false
      @links << link
 
-     link = Links.new 	
+     link = Links.new
      link.path = "patch_updates"
      link.description = "Updating System"
      if permission_check("org.opensuse.yast.patch.read")
@@ -153,8 +153,27 @@ class YastController < ApplicationController
      end
      @links << link
 
+     link = Links.new
+     link.path = "security"
+     link.description = "Security"
+     if permission_check("org.opensuse.yast.system.securities.read")
+        link.read_permission = true
+     else
+        link.read_permission = false
+     end
+     link.write_permission = false
+     link.execute_permission = false
+     link.delete_permission = false
+     link.new_permission = false
+     if permission_check("org.opensuse.yast.system.securities.write")
+        link.install_permission = true
+     else
+        link.install_permission = false
+     end
+     @links << link
+
      respond_to do |format|
-       format.html { render } 
+       format.html { render }
        format.xml  { render :xml => @links, :location => "none" }
        format.json { render :json => @links.to_json, :location => "none" }
      end
