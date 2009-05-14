@@ -1,15 +1,6 @@
 require 'rake'
 require 'rubygems'
 
-namespace :install do
-  desc "install policies"
-  task :policies do |t|
-    Dir.glob("**/*.policy").each do |policy|
-      sudo "cp #{policy} /usr/share/PolicyKit/policy"
-    end
-  end
-end
-
 def sudo(cmd)
   puts "#{cmd}"
   %x[sudo -p "Password: " #{cmd}]
@@ -30,18 +21,15 @@ task :default => :test
   end
 end
 
-task :system_check do
-  Dir.glob("**/*.policy").each do |policy|
-    dest_policy = File.join('/usr/share/PolicyKit/policy', File.basename(policy))
-    if not File.exists?(dest_policy)
-      raise "* Policy '#{policy}' is not installed into '#{dest_policy}'. Run rake install:policies"
-      exit(1)
-    end
-  end
-  # now run webservice checks
-  system %(cd webservice && #{env} #{$0} system_check)
-end
+# the following tasks are defined in the webservice itseld
+# but we allow to run them from the root directory
 
+%w(system_check install_policies).each do |task_name|
+  task task_name do
+    # now run webservice checks
+    system %(cd webservice && #{env} #{$0} #{task_name})
+  end
+end
 
 desc "Check syntax of all Ruby files."
 task :check_syntax do

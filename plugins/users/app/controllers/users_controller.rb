@@ -31,7 +31,7 @@ class UsersController < ApplicationController
        @users = []
        user = User.new 	
        user.error_id = 1
-       user.error_string = "no permission"
+       user.error_string = "no permission for org.opensuse.yast.system.users.read"
        @users << user
     end
   end
@@ -206,7 +206,7 @@ class UsersController < ApplicationController
     else
        @user = User.new
        @user.error_id = 1
-       @user.error_string = "no permission"
+       @user.error_string = "no permission for org.opensuse.yast.system.users.read"
     end       
 
     respond_to do |format|
@@ -224,7 +224,7 @@ class UsersController < ApplicationController
     @user = User.new
     if !permission_check( "org.opensuse.yast.system.users.new")
        @user.error_id = 1
-       @user.error_string = "no permission"
+       @user.error_string = "no permission for org.opensuse.yast.system.users.new"
     else
        if @user.update_attributes(params[:users])
           add_user
@@ -248,7 +248,7 @@ class UsersController < ApplicationController
     @user = User.new
     if !permission_check( "org.opensuse.yast.system.users.write")
        @user.error_id = 1
-       @user.error_string = "no permission"
+       @user.error_string = "no permission for org.opensuse.yast.system.users.write"
     else
        if params[:users] && params[:users][:login_name]
           params[:id] = params[:users][:login_name] #for sync only
@@ -277,7 +277,7 @@ class UsersController < ApplicationController
     if !permission_check( "org.opensuse.yast.system.users.delete")
        @user = User.new
        @user.error_id = 1
-       @user.error_string = "no permission"
+       @user.error_string = "no permission for org.opensuse.yast.system.users.delete"
     else
        get_user params[:id]
        delete_user
@@ -298,7 +298,7 @@ class UsersController < ApplicationController
         !permission_check( "org.opensuse.yast.system.users.write-sshkey"))
        @user = User.new
        @user.error_id = 1
-       @user.error_string = "no permission"
+       @user.error_string = "no permission for org.opensuse.yast.system.users.write or org.opensuse.yast.system.users.write-sshkey"
     else
        get_user params[:id]
     end
