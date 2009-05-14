@@ -73,20 +73,24 @@ task :system_check do
   </match>
 EOF
 
-  # check policykit.conf
-  require 'rexml/document'
-  doc = REXML::Document.new(File.open("/etc/PolicyKit/PolicyKit.conf"))
-  elements =[]
-  doc.elements.each("config/match[@user='#{user}']") do |el|
-    elements << el
-  end
-  
-  if elements.empty?
-     escape("PolicyKit is not configured for running user.", "Please add the following to /etc/PolicyKit/PolicyKit.conf config tag section:\n#{policykit_conf}\n")
-  end
+  # will the webservice be able to run?
+  webservice_permissions_ok = false
 
   # get all granted policies
   granted = `polkit-auth --user #{user}`.split
+
+  # check that the user running the web service has permissions to yast
+  # scr and others. This can be achieved in 2 ways:
+  # manually polkit-auth, or as pattern matching in /etc/PolicyKit/PolicyKit.conf
+
+  scr_actions = `polkit-action`.split.reject { |item| not item.include?('org.opensuse.yast.scr.') }
+  webservice_actions = [ 'org.freedesktop.packagekit.system-update', 'org.freedesktop.policykit.read', *scr_actions]
+
+  webservice_actions.each do | action|
+    if not granted.include?(action)
+      escape "policy #{action} is not granted and it is needed to run the webservice as #{user}.", "Run 'polkit-auth --user #{user} --grant #{action}'\nTo grant it, or use utility script policyKit-rights.rb to grant them all.\nSee http://en.opensuse.org/YaST/Web/Development\n\nAlternatively, you can add the following to /etc/PolicyKit/PolicyKit.conf config tag section:\n#{policykit_conf}\n"
+    end
+  end
 
   # now check that all permission in each policy is granted
   Dir.glob(File.join(Dir.pwd, '..', "**/*.policy")).each do |policy|
@@ -94,7 +98,7 @@ EOF
     doc.elements.each("/policyconfig/action") do |action|
       id = action.attributes['id']
       if not granted.include?(id)
-        escape "policy #{id} is not granted.", "Run 'polkit-auth --user #{user} --grant #{id}'\nTo grant it, or use utility script policyKit-rights.rb to grant them all.\nSee http://en.opensuse.org/YaST/Web/Development"
+        puts "\nWARNING!!\n\npolicy #{id} is not granted for current user.\n\nIf you plan to login to YaST as '#{user}', run 'polkit-auth --user #{user} --grant #{id}'\nTo grant it, or use utility script policyKit-rights.rb to grant them all.\nSee http://en.opensuse.org/YaST/Web/Development\nYou can also grant them to the root user and login as root to the YaST web client.\n\n"
       end
     end
   end
