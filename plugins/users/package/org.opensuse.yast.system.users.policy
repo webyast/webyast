@@ -44,13 +44,4 @@ Rights for users
     </defaults>
   </action>
 
-  <action id="org.opensuse.yast.system.users.write-sshkey">
-    <description>Update user setting sshkey</description>
-    <message>Authentication is required to update user setting sshkey</message>
-    <defaults>
-      <allow_inactive>no</allow_inactive>
-      <allow_active>no</allow_active>
-    </defaults>
-  </action>
-
 </policyconfig>

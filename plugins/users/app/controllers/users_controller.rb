@@ -73,7 +73,7 @@ class UsersController < ApplicationController
   end
 
   def createSSH
-    if @user.home_directory.nil? || @user.home_directory.empty?
+    if @user.home_directory.blank?
       save_key = @user.sshkey
       get_user @user.login_name
       @user.sshkey = save_key
@@ -100,7 +100,7 @@ class UsersController < ApplicationController
 
   def udate_user userId
     ok = true
-    if @user.sshkey and not @user.sshkey.empty?
+    if not @user.sshkey.blank?
       ok = createSSH
     end
 
@@ -291,26 +291,6 @@ class UsersController < ApplicationController
        format.json  { render :json => @user.to_json, :location => "none" }
     end
   end
-
-  # GET /users/1/exportssh
-  def exportssh
-    if (!permission_check( "org.opensuse.yast.system.users.write") and
-        !permission_check( "org.opensuse.yast.system.users.write-sshkey"))
-       @user = User.new
-       @user.error_id = 1
-       @user.error_string = "no permission for org.opensuse.yast.system.users.write or org.opensuse.yast.system.users.write-sshkey"
-    else
-       get_user params[:id]
-    end
-    logger.debug "exportssh: #{@user.inspect}"
-    respond_to do |format|
-      format.html { render :xml => @user, :location => "none" } #return xml only
-      format.xml  { render :xml => @user, :location => "none" }
-      format.json { render :json => @user, :location => "none" }
-    end
-  end
-
-
 
 end
 
