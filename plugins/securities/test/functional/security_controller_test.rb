@@ -1,22 +1,25 @@
 require File.expand_path(File.dirname(__FILE__) + "/../test_helper")
 
 class SecurityControllerTest < ActionController::TestCase
+  fixtures :accounts
   def setup
     @controller = SecuritiesController.new
     @request = ActionController::TestRequest.new
     # http://railsforum.com/viewtopic.php?id=1719
   end
 
-  def test_actions
-    actions = %w{show create update} #index?
-    actions.each do |ac|
-      @request.session[:account_id] = 1 # defined in fixtures
-      get ac
-      assert_response :success, "#{ac}: bad response"
-    end
+  def test_show # must run as root, uses scr.execute
+    @request.session[:account_id] = 1 # defined in fixtures
+    get :show
+    assert_response :success
   end
 
-  def test_show_not_logged_in
+  def test_update # must run as root, uses scr.execute
+    @request.session[:account_id] = 1 # defined in fixtures
+    get :update, :security => {:firewall => true, :firewall_after_startup => true, :ssh => true}
+  end
+
+  def test_actions_not_logged_in
     actions = %w{show create update} #index?
     actions.each do |ac|
       get ac
