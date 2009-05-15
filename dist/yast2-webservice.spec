@@ -124,6 +124,7 @@ test -r /usr/sbin/yastws || { echo "Creating link /usr/sbin/yastws";
 /usr/bin/polkit-auth --user yastws --grant org.opensuse.yast.scr.error >& /dev/null || :
 /usr/bin/polkit-auth --user yastws --grant org.opensuse.yast.scr.unregisterallagents >& /dev/null || :
 /usr/bin/polkit-auth --user yastws --grant org.opensuse.yast.scr.registernewagents >& /dev/null || :
+/usr/bin/polkit-auth --user yastws --grant org.opensuse.yast.module-manager.import >& /dev/null || :
 #
 # granting all permissions for root 
 #

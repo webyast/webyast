@@ -16,6 +16,7 @@ install:
         /usr/bin/polkit-auth --user root --grant org.opensuse.yast.scr.error ; \
         /usr/bin/polkit-auth --user root --grant org.opensuse.yast.scr.unregisterallagents ; \
         /usr/bin/polkit-auth --user root --grant org.opensuse.yast.scr.registernewagents ; \
+	/usr/bin/polkit-auth --user root --grant org.opensuse.yast.module-manager.import ; \
         ruby dist/policyKit-rights.rb --user root --action grant ; \
         echo "NOTE:"; \
         echo "NOTE: Please take care that all needed packages with the correct version are installed !"; \
