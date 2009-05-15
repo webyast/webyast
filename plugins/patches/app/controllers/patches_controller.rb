@@ -197,9 +197,9 @@ class PatchesController < ApplicationController
     end
   end
 
-  # POST /patch_updates/1
-  # POST /patch_updates/1.xml
-  def install
+  # PUT /patch_updates/1
+  # PUT /patch_updates/1.xml
+  def update
     update = Patch.new
     if permission_check( "org.opensuse.yast.system.patches.install")
        ret = install_update params[:id]
