@@ -1,0 +1,33 @@
+require 'rake'
+require 'rake/testtask'
+require 'rake/rdoctask'
+require 'rake/packagetask'
+
+desc 'Default: run unit tests.'
+task :default => :test
+
+desc 'Test the samba_server plugin.'
+Rake::TestTask.new(:test) do |t|
+  t.libs << 'lib'
+  t.libs << 'test'
+  t.pattern = 'test/**/*_test.rb'
+  t.verbose = true
+end
+
+desc 'Generate documentation for the samba_server plugin.'
+Rake::RDocTask.new(:rdoc) do |rdoc|
+  rdoc.rdoc_dir = 'rdoc'
+  rdoc.title    = 'SambaServer'
+  rdoc.options << '--line-numbers' << '--inline-source'
+  rdoc.rdoc_files.include('README')
+  rdoc.rdoc_files.include('lib/**/*.rb')
+end
+
+desc 'Generate tarball package'
+Rake::PackageTask.new('www', :noversion) do |p|
+  p.need_tar_bz2 = true
+  p.package_dir = 'package'
+  p.package_files.include('**/*')
+  p.package_files.exclude('package')
+end
+
