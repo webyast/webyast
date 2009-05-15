@@ -1,9 +1,6 @@
 class Security #< ActiveRecord::Base
   require "scr"
 
-  attr_accessor :error_id,
-                :error_string
-
   attr_reader   :firewall,
                 :firewall_after_startup,
                 :ssh
@@ -14,8 +11,6 @@ class Security #< ActiveRecord::Base
     @firewall
     @firewall_after_startup
     @ssh
-    @error_string = ""
-    @error_id = 0
     @scr = Scr.instance
   end
 
@@ -39,8 +34,6 @@ class Security #< ActiveRecord::Base
       xml.tag!(:ssh, @ssh, {:type => "boolean"})
       xml.tag!(:firewall, @firewall, {:type => "boolean"})
       xml.tag!(:firewall_after_startup, @firewall_after_startup, {:type => "boolean"})
-      xml.tag!(:error_id, @error_id, {:type => "integer"})
-      xml.tag!(:error_string, @error_string)
     end
   end
 

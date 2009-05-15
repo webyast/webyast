@@ -50,9 +50,9 @@ class SecuritiesController < ApplicationController
   def show
     unless permission_check( "org.opensuse.yast.system.security.read")
       render ErrorResult.error(403, 1, "no permission") and return
+    else
+      @security = Security.new
+      @security.update
     end
-
-    @security = Security.new
-    @security.update
   end
 end
