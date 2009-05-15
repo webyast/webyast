@@ -44,12 +44,15 @@ class Security #< ActiveRecord::Base
 
   private
   def firewall?
-    IO.popen("rcSuSEfirewall2 status", 'r+') do |pipe|
-      break if pipe.eof?
-      if pipe.read.to_str.include? "running"
-        return true
-      else#if retval.include? "unused"
-        return false
+    cmd = @scr.execute(["/sbin/rcSuSEfirewall2", "status"])
+    lines = cmd[:stdout].split "\n"
+    lines.each do |l|
+      if l.length > 0
+        if l.include? "running"
+          return true
+        else
+          return false
+        end
       end
     end
   end
@@ -69,12 +72,15 @@ class Security #< ActiveRecord::Base
   end
 
   def ssh?
-    IO.popen("rcsshd status", 'r+') do |pipe|
-      break if pipe.eof?
-      if pipe.read.to_str.include? "running"
-        return true
-      else #if retval.include? "unused"
-        return false
+    cmd = @scr.execute(["/usr/sbin/rcsshd", "status"])
+    lines = cmd[:stdout].split "\n"
+    lines.each do |l|
+      if l.length > 0
+        if l.include? "running"
+          return true
+        else
+          return false
+        end
       end
     end
   end
@@ -86,18 +92,19 @@ class Security #< ActiveRecord::Base
     else #if param == false        # stop firewall
       action = "stop"
     end
-    IO.popen("rcSuSEfirewall2 #{action}", 'r+') do |pipe|
-      break if pipe.eof?
-      retval = pipe.read.to_str
-      if retval.include? "done" #success
-        return param
-      end #FIXME else raise ..
+    cmd = @scr.execute(["/sbin/rcSuSEfirewall2", "#{action}"])
+    lines = cmd[:stdout].split "\n"
+    lines.each do |l|
+      if l.length > 0
+        if l.include? "done"
+          return param
+        end #FIXME else raise ..
+      end
     end
   end
 
   # returns true for success and false for failure
   def firewall_after_startup(param)
-    @scr = Scr.instance
     if param    # enable
       action = "atboot"
       verify = "Enabling"
@@ -123,12 +130,14 @@ class Security #< ActiveRecord::Base
     else        # stop sshd
       action = "stop"
     end
-    IO.popen("rcsshd #{action}", 'r+') do |pipe|
-      break if pipe.eof?
-      retval = pipe.read.to_str
-      if retval.include? "done" #success
-        return param
-      end #FIXME else raise ..
+    cmd = @scr.execute(["/usr/sbin/rcsshd", "#{action}"])
+    lines = cmd[:stdout].split "\n"
+    lines.each do |l|
+      if l.length > 0
+        if l.include? "done"
+          return param
+        end #FIXME else raise ..
+      end
     end
   end
 end
