@@ -11,11 +11,12 @@
 
 Name:           yast2-webservice
 Requires:       yast2-core >= 2.18.3, lighttpd-mod_magnet, ruby-fcgi, ruby-dbus, sqlite, avahi-utils
+Conflicts:      gamin
 PreReq:         lighttpd, PolicyKit, PackageKit, rubygem-rake, rubygem-sqlite3, rubygem-rails-2_3, ruby-rpam, ruby-polkit
 License:        GPL
 Group:          Productivity/Networking/Web/Utilities
 Autoreqprov:    on
-Version:        1.0.1
+Version:        1.0.2
 Release:        1
 Summary:        YaST2 - Webservice 
 Source:         www.tar.bz2
@@ -42,7 +43,10 @@ BuildArch:      noarch
 YaST2 - Webservice - REST based interface of YaST.
 Authors:
 --------
-    Stefan Schubert <schubi@opensuse.org>
+    Duncan Mac-Vicar Prett <dmacvicar@suse.de>
+    Klaus Kaempf <kkaempf@suse.de>
+    Bjoern Geuken <bgeuken@suse.de>
+    Stefan Schubert <schubi@suse.de>
 
 %prep
 %setup -q -n www
