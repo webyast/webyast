@@ -1,13 +1,7 @@
 include ApplicationHelper
 
 class SecuritiesController < ApplicationController
-
   before_filter :login_required
-
-#  def initialize
-#    require "scr"
-#    @scr = Scr.instance
-#  end
 
   public
   # POST /security
@@ -19,20 +13,17 @@ class SecuritiesController < ApplicationController
   # PUT /security/1
   # PUT /security/1.xml
   def update
+    unless permission_check( "org.opensuse.yast.system.security.write")
+      render ErrorResult.error(403, 1, "no permission") and return
+    end
+
     respond_to do |format|
       @security = Security.new
-
-      if permission_check("org.opensuse.yast.system.security.write")
         if params[:security] != nil
           @security.write(params[:security][:firewall], params[:security][:firewall_after_startup], params[:security][:ssh])
         else
-          @security.error_id = 2
-          @security.error_string = "format or internal error"
+          render ErrorResult.error(404, 2, "format or internal error") and return
         end
-      else #no permission
-        @security.error_id = 1
-        @security.error_string = "no permission"
-      end
 
       format.html do
         render :xml => @security.to_xml( :root => "security",
@@ -57,23 +48,11 @@ class SecuritiesController < ApplicationController
   # GET /security/1
   # GET /security/1.xml
   def show
-    @security = Security.new
-    if permission_check("org.opensuse.yast.system.security.read")
-      @security.update
-    else
-      @security.error_id = 1
-      @security.error_string = "no permission"
+    unless permission_check( "org.opensuse.yast.system.security.read")
+      render ErrorResult.error(403, 1, "no permission") and return
     end
-#    respond_to do |format|
-#      format.html do
-#        render :xml => @security.to_xml()#:skip_instruct => true)
-#      end
-#      format.xml do
-#        render :xml => @security.to_xml()
-#      end
-#      format.json do
-#        render :json => @security.to_json , :location => "none"
-#      end
-#    end
+
+    @security = Security.new
+    @security.update
   end
 end
