@@ -1,5 +1,5 @@
 
- # import YastService class
+# import YastService class
 require "yast_service"
 
 class SambaShare
@@ -23,6 +23,7 @@ class SambaShare
     def SambaShare.find_all()
 	# read all share names
 	share_names = YastService.Call("YaPI::Samba::GetAllDirectories")
+	share_names.sort!
 
 	shares = [ ]
 
@@ -117,3 +118,5 @@ class SambaShare
     end
 
 end
+
+# vim: ft=ruby
