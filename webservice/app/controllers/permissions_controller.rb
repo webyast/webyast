@@ -13,39 +13,51 @@ class PermissionsController < ApplicationController
 
   def get_permission_list(user_id, filter = nil)
      @permissions = []
-     if permission_check( "org.opensuse.yast.permissions.read")
+     # user can always see his rights
+     if permission_check( "org.opensuse.yast.permissions.read") || (!user_id.blank? && self.current_account.login == user_id)
        ret = Scr.instance.execute(["polkit-action"])
        if ret[:exit] == 0
           suse_string = "org.opensuse.yast."
           lines = ret[:stdout].split "\n"
+
+	  # a hash for mapping string 'permission name' => boolean 'granted'
+	  perms = Hash.new
+
           lines.each do |s|   
              if (s.include?( suse_string )) &&
                 (filter.blank? || s.include?( filter ))
-                permission = Permission.new 	
-                permission.name = s
-                permission.grant = false
-                permission.error_id = 0
-                permission.error_string = ""
-                @permissions << permission
+		 # set 'not granted' default
+		 perms[s] = false
              end
           end
+
           if user_id.blank?
              ret[:exit] = -1
           else
              ret = Scr.instance.execute(["polkit-auth", "--user", user_id, "--explicit"])
           end
+
           if ret[:exit] == 0
              lines = ret[:stdout].split "\n"
-             lines.each do |s|   
-                   if s.include? suse_string
-                   for i in 0..@permissions.size-1
-                      if @permissions[i].name == s
-                         @permissions[i].grant = true
-                         break
-                      end
-                   end
+             lines.each do |s|
+		# ignore the rights which do not have the prefix, do not have any .policy file
+		# or do not match the filter
+		if (s.include?( suse_string )) && perms.has_key?(s) && (filter.blank? || s.include?( filter ))
+		  # update the value to 'granted' state
+		  perms[s] = true
                 end
              end
+
+	     # convert the hash to a list of Permission objects
+	     @permissions = []
+	     perms.each do |name,value|
+               permission = Permission.new 	
+               permission.name = name
+               permission.grant = value
+               permission.error_id = 0
+               permission.error_string = ""
+               @permissions << permission
+	     end
           else
              @permissions = []
              permission = Permission.new 	

@@ -15,7 +15,7 @@ Provides:       yast2-webservice:/srv/www/yastws/app/controllers/systemtime_cont
 License:        GPL
 Group:          Productivity/Networking/Web/Utilities
 Autoreqprov:    on
-Version:        1.0.0
+Version:        0.0.1
 Release:        0
 Summary:        YaST2 - Webservice - Time
 Source:         www.tar.bz2
@@ -54,6 +54,12 @@ install -m 0644 %SOURCE1 $RPM_BUILD_ROOT/usr/share/PolicyKit/policy/
 
 %clean
 rm -rf $RPM_BUILD_ROOT
+
+%post
+#
+# granting all permissions for root 
+#
+/etc/yastws/tools/policyKit-rights.rb --user root --action grant >& /dev/null || :
 
 %files 
 %defattr(-,root,root)
