@@ -1,9 +1,7 @@
 
 class User
   
-  attr_accessor :error_id, 
-                :error_string,
-                :full_name,
+  attr_accessor :full_name,
                 :groups,
                 :default_group,
                 :home_directory,
@@ -27,8 +25,6 @@ class User
   end
   
   def initialize 
-    @error_id = 0
-    @error_string = ""
     @no_home = false
     @full_name = ""
     @groups = ""
@@ -90,8 +86,6 @@ class User
             end
          end
       end
-      xml.tag!(:error_id, error_id, {:type => "integer"} )
-      xml.tag!(:error_string, error_string )
     end  
   end
 
