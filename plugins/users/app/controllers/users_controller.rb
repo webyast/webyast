@@ -18,22 +18,14 @@ class UsersController < ApplicationController
 
 
   def get_user_list
-    if permission_check( "org.opensuse.yast.system.users.read")
-       ret = @scr.execute(["/sbin/yast2", "users", "list"])
-       lines = ret[:stderr].split "\n"
-       @users = []
-       lines.each do |s|   
-          user = User.new
-          user.login_name = s.rstrip
-          @users << user
-       end
-    else
-       @users = []
-       user = User.new 	
-       user.error_id = 1
-       user.error_string = "no permission for org.opensuse.yast.system.users.read"
-       @users << user
-    end
+     ret = @scr.execute(["/sbin/yast2", "users", "list"])
+     lines = ret[:stderr].split "\n"
+     @users = []
+     lines.each do |s|   
+        user = User.new
+        user.login_name = s.rstrip
+        @users << user
+     end
   end
 
   def get_user (id)
@@ -68,8 +60,6 @@ class UsersController < ApplicationController
       counter += 1
     end
     @user.sshkey = saveKey
-    @user.error_id = 0
-    @user.error_string = ""
   end
 
   def createSSH
@@ -89,17 +79,19 @@ class UsersController < ApplicationController
       @scr.execute(["/bin/chmod", "644", "#{@user.home_directory}/.ssh/authorized_keys"])
     end
     ret = @scr.execute(["echo", "\"#{@user.sshkey}\"", ">>", "#{@user.home_directory}/.ssh/authorized_keys"])
+    @error_id = ret[:exit]
     if ret[:exit] != 0
-      @user.error_id = ret[:exit]
-      @user.error_string = ret[:stderr]
+      @error_string = ret[:stderr]
       return false
     else 
+      @error_string = ""
       return true
     end
   end
 
   def udate_user userId
     ok = true
+
     if not @user.sshkey.blank?
       ok = createSSH
     end
@@ -126,8 +118,11 @@ class UsersController < ApplicationController
     ret = @scr.execute(command)
     if ret[:exit] != 0
       ok = false
-      @user.error_id = ret[:exit]
-      @user.error_string = ret[:stderr]
+      @error_id = ret[:exit]
+      @error_string = ret[:stderr]
+    else
+      @error_id = 0
+      @error_string = ""
     end
     return ok
   end
@@ -156,8 +151,8 @@ class UsersController < ApplicationController
 
     return true if ret[:exit] == 0
 
-    @user.error_id = ret[:exit]
-    @user.error_string = ret[:stderr]
+    @error_id = ret[:exit]
+    @error_string = ret[:stderr]
     return false
   end
 
@@ -173,8 +168,8 @@ class UsersController < ApplicationController
     ret = @scr.execute(command)
     return true if ret[:exit] == 0
 
-    @user.error_id = ret[:exit]
-    @user.error_string = ret[:stderr]
+    @error_id = ret[:exit]
+    @error_string = ret[:stderr]
     return false
 
   end
@@ -189,31 +184,19 @@ class UsersController < ApplicationController
   # GET /users.xml
   # GET /users.json
   def index
-    get_user_list
-
-    respond_to do |format|
-      format.html { render :xml => @users, :location => "none" } #return xml only
-      format.xml  { render :xml => @users, :location => "none" }
-      format.json { render :json => @users.to_json, :location => "none" }
+    unless permission_check( "org.opensuse.yast.system.users.read")
+      render ErrorResult.error(403, 1, "no permission") and return
     end
+    get_user_list
   end
 
   # GET /users/1
   # GET /users/1.xml
   def show
-    if permission_check( "org.opensuse.yast.system.users.read")
-       get_user params[:id]
-    else
-       @user = User.new
-       @user.error_id = 1
-       @user.error_string = "no permission for org.opensuse.yast.system.users.read"
-    end       
-
-    respond_to do |format|
-      format.html { render :xml => @user, :location => "none" } #return xml only
-      format.xml  { render :xml => @user, :location => "none" }
-      format.json { render :json => @user.to_json, :location => "none" }
+    unless permission_check( "org.opensuse.yast.system.users.read")
+      render ErrorResult.error(403, 1, "no permission") and return
     end
+    get_user params[:id]
   end
 
 
@@ -221,74 +204,58 @@ class UsersController < ApplicationController
   # POST /users.xml
   # POST /users.json
   def create
+    unless permission_check( "org.opensuse.yast.system.users.new")
+      render ErrorResult.error(403, 1, "no permission") and return
+    end
+
     @user = User.new
-    if !permission_check( "org.opensuse.yast.system.users.new")
-       @user.error_id = 1
-       @user.error_string = "no permission for org.opensuse.yast.system.users.new"
+    if @user.update_attributes(params[:users])
+      add_user
+      if @error_id!=0
+        render ErrorResult.error(404, @error_id, @error_string) and return
+      end
     else
-       if @user.update_attributes(params[:users])
-          add_user
-       else
-          @user.error_id = 2
-          @user.error_string = "wrong parameter"
-       end
+      render ErrorResult.error(404, 2, "wrong parameter") and return
     end
-    respond_to do |format|
-      format.html  { render :xml => @user.to_xml( :root => "user",
-                    :dasherize => false), :location => "none" } #return xml only
-      format.xml  { render :xml => @user.to_xml( :root => "user",
-                    :dasherize => false), :location => "none" }
-      format.json  { render :json => @user.to_json, :location => "none" }
-    end
+    render :show
   end
 
   # PUT /users/1
   # PUT /users/1.xml
   def update
+    unless permission_check( "org.opensuse.yast.system.users.write")
+      render ErrorResult.error(403, 1, "no permission") and return
+    end
     @user = User.new
-    if !permission_check( "org.opensuse.yast.system.users.write")
-       @user.error_id = 1
-       @user.error_string = "no permission for org.opensuse.yast.system.users.write"
+    if params[:users] && params[:users][:login_name]
+       params[:id] = params[:users][:login_name] #for sync only
+    end
+    get_user params[:id]
+    if @user.update_attributes(params[:users])
+      udate_user params[:id]
+      if @error_id!=0
+        render ErrorResult.error(404, @error_id, @error_string) and return
+      end
     else
-       if params[:users] && params[:users][:login_name]
-          params[:id] = params[:users][:login_name] #for sync only
-       end
-       get_user params[:id]
-       if @user.update_attributes(params[:users])
-          udate_user params[:id]
-       else
-          @user.error_id = 2
-          @user.error_string = "wrong parameter"
-       end
+      render ErrorResult.error(404, 2, "wrong parameter") and return
     end
-    respond_to do |format|
-       format.html  { render :xml => @user.to_xml( :root => "user",
-                     :dasherize => false), :location => "none" }
-       format.xml  { render :xml => @user.to_xml( :root => "user",
-                     :dasherize => false), :location => "none" }
-       format.json  { render :json => @user.to_json, :location => "none" }
-    end
+    render :show
   end
 
   # DELETE /users/1
   # DELETE /users/1.xml
   # DELETE /users/1.json
   def destroy
-    if !permission_check( "org.opensuse.yast.system.users.delete")
-       @user = User.new
-       @user.error_id = 1
-       @user.error_string = "no permission for org.opensuse.yast.system.users.delete"
-    else
-       get_user params[:id]
-       delete_user
-       logger.debug "DELETE: #{@user.inspect}"
+    unless permission_check( "org.opensuse.yast.system.users.delete")
+      render ErrorResult.error(403, 1, "no permission") and return
     end
-    respond_to do |format|
-       format.html { render :xml => @user.to_xml( :root => "user",
-                     :dasherize => false), :location => "none" } #return xml only
-       format.xml  { render :xml => @user.to_xml( :root => "user",
-                     :dasherize => false), :location => "none" }
-       format.json  { render :json => @user.to_json, :location => "none" }
+    get_user params[:id]
+    delete_user
+    logger.debug "DELETE: #{@user.inspect}"
+    if @error_id!=0
+      render ErrorResult.error(404, @error_id, @error_string) and return
+    else
+      render :show
     end
   end
 
