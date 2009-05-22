@@ -98,39 +98,24 @@ class SystemtimesController < ApplicationController
 #--------------------------------------------------------------------------------
 	
   def update
-    respond_to do |format|
-      systemtime = SystemTime.new
-      if permission_check( "org.opensuse.yast.system.time.write")
-         if params[:systemtime] != nil
-           systemtime.timezone = params[:systemtime][:timezone]
-           systemtime.is_utc = params[:systemtime][:is_utc]
-           systemtime.currenttime = params[:systemtime][:currenttime]
-           logger.debug "UPDATED: #{systemtime.inspect}"
-
-           set_is_utc systemtime.is_utc
-           set_timezone systemtime.timezone
-           set_time systemtime.currenttime
-         else
-           systemtime.error_id = 2
-           systemtime.error_string = "format or internal error"
-         end
-      else #no permissions
-         systemtime.error_id = 1
-         systemtime.error_string = "no permission"
-      end
-
-      format.html do
-        render :xml => systemtime.to_xml( :root => "systemtime",
-          :dasherize => false ), :location => "none" #return xml value only
-      end
-      format.xml do
-        render :xml => systemtime.to_xml( :root => "systemtime",
-          :dasherize => false ), :location => "none"
-      end
-      format.json do
-	render :json => systemtime.to_json , :location => "none"
-      end
+    unless permission_check( "org.opensuse.yast.system.time.write")
+      render ErrorResult.error(403, 1, "no permission") and return
     end
+
+    @systemtime = SystemTime.new
+    if params[:time] != nil
+      @systemtime.timezone = params[:time][:timezone]
+      @systemtime.is_utc = params[:time][:is_utc]
+      @systemtime.currenttime = params[:time][:currenttime]
+      logger.debug "UPDATED: #{@systemtime.inspect}"
+
+      set_is_utc @systemtime.is_utc
+      set_timezone @systemtime.timezone
+      set_time @systemtime.currenttime
+    else
+      render ErrorResult.error(404, 2, "format or internal error") and return
+    end
+    render :show
   end
 
   def create

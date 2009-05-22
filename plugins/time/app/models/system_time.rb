@@ -1,15 +1,11 @@
 class SystemTime
 
-  attr_accessor :error_id, 
-                :error_string,
-                :currenttime,
+  attr_accessor :currenttime,
                 :timezone,
                 :is_utc,
                 :validtimezones
 
   def initialize 
-     @error_id = 0
-     @error_string = ""
      @currenttime = ""
      @timezone = ""
      @is_utc = false
@@ -33,8 +29,6 @@ class SystemTime
             end
          end
       end
-      xml.tag!(:error_id, @error_id, {:type => "integer"} )
-      xml.tag!(:error_string, @error_string )
     end  
   end
 
