@@ -7,8 +7,8 @@ namespace :webservice do
 	puts "* Checking GIT repository status..."
 
         # STEP 1: check the local changes
-	# run 'git status' command to get the current status of the repository
-	out = `git status`
+	# run 'git status -a' command to get the current status of the repository
+	out = `git status -a`
 
 	# exit status 0 indicates uncommitted changes
 	if $?.exitstatus == 0
