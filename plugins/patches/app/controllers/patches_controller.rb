@@ -190,7 +190,7 @@ class PatchesController < ApplicationController
     get_update (id)
     if @patch_update.nil?
       logger.error "Patch: #{id} not found."
-      render ErrorResult.error(403, 1, "Patch: #{id} not found.") and return
+      render ErrorResult.error(404, 1, "Patch: #{id} not found.") and return
     end
     unless install_update params[:id]
       render ErrorResult.error(404, 2, "packagekit error") and return       

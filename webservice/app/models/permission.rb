@@ -1,13 +1,9 @@
 class Permission
 
-  attr_accessor :error_id, 
-                :error_string,
-                :name,
+  attr_accessor :name,
                 :grant
 
   def initialize( permission_name = "", gr = false)
-     @error_id = 0
-     @error_string = ""
      @grant = gr
      @name = permission_name
   end
@@ -19,8 +15,6 @@ class Permission
     xml.permission do
       xml.tag!(:name, @name )
       xml.tag!(:grant, @grant, {:type => "boolean"} )
-      xml.tag!(:error_id, @error_id, {:type => "integer"} )
-      xml.tag!(:error_string, @error_string )
     end  
   end
 

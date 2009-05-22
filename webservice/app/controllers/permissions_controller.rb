@@ -12,72 +12,50 @@ class PermissionsController < ApplicationController
 
 
   def get_permission_list(user_id, filter = nil)
+     ok = true
      @permissions = []
-     # user can always see his rights
-     if permission_check( "org.opensuse.yast.permissions.read") || (!user_id.blank? && self.current_account.login == user_id)
-       ret = Scr.instance.execute(["polkit-action"])
-       if ret[:exit] == 0
-          suse_string = "org.opensuse.yast."
-          lines = ret[:stdout].split "\n"
+     ret = Scr.instance.execute(["polkit-action"])
+     if ret[:exit] == 0
+       suse_string = "org.opensuse.yast."
+       lines = ret[:stdout].split "\n"
 
-	  # a hash for mapping string 'permission name' => boolean 'granted'
-	  perms = Hash.new
+       # a hash for mapping string 'permission name' => boolean 'granted'
+       perms = Hash.new
 
-          lines.each do |s|   
-             if (s.include?( suse_string )) &&
-                (filter.blank? || s.include?( filter ))
-		 # set 'not granted' default
-		 perms[s] = false
-             end
-          end
-
-          if user_id.blank?
-             ret[:exit] = -1
-          else
-             ret = Scr.instance.execute(["polkit-auth", "--user", user_id, "--explicit"])
-          end
-
-          if ret[:exit] == 0
-             lines = ret[:stdout].split "\n"
-             lines.each do |s|
-		# ignore the rights which do not have the prefix, do not have any .policy file
-		# or do not match the filter
-		if (s.include?( suse_string )) && perms.has_key?(s) && (filter.blank? || s.include?( filter ))
-		  # update the value to 'granted' state
-		  perms[s] = true
-                end
-             end
-
-	     # convert the hash to a list of Permission objects
-	     @permissions = []
-	     perms.each do |name,value|
-               permission = Permission.new 	
-               permission.name = name
-               permission.grant = value
-               permission.error_id = 0
-               permission.error_string = ""
-               @permissions << permission
-	     end
-          else
-             @permissions = []
-             permission = Permission.new 	
-             permission.error_id = 2
-             permission.error_string = "user not found"
-             @permissions << permission
-          end
-       else
-          permission = Permission.new 	
-          permission.error_id = 2
-          permission.error_string = "cannot get permission list"
-          @permissions << permission
+       lines.each do |s|   
+         if (s.include?( suse_string )) &&
+            (filter.blank? || s.include?( filter ))
+	   # set 'not granted' default
+	   perms[s] = false
+         end
        end
 
-    else
-       permission = Permission.new 	
-       permission.error_id = 1
-       permission.error_string = "no permission"
-       @permissions << permission
-    end
+       ret = Scr.instance.execute(["polkit-auth", "--user", user_id, "--explicit"])
+       if ret[:exit] == 0
+         lines = ret[:stdout].split "\n"
+         lines.each do |s|
+           # ignore the rights which do not have the prefix, do not have any .policy file
+	   # or do not match the filter
+	   if (s.include?( suse_string )) && perms.has_key?(s) && (filter.blank? || s.include?( filter ))
+	     # update the value to 'granted' state
+	     perms[s] = true
+           end
+         end
+
+	 # convert the hash to a list of Permission objects
+	 @permissions = []
+	 perms.each do |name,value|
+           permission = Permission.new 	
+           permission.name = name
+           permission.grant = value
+           @permissions << permission
+	 end
+       else
+         ok = false
+       end
+     else
+       ok = false
+     end
   end
 
 #--------------------------------------------------------------------------------
@@ -91,12 +69,15 @@ class PermissionsController < ApplicationController
   # GET /permissions.json?user_id=<user_id>&filter=<filter>
 
   def index
-    get_permission_list(params[:user_id], params[:filter])
-
-    respond_to do |format|
-      format.html { render :xml => @permissions, :location => "none" } #return xml only
-      format.xml  { render :xml => @permissions, :location => "none" }
-      format.json { render :json => @permissions.to_json, :location => "none" }
+    # user can always see his rights
+    unless (permission_check( "org.opensuse.yast.permissions.read") || (!user_id.blank? && self.current_account.login == user_id))
+      render ErrorResult.error(403, 1, "no permission") and return
+    end
+    if params[:user_id].blank?
+      render ErrorResult.error(404, 2, "user is not defined") and return
+    end
+    if !get_permission_list(params[:user_id], params[:filter])
+      render ErrorResult.error(404, 2, "cannot get permission list") and return
     end
   end
 
@@ -105,6 +86,15 @@ class PermissionsController < ApplicationController
   # GET /users/<uid>/permissions/<id>.json?user_id=<user_id>
 
   def show
+    unless permission_check( "org.opensuse.yast.permissions.read")
+      render ErrorResult.error(403, 1, "no permission") and return
+    end
+    if params[:user_id].blank?
+      render ErrorResult.error(404, 2, "user is not defined") and return
+    end
+    if params[:id].blank?
+      render ErrorResult.error(404, 2, "right is not defined") and return
+    end
     jsonFormat = false
     right = params[:id]
     if params[:id].end_with?(".json")
@@ -113,24 +103,18 @@ class PermissionsController < ApplicationController
     else
        right = params[:id].slice(0..-5) if params[:id].end_with?(".xml")
     end
-    permission = Permission.new 	
-    if permission_check( "org.opensuse.yast.permissions.read")
-       get_permission_list(params[:user_id])
-
-       for i in 0..@permissions.size-1
-          if @permissions[i].name == right
-              permission = @permissions[i]
-              break
-          end
-       end
-       if permission.name.blank?
-          permission.name = right
-          permission.error_id = 2
-          permission.error_string = "permission not found"
-       end
-    else
-       permission.error_id = 1
-       permission.error_string = "no permission"
+    @permission = Permission.new 	
+    if !get_permission_list(params[:user_id])
+      render ErrorResult.error(404, 1, "cannot get permission list") and return
+    end
+    for i in 0..@permissions.size-1
+      if @permissions[i].name == right
+        permission = @permissions[i]
+        break
+      end
+    end
+    if @permission.name.blank?
+      render ErrorResult.error(404, 1, "Permission: #{right} not found.") and return
     end
 
     return render(:json => permission.to_json, :location => "none") if jsonFormat
@@ -142,39 +126,29 @@ class PermissionsController < ApplicationController
   # PUT /permissions/<id>.json?user_id=<user_id>
 
   def update
+    unless permission_check( "org.opensuse.yast.permissions.write")
+      render ErrorResult.error(403, 1, "no permission") and return
+    end
     jsonFormat = false
     right = params[:id]
     if params[:id].end_with?(".json")
-       jsonFormat = true
-       right = params[:id].slice(0..-7)
+      jsonFormat = true
+      right = params[:id].slice(0..-7)
     else
-       right = params[:id].slice(0..-5) if params[:id].end_with?(".xml")
+      right = params[:id].slice(0..-5) if params[:id].end_with?(".xml")
     end
     if ( not params[:permission].blank? )
-       permission = Permission.new(right, params[:permission][:grant] )
+      permission = Permission.new(right, params[:permission][:grant] )
     else
-       permission = Permission.new
+      permission = Permission.new
     end
-    if permission_check( "org.opensuse.yast.permissions.write")
-       permission.error_id = 0
-       permission.error_string = ""     
-       if params[:user_id].blank?
-          ret[:exit] = -1
-       else
-          ret = Scr.instance.execute(["polkit-auth", "--user", params[:user_id], permission.grant ? "--grant" : "--revoke", "org.opensuse.yast.webservice.#{params[:id]}"])
-       end
-       if ret[:exit] != 0
-          permission.error_id = 2
-          permission.error_string = ret[:stderr]
-          if permission.error_string.empty?
-            permission.error_string = "user not found"
-          end
-       end
-    else
-       permission.error_id = 1
-       permission.error_string = "no permission"
+    if params[:user_id].blank?
+      render ErrorResult.error(404, 1, "user not found") and return
     end
-
+    ret = Scr.instance.execute(["polkit-auth", "--user", params[:user_id], permission.grant ? "--grant" : "--revoke", "org.opensuse.yast.webservice.#{params[:id]}"])
+    if ret[:exit] != 0
+      render ErrorResult.error(404, 1, ret[:stderr]) and return
+    end
     return render(:json => permission.to_json, :location => "none") if jsonFormat
     return render(:xml => permission, :location => "none")
 
