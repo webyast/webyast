@@ -56,53 +56,46 @@ class PatchesController < ApplicationController
 
   def get_updateList
     @patch_updates = [] 
-    if permission_check( "org.opensuse.yast.system.patches.read")
-       system_bus = DBus::SystemBus.instance
-       package_kit = system_bus.service("org.freedesktop.PackageKit")
-       obj = package_kit.object("/org/freedesktop/PackageKit")
-       obj.introspect
-       obj_with_iface = obj["org.freedesktop.PackageKit"]
-       tid = obj_with_iface.GetTid
-       obj_tid = package_kit.object(tid[0])
-       obj_tid.introspect
-       obj_tid_with_iface = obj_tid["org.freedesktop.PackageKit.Transaction"]
-       obj_tid.default_iface = "org.freedesktop.PackageKit.Transaction"
+    system_bus = DBus::SystemBus.instance
+    package_kit = system_bus.service("org.freedesktop.PackageKit")
+    obj = package_kit.object("/org/freedesktop/PackageKit")
+    obj.introspect
+    obj_with_iface = obj["org.freedesktop.PackageKit"]
+    tid = obj_with_iface.GetTid
+    obj_tid = package_kit.object(tid[0])
+    obj_tid.introspect
+    obj_tid_with_iface = obj_tid["org.freedesktop.PackageKit.Transaction"]
+    obj_tid.default_iface = "org.freedesktop.PackageKit.Transaction"
 
-       @finished = false
-       obj_tid.on_signal("Package") do |line1,line2,line3|
-         update = Patch.new
-         update.kind = line1
-         update.summary = line3
-         columns = line2.split ";"
-         update.name = columns[0]
-         update.resolvable_id = columns[1]
-         update.arch = columns[2]
-         update.repo = columns[3]
-         @patch_updates << update
-         @finished = true
-       end
-
-       obj_tid.on_signal("Error") do |u1,u2|
-         @finished = true
-       end
-       obj_tid.on_signal("Finished") do |u1,u2|
-         @finished = true
-       end
-       obj_tid_with_iface.GetUpdates("NONE")
-
-       if !@finished
-         @main = MainPkg.new
-         @main << system_bus
-         @main.run
-       end
- 
-       obj_with_iface.SuggestDaemonQuit
-    else
-       update = Patch.new
-       update.error_id = 1
-       update.error_string = "no permission"
-       @patch_updates << update
+    @finished = false
+    obj_tid.on_signal("Package") do |line1,line2,line3|
+      update = Patch.new
+      update.kind = line1
+      update.summary = line3
+      columns = line2.split ";"
+      update.name = columns[0]
+      update.resolvable_id = columns[1]
+      update.arch = columns[2]
+      update.repo = columns[3]
+      @patch_updates << update
+      @finished = true
     end
+
+    obj_tid.on_signal("Error") do |u1,u2|
+      @finished = true
+    end
+    obj_tid.on_signal("Finished") do |u1,u2|
+      @finished = true
+    end
+    obj_tid_with_iface.GetUpdates("NONE")
+
+    unless @finished
+      @main = MainPkg.new
+      @main << system_bus
+      @main.run
+    end
+ 
+    obj_with_iface.SuggestDaemonQuit
   end
 
   def get_update (id)
@@ -119,12 +112,7 @@ class PatchesController < ApplicationController
   end
 
   def install_update (id)
-    ret = "ok"
-    get_update (id)
-    if @patch_update.nil?
-      logger.error "Patch: #{id} not found."
-      return "Patch: #{id} not found."
-    end
+    ok = true
 
     updateId = "#{@patch_update.name};#{@patch_update.resolvable_id};#{@patch_update.arch};#{@patch_update.repo}"
     logger.debug "Install Update: #{updateId}"
@@ -147,23 +135,23 @@ class PatchesController < ApplicationController
 
     obj_tid.on_signal("Error") do |u1,u2|
       @finished = true
-      ret = "packageKit Error"
+      ok = false
     end
     obj_tid.on_signal("Finished") do |u1,u2|
       @finished = true
     end
     obj_tid_with_iface.UpdatePackages([updateId])
 
-    if !@finished
+    unless @finished
       @main = MainPkg.new
       @main << system_bus
       if (!@main.run)
-         ret = "packageKit Error"
+         ok = false
       end
     end
     obj_with_iface.SuggestDaemonQuit
 
-    return ret
+    return ok
   end
 
 
@@ -178,45 +166,36 @@ class PatchesController < ApplicationController
   # GET /patch_updates
   # GET /patch_updates.xml
   def index
-    get_updateList
-    respond_to do |format|
-      format.html { render :xml => @patch_updates } #return xml only
-      format.xml  { render :xml => @patch_updates.to_xml(:dasherize => false) }
-      format.json { render :json => @patch_updates.to_json }
+    unless permission_check( "org.opensuse.yast.system.patches.read")
+      render ErrorResult.error(403, 1, "no permission") and return
     end
+    get_updateList
   end
 
   # GET /patch_updates/1
   # GET /patch_updates/1.xml
   def show
-    get_update params[:id]
-    respond_to do |format|
-      format.html { render :xml => @patch_update } #return xml only
-      format.xml  { render :xml => @patch_update }
-      format.json { render :json => @patch_update.to_json }
+    unless permission_check( "org.opensuse.yast.system.patches.read")
+      render ErrorResult.error(403, 1, "no permission") and return
     end
+    get_update params[:id]
   end
 
   # PUT /patch_updates/1
   # PUT /patch_updates/1.xml
   def update
-    update = Patch.new
-    if permission_check( "org.opensuse.yast.system.patches.install")
-       ret = install_update params[:id]
-       if (ret != "ok")
-          update.error_id = 1
-          update.error_string = ret
-       end
-    else
-       update.error_id = 1
-       update.error_string = "no permission"
+    unless permission_check( "org.opensuse.yast.system.patches.install")
+      render ErrorResult.error(403, 1, "no permission") and return
     end
-
-    respond_to do |format|
-      format.html { render :xml => update } #return xml only
-      format.xml  { render :xml => update }
-      format.json { render :json => update.to_json }
+    get_update (id)
+    if @patch_update.nil?
+      logger.error "Patch: #{id} not found."
+      render ErrorResult.error(403, 1, "Patch: #{id} not found.") and return
     end
+    unless install_update params[:id]
+      render ErrorResult.error(404, 2, "packagekit error") and return       
+    end
+    render :show
   end
 
 end

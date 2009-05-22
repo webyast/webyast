@@ -5,9 +5,7 @@ class Patch
                   :name,
                   :arch,
                   :repo,
-                  :summary,
-                  :error_id,
-                  :error_string
+                  :summary
 
   def id
     @resolvable_id
@@ -18,8 +16,6 @@ class Patch
   end
 
   def initialize 
-     @error_id = 0
-     @error_string = ""
   end
 
   def to_xml( options = {} )
@@ -34,8 +30,6 @@ class Patch
       xml.tag!(:arch, @arch )
       xml.tag!(:repo, @repo )
       xml.tag!(:summary, @summary )
-      xml.tag!(:error_id, @error_id, {:type => "integer"} )
-      xml.tag!(:error_string, @error_string )
     end  
   end
 
