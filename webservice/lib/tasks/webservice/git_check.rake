@@ -22,7 +22,7 @@ namespace :webservice do
 	if out =~ /Your branch is ahead of '.*' by .* commit/
 	    puts "ERROR: The local repository has these changes:\n\n"
 	    puts `git log origin..HEAD`
-	    puts "\nUse 'git push' to push to local changes to the remote repository.\n"
+	    puts "\nUse 'git push' to push the local changes to the remote repository.\n"
 	    exit 1
 	end
 
@@ -49,6 +49,8 @@ namespace :webservice do
 	    puts "\nUse 'git pull' to sychronize the repositories.\n"
 	    exit 1
 	end
+
+	# TODO FIXME: check if VERSION tag exists
 
 	puts '* GIT check OK'
     end
