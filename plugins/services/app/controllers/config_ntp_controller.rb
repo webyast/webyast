@@ -4,8 +4,10 @@ class ConfigNtpController < ApplicationController
   before_filter :login_required
 
   require "scr"
-  
-  @scr = Scr.instance
+
+  def initialize  
+    @scr = Scr.instance
+  end
 #
 #local functions
 #
@@ -79,78 +81,47 @@ class ConfigNtpController < ApplicationController
 #
 
   def show
-
-    @ntp = ConfigNtp.new
-
-    if permission_check( "org.opensuse.yast.system.services.read" )
-       @ntp.manual_server = ""
-       @ntp.use_random_server = true
-       @ntp.manual_server = get_manual_server
-       @ntp.enabled = enabled
-       if @ntp.manual_server == ""
-         @ntp.use_random_server = true
-       else
-         @ntp.use_random_server = false
-       end
-    else
-       @ntp.error_id = 1
-       @ntp.error_string = "no permission"
+    unless permission_check( "org.opensuse.yast.system.services.read")
+      render ErrorResult.error(403, 1, "no permission") and return
     end
 
-    respond_to do |format|
-      format.xml do
-        render :xml => @ntp.to_xml( :root => "config_ntp",
-          :dasherize => false )
-      end
-      format.json do
-	render :json => @ntp.to_json
-      end
-      format.html do
-        render :xml => @ntp.to_xml( :root => "config_ntp",
-          :dasherize => false ) #return xml only
-      end
+    @ntp = ConfigNtp.new
+    @ntp.manual_server = ""
+    @ntp.use_random_server = true
+    @ntp.manual_server = get_manual_server
+    @ntp.enabled = enabled
+    if @ntp.manual_server == ""
+      @ntp.use_random_server = true
+    else
+      @ntp.use_random_server = false
     end
   end
 
   def update
-    respond_to do |format|
-      ntp = ConfigNtp.new
-      if permission_check( "org.opensuse.yast.system.services.write") 
-         if params[:config_ntp] != nil
-            ntp.use_random_server = params[:config_ntp][:use_random_server]
-            ntp.enabled = params[:config_ntp][:enabled]
-            ntp.manual_server = params[:config_ntp][:manual_server]
-            logger.debug "UPDATED: #{ntp.inspect}"
-       
-            requested_servers = []
-            if ntp.use_random_server == false
-              requested_servers << ntp.manual_server
-            else
-              requested_servers = ["0.pool.ntp.org", "1.pool.ntp.org", "2.pool.ntp.org"]
-            end
-            write_ntp_conf(requested_servers)
-            enable(ntp.enabled) 
-         else
-           ntp.error_id = 2
-           ntp.error_string = "format or internal error"
-         end  
-      else #no permissions
-         ntp.error_id = 1
-         ntp.error_string = "no permission"
-      end
 
-      format.html do
-        render :xml => ntp.to_xml( :root => "config_ntp",
-          :dasherize => false ) #return xml only
-      end
-      format.xml do
-        render :xml => ntp.to_xml( :root => "config_ntp",
-          :dasherize => false )
-      end
-      format.json do
-	render :json => ntp.to_json
-      end
+    unless permission_check( "org.opensuse.yast.system.services.write")
+      render ErrorResult.error(403, 1, "no permission") and return
     end
+    @ntp = ConfigNtp.new
+    if params[:config_ntp] != nil
+      @ntp.use_random_server = params[:config_ntp][:use_random_server]
+      @ntp.enabled = params[:config_ntp][:enabled]
+      @ntp.manual_server = params[:config_ntp][:manual_server]
+      logger.debug "UPDATED: #{@ntp.inspect}"
+       
+      requested_servers = []
+      if @ntp.use_random_server == false
+        requested_servers << @ntp.manual_server
+      else
+        requested_servers = ["0.pool.ntp.org", "1.pool.ntp.org", "2.pool.ntp.org"]
+      end
+      write_ntp_conf(requested_servers)
+      enable(@ntp.enabled) 
+    else
+      render ErrorResult.error(404, 2, "format or internal error") and return
+    end
+    render :show
+
   end
 
 
