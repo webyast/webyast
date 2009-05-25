@@ -1,8 +1,6 @@
 class Links
 
-  attr_accessor :error_id, 
-                :error_string,
-                :path,
+  attr_accessor :path,
                 :description,
                 :read_permission,
                 :write_permission,
@@ -12,8 +10,6 @@ class Links
                 :new_permission
 
   def initialize 
-     @error_id = 0
-     @error_string = ""
      @path = ""
      @description = ""
      @read_permission = false
@@ -37,8 +33,6 @@ class Links
       xml.tag!(:delete_permission, @delete_permission, {:type => "boolean"} )
       xml.tag!(:install_permission, @install_permission, {:type => "boolean"} )
       xml.tag!(:new_permission, @new_permission, {:type => "boolean"} )
-      xml.tag!(:error_id, @error_id, {:type => "integer"} )
-      xml.tag!(:error_string, @error_string )
     end  
   end
 

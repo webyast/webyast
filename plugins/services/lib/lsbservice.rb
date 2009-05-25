@@ -59,14 +59,11 @@ class Lsbservice
   #
   
   attr_reader :link, :path, :commands
-  attr_accessor :error_id, :error_string
   
   def initialize link
     link = link.to_s unless link.is_a? String
     @link = link
     @commands = []
-    @error_id = 0
-    @error_string = ""
     @path = PREFIX+link
     raise "Unexisting service" unless File.exists?( path )
     if File.executable?( path )
@@ -113,8 +110,6 @@ class Lsbservice
             end
          end
       end
-      xml.tag!(:error_id, @error_id )
-      xml.tag!(:error_string, @error_string )
     end  
   end
 

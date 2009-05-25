@@ -13,57 +13,34 @@ class ServicesController < ApplicationController
     end
     session['services'] = services
   end
-  def respond data
-    if data
-      respond_to do |format|
-	format.xml do
-	  render :xml => data.to_xml(:root => "services")
-	end
-	format.json do
-	  render :json => data.to_json(:root => "services")
-	end
-	format.html do
-	  render :xml => data.to_xml(:root => "services") #return xml only
-	end
-      end
-    else
-      render :nothing => true, :status => 404 unless @service # not found
-    end
-  end
+
   public
 
   def index
+    unless permission_check( "org.opensuse.yast.system.services.read")
+      render ErrorResult.error(403, 1, "no permission") and return
+    end
+
     init_services unless session['services']
-    @services ||= session['services']
+    ser ||= session['services']
     #converting to an array for xml and json
-    service_array = []
-    @services.each {|key, value| 
+    @services = []
+    ser.each {|key, value| 
         command_array = []
         value.commands.each do |c|
            command_array << {:name=>c}
         end
-        service_array << {:link => key, :path =>value.path, :commands => command_array, 
-                         :error_id => value.error_id, :error_string => value.error_string}
+        @services << {:link => key, :path =>value.path, :commands => command_array}
     }
-
-    respond_to do |format|
-	format.xml do
-	  render :xml => service_array.to_xml(:root => "services")
-        end
-	format.json do
-	  render :json => service_array.to_json(:root => "services")
-	end
-	format.html do
-	  render :xml => service_array.to_xml(:root => "services") #return xml only
-	end
-    end
   end
 
   def show
+    unless permission_check( "org.opensuse.yast.system.services.read")
+      render ErrorResult.error(403, 1, "no permission") and return
+    end
     id = params[:id]
     init_services unless session['services']
     @service = session['services'][id]
     logger.debug "show@service #{@service.inspect}"
-    respond @service
-   end
+  end
 end
