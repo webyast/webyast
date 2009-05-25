@@ -70,7 +70,7 @@ class PermissionsController < ApplicationController
 
   def index
     # user can always see his rights
-    unless (permission_check( "org.opensuse.yast.permissions.read") || (!user_id.blank? && self.current_account.login == user_id))
+    unless (permission_check( "org.opensuse.yast.permissions.read") || (!params[:user_id].blank? && self.current_account.login == params[:user_id]))
       render ErrorResult.error(403, 1, "no permission") and return
     end
     if params[:user_id].blank?
@@ -86,7 +86,7 @@ class PermissionsController < ApplicationController
   # GET /users/<uid>/permissions/<id>.json?user_id=<user_id>
 
   def show
-    unless permission_check( "org.opensuse.yast.permissions.read")
+    unless (permission_check( "org.opensuse.yast.permissions.read") || (!params[:user_id].blank? && self.current_account.login == params[:user_id]))
       render ErrorResult.error(403, 1, "no permission") and return
     end
     if params[:user_id].blank?
