@@ -44,13 +44,10 @@ class Commandline
   #
   
   attr_reader :id, :commands
-  attr_accessor :error_id, :error_string
   
   def initialize id = ""
     @id = id.to_s
     @commands = nil
-    @error_id = 0
-    @error_string = ""
   end
 
   
@@ -126,8 +123,6 @@ class Commandline
            end
          end
        end
-       xml.tag!(:error_id, @error_id )
-       xml.tag!(:error_string, @error_sting )
     end  
   end  
 
