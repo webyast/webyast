@@ -1,1 +1,3 @@
-yast2-webservice-tasks-*.gem
+package/*.gem
+package/*.spec
+*.gemspec

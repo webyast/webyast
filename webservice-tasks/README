@@ -1,12 +1,32 @@
 
+This is 'yast2-webservice-tasks' Ruby gem package.
+
+This gem contains all rake tasks which are shared in all Yast webservice packages.
+
+
+Adding a new .rake file
+-----------------------
+
+All *.rake files under lib/tasks subdirectory can be shared in any Rakefile,
+just add
+
+    require 'tasks/webservice'
+
+to the Rakefile.
+
+
+Package building
+----------------
 
 build package:
 
     rake package
 
-clean temprary (generated) files:
+clean package files:
 
     rake clean
 
+clean all generated files:
 
+    rake clobber
 
