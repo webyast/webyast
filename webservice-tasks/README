@@ -1,0 +1,12 @@
+
+
+build package:
+
+    rake package
+
+clean temprary (generated) files:
+
+    rake clean
+
+
+

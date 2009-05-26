@@ -1,0 +1,38 @@
+require 'rake'
+
+# define clean task
+require 'rake/clean'
+CLEAN.include("*.spec", "*.gemspec", "*.gem")
+
+def version_update(filein)
+    if filein.nil? || filein.empty?
+	puts "ERROR: empty input or output filename"
+	exit 1
+    end
+
+    version = `cat VERSION`
+    version.chomp!
+
+    filein =~ /(.*)\.in$/
+    fileout = $1
+
+    puts "Updating #{fileout} to #{version}..."
+    `sed -e 's|@VERSION@|#{version}|' #{filein} > #{fileout}`
+end
+
+
+file "yast2-webservice-tasks.gemspec" => ["yast2-webservice-tasks.gemspec.in", "VERSION"] do
+    version_update("yast2-webservice-tasks.gemspec.in")
+end
+
+
+file "rubygem-yast2-webservice-tasks.spec" => ["rubygem-yast2-webservice-tasks.spec.in", "VERSION"] do
+    version_update("rubygem-yast2-webservice-tasks.spec.in")
+end
+
+desc 'Build package'
+task :package => ['yast2-webservice-tasks.gemspec', 'rubygem-yast2-webservice-tasks.spec'] do
+   `gem build yast2-webservice-tasks.gemspec`
+end
+
+# vim: ft=ruby
