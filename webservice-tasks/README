@@ -30,3 +30,14 @@ clean all generated files:
 
     rake clobber
 
+
+Installing the gem
+------------------
+
+Build the package ('rake package') and
+
+    call 'sudo gem install yast2-webservice-tasks'
+   
+or
+    build RPM package from sources in package/ subdirectory and install it
+

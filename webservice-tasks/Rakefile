@@ -1,10 +1,17 @@
 require 'rake'
 
-# define clean task
+# define clean and clobber tasks
 require 'rake/clean'
 CLEAN.include("package/*.spec", "package/*.gem")
-CLOBBER.include("package/*.spec", "package/*.gem", "*.gemspec")
+CLOBBER.include("package/*.spec", "package/*.gem", "*.gem", "*.gemspec")
 
+
+def read_version
+    version = `cat VERSION`
+    version.chomp
+end
+
+# generate a file from .in template, replace @VERSION@ strin by VERSION file content
 def version_update(filein, fileout = nil)
     if filein.nil? || filein.empty?
 	puts "ERROR: empty input or output filename"
@@ -16,27 +23,29 @@ def version_update(filein, fileout = nil)
 	fileout = $1
     end
 
-    version = `cat VERSION`
-    version.chomp!
+    version = read_version
 
     puts "Updating #{fileout} to #{version}..."
     `sed -e 's|@VERSION@|#{version}|' #{filein} > #{fileout}`
 end
 
-
+# generate .gemspec file from the template
 file "yast2-webservice-tasks.gemspec" => ["yast2-webservice-tasks.gemspec.in", "VERSION"] do
     version_update("yast2-webservice-tasks.gemspec.in")
 end
 
 
+# generate RPM .spec file from the template
 file "package/rubygem-yast2-webservice-tasks.spec" => ["rubygem-yast2-webservice-tasks.spec.in", "VERSION"] do
     version_update("rubygem-yast2-webservice-tasks.spec.in", "package/rubygem-yast2-webservice-tasks.spec")
 end
 
-desc 'Build package (saved to package/ subdirectory)'
+# build the gem package
+desc 'Build gem package, save RPM sources to package/ subdirectory'
 task :package => ['yast2-webservice-tasks.gemspec', 'package/rubygem-yast2-webservice-tasks.spec'] do
-   `gem build yast2-webservice-tasks.gemspec`
-   `mv yast2-webservice-tasks-*.gem package`
+    version = read_version
+    `gem build yast2-webservice-tasks.gemspec` unless uptodate?("yast2-webservice-tasks-#{version}.gem", FileList["lib/**/*"])
+    cp "yast2-webservice-tasks-#{version}.gem", "package"
 end
 
 # vim: ft=ruby
