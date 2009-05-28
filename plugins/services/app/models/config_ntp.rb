@@ -1,14 +1,10 @@
 class ConfigNtp 
 
-  attr_accessor :error_id, 
-                :error_string,
-                :enabled,
+  attr_accessor :enabled,
                 :use_random_server,
                 :manual_server
 
   def initialize 
-     @error_id = 0
-     @error_string = ""
      @enabled = false
      @use_random_server = false
      @manual_server = ""
@@ -22,8 +18,6 @@ class ConfigNtp
       xml.tag!(:manual_server, @manual_server )
       xml.tag!(:enabled, @enabled, {:type => "boolean"} )
       xml.tag!(:use_random_server, @use_random_server, {:type => "boolean"} )
-      xml.tag!(:error_id, @error_id, {:type => "integer"} )
-      xml.tag!(:error_string, @error_string )
     end  
   end
 

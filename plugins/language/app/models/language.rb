@@ -25,8 +25,14 @@ class Language
       xml.available({:type => "array"}) do
          @available.split("\n").each do |line|
            xml.language do
-              xml.tag!(:id, line[0..(line.index('(')-2)])
-              xml.tag!(:name, line[(line.index('(')+1)..(line.length-2)])
+              # Checking input data before processing
+              # Example: pt_BR (Portugues brasileiro)
+              if line.match (/^[\w_]+ \(.*\)/)
+                xml.tag!(:id, line[0..(line.index('(')-2)])
+                xml.tag!(:name, line[(line.index('(')+1)..(line.length-2)])
+              else
+                raise "Unexpected input:\n" + line + "\n\nGot:\n" + @available
+              end
            end
          end
       end
