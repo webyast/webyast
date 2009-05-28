@@ -3,6 +3,9 @@ require 'rake/testtask'
 require 'rake/rdoctask'
 require 'rake/packagetask'
 
+# load all Yast webservice specific tasks
+require 'tasks/webservice'
+
 desc 'Default: run unit tests.'
 task :default => :test
 
