@@ -19,20 +19,31 @@ class LanguageController < ApplicationController
 
   def get_available
      ret = Scr.instance.execute(["/sbin/yast2", "language", "list"])
-     @language.available = ret[:stderr]
+     if ret && ret[:exit] == 0
+       @language.available = ret[:stderr]
+     else
+       logger.error "yast2 language list returns error"
+       @language.available = ""
+     end
   end
 
   def get_languages
      ret = Scr.instance.execute(["/sbin/yast2", "language", "summary"])
-     lines = ret[:stderr].split "\n"
-     lines.each do |s|    	
-       column = s.split(" ")
-       case column[0]
-         when "Current"
-           @language.first_language = column[2] 
-         when "Additional"
-           @language.second_languages = column[2] 
+     if ret && ret[:exit] == 0
+       lines = ret[:stderr].split "\n"
+       lines.each do |s|    	
+         column = s.split(" ")
+         case column[0]
+           when "Current"
+             @language.first_language = column[2] 
+           when "Additional"
+             @language.second_languages = column[2] 
+         end
        end
+     else
+       logger.error "yast2 language list returns summary"
+       @language.second_languages = ""
+       @language.first_language = ""
      end
   end
 
@@ -65,13 +76,18 @@ class LanguageController < ApplicationController
     if params[:language] != nil 
        second_languages = []
        first_language = params[:language][:first_language]
-       params[:language][:second_languages].each do |lang|
-         second_languages << lang[:id]
+       if params[:language][:second_languages]
+         params[:language][:second_languages].each do |lang|
+           second_languages << lang[:id]
+         end
        end
        logger.debug "UPDATED: #{first_language}, #{second_languages.inspect}"
 
+       if first_language.blank? or second_languages.blank?
+         render ErrorResult.error(404, 2, "format or internal error") and return
+       end
        set_first_language first_language
-       set_second_languages second_languages.join(",")
+       set_second_languages second_languages.join(",") 
 
        @language.first_language = first_language
        @language.second_languages = second_languages

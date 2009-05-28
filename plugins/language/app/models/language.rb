@@ -27,7 +27,7 @@ class Language
            xml.language do
               # Checking input data before processing
               # Example: pt_BR (Portugues brasileiro)
-              if line.match (/^[\w_]+ \(.*\)/)
+              if line.match(/^[\w_]+ \(.*\)/)
                 xml.tag!(:id, line[0..(line.index('(')-2)])
                 xml.tag!(:name, line[(line.index('(')+1)..(line.length-2)])
               else
