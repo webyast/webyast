@@ -28,6 +28,9 @@ BuildRoot:      %{_tmppath}/%{name}-%{version}-build
 BuildRequires:  rubygems_with_buildroot_patch
 Requires:       rubygems >= 1.2.0
 
+BuildRequires:  rubygem-rake
+Requires:	rubygem-rake	
+
 Url:            http://gettext.rubyforge.org/
 Source:         %{mod_name}-%{version}.gem
 
