@@ -1,3 +1,4 @@
 package/*.gem
 package/*.spec
 *.gemspec
+*.gem

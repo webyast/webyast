@@ -25,7 +25,7 @@ def version_update(filein, fileout = nil)
 
     version = read_version
 
-    puts "Updating #{fileout} to #{version}..."
+    puts "Updating #{fileout} (#{version})..."
     `sed -e 's|@VERSION@|#{version}|' #{filein} > #{fileout}`
 end
 
