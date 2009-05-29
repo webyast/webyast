@@ -22,6 +22,7 @@ class SystemtimesController < ApplicationController
 
   def get_validtimezones
      retValue = @scr.execute(["/sbin/yast2", "timezone", "list"])
+     return [] if retValue[:exit] != 0
      lines = retValue[:stderr].split "\n"
      ret = []
      lines.each do |l|   
@@ -43,6 +44,7 @@ class SystemtimesController < ApplicationController
 
   def get_time
     ret = @scr.execute(["/bin/date"])
+    return "" if ret[:exit] != 0
     ret[:stdout]
   end
 
@@ -109,6 +111,11 @@ class SystemtimesController < ApplicationController
       @systemtime.currenttime = params[:time][:currenttime]
       logger.debug "UPDATED: #{@systemtime.inspect}"
 
+      if @systemtime.timezone.blank? or
+         @systemtime.is_utc.blank? or
+         @systemtime.currenttime.blank?
+        render ErrorResult.error(404, 2, "format or internal error") and return
+      end
       set_is_utc @systemtime.is_utc
       set_timezone @systemtime.timezone
       set_time @systemtime.currenttime
@@ -133,6 +140,12 @@ class SystemtimesController < ApplicationController
       @systemtime.is_utc = get_is_utc
       @systemtime.timezone = get_timezone
       @systemtime.validtimezones = get_validtimezones
+      if @systemtime.currenttime.blank? or
+         @systemtime.is_utc.blank? or
+         @systemtime.timezone.blank? or
+         @systemtime.validtimezones.blank?
+        render ErrorResult.error( 404, 1, "Cannot get time information" ) and return
+      end
     end
   end
 

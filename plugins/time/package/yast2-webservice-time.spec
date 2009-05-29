@@ -22,6 +22,7 @@ Source:         www.tar.bz2
 Source1:        org.opensuse.yast.system.time.policy
 BuildRoot:      %{_tmppath}/%{name}-%{version}-build
 BuildArch:      noarch
+BuildRequires:  rubygem-mocha
 
 #
 %define pkg_user yastws
