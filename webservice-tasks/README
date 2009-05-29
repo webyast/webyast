@@ -4,15 +4,45 @@ This is 'yast2-webservice-tasks' Ruby gem package.
 This gem contains all rake tasks which are shared in all Yast webservice packages.
 
 
-Adding a new .rake file
------------------------
+Loading shared tasks in other packages
+--------------------------------------
 
-All *.rake files under lib/tasks subdirectory can be shared in any Rakefile,
-just add
+Just add
 
     require 'tasks/webservice'
 
-to the Rakefile.
+line to your Rakefile. All shared tasks will be found and loaded automatically,
+you can verify it with 'rake -T' command.
+
+
+Adding a new .rake file
+-----------------------
+
+Simply put the *.rake file to lib/tasks subdirectory.
+
+
+How to override a shared task
+-----------------------------
+
+Rake cannot simply change a task or rename it. If you need to redefine a shared
+the best solution is to not load it at all so there is no need to redefine it.
+
+There is a predefined class for this task, just put this your Rakefile:
+
+    require 'lib/tasks/webservice_tasks'
+    WebserviceTasks.loadTasks(:exclude => ["package.rake"])
+
+This example loads all tasks except package task which you can define yourselves.
+Wildcards are supported, use e.g. "*_check.rake" parameter to exclude all checking tasks.
+
+On the other hand, if you want to load just one or more tasks (and ignore all other tasks) use:
+
+    WebserviceTasks.loadTasks(:include => ["dist.rake"])
+
+Wildcards are also supported here.
+
+Include and exclude parameters can be combined, the excluded files have higher priority
+if the same file is in both lists.
 
 
 Package building

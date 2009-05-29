@@ -1,9 +1,16 @@
 require 'rake'
 
+# load the shared rake files from the package itself
+# skip 'package' task, it's redefined here
+require 'lib/tasks/webservice_tasks'
+WebserviceTasks.loadTasks(:exclude => ["package.rake"])
+
+
 # define clean and clobber tasks
 require 'rake/clean'
 CLEAN.include("package/*.spec", "package/*.gem")
-CLOBBER.include("package/*.spec", "package/*.gem", "*.gem", "*.gemspec")
+CLOBBER.include("*.gem", "*.gemspec")
+task :clobber => :clean
 
 
 def read_version
@@ -41,7 +48,7 @@ file "package/rubygem-yast2-webservice-tasks.spec" => ["rubygem-yast2-webservice
 end
 
 # build the gem package
-desc 'Build gem package, save RPM sources to package/ subdirectory'
+desc 'Build gem package, save RPM sources to package subdirectory'
 task :package => ['yast2-webservice-tasks.gemspec', 'package/rubygem-yast2-webservice-tasks.spec'] do
     version = read_version
     `gem build yast2-webservice-tasks.gemspec` unless uptodate?("yast2-webservice-tasks-#{version}.gem", FileList["lib/**/*"])
