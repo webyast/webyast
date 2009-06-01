@@ -37,7 +37,6 @@ class LanguageControllerTest < ActionController::TestCase
   end
 
   test "access show with a SCR call which returns an error" do
-    Scr.any_instance.stubs(:initialize)
     Scr.any_instance.stubs(:execute).with(["/sbin/yast2", "language", "list"]).returns({:exit=>2, :stdout=>"", :stderr=>"wrong parameter"})
     Scr.any_instance.stubs(:execute).with(["/sbin/yast2", "language", "summary"]).returns({:exit=>2, :stdout=>"", :stderr=>"wrong parameter"})
     get :show
@@ -45,7 +44,6 @@ class LanguageControllerTest < ActionController::TestCase
   end
 
   test "access show with a SCR call which returns nil" do
-    Scr.any_instance.stubs(:initialize)
     Scr.any_instance.stubs(:execute).with(["/sbin/yast2", "language", "list"]).returns()
     Scr.any_instance.stubs(:execute).with(["/sbin/yast2", "language", "summary"]).returns()
     get :show
@@ -53,8 +51,6 @@ class LanguageControllerTest < ActionController::TestCase
   end
 
   test "writing values back" do
-    Scr.any_instance.stubs(:initialize)
-
     Scr.any_instance.stubs(:execute).with(["/sbin/yast2", "language", "set",  "lang=de_DE", "no_packages"]).returns()
     Scr.any_instance.stubs(:execute).with(["/sbin/yast2", "language", "set",  "languages=en_US", "no_packages"]).returns()
 
