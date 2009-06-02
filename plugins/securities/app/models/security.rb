@@ -55,7 +55,6 @@ class Security #< ActiveRecord::Base
         end
       end
     end
-#    return false
   end
 
   def firewall_after_startup?
