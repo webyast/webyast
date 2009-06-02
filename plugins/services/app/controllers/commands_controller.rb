@@ -47,6 +47,9 @@ class CommandsController < ApplicationController
     cmd = "/usr/sbin/rc" + params[:service_id] 
     logger.debug "Service cmd #{cmd} #{id}"
     ret = Scr.instance.execute([cmd, id])
+    if !ret    
+      render ErrorResult.error(404, "2", "SCR call failed") and return
+    end
     if ret[:exit].to_i != 0
       error_string = ret[:stderr]
       if ret[:stdout].size > 0

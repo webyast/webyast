@@ -1,9 +1,9 @@
 require 'rake'
 
 # load the shared rake files from the package itself
-# skip 'package' task, it's redefined here
+# skip 'package-local' task, it's redefined here
 require 'lib/tasks/webservice_tasks'
-WebserviceTasks.loadTasks(:exclude => ["package.rake"])
+WebserviceTasks.loadTasks(:exclude => ["package-local.rake"])
 
 
 # define clean and clobber tasks
@@ -49,7 +49,7 @@ end
 
 # build the gem package
 desc 'Build gem package, save RPM sources to package subdirectory'
-task :package => ['yast2-webservice-tasks.gemspec', 'package/rubygem-yast2-webservice-tasks.spec'] do
+task :"package-local" => ['yast2-webservice-tasks.gemspec', 'package/rubygem-yast2-webservice-tasks.spec'] do
     version = read_version
     sh 'gem build yast2-webservice-tasks.gemspec' unless uptodate?("yast2-webservice-tasks-#{version}.gem", FileList["lib/**/*"])
     cp "yast2-webservice-tasks-#{version}.gem", "package"

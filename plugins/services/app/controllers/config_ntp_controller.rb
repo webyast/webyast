@@ -15,19 +15,21 @@ class ConfigNtpController < ApplicationController
 
      manual_server = ""
      ret = @scr.execute(["/sbin/yast2",  "ntp-client",  "list"])
-     servers = ret[:stderr].split "\n"
-     servers.each do |s|
-       column = s.split(" ")
-       if column.size == 2 && column[0] == "Server"
-          if column[1] != "0.pool.ntp.org" && column[1] != "1.pool.ntp.org" && column[1] != "2.pool.ntp.org"
+     if ret
+       servers = ret[:stderr].split "\n"
+       servers.each do |s|
+         column = s.split(" ")
+         if column.size == 2 && column[0] == "Server"
+           if column[1] != "0.pool.ntp.org" && column[1] != "1.pool.ntp.org" && column[1] != "2.pool.ntp.org"
              if manual_server == "" 
-	        # Thats one user defined ntp-server
-                manual_server = column[1]
+	       # Thats one user defined ntp-server
+               manual_server = column[1]
              else
-                #There are more than one user defined server --> do not use it
-                manual_server = "No single configured ntp server"
+               #There are more than one user defined server --> do not use it
+               manual_server = "No single configured ntp server"
              end
-          end
+           end
+         end
        end
      end
      return manual_server
@@ -36,7 +38,8 @@ class ConfigNtpController < ApplicationController
    def enabled
 
      ret = @scr.execute(["/sbin/yast2", "ntp-client", "status"])
-     return (ret[:stderr]=="NTP daemon is enabled.\n")
+     return (ret[:stderr]=="NTP daemon is enabled.\n") if ret
+     return false
    end
 
    def write_ntp_conf (requested_servers)
