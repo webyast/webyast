@@ -35,6 +35,10 @@ class UsersController < ApplicationController
       saveKey = nil
     end
     ret = @scr.execute(["/sbin/yast2", "users", "show", "username=#{id}"])
+    if (!ret or
+        ret[:stderr].include?("There is no such user."))
+      return false
+    end
     lines = ret[:stderr].split "\n"
     counter = 0
     @user = User.new
@@ -60,6 +64,7 @@ class UsersController < ApplicationController
       counter += 1
     end
     @user.sshkey = saveKey
+    return true
   end
 
   def createSSH
@@ -196,7 +201,12 @@ class UsersController < ApplicationController
     unless permission_check( "org.opensuse.yast.system.users.read")
       render ErrorResult.error(403, 1, "no permission") and return
     end
-    get_user params[:id]
+    if params[:id].blank?
+      render ErrorResult.error(404, 2, "empty parameter") and return
+    end
+    unless get_user params[:id]
+      render ErrorResult.error(404, 2, "user not found") and return
+    end
   end
 
 
