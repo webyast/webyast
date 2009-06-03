@@ -15,7 +15,14 @@ class Patch
     @resolvable_id = id_val
   end
 
-  def initialize 
+  def initialize (resolvable_id, kind, name,
+                  arch, repo, summary)
+    @resolvable_id = resolvable_id
+    @kind = kind
+    @name = name
+    @arch = arch
+    @repo = repo
+    @summary = summary
   end
 
   def to_xml( options = {} )
