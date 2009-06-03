@@ -31,12 +31,13 @@ Requires:       rubygems >= 1.2.0
 BuildRequires:  rubygem-rake
 Requires:	rubygem-rake	
 
-Url:            http://gettext.rubyforge.org/
+Url:            http://en.opensuse.org/YaST
 Source:         %{mod_name}-%{version}.gem
 
-Summary:        Localization support for Ruby on Rails(>=2.3) by Ruby-GetText-Package
+Summary:        Rake tasks shared by all YaST webservice packages.
 %description
-Localization support for Ruby on Rails(>=2.3.2) by Ruby-GetText-Package.
+The original task package is renamed to package-local.
+The new task package includes the tasks git_check and syntax_check.
 
 %prep
 %build
