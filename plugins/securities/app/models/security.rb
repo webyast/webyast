@@ -11,7 +11,7 @@ class Security #< ActiveRecord::Base
     @firewall
     @firewall_after_startup
     @ssh
-    @scr = Scr.instance
+#    @scr = Scr.instance
   end
 
   def update
@@ -44,7 +44,7 @@ class Security #< ActiveRecord::Base
 
   private
   def firewall?
-    cmd = @scr.execute(["/sbin/rcSuSEfirewall2", "status"])
+    cmd = Scr.instance.execute(["/sbin/rcSuSEfirewall2", "status"])
     lines = cmd[:stdout].split "\n"
     lines.each do |l|
       if l.length > 0
@@ -58,7 +58,7 @@ class Security #< ActiveRecord::Base
   end
 
   def firewall_after_startup?
-    cmd = @scr.execute(["/sbin/yast2", "firewall", "startup", "show"])
+    cmd = Scr.instance.execute(["/sbin/yast2", "firewall", "startup", "show"])
     lines = cmd[:stderr].split "\n"
     lines.each do |l|
       if l.length > 0
@@ -72,7 +72,7 @@ class Security #< ActiveRecord::Base
   end
 
   def ssh?
-    cmd = @scr.execute(["/usr/sbin/rcsshd", "status"])
+    cmd = Scr.instance.execute(["/usr/sbin/rcsshd", "status"])
     lines = cmd[:stdout].split "\n"
     lines.each do |l|
       if l.length > 0
@@ -92,7 +92,7 @@ class Security #< ActiveRecord::Base
     else #if param == false        # stop firewall
       action = "stop"
     end
-    cmd = @scr.execute(["/sbin/rcSuSEfirewall2", "#{action}"])
+    cmd = Scr.execute(["/sbin/rcSuSEfirewall2", "#{action}"])
     lines = cmd[:stdout].split "\n"
     lines.each do |l|
       if l.length > 0
@@ -112,7 +112,7 @@ class Security #< ActiveRecord::Base
       action = "manual"
       verify = "Removing"
     end
-    cmd = @scr.execute(["/sbin/yast2", "firewall", "startup", "#{action}"])
+    cmd = Scr.execute(["/sbin/yast2", "firewall", "startup", "#{action}"])
     lines = cmd[:stderr].split "\n"
     lines.each do |l|
       if l.length > 0
@@ -130,7 +130,7 @@ class Security #< ActiveRecord::Base
     else        # stop sshd
       action = "stop"
     end
-    cmd = @scr.execute(["/usr/sbin/rcsshd", "#{action}"])
+    cmd = Scr.execute(["/usr/sbin/rcsshd", "#{action}"])
     lines = cmd[:stdout].split "\n"
     lines.each do |l|
       if l.length > 0
