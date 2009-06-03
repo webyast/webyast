@@ -45,11 +45,31 @@ task :install_policies do |t|
 end
 
 task :system_check do
+
+  #
+  # check needed needed packages
+  #
+  version = "0.0.1" # do not take care
+  test_version "sqlite3", version
+  test_version "PolicyKit", version
+  test_version "PackageKit", version
+
+  #
+  # check needed modules
+  # 
+  test_module "rake", "rubygem-rake"
+  test_module "sqlite3", "rubygem-sqlite3"
+  test_module "rake", "rubygem-rake"
+  test_module "rpam", "ruby-rpam"
+  test_module "polkit", "ruby-polkit"
+  test_module "fcgi", "ruby-fcgi"
+  test_module "dbus", "ruby-dbus"
+
   # check that policies are all installed
-  Dir.glob(File.join(File.dirname(__FILE__), '..', "**/*.policy")).each do |policy|
+  Dir.glob(File.join(File.dirname(__FILE__), '../../..', "**/*.policy")).each do |policy|
     dest_policy = File.join('/usr/share/PolicyKit/policy', File.basename(policy))
     if not File.exists?(dest_policy)
-      raise "* Policy '#{policy}' is not installed into '#{dest_policy}'. Run rake install_policies"
+      raise "* Policy '#{policy}' is not installed into '#{dest_policy}'. Run \"rake install\" in the concerning module/plugin"
       exit(1)
     end
   end
@@ -77,14 +97,14 @@ EOF
   webservice_permissions_ok = false
 
   # get all granted policies
-  granted = `polkit-auth --user #{user}`.split
+  granted = `polkit-auth --user #{user} --explicit`.split
 
   # check that the user running the web service has permissions to yast
   # scr and others. This can be achieved in 2 ways:
   # manually polkit-auth, or as pattern matching in /etc/PolicyKit/PolicyKit.conf
 
   scr_actions = `polkit-action`.split.reject { |item| not item.include?('org.opensuse.yast.scr.') }
-  webservice_actions = [ 'org.freedesktop.packagekit.system-update', 'org.freedesktop.policykit.read', *scr_actions]
+  webservice_actions = [ 'org.freedesktop.packagekit.system-update', 'org.freedesktop.packagekit.install',  'org.freedesktop.policykit.read', *scr_actions]
 
   webservice_actions.each do | action|
     if not granted.include?(action)
@@ -93,7 +113,7 @@ EOF
   end
 
   # now check that all permission in each policy is granted
-  Dir.glob(File.join(Dir.pwd, '..', "**/*.policy")).each do |policy|
+  Dir.glob(File.join(File.dirname(__FILE__), '../../..', "**/*.policy")).each do |policy|
     doc = REXML::Document.new(File.open(policy))
     doc.elements.each("/policyconfig/action") do |action|
       id = action.attributes['id']
@@ -104,14 +124,6 @@ EOF
   end
 
   #
-  # rpam        
-  # 
-  test_module "rpam", "ruby-rpam"
-  #
-  # ruby-polkit
-  #
-  test_module "polkit", "ruby-polkit"
-  #
   # /etc/yast_user_roles
   #
   test "User roles configured" do
@@ -119,11 +131,6 @@ EOF
       escape "/etc/yast_user_roles does not exist", "create /etc/yast_user_roles"
     end
   end
-
-  #
-  # ruby-dbus
-  #
-  test_module "dbus", "ruby-dbus"
 
   #
   # yast-dbus, scr
