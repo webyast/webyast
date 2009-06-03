@@ -4,12 +4,12 @@ include ApplicationHelper
 class SystemtimesController < ApplicationController
 
   before_filter :login_required
-  
+
   def initialize
     require "scr"
     @scr = Scr.instance
   end
-  
+
 #--------------------------------------------------------------------------------
 #
 #local methods
@@ -25,7 +25,7 @@ class SystemtimesController < ApplicationController
      return [] if retValue[:exit] != 0
      lines = retValue[:stderr].split "\n"
      ret = []
-     lines.each do |l|   
+     lines.each do |l|
        if not l.empty?
           lang = l.split " "
           ret << " " << lang[0] if lang[0]!="Region:"
@@ -59,7 +59,7 @@ class SystemtimesController < ApplicationController
   def set_is_utc (utc)
     #set hwclock
     if utc
-      hwclock = "-u" 
+      hwclock = "-u"
     else
       hwclock = "--localtime"
     end
@@ -98,7 +98,7 @@ class SystemtimesController < ApplicationController
 # actions
 #
 #--------------------------------------------------------------------------------
-	
+
   def update
     unless permission_check( "org.opensuse.yast.system.time.write")
       render ErrorResult.error(403, 1, "no permission") and return
@@ -133,7 +133,7 @@ class SystemtimesController < ApplicationController
 
     @systemtime = SystemTime.new
 
-    unless permission_check( "org.opensuse.yast.system.time.read")      
+    unless permission_check( "org.opensuse.yast.system.time.read")
       render ErrorResult.error( 403, 1, "no permission" ) and return
     else
       @systemtime.currenttime = get_time
@@ -141,7 +141,7 @@ class SystemtimesController < ApplicationController
       @systemtime.timezone = get_timezone
       @systemtime.validtimezones = get_validtimezones
       if @systemtime.currenttime.blank? or
-         @systemtime.is_utc.blank? or
+         @systemtime.is_utc.nil? or
          @systemtime.timezone.blank? or
          @systemtime.validtimezones.blank?
         render ErrorResult.error( 404, 1, "Cannot get time information" ) and return
