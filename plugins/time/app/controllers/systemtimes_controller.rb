@@ -66,7 +66,7 @@ class SystemtimesController < ApplicationController
     @scr.write(".sysconfig.clock.HWCLOCK", hwclock)
   end
 
-  def set_time (time)
+  def set_time (date, time)
     #set time
     environment = [];
     hwclock = @scr.read(".sysconfig.clock.HWCLOCK");
@@ -76,8 +76,7 @@ class SystemtimesController < ApplicationController
     end
 
     cmd = [ "/sbin/hwclock", "--set", hwclock,
-              "--date=\"#{time.month}/#{time.day}/#{time.year}",
-              "#{time.hour}:#{time.min}:#{time.sec}\""]
+              "--date=\"#{date} #{time}\""]
 
     logger.debug "SetTime cmd #{cmd.inspect}"
     @scr.execute(cmd, environment)
@@ -109,16 +108,20 @@ class SystemtimesController < ApplicationController
       @systemtime.timezone = params[:time][:timezone]
       @systemtime.is_utc = params[:time][:is_utc]
       @systemtime.currenttime = params[:time][:currenttime]
+      @systemtime.date = params[:time][:date]
       logger.debug "UPDATED: #{@systemtime.inspect}"
 
+      time = Time.parse(@systemtime.currenttime).strftime("%H:%M:%S")
+      date = Time.parse(@systemtime.date).strftime("%d/%m/%y")
       if @systemtime.timezone.blank? or
-         @systemtime.is_utc.blank? or
-         @systemtime.currenttime.blank?
+         @systemtime.is_utc.nil? or    # don't use blank? for boolean
+         @systemtime.currenttime.blank? or
+         @systemtime.date.blank?
         render ErrorResult.error(404, 2, "format or internal error") and return
       end
       set_is_utc @systemtime.is_utc
       set_timezone @systemtime.timezone
-      set_time @systemtime.currenttime
+      set_time(date, time)
     else
       render ErrorResult.error(404, 2, "format or internal error") and return
     end
@@ -136,14 +139,17 @@ class SystemtimesController < ApplicationController
     unless permission_check( "org.opensuse.yast.system.time.read")
       render ErrorResult.error( 403, 1, "no permission" ) and return
     else
-      @systemtime.currenttime = get_time
+       datetime = Time.parse get_time
+      @systemtime.currenttime = datetime.strftime("%H:%M")
+      @systemtime.date = datetime.strftime("%d/%m/%Y")
       @systemtime.is_utc = get_is_utc
       @systemtime.timezone = get_timezone
       @systemtime.validtimezones = get_validtimezones
       if @systemtime.currenttime.blank? or
-         @systemtime.is_utc.nil? or
+         @systemtime.is_utc.nil? or     # don't use blank? for boolean
          @systemtime.timezone.blank? or
-         @systemtime.validtimezones.blank?
+         @systemtime.validtimezones.blank? or
+         @systemtime.date.blank?
         render ErrorResult.error( 404, 1, "Cannot get time information" ) and return
       end
     end

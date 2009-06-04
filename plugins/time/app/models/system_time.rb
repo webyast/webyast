@@ -1,12 +1,14 @@
 class SystemTime
 
   attr_accessor :currenttime,
+                :date,
                 :timezone,
                 :is_utc,
                 :validtimezones
 
-  def initialize 
+  def initialize
      @currenttime = ""
+     @date = ""
      @timezone = ""
      @is_utc = false
      @validtimezones = ""
@@ -17,11 +19,12 @@ class SystemTime
     xml.instruct! unless options[:skip_instruct]
 
     xml.systemtime do
-      xml.tag!(:currenttime, @currenttime, {:type=>"datetime"} )
+      xml.tag!(:currenttime, @currenttime )
+      xml.tag!(:date, @date )
       xml.tag!(:timezone, @timezone )
       xml.tag!(:is_utc, @is_utc, {:type => "boolean"} )
       xml.validtimezones({:type => "array"}) do
-         @validtimezones.split( " " ).each do |timezone| 
+         @validtimezones.split( " " ).each do |timezone|
             if not timezone.blank?
                xml.timezone do
                   xml.tag!(:id, timezone)
@@ -29,7 +32,7 @@ class SystemTime
             end
          end
       end
-    end  
+    end
   end
 
   def to_json( options = {} )
