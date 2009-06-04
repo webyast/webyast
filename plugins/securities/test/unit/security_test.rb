@@ -67,4 +67,18 @@ class SecurityTest < ActiveSupport::TestCase
     assert !sec.firewall_after_startup(false), "firewall_after_startup returned true instead of false"
   end
 
+  def test_save_security_without_values
+    sec = Security.new
+    assert !sec.save
+  end
+
+#  def test_write_params
+#    Security.stubs(:firewall).with(true).returns(true)
+#    Security.stubs(:firewall_after_startup).with(true).returns(true)
+#    Security.stubs(:ssh).with(true).returns(true)
+#
+#    sec = Security.new
+#    sec.write(true, true, true)
+#    assert firewall
+#  end
 end

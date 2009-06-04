@@ -4,10 +4,10 @@ Gem::Specification.new do |spec|
 # gem name and description
 spec.name	= "yast2-webservice-tasks"
 spec.version	= "@VERSION@"
-spec.summary	= "Rake tasks shared by all Yast webservice packages."
+spec.summary	= "Rake tasks shared by all YaST webservice packages."
 
 # author
-spec.author	= "The Yast Team"
+spec.author	= "The YaST Team"
 spec.email	= "yast-devel@opensuse.org"
 spec.homepage	= "http://en.opensuse.org/YaST"
 

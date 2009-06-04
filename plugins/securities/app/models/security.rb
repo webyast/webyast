@@ -1,9 +1,12 @@
 class Security #< ActiveRecord::Base
   require "scr"
 
-  attr_reader   :firewall,
-                :firewall_after_startup,
-                :ssh
+#  validates_inclusion_of :firewall, :firewall_after_startup, :ssh, :in => [true, false, nil]
+attr_reader     :firewall,
+    :firewall_after_startup,
+    :ssh
+
+
 
   public
 
@@ -11,7 +14,7 @@ class Security #< ActiveRecord::Base
     @firewall
     @firewall_after_startup
     @ssh
-#    @scr = Scr.instance
+    @scr = Scr.instance
   end
 
   def update
@@ -42,23 +45,24 @@ class Security #< ActiveRecord::Base
     return hash.to_json
   end
 
-  private
+#  private
   def firewall?
-    cmd = Scr.instance.execute(["/sbin/rcSuSEfirewall2", "status"])
+    cmd = @scr.execute(["/sbin/rcSuSEfirewall2", "status"])
     lines = cmd[:stdout].split "\n"
     lines.each do |l|
       if l.length > 0
         if l.include? "running"
           return true
-        else
+        elsif l.include? "unused"
           return false
         end
       end
     end
+    return nil
   end
 
   def firewall_after_startup?
-    cmd = Scr.instance.execute(["/sbin/yast2", "firewall", "startup", "show"])
+    cmd = @scr.execute(["/sbin/yast2", "firewall", "startup", "show"])
     lines = cmd[:stderr].split "\n"
     lines.each do |l|
       if l.length > 0
@@ -69,20 +73,22 @@ class Security #< ActiveRecord::Base
         end
       end
     end
+    return nil
   end
 
   def ssh?
-    cmd = Scr.instance.execute(["/usr/sbin/rcsshd", "status"])
+    cmd = @scr.execute(["/usr/sbin/rcsshd", "status"])
     lines = cmd[:stdout].split "\n"
     lines.each do |l|
       if l.length > 0
         if l.include? "running"
           return true
-        else
+        elsif l.include? "unused"
           return false
         end
       end
     end
+    return nil
   end
 
   # returns true for success and false for failure
@@ -92,7 +98,7 @@ class Security #< ActiveRecord::Base
     else #if param == false        # stop firewall
       action = "stop"
     end
-    cmd = Scr.execute(["/sbin/rcSuSEfirewall2", "#{action}"])
+    cmd = @scr.execute(["/sbin/rcSuSEfirewall2", "#{action}"])
     lines = cmd[:stdout].split "\n"
     lines.each do |l|
       if l.length > 0
@@ -112,7 +118,7 @@ class Security #< ActiveRecord::Base
       action = "manual"
       verify = "Removing"
     end
-    cmd = Scr.execute(["/sbin/yast2", "firewall", "startup", "#{action}"])
+    cmd = @scr.execute(["/sbin/yast2", "firewall", "startup", "#{action}"])
     lines = cmd[:stderr].split "\n"
     lines.each do |l|
       if l.length > 0
@@ -130,7 +136,7 @@ class Security #< ActiveRecord::Base
     else        # stop sshd
       action = "stop"
     end
-    cmd = Scr.execute(["/usr/sbin/rcsshd", "#{action}"])
+    cmd = @scr.execute(["/usr/sbin/rcsshd", "#{action}"])
     lines = cmd[:stdout].split "\n"
     lines.each do |l|
       if l.length > 0
