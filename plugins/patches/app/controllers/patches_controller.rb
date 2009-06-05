@@ -55,7 +55,7 @@ class PatchesController < ApplicationController
 #--------------------------------------------------------------------------------
 
   def get_updateList
-    @patch_updates = [] 
+    patch_updates = [] 
     system_bus = DBus::SystemBus.instance
     package_kit = system_bus.service("org.freedesktop.PackageKit")
     obj = package_kit.object("/org/freedesktop/PackageKit")
@@ -67,7 +67,7 @@ class PatchesController < ApplicationController
     obj_tid_with_iface = obj_tid["org.freedesktop.PackageKit.Transaction"]
     obj_tid.default_iface = "org.freedesktop.PackageKit.Transaction"
 
-    @finished = false
+    finished = false
     obj_tid.on_signal("Package") do |line1,line2,line3|
       update = Patch.new
       update.kind = line1
@@ -77,38 +77,41 @@ class PatchesController < ApplicationController
       update.resolvable_id = columns[1]
       update.arch = columns[2]
       update.repo = columns[3]
-      @patch_updates << update
-      @finished = true
+      patch_updates << update
+      finished = true
     end
 
     obj_tid.on_signal("Error") do |u1,u2|
-      @finished = true
+      finished = true
     end
     obj_tid.on_signal("Finished") do |u1,u2|
-      @finished = true
+      finished = true
     end
     obj_tid_with_iface.GetUpdates("NONE")
 
-    unless @finished
+    unless finished
       @main = MainPkg.new
       @main << system_bus
       @main.run
     end
  
     obj_with_iface.SuggestDaemonQuit
+
+    return patch_updates
   end
 
   def get_update (id)
-    @patch_update = nil
+    patch_update = nil
     if @patch_updates.nil? || @patch_updates.empty?
-      get_updateList
+      @patch_updates = get_updateList
     end
     @patch_updates.each do |p|   
        if p.resolvable_id.to_s == id.to_s
-         @patch_update = p
+         patch_update = p
          break
        end
     end
+    return patch_update
   end
 
   def install_update (id)
@@ -128,21 +131,21 @@ class PatchesController < ApplicationController
     obj_tid_with_iface = obj_tid["org.freedesktop.PackageKit.Transaction"]
     obj_tid.default_iface = "org.freedesktop.PackageKit.Transaction"
 
-    @finished = false
+    finished = false
     obj_tid.on_signal("Package") do |line1,line2,line3|
       logger.debug "  update package: #{line2}"
     end
 
     obj_tid.on_signal("Error") do |u1,u2|
-      @finished = true
+      finished = true
       ok = false
     end
     obj_tid.on_signal("Finished") do |u1,u2|
-      @finished = true
+      finished = true
     end
     obj_tid_with_iface.UpdatePackages([updateId])
 
-    unless @finished
+    unless finished
       @main = MainPkg.new
       @main << system_bus
       if (!@main.run)
@@ -169,7 +172,7 @@ class PatchesController < ApplicationController
     unless permission_check( "org.opensuse.yast.system.patches.read")
       render ErrorResult.error(403, 1, "no permission") and return
     end
-    get_updateList
+    @patch_updates = get_updateList
   end
 
   # GET /patch_updates/1
@@ -178,7 +181,11 @@ class PatchesController < ApplicationController
     unless permission_check( "org.opensuse.yast.system.patches.read")
       render ErrorResult.error(403, 1, "no permission") and return
     end
-    get_update params[:id]
+    @patch_update = get_update params[:id]
+    if @patch_update.nil?
+      logger.error "Patch: #{params[:id]} not found."
+      render ErrorResult.error(404, 1, "Patch: #{params[:id]} not found.") and return
+    end
   end
 
   # PUT /patch_updates/1
@@ -187,10 +194,10 @@ class PatchesController < ApplicationController
     unless permission_check( "org.opensuse.yast.system.patches.install")
       render ErrorResult.error(403, 1, "no permission") and return
     end
-    get_update (id)
+    @patch_update = get_update(params[:id])
     if @patch_update.nil?
-      logger.error "Patch: #{id} not found."
-      render ErrorResult.error(404, 1, "Patch: #{id} not found.") and return
+      logger.error "Patch: #{params[:id]} not found."
+      render ErrorResult.error(404, 1, "Patch: #{params[:id]} not found.") and return
     end
     unless install_update params[:id]
       render ErrorResult.error(404, 2, "packagekit error") and return       
