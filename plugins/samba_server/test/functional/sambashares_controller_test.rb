@@ -15,7 +15,7 @@ class SambasharesControllerTest < ActionController::TestCase
   end
   
   test "access index" do
-    get :show
+    get :index
     assert_response :success
   end
 
