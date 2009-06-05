@@ -44,7 +44,7 @@ class SystemtimesController < ApplicationController
 
   def get_time
     ret = @scr.execute(["/bin/date"])
-    return "" if ret[:exit] != 0
+    return nil if ret[:exit] != 0
     ret[:stdout]
   end
 
@@ -68,6 +68,9 @@ class SystemtimesController < ApplicationController
 
   def set_time (date, time)
     #set time
+#    cmd = ["/bin/date", "--set=\"#{date} #{time}\""]
+#    logger.debug "SetTime cmd #{cmd.inspect}"
+#    @scr.execute(cmd)
     environment = [];
     hwclock = @scr.read(".sysconfig.clock.HWCLOCK");
     timezone = get_timezone
@@ -139,7 +142,11 @@ class SystemtimesController < ApplicationController
     unless permission_check( "org.opensuse.yast.system.time.read")
       render ErrorResult.error( 403, 1, "no permission" ) and return
     else
-      datetime = Time.parse get_time #!!!umwandeln
+    begin
+      datetime = Time.parse get_time
+    rescue
+      render ErrorResult.error( 404, 1, "Cannot parse time information" ) and return
+    end
       @systemtime.currenttime = datetime.strftime("%H:%M")
       @systemtime.date = datetime.strftime("%d/%m/%Y")
       @systemtime.is_utc = get_is_utc
@@ -153,6 +160,7 @@ class SystemtimesController < ApplicationController
         render ErrorResult.error( 404, 1, "Cannot get time information" ) and return
       end
     end
+
   end
 
 end
