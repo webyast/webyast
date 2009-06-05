@@ -114,21 +114,23 @@ class SystemtimesController < ApplicationController
     if params[:time] != nil
       @systemtime.timezone = params[:time][:timezone]
       @systemtime.is_utc = params[:time][:is_utc]
-      @systemtime.currenttime = params[:time][:currenttime]
-      @systemtime.date = params[:time][:date]
-      logger.debug "UPDATED: #{@systemtime.inspect}"
+#      @systemtime.currenttime = params[:time][:currenttime]
+#      @systemtime.date = params[:time][:date]
 
-      time = Time.parse(@systemtime.currenttime).strftime("%H:%M:%S")
-      date = Time.parse(@systemtime.date).strftime("%m/%d/%y")
+      begin
+        @systemtime.currenttime = Time.parse(params[:time][:currenttime]).strftime("%H:%M:%S")
+        @systemtime.date = Time.parse(params[:time][:date]).strftime("%m/%d/%y")
+      rescue
+        render ErrorResult.error(404, 2, "format error in time or date") and return
+      end
+      logger.debug "UPDATED: #{@systemtime.inspect}"
       if @systemtime.timezone.blank? or
-         @systemtime.is_utc.nil? or    # don't use blank? for boolean
-         @systemtime.currenttime.blank? or
-         @systemtime.date.blank?
+         @systemtime.is_utc.nil?     # don't use blank? for boolean
         render ErrorResult.error(404, 2, "format or internal error") and return
       end
       set_is_utc @systemtime.is_utc
       set_timezone @systemtime.timezone
-      set_time(date, time)
+      set_time(@systemtime.date, @systemtime.currenttime)
     else
       render ErrorResult.error(404, 2, "format or internal error") and return
     end
@@ -156,11 +158,9 @@ class SystemtimesController < ApplicationController
       @systemtime.is_utc = get_is_utc
       @systemtime.timezone = get_timezone
       @systemtime.validtimezones = get_validtimezones
-      if @systemtime.currenttime.blank? or
-         @systemtime.is_utc.nil? or     # don't use blank? for boolean
+      if @systemtime.is_utc.nil?      # don't use blank? for boolean
          @systemtime.timezone.blank? or
-         @systemtime.validtimezones.blank? or
-         @systemtime.date.blank?
+         @systemtime.validtimezones.blank?
         render ErrorResult.error( 404, 1, "Cannot get time information" ) and return
       end
     end
