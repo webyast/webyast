@@ -35,10 +35,14 @@ class SystemtimesController < ApplicationController
   end
 
   def get_is_utc
-    if @scr.read(".sysconfig.clock.HWCLOCK") == "-u" then
-      return true
-    else
-      return false
+    cmd = @scr.read(".sysconfig.clock.HWCLOCK")
+    case cmd
+      when "-u"    # is utc
+        return true
+      when nil     # failure
+        return nil
+      else         # no utc
+        return false
     end
   end
 
@@ -142,11 +146,11 @@ class SystemtimesController < ApplicationController
     unless permission_check( "org.opensuse.yast.system.time.read")
       render ErrorResult.error( 403, 1, "no permission" ) and return
     else
-    begin
-      datetime = Time.parse get_time
-    rescue
-      render ErrorResult.error( 404, 1, "Cannot parse time information" ) and return
-    end
+      begin
+        datetime = Time.parse get_time
+      rescue
+        render ErrorResult.error( 404, 1, "Cannot parse time information" ) and return
+      end
       @systemtime.currenttime = datetime.strftime("%H:%M")
       @systemtime.date = datetime.strftime("%d/%m/%Y")
       @systemtime.is_utc = get_is_utc
