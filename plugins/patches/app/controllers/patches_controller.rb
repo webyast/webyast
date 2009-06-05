@@ -7,7 +7,7 @@ require 'singleton'
 # = MainPkg event loop class.
 #
 # Class that takes care of handling message and signal events
-# asynchronously.  
+# asynchronously.
 class MainPkg
   # Create a new main event loop.
   def initialize
@@ -32,7 +32,7 @@ class MainPkg
           b.process(m)
 	  if m.member == "Finished" || m.member == "Errorcode"
             finished = true
-            if m.member == "Error" 
+            if m.member == "Error"
                ok = false
             end
           end
@@ -55,10 +55,11 @@ class PatchesController < ApplicationController
 #--------------------------------------------------------------------------------
 
   def get_updateList
-    patch_updates = [] 
+    patch_updates = []
     system_bus = DBus::SystemBus.instance
     package_kit = system_bus.service("org.freedesktop.PackageKit")
     obj = package_kit.object("/org/freedesktop/PackageKit")
+#logger.debug obj.inspect
     obj.introspect
     obj_with_iface = obj["org.freedesktop.PackageKit"]
     tid = obj_with_iface.GetTid
@@ -69,14 +70,8 @@ class PatchesController < ApplicationController
 
     finished = false
     obj_tid.on_signal("Package") do |line1,line2,line3|
-      update = Patch.new
-      update.kind = line1
-      update.summary = line3
       columns = line2.split ";"
-      update.name = columns[0]
-      update.resolvable_id = columns[1]
-      update.arch = columns[2]
-      update.repo = columns[3]
+      update = Patch.new(columns[1], line1, columns[0], columns[2], columns[3], line3)
       patch_updates << update
       finished = true
     end
@@ -94,7 +89,7 @@ class PatchesController < ApplicationController
       @main << system_bus
       @main.run
     end
- 
+
     obj_with_iface.SuggestDaemonQuit
 
     return patch_updates
@@ -105,7 +100,7 @@ class PatchesController < ApplicationController
     if @patch_updates.nil? || @patch_updates.empty?
       @patch_updates = get_updateList
     end
-    @patch_updates.each do |p|   
+    @patch_updates.each do |p|
        if p.resolvable_id.to_s == id.to_s
          patch_update = p
          break
@@ -119,7 +114,7 @@ class PatchesController < ApplicationController
 
     updateId = "#{@patch_update.name};#{@patch_update.resolvable_id};#{@patch_update.arch};#{@patch_update.repo}"
     logger.debug "Install Update: #{updateId}"
-   
+
     system_bus = DBus::SystemBus.instance
     package_kit = system_bus.service("org.freedesktop.PackageKit")
     obj = package_kit.object("/org/freedesktop/PackageKit")
@@ -200,7 +195,7 @@ class PatchesController < ApplicationController
       render ErrorResult.error(404, 1, "Patch: #{params[:id]} not found.") and return
     end
     unless install_update params[:id]
-      render ErrorResult.error(404, 2, "packagekit error") and return       
+      render ErrorResult.error(404, 2, "packagekit error") and return
     end
     render :show
   end
