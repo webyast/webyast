@@ -69,14 +69,13 @@ class PatchesController < ApplicationController
 
     finished = false
     obj_tid.on_signal("Package") do |line1,line2,line3|
-      update = Patch.new
-      update.kind = line1
-      update.summary = line3
       columns = line2.split ";"
-      update.name = columns[0]
-      update.resolvable_id = columns[1]
-      update.arch = columns[2]
-      update.repo = columns[3]
+      update = Patch.new( columns[1], 
+                          line1, 
+                          columns[0],
+                          columns[2], 
+                          columns[3], 
+                          line3)
       patch_updates << update
       finished = true
     end
