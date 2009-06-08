@@ -1,31 +1,29 @@
 class Security #< ActiveRecord::Base
   require "scr"
 
-#  validates_inclusion_of :firewall, :firewall_after_startup, :ssh, :in => [true, false, nil]
-attr_reader     :firewall,
-    :firewall_after_startup,
-    :ssh
-
-
+  attr_reader  :firewall,
+               :firewall_on_startup,
+               :ssh
 
   public
 
   def initialize
-    @firewall
-    @firewall_after_startup
-    @ssh
     @scr = Scr.instance
+    @firewall = firewall?
+    @firewall_on_startup = firewall_on_startup?
+    @ssh = ssh?
   end
 
   def update
     @firewall = firewall?
-    @firewall_after_startup = firewall_after_startup?
+    @firewall_on_startup = firewall_on_startup?
     @ssh = ssh?
   end
 
-  def write(a, b, c) #(a=firewall?, ..)
+  #firewall,firewall_on_startup,ssh
+  def write(a, b, c)
     @firewall = firewall(a)
-    @firewall_after_startup = firewall_after_startup(b)
+    @firewall_on_startup = firewall_on_startup(b)
     @ssh = ssh(c)
   end
 
@@ -36,7 +34,7 @@ attr_reader     :firewall,
     xml.security do
       xml.tag!(:ssh, @ssh, {:type => "boolean"})
       xml.tag!(:firewall, @firewall, {:type => "boolean"})
-      xml.tag!(:firewall_after_startup, @firewall_after_startup, {:type => "boolean"})
+      xml.tag!(:firewall_on_startup, @firewall_on_startup, {:type => "boolean"})
     end
   end
 
@@ -61,7 +59,7 @@ attr_reader     :firewall,
     return nil
   end
 
-  def firewall_after_startup?
+  def firewall_on_startup?
     cmd = @scr.execute(["/sbin/yast2", "firewall", "startup", "show"])
     lines = cmd[:stderr].split "\n"
     lines.each do |l|
@@ -107,10 +105,11 @@ attr_reader     :firewall,
         end #FIXME else raise ..
       end
     end
+    return nil
   end
 
   # returns true for success and false for failure
-  def firewall_after_startup(param)
+  def firewall_on_startup(param)
     if param    # enable
       action = "atboot"
       verify = "Enabling"
@@ -127,6 +126,7 @@ attr_reader     :firewall,
         end #FIXME else raise ..
       end
     end
+    return nil
   end
 
   # returns true for success and false for failure
@@ -145,5 +145,6 @@ attr_reader     :firewall,
         end #FIXME else raise ..
       end
     end
+    return nil
   end
 end
