@@ -30,7 +30,7 @@ public
        logger.info "UPDATED: #{first_language}, #{second_languages.inspect}"
 
        if first_language.blank?
-         logger.warn(" blank first language")
+         logger.warn("blank first language")
          render ErrorResult.error(404, 2, "format or internal error") and return
        end
        @language.first_language = first_language
@@ -40,7 +40,8 @@ public
 
        
     else
-       render ErrorResult.error(404, 2, "format or internal error during parameters passing") and return
+       logger.warn("No argument language")
+       render ErrorResult.error(404, 2, "format or internal error") and return
     end
     render :show
   end

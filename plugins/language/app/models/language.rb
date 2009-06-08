@@ -20,7 +20,7 @@ private
      if ret && ret[:exit] == 0
        @available = ret[:stderr]
      else
-       logger.error "yast2 language list returns error"
+       Rails.logger.error "yast2 language list returns error"
        @available = ""
      end
   end
@@ -39,7 +39,7 @@ private
          end
        end
      else
-       logger.error "yast2 language list returns summary"
+       Rails.logger.error "yast2 language list returns summary"
        @second_languages = ""
        @first_language = ""
      end
