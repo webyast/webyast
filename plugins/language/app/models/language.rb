@@ -4,9 +4,76 @@ class Language
                 :second_languages,
                 :available
 
+#--------------------------------------------------------------------------------
+#
+#local methods
+#
+#--------------------------------------------------------------------------------
+private
+#
+# get
+#
+
+
+  def fill_available
+     ret = Scr.instance.execute(["/sbin/yast2", "language", "list"])
+     if ret && ret[:exit] == 0
+       @available = ret[:stderr]
+     else
+       Rails.logger.error "yast2 language list returns error"
+       @available = ""
+     end
+  end
+
+  def get_languages
+     ret = Scr.instance.execute(["/sbin/yast2", "language", "summary"])
+     if ret && ret[:exit] == 0
+       lines = ret[:stderr].split "\n"
+       lines.each do |s|
+         column = s.split(" ")
+         case column[0]
+           when "Current"
+             @first_language = column[2]
+           when "Additional"
+             @second_languages = column[2]
+         end
+       end
+     else
+       Rails.logger.error "yast2 language list returns summary"
+       @second_languages = ""
+       @first_language = ""
+     end
+  end
+
+#
+# set
+#
+
+  def write_first_language
+    Scr.instance.execute(["/sbin/yast2", "language", "set",  "lang=#{@first_language}", "no_packages"])
+  end
+
+  def write_second_languages
+    Scr.instance.execute(["/sbin/yast2", "language", "set", "languages=#{@second_languages.join(",")}", "no_packages"])
+  end
+
+
+
+public
   def initialize 
      @second_languages = ""
      @available = ""
+  end
+
+  def read
+    initialize
+    fill_available
+    get_languages
+  end
+
+  def safe ()
+    write_first_language
+    write_second_languages
   end
 
   def to_xml( options = {} )

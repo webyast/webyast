@@ -161,5 +161,36 @@ EOF
     end
     escape "YaST D-Bus does not provide the right data", "reinstall #{package}-#{version}" unless scr
   end
+
+  #
+  # plugin test. Each plugin will be tested for a "GET index" call. This call has to return "success"
+  #
+
+  test "all available plugins are working" do
+     Dir.glob(File.join(File.dirname(__FILE__), '../../../plugins', "**/*_controller.rb")).each do |controller|
+       modulename = File.basename(controller, ".rb").split("_").collect { |i| i.capitalize }.join
+       modulepath = File.dirname(controller).split("/")
+       # add Namespaces to the modulename. 
+       # They are defined as subdirectories in the controller directory
+       while modulepath
+         namespace = modulepath.pop
+         if namespace == "controllers"
+           modulepath = nil
+         else
+           modulename = namespace.capitalize + "::" + modulename
+         end
+       end
+       ok = system %(cd #{File.dirname(__FILE__)}; export RAILS_PARENT=../../; ruby plugin_test/functional/plugin_index_test.rb --plugin #{modulename})
+       if !ok
+          puts "Trying \"GET show\" cause some plugins do not support \"GET index\"..."
+          ok = system %(cd #{File.dirname(__FILE__)}; export RAILS_PARENT=../../; ruby plugin_test/functional/plugin_show_test.rb --plugin #{modulename})
+       end
+       escape "plugin #{modulename} does not work correctly", "check the logfiles" unless ok
+     end
+  end
+  
+  puts ""
+  puts "**************************************"
   puts "All fine, rest-service is ready to run"
+  puts "**************************************"
 end

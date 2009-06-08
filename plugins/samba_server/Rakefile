@@ -4,7 +4,12 @@ require 'rake/rdoctask'
 require 'rake/packagetask'
 
 # load all Yast webservice specific tasks
-require 'tasks/webservice'
+begin
+    require 'tasks/webservice'
+rescue LoadError => e
+    $stderr.puts "WARNING: 'yast2-webservice-tasks' gem is missing, some tasks will be missing or can be broken."
+    $stderr.puts "Install 'yast2-webservice-tasks' Ruby gem from 'rubygem-yast2-webservice-tasks' RPM package.\n"
+end
 
 desc 'Default: run unit tests.'
 task :default => :test
