@@ -1,5 +1,6 @@
 <h1><%= @node -%> resources</h1>
-<% @resources.each do |interface,implementations|
+<% @resources.keys.sort.each do |interface|
+     implementations = @resources[interface]
      implementations.each do |implementation|
        action = (implementation[:singular] ? :show : :index)
        controller = implementation[:controller] -%>
