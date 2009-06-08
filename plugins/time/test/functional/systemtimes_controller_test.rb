@@ -18,7 +18,7 @@ class SystemtimesControllerTest < ActionController::TestCase
     Scr.any_instance.stubs(:read).with(".sysconfig.clock.TIMEZONE").returns("Europe/Berlin")
     Scr.any_instance.stubs(:read).with(".sysconfig.clock.HWCLOCK").returns("-u")
   end
-  
+
   test "access show" do
     get :show
     assert_response :success
@@ -30,7 +30,7 @@ class SystemtimesControllerTest < ActionController::TestCase
     get :show, :format => :xml
     assert_equal mime.to_s, @response.content_type
   end
-  
+
   test "access show json" do
     mime = Mime::JSON
     @request.accept = mime.to_s
@@ -51,12 +51,13 @@ class SystemtimesControllerTest < ActionController::TestCase
   end
 
   test "writing values back" do
-    Scr.any_instance.stubs(:execute).with(["/sbin/hwclock", "--set", "-u", "--date=\"5/29/2009", "4:49:0\""], ["TZ=Europe/Berlin"]).returns()
+    Scr.any_instance.stubs(:execute).with(["/sbin/hwclock", "--set", "-u", "--date=\"05/29/09 04:49:00\""], ["TZ=Europe/Berlin"]).returns()
     Scr.any_instance.stubs(:execute).with(['/sbin/hwclock', '--hctosys', '-u']).returns()
     Scr.any_instance.stubs(:write).with(".sysconfig.clock.TIMEZONE","Europe/Berlin").returns()
     Scr.any_instance.stubs(:write).with(".sysconfig.clock.HWCLOCK","-u").returns()
-    current_time = Time.parse "Fri May 29 04:49:00 UTC 2009"
-    post :create, :time=>{"timezone"=>"Europe/Berlin", "is_utc"=>true, "currenttime"=>current_time, "validtimezones"=>[]}
+    current_time = Time.parse("Fri May 29 04:49:00 UTC 2009").strftime("%H:%M:%S")
+    date = Time.parse("Fri May 29 04:49:00 UTC 2009").strftime("%m/%d/%y")
+    post :create, :time=>{"timezone"=>"Europe/Berlin", "is_utc"=>true, "currenttime"=>current_time, "date"=>date, "validtimezones"=>[]}
     assert_response :success
   end
 
