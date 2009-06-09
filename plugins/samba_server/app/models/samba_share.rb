@@ -54,25 +54,20 @@ class SambaShare
     def update_attributes(attribs)
 	return false if attribs.nil?
 
-	if attribs.has_key?(:id)
-	    new_name = attribs[:id]
+	new_params = {}
 
-	    if new_name.class != :String
+	attribs.each do |pair|
+	    attr_name = pair[:name]
+	    attr_value = pair[:value]
+
+	    if attr_name && attr_value
+		new_params[attr_name] = attr_value
+	    else
 		return false
 	    end
-
-	    @id = new_name
 	end
 
-	if attribs.has_key?(:parameters)
-	    new_params = attribs[:parameters]
-
-	    if new_params.class != :Hash
-		return false
-	    end
-
-	    @parameters = new_params
-	end
+	@parameters = new_params
 
 	return true
     end
@@ -83,7 +78,15 @@ class SambaShare
     end
 
     def edit
-	return YastService.Call("YaPI::Samba::EditShare", @id, @parameters) if !@id.blank?
+	# This is a workaround for ruby-dbus - it cannot send hash<string, variant> properly,
+        # converting the values from simple string to array [ "string, <value> ] helps
+	# (the code for sending variants expects type + value pair)
+	parameters = {}
+	@parameters.each do |key, value|
+	    parameters[key] = [ "string", value ]
+	end
+
+	return YastService.Call("YaPI::Samba::EditShare", @id, parameters) if !@id.blank?
 	return false
     end
 
@@ -102,14 +105,12 @@ class SambaShare
 	    xml.tag!(:id, @id)
 
 	    if !@parameters.blank?
-		xml.parameters {
-		    @parameters.each do |key,value|
-			xml.parameter {
-			    xml.tag!(:name, key)
-			    xml.tag!(:value, value)
-			}
-		    end
-		}
+		@parameters.each do |key,value|
+		    xml.parameters {
+			xml.tag!(:name, key)
+			xml.tag!(:value, value)
+		    }
+		end
 	    end
 	end
     end

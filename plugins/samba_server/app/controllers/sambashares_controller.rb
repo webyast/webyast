@@ -79,8 +79,6 @@ class SambasharesController < ApplicationController
     # PUT /sambashares/share.xml
     # PUT /sambashares/share.json
     def update
-	puts "** Update"
-	debugger
 	if !permission_check("org.opensuse.yast.modules.yapi.samba.editshare")
 	    render ErrorResult.error(403, 1, "no permission") and return
 	end
@@ -92,13 +90,11 @@ class SambasharesController < ApplicationController
 	    render ErrorResult.error(404, 2, "share not found") and return
 	end
 
-	puts "*** Found share: #{@share}"
-
-	render ErrorResult.error(403, 1, "share not found") and return if @share.properties.blank?
-
-	puts "*** New Params: #{params}"
-
-	if !@share.update_attributes(params[:id])
+	begin
+	    if !@share.update_attributes(params[:sambashares][:parameters])
+		render ErrorResult.error(404, 2, "input error") and return
+	    end
+	rescue Exception => e
 	    render ErrorResult.error(404, 2, "input error") and return
 	end
 
