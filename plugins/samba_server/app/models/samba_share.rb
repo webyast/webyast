@@ -4,12 +4,12 @@ require "yast_service"
 
 class SambaShare
 
-    attr_accessor   :name,
+    attr_accessor   :id,
 		    :parameters
 
     def initialize
-	# share name
-	@name = nil
+	# share name = id
+	@id = nil
 
 	# attributes
 	@parameters = nil
@@ -29,7 +29,7 @@ class SambaShare
 
 	share_names.each { |sh_name|
 	    share = SambaShare.new
-	    share.name = sh_name
+	    share.id = sh_name
 
 	    shares << share
 	}
@@ -38,9 +38,9 @@ class SambaShare
     end
 
     def find
-	return false if @name.blank? 
+	return false if @id.blank? 
 
-	share_properties = YastService.Call("YaPI::Samba::GetShare", @name)
+	share_properties = YastService.Call("YaPI::Samba::GetShare", @id)
 
 	if share_properties.nil? || share_properties == {}
 	    @parameters = nil
@@ -52,14 +52,16 @@ class SambaShare
     end
 
     def update_attributes(attribs)
-	if attribs.has_key?(:name)
-	    new_name = attribs[:name]
+	return false if attribs.nil?
+
+	if attribs.has_key?(:id)
+	    new_name = attribs[:id]
 
 	    if new_name.class != :String
 		return false
 	    end
 
-	    @name = new_name
+	    @id = new_name
 	end
 
 	if attribs.has_key?(:parameters)
@@ -76,28 +78,28 @@ class SambaShare
     end
 
     def add
-	return YastService.Call("YaPI::Samba::AddShare", @name, @parameters) if !@name.blank?
+	return YastService.Call("YaPI::Samba::AddShare", @id, @parameters) if !@id.blank?
 	return false
     end
 
     def edit
-	return YastService.Call("YaPI::Samba::EditShare", @name, @parameters) if !@name.blank?
+	return YastService.Call("YaPI::Samba::EditShare", @id, @parameters) if !@id.blank?
 	return false
     end
 
     def delete
-	return YastService.Call("YaPI::Samba::DeleteShare", @name) if !@name.blank?
+	return YastService.Call("YaPI::Samba::DeleteShare", @id) if !@id.blank?
 	return false
     end
 
     def to_xml( options = {} )
-	return nil if @name.nil?
+	return nil if @id.nil?
 
 	xml = options[:builder] ||= Builder::XmlMarkup.new(options)
 	xml.instruct! unless options[:skip_instruct]
 
 	xml.share do
-	    xml.tag!(:name, @name)
+	    xml.tag!(:id, @id)
 
 	    if !@parameters.blank?
 		xml.parameters {

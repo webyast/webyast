@@ -33,7 +33,7 @@ class SambasharesController < ApplicationController
 	end
 
 	@share = SambaShare.new
-	@share.name = params[:id]
+	@share.id = params[:id]
 
 	if !@share.find
 	    render ErrorResult.error(404, 2, "share not found") and return
@@ -59,7 +59,7 @@ class SambasharesController < ApplicationController
 		render ErrorResult.error(404, 2, "input error") and return
 	    end
 
-	    if !@share.name.blank?
+	    if !@share.id.blank?
 		if !@share.add
 		    render ErrorResult.error(404, 3, "adding share failed") and return
 		end
@@ -79,13 +79,24 @@ class SambasharesController < ApplicationController
     # PUT /sambashares/share.xml
     # PUT /sambashares/share.json
     def update
+	puts "** Update"
+	debugger
 	if !permission_check("org.opensuse.yast.modules.yapi.samba.editshare")
 	    render ErrorResult.error(403, 1, "no permission") and return
 	end
 
-	@share = SambaShare.find(params[:id][:name])
+	@share = SambaShare.new
+	@share.id = params[:id]
+
+	if !@share.find
+	    render ErrorResult.error(404, 2, "share not found") and return
+	end
+
+	puts "*** Found share: #{@share}"
 
 	render ErrorResult.error(403, 1, "share not found") and return if @share.properties.blank?
+
+	puts "*** New Params: #{params}"
 
 	if !@share.update_attributes(params[:id])
 	    render ErrorResult.error(404, 2, "input error") and return
@@ -111,7 +122,7 @@ class SambasharesController < ApplicationController
 	end
 
 	@share = SambaShare.new 	
-	@share.name = params[:id]
+	@share.id = params[:id]
 
 	if !@share.delete
 	    render ErrorResult.error(404, 2, "delete failed") and return
