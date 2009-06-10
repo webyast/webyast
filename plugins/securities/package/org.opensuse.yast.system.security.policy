@@ -8,7 +8,7 @@
   <vendor_url>http://en.opensuse.org/YAST</vendor_url>
 
 <!--
-Rights for security
+Rights for languages
 -->
 
   <action id="org.opensuse.yast.system.security.read">
