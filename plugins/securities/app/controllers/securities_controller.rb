@@ -17,25 +17,14 @@ class SecuritiesController < ApplicationController
       render ErrorResult.error(403, 1, "no permission") and return
     end
 
-    respond_to do |format|
-      @security = Security.new
-        if params[:security] != nil
-          @security.write(params[:security][:firewall], params[:security][:firewall_after_startup], params[:security][:ssh])
-        else
-          render ErrorResult.error(404, 2, "format or internal error") and return
-        end
-
-      format.html do
-        render :xml => @security.to_xml( :root => "security",
-          :dasherize => false ), :location => "none" #return xml value only
-      end
-      format.xml do
-        render :xml => @security.to_xml( :root => "security",
-          :dasherize => false ), :location => "none"
-      end
-      format.json do
-        render :json => @security.to_json , :location => "none"
-      end
+    # get security object and set values
+    @security = Security.new
+    if params[:security] != nil
+      @security.write(params[:security][:firewall], params[:security]\
+                    [:firewall_after_startup], params[:security][:ssh])
+      logger.debug "UPDATED: #{@security.inspect}"
+    else
+      render ErrorResult.error(404, 2, "format or internal error") and return
     end
   end
 
@@ -53,6 +42,7 @@ class SecuritiesController < ApplicationController
     else
       @security = Security.new
       @security.update
+      logger.debug "SHOW: #{@security.inspect}"
     end
   end
 end

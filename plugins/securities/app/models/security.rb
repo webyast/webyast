@@ -1,10 +1,9 @@
 class Security #< ActiveRecord::Base
   require "scr"
 
-#  validates_inclusion_of :firewall, :firewall_after_startup, :ssh, :in => [true, false, nil]
-attr_reader     :firewall,
-    :firewall_after_startup,
-    :ssh
+  attr_reader   :firewall,
+                :firewall_after_startup,
+                :ssh
 
 
 
@@ -23,6 +22,7 @@ attr_reader     :firewall,
     @ssh = ssh?
   end
 
+  #firewall,firewall_on_startup,ssh
   def write(a, b, c) #(a=firewall?, ..)
     @firewall = firewall(a)
     @firewall_after_startup = firewall_after_startup(b)
