@@ -55,7 +55,7 @@ class SambasharesController < ApplicationController
 	if !permission_check("org.opensuse.yast.modules.yapi.samba.addshare")
 	    render ErrorResult.error(403, 1, "no permission") and return
 	else
-	    if !@share.update_attributes(params[:id])
+	    if !@share.update_attributes(params[:sambashares][:parameters], true)
 		render ErrorResult.error(404, 2, "input error") and return
 	    end
 

@@ -51,41 +51,56 @@ class SambaShare
 	end
     end
 
-    def update_attributes(attribs)
+    def update_attributes(attribs, update_id = false)
 	return false if attribs.nil?
 
 	new_params = {}
+	new_id = nil
 
 	attribs.each do |pair|
 	    attr_name = pair[:name]
 	    attr_value = pair[:value]
 
 	    if attr_name && attr_value
-		new_params[attr_name] = attr_value
+		# set the id
+		if attr_name == "name"
+		    new_id = attr_value
+		else
+		    new_params[attr_name] = attr_value
+		end
 	    else
 		return false
 	    end
 	end
+
+	@id = new_id if update_id && !new_id.nil?
 
 	@parameters = new_params
 
 	return true
     end
 
-    def add
-	return YastService.Call("YaPI::Samba::AddShare", @id, @parameters) if !@id.blank?
-	return false
-    end
-
-    def edit
+    def convert_map(map)
 	# This is a workaround for ruby-dbus - it cannot send hash<string, variant> properly,
         # converting the values from simple string to array [ "string, <value> ] helps
 	# (the code for sending variants expects type + value pair)
 	parameters = {}
-	@parameters.each do |key, value|
+	map.each do |key, value|
 	    parameters[key] = [ "string", value ]
 	end
 
+	return parameters
+    end
+
+
+    def add
+	parameters = convert_map(@parameters)
+	return YastService.Call("YaPI::Samba::AddShare", @id, parameters) if !@id.blank?
+	return false
+    end
+
+    def edit
+	parameters = convert_map(@parameters)
 	return YastService.Call("YaPI::Samba::EditShare", @id, parameters) if !@id.blank?
 	return false
     end
