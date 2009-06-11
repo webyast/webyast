@@ -20,27 +20,21 @@ public
 
     @language = Language.new
     if params.has_key?(:language)
-       second_languages = []
-       first_language = params[:language][:first_language]
-       if params[:language][:second_languages]
-         params[:language][:second_languages].each do |lang|
-           second_languages << lang[:id]
-         end
+      #fill by one thing to allow update by one item e.g. via ajax
+       if params[:language][:current]
+         @language.language = params[:language][:current]
+         logger.info("set language to #{@language.language}")
        end
-       logger.info "UPDATED: #{first_language}, #{second_languages.inspect}"
-
-       if first_language.blank?
-         logger.warn("blank first language")
-         render ErrorResult.error(404, 2, "format or internal error") and return
+       if params[:language][:utf8]
+         @language.utf8 = params[:language][:utf8]=="true"
+         logger.info("set utf8 to #{@language.utf8}")
        end
-       @language.first_language = first_language
-       @language.second_languages = second_languages
-
-       @language.safe()
-
-       
+       if params[:language][:rootlocale]
+         @language.rootlocale = params[:language][:rootlocale]
+         logger.info("set rootlocale to #{@language.rootlocale}")
+       end
     else
-       logger.warn("No argument language")
+       logger.warn("No argument to update")
        render ErrorResult.error(404, 2, "format or internal error") and return
     end
     render :show
@@ -52,12 +46,8 @@ public
 
 
   def show
-    unless permission_check( "org.opensuse.yast.system.language.read")
-      render ErrorResult.error(403, 1, "no permission") and return
-    end
 
     @language = Language.new
-    @language.read
 
   end
 

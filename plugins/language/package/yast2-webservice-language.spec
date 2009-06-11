@@ -23,6 +23,7 @@ Source1:        org.opensuse.yast.system.language.policy
 BuildRoot:      %{_tmppath}/%{name}-%{version}-build
 BuildArch:      noarch
 BuildRequires:  rubygem-mocha
+Requires:       yast2-country >= 2.18.7
 
 #
 %define pkg_user yastws
