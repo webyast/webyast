@@ -4,6 +4,11 @@ require 'rubygems'
 require "scr"
 require 'mocha'
 
+# Prevent contacting the system bus
+# This looks ugly but the stubs(:initialize) below causes a warning
+class Scr
+  def initialize() end
+end
 
 class ConfigNtpControllerTest < ActionController::TestCase
   fixtures :accounts
@@ -12,7 +17,8 @@ class ConfigNtpControllerTest < ActionController::TestCase
     @request = ActionController::TestRequest.new
     # http://railsforum.com/viewtopic.php?id=1719
     @request.session[:account_id] = 1 # defined in fixtures
-    Scr.any_instance.stubs(:initialize)
+
+#    Scr.stubs(:initialize)
     Scr.any_instance.stubs(:execute).with(["/sbin/yast2",  "ntp-client",  "list"]).returns({:stderr=>"Server ntp1\nServer ntp2\nServer ntp3\n", :exit=>16, :stdout=>""})
     Scr.any_instance.stubs(:execute).with(["/sbin/yast2",  "ntp-client",  "status"]).returns({:stderr=>"NTP daemon is enabled.\n", :exit=>16, :stdout=>""})
 
