@@ -137,9 +137,9 @@ test -r /usr/sbin/yastws || { echo "Creating link /usr/sbin/yastws";
 # create database 
 #
 cd srv/www/%{pkg_user}
-rake db:migrate
-chgrp yastws db db/*.sqlite*
-chown yastws db db/*.sqlite*
+chown yastws: db db/*.sqlite* db/schema.rb
+# it writes to the log, don't leave it to root
+su %{pkg_user} -s /bin/sh -c "rake db:migrate"
 
 %preun
 %stop_on_removal %{pkg_user}
