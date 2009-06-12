@@ -4,11 +4,12 @@ class ServicesController < ApplicationController
   private
   def init_services
     services = Hash.new
-    Lsbservice.all.each do |d| 
+    Lsbservice.mock_each do |d| 
       begin
         service = Lsbservice.new d
         services[service.link] = service
-      rescue # Don't fail on non-existing service. Should be more specific.
+      rescue Exception => e # Don't fail on non-existing service. Should be more specific.
+        logger.debug e
       end
     end
     session['services'] = services

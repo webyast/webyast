@@ -9,7 +9,7 @@ class CommandsController < ApplicationController
   private
   def init_services
     services = Hash.new
-    Lsbservice.all.each do |d|
+    Lsbservice.mock_each do |d|
       begin
         service = Lsbservice.new d
         services[service.link] = service

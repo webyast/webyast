@@ -10,16 +10,24 @@ end
 class Lsbservice
   PREFIX = '/etc/init.d/'
   
+  # Iterates over all service links
+  # Makes up some because the real ones are too many
+  # to store in a session cookie (?!?!)    
+  def self.mock_each
+    items = ["cron", "cups", "gpm", "ntp", "random", "smbfs", "sshd", "nfs",
+      "java.binfmt_misc",
+      "autofs", "apache2", "avahi-daemon", "SuSEfirewall2_setup", "pure-ftpd" ]
+    items.each {|i| yield i}
+  end
+    
   #
   # iterates over all service links
   #
   def self.each
-#    Dir.entries(PREFIX).each do |d|
-     ["cron", "cups", "gpm", "ntp", "random", "smbfs", "sshd", "nfs",
-      "autofs", "apache2", "avahi-daemon", "SuSEfirewall2" ].each do |d|
+    Dir.foreach(PREFIX) do |d|
       next if d[0,1] == '.'
-      next if d == "README"
-      next if d == "reboot"
+      # halt kills the X session
+      next if %w(README boot halt rc reboot skeleton skeleton.compat).include? d
       next if File.directory?( PREFIX+d )
       yield d
     end
@@ -30,9 +38,9 @@ class Lsbservice
   #  returns array of all available services
   #
   
-  def Lsbservice.all
+  def self.all
     result = []
-    Lsbservice::each do |d|
+    each do |d|
       result << d
     end
     result
@@ -65,7 +73,7 @@ class Lsbservice
     @link = link
     @commands = []
     @path = PREFIX+link
-    raise "Unexisting service" unless File.exists?( path )
+    raise "Nonexistent service #{link}" unless File.exists?( path )
     if File.executable?( path )
       # run init script to get its 'Usage' line
       IO.popen( path, 'r+' ) do |pipe|
@@ -74,7 +82,7 @@ class Lsbservice
 	  l = pipe.read
 	  case l
 	  when /Usage:\s*(\S*)\s*\{([^\}]*)\}/
-	    	  STDERR.puts "USAGE: #{$1}, #{$2}"
+#	    	  STDERR.puts "USAGE: #{$1}, #{$2}"
 	    @path = $1
 	    @commands = $2.split("|")
 	    break
