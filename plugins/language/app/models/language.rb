@@ -1,15 +1,15 @@
 class Language 
 @@available = []
-attr_accessor :language,
+attr_reader :language,
               :utf8,
-              :rootlocale
-attr_reader   :available
+              :rootlocale,
+              :available
 #--------------------------------------------------------------------------------
 #
 #local methods
 #
 #--------------------------------------------------------------------------------
-private
+public
 #
 # get
 #
@@ -17,13 +17,9 @@ private
 
   def fill_available
      @@available = YastService.Call("YaPI::LANGUAGE::GetLanguages")
-     if @@available.empty?
-       Rails.logger.error "yast2 language list not loaded"
-       @@available = []
-     end
   end
 
-  def fill_language
+  def fill_language    
     @language = YastService.Call("YaPI::LANGUAGE::GetCurrentLanguage")
   end
 
@@ -41,7 +37,7 @@ private
 public
   def language=(arg)
     @language=arg
-    unless YastService.Call("YaPI::LANGUAGE::SetCurrentLanguage",@language)
+    unless YastService.Call("YaPI::LANGUAGE::SetCurrentLanguage",arg)
       Rails.logger.error "yast2 language not set"
     end
   end
@@ -60,12 +56,6 @@ public
   end
   
   def initialize
-    if @@available.empty?
-      fill_available
-    end
-    fill_language
-    fill_rootlocale
-    fill_utf8
   end
 
   def to_xml( options = {} )
