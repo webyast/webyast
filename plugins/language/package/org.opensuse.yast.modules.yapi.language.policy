@@ -11,17 +11,17 @@
 Rights for languages
 -->
 
-  <action id="org.opensuse.yast.system.language.read">
-    <description>Reading language settings</description>
-    <message>Authentication is required to read language settings</message>
+  <action id="org.opensuse.yast.modules.yapi.language.read">
+    <description>Reading languages settings</description>
+    <message>Authentication is required to read languages settings</message>
     <defaults>
       <allow_inactive>no</allow_inactive>
       <allow_active>no</allow_active>
     </defaults>
   </action>
-  <action id="org.opensuse.yast.system.language.write">
-    <description>Writing language settings</description>
-    <message>Authentication is required to write language settings</message>
+  <action id="org.opensuse.yast.modules.yapi.language.write">
+    <description>Writing new language settings</description>
+    <message>Authentication is required to edit language settings</message>
     <defaults>
       <allow_inactive>no</allow_inactive>
       <allow_active>no</allow_active>

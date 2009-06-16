@@ -12,7 +12,7 @@
 Name:           yast2-webservice-services
 PreReq:         yast2-webservice
 Provides:       yast2-webservice:/srv/www/yastws/app/controllers/services_controller.rb
-License:        GPL
+License:        MIT
 Group:          Productivity/Networking/Web/Utilities
 Autoreqprov:    on
 Version:        0.0.1

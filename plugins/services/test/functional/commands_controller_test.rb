@@ -4,6 +4,11 @@ require 'rubygems'
 require "scr"
 require 'mocha'
 
+# Prevent contacting the system bus
+# This looks ugly but the stubs(:initialize) below causes a warning
+class Scr
+  def initialize() end
+end
 
 class CommandsControllerTest < ActionController::TestCase
   fixtures :accounts
@@ -12,11 +17,17 @@ class CommandsControllerTest < ActionController::TestCase
     @request = ActionController::TestRequest.new
     # http://railsforum.com/viewtopic.php?id=1719
     @request.session[:account_id] = 1 # defined in fixtures
-    Scr.any_instance.stubs(:initialize)
+
+#    Scr.stubs(:initialize)
+    # Scr, unused?
     Scr.any_instance.stubs(:execute).with(["/sbin/yast2",  "ntp-client",  "list"]).returns({:stderr=>"Server ntp1\nServer ntp2\nServer ntp3\n", :exit=>16, :stdout=>""})
     Scr.any_instance.stubs(:execute).with(["/sbin/yast2",  "ntp-client",  "status"]).returns({:stderr=>"NTP daemon is enabled.\n", :exit=>16, :stdout=>""})
 
-
+    # Lsbservice.new
+    opened = mock()
+    opened.expects(:eof?).returns(false, true)
+    opened.expects(:read).returns("Usage: mock-ntp {tick|tock}")
+    IO.stubs(:popen).with("/etc/init.d/ntp", 'r+').yields(opened)
   end
   
   test "access index" do

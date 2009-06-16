@@ -1,5 +1,5 @@
 
-interface: org.opensuse.yast.system.language
+interface: org.opensuse.yast.modules.yapi.language
 controller: language
 singular: true
 

@@ -13,7 +13,7 @@ Name:           yast2-webservice
 Requires:       yast2-core >= 2.18.3, lighttpd-mod_magnet, ruby-fcgi, ruby-dbus, sqlite, avahi-utils
 Conflicts:      gamin
 PreReq:         lighttpd, PolicyKit, PackageKit, rubygem-rake, rubygem-sqlite3, rubygem-rails-2_3, ruby-rpam, ruby-polkit
-License:        GPL
+License:        MIT
 Group:          Productivity/Networking/Web/Utilities
 Autoreqprov:    on
 Version:        0.0.1
@@ -137,9 +137,9 @@ test -r /usr/sbin/yastws || { echo "Creating link /usr/sbin/yastws";
 # create database 
 #
 cd srv/www/%{pkg_user}
-rake db:migrate
-chgrp yastws db db/*.sqlite*
-chown yastws db db/*.sqlite*
+chown yastws: db db/*.sqlite* db/schema.rb
+# it writes to the log, don't leave it to root
+su %{pkg_user} -s /bin/sh -c "rake db:migrate"
 
 %preun
 %stop_on_removal %{pkg_user}
@@ -168,22 +168,18 @@ fi
 %attr(-,%{pkg_user},%{pkg_user}) %dir %{pkg_home}/cache
 %attr(-,%{pkg_user},%{pkg_user}) %dir %{_var}/log/%{pkg_user}
 
-%config /srv/www/yastws/app
-%config /srv/www/yastws/db
-%config /srv/www/yastws/doc
-%config /srv/www/yastws/lib
-%config /srv/www/yastws/public
-%config /srv/www/yastws/Rakefile
-%config /srv/www/yastws/COPYING
-%config /srv/www/yastws/script
-%config /srv/www/yastws/test
-%config /srv/www/yastws/config
-%config /srv/www/yastws/vendor
+/srv/www/yastws/app
+/srv/www/yastws/db
+/srv/www/yastws/doc
+/srv/www/yastws/lib
+/srv/www/yastws/public
+/srv/www/yastws/Rakefile
+/srv/www/yastws/script
+/srv/www/yastws/test
+/srv/www/yastws/config
+/srv/www/yastws/vendor
 %attr(755,root,root) %config /etc/yastws/tools/policyKit-rights.rb
-%attr(755,root,root) %config /srv/www/yastws/start.sh
-%doc /srv/www/yastws/doc_config.html 
-%doc /srv/www/yastws/doc_interface.html
-%doc COPYING
+%attr(755,root,root) /srv/www/yastws/start.sh
 %doc /srv/www/yastws/README
 %attr(-,%{pkg_user},%{pkg_user}) /srv/www/yastws/log
 %attr(-,%{pkg_user},%{pkg_user}) /srv/www/yastws/tmp

@@ -1,29 +1,31 @@
 class Security #< ActiveRecord::Base
   require "scr"
 
-  attr_reader  :firewall,
-               :firewall_on_startup,
-               :ssh
+  attr_reader   :firewall,
+                :firewall_after_startup,
+                :ssh
+
+
 
   public
 
   def initialize
+    @firewall
+    @firewall_after_startup
+    @ssh
     @scr = Scr.instance
-    @firewall = firewall?
-    @firewall_on_startup = firewall_on_startup?
-    @ssh = ssh?
   end
 
   def update
     @firewall = firewall?
-    @firewall_on_startup = firewall_on_startup?
+    @firewall_after_startup = firewall_after_startup?
     @ssh = ssh?
   end
 
   #firewall,firewall_on_startup,ssh
-  def write(a, b, c)
+  def write(a, b, c) #(a=firewall?, ..)
     @firewall = firewall(a)
-    @firewall_on_startup = firewall_on_startup(b)
+    @firewall_after_startup = firewall_after_startup(b)
     @ssh = ssh(c)
   end
 
@@ -34,7 +36,7 @@ class Security #< ActiveRecord::Base
     xml.security do
       xml.tag!(:ssh, @ssh, {:type => "boolean"})
       xml.tag!(:firewall, @firewall, {:type => "boolean"})
-      xml.tag!(:firewall_on_startup, @firewall_on_startup, {:type => "boolean"})
+      xml.tag!(:firewall_after_startup, @firewall_after_startup, {:type => "boolean"})
     end
   end
 
@@ -59,7 +61,7 @@ class Security #< ActiveRecord::Base
     return nil
   end
 
-  def firewall_on_startup?
+  def firewall_after_startup?
     cmd = @scr.execute(["/sbin/yast2", "firewall", "startup", "show"])
     lines = cmd[:stderr].split "\n"
     lines.each do |l|
@@ -105,11 +107,10 @@ class Security #< ActiveRecord::Base
         end #FIXME else raise ..
       end
     end
-    return nil
   end
 
   # returns true for success and false for failure
-  def firewall_on_startup(param)
+  def firewall_after_startup(param)
     if param    # enable
       action = "atboot"
       verify = "Enabling"
@@ -126,7 +127,6 @@ class Security #< ActiveRecord::Base
         end #FIXME else raise ..
       end
     end
-    return nil
   end
 
   # returns true for success and false for failure
@@ -145,6 +145,5 @@ class Security #< ActiveRecord::Base
         end #FIXME else raise ..
       end
     end
-    return nil
   end
 end

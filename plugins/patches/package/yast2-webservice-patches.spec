@@ -12,7 +12,7 @@
 Name:           yast2-webservice-patches
 PreReq:         yast2-webservice
 Provides:       yast2-webservice:/srv/www/yastws/app/controllers/patch_updates_controller.rb
-License:        GPL
+License:        MIT
 Group:          Productivity/Networking/Web/Utilities
 Autoreqprov:    on
 Version:        0.0.1
