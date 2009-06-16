@@ -168,19 +168,19 @@ fi
 %attr(-,%{pkg_user},%{pkg_user}) %dir %{pkg_home}/cache
 %attr(-,%{pkg_user},%{pkg_user}) %dir %{_var}/log/%{pkg_user}
 
-%config /srv/www/yastws/app
-%config /srv/www/yastws/db
-%config /srv/www/yastws/doc
-%config /srv/www/yastws/lib
-%config /srv/www/yastws/public
-%config /srv/www/yastws/Rakefile
-%config /srv/www/yastws/COPYING
-%config /srv/www/yastws/script
-%config /srv/www/yastws/test
-%config /srv/www/yastws/config
-%config /srv/www/yastws/vendor
+/srv/www/yastws/app
+/srv/www/yastws/db
+/srv/www/yastws/doc
+/srv/www/yastws/lib
+/srv/www/yastws/public
+/srv/www/yastws/Rakefile
+/srv/www/yastws/COPYING
+/srv/www/yastws/script
+/srv/www/yastws/test
+/srv/www/yastws/config
+/srv/www/yastws/vendor
 %attr(755,root,root) %config /etc/yastws/tools/policyKit-rights.rb
-%attr(755,root,root) %config /srv/www/yastws/start.sh
+%attr(755,root,root) /srv/www/yastws/start.sh
 %doc /srv/www/yastws/doc_config.html 
 %doc /srv/www/yastws/doc_interface.html
 %doc COPYING
