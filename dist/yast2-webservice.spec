@@ -174,14 +174,12 @@ fi
 /srv/www/yastws/lib
 /srv/www/yastws/public
 /srv/www/yastws/Rakefile
-/srv/www/yastws/COPYING
 /srv/www/yastws/script
 /srv/www/yastws/test
 /srv/www/yastws/config
 /srv/www/yastws/vendor
 %attr(755,root,root) %config /etc/yastws/tools/policyKit-rights.rb
 %attr(755,root,root) /srv/www/yastws/start.sh
-%doc COPYING
 %doc /srv/www/yastws/README
 %attr(-,%{pkg_user},%{pkg_user}) /srv/www/yastws/log
 %attr(-,%{pkg_user},%{pkg_user}) /srv/www/yastws/tmp
