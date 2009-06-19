@@ -181,8 +181,6 @@ fi
 /srv/www/yastws/vendor
 %attr(755,root,root) %config /etc/yastws/tools/policyKit-rights.rb
 %attr(755,root,root) /srv/www/yastws/start.sh
-%doc /srv/www/yastws/doc_config.html 
-%doc /srv/www/yastws/doc_interface.html
 %doc COPYING
 %doc /srv/www/yastws/README
 %attr(-,%{pkg_user},%{pkg_user}) /srv/www/yastws/log
