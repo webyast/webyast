@@ -74,7 +74,7 @@ class PermissionsController < ApplicationController
       render ErrorResult.error(403, 1, "no permission") and return
     end
     if params[:user_id].blank?
-      render ErrorResult.error(404, 2, "user is not defined") and return
+      render ErrorResult.error(404, 2, "user_id is not defined") and return
     end
     if !get_permission_list(params[:user_id], params[:filter])
       render ErrorResult.error(404, 2, "cannot get permission list") and return
@@ -90,7 +90,7 @@ class PermissionsController < ApplicationController
       render ErrorResult.error(403, 1, "no permission") and return
     end
     if params[:user_id].blank?
-      render ErrorResult.error(404, 2, "user is not defined") and return
+      render ErrorResult.error(404, 2, "user_id is not defined") and return
     end
     if params[:id].blank?
       render ErrorResult.error(404, 2, "right is not defined") and return

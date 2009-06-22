@@ -1,14 +1,5 @@
-REST-style web service for YaST
+This is the directory for the YaST web service.
+For more infomation please have a look to
 
-Prerequisites:
-	ruby-rpam
-	ruby-polkit
-	rails
-
-
-Install:
-	rake db:migrate
-
-Run:
-	ruby script/server --port=8080
+http://en.opensuse.org/YaST/Web
 
