@@ -11,63 +11,21 @@
 Rights for languages
 -->
 
-  <action id="org.opensuse.yast.modules.yapi.language.getlanguages">
-    <description>Reading supported languages</description>
-    <message>Authentication is required to read supported languages</message>
+  <action id="org.opensuse.yast.modules.yapi.language.read">
+    <description>Reading languages settings</description>
+    <message>Authentication is required to read languages settings</message>
     <defaults>
       <allow_inactive>no</allow_inactive>
       <allow_active>no</allow_active>
     </defaults>
   </action>
-  <action id="org.opensuse.yast.modules.yapi.language.getcurrentlanguage">
-    <description>Reading current system language</description>
-    <message>Authentication is required to read current system language</message>
+  <action id="org.opensuse.yast.modules.yapi.language.write">
+    <description>Writing new language settings</description>
+    <message>Authentication is required to edit language settings</message>
     <defaults>
       <allow_inactive>no</allow_inactive>
       <allow_active>no</allow_active>
     </defaults>
   </action>
-  <action id="org.opensuse.yast.modules.yapi.language.isutf8">
-    <description>Reading if current language is in UTF8 variant</description>
-    <message>Authentication is required to check if current system language is in UTF8 variant</message>
-    <defaults>
-      <allow_inactive>no</allow_inactive>
-      <allow_active>no</allow_active>
-    </defaults>
-  </action>
-  <action id="org.opensuse.yast.modules.yapi.language.getrootlang">
-    <description>Reading settings for root locale</description>
-    <message>Authentication is required to read settings for root locale</message>
-    <defaults>
-      <allow_inactive>no</allow_inactive>
-      <allow_active>no</allow_active>
-    </defaults>
-  </action>
-
-  <action id="org.opensuse.yast.modules.yapi.language.setcurrentlanguage">
-    <description>Set current system language</description>
-    <message>Authentication is required to set current system language</message>
-    <defaults>
-      <allow_inactive>no</allow_inactive>
-      <allow_active>no</allow_active>
-    </defaults>
-  </action>
-  <action id="org.opensuse.yast.modules.yapi.language.setutf8">
-    <description>Sets if current language is in UTF8 variant</description>
-    <message>Authentication is required to set if current system language is in UTF8 variant</message>
-    <defaults>
-      <allow_inactive>no</allow_inactive>
-      <allow_active>no</allow_active>
-    </defaults>
-  </action>
-  <action id="org.opensuse.yast.modules.yapi.language.setrootlang">
-    <description>Setting root locale</description>
-    <message>Authentication is required to set root locale</message>
-    <defaults>
-      <allow_inactive>no</allow_inactive>
-      <allow_active>no</allow_active>
-    </defaults>
-  </action>
-
 
 </policyconfig>

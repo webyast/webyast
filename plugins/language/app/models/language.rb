@@ -1,60 +1,62 @@
 class Language 
-@@available = []
-attr_reader :language,
-              :utf8,
-              :rootlocale,
-              :available
-#--------------------------------------------------------------------------------
-#
-#local methods
-#
-#--------------------------------------------------------------------------------
-public
-#
-# get
-#
+  @@available = {}
+  attr_accessor  :language,
+    :utf8,
+    :rootlocale
+  #--------------------------------------------------------------------------------
+  #
+  #local methods
+  #
+  #--------------------------------------------------------------------------------
+  private
+  #
+  # dbus parsers
+  #
 
-
-  def fill_available
-     @@available = YastService.Call("YaPI::LANGUAGE::GetLanguages")
-  end
-
-  def fill_language    
-    @language = YastService.Call("YaPI::LANGUAGE::GetCurrentLanguage")
-  end
-
-  def fill_utf8
-    @utf8 = YastService.Call("YaPI::LANGUAGE::IsUTF8")
-  end
-
-  def fill_rootlocale
-    @rootlocale = YastService.Call("YaPI::LANGUAGE::GetRootLang")
-  end
-
-#
-# set
-#
-public
-  def language=(arg)
-    @language=arg
-    unless YastService.Call("YaPI::LANGUAGE::SetCurrentLanguage",arg)
-      Rails.logger.error "yast2 language not set"
+  def parse_response(response)
+    @language = response["current"]
+    @utf8 = response["utf8"]
+    @rootlocale = response["rootlang"]
+    if response["languages"]
+        @@available = response["languages"]
     end
   end
 
-  def utf8=(arg)
-    @utf8=arg
-    unless YastService.Call("YaPI::LANGUAGE::SetUTF8",@utf8)
-      Rails.logger.error "yast2 utf8 not set"
-    end
+  def create_read_question
+    ret = {
+      "current" => "true",
+      "utf8" => "true",
+      "rootlang" => "true"
+    }
+    ret["languages"]= "true" if @@available.empty?
+    return ret
   end
-  def rootlocale=(arg)
-    @rootlocale=arg
-    unless YastService.Call("YaPI::LANGUAGE::SetRootLang",@rootlocale)
-      Rails.logger.error "yast2 root locale not set"
-    end
-  end
+
+
   
+
+  #
+  # set
+  #
+  public
+
+  def available
+    return @@available
+  end
+
+  def read
+    parse_response YastService.Call("YaPI::LANGUAGE::Read",create_read_question)
+  end
+
+  def save
+    settings = {
+      "current" => @language,
+      "utf8" => @utf8,
+      "rootlang" => @rootlocale
+    }
+    YastService.Call("YaPI::LANGUAGE::Write",settings)
+  end
+
   def initialize
   end
 
@@ -67,18 +69,12 @@ public
       xml.tag!(:utf8, @utf8)
       xml.tag!(:rootlocale, @rootlocale )
       xml.available({:type => "array"}) do
-         @@available.each do |line|
-           xml.language do
-              # Checking input data before processing
-              # Example: pt_BR (Portugues brasileiro)
-              if line.match(/^[\w_]+---.*/)
-                xml.tag!(:id, line[0..(line.index('---')-1)])
-                xml.tag!(:name, line[(line.index('---')+3)..(line.length)])
-              else
-                raise "Unexpected input:\n" + line + "\n\nGot:\n" + @@available
-              end
-           end
-         end
+        @@available.each do |k,v|
+          xml.language do
+            xml.tag!(:id, k)
+            xml.tag!(:name, v[0])
+          end
+        end
       end
     end  
   end
