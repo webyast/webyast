@@ -112,7 +112,7 @@ class SystemtimesController < ApplicationController
       logger.debug "UPDATED: #{@systemtime.inspect}"
 
       time = Time.parse(@systemtime.currenttime).strftime("%H:%M:%S")
-      date = Time.parse(@systemtime.date).strftime("%d/%m/%y")
+      date = Time.parse(@systemtime.date).strftime("%m/%d/%y")
       if @systemtime.timezone.blank? or
          @systemtime.is_utc.nil? or    # don't use blank? for boolean
          @systemtime.currenttime.blank? or
@@ -139,7 +139,7 @@ class SystemtimesController < ApplicationController
     unless permission_check( "org.opensuse.yast.system.time.read")
       render ErrorResult.error( 403, 1, "no permission" ) and return
     else
-       datetime = Time.parse get_time
+      datetime = Time.parse get_time #!!!umwandeln
       @systemtime.currenttime = datetime.strftime("%H:%M")
       @systemtime.date = datetime.strftime("%d/%m/%Y")
       @systemtime.is_utc = get_is_utc
