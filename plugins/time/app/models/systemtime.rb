@@ -22,7 +22,7 @@ class Systemtime
       "utcstatus" => "true",
       "currenttime" => "true"
     }
-    ret["zones"]= "true" if @@timezones.empty?
+    ret["zones"]= @@timezones.empty? ? "true" : "false"
     return ret
   end
 
@@ -33,6 +33,20 @@ class Systemtime
 
   def read
     parse_response YastService.Call("YaPI::TIME::Read",create_read_question)
+  end
+
+  def save
+    settings = {}
+    unless @timezone.nil? or @timezone.empty?
+      settings["timezone"] = @timezone
+    end
+    unless @utcstatus.nil? or @utcstatus.empty?
+      settings["utcstatus"] = @utcstatus
+    end
+    unless @datetime.nil? or @datetime.empty?
+      settings["currenttime"] = @datetime
+    end
+    YastService.Call("YaPI::TIME::Write",settings)
   end
 
   def to_xml( options = {} )
