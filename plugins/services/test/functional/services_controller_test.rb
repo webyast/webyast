@@ -35,7 +35,7 @@ class ServicesControllerTest < ActionController::TestCase
 
   test "access show" do
     get :show, :id =>"cron"
-    assert_response :success
+    assert_response :redirect
   end
 
 end

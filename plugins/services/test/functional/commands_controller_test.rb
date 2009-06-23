@@ -25,8 +25,8 @@ class CommandsControllerTest < ActionController::TestCase
 
     # Lsbservice.new
     opened = mock()
-    opened.expects(:eof?).returns(false, true)
-    opened.expects(:read).returns("Usage: mock-ntp {tick|tock}")
+    opened.stubs(:eof?).returns(false, true)
+    opened.stubs(:read).returns("Usage: mock-ntp {tick|tock}")
     IO.stubs(:popen).with("/etc/init.d/ntp", 'r+').yields(opened)
   end
   
@@ -50,14 +50,14 @@ class CommandsControllerTest < ActionController::TestCase
   end
 
   test "execute service" do
-    Scr.any_instance.stubs(:execute).with(['/usr/sbin/rcntp', 'status']).returns({:exit=>0, :stdout=>"", :stderr=>""})
+    Scr.any_instance.stubs(:execute).with(['/etc/init.d/ntp', 'status']).returns({:exit=>0, :stdout=>"", :stderr=>""})
 
     put :update, :id=>"status", :service_id=>"ntp"
     assert_response :success
   end
 
   test "execute service with nil return of the SCR call" do
-    Scr.any_instance.stubs(:execute).with(['/usr/sbin/rcntp', 'status']).returns()
+    Scr.any_instance.stubs(:execute).with(['/etc/init.d/ntp', 'status']).returns()
 
     put :update, :id=>"status", :service_id=>"ntp"
     assert_response 404
