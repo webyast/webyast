@@ -7,19 +7,7 @@ class CommandsController < ApplicationController
   before_filter :login_required
 
   def index
-    unless permission_check( "org.opensuse.yast.system.services.read")
-      render ErrorResult.error(403, 1, "no permission") and return
-    end
-    id = params[:service_id]
-
-    begin
-      @service = Lsbservice.new id
-    rescue Exception => e # Don't fail on non-existing service. Should be more specific.
-      logger.debug e
-      render ErrorResult.error(404, 106, "no such service") and return
-    end
-    logger.debug "show@service #{@service.inspect}"
-    render :show
+    redirect_to service_path(params[:service_id])
   end
 
   def update

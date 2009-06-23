@@ -13,6 +13,17 @@ class ServicesController < ApplicationController
 
   # show the svc including the commands
   def show
-    redirect_to service_commands_path(params[:id])
+    unless permission_check( "org.opensuse.yast.system.services.read")
+      render ErrorResult.error(403, 1, "no permission") and return
+    end
+    id = params[:id]
+
+    begin
+      @service = Lsbservice.new id
+    rescue Exception => e # Don't fail on non-existing service. Should be more specific.
+      logger.debug e
+      render ErrorResult.error(404, 106, "no such service") and return
+    end
+    logger.debug "show@service #{@service.inspect}"
   end
 end

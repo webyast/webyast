@@ -32,22 +32,22 @@ class CommandsControllerTest < ActionController::TestCase
   
   test "access index" do
     get :index , :service_id=>"ntp"
-    assert_response :success
+    assert_response :redirect
   end
 
-  test "access index xml" do
-    mime = Mime::XML
-    @request.accept = mime.to_s
-    get :index, :format => :xml, :service_id=>"ntp"
-    assert_equal mime.to_s, @response.content_type
-  end
+#   test "access index xml" do
+#     mime = Mime::XML
+#     @request.accept = mime.to_s
+#     get :index, :format => :xml, :service_id=>"ntp"
+#     assert_equal mime.to_s, @response.content_type
+#   end
   
-  test "access index json" do
-    mime = Mime::JSON
-    @request.accept = mime.to_s
-    get :index, :format => :json, :service_id=>"ntp"
-    assert_equal mime.to_s, @response.content_type
-  end
+#   test "access index json" do
+#     mime = Mime::JSON
+#     @request.accept = mime.to_s
+#     get :index, :format => :json, :service_id=>"ntp"
+#     assert_equal mime.to_s, @response.content_type
+#   end
 
   test "execute service" do
     Scr.any_instance.stubs(:execute).with(['/etc/init.d/ntp', 'status']).returns({:exit=>0, :stdout=>"", :stderr=>""})
