@@ -1,17 +1,38 @@
-class SystemTime
+class Systemtime
 
-  attr_accessor :currenttime,
-                :date,
+  @@timezones = Array.new()
+
+  attr_accessor :datetime,
                 :timezone,
-                :is_utc,
-                :validtimezones
+                :utcstatus            
 
-  def initialize
-     @currenttime = ""
-     @date = ""
-     @timezone = ""
-     @is_utc = false
-     @validtimezones = ""
+  private
+  def parse_response(response)
+    @datetime = response["time"]
+    @utcstatus= response["utcstatus"]
+    @timezone = response["timezone"]
+    if response["zones"]
+      @@timezones = response["zones"]
+    end
+  end
+
+  def create_read_question
+    ret = {
+      "timezone" => "true",
+      "utcstatus" => "true",
+      "currenttime" => "true"
+    }
+    ret["zones"]= "true" if @@timezones.empty?
+    return ret
+  end
+
+  public
+
+  def initialize     
+  end
+
+  def read
+    parse_response YastService.Call("YaPI::TIME::Read",create_read_question)
   end
 
   def to_xml( options = {} )
@@ -19,15 +40,24 @@ class SystemTime
     xml.instruct! unless options[:skip_instruct]
 
     xml.systemtime do
-      xml.tag!(:currenttime, @currenttime )
-      xml.tag!(:date, @date )
+      xml.tag!(:time, @datetime )
       xml.tag!(:timezone, @timezone )
-      xml.tag!(:is_utc, @is_utc, {:type => "boolean"} )
-      xml.validtimezones({:type => "array"}) do
-         @validtimezones.split( " " ).each do |timezone|
-            if not timezone.blank?
-               xml.timezone do
-                  xml.tag!(:id, timezone)
+      xml.tag!(:utcstatus, @utcstatus )
+      xml.timezones({:type => "array"}) do
+         @@timezones.each do |region|
+            if not region.empty?
+               xml.region do
+                 xml.tag!(:name,  region["name"])
+                 xml.tag!(:central,  region["central"])
+                 xml.entries({:type => "array"}) do
+                  region["entries"].each do |id,name|
+                    xml.timezone do
+                      xml.tag!(:id, id)
+                      xml.tag!(:name, name)
+                    end
+                  end
+                 end
+                  
                end
             end
          end
