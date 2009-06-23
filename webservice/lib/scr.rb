@@ -57,10 +57,15 @@ class Scr
     ret = @scr.Execute([false, "path", ["s",".target.bash_output"] ],
 		       [false, "", ["s",command] ], 
 		       [false, "", ["s",""] ])
+    resmap = ret[0][2]
+    exit = resmap["exit"][2]
+    Rails.logger.error " SCRExecute (#{command}) => #{exit}"
 
-    Rails.logger.error " SCRExecute (" + command + ") => " + if ret[0][2]["exit"][2] == 1 then "1"; else "0"; end
-
-    return { :stdout => ret[0][2]["stdout"][2], :stderr => ret[0][2]["stderr"][2], :exit => ret[0][2]["exit"][2]}
+    return {
+      :stdout => resmap["stdout"][2],
+      :stderr => resmap["stderr"][2],
+      :exit => exit
+    }
   end
 
 end
