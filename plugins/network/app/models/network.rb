@@ -42,13 +42,13 @@ class Network
 
       xml.device do
           xml.tag!(:id, @id)
-          xml.tag!(:name, @name) if !@name.nil?
-          xml.tag!(:description, @description) if !@description.nil?
-          xml.tag!(:mac, @mac) if !@mac.nil?
-          xml.tag!(:dev_name, @dev_name) if !@dev_name.nil?
-          xml.tag!(:startup, @startup) if !@startup.nil?
+          xml.tag!(:name, @name) unless @name.nil?
+          xml.tag!(:description, @description) unless @description.nil?
+          xml.tag!(:mac, @mac) unless @mac.nil?
+          xml.tag!(:dev_name, @dev_name) unless @dev_name.nil?
+          xml.tag!(:startup, @startup) unless @startup.nil?
 
-          if !@parameters.blank?
+          unless @parameters.blank?
               @parameters.each do |key,value|
                   xml.parameters {
                       xml.tag!(:name, key)
