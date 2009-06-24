@@ -1,12 +1,16 @@
 require 'rake'
 require 'rake/testtask'
 require 'rake/rdoctask'
-require 'rake/packagetask'
+begin
+    require 'tasks/webservice'
+rescue LoadError => e
+    $stderr.puts "Install rubygem-yast2-webservice-tasks.rpm"
+end
 
 desc 'Default: run unit tests.'
 task :default => :test
 
-desc 'Test the services plugin.'
+desc 'Test this plugin.'
 Rake::TestTask.new(:test) do |t|
   t.libs << 'lib'
   t.libs << 'test'
@@ -14,22 +18,13 @@ Rake::TestTask.new(:test) do |t|
   t.verbose = true
 end
 
-desc 'Generate documentation for the services plugin.'
+desc 'Generate documentation for this plugin.'
 Rake::RDocTask.new(:rdoc) do |rdoc|
-  rdoc.rdoc_dir = 'rdoc'
   rdoc.title    = 'Services'
+  rdoc.rdoc_dir = 'rdoc'
   rdoc.options << '--line-numbers' << '--inline-source'
   rdoc.rdoc_files.include('README')
   rdoc.rdoc_files.include('lib/**/*.rb')
-end
-
-desc 'Generate tarball package'
-Rake::PackageTask.new('www', :noversion) do |p|
-  %x[rm -r package/www]
-  p.need_tar_bz2 = true
-  p.package_dir = 'package'
-  p.package_files.include('**/*')
-  p.package_files.exclude('package')
 end
 
 desc "install policies"
