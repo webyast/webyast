@@ -15,7 +15,7 @@ Provides:       yast2-webservice:/srv/www/yastws/app/controllers/language_contro
 License:        MIT
 Group:          Productivity/Networking/Web/Utilities
 Autoreqprov:    on
-Version:        0.0.2
+Version:        0.0.3
 Release:        0
 Summary:        YaST2 - Webservice - Language
 Source:         www.tar.bz2
@@ -36,10 +36,10 @@ YaST2 - Webservice - REST based interface of YaST in order to handle language se
 Authors:
 --------
     Stefan Schubert <schubi@opensuse.org>
+    Josef Reidinger <jreidinger@suse.cz>
 
 %prep
 %setup -q -n www
-rm -rf nbproject
 
 %build
 
@@ -66,8 +66,6 @@ rm -rf $RPM_BUILD_ROOT
 %dir /srv/www/%{pkg_user}/vendor
 %dir /srv/www/%{pkg_user}/vendor/plugins
 %dir /srv/www/%{pkg_user}/vendor/plugins/%{plugin_name}
-%dir /usr/share/PolicyKit
-%dir /usr/share/PolicyKit/policy
 /srv/www/%{pkg_user}/vendor/plugins/%{plugin_name}/MIT-LICENSE
 /srv/www/%{pkg_user}/vendor/plugins/%{plugin_name}/README
 /srv/www/%{pkg_user}/vendor/plugins/%{plugin_name}/Rakefile
