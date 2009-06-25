@@ -1,5 +1,8 @@
 require "scr"
 
+# import YastService class FIXME move into the model...
+require "yast_service"
+
 include ApplicationHelper
 
 class UsersController < ApplicationController
@@ -18,14 +21,24 @@ class UsersController < ApplicationController
 
 
   def get_user_list
-     ret = @scr.execute(["/sbin/yast2", "users", "list"])
-     lines = ret[:stderr].split "\n"
-     @users = []
-     lines.each do |s|   
-        user = User.new
-        user.login_name = s.rstrip
-        @users << user
-     end
+    @users = []
+    # FIXME see convert_map in samba_share.rb
+    parameters	= {
+	"type"	=> [ "s", "local" ],
+	"index"	=> [ "s", "uid" ]
+    }
+    users_map = YastService.Call("YaPI::USERS::UsersGet", parameters)
+    if users_map.nil?
+	puts "something wrong happened -------------------------------------"
+    else
+	users_map.each do |key, val|
+	    user = User.new
+	    # FIXME adapt the model to the return map
+	    user.login_name	= val["uid"]
+	    user.full_name	= val["cn"]
+	    @users << user
+	end
+    end
   end
 
   def get_user (id)

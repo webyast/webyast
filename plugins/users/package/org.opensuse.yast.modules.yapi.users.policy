@@ -17,17 +17,6 @@
     </defaults>
   </action>
 
-  <action id="org.opensuse.yast.modules.yapi.users.usersgetsimple">
-    <description>Get list of users.</description>
-    <message>System policy prevents the Yast DBus service from reading users.</message>
-
-    <defaults>
-      <allow_any>no</allow_any>
-      <allow_inactive>no</allow_inactive>
-      <allow_active>auth_admin_keep_session</allow_active>
-    </defaults>
-  </action>
-
   <action id="org.opensuse.yast.modules.yapi.users.userget">
     <description>Get the information about given user.</description>
     <message>System policy prevents the Yast DBus service from reading user info.</message>
