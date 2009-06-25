@@ -2,6 +2,9 @@ require 'rake'
 require 'rake/testtask'
 require 'rake/rdoctask'
 require 'rake/packagetask'
+require File.join(File.dirname(__FILE__), 'config', 'rails_parent')
+require File.join(RailsParent.parent, 'config', 'boot')
+require 'tasks/rails'
 
 desc 'Default: run unit tests.'
 task :default => :test
@@ -10,6 +13,7 @@ desc 'Test the language plugin.'
 Rake::TestTask.new(:test) do |t|
   t.libs << 'lib'
   t.libs << 'test'
+  t.libs << RailsParent.parent
   t.pattern = 'test/**/*_test.rb'
   t.verbose = true
 end
