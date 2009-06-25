@@ -1,6 +1,10 @@
 require 'rake'
 require 'rake/testtask'
 require 'rake/rdoctask'
+require File.join(File.dirname(__FILE__), 'config', 'rails_parent')
+require File.join(RailsParent.parent, 'config', 'boot')
+require 'tasks/rails'
+
 begin
     require 'tasks/webservice'
 rescue LoadError => e

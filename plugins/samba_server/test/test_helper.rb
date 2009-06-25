@@ -1,15 +1,7 @@
-rails_parent = ENV["RAILS_PARENT"]
-unless rails_parent
-  if File.directory?("../../webservice/")
-     $stderr.puts "Taking ../../webservice/ for RAILS_PARENT"  
-     rails_parent="../../webservice/"
-  else
-     $stderr.puts "Please set RAILS_PARENT environment"
-     exit
-  end
-end
+# find the rails parent
+require File.join(File.dirname(__FILE__), '..', 'config', 'rails_parent')
 # first config rails
-require File.expand_path(rails_parent + "/config/environment")
+require File.expand_path( File.join("config","environment"), RailsParent.parent )
 # then enable testing, this will get the routing right
 ENV["RAILS_ENV"] = "test"
 require 'test_help'
