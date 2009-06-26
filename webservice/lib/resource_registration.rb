@@ -5,6 +5,7 @@ class ResourceRegistration
   def self.resources
     @@resources
   end
+  
 private
   def self.error msg
     if @@in_production
@@ -14,6 +15,7 @@ private
       raise msg
     end
   end
+  
 public  
   #
   # reset registered resources
@@ -28,10 +30,6 @@ public
   # optionally the interface and controller can be passed
   # otherwise they are read from the yml file
   #
-public  
-  def self.reset
-    @@resources = Hash.new
-  end
   
   def self.register(file, interface = nil, controller = nil)
 #    $stderr.puts "register #{file}"
