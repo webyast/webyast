@@ -39,10 +39,12 @@ public
     begin
       resource = YAML.load(File.open(file)) || Hash.new
     rescue Exception => e
-      $stderr.puts "#{file} failed to load"
+      $stderr.puts "#{file} failed to load: #{$!}"
       raise # re-raise
     end
 
+    error "#{file} has wrong format" unless resource.is_a? Hash
+    
     # interface: can override
     interface = resource['interface'] || interface
     error "#{file} does not specify interface" unless interface
