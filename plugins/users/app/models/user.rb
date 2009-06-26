@@ -3,6 +3,7 @@ class User
   
   attr_accessor :full_name,
                 :groups,
+		:grouplist,
                 :default_group,
                 :home_directory,
                 :login_name,
@@ -28,6 +29,7 @@ class User
     @no_home = false
     @full_name = ""
     @groups = ""
+    @grouplist	= {}
     @default_group = ""
     @home_directory = ""
     @login_shell = ""
@@ -45,6 +47,7 @@ class User
     return false if usr==nil
     @no_home = usr[:no_home]
     @groups = usr[:groups]
+    @grouplist	= usr[:grouplist]
     @home_directory = usr[:home_directory]
     @type = usr[:type]
     @new_login_name = usr[:new_login_name]
@@ -81,6 +84,13 @@ class User
       xml.tag!(:sshkey, sshkey )
       xml.groups({:type => "array"}) do
          groups.split( "," ).each do |group| 
+            xml.group do
+               xml.tag!(:id, group)
+            end
+         end
+      end
+      xml.grouplist({:type => "array"}) do
+         grouplist.each do |group, val| 
             xml.group do
                xml.tag!(:id, group)
             end

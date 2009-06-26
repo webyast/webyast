@@ -22,10 +22,14 @@ class UsersController < ApplicationController
 
   def get_user_list
     @users = []
-    # FIXME see convert_map in samba_share.rb
     parameters	= {
-	"type"	=> [ "s", "local" ],
-	"index"	=> [ "s", "uid" ]
+	# how to index hash with users
+	"index"	=> [ "s", "uid" ],
+	# attributes to return for each user
+	"user_attributes"	=> [ "as", [ "cn" ]]
+# FIXME this way of passing array currently fails in ruby-dbus:
+#  TypeError (can't convert Array into String): 
+#  /usr/lib64/ruby/vendor_ruby/1.8/dbus/type.rb:112:in `+'
     }
     users_map = YastService.Call("YaPI::USERS::UsersGet", parameters)
     if users_map.nil?
@@ -33,8 +37,8 @@ class UsersController < ApplicationController
     else
 	users_map.each do |key, val|
 	    user = User.new
-	    # FIXME adapt the model to the return map
-	    user.login_name	= val["uid"]
+	    # FIXME adapt the model to the YaPI return map
+	    user.login_name	= key
 	    user.full_name	= val["cn"]
 	    @users << user
 	end
@@ -47,36 +51,27 @@ class UsersController < ApplicationController
     else
       saveKey = nil
     end
-    ret = @scr.execute(["/sbin/yast2", "users", "show", "username=#{id}"])
-    if (!ret or
-        ret[:stderr].include?("There is no such user."))
-      return false
-    end
-    lines = ret[:stderr].split "\n"
-    counter = 0
+    parameters	= {
+	# user to find
+	"uid"	=> [ "s", id ],
+	# list of attributes to return;
+	"user_attributes"	=> [ "as", [
+	    "cn", "uidNumber", "homeDirectory",
+	    "grouplist", "loginShell", "groupname"
+	]]
+    }
+    user_map = YastService.Call("YaPI::USERS::UserGet", parameters)
     @user = User.new
-    lines.each do |s|   
-      if counter+1 <= lines.length
-        case s
-        when "Full Name:"
-          @user.full_name = lines[counter+1].strip
-        when "List of Groups:"
-          @user.groups = lines[counter+1].strip
-        when "Default Group:"
-          @user.default_group = lines[counter+1].strip
-        when "Home Directory:"
-          @user.home_directory = lines[counter+1].strip
-        when "Login Shell:"
-          @user.login_shell = lines[counter+1].strip
-        when "Login Name:"
-          @user.login_name = lines[counter+1].strip
-        when "UID:"
-          @user.uid = lines[counter+1].strip
-        end
-      end
-      counter += 1
-    end
-    @user.sshkey = saveKey
+    # FIXME adapt the model to the YaPI return map
+    @user.login_name	= id
+    @user.full_name	= user_map["cn"]
+    @user.login_shell	= user_map["loginShell"]
+    @user.uid		= user_map["uidNumber"]
+    @user.home_directory= user_map["homeDirectory"]
+    @user.default_group	= user_map["groupname"]
+    @user.grouplist	= user_map["grouplist"]
+
+    @user.sshkey	= saveKey
     return true
   end
 
