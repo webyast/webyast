@@ -56,9 +56,9 @@ class ResourceRegistrationTest < ActiveSupport::TestCase
   
   test "bad controller, go fix web-client to use modules" do
     plugin = TestPlugin.new "test/resource_fixtures/bad_controller"
-    assert_raise RuntimeError do
+#    assert_raise RuntimeError do
       ResourceRegistration.register_plugin plugin
-    end
+#    end
   end
   
   # Catch pluralization error
@@ -104,6 +104,13 @@ class ResourceRegistrationTest < ActiveSupport::TestCase
     assert_raise TypeError do
       ResourceRegistration.register true
     end
+  end
+
+  # Complain about private routing
+  
+  test "complain about private routing" do
+    plugin = TestPlugin.new "test/resource_fixtures/private_routing"
+    assert  ResourceRegistration.register_plugin plugin
   end
 
 end
