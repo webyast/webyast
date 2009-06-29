@@ -3,3 +3,26 @@ For more infomation please have a look to
 
 http://en.opensuse.org/YaST/Web
 
+---
+
+Testing
+
+Testing with the code coverage plugin (vendor/plugins/rails_rcov)
+requires the 'rcov' gem. Install it with
+
+  gem install relevance-rcov --source http://gems.github.com
+  
+(See http://github.com/relevance/rcov/tree/master for details)
+
+
+Now run
+
+  rake test:units:rcov
+  or
+  rake test:functionals:rcov
+  
+and have a look how good we're doing.
+
+http://agilewebdevelopment.com/plugins/rails_rcov also explain the
+various options for rails_rcov.
+

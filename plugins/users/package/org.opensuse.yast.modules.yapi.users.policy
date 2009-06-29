@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE policyconfig PUBLIC "-//freedesktop//DTD PolicyKit Policy Configuration 1.0//EN"
+  "http://www.freedesktop.org/standards/PolicyKit/1.0/policyconfig.dtd">
+
+<policyconfig>
+  <vendor>Novell, Inc.</vendor>
+  <vendor_url>http://www.novell.com</vendor_url>
+  
+  <action id="org.opensuse.yast.modules.yapi.users.usersget">
+    <description>Get list of users.</description>
+    <message>System policy prevents the Yast DBus service from reading users.</message>
+
+    <defaults>
+      <allow_any>no</allow_any>
+      <allow_inactive>no</allow_inactive>
+      <allow_active>auth_admin_keep_session</allow_active>
+    </defaults>
+  </action>
+
+  <action id="org.opensuse.yast.modules.yapi.users.userget">
+    <description>Get the information about given user.</description>
+    <message>System policy prevents the Yast DBus service from reading user info.</message>
+
+    <defaults>
+      <allow_any>no</allow_any>
+      <allow_inactive>no</allow_inactive>
+      <allow_active>auth_admin_keep_session</allow_active>
+    </defaults>
+  </action>
+</policyconfig> 
+

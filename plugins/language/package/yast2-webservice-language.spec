@@ -15,15 +15,15 @@ Provides:       yast2-webservice:/srv/www/yastws/app/controllers/language_contro
 License:        MIT
 Group:          Productivity/Networking/Web/Utilities
 Autoreqprov:    on
-Version:        0.0.2
+Version:        0.0.3
 Release:        0
 Summary:        YaST2 - Webservice - Language
 Source:         www.tar.bz2
-Source1:        org.opensuse.yast.system.language.policy
 BuildRoot:      %{_tmppath}/%{name}-%{version}-build
 BuildArch:      noarch
 BuildRequires:  rubygem-mocha
-Requires:       yast2-country >= 2.18.7
+Requires:       yast2-core > 2.18.14
+Requires:       yast2-country >= 2.18.9
 
 #
 %define pkg_user yastws
@@ -36,6 +36,7 @@ YaST2 - Webservice - REST based interface of YaST in order to handle language se
 Authors:
 --------
     Stefan Schubert <schubi@opensuse.org>
+    Josef Reidinger <jreidinger@suse.cz>
 
 %prep
 %setup -q -n www
@@ -49,10 +50,6 @@ Authors:
 #
 mkdir -p $RPM_BUILD_ROOT/srv/www/%{pkg_user}/vendor/plugins/%{plugin_name}
 cp -a * $RPM_BUILD_ROOT/srv/www/%{pkg_user}/vendor/plugins/%{plugin_name}
-
-# Policies
-mkdir -p $RPM_BUILD_ROOT/usr/share/PolicyKit/policy
-install -m 0644 %SOURCE1 $RPM_BUILD_ROOT/usr/share/PolicyKit/policy/
 
 %clean
 rm -rf $RPM_BUILD_ROOT
@@ -69,17 +66,13 @@ rm -rf $RPM_BUILD_ROOT
 %dir /srv/www/%{pkg_user}/vendor
 %dir /srv/www/%{pkg_user}/vendor/plugins
 %dir /srv/www/%{pkg_user}/vendor/plugins/%{plugin_name}
-%dir /usr/share/PolicyKit
-%dir /usr/share/PolicyKit/policy
-%config /srv/www/%{pkg_user}/vendor/plugins/%{plugin_name}/MIT-LICENSE
-%config /srv/www/%{pkg_user}/vendor/plugins/%{plugin_name}/README
-%config /srv/www/%{pkg_user}/vendor/plugins/%{plugin_name}/Rakefile
-%config /srv/www/%{pkg_user}/vendor/plugins/%{plugin_name}/init.rb
-%config /srv/www/%{pkg_user}/vendor/plugins/%{plugin_name}/install.rb
-%config /srv/www/%{pkg_user}/vendor/plugins/%{plugin_name}/uninstall.rb
-%config /srv/www/%{pkg_user}/vendor/plugins/%{plugin_name}/app
-%config /srv/www/%{pkg_user}/vendor/plugins/%{plugin_name}/config
-%config /srv/www/%{pkg_user}/vendor/plugins/%{plugin_name}/tasks
-%config /srv/www/%{pkg_user}/vendor/plugins/%{plugin_name}/test
-%attr(644,root,root) %config /usr/share/PolicyKit/policy/org.opensuse.yast.system.%{plugin_name}.policy
-
+/srv/www/%{pkg_user}/vendor/plugins/%{plugin_name}/MIT-LICENSE
+/srv/www/%{pkg_user}/vendor/plugins/%{plugin_name}/README
+/srv/www/%{pkg_user}/vendor/plugins/%{plugin_name}/Rakefile
+/srv/www/%{pkg_user}/vendor/plugins/%{plugin_name}/init.rb
+/srv/www/%{pkg_user}/vendor/plugins/%{plugin_name}/install.rb
+/srv/www/%{pkg_user}/vendor/plugins/%{plugin_name}/uninstall.rb
+/srv/www/%{pkg_user}/vendor/plugins/%{plugin_name}/app
+/srv/www/%{pkg_user}/vendor/plugins/%{plugin_name}/config
+/srv/www/%{pkg_user}/vendor/plugins/%{plugin_name}/tasks
+/srv/www/%{pkg_user}/vendor/plugins/%{plugin_name}/test

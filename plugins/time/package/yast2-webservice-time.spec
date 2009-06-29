@@ -19,7 +19,6 @@ Version:        0.0.1
 Release:        0
 Summary:        YaST2 - Webservice - Time
 Source:         www.tar.bz2
-Source1:        org.opensuse.yast.system.time.policy
 BuildRoot:      %{_tmppath}/%{name}-%{version}-build
 BuildArch:      noarch
 BuildRequires:  rubygem-mocha
@@ -49,10 +48,6 @@ Authors:
 mkdir -p $RPM_BUILD_ROOT/srv/www/%{pkg_user}/vendor/plugins/%{plugin_name}
 cp -a * $RPM_BUILD_ROOT/srv/www/%{pkg_user}/vendor/plugins/%{plugin_name}
 
-# Policies
-mkdir -p $RPM_BUILD_ROOT/usr/share/PolicyKit/policy
-install -m 0644 %SOURCE1 $RPM_BUILD_ROOT/usr/share/PolicyKit/policy/
-
 %clean
 rm -rf $RPM_BUILD_ROOT
 
@@ -80,5 +75,4 @@ rm -rf $RPM_BUILD_ROOT
 %config /srv/www/%{pkg_user}/vendor/plugins/%{plugin_name}/config
 %config /srv/www/%{pkg_user}/vendor/plugins/%{plugin_name}/tasks
 %config /srv/www/%{pkg_user}/vendor/plugins/%{plugin_name}/test
-%attr(644,root,root) %config /usr/share/PolicyKit/policy/org.opensuse.yast.system.%{plugin_name}.policy
 

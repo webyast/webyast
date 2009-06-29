@@ -15,7 +15,7 @@ Provides:       yast2-webservice:/srv/www/yastws/app/controllers/services_contro
 License:        MIT
 Group:          Productivity/Networking/Web/Utilities
 Autoreqprov:    on
-Version:        0.0.1
+Version:        0.0.3
 Release:        0
 Summary:        YaST2 - Webservice - Services
 Source:         www.tar.bz2
@@ -69,16 +69,15 @@ rm -rf $RPM_BUILD_ROOT
 %dir /srv/www/%{pkg_user}/vendor/plugins/%{plugin_name}
 %dir /usr/share/PolicyKit
 %dir /usr/share/PolicyKit/policy
-%config /srv/www/%{pkg_user}/vendor/plugins/%{plugin_name}/MIT-LICENSE
-%config /srv/www/%{pkg_user}/vendor/plugins/%{plugin_name}/README
-%config /srv/www/%{pkg_user}/vendor/plugins/%{plugin_name}/Rakefile
-%config /srv/www/%{pkg_user}/vendor/plugins/%{plugin_name}/init.rb
-%config /srv/www/%{pkg_user}/vendor/plugins/%{plugin_name}/install.rb
-%config /srv/www/%{pkg_user}/vendor/plugins/%{plugin_name}/uninstall.rb
-%config /srv/www/%{pkg_user}/vendor/plugins/%{plugin_name}/app
-%config /srv/www/%{pkg_user}/vendor/plugins/%{plugin_name}/config
-%config /srv/www/%{pkg_user}/vendor/plugins/%{plugin_name}/lib
-%config /srv/www/%{pkg_user}/vendor/plugins/%{plugin_name}/tasks
-%config /srv/www/%{pkg_user}/vendor/plugins/%{plugin_name}/test
-%attr(644,root,root) %config /usr/share/PolicyKit/policy/org.opensuse.yast.system.%{plugin_name}.policy
-
+/srv/www/%{pkg_user}/vendor/plugins/%{plugin_name}/MIT-LICENSE
+/srv/www/%{pkg_user}/vendor/plugins/%{plugin_name}/README
+/srv/www/%{pkg_user}/vendor/plugins/%{plugin_name}/Rakefile
+/srv/www/%{pkg_user}/vendor/plugins/%{plugin_name}/init.rb
+/srv/www/%{pkg_user}/vendor/plugins/%{plugin_name}/install.rb
+/srv/www/%{pkg_user}/vendor/plugins/%{plugin_name}/uninstall.rb
+/srv/www/%{pkg_user}/vendor/plugins/%{plugin_name}/app
+/srv/www/%{pkg_user}/vendor/plugins/%{plugin_name}/config
+/srv/www/%{pkg_user}/vendor/plugins/%{plugin_name}/lib
+/srv/www/%{pkg_user}/vendor/plugins/%{plugin_name}/tasks
+/srv/www/%{pkg_user}/vendor/plugins/%{plugin_name}/test
+%attr(644,root,root) /usr/share/PolicyKit/policy/org.opensuse.yast.system.%{plugin_name}.policy

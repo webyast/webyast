@@ -1,4 +1,11 @@
 -------------------------------------------------------------------
+Thu Jun 25 08:57:07 CEST 2009 - jreidinger@suse.cz
+
+- move policy file to dbus backend
+- adapt to reduced dbus backend
+- 0.0.3 
+
+-------------------------------------------------------------------
 Fri Jun 12 18:09:39 CEST 2009 - jreidinger@suse.cz
 
 - adapt to dbus backend
