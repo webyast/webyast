@@ -11,12 +11,12 @@ class LanguageController < ApplicationController
   #--------------------------------------------------------------------------------
 
   def update
-
-    @language = Language.new
+    
     if params.has_key?(:language)
       unless permission_check("org.opensuse.yast.modules.yapi.language.write")
         render ErrorResult.error(403, 1, "no permission") and return
       end
+      @language = Language.new
       @language.language = params[:language][:current]
       @language.utf8 = params[:language][:utf8]
       @language.rootlocale = params[:language][:rootlocale]
@@ -35,9 +35,9 @@ class LanguageController < ApplicationController
 
 
   def show
-    unless permission_check("org.opensuse.yast.modules.yapi.language.read")
-      render ErrorResult.error(403, 1, "no permissions") and return
-    end
+#    unless permission_check("org.opensuse.yast.modules.yapi.language.read")
+#      render ErrorResult.error(403, 1, "no permissions") and return
+#    end
     @language = Language.new
     @language.read
 
