@@ -3,7 +3,7 @@ include ApplicationHelper
 class LanguageController < ApplicationController
 
   before_filter :login_required
-
+  attr_reader :language
   #--------------------------------------------------------------------------------
   #
   # actions
@@ -35,9 +35,9 @@ class LanguageController < ApplicationController
 
 
   def show
-#    unless permission_check("org.opensuse.yast.modules.yapi.language.read")
-#      render ErrorResult.error(403, 1, "no permissions") and return
-#    end
+    unless permission_check("org.opensuse.yast.modules.yapi.language.read")
+      render ErrorResult.error(403, 1, "no permissions") and return
+    end
     @language = Language.new
     @language.read
 

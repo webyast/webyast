@@ -5,9 +5,9 @@ require 'test_helper'
 class LanguageTest < ActiveSupport::TestCase
 
   Test_Lang = {
-#      "test" => ["testing","la testing",".utf","la t"],
-#      "a" => ["b","b","b","b"],
-#      "c" => ["d","d","d","d"]
+      "test" => ["testing","la testing",".utf","la t"],
+      "a" => ["b","b","b","b"],
+      "c" => ["d","d","d","d"]
     }
 
   def read_arguments
@@ -78,9 +78,9 @@ class LanguageTest < ActiveSupport::TestCase
     assert_equal("false", response["utf8"])
     assert_equal("false", response["rootlocale"])
     lang_reponse = [
-#      {"id" => "test", "name" => "testing" },
-#      {"id" => "a", "name" => "b" },
-#      {"id" => "c", "name" => "d" }
+      {"id" => "test", "name" => "testing" },
+      {"id" => "a", "name" => "b" },
+      {"id" => "c", "name" => "d" }
     ]
     assert_equal(lang_reponse.sort { |a,b| a["id"] <=> b["id"] },
       response["available"].sort { |a,b| a["id"] <=> b["id"] })
