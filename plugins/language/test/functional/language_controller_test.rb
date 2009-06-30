@@ -65,9 +65,9 @@ class LanguageControllerTest < ActionController::TestCase
 
   def check_update_result
     assert_response :success
-    assert_equal @controller.language.language, Data[:language][:current]
-    assert_equal @controller.language.utf8, Data[:language][:utf8]
-    assert_equal @controller.language.rootlocale, Data[:language][:rootlocale]
+    assert_equal assigns["language"].language, Data[:language][:current]
+    assert_equal assigns["language"].utf8, Data[:language][:utf8]
+    assert_equal assigns["language"].rootlocale, Data[:language][:rootlocale]
   end
 
   def test_update_noparams

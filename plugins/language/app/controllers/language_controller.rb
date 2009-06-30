@@ -3,7 +3,6 @@ include ApplicationHelper
 class LanguageController < ApplicationController
 
   before_filter :login_required
-  attr_reader :language
   #--------------------------------------------------------------------------------
   #
   # actions
