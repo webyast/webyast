@@ -113,7 +113,7 @@ class PermissionsController < ApplicationController
         break
       end
     end
-    if @permission.name.blank?
+    if permission.name.blank?
       render ErrorResult.error(404, 1, "Permission: #{right} not found.") and return
     end
 
