@@ -121,34 +121,28 @@ class PermissionsController < ApplicationController
     return render(:xml => permission, :location => "none")
   end
 
-  # PUT /permissions?user_id=<user_id>
-  # PUT /permissions/<id>.xml?user_id=<user_id>
-  # PUT /permissions/<id>.json?user_id=<user_id>
+  # PUT /permissions/<user_id>
+  # PUT /permissions/<user_id>.xml
+  # PUT /permissions/<user_id>.json
 
   def update
     unless permission_check( "org.opensuse.yast.permissions.write")
       render ErrorResult.error(403, 1, "no permission") and return
     end
-    jsonFormat = false
-    right = params[:id]
-    if params[:id].end_with?(".json")
-      jsonFormat = true
-      right = params[:id].slice(0..-7)
-    else
-      right = params[:id].slice(0..-5) if params[:id].end_with?(".xml")
-    end
-    if ( not params[:permission].blank? )
-      permission = Permission.new(right, params[:permission][:grant] )
-    else
-      permission = Permission.new
-    end
-    if params[:user_id].blank?
+    if params[:id].blank?
       render ErrorResult.error(404, 1, "user not found") and return
     end
-    ret = Scr.instance.execute(["polkit-auth", "--user", params[:user_id], permission.grant ? "--grant" : "--revoke", "org.opensuse.yast.webservice.#{params[:id]}"])
+    jsonFormat = false
+    jsonFormat = true if params[:id].end_with?(".json")
+    if ( params[:permissions].blank? )
+      render ErrorResult.error(404, 1, "no permissions found") and return
+    end
+
+    ret = Scr.instance.execute(["polkit-auth", "--user", params[:permissions][:id], params[:permissions][:grant] ? "--grant" : "--revoke", params[:permissions][:name]])
     if ret[:exit] != 0
       render ErrorResult.error(404, 1, ret[:stderr]) and return
     end
+    permission = Permission.new(params[:permissions][:name], params[:permissions][:grant] )
     return render(:json => permission.to_json, :location => "none") if jsonFormat
     return render(:xml => permission, :location => "none")
 

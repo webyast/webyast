@@ -30,7 +30,7 @@ Source7:        lighttpd.conf
 Source8:        modules.conf
 Source9:        yastws
 BuildRoot:      %{_tmppath}/%{name}-%{version}-build
-BuildRequires:  ruby-devel, pkg-config
+BuildRequires:  ruby-devel, pkg-config, rubygem-relevance-rcov, rubygem-mocha
 BuildArch:      noarch
 
 #
