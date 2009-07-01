@@ -25,7 +25,7 @@ BuildArch:      noarch
 
 #
 %define pkg_user yastws
-%define plugin_name language
+%define plugin_name security
 #
 
 
@@ -58,11 +58,11 @@ rm -rf $RPM_BUILD_ROOT
 
 %post
 #
-# granting all permissions for root 
+# granting all permissions for root
 #
 /etc/yastws/tools/policyKit-rights.rb --user root --action grant >& /dev/null || :
 
-%files 
+%files
 %defattr(-,root,root)
 %dir /srv/www/%{pkg_user}
 %dir /srv/www/%{pkg_user}/vendor
