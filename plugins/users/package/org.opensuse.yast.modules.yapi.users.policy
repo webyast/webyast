@@ -9,7 +9,6 @@
   <action id="org.opensuse.yast.modules.yapi.users.usersget">
     <description>Get list of users.</description>
     <message>System policy prevents the Yast DBus service from reading users.</message>
-
     <defaults>
       <allow_any>no</allow_any>
       <allow_inactive>no</allow_inactive>
@@ -20,10 +19,39 @@
   <action id="org.opensuse.yast.modules.yapi.users.userget">
     <description>Get the information about given user.</description>
     <message>System policy prevents the Yast DBus service from reading user info.</message>
-
     <defaults>
       <allow_any>no</allow_any>
       <allow_inactive>no</allow_inactive>
+      <allow_active>auth_admin_keep_session</allow_active>
+    </defaults>
+  </action>
+
+  <action id="org.opensuse.yast.modules.yapi.users.usermodify">
+    <description>Update user settings</description>
+    <message>Authentication is required to update user settings</message>
+    <defaults>
+      <allow_inactive>no</allow_inactive>
+      <allow_active>no</allow_active>
+      <allow_active>auth_admin_keep_session</allow_active>
+    </defaults>
+  </action>
+
+  <action id="org.opensuse.yast.modules.yapi.users.useradd">
+    <description>Add a new user account</description>
+    <message>Authentication is required to add a new user account</message>
+    <defaults>
+      <allow_inactive>no</allow_inactive>
+      <allow_active>no</allow_active>
+      <allow_active>auth_admin_keep_session</allow_active>
+    </defaults>
+  </action>
+
+  <action id="org.opensuse.yast.modules.yapi.users.userdelete">
+    <description>Delete a new account</description>
+    <message>Authentication is required to delete a user account</message>
+    <defaults>
+      <allow_inactive>no</allow_inactive>
+      <allow_active>no</allow_active>
       <allow_active>auth_admin_keep_session</allow_active>
     </defaults>
   </action>
