@@ -61,6 +61,7 @@ class UsersController < ApplicationController
 	]]
     }
     user_map = YastService.Call("YaPI::USERS::UserGet", parameters)
+    # TODO check if it is not empty
     @user = User.new
     # FIXME adapt the model to the YaPI return map
     @user.login_name	= id
@@ -141,31 +142,41 @@ class UsersController < ApplicationController
   end
 
   def add_user
-    command = ["/sbin/yast2", "users", "add"]
-    command << "cn=\"#{@user.full_name}\""  if not @user.full_name.blank?
-    if not @user.groups.blank?
-      grp_string = @user.groups.map { |group| group[:id] }.join(',')
-      command << "grouplist=#{grp_string}"
-    end
-    command << "gid=#{@user.default_group}" if not @user.default_group.blank?
-    command << "home=#{@user.home_directory}" if not @user.home_directory.blank?
-    command << "shell=#{@user.login_shell}" if not @user.login_shell.blank?
-    command << "username=#{@user.login_name}" if not @user.login_name.blank?
-    command << "uid=#{@user.uid}" if not @user.uid.blank?
-    command << "password=#{@user.password}" if not @user.password.blank?
-    command << "ldap_password=#{@user.ldap_password}" if not @user.ldap_password.blank?
-    command << "no_home" if not @user.no_home.blank? and @user.no_home.eql?('true')
-    command << "type=#{@user.type}" if not @user.type.blank?
-    command << "batchmode"
+#    command = ["/sbin/yast2", "users", "add"]
+#    command << "cn=\"#{@user.full_name}\""  if not @user.full_name.blank?
+#    if not @user.groups.blank?
+#      grp_string = @user.groups.map { |group| group[:id] }.join(',')
+#      command << "grouplist=#{grp_string}"
+#    end
+#    command << "gid=#{@user.default_group}" if not @user.default_group.blank?
+#    command << "home=#{@user.home_directory}" if not @user.home_directory.blank?
+#    command << "shell=#{@user.login_shell}" if not @user.login_shell.blank?
+#    command << "username=#{@user.login_name}" if not @user.login_name.blank?
+#    command << "uid=#{@user.uid}" if not @user.uid.blank?
+#    command << "password=#{@user.password}" if not @user.password.blank?
+#    command << "ldap_password=#{@user.ldap_password}" if not @user.ldap_password.blank?
+#    command << "no_home" if not @user.no_home.blank? and @user.no_home.eql?('true')
+#    command << "type=#{@user.type}" if not @user.type.blank?
+#    command << "batchmode"
 
-    ret = @scr.execute(command)
+    # FIXME mandatory parameters must be required on web-client side...
+    config	= {
+	"type"	=> [ "s", "local" ]
+    }
+    data	= {
+	"uid"	=> [ "s", @user.login_name ]
+    }
+    data["cn"]			= [ "s", @user.full_name ]	unless @user.full_name.blank?
+    data["userPassword"]	= [ "s", @user.password ]	unless @user.password.blank?
+
+    ret = YastService.Call("YaPI::USERS::UserAdd", config, data)
 
     logger.debug "Command returns: #{ret.inspect}"
 
-    return true if ret[:exit] == 0
+    return true if ret == ""
 
-    @error_id = ret[:exit]
-    @error_string = ret[:stderr]
+#    @error_id = ret[:exit] FIXME
+    @error_string = ret
     return false
   end
 
@@ -197,7 +208,7 @@ class UsersController < ApplicationController
   # GET /users.xml
   # GET /users.json
   def index
-    unless permission_check( "org.opensuse.yast.system.users.read")
+    unless permission_check("org.opensuse.yast.modules.yapi.users.usersget")
       render ErrorResult.error(403, 1, "no permission") and return
     end
     get_user_list
@@ -206,7 +217,7 @@ class UsersController < ApplicationController
   # GET /users/1
   # GET /users/1.xml
   def show
-    unless permission_check( "org.opensuse.yast.system.users.read")
+    unless permission_check("org.opensuse.yast.modules.yapi.users.userget")
       render ErrorResult.error(403, 1, "no permission") and return
     end
     if params[:id].blank?
@@ -222,7 +233,7 @@ class UsersController < ApplicationController
   # POST /users.xml
   # POST /users.json
   def create
-    unless permission_check( "org.opensuse.yast.system.users.new")
+    unless permission_check("org.opensuse.yast.modules.yapi.users.useradd")
       render ErrorResult.error(403, 1, "no permission") and return
     end
 
@@ -241,7 +252,7 @@ class UsersController < ApplicationController
   # PUT /users/1
   # PUT /users/1.xml
   def update
-    unless permission_check( "org.opensuse.yast.system.users.write")
+    unless permission_check("org.opensuse.yast.modules.yapi.users.usermodify")
       render ErrorResult.error(403, 1, "no permission") and return
     end
     @user = User.new
@@ -264,7 +275,7 @@ class UsersController < ApplicationController
   # DELETE /users/1.xml
   # DELETE /users/1.json
   def destroy
-    unless permission_check( "org.opensuse.yast.system.users.delete")
+    unless permission_check("org.opensuse.yast.modules.yapi.users.userdelete")
       render ErrorResult.error(403, 1, "no permission") and return
     end
     get_user params[:id]
