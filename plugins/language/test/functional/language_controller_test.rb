@@ -13,8 +13,9 @@ class LanguageControllerTest < ActionController::TestCase
     @request.session[:account_id] = 1 # defined in fixtures
   end
 
-  #  TODO write tests
-  def test_access_show
+
+
+  def test_access_index
     #mock model to test only controller
     Language.any_instance.stubs(:read)
     get :show
@@ -65,9 +66,11 @@ class LanguageControllerTest < ActionController::TestCase
 
   def check_update_result
     assert_response :success
-    assert_equal assigns["language"].language, Data[:language][:current]
-    assert_equal assigns["language"].utf8, Data[:language][:utf8]
-    assert_equal assigns["language"].rootlocale, Data[:language][:rootlocale]
+    lang = assigns(:language)
+    assert lang
+    assert_equal lang.language, Data[:language][:current]
+    assert_equal lang.utf8, Data[:language][:utf8]
+    assert_equal lang.rootlocale, Data[:language][:rootlocale]
   end
 
   def test_update_noparams
