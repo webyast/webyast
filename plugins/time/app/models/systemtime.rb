@@ -4,7 +4,7 @@ class Systemtime
 
   attr_accessor :datetime,
                 :timezone,
-                :utcstatus            
+                :utcstatus
 
   private
   def parse_response(response)
@@ -27,6 +27,10 @@ class Systemtime
   end
 
   public
+
+  def timezones
+    return @@timezones
+  end
 
   def initialize     
   end

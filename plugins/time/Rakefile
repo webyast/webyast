@@ -9,14 +9,6 @@ require 'tasks/rails'
 desc 'Default: run unit tests.'
 task :default => :test
 
-desc 'Test the systemtime plugin.'
-Rake::TestTask.new(:test) do |t|
-  t.libs << 'lib'
-  t.libs << 'test'
-  t.pattern = 'test/**/*_test.rb'
-  t.verbose = true
-end
-
 desc 'Generate documentation for the systemtime plugin.'
 Rake::RDocTask.new(:rdoc) do |rdoc|
   rdoc.rdoc_dir = 'rdoc'
@@ -33,16 +25,4 @@ Rake::PackageTask.new('www', :noversion) do |p|
   p.package_dir = 'package'
   p.package_files.include('**/*')
   p.package_files.exclude('package')
-end
-
-desc "install policies"
-task :install do |t|
-  Dir.glob("**/*.policy").each do |policy|
-    sudo "cp #{policy} /usr/share/PolicyKit/policy"
-  end
-end
-
-def sudo(cmd)
-  puts "#{cmd}"
-  %x[sudo -p "Password: " #{cmd}]
 end
