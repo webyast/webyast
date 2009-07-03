@@ -17,7 +17,8 @@ class Status
     @cpu=""
     @memory=""
     @timestamp = Time.now #nil
-    @datapath = "/var/lib/collectd/g192.suse.de/" # #{host.chomp("/")}/" # <--
+#    @collectd_base_dir = "/var/lib/collectd/"
+    @datapath = set_datapath#"/var/lib/collectd/g192.suse.de/" # #{host.chomp("/")}/" # <--
   end
 
   def start_collectd
@@ -30,8 +31,16 @@ class Status
     @timestamp = nil
   end
 
-  def set_datapath(path)
-    @datapath = path
+  def set_datapath(path=nil)
+    default = "/var/lib/collectd/"
+    unless path.nil?
+      @datapath = path.chomp("/")
+    else # set default path
+      host = @scr.execute(["hostname"])
+      domain = @scr.execute(["domainname"])
+      @datapath = "#{default}#{host[:stdout].strip}.#{domain[:stdout].strip}"
+    end
+    @datapath
   end
 
   def reset_datapath(path)
@@ -70,10 +79,10 @@ class Status
         case d
           when "cpu"
 #            @cpu = fetch_metric("cpu-0/cpu-idle.rrd", "16:18,07/02/2009", "16:19,07/02/2009")
-            @cpu = fetch_metric("cpu-0/cpu-idle.rrd", start, stop)
+            @cpu = fetch_metric("/cpu-0/cpu-idle.rrd", start, stop)
           when "memory"
 #            @memory = fetch_metric("memory/memory-free.rrd", "16:18,07/02/2009", "16:19,07/02/2009")
-            @memory = fetch_metric("memory/memory-free.rrd", start, stop)
+            @memory = fetch_metric("/memory/memory-free.rrd", start, stop)
           when "disk"
             #fetch_metric
         end
