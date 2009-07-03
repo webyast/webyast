@@ -18,7 +18,7 @@ class Status
     @memory=""
     @timestamp = Time.now #nil
 #    @collectd_base_dir = "/var/lib/collectd/"
-    @datapath = set_datapath#"/var/lib/collectd/g192.suse.de/" # #{host.chomp("/")}/" # <--
+    @datapath = set_datapath
   end
 
   def start_collectd
