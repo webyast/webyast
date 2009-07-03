@@ -1,7 +1,26 @@
-class Status < ActiveRecord::Base
+class Status #< ActiveRecord::Base
   require 'scr'
 
   attr_accessor :data
+
+
+  def to_xml(options = {})
+    xml = options[:builder] ||= Builder::XmlMarkup.new(options)
+    xml.instruct! unless options[:skip_instruct]
+
+    xml.status do
+      @data.each_pair do |branch, n|
+      #xml.branch
+        leaf = @data["#{branch}"].split "|"
+        leaf.each do |p|
+          pair = p.split "=>"
+          pair.each do |key, value|
+            xml.tag!("#{pair[0]}", "#{pair[1]}")
+          end
+        end
+      end
+    end
+  end
 
   def initialize
     @scr = Scr.instance
@@ -66,10 +85,13 @@ class Status < ActiveRecord::Base
     unless @timestamp.nil?
       @metrics.each_pair do |m, n|
         @metrics["#{m}"][:rrds].each do |rrdb|
-          @data["#{m}"] = {"#{rrdb}" => fetch_metric("#{m}/#{rrdb}", start, stop)}
+          value = fetch_metric("#{m}/#{rrdb}", start, stop)
+          @data["#{m}"] = "#{@data["#{m}"]}|#{rrdb.chomp(".rrd")}=>#{value}"
+         # @data["#{m}"]["#{rrdb}"] = fetch_metric("#{m}/#{rrdb}", start, stop)
         end
       end
     end
+@data
   end
 
   # creates one metric for defined period
