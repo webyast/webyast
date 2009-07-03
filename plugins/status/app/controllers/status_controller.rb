@@ -25,8 +25,12 @@ class StatusController < ApplicationController
     else
       @status = Status.new
       @status.collect_data("11:13,07/03/2009", "11:14,07/03/2009", %w{cpu memory disk})
-#      @status.collect_data(params[:start], params[:stop], params[:data])
-      #logger.debug "SHOW: #{@status.inspect}"
+
+      respond_to do |format|
+        format.html { render :xml => @status.data.to_xml, :location => "none" } #return xml only
+        format.xml  { render :xml => @status.data.to_xml, :location => "none" }
+        format.json { render :json => @status.data.to_xml, :location => "none" }
+      end
     end
   end
 
@@ -39,7 +43,12 @@ class StatusController < ApplicationController
       @status = Status.new
       @status.collect_data(params[:start], params[:stop], params[:data])
       #logger.debug "SHOW: #{@status.inspect}"
+
+      respond_to do |format|
+        format.html { render :xml => @status.data.to_xml, :location => "none" } #return xml only
+        format.xml  { render :xml => @status.data.to_xml, :location => "none" }
+        format.json { render :json => @status.data.to_xml, :location => "none" }
+      end
     end
   end
-
 end

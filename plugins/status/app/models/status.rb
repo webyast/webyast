@@ -1,34 +1,7 @@
-class Status
+class Status < ActiveRecord::Base
   require 'scr'
-=begin
-  def to_xml(options = {})
-    xml = options[:builder] ||= Builder::XmlMarkup.new(options)
-    xml.instruct! unless options[:skip_instruct]
-    xml.status do
-       xml.tag!(:cpu, @cpu)
-       xml.tag!(:memory, @memory)
-    end
-  end
-=end
 
-  def to_xml(options = {})
-    xml = options[:builder] ||= Builder::XmlMarkup.new(options)
-    xml.instruct! unless options[:skip_instruct]
-
-    xml.status do
-#      @data.each_pair do |key, value|
-#      @data.each do |m|
-        @data.each_pair do |m, n|
-          @data["#{m}"].each_pair do |key, value|
-#            @data["#{m}"]["#{key}"].each do |v|
-              xml.tag!("#{key}", "#{value}")
-#            end
-          end
-        end
-      end
-#    end
-#@data
-  end
+  attr_accessor :data
 
   def initialize
     @scr = Scr.instance
