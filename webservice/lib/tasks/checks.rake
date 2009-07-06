@@ -50,7 +50,7 @@ task :system_check do
   # check needed needed packages
   #
   version = "0.0.1" # do not take care
-  test_version "libsqlite3", version
+  test_version "libsqlite3-0", version
   test_version "PolicyKit", version
   test_version "PackageKit", version
 
