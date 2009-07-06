@@ -62,7 +62,6 @@ task :system_check do
   test_module "rake", "rubygem-rake"
   test_module "rpam", "ruby-rpam"
   test_module "polkit", "ruby-polkit"
-  test_module "fcgi", "ruby-fcgi"
   test_module "dbus", "ruby-dbus"
 
   # check that policies are all installed
