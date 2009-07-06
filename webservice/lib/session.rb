@@ -3,6 +3,7 @@
 # Homepage http://raa.ruby-lang.org/project/session
 # licence http://www.ruby-lang.org/en/LICENSE.txt
 
+# used by app/models/account.rb
 
 require 'open3'
 require 'tmpdir'
