@@ -50,7 +50,7 @@ task :system_check do
   # check needed needed packages
   #
   version = "0.0.1" # do not take care
-  test_version "sqlite3", version
+  test_version "libsqlite3-0", version
   test_version "PolicyKit", version
   test_version "PackageKit", version
 
@@ -62,7 +62,6 @@ task :system_check do
   test_module "rake", "rubygem-rake"
   test_module "rpam", "ruby-rpam"
   test_module "polkit", "ruby-polkit"
-  test_module "fcgi", "ruby-fcgi"
   test_module "dbus", "ruby-dbus"
 
   # check that policies are all installed
