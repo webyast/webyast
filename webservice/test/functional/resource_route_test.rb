@@ -19,8 +19,6 @@ class ResourceRouteTest < ActiveSupport::TestCase
   
   require "lib/resource_registration"
   
-  fixtures :domains, :resources
-  
   # config/initializers/resource_registration.rb sets it up
   
   test "resource route initialization" do

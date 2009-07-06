@@ -18,8 +18,6 @@ class ResourceRegistrationTest < ActiveSupport::TestCase
 
   require "lib/resource_registration"
   
-  fixtures :domains, :resources
-  
   # Create resources from .yml file
   
   test "resource creation" do

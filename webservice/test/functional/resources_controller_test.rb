@@ -16,8 +16,6 @@ class ResourcesControllerTest < ActionController::TestCase
 
   require "lib/resource_registration"
   
-  fixtures :domains, :resources
-  
   def setup
     # set up test routing
     ResourceRegistration.reset
