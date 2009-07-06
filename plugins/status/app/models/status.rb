@@ -1,26 +1,7 @@
-class Status #< ActiveRecord::Base
+class Status < ActiveRecord::Base
   require 'scr'
 
   attr_accessor :data
-
-
-  def to_xml(options = {})
-    xml = options[:builder] ||= Builder::XmlMarkup.new(options)
-    xml.instruct! unless options[:skip_instruct]
-
-    xml.status do
-      @data.each_pair do |branch, n|
-      #xml.branch
-        leaf = @data["#{branch}"].split "|"
-        leaf.each do |p|
-          pair = p.split "=>"
-          pair.each do |key, value|
-            xml.tag!("#{pair[0]}", "#{pair[1]}")
-          end
-        end
-      end
-    end
-  end
 
   def initialize
     @scr = Scr.instance
@@ -78,38 +59,47 @@ class Status #< ActiveRecord::Base
   def draw_graph(heigth=nil, width=nil)
   end
 
-  #wieviele cpus?
   # creates several metrics for a defined period
   def collect_data(start=Time.now, stop=Time.now, data = %w{cpu memory disk})
-#  def collect_data(start="16:18,07/02/2009", stop="16:19,07/02/2009", data=%w{cpu memory disk})
-    unless @timestamp.nil?
+    result = Hash.new
+    unless @timestamp.nil? # collectd not started
       @metrics.each_pair do |m, n|
         @metrics["#{m}"][:rrds].each do |rrdb|
-          value = fetch_metric("#{m}/#{rrdb}", start, stop)
-          @data["#{m}"] = "#{@data["#{m}"]}|#{rrdb.chomp(".rrd")}=>#{value}"
-         # @data["#{m}"]["#{rrdb}"] = fetch_metric("#{m}/#{rrdb}", start, stop)
+           result["#{rrdb}".chomp(".rrd")] = fetch_metric("#{m}/#{rrdb}", start, stop)
         end
+        @data["#{m}"] = result
+        result = Hash.new
       end
     end
-@data
+    @data
   end
 
   # creates one metric for defined period
   def fetch_metric(rrdfile, start=Time.now, stop=Time.now)#, heigth=nil, width=nil)
     sum = 0.0
     counter = 1
+    result = Hash.new#Array.new
     cmd = @scr.execute(["rrdtool", "fetch", "#{@datapath}/#{rrdfile}", "AVERAGE",\
                                      "--start"," #{start}", "--end", " #{stop}"])
     lines = cmd[:stdout].split "\n"
-    lines.each do |l|
-       if l =~ /\D*:\D*/
-        pair = l.split ":"
-        unless pair[1].include?("nan") # no valid measurement
-          sum += pair[1].to_f
-          counter += 1
+    lines[0].each do |l|
+      if l =~ /\D*/
+        labels = l.split " "
+        collumn = 1
+        labels.each do
+          lines.each do |l|
+            if l =~ /\d*:\D*/  ####
+              pair = l.split " "
+              unless pair[collumn].include?("nan") # no valid measurement
+                sum += pair[collumn].to_f
+                counter += 1
+              end
+            end
+          end
+          result[labels[collumn-1]] = sum/(counter-1) unless counter == 1
         end
       end
     end
-    sum/(counter-1) unless sum == 0
+    result
   end
 end
