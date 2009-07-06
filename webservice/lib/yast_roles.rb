@@ -1,14 +1,11 @@
 module YastRoles
-  
-  # FIXME: move this to test/ if RAILS_ENV == 'test'
-  USER_ROLES_CONFIG = "/etc/yast_user_roles"
 
   require 'polkit'
   include PolKit
 
 private
   def user_roles(user)
-    return session['services'] unless session['user_roles'].nil?
+    return session['services'] if session['user_roles']
       
     return [] unless File.exists?(USER_ROLES_CONFIG)
     
