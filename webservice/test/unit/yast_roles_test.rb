@@ -17,7 +17,7 @@ class YastRolesTest < ActiveSupport::TestCase
   
   def setup
     ENV["RAILS_ENV"] = ""
-    @current_account = CurrentLogin.new "test"
+    @current_account = CurrentLogin.new "root" # be brave
   end
     
   def test_permission_check_trivial
