@@ -1,0 +1,18 @@
+Status
+=========
+
+REST interface for handling collectd/grabbing system information.
+
+Installation:
+-------------
+
+1. Add the Status-policy-file
+
+  sudo cp status/package/org.opensuse.yast.system.status.policy /usr/share/PolicyKit/policy
+
+2. Install rrdtool and collectd packages. You can get them from http://software.opensuse.org/search
+
+3. Start the rest-service
+
+Copyright (c) 2009 Novell, released under the MIT license
+
