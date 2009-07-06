@@ -92,4 +92,6 @@ elsif RAILS_ENV == "development" or RAILS_ENV == "production"
     ResourceRegistration.register_plugin(plugin)
   end
   ResourceRegistration.route ResourceRegistration.resources
+else
+  $stderr.puts "No ResourceRegistration triggered"
 end
