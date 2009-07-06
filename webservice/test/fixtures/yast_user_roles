@@ -8,4 +8,4 @@
 #
 # Format: <user>   <role 1>,<role 2>,...<role n>
 #
-test		network_admin,update_admin
+root		network_admin,update_admin
