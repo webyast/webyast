@@ -27,7 +27,7 @@ public
       return true
     end
     #checking roles
-    roles =  session['user_roles'] ? session['services'] : user_roles(self.current_account.login)
+    roles =  (defined?(session) && session && session['user_roles']) ? session['services'] : user_roles(self.current_account.login)
     roles.each do |role|
       if ( role != self.current_account.login and
 	  polkit_check( action, role) == :yes)
@@ -39,7 +39,7 @@ public
     return false
   rescue Exception => e
     Rails.logger.error "permission_check() exception: #{$!}"
-    Rails.logger.debug $@.join("\n")
+#    Rails.logger.debug $@.join("\n")
     return false
   end
 end
