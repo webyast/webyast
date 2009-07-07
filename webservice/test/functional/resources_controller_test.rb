@@ -3,7 +3,7 @@
 #
 # This tests proper returns for resource inspection
 #
-require 'test_helper'
+require File.expand_path(File.dirname(__FILE__) + "/../test_helper")
 
 class TestPlugin
   attr_reader :directory
