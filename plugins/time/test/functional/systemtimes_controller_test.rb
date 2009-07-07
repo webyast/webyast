@@ -14,7 +14,7 @@ class SystemtimesControllerTest < ActionController::TestCase
     @request.session[:account_id] = 1 # defined in fixtures
   end
 
-  test "access show" do
+  def test_access_show
     Systemtime.any_instance.stubs(:read)
     get :show
     assert_response :success
