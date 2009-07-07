@@ -80,7 +80,7 @@ class Status < ActiveRecord::Base
             @data["#{m}"] = result
             result = Hash.new
           end
-        else
+        else # only metrics in data
           data.each do |d|
             @metrics.each_pair do |m, n|
               if m.include?(d)
@@ -98,34 +98,35 @@ class Status < ActiveRecord::Base
   end
 
   # creates one metric for defined period
-  def fetch_metric(rrdfile, start=Time.now, stop=Time.now)#, heigth=nil, width=nil)
-    sum = 0.0
-    counter = 0
+  def fetch_metric(rrdfile)#, start=Time.now, stop=Time.now)#, heigth=nil, width=nil)
     result = Hash.new#Array.new
     cmd = IO.popen("rrdtool fetch #{@datapath}/#{rrdfile} AVERAGE "\
                                      "--start #{start} --end #{stop}")
     output = cmd.read
     cmd.close
 
-    output = output.gsub(",", ".") # translate 1,234e+07 to 1.234e+07
+    labels=""
+    output = output.gsub(",", ".") # translates eg. 1,234e+07 to 1.234e+07
     lines = output.split "\n"
     lines[0].each do |l|
       if l =~ /\D*/
         labels = l.split " "
-        collumn = 1
-        labels.each do
-          lines.each do |l|
-            if l =~ /\d*:\D*/  ####
-              pair = l.split " "
-              unless pair[collumn].include?("nan") # no valid measurement
-                sum += pair[collumn].to_f
-                counter += 1
-              end
+      end
+    end
+    lines.each do |l|
+      if l =~ /\d*:\D*/  ####
+        unless labels.nil?
+          if l =~ /\d*:\D*/  ####
+            sum = Hash.new
+            pair = l.split ":"
+            values = pair[1].split " "
+            column = 0
+            values.each do |v| # values for each label
+              result["#{labels[column]}"] ||= Hash.new
+              result["#{labels[column]}"].merge!({"T_#{pair[0].chomp(": ")}" => v})
+              column += 1
             end
           end
-          result[labels[collumn-1]] = sum/(counter) unless counter == 0
-          sum, counter = 0.0, 0
-          collumn += 1
         end
       end
     end
