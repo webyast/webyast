@@ -1,4 +1,15 @@
-# This controller handles the login/logout function of the site.  
+#
+# SessionsController
+#
+#
+# This controller handles the login/logout function of the site.
+#
+# /login -> SessionsController.create
+# /logout -> SessionsController.destroy
+#
+# and implements a 'session' resource
+#
+#
 class SessionsController < ApplicationController
 
   # render new.rhtml
