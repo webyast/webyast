@@ -15,13 +15,15 @@ Provides:       yast2-webservice:/srv/www/yastws/app/controllers/systemtime_cont
 License:        MIT
 Group:          Productivity/Networking/Web/Utilities
 Autoreqprov:    on
-Version:        0.0.1
+Version:        0.0.2
 Release:        0
 Summary:        YaST2 - Webservice - Time
 Source:         www.tar.bz2
 BuildRoot:      %{_tmppath}/%{name}-%{version}-build
 BuildArch:      noarch
 BuildRequires:  rubygem-mocha
+Requires:       yast2-core > 2.18.14
+Requires:       yast2-country >= 2.18.9
 
 #
 %define pkg_user yastws
@@ -34,6 +36,7 @@ YaST2 - Webservice - REST based interface of YaST in order to handle time and da
 Authors:
 --------
     Stefan Schubert <schubi@opensuse.org>
+    Josef Reidinger <jreidinger@suse.cz>
 
 %prep
 %setup -q -n www
