@@ -77,7 +77,7 @@ class Status < ActiveRecord::Base
   # creates one metric for defined period
   def fetch_metric(rrdfile, start=Time.now, stop=Time.now)#, heigth=nil, width=nil)
     sum = 0.0
-    counter = 1
+    counter = 0
     result = Hash.new#Array.new
     cmd = @scr.execute(["rrdtool", "fetch", "#{@datapath}/#{rrdfile}", "AVERAGE",\
                                      "--start"," #{start}", "--end", " #{stop}"])
@@ -96,7 +96,9 @@ class Status < ActiveRecord::Base
               end
             end
           end
-          result[labels[collumn-1]] = sum/(counter-1) unless counter == 1
+          result[labels[collumn-1]] = sum/(counter) unless counter == 0
+          sum, counter = 0.0, 0
+          collumn += 1
         end
       end
     end
