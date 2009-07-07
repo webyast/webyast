@@ -9,7 +9,7 @@ class Status < ActiveRecord::Base
     @data = Hash.new
     @cpu=""
     @memory=""
-    @timestamp = Time.now #nil
+    start_collectd
 #    @collectd_base_dir = "/var/lib/collectd/"
     @datapath = set_datapath
     @metrics = available_metrics
@@ -31,26 +31,36 @@ class Status < ActiveRecord::Base
     unless path.nil?
       @datapath = path.chomp("/")
     else # set default path
-      host = @scr.execute(["hostname"])
-      domain = @scr.execute(["domainname"])
-      @datapath = "#{default}#{host[:stdout].strip}.#{domain[:stdout].strip}"
+      cmd = IO.popen("hostname")
+      host = cmd.read
+      cmd.close
+      cmd = IO.popen("domainname")
+      domainname = cmd.read
+      cmd.close
+      @datapath = "#{default}#{host.strip}.#{domainname.strip}"
     end
-    @datapath
+    return @datapath
   end
 
   def available_metrics
     metrics = Hash.new
-    cmd = Scr.instance.execute(["ls", "#{@datapath}"])
-    cmd[:stdout].split(" ").each do |l|
-      files = Scr.instance.execute(["ls", "#{@datapath}/#{l}"])
-      metrics["#{l}"] = { :rrds => files[:stdout].split(" ")}
+    cmd = IO.popen("ls #{@datapath}")
+    output = cmd.read
+    cmd.close
+    output.split(" ").each do |l|
+      fp = IO.popen("ls #{@datapath}/#{l}")
+      files = fp.read
+      fp.close
+      metrics["#{l}"] = { :rrds => files.split(" ")}
     end
-    metrics
+    return metrics
   end
 
   def available_metric_files
-    cmd = @scr.execute(["ls", "#{@datapath}.."])
-    lines = cmd[:stdout].split "\n"
+    cmd = IO.popen("ls #{@datapath}..")
+    lines = cmd.read.split "\n"
+    cmd.close
+    return lines
   end
 
   def determine_status
@@ -71,7 +81,7 @@ class Status < ActiveRecord::Base
         result = Hash.new
       end
     end
-    @data
+    return @data
   end
 
   # creates one metric for defined period
@@ -79,9 +89,13 @@ class Status < ActiveRecord::Base
     sum = 0.0
     counter = 0
     result = Hash.new#Array.new
-    cmd = @scr.execute(["rrdtool", "fetch", "#{@datapath}/#{rrdfile}", "AVERAGE",\
-                                     "--start"," #{start}", "--end", " #{stop}"])
-    lines = cmd[:stdout].split "\n"
+    cmd = IO.popen("rrdtool fetch #{@datapath}/#{rrdfile} AVERAGE "\
+                                     "--start #{start} --end #{stop}")
+    output = cmd.read
+    cmd.close
+
+    output = output.gsub(",", ".") # translate 1,234e+07 to 1.234e+07
+    lines = output.split "\n"
     lines[0].each do |l|
       if l =~ /\D*/
         labels = l.split " "
@@ -102,6 +116,6 @@ class Status < ActiveRecord::Base
         end
       end
     end
-    result
+    return result
   end
 end
