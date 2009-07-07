@@ -14,8 +14,8 @@ end
 
 class ResourcesControllerTest < ActionController::TestCase
 
-  require "lib/resource_registration"
-  
+  require File.expand_path(File.dirname(__FILE__) + "/../../lib/resource_registration")
+
   def setup
     # set up test routing
     ResourceRegistration.reset
@@ -25,6 +25,11 @@ class ResourcesControllerTest < ActionController::TestCase
   
   test "resources access root" do
     get :index
+    assert_response :success
+  end
+  
+  test "resources index with interface" do
+    get :index, :interface => "org.opensuse.test"
     assert_response :success
   end
   
