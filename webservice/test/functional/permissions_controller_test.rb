@@ -12,84 +12,117 @@ require 'mocha'
 
 class PermissionsControllerTest < ActionController::TestCase
   fixtures :accounts
+  
   def setup
     @controller = PermissionsController.new
     @request = ActionController::TestRequest.new
+    
+    # Fake an active session
     # http://railsforum.com/viewtopic.php?id=1719
     @request.session[:account_id] = 1 # defined in fixtures
+    
     Scr.any_instance.stubs(:execute).with(["polkit-action"]).returns({:stderr=>"", :exit=>0, :stdout=>"org.opensuse.yast.system.users.read\norg.opensuse.yast.system.users.write\norg.opensuse.yast.system.users.new\norg.opensuse.yast.system.users.delete\n"})
-    Scr.any_instance.stubs(:execute).with(["polkit-auth", "--user", "schubi", "--explicit"]).returns(:stderr=>"", :exit=>0, :stdout=>"org.opensuse.yast.system.users.read\norg.opensuse.yast.system.users.write\norg.opensuse.yast.system.users.new\n")
-    Scr.any_instance.stubs(:execute).with(['polkit-auth', '--user', 'schubi', '--grant', 'org.opensuse.yast.patch.install']).returns({:stderr=>"", :exit=>0, :stdout=>""})
+    Scr.any_instance.stubs(:execute).with(["polkit-auth", "--user", "test_user", "--explicit"]).returns(:stderr=>"", :exit=>0, :stdout=>"org.opensuse.yast.system.users.read\norg.opensuse.yast.system.users.write\norg.opensuse.yast.system.users.new\n")
+    Scr.any_instance.stubs(:execute).with(['polkit-auth', '--user', 'test_user', '--grant', 'org.opensuse.yast.patch.install']).returns({:stderr=>"", :exit=>0, :stdout=>""})
   end
   
-  test "access index" do
-    get :index, :user_id => "schubi"
+  test "permissions access index" do
+    get :index, :user_id => "test_user"
     assert_response :success
   end
 
-  test "access index xml" do
+  test "permissions access index production" do
+    save = ENV['RAILS_ENV']
+    ENV['RAILS_ENV'] = "production"
+    get :index
+    ENV['RAILS_ENV'] = save
+    assert_response 403
+  end
+
+  test "permissions access index xml" do
     mime = Mime::XML
     @request.accept = mime.to_s
-    get :index, :user_id => "schubi", :format => :xml
+    get :index, :user_id => "test_user", :format => :xml
     assert_equal mime.to_s, @response.content_type
   end
   
-  test "access index json" do
+  test "permissions access index json" do
     mime = Mime::JSON
     @request.accept = mime.to_s
-    get :index, :user_id => "schubi", :format => :json
+    get :index, :user_id => "test_user", :format => :json
     assert_equal mime.to_s, @response.content_type
   end
 
-  test "access index without user" do
+  test "permissions access index without user" do
     get :index
     assert_response 404
   end
 
-  test "access index with wrong user" do
+  test "permissions access index with wrong user" do
     Scr.any_instance.stubs(:execute).with(["polkit-auth", "--user", "not avail", "--explicit"]).returns({:stderr=>"polkit-auth: cannot look up uid for user 'not avail'\n", :exit=>1, :stdout=>""})
     get :index, :user_id => "not avail"
     assert_response 404
   end
 
-  test "access show" do
-    get :show, :id => "org.opensuse.yast.system.users.read", :user_id => "schubi"
+  test "permissions access show" do
+    get :show, :id => "org.opensuse.yast.system.users.read", :user_id => "test_user"
     assert_response :success
   end
 
-  test "access show without right" do
-    get :show, :user_id => "schubi"
-    assert_response 404
+  test "permissions access show json" do
+    mime = Mime::JSON
+    @request.accept = mime.to_s
+    get :show, :id => "org.opensuse.yast.system.users.read", :user_id => "test_user"
+    assert_response :success
   end
 
-  test "access show without user" do
+  test "permissions access show production" do
+    save = ENV['RAILS_ENV']
+    ENV['RAILS_ENV'] = "production"
+    get :show, :id => "org.opensuse.yast.system.users.read"
+    ENV['RAILS_ENV'] = save
+    assert_response 403
+  end
+
+  test "permissions access show without right" do
+    save = ENV['RAILS_ENV']
+    ENV['RAILS_ENV'] = "production"
+    get :show, :user_id => "nobody"
+    ENV['RAILS_ENV'] = save
+    assert_response 403
+  end
+
+  test "permissions access show without user" do
     get :show, :id => "org.opensuse.yast.system.users.read"
     assert_response 404
   end
 
-  test "access show without user AND right" do
+  test "permissions access show without user AND right" do
     get :show
     assert_response 404
   end
 
-  test "setting permissions" do
-    put :update, :permissions => {"name"=>"org.opensuse.yast.patch.install", "id"=>"schubi", "grant"=>true}, :id=>"schubi.xml"
+  test "permissions setting" do
+    put :update, :permissions => {"name"=>"org.opensuse.yast.patch.install", "id"=>"test_user", "grant"=>true}, :id=>"test_user"
     assert_response :success
   end
 
-  test "setting permissions without permissions" do
-    put :update, :id=>"schubi.xml"
-    assert_response 404
+  test " setting permissions without permissions" do
+    save = ENV['RAILS_ENV']
+    ENV['RAILS_ENV'] = "production"
+    put :update, :id=>"nobody"
+    ENV['RAILS_ENV'] = save
+    assert_response 403
   end
 
   test "setting permissions without user" do
-    put :update, :permissions => {"name"=>"org.opensuse.yast.patch.install", "id"=>"schubi", "grant"=>true}
+    put :update, :permissions => {"name"=>"org.opensuse.yast.patch.install", "id"=>"test_user", "grant"=>true}
     assert_response 404
   end
 
   test "setting permissions returns false from polkit-auth" do
-    Scr.any_instance.stubs(:execute).with(['polkit-auth', '--user', 'schubi', '--grant', 'org.opensuse.yast.patch.install']).returns({:stderr=>"error", :exit=>1, :stdout=>""})
-    put :update, :permissions => {"name"=>"org.opensuse.yast.patch.install", "id"=>"schubi", "grant"=>true}, :id=>"schubi.xml"
+    Scr.any_instance.stubs(:execute).with(['polkit-auth', '--user', 'test_user', '--grant', 'org.opensuse.yast.patch.install']).returns({:stderr=>"error", :exit=>1, :stdout=>""})
+    put :update, :permissions => {"name"=>"org.opensuse.yast.patch.install", "id"=>"test_user", "grant"=>true}, :id=>"test_user"
     assert_response 404
   end
 
