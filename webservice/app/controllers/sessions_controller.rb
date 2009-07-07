@@ -18,18 +18,13 @@ class SessionsController < ApplicationController
   end
 
   def show
-    ret = Hash.new
-    ret[:hash] = Hash.new
-    ret[:hash][:login] = 'foo'
-    respond_to do |format|
-      format.xml { render :xml => ret.to_xml, :location => "none" }
-      format.json { render :json => ret.to_json, :location => "none" }
-      format.html { render :html => ret.to_xml, :location => "none" }
-    end
+    @ret = Hash.new
+    @ret[:hash] = Hash.new
+    @ret[:hash][:login] = 'nobody'
   end
   
   def create
-    if params["hash"] != nil
+    if params["hash"].is_a? Hash
       #checking if the session description is hosted in a own Hash
       params["hash"].each do |name,value|
          params[name] = value
@@ -38,40 +33,18 @@ class SessionsController < ApplicationController
     if params.has_key?(:login) && params[:password]
        self.current_account = Account.authenticate(params[:login], params[:password])
     end
+    @cmd_ret = Hash.new
     if logged_in?
-      if params.has_key?(:remember_me) && params[:remember_me] == true
+      auth_token = { :value => self.current_account.remember_token , :expires => self.current_account.remember_token_expires_at }
+      if params[:remember_me]
         current_account.remember_me unless current_account.remember_token?
-        cookies[:auth_token] = { :value => self.current_account.remember_token , :expires => self.current_account.remember_token_expires_at }
+        cookies[:auth_token] = auth_token
       end
 
-      @cmd_ret = Hash.new
       @cmd_ret["login"] = "granted"
-      @cmd_ret["auth_token"] = { :value => self.current_account.remember_token , :expires => self.current_account.remember_token_expires_at }
-      respond_to do |format|
-        format.xml do
-	  render :xml => @cmd_ret.to_xml, :location => "none"
-        end
-        format.json do
-          render :json => @cmd_ret.to_json, :location => "none"
-        end
-        format.html do
-	  render :xml => @cmd_ret.to_xml, :location => "none"
-        end
-      end
+      @cmd_ret["auth_token"] = auth_token
     else
-      @cmd_ret = Hash.new
       @cmd_ret["login"] = "denied"
-      respond_to do |format|
-        format.xml do
-	  render :xml => @cmd_ret.to_xml, :location => "none"
-        end
-        format.json do
-          render :json => @cmd_ret.to_json, :location => "none"
-        end
-        format.html do
-	  render :xml => @cmd_ret.to_xml, :location => "none" #only XML will be returned
-        end
-      end
     end
   end
 
@@ -81,16 +54,5 @@ class SessionsController < ApplicationController
     reset_session
     @cmd_ret = Hash.new
     @cmd_ret["logout"] = "Goodbye!"
-    respond_to do |format|
-      format.xml do
-	render :xml => @cmd_ret.to_xml, :location => "none"
-      end
-      format.json do
-        render :json => @cmd_ret.to_json, :location => "none"
-      end
-      format.html do
-	render :xml => @cmd_ret.to_xml, :location => "none" #only XML will be returned
-      end
-    end
   end
 end
