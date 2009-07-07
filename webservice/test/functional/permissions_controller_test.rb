@@ -69,6 +69,11 @@ class PermissionsControllerTest < ActionController::TestCase
     assert_response :success
   end
 
+  test "permissions access show blank id" do
+    get :show, :user_id => "test_user"
+    assert_response 404
+  end
+
   test "permissions access show json" do
     mime = Mime::JSON
     @request.accept = mime.to_s
@@ -105,6 +110,11 @@ class PermissionsControllerTest < ActionController::TestCase
   test "permissions setting" do
     put :update, :permissions => {"name"=>"org.opensuse.yast.patch.install", "id"=>"test_user", "grant"=>true}, :id=>"test_user"
     assert_response :success
+  end
+
+  test "permissions setting blank" do
+    put :update, :id=>"test_user"
+    assert_response 404
   end
 
   test " setting permissions without permissions" do

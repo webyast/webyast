@@ -2,18 +2,15 @@ class ResourcesController < ApplicationController
   require "resource_registration"
   
   def index
-    if params[:interface]
-      @resources = Hash.new
-      @resources[params[:interface]] = ResourceRegistration.resources[params[:interface]]
+    iface = params[:interface]
+    if iface
+      # return single resource if specific interface requested
+      rsrc = ResourceRegistration.resources[iface]
+      @resources = rsrc ? { iface => rsrc } : Hash.new
     else
+      # return all known resources
       @resources = ResourceRegistration.resources
     end
     @node = "Yast"
-    # respond_to do |format|
-    #  format.html { ... }
-    #  format.xml { ... }
-    # end
-    #
-    # -> index.erb.<format>
   end
 end
