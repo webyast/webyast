@@ -7,8 +7,6 @@ class Status < ActiveRecord::Base
     @scr = Scr.instance
     @health_status = nil
     @data = Hash.new
-    @cpu=""
-    @memory=""
     start_collectd
 #    @collectd_base_dir = "/var/lib/collectd/"
     @datapath = set_datapath
@@ -70,15 +68,30 @@ class Status < ActiveRecord::Base
   end
 
   # creates several metrics for a defined period
-  def collect_data(start=Time.now, stop=Time.now, data = %w{cpu memory disk})
+  def collect_data(start=Time.now, stop=Time.now, data = nil)
     result = Hash.new
     unless @timestamp.nil? # collectd not started
-      @metrics.each_pair do |m, n|
-        @metrics["#{m}"][:rrds].each do |rrdb|
-           result["#{rrdb}".chomp(".rrd")] = fetch_metric("#{m}/#{rrdb}", start, stop)
+        case data
+        when nil # all metrics
+          @metrics.each_pair do |m, n|
+            @metrics["#{m}"][:rrds].each do |rrdb|
+              result["#{rrdb}".chomp(".rrd")] = fetch_metric("#{m}/#{rrdb}", start, stop)
+            end
+            @data["#{m}"] = result
+            result = Hash.new
+          end
+        else
+          data.each do |d|
+            @metrics.each_pair do |m, n|
+              if m.include?(d)
+                @metrics["#{m}"][:rrds].each do |rrdb|
+                result["#{rrdb}".chomp(".rrd")] = fetch_metric("#{m}/#{rrdb}", start, stop)
+              end
+              @data["#{m}"] = result
+              result = Hash.new
+            end
+          end
         end
-        @data["#{m}"] = result
-        result = Hash.new
       end
     end
     return @data

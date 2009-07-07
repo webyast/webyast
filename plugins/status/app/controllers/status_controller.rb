@@ -33,7 +33,7 @@ class StatusController < ApplicationController
     else
       @status = Status.new
 #      @status.collect_data(params[:start], params[:stop])
-      @status.collect_data("11:13,07/03/2009", "11:14,07/03/2009", %w{cpu memory disk})
+      @status.collect_data("11:13,07/03/2009", "11:14,07/03/2009", %w{cpu disk})
 
     end
   end
