@@ -35,9 +35,9 @@ class SystemtimesController < ApplicationController
 
   def show
     
-#    unless permission_check( "org.opensuse.yast.modules.yapi.time.read")
-#      render ErrorResult.error( 403, 1, "no permission" ) and return
-#    end
+    unless permission_check( "org.opensuse.yast.modules.yapi.time.read")
+      render ErrorResult.error( 403, 1, "no permission" ) and return
+    end
 
     @systemtime = Systemtime.new
     @systemtime.read
