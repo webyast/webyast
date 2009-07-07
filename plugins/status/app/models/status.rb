@@ -68,11 +68,11 @@ class Status < ActiveRecord::Base
   end
 
   # creates several metrics for a defined period
-  def collect_data(start=Time.now, stop=Time.now, data = nil)
+  def collect_data(start=Time.now, stop=Time.now, data = %w{cpu memory disk})
     result = Hash.new
-    unless @timestamp.nil? # collectd not started
+    unless @timestamp.nil? # collectd not start
         case data
-        when nil # all metrics
+        when nil, "all", "All" # all metrics
           @metrics.each_pair do |m, n|
             @metrics["#{m}"][:rrds].each do |rrdb|
               result["#{rrdb}".chomp(".rrd")] = fetch_metric("#{m}/#{rrdb}", start, stop)
@@ -98,12 +98,13 @@ class Status < ActiveRecord::Base
   end
 
   # creates one metric for defined period
-  def fetch_metric(rrdfile)#, start=Time.now, stop=Time.now)#, heigth=nil, width=nil)
-    result = Hash.new#Array.new
+  def fetch_metric(rrdfile, start=Time.now, stop=Time.now)
+    result = Hash.new
     cmd = IO.popen("rrdtool fetch #{@datapath}/#{rrdfile} AVERAGE "\
                                      "--start #{start} --end #{stop}")
     output = cmd.read
     cmd.close
+    return nil if output.nil?
 
     labels=""
     output = output.gsub(",", ".") # translates eg. 1,234e+07 to 1.234e+07

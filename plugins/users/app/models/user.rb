@@ -1,65 +1,58 @@
 
 class User
   
-  attr_accessor :full_name,
-                :groups,
-		:grouplist,
-                :default_group,
-                :home_directory,
-                :login_name,
-                :login_shell,
+  attr_accessor :cn,
                 :uid,
-                :password,
-                :ldap_password,
-                :type,
-                :new_uid,
-                :new_login_name,
-                :no_home,
+                :uidNumber,
+		:gidNumber,
+                :grouplist,
+		:groupname,
+		:homeDirectory,
+		:loginShell,
+		:userPassword,
+		:addit_data,
+		:type,
                 :sshkey
 
+#                :new_uid,
+#                :new_login_name,
+#                :no_home,
   def id
-    @login_name
+    @uid
   end
 
   def id=(id_val)
-    @login_name = id_val
+    @uid	= id_val
   end
   
   def initialize 
-    @no_home = false
-    @full_name = ""
-    @groups = ""
-    @grouplist	= {}
-    @default_group = ""
-    @home_directory = ""
-    @login_shell = ""
-    @login_name = ""
-    @uid = ""
-    @password = ""
-    @ldap_password = ""
-    @type = ""
-    @new_uid = ""
-    @new_login_name = ""
-    @sshkey = ""
+    @cn			= ""
+    @uid		= ""
+    @uidNumber		= ""
+    @grouplist		= {}
+    @groupname		= ""
+    @homeDirectory	= ""
+    @loginShell		= ""
+    @userPassword	= ""
+    @type		= "local"
+#    @new_uid = ""
+#    @new_login_name = ""
+    @sshkey		= ""
   end
 
   def update_attributes usr
     return false if usr==nil
-    @no_home = usr[:no_home]
-    @groups = usr[:groups]
-    @grouplist	= usr[:grouplist]
-    @home_directory = usr[:home_directory]
-    @type = usr[:type]
-    @new_login_name = usr[:new_login_name]
-    @default_group = usr[:default_group]
-    @login_name = usr[:login_name]
-    @uid = usr[:uid]
-    @ldap_password = usr[:ldap_password]
-    @login_shell = usr[:login_shell]
-    @full_name = usr[:full_name]
-    @password = usr[:password]
-    @new_uid = usr[:new_uid]
-    @sshkey = usr[:sshkey]
+    @grouplist		= usr[:grouplist]
+    @homeDirectory	= usr[:homeDirectory]
+    @type		= usr[:type]
+    @groupname		= usr[:groupname]
+    @loginShell		= usr[:loginShell]
+    @userPassword	= usr[:userPassword]
+    @uid		= usr[:uid]
+    @uidNumber		= usr[:uidNumber]
+    @cn			= usr[:cn]
+
+    @sshkey 		= usr[:sshkey]
     return true
   end
 
@@ -69,26 +62,14 @@ class User
     
     xml.user do
       xml.tag!(:id, id )
-      xml.tag!(:full_name, full_name )
-      xml.tag!(:no_home, no_home, {:type => "boolean"} )
-      xml.tag!(:default_group, default_group )
-      xml.tag!(:home_directory, home_directory )
-      xml.tag!(:login_shell, login_shell )
-      xml.tag!(:login_name, login_name )
-      xml.tag!(:uid, uid, {:type => "integer"})
-      xml.tag!(:password, password )
-      xml.tag!(:ldap_password, ldap_password )
+      xml.tag!(:cn, cn )
+      xml.tag!(:groupname, groupname)
+      xml.tag!(:loginShell, loginShell )
+      xml.tag!(:uid, uid )
+      xml.tag!(:uidNumber, uidNumber, {:type => "integer"})
+      xml.tag!(:userPassword, userPassword )
       xml.tag!(:type, type )
-      xml.tag!(:new_uid, new_uid )
-      xml.tag!(:new_login_name, new_login_name )
       xml.tag!(:sshkey, sshkey )
-      xml.groups({:type => "array"}) do
-         groups.split( "," ).each do |group| 
-            xml.group do
-               xml.tag!(:id, group)
-            end
-         end
-      end
       xml.grouplist({:type => "array"}) do
          grouplist.each do |group, val| 
             xml.group do
