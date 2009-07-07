@@ -3,7 +3,7 @@
 #
 # This tests lib/scr, the Scr proxy for YaST D-Bus
 #
-require 'test_helper'
+require File.expand_path(File.dirname(__FILE__) + "/../test_helper")
 
 class ScrTest < ActiveSupport::TestCase
 
