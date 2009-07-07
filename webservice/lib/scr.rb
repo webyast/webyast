@@ -24,15 +24,15 @@ class Scr
   def read (path, arg = "")
 
     ret = @scr.Read([false, "path", ["s",path] ],
-                    [false, (arg.empty? ? "" : "string"), ["s",arg] ], 
-                    [false, "", ["s",""] ])
+                    [false, "string", ["s",arg] ], 
+                    [false, "string", ["s",""] ])
     return  ret[0][2]
   end
 
   def write (path, value, arg = "")
     @scr.Write([false, "path", ["s",path] ],
-               [false, "", ["s",value] ], 
-               [false, "", ["s",arg] ])
+               [false, "string", ["s",value] ], 
+               [false, "string", ["s",arg] ])
   end
 
   def execute (arguments, environment=[] )
@@ -55,8 +55,8 @@ class Scr
     command += " </dev/null"
 
     ret = @scr.Execute([false, "path", ["s",".target.bash_output"] ],
-		       [false, "", ["s",command] ], 
-		       [false, "", ["s",""] ])
+		       [false, "string", ["s",command] ], 
+		       [false, "string", ["s",""] ])
     resmap = ret[0][2]
     exit = resmap["exit"][2]
     Rails.logger.error " SCRExecute (#{command}) => #{exit}"
