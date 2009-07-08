@@ -72,7 +72,7 @@ class Language
         @@available.each do |k,v|
           xml.language do
             xml.tag!(:id, k)
-            xml.tag!(:name, v[0])
+            xml.tag!(:name, v[0]) # [native UTF8, native ascii, UTF8 extension, english name]
           end
         end
       end
