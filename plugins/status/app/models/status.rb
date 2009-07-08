@@ -103,36 +103,37 @@ class Status < ActiveRecord::Base
     if start.blank?
       start = "--start #{Time.now.strftime("%H:%M,%m/%d/%Y")}"
     else
-      start = "--start #{start}"
+      start = "--start #{start}"#start.strftime("%H:%M,%m/%d/%Y")}"
     end
     if stop.blank?
       stop = "--end #{Time.now.strftime("%H:%M,%m/%d/%Y")}"
     else
-      stop = "--end #{stop}"
+      stop = "--end #{stop}"#stop.strftime("%H:%M,%m/%d/%Y")}"
     end
     cmd = IO.popen("rrdtool fetch #{@datapath}/#{rrdfile} AVERAGE #{start} #{stop}")
 
     output = cmd.read
     cmd.close
-    return nil if output.blank?
+    return "failed" if output.blank?
 
     labels=""
     output = output.gsub(",", ".") # translates eg. 1,234e+07 to 1.234e+07
     lines = output.split "\n"
+    # set label names
     lines[0].each do |l|
       if l =~ /\D*/
         labels = l.split " "
       end
     end
-    lines.each do |l|
-      if l =~ /\d*:\D*/  ####
-        unless labels.nil?
-          if l =~ /\d*:\D*/  ####
-            sum = Hash.new
+    unless labels.blank?
+      # set values for each label and time
+      lines.each do |l| # each time
+        unless l.blank?
+          if l =~ /\d*:\D*/
             pair = l.split ":"
             values = pair[1].split " "
             column = 0
-            values.each do |v| # values for each label
+            values.each do |v| # each label
               result["#{labels[column]}"] ||= Hash.new
               result["#{labels[column]}"].merge!({"T_#{pair[0].chomp(": ")}" => v})
               column += 1
@@ -140,7 +141,9 @@ class Status < ActiveRecord::Base
           end
         end
       end
+      return result
+    else
+      return "failed"
     end
-    return result
   end
 end
