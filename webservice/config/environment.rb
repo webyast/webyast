@@ -85,7 +85,7 @@ case RAILS_ENV
     end
     ResourceRegistration.register_plugin TestPlugin.new
     
-    USER_ROLES_CONFIG = "test/fixtures/yast_user_roles"
+    USER_ROLES_CONFIG = File.join(File.dirname(__FILE__), "../test/fixtures/yast_user_roles")
     
   when "development", "production"
     $stderr.puts "Registering plugin resources"

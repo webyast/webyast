@@ -11,8 +11,6 @@ end
 class YastRolesTest < ActiveSupport::TestCase
   include YastRoles
   
-  session = Hash.new
-
   attr_reader :current_account
   
   def setup
@@ -21,8 +19,10 @@ class YastRolesTest < ActiveSupport::TestCase
   end
     
   def test_permission_check_trivial
+    save = ENV["RAILS_ENV"]
     ENV["RAILS_ENV"] = "test"
     assert permission_check(nil)
+    ENV["RAILS_ENV"] = save
   end
   
   def test_permission_check_no_account
@@ -37,4 +37,20 @@ class YastRolesTest < ActiveSupport::TestCase
   def test_action_dummy
     assert !permission_check("dummy")
   end    
+
+  def test_polkit_override
+    def PolKit.polkit_check(action,login) return :yes if action == "test_polkit_override" end
+    assert permission_check("test_polkit_override")
+  end
+
+  def test_role_ok
+    def PolKit.polkit_check(action,login) return :yes if login == "network_admin" end
+    assert permission_check("dummy")
+  end
+  
+  def test_role_not_ok
+    @current_account = CurrentLogin.new "nobody"
+    def PolKit.polkit_check(action,login) return :yes if login == "network_admin" end
+    assert !permission_check("dummy")
+  end
 end
