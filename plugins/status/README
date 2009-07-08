@@ -14,5 +14,15 @@ Installation:
 
 3. Start the rest-service
 
+
+Usage:
+------
+
+The data can be requested from the rest-service for a time period or just one single event, by sending ''start'' and ''stop'' parameters. They need to be formated either as ''HH:MM, mm/dd/yyyy'' or as unix timestamp. In the latter case times can be scaled in seconds, while in first other case only in minutes. Of course in the end it will depend on the granularity of the used rrd file (collectd), how exact the grabbed data will be.
+With the ''data'' parameter single metrics or groups of metrics can be grapped.
+
+The parameters where sended via the controller.
+
+
 Copyright (c) 2009 Novell, released under the MIT license
 
