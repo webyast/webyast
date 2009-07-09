@@ -123,7 +123,7 @@ public
 	    toplevel.resource name, :controller => namespaces.join("/"), :except => [ :new, :edit ]
 	  else
 	    toplevel.resources name, :except => [ :new, :edit ] do |mapping|
-	      nested = implementation[:nested] && mapping.resources(nested)
+	      nested = implementation[:nested] and mapping.resources(nested)
 	    end
 	  end
         end
