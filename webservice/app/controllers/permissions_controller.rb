@@ -2,14 +2,6 @@
 # Configure PolicyKit permissions for a user
 #
 
-if __FILE__ == $0
-  require File.dirname(__FILE__) + '/../../test/test_helper'
-  puts "RAILS_ENV #{RAILS_ENV}"
-  puts "USER #{ENV['USER']}"
-  c = PermissionsController.new
-  c.test
-end
-
 class PermissionsController < ApplicationController
 
   before_filter :login_required
@@ -100,10 +92,6 @@ class PermissionsController < ApplicationController
   end
   
   public
-  # test for private functions
-  def test
-    permissions_list(ENV['USER']) if RAILS_ENV == "test"
-  end
 
 #--------------------------------------------------------------------------------
 #
@@ -119,7 +107,11 @@ class PermissionsController < ApplicationController
     retrieve_permissions params
   end
 
-  # GET /users/<uid>/permissions/<id>?user_id=<user_id>
+  # permissions
+  # GET /permissions/:id(.:format)
+  #
+  # nesting within users
+  # GET /users/:user_id/permissions/:id(.:format)
 
   def show
     right = params[:id]
@@ -145,9 +137,10 @@ class PermissionsController < ApplicationController
     end
   end
 
-  # PUT /permissions/<user_id>
-  # PUT /permissions/<user_id>.xml
-  # PUT /permissions/<user_id>.json
+  # change permissions
+  # PUT /permissions/:id(.:format)
+  # nested within users
+  # PUT /users/:user_id/permissions/:id(.:format)
 
   def update
     unless permission_check( "org.opensuse.yast.permissions.write")
