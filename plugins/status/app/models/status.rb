@@ -1,16 +1,18 @@
 class Status < ActiveRecord::Base
   require 'scr'
 
-  attr_accessor :data
+  attr_accessor :data,
+                :datapath,
+                :health_status,
+                :metrics
 
-  def initialize
+  def initialize()
     @scr = Scr.instance
     @health_status = nil
     @data = Hash.new
     start_collectd
-#    @collectd_base_dir = "/var/lib/collectd/"
-    @datapath = set_datapath
-    @metrics = available_metrics
+    @datapath = nil #set_datapath
+#    @metrics = available_metrics
   end
 
   def start_collectd
@@ -25,23 +27,20 @@ class Status < ActiveRecord::Base
 
   # set path of stored rrd files, default: /var/lib/collectd/$host.$domain
   def set_datapath(path=nil)
-    default = "/var/lib/collectd/"
-    unless path.nil?
-      @datapath = path.chomp("/")
+    if path.blank?   #FIXME: read currently used rrdb file from /etc/collectd.conf
+      cmd = IO.popen("ls /var/lib/collectd/")
+      path = cmd.read
+      cmd.close
+      path = path.split " " #FIXME
+      @datapath = "/var/lib/collectd/#{path[0].strip}"
     else # set default path
-      cmd = IO.popen("hostname")
-      host = cmd.read
-      cmd.close
-      cmd = IO.popen("domainname")
-      domainname = cmd.read
-      cmd.close
-      @datapath = "#{default}#{host.strip}.#{domainname.strip}"
+      @datapath = path.chomp("/")
     end
     return @datapath
   end
 
   def available_metrics
-    metrics = Hash.new
+    @metrics = Hash.new
     cmd = IO.popen("ls #{@datapath}")
     output = cmd.read
     cmd.close
@@ -49,9 +48,13 @@ class Status < ActiveRecord::Base
       fp = IO.popen("ls #{@datapath}/#{l}")
       files = fp.read
       fp.close
-      metrics["#{l}"] = { :rrds => files.split(" ")}
+      rrds = Array.new
+      files.split(" ").each do |d|
+        rrds << d if d.include? ".rrd" #only .rrd files
+        @metrics["#{l}"] = { :rrds => rrds}
+      end
     end
-    return metrics
+    return @metrics
   end
 
   def available_metric_files
@@ -68,7 +71,8 @@ class Status < ActiveRecord::Base
   end
 
   # creates several metrics for a defined period
-  def collect_data(start=Time.now, stop=Time.now, data = %w{cpu memory disk})
+  def collect_data(start=nil, stop=nil, data = %w{cpu memory disk})
+    available_metrics
     result = Hash.new
     unless @timestamp.nil? # collectd not started
         case data
@@ -103,15 +107,14 @@ class Status < ActiveRecord::Base
     if start.blank?
       start = "--start #{Time.now.strftime("%H:%M,%m/%d/%Y")}"
     else
-      start = "--start #{start}"#start.strftime("%H:%M,%m/%d/%Y")}"
+      start = "--start #{start}"
     end
     if stop.blank?
       stop = "--end #{Time.now.strftime("%H:%M,%m/%d/%Y")}"
     else
-      stop = "--end #{stop}"#stop.strftime("%H:%M,%m/%d/%Y")}"
+      stop = "--end #{stop}"
     end
     cmd = IO.popen("rrdtool fetch #{@datapath}/#{rrdfile} AVERAGE #{start} #{stop}")
-
     output = cmd.read
     cmd.close
     return "failed" if output.blank?
