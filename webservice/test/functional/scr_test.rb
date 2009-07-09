@@ -14,7 +14,7 @@ class ScrTest < ActiveSupport::TestCase
   end
 
   test "scr read" do
-    assert Scr.instance.read ".proc.modules"
+    assert Scr.instance.read ".target.tmpdir"
   end
 
   test "scr read with argument" do
