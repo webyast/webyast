@@ -30,7 +30,7 @@ def coverage_test dir = "."
       covs = c.split "|"
       file = covs[1]
       percent = covs[-1].to_f
-      coverage[file] = percent unless coverage[file] && (coverage[file] < percent)
+      coverage[file] = percent unless coverage[file] && (coverage[file] > percent)
     end
   end rescue puts "*** No tests for #{dir}"
   coverage.each do |file,percent|
