@@ -22,7 +22,7 @@ class PermissionsControllerTest < ActionController::TestCase
     @request.session[:account_id] = 1 # defined in fixtures
     
     Scr.any_instance.stubs(:execute).with(["polkit-action"]).returns({:stderr=>"", :exit=>0, :stdout=>"org.opensuse.yast.system.users.read\norg.opensuse.yast.system.users.write\norg.opensuse.yast.system.users.new\norg.opensuse.yast.system.users.delete\n"})
-    Scr.any_instance.stubs(:execute).with(["polkit-auth", "--user", "test_user", "--explicit"]).returns(:stderr=>"", :exit=>0, :stdout=>"org.opensuse.yast.system.users.read\norg.opensuse.yast.system.users.write\norg.opensuse.yast.system.users.new\n")
+    Scr.any_instance.stubs(:execute).with(["polkit-auth", "--user", "test_user", "--explicit"]).returns(:stderr=>"", :exit=>0, :stdout=>"org.opensuse.yast.system.users.read\norg.opensuse.yast.system.users.write\norg.opensuse.yast.system.users.new\norg.opensuse.yast.permissions.write\n")
     Scr.any_instance.stubs(:execute).with(['polkit-auth', '--user', 'test_user', '--grant', 'org.opensuse.yast.patch.install']).returns({:stderr=>"", :exit=>0, :stdout=>""})
   end
   
@@ -81,10 +81,21 @@ class PermissionsControllerTest < ActionController::TestCase
     assert_response :success
   end
 
+  test "permissions access no session" do
+    save = ENV['RAILS_ENV']
+    ENV['RAILS_ENV'] = "production" # do a real permission_check
+    uid = @request.session[:account_id]
+    @request.session[:account_id] = 0
+    get :show
+    @request.session[:account_id] = uid
+    ENV['RAILS_ENV'] = save
+    assert_response 401
+  end
+  
   test "permissions access show production" do
     save = ENV['RAILS_ENV']
-    ENV['RAILS_ENV'] = "production"
-    get :show, :id => "org.opensuse.yast.system.users.read"
+    ENV['RAILS_ENV'] = "production" # do a real permission_check
+    get :show, :id => "org.opensuse.yast.system.read"
     ENV['RAILS_ENV'] = save
     assert_response 403
   end
@@ -94,7 +105,7 @@ class PermissionsControllerTest < ActionController::TestCase
     ENV['RAILS_ENV'] = "production"
     get :show, :user_id => "nobody"
     ENV['RAILS_ENV'] = save
-    assert_response 403
+    assert_response 404
   end
 
   test "permissions access show without user" do
@@ -126,7 +137,7 @@ class PermissionsControllerTest < ActionController::TestCase
   end
 
   test "setting permissions without user" do
-    put :update, :permissions => {"name"=>"org.opensuse.yast.patch.install", "id"=>"test_user", "grant"=>true}
+    put :update, :permissions => {"name"=>"org.opensuse.yast.patch.install", "grant"=>true}
     assert_response 404
   end
 
