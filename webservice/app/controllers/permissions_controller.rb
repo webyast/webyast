@@ -1,6 +1,14 @@
 #
-# 
+# Configure PolicyKit permissions for a user
 #
+
+if __FILE__ == $0
+  require File.dirname(__FILE__) + '/../../test/test_helper'
+  puts "RAILS_ENV #{RAILS_ENV}"
+  puts "USER #{ENV['USER']}"
+  c = PermissionsController.new
+  c.test
+end
 
 class PermissionsController < ApplicationController
 
@@ -8,52 +16,95 @@ class PermissionsController < ApplicationController
 
   require "scr"
 
-  private
-
-  def get_permission_list(user_id, filter = nil)
+  def initialize
     @permissions = []
-    ret = Scr.instance.execute(["polkit-action"])
-    return false unless ret && ret[:exit] == 0
+  end
+  
+  private
+  
+  #
+  # iterate over org.opensuse.yast permissions
+  # user_id: if set, iterate over granted perms
+  #          else iterate over all
+  # filter:  optional filter string, i.e. "scr"
+  #
+  def each_suse_permissions( user_id, filter = nil )
+    # filter org.opensuse.yast
+    suse_string = /org\.opensuse\.yast\..*/
     
-    suse_string = "org.opensuse.yast."
-    lines = ret[:stdout].split("\n") rescue []
+    # get users or all actions
+    ret = if user_id
+            Scr.instance.execute(["polkit-auth", "--user", user_id, "--explicit"])
+	  else
+	    Scr.instance.execute(["polkit-action"])
+	  end rescue nil
+    raise RuntimeError unless ret && ret[:exit] == 0
+
+    ret[:stdout].scan(suse_string) do |p|
+      next unless filter.blank? or p.include?(filter)
+      yield p
+    end
+
+  end
+  
+  #
+  # get all Array of Permissions user_id has
+  #
+  
+  def permissions_list(user_id, filter = nil)
 
     # a hash for mapping string 'permission name' => boolean 'granted'
     perms = Hash.new
-
-    lines.each do |s|   
-      if (s.include?( suse_string )) &&
-	(filter.blank? || s.include?( filter ))
-	# set 'not granted' default
-	perms[s] = false
-      end
-    end
-
-    ret = Scr.instance.execute(["polkit-auth", "--user", user_id, "--explicit"])
-    return false unless ret && ret[:exit] == 0
     
-    lines = ret[:stdout].split("\n") rescue []
-    lines.each do |s|
-      # ignore the rights which do not have the prefix, do not have any .policy file
-      # or do not match the filter
-      if (s.include?( suse_string )) && perms.has_key?(s) && (filter.blank? || s.include?( filter ))
-	# update the value to 'granted' state
-	perms[s] = true
-      end
-    end
+    # get all known permissions into 'perms' hash
+    each_suse_permissions( nil, filter ) do |p|
+      perms[p] = false
+    end rescue return false
+
+    # now set those 'true' which are granted
+    each_suse_permissions( user_id, filter ) do |p|
+      perms[p] = true
+    end rescue return false
     
     # convert the hash to a list of Permission objects
     @permissions = []
-    perms.each do |name,value|
-      permission = Permission.new 	
-      permission.name = name
-      permission.grant = value
+    perms.each do |name,grant|
+      permission = Permission.new name, grant
       @permissions << permission
     end
+    true
   end
 
-
+  #
+  # check if logged in user requests his own stuff
+  #
+  def user_self( params )
+    !params[:user_id].blank? && (params[:user_id] == self.current_account.login)
+  end
+  
+  #
+  # check params and fill @permissions
+  #
+  def retrieve_permissions( params )
+    # user can always see his rights
+    unless permission_check( "org.opensuse.yast.permissions.read") || user_self(params)
+      render ErrorResult.error(403, 1, "no permission") and return
+    end
+    if params[:user_id].blank?
+      render ErrorResult.error(404, 2, "No user specified") and return
+    end
+    unless permissions_list(params[:user_id], params[:filter])
+      render ErrorResult.error(404, 2, "cannot get permission list") and return
+    end
+    true
+  end
+  
   public
+  # test for private functions
+  def test
+    permissions_list(ENV['USER']) if RAILS_ENV == "test"
+  end
+
 #--------------------------------------------------------------------------------
 #
 # actions
@@ -65,42 +116,26 @@ class PermissionsController < ApplicationController
   # GET /permissions.json?user_id=<user_id>&filter=<filter>
 
   def index
-    # user can always see his rights
-    unless (permission_check( "org.opensuse.yast.permissions.read") || (!params[:user_id].blank? && self.current_account.login == params[:user_id]))
-      render ErrorResult.error(403, 1, "no permission") and return
-    end
-    if params[:user_id].blank?
-      render ErrorResult.error(404, 2, "user_id is not defined") and return
-    end
-    unless get_permission_list(params[:user_id], params[:filter])
-      render ErrorResult.error(404, 2, "cannot get permission list") and return
-    end
+    retrieve_permissions params
   end
 
   # GET /users/<uid>/permissions/<id>?user_id=<user_id>
 
   def show
-    unless (permission_check( "org.opensuse.yast.permissions.read") || (!params[:user_id].blank? && self.current_account.login == params[:user_id]))
-      render ErrorResult.error(403, 1, "no permission") and return
-    end
-    if params[:user_id].blank?
-      render ErrorResult.error(404, 2, "user_id is not defined") and return
-    end
-    if params[:id].blank?
+    right = params[:id]
+    if right.blank?
       render ErrorResult.error(404, 2, "right is not defined") and return
     end
-    right = params[:id]
-    @permission = Permission.new 	
-    unless get_permission_list(params[:user_id])
-      render ErrorResult.error(404, 1, "cannot get permission list") and return
+    
+    retrieve_permissions(params) or return
+    
+    permission = nil
+    @permissions.each do |p|
+      next unless p.name == right
+      permission = p
+      break
     end
-    for i in 0..@permissions.size-1
-      if @permissions[i].name == right
-        permission = @permissions[i]
-        break
-      end
-    end
-    if !permission || permission.name.blank?
+    if permission.nil? || permission.name.blank?
       render ErrorResult.error(404, 1, "Permission: #{right} not found.") and return
     end
 
@@ -127,7 +162,8 @@ class PermissionsController < ApplicationController
       render ErrorResult.error(404, 1, "no permissions found") and return
     end
 
-    ret = Scr.instance.execute(["polkit-auth", "--user", params[:permissions][:id], params[:permissions][:grant] ? "--grant" : "--revoke", params[:permissions][:name]])
+    ret = Scr.instance.execute(["polkit-auth", "--user", params[:id], params[:permissions][:grant] ? "--grant" : "--revoke", params[:permissions][:name]])
+
     if ret[:exit] != 0
       render ErrorResult.error(404, 1, ret[:stderr]) and return
     end
