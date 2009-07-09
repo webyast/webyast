@@ -14,6 +14,7 @@ def coverage_test dir = "."
   Dir.chdir dir
   puts "Coverage for #{dir}:"
   coverage= Hash.new
+  task = nil
   Dir.new("test").each do |f|
     next if f[0,1] == "."
     next if f[-1..-1] == "~"
@@ -32,10 +33,11 @@ def coverage_test dir = "."
       percent = covs[-1].to_f
       coverage[file] = percent unless coverage[file] && (coverage[file] > percent)
     end
-  end rescue puts "*** No tests for #{dir}"
+  end rescue nil
+  puts "*** No tests for #{dir}" unless task
   coverage.each do |file,percent|
     next if percent > 99.0
-    puts "  %6.2f %-35s" % [percent, file]
+    puts "  %6.2f%%  %-35s" % [percent, file]
   end
   Dir.chdir wd
   puts
