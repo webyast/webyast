@@ -17,12 +17,12 @@
 #    require 'test/unit'
 #    require 'rubygems'
 #    require 'mocha'
-#    require File.expand_path( File.join("lib","plugin_basic_tests"), RailsParent.parent )
+#    require File.expand_path( File.join("test","plugin_basic_tests"), RailsParent.parent )
 #
 #    class LanguageControllerTest < ActionController::TestCase
 #      fixtures :accounts
 #      
-#        Test_data = {:language => {
+#        TEST_DATA = {:language => {
 #      :current => "cs_CZ",
 #      :utf8 => "true",
 #      :rootlocale => "false"
@@ -33,7 +33,7 @@
 #        @request = ActionController::TestRequest.new
 #        # http://railsforum.com/viewtopic.php?id=1719
 #        @request.session[:account_id] = 1 # defined in fixtures
-#        @data = Test_data
+#        @data = TEST_DATA
 #      end
 #
 #      include PluginBasicTests
@@ -80,7 +80,7 @@ module PluginBasicTests
   end
 
   def test_update_noperm
-    #ensure that nothink is saved
+    #ensure that nothing is saved
     @model_class.any_instance.expects(:save).never
 
     @controller.stubs(:permission_check).returns(false);

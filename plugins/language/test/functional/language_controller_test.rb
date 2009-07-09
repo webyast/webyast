@@ -2,7 +2,7 @@ require File.expand_path(File.dirname(__FILE__) + "/../test_helper")
 require 'test/unit'
 require 'rubygems'
 require 'mocha'
-require File.expand_path( File.join("lib","plugin_basic_tests"), RailsParent.parent )
+require File.expand_path( File.join("test","plugin_basic_tests"), RailsParent.parent )
 
 class LanguageControllerTest < ActionController::TestCase
   fixtures :accounts
@@ -13,12 +13,12 @@ class LanguageControllerTest < ActionController::TestCase
     @request = ActionController::TestRequest.new
     # http://railsforum.com/viewtopic.php?id=1719
     @request.session[:account_id] = 1 # defined in fixtures
-    @data = Data
+    @data = DATA
   end
 
   include PluginBasicTests
 
-  Data = {:language => {
+  DATA = {:language => {
       :current => "cs_CZ",
       :utf8 => "true",
       :rootlocale => "false"
@@ -26,13 +26,13 @@ class LanguageControllerTest < ActionController::TestCase
 
   def test_update   
     Language.any_instance.stubs(:save)
-    put :update, Data
+    put :update, DATA
     check_update_result
   end
 
   def test_create
     Language.any_instance.stubs(:save)
-    put :create, Data
+    put :create, DATA
     check_update_result
   end
 
@@ -40,8 +40,8 @@ class LanguageControllerTest < ActionController::TestCase
     assert_response :success
     lang = assigns(:language)
     assert lang
-    assert_equal lang.language, Data[:language][:current]
-    assert_equal lang.utf8, Data[:language][:utf8]
-    assert_equal lang.rootlocale, Data[:language][:rootlocale]
+    assert_equal lang.language, DATA[:language][:current]
+    assert_equal lang.utf8, DATA[:language][:utf8]
+    assert_equal lang.rootlocale, DATA[:language][:rootlocale]
   end
 end

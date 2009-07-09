@@ -3,12 +3,12 @@ require 'test/unit'
 require 'rubygems'
 require "scr"
 require 'mocha'
-require File.expand_path( File.join("lib","plugin_basic_tests"), RailsParent.parent )
+require File.expand_path( File.join("test","plugin_basic_tests"), RailsParent.parent )
 
 class SystemtimesControllerTest < ActionController::TestCase
   fixtures :accounts
 
-    Data = {:time => {
+    DATA = {:time => {
       :timezone => "Europe/Prague",
       :utcstatus => "true"
     }}
@@ -19,20 +19,20 @@ class SystemtimesControllerTest < ActionController::TestCase
     @request = ActionController::TestRequest.new
     # http://railsforum.com/viewtopic.php?id=1719
     @request.session[:account_id] = 1 # defined in fixtures
-    @data = Data
+    @data = DATA
   end  
 
   include PluginBasicTests
   
   def test_update
     Systemtime.any_instance.stubs(:save)
-    put :update, Data
+    put :update, DATA
     check_update_result
   end
 
   def test_create
     Systemtime.any_instance.stubs(:save)
-    put :create, Data
+    put :create, DATA
     check_update_result
   end
 
@@ -40,8 +40,8 @@ class SystemtimesControllerTest < ActionController::TestCase
     assert_response :success
     time = assigns(:systemtime)
     assert time
-    assert_equal Data[:time][:timezone], time.timezone
-    assert_equal Data[:time][:utcstatus], time.utcstatus
+    assert_equal DATA[:time][:timezone], time.timezone
+    assert_equal DATA[:time][:utcstatus], time.utcstatus
     assert_nil time.datetime
   end
 end
