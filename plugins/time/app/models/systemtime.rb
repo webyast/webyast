@@ -35,7 +35,7 @@ class Systemtime
   def initialize     
   end
 
-  def read
+  def find
     parse_response YastService.Call("YaPI::TIME::Read",create_read_question)
   end
 

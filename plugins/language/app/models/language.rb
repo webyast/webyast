@@ -44,7 +44,7 @@ class Language
     return @@available
   end
 
-  def read
+  def find
     parse_response YastService.Call("YaPI::LANGUAGE::Read",create_read_question)
   end
 

@@ -38,7 +38,7 @@ class LanguageController < ApplicationController
       render ErrorResult.error(403, 1, "no permissions") and return
     end
     @language = Language.new
-    @language.read
+    @language.find
 
   end
 

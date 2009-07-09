@@ -16,7 +16,7 @@ class LanguageControllerTest < ActionController::TestCase
     @data = Data
   end
 
-  include PluginBasicTests  
+  include PluginBasicTests
 
   Data = {:language => {
       :current => "cs_CZ",
