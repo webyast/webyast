@@ -9,7 +9,7 @@
 # @*controller* and request specification at @*request* field. Field @*data* is
 # used to test update with valid data but without permissions.
 # Controller is expected to be thin layer and all dbus or system call is done
-# at model code. Controller use during reading only *read* motode of model
+# at model code. Controller use during reading only *find* metode of model
 # and during writing only *save* method.
 # == Example usage
 # This example show basic testing of controller of plugin
@@ -28,7 +28,7 @@
 #      :rootlocale => "false"
 #    }}
 #      def setup
-#        @model = Language
+#        @model_class = Language
 #        @controller = LanguageController.new
 #        @request = ActionController::TestRequest.new
 #        # http://railsforum.com/viewtopic.php?id=1719
