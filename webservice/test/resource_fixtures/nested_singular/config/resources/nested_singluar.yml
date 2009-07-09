@@ -1,0 +1,8 @@
+#
+# test/fixtures/resources/nested_singular.yaml
+#
+
+interface: org.opensuse.yast.printer.device
+controller: yast/printer/device
+singular: true
+nested: queue

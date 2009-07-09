@@ -16,12 +16,21 @@ end
 
 class ResourceRegistrationTest < ActiveSupport::TestCase
 
-  require "lib/resource_registration"
+  require File.expand_path(File.dirname(__FILE__) + "/../../lib/resource_registration")
   
   # Create resources from .yml file
   
   test "resource creation" do
     plugin = TestPlugin.new "test/resource_fixtures/good"
+    ResourceRegistration.register_plugin plugin
+      
+    assert !ResourceRegistration.resources.empty?
+  end
+  
+  # Create nested resources from .yml file
+  
+  test "resource creation nested" do
+    plugin = TestPlugin.new "test/resource_fixtures/nested"
     ResourceRegistration.register_plugin plugin
       
     assert !ResourceRegistration.resources.empty?
@@ -68,6 +77,15 @@ class ResourceRegistrationTest < ActiveSupport::TestCase
     end
   end
 
+  # Catch nested singular, which is not supported (yet?)
+  
+  test "nesting inside a singular resource" do
+    plugin = TestPlugin.new "test/resource_fixtures/nested_singular"
+    assert_raise RuntimeError do
+      ResourceRegistration.register_plugin plugin
+    end
+  end
+  
   # Pass bad values to register_plugin
   
   test "pass bad values to register_plugin" do

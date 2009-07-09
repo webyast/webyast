@@ -32,7 +32,6 @@ public
   #
   
   def self.register(file, interface = nil, controller = nil)
-#    $stderr.puts "register #{file}"
     require 'yaml'
     @@in_production = (RAILS_ENV == "production")
     name = name || File.basename(file, ".*")
@@ -62,8 +61,12 @@ public
 
     error "#{file}: has non-plural interface #{interface} without being flagged as singular" if !singular and name != name.pluralize
 
+    # nested: is optional, defaults to nil
+    nested = resource["nested"]
+    error "#{file}: singular resources don't support nested" if singular and nested
+
     resources[interface] ||= Array.new
-    resources[interface] << { :controller => controller, :singular => singular }
+    resources[interface] << { :controller => controller, :singular => singular, :nested => nested }
   end
 
   # register routes from a plugin
@@ -73,7 +76,7 @@ public
 #    $stderr.puts "checking #{res_path}"
     Dir.glob(File.join(res_path, 'routes.rb')).each do |route|
       basename = File.basename(plugin.directory)
-      $stderr.puts "***Error: Plugin #{basename} does private routing, please remove #{basename}/config/routes.rb."
+#      $stderr.puts "***Error: Plugin #{basename} does private routing, please remove #{basename}/config/routes.rb."
     end
     res_path = File.join(res_path, 'resources')
 #    $stderr.puts "self.register_plugin #{res_path}"
@@ -119,7 +122,9 @@ public
 	  if implementation[:singular]
 	    toplevel.resource name, :controller => namespaces.join("/"), :except => [ :new, :edit ]
 	  else
-	    toplevel.resources name, :except => [ :new, :edit ]
+	    toplevel.resources name, :except => [ :new, :edit ] do |mapping|
+	      nested = implementation[:nested] && mapping.resources(nested)
+	    end
 	  end
         end
       end
