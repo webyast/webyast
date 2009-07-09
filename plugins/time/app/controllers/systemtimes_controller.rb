@@ -40,7 +40,7 @@ class SystemtimesController < ApplicationController
     end
 
     @systemtime = Systemtime.new
-    @systemtime.read
+    @systemtime.find
 
   end
 
