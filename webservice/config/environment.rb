@@ -10,9 +10,6 @@
 # Bootstrap the Rails environment, frameworks, and default configuration
 require File.join(File.dirname(__FILE__), 'boot')
 
-# load lib/resource_registration.rb
-require "resource_registration"
-
 init = Rails::Initializer.run do |config|
   # Settings in config/environments/* take precedence over those specified here.
   # Application configuration should go into files in config/initializers
@@ -76,22 +73,32 @@ init = Rails::Initializer.run do |config|
   config.plugin_paths << File.join(RAILS_ROOT, '..', 'plugins') if RAILS_ENV == "development"
 end
 
-$stderr.puts __FILE__
+# load lib/resource_registration.rb
+require "resource_registration"
 
-if RAILS_ENV == "test"
-  class TestPlugin
-    def directory
-      "test/resource_fixtures/good"
+case RAILS_ENV
+  when "test"
+    class TestPlugin
+      def directory
+	"test/resource_fixtures/good"
+      end
     end
-  end
-  ResourceRegistration.register_plugin TestPlugin.new
-  ResourceRegistration.route ResourceRegistration.resources
-elsif RAILS_ENV == "development" or RAILS_ENV == "production"
-  $stderr.puts "Registering plugin resources"
-  init.loaded_plugins.each do |plugin|
-    ResourceRegistration.register_plugin(plugin)
-  end
-  ResourceRegistration.route ResourceRegistration.resources
-else
-  $stderr.puts "No ResourceRegistration triggered"
+    ResourceRegistration.register_plugin TestPlugin.new
+    
+    USER_ROLES_CONFIG = File.join(File.dirname(__FILE__), "../test/fixtures/yast_user_roles")
+    
+  when "development", "production"
+    $stderr.puts "Registering plugin resources"
+    init.loaded_plugins.each do |plugin|
+      ResourceRegistration.register_plugin(plugin)
+    end
+    
+    USER_ROLES_CONFIG = "/etc/yast_user_roles"
+    
+  else
+    $stderr.puts "No ResourceRegistration triggered"
+    
 end
+  
+ResourceRegistration.route ResourceRegistration.resources
+

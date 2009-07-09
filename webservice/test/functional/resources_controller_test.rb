@@ -3,7 +3,7 @@
 #
 # This tests proper returns for resource inspection
 #
-require 'test_helper'
+require File.expand_path(File.dirname(__FILE__) + "/../test_helper")
 
 class TestPlugin
   attr_reader :directory
@@ -14,10 +14,8 @@ end
 
 class ResourcesControllerTest < ActionController::TestCase
 
-  require "lib/resource_registration"
-  
-  fixtures :domains, :resources
-  
+  require File.expand_path(File.dirname(__FILE__) + "/../../lib/resource_registration")
+
   def setup
     # set up test routing
     ResourceRegistration.reset
@@ -25,24 +23,29 @@ class ResourcesControllerTest < ActionController::TestCase
     ResourceRegistration.register_plugin plugin
   end
   
-  test "access root" do
+  test "resources access root" do
     get :index
     assert_response :success
   end
   
-  test "output xml format" do
+  test "resources index with interface" do
+    get :index, :interface => "org.opensuse.test"
+    assert_response :success
+  end
+  
+  test "resources output xml format" do
     get :index, :format => "xml"
     assert_response :success
     assert @response.headers['Content-Type'] =~ %r{application/xml}
   end
   
-  test "output html format" do
+  test "resources output html format" do
     get :index, :format => "html"
     assert_response :success
     assert @response.headers['Content-Type'] =~ %r{text/html}
   end
   
-  test "by interfaces query" do
+  test "resources by interfaces query" do
     ResourceRegistration.resources.each do |interface,implementations|
       get :index, :params => { "interface" => interface }
       assert_response :success

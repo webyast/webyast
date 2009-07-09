@@ -72,7 +72,7 @@ method_polkit_check(VALUE self, VALUE act_v, VALUE usr_v)
     passwd = getpwnam(user_s);
 
     if (!passwd) {
-        error = "User does not exist";
+        error = "PolicyKit user does not exist";
 	goto finish;
     }
 

@@ -5,7 +5,7 @@
 #
 # See resource_route_test.rb for resource route tests.
 #
-require 'test_helper'
+require File.expand_path(File.dirname(__FILE__) + "/../test_helper")
 
 class TestPlugin
   attr_reader :directory
@@ -17,8 +17,6 @@ end
 class ResourceRegistrationTest < ActiveSupport::TestCase
 
   require "lib/resource_registration"
-  
-  fixtures :domains, :resources
   
   # Create resources from .yml file
   

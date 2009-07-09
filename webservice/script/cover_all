@@ -1,0 +1,3 @@
+#!/bin/sh
+
+ruby test/cover_all.rb 2> /dev/null

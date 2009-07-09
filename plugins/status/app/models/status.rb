@@ -7,9 +7,7 @@ class Status < ActiveRecord::Base
     @scr = Scr.instance
     @health_status = nil
     @data = Hash.new
-    @cpu=""
-    @memory=""
-    @timestamp = Time.now #nil
+    start_collectd
 #    @collectd_base_dir = "/var/lib/collectd/"
     @datapath = set_datapath
     @metrics = available_metrics
@@ -31,26 +29,36 @@ class Status < ActiveRecord::Base
     unless path.nil?
       @datapath = path.chomp("/")
     else # set default path
-      host = @scr.execute(["hostname"])
-      domain = @scr.execute(["domainname"])
-      @datapath = "#{default}#{host[:stdout].strip}.#{domain[:stdout].strip}"
+      cmd = IO.popen("hostname")
+      host = cmd.read
+      cmd.close
+      cmd = IO.popen("domainname")
+      domainname = cmd.read
+      cmd.close
+      @datapath = "#{default}#{host.strip}.#{domainname.strip}"
     end
-    @datapath
+    return @datapath
   end
 
   def available_metrics
     metrics = Hash.new
-    cmd = Scr.instance.execute(["ls", "#{@datapath}"])
-    cmd[:stdout].split(" ").each do |l|
-      files = Scr.instance.execute(["ls", "#{@datapath}/#{l}"])
-      metrics["#{l}"] = { :rrds => files[:stdout].split(" ")}
+    cmd = IO.popen("ls #{@datapath}")
+    output = cmd.read
+    cmd.close
+    output.split(" ").each do |l|
+      fp = IO.popen("ls #{@datapath}/#{l}")
+      files = fp.read
+      fp.close
+      metrics["#{l}"] = { :rrds => files.split(" ")}
     end
-    metrics
+    return metrics
   end
 
   def available_metric_files
-    cmd = @scr.execute(["ls", "#{@datapath}.."])
-    lines = cmd[:stdout].split "\n"
+    cmd = IO.popen("ls #{@datapath}..")
+    lines = cmd.read.split "\n"
+    cmd.close
+    return lines
   end
 
   def determine_status
@@ -63,43 +71,79 @@ class Status < ActiveRecord::Base
   def collect_data(start=Time.now, stop=Time.now, data = %w{cpu memory disk})
     result = Hash.new
     unless @timestamp.nil? # collectd not started
-      @metrics.each_pair do |m, n|
-        @metrics["#{m}"][:rrds].each do |rrdb|
-           result["#{rrdb}".chomp(".rrd")] = fetch_metric("#{m}/#{rrdb}", start, stop)
+        case data
+        when nil, "all", "All" # all metrics
+          @metrics.each_pair do |m, n|
+            @metrics["#{m}"][:rrds].each do |rrdb|
+              result["#{rrdb}".chomp(".rrd")] = fetch_metric("#{m}/#{rrdb}", start, stop)
+            end
+            @data["#{m}"] = result
+            result = Hash.new
+          end
+        else # only metrics in data
+          data.each do |d|
+            @metrics.each_pair do |m, n|
+              if m.include?(d)
+                @metrics["#{m}"][:rrds].each do |rrdb|
+                result["#{rrdb}".chomp(".rrd")] = fetch_metric("#{m}/#{rrdb}", start, stop)
+              end
+              @data["#{m}"] = result
+              result = Hash.new
+            end
+          end
         end
-        @data["#{m}"] = result
-        result = Hash.new
       end
     end
-    @data
+    return @data
   end
 
   # creates one metric for defined period
-  def fetch_metric(rrdfile, start=Time.now, stop=Time.now)#, heigth=nil, width=nil)
-    sum = 0.0
-    counter = 1
-    result = Hash.new#Array.new
-    cmd = @scr.execute(["rrdtool", "fetch", "#{@datapath}/#{rrdfile}", "AVERAGE",\
-                                     "--start"," #{start}", "--end", " #{stop}"])
-    lines = cmd[:stdout].split "\n"
+  def fetch_metric(rrdfile, start=nil, stop=nil)
+    result = Hash.new
+    if start.blank?
+      start = "--start #{Time.now.strftime("%H:%M,%m/%d/%Y")}"
+    else
+      start = "--start #{start}"#start.strftime("%H:%M,%m/%d/%Y")}"
+    end
+    if stop.blank?
+      stop = "--end #{Time.now.strftime("%H:%M,%m/%d/%Y")}"
+    else
+      stop = "--end #{stop}"#stop.strftime("%H:%M,%m/%d/%Y")}"
+    end
+    cmd = IO.popen("rrdtool fetch #{@datapath}/#{rrdfile} AVERAGE #{start} #{stop}")
+
+    output = cmd.read
+    cmd.close
+    return "failed" if output.blank?
+
+    labels=""
+    output = output.gsub(",", ".") # translates eg. 1,234e+07 to 1.234e+07
+    lines = output.split "\n"
+    # set label names
     lines[0].each do |l|
       if l =~ /\D*/
         labels = l.split " "
-        collumn = 1
-        labels.each do
-          lines.each do |l|
-            if l =~ /\d*:\D*/  ####
-              pair = l.split " "
-              unless pair[collumn].include?("nan") # no valid measurement
-                sum += pair[collumn].to_f
-                counter += 1
-              end
-            end
-          end
-          result[labels[collumn-1]] = sum/(counter-1) unless counter == 1
-        end
       end
     end
-    result
+    unless labels.blank?
+      # set values for each label and time
+      lines.each do |l| # each time
+        unless l.blank?
+          if l =~ /\d*:\D*/
+            pair = l.split ":"
+            values = pair[1].split " "
+            column = 0
+            values.each do |v| # each label
+              result["#{labels[column]}"] ||= Hash.new
+              result["#{labels[column]}"].merge!({"T_#{pair[0].chomp(": ")}" => v})
+              column += 1
+            end
+          end
+        end
+      end
+      return result
+    else
+      return "failed"
+    end
   end
 end

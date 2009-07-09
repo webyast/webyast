@@ -15,13 +15,15 @@ Provides:       yast2-webservice:/srv/www/yastws/app/controllers/systemtime_cont
 License:        MIT
 Group:          Productivity/Networking/Web/Utilities
 Autoreqprov:    on
-Version:        0.0.1
+Version:        0.0.2
 Release:        0
 Summary:        YaST2 - Webservice - Time
 Source:         www.tar.bz2
 BuildRoot:      %{_tmppath}/%{name}-%{version}-build
 BuildArch:      noarch
 BuildRequires:  rubygem-mocha
+Requires:       yast2-core > 2.18.14
+Requires:       yast2-country >= 2.18.10
 
 #
 %define pkg_user yastws
@@ -34,6 +36,7 @@ YaST2 - Webservice - REST based interface of YaST in order to handle time and da
 Authors:
 --------
     Stefan Schubert <schubi@opensuse.org>
+    Josef Reidinger <jreidinger@suse.cz>
 
 %prep
 %setup -q -n www
@@ -65,14 +68,14 @@ rm -rf $RPM_BUILD_ROOT
 %dir /srv/www/%{pkg_user}/vendor
 %dir /srv/www/%{pkg_user}/vendor/plugins
 %dir /srv/www/%{pkg_user}/vendor/plugins/%{plugin_name}
-%config /srv/www/%{pkg_user}/vendor/plugins/%{plugin_name}/MIT-LICENSE
-%config /srv/www/%{pkg_user}/vendor/plugins/%{plugin_name}/README
-%config /srv/www/%{pkg_user}/vendor/plugins/%{plugin_name}/Rakefile
-%config /srv/www/%{pkg_user}/vendor/plugins/%{plugin_name}/init.rb
-%config /srv/www/%{pkg_user}/vendor/plugins/%{plugin_name}/install.rb
-%config /srv/www/%{pkg_user}/vendor/plugins/%{plugin_name}/uninstall.rb
-%config /srv/www/%{pkg_user}/vendor/plugins/%{plugin_name}/app
-%config /srv/www/%{pkg_user}/vendor/plugins/%{plugin_name}/config
-%config /srv/www/%{pkg_user}/vendor/plugins/%{plugin_name}/tasks
-%config /srv/www/%{pkg_user}/vendor/plugins/%{plugin_name}/test
+/srv/www/%{pkg_user}/vendor/plugins/%{plugin_name}/MIT-LICENSE
+/srv/www/%{pkg_user}/vendor/plugins/%{plugin_name}/README
+/srv/www/%{pkg_user}/vendor/plugins/%{plugin_name}/Rakefile
+/srv/www/%{pkg_user}/vendor/plugins/%{plugin_name}/init.rb
+/srv/www/%{pkg_user}/vendor/plugins/%{plugin_name}/install.rb
+/srv/www/%{pkg_user}/vendor/plugins/%{plugin_name}/uninstall.rb
+/srv/www/%{pkg_user}/vendor/plugins/%{plugin_name}/app
+/srv/www/%{pkg_user}/vendor/plugins/%{plugin_name}/config
+/srv/www/%{pkg_user}/vendor/plugins/%{plugin_name}/tasks
+/srv/www/%{pkg_user}/vendor/plugins/%{plugin_name}/test
 

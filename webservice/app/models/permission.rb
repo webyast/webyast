@@ -1,3 +1,7 @@
+#
+# Permission class
+#
+
 class Permission
 
   attr_accessor :name,

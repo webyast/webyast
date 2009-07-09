@@ -44,7 +44,7 @@ class LanguageTest < ActiveSupport::TestCase
   def test_getter
     YastService.stubs(:Call).with("YaPI::LANGUAGE::Read",read_arguments).returns(read_response)
 
-    @language.read
+    @language.find
     assert_equal("en_US", @language.language)
     assert_equal("ctype", @language.rootlocale)
     assert_equal("true", @language.utf8)

@@ -1,5 +1,5 @@
 #
-# file : /etc/yast_user_roles
+# file : test/fixtures/yast_user_roles
 #
 # This file describes roles of a user accounts for the YaST Webservice
 # "user accounts": System account which is accessable e.g. via PAM.
@@ -8,4 +8,4 @@
 #
 # Format: <user>   <role 1>,<role 2>,...<role n>
 #
-root		schubi
+root		network_admin,update_admin
