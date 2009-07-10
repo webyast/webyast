@@ -24,7 +24,10 @@ def test_module name, package
 end
 
 def test_version package, version
+  old_lang = ENV['LANG']
+  ENV['LANG'] = 'C'
   v = `rpm -q #{package}`
+  ENV['LANG'] = old_lang
   escape v, "install #{package} >= #{version}" if v =~ /is not installed/
   nvr = v.split "-"
   rel = nvr.pop
