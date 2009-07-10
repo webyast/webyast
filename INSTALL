@@ -13,4 +13,4 @@ Prerequisites:
   or http://rubyforge.org/projects/rpam)
 - ruby-polkit
   (OpenSUSE factory)
-  
+- rubygem-relevance-rcov
