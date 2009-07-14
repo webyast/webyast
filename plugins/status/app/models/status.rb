@@ -1,5 +1,6 @@
 class Status < ActiveRecord::Base
   require 'scr'
+  require 'yaml'
 
   attr_accessor :data
 
@@ -8,9 +9,24 @@ class Status < ActiveRecord::Base
     @health_status = nil
     @data = Hash.new
     start_collectd
-#    @collectd_base_dir = "/var/lib/collectd/"
     @datapath = set_datapath
     @metrics = available_metrics
+
+    #find the correct plugin path for the config file
+    @plugin_config_dir = "#{RAILS_ROOT}/config" #default
+    Rails.configuration.plugin_paths.each do |plugin_path|
+      if File.directory?(File.join(plugin_path, "status"))
+        @plugin_config_dir = plugin_path+"/status/config"
+        Dir.mkdir(@plugin_config_dir) unless File.directory?(@plugin_config_dir)
+        break
+      end
+    end
+    @limits = {}
+    @limits = YAML.load(File.open(File.join(@plugin_config_dir, "status_limits.yaml"))) if File.exists?(File.join(@plugin_config_dir, "status_limits.yaml"))
+#    @limits = {"load/load/shortterm"=>{ :value=>1.00, :maximum=>true}, "load/load/longterm"=>{:value=>2.0, :maximum=>true}, "load/load/midterm"=>{:value=>3.0, :maximum=>true}}
+#    f = File.open(File.join(@plugin_config_dir, "status_limits.yaml"), "w")
+#    f.write(@limits.to_yaml)
+#    f.close
   end
 
   def start_collectd
@@ -141,6 +157,16 @@ class Status < ActiveRecord::Base
         end
       end
     end
+
+    #setting the limits
+    result.each do |key, value|
+      path = rrdfile.chomp(".rrd") + "/" + key
+      if @limits.has_key?(path)
+        result[key] ||= Hash.new
+        result[key].merge!({"limit" => @limits[path] })
+      end
+    end
+
     return result
   end
 end
