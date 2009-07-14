@@ -3,8 +3,8 @@ class Systemtime
   @@timezones = Array.new()
 
   attr_accessor :datetime,
-                :timezone,
-                :utcstatus
+    :timezone,
+    :utcstatus
 
   private
   def parse_response(response)
@@ -35,7 +35,7 @@ class Systemtime
   def initialize     
   end
 
-  def read
+  def find
     parse_response YastService.Call("YaPI::TIME::Read",create_read_question)
   end
 
@@ -47,10 +47,20 @@ class Systemtime
     unless @utcstatus.nil? or @utcstatus.empty?
       settings["utcstatus"] = @utcstatus
     end
+    need_rescue = false
     unless @datetime.nil? or @datetime.empty?
       settings["currenttime"] = @datetime
+      need_rescue = true
     end
-    YastService.Call("YaPI::TIME::Write",settings)
+    begin
+      YastService.Call("YaPI::TIME::Write",settings)
+    rescue Exception => e
+      #XXX hack to avoid dbus timeout durign moving time to future
+      unless need_rescue
+        raise
+      end
+
+    end
   end
 
   def to_xml( options = {} )
@@ -62,23 +72,23 @@ class Systemtime
       xml.tag!(:timezone, @timezone )
       xml.tag!(:utcstatus, @utcstatus )
       xml.timezones({:type => "array"}) do
-         @@timezones.each do |region|
-            if not region.empty?
-               xml.region do
-                 xml.tag!(:name,  region["name"])
-                 xml.tag!(:central,  region["central"])
-                 xml.entries({:type => "array"}) do
-                  region["entries"].each do |id,name|
-                    xml.timezone do
-                      xml.tag!(:id, id)
-                      xml.tag!(:name, name)
-                    end
+        @@timezones.each do |region|
+          if not region.empty?
+            xml.region do
+              xml.tag!(:name,  region["name"])
+              xml.tag!(:central,  region["central"])
+              xml.entries({:type => "array"}) do
+                region["entries"].each do |id,name|
+                  xml.timezone do
+                    xml.tag!(:id, id)
+                    xml.tag!(:name, name)
                   end
-                 end
+                end
+              end
                   
-               end
             end
-         end
+          end
+        end
       end
     end
   end

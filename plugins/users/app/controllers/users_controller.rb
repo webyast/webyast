@@ -53,7 +53,7 @@ class UsersController < ApplicationController
 	# list of attributes to return;
 	"user_attributes"	=> [ "as", [
 	    "cn", "uidNumber", "homeDirectory",
-	    "grouplist", "uidloginShell", "groupname"
+	    "grouplist", "uid", "loginShell", "groupname"
 	]]
     }
     user_map = YastService.Call("YaPI::USERS::UserGet", parameters)

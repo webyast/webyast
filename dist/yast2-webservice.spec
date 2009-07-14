@@ -33,7 +33,7 @@ BuildRoot:      %{_tmppath}/%{name}-%{version}-build
 BuildRequires:  ruby-devel, pkg-config, rubygem-relevance-rcov, rubygem-mocha
 # if we run the tests during build, we need most of Requires here too,
 # except for deployment specific stuff
-BuildRequires:  yast2-core >= 2.18.3, ruby-dbus, sqlite, avahi-utils
+BuildRequires:  yast2-core, ruby-dbus, sqlite, avahi-utils dbus-1
 BuildRequires:  PolicyKit, PackageKit, rubygem-rake, rubygem-sqlite3, rubygem-rails-2_3, ruby-rpam, ruby-polkit
 BuildArch:      noarch
 

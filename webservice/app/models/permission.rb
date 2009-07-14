@@ -4,12 +4,11 @@
 
 class Permission
 
-  attr_accessor :name,
-                :grant
+  attr_reader :name, :grant
 
-  def initialize( permission_name = "", gr = false)
-     @grant = gr
-     @name = permission_name
+  def initialize( name = "", grant = false)
+     @grant = grant
+     @name = name
   end
 
   def to_xml( options = {} )

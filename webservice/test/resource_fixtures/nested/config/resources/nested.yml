@@ -1,0 +1,7 @@
+#
+# test/fixtures/resources/nested.yaml
+#
+
+interface: org.opensuse.yast.printer.devices
+controller: yast/printer/devices
+nested: queue

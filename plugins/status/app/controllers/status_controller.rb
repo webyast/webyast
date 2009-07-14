@@ -32,9 +32,11 @@ class StatusController < ApplicationController
       render ErrorResult.error(403, 1, "no permission") and return
     else
       @status = Status.new
+      #logger.debug params.inspect
+      @status.set_datapath()
+logger.debug @status.datapath
       @status.collect_data(params[:start], params[:stop], params[:data])
 #      @status.collect_data("11:13,07/02/2009", "11:14,07/07/2009", %w{cpu memory disk})
-
     end
   end
 

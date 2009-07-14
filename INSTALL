@@ -1,7 +1,13 @@
 REST-style access to YaST
 -------------------------
 
-Prerequisites:
+rest-service implements a RESTful service to manage system resources
+(e.g. user, network, services, updates, etc.)
+
+It uses Ruby on Rails ActiveResource and D-BUS to access YaSTZ
+functionality.
+
+Prerequisites for running the rest-service:
 
 - YaST
 - PolicyKit
@@ -9,8 +15,14 @@ Prerequisites:
 - ruby-dbus
   (http://raa.ruby-lang.org/project/ruby-dbus/)
 - ruby-rpam
-  (OpenSUSE factory
-  or http://rubyforge.org/projects/rpam)
+  (See OpenSUSE factory for RPMs
+  or 'rpam' below git://git.opensuse.org/projects/yast/rest-service.git)
 - ruby-polkit
-  (OpenSUSE factory)
-  
+  (See OpenSUSE factory for RPMs
+  or 'ruby-polkit' below git://git.opensuse.org/projects/yast/rest-service.git)
+
+
+If you want to develop and test, it's highly recommended to install
+
+- rubygem-relevance-rcov
+  (For code coverage testing)

@@ -2,13 +2,17 @@ class Status < ActiveRecord::Base
   require 'scr'
   require 'yaml'
 
-  attr_accessor :data
+  attr_accessor :data,
+                :datapath,
+                :health_status,
+                :metrics
 
-  def initialize
+  def initialize()
     @scr = Scr.instance
     @health_status = nil
     @data = Hash.new
     start_collectd
+
     @datapath = set_datapath
     @metrics = available_metrics
 
@@ -27,6 +31,7 @@ class Status < ActiveRecord::Base
 #    f = File.open(File.join(@plugin_config_dir, "status_limits.yaml"), "w")
 #    f.write(@limits.to_yaml)
 #    f.close
+
   end
 
   def start_collectd
@@ -41,23 +46,20 @@ class Status < ActiveRecord::Base
 
   # set path of stored rrd files, default: /var/lib/collectd/$host.$domain
   def set_datapath(path=nil)
-    default = "/var/lib/collectd/"
-    unless path.nil?
-      @datapath = path.chomp("/")
+    if path.blank?   #FIXME: read currently used rrdb file from /etc/collectd.conf
+      cmd = IO.popen("ls /var/lib/collectd/")
+      path = cmd.read
+      cmd.close
+      path = path.split " " #FIXME
+      @datapath = "/var/lib/collectd/#{path[0].strip}"
     else # set default path
-      cmd = IO.popen("hostname")
-      host = cmd.read
-      cmd.close
-      cmd = IO.popen("domainname")
-      domainname = cmd.read
-      cmd.close
-      @datapath = "#{default}#{host.strip}.#{domainname.strip}"
+      @datapath = path.chomp("/")
     end
     return @datapath
   end
 
   def available_metrics
-    metrics = Hash.new
+    @metrics = Hash.new
     cmd = IO.popen("ls #{@datapath}")
     output = cmd.read
     cmd.close
@@ -65,9 +67,13 @@ class Status < ActiveRecord::Base
       fp = IO.popen("ls #{@datapath}/#{l}")
       files = fp.read
       fp.close
-      metrics["#{l}"] = { :rrds => files.split(" ")}
+      rrds = Array.new
+      files.split(" ").each do |d|
+        rrds << d if d.include? ".rrd" #only .rrd files
+        @metrics["#{l}"] = { :rrds => rrds}
+      end
     end
-    return metrics
+    return @metrics
   end
 
   def available_metric_files
@@ -84,7 +90,8 @@ class Status < ActiveRecord::Base
   end
 
   # creates several metrics for a defined period
-  def collect_data(start=Time.now, stop=Time.now, data = %w{cpu memory disk})
+  def collect_data(start=nil, stop=nil, data = %w{cpu memory disk})
+    available_metrics
     result = Hash.new
     unless @timestamp.nil? # collectd not started
         case data
@@ -127,28 +134,28 @@ class Status < ActiveRecord::Base
       stop = "--end #{stop}"
     end
     cmd = IO.popen("rrdtool fetch #{@datapath}/#{rrdfile} AVERAGE #{start} #{stop}")
-
     output = cmd.read
     cmd.close
-    return nil if output.blank?
+    return "failed" if output.blank?
 
     labels=""
     output = output.gsub(",", ".") # translates eg. 1,234e+07 to 1.234e+07
     lines = output.split "\n"
+    # set label names
     lines[0].each do |l|
       if l =~ /\D*/
         labels = l.split " "
       end
     end
-    lines.each do |l|
-      if l =~ /\d*:\D*/  ####
-        unless labels.nil?
-          if l =~ /\d*:\D*/  ####
-            sum = Hash.new
+    unless labels.blank?
+      # set values for each label and time
+      lines.each do |l| # each time
+        unless l.blank?
+          if l =~ /\d*:\D*/
             pair = l.split ":"
             values = pair[1].split " "
             column = 0
-            values.each do |v| # values for each label
+            values.each do |v| # each label
               result["#{labels[column]}"] ||= Hash.new
               result["#{labels[column]}"].merge!({"T_#{pair[0].chomp(": ")}" => v})
               column += 1
@@ -156,17 +163,19 @@ class Status < ActiveRecord::Base
           end
         end
       end
-    end
 
-    #setting the limits
-    result.each do |key, value|
-      path = rrdfile.chomp(".rrd") + "/" + key
-      if @limits.has_key?(path)
-        result[key] ||= Hash.new
-        result[key].merge!({"limit" => @limits[path] })
+      #setting the limits
+      result.each do |key, value|
+        path = rrdfile.chomp(".rrd") + "/" + key
+        if @limits.has_key?(path)
+          result[key] ||= Hash.new
+          result[key].merge!({"limit" => @limits[path] })
+        end
       end
-    end
 
-    return result
+      return result
+    else
+      return "failed"
+    end
   end
 end
