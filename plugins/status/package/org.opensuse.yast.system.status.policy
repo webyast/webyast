@@ -20,5 +20,14 @@ Rights for status
     </defaults>
   </action>
 
+  <action id="org.opensuse.yast.system.status.writelimits">
+    <description>Writing limits for status information</description>
+    <message>Authentication is required to write limits for status settings</message>
+    <defaults>
+      <allow_inactive>no</allow_inactive>
+      <allow_active>no</allow_active>
+    </defaults>
+  </action>
+
 </policyconfig>
 
