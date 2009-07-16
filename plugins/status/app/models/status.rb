@@ -136,6 +136,7 @@ class Status < ActiveRecord::Base
     labels=""
     output = output.gsub(",", ".") # translates eg. 1,234e+07 to 1.234e+07
     lines = output.split "\n"
+
     # set label names
     lines[0].each do |l|
       if l =~ /\D*/
@@ -151,9 +152,11 @@ class Status < ActiveRecord::Base
             values = pair[1].split " "
             column = 0
             values.each do |v| # each label
-              result["#{labels[column]}"] ||= Hash.new
-              result["#{labels[column]}"].merge!({"T_#{pair[0].chomp(": ")}" => v})
-              column += 1
+              if v != "nan" #store valid values only
+                result["#{labels[column]}"] ||= Hash.new
+                result["#{labels[column]}"].merge!({"T_#{pair[0].chomp(": ")}" => v})
+                column += 1
+              end
             end
           end
         end
