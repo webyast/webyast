@@ -22,7 +22,8 @@ class SystemtimesController < ApplicationController
     end
     
     @systemtime = Systemtime.new
-    @systemtime.datetime = root[:time]
+    @systemtime.time = root[:time]
+    @systemtime.date = root[:date]
     @systemtime.timezone = root[:timezone]
     @systemtime.utcstatus = root[:utcstatus]
     @systemtime.save

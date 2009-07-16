@@ -42,6 +42,7 @@ class SystemtimesControllerTest < ActionController::TestCase
     assert time
     assert_equal DATA[:time][:timezone], time.timezone
     assert_equal DATA[:time][:utcstatus], time.utcstatus
-    assert_nil time.datetime
+    assert_nil time.date
+    assert_nil time.time
   end
 end

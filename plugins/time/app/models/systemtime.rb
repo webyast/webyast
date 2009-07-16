@@ -2,13 +2,18 @@ class Systemtime
 
   @@timezones = Array.new()
 
-  attr_accessor :datetime,
+  attr_accessor :date,
+    :time,
     :timezone,
     :utcstatus
 
   private
   def parse_response(response)
-    @datetime = response["time"]
+    timedate = response["time"]
+    @time = timedate[timedate.index(" - ")+3,8]
+    @date = timedate[0..timedate.index(" - ")-1]
+    #convert date to format for datepicker
+    @date.sub!(/^(\d+)-(\d+)-(\d+)/,'\3/\2/\1')
     @utcstatus= response["utcstatus"]
     @timezone = response["timezone"]
     if response["zones"]
@@ -41,15 +46,18 @@ class Systemtime
 
   def save
     settings = {}
-    unless @timezone.nil? or @timezone.empty?
+    if @timezone and !@timezone.empty?
       settings["timezone"] = @timezone
     end
-    unless @utcstatus.nil? or @utcstatus.empty?
+    if @utcstatus and !@utcstatus.empty?
       settings["utcstatus"] = @utcstatus
     end
     need_rescue = false
-    unless @datetime.nil? or @datetime.empty?
-      settings["currenttime"] = @datetime
+    if (@date and !@date.empty?) and
+        (@time and !@time.empty?)
+      date = @date.split("/")
+      datetime = "#{date[2]}-#{date[0]}-#{date[1]} - "+@time
+      settings["currenttime"] = datetime
       need_rescue = true
     end
     begin
@@ -68,7 +76,8 @@ class Systemtime
     xml.instruct! unless options[:skip_instruct]
 
     xml.systemtime do
-      xml.tag!(:time, @datetime )
+      xml.tag!(:time, @time )
+      xml.tag!(:date, @date )
       xml.tag!(:timezone, @timezone )
       xml.tag!(:utcstatus, @utcstatus )
       xml.timezones({:type => "array"}) do
