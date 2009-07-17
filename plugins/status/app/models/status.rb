@@ -164,7 +164,10 @@ class Status < ActiveRecord::Base
 
       #setting the limits
       result.each do |key, value|
-        path = rrdfile.chomp(".rrd") + "/" + key
+        
+        path = rrdfile.chomp(".rrd") 
+        path +="/" + key if key!="value" #do not take care about the value flag
+        path = path.tr('-','_')
         if @limits.has_key?(path)
           result[key] ||= Hash.new
           result[key].merge!({"limit" => @limits[path] })
