@@ -14,9 +14,6 @@ class User
 		:type,
                 :sshkey
 
-#                :new_uid,
-#                :new_login_name,
-#                :no_home,
   def id
     @uid
   end
@@ -35,8 +32,6 @@ class User
     @loginShell		= ""
     @userPassword	= ""
     @type		= "local"
-#    @new_uid = ""
-#    @new_login_name = ""
     @sshkey		= ""
   end
 
@@ -64,6 +59,7 @@ class User
       xml.tag!(:id, id )
       xml.tag!(:cn, cn )
       xml.tag!(:groupname, groupname)
+      xml.tag!(:homeDirectory, homeDirectory )
       xml.tag!(:loginShell, loginShell )
       xml.tag!(:uid, uid )
       xml.tag!(:uidNumber, uidNumber, {:type => "integer"})
