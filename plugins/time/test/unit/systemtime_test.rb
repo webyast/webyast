@@ -57,7 +57,8 @@ class LanguageTest < ActiveSupport::TestCase
     YastService.stubs(:Call).with("YaPI::TIME::Read",read_arguments).returns(result)
 
     @model.find
-    assert_equal(result["time"], @model.datetime)
+    assert_equal("02/07/2009", @model.date)
+    assert_equal("12:18:00", @model.time)
     assert_equal("Europe/Prague", @model.timezone)
     assert_equal("true", @model.utcstatus)
     assert_equal(Test_timezones,@model.timezones)
@@ -81,7 +82,8 @@ class LanguageTest < ActiveSupport::TestCase
     data = read_response
     @model.timezone = data["timezone"]
     @model.utcstatus = data["utcstatus"]
-    @model.datetime = data["currenttime"]
+    @model.date = "02/07/2009"
+    @model.time = "12:18:00"
     @model.timezones = Test_timezones
 
     response = Hash.from_xml(@model.to_xml)
@@ -89,7 +91,8 @@ class LanguageTest < ActiveSupport::TestCase
 
     assert_equal(data["timezone"], response["timezone"])
     assert_equal(data["utcstatus"], response["utcstatus"])
-    assert_equal(data["currenttime"], response["time"])
+    assert_equal("12:18:00", response["time"])
+    assert_equal("02/07/2009", response["date"])
 
     zone_response = Test_timezones
     zone_response.each { |zone|
@@ -114,7 +117,8 @@ class LanguageTest < ActiveSupport::TestCase
     data = read_response
     @model.timezone = data["timezone"]
     @model.utcstatus = data["utcstatus"]
-    @model.datetime = data["currenttime"]
+    @model.date = "02/07/2009"
+    @model.time = "12:18:00"
     @model.timezones = Test_timezones
 
     assert_not_nil(@model.to_json)
