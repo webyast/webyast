@@ -1,19 +1,22 @@
+#
+# Wrapper over collectd
+#
 class Status
   require 'scr'
   require 'yaml'
 
   attr_accessor :data,
-                :datapath,
                 :health_status,
                 :metrics
-
+  
   def initialize()
     @scr = Scr.instance
     @health_status = nil
     @data = Hash.new
+    # force initialization of datapath
+    datapath
     start_collectd
 
-    @datapath = set_datapath
     @metrics = available_metrics
 
     #find the correct plugin path for the config file
@@ -29,6 +32,20 @@ class Status
     @limits = YAML.load(File.open(File.join(plugin_config_dir, "status_limits.yaml"))) if File.exists?(File.join(plugin_config_dir, "status_limits.yaml"))
   end
 
+  # returns the data path
+  def datapath
+    if @datapath.blank?
+      # if no datapath is set, use the first directory in /var/lib/collectd
+      @datapath = Dir.glob("/var/lib/collectd/*").first
+    end
+    @datapath
+  end
+  
+  # set path of stored rrd files, default: /var/lib/collectd/$host.$domain
+  def datapath=(path=nil)
+    @datapath = path.chomp("/")
+  end
+  
   def start_collectd
     cmd = @scr.execute(["collectd"])
     @timestamp = Time.now
@@ -39,43 +56,34 @@ class Status
     @timestamp = nil
   end
 
-  # set path of stored rrd files, default: /var/lib/collectd/$host.$domain
-  def set_datapath(path=nil)
-    if path.blank?   #FIXME: read currently used rrdb file from /etc/collectd.conf
-      cmd = IO.popen("ls /var/lib/collectd/")
-      path = cmd.read
-      cmd.close
-      path = path.split " " #FIXME
-      @datapath = "/var/lib/collectd/#{path[0].strip}"
-    else # set default path
-      @datapath = path.chomp("/")
-    end
-    return @datapath
+  # returns available metric types, which are the directories in the
+  # data path.
+  # requires datapath to be configured
+  # ie: ['cpu', 'memory']
+  def metric_types
+    Dir.glob(File.join(datapath,"*")).reject{|x| not File.directory?(x) }.map{|x| File.basename(x) }
   end
 
+  # returns the full path of metric databases for a metric type
+  # ie: /var/foo/cpu/file.rrd
+  def metric_files(metrictype)
+    Dir.glob(File.join(datapath, metrictype, "*.rrd"))
+  end
+    
+  # creates a hash from metric type (cpu, etc) to
   def available_metrics
-    @metrics = Hash.new
-    cmd = IO.popen("ls #{@datapath}")
-    output = cmd.read
-    cmd.close
-    output.split(" ").each do |l|
-      fp = IO.popen("ls #{@datapath}/#{l}")
-      files = fp.read
-      fp.close
+    metrics = Hash.new
+    # look in datapath, except for non directories, and get the last
+    # component of the path ie: interface, cpu, etc
+    metric_types.each do |metrictype|
       rrds = Array.new
-      files.split(" ").each do |d|
-        rrds << d if d.include? ".rrd" #only .rrd files
-        @metrics["#{l}"] = { :rrds => rrds}
+      metric_files(metrictype).each do |rrdfile|
+        rrds << rrdfile
+        #puts "#{rrdfile} at #{metrictype}"
       end
+      metrics["#{metrictype}"] = { :rrds => rrds}
     end
-    return @metrics
-  end
-
-  def available_metric_files
-    cmd = IO.popen("ls #{@datapath}..")
-    lines = cmd.read.split "\n"
-    cmd.close
-    return lines
+    metrics
   end
 
   def determine_status
@@ -92,20 +100,20 @@ class Status
         case data
         when nil, "all", "All" # all metrics
           @metrics.each_pair do |m, n|
-            @metrics["#{m}"][:rrds].each do |rrdb|
-              result["#{rrdb}".chomp(".rrd")] = fetch_metric("#{m}/#{rrdb}", start, stop)
+            @metrics[m][:rrds].each do |rrdb|
+              result[File.basename(rrdb).chomp('.rrd')] = fetch_metric(rrdb, start, stop)
             end
-            @data["#{m}"] = result
+            @data[m] = result
             result = Hash.new
           end
         else # only metrics in data
           data.each do |d|
             @metrics.each_pair do |m, n|
               if m.include?(d)
-                @metrics["#{m}"][:rrds].each do |rrdb|
-                result["#{rrdb}".chomp(".rrd")] = fetch_metric("#{m}/#{rrdb}", start, stop)
+                @metrics[m][:rrds].each do |rrdb|
+                result[File.basename(rrdb).chomp('.rrd')] = fetch_metric(rrdb, start, stop)
               end
-              @data["#{m}"] = result
+              @data[m] = result
               result = Hash.new
             end
           end
@@ -115,23 +123,29 @@ class Status
     return @data
   end
 
-  # creates one metric for defined period
-  def fetch_metric(rrdfile, start=nil, stop=nil)
-    result = Hash.new
-    if start.blank?
-      start = "--start #{Time.now.strftime("%H:%M,%m/%d/%Y")}"
-    else
-      start = "--start #{start}"
-    end
-    if stop.blank?
-      stop = "--end #{Time.now.strftime("%H:%M,%m/%d/%Y")}"
-    else
-      stop = "--end #{stop}"
-    end
-    cmd = IO.popen("rrdtool fetch #{@datapath}/#{rrdfile} AVERAGE #{start} #{stop}")
+  # runs the rddtool on file with start time and end time
+  # default last 5 minutes from now
+  def run_rrdtool(file, start, stop)
+    stop = Time.now if stop.nil?
+    # fetch last 5 minutes
+    start = stop - 300 if start.nil?
+
+    cmd = IO.popen("rrdtool fetch #{file} AVERAGE --start #{start.strftime("%H:%M,%m/%d/%Y")} --end #{stop.strftime("%H:%M,%m/%d/%Y")}")
     output = cmd.read
     cmd.close
-    return "failed" if output.blank?
+    output
+  end
+  
+  # creates one metric for defined period
+  # parameters are the file to read and the
+  # time interval
+  #
+  # If no time is given, last 5 minutes are used
+  def fetch_metric(rrdfile, start=nil, stop=nil)
+    result = Hash.new
+    output = run_rrdtool(rrdfile, start, stop)
+
+    raise "Error running collectd rrdtool" if output =~ /ERROR/ or output.nil?
 
     labels=""
     output = output.gsub(",", ".") # translates eg. 1,234e+07 to 1.234e+07
@@ -163,8 +177,7 @@ class Status
       end
 
       #setting the limits
-      result.each do |key, value|
-        
+      result.each do |key, value|        
         path = rrdfile.chomp(".rrd") 
         path +="/" + key if key!="value" #do not take care about the value flag
         path = path.tr('-','_')
@@ -176,7 +189,7 @@ class Status
 
       return result
     else
-      return "failed"
+      raise "error reading data from rrdtool"
     end
   end
 end

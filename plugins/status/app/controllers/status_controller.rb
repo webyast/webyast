@@ -52,10 +52,15 @@ class StatusController < ApplicationController
       f.close
 
       @status = Status.new
-      @status.collect_data(params[:start], params[:stop], params[:data])
-      #logger.debug "SHOW: #{@status.inspect}"
-
-      render :show
+      # use now if time is not valid
+      begin
+        stop = params[:stop].blank? ? Time.now : Time.at(params[:stop].to_i)
+        start = params[:start].blank? ? stop - 300 : Time.at(params[:start].to_i)        
+        @status.collect_data(start, stop, params[:data])
+        render :show
+      rescue Exception => e
+        render :text => e.to_s, :status => 400    # bad request
+      end
     end
   end
 
@@ -72,9 +77,14 @@ class StatusController < ApplicationController
       render ErrorResult.error(403, 1, "no permission") and return
     else
       @status = Status.new
-      #logger.debug params.inspect
-      @status.set_datapath()
-      @status.collect_data(params[:start], params[:stop], params[:data])
+
+      begin
+        stop = params[:stop].blank? ? Time.now : Time.at(params[:stop].to_i)
+        start = params[:start].blank? ? stop - 300 : Time.at(params[:start].to_i)        
+        @status.collect_data(start, stop, params[:data])
+      rescue Exception => e
+        render :text => e.to_s, :status => 400    # bad request
+      end
     end
   end
 
