@@ -1,6 +1,7 @@
 require File.expand_path(File.dirname(__FILE__) + "/../test_helper")
 require 'scr'
 require 'mocha'
+require 'status'
 require 'test_helper'
 
 class StatusTest < ActiveSupport::TestCase
