@@ -17,8 +17,6 @@ class Status
     datapath
     start_collectd
 
-    @metrics = available_metrics
-
     #find the correct plugin path for the config file
     plugin_config_dir = "#{RAILS_ROOT}/config" #default
     Rails.configuration.plugin_paths.each do |plugin_path|
@@ -94,13 +92,13 @@ class Status
 
   # creates several metrics for a defined period
   def collect_data(start=nil, stop=nil, data = %w{cpu memory disk})
-    available_metrics
+    metrics = available_metrics
     result = Hash.new
     unless @timestamp.nil? # collectd not started
         case data
         when nil, "all", "All" # all metrics
-          @metrics.each_pair do |m, n|
-            @metrics[m][:rrds].each do |rrdb|
+          metrics.each_pair do |m, n|
+            metrics[m][:rrds].each do |rrdb|
               result[File.basename(rrdb).chomp('.rrd')] = fetch_metric(rrdb, start, stop)
             end
             @data[m] = result
@@ -108,9 +106,9 @@ class Status
           end
         else # only metrics in data
           data.each do |d|
-            @metrics.each_pair do |m, n|
+            metrics.each_pair do |m, n|
               if m.include?(d)
-                @metrics[m][:rrds].each do |rrdb|
+                metrics[m][:rrds].each do |rrdb|
                 result[File.basename(rrdb).chomp('.rrd')] = fetch_metric(rrdb, start, stop)
               end
               @data[m] = result
