@@ -8,7 +8,8 @@ end
 
 env = %(PKG_BUILD="#{ENV['PKG_BUILD']}") if ENV['PKG_BUILD']
  
-PROJECTS = ['webservice', *Dir.glob('plugins/*')]
+plugins = Dir.glob('plugins/*').reject{|x| ['users'].include?(File.basename(x))}
+PROJECTS = ['webservice', *plugins]
 desc 'Run all tests by default'
 task :default => :test
  
@@ -36,3 +37,4 @@ task :check_syntax do
   `find . -name "*.rb" |xargs -n1 ruby -c |grep -v "Syntax OK"`
   puts "* Done"
 end
+
