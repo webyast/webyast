@@ -64,7 +64,7 @@ Authors:
 #
 mkdir -p $RPM_BUILD_ROOT/srv/www/%{pkg_user}/
 cp -a * $RPM_BUILD_ROOT/srv/www/%{pkg_user}/
-rm $RPM_BUILD_ROOT/srv/www/%{pkg_user}/log/*
+rm -f $RPM_BUILD_ROOT/srv/www/%{pkg_user}/log/*
 
 %{__install} -d -m 0755                            \
     %{buildroot}%{pkg_home}/sockets/               \
