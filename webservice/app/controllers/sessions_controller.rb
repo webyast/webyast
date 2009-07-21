@@ -35,14 +35,13 @@ class SessionsController < ApplicationController
     end
     @cmd_ret = Hash.new
     if logged_in?
-      auth_token = { :value => self.current_account.remember_token , :expires => self.current_account.remember_token_expires_at }
       if params[:remember_me]
         current_account.remember_me unless current_account.remember_token?
-        cookies[:auth_token] = auth_token
+        cookies[:auth_token] = { :value => self.current_account.remember_token , :expires => self.current_account.remember_token_expires_at }
       end
 
       @cmd_ret["login"] = "granted"
-      @cmd_ret["auth_token"] = auth_token
+      @cmd_ret["auth_token"] = { :value => self.current_account.remember_token , :expires => self.current_account.remember_token_expires_at }
     else
       @cmd_ret["login"] = "denied"
     end
