@@ -1,7 +1,7 @@
 require 'rake'
 
 desc "Check syntax of all Ruby (*.rb) files"
-task :syntax_check do
+task :check_syntax do
     puts "* Starting syntax check..."
 
     # check all *.rb files
