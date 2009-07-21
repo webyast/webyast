@@ -6,21 +6,5 @@ require File.join(File.dirname(__FILE__), 'config', 'rails_parent')
 require File.join(RailsParent.parent, 'config', 'boot')
 require 'tasks/rails'
 
-begin
-      require 'tasks/webservice'
-rescue LoadError => e
-      $stderr.puts "Install rubygem-yast2-webservice-tasks.rpm"
-end
-
 desc 'Default: run unit tests.'
 task :default => :test
-
-desc 'Generate documentation for the systemtime plugin.'
-Rake::RDocTask.new(:rdoc) do |rdoc|
-  rdoc.rdoc_dir = 'rdoc'
-  rdoc.title    = 'Systemtime'
-  rdoc.options << '--line-numbers' << '--inline-source'
-  rdoc.rdoc_files.include('README')
-  rdoc.rdoc_files.include('lib/**/*.rb')
-end
-

@@ -1,4 +1,9 @@
 
+def sudo(cmd)
+  puts "#{cmd}"
+  %x[sudo -p "Password: " #{cmd}]
+end
+
 desc "install policies"
 task :install_policies do |t|
   puts "Running from #{__FILE__}"

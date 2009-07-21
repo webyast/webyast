@@ -6,32 +6,7 @@ require File.join(File.dirname(__FILE__), 'config', 'rails_parent')
 require File.join(RailsParent.parent, 'config', 'boot')
 require 'tasks/rails'
 
-# load all Yast webservice specific tasks
-begin
-    require 'tasks/webservice'
-rescue LoadError => e
-    $stderr.puts "WARNING: 'yast2-webservice-tasks' gem is missing, some tasks will be missing or can be broken."
-    $stderr.puts "Install 'yast2-webservice-tasks' Ruby gem from 'rubygem-yast2-webservice-tasks' RPM package.\n"
-end
-
 desc 'Default: run unit tests.'
 task :default => :test
-
-desc 'Test the samba_server plugin.'
-Rake::TestTask.new(:test) do |t|
-  t.libs << 'lib'
-  t.libs << 'test'
-  t.pattern = 'test/**/*_test.rb'
-  t.verbose = true
-end
-
-desc 'Generate documentation for the samba_server plugin.'
-Rake::RDocTask.new(:rdoc) do |rdoc|
-  rdoc.rdoc_dir = 'rdoc'
-  rdoc.title    = 'SambaServer'
-  rdoc.options << '--line-numbers' << '--inline-source'
-  rdoc.rdoc_files.include('README')
-  rdoc.rdoc_files.include('lib/**/*.rb')
-end
 
 
