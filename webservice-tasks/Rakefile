@@ -1,4 +1,5 @@
 require 'rake'
+require 'rake/rdoctask'
 
 # load the shared rake files from the package itself
 # skip 'package-local' task, it's redefined here

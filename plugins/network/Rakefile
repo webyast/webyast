@@ -5,40 +5,5 @@ require File.join(File.dirname(__FILE__), 'config', 'rails_parent')
 require File.join(RailsParent.parent, 'config', 'boot')
 require 'tasks/rails'
 
-begin
-    require 'tasks/webservice'
-rescue LoadError => e
-    $stderr.puts "Install rubygem-yast2-webservice-tasks.rpm"
-end
-
 desc 'Default: run unit tests.'
 task :default => :test
-
-desc 'Test this plugin.'
-Rake::TestTask.new(:test) do |t|
-  t.libs << 'lib'
-  t.libs << 'test'
-  t.pattern = 'test/**/*_test.rb'
-  t.verbose = true
-end
-
-desc 'Generate documentation for this plugin.'
-Rake::RDocTask.new(:rdoc) do |rdoc|
-  rdoc.title    = 'Services'
-  rdoc.rdoc_dir = 'rdoc'
-  rdoc.options << '--line-numbers' << '--inline-source'
-  rdoc.rdoc_files.include('README')
-  rdoc.rdoc_files.include('lib/**/*.rb')
-end
-
-desc "install policies"
-task :install do |t|
-  Dir.glob("**/*.policy").each do |policy|
-    sudo "cp #{policy} /usr/share/PolicyKit/policy"
-  end
-end
-
-def sudo(cmd)
-  puts "#{cmd}"
-  %x[sudo -p "Password: " #{cmd}]
-end
