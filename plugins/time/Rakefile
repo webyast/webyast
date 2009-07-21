@@ -8,23 +8,3 @@ require 'tasks/rails'
 
 desc 'Default: run unit tests.'
 task :default => :test
-
-desc 'Generate documentation for the systemtime plugin.'
-Rake::RDocTask.new(:rdoc) do |rdoc|
-  rdoc.rdoc_dir = 'rdoc'
-  rdoc.title    = 'Systemtime'
-  rdoc.options << '--line-numbers' << '--inline-source'
-  rdoc.rdoc_files.include('README')
-  rdoc.rdoc_files.include('lib/**/*.rb')
-end
-
-desc 'Generate tarball package'
-Rake::PackageTask.new('www', :noversion) do |p|
-  %x[rm -r package/www]
-  p.need_tar_bz2 = true
-  p.package_dir = 'package'
-  p.package_files.include('**/*')
-  p.package_files.exclude('package')
-  p.package_files.exclude('nbproject')
-  p.package_files.exclude('coverage')
-end

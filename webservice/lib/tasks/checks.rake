@@ -39,14 +39,6 @@ end
 # Tests
 #
 
-desc "install policies"
-task :install_policies do |t|
-  Dir.glob(File.join(Dir.pwd, '..', "**/*.policy")).each do |policy|
-    puts "copying #{policy} -> /usr/share/PolicyKit/policy"
-    `cp #{policy} /usr/share/PolicyKit/policy`
-  end
-end
-
 task :system_check do
 
   #

@@ -45,7 +45,7 @@ class Status
   end
   
   def start_collectd
-    cmd = @scr.execute(["collectd"])
+    cmd = @scr.execute(["/usr/sbin/collectd"])
     @timestamp = Time.now
   end
 
