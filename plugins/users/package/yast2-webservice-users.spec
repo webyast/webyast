@@ -19,7 +19,7 @@ Version:        0.0.1
 Release:        0
 Summary:        YaST2 - Webservice - Users
 Source:         www.tar.bz2
-Source1:        org.opensuse.yast.system.users.policy
+Source1:        org.opensuse.yast.modules.yapi.users.policy
 BuildRoot:      %{_tmppath}/%{name}-%{version}-build
 BuildArch:      noarch
 
@@ -64,20 +64,8 @@ rm -rf $RPM_BUILD_ROOT
 %files 
 %defattr(-,root,root)
 %dir /srv/www/%{pkg_user}
-%dir /srv/www/%{pkg_user}/vendor
-%dir /srv/www/%{pkg_user}/vendor/plugins
 %dir /srv/www/%{pkg_user}/vendor/plugins/%{plugin_name}
+/srv/www/%{pkg_user}/vendor/plugins/%{plugin_name}/*
 %dir /usr/share/PolicyKit
 %dir /usr/share/PolicyKit/policy
-%config /srv/www/%{pkg_user}/vendor/plugins/%{plugin_name}/MIT-LICENSE
-%config /srv/www/%{pkg_user}/vendor/plugins/%{plugin_name}/README
-%config /srv/www/%{pkg_user}/vendor/plugins/%{plugin_name}/Rakefile
-%config /srv/www/%{pkg_user}/vendor/plugins/%{plugin_name}/init.rb
-%config /srv/www/%{pkg_user}/vendor/plugins/%{plugin_name}/install.rb
-%config /srv/www/%{pkg_user}/vendor/plugins/%{plugin_name}/uninstall.rb
-%config /srv/www/%{pkg_user}/vendor/plugins/%{plugin_name}/app
-%config /srv/www/%{pkg_user}/vendor/plugins/%{plugin_name}/config
-%config /srv/www/%{pkg_user}/vendor/plugins/%{plugin_name}/tasks
-%config /srv/www/%{pkg_user}/vendor/plugins/%{plugin_name}/test
-%attr(644,root,root) %config /usr/share/PolicyKit/policy/org.opensuse.yast.system.%{plugin_name}.policy
-
+%attr(644,root,root) %config /usr/share/PolicyKit/policy/org.opensuse.yast.modules.yapi.users.policy

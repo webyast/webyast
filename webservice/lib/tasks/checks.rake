@@ -5,7 +5,6 @@
 def escape why, fix = nil
   $stderr.puts "*** Error: #{why}"
   $stderr.puts "Please #{fix}" if fix
-  exit
 end
 
 def test what
@@ -65,8 +64,7 @@ task :system_check do
   Dir.glob(policy_files).map { |x| File.basename(x) }.reject { |x| not_needed.include?(x) }.each do |policy|
     dest_policy = File.join('/usr/share/PolicyKit/policy', policy)
     if not File.exists?(dest_policy)
-      raise "* Policy '#{policy}' is not installed into '#{dest_policy}'. Run \"rake install\" in the concerning module/plugin"
-      exit(1)
+      escape "Policy '#{policy}' is not installed into '#{dest_policy}'", "Run \"rake install\" in the concerning module/plugin"
     end
   end
 

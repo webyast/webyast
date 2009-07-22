@@ -76,9 +76,8 @@ class StatusController < ApplicationController
     unless permission_check("org.opensuse.yast.system.status.read")
       render ErrorResult.error(403, 1, "no permission") and return
     else
-      @status = Status.new
-
       begin
+        @status = Status.new
         stop = params[:stop].blank? ? Time.now : Time.at(params[:stop].to_i)
         start = params[:start].blank? ? stop - 300 : Time.at(params[:start].to_i)        
         @status.collect_data(start, stop, params[:data])

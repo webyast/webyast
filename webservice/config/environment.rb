@@ -88,7 +88,6 @@ case RAILS_ENV
     USER_ROLES_CONFIG = File.join(File.dirname(__FILE__), "../test/fixtures/yast_user_roles")
     
   when "development", "production"
-    $stderr.puts "Registering plugin resources"
     init.loaded_plugins.each do |plugin|
       ResourceRegistration.register_plugin(plugin)
     end
