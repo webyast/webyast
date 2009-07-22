@@ -23,6 +23,7 @@ Rake::PackageTask.new('www', :noversion) do |p|
   p.package_files.exclude('db/*.sqlite3')
   p.package_files.exclude('db/schema.rb')
   p.package_files.exclude('log/*.log')
+  p.package_files.exclude('vendor/plugins/rails_rcov')
 end
 
 # rename 'package' task to 'package-local' task
