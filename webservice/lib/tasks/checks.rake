@@ -60,8 +60,10 @@ task :system_check do
   test_module "dbus", "ruby-dbus"
 
   # check that policies are all installed
-  Dir.glob(File.join(File.dirname(__FILE__), '../../..', "**/*.policy")).each do |policy|
-    dest_policy = File.join('/usr/share/PolicyKit/policy', File.basename(policy))
+  not_needed = ['org.opensuse.yast.scr.policy']
+  policy_files = File.join(File.dirname(__FILE__), '../../..', "**/*.policy")
+  Dir.glob(policy_files).map { |x| File.basename(x) }.reject { |x| not_needed.include?(x) }.each do |policy|
+    dest_policy = File.join('/usr/share/PolicyKit/policy', policy)
     if not File.exists?(dest_policy)
       raise "* Policy '#{policy}' is not installed into '#{dest_policy}'. Run \"rake install\" in the concerning module/plugin"
       exit(1)
