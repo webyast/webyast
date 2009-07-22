@@ -141,10 +141,10 @@ test -r /usr/sbin/yastws || { echo "Creating link /usr/sbin/yastws";
 # create database 
 #
 cd srv/www/%{pkg_user}
-chown yastws: db/schema.rb
 rm -f db/*
-# it writes to the log, don't leave it to root
 su %{pkg_user} -s /bin/sh -c "rake db:migrate"
+chown yastws: db/schema.rb
+# it writes to the log, don't leave it to root
 chown yastws: db db/*.sqlite*
 
 %preun
