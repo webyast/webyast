@@ -43,6 +43,7 @@ end
 # Tests
 #
 
+desc "Check that your build environment is set up correctly for WebYaST"
 task :system_check do
 
   errors = false
