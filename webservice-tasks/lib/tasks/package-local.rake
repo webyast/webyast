@@ -19,6 +19,7 @@ Rake::PackageTask.new('www', :noversion) do |p|
   p.package_files.include('**/*')
   p.package_files.exclude('package')
   p.package_files.exclude('coverage')
+  p.package_files.exclude('test')
 end
 
 # rename 'package' task to 'package-local' task

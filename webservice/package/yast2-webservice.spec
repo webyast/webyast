@@ -64,7 +64,7 @@ Authors:
 #
 mkdir -p $RPM_BUILD_ROOT/srv/www/%{pkg_user}/
 cp -a * $RPM_BUILD_ROOT/srv/www/%{pkg_user}/
-rm $RPM_BUILD_ROOT/srv/www/%{pkg_user}/log/*
+rm -f $RPM_BUILD_ROOT/srv/www/%{pkg_user}/log/*
 
 %{__install} -d -m 0755                            \
     %{buildroot}%{pkg_home}/sockets/               \
@@ -141,9 +141,11 @@ test -r /usr/sbin/yastws || { echo "Creating link /usr/sbin/yastws";
 # create database 
 #
 cd srv/www/%{pkg_user}
-chown yastws: db db/*.sqlite* db/schema.rb
+chown yastws: db/schema.rb
+rm -f db/*
 # it writes to the log, don't leave it to root
 su %{pkg_user} -s /bin/sh -c "rake db:migrate"
+chown yastws: db db/*.sqlite*
 
 %preun
 %stop_on_removal %{pkg_user}
@@ -179,7 +181,7 @@ fi
 /srv/www/yastws/public
 /srv/www/yastws/Rakefile
 /srv/www/yastws/script
-/srv/www/yastws/test
+#/srv/www/yastws/test
 /srv/www/yastws/config
 /srv/www/yastws/vendor
 %attr(755,root,root) %config /etc/yastws/tools/policyKit-rights.rb
