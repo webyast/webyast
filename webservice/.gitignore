@@ -3,3 +3,5 @@ db/*.sqlite3
 db/schema.rb
 log/*.log
 coverage
+package/www
+package/www.tar.bz2
