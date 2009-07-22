@@ -122,7 +122,7 @@ EOF
   #
   test "User roles configured" do
     unless File.exists? "/etc/yast_user_roles"
-      escape "/etc/yast_user_roles does not exist", "create /etc/yast_user_roles"
+      escape "/etc/yast_user_roles does not exist", "Create /etc/yast_user_roles using template in webservice/package/yast_user_roles"
     end
   end
 
