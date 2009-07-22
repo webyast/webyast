@@ -30,11 +30,11 @@ Source7:        lighttpd.conf
 Source8:        modules.conf
 Source9:        yastws
 BuildRoot:      %{_tmppath}/%{name}-%{version}-build
-BuildRequires:  ruby-devel, pkg-config, rubygem-relevance-rcov, rubygem-mocha
+BuildRequires:  ruby, pkg-config, rubygem-relevance-rcov, rubygem-mocha
 # if we run the tests during build, we need most of Requires here too,
 # except for deployment specific stuff
-BuildRequires:  yast2-core-devel, ruby-dbus, sqlite, avahi-utils dbus-1-devel
-BuildRequires:  PolicyKit-devel, PackageKit-devel, rubygem-sqlite3, rubygem-rails-2_3, ruby-rpam, ruby-polkit
+BuildRequires:  yast2-core, ruby-dbus, sqlite, avahi-utils dbus-1
+BuildRequires:  PolicyKit, PackageKit, rubygem-sqlite3, rubygem-rails-2_3, ruby-rpam, ruby-polkit
 BuildArch:      noarch
 
 #
@@ -66,6 +66,7 @@ Authors:
 mkdir -p $RPM_BUILD_ROOT/srv/www/%{pkg_user}/
 cp -a * $RPM_BUILD_ROOT/srv/www/%{pkg_user}/
 rm -f $RPM_BUILD_ROOT/srv/www/%{pkg_user}/log/*
+touch $RPM_BUILD_ROOT/srv/www/%{pkg_user}/db/schema.rb
 
 %{__install} -d -m 0755                            \
     %{buildroot}%{pkg_home}/sockets/               \
