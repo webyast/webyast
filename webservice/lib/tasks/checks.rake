@@ -3,7 +3,12 @@
 #
 
 def escape why, fix = nil
-  $stderr.puts "*** Error: #{why}"
+  $stderr.puts "*** ERROR: #{why}"
+  $stderr.puts "Please #{fix}" if fix
+end
+
+def warn why, fix = nil
+  $stderr.puts "*** WARNING: #{why}"
   $stderr.puts "Please #{fix}" if fix
 end
 
@@ -40,6 +45,8 @@ end
 
 task :system_check do
 
+  errors = false
+
   #
   # check needed needed packages
   #
@@ -65,6 +72,7 @@ task :system_check do
     dest_policy = File.join('/usr/share/PolicyKit/policy', policy)
     if not File.exists?(dest_policy)
       escape "Policy '#{policy}' is not installed into '#{dest_policy}'", "Run \"rake install\" in the concerning module/plugin"
+      errors = true
     end
   end
 
@@ -100,19 +108,26 @@ EOF
   scr_actions = `polkit-action`.split.reject { |item| not item.include?('org.opensuse.yast.scr.') }
   webservice_actions = [ 'org.freedesktop.packagekit.system-update', 'org.freedesktop.packagekit.install',  'org.freedesktop.policykit.read', *scr_actions]
 
+  hint_message = "Use utility script policyKit-rights.rb to grant them all. See http://en.opensuse.org/YaST/Web/Development\nAlternatively, you can add the following to /etc/PolicyKit/PolicyKit.conf config tag section:\n#{policykit_conf}\n"
+
   webservice_actions.each do | action|
     if not granted.include?(action)
-      escape "policy #{action} is not granted and it is needed to run the webservice as #{user}.", "Run 'polkit-auth --user #{user} --grant #{action}'\nTo grant it, or use utility script policyKit-rights.rb to grant them all.\nSee http://en.opensuse.org/YaST/Web/Development\n\nAlternatively, you can add the following to /etc/PolicyKit/PolicyKit.conf config tag section:\n#{policykit_conf}\n"
+      escape "policy #{action} is not granted and it is needed to run the webservice as #{user}.", "Run 'polkit-auth --user #{user} --grant #{action}' to grant the permission.\n"+hint_message
+      hint_message = ""
+      errors = true
     end
   end
 
   # now check that all permission in each policy is granted
+  hint_message = "\nUse utility script policyKit-rights.rb to grant them all.\nSee http://en.opensuse.org/YaST/Web/Development\nYou can also grant them to the root user and login as root to the YaST web client.\n\n"
   Dir.glob(File.join(File.dirname(__FILE__), '../../..', "**/*.policy")).each do |policy|
     doc = REXML::Document.new(File.open(policy))
     doc.elements.each("/policyconfig/action") do |action|
       id = action.attributes['id']
       if not granted.include?(id)
-        puts "\nWARNING!!\n\npolicy #{id} is not granted for current user.\n\nIf you plan to login to YaST as '#{user}', run 'polkit-auth --user #{user} --grant #{id}'\nTo grant it, or use utility script policyKit-rights.rb to grant them all.\nSee http://en.opensuse.org/YaST/Web/Development\nYou can also grant them to the root user and login as root to the YaST web client.\n\n"
+        warn "policy #{id} is not granted for current user.", " fix it if you plan to login to YaST as '#{user}', run 'polkit-auth --user #{user} --grant #{id}' to grant it." + hint_message
+        hint_message = ""
+        errors = true
       end
     end
   end
@@ -122,7 +137,8 @@ EOF
   #
   test "User roles configured" do
     unless File.exists? "/etc/yast_user_roles"
-      escape "/etc/yast_user_roles does not exist", "create /etc/yast_user_roles"
+      escape "/etc/yast_user_roles does not exist", "Create /etc/yast_user_roles using template in webservice/package/yast_user_roles"
+      errors = true
     end
   end
 
@@ -148,12 +164,14 @@ EOF
       $stderr.puts "YaST D-Bus service not available"
       test_version package, version
       escape "#{package} not correctly installed", "reinstall #{package}-#{version}"
+      errors = true
     end
     begin
       scr = proxy["org.opensuse.yast.SCR.Methods"]
     rescue Exception => e
     end
     escape "YaST D-Bus does not provide the right data", "reinstall #{package}-#{version}" unless scr
+    errors = true
   end
 
   #
@@ -180,11 +198,19 @@ EOF
           ok = system %(cd #{File.dirname(__FILE__)}; export RAILS_PARENT=../../; ruby plugin_test/functional/plugin_show_test.rb --plugin #{modulename})
        end
        escape "plugin #{modulename} does not work correctly", "check the logfiles" unless ok
+       errors = true
      end
   end
   
-  puts ""
-  puts "**************************************"
-  puts "All fine, rest-service is ready to run"
-  puts "**************************************"
+  if !errors 
+    puts ""
+    puts "**************************************"
+    puts "All fine, rest-service is ready to run"
+    puts "**************************************"
+  else
+    puts ""
+    puts "*******************************************************"
+    puts "Please, fix the above errors before running the service"
+    puts "*******************************************************"
+  end
 end

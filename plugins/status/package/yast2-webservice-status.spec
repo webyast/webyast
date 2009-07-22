@@ -11,7 +11,6 @@
 
 Name:           yast2-webservice-status
 PreReq:         yast2-webservice collectd rrdtool
-Provides:       yast2-webservice:/srv/www/yastws/app/controllers/status_controller.rb
 License:        MIT
 Group:          Productivity/Networking/Web/Utilities
 Autoreqprov:    on

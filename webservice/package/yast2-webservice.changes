@@ -1,4 +1,18 @@
 -------------------------------------------------------------------
+Wed Jul 22 17:01:46 CEST 2009 - mvidner@suse.cz
+
+- Too many changes. Please release often!
+    55  Klaus Kämpf
+    21  Stefan Schubert
+    14  Duncan Mac-Vicar P
+     7  Ladislav Slezak
+     6  Josef Reidinger
+     6  Martin Vidner
+     1  Jiří Šrain
+     1  Stanislav Visnovsky
+- 0.0.2
+
+-------------------------------------------------------------------
 Fri May 15 15:14:45 CEST 2009 - schubi@suse.de
 
 - new interface definitions
