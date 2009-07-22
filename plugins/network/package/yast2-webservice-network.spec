@@ -1,5 +1,5 @@
 #
-# spec file for package yast2-webservice-status (Version 0.1)
+# spec file for package yast2-webservice-network (Version 0.1)
 #
 # Copyright (c) 2008 SUSE LINUX Products GmbH, Nuernberg, Germany.
 # This file and all modifications and additions to the pristine
@@ -9,23 +9,23 @@
 #
 
 
-Name:           yast2-webservice-status
-PreReq:         yast2-webservice collectd rrdtool
-Provides:       yast2-webservice:/srv/www/yastws/app/controllers/status_controller.rb
+Name:           yast2-webservice-network
+PreReq:         yast2-webservice
+Provides:       yast2-webservice:/srv/www/yastws/app/controllers/network_controller.rb
 License:        MIT
 Group:          Productivity/Networking/Web/Utilities
 Autoreqprov:    on
 Version:        0.0.1
 Release:        0
-Summary:        YaST2 - Webservice - Status
+Summary:        YaST2 - Webservice - Network
 Source:         www.tar.bz2
-Source1:        org.opensuse.yast.system.status.policy
+Source1:        org.opensuse.yast.system.network.policy
 BuildRoot:      %{_tmppath}/%{name}-%{version}-build
 BuildArch:      noarch
 
 #
 %define pkg_user yastws
-%define plugin_name status
+%define plugin_name network
 #
 
 
@@ -33,7 +33,7 @@ BuildArch:      noarch
 YaST2 - Webservice - REST based interface of YaST in order to handle firewall and ssh settings.
 Authors:
 --------
-    Björn Geuken <bgeuken@suse.de>
+    Michael Zugec <mzugec@suse.cz>
 
 %prep
 %setup -q -n www
@@ -68,8 +68,8 @@ rm -rf $RPM_BUILD_ROOT
 %dir /srv/www/%{pkg_user}/vendor
 %dir /srv/www/%{pkg_user}/vendor/plugins
 %dir /srv/www/%{pkg_user}/vendor/plugins/%{plugin_name}
+/srv/www/%{pkg_user}/vendor/plugins/%{plugin_name}/*
 %dir /usr/share/PolicyKit
 %dir /usr/share/PolicyKit/policy
-/srv/www/%{pkg_user}/vendor/plugins/%{plugin_name}/*
 %attr(644,root,root) %config /usr/share/PolicyKit/policy/org.opensuse.yast.system.%{plugin_name}.policy
 
