@@ -209,3 +209,6 @@ fi
 %config(noreplace) /etc/yast_user_roles
 %config(noreplace)  %{_sysconfdir}/init.d/%{pkg_user}
 %{_sbindir}/rc%{pkg_user}
+
+#---------------------------------------------------------------
+%changelog
