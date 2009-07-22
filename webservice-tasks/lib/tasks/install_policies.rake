@@ -8,7 +8,9 @@ desc "install policies"
 task :install_policies do |t|
   puts "Running from #{__FILE__}"
   Dir.glob("**/*.policy").each do |policy|
-  "cp #{policy} /usr/share/PolicyKit/policy"
+    cmd = "cp #{policy} /usr/share/PolicyKit/policy"
+    echo cmd
+    `#{cmd}`
   end
 end
 
