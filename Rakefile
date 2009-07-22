@@ -8,7 +8,7 @@ end
 
 env = %(PKG_BUILD="#{ENV['PKG_BUILD']}") if ENV['PKG_BUILD']
  
-plugins = Dir.glob('plugins/*').reject{|x| ['users'].include?(File.basename(x))}
+plugins = Dir.glob('plugins/*')#.reject{|x| ['users'].include?(File.basename(x))}
 PROJECTS = ['webservice', *plugins]
 desc 'Run all tests by default'
 task :default => :test
