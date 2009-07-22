@@ -34,7 +34,7 @@ Requires:	rubygem-rake
 Url:            http://en.opensuse.org/YaST
 Source:         %{mod_name}-%{version}.gem
 
-Summary:        Rake tasks shared by all YaST webservice packages.
+Summary:        Rake tasks shared by all YaST webservice packages
 %description
 The original task package is renamed to package-local.
 The new task package includes the tasks git_check and syntax_check.
