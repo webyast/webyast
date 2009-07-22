@@ -176,7 +176,7 @@ class Status
 
       #setting the limits
       result.each do |key, value|        
-        path = rrdfile.chomp(".rrd") 
+        path = rrdfile[datapath.length+1..rrdfile.length-1].chomp('.rrd')
         path +="/" + key if key!="value" #do not take care about the value flag
         path = path.tr('-','_')
         if @limits.has_key?(path)
@@ -184,7 +184,6 @@ class Status
           result[key].merge!({"limit" => @limits[path] })
         end
       end
-
       return result
     else
       raise "error reading data from rrdtool"
