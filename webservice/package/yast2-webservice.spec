@@ -179,7 +179,7 @@ fi
 /srv/www/yastws/public
 /srv/www/yastws/Rakefile
 /srv/www/yastws/script
-/srv/www/yastws/test
+#/srv/www/yastws/test
 /srv/www/yastws/config
 /srv/www/yastws/vendor
 %attr(755,root,root) %config /etc/yastws/tools/policyKit-rights.rb
