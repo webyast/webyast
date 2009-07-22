@@ -34,7 +34,7 @@ BuildRequires:  ruby-devel, pkg-config, rubygem-relevance-rcov, rubygem-mocha
 # if we run the tests during build, we need most of Requires here too,
 # except for deployment specific stuff
 BuildRequires:  yast2-core-devel, ruby-dbus, sqlite, avahi-utils dbus-1-devel
-BuildRequires:  PolicyKit-devel, PackageKit-devel, rubygem-rake, rubygem-sqlite3, rubygem-rails-2_3, ruby-rpam, ruby-polkit
+BuildRequires:  PolicyKit-devel, PackageKit-devel, rubygem-sqlite3, rubygem-rails-2_3, ruby-rpam, ruby-polkit
 BuildArch:      noarch
 
 #
