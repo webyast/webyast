@@ -21,6 +21,7 @@ Rake::PackageTask.new('www', :noversion) do |p|
   p.package_files.exclude('coverage')
   p.package_files.exclude('test')
   p.package_files.exclude('db/*.sqlite3')
+  p.package_files.exclude('db/schema.rb')
   p.package_files.exclude('log/*.log')
 end
 
