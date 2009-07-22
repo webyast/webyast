@@ -155,7 +155,7 @@ class PermissionsController < ApplicationController
       render ErrorResult.error(404, 1, "no permissions found") and return
     end
 
-    ret = Scr.instance.execute(["polkit-auth", "--user", params[:id], params[:permissions][:grant] ? "--grant" : "--revoke", params[:permissions][:name]])
+    ret = Scr.instance.execute(["polkit-auth", "--user", params[:id].chomp(".xml"), params[:permissions][:grant] ? "--grant" : "--revoke", params[:permissions][:name]])
 
     if ret[:exit] != 0
       render ErrorResult.error(404, 1, ret[:stderr]) and return
