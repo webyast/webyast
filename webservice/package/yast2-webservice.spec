@@ -33,8 +33,8 @@ BuildRoot:      %{_tmppath}/%{name}-%{version}-build
 BuildRequires:  ruby-devel, pkg-config, rubygem-relevance-rcov, rubygem-mocha
 # if we run the tests during build, we need most of Requires here too,
 # except for deployment specific stuff
-BuildRequires:  yast2-core, ruby-dbus, sqlite, avahi-utils dbus-1
-BuildRequires:  PolicyKit, PackageKit, rubygem-rake, rubygem-sqlite3, rubygem-rails-2_3, ruby-rpam, ruby-polkit
+BuildRequires:  yast2-core-devel, ruby-dbus, sqlite, avahi-utils dbus-1-devel
+BuildRequires:  PolicyKit-devel, PackageKit-devel, rubygem-rake, rubygem-sqlite3, rubygem-rails-2_3, ruby-rpam, ruby-polkit
 BuildArch:      noarch
 
 #
@@ -57,6 +57,7 @@ Authors:
 
 %build
 
+#---------------------------------------------------------------
 %install
 
 #
@@ -102,9 +103,11 @@ mkdir -p $RPM_BUILD_ROOT/srv/www/%{pkg_user}/tmp/sessions
 mkdir -p $RPM_BUILD_ROOT/srv/www/%{pkg_user}/tmp/sockets
 
 
+#---------------------------------------------------------------
 %clean
 rm -rf $RPM_BUILD_ROOT
 
+#---------------------------------------------------------------
 %pre
 #
 # e.g. adding user
@@ -112,7 +115,9 @@ rm -rf $RPM_BUILD_ROOT
 /usr/sbin/groupadd -r %{pkg_user} &>/dev/null ||:
 /usr/sbin/useradd  -g %{pkg_user} -s /bin/false -r -c "User for YaST-Webservice" -d %{pkg_home} %{pkg_user} &>/dev/null ||:
 
+#---------------------------------------------------------------
 %post
+
 #installing lighttpd server
 test -r /usr/sbin/yastws || { echo "Creating link /usr/sbin/yastws";
         ln -s /usr/sbin/lighttpd /usr/sbin/yastws; }
@@ -146,10 +151,13 @@ su %{pkg_user} -s /bin/sh -c "rake db:migrate"
 chown yastws: db/schema.rb
 # it writes to the log, don't leave it to root
 chown yastws: db db/*.sqlite*
+echo "Database is ready"
 
+#---------------------------------------------------------------
 %preun
 %stop_on_removal %{pkg_user}
 
+#---------------------------------------------------------------
 %postun
 %restart_on_update %{pkg_user}
 %{insserv_cleanup}
@@ -161,6 +169,7 @@ else
   rm /usr/sbin/yastws
 fi
 
+#---------------------------------------------------------------
 %files 
 %defattr(-,root,root)
 %dir /etc/yastws
@@ -175,7 +184,9 @@ fi
 %attr(-,%{pkg_user},%{pkg_user}) %dir %{_var}/log/%{pkg_user}
 
 /srv/www/yastws/app
-/srv/www/yastws/db
+%dir /srv/www/yastws/db
+/srv/www/yastws/db/migrate
+%ghost /srv/www/yastws/db/schema.rb
 /srv/www/yastws/doc
 /srv/www/yastws/lib
 /srv/www/yastws/public
