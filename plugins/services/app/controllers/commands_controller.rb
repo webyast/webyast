@@ -6,6 +6,7 @@ class CommandsController < ApplicationController
 
   before_filter :login_required
 
+  #FIXME: index requires parameter, but system_check does not expect that and breaks
   def index
     redirect_to service_path(params[:service_id])
   end
