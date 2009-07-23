@@ -79,5 +79,5 @@ rm -rf $RPM_BUILD_ROOT
 /srv/www/%{pkg_user}/vendor/plugins/%{plugin_name}/config
 /srv/www/%{pkg_user}/vendor/plugins/%{plugin_name}/lib
 /srv/www/%{pkg_user}/vendor/plugins/%{plugin_name}/tasks
-/srv/www/%{pkg_user}/vendor/plugins/%{plugin_name}/test
+#/srv/www/%{pkg_user}/vendor/plugins/%{plugin_name}/test
 %attr(644,root,root) /usr/share/PolicyKit/policy/org.opensuse.yast.system.%{plugin_name}.policy

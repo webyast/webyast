@@ -1,4 +1,21 @@
 -------------------------------------------------------------------
+Thu Jul 23 09:31:30 CEST 2009 - mvidner@suse.cz
+
+- Stefan Schubert (4):
+      HTTP errors handled
+      added testcases; code cleanup
+      changed licences
+  Klaus Kämpf (3):
+      Don't do private routing
+      Enable code coverage testing
+      Fix to build
+  Bjoern Geuken (1):
+      patches module: fixed get_updateList in controller
+  Duncan Mac-Vicar P (1):
+      Cleaning up the Rake mess, make all stuff use the shared tasks
+- 0.0.2
+
+-------------------------------------------------------------------
 Fri Apr 17 11:50:12 CEST 2009 - schubi@suse.de
 
 - splitted off from yast2-webservice 

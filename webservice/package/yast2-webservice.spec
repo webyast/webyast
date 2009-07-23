@@ -16,7 +16,7 @@ PreReq:         lighttpd, PolicyKit, PackageKit, rubygem-rake, rubygem-sqlite3, 
 License:        MIT
 Group:          Productivity/Networking/Web/Utilities
 Autoreqprov:    on
-Version:        0.0.1
+Version:        0.0.2
 Release:        0
 Summary:        YaST2 - Webservice 
 Source:         www.tar.bz2
@@ -209,3 +209,6 @@ fi
 %config(noreplace) /etc/yast_user_roles
 %config(noreplace)  %{_sysconfdir}/init.d/%{pkg_user}
 %{_sbindir}/rc%{pkg_user}
+
+#---------------------------------------------------------------
+%changelog

@@ -10,8 +10,6 @@
 
 
 Name:           yast2-webservice-status
-PreReq:         yast2-webservice collectd rrdtool
-Provides:       yast2-webservice:/srv/www/yastws/app/controllers/status_controller.rb
 License:        MIT
 Group:          Productivity/Networking/Web/Utilities
 Autoreqprov:    on
@@ -22,6 +20,8 @@ Source:         www.tar.bz2
 Source1:        org.opensuse.yast.system.status.policy
 BuildRoot:      %{_tmppath}/%{name}-%{version}-build
 BuildArch:      noarch
+PreReq:         yast2-webservice
+Requires:       collectd rrdtool
 
 #
 %define pkg_user yastws
@@ -73,3 +73,4 @@ rm -rf $RPM_BUILD_ROOT
 /srv/www/%{pkg_user}/vendor/plugins/%{plugin_name}/*
 %attr(644,root,root) %config /usr/share/PolicyKit/policy/org.opensuse.yast.system.%{plugin_name}.policy
 
+%changelog

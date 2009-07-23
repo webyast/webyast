@@ -1,4 +1,21 @@
 -------------------------------------------------------------------
+Thu Jul 23 08:20:06 CEST 2009 - mvidner@suse.cz
+
+- Josef Reidinger (6):
+      remove from spec marking sources as config
+      adapt to rails convention for model find/save
+      fix documentation
+      follow ruby conventions for constants
+      refactor time plugin to better readiness, handle timeout
+	 when setting time to future
+      parse datetime info on backend side
+
+  Duncan Mac-Vicar P (2):
+      Cleaning up the Rake mess, make all stuff use the shared tasks
+      cleanup. Dont use the top level Rakefiles, but the tasks subdirectory
+- 0.0.3
+
+-------------------------------------------------------------------
 Tue Jul  7 14:03:19 CEST 2009 - jreidinger@suse.cz
 
 - adapt to dbus backend
