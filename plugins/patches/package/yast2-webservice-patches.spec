@@ -15,7 +15,7 @@ Provides:       yast2-webservice:/srv/www/yastws/app/controllers/patch_updates_c
 License:        MIT
 Group:          Productivity/Networking/Web/Utilities
 Autoreqprov:    on
-Version:        0.0.1
+Version:        0.0.2
 Release:        0
 Summary:        YaST2 - Webservice - Patches
 Source:         www.tar.bz2
