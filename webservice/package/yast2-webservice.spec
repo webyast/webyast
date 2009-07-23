@@ -30,7 +30,7 @@ Source7:        lighttpd.conf
 Source8:        modules.conf
 Source9:        yastws
 BuildRoot:      %{_tmppath}/%{name}-%{version}-build
-BuildRequires:  ruby, pkg-config, rubygem-relevance-rcov, rubygem-mocha
+BuildRequires:  ruby, pkg-config, rubygem-mocha
 # if we run the tests during build, we need most of Requires here too,
 # except for deployment specific stuff
 BuildRequires:  yast2-core, ruby-dbus, sqlite, avahi-utils dbus-1
