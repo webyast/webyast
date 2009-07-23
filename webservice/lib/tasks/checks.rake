@@ -193,12 +193,12 @@ EOF
            modulename = namespace.capitalize + "::" + modulename
          end
        end
-       ok = system %(cd #{File.dirname(__FILE__)}; export RAILS_PARENT=../../; ruby plugin_test/functional/plugin_index_test.rb --plugin #{modulename})
+       ok = system %(cd #{File.dirname(__FILE__)}; export RAILS_PARENT=../../; ruby plugin_test/functional/plugin_index_test.rb --plugin #{modulename} > /dev/null)
        if !ok
-          puts "Trying \"GET show\" cause some plugins do not support \"GET index\"..."
-          ok = system %(cd #{File.dirname(__FILE__)}; export RAILS_PARENT=../../; ruby plugin_test/functional/plugin_show_test.rb --plugin #{modulename})
+          # puts "Trying \"GET show\" cause some plugins do not support \"GET index\"..."
+          ok = system %(cd #{File.dirname(__FILE__)}; export RAILS_PARENT=../../; ruby plugin_test/functional/plugin_show_test.rb --plugin #{modulename} > /dev/null)
        end
-       escape "plugin #{modulename} does not work correctly", "check the logfiles" unless ok
+       escape "plugin #{modulename} does not work correctly", "try 'export RAILS_PARENT=.; ruby plugin_test/functional/plugin_index_test.rb --plugin #{modulename}' and check the result" unless ok
        errors = true
      end
   end
