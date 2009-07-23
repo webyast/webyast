@@ -11,6 +11,7 @@
 
 Name:           yast2-webservice
 Requires:       yast2-core >= 2.18.3, lighttpd-mod_magnet, ruby-fcgi, ruby-dbus, sqlite, avahi-utils
+Requires:       rubygem-yast2-webservice-tasks
 Conflicts:      gamin
 PreReq:         lighttpd, PolicyKit, PackageKit, rubygem-rake, rubygem-sqlite3, rubygem-rails-2_3, ruby-rpam, ruby-polkit
 License:        MIT
@@ -147,10 +148,9 @@ test -r /usr/sbin/yastws || { echo "Creating link /usr/sbin/yastws";
 # create database 
 #
 cd srv/www/%{pkg_user}
-su %{pkg_user} -s /bin/sh -c "rake db:migrate"
-chown yastws: db/schema.rb
-# it writes to the log, don't leave it to root
-chown yastws: db db/*.sqlite*
+rake db:migrate
+chown -R yastws: db
+chown -R yastws: log
 echo "Database is ready"
 
 #---------------------------------------------------------------
