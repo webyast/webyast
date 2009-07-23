@@ -11,12 +11,14 @@
 
 Name:           yast2-webservice
 Requires:       yast2-core >= 2.18.3, lighttpd-mod_magnet, ruby-fcgi, ruby-dbus, sqlite, avahi-utils
+Requires:       rubygem-yast2-webservice-tasks
+# gamin gives problems with lighttpd, so better conflict with it for now
 Conflicts:      gamin
 PreReq:         lighttpd, PolicyKit, PackageKit, rubygem-rake, rubygem-sqlite3, rubygem-rails-2_3, ruby-rpam, ruby-polkit
 License:        MIT
 Group:          Productivity/Networking/Web/Utilities
 Autoreqprov:    on
-Version:        0.0.2
+Version:        0.0.3
 Release:        0
 Summary:        YaST2 - Webservice 
 Source:         www.tar.bz2
@@ -30,7 +32,7 @@ Source7:        lighttpd.conf
 Source8:        modules.conf
 Source9:        yastws
 BuildRoot:      %{_tmppath}/%{name}-%{version}-build
-BuildRequires:  ruby, pkg-config, rubygem-relevance-rcov, rubygem-mocha
+BuildRequires:  ruby, pkg-config, rubygem-mocha
 # if we run the tests during build, we need most of Requires here too,
 # except for deployment specific stuff
 BuildRequires:  yast2-core, ruby-dbus, sqlite, avahi-utils dbus-1
@@ -147,10 +149,9 @@ test -r /usr/sbin/yastws || { echo "Creating link /usr/sbin/yastws";
 # create database 
 #
 cd srv/www/%{pkg_user}
-su %{pkg_user} -s /bin/sh -c "rake db:migrate"
-chown yastws: db/schema.rb
-# it writes to the log, don't leave it to root
-chown yastws: db db/*.sqlite*
+rake db:migrate
+chown -R yastws: db
+chown -R yastws: log
 echo "Database is ready"
 
 #---------------------------------------------------------------

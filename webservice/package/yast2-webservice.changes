@@ -1,4 +1,16 @@
 -------------------------------------------------------------------
+Thu Jul 23 12:41:40 CEST 2009 - mvidner@suse.cz
+
+- Repackaged with new webservice-tasks, omitting rails_rcov.
+  Klaus Kämpf (3):
+      Remove rcov from BuildRequires, tests aren't run during build
+      Fix package install
+      Explain why there's a conflict with gamin
+  Martin Vidner (1):
+      Let system_check show up in rake -T.
+- 0.0.3
+
+-------------------------------------------------------------------
 Wed Jul 22 17:01:46 CEST 2009 - mvidner@suse.cz
 
 - Too many changes. Please release often!

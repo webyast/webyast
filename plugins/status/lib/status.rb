@@ -36,7 +36,7 @@ class Status
       # if no datapath is set, use the first directory in /var/lib/collectd
       @datapath = Dir.glob("/var/lib/collectd/*").first
       if @datapath.nil?
-	  raise Exception.new("Cannot read data from /var/lib/collectd/, check 'collectd' status") 
+	  raise Exception.new("Cannot read data from /var/lib/collectd/, check status of 'collectd' service") 
       end
     end
     @datapath
