@@ -15,7 +15,9 @@ class Status
     @data = Hash.new
     # force initialization of datapath
     datapath
-    start_collectd
+
+    @collectd_running = check_collectd
+    raise Exception.new("Service 'collectd' is not running") unless @collectd_running
 
     #find the correct plugin path for the config file
     plugin_config_dir = "#{RAILS_ROOT}/config" #default
@@ -47,14 +49,9 @@ class Status
     @datapath = path.chomp("/")
   end
   
-  def start_collectd
-    cmd = @scr.execute(["/usr/sbin/collectd"])
-    @timestamp = Time.now
-  end
-
-  def stop_collectd
-    cmd = @scr.execute(["killall", "collectd"])
-    @timestamp = nil
+  def check_collectd
+    ret = @scr.execute(["/usr/sbin/rccollectd", "status"])
+    return ret[:exit]==0
   end
 
   # returns available metric types, which are the directories in the
@@ -97,7 +94,7 @@ class Status
   def collect_data(start=nil, stop=nil, data = %w{cpu memory disk})
     metrics = available_metrics
     result = Hash.new
-    unless @timestamp.nil? # collectd not started
+    if @collectd_running
         case data
         when nil, "all", "All" # all metrics
           metrics.each_pair do |m, n|
