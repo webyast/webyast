@@ -165,7 +165,7 @@ IGNORE_FILE=/var/run/yastwc.pid
 #only for beeing sure....
 SCRIPT_PID=$$
 if ps -C yastwc |grep -v $SCRIPT_PID >/dev/null; then
-   ps -C yastwc |grep -V $SCRIPT_PID|grep yastwc|cut -c -6 >$IGNORE_FILE
+   ps -C yastwc |grep -v $SCRIPT_PID|grep yastwc|cut -c -6 >$IGNORE_FILE
    IGNORE_FILE_SIZE="$(stat -c "%s" $IGNORE_FILE)"
    IGNORE_FILE_ENTRIES="$(wc -l $IGNORE_FILE|cut -c -1)"
    if [ $IGNORE_FILE_SIZE -eq 0 ]; then
