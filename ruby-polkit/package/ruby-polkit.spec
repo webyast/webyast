@@ -11,7 +11,7 @@
 # norootforbuild
 
 Name:           ruby-polkit
-Version:        0.0.1
+Version:        0.0.2
 Release:        0
 License:        GPLv2
 Group:          Development/Languages/Ruby

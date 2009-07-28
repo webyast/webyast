@@ -2,6 +2,8 @@
 # Makefile for ruby-polkit
 #
 
+VERSION=0.0.2
+
 all: src/Makefile
 	(cd src; make)
 
@@ -36,4 +38,4 @@ distclean: clean
 	rm -rf package/*bz2
 	
 dist: distclean
-	(cd ..; tar -cj --exclude=ruby-polkit/package -f ruby-polkit/package/ruby-polkit-0.0.1.tar.bz2 ruby-polkit)
+	(cd ..; tar -cj --exclude=ruby-polkit/package -f ruby-polkit/package/ruby-polkit-$(VERSION).tar.bz2 ruby-polkit)
