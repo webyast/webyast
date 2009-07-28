@@ -17,6 +17,9 @@ uninstall:
 doc: src/Makefile
 	(cd src; rdoc --all --line-numbers --charset=UTF-8 --fmt=html -p --inline-source --op=rdoc)
 
+# autotools style
+check: test
+# rake style
 test: all
 	(cd test; make)
 
