@@ -96,17 +96,11 @@ class PatchesController < ApplicationController
   end
 
   def get_update (id)
-    patch_update = nil
     if @patch_updates.nil? || @patch_updates.empty?
       @patch_updates = get_updateList
     end
-    @patch_updates.each do |p|
-       if p.resolvable_id.to_s == id.to_s
-         patch_update = p
-         break
-       end
-    end
-    return patch_update
+
+    @patch_updates.find { |p| p.resolvable_id.to_s == id.to_s }
   end
 
   def install_update (id)
