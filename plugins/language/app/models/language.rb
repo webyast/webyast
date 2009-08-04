@@ -20,7 +20,7 @@ class Language
 
   # Parses response from dbus YaPI call
   # response:: response from dbus
-  def parse_response(response)
+  def parse_response(response) #:doc:
     @language = response["current"]
     @utf8 = response["utf8"]
     @rootlocale = response["rootlang"]
@@ -32,7 +32,7 @@ class Language
   # Creates argument for dbus call which specify what data is requested.
   # Available languages is cached so request it only if it is necessary.
   # return:: hash with requested keys
-  def create_read_question
+  def create_read_question #:doc:
     ret = {
       "current" => "true",
       "utf8" => "true",
@@ -56,6 +56,7 @@ class Language
   end
 
   # fills language instance with data from YaPI.
+  # 
   # +warn+: Doesn't take any parameters and is not static.
   def find
     parse_response YastService.Call("YaPI::LANGUAGE::Read",create_read_question)
