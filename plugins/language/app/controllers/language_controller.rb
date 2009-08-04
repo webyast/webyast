@@ -1,5 +1,6 @@
-include ApplicationHelper
-
+# = Language controller
+# Provides access to language settings for authentificated users.
+# Main goal is checking permissions.
 class LanguageController < ApplicationController
 
   before_filter :login_required
@@ -9,8 +10,8 @@ class LanguageController < ApplicationController
   #
   #--------------------------------------------------------------------------------
 
-  def update
-    
+  # Actualizes language settings. Requires write permissions for language YaPI.
+  def update    
     if params.has_key?(:language)
       unless permission_check("org.opensuse.yast.modules.yapi.language.write")
         render ErrorResult.error(403, 1, "no permission") and return
@@ -28,11 +29,12 @@ class LanguageController < ApplicationController
     render :show
   end
 
+  # See update
   def create
     update
   end
 
-
+  # Shows language settings. Requires read permission for language YaPI.
   def show
     unless permission_check("org.opensuse.yast.modules.yapi.language.read")
       render ErrorResult.error(403, 1, "no permissions") and return
@@ -41,6 +43,5 @@ class LanguageController < ApplicationController
     @language.find
 
   end
-
 
 end

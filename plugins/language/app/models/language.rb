@@ -5,9 +5,12 @@
 class Language
   # cache available languages as it is change only rarely
   @@available = {}
-  attr_accessor  :language,
-    :utf8,
-    :rootlocale
+  # current language
+  attr_accessor   :language
+    # utf8 settings ("true" or "false")
+  attr_accessor   :utf8
+    # root locale settings ("true" or "false" or "ctype") see yast-country documentation
+  attr_accessor   :rootlocale
   #--------------------------------------------------------------------------------
   #
   #local methods
