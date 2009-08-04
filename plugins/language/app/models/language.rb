@@ -1,4 +1,9 @@
-class Language 
+# = Language model
+# Provides set and gets resources from YaPI time module.
+# Main goal is handle YaPI specific calls and data formats. Provide cleaned
+# and well defined data.
+class Language
+  # cache available languages as it is change only rarely
   @@available = {}
   attr_accessor  :language,
     :utf8,
@@ -13,6 +18,8 @@ class Language
   # dbus parsers
   #
 
+  # Parses response from dbus YaPI call
+  # response:: response from dbus
   def parse_response(response)
     @language = response["current"]
     @utf8 = response["utf8"]
@@ -22,6 +29,9 @@ class Language
     end
   end
 
+  # Creates argument for dbus call which specify what data is requested.
+  # Available languages is cached so request it only if it is necessary.
+  # return:: hash with requested keys
   def create_read_question
     ret = {
       "current" => "true",
@@ -40,14 +50,18 @@ class Language
   #
   public
 
-  def available
+  # Getter for available static field
+  def Language.available
     return @@available
   end
 
+  # fills language instance with data from YaPI.
+  # +warn+: Doesn't take any parameters and is not static.
   def find
     parse_response YastService.Call("YaPI::LANGUAGE::Read",create_read_question)
   end
 
+  # Saves data from model to system via YaPI
   def save
     settings = {
       "current" => @language,
