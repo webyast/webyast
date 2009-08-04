@@ -47,12 +47,51 @@ end # class MainPkg
 class PatchesController < ApplicationController
 
    before_filter :login_required
+   
+   # always check permissions and cache expiration
+   # even if the result is already created and cached
+   before_filter :check_read_permissions, :only => :index
+   before_filter :check_cache_status, :only => :index
+
+   # cache 'index' method result
+   caches_action :index
 
 #--------------------------------------------------------------------------------
 #
 #local methods
 #
 #--------------------------------------------------------------------------------
+
+  private
+
+  def check_read_permissions
+    unless permission_check( "org.opensuse.yast.system.patches.read")
+      render ErrorResult.error(403, 1, "no permission") and return
+    end
+  end
+
+  # check whether the cached result is still valid
+  def check_cache_status
+    cache_timestamp = Rails.cache.read('patches:timestamp')
+
+    if cache_timestamp.nil?
+	# this is the first run, the cache is not initialized yet, just return
+	Rails.cache.write('patches:timestamp', Time.now)
+	return
+    # the cache expires after 5 minutes, repository metadata
+    # or RPM database update invalidates the cache immeditely
+    # (new patches might be applicable)
+    elsif cache_timestamp < 5.minutes.ago ||
+    cache_timestamp < File.stat("/var/lib/rpm/Packages").mtime ||
+    cache_timestamp < File.stat("/var/cache/zypp/solv").mtime ||
+    Dir["/var/cache/zypp/solv/*/solv"].find{ |x| File.stat(x).mtime > cache_timestamp}
+	logger.debug "#### Patch cache expired"
+	expire_action :action => :index, :format => params["format"]
+	Rails.cache.write('patches:timestamp', Time.now)
+    end
+  end
+
+  public
 
   def get_updateList
     patch_updates = []
@@ -158,9 +197,8 @@ class PatchesController < ApplicationController
   # GET /patch_updates
   # GET /patch_updates.xml
   def index
-    unless permission_check( "org.opensuse.yast.system.patches.read")
-      render ErrorResult.error(403, 1, "no permission") and return
-    end
+    # note: permission check was performed in :before_filter
+
     @patch_updates = get_updateList
   end
 
