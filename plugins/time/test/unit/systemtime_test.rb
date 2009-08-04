@@ -56,12 +56,12 @@ class LanguageTest < ActiveSupport::TestCase
     result = read_response
     YastService.stubs(:Call).with("YaPI::TIME::Read",read_arguments).returns(result)
 
-    @model.find
+    @model = Systemtime.find
     assert_equal("02/07/2009", @model.date)
     assert_equal("12:18:00", @model.time)
     assert_equal("Europe/Prague", @model.timezone)
     assert_equal("true", @model.utcstatus)
-    assert_equal(Test_timezones,@model.timezones)
+    assert_equal(Test_timezones,Systemtime.timezones)
   end
 
   def test_setter

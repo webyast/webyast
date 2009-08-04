@@ -17,6 +17,21 @@ class Systemtime
 
   private
 
+  # Creates argument for dbus call which specify what data is requested.
+  # Available timezones is cached so request it only if it is necessary.
+  # return:: hash with requested keys
+  def Systemtime.create_read_question #:doc:
+    ret = {
+      "timezone" => "true",
+      "utcstatus" => "true",
+      "currenttime" => "true"
+    }
+    ret["zones"]= @@timezones.empty? ? "true" : "false"
+    return ret
+  end
+
+  public
+
   # Parses response from dbus YaPI call
   # response:: response from dbus
   def parse_response(response) #:doc:
@@ -32,23 +47,8 @@ class Systemtime
     end
   end
 
-  # Creates argument for dbus call which specify what data is requested.
-  # Available timezones is cached so request it only if it is necessary.
-  # return:: hash with requested keys
-  def create_read_question #:doc:
-    ret = {
-      "timezone" => "true",
-      "utcstatus" => "true",
-      "currenttime" => "true"
-    }
-    ret["zones"]= @@timezones.empty? ? "true" : "false"
-    return ret
-  end
-
-  public
-
   #Getter for static timezones
-  def timezones
+  def Systemtime.timezones
     return @@timezones
   end
 
@@ -58,8 +58,10 @@ class Systemtime
   # fills time instance with data from YaPI.
   #
   # +warn+: Doesn't take any parameters.
-  def find
-    parse_response YastService.Call("YaPI::TIME::Read",create_read_question)
+  def Systemtime.find
+    ret = Systemtime.new()
+    ret.parse_response YastService.Call("YaPI::TIME::Read",create_read_question)
+    return ret
   end
 
   # Saves data from model to system via YaPI. Saves only setted data,

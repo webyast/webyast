@@ -43,8 +43,7 @@ class SystemtimesController < ApplicationController
       render ErrorResult.error( 403, 1, "no permission" ) and return
     end
 
-    @systemtime = Systemtime.new
-    @systemtime.find
+    @systemtime = Systemtime.find
 
   end
 
