@@ -8,3 +8,18 @@ require 'rake/testtask'
 require 'rake/rdoctask'
 
 require 'tasks/rails'
+
+#include in doc:app also shared test enhancements for plugins
+#FIXME find way how to change original rails task app:doc we only need include some files to it
+namespace :doc do
+  Rake::RDocTask.new("app") { |rdoc|
+    rdoc.rdoc_dir = 'doc/app'
+    rdoc.title    = "Rails Application Documentation"
+    rdoc.options << '--line-numbers' << '--inline-source'
+    rdoc.rdoc_files.include('doc/README_FOR_APP')
+    rdoc.rdoc_files.include('app/**/*.rb')
+    rdoc.rdoc_files.include('lib/**/*.rb')
+#include shared test functionality in documentation
+    rdoc.rdoc_files.include('test/plugin_basic_tests.rb')
+  }
+end
