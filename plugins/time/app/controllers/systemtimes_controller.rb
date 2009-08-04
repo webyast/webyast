@@ -1,6 +1,6 @@
-
-include ApplicationHelper
-
+# = Systemtime controller
+# Provides access to time settings for authentificated users.
+# Main goal is checking permissions.
 class SystemtimesController < ApplicationController
 
   before_filter :login_required
@@ -11,6 +11,7 @@ class SystemtimesController < ApplicationController
   #
   #--------------------------------------------------------------------------------
 
+  # Sets time settings. Requires write permissions for time YaPI.
   def update
     unless permission_check( "org.opensuse.yast.modules.yapi.time.write")
       render ErrorResult.error(403, 1, "no permission") and return
@@ -30,10 +31,12 @@ class SystemtimesController < ApplicationController
     render :show
   end
 
+  # See update
   def create
     update
   end
 
+  # Shows time settings. Requires read permission for time YaPI.
   def show
     
     unless permission_check( "org.opensuse.yast.modules.yapi.time.read")

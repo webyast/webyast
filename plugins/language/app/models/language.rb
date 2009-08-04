@@ -1,6 +1,6 @@
 # = Language model
-# Provides set and gets resources from YaPI time module.
-# Main goal is handle YaPI specific calls and data formats. Provide cleaned
+# Provides set and gets resources from YaPI language module.
+# Main goal is handle YaPI specific calls and data formats. Provides cleaned
 # and well defined data.
 class Language
   # cache available languages as it is change only rarely
