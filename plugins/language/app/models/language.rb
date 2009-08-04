@@ -21,21 +21,12 @@ class Language
   # dbus parsers
   #
 
-  # Parses response from dbus YaPI call
-  # response:: response from dbus
-  def parse_response(response) #:doc:
-    @language = response["current"]
-    @utf8 = response["utf8"]
-    @rootlocale = response["rootlang"]
-    if response["languages"]
-        @@available = response["languages"]
-    end
-  end
+  
 
   # Creates argument for dbus call which specify what data is requested.
   # Available languages is cached so request it only if it is necessary.
   # return:: hash with requested keys
-  def create_read_question #:doc:
+  def Language.create_read_question #:doc:
     ret = {
       "current" => "true",
       "utf8" => "true",
@@ -53,6 +44,17 @@ class Language
   #
   public
 
+  # Parses response from dbus YaPI call
+  # response:: response from dbus
+  def parse_response(response) #:doc:
+    @language = response["current"]
+    @utf8 = response["utf8"]
+    @rootlocale = response["rootlang"]
+    if response["languages"]
+        @@available = response["languages"]
+    end
+  end
+
   # Getter for available static field
   def Language.available
     return @@available
@@ -60,9 +62,11 @@ class Language
 
   # fills language instance with data from YaPI.
   # 
-  # +warn+: Doesn't take any parameters and is not static.
-  def find
-    parse_response YastService.Call("YaPI::LANGUAGE::Read",create_read_question)
+  # +warn+: Doesn't take any parameters.
+  def Language.find
+    ret = Language.new
+    ret.parse_response YastService.Call("YaPI::LANGUAGE::Read",create_read_question)
+    return ret
   end
 
   # Saves data from model to system via YaPI

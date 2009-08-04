@@ -37,18 +37,24 @@ class LanguageTest < ActiveSupport::TestCase
   end
 
   def setup    
-    @language = Language.new        
+    @language = Language.new
+    #inject Language to set available for direct testing
+    def @language.available=(val)
+      @@available=val
+    end
+    #clean static variable
+    @language.available = nil
   end
 
   
   def test_getter
     YastService.stubs(:Call).with("YaPI::LANGUAGE::Read",read_arguments).returns(read_response)
 
-    @language.find
+    @language = Language.find
     assert_equal("en_US", @language.language)
     assert_equal("ctype", @language.rootlocale)
     assert_equal("true", @language.utf8)
-    assert_equal(Test_Lang,@language.available)
+    assert_equal(Test_Lang,Language.available)
   end
 
   def test_setter
@@ -61,11 +67,6 @@ class LanguageTest < ActiveSupport::TestCase
   end
 
   def test_xml
-    #inject Language to set available for direct testing
-    def @language.available=(val)
-      @@available=val
-    end
-
     @language.language = "de_DE"
     @language.rootlocale = "false"
     @language.utf8 = "false"

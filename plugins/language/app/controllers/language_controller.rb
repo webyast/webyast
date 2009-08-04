@@ -39,8 +39,7 @@ class LanguageController < ApplicationController
     unless permission_check("org.opensuse.yast.modules.yapi.language.read")
       render ErrorResult.error(403, 1, "no permissions") and return
     end
-    @language = Language.new
-    @language.find
+    @language = Language.find
 
   end
 
