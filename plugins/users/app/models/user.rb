@@ -3,16 +3,15 @@ class User
   
   attr_accessor :cn,
                 :uid,
-                :uidNumber,
-		:gidNumber,
+                :uid_number,
+		:gid_number,
                 :grouplist,
 		:groupname,
-		:homeDirectory,
-		:loginShell,
-		:userPassword,
+		:home_directory,
+		:login_shell,
+		:user_password,
 		:addit_data,
-		:type,
-                :sshkey
+		:type
 
   def id
     @uid
@@ -25,29 +24,29 @@ class User
   def initialize 
     @cn			= ""
     @uid		= ""
-    @uidNumber		= ""
+    @uid_number		= ""
+    @gid_number		= ""
     @grouplist		= {}
     @groupname		= ""
-    @homeDirectory	= ""
-    @loginShell		= ""
-    @userPassword	= ""
+    @home_directory	= ""
+    @login_shell		= ""
+    @user_password	= ""
     @type		= "local"
-    @sshkey		= ""
   end
 
   def update_attributes usr
     return false if usr==nil
     @grouplist		= usr[:grouplist]
-    @homeDirectory	= usr[:homeDirectory]
+    @home_directory	= usr[:home_directory]
     @type		= usr[:type]
     @groupname		= usr[:groupname]
-    @loginShell		= usr[:loginShell]
-    @userPassword	= usr[:userPassword]
+    @login_shell		= usr[:login_shell]
+    @user_password	= usr[:user_password]
     @uid		= usr[:uid]
-    @uidNumber		= usr[:uidNumber]
+    @uid_number		= usr[:uid_number]
+    @gid_number		= usr[:gid_number]
     @cn			= usr[:cn]
 
-    @sshkey 		= usr[:sshkey]
     return true
   end
 
@@ -59,13 +58,13 @@ class User
       xml.tag!(:id, id )
       xml.tag!(:cn, cn )
       xml.tag!(:groupname, groupname)
-      xml.tag!(:homeDirectory, homeDirectory )
-      xml.tag!(:loginShell, loginShell )
+      xml.tag!(:gid_number, gid_number, {:type => "integer"})
+      xml.tag!(:home_directory, home_directory )
+      xml.tag!(:login_shell, login_shell )
       xml.tag!(:uid, uid )
-      xml.tag!(:uidNumber, uidNumber, {:type => "integer"})
-      xml.tag!(:userPassword, userPassword )
+      xml.tag!(:uid_number, uid_number, {:type => "integer"})
+      xml.tag!(:user_password, user_password )
       xml.tag!(:type, type )
-      xml.tag!(:sshkey, sshkey )
       xml.grouplist({:type => "array"}) do
          grouplist.each do |group, val| 
             xml.group do

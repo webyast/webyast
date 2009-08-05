@@ -1,5 +1,3 @@
-require "scr"
-
 # import YastService class FIXME move into the model...
 require "yast_service"
 
@@ -42,11 +40,6 @@ class UsersController < ApplicationController
   end
 
   def get_user (id)
-    if @user
-      saveKey = @user.sshkey
-    else
-      saveKey = nil
-    end
     parameters	= {
 	# user to find
 	"uid"	=> [ "s", id ],
@@ -63,73 +56,36 @@ class UsersController < ApplicationController
 
 #FIXME why User.new (user_map) does not work?
 
-    @user.grouplist	= user_map["grouplist"]
-    @user.homeDirectory	= user_map["homeDirectory"]
-    @user.groupname	= user_map["groupname"]
-    @user.loginShell	= user_map["loginShell"]
-    @user.uid		= id
-    @user.uidNumber	= user_map["uidNumber"]
-    @user.cn		= user_map["cn"]
+    # convert camel-cased YaST keys to ruby's under_scored ones
+    @user.grouplist		= user_map["grouplist"]
+    @user.home_directory	= user_map["homeDirectory"]
+    @user.groupname		= user_map["groupname"]
+    @user.login_shell		= user_map["loginShell"]
+    @user.uid			= id
+    @user.uid_number		= user_map["uidNumber"]
+    @user.cn			= user_map["cn"]
 
-    @user.sshkey	= saveKey
     return true
-  end
-
-  def createSSH
-    if @user.homeDirectory.blank?
-      save_key = @user.sshkey
-      get_user @user.uid
-      @user.sshkey = save_key
-    end
-    ret = @scr.read(".target.stat", "#{@user.homeDirectory}/.ssh/authorized_keys")
-    if ret.empty?
-      logger.debug "Create: #{@user.homeDirectory}/.ssh/authorized_keys"
-      @scr.execute(["/bin/mkdir", "#{@user.homeDirectory}/.ssh"])      
-      @scr.execute(["/bin/chown", "#{@user.uid}", "#{@user.homeDirectory}/.ssh"])      
-      @scr.execute(["/bin/chmod", "755", "#{@user.homeDirectory}/.ssh"])
-      @scr.execute(["/usr/bin/touch", "#{@user.homeDirectory}/.ssh/authorized_keys"])      
-      @scr.execute(["/bin/chown", "#{@user.uid}", "#{@user.homeDirectory}/.ssh/authorized_keys"])      
-      @scr.execute(["/bin/chmod", "644", "#{@user.homeDirectory}/.ssh/authorized_keys"])
-    end
-    ret = @scr.execute(["echo", "\"#{@user.sshkey}\"", ">>", "#{@user.homeDirectory}/.ssh/authorized_keys"])
-    @error_id = ret[:exit]
-    if ret[:exit] != 0
-      @error_string = ret[:stderr]
-      return false
-    else 
-      @error_string = ""
-      return true
-    end
   end
 
   # -------------------------------------------------------
   # modify existing user
   def update_user userId
-    ok = true
-
-    if not @user.sshkey.blank?
-      ok = createSSH
-    end
-
     config	= {
 	"type"	=> [ "s", "local" ],
 	"uid"	=> [ "s", @user.uid ]
     }
+    # FIXME convert ruby's under_scored keys to YaST's camel-cased ones
     data	= {
+	"uid"	=> [ "s", @user.uid]
     }
 
     ret = YastService.Call("YaPI::USERS::UserModify", config, data)
 
     logger.debug "Command returns: #{ret.inspect}"
 
-    if ret != ""
-      ok = false
-      @error_string = ret
-    else
-      @error_id = 0
-      @error_string = ""
-    end
-    return ok
+    @error_string = ret
+    return (ret == "")
   end
 
   # -------------------------------------------------------
@@ -143,17 +99,20 @@ class UsersController < ApplicationController
     data	= {
 	"uid"	=> [ "s", @user.uid]
     }
-#FIXME convert @user hash to data hash
+    # FIXME convert ruby's under_scored keys to YaST's camel-cased ones
     data["cn"]			= [ "s", @user.cn ]		unless @user.cn.blank?
-    data["userPassword"]	= [ "s", @user.userPassword ]	unless @user.userPassword.blank?
+    data["userPassword"]	= [ "s", @user.user_password ]	unless @user.user_password.blank?
+    data["homeDirectory"]	= [ "s", @user.home_directory ]	unless @user.home_directory.blank?
+    data["loginShell"]		= [ "s", @user.login_shell ]	unless @user.login_shell.blank?
+    data["uidNumber"]		= [ "s", @user.uid_number ]	unless @user.uid_number.blank?
+    data["groupname"]		= [ "s", @user.groupname ]	unless @user.groupname.blank?
 
     ret = YastService.Call("YaPI::USERS::UserAdd", config, data)
 
     logger.debug "Command returns: #{ret.inspect}"
 
-    return true if ret == ""
     @error_string = ret
-    return false
+    return (ret == "")
   end
 
   # -------------------------------------------------------
@@ -167,12 +126,10 @@ class UsersController < ApplicationController
 
     ret = YastService.Call("YaPI::USERS::UserDelete", config)
 
-    return true if ret[:exit] == 0
+    logger.debug "Command returns: #{ret}"
 
-    @error_id = ret[:exit]
-    @error_string = ret[:stderr]
-    return false
-
+    @error_string = ret
+    return (ret == "")
   end
 
 #--------------------------------------------------------------------------------
@@ -217,7 +174,7 @@ class UsersController < ApplicationController
     @user = User.new
     if @user.update_attributes(params[:users])
       add_user
-      if @error_id!=0
+      if @error_string != ""
         render ErrorResult.error(404, @error_id, @error_string) and return
       end
     else
@@ -239,7 +196,7 @@ class UsersController < ApplicationController
     get_user params[:id]
     if @user.update_attributes(params[:users])
       update_user params[:id]
-      if @error_id!=0
+      if @error_string != ""
         render ErrorResult.error(404, @error_id, @error_string) and return
       end
     else
@@ -258,7 +215,7 @@ class UsersController < ApplicationController
     get_user params[:id]
     delete_user
     logger.debug "DELETE: #{@user.inspect}"
-    if @error_id!=0
+    if @error_string != ""
       render ErrorResult.error(404, @error_id, @error_string) and return
     else
       render :show
