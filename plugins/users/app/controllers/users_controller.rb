@@ -92,6 +92,11 @@ class UsersController < ApplicationController
   # add the new local user
   def add_user
 
+    if @user.uid.nil?
+	@error_string = "Empty login name"
+	return false
+    end
+
     # FIXME mandatory parameters must be required on web-client side...
     config	= {
 	"type"	=> [ "s", "local" ]
