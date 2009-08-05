@@ -16,46 +16,44 @@ class UsersController < ApplicationController
 #local methods
 #
 #--------------------------------------------------------------------------------
-
-
   def get_user_list
     @users = []
     parameters	= {
-	# how to index hash with users
-	"index"	=> [ "s", "uid" ],
-	# attributes to return for each user
-	"user_attributes"	=> [ "as", [ "cn" ]]
+      # how to index hash with users
+      "index"	=> ["s", "uid"],
+      # attributes to return for each user
+      "user_attributes"	=> ["as", [ "cn" ]]
     }
     users_map = YastService.Call("YaPI::USERS::UsersGet", parameters)
     if users_map.nil?
-	puts "something wrong happened -------------------------------------"
+      puts "something wrong happened -------------------------------------"
     else
-	users_map.each do |key, val|
-	    user = User.new
-	    user.uid		= key
-	    user.cn		= val["cn"]
-	    @users << user
-	end
+      users_map.each do |key, val|
+        user = User.new
+        user.uid = key
+        user.cn = val["cn"]
+        @users << user
+      end
     end
   end
 
   def get_user (id)
     parameters	= {
-	# user to find
-	"uid"	=> [ "s", id ],
-	# list of attributes to return;
-	"user_attributes"	=> [ "as", [
-	    "cn", "uidNumber", "homeDirectory",
-	    "grouplist", "uid", "loginShell", "groupname"
-	]]
+      # user to find
+      "uid"	=> [ "s", id ],
+      # list of attributes to return;
+      "user_attributes"	=> [ "as", [
+                                    "cn", "uidNumber", "homeDirectory",
+                                    "grouplist", "uid", "loginShell", "groupname"
+                                   ]]
     }
     user_map = YastService.Call("YaPI::USERS::UserGet", parameters)
     # TODO check if it is not empty
-
+    
     @user 	= User.new
-
-#FIXME why User.new (user_map) does not work?
-
+    
+    #FIXME why User.new (user_map) does not work?
+    
     # convert camel-cased YaST keys to ruby's under_scored ones
     @user.grouplist		= user_map["grouplist"]
     @user.home_directory	= user_map["homeDirectory"]
@@ -72,12 +70,12 @@ class UsersController < ApplicationController
   # modify existing user
   def update_user userId
     config	= {
-	"type"	=> [ "s", "local" ],
-	"uid"	=> [ "s", @user.uid ]
+      "type"	=> [ "s", "local" ],
+      "uid"	=> [ "s", @user.uid ]
     }
-    # FIXME convert ruby's under_scored keys to YaST's camel-cased ones
+    # =>  FIXME convert ruby's under_scored keys to YaST's camel-cased ones
     data	= {
-	"uid"	=> [ "s", @user.uid]
+      "uid"	=> [ "s", @user.uid]
     }
 
     ret = YastService.Call("YaPI::USERS::UserModify", config, data)
@@ -119,13 +117,12 @@ class UsersController < ApplicationController
   # delete existing local user
   def delete_user
 
-    config	= {
-	"type"	=> [ "s", "local" ],
-	"uid"	=> [ "s", @user.uid ]
+    config = {
+      "type" => [ "s", "local" ],
+      "uid" => [ "s", @user.uid ]
     }
 
     ret = YastService.Call("YaPI::USERS::UserDelete", config)
-
     logger.debug "Command returns: #{ret}"
 
     @error_string = ret
