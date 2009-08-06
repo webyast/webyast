@@ -2,7 +2,7 @@ require File.expand_path(File.dirname(__FILE__) + "/../test_helper")
 require 'test/unit'
 require 'rubygems'
 require "yast_service"
-#require 'mocha'
+require 'mocha'
 require 'pp'
 
 class UserTest < Test::Unit::TestCase
