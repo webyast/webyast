@@ -2,6 +2,7 @@ require File.expand_path(File.dirname(__FILE__) + "/../test_helper")
 require 'test/unit'
 require 'rubygems'
 require "scr"
+require "yast_service"
 require 'mocha'
 
 
@@ -12,10 +13,10 @@ class UsersControllerTest < ActionController::TestCase
     @request = ActionController::TestRequest.new
     # http://railsforum.com/viewtopic.php?id=1719
     @request.session[:account_id] = 1 # defined in fixtures
-    Scr.any_instance.stubs(:initialize)
-    Scr.any_instance.stubs(:execute).with(['/sbin/yast2', 'users', 'list']).returns({:stderr=>"schubi19 \nschubi2 \nschubi5 \ntuxtux \n", :exit=>16, :stdout=>""})
-    Scr.any_instance.stubs(:execute).with(['/sbin/yast2', 'users', 'show', 'username=schubi5']).returns({:stderr=>"Full Name:\n\tschubi5\nList of Groups:\n\t\nDefault Group:\n\tusers\nHome Directory:\n\t/home/schubi5\nLogin Shell:\n\t/bin/bash\nLogin Name:\n\tschubi5\nUID:\n\t1005\n", :exit=>16, :stdout=>""})
+
+    User.stubs(:find_all).returns([])    
   end
+  
   
   test "access index" do
     get :index
@@ -37,12 +38,15 @@ class UsersControllerTest < ActionController::TestCase
   end
 
   test "access show" do
+    u = User.new
+    u.load_attributes({:uid => "schubi5"})
+    User.stubs(:find).with("schubi5").returns(u)
     get :show, :id => "schubi5"
     assert_response :success
   end
 
   test "access show with wrong user" do
-    Scr.any_instance.stubs(:execute).with(['/sbin/yast2', 'users', 'show', 'username=schubi_not_found']).returns({:stderr=>"There is no such user.\n", :exit=>0, :stdout=>""})
+    User.stubs(:find).with("schubi_not_found").returns(nil)
     get :show, :id => "schubi_not_found"
     assert_response 404
   end
