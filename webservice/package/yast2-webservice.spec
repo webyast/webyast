@@ -10,15 +10,16 @@
 
 
 Name:           yast2-webservice
-Requires:       yast2-core >= 2.18.3, lighttpd-mod_magnet, ruby-fcgi, ruby-dbus, sqlite, avahi-utils
+Requires:       yast2-core >= 2.18.3, lighttpd-mod_magnet, ruby-fcgi, ruby-dbus, sqlite
 Requires:       rubygem-yast2-webservice-tasks
+Recommends:     avahi-utils
 # gamin gives problems with lighttpd, so better conflict with it for now
 Conflicts:      gamin
 PreReq:         lighttpd, PolicyKit, PackageKit, rubygem-rake, rubygem-sqlite3, rubygem-rails-2_3, ruby-rpam, ruby-polkit
 License:        MIT
 Group:          Productivity/Networking/Web/Utilities
 Autoreqprov:    on
-Version:        0.0.2
+Version:        0.0.3
 Release:        0
 Summary:        YaST2 - Webservice 
 Source:         www.tar.bz2
