@@ -9,17 +9,13 @@ class UserTest < Test::Unit::TestCase
 
   def setup
 
-    #parameters	= { "index" => ["s", "uid"], "user_attributes" => ["as", [ "cn" ]] }
-    #YastService.stubs(:Call).with("YaPI::USERS::UsersGet", parameters)
-
-    
+    parameters	= { "index" => ["s", "uid"], "user_attributes" => ["as", [ "cn" ]] }
+    YastService.stubs(:Call).with("YaPI::USERS::UsersGet", parameters).returns({"testuser1"=>{"cn"=>"testuser1"}, "testuser2"=>{"cn"=>"testuser2"}})    
   end
 
   def test_user
-    parameters	= { "index" => ["s", "uid"], "user_attributes" => ["as", [ "cn" ]] }
-    YastService.stubs(:Call).with("YaPI::USERS::UsersGet", parameters)
-    reply = YastService.Call("YaPI::USERS::UsersGet", parameters)
-    assert_equal({}, reply)
+    users = User.find_all
+    assert_equal(2, users.size)
   end
   
 end
