@@ -163,12 +163,12 @@ PID_FILE=/var/run/yastws.pid
 IGNORE_FILE=/var/run/yastwc.pid
 
 #only for beeing sure....
-if ps -C yastwc >/dev/null; then
-   ps -C yastwc|grep yastwc|cut -c -6 >$IGNORE_FILE
+SCRIPT_PID=$$
+if ps -C yastwc |grep -v $SCRIPT_PID >/dev/null; then
+   ps -C yastwc |grep -v $SCRIPT_PID|grep yastwc|cut -c -6 >$IGNORE_FILE
    IGNORE_FILE_SIZE="$(stat -c "%s" $IGNORE_FILE)"
    IGNORE_FILE_ENTRIES="$(wc -l $IGNORE_FILE|cut -c -1)"
    if [ $IGNORE_FILE_SIZE -eq 0 ]; then
-       echo "$IGNORE_FILE has no entry --> removing"
        rm $IGNORE_FILE
    fi
 else
@@ -176,12 +176,11 @@ else
      rm $IGNORE_FILE
    fi
 fi
-if ps -C yastws >/dev/null; then
-   ps -C yastws|grep yastws|cut -c -6 >$PID_FILE
+if ps -C yastws |grep -v $SCRIPT_PID >/dev/null; then
+   ps -C yastws |grep -v $SCRIPT_PID |grep yastws|cut -c -6 >$PID_FILE
    PID_FILE_SIZE="$(stat -c "%s" $PID_FILE)"
    PID_FILE_ENTRIES="$(wc -l $PID_FILE|cut -c -1)"
    if [ $PID_FILE_SIZE -eq 0 ]; then
-       echo "$PID_FILE has no entry --> removing"
        rm $PID_FILE
    fi
 else

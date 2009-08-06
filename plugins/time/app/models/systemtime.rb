@@ -1,14 +1,40 @@
+# = Systemtime model
+# Provides set and gets resources from YaPI time module.
+# Main goal is handle YaPI specific calls and data formats. Provides cleaned
+# and well defined data.
 class Systemtime
 
   @@timezones = Array.new()
 
-  attr_accessor :date,
-    :time,
-    :timezone,
-    :utcstatus
+  # Date settings format is dd/mm/yyyy
+  attr_accessor :date
+  # time settings format is hh:mm:ss
+  attr_accessor :time
+  # Current timezone as id
+  attr_accessor :timezone
+  # Utc status possible values is UTCOnly, UTC and localtime see yast2-country doc
+  attr_accessor :utcstatus
 
   private
-  def parse_response(response)
+
+  # Creates argument for dbus call which specify what data is requested.
+  # Available timezones is cached so request it only if it is necessary.
+  # return:: hash with requested keys
+  def Systemtime.create_read_question #:doc:
+    ret = {
+      "timezone" => "true",
+      "utcstatus" => "true",
+      "currenttime" => "true"
+    }
+    ret["zones"]= @@timezones.empty? ? "true" : "false"
+    return ret
+  end
+
+  public
+
+  # Parses response from dbus YaPI call
+  # response:: response from dbus
+  def parse_response(response) #:doc:
     timedate = response["time"]
     @time = timedate[timedate.index(" - ")+3,8]
     @date = timedate[0..timedate.index(" - ")-1]
@@ -21,29 +47,25 @@ class Systemtime
     end
   end
 
-  def create_read_question
-    ret = {
-      "timezone" => "true",
-      "utcstatus" => "true",
-      "currenttime" => "true"
-    }
-    ret["zones"]= @@timezones.empty? ? "true" : "false"
-    return ret
-  end
-
-  public
-
-  def timezones
+  #Getter for static timezones
+  def Systemtime.timezones
     return @@timezones
   end
 
   def initialize     
   end
 
-  def find
-    parse_response YastService.Call("YaPI::TIME::Read",create_read_question)
+  # fills time instance with data from YaPI.
+  #
+  # +warn+: Doesn't take any parameters.
+  def Systemtime.find
+    ret = Systemtime.new()
+    ret.parse_response YastService.Call("YaPI::TIME::Read",create_read_question)
+    return ret
   end
 
+  # Saves data from model to system via YaPI. Saves only setted data,
+  # so it support partial safe (e.g. save only new timezone if rest of fields is not set).
   def save
     settings = {}
     if @timezone and !@timezone.empty?

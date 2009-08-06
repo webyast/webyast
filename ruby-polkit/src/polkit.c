@@ -9,6 +9,7 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include <unistd.h>
+#include <stdarg.h>
 
 #include <dbus/dbus.h>
 #include <polkit-dbus/polkit-dbus.h>
@@ -22,6 +23,18 @@
 /* Ruby module */
 static VALUE mPolKit = Qnil;
 
+
+static
+VALUE
+new_runtime_error(const char *fmt, ...)
+{
+    va_list args;
+    char buf[1000];
+    va_start(args, fmt);
+    vsnprintf(buf, 1000, fmt, args);
+    va_end(args);
+    return rb_exc_new2(rb_eRuntimeError, buf);
+}
 
 /**
  * checks if user can perform action
@@ -39,6 +52,7 @@ method_polkit_check(VALUE self, VALUE act_v, VALUE usr_v)
     const char *action_s = StringValuePtr(act_v);
     const char *user_s = StringValuePtr(usr_v);
     const char *error = NULL;
+    VALUE exc = Qnil;	/* used when "error" would leak memory */
     VALUE ret = Qnil;
 
     DBusError dbus_error;
@@ -72,7 +86,7 @@ method_polkit_check(VALUE self, VALUE act_v, VALUE usr_v)
     passwd = getpwnam(user_s);
 
     if (!passwd) {
-        error = "PolicyKit user does not exist";
+        exc = new_runtime_error("PolicyKit user '%s' does not exist", user_s);
 	goto finish;
     }
 
@@ -105,7 +119,8 @@ method_polkit_check(VALUE self, VALUE act_v, VALUE usr_v)
     polkit_result = polkit_context_is_caller_authorized(context, action, caller, FALSE, &polkit_error);
 
     if (polkit_error_is_set(polkit_error)) {
-        error = "PolicyKit failed";
+	/* polkit_error will be freed before we raise so we must copy the msg */
+        exc = new_runtime_error(polkit_error_get_error_message(polkit_error));
 	goto finish;
     }
     
@@ -152,7 +167,9 @@ method_polkit_check(VALUE self, VALUE act_v, VALUE usr_v)
         polkit_error_free(polkit_error);
 
     if (error)
-      rb_raise(rb_eRuntimeError, error);
+	rb_raise(rb_eRuntimeError, error);
+    if (exc != Qnil)
+	rb_exc_raise(exc);
 
     return ret;
 }
