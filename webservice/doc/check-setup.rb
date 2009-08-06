@@ -2,7 +2,9 @@
 #
 # check-setup.rb
 #
-# Tests correct setup of rest-service
+# Tests correct setup of rest-service *development* environment
+#
+# If you want a runtime environment, use RPM packages
 #
 
 ###
@@ -55,6 +57,20 @@ test_module "rpam", "ruby-rpam"
 #
 test_module "polkit", "ruby-polkit"
 
+#
+# rubygems
+#
+test_module "rubygems", "rubygems"
+
+#
+# rubygem-sqlite3
+#
+test_module "sqlite3", "rubygem-sqlite3"
+
+#
+# mocha
+#
+test_module "mocha", "rubygem-mocha"
 
 #
 # /etc/yast_user_roles
