@@ -1,5 +1,3 @@
-# import YastService class FIXME move into the model...
-
 include ApplicationHelper
 
 class UsersController < ApplicationController

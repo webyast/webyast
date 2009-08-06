@@ -1,4 +1,3 @@
-
 require 'yast_service'
 
 # User model, not ActiveRecord based, but a
@@ -58,8 +57,9 @@ class User
 
     raise "Got no data while loading user attributes" if user_map.empty?
 
-    load_data(user_map)
+    user.load_data(user_map)
     user.uid = id
+    user
   end
 
   # User.destroy("joe")
@@ -71,8 +71,8 @@ class User
     }
 
     ret = YastService.Call("YaPI::USERS::UserDelete", config)
-    Rails.logger "Command returns: #{ret}"
-    # @error_string = ret
+    Rails.logger.debug "Command returns: #{ret}"
+    raise ret if not ret.blank?
     return (ret == "")
   end
 
@@ -88,7 +88,7 @@ class User
     data = retrieve_data
     ret = YastService.Call("YaPI::USERS::UserModify", config, data)
 
-    logger.debug "Command returns: #{ret.inspect}"
+    Rails.logger.debug "Command returns: #{ret.inspect}"
     raise ret if not ret.blank?
     true
   end
@@ -100,7 +100,7 @@ class User
     data.each do |key, value|
       attrs.store(key.underscore, value)
     end
-    load_attribures(attrs)
+    load_attributes(attrs)
   end
 
   # load a hash of attributes
@@ -140,7 +140,6 @@ class User
     ret = YastService.Call("YaPI::USERS::UserAdd", config, data)
 
     Rails.logger.debug "Command returns: #{ret.inspect}"
-    # @error_string = ret
     raise ret if not ret.blank?
     user
   end
