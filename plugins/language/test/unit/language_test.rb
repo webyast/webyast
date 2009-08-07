@@ -1,103 +1,108 @@
-require 'test_helper'
-
-
+require File.expand_path(File.dirname(__FILE__) + "/../test_helper")
 
 class LanguageTest < ActiveSupport::TestCase
 
-  Test_Lang = {
-      "test" => ["testing","la testing",".utf","la t"],
-      "a" => ["b","b","b","b"],
-      "c" => ["d","d","d","d"]
-    }
+  LANGUAGES = {
+    'en_US' => [            
+      'English (US)',
+      'English (US)',
+      '.UTF-8',      
+      '',     
+      'English (US)' ],
+    'fr_FR' => [
+      'Français',
+      'Francais',
+      '.UTF-8',
+      '@euro',
+      'French' ],
+    'de_DE' => [
+      'Deutsch',
+      'Deutsch',
+      '.UTF-8',
+      '@euro',
+    'German' ]
+   }
 
-  def read_arguments
-    return {
-      "current"=> "true",
-      "utf8"=> "true",
-      "rootlang"=> "true",
-      "languages" => "true"
-    }
-  end
+  ARGS_FULL = {
+    "current"=> "true",
+    "utf8"=> "true",
+    "rootlang"=> "true",
+    "languages" => "true"
+  }
 
-  def read_response
-    return {
-      "current" => "en_US",
-      "utf8" => "true",
-      "rootlang" => "ctype",
-      "languages" => Test_Lang
-    }
-  end
+  ARGS_PARTIAL = {
+    "current"=> "true",
+    "utf8"=> "true",
+    "rootlang"=> "true"
+  }
+  
+  RESPONSE_FULL = {
+    "current" => "en_US",
+    "utf8" => "true",
+    "rootlang" => "ctype",
+    "languages" => LANGUAGES }
 
-  def write_arguments
-    return {
-      "current" => "de_DE",
-      "utf8" => "false",
-      "rootlang" => "false",
-    }
-  end
+  RESPONSE_PARTIAL = {
+    "current" => "en_US",
+    "utf8" => "true",
+    "rootlang" => "ctype" }
+  
+  ARGS_WRITE = {
+    "current" => "de_DE",
+    "utf8" => "false",
+    "rootlang" => "false" }
 
   def setup    
-    @language = Language.new
-    #inject Language to set available for direct testing
-    def @language.available=(val)
-      @@available=val
-    end
-    #clean static variable
-    @language.available = nil
+    YastService.stubs(:Call).with("YaPI::LANGUAGE::Read",ARGS_FULL).returns(RESPONSE_FULL)
+    YastService.stubs(:Call).with("YaPI::LANGUAGE::Read",ARGS_PARTIAL).returns(RESPONSE_PARTIAL)
+    YastService.stubs(:Call).with("YaPI::LANGUAGE::Write",ARGS_WRITE).returns(true)
   end
 
-  
   def test_getter
-    YastService.stubs(:Call).with("YaPI::LANGUAGE::Read",read_arguments).returns(read_response)
+    lang = Language.find
+#    pp Language.available
 
-    @language = Language.find
-    assert_equal("en_US", @language.language)
-    assert_equal("ctype", @language.rootlocale)
-    assert_equal("true", @language.utf8)
-    assert_equal(Test_Lang,Language.available)
+    assert_equal("en_US", lang.language)
+    assert_equal("ctype", lang.rootlocale)
+    assert_equal("true", lang.utf8)
+    assert_equal(LANGUAGES,Language.available)
   end
 
   def test_setter
-    YastService.stubs(:Call).with("YaPI::LANGUAGE::Write",write_arguments).returns(true)
-
-    @language.language = "de_DE"
-    @language.rootlocale = "false"
-    @language.utf8 = "false"
-    @language.save
+    lang = Language.find
+    lang.language = "de_DE"
+    lang.rootlocale = "false"
+    lang.utf8 = "false"
+    lang.save
   end
 
   def test_xml
-    @language.language = "de_DE"
-    @language.rootlocale = "false"
-    @language.utf8 = "false"
-    @language.available = Test_Lang
+    lang = Language.find
+    lang.language = "de_DE"
+    lang.rootlocale = "false"
+    lang.utf8 = "false"
 
-    response = Hash.from_xml(@language.to_xml)
+    response = Hash.from_xml(lang.to_xml)
     response = response["language"]
 
     assert_equal("de_DE", response["current"])
     assert_equal("false", response["utf8"])
     assert_equal("false", response["rootlocale"])
-    lang_reponse = [
-      {"id" => "test", "name" => "testing" },
-      {"id" => "a", "name" => "b" },
-      {"id" => "c", "name" => "d" }
-    ]
+    lang_reponse = [ {"name"=>"Deutsch", "id"=>"de_DE"},
+                     {"name"=>"English (US)", "id"=>"en_US"},
+                     {"name"=>"Français", "id"=>"fr_FR"} ]
+    
     assert_equal(lang_reponse.sort { |a,b| a["id"] <=> b["id"] },
       response["available"].sort { |a,b| a["id"] <=> b["id"] })
   end
 
   def test_json
-    def @language.available=(val)
-      @@available=val
-    end
-    
-    @language.language = "de_DE"
-    @language.rootlocale = "false"
-    @language.utf8 = "false"
-    @language.available = Test_Lang
-
-    assert_not_nil(@language.to_json)
+    lang = Language.find
+    lang.language = "de_DE"
+    lang.rootlocale = "false"
+    lang.utf8 = "false"
+ 
+    assert_not_nil(lang.to_json)
   end
 
 end

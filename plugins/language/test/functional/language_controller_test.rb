@@ -14,6 +14,40 @@ class LanguageControllerTest < ActionController::TestCase
     # http://railsforum.com/viewtopic.php?id=1719
     @request.session[:account_id] = 1 # defined in fixtures
     @data = DATA
+
+    Language.stubs(:available).returns(
+      {  'rootlang' => 'ctype',                 
+         'languages' => {
+           'en_US' => [            
+             'English (US)',
+             'English (US)',
+             '.UTF-8',      
+             '',            
+             'English (US)' ],               
+           'fr_FR' => [
+              'Français',
+              'Francais',
+              '.UTF-8',
+              '@euro',
+              'French' ],
+            'de_DE' => [
+              'Deutsch',
+              'Deutsch',
+              '.UTF-8',
+              '@euro',
+              'German' ]
+         },
+         'current' => 'en_US',
+         'utf8' => 'true'
+        } )
+
+   @lang = Language.new
+   @lang.language = "de_DE"
+   @lang.rootlocale = "false"
+   @lang.utf8 = "false"
+
+   Language.stubs(:find).returns(@lang)
+    
   end
 
   include PluginBasicTests
