@@ -26,7 +26,6 @@ class SystemController < ApplicationController
 
 	# do the action
 	root.each do |k, v|
-
 	    if v.nil? or !v.has_key? 'active'
 		render ErrorResult.error(404, 2, "format error - missing requested status") and return
 	    end
@@ -40,15 +39,25 @@ class SystemController < ApplicationController
 		render ErrorResult.error(404, 2, "format error - unknown action requested") and return
 	    end
 
-	    if v['active'] == true and @system.actions[k.to_sym][:active] == false
-		case k
-		    when 'reboot'
+	    case k
+		when 'reboot'
+		    unless permission_check( 'org.freedesktop.hal.power-management.reboot')
+		      render ErrorResult.error(403, 1, "no permission") and return
+		    end
+
+		    if v['active'] == true and @system.actions[k.to_sym][:active] == false
 			do_reboot = true
-		    when 'shutdown'
+		    end
+		when 'shutdown'
+		    unless permission_check( 'org.freedesktop.hal.power-management.shutdown')
+		      render ErrorResult.error(403, 1, "no permission") and return
+		    end
+
+		    if v['active'] == true and @system.actions[k.to_sym][:active] == false
 			do_shutdown = true
-		    else
-			render ErrorResult.error(404, 2, "internal error - unknown action requested") and return
-		end
+		    end
+		else
+		    render ErrorResult.error(404, 2, "internal error - unknown action requested") and return
 	    end
 	end
 

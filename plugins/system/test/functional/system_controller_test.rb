@@ -66,6 +66,33 @@ class SystemControllerTest < ActionController::TestCase
   end
 
 
+  # test access rights
+
+  test "return error when not logged in" do
+    # remember the current setting
+    session_backup = @request.session
+    @request.session = {} # the session is not defined
+
+    ret = get :show
+    # expect 401 Unauthorized error code
+    assert_response :unauthorized
+
+    # revert back the original session setting (for the following tests)
+    @request.session = session_backup
+  end
+
+  test "return error when not permitted" do
+    @controller.stubs(:permission_check).returns(false);
+
+    ret = put :update, :actions => {:reboot => {:active => true}}
+    # expect 403 Forbidden error code
+    assert_response :forbidden
+
+    # set permissions back for the other tests
+    @controller.stubs(:permission_check).returns(true);
+  end
+
+
   # test invalid / malformed requests
 
   test "invalid (empty) request" do
