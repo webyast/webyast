@@ -7,11 +7,10 @@ require 'test_helper'
 class StatusTest < ActiveSupport::TestCase
   def setup
     # http://railsforum.com/viewtopic.php?id=1719
+    Scr.instance.stubs(:execute).with(['/usr/sbin/rccollectd', 'status']).returns({:exit => 0})
   end
 
   def test_set_datapath
-    Scr.instance.stubs(:execute).with(["/usr/sbin/collectd"]).returns(nil)
-
     status = Status.new
     assert (status.datapath = "/var/lib/collectd/test/"),  "/var/lib/collectd/test"
     status = Status.new
