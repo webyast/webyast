@@ -15,6 +15,9 @@ class SystemtimesControllerTest < ActionController::TestCase
 
   def setup
     @model_class = Systemtime
+
+    Systemtime.stubs(:find).returns([Systemtime.new, Systemtime.new])
+    
     @controller = SystemtimesController.new
     @request = ActionController::TestRequest.new
     # http://railsforum.com/viewtopic.php?id=1719

@@ -1,10 +1,8 @@
 require 'test_helper'
 
-
-
 class LanguageTest < ActiveSupport::TestCase
 
-  Test_timezones = [{
+  TEST_TIMEZONES = [{
       "name" => "Europe",
       "central" => "Europe/Prague",
       "entries" => {
@@ -33,7 +31,7 @@ class LanguageTest < ActiveSupport::TestCase
 
   def read_response
     return {
-      "zones"=> Test_timezones,
+      "zones"=> TEST_TIMEZONES,
       "timezone"=> "Europe/Prague",
       "utcstatus"=> "true",
       "time" => "2009-07-02 - 12:18:00"
@@ -61,7 +59,7 @@ class LanguageTest < ActiveSupport::TestCase
     assert_equal("12:18:00", @model.time)
     assert_equal("Europe/Prague", @model.timezone)
     assert_equal("true", @model.utcstatus)
-    assert_equal(Test_timezones,Systemtime.timezones)
+    assert_equal(TEST_TIMEZONES,Systemtime.timezones)
   end
 
   def test_setter
@@ -84,7 +82,7 @@ class LanguageTest < ActiveSupport::TestCase
     @model.utcstatus = data["utcstatus"]
     @model.date = "02/07/2009"
     @model.time = "12:18:00"
-    @model.timezones = Test_timezones
+    @model.timezones = TEST_TIMEZONES
 
     response = Hash.from_xml(@model.to_xml)
     response = response["systemtime"]
@@ -94,7 +92,7 @@ class LanguageTest < ActiveSupport::TestCase
     assert_equal("12:18:00", response["time"])
     assert_equal("02/07/2009", response["date"])
 
-    zone_response = Test_timezones
+    zone_response = TEST_TIMEZONES
     zone_response.each { |zone|
       entries = []
       zone["entries"].each { |k,v|
@@ -119,7 +117,7 @@ class LanguageTest < ActiveSupport::TestCase
     @model.utcstatus = data["utcstatus"]
     @model.date = "02/07/2009"
     @model.time = "12:18:00"
-    @model.timezones = Test_timezones
+    @model.timezones = TEST_TIMEZONES
 
     assert_not_nil(@model.to_json)
   end
