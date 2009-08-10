@@ -9,7 +9,6 @@ end
 vars = ['PKG_BUILD', 'RCOV_PARAMS']
 
 env = ENV.map { |key,val| ENV[key] ? %(#{key}="#{ENV[key]}") : nil }.reject {|x| x.nil?}.join(' ')
-#env = %(PKG_BUILD="#{ENV['PKG_BUILD']}") if ENV['PKG_BUILD']
 
 plugins = Dir.glob('plugins/*')#.reject{|x| ['users'].include?(File.basename(x))}
 PROJECTS = ['webservice', *plugins]
