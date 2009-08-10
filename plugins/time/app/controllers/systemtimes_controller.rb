@@ -1,3 +1,5 @@
+require 'systemtime'
+
 # = Systemtime controller
 # Provides access to time settings for authentificated users.
 # Main goal is checking permissions.
