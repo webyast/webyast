@@ -1,6 +1,7 @@
 require 'test_helper'
+require 'systemtime'
 
-class LanguageTest < ActiveSupport::TestCase
+class SystemtimeTest < ActiveSupport::TestCase
 
   TEST_TIMEZONES = [{
       "name" => "Europe",
