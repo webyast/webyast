@@ -6,7 +6,7 @@ def sudo(cmd)
   %x[sudo -p "Password: " #{cmd}]
 end
 
-vars = ['PKG_BUILD', 'RCOV_PARAMS']
+vars = ['PKG_BUILD', 'RCOV_PARAMS', 'RAILS_ENV']
 
 env = ENV.map { |key,val| ENV[key] ? %(#{key}="#{ENV[key]}") : nil }.reject {|x| x.nil?}.join(' ')
 
