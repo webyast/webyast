@@ -25,13 +25,18 @@ class PermissionsController < ApplicationController
     suse_string = /org\.opensuse\.yast\..*/
     
     # get users or all actions
-    ret = if user_id
-            Scr.instance.execute(["polkit-auth", "--user", user_id, "--explicit"])
-	  else
-	    Scr.instance.execute(["polkit-action"])
-	  end rescue nil
-    raise RuntimeError unless ret && ret[:exit] == 0
+    begin
+      ret = if user_id
+              Scr.instance.execute(["polkit-auth", "--user", user_id, "--explicit"])
+            else
+              Scr.instance.execute(["polkit-action"])
+            end 
+    rescue Exception => e
+      ret = nil
+      logger.error "SCR.execute has raised the exception: #{e.inspect}"
+    end
 
+    raise RuntimeError unless ret && ret[:exit] == 0
     ret[:stdout].scan(suse_string) do |p|
       next unless filter.blank? or p.include?(filter)
       yield p
