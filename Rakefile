@@ -6,7 +6,9 @@ def sudo(cmd)
   %x[sudo -p "Password: " #{cmd}]
 end
 
-vars = ['PKG_BUILD', 'RCOV_PARAMS', 'RAILS_ENV']
+# recognized variables
+vars = ['PKG_BUILD', 'RCOV_PARAMS', 'RAILS_ENV', 'RAILS_PARENT']
+ENV['RAILS_PARENT'] = File.join(Dir.pwd, 'webservice')
 
 env = ENV.map { |key,val| ENV[key] ? %(#{key}="#{ENV[key]}") : nil }.reject {|x| x.nil?}.join(' ')
 
