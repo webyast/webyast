@@ -38,9 +38,6 @@ class SystemControllerTest < ActionController::TestCase
 
     orig = Hash.from_xml(ret.body)
 
-    puts "orig:"
-    pp orig
-
     put :update, :actions => {:shutdown => {:active => true}, :zzzzzz => {}}
     assert_response :missing
 
