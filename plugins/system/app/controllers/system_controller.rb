@@ -21,6 +21,9 @@ class SystemController < ApplicationController
 	
 	@system = System.instance
 
+	do_reboot = false
+	do_shutdown = false
+
 	# do the action
 	root.each do |k, v|
 
@@ -40,14 +43,17 @@ class SystemController < ApplicationController
 	    if v['active'] == true and @system.actions[k.to_sym][:active] == false
 		case k
 		    when 'reboot'
-			@system.reboot
+			do_reboot = true
 		    when 'shutdown'
-			@system.shutdown
+			do_shutdown = true
 		    else
 			render ErrorResult.error(404, 2, "internal error - unknown action requested") and return
 		end
 	    end
 	end
+
+	if do_reboot then @system.reboot end
+	if do_shutdown then @system.shutdown end
 
 	show
     end

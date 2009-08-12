@@ -31,6 +31,27 @@ class SystemControllerTest < ActionController::TestCase
 	(ret_hash['actions']['shutdown']['active'] == true or ret_hash['actions']['shutdown']['active'] == false)
   end
 
+  test "don't change status on error" do
+    ret = get :show
+    # success (200 OK)
+    assert_response :success
+
+    orig = Hash.from_xml(ret.body)
+
+    puts "orig:"
+    pp orig
+
+    put :update, :actions => {:shutdown => {:active => true}, :zzzzzz => {}}
+    assert_response :missing
+
+    ret = get :show
+    # success (200 OK)
+    assert_response :success
+
+    assert orig == Hash.from_xml(ret.body)
+  end
+
+
   test "request reboot" do
     ret = put :update, :actions => {:reboot => {:active => true}}
     assert_response :success
