@@ -4,27 +4,23 @@ require 'singleton'
 
 
 class System
+    attr_reader :actions
 
     include Singleton
 
     def initialize
-	@reboot = false
-	@shutdown = false
-    end
-
-    def actions
-	return {:reboot => @reboot, :shutdown => @shutdown}
+	@actions = {:reboot => {:active => false}, :shutdown => {:active => false} }
     end
 
     def reboot
 	if hal_power_management(:reboot)
-	    @reboot = true
+	    @actions[:reboot][:active] = true
 	end
     end
 
     def shutdown
 	if hal_power_management(:shutdown)
-	    @shutdown = true
+	    @actions[:shutdown][:active] = true
 	end
     end
 

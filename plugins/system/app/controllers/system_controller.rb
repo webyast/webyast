@@ -14,28 +14,42 @@ class SystemController < ApplicationController
     end
    
     def update
-	root = params[:time]
-	if root == nil
-	  render ErrorResult.error(404, 2, "format or internal error") and return
+	root = params[:actions]
+	if root == nil || root == {} 
+	  render ErrorResult.error(404, 2, "format error - missing actions") and return
 	end
 	
 	@system = System.instance
 
 	# do the action
-	action = params.find { |k, v| v == true}
+	root.each do |k, v|
 
-	if not action.blank?
-	    case action
-		when :reboot
-		    @system.reboot
-		when :shutdown
-		    @system.shutdown
-		else
-		    render ErrorResult.error(404, 2, "format error") and return
+	    if v.nil? or !v.has_key? 'active'
+		render ErrorResult.error(404, 2, "format error - missing requested status") and return
+	    end
+
+	    if v['active'] != true and v['active'] != false
+		render ErrorResult.error(404, 2, "format error - non-boolean active parameter") and return
+	    end
+
+	    # unknown action requested
+	    if !@system.actions.has_key? k.to_sym
+		render ErrorResult.error(404, 2, "format error - unknown action requested") and return
+	    end
+
+	    if v['active'] == true and @system.actions[k.to_sym][:active] == false
+		case k
+		    when 'reboot'
+			@system.reboot
+		    when 'shutdown'
+			@system.shutdown
+		    else
+			render ErrorResult.error(404, 2, "internal error - unknown action requested") and return
+		end
 	    end
 	end
 
-	render :show
+	show
     end
 
     # See update
