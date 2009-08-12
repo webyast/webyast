@@ -4,30 +4,24 @@ require 'singleton'
 
 
 class System
+    attr_reader :actions
 
     include Singleton
 
     def initialize
-	@reboot = false
-	@shutdown = false
-    end
-
-    def actions
-	return {:reboot => @reboot, :shutdown => @shutdown}
+	@actions = {:reboot => {:active => false}, :shutdown => {:active => false} }
     end
 
     def reboot
-	logger.debug "##### reboot"
-#	if hal_power_management(:reboot)
-#	    @reboot = true
-#	end
+	if hal_power_management(:reboot)
+	    @actions[:reboot][:active] = true
+	end
     end
 
     def shutdown
-	logger.debug "##### shutdown"
-#	if hal_power_management(:shutdown)
-#	    @shutdown = true
-#	end
+	if hal_power_management(:shutdown)
+	    @actions[:shutdown][:active] = true
+	end
     end
 
 
@@ -49,17 +43,16 @@ class System
 	    computer.introspect
 	    computer.default_iface = 'org.freedesktop.Hal.Device.SystemPowerManagement'
 
-
 	    case action
 
 		when :reboot
-		    logger.debug 'Rebooting the computer...'
+		    Rails.logger.debug 'Rebooting the computer...'
 		    return computer.Reboot == 0
 		when :shutdown
-		    logger.debug 'Shutting down the computer...'
+		    Rails.logger.debug 'Shutting down the computer...'
 		    return computer.Shutdown == 0
 		else
-		    logger.error "Unsupported HAL command: #{action}"
+		    Rails.logger.error "Unsupported HAL command: #{action}"
 	    end
 
 	# handle DBus errors
