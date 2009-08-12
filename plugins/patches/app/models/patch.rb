@@ -2,45 +2,10 @@ require "dbus"
 require 'socket'
 require 'thread'
 
-# = MainPkg event loop class.
-#
-# Class that takes care of handling message and signal events
-# asynchronously.
-class MainPkg
-  # Create a new main event loop.
-  def initialize
-    @buses = Hash.new
-  end
-
-  # Add a _bus_ to the list of buses to watch for events.
-  def <<(bus)
-    @buses[bus.socket] = bus
-  end
-
-  # Run the main loop. This is a blocking call!
-  def run
-    ok = true
-    finished = false
-    while !finished do
-      ready, dum, dum = IO.select(@buses.keys)
-      ready.each do |socket|
-        b = @buses[socket]
-        b.update_buffer
-        while m = b.pop_message
-          b.process(m)
-	  if m.member == "Finished" || m.member == "Errorcode"
-            finished = true
-            if m.member == "Error"
-               ok = false
-            end
-          end
-        end
-      end
-    end
-    return ok
-  end
-end # class MainPkg
-
+# Used to stop DBus::Main loop
+class PKErrorException < Exception; end
+# Used to stop DBus::Main loop
+class PKFinishedException < Exception; end
 
 # Model for patches available via package kit
 class Patch
@@ -51,7 +16,6 @@ class Patch
                   :arch,
                   :repo,
                   :summary
-
   def id
     @resolvable_id
   end
@@ -130,19 +94,27 @@ class Patch
       end
 
       obj_tid.on_signal("Error") do |u1,u2|
-        finished = true
+        raise PKErrorException
       end
       obj_tid.on_signal("Finished") do |u1,u2|
-        finished = true
+        raise PKFinishedException
       end
+
       obj_tid_with_iface.GetUpdates("NONE")
 
       unless finished
-        @main = MainPkg.new
-        @main << system_bus
-        @main.run
+        loop = DBus::Main.new
+        loop << system_bus
+        begin
+          loop.run
+        rescue PKErrorException
+          finished = true
+          ok = false
+        rescue PKFinishedException
+          finished = true
+        end
       end
-
+      
       obj_with_iface.SuggestDaemonQuit
 
       return patch_updates
@@ -194,19 +166,23 @@ class Patch
     end
 
     obj_tid.on_signal("Error") do |u1,u2|
-      finished = true
-      ok = false
+      raise PKErrorException
     end
     obj_tid.on_signal("Finished") do |u1,u2|
-      finished = true
+      raise PKFinishedException
     end
     obj_tid_with_iface.UpdatePackages([pkkit_id])
 
     unless finished
-      @main = MainPkg.new
-      @main << system_bus
-      if (!@main.run)
-         ok = false
+      loop = DBus::Main.new
+      loop << system_bus
+      begin
+        loop.run
+      rescue PKErrorException
+        finished = true
+        ok = false
+      rescue PKFinishedException
+        finished = true
       end
     end
     obj_with_iface.SuggestDaemonQuit
