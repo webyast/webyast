@@ -12,7 +12,32 @@ class PatchesControllerTest < ActionController::TestCase
     @request = ActionController::TestRequest.new
     # http://railsforum.com/viewtopic.php?id=1719
     @request.session[:account_id] = 1 # defined in fixtures
-    PatchesController.any_instance.stubs(:get_updateList).with().returns([Patch.new("462","important","softwaremgmt","noarch","openSUSE-11.0-Updates","Various fixes for the software management stack")])
+
+    # we make them member variables so we can use
+    # in other assertions
+    @p1 = Patch.new(
+            :resolvable_id => "462",
+            :name => "softwaremgmt",
+            :kind => "important",
+            :summary => "Various fixes for the software management stack",
+            :arch => "noarch",
+            :repo => "openSUSE-11.1-Updates")
+
+    @p2 = Patch.new(
+            :resolvable_id => "463",
+            :name => "yast",
+            :kind => "security",
+            :summary => "Various fixes",
+            :arch => "noarch",
+            :repo => "openSUSE-11.1-Updates")
+
+    Patch.stubs(:mtime).returns(Time.now)
+    Patch.stubs(:find).with(:available).returns([@p1, @p2])
+    Patch.stubs(:find).with('462').returns(@p1)
+    Patch.stubs(:find).with('wrong_id').returns(nil)
+    Patch.stubs(:find).with('not_found').returns(nil)
+
+    @p1.stubs(:install).returns(true)
   end
   
   test "access index" do
@@ -59,13 +84,11 @@ class PatchesControllerTest < ActionController::TestCase
   end
 
   test "installing a patch" do
-    PatchesController.any_instance.stubs(:install_update).with("462").returns(true)
     put :update, :id =>"462"
     assert_response :success
   end
 
   test "installing a patch with wrong ID" do
-    PatchesController.any_instance.stubs(:install_update).with("462").returns(true)
     put :update, :id =>"wrong_id"
     assert_response 404
   end
