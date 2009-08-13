@@ -14,7 +14,7 @@ class SystemController < ApplicationController
     end
    
     def update
-	root = params[:actions]
+	root = params[:system]
 	if root == nil || root == {} 
 	  render ErrorResult.error(404, 2, "format error - missing actions") and return
 	end
@@ -26,7 +26,7 @@ class SystemController < ApplicationController
 
 	# do the action
 	root.each do |k, v|
-	    if v.nil? or !v.has_key? 'active'
+	    if v.nil? or !v.respond_to?('has_key?') or !v.has_key? 'active'
 		render ErrorResult.error(404, 2, "format error - missing requested status") and return
 	    end
 

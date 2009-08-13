@@ -38,7 +38,7 @@ class SystemControllerTest < ActionController::TestCase
 
     orig = Hash.from_xml(ret.body)
 
-    put :update, :actions => {:shutdown => {:active => true}, :zzzzzz => {}}
+    put :update, :system => {:shutdown => {:active => true}, :zzzzzz => {}}
     assert_response :missing
 
     ret = get :show
@@ -50,7 +50,7 @@ class SystemControllerTest < ActionController::TestCase
 
 
   test "request reboot" do
-    ret = put :update, :actions => {:reboot => {:active => true}}
+    ret = put :update, :system => {:reboot => {:active => true}}
     assert_response :success
 
     # :reboot action must be active
@@ -58,7 +58,7 @@ class SystemControllerTest < ActionController::TestCase
   end
 
   test "request shutdown" do
-    ret = put :update, :actions => {:shutdown => {:active => true}}
+    ret = put :update, :system => {:shutdown => {:active => true}}
     assert_response :success
 
     # :shutdown action must be active
@@ -84,7 +84,7 @@ class SystemControllerTest < ActionController::TestCase
   test "return error when not permitted" do
     @controller.stubs(:permission_check).returns(false);
 
-    ret = put :update, :actions => {:reboot => {:active => true}}
+    ret = put :update, :system => {:reboot => {:active => true}}
     # expect 403 Forbidden error code
     assert_response :forbidden
 
@@ -106,22 +106,27 @@ class SystemControllerTest < ActionController::TestCase
   end
 
   test "invalid (empty actions) request" do
-    ret = put :update, :actions => {}
+    ret = put :update, :system => {}
     assert_response :missing
   end
 
   test "invalid (unknown) request" do
-    ret = put :update, :actions => {:_invalid_action_ => {:active => true}}
+    ret = put :update, :system => {:_invalid_action_ => {:active => true}}
+    assert_response :missing
+  end
+
+  test "invalid (unexpected type) request" do
+    ret = put :update, :system => {:reboot => :string}
     assert_response :missing
   end
 
   test "invalid (missing active parameter) request" do
-    ret = put :update, :actions => {:reboot => {}}
+    ret = put :update, :system => {:reboot => {}}
     assert_response :missing
   end
 
   test "invalid (non-boolean active parameter) request" do
-    ret = put :update, :actions => {:reboot => {:active => 'string'}}
+    ret = put :update, :system => {:reboot => {:active => 'string'}}
     assert_response :missing
   end
 
