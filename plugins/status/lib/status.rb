@@ -175,7 +175,7 @@ class Status
       end
 
       #setting the limits
-      result.each do |key, value|        
+      result.each do |key, value|
         path = rrdfile[datapath.length+1..rrdfile.length-1].chomp('.rrd')
         path +="/" + key if key!="value" #do not take care about the value flag
         path = path.tr('-','_')

@@ -8,6 +8,7 @@ class StatusTest < ActiveSupport::TestCase
   def setup
     # http://railsforum.com/viewtopic.php?id=1719
     Scr.instance.stubs(:execute).with(['/usr/sbin/rccollectd', 'status']).returns({:exit => 0})
+    Status.any_instance.stubs(:datapath).returns("/var/lib/collectd/test")
   end
 
   def test_set_datapath
@@ -38,12 +39,12 @@ class StatusTest < ActiveSupport::TestCase
 
     # simulate environment
     status.stubs(:metric_types).returns(['cpu', 'memory'])
-    status.stubs(:metric_files).with('cpu').returns(['/var/lib/collectd/cpu/cpuheat.rrd'])
-    status.stubs(:metric_files).with('memory').returns(['/var/lib/collectd/memory/memory.rrd'])
+    status.stubs(:metric_files).with('cpu').returns(['/var/lib/collectd/test/cpu/cpuheat.rrd'])
+    status.stubs(:metric_files).with('memory').returns(['/var/lib/collectd/test/memory/memory.rrd'])
     
     status.datapath = "/var/lib/collectd"
-    fake_metrics = {"memory"=>{:rrds=>["/var/lib/collectd/memory/memory.rrd"]},
-      "cpu"=>{:rrds=>["/var/lib/collectd/cpu/cpuheat.rrd"]}}
+    fake_metrics = {"memory"=>{:rrds=>["/var/lib/collectd/test/memory/memory.rrd"]},
+      "cpu"=>{:rrds=>["/var/lib/collectd/test/cpu/cpuheat.rrd"]}}
     assert_equal fake_metrics, status.available_metrics
   end
 
@@ -80,7 +81,7 @@ class StatusTest < ActiveSupport::TestCase
 EOF
     
     # stub the command output
-    status.stubs(:run_rrdtool).with("/test/memory-free.rrd", start, stop).returns(rrd_output)
+    status.stubs(:run_rrdtool).with("/var/lib/collectd/test/memory-free.rrd", start, stop).returns(rrd_output)
     
     status.datapath = "/test"
 
@@ -111,6 +112,6 @@ EOF
    "T_1248092510"=>"4.9271428571e+01",
    "T_1248092720"=>"2.3042857143e+01"}}
     
-    assert_equal expected_response, status.fetch_metric("/test/memory-free.rrd", start, stop)    
+    assert_equal expected_response, status.fetch_metric("/var/lib/collectd/test/memory-free.rrd", start, stop)    
   end
 end
