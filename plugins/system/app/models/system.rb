@@ -48,7 +48,7 @@ class System
 		when :reboot
 		    if ENV['RAILS_ENV'] == 'production'
 			Rails.logger.debug 'Rebooting the computer...'
-			return computer.Reboot == 0
+			return computer.Reboot.zero?
 		    else
 			Rails.logger.debug "Skipping reboot in #{ENV['RAILS_ENV']} mode"
 			return true
@@ -56,7 +56,7 @@ class System
 		when :shutdown
 		    if ENV['RAILS_ENV'] == 'production'
 			Rails.logger.debug 'Shutting down the computer...'
-			return computer.Shutdown == 0
+			return computer.Shutdown.zero?
 		    else
 			Rails.logger.debug "Skipping shutdown in #{ENV['RAILS_ENV']} mode"
 			return true
