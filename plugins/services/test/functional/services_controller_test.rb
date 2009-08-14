@@ -4,7 +4,6 @@ require 'rubygems'
 require "scr"
 require 'mocha'
 
-
 class ServicesControllerTest < ActionController::TestCase
   fixtures :accounts
   def setup
@@ -13,16 +12,15 @@ class ServicesControllerTest < ActionController::TestCase
     # http://railsforum.com/viewtopic.php?id=1719
     @request.session[:account_id] = 1 # defined in fixtures
 
-    s1 = Service.new
-    s1.name = "foo"
-    s1.status = 0
+    s1 = Lsbservice.new("foo")
+    s1.stubs(:path).returns("/foo")
+    s1.stubs(:commands).returns(["start", "stop"])
 
-    s2 = Service.new
-    s2.name = "cron"
-    s2.status = 1
-    
-    Service.stubs(:find_all).returns([s1, s2])
-    Service.stubs(:find).with("cron").returns([s2])
+    s2 = Lsbservice.new("cron")
+    s2.stubs(:path).returns("/cron")
+    s2.stubs(:commands).returns(["start", "stop", "kill"])
+
+    Lsbservice.stubs(:all).returns([s1, s2])
   end
   
   test "access index" do

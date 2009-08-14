@@ -6,9 +6,10 @@ class ServicesController < ApplicationController
       render ErrorResult.error(403, 1, "no permission") and return
     end
 
-    lservices = Lsbservice.all
-    lservices = lservices.sort unless params[:sort] == "0"
-    @services = lservices.map {|svc| {:link => svc} }
+    @services = Lsbservice.all
+    @services = @services.sort unless params[:sort] == "0"
+
+    @services = @services.map {|svc| {:link => svc} }
   end
 
   # show the svc including the commands
