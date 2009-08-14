@@ -26,29 +26,33 @@ class ServicesController < ApplicationController
     logger.debug "show@service #{@service.inspect}"
   end
 
-  # PUT /services/1.xml
-  def update
+  # Change the service status. Requires write permissions for services YaPI.
+  # POST /services
+  def create
 
     unless permission_check( "org.opensuse.yast.modules.yapi.services.execute")
       render ErrorResult.error(403, 1, "no permission") and return
     end
 
+    services	= params[:services]
+    id		= services[:name]
     begin
-      @service = Service.find params[:id]
+      @service = Service.find id
     rescue Exception => e
       logger.debug e
       render ErrorResult.error(404, 106, "no such service") and return
     end
 
-    ret	= {}
+    @service.execute	= services[:execute]
+
     begin
-      ret	= @service.save(params[:execute])
+      @service.save
     rescue Exception => e
       logger.debug e
       render ErrorResult.error(404, @error_id, @error_string) and return
     end
 
-    render :xml => ret
+    render :show
   end
 
 end

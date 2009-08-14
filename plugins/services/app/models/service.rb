@@ -4,6 +4,7 @@ class Service
   
   attr_accessor :name
   attr_accessor :status
+  attr_accessor :execute
 
   def initialize    
   end
@@ -43,12 +44,14 @@ class Service
   end
 
 
-  def save(cmd)
-    ret = YastService.Call("YaPI::SERVICES::Execute", self.name, cmd)
+  def save
+    ret = YastService.Call("YaPI::SERVICES::Execute", self.name, self.execute)
 
     Rails.logger.debug "Command returns: #{ret.inspect}"
-    ret
+    raise ret["stdout"] + ret["stderr"] if ret["exit"] != "0"
+    true
   end
+  
   
   def to_xml( options = {} )
     xml = options[:builder] ||= Builder::XmlMarkup.new(options)
@@ -57,6 +60,7 @@ class Service
     xml.service do
       xml.tag!(:name, name )
       xml.tag!(:status, status, {:type => "integer"} )
+      xml.tag!(:execute, execute )
     end  
   end
 
