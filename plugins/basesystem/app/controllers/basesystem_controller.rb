@@ -1,6 +1,6 @@
 # = Base system controller
-# Provides access to language settings for authentificated users.
-# Main goal is checking permissions.
+# Provides access to queue for basic system setup.
+# It is really quite thin layer.
 class LanguageController < ApplicationController
 
   before_filter :login_required
