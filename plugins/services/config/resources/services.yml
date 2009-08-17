@@ -1,3 +1,2 @@
-interface: org.opensuse.yast.modules.yapi.services
+interface: org.opensuse.yast.system.services
 controller: services
-nested: permissions

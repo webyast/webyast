@@ -67,16 +67,14 @@ class Lsbservice
   #
   
   attr_reader :link, :path, :commands
-  
-  def initialize link
-    link = link.to_s unless link.is_a? String
-    @link = link
-    @commands = []
-    @path = PREFIX+link
-    raise "Nonexistent service #{link}" unless File.exists?( path )
-    if File.executable?( path )
+
+  # scans the system to detect path and commands
+  def read_system
+    expected_path = PREFIX+link
+    raise "Nonexistent service #{link}" unless File.exists?(expected_path)
+    if File.executable?(expected_path)
       # run init script to get its 'Usage' line
-      IO.popen( path, 'r+' ) do |pipe|
+      IO.popen(expected_path, 'r+') do |pipe|
 	loop do
 	  break if pipe.eof?
 	  l = pipe.read
@@ -90,13 +88,32 @@ class Lsbservice
 	end
       end
     end
-    if @commands.length == 0
-      #put at least run|stop|status|restart
-      @commands = ["run",
-                   "stop",
-                   "status",
-                   "restart"]
-    end
+
+    #put at least run|stop|status|restart
+    @commands = ["run", "stop", "status", "restart"] if @commands.blank?
+  end
+
+  # sorting operator
+  def <=>(other_service)
+    link <=> other_service.link
+  end
+  
+  # returns the path of the service
+  def path
+    return @path if defined?(@path)
+    read_system
+    @path
+  end
+
+  def commands
+    return @commands if defined?(@commands)
+    read_system
+    @commands
+  end
+  
+  def initialize link
+    link = link.to_s unless link.is_a? String
+    @link = link    
   end
   
   
@@ -109,10 +126,10 @@ class Lsbservice
     xml.instruct! unless options[:skip_instruct]
 
     xml.service do
-      xml.tag!(:link, @link )
-      xml.tag!(:path, @path )
+      xml.tag!(:link, link )
+      xml.tag!(:path, path )
       xml.commands do 
-         @commands.each do |c|
+         commands.each do |c|
             xml.command do 
               xml.tag!(:name, c)
             end

@@ -1,7 +1,7 @@
 #
-# spec file for package yast2-webservice-language (Version 0.1)
+# spec file for package yast2-webservice-basesystem (Version 0.1)
 #
-# Copyright (c) 2008 SUSE LINUX Products GmbH, Nuernberg, Germany.
+# Copyright (c) 2008-09 SUSE LINUX Products GmbH, Nuernberg, Germany.
 # This file and all modifications and additions to the pristine
 # package are under the same license as the package itself.
 #
@@ -9,15 +9,15 @@
 #
 
 
-Name:           yast2-webservice-language
+Name:           yast2-webservice-basesystem
 PreReq:         yast2-webservice
-Provides:       yast2-webservice:/srv/www/yastws/app/controllers/language_controller.rb
+Provides:       yast2-webservice:/srv/www/yastws/app/controllers/basesystem_controller.rb
 License:        MIT
 Group:          Productivity/Networking/Web/Utilities
 Autoreqprov:    on
-Version:        0.0.3
+Version:        0.0.1
 Release:        0
-Summary:        YaST2 - Webservice - Language
+Summary:        YaST2 - Webservice - Basesystem
 Source:         www.tar.bz2
 BuildRoot:      %{_tmppath}/%{name}-%{version}-build
 BuildArch:      noarch
@@ -32,11 +32,12 @@ Requires:       yast2-country >= 2.18.9
 
 
 %description
-YaST2 - Webservice - REST based interface of YaST in order to handle language settings.
+YaST2 - Webservice - REST based interface of YaST in order to handle initial basic system settings.
+
 Authors:
 --------
-    Stefan Schubert <schubi@opensuse.org>
     Josef Reidinger <jreidinger@suse.cz>
+    Martin Kudlvasr <mkudlvasr@suse.cz>
 
 %prep
 %setup -q -n www
@@ -54,11 +55,6 @@ cp -a * $RPM_BUILD_ROOT/srv/www/%{pkg_user}/vendor/plugins/%{plugin_name}
 %clean
 rm -rf $RPM_BUILD_ROOT
 
-%post
-#
-# granting all permissions for root 
-#
-/etc/yastws/tools/policyKit-rights.rb --user root --action grant >& /dev/null || :
 
 %files 
 %defattr(-,root,root)
@@ -67,6 +63,7 @@ rm -rf $RPM_BUILD_ROOT
 %dir /srv/www/%{pkg_user}/vendor/plugins
 %dir /srv/www/%{pkg_user}/vendor/plugins/%{plugin_name}
 %dir /srv/www/%{pkg_user}/vendor/plugins/%{plugin_name}/doc
+%dir /srv/www/%{pkg_user}/vendor/plugins/%{plugin_name}/var
 /srv/www/%{pkg_user}/vendor/plugins/%{plugin_name}/MIT-LICENSE
 /srv/www/%{pkg_user}/vendor/plugins/%{plugin_name}/README
 /srv/www/%{pkg_user}/vendor/plugins/%{plugin_name}/Rakefile

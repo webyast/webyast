@@ -46,11 +46,21 @@ class System
 	    case action
 
 		when :reboot
-		    Rails.logger.debug 'Rebooting the computer...'
-		    return computer.Reboot == 0
+		    if ENV['RAILS_ENV'] == 'production'
+			Rails.logger.debug 'Rebooting the computer...'
+			return computer.Reboot.zero?
+		    else
+			Rails.logger.debug "Skipping reboot in #{ENV['RAILS_ENV']} mode"
+			return true
+		    end
 		when :shutdown
-		    Rails.logger.debug 'Shutting down the computer...'
-		    return computer.Shutdown == 0
+		    if ENV['RAILS_ENV'] == 'production'
+			Rails.logger.debug 'Shutting down the computer...'
+			return computer.Shutdown.zero?
+		    else
+			Rails.logger.debug "Skipping shutdown in #{ENV['RAILS_ENV']} mode"
+			return true
+		    end
 		else
 		    Rails.logger.error "Unsupported HAL command: #{action}"
 	    end
