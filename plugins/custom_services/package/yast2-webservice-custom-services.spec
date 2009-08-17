@@ -1,5 +1,5 @@
 #
-# spec file for package yast2-webservice-services (Version 0.1)
+# spec file for package yast2-webservice-custom-services (Version 0.1)
 #
 # Copyright (c) 2008 SUSE LINUX Products GmbH, Nuernberg, Germany.
 # This file and all modifications and additions to the pristine
@@ -9,28 +9,28 @@
 #
 
 
-Name:           yast2-webservice-services
+Name:           yast2-webservice-custom-services
 PreReq:         yast2-webservice
-Provides:       yast2-webservice:/srv/www/yastws/app/controllers/services_controller.rb
+Provides:       yast2-webservice:/srv/www/yastws/app/controllers/custom_services_controller.rb
 License:        MIT
 Group:          Productivity/Networking/Web/Utilities
 Autoreqprov:    on
-Version:        0.0.3
+Version:        0.0.1
 Release:        0
 Summary:        YaST2 - Webservice - Services
 Source:         www.tar.bz2
-Source1:        org.opensuse.yast.system.services.policy
+Source1:        org.opensuse.yast.modules.yapi.services.policy
 BuildRoot:      %{_tmppath}/%{name}-%{version}-build
 BuildArch:      noarch
 
 #
 %define pkg_user yastws
-%define plugin_name services
+%define plugin_name custom_services
 #
 
 
 %description
-YaST2 - Webservice - REST based interface of YaST in order to handle services.
+YaST2 - Webservice - REST based interface of YaST in order to handle custom services.
 Authors:
 --------
     Stefan Schubert <schubi@opensuse.org>
