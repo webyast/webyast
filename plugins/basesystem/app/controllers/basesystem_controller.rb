@@ -1,7 +1,7 @@
 # = Base system controller
 # Provides access to queue for basic system setup.
 # It is really quite thin layer.
-class LanguageController < ApplicationController
+class BasesystemController < ApplicationController
 
   before_filter :login_required
 
