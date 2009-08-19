@@ -1,20 +1,7 @@
 require "scr"
 require 'yast_service'
+require 'yast/config_file'
 
-# FIXME move to helper? fill class variable on initialize?
-# -> use some generic library for accessing vendor specific data
-def get_custom_services
-
-  file = '/etc/YaST2/custom_services.yml';
-  custom = {}
-  if File.exists?(file)
-    custom	= YAML::load (File.open('/etc/YaST2/custom_services.yml'));
-    custom = {} unless custom.is_a? Hash
-  end
-  custom
-end
-
- 
 class Service
   
   attr_accessor :name
@@ -29,12 +16,17 @@ class Service
 
     services	= []
     if params.has_key?("custom")
-      get_custom_services().each do |name, s|
+      begin
+        cfg = YaST::ConfigFile.new(:custom_services)
+        cfg.each do |name, s|
 	  service	= Service.new
 	  service.name	= name
 	  # TODO read the service status?
 	  Rails.logger.debug "custom service: #{service.inspect}"
-	  services << service
+          services << service
+        end
+      rescue Exception => e
+        Rails.logger.error e
       end
     else
       yapi_ret = YastService.Call("YaPI::SERVICES::Read")
@@ -67,7 +59,14 @@ class Service
   # execute a service command (start, stop, ...)
   def save(cmd)
 
-    custom_service	= get_custom_services[self.name]
+    custom_service	= {}
+    begin
+      cfg = YaST::ConfigFile.new(:custom_services)
+      custom_service	= cfg[self.name] if cfg.has_key?(self.name)
+    rescue Exception => e
+      Rails.logger.error "looking for service #{self.name}: #{e}"
+      return { :stderr => e }
+    end
 
     command = ""
     command = custom_service[cmd] unless custom_service.nil?
