@@ -1,0 +1,15 @@
+
+appliance:
+  bug_url: http://www.bugs.com
+  packages:
+    - mydb-server
+    - mydb-console
+  services:
+    - mydb-daemon
+    - syslog
+  eula:
+    This is an evil eula that will
+    make you think twice before
+    clicking it
+
+  
