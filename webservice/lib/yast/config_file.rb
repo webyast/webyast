@@ -74,8 +74,12 @@ module YaST
     end
 
     # returns the xml representation if available
-    def to_xml
-      @data.to_xml
+    def to_xml(options = {})
+      @data.to_xml(options)
+    end
+
+    def to_json
+      @data.to_json
     end
     
     # resolves the file name

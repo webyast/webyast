@@ -19,5 +19,4 @@ require 'yast/settings_model'
 class VendorSetting < YaST::SettingsModel
 
   config_name :vendor
-  
 end

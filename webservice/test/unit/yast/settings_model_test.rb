@@ -38,7 +38,8 @@ class SettingsModelTest < ActiveSupport::TestCase
     assert_equal(300, MonitorSetting.width)
     assert_instance_of(Array, MonitorSetting.outputs)
 
-    setting = settings.find{ |x| x.name == "height" }
+    setting = MonitorSetting.find(:height)
+    assert_equal(100, setting.value)
 
     xml = <<DONE
 <?xml version="1.0" encoding="UTF-8"?>
@@ -48,6 +49,45 @@ class SettingsModelTest < ActiveSupport::TestCase
 </monitor-setting>
 DONE
     assert_equal(xml, setting.to_xml)
+
+    assert_equal("100", setting.to_json)
+
+xml = <<END
+<?xml version="1.0" encoding="UTF-8"?>
+<monitor-settings type="array">
+  <monitor-setting>
+    <value>vga</value>
+    <name>mode</name>
+  </monitor-setting>
+  <monitor-setting>
+    <value type="integer">100</value>
+    <name>height</name>
+  </monitor-setting>
+  <monitor-setting>
+    <value type="integer">40</value>
+    <name>frequency</name>
+  </monitor-setting>
+  <monitor-setting>
+    <value type="array">
+      <value>
+        <output>dvi</output>
+      </value>
+      <value>
+        <output>analog</output>
+      </value>
+    </value>
+    <name>outputs</name>
+  </monitor-setting>
+  <monitor-setting>
+    <value type="integer">300</value>
+    <name>width</name>
+  </monitor-setting>
+</monitor-settings>
+END
+    
+    assert_equal(xml, settings.to_xml)
+
+    #assert_equal("d", settings.to_json)
     
   end
   
