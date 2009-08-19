@@ -44,9 +44,4 @@ class ServicesControllerTest < ActionController::TestCase
     assert_equal mime.to_s, @response.content_type
   end
 
-  test "access show" do
-    get :show, :id =>"cron"
-    assert_response :success
-  end
-
 end
