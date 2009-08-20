@@ -1,25 +1,22 @@
-# To change this template, choose Tools | Templates
-# and open the template in the editor.
+require File.expand_path(File.dirname(__FILE__) + "/../test_helper")
 
-$:.unshift File.join(File.dirname(__FILE__),'..','lib')
+class BasesystemTest < ActiveSupport::TestCase
 
-require 'test/unit'
-require 'basesystem'
-
-class BasesystemTest < Test::Unit::TestCase
-  
   def setup
-    fh = File.new(Basesystem.STEPS_FILE, "r")
-    @test_steps = fh.lines.collect { |l| chomp l}.delete_if{|l| length l == 0}
+    fh = File.new(Basesystem.steps_file, "r")
+    @test_steps = fh.lines.collect { |l| l.chomp}.delete_if{|l| l.length == 0}
     fh.close
     @basesystem = Basesystem.find
   end
   
   def teardown
-    File.delete(Basesystem.CURRENT_STEP_FILE)
+    if File.exists?(Basesystem.current_step_file)
+      File.delete(Basesystem.current_step_file)
+    end
   end
   
   def test_steps
+    @basesystem = Basesystem.find
     assert_equal(@test_steps, @basesystem.steps)
   end
 
@@ -28,17 +25,17 @@ class BasesystemTest < Test::Unit::TestCase
   end
 
   def test_save
-    @basesystem.current = @test_steps[0]
+    @basesystem.current = Basesystem.end_string
     @basesystem.save
     @basesystem = Basesystem.find
-    assert_equal((@test_steps[1] or END_STRING), @basesystem.current)
+    assert_equal(Basesystem.end_string, @basesystem.current)
     # test for save fail on invalid current step
     @basesystem.current = "ridiculous"
-    assert(false, @basesystem.save)
+    assert !@basesystem.save
   end
 
   def test_corrupted_current
-    fh = File.new(Basesystem.CURRENT_STEP_FILE)
+    fh = File.new(Basesystem.current_step_file, "w")
     fh << "ridiculous"
     fh.close
     @basesystem = Basesystem.find
