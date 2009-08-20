@@ -52,6 +52,15 @@ class Systemtime
     return @@timezones
   end
 
+  def Systemtime.create_from_xml(xmlroot)
+    systemtime = Systemtime.new
+    systemtime.time = xmlroot[:time]
+    systemtime.date = xmlroot[:date]
+    systemtime.timezone = xmlroot[:timezone]
+    systemtime.utcstatus = xmlroot[:utcstatus]
+    return systemtime
+  end
+
   def initialize     
   end
 
