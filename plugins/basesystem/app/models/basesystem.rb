@@ -72,7 +72,13 @@ class Basesystem
     xml.instruct! unless options[:skip_instruct]
 
     xml.basesystem do
-      xml.tag!(:current, @current)
+      xml.current  @current
+      xml.steps({:type => "array"}) do
+        @steps.each do
+          |step|
+          xml.step step
+        end
+      end
     end
   end
 
