@@ -23,6 +23,10 @@ Source1:        org.opensuse.yast.system.services.policy
 BuildRoot:      %{_tmppath}/%{name}-%{version}-build
 BuildArch:      noarch
 
+# YaPI/SERVICES.pm
+Requires:       yast2 >= 2.17.10.1
+
+
 #
 %define pkg_user yastws
 %define plugin_name services

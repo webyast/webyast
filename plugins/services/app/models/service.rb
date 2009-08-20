@@ -21,7 +21,6 @@ class Service
         cfg.each do |name, s|
 	  service	= Service.new
 	  service.name	= name
-	  # TODO read the service status?
 	  Rails.logger.debug "custom service: #{service.inspect}"
           services << service
         end
@@ -29,15 +28,16 @@ class Service
         Rails.logger.error e
       end
     else
-      yapi_ret = YastService.Call("YaPI::SERVICES::Read")
+      rl = `runlevel`.split(" ").last
+      yapi_ret = YastService.Call("YaPI::SERVICES::Read", rl == "S" ? -1 : rl.to_i)
 
       if yapi_ret.nil?
         raise "Can't get services list"
       else
         yapi_ret.each do |s|
 	  service	= Service.new
-	  service.name	= s["name"]
-#	  service.status= s["status"] read on demand, this takes much time
+	  service.name	= s
+	  # read status on demand, it takes much time
 	  Rails.logger.debug "service: #{service.inspect}"
 	  services << service
         end
