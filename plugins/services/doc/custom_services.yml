@@ -1,0 +1,24 @@
+# This is an example of how could the configuration file for custom services
+# look like.
+#
+# It is a map of type
+#
+# service name:
+#	description: Enhanced description of the service
+#	start: path to application that should start the service
+#	stop: path to application that should stop the service
+#	status: path to application that should query the service status
+#
+# The file needs to be located under /etc/YaST2/.
+# ------------------------------------------------------------------------------
+#
+# The list of services that could be operated by webYaST services module.
+# Add only name of service if there is /etc/init.d/<service-name> available.
+# Otherwise, provide also service description and paths to start, stop and
+# status scripts.
+
+collectd:
+  description: Statistics Collection Daemon for filling RRD Files
+  start: "/usr/sbin/rccollectd start"
+  stop: "/usr/sbin/rccollectd stop"
+  status: "/usr/sbin/rccollectd status"
