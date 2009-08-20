@@ -18,69 +18,46 @@ class Basesystem
   #Gets instance of Basesystem with initialized steps queue.
   def initialize
     @steps = Array.new
-    @current = nil
     #load steps configuration    
     fh = File.new(STEPS_FILE, "r")
-    # file => read lines => remove line separators => only non-blank
-    fh.lines.collect { |line| chomp line }.delete_if { |line| length line == 0 }
+    while (line = fh.gets)
+      steps.push(line.chomp)
+    end
     fh.close
-  end
-
-  def current_step_valid?
-    if @steps.include?(@current) or @current == END_STRING
-      :true
-    else
-      Rails.logger.warn "invalid step in current"
-      :false
-    end
-  end
-
-  def restart_setup
-    Rails.logger.warn "Restarting basic system setup"
-    # allow empty list of setup steps
-    @current = @steps[0] or END_STRING
-  end
-
-  def load_current_step
-    if File.exist?(CURRENT_STEP_FILE)
-      fh = File.new(CURRENT_STEP_FILE,"r")
-      @current = fh.gets
-      fh.close
-    else
-      @current = nil
-    end
-  end
-
-  def save_current_step
-    fh = File.new(CURRENT_STEP_FILE, "w")
-    fh << @current
-    fh.close
-  end
-
-  def next_step
-    if current_step_valid?
-      @current = @steps[@steps.index(@current)+1] or END_STRING
-    end
   end
 
   #Gets instance of Basesystem with initialized steps queue and current step
   def Basesystem.find
-    base = Basesystem.new
-    base.load_current_step
-    unless base.current_step_valid?
-      base.restart_setup
+    ret = Basesystem.new        
+    unless File.exist?(CURRENT_STEP_FILE)
+      ret.current = ret.steps.empty? ? END_STRING : ret.steps[0]
+    else
+      fh = File.new(CURRENT_STEP_FILE,"r")
+      ret.current = fh.gets.chomp
+      fh.close
+      if ret.steps.include?(ret.current) #invalid step
+        Rails.logger.warn "invalid step in current"
+        ret.current = END_STRING
+      end
     end
-    base
+    Rails.logger.info "Current step is set to #{ret.current}"
+    return ret
+  end
+
+  def finish
+    @current = END_STRING
   end
 
   #stores to system Basesystem settings
-  #goes to the next step
-  def step_completed
-    unless current_step_valid?
+  def save
+    #check if current is valid
+    unless @steps.include?(@current) or @current == END_STRING
+      #invalid current value
       return false
     end
-    next_step
-    save_current_step
+    cur = File.new(CURRENT_STEP_FILE, "w")
+    cur.puts @current
+    cur.close
   end
 
   #serialize part of Basesystem to xml
@@ -89,10 +66,11 @@ class Basesystem
     xml.instruct! unless options[:skip_instruct]
 
     xml.basesystem do
-      xml.current_step @current
-      xml.setup_steps({:type => "array"}) do
-        @steps.each do |step|
-          xml.setup_step step
+      xml.current  @current
+      xml.steps({:type => "array"}) do
+        @steps.each do
+          |step|
+          xml.step step
         end
       end
     end
@@ -104,3 +82,4 @@ class Basesystem
     return hash.to_json
   end
 end
+

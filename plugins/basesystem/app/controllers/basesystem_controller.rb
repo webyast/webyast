@@ -11,9 +11,9 @@ class BasesystemController < ApplicationController
 
    def update
      @basesystem = Basesystem.find
-     @basesystem.current = params[:basesystem][:current]
+     @basesystem.finish
      @basesystem.save
-     render :index
+     render :show
    end
 
    def create
