@@ -33,9 +33,9 @@ class Basesystem
       ret.current = ret.steps.empty? ? END_STRING : ret.steps[0]
     else
       fh = File.new(CURRENT_STEP_FILE,"r")
-      ret.current = fh.gets
+      ret.current = fh.gets.chomp
       fh.close
-      if ret.steps.include(ret.current) #invalid step
+      if ret.steps.include?(ret.current) #invalid step
         Rails.logger.warn "invalid step in current"
         ret.current = END_STRING
       end
@@ -45,12 +45,9 @@ class Basesystem
   end
 
   def next_step (current)
-    if (current != @current) #concurent modification
-      return
-    end
 
     index = @steps.index current
-    if index == (@steps.size -1)
+    if index == @steps.size() -1
       @current = END_STRING
     else
       @current = @steps[index+1]

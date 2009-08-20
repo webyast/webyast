@@ -13,7 +13,7 @@ class BasesystemController < ApplicationController
      @basesystem = Basesystem.find
      @basesystem.next_step params[:basesystem][:current]
      @basesystem.save
-     render :index
+     render :show
    end
 
    def create
