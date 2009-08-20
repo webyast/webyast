@@ -44,14 +44,8 @@ class Basesystem
     return ret
   end
 
-  def next_step (current)
-
-    index = @steps.index current
-    if index == @steps.size() -1
-      @current = END_STRING
-    else
-      @current = @steps[index+1]
-    end
+  def finish
+    @current = END_STRING
   end
 
   #stores to system Basesystem settings
