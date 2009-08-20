@@ -17,7 +17,7 @@ class SystemtimesControllerTest < ActionController::TestCase
   def setup
     @model_class = Systemtime
 
-    Systemtime.stubs(:find).returns([Systemtime.new, Systemtime.new])
+    Systemtime.stubs(:find).returns(Systemtime.new)
     
     @controller = SystemtimesController.new
     @request = ActionController::TestRequest.new
@@ -29,24 +29,24 @@ class SystemtimesControllerTest < ActionController::TestCase
   include PluginBasicTests
   
   def test_update
-    Systemtime.any_instance.stubs(:save)
+    mock_save
     put :update, DATA
-    check_update_result
+    assert_response :success
   end
 
   def test_create
-    Systemtime.any_instance.stubs(:save)
+    mock_save
     put :create, DATA
-    check_update_result
+    assert_response :success
   end
 
-  def check_update_result
-    assert_response :success
-    time = assigns(:systemtime)
-    assert time
-    assert_equal DATA[:time][:timezone], time.timezone
-    assert_equal DATA[:time][:utcstatus], time.utcstatus
-    assert_nil time.date
-    assert_nil time.time
+  def mock_save
+    YastService.stubs(:Call).with {
+      |params,settings|
+      params == "YaPI::TIME::Write" and
+        settings[:timezone] == DATA[:time][:timezone] and
+        settings[:utcstatus] == DATA[:time][:utcstatus] and
+        ! settings.include?(:currenttime)
+    }
   end
 end
