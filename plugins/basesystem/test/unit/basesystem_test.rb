@@ -31,7 +31,7 @@ class BasesystemTest < Test::Unit::TestCase
     @basesystem.current = @test_steps[0]
     @basesystem.save
     @basesystem = Basesystem.find
-    assert_equal(@test_steps[0], @basesystem.current)
+    assert_equal((@test_steps[1] or END_STRING), @basesystem.current)
     # test for save fail on invalid current step
     @basesystem.current = "ridiculous"
     assert(false, @basesystem.save)
