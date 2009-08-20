@@ -44,6 +44,19 @@ class Basesystem
     return ret
   end
 
+  def next_step (current)
+    if (current != @current) #concurent modification
+      return
+    end
+
+    index = @steps.index current
+    if index == (@steps.size -1)
+      @current = END_STRING
+    else
+      @current = @steps[index+1]
+    end
+  end
+
   #stores to system Basesystem settings
   def save
     #check if current is valid
