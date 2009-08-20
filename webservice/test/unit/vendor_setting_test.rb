@@ -2,7 +2,7 @@ require File.dirname(__FILE__) + '/../test_helper'
 require 'vendor_setting'
 
 def test_data(name)
-  File.join(File.dirname(__FILE__), "data", name)
+  File.join(File.dirname(__FILE__), 'yast', 'data', name)
 end
 
 # example config file
