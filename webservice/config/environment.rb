@@ -20,7 +20,11 @@ init = Rails::Initializer.run do |config|
   # you must remove the Active Record framework.
   # config.frameworks -= [ :active_record, :active_resource, :action_mailer ]
 
-  config.gem 'test-unit', :lib => 'test/unit'
+  config.gem 'test-unit', :lib => 'test/unit'  if ENV['RAILS_ENV'] == 'test' or
+    # FIXME: 'rake test' in plugins sets test mode too late, script/server sets both variables
+    # to 'development' so this should not be set in real development mode
+    (RAILS_ENV == 'development' and ENV['RAILS_ENV'].nil?)
+
 
   # Specify gems that this application depends on. 
   # They can then be installed with "rake gems:install" on new installations.
