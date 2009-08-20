@@ -52,6 +52,15 @@ class Systemtime
     return @@timezones
   end
 
+  def Systemtime.create_from_xml(xmlroot)
+    systemtime = Systemtime.new
+    systemtime.time = xmlroot[:time]
+    systemtime.date = xmlroot[:date]
+    systemtime.timezone = xmlroot[:timezone]
+    systemtime.utcstatus = xmlroot[:utcstatus]
+    return systemtime
+  end
+
   def initialize     
   end
 
@@ -69,17 +78,17 @@ class Systemtime
   def save
     settings = {}
     if @timezone and !@timezone.empty?
-      settings["timezone"] = @timezone
+      settings[:timezone] = @timezone
     end
     if @utcstatus and !@utcstatus.empty?
-      settings["utcstatus"] = @utcstatus
+      settings[:utcstatus] = @utcstatus
     end
     need_rescue = false
     if (@date and !@date.empty?) and
         (@time and !@time.empty?)
       date = @date.split("/")
       datetime = "#{date[2]}-#{date[0]}-#{date[1]} - "+@time
-      settings["currenttime"] = datetime
+      settings[:currenttime] = datetime
       need_rescue = true
     end
     begin

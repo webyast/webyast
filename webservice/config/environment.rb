@@ -20,7 +20,11 @@ init = Rails::Initializer.run do |config|
   # you must remove the Active Record framework.
   # config.frameworks -= [ :active_record, :active_resource, :action_mailer ]
 
-  config.gem 'test-unit', :lib => 'test/unit'
+  config.gem 'test-unit', :lib => 'test/unit'  if ENV['RAILS_ENV'] == 'test' or
+    # FIXME: 'rake test' in plugins sets test mode too late, script/server sets both variables
+    # to 'development' so this should not be set in real development mode
+    (RAILS_ENV == 'development' and ENV['RAILS_ENV'].nil?)
+
 
   # Specify gems that this application depends on. 
   # They can then be installed with "rake gems:install" on new installations.
@@ -66,6 +70,10 @@ init = Rails::Initializer.run do |config|
 
   # Activate observers that should always be running
   # config.active_record.observers = :cacher, :garbage_collector
+
+  # reload all plugins, changes in *.rb files take effect immediately
+  # it's here because of https://rails.lighthouseapp.com/projects/8994/tickets/2324-configreload_plugins-true-only-works-in-environmentrb
+  config.reload_plugins = true if ENV['RAILS_ENV'] == 'development'
 
   # In order to prevent unloading of AuthenticatedSystem
   config.load_once_paths += %W( #{RAILS_ROOT}/lib )

@@ -42,23 +42,17 @@
 #     end
 
 module PluginBasicTests
-  def test_access_index
-    #mock model to test only controller
-    @model_class.any_instance.stubs(:find)
-    get :show
-    assert_response :success
-  end
 
   def test_access_denied
     #mock model to test only controller
-    @model_class.any_instance.stubs(:find)
+    @model_class.stubs(:find)
     @controller.stubs(:permission_check).returns(false);
     get :show
     assert_response :forbidden
   end
 
   def test_access_show_xml
-    @model_class.any_instance.stubs(:find)
+    @model_class.stubs(:find)
     mime = Mime::XML
     @request.accept = mime.to_s
     get :show, :format => :xml
@@ -66,7 +60,7 @@ module PluginBasicTests
   end
 
   def test_access_show_json
-    @model_class.any_instance.stubs(:find)
+    @model_class.stubs(:find)
     mime = Mime::JSON
     @request.accept = mime.to_s
     get :show, :format => :json
@@ -74,14 +68,14 @@ module PluginBasicTests
   end
 
   def test_update_noparams
-    @model_class.any_instance.stubs(:save)
+    @model_class.stubs(:save)
     put :update
     assert_response :missing
   end
 
   def test_update_noperm
     #ensure that nothing is saved
-    @model_class.any_instance.expects(:save).never
+    @model_class.expects(:save).never
 
     @controller.stubs(:permission_check).returns(false);
 
