@@ -24,7 +24,7 @@ BuildRoot:      %{_tmppath}/%{name}-%{version}-build
 BuildArch:      noarch
 
 # YaPI/SERVICES.pm
-Requires:       yast2 >= 2.17.10.1
+Requires:       yast2 >= 2.17.10.2
 
 
 #
