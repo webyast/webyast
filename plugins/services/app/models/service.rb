@@ -5,7 +5,7 @@ require 'yast/config_file'
 class Service
   
   attr_accessor :name
-  attr_accessor_with_default :status, 0
+  attr_accessor :status
 
   def initialize(name)
     @name = name
@@ -15,11 +15,17 @@ class Service
   def self.find_all(params)
 
     services	= []
+    read_status	= params.has_key?("read_status") 
+
     if params.has_key?("custom")
       begin
         cfg = YaST::ConfigFile.new(:custom_services)
         cfg.each do |name, s|
 	  service	= Service.new(name)
+	  if read_status and s.has_key?("status")
+	    ret = Scr.instance.execute([s["status"]])
+	    service.status = ret[:exit]
+	  end
 	  Rails.logger.debug "custom service: #{service.inspect}"
           services << service
         end
@@ -28,14 +34,18 @@ class Service
       end
     else
       rl = `runlevel`.split(" ").last
-      yapi_ret = YastService.Call("YaPI::SERVICES::Read", rl == "S" ? -1 : rl.to_i)
+      params	= {
+	  "runlevel"	=> [ "i", rl == "S" ? -1 : rl.to_i ],
+	  "read_status"	=> [ "b", read_status]
+      }
+      yapi_ret = YastService.Call("YaPI::SERVICES::Read", params)
 
       if yapi_ret.nil?
         raise "Can't get services list"
       else
         yapi_ret.each do |s|
-	  service	= Service.new(s)
-	  # read status on demand, it takes much time
+	  service	= Service.new(s["name"])
+	  service.status= s["status"] if s.has_key?("status")
 	  Rails.logger.debug "service: #{service.inspect}"
 	  services << service
         end
@@ -62,7 +72,7 @@ class Service
       return { :stderr => e }
     end
 
-    if custom_service.blank?
+    if custom_service.blank? or not custom_service.has_key?(cmd)
 	Rails.logger.debug "no custom command found, calling YaPI..."
 	ret = YastService.Call("YaPI::SERVICES::Execute", self.name, cmd)
     else
