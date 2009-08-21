@@ -17,6 +17,5 @@ require 'yast/settings_model'
 # => text
 #
 class VendorSetting < YaST::SettingsModel
-
-  config_name :vendor
+  self.config_name = :vendor
 end

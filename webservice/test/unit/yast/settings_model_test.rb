@@ -6,8 +6,16 @@ def test_data(name)
   File.join(File.dirname(__FILE__), "data", name)
 end
 
-# example config file
-$config_data =<<EOF
+# example setting model
+class MonitorSetting < YaST::SettingsModel
+  self.config_name = :monitor  
+end
+
+class SettingsModelTest < ActiveSupport::TestCase
+  
+  def setup
+    # example config file
+    @config_data =<<EOF
 height: 100
 width: 300
 frequency: 40
@@ -17,20 +25,14 @@ outputs:
   - analog
 EOF
 
-# example setting model
-class MonitorSetting < YaST::SettingsModel
-  config_name :monitor  
-end
-
-class SettingsModelTest < ActiveSupport::TestCase
-  
-  def setup
-    YaST::ConfigFile.stubs(:resolve_file_name).with(:monitor).returns('/foo/monitor.yml')
-    YaST::ConfigFile.stubs(:read_file).with('/foo/monitor.yml').returns($config_data)
+    YaST::ConfigFile.stubs(:read_file).with('/etc/YaST2/monitor.yml').returns(@config_data)
   end
 
+  def teardown
+  end
+  
   def test_model
-    assert_equal('/foo/monitor.yml', MonitorSetting.path)
+    assert_equal('/etc/YaST2/monitor.yml', MonitorSetting.path)
     settings = MonitorSetting.find(:all)
     assert_equal(5, settings.size)
 

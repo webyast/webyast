@@ -19,13 +19,17 @@ class ConfigFileTest < ActiveSupport::TestCase
     assert_equal("This is an evil eula that will make you think twice before clicking it", config['appliance']['eula'])
 
     # now try to load an non-existing resource
-    assert_raise YaST::ConfigFile::NotFoundError do
-      YaST::ConfigFile.new(:whatever)
+    # this should be ok
+    config = nil
+    assert_nothing_raised do
+      config = YaST::ConfigFile.new(:whatever)
     end
+    # and the path should be pointed to the right file
+    assert_equal(test_data('config/whatever.yml'), config.path)
 
     # now try to load an non-existing file
     assert_raise YaST::ConfigFile::NotFoundError do
-      YaST::ConfigFile.new(test_data('config/whatever.yml'))
+      YaST::ConfigFile.load_file(test_data('config/whatever.yml'))
     end
 
     #assert_instance_of Hash, config

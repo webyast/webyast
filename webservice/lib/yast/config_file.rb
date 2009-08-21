@@ -42,22 +42,33 @@ module YaST
     #
     # otherwise the given path is used
     def initialize(name)
+      @data = {}
       @file_name = ConfigFile.resolve_file_name(name)
-      load_file(@file_name)
+      @loaded = false
     end
 
+    def load_if_needed
+      if not @loaded
+        load_file(@file_name)
+        @loaded = true
+      end      
+    end
+    
     # access a key in the configuration
     def [](key)
+      load_if_needed
       @data[key]
     end
 
     # modifies a key in the configuration
     def []=(key, val)
+      load_if_needed
       @data[key] = val
     end
 
     # iterate over config keys and values
     def each
+      load_if_needed
       @data.each do |key, val|
         yield(key, val)
       end
@@ -65,38 +76,40 @@ module YaST
 
     # true if configuration has a given key
     def has_key?(name)
+      load_if_needed
       @data.has_key?(name)
     end
 
     # the file path where this config is operating on
+    # note, this file may not exist at all
     def path
       @file_name
     end
 
     # returns the xml representation if available
     def to_xml(options = {})
+      load_if_needed
       @data.to_xml(options)
     end
 
     def to_json
+      load_if_needed
       @data.to_json
     end
     
-    # resolves the file name
-    # and throws NotFoundError if
-    # it can't be resolved
+    # resolves the file name or nil
+    # if it can be resolved
     def self.resolve_file_name(name)
       file_name = name
       if name.is_a?(Symbol)
         file_name = File.join(config_default_location, "#{name}.yml")
       end
-      # simple case first
-      raise NotFoundError if not File.exist?(file_name)
       file_name
     end
 
     # returns the file content
     def self.read_file(file_name)
+      raise NotFoundError if not File.exist?(file_name)
       File.open(file_name, 'r').read
     end
     
@@ -107,13 +120,13 @@ module YaST
     
     # loads data from a file and returns
     # the data
-    def self.load_file(file_name)      
+    def self.load_file(file_name)
       YAML::load(read_file(file_name))
     end
 
     # loads data from a file
     def load_file(file_name)
-      @data = ConfigFile.load_file(file_name)
+      @data.merge!(ConfigFile.load_file(file_name))
     end
     
     # access the location constant
