@@ -3,10 +3,10 @@ require 'singleton'
 class PatchesController < ApplicationController
 
    before_filter :login_required
-   
+
    # always check permissions and cache expiration
    # even if the result is already created and cached
-   before_filter :check_read_permissions, :only => :index
+   before_filter :check_read_permissions, :only => {:index, :show}
    before_filter :check_cache_status, :only => :index
 
    # cache 'index' method result
@@ -45,14 +45,16 @@ class PatchesController < ApplicationController
   def index
     # note: permission check was performed in :before_filter
     @patch_updates = Patch.find(:available)
+    if @patch_updates == -1
+      logger.error "Patch Module: PackageKit is not available."
+      render ErrorResult.error(423, 1, "PackageKit is not available. It might "+\
+                                     "be blocked by another process") and return
+    end
   end
 
   # GET /patch_updates/1
   # GET /patch_updates/1.xml
   def show
-    unless permission_check( "org.opensuse.yast.system.patches.read")
-      render ErrorResult.error(403, 1, "no permission") and return
-    end
     @patch_update = Patch.find(params[:id])
     if @patch_update.nil?
       logger.error "Patch: #{params[:id]} not found."

@@ -54,7 +54,7 @@ class Patch
       xml.tag!(:arch, @arch )
       xml.tag!(:repo, @repo )
       xml.tag!(:summary, @summary )
-    end  
+    end
   end
 
   def to_json( options = {} )
@@ -67,57 +67,55 @@ class Patch
   # Patch.find(212)
   def self.find(what)
     if what == :available
-      patch_updates = []
-      system_bus = DBus::SystemBus.instance
-      package_kit = system_bus.service("org.freedesktop.PackageKit")
-      obj = package_kit.object("/org/freedesktop/PackageKit")
-      #logger.debug obj.inspect
-      obj.introspect
-      obj_with_iface = obj["org.freedesktop.PackageKit"]
-      tid = obj_with_iface.GetTid
-      obj_tid = package_kit.object(tid[0])
-      obj_tid.introspect
-      obj_tid_with_iface = obj_tid["org.freedesktop.PackageKit.Transaction"]
-      obj_tid.default_iface = "org.freedesktop.PackageKit.Transaction"
-      
-      finished = false
-      obj_tid.on_signal("Package") do |line1,line2,line3|
-        columns = line2.split ";"
-        update = Patch.new(:resolvable_id => columns[1],
-                           :kind => line1,
-                           :name => columns[0],
-                           :arch => columns[2],
-                           :repo => columns[3],
-                           :summary => line3 )
-        patch_updates << update
-        finished = true
-      end
+      begin
+        patch_updates = []
+        system_bus = DBus::SystemBus.instance
+        package_kit = system_bus.service("org.freedesktop.PackageKit")
+        obj = package_kit.object("/org/freedesktop/PackageKit")
+        #logger.debug obj.inspect
+        obj.introspect
+        obj_with_iface = obj["org.freedesktop.PackageKit"]
+        tid = obj_with_iface.GetTid
+        obj_tid = package_kit.object(tid[0])
+        obj_tid.introspect
+        obj_tid_with_iface = obj_tid["org.freedesktop.PackageKit.Transaction"]
+        obj_tid.default_iface = "org.freedesktop.PackageKit.Transaction"
 
-      obj_tid.on_signal("Error") do |u1,u2|
-        raise PKErrorException
-      end
-      obj_tid.on_signal("Finished") do |u1,u2|
-        raise PKFinishedException
-      end
-
-      obj_tid_with_iface.GetUpdates("NONE")
-
-      unless finished
-        loop = DBus::Main.new
-        loop << system_bus
-        begin
-          loop.run
-        rescue PKErrorException
-          finished = true
-          ok = false
-        rescue PKFinishedException
-          finished = true
+        obj_tid.on_signal("Package") do |line1,line2,line3|
+          columns = line2.split ";"
+          update = Patch.new(:resolvable_id => columns[1],
+                             :kind => line1,
+                             :name => columns[0],
+                             :arch => columns[2],
+                             :repo => columns[3],
+                             :summary => line3 )
+          patch_updates << update
         end
-      end
-      
-      obj_with_iface.SuggestDaemonQuit
 
-      return patch_updates
+        obj_tid.on_signal("Error") do |u1,u2|
+          raise PKErrorException
+        end
+        obj_tid.on_signal("Finished") do |u1,u2|
+          raise PKFinishedException
+        end
+
+        obj_tid_with_iface.GetUpdates("NONE")
+
+        if patch_updates.empty?
+          loop = DBus::Main.new
+          loop << system_bus
+          begin
+            loop.run
+          rescue PKErrorException
+          rescue PKFinishedException
+          end
+        end
+
+        obj_with_iface.SuggestDaemonQuit
+        return patch_updates
+      rescue Exception #packagekit blocked?
+        return -1
+      end
     else
       # try to find by id
       self.find(:available).find { |p| p.resolvable_id.to_s == what.to_s }
@@ -144,7 +142,7 @@ class Patch
       self.install(patch)
     end
   end
-  
+
   # install an update, based on the PackageKit
   # id
   def self.package_kit_install(pkkit_id)
@@ -190,5 +188,5 @@ class Patch
     return ok
   end
 
-  
+
 end
