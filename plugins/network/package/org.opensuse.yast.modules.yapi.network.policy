@@ -5,13 +5,13 @@
 <policyconfig>
 
   <vendor>YaST Webservice Project</vendor>
-  <vendor_url>http://en.opensuse.org/YAST</vendor_url>
+  <vendor_url>http://en.opensuse.org/WebYaST</vendor_url>
 
 <!--
 Rights for network
 -->
 
-  <action id="org.opensuse.yast.system.network.read">
+  <action id="org.opensuse.yast.modules.yapi.network.read">
     <description>Reading network information</description>
     <message>Authentication is required to read network settings</message>
     <defaults>
@@ -20,9 +20,9 @@ Rights for network
     </defaults>
   </action>
 
-  <action id="org.opensuse.yast.system.network.writelimits">
-    <description>Writing limits for network information</description>
-    <message>Authentication is required to write limits for network settings</message>
+  <action id="org.opensuse.yast.modules.yapi.network.write">
+    <description>Writing network information</description>
+    <message>Authentication is required to write network settings</message>
     <defaults>
       <allow_inactive>no</allow_inactive>
       <allow_active>no</allow_active>
@@ -30,4 +30,3 @@ Rights for network
   </action>
 
 </policyconfig>
-

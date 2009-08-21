@@ -1,0 +1,2 @@
+interface: org.opensuse.yast.modules.yapi.network.interfaces
+controller: network/interfaces

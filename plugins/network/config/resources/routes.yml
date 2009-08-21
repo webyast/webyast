@@ -1,0 +1,2 @@
+interface: org.opensuse.yast.modules.yapi.network.routes
+controller: network/routes
