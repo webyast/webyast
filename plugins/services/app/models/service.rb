@@ -7,9 +7,9 @@ class Service
   attr_accessor :name
   attr_accessor_with_default :status, 0
 
-  def initialize    
+  def initialize(name)
+    @name = name
   end
-
  
   # services = Service.find_all
   def self.find_all(params)
@@ -19,8 +19,7 @@ class Service
       begin
         cfg = YaST::ConfigFile.new(:custom_services)
         cfg.each do |name, s|
-	  service	= Service.new
-	  service.name	= name
+	  service	= Service.new(name)
 	  Rails.logger.debug "custom service: #{service.inspect}"
           services << service
         end
@@ -35,8 +34,7 @@ class Service
         raise "Can't get services list"
       else
         yapi_ret.each do |s|
-	  service	= Service.new
-	  service.name	= s
+	  service	= Service.new(s)
 	  # read status on demand, it takes much time
 	  Rails.logger.debug "service: #{service.inspect}"
 	  services << service
@@ -48,33 +46,27 @@ class Service
 
   # load the status of the service
   def self.find(id)
-
     # actually we do not need to read the real status now
-    service		= Service.new
-    service.name	= id
-    service
+    Service.new(id)
   end
 
 
   # execute a service command (start, stop, ...)
   def save(cmd)
 
-    custom_service	= {}
     begin
       cfg = YaST::ConfigFile.new(:custom_services)
-      custom_service	= cfg[self.name] if cfg.has_key?(self.name)
+      custom_service = cfg[self.name]
     rescue Exception => e
       Rails.logger.error "looking for service #{self.name}: #{e}"
       return { :stderr => e }
     end
 
-    command = ""
-    command = custom_service[cmd] unless custom_service.nil?
-
-    if command.nil? or command.empty?
+    if custom_service.blank?
 	Rails.logger.debug "no custom command found, calling YaPI..."
 	ret = YastService.Call("YaPI::SERVICES::Execute", self.name, cmd)
     else
+	command = custom_service[cmd]
 	Rails.logger.debug "Service commmand #{command}"
 	ret = Scr.instance.execute([command])
     end
@@ -89,8 +81,8 @@ class Service
     xml.instruct! unless options[:skip_instruct]
     
     xml.service do
-      xml.tag!(:name, name )
-      xml.tag!(:status, status, {:type => "integer"} )
+      xml.name name
+      xml.status status, {:type => "integer"}
     end  
   end
 
