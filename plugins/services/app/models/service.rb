@@ -38,7 +38,8 @@ class Service
 	  "runlevel"	=> [ "i", rl == "S" ? -1 : rl.to_i ],
 	  "read_status"	=> [ "b", read_status]
       }
-      yapi_ret = YastService.Call("YaPI::SERVICES::Read", params)
+
+      yapi_ret = YastService.Call("YaPI::SERVICES::Read", params) rescue nil
 
       if yapi_ret.nil?
         raise "Can't get services list"
