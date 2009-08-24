@@ -10,9 +10,25 @@ class Service
   def initialize(name)
     @name = name
   end
+
+  private
+
+  # factored out because of testing
+  def self.run_runlevel
+    `runlevel`
+  end
+
+  public
+
+  def self.current_runlevel
+    rl = run_runlevel.split(" ").last
+    raise Exception.new('Non-number runlevel') if !/^[0-9]*$/.match rl
+    rl == "S" ? -1 : rl.to_i
+  end
  
   # services = Service.find_all
   def self.find_all(params)
+    params = {} if params.nil?
 
     services	= []
     read_status	= params.has_key?("read_status") 
@@ -33,9 +49,9 @@ class Service
         Rails.logger.error e
       end
     else
-      rl = `runlevel`.split(" ").last
+      rl = current_runlevel
       params	= {
-	  "runlevel"	=> [ "i", rl == "S" ? -1 : rl.to_i ],
+	  "runlevel"	=> [ "i", rl ],
 	  "read_status"	=> [ "b", read_status]
       }
 
