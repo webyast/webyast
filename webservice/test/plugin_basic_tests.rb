@@ -51,8 +51,8 @@ module PluginBasicTests
     assert_response :forbidden
   end
 
+=begin
   def test_access_show_xml
-    @model_class.stubs(:find)
     mime = Mime::XML
     @request.accept = mime.to_s
     get :show, :format => :xml
@@ -60,12 +60,12 @@ module PluginBasicTests
   end
 
   def test_access_show_json
-    @model_class.stubs(:find)
     mime = Mime::JSON
     @request.accept = mime.to_s
     get :show, :format => :json
     assert_equal mime.to_s, @response.content_type
   end
+=end
 
   def test_update_noparams
     @model_class.stubs(:save)

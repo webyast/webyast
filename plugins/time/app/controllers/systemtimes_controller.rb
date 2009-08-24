@@ -41,12 +41,12 @@ class SystemtimesController < ApplicationController
       render ErrorResult.error( 403, 1, "no permission" ) and return
     end
 
-    @systemtime = Systemtime.find
+    systemtime = Systemtime.find
 
     respond_to do |format|
-      format.html { render :xml => @systemtime.to_xml( :root => "systemtime", :dasherize => false ) }
-      format.xml { render  :xml => @systemtime.to_xml( :root => "systemtime", :dasherize => false ) }
-      format.json { render :json => @systemtime.to_json( :root => "systemtime", :dasherize => false ) }
+      format.html { render :xml => systemtime.to_xml( :root => "systemtime", :dasherize => false ) }
+      format.xml { render  :xml => systemtime.to_xml( :root => "systemtime", :dasherize => false ) }
+      format.json { render :json => systemtime.to_json( :root => "systemtime", :dasherize => false ) }
     end
 
   end
