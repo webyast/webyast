@@ -7,11 +7,12 @@ class BasesystemController < ApplicationController
 
    def show
      @basesystem = Basesystem.find
+     logger.debug @basesystem.inspect
    end
 
    def update
-     @basesystem = Basesystem.find
-     @basesystem.finish
+     @basesystem = Basesystem.new
+     @basesystem.finish = params[:finish]
      @basesystem.save
      render :show
    end
