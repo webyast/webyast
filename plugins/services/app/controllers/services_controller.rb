@@ -26,7 +26,6 @@ class ServicesController < ApplicationController
       render ErrorResult.error(404, 106, "no such service") and return
     end
 
-    ret	= {}
     begin
       ret	= @service.save(params[:execute])
     rescue Exception => e
