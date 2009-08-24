@@ -1,3 +1,4 @@
 interface: org.opensuse.yast.modules.yapi.network.hostname
+policy: org.opensuse.yast.modules.yapi.network
 controller: network/hostname
 singular: true
