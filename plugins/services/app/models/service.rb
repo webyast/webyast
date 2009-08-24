@@ -88,13 +88,17 @@ class Service
       return { :stderr => e }
     end
 
-    if custom_service.blank? or not custom_service.has_key?(cmd)
+    if custom_service.blank?
 	Rails.logger.debug "no custom command found, calling YaPI..."
 	ret = YastService.Call("YaPI::SERVICES::Execute", self.name, cmd)
     else
-	command = custom_service[cmd]
-	Rails.logger.debug "Service commmand #{command}"
-	ret = Scr.instance.execute([command])
+	if custom_service.has_key?(cmd) and !custom_service[cmd].blank?
+	    command = custom_service[cmd]
+	    Rails.logger.debug "Service commmand #{command}"
+	    ret = Scr.instance.execute([command])
+	else
+	    raise Exception.new("Missing custom command to '#{cmd}' command")
+	end
     end
 
     Rails.logger.debug "Command returns: #{ret.inspect}"

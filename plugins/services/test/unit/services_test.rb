@@ -7,6 +7,10 @@ class ServiceTest < ActiveSupport::TestCase
   def setup    
   end
 
+  def vendor_config(name)
+      File.join(File.dirname(__FILE__), 'vendor_config', name)
+  end
+
   test "read current runlevel" do
     Service.stubs(:run_runlevel).returns("N 5")
 
@@ -53,17 +57,31 @@ class ServiceTest < ActiveSupport::TestCase
     assert ret.map {|s| s.name} == ['acpid', 'dbus']
   end
 
-
   test "find custom service" do
-# TODO
+    Service.stubs(:run_runlevel).returns("N 5")
+    YaST::ConfigFile.stubs(:config_default_location).returns(vendor_config('valid'))
+
+    ret = Service.find_all({"custom" => true})
+    assert ret.map {|s| s.name} == ['vendor_service']
   end
 
-  test "check invalid custom service" do
-# TODO
+  test "missing custom service" do
+    Service.stubs(:run_runlevel).returns("N 5")
+    YaST::ConfigFile.stubs(:config_default_location).returns(vendor_config('missing'))
+    YastService.stubs(:Call).returns({})
+
+    ret = Service.find_all({"custom" => true})
+    assert ret.map {|s| s.name} == []
   end
 
-  test "missing command is custom service" do
-# TODO
+  test "missing command in custom service" do
+    YaST::ConfigFile.stubs(:config_default_location).returns(vendor_config('invalid'))
+    YastService.stubs(:Call).returns({})
+
+    s = Service.new('vendor_service')
+    assert_raise Exception do
+	s.save('status')
+    end
   end
 
   test "check missing LSB service" do
@@ -82,7 +100,18 @@ class ServiceTest < ActiveSupport::TestCase
     assert s.save('status') == ret
   end
 
+
   test "check custom service status" do
+    YaST::ConfigFile.stubs(:config_default_location).returns(vendor_config('valid'))
+
+    # do not call introspection in the Scr constructor
+    DBus::SystemBus.instance.stubs(:introspect).returns('<node><interface name="org.opensuse.yast.SCR.Methods"></interface></node>')
+
+    ret = {:exit => 0, :stderr => "", :stdout => "Checking for service collectd ..running\n"}
+    Scr.instance.stubs(:execute).with(['/usr/sbin/rccollectd status']).returns(ret)
+
+    s = Service.new('vendor_service')
+    assert s.save("status") == ret
   end
 
 
