@@ -8,11 +8,7 @@ class ServicesController < ApplicationController
       render ErrorResult.error(403, 1, "no permission") and return
     end
 
-    begin
-	@services	= Service.find_all params
-    rescue Exception => e
-	render ErrorResult.error(404, 107, "cannot read services") and return
-    end
+    @services	= Service.find_all params
   end
 
   # PUT /services/1.xml
