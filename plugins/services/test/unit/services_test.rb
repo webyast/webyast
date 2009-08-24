@@ -21,6 +21,12 @@ class ServiceTest < ActiveSupport::TestCase
     end
   end
 
+  test "test S runlevel" do
+    Service.stubs(:run_runlevel).returns("N S")
+
+    assert Service.current_runlevel == -1
+  end
+
   test "find_all nil parameter" do
     Service.stubs(:run_runlevel).returns("N 5")
     YastService.stubs(:Call).with('YaPI::SERVICES::Read', {"runlevel" => [ "i", 5 ], "read_status" => [ "b", false]}).returns([])

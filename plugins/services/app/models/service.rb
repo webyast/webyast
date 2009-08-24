@@ -22,7 +22,7 @@ class Service
 
   def self.current_runlevel
     rl = run_runlevel.split(" ").last
-    raise Exception.new('Non-number runlevel') if !/^[0-9]*$/.match rl
+    raise Exception.new('Non-number runlevel') if !/^[0-9]*$/.match rl and rl != "S"
     rl == "S" ? -1 : rl.to_i
   end
  
