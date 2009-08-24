@@ -1,6 +1,6 @@
 require 'singleton'
 
-class PatchesController < ApplicationController
+class PackagesController < ApplicationController
 
    before_filter :login_required
 
@@ -44,39 +44,22 @@ class PatchesController < ApplicationController
   # GET /patch_updates.xml
   def index
     # note: permission check was performed in :before_filter
-    @patches = Patch.find(:available)
+    @packages = Package.find(:installed)
     respond_to do |format|
-      format.html { render :xml => @patches.to_xml( :root => "patches", :dasherize => false ) }
-      format.xml { render  :xml => @patches.to_xml( :root => "patches", :dasherize => false ) }
-      format.json { render :json => @patches.to_json( :root => "patches", :dasherize => false ) }
+      format.html { render :xml => @packages.to_xml( :root => "packages", :dasherize => false ) }
+      format.xml { render  :xml => @packages.to_xml( :root => "packages", :dasherize => false ) }
+      format.json { render :json => @packages.to_json( :root => "packages", :dasherize => false ) }
     end
   end
 
   # GET /patch_updates/1
   # GET /patch_updates/1.xml
   def show
-    @patch_update = Patch.find(params[:id])
-    if @patch_update.nil?
-      logger.error "Patch: #{params[:id]} not found."
-      render ErrorResult.error(404, 1, "Patch: #{params[:id]} not found.") and return
-    end
   end
 
   # PUT /patch_updates/1
   # PUT /patch_updates/1.xml
   def update
-    unless permission_check( "org.opensuse.yast.system.patches.install")
-      render ErrorResult.error(403, 1, "no permission") and return
-    end
-    @patch_update = Patch.find(params[:id])
-    if @patch_update.nil?
-      logger.error "Patch: #{params[:id]} not found."
-      render ErrorResult.error(404, 1, "Patch: #{params[:id]} not found.") and return
-    end
-    unless @patch_update.install
-      render ErrorResult.error(404, 2, "packagekit error") and return
-    end
-    render :show
   end
 
 end

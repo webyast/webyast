@@ -1,6 +1,6 @@
-require 'policykit'
+require 'packagekit'
 
-class Package < Policykit
+class Package < PackageKitModule
 
   attr_accessor   :resolvable_id,
                   :name,

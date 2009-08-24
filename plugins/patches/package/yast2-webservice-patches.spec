@@ -20,6 +20,7 @@ Release:        0
 Summary:        YaST2 - Webservice - Patches
 Source:         www.tar.bz2
 Source1:        org.opensuse.yast.system.patches.policy
+Source2:        org.opensuse.yast.system.packages.policy
 BuildRoot:      %{_tmppath}/%{name}-%{version}-build
 BuildArch:      noarch
 
@@ -30,7 +31,7 @@ BuildArch:      noarch
 
 
 %description
-YaST2 - Webservice - REST based interface of YaST in order to handle patches.
+YaST2 - Webservice - REST based interface of YaST in order to handle patches and packages.
 Authors:
 --------
     Stefan Schubert <schubi@opensuse.org>
@@ -51,17 +52,18 @@ cp -a * $RPM_BUILD_ROOT/srv/www/%{pkg_user}/vendor/plugins/%{plugin_name}
 # Policies
 mkdir -p $RPM_BUILD_ROOT/usr/share/PolicyKit/policy
 install -m 0644 %SOURCE1 $RPM_BUILD_ROOT/usr/share/PolicyKit/policy/
+install -m 0644 %SOURCE2 $RPM_BUILD_ROOT/usr/share/PolicyKit/policy/
 
 %clean
 rm -rf $RPM_BUILD_ROOT
 
 %post
 #
-# granting all permissions for root 
+# granting all permissions for root
 #
 /etc/yastws/tools/policyKit-rights.rb --user root --action grant >& /dev/null || :
 
-%files 
+%files
 %defattr(-,root,root)
 %dir /srv/www/%{pkg_user}
 %dir /srv/www/%{pkg_user}/vendor
@@ -79,5 +81,6 @@ rm -rf $RPM_BUILD_ROOT
 /srv/www/%{pkg_user}/vendor/plugins/%{plugin_name}/config
 /srv/www/%{pkg_user}/vendor/plugins/%{plugin_name}/tasks
 %attr(644,root,root) %config /usr/share/PolicyKit/policy/org.opensuse.yast.system.%{plugin_name}.policy
+%attr(644,root,root) %config /usr/share/PolicyKit/policy/%SOURCE2
 
 %changelog

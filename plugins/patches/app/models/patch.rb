@@ -1,7 +1,4 @@
-#require "dbus"
-#require 'socket'
-#require 'thread'
-require 'policykit'
+require 'packagekit'
 
 # Used to stop DBus::Main loop
 class PKErrorException < Exception; end
@@ -9,7 +6,7 @@ class PKErrorException < Exception; end
 class PKFinishedException < Exception; end
 
 # Model for patches available via package kit
-class Patch < Policykit
+class Patch < PackageKitModule
 
   attr_accessor   :resolvable_id,
                   :kind,
@@ -17,6 +14,7 @@ class Patch < Policykit
                   :arch,
                   :repo,
                   :summary
+
   def id
     @resolvable_id
   end
@@ -41,9 +39,7 @@ class Patch < Policykit
     xml.instruct! unless options[:skip_instruct]
 
     xml.patch_update do
-      xml.tag!(:id, id )
       xml.tag!(:resolvable_id, @resolvable_id, {:type => "integer"} )
-      # Patch.find(212)
       xml.tag!(:kind, @kind )
       xml.tag!(:name, @name )
       xml.tag!(:arch, @arch )
