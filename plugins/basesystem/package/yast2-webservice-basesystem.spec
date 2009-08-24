@@ -51,6 +51,8 @@ Authors:
 #
 mkdir -p $RPM_BUILD_ROOT/srv/www/%{pkg_user}/vendor/plugins/%{plugin_name}
 cp -a * $RPM_BUILD_ROOT/srv/www/%{pkg_user}/vendor/plugins/%{plugin_name}
+#FIXME maybe location change in future
+cp $RPM_BUILD_ROOT/srv/www/%{pkg_user}/vendor/plugins/%{plugin_name}/package/basesystem.yml $RPM_BUILD_ROOT/etc/YaST2/
 
 %clean
 rm -rf $RPM_BUILD_ROOT
@@ -75,4 +77,4 @@ rm -rf $RPM_BUILD_ROOT
 /srv/www/%{pkg_user}/vendor/plugins/%{plugin_name}/tasks
 #/srv/www/%{pkg_user}/vendor/plugins/%{plugin_name}/test
 /srv/www/yastws/vendor/plugins/language/doc/README_FOR_APP
-
+%config /etc/YaST2/basesystem.yml
