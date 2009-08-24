@@ -1,6 +1,7 @@
-require "dbus"
-require 'socket'
-require 'thread'
+#require "dbus"
+#require 'socket'
+#require 'thread'
+require 'policykit'
 
 # Used to stop DBus::Main loop
 class PKErrorException < Exception; end
@@ -8,7 +9,7 @@ class PKErrorException < Exception; end
 class PKFinishedException < Exception; end
 
 # Model for patches available via package kit
-class Patch
+class Patch < Policykit
 
   attr_accessor   :resolvable_id,
                   :kind,
@@ -35,13 +36,6 @@ class Patch
       * Dir["/var/cache/zypp/solv/*/solv"].map{ |x| File.stat(x).mtime } ].max
   end
 
-  # default constructor
-  def initialize(attributes)
-    attributes.each do |key, value|
-      instance_variable_set("@#{key}", value)
-    end
-  end
-
   def to_xml( options = {} )
     xml = options[:builder] ||= Builder::XmlMarkup.new(options)
     xml.instruct! unless options[:skip_instruct]
@@ -49,6 +43,7 @@ class Patch
     xml.patch_update do
       xml.tag!(:id, id )
       xml.tag!(:resolvable_id, @resolvable_id, {:type => "integer"} )
+      # Patch.find(212)
       xml.tag!(:kind, @kind )
       xml.tag!(:name, @name )
       xml.tag!(:arch, @arch )
@@ -57,31 +52,13 @@ class Patch
     end
   end
 
-  def to_json( options = {} )
-    hash = Hash.from_xml(to_xml())
-    return hash.to_json
-  end
-
   # find patches
   # Patch.find(:available)
   # Patch.find(212)
   def self.find(what)
     if what == :available
-      begin
-        patch_updates = []
-        system_bus = DBus::SystemBus.instance
-        package_kit = system_bus.service("org.freedesktop.PackageKit")
-        obj = package_kit.object("/org/freedesktop/PackageKit")
-        #logger.debug obj.inspect
-        obj.introspect
-        obj_with_iface = obj["org.freedesktop.PackageKit"]
-        tid = obj_with_iface.GetTid
-        obj_tid = package_kit.object(tid[0])
-        obj_tid.introspect
-        obj_tid_with_iface = obj_tid["org.freedesktop.PackageKit.Transaction"]
-        obj_tid.default_iface = "org.freedesktop.PackageKit.Transaction"
-
-        obj_tid.on_signal("Package") do |line1,line2,line3|
+      patch_updates = Array.new
+      self.execute("GetUpdates", "NONE", "Package") { |line1,line2,line3|
           columns = line2.split ";"
           update = Patch.new(:resolvable_id => columns[1],
                              :kind => line1,
@@ -90,35 +67,8 @@ class Patch
                              :repo => columns[3],
                              :summary => line3 )
           patch_updates << update
-        end
-
-        obj_tid.on_signal("Error") do |u1,u2|
-          raise PKErrorException
-        end
-        obj_tid.on_signal("Finished") do |u1,u2|
-          raise PKFinishedException
-        end
-
-        obj_tid_with_iface.GetUpdates("NONE")
-
-        if patch_updates.empty?
-          loop = DBus::Main.new
-          loop << system_bus
-          begin
-            loop.run
-          rescue PKErrorException
-          rescue PKFinishedException
-          end
-        end
-
-        obj_with_iface.SuggestDaemonQuit
-        return patch_updates
-      rescue Exception #packagekit blocked?
-        return -1
-      end
-    else
-      # try to find by id
-      self.find(:available).find { |p| p.resolvable_id.to_s == what.to_s }
+        }
+      return patch_updates
     end
   end
 
