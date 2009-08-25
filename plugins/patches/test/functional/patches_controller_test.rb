@@ -48,14 +48,14 @@ class PatchesControllerTest < ActionController::TestCase
   test "access index xml" do
     mime = Mime::XML
     @request.accept = mime.to_s
-    get :index, :format => :xml
+    get :index
     assert_equal mime.to_s, @response.content_type
   end
   
   test "access index json" do
     mime = Mime::JSON
     @request.accept = mime.to_s
-    get :index, :format => :json
+    get :index
     assert_equal mime.to_s, @response.content_type
   end
 

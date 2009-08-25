@@ -1,0 +1,6 @@
+# This a valid example of vendor config
+vendor_service:
+  description: Statistics Collection Daemon for filling RRD Files
+  start: "/usr/sbin/rccollectd start"
+  stop: "/usr/sbin/rccollectd stop"
+  status: "/usr/sbin/rccollectd status"

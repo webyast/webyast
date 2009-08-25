@@ -26,7 +26,7 @@ BuildArch:      noarch
 
 #
 %define pkg_user yastws
-%define plugin_name patches
+%define plugin_name system
 #
 
 

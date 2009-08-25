@@ -4,6 +4,14 @@ class PackagesController < ApplicationController
 
    before_filter :login_required
 
+   # always check permissions and cache expiration
+   # even if the result is already created and cached
+   before_filter :check_read_permissions, :only => {:index, :show}
+   before_filter :check_cache_status, :only => :index
+
+   # cache 'index' method result
+   caches_action :index
+
   private
 
   def check_read_permissions
@@ -12,16 +20,46 @@ class PackagesController < ApplicationController
     end
   end
 
-  public
+  # check whether the cached result is still valid
+  def check_cache_status
+    cache_timestamp = Rails.cache.read('patches:timestamp')
 
-  # GET /packages
-  # GET /packages.xml
-  def index
-    # note: permission check was performed in :before_filter
-    @installed_packages = Package.find()
-    if @installed_packages == -1
-      logger.error "Package Module: DBUS Resource is not available."
-      render ErrorResult.error(423, 1, "DBUS Resource is not available.") and return
+    if cache_timestamp.nil?
+	# this is the first run, the cache is not initialized yet, just return
+	Rails.cache.write('patches:timestamp', Time.now)
+	return
+    # the cache expires after 5 minutes, repository metadata
+    # or RPM database update invalidates the cache immeditely
+    # (new patches might be applicable)
+    elsif cache_timestamp < 5.minutes.ago || cache_timestamp < Patch.mtime
+	logger.debug "#### Patch cache expired"
+	expire_action :action => :index, :format => params["format"]
+	Rails.cache.write('patches:timestamp', Time.now)
     end
   end
+
+  public
+
+  # GET /patch_updates
+  # GET /patch_updates.xml
+  def index
+    # note: permission check was performed in :before_filter
+    @packages = Package.find(:installed)
+    respond_to do |format|
+      format.html { render :xml => @packages.to_xml( :root => "packages", :dasherize => false ) }
+      format.xml { render  :xml => @packages.to_xml( :root => "packages", :dasherize => false ) }
+      format.json { render :json => @packages.to_json( :root => "packages", :dasherize => false ) }
+    end
+  end
+
+  # GET /patch_updates/1
+  # GET /patch_updates/1.xml
+  def show
+  end
+
+  # PUT /patch_updates/1
+  # PUT /patch_updates/1.xml
+  def update
+  end
+
 end

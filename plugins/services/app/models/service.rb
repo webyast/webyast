@@ -10,9 +10,25 @@ class Service
   def initialize(name)
     @name = name
   end
+
+  private
+
+  # factored out because of testing
+  def self.run_runlevel
+    `runlevel`
+  end
+
+  public
+
+  def self.current_runlevel
+    rl = run_runlevel.split(" ").last
+    raise Exception.new('Non-number runlevel') if !/^[0-9]*$/.match rl and rl != "S"
+    rl == "S" ? -1 : rl.to_i
+  end
  
   # services = Service.find_all
   def self.find_all(params)
+    params = {} if params.nil?
 
     services	= []
     read_status	= params.has_key?("read_status") 
@@ -33,9 +49,9 @@ class Service
         Rails.logger.error e
       end
     else
-      rl = `runlevel`.split(" ").last
+      rl = current_runlevel
       params	= {
-	  "runlevel"	=> [ "i", rl == "S" ? -1 : rl.to_i ],
+	  "runlevel"	=> [ "i", rl ],
 	  "read_status"	=> [ "b", read_status]
       }
       yapi_ret = YastService.Call("YaPI::SERVICES::Read", params)
@@ -72,13 +88,17 @@ class Service
       return { :stderr => e }
     end
 
-    if custom_service.blank? or not custom_service.has_key?(cmd)
+    if custom_service.blank?
 	Rails.logger.debug "no custom command found, calling YaPI..."
 	ret = YastService.Call("YaPI::SERVICES::Execute", self.name, cmd)
     else
-	command = custom_service[cmd]
-	Rails.logger.debug "Service commmand #{command}"
-	ret = Scr.instance.execute([command])
+	if custom_service.has_key?(cmd) and !custom_service[cmd].blank?
+	    command = custom_service[cmd]
+	    Rails.logger.debug "Service commmand #{command}"
+	    ret = Scr.instance.execute([command])
+	else
+	    raise Exception.new("Missing custom command to '#{cmd}' command")
+	end
     end
 
     Rails.logger.debug "Command returns: #{ret.inspect}"

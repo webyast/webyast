@@ -44,11 +44,11 @@ class PatchesController < ApplicationController
   # GET /patch_updates.xml
   def index
     # note: permission check was performed in :before_filter
-    @patch_updates = Patch.find(:available)
-    if @patch_updates == -1
-      logger.error "Patch Module: PackageKit is not available."
-      render ErrorResult.error(423, 1, "PackageKit is not available. It might "+\
-                                     "be blocked by another process") and return
+    @patches = Patch.find(:available)
+    respond_to do |format|
+      format.html { render :xml => @patches.to_xml( :root => "patches", :dasherize => false ) }
+      format.xml { render  :xml => @patches.to_xml( :root => "patches", :dasherize => false ) }
+      format.json { render :json => @patches.to_json( :root => "patches", :dasherize => false ) }
     end
   end
 
