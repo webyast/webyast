@@ -82,6 +82,7 @@ polkit-auth --user %{pkg_user} --revoke org.freedesktop.hal.power-management.reb
 /srv/www/%{pkg_user}/vendor/plugins/%{plugin_name}/uninstall.rb
 /srv/www/%{pkg_user}/vendor/plugins/%{plugin_name}/app
 /srv/www/%{pkg_user}/vendor/plugins/%{plugin_name}/config
-/srv/www/%{pkg_user}/vendor/plugins/%{plugin_name}/tasks
+#/srv/www/%{pkg_user}/vendor/plugins/%{plugin_name}/tasks
+#%attr(644,root,root) %config %{_datadir}/PolicyKit/policy/org.opensuse.yast.system.packages.policy
 
 %changelog

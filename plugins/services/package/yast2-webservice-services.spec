@@ -19,7 +19,7 @@ Version:        0.0.3
 Release:        0
 Summary:        YaST2 - Webservice - Services
 Source:         www.tar.bz2
-Source1:        org.opensuse.yast.system.services.policy
+#Source1:        org.opensuse.yast.system.services.policy
 BuildRoot:      %{_tmppath}/%{name}-%{version}-build
 BuildArch:      noarch
 
@@ -54,7 +54,7 @@ cp -a * $RPM_BUILD_ROOT/srv/www/%{pkg_user}/vendor/plugins/%{plugin_name}
 
 # Policies
 mkdir -p $RPM_BUILD_ROOT/usr/share/PolicyKit/policy
-install -m 0644 %SOURCE1 $RPM_BUILD_ROOT/usr/share/PolicyKit/policy/
+#install -m 0644 %SOURCE1 $RPM_BUILD_ROOT/usr/share/PolicyKit/policy/
 
 %clean
 rm -rf $RPM_BUILD_ROOT
@@ -81,7 +81,9 @@ rm -rf $RPM_BUILD_ROOT
 /srv/www/%{pkg_user}/vendor/plugins/%{plugin_name}/uninstall.rb
 /srv/www/%{pkg_user}/vendor/plugins/%{plugin_name}/app
 /srv/www/%{pkg_user}/vendor/plugins/%{plugin_name}/config
-/srv/www/%{pkg_user}/vendor/plugins/%{plugin_name}/lib
+#/srv/www/%{pkg_user}/vendor/plugins/%{plugin_name}/lib
 /srv/www/%{pkg_user}/vendor/plugins/%{plugin_name}/tasks
+/srv/www/%{pkg_user}/vendor/plugins/%{plugin_name}/doc/custom_services.yml
+
 #/srv/www/%{pkg_user}/vendor/plugins/%{plugin_name}/test
-%attr(644,root,root) /usr/share/PolicyKit/policy/org.opensuse.yast.system.%{plugin_name}.policy
+#%attr(644,root,root) /usr/share/PolicyKit/policy/org.opensuse.yast.system.%{plugin_name}.policy
