@@ -48,7 +48,7 @@ class Basesystem
           |step|
           xml.step do             
             xml.controller step["controller"]
-            xml.action step["action"] if step.include? "action"
+            xml.action step["action"]
           end
         end
       end
