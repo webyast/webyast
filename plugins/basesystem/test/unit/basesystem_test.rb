@@ -5,11 +5,12 @@ class BasesystemTest < ActiveSupport::TestCase
 
 YAML_CONTENT = <<EOF
 steps:
-  - systemtime
-  - language
+  - controller: systemtime
+  - controller: language
+    action: show
 EOF
 
-  TEST_STEPS = ["systemtime","language"]
+  TEST_STEPS = [{ "controller" => "systemtime"},{"controller" => "language", "action" => "show"}]
   def setup
     YaST::ConfigFile.stubs(:read_file).returns(YAML_CONTENT)
     @basesystem = Basesystem.find

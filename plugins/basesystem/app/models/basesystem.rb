@@ -46,7 +46,10 @@ class Basesystem
       xml.steps({:type => "array"}) do
         @steps.each do
           |step|
-          xml.step step
+          xml.step do             
+            xml.controller step["controller"]
+            xml.action step["action"] if step.include? "action"
+          end
         end
       end
     end
