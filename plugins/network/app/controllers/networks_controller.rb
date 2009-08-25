@@ -77,7 +77,7 @@ class NetworksController < ApplicationController
       render ErrorResult.error(404, 2, "empty parameter") and return
     end
     unless get_device params[:id]
-      render ErrorResult.error(404, 2, "user not found") and return
+      render ErrorResult.error(404, 2, "device not found") and return
     end
   end
 

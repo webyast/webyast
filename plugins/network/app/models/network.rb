@@ -21,17 +21,22 @@ class Network
 
 
   def Network.find_all()
-     ret = Scr.instance.execute(["/sbin/yast2", "lan", "list"])
-     lines = ret[:stderr].split "\n"
-     devices = []
-     lines.each do |s|   
-        dev = Network.new
-	dev.id = s.split("\t")[0]
-        dev.name = s.split("\t")[1]
-        devices << dev
-     end
-     return devices
+    ret = Network.new()
+#    ret.parse_response YastService.Call("YaPI::NETWORK::Read")
+    return YastService.Call("YaPI::NETWORK::Read")
+#    return ret
   end
+#     ret = Scr.instance.execute(["/sbin/yast2", "lan", "list"])
+#     lines = ret[:stderr].split "\n"
+#     devices = []
+#     lines.each do |s|   
+#        dev = Network.new
+#	dev.id = s.split("\t")[0]
+#        dev.name = s.split("\t")[1]
+#        devices << dev
+#     end
+#     return devices
+#  end
 
 
   def to_xml( options = {} )
