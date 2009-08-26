@@ -10,12 +10,6 @@ class PKFinishedException < Exception; end
 # Model for patches available via package kit
 class PackageKitModule
 
-  attr_accessor   :resolvable_id,
-                  :kind,
-                  :name,
-                  :arch,
-                  :repo,
-                  :summary
   def id
     @resolvable_id
   end
@@ -64,7 +58,7 @@ class PackageKitModule
     obj_tid_with_iface = obj_tid["org.freedesktop.PackageKit.Transaction"]
     obj_tid.default_iface = "org.freedesktop.PackageKit.Transaction"
 
-    obj_tid.on_signal(signal.to_s) do |line1,line2,line3| block.call(line1,line2,line3) end
+    obj_tid.on_signal(signal.to_s, &block)
 
     obj_tid.on_signal("Error") do |u1,u2|
       raise PKErrorException
@@ -81,12 +75,14 @@ class PackageKitModule
       begin
 	loop.run
       rescue PKErrorException
+        puts "PKErrorException"
       rescue PKFinishedException
+        puts "PKFinished"
       end
     end
 
-      obj_with_iface.SuggestDaemonQuit
-      return patch_updates
+    obj_with_iface.SuggestDaemonQuit
+    return patch_updates
   end
 
   # installs this
