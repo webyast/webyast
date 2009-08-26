@@ -22,7 +22,7 @@ class Hostname
   #
   # +warn+: Doesn't take any parameters.
   def Hostname.find
-    response = YastService.Call("YaPI::Network::Read") # hostname: true
+    response = YastService.Call("YaPI::NETWORK::Read") # hostname: true
     ret = Hostname.new(response["hostname"])
     return ret
   end
@@ -34,7 +34,7 @@ class Hostname
       "name" => @name,
       "domain" => @domain,
     }
-    YastService.Call("YaPI::Network::Write",{"hostname" => settings})
+    YastService.Call("YaPI::NETWORK::Write",{"hostname" => settings})
     # TODO success or not?
   end
 
