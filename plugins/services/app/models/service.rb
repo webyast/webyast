@@ -83,6 +83,9 @@ class Service
     begin
       cfg = YaST::ConfigFile.new(:custom_services)
       custom_service = cfg[self.name]
+    rescue YaST::ConfigFile::NotFoundError
+      Rails.logger.debug "No custom service defined"
+      custom_service = nil
     rescue Exception => e
       Rails.logger.error "looking for service #{self.name}: #{e}"
       return { :stderr => e }
