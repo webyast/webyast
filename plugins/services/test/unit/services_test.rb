@@ -87,17 +87,19 @@ class ServiceTest < ActiveSupport::TestCase
   test "check missing LSB service" do
     ret = {"exit" => "127", "stderr" => "", "stdout" => "sh: line 1: /etc/init.d/non_existing_service: No such file or directory\n"}
     YastService.stubs(:Call).with('YaPI::SERVICES::Execute', 'non_existing_service', 'status').returns(ret)
+    YaST::ConfigFile.stubs(:config_default_location).returns(vendor_config('missing'))
 
     s = Service.new('non_existing_service')
-    #assert s.save('status') == ret
+    assert s.save('status') == ret
   end
 
   test "check LSB service status" do
     ret = {:exit => 0}
     YastService.stubs(:Call).with('YaPI::SERVICES::Execute', 'ntp', 'status').returns(ret)
+    YaST::ConfigFile.stubs(:config_default_location).returns(vendor_config('missing'))
 
     s = Service.new('ntp')
-    #assert s.save('status') == ret
+    assert s.save('status') == ret
   end
 
 
