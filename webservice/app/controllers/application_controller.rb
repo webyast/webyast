@@ -3,7 +3,7 @@
 
 class ApplicationController < ActionController::Base
   rescue_from 'BackendException' do |exception|
-      render :xml => exception, :status => 409
+      render :xml => exception, :status => 503
   end
 
   include AuthenticatedSystem
