@@ -2,6 +2,9 @@
 # Likewise, all the methods added will be available for all controllers.
 
 class ApplicationController < ActionController::Base
+  rescue_from 'BackendException' do |exception|
+      render :xml => exception, :status => 409
+  end
 
   include AuthenticatedSystem
 

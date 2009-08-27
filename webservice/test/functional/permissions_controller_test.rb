@@ -36,7 +36,7 @@ class PermissionsControllerTest < ActionController::TestCase
     ENV['RAILS_ENV'] = "production"
     get :index
     ENV['RAILS_ENV'] = save
-    assert_response 403
+    assert_response 409
   end
 
   test "permissions access index xml" do
@@ -97,7 +97,7 @@ class PermissionsControllerTest < ActionController::TestCase
     ENV['RAILS_ENV'] = "production" # do a real permission_check
     get :show, :id => "org.opensuse.yast.system.read"
     ENV['RAILS_ENV'] = save
-    assert_response 403
+    assert_response 409
   end
 
   test "permissions access show without right" do
@@ -133,7 +133,7 @@ class PermissionsControllerTest < ActionController::TestCase
     ENV['RAILS_ENV'] = "production"
     put :update, :id=>"nobody"
     ENV['RAILS_ENV'] = save
-    assert_response 403
+    assert_response 409
   end
 
   test "setting permissions without user" do

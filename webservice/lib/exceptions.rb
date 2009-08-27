@@ -10,7 +10,7 @@ class BackendException < StandardError
   protected
   #create xml without arguments, so only error type and description
   def no_arg_to_xml(type,descr)
-    xml = Builder::XmlMarkup.new(options)
+    xml = Builder::XmlMarkup.new({})
     xml.instruct!
 
     xml.error do
@@ -29,7 +29,7 @@ class NoPermissionException < BackendException
   end
 
   def to_xml
-    xml = Builder::XmlMarkup.new(options)
+    xml = Builder::XmlMarkup.new({})
     xml.instruct!
 
     xml.error do
@@ -60,7 +60,7 @@ class PolicyKitException < BackendException
   end
 
   def to_xml
-    xml = Builder::XmlMarkup.new(options)
+    xml = Builder::XmlMarkup.new({})
     xml.instruct!
 
     xml.error do
