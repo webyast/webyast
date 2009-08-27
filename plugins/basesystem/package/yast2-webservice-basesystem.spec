@@ -27,7 +27,7 @@ Requires:       yast2-country >= 2.18.9
 
 #
 %define pkg_user yastws
-%define plugin_name language
+%define plugin_name basesystem
 #
 
 
@@ -74,7 +74,8 @@ rm -rf $RPM_BUILD_ROOT
 /srv/www/%{pkg_user}/vendor/plugins/%{plugin_name}/uninstall.rb
 /srv/www/%{pkg_user}/vendor/plugins/%{plugin_name}/app
 /srv/www/%{pkg_user}/vendor/plugins/%{plugin_name}/config
-/srv/www/%{pkg_user}/vendor/plugins/%{plugin_name}/tasks
+#/srv/www/%{pkg_user}/vendor/plugins/%{plugin_name}/tasks
 #/srv/www/%{pkg_user}/vendor/plugins/%{plugin_name}/test
-/srv/www/yastws/vendor/plugins/language/doc/README_FOR_APP
+/srv/www/%{pkg_user}/vendor/plugins/%{plugin_name}/doc/README_FOR_APP
 %config /etc/YaST2/basesystem.yml
+
