@@ -40,11 +40,36 @@ class PackagesController < ApplicationController
 
   public
 
+  def compare_lists(packages)
+    vendor_packages = Hash.new
+    # yml datei auslesen: ["packages"] => ["yast-core", "ruby-dbus", ...]
+    package_list = Array.new
+    package_list << ["yast2-users", "3ddiag", "foo"]
+
+    package_list.each {|pk_name|
+      packages.each {|p|
+        # package installed?
+        if p.name == pk_name
+          # store version and name
+          vendor_packages["package"] = {:name => "#{p.name}", :version => "#{p.version}"}
+        end
+      }
+      unless vendor_packages.has_key? pk_name
+        vendor_packages["package"] = {"#{pk_name}" => "not installed"}
+      end
+    }
+    # puts vendor_packages.inspect
+    vendor_packages
+  end
+
   # GET /patch_updates
   # GET /patch_updates.xml
   def index
     # note: permission check was performed in :before_filter
     @packages = Package.find(:installed)
+    if params[:filter] == "custom"
+      @packages = compare_lists(@packages)
+    end
     respond_to do |format|
       format.html { render :xml => @packages.to_xml( :root => "packages", :dasherize => false ) }
       format.xml { render  :xml => @packages.to_xml( :root => "packages", :dasherize => false ) }

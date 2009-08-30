@@ -76,6 +76,9 @@ class Service
     Service.new(id)
   end
 
+  def read_status
+    @status = save('status')['exit']
+  end
 
   # execute a service command (start, stop, ...)
   def save(cmd)
