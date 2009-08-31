@@ -73,7 +73,7 @@ class StatusController < ApplicationController
   # GET /status/1
   # GET /status/1.xml
   def show
-    unless true #permission_check("org.opensuse.yast.system.status.read")
+    unless permission_check("org.opensuse.yast.system.status.read")
       render ErrorResult.error(403, 1, "no permission") and return
     else
       begin
@@ -81,7 +81,6 @@ class StatusController < ApplicationController
         stop = params[:stop].blank? ? Time.now : Time.at(params[:stop].to_i)
         start = params[:start].blank? ? stop - 300 : Time.at(params[:start].to_i)
         @status.collect_data(start, stop, params[:data])
-   puts @status.data.inspect
       rescue Exception => e
         render :text => e.to_s, :status => 400    # bad request
       end
