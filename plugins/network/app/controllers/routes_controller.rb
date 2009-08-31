@@ -11,12 +11,12 @@ class RoutesController < ApplicationController
       render ErrorResult.error(403, 1, "no permission") and return
     end
     
-    root = params[:routing]
+    root = params[:routes]
     if root == nil
       render ErrorResult.error(404, 2, "format or internal error") and return
     end
     
-    @routing = Routing.new(root)
+    @routing = Route.new(root)
     @routing.save
     render :show
   end
@@ -33,12 +33,12 @@ class RoutesController < ApplicationController
       render ErrorResult.error( 403, 1, "no permission" ) and return
     end
 
-    @routes = Routes.find
+    @route = Route.find(params[:id])
 
     respond_to do |format|
-      format.html { render :xml => @routes.to_xml( :root => "routes", :dasherize => false ) }
-      format.xml { render :xml => @routes.to_xml( :root => "routes", :dasherize => false ) }
-      format.json { render :json => @routes.to_json }
+      format.html { render :xml => @route.to_xml( :root => "route", :dasherize => false ) }
+      format.xml { render :xml => @route.to_xml( :root => "route", :dasherize => false ) }
+      format.json { render :json => @route.to_json }
     end
   end
 

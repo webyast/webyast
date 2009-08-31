@@ -2,25 +2,27 @@
 # Provides set and gets resources from YaPI network module.
 # Main goal is handle YaPI specific calls and data formats. Provides cleaned
 # and well defined data.
-class Routes
+class Route
 
-  # default route
-  attr_accessor :default
+  # default gateway
+  attr_accessor :via,
+		:id
 
   private
 
   public
 
   def initialize(kwargs)
-    @default = kwargs["default"]
+    @via = kwargs["via"]
   end
 
   # fills route instance with data from YaPI.
   #
-  # +warn+: Doesn't take any parameters.
-  def Routes.find
-    response = YastService.Call("YaPI::NETWORK::Read") # hostname: true
-    ret = Routes.new(response["routes"])
+  # +warn+: YaPI implements default only.
+  def Route.find( which )
+    response = YastService.Call("YaPI::NETWORK::Read")
+    ret = Route.new(response["routes"][which])
+    ret.id = which
     return ret
   end
 
@@ -28,9 +30,9 @@ class Routes
   # so it support partial safe (e.g. save only new timezone if rest of fields is not set).
   def save
     settings = {
-      "default" => @default,
+      @id => { 'via'=>@via },
     }
-    YastService.Call("YaPI::NETWORK::Write",{"routes" => settings})
+    YastService.Call("YaPI::NETWORK::Write",{"route" => settings})
     # TODO success or not?
   end
 
@@ -38,8 +40,8 @@ class Routes
     xml = options[:builder] ||= Builder::XmlMarkup.new(options)
     xml.instruct! unless options[:skip_instruct]
 
-    xml.hostname do
-      xml.default @default
+    xml.route do
+      xml.via @via
     end
   end
 
