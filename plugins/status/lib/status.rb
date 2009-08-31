@@ -9,9 +9,8 @@ class Status
                 :health_status,
                 :metrics,
                 :limits
-#=begin
+
   def to_xml(options = {})
-#        puts @limits.inspect
     xml = options[:builder] ||= Builder::XmlMarkup.new(options)
     xml.instruct! unless options[:skip_instruct]
 
@@ -20,7 +19,7 @@ class Status
         data.each {|metric, data|
           xml.metric(:name => metric, :metricgroup => metric_group) do
           xml.starttime(@data[metric_group][metric]["starttime"])
-          xml.interval(5)
+          xml.interval(@data[metric_group][metric]["interval"])
           data.each {|label,data|
             unless label == "starttime" or label == "interval"
               xml.label(:type => "hash", :name => label) do
@@ -201,43 +200,37 @@ class Status
     end
     unless labels.blank?
       # set values for each label and time
+      # evaluates interval and starttime once for each metric (not each label)
+      nexttime = 9.9e+99
+      result["starttime"] = 9.9e+99
       lines.each do |l| # each time
         unless l.blank?
           if l =~ /\d*:\D*/
             pair = l.split ":"
             values = pair[1].split " "
-            #puts pair[1]
             column = 0
             values.each do |v| # each label
-              result["starttime"] ||= pair[0]
-              result["starttime"] = pair[0] if pair[0].to_i < result["starttime"].to_i
-              nexttime =
+              if result["interval"].nil?
+                if pair[0].to_i < result["starttime"].to_i
+                  result["starttime"] = pair[0].to_i
+                elsif pair[0].to_i < nexttime and pair[0].to_i > result["starttime"].to_i
+                  nexttime = pair[0].to_i
+                end
+              end
 
               if v != "nan" #store valid values only
                 result["#{labels[column]}"] ||= Hash.new
-#                result["#{labels[column]}"].merge!(v)
                 result["#{labels[column]}"].merge!({"#{pair[0].chomp(": ")}" => v})
-                #result["#{labels[column]}"].merge!({"T_#{pair[0].chomp(": ")}" => v})
                 column += 1
               else
                 result["#{labels[column]}"] ||= Hash.new
-#                result["#{labels[column]}"].merge!("invalid")
                 result["#{labels[column]}"].merge!({"#{pair[0].chomp(": ")}" => "invalid"})
               end
             end
           end
         end
       end
-      #setting the limits
-#      result.each do |key, value|
-#        path = rrdfile[datapath.length+1..rrdfile.length-1].chomp('.rrd')
-#        path +="/" + key if key!="value" #do not take care about the value flag
-#        path = path.tr('-','_')
-#        if @limits.has_key?(path)
-#          result[key] ||= Hash.new
-#          result[key].merge!({"limit" => @limits[path] })
-#        end
-#      end
+      result["interval"] = nexttime.to_i - result["starttime"].to_i if result["interval"].nil?
       return result
     else
       raise "error reading data from rrdtool"

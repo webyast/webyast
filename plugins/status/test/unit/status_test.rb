@@ -115,7 +115,8 @@ EOF
    "1248092930"=>"2.5092857143e+01",
    "1248092160"=>"invalid",
    "1248092370"=>"4.7314285714e+01"},
-   "starttime"=>"1248092090"}
+ "interval"=>70,
+ "starttime"=>1248092090}
 
     assert_equal expected_response, status.fetch_metric("/var/lib/collectd/test/memory-free.rrd", start, stop)
   end
