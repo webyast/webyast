@@ -38,29 +38,31 @@ class PackagesController < ApplicationController
     end
   end
 
-  public
-
   def compare_lists(packages)
-    vendor_packages = Hash.new
-    # yml datei auslesen: ["packages"] => ["yast-core", "ruby-dbus", ...]
-    package_list = Array.new
-    package_list << ["yast2-users", "3ddiag", "foo"]
+    vendor_packages = Array.new
+    #TODO: replace by real yml file
+    package_list = ["3ddiag", "foo", "yast2-users", "yast2-network"]
 
     package_list.each {|pk_name|
-      packages.each {|p|
+      p = nil
+      for i in 0..packages.size-1
         # package installed?
-        if p.name == pk_name
-          # store version and name
-          vendor_packages["package"] = {:name => "#{p.name}", :version => "#{p.version}"}
+        if pk_name == packages[i].name
+          # store package
+          p = packages[i]
+          break
         end
-      }
-      unless vendor_packages.has_key? pk_name
-        vendor_packages["package"] = {"#{pk_name}" => "not installed"}
+      end
+      if p
+        vendor_packages << p
+      else
+        vendor_packages << Package.new(:resolvable_id => 0, :name => pk_name, :version => "not_installed")
       end
     }
-    # puts vendor_packages.inspect
     vendor_packages
   end
+
+  public
 
   # GET /patch_updates
   # GET /patch_updates.xml

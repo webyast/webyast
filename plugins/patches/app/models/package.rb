@@ -6,13 +6,6 @@ class Package < PackageKitModule
                   :name,
                   :version
 
-=begin
-  def initialize(attributes)
-    attributes.each do |key, value|
-      instance_variable_set("@#{key}", value)
-    end
-  end
-=end
   def to_xml( options = {} )
     xml = options[:builder] ||= Builder::XmlMarkup.new(options)
     xml.instruct! unless options[:skip_instruct]
