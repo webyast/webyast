@@ -1,3 +1,4 @@
 interface: org.opensuse.yast.modules.yapi.network.routes
 policy: org.opensuse.yast.modules.yapi.network
 controller: network/routes
+singular: true
