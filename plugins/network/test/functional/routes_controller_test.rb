@@ -1,7 +1,7 @@
 require File.expand_path(File.dirname(__FILE__) + "/../test_helper")
 require 'test/unit'
 require 'rubygems'
-require 'hostname'
+require 'route'
 require "scr"
 require 'mocha'
 require File.expand_path( File.join("test","plugin_basic_tests"), RailsParent.parent )
@@ -13,8 +13,10 @@ class RoutesControllerTest < Test::Unit::TestCase
  # to extract routes data from all YaPI map
  #
  def test_show
-    Routes.expects(:find).returns({:routes=>{:default=>'10.20.30.40'}})
-    Routes.find
+    # if this code raises, test-unit 2.0.3 and mocha 0.9.5 fail
+    # with PASSTHROUGH_EXCEPTIONS. version mismatch?!
+    Route.expects(:find).returns({:routes=>{:default=>{'via'=>'10.20.30.40'}}})
+    Route.find
  end
 
 end
