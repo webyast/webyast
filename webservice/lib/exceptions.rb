@@ -68,7 +68,7 @@ class PolicyKitException < BackendException
       xml.description message
       xml.polkitout @message
       xml.user @user
-      xml.permission = @permission
+      xml.permission @permission
     end
   end
 end
