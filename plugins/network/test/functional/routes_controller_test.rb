@@ -1,23 +1,23 @@
 require File.expand_path(File.dirname(__FILE__) + "/../test_helper")
 require 'test/unit'
-require 'rubygems'
 require 'route'
-require "scr"
+require 'rubygems'
 require 'mocha'
 require File.expand_path( File.join("test","plugin_basic_tests"), RailsParent.parent )
 
-class RoutesControllerTest < Test::Unit::TestCase
+class RoutesControllerTest < ActionController::TestCase
 
- # this is test only for mocked data - not very useful
- # we need to extend it to test both model and controller
- # to extract routes data from all YaPI map
- #
- def test_show
-    # if this code raises, test-unit 2.0.3 and mocha 0.9.5 fail
-    # with PASSTHROUGH_EXCEPTIONS. version mismatch?!
-    Route.expects(:find).returns({:routes=>{:default=>{'via'=>'10.20.30.40'}}})
-    Route.find
- end
+  def setup
+    @model_class = Route
+    Route.stubs(:find).returns(Route.new({"via" => "42.42.42.42"}))
+    @controller = Network::RoutesController.new
+    @request = ActionController::TestRequest.new
+    # http://railsforum.com/viewtopic.php?id=1719
+    @request.session[:account_id] = 1 # defined in fixtures
+  end  
+
+  # some cases fail because PluginBasicTests expects a singular controller
+  #include PluginBasicTests
 
 end
 
