@@ -1,21 +1,22 @@
 require File.expand_path(File.dirname(__FILE__) + "/../test_helper")
 require 'test/unit'
-require 'rubygems'
 require 'hostname'
-require "scr"
+require 'rubygems'
 require 'mocha'
 require File.expand_path( File.join("test","plugin_basic_tests"), RailsParent.parent )
 
-class HostnameControllerTest < Test::Unit::TestCase
+class HostnameControllerTest < ActionController::TestCase
 
- # this is test only for mocked data - not very useful
- # we need to extend it to test both model and controller
- # to extract hostname data from all YaPI map
- #
- def test_show
-    Hostname.expects(:find).returns({:name=>'linux', :domain=>'suse.cz'})
-    Hostname.find
- end
+  def setup
+    @model_class = Hostname
+    Hostname.stubs(:find).returns(Hostname.new({"name" => "BAD", "domain" => "DOMAIN"}))
+    @controller = Network::HostnameController.new
+    @request = ActionController::TestRequest.new
+    # http://railsforum.com/viewtopic.php?id=1719
+    @request.session[:account_id] = 1 # defined in fixtures
+  end  
+
+  include PluginBasicTests
 
 end
 

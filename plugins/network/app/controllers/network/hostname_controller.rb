@@ -1,7 +1,8 @@
 # = Hostname controller
 # Provides access to hostname settings for authenticated users.
 # Main goal is checking permissions.
-class HostnameController < ApplicationController
+
+class Network::HostnameController < ApplicationController
 
   before_filter :login_required
 
