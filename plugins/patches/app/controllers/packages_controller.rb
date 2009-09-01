@@ -44,21 +44,11 @@ class PackagesController < ApplicationController
     package_list = ["3ddiag", "foo", "yast2-users", "yast2-network"]
 
     package_list.each {|pk_name|
-      p = nil
-      for i in 0..packages.size-1
-        # package installed?
-        if pk_name == packages[i].name
-          # store package
-          p = packages[i]
-          break
-        end
-      end
-      if p
-        vendor_packages << p
-      else
-        vendor_packages << Package.new(:resolvable_id => 0, :name => pk_name, :version => "not_installed")
-      end
+      p = packages.find { |pkg| pk_name == pkg.name }
+      p ||= Package.new(:resolvable_id => 0, :name => pk_name, :version => "not_installed")
+      vendor_packages << p
     }
+
     vendor_packages
   end
 
