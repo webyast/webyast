@@ -8,7 +8,11 @@ class ServicesController < ApplicationController
       render ErrorResult.error(403, 1, "no permission") and return
     end
 
-    @services	= Service.find_all params
+    begin
+	@services	= Service.find_all params
+    rescue Exception => e
+	render ErrorResult.error(404, 107, e.to_s) and return
+    end
   end
 
   # GET /services/service_name
@@ -20,7 +24,12 @@ class ServicesController < ApplicationController
     end
 
     @service = Service.new(params[:id])
-    @service.read_status
+
+    begin
+	@service.read_status
+    rescue Exception => e
+	render ErrorResult.error(404, 108, e.to_s) and return
+    end
 
     respond_to do |format|
 	format.html { render :xml => @service.to_xml(:root => 'service', :dasherize => false), :location => "none" } #return xml only
