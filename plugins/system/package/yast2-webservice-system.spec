@@ -1,5 +1,5 @@
 #
-# spec file for package yast2-webservice-patches (Version 0.1)
+# spec file for package yast2-webservice-system
 #
 # Copyright (c) 2008 SUSE LINUX Products GmbH, Nuernberg, Germany.
 # This file and all modifications and additions to the pristine
@@ -26,7 +26,7 @@ BuildArch:      noarch
 
 #
 %define pkg_user yastws
-%define plugin_name patches
+%define plugin_name system
 #
 
 
@@ -56,10 +56,10 @@ rm -rf $RPM_BUILD_ROOT
 
 %post
 # granting all permissions for the web user
-polkit-auth --user %{pkg_user} --grant org.freedesktop.hal.power-management.shutdown
-polkit-auth --user %{pkg_user} --grant org.freedesktop.hal.power-management.shutdown-multiple-sessions
-polkit-auth --user %{pkg_user} --grant org.freedesktop.hal.power-management.reboot
-polkit-auth --user %{pkg_user} --grant org.freedesktop.hal.power-management.reboot-multiple-sessions
+polkit-auth --user %{pkg_user} --grant org.freedesktop.hal.power-management.shutdown ||:
+polkit-auth --user %{pkg_user} --grant org.freedesktop.hal.power-management.shutdown-multiple-sessions ||:
+polkit-auth --user %{pkg_user} --grant org.freedesktop.hal.power-management.reboot ||:
+polkit-auth --user %{pkg_user} --grant org.freedesktop.hal.power-management.reboot-multiple-sessions ||:
 
 %postun
 # discard all configured permissions for the web user
@@ -82,6 +82,7 @@ polkit-auth --user %{pkg_user} --revoke org.freedesktop.hal.power-management.reb
 /srv/www/%{pkg_user}/vendor/plugins/%{plugin_name}/uninstall.rb
 /srv/www/%{pkg_user}/vendor/plugins/%{plugin_name}/app
 /srv/www/%{pkg_user}/vendor/plugins/%{plugin_name}/config
-/srv/www/%{pkg_user}/vendor/plugins/%{plugin_name}/tasks
+#/srv/www/%{pkg_user}/vendor/plugins/%{plugin_name}/tasks
+#%attr(644,root,root) %config %{_datadir}/PolicyKit/policy/org.opensuse.yast.system.packages.policy
 
 %changelog

@@ -11,68 +11,97 @@ module YaST
   # find the configuration
   class SettingsModel
 
+    class << self
+      attr_accessor :config
+    end
+
+    def self.config_name
+    end
+
+    def self.config_name=(name)
+      self.config = YaST::ConfigFile.new(name)
+    end
+    
     # initialize a model instance
-    def initialize(name, value)
-      SettingsModel.init
+    def initialize(name)
       @name = name
-      @value = value
     end
 
     def self.path
-      SettingsModel.init
-      @@config.path
+      self.config.path
     end
     
     # find instances of the model
     def self.find(what)
-      SettingsModel.init
       ret = nil
-      if what == :all
-        ret = []
-        @@config.each do |key,val|
-          ret << self.new(key, val)
-        end  
+      ret = case what
+        when :all then find_all
+        else find_one(what)
+      end
+    end
+
+    def self.find_all
+      ret = []
+      return ret if self.config.nil?
+      self.config.each do |key,val|
+        ret << self.new(key)
       end
       ret
     end
-
-    def self.init
-      if not defined?(@@config)
-        @@config = YaST::ConfigFile.new(@@config_name)
+    
+    def self.find_one(id)
+      ret = nil
+      if self.config.has_key?(id.to_s)
+        ret = self.new(id.to_s)
       end
-    end
-
-    def self.config_name(name)
-      @@config_name = name
+      ret
     end
     
     # setting id, alias for name
     def id
-      name
+      name.to_s
     end
   
     # setting name
     def name
-      @name
+      @name.to_s
     end
 
     def value
-      @value
+      self.class.config[name.to_s]
     end
 
     def self.method_missing(name)
-      SettingsModel.init
       # look if config has a key
-      if @@config.has_key?(name.to_s)
-        return @@config[name.to_s]
+      if self.config.has_key?(name.to_s)
+        return self.config[name.to_s]
       end
       raise NoMethodError.new("undefined method `#{name}' for #{self.class.to_s}:Class")
     end
-  
-    def to_xml
-      tag_name = self.class.to_s.underscore
-      { :name => name, :value => value }.to_xml(:root => tag_name)
+
+    def self.to_xml
+      tag_name = self.to_s.underscore
+      self.config.to_xml(:root => tag_name)
     end
+
+    def self.to_json
+      self.config.to_json
+    end
+    
+    def to_xml(options = {})
+      fixed_value = value
+      # quick fix in case the value is an array
+      if value.is_a?(Array)
+        # convert something like [a,b,c] into [{ :foo => a }, { :foo => b }, ...]
+        fixed_value = value.map { |x| { name.singularize => x } }
+      end
+      { :name => name, :value => fixed_value }.to_xml({:root => self.class.to_s.underscore}.merge(options))
+    end
+
+    def to_json
+      self.class.config[name].to_json
+    end
+    
   end
   
 end

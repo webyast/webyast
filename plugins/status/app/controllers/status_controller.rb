@@ -55,7 +55,7 @@ class StatusController < ApplicationController
       # use now if time is not valid
       begin
         stop = params[:stop].blank? ? Time.now : Time.at(params[:stop].to_i)
-        start = params[:start].blank? ? stop - 300 : Time.at(params[:start].to_i)        
+        start = params[:start].blank? ? stop - 300 : Time.at(params[:start].to_i)
         @status.collect_data(start, stop, params[:data])
         render :show
       rescue Exception => e
@@ -79,7 +79,7 @@ class StatusController < ApplicationController
       begin
         @status = Status.new
         stop = params[:stop].blank? ? Time.now : Time.at(params[:stop].to_i)
-        start = params[:start].blank? ? stop - 300 : Time.at(params[:start].to_i)        
+        start = params[:start].blank? ? stop - 300 : Time.at(params[:start].to_i)
         @status.collect_data(start, stop, params[:data])
       rescue Exception => e
         render :text => e.to_s, :status => 400    # bad request
