@@ -6,6 +6,12 @@ class SecurityControllerTest < ActionController::TestCase
     @controller = SecuritiesController.new
     @request = ActionController::TestRequest.new
     # http://railsforum.com/viewtopic.php?id=1719
+
+    Security.any_instance.stubs(:update).returns(true)
+    Security.any_instance.stubs(:ssh).returns(true)
+    Security.any_instance.stubs(:firewall).returns(false)
+    Security.any_instance.stubs(:firewall_after_startup).returns(true)
+    Security.any_instance.stubs(:save).returns(true)
   end
 
   def test_actions_not_logged_in

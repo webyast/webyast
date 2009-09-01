@@ -7,8 +7,43 @@ class Status
 
   attr_accessor :data,
                 :health_status,
-                :metrics
-  
+                :metrics,
+                :limits
+
+  def to_xml(options = {})
+    xml = options[:builder] ||= Builder::XmlMarkup.new(options)
+    xml.instruct! unless options[:skip_instruct]
+
+    xml.status do
+      @data.each {|metric_group,data|
+        data.each {|metric, data|
+          xml.metric(:name => metric, :metricgroup => metric_group) do
+          xml.starttime(@data[metric_group][metric]["starttime"])
+          xml.interval(@data[metric_group][metric]["interval"])
+          data.each {|label,data|
+            unless label == "starttime" or label == "interval"
+              xml.label(:type => "hash", :name => label) do
+                # limits
+                path = "#{metric_group}/#{metric}/#{label}"
+                if @limits.has_key? path
+                  xml.limits() do
+                    xml.min(@limits["#{path}"]["maximum"])
+                    xml.max(@limits["#{path}"]["minimum"])
+                  end
+                end
+                # values
+                data.sort.each {|time, value| #sort values by time
+                  xml.values(value)
+                }
+              end
+            end
+          }
+          end
+        }
+      }
+    end
+  end
+
   def initialize()
     @scr = Scr.instance
     @health_status = nil
@@ -38,17 +73,22 @@ class Status
       # if no datapath is set, use the first directory in /var/lib/collectd
       @datapath = Dir.glob("/var/lib/collectd/*").first
       if @datapath.nil?
-	  raise Exception.new("Cannot read data from /var/lib/collectd/, check status of 'collectd' service") 
+	  raise Exception.new("Cannot read data from /var/lib/collectd/, check status of 'collectd' service")
       end
     end
     @datapath
   end
-  
+
   # set path of stored rrd files, default: /var/lib/collectd/$host.$domain
   def datapath=(path=nil)
     @datapath = path.chomp("/")
   end
-  
+
+  # returns available datapaths of rrd files
+  def available_datapaths
+    Dir.glob("/var/lib/collectd/*").reject{|x| not File.directory?(x) }.map{|x| File.basename(x) }
+  end
+
   def check_collectd
     ret = @scr.execute(["/usr/sbin/rccollectd", "status"])
     return ret[:exit]==0
@@ -67,7 +107,7 @@ class Status
   def metric_files(metrictype)
     Dir.glob(File.join(datapath, metrictype, "*.rrd"))
   end
-    
+
   # creates a hash from metric type (cpu, etc) to
   def available_metrics
     metrics = Hash.new
@@ -93,6 +133,7 @@ class Status
   # creates several metrics for a defined period
   def collect_data(start=nil, stop=nil, data = %w{cpu memory disk})
     metrics = available_metrics
+    #puts metrics.inspect
     result = Hash.new
     if @collectd_running
         case data
@@ -118,6 +159,8 @@ class Status
         end
       end
     end
+    #logger.debug @data.inspect
+   # puts @data.inspect
     return @data
   end
 
@@ -133,7 +176,7 @@ class Status
     cmd.close
     output
   end
-  
+
   # creates one metric for defined period
   # parameters are the file to read and the
   # time interval
@@ -157,6 +200,9 @@ class Status
     end
     unless labels.blank?
       # set values for each label and time
+      # evaluates interval and starttime once for each metric (not each label)
+      nexttime = 9.9e+99
+      result["starttime"] = 9.9e+99
       lines.each do |l| # each time
         unless l.blank?
           if l =~ /\d*:\D*/
@@ -164,26 +210,27 @@ class Status
             values = pair[1].split " "
             column = 0
             values.each do |v| # each label
+              if result["interval"].nil?
+                if pair[0].to_i < result["starttime"].to_i
+                  result["starttime"] = pair[0].to_i
+                elsif pair[0].to_i < nexttime and pair[0].to_i > result["starttime"].to_i
+                  nexttime = pair[0].to_i
+                end
+              end
+
               if v != "nan" #store valid values only
                 result["#{labels[column]}"] ||= Hash.new
-                result["#{labels[column]}"].merge!({"T_#{pair[0].chomp(": ")}" => v})
+                result["#{labels[column]}"].merge!({"#{pair[0].chomp(": ")}" => v})
                 column += 1
+              else
+                result["#{labels[column]}"] ||= Hash.new
+                result["#{labels[column]}"].merge!({"#{pair[0].chomp(": ")}" => "invalid"})
               end
             end
           end
         end
       end
-
-      #setting the limits
-      result.each do |key, value|
-        path = rrdfile[datapath.length+1..rrdfile.length-1].chomp('.rrd')
-        path +="/" + key if key!="value" #do not take care about the value flag
-        path = path.tr('-','_')
-        if @limits.has_key?(path)
-          result[key] ||= Hash.new
-          result[key].merge!({"limit" => @limits[path] })
-        end
-      end
+      result["interval"] = nexttime.to_i - result["starttime"].to_i if result["interval"].nil?
       return result
     else
       raise "error reading data from rrdtool"

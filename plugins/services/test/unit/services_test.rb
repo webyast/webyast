@@ -94,12 +94,14 @@ class ServiceTest < ActiveSupport::TestCase
   end
 
   test "check LSB service status" do
-    ret = {:exit => 0}
+    ret = {'exit' => '0'}
     YastService.stubs(:Call).with('YaPI::SERVICES::Execute', 'ntp', 'status').returns(ret)
     YaST::ConfigFile.stubs(:config_default_location).returns(vendor_config('missing'))
 
     s = Service.new('ntp')
     assert s.save('status') == ret
+    s.read_status
+    assert s.status == '0'
   end
 
 
@@ -109,11 +111,13 @@ class ServiceTest < ActiveSupport::TestCase
     # do not call introspection in the Scr constructor
     DBus::SystemBus.instance.stubs(:introspect).returns('<node><interface name="org.opensuse.yast.SCR.Methods"></interface></node>')
 
-    ret = {:exit => 0, :stderr => "", :stdout => "Checking for service collectd ..running\n"}
+    ret = {'exit' => '0', 'stderr' => '', 'stdout' => "Checking for service collectd ..running\n"}
     Scr.instance.stubs(:execute).with(['/usr/sbin/rccollectd status']).returns(ret)
 
     s = Service.new('vendor_service')
     assert s.save("status") == ret
+    s.read_status
+    assert s.status == '0'
   end
 
 

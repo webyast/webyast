@@ -38,6 +38,30 @@ class PackagesController < ApplicationController
     end
   end
 
+  def compare_lists(packages)
+    vendor_packages = Array.new
+    #TODO: replace by real yml file
+    package_list = ["3ddiag", "foo", "yast2-users", "yast2-network"]
+
+    package_list.each {|pk_name|
+      p = nil
+      for i in 0..packages.size-1
+        # package installed?
+        if pk_name == packages[i].name
+          # store package
+          p = packages[i]
+          break
+        end
+      end
+      if p
+        vendor_packages << p
+      else
+        vendor_packages << Package.new(:resolvable_id => 0, :name => pk_name, :version => "not_installed")
+      end
+    }
+    vendor_packages
+  end
+
   public
 
   # GET /patch_updates
@@ -45,6 +69,9 @@ class PackagesController < ApplicationController
   def index
     # note: permission check was performed in :before_filter
     @packages = Package.find(:installed)
+    if params[:filter] == "custom"
+      @packages = compare_lists(@packages)
+    end
     respond_to do |format|
       format.html { render :xml => @packages.to_xml( :root => "packages", :dasherize => false ) }
       format.xml { render  :xml => @packages.to_xml( :root => "packages", :dasherize => false ) }
