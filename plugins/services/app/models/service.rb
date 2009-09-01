@@ -77,7 +77,7 @@ class Service
   end
 
   def read_status
-    @status = save('status')['exit']
+    @status = save('status')[:exit]
   end
 
   # execute a service command (start, stop, ...)
@@ -108,7 +108,7 @@ class Service
     end
 
     Rails.logger.debug "Command returns: #{ret.inspect}"
-    ret
+    ret.symbolize_keys!
   end
 
   
