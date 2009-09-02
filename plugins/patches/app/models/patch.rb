@@ -1,10 +1,5 @@
 require 'packagekit'
 
-# Used to stop DBus::Main loop
-class PKErrorException < Exception; end
-# Used to stop DBus::Main loop
-class PKFinishedException < Exception; end
-
 # Model for patches available via package kit
 class Patch < PackageKitModule
 
@@ -104,31 +99,21 @@ class Patch < PackageKitModule
     obj_tid_with_iface = obj_tid["org.freedesktop.PackageKit.Transaction"]
     obj_tid.default_iface = "org.freedesktop.PackageKit.Transaction"
 
-    finished = false
     obj_tid.on_signal("Package") do |line1,line2,line3|
       Rails.logger.debug "  update package: #{line2}"
     end
 
+    loop = DBus::Main.new
+    loop << system_bus
+
+    obj_tid.on_signal("Finished") {|u1,u2| loop.quit }
     obj_tid.on_signal("Error") do |u1,u2|
-      raise PKErrorException
-    end
-    obj_tid.on_signal("Finished") do |u1,u2|
-      raise PKFinishedException
+      ok = false
+      loop.quit
     end
     obj_tid_with_iface.UpdatePackages([pkkit_id])
 
-    unless finished
-      loop = DBus::Main.new
-      loop << system_bus
-      begin
-        loop.run
-      rescue PKErrorException
-        finished = true
-        ok = false
-      rescue PKFinishedException
-        finished = true
-      end
-    end
+    loop.run
     obj_with_iface.SuggestDaemonQuit
 
     return ok

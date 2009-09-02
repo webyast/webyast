@@ -2,11 +2,6 @@ require "dbus"
 require 'socket'
 require 'thread'
 
-# Used to stop DBus::Main loop
-class PKErrorException < Exception; end
-# Used to stop DBus::Main loop
-class PKFinishedException < Exception; end
-
 # Model for patches available via package kit
 class PackageKitModule
 
@@ -58,28 +53,15 @@ class PackageKitModule
     obj_tid_with_iface = obj_tid["org.freedesktop.PackageKit.Transaction"]
     obj_tid.default_iface = "org.freedesktop.PackageKit.Transaction"
 
-    obj_tid.on_signal(signal.to_s, &block)
+    loop = DBus::Main.new
+    loop << system_bus
 
-    obj_tid.on_signal("Error") do |u1,u2|
-      raise PKErrorException
-    end
-    obj_tid.on_signal("Finished") do |u1,u2|
-      raise PKFinishedException
-    end
+    obj_tid.on_signal(signal.to_s, &block)
+    obj_tid.on_signal("Error") {|u1,u2| loop.quit }
+    obj_tid.on_signal("Finished") {|u1,u2| loop.quit }
 
     obj_tid_with_iface.send(method.to_sym, *args)
-
-    if patch_updates.empty?
-      loop = DBus::Main.new
-      loop << system_bus
-      begin
-	loop.run
-      rescue PKErrorException
-        puts "PKErrorException"
-      rescue PKFinishedException
-        puts "PKFinished"
-      end
-    end
+    loop.run
 
     obj_with_iface.SuggestDaemonQuit
     return patch_updates
