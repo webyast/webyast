@@ -41,17 +41,13 @@ class SystemController < ApplicationController
 
 	    case k
 		when 'reboot'
-		    unless permission_check( 'org.freedesktop.hal.power-management.reboot')
-		      render ErrorResult.error(403, 1, "no permission") and return
-		    end
+		    permission_check( 'org.freedesktop.hal.power-management.reboot')
 
 		    if v['active'] == true and @system.actions[k.to_sym][:active] == false
 			do_reboot = true
 		    end
 		when 'shutdown'
-		    unless permission_check( 'org.freedesktop.hal.power-management.shutdown')
-		      render ErrorResult.error(403, 1, "no permission") and return
-		    end
+		    permission_check( 'org.freedesktop.hal.power-management.shutdown')
 
 		    if v['active'] == true and @system.actions[k.to_sym][:active] == false
 			do_shutdown = true

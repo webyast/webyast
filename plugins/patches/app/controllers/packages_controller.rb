@@ -15,9 +15,7 @@ class PackagesController < ApplicationController
   private
 
   def check_read_permissions
-    unless permission_check( "org.opensuse.yast.system.patches.read")
-      render ErrorResult.error(403, 1, "no permission") and return
-    end
+    permission_check "org.opensuse.yast.system.patches.read"
   end
 
   # check whether the cached result is still valid

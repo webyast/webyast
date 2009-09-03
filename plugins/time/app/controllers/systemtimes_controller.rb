@@ -15,9 +15,7 @@ class SystemtimesController < ApplicationController
 
   # Sets time settings. Requires write permissions for time YaPI.
   def update
-    unless permission_check( "org.opensuse.yast.modules.yapi.time.write")
-      render ErrorResult.error(403, 1, "no permission") and return
-    end
+    yapi_perm_check "time.write"
     
     root = params[:time]
     if root == nil
@@ -36,11 +34,8 @@ class SystemtimesController < ApplicationController
 
   # Shows time settings. Requires read permission for time YaPI.
   def show
+    yapi_perm_check "time.read"
     
-    unless permission_check( "org.opensuse.yast.modules.yapi.time.read")
-      render ErrorResult.error( 403, 1, "no permission" ) and return
-    end
-
     systemtime = Systemtime.find
 
     respond_to do |format|
