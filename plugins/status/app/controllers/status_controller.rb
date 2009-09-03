@@ -33,32 +33,33 @@ class StatusController < ApplicationController
   # POST /status
   # POST /status.xml
   def create
-    unless permission_check("org.opensuse.yast.system.status.writelimits")      
-      #find the correct plugin path for the config file
-      plugin_config_dir = "#{RAILS_ROOT}/config" #default
-      Rails.configuration.plugin_paths.each do |plugin_path|
-        if File.directory?(File.join(plugin_path, "status"))
-          plugin_config_dir = plugin_path+"/status/config"
-          Dir.mkdir(plugin_config_dir) unless File.directory?(plugin_config_dir)
-          break
-        end
-      end
-      limits = Hash.new
-      limits = create_limit(params["status"])
-      f = File.open(File.join(plugin_config_dir, "status_limits.yaml"), "w")
-      f.write(limits.to_yaml)
-      f.close
+    permission_check("org.opensuse.yast.system.status.writelimits")      
 
-      @status = Status.new
-      # use now if time is not valid
-      begin
-        stop = params[:stop].blank? ? Time.now : Time.at(params[:stop].to_i)
-        start = params[:start].blank? ? stop - 300 : Time.at(params[:start].to_i)
-        @status.collect_data(start, stop, params[:data])
-        render :show
-      rescue Exception => e
-        render :text => e.to_s, :status => 400    # bad request
+    #find the correct plugin path for the config file
+    plugin_config_dir = "#{RAILS_ROOT}/config" #default
+    Rails.configuration.plugin_paths.each do |plugin_path|
+      if File.directory?(File.join(plugin_path, "status"))
+        plugin_config_dir = plugin_path+"/status/config"
+        Dir.mkdir(plugin_config_dir) unless File.directory?(plugin_config_dir)
+        break
       end
+    end
+    limits = Hash.new
+    limits = create_limit(params["status"])
+    f = File.open(File.join(plugin_config_dir, "status_limits.yaml"), "w")
+    f.write(limits.to_yaml)
+    f.close
+
+    @status = Status.new
+    # use now if time is not valid
+    begin
+      stop = params[:stop].blank? ? Time.now : Time.at(params[:stop].to_i)
+      start = params[:start].blank? ? stop - 300 : Time.at(params[:start].to_i)
+      @status.collect_data(start, stop, params[:data])
+      render :show
+    rescue Exception => e
+      render :text => e.to_s, :status => 400    # bad request
+    end
   end
 
   # GET /status
@@ -71,13 +72,13 @@ class StatusController < ApplicationController
   # GET /status/1.xml
   def show
     permission_check("org.opensuse.yast.system.status.read")
-      begin
-        @status = Status.new
-        stop = params[:stop].blank? ? Time.now : Time.at(params[:stop].to_i)
-        start = params[:start].blank? ? stop - 300 : Time.at(params[:start].to_i)
-        @status.collect_data(start, stop, params[:data])
-      rescue Exception => e
-        render :text => e.to_s, :status => 400    # bad request
-      end
+    begin
+      @status = Status.new
+      stop = params[:stop].blank? ? Time.now : Time.at(params[:stop].to_i)
+      start = params[:start].blank? ? stop - 300 : Time.at(params[:start].to_i)
+      @status.collect_data(start, stop, params[:data])
+    rescue Exception => e
+      render :text => e.to_s, :status => 400    # bad request
+    end
   end
 end
