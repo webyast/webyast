@@ -11,18 +11,14 @@ class UsersController < ApplicationController
   # GET /users.xml
   # GET /users.json
   def index
-    unless permission_check("org.opensuse.yast.modules.yapi.users.usersget")
-      render ErrorResult.error(403, 1, "no permission") and return
-    end
+    yapi_perm_check "users.usersget"
     @users = User.find_all
   end
 
   # GET /users/1
   # GET /users/1.xml
   def show
-    unless permission_check("org.opensuse.yast.modules.yapi.users.userget")
-      render ErrorResult.error(403, 1, "no permission") and return
-    end
+    yapi_perm_check "users.userget"
     if params[:id].blank?
       render ErrorResult.error(404, 2, "empty parameter") and return
     end
@@ -44,9 +40,7 @@ class UsersController < ApplicationController
   # POST /users.xml
   # POST /users.json
   def create
-    unless permission_check("org.opensuse.yast.modules.yapi.users.useradd")
-      render ErrorResult.error(403, 1, "no permission") and return
-    end
+    yapi_perm_check "users.useradd"
 
     begin
       @user = User.create(params[:users])
@@ -60,9 +54,7 @@ class UsersController < ApplicationController
   # PUT /users/1
   # PUT /users/1.xml
   def update
-    unless permission_check("org.opensuse.yast.modules.yapi.users.usermodify")
-      render ErrorResult.error(403, 1, "no permission") and return
-    end
+    yapi_perm_check "users.usermodify"
 
     if params[:users] && params[:users][:uid]
        params[:id] = params[:users][:uid] #for sync only
@@ -87,9 +79,7 @@ class UsersController < ApplicationController
   # DELETE /users/1.xml
   # DELETE /users/1.json
   def destroy
-    unless permission_check("org.opensuse.yast.modules.yapi.users.userdelete")
-      render ErrorResult.error(403, 1, "no permission") and return
-    end
+    yapi_perm_check "users.userdelete"
 
     begin
       @user = User.find(params[:id])

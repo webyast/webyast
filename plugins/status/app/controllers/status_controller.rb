@@ -33,9 +33,7 @@ class StatusController < ApplicationController
   # POST /status
   # POST /status.xml
   def create
-    unless permission_check("org.opensuse.yast.system.status.writelimits")
-      render ErrorResult.error(403, 1, "no permission") and return
-    else
+    unless permission_check("org.opensuse.yast.system.status.writelimits")      
       #find the correct plugin path for the config file
       plugin_config_dir = "#{RAILS_ROOT}/config" #default
       Rails.configuration.plugin_paths.each do |plugin_path|
@@ -61,7 +59,6 @@ class StatusController < ApplicationController
       rescue Exception => e
         render :text => e.to_s, :status => 400    # bad request
       end
-    end
   end
 
   # GET /status
@@ -73,9 +70,7 @@ class StatusController < ApplicationController
   # GET /status/1
   # GET /status/1.xml
   def show
-    unless permission_check("org.opensuse.yast.system.status.read")
-      render ErrorResult.error(403, 1, "no permission") and return
-    else
+    permission_check("org.opensuse.yast.system.status.read")
       begin
         @status = Status.new
         stop = params[:stop].blank? ? Time.now : Time.at(params[:stop].to_i)
@@ -84,7 +79,5 @@ class StatusController < ApplicationController
       rescue Exception => e
         render :text => e.to_s, :status => 400    # bad request
       end
-    end
   end
-
 end

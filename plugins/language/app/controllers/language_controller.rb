@@ -13,9 +13,8 @@ class LanguageController < ApplicationController
   # Actualizes language settings. Requires write permissions for language YaPI.
   def update    
     if params.has_key?(:language)
-      unless permission_check("org.opensuse.yast.modules.yapi.language.write")
-        render ErrorResult.error(403, 1, "no permission") and return
-      end
+      yapi_perm_check "language.write"
+
       @language = Language.new
       @language.language = params[:language][:current]
       @language.utf8 = params[:language][:utf8]
@@ -36,11 +35,9 @@ class LanguageController < ApplicationController
 
   # Shows language settings. Requires read permission for language YaPI.
   def show
-    unless permission_check("org.opensuse.yast.modules.yapi.language.read")
-      render ErrorResult.error(403, 1, "no permissions") and return
-    end
-    @language = Language.find
+    yapi_perm_check "language.read"
 
+    @language = Language.find
   end
 
 end

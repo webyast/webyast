@@ -15,9 +15,7 @@ class PatchesController < ApplicationController
   private
 
   def check_read_permissions
-    unless permission_check( "org.opensuse.yast.system.patches.read")
-      render ErrorResult.error(403, 1, "no permission") and return
-    end
+    permission_check "org.opensuse.yast.system.patches.read"
   end
 
   # check whether the cached result is still valid
@@ -65,9 +63,7 @@ class PatchesController < ApplicationController
   # PUT /patch_updates/1
   # PUT /patch_updates/1.xml
   def update
-    unless permission_check( "org.opensuse.yast.system.patches.install")
-      render ErrorResult.error(403, 1, "no permission") and return
-    end
+    permission_check "org.opensuse.yast.system.patches.install"
     @patch_update = Patch.find(params[:id])
     if @patch_update.nil?
       logger.error "Patch: #{params[:id]} not found."
