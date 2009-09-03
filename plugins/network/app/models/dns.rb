@@ -42,9 +42,17 @@ class DNS
     xml = options[:builder] ||= Builder::XmlMarkup.new(options)
     xml.instruct! unless options[:skip_instruct]
 
-    xml.hostname do
-      xml.domains @domains
-      xml.servers @servers
+    xml.dns do
+      xml.domains({:type => "array"}) do
+         domains.each do |@domains, val|
+               xml.tag!(:domain, domains)
+         end
+      end
+      xml.servers({:type => "array"}) do
+         servers.each do |@servers, val|
+               xml.tag!(:nameserver, servers)
+         end
+      end
     end
   end
 
