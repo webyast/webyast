@@ -17,6 +17,22 @@ module YastRoles
 
   public
 
+  # Shortcut for yapi permission so it is enought to write
+  #    yapi_perm_check "time.read"
+  # instead
+  #    permission_check "org.opensuse.yast.modules.yapi.time.read"
+  # for more details see permission_check
+  def yapi_perm_check(action)
+    permission_check "org.opensuse.yast.modules.yapi.#{action}"
+  end
+
+  # Check if permission user can do selected action. Check also roles in which user act.
+  # <b>action</b>:: name of target action
+  # <b>throws</b> :: throwed exceptions:
+  #                  - _NotLoggedException_ if no user is logged
+  #                  - _NoPermissionException_ if permission is not granted
+  #                  - _PolicyKitException_ for error during running policy kit
+  #
   def permission_check(action)
     return true if ENV["RAILS_ENV"] == "test"
     raise NotLoggedException if self.current_account==nil || self.current_account.login.size == 0
