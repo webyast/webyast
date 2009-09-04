@@ -25,7 +25,7 @@ class Status
               xml.label(:type => "hash", :name => label) do
                 # limits
                 path = "#{metric_group}/#{metric}/#{label}"
-                if @limits.has_key? path
+                if @limits and @limits.has_key? path
                   xml.limits() do
                     xml.min(@limits["#{path}"]["maximum"])
                     xml.max(@limits["#{path}"]["minimum"])
@@ -63,7 +63,6 @@ class Status
         break
       end
     end
-    @limits = {}
     @limits = YAML.load(File.open(File.join(plugin_config_dir, "status_limits.yaml"))) if File.exists?(File.join(plugin_config_dir, "status_limits.yaml"))
   end
 
