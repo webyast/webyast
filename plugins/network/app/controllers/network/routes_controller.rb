@@ -43,7 +43,16 @@ class Network::RoutesController < ApplicationController
   end
 
   def index
-   show
+    unless permission_check( "org.opensuse.yast.modules.yapi.network.read")
+      render ErrorResult.error( 403, 1, "no permission" ) and return
+    end
+
+    routes_a = Route.find(:all).values
+    respond_to do |format|
+      format.html { render :xml => routes_a.to_xml( :root => "routes", :dasherize => false ) }
+      format.xml { render :xml => routes_a.to_xml( :root => "routes", :dasherize => false ) }
+      format.json { render :json => routes_a.to_json }
+    end    
   end
 
 end
