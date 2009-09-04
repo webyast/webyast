@@ -16,6 +16,13 @@ class HostnameControllerTest < ActionController::TestCase
     @request.session[:account_id] = 1 # defined in fixtures
   end  
 
+  def test_content_of_xml
+    get :show, :format => 'xml'
+    h=Hash.from_xml @response.body
+    assert_equal 'BAD', h['hostname']['name']
+    assert_equal 'DOMAIN', h['hostname']['domain']
+  end
+
   include PluginBasicTests
 
 end
