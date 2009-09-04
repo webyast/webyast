@@ -43,14 +43,14 @@ class DNS
     xml.instruct! unless options[:skip_instruct]
 
     xml.dns do
-      xml.domains({:type => "array"}) do
-         domains.each do |@domains, val|
-               xml.tag!(:domain, domains)
-         end
+      xml.nameservers({:type => "array"}) do
+	  servers.each do |s|
+	    xml.nameserver s
+	  end
       end
-      xml.servers({:type => "array"}) do
-         servers.each do |@servers, val|
-               xml.tag!(:nameserver, servers)
+      xml.searches({:type => "array"}) do
+         domains.each do |s|
+               xml.search s
          end
       end
     end
