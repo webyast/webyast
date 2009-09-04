@@ -42,4 +42,11 @@ class Network::InterfacesController < ApplicationController
     end
   end
 
+  def index
+    unless permission_check( "org.opensuse.yast.modules.yapi.network.read")
+      render ErrorResult.error( 403, 1, "no permission" ) and return
+    end
+   @interfaces = Interface.find_all
+  end
+
 end

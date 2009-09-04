@@ -18,11 +18,30 @@ class Interface
     @ipaddr    = kwargs["ipaddr"]
   end
 
+  def self.find_all
+    interfaces = []
+    response = YastService.Call("YaPI::NETWORK::Read") # interfaces: true
+    response = response["interfaces"]
+    
+    if response.nil?
+      raise "Can't get interfaces list"
+    else
+      response.each do |key, val|
+        ifce = Interface.new({'bootproto'=>val["bootproto"], 'ipaddr'=>val["ipaddr"]})
+#	ifce.id = val[""]
+        ifce.bootproto = val["bootproto"]
+        ifce.ipaddr = val["ipaddr"]
+        interfaces << ifce
+      end
+    end
+    interfaces
+  end
+
   # fills time instance with data from YaPI.
   #
   # +warn+: Doesn't take any parameters.
   def Interface.find(which)
-    response = YastService.Call("YaPI::NETWORK::Read") # hostname: true
+    response = YastService.Call("YaPI::NETWORK::Read") # interfaces: true
     ret = Interface.new(response["interfaces"][which])
     return ret
   end
