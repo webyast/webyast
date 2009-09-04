@@ -11,12 +11,16 @@ class LogsController < ApplicationController
       when "messages" then '/var/log/messages'
       when "apache_access" then '/var/log/apache2/access_log'
       when "apache_error" then '/var/log/apache2/error_log'
-      else nil
+      when "custom"
+         # if a custom log is requested, then
+         # we evaluate a filename parameter
+         params[:filename].blank? ? nil : params[:filename]
+      else params[:id]
     end
 
     # not found
-    if log_filename.nil?
-      render :nothing, :status => 404 and return
+    if log_filename.nil? or not File.exist?(log_filename)
+      render :nothing => true, :status => 404 and return
     end
 
     # how many lines to show
@@ -28,12 +32,8 @@ class LogsController < ApplicationController
     output = Scr.instance.execute(['tail', '-n', "#{lines}", log_filename])
 
     respond_to do |format|
-      format.xml { render :xml => settings.to_xml }
-      format.json { render :json => VendorSetting }
+      format.text { render :xml => output[:stdout] }
     end
-    
-    #render :text => output[:stdout]
-    render :xml => xm.target!
   end
 
 end
