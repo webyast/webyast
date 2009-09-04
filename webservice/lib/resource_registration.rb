@@ -56,6 +56,9 @@ public
     error "#{file} does not specify controller" unless controller
 #    error "#{file}: controller is not a path name" unless controller =~ %r{((\w+)/)+(\w+)}
     
+    # policy: is optional, interface is used otherwise
+    policy = resource["policy"]
+
     # singular: is optional, defaults to false
     singular = resource["singular"] || false
 
@@ -66,7 +69,7 @@ public
     error "#{file}: singular resources don't support nested" if singular and nested
 
     resources[interface] ||= Array.new
-    resources[interface] << { :controller => controller, :singular => singular, :nested => nested }
+    resources[interface] << { :controller => controller, :singular => singular, :nested => nested, :policy => policy }
   end
 
   # register routes from a plugin
