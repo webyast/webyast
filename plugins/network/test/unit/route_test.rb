@@ -17,8 +17,7 @@ class RouteTest < ActiveSupport::TestCase
 
  def test_getter
    route=Route.find('default')
-#   assert_equal("linux", hostname.name)
-#   assert_equal("suse.cz", hostname.domain)
+   assert_equal '10.20.7.254', route.via
  end
  
 end
