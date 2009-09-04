@@ -4,13 +4,23 @@
 class Network::RoutesController < ApplicationController
 
   before_filter :login_required
+  before_filter :read_check,  :only => [:index, :show]
+  before_filter :write_check, :only => [:create, :update]
 
-  # Sets hostname settings. Requires write permissions for network YaPI.
-  def update
-    unless permission_check( "org.opensuse.yast.modules.yapi.network.write")
-      render ErrorResult.error(403, 1, "no permission") and return
+  def read_check    
+    unless permission_check( "org.opensuse.yast.modules.yapi.network.read")
+      render ErrorResult.error( 403, 1, "no permission" )
     end
-    
+  end
+
+  def write_check
+    unless permission_check( "org.opensuse.yast.modules.yapi.network.write")
+      render ErrorResult.error(403, 1, "no permission")
+    end
+  end
+
+  # Sets route settings. Requires write permissions for network YaPI.
+  def update
     root = params[:routes]
     if root == nil
       render ErrorResult.error(404, 2, "format or internal error") and return
@@ -26,13 +36,8 @@ class Network::RoutesController < ApplicationController
     update
   end
 
-  # Shows hostname settings. Requires read permission for network YaPI.
+  # Shows route settings. Requires read permission for network YaPI.
   def show
-    
-    unless permission_check( "org.opensuse.yast.modules.yapi.network.read")
-      render ErrorResult.error( 403, 1, "no permission" ) and return
-    end
-
     @route = Route.find(params[:id])
 
     respond_to do |format|
@@ -43,10 +48,6 @@ class Network::RoutesController < ApplicationController
   end
 
   def index
-    unless permission_check( "org.opensuse.yast.modules.yapi.network.read")
-      render ErrorResult.error( 403, 1, "no permission" ) and return
-    end
-
     routes_a = Route.find(:all).values
     respond_to do |format|
       format.html { render :xml => routes_a.to_xml( :root => "routes", :dasherize => false ) }
