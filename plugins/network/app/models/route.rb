@@ -12,8 +12,9 @@ class Route
 
   public
 
-  def initialize(kwargs)
+  def initialize(kwargs, id = nil)
     @via = kwargs["via"]
+    @id = kwargs["id"] || id
   end
 
   # fills route instance with data from YaPI.
@@ -21,8 +22,15 @@ class Route
   # +warn+: YaPI implements default only.
   def Route.find( which )
     response = YastService.Call("YaPI::NETWORK::Read")
-    ret = Route.new(response["routes"][which])
-    ret.id = which
+    routes_h = response["routes"]
+    if which == :all
+      ret = Hash.new
+      routes_h.each do |id, route_h|
+        ret[id] = Route.new(route_h, id)
+      end
+    else
+      ret = Route.new(routes_h[which], which)
+    end
     return ret
   end
 
@@ -41,6 +49,7 @@ class Route
     xml.instruct! unless options[:skip_instruct]
 
     xml.route do
+      xml.id @id
       xml.via @via
     end
   end

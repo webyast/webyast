@@ -18,6 +18,14 @@ class RouteTest < ActiveSupport::TestCase
  def test_getter
    route=Route.find('default')
    assert_equal '10.20.7.254', route.via
+   assert_equal 'default', route.id
+ end
+ 
+ def test_index
+   routes = Route.find(:all)
+   assert_instance_of Hash, routes
+   route = routes["default"]
+   assert_equal 'default', route.id
  end
  
 end
