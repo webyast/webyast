@@ -4,20 +4,8 @@
 class Network::RoutesController < ApplicationController
 
   before_filter :login_required
-  before_filter :read_check,  :only => [:index, :show]
-  before_filter :write_check, :only => [:create, :update]
-
-  def read_check    
-    unless permission_check( "org.opensuse.yast.modules.yapi.network.read")
-      render ErrorResult.error( 403, 1, "no permission" )
-    end
-  end
-
-  def write_check
-    unless permission_check( "org.opensuse.yast.modules.yapi.network.write")
-      render ErrorResult.error(403, 1, "no permission")
-    end
-  end
+  before_filter(:only => [:index, :show]) { |c|    c.yapi_perm_check "network.read" }
+  before_filter(:only => [:create, :update]) { |c| c.yapi_perm_check "network.write"}
 
   # Sets route settings. Requires write permissions for network YaPI.
   def update

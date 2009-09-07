@@ -4,13 +4,11 @@
 class Network::InterfacesController < ApplicationController
 
   before_filter :login_required
+  before_filter(:only => [:index, :show]) { |c|    c.yapi_perm_check "network.read" }
+  before_filter(:only => [:create, :update]) { |c| c.yapi_perm_check "network.write"}
 
   # Sets hostname settings. Requires write permissions for network YaPI.
   def update
-    unless permission_check( "org.opensuse.yast.modules.yapi.network.write")
-      render ErrorResult.error(403, 1, "no permission") and return
-    end
-    
     root = params[:interfaces]
     if root == nil
       render ErrorResult.error(404, 2, "format or internal error") and return
@@ -28,11 +26,6 @@ class Network::InterfacesController < ApplicationController
 
   # Shows hostname settings. Requires read permission for network YaPI.
   def show
-    
-    unless permission_check( "org.opensuse.yast.modules.yapi.network.read")
-      render ErrorResult.error( 403, 1, "no permission" ) and return
-    end
-
     @ifce = Interface.find(params[:id])
 
     respond_to do |format|
@@ -43,9 +36,6 @@ class Network::InterfacesController < ApplicationController
   end
 
   def index
-    unless permission_check( "org.opensuse.yast.modules.yapi.network.read")
-      render ErrorResult.error( 403, 1, "no permission" ) and return
-    end
    @interfaces = Interface.find_all
   end
 
