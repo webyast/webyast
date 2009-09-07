@@ -27,15 +27,16 @@ class YastRolesTest < ActiveSupport::TestCase
   
   def test_permission_check_no_account
     @current_account = nil
-    assert !permission_check(nil)
+    assert_raise(NotLoggedException) { permission_check(nil) }
   end
   
   def test_action_nil
-    assert !permission_check(nil)
+    assert_raise(NoPermissionException) { permission_check(nil) }
   end    
   
   def test_action_dummy
-    assert !permission_check("dummy")
+    def PolKit.polkit_check(action,login) return :no end
+    assert_raise(NoPermissionException) { permission_check("dummy") }
   end    
 
   def test_polkit_override
@@ -51,6 +52,6 @@ class YastRolesTest < ActiveSupport::TestCase
   def test_role_not_ok
     @current_account = CurrentLogin.new "nobody"
     def PolKit.polkit_check(action,login) return :yes if login == "network_admin" end
-    assert !permission_check("dummy")
+    assert_raise(NoPermissionException) { permission_check("dummy") }
   end
 end

@@ -46,9 +46,9 @@ module PluginBasicTests
   def test_access_denied
     #mock model to test only controller
     @model_class.stubs(:find)
-    @controller.stubs(:permission_check).returns(false);
+    @controller.stubs(:permission_check).raises(NoPermissionException.new("action", "test"));
     get :show
-    assert_response :forbidden
+    assert_response 503
   end
 
   def test_access_show_xml
@@ -73,11 +73,11 @@ module PluginBasicTests
     #ensure that nothing is saved
     @model_class.expects(:save).never
 
-    @controller.stubs(:permission_check).returns(false);
+    @controller.stubs(:permission_check).raises(NoPermissionException.new("action", "test"));
 
     put :update, @data
 
-    assert_response  :forbidden
+    assert_response  503
   end
 end
 

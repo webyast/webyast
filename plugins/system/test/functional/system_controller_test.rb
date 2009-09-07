@@ -82,11 +82,11 @@ class SystemControllerTest < ActionController::TestCase
   end
 
   test "return error when not permitted" do
-    @controller.stubs(:permission_check).returns(false);
+    @controller.stubs(:permission_check).raises(NoPermissionException.new("action", "test"))
 
     ret = put :update, :system => {:reboot => {:active => true}}
     # expect 403 Forbidden error code
-    assert_response :forbidden
+    assert_response 503
 
     # set permissions back for the other tests
     @controller.stubs(:permission_check).returns(true);

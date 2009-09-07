@@ -13,9 +13,7 @@ class SecuritiesController < ApplicationController
   # PUT /security/1
   # PUT /security/1.xml
   def update
-    unless permission_check( "org.opensuse.yast.system.security.write")
-      render ErrorResult.error(403, 1, "no permission") and return
-    end
+    permission_check( "org.opensuse.yast.system.security.write")
 
     # get security object and set values
     @security = Security.new
@@ -37,12 +35,10 @@ class SecuritiesController < ApplicationController
   # GET /security/1
   # GET /security/1.xml
   def show
-    unless permission_check( "org.opensuse.yast.system.security.read")
-      render ErrorResult.error(403, 1, "no permission") and return
-    else
-      @security = Security.new
-      @security.update
-      logger.debug "SHOW: #{@security.inspect}"
-    end
+    permission_check( "org.opensuse.yast.system.security.read")
+
+    @security = Security.new
+    @security.update
+    logger.debug "SHOW: #{@security.inspect}"
   end
 end

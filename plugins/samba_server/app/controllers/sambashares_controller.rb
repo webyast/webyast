@@ -10,9 +10,7 @@ class SambasharesController < ApplicationController
     # GET /sambashares.json
     def index
 	# read all Samba shares
-	if !permission_check("org.opensuse.yast.modules.yapi.samba.getalldirectories")
-	    render ErrorResult.error(403, 1, "no permission") and return
-	end
+	yapi_perm_check "samba.getalldirectories"
 
 	@shares = SambaShare.find_all
     
@@ -28,9 +26,7 @@ class SambasharesController < ApplicationController
     # GET /sambashares/share_name.json
     # return properties of a samba share, use YaPI::Samba Yast module
     def show
-	if !permission_check("org.opensuse.yast.modules.yapi.samba.getshare")
-	    render ErrorResult.error(403, 1, "no permission") and return
-	end
+	yapi_perm_check "samba.getshare"
 
 	@share = SambaShare.new
 	@share.id = params[:id]
@@ -52,20 +48,18 @@ class SambasharesController < ApplicationController
     def create
 	@share = SambaShare.new
 
-	if !permission_check("org.opensuse.yast.modules.yapi.samba.addshare")
-	    render ErrorResult.error(403, 1, "no permission") and return
-	else
-	    if !@share.update_attributes(params[:sambashares][:parameters], true)
-		render ErrorResult.error(404, 2, "input error") and return
-	    end
+	yapi_perm_check "samba.addshare"
 
-	    if !@share.id.blank?
-		if !@share.add
-		    render ErrorResult.error(404, 3, "adding share failed") and return
-		end
-	    else
-		render ErrorResult.error(404, 4, "empty share name") and return
-	    end
+	if !@share.update_attributes(params[:sambashares][:parameters], true)
+	  render ErrorResult.error(404, 2, "input error") and return
+	end
+
+	if !@share.id.blank?
+	  if !@share.add
+	    render ErrorResult.error(404, 3, "adding share failed") and return
+	  end
+	else
+	  render ErrorResult.error(404, 4, "empty share name") and return
 	end
 
 	respond_to do |format|
@@ -79,9 +73,7 @@ class SambasharesController < ApplicationController
     # PUT /sambashares/share.xml
     # PUT /sambashares/share.json
     def update
-	if !permission_check("org.opensuse.yast.modules.yapi.samba.editshare")
-	    render ErrorResult.error(403, 1, "no permission") and return
-	end
+	yapi_perm_check "samba.editshare"
 
 	@share = SambaShare.new
 	@share.id = params[:id]
@@ -113,9 +105,7 @@ class SambasharesController < ApplicationController
     # DELETE /sambashares/share.xml
     # DELETE /sambashares/share.json
     def destroy
-	if !permission_check("org.opensuse.yast.modules.yapi.samba.deleteshare")
-	    render ErrorResult.error(403, 1, "no permission") and return
-	end
+	yapi_perm_check "samba.deleteshare"
 
 	@share = SambaShare.new 	
 	@share.id = params[:id]
