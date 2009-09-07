@@ -19,6 +19,8 @@ Version:        0.0.3
 Release:        0
 Summary:        YaST2 - Webservice - Time
 Source:         www.tar.bz2
+Source1:        NTP.pm
+Source2:        org.opensuse.yast.modules.yapi.ntp.policy
 BuildRoot:      %{_tmppath}/%{name}-%{version}-build
 BuildArch:      noarch
 BuildRequires:  rubygem-mocha
@@ -50,6 +52,10 @@ Authors:
 #
 mkdir -p $RPM_BUILD_ROOT/srv/www/%{pkg_user}/vendor/plugins/%{plugin_name}
 cp -a * $RPM_BUILD_ROOT/srv/www/%{pkg_user}/vendor/plugins/%{plugin_name}
+cp ${SOURCE1} $RPM_BUILD_ROOT/usr/share/YaST2/modules/YaPI/
+mkdir -p $RPM_BUILD_ROOT/usr/share/PolicyKit/policy/
+cp ${SOURCE2} $RPM_BUILD_ROOT/usr/share/PolicyKit/policy/
+
 
 %clean
 rm -rf $RPM_BUILD_ROOT
@@ -69,6 +75,8 @@ rm -rf $RPM_BUILD_ROOT
 %dir /srv/www/%{pkg_user}/vendor/plugins
 %dir /srv/www/%{pkg_user}/vendor/plugins/%{plugin_name}
 %dir /srv/www/%{pkg_user}/vendor/plugins/%{plugin_name}/doc
+%dir /usr/share/PolicyKit
+%dir /usr/share/PolicyKit/policy/
 /srv/www/%{pkg_user}/vendor/plugins/%{plugin_name}/MIT-LICENSE
 /srv/www/%{pkg_user}/vendor/plugins/%{plugin_name}/README
 /srv/www/%{pkg_user}/vendor/plugins/%{plugin_name}/Rakefile
@@ -80,3 +88,5 @@ rm -rf $RPM_BUILD_ROOT
 /srv/www/%{pkg_user}/vendor/plugins/%{plugin_name}/tasks
 #/srv/www/%{pkg_user}/vendor/plugins/%{plugin_name}/test
 /srv/www/%{pkg_user}/vendor/plugins/%{plugin_name}/doc/README_FOR_APP
+/usr/share/YaST2/modules/YaPI/${SOURCE1}
+/usr/share/PolicyKit/policy/${SOURCE2}
