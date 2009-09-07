@@ -36,7 +36,12 @@ class Network::InterfacesController < ApplicationController
   end
 
   def index
-   @interfaces = Interface.find_all
+   ifaces_a = Interface.find(:all).values
+   respond_to do |format|
+     format.html { render :xml => ifaces_a.to_xml( :root => "interfaces", :dasherize => false ) }
+     format.xml { render :xml => ifaces_a.to_xml( :root => "interfaces", :dasherize => false ) }
+     format.json { render :json => ifaces_a.to_json }
+   end    
   end
 
 end
