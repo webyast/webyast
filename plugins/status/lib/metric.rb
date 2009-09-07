@@ -15,29 +15,55 @@ require 'yaml'
 # By default the model operates in the current host, or in the
 # first available one, unless overriden by the :host option
 #
-# metrics = Metric.find(:all, group => /cpu/)
+# each value has an identifier based on
+# host, plugin, plugin instance, type and type instance
+# See http://collectd.org/wiki/index.php/Naming_schema
+#
+# for the naming schema of a metric
+# metrics = Metric.find(:all, :plugin => /cpu/)
 # metrics.each do |metric|
-#   metric.name
-#   metric.group
+#   metric.type
+#   metric.type_instance
+#   metric.plugin
+#   metric.plugin_instance
 #   metric.host
 #   metric.data(:stop => Time.now - 5000)
 # end
-#
 #
 class Metric
 
   COLLECTD_BASE = "/var/lib/collectd"
 
-  attr_accessor :host, :group, :name
-  
-  def path
-    File.join(Metric.host_directory(host), group, name + '.rrd')
-  end
+  # path to the round robin database for this value
+  attr_reader :path
+  attr_reader :host
+  attr_reader :plugin, :plugin_instance
+  attr_reader :type, :type_instance
+  # convenience, plugin and instance
+  attr_reader :plugin_full
+  attr_reader :type_full
 
+  # alias for identifier
   def id
-    [host, group, name].join('/')
+    identifier
+  end
+  
+  def identifier
+    [host, plugin_full, type_full].join('/')
   end
 
+  # plugin and plugin instance ie: cpu-0
+  def plugin_full
+    return plugin if plugin_instance.blank?      
+    "#{plugin}-#{plugin_instance}"
+  end
+
+  # type and type instance, ie: memory-free
+  def type_full
+    return type if type_instance.blank?      
+    "#{type}-#{type_instance}"
+  end
+  
   # returns available hosts for which metrics are collected
   def self.available_hosts
     Dir.glob(File.join(COLLECTD_BASE, "*")).reject{|x| not File.directory?(x) }.map{|x| File.basename(x) }
@@ -71,35 +97,45 @@ class Metric
     end
   end    
   
-  # the directory where we are gathering data from
-  # normally is the directory corresponding to *this*
-  # host. If there are more than one, we take the first
-  # one or the one given
-  #
-  # Metrics.host_directory
-  # Metrics.host_directory("foo.com")
-  #
-  def self.host_directory(host=Metric.default_host)
-    File.join(COLLECTD_BASE, host)
-  end
-
   # returns true if collectd daemon is running
   def self.collectd_running?
     ret = Scr.instance.execute(["/usr/sbin/rccollectd", "status"])
     ret[:exit].zero?
   end
 
-  # returns the available metric groups
-  def self.available_groups(host=Metric.default_host)
-    Dir.glob(File.join(host_directory(host), '*')).reject{|x| not File.directory?(x) }.map{|x| File.basename(x) }
+  #
+  def self.plugins
+    Metric.find(:all).map { |x| x.plugin }
   end
 
-  # returns the available metrics names for a group
-  # that is the rrd file name without the extension
-  def self.available_metrics(group, host=Metric.default_host)
-    Dir.glob(File.join(host_directory(host), group, '*')).reject{|x| not File.file?(x) }.map{|x| File.basename(x).chomp('.rrd') }
+  # avaliable databases for a host
+  def self.rrd_files
+    Dir.glob(File.join(COLLECTD_BASE, '**/*.rrd'))
+  end
+  
+  # initialize with the path to the rrdb database
+  def initialize(path)
+    @path = path
+    # these values can be extracted from the file but we cache
+    # them
+    @host, @plugin, @plugin_instance, @type, @type_instance = Metric.parse_file_path(path)
   end
 
+  # parses the host, plugin, plugin_instance, type and type_instance
+  # from the file name
+  def self.parse_file_path(path)
+    type_full = File.basename(path, '.rrd')
+    plugin_instance_path = File.dirname(path)
+    plugin_full = File.basename(plugin_instance_path)
+    host_path = File.dirname(plugin_instance_path)
+    host = File.basename(host_path)
+
+    type, type_instance = type_full.split('-', 2)
+    plugin, plugin_instance = plugin_full.split('-', 2)
+    
+    return host, plugin, plugin_instance, type, type_instance
+  end    
+  
   # Finds metrics.
   #
   # Metric.find(:all)
@@ -108,7 +144,7 @@ class Metric
   # Where id is host:group:name (whithout rrd extension)
   def self.find(what, opts={})
     case what
-    when :all then find_multiple(opts)
+    when :all then opts.empty? ? find_all : find_multiple(opts)
     # in this case, the options are the first
     # parameter
     when Hash
@@ -116,36 +152,37 @@ class Metric
     end
   end
 
+  # find all values
+  def self.find_all
+    ret = []
+    rrd_files.each do |path|
+      ret << Metric.new(path)
+    end
+    ret
+  end
+    
   def self.find_multiple(opts)
     ret = []
-    current_host = opts[:host] || default_host
-    available_hosts.each do |host|
-      # if host is specified, only use that
-      # host
-      next if host != current_host
-      available_groups(current_host).each do |group|
-        # filter by group
-        case opts[:group]
-        when Regexp
-          next if not group =~ opts[:group]
-        when String
-          next if group != opts[:group]
-        end
-        available_metrics(group, current_host).each do |metric_name|
-          # filter by name
-          case opts[:name]          
-          when Regexp then next if not metric_name =~ opts[:name]
-          when String then next if metric_name != opts[:name]
-          end
 
-          # instantiate the object
-          metric = Metric.new
-          metric.host = current_host
-          metric.name = metric_name
-          metric.group = group
-          ret << metric
+    # think how to factor this out
+    opts[:host] = default_host if not opts.has_key?(:host)
+    
+    all = Metric.find(:all)
+    all.each do |metric|     
+      matched = true
+      # match each attribute passed in opts
+      opts.each do |key, val|
+        raise "Unknown attribute #{key}" if not metric.respond_to?(key)
+        # if the val is a regexp we do different matching
+        if val.is_a?(Regexp)
+          matched = false if not metric.send(key) =~ val
+        else
+          matched = false if metric.send(key) != val
         end
       end
+      # go to next value if this does not match
+      next if not matched
+      ret << metric
     end
     ret
   end

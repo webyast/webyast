@@ -12,37 +12,22 @@ class MetricTest < ActiveSupport::TestCase
 
   def setup
     # standard setup
-    Metric.stubs(:this_hostname).returns('myhost.domain.de')    
+    Metric.stubs(:this_hostname).returns('myhost.domain.de')
     Metric.stubs(:available_hosts).returns(['foo.com', 'myhost.domain.de'])
-    Metric.stubs(:available_groups).with('myhost.domain.de').returns(['memory', 'cpu-1', 'cpu-2', 'interface'])
-    Metric.stubs(:available_metrics).with('memory', 'myhost.domain.de').returns(['memory-free'])
-    Metric.stubs(:available_metrics).with('cpu-1', 'myhost.domain.de').returns(['cpudata1', 'cpudata2'])
-    Metric.stubs(:available_metrics).with('cpu-2', 'myhost.domain.de').returns(['cpudata1'])
-    Metric.stubs(:available_metrics).with('interface', 'myhost.domain.de').returns(['packets'])
-    # in total 5 metrics, 4 groups, 2 hosts
-
-    
+    Metric.stubs(:rrd_files).returns(['/var/lib/collectd/foo.com/cpu-0/cppudata-1.rrd', '/var/lib/collectd/myhost.domain.de/memory/memory-free.rrd', '/var/lib/collectd/myhost.domain.de/cpu-1/cpudata-1.rrd', '/var/lib/collectd/myhost.domain.de/cpu-1/cpudata-2.rrd', '/var/lib/collectd/myhost.domain.de/cpu-2/cpudata-1.rrd', '/var/lib/collectd/myhost.domain.de/interface/packets.rrd', '/var/lib/collectd/myhost.domain.de/interface/some-0.rrd'])
   end
 
   def teardown
   end
   
-  def test_host_directory
+  def test_default_host
     # if only one host data is available, then that one should be
     # the one used for the data directory
     Metric.stubs(:this_hostname).returns(nil)
     assert_equal 'foo.com', Metric.default_host
-    assert_equal File.join(Metric::COLLECTD_BASE, 'foo.com'), Metric.host_directory
-    # if our hostname is in the available list, that one should be the default host
+    
     Metric.stubs(:this_hostname).returns('myhost.domain.de')
     assert_equal 'myhost.domain.de', Metric.default_host
-    assert_equal File.join(Metric::COLLECTD_BASE, 'myhost.domain.de'), Metric.host_directory
-    
-    # if no host data is available, no base_directory
-    Metric.stubs(:available_hosts).returns([])
-    assert_raise RuntimeError do
-      Metric.host_directory
-    end           
   end
 
   def test_parse_rrdtool_output
@@ -52,7 +37,7 @@ class MetricTest < ActiveSupport::TestCase
     Metric.stubs(:run_rrdtool).with('/var/lib/collectd/myhost.domain.de/memory/memory-free.rrd', :start => start, :stop => stop).returns(File.open(test_data('rrdtool-memory-free.txt')).read)
     Metric.stubs(:run_rrdtool).with('/var/lib/collectd/myhost.domain.de/interface/packets.rrd', :start => start, :stop => stop).returns(File.open(test_data('rrdtool-packets.txt')).read)
 
-    ret = Metric.find(:all, :group => /memory/, :name => 'memory-free')
+    ret = Metric.find(:all, :plugin => /memory/, :type => 'memory', :type_instance => 'free')
     memory = ret.first
 
     expected = { "value"=>
@@ -70,7 +55,7 @@ class MetricTest < ActiveSupport::TestCase
     
     assert_equal expected, memory.data(:start => start, :stop => stop)
 
-    ret = Metric.find(:all, :group => /interface/, :name => 'packets')
+    ret = Metric.find(:all, :plugin => /interface/, :type => 'packets')
     packets = ret.first
     expected =  {"tx"=>
      {"1252075780"=>"4.2576000000e+02",
@@ -102,41 +87,41 @@ class MetricTest < ActiveSupport::TestCase
 
   def test_finders
     ret = Metric.find(:all)
-    assert_equal 5, ret.size
-    assert ret.map{|x| x.group}.include?('cpu-1')
-    assert ret.map{|x| x.group}.include?('memory')
-    assert ret.map{|x| x.group}.include?('interface')
+    assert_equal 7, ret.size
+    assert ret.map{|x| x.plugin_full}.include?('cpu-1')
+    assert ret.map{|x| x.plugin}.include?('memory')
+    assert ret.map{|x| x.plugin}.include?('interface')
     
-    ret = Metric.find(:all, :group => 'memory')
+    ret = Metric.find(:all, :plugin => 'memory')
     assert_equal 1, ret.size
-    assert_equal 'memory', ret.first.group
-    assert_equal 'memory-free', ret.first.name
+    assert_equal 'memory', ret.first.plugin
+    assert_equal 'memory-free', ret.first.type_full
     assert_equal 'myhost.domain.de', ret.first.host
 
     # should produce same result
-    ret = Metric.find(:all, :group => /memory/)
+    ret = Metric.find(:all, :plugin_full => /memory/)
     assert_equal 1, ret.size
-    ret = Metric.find(:all, :group => /memory/, :name => 'boooh')
+    ret = Metric.find(:all, :plugin_full => /memory/, :type_full => 'boooh')
     assert_equal 0, ret.size
-    ret = Metric.find(:all, :group => /memory/, :name => 'memory-free')
+    ret = Metric.find(:all, :plugin_full => /memory/, :type_full => 'memory-free')
     assert_equal 1, ret.size
     
     # test attributes
     assert_equal '/var/lib/collectd/myhost.domain.de/memory/memory-free.rrd', ret.first.path
     assert_equal 'myhost.domain.de/memory/memory-free', ret.first.id
     
-    ret = Metric.find(:all, :group => /meemory/)
+    ret = Metric.find(:all, :plugin_full => /meemory/)
     assert_equal 0, ret.size
 
-    ret = Metric.find(:all, :group => 'meemory')
+    ret = Metric.find(:all, :plugin_full => 'meemory')
     assert_equal 0, ret.size
 
     # using a regexp
-    ret = Metric.find(:all, :group => /cpu/)
-    assert ret.map{ |x| x.group }.include?('cpu-1')
-    assert ret.map{ |x| x.group }.include?('cpu-2')
-    assert ret.map{ |x| x.name }.include?('cpudata1')
-    assert ret.map{ |x| x.name }.include?('cpudata2')
+    ret = Metric.find(:all, :plugin_full => /cpu/)
+    assert ret.map{ |x| x.plugin_full }.include?('cpu-1')
+    assert ret.map{ |x| x.plugin_full }.include?('cpu-2')
+    assert ret.map{ |x| x.type_full }.include?('cpudata-1')
+    assert ret.map{ |x| x.type_full }.include?('cpudata-2')
     assert_equal 3, ret.size
   end
   
