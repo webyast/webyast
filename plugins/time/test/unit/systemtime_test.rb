@@ -21,39 +21,43 @@ class SystemtimeTest < ActiveSupport::TestCase
     }
   ]
 
-  def read_arguments
-    return {
+  READ_ARGUMENTS = {
       "zones"=> "true",
       "timezone"=> "true",
       "utcstatus"=> "true",
       "currenttime" => "true"
     }
-  end
 
-  def read_response
-    return {
+  READ_RESPONSE = {
       "zones"=> TEST_TIMEZONES,
       "timezone"=> "Europe/Prague",
       "utcstatus"=> "true",
       "time" => "2009-07-02 - 12:18:00"
-    }
-  end
+    }  
 
-  def write_arguments
-    return {
-      "timezone"=> "America/Kentucky/Monticello",
-      "utcstatus"=> "false"
+  WRITE_ARGUMENTS_NONE = {
+      :timezone=> "America/Kentucky/Monticello",
+      :utcstatus=> "false"
     }
-  end
+
+  WRITE_ARGUMENTS_TIME = {
+      :timezone=> "America/Kentucky/Monticello",
+      :utcstatus=> "false",
+      :time => "2009-07-02 - 12:18:00"
+    }
+
+  WRITE_ARGUMENTS_NTP = {
+      :timezone=> "America/Kentucky/Monticello",
+      :utcstatus=> "false",
+    }
 
   def setup    
     @model = Systemtime.new
   end
 
   
-  def test_getter
-    result = read_response
-    YastService.stubs(:Call).with("YaPI::TIME::Read",read_arguments).returns(result)
+  def test_getter    
+    YastService.stubs(:Call).with("YaPI::TIME::Read",READ_ARGUMENTS).returns(READ_RESPONSE)
 
     @model = Systemtime.find
     assert_equal("02/07/2009", @model.date)
@@ -63,12 +67,37 @@ class SystemtimeTest < ActiveSupport::TestCase
     assert_equal(TEST_TIMEZONES,Systemtime.timezones)
   end
 
-  def test_setter
-    YastService.stubs(:Call).with("YaPI::TIME::Write",write_arguments).returns(true)
+  def test_setter_none
+    YastService.stubs(:Call).with("YaPI::TIME::Write",WRITE_ARGUMENTS_NONE).returns(true)
     YastService.expects(:Call).once
+    YastService.expects(:Call).with("YaPI::NTP::Synchronize").never
 
-    @model.timezone = "Europe/Prague"
+    @model.timezone = "America/Kentucky/Monticello"
     @model.utcstatus = "false"
+    @model.time_setter = Systemtime.const_get "NONE"
+    @model.save
+  end
+
+  def test_setter_manual
+    YastService.stubs(:Call).with("YaPI::TIME::Write",WRITE_ARGUMENTS_TIME).returns(true)
+    YastService.expects(:Call).once
+    YastService.expects(:Call).with("YaPI::NTP::Synchronize").never
+
+    @model.timezone = "America/Kentucky/Monticello"
+    @model.utcstatus = "false"
+    @model.date = "02/07/2009"
+    @model.time = "12:18:00"
+    @model.time_setter = Systemtime.const_get "MANUAL"
+    @model.save
+  end
+
+  def test_setter_ntp
+    YastService.stubs(:Call).with("YaPI::TIME::Write",WRITE_ARGUMENTS_NTP).returns(true)
+    YastService.expects(:Call).with("YaPI::NTP::Synchronize").once
+
+    @model.timezone = "America/Kentucky/Monticello"
+    @model.utcstatus = "false"
+    @model.time_setter = Systemtime.const_get "NTP"
     @model.save
   end
 
@@ -78,7 +107,7 @@ class SystemtimeTest < ActiveSupport::TestCase
       @@timezones=val
     end
 
-    data = read_response
+    data = READ_RESPONSE
     @model.timezone = data["timezone"]
     @model.utcstatus = data["utcstatus"]
     @model.date = "02/07/2009"
@@ -113,7 +142,7 @@ class SystemtimeTest < ActiveSupport::TestCase
     end
     
 
-    data = read_response
+    data = READ_RESPONSE
     @model.timezone = data["timezone"]
     @model.utcstatus = data["utcstatus"]
     @model.date = "02/07/2009"
