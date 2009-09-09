@@ -8,6 +8,8 @@
 # but http://groups.google.com/group/sdruby/browse_thread/thread/5239824b058ac936 doesn't know any better
 RAILS_ENV = ENV['RAILS_ENV']
 
+STDERR.puts "RAILS_ENV environment variable isn't set !" unless RAILS_ENV
+
 # Specifies gem version of Rails to use when vendor/rails is not present
 # RAILS_GEM_VERSION = '2.1.0' unless defined? RAILS_GEM_VERSION
 
