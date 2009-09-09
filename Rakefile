@@ -23,9 +23,6 @@ task :default => :test
   task task_name do
     PROJECTS.each do |project|
       Dir.chdir(project) do
-      puts "Env: #{env.inspect}"
-      puts "$0: #{$0.inspect}"
-      puts "task: #{task_name.inspect}"
         system %(#{env} #{$0} #{task_name})
         raise "Error on execute task #{task_name} on #{project}" if $?.exitstatus != 0
       end
