@@ -1,6 +1,18 @@
 # load resources and populate database
+
+class ResourceRegistrationError < StandardError
+end
+
+class ResourceRegistrationPathError < ResourceRegistrationError
+end
+
+class ResourceRegistrationFormatError < ResourceRegistrationError
+end
+
 class ResourceRegistration
  
+  @@in_production = (ENV['RAILS_ENV'] == "production")
+  
   @@resources = Hash.new
   def self.resources
     @@resources
@@ -12,7 +24,7 @@ private
       log.error msg
       return
     else
-      raise msg
+      raise ResourceRegistrationFormatError.new( msg )
     end
   end
   
@@ -33,7 +45,6 @@ public
   
   def self.register(file, interface = nil, controller = nil)
     require 'yaml'
-    @@in_production = (RAILS_ENV == "production")
     name = name || File.basename(file, ".*")
     begin
       resource = YAML.load(File.open(file)) || Hash.new
@@ -76,18 +87,29 @@ public
   #
   def self.register_plugin(plugin)
     res_path = File.join(plugin.directory, 'config')
+    if defined? RESOURCE_REGISTRATION_TESTING
+      raise ResourceRegistrationPathError.new("Could not access plugin directory: #{res_path}") unless File.exists?( res_path )
+    end
 #    $stderr.puts "checking #{res_path}"
     Dir.glob(File.join(res_path, 'routes.rb')).each do |route|
       basename = File.basename(plugin.directory)
-#      $stderr.puts "***Error: Plugin #{basename} does private routing, please remove #{basename}/config/routes.rb."
+      raise ResourceRegistrationFormatError.new "Plugin #{basename} does private routing, please remove #{basename}/config/routes.rb."
     end
     res_path = File.join(res_path, 'resources')
+    if defined? RESOURCE_REGISTRATION_TESTING
+      raise ResourceRegistrationPathError.new("Could not access plugin directory: #{res_path}") unless File.exists?( res_path )
+    end
 #    $stderr.puts "self.register_plugin #{res_path}"
+    registration_count = 0
     Dir.glob(File.join(res_path, '**/*.y*ml')).each do |descriptor|
 #      $stderr.puts "checking #{descriptor}"
       next unless descriptor =~ %r{#{res_path}/((\w+)/)?(\w+)\.y(a)?ml$}
 #      $stderr.puts "registering #{descriptor}"
       self.register(descriptor)
+      registration_count += 1
+    end
+    if defined? RESOURCE_REGISTRATION_TESTING
+      raise ResourceRegistrationPathError.new("Could not find any YAML file with resource description below #{res_path}") unless registration_count > 0
     end
   end
 

@@ -5,23 +5,30 @@
 #
 # See resource_route_test.rb for resource route tests.
 #
-require File.expand_path(File.dirname(__FILE__) + "/../test_helper")
-
 class TestPlugin
   attr_reader :directory
   def initialize path
-    @directory = path
+    @directory = File.join(File.dirname(__FILE__), "..", path)
   end
 end
 
+unless defined? USER_ROLES_CONFIG
+  USER_ROLES_CONFIG = File.join(File.dirname(__FILE__), "..", "fixtures", "yast_user_roles")
+end
+
+unless defined? RESOURCE_REGISTRATION_TESTING
+  RESOURCE_REGISTRATION_TESTING = true # prevent plugin registration in environment.rb
+end
+
+require File.join(File.dirname(__FILE__), "..", "test_helper")
+require File.join(File.dirname(__FILE__), "..", "..", "lib", "resource_registration")
+
 class ResourceRegistrationTest < ActiveSupport::TestCase
 
-  require File.expand_path(File.dirname(__FILE__) + "/../../lib/resource_registration")
-  
   # Create resources from .yml file
   
   test "resource creation" do
-    plugin = TestPlugin.new "test/resource_fixtures/good"
+    plugin = TestPlugin.new "resource_fixtures/good"
     ResourceRegistration.register_plugin plugin
       
     assert !ResourceRegistration.resources.empty?
@@ -30,7 +37,7 @@ class ResourceRegistrationTest < ActiveSupport::TestCase
   # Create nested resources from .yml file
   
   test "resource creation nested" do
-    plugin = TestPlugin.new "test/resource_fixtures/nested"
+    plugin = TestPlugin.new "resource_fixtures/nested"
     ResourceRegistration.register_plugin plugin
       
     assert !ResourceRegistration.resources.empty?
@@ -39,15 +46,15 @@ class ResourceRegistrationTest < ActiveSupport::TestCase
   # Catch errors in interface
   
   test "bad interface" do
-    plugin = TestPlugin.new "test/resource_fixtures/bad_interface"
-    assert_raise RuntimeError do
+    plugin = TestPlugin.new "resource_fixtures/bad_interface"
+    assert_raise ResourceRegistrationFormatError do
       ResourceRegistration.register_plugin plugin
     end
   end
   
   test "no interface" do
-    plugin = TestPlugin.new "test/resource_fixtures/no_interface"
-    assert_raise RuntimeError do
+    plugin = TestPlugin.new "resource_fixtures/no_interface"
+    assert_raise ResourceRegistrationFormatError do
       ResourceRegistration.register_plugin plugin
     end
   end
@@ -55,14 +62,14 @@ class ResourceRegistrationTest < ActiveSupport::TestCase
   # Catch errors in controller
   
   test "no controller" do
-    plugin = TestPlugin.new "test/resource_fixtures/no_controller"
-    assert_raise RuntimeError do
+    plugin = TestPlugin.new "resource_fixtures/no_controller"
+    assert_raise ResourceRegistrationFormatError do
       ResourceRegistration.register_plugin plugin
     end
   end
   
   test "bad controller, go fix web-client to use modules" do
-    plugin = TestPlugin.new "test/resource_fixtures/bad_controller"
+    plugin = TestPlugin.new "resource_fixtures/bad_controller"
 #    assert_raise RuntimeError do
       ResourceRegistration.register_plugin plugin
 #    end
@@ -71,8 +78,8 @@ class ResourceRegistrationTest < ActiveSupport::TestCase
   # Catch pluralization error
   
   test "interface is singular but not flagged as such" do
-    plugin = TestPlugin.new "test/resource_fixtures/bad_singular"
-    assert_raise RuntimeError do
+    plugin = TestPlugin.new "resource_fixtures/bad_singular"
+    assert_raise ResourceRegistrationFormatError do
       ResourceRegistration.register_plugin plugin
     end
   end
@@ -80,8 +87,8 @@ class ResourceRegistrationTest < ActiveSupport::TestCase
   # Catch nested singular, which is not supported (yet?)
   
   test "nesting inside a singular resource" do
-    plugin = TestPlugin.new "test/resource_fixtures/nested_singular"
-    assert_raise RuntimeError do
+    plugin = TestPlugin.new "resource_fixtures/nested_singular"
+    assert_raise ResourceRegistrationFormatError do
       ResourceRegistration.register_plugin plugin
     end
   end
@@ -125,8 +132,10 @@ class ResourceRegistrationTest < ActiveSupport::TestCase
   # Complain about private routing
   
   test "complain about private routing" do
-    plugin = TestPlugin.new "test/resource_fixtures/private_routing"
-    assert  ResourceRegistration.register_plugin plugin
+    plugin = TestPlugin.new "resource_fixtures/private_routing"
+    assert_raise ResourceRegistrationFormatError do
+      ResourceRegistration.register_plugin plugin
+    end
   end
 
 end

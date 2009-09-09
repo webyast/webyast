@@ -4,6 +4,10 @@
 # you don't control web/app server and can't set it the proper way
 # ENV['RAILS_ENV'] ||= 'production'
 
+# Hmm, don't know if this is the right place for this
+# but http://groups.google.com/group/sdruby/browse_thread/thread/5239824b058ac936 doesn't know any better
+RAILS_ENV = ENV['RAILS_ENV']
+
 # Specifies gem version of Rails to use when vendor/rails is not present
 # RAILS_GEM_VERSION = '2.1.0' unless defined? RAILS_GEM_VERSION
 
@@ -20,11 +24,7 @@ init = Rails::Initializer.run do |config|
   # you must remove the Active Record framework.
   # config.frameworks -= [ :active_record, :active_resource, :action_mailer ]
 
-  config.gem 'test-unit', :lib => 'test/unit'  if ENV['RAILS_ENV'] == 'test' or
-    # FIXME: 'rake test' in plugins sets test mode too late, script/server sets both variables
-    # to 'development' so this should not be set in real development mode
-    (RAILS_ENV == 'development' and ENV['RAILS_ENV'].nil?)
-
+  config.gem 'test-unit', :lib => 'test/unit'  if ENV['RAILS_ENV'] == 'test'
 
   # Specify gems that this application depends on. 
   # They can then be installed with "rake gems:install" on new installations.
@@ -80,34 +80,21 @@ init = Rails::Initializer.run do |config|
 
   # allows to find plugin in development tree locations
   # avoiding installing plugins to see them
-  config.plugin_paths << File.join(RAILS_ROOT, '..', 'plugins') if RAILS_ENV == "development"
+  config.plugin_paths << File.join(RAILS_ROOT, '..', 'plugins') if ENV['RAILS_ENV'] == "development" or ENV['RAILS_ENV'] == "test"
 end
 
-# load lib/resource_registration.rb
-require "resource_registration"
+# don't load all plugins while just testing resource registration
+unless defined? RESOURCE_REGISTRATION_TESTING
+  STDERR.puts "\n*** registering plugins ***\n"
+  # load lib/resource_registration.rb
+  require "resource_registration"
 
-case RAILS_ENV
-  when "test"
-    class TestPlugin
-      def directory
-	"test/resource_fixtures/good"
-      end
-    end
-    ResourceRegistration.register_plugin TestPlugin.new
+  init.loaded_plugins.each do |plugin|
+    ResourceRegistration.register_plugin(plugin)
+  end
     
-    USER_ROLES_CONFIG = File.join(File.dirname(__FILE__), "../test/fixtures/yast_user_roles")
-    
-  when "development", "production"
-    init.loaded_plugins.each do |plugin|
-      ResourceRegistration.register_plugin(plugin)
-    end
-    
-    USER_ROLES_CONFIG = "/etc/yast_user_roles"
-    
-  else
-    $stderr.puts "No ResourceRegistration triggered"
-    
+  USER_ROLES_CONFIG = "/etc/yast_user_roles"    
+
+  ResourceRegistration.route ResourceRegistration.resources
+
 end
-  
-ResourceRegistration.route ResourceRegistration.resources
-
