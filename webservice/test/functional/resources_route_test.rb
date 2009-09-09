@@ -10,7 +10,14 @@ class TestPlugin
   end
 end
 
-RESOURCE_REGISTRATION_TESTING = true # prevent plugin registration in environment.rb
+unless defined? USER_ROLES_CONFIG
+  USER_ROLES_CONFIG = File.join(File.dirname(__FILE__), "..", "fixtures", "yast_user_roles")
+end
+
+unless defined? RESOURCE_REGISTRATION_TESTING
+  RESOURCE_REGISTRATION_TESTING = true # prevent plugin registration in environment.rb
+end
+
 require File.join(File.dirname(__FILE__), "..", "test_helper")
 require File.join(File.dirname(__FILE__), "..", "..", "lib", "resource_registration")
 
