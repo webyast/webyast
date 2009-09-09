@@ -94,9 +94,14 @@ unless defined? RESOURCE_REGISTRATION_TESTING
   init.loaded_plugins.each do |plugin|
     ResourceRegistration.register_plugin(plugin)
   end
-    
-  USER_ROLES_CONFIG = "/etc/yast_user_roles"    
-
+  
   ResourceRegistration.route ResourceRegistration.resources
+
+end
+
+# load global role assignments unless we're testing them
+unless defined? PERMISSION_CHECK_TESTING
+  
+  USER_ROLES_CONFIG = "/etc/yast_user_roles"    
 
 end
