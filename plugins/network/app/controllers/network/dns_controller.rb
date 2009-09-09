@@ -4,13 +4,11 @@
 class Network::DnsController < ApplicationController
 
   before_filter :login_required
+  before_filter(:only => [:show]) { |c| c.yapi_perm_check "network.read" }
+  before_filter(:only => [:create, :update]) { |c| c.yapi_perm_check "network.write"}
 
   # Sets hostname settings. Requires write permissions for network YaPI.
   def update
-    unless permission_check( "org.opensuse.yast.modules.yapi.network.write")
-      render ErrorResult.error(403, 1, "no permission") and return
-    end
-    
     root = params[:hostname]
     if root == nil
       render ErrorResult.error(404, 2, "format or internal error") and return
@@ -28,11 +26,6 @@ class Network::DnsController < ApplicationController
 
   # Shows hostname settings. Requires read permission for network YaPI.
   def show
-    
-    unless permission_check( "org.opensuse.yast.modules.yapi.network.read")
-      render ErrorResult.error( 403, 1, "no permission" ) and return
-    end
-
     @dns = DNS.find
 
     respond_to do |format|
