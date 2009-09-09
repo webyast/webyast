@@ -75,7 +75,12 @@ class MetricTest < ActiveSupport::TestCase
       "starttime"=>1252075500}
     
     assert_equal expected, packets.data(:start => start, :stop => stop)    
-    
+
+    require 'pp'
+    pp packets.data(:start => start, :stop => stop)
+
+    assert_equal "", packets.to_xml(:start => start, :stop => stop)
+    #assert_equal "", packets.to_xml    
   end
   
   def test_collectd_running

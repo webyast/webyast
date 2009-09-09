@@ -200,6 +200,39 @@ class Metric
     Metric.read_metric_file(path, opts)
   end
   
+  # converts the metric to xml
+  def to_xml(opts={})
+    data_opts = {}
+    data_opts[:start] = opts[:start] if opts.has_key?(:start)
+    data_opts[:stop] = opts[:stop] if opts.has_key?(:stop)
+
+    metric_data = data(data_opts)
+    starttime = metric_data['starttime']
+    interval = metric_data['interval']
+    
+    xml = opts[:builder] ||= Builder::XmlMarkup.new(opts)
+    xml.instruct! unless opts[:skip_instruct]
+
+    xml.metric do
+      xml.id self.identifier
+      xml.host self.host
+      xml.plugin self.plugin
+      xml.plugin_instance self.plugin_instance
+      xml.type self.type
+      xml.type_instance self.type_instance
+      
+      metric_data.each do |col, values|
+        next if col == "starttime"
+        next if col == "interval"
+        xml.data(:column => col, :start => starttime, :interval => interval ) do
+          values.each { |time, value| xml.value value }
+        end
+      end
+      
+    end
+
+  end
+  
   # runs the rddtool on file with start time and end time
   #
   # You can pass start and stop options:

@@ -22,6 +22,9 @@ eula:
   This is an evil eula that will
   make you think twice before
   clicking it
+logs:
+  - /var/log/messages
+  - /var/log/apache2/access_log
 EOF
 
     YaST::ConfigFile.stubs(:read_file).with('/etc/YaST2/vendor.yml').returns(@config_data)
