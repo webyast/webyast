@@ -3,29 +3,30 @@
 #
 # This tests route creation from the resource database
 #
-require File.expand_path(File.dirname(__FILE__) + "/../test_helper")
-
 class TestPlugin
   attr_reader :directory
   def initialize path
-    @directory = path
+    @directory = File.join(File.dirname(__FILE__), "..", path)
   end
 end
+
+RESOURCE_REGISTRATION_TESTING = true # prevent plugin registration in environment.rb
+require File.join(File.dirname(__FILE__), "..", "test_helper")
+require File.join(File.dirname(__FILE__), "..", "..", "lib", "resource_registration")
 
 class ResourceRouteTest < ActiveSupport::TestCase
 
   # See http://pennysmalls.com/2009/03/04/rails-23-breakage-and-fixage/
   include ActionController::Assertions::RoutingAssertions
   
-  require "lib/resource_registration"
-  
   # config/initializers/resource_registration.rb sets it up
   
   test "resource route initialization" do
     
-    plugin = TestPlugin.new "test/resource_fixtures/good"
+    plugin = TestPlugin.new "resource_fixtures/good"
     ResourceRegistration.reset
     ResourceRegistration.register_plugin plugin
+    ResourceRegistration.route ResourceRegistration.resources
 
 #    $stderr.puts ActionController::Routing::Routes.routes
     
@@ -44,15 +45,6 @@ class ResourceRouteTest < ActiveSupport::TestCase
 	end
       end
     end
-  end
-
-  test "plugin private routing" do
-    searchdir = File.join(File.dirname(__FILE__),"..","..","..","plugins")
-    Dir.foreach(searchdir) { |filename|
-      unless filename[0].chr == "."
-        assert !File.exist?(File.join(searchdir,filename,"config","routes.rb")), "Plugin #{filename} contains private routing"
-      end
-    }
   end
   
 end
