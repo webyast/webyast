@@ -11,10 +11,6 @@ class TestPlugin
   end
 end
 
-unless defined? USER_ROLES_CONFIG
-  USER_ROLES_CONFIG = File.join(File.dirname(__FILE__), "..", "fixtures", "yast_user_roles")
-end
-
 unless defined? RESOURCE_REGISTRATION_TESTING
   RESOURCE_REGISTRATION_TESTING = true # prevent plugin registration in environment.rb
 end
