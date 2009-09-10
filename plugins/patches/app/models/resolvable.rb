@@ -58,7 +58,7 @@ public
     xml = options[:builder] ||= Builder::XmlMarkup.new(options)
     xml.instruct! unless options[:skip_instruct]
 
-    xml.__send__ tag.to_sym do
+    xml.tag! tag do
       xml.tag!(:resolvable_id, @resolvable_id, {:type => "integer"} )
       xml.tag!(:kind, @kind )
       xml.tag!(:name, @name )
@@ -94,8 +94,8 @@ public
     dbusloop, obj_tid, obj_with_iface, obj_tid_with_iface = self.packagekit_connect
     
     obj_tid.on_signal(signal.to_s, &block)
-    obj_tid.on_signal("Error") {|u1,u2| loop.quit }
-    obj_tid.on_signal("Finished") {|u1,u2| loop.quit }
+    obj_tid.on_signal("Error") {|u1,u2| dbusloop.quit }
+    obj_tid.on_signal("Finished") {|u1,u2| dbusloop.quit }
 
     obj_tid_with_iface.send(method.to_sym, *args)
     dbusloop.run
@@ -108,7 +108,7 @@ public
   # id
   def self.package_kit_install(pkkit_id)
     ok = true
-    mainloop, obj_tid, obj_with_iface, obj_tid_with_iface = self.packagekit_connect
+    dbusloop, obj_tid, obj_with_iface, obj_tid_with_iface = self.packagekit_connect
 
     obj_tid.on_signal("Package") do |line1,line2,line3|
       Rails.logger.debug "  update package: #{line2}"
@@ -117,7 +117,7 @@ public
     dbusloop = DBus::Main.new
     dbusloop << system_bus
 
-    obj_tid.on_signal("Finished") {|u1,u2| loop.quit }
+    obj_tid.on_signal("Finished") {|u1,u2| dbusloop.quit }
     obj_tid.on_signal("Error") do |u1,u2|
       ok = false
       dbusloop.quit
