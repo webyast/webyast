@@ -22,7 +22,7 @@ class Basesystem
     @finish = false
   end
 
-  #Gets instance of Basesystem with initialized steps queue and current step
+  #Gets instance of Basesystem with initialized steps queue and if basic settings is done
   def Basesystem.find
     base = Basesystem.new
     base.finish = File.exist?(FINISH_FILE)
