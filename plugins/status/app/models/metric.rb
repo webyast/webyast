@@ -147,8 +147,11 @@ class Metric
     when :all then opts.empty? ? find_all : find_multiple(opts)
     # in this case, the options are the first
     # parameter
-    when Hash
-    else find_multiple(what.merge(opts))
+    when Hash then find_multiple(what.merge(opts))
+    when String
+      raise "hello"
+      find_multiple({:identifier => what})
+    else nil     
     end
   end
 
@@ -205,27 +208,28 @@ class Metric
     data_opts = {}
     data_opts[:start] = opts[:start] if opts.has_key?(:start)
     data_opts[:stop] = opts[:stop] if opts.has_key?(:stop)
-
-    metric_data = data(data_opts)
-    starttime = metric_data['starttime']
-    interval = metric_data['interval']
     
     xml = opts[:builder] ||= Builder::XmlMarkup.new(opts)
     xml.instruct! unless opts[:skip_instruct]
 
     xml.metric do
-      xml.id self.identifier
-      xml.host self.host
-      xml.plugin self.plugin
-      xml.plugin_instance self.plugin_instance
-      xml.type self.type
-      xml.type_instance self.type_instance
+      xml.id identifier
+      xml.host host
+      xml.plugin plugin
+      xml.plugin_instance plugin_instance
+      xml.type type
+      xml.type_instance type_instance
+
+      # serialize data unless it is disabled
+      unless opts.has_key?(:data) and !opts[:data]
+        metric_data = data(data_opts)
+        starttime = metric_data['starttime']
+        interval = metric_data['interval']
       
-      metric_data.each do |col, values|
-        next if col == "starttime"
-        next if col == "interval"
-        xml.data(:column => col, :start => starttime, :interval => interval ) do
-          values.each { |time, value| xml.value value }
+        metric_data.each do |col, values|
+          next if col == "starttime"
+          next if col == "interval"
+          xml.data(:column => col, :start => starttime.to_i, :interval => interval ) { values.each { |time, value| xml.value value } }
         end
       end
       
@@ -243,60 +247,68 @@ class Metric
     stop = opts.has_key?(:stop) ? opts[:stop] : Time.now
     start = opts.has_key?(:stop) ? opts[:stop] : stop - 300
 
-    cmd = IO.popen("rrdtool fetch #{file} AVERAGE --start #{start.strftime("%H:%M,%m/%d/%Y")} --end #{stop.strftime("%H:%M,%m/%d/%Y")}")
+    cmd = IO.popen("rrdtool fetch #{file} AVERAGE --start #{start.strftime("%H:%M,%m/%d/%Y")} --end #{stop.strftime("%H:%M,%m/%d/%Y")}")      
     output = cmd.read
     cmd.close
+
+    raise output if $?.exitstatus != 0
+
     output
   end
 
   def self.read_metric_file(rrdfile, opts={})
     result = Hash.new
+    
     output = run_rrdtool(rrdfile, opts)
 
     raise "Error running collectd rrdtool" if output =~ /ERROR/ or output.nil?
-
-    labels=""
+    
     output = output.gsub(",", ".") # translates eg. 1,234e+07 to 1.234e+07
-    lines = output.split "\n"
 
-    # set label names
-    lines[0].each do |l|
-      if l =~ /\D*/
-        labels = l.split " "
+    line_count = 0
+    result["starttime"] = 9.9e+99
+
+    times = []
+    labels = []
+    output.each_line do |line|
+      line_count += 1
+      next if line.blank?
+
+      # read the labels for the first line
+      if line_count == 1
+        labels = line.split(" ")
+        # no labels, no data
+        return {} if labels.empty?
+        next
+      end
+
+      time_str, values_str = line.split(":")
+      time = Time.at(time_str.to_i)
+      
+      # store time to get the starttime and interval
+      times << time
+      
+      values = values_str.split(" ").map {|x| x == "nan" ? nil : x.to_f}
+
+      values.each_with_index do |value, index|
+        label = labels[index]
+        result[label] = {} if not result.has_key?(label)
+        result[label][time] = value
+      end      
+    end
+
+    result["starttime"] = times.first
+
+    # calculate the interval between elements
+    if times.size > 1
+      last = times.pop
+      times.each_with_index do |time, index|
+        result["interval"] = time.to_i - last.to_i
+        last = time
       end
     end
-    unless labels.blank?
-      # set values for each label and time
-      # evaluates interval and starttime once for each metric (not each label)
-      nexttime = 9.9e+99
-      result["starttime"] = 9.9e+99
-      lines.each do |l| # each time
-        next if l.blank?
-        if l =~ /\d*:\D*/
-          pair = l.split ":"
-          values = pair[1].split " "
-          column = 0
-          values.each do |v| # each label
-            unless result["interval"] # already defined?
-              # get the least distance to evaluate time interval
-              if pair[0].to_i < result["starttime"].to_i
-                result["starttime"] = pair[0].to_i
-              elsif pair[0].to_i < nexttime and pair[0].to_i > result["starttime"].to_i
-                nexttime = pair[0].to_i
-              end
-            end
-            v = "invalid" if v == "nan" #store valid values only
-            result[labels[column]] ||= Hash.new
-            result[labels[column]][pair[0]] = v
-            column += 1
-          end
-        end
-      end
-      result["interval"] = nexttime.to_i - result["starttime"].to_i if result["interval"].nil?
-      return result
-    else
-      raise "error reading data from rrdtool"
-    end
+    return result
+    
   end
   
 end

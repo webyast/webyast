@@ -65,23 +65,38 @@ class MetricsController < ApplicationController
 
   # GET /status
   # GET /status.xml
+  #
   def index
-    opts = {}
-    opts.merge!(params)
-    @metrics = Metric.find(:all, opts)
+
+    conditions = {}
     
+    # support filtering by host, plugin, plugin_instance ...
+    [:host, :plugin, :type, :plugin_instance, :type_instance, :plugin_full, :type_full ].each do |key|
+      if params.has_key?(key)
+        conditions[key] = params[key]
+      end
+    end
+    
+    @metrics = Metric.find(:all, conditions)
+    
+    respond_to do |format|
+      format.xml { render :xml => @metrics.to_xml(:root => 'metrics', :data => false) }
+    end
+
   end
 
   # GET /status/1
   # GET /status/1.xml
   def show
     #permission_check("org.opensuse.yast.system.status.read")
-    @metrics =
     begin
-      @status = Status.new
+      @metric = Metric.find(CGI.unescape(params[:id]))
       stop = params[:stop].blank? ? Time.now : Time.at(params[:stop].to_i)
       start = params[:start].blank? ? stop - 300 : Time.at(params[:start].to_i)
-      @status.collect_data(start, stop, params[:data])
+
+      respond_to do |format|
+        format.xml { render :xml => @metric.to_xml(:start => start, :stop => stop) }
+      end
     rescue Exception => e
       render :text => e.to_s, :status => 400    # bad request
     end
