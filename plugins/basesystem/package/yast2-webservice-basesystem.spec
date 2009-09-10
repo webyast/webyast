@@ -53,6 +53,8 @@ Authors:
 mkdir -p $RPM_BUILD_ROOT/srv/www/%{pkg_user}/vendor/plugins/%{plugin_name}
 cp -a * $RPM_BUILD_ROOT/srv/www/%{pkg_user}/vendor/plugins/%{plugin_name}
 #FIXME maybe location change in future
+
+mkdir -p $RPM_BUILD_ROOT/etc/YaST2/
 cp %SOURCE1 $RPM_BUILD_ROOT/etc/YaST2/
 
 %clean
