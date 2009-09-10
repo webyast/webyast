@@ -13,19 +13,17 @@ class Network::RoutesController < ApplicationController
     if root == nil
       render ErrorResult.error(404, 2, "format or internal error") and return
     end
-    
-    @routing = Route.new(root)
-    @routing.save
+    @route = Route.find(root[:id])
+    @route.via = root[:via]
+    @route.save
     render :show
+#    show
   end
 
-  # See update
-  def create
-    update
-  end
 
   # Shows route settings. Requires read permission for network YaPI.
   def show
+    yapi_perm_check "network.read"
     @route = Route.find(params[:id])
 
     respond_to do |format|
