@@ -16,6 +16,8 @@ class Network::HostnameController < ApplicationController
     end
     
     @hostname = Hostname.new(root)
+    @hostname.name   = root[:name]
+    @hostname.domain = root[:domain]
     @hostname.save
     render :show
   end
