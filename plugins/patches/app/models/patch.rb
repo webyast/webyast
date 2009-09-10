@@ -3,17 +3,6 @@ require 'resolvable'
 # Model for patches available via package kit
 class Patch < Resolvable
 
-  # returns the modification time of
-  # the patch status, which you can use
-  # for cache policy purposes
-  def self.mtime
-    # we look for the most recent (max) modification time
-    # of either the package database or libzypp cache files
-    [ File.stat("/var/lib/rpm/Packages").mtime,
-      File.stat("/var/cache/zypp/solv").mtime,
-      * Dir["/var/cache/zypp/solv/*/solv"].map{ |x| File.stat(x).mtime } ].max
-  end
-
   def to_xml( options = {} )
     xml = options[:builder] ||= Builder::XmlMarkup.new(options)
     xml.instruct! unless options[:skip_instruct]

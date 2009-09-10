@@ -21,9 +21,8 @@ class Resolvable
     @resolvable_id = id_val
   end
 
-  # returns the modification time of
-  # the patch status, which you can use
-  # for cache policy purposes
+  # returns the modification time of the resolvable
+  # which you can use for cache policy purposes
   def self.mtime
     # we look for the most recent (max) modification time
     # of either the package database or libzypp cache files
