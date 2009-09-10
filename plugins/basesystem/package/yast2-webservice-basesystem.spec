@@ -19,6 +19,7 @@ Version:        0.0.1
 Release:        0
 Summary:        YaST2 - Webservice - Basesystem
 Source:         www.tar.bz2
+Source1:        basesystem.yml
 BuildRoot:      %{_tmppath}/%{name}-%{version}-build
 BuildArch:      noarch
 BuildRequires:  rubygem-mocha
@@ -52,7 +53,7 @@ Authors:
 mkdir -p $RPM_BUILD_ROOT/srv/www/%{pkg_user}/vendor/plugins/%{plugin_name}
 cp -a * $RPM_BUILD_ROOT/srv/www/%{pkg_user}/vendor/plugins/%{plugin_name}
 #FIXME maybe location change in future
-cp $RPM_BUILD_ROOT/srv/www/%{pkg_user}/vendor/plugins/%{plugin_name}/package/basesystem.yml $RPM_BUILD_ROOT/etc/YaST2/
+cp %SOURCE1 $RPM_BUILD_ROOT/etc/YaST2/
 
 %clean
 rm -rf $RPM_BUILD_ROOT
