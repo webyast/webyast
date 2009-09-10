@@ -6,9 +6,12 @@
 
 # Hmm, don't know if this is the right place for this
 # but http://groups.google.com/group/sdruby/browse_thread/thread/5239824b058ac936 doesn't know any better
-RAILS_ENV = ENV['RAILS_ENV']
+#
+# Apparently, webrick sets it, while "rake test" doesn't.
+#
+RAILS_ENV = ENV['RAILS_ENV'] unless defined? RAILS_ENV
 
-STDERR.puts "RAILS_ENV environment variable isn't set !" unless RAILS_ENV
+STDERR.puts "\n\n\t***RAILS_ENV environment variable isn't set !\n\n" unless RAILS_ENV
 
 # Specifies gem version of Rails to use when vendor/rails is not present
 # RAILS_GEM_VERSION = '2.1.0' unless defined? RAILS_GEM_VERSION
