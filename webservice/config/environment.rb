@@ -108,3 +108,9 @@ unless defined? PERMISSION_CHECK_TESTING
   USER_ROLES_CONFIG = "/etc/yast_user_roles"    
 
 end
+
+# look for all existing loaded plugin's public/ directories
+plugin_assets = init.loaded_plugins.map { |plugin| File.join(plugin.directory, 'public') }.reject { |dir| not (File.directory?(dir) and File.exist?(dir)) }
+
+require 'yast/rack/static_overlay'
+init.configuration.middleware.use YaST::Rack::StaticOverlay, :roots => plugin_assets
