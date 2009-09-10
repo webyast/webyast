@@ -1,5 +1,10 @@
 require 'rake'
 
+# This task generates REST API documentation from restdoc/api.txt file
+# if it has been found. The generated HTML documentation is stored
+# to public/*/restdoc directory. (Plugins set the target by creating
+# restdoc directory somewhere in public/ subdirectory.)
+
 desc "Generate REST API documentation using 'restility'"
 task :restdoc do
 
