@@ -3,14 +3,7 @@ require 'resolvable'
 class Package < Resolvable
 
   def to_xml( options = {} )
-    xml = options[:builder] ||= Builder::XmlMarkup.new(options)
-    xml.instruct! unless options[:skip_instruct]
-
-    xml.package do
-      xml.tag!(:resolvable_id, @resolvable_id )
-      xml.tag!(:name, @name )
-      xml.tag!(:version, @version )
-    end
+    super :package, options
   end
 
   def self.find(what)

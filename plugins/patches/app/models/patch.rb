@@ -3,29 +3,8 @@ require 'resolvable'
 # Model for patches available via package kit
 class Patch < Resolvable
 
-  # returns the modification time of
-  # the patch status, which you can use
-  # for cache policy purposes
-  def self.mtime
-    # we look for the most recent (max) modification time
-    # of either the package database or libzypp cache files
-    [ File.stat("/var/lib/rpm/Packages").mtime,
-      File.stat("/var/cache/zypp/solv").mtime,
-      * Dir["/var/cache/zypp/solv/*/solv"].map{ |x| File.stat(x).mtime } ].max
-  end
-
   def to_xml( options = {} )
-    xml = options[:builder] ||= Builder::XmlMarkup.new(options)
-    xml.instruct! unless options[:skip_instruct]
-
-    xml.patch_update do
-      xml.tag!(:resolvable_id, @resolvable_id, {:type => "integer"} )
-      xml.tag!(:kind, @kind )
-      xml.tag!(:name, @name )
-      xml.tag!(:arch, @arch )
-      xml.tag!(:repo, @repo )
-      xml.tag!(:summary, @summary )
-    end
+    super :patch_update, options
   end
 
   # find patches
@@ -68,41 +47,5 @@ class Patch < Resolvable
       self.install(patch)
     end
   end
-
-  # install an update, based on the PackageKit
-  # id
-  def self.package_kit_install(pkkit_id)
-    ok = true
-    system_bus = DBus::SystemBus.instance
-    package_kit = system_bus.service("org.freedesktop.PackageKit")
-    obj = package_kit.object("/org/freedesktop/PackageKit")
-    obj.introspect
-    obj_with_iface = obj["org.freedesktop.PackageKit"]
-    tid = obj_with_iface.GetTid
-    obj_tid = package_kit.object(tid[0])
-    obj_tid.introspect
-    obj_tid_with_iface = obj_tid["org.freedesktop.PackageKit.Transaction"]
-    obj_tid.default_iface = "org.freedesktop.PackageKit.Transaction"
-
-    obj_tid.on_signal("Package") do |line1,line2,line3|
-      Rails.logger.debug "  update package: #{line2}"
-    end
-
-    loop = DBus::Main.new
-    loop << system_bus
-
-    obj_tid.on_signal("Finished") {|u1,u2| loop.quit }
-    obj_tid.on_signal("Error") do |u1,u2|
-      ok = false
-      loop.quit
-    end
-    obj_tid_with_iface.UpdatePackages([pkkit_id])
-
-    loop.run
-    obj_with_iface.SuggestDaemonQuit
-
-    return ok
-  end
-
 
 end
