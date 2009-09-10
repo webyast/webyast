@@ -11,8 +11,8 @@ class BasesystemController < ApplicationController
    end
 
    def update
-     @basesystem = Basesystem.new
-     @basesystem.finish = params[:finish]
+     @basesystem = Basesystem.new     
+     @basesystem.finish = params[:basesystem][:finish]
      @basesystem.save
      render :show
    end

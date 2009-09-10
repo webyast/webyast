@@ -56,7 +56,7 @@ class PolicyKitException < BackendException
     @message = message
     @user = user
     @permission = permission
-    super("Policy kit exception for user #{user} and permission #{permission}: #{message}.")
+    super "Policy kit exception for user #{user} and permission #{permission}: #{message}."
   end
 
   def to_xml
@@ -69,6 +69,26 @@ class PolicyKitException < BackendException
       xml.polkitout @message
       xml.user @user
       xml.permission @permission
+    end
+  end
+end
+
+# Exception that signalizes that target file is missing or corrupted
+# for bad configuration in file use own exception with better explanation what is wrong
+class CorruptedFileException < BackendException
+  def initialize(file)
+    @file = file
+    super "Target system is not consistent: Missing or corrupted file #{@file}"
+  end
+
+  def to_xml
+    xml = Builder::XmlMarkup.new({})
+    xml.instruct!
+
+    xml.error do
+      xml.type "BADFILE"
+      xml.description message
+      xml.file @file
     end
   end
 end
