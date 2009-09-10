@@ -1,3 +1,4 @@
+ENV["RAILS_ENV"] = "test"
 # find the rails parent
 require File.join(File.dirname(__FILE__), '..', 'config', 'rails_parent')
 # first config rails

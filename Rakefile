@@ -10,7 +10,7 @@ end
 vars = ['PKG_BUILD', 'RCOV_PARAMS', 'RAILS_ENV', 'RAILS_PARENT']
 ENV['RAILS_PARENT'] = File.join(Dir.pwd, 'webservice')
 
-env = ENV.map { |key,val| ENV[key] ? %(#{key}="#{ENV[key]}") : nil }.reject {|x| x.nil?}.join(' ')
+env = ENV.map { |key,val| (ENV[key] && vars.include?( key )) ? %(#{key}="#{ENV[key]}") : nil }.reject {|x| x.nil?}.join(' ')
 
 plugins = Dir.glob('plugins/*')#.reject{|x| ['users'].include?(File.basename(x))}
 PROJECTS = ['webservice', *plugins]

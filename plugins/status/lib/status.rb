@@ -25,7 +25,7 @@ class Status
               xml.label(:type => "hash", :name => label) do
                 # limits
                 path = "#{metric_group}/#{metric}/#{label}"
-                if @limits.has_key? path
+                if @limits and @limits.has_key? path
                   xml.limits() do
                     xml.min(@limits["#{path}"]["maximum"])
                     xml.max(@limits["#{path}"]["minimum"])
@@ -63,7 +63,6 @@ class Status
         break
       end
     end
-    @limits = {}
     @limits = YAML.load(File.open(File.join(plugin_config_dir, "status_limits.yaml"))) if File.exists?(File.join(plugin_config_dir, "status_limits.yaml"))
   end
 
@@ -204,29 +203,24 @@ class Status
       nexttime = 9.9e+99
       result["starttime"] = 9.9e+99
       lines.each do |l| # each time
-        unless l.blank?
-          if l =~ /\d*:\D*/
-            pair = l.split ":"
-            values = pair[1].split " "
-            column = 0
-            values.each do |v| # each label
-              if result["interval"].nil?
-                if pair[0].to_i < result["starttime"].to_i
-                  result["starttime"] = pair[0].to_i
-                elsif pair[0].to_i < nexttime and pair[0].to_i > result["starttime"].to_i
-                  nexttime = pair[0].to_i
-                end
-              end
-
-              if v != "nan" #store valid values only
-                result["#{labels[column]}"] ||= Hash.new
-                result["#{labels[column]}"].merge!({"#{pair[0].chomp(": ")}" => v})
-                column += 1
-              else
-                result["#{labels[column]}"] ||= Hash.new
-                result["#{labels[column]}"].merge!({"#{pair[0].chomp(": ")}" => "invalid"})
+        next if l.blank?
+        if l =~ /\d*:\D*/
+          pair = l.split ":"
+          values = pair[1].split " "
+          column = 0
+          values.each do |v| # each label
+            unless result["interval"] # already defined?
+              # get the least distance to evaluate time interval
+              if pair[0].to_i < result["starttime"].to_i
+                result["starttime"] = pair[0].to_i
+              elsif pair[0].to_i < nexttime and pair[0].to_i > result["starttime"].to_i
+                nexttime = pair[0].to_i
               end
             end
+            v = "invalid" if v == "nan" #store valid values only
+            result[labels[column]] ||= Hash.new
+            result[labels[column]][pair[0]] = v
+            column += 1
           end
         end
       end

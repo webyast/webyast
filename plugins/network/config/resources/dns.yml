@@ -1,0 +1,4 @@
+interface: org.opensuse.yast.modules.yapi.network.dns
+policy: org.opensuse.yast.modules.yapi.network
+controller: network/dns
+singular: true

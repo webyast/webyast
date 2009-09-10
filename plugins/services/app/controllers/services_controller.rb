@@ -4,11 +4,13 @@ class ServicesController < ApplicationController
   before_filter :login_required
 
   def index
-    unless permission_check("org.opensuse.yast.modules.yapi.services.read")
-      render ErrorResult.error(403, 1, "no permission") and return
-    end
+    yapi_perm_check "services.read"
 
-    @services	= Service.find_all params
+    begin
+	@services	= Service.find_all params
+    rescue Exception => e
+	render ErrorResult.error(404, 107, e.to_s) and return
+    end
   end
 
   # GET /services/service_name
@@ -20,7 +22,12 @@ class ServicesController < ApplicationController
     end
 
     @service = Service.new(params[:id])
-    @service.read_status
+
+    begin
+	@service.read_status
+    rescue Exception => e
+	render ErrorResult.error(404, 108, e.to_s) and return
+    end
 
     respond_to do |format|
 	format.html { render :xml => @service.to_xml(:root => 'service', :dasherize => false), :location => "none" } #return xml only
@@ -32,10 +39,7 @@ class ServicesController < ApplicationController
   # PUT /services/1.xml
   # Shows service status. Requires execute permission for services YaPI.
   def update
-
-    unless permission_check( "org.opensuse.yast.modules.yapi.services.execute")
-      render ErrorResult.error(403, 1, "no permission") and return
-    end
+    yapi_perm_check "services.execute"
 
     begin
       @service = Service.find params[:id]

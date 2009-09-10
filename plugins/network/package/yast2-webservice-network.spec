@@ -11,7 +11,6 @@
 
 Name:           yast2-webservice-network
 PreReq:         yast2-webservice
-Provides:       yast2-webservice:/srv/www/yastws/app/controllers/network_controller.rb
 License:        MIT
 Group:          Productivity/Networking/Web/Utilities
 Autoreqprov:    on
@@ -19,7 +18,7 @@ Version:        0.0.1
 Release:        0
 Summary:        YaST2 - Webservice - Network
 Source:         www.tar.bz2
-Source1:        org.opensuse.yast.system.network.policy
+Source1:        org.opensuse.yast.modules.yapi.network.policy
 BuildRoot:      %{_tmppath}/%{name}-%{version}-build
 BuildArch:      noarch
 
@@ -71,5 +70,5 @@ rm -rf $RPM_BUILD_ROOT
 /srv/www/%{pkg_user}/vendor/plugins/%{plugin_name}/*
 %dir /usr/share/PolicyKit
 %dir /usr/share/PolicyKit/policy
-%attr(644,root,root) %config /usr/share/PolicyKit/policy/org.opensuse.yast.system.%{plugin_name}.policy
+%attr(644,root,root) %config /usr/share/PolicyKit/policy/org.opensuse.yast.modules.yapi.%{plugin_name}.policy
 
