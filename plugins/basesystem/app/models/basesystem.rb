@@ -2,6 +2,7 @@
 # Provides access to basic system settings module queue. Provides and updates
 # if base system settings is already done.
 require "yast/config_file"
+require "exceptions"
 class Basesystem
 
   # steps needed by base system
@@ -25,7 +26,11 @@ class Basesystem
   def Basesystem.find
     base = Basesystem.new
     base.finish = File.exist?(FINISH_FILE)
-    base.steps = YaST::ConfigFile.new(BASESYSTEM_CONF)["steps"] || []
+    begin
+      base.steps = YaST::ConfigFile.new(BASESYSTEM_CONF)["steps"] || []
+    rescue Exception => e
+      raise CorruptedFileException.new(File.join YaST::ConfigFile.config_default_location, "#{BASESYSTEM_CONF.to_s}.yml")
+    end
     return base
   end
 
