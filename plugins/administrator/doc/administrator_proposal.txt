@@ -1,0 +1,49 @@
+Admin password module proposal (fate #307141)
+---------------------------------------------
+
+Tasks: 
+    - change administrator (root's) password
+    - configure notification e-mail addresses
+      (mail aliases for root)
+
+
+Model
+
+    singleton class Administrator 
+    
+    attributes
+	string password
+	list<string> forward_mail_to
+
+    methods
+      (accessing the system, probably using YaPI::USERS)
+
+	save_password
+	save_aliases
+
+Policies
+
+    org.opensuse.yast.modules.yapi.users.administrator.read
+    org.opensuse.yast.modules.yapi.users.administrator.write
+
+API
+
+    URL: /administrator
+
+    REST service pseudo-code:
+
+    # GET method
+    def show
+
+	read and return current mail aliases
+
+    # PUT method
+    def update (params)
+
+	if password changed
+
+	    save the new password
+
+	if aliases changed
+
+	    save new list of aliases

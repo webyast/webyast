@@ -34,7 +34,7 @@ module YastRoles
   #                  - _PolicyKitException_ for error during running policy kit
   #
   def permission_check(action)
-    return true if ENV["RAILS_ENV"] == "test"
+    return true if ENV["RAILS_ENV"] == "test" and !defined? PERMISSION_CHECK_TESTING
     raise NotLoggedException if self.current_account==nil || self.current_account.login.size == 0
     action ||= "" #avoid nil action
 

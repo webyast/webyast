@@ -1,9 +1,9 @@
-ENV["RAILS_ENV"] = "test"
 # find the rails parent
 require File.join(File.dirname(__FILE__), '..', 'config', 'rails_parent')
 # first config rails
 require File.expand_path( File.join("config","environment"), RailsParent.parent )
 # then enable testing, this will get the routing right
+ENV["RAILS_ENV"] = "test"
 require 'test_help'
 
 class ActiveSupport::TestCase
@@ -39,4 +39,14 @@ class ActiveSupport::TestCase
   fixtures :all
 
   # Add more helper methods to be used by all tests here...
+  
+  # See http://pennysmalls.com/2009/03/04/rails-23-breakage-and-fixage/
+  def clean_backtrace(&block)
+    yield
+  rescue ActiveSupport::TestCase::Assertion => error
+    framework_path = Regexp.new(File.expand_path("#{File.dirname(__FILE__)}/assertions"))
+    error.backtrace.reject! { |line| File.expand_path(line) =~ framework_path }
+    raise
+  end
+		  
 end
