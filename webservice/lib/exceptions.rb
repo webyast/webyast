@@ -47,7 +47,7 @@ class NotLoggedException < BackendException
   end
 
   def to_xml
-    no_arg_to_xml("NOT_LOOGED", "No one is logged to rest service.")
+    no_arg_to_xml("NOT_LOGGED", "No one is logged to rest service.")
   end
 end
 
