@@ -22,13 +22,25 @@ class Administrator
   end
 
   def save_password(pw)
-    Rails.logger.debug "--------------------- saving password #{pw}--------"
+    parameters  = {
+      "password" => ["s", pw ]
+    }
+    yapi_ret = YastService.Call("YaPI::ADMINISTRATOR::Write", parameters)
+    Rails.logger.debug "YaPI returns: '#{yapi_ret}'"
   end
 
   def save_aliases(new_aliases)
-    # TODO compare new_aliases with aliases
-    Rails.logger.debug "--------------------- current aliases #{aliases.inspect}"
-    Rails.logger.debug "--------------------- saving aliases #{new_aliases.inspect}"
+    if @aliases.sort == new_aliases
+      Rails.logger.debug "mail aliases have not been changed"
+      return
+    end
+    parameters	= {
+      "aliases" => ["as", new_aliases]
+    }
+    yapi_ret = YastService.Call("YaPI::ADMINISTRATOR::Write", parameters)
+    Rails.logger.debug "YaPI returns: '#{yapi_ret}'"
+
+    raise yapi_ret unless yapi_ret.empty?
     @aliases = new_aliases
   end
 

@@ -4,7 +4,10 @@ class AdministratorController < ApplicationController
 
   # GET action
   def show
-#    @aliases = Administrator.instance.aliases
+    unless permission_check("org.opensuse.yast.modules.yapi.administrator.read")
+      render ErrorResult.error(403, 1, "no permission for reading") and return
+    end
+
     @admin = Administrator.instance
     @aliases	= @admin.read_aliases
 
@@ -17,6 +20,10 @@ class AdministratorController < ApplicationController
    
   # PUT action
   def update
+
+    unless permission_check("org.opensuse.yast.modules.yapi.administrator.write")
+      render ErrorResult.error(403, 1, "no permission for writing") and return
+    end
 	
     @admin = Administrator.instance
 
