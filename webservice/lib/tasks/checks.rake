@@ -175,6 +175,34 @@ EOF
     errors = true
   end
 
+  #
+  # plugin test. Each plugin will be tested for a "GET index" call. This call has to return "success"
+  #
+
+  test "all available plugins are working" do
+     Dir.glob(File.join(File.dirname(__FILE__), '../../../plugins', "**/*_controller.rb")).each do |controller|
+       modulename = File.basename(controller, ".rb").split("_").collect { |i| i.capitalize }.join
+       modulepath = File.dirname(controller).split("/")
+       # add Namespaces to the modulename. 
+       # They are defined as subdirectories in the controller directory
+       while modulepath
+         namespace = modulepath.pop
+         if namespace == "controllers"
+           modulepath = nil
+         else
+           modulename = namespace.capitalize + "::" + modulename
+         end
+       end
+       ok = system %(cd #{File.dirname(__FILE__)}; export RAILS_PARENT=../../; ruby plugin_test/functional/plugin_index_test.rb --plugin #{modulename} > /dev/null)
+       if !ok
+          # puts "Trying \"GET show\" cause some plugins do not support \"GET index\"..."
+          ok = system %(cd #{File.dirname(__FILE__)}; export RAILS_PARENT=../../; ruby plugin_test/functional/plugin_show_test.rb --plugin #{modulename} > /dev/null)
+       end
+       escape "plugin #{modulename} does not work correctly", "try 'export RAILS_PARENT=.; ruby plugin_test/functional/plugin_index_test.rb --plugin #{modulename}' and check the result" unless ok
+       errors = true
+     end
+  end
+  
   if !errors 
     puts ""
     puts "**************************************"

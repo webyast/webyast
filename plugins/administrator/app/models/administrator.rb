@@ -9,7 +9,16 @@ class Administrator
 
   def initialize
     @aliases	= []
-    Rails.logger.debug "===================== reading aliases now ? =========="
+  end
+
+  def read_aliases
+    yapi_ret = YastService.Call("YaPI::ADMINISTRATOR::Read")
+    if yapi_ret.nil?
+      raise "Can't read administrator data"
+    elsif yapi_ret.has_key?("aliases")
+      @aliases	= yapi_ret["aliases"]
+    end
+    @aliases
   end
 
   def save_password(pw)

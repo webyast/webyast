@@ -78,6 +78,7 @@ rm -rf $RPM_BUILD_ROOT
 /srv/www/%{pkg_user}/vendor/plugins/%{plugin_name}/uninstall.rb
 /srv/www/%{pkg_user}/vendor/plugins/%{plugin_name}/app
 /srv/www/%{pkg_user}/vendor/plugins/%{plugin_name}/config
+/srv/www/%{pkg_user}/vendor/plugins/%{plugin_name}/doc
 %dir /usr/share/PolicyKit
 %dir /usr/share/PolicyKit/policy
 %attr(644,root,root) %config /usr/share/PolicyKit/policy/org.opensuse.yast.modules.yapi.users.%{plugin_name}.policy

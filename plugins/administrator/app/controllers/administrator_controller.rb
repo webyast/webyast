@@ -4,7 +4,9 @@ class AdministratorController < ApplicationController
 
   # GET action
   def show
-    @aliases = Administrator.instance.aliases
+#    @aliases = Administrator.instance.aliases
+    @admin = Administrator.instance
+    @aliases	= @admin.read_aliases
 
     respond_to do |format|
       format.html { render :xml => @aliases.to_xml(:root => 'aliases'), :location => "none" } #return xml only
