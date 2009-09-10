@@ -58,7 +58,7 @@ public
     xml = options[:builder] ||= Builder::XmlMarkup.new(options)
     xml.instruct! unless options[:skip_instruct]
 
-    xml.send tag.to_sym do
+    xml.__send__ tag.to_sym do
       xml.tag!(:resolvable_id, @resolvable_id, {:type => "integer"} )
       xml.tag!(:kind, @kind )
       xml.tag!(:name, @name )
@@ -71,7 +71,7 @@ public
   end
   
   def to_json( options = {} )
-    hash = Hash.from_xml(to_xml())
+    hash = Hash.from_xml(self.to_xml())
     return hash.to_json
   end
 
