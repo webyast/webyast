@@ -1,10 +1,6 @@
-require 'packagekit'
+require 'resolvable'
 
-class Package < PackageKitModule
-
-  attr_accessor   :resolvable_id,
-                  :name,
-                  :version
+class Package < Resolvable
 
   def to_xml( options = {} )
     xml = options[:builder] ||= Builder::XmlMarkup.new(options)

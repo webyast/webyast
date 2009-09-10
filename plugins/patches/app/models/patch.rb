@@ -1,22 +1,7 @@
-require 'packagekit'
+require 'resolvable'
 
 # Model for patches available via package kit
-class Patch < PackageKitModule
-
-  attr_accessor   :resolvable_id,
-                  :kind,
-                  :name,
-                  :arch,
-                  :repo,
-                  :summary
-
-  def id
-    @resolvable_id
-  end
-
-  def id=(id_val)
-    @resolvable_id = id_val
-  end
+class Patch < Resolvable
 
   # returns the modification time of
   # the patch status, which you can use

@@ -3,7 +3,15 @@ require 'socket'
 require 'thread'
 
 # Model for patches available via package kit
-class PackageKitModule
+class Resolvable
+
+  attr_accessor   :resolvable_id,
+                  :kind,
+                  :name,
+		  :version,
+                  :arch,
+                  :repo,
+                  :summary
 
   def id
     @resolvable_id
