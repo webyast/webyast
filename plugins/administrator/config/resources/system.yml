@@ -1,3 +1,0 @@
-interface: org.opensuse.yast.modules.yapi.users.administrator
-controller: administrator
-singular: true
