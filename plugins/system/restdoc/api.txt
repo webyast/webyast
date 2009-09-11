@@ -36,7 +36,7 @@ GET /system
 
   Get the list of supported system actions. The list contains actions like <i>reboot</i> or <i>shutdown</i>.
 
-  CURL Example: curl -u <user> http://localhost:8080/system.xml
+  CURL Example: curl -u user http://localhost:8080/system.xml
 
 XmlResult: system
 
@@ -45,7 +45,7 @@ PUT /system
 
   Trigger a system action. Set active flag to true for the action which should be started - see the XML example file.
 
-  CURL example: curl -u <user> -X PUT -H 'Content-type: text/xml' -d @reboot_request.xml http://localhost:8080/system.xml
+  CURL example: curl -u user -X PUT -H 'Content-type: text/xml' -d @reboot_request.xml http://localhost:8080/system.xml
 
 XmlBody: reboot_request
   
