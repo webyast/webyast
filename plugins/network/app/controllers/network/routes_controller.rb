@@ -15,9 +15,13 @@ class Network::RoutesController < ApplicationController
     end
     @route = Route.find(root[:id])
     @route.via = root[:via]
-    @route.save
-    render :show
-#    show
+    respond_to do |format|    
+	if @route.save 
+	  format.xml { head :ok } 
+	  else  
+	    format.xml { render :xml => @route.errors,  :status => :unprocessable_entity } 
+	end
+    end
   end
 
 
