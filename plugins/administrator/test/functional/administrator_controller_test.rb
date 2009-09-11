@@ -12,6 +12,7 @@ class AdministratorControllerTest < ActionController::TestCase
     @request.session[:account_id] = 1 # defined in fixtures
 
     @model = Administrator.instance
+    @model.stubs(:read_aliases).returns([])
   end
   
   test "check 'show' result" do
