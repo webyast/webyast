@@ -16,10 +16,12 @@ task :restdoc do
 	# output directory
 	doc_target = Dir.glob('public/**/restdoc').first
 
-	if File.exists?(api_file) && File.exists?(doc_target)
+	if File.exists?(api_file) && !doc_target.nil? && File.directory?(doc_target)
 	    puts "Generating REST API documentation in #{doc_target}..."
 
 	    `rest_doc #{api_file} -I #{api_file.split('/').first} --html -o #{doc_target}`
+        else
+            puts "Skipping restdoc: restdoc/api.txt or public/**/restdoc/ not found."
 	end
     else
 	puts 'Error: restility gem is not installed!'
