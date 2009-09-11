@@ -1,0 +1,114 @@
+= YaST REST Service Documentation
+  <!-- it uses restility, TODO URL -->
+
+== Network
+
+  TODO link to a master API document that contains the common
+  conventions like the authentication below.
+
+  Only authenticated users are allowed to access the API. Authentication is done
+  by sending a Basic HTTP Authorisation header.
+
+  All names aren't allowed to contain spaces, slashes or colons.
+
+  TODO how to document errors?
+
+  <b>FIXME</b> for PUT requests the XmlBody and XmlResult documents are
+  faked, they need to match the implementation.
+
+== Table of Contents
+
+Contents
+
+== Overview
+
+  network...
+
+== PolicyKit Access Rights
+
+  The following PolicyKit permissions are defined:
+
+  org.opensuse.yast.modules.yapi.network.read
+
+  org.opensuse.yast.modules.yapi.network.write
+
+== Interfaces
+
+  Actually currently it operates on the interface
+  <b>configurations</b> (/etc/sysconfig/network/ifcfg-*)
+
+GET /network/interfaces
+
+  Get the list of interfaces.
+
+XmlResult: interfaces_get
+
+GET /network/interfaces/<id>
+<id>: interface ID, as in /etc/sysconfig/network/ifcfg-ID
+
+  Get the details of an interface.
+
+XmlResult: interfaces_eth0_get
+
+PUT /network/interfaces/<id>
+<id>: interface ID, as in /etc/sysconfig/network/ifcfg-ID
+
+  Update an interface config.
+
+XmlBody: interfaces_eth0_get
+XmlResult: interfaces_eth0_get
+
+== Hostname
+
+GET /network/hostname
+
+  Get the host name and domain.
+
+XmlResult: hostname_get
+
+PUT /network/hostname
+
+  Set the host name and domain.
+
+XmlBody: hostname_get
+XmlResult: hostname_get
+
+== DNS
+
+GET /network/dns
+
+  Get the nameservers and DNS search list.
+
+XmlResult: dns_get
+
+PUT /network/dns
+
+  Set the nameservers and DNS search list.
+
+XmlBody: dns_get
+XmlResult: dns_get
+
+== Routes
+
+GET /network/routes
+
+  Get the list of configured routes.
+
+XmlResult: routes_get
+
+GET /network/routes/<id>
+<id>: route ID
+
+  Get the details of a route.
+
+XmlResult: routes_default_get
+
+PUT /network/routes/<id>
+
+<id>: route ID, currently only "default" is valid
+
+  Update a route.
+
+
+XmlBody: routes_default_get
+XmlResult: routes_default_get
