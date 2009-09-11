@@ -16,10 +16,13 @@ class Network::HostnameController < ApplicationController
     end
     
     @hostname = Hostname.new(root)
-    @hostname.name   = root[:name]
-    @hostname.domain = root[:domain]
-    @hostname.save
-    render :show
+    respond_to do |format|    
+	if @hostname.save 
+	  format.xml { head :ok } 
+	  else  
+	    format.xml { render :xml => @route.errors,  :status => :unprocessable_entity } 
+	end
+    end
   end
 
   # See update
