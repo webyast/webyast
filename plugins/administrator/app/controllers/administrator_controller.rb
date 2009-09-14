@@ -33,7 +33,7 @@ class AdministratorController < ApplicationController
       @admin.save_password(data[:password])
     end
 
-    if data.has_key?(:aliases)
+    if data.has_key?(:aliases) && !data[:aliases].nil?
       begin
         @admin.save_aliases(data[:aliases])
 	rescue Exception => e
