@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<interfaces type="array">
+  <interface>
+    <id>eth0</id>
+    <bootproto>dhcp4</bootproto>
+    <ipaddr></ipaddr>
+  </interface>
+  <interface>
+    <id>eth7</id>
+    <bootproto>static</bootproto>
+    <ipaddr>7.7.7.7/7</ipaddr>
+  </interface>
+</interfaces>

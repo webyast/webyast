@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<route>
+  <id>default</id>
+  <via>192.168.1.1</via>
+</route>
