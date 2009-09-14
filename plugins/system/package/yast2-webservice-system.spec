@@ -50,6 +50,9 @@ Authors:
 mkdir -p $RPM_BUILD_ROOT/srv/www/%{pkg_user}/vendor/plugins/%{plugin_name}
 cp -a * $RPM_BUILD_ROOT/srv/www/%{pkg_user}/vendor/plugins/%{plugin_name}
 
+# do not package restdoc sources
+rm -rf $RPM_BUILD_ROOT/srv/www/%{pkg_user}/vendor/plugins/%{plugin_name}/restdoc
+
 
 %clean
 rm -rf $RPM_BUILD_ROOT
@@ -82,7 +85,6 @@ polkit-auth --user %{pkg_user} --revoke org.freedesktop.hal.power-management.reb
 /srv/www/%{pkg_user}/vendor/plugins/%{plugin_name}/uninstall.rb
 /srv/www/%{pkg_user}/vendor/plugins/%{plugin_name}/app
 /srv/www/%{pkg_user}/vendor/plugins/%{plugin_name}/config
-/srv/www/%{pkg_user}/vendor/plugins/%{plugin_name}/tasks
 /srv/www/%{pkg_user}/vendor/plugins/%{plugin_name}/public
 
 %changelog

@@ -18,15 +18,15 @@ class AdministratorTest < ActiveSupport::TestCase
     YastService.stubs(:Call).with('YaPI::ADMINISTRATOR::Read').returns({ "aliases" => [ "a@b" ] })
     ret = @model.read_aliases
     assert ret
-    assert @model.aliases.size == 1
+    assert @model.aliases.split(",").size == 1
   end
 
   def test_save_aliases
     new_aliases	= [ "test@domain.com", "a@b" ];
     YastService.stubs(:Call).with('YaPI::ADMINISTRATOR::Write', {"aliases" => [ "as", new_aliases ]}).returns("")
-    ret = @model.save_aliases(new_aliases)
+    ret = @model.save_aliases(new_aliases.join(","))
     assert ret
-    assert @model.aliases.size == 2
+    assert @model.aliases.split(",").size == 2
   end
 
 end
