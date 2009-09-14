@@ -20,7 +20,7 @@ class Network::HostnameController < ApplicationController
 	if @hostname.save 
 	  format.xml { head :ok } 
 	  else  
-	    format.xml { render :xml => @route.errors,  :status => :unprocessable_entity } 
+	    format.xml { render :xml => @hostname.errors,  :status => :unprocessable_entity } 
 	end
     end
   end
