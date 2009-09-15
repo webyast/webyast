@@ -7,6 +7,8 @@ class Resource
   attr_accessor :implementations
 
   class Implementation
+    attr_accessor :controller, :interface
+
     def initialize(interface, impl_hash)
       @interface = interface
       @policy    = impl_hash[:policy]
@@ -15,10 +17,14 @@ class Resource
     end
 
     def link_to
-      "/#{@controller}/#{@singular ? "show" : "index"}"
+      "/#{@controller}/#{action}"
       #               url_for :only_path => :true,
       #                       :controller => @controller,
       #                       :action => (@singular ? :show : :index)
+    end
+
+    def action
+      @singular ? :show : :index
     end
 
     def to_xml(xml_builder = nil)
@@ -26,7 +32,7 @@ class Resource
       xml.resource do
         xml.interface(@interface)
         xml.policy(@policy)
-        xml.singular (:type => :boolean) @singular.to_s
+        xml.singular(@singular, :type => :boolean)
         xml.href(link_to)
       end 
     end
