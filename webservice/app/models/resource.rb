@@ -17,7 +17,7 @@ class Resource
     end
 
     def link_to
-      "/#{@controller}/#{action}"
+      "/#{@controller}"
       #               url_for :only_path => :true,
       #                       :controller => @controller,
       #                       :action => (@singular ? :show : :index)
