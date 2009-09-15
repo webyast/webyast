@@ -18,6 +18,8 @@ install_test:
         /usr/bin/polkit-auth --user webyast_guest --grant org.opensuse.yast.scr.registernewagents ; \
         /usr/bin/polkit-auth --user webyast_guest --grant org.opensuse.yast.system.status ; \
         /usr/bin/polkit-auth --user webyast_guest --grant org.opensuse.yast.module-manager.import ; \
+        /usr/bin/polkit-auth --user webyast_guest --grant org.opensuse.yast.modules.yapi.time.read ; \
+        /usr/bin/polkit-auth --user webyast_guest --grant org.opensuse.yast.modules.yapi.time.write ; \
         ruby webservice/package/policyKit-rights.rb --user webyast_guest --action grant ; \
         echo "NOTE:"; \
         echo "NOTE: Please take care that all needed packages with the correct version are installed !"; \
@@ -42,6 +44,8 @@ install:
         /usr/bin/polkit-auth --user root --grant org.opensuse.yast.scr.unregisterallagents ; \
         /usr/bin/polkit-auth --user root --grant org.opensuse.yast.scr.registernewagents ; \
 	/usr/bin/polkit-auth --user root --grant org.opensuse.yast.module-manager.import ; \
+        /usr/bin/polkit-auth --user root --grant org.opensuse.yast.modules.yapi.time.read ; \
+        /usr/bin/polkit-auth --user root --grant org.opensuse.yast.modules.yapi.time.write ; \
         ruby webservice/package/policyKit-rights.rb --user root --action grant ; \
         echo "NOTE:"; \
         echo "NOTE: Please take care that all needed packages with the correct version are installed !"; \
