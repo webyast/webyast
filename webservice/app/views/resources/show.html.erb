@@ -1,5 +1,4 @@
 <h1><%= @node -%> resources</h1>
-<%= @resources.inspect -%>
 <% @resources.implementations do |implementation| -%>
-  <%= url_for :href => implementation.link_to -%><br/>
+   <%= url_for :href => implementation.link_to -%><br/>
 <% end -%>
