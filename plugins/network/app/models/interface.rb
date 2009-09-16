@@ -42,7 +42,8 @@ class Interface
 	      "ipaddr" => @ipaddr
       }
     }
-    YastService.Call("YaPI::NETWORK::Write",{"interface" => settings})
+    vsettings = [ "a{sa{ss}}", settings ] # bnc#538050
+    YastService.Call("YaPI::NETWORK::Write",{"interface" => vsettings})
     # TODO success or not?
   end
 
