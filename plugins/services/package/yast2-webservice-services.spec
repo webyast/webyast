@@ -38,6 +38,8 @@ YaST2 - Webservice - REST based interface of YaST in order to handle services.
 Authors:
 --------
     Stefan Schubert <schubi@opensuse.org>
+    Jiri Suchomel <jsuchome@suse.cz>
+    Ladislav Slezak <jsuchome@suse.cz>
 
 %prep
 %setup -q -n www
@@ -72,6 +74,7 @@ rm -rf $RPM_BUILD_ROOT
 %dir /srv/www/%{pkg_user}/vendor
 %dir /srv/www/%{pkg_user}/vendor/plugins
 %dir /srv/www/%{pkg_user}/vendor/plugins/%{plugin_name}
+%dir /srv/www/%{pkg_user}/vendor/plugins/%{plugin_name}/doc
 %dir /usr/share/PolicyKit
 %dir /usr/share/PolicyKit/policy
 /srv/www/%{pkg_user}/vendor/plugins/%{plugin_name}/MIT-LICENSE
