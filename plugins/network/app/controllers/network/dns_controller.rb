@@ -10,12 +10,12 @@ class Network::DnsController < ApplicationController
   # Sets hostname settings. Requires write permissions for network YaPI.
   def update
     root = params[:dns]
-    root["searches"]=root["searches"].split
-    root["nameservers"]=root["nameservers"].split
-    
     if root == nil
       render ErrorResult.error(404, 2, "format or internal error") and return
     end
+    
+    root["searches"]=root["searches"].split
+    root["nameservers"]=root["nameservers"].split
     
     @dns = DNS.new(root)
     @dns.save
