@@ -21,7 +21,7 @@ class Hostname
   # fills time instance with data from YaPI.
   #
   # +warn+: Doesn't take any parameters.
-  def Hostname.find
+  def self.find
     response = YastService.Call("YaPI::NETWORK::Read") # hostname: true
     ret = Hostname.new(response["hostname"])
     return ret
@@ -34,7 +34,8 @@ class Hostname
       "name" => @name,
       "domain" => @domain,
     }
-    YastService.Call("YaPI::NETWORK::Write",{"hostname" => settings})
+    vsettings = [ "a{ss}", settings ] # bnc#538050
+    YastService.Call("YaPI::NETWORK::Write",{"hostname" => vsettings})
     # TODO success or not?
   end
 

@@ -15,6 +15,8 @@ class Network::DnsController < ApplicationController
     end
     
     @dns = DNS.new(root)
+    @dns.domains = root["searches"]
+    @dns.servers = root["nameservers"]
     @dns.save
     render :show
   end

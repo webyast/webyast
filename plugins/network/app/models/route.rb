@@ -20,7 +20,7 @@ class Route
   # fills route instance with data from YaPI.
   #
   # +warn+: YaPI implements default only.
-  def Route.find( which )
+  def self.find( which )
     response = YastService.Call("YaPI::NETWORK::Read")
     routes_h = response["routes"]
     if which == :all
@@ -37,10 +37,12 @@ class Route
   # Saves data from model to system via YaPI. Saves only setted data,
   # so it support partial safe (e.g. save only new timezone if rest of fields is not set).
   def save
+    @via="" if @via==nil
     settings = {
       @id => { 'via'=>@via },
     }
-    YastService.Call("YaPI::NETWORK::Write",{"route" => settings})
+    vsettings = [ "a{sa{ss}}", settings ] # bnc#538050
+    YastService.Call("YaPI::NETWORK::Write",{"route" => vsettings})
     # TODO success or not?
   end
 

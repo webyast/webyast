@@ -29,7 +29,9 @@ class Network::InterfacesController < ApplicationController
     @ifce = Interface.find(params[:id])
 
     respond_to do |format|
-      format.html { render :xml => @difce.to_xml( :root => "interfaces", :dasherize => false ) }
+      format.html do
+        render :xml => difce.to_xml( :root => "interfaces", :dasherize => false )
+      end
       format.xml { render :xml => @ifce.to_xml( :root => "interfaces", :dasherize => false ) }
       format.json { render :json => @ifce.to_json }
     end

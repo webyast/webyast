@@ -12,10 +12,11 @@ class AdministratorControllerTest < ActionController::TestCase
     @request.session[:account_id] = 1 # defined in fixtures
 
     @model = Administrator.instance
-    @model.stubs(:read_aliases).returns([])
+    @model.stubs(:read_aliases).returns("")
   end
   
   test "check 'show' result" do
+
     ret = get :show
     # success (200 OK)
     assert_response :success
@@ -23,8 +24,9 @@ class AdministratorControllerTest < ActionController::TestCase
     # is returned a valid XML?
     ret_hash = Hash.from_xml(ret.body)
     assert ret_hash
-    assert ret_hash.has_key?("aliases")
-    assert ret_hash["aliases"].is_a? Array
+    assert ret_hash.has_key?("administrator")
+    assert ret_hash["administrator"].has_key?("aliases")
+    Rails.logger.debug ret_hash.inspect
   end
 
 end
