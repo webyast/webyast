@@ -3,10 +3,6 @@ class ResourcesController < ApplicationController
   
   def index
     @resources = Resource.all
-    do_respond
-  end
-
-  def do_respond
     @node = "Yast"
 
     respond_to do |format|
@@ -16,8 +12,17 @@ class ResourcesController < ApplicationController
     end
   end
 
+  def do_respond
+  end
+
   def show
-    @resources = Resource.find(params[:id])
-    do_respond
+    @resource = Resource.find(params[:id].tr('-','.'))
+    @node = "Yast"
+
+    respond_to do |format|
+      format.html
+      format.xml { render :xml => @resource.to_xml }
+      format.json{ render :json=> @resource.to_json}
+    end
   end
 end
