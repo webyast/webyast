@@ -15,13 +15,13 @@ class Network::InterfacesController < ApplicationController
     end
     
     @iface = Interface.new(root)
-    @iface.save
-    render :show
-  end
-
-  # See update
-  def create
-    update
+    respond_to do |format|    
+	if @iface.save 
+	  format.xml { head :ok } 
+	  else  
+	    format.xml { render :xml => @iface.errors,  :status => :unprocessable_entity } 
+	end
+    end
   end
 
   # Shows hostname settings. Requires read permission for network YaPI.
