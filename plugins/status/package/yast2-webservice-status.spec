@@ -20,8 +20,8 @@ Source:         www.tar.bz2
 Source1:        org.opensuse.yast.system.status.policy
 BuildRoot:      %{_tmppath}/%{name}-%{version}-build
 BuildArch:      noarch
-PreReq:         yast2-webservice
-Requires:       collectd rrdtool
+PreReq:         yast2-webservice, collectd
+Requires:       rrdtool
 
 #
 %define pkg_user yastws
@@ -61,6 +61,11 @@ rm -rf $RPM_BUILD_ROOT
 # granting all permissions for root
 #
 /etc/yastws/tools/policyKit-rights.rb --user root --action grant >& /dev/null || :
+#
+# enable and start  collectd
+#
+insserv collectd
+/etc/init.d/collectd start
 
 %files
 %defattr(-,root,root)
