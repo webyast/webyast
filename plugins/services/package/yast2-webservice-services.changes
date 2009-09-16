@@ -4,6 +4,7 @@ Thu Aug 20 15:47:27 CEST 2009 - jsuchome@suse.cz
 - simplified: only one controler and model, index and update actions
 - model uses YaPI and SCR libraries to access the system 
 - YaPI based policy file
+- 0.0.4
 
 -------------------------------------------------------------------
 Wed Jun 24 10:40:44 CEST 2009 - mvidner@suse.cz
