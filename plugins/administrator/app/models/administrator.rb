@@ -53,7 +53,7 @@ class Administrator
     
     xml.administrator do
       xml.password password
-      xml.aliases aliases
+      xml.aliases aliases, {:type => "string"}
     end  
   end
 
