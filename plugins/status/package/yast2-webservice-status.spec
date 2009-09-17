@@ -48,6 +48,7 @@ Authors:
 #
 mkdir -p $RPM_BUILD_ROOT/srv/www/%{pkg_user}/vendor/plugins/%{plugin_name}
 cp -a * $RPM_BUILD_ROOT/srv/www/%{pkg_user}/vendor/plugins/%{plugin_name}
+rm $RPM_BUILD_ROOT/srv/www/%{pkg_user}/vendor/plugins/%{plugin_name}/config/status_limits.yaml
 
 # Policies
 mkdir -p $RPM_BUILD_ROOT/usr/share/PolicyKit/policy
@@ -64,7 +65,7 @@ rm -rf $RPM_BUILD_ROOT
 #
 # enable and start  collectd
 #
-insserv collectd
+insserv -f collectd
 /etc/init.d/collectd start
 
 %files
@@ -73,6 +74,7 @@ insserv collectd
 %dir /srv/www/%{pkg_user}/vendor
 %dir /srv/www/%{pkg_user}/vendor/plugins
 %dir /srv/www/%{pkg_user}/vendor/plugins/%{plugin_name}
+%attr(-,%{pkg_user},%{pkg_user}) %dir /srv/www/%{pkg_user}/vendor/plugins/%{plugin_name}/config
 %dir /usr/share/PolicyKit
 %dir /usr/share/PolicyKit/policy
 /srv/www/%{pkg_user}/vendor/plugins/%{plugin_name}/*
