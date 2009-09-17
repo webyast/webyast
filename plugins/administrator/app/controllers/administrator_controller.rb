@@ -14,7 +14,7 @@ class AdministratorController < ApplicationController
 
     respond_to do |format|
       format.html { render :xml => @admin.to_xml(:root => "administrator"), :location => "none" } #return xml only
-      format.xml  { render :xml => @admin.to_xml(:root => "administrator"), :location => "none" }
+      format.xml  { render :xml => @admin.to_xml(:root => "administrator", :indent=>2), :location => "none" }
       format.json { render :json => @admin.to_json, :location => "none" }
     end
   end
