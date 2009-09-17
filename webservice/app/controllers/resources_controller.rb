@@ -17,8 +17,10 @@ class ResourcesController < ApplicationController
 
   def show
     @resource = Resource.find(params[:id].tr('-','.'))
+    unless @resource then
+      render :file => "#{RAILS_ROOT}/public/404.html", :status => 404 and return 
+    end
     @node = "Yast"
-
     respond_to do |format|
       format.html
       format.xml { render :xml => @resource.to_xml }

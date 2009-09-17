@@ -1,4 +1,2 @@
 <h1><%= @node -%> resources</h1>
-<% @resource.implementations.each do |impl| -%>
-   <%= link_to impl.interface, :only_path => :true, :controller => impl.controller, :action => impl.action -%><br/>
-<% end -%>
+   <%= link_to @resource.interface, :only_path => :true, :controller => @resource.controller, :action => @resource.action -%><br/>
