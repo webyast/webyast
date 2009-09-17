@@ -5,17 +5,17 @@
 class DNS
 
   # the short hostname
-  attr_accessor :domains
+  attr_accessor :searches
   # the domain name
-  attr_accessor :servers
+  attr_accessor :nameservers
 
   private
 
   public
 
   def initialize(kwargs)
-    @domains = kwargs["dnsdomains"]
-    @servers = kwargs["dnsservers"]
+    @searches = kwargs["searches"]
+    @nameservers = kwargs["nameservers"]
   end
 
   # fills time instance with data from YaPI.
@@ -31,10 +31,11 @@ class DNS
   # so it support partial safe (e.g. save only new timezone if rest of fields is not set).
   def save
     settings = {
-      "domains" => @domains,
-      "servers" => @servers,
+      "searches" => @searches,
+      "nameservers" => @nameservers,
     }
-    YastService.Call("YaPI::NETWORK::Write",{"hostname" => settings})
+    vsettings = [ "a{sas}", settings ] # bnc#538050    
+    YastService.Call("YaPI::NETWORK::Write",{"dns" => vsettings})
     # TODO success or not?
   end
 
@@ -44,12 +45,12 @@ class DNS
 
     xml.dns do
       xml.nameservers({:type => "array"}) do
-	  servers.each do |s|
+	  nameservers.each do |s|
 	    xml.nameserver s
 	  end
       end
       xml.searches({:type => "array"}) do
-         domains.each do |s|
+	searches.each do |s|
                xml.search s
          end
       end

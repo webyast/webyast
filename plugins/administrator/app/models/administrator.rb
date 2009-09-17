@@ -32,7 +32,7 @@ class Administrator
   end
 
   def save_aliases(new_aliases)
-    new_aliases = "" if new_aliases.nil?
+    new_aliases = "" if new_aliases.nil? || new_aliases == "NONE"
     if @aliases.split(",").sort == new_aliases.split(",").sort
       Rails.logger.debug "mail aliases have not been changed"
       return

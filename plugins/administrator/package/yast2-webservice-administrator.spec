@@ -12,7 +12,7 @@
 Name:           yast2-webservice-administrator
 PreReq:         yast2-webservice
 # requires YaPI::USERS
-Requires:	ysat2-users
+Requires:	yast2-users
 Provides:       yast2-webservice:/srv/www/yastws/app/controllers/administrator_controller.rb
 License:        MIT
 Group:          Productivity/Networking/Web/Utilities
@@ -21,7 +21,7 @@ Version:        0.0.1
 Release:        0
 Summary:        YaST2 - Webservice - Administrator
 Source:         www.tar.bz2
-Source1:	org.opensuse.yast.modules.yapi.users.administrator.policy
+Source1:	org.opensuse.yast.modules.yapi.administrator.policy
 BuildRoot:      %{_tmppath}/%{name}-%{version}-build
 BuildArch:      noarch
 
@@ -55,6 +55,9 @@ cp -a * $RPM_BUILD_ROOT/srv/www/%{pkg_user}/vendor/plugins/%{plugin_name}
 mkdir -p $RPM_BUILD_ROOT/usr/share/PolicyKit/policy
 install -m 0644 %SOURCE1 $RPM_BUILD_ROOT/usr/share/PolicyKit/policy/
 
+# do not package restdoc sources
+rm -rf $RPM_BUILD_ROOT/srv/www/%{pkg_user}/vendor/plugins/%{plugin_name}/restdoc
+
 %clean
 rm -rf $RPM_BUILD_ROOT
 
@@ -81,7 +84,7 @@ rm -rf $RPM_BUILD_ROOT
 /srv/www/%{pkg_user}/vendor/plugins/%{plugin_name}/doc
 %dir /usr/share/PolicyKit
 %dir /usr/share/PolicyKit/policy
-%attr(644,root,root) %config /usr/share/PolicyKit/policy/org.opensuse.yast.modules.yapi.users.%{plugin_name}.policy
+%attr(644,root,root) %config /usr/share/PolicyKit/policy/org.opensuse.yast.modules.yapi.%{plugin_name}.policy
 
 
 %changelog
