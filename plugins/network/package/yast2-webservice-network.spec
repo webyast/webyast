@@ -10,17 +10,18 @@
 
 
 Name:           yast2-webservice-network
-PreReq:         yast2-webservice
 License:        MIT
 Group:          Productivity/Networking/Web/Utilities
 Autoreqprov:    on
-Version:        0.0.2
+Version:        0.0.3
 Release:        0
 Summary:        YaST2 - Webservice - Network
 Source:         www.tar.bz2
 Source1:        org.opensuse.yast.modules.yapi.network.policy
 BuildRoot:      %{_tmppath}/%{name}-%{version}-build
 BuildArch:      noarch
+PreReq:         yast2-webservice
+Requires:       yast2-network >= 2.18.47
 
 #
 %define pkg_user yastws
@@ -60,6 +61,8 @@ rm -rf $RPM_BUILD_ROOT
 # granting all permissions for root
 #
 /etc/yastws/tools/policyKit-rights.rb --user root --action grant >& /dev/null || :
+# and for yastws
+/etc/yastws/tools/policyKit-rights.rb --user %{pkg_user} --action grant >& /dev/null || :
 
 %files
 %defattr(-,root,root)

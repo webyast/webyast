@@ -36,13 +36,18 @@ class Interface
   # Saves data from model to system via YaPI. Saves only setted data,
   # so it support partial safe (e.g. save only new timezone if rest of fields is not set).
   def save
-    settings = {
-      @id => {
+    if @bootproto==""
+      settings = {@id=>{}}
+    else
+      settings = {
+        @id => {
 	      "bootproto" => @bootproto,
 	      "ipaddr" => @ipaddr
+        }
       }
-    }
-    YastService.Call("YaPI::NETWORK::Write",{"interface" => settings})
+    end
+    vsettings = [ "a{sa{ss}}", settings ] # bnc#538050
+    YastService.Call("YaPI::NETWORK::Write",{"interface" => vsettings})
     # TODO success or not?
   end
 
