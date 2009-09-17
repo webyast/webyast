@@ -14,8 +14,8 @@ class DNS
   public
 
   def initialize(kwargs)
-    @domains = kwargs["dnsdomains"]
-    @servers = kwargs["dnsservers"]
+    @domains = kwargs["searches"]
+    @servers = kwargs["nameservers"]
   end
 
   # fills time instance with data from YaPI.
@@ -44,12 +44,12 @@ class DNS
 
     xml.dns do
       xml.nameservers({:type => "array"}) do
-	  servers.each do |s|
+	  @servers.each do |s|
 	    xml.nameserver s
 	  end
       end
       xml.searches({:type => "array"}) do
-         domains.each do |s|
+         @domains.each do |s|
                xml.search s
          end
       end
