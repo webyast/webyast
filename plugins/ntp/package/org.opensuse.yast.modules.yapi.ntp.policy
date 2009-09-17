@@ -8,7 +8,7 @@
   <vendor_url>http://en.opensuse.org/YAST</vendor_url>
 
   <action id="org.opensuse.yast.modules.yapi.ntp.synchronize">
-    <description>One time synchronization agaijn given ntp server</description>
+    <description>One time synchronization again given ntp server</description>
     <message>Authentication is required to onetime synchronize with ntp</message>
     <defaults>
       <allow_inactive>no</allow_inactive>

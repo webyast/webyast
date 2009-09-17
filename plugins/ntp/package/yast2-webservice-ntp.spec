@@ -1,5 +1,5 @@
 #
-# spec file for package yast2-webservice-systemtime (Version 0.1)
+# spec file for package yast2-webservice-ntp
 #
 # Copyright (c) 2008 SUSE LINUX Products GmbH, Nuernberg, Germany.
 # This file and all modifications and additions to the pristine
@@ -9,34 +9,35 @@
 #
 
 
-Name:           yast2-webservice-time
+Name:           yast2-webservice-ntp
 PreReq:         yast2-webservice
-Provides:       yast2-webservice:/srv/www/yastws/app/controllers/systemtime_controller.rb
+# requires HAL for reboot/shutdown actions
+Requires:	ntp
+Provides:       yast2-webservice:/srv/www/yastws/app/controllers/ntp_controller.rb
 License:        MIT
 Group:          Productivity/Networking/Web/Utilities
 Autoreqprov:    on
-Version:        0.0.3
+Version:        0.0.1
 Release:        0
-Summary:        YaST2 - Webservice - Time
+Summary:        YaST2 - Webservice - NTP
 Source:         www.tar.bz2
+Source1:        NTP.pm
+Source2:        org.opensuse.yast.modules.yapi.ntp.policy
 BuildRoot:      %{_tmppath}/%{name}-%{version}-build
 BuildArch:      noarch
-BuildRequires:  rubygem-mocha
-Requires:       yast2-core > 2.18.14
-Requires:       yast2-country >= 2.18.10
 
 #
 %define pkg_user yastws
-%define plugin_name time
+%define plugin_name ntp
 #
 
 
 %description
-YaST2 - Webservice - REST based interface of YaST in order to handle time and date.
+YaST2 - Webservice - REST based interface for basic ntp access
+
 Authors:
 --------
-    Stefan Schubert <schubi@opensuse.org>
-    Josef Reidinger <jreidinger@suse.cz>
+    Josef Reidinger <jreidinger@novell.com>
 
 %prep
 %setup -q -n www
@@ -50,18 +51,17 @@ Authors:
 #
 mkdir -p $RPM_BUILD_ROOT/srv/www/%{pkg_user}/vendor/plugins/%{plugin_name}
 cp -a * $RPM_BUILD_ROOT/srv/www/%{pkg_user}/vendor/plugins/%{plugin_name}
+cp ${SOURCE1} $RPM_BUILD_ROOT/usr/share/YaST2/modules/YaPI/
+mkdir -p $RPM_BUILD_ROOT/usr/share/PolicyKit/policy/
+cp ${SOURCE2} $RPM_BUILD_ROOT/usr/share/PolicyKit/policy/
 
 
 %clean
 rm -rf $RPM_BUILD_ROOT
 
 %post
-#
-# granting all permissions for root 
-#
-/etc/yastws/tools/policyKit-rights.rb --user root --action grant >& /dev/null || :
-# XXX not nice to get yastws all permissions, but now not better solution
-/etc/yastws/tools/policyKit-rights.rb --user yastws --action grant >& /dev/null || :
+
+%postun
 
 %files 
 %defattr(-,root,root)
@@ -69,9 +69,6 @@ rm -rf $RPM_BUILD_ROOT
 %dir /srv/www/%{pkg_user}/vendor
 %dir /srv/www/%{pkg_user}/vendor/plugins
 %dir /srv/www/%{pkg_user}/vendor/plugins/%{plugin_name}
-%dir /srv/www/%{pkg_user}/vendor/plugins/%{plugin_name}/doc
-%dir /usr/share/PolicyKit
-%dir /usr/share/PolicyKit/policy/
 /srv/www/%{pkg_user}/vendor/plugins/%{plugin_name}/MIT-LICENSE
 /srv/www/%{pkg_user}/vendor/plugins/%{plugin_name}/README
 /srv/www/%{pkg_user}/vendor/plugins/%{plugin_name}/Rakefile
@@ -80,6 +77,5 @@ rm -rf $RPM_BUILD_ROOT
 /srv/www/%{pkg_user}/vendor/plugins/%{plugin_name}/uninstall.rb
 /srv/www/%{pkg_user}/vendor/plugins/%{plugin_name}/app
 /srv/www/%{pkg_user}/vendor/plugins/%{plugin_name}/config
-/srv/www/%{pkg_user}/vendor/plugins/%{plugin_name}/tasks
-#/srv/www/%{pkg_user}/vendor/plugins/%{plugin_name}/test
-/srv/www/%{pkg_user}/vendor/plugins/%{plugin_name}/doc/README_FOR_APP
+/usr/share/YaST2/modules/YaPI/${SOURCE1}
+/usr/share/PolicyKit/policy/${SOURCE2}
