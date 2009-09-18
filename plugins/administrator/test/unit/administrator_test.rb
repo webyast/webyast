@@ -6,6 +6,8 @@ class AdministratorTest < ActiveSupport::TestCase
 
   def setup    
     @model = Administrator.instance
+    YastService.stubs(:Call).with('YaPI::ADMINISTRATOR::Read').returns({ "aliases" => [ "a@b" ] })
+    @model.read_aliases
   end
 
   def test_save_password
@@ -15,7 +17,7 @@ class AdministratorTest < ActiveSupport::TestCase
   end
 
   def test_read_aliases
-    YastService.stubs(:Call).with('YaPI::ADMINISTRATOR::Read').returns({ "aliases" => [ "a@b" ] })
+    YastService.stubs(:Call).with('YaPI::ADMINISTRATOR::Read').returns({ "aliases" => [ "a@b.c" ] })
     ret = @model.read_aliases
     assert ret
     assert @model.aliases.split(",").size == 1
@@ -27,6 +29,29 @@ class AdministratorTest < ActiveSupport::TestCase
     ret = @model.save_aliases(new_aliases.join(","))
     assert ret
     assert @model.aliases.split(",").size == 2
+  end
+
+  def test_save_empty_aliases
+    new_aliases	= "NONE"
+    YastService.stubs(:Call).with('YaPI::ADMINISTRATOR::Write', {"aliases" => [ "as", [] ]}).returns("")
+    ret = @model.save_aliases(new_aliases)
+    assert ret
+    assert @model.aliases.empty?
+  end
+
+  def test_save_failure
+    new_aliases	= [ "test@domain.com" ];
+    YastService.stubs(:Call).with('YaPI::ADMINISTRATOR::Write', {"aliases" => [ "as", new_aliases ]}).returns("YaPI error")
+    assert_raise Exception do
+      ret = @model.save_aliases(new_aliases.join(","))
+    end
+  end
+
+  def test_save_no_change
+    new_aliases	= [ "a@b" ];
+    ret = @model.save_aliases(new_aliases.join(","))
+    assert ret
+    assert @model.aliases.split(",").size == 1
   end
 
 end
