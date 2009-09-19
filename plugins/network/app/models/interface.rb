@@ -14,7 +14,7 @@ class Interface
 
   def initialize(kwargs, id=nil)
     @bootproto = kwargs["bootproto"]
-    @ipaddr    = kwargs["ipaddr"]
+    @ipaddr    = kwargs["ipaddr"] || ""
     @id	       = kwargs["id"] || id
   end
 
