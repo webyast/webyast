@@ -42,7 +42,7 @@ class InvalidParameters < ArgumentError
   end
 
   # Creates standartized xml for ActiveResource validation - http://railsbrain.com/api/rails-2.3.2/doc/index.html?a=C00000626&name=Base
-  # error is reported in format 'Invalid: <argument name> --- <error identificator>
+  # error is reported in format '<humanized argument name> --- <error identificator>
   def to_xml()
     xml = Builder::XmlMarkup.new(options)
     xml.instruct! unless options[:skip_instruct]
@@ -50,7 +50,7 @@ class InvalidParameters < ArgumentError
     xml.errors(:type => "array") do
       @constrains.each {
         |c|
-        xml.error "Invalid: #{c[:name]} --- #{c[:error]}"
+        xml.error "#{c[:name].humanize} --- #{c[:error]}"
       }
     end
   end
