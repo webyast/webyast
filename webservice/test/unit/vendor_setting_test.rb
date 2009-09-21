@@ -36,7 +36,7 @@ EOF
   def test_config
     settings = VendorSetting.find(:all)
 
-    assert_equal(4, settings.size)
+    assert_equal(5, settings.size)
 
     assert_equal("http://www.bugs.com", VendorSetting.bug_url)
     assert_instance_of(Array, VendorSetting.services)
