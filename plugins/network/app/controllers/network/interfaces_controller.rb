@@ -11,7 +11,7 @@ class Network::InterfacesController < ApplicationController
   def update
     root = params[:interfaces]
     if root == nil
-      render ErrorResult.error(404, 2, "format or internal error") and return
+      raise InvalidParameters.new [{:name => "Interfaces", :error => "Missing"}]
     end
     
     @iface = Interface.new(root)

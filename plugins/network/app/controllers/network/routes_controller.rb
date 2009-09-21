@@ -11,7 +11,7 @@ class Network::RoutesController < ApplicationController
   def update
     root = params[:routes]
     if root == nil
-      render ErrorResult.error(404, 2, "format or internal error") and return
+      raise InvalidParameters.new [{:name => "Routes", :error => "Missing"}]
     end
     @route = Route.find(root[:id])
     @route.via = root[:via]
