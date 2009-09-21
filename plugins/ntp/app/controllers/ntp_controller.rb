@@ -16,7 +16,7 @@ class NtpController < ApplicationController
   def update
     root = params["ntp"]
     if root == nil || root == {} #FIXME exception for this
-      render ErrorResult.error(404, 2, "format error - missing actions") and return
+      raise InvalidParameters [{:name => "ntp",:error => "Missing"}]
     end
 	
     @ntp = Ntp.find
@@ -27,7 +27,7 @@ class NtpController < ApplicationController
     end
 
     @ntp.save
-    redirect_to :action => :show
+    show
   end
 
   # See update

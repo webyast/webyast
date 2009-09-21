@@ -22,8 +22,8 @@ class SystemtimesController < ApplicationController
       raise InvalidParameters.new [{:name => "Timezone", :error => "Missing"}]
     end
     
-    @systemtime = Systemtime.create_from_xml(root)
-    @systemtime.save
+    systemtime = Systemtime.create_from_xml(root)    
+    systemtime.save
     show
   end
 
