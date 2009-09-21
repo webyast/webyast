@@ -2,8 +2,12 @@
 # Likewise, all the methods added will be available for all controllers.
 
 class ApplicationController < ActionController::Base
-  rescue_from 'BackendException' do |exception|
+  rescue_from :BackendException do |exception|
       render :xml => exception, :status => 503
+  end
+
+  rescue_from :InvalidParameters do |exception|
+      render :xml => exception, :status => 422 #422-resource invalid
   end
 
   include AuthenticatedSystem

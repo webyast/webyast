@@ -3,15 +3,15 @@
 # Main goal is to provide to_xml method to report it in response.
 class BackendException < StandardError
 
-  def to_xml()
-    no_arg_to_xml("GENERAL", "Universal error, should be redefined.")
+  def to_xml(options={})
+    no_arg_to_xml(options,"GENERAL", "Universal error, should be redefined.")
   end
 
   protected
   #create xml without arguments, so only error type and description
-  def no_arg_to_xml(type,descr)
-    xml = Builder::XmlMarkup.new({})
-    xml.instruct!
+  def no_arg_to_xml(options,type,descr)
+    xml = Builder::XmlMarkup.new(options)
+    xml.instruct! unless options[:skip_instruct]
 
     xml.error do
       xml.type type
@@ -22,15 +22,49 @@ class BackendException < StandardError
 
 end
 
+# Exception that reports invalid arguments
+# initialized by constrains which is broken
+# If uncatched then response 422 and cause fail of ActiveResouce#save
+class InvalidParameters < ArgumentError
+  # Takes as argument constrains. Constrains is array of hash with keys name
+  # and error. Name is name of parameter and error is broken constrain
+  # (it is not translated so should be some symbol, which is then on frontend
+  #  readed and reported translated message)
+  #
+  # example::
+  #   raise InvalidParameters.new [
+  #     { :name => "id", :error => "MISSING"},
+  #     { :name => "email", :error => "NO@"}
+  #   ]
+  def initialize (constrains)
+    @constrains = constrains
+    super("Invalid arguments: #{@constrains.inspect}")
+  end
+
+  # Creates standartized xml for ActiveResource validation - http://railsbrain.com/api/rails-2.3.2/doc/index.html?a=C00000626&name=Base
+  # error is reported in format 'Invalid: <argument name> --- <error identificator>
+  def to_xml()
+    xml = Builder::XmlMarkup.new(options)
+    xml.instruct! unless options[:skip_instruct]
+
+    xml.errors(:type => "array") do
+      @constrains.each {
+        |c|
+        xml.error "Invalid: #{c[:name]} --- #{c[:error]}"
+      }
+    end
+  end
+end
+
 class NoPermissionException < BackendException
   def initialize(permission,user)
     @permission = permission
     @user = user
   end
 
-  def to_xml
-    xml = Builder::XmlMarkup.new({})
-    xml.instruct!
+  def to_xml(options={})
+    xml = Builder::XmlMarkup.new(options)
+    xml.instruct! unless options[:skip_instruct]
 
     xml.error do
       xml.type "NO_PERM"
@@ -46,8 +80,8 @@ class NotLoggedException < BackendException
     super("No one is logged.")
   end
 
-  def to_xml
-    no_arg_to_xml("NOT_LOGGED", "No one is logged to rest service.")
+  def to_xml(options={})
+    no_arg_to_xml(options,"NOT_LOGGED", "No one is logged to rest service.")
   end
 end
 
@@ -59,9 +93,9 @@ class PolicyKitException < BackendException
     super "Policy kit exception for user #{user} and permission #{permission}: #{message}."
   end
 
-  def to_xml
-    xml = Builder::XmlMarkup.new({})
-    xml.instruct!
+  def to_xml(options={})
+    xml = Builder::XmlMarkup.new(options)
+    xml.instruct! unless options[:skip_instruct]
 
     xml.error do
       xml.type "POLKIT"
@@ -81,9 +115,9 @@ class CorruptedFileException < BackendException
     super "Target system is not consistent: Missing or corrupted file #{@file}"
   end
 
-  def to_xml
-    xml = Builder::XmlMarkup.new({})
-    xml.instruct!
+  def to_xml(options={})
+    xml = Builder::XmlMarkup.new(options)
+    xml.instruct! unless options[:skip_instruct]
 
     xml.error do
       xml.type "BADFILE"
