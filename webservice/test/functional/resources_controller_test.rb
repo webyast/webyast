@@ -3,24 +3,28 @@
 #
 # This tests proper returns for resource inspection
 #
-require File.expand_path(File.dirname(__FILE__) + "/../test_helper")
 
 class TestPlugin
   attr_reader :directory
   def initialize path
-    @directory = path
+    @directory = File.join(File.dirname(__FILE__), "..", path)
   end
 end
 
-class ResourcesControllerTest < ActionController::TestCase
+unless defined? RESOURCE_REGISTRATION_TESTING
+  RESOURCE_REGISTRATION_TESTING = true # prevent plugin registration in environment.rb
+end
+require File.join(File.dirname(__FILE__), "..", "test_helper")
+require File.join(File.dirname(__FILE__), "..", "..", "lib", "resource_registration")
 
-  require File.expand_path(File.dirname(__FILE__) + "/../../lib/resource_registration")
+class ResourcesControllerTest < ActionController::TestCase
 
   def setup
     # set up test routing
     ResourceRegistration.reset
-    plugin = TestPlugin.new "test/resource_fixtures/good"
+    plugin = TestPlugin.new "resource_fixtures/good"
     ResourceRegistration.register_plugin plugin
+    ResourceRegistration.route ResourceRegistration.resources
   end
   
   test "resources access root" do

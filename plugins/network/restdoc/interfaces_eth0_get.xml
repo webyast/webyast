@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<interface>
+  <id>eth0</id>
+  <bootproto>dhcp4</bootproto>
+  <ipaddr/>
+</interface>

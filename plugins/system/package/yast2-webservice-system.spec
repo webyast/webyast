@@ -50,16 +50,19 @@ Authors:
 mkdir -p $RPM_BUILD_ROOT/srv/www/%{pkg_user}/vendor/plugins/%{plugin_name}
 cp -a * $RPM_BUILD_ROOT/srv/www/%{pkg_user}/vendor/plugins/%{plugin_name}
 
+# do not package restdoc sources
+rm -rf $RPM_BUILD_ROOT/srv/www/%{pkg_user}/vendor/plugins/%{plugin_name}/restdoc
+
 
 %clean
 rm -rf $RPM_BUILD_ROOT
 
 %post
 # granting all permissions for the web user
-polkit-auth --user %{pkg_user} --grant org.freedesktop.hal.power-management.shutdown ||:
-polkit-auth --user %{pkg_user} --grant org.freedesktop.hal.power-management.shutdown-multiple-sessions ||:
-polkit-auth --user %{pkg_user} --grant org.freedesktop.hal.power-management.reboot ||:
-polkit-auth --user %{pkg_user} --grant org.freedesktop.hal.power-management.reboot-multiple-sessions ||:
+polkit-auth --user %{pkg_user} --grant org.freedesktop.hal.power-management.shutdown
+polkit-auth --user %{pkg_user} --grant org.freedesktop.hal.power-management.shutdown-multiple-sessions
+polkit-auth --user %{pkg_user} --grant org.freedesktop.hal.power-management.reboot
+polkit-auth --user %{pkg_user} --grant org.freedesktop.hal.power-management.reboot-multiple-sessions
 
 %postun
 # discard all configured permissions for the web user
@@ -82,7 +85,6 @@ polkit-auth --user %{pkg_user} --revoke org.freedesktop.hal.power-management.reb
 /srv/www/%{pkg_user}/vendor/plugins/%{plugin_name}/uninstall.rb
 /srv/www/%{pkg_user}/vendor/plugins/%{plugin_name}/app
 /srv/www/%{pkg_user}/vendor/plugins/%{plugin_name}/config
-#/srv/www/%{pkg_user}/vendor/plugins/%{plugin_name}/tasks
-#%attr(644,root,root) %config %{_datadir}/PolicyKit/policy/org.opensuse.yast.system.packages.policy
+/srv/www/%{pkg_user}/vendor/plugins/%{plugin_name}/public
 
 %changelog

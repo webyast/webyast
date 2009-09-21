@@ -1,0 +1,10 @@
+System
+======
+
+REST interface for configuration of system administrator's attributes:
+
+- password
+- mail aliases
+
+
+Copyright (c) 2009 Novell, released under the MIT license

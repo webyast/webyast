@@ -1,2 +1,9 @@
-Use this README file to introduce your application and point to useful places in the API for learning more.
-Run "rake doc:app" to generate API documentation for your models, controllers, helpers, and libraries.
+Basesystem
+=========
+
+Plugin for create sequence of modules that should be done.
+Provides list of modules and status if sequence is completed or not.
+Completation status must be set manual via REST api.
+
+
+Copyright (c) 2009 Novell, released under the GPL2 license

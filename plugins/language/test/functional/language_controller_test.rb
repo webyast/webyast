@@ -8,7 +8,7 @@ class LanguageControllerTest < ActionController::TestCase
   fixtures :accounts
   
   def setup
-    @model_class = Language
+#    @model_class = Language
     @controller = LanguageController.new
     @request = ActionController::TestRequest.new
     # http://railsforum.com/viewtopic.php?id=1719

@@ -9,4 +9,6 @@ ActionController::Routing::Routes.draw do |map|
   map.login "/login.:format", :controller => 'sessions', :action => 'create'
   map.logout "/logout.:format", :controller => 'sessions', :action => 'destroy'
 
+  map.resources :logs
+  
 end

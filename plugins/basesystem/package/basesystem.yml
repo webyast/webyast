@@ -1,0 +1,4 @@
+steps:
+  - controller: systemtime
+  - controller: language
+    action: index

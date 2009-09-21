@@ -65,8 +65,8 @@ module PluginBasicTests
 
   def test_update_noparams
     @model_class.stubs(:save)
-    put :update
-    assert_response :missing
+    put :update    
+    assert_response 422
   end
 
   def test_update_noperm

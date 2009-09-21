@@ -6,6 +6,7 @@ class Service
   
   attr_accessor :name
   attr_accessor :status
+  attr_accessor :description
 
   def initialize(name)
     @name = name
@@ -20,12 +21,21 @@ class Service
 
   public
 
+  # Return current system runlevel,
   def self.current_runlevel
     rl = run_runlevel.split(" ").last
     raise Exception.new('Non-number runlevel') if !/^[0-9]*$/.match rl and rl != "S"
     rl == "S" ? -1 : rl.to_i
   end
  
+  # Read the list of all services.
+  # If the key "custom" is present in the parameter hash, read the list of
+  # custom services from the file. Otherwise, read LSB services available in
+  # current system runlevel.
+  #
+  # If the key "read_status" is present in the parameter hash, read the status of
+  # each service.
+  #
   # services = Service.find_all
   def self.find_all(params)
     params = {} if params.nil?
@@ -41,6 +51,9 @@ class Service
 	  if read_status and s.has_key?("status")
 	    ret = Scr.instance.execute([s["status"]])
 	    service.status = ret[:exit]
+	  end
+	  if s.has_key?("description")
+	    service.description	= s["description"]
 	  end
 	  Rails.logger.debug "custom service: #{service.inspect}"
           services << service
@@ -70,12 +83,12 @@ class Service
     services
   end
 
-  # load the status of the service
   def self.find(id)
     # actually we do not need to read the real status now
     Service.new(id)
   end
 
+  # load the status of the service
   def read_status
     @status = save('status')[:exit]
   end
@@ -118,6 +131,7 @@ class Service
     
     xml.service do
       xml.name name
+      xml.description description
       xml.status status, {:type => "integer"}
     end  
   end

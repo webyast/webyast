@@ -1,59 +1,44 @@
 # = Base system model
 # Provides access to basic system settings module queue. Provides and updates
-# currently reached state in queue.
+# if base system settings is already done.
+require "yast/config_file"
+require "exceptions"
 class Basesystem
 
   # steps needed by base system
   attr_accessor   :steps
-  # current step to finish
-  attr_accessor   :current
+  # Flag if base system configuration is  finished
+  attr_accessor   :finish
 
   # path to file which defines module queue
-  STEPS_FILE = File.join(File.dirname(__FILE__),"..","..","config","basesystemsteps.conf")
+  BASESYSTEM_CONF = :basesystem
   # path to file which store module then is next in queue or END_STRING if all steps is done
-  CURRENT_STEP_FILE = File.join(File.dirname(__FILE__),"..","..","var","currentstep")
-  # keyword that signalize finish of all steps
-  END_STRING = "FINISH"
+  FINISH_FILE = File.join(File.dirname(__FILE__),"..","..","var","finish")  
+
 
   #Gets instance of Basesystem with initialized steps queue.
   def initialize
-    @steps = Array.new
-    #load steps configuration    
-    fh = File.new(STEPS_FILE, "r")
-    while (line = fh.gets)
-      steps.push(line.chomp)
-    end
-    fh.close
+    @steps = []
+    @finish = false
   end
 
-  #Gets instance of Basesystem with initialized steps queue and current step
+  #Gets instance of Basesystem with initialized steps queue and if basic settings is done
   def Basesystem.find
-    ret = Basesystem.new        
-    unless File.exist?(CURRENT_STEP_FILE)
-      ret.current = ret.steps.empty? ? END_STRING : ret.steps[0]
-    else
-      fh = File.new(CURRENT_STEP_FILE,"r")
-      ret.current = fh.gets
-      fh.close
-      if ret.steps.include(ret.current) #invalid step
-        Rails.logger.warn "invalid step in current"
-        ret.current = END_STRING
-      end
+    base = Basesystem.new
+    base.finish = File.exist?(FINISH_FILE)
+    begin
+      base.steps = YaST::ConfigFile.new(BASESYSTEM_CONF)["steps"] || []
+    rescue Exception => e
+      raise CorruptedFileException.new(File.join YaST::ConfigFile.config_default_location, "#{BASESYSTEM_CONF.to_s}.yml")
     end
-    Rails.logger.info "Current step is set to #{ret.current}"
-    return ret
+    return base
   end
 
   #stores to system Basesystem settings
   def save
-    #check if current is valid
-    unless @steps.include?(@current) or @current == END_STRING
-      #invalid current value
-      return false
+    if @finish
+      FileUtils.touch FINISH_FILE unless File.exist?(FINISH_FILE)
     end
-    cur = File.new(CURRENT_STEP_FILE, "w")
-    cur.puts @current
-    cur.close
   end
 
   #serialize part of Basesystem to xml
@@ -62,7 +47,16 @@ class Basesystem
     xml.instruct! unless options[:skip_instruct]
 
     xml.basesystem do
-      xml.tag!(:current, @current)
+      xml.finish(@finish,{:type => "boolean"})
+      xml.steps({:type => "array"}) do
+        @steps.each do
+          |step|
+          xml.step do             
+            xml.controller step["controller"]
+            xml.action step["action"]
+          end
+        end
+      end
     end
   end
 
@@ -72,3 +66,4 @@ class Basesystem
     return hash.to_json
   end
 end
+
