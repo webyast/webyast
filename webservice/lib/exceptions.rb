@@ -43,7 +43,7 @@ class InvalidParameters < ArgumentError
 
   # Creates standartized xml for ActiveResource validation - http://railsbrain.com/api/rails-2.3.2/doc/index.html?a=C00000626&name=Base
   # error is reported in format '<humanized argument name> --- <error identificator>
-  def to_xml()
+  def to_xml(options={})
     xml = Builder::XmlMarkup.new(options)
     xml.instruct! unless options[:skip_instruct]
 
