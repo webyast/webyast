@@ -43,9 +43,10 @@ class Metric
   attr_reader :plugin_full
   attr_reader :type_full
 
-  # alias for identifier
+  # like identifier, but to be used as a REST id
+  # so / are replaced by +
   def id
-    identifier
+    identifier.gsub("/", "+").gsub(".", "*")
   end
   
   def identifier
@@ -103,7 +104,7 @@ class Metric
     ret[:exit].zero?
   end
 
-  #
+  # available plugins
   def self.plugins
     Metric.find(:all).map { |x| x.plugin }
   end
@@ -149,12 +150,11 @@ class Metric
     # parameter
     when Hash then find_multiple(what.merge(opts))
     when String
-      raise "hello"
-      find_multiple({:identifier => what})
+      find_multiple({:id => what}).first rescue nil
     else nil     
     end
   end
-
+  
   # find all values
   def self.find_all
     ret = []
@@ -208,12 +208,15 @@ class Metric
     data_opts = {}
     data_opts[:start] = opts[:start] if opts.has_key?(:start)
     data_opts[:stop] = opts[:stop] if opts.has_key?(:stop)
+
+    Rails.logger.info "rendering metric #{id} from #{data_opts[:start].to_i} to #{data_opts[:stop].to_i}"
     
     xml = opts[:builder] ||= Builder::XmlMarkup.new(opts)
     xml.instruct! unless opts[:skip_instruct]
 
     xml.metric do
-      xml.id identifier
+      xml.id id
+      xml.identifier identifier
       xml.host host
       xml.plugin plugin
       xml.plugin_instance plugin_instance
@@ -229,7 +232,7 @@ class Metric
         metric_data.each do |col, values|
           next if col == "starttime"
           next if col == "interval"
-          xml.data(:column => col, :start => starttime.to_i, :interval => interval ) { values.each { |time, value| xml.value value } }
+          xml.data(:column => col, :start => starttime.to_i, :interval => interval ) { values.sort.each { |x| xml.comment!(x[0].to_i.to_s) if RAILS_ENV == "development"; xml.value x[1] } }
         end
       end
       
@@ -245,9 +248,11 @@ class Metric
   # default last 5 minutes from now
   def self.run_rrdtool(file, opts={})
     stop = opts.has_key?(:stop) ? opts[:stop] : Time.now
-    start = opts.has_key?(:stop) ? opts[:stop] : stop - 300
-
-    cmd = IO.popen("rrdtool fetch #{file} AVERAGE --start #{start.strftime("%H:%M,%m/%d/%Y")} --end #{stop.strftime("%H:%M,%m/%d/%Y")}")      
+    start = opts.has_key?(:start) ? opts[:start] : stop - 300
+    
+    cmdline = "rrdtool fetch #{file} AVERAGE --start #{start.to_i} --end #{stop.to_i}"
+    Rails.logger.debug "running #{cmdline}"
+    cmd = IO.popen(cmdline)
     output = cmd.read
     cmd.close
 
@@ -271,6 +276,7 @@ class Metric
     times = []
     labels = []
     output.each_line do |line|
+      line.chomp!
       line_count += 1
       next if line.blank?
 
@@ -282,15 +288,20 @@ class Metric
         next
       end
 
+      #Rails.logger.info "--> '#{line}'"
+      
       time_str, values_str = line.split(":")
       time = Time.at(time_str.to_i)
       
       # store time to get the starttime and interval
       times << time
+
+      #Rails.logger.info "--> '#{values_str}'"
       
       values = values_str.split(" ").map {|x| x == "nan" ? nil : x.to_f}
 
       values.each_with_index do |value, index|
+#        Rails.logger.info "#{value} at #{index}"
         label = labels[index]
         result[label] = {} if not result.has_key?(label)
         result[label][time] = value
