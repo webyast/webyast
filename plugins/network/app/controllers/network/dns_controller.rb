@@ -11,7 +11,7 @@ class Network::DnsController < ApplicationController
   def update
     root = params[:dns]
     if root == nil
-      render ErrorResult.error(404, 2, "format or internal error") and return
+      raise InvalidParameters.new :dns => "Missing"
     end
     
     root["searches"]=root["searches"].split
