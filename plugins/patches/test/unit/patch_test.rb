@@ -4,6 +4,10 @@ require 'patch'
 
 class PatchTest < ActiveSupport::TestCase
 
+  SERVICE = "org.freedesktop.PackageKit"
+  PATH = "/org/freedesktop/PackageKit"
+  TRANSACTION = "#{SERVICE}.Transaction"
+
   def setup
     # avoid accessing the rpm db
     Patch.stubs(:mtime).returns(Time.now)
@@ -13,36 +17,36 @@ class PatchTest < ActiveSupport::TestCase
     update_result1 = ['important', 'update-test-affects-package-manager;847;noarch;updates-test', 'update-test: Test updates for 11.2']
     update_result2 = ['security', 'update-test;844;noarch;updates-test', 'update-test: Test update for 11.2']
 
-    obj_tid = DBus::ProxyObject.new(DBus::SystemBus.instance, "org.freedesktop.PackageKit", "/104_acdadcdd_data")
+    obj_tid = DBus::ProxyObject.new(DBus::SystemBus.instance, SERVICE, "/104_acdadcdd_data")
     obj_tid.stubs(:introspect).returns(true)
 
-    obj_tid_with_iface = DBus::ProxyObjectInterface.new(obj_tid, "org.freedesktop.PackageKit.Transaction")
+    obj_tid_with_iface = DBus::ProxyObjectInterface.new(obj_tid, TRANSACTION)
     obj_tid_with_iface.stubs(:GetUpdates).with("NONE").returns(true)
-    #obj_tid.stubs(:'[]').with("org.freedesktop.PackageKit.Transaction").returns(obj_tid_with_iface)
+    #obj_tid.stubs(:'[]').with(TRANSACTION).returns(obj_tid_with_iface)
 
-    obj_tid["org.freedesktop.PackageKit.Transaction"] = obj_tid_with_iface
+    obj_tid[TRANSACTION] = obj_tid_with_iface
     
-    #obj_tid.stubs(:'default_iface=').with("org.freedesktop.PackageKit.Transaction").returns("org.freedesktop.PackageKit.Transaction")
+    #obj_tid.stubs(:'default_iface=').with(TRANSACTION).returns(TRANSACTION)
     obj_tid.stubs(:has_iface?).returns(true)
     
-    object = DBus::ProxyObject.new(DBus::SystemBus.instance, "org.freedesktop.PackageKit", "/org/freedesktop/PackageKit")
+    object = DBus::ProxyObject.new(DBus::SystemBus.instance, SERVICE, PATH)
     object.stubs(:introspect).returns(true)
     
 
-    obj_with_iface = DBus::ProxyObjectInterface.new(object, "org.freedesktop.PackageKit")
+    obj_with_iface = DBus::ProxyObjectInterface.new(object, SERVICE)
     obj_with_iface.stubs(:GetTid).returns([100])
     obj_with_iface.stubs(:SuggestDaemonQuit).returns(true)
 
-    object.stubs(:'[]').with("org.freedesktop.PackageKit").returns(obj_with_iface)
+    object.stubs(:'[]').with(SERVICE).returns(obj_with_iface)
 
-    DBus::Service.any_instance.stubs(:object).with("/org/freedesktop/PackageKit").returns(object)
+    DBus::Service.any_instance.stubs(:object).with(PATH).returns(object)
     DBus::Service.any_instance.stubs(:object).with(100).returns(obj_tid)    
 
-    service = DBus::Service.new("org.freedesktop.PackageKit", DBus::SystemBus.instance)
-    service.stubs(:object).with("/org/freedesktop/PackageKit").returns(object)
+    service = DBus::Service.new(SERVICE, DBus::SystemBus.instance)
+    service.stubs(:object).with(PATH).returns(object)
     service.stubs(:object).with(100).returns(obj_tid)    
 
-    DBus::SystemBus.instance.stubs(:service).with("org.freedesktop.PackageKit").returns(service)
+    DBus::SystemBus.instance.stubs(:service).with(SERVICE).returns(service)
 
     DBus::Main.send(:define_method, :run) do
       DBus::SystemBus.instance.emit(service, obj_tid, obj_tid_with_iface, DBus::Signal.new("Packages"), update_result1)
