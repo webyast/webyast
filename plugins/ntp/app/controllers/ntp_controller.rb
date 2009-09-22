@@ -16,7 +16,7 @@ class NtpController < ApplicationController
   def update
     root = params["ntp"]
     if root == nil || root == {} #FIXME exception for this
-      raise InvalidParameters [{:name => "ntp",:error => "Missing"}]
+      raise InvalidParameters :ntp => "Missing"
     end
 	
     @ntp = Ntp.find

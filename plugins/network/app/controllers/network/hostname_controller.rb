@@ -12,7 +12,7 @@ class Network::HostnameController < ApplicationController
   def update
     root = params[:hostname]
     if root == nil
-      raise InvalidParameters.new [{:name => "Hostname", :error => "Missing"}]
+      raise InvalidParameters.new :hostname => "Missing"
     end
     
     @hostname = Hostname.new(root)

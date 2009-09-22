@@ -11,7 +11,7 @@ class Network::InterfacesController < ApplicationController
   def update
     root = params[:interfaces]
     if root == nil
-      raise InvalidParameters.new [{:name => "Interfaces", :error => "Missing"}]
+      raise InvalidParameters.new :interfaces => "Missing"
     end
     
     @iface = Interface.new(root)

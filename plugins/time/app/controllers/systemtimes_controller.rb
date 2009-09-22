@@ -19,7 +19,7 @@ class SystemtimesController < ApplicationController
     
     root = params[:time]
     if root == nil
-      raise InvalidParameters.new [{:name => "Timezone", :error => "Missing"}]
+      raise InvalidParameters.new :timezone => "Missing"
     end
     
     systemtime = Systemtime.create_from_xml(root)    

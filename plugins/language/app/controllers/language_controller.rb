@@ -23,7 +23,7 @@ class LanguageController < ApplicationController
        
     else
       logger.warn("No argument to update")
-      raise InvalidParameters.new [{:name => "language", :error => "Missing"}]
+      raise InvalidParameters.new :language => "Missing"
     end
     render :show
   end

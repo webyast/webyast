@@ -11,7 +11,7 @@ class Network::RoutesController < ApplicationController
   def update
     root = params[:routes]
     if root == nil
-      raise InvalidParameters.new [{:name => "Routes", :error => "Missing"}]
+      raise InvalidParameters.new :routes => "Missing"
     end
     @route = Route.find(root[:id])
     @route.via = root[:via]

@@ -26,16 +26,16 @@ end
 # initialized by constrains which is broken
 # If uncatched then response 422 and cause fail of ActiveResouce#save
 class InvalidParameters < ArgumentError
-  # Takes as argument constrains. Constrains is array of hash with keys name
-  # and error. Name is name of parameter and error is broken constrain
+  # Takes as argument constrains. Constrains is hash where key is parameter
+  # and value is broken constrain
   # (it is not translated so should be some symbol, which is then on frontend
   #  readed and reported translated message)
   #
   # example::
-  #   raise InvalidParameters.new [
-  #     { :name => "id", :error => "MISSING"},
-  #     { :name => "email", :error => "NO@"}
-  #   ]
+  #   raise InvalidParameters.new {
+  #      :id => "MISSING"
+  #      :email => "NO@"
+  #   }
   def initialize (constrains)
     @constrains = constrains
     super("Invalid arguments: #{@constrains.inspect}")
@@ -49,8 +49,8 @@ class InvalidParameters < ArgumentError
 
     xml.errors(:type => "array") do
       @constrains.each {
-        |c|
-        xml.error "#{c[:name].humanize} --- #{c[:error]}"
+        |k,v|
+        xml.error "#{k.to_s.humanize} --- #{v}"
       }
     end
   end

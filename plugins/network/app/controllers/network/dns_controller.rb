@@ -11,7 +11,7 @@ class Network::DnsController < ApplicationController
   def update
     root = params[:dns]
     if root == nil
-      raise InvalidParameters.new [{:name => "Dns", :error => "Missing"}]
+      raise InvalidParameters.new :dns => "Missing"
     end
     
     root["searches"]=root["searches"].split
