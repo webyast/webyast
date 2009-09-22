@@ -1,8 +1,10 @@
+#
+# Model for resolvables available via package kit
+#
 require "dbus"
 require 'socket'
 require 'thread'
 
-# Model for patches available via package kit
 class Resolvable
 
   attr_accessor   :resolvable_id,
@@ -14,24 +16,43 @@ class Resolvable
                   :summary
 
 private
+
+  #
+  # Resolvable.packagekit_connect
+  #
+  # connect to PackageKit and create Transaction proxy
+  #
+  # return Array of <transaction proxy>,<packagekit interface>,<transaction 
+  #
+  # Reference: http://www.packagekit.org/gtk-doc/index.html
+  #
+
   def self.packagekit_connect
-
     system_bus = DBus::SystemBus.instance
-    package_kit = system_bus.service("org.freedesktop.PackageKit")
-    obj = package_kit.object("/org/freedesktop/PackageKit")
-    #logger.debug obj.inspect
-    obj.introspect
-    obj_with_iface = obj["org.freedesktop.PackageKit"]
-    tid = obj_with_iface.GetTid
-    obj_tid = package_kit.object(tid[0])
-    obj_tid.introspect
-    obj_tid_with_iface = obj_tid["org.freedesktop.PackageKit.Transaction"]
-    obj_tid.default_iface = "org.freedesktop.PackageKit.Transaction"
+    # connect to PackageKit service via SystemBus
+    pk_service = system_bus.service("org.freedesktop.PackageKit")
+    
+    # Create PackageKit proxy object
+    packagekit_proxy = pk_service.object("/org/freedesktop/PackageKit")
 
-    dbusloop = DBus::Main.new
-    dbusloop << system_bus
+    # learn about object
+    packagekit_proxy.introspect
+    
+    # use the (generic) 'PackageKit' interface
+    packagekit_iface = packagekit_proxy["org.freedesktop.PackageKit"]
+    
+    # get transaction id via this interface
+    tid = packagekit_iface.GetTid
+    
+    # retrieve transaction object
+    transaction_proxy = pk_service.object(tid[0])
+    transaction_proxy.introspect
+    
+    # use the 'Transaction' interface
+    transaction_iface = transaction_proxy["org.freedesktop.PackageKit.Transaction"]
+    transaction_proxy.default_iface = "org.freedesktop.PackageKit.Transaction"
 
-    [dbusloop, obj_tid, obj_with_iface, obj_tid_with_iface]
+    [transaction_proxy, packagekit_iface, transaction_iface]
   end
 
 public
@@ -85,47 +106,53 @@ public
       * Dir["/var/cache/zypp/solv/*/solv"].map{ |x| File.stat(x).mtime } ].max
   end
 
-  # find patches
-  # Patch.find(:available)
-  # Patch.find(212)
+  #
+  # Execute PackageKit transaction method
+  #
+  # method: method to execute
+  # args: arguments to method
+  # signal: signal to intercept (usuallay "Package")
+  # block: block to run on signal
+  #
   def self.execute(method, args, signal, &block)
-    patch_updates = []
-
-    dbusloop, obj_tid, obj_with_iface, obj_tid_with_iface = self.packagekit_connect
+    transaction_proxy, packagekit_iface, transaction_iface = self.packagekit_connect
     
-    obj_tid.on_signal(signal.to_s, &block)
-    obj_tid.on_signal("Error") {|u1,u2| dbusloop.quit }
-    obj_tid.on_signal("Finished") {|u1,u2| dbusloop.quit }
+    transaction_proxy.on_signal(signal.to_s, &block)
+    transaction_proxy.on_signal("Error") {|u1,u2| dbusloop.quit }
+    transaction_proxy.on_signal("Finished") {|u1,u2| dbusloop.quit }
 
-    obj_tid_with_iface.send(method.to_sym, *args)
+    transaction_iface.send(method.to_sym, *args)
+    
+    dbusloop = DBus::Main.new
+    dbusloop << DBus::SystemBus.instance
     dbusloop.run
 
-    obj_with_iface.SuggestDaemonQuit
-    return patch_updates
+    packagekit_iface.SuggestDaemonQuit
   end
 
   # install an update, based on the PackageKit
-  # id
+  # id ("<name>;<id>;<arch>;<repo>")
+  #
   def self.package_kit_install(pkkit_id)
     ok = true
-    dbusloop, obj_tid, obj_with_iface, obj_tid_with_iface = self.packagekit_connect
+    transaction_proxy, packagekit_iface, transaction_iface = self.packagekit_connect
 
-    obj_tid.on_signal("Package") do |line1,line2,line3|
+    transaction_proxy.on_signal("Package") do |line1,line2,line3|
       Rails.logger.debug "  update package: #{line2}"
     end
 
     dbusloop = DBus::Main.new
-    dbusloop << system_bus
+    dbusloop << DBus::SystemBus.instance
 
-    obj_tid.on_signal("Finished") {|u1,u2| dbusloop.quit }
-    obj_tid.on_signal("Error") do |u1,u2|
+    transaction_proxy.on_signal("Finished") {|u1,u2| dbusloop.quit }
+    transaction_proxy.on_signal("Error") do |u1,u2|
       ok = false
       dbusloop.quit
     end
-    obj_tid_with_iface.UpdatePackages([pkkit_id])
+    transaction_iface.UpdatePackages([pkkit_id])
 
     dbusloop.run
-    obj_with_iface.SuggestDaemonQuit
+    packagekit_iface.SuggestDaemonQuit
 
     return ok
   end
