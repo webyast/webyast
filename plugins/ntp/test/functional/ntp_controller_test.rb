@@ -25,8 +25,7 @@ class SystemControllerTest < ActionController::TestCase
   def test_update
     YastService.stubs(:Call).with("YaPI::NTP::Synchronize").once.returns("OK")
     post :update, {"ntp"=>{"synchronize"=>true}}
-    assert_response :redirect
-    assert_redirected_to :action => "show"
+    assert_response :success
   end
 
   def test_update_failed
