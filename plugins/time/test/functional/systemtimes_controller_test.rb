@@ -15,10 +15,10 @@ class SystemtimesControllerTest < ActionController::TestCase
     }}
 
   def setup
-    @model_class = Systemtime
-
-    Systemtime.stubs(:find).returns(Systemtime.new)
+    @model_class = Systemtime    
     
+    Systemtime.stubs(:find).returns(Systemtime.new)
+
     @controller = SystemtimesController.new
     @request = ActionController::TestRequest.new
     # http://railsforum.com/viewtopic.php?id=1719
@@ -44,9 +44,9 @@ class SystemtimesControllerTest < ActionController::TestCase
     YastService.stubs(:Call).with {
       |params,settings|
       params == "YaPI::TIME::Write" and
-        settings[:timezone] == DATA[:time][:timezone] and
-        settings[:utcstatus] == DATA[:time][:utcstatus] and
-        ! settings.include?(:currenttime)
+        settings["timezone"] == DATA[:time][:timezone] and
+        settings["utcstatus"] == DATA[:time][:utcstatus] and
+        ! settings.include?("currenttime")
     }
   end
 end

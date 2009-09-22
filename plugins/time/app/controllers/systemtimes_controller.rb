@@ -19,11 +19,11 @@ class SystemtimesController < ApplicationController
     
     root = params[:time]
     if root == nil
-      render ErrorResult.error(404, 2, "format or internal error") and return
+      raise InvalidParameters.new :timezone => "Missing"
     end
     
-    @systemtime = Systemtime.create_from_xml(root)
-    @systemtime.save
+    systemtime = Systemtime.create_from_xml(root)    
+    systemtime.save
     show
   end
 

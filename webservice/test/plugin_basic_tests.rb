@@ -65,10 +65,8 @@ module PluginBasicTests
 
   def test_update_noparams
     @model_class.stubs(:save)
-    put :update
-    # FIXME: it is not 404, but 422 unprocessable entity,
-    # see "Validation errors" in http://api.rubyonrails.org/classes/ActiveResource/Base.html
-    assert_response :missing
+    put :update    
+    assert_response 422
   end
 
   def test_update_noperm

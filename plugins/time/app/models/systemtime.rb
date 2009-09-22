@@ -14,7 +14,7 @@ class Systemtime
   attr_accessor :timezone
   # Utc status possible values is UTCOnly, UTC and localtime see yast2-country doc
   attr_accessor :utcstatus
-
+  
   private
 
   # Creates argument for dbus call which specify what data is requested.
@@ -57,7 +57,7 @@ class Systemtime
     systemtime.time = xmlroot[:time]
     systemtime.date = xmlroot[:date]
     systemtime.timezone = xmlroot[:timezone]
-    systemtime.utcstatus = xmlroot[:utcstatus]
+    systemtime.utcstatus = xmlroot[:utcstatus]    
     return systemtime
   end
 
@@ -77,20 +77,24 @@ class Systemtime
   # so it support partial safe (e.g. save only new timezone if rest of fields is not set).
   def save
     settings = {}
+    RAILS_DEFAULT_LOGGER.info "called write with #{settings.inspect}"
     if @timezone and !@timezone.empty?
-      settings[:timezone] = @timezone
+      settings["timezone"] = @timezone
     end
     if @utcstatus and !@utcstatus.empty?
-      settings[:utcstatus] = @utcstatus
+      settings["utcstatus"] = @utcstatus
     end
     need_rescue = false
     if (@date and !@date.empty?) and
         (@time and !@time.empty?)
       date = @date.split("/")
       datetime = "#{date[2]}-#{date[0]}-#{date[1]} - "+@time
-      settings[:currenttime] = datetime
-      need_rescue = true
+      settings["currenttime"] = datetime
+      need_rescue = true    
     end
+
+    RAILS_DEFAULT_LOGGER.info "called write with #{settings.inspect}"
+
     begin
       YastService.Call("YaPI::TIME::Write",settings)
     rescue Exception => e
@@ -98,7 +102,6 @@ class Systemtime
       unless need_rescue
         raise
       end
-
     end
   end
 
@@ -107,21 +110,21 @@ class Systemtime
     xml.instruct! unless options[:skip_instruct]
 
     xml.systemtime do
-      xml.tag!(:time, @time )
-      xml.tag!(:date, @date )
-      xml.tag!(:timezone, @timezone )
-      xml.tag!(:utcstatus, @utcstatus )
+      xml.time @time
+      xml.date @date
+      xml.timezone @timezone
+      xml.utcstatus @utcstatus
       xml.timezones({:type => "array"}) do
         @@timezones.each do |region|
           if not region.empty?
             xml.region do
-              xml.tag!(:name,  region["name"])
-              xml.tag!(:central,  region["central"])
+              xml.name  region["name"]
+              xml.central region["central"]
               xml.entries({:type => "array"}) do
                 region["entries"].each do |id,name|
                   xml.timezone do
-                    xml.tag!(:id, id)
-                    xml.tag!(:name, name)
+                    xml.id id
+                    xml.name name
                   end
                 end
               end

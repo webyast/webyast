@@ -8,4 +8,7 @@ ActionController::Routing::Routes.draw do |map|
   # login uses POST for both
   map.login "/login.:format", :controller => 'sessions', :action => 'create'
   map.logout "/logout.:format", :controller => 'sessions', :action => 'destroy'
+
+  map.resources :logs
+  
 end

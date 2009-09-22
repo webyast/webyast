@@ -22,6 +22,9 @@ eula:
   This is an evil eula that will
   make you think twice before
   clicking it
+logs:
+  - /var/log/messages
+  - /var/log/apache2/access_log
 EOF
 
     YaST::ConfigFile.stubs(:read_file).with('/etc/YaST2/vendor.yml').returns(@config_data)
@@ -33,7 +36,7 @@ EOF
   def test_config
     settings = VendorSetting.find(:all)
 
-    assert_equal(4, settings.size)
+    assert_equal(5, settings.size)
 
     assert_equal("http://www.bugs.com", VendorSetting.bug_url)
     assert_instance_of(Array, VendorSetting.services)

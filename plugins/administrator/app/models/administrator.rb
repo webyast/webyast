@@ -35,7 +35,7 @@ class Administrator
     new_aliases = "" if new_aliases.nil? || new_aliases == "NONE"
     if @aliases.split(",").sort == new_aliases.split(",").sort
       Rails.logger.debug "mail aliases have not been changed"
-      return
+      return true
     end
     parameters	= {
       "aliases" => ["as", new_aliases.split(",")]
@@ -43,7 +43,7 @@ class Administrator
     yapi_ret = YastService.Call("YaPI::ADMINISTRATOR::Write", parameters)
     Rails.logger.debug "YaPI returns: '#{yapi_ret}'"
 
-    raise yapi_ret unless yapi_ret.empty?
+    raise Exception.new(yapi_ret) unless yapi_ret.empty?
     @aliases = new_aliases
   end
 

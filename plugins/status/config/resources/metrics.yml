@@ -1,0 +1,4 @@
+interface: org.opensuse.yast.system.metrics
+controller: metrics
+singular: false
+

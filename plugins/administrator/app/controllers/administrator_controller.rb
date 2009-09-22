@@ -37,7 +37,7 @@ class AdministratorController < ApplicationController
       begin
         @admin.save_aliases(data[:aliases])
 	rescue Exception => e
-	    render ErrorResult.error(500, 2, e.message) and return
+	  render ErrorResult.error(404, 2, e.message) and return
       end
     end
     show
