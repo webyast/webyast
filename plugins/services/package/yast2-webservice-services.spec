@@ -24,7 +24,13 @@ BuildRoot:      %{_tmppath}/%{name}-%{version}-build
 BuildArch:      noarch
 
 # YaPI/SERVICES.pm
+%if 0%{?suse_version} == 0 || %suse_version > 1110
+# 11.2 or newer
+Requires:       yast2 >= 2.18.24
+%else
+# 11.1 or SLES11
 Requires:       yast2 >= 2.17.10.2
+%endif
 
 
 #
