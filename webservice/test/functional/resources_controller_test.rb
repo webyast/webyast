@@ -33,7 +33,7 @@ class ResourcesControllerTest < ActionController::TestCase
   end
   
   test "resources index with interface" do
-    get :index, :interface => "org.opensuse.test"
+    get :index, :id => "org.opensuse.test"
     assert_response :success
   end
   
@@ -51,7 +51,7 @@ class ResourcesControllerTest < ActionController::TestCase
   
   test "resources by interfaces query" do
     ResourceRegistration.resources.each do |interface,implementations|
-      get :index, :params => { "interface" => interface }
+      get :index, :params => { "id" => interface }
       assert_response :success
     end
   end  
