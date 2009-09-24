@@ -2,7 +2,19 @@ include ApplicationHelper
 
 require 'scr'
 require 'metric'
+require 'uri'
 
+#
+# Controller that exposes collectd metrics in a RESTful
+# way.
+#
+# GET /metrics returns all metrics (with no data)
+#
+# GET /metrics/id returns one metric.
+# As the id contains "/" you need to URI encode it.
+#
+# ie: /metrics/myhost.com%2Ffscache-Cookies%2Ffscache_stat-idx
+#
 class MetricsController < ApplicationController
   before_filter :login_required
 
@@ -90,7 +102,7 @@ class MetricsController < ApplicationController
   def show
     #permission_check("org.opensuse.yast.system.status.read")
     begin
-      @metric = Metric.find(CGI.unescape(params[:id]))
+      @metric = Metric.find(params[:id])
       stop = params[:stop].blank? ? Time.now : Time.at(params[:stop].to_i)
       start = params[:start].blank? ? stop - 300 : Time.at(params[:start].to_i)
 
