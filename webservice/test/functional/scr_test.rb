@@ -8,7 +8,24 @@ require File.expand_path(File.dirname(__FILE__) + "/../test_helper")
 class ScrTest < ActiveSupport::TestCase
 
   require "scr"
-
+  
+  SERVICE = "org.opensuse.yast.SCR"
+  PATH = "/SCR"
+  INTERFACE = "#{SERVICE}.Methods"
+  
+  def setup
+    # stub D-Bus/SCR, see lib/scr.rb
+    @scr_proxy = DBus::ProxyObject.new(DBus::SystemBus.instance, SERVICE, PATH)
+    @scr_iface = DBus::ProxyObjectInterface.new(@scr_proxy, SERVICE)
+    # must stub class method here, 'Singleton' seems to prevent instance stubbing ?!
+    @scr_iface.class.any_instance.stubs(:Write).returns(true)
+    @scr_iface.class.any_instance.stubs(:Read).returns([["","",""]])
+    @scr_iface.class.any_instance.stubs(:Execute).returns([[nil,nil,{"exit"=>[0,0,0],"stdout"=>["","",""], "stderr"=>["","",""]}]])
+    
+    @scr_proxy[INTERFACE] = @scr_iface
+    DBus::SystemBus.any_instance.stubs(:introspect).with(SERVICE,PATH).returns(@scr_proxy)
+  end
+  
   test "instanciating the scr singleton" do
     assert Scr.instance
   end

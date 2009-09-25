@@ -12,7 +12,11 @@ require 'mocha'
 
 class PermissionsControllerTest < ActionController::TestCase
   fixtures :accounts
-  
+
+  SERVICE = "org.opensuse.yast.SCR"
+  PATH = "/SCR"
+  INTERFACE = "#{SERVICE}.Methods"
+
   def setup
     @controller = PermissionsController.new
     @request = ActionController::TestRequest.new
@@ -21,6 +25,17 @@ class PermissionsControllerTest < ActionController::TestCase
     # http://railsforum.com/viewtopic.php?id=1719
     @request.session[:account_id] = 1 # defined in fixtures
     
+    # stub D-Bus/SCR, see lib/scr.rb
+    @scr_proxy = DBus::ProxyObject.new(DBus::SystemBus.instance, SERVICE, PATH)
+    @scr_iface = DBus::ProxyObjectInterface.new(@scr_proxy, SERVICE)
+    # must stub class method here, 'Singleton' seems to prevent instance stubbing ?!
+    @scr_iface.class.any_instance.stubs(:Write).returns(true)
+    @scr_iface.class.any_instance.stubs(:Read).returns([["","",""]])
+    @scr_iface.class.any_instance.stubs(:Execute).returns([[nil,nil,{"exit"=>[0,0,0],"stdout"=>["","",""], "stderr"=>["","",""]}]])
+    
+    @scr_proxy[INTERFACE] = @scr_iface
+    DBus::SystemBus.any_instance.stubs(:introspect).with(SERVICE,PATH).returns(@scr_proxy)
+
     Scr.any_instance.stubs(:execute).with(["polkit-action"]).returns({:stderr=>"", :exit=>0, :stdout=>"org.opensuse.yast.system.users.read\norg.opensuse.yast.system.users.write\norg.opensuse.yast.system.users.new\norg.opensuse.yast.system.users.delete\n"})
     Scr.any_instance.stubs(:execute).with(["polkit-auth", "--user", "test_user", "--explicit"]).returns(:stderr=>"", :exit=>0, :stdout=>"org.opensuse.yast.system.users.read\norg.opensuse.yast.system.users.write\norg.opensuse.yast.system.users.new\norg.opensuse.yast.permissions.write\n")
     Scr.any_instance.stubs(:execute).with(['polkit-auth', '--user', 'test_user', '--grant', 'org.opensuse.yast.patch.install']).returns({:stderr=>"", :exit=>0, :stdout=>""})
