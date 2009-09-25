@@ -73,7 +73,7 @@ class PackageKitStub
     #
     # PackageKit transaction interface
     #
-    transaction_iface = DBus::ProxyObjectInterface.new(pk_service, TRANSACTION)
+    transaction_iface = DBus::ProxyObjectInterface.new(transaction_proxy, TRANSACTION)
     
     # stub:    transaction_iface = transaction_proxy["org.freedesktop.PackageKit.Transaction"]
     transaction_proxy[TRANSACTION] = transaction_iface
@@ -83,6 +83,9 @@ class PackageKitStub
 
     # stub:    transaction_iface.GetUpdates("NONE")
     transaction_iface.stubs(:GetUpdates).with("NONE").returns(true)
+    
+    # stub:    transaction_iface.SearchName(...)
+    transaction_iface.stubs(:SearchName).returns(true)
     
   end # stub !
   
