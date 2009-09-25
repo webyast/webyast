@@ -45,14 +45,14 @@ class DNS
 
     xml.dns do
       xml.nameservers({:type => "array"}) do
-	  nameservers.each do |s|
-	    xml.nameserver s
-	  end
+      @nameservers.each do |s|
+        xml.nameserver s
+      end
       end
       xml.searches({:type => "array"}) do
-	searches.each do |s|
-               xml.search s
-         end
+        @searches.each do |s|
+          xml.search s
+        end
       end
     end
   end

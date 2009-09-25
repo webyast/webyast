@@ -29,8 +29,6 @@ init = Rails::Initializer.run do |config|
   # you must remove the Active Record framework.
   # config.frameworks -= [ :active_record, :active_resource, :action_mailer ]
 
-  config.gem 'test-unit', :lib => 'test/unit'  if ENV['RAILS_ENV'] == 'test'
-
   # Specify gems that this application depends on. 
   # They can then be installed with "rake gems:install" on new installations.
   # config.gem "bj"

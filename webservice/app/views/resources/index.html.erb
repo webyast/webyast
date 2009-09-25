@@ -1,9 +1,4 @@
 <h1><%= @node -%> resources</h1>
-<% @resources.keys.sort.each do |interface|
-     implementations = @resources[interface]
-     implementations.each do |implementation|
-       action = (implementation[:singular] ? :show : :index)
-       controller = implementation[:controller] -%>
-   <%= link_to interface, :controller => controller, :action => action -%><br/>
-<%   end
-   end -%>
+<% @resources.each do |rsrc| -%>
+   <%= link_to rsrc.interface, :only_path => :true, :controller => rsrc.link_to, :action => rsrc.action -%><br/>
+<% end -%>

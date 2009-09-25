@@ -75,10 +75,38 @@ class MetricTest < ActiveSupport::TestCase
       "starttime"=>Time.at(1252075500)}
     
     assert_equal expected, packets.data(:start => start, :stop => stop)    
+    
+    xml = Builder::XmlMarkup.new
+    xml.instruct!
+    xml.metric do
+      xml.id "myhost*domain*de+interface+packets"
+      xml.identifier "myhost.domain.de/interface/packets"
+      xml.host "myhost.domain.de"
+      xml.plugin "interface"
+      xml.plugin_instance ""
+      xml.type "packets"
+      xml.type_instance ""
 
-    xml = '<?xml version="1.0" encoding="UTF-8"?><metric><id>myhost.domain.de/interface/packets</id><host>myhost.domain.de</host><plugin>interface</plugin><plugin_instance></plugin_instance><type>packets</type><type_instance></type_instance><data interval="10" column="tx" start="1252075500"><value></value><value>425.76</value><value>159.22</value><value>61.66</value><value>7.79</value><value></value></data><data interval="10" column="rx" start="1252075500"><value></value><value>280.69</value><value>339.62</value><value>258.14</value><value>22.15</value><value></value></data></metric>'
+      xml.data(:interval => "10", :column => "tx", :start=>"1252075500") do
+        xml.value 7.79
+        xml.value 61.66
+        xml.value 159.22
+        xml.value 425.76
+        xml.value nil
+        xml.value nil
+      end
 
-    assert_equal xml, packets.to_xml(:start => start, :stop => stop)
+      xml.data(:interval => "10", :column => "rx", :start=>"1252075500") do
+        xml.value 22.15
+        xml.value 258.14
+        xml.value 339.62
+        xml.value 280.69
+        xml.value nil
+        xml.value nil
+      end
+    end
+
+    assert_equal packets.to_xml(:start => start, :stop => stop), xml.target!
   end
   
   def test_collectd_running
@@ -111,7 +139,7 @@ class MetricTest < ActiveSupport::TestCase
     
     # test attributes
     assert_equal '/var/lib/collectd/myhost.domain.de/memory/memory-free.rrd', ret.first.path
-    assert_equal 'myhost.domain.de/memory/memory-free', ret.first.id
+    assert_equal 'myhost.domain.de/memory/memory-free', ret.first.identifier
     
     ret = Metric.find(:all, :plugin_full => /meemory/)
     assert_equal 0, ret.size
