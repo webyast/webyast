@@ -28,6 +28,10 @@ class ResourceRegistrationTest < ActiveSupport::TestCase
     ResourceRegistration.register_plugin plugin
       
     assert !ResourceRegistration.resources.empty?
+    assert_not_nil ResourceRegistration.resources["org.opensuse.yast.modules.yapi.time"][0]
+    time = ResourceRegistration.resources["org.opensuse.yast.modules.yapi.time"][0]
+    assert_equal "systemtimes", time[:controller]
+    assert time[:singular]
   end
   
   # Create nested resources from .yml file
