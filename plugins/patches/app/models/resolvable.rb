@@ -44,7 +44,7 @@ private
     # get transaction id via this interface
     tid = packagekit_iface.GetTid
     
-    # retrieve transaction object
+    # retrieve transaction (proxy) object
     transaction_proxy = pk_service.object(tid[0])
     transaction_proxy.introspect
     
@@ -52,7 +52,7 @@ private
     transaction_iface = transaction_proxy["org.freedesktop.PackageKit.Transaction"]
     transaction_proxy.default_iface = "org.freedesktop.PackageKit.Transaction"
 
-    [transaction_proxy, packagekit_iface, transaction_iface]
+    [transaction_iface, packagekit_iface]
   end
 
 public
@@ -115,15 +115,17 @@ public
   # block: block to run on signal
   #
   def self.execute(method, args, signal, &block)
-    transaction_proxy, packagekit_iface, transaction_iface = self.packagekit_connect
+    transaction_iface, packagekit_iface = self.packagekit_connect
     
-    transaction_proxy.on_signal(signal.to_s, &block)
-    transaction_proxy.on_signal("Error") {|u1,u2| dbusloop.quit }
-    transaction_proxy.on_signal("Finished") {|u1,u2| dbusloop.quit }
-
+    proxy = transaction_iface.object
+    
+    proxy.on_signal(signal.to_s, &block)
     transaction_iface.send(method.to_sym, *args)
     
     dbusloop = DBus::Main.new
+    proxy.on_signal("Error") {|u1,u2| dbusloop.quit }
+    proxy.on_signal("Finished") {|u1,u2| dbusloop.quit }
+
     dbusloop << DBus::SystemBus.instance
     dbusloop.run
 
@@ -133,23 +135,24 @@ public
   # install an update, based on the PackageKit
   # id ("<name>;<id>;<arch>;<repo>")
   #
-  def self.package_kit_install(pkkit_id)
+  def self.package_kit_install(pk_id)
     ok = true
-    transaction_proxy, packagekit_iface, transaction_iface = self.packagekit_connect
+    transaction_iface, packagekit_iface = self.packagekit_connect
 
-    transaction_proxy.on_signal("Package") do |line1,line2,line3|
+    proxy = transaction_iface.object
+    proxy.on_signal("Package") do |line1,line2,line3|
       Rails.logger.debug "  update package: #{line2}"
     end
 
     dbusloop = DBus::Main.new
     dbusloop << DBus::SystemBus.instance
 
-    transaction_proxy.on_signal("Finished") {|u1,u2| dbusloop.quit }
-    transaction_proxy.on_signal("Error") do |u1,u2|
+    proxy.on_signal("Finished") {|u1,u2| dbusloop.quit }
+    proxy.on_signal("Error") do |u1,u2|
       ok = false
       dbusloop.quit
     end
-    transaction_iface.UpdatePackages([pkkit_id])
+    transaction_iface.UpdatePackages([pk_id])
 
     dbusloop.run
     packagekit_iface.SuggestDaemonQuit
