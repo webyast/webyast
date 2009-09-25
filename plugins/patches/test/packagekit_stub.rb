@@ -118,6 +118,16 @@ class PackageKitStub
     # This will fake a sender (via .emit) sending signals
     # then we call orig_run to process these signals
     #
+    # Remark: This might look overly complex but emitting the signals
+    #  at PackageKitResult creation does not work. It seems as if the
+    #  buffer (socket?) is flushed so the previously emitted signals are
+    #  not received when calling 'run'.
+    #
+    #  So this implementation presents the only working solution: Emitting
+    #  the signals from inside a faked 'run' and the processing them by
+    #  calling 'orig_run'.
+    #
+    
     # pass a closure(!) to 'run'
     DBus::Main.send(:define_method, :run) do
       sig = DBus::Signal.new(signal)
