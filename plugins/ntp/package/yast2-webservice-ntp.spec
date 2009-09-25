@@ -83,5 +83,5 @@ rm -rf $RPM_BUILD_ROOT
 /srv/www/%{pkg_user}/vendor/plugins/%{plugin_name}/uninstall.rb
 /srv/www/%{pkg_user}/vendor/plugins/%{plugin_name}/app
 /srv/www/%{pkg_user}/vendor/plugins/%{plugin_name}/config
-/usr/share/YaST2/modules/YaPI/${SOURCE1}
-/usr/share/PolicyKit/policy/${SOURCE2}
+/usr/share/YaST2/modules/YaPI/%{SOURCE1}
+/usr/share/PolicyKit/policy/%{SOURCE2}
