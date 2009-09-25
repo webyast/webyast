@@ -3,6 +3,7 @@
 #
 # *** This test requires a 'live' system with D-Bus running ***
 #
+require "rubygems"
 require "dbus"
 
 require File.join(File.dirname(__FILE__), "test_helper")
