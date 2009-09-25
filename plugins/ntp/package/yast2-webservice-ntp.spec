@@ -10,8 +10,9 @@
 
 
 Name:           yast2-webservice-ntp
+#webservice already require yast2-dbus-server which is needed for yapi
 PreReq:         yast2-webservice
-# requires HAL for reboot/shutdown actions
+#for YaPI needs ntp
 Requires:	ntp
 Provides:       yast2-webservice:/srv/www/yastws/app/controllers/ntp_controller.rb
 License:        MIT
@@ -51,6 +52,7 @@ Authors:
 #
 mkdir -p $RPM_BUILD_ROOT/srv/www/%{pkg_user}/vendor/plugins/%{plugin_name}
 cp -a * $RPM_BUILD_ROOT/srv/www/%{pkg_user}/vendor/plugins/%{plugin_name}
+mkdir -p $RPM_BUILD_ROOT/usr/share/YaST2/modules/YaPI/
 cp %{SOURCE1} $RPM_BUILD_ROOT/usr/share/YaST2/modules/YaPI/
 mkdir -p $RPM_BUILD_ROOT/usr/share/PolicyKit/policy/
 cp %{SOURCE2} $RPM_BUILD_ROOT/usr/share/PolicyKit/policy/
@@ -69,6 +71,10 @@ rm -rf $RPM_BUILD_ROOT
 %dir /srv/www/%{pkg_user}/vendor
 %dir /srv/www/%{pkg_user}/vendor/plugins
 %dir /srv/www/%{pkg_user}/vendor/plugins/%{plugin_name}
+# ntp require only yast2-dbus server, so it must ensure that directory exist
+%dir /usr/share/YaST2/
+%dir /usr/share/YaST2/modules/
+%dir /usr/share/YaST2/modules/YaPI/
 /srv/www/%{pkg_user}/vendor/plugins/%{plugin_name}/MIT-LICENSE
 /srv/www/%{pkg_user}/vendor/plugins/%{plugin_name}/README
 /srv/www/%{pkg_user}/vendor/plugins/%{plugin_name}/Rakefile
