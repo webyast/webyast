@@ -51,9 +51,9 @@ Authors:
 #
 mkdir -p $RPM_BUILD_ROOT/srv/www/%{pkg_user}/vendor/plugins/%{plugin_name}
 cp -a * $RPM_BUILD_ROOT/srv/www/%{pkg_user}/vendor/plugins/%{plugin_name}
-cp ${SOURCE1} $RPM_BUILD_ROOT/usr/share/YaST2/modules/YaPI/
+cp %{SOURCE1} $RPM_BUILD_ROOT/usr/share/YaST2/modules/YaPI/
 mkdir -p $RPM_BUILD_ROOT/usr/share/PolicyKit/policy/
-cp ${SOURCE2} $RPM_BUILD_ROOT/usr/share/PolicyKit/policy/
+cp %{SOURCE2} $RPM_BUILD_ROOT/usr/share/PolicyKit/policy/
 
 
 %clean
