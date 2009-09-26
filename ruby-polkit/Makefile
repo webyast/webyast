@@ -2,7 +2,7 @@
 # Makefile for ruby-polkit
 #
 
-VERSION=0.0.2
+VERSION=0.0.3
 
 all: src/Makefile
 	(cd src; make)
