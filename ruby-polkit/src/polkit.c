@@ -119,8 +119,12 @@ method_polkit_check(VALUE self, VALUE act_v, VALUE usr_v)
     polkit_result = polkit_context_is_caller_authorized(context, action, caller, FALSE, &polkit_error);
 
     if (polkit_error_is_set(polkit_error)) {
+        uid_t uid;
+        polkit_caller_get_uid( caller, &uid );
+        struct passwd *passwd = getpwuid(uid);
+      
 	/* polkit_error will be freed before we raise so we must copy the msg */
-        exc = new_runtime_error(polkit_error_get_error_message(polkit_error));
+      exc = new_runtime_error("User %s (uid %d) is not authorized: %s", passwd?passwd->pw_name:"<unknown>", (int)uid, polkit_error_get_error_message(polkit_error));
 	goto finish;
     }
     
