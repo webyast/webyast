@@ -26,10 +26,15 @@ class Basesystem
   def Basesystem.find
     base = Basesystem.new
     base.finish = File.exist?(FINISH_FILE)
-    begin
-      base.steps = YaST::ConfigFile.new(BASESYSTEM_CONF)["steps"] || []
-    rescue Exception => e
-      raise CorruptedFileException.new(File.join YaST::ConfigFile.config_default_location, "#{BASESYSTEM_CONF.to_s}.yml")
+    config = YaST::ConfigFile.new(BASESYSTEM_CONF)
+    if File.exist?(config.path)
+      begin
+	base.steps = config["steps"] || []
+      rescue Exception => e
+	raise CorruptedFileException.new(config.path)
+      end
+    else
+      base.steps = []
     end
     return base
   end

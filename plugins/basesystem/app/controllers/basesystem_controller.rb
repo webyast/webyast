@@ -7,6 +7,7 @@ class BasesystemController < ApplicationController
 
    def show
      @basesystem = Basesystem.find
+     logger.warn "No steps defined for Basesystem" if @basesystem.steps.nil? or @basesystem.steps.empty?
      logger.debug @basesystem.inspect
    end
 
