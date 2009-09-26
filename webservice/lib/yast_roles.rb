@@ -34,29 +34,36 @@ module YastRoles
   #                  - _PolicyKitException_ for error during running policy kit
   #
   def permission_check(action)
+    # FIXME: PolicyKit/D-Bus should be mocked when testing (bnc#542447)
     return true if ENV["RAILS_ENV"] == "test" and !defined? PERMISSION_CHECK_TESTING
-    raise NotLoggedException if self.current_account==nil || self.current_account.login.size == 0
+    account = self.current_account
+    raise NotLoggedException if account.nil? || account.login.size == 0
     action ||= "" #avoid nil action
 
     begin
-      if PolKit.polkit_check( action, self.current_account.login) == :yes
-        Rails.logger.debug "Action: #{action} User: #{self.current_account.login} Result: ok"
+      if PolKit.polkit_check( action, account.login) == :yes
+        Rails.logger.debug "Action: #{action} User: #{account.login} Result: ok"
         return true
       end
       #checking roles
-      roles = (defined?(session) && session && session['user_roles']) ? session['services'] : user_roles(self.current_account.login)
+      roles = (defined?(session) && session && session['user_roles']) ? session['services'] : user_roles(account.login)
       roles.each do |role|
-        if ( role != self.current_account.login and
+        if ( role != account.login and
               PolKit.polkit_check( action, role) == :yes)
-          Rails.logger.debug "Action: #{action} User: #{self.current_account.login} WITH role #{role} Result: ok"
+          Rails.logger.debug "Action: #{action} User: #{account.login} WITH role #{role} Result: ok"
           return true
         end
       end
-      Rails.logger.debug "Action: #{action} User: #{self.current_account.login} Result: NOT granted"
-      raise NoPermissionException.new(action, self.current_account.login)
+      Rails.logger.debug "Action: #{action} User: #{account.login} Result: NOT granted"
+      raise NoPermissionException.new(action, account.login)
     rescue RuntimeError => e
+      puts "permission_check1: #{e}, #{account.inspect}:#{action}"
       Rails.logger.info e
-      raise PolicyKitException.new(e.message, self.current_account.login, action)
+      raise PolicyKitException.new(e.message, account.login, action)
+    rescue Exception => e
+      puts "permission_check2: #{e}"
+      Rails.logger.info e
+      raise
     end
   end
 end
