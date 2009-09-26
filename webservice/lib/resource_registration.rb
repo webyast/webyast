@@ -123,9 +123,6 @@ public
       map.root :controller => "resources", :action => "index"
       resources.each do |interface,implementations|
 	
-	qualifiers = interface.split "."
-	name = qualifiers.pop
-	
 	implementations.each do |implementation|
 	
 	  # url and controller are closely coupled
@@ -134,6 +131,7 @@ public
 	  # the last one specifies the resource name and thus the controller name
 	  #
 	  namespaces = implementation[:controller].split "/"
+	  name = namespaces[-1]
 	
 	  # the .namespace call affects the URI _and_ the controller path (!)
 	
@@ -143,11 +141,11 @@ public
 	      toplevel = ns
 	    end
 	  end
-	
+	  params = [ name, { :controller => namespaces.join("/"), :except => [ :new, :edit ] } ]
 	  if implementation[:singular]
-	    toplevel.resource name, :controller => namespaces.join("/"), :except => [ :new, :edit ]
+	    toplevel.resource *params
 	  else
-	    toplevel.resources name, :except => [ :new, :edit ] do |mapping|
+	    toplevel.resources *params do |mapping|
 	      nested = implementation[:nested] and mapping.resources(nested)
 	    end
 	  end
