@@ -8,6 +8,7 @@
 require File.join(File.dirname(__FILE__), "test_helper")
 
 class PackageKitResult
+
   attr_reader :info, :id, :summary
   
   def initialize info, id, summary
@@ -113,7 +114,7 @@ class PackageKitStub
     
     # alias 'run' as 'orig_run'
     DBus::Main.class_eval { alias :orig_run :run }
-    
+
     # Now overlay 'run' with our own implementation
     # This will fake a sender (via .emit) sending signals
     # then we call orig_run to process these signals
@@ -142,7 +143,10 @@ class PackageKitStub
       DBus::SystemBus.instance.emit(pks, ti.object, ti, DBus::Signal.new("Finished"))
       # now call the original 'run' to process the signals we just emitted
       self.orig_run
+      DBus::Main.send(:undef_method, :run)
+      DBus::Main.class_eval { alias :run :orig_run }
     end
+    
   end
 
 end # PackageKitStub
