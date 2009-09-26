@@ -25,18 +25,12 @@ class PermissionsController < ApplicationController
     suse_string = /org\.opensuse\.yast\..*/
     
     # get users or all actions
-    begin
-      ret = if user_id
-              Scr.instance.execute(["polkit-auth", "--user", user_id, "--explicit"])
-            else
-              Scr.instance.execute(["polkit-action"])
-            end 
-    rescue Exception => e
-      ret = nil
-      logger.error "SCR.execute has raised the exception: #{e.inspect}"
-    end
+    ret = if user_id
+            Scr.instance.execute(["polkit-auth", "--user", user_id, "--explicit"])
+          else
+            Scr.instance.execute(["polkit-action"])
+          end 
 
-    raise RuntimeError unless ret && ret[:exit] == 0
     ret[:stdout].scan(suse_string) do |p|
       next unless filter.blank? or p.include?(filter)
       yield p
@@ -56,12 +50,12 @@ class PermissionsController < ApplicationController
     # get all known permissions into 'perms' hash
     each_suse_permissions( nil, filter ) do |p|
       perms[p] = false
-    end rescue return false
+    end
 
     # now set those 'true' which are granted
     each_suse_permissions( user_id, filter ) do |p|
       perms[p] = true
-    end rescue return false
+    end
     
     # convert the hash to a list of Permission objects
     @permissions = []
