@@ -5,14 +5,15 @@ class BasesystemTest < ActiveSupport::TestCase
 
 YAML_CONTENT = <<EOF
 steps:
-  - controller: systemtime
+  - controller: systemtimes
   - controller: language
     action: show
 EOF
 
-  TEST_STEPS = [{ "controller" => "systemtime"},{"controller" => "language", "action" => "show"}]
+  TEST_STEPS = [{ "controller" => "systemtimes"},{"controller" => "language", "action" => "show"}]
   def setup
     YaST::ConfigFile.stubs(:read_file).returns(YAML_CONTENT)
+    YaST::ConfigFile.any_instance.stubs(:path).returns(__FILE__)
     @basesystem = Basesystem.find
   end
   
@@ -24,19 +25,16 @@ EOF
   end
   
   def test_steps
-    @basesystem = Basesystem.find
     assert_equal(TEST_STEPS, @basesystem.steps)
   end  
 
   def test_finish
-    @basesystem = Basesystem.find
     assert !@basesystem.finish
   end
 
   def test_save
     @basesystem.finish = true
     @basesystem.save
-    @basesystem = Basesystem.find
     assert @basesystem.finish
   end  
 
