@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Sat Sep 26 18:26:20 CEST 2009 - kkaempf@suse.de
+
+- Add caller uid/name to exception
+- 0.0.3
+
+-------------------------------------------------------------------
 Tue Jul 28 09:35:39 CEST 2009 - mvidner@suse.cz
 
 - More verbose error messages (bnc#525472).
