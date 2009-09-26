@@ -1,5 +1,5 @@
 #
-# spec file for package ruby-polkit (Version 0.0.1)
+# spec file for package ruby-polkit (Version 0.0.3)
 #
 # Copyright (c) 2009 SUSE LINUX Products GmbH, Nuernberg, Germany.
 # This file and all modifications and additions to the pristine
@@ -11,7 +11,7 @@
 # norootforbuild
 
 Name:           ruby-polkit
-Version:        0.0.2
+Version:        0.0.3
 Release:        0
 License:        GPLv2
 Group:          Development/Languages/Ruby
