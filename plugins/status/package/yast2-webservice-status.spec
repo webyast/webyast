@@ -64,9 +64,9 @@ rm -rf $RPM_BUILD_ROOT
 /etc/yastws/tools/policyKit-rights.rb --user root --action grant >& /dev/null || :
 #
 # enable and start  collectd
-#
-insserv -f collectd
-/etc/init.d/collectd start
+# Temporarily disabled: bnc#542475
+#insserv -f collectd
+#/etc/init.d/collectd start
 
 %files
 %defattr(-,root,root)
