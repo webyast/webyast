@@ -1,3 +1,9 @@
+#
+# patch_test.rb
+#
+# Test 'Patch' model
+#
+#
 
 require File.expand_path(File.dirname(__FILE__) + "/../test_helper")
 require File.join(File.dirname(__FILE__), "..", "packagekit_stub")
@@ -21,7 +27,7 @@ class PatchTest < ActiveSupport::TestCase
     @pk_stub = PackageKitStub.new
     
   end
-
+  
   def test_available_patches
     results = Array.new
     # Available updates in PackageKit format
