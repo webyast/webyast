@@ -1,3 +1,4 @@
 *~
 *.bak
 plugins/status/config/status_limits.yaml
+coverage
