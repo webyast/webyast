@@ -1,4 +1,4 @@
 interface: org.opensuse.yast.modules.yapi.time
-controller: systemtimes
+controller: systemtime
 singular: true
 
