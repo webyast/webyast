@@ -1,4 +1,9 @@
 -------------------------------------------------------------------
+Tue Sep 29 11:44:01 CEST 2009 - schubi@suse.de
+
+- version 0.0.5 
+
+-------------------------------------------------------------------
 Thu Aug 20 15:47:27 CEST 2009 - jsuchome@suse.cz
 
 - simplified: only one controler and model, index and update actions
