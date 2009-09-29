@@ -40,6 +40,10 @@ BuildRequires:  ruby, pkg-config, rubygem-mocha
 BuildRequires:  rubygem-yast2-webservice-tasks, rubygem-restility
 BuildRequires:  yast2-core, yast2-dbus-server, ruby-dbus, sqlite, avahi-utils dbus-1
 BuildRequires:  PolicyKit, PackageKit, rubygem-sqlite3, rubygem-rails-2_3, ruby-rpam, ruby-polkit
+%if 0%{?suse_version} > 1020
+BuildRequires:  fdupes
+%endif
+
 BuildArch:      noarch
 
 #
