@@ -69,7 +69,7 @@ begin
                if policy.include? SuseString and not policy.include? ".scr"
                   STDOUT.puts "granting: #{policy}"
                   command = "polkit-auth --user " + user + " --grant " + policy
-                  unless system (command)
+                  unless system(command)
 		    STDERR.puts "#{command} failed !"
 		  end
                end
@@ -91,7 +91,7 @@ begin
                     if policy.include? SuseString and not policy.include? ".scr"
                       STDOUT.puts "revoking: #{policy}"
                       command = "polkit-auth --user " + user + " --revoke " + policy
-		      unless system (command)
+		      unless system(command)
 			STDERR.puts "#{command} failed !"
 		      end
                     end
