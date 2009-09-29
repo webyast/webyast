@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Tue Sep 29 10:55:16 CEST 2009 - schubi@suse.de
+
+- cleanup DBUS-PackageKit interface 
+- version 0.0.3
+
+-------------------------------------------------------------------
 Thu Jul 23 09:31:30 CEST 2009 - mvidner@suse.cz
 
 - Stefan Schubert (4):
