@@ -15,7 +15,7 @@ Provides:       yast2-webservice:/srv/www/yastws/app/controllers/users_controlle
 License:        MIT
 Group:          Productivity/Networking/Web/Utilities
 Autoreqprov:    on
-Version:        0.0.1
+Version:        0.0.2
 Release:        0
 Summary:        YaST2 - Webservice - Users
 Source:         www.tar.bz2
