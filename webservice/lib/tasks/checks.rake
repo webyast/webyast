@@ -2,9 +2,21 @@
 # Helpers
 #
 
+class Error
+  @@errors = 0
+  def self.inc
+    @@errors += 1
+  end
+  def self.errors
+    @@errors
+  end
+end
+
 def escape why, fix = nil
   $stderr.puts "*** ERROR: #{why}"
   $stderr.puts "Please #{fix}" if fix
+  exit(1) unless ENV["SYSTEM_CHECK_NON_STRICT"]
+  Error.inc
 end
 
 def warn why, fix = nil
@@ -46,8 +58,6 @@ end
 desc "Check that your build environment is set up correctly for WebYaST"
 task :system_check do
 
-  errors = false
-
   #
   # check needed needed packages
   #
@@ -73,7 +83,6 @@ task :system_check do
     dest_policy = File.join('/usr/share/PolicyKit/policy', policy)
     if not File.exists?(dest_policy)
       escape "Policy '#{policy}' is not installed into '#{dest_policy}'", "Run \"rake install\" in the concerning module/plugin"
-      errors = true
     end
   end
 
@@ -115,7 +124,6 @@ EOF
     if not granted.include?(action)
       escape "policy #{action} is not granted and it is needed to run the webservice as #{user}.", "Run 'polkit-auth --user #{user} --grant #{action}' to grant the permission.\n"+hint_message
       hint_message = ""
-      errors = true
     end
   end
 
@@ -128,7 +136,6 @@ EOF
       if not granted.include?(id)
         warn "policy #{id} is not granted for current user.", " fix it if you plan to login to YaST as '#{user}', run 'polkit-auth --user #{user} --grant #{id}' to grant it." + hint_message
         hint_message = ""
-        errors = true
       end
     end
   end
@@ -139,7 +146,6 @@ EOF
   test "User roles configured" do
     unless File.exists? "/etc/yast_user_roles"
       escape "/etc/yast_user_roles does not exist", "Create /etc/yast_user_roles using template in webservice/package/yast_user_roles"
-      errors = true
     end
   end
 
@@ -157,6 +163,7 @@ EOF
     begin
       proxy = bus.introspect( "org.opensuse.yast.SCR", "/SCR" )
     rescue Exception => e
+      # catched by 'unless proxy' below
     end
   
     package = "yast2-core"
@@ -165,14 +172,12 @@ EOF
       $stderr.puts "YaST D-Bus service not available"
       test_version package, version
       escape "#{package} not correctly installed", "reinstall #{package}-#{version}"
-      errors = true
     end
     begin
       scr = proxy["org.opensuse.yast.SCR.Methods"]
     rescue Exception => e
     end
     escape "YaST D-Bus does not provide the right data", "reinstall #{package}-#{version}" unless scr
-    errors = true
   end
 
   #
@@ -180,6 +185,7 @@ EOF
   #
 
   test "all available plugins are working" do
+     # Disabled, "Dir.glob" is *waaay* too slow
      Dir.glob(File.join(File.dirname(__FILE__), '../../../plugins', "**/*_controller.rb")).each do |controller|
        modulename = File.basename(controller, ".rb").split("_").collect { |i| i.capitalize }.join
        modulepath = File.dirname(controller).split("/")
@@ -199,11 +205,10 @@ EOF
           ok = system %(cd #{File.dirname(__FILE__)}; export RAILS_PARENT=../../; ruby plugin_test/functional/plugin_show_test.rb --plugin #{modulename} > /dev/null)
        end
        escape "plugin #{modulename} does not work correctly", "try 'export RAILS_PARENT=.; ruby plugin_test/functional/plugin_index_test.rb --plugin #{modulename}' and check the result" unless ok
-       errors = true
-     end
+     end if false
   end
   
-  if !errors 
+  if Error.errors == 0
     puts ""
     puts "**************************************"
     puts "All fine, rest-service is ready to run"
