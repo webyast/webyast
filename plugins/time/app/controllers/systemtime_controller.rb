@@ -3,7 +3,7 @@ require 'systemtime'
 # = Systemtime controller
 # Provides access to time settings for authentificated users.
 # Main goal is checking permissions.
-class SystemtimesController < ApplicationController
+class SystemtimeController < ApplicationController
 
   before_filter :login_required
 
