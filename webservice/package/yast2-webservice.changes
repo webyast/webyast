@@ -1,4 +1,9 @@
 -------------------------------------------------------------------
+Tue Sep 29 10:13:45 CEST 2009 - schubi@suse.de
+
+- version 0.0.4 
+
+-------------------------------------------------------------------
 Thu Jul 23 12:41:40 CEST 2009 - mvidner@suse.cz
 
 - Repackaged with new webservice-tasks, omitting rails_rcov.
