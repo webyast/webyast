@@ -29,8 +29,8 @@ Rake::PackageTask.new('www', :noversion) do |p|
   p.package_files.exclude('./db/schema.rb')
   p.package_files.exclude('./log/*.log')
   p.package_files.exclude('./vendor/plugins/rails_rcov')
-  p.package_files.exclude('./public/vendor/text/*.po')
-  p.package_files.exclude('./public/vendor/text/*.mo')
+  p.package_files.exclude('./public/vendor/text/locale')
+  p.package_files.exclude('./public/vendor/text/po')
   p.package_files.exclude('./public/vendor/images')
   p.package_files.exclude('./public/vendor/stylesheets')
 end
