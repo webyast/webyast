@@ -23,7 +23,6 @@ Source1:        basesystem.yml
 BuildRoot:      %{_tmppath}/%{name}-%{version}-build
 BuildArch:      noarch
 BuildRequires:  rubygem-mocha
-Requires:       yast2-core > 2.18.14
 Requires:       yast2-country >= 2.18.9
 
 #
