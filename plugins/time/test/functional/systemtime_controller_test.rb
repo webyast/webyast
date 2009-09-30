@@ -6,7 +6,7 @@ require "scr"
 require 'mocha'
 require File.expand_path( File.join("test","plugin_basic_tests"), RailsParent.parent )
 
-class SystemtimesControllerTest < ActionController::TestCase
+class SystemtimeControllerTest < ActionController::TestCase
   fixtures :accounts
 
     DATA = {:time => {
@@ -19,7 +19,7 @@ class SystemtimesControllerTest < ActionController::TestCase
     
     Systemtime.stubs(:find).returns(Systemtime.new)
 
-    @controller = SystemtimesController.new
+    @controller = SystemtimeController.new
     @request = ActionController::TestRequest.new
     # http://railsforum.com/viewtopic.php?id=1719
     @request.session[:account_id] = 1 # defined in fixtures
