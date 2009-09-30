@@ -1,6 +1,7 @@
 
 require 'rake'
 require 'rake/packagetask'
+require 'fileutils'
 
 require "#{File.dirname(__FILE__)}/rake_rename_task"
 
@@ -12,6 +13,11 @@ if Rake::Task.task_defined?(:package)
 end
 
 # create new package task
+
+#removing old stuff
+www_dir = File.join(Dir.pwd,"package", "www")
+FileUtils.rm_rf(www_dir) if File.directory?(www_dir)
+
 Rake::PackageTask.new('www', :noversion) do |p|
   p.need_tar_bz2 = true
   p.package_dir = 'package'
