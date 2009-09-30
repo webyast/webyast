@@ -45,7 +45,7 @@ Authors:
 --------
     Stefan Schubert <schubi@opensuse.org>
     Jiri Suchomel <jsuchome@suse.cz>
-    Ladislav Slezak <jsuchome@suse.cz>
+    Ladislav Slezak <lslezak@suse.cz>
 
 %prep
 %setup -q -n www
