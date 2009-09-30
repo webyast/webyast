@@ -29,7 +29,7 @@ BuildArch:      noarch
 Requires:       yast2 >= 2.18.24
 %else
 # 11.1 or SLES11
-Requires:       yast2 >= 2.17.10.2
+Requires:       yast2 >= 2.17.71
 %endif
 
 
