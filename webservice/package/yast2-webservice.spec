@@ -10,7 +10,16 @@
 
 
 Name:           yast2-webservice
-Requires:       yast2-core >= 2.18.10, lighttpd-mod_magnet, ruby-fcgi, ruby-dbus, sqlite
+
+%if 0%{?suse_version} == 0 || %suse_version > 1110
+# 11.2 or newer
+Requires:       yast2-core >= 2.18.10
+%else
+# 11.1 or SLES11
+Requires:       yast2-core >= 2.17.31
+%endif
+
+Requires:	lighttpd-mod_magnet, ruby-fcgi, ruby-dbus, sqlite
 Requires:       rubygem-yast2-webservice-tasks
 Recommends:     avahi-utils
 Requires:	yast2-dbus-server
