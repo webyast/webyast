@@ -26,6 +26,8 @@ Rake::PackageTask.new('www', :noversion) do |p|
   p.package_files.exclude('./nbproject')
   #don't add generated documentation. If you want have it in package, generate it fresh
   p.package_files.exclude('./doc/app')
+  # ignore backups
+  p.package_files.exclude('./**/*.orig')
   p.package_files.exclude('./package')
   p.package_files.exclude('./coverage')
   p.package_files.exclude('./test')

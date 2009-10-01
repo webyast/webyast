@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Thu Oct  1 16:58:59 CEST 2009 - lslezak@suse.cz
+
+- rake package-local - don't package *.orig files
+- 0.0.3
+
+-------------------------------------------------------------------
 Thu Oct  1 15:35:50 CEST 2009 - jreidinger@suse.cz
 
 - Ignore more files to final package like IDE files or generated
