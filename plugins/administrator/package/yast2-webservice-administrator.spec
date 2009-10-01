@@ -11,8 +11,6 @@
 
 Name:           yast2-webservice-administrator
 PreReq:         yast2-webservice
-# requires YaPI::USERS
-Requires:	yast2-users
 Provides:       yast2-webservice:/srv/www/yastws/app/controllers/administrator_controller.rb
 License:        MIT
 Group:          Productivity/Networking/Web/Utilities
@@ -24,6 +22,15 @@ Source:         www.tar.bz2
 Source1:	org.opensuse.yast.modules.yapi.administrator.policy
 BuildRoot:      %{_tmppath}/%{name}-%{version}-build
 BuildArch:      noarch
+
+# requires YaPI::USERS
+%if 0%{?suse_version} == 0 || %suse_version > 1110
+# 11.2 or newer
+Requires:       yast2-users >= 2.18.13
+%else
+# 11.1 or SLES11
+Requires:       yast2-users >= 2.17.29
+%endif
 
 #
 %define pkg_user yastws
