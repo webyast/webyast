@@ -22,7 +22,15 @@ Source:         www.tar.bz2
 BuildRoot:      %{_tmppath}/%{name}-%{version}-build
 BuildArch:      noarch
 BuildRequires:  rubygem-mocha
+
+# YaPI/TIME.pm
+%if 0%{?suse_version} == 0 || %suse_version > 1110
+# 11.2 or newer
 Requires:       yast2-country >= 2.18.10
+%else
+# 11.1 or SLES11
+Requires:       yast2-country >= 2.17.35
+%endif
 
 #
 %define pkg_user yastws
