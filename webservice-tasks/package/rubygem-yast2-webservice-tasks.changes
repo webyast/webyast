@@ -1,4 +1,13 @@
 -------------------------------------------------------------------
+Thu Oct  1 15:35:50 CEST 2009 - jreidinger@suse.cz
+
+- Ignore more files to final package like IDE files or generated
+  documentation
+- Add safety push, which before git push checks if package pass test
+  and build succesfull
+- 0.0.2
+
+-------------------------------------------------------------------
 Wed Jun  3 15:36:34 CEST 2009 - mvidner@suse.cz
 
 - initial packaging
