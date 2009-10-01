@@ -27,6 +27,9 @@ class RouteTest < ActiveSupport::TestCase
    route = routes["default"]
    assert_equal 'default', route.id
  end
+
+ #FIXME: test for YaPI::NETWORK::Write with invalid IP of default route
+
  
 end
 
