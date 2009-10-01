@@ -22,6 +22,10 @@ Rake::PackageTask.new('www', :noversion) do |p|
   p.need_tar_bz2 = true
   p.package_dir = 'package'
   p.package_files.include('./**/*')
+  #don't add IDE files
+  p.package_files.exclude('./nbproject')
+  #don't add generated documentation. If you want have it in package, generate it fresh
+  p.package_files.exclude('./doc/app')
   p.package_files.exclude('./package')
   p.package_files.exclude('./coverage')
   p.package_files.exclude('./test')
