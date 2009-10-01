@@ -13,7 +13,7 @@ Name:           yast2-webservice-network
 License:        MIT
 Group:          Productivity/Networking/Web/Utilities
 Autoreqprov:    on
-Version:        0.0.4
+Version:        0.0.5
 Release:        0
 Summary:        YaST2 - Webservice - Network
 Source:         www.tar.bz2
@@ -21,7 +21,12 @@ Source1:        org.opensuse.yast.modules.yapi.network.policy
 BuildRoot:      %{_tmppath}/%{name}-%{version}-build
 BuildArch:      noarch
 PreReq:         yast2-webservice
+# YaPI/NETWORK.pm
+%if 0%{?suse_version} == 0 || %suse_version > 1110
 Requires:       yast2-network >= 2.18.47
+%else
+Requires:       yast2-network >= 2.17.100
+%endif
 
 #
 %define pkg_user yastws
