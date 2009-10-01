@@ -168,7 +168,7 @@ test -r /usr/sbin/yastws || { echo "Creating link /usr/sbin/yastws";
 # create database 
 #
 cd srv/www/%{pkg_user}
-rake db:migrate
+RAILS_ENV=production rake db:migrate
 chown -R yastws: db
 chown -R yastws: log
 echo "Database is ready"
