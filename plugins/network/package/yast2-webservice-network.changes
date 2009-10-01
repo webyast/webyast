@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Thu Oct  1 16:18:11 CEST 2009 - mzugec@suse.cz
+
+- raise exception (and send it to the rest-api) if any error given
+ from YaPI 
+
+-------------------------------------------------------------------
 Thu Oct  1 14:19:10 CEST 2009 - mvidner@suse.cz
 
 - Fixed the YaPI dependency for SLE11.

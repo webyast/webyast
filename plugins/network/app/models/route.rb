@@ -42,7 +42,7 @@ class Route
       @id => { 'via'=>@via },
     }
     vsettings = [ "a{sa{ss}}", settings ] # bnc#538050
-    YastService.Call("YaPI::NETWORK::Write",{"route" => vsettings})
+    ret = YastService.Call("YaPI::NETWORK::Write",{"route" => vsettings})
     # TODO success or not?
   end
 

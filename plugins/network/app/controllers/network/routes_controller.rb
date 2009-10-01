@@ -16,11 +16,12 @@ class Network::RoutesController < ApplicationController
     @route = Route.find(root[:id])
     @route.via = root[:via]
     respond_to do |format|    
-	if @route.save 
-	  format.xml { head :ok } 
-	  else  
-	    format.xml { render :xml => @route.errors,  :status => :unprocessable_entity } 
-	end
+      ret = @route.save 
+      if ret["exit"]=="0"
+	format.xml { head :ok } 
+      else  
+	  raise RouteError.new ret["error"]
+      end
     end
   end
 
@@ -46,4 +47,23 @@ class Network::RoutesController < ApplicationController
     end    
   end
 
+end
+
+require 'exceptions'
+class RouteError < BackendException
+  def initialize(message)
+    @message = message
+    super("Failed to write route setting with this error: #{@message}.")
+  end
+
+  def to_xml
+    xml = Builder::XmlMarkup.new({})
+    xml.instruct!
+
+    xml.error do
+      xml.type "NETWORK_ROUTE_ERROR"
+      xml.description @message
+      xml.output @message
+    end
+  end
 end
