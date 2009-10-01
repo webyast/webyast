@@ -64,6 +64,12 @@ polkit-auth --user %{pkg_user} --grant org.freedesktop.hal.power-management.shut
 polkit-auth --user %{pkg_user} --grant org.freedesktop.hal.power-management.reboot >& /dev/null || true
 polkit-auth --user %{pkg_user} --grant org.freedesktop.hal.power-management.reboot-multiple-sessions >& /dev/null || true
 
+# granting all permissions for root
+polkit-auth --user root --grant org.freedesktop.hal.power-management.shutdown >& /dev/null || true
+polkit-auth --user root --grant org.freedesktop.hal.power-management.shutdown-multiple-sessions >& /dev/null || true
+polkit-auth --user root --grant org.freedesktop.hal.power-management.reboot >& /dev/null || true
+polkit-auth --user root --grant org.freedesktop.hal.power-management.reboot-multiple-sessions >& /dev/null || true
+
 %postun
 # discard all configured permissions for the web user
 polkit-auth --user %{pkg_user} --revoke org.freedesktop.hal.power-management.shutdown
