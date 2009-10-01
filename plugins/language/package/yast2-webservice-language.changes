@@ -1,4 +1,9 @@
 -------------------------------------------------------------------
+Thu Oct  1 13:22:26 CEST 2009 - jreidinger@suse.cz
+
+- adapt requirements to SLE11 appliance
+
+-------------------------------------------------------------------
 Tue Sep 29 10:36:48 CEST 2009 - schubi@suse.de
 
 - version 0.0.4 
