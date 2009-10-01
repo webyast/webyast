@@ -8,6 +8,11 @@ Thu Oct  1 15:35:50 CEST 2009 - jreidinger@suse.cz
 - 0.0.2
 
 -------------------------------------------------------------------
+Tue Sep 29 10:06:10 CEST 2009 - kkaempf@suse.de
+
+- Fix package summary and description
+
+-------------------------------------------------------------------
 Wed Jun  3 15:36:34 CEST 2009 - mvidner@suse.cz
 
 - initial packaging
