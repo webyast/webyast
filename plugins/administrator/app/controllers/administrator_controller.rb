@@ -34,11 +34,7 @@ class AdministratorController < ApplicationController
     end
 
     if data.has_key?(:aliases) && !data[:aliases].nil?
-      begin
-        @admin.save_aliases(data[:aliases])
-	rescue Exception => e
-	  render ErrorResult.error(404, 2, e.message) and return
-      end
+      @admin.save_aliases(data[:aliases])
     end
     show
   end
