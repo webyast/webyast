@@ -76,7 +76,7 @@ rm -rf $RPM_BUILD_ROOT
 %dir /srv/www/%{pkg_user}/vendor/plugins/%{plugin_name}
 %dir /srv/www/%{pkg_user}/vendor/plugins/%{plugin_name}/doc
 # FIXME respect FHS. bnc#543766
-%dir %defattr(-,yastws,root) /srv/www/%{pkg_user}/vendor/plugins/%{plugin_name}/var
+%dir %attr(-,yastws,root) /srv/www/%{pkg_user}/vendor/plugins/%{plugin_name}/var
 %dir /etc/YaST2
 /srv/www/%{pkg_user}/vendor/plugins/%{plugin_name}/MIT-LICENSE
 /srv/www/%{pkg_user}/vendor/plugins/%{plugin_name}/README
