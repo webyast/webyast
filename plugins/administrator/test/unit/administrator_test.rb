@@ -42,7 +42,7 @@ class AdministratorTest < ActiveSupport::TestCase
   def test_save_failure
     new_aliases	= [ "test@domain.com" ];
     YastService.stubs(:Call).with('YaPI::ADMINISTRATOR::Write', {"aliases" => [ "as", new_aliases ]}).returns("YaPI error")
-    assert_raise Exception do
+    assert_raise AdministratorError do
       ret = @model.save_aliases(new_aliases.join(","))
     end
   end

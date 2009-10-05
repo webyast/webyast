@@ -23,7 +23,15 @@ Source1:        basesystem.yml
 BuildRoot:      %{_tmppath}/%{name}-%{version}-build
 BuildArch:      noarch
 BuildRequires:  rubygem-mocha
-Requires:       yast2-country >= 2.18.9
+
+# YaPI/TIME.pm
+%if 0%{?suse_version} == 0 || %suse_version > 1110
+# 11.2 or newer
+Requires:       yast2-country >= 2.18.10
+%else
+# 11.1 or SLES11
+Requires:       yast2-country >= 2.17.35
+%endif
 
 #
 %define pkg_user yastws
@@ -67,7 +75,8 @@ rm -rf $RPM_BUILD_ROOT
 %dir /srv/www/%{pkg_user}/vendor/plugins
 %dir /srv/www/%{pkg_user}/vendor/plugins/%{plugin_name}
 %dir /srv/www/%{pkg_user}/vendor/plugins/%{plugin_name}/doc
-%dir /srv/www/%{pkg_user}/vendor/plugins/%{plugin_name}/var
+# FIXME respect FHS. bnc#543766
+%dir %attr(-,yastws,root) /srv/www/%{pkg_user}/vendor/plugins/%{plugin_name}/var
 %dir /etc/YaST2
 /srv/www/%{pkg_user}/vendor/plugins/%{plugin_name}/MIT-LICENSE
 /srv/www/%{pkg_user}/vendor/plugins/%{plugin_name}/README

@@ -42,8 +42,7 @@ class Administrator
     }
     yapi_ret = YastService.Call("YaPI::ADMINISTRATOR::Write", parameters)
     Rails.logger.debug "YaPI returns: '#{yapi_ret}'"
-
-    raise Exception.new(yapi_ret) unless yapi_ret.empty?
+    raise AdministratorError.new(yapi_ret) unless yapi_ret.empty?
     @aliases = new_aliases
   end
 
@@ -62,4 +61,24 @@ class Administrator
     return hash.to_json
   end
 
+end
+
+require 'exceptions'
+class AdministratorError < BackendException
+
+  def initialize(message)
+    @message = message
+    super("Administrator setup failed with this error: #{@message}.")
+  end
+
+  def to_xml
+    xml = Builder::XmlMarkup.new({})
+    xml.instruct!
+
+    xml.error do
+      xml.type "ADMINISTRATOR_ERROR"
+      xml.description message
+      xml.output @message
+    end
+  end
 end

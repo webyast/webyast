@@ -48,6 +48,8 @@ if the same file is in both lists.
 Package building
 ----------------
 
+Update VERSION file if needed, then:
+
 build package:
 
     rake package
