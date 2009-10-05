@@ -47,18 +47,18 @@ class System
 
 		when :reboot
 		    if ENV['RAILS_ENV'] == 'production'
-			Rails.logger.debug 'Rebooting the computer...'
+			Rails.logger.warning 'Rebooting the computer...'
 			return computer.Reboot.zero?
 		    else
-			Rails.logger.debug "Skipping reboot in #{ENV['RAILS_ENV']} mode"
+			Rails.logger.warning "Skipping reboot in #{ENV['RAILS_ENV']} mode"
 			return true
 		    end
 		when :shutdown
 		    if ENV['RAILS_ENV'] == 'production'
-			Rails.logger.debug 'Shutting down the computer...'
+			Rails.logger.warning 'Shutting down the computer...'
 			return computer.Shutdown.zero?
 		    else
-			Rails.logger.debug "Skipping shutdown in #{ENV['RAILS_ENV']} mode"
+			Rails.logger.warning "Skipping shutdown in #{ENV['RAILS_ENV']} mode"
 			return true
 		    end
 		else
@@ -67,11 +67,11 @@ class System
 
 	# handle DBus errors
 	rescue DBus::Error => dbe
-	    logger.error "DBus error: #{dbe.dbus_message.error_name}"
+	    Rails.logger.error "DBus error: #{dbe.dbus_message.error_name}"
 	    return false
 	# handle generic errors
 	rescue Exception => e
-	    logger.error "Caught exception: #{e.message}"
+	    Rails.logger.error "Caught exception: #{e.message}"
 	    return false
 	end
     end
