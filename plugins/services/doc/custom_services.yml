@@ -16,9 +16,8 @@
 # ------------------------------------------------------------------------------
 #
 # The list of services that could be operated by webYaST services module.
-# Add only name of service if there is /etc/init.d/<service-name> available.
-# Otherwise, provide also service description and paths to start, stop and
-# status scripts.
+# It is required to provide commands to start, stop and read the service status.
+# Providing service description is optional.
 
 collectd:
   description: Statistics Collection Daemon for filling RRD Files
