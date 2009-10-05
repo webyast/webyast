@@ -20,7 +20,7 @@ Source:         www.tar.bz2
 Source1:        org.opensuse.yast.system.status.policy
 BuildRoot:      %{_tmppath}/%{name}-%{version}-build
 BuildArch:      noarch
-PreReq:         yast2-webservice, collectd
+PreReq:         yast2-webservice, collectd, %insserv_prereq
 Requires:       rrdtool
 
 #
@@ -64,9 +64,9 @@ rm -rf $RPM_BUILD_ROOT
 /etc/yastws/tools/policyKit-rights.rb --user root --action grant >& /dev/null || :
 #
 # enable and start  collectd
-# Temporarily disabled: bnc#542475
-#insserv -f collectd
-#/etc/init.d/collectd start
+# 
+%{fillup_and_insserv -Y collectd}
+rccollectd start
 
 %files
 %defattr(-,root,root)
