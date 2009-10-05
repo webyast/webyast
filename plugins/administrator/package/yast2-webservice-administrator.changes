@@ -1,4 +1,11 @@
 -------------------------------------------------------------------
+Mon Oct  5 12:43:42 CEST 2009 - jsuchome@suse.cz
+
+- grant permissions to root (bnc#543756)
+- added basic documentation of REST service (bnc#537200)
+- 0.0.3
+
+-------------------------------------------------------------------
 Tue Sep 29 10:18:50 CEST 2009 - schubi@suse.de
 
 - version 0.0.2 
