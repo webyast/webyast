@@ -16,7 +16,7 @@ task :'build_test'  do
   begin
     `osc checkout 'YaST:Web' #{package_name}`
     #clean www dir and also clean before copy old entries in osc dir to test if package build after remove some file
-    `rm -rf package/www 'YaST:Web/#{package_name}/*`  
+    `rm -rf package/www 'YaST:Web/#{package_name}/*'`  
     `cp package/* 'YaST:Web/#{package_name}'`
     Dir.chdir File.join(Dir.pwd, "YaST:Web", package_name)
     puts "start building package. output will appear at the end."
