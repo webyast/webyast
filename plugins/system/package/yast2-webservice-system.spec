@@ -71,11 +71,15 @@ polkit-auth --user root --grant org.freedesktop.hal.power-management.reboot >& /
 polkit-auth --user root --grant org.freedesktop.hal.power-management.reboot-multiple-sessions >& /dev/null || true
 
 %postun
-# discard all configured permissions for the web user
-polkit-auth --user %{pkg_user} --revoke org.freedesktop.hal.power-management.shutdown
-polkit-auth --user %{pkg_user} --revoke org.freedesktop.hal.power-management.shutdown-multiple-sessions
-polkit-auth --user %{pkg_user} --revoke org.freedesktop.hal.power-management.reboot
-polkit-auth --user %{pkg_user} --revoke org.freedesktop.hal.power-management.reboot-multiple-sessions
+# don't remove the rights during package update ($1 > 0)
+# see https://fedoraproject.org/wiki/Packaging/ScriptletSnippets#Syntax
+if [ $1 -eq 0 ] ; then
+  # discard all configured permissions for the web user
+  polkit-auth --user %{pkg_user} --revoke org.freedesktop.hal.power-management.shutdown
+  polkit-auth --user %{pkg_user} --revoke org.freedesktop.hal.power-management.shutdown-multiple-sessions
+  polkit-auth --user %{pkg_user} --revoke org.freedesktop.hal.power-management.reboot
+  polkit-auth --user %{pkg_user} --revoke org.freedesktop.hal.power-management.reboot-multiple-sessions
+fi
 
 %files 
 %defattr(-,root,root)
