@@ -49,7 +49,7 @@ Authors:
 # Install all web and frontend parts.
 #
 mkdir -p $RPM_BUILD_ROOT/srv/www/%{pkg_user}/vendor/plugins/%{plugin_name}
-mkdir -p $RPM_BUILD_ROOT/var/yastws/%{plugin_name}
+mkdir -p $RPM_BUILD_ROOT/var/lib/yastws/%{plugin_name}
 cp -a * $RPM_BUILD_ROOT/srv/www/%{pkg_user}/vendor/plugins/%{plugin_name}
 #FIXME maybe location change in future
 
@@ -68,8 +68,8 @@ rm -rf $RPM_BUILD_ROOT
 %dir /srv/www/%{pkg_user}/vendor/plugins/%{plugin_name}
 %dir /srv/www/%{pkg_user}/vendor/plugins/%{plugin_name}/doc
 #var dir to store basesystem status
-%dir %attr (-,%{pkg_user},root) /var/yastws
-%dir %attr (-,%{pkg_user},root) /var/yastws/%{plugin_name}
+%dir %attr (-,%{pkg_user},root) /var/lib/yastws
+%dir %attr (-,%{pkg_user},root) /var/lib/yastws/%{plugin_name}
 #FIXME change what yastws config file has own directory
 %dir /etc/YaST2
 %config /etc/YaST2/basesystem.yml
