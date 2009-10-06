@@ -22,10 +22,11 @@ class Network::DnsController < ApplicationController
     respond_to do |format|    
 	if @dns.save 
 	  format.xml { head :ok } 
-	  else  
-	    format.xml { render :xml => @dns.errors,  :status => :unprocessable_entity } 
+        else  
+          format.xml { render :xml => @dns.errors,  :status => :unprocessable_entity } 
 	end
-    end  end
+    end
+  end
 
   # See update
   def create
