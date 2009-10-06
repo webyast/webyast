@@ -14,8 +14,8 @@ class Network::DnsController < ApplicationController
       raise InvalidParameters.new :dns => "Missing"
     end
     
-    root["searches"]=root["searches"].split
-    root["nameservers"]=root["nameservers"].split
+    root["searches"] = (root["searches"] || "").split
+    root["nameservers"] = (root["nameservers"] || "").split
     
     @dns = DNS.new(root)
     @dns.save
