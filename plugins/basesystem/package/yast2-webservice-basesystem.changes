@@ -1,4 +1,11 @@
 -------------------------------------------------------------------
+Tue Oct  6 12:03:50 CEST 2009 - jreidinger@suse.cz
+
+- change state directory to /var/lib/yastws/basesystem to be FHS
+  compliant (bnc 543766)
+- 0.0.3
+
+-------------------------------------------------------------------
 Fri Oct  2 09:03:55 CEST 2009 - jsrain@suse.cz
 
 - adapt requirements to SLE11 appliance
