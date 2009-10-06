@@ -17,7 +17,7 @@ Provides:       yast2-webservice:/srv/www/%{pkg_user}/vendor/plugins/%{plugin_na
 License:        MIT
 Group:          Productivity/Networking/Web/Utilities
 Autoreqprov:    on
-Version:        0.0.1
+Version:        0.0.2
 Release:        0
 Summary:        YaST2 - Webservice - REST API for Samba Server configuration
 Source:         www.tar.bz2
