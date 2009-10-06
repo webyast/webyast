@@ -3,15 +3,19 @@
 class RegistrationController < ApplicationController
 
   before_filter :login_required
+  @@registration = Registration.new('I am a registered machine (or not)')
 
-
-  def update    
+  def update
   end
 
   def create
+    # POST to registration => run registration
+
   end
 
   def show
+    @registration = @@registration
   end
+
 
 end
