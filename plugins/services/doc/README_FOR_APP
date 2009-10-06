@@ -1,0 +1,5 @@
+To configure Custom services (fate#306696):
+   
+ - edit /etc/YaST2/custom_services.yml and place the info about your own service there
+
+ - see the example file for custom_services.yml in this directory

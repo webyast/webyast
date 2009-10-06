@@ -17,7 +17,7 @@ Provides:       yast2-webservice:/srv/www/%{pkg_user}/vendor/plugins/%{plugin_na
 License:        MIT
 Group:          Productivity/Networking/Web/Utilities
 Autoreqprov:    on
-Version:        0.0.1
+Version:        0.0.2
 Release:        0
 Summary:        YaST2 - Webservice - REST API for Samba Server configuration
 Source:         www.tar.bz2
@@ -55,6 +55,13 @@ rm -rf $RPM_BUILD_ROOT
 /usr/bin/polkit-auth --user %{pkg_user} --grant org.opensuse.yast.modules.yapi.samba.editshare >& /dev/null || :
 /usr/bin/polkit-auth --user %{pkg_user} --grant org.opensuse.yast.modules.yapi.samba.deleteshare >& /dev/null || :
 /usr/bin/polkit-auth --user %{pkg_user} --grant org.opensuse.yast.modules.yapi.samba.getshare >& /dev/null || :
+
+# grant the needed privileges to root
+/usr/bin/polkit-auth --user root --grant org.opensuse.yast.modules.yapi.samba.getalldirectories >& /dev/null || :
+/usr/bin/polkit-auth --user root --grant org.opensuse.yast.modules.yapi.samba.addshare >& /dev/null || :
+/usr/bin/polkit-auth --user root --grant org.opensuse.yast.modules.yapi.samba.editshare >& /dev/null || :
+/usr/bin/polkit-auth --user root --grant org.opensuse.yast.modules.yapi.samba.deleteshare >& /dev/null || :
+/usr/bin/polkit-auth --user root --grant org.opensuse.yast.modules.yapi.samba.getshare >& /dev/null || :
 
 %files 
 %defattr(-,root,root)

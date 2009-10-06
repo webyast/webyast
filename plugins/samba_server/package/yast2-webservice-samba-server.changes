@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Tue Oct  6 08:04:32 CEST 2009 - lslezak@suse.cz
+
+- grant needed privileges to root (bnc#541695)
+- 0.0.2
+
+-------------------------------------------------------------------
 Tue May 12 20:11:40 CEST 2009 - lslezak@suse.cz
 
 - initial version
