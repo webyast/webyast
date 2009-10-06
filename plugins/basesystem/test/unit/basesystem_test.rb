@@ -12,6 +12,8 @@ EOF
 
   TEST_STEPS = [{ "controller" => "systemtimes"},{"controller" => "language", "action" => "show"}]
   def setup
+    #set const to run test in this directory
+    Basesystem.const_set "FINISH_FILE", File.expand_path(File.join(File.dirname(__FILE__),"finish")) 
     YaST::ConfigFile.stubs(:read_file).returns(YAML_CONTENT)
     YaST::ConfigFile.any_instance.stubs(:path).returns(__FILE__)
     @basesystem = Basesystem.find
