@@ -47,18 +47,18 @@ class System
 
 		when :reboot
 		    if ENV['RAILS_ENV'] == 'production'
-			Rails.logger.warning 'Rebooting the computer...'
+			Rails.logger.info 'Rebooting the computer...'
 			return computer.Reboot.zero?
 		    else
-			Rails.logger.warning "Skipping reboot in #{ENV['RAILS_ENV']} mode"
+			Rails.logger.warn "Skipping reboot in #{ENV['RAILS_ENV']} mode"
 			return true
 		    end
 		when :shutdown
 		    if ENV['RAILS_ENV'] == 'production'
-			Rails.logger.warning 'Shutting down the computer...'
+			Rails.logger.info 'Shutting down the computer...'
 			return computer.Shutdown.zero?
 		    else
-			Rails.logger.warning "Skipping shutdown in #{ENV['RAILS_ENV']} mode"
+			Rails.logger.warn "Skipping shutdown in #{ENV['RAILS_ENV']} mode"
 			return true
 		    end
 		else

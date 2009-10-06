@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Tue Oct  6 11:49:59 CEST 2009 - lslezak@suse.cz
+
+- a bug in logging lead to a wrong status message (bnc#543760)
+- 0.0.3
+
+-------------------------------------------------------------------
 Tue Sep 29 11:49:44 CEST 2009 - schubi@suse.de
 
 - version 0.0.2 
