@@ -40,11 +40,17 @@ class RoutesControllerTest < ActionController::TestCase
 	 },
       "id"=>"default"
      }
+  ERROR = {
+    "exit" => "-1",
+    "error" => "invalid ip",
+  }
 
   def test_validation
+    @model_class.any_instance.stubs(:save).returns ERROR
     put :update, DATA
     h = Hash.from_xml @response.body
     assert_equal "NETWORK_ROUTE_ERROR", h["error"]["type"]
+    assert_response :error
   end
 
 end
