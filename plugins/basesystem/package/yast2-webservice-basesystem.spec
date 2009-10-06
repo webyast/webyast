@@ -24,15 +24,6 @@ BuildRoot:      %{_tmppath}/%{name}-%{version}-build
 BuildArch:      noarch
 BuildRequires:  rubygem-mocha
 
-# YaPI/TIME.pm
-%if 0%{?suse_version} == 0 || %suse_version > 1110
-# 11.2 or newer
-Requires:       yast2-country >= 2.18.10
-%else
-# 11.1 or SLES11
-Requires:       yast2-country >= 2.17.35
-%endif
-
 #
 %define pkg_user yastws
 %define plugin_name basesystem
@@ -75,9 +66,12 @@ rm -rf $RPM_BUILD_ROOT
 %dir /srv/www/%{pkg_user}/vendor/plugins
 %dir /srv/www/%{pkg_user}/vendor/plugins/%{plugin_name}
 %dir /srv/www/%{pkg_user}/vendor/plugins/%{plugin_name}/doc
-# FIXME respect FHS. bnc#543766
-%dir %attr(-,yastws,root) /srv/www/%{pkg_user}/vendor/plugins/%{plugin_name}/var
+#var dir to store basesystem status
+%dir %attr (-,%{pkg_user},root) /var/yastws
+%dir %attr (-,%{pkg_user},root) /var/yastws/basesystem
+#FIXME change what yastws config file has own directory
 %dir /etc/YaST2
+%config /etc/YaST2/basesystem.yml
 /srv/www/%{pkg_user}/vendor/plugins/%{plugin_name}/MIT-LICENSE
 /srv/www/%{pkg_user}/vendor/plugins/%{plugin_name}/README
 /srv/www/%{pkg_user}/vendor/plugins/%{plugin_name}/Rakefile
@@ -89,5 +83,4 @@ rm -rf $RPM_BUILD_ROOT
 #/srv/www/%{pkg_user}/vendor/plugins/%{plugin_name}/tasks
 #/srv/www/%{pkg_user}/vendor/plugins/%{plugin_name}/test
 /srv/www/%{pkg_user}/vendor/plugins/%{plugin_name}/doc/README_FOR_APP
-%config /etc/YaST2/basesystem.yml
 

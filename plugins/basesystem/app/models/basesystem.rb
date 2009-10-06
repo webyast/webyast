@@ -13,7 +13,7 @@ class Basesystem
   # path to file which defines module queue
   BASESYSTEM_CONF = :basesystem
   # path to file which store module then is next in queue or END_STRING if all steps is done
-  FINISH_FILE = File.join(File.dirname(__FILE__),"..","..","var","finish")  
+  FINISH_FILE = File.join("var","yastws","basesystem","finish")
 
 
   #Gets instance of Basesystem with initialized steps queue.
@@ -56,7 +56,7 @@ class Basesystem
       xml.steps({:type => "array"}) do
         @steps.each do
           |step|
-          xml.step do             
+          xml.step do
             xml.controller step["controller"]
             xml.action step["action"]
           end
