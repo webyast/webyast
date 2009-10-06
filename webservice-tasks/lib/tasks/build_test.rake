@@ -16,14 +16,14 @@ task :'build_test'  do
   `rm -rf package/www`  
   `cp package/* 'YaST:Web/#{package_name}'`
   Dir.chdir File.join(Dir.pwd, "YaST:Web", package_name)
-  puts "start building package"
+  puts "start building package. output will appear at the end."
   puts `osc build`
   if $?.exitstatus != 0
     raise "Failed to build"
   end
-  puts "package builded, cleaning"
+  puts "package built, cleaning"
   Dir.chdir File.join(Dir.pwd, '..', '..')
-  `rm -rf 'YaST:WeB'`
+  `rm -rf 'YaST:Web'`
 end
 
 
