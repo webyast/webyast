@@ -23,6 +23,11 @@ BuildArch:      noarch
 PreReq:         yast2-webservice, collectd, %insserv_prereq
 Requires:       rrdtool
 
+# This is for Hudson (build server) to prepare the build env correctly.
+%if 0
+BuildRequires:  collectd
+%endif
+
 #
 %define pkg_user yastws
 %define plugin_name status
