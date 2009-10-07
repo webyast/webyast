@@ -105,9 +105,7 @@ class MetricTest < ActiveSupport::TestCase
         xml.value nil
       end
     end
-
-# disabled, bnc#54355, you cannot string-compare XML representations
-#   assert_equal packets.to_xml(:start => start, :stop => stop), xml.target!
+   assert_equal packets.to_xml(:start => start, :stop => stop), xml.target!
   end
   
   def test_collectd_running
