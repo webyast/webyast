@@ -1,0 +1,127 @@
+LIZENZVEREINBARUNG 
+openSUSE(r) 11.1
+
+Diese Vereinbarung bildet die Grundlage für das Herunterladen, die
+Installation oder die Nutzung von openSUSE 11.1 und dessen Updates
+unabhängig vom Liefermechanismus. openSUSE 11.1 stellt eine dem
+Urheberrechtsgesetz der USA unterliegende Gemeinschaftsarbeit dar.
+Vorbehaltlich der nachstehenden Bestimmungen  gewährt Ihnen
+das openSUSE-Projekt eine Lizenz für diese Gemeinschaftsarbeit
+entsprechend der allgemeinen öffentlichen GNU-Lizenz Version
+2. Indem Sie openSUSE 11.1 herunterladen, installieren oder nutzen,
+stimmen Sie den Bedingungen dieser Vereinbarung zu.
+
+openSUSE 11.1 ist ein modulares Linux-Betriebssystem, das aus
+Hunderten von Softwarekomponenten besteht. Die Lizenzvereinbarung
+zu jeder Komponente befindet sich im Allgemeinen im Quellcode der
+jeweiligen Komponente. Mit Ausnahme bestimmter Dateien, die die
+nachstehend erläuterte Marke „openSUSE“ enthalten, ermöglichen
+es Ihnen die Lizenzbedingungen zu den Komponenten, die jeweilige
+Komponente zu kopieren und weiterzugeben. Mit der potenziellen
+Ausnahme bestimmter Firmware-Dateien ermöglichen es Ihnen die
+Lizenzbedingungen zu den Komponenten, die jeweilige Komponente
+sowohl in Quellcode- als auch in Binärcodeform zu kopieren, zu
+ändern und weiterzugeben. Diese Vereinbarung stellt weder eine
+Einschränkung Ihrer Rechte im Rahmen der Lizenzbedingungen zu
+einer bestimmten Komponente dar, noch gewährt Sie Ihnen Rechte,
+die an die Stelle dieser Lizenzbedingungen treten.
+
+openSUSE 11.1 und alle Komponenten einschließlich Quellcode,
+Dokumentation, Aufmachung, Struktur und Anordnung wurden vom
+openSUSE-Projekt und anderen mit einem Copyright versehen und
+sind durch das Urheberrecht und andere Gesetze geschützt. Der
+Rechtsanspruch auf openSUSE 11.1 und dessen Komponenten bzw. auf
+Kopien, Änderungen oder zusammengeführte Teile verbleibt bei
+den Vorgenannten und unterliegt der jeweiligen Lizenz. Die Marke
+„openSUSE“ ist eine Marke von Novell, Inc. in den USA und
+anderen Ländern und wird nach Genehmigung verwendet. Gemäß
+dieser Vereinbarung sind Sie zur Verteilung unveränderter Kopien
+von openSUSE 11.1 mit der Marke „openSUSE“ unter der Bedingung
+berechtigt, dass Sie die Markenrichtlinien des openSUSE-Projekts
+befolgen. Diese sind unter http://www.opensuse.org/Legal
+zu finden. Diese Markenrichtlinien sind bei der Verteilung von
+openSUSE 11.1 unabhängig davon einzuhalten, ob openSUSE 11.1
+verändert wurde.
+
+Soweit in dieser Vereinbarung oder in einer Lizenz zu einer
+bestimmten Komponente nicht ausdrücklich erwähnt, WERDEN
+OPENSUSE 11.1 UND DESSEN KOMPONENTEN GEMÄSS DEN ENTSPRECHENDEN
+GESETZEN IN DER VERFÜGBAREN FORM OHNE AUSDRÜCKLICHE ODER IMPLIZITE
+GEWÄHRLEISTUNG BEREITGESTELLT UND LIZENZIERT.  HIERZU GEHÖREN DIE
+IMPLIZITEN GEWÄHRLEISTUNGEN FÜR MARKTGÄNGIGKEIT, EIGNUNG FÜR
+EINEN BESTIMMTEN ZWECK, EIGENTUMSRECHT, NICHTBEEINTRÄCHTIGUNG ODER
+EIGNUNG FÜR EINEN BESTIMMTEN ZWECK. Das openSUSE-Projekt garantiert
+nicht, dass die in openSUSE 11.1 enthaltenen Funktionen Ihren
+Anforderungen entsprechen und dass openSUSE 11.1 völlig fehlerfrei
+ausgeführt wird oder genau wie in der Begleitdokumentation
+beschrieben funktioniert. DIE NUTZUNG VON OPENSUSE 11.1 ERFOLGT
+AUF EIGENE GEFAHR.
+
+GEMÄSS DEN ENTSPRECHENDEN GESETZEN SIND DAS OPENSUSE-PROJEKT UND
+DESSEN LIZENZGEBER, TOCHTERGESELLSCHAFTEN ODER MITARBEITER NICHT
+FÜR IRGENDWELCHE SCHÄDEN EINSCHLIESSLICH DIREKTER, BEILÄUFIG
+ENTSTANDENER ODER FOLGESCHÄDEN SOWIE PROFIT- ODER ERSPARNISVERLUST
+HAFTBAR, DIE SICH AUS DER NUTZUNG BZW.  DER UNFÄHIGKEIT ZUR
+NUTZUNG VON OPENSUSE 11.1 ERGEBEN KÖNNEN. DIES GILT AUCH DANN,
+WENN DAS OPENSUSE-PROJEKT ÜBER DIE MÖGLICHKEIT DERARTIGER SCHÄDEN
+IN KENNTNIS GESETZT WURDE. IN LÄNDERN, IN DENEN DIE RECHTSPRECHUNG
+DEN AUSSCHLUSS ODER DIE EINSCHRÄNKUNG VON SCHADENSERSATZFORDERUNGEN
+BESCHRÄNKT, BETRÄGT DIE GESAMTHAFTUNG DES OPENSUSE-PROJEKTS UND
+SEINER LIZENZGEBER, TOCHTERGESELLSCHAFTEN ODER MITARBEITER MAXIMAL
+50 US-DOLLAR ODER, SOFERN EINE DERARTIGE EINSCHRÄNKUNG NICHT
+ERLAUBT IST, DEN MAXIMAL ZULÄSSIGEN BETRAG.
+
+Gemäß der Gesetzgebung der USA versichern und garantieren Sie,
+dass: (a) Ihnen bekannt ist, dass openSUSE 11.1 Exportkontrollen
+gemäß den „Export Administration Regulations“ (EAR)
+des US-Wirtschaftsministeriums unterliegt; (b) Sie sich nicht
+in einem verbotenen Zielexportland gemäß den Vorschriften und
+Bestimmungen der EAR oder der USA befinden; (c) openSUSE 11.1 nicht
+ohne die erforderlichen Exportlizenzen oder -genehmigungen von der
+US-Regierung an verbotene Orte, Einheiten oder Privatpersonen
+exportieren oder rückexportieren; (d) openSUSE 11.1 nicht
+ohne Genehmigung der US-Regierung in Form von Bestimmungen oder
+spezieller Lizenzen zur Verwendung in Nuklear-, chemischen oder
+biologischen Waffen oder in der Raketentechnologie einsetzen
+oder übertragen; (e) Ihnen bekannt ist und Sie zustimmen,
+dass Sie, wenn Sie sich in den USA befinden und openSUSE 11.1 an
+qualifizierte Endbenutzer exportieren oder übertragen, gemäß EAR
+Abschnitt 741.17(e) dem  Commerce Department's Bureau of Industry
+& Security (BIS) halbjährliche Berichte mit Namen und Adresse
+(einschließlich Land) aller Empfänger liefern müssen und (f)
+darüber informiert sind, dass andere Länder Import, Nutzung oder
+Export von Verschlüsselungsprodukten möglicherweise einschränken
+und Sie allein für die Einhaltung derartiger Import-, Nutzungs-
+oder Exporteinschränkungen verantwortlich sind.
+
+Sollte sich eine Bestimmung in dieser Vereinbarung als nicht
+durchsetzbar erweisen, ist die Durchsetzbarkeit aller anderen
+Bestimmungen davon nicht betroffen. Diese Vereinbarung unterliegt
+den Gesetzen des US-Bundesstaats Utah und der USA, unabhängig
+von Gesetzen zur Regelung einander widersprechender Gesetze, mit
+der Ausnahme, dass die Konvention der Vereinten Nationen für
+den internationalen Verkauf von Gütern nicht zutrifft. Diese
+Vereinbarung stellt das gesamte Übereinkommen zwischen Ihnen und
+dem openSUSE-Projekt im Hinblick auf den Gegenstand der Vereinbarung
+dar und kann nur in einem von beiden Parteien unterschriebenen
+Schriftstück geändert werden. Ein Verzicht auf eines der in
+dieser Vereinbarung festgehaltenen Rechte wird erst wirksam,
+wenn dieser schriftlich erfolgt und von einem ordnungsgemäß
+bevollmächtigten Vertreter der zu bindenden Partei unterschrieben
+ist. Ein Verzicht auf ein zuvor oder derzeit gültiges Recht, der auf
+einen Vertragsbruch oder eine Unterlassung zurückzuführen ist, kann
+nicht als Verzicht auf künftige Rechte erachtet werden, die sich
+aus dieser Vereinbarung ergeben. Die Nutzung, Vervielfältigung oder
+Offenlegung durch die US-Regierung unterliegt den Beschränkungen in
+FAR 52.227-14 (Juni 1987), Alternate III (Juni 1987), FAR 52.227-19
+(Juni 1987) oder DFARS 252. 227-7013 (b)(3) (November 1995) bzw.
+den zutreffenden Folgebestimmungen.
+
+Copyright (c) 2008 The openSUSE Project. Alle Rechte
+vorbehalten. „Novell“ und „openSUSE“ sind Marken
+von Novell, Inc., begründet, gefördert und ausgewiesen vom
+openSUSE-Projekt. „Linux“ ist eine eingetragene Marke von Linus
+Torvalds. Alle anderen Marken sind das Eigentum der jeweiligen
+Besitzer.
+
+

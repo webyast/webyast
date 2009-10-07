@@ -1,0 +1,108 @@
+CONTRATO DE LICENÇA
+openSUSE(r) 11.1
+
+Este contrato rege o download, a instalação ou o uso, por você, do openSUSE
+11.1 e de suas atualizações, independentemente do mecanismo de
+fornecimento. O openSUSE 11.1 é um trabalho coletivo, regido pelas leis de
+direitos autorais dos Estados Unidos. Sujeito aos termos a seguir, o The
+openSUSE Project concede a você uma licença para esse trabalho coletivo em
+conformidade com a Licença Pública Geral GNU versão 2. Ao fazer download,
+instalar ou usar o openSUSE 11.1, você concorda com os termos deste
+contrato.
+
+O openSUSE 11.1 é um sistema operacional Linux modular que consiste em
+centenas de componentes de software. O contrato de licença de cada
+componente geralmente está localizado no código-fonte do componente. Com
+exceção de certos arquivos que contêm a marca registrada “openSUSE”
+discutida a seguir, os termos de licença dos componentes permitem que você
+copie e redistribua o componente. Com a potencial exceção de determinados
+arquivos de firmware, os termos de licença dos componentes permitem que
+você copie, modifique e redistribua o componente, tanto na forma de
+código-fonte quanto na forma de código binário. Este contrato não limita
+seus direitos sob, nem lhe concede direitos que substituem, os termos de
+licença de nenhum componente em particular.
+
+Os direitos autorais sobre o openSUSE 11.1 e cada um de seus componentes,
+incluindo o código-fonte, a documentação, a aparência, a estrutura e a
+organização, são de propriedade do The openSUSE Project e de outras partes,
+e estão protegidos por leis de direitos autorais, entre outras. A
+titularidade ao openSUSE 11.1 e a qualquer componente ou qualquer cópia,
+modificação ou parte mesclada, permanecerá como disposto acima, sujeita à
+licença aplicável. A marca registrada “openSUSE” é de propriedade da
+Novell, Inc. nos EUA e em outros países e é usada mediante permissão. Este
+contrato permite que você distribua cópias não modificadas do openSUSE 11.1
+usando a marca registrada “openSUSE” mediante a condição de que você siga
+as diretrizes da marca registrada do The openSUSE Project, localizadas em
+http://www.opensuse.org/Legal. Você deve seguir essas diretrizes ao
+distribuir o openSUSE 11.1, independentemente de o openSUSE 11.1 ter sido
+modificado.
+
+Exceto se especificamente indicado neste contrato ou em uma licença de um
+componente em particular, NA EXTENSÃO MÁXIMA PERMITIDA PELA LEGISLAÇÃO
+APLICÁVEL, O OPENSUSE 11.1 E OS COMPONENTES SÃO FORNECIDOS E LICENCIADOS
+"NO ESTADO EM QUE SE ENCONTRAM", SEM GARANTIAS DE NENHUM TIPO, EXPRESSAS OU
+IMPLÍCITAS, INCLUINDO AS GARANTIAS IMPLÍCITAS DE COMERCIALIZAÇÃO,
+TITULARIDADE, NÃO-VIOLAÇÃO OU ADEQUAÇÃO A UM PROPÓSITO ESPECÍFICO. O The
+openSUSE Project não garante que as funções contidas no openSUSE 11.1
+atenderão a seus requisitos ou que a operação do openSUSE 11.1 será
+totalmente isenta de erros ou terá a aparência precisamente igual à
+descrita na documentação que o acompanha. O USO DO OPENSUSE 11.1 É DE SUA
+INTEIRA RESPONSABILIDADE.
+
+NA EXTENSÃO MÁXIMA PERMITIDA PELA LEGISLAÇÃO APLICÁVEL, O THE OPENSUSE
+PROJECT (E SEUS AGENTES, SUBSIDIÁRIAS E FUNCIONÁRIOS) NÃO SERÃO
+RESPONSABILIZADOS POR NENHUM DANO, INCLUINDO DANOS DIRETOS, CIRCUNSTANCIAIS
+OU CONSEQÜENCIAIS, PERDA DE LUCROS OU PERDA DE ECONOMIAS DECORRENTES DO USO
+OU DA INCAPACIDADE DE USAR O OPENSUSE 11.1, MESMO QUE O THE OPENSUSE
+PROJECT TENHA SIDO AVISADO SOBRE A POSSIBILIDADE DESSES DANOS. EM UMA
+JURISDIÇÃO QUE LIMITE A EXCLUSÃO OU LIMITAÇÃO DE DANOS, A RESPONSABILIDADE
+AGREGADA DO THE OPENSUSE PROJECT (E DE SEUS AGENTES, SUBSIDIÁRIAS E
+FUNCIONÁRIOS) LIMITA-SE A US$ 50 OU, SE TAL LIMITAÇÃO NÃO FOR PERMITIDA,
+LIMITA-SE AO MÁXIMO PERMITIDO.
+
+Segundo exigido pela legislação dos EUA, você representa e garante que: (a)
+compreende que o openSUSE 11.1 está sujeito aos controles de exportação do
+EAR (Export Administration Regulations, Regulamentos de administração de
+exportação) do Departamento de Comércio dos EUA; (b) não está localizado em
+um país de destino proibido de acordo com o EAR ou as normas de sanções dos
+EUA; (c) não exportará, reexportará ou transferirá o openSUSE 11.1 para
+nenhum destino, entidade ou indivíduo proibido sem as licenças ou
+autorizações de exportação necessárias do Governo dos EUA; (d) não usará
+nem transferirá o openSUSE 11.1 para uso final em nenhuma tecnologia
+confidencial de armas ou mísseis nucleares, químicos ou biológicos, a menos
+que autorizado pelo Governo dos EUA por meio de norma ou de licença
+específica; (e) compreende e concorda que, se estiver nos EUA e exportar ou
+transferir o openSUSE 11.1 para usuários finais qualificados, enviará,
+segundo exigido pelo EAR seção 741.17(e), relatórios semestrais ao BIS
+(Bureau of Industry & Security) do Departamento de Comércio dos EUA
+incluindo o nome e endereço (além do país) de cada indivíduo para quem a
+transferência foi feita; e (f) compreende que os outros países (fora dos
+EUA) podem restringir a importação, o uso ou a exportação de produtos de
+criptografia e que você será o único responsável pela conformidade com tais
+restrições de importação, uso ou exportação.
+
+Se alguma cláusula deste contrato não puder ser cumprida, isso não afetará
+a validade das cláusulas restantes. Este contrato será regido pelas leis do
+Estado de Utah e dos EUA, sem levar em consideração qualquer conflito entre
+cláusulas legais, com exceção de que a Convenção das Nações Unidas sobre a
+Venda Internacional de Produtos não se aplicará. Este contrato estabelece o
+completo entendimento e acordo entre você e o The openSUSE Project em
+relação a seu objeto e só pode ser modificado por escrito e assinado pelas
+duas partes. Nenhuma renúncia a nenhum direito deste contrato estará em
+vigor, a menos que seja registrada por escrito e assinada por um
+representante devidamente autorizado da parte legalmente obrigada. Nenhuma
+renúncia a nenhum direito, passado ou presente, decorrente de qualquer
+violação ou falha na execução deverá ser considerada como uma renúncia a
+nenhum direito futuro procedente deste contrato. O uso, a reprodução ou a
+divulgação pelo Governo dos EUA estão sujeitos às restrições estabelecidas
+no FAR 52.227-14 (junho de 1987) Alternate III (junho de 1987), FAR
+52.227-19 (junho de 1987) ou DFARS 252.227-7013 (b)(3) (novembro de 1995)
+ou às cláusulas substitutas aplicáveis.
+
+Copyright (c) 2008 The openSUSE Project. Todos os direitos reservados.
+"Novell" e "openSUSE" são marcas registradas da Novell, Inc., que fundou,
+patrocina e é designada pelo The openSUSE Project. "Linux" é marca
+comercial registrada de Linus Torvalds. Todas as marcas registradas são de
+seus respectivos proprietários.
+
+ 

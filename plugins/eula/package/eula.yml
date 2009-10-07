@@ -1,4 +1,3 @@
-steps:
-  - controller: systemtime
-  - controller: language
-    action: index
+licenses:
+  - openSUSE-11.1
+  - SLED-10-SP3
