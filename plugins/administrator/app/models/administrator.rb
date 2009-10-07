@@ -1,6 +1,9 @@
 require 'singleton'
 require 'yast_service'
 
+# = Administrator model
+# Proviceds access to system administrator.
+# Uses YaPI::ADMINISTRATOR for read and write operations.
 class Administrator
 
   attr_accessor	:aliases
@@ -13,6 +16,8 @@ class Administrator
     @password	= ""
   end
 
+  # Read mail aliases for root.
+  # return value:: comma-separated string
   def read_aliases
     yapi_ret = YastService.Call("YaPI::ADMINISTRATOR::Read")
     if yapi_ret.nil?
@@ -23,6 +28,8 @@ class Administrator
     @aliases
   end
 
+  # Sets administrator's password.
+  # pw:: password (clear text)
   def save_password(pw)
     parameters  = {
       "password" => ["s", pw ]
@@ -31,6 +38,9 @@ class Administrator
     Rails.logger.debug "YaPI returns: '#{yapi_ret}'"
   end
 
+  # Changes the list of administrator's mail aliases.
+  # new_aliases:: comma-separated string
+  # Use special value "NONE" for removal of current mail aliases.
   def save_aliases(new_aliases)
     new_aliases = "" if new_aliases.nil? || new_aliases == "NONE"
     if @aliases.split(",").sort == new_aliases.split(",").sort
