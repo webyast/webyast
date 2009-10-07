@@ -14,18 +14,19 @@ class Network::DnsController < ApplicationController
       raise InvalidParameters.new :dns => "Missing"
     end
     
-    root["searches"]=root["searches"].split
-    root["nameservers"]=root["nameservers"].split
+    root["searches"] = (root["searches"] || "").split
+    root["nameservers"] = (root["nameservers"] || "").split
     
     @dns = DNS.new(root)
     @dns.save
     respond_to do |format|    
 	if @dns.save 
 	  format.xml { head :ok } 
-	  else  
-	    format.xml { render :xml => @dns.errors,  :status => :unprocessable_entity } 
+        else  
+          format.xml { render :xml => @dns.errors,  :status => :unprocessable_entity } 
 	end
-    end  end
+    end
+  end
 
   # See update
   def create

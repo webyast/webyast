@@ -31,5 +31,11 @@ class DnsControllerTest < ActionController::TestCase
 
   include PluginBasicTests
 
+  def test_update_without_info
+    @model_class.any_instance.stubs(:save).returns true
+    # had a bug with nil.split
+    put :update, { "dns" => {} }
+    assert_response :success
+  end
 end
 

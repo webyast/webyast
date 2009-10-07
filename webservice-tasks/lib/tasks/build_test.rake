@@ -12,18 +12,24 @@ task :'build_test'  do
   puts "package is #{package_name}"
   raise "cannot determine package name" if package_name.empty?  
   puts "checking out osc package to build"
-  `osc checkout 'YaST:Web' #{package_name}`
-  `rm -rf package/www`  
-  `cp package/* 'YaST:Web/#{package_name}'`
-  Dir.chdir File.join(Dir.pwd, "YaST:Web", package_name)
-  puts "start building package"
-  puts `osc build`
-  if $?.exitstatus != 0
-    raise "Failed to build"
+  top_dir = Dir.pwd
+  begin
+    `osc checkout 'YaST:Web' #{package_name}`
+    #clean www dir and also clean before copy old entries in osc dir to test if package build after remove some file
+    `rm -rf package/www 'YaST:Web/#{package_name}/*'`  
+    `cp package/* 'YaST:Web/#{package_name}'`
+    Dir.chdir File.join(Dir.pwd, "YaST:Web", package_name)
+    puts "start building package. output will appear at the end."
+    puts `osc build`
+    if $?.exitstatus != 0
+      raise "Failed to build"
+    end
+    puts "package built"
+  ensure
+    puts "cleaning"
+    Dir.chdir top_dir
+    `rm -rf 'YaST:Web'`
   end
-  puts "package builded, cleaning"
-  Dir.chdir File.join(Dir.pwd, '..', '..')
-  `rm -rf 'YaST:WeB'`
 end
 
 

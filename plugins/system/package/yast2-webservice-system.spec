@@ -17,7 +17,7 @@ Provides:       yast2-webservice:/srv/www/yastws/app/controllers/system_controll
 License:        MIT
 Group:          Productivity/Networking/Web/Utilities
 Autoreqprov:    on
-Version:        0.0.3
+Version:        0.0.4
 Release:        0
 Summary:        YaST2 - Webservice - System
 Source:         www.tar.bz2
@@ -71,11 +71,15 @@ polkit-auth --user root --grant org.freedesktop.hal.power-management.reboot >& /
 polkit-auth --user root --grant org.freedesktop.hal.power-management.reboot-multiple-sessions >& /dev/null || true
 
 %postun
-# discard all configured permissions for the web user
-polkit-auth --user %{pkg_user} --revoke org.freedesktop.hal.power-management.shutdown
-polkit-auth --user %{pkg_user} --revoke org.freedesktop.hal.power-management.shutdown-multiple-sessions
-polkit-auth --user %{pkg_user} --revoke org.freedesktop.hal.power-management.reboot
-polkit-auth --user %{pkg_user} --revoke org.freedesktop.hal.power-management.reboot-multiple-sessions
+# don't remove the rights during package update ($1 > 0)
+# see https://fedoraproject.org/wiki/Packaging/ScriptletSnippets#Syntax for details
+if [ $1 -eq 0 ] ; then
+  # discard all configured permissions for the web user
+  polkit-auth --user %{pkg_user} --revoke org.freedesktop.hal.power-management.shutdown >& /dev/null || :
+  polkit-auth --user %{pkg_user} --revoke org.freedesktop.hal.power-management.shutdown-multiple-sessions >& /dev/null || :
+  polkit-auth --user %{pkg_user} --revoke org.freedesktop.hal.power-management.reboot >& /dev/null || :
+  polkit-auth --user %{pkg_user} --revoke org.freedesktop.hal.power-management.reboot-multiple-sessions >& /dev/null || :
+fi
 
 %files 
 %defattr(-,root,root)
