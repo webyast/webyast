@@ -12,8 +12,18 @@ class Registration
   @reg = ''
 
   def initialize(hash)
+    # set context defaults
+    @context = { 'yastcall'     => 1,
+                 'norefresh'    => 1,
+                 'restoreRepos' => 1,
+                 'forcereg'     => 0,
+                 'nohwdata'     => 1,
+                 'nooptional'   => 1,
+                 'logfile'      => '/root/.suse_register.log' }
+
+    # merge custom context data
     if hash.class.to_s == 'Hash'
-      @context = hash
+      @context.merge hash
     else
       raise "Invalid or missing registration initialization context data."
     end
@@ -32,15 +42,20 @@ class Registration
   end
 
   def register
-    @reg = YastService.Call("YSR::stateless_register", @context )
+    puts "-> called registration.register"
+    @reg = YastService.Call("YSR::stateless_register", { 'ctx' => @context, 'arguments' => @arguments } )
+    puts "-> YSR::stateless_register was called"
+    puts @reg.inspect
+    return @reg.inspect
   end
 
-  def get_registration_server_details
-    @reg = "get-reg-srv-det"
+  def get_registration_config
+    return @reg.inspect
   end
 
-  def set_registration_server_details(url, ca)
-    @reg = "you want to set URL: #{ url }"
+  def set_registration_config(url, ca)
+    # TODO: write registration config
+    return @reg.inspect
   end
 
 

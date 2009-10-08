@@ -5,20 +5,21 @@ class RegistrationController < ApplicationController
 
   before_filter :login_required
 
-  # @registration = Registration.new( { :doo => :daa } )
-
-
   def update
   end
 
   def create
+    puts "-> REGISTRATION CREATE"
     # POST to registration => run registration
     @registration = Registration.new({})
-
+    puts "-> NEW registration"
+    puts @registration.inspect
     # TODO: parse post data and set context data
     #@registration.set_context( { } )
-    @registration.register
-
+    ret = @registration.register
+    puts "-> RAN register"
+    puts ret.inspect
+    puts "-> PUT inpect ^"
   end
 
   def show

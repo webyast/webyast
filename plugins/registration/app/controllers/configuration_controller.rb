@@ -1,16 +1,15 @@
 # = RegistrationConfiguration controller
 # Provides access to the configuration of the registration system
+#class Registration::ConfigurationController < ApplicationController
 class ConfigurationController < ApplicationController
 
   before_filter :login_required
-
 
   def update
     # PUT
     # setRegistrationServerDetails
     @registration = "PUT to /registration/configuration"
   end
-
 
   def show
     @registration = Registration.new( { } )
