@@ -11,20 +11,21 @@ class Patch < Resolvable
   # Patch.find(:available)
   # Patch.find(212)
   def self.find(what)
-    if what == :available
-      patch_updates = Array.new
-      self.execute("GetUpdates", "NONE", "Package") { |line1,line2,line3|
-          columns = line2.split ";"
-          update = Patch.new(:resolvable_id => columns[1],
-                             :kind => line1,
-                             :name => columns[0],
-                             :arch => columns[2],
-                             :repo => columns[3],
-                             :summary => line3 )
-          patch_updates << update
-        }
-      return patch_updates
-    end
+    patch_updates = Array.new
+    self.execute("GetUpdates", "NONE", "Package") { |line1,line2,line3|
+      columns = line2.split ";"
+      if what == :available || columns[1] == what
+        update = Patch.new(:resolvable_id => columns[1],
+                           :kind => line1,
+                           :name => columns[0],
+                           :arch => columns[2],
+                           :repo => columns[3],
+                           :summary => line3 )
+        return update if columns[1] == what #only the first entry will be returned in a hash
+        patch_updates << update
+      end
+    }
+    return patch_updates
   end
 
   # installs this
@@ -36,7 +37,7 @@ class Patch < Resolvable
   # Patch.install(id)
   def self.install(patch)
     if patch.is_a?(Patch)
-      update_id = "#{patch.name};#{patch.resolvable_id};#{patch.arch};#{@patch.repo}"
+      update_id = "#{patch.name};#{patch.resolvable_id};#{patch.arch};#{patch.repo}"
       Rails.logger.debug "Install Update: #{update_id}"
       self.package_kit_install(update_id)
     else
