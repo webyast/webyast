@@ -1,13 +1,14 @@
+# = Administrator controller
+# Provides access to configuration of system administrator.
 class AdministratorController < ApplicationController
 
   before_filter :login_required
 
   # GET action
+  # Read administrator settings (currently mail aliases).
+  # Requires read permissions for administrator YaPI.
   def show
-
-    unless permission_check("org.opensuse.yast.modules.yapi.administrator.read")
-      render ErrorResult.error(403, 1, "no permission for reading") and return
-    end
+    yapi_perm_check "administrator.read"
 
     @admin = Administrator.instance
     @admin.read_aliases
@@ -20,10 +21,10 @@ class AdministratorController < ApplicationController
   end
    
   # PUT action
+  # Write administrator settings: mail aliases and/or password.
+  # Requires write permissions for administrator YaPI.
   def update
-    unless permission_check("org.opensuse.yast.modules.yapi.administrator.write")
-      render ErrorResult.error(403, 1, "no permission for writing") and return
-    end
+    yapi_perm_check "administrator.write"
 	
     data = params["administrator"]
     @admin = Administrator.instance
@@ -39,6 +40,7 @@ class AdministratorController < ApplicationController
     show
   end
 
+  # See update
   def create
     update
   end

@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Thu Oct  8 09:42:30 CEST 2009 - lslezak@suse.cz
+
+- build restdoc documentation during package build
+- 0.0.4
+
+-------------------------------------------------------------------
 Mon Oct  5 12:43:42 CEST 2009 - jsuchome@suse.cz
 
 - grant permissions to root (bnc#543756)

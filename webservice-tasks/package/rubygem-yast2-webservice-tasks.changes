@@ -1,4 +1,11 @@
 -------------------------------------------------------------------
+Thu Oct  8 10:09:15 CEST 2009 - lslezak@suse.cz
+
+- do not generate restdoc in 'rake package', it is generated
+  during RPM build now
+- 0.0.4
+
+-------------------------------------------------------------------
 Tue Oct  6 17:35:48 CEST 2009 - jreidinger@suse.cz
 
 - always clean osc dir, even after fail 
