@@ -50,7 +50,7 @@ class Registration
   end
 
   def to_xml( options = {} )
-    #return "This function should output XML"
+    #return "This function outputs XML :)"
 
     xml = options[:builder] ||= Builder::XmlMarkup.new(options)
     xml.instruct! unless options[:skip_instruct]

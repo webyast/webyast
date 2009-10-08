@@ -5,7 +5,7 @@ class RegistrationController < ApplicationController
 
   before_filter :login_required
 
-  # @@registration = Registration.new( { :doo => :daa } )
+  # @registration = Registration.new( { :doo => :daa } )
 
 
   def update
@@ -13,10 +13,12 @@ class RegistrationController < ApplicationController
 
   def create
     # POST to registration => run registration
-    @registration = Registration.new( { } )
+    @registration = Registration.new({})
+
+    # TODO: parse post data and set context data
+    #@registration.set_context( { } )
     @registration.register
 
-    # @registration = "POST to /registration/ ... so we run the registration"
   end
 
   def show
@@ -24,9 +26,12 @@ class RegistrationController < ApplicationController
     #@registration = @@registration
     #@registration = Registration.new( getRegistrationServerDetails.to_s )
 
-    # 
+
     @registration = Registration.new( { } )
-    @registration.register
+    # do not run registration
+    # only get the uuid, server url and certificate -> to be done in YSR.pm
+
+    #@registration.register
     #@registration = "GET to /registration/"
   end
 
