@@ -2,6 +2,10 @@ require "scr"
 require 'yast_service'
 require 'yast/config_file'
 
+# = Service model
+# Proviceds access to configured services.
+# Uses YaPI for accessing standard system services (/etc/init.d) and
+# Scr library to access vendor specific services (defined in config file).
 class Service
   
   attr_accessor :name
@@ -33,7 +37,7 @@ class Service
   # custom services from the file. Otherwise, read LSB services available in
   # current system runlevel.
   #
-  # If the key "read_status" is present in the parameter hash, read the status of
+  # If the key read_status is present in the parameter hash, read the status of
   # each service.
   #
   # services = Service.find_all

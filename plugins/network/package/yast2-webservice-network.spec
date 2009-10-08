@@ -13,13 +13,14 @@ Name:           yast2-webservice-network
 License:        MIT
 Group:          Productivity/Networking/Web/Utilities
 Autoreqprov:    on
-Version:        0.0.5
+Version:        0.0.6
 Release:        0
 Summary:        YaST2 - Webservice - Network
 Source:         www.tar.bz2
 Source1:        org.opensuse.yast.modules.yapi.network.policy
 BuildRoot:      %{_tmppath}/%{name}-%{version}-build
 BuildArch:      noarch
+BuildRequires:  rubygem-yast2-webservice-tasks rubygem-restility
 PreReq:         yast2-webservice
 # YaPI/NETWORK.pm
 %if 0%{?suse_version} == 0 || %suse_version > 1110
@@ -45,6 +46,9 @@ Authors:
 
 
 %build
+# build restdoc documentation
+export RAILS_PARENT=/srv/www/yastws
+env LANG=en rake restdoc
 
 %install
 
@@ -57,6 +61,9 @@ cp -a * $RPM_BUILD_ROOT/srv/www/%{pkg_user}/vendor/plugins/%{plugin_name}
 # Policies
 mkdir -p $RPM_BUILD_ROOT/usr/share/PolicyKit/policy
 install -m 0644 %SOURCE1 $RPM_BUILD_ROOT/usr/share/PolicyKit/policy/
+
+# do not package restdoc sources
+rm -rf $RPM_BUILD_ROOT/srv/www/%{pkg_user}/vendor/plugins/%{plugin_name}/restdoc
 
 %clean
 rm -rf $RPM_BUILD_ROOT

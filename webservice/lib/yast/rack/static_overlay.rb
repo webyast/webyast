@@ -25,11 +25,21 @@ module YaST
       def call(env)
         req = ::Rack::Request.new(env)
         resource = URI.parse(req.url).path
-        puts resource
+
+	# this is a workaround for lighttpd server
+	# where all requests go through FastCGI dispatcher
+	if resource == '/dispatch.fcgi'
+	    # get the real request path
+	    resource = env['REQUEST_URI']
+	    # Rack expects the path in PATH_INFO which is not set by lighttpd
+	    env['PATH_INFO'] = env['REQUEST_URI']
+	end
+
         # go over all overlays
         @roots.each do |directory|
           resource_path = File.join(directory, resource)
           if File.exist?(resource_path) and File.file?(resource_path)
+	    Rails.logger.info "Using static overlay for #{resource_path}"
             return @servers[directory].call(env)
           end
         end

@@ -1,8 +1,11 @@
-require 'service'
-
+# = Services controller
+# Provides access system and vendor sepcific services.
 class ServicesController < ApplicationController
   before_filter :login_required
 
+  # GET /services
+  # Reads a list of services.
+  # Requires read permission for services YaPI.
   def index
     yapi_perm_check "services.read"
 
@@ -14,12 +17,10 @@ class ServicesController < ApplicationController
   end
 
   # GET /services/service_name
-  # GET /services/service_name.xml
-  # GET /services/service_name.json
+  # Shows service status.
+  # Requires read permission for services YaPI.
   def show
-    unless permission_check("org.opensuse.yast.modules.yapi.services.read")
-      render ErrorResult.error(403, 1, "no permission") and return
-    end
+    yapi_perm_check "services.read"
 
     @service = Service.new(params[:id])
 
@@ -37,7 +38,8 @@ class ServicesController < ApplicationController
   end
 
   # PUT /services/1.xml
-  # Shows service status. Requires execute permission for services YaPI.
+  # Execute service command (start or stop).
+  # Requires execute permission for services YaPI.
   def update
     yapi_perm_check "services.execute"
 

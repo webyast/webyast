@@ -3,6 +3,25 @@ require 'scr'
 require 'mocha'
 require 'metric'
 
+require 'rexml/document'
+
+def xml_cmp a, b
+  a = REXML::Document.new(a.to_s)
+  b = REXML::Document.new(b.to_s)
+
+  normalized = Class.new(REXML::Formatters::Pretty) do
+    def write_text(node, output)
+      super(node.to_s.strip, output)
+    end
+  end
+
+  normalized.new(indentation=0,ie_hack=false).write(node=a, a_normalized='')
+  normalized.new(indentation=0,ie_hack=false).write(node=b, b_normalized='')
+
+  a_normalized == b_normalized
+end
+
+
 def test_data(name)
   File.join(File.dirname(__FILE__), '..', 'data', name)
 end
@@ -105,9 +124,12 @@ class MetricTest < ActiveSupport::TestCase
         xml.value nil
       end
     end
-
-# disabled, bnc#54355, you cannot string-compare XML representations
-#   assert_equal packets.to_xml(:start => start, :stop => stop), xml.target!
+    
+    ptx = packets.to_xml(:start => start, :stop => stop)
+#    puts "packets.to_xml #{ptx.inspect}"
+    xtg = xml.target!
+#    puts "xml.target #{xtg.inspect}"    
+    assert xml_cmp ptx, xtg
   end
   
   def test_collectd_running

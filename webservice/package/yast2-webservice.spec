@@ -29,7 +29,7 @@ PreReq:         lighttpd, PolicyKit, PackageKit, rubygem-rake, rubygem-sqlite3, 
 License:        MIT
 Group:          Productivity/Networking/Web/Utilities
 Autoreqprov:    on
-Version:        0.0.4
+Version:        0.0.5
 Release:        0
 Summary:        YaST2 - Webservice 
 Source:         www.tar.bz2
@@ -49,6 +49,12 @@ BuildRequires:  ruby, pkg-config, rubygem-mocha
 BuildRequires:  rubygem-yast2-webservice-tasks, rubygem-restility
 BuildRequires:  yast2-core, yast2-dbus-server, ruby-dbus, sqlite, avahi-utils dbus-1
 BuildRequires:  PolicyKit, PackageKit, rubygem-sqlite3, rubygem-rails-2_3, ruby-rpam, ruby-polkit
+
+# This is for Hudson (build service) to setup the build env correctly
+%if 0
+BuildRequires:  rubygem-test-unit
+BuildRequires:  rubygem-rcov >= 0.9.3.2
+%endif
 
 # rpmlint warns about file duplicates, this should take care but
 # doesn't build (?!)

@@ -15,13 +15,14 @@ Provides:       yast2-webservice:/srv/www/yastws/app/controllers/administrator_c
 License:        MIT
 Group:          Productivity/Networking/Web/Utilities
 Autoreqprov:    on
-Version:        0.0.3
+Version:        0.0.4
 Release:        0
 Summary:        YaST2 - Webservice - Administrator
 Source:         www.tar.bz2
 Source1:	org.opensuse.yast.modules.yapi.administrator.policy
 BuildRoot:      %{_tmppath}/%{name}-%{version}-build
 BuildArch:      noarch
+BuildRequires:  rubygem-yast2-webservice-tasks rubygem-restility
 
 # requires YaPI::USERS
 %if 0%{?suse_version} == 0 || %suse_version > 1110
@@ -49,6 +50,9 @@ Authors:
 %setup -q -n www
 
 %build
+# build restdoc documentation
+export RAILS_PARENT=/srv/www/yastws
+env LANG=en rake restdoc
 
 %install
 

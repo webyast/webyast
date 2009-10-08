@@ -17,12 +17,14 @@ Provides:       yast2-webservice:/srv/www/yastws/app/controllers/system_controll
 License:        MIT
 Group:          Productivity/Networking/Web/Utilities
 Autoreqprov:    on
-Version:        0.0.4
+Version:        0.0.5
 Release:        0
 Summary:        YaST2 - Webservice - System
 Source:         www.tar.bz2
+Url:            http://en.opensuse.org/YaST/Web
 BuildRoot:      %{_tmppath}/%{name}-%{version}-build
 BuildArch:      noarch
+BuildRequires:  rubygem-yast2-webservice-tasks rubygem-restility
 
 #
 %define pkg_user yastws
@@ -41,6 +43,9 @@ Authors:
 %setup -q -n www
 
 %build
+# build restdoc documentation
+export RAILS_PARENT=/srv/www/yastws
+env LANG=en rake restdoc
 
 %install
 

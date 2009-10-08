@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Wed Oct  7 19:59:58 CEST 2009 - lslezak@suse.cz
+
+- Fixed static overlay when running in lighttpd server (bnc#544355)
+- 0.0.5
+
+-------------------------------------------------------------------
 Tue Sep 29 10:13:45 CEST 2009 - schubi@suse.de
 
 - version 0.0.4 
