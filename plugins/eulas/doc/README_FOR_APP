@@ -1,0 +1,8 @@
+Eula
+====
+
+Plugin cares for licenses and serves them to web-client on demand.
+It handles locale, order of the licenses, checks and sets whether licenses
+were accepted.
+
+Copyright (c) 2009 Novell, released under the GPL2 license

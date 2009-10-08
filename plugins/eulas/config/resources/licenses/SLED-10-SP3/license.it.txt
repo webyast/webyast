@@ -1,0 +1,2538 @@
+﻿SUSE(r) LINUX Enterprise Desktop (SLED) 10 (Spring 2007) 
+Novell(r) Contratto di licenza relativo al Software
+
+LEGGERE ATTENTAMENTE IL PRESENTE CONTRATTO. PER POTER INSTALLARE O 
+UTILIZZARE ALTRIMENTI IL SOFTWARE (E I SUOI COMPONENTI), E 
+NECESSARIO ACCETTARE I TERMINI E LE CONDIZIONI DEL PRESENTE 
+CONTRATTO. GLI UTENTI CHE NON ACCETTANO TALI TERMINI NON POSSONO 
+SCARICARE, INSTALLARE O UTILIZZARE IL SOFTWARE E, SE APPLICABILE, 
+DEVONO RESTITUIRE AL RIVENDITORE L'INTERO PACCHETTO INUTILIZZATO 
+ACCOMPAGNATO DALLA RELATIVA RICEVUTA D'ACQUISTO PER UN EVENTUALE 
+RIMBORSO. IL SOFTWARE NON PU? ESSERE VENDUTO, CEDUTO O ALTRIMENTI 
+DISTRIBUITO SENZA LA PREVENTIVA AUTORIZZAZIONE SCRITTA DI NOVELL.
+
+DIRITTI E LICENZE
+
+Il presente Contratto di licenza relativo al software Novell 
+("Contratto") è un accordo legale tra l'Utente (persona fisica o 
+organizzazione) e Novell, Inc.("Novell") che disciplina l'uso del 
+prodotto specificato nell'oggetto del Contratto, dei supporti (se 
+disponibili) e della documentazione di accompagnamento 
+(collettivamente denominati "Software").
+
+Il Software rappresenta un'opera collettiva di Novell. E necessario 
+acquistare una licenza per ogni installazione del Software e per 
+ogni copia aggiuntiva, o copia parziale, del Software archiviata o 
+caricata nella memoria o nella memoria virtuale, oltre alla copia 
+iniziale necessaria per eseguire il Software installato 
+nell’hardware.
+
+Il Software è un sistema operativo modulare. La maggior parte dei 
+componenti sono pacchetti open source sviluppati da altri produttori 
+e ceduti in base a termini e condizioni di licenza specifici. I 
+diritti dell'Utente relativamente all'uso dei singoli pacchetti 
+forniti con licenza a parte sono disciplinati dai termini e dalle 
+condizioni definiti in tale licenza. Nessuna parte del presente 
+Contratto potrà limitare o altres? modificare i diritti e gli 
+obblighi dell'Utente o comunque le condizioni a cui l'Utente è 
+tenuto a sottostare ai sensi di quanto specificato nei termini e 
+nelle condizioni della suddetta licenza.
+
+Qualora i termini e le condizioni della licenza di un componente 
+specifico autorizzino l'Utente a distribuire il componente, l'Utente 
+non potrà utilizzare marchi Novell (come SUSE e SUSE LINUX) nella 
+copia distribuita, indipendentemente dal fatto che il componente 
+contenga o meno i marchi Novell.
+
+ALTRI TERMINI E LIMITAZIONI DELLA LICENZA
+
+Il Software è protetto dalle leggi del copyright e da trattati degli 
+Stati Uniti ("U.S.") e di altri paesi, ed è soggetto ai termini e 
+alle condizioni del presente Contratto. Il Software viene concesso 
+in licenza all'Utente, non venduto.
+
+Il Software pu? essere fornito con altri programmi software 
+("Programmi in bundle"). I diritti dell'Utente relativamente all'uso 
+dei Programmi in bundle forniti con licenza a parte sono 
+disciplinati dai termini e dalle condizioni definiti in tale 
+licenza. Nessuna parte del presente Contratto potrà limitare o 
+altres? modificare i diritti e gli obblighi dell'Utente o comunque 
+le condizioni a cui l'Utente è tenuto a sottostare ai sensi di 
+quanto specificato nei termini e nelle condizioni della suddetta 
+licenza.
+
+Novell si riserva tutti i diritti non esplicitamente concessi 
+all'Utente. L'Utente non potrà: (1) estrarre il codice sorgente, 
+decompilare o disassemblare il Software, eccetto e solo nei casi in 
+cui tali operazioni siano consentite dalle leggi in vigore o dai 
+termini della licenza fornita con il componente del Software; oppure 
+(2) cedere per intero o in parte il Software o i diritti previsti 
+dalla licenza oggetto di questo Contratto.
+
+MANUTENZIONE E ASSISTENZA
+
+I diritti relativi ad aggiornamenti, patch o altri materiali 
+ricevuti mediante una sottoscrizione a un programma di manutenzione 
+Novell per il Software sono stabiliti dai termini corrispondenti.
+
+Novell non ha alcun obbligo in questo Contratto di garantire la 
+manutenzione o l'assistenza per il Software. In base alla modalità 
+di acquisto del Software, è possibile che l'Utente debba acquistare 
+la sottoscrizione di manutenzione per il Software. Per ulteriori 
+informazioni sulle offerte correnti di assistenza e manutenzione di 
+Novell, visitare il sito Web all’indirizzo: 
+http://www.novell.com/support.
+
+DIRITTI DI PROPRIETA
+
+La cessione del Software all'Utente non include il trasferimento di 
+titoli o proprietà. Novell e/o i licenziatari rimarranno i 
+proprietari e manterranno tutti i diritti sulla proprietà 
+intellettuale del Software, compresi eventuali adattamenti o copie. 
+L'Utente acquisisce solo il diritto di usare il Software.
+
+GARANZIA LIMITATA
+
+Novell garantisce, per un periodo di novanta (90) giorni dalla data 
+di acquisto, che (1) tutti i supporti su cui viene fornito il 
+Software sono privi di difetti fisici; e che (2) il Software è 
+sostanzialmente conforme alla documentazione di accompagnamento 
+fornita con il Software stesso. Se l'utente effettua a Novell il 
+reso di eventuali articoli difettosi o se ne segnala a Novell la non 
+conformità entro novanta (90) giorni dalla data dell'acquisto, 
+Novell stabilirà a propria discrezione se risolvere la non 
+conformità o rimborsare i costi di licenza sostenuti per il 
+Software. Qualsiasi uso improprio o modifica non autorizzata del 
+Software renderà nulla la presente garanzia. LA LICENZA DI CUI SOPRA 
+RAPPRESENTA L'UNICO RIMEDIO ESCLUSIVO SPETTANTE ALL'UTENTE E 
+SOSTITUISCE OGNI ALTRA GARANZIA ESPLICITA O IMPLICITA. La garanzia 
+di cui sopra non si applica al Software fornito gratuitamente. TALE 
+SOFTWARE VIENE FORNITO "COME TALE" SENZA ALCUN TIPO DI GARANZIA.
+
+IL SOFTWARE NON E PROGETTATO, PRODOTTO O DESTINATO ALL'USO O ALLA 
+DISTRIBUZIONE SU SISTEMI PER IL CONTROLLO CONTINUO IN AMBIENTI 
+PERICOLOSI CHE RICHIEDONO L'ASSOLUTA ASSENZA DI ERRORI, COME 
+IMPIANTI NUCLEARI, SISTEMI DI NAVIGAZIONE, SISTEMI DI COMUNICAZIONE, 
+SISTEMI DI CONTROLLO, APPARECCHIATURE PER LA RIANIMAZIONE/IL 
+SUPPORTO VITALE O ALTRE APPLICAZIONI IN CUI IL GUASTO DEL SOFTWARE 
+POTREBBE PROVOCARE DIRETTAMENTE INCIDENTI MORTALI, LESIONI 
+PERSONALI, INFORTUNI FISICI O GRAVI DANNI ALL'AMBIENTE.
+
+IL SOFTWARE E COMPATIBILE SOLO CON ALCUNI COMPUTER E SISTEMI 
+OPERATIVI. IL FUNZIONAMENTO DEL SOFTWARE NON E GARANTITO SU SISTEMI 
+NON COMPATIBILI. Per informazioni sulla compatibilità del software, 
+rivolgersi a Novell o al proprio rivenditore.
+
+Prodotti non Novell. Il Software pu? includere o pu? essere fornito 
+con hardware o altri programmi software concessi in licenza o 
+venduti da licenziatari diversi da Novell. NOVELL NON FORNISCE 
+ALCUNA GARANZIA SUI PRODOTTI NON NOVELL. TUTTI I PRODOTTI VENGONO 
+FORNITI "COME TALI". L'ASSISTENZA IN GARANZIA RELATIVA AI PRODOTTI 
+NON NOVELL VIENE FORNITA DAL LICENZIATARIO DEL PRODOTTO 
+CONFORMEMENTE ALLA GARANZIA APPLICABILE.
+
+SE NON DIVERSAMENTE INDICATO NELLE LEGGI APPLICABILI, NOVELL NON 
+RICONOSCE E DECLINA OGNI ALTRA GARANZIA IMPLICITA, COMPRESE LE 
+GARANZIE DI COMMERCIABILITA, PROPRIETA E NON VIOLAZIONE DI DIRITTI 
+DI TERZI, O L'IDONEITA A UN USO SPECIFICO. NOVELL NON FORNISCE ALTRE 
+GARANZIE, DICHIARAZIONI O PROMESSE DIVERSE DA QUELLE INDICATE NELLA 
+PRESENTE GARANZIA LIMITATA. NOVELL NON GARANTISCE CHE IL SOFTWARE 
+SODDISFI INTERAMENTE I REQUISITI DELL'UTENTE NE GARANTISCE IL 
+FUNZIONAMENTO CONTINUATIVO DELLO STESSO. Alcune giurisdizioni non 
+riconoscono l'esclusione o la limitazione di responsabilità, 
+pertanto è possibile che alcune delle limitazioni sopra descritte 
+non si applichino all'Utente. Benché la presente garanzia limitata 
+riconosca all'Utente diritti specifici, è possibile anche che 
+l'Utente abbia anche altri diritti che variano a seconda dei paesi.
+
+LIMITAZIONE DI RESPONSABILITA
+
+(a) Danni indiretti. NOVELL, I SUOI LICENZIATARI, LE SUE SOCIETA 
+SUSSIDIARIE E I SUOI DIPENDENTI DECLINANO OGNI RESPONSABILITA PER 
+EVENTUALI DANNI SPECIALI, ACCIDENTALI, CONSEQUENZIALI, INDIRETTI, 
+LEGALI, ECONOMICI O PUNITIVI DERIVANTI DALL'USO O DALL'IMPOSSIBILITA 
+DI USARE IL SOFTWARE, COMPRESI, SENZA LIMITAZIONE ALCUNA, LA PERDITA 
+DI PROFITTI, PROVENTI O DATI, ANCHE NEL CASO IN CUI NE SIANO STATI 
+PREVENTIVAMENTE INFORMATI.
+
+(b) Danni diretti. LA RESPONSABILITA COMPLESSIVA DI NOVELL PER 
+EVENTUALI DANNI DIRETTI A PROPRIETA O PERSONE (CAUSATI DA UN SOLO 
+INCIDENTE O PIU INCIDENTI) NON POTRA SUPERARE 1,25 VOLTE IL PREZZO 
+DI ACQUISTO DEL SOFTWARE CHE HA CAUSATO IL DANNO [O $50 (U.S.) SE IL 
+SOFTWARE E STATO FORNITO GRATUITAMENTE]. Le esclusioni e le 
+limitazioni di cui sopra non si applicano alle richieste di danni 
+relative ad incidenti mortali o infortuni personali. Nelle 
+giurisdizioni che non riconoscono l'esclusione o la limitazione dei 
+danni, la limitazione o l'esclusione di responsabilità di Novell 
+sarà pari al limite massimo previsto nella giurisdizione in 
+questione.
+
+TERMINI GENERALI
+
+Durata. Il presente Contratto diventa effettivo alla data effettiva 
+di acquisto del Software e cessa automaticamente nel caso in cui 
+l'Utente violi uno dei termini qui indicati. Alla cessazione del 
+presente Contratto, l'Utente dovrà distruggere tutti gli originali e 
+le copie del Software oppure restituirli a Novell e rimuovere il 
+Software dai sistemi in uso.
+
+Test di benchmark. Le limitazioni relative ai test di benchmark si 
+applicano all'Utente solo nel caso in cui sia un produttore software 
+o sia effettuando tali test dietro richiesta o per conto di un 
+produttore software. L'Utente non potrà pubblicare o altres? 
+rivelare a terze parti i risultati dei test di benchmark del 
+Software senza la preventiva autorizzazione scritta di Novell, che 
+potrà rifiutarla solo per motivi ragionevoli. Qualora l'Utente - sia 
+esso un produttore di prodotti funzionalmente simili o equivalenti 
+al Software ("Prodotti simili") o una società che sta effettuando i 
+test di cui sopra per un produttore di prodotti funzionalmente 
+simili o equivalenti - pubblichi o renda noti i dati dei test di 
+benchmark sul Software, in violazione alla presente limitazione, 
+Novell potrà, indipendentemente da quanto stabilito nel contratto di 
+licenza per l'utente finale del suddetto prodotto, o in altri rimedi 
+spettanti a Novell, effettuare test di benchmark sui prodotti simili 
+nonché rivelare e pubblicare i risultati senza che l'Utente in 
+questione possa opporsi.
+
+Cessione. Il presente Accordo non pu? essere ceduto o trasferito 
+senza la preventiva autorizzazione scritta di Novell.
+
+Legge applicabile e giurisdizione. Il presente Contratto è 
+disciplinato dalle leggi dello Stato dello Utah, Stati Uniti. 
+Qualsiasi azione legale relativa al presente Contratto potrà quindi 
+essere intrapresa solo tramite i tribunali di una giurisdizione 
+competente dello Stato dello Utah. Tuttavia, nel caso in cui il 
+paese principale di residenza dell'Utente sia uno stato membro 
+dell'Unione Europea o dell'EFTA, il presente Contratto sarà 
+disciplinato dalle leggi del paese in questione. Pertanto, ogni 
+azione legale dovrà essere intrapresa tramite i tribunali competenti 
+per giurisdizione del paese di residenza.
+
+Accordo completo. Il presente Contratto ed eventuali 
+aggiornamenti/aggiunte (se applicabili) rappresentano l'intero 
+accordo tra l'Utente e Novell, e potranno essere modificati per 
+iscritto solo dietro il consenso di entrambe le parti. NESSUN 
+LICENZIATARIO, DISTRIBUTORE, RIVENDITORE, CONCESSIONARIO, 
+RAPPRESENTANTE O DIPENDENTE POTRA MODIFICARE IL PRESENTE CONTRATTO O 
+FORNIRE DICHIARAZIONI O PROMESSE DIVERSE O AGGIUNTIVE RISPETTO AI 
+TERMINI E ALLE CONDIZIONI INDICATI NEL PRESENTE CONTRATTO.
+
+Rinuncia. Eventuali rinunce ai diritti specificati dal presente 
+Contratto saranno valide solo se firmate da un rappresentante 
+autorizzato dalla parte interessata. Eventuali rinunce a diritti 
+passati o attuali derivanti dalla violazione dei termini o dal 
+mancato rispetto degli stessi non potranno essere considerate come 
+rinuncia a ogni eventuale diritto derivante dal presente Contratto.
+
+Clausole finali. Qualora una delle disposizioni del presente 
+Contratto risulti non valida o inapplicabile, tale disposizione 
+verrà riformulata, limitata, modificata o, se necessario, resa più 
+severa fino ai massimi limiti possibili e necessari per rendere la 
+disposizione valida e applicabile. Tuttavia, la modifica di una 
+disposizione non avrà alcun effetto sugli altri termini e condizioni 
+del Contratto.
+
+Conformità con le leggi sulle esportazioni. Tutti gli utenti o le 
+organizzazioni che esportano o riesportano i prodotti Novell, 
+direttamente o indirettamente e tramite ogni qualsivoglia mezzo, 
+compresi i trasferimenti elettronici, sono direttamente responsabili 
+di tali operazioni, conformemente a quanto stabilito nelle leggi 
+sulle esportazioni degli Stati Uniti e di altri paesi. Novell 
+declina ogni responsabilità nel caso in cui l'Utente non riesca ad 
+ottenere le autorizzazioni per l'esportazione, che variano a seconda 
+delle caratteristiche tecniche del prodotto, della sua destinazione 
+d'uso, dell'uso finale e dell'utente finale a cui sono destinati, 
+nonché delle attività specifiche dell'utente finale. Nello 
+specifico, nessun prodotto Novell potrà essere esportato in paesi 
+sottoposti a embargo o a utenti/paesi soggetti a limitazioni. Prima 
+di esportare i prodotti Novell dagli Stati Uniti, consultare la 
+pagina Web Bureau of Industry and Security (Ministero per 
+l'industria e la sicurezza) e consultare le leggi dei paesi di 
+destinazione prima di riesportare i prodotti Novell. Questa 
+disposizione resterà in vigore anche in caso di scadenza o 
+cessazione anticipata del Contratto. Per ulteriori informazioni 
+sull'esportazione dei prodotti Novell, consultare la matrice 
+relativa all'esportazione dei prodotti Novell, che pu? essere 
+scaricata dalla pagina Web: http://www.novell.com/info/exports/ o 
+richiesta alla sede Novell
+
+Diritti limitati applicabili agli uffici del Governo degli Stati 
+Uniti. L’utilizzo, la duplicazione o la divulgazione a uffici del 
+Governo degli Stati Uniti sono soggetti alle limitazioni specificate 
+in FAR 52.227-14 (giugno 1987) Alternate III (giugno 1987), FAR 
+52.227-19 (giugno 1987) o DFARS 252.227-7013 (b)(3) (Nov 1995) o 
+altre clausole successive. Il licenziatario/produttore è Novell, 
+Inc., 1800 South Novell Place, Provo, Utah 84606.
+
+Altre disposizioni. L'applicazione delle norme contenute nella 
+United Nations Convention of Contractsfor the International Sale of 
+Goods viene espressamente esclusa.
+
+Copyright 1993, 2000-2006 Novell, Inc. Tutti i diritti riservati. 
+(031507) Novell e SUSE sono marchi registrati e il logo SUSE è un 
+marchio di Novell, Inc. Negli Stati Uniti e in altri paesi. Linux è 
+un marchio registrato di Linus Torvalds. 
+
+
+############################################## ##
+## ## Third-party EULAs                        ## ##
+## ##############################################
+
+ADOBE SYSTEMS INCORPORATED End User License Agreement Please
+return any accompanying registration form to receive registration
+benefits.
+
+NOTICE TO USER:  PLEASE READ THIS CONTRACT CAREFULLY.  BY USING
+ALL OR ANY PORTION OF THE SOFTWARE YOU ACCEPT ALL THE TERMS AND
+CONDITIONS OF THIS AGREEMENT, INCLUDING, IN PARTICULAR THE
+LIMITATIONS ON: USE CONTAINED IN SECTION 2; TRANSFERABILITY IN
+SECTION 4; WARRANTY IN SECTION 6 AND 7; AND LIABILITY IN SECTION
+8. YOU AGREE THAT THIS AGREEMENT IS ENFORCEABLE LIKE ANY WRITTEN
+NEGOTIATED AGREEMENT SIGNED BY YOU.  IF YOU DO NOT AGREE, DO NOT
+USE THIS SOFTWARE.  IF YOU ACQUIRED THE SOFTWARE ON TANGIBLE
+MEDIA (e.g. CD) WITHOUT AN OPPORTUNITY TO REVIEW THIS LICENSE AND
+YOU DO NOT ACCEPT THIS AGREEMENT, YOU MAY OBTAIN A REFUND OF THE
+AMOUNT YOU ORIGINALLY PAID IF YOU: (A) DO NOT USE THE SOFTWARE
+AND (B) RETURN IT, WITH PROOF OF PAYMENT, TO THE LOCATION FROM
+WHICH IT WAS OBTAINED WITHIN THIRTY (30) DAYS OF THE PURCHASE
+DATE.
+
+1.  Definitions.  "Software" means (a) all of the contents of the
+files, disk(s), CD-ROM(s) or other media with which this
+Agreement is provided, including but not limited to (i) Adobe or
+third party computer information or software; (ii) digital
+images, stock photographs, clip art, sounds or other artistic
+works ("Stock Files"); (iii) related explanatory written
+materials or files ("Documentation"); and (iv) fonts; and (b)
+upgrades, modified versions, updates, additions, and copies of
+the Software, if any, licensed to you by Adobe (collectively,
+"Updates").  "Use" or "Using" means to access, install, download,
+copy or otherwise benefit from using the functionality of the
+Software in accordance with the Documentation.  "Permitted
+Number" means one (1) unless otherwise indicated under a valid
+license (e.g. volume license) granted by Adobe.  "Computer" means
+an electronic device that accepts information in digital or
+similar form and manipulates it for a specific result based on a
+sequence of instructions.  "Adobe" means Adobe Systems
+Incorporated, a Delaware corporation, 345 Park Avenue, San Jose,
+California 95110, if subsection 10(a) of this Agreement applies;
+otherwise it means Adobe Systems Benelux BV, Europlaza,
+Hoogoorddreef 54a, 1101 BE Amsterdam ZO, the Netherlands, a
+company organized under the laws of the Netherlands and an
+affiliate and licensee of Adobe Systems Incorporated. 
+
+2. Software License.  As long as you comply with the terms of
+this End User License Agreement (the "Agreement"), Adobe grants
+to you a non-exclusive license to Use the Software for the
+purposes described in the Documentation.  Some third party
+materials included in the Software may be subject to other terms
+and conditions, which are typically found in a "Read Me" file
+located near such materials.  2.1.  General Use.  You may install
+and Use a copy of the Software on your compatible computer, up to
+the Permitted Number of computers; or 2.2.  Server Use.  You may
+install one copy of the Software on your computer file server for
+the purpose of downloading and installing the Software onto other
+computers within your internal network up to the Permitted Number
+or you may install one copy of the Software on a computer file
+server within your internal network for the sole and exclusive
+purpose of using the Software through commands, data or
+instructions (e.g. scripts) from an unlimited number of computers
+on your internal network.  No other network use is permitted,
+including but not limited to, using the Software either directly
+or through commands, data or instructions from or to a computer
+not part of your internal network, for internet or web hosting
+services or by any user not licensed to use this copy of the
+Software through a valid license from Adobe; and  2.3.  Backup
+Copy.  You may make one backup copy of the Software, provided
+your backup copy is not installed or used on any computer. You
+may not transfer the rights to a backup copy unless you transfer
+all rights in the Software as provided under Section 4.  2.4.
+Home Use.  You, as the primary user of the computer on which the
+Software is installed, may also install the Software on one of
+your home computers. However, the Software may not be used on
+your home computer at the same time the Software on the primary
+computer is being used.  2.5.  Stock Files.  Unless stated
+otherwise in the "Read-Me" files associated with the Stock Files,
+which may include specific rights and restrictions with respect
+to such materials, you may display, modify, reproduce and
+distribute any of the Stock Files included with the Software.
+However, you may not distribute the Stock Files on a stand-alone
+basis, i.e., in circumstances in which the Stock Files constitute
+the primary value of the product being distributed.  Stock Files
+may not be used in the production of libelous, defamatory,
+fraudulent, lewd, obscene or pornographic material or any
+material that infringes upon any third party intellectual
+property rights or in any otherwise illegal manner.  You may not
+claim any trademark rights in the Stock Files or derivative works
+thereof.  2.6. Font Software. If the Software includes font
+software -  2.6.1. You may Use the font software as described
+above on the Permitted Number of computers and output such font
+software on any output devices connected to such computers.
+2.6.2. If the Permitted Number of computers is five or fewer, you
+may download the font software to the memory (hard disk or RAM)
+of one output device connected to at least one of such computers
+for the purpose of having such font software remain resident in
+the output device, and of one additional such output device for
+every multiple of five represented by the Permitted Number of
+computers.2.6.3. You may take a copy of the font(s) you have used
+for a particular file to a commercial printer or other service
+bureau, and such service bureau may Use the font(s) to process
+your file, provided such service bureau has a valid license to
+Use that particular font software.   2.6.4. You may convert and
+install the font software into another format for use in other
+environments, subject to the following conditions: A computer on
+which the converted font software is used or installed shall be
+considered as one of your Permitted Number of computers. Use of
+the font software you have converted shall be pursuant to all the
+terms and conditions of this Agreement. Such converted font
+software may be used only for your own customary internal
+business or personal use and may not be distributed or
+transferred for any purpose, except in accordance with the
+Transfer section below.  2.6.5 You may embed the font software,
+or outlines of the font software, into your electronic documents
+to the extent that the font vendor copyright owner allows for
+such embedding. The fonts contained in this package may contain
+both Adobe and non-Adobe owned fonts. You may fully embed any
+font owned by Adobe. Refer to the font sample sheet or font
+information file to determine font ownership.  See the
+Documentation for location and information on how to access these
+sheets and files.  2.7  To the extent that the Software includes
+Adobe Acrobat Reader software, (i) you may customize the
+installer for such software in accordance with the restrictions
+found at www.adobe.com (e.g., installation of additional plug-in
+and help files); however, you may not otherwise alter or modify
+the installer program or create a new installer for any of such
+software, (ii) such software is licensed and distributed by Adobe
+for viewing, distributing and sharing PDF files, and (iii) you
+are not authorized to use any plug-in or enhancement that permits
+you to save modifications to a PDF file with such software;
+however, such use is authorized with Adobe Acrobat, Adobe Acrobat
+Business Tools, and other current and future Adobe products that
+feature the creation or manipulation of PDF files.  For
+information on how to distribute Adobe Acrobat Reader and Adobe
+SVG Viewer please refer to the sections entitled "How to
+Distribute Acrobat Reader" and "How to Distribute SVG Viewer" at
+www.adobe.com. 
+
+3. Intellectual Property Rights. The Software and any copies that
+you are authorized by Adobe to make are the intellectual property
+of and are owned by Adobe Systems Incorporated and its suppliers.
+The structure, organization and code of the Software are the
+valuable trade secrets and confidential information of Adobe
+Systems Incorporated and its suppliers. The Software is protected
+by copyright, including without limitation by United States
+Copyright Law, international treaty provisions and applicable
+laws in the country in which it is being used.  You may not copy
+the Software, except as set forth in Section 2 ("Software
+License"). Any copies that you are permitted to make pursuant to
+this Agreement must contain the same copyright and other
+proprietary notices that appear on or in the Software. Except for
+font software converted to other formats as permitted in section
+2.6.4, you agree not to modify, adapt or translate the Software.
+You also agree not to reverse engineer, decompile, disassemble or
+otherwise attempt to discover the source code of the Software
+except to the extent you may be expressly permitted to decompile
+under applicable law, it is essential to do so in order to
+achieve operability of the Software with another software
+program, and you have first requested Adobe to provide the
+information necessary to achieve such operability and Adobe has
+not made such information available. Adobe has the right to
+impose reasonable conditions and to request a reasonable fee
+before providing such information. Any information supplied by
+Adobe or obtained by you, as permitted hereunder, may only be
+used by you for the purpose described herein and may not be
+disclosed to any third party or used to create any software which
+is substantially similar to the expression of the Software.
+Requests for information should be directed to the Adobe Customer
+Support Department. Trademarks shall be used in accordance with
+accepted trademark practice, including identification of
+trademarks owners' names. Trademarks can only be used to identify
+printed output produced by the Software and such use of any
+trademark does not give you any rights of ownership in that
+trademark. Except as expressly stated above, this Agreement does
+not grant you any intellectual property rights in the Software.
+
+4. Transfer. You may not, rent, lease, sublicense or authorize
+all or any portion of the Software to be copied onto another
+users computer except as may be expressly permitted herein. You
+may, however, transfer all your rights to Use the Software to
+another person or legal entity provided that: (a) you also
+transfer each this Agreement, the Software and all other software
+or hardware bundled or pre- installed with the Software,
+including all copies, Updates and prior versions, and all copies
+of font software converted into other formats, to such person or
+entity;  (b) you retain no copies, including backups and copies
+stored on a computer; and (c) the receiving party accepts the
+terms and conditions of this Agreement and any other terms and
+conditions upon which you legally purchased a license to the
+Software. Notwithstanding the foregoing, you may not transfer
+education, pre-release, or not for resale copies of the Software. 
+
+5. Multiple Environment Software / Multiple Language Software /
+Dual Media Software / Multiple Copies/ Bundles / Updates. If the
+Software supports multiple platforms or languages, if you receive
+the Software on multiple media, if you otherwise receive multiple
+copies of the Software, or if you received the Software bundled
+with other software, the total number of your computers on which
+all versions of the Software are installed may not exceed the
+Permitted Number.  You may not, rent, lease, sublicense, lend or
+transfer any versions or copies of such Software you do not Use.
+If the Software is an Update to a previous version of the
+Software, you must possess a valid license to such previous
+version in order to Use the Update.  You may continue to Use the
+previous version of the Software on your computer after you
+receive the Update to assist you in the transition to the Update,
+provided that: the Update and the previous version are installed
+on the same computer; the previous version or copies thereof are
+not transferred to another party or computer unless all copies of
+the Update are also transferred to such party or computer; and
+you acknowledge that any obligation Adobe may have to support the
+previous version of the Software may be ended upon availability
+of the Update.
+
+6.  NO WARRANTY.  The Software is being delivered to you "AS IS"
+and Adobe makes no warranty as to its use or performance.  ADOBE
+AND ITS SUPPLIERS DO NOT AND CANNOT WARRANT THE PERFORMANCE OR
+RESULTS YOU MAY OBTAIN BY USING THE SOFTWARE.  EXCEPT FOR ANY
+WARRANTY, CONDITION, REPRESENTATION OR TERM TO THE EXTENT TO
+WHICH THE SAME CANNOT OR MAY NOT BE EXCLUDED OR LIMITED BY LAW
+APPLICABLE TO YOU IN YOUR JURISDICTION, ADOBE AND ITS SUPPLIERS
+MAKE NO WARRANTIES CONDITIONS, REPRESENTATIONS, OR TERMS (EXPRESS
+OR IMPLIED WHETHER BY STATUTE, COMMON LAW, CUSTOM, USAGE OR
+OTHERWISE) AS TO ANY MATTER INCLUDING WITHOUT LIMITATION
+NONINFRINGEMENT OF THIRD PARTY RIGHTS, MERCHANTABILITY,
+INTEGRATION, SATISFACTORY QUALITY, OR FITNESS FOR ANY PARTICULAR
+PURPOSE. 
+
+7.  Pre-release Product Additional Terms.  If the product you
+have received with this license is pre-commercial release or beta
+Software ("Pre-release Software"), then the following Section
+applies.  To the extent that any provision in this Section is in
+conflict with any other term or condition in this Agreement, this
+Section shall supercede such other term(s) and condition(s) with
+respect to the Pre- Release Software, but only to the extent
+necessary to resolve the conflict. You acknowledge that the
+Software is a pre-release version, does not represent final
+product from Adobe, and may contain bugs, errors and other
+problems that could cause system or other failures and data loss.
+Consequently, the Pre- Release Software is provided to you
+"AS-IS", and Adobe disclaims any warranty or liability
+obligations to you of any kind. WHERE LEGALLY LIABILITY CANNOT BE
+EXCLUDED FOR PRE-RELEASE SOFTWARE, BUT IT MAY BE LIMITED, ADOBE'S
+LIABILITY AND THAT OF ITS SUPPLIERS SHALL BE LIMITED TO THE SUM
+OF FIFTY DOLLARS (U.S. $50) IN TOTAL. You acknowledge that Adobe
+has not promised or guaranteed to you that Pre-release Software
+will be announced or made available to anyone in the future, that
+Adobe has no express or implied obligation to you to announce or
+introduce the Pre-release Software and that Adobe may not
+introduce a product similar to or compatible with the Pre-release
+Software.  Accordingly, you acknowledge that any research or
+development that you perform regarding the Pre-release Software
+or any product associated with the Pre-release Software is done
+entirely at your own risk. During the term of this Agreement, if
+requested by Adobe, you will provide feedback to Adobe regarding
+testing and use of the Pre-release Software, including error or
+bug reports. If you have been provided the Pre-release Software
+pursuant to a separate written agreement, such as the Adobe
+Systems Incorporated Serial Agreement for Unreleased Products,
+your use of the Software is also governed by such agreement. You
+agree that you may not and certify that you will not sublicense,
+lease, loan, rent, or transfer the Pre-release Software. Upon
+receipt of a later unreleased version of the Pre-release Software
+or release by Adobe of a publicly released commercial version of
+the Software, whether as a stand-alone product or as part of a
+larger product, you agree to return or destroy all earlier
+Pre-release Software received from Adobe and to abide by the
+terms of the End User License Agreement for any such later
+versions of the Pre-release Software. Notwithstanding anything in
+this Section to the contrary, if you are located outside the
+United States of America, you agree that you will return or
+destroy all unreleased versions of the Pre- Release Software
+within thirty (30) days of the completion of your testing of the
+Software when such date is earlier than the date for Adobe's
+first commercial shipment of the publicly released (commercial)
+Software.
+
+8. LIMITATION OF LIABILITY. IN NO EVENT WILL ADOBE OR ITS
+SUPPLIERS BE LIABLE TO YOU FOR ANY DAMAGES, CLAIMS OR COSTS
+WHATSOEVER OR ANY CONSEQUENTIAL, INDIRECT, INCIDENTAL DAMAGES, OR
+ANY LOST PROFITS OR LOST SAVINGS, EVEN IF AN ADOBE REPRESENTATIVE
+HAS BEEN ADVISED OF THE POSSIBILITY OF SUCH LOSS, DAMAGES, CLAIMS
+OR COSTS OR FOR ANY CLAIM BY ANY THIRD PARTY.  THE FOREGOING
+LIMITATIONS AND EXCLUSIONS APPLY TO THE EXTENT PERMITTED BY
+APPLICABLE LAW IN YOUR JURISDICTION.  ADOBE'S AGGREGATE
+LIABILITY AND THAT OF ITS SUPPLIERS  UNDER OR IN CONNECTION WITH
+THIS AGREEMENT SHALL BE LIMITED TO THE AMOUNT PAID FOR THE
+SOFTWARE, IF ANY. Nothing contained in this Agreement limits
+Adobe's liability to you in the event of death or personal injury
+resulting from Adobe's negligence or for the tort of deceit
+(fraud).  Adobe is acting on behalf of its suppliers for the
+purpose of disclaiming, excluding and/or limiting obligations,
+warranties and liability as provided in this Agreement, but in no
+other respects and for no other purpose. For further information,
+please see the jurisdiction specific information at the end of
+this Agreement, if any, or contact Adobe's Customer Support
+Department.
+
+9. Export Rules. You agree that the Software will not be shipped,
+transferred or exported into any country or used in any manner
+prohibited by the United States Export Administration Act or any
+other export laws, restrictions or regulations (collectively the
+"Export Laws"). In addition, if the Software is identified as
+export controlled items under the Export Laws, you represent and
+warrant that you are not a citizen, or otherwise located within,
+an embargoed nation (including without limitation Iran, Iraq,
+Syria, Sudan, Libya, Cuba, North Korea, and Serbia) and that you
+are not otherwise prohibited under the Export Laws from receiving
+the Software.   All rights to Use the Software are granted on
+condition that such rights are forfeited if you fail to comply
+with the terms of this Agreement.
+
+10. Governing Law. This Agreement will be governed by and
+construed in accordance with the substantive laws in force: (a)
+in the State of California, if a license to the Software is
+purchased when you are in the United States, Canada, or Mexico;
+or (b) in Japan, if a license to the Software is purchased when
+you are in Japan, China, Korea, or other Southeast Asian country
+where all official languages are written in either an ideographic
+script (e.g., hanzi, kanji, or hanja), and/or other script based
+upon or similar in structure to an ideographic script, such as
+hangul or kana; or (c) the Netherlands, if a license to the
+Software is purchased when you are in any other jurisdiction not
+described above. The respective courts of Santa Clara County,
+California when California law applies, Tokyo District Court in
+Japan, when Japanese law applies, and the courts of Amsterdam,
+the Netherlands, when the law of the Netherlands applies, shall
+each have non-exclusive jurisdiction over all disputes relating
+to this Agreement. This Agreement will not be governed by the
+conflict of law rules of any jurisdiction or the United Nations
+Convention on Contracts for the International Sale of Goods, the
+application of which is expressly excluded. 
+
+11. General Provisions. If any part of this Agreement is found
+void and unenforceable, it will not affect the validity of the
+balance of the Agreement, which shall remain valid and
+enforceable according to its terms.  This Agreement shall not
+prejudice the statutory rights of any party dealing as a
+consumer. This Agreement may only be modified by a writing signed
+by an authorized officer of Adobe.  Updates may be licensed to
+you by Adobe with additional or different terms. This is the
+entire agreement between Adobe and you relating to the Software
+and it supersedes any prior representations, discussions,
+undertakings, communications or advertising relating to the
+Software.  
+
+12. Notice to U.S. Government End Users. The Software and
+Documentation are "Commercial Items," as that term is defined at
+48 C.F.R.  Section 2.101, consisting of "Commercial Computer 
+Software" and "Commercial Computer Software Documentation," as such
+terms are used in 48 C.F.R. Section 12.212 or 48 C.F.R. Section 
+227.7202, as applicable. Consistent with 48 C.F.R. Section 12.212 
+or 48 C.F.R. Sections 227.7202-1 through 227.7202-4, as applicable, 
+the Commercial Computer Software and Commercial Computer Software
+Documentation are being licensed to U.S. Government end users (a)
+only as Commercial Items and (b) with only those rights as are
+granted to all other end users pursuant to the terms and
+conditions herein. Unpublished-rights reserved under the
+copyright laws of the United States. Adobe Systems Incorporated,
+345 Park Avenue, San Jose, CA 95110-2704, USA. For U.S.
+Government End Users, Adobe agrees to comply with all applicable
+equal opportunity laws including, if appropriate, the provisions
+of Executive Order 11246, as amended, Section 402 of the Vietnam
+Era Veterans Readjustment Assistance Act of 1974 (38 USC 4212),
+and Section 503 of the Rehabilitation Act of 1973, as amended,
+and the regulations at 41 CFR Parts 60-1 through 60-60, 60-250,
+and 60-741.  The affirmative action clause and regulations
+contained in the preceding sentence shall be incorporated by
+reference in this Agreement.
+
+13. Compliance with Licenses. If you are a business or
+organization, you agree that upon request from Adobe or Adobe's
+authorized representative, you will within thirty (30) days fully
+document and certify that use of any and all Adobe Software at
+the time of the request is in conformity with your valid licenses
+from Adobe.
+
+If you have any questions regarding this Agreement or if you wish
+to request any information from Adobe please use the address and
+contact information included with this product to contact the
+Adobe office serving your jurisdiction.  
+
+Adobe, Acrobat, Acrobat Reader, and After Effects are either
+registered trademarks or trademarks of Adobe Systems Incorporated
+in the United States and/or other countries.
+
+##############################################
+
+END USER LICENSE AGREEMENT FOR CITRIX SYSTEMS, INC.
+
+This is a legal agreement ("AGREEMENT") between you, the Licensed
+User or representative of the Licensed User and Citrix Systems,
+Inc., or Citrix Systems International GmbH.  Citrix Systems,
+Inc., a Delaware corporation, markets and supports this product
+or feature release (both hereinafter "PRODUCT") in the Americas.
+Citrix Systems International GmbH, a Swiss company wholly owned
+by Citrix Systems, Inc., markets and supports this PRODUCT in
+Europe, the Middle East, Africa, Asia and the Pacific.  Your
+location of receipt of this PRODUCT determines which is the
+licensing entity hereunder (the applicable entity is hereinafter
+referred to as "CITRIX"). BY OPENING THE SEALED DISK PACKAGE OR
+BY INDICATING YOUR ACCEPTANCE AS IDENTIFIED BELOW, YOU ARE
+AGREEING TO BE BOUND BY THE TERMS OF THIS AGREEMENT. IF YOU DO
+NOT AGREE TO THE TERMS OF THIS AGREEMENT, PROMPTLY RETURN THE
+UNOPENED DISK PACKAGE AND THE ACCOMPANYING ITEMS (INCLUDING
+WRITTEN MATERIALS AND BINDERS OR OTHER CONTAINERS) TO THE PLACE
+WHERE YOU OBTAINED THEM FOR A FULL REFUND.
+
+1.  GRANT OF LICENSE.  This CITRIX product contains software that
+provides services on a computer called a server (''Server
+Software''), and software that  allows a computer to access or
+utilize the services provided by the Server Software (''Client
+Software''). CITRIX grants to you the following non-exclusive
+rights to the Client Software and the Server Software and
+accompanying  documentation (collectively called the
+''SOFTWARE''): 
+
+a) Installation and Transfer.  You may install one copy of the
+Server Software on  a single computer (the computer running the
+Server Software shall be referred to  as the ''Server''). The CD
+on which the Server Software resides may contain  several copies
+of the Server Software, each of which is compatible with a
+different  microprocessor architecture. You may install the
+Server Software for use with only  one of those architectures at
+any given time. You may transfer the Server  Software to another
+computer, provided that it is removed from the computer from
+which it is transferred. The Client Software diskettes with the
+"Unlimited Copies  Allowed Under User License Agreement" legend
+may be installed on an unlimited  number of computers, provided
+that these computers are used to access the  Server. All other
+Client Software diskettes can be installed and used on a single
+computer only. However, the number of concurrent logins will be
+limited pursuant  to Section 1.b. 
+
+b) Use of the Server Software.  You may use one copy of the
+Server Software at  any time on one Server, which may be
+connected at any point in time to an  unlimited number of
+computers operating remotely or on one or more networks.  The
+Server Software supports usage by more than one user at a time.
+However, it  may only be used to support the number of user
+logins you are entitled to based  on your purchase of CITRIX
+licenses for the basic system and any additional  CITRIX User
+License Packs which increase the number of allowable logins.
+System management and other service features of the SOFTWARE may
+only be  used to support the same SOFTWARE. Any attempt to defeat
+or circumvent these  software-enforced login limitations is a
+breach of this AGREEMENT. You may  make one (1) copy of the
+SOFTWARE in machine readable form solely for back- up purposes,
+provided that you reproduce all proprietary notices on the copy.
+
+c) Use of the Client Software.  You may use the Client Software
+to access the  Server.  
+
+d) Not For Resale and Developers' Edition Software. If this
+SOFTWARE is  labeled ''Not For Resale'' or ''NFR,'' your license
+only permits use for  demonstration, test, or evaluation
+purposes.  If this SOFTWARE is labeled  "Developers' Edition,"
+your license only permits use for developing your own product(s)
+to operate in conjunction with the SOFTWARE.  You receive no
+license  hereunder to incorporate the SOFTWARE or any portion
+thereof in your own  product(s). 
+
+e) Other.  Notice to Users - You shall inform all users of the
+SOFTWARE of the  terms and conditions of this AGREEMENT. 
+
+2. SUBSCRIPTION RIGHTS.  If the licensed user has purchased a
+subscription to  obtain "Updates" (as defined below) for the
+SOFTWARE (the "Subscription"), the  following terms and
+conditions shall also apply.  If the licensed user has paid the
+appropriate subscription fee and registered its Subscription with
+CITRIX, the  licensed user's Subscription shall begin on the
+effective date of this AGREEMENT  and shall continue for a term
+of one year thereafter unless terminated sooner (the
+"Subscription Term").  During the Subscription Term, CITRIX may,
+from time to  time, generally make Updates available for
+licensing to the public. For the  purposes of this AGREEMENT, an
+Update shall mean a generally available release of the SOFTWARE
+which is designated by CITRIX in its sole discretion as  an
+increase in any digit of the SOFTWARE version number from that
+version  number of the SOFTWARE originally licensed by the
+licensed user pursuant to  this AGREEMENT.  Upon general
+availability of such Update during the Subscription Term, CITRIX
+shall provide the licensed user with one (1) copy of  such UPDATE
+for each copy of the SOFTWARE originally licensed by the
+licensed user pursuant to this AGREEMENT, without additional
+charge.   Any such  Updates so delivered to the licensed user
+shall be considered SOFTWARE under  the terms of this AGREEMENT. 
+
+The licensed user acknowledges that CITRIX may develop and market
+new or  different computer programs which use portions of the
+SOFTWARE and which  perform all or part of the functions
+performed by the SOFTWARE.  Nothing  contained in this AGREEMENT
+shall give the licensed user any rights with respect to such new
+or different computer programs.  The licensed user also
+acknowledges that CITRIX is not obligated under this AGREEMENT to
+generally  make any Updates available to the public.  All
+deliveries of Updates shall be  F.O.B. Fort Lauderdale, Florida.
+CITRIX shall have no responsibility under this  AGREEMENT for the
+installation of any Updates. 
+
+3. DESCRIPTION OF OTHER RIGHTS AND LIMITATIONS.  For all SOFTWARE
+-  You may not rent or lease the SOFTWARE, but you may transfer
+the SOFTWARE and accompanying written materials on a permanent
+basis, provided you retain no  copies and the recipient agrees to
+the terms of this AGREEMENT. You may not  modify, translate,
+reverse engineer, decompile, or disassemble, create derivative
+works based on, or copy (except for the back-up copy of the
+SOFTWARE) the  SOFTWARE, except to the extent such foregoing
+restriction is expressly prohibited by applicable law. You may
+not remove any proprietary notices, labels, or marks on  the
+SOFTWARE and accompanying documentation. 
+
+YOU MAY NOT USE, COPY, MODIFY, OR TRANSFER THE SOFTWARE OR  ANY
+COPY IN WHOLE OR IN PART, OR GRANT ANY RIGHTS IN THE  SOFTWARE OR
+ACCOMPANYING DOCUMENTATION, EXCEPT AS EXPRESSLY PROVIDED IN THIS
+LICENSE. ALL RIGHTS NOT EXPRESSLY  GRANTED ARE RESERVED BY CITRIX
+OR ITS SUPPLIERS. 
+
+Limited Warranty and Disclaimer.  CITRIX warrants that, for a
+period of ninety  (90) days from the date of delivery of the
+SOFTWARE to you as evidenced by a  copy of your receipt, the
+media on which the SOFTWARE is furnished under  normal use will
+be free from defects in materials and workmanship and that the
+CITRIX product will perform substantially in accordance with the
+CITRIX product documentation published by CITRIX and included
+with the enclosed sealed media  package. CITRIX and its
+suppliers' entire liability and your exclusive remedy under  this
+warranty (which is subject to you returning the SOFTWARE to
+CITRIX or an  authorized reseller with a copy of your receipt)
+will be, at CITRIX' option, to replace the media or to refund the
+purchase price and terminate this  AGREEMENT. 
+
+EXCEPT FOR THE ABOVE EXPRESS LIMITED WARRANTIES, CITRIX AND  ITS
+SUPPLIERS MAKE AND YOU RECEIVE NO WARRANTIES OR  CONDITIONS,
+EXPRESS, IMPLIED, STATUTORY, OR OTHERWISE, AND CITRIX AND ITS
+SUPPLIERS SPECIFICALLY DISCLAIM ANY CONDITIONS OF  QUALITY AND
+ANY IMPLIED WARRANTIES, INCLUDING, WITHOUT  LIMITATION, ANY
+WARRANTY OF MERCHANTABILITY, NONINFRINGEMENT, OR FITNESS FOR A
+PARTICULAR PURPOSE. YOU ASSUME THE  RESPONSIBILITY FOR THE
+SELECTION OF THE PRODUCTS AND  HARDWARE TO ACHIEVE YOUR INTENDED
+RESULTS, AND FOR THE  INSTALLATION OF, USE OF, AND RESULTS
+OBTAINED FROM THE PRODUCTS. CITRIX does not warrant that the
+SOFTWARE will be uninterrupted  or error free. 
+
+SOME JURISDICTIONS DO NOT ALLOW THE EXCLUSION OF IMPLIED
+WARRANTIES SO THE ABOVE EXCLUSIONS MAY NOT APPLY TO YOU. THIS
+WARRANTY GIVES YOU SPECIFIC LEGAL RIGHTS. YOU MAY ALSO HAVE
+OTHER RIGHTS WHICH VARY FROM JURISDICTION TO JURISDICTION. 
+
+Proprietary Rights.  This license is not a sale. Title and
+copyrights to the  SOFTWARE, accompanying documentation and any
+copies made by you remain  with CITRIX or its suppliers. 
+
+Limitation of Liability.  IN NO EVENT WILL CITRIX OR ITS
+SUPPLIERS BE  LIABLE FOR ANY LOSS OF DATA, LOSS OF INCOME, LOSS
+OF  OPPORTUNITY OR PROFITS, COST OF RECOVERY OR ANY OTHER
+SPECIAL, INCIDENTAL, CONSEQUENTIAL OR INDIRECT DAMAGES ARISING
+OUT OF OR IN CONNECTION WITH THIS AGREEMENT, OR THE USE OF THE
+SOFTWARE, REFERENCE MATERIALS OR ACCOMPANYING DOCUMENTATION,
+HOWEVER CAUSED AND ON ANY THEORY OF  LIABILITY. THIS LIMITATION
+WILL APPLY EVEN IF CITRIX, ITS SUPPLIERS  OR AUTHORIZED
+DISTRIBUTORS HAVE BEEN ADVISED OF THE  POSSIBILITY OF SUCH
+DAMAGE. IN NO EVENT SHALL THE LIABILITY OF  CITRIX EXCEED THE
+AMOUNT PAID FOR THE LICENSED SOFTWARE AT ISSUE.  YOU ACKNOWLEDGE
+THAT THE LICENSE FEE REFLECTS THIS  ALLOCATION OF RISK. SOME
+JURISDICTIONS DO NOT ALLOW THE  LIMITATION OR EXCLUSION OF
+LIABILITY FOR INCIDENTAL OR CONSEQUENTIAL DAMAGES, SO THE ABOVE
+LIMITATION OR EXCLUSION  MAY NOT APPLY TO YOU. 
+
+Export Restriction.  You agree that you will not export or
+re-export the  SOFTWARE in any form without the appropriate
+United States and foreign  government licenses. Your failure to
+comply with this provision is a material breach of this
+AGREEMENT. 
+
+Termination.  This AGREEMENT is effective until terminated. You
+may terminate  this AGREEMENT at any time by removing from your
+computer and destroying all  copies of the SOFTWARE.
+Unauthorized copying of the SOFTWARE or the accompanying
+documentation or otherwise failing to comply with the terms and
+conditions of this AGREEMENT will result in automatic termination
+of this license  and will make available to CITRIX other legal
+remedies.  Upon termination of this  AGREEMENT, the license
+granted herein will terminate and you must immediately  destroy
+the SOFTWARE and accompanying documentation, and all back-up
+copies thereof. 
+
+Government End-Users. If you are a U.S.  Government agency, in
+accordance  with Section 12.212 of the Federal Acquisition
+Regulation (48 CFR 12.212), you  hereby acknowledge that use,
+duplication and disclosure of the SOFTWARE by  the U.S.
+Government or any of its agencies is governed by, and subject to,
+all of  the terms, conditions, restrictions and limitations set
+forth in this AGREEMENT. In  the event that, for any reason,
+Section 12.212 is not applicable, you hereby  acknowledge that
+use, duplication and disclosure of the SOFTWARE by U.S.
+Government agencies is subject to the Commercial Computer
+Software Restricted  Rights clause at 48 CFR Section
+52.227-19(c)(1) and (2), or the Rights in  Technical Data and
+Computer Software clause at DFARS 252.227-7013, as  applicable.
+Manufacturer is Citrix Systems, Inc., 851 West Cypress Creek
+Road,  Fort Lauderdale, Florida, 33309. 
+
+If licensor is Citrix Systems, Inc., this AGREEMENT will be
+governed by the laws  of the State of Florida without reference
+to conflict of laws principles and excluding  the United Nations
+Convention on Contracts for the International Sale of Goods,  and
+in any dispute arising out of this AGREEMENT, you consent to the
+exclusive  personal jurisdiction and venue in the State and
+Federal courts within Broward  County, Florida. If licensor is
+Citrix Systems International GmbH, this AGREEMENT will be
+governed by the laws of Switzerland without reference to  the
+conflict of laws principles, and excluding the United Nations
+Convention on  Contracts for the International Sale of Goods, and
+in any dispute arising out of this  Citrix MetaFrame Server for
+UNIX Operating Systems License Agreement 7 AGREEMENT, you consent 
+to the exclusive personal jurisdiction and venue of the competent
+courts in the Canton of Zurich. 
+
+Should you have any questions concerning this AGREEMENT, or wish
+to contact  licensor for any reason, please write to licensor at
+the following address: Citrix  Systems, Inc., Customer Service,
+851 West Cypress Creek Road, Ft. Lauderdale,  Florida 33309; or
+Citrix Systems International GmbH, Rheinweg 9, CH-8200
+Schaffhausen, Switzerland. 
+
+Should you have any questions concerning this AGREEMENT, or if
+you desire to  contact Citrix Systems, Inc. for any reason,
+please write: Citrix Systems, Inc.,  Customer Service, 6400 NW
+6th Way, Fort Lauderdale, FL  33309.  Citrix is a  registered
+trademark of Citrix Systems, Inc.  UNIX is a registered trademark
+of  The Open Group.
+
+##############################################
+ADOBE Flash Player
+
+ADOBE(r) SOFTWARE LICENSE AGREEMENT
+
+NOTICE TO USER: PLEASE READ THIS CONTRACT CAREFULLY. BY USING,
+COPYING OR DISTRIBUTING ALL OR ANY PORTION OF THE ADOBE SOFTWARE
+("SOFTWARE") YOU ACCEPT ALL THE TERMS AND CONDITIONS OF THIS
+AGREEMENT, INCLUDING, IN PARTICULAR THE LIMITATIONS ON: USE
+CONTAINED IN SECTION 2; TRANSFERABILITY IN SECTION 4; WARRANTY IN
+SECTION 7; AND LIABILITY IN SECTION 8. YOU AGREE THAT THIS
+AGREEMENT IS ENFORCEABLE LIKE ANY WRITTEN NEGOTIATED AGREEMENT
+SIGNED BY YOU. THIS AGREEMENT IS ENFORCEABLE AGAINST YOU AND ANY
+LEGAL ENTITY THAT OBTAINED THE SOFTWARE AND ON WHOSE BEHALF IT IS
+USED. IF YOU DO NOT AGREE, DO NOT USE THIS SOFTWARE.
+
+Adobe and its suppliers own all intellectual property in the
+Software. Adobe permits you to Use the Software only in
+accordance with the terms of this Agreement. Use of some third
+party materials included in the Software may be subject to other
+terms and conditions typically found in a separate license
+agreement, a “Read Me” file located near such materials or in the
+“Third Party Software Notices and/or Additional Terms and
+Conditions” found at www.adobe.com/go/thirdparty/
+
+1. Definitions. "Software" means (a) all of the contents of
+the files (provided either by electronic download, on physical
+media or any other method of distribution), disk(s), CD-ROM(s)
+or other media with which this Agreement is provided,
+including but not limited to (i) Adobe or third party computer
+information or software, including the Adobe Reader(r) ("Adobe
+Reader"), Adobe Flash(r) Player, Shockwave(r) Player and
+Authorware(r) Player (collectively, the Flash, Shockwave and
+Authorware players, are the "Web Players"); (ii) related
+explanatory written materials or files ("Documentation"); and
+(iii) fonts; and (b) upgrades, modified versions, updates,
+additions, and copies of the Software, if any, licensed to you
+by Adobe (collectively, "Updates"). "Use" or "Using" means to
+access, install, download, copy, or otherwise benefit from
+using the functionality of the Software in accordance with the
+Documentation. "Permitted Number" means one (1) unless
+otherwise indicated under a valid license (e.g., volume
+license) granted by Adobe. "Computer" means an electronic
+device that accepts information in digital or similar form and
+manipulates it for a specific result based on a sequence of
+instructions. "Adobe" means Adobe Systems Incorporated, a
+Delaware corporation, 345 Park Avenue, San Jose, California
+95110, if subsection 9(a) of this Agreement applies; otherwise
+it means Adobe Systems Software Ireland Limited, Unit 3100,
+Lake Drive, City West Campus, Saggart D24, Republic of
+Ireland, a company organized under the laws of Ireland and an
+affiliate and licensee of Adobe Systems Incorporated.
+
+2. Software License. If you obtained the Software from Adobe
+or one of its authorized licensees, and subject to your
+compliance with the terms of this agreement (this
+"Agreement"), including the restrictions in Setion 3, Adobe
+grants to you a non-exclusive license to Use the Software for
+the purposes described in the Documentation as follows.
+2.1 General Use. You may install and Use a copy of the
+Software on your compatible Computer, up to the Permitted
+Number of computers. The Software may not be shared,
+installed or used concurrently on different
+computers. See Section 3 for important restrictions on
+the Use of Adobe Reader and Web Players.
+2.2 Server Use and Distribution.
+2.2.1 You may install one copy of the Adobe Reader on a
+computer file server within your internal network for
+the sole and exclusive purpose of (a) using the
+Software (from an unlimited number of client computers
+on your internal network) via (i) the Network File
+System (NFS) for UNIX versions of the Software or (ii)
+Windows Terminal Services and (b) allowing for printing
+within your internal network. Unless otherwise
+expressly permitted hereunder, no other server or
+network use of the Software is permitted, including but
+not limited to use of the Software (i) either directly
+or through commands, data or instructions from or to
+another computer or (ii) for internal network, internet
+or web hosting services.
+2.2.2 For information on how to distribute the Software on
+tangible media or through an internal network please
+refer to the sections entitled "How to Distribute Adobe
+Reader" at
+http://www.adobe.com/products/acrobat/distribute.html;
+or "Distribute Macromedia Web Players" at
+http://www.adobe.com/licensing.
+2.3 Backup Copy. You may make one backup copy of the
+Software, provided your backup copy is not installed or
+used on any Computer. You may not transfer the rights to
+a backup copy unless you transfer all rights in the
+Software as provided under Section 4.
+2.4 Portable or Home Computer Use. If and only if the
+Software is Adobe Reader, in addition to the single copy
+permitted under Sections 2.1 and 2.2, the primary user of
+the Computer on which the Software is installed may make
+a second copy of the Software for his or her exclusive
+Use on either a portable Computer or a Computer located
+at his or her home, provided the Software on the portable
+or home Computer is not used at the same time as the
+Software on the primary computer.
+2.5 No Modification.
+2.5.1 You may not modify, adapt, translate or create
+derivative works based upon the Software. You may not
+reverse engineer, decompile, disassemble or otherwise
+attempt to discover the source code of the Software
+except to the extent you may be expressly permitted to
+decompile under applicable law, it is essential to do
+so in order to achieve operability of the Software with
+another software program, and you have first requested
+Adobe to provide the information necessary to achieve
+such operability and Adobe has not made such
+information available. Adobe has the right to impose
+reasonable conditions and to request a reasonable fee
+before providing such information. Any such information
+supplied by Adobe and any information obtained by you
+by such permitted decompilation may only be used by you
+for the purpose described herein and may not be
+disclosed to any third party or used to create any
+software which is substantially similar to the
+expression of the Software. Requests for information
+should be directed to the Adobe Customer Support
+Department.
+2.5.2 As an exception to the above, you may customize or
+extend the functionality of the installer for the Adobe
+Reader as specifically allowed by instructions found at
+http://www.adobe.com/support/main.html or
+http://partners.adobe.com (e.g., installation of
+additional plug-in and help files). You may not
+otherwise alter or modify the Software or create a new
+installer for the Software. The Adobe Reader is
+licensed and distributed by Adobe for viewing,
+distributing and sharing PDF files.
+2.6 Third Party Website Access. The Software may allow you
+to access third party websites ("Third Party
+Sites"). Your access to and use of any Third Party Sites,
+including any goods, services or information made
+available from such sites, is governed by the terms and
+conditions found at each Third Party Site, if any. Third
+Party Sites are not owned or operated by Adobe. YOUR USE
+OF THIRD PARTY SITES IS AT YOUR OWN RISK. ADOBE MAKES NO
+WARRANTIES, CONDITIONS, INDEMNITIES, REPRESENTATIONS OR
+TERMS, EXPRESS OR IMPLIED, WHETHER BY STATUTE, COMMON
+LAW, CUSTOM, USAGE OR OTHERWISE AS TO ANY OTHER MATTERS,
+INCLUDING BUT NOT LIMITED TO NON-INFRINGEMENT OF THIRD
+PARTY RIGHTS, TITLE, INTEGRATION, ACCURACY, SECURITY,
+AVAILABILITY, SATISFACTORY QUALITY, MERCHANTABILITY OR
+FITNESS FOR ANY PARTICULAR PURPOSE WITH RESPECT TO THE
+THIRD PARTY SITES.
+2.7  Certified Documents.
+2.7.1 Certified Documents and CD Services. The Software may
+allow you to validate Certified Documents. A "Certified
+Document" or “CD” is a PDF file that has been digitally
+signed using (a) a certificate and (b) a “private”
+encryption key that corresponds to the “public” key in
+the certificate. Validation of a CD requires CD
+Services from the CD Service Provider that issued the
+certificate. “CD Service Provider” is an independent
+third party service vendor listed at
+http://www.adobe.com/security/partners_cds.html. “CD
+Services” are services provided by CD Service
+Providers, including without limitation (i)
+certificates issued by such CD Service Provider for use
+with the Software's CD feature set, (ii) services
+related to issuance of certificates, and (iii) other
+services related to certificates, including without
+limitation verification services.
+2.7.2 CD Service Providers. Although the Software may
+provide validation features, Adobe does not supply the
+necessary CD Services required to use these
+features. Purchasing, availability and responsibility
+for the CD Services are between you and the CD Service
+Provider. Before you rely upon any CD, any digital
+signature applied thereto, and/or any related CD
+Services, you must first review and agree to the
+applicable Issuer Statement and this Agreement. “Issuer
+Statement” means the terms and conditions under which
+each CD Service Provider offers CD Services (see the
+links on
+http://www.adobe.com/security/partners_cds.html),
+including for example any subscriber agreements,
+relying party agreements, certificate policies and
+practice statements, and Section 2.7 of this
+Agreement. By validating a CD using CD Services, you
+acknowledge and agree that (a) the certificate used to
+digitally sign a CD may be revoked at the time of
+verification, making the digital signature on the CD
+appear valid when in fact it is not, (b) the security
+or integrity of a CD may be compromised due to an act
+or omission by the signer of the CD, the applicable CD
+Service Provider, or any other third party and (c) you
+must read, understand, and be bound by the applicable
+Issuer Statement.
+2.7.3 Warranty Disclaimer. CD Service Providers offer CD
+Services solely in accordance with the applicable
+Issuer Statement. ACCESS TO THE CD SERVICES THROUGH THE
+USE OF THE SOFTWARE IS MADE AVAILABLE ON AN “AS IS”
+BASIS ONLY AND WITHOUT ANY WARRANTY OR INDEMNITY OF ANY
+KIND (EXCEPT AS SUPPLIED BY A CD SERVICES PROVIDER IN
+ITS ISSUER STATEMENT). ADOBE AND EACH CD SERVICE
+PROVIDER (EXCEPT AS EXPRESSLY PROVIDED IN ITS ISSUER
+STATEMENT) MAKE NO WARRANTIES, CONDITIONS, INDEMNITIES,
+REPRESENTATIONS OR TERMS, EXPRESS OR IMPLIED, WHETHER
+BY STATUTE, COMMON LAW, CUSTOM, USAGE OR OTHERWISE AS
+TO ANY OTHER MATTERS, INCLUDING BUT NOT LIMITED TO
+NON-INFRINGEMENT OF THIRD PARTY RIGHTS, TITLE,
+INTEGRATION, ACCURACY, SECURITY, AVAILABILITY,
+SATISFACTORY QUALITY, MERCHANTABILITY OR FITNESS FOR
+ANY PARTICULAR PURPOSE WITH RESPECT TO THE CD SERVICES.
+2.7.4 Indemnity. You agree to hold Adobe and any applicable
+CD Service Provider (except as expressly provided in
+its Issuer Statement) harmless from any and all
+liabilities, losses, actions, damages, or claims
+(including all reasonable expenses, costs, and
+attorneys fees) arising out of or relating to any use
+of, or reliance on, any CD Service, including, without
+limitation (a) reliance on an expired or revoked
+certificate, (b) improper verification of a
+certificate, (c) use of a certificate other than as
+permitted by any applicable Issuer Statement, this
+Agreement or applicable law; (d) failure to exercise
+reasonable judgment under the circumstances in relying
+on the CD Services or (e) failure to perform any of the
+obligations as required in an applicable Issuer
+Statement.
+2.7.5 Limit of Liability. UNDER NO CIRCUMSTANCES WILL ADOBE
+OR ANY CD SERVICE PROVIDER (EXCEPT AS EXPRESSLY SET
+FORTH IN ITS ISSUER STATEMENT) BE LIABLE TO YOU, OR ANY
+OTHER PERSON OR ENTITY, FOR ANY LOSS OF USE, REVENUE OR
+PROFIT, LOST OR DAMAGED DATA, OR OTHER COMMERCIAL OR
+ECONOMIC LOSS OR FOR ANY DIRECT, INDIRECT, INCIDENTAL,
+SPECIAL, STATUTORY, PUNITIVE, EXEMPLARY OR
+CONSEQUENTIAL DAMAGES WHATSOEVER RELATED TO YOUR USE OR
+RELIANCE UPON CD SERVICES, EVEN IF ADVISED OF THE
+POSSIBILITY OF SUCH DAMAGES OR IF SUCH DAMAGES ARE
+FORESEEABLE. THIS LIMITATION SHALL APPLY EVEN IN THE
+EVENT OF A FUNDAMENTAL OR MATERIAL BREACH OR A BREACH
+OF THE FUNDAMENTAL OR MATERIALTERMS OF THIS AGREEMENT.
+2.7.6 Third Party Beneficiaries. You agree that any CD
+Service Provider you utilize shall be a third party
+beneficiary with respect to this Section 2.7 of this
+Agreement, and that such CD Service Provider shall have the
+right to enforce such provisions in its own name as if the CD
+Service Provider were Adobe.  
+
+3. Restrictions.
+3.1 Web Player Prohibited Devices. You may not Use any Web
+Player on any non-PC device or with any embedded or
+device version of any operating system. For the avoidance
+of doubt, and by example only, you may not use a Web
+Player on any (a) mobile devices, set top boxes (STB),
+handhelds, phones, web pads, tablets and Tablet PCs that
+are not running Windows XP Tablet PC Edition, game
+consoles, TVs, DVD players, media centers (excluding
+Windows XP Media Center Edition and its successors),
+electronic billboards or other digital signage, internet
+appliances or other internet-connected devices, PDAs,
+medical devices, ATMs, telematic devices, gaming
+machines, home automation systems, kiosks, remote control
+devices, or any other consumer electronics device, (b)
+operator-based mobile, cable, satellite, or television
+systems or (c) other closed system devices.
+3.2 Notices. You shall not copy the Software except as set
+forth in Section 2. Any copy of the Software that you
+make must contain the same copyright and other
+proprietary notices that appear on or in the Software.
+3.3 Document Features. The Software may contain features
+and functionality (the “Document Features”) that appear
+disabled or “grayed out.” These Document Features will
+only activate when opening a PDF document that was
+created using corresponding enabling technology available
+only from Adobe (“Keys”). You agree not to access, or
+attempt to access, disabled Document Features or
+otherwise circumvent the permissions that control
+activation of such Document Features. You may only use
+the Document Features with PDF documents that have been
+enabled using Keys obtained under a valid license from
+Adobe. No other use is permitted.
+3.4 Adobe Reader Restrictions. You are not authorized to
+integrate or use the Adobe Reader with any other software,
+plug-in or enhancement that uses or relies upon the the Adobe
+Reader when converting or transforming PDF files into other
+file formats (e.g., a PDF file into a TIFF, JPEG, or SVG
+file). You are not authorized to integrate or use the Adobe
+Reader with any plug-in software not developed in accordance
+with the Adobe Integration Key License Agreement. Further, you
+are not permitted to integrate or use the Adobe Reader with
+other software, or access PDF files that contain instructions
+(e.g., JavaScript), in order to (a) save data locally (on the
+same Computer), (b) create a file that contains data (e.g., an
+XML or comments file) or (c) save modifications to a PDF file,
+except when such saving or creation is allowed through the use
+of Document Feature(s) enabled by Adobe.  
+
+4. Transfer. 
+You may not rent, lease, sublicense, assign or transfer your rights 
+in the Software, or authorize all or any portion of the Software
+to be copied onto another user's Computer except as may be
+expressly permitted herein. You may, however, transfer all
+your rights to Use the Software to another person or legal
+entity provided that: (a) you also transfer (i) this
+Agreement, and (ii) the Software and all other software or
+hardware bundled or pre-installed with the Software, including
+all copies, Updates and prior versions, to such person or
+entity, (b) you retain no copies, including backups and copies
+stored on a Computer, and (c) the receiving party accepts the
+terms and conditions of this Agreement and any other terms and
+conditions upon which you legally purchased a license to the
+Software. Notwithstanding the foregoing, you may not transfer
+education, pre-release, or not for resale copies of the
+Software.  
+
+5. Intellectual Property Ownership, Copyright
+Protection. The Software and any authorized copies that you
+make are the intellectual property of and are owned by Adobe
+Systems Incorporated and its suppliers. The structure,
+organization and code of the Software are the valuable trade
+secrets and confidential information of Adobe Systems
+Incorporated and its suppliers. The Software is protected by
+law, including without limitation the copyright laws of the
+United States and other countries, and by international treaty
+provisions. Except as expressly stated herein, this Agreement
+does not grant you any intellectual property rights in the
+Software and all rights not expressly granted are reserved by
+Adobe and its suppliers.  
+
+6. Updates. 
+If the Software is an Update to a previous version of the 
+Software, you must possess a valid license to such previous 
+version in order to Use such Update. All Updates are provided 
+to you on a license exchange basis. You agree that by Using an 
+Update you voluntarily terminate your right to use any previous 
+version of the Software. As an exception, you may continue to 
+Use previous versions of the Software on your Computer after you 
+Use the Update but only to assist you in the transition to the 
+Update, provided that: (a) the Update and the previous versions 
+are installed on the same computer; (b) the previous versions or
+copies thereof are not transferred to another party or
+Computer unless all copies of the Update are also transferred
+to such party or Computer; and (c) you acknowledge that any
+obligation Adobe may have to support the previous versions of
+the Software may be ended upon availability of the Update.
+
+7. NO WARRANTY. 
+The Software is being delivered to you "AS IS" and Adobe makes 
+no warranty as to its use or performance. Adobe provides no 
+technical support, warranties or remedies for the Software. 
+ADOBE AND ITS SUPPLIERS DO NOT AND CANNOT WARRANT THE 
+PERFORMANCE OR RESULTS YOU MAY OBTAIN BY USING THE SOFTWARE. 
+EXCEPT FOR ANY WARRANTY, CONDITION, REPRESENTATION OR TERM TO 
+THE EXTENT TO WHICH THE SAME CANNOT OR MAY NOT BE EXCLUDED OR 
+LIMITED BY LAW APPLICABLE TO YOU IN YOUR JURISDICTION, ADOBE AND 
+ITS SUPPLIERS MAKE NO WARRANTIES CONDITIONS, REPRESENTATIONS, OR 
+TERMS (EXPRESS OR IMPLIED WHETHER BY STATUTE, COMMON LAW, CUSTOM, 
+USAGE OR OTHERWISE) AS TO ANY MATTER INCLUDING WITHOUT LIMITATION 
+NONINFRINGEMENT OF THIRD PARTY RIGHTS, MERCHANTABILITY, INTEGRATION, 
+SATISFACTORY QUALITY, OR FITNESS FOR ANY PARTICULAR PURPOSE. The 
+provisions of Section 7 and Section 8 shall survive the termination
+of this Agreement, howsoever caused, but this shall not imply or
+create any continued right to Use the Software after
+termination of this Agreement.  
+
+8. LIMITATION OF LIABILITY. 
+IN NO EVENT WILL ADOBE OR ITS SUPPLIERS BE LIABLE TO YOU FOR ANY
+DAMAGES, CLAIMS OR COSTS WHATSOEVER OR ANY CONSEQUENTIAL,
+INDIRECT, INCIDENTAL DAMAGES, OR ANY LOST PROFITS OR LOST
+SAVINGS, EVEN IF AN ADOBE REPRESENTATIVE HAS BEEN ADVISED OF
+THE POSSIBILITY OF SUCH LOSS, DAMAGES, CLAIMS OR COSTS OR FOR
+ANY CLAIM BY ANY THIRD PARTY. THE FOREGOING LIMITATIONS AND
+EXCLUSIONS APPLY TO THE EXTENT PERMITTED BY APPLICABLE LAW IN
+YOUR JURISDICTION. ADOBE'S AGGREGATE LIABILITY AND THAT OF ITS
+SUPPLIERS UNDER OR IN CONNECTION WITH THIS AGREEMENT SHALL BE
+LIMITED TO THE AMOUNT PAID FOR THE SOFTWARE, IF ANY. Nothing
+contained in this Agreement limits Adobe's liability to you in
+the event of death or personal injury resulting from Adobe's
+negligence or for the tort of deceit (fraud). Adobe is acting
+on behalf of its suppliers for the purpose of disclaiming,
+excluding and/or limiting obligations, warranties and
+liability as provided in this Agreement, but in no other
+respects and for no other purpose. For further information,
+please see the jurisdiction specific information at the end of
+this Agreement, if any, or contact Adobe's Customer Support
+Department.  
+
+9. Export Rules. 
+You agree that the Software will not be shipped, transferred or 
+exported into any country or used in any manner prohibited by 
+the United States Export Administration Act or any other export 
+laws, restrictions or regulations (collectively the "Export 
+Laws"). In addition, if the Software is identified as export 
+controlled items under the Export Laws, you represent and 
+warrant that you are not a citizen, or otherwise located within, 
+an embargoed nation (including without limitation Iran, Syria, 
+Sudan, Libya, Cuba, and North Korea) and that you are not 
+otherwise prohibited under the Export Laws from receiving the 
+Software. All rights to Use the Software are granted on 
+condition that such rights are forfeited if you fail to comply 
+with the terms of this Agreement.  
+
+10. Governing Law. 
+This Agreement will be governed by and construed in accordance 
+with the substantive laws in force: (a) in the State of 
+California, if a license to the Software is obtained when you 
+are in the United States, Canada, or Mexico; or (b) in Japan, 
+if a license to the Software is obtained when you are in 
+Japan, China, Korea, or other Southeast Asian country where all 
+official languages are written in either an ideographic script 
+(e.g., hanzi, kanji, or hanja), and/or other script based upon 
+or similar in structure to an ideographic script, such as 
+hangul or kana; or (c) England, if a license to the Software is
+purchased when you are in any other jurisdiction not described 
+above. The respective courts of Santa Clara County, California 
+when California law applies, Tokyo District Court in Japan, 
+when Japanese law applies, and the competent courts of England,
+when the law of England applies, shall each have non-exclusive
+jurisdiction over all disputes relating to this
+Agreement. This Agreement will not be governed by the conflict
+of law rules of any jurisdiction or the United Nations
+Convention on Contracts for the International Sale of Goods,
+the application of which is expressly excluded.  
+
+11. General Provisions. 
+If any part of this Agreement is found void and unenforceable, 
+it will not affect the validity of the balance of this Agreement, 
+which shall remain valid and enforceable according to its terms. 
+This Agreement shall not prejudice the statutory rights of any 
+party dealing as a consumer. This Agreement may only be modified 
+by a writing signed by an authorized officer of Adobe. Updates may
+be licensed to you by Adobe with additional or different terms. 
+This is the entire agreement between Adobe and you relating to the
+Software and it supersedes any prior representations, 
+discussions, undertakings, communications or advertising relating 
+to the Software.  
+
+12. Notice to U.S. Government End Users. 
+The Software and Documentation are "Commercial Items," as that
+term is defined at 48 C.F.R. Section 2.101, consisting of 
+"Commercial Computer Software" and "Commercial Computer 
+Software Documentation," as such terms are used in 48 C.F.R. 
+Section 12.212 or 48 C.F.R. Section 227.7202, as applicable. 
+Consistent with 48 C.F.R. Section 12.212 or 48 C.F.R. 
+Sections 227.7202-1 through 227.7202-4,as applicable, the 
+Commercial Computer Software and Commercial Computer 
+Software Documentation are being licensed to U.S. 
+Government end users (a) only as Commercial Items and (b)
+with only those rights as are granted to all other end users
+pursuant to the terms and conditions herein. 
+Unpublished-rights reserved under the copyright laws
+of the United States. Adobe Systems Incorporated, 345 Park
+Avenue, San Jose, CA 95110-2704, USA. For U.S. Government End
+Users, Adobe agrees to comply with all applicable equal
+opportunity laws including, if appropriate, the provisions of
+Executive Order 11246, as amended, Section 402 of the Vietnam
+Era Veterans Readjustment Assistance Act of 1974 (38 USC
+4212), and Section 503 of the Rehabilitation Act of 1973, as
+amended, and the regulations at 41 CFR Parts 60-1 through
+60-60, 60-250, and 60-741. The affirmative action clause and
+regulations contained in the preceding sentence shall be
+incorporated by reference in this Agreement.  
+
+13. Compliance with Licenses. 
+If you are a business or organization, you agree that upon 
+request from Adobe or Adobe's authorized representative, 
+you will within thirty (30) days fully document and certify 
+that use of any and all Software at the time of the request 
+is in conformity with your valid licenses from Adobe.  
+
+14. Specific Provisions and Exceptions.
+14.1 Limited Warranty for Users Residing in Germany or
+Austria. If you obtained the Software in Germany or
+Austria, and you usually reside in such country, then
+Section 7 does not apply, instead, Adobe warrants that
+the Software provides the functionalities set forth in
+the Documentation (the "agreed upon functionalities")
+for the limited warranty period following receipt of the
+Software when used on the recommended hardware
+configuration. As used in this Section, "limited
+warranty period" means one (1) year if you are a
+business user and two (2) years if you are not a
+business user. Non-substantial variation from the agreed
+upon functionalities shall not be considered and does
+not establish any warranty rights. THIS LIMITED WARRANTY
+DOES NOT APPLY TO SOFTWARE PROVIDED TO YOU FREE OF
+CHARGE, FOR EXAMPLE, UPDATES, PRE-RELEASE, TRYOUT,
+PRODUCT SAMPLER, NOT FOR RESALE (NFR) COPIES OF
+SOFTWARE, OR SOFTWARE THAT HAS BEEN ALTERED BY YOU, TO
+THE EXTENT SUCH ALTERATIONS CAUSED A DEFECT. To make a
+warranty claim, during the limited warranty period you
+must return, at our expense, the Software and proof of
+purchase to the location where you obtained it. If the
+functionalities of the Software vary substantially from
+the agreed upon functionalities, Adobe is entitled -- by
+way of re-performance and at its own discretion -- to
+repair or replace the Software. If this fails, you are
+entitled to a reduction of the purchase price
+(reduction) or to cancel the purchase agreement
+(rescission). For further warranty information, please
+contact Adobe's Customer Support Department
+
+14.2 Limitation of Liability for Users Residing in Germany
+and Austria.
+14.2.1 If you obtained the Software in Germany or Austria,
+and you usually reside in such country, then Section 8
+does not apply, Instead, subject to the provisions in
+Section 14.2.2, Adobe's statutory liability for
+damages shall be limited as follows: (i) Adobe shall
+be liable only up to the amount of damages as
+typically foreseeable at the time of entering into the
+purchase agreement in respect of damages caused by a
+slightly negligent breach of a material contractual
+obligation and (ii) Adobe shall not be liable for
+damages caused by a slightly negligent breach of a
+non-material contractual obligation.
+14.2.2 The aforesaid limitation of liability shall not
+apply to any mandatory statutory liability, in
+particular, to liability under the German Product
+Liability Act, liability for assuming a specific
+guarantee or liability for culpably caused personal
+injuries.
+14.2.3 You are required to take all reasonable measures to
+avoid and reduce damages, in particular to make
+back-up copies of the Software and your computer data
+subject to the provisions of this Agreement.
+
+14.3 Pre-release Product Additional Terms. If the product
+you have received with this license is pre-commercial
+release or beta Software ("Pre-release Software"), then
+the following Section applies. To the extent that any
+provision in this Section is in conflict with any other
+term or condition in this Agreement, this Section shall
+supercede such other term(s) and condition(s) with
+respect to the Pre-release Software, but only to the
+extent necessary to resolve the conflict. You
+acknowledge that the Software is a pre-release version,
+does not represent final product from Adobe, and may
+contain bugs, errors and other problems that could cause
+system or other failures and data loss. Consequently,
+the Pre-release Software is provided to you "AS-IS", and
+Adobe disclaims any warranty or liability obligations to
+you of any kind. WHERE LIABILITY CANNOT BE EXCLUDED FOR
+PRE-RELEASE SOFTWARE, BUT IT MAY BE LIMITED, ADOBE'S
+LIABILITY AND THAT OF ITS SUPPLIERS SHALL BE LIMITED TO
+THE SUM OF FIFTY DOLLARS (U.S. $50) IN TOTAL. You
+acknowledge that Adobe has not promised or guaranteed to
+you that Pre-release Software will be announced or made
+available to anyone in the future, Adobe has no express
+or implied obligation to you to announce or introduce
+the Pre-release Software and that Adobe may not
+introduce a product similar to or compatible with the
+Pre-release Software. Accordingly, you acknowledge that
+any research or development that you perform regarding
+the Pre-release Software or any product associated with
+the Pre-release Software is done entirely at your own
+risk. During the term of this Agreement, if requested by
+Adobe, you will provide feedback to Adobe regarding
+testing and use of the Pre-release Software, including
+error or bug reports. If you have been provided the
+Pre-release Software pursuant to a separate written
+agreement, such as the Adobe Systems Incorporated Serial
+Agreement for Unreleased Products, your use of the
+Software is also governed by such agreement. You agree
+that you may not and certify that you will not
+sublicense, lease, loan, rent, assign or transfer the
+Pre-release Software. Upon receipt of a later unreleased
+version of the Pre-release Software or release by Adobe
+of a publicly released commercial version of the
+Software, whether as a stand-alone product or as part of
+a larger product, you agree to return or destroy all
+earlier Pre-release Software received from Adobe and to
+abide by the terms of the license agreement for any such
+later versions of the Pre-release
+Software. Notwithstanding anything in this Section to
+the contrary, if you are located outside the United
+States of America, you agree that you will return or
+destroy all unreleased versions of the Pre-release
+Software within thirty (30) days of the completion of
+your testing of the Software when such date is earlier
+than the date for Adobe's first commercial shipment of
+the publicly released (commercial) Software.
+
+14.4 Settings Manager. Use of the Web Players, specifically
+the Flash Player, will enable the Software to store
+certain user settings as a local shared object on a your
+Computer. These settings are not associated with you,
+but allow you to configure certain settings within the
+Flash Player. You can find more information on local
+shared objects at
+http://www.adobe.com/software/flashplayer/security/ and
+more information on the Settings Manager at
+www.adobe.com/go/settingsmanager.
+
+If you have any questions regarding this Agreement or if you wish
+to request any information from Adobe please use the address and
+contact information included with this product or via the web at
+www.adobe.com to contact the Adobe office serving your
+jurisdiction
+
+Adobe, Authorware, Flash, Reader, and Shockwave are either
+registered trademarks or trademarks of Adobe Systems Incorporated
+in the United States and/or other countries.
+
+
+##############################################
+
+REALPLAYER 10
+
+Helix DNA Technology Binary Research Use License
+
+REDISTRIBUTION NOT PERMITTED
+
+This Helix DNA Technology Binary Research Use License ("License")
+is a legal agreement between You and RealNetworks, Inc. and its
+suppliers and licensors (collectively, "RealNetworks") for the
+binary versions of the Helix DNA Compiled Binaries distributed
+under this License ("Software"), which are made available from
+the "Helix DNA Compiled Binaries" section of the
+www.helixcommunity.org <http://www.helixcommunity.org/> Web site.
+"You" means an individual, or a legal entity acting by and
+through an individual or individuals, exercising rights either
+under this License. For legal entities, "You" includes any entity
+that by majority voting interest controls, is controlled by, or
+is under common control with You. The terms and conditions for
+this License are as follows:
+
+By clicking on or accepting the "ACCEPT" option below, or by
+installing, copying or otherwise using the Software, you agree to
+be bound by the terms of this License Agreement. IF YOU DO NOT
+AGREE TO THE TERMS OF THIS LICENSE AGREEMENT, CLICK THE "ACCEPT"
+BUTTON AND/OR DO NOT INSTALL THE SOFTWARE.
+
+YOU AGREE THAT YOUR USE OF THE SOFTWARE ACKNOWLEDGES THAT YOU
+HAVE READ THIS LICENSE, UNDERSTAND IT, AND AGREE TO BE BOUND BY
+ITS TERMS AND CONDITIONS.
+
+1. GRANT OF LICENSE FOR INTERNAL RESEARCH AND DEVELOPMENT WORK.
+Subject to the restrictions set forth herein, RealNetworks hereby
+grants to You a non-exclusive, non-sublicensable, personal
+license to use the Software in object code and any accompanying
+documentation ("Documentation") solely for Your internal,
+non-commercial evaluation and research use, provided that You may
+only install and use a reasonable number of copies of the
+Software on computers owned or controlled by You and located on
+Your premises. As part of such use You may combine the Software
+with other Helix software properly licensed to You under the
+terms of the RealNetworks Community Source License Agreement or
+the RealNetworks Public Source License Agreement, but You may not
+otherwise create derivative works of the Software or
+Documentation.
+
+2. LICENSE RESTRICTIONS.
+
+a) You may not: (i) permit other individuals to use the Software
+except under the terms listed above; (ii) modify, translate,
+reverse engineer, decompile, disassemble or use any other method
+(including "clean room" development) to learn the source code of
+the Software (except to the extent that this restriction is
+expressly prohibited by law); (iii) rent, lease, transfer, or
+otherwise transfer rights to the Software or Documentation; (iv)
+remove any proprietary notices or labels on the Software or
+Documentation; (v) use the Software to encode, reproduce or copy
+any material or intellectual property You do not have the right
+to encode, reproduce, or copy; (vi) use the Software to develop
+any application that has the capability of transcoding or
+converting RealAudio or RealVideo Files into any other file
+format ("Transcode" means to alter the current encoding or form
+of media files that was decoded from its original form, including
+by way of example but not limited to by way of example but not
+limited to: decompression of an audio or video stream and
+recompression using a different compression algorithm); or (vii)
+make available to any third party the results of any evaluation
+or testing of the Software by You under this License. Any such
+forbidden use shall immediately terminate Your license to the
+Software.
+
+b) You agree that You shall only use the Software and
+Documentation in a manner that complies with all applicable laws
+in the jurisdictions in which You use the Software and
+Documentation, including, but not limited to, applicable
+restrictions concerning copyright and other intellectual property
+rights.
+
+c) You may not use the Software in an attempt to, or in
+conjunction with, any device, program or service designed to
+circumvent technological measures employed to control access to,
+or the rights in, a digital media content file or other work
+protected by the copyright laws of any jurisdiction.
+
+d) Certain components of the Software may a serial copying
+management system required by the laws of the United States. You
+may not circumvent or attempt to circumvent this system by any
+means.
+
+3. COPIES OF SOFTWARE AND ENHANCEMENTS. This license does not
+grant You any right to any enhancement or update.
+
+4. TITLE. Title, ownership, rights, and intellectual property
+rights in and to the Software and Documentation shall remain in
+RealNetworks.  The Software is protected by the copyright laws of
+the United States and international copyright treaties. Title,
+ownership rights and intellectual property rights in and to the
+content accessed through the Software including the content
+contained in the Software media demonstration files shall be
+retained by the applicable content owner and may be protected by
+applicable copyright or other law. This license gives You no
+rights to such content.
+
+5. DISCLAIMER OF WARRANTY & LIMIT OF LIABILITY.  THE SOFTWARE AND
+DOCUMENTATION ARE PROVIDED "AS IS" WITHOUT WARRANTY OF ANY KIND.
+TO THE MAXIMUM EXTENT PERMITTED BY APPLICABLE LAW, REALNETWORKS
+FURTHER DISCLAIMS ALL WARRANTIES, INCLUDING WITHOUT LIMITATION
+ANY IMPLIED WARRANTIES OF MERCHANTABILITY, FITNESS FOR A
+PARTICULAR PURPOSE, AND NONINFRINGEMENT. THE ENTIRE RISK ARISING
+OUT OF THE USE OR PERFORMANCE OF THE SOFTWARE AND DOCUMENTATION
+REMAINS WITH YOU. TO THE MAXIMUM EXTENT PERMITTED BY APPLICABLE
+LAW, IN NO EVENT SHALL REALNETWORKS OR ITS SUPPLIERS BE LIABLE
+FOR ANY CONSEQUENTIAL, INCIDENTAL, INDIRECT, SPECIAL, PUNITIVE,
+OR OTHER DAMAGES WHATSOEVER (INCLUDING, WITHOUT LIMITATION,
+DAMAGES FOR LOSS OF BUSINESS PROFITS, BUSINESS INTERRUPTION, LOSS
+OF BUSINESS INFORMATION, OR OTHER PECUNIARY LOSS) ARISING OUT OF
+THIS LICENSE OR THE USE OF OR INABILITY TO USE THE PRODUCT, EVEN
+IF REALNETWORKS HAS BEEN ADVISED OF THE POSSIBILITY OF SUCH
+DAMAGES.  REALNETWORKS' TOTAL LIABLITY FOR ANY DIRECT DAMAGES
+SHALL NOT EXCEED FIVE DOLLARS ($5.00).  BECAUSE SOME
+STATES/JURISDICTIONS DO NOT ALLOW THE EXCLUSION OR LIMITATION OF
+LIABILITY FOR CONSEQUENTIAL OR INCIDENTAL DAMAGES, THE ABOVE
+LIMITATION MAY NOT APPLY TO YOU.
+
+6. INDEMNIFICATION. This Software is intended for use only with
+properly licensed media, content and content creation tools. It
+is Your responsibility to ascertain whether any copyright, patent
+or other licenses are necessary and to obtain any licenses to
+such media and content. You agree to use only those materials for
+which You have the necessary patent, copyright and other
+permissions, licenses, and/or clearances. You agree to hold
+harmless, indemnify and defend RealNetworks, its officers,
+directors and employees, from and against any losses, damages,
+fines and expenses (including attorneys' fees and costs) arising
+out of or relating to any claims that You have encoded, copied,
+compressed, enabled the "Allow Recording" feature, enabled the
+"Allow Download" feature, or copied, used, published, displayed,
+or transmitted any content or materials (other than materials
+provided by RealNetworks specifically for Your use) in connection
+with the Software in violation of another party's rights If You
+are importing the Software from the United States, You shall
+indemnify and hold RealNetworks harmless from and against any
+import and export duties or other claims arising from such
+importation. 
+
+7. TERMINATION. This License and Your right to use this Software
+automatically terminate if You fail to comply with any material
+provision of this License. RealNetworks may terminate this
+License at any time by delivering notice to You and You may
+terminate this License at any time by destroying or erasing Your
+copy of the Software. Upon termination of this License, You agree
+to destroy or erase the Software.
+
+8. NO ASSIGNMENT. This License is personal to You, and may not be
+assigned without RealNetworks' express written consent.
+
+9. U.S. GOVERNMENT RESTRICTED RIGHTS. U.S.  GOVERNMENT RESTRICTED
+RIGHTS: This Software and documentation are provided with
+RESTRICTED RIGHTS. Use, duplication or disclosure by the
+Government is subject to restrictions set forth in subparagraphs
+(a) through (d) of the Commercial Computer Software--Restricted
+Rights at FAR 52.227-19 when applicable, or in subparagraph
+(c)(1)(ii) of the Rights in Technical Data and Computer Software
+clause at DFARS 252.227-7013, and in similar clauses in the NASA
+FAR supplement, as applicable.  Manufacturer is RealNetworks,
+Inc./2601 Elliott, Suite 1000/Seattle, Washington 98121.  You are
+responsible for complying with all trade regulations and laws
+both foreign and domestic. You acknowledge that none of the
+Software or underlying information or technology may be
+downloaded or otherwise exported or re-exported (i) into (or to a
+national or resident of) Cuba, Iraq, Libya, Sudan, North Korea,
+Iran, Syria or any other country subject to a U.S. embargo; or
+(ii) to anyone on the U.S. Treasury Department's list of
+Specially Designated Nationals or the U.S.  Commerce Department's
+Denied Parties List or Entity List. By using the Software You are
+agreeing to the foregoing and are representing and warranting
+that (i) no U.S. federal agency has suspended, revoked, or denied
+You export privileges, (ii) You are not located in or under the
+control of a national or resident of any such country or on any
+such list, and (iii) You will not export or re-export the
+Software to any prohibited county, or to any prohibited person,
+entity, or end-user as specified by U.S. export controls.
+
+10. MISCELLANEOUS. This License Agreement shall constitute the
+complete and exclusive agreement between us. A separate written
+agreement with respect to the subject matter hereof shall
+supersede this instrument to the extent indicated in such
+separate agreement. This License Agreement may not be modified
+except in a writing duly signed by an authorized representative
+of RealNetworks and You. If any provision of this License
+Agreement is held to be unenforceable for any reason, such
+provision shall be reformed only to the extent necessary to make
+it enforceable, and such decision shall not affect the
+enforceability of such provision under other circumstances, or of
+the remaining provisions hereof under all circumstances. This
+License Agreement shall be governed by the laws of the State of
+Washington without regard to conflicts of law provisions and You
+consent to the exclusive jurisdiction of the state and federal
+courts sitting in the State of Washington. This License Agreement
+will not be governed by the United Nations Convention of
+Contracts for the International Sale of Goods, the application of
+which is hereby expressly excluded. 
+
+Copyright (C)1995-2004 RealNetworks, Inc.  and/or its suppliers.
+2601 Elliott Avenue, Suite 1000, Seattle, Washington 98121 U.S.A.
+The Software may incorporate one or more of the following
+patents: U.S.  Patent #5,917,835; U.S. Patent # 5,854,858; U.S.
+Patent # 5,917,954.  Other U.S. patents pending. All rights
+reserved. RealNetworks, Helix, RealAudio, and RealVideo are
+trademarks or registered trademarks of RealNetworks, Inc.  
+
+By Clicking the "ACCEPT" button below you are agreeing to the
+Helix DNA Technology Binary Research Use License
+
+
+##############################################
+
+Sun Microsystems, Inc.  Binary Code License Agreement for the:
+JAVATM 2 RUNTIME ENVIRONMENT (J2RE), STANDARD EDITION, VERSION
+1.4.2_X
+
+SUN MICROSYSTEMS, INC. ("SUN") IS WILLING TO LICENSE THE SOFTWARE
+IDENTIFIED BELOW TO YOU ONLY UPON THE CONDITION THAT YOU ACCEPT
+ALL OF THE TERMS CONTAINED IN THIS BINARY CODE LICENSE AGREEMENT
+AND SUPPLEMENTAL LICENSE TERMS (COLLECTIVELY "AGREEMENT").
+PLEASE READ THE AGREEMENT CAREFULLY.  BY DOWNLOADING OR
+INSTALLING THIS SOFTWARE, YOU ACCEPT THE TERMS OF THE AGREEMENT.
+INDICATE ACCEPTANCE BY SELECTING THE "ACCEPT" BUTTON AT THE
+BOTTOM OF THE AGREEMENT. IF YOU ARE NOT WILLING TO BE BOUND BY
+ALL THE TERMS, SELECT THE "DECLINE" BUTTON AT THE BOTTOM OF THE
+AGREEMENT AND THE DOWNLOAD OR INSTALL PROCESS WILL NOT CONTINUE.
+
+1. DEFINITIONS. "Software" means the identified above in binary
+form, any other machine readable materials (including, but not
+limited to, libraries, source files, header files, and data
+files), any updates or error corrections provided by Sun, and any
+user manuals, programming guides and other documentation provided
+to you by Sun under this Agreement.  "Programs" mean Java applets
+and applications intended to run on the Java 2 Platform, Standard
+Edition (J2SETM platform) platform on Java-enabled general
+purpose desktop computers and servers.
+
+2. LICENSE TO USE. Subject to the terms and conditions of this
+Agreement, including, but not limited to the Java Technology
+Restrictions of the Supplemental License Terms, Sun grants you a
+non-exclusive, non-transferable, limited license without license
+fees to reproduce and use internally Software complete and
+unmodified for the sole purpose of running Programs.  Additional
+licenses for developers and/or publishers are granted in the
+Supplemental License Terms.
+
+3. RESTRICTIONS. Software is confidential and copyrighted. Title
+to Software and all associated intellectual property rights is
+retained by Sun and/or its licensors. Unless enforcement is
+prohibited by applicable law, you may not modify, decompile, or
+reverse engineer Software.  You acknowledge that Licensed
+Software is not designed or intended for use in the design,
+construction, operation or maintenance of any nuclear facility.
+Sun Microsystems, Inc. disclaims any express or implied warranty
+of fitness for such uses. No right, title or interest in or to
+any trademark, service mark, logo or trade name of Sun or its
+licensors is granted under this Agreement. Additional
+restrictions for developers and/or publishers licenses are set
+forth in the Supplemental License Terms.
+
+4. LIMITED WARRANTY.  Sun warrants to you that for a period of
+ninety (90) days from the date of purchase, as evidenced by a
+copy of the receipt, the media on which Software is furnished (if
+any) will be free of defects in materials and workmanship under
+normal use.  Except for the foregoing, Software is provided "AS
+IS".  Your exclusive remedy and Sun's entire liability under this
+limited warranty will be at Sun's option to replace Software
+media or refund the fee paid for Software. Any implied warranties
+on the Software are limited to 90 days. Some states do not allow
+limitations on duration of an implied warranty, so the above may
+not apply to you. This limited warranty gives you specific legal
+rights. You may have others, which vary from state to state.
+
+5. DISCLAIMER OF WARRANTY.  UNLESS SPECIFIED IN THIS AGREEMENT,
+ALL EXPRESS OR IMPLIED CONDITIONS, REPRESENTATIONS AND
+WARRANTIES, INCLUDING ANY IMPLIED WARRANTY OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE OR NON-INFRINGEMENT ARE
+DISCLAIMED, EXCEPT TO THE EXTENT THAT THESE DISCLAIMERS ARE HELD
+TO BE LEGALLY INVALID.  
+
+6. LIMITATION OF LIABILITY.  TO THE EXTENT NOT PROHIBITED BY LAW,
+IN NO EVENT WILL SUN OR ITS LICENSORS BE LIABLE FOR ANY LOST
+REVENUE, PROFIT OR DATA, OR FOR SPECIAL, INDIRECT, CONSEQUENTIAL,
+INCIDENTAL OR PUNITIVE DAMAGES, HOWEVER CAUSED REGARDLESS OF THE
+THEORY OF LIABILITY, ARISING OUT OF OR RELATED TO THE USE OF OR
+INABILITY TO USE SOFTWARE, EVEN IF SUN HAS BEEN ADVISED OF THE
+POSSIBILITY OF SUCH DAMAGES.  In no event will Sun's liability to
+you, whether in contract, tort (including negligence), or
+otherwise, exceed the amount paid by you for Software under this
+Agreement.  The foregoing limitations will apply even if the
+above stated warranty fails of its essential purpose. Some states
+do not allow the exclusion of incidental or consequential
+damages, so some of the terms above may not be applicable to you.
+
+7. SOFTWARE UPDATES FROM SUN. You acknowledge that at your
+request or consent optional features of the Software may
+download, install, and execute applets, applications, software
+extensions, and updated versions of the Software from Sun
+("Software Updates"), which may require you to accept updated
+terms and conditions for installation. If additional terms and
+conditions are not presented on installation, the Software
+Updates will be considered part of the Software and subject to
+the terms and conditions of the Agreement.
+
+8. SOFTWARE FROM SOURCES OTHER THAN SUN. You acknowledge that, by
+your use of optional features of the Software and/or by
+requesting services that require use of the optional features of
+the Software, the Software may automatically download, install,
+and execute software applications from sources other than Sun
+("Other Software"). Sun makes no representations of a
+relationship of any kind to licensors of Other Software. TO THE
+EXTENT NOT PROHIBITED BY LAW, IN NO EVENT WILL SUN OR ITS
+LICENSORS BE LIABLE FOR ANY LOST REVENUE, PROFIT OR DATA, OR FOR
+SPECIAL, INDIRECT, CONSEQUENTIAL, INCIDENTAL OR PUNITIVE DAMAGES,
+HOWEVER CAUSED REGARDLESS OF THE THEORY OF LIABILITY, ARISING OUT
+OF OR RELATED TO THE USE OF OR INABILITY TO USE OTHER SOFTWARE,
+EVEN IF SUN HAS BEEN ADVISED OF THE POSSIBILITY OF SUCH DAMAGES.
+Some states do not allow the exclusion of incidental or
+consequential damages, so some of the terms above may not be
+applicable to you. 
+
+9. TERMINATION.  This Agreement is effective until terminated.
+You may terminate this Agreement at any time by destroying all
+copies of Software.  This Agreement will terminate immediately
+without notice from Sun if you fail to comply with any provision
+of this Agreement.  Either party may terminate this Agreement
+immediately should any Software become, or in either party's
+opinion be likely to become, the subject of a claim of
+infringement of any intellectual property right. Upon
+Termination, you must destroy all copies of Software.
+
+10. EXPORT REGULATIONS. All Software and technical data delivered
+under this Agreement are subject to US export control laws and
+may be subject to export or import regulations in other
+countries.  You agree to comply strictly with all such laws and
+regulations and acknowledge that you have the responsibility to
+obtain such licenses to export, re-export, or import as may be
+required after delivery to you.
+
+11. TRADEMARKS AND LOGOS. You acknowledge and agree as between
+you and Sun that Sun owns the SUN, SOLARIS, JAVA, JINI, FORTE,
+and iPLANET trademarks and all SUN, SOLARIS, JAVA, JINI, FORTE,
+and iPLANET-related trademarks, service marks, logos and other
+brand designations ("Sun Marks"), and you agree to comply with
+the Sun Trademark and Logo Usage Requirements currently located
+at http://www.sun.com/policies/trademarks. Any use you make of
+the Sun Marks inures to Sun's benefit.
+
+12. U.S. GOVERNMENT RESTRICTED RIGHTS.  If Software is being
+acquired by or on behalf of the U.S. Government or by a U.S.
+Government prime contractor or subcontractor (at any tier), then
+the Government's rights in Software and accompanying
+documentation will be only as set forth in this Agreement; this
+is in accordance with 48 CFR 227.7201 through 227.7202-4 (for
+Department of Defense (DOD) acquisitions) and with 48 CFR 2.101
+and 12.212 (for non-DOD acquisitions).
+
+13. GOVERNING LAW.  Any action related to this Agreement will be
+governed by California law and controlling U.S. federal law.  No
+choice of law rules of any jurisdiction will apply.
+
+14. SEVERABILITY. If any provision of this Agreement is held to
+be unenforceable, this Agreement will remain in effect with the
+provision omitted, unless omission would frustrate the intent of
+the parties, in which case this Agreement will immediately
+terminate.
+
+15. INTEGRATION.  This Agreement is the entire agreement between
+you and Sun relating to its subject matter.  It supersedes all
+prior or contemporaneous oral or written communications,
+proposals, representations and warranties and prevails over any
+conflicting or additional terms of any quote, order,
+acknowledgment, or other communication between the parties
+relating to its subject matter during the term of this Agreement.
+No modification of this Agreement will be binding, unless in
+writing and signed by an authorized representative of each party.
+
+SUPPLEMENTAL LICENSE TERMS
+
+These Supplemental License Terms add to or modify the terms of
+the Binary Code License Agreement. Capitalized terms not defined
+in these Supplemental Terms shall have the same meanings ascribed
+to them in the Binary Code License Agreement . These Supplemental
+Terms shall supersede any inconsistent or conflicting terms in
+the Binary Code License Agreement, or in any license contained
+within the Software.
+
+A. Software Internal Use and Development License Grant. Subject
+to the terms and conditions of this Agreement, including, but not
+limited to the Java Technology Restrictions of these Supplemental
+Terms, Sun grants you a non-exclusive, non-transferable, limited
+license without fees to reproduce internally and use internally
+the Software complete and unmodified for the purpose of
+designing, developing, and testing your Programs.
+
+B. License to Distribute Software. Subject to the terms and
+conditions of this Agreement, including, but not limited to the
+Java Technology Restrictions of these Supplemental Terms, Sun
+grants you a non-exclusive, non- transferable, limited license
+without fees to reproduce and distribute the Software, provided
+that (i) you distribute the Software complete and unmodified
+(unless otherwise specified in the applicable README file) and
+only bundled as part of, and for the sole purpose of running,
+your Programs, (ii) the Programs add significant and primary
+functionality to the Software, (iii) you do not distribute
+additional software intended to replace any component(s) of the
+Software (unless otherwise specified in the applicable README
+file), (iv) you do not remove or alter any proprietary legends or
+notices contained in the Software, (v) you only distribute the
+Software subject to a license agreement that protects Sun's
+interests consistent with the terms contained in this Agreement,
+and (vi) you agree to defend and indemnify Sun and its licensors
+from and against any damages, costs, liabilities, settlement
+amounts and/or expenses (including attorneys' fees) incurred in
+connection with any claim, lawsuit or action by any third party
+that arises or results from the use or distribution of any and
+all Programs and/or Software.
+
+C. License to Distribute Redistributables.  Subject to the terms
+and conditions of this Agreement, including but not limited to
+the Java Technology Restrictions of these Supplemental Terms, Sun
+grants you a non- exclusive, non-transferable, limited license
+without fees to reproduce and distribute those files specifically
+identified as redistributable in the Software "README" file
+("Redistributables") provided that: (i) you distribute the
+Redistributables complete and unmodified (unless otherwise
+specified in the applicable README file), and only bundled as
+part of Programs, (ii) you do not distribute additional software
+intended to supersede any component(s) of the Redistributables
+(unless otherwise specified in the applicable README file), (iii)
+you do not remove or alter any proprietary legends or notices
+contained in or on the Redistributables, (iv) you only distribute
+the Redistributables pursuant to a license agreement that
+protects Sun's interests consistent with the terms contained in
+the Agreement, (v) you agree to defend and indemnify Sun and its
+licensors from and against any damages, costs, liabilities,
+settlement amounts and/or expenses (including attorneys' fees)
+incurred in connection with any claim, lawsuit or action by any
+third party that arises or results from the use or distribution
+of any and all Programs and/or Software.
+
+D. Java Technology Restrictions. You may not modify the Java
+Platform Interface ("JPI", identified as classes contained within
+the "java" package or any subpackages of the "java" package), by
+creating additional classes within the JPI or otherwise causing
+the addition to or modification of the classes in the JPI.  In
+the event that you create an additional class and associated
+API(s) which (i) extends the functionality of the Java platform,
+and (ii) is exposed to third party software developers for the
+purpose of developing additional software which invokes such
+additional API, you must promptly publish broadly an accurate
+specification for such API for free use by all developers. You
+may not create, or authorize your licensees to create, additional
+classes, interfaces, or subpackages that are in any way
+identified as "java", "javax", "sun" or similar convention as
+specified by Sun in any naming convention designation.
+
+E. Source Code. Software may contain source code that, unless
+expressly licensed for other purposes, is provided solely for
+reference purposes pursuant to the terms of this Agreement.
+Source code may not be redistributed unless expressly provided
+for in this Agreement.
+
+F. Third Party Code. Additional copyright notices and license
+terms applicable to portions of the Software are set forth in the
+THIRDPARTYLICENSEREADME.txt file. In addition to any terms and
+conditions of any third party opensource/freeware license
+identified in the THIRDPARTYLICENSEREADME.txt file, the
+disclaimer of warranty and limitation of liability provisions in
+paragraphs 5 and 6 of the Binary Code License Agreement shall
+apply to all Software in this distribution.
+
+For inquiries please contact: Sun Microsystems, Inc., 4150
+Network Circle, Santa Clara, California 95054, U.S.A.
+(LFI#135003/Form ID#011801)
+
+
+##############################################
+
+AGFA MONOTYPE CORPORATION END USER LICENSE AGREEMENT
+
+We recommend that you print this End User Agreement for further
+reference.
+
+This Agfa Monotype Corporation End User Agreement (the
+"Agreement") becomes a binding contract between you and Agfa
+Monotype Corporation (a) when you click on the area marked
+"ACCEPT LICENSE AGREEMENT", or, (b) if you are acquiring Font
+Software on a floppy disk, when you open the package in which the
+font is contained. If you do not wish to be bound by the
+Agreement, you cannot access, use or download the Font Software.
+Please read all of the Agreement before you agree to be bound by
+its terms and conditions.
+
+You hereby agree to the following: 1.You are bound by the
+Agreement and you acknowledge that all Use (as defined herein) of
+the Font Software (as defined herein) supplied to you by AMT is
+governed by the Agreement. 
+
+2."AMT" as used herein shall mean collectively Agfa Monotype
+Corporation, its successors and assigns, its parent and
+affiliated corporations, its authorized distributors, and any
+third party which has licensed to AMT any or all of the
+components of the Font Software supplied to you pursuant to the
+Agreement.
+
+3."Font Software" as used herein shall mean software which, when
+used on an appropriate device or devices, generates typeface and
+typographic designs and ornaments. Font Software shall include
+all bitmap representations of typeface and typographic designs
+and ornaments created by or derived from the Font Software. Font
+Software includes upgrades, updates, related files, permitted
+modifications, permitted copies, and related documentation.
+
+4."Basic Licensed Unit" as used herein shall mean up to five (5)
+Workstations (as defined herein) connected to no more than one
+(1) printer with a non-volatile memory (for example, a hard
+drive), all located at a single geographic location. If you
+intend to use the Font Software on more equipment than permitted
+by a Basic Licensed Unit, you must create an "Expanded Licensed
+Unit" by obtaining from AMT, for an additional fee, a site
+license for all such equipment. "Licensed Unit" as used herein
+shall mean a Basic Licensed Unit or an Expanded Licensed Unit as
+is appropriate to the context in which the term is used. If you
+have acquired an entire Font Software Library (that is, a single
+license for Font Software for 500 or more different typeface
+designs) and you use such Font Software Library only at a single
+geographic location, then "Licensed Unit" shall mean up to twenty
+(20) Workstations connected to no more than two (2) printers with
+non- volatile memories at such geographic location.  
+
+5."Use" of the Font Software shall occur when an individual is
+able to give commands (whether by keyboard or otherwise) that are
+followed by the Font Software, regardless of the location in
+which the Font Software resides.
+
+6."Derivative Work" shall mean binary data based upon or derived
+from Font Software (or any portion of Font Software) in any form
+in which such binary data may be recast, transformed, or adapted
+including, but not limited to, binary data in any format into
+which Font Software may be converted.
+
+7."Personal or Internal Business Use" shall mean Use of the Font
+Software for your customary personal or internal business
+purposes and shall not mean any distribution whatsoever of the
+Font Software or any component or Derivative Work thereof.
+"Personal or Internal Business Use" shall not include any Use of
+the Font Software by persons that are not members of your
+immediate household, your authorized employees, or your
+authorized agents. All such household members, employees and
+agents shall be notified by you as to the terms and conditions of
+the Agreement and shall agree to be bound by it before they can
+have Use of the Font Software.
+
+8."Workstation" as used herein shall mean a component in which an
+individual is able to give commands (whether by keyboard or
+otherwise) that are followed by the Font Software, regardless of
+the location in which the Font Software resides.
+
+9."Commercial Product" as used herein shall mean an electronic
+document or data file created by Use of the Font Software which
+is offered for distribution to the general public (or to some
+subset of the general public) as a commercial product in exchange
+for a separate fee or other consideration. By way of illustration
+and not by way of limitation, an electronic book or magazine
+distributed for a fee shall be considered a Commercial Product; a
+document distributed in connection with a commercial transaction
+in which the consideration is unrelated to such document (for
+example, a business letter, a ticket for an event, or a receipt
+for purchase of tangible goods such as clothing) shall not be
+considered a Commercial Product. 
+
+10.You are hereby granted a non-exclusive, non-assignable,
+non-transferable (except as expressly permitted herein) license
+to access the Font Software (i) only in a Licensed Unit, (ii)
+only for your Personal or Internal Business Use, and (iii) only
+subject to all of the terms and conditions of the Agreement. You
+have no rights to the Font Software other than as expressly set
+forth in the Agreement. You agree that AMT owns all right, title
+and interest in and to the Font Software, its structure,
+organization, code, and related files, including all property
+rights therein such as copyright, design and trademarks rights.
+You agree that the Font Software, its structure, organization,
+code, and related files are valuable property of AMT and that any
+intentional Use of the Font Software not expressly permitted by
+the Agreement constitutes a theft of valuable property. All
+rights not expressly granted in the Agreement are expressly
+reserved to AMT. You may not use the Font Software to
+electronically distribute a Commercial Document without a
+separate license from AMT authorizing you to do so.
+
+11.You may install and Use the Font Software on a single file
+server for Use on a single local area network ("LAN") only when
+the Use of such Font Software is limited to the Workstations and
+printers that are part of the Licensed Unit of which the server
+is a part.  For the purpose of determining the proper number of
+Workstations for which a license is needed, the following example
+is supplied for illustration purposes only: If there are 100
+Workstations connected to the server, with no more than 15
+Workstations ever using the Font Software concurrently, but the
+Font Software will be used on 25 different Workstations at
+various points in time, a site license must be obtained creating
+a Licensed Unit for 25 Workstations. The Font Software may not be
+installed or Used on a server that can be accessed via the
+Internet or other external network system (a system other than a
+LAN) by Workstations which are not part of a Licensed Unit.
+
+12.You may electronically distribute Font Software embedded in a
+"Personal or Internal Business Use" document (that is, a document
+other than a "Commercial Product" as defined herein) only when
+the Font Software embedded in such document (i) is in a static
+graphic image (for example, a "gif") or an embedded electronic
+document, and (ii) is distributed in a secure format that permits
+only the viewing and printing (and not the editing, altering,
+enhancing, or modifying) of such static graphic image or embedded
+document. You may not embed Font Software in a Commercial Product
+without a separate written license from AMT, and you may not
+embed Font Software in an electronic document or data file for
+any reason other than your own Personal or Internal Business Use.
+
+13.You may not alter Font Software for the purpose of adding any
+functionality which such Font Software did not have when
+delivered to you by AMT. If the Font Software contains embedding
+bits that limit the capabilities of the Font Software, you may
+not change or alter the embedding bits. Font Software may not be
+used to create or distribute any electronic document in which the
+Font Software, or any part thereof, is embedded in a format that
+permits editing, alterations, enhancements, or modifications by
+the recipient of such document. If you have reason to believe
+that a recipient of an electronic document possesses the
+capability to edit, alter, enhance, or modify such electronic
+document even though you have distributed it in a format which
+does not permit such editing, alteration, enhancement, or
+modification, you shall not transmit such document to such
+person. 
+
+14.You may take a digitized copy of the Font Software used for a
+particular document, or Font Software embedded in an electronic
+document, to a commercial printer or service bureau for use by
+the printer or service in printing such document but only if the
+printer or service bureau represents to you that it has purchased
+or been granted a license to use that particular Font Software. 
+
+15.You acknowledge that the Font Software is protected by the
+copyright and other intellectual property law of the United
+States and its various States, by the copyright and design laws
+of other nations, and by international treaties. You agree to
+treat the Font Software as you would any other copyrighted
+material, such as a book. You may not copy the Font Software,
+except as expressly provided herein. Any copies that you are
+expressly permitted to make pursuant to the Agreement must
+contain the same copyright, trademark, and other proprietary
+notices that appear on or in the Font Software. You agree not to
+adapt, modify, alter, translate, convert, or otherwise change the
+Font Software, or to create Derivative Works from Font Software
+or any portion thereof. You further agree not to use Font
+Software in connection with software and/or hardware which create
+Derivative Works of such Font Software. You agree not to reverse
+engineer, decompile, disassemble, or otherwise attempt to
+discover the source code of the Font Software, provided, however,
+that if you are located in a European Community member country or
+any other country which provides rights materially similar to the
+rights set forth in this proviso, you may reverse engineer or
+decompile the Font Software only to the extent that sufficient
+information is not available for the purpose of creating an
+interoperable software program (but only for such purpose and
+only to the extent that sufficient information is not provided by
+AMT upon written request). You agree to use trademarks associated
+with the Font Software according to accepted trademark practice,
+including identification of the trademark owner’s name.
+Trademarks can only be used to identify printed output produced
+by the Font Software. The use of any trademark as herein
+authorized does not give you any rights of ownership in that
+trademark and all use of any trademark shall inure to the sole
+benefit of AMT. You may not change any trademark or trade name
+designation for the Font Software.
+
+16. You may not rent, lease, sublicense, give, lend, or further
+distribute the Font Software, or any copy thereof, except as
+expressly provided herein. You may transfer all your rights to
+use the Font Software to another person or legal entity provided
+that (i) the transferee accepts and agrees to be bound by all the
+terms and conditions of the Agreement, and (ii) you destroy all
+copies of the Font Software, including all copies stored in the
+memory of a hardware device. If you are a business or
+organization, you agree that upon request from AMT or AMT's
+authorized representative, you will with thirty (30) days fully
+document and certify that use of any and all AMT Font Software at
+the time of the request is in conformity with your valid licences
+from AMT.
+
+17.You may make one back-up copy of Font Software for archival
+purposes only, and you shall retain exclusive custody and control
+over such copy. Upon termination of the Agreement, you must
+destroy the original and any and all copies of the Font Software.
+
+18.AMT warrants to you that the Font Software will perform
+substantially in accordance with its documentation for the ninety
+(90) day period following delivery of the Font Software.  To make
+a warranty claim, you must, within the ninety (90) day warranty
+period, return the Font Software to the location from which you
+obtained it along with a copy of your receipt or, if such Font
+Software is acquired on-line, contact the on-line provider with
+sufficient information regarding your acquisition of the Font
+Software so as to enable AMT to verify the existence and date of
+the transaction. If the Font Software does not perform
+substantially in accordance with its documentation, the entire,
+exclusive, and cumulative liability and remedy shall be limited
+to the refund of the license fee you paid to AMT to obtain
+delivery of the Font Software. AMT DOES NOT WARRANT THE
+PERFORMANCE OR RESULTS YOU MAY OBTAIN BY USING THE FONT SOFTWARE.
+THE FOREGOING STATES THE SOLE AND EXCLUSIVE REMEDIES FOR AMT’S
+BREACH OF WARRANTY. EXCEPT FOR THE FOREGOING LIMITED WARRANTY,
+AMT MAKES NO REPRESENTATIONS OR WARRANTIES, EXPRESS OR IMPLIED,
+AS TO NON- NFRINGEMENT OF THIRD PARTY RIGHTS, MERCHANTABILITY, OR
+FITNESS FOR ANY PARTICULAR PURPOSE. IN NO EVENT WILL AMT BE
+LIABLE TO YOU OR ANYONE ELSE (I) FOR ANY CONSEQUENTIAL,
+INCIDENTAL OR SPECIAL DAMAGES, INCLUDING WITHOUT LIMITATION ANY
+LOST PROFITS, LOST DATA, LOST BUSINESS OPPORTUNITIES, OR LOST
+SAVINGS, EVEN IF AMT HAS BEEN ADVISED OF THE POSSIBILITY OF SUCH
+DAMAGES, OR (II) FOR ANY CLAIM AGAINST YOU BY ANY THIRD PARTY
+SEEKING SUCH DAMAGES EVEN IF AMT HAS BEEN ADVISED OF THE
+POSSIBILITY OF SUCH DAMAGES.
+
+Some states or jurisdictions do not allow the exclusions of
+limitations of incidental, consequential or special damages, so
+the above exclusion may not apply to you. Also, some states or
+jurisdictions do not allow the exclusions of implied warranties
+or limitations on how long an implied warranty may last, so the
+above limitations may not apply to you. To the greatest extent
+permitted by law, any implied warranties not effectively excluded
+by the Agreement are limited to ninety (90) days.  Some
+jurisdictions do not permit a limitation of implied warranties
+where the product results in physical injury or death so that
+such limitations may not apply to you. In those jurisdictions,
+you agree that AMT’s liability for such physical injury or death
+shall not exceed One Hundred Thousand Dollars (U.S.  $100,000),
+provided that such jurisdictions permit a limitation of such
+liability. This warranty gives you specific legal rights. You may
+have other rights that vary from state to state or jurisdiction
+to jurisdiction. The Font Software is non-returnable and
+nonrefundable.
+
+19. The Agreement will be governed by the laws of Illinois
+applicable to contracts wholly entered and performable within
+such state. All disputes related to the Agreement shall be heard
+in the Circuit Court of Cook County, Illinois, U.S.A. or the
+United States District Court for the Northern District of
+Illinois, Chicago, Illinois U.S.A. Both you and AMT agree to the
+personal jurisdiction and venue of these courts in any action
+related to the Agreement.  The Agreement will not be governed by
+the United Nations Convention of Contracts for the International
+Sale of Goods, the application of which is expressly excluded. If
+any part of this Agreement is found void and unenforceable, it
+will not affect the validity of the balance of the Agreement,
+which shall remain valid and enforceable according to its terms.
+
+20.The Agreement shall automatically terminate upon failure by
+you (or any authorized person or member of your immediate
+household to whom you have given permission to Use the Font
+Software) to comply with its terms. The termination of the
+Agreement shall not preclude AMT from suing you for damages of
+any breach of the Agreement. The Agreement may only be modified
+in writing signed by an authorized officer of AMT. You agree that
+the Font Software will not be shipped, transferred or exported
+into any country or used in any manner prohibited by the United
+States Export Administration or any applicable export laws,
+restrictions or regulations.
+
+21.You have the rights expressly set forth in the Agreement and
+no other. All rights in and to the Font Software, including
+unpublished rights, are reserved under the copyright laws of the
+United States and other jurisdictions.  All rights reserved.
+Notwithstanding the foregoing, to the extent that any law,
+statute, treaty, or governmental regulation shall be deemed by a
+court of competent jurisdiction to provide you with any
+additional or different rights from those provided herein and
+such rights shall be deemed non-waiveable as a matter of law and
+to supersede the rights specifically provided herein, then such
+law, statute, treaty, or governmental regulation shall be deemed
+to be made a part of the Agreement. To the extent that any such
+rights created by any law, statute, treaty or governmental
+regulation are waiveable, you agree that your acceptance of the
+Agreement shall constitute an effective and irrevocable waiver of
+such rights. The Agreement may be enforced by AMT or by an
+authorized dealer acting on behalf of AMT.
+
+22.If this product is acquired under the terms of a (i) GSA
+contract - use, reproduction or disclosure is subject to the
+restrictions set forth in the applicable ADP Schedule contract,
+(ii) DOD contract - use, duplication or disclosure by the
+Government is subject to the applicable restrictions set forth in
+DFARS 252.277-7013; (iii) Civilian agency contract - use,
+reproduction, or disclosure is subject to FAR 52.277-19(a)
+through (d) and restrictions set forth in the Agreement. 
+
+"Monotype" is a trademark of Agfa Monotype Limited registered in
+the U.S. Patent and Trademark Office and elsewhere. All other
+trademarks are the property of their respective owners.
+
+
+#############################################
+
+END-USER LICENSE AGREEMENT FOR BRAINSTORM COURSEWARE SOFWARE
+Single User License (1 users)
+
+
+PLEASE READ THIS SOFTWARE LICENSE AGREEMENT CAREFULLY. BY
+DOWNLOADING, INSTALLING OR USING THE SOFTWARE YOU INDICATE
+ACCEPTANCE OF AND AGREE TO THE TERMS AND CONDITIONS OF THIS
+AGREEMENT. IF YOU DO NOT AGREE TO THESE TERMS AND CONDITIONS, DO
+NOT DOWNLOAD, INSTALL OR USE THE SOFTWARE. THIS AGREEMENT DOES
+NOT SUPERCEDE ANY OTHER WRITTEN AGREEMENT BETWEEN YOU AND
+BRAINSTORM, INC.
+
+THIS PRODUCT IS LICENSED FOR USE BY 1 INDIVIDUAL USER.  IT CANNOT
+BE SOLD OR OTHERWISE DISTRIBUTED. IT IS NOT LICENSED FOR USE ON A
+NETWORK OR OTHER SHARED DEVICES.  NETWORKABLE LICENSES ARE
+AVAILABLE.  PLEASE CONTACT BRAINSTORM AT 1.801.229.1337 FOR MORE
+INFORMATION.
+
+This agreement (the “Agreement”) is made between BrainStorm,
+Inc., (“BSI”) and the recipient party (“Licensee”). The terms and
+conditions of this Agreement are intended by the parties as a
+final expression of their agreement with respect to the subject
+matter hereof and may not be contradicted by evidence of any
+prior or contemporaneous agreement unless such agreement is
+signed by both parties. In the absence of such an agreement, this
+Agreement shall constitute the complete and exclusive statement
+of the terms and conditions and no extrinsic evidence whatsoever
+may be introduced in any judicial proceeding which may involve
+the Agreement. This Agreement may not be modified except by a
+writing executed by both parties hereto.
+
+
+SECTION 1. GENERAL PROVISIONS.
+
+The provisions of this Section 1 shall apply to any and all
+Software, as defined below.
+
+1.1 Software. For the purpose of this Agreement, the licensed
+computer software program(s) downloaded and/or installed and the
+supporting documentation for such will be referred to as the
+“Software.”
+
+1.2 Restrictions. BSI reserves any rights not expressly granted
+to Licensee and retains title and full ownership rights under the
+copyright laws of the United States or any other jurisdiction or
+under any federal, state, or foreign laws. BSI is not obligated
+to provide and Licensee acquires no right of any kind with
+respect to any source code for the Software. Licensee agrees that
+it has no right whatsoever to modify the Software or any portion
+thereof in any manner. Licensee shall not, nor permit any third
+party to reverse engineer, decompile, disassemble or otherwise
+reduce the Software to any other humanly perceivable form, and
+may not modify, adapt, rent, lease, loan or create derivative
+works based upon the Software or any part thereof.
+
+1.3 Export Law Assurances. Licensee shall not export or
+re-export, or allow the export or re-export of the Software or
+any copy, portion or direct product of the foregoing, in
+violation of any export laws, restrictions, national security
+controls or regulations of the United States or other applicable
+foreign agency or authority.
+ 
+1.4 Limitation of Remedies and Damages. IN NO EVENT WILL BSI, ITS
+SUBSIDIARIES OR ANY OF THE LICENSORS, DIRECTORS, OFFICERS,
+EMPLOYEES OR AFFILIATES OF ANY OF THE FOREGOING BE LIABLE TO
+LICENSEE UNDER ANY CONTRACT, NEGLIGENCE, STRICT LIABILITY OR
+OTHER LEGAL OR EQUITABLE THEORY FOR ANY CONSEQUENTIAL,
+INCIDENTAL, INDIRECT OR SPECIAL DAMAGES WHATSOEVER (INCLUDING,
+BUT NOT LIMITED TO, DAMAGES FOR LOSS OF BUSINESS PROFITS,
+BUSINESS INTERRUPTION, LOSS OF BUSINESS INFORMATION AND THE
+LIKE), WHETHER FORESEEABLE OR UNFORESEEABLE, OR FOR COST OF
+PROCUREMENT OF SUBSTITUTE GOODS, TECHNOLOGY OR
+SERVICES,REGARDLESS OF THE BASIS OF THE CLAIM AND EVEN IF BSI OR
+A BSI REPRESENTATIVE HAS BEEN ADVISED OF THE POSSIBILITY OF SUCH
+DAMAGE. BSI’S CUMULATIVE LIABILITY FOR DAMAGES FOR ANY CAUSE
+WHATSOEVER, AND REGARDLESS OF THE FORM OF THE ACTION, WILL BE
+LIMITED TO NO GREATER THAN THE AMOUNT OF MONEY PAID TO BSI FOR
+THE SOFTWARE THAT CAUSED THE DAMAGES. NO ACTION MAY BE BROUGHT
+AGAINST BSI LATER THAN ONE YEAR FROM THE TERMINATION OF THIS
+AGREEMENT.
+
+1.5 Nondisclosure. “Confidential Information” shall be defined to
+include Software, source code, object code, documentation and any
+proprietary tools, proprietary knowledge or proprietary
+methodologies disclosed by BSI to Licensee under or relating to
+this Agreement. Licensee shall observe complete confidentiality
+with respect to the Confidential Information, and shall use its
+best efforts and take all reasonable steps to protect the
+Confidential Information from any use, reproduction, publication,
+disclosure, or distribution except as specifically authorized by
+this Agreement. Licensee shall promptly notify BSI of any known
+unauthorized use or disclosure of the Confidential Information
+and will cooperate with BSI in any litigation brought by BSI
+against third parties to protect its proprietary rights.
+
+1.6 Assignment. Licensee may not assign or transfer its rights
+and obligations under this Agreement without prior written
+approval by BSI and any purported assignment or transfer without
+BSI’s consent shall be null and void.
+
+1.7 Injunctive Relief. Licensee hereby expressly agrees that BSI,
+in addition to any other rights or remedies which BSI may
+possess, shall be entitled to injunctive and other equitable
+relief without having to post bond or other security to prevent a
+material breach or continuing material breach of this Agreement.
+
+1.8 Software Supplied to the Government. The Software is a
+“commercial item,” “commercial computer software” and/or
+“commercial computer software documentation.” Consistent with
+DFAR section 227.7202 and FAR section 12.212, any use,
+modification, reproduction, release, performance, display,
+disclosure or distribution of the Software by the U.S. government
+shall be governed solely by the terms of this Agreement and shall
+be prohibited except to the extent expressly permitted herein.
+
+1.9 Survival. Sections 1.2, 1.3, 1.4, 1.5, 1.7, 1.9, 1.10, 1.11
+and 1.12 shall survive termination of this Agreement for any
+reason whatsoever.
+
+1.10 Warranties. THE LIMITED WARRANTIES AS DESCRIBED IN SECTION
+2.3 OF THIS AGREEMENT ARE THE ONLY WARRANTIES PROVIDED BY BSI AND
+ITS LICENSORS, WHO EXPRESSLY DISCLAIM ALL OTHER WARRANTIES,
+EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO IMPLIED
+WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR
+PURPOSE WITH REGARD TO THE SOFTWARE AND ACCOMPANYING WRITTEN
+MATERIALS.
+
+1.11 Term and Termination. This Agreement is effective for the
+term of the license grant unless sooner terminated, either
+through mutual agreement by the parties or by Licensee’s material
+breach of the Agreement; provided, however, Licensee shall have
+ten (10) days from written notice to cure any such breach if
+curable. Upon any termination Licensee must immediately destroy
+the Software and all accompanying written materials and all
+copies thereof (including copies stored in computer memory) and
+shall so certify to BSI in writing.
+
+1.12 General. This Agreement will be construed under the laws of
+the State of Utah, except for that body of law dealing with
+conflicts of law and the U.N. Convention of Contracts for the
+Sale of International Goods, which shall not apply. In the event
+there is a dispute concerning the subject matter of this
+Agreement, the proper venue shall be the County of Utah, State of
+Utah, United States of America. Each party hereby waives
+opposition to jurisdiction in such court. Service of process can
+be done in accordance with the governing law of the Agreement.
+Performance of any obligation required by a party hereunder may
+be waived only by a written waiver signed by the other party,
+which waiver shall be effective only with respect to the specific
+obligation described therein. If any provision of this Agreement
+shall be held by a court of competent jurisdiction to be contrary
+to law, that provision will be enforced to the maximum extent
+permissible, and the remaining provisions of this Agreement will
+remain in full force and effect.
+
+
+SECTION 2. “FULL” LICENSE TERMS AND CONDITIONS.
+
+The provisions of this Section 2 shall apply to Software licensed
+with no time limits.
+
+2.1 LICENSE. Subject to the terms and conditions of this
+Agreement and upon Licensee’s full payment of the applicable
+fees, the Software shall be licensed, not sold, to Licensee by
+BSI. The “License” granted hereunder shall be perpetual,
+non-exclusive, and non-sublicensable, and is defined as
+Licensee’s right to:
+
+(a) For the number of copies licensed, Licensee may Use one (1)
+copy of the Software. “Use” shall mean Licensee may install, use,
+access, run, or otherwise interact with the Software in
+accordance with the applicable documentation and the license
+grant specified by BSI. The Software may not be installed,
+accessed, displayed, run, shared, or used concurrently on or from
+different computers, including a workstation, terminal, or other
+digital electronic devise.
+
+(b) For the number of copies licensed, Licensee may make one copy
+(in machine-readable form only) of each copy of the Software
+licensed hereunder solely for backup or disaster recovery
+purposes. However, Licensee must reproduce each such copy without
+modification, including all copyright and other proprietary
+notices that are on the originalcopy.
+
+2.2 Maintenance and support. BSI shall provide the Software to
+you electronically, either pre-loaded or on media in
+machine-readable form. This license does not grant you any right
+to any enhancement or update to the Software. Enhancements and
+updates, if available, may be obtained by you at BSI's then
+current standard pricing, terms and conditions. This Agreement
+does not grant you any rights to receive Support from BSI with
+respect to the Software. Support, if available, must be purchased
+separately and will be governed by a separate agreement.
+
+2.3 Limited Warranty. BSI warrants that it or its licensors
+retain(s) all intellectual property rights in the Software and
+any accompanying written materials provided by BSI, including but
+not limited to copyright, and that it has the legal right to
+grant Licensee the License granted under this Agreement.  BSI
+also warrants for a period of thirty (30) days from the delivery
+date of the Software that (i) the media provided by BSI, if any,
+on which the Software is recorded will be free from material
+defects in materials and workmanship under normal use, and (ii)
+the operation of the Software, as provided by BSI, will
+substantially conform to BSI’s published documentation for the
+Software. In the event Licensee notifies BSI during the warranty
+period that the Software does not meet these standards, BSI
+shall, at its sole option and expense, either replace the media,
+refund the purchase price, or repair or replace the Software as
+Licensee’s sole and exclusive remedy.
+ 
+THIS LIMITED WARRANTY IS THE ONLY WARRANTY PROVIDED BY BSI WITH
+RESPECT TO THE SOFTWARE LICENSED UNDER THIS SECTION 2, AND BSI
+EXPRESSLY DISCLAIMS ALL OTHER WARRANTIES, EXPRESS OR IMPLIED,
+INCLUDING BUT NOT LIMITED TO THE IMPLIED WARRANTIES OF
+MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE.

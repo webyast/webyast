@@ -1,0 +1,112 @@
+ACCORD DE LICENCE
+openSUSE(r) 11.1
+
+Cet accord régit le téléchargement, l’installation et l’utilisation
+d’openSUSE 11.1 et de ses mises à jour, quel que soit le mode de livraison.
+openSUSE 11.1 est une œuvre collective protégée par les lois sur les droits
+d’auteur en vigueur aux États-Unis. Conformément aux termes suivants, le
+Projet openSUSE vous concède une licence d’utilisation de cette œuvre
+collective dans le cadre de la Licence Publique Générale de GNU version 2.
+En téléchargeant, installant ou en utilisant openSUSE 11.1, vous acceptez
+les termes du présent accord.
+
+openSUSE 11.1 est un système d’exploitation Linux modulaire qui inclut des
+centaines de composants logiciels. L’accord de licence de chaque composant
+se trouve généralement dans le code source du composant. À l’exception de
+certains fichiers contenant la marque « openSUSE » décrite ci-dessous, les
+termes de l’accord de licence de ces composants vous autorisent à copier et
+redistribuer le composant. À l’exception de certains fichiers de
+micrologiciels, les termes de l’accord de licence des composants vous
+autorisent à copier, modifier et redistribuer le composant, à la fois sous
+la forme de code source et de code binaire. Cet accord ne limite pas les
+droits qui vous sont concédés par les termes d’un accord de licence d’un
+composant spécifique et ne vous concède pas de droits qui annulent et
+remplacent lesdits termes.
+
+openSUSE 11.1 et chacun de ses composants, y compris code source,
+documentation, apparence, structure et organisation, sont protégés par des
+droits d’auteur du Projet openSUSE et autres et par des lois sur les droits
+d’auteur et autres. Le titre de propriété d’openSUSE 11.1 et de ses
+composants, ou de toute copie, modification ou partie fusionnée, restera la
+propriété de la partie susmentionnée, conformément aux termes de l’accord
+de licence applicables. « openSUSE » est une marque de Novell, Inc. aux
+États-Unis et dans d’autres pays et est utilisée sous autorisation. Le
+présent accord vous autorise à distribuer des copies non modifiées
+d’openSUSE 11.1 en utilisant la marque « openSUSE » sous réserve que vous
+respectiez les directives relatives à la marque du Projet openSUSE
+disponibles à l’adresse suivante : http://www.opensuse.org/Legal. Vous
+devez vous conformer à ces directives lorsque vous distribuez openSUSE
+11.1, qu’openSUSE 11.1 ait été modifié ou non.
+
+À l’exception de ce qui est prévu dans le présent accord ou dans un accord
+de licence d’un composant spécifique, DANS LA LIMITE AUTORISÉE PAR LA LOI,
+OPENSUSE 11.1 ET LES COMPOSANTS SONT FOURNIS ET CONCÉDÉS SOUS LICENCE « EN
+L’ÉTAT » SANS GARANTIE DE QUELQUE NATURE QU’ELLE SOIT, EXPLICITE OU
+IMPLICITE, Y COMPRIS LES GARANTIES IMPLICITES DE QUALITÉ MARCHANDE, DE
+PROPRIÉTÉ, D’ABSENCE DE CONTREFAÇON OU D’ADÉQUATION À UN BUT PARTICULIER.
+Le Projet openSUSE ne garantit pas que les fonctionnalités d’openSUSE 11.1
+répondront à vos besoins ou qu’openSUSE 11.1 fonctionnera sans erreur ou
+tel que décrit dans la documentation qui l’accompagne. L’USAGE QUE VOUS
+FEREZ D’OPENSUSE 11.1 ENGAGE VOTRE SEULE RESPONSABILITÉ.
+
+DANS LA LIMITE AUTORISÉE PAR LA LOI, LE PROJET OPENSUSE ET SES CONCÉDANTS,
+FILIALES ET EMPLOYÉS, NE POURRONT EN AUCUN CAS ÊTRE TENUS POUR RESPONSABLES
+DES PRÉJUDICES DIRECTS, ACCESSOIRES, INDIRECTS, DE PERTE FINANCIÈRE OU DE
+MANQUE À GAGNER RÉSULTANT DE L’UTILISATION D’OPENSUSE 11.1 OU DE
+L’IMPOSSIBILITÉ DE L’UTILISER ET CE, MÊME DANS LE CAS OÙ ILS SERAIENT
+INFORMÉS DE L’ÉVENTUALITÉ DE TELS PRÉJUDICES. DANS UNE JURIDICTION QUI
+LIMITE L’EXCLUSION OU LA LIMITATION DES PRÉJUDICES, LA RESPONSABILITÉ
+GLOBALE DU PROJET OPENSUSE, DE SES CONCÉDANTS, FILIALES ET EMPLOYÉS, NE
+POURRA EXCÉDER 50 USD, OU SI UNE TELLE LIMITATION EST INTERDITE, LA LIMITE
+AUTORISÉE PAR LA LOI.
+
+Conformément à la législation américaine, vous déclarez ce suit : (a)
+openSUSE 11.1 est soumis aux Export Administration Regulations (« EAR ») du
+Département américain du Commerce en matière de contrôle des exportations ;
+(b) vous ne résidez pas dans un pays de destination faisant l’objet d’une
+interdiction dans le cadre des EAR ou réglementations américaines en
+matière de sanctions ; (c) vous n’exporterez, ne réexporterez ou ne
+transférerez pas openSUSE 11.1 vers toute destination, entité ou tout
+individu faisant l’objet de restrictions sans obtenir les licences ou
+autorisations d’exportation nécessaires de la part de l’administration
+américaine ; (d) vous n’utiliserez pas ni ne transférerez openSUSE 11.1
+pour des utilisations finales dans une technologie de missile, d’armes
+nucléaires, chimiques ou biologiques sauf autorisation par l’administration
+américaine dans le cadre d’une réglementation ou d’une licence spécifique ;
+(e) vous acceptez que si vous résidez aux États-Unis et exportez ou
+transférez openSUSE 11.1 vers des utilisateurs éligibles, tel que le
+requiert la section EAR Section 741.17(e), vous devrez soumettre des
+rapports semestriels au Bureau of Industry & Security (BIS) du Département
+américain du Commerce, comprenant le nom et l’adresse (ainsi que le pays)
+de chacun des bénéficiaires ; et (f) vous acceptez que des pays autres que
+les États-Unis peuvent restreindre l’importation, l’utilisation ou
+l’exportation de logiciels de chiffrement et vous assumez l’entière
+responsabilité du respect desdites restrictions.
+
+Si une quelconque stipulation du présent accord est jugée inapplicable,
+elle n’affectera pas la force exécutoire des autres stipulations. Le
+présent accord sera régi par les lois de l’État de l’Utah et des
+États-Unis, nonobstant les conflits de principes juridiques, excepté que la
+Convention des Nations Unies sur les contrats de vente internationale de
+marchandises ne s’applique pas au présent contrat. Cet accord constitue la
+totalité de l’accord existant entre vous et le Projet openSUSE, et ne peut
+être modifié qu’au moyen d’un document écrit signé par les deux parties.
+Toute renonciation à un droit prévu par le présent accord devra, pour
+prendre effet, être formulée par écrit et signée par un représentant dûment
+autorisé de la partie concernée. Une renonciation à un droit passé ou
+présent, en relation avec la violation d’une clause ou un manquement, ne
+saurait être interprétée comme une renonciation à un droit futur découlant
+des termes du présent accord. Toute utilisation, reproduction ou
+divulgation de la part de l’administration des États-Unis est soumise aux
+limitations prévues par les dispositions légales suivantes : FAR 52.227-14
+(juin 1987) Alternate III (juin 1987), FAR 52.227-19 (juin 1987) ou DFARS
+252.227-7013 (b)(3) (novembre 1995), ou par les clauses ultérieures
+appliquées en remplacement des dispositions légales précitées.
+
+Copyright (c) 2008 Projet openSUSE. Tous droits réservés. « Novell » et «
+openSUSE » sont des marques de Novell, Inc., qui les a créées et les
+sponsorise, et est désigné par l’expression Projet openSUSE. « Linux » est
+une marque déposée de Linus Torvalds. Toutes les marques sont la propriété
+de leurs détenteurs respectifs.
+
+ 
