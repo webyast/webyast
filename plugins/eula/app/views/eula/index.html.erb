@@ -1,0 +1,13 @@
+<h1><%= @node -%> licenses overview</h1>
+<table>
+<tr><th>EULA</th><th>Accepted?</th></tr>
+<% @licenses.each_with_index do |license,index| -%>
+<tr>
+  <td>
+   <%= link_to license.name, :only_path => :true, :controller => "eulas", :action => :show, :id => index -%>
+  </td><td>
+   <%= license.accepted ? "v" : "x" -%>
+  </td>
+</tr>
+<% end -%>
+</table>

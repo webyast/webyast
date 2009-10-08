@@ -1,0 +1,19 @@
+<h1><%= @node -%> EULAS - <%= @license.name -%></h1><br/>
+<table>
+<tr>
+  <td>Accepted?</td>
+  <td><%= @license.accepted.to_s -%></td>
+</tr>
+<tr>
+  <td>Only show?</td>
+  <td><%= @license.only_show.to_s -%></td>
+</tr>
+<tr>
+  <td>Available translations:</td>
+  <td><%= @license.langs_list.join(", ") -%></td>
+</tr>
+<tr>
+  <td>Current translation:</td>
+  <td><%= @license.text_lang -%></td>
+</tr>
+</table>
