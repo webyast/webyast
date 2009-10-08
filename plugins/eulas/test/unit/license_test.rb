@@ -1,6 +1,11 @@
 require File.expand_path(File.dirname(__FILE__) + "/../test_helper")
 
 class LicenseTest < ActiveSupport::TestCase
+  def setup
+    License.const_set 'RESOURCES_DIR', File.join(File.dirname(__FILE__),"..","..","test","share")
+    License.const_set 'VAR_DIR'      , File.join(File.dirname(__FILE__),"..","..","test","var")
+  end
+
   def test_create
     license = License.find 1
     assert_not_nil license

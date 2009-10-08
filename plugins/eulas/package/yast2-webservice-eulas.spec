@@ -50,6 +50,11 @@ Authors:
 #
 # Install all web and frontend parts.
 #
+mkdir -p $RPM_BUILD_ROOT/usr/share/%{pkg_user}/%{plugin_name}
+mv config/resources/licenses $RPM_BUILD_ROOT/usr/share/%{pkg_user}/%{plugin_name}/
+
+mkdir -p $RPM_BUILD_ROOT/var/lib/%{pkg_user}/%{plugin_name}/accepted-licenses
+
 mkdir -p $RPM_BUILD_ROOT/srv/www/%{pkg_user}/vendor/plugins/%{plugin_name}
 cp -a * $RPM_BUILD_ROOT/srv/www/%{pkg_user}/vendor/plugins/%{plugin_name}
 #FIXME maybe location change in future
@@ -69,6 +74,8 @@ rm -rf $RPM_BUILD_ROOT
 %dir /srv/www/%{pkg_user}/vendor/plugins/%{plugin_name}
 %dir /srv/www/%{pkg_user}/vendor/plugins/%{plugin_name}/doc
 %dir /srv/www/%{pkg_user}/vendor/plugins/%{plugin_name}/var
+%dir /usr/share/%{pkg_user}/%{plugin_name}
+%dir /var/lib/%{pkg_user}/%{plugin_name}
 /srv/www/%{pkg_user}/vendor/plugins/%{plugin_name}/MIT-LICENSE
 /srv/www/%{pkg_user}/vendor/plugins/%{plugin_name}/README
 /srv/www/%{pkg_user}/vendor/plugins/%{plugin_name}/Rakefile
@@ -80,5 +87,8 @@ rm -rf $RPM_BUILD_ROOT
 #/srv/www/%{pkg_user}/vendor/plugins/%{plugin_name}/tasks
 #/srv/www/%{pkg_user}/vendor/plugins/%{plugin_name}/test
 /srv/www/%{pkg_user}/vendor/plugins/%{plugin_name}/doc/README_FOR_APP
+/usr/share/%{pkg_user}/%{plugin_name}/licenses
 %config /etc/YaST2/eulas.yml
+%defattr(-,%{pkg_user},%{pkg_user})
+%dir /var/lib/%{pkg_user}/%{plugin_name}/accepted-licenses
 
