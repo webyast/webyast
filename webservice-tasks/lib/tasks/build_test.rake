@@ -19,8 +19,9 @@ task :'build_test'  do
     `rm -rf package/www 'YaST:Web/#{package_name}/*'`  
     `cp package/* 'YaST:Web/#{package_name}'`
     Dir.chdir File.join(Dir.pwd, "YaST:Web", package_name)
-    puts "start building package. output will appear at the end."
-    puts `osc build`
+    puts "building package"
+    # long running, `foo` would only show output at the end
+    system "osc build"
     if $?.exitstatus != 0
       raise "Failed to build"
     end
