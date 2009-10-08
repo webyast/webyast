@@ -1,6 +1,6 @@
 # = Eula controller
 # Serves licences and handles notices about acceptations.
-class EulaController < ApplicationController
+class EulasController < ApplicationController
 
   before_filter :login_required
 
@@ -14,7 +14,8 @@ class EulaController < ApplicationController
    end
 
   def show
-    @license = License.find params[:id]
+    @id      = params[:id].to_i
+    @license = License.find @id
     if not params[:lang].nil? then @license.load_text params[:lang] end
     logger.debug @license.inspect
     respond_to do |format|

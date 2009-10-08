@@ -4,7 +4,7 @@
 <% @licenses.each_with_index do |license,index| -%>
 <tr>
   <td>
-   <%= link_to license.name, :only_path => :true, :controller => "eulas", :action => :show, :id => index -%>
+   <%= link_to license.name, :only_path => :true, :controller => "eulas", :action => :show, :id => (index+1) -%>
   </td><td>
    <%= license.accepted ? "v" : "x" -%>
   </td>

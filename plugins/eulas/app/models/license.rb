@@ -10,9 +10,8 @@ class License
   # :text_lang - language, of the current eula translation
   # :only_show - some licenses only need to be show and user doesn't have to change the radio button to "accept"
   # :accepted  - whether this license was already accepted
-  # :last      - true if this is the last unaccepted license. Set by controller.
 
-  attr_accessor :name, :langs_hash, :langs_list, :accepted, :text, :text_lang, :only_show, :last
+  attr_accessor :name, :langs_hash, :langs_list, :accepted, :text, :text_lang, :only_show
 
   RESOURCES_DIR = File.join(File.dirname(__FILE__),"..","..","config","resources")
   VAR_DIR       = File.join(File.dirname(__FILE__),"..","..","var")
@@ -55,32 +54,31 @@ class License
       raise CorruptedFileException.new license_dir
     end
     @name  = name
-    # @last is true if this is the last license to be accepted.
-    # this is to be set by class method
-    @last = false
   end
 
-  def self.find(name)
-    license = new name
-    # lets be sure, that @text and @text_lang is never nil
-    license.load_text "en"
-    license
+  def self.find(id)
+    name = license_names[id-1] # let ids in find start from 1
+    if name.nil? then
+      nil
+    else
+      license = new name
+      # lets be sure, that @text and @text_lang is never nil
+      license.load_text "en"
+      license
+    end
+  end
+
+  def self.license_names
+    config = YaST::ConfigFile.new(:eula)
+    begin
+      config["licenses"]
+    rescue Exception => e
+      raise CorruptedFileException.new config.path
+    end
   end
 
   def self.find_all
-    config = YaST::ConfigFile.new(:eula)
-    license_names = config["licenses"]
-    license_names.collect{|ln| new ln}
-  end
-
-  def self.next
-    all = find_all
-    unaccepted_count = all.inject(0){|sum,license| sum + (license.accepted ? 0 : 1)}
-    next_license = all.find{|license| not license.accepted}
-    if not next_license.nil? then
-      next_license.last = unaccepted_count == 1
-    end
-    next_license
+    Licenses.new license_names.collect{|ln| new ln}
   end
 
   def save
@@ -133,12 +131,12 @@ class License
       xml.name @name
       xml.accepted (@accepted, {:type => "boolean"})
       xml.last (@last, {:type => "boolean"})
-      xml.textlang @text_lang
       xml.availablelangs({:type => "array"}) do
         @langs_list.each do |lang| 
           xml.availablelang lang
         end
       end
+      xml.textlang @text_lang
       xml.text @text
     end
   end
@@ -149,3 +147,17 @@ class License
   end
 
 end
+
+class Licenses < Array
+  def to_xml( options = {} )
+    xml = options[:builder] ||= Builder::XmlMarkup.new(options)
+    xml.instruct! unless options[:skip_instruct]
+    xml.eulas(:type => :array) do
+      each {|eula| eula.to_xml(:builder => xml, :skip_instruct => true)}
+    end
+  end
+
+  def to_json
+    Hash.from_xml(to_xml).to_json
+  end
+end 
