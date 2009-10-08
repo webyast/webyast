@@ -9,9 +9,9 @@
 #
 
 
-Name:           yast2-webservice-eula
+Name:           yast2-webservice-eulas
 PreReq:         yast2-webservice
-Provides:       yast2-webservice:/srv/www/yastws/app/controllers/basesystem_controller.rb
+Provides:       yast2-webservice:/srv/www/yastws/app/controllers/eulas_controller.rb
 License:        MIT
 Group:          Productivity/Networking/Web/Utilities
 Autoreqprov:    on
@@ -19,7 +19,7 @@ Version:        0.0.2
 Release:        0
 Summary:        YaST2 - Webservice - EULA
 Source:         www.tar.bz2
-Source1:        eula.yml
+Source1:        eulas.yml
 BuildRoot:      %{_tmppath}/%{name}-%{version}-build
 BuildArch:      noarch
 BuildRequires:  rubygem-mocha
@@ -28,7 +28,7 @@ Requires:       yast2-country >= 2.18.9
 
 #
 %define pkg_user yastws
-%define plugin_name eula
+%define plugin_name eulas
 #
 
 
@@ -80,5 +80,5 @@ rm -rf $RPM_BUILD_ROOT
 #/srv/www/%{pkg_user}/vendor/plugins/%{plugin_name}/tasks
 #/srv/www/%{pkg_user}/vendor/plugins/%{plugin_name}/test
 /srv/www/%{pkg_user}/vendor/plugins/%{plugin_name}/doc/README_FOR_APP
-%config /etc/YaST2/eula.yml
+%config /etc/YaST2/eulas.yml
 

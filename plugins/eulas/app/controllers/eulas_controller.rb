@@ -14,9 +14,11 @@ class EulasController < ApplicationController
    end
 
   def show
+    raise InvalidParameters.new ({:id => 'MISSING'}) if params[:id].nil?
     @id      = params[:id].to_i
     @license = License.find @id
-    if not params[:lang].nil? then @license.load_text params[:lang] end
+    render ErrorResult.error(404, 1, "License not found") and return if @license.nil?
+    @license.load_text params[:lang] unless params[:lang].nil?
     logger.debug @license.inspect
     respond_to do |format|
       format.html
@@ -26,8 +28,10 @@ class EulasController < ApplicationController
   end
 
   def update
+    raise InvalidParameters.new ({:id => 'MISSING'}) if params[:id].nil?
     @license = License.find params[:id]
-    @license.accept = params[:license][:accept]
+    render ErrorResult.error(404, 1, "License not found") and return if @license.nil?
+    @license.accept = params[:eula][:accept]
     @license.save
     render :show
   end
