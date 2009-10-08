@@ -1,0 +1,5 @@
+
+interface: org.opensuse.yast.modules.eulas
+controller: eulas
+singular: false
+

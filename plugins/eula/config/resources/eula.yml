@@ -1,5 +1,0 @@
-
-interface: org.opensuse.yast.modules.eula
-controller: eula
-singular: true
-
