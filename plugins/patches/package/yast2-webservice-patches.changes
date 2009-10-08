@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Thu Oct  8 10:13:58 CEST 2009 - schubi@suse.de
+
+- Bugfixes in finding and installing a patch bnc #537660
+- version 0.0.4 
+
+-------------------------------------------------------------------
 Tue Sep 29 10:55:16 CEST 2009 - schubi@suse.de
 
 - cleanup DBUS-PackageKit interface 
