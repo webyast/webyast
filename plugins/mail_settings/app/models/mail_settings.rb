@@ -19,7 +19,10 @@ class MailSettings
     @user	= ""
     @smtp_server= ""
     @transport_layer_security	= "NONE"
+  end
 
+  # read the settings from system
+  def read
     yapi_ret = YastService.Call("YaPI::MailSettings::Read")
     if yapi_ret.has_key? "SendingMail"
       sending_mail	= yapi_ret["SendingMail"]
@@ -40,7 +43,8 @@ class MailSettings
       return true
     end
     parameters	= {
-      "Changed" => [ "i", 1],
+#      "Changed" => [ "i", 1],
+      "Changed" => [ "i", 0],
       "SendingMail" => ["a{sv}", {
 	  "Type"	=> [ "s", "relayhost"],
 	  "TLS"		=> [ "s", @transport_layer_security],

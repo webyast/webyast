@@ -11,6 +11,7 @@ class MailSettingsController < ApplicationController
     yapi_perm_check "mailsettings.read"
 
     @mail = MailSettings.instance
+    @mail.read
 
     respond_to do |format|
       format.html { render :xml => @mail.to_xml(:root => "mail_settings"), :location => "none" } #return xml only
@@ -26,6 +27,7 @@ class MailSettingsController < ApplicationController
     yapi_perm_check "mailsettings.write"
 	
     @mail = MailSettings.instance
+#    @mail.read only needed if we'd want to check the differences
     @mail.save(params["mail_settings"])
     show
   end
