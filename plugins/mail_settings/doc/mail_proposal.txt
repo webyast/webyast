@@ -1,0 +1,44 @@
+Mail server module proposal (fate #307142)
+---------------------------------------------
+
+Tasks: 
+    - configure the SMTP server used for sending mails:
+	- smtp server address
+	- authentication fields
+
+Model
+
+    singleton class Mail
+    
+    attributes
+	string smtp_server
+	string login
+	string password
+	string tls
+
+    access to the system:
+	YaPI::MailServer
+	YaPI::SERVICES
+
+
+Policies
+
+    org.opensuse.yast.modules.yapi.mail.read
+    org.opensuse.yast.modules.yapi.mail.write
+
+API
+
+    URL: /mail
+
+    REST service pseudo-code:
+
+    # GET method
+    def show
+
+	read and return current settings
+
+    # PUT method
+    def update (params)
+
+	save new settings: smtp server address and credentials
+	if there was a change, reload of postfix service is needed
