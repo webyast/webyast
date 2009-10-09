@@ -9,7 +9,7 @@ require File.expand_path( File.join("test","plugin_basic_tests"), RailsParent.pa
 class SystemtimeControllerTest < ActionController::TestCase
   fixtures :accounts
 
-    DATA = {:time => {
+    DATA = {:systemtime => {
       :timezone => "Europe/Prague",
       :utcstatus => "true"
     }}
@@ -44,8 +44,8 @@ class SystemtimeControllerTest < ActionController::TestCase
     YastService.stubs(:Call).with {
       |params,settings|
       params == "YaPI::TIME::Write" and
-        settings["timezone"] == DATA[:time][:timezone] and
-        settings["utcstatus"] == DATA[:time][:utcstatus] and
+        settings["timezone"] == DATA[:systemtime][:timezone] and
+        settings["utcstatus"] == DATA[:systemtime][:utcstatus] and
         ! settings.include?("currenttime")
     }
   end

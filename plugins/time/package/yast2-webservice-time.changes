@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Fri Oct  9 14:13:50 CEST 2009 - jreidinger@suse.cz
+
+- fix saving values as xml expect systemtime root and not time
+- version 0.0.5
+
+-------------------------------------------------------------------
 Thu Oct  1 13:20:12 CEST 2009 - jreidinger@suse.cz
 
 - adapt requirements for SLE11 appliances 

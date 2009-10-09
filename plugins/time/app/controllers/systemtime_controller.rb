@@ -17,8 +17,9 @@ class SystemtimeController < ApplicationController
   def update
     yapi_perm_check "time.write"
     
-    root = params[:time]
+    root = params[:systemtime]
     if root == nil
+      logger.error "Response doesn't contain systemtime key"
       raise InvalidParameters.new :timezone => "Missing"
     end
     
