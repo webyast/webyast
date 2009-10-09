@@ -27,7 +27,6 @@ class MailSettingsController < ApplicationController
     yapi_perm_check "mailsettings.write"
 	
     @mail = MailSettings.instance
-#    @mail.read only needed if we'd want to check the differences
     @mail.save(params["mail_settings"])
     show
   end

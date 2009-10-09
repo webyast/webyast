@@ -60,7 +60,11 @@ class MailSettings
     yapi_ret = YastService.Call("YaPI::MailSettings::Write", parameters)
     Rails.logger.debug "YaPI returns: '#{yapi_ret}'"
     raise MailSettingsError.new(yapi_ret) unless yapi_ret.empty?
-    # FIXME restart postfix...
+    Rails.logger.debug "reloading postfix service..."
+    yapi_ret = YastService.Call("YaPI::SERVICES::Execute", "postfix", "reload")
+    Rails.logger.debug "YaPI returns: '#{yapi_ret.inspect}'"
+    raise MailSettingsError.new(yapi_ret["stderr"]) unless yapi_ret["stderr"].empty?
+#    raise MailSettingsError.new(yapi_ret) unless yapi_ret.empty?
   end
 
   def to_xml( options = {} )
