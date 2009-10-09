@@ -38,21 +38,25 @@ class MailSettings
 
   # Save new mail settings
   def save(settings)
+
+    settings.each do |k, v|
+	settings[k] = "" if v.nil?
+    end
+
     if false # FIXME compare with current values... but do we know original password?
       Rails.logger.debug "nothing has been changed"
       return true
     end
     parameters	= {
-#      "Changed" => [ "i", 1],
-      "Changed" => [ "i", 0],
+      "Changed" => [ "i", 1],
       "SendingMail" => ["a{sv}", {
 	  "Type"	=> [ "s", "relayhost"],
-	  "TLS"		=> [ "s", @transport_layer_security],
+	  "TLS"		=> [ "s", settings["transport_layer_security"]],
 	  "RelayHost"	=> [ "a{sv}", {
-	      "Name"	=> [ "s", @smtp_server],
-	      "Auth"	=> [ "i", @user == "" ? 0 : 1],
-	      "Account"	=> [ "s", @user],
-	      "Password"=> [ "s", @password]
+	      "Name"	=> [ "s", settings["smtp_server"]],
+	      "Auth"	=> [ "i", settings["user"] == "" ? 0 : 1],
+	      "Account"	=> [ "s", settings["user"]],
+	      "Password"=> [ "s", settings["password"]]
 	  }]
       }]
     }
@@ -60,11 +64,11 @@ class MailSettings
     yapi_ret = YastService.Call("YaPI::MailSettings::Write", parameters)
     Rails.logger.debug "YaPI returns: '#{yapi_ret}'"
     raise MailSettingsError.new(yapi_ret) unless yapi_ret.empty?
-    Rails.logger.debug "reloading postfix service..."
+
     yapi_ret = YastService.Call("YaPI::SERVICES::Execute", "postfix", "reload")
     Rails.logger.debug "YaPI returns: '#{yapi_ret.inspect}'"
     raise MailSettingsError.new(yapi_ret["stderr"]) unless yapi_ret["stderr"].empty?
-#    raise MailSettingsError.new(yapi_ret) unless yapi_ret.empty?
+    true
   end
 
   def to_xml( options = {} )

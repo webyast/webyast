@@ -5,7 +5,6 @@ package YaPI::MailSettings;
 
 use strict;
 use ycp;
-#use YaST::YCP;
 use YaPI;
 use Data::Dumper;
 
