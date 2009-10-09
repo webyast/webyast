@@ -28,10 +28,10 @@ BuildRequires:  rubygem-yast2-webservice-tasks rubygem-restility
 # requires YaPI::USERS
 %if 0%{?suse_version} == 0 || %suse_version > 1110
 # 11.2 or newer
-Requires:       yast2-mail-server >= 2.18.2
+Requires:       yast2-mail >= 2.18.2
 %else
 # 11.1 or SLES11
-Requires:       yast2-mail-server >= 2.17.3
+Requires:       yast2-mail >= 2.17.3
 %endif
 
 #
