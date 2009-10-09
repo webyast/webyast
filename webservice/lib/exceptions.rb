@@ -33,8 +33,7 @@ class InvalidParameters < ArgumentError
   #
   # example::
   #   raise InvalidParameters.new {
-  #      :id => "MISSING"
-  #      :email => "NO@"
+  #      :email => "MISSING"
   #   }
   def initialize (constrains)
     @constrains = constrains
