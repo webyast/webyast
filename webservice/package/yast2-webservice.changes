@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Fri Oct  9 09:35:39 CEST 2009 - mvidner@suse.cz
+
+- Using TCP ports 4984 (REST), 54984 (UI).
+- 0.0.6
+
+-------------------------------------------------------------------
 Wed Oct  7 19:59:58 CEST 2009 - lslezak@suse.cz
 
 - Fixed static overlay when running in lighttpd server (bnc#544355)
