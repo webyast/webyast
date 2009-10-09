@@ -1,9 +1,18 @@
 require File.expand_path(File.dirname(__FILE__) + "/../test_helper")
 
 class LicenseTest < ActiveSupport::TestCase
+YAML_CONTENT = <<EOF
+licenses:
+  - openSUSE-11.1
+  - SLED-10-SP3
+EOF
+
   def setup
     License.const_set 'RESOURCES_DIR', File.join(File.dirname(__FILE__),"..","..","test","share")
     License.const_set 'VAR_DIR'      , File.join(File.dirname(__FILE__),"..","..","test","var")
+    YaST::ConfigFile.stubs(:read_file).returns(YAML_CONTENT)
+    YaST::ConfigFile.any_instance.stubs(:path).returns(__FILE__)
+
   end
 
   def test_create
