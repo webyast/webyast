@@ -43,7 +43,8 @@ class Registration
 
   def register
     puts "-> called registration.register"
-    @reg = YastService.Call("YSR::statelessregister", { 'ctx' => @context, 'arguments' => @arguments } )
+    # @reg = YastService.Call("YSR::statelessregister", { 'ctx' => @context, 'arguments' => @arguments } )
+    @reg = YastService.Call("YSR::statelessregister", { } )
     puts "-> YSR::stateless_register was called"
     puts @reg.inspect
     return @reg.inspect
