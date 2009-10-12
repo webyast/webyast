@@ -13,20 +13,25 @@ class Registration
 
   def initialize(hash)
     # set context defaults
-    @context = { 'yastcall'     => 1,
-                 'norefresh'    => 1,
-                 'restoreRepos' => 1,
-                 'forcereg'     => 0,
-                 'nohwdata'     => 1,
-                 'nooptional'   => 1,
-                 'logfile'      => '/root/.suse_register.log' }
+    @context = { 'yastcall'     => [ 'i', 1 ],
+                 'norefresh'    => [ 'i', 1 ],
+                 'restoreRepos' => [ 'i', 1 ],
+                 'forcereg'     => [ 'i', 0 ],
+                 'nohwdata'     => [ 'i', 1 ],
+                 'nooptional'   => [ 'i', 1 ],
+                 'debugMode'    => [ 'i', 2 ],
+                 'logfile'      => [ 's', '/root/.suse_register.log' ] }
+
+    # when hash is nil, ignore it
+    return if hash.nil?
 
     # merge custom context data
     if hash.class.to_s == 'Hash'
-      @context.merge hash
+       @context.merge hash
     else
       raise "Invalid or missing registration initialization context data."
     end
+
   end
 
   def set_context(hash)
@@ -42,21 +47,19 @@ class Registration
   end
 
   def register
-    puts "-> called registration.register"
     # @reg = YastService.Call("YSR::statelessregister", { 'ctx' => @context, 'arguments' => @arguments } )
-    @reg = YastService.Call("YSR::statelessregister", { } )
-    puts "-> YSR::stateless_register was called"
-    puts @reg.inspect
-    return @reg.inspect
+    # don't know how to pass only one hash, so split it into two. FIXME change later if possible!
+    @reg = YastService.Call("YSR::statelessregister", @context, {} )
+    # return @reg.inspect
   end
 
   def get_registration_config
-    return @reg.inspect
+    # return @reg.inspect
   end
 
   def set_registration_config(url, ca)
     # TODO: write registration config
-    return @reg.inspect
+    # return @reg.inspect
   end
 
 
@@ -67,6 +70,9 @@ class Registration
 
   def to_xml( options = {} )
     #return "This function outputs XML :)"
+
+    # FIXME only for testing!!
+    return @reg.inspect
 
     xml = options[:builder] ||= Builder::XmlMarkup.new(options)
     xml.instruct! unless options[:skip_instruct]
