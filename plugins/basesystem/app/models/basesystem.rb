@@ -13,7 +13,7 @@ class Basesystem
   # path to file which defines module queue
   BASESYSTEM_CONF = :basesystem
   # path to file which store module then is next in queue or END_STRING if all steps is done
-  FINISH_FILE = File.join("/var","lib","yastws","basesystem","finish")
+  FINISH_FILE = File.join(Paths::VAR,"basesystem","finish")
 
 
   #Gets instance of Basesystem with initialized steps queue.
