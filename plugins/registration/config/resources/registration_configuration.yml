@@ -1,4 +1,4 @@
 interface: org.opensuse.yast.modules.yapi.registration.configuration
-policy: org.opensuse.yast.modules.yapi.registration.configuration
+policy: org.opensuse.yast.modules.ysr
 controller: registration/configuration
 singular: true
