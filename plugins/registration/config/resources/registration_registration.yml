@@ -1,0 +1,4 @@
+interface: org.opensuse.yast.modules.yapi.registration.registration
+policy: org.opensuse.yast.modules.yapi.registration.registration
+controller: registration/registration
+singular: true
