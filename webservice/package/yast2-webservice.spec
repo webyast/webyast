@@ -203,9 +203,9 @@ fi
 #---------------------------------------------------------------
 %files 
 %defattr(-,root,root)
-%dir %{_config}/yastws
+%dir /etc/yastws
 %dir /srv/www/yastws
-%dir %{_config}/yastws/tools
+%dir /etc/yastws/tools
 %dir /etc/yastws/vhosts.d
 %dir %{_datadir}/PolicyKit
 %dir %{_datadir}/PolicyKit/policy
@@ -214,7 +214,7 @@ fi
 %attr(-,%{pkg_user},%{pkg_user}) %dir %{pkg_home}/cache
 %attr(-,%{pkg_user},%{pkg_user}) %dir %{_var}/log/%{pkg_user}
 
-%dir %{_config}/YaST2/
+%dir /etc/YaST2/
 %dir %{_datadir}/yastws
 %dir /var/lib/yastws
 %dir /srv/www/yastws/db
