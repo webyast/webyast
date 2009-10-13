@@ -1,4 +1,12 @@
 -------------------------------------------------------------------
+Tue Oct 13 09:47:39 CEST 2009 - lslezak@suse.cz
+
+- fixed 'rake package' - do not package files which are not in the
+  GIT repository (avoids broken submits caused by an extra file,
+  makes the packaging more reliable)
+- 0.0.5
+
+-------------------------------------------------------------------
 Thu Oct  8 10:09:15 CEST 2009 - lslezak@suse.cz
 
 - do not generate restdoc in 'rake package', it is generated

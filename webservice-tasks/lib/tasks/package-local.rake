@@ -13,15 +13,39 @@ if Rake::Task.task_defined?(:package)
 end
 
 # create new package task
-
-#removing old stuff
-www_dir = File.join(Dir.pwd,"package", "www")
-FileUtils.rm_rf(www_dir) if File.directory?(www_dir)
-
 Rake::PackageTask.new('www', :noversion) do |p|
   p.need_tar_bz2 = true
   p.package_dir = 'package'
-  p.package_files.include('./**/*')
+
+  # do not call git and do not remove old files if package task won't be executed
+  # FIXME: this does not support calling the package task from another task!
+  packaging = ARGV.include?('package') || ARGV.include?('package-local')
+
+  if packaging
+    #removing old stuff
+    www_dir = File.join(Dir.pwd,"package", "www")
+    FileUtils.rm_rf(www_dir) if File.directory?(www_dir)
+
+    # package only the files which are available in the GIT repository
+    filelist = `git ls-files . --exclude=.gitignore`.split("\n")
+
+    if $?.exitstatus.zero?
+	p.package_files.include filelist
+
+	ignored = `git ls-files -o .`.split("\n")
+
+	if $?.exitstatus.zero? and ignored.size > 0
+	    $stderr.puts 'WARNING: Ignored files:'
+	    $stderr.puts ignored
+	end
+    else
+	$stderr.puts 'WARNING: Cannot get GIT listing, packaging all files' if packaging
+	p.package_files.include('./**/*')
+    end
+  else
+    p.package_files.include('./**/*')
+  end
+
   #don't add IDE files
   p.package_files.exclude('./nbproject')
   #don't add generated documentation. If you want have it in package, generate it fresh
