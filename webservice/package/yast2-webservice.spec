@@ -216,7 +216,7 @@ fi
 
 %dir /etc/YaST2/
 %dir %{_datadir}/yastws
-%dir /var/lib/yastws
+%dir %attr(-,%{pkg_user},root) /var/lib/yastws
 %dir /srv/www/yastws/db
 %dir /srv/www/yastws/db
 /srv/www/yastws/app
