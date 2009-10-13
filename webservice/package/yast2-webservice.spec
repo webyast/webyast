@@ -123,6 +123,11 @@ mkdir -p $RPM_BUILD_ROOT/etc/yastws/tools
 install -m 0644 %SOURCE5 $RPM_BUILD_ROOT/etc/yastws/tools
 install -m 0644 %SOURCE6 $RPM_BUILD_ROOT/etc/
 
+#  create yastwsdirs (config, var and data)
+mkdir -p $RPM_BUILD_ROOT/etc/YaST2
+mkdir -p $RPM_BUILD_ROOT/var/lib/yastws
+mkdir -p $RPM_BUILD_ROOT/usr/share/yastws
+
 #  create empty tmp directory
 mkdir -p $RPM_BUILD_ROOT/srv/www/%{pkg_user}/tmp
 mkdir -p $RPM_BUILD_ROOT/srv/www/%{pkg_user}/tmp/cache
@@ -198,17 +203,22 @@ fi
 #---------------------------------------------------------------
 %files 
 %defattr(-,root,root)
-%dir /etc/yastws
+%dir %{_config}/yastws
 %dir /srv/www/yastws
-%dir /etc/yastws/tools
+%dir %{_config}/yastws/tools
 %dir /etc/yastws/vhosts.d
-%dir /usr/share/PolicyKit
-%dir /usr/share/PolicyKit/policy
+%dir %{_datadir}/PolicyKit
+%dir %{_datadir}/PolicyKit/policy
 %attr(-,%{pkg_user},%{pkg_user}) %dir %{pkg_home}
 %attr(-,%{pkg_user},%{pkg_user}) %dir %{pkg_home}/sockets
 %attr(-,%{pkg_user},%{pkg_user}) %dir %{pkg_home}/cache
 %attr(-,%{pkg_user},%{pkg_user}) %dir %{_var}/log/%{pkg_user}
 
+%dir %{_config}/YaST2/
+%dir %{_datadir}/yastws
+%dir /var/lib/yastws
+%dir /srv/www/yastws/db
+%dir /srv/www/yastws/db
 /srv/www/yastws/app
 %dir /srv/www/yastws/db
 /srv/www/yastws/db/migrate
