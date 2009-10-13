@@ -13,8 +13,8 @@ class License
 
   attr_accessor :name, :langs_hash, :langs_list, :accepted, :text, :text_lang, :only_show
 
-  VAR_DIR       = File.join("/var","lib","yastws","eulas")
-  RESOURCES_DIR = File.join("/usr","share","yastws","eulas")
+  VAR_DIR       = File.join(Paths::VAR,"eulas")
+  RESOURCES_DIR = File.join(Paths::DATAS,"eulas")
 
   def dig_lang(line)
     r = Regexp.new('license(?:\.(\w+))?\.txt')
