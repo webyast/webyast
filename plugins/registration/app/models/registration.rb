@@ -34,6 +34,11 @@ class Registration
 
   end
 
+  def find 
+    # Fixme: get the uuid, server url and certificate -> to be done in YSR.pm
+    return {}
+  end
+
   def set_context(hash)
     self.initialize hash
   end
