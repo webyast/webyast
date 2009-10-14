@@ -25,13 +25,16 @@ BuildRoot:      %{_tmppath}/%{name}-%{version}-build
 BuildArch:      noarch
 BuildRequires:  rubygem-yast2-webservice-tasks rubygem-restility
 
-# requires YaPI::USERS
+# YaPI::MailServer (standard edition)
+Requires:	yast2-mail
+
+# YaPI::SERVICES (for postfix)
 %if 0%{?suse_version} == 0 || %suse_version > 1110
 # 11.2 or newer
-Requires:       yast2-mail >= 2.18.2
+Requires:       yast2 >= 2.18.24
 %else
 # 11.1 or SLES11
-Requires:       yast2-mail >= 2.17.3
+Requires:       yast2 >= 2.17.72
 %endif
 
 #
