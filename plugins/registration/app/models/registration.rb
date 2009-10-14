@@ -13,6 +13,8 @@ class Registration
   @reg = ''
 
   def initialize(hash)
+    # cleanup arguments
+    @arguments = { 'test' => [ 'a{ss}', { 'value' => 'mytestvalue' } ] }
     # set context defaults
     @context = { 'yastcall'     => [ 'i', 1 ],
                  'norefresh'    => [ 'i', 1 ],
@@ -27,8 +29,8 @@ class Registration
     return if hash.nil?
 
     # merge custom context data
-    if hash.class.to_s == 'Hash'
-       @context.merge hash
+    if hash.class == Hash
+       hash.each {|k, v|  @context.merge!( { k => ['s', "#{v.to_s}"] } ) }
     else
       raise "Invalid or missing registration initialization context data."
     end
@@ -44,19 +46,26 @@ class Registration
     self.initialize hash
   end
 
-  def set_arguments(hash)
-    @arguments = hash
+  def add_argument(key, value)
+    @arguments.merge!( { key => [ 'a{ss}',{ 'value' => "#{value.to_s}" } ] } )
   end
 
   def add_arguments(hash)
-    @arguments.merge hash
+    hash.each {|k, v| self.add_argument k, v }
   end
 
+  def set_arguments(hash)
+    @arguments = {}
+    self.add_arguments hash
+  end
+
+
   def register
-    # @reg = YastService.Call("YSR::statelessregister", { 'ctx' => @context, 'arguments' => @arguments } )
     # don't know how to pass only one hash, so split it into two. FIXME change later if possible!
-    @reg = YastService.Call("YSR::statelessregister", @context, {} )
-    # return @reg.inspect
+    # @reg = YastService.Call("YSR::statelessregister", { 'ctx' => @context, 'arguments' => @arguments } )
+
+    @reg = YastService.Call("YSR::statelessregister", @context, @arguments )
+    return @reg['exitcode'] || 99
   end
 
   def get_config
@@ -65,8 +74,12 @@ class Registration
   end
 
   def set_config(url, ca)
-    # TODO: write registration config
-    # return @reg.inspect
+    newconfig = { 'regserverurl' => url,
+                  'regserverca'  => ca  }
+    ret = YastService.Call("YSR::setregistrationconfig", newconfig)
+    puts "YastService.Call retruned: =#{ret}="
+    self.get_config
+    return ret
   end
 
   def status_to_xml( options = {} )
@@ -88,7 +101,7 @@ class Registration
       end
      xml.certificate do
        xml.data do
-         xml.cdata!(@config['regserverca']) if @config['regserverca'].size > 0 
+         xml.cdata!(@config['regserverca']) if @config['regserverca'].size > 0
        end
      end
     end
@@ -96,7 +109,7 @@ class Registration
 
 
   def to_xml( options = {} )
-
+    # TODO  FIXME ... create the registration xml structure
     xml = options[:builder] ||= Builder::XmlMarkup.new(options)
     xml.instruct! unless options[:skip_instruct]
 
@@ -114,4 +127,13 @@ class Registration
     end
   end
 
+  def config_to_json( options = {} )
+    hash = Hash.from_xml(config_to_xml())
+    return hash.to_json
+  end
+
+  def to_json( options = {} )
+    hash = Hash.from_xml(to_xml())
+    return hash.to_json
+  end
 end

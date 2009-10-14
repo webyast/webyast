@@ -1,1 +1,1 @@
-<%= @registration == nil ? "@registration is nil - FIXME" : @registration.to_json -%>
+<%= @registration.config_to_json if @registration -%>

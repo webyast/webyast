@@ -9,20 +9,21 @@ class RegistrationController < ApplicationController
     # POST to registration => run registration
     @registration = Registration.new({})
 
-    # TODO: parse post data and set context data
+    # TODO overwrite context data if defined
     #@registration.set_context( { } )
+
+    # TODO: parse post data and set the arguments
+    # @registration.set_arguments( { } )
+
     ret = @registration.register
+    headers["Status"] = "400 Bad Request" if ret == 3
   end
 
   def show
-    # getRegistrationServerDetails
-
+    # get registration status
     @registration = Registration.new( { } )
-    puts @registration.get_config.inspect
+    @registration.get_config
     render :status
-    # do not run registration
-    # only get the uuid, server url and certificate -> to be done in YSR.pm
-
   end
 
   def index
