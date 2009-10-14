@@ -1,1 +1,1 @@
-<%= @registration == nil ? "@registration is nil - FIXME" : @registration.to_xml -%>
+<%= @registration.config_to_xml if @registration -%>

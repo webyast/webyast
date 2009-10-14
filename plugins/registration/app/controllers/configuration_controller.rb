@@ -12,11 +12,12 @@ class ConfigurationController < ApplicationController
   end
 
   def show
-    @registration = Registration.new( { } )
     # do not run registration
     # only get the server url and certificate -> to be done in YSR.pm
 
-    # @registration = "GET to /registration/configuration"
+    @registration = Registration.new( { } )
+    puts @registration.get_config.inspect
+
   end
 
   def index
