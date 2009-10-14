@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<services type="array">
+  <service>
+    <name>collectd</name>
+    <description>Statistics Collection Daemon for filling RRD Files</description>
+    <status type="integer"></status>
+  </service>
+</services>
