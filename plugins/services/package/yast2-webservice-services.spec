@@ -15,13 +15,14 @@ Provides:       yast2-webservice:/srv/www/yastws/app/controllers/services_contro
 License:        MIT
 Group:          Productivity/Networking/Web/Utilities
 Autoreqprov:    on
-Version:        0.0.6
+Version:        0.0.7
 Release:        0
 Summary:        YaST2 - Webservice - Services
 Source:         www.tar.bz2
 Source1:        org.opensuse.yast.modules.yapi.services.policy
 BuildRoot:      %{_tmppath}/%{name}-%{version}-build
 BuildArch:      noarch
+BuildRequires:  rubygem-yast2-webservice-tasks rubygem-restility
 
 # YaPI/SERVICES.pm
 %if 0%{?suse_version} == 0 || %suse_version > 1110
@@ -52,6 +53,10 @@ Authors:
 
 %build
 
+# build restdoc documentation
+export RAILS_PARENT=/srv/www/yastws
+env LANG=en rake restdoc
+
 %install
 
 #
@@ -63,6 +68,9 @@ cp -a * $RPM_BUILD_ROOT/srv/www/%{pkg_user}/vendor/plugins/%{plugin_name}
 # Policies
 mkdir -p $RPM_BUILD_ROOT/usr/share/PolicyKit/policy
 install -m 0644 %SOURCE1 $RPM_BUILD_ROOT/usr/share/PolicyKit/policy/
+
+# do not package restdoc sources
+rm -rf $RPM_BUILD_ROOT/srv/www/%{pkg_user}/vendor/plugins/%{plugin_name}/restdoc
 
 %clean
 rm -rf $RPM_BUILD_ROOT
@@ -93,5 +101,6 @@ rm -rf $RPM_BUILD_ROOT
 /srv/www/%{pkg_user}/vendor/plugins/%{plugin_name}/config
 /srv/www/%{pkg_user}/vendor/plugins/%{plugin_name}/tasks
 /srv/www/%{pkg_user}/vendor/plugins/%{plugin_name}/doc
+/srv/www/%{pkg_user}/vendor/plugins/%{plugin_name}/public
 
 %attr(644,root,root) %config /usr/share/PolicyKit/policy/org.opensuse.yast.modules.yapi.%{plugin_name}.policy

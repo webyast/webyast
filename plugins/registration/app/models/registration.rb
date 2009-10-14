@@ -9,6 +9,7 @@ class Registration
 
   @context = { }
   @arguments = { }
+  @config = { }
   @reg = ''
 
   def initialize(hash)
@@ -34,9 +35,9 @@ class Registration
 
   end
 
-  def find 
-    # Fixme: get the uuid, server url and certificate -> to be done in YSR.pm
-    return {}
+  def find
+    @config = YastService.Call("YSR::getregistrationconfig")
+    return @config
   end
 
   def set_context(hash)
@@ -58,26 +59,43 @@ class Registration
     # return @reg.inspect
   end
 
-  def get_registration_config
-    # return @reg.inspect
+  def get_config
+    @config = YastService.Call("YSR::getregistrationconfig")
+    return @config
   end
 
-  def set_registration_config(url, ca)
+  def set_config(url, ca)
     # TODO: write registration config
     # return @reg.inspect
   end
 
+  def status_to_xml( options = {} )
+    xml = options[:builder] ||= Builder::XmlMarkup.new(options)
+    xml.instruct! unless options[:skip_instruct]
 
-  def to_xml
-    return @reg if @reg.class.to_s == String
-    return "<regtest>#{ @reg.to_s }</regtest>"
+    xml.registration do
+      xml.tag!(:guid, @config['guid']) if @config['guid'] && @config['guid'].size > 0
+    end
   end
 
-  def to_xml( options = {} )
-    #return "This function outputs XML :)"
+  def config_to_xml( options = {} )
+    xml = options[:builder] ||= Builder::XmlMarkup.new(options)
+    xml.instruct! unless options[:skip_instruct]
 
-    # FIXME only for testing!!
-    return @reg.inspect
+    xml.registrationconfig do
+      xml.server do
+        xml.tag!(:url, @config['regserverurl'] )
+      end
+     xml.certificate do
+       xml.data do
+         xml.cdata!(@config['regserverca']) if @config['regserverca'].size > 0 
+       end
+     end
+    end
+  end
+
+
+  def to_xml( options = {} )
 
     xml = options[:builder] ||= Builder::XmlMarkup.new(options)
     xml.instruct! unless options[:skip_instruct]

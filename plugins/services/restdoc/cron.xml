@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<service>
+  <name>cron</name>
+  <description></description>
+  <status type="integer">0</status>
+</service>

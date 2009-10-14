@@ -1,4 +1,11 @@
 -------------------------------------------------------------------
+Wed Oct 14 16:25:24 CEST 2009 - jsuchome@suse.cz
+
+- added rest API documentation
+- "get" right not needed in policy file
+- 0.0.7 
+
+-------------------------------------------------------------------
 Tue Oct  6 12:25:50 CEST 2009 - jsuchome@suse.cz
 
 - package whole doc directory

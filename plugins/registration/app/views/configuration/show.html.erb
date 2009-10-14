@@ -1,11 +1,1 @@
-<%= # @registration == nil ? "@registration is nil - FIXME" : @registration.to_xml
- -%>
-<%= case @registration.class.to_s
-      when 'NilClass'
-        "@registration is nil"
-      when 'String'
-        @registration.to_s
-      when 'Registration'
-        @registration.to_xml
-    end
-  -%>
+<%= @registration.config_to_xml if @registration -%>

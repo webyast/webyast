@@ -42,7 +42,6 @@ class ServicesController < ApplicationController
   # Requires execute permission for services YaPI.
   def update
     yapi_perm_check "services.execute"
-
     begin
       @service = Service.find params[:id]
     rescue Exception => e
