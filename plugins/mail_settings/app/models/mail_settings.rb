@@ -30,6 +30,7 @@ class MailSettings
         relay_host 	= sending_mail["RelayHost"]
         @smtp_server 	= relay_host["Name"]
         @user		= relay_host["Account"]
+        @password	= relay_host["Password"]
       end
       @transport_layer_security = sending_mail["TLS"] if sending_mail.has_key? "TLS"
     end
@@ -43,8 +44,10 @@ class MailSettings
 	settings[k] = "" if v.nil?
     end
 
-    if false # FIXME compare with current values... but do we know original password?
-      Rails.logger.debug "nothing has been changed"
+    if settings["transport_layer_security"] == @transport_layer_security &&
+       settings["smtp_server"] == @smtp_server &&
+       settings["user"] == @user && settings["password"] == @password
+      Rails.logger.debug "nothing has been changed, not saving"
       return true
     end
     parameters	= {

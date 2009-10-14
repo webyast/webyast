@@ -27,6 +27,7 @@ class MailSettingsController < ApplicationController
     yapi_perm_check "mailsettings.write"
 	
     @mail = MailSettings.instance
+    @mail.read
     @mail.save(params["mail_settings"])
     show
   end
