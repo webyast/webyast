@@ -230,7 +230,6 @@ fi
 /srv/www/yastws/script
 #/srv/www/yastws/test
 /srv/www/yastws/config
-/srv/www/yastws/vendor
 %attr(755,root,root) %config /etc/yastws/tools/policyKit-rights.rb
 %attr(755,root,root) /srv/www/yastws/start.sh
 %doc /srv/www/yastws/README
