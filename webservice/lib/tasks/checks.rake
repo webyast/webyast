@@ -142,7 +142,7 @@ EOF
     doc.elements.each("/policyconfig/action") do |action|
       id = action.attributes['id']
       if not granted.include?(id)
-        warn "policy #{id} is not granted for current user.", " fix it if you plan to login to YaST as '#{user}', run 'polkit-auth --user #{user} --grant #{id}' to grant it." + hint_message
+        warn "policy #{id} is not granted for current user.", "fix it if you plan to login to YaST as '#{user}', run\n  polkit-auth --user #{user} --grant #{id}\nto grant it." + hint_message
         hint_message = ""
       end
     end
@@ -173,13 +173,21 @@ EOF
     rescue Exception => e
       # catched by 'unless proxy' below
     end
-  
+
+    # check if openSUSE 11.2 or SLE11
+    
+    os_version = "unknown"
+    suse_release = File.read "/etc/SuSE-release"
+    suse_release.scan( /VERSION = ([\d\.]*)/ ) do |v|
+      os_version = v[0]
+    end if suse_release
+
     package = "yast2-core"
-    version = "2.18.10"
+    version = (os_version == "11.2")?"2.18.10":"2.17.31"
     unless proxy
       $stderr.puts "YaST D-Bus service not available"
       test_version package, version
-      escape "#{package} not correctly installed", "reinstall #{package}-#{version}"
+      escape "#{package} not correctly installed", "reinstall #{package} >= #{version}"
     end
     begin
       scr = proxy["org.opensuse.yast.SCR.Methods"]
