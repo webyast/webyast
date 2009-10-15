@@ -14,7 +14,12 @@ class Registration
 
   def initialize(hash)
     # cleanup arguments
-    @arguments = { 'test' => [ 'a{ss}', { 'value' => 'mytestvalue' } ] }
+    @arguments = { }
+    # initialize context
+    init_context hash
+  end
+
+  def init_context(hash)
     # set context defaults
     @context = { 'yastcall'     => [ 'i', 1 ],
                  'norefresh'    => [ 'i', 1 ],
@@ -30,11 +35,10 @@ class Registration
 
     # merge custom context data
     raise "Invalid or missing registration initialization context data." unless hash.is_a?(Hash)
-    
-    hash.each do |k, v|
-      @context.merge!( { k => ['s', v.to_s] } )
-    end
 
+    hash.each do |k, v|
+      @context.merge!( { k.to_s => ['s', v.to_s] } )
+    end
   end
 
   def find
@@ -48,11 +52,11 @@ class Registration
   end
 
   def set_context(hash)
-    self.initialize hash
+    self.init_context hash
   end
 
   def add_argument(key, value)
-    @arguments.merge!( { key => [ 'a{ss}',{ 'value' => "#{value.to_s}" } ] } )
+    @arguments.merge!( { key.to_s => [ 'a{ss}',{ 'value' => value.to_s } ] } )
   end
 
   def add_arguments(hash)
@@ -113,23 +117,70 @@ class Registration
 
 
   def to_xml( options = {} )
-    # TODO  FIXME ... create the registration xml structure
+    # TODO  FIXME ... create the output based on parsed data
+    # return static response during development
+
     xml = options[:builder] ||= Builder::XmlMarkup.new(options)
     xml.instruct! unless options[:skip_instruct]
 
     xml.registration do
-      xml.tag!(:info, "infotest")
-      xml.tag!(:foobar, "foobartest" )
-      xml.arguments({:type => "array"}) do
-        { "eins" => 1, "zwei" => 2, "drei" => 3 }.each do |k,v|
+      if @reg then
+        xml.tag!(:status, 'missinginfo')
+        xml.tag!(:exitcode, 55)
+        xml.tag!(:guid, "abcdefg1234567")
+
+
+        xml.missingarguments do
           xml.argument do
-            xml.tag!( :name, k)
-            xml.tag!( :value, v)
+            xml.tag!(:name, 'regcode-SLES-13-SP5')
+            xml.tag!(:type, 'string')
+          end
+          xml.argument do
+            xml.tag!(:name, 'email')
+            xml.tag!(:type, 'string')
+          end
+          xml.argument do
+            xml.tag!(:name, 'moniker')
+            xml.tag!(:type, 'string')
           end
         end
-      end
-    end
-  end
+
+        xml.changedrepos do
+          xml.repo do
+            xml.tag!(:name, 'foobar11n')
+            xml.tag!(:alias, 'foobar11a')
+            xml.tag!(:status, 'added')
+          end
+          xml.repo do
+            xml.tag!(:name, 'foobar22n')
+            xml.tag!(:alias, 'foobar22a')
+            xml.tag!(:status, 'deleted')
+          end
+        end
+
+        xml.changedservices do
+          xml.service do
+            xml.tag!(:name, 'foobar33n')
+            xml.tag!(:alias, 'foobar33a')
+            xml.tag!(:status, 'deleted')
+            xml.catalogs do
+              xml.catalog do
+                xml.tag!(:name, 'foobar44n')
+                xml.tag!(:alias, 'foobar44a')
+                xml.tag!(:status, 'enabled')
+              end
+              xml.catalog do
+                xml.tag!(:name, 'foobar55n')
+                xml.tag!(:alias, 'foobar55a')
+                xml.tag!(:status, 'disabled')
+              end # cat
+            end # cats
+          end # service 
+        end # changedservices
+
+      end # if reg
+    end # xml-root
+  end # func
 
   def status_to_json( options = {} )
     hash = Hash.from_xml(status_to_xml())
