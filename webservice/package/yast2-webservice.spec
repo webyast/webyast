@@ -90,7 +90,7 @@ Authors:
 #
 # Install all web and frontend parts.
 #
-mkdir -p $RPM_BUILD_ROOT/srv/www/%{pkg_user}/
+mkdir -p $RPM_BUILD_ROOT/srv/www/%{pkg_user}/log/
 cp -a * $RPM_BUILD_ROOT/srv/www/%{pkg_user}/
 rm -f $RPM_BUILD_ROOT/srv/www/%{pkg_user}/log/*
 touch $RPM_BUILD_ROOT/srv/www/%{pkg_user}/db/schema.rb
