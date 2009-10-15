@@ -127,6 +127,11 @@ class Registration
     end
   end
 
+  def status_to_json( options = {} )
+    hash = Hash.from_xml(status_to_xml())
+    return hash.to_json
+  end
+
   def config_to_json( options = {} )
     hash = Hash.from_xml(config_to_xml())
     return hash.to_json
@@ -136,4 +141,6 @@ class Registration
     hash = Hash.from_xml(to_xml())
     return hash.to_json
   end
+
+
 end
