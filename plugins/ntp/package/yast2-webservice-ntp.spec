@@ -46,7 +46,7 @@ Authors:
 
 %build
 # build restdoc documentation
-mkdir -p $RPM_BUILD_ROOT/srv/www/%{pkg_user}/vendor/plugins/%{plugin_name}/public/system/restdoc
+mkdir -p $RPM_BUILD_ROOT/srv/www/%{pkg_user}/vendor/plugins/%{plugin_name}/public/ntp/restdoc
 export RAILS_PARENT=/srv/www/yastws
 env LANG=en rake restdoc
 
