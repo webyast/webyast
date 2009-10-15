@@ -1,3 +1,54 @@
 = YaST REST Service Documentation
 
-FIXME
+== Mail Settings Service
+
+  Only authenticated users are allowed to access the API. Authentication is done
+  by sending a Basic HTTP Authorisation header.
+
+  All names aren't allowed to contain spaces, slashes or colons.
+
+
+== Table of Contents
+
+Contents:
+
+== Formats
+
+  The system REST service supports only XML and JSON input/output formats.
+
+== Overview
+
+  This module is used to configure SMTP server for sending mails
+  
+
+
+== PolicyKit Access Rights
+
+  The following PolicyKit permission is needed to perform configutation actions:
+
+  <i>org.opensuse.yast.modules.yapi.mailsettings.read</i>
+
+  <i>org.opensuse.yast.modules.yapi.mailsettings.write</i>
+
+
+== Actions
+
+
+GET /mail_settings
+
+  Get the information about current system mail settings.
+
+  CURL Example: curl -u &lt;user> http://localhost:4984/mail_settings.xml
+
+XmlResult: mail_settings
+
+
+PUT /mail_settings
+
+  Update current system mail settings. Password must be in plain text.
+
+  CURL example: curl -u <user> -X PUT -H 'Content-type: text/xml' -d @save_mail_request.xml http://localhost:4984/mail_settings.xml
+
+XmlBody: save_mail_request
+  
+XmlResult: save_mail_response
