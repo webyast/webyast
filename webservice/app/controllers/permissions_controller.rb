@@ -5,6 +5,8 @@
 class PermissionsController < ApplicationController
 
   before_filter :login_required
+  # this controller has to work even if EULA is not accepted. More on this in ApplicationController.
+  skip_before_filter :ensure_eulas
 
   require "scr"
 

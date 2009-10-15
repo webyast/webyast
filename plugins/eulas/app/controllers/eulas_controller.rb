@@ -2,6 +2,9 @@
 # Serves licences and handles notices about acceptations.
 class EulasController < ApplicationController
 
+  # this controller has to work even if EULA is not accepted. More on this in ApplicationController.
+  skip_before_filter :ensure_eulas
+
   before_filter :login_required
 
   def index
@@ -31,9 +34,13 @@ class EulasController < ApplicationController
     raise InvalidParameters.new ({:id => 'MISSING'}) if params[:id].nil?
     @license = License.find params[:id]
     render ErrorResult.error(404, 1, "License not found") and return if @license.nil?
-    @license.accept = params[:eula][:accept]
+    @license.accepted = params[:eulas][:accepted] == "true" ? true : false
     @license.save
-    render :show
+    respond_to do |format|
+      format.html
+      format.xml { render :xml => @license.to_xml }
+      format.json{ render :json=> @license.to_json}
+    end
   end
 
 end

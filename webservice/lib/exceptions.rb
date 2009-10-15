@@ -125,3 +125,15 @@ class CorruptedFileException < BackendException
     end
   end
 end
+
+# Exception, which signalizes, that some functionality of backend was requested
+# without accepting the EULA first.
+class EulaNotAcceptedException < BackendException
+  def initialize()
+    super("EULA not yet accepted.")
+  end
+
+  def to_xml(options={})
+    no_arg_to_xml(options,"EULA_NOT_ACCEPTED", "Functionality of the target system was required, but its EULA was not accepted yet.")
+  end
+end
