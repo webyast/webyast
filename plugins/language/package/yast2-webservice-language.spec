@@ -21,7 +21,7 @@ Summary:        YaST2 - Webservice - Language
 Source:         www.tar.bz2
 BuildRoot:      %{_tmppath}/%{name}-%{version}-build
 BuildArch:      noarch
-BuildRequires:  rubygem-mocha
+BuildRequires:  rubygem-yast2-webservice-tasks rubygem-restility
 
 # YaPI/LANGUAGE.pm
 %if 0%{?suse_version} == 0 || %suse_version > 1110
@@ -50,6 +50,10 @@ Authors:
 %setup -q -n www
 
 %build
+# build restdoc documentation
+mkdir -p $RPM_BUILD_ROOT/srv/www/%{pkg_user}/vendor/plugins/%{plugin_name}/public/%{plugin_name}/restdoc
+export RAILS_PARENT=/srv/www/yastws
+env LANG=en rake restdoc
 
 %install
 
@@ -58,6 +62,9 @@ Authors:
 #
 mkdir -p $RPM_BUILD_ROOT/srv/www/%{pkg_user}/vendor/plugins/%{plugin_name}
 cp -a * $RPM_BUILD_ROOT/srv/www/%{pkg_user}/vendor/plugins/%{plugin_name}
+
+# do not package restdoc sources
+rm -rf $RPM_BUILD_ROOT/srv/www/%{pkg_user}/vendor/plugins/%{plugin_name}/restdoc
 
 %clean
 rm -rf $RPM_BUILD_ROOT

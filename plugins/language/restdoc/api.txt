@@ -1,0 +1,55 @@
+= YaST REST Service Documentation
+== Language Service
+
+  Only authenticated users are allowed to access the API. Authentication is done
+  by sending a Basic HTTP Authorisation header.
+
+  All names aren't allowed to contain spaces, slashes or colons.
+
+
+== Table of Contents
+
+Contents:
+
+== Formats
+
+  The Language REST service supports only XML and JSON input/output formats.
+
+== Overview
+
+  This module provides access to the basic language component. Curretly it provides primary language settings, root locale settings
+  and if use UTF8 variant of language. It also provides available languages.
+
+  The module uses YaST Language  as the backend.
+
+== PolicyKit Access Rights
+
+  The following PolicyKit permissions are needed to read and write settings:
+
+  Read:   org.opensuse.yast.modules.yapi.language.read
+
+  Write:   org.opensuse.yast.modules.yapi.language.write
+
+== Language Actions
+
+
+GET /language
+
+  Get the the current settings of language and available languages.
+
+  CURL Example: curl -u &lt;user&gt; http://localhost:4984/language.xml
+
+XmlResult: language
+
+
+PUT /language
+
+  Sets new values for language settings.
+
+  CURL example: curl -u &lt;user&gt; -X PUT -H 'Content-type: text/xml' -d @language_request.xml http://localhost:4984/language.xml
+
+XmlBody: language_request
+  
+XmlResult: language_response
+
+
