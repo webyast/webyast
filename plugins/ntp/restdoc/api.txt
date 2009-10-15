@@ -1,0 +1,50 @@
+= YaST REST Service Documentation
+== Ntp Service
+
+  Only authenticated users are allowed to access the API. Authentication is done
+  by sending a Basic HTTP Authorisation header.
+
+  All names aren't allowed to contain spaces, slashes or colons.
+
+
+== Table of Contents
+
+Contents:
+
+== Formats
+
+  The Ntp REST service supports only XML and JSON input/output formats.
+
+== Overview
+
+  This module provides access to the Ntp synchronization. Curretly it provides only synchronize again predefined server.
+
+== PolicyKit Access Rights
+
+  The following PolicyKit permissions are needed to execute synchronize:
+
+  Synchronize: org.opensuse.yast.modules.yapi.ntp.synchronize
+
+== System Actions
+
+
+GET /ntp
+
+  Get the list of supported system actions. The list contains actions for ntp. Nowadays, it is like <i>synchronize</i>.
+
+  CURL Example: curl -u &gt;user&lt; http://localhost:4984/ntp.xml
+
+XmlResult: ntp
+
+
+PUT /ntp
+
+  Trigger a action. Set active flag to true for the action which should be started - see the XML example file.
+
+  CURL example: curl -u user -X PUT -H 'Content-type: text/xml' -d @sync_request.xml http://localhost:4984/ntp.xml
+
+XmlBody: sync_request
+  
+XmlResult: ntp
+
+
