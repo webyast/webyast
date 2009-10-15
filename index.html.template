@@ -1,0 +1,16 @@
+<html>
+<head>
+  <title> Generated webyast rest-service documentation</title>
+</head>
+<body>
+  <h2>Framework documentation</h2>
+  <div>
+    <a href="./webservice/index.html"> Rest-Service framework </a>
+  </div>
+  <h2> Plugins documentation </h2>
+  <div>
+  %%PLUGINS%%
+  </div>
+
+</body>
+</html>

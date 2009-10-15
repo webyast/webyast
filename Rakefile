@@ -34,4 +34,37 @@ task :default => :test
 
 end
 
+desc "Run app:doc to generate whole documentation"
+task :doc do
+  #clean old documentation
+  puts "cleaning old doc"
+  system "rm -rf doc"
+  
+  Dir.mkdir 'doc'
+  copy 'index.html.template', "doc/index.html"
+  #handle rest service separate from plugins
+  puts "create framework documentation"
+  Dir.chdir('webservice') do
+    system "rake doc:app"
+  end
+    system "cp -r webservice/doc/app doc/webservice"
+  puts "create plugins documentation"
+  plugins_names = []
+  Dir.chdir('plugins') do
+    plugins_names = Dir.glob '*'
+  end
+  plugins_names.each do |plugin|
+    Dir.chdir("plugins/#{plugin}") do
+      system "rake doc:app"
+    end
+    system "cp -r plugins/#{plugin}/doc/app doc/#{plugin}"
+  end
+  puts "generate links for plugins"
+  code = ""
+  plugins_names.each do |plugin|
+    code = "#{code}<a href=\"./#{plugin}/index.html\"><b>#{plugin}</b></a><br>"
+  end
+  system "sed -i 's:%%PLUGINS%%:#{code}:' doc/index.html"
+  puts "documentation successfully generated"
+end
 
