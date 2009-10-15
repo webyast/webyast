@@ -1,4 +1,6 @@
 steps:
-  - controller: systemtime
   - controller: language
     action: index
+  - controller: eulas
+    action: next
+  - controller: systemtime
