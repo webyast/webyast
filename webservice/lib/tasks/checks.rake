@@ -65,11 +65,14 @@ task :system_check do
   # check if openSUSE 11.2 or SLE11
 
   os_version = "unknown"
-  suse_release = File.read "/etc/SuSE-release"
-  suse_release.scan( /VERSION = ([\d\.]*)/ ) do |v|
-    os_version = v[0]
-  end if suse_release
-
+  begin
+    suse_release = File.read "/etc/SuSE-release"
+    suse_release.scan( /VERSION = ([\d\.]*)/ ) do |v|
+      os_version = v[0]
+    end if suse_release
+  rescue
+  end
+  
   #
   # check needed needed packages
   #
