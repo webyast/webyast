@@ -38,7 +38,13 @@ class Registration
   end
 
   def find
-    @config = YastService.Call("YSR::getregistrationconfig")
+    begin
+      @config = YastService.Call("YSR::getregistrationconfig")
+    rescue Exception => e
+      Rails.logger.error "YastService.Call('YSR::getregistrationconfig') failed"
+      raise
+    end
+    @config
   end
 
   def set_context(hash)
@@ -68,7 +74,7 @@ class Registration
   end
 
   def get_config
-    @config = YastService.Call("YSR::getregistrationconfig")
+    find
   end
 
   def set_config(url, ca)
