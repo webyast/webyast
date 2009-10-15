@@ -85,7 +85,7 @@ task :system_check do
     plugin = if fname =~ %r{plugins/([^/]*)}
                $1
 	     else
-	       fname
+	       File.dirname fname
 	     end
     dest_policy = File.join('/usr/share/PolicyKit/policy', policy)
     if not File.exists?(dest_policy)
