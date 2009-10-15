@@ -78,11 +78,19 @@ task :system_check do
 
   # check that policies are all installed
   not_needed = ['org.opensuse.yast.scr.policy']
-  policy_files = File.join(File.dirname(__FILE__), '../../..', "**/*.policy")
-  Dir.glob(policy_files).map { |x| File.basename(x) }.reject { |x| not_needed.include?(x) }.each do |policy|
+  policy_files = File.expand_path(File.join(File.dirname(__FILE__), '../../..', "**/*.policy"))
+  Dir.glob(policy_files) do |fname|
+    policy = File.basename(fname)
+    next if not_needed.include?(policy)
+    plugin = if fname =~ %r{plugins/([^/]*)}
+               $1
+	     else
+	       fname
+	     end
     dest_policy = File.join('/usr/share/PolicyKit/policy', policy)
     if not File.exists?(dest_policy)
-      escape "Policy '#{policy}' is not installed into '#{dest_policy}'", "Run \"rake install\" in the concerning module/plugin"
+      escape "Policy '#{policy}' of plugin '#{plugin}' is not installed",
+             "Run \"rake install\" in plugin '#{plugin}'\n or run\nsudo cp #{fname} #{dest_policy}"
     end
   end
 
