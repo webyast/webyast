@@ -44,6 +44,10 @@ Authors:
 %setup -q -n www
 
 %build
+# build restdoc documentation
+mkdir -p $RPM_BUILD_ROOT/srv/www/%{pkg_user}/vendor/plugins/%{plugin_name}/public/system/restdoc
+export RAILS_PARENT=/srv/www/yastws
+env LANG=en rake restdoc
 
 %install
 
@@ -57,6 +61,8 @@ cp %{SOURCE1} $RPM_BUILD_ROOT/usr/share/YaST2/modules/YaPI/
 mkdir -p $RPM_BUILD_ROOT/usr/share/PolicyKit/policy/
 cp %{SOURCE2} $RPM_BUILD_ROOT/usr/share/PolicyKit/policy/
 
+# do not package restdoc sources
+rm -rf $RPM_BUILD_ROOT/srv/www/%{pkg_user}/vendor/plugins/%{plugin_name}/restdoc
 
 %clean
 rm -rf $RPM_BUILD_ROOT
@@ -83,5 +89,6 @@ rm -rf $RPM_BUILD_ROOT
 /srv/www/%{pkg_user}/vendor/plugins/%{plugin_name}/uninstall.rb
 /srv/www/%{pkg_user}/vendor/plugins/%{plugin_name}/app
 /srv/www/%{pkg_user}/vendor/plugins/%{plugin_name}/config
+/srv/www/%{pkg_user}/vendor/plugins/%{plugin_name}/public
 /usr/share/YaST2/modules/YaPI/NTP.pm
 /usr/share/PolicyKit/policy/org.opensuse.yast.modules.yapi.ntp.policy

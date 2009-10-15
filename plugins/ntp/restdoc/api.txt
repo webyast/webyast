@@ -18,6 +18,7 @@ Contents:
 == Overview
 
   This module provides access to the Ntp synchronization. Curretly it provides only synchronize again predefined server.
+  Predefined servers is stored in /etc/sysconfig/network/config - key NETCONFIG_NTP_STATIC_SERVERS
 
 == PolicyKit Access Rights
 
@@ -32,7 +33,7 @@ GET /ntp
 
   Get the list of supported system actions. The list contains actions for ntp. Nowadays, it is like <i>synchronize</i>.
 
-  CURL Example: curl -u &gt;user&lt; http://localhost:4984/ntp.xml
+  CURL Example: curl -u &lt;user&gt; http://localhost:4984/ntp.xml
 
 XmlResult: ntp
 
@@ -41,7 +42,7 @@ PUT /ntp
 
   Trigger a action. Set active flag to true for the action which should be started - see the XML example file.
 
-  CURL example: curl -u user -X PUT -H 'Content-type: text/xml' -d @sync_request.xml http://localhost:4984/ntp.xml
+  CURL example: curl -u &lt;user&gt; -X PUT -H 'Content-type: text/xml' -d @sync_request.xml http://localhost:4984/ntp.xml
 
 XmlBody: sync_request
   
