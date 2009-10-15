@@ -14,7 +14,6 @@ class MailSettingsController < ApplicationController
     @mail.read
 
     respond_to do |format|
-      format.html { render :xml => @mail.to_xml(:root => "mail_settings"), :location => "none" } #return xml only
       format.xml  { render :xml => @mail.to_xml(:root => "mail_settings", :indent=>2), :location => "none" }
       format.json { render :json => @mail.to_json, :location => "none" }
     end
