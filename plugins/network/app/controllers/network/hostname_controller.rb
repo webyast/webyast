@@ -35,7 +35,6 @@ class Network::HostnameController < ApplicationController
     @hostname = Hostname.find
 
     respond_to do |format|
-      format.html { render :xml => @hostname.to_xml( :root => "hostname", :dasherize => false ) }
       format.xml { render :xml => @hostname.to_xml( :root => "hostname", :dasherize => false ) }
       format.json { render :json => @hostname.to_json }
     end

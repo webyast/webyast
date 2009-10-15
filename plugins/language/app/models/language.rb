@@ -46,7 +46,7 @@ class Language
   end
 
   # Getter for available static field
-  def self.available
+  def available
     @@available
   end
 

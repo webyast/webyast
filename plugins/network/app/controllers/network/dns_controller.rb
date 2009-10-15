@@ -1,5 +1,5 @@
-# = Hostname controller
-# Provides access to hostname settings for authenticated users.
+# = DNS controller
+# Provides access to DNS settings for authenticated users.
 # Main goal is checking permissions.
 class Network::DnsController < ApplicationController
 
@@ -38,7 +38,6 @@ class Network::DnsController < ApplicationController
     @dns = DNS.find
 
     respond_to do |format|
-      format.html { render :xml => @dns.to_xml( :root => "dns", :dasherize => false ) }
       format.xml { render :xml => @dns.to_xml( :root => "dns", :dasherize => false ) }
       format.json { render :json => @dns.to_json }
     end
