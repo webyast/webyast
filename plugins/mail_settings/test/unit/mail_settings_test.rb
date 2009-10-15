@@ -7,13 +7,14 @@ class MailSettingsTest < ActiveSupport::TestCase
   def setup    
     @model = MailSettings.instance
     YastService.stubs(:Call).with('YaPI::MailSettings::Read').returns({ })
-    YastService.stubs(:Call).with('YaPI::SERVICES::Execute', 'postfix', 'reload').returns({ "stdout" => "", "exit" => 0, "stderr" => ""})
+    YastService.stubs(:Call).with('YaPI::SERVICES::Execute', 'postfix', 'restart').returns({ "stdout" => "", "exit" => 0, "stderr" => ""})
     @model.read
   end
 
   def test_save
     YastService.stubs(:Call).with('YaPI::MailSettings::Write', {
       "Changed" => [ "i", 1],
+      "MaximumMailSize" => [ "i", 10485760],
       "SendingMail" => ["a{sv}", {
 	  "Type"	=> [ "s", "relayhost"],
 	  "TLS"		=> [ "s", "NONE"],
@@ -54,6 +55,7 @@ class MailSettingsTest < ActiveSupport::TestCase
   def test_save_failure
     YastService.stubs(:Call).with('YaPI::MailSettings::Write', {
       "Changed" => [ "i", 1],
+      "MaximumMailSize" => [ "i", 10485760],
       "SendingMail" => ["a{sv}", {
 	  "Type"	=> [ "s", "relayhost"],
 	  "TLS"		=> [ "s", nil],
