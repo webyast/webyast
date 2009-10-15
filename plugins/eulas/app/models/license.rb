@@ -57,7 +57,7 @@ class License
   end
 
   def self.find(id)
-    name = license_names[id-1] # let ids in find start from 1
+    name = license_names[id.to_i-1] # let ids in find start from 1
     if name.nil? then
       nil
     else
@@ -79,6 +79,10 @@ class License
 
   def self.find_all
     Licenses.new license_names.collect{|ln| new ln}
+  end
+
+  def self.all_accepted?
+    find_all.collect{|license| license.accepted}.inject{|a,b| a and b}
   end
 
   def save
@@ -130,11 +134,10 @@ class License
     xml.eula do
       xml.name @name
       xml.accepted (@accepted, {:type => "boolean"})
-      xml.last (@last, {:type => "boolean"})
       xml.only_show (@only_show, {:type => "boolean"})
       xml.available_langs({:type => "array"}) do
         @langs_list.each do |lang| 
-          xml.availablelang lang
+          xml.available_lang lang
         end
       end
       xml.text_lang @text_lang
