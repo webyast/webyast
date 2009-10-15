@@ -131,12 +131,13 @@ class License
       xml.name @name
       xml.accepted (@accepted, {:type => "boolean"})
       xml.last (@last, {:type => "boolean"})
-      xml.availablelangs({:type => "array"}) do
+      xml.only_show (@only_show, {:type => "boolean"})
+      xml.available_langs({:type => "array"}) do
         @langs_list.each do |lang| 
           xml.availablelang lang
         end
       end
-      xml.textlang @text_lang
+      xml.text_lang @text_lang
       xml.text @text
     end
   end
@@ -160,4 +161,4 @@ class Licenses < Array
   def to_json
     Hash.from_xml(to_xml).to_json
   end
-end 
+end
