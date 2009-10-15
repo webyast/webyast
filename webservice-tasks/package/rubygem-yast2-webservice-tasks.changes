@@ -1,4 +1,11 @@
 -------------------------------------------------------------------
+Thu Oct 15 10:33:26 CEST 2009 - lslezak@suse.cz
+
+- fixed packaging of GIT files - fix the file list so the exclude
+  patterns match
+- 0.0.6
+
+-------------------------------------------------------------------
 Tue Oct 13 09:47:39 CEST 2009 - lslezak@suse.cz
 
 - fixed 'rake package' - do not package files which are not in the

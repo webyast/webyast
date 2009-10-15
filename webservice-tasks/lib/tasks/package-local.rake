@@ -30,6 +30,9 @@ Rake::PackageTask.new('www', :noversion) do |p|
     filelist = `git ls-files . --exclude=.gitignore`.split("\n")
 
     if $?.exitstatus.zero?
+	# add ./ prefix so the exclude patterns match
+	filelist.map! { |f| "./#{f}"}
+
 	p.package_files.include filelist
 
 	ignored = `git ls-files -o .`.split("\n")
