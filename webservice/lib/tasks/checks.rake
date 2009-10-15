@@ -168,12 +168,7 @@ EOF
     rescue Exception => e
     end
     escape "System error, cannot access D-Bus SystemBus" unless bus
-    begin
-      proxy = bus.introspect( "org.opensuse.yast.SCR", "/SCR" )
-    rescue Exception => e
-      # catched by 'unless proxy' below
-    end
-
+    
     # check if openSUSE 11.2 or SLE11
     
     os_version = "unknown"
@@ -181,6 +176,15 @@ EOF
     suse_release.scan( /VERSION = ([\d\.]*)/ ) do |v|
       os_version = v[0]
     end if suse_release
+
+    # FIXME: Is yast2-dbus-server also available in SLE ?
+    test_version "yast2-dbus-server", "2.18.1" if os_version == "11.2"
+
+    begin
+      proxy = bus.introspect( "org.opensuse.yast.SCR", "/SCR" )
+    rescue Exception => e
+      # catched by 'unless proxy' below
+    end
 
     package = "yast2-core"
     version = (os_version == "11.2")?"2.18.10":"2.17.31"
