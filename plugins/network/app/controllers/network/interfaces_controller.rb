@@ -1,5 +1,5 @@
-# = Hostname controller
-# Provides access to hostname settings for authenticated users.
+# = Interfacescontroller
+# Provides access to interface settings for authenticated users.
 # Main goal is checking permissions.
 class Network::InterfacesController < ApplicationController
 
@@ -29,9 +29,6 @@ class Network::InterfacesController < ApplicationController
     @ifce = Interface.find(params[:id])
 
     respond_to do |format|
-      format.html do
-        render :xml => difce.to_xml( :root => "interfaces", :dasherize => false )
-      end
       format.xml { render :xml => @ifce.to_xml( :root => "interfaces", :dasherize => false ) }
       format.json { render :json => @ifce.to_json }
     end
@@ -40,7 +37,6 @@ class Network::InterfacesController < ApplicationController
   def index
    ifaces_a = Interface.find(:all).values
    respond_to do |format|
-     format.html { render :xml => ifaces_a.to_xml( :root => "interfaces", :dasherize => false ) }
      format.xml { render :xml => ifaces_a.to_xml( :root => "interfaces", :dasherize => false ) }
      format.json { render :json => ifaces_a.to_json }
    end    
