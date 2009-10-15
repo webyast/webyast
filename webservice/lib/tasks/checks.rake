@@ -39,12 +39,16 @@ def test_module name, package
   end
 end
 
-def test_version package, version
+def test_version package, version = nil
   old_lang = ENV['LANG']
   ENV['LANG'] = 'C'
   v = `rpm -q #{package}`
   ENV['LANG'] = old_lang
-  escape v, "install #{package} >= #{version}" if v =~ /is not installed/
+  if v =~ /is not installed/
+    escape v, "install #{package} >= #{version}" if version
+    escape v, "install #{package}"
+  end
+  return unless version # just check package, not version
   nvr = v.split "-"
   rel = nvr.pop
   ver = nvr.pop
@@ -57,6 +61,14 @@ end
 
 desc "Check that your build environment is set up correctly for WebYaST"
 task :system_check do
+
+  # check if openSUSE 11.2 or SLE11
+
+  os_version = "unknown"
+  suse_release = File.read "/etc/SuSE-release"
+  suse_release.scan( /VERSION = ([\d\.]*)/ ) do |v|
+    os_version = v[0]
+  end if suse_release
 
   #
   # check needed needed packages
@@ -168,14 +180,6 @@ EOF
     rescue Exception => e
     end
     escape "System error, cannot access D-Bus SystemBus" unless bus
-    
-    # check if openSUSE 11.2 or SLE11
-    
-    os_version = "unknown"
-    suse_release = File.read "/etc/SuSE-release"
-    suse_release.scan( /VERSION = ([\d\.]*)/ ) do |v|
-      os_version = v[0]
-    end if suse_release
 
     # FIXME: Is yast2-dbus-server also available in SLE ?
     test_version "yast2-dbus-server", "2.18.1" if os_version == "11.2"
@@ -199,6 +203,14 @@ EOF
     end
     escape "YaST D-Bus does not provide the right data", "reinstall #{package}-#{version}" unless scr
   end
+
+  #
+  # plugin-specific tests
+  #
+  
+  # mailsettings
+  test_version "yast2-mail"
+  test_version "yast2", (os_version == "11.2")?"2.18.24":"2.17.72"
 
   #
   # plugin test. Each plugin will be tested for a "GET index" call. This call has to return "success"
