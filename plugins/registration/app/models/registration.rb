@@ -29,17 +29,16 @@ class Registration
     return if hash.nil?
 
     # merge custom context data
-    if hash.class == Hash
-       hash.each {|k, v|  @context.merge!( { k => ['s', "#{v.to_s}"] } ) }
-    else
-      raise "Invalid or missing registration initialization context data."
+    raise "Invalid or missing registration initialization context data." unless hash.is_a?(Hash)
+    
+    hash.each do |k, v|
+      @context.merge!( { k => ['s', v.to_s] } )
     end
 
   end
 
   def find
     @config = YastService.Call("YSR::getregistrationconfig")
-    return @config
   end
 
   def set_context(hash)
@@ -70,14 +69,13 @@ class Registration
 
   def get_config
     @config = YastService.Call("YSR::getregistrationconfig")
-    return @config
   end
 
   def set_config(url, ca)
     newconfig = { 'regserverurl' => url,
                   'regserverca'  => ca  }
     ret = YastService.Call("YSR::setregistrationconfig", newconfig)
-    puts "YastService.Call retruned: =#{ret}="
+    puts "YastService.Call returned: =#{ret}="
     self.get_config
     return ret
   end
