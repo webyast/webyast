@@ -50,7 +50,7 @@ Authors:
 #
 # Install all web and frontend parts.
 #
-mkdir -p $RPM_BUILD_ROOT/usr/share/%{pkg_user}/%{plugin_name}
+mkdir -p $RPM_BUILD_ROOT/usr/share/%{pkg_user}/%{plugin_name}/var
 mv config/resources/licenses $RPM_BUILD_ROOT/usr/share/%{pkg_user}/%{plugin_name}/
 
 mkdir -p $RPM_BUILD_ROOT/var/lib/%{pkg_user}/%{plugin_name}/accepted-licenses
