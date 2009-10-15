@@ -52,6 +52,7 @@ class MailSettings
     end
     parameters	= {
       "Changed" => [ "i", 1],
+      "MaximumMailSize" => [ "i", 10485760],
       "SendingMail" => ["a{sv}", {
 	  "Type"	=> [ "s", "relayhost"],
 	  "TLS"		=> [ "s", settings["transport_layer_security"]],
@@ -68,7 +69,7 @@ class MailSettings
     Rails.logger.debug "YaPI returns: '#{yapi_ret}'"
     raise MailSettingsError.new(yapi_ret) unless yapi_ret.empty?
 
-    yapi_ret = YastService.Call("YaPI::SERVICES::Execute", "postfix", "reload")
+    yapi_ret = YastService.Call("YaPI::SERVICES::Execute", "postfix", "restart")
     Rails.logger.debug "YaPI returns: '#{yapi_ret.inspect}'"
     raise MailSettingsError.new(yapi_ret["stderr"]) unless yapi_ret["stderr"].empty?
     true
