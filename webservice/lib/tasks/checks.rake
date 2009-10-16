@@ -209,8 +209,8 @@ EOF
   #
   
   # mailsettings
-#  test_version "yast2-mail"
-#  test_version "yast2", (os_version == "11.2")?"2.18.24":"2.17.72"
+  test_version "yast2-mail"
+  test_version "yast2", (os_version == "11.2")?"2.18.24":"2.17.72"
 
   #
   # plugin test. Each plugin will be tested for a "GET index" call. This call has to return "success"

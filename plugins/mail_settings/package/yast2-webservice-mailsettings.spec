@@ -25,6 +25,12 @@ BuildRoot:      %{_tmppath}/%{name}-%{version}-build
 BuildArch:      noarch
 BuildRequires:  rubygem-yast2-webservice-tasks rubygem-restility
 
+# install these packages into Hudson chroot environment
+# the exact versions are checked in checks.rake task
+%if 0
+BuildRequires:  yast2 yast2-mail
+%endif
+
 # YaPI::MailServer (standard edition)
 Requires:	yast2-mail
 
