@@ -209,6 +209,12 @@ EOF
   #
   
   # mailsettings
+  test "Mail YaPI existance" do
+    unless File.exists? "/usr/share/YaST2/modules/YaPI/MailSettings.pm"
+      escape "mail_settings incomplete", "Install /usr/share/YaST2/modules/YaPI/MailSettings.pm from plugins/mail_settings"
+    end
+  end
+
   test_version "yast2-mail"
   test_version "yast2", (os_version == "11.2")?"2.18.24":"2.17.72"
 
