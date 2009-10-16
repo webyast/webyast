@@ -73,6 +73,7 @@ rm -rf $RPM_BUILD_ROOT
 %dir /srv/www/%{pkg_user}/vendor/plugins
 %dir /srv/www/%{pkg_user}/vendor/plugins/%{plugin_name}
 %dir /srv/www/%{pkg_user}/vendor/plugins/%{plugin_name}/doc
+%dir /usr/share/%{pkg_user}
 %dir /usr/share/%{pkg_user}/%{plugin_name}
 %dir /var/lib/%{pkg_user}
 %dir /var/lib/%{pkg_user}/%{plugin_name}
