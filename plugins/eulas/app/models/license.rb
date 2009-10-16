@@ -69,7 +69,7 @@ class License
   end
 
   def self.license_names
-    config = YaST::ConfigFile.new(:eula)
+    config = YaST::ConfigFile.new(:eulas)
     begin
       config["licenses"]
     rescue Exception => e
