@@ -1,8 +1,20 @@
 -------------------------------------------------------------------
+Fri Oct 16 16:28:33 CEST 2009 - mvidner@suse.cz
+
+- Disabled HTML output, it returned XML anyway (kkaempf)
+- There is no org.opensuse.yast.modules.yapi.network resource (bnc#547290).
+- 0.0.7
+
+-------------------------------------------------------------------
 Thu Oct  8 09:44:18 CEST 2009 - lslezak@suse.cz
 
 - build restdoc documentation during package build
 - 0.0.6
+
+-------------------------------------------------------------------
+Tue Oct  6 16:41:30 CEST 2009 - mvidner@suse.cz
+
+- Handle nil nameservers and searches.
 
 -------------------------------------------------------------------
 Thu Oct  1 16:18:11 CEST 2009 - mzugec@suse.cz
