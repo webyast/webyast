@@ -133,8 +133,8 @@ class License
 
     xml.eula do
       xml.name @name
-      xml.accepted (@accepted, {:type => "boolean"})
-      xml.only_show (@only_show, {:type => "boolean"})
+      xml.accepted(@accepted, {:type => "boolean"})
+      xml.only_show(@only_show, {:type => "boolean"})
       xml.available_langs({:type => "array"}) do
         @langs_list.each do |lang| 
           xml.available_lang lang

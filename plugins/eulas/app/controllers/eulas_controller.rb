@@ -9,7 +9,7 @@ class EulasController < ApplicationController
   before_filter :ensure_license, :only => [:show, :update]
 
   def ensure_license
-    raise InvalidParameters.new ({:id => 'MISSING'}) if params[:id].nil?
+    raise InvalidParameters.new({:id => 'MISSING'}) if params[:id].nil?
     @id      = params[:id].to_i
     @license = License.find @id
     render ErrorResult.error(404, 1, "License not found") and return if @license.nil?
@@ -35,7 +35,7 @@ class EulasController < ApplicationController
   end
   
   def update
-    raise InvalidParameters.new ({:id => 'MISSING'}) if params[:id].nil?
+    raise InvalidParameters.new({:id => 'MISSING'}) if params[:id].nil?
     @license = License.find params[:id]
     render ErrorResult.error(404, 1, "License not found") and return if @license.nil?
     @license.accepted = params[:eulas][:accepted] == "true" ? true : false
