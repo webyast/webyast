@@ -74,6 +74,7 @@ rm -rf $RPM_BUILD_ROOT
 %dir /srv/www/%{pkg_user}/vendor/plugins/%{plugin_name}
 %dir /srv/www/%{pkg_user}/vendor/plugins/%{plugin_name}/doc
 %dir /usr/share/%{pkg_user}/%{plugin_name}
+%dir /var/lib/%{pkg_user}
 %dir /var/lib/%{pkg_user}/%{plugin_name}
 /srv/www/%{pkg_user}/vendor/plugins/%{plugin_name}/MIT-LICENSE
 /srv/www/%{pkg_user}/vendor/plugins/%{plugin_name}/README
@@ -87,6 +88,7 @@ rm -rf $RPM_BUILD_ROOT
 #/srv/www/%{pkg_user}/vendor/plugins/%{plugin_name}/test
 /srv/www/%{pkg_user}/vendor/plugins/%{plugin_name}/doc/README_FOR_APP
 /usr/share/%{pkg_user}/%{plugin_name}/licenses
+%dir /etc/YaST2
 %config /etc/YaST2/eulas.yml
 %defattr(-,%{pkg_user},%{pkg_user})
 %dir /var/lib/%{pkg_user}/%{plugin_name}/accepted-licenses
