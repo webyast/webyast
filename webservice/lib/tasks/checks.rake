@@ -168,7 +168,7 @@ EOF
   #
   test "User roles configured" do
     unless File.exists? "/etc/yast_user_roles"
-      escape "/etc/yast_user_roles does not exist", "Create /etc/yast_user_roles using template in webservice/package/yast_user_roles"
+      warn "/etc/yast_user_roles does not exist", "Create /etc/yast_user_roles using template in webservice/package/yast_user_roles"
     end
   end
 
@@ -211,7 +211,7 @@ EOF
   # mailsettings
   test "Mail YaPI existance" do
     unless File.exists? "/usr/share/YaST2/modules/YaPI/MailSettings.pm"
-      escape "mail_settings incomplete", "Install /usr/share/YaST2/modules/YaPI/MailSettings.pm from plugins/mail_settings"
+      warn "mail_settings incomplete", "Install /usr/share/YaST2/modules/YaPI/MailSettings.pm from plugins/mail_settings"
     end
   end
 
