@@ -1,4 +1,9 @@
 -------------------------------------------------------------------
+Fri Oct 16 14:03:09 CEST 2009 - jreidinger@suse.cz
+
+- add eula as first plugin in workflow 
+- 0.0.4
+-------------------------------------------------------------------
 Tue Oct  6 12:03:50 CEST 2009 - jreidinger@suse.cz
 
 - change state directory to /var/lib/yastws/basesystem to be FHS
