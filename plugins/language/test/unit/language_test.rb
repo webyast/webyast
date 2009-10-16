@@ -65,7 +65,7 @@ class LanguageTest < ActiveSupport::TestCase
     assert_equal("en_US", lang.language)
     assert_equal("ctype", lang.rootlocale)
     assert_equal("true", lang.utf8)
-    assert_equal(LANGUAGES,Language.available)
+    assert_equal(LANGUAGES,lang.available)
   end
 
   def test_setter
@@ -91,7 +91,7 @@ class LanguageTest < ActiveSupport::TestCase
     lang_reponse = [ {"name"=>"Deutsch", "id"=>"de_DE"},
                      {"name"=>"English (US)", "id"=>"en_US"},
                      {"name"=>"Français", "id"=>"fr_FR"} ]
-    
+
     assert_equal(lang_reponse.sort { |a,b| a["id"] <=> b["id"] },
       response["available"].sort { |a,b| a["id"] <=> b["id"] })
   end
