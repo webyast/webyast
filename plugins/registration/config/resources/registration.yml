@@ -1,4 +1,0 @@
-interface: org.opensuse.yast.modules.registration
-policy: org.opensuse.yast.modules.ysr
-controller: registration
-singular: true
