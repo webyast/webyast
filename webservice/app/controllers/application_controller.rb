@@ -5,7 +5,7 @@ require 'exceptions'
 
 class ApplicationController < ActionController::Base
 
-  before_filter :ensure_eulas
+#  before_filter :ensure_eulas
 
   rescue_from 'BackendException' do |exception|
       render :xml => exception, :status => 503

@@ -1,7 +1,7 @@
-# = RegistrationConfiguration controller
+# = Registration::Configuration controller
 # Provides access to the configuration of the registration system
-#class Registration::ConfigurationController < ApplicationController
-class ConfigurationController < ApplicationController
+
+class Registration::ConfigurationController < ApplicationController
 
   before_filter :login_required
 
@@ -34,16 +34,16 @@ class ConfigurationController < ApplicationController
 
     end
 
-    @registration = Registration.new( { } )
-    @registration.set_config newurl, newca
+    @register = Register.new( { } )
+    @register.set_config newurl, newca
     render :show
   end
 
   def show
     permission_check("org.opensuse.yast.modules.ysr.getregistrationconfig")
     # do not run registration, only get the config
-    @registration = Registration.new( { } )
-    @registration.get_config
+    @register = Register.new( { } )
+    @register.get_config
   end
 
   def index

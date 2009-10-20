@@ -3,7 +3,7 @@ require 'test/unit'
 require 'rubygems'
 require 'mocha'
 require File.expand_path( File.join("test","plugin_basic_tests"), RailsParent.parent )
-
+module Registration
 class ConfigurationControllerTest < ActionController::TestCase
   fixtures :accounts
 
@@ -11,12 +11,16 @@ class ConfigurationControllerTest < ActionController::TestCase
             'certificate'=>{'data'=>"<![CDATA[-----BEGIN CERTIFICATE-----MIIFIDCCBAigAwIBAgIJAPP6cY6saTFlMA0GCSqGSIb3DQEBBQUAMIGPMQswCQYDVQQGEwJERTEPMA0    .........     60QTef32lxeuVH9Kve8gGZiMwDqcJflJ8NLO3kNW3Zys2p4agg22yttmUs=-----END CERTIFICATE-----"}}
 
   def setup
-    @model_class = Registration
-    
-#    Registration.stubs(:find).returns(Registration.new)
+    @data = DATA
+#    @model_class = Registration
 
-    @controller = ConfigurationController.new
-    @request = ActionController::TestRequest.new
+#    @reg = Registration.new
+#    @reg.config = DATA
+    
+#    Registration.stubs(:find).returns(@reg)
+
+#    @controller = Registration::ConfigurationController.new
+#    @request = ActionController::TestRequest.new
     # http://railsforum.com/viewtopic.php?id=1719
     @request.session[:account_id] = 1 # defined in fixtures
     @data = DATA
@@ -26,9 +30,11 @@ class ConfigurationControllerTest < ActionController::TestCase
   
   def test_update
 #    mock_save #Fixme as when the interface is ready
-#    put :update, DATA
+#    @controller = Registration::ConfigurationController.new
+#    put :update ,  DATA
 #    assert_response :success
   end
 
 
+end
 end
