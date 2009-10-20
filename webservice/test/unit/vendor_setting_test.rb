@@ -27,7 +27,7 @@ logs:
   - /var/log/apache2/access_log
 EOF
 
-    YaST::ConfigFile.stubs(:read_file).with('/etc/YaST2/vendor.yml').returns(@config_data)
+    YaST::ConfigFile.stubs(:read_file).with('/etc/webyast/vendor.yml').returns(@config_data)
   end
 
   def teardown

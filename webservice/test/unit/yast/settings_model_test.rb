@@ -25,14 +25,14 @@ outputs:
   - analog
 EOF
 
-    YaST::ConfigFile.stubs(:read_file).with('/etc/YaST2/monitor.yml').returns(@config_data)
+    YaST::ConfigFile.stubs(:read_file).with('/etc/webyast/monitor.yml').returns(@config_data)
   end
 
   def teardown
   end
   
   def test_model
-    assert_equal('/etc/YaST2/monitor.yml', MonitorSetting.path)
+    assert_equal('/etc/webyast/monitor.yml', MonitorSetting.path)
     settings = MonitorSetting.find(:all)
     assert_equal(5, settings.size)
 
