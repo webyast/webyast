@@ -23,7 +23,7 @@ Contents:
   
 
   Additionally, it uses the same interface for accessing and managing "custom services" - actually any application
-  defined in /etc/YaST2/custom_services.yml.
+  defined in /etc/webyast/custom_services.yml.
 
 
 == PolicyKit Access Rights
@@ -41,7 +41,7 @@ Contents:
 GET /services
 
   Get the list of all available services. With 'custom' argument, it returns list of custom services (defined in 
-  /etc/YaST2/custom_services.yml config file), otherwise it is a list of system (/etc/init.d) services.
+  /etc/webyast/custom_services.yml config file), otherwise it is a list of system (/etc/init.d) services.
 
   The information about service status is not read in this call.
 
