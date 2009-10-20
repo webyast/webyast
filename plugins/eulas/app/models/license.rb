@@ -71,11 +71,13 @@ class License
   end
 
   def self.license_names
+    config = YaST::ConfigFile.new(:eulas)
     begin
-      config = YaST::ConfigFile.new(:eulas)
       config["licenses"] || []
-    rescue Exception => e
+    rescue YaST::ConfigFile::NotFoundError
       [] # treat absense or corruption of eulas.yml as "no eulas"
+    rescue Exception
+      raise CorruptedFileException.new config.path
     end
   end
 
