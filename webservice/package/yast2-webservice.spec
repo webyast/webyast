@@ -29,7 +29,7 @@ PreReq:         lighttpd, PolicyKit, PackageKit, rubygem-rake, rubygem-sqlite3, 
 License:        MIT
 Group:          Productivity/Networking/Web/Utilities
 Autoreqprov:    on
-Version:        0.0.7
+Version:        0.0.8
 Release:        0
 Summary:        YaST2 - Webservice 
 Source:         www.tar.bz2
@@ -124,7 +124,7 @@ install -m 0644 %SOURCE5 $RPM_BUILD_ROOT/etc/yastws/tools
 install -m 0644 %SOURCE6 $RPM_BUILD_ROOT/etc/
 
 #  create yastwsdirs (config, var and data)
-mkdir -p $RPM_BUILD_ROOT/etc/YaST2
+mkdir -p $RPM_BUILD_ROOT/etc/webyast
 mkdir -p $RPM_BUILD_ROOT/var/lib/yastws
 mkdir -p $RPM_BUILD_ROOT/usr/share/yastws
 
@@ -203,6 +203,7 @@ fi
 #---------------------------------------------------------------
 %files 
 %defattr(-,root,root)
+#this /etc/yastws is for ligght conf for yastws
 %dir /etc/yastws
 %dir /srv/www/yastws
 %dir /etc/yastws/tools
@@ -214,7 +215,8 @@ fi
 %attr(-,%{pkg_user},%{pkg_user}) %dir %{pkg_home}/cache
 %attr(-,%{pkg_user},%{pkg_user}) %dir %{_var}/log/%{pkg_user}
 
-%dir /etc/YaST2/
+#this /etc/webyast is for webyast configuration files
+%dir /etc/webyast/
 %dir %{_datadir}/yastws
 %dir %attr(-,%{pkg_user},root) /var/lib/yastws
 %dir /srv/www/yastws/db
