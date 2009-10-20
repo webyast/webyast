@@ -71,7 +71,7 @@ class License
   def self.license_names
     config = YaST::ConfigFile.new(:eulas)
     begin
-      config["licenses"]
+      config["licenses"] || []
     rescue Exception => e
       raise CorruptedFileException.new config.path
     end
