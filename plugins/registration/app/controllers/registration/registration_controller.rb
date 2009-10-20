@@ -42,7 +42,7 @@ class Registration::RegistrationController < ApplicationController
     end
 
     logger.debug "set context to #{context.inspect}"
-    raise InvalidParameters.new :conext => "Missing"
+    raise InvalidParameters.new :context => "Missing"
 
     # overwrite context data
     @register.set_context( context )
