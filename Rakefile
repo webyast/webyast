@@ -3,6 +3,7 @@ verbose = (Rake.application.options.verbose)?"--verbose":""
 
 require 'rake'
 require 'rubygems'
+#require 'metric_fu'
 
 def sudo(cmd)
   puts "#{cmd}"
@@ -34,7 +35,7 @@ task :default => :test
 
 end
 
-desc "Run app:doc to generate whole documentation"
+desc "Run doc to generate whole documentation"
 task :doc do
   #clean old documentation
   puts "cleaning old doc"
@@ -61,7 +62,7 @@ task :doc do
   end
   puts "generate links for plugins"
   code = ""
-  plugins_names.each do |plugin|
+  plugins_names.sort.each do |plugin|
     code = "#{code}<a href=\"./#{plugin}/index.html\"><b>#{plugin}</b></a><br>"
   end
   system "sed -i 's:%%PLUGINS%%:#{code}:' doc/index.html"
