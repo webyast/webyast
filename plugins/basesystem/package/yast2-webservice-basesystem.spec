@@ -53,8 +53,8 @@ mkdir -p $RPM_BUILD_ROOT/srv/www/%{pkg_user}/vendor/plugins/%{plugin_name}
 cp -a * $RPM_BUILD_ROOT/srv/www/%{pkg_user}/vendor/plugins/%{plugin_name}
 #FIXME maybe location change in future
 
-mkdir -p $RPM_BUILD_ROOT/etc/YaST2/
-cp %SOURCE1 $RPM_BUILD_ROOT/etc/YaST2/
+mkdir -p $RPM_BUILD_ROOT/etc/webyast/
+cp %SOURCE1 $RPM_BUILD_ROOT/etc/webyast/
 
 %clean
 rm -rf $RPM_BUILD_ROOT
@@ -70,9 +70,7 @@ rm -rf $RPM_BUILD_ROOT
 #var dir to store basesystem status
 %dir %attr (-,%{pkg_user},root) /var/lib/yastws
 %dir %attr (-,%{pkg_user},root) /var/lib/yastws/%{plugin_name}
-#FIXME change what yastws config file has own directory
-%dir /etc/YaST2
-%config /etc/YaST2/basesystem.yml
+%config /etc/webyast/basesystem.yml
 /srv/www/%{pkg_user}/vendor/plugins/%{plugin_name}/MIT-LICENSE
 /srv/www/%{pkg_user}/vendor/plugins/%{plugin_name}/README
 /srv/www/%{pkg_user}/vendor/plugins/%{plugin_name}/Rakefile
