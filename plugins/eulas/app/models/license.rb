@@ -71,11 +71,11 @@ class License
   end
 
   def self.license_names
-    config = YaST::ConfigFile.new(:eulas)
     begin
+      config = YaST::ConfigFile.new(:eulas)
       config["licenses"] || []
     rescue Exception => e
-      raise CorruptedFileException.new config.path
+      [] # treat absense or corruption of eulas.yml as "no eulas"
     end
   end
 
@@ -84,7 +84,7 @@ class License
   end
 
   def self.all_accepted?
-    find_all.collect{|license| license.accepted}.inject{|a,b| a and b}
+    find_all.collect{|license| license.accepted}.inject(true){|a,b| a and b}
   end
 
   def save
