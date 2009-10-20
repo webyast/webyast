@@ -89,6 +89,7 @@ rm -rf $RPM_BUILD_ROOT
 #/srv/www/%{pkg_user}/vendor/plugins/%{plugin_name}/test
 /srv/www/%{pkg_user}/vendor/plugins/%{plugin_name}/doc/README_FOR_APP
 /usr/share/%{pkg_user}/%{plugin_name}/licenses
+%dir /etc/webyast/
 %config /etc/webyast/eulas.yml
 %defattr(-,%{pkg_user},%{pkg_user})
 %dir /var/lib/%{pkg_user}/%{plugin_name}/accepted-licenses
