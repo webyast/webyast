@@ -59,8 +59,8 @@ mkdir -p $RPM_BUILD_ROOT/srv/www/%{pkg_user}/vendor/plugins/%{plugin_name}
 cp -a * $RPM_BUILD_ROOT/srv/www/%{pkg_user}/vendor/plugins/%{plugin_name}
 #FIXME maybe location change in future
 
-mkdir -p $RPM_BUILD_ROOT/etc/YaST2/
-cp %SOURCE1 $RPM_BUILD_ROOT/etc/YaST2/
+mkdir -p $RPM_BUILD_ROOT/etc/webyast/
+cp %SOURCE1 $RPM_BUILD_ROOT/etc/webyast/
 
 %clean
 rm -rf $RPM_BUILD_ROOT
@@ -89,8 +89,7 @@ rm -rf $RPM_BUILD_ROOT
 #/srv/www/%{pkg_user}/vendor/plugins/%{plugin_name}/test
 /srv/www/%{pkg_user}/vendor/plugins/%{plugin_name}/doc/README_FOR_APP
 /usr/share/%{pkg_user}/%{plugin_name}/licenses
-%dir /etc/YaST2
-%config /etc/YaST2/eulas.yml
+%config /etc/webyast/eulas.yml
 %defattr(-,%{pkg_user},%{pkg_user})
 %dir /var/lib/%{pkg_user}/%{plugin_name}/accepted-licenses
 
