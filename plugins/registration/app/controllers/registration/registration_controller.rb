@@ -1,7 +1,7 @@
 # = Registration controller
 # Provides access to the registration of the system at NCC/SMT.
-#class Registration::RegistrationController < ApplicationController
-class RegistrationController < ApplicationController
+
+class Registration::RegistrationController < ApplicationController
 
   before_filter :login_required
 
@@ -9,7 +9,7 @@ class RegistrationController < ApplicationController
     # POST to registration => run registration
     permission_check("org.opensuse.yast.modules.ysr.statelessregister")
 
-    @registration = Registration.new({})
+    @register = Register.new({})
 
     begin
       if request.env["rack.input"].size>0
@@ -46,12 +46,12 @@ class RegistrationController < ApplicationController
     puts context.inspect
 
     # overwrite context data
-    @registration.set_context( context )
+    @register.set_context( context )
 
     # TODO: parse post data and set the arguments
-    # @registration.set_arguments( { } )
+    # @register.set_arguments( { } )
 
-    ret = @registration.register
+    ret = @register.register
     #if (ret != 0)
     #  headers["Status"] = "400 Bad Request"
     #end
@@ -60,8 +60,8 @@ class RegistrationController < ApplicationController
   def show
     permission_check("org.opensuse.yast.modules.ysr.getregistrationconfig")
     # get registration status
-    @registration = Registration.new( { } )
-    @registration.get_config
+    @register = Register.new( { } )
+    @register.get_config
     render :status
   end
 

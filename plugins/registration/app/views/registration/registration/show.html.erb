@@ -1,0 +1,11 @@
+<%= # @register == nil ? "@register is nil - FIXME" : @register.to_xml
+ -%>
+<%= case @register.class.to_s
+      when 'NilClass'
+        "@register is nil"
+      when 'String'
+        @register.to_s
+      when 'Register'
+        @register.to_xml
+    end
+  -%>

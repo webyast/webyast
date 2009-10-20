@@ -1,4 +1,15 @@
 -------------------------------------------------------------------
+Tue Oct 20 14:57:53 CEST 2009 - jreidinger@suse.cz
+
+- define constant for used paths (bnc#545626)
+- lslezak,kkampf - fix build and hudson tests
+- schubi - ensure correct path in routing
+- lslezak - handle missing directory
+- mkudlvasr - enforce eula requirements
+- kkampf - don't fail on non-suse system
+- 0.0.7
+
+-------------------------------------------------------------------
 Thu Oct 15 13:45:03 CEST 2009 - lslezak@suse.cz
 
 - build fix - do not package non-existing vendor/ directory

@@ -3,7 +3,7 @@ require 'test/unit'
 require 'rubygems'
 require 'mocha'
 require File.expand_path( File.join("test","plugin_basic_tests"), RailsParent.parent )
-
+module Registration
 class RegistrationControllerTest < ActionController::TestCase
   fixtures :accounts
   
@@ -77,4 +77,5 @@ class RegistrationControllerTest < ActionController::TestCase
 #    assert_response :success
   end
 
+end
 end
