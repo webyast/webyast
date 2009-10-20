@@ -7,6 +7,8 @@ class RegistrationController < ApplicationController
 
   def create
     # POST to registration => run registration
+    permission_check("org.opensuse.yast.modules.ysr.statelessregister")
+
     @registration = Registration.new({})
 
     begin
@@ -56,6 +58,7 @@ class RegistrationController < ApplicationController
   end
 
   def show
+    permission_check("org.opensuse.yast.modules.ysr.getregistrationconfig")
     # get registration status
     @registration = Registration.new( { } )
     @registration.get_config

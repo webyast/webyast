@@ -6,6 +6,8 @@ class ConfigurationController < ApplicationController
   before_filter :login_required
 
   def update
+    permission_check("org.opensuse.yast.modules.ysr.setregistrationconfig")
+
     #request.env.each do |k,v |  puts "==#{k}==  =>  ==#{v.inspect}==" end
 
     if request.env["rack.input"].size>0
@@ -38,6 +40,7 @@ class ConfigurationController < ApplicationController
   end
 
   def show
+    permission_check("org.opensuse.yast.modules.ysr.getregistrationconfig")
     # do not run registration, only get the config
     @registration = Registration.new( { } )
     @registration.get_config
