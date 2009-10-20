@@ -70,6 +70,7 @@ rm -rf $RPM_BUILD_ROOT
 #var dir to store basesystem status
 %dir %attr (-,%{pkg_user},root) /var/lib/yastws
 %dir %attr (-,%{pkg_user},root) /var/lib/yastws/%{plugin_name}
+%dir /etc/webyast/
 %config /etc/webyast/basesystem.yml
 /srv/www/%{pkg_user}/vendor/plugins/%{plugin_name}/MIT-LICENSE
 /srv/www/%{pkg_user}/vendor/plugins/%{plugin_name}/README
