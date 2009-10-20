@@ -21,8 +21,6 @@ class Registration::RegistrationController < ApplicationController
       req = Hash.new
     end
 
-
-
     valid_context_keys = %w[forcereg nooptional nohwdata yastcall norefresh logfile]
     context = Hash.new
 
@@ -43,7 +41,8 @@ class Registration::RegistrationController < ApplicationController
       end
     end
 
-    puts context.inspect
+    logger.debug "set context to #{context.inspect}"
+    raise InvalidParameters.new :conext => "Missing"
 
     # overwrite context data
     @register.set_context( context )
