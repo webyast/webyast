@@ -52,6 +52,8 @@ class License
       @accepted  = File.exists? File.join(VAR_DIR, "accepted-licenses",name)
     rescue Errno::ENOENT, Errno::EACCES
       raise CorruptedFileException.new license_dir
+    rescue Errno::ENOTDIR
+      raise NotADirException.new license_dir
     end
     @name  = name
   end

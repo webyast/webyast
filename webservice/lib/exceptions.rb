@@ -126,6 +126,25 @@ class CorruptedFileException < BackendException
   end
 end
 
+# Exception that signalizes that the requested path does not point to a directory
+class NotADirException < BackendException
+  def initialize(file)
+    @file = file
+    super "File error: Path #{@file} does not point to a directory"
+  end
+
+  def to_xml(options={})
+    xml = Builder::XmlMarkup.new(options)
+    xml.instruct! unless options[:skip_instruct]
+
+    xml.error do
+      xml.type "NOTADIR"
+      xml.description message
+      xml.file @file
+    end
+  end
+end
+
 # Exception, which signalizes, that some functionality of backend was requested
 # without accepting the EULA first.
 class EulaNotAcceptedException < BackendException
