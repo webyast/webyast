@@ -58,6 +58,7 @@ class Register
     self.arguments.each { |k, v| args[k] = [ 'a{ss}', { 'value' => v.to_s  } ] }
 
     @reg = YastService.Call("YSR::statelessregister", ctx, args )
+    logger.debug "YSR::statelessregister: #{@reg.inspect}"
     return @reg['exitcode'] || 99
   end
 
@@ -110,7 +111,7 @@ class Register
         xml.tag!(:guid, "abcdefg1234567")
 
 
-        xml.missingarguments do
+        xml.missingarguments({:type => "array"}) do
           xml.argument do
             xml.tag!(:name, 'regcode-SLES-13-SP5')
             xml.tag!(:type, 'string')
@@ -125,7 +126,7 @@ class Register
           end
         end
 
-        xml.changedrepos do
+        xml.changedrepos ({:type => "array"})do
           xml.repo do
             xml.tag!(:name, 'foobar11n')
             xml.tag!(:alias, 'foobar11a')
@@ -138,7 +139,7 @@ class Register
           end
         end
 
-        xml.changedservices do
+        xml.changedservices ({:type => "array"})do
           xml.service do
             xml.tag!(:name, 'foobar33n')
             xml.tag!(:alias, 'foobar33a')
