@@ -52,13 +52,15 @@ class Register
     # don't know how to pass only one hash, so split it into two. FIXME change later if possible!
     # @reg = YastService.Call("YSR::statelessregister", { 'ctx' => ctx, 'arguments' => args } )
 
-
-    # TODO: check the hashes and do a rescue if it fails
-
     ctx = Hash.new
-    self.context.each   { |k, v|  ctx[k] = [ 's', v.to_s ] }
     args = Hash.new
-    self.arguments.each { |k, v| args[k] = [ 'a{ss}', { 'value' => v.to_s  } ] }
+    begin
+      self.context.each   { |k, v|  ctx[k] = [ 's', v.to_s ] }
+      self.arguments.each { |k, v| args[k] = [ 'a{ss}', { 'value' => v.to_s  } ] }
+    rescue
+      Rails.logger.error "When registration was called, the context or the arguments data was invalid."
+      raise InvalidParameters.new :registrationdata => "Invalid"
+    end
 
     @reg = YastService.Call("YSR::statelessregister", ctx, args )
     @reg['exitcode'] rescue 99
@@ -68,7 +70,7 @@ class Register
     newconfig = { 'regserverurl' => registrationserver,
                   'regserverca'  => certificate  }
     ret = YastService.Call("YSR::setregistrationconfig", newconfig)
-#    puts "YastService.Call returned: =#{ret}="
+
     self.find
     return ret
   end
