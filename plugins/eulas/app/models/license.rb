@@ -106,6 +106,25 @@ class License
   end
 
   ##
+  # Load license translation from disk
+  # @raise [CorruptedFileException] in case license translation name does not exist
+  # @param [String] lang lang or locale code of the desired license translation
+  # @return [nil] @text and @text_lang instance variables are set
+  def load_text(lang)
+    lang = make_lang_acceptable lang
+    if lang != @text_lang then
+      lang_str = (lang == 'en') ? "" : "."+@langs_hash[lang]
+      license_filename = File.join(RESOURCES_DIR, 'licenses', self.name, 'license' + lang_str + ".txt")
+      begin 
+        @text = File.open(license_filename).read
+        @text_lang = lang
+      rescue Errno::ENOENT, Errno::EACCES
+        raise CorruptedFileException.new license_filename
+      end
+    end
+  end
+
+  ##
   # Serialize to xml representation
   # @option options [Builder::XmlMarkup] :builder parent xml-builder
   # @option options [Boolean]            :skip_instruct whether xml document header should be skipped
@@ -144,7 +163,7 @@ class License
   # @return [String,nil] lang code of the translation. Can return nil in case regexp fails.
   def dig_lang(filename)
     r = Regexp.new('license(?:\.(\w+))?\.txt')
-    match = r.match(line)
+    match = r.match(filename)
     if match.nil? then
       nil
     else
@@ -191,26 +210,6 @@ class License
       end
     end
   end
-
-  ##
-  # Load license translation from disk
-  # @raise [CorruptedFileException] in case license translation name does not exist
-  # @param [String] lang lang or locale code of the desired license translation
-  # @return [nil] @text and @text_lang instance variables are set
-  def load_text(lang)
-    lang = make_lang_acceptable lang
-    if lang != @text_lang then
-      lang_str = (lang == 'en') ? "" : "."+@langs_hash[lang]
-      license_filename = File.join(RESOURCES_DIR, 'licenses', self.name, 'license' + lang_str + ".txt")
-      begin 
-        @text = File.open(license_filename).read
-        @text_lang = lang
-      rescue Errno::ENOENT, Errno::EACCES
-        raise CorruptedFileException.new license_filename
-      end
-    end
-  end
-
 
 end
 
