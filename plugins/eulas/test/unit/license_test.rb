@@ -60,4 +60,8 @@ EOF
     assert_not_nil licenses.to_json
   end
 
+  def text_all_accepted
+    assert_false( License.all_accepted? )
+  end
+
 end
