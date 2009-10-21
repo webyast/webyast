@@ -34,17 +34,17 @@ class Registration::ConfigurationController < ApplicationController
 
     end
 
-    @register = Register.new({})
+    @register = Register.new
     @register.registrationserver = newurl if newurl
     @register.certificate = newca if newca
-    @register.save
+    @register.save || raise ("Error: Could not save the new registration configuration.")
     render :show
   end
 
   def show
     permission_check("org.opensuse.yast.modules.ysr.getregistrationconfig")
     # do not run registration, only get the config
-    @register = Register.new({})
+    @register = Register.new
   end
 
   def index

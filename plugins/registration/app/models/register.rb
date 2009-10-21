@@ -15,7 +15,7 @@ class Register
 
   @reg = ''
 
-  def initialize(hash)
+  def initialize(hash={})
     # initialize context
     init_context hash
     # read the configuration
@@ -31,7 +31,7 @@ class Register
                  'nohwdata'     => '1',
                  'nooptional'   => '1',
                  'debugMode'    => '2',
-                 'logfile'      => '/root/.suse_register.log' }
+                 'logfile'      => Paths::REGISTRATION_LOG }
     @context.merge! hash if hash.class == Hash
   end
 
@@ -52,14 +52,16 @@ class Register
     # don't know how to pass only one hash, so split it into two. FIXME change later if possible!
     # @reg = YastService.Call("YSR::statelessregister", { 'ctx' => ctx, 'arguments' => args } )
 
+
+    # TODO: check the hashes and do a rescue if it fails
+
     ctx = Hash.new
     self.context.each   { |k, v|  ctx[k] = [ 's', v.to_s ] }
     args = Hash.new
     self.arguments.each { |k, v| args[k] = [ 'a{ss}', { 'value' => v.to_s  } ] }
 
     @reg = YastService.Call("YSR::statelessregister", ctx, args )
-    logger.debug "YSR::statelessregister: #{@reg.inspect}"
-    return @reg['exitcode'] || 99
+    @reg['exitcode'] rescue 99
   end
 
   def save
