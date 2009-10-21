@@ -10,7 +10,7 @@ class Registration::RegistrationController < ApplicationController
     permission_check("org.opensuse.yast.modules.ysr.statelessregister")
     raise InvalidParameters.new :registration => "Missing" unless params.has_key? :registration
 
-    @register = Register.new({})
+    @register = Register.new
     @register.arguments = params[:registration][:arguments] if params[:registration].has_key? :arguments && 
                                                                !params[:registration][:arguments].blank?
 
@@ -30,7 +30,7 @@ class Registration::RegistrationController < ApplicationController
   def show
     permission_check("org.opensuse.yast.modules.ysr.getregistrationconfig")
     # get registration status
-    @register = Register.new({})
+    @register = Register.new
     render :status
   end
 
