@@ -104,18 +104,18 @@ class Register
 
 
   def to_xml( options = {} )
-    # TODO  FIXME ... create the output based on parsed data
-    # return static response during development
+    # TODO  Parse the response in @reg{'readabletext'} if @reg{'missinginfo'} exists to hashed data
+    # TODO  create the output based on parsed data
 
     xml = options[:builder] ||= Builder::XmlMarkup.new(options)
     xml.instruct! unless options[:skip_instruct]
 
+# during development return static response
     xml.registration do
       if @reg then
         xml.tag!(:status, 'missinginfo')
         xml.tag!(:exitcode, 55)
         xml.tag!(:guid, "abcdefg1234567")
-
 
         xml.missingarguments({:type => "array"}) do
           xml.argument do
