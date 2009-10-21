@@ -3,15 +3,13 @@ require 'scr'
 require 'yast/config_file'
 
 class LogsController < ApplicationController
-  CONFIG_FILE="/etc/YaST2/vendor/logs.yml"
+  CONFIG_FILE=File.join(Paths::CONFIG,"vendor","logs.yml")
 
   def initialize
-    @cfg = case File.exists?(CONFIG_FILE)
-    when true then YaST::ConfigFile.new("/etc/YaST2/vendor/logs.yml")
-    else {}
-    end
+    @cfg = YaST::ConfigFile.new(CONFIG_FILE)
   end
     
+#XXX xml response should go to separate model, not to controller
   def index
     xml = Builder::XmlMarkup.new
     xml.instruct!
@@ -43,10 +41,7 @@ class LogsController < ApplicationController
     log_filename = @cfg[id]['path']
 
     # how many lines to show
-    lines = case params[:lines]
-      when nil then 50
-      else params[:lines].to_i
-    end
+    lines = params[:lines] ? params[:lines].to_i : 50
     
     output = Scr.instance.execute(['tail', '-n', "#{lines}", log_filename])
     

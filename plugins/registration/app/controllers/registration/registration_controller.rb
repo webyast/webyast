@@ -21,7 +21,7 @@ class Registration::RegistrationController < ApplicationController
       req = Hash.new
     end
 
-    valid_context_keys = %w[forcereg nooptional nohwdata yastcall norefresh logfile]
+    valid_context_keys = %w[forcereg nooptional nohwdata yastcall norefresh logfile].freeze
     context = Hash.new
 
     #puts req.inspect
@@ -32,20 +32,17 @@ class Registration::RegistrationController < ApplicationController
       req['registration']['options'].each do |k, v|
         case k
           when 'debug'
-            context['debugMode'] = v
+            @register.context['debugMode'] = v
           when 'restorerepos'
-            context['restoreRepos'] = v
+            @register.context['restoreRepos'] = v
           else
-            context[k] = v if valid_context_keys.include? k
+            @register.context[k] = v if valid_context_keys.include? k
         end
       end
     end
 
     logger.debug "set context to #{context.inspect}"
-    raise InvalidParameters.new :context => "Missing"
-
-    # overwrite context data
-    @register.set_context( context )
+    # raise InvalidParameters.new :context => "Missing"
 
     # TODO: parse post data and set the arguments
     # @register.set_arguments( { } )
@@ -59,8 +56,7 @@ class Registration::RegistrationController < ApplicationController
   def show
     permission_check("org.opensuse.yast.modules.ysr.getregistrationconfig")
     # get registration status
-    @register = Register.new( { } )
-    @register.get_config
+    @register = Register.new({})
     render :status
   end
 

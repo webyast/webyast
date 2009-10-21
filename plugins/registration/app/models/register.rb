@@ -7,86 +7,68 @@ class Register
 
   require 'yast_service'
 
-  @context = { }
-  @arguments = { }
-  @config = { }
+  attr_accessor :registrationserver
+  attr_accessor :certificate
+  attr_accessor :context
+  attr_accessor_with_default :arguments, Hash.new
+  attr_reader   :guid
+
   @reg = ''
 
   def initialize(hash)
     # cleanup arguments
-    @arguments = { }
+    #self.arguments = Hash.new
     # initialize context
     init_context hash
+    # read the configuration
+    find
   end
 
   def init_context(hash)
     # set context defaults
-    @context = { 'yastcall'     => [ 'i', 1 ],
-                 'norefresh'    => [ 'i', 1 ],
-                 'restoreRepos' => [ 'i', 1 ],
-                 'forcereg'     => [ 'i', 0 ],
-                 'nohwdata'     => [ 'i', 1 ],
-                 'nooptional'   => [ 'i', 1 ],
-                 'debugMode'    => [ 'i', 2 ],
-                 'logfile'      => [ 's', '/root/.suse_register.log' ] }
-
-    # when hash is nil, ignore it
-    return if hash.nil?
-
-    # merge custom context data
-    raise "Invalid or missing registration initialization context data." unless hash.is_a?(Hash)
-
-    hash.each do |k, v|
-      @context.merge!( { k.to_s => ['s', v.to_s] } )
-    end
+    @context = { 'yastcall'     => '1',
+                 'norefresh'    => '1',
+                 'restoreRepos' => '1',
+                 'forcereg'     => '0',
+                 'nohwdata'     => '1',
+                 'nooptional'   => '1',
+                 'debugMode'    => '2',
+                 'logfile'      => '/root/.suse_register.log' }
+    @context.merge! hash if hash.class == Hash
   end
 
   def find
     begin
-      @config = YastService.Call("YSR::getregistrationconfig")
+      config = YastService.Call("YSR::getregistrationconfig")
+      @registrationserver = config['regserverurl']
+      @certificate = config['regserverca']
+      @guid = config['guid']
     rescue Exception => e
       Rails.logger.error "YastService.Call('YSR::getregistrationconfig') failed"
       raise
     end
-    @config
+    config
   end
-
-  def set_context(hash)
-    self.init_context hash
-  end
-
-  def add_argument(key, value)
-    @arguments.merge!( { key.to_s => [ 'a{ss}',{ 'value' => value.to_s } ] } )
-  end
-
-  def add_arguments(hash)
-    hash.each {|k, v| self.add_argument k, v }
-  end
-
-  def set_arguments(hash)
-    @arguments = {}
-    self.add_arguments hash
-  end
-
 
   def register
     # don't know how to pass only one hash, so split it into two. FIXME change later if possible!
-    # @reg = YastService.Call("YSR::statelessregister", { 'ctx' => @context, 'arguments' => @arguments } )
+    # @reg = YastService.Call("YSR::statelessregister", { 'ctx' => ctx, 'arguments' => args } )
 
-    @reg = YastService.Call("YSR::statelessregister", @context, @arguments )
+    ctx = Hash.new
+    self.context.each   { |k, v|  ctx[k] = [ 's', v.to_s ] }
+    args = Hash.new
+    self.arguments.each { |k, v| args[k] = [ 'a{ss}', { 'value' => v.to_s  } ] }
+
+    @reg = YastService.Call("YSR::statelessregister", ctx, args )
     return @reg['exitcode'] || 99
   end
 
-  def get_config
-    find
-  end
-
-  def set_config(url, ca)
-    newconfig = { 'regserverurl' => url,
-                  'regserverca'  => ca  }
+  def save
+    newconfig = { 'regserverurl' => registrationserver,
+                  'regserverca'  => certificate  }
     ret = YastService.Call("YSR::setregistrationconfig", newconfig)
-    puts "YastService.Call returned: =#{ret}="
-    self.get_config
+#    puts "YastService.Call returned: =#{ret}="
+    self.find
     return ret
   end
 
@@ -95,7 +77,7 @@ class Register
     xml.instruct! unless options[:skip_instruct]
 
     xml.registration do
-      xml.tag!(:guid, @config['guid']) if @config['guid'] && @config['guid'].size > 0
+      xml.guid @guid if @guid && @guid.size > 0
     end
   end
 
@@ -105,11 +87,11 @@ class Register
 
     xml.registrationconfig do
       xml.server do
-        xml.tag!(:url, @config['regserverurl'] )
+        xml.url self.registrationserver if self.registrationserver
       end
      xml.certificate do
        xml.data do
-         xml.cdata!(@config['regserverca']) if @config['regserverca'].size > 0
+         xml.cdata!(self.certificate) if self.certificate && self.certificate.size > 0
        end
      end
     end

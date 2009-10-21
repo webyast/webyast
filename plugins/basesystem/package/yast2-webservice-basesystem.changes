@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Tue Oct 20 17:51:08 CEST 2009 - jreidinger@suse.cz
+
+- adapt to new webyast config directory
+- 0.0.5
+
+-------------------------------------------------------------------
 Fri Oct 16 14:03:09 CEST 2009 - jreidinger@suse.cz
 
 - add eula as first plugin in workflow 

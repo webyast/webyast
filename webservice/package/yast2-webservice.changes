@@ -1,4 +1,11 @@
 -------------------------------------------------------------------
+Tue Oct 20 17:05:00 CEST 2009 - jreidinger@suse.cz
+
+- change default configuration path to /etc/webyast 
+  (bnc#547614)
+- 0.0.8
+
+-------------------------------------------------------------------
 Tue Oct 20 14:57:53 CEST 2009 - jreidinger@suse.cz
 
 - define constant for used paths (bnc#545626)

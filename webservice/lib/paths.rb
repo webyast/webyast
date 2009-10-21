@@ -11,5 +11,5 @@ module Paths
   DATAS=File.join(ROOT,"usr","share","yastws")
 
 # Configuration place where is stored configuration place. Read-only.
-  CONFIG=File.join(ROOT,"etc","YaST2")
+  CONFIG=File.join(ROOT,"etc","webyast")
 end
