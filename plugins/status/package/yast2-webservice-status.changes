@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Wed Oct 21 09:32:53 CEST 2009 - schubi@suse.de
+
+- changed the config file location to /etc/webyast (bnc#547614)
+- version 0.0.4 
+
+-------------------------------------------------------------------
 Mon Oct  5 10:14:37 CEST 2009 - schubi@suse.de
 
 - Enanbling and starting collectd while postinstallation (again)

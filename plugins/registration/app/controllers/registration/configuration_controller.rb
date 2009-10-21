@@ -16,8 +16,8 @@ class Registration::ConfigurationController < ApplicationController
       req = Hash.new
     end
 
-    newurl = ''
-    newca  = ''
+    newurl = nil
+    newca  = nil
 
     # read registration server url
     if req['registrationconfig'] &&
@@ -34,16 +34,17 @@ class Registration::ConfigurationController < ApplicationController
 
     end
 
-    @register = Register.new( { } )
-    @register.set_config newurl, newca
+    @register = Register.new
+    @register.registrationserver = newurl if newurl
+    @register.certificate = newca if newca
+    @register.save || raise ("Error: Could not save the new registration configuration.")
     render :show
   end
 
   def show
     permission_check("org.opensuse.yast.modules.ysr.getregistrationconfig")
     # do not run registration, only get the config
-    @register = Register.new( { } )
-    @register.get_config
+    @register = Register.new
   end
 
   def index
