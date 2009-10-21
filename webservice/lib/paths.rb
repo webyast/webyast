@@ -12,4 +12,7 @@ module Paths
 
 # Configuration place where is stored configuration place. Read-only.
   CONFIG=File.join(ROOT,"etc","webyast")
+
+# Logfile for the registration - default is the YaST default: /root/.suse_register.log
+  REGISTRATION_LOG=File.join(ROOT, "root", ".suse_register.log")
 end
