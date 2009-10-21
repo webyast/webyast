@@ -16,8 +16,6 @@ class Register
   @reg = ''
 
   def initialize(hash)
-    # cleanup arguments
-    #self.arguments = Hash.new
     # initialize context
     init_context hash
     # read the configuration
@@ -87,11 +85,11 @@ class Register
 
     xml.registrationconfig do
       xml.server do
-        xml.url self.registrationserver if self.registrationserver
+        xml.url @registrationserver if @registrationserver
       end
      xml.certificate do
        xml.data do
-         xml.cdata!(self.certificate) if self.certificate && self.certificate.size > 0
+         xml.cdata!(@certificate) if @certificate && @certificate.size > 0
        end
      end
     end
