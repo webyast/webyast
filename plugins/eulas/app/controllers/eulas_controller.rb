@@ -2,9 +2,6 @@
 # Serves licences and handles notices about acceptations.
 class EulasController < ApplicationController
 
-  # this controller has to work even if EULA is not accepted. More on this in ApplicationController.
-  skip_before_filter :ensure_eulas
-
   before_filter :login_required
   before_filter :ensure_license, :only => [:show, :update]
 

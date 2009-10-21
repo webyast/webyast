@@ -3,9 +3,6 @@
 # It is really quite thin layer.
 class BasesystemController < ApplicationController
 
-  # this controller has to work even if EULA is not accepted. More on this in ApplicationController.
-  skip_before_filter :ensure_eulas
-
   before_filter :login_required
 
    def show

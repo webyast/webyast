@@ -1,7 +1,5 @@
 class ResourcesController < ApplicationController
   require "resource_registration"
-  # this controller has to work even if EULA is not accepted. More on this in ApplicationController.
-  skip_before_filter :ensure_eulas
   
   def index
     @resources = Resource.all
