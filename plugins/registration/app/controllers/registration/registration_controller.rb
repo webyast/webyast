@@ -42,7 +42,7 @@ class Registration::RegistrationController < ApplicationController
     end
 
     logger.debug "set context to #{context.inspect}"
-    # raise InvalidParameters.new :context => "Missing"
+#    raise InvalidParameters.new :request => "Missing" if req.blank?
 
     # TODO: parse post data and set the arguments
     # @register.set_arguments( { } )
