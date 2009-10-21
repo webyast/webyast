@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Wed Oct 21 08:22:01 CEST 2009 - jsuchome@suse.cz
+
+- changed the config file location to /etc/webyast (bnc#547614)
+- 0.0.8 
+
+-------------------------------------------------------------------
 Wed Oct 14 16:25:24 CEST 2009 - jsuchome@suse.cz
 
 - added rest API documentation
