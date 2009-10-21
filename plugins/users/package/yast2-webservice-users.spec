@@ -64,6 +64,8 @@ rm -rf $RPM_BUILD_ROOT
 %files 
 %defattr(-,root,root)
 %dir /srv/www/%{pkg_user}
+%dir /srv/www/%{pkg_user}/vendor
+%dir /srv/www/%{pkg_user}/vendor/plugins
 %dir /srv/www/%{pkg_user}/vendor/plugins/%{plugin_name}
 /srv/www/%{pkg_user}/vendor/plugins/%{plugin_name}/*
 %dir /usr/share/PolicyKit
