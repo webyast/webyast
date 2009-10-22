@@ -130,7 +130,7 @@ class Register
           end
         end
 
-        xml.changedrepos ({:type => "array"})do
+        xml.changedrepos({:type => "array"})do
           xml.repo do
             xml.tag!(:name, 'foobar11n')
             xml.tag!(:alias, 'foobar11a')
@@ -143,7 +143,7 @@ class Register
           end
         end
 
-        xml.changedservices ({:type => "array"})do
+        xml.changedservices({:type => "array"})do
           xml.service do
             xml.tag!(:name, 'foobar33n')
             xml.tag!(:alias, 'foobar33a')
