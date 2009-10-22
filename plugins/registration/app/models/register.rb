@@ -162,7 +162,9 @@ class Register
             end # cats
           end # service 
         end # changedservices
-
+      else
+        xml.tag!(:status, 'error')
+        xml.tag!(:exitcode, 1)
       end # if reg
     end # xml-root
   end # func
