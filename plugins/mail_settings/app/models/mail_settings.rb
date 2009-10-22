@@ -15,22 +15,23 @@ class MailSettings
   include Singleton
 
   def initialize
-    @password	= ""
-    @user	= ""
-    @smtp_server= ""
-    @transport_layer_security	= "NONE"
   end
 
   # read the settings from system
   def read
+    # reset the settings before read
+    @password	= ""
+    @user	= ""
+    @smtp_server= ""
+    @transport_layer_security	= "NONE"
     yapi_ret = YastService.Call("YaPI::MailSettings::Read")
     if yapi_ret.has_key? "SendingMail"
       sending_mail	= yapi_ret["SendingMail"]
       if sending_mail.has_key? "RelayHost"
         relay_host 	= sending_mail["RelayHost"]
         @smtp_server 	= relay_host["Name"]
-        @user		= relay_host["Account"]
-        @password	= relay_host["Password"]
+        @user		= relay_host["Account"] if relay_host.has_key? "Account"
+        @password	= relay_host["Password"] if  relay_host.has_key? "Password"
       end
       @transport_layer_security = sending_mail["TLS"] if sending_mail.has_key? "TLS"
     end
@@ -40,8 +41,9 @@ class MailSettings
   # Save new mail settings
   def save(settings)
 
-    settings.each do |k, v|
-	settings[k] = "" if v.nil?
+    # fill settings hash if it misses some keys
+    ["transport_layer_security", "smtp_server", "user", "password"].each do |key|
+	settings[key] = "" if (!settings.has_key? key) || settings[key].nil?
     end
 
     if settings["transport_layer_security"] == @transport_layer_security &&

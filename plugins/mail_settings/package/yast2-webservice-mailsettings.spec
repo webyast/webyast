@@ -15,7 +15,7 @@ Provides:       yast2-webservice:/srv/www/yastws/app/controllers/mail_settings_c
 License:        MIT
 Group:          Productivity/Networking/Web/Utilities
 Autoreqprov:    on
-Version:        0.0.2
+Version:        0.0.3
 Release:        0
 Summary:        YaST2 - Webservice - Mail Settings
 Source:         www.tar.bz2
@@ -32,7 +32,7 @@ BuildRequires:  yast2 yast2-mail
 %endif
 
 # YaPI::MailServer (standard edition)
-Requires:	yast2-mail
+Requires:	yast2-mail postfix
 
 # YaPI::SERVICES (for postfix)
 %if 0%{?suse_version} == 0 || %suse_version > 1110

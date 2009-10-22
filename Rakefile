@@ -73,7 +73,7 @@ require 'metric_fu'
 MetricFu::Configuration.run do |config|
         #define which metrics you want to use
         config.metrics  = [:churn, :saikuro, :flog, :reek, :roodi, :rcov] #missing flay and stats both not working
-        config.graphs   = [:flog, :flay, :reek, :roodi, :rcov]
+        config.graphs   = [:flog, :reek, :roodi, :rcov]
         config.flay     = { :dirs_to_flay => ['webservice', 'plugins']  } 
         config.flog     = { :dirs_to_flog => ['webservice', 'plugins']  }
         config.reek     = { :dirs_to_reek => ['webservice', 'plugins']  }

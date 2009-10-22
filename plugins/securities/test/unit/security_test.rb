@@ -1,7 +1,6 @@
 require File.expand_path(File.dirname(__FILE__) + "/../test_helper")
 require 'scr'
 require 'mocha'
-require 'test_helper'
 
 class SecurityTest < ActiveSupport::TestCase
 #  fixtures :accounts
