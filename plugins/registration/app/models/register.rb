@@ -64,7 +64,7 @@ class Register
 
     @reg = YastService.Call("YSR::statelessregister", ctx, args )
     @arguments = Hash.from_xml(@reg['missingarguments']) if @reg.has_key? 'missingarguments'
-    @arguments = @arguments["opt"] if @arguments.has_key? "opt"
+    @arguments = @arguments["missingarguments"] if @arguments.has_key? "missingarguments"
     @reg['exitcode'] rescue 99
   end
 
@@ -112,10 +112,9 @@ class Register
              elsif @reg['success']     then  'finished'
              end
 
-    missingargs = Hash.from_xml @reg['missingarguments'] if @reg['missingarguments']
     tasklist = Hash.from_xml @reg['tasklist'] if @reg['tasklist']
-    changedrepos    = tasklist.collect { | k, v |  v.class == Hash && v['TYPE'] == 'zypp'  }
-    changedservices = tasklist.collect { | k, v |  v.class == Hash && v['TYPE'] == 'nu'  }
+    changedrepos    = tasklist.collect { | k, v |  v.class == Hash && v['TYPE'] == 'zypp'  } if tasklist
+    changedservices = tasklist.collect { | k, v |  v.class == Hash && v['TYPE'] == 'nu'  } if tasklist
     tasknic = { 'a'  => 'added',         'd' => 'deleted',
                 'ld' => 'leave enabled', 'ld' => 'leave disabled'}
 
@@ -126,9 +125,9 @@ class Register
         xml.exitcode @reg['exitcode'] || ''
         xml.guid @reg['guid'] || ''
 
-        if missingargs then
+        if @arguments then
           xml.missingarguments({:type => "array"}) do
-            missingargs.each do | k, v |
+            @arguments.each do | k, v |
               if k && v.class == Hash
               then
                 xml.argument do
