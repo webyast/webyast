@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Thu Oct 22 17:18:59 CEST 2009 - jreidinger@suse.cz
+
+- render uncaught exception as text to easy frontend display
+  (bnc#549132) 
+
+-------------------------------------------------------------------
 Tue Oct 20 17:05:00 CEST 2009 - jreidinger@suse.cz
 
 - change default configuration path to /etc/webyast 
