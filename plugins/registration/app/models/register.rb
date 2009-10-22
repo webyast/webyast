@@ -27,7 +27,7 @@ class Register
     @context = { 'yastcall'     => '1',
                  'norefresh'    => '1',
                  'restoreRepos' => '1',
-                 'forcereg'     => '0',
+                 'forcereg'     => '1',
                  'nohwdata'     => '1',
                  'nooptional'   => '1',
                  'debugMode'    => '2',
@@ -63,6 +63,8 @@ class Register
     end
 
     @reg = YastService.Call("YSR::statelessregister", ctx, args )
+    @arguments = Hash.from_xml(@reg['missingarguments']) if @reg.has_key? 'missingarguments'
+    @arguments = @arguments["opt"] if @arguments.has_key? "opt"
     @reg['exitcode'] rescue 99
   end
 
