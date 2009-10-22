@@ -55,16 +55,35 @@ class Register
     ctx = Hash.new
     args = Hash.new
     begin
-      self.context.each   { |k, v|  ctx[k] = [ 's', v.to_s ] }
-      self.arguments.each { |k, v| args[k] = [ 'a{ss}', { 'value' => v.to_s  } ] }
+      self.context.each   { |k, v|  ctx[k.to_s] = [ 's', v.to_s ] }
+#puts "CCCCCCCCCCCCCTX #{ctx.inspect}"
+      self.arguments.each { |k, v| args[k.to_s] = [ 's', v.to_s ] }
+#puts "AAAAAAAAAAAARGS #{args.inspect}"
     rescue
       Rails.logger.error "When registration was called, the context or the arguments data was invalid."
       raise InvalidParameters.new :registrationdata => "Invalid"
     end
 
     @reg = YastService.Call("YSR::statelessregister", ctx, args )
-    @arguments = Hash.from_xml(@reg['missingarguments']) if @reg.has_key? 'missingarguments'
-    @arguments = @arguments["missingarguments"] if @arguments.has_key? "missingarguments"
+
+#puts "ATREG: #{@reg.inspect}"
+
+    # SCHUBI !! SCHUBI !! SCHUBI
+    # FIXME FIXME FIXME FIXME FIXME FIXME FIXME FIXME FIXME FIXME FIXME FIXME FIXME FIXME FIXME
+    # Hash.from_xml converts dashes in keys to underscores
+    #  by this we can not find out the correct key name (whether it was a dash or an underscore)
+    #  unfortunately the regcode keys in registration make excessive use of dashes AND underscores
+    #  that way the information gets lost what key to assign the correct value
+    # This needs urgently to be fixed
+    @arguments = Hash.from_xml(@reg['missingarguments']) if @reg && @reg.has_key?('missingarguments')
+#puts "ARGS after XML transformation #{@arguments.inspect}\n"
+    @arguments = @arguments["missingarguments"] if @arguments && @arguments.has_key?('missingarguments')
+
+# UGLY WORKAROUND
+@arguments.each { | k, v |  if k =~ /_/ then @arguments[ k.sub(/_/, '-')  ] = v   end   }
+# UGLY !!!!!!!!! ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+#puts "ARGS after correction #{@arguments.inspect}\n"
     @reg['exitcode'] rescue 99
   end
 
@@ -102,17 +121,16 @@ class Register
     end
   end
 
-
   def to_xml( options = {} )
     xml = options[:builder] ||= Builder::XmlMarkup.new(options)
     xml.instruct! unless options[:skip_instruct]
 
-    status = if @reg['error']          then  'error'
-             elsif @reg['missinginfo'] then  'missinginfo'
-             elsif @reg['success']     then  'finished'
+    status = if !@reg ||  @reg['error'] then  'error'
+             elsif @reg['missinginfo']  then  'missinginfo'
+             elsif @reg['success']      then  'finished'
              end
 
-    tasklist = Hash.from_xml @reg['tasklist'] if @reg['tasklist']
+    tasklist = Hash.from_xml @reg['tasklist'] if @reg && @reg['tasklist']
     changedrepos    = tasklist.collect { | k, v |  v.class == Hash && v['TYPE'] == 'zypp'  } if tasklist
     changedservices = tasklist.collect { | k, v |  v.class == Hash && v['TYPE'] == 'nu'  } if tasklist
     tasknic = { 'a'  => 'added',         'd' => 'deleted',

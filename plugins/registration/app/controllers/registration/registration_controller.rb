@@ -8,14 +8,22 @@ class Registration::RegistrationController < ApplicationController
   def create
     # POST to registration => run registration
     permission_check("org.opensuse.yast.modules.ysr.statelessregister")
-    raise InvalidParameters.new :registration => "Missing" unless params.has_key? :registration
+    raise InvalidParameters.new :registration => "Missing" unless params.has_key?(:registration)
 
     @register = Register.new
-    @register.arguments = params[:registration][:arguments] if params[:registration].has_key? :arguments && 
-                                                               !params[:registration][:arguments].blank?
+    if params[:registration].has_key?(:arguments) &&  !params[:registration][:arguments].blank? 
+    then
+      @register.arguments = {}
+       params[:registration][:arguments].each do |h|
+         if h.class == Hash || h.class == HashWithIndifferentAccess
+         then
+           @register.arguments[ h['name'] ] = h['value'] if ( h['name'] && h['value'] )
+         end
+      end
+    end
 
     #overwriting default options
-    if params[:registration].has_key? :options && params[:registration][:options].is_a?(Hash)
+    if params[:registration].has_key?(:options) && params[:registration][:options].is_a?(Hash)
       params[:registration][:options].each do |key, value|
         @register.context[key] = value if @register.context.has_key? key
       end
