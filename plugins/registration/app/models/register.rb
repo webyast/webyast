@@ -104,65 +104,94 @@ class Register
 
 
   def to_xml( options = {} )
-    # TODO  Parse the response in @reg{'readabletext'} if @reg{'missinginfo'} exists to hashed data
-    # TODO  create the output based on parsed data
-
     xml = options[:builder] ||= Builder::XmlMarkup.new(options)
     xml.instruct! unless options[:skip_instruct]
+
+    status = if @reg['error']          then  'error'
+             elsif @reg['missinginfo'] then  'missinginfo'
+             elsif @reg['success']     then  'finished'
+             end
+
+    missingargs = Hash.from_xml @reg['missingarguments'] if @reg['missingarguments']
+    tasklist = Hash.from_xml @reg['tasklist'] if @reg['tasklist']
+    changedrepos    = tasklist.collect { | k, v |  v.class == Hash && v['TYPE'] == 'zypp'  }
+    changedservices = tasklist.collect { | k, v |  v.class == Hash && v['TYPE'] == 'nu'  }
+    tasknic = { 'a'  => 'added',         'd' => 'deleted',
+                'ld' => 'leave enabled', 'ld' => 'leave disabled'}
 
 # during development return static response
     xml.registration do
       if @reg then
-        xml.tag!(:status, 'missinginfo')
-        xml.tag!(:exitcode, 55)
-        xml.tag!(:guid, "abcdefg1234567")
+        xml.status status
+        xml.exitcode @reg['exitcode'] || ''
+        xml.guid @reg['guid'] || ''
 
-        xml.missingarguments({:type => "array"}) do
-          xml.argument do
-            xml.tag!(:name, 'regcode-SLES-13-SP5')
-            xml.tag!(:type, 'string')
-          end
-          xml.argument do
-            xml.tag!(:name, 'email')
-            xml.tag!(:type, 'string')
-          end
-          xml.argument do
-            xml.tag!(:name, 'moniker')
-            xml.tag!(:type, 'string')
-          end
-        end
-
-        xml.changedrepos({:type => "array"})do
-          xml.repo do
-            xml.tag!(:name, 'foobar11n')
-            xml.tag!(:alias, 'foobar11a')
-            xml.tag!(:status, 'added')
-          end
-          xml.repo do
-            xml.tag!(:name, 'foobar22n')
-            xml.tag!(:alias, 'foobar22a')
-            xml.tag!(:status, 'deleted')
-          end
-        end
-
-        xml.changedservices({:type => "array"})do
-          xml.service do
-            xml.tag!(:name, 'foobar33n')
-            xml.tag!(:alias, 'foobar33a')
-            xml.tag!(:status, 'deleted')
-            xml.catalogs do
-              xml.catalog do
-                xml.tag!(:name, 'foobar44n')
-                xml.tag!(:alias, 'foobar44a')
-                xml.tag!(:status, 'enabled')
+        if missingargs then
+          xml.missingarguments({:type => "array"}) do
+            missingargs.each do | k, v |
+              if k && v.class == Hash
+              then
+                xml.argument do
+                  xml.name k
+                  xml.value v['value']
+                  xml.flag v['flag']
+                  xml.kind v['kind']
+                  xml.type 'string'
+                end
               end
-              xml.catalog do
-                xml.tag!(:name, 'foobar55n')
-                xml.tag!(:alias, 'foobar55a')
-                xml.tag!(:status, 'disabled')
-              end # cat
-            end # cats
-          end # service 
+            end
+          end
+        end
+
+        if changedrepos
+        then
+          xml.changedrepos({:type => "array"}) do
+            changedrepos.each do | k, v |
+              if k && v.class == Hash
+              then
+                xml.repo do
+                  xml.name v['NAME'] || ''
+                  xml.alias v['ALIAS'] || ''
+                  xml.type v['TYPE']  || ''
+                  xml.url v['URL'] || ''
+                  xml.status tasknic[ v['TASK'] ] || ''
+                end
+              end
+            end
+          end
+        end
+
+        if changedservices
+        then
+          xml.changedservices({:type => "array"}) do
+            changedservices.each do | k, v |
+              if k && v.class == Hash
+              then
+                xml.service do
+                  xml.name v['NAME'] || ''
+                  xml.alias v['ALIAS'] || ''
+                  xml.type v['TYPE']  || ''
+                  xml.url v['URL'] || ''
+                  xml.status tasknic[ v['TASK'] ] || ''
+                  if v['CATALOGS']  &&  v['CATALOGS'].class == Hash
+                  then
+                    xml.catalogs do
+                      v['CATALOGS'].each do |l, w|
+                        if l && w.class == Hash
+                        then
+                          xml.catalog do
+                            xml.name v['NAME'] || ''
+                            xml.alias v['ALIAS'] || ''
+                            xml.status tasknic[ v['TASK'] ] || ''
+                          end
+                        end
+                      end
+                    end
+                  end # catalogs
+                end
+              end
+            end # services.each
+          end
         end # changedservices
       else
         xml.tag!(:status, 'error')
