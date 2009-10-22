@@ -1,4 +1,11 @@
 -------------------------------------------------------------------
+Thu Oct 22 10:05:17 CEST 2009 - jsuchome@suse.cz
+
+- enhanced test suite
+- required postfix
+- 0.0.3 
+
+-------------------------------------------------------------------
 Thu Oct 15 11:06:33 CEST 2009 - jsuchome@suse.cz
 
 - save MaximumMailSize, restart postfix

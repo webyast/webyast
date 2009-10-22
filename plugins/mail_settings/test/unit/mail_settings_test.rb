@@ -11,6 +11,52 @@ class MailSettingsTest < ActiveSupport::TestCase
     @model.read
   end
 
+  def test_read_notls
+    YastService.stubs(:Call).with('YaPI::MailSettings::Read').returns({
+	"SendingMail" => {
+	    "RelayHost"	=> {
+		"Name"	=> "smtp.domain.com"
+	    }
+	}
+    })
+    ret = @model.read
+    assert @model.transport_layer_security == "NONE"
+  end
+
+  def test_read
+    YastService.stubs(:Call).with('YaPI::MailSettings::Read').returns({
+	"SendingMail" => {
+	    "TLS"	=> "MUST",
+	    "RelayHost"	=> {
+		"Name"	=> "smtp.domain.com"
+	    }
+	}
+    })
+    ret = @model.read
+    assert @model.smtp_server == "smtp.domain.com"
+    assert @model.transport_layer_security == "MUST"
+  end
+
+
+  def test_save_no_change
+    YastService.stubs(:Call).with('YaPI::MailSettings::Read').returns({
+	"SendingMail" => {
+	    "TLS"	=> "MUST",
+	    "RelayHost"	=> {
+		"Name"	=> "smtp.domain.com"
+	    }
+	}
+    })
+    ret = @model.read
+    ret = @model.save({
+	"smtp_server"	=> "smtp.domain.com",
+	"user"		=> "",
+	"password"	=> "",
+	"transport_layer_security"	=> "MUST"
+    })
+    assert ret
+  end
+
   def test_save
     YastService.stubs(:Call).with('YaPI::MailSettings::Write', {
       "Changed" => [ "i", 1],
@@ -36,21 +82,6 @@ class MailSettingsTest < ActiveSupport::TestCase
     assert ret
   end
 
-  def test_read
-    YastService.stubs(:Call).with('YaPI::MailSettings::Read').returns({
-	"SendingMail" => {
-	    "TLS"	=> "MUST",
-	    "RelayHost"	=> {
-		"Name"	=> "smtp.domain.com"
-	    }
-	}
-    })
-    ret = @model.read
-    assert ret
-    assert @model.smtp_server == "smtp.domain.com"
-    assert @model.transport_layer_security == "MUST"
-  end
-
 
   def test_save_failure
     YastService.stubs(:Call).with('YaPI::MailSettings::Write', {
@@ -58,7 +89,7 @@ class MailSettingsTest < ActiveSupport::TestCase
       "MaximumMailSize" => [ "i", 10485760],
       "SendingMail" => ["a{sv}", {
 	  "Type"	=> [ "s", "relayhost"],
-	  "TLS"		=> [ "s", nil],
+	  "TLS"		=> [ "s", ""],
 	  "RelayHost"	=> [ "a{sv}", {
 	      "Name"	=> [ "s", "smtp.newdomain.com"],
 	      "Auth"	=> [ "i", 0],
@@ -67,7 +98,7 @@ class MailSettingsTest < ActiveSupport::TestCase
 	  }]
       }]
    
-    }).returns("TLS cannot be empty")
+    }).returns("Unknown mail sending TLS type. Allowed values are: NONE | MAY | MUST | MUST_NOPEERMATCH")
     assert_raise MailSettingsError do
       @model.save({
 	"smtp_server"	=> "smtp.newdomain.com",
