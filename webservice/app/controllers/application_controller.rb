@@ -5,6 +5,11 @@ require 'exceptions'
 
 class ApplicationController < ActionController::Base
 
+  #render only pure text to simple show it on frontend
+  rescue_from 'Exception' do |exception|
+      render :text => "#{exception.message}\n Backtrace:\n #{exception.backtrace.join("\n")}", :status => 500
+  end
+
   rescue_from 'BackendException' do |exception|
       render :xml => exception, :status => 503
   end
@@ -12,6 +17,7 @@ class ApplicationController < ActionController::Base
   rescue_from 'InvalidParameters' do |exception|
       render :xml => exception, :status => 422 #422-resource invalid
   end
+
 
   include AuthenticatedSystem
 
