@@ -15,7 +15,7 @@ Provides:       yast2-webservice:/srv/www/yastws/app/controllers/mail_settings_c
 License:        MIT
 Group:          Productivity/Networking/Web/Utilities
 Autoreqprov:    on
-Version:        0.0.3
+Version:        0.0.4
 Release:        0
 Summary:        YaST2 - Webservice - Mail Settings
 Source:         www.tar.bz2
