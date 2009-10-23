@@ -87,7 +87,6 @@ class Register
       end   
     }
 
-
 #puts "ARGS after correction #{@arguments.inspect}\n"
     @reg['exitcode'] rescue 99
   end
@@ -136,23 +135,27 @@ class Register
              end
 
     tasklist = Hash.from_xml @reg['tasklist'] if @reg && @reg['tasklist']
-    changedrepos    = tasklist.collect { | k, v |  v.class == Hash && v['TYPE'] == 'zypp'  } if tasklist
-    changedservices = tasklist.collect { | k, v |  v.class == Hash && v['TYPE'] == 'nu'  } if tasklist
+    if tasklist
+      tasklist = tasklist['tasklist'] if tasklist.has_key? 'tasklist'
+      changedrepos    = tasklist.reject { | k, v |  v.class != Hash || v['type'] != 'zypp'  }
+      changedservices = tasklist.reject { | k, v |  v.class != Hash || v['type'] != 'nu'  }
+    else
+      changedrepos = {}
+      changedservices = {}
+    end
     tasknic = { 'a'  => 'added',         'd' => 'deleted',
-                'ld' => 'leave enabled', 'ld' => 'leave disabled'}
+                'le' => 'leave enabled', 'ld' => 'leave disabled'}
 
-# during development return static response
     xml.registration do
-      if @reg then
+      if @reg 
         xml.status status
         xml.exitcode @reg['exitcode'] || ''
         xml.guid @reg['guid'] || ''
 
-        if @arguments then
+        if @arguments
           xml.missingarguments({:type => "array"}) do
             @arguments.each do | k, v |
               if k && v.class == Hash
-              then
                 xml.argument do
                   xml.name k
                   xml.value v['value']
@@ -166,17 +169,15 @@ class Register
         end
 
         if changedrepos
-        then
           xml.changedrepos({:type => "array"}) do
             changedrepos.each do | k, v |
-              if k && v.class == Hash
-              then
+              if k && v.class == Hash && v["task"] != "le" && v["task"] != "ld" #only changed repos
                 xml.repo do
-                  xml.name v['NAME'] || ''
-                  xml.alias v['ALIAS'] || ''
-                  xml.type v['TYPE']  || ''
-                  xml.url v['URL'] || ''
-                  xml.status tasknic[ v['TASK'] ] || ''
+                  xml.name k
+                  xml.alias v['alias'] || ''
+                  xml.type v['type']  || ''
+                  xml.url v['url'] || ''
+                  xml.status tasknic[ v['task'] ] || ''
                 end
               end
             end
@@ -184,32 +185,29 @@ class Register
         end
 
         if changedservices
-        then
           xml.changedservices({:type => "array"}) do
             changedservices.each do | k, v |
-              if k && v.class == Hash
-              then
+              if k && v.class == Hash && v["task"] != "le" && v["task"] != "ld" #only changed services
                 xml.service do
-                  xml.name v['NAME'] || ''
-                  xml.alias v['ALIAS'] || ''
-                  xml.type v['TYPE']  || ''
-                  xml.url v['URL'] || ''
-                  xml.status tasknic[ v['TASK'] ] || ''
-                  if v['CATALOGS']  &&  v['CATALOGS'].class == Hash
-                  then
-                    xml.catalogs do
-                      v['CATALOGS'].each do |l, w|
-                        if l && w.class == Hash
-                        then
-                          xml.catalog do
-                            xml.name v['NAME'] || ''
-                            xml.alias v['ALIAS'] || ''
-                            xml.status tasknic[ v['TASK'] ] || ''
-                          end
-                        end
-                      end
-                    end
-                  end # catalogs
+                  xml.name k
+                  xml.alias v['alias'] || ''
+                  xml.type v['type']  || ''
+                  xml.url v['url'] || ''
+                  xml.status tasknic[ v['task'] ] || ''
+#disabled. it returns currently only a hash and not a hash in hash
+#                  if v['catalogs'] && v['catalogs'].class == Hash
+#                    xml.catalogs do
+#                      v['catalogs'].each do |l, w|
+#                        if l && w.class == Hash
+#                          xml.catalog do
+#                            xml.name v['NAME'] || ''
+#                            xml.alias v['ALIAS'] || ''
+#                            xml.status tasknic[ v['TASK'] ] || ''
+#                          end
+#                        end
+#                      end
+#                    end
+#                  end # catalogs
                 end
               end
             end # services.each
