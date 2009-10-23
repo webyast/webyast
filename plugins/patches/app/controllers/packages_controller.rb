@@ -61,7 +61,6 @@ class PackagesController < ApplicationController
       @packages = compare_lists(@packages)
     end
     respond_to do |format|
-      format.html { render :xml => @packages.to_xml( :root => "packages", :dasherize => false ) }
       format.xml { render  :xml => @packages.to_xml( :root => "packages", :dasherize => false ) }
       format.json { render :json => @packages.to_json( :root => "packages", :dasherize => false ) }
     end

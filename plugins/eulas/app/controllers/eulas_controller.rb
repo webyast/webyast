@@ -17,7 +17,6 @@ class EulasController < ApplicationController
   def index
     @licenses = License.find_all
     respond_to do |format|
-      format.html
       format.xml { render :xml => @licenses.to_xml }
       format.json{ render :json=> @licenses.to_json}
     end
@@ -29,7 +28,6 @@ class EulasController < ApplicationController
     @license.load_text params[:lang] unless params[:lang].nil?
     logger.debug @license.inspect
     respond_to do |format|
-      format.html
       format.xml { render :xml => @license.to_xml }
       format.json{ render :json=> @license.to_json}
     end
@@ -43,7 +41,6 @@ class EulasController < ApplicationController
     @license.accepted = params[:eulas][:accepted] == "true" ? true : false
     @license.save
     respond_to do |format|
-      format.html
       format.xml { render :xml => @license.to_xml }
       format.json{ render :json=> @license.to_json}
     end

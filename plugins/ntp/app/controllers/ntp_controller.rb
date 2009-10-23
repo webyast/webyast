@@ -7,7 +7,6 @@ class NtpController < ApplicationController
    	ntp = Ntp.find
 
     respond_to do |format|
-	    format.html { render :xml => ntp.actions.to_xml(:root => :actions)} #return xml only
 	    format.xml  { render :xml => ntp.actions.to_xml(:root => :actions)}
 	    format.json { render :json => ntp.actions.to_json }
     end

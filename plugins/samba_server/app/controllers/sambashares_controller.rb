@@ -15,7 +15,6 @@ class SambasharesController < ApplicationController
 	@shares = SambaShare.find_all
     
 	respond_to do |format|
-	    format.html { render :xml => @shares, :location => "none" } #return xml only
 	    format.xml  { render :xml => @shares, :location => "none" }
 	    format.json { render :json => @shares.to_json, :location => "none" }
 	end
@@ -36,7 +35,6 @@ class SambasharesController < ApplicationController
 	end
 
 	respond_to do |format|
-	    format.html { render :xml => @share, :location => "none" } #return xml only
 	    format.xml  { render :xml => @share, :location => "none" }
 	    format.json { render :json => @share.to_json, :location => "none" }
 	end
@@ -63,7 +61,6 @@ class SambasharesController < ApplicationController
 	end
 
 	respond_to do |format|
-	    format.html { render :xml => @share, :location => "none" } #return xml only
 	    format.xml  { render :xml => @share, :location => "none" }
 	    format.json { render :json => @share.to_json, :location => "none" }
 	end
@@ -95,7 +92,6 @@ class SambasharesController < ApplicationController
 	end
 
 	respond_to do |format|
-	    format.html { render :xml => @share, :location => "none" } #return xml only
 	    format.xml  { render :xml => @share, :location => "none" }
 	    format.json { render :json => @share.to_json, :location => "none" }
 	end
@@ -115,7 +111,6 @@ class SambasharesController < ApplicationController
 	end
 
 	respond_to do |format|
-	    format.html { render :xml => @share, :location => "none" } #return xml only
 	    format.xml  { render :xml => @share, :location => "none" }
 	    format.json { render :json => @share.to_json, :location => "none" }
 	end
