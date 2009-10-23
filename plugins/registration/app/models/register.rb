@@ -66,7 +66,7 @@ class Register
 
     @reg = YastService.Call("YSR::statelessregister", ctx, args )
 
-#puts "ATREG: #{@reg.inspect}"
+#puts "xxxxxxxxxxxxxxATREG: #{@reg.inspect}"
 
     # SCHUBI !! SCHUBI !! SCHUBI
     # FIXME FIXME FIXME FIXME FIXME FIXME FIXME FIXME FIXME FIXME FIXME FIXME FIXME FIXME FIXME
@@ -79,9 +79,14 @@ class Register
 #puts "ARGS after XML transformation #{@arguments.inspect}\n"
     @arguments = @arguments["missingarguments"] if @arguments && @arguments.has_key?('missingarguments')
 
-# UGLY WORKAROUND
-@arguments.each { | k, v |  if k =~ /_/ then @arguments[ k.sub(/_/, '-')  ] = v   end   }
-# UGLY !!!!!!!!! ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    # UGLY WORKAROUND
+    @arguments.each { | k, v |  
+      if k =~ /_/ 
+        @arguments[ k.sub(/_/, '-')  ] = v   
+        @arguments.delete k  
+      end   
+    }
+
 
 #puts "ARGS after correction #{@arguments.inspect}\n"
     @reg['exitcode'] rescue 99
