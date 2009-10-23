@@ -1,12 +1,14 @@
 -------------------------------------------------------------------
-Fri Oct 23 14:17:00 CEST 2009 - jreidinger@suse.cz
+Thu Oct 22 17:24:31 CEST 2009 - mkudlvasr@novell.com
 
-- jreidinger: adapt to new config path /etc/webyast
-- mkudlvasr: - remove eula check from all controller, leave it in
-              basesystem
-             - remove dependencies on yast
-             - add tests and documentation
+- added controller tests
+- removed unneeded dependencies
 - 0.0.2
+
+-------------------------------------------------------------------
+Tue Oct 20 18:06:57 CEST 2009 - mkudlvasr@novell.com
+
+- updated config files placement YaST2 -> webyast
 
 -------------------------------------------------------------------
 Wed Sep 30 17:34:07 CEST 2009 - mkudlvasr@novell.com
