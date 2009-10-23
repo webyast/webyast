@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Fri Oct 23 14:24:58 CEST 2009 - jsuchome@suse.cz
+
+- make test independent (and working for analysis)
+- 0.0.4 
+
+-------------------------------------------------------------------
 Thu Oct 22 10:05:17 CEST 2009 - jsuchome@suse.cz
 
 - enhanced test suite
