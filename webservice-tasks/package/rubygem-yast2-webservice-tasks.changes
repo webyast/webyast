@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Fri Oct 23 15:44:07 CEST 2009 - jreidinger@suse.cz
+
+- Add task to submit package to obs repository 
+- 0.0.7
+
+-------------------------------------------------------------------
 Thu Oct 15 10:33:26 CEST 2009 - lslezak@suse.cz
 
 - fixed packaging of GIT files - fix the file list so the exclude
