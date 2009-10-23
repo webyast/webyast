@@ -25,9 +25,9 @@ class Account < ActiveRecord::Base
 
   # Authenticates a user by their login name and unencrypted password with unix2_chkpwd
   def self.unix2_chkpwd(login, passwd)
-     cmd = "/sbin/unix2_chkpwd rpam " + login
+     cmd = "/sbin/unix2_chkpwd rpam '#{login}'"
      se = Session.new
-     result, err = se.execute cmd, :stdin => passwd
+     result, err = se.execute cmd, :stdin => passwd #password needn't pt be escaped as it is on stdin
      return (se.get_status == 0)
   end
 
