@@ -2,7 +2,6 @@ tracing = (Rake.application.options.trace)?"--trace":""
 verbose = (Rake.application.options.verbose)?"--verbose":""
 
 require 'rake'
-require 'rubygems'
 
 def sudo(cmd)
   puts "#{cmd}"

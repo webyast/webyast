@@ -1,7 +1,6 @@
 require File.expand_path(File.dirname(__FILE__) + "/../test_helper")
 require 'test/unit'
 require 'license'
-require 'rubygems'
 require 'mocha'
 
 class EulasControllerTest < ActionController::TestCase
