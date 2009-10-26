@@ -3,6 +3,31 @@
 # The main goal is to provide easy access to the registration workflow,
 # the caller must interpret the result and maybe call it again with 
 # changed values.
+
+
+# Hash.from_xml converts dashes in keys to underscores
+#  by this we can not find out the correct key name (whether it was a dash or an underscore)
+#  unfortunately the regcode keys in registration make excessive use of dashes AND underscores
+#  that way the information gets lost what key to assign the correct value.
+#  So the function "unrename_keys" will be overwritten
+module RailsHashFromWithoutConversationKey
+   Hash.class_eval do
+     def self.unrename_keys(params)
+       case params.class.to_s
+         when "Hash"
+           params.inject({}) do |h,(k,v)|
+             h[k.to_s] = unrename_keys(v)
+             h
+           end
+         when "Array"
+           params.map { |v| unrename_keys(v) }
+         else
+           params
+         end
+     end
+   end
+end
+
 class Register
 
   require 'yast_service'
@@ -56,9 +81,7 @@ class Register
     args = Hash.new
     begin
       self.context.each   { |k, v|  ctx[k.to_s] = [ 's', v.to_s ] }
-#puts "CCCCCCCCCCCCCTX #{ctx.inspect}"
       self.arguments.each { |k, v| args[k.to_s] = [ 's', v.to_s ] }
-#puts "AAAAAAAAAAAARGS #{args.inspect}"
     rescue
       Rails.logger.error "When registration was called, the context or the arguments data was invalid."
       raise InvalidParameters.new :registrationdata => "Invalid"
@@ -66,28 +89,11 @@ class Register
 
     @reg = YastService.Call("YSR::statelessregister", ctx, args )
 
-#puts "xxxxxxxxxxxxxxATREG: #{@reg.inspect}"
+#    logger.debug "ATREG: #{@reg.inspect}"
 
-    # SCHUBI !! SCHUBI !! SCHUBI
-    # FIXME FIXME FIXME FIXME FIXME FIXME FIXME FIXME FIXME FIXME FIXME FIXME FIXME FIXME FIXME
-    # Hash.from_xml converts dashes in keys to underscores
-    #  by this we can not find out the correct key name (whether it was a dash or an underscore)
-    #  unfortunately the regcode keys in registration make excessive use of dashes AND underscores
-    #  that way the information gets lost what key to assign the correct value
-    # This needs urgently to be fixed
     @arguments = Hash.from_xml(@reg['missingarguments']) if @reg && @reg.has_key?('missingarguments')
-#puts "ARGS after XML transformation #{@arguments.inspect}\n"
     @arguments = @arguments["missingarguments"] if @arguments && @arguments.has_key?('missingarguments')
 
-    # UGLY WORKAROUND
-    @arguments.each { | k, v |  
-      if k =~ /_/ 
-        @arguments[ k.sub(/_/, '-')  ] = v   
-        @arguments.delete k  
-      end   
-    }
-
-#puts "ARGS after correction #{@arguments.inspect}\n"
     @reg['exitcode'] rescue 99
   end
 
