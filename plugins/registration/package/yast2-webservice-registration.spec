@@ -22,7 +22,7 @@ Source:         www.tar.bz2
 BuildRoot:      %{_tmppath}/%{name}-%{version}-build
 BuildArch:      noarch
 BuildRequires:  rubygem-mocha
-Requires:       yast2-core > 2.18.14
+Requires:       yast2-core > 2.18.14 yast2-webservice-registration
 
 #
 %define pkg_user yastws
