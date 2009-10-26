@@ -1,3 +1,4 @@
+require 'exceptions'
 #
 # Wrapper over collectd
 #
@@ -52,8 +53,8 @@ class Status
     datapath
 
     @collectd_running = check_collectd
-    raise Exception.new("Service 'collectd' is not running") unless @collectd_running
-
+    raise ServiceNotRunning.new('collectd') unless @collectd_running
+    
     #find the correct plugin path for the config file
     plugin_config_dir = "#{RAILS_ROOT}/config" #default
     Rails.configuration.plugin_paths.each do |plugin_path|
