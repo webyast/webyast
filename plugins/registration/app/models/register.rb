@@ -80,8 +80,8 @@ class Register
     ctx = Hash.new
     args = Hash.new
     begin
-      self.context.each   { |k, v|  ctx[k.to_s] = [ 's', v.to_s ] }
-      self.arguments.each { |k, v| args[k.to_s] = [ 's', v.to_s ] }
+      self.context.each   { |k, v|  ctx[k.to_s] = [ 's', v.to_s ] } if self.context.class == Hash
+      self.arguments.each { |k, v| args[k.to_s] = [ 's', v.to_s ] } if self.arguments.class == Hash
     rescue
       Rails.logger.error "When registration was called, the context or the arguments data was invalid."
       raise InvalidParameters.new :registrationdata => "Invalid"
