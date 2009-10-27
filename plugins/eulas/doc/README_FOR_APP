@@ -5,4 +5,30 @@ Plugin cares for licenses and serves them to web-client on demand.
 It handles locale, order of the licenses, checks and sets whether licenses
 were accepted.
 
+Eula plugin package comes pre-configured with license for the distribution, 
+which the package is built for.
+
+Add vendor specific license
+===========================
+
+ - Store your license text into the directory:
+     /usr/share/yastws/eulas/licenses/YOUR_LICENSE_NAME/license.txt
+ - Add YOUR_LICENSE_NAME into /etc/webyast/eulas.yml configuration file.
+
+ Optional
+ --------
+
+  - Store your license translations the same directory as license.txt and name 
+    them like license.LANGUAGE_CODE.txt .
+  - Your license can only be shown to the user (instead of explicitely making 
+    him accept it). If you want to choose this behaviour, create an empty file 
+    named "no-acceptance-needed" in the same directory as license.txt.
+ 
+ Example of eulas.yml
+ --------------------
+
+ licenses:
+   - SLE-11
+   - YOUR_LICENSE_NAME
+
 Copyright (c) 2009 Novell, released under the GPL2 license
