@@ -1,4 +1,9 @@
 -------------------------------------------------------------------
+Tue Oct 27 10:17:46 CET 2009 - jreidinger@suse.cz
+
+- submit version in git, not local version 
+
+-------------------------------------------------------------------
 Fri Oct 23 15:44:07 CEST 2009 - jreidinger@suse.cz
 
 - Add task to submit package to obs repository 
