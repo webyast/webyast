@@ -1,0 +1,363 @@
+Licenční smlouva k softwaru Novell(r) SUSE(r) Linux Enterprise Server 11
+
+PŘEČTĚTE SI POZORNĚ TUTO SMLOUVU. INSTALACÍ NEBO JINÝM POUŽÍVÁNÍM SOFTWARU
+(VČETNĚ JEHO ČÁSTÍ) VYJADŘUJETE SOUHLAS S TOUTO SMLOUVOU. POKUD S TĚMITO
+PODMÍNKAMI NESOUHLASÍTE, SOFTWARE NESTAHUJTE, NEINSTALUJTE ANI
+NEPOUŽÍVEJTE.
+
+PRÁVA A LICENCE
+
+Tato licenční smlouva k softwaru Novell („Smlouva“) je právní smlouva mezi
+vámi (subjektem nebo osobou) a společností Novell, Inc. („Novell“).
+Softwarový produkt uvedený v názvu této Smlouvy, média a doprovodná
+dokumentace (souhrnným označením „Software“) jsou chráněny autorskými právy
+a úmluvami Spojených států amerických („USA“) a dalších zemí a vztahují se
+na ně podmínky této Smlouvy.  Všechny aktualizace a podpůrné verze
+Softwaru, které můžete stáhnout či získat a které nejsou doprovázeny
+licenční smlouvou výslovně nahrazující tuto Smlouvu, jsou považovány za
+Software a řídí se touto Smlouvou.  Pokud je Software aktualizací nebo
+podpůrnou verzí, musíte mít pro instalaci a používání aktualizace nebo
+podpůrné verze platnou licenci k původní verzi a počtu uživatelů Softwaru. 
+
+Software je modulární operační systém složený z mnoha součástí, ke kterým
+mohou být přiloženy samostatné licenční podmínky.  Software je kolektivním
+dílem společnosti Novell; ačkoli společnost Novell nevlastní autorská práva
+ke všem součástem Softwaru, vlastní autorská práva k Softwaru jako
+kolektivnímu dílu.  
+
+Většina jeho součástí jsou nezávisle vyvinuté součásti open source, které
+se řídí samostatnými licenčními podmínkami.  Licenční práva k jednotlivým
+součástem řídícím se samostatnými licenčními podmínkami jsou definována
+příslušnými podmínkami. Žádné ustanovení této Smlouvy neomezuje ani jinak
+neovlivňuje práva, povinnosti a podmínky, jež se na vás vztahují a které
+musíte splnit, vyplývající z takových licencí. Pokud však distribuujete
+kopie jakýchkoli součástí nezávislých na Softwaru, musíte z každé kopie
+odstranit všechny ochranné známky, typické úpravy vzhledu a loga
+společnosti Novell.
+
+Ve své Organizaci můžete vytvořit a používat neomezený počet kopií
+Softwaru. Neomezené množství upravených kopií můžete vytvářet a mimo svou
+organizaci distribuovat za podmínky, že ze všech upravených kopií
+odstraníte veškeré ochranné známky, typické úpravy vzhledu a loga Novell.
+Pojem „Organizace“ označuje právní subjekt s výjimkou poboček a
+přidružených organizací s vlastní subjektivitou z důvodů daňových nebo z
+důvodů úpravy právnických osob. Příkladem Organizace v soukromém sektoru je
+společnost, sdružení nebo trust, s výjimkou poboček a přidružených
+organizací s vlastním daňovým identifikačním číslem nebo identifikačním
+číslem společnosti. Příkladem Organizace ve veřejném sektoru může být
+konkrétní vládní orgán nebo místní vládní úřad.
+
+
+
+DALŠÍ LICENČNÍ PODMÍNKY A OMEZENÍ
+
+Software je chráněn autorskými právy a úmluvami Spojených států amerických
+(„USA“) a dalších zemí a vztahují se na něj podmínky této Smlouvy. Na
+Software jste získali pouze licenci, Software není předmětem prodeje.
+
+Software může být dodáván v sadě s jinými programy („Přidružené programy“).
+Licenční práva k Přidruženým programům řídícím se samostatnými licenčními
+podmínkami jsou definována příslušnými podmínkami. Žádné ustanovení této
+Smlouvy neomezuje ani jinak neovlivňuje práva, povinnosti a podmínky, jež
+se na vás vztahují a které musíte splnit, vyplývající z takových licencí.  
+
+Společnost Novell si vyhrazuje všechna práva, která vám nebyla výslovně
+poskytnuta. Nesmíte provádět následující úkony: (1) Zpětně překládat,
+dekompilovat nebo analyzovat Software mimo rozsah výslovně povolený
+příslušnými zákony. (2) Převádět Software nebo svá licenční práva plynoucí
+z této Smlouvy, ať již vcelku nebo částečně.
+
+ÚDRŽBA A PODPORA
+
+Společnost Novell není povinna zajišťovat podporu či údržbu Softwaru, pokud
+si nezakoupíte nabídku, která služby podpory či údržby výslovně zahrnuje. 
+Pokud si zakoupíte takový produkt a na služby podpory či údržby se nebude
+nevztahovat žádná samostatná smlouva, poskytování takových služeb podpory
+či údržby („Služby“) se bude řídit podmínkami této Smlouvy.  Další
+informace ohledně aktuální nabídky podpory společnosti Novell můžete získat
+na internetové adrese http://www.novell.com/support.
+
+VLASTNICKÁ PRÁVA
+
+Nepřechází na vás nárok na Software ani na jeho vlastnictví.  Společnost
+Novell a/nebo její poskytovatelé licencí si ponechávají veškerá práva,
+nároky a podíl na duševním vlastnictví Softwaru a Služeb, včetně jakýchkoli
+úprav a jejich kopií.  Všechny materiály, které získáte jako součást Služeb
+a které nejsou doprovázeny podmínkami výslovně nahrazujícími tuto Smlouvu,
+jsou považovány za Software a řídí se touto Smlouvou.  Získáváte pouze
+podmíněnou licenci k používání Softwaru.
+
+OMEZENÁ ZÁRUKA
+
+Společnost Novell po dobu devadesáti (90) dní od zakoupení zaručuje, že (1)
+média, na nichž je Software dodáván, neobsahují fyzické vady a (2) software
+bude v podstatných rysech odpovídat doprovodné dokumentaci. Pokud během
+devadesáti (90) dní od zakoupení Softwaru vrátíte společnosti Novell vadná
+média nebo pokud ve stejné době oznámíte nesoulad s parametry, společnost
+Novell výhradně dle vlastního uvážení tento nesoulad vyřeší nebo vám vrátí
+licenční poplatky zaplacené za Software. Jakékoli neoprávněné použití nebo
+úpravy Softwaru ruší platnost této záruky. PŘEDCHOZÍ ZÁRUKA PŘEDSTAVUJE
+JEDINÝ MOŽNÝ A VÝHRADNÍ NÁPRAVNÝ KROK A NAHRAZUJE VEŠKERÉ DALŠÍ ZÁRUKY, AŤ
+JIŽ VÝSLOVNÉ ČI VYPLÝVAJÍCÍ.  (Předchozí záruka se nevztahuje na Software
+poskytovaný zdarma.  TAKOVÝ SOFTWARE SE POSKYTUJE „TAK JAK JE“, BEZ
+JAKÉKOLI ZÁRUKY.)
+
+Služby.  Společnost Novell zaručuje, že jakékoli zakoupené služby budou
+poskytnuty profesionálním způsobem v souladu s obecně přijímanými standardy
+v oboru.  Tato záruka bude platit po dobu 90 dní od doručení Služeb.  Při
+jakémkoli porušení této záruky se společnost Novell zavazuje, buď napravit
+tyto služby tak, aby vyhověly této záruce nebo podle svého uvážení nahradit
+částku, kterou jste společnosti Novell zaplatili za část služeb, které této
+záruce nevyhovují.  Protože soubory mohou být v průběhu poskytování
+technických služeb společností Novell měněny nebo poškozeny, souhlasíte, že
+přijmete přiměřená opatření k izolování a zálohování vašich systémů.
+
+TENTO SOFTWARE NENÍ NAVRŽEN, VYTVÁŘEN ANI URČEN K POUŽITÍ NEBO DISTRIBUCI S
+ONLINE ŘÍDICÍM VYBAVENÍM PRO NEBEZPEČNÁ PROSTŘEDÍ VYŽADUJÍCÍ BEZCHYBNÝ
+PROVOZ, JAKO JSOU PROVOZY S NUKLEÁRNÍMI ZAŘÍZENÍMI, ŘÍZENÍ LETECKÉHO
+PROVOZU, KOMUNIKAČNÍ A KONTROLNÍ SYSTÉMY, ZAŘÍZENÍ PRO PODPORU DŮLEŽITÝCH
+ŽIVOTNÍCH FUNKCÍ, ZBRAŇOVÉ SYSTÉMY ANI PRO JINÁ POUŽITÍ, U KTERÝCH BY
+PŘÍPADNÉ SELHÁNÍ SOFTWARU MOHLO PŘÍMO VÉST K ÚMRTÍ, ZRANĚNÍ NEBO TĚŽKÉMU
+POŠKOZENÍ ZDRAVÍ OSOB, PŘÍPADNĚ K POŠKOZENÍ ŽIVOTNÍHO PROSTŘEDÍ.
+
+TENTO SOFTWARE JE KOMPATIBILNÍ POUZE S NĚKTERÝMI POČÍTAČI A OPERAČNÍMI
+SYSTÉMY. NA SOFTWARE SE NEVZTAHUJE ZÁRUKA, JE-LI POUŽÍVÁN V
+NEKOMPATIBILNÍCH SYSTÉMECH. Chcete-li získat informace týkající se
+kompatibility Softwaru, obraťte se telefonicky na společnost Novell nebo na
+svého prodejce.
+
+Produkty jiných výrobců. Software může být dodáván spolu s hardwarem nebo
+jinými softwarovými programy nebo službami licencovanými nebo prodávanými
+jinými subjekty než společností Novell. SPOLEČNOST NOVELL NEPOSKYTUJE
+ZÁRUKU NA PRODUKTY NEBO SLUŽBY JINÝCH VÝROBCŮ. VŠECHNY TAKOVÉ PRODUKTY NEBO
+SLUŽBY JSOU POSKYTOVÁNY „TAK JAK JSOU“. VŠECHNY ZÁRUČNÍ OPRAVY PRODUKTŮ
+JINÝCH VÝROBCŮ ZAJIŠŤUJÍ POSKYTOVATELÉ LICENCÍ TĚCHTO PRODUKTŮ V SOULADU S
+PLATNOU ZÁRUKOU POSKYTOVATELE LICENCE.
+
+NENÍ-LI ZÁKONEM STANOVENO JINAK, SPOLEČNOST NOVELL ODMÍTÁ JAKÉKOLI
+PŘEDPOKLÁDANÉ ZÁRUKY, VČETNĚ ZÁRUK VZTAHUJÍCÍCH SE K OBCHODOVATELNOSTI,
+VHODNOSTI PRO DANÝ ÚČEL, PRÁVNÍM NÁROKŮM NEBO NEDODRŽENÍ SMLOUVY.
+SPOLEČNOST NOVELL NEPOSKYTUJE ŽÁDNÉ ZÁRUKY, PROHLÁŠENÍ ANI ZÁVAZKY, KTERÉ
+NEJSOU VÝSLOVNĚ UVEDENY V TÉTO OMEZENÉ ZÁRUCE. SPOLEČNOST NOVELL
+NEZARUČUJE, ŽE SOFTWARE NEBO SLUŽBY SPLNÍ VAŠE POŽADAVKY ANI ŽE JEJICH
+PROVOZ BUDE NEPŘERUŠOVANÝ.  Některé místně příslušné soudy neumožňují
+odmítnutí určitých záruk nebo některá omezení, proto je možné, že některá z
+výše uvedených omezení se na vás nevztahují. Omezená záruka vám dává určitá
+práva a kromě nich můžete mít i další práva, která se liší v závislosti na
+státu nebo jurisdikci.
+
+OMEZENÍ ODPOVĚDNOSTI
+
+(a) Následné ztráty. SPOLEČNOST NOVELL ANI ŽÁDNÝ Z JEJÍCH POSKYTOVATELŮ
+LICENCÍ, PŘIDRUŽENÝCH SPOLEČNOSTÍ NEBO ZAMĚSTNANCŮ NENESE ODPOVĚDNOST ZA
+JAKÉKOLI ZVLÁŠTNÍ, NÁHODNÉ, NÁSLEDNÉ, NEPŘÍMÉ, ÚMYSLNÉ, EKONOMICKÉ NEBO
+TRESTNÍ ŠKODY ZPŮSOBENÉ POUŽITÍM SOFTWARU NEBO SLUŽEB NEBO NEMOŽNOSTÍ JE
+POUŽÍT, MIMO JINÉ VČETNĚ ZTRÁTY ZISKU, ŠKOD PŘI PODNIKÁNÍ NEBO ZTRÁTY DAT,
+A TO I V PŘÍPADĚ, ŽE BYLA NA MOŽNOST VZNIKU TAKOVÝCH ŠKOD UPOZORNĚNA. (b)
+Přímé škody. CELKOVÁ ODPOVĚDNOST SPOLEČNOSTI NOVELL ZA PŘÍMÉ ŠKODY NA
+MAJETKU NEBO OSOBNÍ ÚJMY (AŤ JIŽ SE JEDNÁ O JEDEN PŘÍPAD NEBO O ŘADU
+PŘÍPADŮ) V ŽÁDNÉM PŘÍPADĚ NEPŘESÁHNE 1,25NÁSOBEK ČÁSTKY, KTEROU JSTE
+ZAPLATILI ZA SOFTWARE NEBO SLUŽBY, KTERÉ VZNIK NÁROKU ZPŮSOBILY (NEBO 50
+USD, POKUD JSTE SOFTWARE ZÍSKALI ZDARMA).  Výše uvedená vyloučení a omezení
+se nevztahují na nároky související s úmrtím nebo zraněním osob. V rámci
+působnosti soudů, které neumožňují vyloučení nebo omezení náhrady škody,
+bude odpovědnost společnosti Novell omezena nebo vyloučena v maximálním
+povoleném rozsahu.
+
+VŠEOBECNÉ PODMÍNKY
+
+Doba trvání.  Tato Smlouva vstupuje v platnost dnem legálního získání
+Softwaru a bude automaticky ukončena, porušíte-li jakoukoli její podmínku. 
+Testování produktu.  Toto omezení testování produktu se vás týká, jen pokud
+jste vývojář softwaru nebo poskytovatel licence nebo pokud provádíte
+testování Softwaru podle pokynů nebo jménem vývojáře nebo poskytovatele
+licence.  Bez předchozího písemného svolení společnosti Novell nesmíte
+publikovat nebo předat výsledky testování Softwaru další straně. Pokud jste
+poskytovatelem licence produktů, které jsou funkčně podobné nebo konkurují
+softwaru („Podobné produkty“), nebo vystupujete jménem takového
+poskytovatele licence a zveřejníte nebo předáte informace o testování
+Softwaru v rozporu s tímto omezením, potom bez ohledu na jakákoli
+ustanovení licenční smlouvy koncového uživatele Podobného produktu a kromě
+dalších náhrad, které může společnost Novell požadovat, má společnost
+Novell právo provést testování produktu na Podobných produktech a zveřejnit
+a publikovat tyto informace o testování produktu a vy tímto prohlašujete,
+že jste oprávněni toto právo společnosti Novell poskytnout.
+
+Open Source.  Žádné ustanovení této Smlouvy neomezuje ani jinak neovlivňuje
+práva, povinnosti a podmínky, jež se na vás vztahují a které musíte splnit,
+vyplývající z případných licencí pro programové kódy open source obsažené v
+tomto Softwaru.
+
+Převod.  Tato Smlouva nesmí být převedena ani postoupena bez předchozího
+písemného svolení společnosti Novell.
+
+Volba práva a jurisdikce.  Tato Smlouva se řídí zákony státu Utah, USA.
+Veškeré právní akty vztahující se k této smlouvě mohou řešit pouze soudy
+podle příslušné právní oblasti státu Utah.  Pokud se však vaše hlavní sídlo
+nachází v zemi, která je členským státem Evropské unie nebo Evropského
+sdružení volného obchodu (EFTA), řídí se tato smlouva zákony dané země a
+veškeré právní akty vztahující se ke Smlouvě mohou řešit pouze soudy v
+příslušné právní oblasti této země.
+
+Úplnost smlouvy.  Tato Smlouva potvrzuje úplné porozumění a shodu mezi vámi
+a společností Novell. Může být doplněna nebo změněna pouze písemnou dohodou
+mezi vámi a oprávněným zástupcem společnosti Novell.  ŽÁDNÝ POSKYTOVATEL
+LICENCE, DISTRIBUTOR, PRODEJCE, MALOOBCHODNÍK, OBCHODNÍ ZÁSTUPCE ANI
+ZAMĚSTNANEC NENÍ OPRÁVNĚN TUTO SMLOUVU UPRAVOVAT NEBO POSKYTOVAT JAKÁKOLI
+PROHLÁŠENÍ ČI ZÁVAZKY NEOBSAŽENÉ V PODMÍNKÁCH TÉTO SMLOUVY NEBO LIŠÍCÍ SE
+OD NÍ.
+
+Vzdání se práva.  Jakékoli zřeknutí se práv v rámci Smlouvy je platné pouze
+v písemné formě s podpisem oprávněného zástupce smluvní strany. Žádné
+vzdání se jakéhokoli dřívějšího nebo současného práva vyplývajícího z
+porušení nebo nedodržení Smlouvy nebude považováno za vzdání se jakéhokoli
+budoucího práva plynoucího ze Smlouvy.
+
+Klauzule o oddělitelnosti.  Stane-li se jakékoli ustanovení této Smlouvy
+neplatným nebo neúčinným, bude toto ustanovení interpretováno, omezeno,
+upraveno nebo v případě potřeby i zrušeno v nezbytném rozsahu, aby bylo
+zabráněno neplatnosti nebo neúčinnosti Smlouvy. Ostatní ustanovení Smlouvy
+zůstávají v platnosti v původním znění.
+
+Splnění exportních požadavků.  Výrobky nebo technické údaje poskytnuté
+podle této Smlouvy mohou být předmětem exportních omezení USA a obchodních
+zákonů jiných zemí.  Smluvní strany se zavazují dodržovat veškerá exportní
+omezení a získat jakékoli licence nebo exportní klasifikace potřebné k
+exportu, reexportu nebo importu zboží.  Smluvní strany se zavazují
+neexportovat ani nereexportovat subjektům uvedeným v platném seznamu
+subjektů vyloučených z exportu, do zemí, na které je uvaleno embargo, ani
+do teroristických zemí podle exportních zákonů USA.  Smluvní strany
+nepoužijí zboží pro zakázané jaderné, raketové nebo chemické a biologické
+zbraně.  Než začnete z USA vyvážet produkty společnosti Novell, informujte
+se na webových stránkách úřadu Bureau of Industry and Security (Úřad pro
+průmysl a bezpečnost, www.bis.doc.gov). Další informace o exportu softwaru
+Novell najdete na adrese http://www.novell.com/company/legal/.  Společnost
+Novell vám na požádání poskytne konkrétní informace o platných omezeních. 
+Společnost Novell však nenese žádnou odpovědnost za váš neúspěch při
+získávání některého nezbytného povolení pro export.
+
+Omezená práva pro vládu USA.  Používání, kopírování nebo předávání
+informací vládou USA podléhá omezením uvedeným ve směrnicích FAR 52.227-14
+(červen 1987) obměna III (červen 1987), FAR 52.227-19 (červen 1987) nebo
+DFARS 252.227-7013 (b) (3) (listopad 1995), případně v příslušných
+následných klauzulích. 
+
+Dodavatel (výrobce) je Novell, Inc., 1800 South Novell Place, Provo, Utah
+84606.
+
+Jiné.  Uplatnění Konvence OSN o kontraktech pro mezinárodní prodej zboží je
+výslovně vyloučeno.
+
+(c)1993, 2000-2009 Novell, Inc. Všechna práva vyhrazena.(022309)
+
+Novell a SUSE LINUX jsou registrované ochranné známky společnosti Novell,
+Inc. ve Spojených státech amerických a dalších zemích. 
+
+Všechny ochranné známky jiných subjektů jsou vlastnictvím příslušných
+vlastníků.
+
+
+
+
+                                                            
+                                                            
+                                                            
+                                                            
+                                                            
+                                                            
+                                                            
+                                                            
+                                                            
+                                                            
+                                                            
+                                                            
+                                                            
+                                                            
+                                                            
+                                                            
+                                                            
+                                                            
+                                                            
+                                                            
+                                                            
+                                                            
+                                                            
+                                                            
+                                                            
+                                                            
+                                                            
+                                                            
+                                                            
+                                                            
+                                                            
+                                                            
+                                                            
+                                                            
+                                                            
+                                                            
+                                                            
+                                                            
+                                                            
+                                                            
+                                                            
+                                                            
+                                                            
+                                                            
+                                                            
+                                                            
+                                                            
+                                                            
+                                                            
+                                                            
+                                                            
+                                                            
+                                                            
+                                                            
+                                                            
+                                                            
+                                                            
+                                                            
+                                                            
+                                                            
+                                                            
+                                                            
+                                                            
+                                                            
+                                                            
+                                                            
+                                                            
+                                                            
+                                                            
+                                                            
+                                                            
+                                                            
+                                                            
+                                                            
+                                                            
+                                                            
+                                                            
+                                                            
+                                                            
+                                                            
+                                                            
+                                                            
+                                                            
+                                                            
+                                                            
+                                                            
+                                                            
+                                                            
+                                                            
+                                                            
+                                                            
+                                                            
+                                                            
+                                                            
+                                                            
+                                                            
+                                                            
+                                                            
+                                                            
+                                                            
+                                                            
+                                                            

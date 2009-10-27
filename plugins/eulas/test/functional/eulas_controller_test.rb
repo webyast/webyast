@@ -7,7 +7,7 @@ class EulasControllerTest < ActionController::TestCase
   YAML_CONTENT = <<EOF
 licenses:
   - openSUSE-11.1
-  - SLED-10-SP3
+  - SLES-11
 EOF
 
   UPDATE_DATA = {"id"=>"1", 
@@ -28,7 +28,6 @@ EOF
     @request = ActionController::TestRequest.new
     # http://railsforum.com/viewtopic.php?id=1719
     @request.session[:account_id] = 1 # defined in fixtures
-    # @test_license = License.new "openSUSE-11.1"
   end
 
   def test_index

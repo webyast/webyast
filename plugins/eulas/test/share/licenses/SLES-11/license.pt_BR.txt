@@ -1,0 +1,380 @@
+Contrato de Licença de Software SUSE(r) Linux Enterprise Server 11 Novell(r)
+
+LEIA ESTE CONTRATO COM ATENÇÃO. AO INSTALAR OU DE QUALQUER OUTRA FORMA
+UTILIZAR O SOFTWARE (INCLUINDO SEUS COMPONENTES), VOCÊ ESTÁ CONCORDANDO COM
+OS TERMOS DESTE CONTRATO. CASO VOCÊ NÃO ESTEJA DE ACORDO COM ESTES TERMOS,
+NÃO FAÇA DOWNLOAD, NÃO INSTALE NEM UTILIZE O SOFTWARE.
+
+DIREITOS E LICENÇAS
+
+Este Contrato de Licença de Software da Novell ("Contrato") é um contrato
+legal entre Você (pessoa física ou jurídica) e a Novell, Inc. ("Novell"). O
+produto de software identificado no título deste Contrato, qualquer mídia e
+sua respectiva documentação (coletivamente o "Software") estão protegidos
+pelas leis e pelos tratados de direitos autorais dos Estados Unidos ("EUA")
+e de outros países, estando sujeitos aos termos deste Contrato.  Qualquer
+versão de atualização ou de suporte do Software que for baixado ou recebido
+por Você que não for acompanhado por um contrato de licença, que
+expressamente substitua o presente Contrato será considerado como Software
+e será regido pelo presente Contrato.  Se o Software for uma versão de
+Atualização ou de Suporte, Você deverá ter licenciado de forma válida a
+versão e as instalações do Software que estão sendo atualizadas ou
+recebendo suporte para instalar ou usar a versão de Atualização ou de
+Suporte. 
+
+O Software é um sistema operacional modular, formado por diversos
+componentes que podem ser fornecidos com termos de licença separados.  O
+Software é um trabalho coletivo da Novell; embora a Novell não tenha a
+propriedade dos direitos autorais de todos os componentes do Software, a
+Novell detém os direitos autorais do trabalho coletivo do Software.  
+
+A maior parte dos componentes é composta por pacotes de código-fonte
+aberto, desenvolvidos de forma independente e acompanhados de termos de
+licença separados.  Seus direitos de licença em relação aos componentes
+individuais fornecidos com termos de licença separados são definidos por
+esses termos; nada neste contrato deve restringir, limitar ou, de outra
+forma, afetar quaisquer direitos ou obrigações que Você possa ter, ou
+condições às quais Você possa estar sujeito, sob tais termos de licença; no
+entanto, se Você distribuir cópias de qualquer componente independente do
+Software, deverá remover de cada cópia todas as marcas registradas, marcas
+comerciais e logotipos da Novell.
+
+Você pode fazer e usar cópias ilimitadas do Software dentro de Sua
+organização. Você pode fazer e distribuir cópias modificadas ilimitadas
+fora de Sua organização, desde que remova de cada cópia modificada do
+Software todas as marcas registradas, marcas comerciais e logotipos da
+Novell. O termo "Organização" significa uma entidade jurídica, excluindo
+subsidiárias e afiliadas cuja existência seja independente para fins
+tributários ou de personalidade jurídica. Um exemplo de Organização do
+setor privado seria uma corporação, uma sociedade ou um truste, excluindo
+quaisquer subsidiárias ou afiliadas da organização com números separados de
+identificação tributária ou de registro comercial. No setor público, um
+exemplo de Organização seria um órgão governamental específico ou a
+autoridade governamental local.
+
+
+
+OUTROS TERMOS DE LICENÇA E RESTRIÇÕES
+
+O Software está protegido pelas leis e tratados de direitos autorais dos
+Estados Unidos ("EUA") e outros países e está sujeito aos termos deste
+Contrato. O Software foi licenciado para Você, não vendido.
+
+O Software pode estar acompanhado de outros programas de software
+("Programas Incluídos"). Seus direitos de licença sobre Programas Incluídos
+fornecidos com termos de licença separados são definidos por esses termos.
+nada neste contrato deve restringir, limitar ou, de outra forma, afetar
+quaisquer direitos ou obrigações que Você possa ter, ou condições às quais
+Você possa estar sujeito, sob tais termos de licença.  
+
+A Novell detém todos os direitos que não foram expressamente concedidos a
+Você. Por esse motivo, Você não deve: (1) fazer engenharia reversa,
+descompilação ou desmontagem do Software, exceto e somente quando
+expressamente permitido pela legislação aplicável; ou (2) transferir o
+Software ou Seus direitos de licença sob este Contrato, em parte ou no
+todo.
+
+MANUTENÇÃO E SUPORTE
+
+A Novell não tem obrigação de oferecer suporte ou manutenção, a menos que
+Você adquira uma oferta que inclua expressamente serviços de suporte ou de
+manutenção.  Se Você fizer tal aquisição e nenhum contrato separado se
+aplicar especificamente aos serviços de suporte ou manutenção, os termos
+deste Contrato regerão o fornecimento desses serviços de suporte ou de
+manutenção ("Serviços").  Para obter mais informações sobre as ofertas
+atuais de suporte da Novell, consulte http://www.novell.com/support.
+
+DIREITOS DE PROPRIEDADE
+
+Nenhum direito de posse ou de propriedade do Software foi transferido para
+Você.  A Novell e/ou seus respectivos licenciadores detêm todo o direito,
+toda a titularidade e todo o interesse sobre todos os direitos de
+propriedade intelectual do Software e dos Serviços, incluindo quaisquer
+adaptações ou cópias deles.  Quaisquer materiais recebidos por Você como
+parte dos Serviços que não forem acompanhados por termos que expressamente
+substituam este Contrato, serão Software e serão regidos pelo presente
+Contrato.  Você adquiriu apenas uma licença condicional para usar o
+Software.
+
+GARANTIA LIMITADA
+
+Por noventa (90) dias, a partir da data da aquisição, a Novell garante que
+(1) nenhuma mídia na qual o Software for entregue apresentará defeitos
+físicos; e (2) o Software realmente estará de acordo com documentação que o
+acompanha. Se os itens com defeito forem devolvidos para a Novell ou se
+Você informar a não-conformidade à Novell, por escrito, no prazo de noventa
+(90) dias a partir da data da aquisição, a Novell decidirá, a seu critério,
+se solucionará a não-conformidade ou se reembolsará os custos da aquisição
+da licença do Software. Qualquer uso ou modificação não autorizado(a) do
+Software invalidará esta garantia. ESTA GARANTIA É O SEU RECURSO ÚNICO E
+EXCLUSIVO E ANULA TODAS AS OUTRAS GARANTIAS, EXPRESSAS OU IMPLÍCITAS. 
+(Esta garantia não se aplica ao Software fornecido gratuitamente.  ESTE
+SOFTWARE É FORNECIDO "NO ESTADO EM QUE SE ENCONTRA" E SEM GARANTIAS DE
+NENHUM TIPO.)
+
+Serviços.  A Novell garante que todos os Serviços adquiridos serão
+fornecidos de forma profissional e de acordo com padrões geralmente aceitos
+pelo setor.  Esta garantia terá a validade de noventa (90) dias a contar da
+data do fornecimento dos Serviços.  Caso haja qualquer violação desta
+garantia, a única obrigação da Novell será corrigir os Serviços para que
+eles estejam em conformidade com esta garantia ou, a critério próprio,
+reembolsar o valor pago por Você à Novell pela parte dos Serviços que não
+estiver em conformidade com esta garantia.  Uma vez que os arquivos podem
+ser alterados ou danificados no decorrer do fornecimento de serviços
+técnicos pela Novell, Você concorda em tomar as medidas apropriadas para
+isolar e fazer backup dos Seus sistemas.
+
+O SOFTWARE NÃO FOI PROJETADO, FABRICADO OU PLANEJADO PARA USO OU
+DISTRIBUIÇÃO COM EQUIPAMENTOS DE CONTROLE ONLINE EM AMBIENTES QUE OFERECEM
+RISCOS E REQUEREM UM DESEMPENHO CONTRA FALHAS, COMO NOS CASOS DE OPERAÇÃO
+DE INSTALAÇÕES NUCLEARES, NAVEGAÇÃO AÉREA, COMUNICAÇÕES OU SISTEMAS DE
+CONTROLE, MÁQUINAS DE MANUTENÇÃO ARTIFICIAL DE VIDA, SISTEMAS DE ARMAMENTOS
+OU OUTROS USOS EM QUE A FALHA DO SOFTWARE POSSA SER DIRETAMENTE RESPONSÁVEL
+POR MORTE, DANOS PESSOAIS OU GRAVES DANOS FÍSICOS OU AMBIENTAIS.
+
+O SOFTWARE É COMPATÍVEL APENAS COM ALGUNS COMPUTADORES E SISTEMAS
+OPERACIONAIS. NÃO É GARANTIDO PARA SISTEMAS NÃO COMPATÍVEIS. Entre em
+contato com a Novell ou com Seu revendedor para obter informações sobre
+compatibilidade.
+
+Produtos Não Pertencentes à Novell. O Software pode incluir ou ser
+fornecido com hardware ou com outros programas de software ou serviços
+licenciados ou vendidos por terceiros. A NOVELL NÃO GARANTE PRODUTOS OU
+SERVIÇOS DE TERCEIROS. QUALQUER UM DESSES PRODUTOS OU SERVIÇOS É FORNECIDO
+"NO ESTADO EM QUE SE ENCONTRA". QUALQUER SERVIÇO DE GARANTIA, SE HOUVER,
+PARA PRODUTOS NÃO PERTENCENTES À NOVELL É FORNECIDO PELO LICENCIADOR DO
+PRODUTO, DE ACORDO COM AS GARANTIAS APLICÁVEIS DO PRÓPRIO LICENCIADOR.
+
+A NÃO SER NAS FORMAS LIMITADAS POR LEI, A NOVELL REJEITA E SE ISENTA DE
+TODA E QUALQUER GARANTIA IMPLÍCITA, INCLUSIVE QUAISQUER GARANTIAS DE
+COMERCIALIZAÇÃO, ADEQUAÇÃO A UM PROPÓSITO ESPECÍFICO, TITULARIDADE OU
+NÃO-VIOLAÇÃO. A NOVELL NÃO CONCEDE QUALQUER GARANTIA, REPRESENTAÇÃO OU
+COMPROMISSO ALÉM DAQUELES EXPRESSAMENTE ESTABELECIDOS NESTA GARANTIA
+LIMITADA. A NOVELL NÃO GARANTE QUE O SOFTWARE OU OS SERVIÇOS ATENDERÃO ÀS
+SUAS NECESSIDADES OU QUE A OPERAÇÃO DO SOFTWARE OU DOS SERVIÇOS NÃO SOFRERÁ
+INTERRUPÇÕES.  Algumas jurisdições não permitem certas isenções de
+responsabilidade e limitações de garantia; portanto, partes das limitações
+acima podem não se aplicar a Você. Esta garantia limitada Lhe concede
+direitos específicos, e Você também poderá ter outros direitos que variam
+de acordo com o estado ou a jurisdição.
+
+LIMITAÇÃO DE RESPONSABILIDADE
+
+(a) Perdas Consequenciais. A NOVELL OU QUALQUER UM DE SEUS AGENTES,
+SUBSIDIÁRIAS OU FUNCIONÁRIOS NÃO SERÁ RESPONSÁVEL, EM HIPÓTESE ALGUMA, POR
+QUAISQUER DANOS ESPECIAIS, CIRCUNSTANCIAIS, GRAVES, INDIRETOS, ILÍCITOS,
+ECONÔMICOS OU PUNITIVOS DECORRENTES DO USO OU DA INCAPACIDADE DE USAR O
+SOFTWARE OU OS SERVIÇOS, INCLUINDO, SEM LIMITAÇÃO, PERDA DE LUCROS,
+NEGÓCIOS OU DADOS, MESMO SE AVISADOS DA POSSIBILIDADE DESSES DANOS. (b)
+Danos diretos.  EM HIPÓTESE ALGUMA, A RESPONSABILIDADE AGREGADA DA NOVELL
+POR DANOS DIRETOS À PROPRIEDADE OU A PESSOAS (EM UMA INSTÂNCIA OU SÉRIE DE
+INSTÂNCIAS) EXCEDERÁ 1,25 VEZ O VALOR PAGO PELO SOFTWARE OU PELOS SERVIÇOS
+A PARTIR DOS QUAIS ESSA RECLAMAÇÃO SE ORIGINOU (OU US$ 50,00 SE VOCÊ
+RECEBEU O SOFTWARE GRATUITAMENTE).  As exclusões e limitações citadas acima
+não se aplicarão a reivindicações relacionadas à morte ou danos pessoais.
+Nas jurisdições em que não são permitidas a exclusão ou limitação de danos,
+a responsabilidade da Novell será limitada ou excluída, no limite máximo
+permitido por essas jurisdições.
+
+TERMOS GERAIS
+
+Vigência.  Este Contrato entrará em vigor na data de aquisição legal do
+Software e será automaticamente rescindido se Você violar algum de seus
+termos.  Teste de Desempenho.  Esta restrição ao teste de desempenho é
+aplicável se Você for responsável pelo desenvolvimento ou licenciamento de
+softwares ou estiver realizando um teste no Software sob orientação ou em
+nome de um desenvolvedor ou licenciador de software.  Sem o consentimento
+prévio, por escrito, da Novell, Você não pode reter, publicar ou divulgar a
+terceiros, sem motivo, os resultados de nenhum teste de desempenho do
+Software. Se Você for um licenciador de produtos que tiverem funcionalidade
+similar ou forem concorrentes do Software ("Produtos Similares"), ou
+estiver atuando em nome de um licenciador, e vier a publicar ou divulgar
+informações sobre o teste de desempenho do Software, violando assim esta
+restrição, a Novell, além de outros recursos, terá o direito de executar
+testes de desempenho dos Produtos Similares e de divulgar e publicar essas
+informações, não obstante o contido no contrato de licença de usuário final
+dos Produtos Similares, e Você, pelo presente, declara que tem autoridade
+para conceder tal direito à Novell.
+
+Código-fonte Aberto.  Nenhuma parte deste Contrato deve restringir, limitar
+ou afetar qualquer direito ou obrigação que Você possa ter, ou as condições
+às quais Você possa estar sujeito, em qualquer licença de código-fonte
+aberto para qualquer código-fonte aberto contido ao Software.
+
+Transferência.  Este Contrato não pode ser transferido ou atribuído sem a
+aprovação prévia, por escrito, da Novell.
+
+Lei e Jurisdição.  Este Contrato é regido pelas leis do Estado de Utah,
+Estados Unidos. Qualquer ação legal relacionada a este Contrato poderá ser
+julgada somente perante o tribunal de jurisdição competente do Estado de
+Utah.  Contudo, se o Seu país de domicílio for um estado membro da
+Comunidade Européia ou da Associação de Livre Comércio Europeu, este
+Contrato será regido pelas leis desse país e qualquer ação legal poderá ser
+julgada somente pelo tribunal de jurisdição competente desse país.
+
+Contrato Total.  Este Contrato estabelece o completo entendimento e acordo
+entre Você e a Novell e pode ser retificado ou modificado somente por um
+contrato por escrito acordado por Você e por um representante autorizado da
+Novell.  NENHUM LICENCIADOR, DISTRIBUIDOR, REPRESENTANTE, VAREJISTA,
+REVENDEDOR, VENDEDOR OU FUNCIONÁRIO ESTÁ AUTORIZADO A MODIFICAR ESTE
+CONTRATO OU FAZER QUALQUER DECLARAÇÃO OU ASSUMIR COMPROMISSOS QUE SEJAM
+DIFERENTES OU ADICIONEM INFORMAÇÕES AOS TERMOS DESTE CONTRATO.
+
+Renúncia.  Nenhuma renúncia a nenhum direito sob este Contrato será
+considerada efetiva, a menos que seja registrada por escrito e assinada por
+um representante devidamente autorizado da parte legalmente obrigada.
+Nenhuma renúncia a qualquer direito, passado ou presente, decorrente de
+qualquer violação ou falha na execução deverá ser considerada como uma
+renúncia a qualquer direito futuro procedente deste Contrato.
+
+Independência das Cláusulas do Contrato.  Se qualquer disposição deste
+Contrato se tornar inválida ou não puder ser cumprida, deverá ser
+interpretada, limitada, modificada ou, se necessário, separada, na medida
+necessária, para eliminar seu aspecto inválido ou inexeqüível e as outras
+disposições deste Contrato deverão permanecer inalteradas.
+
+Conformidade com as Leis de Exportação.  Todos os produtos ou as
+informações técnicas fornecidas neste Contrato podem estar sujeitas aos
+controles de exportação dos Estados Unidos e às leis de comércio de outros
+países.  As partes concordam em cumprir todas as regulamentações de
+controle de exportação e em obter todas as licenças ou a documentação
+necessárias para exportar, reexportar ou importar produtos.  As partes
+concordam em não exportar ou reexportar para entidades que constam das
+listas atuais de exclusão de exportação dos Estados Unidos ou para todos os
+países sob embargo ou que abrigam organizações terroristas, de acordo com o
+especificado pelas leis de exportação dos Estados Unidos.  As partes não
+usarão os produtos para finalidades nucleares, de lançamento de mísseis ou
+de armamento químico e biológico.  Consulte a página do Bureau of Industry
+and Security na Web www.bis.doc.gov antes de exportar os produtos da Novell
+a partir dos EUA. Para obter mais informações sobre como exportar o
+software da Novell, consulte http://www.novell.com/company/legal/. 
+Mediante solicitação, a Novell fornecerá a Você informações específicas
+sobre as restrições aplicáveis.  Contudo, a Novell não assumirá
+responsabilidades pela não aprovação de documentos necessários para
+exportação fornecidos por Você.
+
+Direitos Restritos do Governo dos EUA.  O uso, a reprodução ou a divulgação
+pelo Governo dos EUA estão sujeitos às restrições estabelecidas no FAR §
+52.227-14 (junho de 1987) Alternate III (junho de 1987), FAR 52.227-19
+(junho de 1987) ou DFARS 252.227-7013 (b)(3) (novembro de 1995) ou às
+cláusulas substitutas aplicáveis. 
+
+O Fornecedor/Fabricante é a Novell, Inc., 1800 South Novell Place, Provo,
+Utah 84606.
+
+Outros.  Está expressamente excluída a aplicação da Convenção de Contratos
+das Nações Unidas para a Lei Internacional sobre Vendas.
+
+(c)1993, 2000-2009 Novell, Inc. Todos os direitos reservados. (022309)
+
+Novell e SUSE LINUX são marcas registradas da Novell, Inc. nos Estados
+Unidos e em outros países. 
+
+Todas as marcas registradas de terceiros pertencem a seus respectivos
+proprietários.
+
+
+
+
+                                                            
+                                                            
+                                                            
+                                                            
+                                                            
+                                                            
+                                                            
+                                                            
+                                                            
+                                                            
+                                                            
+                                                            
+                                                            
+                                                            
+                                                            
+                                                            
+                                                            
+                                                            
+                                                            
+                                                            
+                                                            
+                                                            
+                                                            
+                                                            
+                                                            
+                                                            
+                                                            
+                                                            
+                                                            
+                                                            
+                                                            
+                                                            
+                                                            
+                                                            
+                                                            
+                                                            
+                                                            
+                                                            
+                                                            
+                                                            
+                                                            
+                                                            
+                                                            
+                                                            
+                                                            
+                                                            
+                                                            
+                                                            
+                                                            
+                                                            
+                                                            
+                                                            
+                                                            
+                                                            
+                                                            
+                                                            
+                                                            
+                                                            
+                                                            
+                                                            
+                                                            
+                                                            
+                                                            
+                                                            
+                                                            
+                                                            
+                                                            
+                                                            
+                                                            
+                                                            
+                                                            
+                                                            
+                                                            
+                                                            
+                                                            
+                                                            
+                                                            
+                                                            
+                                                            
+                                                            
+                                                            
+                                                            
+                                                            
+                                                            
+                                                            
+                                                            
+                                                            
+                                                            
+                                                            
+                                                            
+                                                            
+                                                            
+                                                            
+                                                            
+                                                            
+                                                            
+                                                            
+                                                            
+                                                            
+                                                            
+                                                            
+                                                            

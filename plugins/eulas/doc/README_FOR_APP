@@ -31,4 +31,11 @@ Add vendor specific license
    - SLE-11
    - YOUR_LICENSE_NAME
 
+Accept license by hand
+======================
+
+To accept a license without using the UI or webservice API, create an empty file
+ in the directory: /var/lib/yastws/eulas/accepted-licenses/LICENSE_NAME. Where 
+LICENSE_NAME is a license name identical to the one in /etc/webservice/eulas.yml .
+
 Copyright (c) 2009 Novell, released under the GPL2 license

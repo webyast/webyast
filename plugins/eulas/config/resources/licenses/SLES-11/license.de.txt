@@ -1,0 +1,405 @@
+Novell(r)-Software-Lizenzvereinbarung für SUSE(r) Linux Enterprise Server
+11
+
+LESEN SIE DIESE VEREINBARUNG SORGFÄLTIG DURCH. MIT DER INSTALLATION ODER
+ANDERWEITIGEN NUTZUNG DER SOFTWARE (BZW. IHRER KOMPONENTEN) STIMMEN SIE DEN
+BESTIMMUNGEN DIESER VEREINBARUNG ZU. FALLS SIE MIT DEN BESTIMMUNGEN DIESER
+VEREINBARUNG NICHT EINVERSTANDEN SIND, UNTERLASSEN SIE DAS HERUNTERLADEN,
+DIE INSTALLATION ODER NUTZUNG DER SOFTWARE.
+
+RECHTE UND LIZENZEN
+
+Diese Novell-Software-Lizenzvereinbarung ("Vereinbarung") ist eine
+rechtsgültige Vereinbarung zwischen Ihnen (als juristische Person oder
+Einzelperson) und Novell, Inc., ("Novell"). Das im Titel dieser
+Vereinbarung genannte Produkt, jegliche Medien sowie die
+Begleitdokumentation (im Gesamten als "Software" bezeichnet) unterliegen
+den urheberrechtlichen Bestimmungen der Vereinigten Staaten von Amerika
+("USA") und anderer Länder sowie den Bestimmungen dieser Vereinbarung. Jede
+Aktualisierung oder Support-Version für die Software, die Sie herunterladen
+oder erhalten und der nicht eine Lizenzvereinbarung beigefügt ist, die
+diese Vereinbarung ausdrücklich ersetzt, gilt als Software und unterliegt
+dieser Vereinbarung. Falls es sich bei der Software um eine Aktualisierung
+oder eine Support-Version handelt, benötigen Sie eine gültige Lizenz für
+die Version und die Anzahl der Software-Aktualisierungen oder
+Support-Versionen, um die Aktualisierung oder Support-Version installieren
+und nutzen zu können. 
+
+Die Software ist ein modulares Betriebssystem aus zahlreichen Komponenten,
+für die unterschiedliche Lizenzbedingungen gelten können. Die Software ist
+als Gesamtheit Eigentum von Novell. Novell verfügt zwar nicht über das
+Urheberrecht für jede Komponente der Software, aber über ein Urheberrecht
+für die Gesamtheit dieser Software.  
+
+Die meisten Komponenten sind Open Source-Pakete, die unabhängig entwickelt
+wurden und für die andere Lizenzbedingungen gelten. Ihre Lizenzrechte in
+Bezug auf diese einzelnen Komponenten, für die andere Lizenzbedingungen
+gelten, werden durch die Lizenzvereinbarung der jeweiligen Komponente
+bestimmt. Durch keine der hier aufgeführten Bedingungen werden Ihre Rechte
+oder Verpflichtungen sowie die für Sie zutreffenden Bedingungen
+eingeschränkt oder anderweitig beeinflusst, die für Sie im Rahmen dieser
+Lizenzvereinbarungen gelten. Wenn Sie jedoch Kopien einer der Komponenten
+unabhängig von der Software weitervertreiben, müssen Sie alle
+Markenzeichen, Handelszeichen und Logos von Novell aus jeder Kopie
+entfernen.
+
+Sie können unbegrenzt Kopien der Software innerhalb Ihrer Organisation
+erstellen und verwenden. Sie dürfen unbegrenzt geänderte Kopien außerhalb
+Ihrer Organisation erstellen und verteilen, wenn Sie alle Markenzeichen,
+Handelszeichen und Logos von Novell aus allen geänderten Kopien der
+Software entfernen. Der Begriff „Unternehmen“ bezeichnet eine juristische
+Einheit, unter Ausschluss ihrer Tochtergesellschaften und angegliederten
+Unternehmen, die steuerlich eigenständig sind oder eine separate
+juristische Einheit bilden. Ein Beispiel für ein Unternehmen im
+Privatsektor ist eine GmbH, eine Personengesellschaft oder eine
+Treuhandgesellschaft, ausgenommen Tochterunternehmen oder Zweigunternehmen
+des Unternehmens, die eine separate Steuernummer oder Handelsregisternummer
+führen. Ein Beispiel für ein Unternehmen im öffentlichen Sektor ist eine
+Regierungsbehörde oder ein Amt.
+
+
+
+WEITERE LIZENZBEDINGUNGEN UND EINSCHRÄNKUNGEN
+
+Die Software unterliegt den urheberrechtlichen Bestimmungen der Vereinigten
+Staaten von Amerika ("USA") und anderer Länder sowie den Bestimmungen
+dieser Vereinbarung. Diese Software wird für Sie lizenziert; Sie erwerben
+nicht die Software selbst.
+
+Die Software wird möglicherweise mit anderen Software-Produkten vertrieben
+("Software-Paket"). Ihre Lizenzrechte in Bezug auf die im Software-Paket
+enthaltenen anderen Software-Programme, für die andere Lizenzbedingungen
+gelten, werden durch die Lizenzvereinbarungen der jeweiligen Software
+bestimmt. Durch keine der hier aufgeführten Bedingungen werden Ihre Rechte
+oder Verpflichtungen sowie die für Sie zutreffenden Bedingungen
+eingeschränkt oder anderweitig beeinflusst, die für Sie im Rahmen dieser
+Lizenzvereinbarungen gelten.  
+
+Novell behält sich alle Rechte vor, die Ihnen nicht ausdrücklich gewährt
+werden. Es gelten folgende Einschränkungen: (1) Rückentwickeln (Reverse
+Engineering), Dekompilierung oder Disassemblierung der Software ist nicht
+oder höchstens in dem Maße gestattet, das das anwendbare Recht zulässt; und
+(2) die Software oder die im Rahmen dieser Vereinbarung gewährten
+Lizenzrechte dürfen weder ganz noch teilweise an Dritte übertragen werden.
+
+WARTUNG UND SUPPORT
+
+Novell ist nicht verpflichtet, Support oder Wartung für die Software zu
+leisten, es sei denn, Sie entscheiden sich für ein Angebot, in dem Support-
+bzw. Wartungs-Services ausdrücklich enthalten sind. Im Falle eines Erwerbs
+dieser Art, bei dem keine separate Vereinbarung speziell für die Support-
+bzw. Wartungs-Services gilt, regeln die Bestimmungen der vorliegenden
+Vereinbarung die Bereitstellung derartiger Support- bzw. Wartungs-Services
+("Services"). Weitere Informationen über die aktuellen Support-Angebote von
+Novell finden Sie unter http://www.novell.com/support.
+
+EIGENTUMSRECHTE
+
+Ihnen werden keine Eigentumsrechte an der Software übertragen. Novell
+und/oder seine Lizenzgeber besitzen alle Rechte, Eigentums- und
+Nutzungsrechte auf geistiges Eigentum an der Software und den Services und
+behalten sich diese vor; dies gilt auch für Anpassungen oder Kopien
+hiervon. Alle Materialien, die Sie im Rahmen der Services erhalten und
+denen nicht eine Lizenzvereinbarung beigefügt ist,  die diese Vereinbarung
+ausdrücklich ersetzt, gelt als Software, die dieser Vereinbarung
+unterliegt. Sie erhalten lediglich eine bedingte Lizenz zur Nutzung der
+Software.
+
+EINGESCHRÄNKTE GEWÄHRLEISTUNG
+
+Novell gewährleistet für neunzig (90) Tage ab Kaufdatum, dass (1) sämtliche
+Medien, auf denen die Software zur Verfügung gestellt wird, frei von
+Sachschäden sind und (2) die Software im Wesentlichen der beiliegenden
+Dokumentation entspricht. Wenn Sie fehlerhafte Exemplare an Novell
+zurückgeben oder Novell innerhalb von neunzig (90) Tagen nach Erwerb der
+Software über einen bestehenden Mangel informieren, wird Novell nach
+eigenem Ermessen entweder den Mangel nachbessern oder die von Ihnen
+entrichteten Lizenzgebühren rückerstatten. Jeder unbefugte Gebrauch/jede
+unbefugte Modifizierung der Software führt zum Erlöschen dieser Garantie.
+DIE VORLIEGENDE GEWÄHRLEISTUNG STELLT IHREN EINZIGEN UND AUSSCHLIESSLICHEN
+ANSPRUCH DAR UND ERSETZT ALLE ANDEREN AUSDRÜCKLICHEN ODER KONKLUDENTEN
+GARANTIEN. (Die vorliegende Gewährleistung gilt nicht für kostenlos zur
+Verfügung gestellte Software. DIE SOFTWARE WIRD IN DER VERFÜGBAREN FORM
+OHNE GEWÄHRLEISTUNG BEREITGESTELLT.)
+
+Services. Novell gewährleistet, dass sämtliche erworbenen Services auf
+professionelle Weise und gemäß den allgemein anerkannten Branchenstandards
+erbracht werden. Diese Gewährleistung gilt für einen Zeitraum von neunzig
+(90) Tagen ab Bereitstellung der Services. Bei jeglichem Verstoß gegen
+diese Gewährleistung ist Novell lediglich verpflichtet, entweder die
+Services so zu verändern, dass sie mit dieser Gewährleistung
+übereinstimmen, oder Ihnen den Betrag zu erstatten, den Sie für den Teil
+der Services an Novell bezahlt haben, der nicht mit dieser Gewährleistung
+übereinstimmt. Ihre Dateien können bei der Bereitstellung technischer
+Dienstleistungen durch Novell verändert oder beschädigt werden. Sie sind
+daher verpflichtet, geeignete Maßnahmen zur Trennung und Sicherung (Backup)
+Ihrer Systeme zu ergreifen.
+
+DIE SOFTWARE WURDE NICHT FÜR DIE NUTZUNG ODER DEN VERTRIEB MIT
+ONLINE-STEUERUNGSHARDWARE IN GEFÄHRLICHEN UMGEBUNGEN, DIE EINEN
+STÖRUNGSSICHEREN BETRIEB ERFORDERN, ENTWICKELT, HERGESTELLT ODER
+KONZIPIERT, BEISPIELSWEISE FÜR DEN BETRIEB VON KERNKRAFTANLAGEN,
+FLUGNAVIGATION, KOMMUNIKATIONS- ODER STEUERUNGSSYSTEMEN, LEBENSERHALTENDEN
+GERÄTEN, WAFFENSYSTEMEN ODER FÜR ANDERE NUTZUNGSZWECKE, BEI DENEN
+SOFTWARE-AUSFÄLLE DIREKT ZUM TOD, ZU VERLETZUNGEN ODER SCHWEREN PHYSISCHEN
+ODER UMWELTSCHÄDEN FÜHREN KÖNNEN.
+
+DIE SOFTWARE IST NUR MIT BESTIMMTEN COMPUTERN UND BETRIEBSSYSTEMEN
+KOMPATIBEL. BEI NICHT KOMPATIBLEN SYSTEMEN WIRD KEINE HAFTUNG FÜR DIE
+SOFTWARE ÜBERNOMMEN. Informationen zur Kompatibilität erhalten Sie von
+Novell oder Ihrem Fachhändler.
+
+Nicht-Novell-Produkte: In der Software oder im Lieferumfang können weitere
+Hardware oder Softwareprogramme bzw. Services, die von anderen als Novell
+lizenziert oder verkauft werden, enthalten sein. NOVELL ÜBERNIMMT KEINE
+GARANTIE FÜR PRODUKTE ODER SERVICES, DIE NICHT VON NOVELL ENTWICKELT WURDEN
+BZW. BEREITGESTELLT WERDEN. PRODUKTE BZW. SERVICES DIESER ART WERDEN IN DER
+VERFÜGBAREN FORM BEREITGESTELLT. EIN ETWAIGER GARANTIE-SERVICE FÜR
+NICHT-NOVELL-PRODUKTE WIRD VOM PRODUKTLIZENZGEBER GEMÄSS DER ZUTREFFENDEN
+LIZENZGEBERGARANTIE ZUR VERFÜGUNG GESTELLT.
+
+SOWEIT GESETZLICH NICHT ANDERS VORGESCHRIEBEN, WEIST NOVELL ALLE
+STILLSCHWEIGENDEN GEWÄHRLEISTUNGEN, EINSCHLIESSLICH DER GEWÄHR HINSICHTLICH
+MARKTGÄNGIGKEIT, EIGNUNG FÜR EINEN BESTIMMTEN ZWECK, EIGENTUMSRECHT ODER
+NICHTBEEINTRÄCHTIGUNG, ZURÜCK UND SCHLIESST SIE AUS. NOVELL LEISTET KEINE
+GARANTIEN UND HAFTET NICHT FÜR ANGABEN ODER ZUSAGEN, DIE NICHT AUSDRÜCKLICH
+IN DIESER BESCHRÄNKTEN GEWÄHRLEISTUNG GENANNT SIND. NOVELL GEWÄHRLEISTET
+NICHT DIE EIGNUNG DER SOFTWARE ODER SERVICES FÜR JEDWEDEN BEDARF BZW. DEN
+UNUNTERBROCHENEN BETRIEB DER SOFTWARE/DIE UNUNTERBROCHENE BEREITSTELLUNG
+DER SERVICES. Einige Rechtsprechungen lassen bestimmte Haftungsausschlüsse
+und Haftungsbeschränkungen nicht zu, sodass einige dieser Bestimmungen
+möglicherweise nicht für Sie zutreffen. Diese eingeschränkte Gewährleistung
+verleiht Ihnen bestimmte Rechte; abhängig von Bundesstaat oder Rechtssystem
+ergeben sich möglicherweise weitere Rechte.
+
+HAFTUNGSEINSCHRÄNKUNG
+
+(a) Folgeschäden: WEDER NOVELL NOCH DIE ZUGEHÖRIGEN LIZENZGEBER,
+TOCHTERGESELLSCHAFTEN ODER MITARBEITER SIND ZU ENTSCHÄDIGUNGEN FÜR
+BESONDERE, ZUFÄLLIGE, MITTELBARE ODER INDIREKTE SCHÄDEN, SCHÄDEN
+RESULTIEREND AUS UNERLAUBTER HANDLUNG ODER VERSCHÄRFTEM SCHADENSERSATZ
+VERPFLICHTET, DIE SICH AUS DER NUTZUNG BZW. NICHT MÖGLICHEN NUTZUNG DER
+SOFTWARE ODER SERVICES ERGEBEN, EINSCHLIESSLICH GEWINN- UND
+BETRIEBSAUSFÄLLEN SOWIE DATENVERLUST, SELBST WENN AUF DIE MÖGLICHKEIT
+SOLCHER SCHÄDEN HINGEWIESEN WURDE. (b) Direkte Schäden. DIE GESAMTHAFTUNG
+VON NOVELL FÜR DIREKTE SCHÄDEN AN EIGENTUM ODER PERSONEN (SOWOHL IM
+EINZELFALL ALS AUCH IN WIEDERHOLTEN FÄLLEN) ÜBERSTEIGT IN KEINEM FALL DEN
+1,25-FACHEN WERT DES FÜR DIE SOFTWARE ODER SERVICES, DIE GRUND FÜR DIESE
+FORDERUNG IST/SIND, BEZAHLTEN PREISES [ODER 50 US-DOLLAR, FALLS SIE DIE
+SOFTWARE KOSTENFREI ERHALTEN HABEN]. Die oben genannten Ausschlüsse und
+Einschränkungen gelten nicht für Forderungen im Zusammenhang mit
+Todesfällen oder Körperverletzungen. In Ländern, in denen die
+Rechtsprechung den Ausschluss oder die Einschränkung von
+Schadensersatzforderungen nicht zulässt, ist die Haftung von Novell auf den
+jeweils rechtlich zulässigen Rahmen beschränkt bzw. ausgeschlossen.
+
+ALLGEMEINE BESTIMMUNGEN
+
+Laufzeit: Diese Vereinbarung wird zu dem Zeitpunkt wirksam, zu dem Sie die
+Software rechtmäßig erwerben, und endet automatisch, sobald Sie eine der
+darin enthaltenen Bestimmungen missachten. Vergleichstests: Diese
+Einschränkung bezüglich Vergleichstests gilt für Sie, wenn Sie
+Softwareentwickler oder -lizenzgeber sind oder die Software im Auftrag bzw.
+im Namen eines Softwareentwicklers oder -lizenzgebers testen. Ohne
+schriftliche Genehmigung von Novell, die nicht ohne triftigen Grund versagt
+wird, dürfen Sie Ergebnisse von an der Software ausgeführten
+Vergleichstests nicht veröffentlichen oder an Dritte weitergeben. Wenn Sie
+Lizenzen für Produkte vergeben, die in der Funktion der Software ähnlich
+sind oder ein Konkurrenzprodukt darstellen (im Folgenden als "ähnliche
+Produkte" bezeichnet), oder wenn Sie im Namen eines solchen Lizenzgebers
+handeln und durch Veröffentlichung oder Weitergabe von Vergleichsdaten
+gegen diese Einschränkung verstoßen, gilt - ungeachtet eventuell anders
+lautender Bestimmungen im Endbenutzer-Lizenzvertrag des ähnlichen Produkts
+und zusätzlich zu anderen, Novell eventuell zur Verfügung stehenden
+Gegenmaßnahmen - Folgendes: Novell darf Vergleichstests an den ähnlichen
+Produkten durchführen sowie die Testergebnisse veröffentlichen und
+weitergeben. Durch Ihr Handeln bestätigen Sie, dass Sie befugt sind, Novell
+solche Rechte zu erteilen.
+
+Open Source: Durch keine der hier aufgeführten Bedingungen werden Ihre
+Rechte oder Verpflichtungen sowie die für Sie zutreffenden Bedingungen
+eingeschränkt oder anderweitig beeinflusst, die für Sie im Rahmen aller
+zutreffenden Open Source-Lizenzen für den Open Source-Code in dieser
+Software gelten.
+
+Übertragung: Diese Vereinbarung darf ohne vorherige schriftliche
+Genehmigung von Novell nicht übertragen werden.
+
+Gesetz und Rechtsprechung: Diese Vereinbarung unterliegt den Gesetzen des
+US-Bundesstaates Utah. Bei jedweder Klage, die sich auf diese Vereinbarung
+bezieht, sind die Gerichte des US-Bundesstaates Utah zuständig. Sollte Ihr
+Hauptwohnsitz in einem Mitgliedsstaat der Europäischen Union oder der
+Europäischen Freihandelszone liegen, gelten die Gesetze dieses Landes. In
+diesem Fall sind bei jedweden Klagen die Gerichte des entsprechenden Landes
+zuständig.
+
+Ungeteilte Vereinbarung: Die vorliegende Vereinbarung legt die gesamte
+Vereinbarung und Lizenz zwischen Ihnen und Novell fest und kann nur durch
+eine schriftliche Vereinbarung zwischen Ihnen und einem autorisierten
+Vertreter von Novell geändert oder modifiziert werden. WEDER LIZENZGEBER,
+DISTRIBUTOREN, HÄNDLER, FACHHÄNDLER, VERKAUFSMITARBEITER NOCH SONSTIGE
+MITARBEITER SIND ZU ÄNDERUNGEN DIESER LIZENZ ODER ZU ZUSICHERUNGEN
+BERECHTIGT, DIE VON DEN BESTIMMUNGEN DIESER VEREINBARUNG ABWEICHEN ODER DEN
+BESTIMMUNGEN DIESER VEREINBARUNG HINZUGEFÜGT WERDEN.
+
+Rechtsverzicht: Ein Verzicht auf eines der in dieser Vereinbarung
+festgehaltenen Rechte wird erst wirksam, wenn dieser schriftlich erfolgt
+und von einem ordnungsgemäß bevollmächtigten Vertreter der zu bindenden
+Partei unterschrieben ist. Ein Verzicht auf ein zuvor oder derzeit gültiges
+Recht, der auf einen Vertragsbruch oder eine Unterlassung zurückzuführen
+ist, kann nicht als Verzicht auf künftige Rechte erachtet werden, die sich
+aus dieser Vereinbarung ergeben.
+
+Trennbarkeit: Ist eine Bestimmung dieser Vereinbarung ungültig oder nicht
+anwendbar, wird diese Bestimmung im notwendigen Umfang ausgelegt,
+beschränkt, geändert oder notfalls abgetrennt, um die Ungültigkeit oder
+Nichtdurchführbarkeit der Bestimmung zu beseitigen; die übrigen
+Bestimmungen dieser Vereinbarung bleiben unberührt.
+
+Exportbestimmungen: Alle Produkte oder technischen Informationen, die im
+Rahmen dieser Vereinbarung zur Verfügung gestellt werden, unterliegen
+möglicherweise den US-Exportkontrollen und den Handelsbestimmungen anderer
+Länder. Die Parteien erklären sich einverstanden, alle Exportbestimmungen
+einzuhalten und für die Ausfuhr, Wiederausfuhr oder Einfuhr der lieferbaren
+Produkte oder Leistungen die erforderlichen Lizenzen einzuholen oder eine
+Klassifizierung zu beantragen. Die Parteien erklären sich einverstanden,
+keine Ausfuhr oder Wiederausfuhr an Länder vorzunehmen, für die derzeit ein
+Exportverbot der US-Behörden besteht oder denen gemäß der
+US-Exportbestimmungen ein Embargo auferlegt wurde oder die als
+terroristische Länder eingestuft wurden. Die lieferbaren Produkte werden
+nicht für illegale Nuklearwaffen, militärische Fluggeräte oder chemische
+bzw. biologische Waffen eingesetzt. Bitte informieren Sie sich auf der
+Webseite des Bureau of Industry and Security (www.bis.doc.gov), bevor Sie
+Novell-Produkte aus den USA exportieren. Weitere Informationen zur Ausfuhr
+von Novell-Software finden Sie unter http://www.novell.com/company/legal/.
+Wenden Sie sich an Novell, um detaillierte Informationen zu evtl.
+zutreffenden Beschränkungen zu erhalten. Novell übernimmt jedoch keine
+Verantwortung für Ihr Versäumnis, die erforderlichen Exportgenehmigungen
+einzuholen.
+
+Eingeschränkte Rechte für die US-Regierung: Die Nutzung, Vervielfältigung
+oder Offenlegung durch die US-Regierung unterliegt den Beschränkungen in
+FAR 52.227-14 (Juni 1987), Alternate III (Juni 1987), FAR 52.227-19 (Juni
+1987) oder DFARS 252.227-7013 (b)(3) (November 1995) bzw. den zutreffenden
+Folgebestimmungen. 
+
+Vertragsgeber/Hersteller ist Novell, Inc., 1800 South Novell Place, Provo,
+Utah 84606, USA.
+
+Sonstiges: Die Anwendung der Vertragskonventionen der Vereinten Nationen
+für den internationalen Verkauf von Gütern wird ausdrücklich
+ausgeschlossen.
+
+(c)1993, 2000-2009 Novell, Inc. Alle Rechte vorbehalten.(022309)
+
+Novell und SUSE LINUX sind eingetragene Marken von Novell, Inc. in den USA
+und anderen Ländern. 
+
+Jegliche Warenzeichen von Dritten sind das Eigentum der jeweiligen
+Besitzer.
+
+
+
+
+                                                            
+                                                            
+                                                            
+                                                            
+                                                            
+                                                            
+                                                            
+                                                            
+                                                            
+                                                            
+                                                            
+                                                            
+                                                            
+                                                            
+                                                            
+                                                            
+                                                            
+                                                            
+                                                            
+                                                            
+                                                            
+                                                            
+                                                            
+                                                            
+                                                            
+                                                            
+                                                            
+                                                            
+                                                            
+                                                            
+                                                            
+                                                            
+                                                            
+                                                            
+                                                            
+                                                            
+                                                            
+                                                            
+                                                            
+                                                            
+                                                            
+                                                            
+                                                            
+                                                            
+                                                            
+                                                            
+                                                            
+                                                            
+                                                            
+                                                            
+                                                            
+                                                            
+                                                            
+                                                            
+                                                            
+                                                            
+                                                            
+                                                            
+                                                            
+                                                            
+                                                            
+                                                            
+                                                            
+                                                            
+                                                            
+                                                            
+                                                            
+                                                            
+                                                            
+                                                            
+                                                            
+                                                            
+                                                            
+                                                            
+                                                            
+                                                            
+                                                            
+                                                            
+                                                            
+                                                            
+                                                            
+                                                            
+                                                            
+                                                            
+                                                            
+                                                            
+                                                            
+                                                            
+                                                            
+                                                            
+                                                            
+                                                            
+                                                            
+                                                            
+                                                            
+                                                            
+                                                            
+                                                            
+                                                            
+                                                            
+                                                            
+                                                            

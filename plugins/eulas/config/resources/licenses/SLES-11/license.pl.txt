@@ -1,0 +1,415 @@
+Umowa licencyjna na oprogramowanie SUSE(r) Linux Enterprise Server 11 firmy
+Novell(r)
+
+PROSIMY UWAŻNIE PRZECZYTAĆ NINIEJSZĄ UMOWĘ. ZAINSTALOWANIE LUB KORZYSTANIE
+Z NINIEJSZEGO OPROGRAMOWANIA (W TYM Z JEGO SKŁADNIKÓW) OZNACZA, ŻE
+LICENCJOBIORCA WYRAŻA ZGODĘ NA ZWIĄZANIE POSTANOWIENIAMI NINIEJSZEJ UMOWY.
+JEŚLI LICENCJOBIORCA NIE ZGADZA SIĘ NA WARUNKI ZAWARTE W NINIEJSZEJ UMOWIE,
+NIE POWINIEN POBIERAĆ, INSTALOWAĆ ANI KORZYSTAĆ Z OPROGRAMOWANIA.
+
+UPRAWNIENIA I LICENCJE
+
+Niniejsza Umowa licencyjna na oprogramowanie firmy Novell („Umowa”) jest
+prawnym porozumieniem między Licencjobiorcą (podmiotem lub osobą) a firmą
+Novell, Inc. („firma Novell”). Oprogramowanie określone w tytule niniejszej
+Umowy, ewentualny nośnik oraz towarzysząca mu dokumentacja (wspólnie dalej
+nazywane „Oprogramowaniem”) są chronione prawem autorskim obowiązującym w
+Stanach Zjednoczonych („Stany Zjednoczone”) i innych krajach oraz
+stosownymi umowami międzynarodowymi, a także podlegają postanowieniom
+niniejszej Umowy. Dowolna wersja aktualizacyjna lub pomocnicza
+Oprogramowania, którą Licencjobiorca może pobrać lub otrzymać, której nie
+towarzyszy umowa licencyjna wyraźnie zastępująca tę Umowę jest
+Oprogramowaniem i podlega postanowieniom niniejszej Umowy. Jeśli
+Oprogramowanie stanowi wersję aktualizacyjną lub pomocniczą, Licencjobiorca
+musi dysponować odpowiednią liczbą ważnych licencji na wersję
+aktualizowanego lub uzupełnianego wersją pomocniczą Oprogramowania, aby
+zainstalować taką wersję aktualizacyjną lub pomocniczą lub z nich
+korzystać. 
+
+Oprogramowanie to modułowy system operacyjny zawierający wiele składników,
+które mogą być objęte osobnymi warunkami licencyjnymi. Oprogramowanie
+zostało opracowane zbiorczo przez firmę Novell; mimo że firma Novell nie
+posiada praw autorskich do każdego składnika Oprogramowania, posiada prawa
+autorskie do Oprogramowania jako do pracy zbiorczej. 
+
+Większość jego składników to opracowane niezależnie pakiety o otwartym
+kodzie źródłowym, którym towarzyszą odrębne warunki licencyjne. Prawa
+licencyjne Licencjobiorcy do poszczególnych składników, którym towarzyszą
+odrębne warunki licencyjne, zdefiniowane są w tych warunkach; żadne z
+postanowień niniejszej umowy nie ogranicza ani nie ma innego rodzaju wpływu
+na zakres praw i zobowiązań Licencjobiorcy ani też postanowień, którym
+Licencjobiorca może podlegać, w związku z warunkami takich licencji; jeśli
+jednak Licencjobiorca rozpowszechnia kopie jakiegokolwiek składnika
+niezależnego od Oprogramowania, musi usunąć z każdej kopii wszelkie znaki
+towarowe firmy Novell, wygląd typowy dla marki i logo.
+
+Licencjobiorca może tworzyć nieograniczoną liczbę kopii Oprogramowania i
+używać ich w swojej Organizacji. Licencjobiorca może tworzyć i
+rozpowszechniać nieograniczoną liczbę zmodyfikowanych kopii poza swoją
+organizacją, jeśli usunie wszelkie znaki towarowe, wygląd typowy dla marki
+i logo firmy Novell z każdej zmodyfikowanej kopii Oprogramowania. Przez
+termin “Organizacja” należy rozumieć podmiot prawny, z wyłączeniem
+podmiotów zależnych i powiązanych, odrębny pod względem podatkowym i
+posiadający odrębną osobowość prawną. Przykładem Organizacji z sektora
+prywatnego może być korporacja, spółka lub trust, z wyłączeniem podmiotów
+zależnych i powiązanych organizacji odrębnych pod względem podatkowym i
+posiadających obręby numer identyfikacji podatkowej lub numer wpisu do
+rejestru spółek. W sektorze publicznym przykładem Organizacji może być
+określony organ administracji rządowej lub organ jednostki samorządu
+terytorialnego.
+
+
+
+POZOSTAŁE WARUNKI LICENCYJNE I OGRANICZENIA
+
+Oprogramowanie jest chronione przepisami o prawach autorskich i umowami
+zawartymi przez Stany Zjednoczone („Stany Zjednoczone”) lub inne kraje oraz
+podlegają warunkom niniejszej Umowy. Licencjobiorca nie nabywa
+oprogramowania, otrzymuje jedynie licencję na jego użytkowanie.
+
+Niniejsze Oprogramowanie może być powiązane z innym oprogramowaniem
+(„Programy Powiązane”). Prawa licencyjne Licencjobiorcy do poszczególnych
+Programów Powiązanych, którym towarzyszą odrębne warunki licencyjne,
+zdefiniowane są w tych warunkach; żadne z postanowień niniejszej Umowy nie
+ogranicza zakresu praw i zobowiązań Licencjobiorcy czy też postanowień,
+którym Licencjobiorca może podlegać w związku z warunkami takich licencji,
+ani nie wpływa na nie w inny sposób. 
+
+Firma Novell zastrzega sobie wszelkie prawa, które nie zostały w sposób
+wyraźny przyznane Licencjobiorcy. Licencjobiorca nie może: (1) odtwarzać,
+dekompilować ani dezasemblować Oprogramowania w zakresie innym niż wyraźnie
+dozwolony przez stosowne przepisy prawa; ani (2) przenosić praw
+licencyjnych do Oprogramowania wynikających z niniejszej Umowy w całości
+lub w części.
+
+KONSERWACJA I POMOC TECHNICZNA
+
+Firma Novell świadczy usługi pomocy technicznej lub konserwacji tylko
+wówczas, gdy nabyty produkt w sposób wyraźny był objęty takimi usługami.
+Jeśli zaistniał taki przypadek nabycia, a wspomnianych usług pomocy
+technicznej lub konserwacji nie dotyczą żadne oddzielne umowy, wówczas
+świadczenie rzeczonych usług pomocy technicznej lub konserwacji („Usługi”)
+podlega postanowieniom niniejszej Umowy. Więcej informacji na temat
+aktualnej oferty firmy Novell w zakresie usług pomocy technicznej znajduje
+się na stronie http://www.novell.com/support.
+
+PRAWA WŁASNOŚCI
+
+Licencjobiorcy nie przysługuje tytuł ani prawo własności do Oprogramowania.
+Firma Novell lub jej licencjodawcy zachowują wszelkie prawa własności
+intelektualnej do Oprogramowania i Usług, łącznie ze wszelkimi
+modyfikacjami lub kopiami. Wszelkie materiały otrzymywane przez
+Licencjobiorcę w ramach Usług, którym nie towarzyszą postanowienia wyraźnie
+zastępujące postanowienia niniejszej Umowy, są Oprogramowaniem i podlegają
+postanowieniom tej Umowy. Licencjobiorca nabywa jedynie warunkową licencję
+na używanie Oprogramowania.
+
+OGRANICZONA GWARANCJA
+
+Firma Novell gwarantuje, że przez dziewięćdziesiąt (90) dni od daty
+dokonania zakupu przez Licencjobiorcę (1) wszelkie nośniki, na których
+dostarczono Oprogramowanie, będą pozbawione wad fizycznych oraz (2)
+Oprogramowanie będzie w istotnym zakresie odpowiadać dokumentacji do niego
+dołączonej. Jeśli w ciągu dziewięćdziesięciu (90) dni od daty zakupu
+Licencjobiorca zwróci firmie Novell wadliwe elementy lub powiadomi ją o
+niezgodności z dokumentacją, firma Novell, według własnego uznania, usunie
+niezgodność albo dokona zwrotu kosztów poniesionych przez Licencjobiorcę z
+tytułu opłat licencyjnych za Oprogramowanie. Wszelkie nieuprawnione
+używanie lub dokonywanie modyfikacji Oprogramowania powoduje unieważnienie
+niniejszej gwarancji. POWYŻSZA GWARANCJA STANOWI JEDYNY I WYŁĄCZNY ŚRODEK
+PRAWNY PRZYSŁUGUJĄCY LICENCJOBIORCY I NINIEJSZYM ZASTĘPUJE WSZELKIE INNE
+GWARANCJE, WYRAŹNE LUB DOROZUMIANE. (Powyższa gwarancja nie dotyczy
+Oprogramowania dostarczanego bezpłatnie. OPROGRAMOWANIE TAKIE JEST
+DOSTARCZANE „W STANIE TAKIM, W JAKIM SIĘ ZNAJDUJE”, BEZ ŻADNYCH GWARANCJI).
+
+Usługi. Firma Novell gwarantuje, że wszelkie nabyte Usługi będą świadczone
+w sposób profesjonalny, zgodnie z ogólnie przyjętymi standardami. Niniejsza
+gwarancja jest udzielana na okres 90 (dziewięćdziesięciu) dni od daty
+rozpoczęcia świadczenia Usług. W przypadku naruszenia postanowień
+niniejszej gwarancji firma Novell ma obowiązek zmodyfikować usługi tak, aby
+były zgodne z postanowieniami niniejszej gwarancji, albo według własnego
+uznania zwrócić Licencjobiorcy kwotę zapłaconą przez niego za usługi, które
+nie spełniały wymogów niniejszej gwarancji. Jest to jedyny obowiązek firmy
+Novell w przypadku naruszenia postanowień niniejszej gwarancji. W trakcie
+udzielania przez firmę Novell pomocy technicznej pliki mogą ulec zmianie
+lub uszkodzeniu, Licencjobiorca zgadza się zatem podjąć odpowiednie
+działania zmierzające do odizolowania i sporządzenia kopii zapasowych
+swoich systemów.
+
+NINIEJSZE OPROGRAMOWANIE NIE JEST ZAPROJEKTOWANE, WYTWORZONE ANI
+PRZEZNACZONE DO UŻYTKU LUB DYSTRYBUCJI Z URZĄDZENIAMI DO STEROWANIA
+PRACUJĄCYMI W CZASIE RZECZYWISTYM W ŚRODOWISKACH DUŻEGO RYZYKA,
+WYMAGAJĄCYCH NIEZAWODNEGO DZIAŁANIA, TAKICH JAK ELEKTROWNIE ATOMOWE,
+SYSTEMY NAWIGACJI, KOMUNIKACJI LUB KONTROLI LOTNICZEJ, SYSTEMY
+BEZPOŚREDNIEGO PODTRZYMYWANIA ŻYCIA, SYSTEMY UZBROJENIA LUB INNE, W KTÓRYCH
+AWARIA OPROGRAMOWANIA MOŻE BYĆ BEZPOŚREDNIĄ PRZYCZYNĄ ŚMIERCI, UTRATY
+ZDROWIA BĄDŹ POWSTANIA POWAŻNYCH SZKÓD MATERIALNYCH LUB ŚRODOWISKOWYCH.
+
+OPROGRAMOWANIE JEST ZGODNE TYLKO Z NIEKTÓRYMI KOMPUTERAMI I SYSTEMAMI
+OPERACYJNYMI. GWARANCJA NIE OBEJMUJE DZIAŁANIA OPROGRAMOWANIA W SYSTEMACH,
+Z KTÓRYMI NIE JEST ONO ZGODNE. Informacji na temat zgodności udziela firma
+Novell lub jej przedstawiciel.
+
+Produkty innych firm. Oprogramowanie może zawierać sprzęt lub
+oprogramowanie przekazywane na warunkach licencji bądź sprzedawane przez
+licencjodawców innych niż firma Novell albo być powiązane ze sprzętem bądź
+oprogramowaniem przekazywanym na warunkach licencji lub sprzedawanym przez
+licencjodawców innych niż firma Novell. FIRMA NOVELL NIE UDZIELA ŻADNYCH
+GWARANCJI NA PRODUKTY ANI USŁUGI INNYCH FIRM. WSZELKIE TAKIE PRODUKTY LUB
+USŁUGI SĄ DOSTARCZANE „W STANIE TAKIM, W JAKIM SIĘ ZNAJDUJĄ”. WSZELKIE
+USŁUGI GWARANCYJNE ZWIĄZANE Z PRODUKTAMI INNYCH FIRM SĄ ŚWIADCZONE PRZEZ
+LICENCJODAWCÓW TYCH PRODUKTÓW ZGODNIE Z POSTANOWIENIAMI STOSOWNYCH
+GWARANCJI.
+
+W ZAKRESIE DOPUSZCZALNYM PRZEZ PRZEPISY PRAWA FIRMA NOVELL ZRZEKA SIĘ
+ODPOWIEDZIALNOŚCI I WYŁĄCZA SWOJĄ WSZELKĄ ODPOWIEDZIALNOŚĆ Z TYTUŁU
+WSZELKICH DOROZUMIANYCH GWARANCJI, W TYM GWARANCJI DOTYCZĄCYCH PRZYDATNOŚCI
+HANDLOWEJ, PRZYDATNOŚCI DO OKREŚLONEGO CELU, TYTUŁU WŁASNOŚCI ORAZ
+NIENARUSZANIA PRAW OSÓB TRZECICH. FIRMA NOVELL NIE UDZIELA ŻADNYCH
+GWARANCJI, NIE SKŁADA ŻADNYCH OŚWIADCZEŃ ANI NIE PODEJMUJE ŻADNYCH
+ZOBOWIĄZAŃ INNYCH NIŻ TE, KTÓRE ZOSTAŁY WYRAŹNIE SFORMUŁOWANE W NINIEJSZEJ
+OGRANICZONEJ GWARANCJI. FIRMA NOVELL NIE GWARANTUJE, ŻE OPROGRAMOWANIE LUB
+USŁUGI BĘDĄ SPEŁNIAĆ WYMAGANIA LICENCJOBIORCY ANI ŻE DZIAŁANIE
+OPROGRAMOWANIA LUB USŁUG BĘDZIE NIEPRZERWANE. Ponieważ istnieją
+jurysdykcje, które nie zezwalają na zrzeczenie się lub ograniczenie
+gwarancji, część powyższych postanowień może nie mieć zastosowania w
+przypadku niektórych Licencjobiorców. Niniejsza ograniczona gwarancja
+przyznaje Licencjobiorcy określone prawa, przy czym Licencjobiorca może
+także mieć inne prawa wynikające z ustawodawstwa krajowego.
+
+OGRANICZENIE ODPOWIEDZIALNOŚCI
+
+(a) Straty wtórne. FIRMA NOVELL ANI JEJ LICENCJODAWCY, JEDNOSTKI ZALEŻNE I
+PRACOWNICY W ŻADNYM PRZYPADKU NIE PONOSZĄ ODPOWIEDZIALNOŚCI ZA ŻADNE
+SZCZEGÓLNE, UBOCZNE, NASTĘPCZE, POŚREDNIE, DELIKTOWE, FINANSOWE ANI MORALNE
+SZKODY WYNIKAJĄCE Z UŻYWANIA LUB NIEMOŻNOŚCI KORZYSTANIA Z OPROGRAMOWANIA
+LUB USŁUG, W TYM W SZCZEGÓLNOŚCI ZA UTRATĘ ZYSKÓW LUB DANYCH ALBO
+NIEMOŻNOŚĆ PROWADZENIA DZIAŁALNOŚCI, NAWET JEŚLI PODMIOTY TE ZOSTAŁY
+POWIADOMIONE O MOŻLIWOŚCI POWSTANIA POWYŻSZYCH SZKÓD. (b) Szkody
+bezpośrednie. W ŻADNYM PRZYPADKU CAŁKOWITA ODPOWIEDZIALNOŚĆ FIRMY NOVELL ZA
+BEZPOŚREDNIE SZKODY NA MIENIU LUB OSOBIE (WYNIKAJĄCE Z POJEDYNCZYCH ZDARZEŃ
+LUB Z ICH SERII) NIE PRZEKROCZY KROTNOŚCI LICZBY 1,25 I KWOTY ZAPŁACONEJ
+PRZEZ LICENCJOBIORCĘ ZA OPROGRAMOWANIE LUB USŁUGI, W ZWIĄZKU Z KTÓRYMI
+POWSTAŁO ROSZCZENIE (LUB KWOTY 50 USD, JEŚLI LICENCJOBIORCA UZYSKAŁ
+OPROGRAMOWANIE BEZPŁATNIE). Powyższe wyłączenia i ograniczenia nie dotyczą
+roszczeń związanych ze śmiercią lub uszkodzeniem ciała. Na obszarze
+jurysdykcji, która nie zezwala na wyłączenie lub ograniczenie odszkodowań,
+odpowiedzialność firmy Novell będzie ograniczona lub wyłączona w
+maksymalnym zakresie dopuszczalnym przez daną jurysdykcję.
+
+WARUNKI OGÓLNE
+
+Okres ważności. Niniejsza Umowa wchodzi w życie z dniem legalnego nabycia
+Oprogramowania przez Licencjobiorcę i zostaje automatycznie rozwiązana,
+jeśli Licencjobiorca naruszy dowolny z warunków w niej zawartych.
+Testowanie wydajności. Ograniczenia dotyczące testowania wydajności dotyczą
+Licencjobiorcy, który jest deweloperem lub licencjodawcą oprogramowania lub
+który testuje Oprogramowanie pod kierunkiem albo w imieniu dewelopera lub
+licencjodawcy oprogramowania. Bez uprzedniej pisemnej zgody firmy Novell
+(nieudzielanej tylko w uzasadnionych przypadkach) Licencjobiorcy nie wolno
+publikować ani ujawniać osobom trzecim wyników jakichkolwiek testów
+wydajności Oprogramowania. Jeśli Licencjobiorca jest licencjodawcą
+produktów o zbliżonej funkcjonalności lub konkurencyjnych względem
+Oprogramowania (dalej zwanych „Produktami Podobnymi”) albo działa w imieniu
+takiego licencjodawcy i opublikuje lub ujawni informacje o wydajności
+Oprogramowania mimo powyższego zastrzeżenia, wówczas firma Novell może
+wykonać testy wydajności Produktów Podobnych oraz ujawnić i opublikować
+informacje o wynikach tych testów. Firma Novell może skorzystać z tego
+prawa niezależnie od wszelkich zastrzeżeń w umowie licencyjnej na Produkty
+Podobne, a ponadto może podjąć inne działania, do których jest uprawniona.
+Licencjobiorca niniejszym potwierdza, że jest uprawniony do przyznania
+takiego prawa firmie Novell.
+
+Otwarty kod źródłowy. Żadne z postanowień niniejszej Umowy nie zastrzega
+ani nie ogranicza praw i zobowiązań Licencjobiorcy ani postanowień, którym
+Licencjobiorca może podlegać w związku z jakimikolwiek licencjami na
+otwarty kod źródłowy, dotyczącymi jakiegokolwiek kodu źródłowego zawartego
+w Oprogramowaniu, ani w żaden inny sposób nie wpływa na te prawa,
+zobowiązania i postanowienia.
+
+Cesja. Niniejsza Umowa nie może zostać przeniesiona ani scedowana bez
+uprzedniej pisemnej zgody firmy Novell.
+
+Prawo obowiązujące i sąd właściwy. Niniejsza Umowa podlega prawu stanu Utah
+w Stanach Zjednoczonych. Wszelkie działania prawne związane z niniejszą
+Umową mogą być podejmowane tylko przez sądy właściwej jurysdykcji stanu
+Utah. Jeśli jednak kraj zamieszkania Licencjobiorcy jest państwem
+członkowskim Unii Europejskiej lub Europejskiego Stowarzyszenia Wolnego
+Handlu, niniejsza Umowa będzie podlegać prawu tego kraju, a wszelkie
+działania prawne będą mogły być podejmowane tylko przez sądy właściwej
+jurysdykcji tego kraju.
+
+Umowa w pełnym brzmieniu. Niniejsza Umowa stanowi całość porozumienia
+zawartego między firmą Novell a Licencjobiorcą. Treść umowy może być
+poprawiana lub modyfikowana wyłącznie w formie pisemnej za zgodą
+Licencjobiorcy i upoważnionego przedstawiciela firmy Novell. ŻADEN
+LICENCJODAWCA, DYSTRYBUTOR, DEALER, SPRZEDAWCA DETALICZNY, ODSPRZEDAWCA,
+PRZEDSTAWICIEL HANDLOWY ANI PRACOWNIK NIE JEST UPOWAŻNIONY DO ZMIANY
+NINIEJSZEJ UMOWY ANI DO SKŁADANIA OŚWIADCZEŃ LUB PODEJMOWANIA ZOBOWIĄZAŃ,
+KTÓRE RÓŻNIĄ SIĘ OD POSTANOWIEŃ NINIEJSZEJ UMOWY LUB JE ROZSZERZAJĄ.
+
+Klauzula zwalniająca. Żadne zrzeczenie się praw wynikających z niniejszej
+Umowy nie będzie prawomocne bez zachowania formy pisemnej i podpisu
+upoważnionego przedstawiciela strony, której dane zrzeczenie dotyczy. Żadne
+zrzeczenie się przeszłych lub obecnych praw wynikających z naruszenia lub
+braku realizacji któregoś z postanowień niniejszej Umowy nie będzie uznane
+za zrzeczenie się jakichkolwiek innych praw wynikających z niniejszej Umowy
+w przyszłości.
+
+Podzielność postanowień licencji. Jeśli jakiekolwiek postanowienie
+niniejszej Umowy okaże się nieważne lub niewykonalne, zostanie ono
+zinterpretowane, ograniczone, zmodyfikowane lub, jeśli zajdzie potrzeba,
+całkowicie bądź częściowo usunięte w zakresie niezbędnym do wyeliminowania
+powstałej nieważności lub niewykonalności, przy czym pozostałe
+postanowienia niniejszej Umowy pozostaną w mocy.
+
+Ograniczenia eksportowe. Wszystkie produkty lub informacje techniczne
+objęte niniejszą Umową mogą podlegać obowiązującym w Stanach Zjednoczonych
+przepisom dotyczącym kontroli eksportu oraz obowiązującym w innych krajach
+przepisom handlowym. Strony wyrażają zgodę na przestrzeganie wszystkich
+przepisów dotyczących kontroli eksportu oraz na uzyskanie wymaganych
+licencji lub zezwoleń dotyczących eksportu, reeksportu lub importu
+materiałów przedstawianych do odbioru. Strony nie będą eksportować ani
+reeksportować towarów do podmiotów znajdujących się na liście podmiotów
+objętych zakazem eksportu przez Stany Zjednoczone, do krajów objętych
+embargiem ani do krajów określanych jako terrorystyczne, zgodnie z
+obowiązującymi w Stanach Zjednoczonych przepisami dotyczącymi eksportu.
+Strony nie będą wykorzystywać materiałów przedstawianych do odbioru do
+produkcji broni nuklearnej, rakietowej, chemicznej ani biologicznej. Przed
+próbą eksportu produktów firmy Novell ze Stanów Zjednoczonych prosimy
+zajrzeć na stronę sieci Web dotyczącą Biura przemysłu i bezpieczeństwa pod
+adresem www.bis.doc.gov. Aby uzyskać więcej informacji na temat
+eksportowania oprogramowania firmy Novell, prosimy zajrzeć na stronę
+http://www.novell.com/company/legal/. Na żądanie firma Novell udostępni
+szczegółowe informacje dotyczące określonych ograniczeń. Firma Novell nie
+ponosi jednak odpowiedzialności za niedopełnienie przez Licencjobiorcę
+obowiązku uzyskania wszelkich niezbędnych zezwoleń eksportowych.
+
+Ograniczone prawa rządu Stanów Zjednoczonych. Używanie, powielanie i
+ujawnianie przez rząd Stanów Zjednoczonych podlega ograniczeniom ujętym w
+przepisach FAR § 52.227-14 (z czerwca 1987 roku) z poprawką III (z czerwca
+1987 roku), FAR § 52.227-19 (z czerwca 1987 roku) i DFARS § 252.227-7013
+(b)(3) (z listopada 1995 roku) oraz stosownym przepisom o następstwie
+prawnym. 
+
+Stroną kontraktu/producentem jest firma Novell Inc., 1800 South Novell
+Place, Provo, Utah 84606, USA.
+
+Inne. Niniejszym stwierdza się, że w odniesieniu do Oprogramowania nie ma
+zastosowania konwencja Organizacji Narodów Zjednoczonych dotycząca
+zawierania umów w zakresie międzynarodowej sprzedaży towarów.
+
+(c) 1993, 2000-2009 Novell, Inc. Wszelkie prawa zastrzeżone. (022309)
+
+Novell i SUSE LINUX są zastrzeżonymi w Stanach Zjednoczonych i innych
+krajach znakami towarowymi firmy Novell, Inc. 
+
+Wszystkie znaki towarowe innych firm stanowią własność ich odpowiednich
+właścicieli.
+
+
+
+
+
+                                                            
+                                                            
+                                                            
+                                                            
+                                                            
+                                                            
+                                                            
+                                                            
+                                                            
+                                                            
+                                                            
+                                                            
+                                                            
+                                                            
+                                                            
+                                                            
+                                                            
+                                                            
+                                                            
+                                                            
+                                                            
+                                                            
+                                                            
+                                                            
+                                                            
+                                                            
+                                                            
+                                                            
+                                                            
+                                                            
+                                                            
+                                                            
+                                                            
+                                                            
+                                                            
+                                                            
+                                                            
+                                                            
+                                                            
+                                                            
+                                                            
+                                                            
+                                                            
+                                                            
+                                                            
+                                                            
+                                                            
+                                                            
+                                                            
+                                                            
+                                                            
+                                                            
+                                                            
+                                                            
+                                                            
+                                                            
+                                                            
+                                                            
+                                                            
+                                                            
+                                                            
+                                                            
+                                                            
+                                                            
+                                                            
+                                                            
+                                                            
+                                                            
+                                                            
+                                                            
+                                                            
+                                                            
+                                                            
+                                                            
+                                                            
+                                                            
+                                                            
+                                                            
+                                                            
+                                                            
+                                                            
+                                                            
+                                                            
+                                                            
+                                                            
+                                                            
+                                                            
+                                                            
+                                                            
+                                                            
+                                                            
+                                                            
+                                                            
+                                                            
+                                                            
+                                                            
+                                                            
+                                                            
+                                                            
+                                                            
+                                                            
+                                                            

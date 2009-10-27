@@ -4,7 +4,7 @@ class LicenseTest < ActiveSupport::TestCase
 YAML_CONTENT = <<EOF
 licenses:
   - openSUSE-11.1
-  - SLED-10-SP3
+  - SLES-11
 EOF
 
   def setup
@@ -26,7 +26,7 @@ EOF
     license = License.find 2
     assert_not_nil license
     assert_equal( license.accepted, true)
-    assert_equal( license.name, 'SLED-10-SP3')
+    assert_equal( license.name, 'SLES-11')
   end
 
   def test_load_text
@@ -54,7 +54,7 @@ EOF
   def test_find_all
     licenses = License.find_all 
     assert_equal( licenses.length, 2)
-    assert_equal(licenses[1].name, 'SLED-10-SP3')
+    assert_equal(licenses[1].name, 'SLES-11')
     assert_nil licenses[1].text 
     assert_not_nil licenses.to_xml
     assert_not_nil licenses.to_json
