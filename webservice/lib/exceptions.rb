@@ -156,3 +156,36 @@ class EulaNotAcceptedException < BackendException
     no_arg_to_xml(options,"EULA_NOT_ACCEPTED", "Functionality of the target system was required, but its EULA was not accepted yet.")
   end
 end
+
+class ServiceNotAvailable < BackendException
+  def initialize(service)
+    @service = service
+  end
+
+  def to_xml(options={})
+    xml = Builder::XmlMarkup.new(options)
+    xml.instruct! unless options[:skip_instruct]
+    xml.error do
+      xml.type "SERVICE_NOT_AVAILABLE"
+      xml.description "#{@service} is not available on the target machine"
+      xml.service @service
+    end
+  end
+end
+
+class ServiceNotRunning < BackendException
+  def initialize(service)
+    @service = service
+  end
+
+  def to_xml(options={})
+    xml = Builder::XmlMarkup.new(options)
+    xml.instruct! unless options[:skip_instruct]
+    xml.error do
+      xml.type "SERVICE_NOT_RUNNING"
+      xml.description "#{@service} is not running on the target machine"
+      xml.service @service
+    end
+  end
+end
+
