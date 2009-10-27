@@ -15,14 +15,22 @@ Provides:       yast2-webservice:/srv/www/yastws/app/controllers/registration_co
 License:        MIT
 Group:          Productivity/Networking/Web/Utilities
 Autoreqprov:    on
-Version:        0.0.2
+Version:        0.0.3
 Release:        0
 Summary:        YaST2 - Webservice - Registration
 Source:         www.tar.bz2
 BuildRoot:      %{_tmppath}/%{name}-%{version}-build
 BuildArch:      noarch
 BuildRequires:  rubygem-mocha
-Requires:       yast2-core > 2.18.14 yast2-webservice-registration
+
+# YaST2/modules/YSR.pm  
+%if 0%{?suse_version} == 0 || %suse_version > 1110  
+# 11.2 or newer  
+Requires:       yast2-registration > 2.18.0
+%else  
+# 11.1 or SLES11  
+Requires:       yast2-registration > 2.17.25
+%endif  
 
 #
 %define pkg_user yastws

@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Mon Oct 26 11:43:42 CET 2009 - schubi@suse.de
+
+- added requirement yast2-registration 
+- version 0.0.3
+
+-------------------------------------------------------------------
 Mon Oct 26 10:10:13 CET 2009 - schubi@suse.de
 
 - first running version 

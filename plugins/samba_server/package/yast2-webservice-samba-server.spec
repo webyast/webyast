@@ -17,10 +17,11 @@ Provides:       yast2-webservice:/srv/www/%{pkg_user}/vendor/plugins/%{plugin_na
 License:        MIT
 Group:          Productivity/Networking/Web/Utilities
 Autoreqprov:    on
-Version:        0.0.2
+Version:        0.0.3
 Release:        0
 Summary:        YaST2 - Webservice - REST API for Samba Server configuration
 Source:         www.tar.bz2
+Source1:        org.opensuse.yast.modules.yapi.samba.policy
 BuildRoot:      %{_tmppath}/%{name}-%{version}-build
 BuildArch:      noarch
 
@@ -44,6 +45,11 @@ Authors:
 #
 mkdir -p $RPM_BUILD_ROOT/srv/www/%{pkg_user}/vendor/plugins/%{plugin_name}
 cp -a * $RPM_BUILD_ROOT/srv/www/%{pkg_user}/vendor/plugins/%{plugin_name}
+
+# install policies
+mkdir -p $RPM_BUILD_ROOT/usr/share/PolicyKit/policy
+install -m 0644 %SOURCE1 $RPM_BUILD_ROOT/usr/share/PolicyKit/policy/
+
 
 %clean
 rm -rf $RPM_BUILD_ROOT
@@ -79,5 +85,7 @@ rm -rf $RPM_BUILD_ROOT
 /srv/www/%{pkg_user}/vendor/plugins/%{plugin_name}/config
 /srv/www/%{pkg_user}/vendor/plugins/%{plugin_name}/tasks
 /srv/www/%{pkg_user}/vendor/plugins/%{plugin_name}/rakelib
-#/srv/www/%{pkg_user}/vendor/plugins/%{plugin_name}/test
+%dir /usr/share/PolicyKit
+%dir /usr/share/PolicyKit/policy
+%attr(644,root,root) %config /usr/share/PolicyKit/policy/org.opensuse.yast.modules.yapi.samba.policy
 
