@@ -30,9 +30,10 @@ class Registration::RegistrationController < ApplicationController
     end
 
     ret = @register.register
-    if ret == "4"
+    if ret == 4
       render :xml=>@register.to_xml( :root => "registration", :dasherize => false ), :status =>400 and return 
-    elseif ret != 0
+    end
+    if ret != 0
       render ErrorResult.error(404, 2, "Error while calling registration server.") and return
     end
   end
