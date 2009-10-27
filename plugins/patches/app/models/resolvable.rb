@@ -5,6 +5,8 @@ require "dbus"
 require 'socket'
 require 'thread'
 
+require 'exceptions'
+
 class Resolvable
 
   attr_accessor   :resolvable_id,
@@ -115,21 +117,30 @@ public
   # block: block to run on signal
   #
   def self.execute(method, args, signal, &block)
-    transaction_iface, packagekit_iface = self.packagekit_connect
+    begin
+      transaction_iface, packagekit_iface = self.packagekit_connect
     
-    proxy = transaction_iface.object
+      proxy = transaction_iface.object
     
-    proxy.on_signal(signal.to_s, &block)
-    transaction_iface.send(method.to_sym, *args)
+      proxy.on_signal(signal.to_s, &block)
+      transaction_iface.send(method.to_sym, *args)
     
-    dbusloop = DBus::Main.new
-    proxy.on_signal("Error") {|u1,u2| dbusloop.quit }
-    proxy.on_signal("Finished") {|u1,u2| dbusloop.quit }
+      dbusloop = DBus::Main.new
+      proxy.on_signal("Error") {|u1,u2| dbusloop.quit }
+      proxy.on_signal("Finished") {|u1,u2| dbusloop.quit }
 
-    dbusloop << DBus::SystemBus.instance
-    dbusloop.run
+      dbusloop << DBus::SystemBus.instance
+      dbusloop.run
 
-    packagekit_iface.SuggestDaemonQuit
+      packagekit_iface.SuggestDaemonQuit
+    rescue DBus::Error => dbus_error
+      # check if it is a known error
+      raise ServiceNotAvailable.new('PackageKit') if dbus_error.message =~ /org.freedesktop.DBus.Error.ServiceUnknown/
+      # otherwise rethrow
+      raise dbus_error
+    rescue Exception => e
+      raise e
+    end
   end
 
   # install an update, based on the PackageKit
