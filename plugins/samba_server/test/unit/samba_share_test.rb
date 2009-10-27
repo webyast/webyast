@@ -2,7 +2,6 @@
 require File.expand_path(File.dirname(__FILE__) + "/../test_helper")
 
 require 'test/unit'
-require 'rubygems'
 require "yast_service"
 require "samba_share"
 require 'mocha'

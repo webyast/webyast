@@ -8,9 +8,7 @@ require 'rake'
 desc "Generate REST API documentation using 'restility'"
 task :restdoc do
 
-    require 'rubygems'
-    if Gem.available? 'restility'
-
+    if File.exist? '/usr/bin/rest_doc'
 	# input file in root plugin directory
 	api_file = 'restdoc/api.txt'
 	# output directory

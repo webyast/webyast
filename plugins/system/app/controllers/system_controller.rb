@@ -7,7 +7,6 @@ class SystemController < ApplicationController
    	@actions = System.instance.actions
 
 	respond_to do |format|
-	    format.html { render :xml => @actions.to_xml(:root => :actions), :location => "none" } #return xml only
 	    format.xml  { render :xml => @actions.to_xml(:root => :actions), :location => "none" }
 	    format.json { render :json => @actions.to_json, :location => "none" }
 	end

@@ -2,7 +2,6 @@ tracing = (Rake.application.options.trace)?"--trace":""
 verbose = (Rake.application.options.verbose)?"--verbose":""
 
 require 'rake'
-require 'rubygems'
 
 def sudo(cmd)
   puts "#{cmd}"
@@ -78,13 +77,13 @@ MetricFu::Configuration.run do |config|
         config.flog     = { :dirs_to_flog => ['webservice', 'plugins']  }
         config.reek     = { :dirs_to_reek => ['webservice', 'plugins']  }
         config.roodi    = { :dirs_to_roodi => ['webservice', 'plugins'] }
-        config.saikuro  = { :output_directory => 'scratch_directory/saikuro', 
+        config.saikuro  = { :output_directory => 'tmp/metric_fu/output', 
                             :input_directory => ['webservice', 'plugins'],
                             :cyclo => "",
                             :filter_cyclo => "0",
                             :warn_cyclo => "5",
                             :error_cyclo => "7",
-                            :formater => "text"} #this needs to be set to "text"
+                            :formater => "html"} #this needs to be set to "text"
         config.churn    = { :start_date => "1 year ago", :minimum_churn_count => 10}
         config.rcov     = { :test_files => ['webservice/test/**/*_test.rb', 
                                             'plugins/**/test/**/*_test.rb'],
@@ -96,5 +95,13 @@ MetricFu::Configuration.run do |config|
                                            "--rails",
                                            "--exclude /gems/,/Library/,spec"]}
     end
+=end
+
+=begin
+require 'yard'
+YARD::Rake::YardocTask.new do |t|
+  t.files   = ['webservice/app/**/*.rb','webservice/lib/**/*.rb','webservice/test/plugin_basic_tests.rb', 'plugins/*/app/**/*.rb', 'plugins/*/lib/**/*.rb','webservice/doc/README_FOR_APP', 'plugins/**/README_FOR_APP']   # optional
+  t.options = ['--private', '--protected'] # optional
+end
 =end
 

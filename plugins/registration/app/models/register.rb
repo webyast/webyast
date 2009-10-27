@@ -3,6 +3,31 @@
 # The main goal is to provide easy access to the registration workflow,
 # the caller must interpret the result and maybe call it again with 
 # changed values.
+
+
+# Hash.from_xml converts dashes in keys to underscores
+#  by this we can not find out the correct key name (whether it was a dash or an underscore)
+#  unfortunately the regcode keys in registration make excessive use of dashes AND underscores
+#  that way the information gets lost what key to assign the correct value.
+#  So the function "unrename_keys" will be overwritten
+module RailsHashFromWithoutConversationKey
+   Hash.class_eval do
+     def self.unrename_keys(params)
+       case params.class.to_s
+         when "Hash"
+           params.inject({}) do |h,(k,v)|
+             h[k.to_s] = unrename_keys(v)
+             h
+           end
+         when "Array"
+           params.map { |v| unrename_keys(v) }
+         else
+           params
+         end
+     end
+   end
+end
+
 class Register
 
   require 'yast_service'
@@ -13,7 +38,7 @@ class Register
   attr_accessor_with_default :arguments, Hash.new
   attr_reader   :guid
 
-  @reg = ''
+  @reg = {}
 
   def initialize(hash={})
     # initialize context
@@ -32,7 +57,7 @@ class Register
                  'nooptional'   => '1',
                  'debugMode'    => '2',
                  'logfile'      => Paths::REGISTRATION_LOG }
-    @context.merge! hash if hash.class == Hash
+    @context.merge! hash if hash.kind_of?(Hash)
   end
 
   def find
@@ -55,24 +80,27 @@ class Register
     ctx = Hash.new
     args = Hash.new
     begin
-      self.context.each   { |k, v|  ctx[k] = [ 's', v.to_s ] }
-      self.arguments.each { |k, v| args[k] = [ 'a{ss}', { 'value' => v.to_s  } ] }
+      self.context.each   { |k, v|  ctx[k.to_s] = [ 's', v.to_s ] } if self.context.kind_of?(Hash)
+      self.arguments.each { |k, v| args[k.to_s] = [ 's', v.to_s ] } if self.arguments.kind_of?(Hash)
     rescue
       Rails.logger.error "When registration was called, the context or the arguments data was invalid."
       raise InvalidParameters.new :registrationdata => "Invalid"
     end
 
     @reg = YastService.Call("YSR::statelessregister", ctx, args )
-    @arguments = Hash.from_xml(@reg['missingarguments']) if @reg.has_key? 'missingarguments'
-    @arguments = @arguments["missingarguments"] if @arguments.has_key? "missingarguments"
-    @reg['exitcode'] rescue 99
+
+    #logger.debug   "ATREG: #{@reg.inspect}"
+
+    @arguments = Hash.from_xml(@reg['missingarguments']) if @reg && @reg.has_key?('missingarguments')
+    @arguments = @arguments["missingarguments"] if @arguments && @arguments.has_key?('missingarguments')
+
+    @reg['exitcode'].to_i rescue 99
   end
 
   def save
     newconfig = { 'regserverurl' => registrationserver,
                   'regserverca'  => certificate  }
     ret = YastService.Call("YSR::setregistrationconfig", newconfig)
-
     self.find
     return ret
   end
@@ -102,34 +130,37 @@ class Register
     end
   end
 
-
   def to_xml( options = {} )
     xml = options[:builder] ||= Builder::XmlMarkup.new(options)
     xml.instruct! unless options[:skip_instruct]
 
-    status = if @reg['error']          then  'error'
-             elsif @reg['missinginfo'] then  'missinginfo'
-             elsif @reg['success']     then  'finished'
+    status = if !@reg ||  @reg['error'] then  'error'
+             elsif @reg['missinginfo']  then  'missinginfo'
+             elsif @reg['success']      then  'finished'
              end
 
-    tasklist = Hash.from_xml @reg['tasklist'] if @reg['tasklist']
-    changedrepos    = tasklist.collect { | k, v |  v.class == Hash && v['TYPE'] == 'zypp'  } if tasklist
-    changedservices = tasklist.collect { | k, v |  v.class == Hash && v['TYPE'] == 'nu'  } if tasklist
-    tasknic = { 'a'  => 'added',         'd' => 'deleted',
-                'ld' => 'leave enabled', 'ld' => 'leave disabled'}
+    tasklist = Hash.from_xml @reg['tasklist'] if @reg && @reg['tasklist']
+    if tasklist
+      tasklist = tasklist['tasklist'] if tasklist.has_key? 'tasklist'
 
-# during development return static response
+      changedrepos    = tasklist.reject { | k, v |  !v.kind_of?(Hash) || v['TYPE'] != 'zypp' }
+      changedservices = tasklist.reject { | k, v |  !v.kind_of?(Hash) || v['TYPE'] != 'nu' }
+    else
+      changedrepos = {}
+      changedservices = {}
+    end
+    tasknic = { 'a'  => 'added',         'd' => 'deleted',
+                'le' => 'leave enabled', 'ld' => 'leave disabled'}
     xml.registration do
-      if @reg then
+      if @reg 
         xml.status status
         xml.exitcode @reg['exitcode'] || ''
         xml.guid @reg['guid'] || ''
 
-        if @arguments then
+        if @arguments
           xml.missingarguments({:type => "array"}) do
             @arguments.each do | k, v |
-              if k && v.class == Hash
-              then
+              if k && v.kind_of?(Hash)
                 xml.argument do
                   xml.name k
                   xml.value v['value']
@@ -143,13 +174,11 @@ class Register
         end
 
         if changedrepos
-        then
           xml.changedrepos({:type => "array"}) do
             changedrepos.each do | k, v |
-              if k && v.class == Hash
-              then
+              if k && v.kind_of?(Hash) && v["TASK"] != "le" && v["TASK"] != "ld" #only changed repos
                 xml.repo do
-                  xml.name v['NAME'] || ''
+                  xml.name k
                   xml.alias v['ALIAS'] || ''
                   xml.type v['TYPE']  || ''
                   xml.url v['URL'] || ''
@@ -159,30 +188,33 @@ class Register
             end
           end
         end
-
         if changedservices
-        then
           xml.changedservices({:type => "array"}) do
             changedservices.each do | k, v |
-              if k && v.class == Hash
-              then
+              if k && v.kind_of?(Hash)
                 xml.service do
-                  xml.name v['NAME'] || ''
+                  xml.name k
                   xml.alias v['ALIAS'] || ''
-                  xml.type v['TYPE']  || ''
+                  xml.type v['TYPPE']  || ''
                   xml.url v['URL'] || ''
                   xml.status tasknic[ v['TASK'] ] || ''
-                  if v['CATALOGS']  &&  v['CATALOGS'].class == Hash
-                  then
+                  if v['CATALOGS'] 
                     xml.catalogs do
-                      v['CATALOGS'].each do |l, w|
-                        if l && w.class == Hash
-                        then
-                          xml.catalog do
-                            xml.name v['NAME'] || ''
-                            xml.alias v['ALIAS'] || ''
-                            xml.status tasknic[ v['TASK'] ] || ''
+                      if v['CATALOGS'].kind_of?(Array)
+                        v['CATALOGS'].each { |l|
+                          if l && w.kind_of?(Hash)
+                            xml.catalog do
+                              xml.name v['NAME'] || ''
+                              xml.alias v['ALIAS'] || ''
+                              xml.status tasknic[ v['TASK'] ] || ''
+                            end
                           end
+                        }
+                      else #It is an hash only. This is produced by hash.form_xml if catalogs contains ONE entry only
+                        xml.catalog do
+                          xml.name v['CATALOGS']['NAME'] || ''
+                          xml.alias v['CATALOGS']['ALIAS'] || ''
+                          xml.status tasknic[ v['CATALOGS']['TASK'] ] || ''
                         end
                       end
                     end

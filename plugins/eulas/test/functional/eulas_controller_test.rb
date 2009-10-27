@@ -1,7 +1,6 @@
 require File.expand_path(File.dirname(__FILE__) + "/../test_helper")
 require 'test/unit'
 require 'license'
-require 'rubygems'
 require 'mocha'
 
 class EulasControllerTest < ActionController::TestCase
@@ -33,14 +32,14 @@ EOF
   end
 
   def test_index
-    ["html", "xml", "json"].each do |format|
+    ["xml", "json"].each do |format|
       get :index, {:format => format}
       assert_response :success
     end
   end
 
   def test_show
-    ["html", "xml", "json"].each do |format|
+    ["xml", "json"].each do |format|
       get :show, {:format => format, :id => "1"}
       assert_response :success
     end

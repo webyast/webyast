@@ -31,7 +31,6 @@ class ServicesController < ApplicationController
     end
 
     respond_to do |format|
-	format.html { render :xml => @service.to_xml(:root => 'service', :dasherize => false), :location => "none" } #return xml only
 	format.xml  { render :xml => @service.to_xml(:root => 'service', :dasherize => false, :indent => 2), :location => "none" }
 	format.json { render :json => @service.to_json, :location => "none" }
     end

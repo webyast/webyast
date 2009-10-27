@@ -1,4 +1,11 @@
 -------------------------------------------------------------------
+Fri Oct 23 14:31:44 CEST 2009 - jreidinger@suse.cz
+
+- kkaempf: get reasonable html representation
+- jreidinger: fix tests
+- 0.0.5
+
+-------------------------------------------------------------------
 Thu Oct  1 13:22:26 CEST 2009 - jreidinger@suse.cz
 
 - adapt requirements to SLE11 appliance

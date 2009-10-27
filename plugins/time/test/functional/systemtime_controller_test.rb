@@ -1,6 +1,5 @@
 require File.expand_path(File.dirname(__FILE__) + "/../test_helper")
 require 'test/unit'
-require 'rubygems'
 require 'systemtime'
 require "scr"
 require 'mocha'

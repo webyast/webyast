@@ -44,7 +44,6 @@ class PatchesController < ApplicationController
     # note: permission check was performed in :before_filter
     @patches = Patch.find(:available)
     respond_to do |format|
-      format.html { render :xml => @patches.to_xml( :root => "patches", :dasherize => false ) }
       format.xml { render  :xml => @patches.to_xml( :root => "patches", :dasherize => false ) }
       format.json { render :json => @patches.to_json( :root => "patches", :dasherize => false ) }
     end
