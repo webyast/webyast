@@ -57,7 +57,7 @@ class Register
                  'nooptional'   => '1',
                  'debugMode'    => '2',
                  'logfile'      => Paths::REGISTRATION_LOG }
-    @context.merge! hash if hash.class == Hash
+    @context.merge! hash if hash.kind_of?(Hash)
   end
 
   def find
@@ -80,8 +80,8 @@ class Register
     ctx = Hash.new
     args = Hash.new
     begin
-      self.context.each   { |k, v|  ctx[k.to_s] = [ 's', v.to_s ] } if self.context.class == Hash
-      self.arguments.each { |k, v| args[k.to_s] = [ 's', v.to_s ] } if self.arguments.class == Hash
+      self.context.each   { |k, v|  ctx[k.to_s] = [ 's', v.to_s ] } if self.context.kind_of?(Hash)
+      self.arguments.each { |k, v| args[k.to_s] = [ 's', v.to_s ] } if self.arguments.kind_of?(Hash)
     rescue
       Rails.logger.error "When registration was called, the context or the arguments data was invalid."
       raise InvalidParameters.new :registrationdata => "Invalid"
@@ -143,8 +143,8 @@ class Register
     tasklist = Hash.from_xml @reg['tasklist'] if @reg && @reg['tasklist']
     if tasklist
       tasklist = tasklist['tasklist'] if tasklist.has_key? 'tasklist'
-      changedrepos    = tasklist.reject { | k, v |  v.class != Hash || v['type'] != 'zypp'  }
-      changedservices = tasklist.reject { | k, v |  v.class != Hash || v['type'] != 'nu'  }
+      changedrepos    = tasklist.reject { | k, v |  !v.kind_of?(Hash) || v['type'] != 'zypp'  }
+      changedservices = tasklist.reject { | k, v |  !v.kind_of?(Hash) || v['type'] != 'nu'  }
     else
       changedrepos = {}
       changedservices = {}
@@ -161,14 +161,13 @@ class Register
         if @arguments
           xml.missingarguments({:type => "array"}) do
             @arguments.each do | k, v |
-              if k && v.class == Hash
-                xml.argument do
-                  xml.name k
-                  xml.value v['value']
-                  xml.flag v['flag']
-                  xml.kind v['kind']
-                  xml.type 'string'
-                end
+              next unless k && v.kind_of?(Hash)
+	      xml.argument do
+		xml.name k
+		xml.value v['value']
+		xml.flag v['flag']
+		xml.kind v['kind']
+		xml.type 'string'
               end
             end
           end
@@ -177,14 +176,13 @@ class Register
         if changedrepos
           xml.changedrepos({:type => "array"}) do
             changedrepos.each do | k, v |
-              if k && v.class == Hash && v["task"] != "le" && v["task"] != "ld" #only changed repos
-                xml.repo do
-                  xml.name k
-                  xml.alias v['alias'] || ''
-                  xml.type v['type']  || ''
-                  xml.url v['url'] || ''
-                  xml.status tasknic[ v['task'] ] || ''
-                end
+              next unless k && v.kind_of?(Hash) && v["task"] != "le" && v["task"] != "ld" #only changed repos
+	      xml.repo do
+		xml.name k
+		xml.alias v['alias'] || ''
+		xml.type v['type']  || ''
+		xml.url v['url'] || ''
+		xml.status tasknic[ v['task'] ] || ''
               end
             end
           end
@@ -193,28 +191,25 @@ class Register
         if changedservices
           xml.changedservices({:type => "array"}) do
             changedservices.each do | k, v |
-              if k && v.class == Hash && v["task"] != "le" && v["task"] != "ld" #only changed services
-                xml.service do
-                  xml.name k
-                  xml.alias v['alias'] || ''
-                  xml.type v['type']  || ''
-                  xml.url v['url'] || ''
-                  xml.status tasknic[ v['task'] ] || ''
+              next unless k && v.kind_of?(Hash) && v["task"] != "le" && v["task"] != "ld" #only changed services
+	      xml.service do
+		xml.name k
+		xml.alias v['alias'] || ''
+		xml.type v['type']  || ''
+		xml.url v['url'] || ''
+		xml.status tasknic[ v['task'] ] || ''
 #disabled. it returns currently only a hash and not a hash in hash
-#                  if v['catalogs'] && v['catalogs'].class == Hash
-#                    xml.catalogs do
-#                      v['catalogs'].each do |l, w|
-#                        if l && w.class == Hash
-#                          xml.catalog do
-#                            xml.name v['NAME'] || ''
-#                            xml.alias v['ALIAS'] || ''
-#                            xml.status tasknic[ v['TASK'] ] || ''
-#                          end
-#                        end
+#                  next unless v['catalogs'] && v['catalogs'].kind_of?(Hash)
+#                  xml.catalogs do
+#                    v['catalogs'].each do |l, w|
+#                      next unless l && w.kind_of?(Hash)
+#                      xml.catalog do
+#                        xml.name v['NAME'] || ''
+#                        xml.alias v['ALIAS'] || ''
+#                        xml.status tasknic[ v['TASK'] ] || ''
 #                      end
 #                    end
 #                  end # catalogs
-                end
               end
             end # services.each
           end
@@ -240,6 +235,5 @@ class Register
     hash = Hash.from_xml(to_xml())
     return hash.to_json
   end
-
 
 end
