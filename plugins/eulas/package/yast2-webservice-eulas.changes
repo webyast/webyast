@@ -1,4 +1,15 @@
 -------------------------------------------------------------------
+Thu Oct 22 17:24:31 CEST 2009 - mkudlvasr@novell.com
+
+- added controller tests
+- removed unneeded dependencies
+
+-------------------------------------------------------------------
+Tue Oct 20 18:06:57 CEST 2009 - mkudlvasr@novell.com
+
+- updated config files placement YaST2 -> webyast
+
+-------------------------------------------------------------------
 Wed Sep 30 17:34:07 CEST 2009 - mkudlvasr@novell.com
 
 - initial version 0.0.1
