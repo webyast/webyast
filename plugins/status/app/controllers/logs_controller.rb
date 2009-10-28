@@ -15,12 +15,16 @@ class LogsController < ApplicationController
     xml.instruct!
 
     xml.logs(:type => :array) do
-      @cfg.each do |logid, logdata|
-        xml.log do
-          xml.id logid
-          xml.path logdata["path"]
-          xml.description logdata["description"]
+      begin
+        @cfg.each do |logid, logdata|
+          xml.log do
+            xml.id logid
+            xml.path logdata["path"]
+            xml.description logdata["description"]
+          end
         end
+      rescue YaST::ConfigFile::NotFoundError => error
+        logger.error "config file #{CONFIG_FILE} not found"
       end
     end
           
