@@ -37,13 +37,15 @@ class Scr
 
   def execute (arguments, environment=[] )
 
-    #sanitize arguments
-    # FIXME: use regexp
+    # sanitize arguments
+    # and enclose in '' for command below
+
     whitelist = ("a".."z").to_a.to_s + ("A".."Z").to_a.to_s + ("0".."9").to_a.to_s + "_-/=:.,\"<> "
-    arguments.each do |arg|
-      for i in (0..arg.size-1) do
-	return { :stdout =>"", :stderr => "#{arg}: only a..z A..Z 0..9,_-/=.:<> are allowed", :exit => 2} if whitelist.index(arg[i]).nil?
+    arguments.collect! do |arg|
+      unless arg.empty? or arg =~ %r{\A[-\w\/=:.,\"<> ]+\z}
+	return { :stdout =>"", :stderr => "#{arg}: only a..z A..Z 0..9,_-/=.:<> are allowed", :exit => 2}
       end
+      "'#{arg}'"
     end
 
     #note environment array will not be set by the user. So no check is needed.

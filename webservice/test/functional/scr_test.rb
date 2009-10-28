@@ -38,6 +38,32 @@ class ScrTest < ActiveSupport::TestCase
     Scr.instance.read(".target.string", __FILE__)
   end
 
+  test "scr execute with good args" do
+    res = Scr.instance.execute ["ABCabc123", "_", "-", "/", "=", ":", ".", "\"", "<", ">", " ", "_-/=:.,\"<> ", "" ]
+    assert res[:exit] != 2
+  end
+  
+  test "scr execute with bad args" do
+    res = Scr.instance.execute ["|"]
+    assert_equal 2, res[:exit]
+    res = Scr.instance.execute ["/bin/date | ls /"]
+    assert_equal 2, res[:exit]
+    res = Scr.instance.execute ["ls $foo"]
+    assert_equal 2, res[:exit]
+    res = Scr.instance.execute ["%"]
+    assert_equal 2, res[:exit]
+    res = Scr.instance.execute ["@"]
+    assert_equal 2, res[:exit]
+    res = Scr.instance.execute ["foo & bar"]
+    assert_equal 2, res[:exit]
+    res = Scr.instance.execute ["cd (foo)"]
+    assert_equal 2, res[:exit]
+    res = Scr.instance.execute ["ls *?"]
+    assert_equal 2, res[:exit]
+    res = Scr.instance.execute ["'foo'"]
+    assert_equal 2, res[:exit]
+  end
+  
   test "scr write" do
     scr = Scr.instance
     
