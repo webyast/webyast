@@ -4,6 +4,11 @@ Wed Oct 28 14:03:41 CET 2009 - kkaempf@suse.de
 - Tighten parameter checks in permission_controller
 
 -------------------------------------------------------------------
+Wed Oct 28 13:24:00 UTC 2009 - dmacvicar@suse.de
+
+- better error messages (bnc#550033)
+
+-------------------------------------------------------------------
 Wed Oct 28 13:05:14 CET 2009 - schubi@suse.de
 
 - Simplified starting script.           
