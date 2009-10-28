@@ -19,7 +19,9 @@
 Name:           rubygem-yast2-webservice-tasks
 Version:        @VERSION@
 Release:        0
-BuildArch:      noarch
+
+# Nope, doesn't work. Gems are installed below /usr/lib{64}
+# BuildArch:      noarch
 
 %define mod_name yast2-webservice-tasks
 #
