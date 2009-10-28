@@ -114,7 +114,7 @@
 
 # Check for missing binaries (stale symlinks should not happen)
 # Note: Special treatment of stop for LSB conformance
-LIGHTTPD_BIN=/usr/sbin/yastws
+LIGHTTPD_BIN=/usr/sbin/lighttpd
 test -x $LIGHTTPD_BIN || { echo "$LIGHTTPD_BIN not installed"; 
 	if [ "$1" = "stop" ]; then exit 0;
 	else exit 5; fi; }
@@ -162,34 +162,6 @@ function avahi_announce () {
 PID_FILE=/var/run/yastws.pid
 IGNORE_FILE=/var/run/yastwc.pid
 
-#only for beeing sure....
-SCRIPT_PID=$$
-if ps -C yastwc |grep -v $SCRIPT_PID >/dev/null; then
-   ps -C yastwc |grep -v $SCRIPT_PID|grep yastwc|cut -c -6 >$IGNORE_FILE
-   IGNORE_FILE_SIZE="$(stat -c "%s" $IGNORE_FILE)"
-   IGNORE_FILE_ENTRIES="$(wc -l $IGNORE_FILE|cut -c -1)"
-   if [ $IGNORE_FILE_SIZE -eq 0 ]; then
-       rm $IGNORE_FILE
-   fi
-else
-   if test -s $IGNORE_FILE ; then
-     rm $IGNORE_FILE
-   fi
-fi
-if ps -C yastws |grep -v $SCRIPT_PID >/dev/null; then
-   ps -C yastws |grep -v $SCRIPT_PID |grep yastws|cut -c -6 >$PID_FILE
-   PID_FILE_SIZE="$(stat -c "%s" $PID_FILE)"
-   PID_FILE_ENTRIES="$(wc -l $PID_FILE|cut -c -1)"
-   if [ $PID_FILE_SIZE -eq 0 ]; then
-       rm $PID_FILE
-   fi
-else
-   if test -s $PID_FILE ; then
-      rm $PID_FILE
-   fi
-fi
-
-
 # Source LSB init functions
 # providing start_daemon, killproc, pidofproc, 
 # log_success_msg, log_failure_msg and log_warning_msg.
@@ -233,23 +205,14 @@ rc_reset
 
 case "$1" in
     start)
-   	if test -s $PID_FILE ; then
-           #already running
-           echo ""
-        else
-  	   ## Start daemon with startproc(8). If this fails
-	   ## the return value is set appropriately by startproc.
-  	   if test -s $IGNORE_FILE ; then
- 	      startproc -i $IGNORE_FILE $LIGHTTPD_BIN -f $LIGHTTPD_CONFIG 
-           else
- 	      startproc $LIGHTTPD_BIN -f $LIGHTTPD_CONFIG
-           fi
-	   # Remember status and be verbose
-	   rc_status -v
+	echo -n "Starting yastws "
+	startproc -p $PID_FILE -i $IGNORE_FILE $LIGHTTPD_BIN -f $LIGHTTPD_CONFIG 
 
-           # Make it public if it is needed (AVAHI)
-           avahi_announce
-	fi
+	# Remember status and be verbose
+	rc_status -v
+
+        # Make it public if it is needed (AVAHI)
+        avahi_announce
 	;;
     stop)
 	echo -n "Shutting down yastws "
@@ -259,9 +222,6 @@ case "$1" in
 
 	# Remember status and be verbose
 	rc_status -v
-
-        # Kill /usr/lib/YaST2/bin/SCR_dbus_server cause it is not needed anymore
-        killproc /usr/lib/YaST2/bin/SCR_dbus_server
 
         #Stopping AVAHI
         avahi_stop

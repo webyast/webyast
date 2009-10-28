@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Wed Oct 28 13:05:14 CET 2009 - schubi@suse.de
+
+- Simplified starting script.           
+- Fixed: Race condition in init scripts (bnc#550340)
+
+-------------------------------------------------------------------
 Mon Oct 26 15:49:52 CET 2009 - kkaempf@suse.de
 
 - Enforce rubygem-rails 2.3.4

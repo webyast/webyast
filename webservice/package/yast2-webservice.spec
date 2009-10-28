@@ -154,10 +154,6 @@ rm -rf $RPM_BUILD_ROOT
 
 #---------------------------------------------------------------
 %post
-
-#installing lighttpd server
-test -r /usr/sbin/yastws || { echo "Creating link /usr/sbin/yastws";
-        ln -s /usr/sbin/lighttpd /usr/sbin/yastws; }
 %fillup_and_insserv %{pkg_user}
 #
 #granting permissions for yastws
@@ -196,13 +192,6 @@ echo "Database is ready"
 %postun
 %restart_on_update %{pkg_user}
 %{insserv_cleanup}
-#remove link
-if test -r /usr/sbin/yastws ; then
-  echo "/usr/sbin/yastws already removed"
-else
-  echo "Removing link /usr/sbin/yastws";
-  rm /usr/sbin/yastws
-fi
 
 #---------------------------------------------------------------
 %files 
