@@ -19,6 +19,8 @@
 Name:           rubygem-yast2-webservice-tasks
 Version:        @VERSION@
 Release:        0
+BuildArch:      noarch
+
 %define mod_name yast2-webservice-tasks
 #
 Group:          Development/Languages/Ruby
