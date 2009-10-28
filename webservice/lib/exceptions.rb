@@ -70,6 +70,7 @@ class NoPermissionException < BackendException
       xml.description "Permission to allow #{@permission} is not available for user #{@user}"
       xml.permission @permission
       xml.user @user
+      xml.bug false
     end
   end
 end

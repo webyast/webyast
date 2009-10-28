@@ -1,14 +1,4 @@
-
-class PolkitUnauthorizedError < Exception
-
-    attr_reader :actionid,
-		:result
-
-    def initialize(actionid, result)
-	@actionid = actionid
-	@result = result
-    end
-end
+require 'exceptions'
 
 class YastService
     require "dbus"
@@ -72,8 +62,8 @@ class YastService
 	if dbe.dbus_message.error_name == 'org.freedesktop.PolicyKit.Error.NotAuthorized' && dbe.dbus_message.params.size == 1
 	    parms = dbe.dbus_message.params[0].split(' ')
 
-	    # throw a PolicyKit exception instead of the DBus exception
-	    raise PolkitUnauthorizedError.new(parms[0], parms[1])
+            # throw a PolicyKit exception instead of the DBus exception
+            raise NoPermissionException.new(parms[0], ENV['USER'])
 	end
 
 	# rethrow other DBus Errors
