@@ -8,7 +8,7 @@ class Registration::RegistrationController < ApplicationController
   def create
     # POST to registration => run registration
     permission_check("org.opensuse.yast.modules.ysr.statelessregister")
-    raise InvalidParameters.new :registration => "Missing" unless params.has_key?(:registration)
+    raise InvalidParameters.new :registration => "Passed none or invalid data to registration" unless params.has_key?(:registration)
 
     @register = Register.new
     if params[:registration].has_key?(:arguments) &&  !params[:registration][:arguments].blank? 
