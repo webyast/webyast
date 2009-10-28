@@ -19,7 +19,7 @@ def read_version
     version.chomp
 end
 
-# generate a file from .in template, replace @VERSION@ strin by VERSION file content
+# generate a file from .in template, replace @VERSION@ string by VERSION file content
 def version_update(filein, fileout = nil)
     if filein.nil? || filein.empty?
 	puts "ERROR: empty input or output filename"
