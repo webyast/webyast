@@ -73,8 +73,9 @@ class PermissionsControllerTest < ActionController::TestCase
   end
 
   test "permissions access index with wrong user" do
-    Scr.any_instance.stubs(:execute).with(["polkit-auth", "--user", "not avail", "--explicit"]).returns({:stderr=>"polkit-auth: cannot look up uid for user 'not avail'\n", :exit=>1, :stdout=>""})
-    get :index, :user_id => "not avail"
+    user = "unknown"
+    Scr.any_instance.stubs(:execute).with(["polkit-auth", "--user", user, "--explicit"]).returns({:stderr=>"polkit-auth: cannot look up uid for user '#{user}'\n", :exit=>1, :stdout=>""})
+    get :index, :user_id => user
     
 #FIXME    assert_response 404
   end
