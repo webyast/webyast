@@ -37,7 +37,7 @@ class Registration::ConfigurationController < ApplicationController
     @register = Register.new
     @register.registrationserver = newurl if newurl
     @register.certificate = newca if newca
-    @register.save || raise ("Error: Could not save the new registration configuration.")
+    @register.save || raise("Error: Could not save the new registration configuration.")
     render :show
   end
 
