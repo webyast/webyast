@@ -1,4 +1,20 @@
 -------------------------------------------------------------------
+Thu Oct 29 12:31:46 CET 2009 - jdsn@suse.de
+
+- version 0.0.4
+
+-------------------------------------------------------------------
+Thu Oct 29 12:00:08 CET 2009 - schubi@suse.de
+
+- only display missing values during registration
+
+-------------------------------------------------------------------
+Wed Oct 28 14:14:13 CET 2009 - jdsn@suse.de
+
+- better error handling
+- small fixes
+
+-------------------------------------------------------------------
 Mon Oct 26 11:43:42 CET 2009 - schubi@suse.de
 
 - added requirement yast2-registration 
