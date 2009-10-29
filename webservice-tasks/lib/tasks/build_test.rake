@@ -11,7 +11,7 @@ task :'build_test'  do
   end
   puts "package is #{package_name}"
   raise "cannot determine package name" if package_name.empty?  
-  puts "checking out osc package to build"
+  puts "checking out osc package from build"
   top_dir = Dir.pwd
   begin
     `osc checkout 'YaST:Web' #{package_name}`

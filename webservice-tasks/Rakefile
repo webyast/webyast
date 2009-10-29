@@ -6,6 +6,9 @@ require 'rake/rdoctask'
 require 'lib/tasks/webservice_tasks'
 WebserviceTasks.loadTasks(:exclude => ["package-local.rake"])
 
+# define empty test task (rake submit doesn't fail then)
+task :test do
+end
 
 # define clean and clobber tasks
 require 'rake/clean'

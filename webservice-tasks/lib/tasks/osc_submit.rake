@@ -11,7 +11,7 @@ task :'osc_submit'  do
   end
   puts "package is #{package_name}"
   raise "cannot determine package name" if package_name.empty?  
-  puts "checking out osc package to build"
+  puts "checking out osc package from build"
   top_dir = Dir.pwd
   begin
     `osc checkout 'YaST:Web' #{package_name}`
@@ -23,7 +23,7 @@ task :'osc_submit'  do
     # long running, `foo` would only show output at the end
     system "osc commit -m 'new version'"
     if $?.exitstatus != 0
-      raise "Failed to build"
+      raise "Failed to submit"
     end
     puts "package built"
   ensure
