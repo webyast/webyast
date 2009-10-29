@@ -1,21 +1,11 @@
 
 require 'rake'
-require 'rake/packagetask'
 require 'fileutils'
 
-require "#{File.dirname(__FILE__)}/rake_rename_task"
-
-# temporary name for the package task backup
-PACKAGE_BACKUP = '*__package_task_backup__*'
 # name of the package (base file name)
 PACKAGE_NAME = 'www'
 # target directory for the package file
 PACKAGE_DIR = 'package'
-
-# backup the current existing :package task
-if Rake::Task.task_defined?(:package)
-    Rake::Task[:package].rename(PACKAGE_BACKUP)
-end
 
 def remove_package_dir
   # remove the old package directory
@@ -58,6 +48,8 @@ end
 
 # create new package task
 def create_package_task
+  require 'rake/packagetask'
+
   Rake::PackageTask.new(PACKAGE_NAME, :noversion) do |p|
     p.need_tar_bz2 = true
     p.package_dir = PACKAGE_DIR
@@ -112,10 +104,5 @@ desc "Force a rebuild of the package files"
 # Note: 'repackage' can be simply redirected to 'package', the old package
 # is always removed before creating a new package
 task :repackage => :package
-
-# restore the original :package task
-if Rake::Task.task_defined?(PACKAGE_BACKUP)
-    Rake::Task[PACKAGE_BACKUP].rename(:package)
-end
 
 # vim: ft=ruby
