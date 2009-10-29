@@ -26,7 +26,7 @@ Release:        0
 %define mod_name yast2-webservice-tasks
 #
 Group:          Development/Languages/Ruby
-License:        MIT
+License:        LGPL v2.1
 
 BuildRoot:      %{_tmppath}/%{name}-%{version}-build
 BuildRequires:  rubygems_with_buildroot_patch
@@ -57,5 +57,6 @@ The new task package includes the tasks git_check and syntax_check.
 %{_libdir}/ruby/gems/%{rb_ver}/gems/%{mod_name}-%{version}/
 %{_libdir}/ruby/gems/%{rb_ver}/specifications/%{mod_name}-%{version}.gemspec
 %doc %{_libdir}/ruby/gems/%{rb_ver}/doc/%{mod_name}-%{version}/
+%doc COPYING
 
 %changelog
