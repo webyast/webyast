@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Thu Oct 29 14:48:07 CET 2009 - jsuchome@suse.cz
+
+- licence changed to GPL2
+- 0.0.9 
+
+-------------------------------------------------------------------
 Wed Oct 21 08:22:01 CEST 2009 - jsuchome@suse.cz
 
 - changed the config file location to /etc/webyast (bnc#547614)

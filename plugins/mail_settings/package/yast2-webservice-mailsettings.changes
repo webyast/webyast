@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Thu Oct 29 14:50:57 CET 2009 - jsuchome@suse.cz
+
+- licence changed to GPL2
+- 0.0.5 
+
+-------------------------------------------------------------------
 Fri Oct 23 14:24:58 CEST 2009 - jsuchome@suse.cz
 
 - make test independent (and working for analysis)
