@@ -73,7 +73,6 @@ rm -rf $RPM_BUILD_ROOT
 %dir %attr (-,%{pkg_user},root) /var/lib/yastws/%{plugin_name}
 %dir /etc/webyast/
 %config /etc/webyast/basesystem.yml
-/srv/www/%{pkg_user}/vendor/plugins/%{plugin_name}/MIT-LICENSE
 /srv/www/%{pkg_user}/vendor/plugins/%{plugin_name}/README
 /srv/www/%{pkg_user}/vendor/plugins/%{plugin_name}/Rakefile
 /srv/www/%{pkg_user}/vendor/plugins/%{plugin_name}/init.rb

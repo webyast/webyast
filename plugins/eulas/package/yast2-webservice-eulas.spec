@@ -76,7 +76,6 @@ rm -rf $RPM_BUILD_ROOT
 %dir /usr/share/%{pkg_user}/%{plugin_name}
 %dir /var/lib/%{pkg_user}
 %dir /var/lib/%{pkg_user}/%{plugin_name}
-/srv/www/%{pkg_user}/vendor/plugins/%{plugin_name}/MIT-LICENSE
 /srv/www/%{pkg_user}/vendor/plugins/%{plugin_name}/README
 /srv/www/%{pkg_user}/vendor/plugins/%{plugin_name}/Rakefile
 /srv/www/%{pkg_user}/vendor/plugins/%{plugin_name}/init.rb
