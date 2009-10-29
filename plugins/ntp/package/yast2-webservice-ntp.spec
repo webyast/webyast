@@ -18,7 +18,7 @@ Provides:       yast2-webservice:/srv/www/yastws/app/controllers/ntp_controller.
 License:	GPLv2
 Group:          Productivity/Networking/Web/Utilities
 Autoreqprov:    on
-Version:        0.0.1
+Version:        0.0.2
 Release:        0
 Summary:        YaST2 - Webservice - NTP
 Source:         www.tar.bz2
