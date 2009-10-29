@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Thu Oct 29 10:55:32 CET 2009 - jreidinger@suse.cz
+
+- generate secret key for session during installation (bnc#550635)
+- 0.0.10
+
+-------------------------------------------------------------------
 Wed Oct 28 14:03:41 CET 2009 - kkaempf@suse.de
 
 - Tighten parameter checks in permission_controller
