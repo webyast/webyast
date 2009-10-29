@@ -21,7 +21,6 @@ Requires:       yast2-core >= 2.17.31
 
 Requires:	lighttpd-mod_magnet, ruby-fcgi, ruby-dbus, sqlite
 Requires:       rubygem-yast2-webservice-tasks
-Recommends:     avahi-utils
 Requires:	yast2-dbus-server
 # gamin gives problems with lighttpd, so better conflict with it for now
 Conflicts:      gamin
@@ -31,7 +30,7 @@ PreReq:         ruby-rpam, ruby-polkit, rubygem-test-unit
 License:        MIT
 Group:          Productivity/Networking/Web/Utilities
 Autoreqprov:    on
-Version:        0.0.10
+Version:        0.0.11
 Release:        0
 Summary:        YaST2 - Webservice 
 Source:         www.tar.bz2
@@ -49,7 +48,7 @@ BuildRequires:  ruby, pkg-config, rubygem-mocha
 # if we run the tests during build, we need most of Requires here too,
 # except for deployment specific stuff
 BuildRequires:  rubygem-yast2-webservice-tasks, rubygem-restility
-BuildRequires:  yast2-core, yast2-dbus-server, ruby-dbus, sqlite, avahi-utils dbus-1
+BuildRequires:  yast2-core, yast2-dbus-server, ruby-dbus, sqlite, dbus-1
 BuildRequires:  PolicyKit, PackageKit, rubygem-sqlite3
 BuildRequires:  rubygem-rails-2_3 = 2.3.4
 BuildRequires:  ruby-rpam, ruby-polkit
