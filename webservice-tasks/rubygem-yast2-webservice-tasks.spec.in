@@ -57,6 +57,5 @@ The new task package includes the tasks git_check and syntax_check.
 %{_libdir}/ruby/gems/%{rb_ver}/gems/%{mod_name}-%{version}/
 %{_libdir}/ruby/gems/%{rb_ver}/specifications/%{mod_name}-%{version}.gemspec
 %doc %{_libdir}/ruby/gems/%{rb_ver}/doc/%{mod_name}-%{version}/
-%doc COPYING
 
 %changelog
