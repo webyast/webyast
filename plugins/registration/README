@@ -1,7 +1,7 @@
-Language
-==========
+Registration
+============
 
-REST interface for setting system language.
+REST interface for registration.
 
 
-Copyright (c) 2009 Novell, released under the MIT license
+Copyright (c) 2009 Novell, released under the GPLv2 license

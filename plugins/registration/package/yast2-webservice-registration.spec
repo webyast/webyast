@@ -12,7 +12,7 @@
 Name:           yast2-webservice-registration
 PreReq:         yast2-webservice
 Provides:       yast2-webservice:/srv/www/yastws/app/controllers/registration_controller.rb
-License:	GPLv2
+License:        GPLv2
 Group:          Productivity/Networking/Web/Utilities
 Autoreqprov:    on
 Version:        0.0.4
@@ -39,11 +39,12 @@ Requires:       yast2-registration > 2.17.25
 
 
 %description
-YaST2 - Webservice - REST based interface for the registration of a system at NCC or SMT
+YaST2 - Webservice - REST based interface for the registration of a system at NCC, SMT or SLMS
 
 Authors:
 --------
-    J. Daniel Schmidt <jdsn@suse.de>
+    J. Daniel Schmidt <jdsn@novell.com>
+    Stefan Schubert <schubi@novell.com>
 
 %prep
 %setup -q -n www
