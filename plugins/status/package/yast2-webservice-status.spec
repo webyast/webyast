@@ -13,7 +13,7 @@ Name:           yast2-webservice-status
 License:	GPLv2
 Group:          Productivity/Networking/Web/Utilities
 Autoreqprov:    on
-Version:        0.0.4
+Version:        0.0.5
 Release:        0
 Summary:        YaST2 - Webservice - Status
 Source:         www.tar.bz2
