@@ -89,7 +89,7 @@ class Register
 
     @reg = YastService.Call("YSR::statelessregister", ctx, args )
 
-    #logger.debug   "ATREG: #{@reg.inspect}"
+    Rails.logger.debug "registration server returns: #{@reg.inspect}"
 
     @arguments = Hash.from_xml(@reg['missingarguments']) if @reg && @reg.has_key?('missingarguments')
     @arguments = @arguments["missingarguments"] if @arguments && @arguments.has_key?('missingarguments')
@@ -166,7 +166,6 @@ class Register
                   xml.value v['value']
                   xml.flag v['flag']
                   xml.kind v['kind']
-                  xml.type 'string'
                 end
               end
             end
