@@ -17,10 +17,21 @@ if Rake::Task.task_defined?(:package)
     Rake::Task[:package].rename(PACKAGE_BACKUP)
 end
 
-def remove_old_package
-  #removing old stuff
+def remove_package_dir
+  # remove the old package directory
   www_dir = File.join(Dir.pwd, PACKAGE_DIR, PACKAGE_NAME)
   FileUtils.rm_rf(www_dir) if File.directory?(www_dir)
+end
+
+def remove_old_package
+  # remove the old tarball
+  tarball = File.join(Dir.pwd, PACKAGE_DIR, "#{PACKAGE_NAME}.tar.bz2")
+  FileUtils.rm_rf(tarball) if File.exists?(tarball)
+end
+
+def package_clean
+  remove_package_dir
+  remove_old_package
 end
 
 # add all GIT files under the current directory to the package_task
@@ -46,35 +57,61 @@ def add_git_files(package_task)
 end
 
 # create new package task
-Rake::PackageTask.new(PACKAGE_NAME, :noversion) do |p|
-  p.need_tar_bz2 = true
-  p.package_dir = PACKAGE_DIR
+def create_package_task
+  Rake::PackageTask.new(PACKAGE_NAME, :noversion) do |p|
+    p.need_tar_bz2 = true
+    p.package_dir = PACKAGE_DIR
 
-  remove_old_package
+    package_clean
 
-  add_git_files p
+    add_git_files p
 
-  #don't add IDE files
-  p.package_files.exclude('./nbproject')
-  #don't add generated documentation. If you want have it in package, generate it fresh
-  p.package_files.exclude('./doc/app')
-  # ignore backups
-  p.package_files.exclude('./**/*.orig')
-  p.package_files.exclude('./package')
-  p.package_files.exclude('./coverage')
-  p.package_files.exclude('./test')
-  p.package_files.exclude('./db/*.sqlite3')
-  p.package_files.exclude('./db/schema.rb')
-  p.package_files.exclude('./log/*.log')
-  p.package_files.exclude('./vendor/plugins/rails_rcov')
-  p.package_files.exclude('./public/vendor/text/locale')
-  p.package_files.exclude('./public/vendor/text/po')
-  p.package_files.exclude('./public/vendor/images')
-  p.package_files.exclude('./public/vendor/stylesheets')
+    #don't add IDE files
+    p.package_files.exclude('./nbproject')
+    #don't add generated documentation. If you want have it in package, generate it fresh
+    p.package_files.exclude('./doc/app')
+    # ignore backups
+    p.package_files.exclude('./**/*.orig')
+    p.package_files.exclude('./package')
+    p.package_files.exclude('./coverage')
+    p.package_files.exclude('./test')
+    p.package_files.exclude('./db/*.sqlite3')
+    p.package_files.exclude('./db/schema.rb')
+    p.package_files.exclude('./log/*.log')
+    p.package_files.exclude('./vendor/plugins/rails_rcov')
+    p.package_files.exclude('./public/vendor/text/locale')
+    p.package_files.exclude('./public/vendor/text/po')
+    p.package_files.exclude('./public/vendor/images')
+    p.package_files.exclude('./public/vendor/stylesheets')
+  end
 end
 
-# rename 'package' task to 'package-local' task
-Rake::Task[:package].rename(:"package-local")
+# this is just a dummy package task which creates the real Rake::PackageTask
+# when it is invoked - this avoids removing of the old package and
+# calling 'git ls-files' for every rake call (even 'rake -T')
+task :"package-local" do
+  # create the real package task
+  create_package_task
+
+  # execute the real package task
+  Rake::Task[:"#{PACKAGE_DIR}/#{PACKAGE_NAME}.tar.bz2"].invoke
+
+  # remove the package dir, not needed anymore
+  remove_package_dir
+end
+
+# define the same tasks as in Rake::PackageTask
+desc "Remove package products"
+task :clobber_package do
+  remove_old_package
+end
+
+task :clobber => :clobber_package
+
+desc "Force a rebuild of the package files"
+# Note: 'repackage' can be simply redirected to 'package', the old package
+# is always removed before creating a new package
+task :repackage => :package
 
 # restore the original :package task
 if Rake::Task.task_defined?(PACKAGE_BACKUP)
