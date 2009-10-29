@@ -1,6 +1,9 @@
 steps:
+  - controller: language
   - controller: eulas
     action: next
-  - controller: language
-    action: index
+  - controller: administrator
+  - controller: network
   - controller: systemtime
+  - controller: mail_settings
+  - controller: registration
