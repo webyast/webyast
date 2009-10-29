@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Thu Oct 29 17:28:38 CET 2009 - lslezak@suse.cz
+
+- GPLv2 license
+- 0.0.6
+
+-------------------------------------------------------------------
 Thu Oct  8 09:43:42 CEST 2009 - lslezak@suse.cz
 
 - build restdoc documentation during package build

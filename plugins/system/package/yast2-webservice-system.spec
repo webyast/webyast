@@ -17,7 +17,7 @@ Provides:       yast2-webservice:/srv/www/yastws/app/controllers/system_controll
 License:	GPLv2
 Group:          Productivity/Networking/Web/Utilities
 Autoreqprov:    on
-Version:        0.0.5
+Version:        0.0.6
 Release:        0
 Summary:        YaST2 - Webservice - System
 Source:         www.tar.bz2
