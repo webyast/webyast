@@ -194,7 +194,7 @@ class Register
                 xml.service do
                   xml.name k
                   xml.alias v['ALIAS'] || ''
-                  xml.type v['TYPPE']  || ''
+                  xml.type v['TYPE']  || ''
                   xml.url v['URL'] || ''
                   xml.status tasknic[ v['TASK'] ] || ''
                   if v['CATALOGS'] 
