@@ -11,7 +11,6 @@
 
 Name:           yast2-webservice-registration
 PreReq:         yast2-webservice
-Provides:       yast2-webservice:/srv/www/yastws/app/controllers/registration_controller.rb
 License:        GPLv2
 Group:          Productivity/Networking/Web/Utilities
 Autoreqprov:    on
