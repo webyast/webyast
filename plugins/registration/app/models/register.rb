@@ -201,11 +201,11 @@ class Register
                     xml.catalogs do
                       if v['CATALOGS'].kind_of?(Array)
                         v['CATALOGS'].each { |l|
-                          if l && w.kind_of?(Hash)
+                          if l && l.kind_of?(Hash)
                             xml.catalog do
-                              xml.name v['NAME'] || ''
-                              xml.alias v['ALIAS'] || ''
-                              xml.status tasknic[ v['TASK'] ] || ''
+                              xml.name l['NAME'] || ''
+                              xml.alias l['ALIAS'] || ''
+                              xml.status tasknic[ l['TASK'] ] || ''
                             end
                           end
                         }
