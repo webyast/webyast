@@ -13,7 +13,7 @@ Name:           yast2-webservice-network
 License:	GPLv2
 Group:          Productivity/Networking/Web/Utilities
 Autoreqprov:    on
-Version:        0.0.7
+Version:        0.0.8
 Release:        0
 Summary:        YaST2 - Webservice - Network
 Source:         www.tar.bz2

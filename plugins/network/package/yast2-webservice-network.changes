@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Thu Oct 29 17:56:16 CET 2009 - lslezak@suse.cz
+
+- GPLv2 license
+- 0.0.8
+
+-------------------------------------------------------------------
 Fri Oct 16 16:28:33 CEST 2009 - mvidner@suse.cz
 
 - Disabled HTML output, it returned XML anyway (kkaempf)
