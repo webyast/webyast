@@ -92,7 +92,6 @@ rm -rf $RPM_BUILD_ROOT
 %dir /srv/www/%{pkg_user}/vendor/plugins/%{plugin_name}/doc
 %dir /usr/share/PolicyKit
 %dir /usr/share/PolicyKit/policy
-/srv/www/%{pkg_user}/vendor/plugins/%{plugin_name}/MIT-LICENSE
 /srv/www/%{pkg_user}/vendor/plugins/%{plugin_name}/README
 /srv/www/%{pkg_user}/vendor/plugins/%{plugin_name}/Rakefile
 /srv/www/%{pkg_user}/vendor/plugins/%{plugin_name}/init.rb
