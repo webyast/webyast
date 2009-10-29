@@ -54,8 +54,6 @@ def create_package_task
     p.need_tar_bz2 = true
     p.package_dir = PACKAGE_DIR
 
-    package_clean
-
     add_git_files p
 
     #don't add IDE files
@@ -81,7 +79,11 @@ end
 # this is just a dummy package task which creates the real Rake::PackageTask
 # when it is invoked - this avoids removing of the old package and
 # calling 'git ls-files' for every rake call (even 'rake -T')
+desc "Build distribution package (no check, for testing only)"
 task :"package-local" do
+  # start from scratch, ensure that the package is fresh
+  package_clean
+
   # create the real package task
   create_package_task
 
