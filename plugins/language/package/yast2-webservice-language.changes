@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Thu Oct 29 17:32:09 CET 2009 - lslezak@suse.cz
+
+- GPLv2 license
+- 0.0.7
+
+-------------------------------------------------------------------
 Thu Oct 29 09:17:57 CET 2009 - jreidinger@suse.cz
 
 - lslezak: Do not require rubygems
