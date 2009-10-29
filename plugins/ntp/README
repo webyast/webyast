@@ -10,4 +10,4 @@ It uses own YaPI that uses sntp program. The reasons are:
 - need root permissions to run sntp and YaPI ensure also policyKit check
 
 
-Copyright (c) 2009 Novell, released under the MIT license
+Copyright (c) 2009 Novell

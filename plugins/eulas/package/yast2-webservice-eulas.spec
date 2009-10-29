@@ -12,7 +12,7 @@
 Name:           yast2-webservice-eulas
 PreReq:         yast2-webservice
 Provides:       yast2-webservice:/srv/www/yastws/app/controllers/eulas_controller.rb
-License:        GLV v2 only
+License:        GPLv2
 Group:          Productivity/Networking/Web/Utilities
 Autoreqprov:    on
 Version:        0.0.2
@@ -55,6 +55,7 @@ mkdir -p $RPM_BUILD_ROOT/var/lib/%{pkg_user}/%{plugin_name}/accepted-licenses
 
 mkdir -p $RPM_BUILD_ROOT/srv/www/%{pkg_user}/vendor/plugins/%{plugin_name}
 cp -a * $RPM_BUILD_ROOT/srv/www/%{pkg_user}/vendor/plugins/%{plugin_name}
+rm -f $RPM_BUILD_ROOT/srv/www/%{pkg_user}/vendor/plugins/%{plugin_name}/COPYING
 #FIXME maybe location change in future
 
 mkdir -p $RPM_BUILD_ROOT/etc/webyast/
@@ -75,7 +76,6 @@ rm -rf $RPM_BUILD_ROOT
 %dir /usr/share/%{pkg_user}/%{plugin_name}
 %dir /var/lib/%{pkg_user}
 %dir /var/lib/%{pkg_user}/%{plugin_name}
-/srv/www/%{pkg_user}/vendor/plugins/%{plugin_name}/MIT-LICENSE
 /srv/www/%{pkg_user}/vendor/plugins/%{plugin_name}/README
 /srv/www/%{pkg_user}/vendor/plugins/%{plugin_name}/Rakefile
 /srv/www/%{pkg_user}/vendor/plugins/%{plugin_name}/init.rb
@@ -91,4 +91,5 @@ rm -rf $RPM_BUILD_ROOT
 %config /etc/webyast/eulas.yml
 %defattr(-,%{pkg_user},%{pkg_user})
 %dir /var/lib/%{pkg_user}/%{plugin_name}/accepted-licenses
+%doc COPYING
 

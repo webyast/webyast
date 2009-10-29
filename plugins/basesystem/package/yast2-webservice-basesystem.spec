@@ -12,7 +12,7 @@
 Name:           yast2-webservice-basesystem
 PreReq:         yast2-webservice
 Provides:       yast2-webservice:/srv/www/yastws/app/controllers/basesystem_controller.rb
-License:        MIT
+License:	GPLv2
 Group:          Productivity/Networking/Web/Utilities
 Autoreqprov:    on
 Version:        0.0.7
@@ -51,6 +51,7 @@ Authors:
 mkdir -p $RPM_BUILD_ROOT/var/lib/yastws/%{plugin_name}
 mkdir -p $RPM_BUILD_ROOT/srv/www/%{pkg_user}/vendor/plugins/%{plugin_name}
 cp -a * $RPM_BUILD_ROOT/srv/www/%{pkg_user}/vendor/plugins/%{plugin_name}
+rm -f $RPM_BUILD_ROOT/srv/www/%{pkg_user}/vendor/plugins/%{plugin_name}/COPYING
 #FIXME maybe location change in future
 
 mkdir -p $RPM_BUILD_ROOT/etc/webyast/
@@ -72,7 +73,6 @@ rm -rf $RPM_BUILD_ROOT
 %dir %attr (-,%{pkg_user},root) /var/lib/yastws/%{plugin_name}
 %dir /etc/webyast/
 %config /etc/webyast/basesystem.yml
-/srv/www/%{pkg_user}/vendor/plugins/%{plugin_name}/MIT-LICENSE
 /srv/www/%{pkg_user}/vendor/plugins/%{plugin_name}/README
 /srv/www/%{pkg_user}/vendor/plugins/%{plugin_name}/Rakefile
 /srv/www/%{pkg_user}/vendor/plugins/%{plugin_name}/init.rb
@@ -83,4 +83,5 @@ rm -rf $RPM_BUILD_ROOT
 #/srv/www/%{pkg_user}/vendor/plugins/%{plugin_name}/tasks
 #/srv/www/%{pkg_user}/vendor/plugins/%{plugin_name}/test
 /srv/www/%{pkg_user}/vendor/plugins/%{plugin_name}/doc/README_FOR_APP
+%doc COPYING
 

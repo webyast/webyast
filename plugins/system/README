@@ -10,4 +10,4 @@ It uses HAL for reboot/shutdown, the reasons are:
 - HAL access rights are used, no need to define/setup extra rights for YaST
 
 
-Copyright (c) 2009 Novell, released under the MIT license
+Copyright (c) 2009 Novell

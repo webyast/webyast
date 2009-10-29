@@ -12,7 +12,7 @@
 Name:           yast2-webservice-security
 PreReq:         yast2-webservice
 Provides:       yast2-webservice:/srv/www/yastws/app/controllers/security_controller.rb
-License:        MIT
+License:	GPLv2
 Group:          Productivity/Networking/Web/Utilities
 Autoreqprov:    on
 Version:        0.0.2
@@ -48,6 +48,7 @@ Authors:
 #
 mkdir -p $RPM_BUILD_ROOT/srv/www/%{pkg_user}/vendor/plugins/%{plugin_name}
 cp -a * $RPM_BUILD_ROOT/srv/www/%{pkg_user}/vendor/plugins/%{plugin_name}
+rm -f $RPM_BUILD_ROOT/srv/www/%{pkg_user}/vendor/plugins/%{plugin_name}/COPYING
 
 # Policies
 mkdir -p $RPM_BUILD_ROOT/usr/share/PolicyKit/policy
@@ -70,7 +71,6 @@ rm -rf $RPM_BUILD_ROOT
 %dir /srv/www/%{pkg_user}/vendor/plugins/%{plugin_name}
 %dir /usr/share/PolicyKit
 %dir /usr/share/PolicyKit/policy
-%config /srv/www/%{pkg_user}/vendor/plugins/%{plugin_name}/MIT-LICENSE
 %config /srv/www/%{pkg_user}/vendor/plugins/%{plugin_name}/README
 %config /srv/www/%{pkg_user}/vendor/plugins/%{plugin_name}/Rakefile
 %config /srv/www/%{pkg_user}/vendor/plugins/%{plugin_name}/init.rb
@@ -81,4 +81,4 @@ rm -rf $RPM_BUILD_ROOT
 %config /srv/www/%{pkg_user}/vendor/plugins/%{plugin_name}/tasks
 #%config /srv/www/%{pkg_user}/vendor/plugins/%{plugin_name}/test
 %attr(644,root,root) %config /usr/share/PolicyKit/policy/org.opensuse.yast.system.%{plugin_name}.policy
-
+%doc COPYING

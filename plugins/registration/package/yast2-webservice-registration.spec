@@ -11,11 +11,10 @@
 
 Name:           yast2-webservice-registration
 PreReq:         yast2-webservice
-Provides:       yast2-webservice:/srv/www/yastws/app/controllers/registration_controller.rb
-License:        MIT
+License:        GPLv2
 Group:          Productivity/Networking/Web/Utilities
 Autoreqprov:    on
-Version:        0.0.3
+Version:        0.0.4
 Release:        0
 Summary:        YaST2 - Webservice - Registration
 Source:         www.tar.bz2
@@ -39,11 +38,12 @@ Requires:       yast2-registration > 2.17.25
 
 
 %description
-YaST2 - Webservice - REST based interface for the registration of a system at NCC or SMT
+YaST2 - Webservice - REST based interface for the registration of a system at NCC, SMT or SLMS
 
 Authors:
 --------
-    J. Daniel Schmidt <jdsn@suse.de>
+    J. Daniel Schmidt <jdsn@novell.com>
+    Stefan Schubert <schubi@novell.com>
 
 %prep
 %setup -q -n www
@@ -57,6 +57,7 @@ Authors:
 #
 mkdir -p $RPM_BUILD_ROOT/srv/www/%{pkg_user}/vendor/plugins/%{plugin_name}
 cp -a * $RPM_BUILD_ROOT/srv/www/%{pkg_user}/vendor/plugins/%{plugin_name}
+rm -f $RPM_BUILD_ROOT/srv/www/%{pkg_user}/vendor/plugins/%{plugin_name}/COPYING
 
 %clean
 rm -rf $RPM_BUILD_ROOT
@@ -74,7 +75,6 @@ rm -rf $RPM_BUILD_ROOT
 %dir /srv/www/%{pkg_user}/vendor/plugins
 %dir /srv/www/%{pkg_user}/vendor/plugins/%{plugin_name}
 %dir /srv/www/%{pkg_user}/vendor/plugins/%{plugin_name}/doc
-/srv/www/%{pkg_user}/vendor/plugins/%{plugin_name}/MIT-LICENSE
 /srv/www/%{pkg_user}/vendor/plugins/%{plugin_name}/README
 /srv/www/%{pkg_user}/vendor/plugins/%{plugin_name}/Rakefile
 /srv/www/%{pkg_user}/vendor/plugins/%{plugin_name}/init.rb
@@ -85,4 +85,5 @@ rm -rf $RPM_BUILD_ROOT
 /srv/www/%{pkg_user}/vendor/plugins/%{plugin_name}/tasks
 #/srv/www/%{pkg_user}/vendor/plugins/%{plugin_name}/test
 /srv/www/%{pkg_user}/vendor/plugins/%{plugin_name}/doc/README_FOR_APP
+%doc COPYING
 

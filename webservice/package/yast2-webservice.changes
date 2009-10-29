@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Thu Oct 29 12:37:42 CET 2009 - mvidner@suse.cz
+
+- Removed avahi (zeroconf) usage.
+- 0.0.11
+
+-------------------------------------------------------------------
 Thu Oct 29 10:55:32 CET 2009 - jreidinger@suse.cz
 
 - generate secret key for session during installation (bnc#550635)
