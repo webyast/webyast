@@ -12,7 +12,7 @@
 Name:           yast2-webservice-eulas
 PreReq:         yast2-webservice
 Provides:       yast2-webservice:/srv/www/yastws/app/controllers/eulas_controller.rb
-License:        MIT
+License:        GLV v2 only
 Group:          Productivity/Networking/Web/Utilities
 Autoreqprov:    on
 Version:        0.0.2
