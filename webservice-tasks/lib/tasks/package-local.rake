@@ -5,49 +5,54 @@ require 'fileutils'
 
 require "#{File.dirname(__FILE__)}/rake_rename_task"
 
-package_backup = '*__package_task_backup__*'
+# temporary name for the package task backup
+PACKAGE_BACKUP = '*__package_task_backup__*'
+# name of the package (base file name)
+PACKAGE_NAME = 'www'
+# target directory for the package file
+PACKAGE_DIR = 'package'
 
 # backup the current existing :package task
 if Rake::Task.task_defined?(:package)
-    Rake::Task[:package].rename(package_backup)
+    Rake::Task[:package].rename(PACKAGE_BACKUP)
+end
+
+def remove_old_package
+  #removing old stuff
+  www_dir = File.join(Dir.pwd, PACKAGE_DIR, PACKAGE_NAME)
+  FileUtils.rm_rf(www_dir) if File.directory?(www_dir)
+end
+
+# add all GIT files under the current directory to the package_task
+def add_git_files(package_task)
+  # package only the files which are available in the GIT repository
+  filelist = `git ls-files . --exclude=.gitignore`.split("\n")
+
+  if $?.exitstatus.zero?
+      # add ./ prefix so the exclude patterns match
+      filelist.map! { |f| "./#{f}"}
+
+      package_task.package_files.include filelist
+
+      ignored = `git ls-files -o .`.split("\n")
+
+      if $?.exitstatus.zero? and ignored.size > 0
+	  ignored.each {|f| $stderr.puts "WARNING: Ignoring file: #{f}"}
+      end
+  else
+      $stderr.puts 'WARNING: Cannot get GIT listing, packaging all files'
+      package_task.package_files.include('./**/*')
+  end
 end
 
 # create new package task
-Rake::PackageTask.new('www', :noversion) do |p|
+Rake::PackageTask.new(PACKAGE_NAME, :noversion) do |p|
   p.need_tar_bz2 = true
-  p.package_dir = 'package'
+  p.package_dir = PACKAGE_DIR
 
-  # do not call git and do not remove old files if package task won't be executed
-  # FIXME: this does not support calling the package task from another task!
-  packaging = ARGV.include?('package') || ARGV.include?('package-local')
+  remove_old_package
 
-  if packaging
-    #removing old stuff
-    www_dir = File.join(Dir.pwd,"package", "www")
-    FileUtils.rm_rf(www_dir) if File.directory?(www_dir)
-
-    # package only the files which are available in the GIT repository
-    filelist = `git ls-files . --exclude=.gitignore`.split("\n")
-
-    if $?.exitstatus.zero?
-	# add ./ prefix so the exclude patterns match
-	filelist.map! { |f| "./#{f}"}
-
-	p.package_files.include filelist
-
-	ignored = `git ls-files -o .`.split("\n")
-
-	if $?.exitstatus.zero? and ignored.size > 0
-	    $stderr.puts 'WARNING: Ignored files:'
-	    $stderr.puts ignored
-	end
-    else
-	$stderr.puts 'WARNING: Cannot get GIT listing, packaging all files' if packaging
-	p.package_files.include('./**/*')
-    end
-  else
-    p.package_files.include('./**/*')
-  end
+  add_git_files p
 
   #don't add IDE files
   p.package_files.exclude('./nbproject')
@@ -72,8 +77,8 @@ end
 Rake::Task[:package].rename(:"package-local")
 
 # restore the original :package task
-if Rake::Task.task_defined?(package_backup)
-    Rake::Task[package_backup].rename(:package)
+if Rake::Task.task_defined?(PACKAGE_BACKUP)
+    Rake::Task[PACKAGE_BACKUP].rename(:package)
 end
 
 # vim: ft=ruby
