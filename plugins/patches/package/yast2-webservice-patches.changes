@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Thu Oct 29 14:28:58 CET 2009 - schubi@suse.de
+
+- changed licence
+- version 0.0.5 
+
+-------------------------------------------------------------------
 Thu Oct  8 10:13:58 CEST 2009 - schubi@suse.de
 
 - Bugfixes in finding and installing a patch bnc #537660
