@@ -125,40 +125,6 @@ test -r $LIGHTTPD_CONFIG || { echo "$LIGHTTPD_CONFIG not existing";
 	if [ "$1" = "stop" ]; then exit 0;
 	else exit 6; fi; }
 
-#
-# Activate/Deactivate AVAHI
-#
-DOMAIN="$(domainname)"
-if [ "$DOMAIN" = "" ]; then
-   HOSTNAME="$(hostname)"
-else
-   HOSTNAME="$(hostname).$DOMAIN"
-fi
-
-function avahi_stop () {
-   RUNNING=$(ps ux | grep avahi-publish-service | grep yastws | grep $HOSTNAME >/dev/null)
-   if [ $? = 0 ]; then
-      kill $(ps ux | grep avahi-publish-service | grep yastws | grep $HOSTNAME | awk '" " { print $2 }') >/dev/null
-   fi
-}
-function avahi_announce () {
-   PORT="$(netstat -npl|grep yastws| grep tcp| awk '{print $4}'| awk -F : '{print $NF}')"
-   HTTPS="$(grep -v '#' /etc/yastws/lighttpd.conf|grep ssl.engine|grep enable )"
-   PROTOCOL="https"
-   if [ "$HTTPS" = "" ]; then
-      PROTOCOL="http"
-   fi
-   RUNNING=$(netstat -ap|grep yastws|grep localhost >/dev/null)
-   if [ $? = 1 ]; then
-      if [ -x /usr/bin/avahi-publish-service ]; then
-	 if [ -f /var/run/avahi-daemon/pid ]; then
-            avahi-publish-service "YaST Webservice $PROTOCOL://$HOSTNAME:$PORT" _yastws._tcp $PORT >/dev/null 2>/dev/null & 
-         fi
-      fi
-   fi
-}
-
-
 PID_FILE=/var/run/yastws.pid
 IGNORE_FILE=/var/run/yastwc.pid
 
@@ -210,9 +176,6 @@ case "$1" in
 
 	# Remember status and be verbose
 	rc_status -v
-
-        # Make it public if it is needed (AVAHI)
-        avahi_announce
 	;;
     stop)
 	echo -n "Shutting down yastws "
@@ -222,9 +185,6 @@ case "$1" in
 
 	# Remember status and be verbose
 	rc_status -v
-
-        #Stopping AVAHI
-        avahi_stop
 	;;
     try-restart|condrestart)
 	## Do a restart only if the service was active before.
