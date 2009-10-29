@@ -12,7 +12,7 @@
 Name:           yast2-webservice-security
 PreReq:         yast2-webservice
 Provides:       yast2-webservice:/srv/www/yastws/app/controllers/security_controller.rb
-License:        MIT
+License:	GPLv2
 Group:          Productivity/Networking/Web/Utilities
 Autoreqprov:    on
 Version:        0.0.2
@@ -81,4 +81,4 @@ rm -rf $RPM_BUILD_ROOT
 %config /srv/www/%{pkg_user}/vendor/plugins/%{plugin_name}/tasks
 #%config /srv/www/%{pkg_user}/vendor/plugins/%{plugin_name}/test
 %attr(644,root,root) %config /usr/share/PolicyKit/policy/org.opensuse.yast.system.%{plugin_name}.policy
-
+%doc COPYING

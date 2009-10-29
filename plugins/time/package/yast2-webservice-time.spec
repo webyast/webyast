@@ -12,7 +12,7 @@
 Name:           yast2-webservice-time
 PreReq:         yast2-webservice
 Provides:       yast2-webservice:/srv/www/yastws/app/controllers/systemtime_controller.rb
-License:        MIT
+License:	GPLv2
 Group:          Productivity/Networking/Web/Utilities
 Autoreqprov:    on
 Version:        0.0.6
@@ -90,3 +90,5 @@ rm -rf $RPM_BUILD_ROOT
 /srv/www/%{pkg_user}/vendor/plugins/%{plugin_name}/tasks
 #/srv/www/%{pkg_user}/vendor/plugins/%{plugin_name}/test
 /srv/www/%{pkg_user}/vendor/plugins/%{plugin_name}/doc/README_FOR_APP
+%doc COPYING
+

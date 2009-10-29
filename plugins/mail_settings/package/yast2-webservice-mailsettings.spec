@@ -12,7 +12,7 @@
 Name:           yast2-webservice-mailsettings
 PreReq:         yast2-webservice
 Provides:       yast2-webservice:/srv/www/yastws/app/controllers/mail_settings_controller.rb
-License:        MIT
+License:	GPLv2
 Group:          Productivity/Networking/Web/Utilities
 Autoreqprov:    on
 Version:        0.0.4
@@ -116,6 +116,6 @@ rm -rf $RPM_BUILD_ROOT
 %dir /usr/share/PolicyKit
 %dir /usr/share/PolicyKit/policy
 %attr(644,root,root) %config /usr/share/PolicyKit/policy/org.opensuse.yast.modules.yapi.%{plugin_name}.policy
-
+%doc COPYING
 
 %changelog

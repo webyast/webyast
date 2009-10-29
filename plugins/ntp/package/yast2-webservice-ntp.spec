@@ -15,7 +15,7 @@ PreReq:         yast2-webservice
 #for YaPI needs ntp
 Requires:	ntp
 Provides:       yast2-webservice:/srv/www/yastws/app/controllers/ntp_controller.rb
-License:        MIT
+License:	GPLv2
 Group:          Productivity/Networking/Web/Utilities
 Autoreqprov:    on
 Version:        0.0.1
@@ -93,3 +93,5 @@ rm -rf $RPM_BUILD_ROOT
 /srv/www/%{pkg_user}/vendor/plugins/%{plugin_name}/public
 /usr/share/YaST2/modules/YaPI/NTP.pm
 /usr/share/PolicyKit/policy/org.opensuse.yast.modules.yapi.ntp.policy
+%doc COPYING
+

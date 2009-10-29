@@ -15,7 +15,7 @@ PreReq:         yast2-webservice
 # but here we use a recent feature of DBus::Main.quit
 Requires:       ruby-dbus >= 0.2.9
 Provides:       yast2-webservice:/srv/www/yastws/app/controllers/patch_updates_controller.rb
-License:        MIT
+License:	GPLv2
 Group:          Productivity/Networking/Web/Utilities
 Autoreqprov:    on
 Version:        0.0.4
@@ -85,5 +85,6 @@ rm -rf $RPM_BUILD_ROOT
 /srv/www/%{pkg_user}/vendor/plugins/%{plugin_name}/tasks
 %attr(644,root,root) %config /usr/share/PolicyKit/policy/org.opensuse.yast.system.%{plugin_name}.policy
 %attr(644,root,root) %config /usr/share/PolicyKit/policy/org.opensuse.yast.system.packages.policy
+%doc COPYING
 
 %changelog

@@ -12,7 +12,7 @@
 Name:           yast2-webservice-language
 PreReq:         yast2-webservice
 Provides:       yast2-webservice:/srv/www/yastws/app/controllers/language_controller.rb
-License:        MIT
+License:	GPLv2
 Group:          Productivity/Networking/Web/Utilities
 Autoreqprov:    on
 Version:        0.0.6
@@ -94,4 +94,6 @@ rm -rf $RPM_BUILD_ROOT
 /srv/www/%{pkg_user}/vendor/plugins/%{plugin_name}/public
 #/srv/www/%{pkg_user}/vendor/plugins/%{plugin_name}/test
 /srv/www/yastws/vendor/plugins/language/doc/README_FOR_APP
+%doc COPYING
+
 

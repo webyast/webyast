@@ -10,7 +10,7 @@
 
 
 Name:           yast2-webservice-status
-License:        MIT
+License:	GPLv2
 Group:          Productivity/Networking/Web/Utilities
 Autoreqprov:    on
 Version:        0.0.4
@@ -84,5 +84,6 @@ rccollectd start
 %dir /usr/share/PolicyKit/policy
 /srv/www/%{pkg_user}/vendor/plugins/%{plugin_name}/*
 %attr(644,root,root) %config /usr/share/PolicyKit/policy/org.opensuse.yast.system.%{plugin_name}.policy
+%doc COPYING
 
 %changelog

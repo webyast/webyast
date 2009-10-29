@@ -27,7 +27,7 @@ Conflicts:      gamin
 PreReq:         lighttpd, PolicyKit, PackageKit, rubygem-rake, rubygem-sqlite3
 PreReq:         rubygem-rails-2_3 = 2.3.4
 PreReq:         ruby-rpam, ruby-polkit, rubygem-test-unit
-License:        MIT
+License:	LGPLv2.1
 Group:          Productivity/Networking/Web/Utilities
 Autoreqprov:    on
 Version:        0.0.11
@@ -241,6 +241,7 @@ echo "Database is ready"
 %config(noreplace) /etc/yast_user_roles
 %config(noreplace)  %{_sysconfdir}/init.d/%{pkg_user}
 %{_sbindir}/rc%{pkg_user}
+%doc COPYING
 
 #---------------------------------------------------------------
 %changelog

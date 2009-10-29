@@ -14,7 +14,7 @@ PreReq:         yast2-webservice
 # requires HAL for reboot/shutdown actions
 Requires:	hal
 Provides:       yast2-webservice:/srv/www/yastws/app/controllers/system_controller.rb
-License:        MIT
+License:	GPLv2
 Group:          Productivity/Networking/Web/Utilities
 Autoreqprov:    on
 Version:        0.0.5
@@ -101,5 +101,6 @@ fi
 /srv/www/%{pkg_user}/vendor/plugins/%{plugin_name}/app
 /srv/www/%{pkg_user}/vendor/plugins/%{plugin_name}/config
 /srv/www/%{pkg_user}/vendor/plugins/%{plugin_name}/public
+%doc COPYING
 
 %changelog

@@ -10,7 +10,7 @@
 
 
 Name:           yast2-webservice-network
-License:        MIT
+License:	GPLv2
 Group:          Productivity/Networking/Web/Utilities
 Autoreqprov:    on
 Version:        0.0.7
@@ -86,4 +86,4 @@ rm -rf $RPM_BUILD_ROOT
 %dir /usr/share/PolicyKit
 %dir /usr/share/PolicyKit/policy
 %attr(644,root,root) %config /usr/share/PolicyKit/policy/org.opensuse.yast.modules.yapi.%{plugin_name}.policy
-
+%doc COPYING

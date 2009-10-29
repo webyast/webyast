@@ -12,7 +12,7 @@
 Name:           yast2-webservice-eulas
 PreReq:         yast2-webservice
 Provides:       yast2-webservice:/srv/www/yastws/app/controllers/eulas_controller.rb
-License:        MIT
+License:	GPLv2
 Group:          Productivity/Networking/Web/Utilities
 Autoreqprov:    on
 Version:        0.0.2
@@ -91,4 +91,5 @@ rm -rf $RPM_BUILD_ROOT
 %config /etc/webyast/eulas.yml
 %defattr(-,%{pkg_user},%{pkg_user})
 %dir /var/lib/%{pkg_user}/%{plugin_name}/accepted-licenses
+%doc COPYING
 
