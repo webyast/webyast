@@ -13,7 +13,7 @@ Name:           yast2-webservice-network
 License:	GPLv2
 Group:          Productivity/Networking/Web/Utilities
 Autoreqprov:    on
-Version:        0.0.8
+Version:        0.0.9
 Release:        0
 Summary:        YaST2 - Webservice - Network
 Source:         www.tar.bz2
@@ -50,6 +50,9 @@ Authors:
 export RAILS_PARENT=/srv/www/yastws
 env LANG=en rake restdoc
 
+# do not package restdoc sources
+rm -rf restdoc
+
 %install
 
 #
@@ -62,9 +65,6 @@ rm -f $RPM_BUILD_ROOT/srv/www/%{pkg_user}/vendor/plugins/%{plugin_name}/COPYING
 # Policies
 mkdir -p $RPM_BUILD_ROOT/usr/share/PolicyKit/policy
 install -m 0644 %SOURCE1 $RPM_BUILD_ROOT/usr/share/PolicyKit/policy/
-
-# do not package restdoc sources
-rm -rf $RPM_BUILD_ROOT/srv/www/%{pkg_user}/vendor/plugins/%{plugin_name}/restdoc
 
 %clean
 rm -rf $RPM_BUILD_ROOT

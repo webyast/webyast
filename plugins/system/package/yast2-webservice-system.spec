@@ -17,7 +17,7 @@ Provides:       yast2-webservice:/srv/www/yastws/app/controllers/system_controll
 License:	GPLv2
 Group:          Productivity/Networking/Web/Utilities
 Autoreqprov:    on
-Version:        0.0.6
+Version:        0.0.7
 Release:        0
 Summary:        YaST2 - Webservice - System
 Source:         www.tar.bz2
@@ -44,20 +44,21 @@ Authors:
 
 %build
 # build restdoc documentation
-mkdir -p $RPM_BUILD_ROOT/srv/www/%{pkg_user}/vendor/plugins/%{plugin_name}/public/system/restdoc
+mkdir -p public/system/restdoc
 export RAILS_PARENT=/srv/www/yastws
 env LANG=en rake restdoc
+
+# do not package restdoc sources
+rm -rf restdoc
 
 %install
 
 #
 # Install all web and frontend parts.
 #
+mkdir -p $RPM_BUILD_ROOT/srv/www/%{pkg_user}/vendor/plugins/%{plugin_name}
 cp -a * $RPM_BUILD_ROOT/srv/www/%{pkg_user}/vendor/plugins/%{plugin_name}
 rm -f $RPM_BUILD_ROOT/srv/www/%{pkg_user}/vendor/plugins/%{plugin_name}/COPYING
-
-# do not package restdoc sources
-rm -rf $RPM_BUILD_ROOT/srv/www/%{pkg_user}/vendor/plugins/%{plugin_name}/restdoc
 
 
 %clean

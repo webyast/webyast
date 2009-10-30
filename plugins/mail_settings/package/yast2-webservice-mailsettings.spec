@@ -15,7 +15,7 @@ Provides:       yast2-webservice:/srv/www/yastws/app/controllers/mail_settings_c
 License:	GPLv2
 Group:          Productivity/Networking/Web/Utilities
 Autoreqprov:    on
-Version:        0.0.5
+Version:        0.0.6
 Release:        0
 Summary:        YaST2 - Webservice - Mail Settings
 Source:         www.tar.bz2
@@ -61,15 +61,19 @@ Authors:
 
 %build
 # build restdoc documentation
-mkdir -p $RPM_BUILD_ROOT/srv/www/%{pkg_user}/vendor/plugins/%{plugin_name}/public/mail_settings/restdoc
+mkdir -p public/mail_settings/restdoc
 export RAILS_PARENT=/srv/www/yastws
 env LANG=en rake restdoc
+
+# do not package restdoc sources
+rm -rf restdoc
 
 %install
 
 #
 # Install all web and frontend parts.
 #
+mkdir -p $RPM_BUILD_ROOT/srv/www/%{pkg_user}/vendor/plugins/%{plugin_name}
 cp -a * $RPM_BUILD_ROOT/srv/www/%{pkg_user}/vendor/plugins/%{plugin_name}
 rm -f $RPM_BUILD_ROOT/srv/www/%{pkg_user}/vendor/plugins/%{plugin_name}/COPYING
 
@@ -80,9 +84,6 @@ install -m 0644 %SOURCE2 $RPM_BUILD_ROOT/usr/share/PolicyKit/policy/
 #YaPI
 mkdir -p $RPM_BUILD_ROOT/usr/share/YaST2/modules/YaPI/
 cp %{SOURCE1} $RPM_BUILD_ROOT/usr/share/YaST2/modules/YaPI/
-
-# do not package restdoc sources
-rm -rf $RPM_BUILD_ROOT/srv/www/%{pkg_user}/vendor/plugins/%{plugin_name}/restdoc
 
 %clean
 rm -rf $RPM_BUILD_ROOT

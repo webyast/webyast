@@ -15,7 +15,7 @@ Provides:       yast2-webservice:/srv/www/yastws/app/controllers/language_contro
 License:	GPLv2
 Group:          Productivity/Networking/Web/Utilities
 Autoreqprov:    on
-Version:        0.0.7
+Version:        0.0.8
 Release:        0
 Summary:        YaST2 - Webservice - Language
 Source:         www.tar.bz2
@@ -51,9 +51,12 @@ Authors:
 
 %build
 # build restdoc documentation
-mkdir -p $RPM_BUILD_ROOT/srv/www/%{pkg_user}/vendor/plugins/%{plugin_name}/public/%{plugin_name}/restdoc
+mkdir -p public/language/restdoc
 export RAILS_PARENT=/srv/www/yastws
 env LANG=en rake restdoc
+
+# do not package restdoc sources
+rm -rf restdoc
 
 %install
 
@@ -63,9 +66,6 @@ env LANG=en rake restdoc
 mkdir -p $RPM_BUILD_ROOT/srv/www/%{pkg_user}/vendor/plugins/%{plugin_name}
 cp -a * $RPM_BUILD_ROOT/srv/www/%{pkg_user}/vendor/plugins/%{plugin_name}
 rm -f $RPM_BUILD_ROOT/srv/www/%{pkg_user}/vendor/plugins/%{plugin_name}/COPYING
-
-# do not package restdoc sources
-rm -rf $RPM_BUILD_ROOT/srv/www/%{pkg_user}/vendor/plugins/%{plugin_name}/restdoc
 
 %clean
 rm -rf $RPM_BUILD_ROOT

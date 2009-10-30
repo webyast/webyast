@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Fri Oct 30 08:04:05 CET 2009 - lslezak@suse.cz
+
+- fixed restdoc packaging
+- 0.0.6
+
+-------------------------------------------------------------------
 Thu Oct 29 14:50:57 CET 2009 - jsuchome@suse.cz
 
 - licence changed to GPL2

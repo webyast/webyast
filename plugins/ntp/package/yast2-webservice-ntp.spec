@@ -18,7 +18,7 @@ Provides:       yast2-webservice:/srv/www/yastws/app/controllers/ntp_controller.
 License:	GPLv2
 Group:          Productivity/Networking/Web/Utilities
 Autoreqprov:    on
-Version:        0.0.2
+Version:        0.0.3
 Release:        0
 Summary:        YaST2 - Webservice - NTP
 Source:         www.tar.bz2
@@ -46,9 +46,12 @@ Authors:
 
 %build
 # build restdoc documentation
-mkdir -p $RPM_BUILD_ROOT/srv/www/%{pkg_user}/vendor/plugins/%{plugin_name}/public/ntp/restdoc
+mkdir -p public/ntp/restdoc
 export RAILS_PARENT=/srv/www/yastws
 env LANG=en rake restdoc
+
+# do not package restdoc sources
+rm -rf restdoc
 
 %install
 
@@ -62,9 +65,6 @@ mkdir -p $RPM_BUILD_ROOT/usr/share/YaST2/modules/YaPI/
 cp %{SOURCE1} $RPM_BUILD_ROOT/usr/share/YaST2/modules/YaPI/
 mkdir -p $RPM_BUILD_ROOT/usr/share/PolicyKit/policy/
 cp %{SOURCE2} $RPM_BUILD_ROOT/usr/share/PolicyKit/policy/
-
-# do not package restdoc sources
-rm -rf $RPM_BUILD_ROOT/srv/www/%{pkg_user}/vendor/plugins/%{plugin_name}/restdoc
 
 %clean
 rm -rf $RPM_BUILD_ROOT
