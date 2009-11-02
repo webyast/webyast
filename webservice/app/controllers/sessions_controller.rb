@@ -46,6 +46,7 @@ class SessionsController < ApplicationController
       @cmd_ret["login"] = "granted"
       @cmd_ret["auth_token"] = { :value => self.current_account.remember_token , :expires => self.current_account.remember_token_expires_at }
     else
+      logger.warn "Login failed from ip #{request.remote_ip} with user #{params[:login] ||""}"
       @cmd_ret["login"] = "denied"
       BruteForceProtection.instance.fail_attempt
     end
