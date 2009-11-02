@@ -34,7 +34,10 @@ class SessionsController < ApplicationController
        self.current_account = Account.authenticate(params[:login], params[:password])
     end
     @cmd_ret = Hash.new
-    if logged_in?
+    if BruteForceProtection.instance.blocked?
+      @cmd_ret["login"] = "blocked"
+      @cmd_ret["remain"] = BruteForceProtection.instance.last_fail + BruteForceProtection::BAN_TIMEOUT
+    elsif logged_in?
       if params[:remember_me]
         current_account.remember_me unless current_account.remember_token?
         cookies[:auth_token] = { :value => self.current_account.remember_token , :expires => self.current_account.remember_token_expires_at }
@@ -44,6 +47,7 @@ class SessionsController < ApplicationController
       @cmd_ret["auth_token"] = { :value => self.current_account.remember_token , :expires => self.current_account.remember_token_expires_at }
     else
       @cmd_ret["login"] = "denied"
+      BruteForceProtection.instance.fail_attempt
     end
   end
 
