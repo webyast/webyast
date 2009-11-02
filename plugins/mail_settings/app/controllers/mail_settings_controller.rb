@@ -14,7 +14,7 @@ class MailSettingsController < ApplicationController
     @mail.read
 
     respond_to do |format|
-      format.xml  { render :xml => @mail.to_xml(:root => "mail_settings", :indent=>2), :location => "none" }
+      format.xml  { render :xml => @mail.to_xml(:root => "mail_settings", :dasherize => false, :indent=>2), :location => "none" }
       format.json { render :json => @mail.to_json, :location => "none" }
     end
   end
@@ -27,7 +27,11 @@ class MailSettingsController < ApplicationController
 	
     @mail = MailSettings.instance
     @mail.read
-    @mail.save(params["mail_settings"])
+    if params.has_key? "mail_settings"
+      @mail.save(params["mail_settings"])
+    else
+      logger.warn "mail_settings hash missing in request"
+    end
     show
   end
 
