@@ -1,4 +1,14 @@
 -------------------------------------------------------------------
+Mon Nov  2 16:52:08 CET 2009 - jreidinger@suse.cz
+
+- log all failed login (user and its ip) (bnc#550377)
+
+-------------------------------------------------------------------
+Mon Nov  2 16:12:32 CET 2009 - jreidinger@suse.cz
+
+- add brute force attack protection (bnc#550377)
+
+-------------------------------------------------------------------
 Thu Oct 29 12:37:42 CET 2009 - mvidner@suse.cz
 
 - Removed avahi (zeroconf) usage.
