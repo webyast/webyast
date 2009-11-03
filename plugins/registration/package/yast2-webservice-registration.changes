@@ -1,7 +1,7 @@
 -------------------------------------------------------------------
 Tue Nov  3 11:33:48 CET 2009 - schubi@suse.de
 
-- do NOT overwrite unrename_keys for HASH class in generally; (bnc#551284) 
+- do NOT overwrite unrename_keys for HASH class generally; (bnc#551284) 
 
 -------------------------------------------------------------------
 Thu Oct 29 12:31:46 CET 2009 - jdsn@suse.de
