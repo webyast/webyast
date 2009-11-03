@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Tue Nov  3 17:48:28 CET 2009 - jreidinger@suse.cz
+
+- report uncaught YaST::ConfigFile::NotFoundError as 
+  BackendException (bnc#548721)
+
+-------------------------------------------------------------------
 Tue Nov  3 16:42:39 CET 2009 - schubi@suse.de
 
 - Code cleanup system_check; Code cleanup of plugin tests (bnc#542658)" 
