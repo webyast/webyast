@@ -10,12 +10,18 @@ class ApplicationController < ActionController::Base
       render :text => "#{exception.message}\n Backtrace:\n #{exception.backtrace.join("\n")}", :status => 500
   end
 
-  rescue_from BackendException do |exception|
-      render :xml => exception, :status => 503
-  end
+  rescue_from BackendException, :with => :report_backend_exception
 
   rescue_from InvalidParameters do |exception|
       render :xml => exception, :status => 422 #422-resource invalid
+  end
+
+  rescue_from YaST::ConfigFile::NotFoundError do |exception|
+    #catch uncaught exception from reading yaml and report as
+    #Backend problem
+    logger.warn "Uncaught ConfigFile::NotFound exception. Reported as CorruptedFile"
+    report_backend_exception CorruptedFileException.new(exception.path)
+
   end
 
 
@@ -33,4 +39,9 @@ class ApplicationController < ActionController::Base
   # Uncomment this to filter the contents of submitted sensitive data parameters
   # from your application log (in this case, all fields with names like "password").
   filter_parameter_logging :password
+
+  private
+  def report_backend_exception(exception) 
+      render :xml => exception, :status => 503
+  end
 end
