@@ -10,7 +10,7 @@
 
 
 Name:           yast2-webservice-network
-License:	GPLv2
+License:	GPL v2 only
 Group:          Productivity/Networking/Web/Utilities
 Autoreqprov:    on
 Version:        0.0.9

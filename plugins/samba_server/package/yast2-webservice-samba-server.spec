@@ -14,7 +14,7 @@
 Name:           yast2-webservice-samba-server
 PreReq:         yast2-webservice
 Provides:       yast2-webservice:/srv/www/%{pkg_user}/vendor/plugins/%{plugin_name}/app/controllers/sambashares_controller.rb
-License:        GPLv2
+License:	GPL v2 only
 Group:          Productivity/Networking/Web/Utilities
 Autoreqprov:    on
 Version:        0.0.3

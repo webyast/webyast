@@ -13,7 +13,7 @@
 Name:           ruby-polkit
 Version:        0.0.3
 Release:        0
-License:        GPLv2
+License:	GPL v2 only
 Group:          Development/Languages/Ruby
 BuildRoot:      %{_tmppath}/%{name}-%{version}-build
 BuildRequires:  gcc ruby-devel PolicyKit-devel dbus-1-devel

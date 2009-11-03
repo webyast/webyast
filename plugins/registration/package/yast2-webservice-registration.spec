@@ -11,7 +11,7 @@
 
 Name:           yast2-webservice-registration
 PreReq:         yast2-webservice
-License:        GPLv2
+License:	GPL v2 only
 Group:          Productivity/Networking/Web/Utilities
 Autoreqprov:    on
 Version:        0.0.4
