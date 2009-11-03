@@ -32,6 +32,11 @@ module YaST
     # Error raised when a configuration file
     # or resource is not found
     class NotFoundError < RuntimeError
+      attr_accessor :path
+
+      def initialize(path)
+        @path = path
+      end
     end
 
     # initializes a config file based on
@@ -109,7 +114,7 @@ module YaST
 
     # returns the file content
     def self.read_file(file_name)
-      raise NotFoundError if not File.exist?(file_name)
+      raise NotFoundError.new(file_name) if not File.exist?(file_name)
       File.open(file_name, 'r').read
     end
     
