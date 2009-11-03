@@ -1,4 +1,9 @@
 -------------------------------------------------------------------
+Tue Nov  3 16:42:39 CET 2009 - schubi@suse.de
+
+- Code cleanup system_check; Code cleanup of plugin tests (bnc#542658)" 
+
+-------------------------------------------------------------------
 Tue Nov  3 14:34:58 CET 2009 - jreidinger@suse.cz
 
 - block only user which has too many attempts, so another user can 
