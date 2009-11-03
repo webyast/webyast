@@ -105,7 +105,7 @@ task :system_check do
     dest_policy = File.join('/usr/share/PolicyKit/policy', policy)
     if not File.exists?(dest_policy)
       escape "Policy '#{policy}' of plugin '#{plugin}' is not installed",
-             "Run \"rake install\" in plugin '#{plugin}'\n or run\nsudo cp #{fname} #{dest_policy}"
+             "Run \"sudo rake install_policies\" in plugin '#{plugin}'\n or run\nsudo cp #{fname} #{dest_policy}"
     end
   end
 
@@ -122,6 +122,11 @@ task :system_check do
     </match>
   </match>
   <match user="#{user}">
+    <match action="org.freedesktop.packagekit.package-install">
+      <return result="yes"/>
+    </match>
+  </match>
+  <match user="#{user}">
     <match action="org.freedesktop.policykit.read">
       <return result="yes"/>
     </match>
@@ -132,14 +137,14 @@ EOF
   webservice_permissions_ok = false
 
   # get all granted policies
-  granted = `polkit-auth --user #{user} --explicit`.split
+  granted = `polkit-auth --user #{user}`.split
 
   # check that the user running the web service has permissions to yast
   # scr and others. This can be achieved in 2 ways:
   # manually polkit-auth, or as pattern matching in /etc/PolicyKit/PolicyKit.conf
 
   scr_actions = `polkit-action`.split.reject { |item| not item.include?('org.opensuse.yast.scr.') }
-  webservice_actions = [ 'org.freedesktop.packagekit.system-update', 'org.freedesktop.packagekit.install',  'org.freedesktop.policykit.read', *scr_actions]
+  webservice_actions = [ 'org.freedesktop.packagekit.system-update', 'org.freedesktop.packagekit.package-install',  'org.freedesktop.policykit.read', *scr_actions]
 
   hint_message = "Use utility script policyKit-rights.rb to grant them all. See http://en.opensuse.org/YaST/Web/Development\nAlternatively, you can add the following to /etc/PolicyKit/PolicyKit.conf config tag section:\n#{policykit_conf}\n"
 
@@ -219,12 +224,15 @@ EOF
   test_version "yast2", (os_version == "11.2")?"2.18.24":"2.17.72"
 
   #
-  # plugin test. Each plugin will be tested for a "GET index" call. This call has to return "success"
+  # plugin test. Each plugin will be tested for a "GET show" call OR a "GET index" call. This call should return success.
+  # If not an warning will be reported only.
   #
 
   test "all available plugins are working" do
      # Disabled, "Dir.glob" is *waaay* too slow
-     Dir.glob(File.join(File.dirname(__FILE__), '../../../plugins', "**/*_controller.rb")).each do |controller|
+
+     Dir.glob(File.join(File.dirname(__FILE__), '../../../plugins', "*","app/controllers","*_controller.rb")).each do |controller|
+       # go over all plugin controllers and call "GET show" or "GET index" (if show does not work)
        modulename = File.basename(controller, ".rb").split("_").collect { |i| i.capitalize }.join
        modulepath = File.dirname(controller).split("/")
        # add Namespaces to the modulename. 
@@ -237,13 +245,18 @@ EOF
            modulename = namespace.capitalize + "::" + modulename
          end
        end
-       ok = system %(cd #{File.dirname(__FILE__)}; export RAILS_PARENT=../../; ruby plugin_test/functional/plugin_index_test.rb --plugin #{modulename} > /dev/null)
+       puts "Checking plugin #{modulename} via HTTP GET requests..."
+       ok = system %(cd #{File.dirname(__FILE__)}; export RAILS_PARENT=../../; ruby plugin_test/functional/plugin_show_test.rb --plugin #{modulename} > /dev/null)
        if !ok
-          # puts "Trying \"GET show\" cause some plugins do not support \"GET index\"..."
-          ok = system %(cd #{File.dirname(__FILE__)}; export RAILS_PARENT=../../; ruby plugin_test/functional/plugin_show_test.rb --plugin #{modulename} > /dev/null)
+#          puts "Trying \"GET index\" cause some plugins do not support \"GET show\"..."
+          ok = system %(cd #{File.dirname(__FILE__)}; export RAILS_PARENT=../../; ruby plugin_test/functional/plugin_index_test.rb --plugin #{modulename} > /dev/null)
        end
-       escape "plugin #{modulename} does not work correctly", "try 'export RAILS_PARENT=.; ruby plugin_test/functional/plugin_index_test.rb --plugin #{modulename}' and check the result" unless ok
-     end if false
+       unless ok
+         warn "plugin #{modulename} does not work correctly.", "Have a look to log/test.log for additional information" 
+       else
+         puts "plugin #{modulename} works correctly."
+       end
+     end 
   end
   
   if Error.errors == 0

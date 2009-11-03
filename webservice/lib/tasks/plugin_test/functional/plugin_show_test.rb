@@ -1,37 +1,11 @@
-require 'fileutils'
-require 'getoptlong'
-
-options = GetoptLong.new(
-  [ "--plugin",   GetoptLong::REQUIRED_ARGUMENT ]
-)
-
-$pluginname = nil
-
-begin
-options.each do |opt, arg|
-  case opt
-    when "--plugin": $pluginname = arg
-    else
-	STDERR.puts "Ignoring unrecognized option #{opt}"
-  end
-end
-rescue
-end
-
+# 
+# This "GET show" request will be called for each plugin.
+# The loop over all available plugins is defined in checks.rake
+#
 
 require File.expand_path(File.dirname(__FILE__) + "/../test_helper")
-require 'test/unit'
-require "scr"
 
-class Module
-  def recursive_const_get(name)
-    name.to_s.split("::").inject(self) do |b, c|
-      b.const_get(c)
-    end
-  end
-end
-
-class PluginIndexTest < ActionController::TestCase
+class PluginShowTest < ActionController::TestCase
   fixtures :accounts
   def setup
     puts "Checking #{$pluginname}"
@@ -42,8 +16,8 @@ class PluginIndexTest < ActionController::TestCase
   end
   
   test "access show" do
-#    get :show
-#    assert_response :success
+    get :show
+    assert_response :success
   end
 
 end
