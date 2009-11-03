@@ -4,28 +4,26 @@
 # the caller must interpret the result and maybe call it again with 
 # changed values.
 
-
 # Hash.from_xml converts dashes in keys to underscores
 #  by this we can not find out the correct key name (whether it was a dash or an underscore)
 #  unfortunately the regcode keys in registration make excessive use of dashes AND underscores
 #  that way the information gets lost what key to assign the correct value.
 #  So the function "unrename_keys" will be overwritten
-module RailsHashFromWithoutConversationKey
-   Hash.class_eval do
-     def self.unrename_keys(params)
-       case params.class.to_s
-         when "Hash"
-           params.inject({}) do |h,(k,v)|
-             h[k.to_s] = unrename_keys(v)
-             h
-           end
-         when "Array"
-           params.map { |v| unrename_keys(v) }
-         else
-           params
+class HashWithoutKeyConversion < Hash; end
+HashWithoutKeyConversion.class_eval do
+   def self.unrename_keys(params)
+      case params.class.to_s
+        when "Hash"
+          params.inject({}) do |h,(k,v)|
+            h[k.to_s] = unrename_keys(v)
+            h
+          end
+        when "Array"
+          params.map { |v| unrename_keys(v) }
+        else
+          params
          end
-     end
-   end
+  end
 end
 
 class Register
@@ -90,8 +88,7 @@ class Register
     @reg = YastService.Call("YSR::statelessregister", ctx, args )
 
     Rails.logger.debug "registration server returns: #{@reg.inspect}"
-
-    @arguments = Hash.from_xml(@reg['missingarguments']) if @reg && @reg.has_key?('missingarguments')
+    @arguments = HashWithoutKeyConversion.from_xml(@reg['missingarguments']) if @reg && @reg.has_key?('missingarguments')
     @arguments = @arguments["missingarguments"] if @arguments && @arguments.has_key?('missingarguments')
 
     @reg['exitcode'].to_i rescue 99
