@@ -21,43 +21,53 @@ class BruteForceProtection
   #Specifies how long is login blocked
   BAN_TIMEOUT=10*60 #10 minutes
 
-  attr_reader :last_fail
-
   #Sets initial values
   def initialize
-    @blocked = false
-    @last_fail = Time.new
-    @count_failed = 0
+    @blocking_list = {}
   end
 
   #Returns if login is blocked
-  def blocked?
-    unless @blocked
-      return false
-    end
-
+  def blocked?(user)
     clean_old_block
 
-    return @blocked
+    return (@blocking_list[user] && @blocking_list[user][:blocked])
+  end
+
+  def last_failed(user)
+    return 0 unless @blocking_list[user]
+    return @blocking_list[user][:last_fail]
   end
 
   # notification that user fail to login
-  def fail_attempt
+  def fail_attempt (user)
     clean_old_block #clean old fail attempts
-    @last_fail = Time.new
-    @count_failed += 1
-    sleep TIMEOUT_ON_FAIL
-    @blocked = @count_failed >= ATTEMPTS_TO_BLOCK
+    if @blocking_list[user]
+      record = @blocking_list[user]
+      record[:last_fail] = Time.now
+      record[:count] += 1
+      record[:blocked] = record[:count] >= ATTEMPTS_TO_BLOCK
+    else
+      @blocking_list[user] = {
+        :last_fail => Time.now,
+        :count => 1,
+        :blocked => ATTEMPTS_TO_BLOCK == 1
+      }
+    end
+    
+    sleep TIMEOUT_ON_FAIL #FIXME maybe unix_chkpwd is slow enought to disable sleep
   end
 
   private
 
   #Cleans failed attempts if specified time pass
   def clean_old_block
-    if (Time.new - @last_fail) > BAN_TIMEOUT
-      @blocked = false
-      @count_failed=0
-    end
+    @blocking_list.each_value {
+      |value|
+      if (Time.now - value[:last_fail]) > BAN_TIMEOUT
+        value[:blocked] = false
+        value[:count] = 0
+      end
+    }
   end
 
 end

@@ -34,9 +34,9 @@ class SessionsController < ApplicationController
        self.current_account = Account.authenticate(params[:login], params[:password])
     end
     @cmd_ret = Hash.new
-    if BruteForceProtection.instance.blocked?
+    if BruteForceProtection.instance.blocked? params[:login]
       @cmd_ret["login"] = "blocked"
-      @cmd_ret["remain"] = BruteForceProtection.instance.last_fail + BruteForceProtection::BAN_TIMEOUT
+      @cmd_ret["remain"] = BruteForceProtection.instance.last_fail(params[:login]) + BruteForceProtection::BAN_TIMEOUT
     elsif logged_in?
       if params[:remember_me]
         current_account.remember_me unless current_account.remember_token?
@@ -48,7 +48,7 @@ class SessionsController < ApplicationController
     else
       logger.warn "Login failed from ip #{request.remote_ip} with user #{params[:login] ||""}"
       @cmd_ret["login"] = "denied"
-      BruteForceProtection.instance.fail_attempt
+      BruteForceProtection.instance.fail_attempt params[:login]
     end
   end
 

@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Tue Nov  3 14:34:58 CET 2009 - jreidinger@suse.cz
+
+- block only user which has too many attempts, so another user can 
+  login (bnc#550377)
+
+-------------------------------------------------------------------
 Mon Nov  2 16:52:08 CET 2009 - jreidinger@suse.cz
 
 - log all failed login (user and its ip) (bnc#550377)
