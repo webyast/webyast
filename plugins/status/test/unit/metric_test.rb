@@ -33,6 +33,7 @@ class MetricTest < ActiveSupport::TestCase
     Metric.stubs(:this_hostname).returns('myhost.domain.de')
     Metric.stubs(:available_hosts).returns(['foo.com', 'myhost.domain.de'])
     Metric.stubs(:rrd_files).returns(['/var/lib/collectd/foo.com/cpu-0/cppudata-1.rrd', '/var/lib/collectd/myhost.domain.de/memory/memory-free.rrd', '/var/lib/collectd/myhost.domain.de/cpu-1/cpudata-1.rrd', '/var/lib/collectd/myhost.domain.de/cpu-1/cpudata-2.rrd', '/var/lib/collectd/myhost.domain.de/cpu-2/cpudata-1.rrd', '/var/lib/collectd/myhost.domain.de/interface/packets.rrd', '/var/lib/collectd/myhost.domain.de/interface/some-0.rrd'])
+    Metric.stubs(:collectd_runnning?).returns(true)
   end
 
   def teardown
@@ -130,13 +131,6 @@ class MetricTest < ActiveSupport::TestCase
     xtg = xml.target!
 #    puts "xml.target #{xtg.inspect}"    
     assert xml_cmp ptx, xtg
-  end
-  
-  def test_collectd_running
-    Scr.instance.stubs(:execute).with(['/usr/sbin/rccollectd', 'status']).returns({:exit => 0})
-    assert Metric.collectd_running?
-    Scr.instance.stubs(:execute).with(['/usr/sbin/rccollectd', 'status']).returns({:exit => 1})
-    assert !Metric.collectd_running?
   end
 
   def test_finders

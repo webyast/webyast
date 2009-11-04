@@ -5,7 +5,6 @@
 # @author Duncan Mac-Vicar P. <dmacvicar@suse.de>
 # @author Stefan Schubert <schubi@suse.de>
 #
-require 'scr'
 require 'yaml'
 
 #
@@ -100,8 +99,12 @@ class Metric
   
   # returns true if collectd daemon is running
   def self.collectd_running?
-    ret = Scr.instance.execute(["/usr/sbin/rccollectd", "status"])
-    ret[:exit].zero?
+    #cannot run directly rccollectd status as it cannot run under non-root,
+    # but because it is not fatal information and if someone hackly run process
+    # which itself identify as collectd, then he runs into problems, but no
+    # security problem occur
+    ret = `ps xaf | grep '/usr/sbin/collectd' | grep -vc 'grep'`
+    ret.to_i > 0
   end
 
   # available plugins

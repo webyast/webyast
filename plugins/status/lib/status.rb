@@ -3,7 +3,6 @@ require 'exceptions'
 # Wrapper over collectd
 #
 class Status
-  require 'scr'
   require 'yaml'
 
   attr_accessor :data,
@@ -46,7 +45,6 @@ class Status
   end
 
   def initialize()
-    @scr = Scr.instance
     @health_status = nil
     @data = Hash.new
     # force initialization of datapath
@@ -90,8 +88,10 @@ class Status
   end
 
   def check_collectd
-    ret = @scr.execute(["/usr/sbin/rccollectd", "status"])
-    return ret[:exit]==0
+  #FIXME duplicate code, already in app/model/metric
+  #SHARE IT!!!
+    ret = `ps xaf | grep '/usr/sbin/collectd' | grep -vc 'grep'`
+    ret.to_i > 0
   end
 
   # returns available metric types, which are the directories in the

@@ -6,8 +6,8 @@ require 'status'
 class StatusTest < ActiveSupport::TestCase
   def setup
     # http://railsforum.com/viewtopic.php?id=1719
-    Scr.instance.stubs(:execute).with(['/usr/sbin/rccollectd', 'status']).returns({:exit => 0})
     Status.any_instance.stubs(:datapath).returns("/var/lib/collectd/test")
+    Status.any_instance.stubs(:check_collectd).returns(true)
   end
 
   def test_set_datapath
