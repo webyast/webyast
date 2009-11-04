@@ -16,7 +16,8 @@ class ApplicationController < ActionController::Base
       render :xml => exception, :status => 422 #422-resource invalid
   end
 
-  rescue_from YaST::ConfigFile::NotFoundError do |exception|
+#lazy load of YaST::Config library
+  rescue_from "YaST::ConfigFile::NotFoundError" do |exception|
     #catch uncaught exception from reading yaml and report as
     #Backend problem
     logger.warn "Uncaught ConfigFile::NotFound exception. Reported as CorruptedFile"
