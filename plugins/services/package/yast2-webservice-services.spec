@@ -15,14 +15,18 @@ Provides:       yast2-webservice:/srv/www/yastws/app/controllers/services_contro
 License:	GPL v2 only
 Group:          Productivity/Networking/Web/Utilities
 Autoreqprov:    on
-Version:        0.0.10
+Version:        0.0.11
 Release:        0
 Summary:        YaST2 - Webservice - Services
 Source:         www.tar.bz2
 Source1:        org.opensuse.yast.modules.yapi.services.policy
+Source2:	YML.rb
 BuildRoot:      %{_tmppath}/%{name}-%{version}-build
 BuildArch:      noarch
 BuildRequires:  rubygem-yast2-webservice-tasks rubygem-restility
+
+# so SERVICES.pm is able to call YML.rb
+Requires:       yast2-ruby-bindings >= 0.3.4
 
 # YaPI/SERVICES.pm
 %if 0%{?suse_version} == 0 || %suse_version > 1110
@@ -74,6 +78,10 @@ rm -f $RPM_BUILD_ROOT/srv/www/%{pkg_user}/vendor/plugins/%{plugin_name}/COPYING
 mkdir -p $RPM_BUILD_ROOT/usr/share/PolicyKit/policy
 install -m 0644 %SOURCE1 $RPM_BUILD_ROOT/usr/share/PolicyKit/policy/
 
+# YML.rb
+mkdir -p $RPM_BUILD_ROOT/usr/share/YaST2/modules/
+cp %{SOURCE2} $RPM_BUILD_ROOT/usr/share/YaST2/modules/
+
 %clean
 rm -rf $RPM_BUILD_ROOT
 
@@ -91,6 +99,8 @@ rm -rf $RPM_BUILD_ROOT
 %dir /srv/www/%{pkg_user}/vendor/plugins
 %dir /srv/www/%{pkg_user}/vendor/plugins/%{plugin_name}
 %dir /srv/www/%{pkg_user}/vendor/plugins/%{plugin_name}/doc
+%dir /usr/share/YaST2/
+%dir /usr/share/YaST2/modules/
 %dir /usr/share/PolicyKit
 %dir /usr/share/PolicyKit/policy
 /srv/www/%{pkg_user}/vendor/plugins/%{plugin_name}/README
@@ -103,6 +113,7 @@ rm -rf $RPM_BUILD_ROOT
 /srv/www/%{pkg_user}/vendor/plugins/%{plugin_name}/tasks
 /srv/www/%{pkg_user}/vendor/plugins/%{plugin_name}/doc
 /srv/www/%{pkg_user}/vendor/plugins/%{plugin_name}/public
+/usr/share/YaST2/modules/YML.rb
 
 %attr(644,root,root) %config /usr/share/PolicyKit/policy/org.opensuse.yast.modules.yapi.%{plugin_name}.policy
 %doc COPYING

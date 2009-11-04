@@ -1,4 +1,12 @@
 -------------------------------------------------------------------
+Wed Nov  4 14:03:24 CET 2009 - jsuchome@suse.cz
+
+- adapted to changes in SERVICES.pm: new API for Execute,
+  use YaPI for all services (bnc#551276)
+- include YML.rb for parsing yml files from YaST
+- 0.0.11
+
+-------------------------------------------------------------------
 Fri Oct 30 08:04:50 CET 2009 - lslezak@suse.cz
 
 - fixed restdoc packaging

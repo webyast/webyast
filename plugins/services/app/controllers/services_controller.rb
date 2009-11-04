@@ -25,7 +25,7 @@ class ServicesController < ApplicationController
     @service = Service.new(params[:id])
 
     begin
-	@service.read_status
+	@service.read_status(params)
     rescue Exception => e
 	render ErrorResult.error(404, 108, e.to_s) and return
     end
@@ -40,6 +40,7 @@ class ServicesController < ApplicationController
   # Execute service command (start or stop).
   # Requires execute permission for services YaPI.
   def update
+logger.debug "------------ update params: #{params.inspect}"
     yapi_perm_check "services.execute"
     begin
       @service = Service.find params[:id]
@@ -49,7 +50,7 @@ class ServicesController < ApplicationController
     end
 
     begin
-      ret	= @service.save(params[:execute])
+      ret	= @service.save(params)
     rescue Exception => e
       logger.debug e
       render ErrorResult.error(404, @error_id, @error_string) and return
