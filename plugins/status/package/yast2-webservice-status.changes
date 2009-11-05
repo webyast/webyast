@@ -3,7 +3,7 @@ Thu Nov  5 15:31:33 CET 2009 - schubi@suse.de
 
 - use backticks instead of IO.popen and set LC_ALL=C
    ',' -> '.' conversion then not needed
-- remove Scr.execute  for checking if collectd running bnc#548132
+- remove Scr.execute  for checking if collectd running (bnc#472752)
 - Clarify license
 - version 0.0.6
 
