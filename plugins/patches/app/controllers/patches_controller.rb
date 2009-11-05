@@ -6,7 +6,7 @@ class PatchesController < ApplicationController
 
    # always check permissions and cache expiration
    # even if the result is already created and cached
-   before_filter :check_read_permissions, :only => {:index, :show}
+   before_filter :check_read_permissions, :only => [:index, :show]
    before_filter :check_cache_status, :only => :index
 
    # cache 'index' method result
