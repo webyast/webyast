@@ -40,7 +40,6 @@ class ServicesController < ApplicationController
   # Execute service command (start or stop).
   # Requires execute permission for services YaPI.
   def update
-logger.debug "------------ update params: #{params.inspect}"
     yapi_perm_check "services.execute"
     begin
       @service = Service.find params[:id]
