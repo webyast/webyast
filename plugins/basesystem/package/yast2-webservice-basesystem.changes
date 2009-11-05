@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Thu Nov  5 11:19:06 CET 2009 - jreidinger@suse.cz
+
+- kkampf - clarify license
+- 0.0.8
+
+-------------------------------------------------------------------
 Thu Oct 29 08:37:16 CET 2009 - jreidinger@suse.cz
 
 - update default base system configuration to required one
