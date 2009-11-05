@@ -1,7 +1,6 @@
 steps:
   - controller: language
   - controller: eulas
-    action: next
   - controller: administrator
   - controller: network
   - controller: systemtime
