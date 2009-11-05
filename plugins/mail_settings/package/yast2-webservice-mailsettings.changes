@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Thu Nov  5 10:11:08 CET 2009 - jsuchome@suse.cz
+
+- kkaempf: GPLv2 only
+- 0.0.8 
+
+-------------------------------------------------------------------
 Fri Oct 30 15:15:30 CET 2009 - jsuchome@suse.cz
 
 - do not dasherize underscores (bnc#551284)
