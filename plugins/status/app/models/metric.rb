@@ -253,13 +253,8 @@ class Metric
     stop = opts.has_key?(:stop) ? opts[:stop] : Time.now
     start = opts.has_key?(:start) ? opts[:start] : stop - 300
     
-    cmdline = "rrdtool fetch #{file} AVERAGE --start #{start.to_i} --end #{stop.to_i}"
-    Rails.logger.debug "running #{cmdline}"
-    cmd = IO.popen(cmdline)
-    output = cmd.read
-    cmd.close
-
-    raise output if $?.exitstatus != 0
+    output = `/bin/sh -c "LC_ALL=C rrdtool fetch #{file} AVERAGE --start #{start.to_i} --end #{stop.to_i}"`
+    raise output unless $?.exitstatus.zero?
 
     output
   end
@@ -271,8 +266,6 @@ class Metric
 
     raise "Error running collectd rrdtool" if output =~ /ERROR/ or output.nil?
     
-    output = output.gsub(",", ".") # translates eg. 1,234e+07 to 1.234e+07
-
     line_count = 0
     result["starttime"] = 9.9e+99
 
