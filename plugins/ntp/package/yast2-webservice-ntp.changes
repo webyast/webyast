@@ -1,4 +1,11 @@
 -------------------------------------------------------------------
+Thu Nov  5 14:32:36 CET 2009 - jreidinger@suse.cz
+
+- mention in README where is stored predefined NTP servers
+- kkaempf - clarify license
+- 0.0.4
+
+-------------------------------------------------------------------
 Fri Oct 30 08:04:32 CET 2009 - lslezak@suse.cz
 
 - fixed restdoc packaging
