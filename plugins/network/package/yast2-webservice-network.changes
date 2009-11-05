@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Tue Nov  3 13:09:20 CET 2009 - kkaempf@suse.de
+
+- Clarified license (GPL v2 *only*)
+- 0.0.10
+
+-------------------------------------------------------------------
 Fri Oct 30 08:04:20 CET 2009 - lslezak@suse.cz
 
 - fixed restdoc packaging
