@@ -171,7 +171,7 @@ class Status
     # fetch last 5 minutes
     start = stop - 300 if start.nil?
 
-    cmd = IO.popen("LC_ALL=C rrdtool fetch #{file} AVERAGE --start #{start.strftime("%H:%M,%m/%d/%Y")} --end #{stop.strftime("%H:%M,%m/%d/%Y")}")
+    cmd = IO.popen("rrdtool fetch #{file} AVERAGE --start #{start.strftime("%H:%M,%m/%d/%Y")} --end #{stop.strftime("%H:%M,%m/%d/%Y")}")
     output = cmd.read
     cmd.close
     output
@@ -189,6 +189,7 @@ class Status
     raise "Error running collectd rrdtool" if output =~ /ERROR/ or output.nil?
 
     labels=""
+    output = output.gsub(",", ".") # translates eg. 1,234e+07 to 1.234e+07
     lines = output.split "\n"
 
     # set label names
