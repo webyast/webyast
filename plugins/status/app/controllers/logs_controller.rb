@@ -1,6 +1,5 @@
-require 'scr'
-#require 'vendor_setting'
 require 'yast/config_file'
+require 'yast_service'
 
 class LogsController < ApplicationController
   CONFIG_FILE=File.join(Paths::CONFIG,"vendor","logs.yml")
@@ -42,13 +41,15 @@ class LogsController < ApplicationController
       render :nothing => true, :status => 404 and return
     end
       
-    log_filename = @cfg[id]['path']
-
     # how many lines to show
     lines = params[:lines] ? params[:lines].to_i : 50
-    
-    output = Scr.instance.execute(['tail', '-n', "#{lines}", log_filename])
-    
+
+    # call YaST ruby module directly: FIXME does not work...
+#    output = YastService.Call("LogFile::Read", id, lines)
+
+    output = YastService.Call("YaPI::LOGFILE::Read", id, lines)
+    output.symbolize_keys!
+
     respond_to do |format|
       format.text { render :xml => output[:stdout] }
     end
