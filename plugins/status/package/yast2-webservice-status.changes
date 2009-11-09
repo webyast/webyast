@@ -1,4 +1,9 @@
 -------------------------------------------------------------------
+Mon Nov  9 17:58:15 CET 2009 - schubi@suse.de
+
+- fixed displaying limits (bnc#553723)
+
+-------------------------------------------------------------------
 Mon Nov  9 14:48:54 CET 2009 - jsuchome@suse.cz
 
 - get rid of Scr.execute: use ruby YaST module for reading the log
