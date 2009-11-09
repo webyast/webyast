@@ -160,16 +160,6 @@ rm -rf $RPM_BUILD_ROOT
 #
 /usr/bin/polkit-auth --user yastws --grant org.freedesktop.packagekit.system-update >& /dev/null || :
 /usr/bin/polkit-auth --user yastws --grant org.freedesktop.policykit.read >& /dev/null || :
-/usr/bin/polkit-auth --user yastws --grant org.opensuse.yast.scr.read >& /dev/null || :
-/usr/bin/polkit-auth --user yastws --grant org.opensuse.yast.scr.write >& /dev/null || :
-/usr/bin/polkit-auth --user yastws --grant org.opensuse.yast.scr.execute >& /dev/null || :
-/usr/bin/polkit-auth --user yastws --grant org.opensuse.yast.scr.dir >& /dev/null || :
-/usr/bin/polkit-auth --user yastws --grant org.opensuse.yast.scr.registeragent >& /dev/null || :
-/usr/bin/polkit-auth --user yastws --grant org.opensuse.yast.scr.unregisteragent >& /dev/null || :
-/usr/bin/polkit-auth --user yastws --grant org.opensuse.yast.scr.unmountagent >& /dev/null || :
-/usr/bin/polkit-auth --user yastws --grant org.opensuse.yast.scr.error >& /dev/null || :
-/usr/bin/polkit-auth --user yastws --grant org.opensuse.yast.scr.unregisterallagents >& /dev/null || :
-/usr/bin/polkit-auth --user yastws --grant org.opensuse.yast.scr.registernewagents >& /dev/null || :
 /usr/bin/polkit-auth --user yastws --grant org.opensuse.yast.module-manager.import >& /dev/null || :
 #
 # granting all permissions for root 
