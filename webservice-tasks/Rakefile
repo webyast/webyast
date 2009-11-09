@@ -63,6 +63,6 @@ end
 
 desc 'Run test suite'
 task :test do
-    sh 'no test yet'
+    puts 'no test yet'
 end
 # vim: ft=ruby
