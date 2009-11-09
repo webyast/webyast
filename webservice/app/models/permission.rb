@@ -77,7 +77,7 @@ private
   
   def check_username user
     unless user =~ USERNAME_REGEX
-      raise InvalidParameters :user_id => "INVALID" 
+      raise InvalidParameters.new(:user_id => "INVALID")
     end
   end
 
@@ -87,7 +87,7 @@ private
     Rails.logger.info ret
     if $?.exitstatus != 0 || ret.include?("cannot look up uid for user")
       Rails.logger.info "status: #{$?.exitstatus} unknown user:"+ret
-      raise InvalidParameters :user_id => "UNKNOW" 
+      raise InvalidParameters.new :user_id => "UNKNOWN" 
     end
     return ret || []
   end

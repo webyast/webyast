@@ -11,7 +11,6 @@
 
 Name:           yast2-webservice-time
 PreReq:         yast2-webservice
-Provides:       yast2-webservice:/srv/www/yastws/app/controllers/systemtime_controller.rb
 License:	GPL v2 only
 Group:          Productivity/Networking/Web/Utilities
 Autoreqprov:    on

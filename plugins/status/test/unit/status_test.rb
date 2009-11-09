@@ -1,5 +1,4 @@
 require File.expand_path(File.dirname(__FILE__) + "/../test_helper")
-require 'scr'
 require 'mocha'
 require 'status'
 
@@ -18,8 +17,6 @@ class StatusTest < ActiveSupport::TestCase
   end
 
   def test_set_datapath_default
-    Scr.instance.stubs(:execute).with(["/usr/sbin/collectd"]).returns(nil)
-
     IO.stubs(:popen).with("hostname").returns(String) #FIXME: replace String with IO
     IO.stubs(:popen).with("domainname").returns(String) # returns(IO.new(2, "r+")) dont work
     IO.stubs(:popen).with("ls /var/lib/collectd/").returns(String) # because of missing EOF token
@@ -33,7 +30,6 @@ class StatusTest < ActiveSupport::TestCase
   end
 
   def test_available_metrics
-    Scr.instance.stubs(:execute).with(["/usr/sbin/collectd"]).returns(nil)
     status = Status.new
 
     # simulate environment
@@ -52,7 +48,6 @@ class StatusTest < ActiveSupport::TestCase
   end
 
   def test_fetch_data
-    Scr.instance.stubs(:execute).with(["/usr/sbin/collectd"]).returns(nil)
     stop = Time.now
     start = Time.now - 300
 

@@ -1,7 +1,5 @@
 include ApplicationHelper
 
-require 'scr'
-
 class StatusController < ApplicationController
   before_filter :login_required
 

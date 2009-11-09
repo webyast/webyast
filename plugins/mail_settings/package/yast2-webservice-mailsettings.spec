@@ -11,7 +11,6 @@
 
 Name:           yast2-webservice-mailsettings
 PreReq:         yast2-webservice
-Provides:       yast2-webservice:/srv/www/yastws/app/controllers/mail_settings_controller.rb
 License:	GPL v2 only
 Group:          Productivity/Networking/Web/Utilities
 Autoreqprov:    on

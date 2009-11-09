@@ -13,7 +13,6 @@ Name:           yast2-webservice-system
 PreReq:         yast2-webservice
 # requires HAL for reboot/shutdown actions
 Requires:	hal
-Provides:       yast2-webservice:/srv/www/yastws/app/controllers/system_controller.rb
 License:	GPL v2 only
 Group:          Productivity/Networking/Web/Utilities
 Autoreqprov:    on

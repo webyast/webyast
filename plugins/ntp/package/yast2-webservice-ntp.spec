@@ -14,7 +14,6 @@ Name:           yast2-webservice-ntp
 PreReq:         yast2-webservice
 #for YaPI needs ntp
 Requires:	ntp
-Provides:       yast2-webservice:/srv/www/yastws/app/controllers/ntp_controller.rb
 License:	GPL v2 only
 Group:          Productivity/Networking/Web/Utilities
 Autoreqprov:    on
