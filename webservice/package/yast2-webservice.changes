@@ -1,4 +1,11 @@
 -------------------------------------------------------------------
+Thu Nov  5 16:34:56 CET 2009 - jreidinger@suse.cz
+
+- kkaempf - clarify license
+- schubi - code cleanup of login tests (bnc#542658)
+- 0.0.12
+
+-------------------------------------------------------------------
 Tue Nov  3 17:48:28 CET 2009 - jreidinger@suse.cz
 
 - report uncaught YaST::ConfigFile::NotFoundError as 

@@ -15,7 +15,7 @@ Provides:       yast2-webservice:/srv/www/yastws/app/controllers/services_contro
 License:	GPL v2 only
 Group:          Productivity/Networking/Web/Utilities
 Autoreqprov:    on
-Version:        0.0.11
+Version:        0.0.12
 Release:        0
 Summary:        YaST2 - Webservice - Services
 Source:         www.tar.bz2
@@ -26,7 +26,7 @@ BuildArch:      noarch
 BuildRequires:  rubygem-yast2-webservice-tasks rubygem-restility
 
 # so SERVICES.pm is able to call YML.rb
-Requires:       yast2-ruby-bindings >= 0.3.4
+Requires:       yast2-ruby-bindings >= 0.3.2.1
 
 # YaPI/SERVICES.pm
 %if 0%{?suse_version} == 0 || %suse_version > 1110
