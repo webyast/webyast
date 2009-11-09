@@ -61,4 +61,8 @@ task :install do
     sh 'gem install yast2-webservice-tasks'
 end
 
+desc 'Run test suite'
+task :test do
+    sh 'no test yet'
+end
 # vim: ft=ruby
