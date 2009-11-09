@@ -25,10 +25,16 @@ class Status
               xml.label(:type => "hash", :name => label) do
                 # limits
                 path = "#{metric_group}/#{metric}/#{label}"
-                if @limits and @limits.has_key? path
+                subpath = "#{metric_group}/#{metric}"
+                if @limits and (@limits.has_key?(path) || @limits.has_key?(subpath)) #could also be a subtree
                   xml.limits() do
-                    xml.min(@limits["#{path}"]["maximum"])
-                    xml.max(@limits["#{path}"]["minimum"])
+                    if @limits.has_key?(path)
+                      xml.max(@limits["#{path}"]["max"]) 
+                      xml.min(@limits["#{path}"]["min"])
+                    else
+                      xml.max(@limits["#{subpath}"]["max"]) 
+                      xml.min(@limits["#{subpath}"]["min"])
+                    end
                   end
                 end
                 # values
