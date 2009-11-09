@@ -18,10 +18,13 @@ Release:        0
 Summary:        YaST2 - Webservice - Status
 Source:         www.tar.bz2
 Source1:        org.opensuse.yast.system.status.policy
+Source2:	org.opensuse.yast.modules.logfile.policy
 BuildRoot:      %{_tmppath}/%{name}-%{version}-build
 BuildArch:      noarch
 PreReq:         yast2-webservice, collectd, %insserv_prereq
 Requires:       rrdtool
+# for calling ruby module via YastService:
+Requires:	yast2-ruby-bindings >= 0.3.2.1
 
 # This is for Hudson (build server) to prepare the build env correctly.
 %if 0
@@ -59,6 +62,7 @@ rm -f $RPM_BUILD_ROOT/srv/www/%{pkg_user}/vendor/plugins/%{plugin_name}/COPYING
 # Policies
 mkdir -p $RPM_BUILD_ROOT/usr/share/PolicyKit/policy
 install -m 0644 %SOURCE1 $RPM_BUILD_ROOT/usr/share/PolicyKit/policy/
+install -m 0644 %SOURCE2 $RPM_BUILD_ROOT/usr/share/PolicyKit/policy/
 
 %clean
 rm -rf $RPM_BUILD_ROOT
@@ -85,6 +89,7 @@ rccollectd start
 %dir /usr/share/PolicyKit/policy
 /srv/www/%{pkg_user}/vendor/plugins/%{plugin_name}/*
 %attr(644,root,root) %config /usr/share/PolicyKit/policy/org.opensuse.yast.system.%{plugin_name}.policy
+%attr(644,root,root) %config /usr/share/PolicyKit/policy/org.opensuse.yast.modules.logfile.policy
 %doc COPYING
 
 %changelog

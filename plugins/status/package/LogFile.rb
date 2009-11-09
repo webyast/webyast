@@ -1,5 +1,8 @@
 require 'yaml'
 
+# simple ruby module for reading last n lines from given file
+# files for reading are specified in the configuration file
+# /etc/webyast/vendor/logs.yml
 module LogFile
 
   def self.Read(id, lines)

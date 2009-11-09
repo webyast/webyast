@@ -46,7 +46,6 @@ class LogsController < ApplicationController
     # how many lines to show
     lines = params[:lines] ? params[:lines].to_i : 50
 
-    # call YaST ruby module directly: FIXME does not work...
     output = YastService.Call("LogFile::Read", ["s",id], ["s",lines.to_s])
     if output=="___WEBYAST___INVALID"
       logger.error "invalid id "+id #TODO some exception and better log it as it could be hack attempt

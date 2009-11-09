@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Mon Nov  9 14:48:54 CET 2009 - jsuchome@suse.cz
+
+- get rid of Scr.execute: use ruby YaST module for reading the log
+  file (bnc#552504)
+
+-------------------------------------------------------------------
 Thu Nov  5 15:31:33 CET 2009 - schubi@suse.de
 
 - use backticks instead of IO.popen and set LC_ALL=C
