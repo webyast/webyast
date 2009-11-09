@@ -19,6 +19,7 @@ Summary:        YaST2 - Webservice - Status
 Source:         www.tar.bz2
 Source1:        org.opensuse.yast.system.status.policy
 Source2:	org.opensuse.yast.modules.logfile.policy
+Source3:	LogFile.rb
 BuildRoot:      %{_tmppath}/%{name}-%{version}-build
 BuildArch:      noarch
 PreReq:         yast2-webservice, collectd, %insserv_prereq
@@ -64,6 +65,10 @@ mkdir -p $RPM_BUILD_ROOT/usr/share/PolicyKit/policy
 install -m 0644 %SOURCE1 $RPM_BUILD_ROOT/usr/share/PolicyKit/policy/
 install -m 0644 %SOURCE2 $RPM_BUILD_ROOT/usr/share/PolicyKit/policy/
 
+# LogFile.rb
+mkdir -p $RPM_BUILD_ROOT/usr/share/YaST2/modules/
+cp %{SOURCE3} $RPM_BUILD_ROOT/usr/share/YaST2/modules/
+
 %clean
 rm -rf $RPM_BUILD_ROOT
 
@@ -80,6 +85,9 @@ rccollectd start
 
 %files
 %defattr(-,root,root)
+%dir /usr/share/YaST2/
+%dir /usr/share/YaST2/modules/
+/usr/share/YaST2/modules/LogFile.rb
 %dir /srv/www/%{pkg_user}
 %dir /srv/www/%{pkg_user}/vendor
 %dir /srv/www/%{pkg_user}/vendor/plugins
