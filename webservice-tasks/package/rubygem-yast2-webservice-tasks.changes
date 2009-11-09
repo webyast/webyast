@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Mon Nov  9 16:31:50 UTC 2009 - jreidinger@novell.com
+
+- "osc_submit" task removed/added sources
+- 0.0.9
+
+-------------------------------------------------------------------
 Thu Oct 29 18:31:38 CET 2009 - lslezak@suse.cz
 
 - refactored 'rake package' task:

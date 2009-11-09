@@ -16,11 +16,12 @@ task :'osc_submit'  do
   begin
     `osc checkout 'YaST:Web' #{package_name}`
     #clean www dir and also clean before copy old entries in osc dir to test if package build after remove some file
-    `rm -rf package/www 'YaST:Web/#{package_name}/*'`  
+    `rm -rf 'YaST:Web/#{package_name}/*'`  
     `cp package/* 'YaST:Web/#{package_name}'`
     Dir.chdir File.join(Dir.pwd, "YaST:Web", package_name)
     puts "submiting package"
     # long running, `foo` would only show output at the end
+    system "osc addremove"
     system "osc commit -m 'new version'"
     if $?.exitstatus != 0
       raise "Failed to submit"
