@@ -24,6 +24,7 @@ class LogsController < ApplicationController
         end
       rescue YaST::ConfigFile::NotFoundError => error
         logger.error "config file #{CONFIG_FILE} not found"
+#FIXME report IT!!!
       end
     end
           
@@ -38,6 +39,7 @@ class LogsController < ApplicationController
     # as default
     id = params[:id]
     if !@cfg.has_key?(id) or ! @cfg[id].has_key?('path')
+      #FIXME better report problem, look eg on permission module how it should be implemented
       render :nothing => true, :status => 404 and return
     end
       
@@ -45,13 +47,14 @@ class LogsController < ApplicationController
     lines = params[:lines] ? params[:lines].to_i : 50
 
     # call YaST ruby module directly: FIXME does not work...
-#    output = YastService.Call("LogFile::Read", id, lines)
-
-    output = YastService.Call("YaPI::LOGFILE::Read", id, lines)
-    output.symbolize_keys!
-
+    output = YastService.Call("LogFile::Read", ["s",id], ["s",lines.to_s])
+    if output=="___WEBYAST___INVALID"
+      logger.error "invalid id "+id #TODO some exception and better log it as it could be hack attempt
+    end
+    logger.info output
     respond_to do |format|
-      format.text { render :xml => output[:stdout] }
+      format.xml { render :xml => "<log>#{output}</log>" }
+      format.json { render :json => { :log => output }.to_json }
     end
   end
 

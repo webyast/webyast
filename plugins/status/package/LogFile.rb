@@ -10,10 +10,15 @@ module LogFile
       parsed = {} unless parsed.is_a? Hash
     end
 
+    unless parsed.has_key? id
+      return "___WEBYAST___INVALID"
+    end
+    
     path	= parsed[id]["path"]
-
-    # FIXME this is wrong, system does not return stdout, but only boolean
-    ret		= Kernel.system("tail -n #{lines} #{path}")
+    lcount = lines.to_i rescue 0 #if someone pass type which doesn't have to_i
+    lcount = 1 if lcount==0
+#it is secure, because vendor specify path and lines is always number
+    ret		= `tail -n #{lcount} #{path}`
     return ret
   end
 end
