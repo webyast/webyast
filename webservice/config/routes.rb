@@ -2,7 +2,7 @@
 ActionController::Routing::Routes.draw do |map|
   map.resource :session
   map.resources :resources, :requirements => { :id => /[-\w]+/ }
-  map.resources :permissions, :requirements => {:id => /.*/}
+  map.resource :permissions
   map.resources :vendor_settings
   
   # login uses POST for both
