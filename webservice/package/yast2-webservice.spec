@@ -16,7 +16,7 @@ Name:           yast2-webservice
 Requires:       yast2-core >= 2.18.10
 %else
 # 11.1 or SLES11
-Requires:       yast2-core >= 2.17.31
+Requires:       yast2-core >= 2.17.30.1
 %endif
 
 Requires:	lighttpd-mod_magnet, ruby-fcgi, ruby-dbus, sqlite
@@ -30,7 +30,7 @@ PreReq:         ruby-rpam, ruby-polkit, rubygem-test-unit
 License:	LGPL v2.1 only
 Group:          Productivity/Networking/Web/Utilities
 Autoreqprov:    on
-Version:        0.0.12
+Version:        0.0.13
 Release:        0
 Summary:        YaST2 - Webservice 
 Source:         www.tar.bz2
