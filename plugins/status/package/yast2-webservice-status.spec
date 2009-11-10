@@ -104,6 +104,7 @@ rccollectd start
 %dir /srv/www/%{pkg_user}/vendor
 %dir /srv/www/%{pkg_user}/vendor/plugins
 %dir /srv/www/%{pkg_user}/vendor/plugins/%{plugin_name}
+%dir /srv/www/%{pkg_user}/vendor/plugins/%{plugin_name}/doc
 %attr(-,%{pkg_user},%{pkg_user}) %dir /srv/www/%{pkg_user}/vendor/plugins/%{plugin_name}/config
 %dir /usr/share/PolicyKit
 %dir /usr/share/PolicyKit/policy

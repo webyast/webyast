@@ -1,4 +1,9 @@
 -------------------------------------------------------------------
+Tue Nov 10 13:12:32 CET 2009 - jsuchome@suse.cz
+
+- added example logs.yml 
+
+-------------------------------------------------------------------
 Tue Nov 10 12:23:23 CET 2009 - schubi@suse.de
 
 - disable FQDNLookup and enable df in collectd.conf (bnc#553185) 

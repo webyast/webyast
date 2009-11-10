@@ -1,0 +1,5 @@
+To monitor given log files in Status view:
+   
+ - edit /etc/webyast/vendor/logs.yml and write a list of your the log files to be monitored
+
+ - see the example file for logs.yml in this directory
