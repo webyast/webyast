@@ -77,6 +77,18 @@ rm -rf $RPM_BUILD_ROOT
 # granting all permissions for root
 #
 /etc/yastws/tools/policyKit-rights.rb --user root --action grant >& /dev/null || :
+
+#
+# nslookup of static hostnames can result to an error. Due this error collectd
+# will not be started. So FQDN (fully qualified domain name) is disabled.
+#
+sed -i "s/^FQDNLookup.*/FQDNLookup false/" "/etc/collectd.conf"
+
+#
+# enable "df" plugin of collectd
+#
+sed -i "s/^#LoadPlugin df.*/LoadPlugin df/" "/etc/collectd.conf"
+
 #
 # enable and start  collectd
 # 
