@@ -191,15 +191,16 @@ class Status
 
     raise "Error running collectd rrdtool" if output =~ /ERROR/ or output.nil?
 
-    labels=""
+    labels=[]
     lines = output.split "\n"
+    return result if lines.blank? #no data found --> return
 
     # set label names
     lines[0].each do |l|
       if l =~ /\D*/
         labels = l.split " "
       end
-    end
+    end 
     unless labels.blank?
       # set values for each label and time
       # evaluates interval and starttime once for each metric (not each label)
