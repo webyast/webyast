@@ -71,7 +71,10 @@ class MailSettings
     Rails.logger.debug "YaPI returns: '#{yapi_ret}'"
     raise MailSettingsError.new(yapi_ret) unless yapi_ret.empty?
 
-    yapi_ret = YastService.Call("YaPI::SERVICES::Execute", "postfix", "restart")
+    yapi_ret = YastService.Call("YaPI::SERVICES::Execute", {
+	"name"	=> [ "s", "postfix"],
+	"action"=> [ "s", "restart"]
+    })
     Rails.logger.debug "YaPI returns: '#{yapi_ret.inspect}'"
     raise MailSettingsError.new(yapi_ret["stderr"]) unless yapi_ret["stderr"].empty?
     true

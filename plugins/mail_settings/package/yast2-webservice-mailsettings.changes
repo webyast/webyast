@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Tue Nov 10 09:10:28 CET 2009 - jsuchome@suse.cz
+
+- adapt to new API of SERVICES::Execute call (bnc#554026)
+- 0.0.9 
+
+-------------------------------------------------------------------
 Thu Nov  5 10:11:08 CET 2009 - jsuchome@suse.cz
 
 - kkaempf: GPLv2 only
