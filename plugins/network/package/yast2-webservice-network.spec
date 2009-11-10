@@ -26,7 +26,7 @@ PreReq:         yast2-webservice
 %if 0%{?suse_version} == 0 || %suse_version > 1110
 Requires:       yast2-network >= 2.18.47
 %else
-Requires:       yast2-network >= 2.17.1
+Requires:       yast2-network >= 2.17.78.1
 %endif
 
 #
