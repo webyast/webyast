@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Tue Nov 10 14:05:42 CET 2009 - jsuchome@suse.cz
+
+- require SLE11 version of yast2 package
+- 0.0.10 
+
+-------------------------------------------------------------------
 Tue Nov 10 09:10:28 CET 2009 - jsuchome@suse.cz
 
 - adapt to new API of SERVICES::Execute call (bnc#554026)

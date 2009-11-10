@@ -14,7 +14,7 @@ PreReq:         yast2-webservice
 License:	GPL v2 only
 Group:          Productivity/Networking/Web/Utilities
 Autoreqprov:    on
-Version:        0.0.9
+Version:        0.0.10
 Release:        0
 Summary:        YaST2 - Webservice - Mail Settings
 Source:         www.tar.bz2
@@ -39,7 +39,7 @@ Requires:	yast2-mail postfix
 Requires:       yast2 >= 2.18.24
 %else
 # 11.1 or SLES11
-Requires:       yast2 >= 2.17.72
+Requires:       yast2 >= 2.17.70.1
 %endif
 
 #
