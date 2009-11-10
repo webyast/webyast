@@ -17,7 +17,7 @@ Requires:	ntp
 License:	GPL v2 only
 Group:          Productivity/Networking/Web/Utilities
 Autoreqprov:    on
-Version:        0.0.3
+Version:        0.0.5
 Release:        0
 Summary:        YaST2 - Webservice - NTP
 Source:         www.tar.bz2
