@@ -1,4 +1,9 @@
 -------------------------------------------------------------------
+Tue Nov 10 09:18:26 CET 2009 - schubi@suse.de
+
+- returning empty hash if no value is available from collectd (bnc #553825) 
+
+-------------------------------------------------------------------
 Mon Nov  9 17:58:15 CET 2009 - schubi@suse.de
 
 - fixed displaying limits (bnc#553723)
