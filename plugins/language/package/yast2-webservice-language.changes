@@ -1,4 +1,9 @@
 -------------------------------------------------------------------
+Tue Nov 10 14:09:02 CET 2009 - jsuchome@suse.cz
+
+- require SLE11 version of yast2-country package 
+
+-------------------------------------------------------------------
 Thu Nov  5 11:26:12 CET 2009 - jreidinger@suse.cz
 
 - kkaempf - clarify license
