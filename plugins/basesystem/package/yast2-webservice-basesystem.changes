@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Tue Nov 10 16:23:53 CET 2009 - jreidinger@suse.cz
+
+- remove deprecated provisions in spec file
+- 0.0.10
+
+-------------------------------------------------------------------
 Thu Nov  5 11:37:48 CET 2009 - jreidinger@suse.cz
 
 - mkudlvasr - change default eula action
