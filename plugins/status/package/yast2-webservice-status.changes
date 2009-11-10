@@ -1,4 +1,9 @@
 -------------------------------------------------------------------
+Tue Nov 10 12:23:23 CET 2009 - schubi@suse.de
+
+- disable FQDNLookup and enable df in collectd.conf (bnc#553185) 
+
+-------------------------------------------------------------------
 Tue Nov 10 09:18:26 CET 2009 - schubi@suse.de
 
 - returning empty hash if no value is available from collectd (bnc #553825) 
