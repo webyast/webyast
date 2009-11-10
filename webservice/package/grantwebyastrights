@@ -1,11 +1,12 @@
 #!/usr/bin/ruby
 #
-# policyKit-rights.rb
+# grantwebyastrights
 #
 # show, grant and revoke policies for YaST webservice
 #
-# run: ruby policyKit-rights.rb
+# run: grantwebyastrights
 #
+# FIXME grant really All rights to run webyast, (so also packagekit rights, hal rights for system plugin etc)
 #
 require 'fileutils'
 require 'getoptlong'
@@ -14,7 +15,7 @@ $debug = 0
 
 def usage why
 	STDERR.puts why
-	STDERR.puts "Usage: policyKit-rights.rb --user <user> --action (show|grant|revoke)"
+	STDERR.puts "Usage: grantwebyastrights --user <user> --action (show|grant|revoke)"
         STDERR.puts "NOTE: This program should be run by user root"
         STDERR.puts ""
         STDERR.puts "This call grant/revoke ALL permissions for the YaST Webservice."

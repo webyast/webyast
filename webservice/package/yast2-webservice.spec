@@ -38,7 +38,7 @@ Source1:        yast.conf
 Source2:        rails.include
 Source3:        cleanurl-v5.lua
 Source4:        org.opensuse.yast.permissions.policy
-Source5:        policyKit-rights.rb  
+Source5:        grantwebyastrights
 Source6:        yast_user_roles
 Source7:        lighttpd.conf
 Source8:        modules.conf
@@ -123,9 +123,8 @@ install -m 0644 %SOURCE8 $RPM_BUILD_ROOT/etc/yastws/
 # Policies
 mkdir -p $RPM_BUILD_ROOT/usr/share/PolicyKit/policy
 install -m 0644 %SOURCE4 $RPM_BUILD_ROOT/usr/share/PolicyKit/policy/
-mkdir -p $RPM_BUILD_ROOT/etc/yastws/tools
-install -m 0644 %SOURCE5 $RPM_BUILD_ROOT/etc/yastws/tools
 install -m 0644 %SOURCE6 $RPM_BUILD_ROOT/etc/
+install -m 0544 %SOURCE5 $RPM_BUILD_ROOT/usr/sbin/
 
 #  create yastwsdirs (config, var and data)
 mkdir -p $RPM_BUILD_ROOT/etc/webyast
@@ -164,7 +163,7 @@ rm -rf $RPM_BUILD_ROOT
 #
 # granting all permissions for root 
 #
-/etc/yastws/tools/policyKit-rights.rb --user root --action grant >& /dev/null || :
+/usr/sbin/grantwebyastrights --user root --action grant >& /dev/null || :
 #
 # create database 
 #
