@@ -111,6 +111,8 @@ rccollectd start
 /srv/www/%{pkg_user}/vendor/plugins/%{plugin_name}/*
 %attr(644,root,root) %config /usr/share/PolicyKit/policy/org.opensuse.yast.system.%{plugin_name}.policy
 %attr(644,root,root) %config /usr/share/PolicyKit/policy/org.opensuse.yast.modules.logfile.policy
+/srv/www/%{pkg_user}/vendor/plugins/%{plugin_name}/doc/README_FOR_APP
+/srv/www/%{pkg_user}/vendor/plugins/%{plugin_name}/doc/logs.yml
 %doc COPYING
 
 %changelog
