@@ -14,7 +14,7 @@ EOF
                  "format"=>"xml",
                  "eulas"=>{"name"    =>"openSUSE-11.1", 
                            "id"      =>"1", 
-                           "accepted"=>"true"
+                           "accepted"=>true
                           }
                 }
 
@@ -47,6 +47,9 @@ EOF
   def test_update
     License.any_instance.expects(:save).returns(nil)
     get :update, UPDATE_DATA
+    assert_response :success
+    (more_update_data = UPDATE_DATA)["eulas"]["accepted"] = "true"
+    get :update, more_update_data
     assert_response :success
   end
 

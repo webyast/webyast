@@ -36,9 +36,10 @@ class EulasController < ApplicationController
   # Save updated license data. The only changeable attribute is "accepted"
   def update
     raise InvalidParameters.new({:id => 'MISSING'}) if params[:id].nil?
+    raise InvalidParameters.new({:eulas_accepted => 'INVALID'}) unless [true,false,"true","false"].include? params[:eulas][:accepted]
     @license = License.find params[:id]
     render ErrorResult.error(404, 1, "License not found") and return if @license.nil?
-    @license.accepted = params[:eulas][:accepted] == "true" ? true : false
+    @license.accepted = ([true,"true"].include? params[:eulas][:accepted]) ? true : false
     @license.save
     respond_to do |format|
       format.xml { render :xml => @license.to_xml }
