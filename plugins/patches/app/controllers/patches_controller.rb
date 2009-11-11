@@ -51,6 +51,12 @@ class PatchesController < ApplicationController
       format.xml { render  :xml => @patches.to_xml( :root => "patches", :dasherize => false ) }
       format.json { render :json => @patches.to_json( :root => "patches", :dasherize => false ) }
     end
+
+    # do not cache the background progress status
+    # (expire the cache in the next request)
+    if bgr && @patches.first.class == BackgroundStatus
+      Rails.cache.write('patches:timestamp', Time.at(0))
+    end
   end
 
   # GET /patch_updates/1
