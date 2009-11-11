@@ -191,7 +191,6 @@ echo "Database is ready"
 #this /etc/yastws is for ligght conf for yastws
 %dir /etc/yastws
 %dir /srv/www/yastws
-%dir /etc/yastws/tools
 %dir /etc/yastws/vhosts.d
 %dir %{_datadir}/PolicyKit
 %dir %{_datadir}/PolicyKit/policy
