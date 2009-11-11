@@ -130,10 +130,11 @@ public
   #
   # method: method to execute
   # args: arguments to method
-  # signal: signal to intercept (usuallay "Package")
+  # signal: signal to intercept (usually "Package")
+  # bg_stat: BackgroundStatus object for reporting progress (optional)
   # block: block to run on signal
   #
-  def self.execute(method, args, signal, &block)
+  def self.execute(method, args, signal, bg_stat = nil, &block)
     begin
       dbusloop = DBus::Main.new
       transaction_iface, packagekit_iface = self.packagekit_connect
@@ -158,6 +159,20 @@ public
       # otherwise Finished can arrive early and dbusloop will never
       # quit, bnc#561578
       transaction_iface.send(method.to_sym, *args)
+
+      if bg_stat
+        proxy.on_signal("StatusChanged") do |s|
+          Rails.logger.debug "Background process: StatusChanged: #{s}"
+          bg_stat.status = s
+        end
+
+        proxy.on_signal("ProgressChanged") do |p1, p2, p3, p4|
+          Rails.logger.debug "Background process: ProgressChanged: #{p1}%"
+          bg_stat.progress = p1
+          # 101% means no subprogress available
+          bg_stat.subprogress = p2 < 101 ? p2 : nil
+        end
+      end
 
       dbusloop << DBus::SystemBus.instance
       dbusloop.run

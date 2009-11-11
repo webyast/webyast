@@ -27,7 +27,7 @@ class PatchesController < ApplicationController
 	Rails.cache.write('patches:timestamp', Time.now)
 	return
     # the cache expires after 5 minutes, repository metadata
-    # or RPM database update invalidates the cache immeditely
+    # or RPM database update invalidates the cache immediately
     # (new patches might be applicable)
     elsif cache_timestamp < 5.minutes.ago || cache_timestamp < Patch.mtime
 	logger.debug "#### Patch cache expired"
@@ -42,7 +42,10 @@ class PatchesController < ApplicationController
   # GET /patch_updates.xml
   def index
     # note: permission check was performed in :before_filter
-    @patches = Patch.find(:available)
+#      ActionController::Base.benchmark("Patches read") do
+	@patches = Patch.find(:available, {:background => true})
+#      end
+
     respond_to do |format|
       format.xml { render  :xml => @patches.to_xml( :root => "patches", :dasherize => false ) }
       format.json { render :json => @patches.to_json( :root => "patches", :dasherize => false ) }

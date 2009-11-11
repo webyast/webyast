@@ -3,16 +3,17 @@ require 'resolvable'
 # Model for patches available via package kit
 class Patch < Resolvable
 
+  @@running = Hash.new
+  @@done = Hash.new
+
   def to_xml( options = {} )
     super :patch_update, options
   end
 
-  # find patches
-  # Patch.find(:available)
-  # Patch.find(212)
-  def self.find(what)
+  # find patches using PackageKit
+  def self.do_find(what, bg_status = nil)
     patch_updates = Array.new
-    self.execute("GetUpdates", "NONE", "Package") { |line1,line2,line3|
+    self.execute("GetUpdates", "NONE", "Package", bg_status) { |line1,line2,line3|
       columns = line2.split ";"
       if what == :available || columns[1] == what
         update = Patch.new(:resolvable_id => columns[1],
@@ -26,6 +27,41 @@ class Patch < Resolvable
       end
     }
     return patch_updates
+  end
+
+  # find patches
+  # Patch.find(:available)
+  # Patch.find(212)
+  def self.find(what, opts = {})
+    background = opts[:background]
+
+    if background
+      if @@done.has_key?(what)
+        Rails.logger.debug "Request #{what} is done"
+        @@running.delete(what)
+        return @@done.delete(what)
+      end
+
+      running = @@running[what]
+      if running
+        Rails.logger.debug "Request #{what} is already running: #{running.inspect}"
+        return [running]
+      end
+
+      bs = BackgroundStatus.new
+      @@running[what] = bs
+
+      Rails.logger.info "Starting background thread for reading patches..."
+      Thread.new do
+        res = do_find(what, bs)
+        Rails.logger.info "*** Patches thread: Found #{res.size} applicable patches"
+        @@done[what] = res
+      end
+
+      return [bs]
+    else
+      return do_find(what)
+    end
   end
 
   # installs this
