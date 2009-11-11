@@ -24,7 +24,7 @@ BuildRequires:  rubygem-yast2-webservice-tasks rubygem-restility
 PreReq:         yast2-webservice
 # YaPI/NETWORK.pm
 %if 0%{?suse_version} == 0 || %suse_version > 1110
-Requires:       yast2-network >= 2.18.47
+Requires:       yast2-network >= 2.18.51
 %else
 Requires:       yast2-network >= 2.17.78.1
 %endif
