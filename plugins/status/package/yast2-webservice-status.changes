@@ -2,6 +2,7 @@
 Tue Nov 10 14:40:47 CET 2009 - schubi@suse.de
 
 - searching for the correct host in /var/lib/collectd/; (bnc#549022) 
+- vesion 0.0.7
 
 -------------------------------------------------------------------
 Tue Nov 10 13:12:32 CET 2009 - jsuchome@suse.cz
