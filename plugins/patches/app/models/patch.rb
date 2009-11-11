@@ -5,6 +5,7 @@ class Patch < Resolvable
 
   @@running = Hash.new
   @@done = Hash.new
+  @@mutex = Mutex.new
 
   def to_xml( options = {} )
     super :patch_update, options
@@ -38,31 +39,36 @@ class Patch < Resolvable
     # background reading doesn't work correctly if class reloading is active
     # (static class members are lost between requests)
     if background && !Rails.configuration.cache_classes
-      Rails.logger.info "Class reloading is active, cannot run background thread (set config.cache_classes = true)"
+      Rails.logger.info "Class reloading is active, cannot use background thread (set config.cache_classes = true)"
       background = false
     end
 
     if background
-      if @@done.has_key?(what)
-        Rails.logger.debug "Request #{what} is done"
-        @@running.delete(what)
-        return @@done.delete(what)
-      end
+      bs = nil
+      @@mutex.synchronize do
+        if @@done.has_key?(what)
+          Rails.logger.debug "Request #{what} is done"
+          return @@done.delete(what)
+        end
 
-      running = @@running[what]
-      if running
-        Rails.logger.debug "Request #{what} is already running: #{running.inspect}"
-        return [running]
-      end
+        running = @@running[what]
+        if running
+          Rails.logger.debug "Request #{what} is already running: #{running.inspect}"
+          return [running]
+        end
 
-      bs = BackgroundStatus.new
-      @@running[what] = bs
+        bs = BackgroundStatus.new
+        @@running[what] = bs
+      end
 
       Rails.logger.info "Starting background thread for reading patches..."
       Thread.new do
         res = do_find(what, bs)
         Rails.logger.info "*** Patches thread: Found #{res.size} applicable patches"
-        @@done[what] = res
+        @@mutex.synchronize do
+          @@running.delete(what)
+          @@done[what] = res
+        end
       end
 
       return [bs]
