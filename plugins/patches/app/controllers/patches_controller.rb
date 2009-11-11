@@ -29,7 +29,7 @@ class PatchesController < ApplicationController
     # the cache expires after 5 minutes, repository metadata
     # or RPM database update invalidates the cache immediately
     # (new patches might be applicable)
-    elsif cache_timestamp < 5.minutes.ago || cache_timestamp < Patch.mtime
+    elsif cache_timestamp < 15.minutes.ago || cache_timestamp < Patch.mtime
 	logger.debug "#### Patch cache expired"
 	expire_action :action => :index, :format => params["format"]
 	Rails.cache.write('patches:timestamp', Time.now)

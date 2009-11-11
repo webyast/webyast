@@ -35,6 +35,13 @@ class Patch < Resolvable
   def self.find(what, opts = {})
     background = opts[:background]
 
+    # background reading doesn't work correctly if class reloading is active
+    # (static class members are lost between requests)
+    if background && !Rails.configuration.cache_classes
+      Rails.logger.info "Class reloading is active, cannot run background thread (set config.cache_classes = true)"
+      background = false
+    end
+
     if background
       if @@done.has_key?(what)
         Rails.logger.debug "Request #{what} is done"
