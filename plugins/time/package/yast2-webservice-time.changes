@@ -1,4 +1,11 @@
 -------------------------------------------------------------------
+Tue Nov 10 16:38:52 CET 2009 - jreidinger@suse.cz
+
+- remove useless scr require from controller test
+- remove deprecated provisions from spec file
+- 0.0.9
+
+-------------------------------------------------------------------
 Tue Nov 10 14:08:35 CET 2009 - jsuchome@suse.cz
 
 - require SLE11 version of yast2-country package 

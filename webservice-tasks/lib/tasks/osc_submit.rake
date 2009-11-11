@@ -14,10 +14,10 @@ task :'osc_submit'  do
   puts "checking out osc package from build"
   top_dir = Dir.pwd
   begin
-    `osc checkout 'YaST:Web' #{package_name}`
+    system("osc checkout 'YaST:Web' #{package_name}")
     #clean www dir and also clean before copy old entries in osc dir to test if package build after remove some file
-    `rm -rf 'YaST:Web/#{package_name}/*'`  
-    `cp package/* 'YaST:Web/#{package_name}'`
+    system("rm -vrf 'YaST:Web/#{package_name}/'*")  
+    system("cp -v package/* 'YaST:Web/#{package_name}'")
     Dir.chdir File.join(Dir.pwd, "YaST:Web", package_name)
     puts "submiting package"
     # long running, `foo` would only show output at the end

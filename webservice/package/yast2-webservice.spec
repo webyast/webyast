@@ -16,7 +16,7 @@ Name:           yast2-webservice
 Requires:       yast2-core >= 2.18.10
 %else
 # 11.1 or SLES11
-Requires:       yast2-core >= 2.17.31
+Requires:       yast2-core >= 2.17.30.1
 %endif
 
 Requires:	lighttpd-mod_magnet, ruby-fcgi, ruby-dbus, sqlite
@@ -30,7 +30,7 @@ PreReq:         ruby-rpam, ruby-polkit, rubygem-test-unit
 License:	LGPL v2.1 only
 Group:          Productivity/Networking/Web/Utilities
 Autoreqprov:    on
-Version:        0.0.12
+Version:        0.0.13
 Release:        0
 Summary:        YaST2 - Webservice 
 Source:         www.tar.bz2
@@ -38,7 +38,7 @@ Source1:        yast.conf
 Source2:        rails.include
 Source3:        cleanurl-v5.lua
 Source4:        org.opensuse.yast.permissions.policy
-Source5:        policyKit-rights.rb  
+Source5:        grantwebyastrights
 Source6:        yast_user_roles
 Source7:        lighttpd.conf
 Source8:        modules.conf
@@ -123,9 +123,8 @@ install -m 0644 %SOURCE8 $RPM_BUILD_ROOT/etc/yastws/
 # Policies
 mkdir -p $RPM_BUILD_ROOT/usr/share/PolicyKit/policy
 install -m 0644 %SOURCE4 $RPM_BUILD_ROOT/usr/share/PolicyKit/policy/
-mkdir -p $RPM_BUILD_ROOT/etc/yastws/tools
-install -m 0644 %SOURCE5 $RPM_BUILD_ROOT/etc/yastws/tools
 install -m 0644 %SOURCE6 $RPM_BUILD_ROOT/etc/
+install -m 0544 %SOURCE5 $RPM_BUILD_ROOT/usr/sbin/
 
 #  create yastwsdirs (config, var and data)
 mkdir -p $RPM_BUILD_ROOT/etc/webyast
@@ -164,7 +163,7 @@ rm -rf $RPM_BUILD_ROOT
 #
 # granting all permissions for root 
 #
-/etc/yastws/tools/policyKit-rights.rb --user root --action grant >& /dev/null || :
+/usr/sbin/grantwebyastrights --user root --action grant >& /dev/null || :
 #
 # create database 
 #

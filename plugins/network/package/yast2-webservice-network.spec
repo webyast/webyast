@@ -13,7 +13,7 @@ Name:           yast2-webservice-network
 License:	GPL v2 only
 Group:          Productivity/Networking/Web/Utilities
 Autoreqprov:    on
-Version:        0.0.10
+Version:        0.0.11
 Release:        0
 Summary:        YaST2 - Webservice - Network
 Source:         www.tar.bz2
@@ -26,7 +26,7 @@ PreReq:         yast2-webservice
 %if 0%{?suse_version} == 0 || %suse_version > 1110
 Requires:       yast2-network >= 2.18.47
 %else
-Requires:       yast2-network >= 2.17.100
+Requires:       yast2-network >= 2.17.78.1
 %endif
 
 #

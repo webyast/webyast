@@ -1,4 +1,17 @@
 -------------------------------------------------------------------
+Tue Nov 10 17:18:31 CET 2009 - jreidinger@suse.cz
+
+- refactor permissions controller 
+    -change it to single resource rest service
+    - move functionality to model, adapt test-suite
+    - remove Scr.Execute from permissions(bnc#472752)
+    - disable setting permissions as it is broken and insecure
+- Uncatched exception is reported in xml to provide real REST
+  response and to allow better report for user
+- remove whole scr library as it is security problem (bnc#472752)
+- 0.0.13
+
+-------------------------------------------------------------------
 Thu Nov  5 16:34:56 CET 2009 - jreidinger@suse.cz
 
 - kkaempf - clarify license

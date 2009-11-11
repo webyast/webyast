@@ -53,7 +53,7 @@ class ApplicationController < ActionController::Base
         xml.type "GENERIC"
         xml.description exception.message
         xml.tag!(:bug,true,:type=> "boolean")
-        xml.backtrace (:type => "array") do
+        xml.backtrace(:type => "array") do
           exception.backtrace.each do |b|
             xml.line b
           end
