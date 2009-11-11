@@ -124,7 +124,7 @@ install -m 0644 %SOURCE8 $RPM_BUILD_ROOT/etc/yastws/
 mkdir -p $RPM_BUILD_ROOT/usr/share/PolicyKit/policy
 install -m 0644 %SOURCE4 $RPM_BUILD_ROOT/usr/share/PolicyKit/policy/
 install -m 0644 %SOURCE6 $RPM_BUILD_ROOT/etc/
-install -m 0544 %SOURCE5 $RPM_BUILD_ROOT/usr/sbin/
+install -m 0555 %SOURCE5 $RPM_BUILD_ROOT/usr/sbin/
 
 #  create yastwsdirs (config, var and data)
 mkdir -p $RPM_BUILD_ROOT/etc/webyast
@@ -217,7 +217,8 @@ echo "Database is ready"
 /srv/www/yastws/script
 #/srv/www/yastws/test
 /srv/www/yastws/config
-%attr(755,root,root) %config /etc/yastws/tools/policyKit-rights.rb
+#also users can run granting script, as permissions is handled by policyKit right for granting permissions
+%attr(555,root,root) %config /usr/sbin/grantwebyastrights
 %attr(755,root,root) /srv/www/yastws/start.sh
 %doc /srv/www/yastws/README
 %attr(-,%{pkg_user},%{pkg_user}) /srv/www/yastws/log
