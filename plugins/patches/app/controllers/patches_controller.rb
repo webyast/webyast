@@ -42,9 +42,10 @@ class PatchesController < ApplicationController
   # GET /patch_updates.xml
   def index
     # note: permission check was performed in :before_filter
-#      ActionController::Base.benchmark("Patches read") do
-	@patches = Patch.find(:available, {:background => true})
-#      end
+    bgr = params['background']
+    Rails.logger.info "Reading patches in background" if bgr
+
+    @patches = Patch.find(:available, {:background => bgr})
 
     respond_to do |format|
       format.xml { render  :xml => @patches.to_xml( :root => "patches", :dasherize => false ) }
