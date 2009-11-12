@@ -75,8 +75,8 @@ rm -rf $RPM_BUILD_ROOT
 
 %post
 # granting all permissions for the web user
-/etc/yastws/tools/policyKit-rights.rb --user root --action grant >& /dev/null || :
-/etc/yastws/tools/policyKit-rights.rb --user yastws --action grant >& /dev/null || :
+/usr/sbin/grantwebyastrights --user root --action grant >& /dev/null || :
+/usr/sbin/grantwebyastrights --user yastws --action grant >& /dev/null || :
 
 %postun
 

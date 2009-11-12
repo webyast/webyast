@@ -156,7 +156,7 @@ EOF
   end
 
   # now check that all permission in each policy is granted
-  hint_message = "\nUse utility script policyKit-rights.rb to grant them all.\nSee http://en.opensuse.org/YaST/Web/Development\nYou can also grant them to the root user and login as root to the YaST web client.\n\n"
+  hint_message = "\nUse utility script grantwebyastrights.rb to grant them all.\nSee http://en.opensuse.org/YaST/Web/Development\nYou can also grant them to the root user and login as root to the YaST web client.\n\n"
   Dir.glob(File.join(File.dirname(__FILE__), '../../..', "**/*.policy")).each do |policy|
     doc = REXML::Document.new(File.open(policy))
     doc.elements.each("/policyconfig/action") do |action|

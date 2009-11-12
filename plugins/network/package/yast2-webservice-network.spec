@@ -73,9 +73,9 @@ rm -rf $RPM_BUILD_ROOT
 #
 # granting all permissions for root
 #
-/etc/yastws/tools/policyKit-rights.rb --user root --action grant >& /dev/null || :
+/usr/sbin/grantwebyastrights --user root --action grant >& /dev/null || :
 # and for yastws
-/etc/yastws/tools/policyKit-rights.rb --user %{pkg_user} --action grant >& /dev/null || :
+/usr/sbin/grantwebyastrights --user %{pkg_user} --action grant >& /dev/null || :
 
 %files
 %defattr(-,root,root)
