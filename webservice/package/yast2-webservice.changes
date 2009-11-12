@@ -1,4 +1,11 @@
 -------------------------------------------------------------------
+Thu Nov 12 12:49:39 UTC 2009 - jreidinger@novell.com
+
+- rename script for granting webyast permissions and move it to
+  correct place (bnc#542077)
+- 0.0.14
+
+-------------------------------------------------------------------
 Tue Nov 10 17:18:31 CET 2009 - jreidinger@suse.cz
 
 - refactor permissions controller 
