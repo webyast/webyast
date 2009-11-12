@@ -3,8 +3,13 @@ require 'resolvable'
 # Model for patches available via package kit
 class Patch < Resolvable
 
+  # class variables - they keep the information between requests
+  #
+  # currently running patch requests in background (current states)
   @@running = Hash.new
+  # finished requests (actual results)
   @@done = Hash.new
+  # a mutex which guards access to the shared class variables above
   @@mutex = Mutex.new
 
   def to_xml( options = {} )
@@ -32,6 +37,9 @@ class Patch < Resolvable
 
   # find patches
   # Patch.find(:available)
+  # Patch.find(:available, :background => true) - read patches in background
+  #   the result may the current state (progress) or the actual patch list
+  #   call this function in a loop until a patch list (or an error) is received
   # Patch.find(212)
   def self.find(what, opts = {})
     background = opts[:background]
@@ -44,6 +52,7 @@ class Patch < Resolvable
     end
 
     if background
+      # background status
       bs = nil
       @@mutex.synchronize do
         if @@done.has_key?(what)
@@ -62,6 +71,7 @@ class Patch < Resolvable
       end
 
       Rails.logger.info "Starting background thread for reading patches..."
+      # run the patch query in a separate thread
       Thread.new do
         res = do_find(what, bs)
         Rails.logger.info "*** Patches thread: Found #{res.size} applicable patches"
