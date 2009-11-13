@@ -64,7 +64,7 @@ class Language
     settings = {}
     settings["current"] = @language if @language #set only if value is passed
     settings["utf8"] = @utf8 if @utf8 #set only if value is passed
-    settings["rootlang"] = @rootlang if @rootlang #set only if value is passed
+    settings["rootlang"] = @rootlocale if @rootlocale #set only if value is passed
     YastService.Call("YaPI::LANGUAGE::Write",settings)
   end
 
