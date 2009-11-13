@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Fri Nov 13 07:03:56 UTC 2009 - jreidinger@novell.com
+
+- make language more robust to changes in UI (bnc#555157)
+- 0.0.11
+
+-------------------------------------------------------------------
 Tue Nov 10 16:33:38 CET 2009 - jreidinger@suse.cz
 
 - remove deprecated provisions in spec file
