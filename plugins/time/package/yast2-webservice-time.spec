@@ -28,7 +28,7 @@ BuildRequires:  rubygem-mocha
 Requires:       yast2-country >= 2.18.10
 %else
 # 11.1 or SLES11
-Requires:       yast2-country >= 2.17.34.1
+Requires:       yast2-country >= 2.17.34.2
 %endif
 
 #
