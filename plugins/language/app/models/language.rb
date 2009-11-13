@@ -61,11 +61,10 @@ class Language
 
   # Saves data from model to system via YaPI
   def save
-    settings = {
-      "current" => @language,
-      "utf8" => @utf8,
-      "rootlang" => @rootlocale
-    }
+    settings = {}
+    settings["current"] = @language if @language #set only if value is passed
+    settings["utf8"] = @utf8 if @utf8 #set only if value is passed
+    settings["rootlang"] = @rootlang if @rootlang #set only if value is passed
     YastService.Call("YaPI::LANGUAGE::Write",settings)
   end
 
