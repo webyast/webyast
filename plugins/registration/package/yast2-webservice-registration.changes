@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Fri Nov 13 14:04:04 UTC 2009 - jreidinger@novell.com
+
+- adapt to rename of policykit granting script (bnc#554946)
+  (mkudlvasr)
+- 0.0.6
+-------------------------------------------------------------------
 Thu Nov  5 13:42:03 CET 2009 - jdsn@suse.de
 
 - fix backend communication
