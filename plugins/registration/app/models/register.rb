@@ -102,6 +102,7 @@ class Register
   end
 
   def status_to_xml( options = {} )
+    find
     xml = options[:builder] ||= Builder::XmlMarkup.new(options)
     xml.instruct! unless options[:skip_instruct]
 
@@ -111,6 +112,7 @@ class Register
   end
 
   def config_to_xml( options = {} )
+    find
     xml = options[:builder] ||= Builder::XmlMarkup.new(options)
     xml.instruct! unless options[:skip_instruct]
 
@@ -127,6 +129,7 @@ class Register
   end
 
   def to_xml( options = {} )
+    find
     xml = options[:builder] ||= Builder::XmlMarkup.new(options)
     xml.instruct! unless options[:skip_instruct]
 
@@ -153,15 +156,15 @@ class Register
 
       case item
       when Hash, HashWithIndifferentAccess
-        tasklist_hash[item['alias']] = item if item.has_key?('alias')
+        tasklist_hash[item['ALIAS']] = item if item.has_key?('ALIAS')
       when Array
         item.each do |i|
-          tasklist_hash[i['alias']] = i if i.has_key?('alias')
+          tasklist_hash[i['ALIAS']] = i if i.has_key?('ALIAS')
         end
       end
 
-      changedrepos    = tasklist_hash.reject { | k, v |  !v.kind_of?(Hash) || v['type'] != 'zypp' }
-      changedservices = tasklist_hash.reject { | k, v |  !v.kind_of?(Hash) || v['type'] != 'nu' }
+      changedrepos    = tasklist_hash.reject { | k, v |  !v.kind_of?(Hash) || v['TYPE'] != 'zypp' }
+      changedservices = tasklist_hash.reject { | k, v |  !v.kind_of?(Hash) || v['TYPE'] != 'nu' }
     end
 
 
@@ -173,7 +176,7 @@ class Register
       xml.exitcode exitcode
       xml.guid self.guid || ''
 
-      if @arguments
+      if @arguments && exitcode != 0
         xml.missingarguments({:type => "array"}) do
           @arguments.each do | k, v |
             if k && v.kind_of?(Hash)
@@ -191,13 +194,13 @@ class Register
       if changedrepos && changedrepos.size > 0
         xml.changedrepos({:type => "array"}) do
           changedrepos.each do | k, v |
-            if k && v.kind_of?(Hash) && v.has_key?('task') && v['task'] != "le" && v['task'] != "ld" #only changed repos
+            if k && v && v.kind_of?(Hash) && v.has_key?('TASK') && v['TASK'] != "le" && v['TASK'] != "ld" #only changed repos
               xml.repo do
-                xml.name v['alias'] || ''
-                xml.alias v['alias'] || ''
-                xml.type v['type']  || ''
-                xml.url v['url'] || ''
-                xml.status tasknic[ v['task'] ] || ''
+                xml.name v['ALIAS'] || ''
+                xml.alias v['ALIAS'] || ''
+                xml.type v['TYPE']  || ''
+                xml.url v['URL'] || ''
+                xml.status tasknic[ v['TASK'] ] || ''
               end
             end
           end
@@ -208,29 +211,32 @@ class Register
           changedservices.each do | k, v |
             if k && v.kind_of?(Hash)
               xml.service do
-                xml.name v['alias'] || ''
-                xml.alias v['alias'] || ''
-                xml.type v['type']  || ''
-                xml.url v['url'] || ''
-                xml.status tasknic[ v['task'] ] || ''
-                if v['catalogs']
+                xml.name v['ALIAS'] || ''
+                xml.alias v['ALIAS'] || ''
+                xml.type v['TYPE']  || ''
+                xml.url v['URL'] || ''
+                xml.status tasknic[ v['TASK'] ] || ''
+                if v['CATALOGS']
                   xml.catalogs do
-                    if v['catalogs'].kind_of?(Array)
-                      v['catalogs'].each { |l|
+                    if v['CATALOGS'].kind_of?(Hash) && v['CATALOGS']['catalog'] && v['CATALOGS']['catalog'].kind_of?(Array) && v['CATALOGS']['catalog'].size > 0
+                      v['CATALOGS']['catalog'].each do |l|
                         if l && l.kind_of?(Hash)
                           xml.catalog do
-                            xml.name l['name'] || ''
-                            xml.alias l['alias'] || ''
-                            xml.status tasknic[ l['task'] ] || ''
+                            xml.name l['NAME'] || ''
+                            xml.alias l['ALIAS'] || ''
+                            xml.status tasknic[ l['TASK'] ] || ''
                           end
                         end
-                      }
-                    else #It is an hash only. This is produced by hash.form_xml if catalogs contains ONE entry only
-                      xml.catalog do
-                        xml.name v['catalogs']['name'] || ''
-                        xml.alias v['catalogs']['alias'] || ''
-                        xml.status tasknic[ v['catalogs']['task'] ] || ''
                       end
+                    #It is an hash only. This is produced by hash.form_xml if catalogs contains ONE entry only
+                    elsif v['CATALOGS'].kind_of?(Hash) && v['CATALOGS']['catalog'] && v['CATALOGS']['catalog'].kind_of?(Hash)
+                      xml.catalog do
+                        xml.name v['CATALOGS']['catalog']['NAME'] || ''
+                        xml.alias v['CATALOGS']['catalog']['ALIAS'] || ''
+                        xml.status tasknic[ v['CATALOGS']['catalog']['TASK'] ] || ''
+                      end
+                    else
+                      xml.catalog ''
                     end
                   end
                 end # catalogs

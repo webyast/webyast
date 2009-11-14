@@ -14,7 +14,7 @@ PreReq:         yast2-webservice
 License:        GPL v2 only
 Group:          Productivity/Networking/Web/Utilities
 Autoreqprov:    on
-Version:        0.0.6
+Version:        0.0.7
 Release:        0
 Summary:        YaST2 - Webservice - Registration
 Source:         www.tar.bz2
@@ -25,10 +25,10 @@ BuildRequires:  rubygem-mocha
 # YaST2/modules/YSR.pm  
 %if 0%{?suse_version} == 0 || %suse_version > 1110  
 # 11.2 or newer  
-Requires:       yast2-registration > 2.18.1
+Requires:       yast2-registration > 2.18.2
 %else  
 # 11.1 or SLES11  
-Requires:       yast2-registration > 2.17.26
+Requires:       yast2-registration > 2.17.27
 %endif  
 
 #

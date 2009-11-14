@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Sat Nov 14 04:00:37 CET 2009 - jdsn@suse.de
+
+- adaptions for the fix of the internal server error (bnc#553244)
+- version 0.0.7
+
+-------------------------------------------------------------------
 Fri Nov 13 14:04:04 UTC 2009 - jreidinger@novell.com
 
 - adapt to rename of policykit granting script (bnc#554946)
