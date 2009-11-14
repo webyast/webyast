@@ -51,9 +51,9 @@ class Register
                  'norefresh'    => '1',
                  'restoreRepos' => '1',
                  'forcereg'     => '1',
-                 'nohwdata'     => '1',
-                 'nooptional'   => '1',
-                 'debugMode'    => '2',
+                 'nohwdata'     => '0',
+                 'nooptional'   => '0',
+                 'debug'        => '2',
                  'logfile'      => Paths::REGISTRATION_LOG }
     @context.merge! hash if hash.kind_of?(Hash)
   end
