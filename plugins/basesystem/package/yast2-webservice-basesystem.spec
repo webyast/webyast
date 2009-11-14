@@ -11,11 +11,10 @@
 
 Name:           yast2-webservice-basesystem
 PreReq:         yast2-webservice
-Provides:       yast2-webservice:/srv/www/yastws/app/controllers/basesystem_controller.rb
 License:	GPL v2 only
 Group:          Productivity/Networking/Web/Utilities
 Autoreqprov:    on
-Version:        0.0.9
+Version:        0.0.10
 Release:        0
 Summary:        YaST2 - Webservice - Basesystem
 Source:         www.tar.bz2

@@ -11,11 +11,10 @@
 
 Name:           yast2-webservice-mailsettings
 PreReq:         yast2-webservice
-Provides:       yast2-webservice:/srv/www/yastws/app/controllers/mail_settings_controller.rb
 License:	GPL v2 only
 Group:          Productivity/Networking/Web/Utilities
 Autoreqprov:    on
-Version:        0.0.8
+Version:        0.0.10
 Release:        0
 Summary:        YaST2 - Webservice - Mail Settings
 Source:         www.tar.bz2
@@ -40,7 +39,7 @@ Requires:	yast2-mail postfix
 Requires:       yast2 >= 2.18.24
 %else
 # 11.1 or SLES11
-Requires:       yast2 >= 2.17.72
+Requires:       yast2 >= 2.17.70.1
 %endif
 
 #
@@ -90,8 +89,8 @@ rm -rf $RPM_BUILD_ROOT
 
 %post
 # granting all permissions for the web user
-/etc/yastws/tools/policyKit-rights.rb --user root --action grant >& /dev/null || :
-/etc/yastws/tools/policyKit-rights.rb --user yastws --action grant >& /dev/null || :
+/usr/sbin/grantwebyastrights --user root --action grant >& /dev/null || :
+/usr/sbin/grantwebyastrights --user yastws --action grant >& /dev/null || :
 
 %postun
 

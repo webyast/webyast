@@ -1,6 +1,5 @@
-require 'scr'
-#require 'vendor_setting'
 require 'yast/config_file'
+require 'yast_service'
 
 class LogsController < ApplicationController
   CONFIG_FILE=File.join(Paths::CONFIG,"vendor","logs.yml")
@@ -25,6 +24,7 @@ class LogsController < ApplicationController
         end
       rescue YaST::ConfigFile::NotFoundError => error
         logger.error "config file #{CONFIG_FILE} not found"
+#FIXME report IT!!!
       end
     end
           
@@ -39,18 +39,21 @@ class LogsController < ApplicationController
     # as default
     id = params[:id]
     if !@cfg.has_key?(id) or ! @cfg[id].has_key?('path')
+      #FIXME better report problem, look eg on permission module how it should be implemented
       render :nothing => true, :status => 404 and return
     end
       
-    log_filename = @cfg[id]['path']
-
     # how many lines to show
     lines = params[:lines] ? params[:lines].to_i : 50
-    
-    output = Scr.instance.execute(['tail', '-n', "#{lines}", log_filename])
-    
+
+    output = YastService.Call("LogFile::Read", ["s",id], ["s",lines.to_s])
+    if output=="___WEBYAST___INVALID"
+      logger.error "invalid id "+id #TODO some exception and better log it as it could be hack attempt
+    end
+    logger.info output
     respond_to do |format|
-      format.text { render :xml => output[:stdout] }
+      format.xml { render :xml => "<log>#{output}</log>" }
+      format.json { render :json => { :log => output }.to_json }
     end
   end
 

@@ -1,4 +1,11 @@
 -------------------------------------------------------------------
+Fri Nov 13 15:19:07 CET 2009 - jreidinger@suse.cz
+
+- remove deprecated provisions
+- clarify license (kkaempf)
+- 0.0.8
+
+-------------------------------------------------------------------
 Fri Oct 30 08:05:04 CET 2009 - lslezak@suse.cz
 
 - fixed restdoc packaging

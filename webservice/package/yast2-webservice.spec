@@ -16,7 +16,7 @@ Name:           yast2-webservice
 Requires:       yast2-core >= 2.18.10
 %else
 # 11.1 or SLES11
-Requires:       yast2-core >= 2.17.31
+Requires:       yast2-core >= 2.17.30.1
 %endif
 
 Requires:	lighttpd-mod_magnet, ruby-fcgi, ruby-dbus, sqlite
@@ -30,7 +30,7 @@ PreReq:         ruby-rpam, ruby-polkit, rubygem-test-unit
 License:	LGPL v2.1 only
 Group:          Productivity/Networking/Web/Utilities
 Autoreqprov:    on
-Version:        0.0.11
+Version:        0.0.14
 Release:        0
 Summary:        YaST2 - Webservice 
 Source:         www.tar.bz2
@@ -38,7 +38,7 @@ Source1:        yast.conf
 Source2:        rails.include
 Source3:        cleanurl-v5.lua
 Source4:        org.opensuse.yast.permissions.policy
-Source5:        policyKit-rights.rb  
+Source5:        grantwebyastrights
 Source6:        yast_user_roles
 Source7:        lighttpd.conf
 Source8:        modules.conf
@@ -123,9 +123,8 @@ install -m 0644 %SOURCE8 $RPM_BUILD_ROOT/etc/yastws/
 # Policies
 mkdir -p $RPM_BUILD_ROOT/usr/share/PolicyKit/policy
 install -m 0644 %SOURCE4 $RPM_BUILD_ROOT/usr/share/PolicyKit/policy/
-mkdir -p $RPM_BUILD_ROOT/etc/yastws/tools
-install -m 0644 %SOURCE5 $RPM_BUILD_ROOT/etc/yastws/tools
 install -m 0644 %SOURCE6 $RPM_BUILD_ROOT/etc/
+install -m 0555 %SOURCE5 $RPM_BUILD_ROOT/usr/sbin/
 
 #  create yastwsdirs (config, var and data)
 mkdir -p $RPM_BUILD_ROOT/etc/webyast
@@ -160,21 +159,11 @@ rm -rf $RPM_BUILD_ROOT
 #
 /usr/bin/polkit-auth --user yastws --grant org.freedesktop.packagekit.system-update >& /dev/null || :
 /usr/bin/polkit-auth --user yastws --grant org.freedesktop.policykit.read >& /dev/null || :
-/usr/bin/polkit-auth --user yastws --grant org.opensuse.yast.scr.read >& /dev/null || :
-/usr/bin/polkit-auth --user yastws --grant org.opensuse.yast.scr.write >& /dev/null || :
-/usr/bin/polkit-auth --user yastws --grant org.opensuse.yast.scr.execute >& /dev/null || :
-/usr/bin/polkit-auth --user yastws --grant org.opensuse.yast.scr.dir >& /dev/null || :
-/usr/bin/polkit-auth --user yastws --grant org.opensuse.yast.scr.registeragent >& /dev/null || :
-/usr/bin/polkit-auth --user yastws --grant org.opensuse.yast.scr.unregisteragent >& /dev/null || :
-/usr/bin/polkit-auth --user yastws --grant org.opensuse.yast.scr.unmountagent >& /dev/null || :
-/usr/bin/polkit-auth --user yastws --grant org.opensuse.yast.scr.error >& /dev/null || :
-/usr/bin/polkit-auth --user yastws --grant org.opensuse.yast.scr.unregisterallagents >& /dev/null || :
-/usr/bin/polkit-auth --user yastws --grant org.opensuse.yast.scr.registernewagents >& /dev/null || :
 /usr/bin/polkit-auth --user yastws --grant org.opensuse.yast.module-manager.import >& /dev/null || :
 #
 # granting all permissions for root 
 #
-/etc/yastws/tools/policyKit-rights.rb --user root --action grant >& /dev/null || :
+/usr/sbin/grantwebyastrights --user root --action grant >& /dev/null || :
 #
 # create database 
 #
@@ -202,7 +191,6 @@ echo "Database is ready"
 #this /etc/yastws is for ligght conf for yastws
 %dir /etc/yastws
 %dir /srv/www/yastws
-%dir /etc/yastws/tools
 %dir /etc/yastws/vhosts.d
 %dir %{_datadir}/PolicyKit
 %dir %{_datadir}/PolicyKit/policy
@@ -228,7 +216,8 @@ echo "Database is ready"
 /srv/www/yastws/script
 #/srv/www/yastws/test
 /srv/www/yastws/config
-%attr(755,root,root) %config /etc/yastws/tools/policyKit-rights.rb
+#also users can run granting script, as permissions is handled by policyKit right for granting permissions
+%attr(555,root,root) %config /usr/sbin/grantwebyastrights
 %attr(755,root,root) /srv/www/yastws/start.sh
 %doc /srv/www/yastws/README
 %attr(-,%{pkg_user},%{pkg_user}) /srv/www/yastws/log

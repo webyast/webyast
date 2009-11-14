@@ -1,4 +1,17 @@
 -------------------------------------------------------------------
+Fri Nov 13 14:00:46 UTC 2009 - jreidinger@novell.com
+
+- adapt to policykit granting script rename (bnc#554946) (mkudlvasr)
+- remove deprecated provisions
+- 0.0.8
+
+-------------------------------------------------------------------
+Thu Nov  5 14:08:41 CET 2009 - schubi@suse.de
+
+- fixed before filter specification
+- version 0.0.7 
+
+-------------------------------------------------------------------
 Thu Nov  5 13:15:24 CET 2009 - schubi@suse.de
 
 - Clarify license

@@ -6,9 +6,7 @@ require 'exceptions'
 class ApplicationController < ActionController::Base
 
   #render only pure text to simple show it on frontend
-  rescue_from Exception do |exception|
-      render :text => "#{exception.message}\n Backtrace:\n #{exception.backtrace.join("\n")}", :status => 500
-  end
+  rescue_from Exception, :with => :report_exception
 
   rescue_from BackendException, :with => :report_backend_exception
 
@@ -44,5 +42,26 @@ class ApplicationController < ActionController::Base
   private
   def report_backend_exception(exception) 
       render :xml => exception, :status => 503
+  end
+
+  def report_exception(exception)
+    def exception.to_xml
+      xml = Builder::XmlMarkup.new({})
+      xml.instruct!
+
+      xml.error do
+        xml.type "GENERIC"
+        xml.description exception.message
+        xml.tag!(:bug,true,:type=> "boolean")
+        xml.backtrace(:type => "array") do
+          exception.backtrace.each do |b|
+            xml.line b
+          end
+        end
+      end
+    end
+      
+    render :xml => exception, :status => 500
+    
   end
 end

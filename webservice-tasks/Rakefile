@@ -50,7 +50,7 @@ end
 
 # build the gem package
 desc 'Build gem package, save RPM sources to package subdirectory'
-task :"package-local" => ['yast2-webservice-tasks.gemspec', 'package/rubygem-yast2-webservice-tasks.spec'] do
+task :"package-local" => [:clean,'yast2-webservice-tasks.gemspec', 'package/rubygem-yast2-webservice-tasks.spec'] do
     version = read_version
     sh 'gem build yast2-webservice-tasks.gemspec' unless uptodate?("yast2-webservice-tasks-#{version}.gem", FileList["lib/**/*"])
     cp "yast2-webservice-tasks-#{version}.gem", "package"
@@ -61,4 +61,8 @@ task :install do
     sh 'gem install yast2-webservice-tasks'
 end
 
+desc 'Run test suite'
+task :test do
+    puts 'no test yet'
+end
 # vim: ft=ruby

@@ -7,7 +7,7 @@ class MailSettingsTest < ActiveSupport::TestCase
   def setup    
     @model = MailSettings.instance
     YastService.stubs(:Call).with('YaPI::MailSettings::Read').returns({ })
-    YastService.stubs(:Call).with('YaPI::SERVICES::Execute', 'postfix', 'restart').returns({ "stdout" => "", "exit" => 0, "stderr" => ""})
+    YastService.stubs(:Call).with('YaPI::SERVICES::Execute', {"name" => [ "s", "postfix" ], "action" => [ "s", "restart"]}).returns({ "stdout" => "", "exit" => 0, "stderr" => ""})
     @model.read
   end
 

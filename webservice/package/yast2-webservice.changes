@@ -1,4 +1,31 @@
 -------------------------------------------------------------------
+Thu Nov 12 12:49:39 UTC 2009 - jreidinger@novell.com
+
+- rename script for granting webyast permissions and move it to
+  correct place (bnc#542077)
+- 0.0.14
+
+-------------------------------------------------------------------
+Tue Nov 10 17:18:31 CET 2009 - jreidinger@suse.cz
+
+- refactor permissions controller 
+    -change it to single resource rest service
+    - move functionality to model, adapt test-suite
+    - remove Scr.Execute from permissions(bnc#472752)
+    - disable setting permissions as it is broken and insecure
+- Uncatched exception is reported in xml to provide real REST
+  response and to allow better report for user
+- remove whole scr library as it is security problem (bnc#472752)
+- 0.0.13
+
+-------------------------------------------------------------------
+Thu Nov  5 16:34:56 CET 2009 - jreidinger@suse.cz
+
+- kkaempf - clarify license
+- schubi - code cleanup of login tests (bnc#542658)
+- 0.0.12
+
+-------------------------------------------------------------------
 Tue Nov  3 17:48:28 CET 2009 - jreidinger@suse.cz
 
 - report uncaught YaST::ConfigFile::NotFoundError as 

@@ -1,7 +1,5 @@
 require File.expand_path(File.dirname(__FILE__) + "/../test_helper")
 require 'test/unit'
-require "scr"
-require "yast_service"
 require 'mocha'
 
 

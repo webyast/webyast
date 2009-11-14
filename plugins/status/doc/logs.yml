@@ -1,0 +1,12 @@
+# Syntax of this file is
+# log_file_name:
+#	path: path to log file to be monitored
+#	description: file description shown in Status module
+
+system:
+  path: /var/log/messages
+  description: System messages
+
+#apache:
+#  description: Apache
+#  path: /var/log/apache2/access_log

@@ -11,7 +11,6 @@
 
 Name:           yast2-webservice-users
 PreReq:         yast2-webservice
-Provides:       yast2-webservice:/srv/www/yastws/app/controllers/users_controller.rb
 License:	GPL v2 only
 Group:          Productivity/Networking/Web/Utilities
 Autoreqprov:    on
@@ -60,7 +59,7 @@ rm -rf $RPM_BUILD_ROOT
 #
 # granting all permissions for root 
 #
-/etc/yastws/tools/policyKit-rights.rb --user root --action grant >& /dev/null || :
+/usr/sbin/grantwebyastrights --user root --action grant >& /dev/null || :
 
 %files 
 %defattr(-,root,root)

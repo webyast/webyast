@@ -11,11 +11,10 @@
 
 Name:           yast2-webservice-time
 PreReq:         yast2-webservice
-Provides:       yast2-webservice:/srv/www/yastws/app/controllers/systemtime_controller.rb
 License:	GPL v2 only
 Group:          Productivity/Networking/Web/Utilities
 Autoreqprov:    on
-Version:        0.0.8
+Version:        0.0.9
 Release:        0
 Summary:        YaST2 - Webservice - Time
 Source:         www.tar.bz2
@@ -29,7 +28,7 @@ BuildRequires:  rubygem-mocha
 Requires:       yast2-country >= 2.18.10
 %else
 # 11.1 or SLES11
-Requires:       yast2-country >= 2.17.35
+Requires:       yast2-country >= 2.17.34.2
 %endif
 
 #
@@ -67,9 +66,9 @@ rm -rf $RPM_BUILD_ROOT
 #
 # granting all permissions for root 
 #
-/etc/yastws/tools/policyKit-rights.rb --user root --action grant >& /dev/null || :
+/usr/sbin/grantwebyastrights --user root --action grant >& /dev/null || :
 # XXX not nice to get yastws all permissions, but now not better solution
-/etc/yastws/tools/policyKit-rights.rb --user yastws --action grant >& /dev/null || :
+/usr/sbin/grantwebyastrights --user yastws --action grant >& /dev/null || :
 
 %files 
 %defattr(-,root,root)

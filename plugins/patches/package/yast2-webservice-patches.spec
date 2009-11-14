@@ -14,11 +14,10 @@ PreReq:         yast2-webservice
 # ruby-dbus is required by yast2-webservice already
 # but here we use a recent feature of DBus::Main.quit
 Requires:       ruby-dbus >= 0.2.9
-Provides:       yast2-webservice:/srv/www/yastws/app/controllers/patch_updates_controller.rb
 License:	GPL v2 only
 Group:          Productivity/Networking/Web/Utilities
 Autoreqprov:    on
-Version:        0.0.6
+Version:        0.0.8
 Release:        0
 Summary:        YaST2 - Webservice - Patches
 Source:         www.tar.bz2
@@ -65,7 +64,7 @@ rm -rf $RPM_BUILD_ROOT
 #
 # granting all permissions for root
 #
-/etc/yastws/tools/policyKit-rights.rb --user root --action grant >& /dev/null || :
+/usr/sbin/grantwebyastrights --user root --action grant >& /dev/null || :
 
 %files
 %defattr(-,root,root)

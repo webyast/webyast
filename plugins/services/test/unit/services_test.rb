@@ -100,18 +100,6 @@ class ServiceTest < ActiveSupport::TestCase
 
 
 #  test "check custom service status" do
-#    YaST::ConfigFile.stubs(:config_default_location).returns(vendor_config('valid'))
-#
-#    # do not call introspection in the Scr constructor
-#    DBus::SystemBus.instance.stubs(:introspect).returns('<node><interface name="org.opensuse.yast.SCR.Methods"></interface></node>')
-#
-#    ret = {'exit' => '0', 'stderr' => '', 'stdout' => "Checking for service collectd ..running\n"}
-#    Scr.instance.stubs(:execute).with(['/usr/sbin/rccollectd status']).returns(ret)
-#
-#    s = Service.new('vendor_service')
-#    assert s.save("status") == ret
-#    s.read_status
-#    assert s.status == '0'
 #  end
 
 

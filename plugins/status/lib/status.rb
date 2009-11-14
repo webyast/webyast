@@ -25,10 +25,16 @@ class Status
               xml.label(:type => "hash", :name => label) do
                 # limits
                 path = "#{metric_group}/#{metric}/#{label}"
-                if @limits and @limits.has_key? path
+                subpath = "#{metric_group}/#{metric}"
+                if @limits and (@limits.has_key?(path) || @limits.has_key?(subpath)) #could also be a subtree
                   xml.limits() do
-                    xml.min(@limits["#{path}"]["maximum"])
-                    xml.max(@limits["#{path}"]["minimum"])
+                    if @limits.has_key?(path)
+                      xml.max(@limits["#{path}"]["max"]) 
+                      xml.min(@limits["#{path}"]["min"])
+                    else
+                      xml.max(@limits["#{subpath}"]["max"]) 
+                      xml.min(@limits["#{subpath}"]["min"])
+                    end
                   end
                 end
                 # values
@@ -68,8 +74,13 @@ class Status
   # returns the data path
   def datapath
     if @datapath.blank?
-      # if no datapath is set, use the first directory in /var/lib/collectd
-      @datapath = Dir.glob("/var/lib/collectd/*").first
+      # if no datapath is set, use the first directory with the valid hostname in /var/lib/collectd
+      datapath_list = Dir.glob("/var/lib/collectd/*")
+      hostname = `hostname`
+      hostname.strip!
+      datapath_list.reject! {|dir| File.basename(dir) != hostname && !File.basename(dir).start_with?(hostname+".")} # take entries with the beginning hostname only
+      Rails.logger.error "/var/lib/collectd/ has more than one entry with the hostname #{hostname}" if datapath_list.size > 1 
+      @datapath = datapath_list.first
       if @datapath.nil?
 	  raise Exception.new("Cannot read data from /var/lib/collectd/, check status of 'collectd' service")
       end
@@ -185,15 +196,16 @@ class Status
 
     raise "Error running collectd rrdtool" if output =~ /ERROR/ or output.nil?
 
-    labels=""
+    labels=[]
     lines = output.split "\n"
+    return result if lines.blank? #no data found --> return
 
     # set label names
     lines[0].each do |l|
       if l =~ /\D*/
         labels = l.split " "
       end
-    end
+    end 
     unless labels.blank?
       # set values for each label and time
       # evaluates interval and starttime once for each metric (not each label)

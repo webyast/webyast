@@ -13,7 +13,7 @@ Name:           yast2-webservice-network
 License:	GPL v2 only
 Group:          Productivity/Networking/Web/Utilities
 Autoreqprov:    on
-Version:        0.0.9
+Version:        0.0.11
 Release:        0
 Summary:        YaST2 - Webservice - Network
 Source:         www.tar.bz2
@@ -24,9 +24,9 @@ BuildRequires:  rubygem-yast2-webservice-tasks rubygem-restility
 PreReq:         yast2-webservice
 # YaPI/NETWORK.pm
 %if 0%{?suse_version} == 0 || %suse_version > 1110
-Requires:       yast2-network >= 2.18.47
+Requires:       yast2-network >= 2.18.51
 %else
-Requires:       yast2-network >= 2.17.100
+Requires:       yast2-network >= 2.17.78.1
 %endif
 
 #
@@ -73,9 +73,9 @@ rm -rf $RPM_BUILD_ROOT
 #
 # granting all permissions for root
 #
-/etc/yastws/tools/policyKit-rights.rb --user root --action grant >& /dev/null || :
+/usr/sbin/grantwebyastrights --user root --action grant >& /dev/null || :
 # and for yastws
-/etc/yastws/tools/policyKit-rights.rb --user %{pkg_user} --action grant >& /dev/null || :
+/usr/sbin/grantwebyastrights --user %{pkg_user} --action grant >& /dev/null || :
 
 %files
 %defattr(-,root,root)

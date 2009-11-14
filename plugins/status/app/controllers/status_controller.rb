@@ -1,6 +1,21 @@
 include ApplicationHelper
 
-require 'scr'
+class HashWithoutKeyConversion < Hash; end
+HashWithoutKeyConversion.class_eval do
+   def self.unrename_keys(params)
+      case params.class.to_s
+        when "Hash"
+          params.inject({}) do |h,(k,v)|
+            h[k.to_s] = unrename_keys(v)
+            h
+          end
+        when "Array"
+          params.map { |v| unrename_keys(v) }
+        else
+          params
+         end
+  end
+end
 
 class StatusController < ApplicationController
   before_filter :login_required
@@ -10,19 +25,18 @@ class StatusController < ApplicationController
   def create_limit(status, label = "", limits = {})
     if status.is_a? Hash
       status.each do |key, value|
-        if key=="limit" && value.is_a?(Hash) && value["value"].to_f>0
-          limit = Hash.new
-          limit["value"] = value["value"].to_f
-          limit["maximum"] = value["maximum"]
-          limits[label] = limit
-        end
-        next_label = ""
-        if label.blank?
-          next_label = key
+        if value.is_a?(Hash)
+          unless label.blank?
+            next_label = label+ "/" + key
+          else
+             next_label = key
+          end
+          create_limit(value, next_label, limits)
         else
-          next_label = label+ "/" + key
+          limits[label] ||= { "max" => 0, "min" => 0 }
+          limits[label]["max"] = value.to_f if key == "max"
+          limits[label]["min"] = value.to_f if key == "min"
         end
-        create_limit(value, next_label, limits) if value.is_a? Hash
       end
     end
     return limits
@@ -45,7 +59,8 @@ class StatusController < ApplicationController
       end
     end
     limits = Hash.new
-    limits = create_limit(params["status"])
+    pa = HashWithoutKeyConversion.from_xml(params["status"]["limits"])
+    limits = create_limit(pa["limits"])
     f = File.open(File.join(plugin_config_dir, "status_limits.yaml"), "w")
     f.write(limits.to_yaml)
     f.close

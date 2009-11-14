@@ -146,7 +146,7 @@ EOF
   scr_actions = `polkit-action`.split.reject { |item| not item.include?('org.opensuse.yast.scr.') }
   webservice_actions = [ 'org.freedesktop.packagekit.system-update', 'org.freedesktop.packagekit.package-install',  'org.freedesktop.policykit.read', *scr_actions]
 
-  hint_message = "Use utility script policyKit-rights.rb to grant them all. See http://en.opensuse.org/YaST/Web/Development\nAlternatively, you can add the following to /etc/PolicyKit/PolicyKit.conf config tag section:\n#{policykit_conf}\n"
+  hint_message = "Use utility script grantwebyastrights to grant them all. See http://en.opensuse.org/YaST/Web/Development\nAlternatively, you can add the following to /etc/PolicyKit/PolicyKit.conf config tag section:\n#{policykit_conf}\n"
 
   webservice_actions.each do | action|
     if not granted.include?(action)
@@ -156,7 +156,7 @@ EOF
   end
 
   # now check that all permission in each policy is granted
-  hint_message = "\nUse utility script policyKit-rights.rb to grant them all.\nSee http://en.opensuse.org/YaST/Web/Development\nYou can also grant them to the root user and login as root to the YaST web client.\n\n"
+  hint_message = "\nUse utility script grantwebyastrights.rb to grant them all.\nSee http://en.opensuse.org/YaST/Web/Development\nYou can also grant them to the root user and login as root to the YaST web client.\n\n"
   Dir.glob(File.join(File.dirname(__FILE__), '../../..', "**/*.policy")).each do |policy|
     doc = REXML::Document.new(File.open(policy))
     doc.elements.each("/policyconfig/action") do |action|
