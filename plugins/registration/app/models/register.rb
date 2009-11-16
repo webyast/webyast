@@ -146,7 +146,7 @@ class Register
     changedrepos = {}
     changedservices = {}
 
-    tasklist = Hash.from_xml @reg['tasklist'] if @reg && @reg['tasklist']
+    tasklist = HashWithoutKeyConversion.from_xml @reg['tasklist'] if @reg && @reg['tasklist']
 
     if ( tasklist && tasklist.has_key?('tasklist') && tasklist['tasklist'] &&
          tasklist['tasklist'].has_key?('item') && tasklist['tasklist']['item'] )
