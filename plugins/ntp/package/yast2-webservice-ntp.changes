@@ -1,4 +1,11 @@
 -------------------------------------------------------------------
+Wed Nov 18 08:08:02 UTC 2009 - jreidinger@novell.com
+
+- don't raise exception if dbus timeout due to time move to future
+  or past (bnc#553980)
+- 0.0.6
+
+-------------------------------------------------------------------
 Tue Nov 10 16:19:32 CET 2009 - jreidinger@suse.cz
 
 - remove deprecated provisions in spec file 
