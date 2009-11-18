@@ -47,6 +47,7 @@ Authors:
 
 %build
 # build restdoc documentation
+mkdir -p public/network/restdoc
 export RAILS_PARENT=/srv/www/yastws
 env LANG=en rake restdoc
 
