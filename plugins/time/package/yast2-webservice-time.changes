@@ -1,4 +1,11 @@
 -------------------------------------------------------------------
+Wed Nov 18 08:29:49 UTC 2009 - jreidinger@novell.com
+
+- prevent timeout error also if timezone or UTC status and cause 
+  time move (bnc#553980)
+- 0.0.10
+
+-------------------------------------------------------------------
 Tue Nov 10 16:38:52 CET 2009 - jreidinger@suse.cz
 
 - remove useless scr require from controller test
