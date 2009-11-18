@@ -74,18 +74,19 @@ class Status
   # returns the data path
   def datapath
     if @datapath.blank?
-	  if File.directory? "/var/lib/collectd/WebYaST"
-	    @datapath = "/var/lib/collectd/WebYaST"
-	  else
-      # if no datapath is set, use the first directory with the valid hostname in /var/lib/collectd
-      datapath_list = Dir.glob("/var/lib/collectd/*")
-      hostname = `hostname`
-      hostname.strip!
-      datapath_list.reject! {|dir| File.basename(dir) != hostname && !File.basename(dir).start_with?(hostname+".")} # take entries with the beginning hostname only
-      Rails.logger.error "/var/lib/collectd/ has more than one entry with the hostname #{hostname}" if datapath_list.size > 1 
-      @datapath = datapath_list.first
-      if @datapath.nil?
-	  raise Exception.new("Cannot read data from /var/lib/collectd/, check status of 'collectd' service")
+      if File.directory? "/var/lib/collectd/WebYaST"
+	@datapath = "/var/lib/collectd/WebYaST"
+      else
+        # if no datapath is set, use the first directory with the valid hostname in /var/lib/collectd
+        datapath_list = Dir.glob("/var/lib/collectd/*")
+        hostname = `hostname`
+        hostname.strip!
+        datapath_list.reject! {|dir| File.basename(dir) != hostname && !File.basename(dir).start_with?(hostname+".")} # take entries with the beginning hostname only
+        Rails.logger.error "/var/lib/collectd/ has more than one entry with the hostname #{hostname}" if datapath_list.size > 1 
+        @datapath = datapath_list.first
+        if @datapath.nil?
+          raise Exception.new("Cannot read data from /var/lib/collectd/, check status of 'collectd' service")
+        end
       end
     end
     @datapath
