@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Wed Nov 18 16:47:37 CET 2009 - jdsn@suse.de
+
+- fix success message of registration
+- version 0.0.8 
+
+-------------------------------------------------------------------
 Sat Nov 14 04:00:37 CET 2009 - jdsn@suse.de
 
 - adaptions for the fix of the internal server error (bnc#553244)
