@@ -60,6 +60,7 @@ class ApplicationController < ActionController::Base
         end
       end
     end
+    logger.warn "Uncaught exception: #{exception.message} \n Backtrace: #{exception.backtrace.join('\n')}"
       
     render :xml => exception, :status => 500
     
