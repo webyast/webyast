@@ -19,7 +19,12 @@ class Ntp
 
   private
     def synchronize
-      ret = YastService.Call("YaPI::NTP::Synchronize")
+      ret = "OK"
+      begin
+        ret = YastService.Call("YaPI::NTP::Synchronize")
+      rescue Exception => e
+        Rails.logger.info "ntp synchronization cause probably timeout #{e.inspect}"
+      end
       raise NtpError.new(ret) unless ret == "OK"
     end
 end

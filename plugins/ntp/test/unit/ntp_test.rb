@@ -29,4 +29,15 @@ class NtpTest < ActiveSupport::TestCase
     end
   end  
 
+  def test_synchronize_error
+    @model.actions[:synchronize] = true
+    msg_mock = mock()
+    msg_mock.stubs(:error_name).returns("org.freedesktop.DBus.Error.NoReply")
+    msg_mock.stubs(:params).returns(["test","test"])
+    YastService.stubs(:Call).with("YaPI::NTP::Synchronize").once.raises(DBus::Error,msg_mock)
+
+    assert_nothing_raised do
+      @model.save
+    end
+  end  
 end
