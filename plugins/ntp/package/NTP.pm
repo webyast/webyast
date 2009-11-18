@@ -14,15 +14,19 @@ sub Synchronize {
   my $out = undef;
 
   foreach my $server (@{$servers}){
-    # -r: do set the system time
+    # -r: set the system time
     # -P no: do not ask if time difference is too large
     # -c 1 -d 15: delay 15s, only one try (bnc#442287)
     $out = `/usr/sbin/sntp -c 1 -d 15 -r -P no '$server' 2>&1`;
-    return "OK" unless ($?);
+    last if ($?==0);
     $out = "Error for server $server: $out";
   }
   return "NOSERVERS" unless (defined ($out));
-  return $out;
+  my $ret = `hwclock --utc --systohc`;
+  if ($? == 0){
+    return "OK";
+  }
+  return $out.$ret;
 }
 
 sub getServers {
