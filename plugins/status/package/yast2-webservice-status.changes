@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Wed Nov 18 14:54:36 CET 2009 - bbrunner@suse.de
+
+- collectd saves datas to /var/lib/collectd/WebYaST static; (bnc#555204)
+- vesion 0.0.8
+
+-------------------------------------------------------------------
 Tue Nov 10 14:40:47 CET 2009 - schubi@suse.de
 
 - searching for the correct host in /var/lib/collectd/; (bnc#549022) 

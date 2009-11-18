@@ -70,7 +70,6 @@ class SystemtimeTest < ActiveSupport::TestCase
   def test_setter_without_time
     YastService.stubs(:Call).with("YaPI::TIME::Write",WRITE_ARGUMENTS_NONE).returns(true)
     YastService.expects(:Call).once
-    YastService.expects(:Call).with("YaPI::NTP::Synchronize").never
 
     @model.timezone = "America/Kentucky/Monticello"
     @model.utcstatus = "false"
@@ -80,13 +79,28 @@ class SystemtimeTest < ActiveSupport::TestCase
   def test_setter_with_time
     YastService.stubs(:Call).with("YaPI::TIME::Write",WRITE_ARGUMENTS_TIME).returns(true)
     YastService.expects(:Call).once
-    YastService.expects(:Call).with("YaPI::NTP::Synchronize").never
 
     @model.timezone = "America/Kentucky/Monticello"
     @model.utcstatus = "false"
     @model.date = "02/07/2009"
     @model.time = "12:18:00"
     @model.save
+  end
+
+  def test_setter_with_move_to_future
+    msg_mock = mock()
+    msg_mock.stubs(:error_name).returns("org.freedesktop.DBus.Error.NoReply")
+    msg_mock.stubs(:params).returns(["test","test"])
+    YastService.stubs(:Call).with("YaPI::TIME::Write",WRITE_ARGUMENTS_TIME).raises(DBus::Error,msg_mock)
+    YastService.expects(:Call).once
+
+    @model.timezone = "America/Kentucky/Monticello"
+    @model.utcstatus = "false"
+    @model.date = "02/07/2009"
+    @model.time = "12:18:00"
+    assert_nothing_raised do
+      @model.save
+    end
   end
 
   def test_xml

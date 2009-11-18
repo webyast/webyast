@@ -1,4 +1,13 @@
 -------------------------------------------------------------------
+Wed Nov 18 15:40:12 CET 2009 - mvidner@suse.cz
+
+- Fixed building the REST docs (bnc#537188#c2).
+- Use the new name of policyKit-rights.rb: grantwebyastrights
+  (bnc#554946, mkudlvasr).
+- Fixed the yast2-network dependency on 11.2 (jreidinger).
+- 0.0.12
+
+-------------------------------------------------------------------
 Tue Nov 10 16:57:56 CET 2009 - jreidinger@suse.cz
 
 - adapt requirements to SLE11 GA version of network

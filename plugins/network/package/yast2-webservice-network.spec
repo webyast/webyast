@@ -13,7 +13,7 @@ Name:           yast2-webservice-network
 License:	GPL v2 only
 Group:          Productivity/Networking/Web/Utilities
 Autoreqprov:    on
-Version:        0.0.11
+Version:        0.0.12
 Release:        0
 Summary:        YaST2 - Webservice - Network
 Source:         www.tar.bz2
@@ -47,6 +47,7 @@ Authors:
 
 %build
 # build restdoc documentation
+mkdir -p public/network/restdoc
 export RAILS_PARENT=/srv/www/yastws
 env LANG=en rake restdoc
 

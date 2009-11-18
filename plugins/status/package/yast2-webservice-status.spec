@@ -13,7 +13,7 @@ Name:           yast2-webservice-status
 License:	GPL v2 only
 Group:          Productivity/Networking/Web/Utilities
 Autoreqprov:    on
-Version:        0.0.7
+Version:        0.0.8
 Release:        0
 Summary:        YaST2 - Webservice - Status
 Source:         www.tar.bz2
@@ -90,10 +90,14 @@ sed -i "s/^FQDNLookup.*/FQDNLookup false/" "/etc/collectd.conf"
 sed -i "s/^#LoadPlugin df.*/LoadPlugin df/" "/etc/collectd.conf"
 
 #
+# set "Hostname" to WebYaST
+#
+sed -i "s/^#Hostname[[:space:]].*/#If you change hostname please delete \/var\/lib\/collectd\/WebYaST\nHostname \"WebYaST\"/" "/etc/collectd.conf"
+#
 # enable and start  collectd
 # 
 %{fillup_and_insserv -Y collectd}
-rccollectd start
+rccollectd restart
 
 %files
 %defattr(-,root,root)

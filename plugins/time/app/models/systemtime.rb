@@ -84,13 +84,11 @@ class Systemtime
     if @utcstatus and !@utcstatus.empty?
       settings["utcstatus"] = @utcstatus
     end
-    need_rescue = false
     if (@date and !@date.empty?) and
         (@time and !@time.empty?)
       date = @date.split("/")
       datetime = "#{date[2]}-#{date[0]}-#{date[1]} - "+@time
       settings["currenttime"] = datetime
-      need_rescue = true    
     end
 
     RAILS_DEFAULT_LOGGER.info "called write with #{settings.inspect}"
@@ -98,10 +96,9 @@ class Systemtime
     begin
       YastService.Call("YaPI::TIME::Write",settings)
     rescue Exception => e
+      Rails.logger.info "Exception thrown by DBus probably timeout #{e.inspect}"
       #XXX hack to avoid dbus timeout durign moving time to future
-      unless need_rescue
-        raise
-      end
+      #FIXME use correct exception
     end
   end
 
