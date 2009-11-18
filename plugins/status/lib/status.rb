@@ -74,6 +74,9 @@ class Status
   # returns the data path
   def datapath
     if @datapath.blank?
+	  if File.directory? "/var/lib/collectd/WebYaST"
+	    @datapath = "/var/lib/collectd/WebYaST"
+	  else
       # if no datapath is set, use the first directory with the valid hostname in /var/lib/collectd
       datapath_list = Dir.glob("/var/lib/collectd/*")
       hostname = `hostname`

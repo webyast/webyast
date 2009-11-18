@@ -90,10 +90,14 @@ sed -i "s/^FQDNLookup.*/FQDNLookup false/" "/etc/collectd.conf"
 sed -i "s/^#LoadPlugin df.*/LoadPlugin df/" "/etc/collectd.conf"
 
 #
+# set "Hostname" to WebYaST
+#
+sed -i "s/^#Hostname[[:space:]].*/#If you change hostname please delete \/var\/lib\/collectd\/WebYaST\nHostname \"WebYaST\"/" "/etc/collectd.conf"
+#
 # enable and start  collectd
 # 
 %{fillup_and_insserv -Y collectd}
-rccollectd start
+rccollectd restart
 
 %files
 %defattr(-,root,root)
