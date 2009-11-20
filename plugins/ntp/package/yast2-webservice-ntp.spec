@@ -14,10 +14,12 @@ Name:           yast2-webservice-ntp
 PreReq:         yast2-webservice
 #for YaPI needs ntp
 Requires:	ntp
+#for YaPI hwclock
+Requires:	util-linux
 License:	GPL v2 only
 Group:          Productivity/Networking/Web/Utilities
 Autoreqprov:    on
-Version:        0.0.7
+Version:        0.0.8
 Release:        0
 Summary:        YaST2 - Webservice - NTP
 Source:         www.tar.bz2

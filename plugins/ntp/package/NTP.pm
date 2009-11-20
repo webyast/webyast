@@ -2,6 +2,7 @@ package YaPI::NTP;
 
 use strict;
 use YaPI;
+use YaST::YCP qw(:LOGGING);
 
 our %TYPEINFO;
 
@@ -20,9 +21,11 @@ sub Synchronize {
     $out = `/usr/sbin/sntp -c 1 -d 15 -r -P no '$server' 2>&1`;
     last if ($?==0);
     $out = "Error for server $server: $out";
+    y2warning($out);
   }
   return "NOSERVERS" unless (defined ($out));
-  my $ret = `hwclock --utc --systohc`;
+  my $ret = `/sbin/hwclock --utc --systohc`;
+  y2milestone("hwclock returns $?: $ret");
   if ($? == 0){
     return "OK";
   }

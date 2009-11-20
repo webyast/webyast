@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Fri Nov 20 12:29:33 UTC 2009 - jreidinger@novell.com
+
+- fix writing ntp to hardware clock (use absolute path) (bnc#553980)
+- 0.0.8
+
+-------------------------------------------------------------------
 Wed Nov 18 10:45:24 UTC 2009 - jreidinger@novell.com
 
 - write time from ntp to hardware clock (bnc#556467)
