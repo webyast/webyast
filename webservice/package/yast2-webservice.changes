@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Fri Nov 20 13:42:06 CET 2009 - mvidner@suse.cz
+
+- Added a service definition for SuSEfirewall2 (bnc#545627).
+- 0.0.15
+
+-------------------------------------------------------------------
 Thu Nov 12 12:49:39 UTC 2009 - jreidinger@novell.com
 
 - rename script for granting webyast permissions and move it to

@@ -30,7 +30,7 @@ PreReq:         ruby-rpam, ruby-polkit, rubygem-test-unit
 License:	LGPL v2.1 only
 Group:          Productivity/Networking/Web/Utilities
 Autoreqprov:    on
-Version:        0.0.14
+Version:        0.0.15
 Release:        0
 Summary:        YaST2 - Webservice 
 Source:         www.tar.bz2
@@ -43,6 +43,7 @@ Source6:        yast_user_roles
 Source7:        lighttpd.conf
 Source8:        modules.conf
 Source9:        yastws
+Source10:       webyast
 BuildRoot:      %{_tmppath}/%{name}-%{version}-build
 BuildRequires:  ruby, pkg-config, rubygem-mocha
 # if we run the tests during build, we need most of Requires here too,
@@ -125,6 +126,10 @@ mkdir -p $RPM_BUILD_ROOT/usr/share/PolicyKit/policy
 install -m 0644 %SOURCE4 $RPM_BUILD_ROOT/usr/share/PolicyKit/policy/
 install -m 0644 %SOURCE6 $RPM_BUILD_ROOT/etc/
 install -m 0555 %SOURCE5 $RPM_BUILD_ROOT/usr/sbin/
+
+# firewall service definition, bnc#545627
+mkdir -p $RPM_BUILD_ROOT/etc/sysconfig/SuSEfirewall2.d/services
+install -m 0644 %SOURCE10 $RPM_BUILD_ROOT/etc/sysconfig/SuSEfirewall2.d/services
 
 #  create yastwsdirs (config, var and data)
 mkdir -p $RPM_BUILD_ROOT/etc/webyast

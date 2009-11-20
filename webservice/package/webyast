@@ -1,0 +1,6 @@
+# SuSEfirewall2 service definition
+## Name: WebYaST 
+## Description: The back end of WebYaST, http://en.opensuse.org/WebYaST
+
+# space separated list of allowed TCP ports
+TCP="4984"
