@@ -232,6 +232,7 @@ echo "Database is ready"
 %config /etc/yastws/vhosts.d/rails.inc
 %config /etc/yastws/cleanurl-v5.lua
 %config /etc/yastws/modules.conf
+%config /etc/sysconfig/SuSEfirewall2.d/services/webyast
 %config /usr/share/PolicyKit/policy/org.opensuse.yast.permissions.policy
 %config(noreplace) /etc/yast_user_roles
 %config(noreplace)  %{_sysconfdir}/init.d/%{pkg_user}
