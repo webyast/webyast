@@ -30,7 +30,7 @@ PreReq:         ruby-rpam, ruby-polkit, rubygem-test-unit
 License:	LGPL v2.1 only
 Group:          Productivity/Networking/Web/Utilities
 Autoreqprov:    on
-Version:        0.0.15
+Version:        0.0.16
 Release:        0
 Summary:        YaST2 - Webservice 
 Source:         www.tar.bz2
@@ -220,7 +220,13 @@ echo "Database is ready"
 /srv/www/yastws/Rakefile
 /srv/www/yastws/script
 #/srv/www/yastws/test
-/srv/www/yastws/config
+%dir /srv/www/yastws/config
+/srv/www/yastws/config/boot.rb
+/srv/www/yastws/config/database.yml
+/srv/www/yastws/config/environments
+/srv/www/yastws/config/initializers
+/srv/www/yastws/config/routes.rb
+/srv/www/yastws/start.sh
 #also users can run granting script, as permissions is handled by policyKit right for granting permissions
 %attr(555,root,root) %config /usr/sbin/grantwebyastrights
 %attr(755,root,root) /srv/www/yastws/start.sh
@@ -234,6 +240,7 @@ echo "Database is ready"
 %config /etc/yastws/modules.conf
 %config /etc/sysconfig/SuSEfirewall2.d/services/webyast
 %config /usr/share/PolicyKit/policy/org.opensuse.yast.permissions.policy
+%config /srv/www/yastws/config/environment.rb
 %config(noreplace) /etc/yast_user_roles
 %config(noreplace)  %{_sysconfdir}/init.d/%{pkg_user}
 %{_sbindir}/rc%{pkg_user}

@@ -1,4 +1,11 @@
 -------------------------------------------------------------------
+Tue Nov 24 13:04:49 UTC 2009 - lslezak@suse.cz
+
+- mark /srv/www/yastws/config/environment.rb as %config file
+  (bnc#557721)
+- 0.0.16
+
+-------------------------------------------------------------------
 Fri Nov 20 13:42:06 CET 2009 - mvidner@suse.cz
 
 - Added a service definition for SuSEfirewall2 (bnc#545627).
