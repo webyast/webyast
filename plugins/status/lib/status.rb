@@ -1,4 +1,24 @@
 require 'exceptions'
+
+class CollectdOutOfSyncError < BackendException
+  def initialize(timestamp)
+    @timestamp = timestamp
+    super("Collectd is out of sync.")
+  end
+
+  def to_xml
+    xml = Builder::XmlMarkup.new({})
+    xml.instruct!
+
+    xml.error do
+      xml.type "COLLECTD_SYNC_ERROR"
+      xml.description "Collectd is out of sync. Status information can be expected at #{Time.at(@timestamp.to_i).inspect}."
+      xml.timestamp @timestamp
+    end
+  end
+end
+
+
 #
 # Wrapper over collectd
 #
@@ -58,7 +78,7 @@ class Status
 
     @collectd_running = check_collectd
     raise ServiceNotRunning.new('collectd') unless @collectd_running
-    
+
     #find the correct plugin path for the config file
     plugin_config_dir = "#{RAILS_ROOT}/config" #default
     Rails.configuration.plugin_paths.each do |plugin_path|
@@ -182,6 +202,12 @@ class Status
   # runs the rddtool on file with start time and end time
   # default last 5 minutes from now
   def run_rrdtool(file, start, stop)
+
+    #checking if systemtime is BEHIND the last entry of collectd. 
+    #If yes, no data will be available.
+    timestamp = `/bin/sh -c "LC_ALL=C rrdtool last #{file}"`    
+    raise CollectdOutOfSyncError.new(timestamp) if Time.now < Time.at(timestamp.to_i)
+
     stop = Time.now if stop.nil?
     # fetch last 5 minutes
     start = stop - 300 if start.nil?
