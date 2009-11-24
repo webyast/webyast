@@ -100,6 +100,18 @@ class Systemtime
       #XXX hack to avoid dbus timeout durign moving time to future
       #FIXME use correct exception
     end
+    #restart collectd as moving in time confuse status module (bnc#557929)
+    begin
+      ret = YastService.Call("YaPI::SERVICES::Execute",{
+            "name" => ["s","collectd"],
+            "action" => ["s","restart"]
+          })
+      Rails.logger.info "Calling restart of collectd with result: #{ret.inspect}"
+    rescue Exception => e
+      Rails.logger.warn "Exception thrown by DBus while restarting collectd #{e.inspect}"
+      #restarting collectd is optional, so it should not do anything
+    end
+
   end
 
   def to_xml( options = {} )

@@ -1,5 +1,6 @@
 require File.expand_path(File.dirname(__FILE__) + "/../test_helper")
 require 'systemtime'
+require 'mocha'
 
 class SystemtimeTest < ActiveSupport::TestCase
 
@@ -36,14 +37,14 @@ class SystemtimeTest < ActiveSupport::TestCase
     }  
 
   WRITE_ARGUMENTS_NONE = {
-      :timezone=> "America/Kentucky/Monticello",
-      :utcstatus=> "false"
+      "timezone"=> "America/Kentucky/Monticello",
+      "utcstatus"=> "false"
     }
 
   WRITE_ARGUMENTS_TIME = {
-      :timezone=> "America/Kentucky/Monticello",
-      :utcstatus=> "false",
-      :time => "2009-07-02 - 12:18:00"
+      "timezone"=> "America/Kentucky/Monticello",
+      "utcstatus"=> "false",
+      "time" => "2009-07-02 - 12:18:00"
     }
 
   WRITE_ARGUMENTS_NTP = {
@@ -68,8 +69,12 @@ class SystemtimeTest < ActiveSupport::TestCase
   end
 
   def test_setter_without_time
-    YastService.stubs(:Call).with("YaPI::TIME::Write",WRITE_ARGUMENTS_NONE).returns(true)
-    YastService.expects(:Call).once
+    x= YastService.stubs(:Call)
+    x.with("YaPI::TIME::Write",WRITE_ARGUMENTS_NONE).once
+    x.with("YaPI::SERVICES::Execute",{
+            "name" => ["s","collectd"],
+            "action" => ["s","restart"]
+          }).once
 
     @model.timezone = "America/Kentucky/Monticello"
     @model.utcstatus = "false"
@@ -77,8 +82,12 @@ class SystemtimeTest < ActiveSupport::TestCase
   end
 
   def test_setter_with_time
-    YastService.stubs(:Call).with("YaPI::TIME::Write",WRITE_ARGUMENTS_TIME).returns(true)
-    YastService.expects(:Call).once
+    x= YastService.stubs(:Call)
+    x.with("YaPI::TIME::Write",WRITE_ARGUMENTS_TIME).returns(true).once
+    x.with("YaPI::SERVICES::Execute",{
+            "name" => ["s","collectd"],
+            "action" => ["s","restart"]
+          }).once
 
     @model.timezone = "America/Kentucky/Monticello"
     @model.utcstatus = "false"
@@ -91,8 +100,13 @@ class SystemtimeTest < ActiveSupport::TestCase
     msg_mock = mock()
     msg_mock.stubs(:error_name).returns("org.freedesktop.DBus.Error.NoReply")
     msg_mock.stubs(:params).returns(["test","test"])
-    YastService.stubs(:Call).with("YaPI::TIME::Write",WRITE_ARGUMENTS_TIME).raises(DBus::Error,msg_mock)
-    YastService.expects(:Call).once
+    x= YastService.stubs(:Call)
+    x.with("YaPI::TIME::Write",WRITE_ARGUMENTS_TIME).raises(DBus::Error,msg_mock).once
+#also if error is raised due to time moving collectd must be restarted
+    x.with("YaPI::SERVICES::Execute",{
+            "name" => ["s","collectd"],
+            "action" => ["s","restart"]
+          }).once
 
     @model.timezone = "America/Kentucky/Monticello"
     @model.utcstatus = "false"
