@@ -75,7 +75,16 @@ Configuration of EULAs
 
   has the same effect as accepting the license via the UI.
 
- Example eulas.yml File:
+ YAML
+ ----
+
+ EULAs configuration file /etc/webyast/eulas.yml (as well as other WebYaST configuration 
+ files) is written in YAML language. You can read more about it at www.yaml.org .
+
+ Examples
+ --------
+
+ Example of /etc/webyast/eulas.yml File:
 
    eulas_example.yml
 
