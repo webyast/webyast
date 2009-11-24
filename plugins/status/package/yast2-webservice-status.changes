@@ -1,4 +1,9 @@
 -------------------------------------------------------------------
+Tue Nov 24 16:07:14 CET 2009 - schubi@suse.de
+
+- raising an exception if collectd is out of sync with the systemtime (#bnc555204) 
+
+-------------------------------------------------------------------
 Wed Nov 18 14:54:36 CET 2009 - bbrunner@suse.de
 
 - collectd saves datas to /var/lib/collectd/WebYaST static; (bnc#555204)
