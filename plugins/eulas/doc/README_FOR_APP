@@ -1,41 +1,82 @@
-Eula
-====
+EULAs
+=====
 
-Plugin cares for licenses and serves them to web-client on demand.
-It handles locale, order of the licenses, checks and sets whether licenses
-were accepted.
+ With the help of the WebYaST eulas module, users are presented with one or more end
+ user licence agreements (EULAs) during the base system setup.
 
-Eula plugin package comes pre-configured with license for the distribution, 
-which the package is built for.
-
-Add vendor specific license
-===========================
-
- - Store your license text into the directory:
-     /usr/share/yastws/eulas/licenses/YOUR_LICENSE_NAME/license.txt
- - Add YOUR_LICENSE_NAME into /etc/webyast/eulas.yml configuration file.
-
- Optional
- --------
-
-  - Store your license translations the same directory as license.txt and name 
-    them like license.LANGUAGE_CODE.txt .
-  - Your license can only be shown to the user (instead of explicitely making 
-    him accept it). If you want to choose this behaviour, create an empty file 
-    named "no-acceptance-needed" in the same directory as license.txt.
- 
- Example of eulas.yml
- --------------------
-
- licenses:
-   - SLE-11
-   - YOUR_LICENSE_NAME
-
-Accept license by hand
+Configuration of EULAs
 ======================
 
-To accept a license without using the UI or webservice API, create an empty file
- in the directory: /var/lib/yastws/eulas/accepted-licenses/LICENSE_NAME. Where 
-LICENSE_NAME is a license name identical to the one in /etc/webservice/eulas.yml .
+ The list of EULAs to be used, in the order they are presented during the base system
+ setup, is defined in the /etc/webyast/eulas.yml configuration file.
+ 
+ Configuration file is started with the initial line:
+
+   licenses:
+
+ Then follows the  list of EULAs ordered as they should appear during the base system 
+ setup follows. The format of eache line is:
+
+    - EULA_name
+
+ Where EULA_name is the name of the directory containing text of the EULA. The full
+ path to this directory is:
+
+   /usr/share/yastws/eulas/licenses/EULA_name/
+
+ The EULA_name directory contains plain text files with the text of the EULA. Text
+ files should be named using the license.locale.txt format. If the file with an
+ appropriate locale is not found, license.txt is used as a fallback. 
+
+ Minimum EULA configuration
+ --------------------------
+
+  Configuration with no EULAs is possible. When the file /etc/webyast/eulas.yml is
+  missing (or if it contains only the initial line), no licenses will be displayed.
+
+ Minimum single EULA configuration
+ -------------------------
+
+  Single license configuration MUST contain english text of the license stored in:
+
+    /usr/share/yastws/eulas/licenses/EULA_name/license.txt
+
+  and /etc/webyast/eulas.yml configuration file:
+
+    licenses:
+      - EULA_name
+
+ Optional features
+ -----------------
+
+  If the file:
+
+   /usr/share/yastws/eulas/licenses/EULA_name/no-acceptance-needed
+
+  exists, there will be no Accept/Reject options displayed in the UI. After clicking
+  Next, the license will be considered accepted.
+
+ Translations
+ ------------
+
+  All files in /usr/share/yastws/eulas/licenses/EULA_name/ with the name 
+  license.locale.txt are considered license translation files with 'locale' being 
+  the language identification string. No other configuration of the translations 
+  is needed.
+
+ Accept license by hand
+ ----------------------
+
+  Sometimes, accepting the license from command line on the target appliance 
+  is useful. Entering these commands:
+
+    touch /var/lib/yastws/eulas/accepted-licenses/EULA_name
+    chown yastws /var/lib/yastws/eulas/accepted-licenses/EULA_name
+
+  has the same effect as accepting the license via the UI.
+
+ Example eulas.yml File:
+
+   eulas_example.yml
 
 Copyright (c) 2009 Novell, released under the GPL2 license
