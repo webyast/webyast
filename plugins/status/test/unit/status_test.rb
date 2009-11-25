@@ -118,4 +118,20 @@ EOF
 
     assert_equal expected_response, status.fetch_metric("/var/lib/collectd/test/memory-free.rrd", start, stop)
   end
+
+  def test_db_out_of_sync
+    stop = Time.now
+    start = Time.now - 300
+
+    status = Status.new
+
+    # stub the checking db for last entry
+    status.stubs(:last_db_entry).with("/var/lib/collectd/test/memory-free.rrd").returns("1248092090")
+    Time.stubs(:now).returns(Time.at(1248000000))
+
+    assert_raise CollectdOutOfSyncError do
+      ret = status.fetch_metric("/var/lib/collectd/test/memory-free.rrd", start, stop)
+    end
+  end
+
 end
