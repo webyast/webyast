@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Wed Nov 25 16:43:58 CET 2009 - schubi@suse.de
+
+- Waiting for yastwc until he has really written his pid file (bnc#558307)
+- remove yastwc from Should-Start option
+
+-------------------------------------------------------------------
 Tue Nov 24 13:04:49 UTC 2009 - lslezak@suse.cz
 
 - mark /srv/www/yastws/config/environment.rb as %config file
