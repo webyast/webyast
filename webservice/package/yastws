@@ -36,9 +36,9 @@
 ### BEGIN INIT INFO
 # Provides:          yastws
 # Required-Start:    $syslog $remote_fs
-# Should-Start: $time ypbind sendmail
+# Should-Start: $time ypbind sendmail yastwc
 # Required-Stop:     $syslog $remote_fs
-# Should-Stop: $time ypbind sendmail
+# Should-Stop: $time ypbind sendmail yastwc
 # Default-Start:     3 5
 # Default-Stop:      0 1 2 6
 # Short-Description: yastws 
