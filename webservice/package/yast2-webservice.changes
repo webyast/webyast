@@ -2,7 +2,6 @@
 Wed Nov 25 16:43:58 CET 2009 - schubi@suse.de
 
 - Waiting for yastwc until he has really written his pid file (bnc#558307)
-- remove yastwc from Should-Start option
 - 0.0.17
 
 -------------------------------------------------------------------
