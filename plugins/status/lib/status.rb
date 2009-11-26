@@ -199,13 +199,18 @@ class Status
     return @data
   end
 
+  #get last entry of rrd database
+  def last_db_entry(file)
+    `/bin/sh -c "LC_ALL=C rrdtool last #{file}"`    
+  end
+
   # runs the rddtool on file with start time and end time
   # default last 5 minutes from now
   def run_rrdtool(file, start, stop)
 
     #checking if systemtime is BEHIND the last entry of collectd. 
     #If yes, no data will be available.
-    timestamp = `/bin/sh -c "LC_ALL=C rrdtool last #{file}"`    
+    timestamp = last_db_entry(file)
     raise CollectdOutOfSyncError.new(timestamp) if Time.now < Time.at(timestamp.to_i)
 
     stop = Time.now if stop.nil?

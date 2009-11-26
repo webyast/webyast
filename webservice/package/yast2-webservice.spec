@@ -30,7 +30,7 @@ PreReq:         ruby-rpam, ruby-polkit, rubygem-test-unit
 License:	LGPL v2.1 only
 Group:          Productivity/Networking/Web/Utilities
 Autoreqprov:    on
-Version:        0.0.16
+Version:        0.0.17
 Release:        0
 Summary:        YaST2 - Webservice 
 Source:         www.tar.bz2

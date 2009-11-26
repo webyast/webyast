@@ -36,9 +36,9 @@
 ### BEGIN INIT INFO
 # Provides:          yastws
 # Required-Start:    $syslog $remote_fs
-# Should-Start: $time ypbind sendmail yastwc
+# Should-Start: $time ypbind sendmail
 # Required-Stop:     $syslog $remote_fs
-# Should-Stop: $time ypbind sendmail yastwc
+# Should-Stop: $time ypbind sendmail
 # Default-Start:     3 5
 # Default-Stop:      0 1 2 6
 # Short-Description: yastws 
@@ -172,6 +172,10 @@ rc_reset
 case "$1" in
     start)
 	echo -n "Starting yastws "
+
+        #Waiting for yastwc until he has really written his pid file (currently just a hack)
+        sleep 4 
+
 	startproc -p $PID_FILE -i $IGNORE_FILE $LIGHTTPD_BIN -f $LIGHTTPD_CONFIG 
 
 	# Remember status and be verbose
