@@ -12,6 +12,7 @@ class SystemControllerTest < ActionController::TestCase
     @request = ActionController::TestRequest.new
     # http://railsforum.com/viewtopic.php?id=1719
     @request.session[:account_id] = 1 # defined in fixtures    
+    YastService.stubs(:Call).with("YaPI::NTP::Available").returns(true)
   end
 
 

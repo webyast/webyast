@@ -5,7 +5,8 @@ require 'system'
 class NtpTest < ActiveSupport::TestCase
 
   def setup    
-    @model = Ntp.find    
+    YastService.stubs(:Call).with("YaPI::NTP::Available").once.returns(true)
+    @model = Ntp.find
   end
 
   def test_actions
@@ -40,4 +41,9 @@ class NtpTest < ActiveSupport::TestCase
       @model.save
     end
   end  
+
+  def test_unavailable_NTP
+    YastService.stubs(:Call).with("YaPI::NTP::Available").once.returns(false)
+    assert_equal nil, Ntp.find.actions[:synchronize]
+  end
 end

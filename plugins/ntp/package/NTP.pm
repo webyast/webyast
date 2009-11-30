@@ -32,6 +32,15 @@ sub Synchronize {
   return $out.$ret;
 }
 
+BEGIN{$TYPEINFO{Synchronize} = ["function",
+    "boolean"];
+}
+sub Available {
+  my $self = shift;
+  return ((scalar @{getServers()}) != 0) && (getServers()->[0] ne "")
+}
+
+
 sub getServers {
   my $servers = `grep "^[:space:]*NETCONFIG_NTP_STATIC_SERVERS" /etc/sysconfig/network/config | sed 's/.*="\\(.*\\)"/\\1/'`;
   my @serv = split(/\s+/,$servers);
