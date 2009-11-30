@@ -32,7 +32,7 @@ sub Synchronize {
   return $out.$ret;
 }
 
-BEGIN{$TYPEINFO{Synchronize} = ["function",
+BEGIN{$TYPEINFO{Available} = ["function",
     "boolean"];
 }
 sub Available {
