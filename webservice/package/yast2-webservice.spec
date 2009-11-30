@@ -162,13 +162,19 @@ rm -rf $RPM_BUILD_ROOT
 #
 #granting permissions for yastws
 #
-/usr/bin/polkit-auth --user yastws --grant org.freedesktop.packagekit.system-update >& /dev/null || :
-/usr/bin/polkit-auth --user yastws --grant org.freedesktop.policykit.read >& /dev/null || :
-/usr/bin/polkit-auth --user yastws --grant org.opensuse.yast.module-manager.import >& /dev/null || :
+if [ `/usr/bin/polkit-auth --user yastws | grep -c "org.freedesktop.packagekit.system-update"` -eq 0 ]; then
+  /usr/bin/polkit-auth --user yastws --grant org.freedesktop.packagekit.system-update > /dev/null
+fi
+if [ `/usr/bin/polkit-auth --user yastws | grep -c "org.freedesktop.policykit.read"` -eq 0 ]; then
+  /usr/bin/polkit-auth --user yastws --grant org.freedesktop.policykit.read > /dev/null
+fi
+if [ `/usr/bin/polkit-auth --user yastws | grep -c "org.opensuse.yast.module-manager.import"` -eq 0 ]; then
+  /usr/bin/polkit-auth --user yastws --grant org.opensuse.yast.module-manager.import > /dev/null
+fi
 #
 # granting all permissions for root 
 #
-/usr/sbin/grantwebyastrights --user root --action grant >& /dev/null || :
+/usr/sbin/grantwebyastrights --user root --action grant > /dev/null
 #
 # create database 
 #
