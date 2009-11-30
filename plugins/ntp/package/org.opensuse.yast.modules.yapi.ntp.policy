@@ -16,4 +16,12 @@
     </defaults>
   </action>
 
+  <action id="org.opensuse.yast.modules.yapi.ntp.available">
+    <description>Test if ntp is available</description>
+    <message>Authentication is required to test if ntp is available</message>
+    <defaults>
+      <allow_inactive>no</allow_inactive>
+      <allow_active>no</allow_active>
+    </defaults>
+  </action>
 </policyconfig>
