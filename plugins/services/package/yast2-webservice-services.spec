@@ -19,7 +19,7 @@ Release:        0
 Summary:        YaST2 - Webservice - Services
 Source:         www.tar.bz2
 Source1:        org.opensuse.yast.modules.yapi.services.policy
-Source2:	YML.rb
+Source2:	      YML.rb
 BuildRoot:      %{_tmppath}/%{name}-%{version}-build
 BuildArch:      noarch
 BuildRequires:  rubygem-yast2-webservice-tasks rubygem-restility
@@ -88,8 +88,8 @@ rm -rf $RPM_BUILD_ROOT
 #
 # granting all permissions for root 
 #
-/usr/sbin/grantwebyastrights --user root --action grant >& /dev/null || :
-/usr/sbin/grantwebyastrights --user yastws --action grant >& /dev/null || :
+/usr/sbin/grantwebyastrights --user root --action grant > /dev/null
+/usr/sbin/grantwebyastrights --user yastws --action grant > /dev/null
 
 %files 
 %defattr(-,root,root)

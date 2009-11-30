@@ -59,7 +59,7 @@ rm -rf $RPM_BUILD_ROOT
 #
 # granting all permissions for root 
 #
-/usr/sbin/grantwebyastrights --user root --action grant >& /dev/null || :
+/usr/sbin/grantwebyastrights --user root --action grant > /dev/null
 
 %files 
 %defattr(-,root,root)

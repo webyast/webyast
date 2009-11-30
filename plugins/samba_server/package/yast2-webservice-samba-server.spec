@@ -57,18 +57,10 @@ rm -rf $RPM_BUILD_ROOT
 
 %post
 # grant the needed privileges to the server user
-/usr/bin/polkit-auth --user %{pkg_user} --grant org.opensuse.yast.modules.yapi.samba.getalldirectories >& /dev/null || :
-/usr/bin/polkit-auth --user %{pkg_user} --grant org.opensuse.yast.modules.yapi.samba.addshare >& /dev/null || :
-/usr/bin/polkit-auth --user %{pkg_user} --grant org.opensuse.yast.modules.yapi.samba.editshare >& /dev/null || :
-/usr/bin/polkit-auth --user %{pkg_user} --grant org.opensuse.yast.modules.yapi.samba.deleteshare >& /dev/null || :
-/usr/bin/polkit-auth --user %{pkg_user} --grant org.opensuse.yast.modules.yapi.samba.getshare >& /dev/null || :
+/usr/sbin/grantwebyastrights --user yastws --action grant > /dev/null
 
 # grant the needed privileges to root
-/usr/bin/polkit-auth --user root --grant org.opensuse.yast.modules.yapi.samba.getalldirectories >& /dev/null || :
-/usr/bin/polkit-auth --user root --grant org.opensuse.yast.modules.yapi.samba.addshare >& /dev/null || :
-/usr/bin/polkit-auth --user root --grant org.opensuse.yast.modules.yapi.samba.editshare >& /dev/null || :
-/usr/bin/polkit-auth --user root --grant org.opensuse.yast.modules.yapi.samba.deleteshare >& /dev/null || :
-/usr/bin/polkit-auth --user root --grant org.opensuse.yast.modules.yapi.samba.getshare >& /dev/null || :
+/usr/sbin/grantwebyastrights --user root --action grant > /dev/null
 
 %files 
 %defattr(-,root,root)
