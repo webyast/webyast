@@ -191,6 +191,11 @@ echo "Database is ready"
 %{insserv_cleanup}
 
 #---------------------------------------------------------------
+# restart yastws on lighttpd update (bnc#559534)
+%triggerin -- lighttpd
+%restart_on_update %{pkg_user}
+
+#---------------------------------------------------------------
 %files 
 %defattr(-,root,root)
 #this /etc/yastws is for ligght conf for yastws

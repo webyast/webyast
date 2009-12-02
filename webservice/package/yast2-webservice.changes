@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Wed Dec  2 20:41:21 CET 2009 - kkaempf@suse.de
+
+- trigger service restart on lighttpd update (bnc#559534)
+- 0.0.18
+
+-------------------------------------------------------------------
 Wed Nov 25 16:43:58 CET 2009 - schubi@suse.de
 
 - Waiting for yastwc until he has really written his pid file (bnc#558307)
