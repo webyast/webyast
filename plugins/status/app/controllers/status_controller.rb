@@ -82,10 +82,13 @@ class StatusController < ApplicationController
   # GET /status/1
   # GET /status/1.xml
   def show
+    bgr = params['background']
+    Rails.logger.info "Reading status in background" if bgr
+
     permission_check("org.opensuse.yast.system.status.read")
     @status = Status.new
     stop = params[:stop].blank? ? Time.now : Time.at(params[:stop].to_i)
     start = params[:start].blank? ? stop - 300 : Time.at(params[:start].to_i)
-    @status.collect_data(start, stop, params[:data])
+    @status.collect_data(start, stop, params[:data], bgr)
   end
 end

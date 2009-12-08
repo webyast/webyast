@@ -31,7 +31,18 @@ class Status
                 :metrics,
                 :limits
 
+  # currently running status requests in background (current states)
+  @@running = Hash.new
+  # finished requests (actual results)
+  @@done = Hash.new
+  # a mutex which guards access to the shared class variables above
+  @@mutex = Mutex.new
+
   def to_xml(options = {})
+    if @data.class == Hash && @data.size == 1 && @data[:progress].class == BackgroundStatus
+      return @data[:progress].to_xml
+    end
+
     xml = options[:builder] ||= Builder::XmlMarkup.new(options)
     xml.instruct! unless options[:skip_instruct]
 
@@ -166,23 +177,99 @@ class Status
   def draw_graph(heigth=nil, width=nil)
   end
 
+  # this is a wrapper to collect_data
+  def collect_data(start=nil, stop=nil, data = %w{cpu memory disk}, background = false)
+    # background reading doesn't work correctly if class reloading is active
+    # (static class members are lost between requests)
+    if background && !Rails.configuration.cache_classes
+      Rails.logger.info "Class reloading is active, cannot use background thread (set config.cache_classes = true)"
+      background = false
+    end
+
+    if background
+      # background status
+      bs = nil
+      key = start.to_i.to_s + '_' + stop.to_i.to_s + '_' + data.to_s
+      @@mutex.synchronize do
+        if @@done.has_key?(key)
+          Rails.logger.debug "Request #{key} is done"
+          @data = @@done.delete key
+          @data.delete :progress
+          return @data
+        end
+
+        running = @@running[key]
+        if running
+          Rails.logger.debug "Request #{key} is already running: #{running.inspect}"
+          @data = {:progress => running}
+          return @data
+        end
+
+        bs = BackgroundStatus.new
+        @@running[key] = bs
+      end
+      
+      # read the status in a separate thread
+      Thread.new do
+        Rails.logger.info '*** Background thread for reading status started...'
+        res = collect_status_data(start, stop, data, bs)
+        @@mutex.synchronize do
+          @@running.delete(key)
+          @@done[key] = res
+        end
+        Rails.logger.info '*** Finishing background status thread'
+      end
+
+      # return current progress
+      @data = {:progress => bs}
+      return @data
+    else
+      collect_status_data(start, stop, data)
+    end
+  end
+
   # creates several metrics for a defined period
-  def collect_data(start=nil, stop=nil, data = %w{cpu memory disk})
+  def collect_status_data(start=nil, stop=nil, data = %w{cpu memory disk}, progress=nil)
+
     metrics = available_metrics
     #puts metrics.inspect
     result = Hash.new
     if @collectd_running
-        case data
+      current_step = 0 if progress
+      case data
         when nil, "all", "All" # all metrics
+          if progress
+            total_steps = metrics.size
+          end
+
           metrics.each_pair do |m, n|
+            if progress
+              @@mutex.synchronize do
+                progress.status = m.to_s
+                progress.progress = 100 * current_step / total_steps
+                Rails.logger.debug "*** Reading status: #{progress.status}: #{progress.progress}%"
+              end
+            end
+
             metrics[m][:rrds].each do |rrdb|
               result[File.basename(rrdb).chomp('.rrd')] = fetch_metric(rrdb, start, stop)
             end
             @data[m] = result
             result = Hash.new
+
+            current_step += 1 if progress
           end
         else # only metrics in data
+          total_steps = data.size if progress
           data.each do |d|
+            if progress
+              @@mutex.synchronize do
+                progress.status = d.to_s
+                progress.progress = 100 * current_step / total_steps
+                Rails.logger.debug "*** Reading status: #{progress.status}: #{progress.progress}%"
+              end
+            end
+
             metrics.each_pair do |m, n|
               if m.include?(d)
                 metrics[m][:rrds].each do |rrdb|
@@ -192,6 +279,7 @@ class Status
               result = Hash.new
             end
           end
+          current_step += 1 if progress
         end
       end
     end

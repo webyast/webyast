@@ -2,7 +2,7 @@
 
 class BackgroundStatus
 
-  attr_writer	  :status,
+  attr_accessor	  :status,
 		  :progress,
 		  :subprogress
 
