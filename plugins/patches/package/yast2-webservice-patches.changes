@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Tue Dec  8 18:24:24 CET 2009 - mvidner@suse.cz
+
+- Fixed a hang when PackageKit responded too fast (bnc#561578).
+- 0.0.9
+
+-------------------------------------------------------------------
 Fri Nov 13 14:00:46 UTC 2009 - jreidinger@novell.com
 
 - adapt to policykit granting script rename (bnc#554946) (mkudlvasr)
