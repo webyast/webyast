@@ -53,4 +53,14 @@ MASS_DATA = { :arg1 => "last", :arg2 => "5", :callback_used => false }
     assert_equal "last", test2.arg1
     assert test2.arg2.nil?
   end
+
+  def test_xml_serialization
+    test= Test.new(MASS_DATA)
+    xml = test.to_xml
+    assert xml
+    test2 = Test.new
+    test2.from_xml xml
+    assert_equal "last", test2.arg1
+    assert_equal "5", test2.arg2
+  end
 end

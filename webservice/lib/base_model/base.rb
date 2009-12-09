@@ -44,6 +44,7 @@ module BaseModel
 
 
     include BaseModel::MassAssignment
+    include BaseModel::Serialization
 
   end
 end
