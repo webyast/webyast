@@ -1,5 +1,8 @@
 module BaseModel
   class Base
+    def initialize(attr={})
+      load(attr)
+    end
 
     def save
       create_or_update
@@ -29,9 +32,18 @@ module BaseModel
     def destroy
     end
 
-    include BaseModel::MassAssignment
+#remove overwritten method_missing from activeRecord
+    alias :method_missing_orig :method_missing
     include ActiveRecord::AttributeMethods
+    alias :method_missing :method_missing_orig
+#remove overwritten respond_to
+    alias :respond_to? :respond_to_without_attributes?
+
     include ActiveRecord::Validations
     include ActiveRecord::Callbacks
+
+
+    include BaseModel::MassAssignment
+
   end
 end
