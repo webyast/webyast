@@ -25,17 +25,10 @@ org.opensuse.yast.permissions.read
 org.opensuse.yast.permissions.write
 EOF
 
-TEST_DATA_GRANT = <<EOF
-org.opensuse.yast.modules.ysr.statelessregister
-org.opensuse.yast.modules.ysr.getregistrationconfig
-org.freedesktop.network-manager-settings.system.modify
-org.opensuse.yast.module-manager.import
-EOF
-
   def setup
     @request.session[:account_id] = 1 #fixtures
     Permission.any_instance.stubs(:all_actions).returns(TEST_DATA_ACTIONS)
-    Permission.any_instance.stubs(:actions_for_user).returns(TEST_DATA_GRANT)
+    PolKit.stubs(:polkit_check).returns(:yes)
   end
   
 #TODO more tests (not enough permissions etc.)

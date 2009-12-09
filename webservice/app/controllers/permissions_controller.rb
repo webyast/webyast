@@ -35,7 +35,6 @@ class PermissionsController < ApplicationController
       permission_check "org.opensuse.yast.permissions.read"
     end
     permission = Permission.find(:all,params)
-    logger.debug permission.inspect
     respond_to do |format|
       format.json { render :json => permission.to_json }
       format.xml { render :xml => permission.to_xml }

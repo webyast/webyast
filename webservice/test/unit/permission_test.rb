@@ -19,20 +19,19 @@ org.opensuse.yast.permissions.read
 org.opensuse.yast.permissions.write
 EOF
 
-TEST_DATA_GRANT = <<EOF
-org.opensuse.yast.modules.ysr.statelessregister
-org.opensuse.yast.modules.ysr.getregistrationconfig
-org.freedesktop.network-manager-settings.system.modify
-org.opensuse.yast.module-manager.import
-EOF
-
 TEST_NONEXIST = <<EOF
   polkit-auth: cannot look up uid for user 'nonexist'
 EOF
 
   def setup
     Permission.any_instance.stubs(:all_actions).returns(TEST_DATA_ACTIONS)
-    Permission.any_instance.stubs(:actions_for_user).returns(TEST_DATA_GRANT)
+    PolKit.stubs(:polkit_check).returns(:no)
+    ["org.opensuse.yast.modules.ysr.statelessregister",
+     "org.opensuse.yast.modules.ysr.getregistrationconfig",
+     "org.freedesktop.network-manager-settings.system.modify",
+     "org.opensuse.yast.module-manager.import"].each do |perm|
+      PolKit.stubs(:polkit_check).with(perm,"test").returns(:yes)
+    end
   end
 
   def test_find_all
