@@ -1,7 +1,7 @@
 module BaseModel
   module Serialization
     class Serializer
-      attr_reader :options
+      attr_reader :options, :attributes
 
       def initialize(model,options={})
         @model = model
@@ -35,3 +35,4 @@ module BaseModel
   end
 end
 require 'base_model/serializers/xml_serializer'
+require 'base_model/serializers/json_serializer'
