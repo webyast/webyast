@@ -12,7 +12,8 @@ class CollectdOutOfSyncError < BackendException
 
     xml.error do
       xml.type "COLLECTD_SYNC_ERROR"
-      xml.description "Collectd is out of sync. Status information can be expected at #{Time.at(@timestamp.to_i).inspect}."
+      xml.description "Collectd is out of sync. Status information can be expected at #{Time.at(@timestamp.to_i).ctime}."
+
       xml.timestamp @timestamp
     end
   end
