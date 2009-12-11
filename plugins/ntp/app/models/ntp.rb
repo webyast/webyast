@@ -4,7 +4,9 @@ class Ntp
 
   public
     def initialize
-      @actions = { :synchronize => false }
+      @actions = { :synchronize => false,
+        :synchronize_utc => true
+      }
     end
     
     def self.find
@@ -21,7 +23,7 @@ class Ntp
     def synchronize
       ret = "OK"
       begin
-        ret = YastService.Call("YaPI::NTP::Synchronize")
+        ret = YastService.Call("YaPI::NTP::Synchronize",@actions[:synchronize_utc])
       rescue Exception => e
         Rails.logger.info "ntp synchronization cause probably timeout #{e.inspect}"
       end

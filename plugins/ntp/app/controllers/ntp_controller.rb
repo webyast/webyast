@@ -23,6 +23,7 @@ class NtpController < ApplicationController
     if root["synchronize"]
       yapi_perm_check "ntp.synchronize"
       @ntp.actions[:synchronize] = true
+      @ntp.actions[:synchronize_utc] = root[:synchronize_utc]
     end
 
     @ntp.save
