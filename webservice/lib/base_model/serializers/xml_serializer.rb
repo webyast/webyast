@@ -40,9 +40,27 @@ module BaseModel
             end
           end
         else
-          builder.tag!(name,value.to_s)
+          type = XML_TYPE_NAMES[value.class.to_s]
+          opts = {}
+          opts[:type] = type if type
+          builder.tag!(name,value.to_s,opts)
         end
       end
+
+      XML_TYPE_NAMES = { #type conversion
+          "Symbol"     => "symbol",
+          "Fixnum"     => "integer",
+          "Bignum"     => "integer",
+          "BigDecimal" => "decimal",
+          "Float"      => "float",
+          "TrueClass"  => "boolean",
+          "FalseClass" => "boolean",
+          "Date"       => "date",
+          "DateTime"   => "datetime",
+          "Time"       => "datetime",
+          "ActiveSupport::TimeWithZone" => "datetime"
+        } unless defined?(XML_TYPE_NAMES)
+
     end
   end
 end

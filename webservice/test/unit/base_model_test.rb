@@ -56,7 +56,8 @@ MASS_DATA = { :arg1 => "last", :arg2 => "5", :callback_used => false }
 
 COMPLEX_DATA = {
   "test" => [ "a","b"], #serializers doesn't differ symbol from string and always sue string
-  "test2" => [ "5","6"], #number after serializing is converted to string
+  "test2" => [ 5,6], #number test
+  "test4" => [ true,false], #number boolean
   "test3" => { "a" => "b","c"=> "d" }, #number after serializing is converted to string
   "test_escapes" => "<arg>/&\\test",
   "test_hash" => [{"a"=>"a"},{"b"=>"b"}]
