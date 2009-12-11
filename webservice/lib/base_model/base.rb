@@ -1,5 +1,10 @@
 module BaseModel
   class Base
+
+    def to_model
+      self
+    end
+
     def initialize(attr={})
       load(attr)
     end
@@ -14,7 +19,7 @@ module BaseModel
     end
 
     def new_record?
-      true
+      false #always update by default
     end
 
     def create_or_update
@@ -45,6 +50,8 @@ module BaseModel
 
     include BaseModel::MassAssignment
     include BaseModel::Serialization
+
+    include YastRoles #to access permission check in models
 
   end
 end

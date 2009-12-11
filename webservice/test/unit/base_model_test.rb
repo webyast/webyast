@@ -5,7 +5,7 @@ class BaseModelTest < ActiveSupport::TestCase
     validates_format_of :arg2, :with => /^\d$/
     before_save :call
 
-    attr_accessor :arg1, :arg2, :callback_used
+    attr_accessor :arg1, :arg2, :callback_used, :carg
     attr_protected :callback_used
     def call
       @callback_used = true;
@@ -54,23 +54,37 @@ MASS_DATA = { :arg1 => "last", :arg2 => "5", :callback_used => false }
     assert test2.arg2.nil?
   end
 
+COMPLEX_DATA = {
+  "test" => [ "a","b"], #serializers doesn't differ symbol from string and always sue string
+  "test2" => [ "5","6"], #number after serializing is converted to string
+  "test3" => { "a" => "b","c"=> "d" }, #number after serializing is converted to string
+  "test_escapes" => "<arg>/&\\test",
+  "test_hash" => [{"a"=>"a"},{"b"=>"b"}]
+}
+
   def test_xml_serialization
     test= Test.new(MASS_DATA)
+    test.carg = COMPLEX_DATA
     xml = test.to_xml
     assert xml
+    puts xml.inspect
     test2 = Test.new
     test2.from_xml xml
     assert_equal "last", test2.arg1
     assert_equal "5", test2.arg2
+    assert_equal COMPLEX_DATA, test2.carg
   end
 
   def test_json_serialization
     test= Test.new(MASS_DATA)
+    test.carg = COMPLEX_DATA
     json = test.to_json
+    puts json.inspect
     assert json
     test2 = Test.new
     test2.from_json json
     assert_equal "last", test2.arg1
     assert_equal "5", test2.arg2
+    assert_equal COMPLEX_DATA, test2.carg
   end
 end

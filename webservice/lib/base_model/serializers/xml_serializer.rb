@@ -17,9 +17,31 @@ module BaseModel
         builder = options[:builder] || Builder::XmlMarkup.new(options)
         builder.tag!(root){
           @attributes.each do |attr|
-            builder.tag!(attr.to_s[1..-1],@model.instance_variable_get(attr))
+            value = @model.instance_variable_get(attr)
+            name = attr.to_s[1..-1]
+            serialize_value(name,value,builder)
           end
         }
+      end
+
+      protected
+#place for all types for special serializing
+      def serialize_value(name,value,builder)
+        if value.is_a? Array
+          builder.tag!(name,{:type => "array"}) do
+            value.each do |v|
+              serialize_value(name,v,builder)
+            end
+          end
+        elsif value.is_a? Hash
+        builder.tag!(name) do
+            value.each do |k,v|
+              serialize_value(k,v,builder)
+            end
+          end
+        else
+          builder.tag!(name,value.to_s)
+        end
       end
     end
   end
