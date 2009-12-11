@@ -4,13 +4,16 @@ class Ntp
 
   public
     def initialize
-      @actions = { :synchronize => false,
-        :synchronize_utc => true
-      }
+      @actions = Hash.new
     end
     
     def self.find
-      Ntp.new
+      ret = Ntp.new
+      if YastService.Call("YaPI::NTP::Available")
+        ret.actions[:synchronize] = false
+        ret.actions[:synchronize_utc] = true
+      end
+      return ret
     end
 
     def save
