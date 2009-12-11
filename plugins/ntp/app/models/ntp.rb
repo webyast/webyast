@@ -1,10 +1,15 @@
-class Ntp
+class Ntp < BaseModel::Base
 
   attr_accessor :actions
 
+  validates_inclusion_of :'actions[:synchronize]', :in => [ true, false ], :allow_nil => true
+
+  before_save { yapi_perm_check "ntp.synchronize" if actions[:synchronize] }
+
   public
-    def initialize
+    def initialize(args={})
       @actions = { :synchronize => false }
+      super args
     end
     
     def self.find
@@ -12,9 +17,7 @@ class Ntp
     end
 
     def save
-      if @actions[:synchronize]
-        synchronize
-      end
+      synchronize if @actions[:synchronize]
     end
 
   private
