@@ -60,7 +60,7 @@ class Systemtime < BaseModel::Base
     @utcstatus = 
     case response["utcstatus"]
       when "UTC" then true
-      when "localtime" then false
+      when "local" then false
       when "UTCOnly" then nil
       else 
         Rails.logger.warn "Unknown key in utcstatus #{response["utcstatus"]}"
@@ -70,6 +70,8 @@ class Systemtime < BaseModel::Base
     @timezones = response["zones"]
   end
 
+#super sometime doesn't work (need more investigation - in test work always, in real code sometime report no method in superclass)
+  alias orig_to_xml to_xml
   def to_xml(options={})
     tmp =@timezones
     @timezones = @timezones.clone
@@ -81,7 +83,7 @@ class Systemtime < BaseModel::Base
       end
       zone["entries"] = newentry
     end
-    res = super options
+    res = orig_to_xml options
     @timezones = tmp
     return res
   end

@@ -38,18 +38,18 @@ class SystemtimeTest < ActiveSupport::TestCase
 
   WRITE_ARGUMENTS_NONE = {
       "timezone"=> "America/Kentucky/Monticello",
-      "utcstatus"=> "localtime"
+      "utcstatus"=> "local"
     }
 
   WRITE_ARGUMENTS_TIME = {
       "timezone"=> "America/Kentucky/Monticello",
-      "utcstatus"=> "localtime",
+      "utcstatus"=> "local",
       "time" => "2009-07-02 - 12:18:00"
     }
 
   WRITE_ARGUMENTS_NTP = {
       :timezone=> "America/Kentucky/Monticello",
-      :utcstatus=> "localtime",
+      :utcstatus=> "local",
     }
 
   def setup    
