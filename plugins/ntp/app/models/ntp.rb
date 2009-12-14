@@ -1,14 +1,15 @@
-class Ntp
+class Ntp < BaseModel::Base
 
   attr_accessor :actions
 
+  validates_inclusion_of :'actions[:synchronize]', :in => [ true, false ], :allow_nil => true
+
+
   public
-    def initialize
-      @actions = Hash.new
-    end
     
     def self.find
       ret = Ntp.new
+      ret.actions ||= {}
       if YastService.Call("YaPI::NTP::Available")
         ret.actions[:synchronize] = false
         ret.actions[:synchronize_utc] = true
@@ -17,9 +18,7 @@ class Ntp
     end
 
     def save
-      if @actions[:synchronize]
-        synchronize
-      end
+      synchronize if @actions[:synchronize]
     end
 
   private

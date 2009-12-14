@@ -2,31 +2,48 @@
 # Provides set and gets resources from YaPI time module.
 # Main goal is handle YaPI specific calls and data formats. Provides cleaned
 # and well defined data.
-class Systemtime
-
-  @@timezones = Array.new()
+class Systemtime < BaseModel::Base
 
   # Date settings format is dd/mm/yyyy
   attr_accessor :date
+  validates_format_of :date, :with => /^\d{2}\/\d{2}\/\d{4}$/, :allow_nil => true
   # time settings format is hh:mm:ss
   attr_accessor :time
+  validates_format_of :time, :with => /^\d{2}:\d{2}:\d{2}$/, :allow_nil => true
   # Current timezone as id
   attr_accessor :timezone
+  #check if zone exists
+  validates_each :timezone, :allow_nil => true do |model,attr,zone|
+    contain = false
+    unless model.timezones.nil?
+      model.timezones.each do |z|
+        contain = true if z["entries"][zone]
+      end
+      model.errors.add attr, "Unknown timezone" unless contain
+    end
+  end
   # Utc status possible values is UTCOnly, UTC and localtime see yast2-country doc
   attr_accessor :utcstatus
+  validates_inclusion_of :utcstatus, :in => [true,false], :allow_nil => true
+  attr_accessor :timezones
+  validates_presence_of :timezones
+  # do not massload timezones, as it is read-only
+  attr_protected :timezones
+
+  after_save :restart_collectd
   
   private
 
   # Creates argument for dbus call which specify what data is requested.
   # Available timezones is cached so request it only if it is necessary.
   # return:: hash with requested keys
-  def Systemtime.create_read_question #:doc:
+  def self.create_read_question #:doc:
     ret = {
       "timezone" => "true",
       "utcstatus" => "true",
-      "currenttime" => "true"
+      "currenttime" => "true",
+      "zones"  => "true"
     }
-    ret["zones"]= @@timezones.empty? ? "true" : "false"
     return ret
   end
 
@@ -40,34 +57,39 @@ class Systemtime
     @date = timedate[0..timedate.index(" - ")-1]
     #convert date to format for datepicker
     @date.sub!(/^(\d+)-(\d+)-(\d+)/,'\3/\2/\1')
-    @utcstatus= response["utcstatus"]
-    @timezone = response["timezone"]
-    if response["zones"]
-      @@timezones = response["zones"]
+    @utcstatus = 
+    case response["utcstatus"]
+      when "UTC" then true
+      when "localtime" then false
+      when "UTCOnly" then nil
+      else 
+        Rails.logger.warn "Unknown key in utcstatus #{response["utcstatus"]}"
+        nil #set nill, maybe exception???
     end
+    @timezone = response["timezone"]
+    @timezones = response["zones"]
   end
 
-  #Getter for static timezones
-  def Systemtime.timezones
-    return @@timezones
-  end
-
-  def Systemtime.create_from_xml(xmlroot)
-    systemtime = Systemtime.new
-    systemtime.time = xmlroot[:time]
-    systemtime.date = xmlroot[:date]
-    systemtime.timezone = xmlroot[:timezone]
-    systemtime.utcstatus = xmlroot[:utcstatus]    
-    return systemtime
-  end
-
-  def initialize     
+  def to_xml(options={})
+    tmp =@timezones
+    @timezones = @timezones.clone
+    #transform hash before serialization
+    @timezones.each do |zone|
+      newentry = []
+      zone["entries"].each do |k,v|
+        newentry << { "id" => k, "name" => v }
+      end
+      zone["entries"] = newentry
+    end
+    res = super options
+    @timezones = tmp
+    return res
   end
 
   # fills time instance with data from YaPI.
   #
   # +warn+: Doesn't take any parameters.
-  def Systemtime.find
+  def self.find
     ret = Systemtime.new()
     ret.parse_response YastService.Call("YaPI::TIME::Read",create_read_question)
     return ret
@@ -75,17 +97,14 @@ class Systemtime
 
   # Saves data from model to system via YaPI. Saves only setted data,
   # so it support partial safe (e.g. save only new timezone if rest of fields is not set).
-  def save
+  def update
     settings = {}
     RAILS_DEFAULT_LOGGER.info "called write with #{settings.inspect}"
-    if @timezone and !@timezone.empty?
-      settings["timezone"] = @timezone
+    settings["timezone"] = @timezone unless @timezone.blank?
+    unless @utcstatus.nil?
+      settings["utcstatus"] = @utcstatus ? "UTC" : "localtime"
     end
-    if @utcstatus and !@utcstatus.empty?
-      settings["utcstatus"] = @utcstatus
-    end
-    if (@date and !@date.empty?) and
-        (@time and !@time.empty?)
+    unless @date.blank? || @time.blank?
       date = @date.split("/")
       datetime = "#{date[2]}-#{date[0]}-#{date[1]} - "+@time
       settings["currenttime"] = datetime
@@ -100,6 +119,9 @@ class Systemtime
       #XXX hack to avoid dbus timeout durign moving time to future
       #FIXME use correct exception
     end
+  end
+
+  def restart_collectd
     #restart collectd as moving in time confuse status module (bnc#557929)
     begin
       ret = YastService.Call("YaPI::SERVICES::Execute",{
@@ -111,43 +133,6 @@ class Systemtime
       Rails.logger.warn "Exception thrown by DBus while restarting collectd #{e.inspect}"
       #restarting collectd is optional, so it should not do anything
     end
-
+    true
   end
-
-  def to_xml( options = {} )
-    xml = options[:builder] ||= Builder::XmlMarkup.new(options)
-    xml.instruct! unless options[:skip_instruct]
-
-    xml.systemtime do
-      xml.time @time
-      xml.date @date
-      xml.timezone @timezone
-      xml.utcstatus @utcstatus
-      xml.timezones({:type => "array"}) do
-        @@timezones.each do |region|
-          if not region.empty?
-            xml.region do
-              xml.name  region["name"]
-              xml.central region["central"]
-              xml.entries({:type => "array"}) do
-                region["entries"].each do |id,name|
-                  xml.timezone do
-                    xml.id id
-                    xml.name name
-                  end
-                end
-              end
-                  
-            end
-          end
-        end
-      end
-    end
-  end
-
-  def to_json( options = {} )
-    hash = Hash.from_xml(to_xml())
-    return hash.to_json
-  end
-
 end
