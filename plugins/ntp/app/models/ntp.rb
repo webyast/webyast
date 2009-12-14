@@ -4,7 +4,6 @@ class Ntp < BaseModel::Base
 
   validates_inclusion_of :'actions[:synchronize]', :in => [ true, false ], :allow_nil => true
 
-  before_save { yapi_perm_check "ntp.synchronize" if actions[:synchronize] }
 
   public
     def initialize(args={})
