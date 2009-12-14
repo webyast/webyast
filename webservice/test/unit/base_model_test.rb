@@ -16,11 +16,20 @@ class BaseModelTest < ActiveSupport::TestCase
 
     attr_accessor :arg1, :arg2
     attr_accessible :arg1
+    attr_serialized :arg1
     def call
       @callback_used = true;
     end
   end
 
+  class  Test3 < BaseModel::Base
+
+    attr_accessor :arg1, :arg2
+    attr_serialized :arg1
+    def call
+      @callback_used = true;
+    end
+  end
 
   def test_validations
     test = Test.new
@@ -68,7 +77,6 @@ COMPLEX_DATA = {
     test.carg = COMPLEX_DATA
     xml = test.to_xml
     assert xml
-    puts xml.inspect
     test2 = Test.new
     test2.from_xml xml
     assert_equal "last", test2.arg1
@@ -80,12 +88,32 @@ COMPLEX_DATA = {
     test= Test.new(MASS_DATA)
     test.carg = COMPLEX_DATA
     json = test.to_json
-    puts json.inspect
     assert json
     test2 = Test.new
     test2.from_json json
     assert_equal "last", test2.arg1
     assert_equal "5", test2.arg2
     assert_equal COMPLEX_DATA, test2.carg
+  end
+
+  def test_attr_serializable
+    test = Test3.new
+    test.arg1 = "dev"
+    test.arg2 = "null"
+    xml = test.to_xml
+    assert xml
+    test2 = Test3.new
+    test2.from_xml xml
+    assert_equal "dev",test2.arg1
+    assert_nil test2.arg2
+    test = Test3.new
+    test.arg1 = "dev"
+    test.arg2 = "null"
+    json = test.to_json
+    assert json
+    test2 = Test3.new
+    test2.from_json json
+    assert_equal "dev",test2.arg1
+    assert_nil test2.arg2
   end
 end

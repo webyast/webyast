@@ -1,11 +1,16 @@
 module BaseModel
   module Serialization
+    # Serializes model to XML
+    #
+    # +WARNING+:: keys from hash is get to tags unescaped, so don't use hash with keys which can break XML tag (this behavior might change in future)
+    # options:: recognizes common Builder::XmlMarkup options (if root is not given, it uses singular of model name )
+    # block:: not used now
     def to_xml(options={},&block)
-      options[:attributes] = self.class.serialized_attributes
       serializer = XmlSerializer.new(self,options)
       block_given? ? serializer.serialize(&block) : serializer.serialize
     end
 
+    # loads model from xml
     def from_xml(xml)
       load(Hash.from_xml(xml).values.first)
       self
@@ -25,7 +30,7 @@ module BaseModel
       end
 
       protected
-#place for all types for special serializing
+      #place for all types for special serializing
       def serialize_value(name,value,builder)
         if value.is_a? Array
           builder.tag!(name,{:type => "array"}) do
@@ -43,6 +48,7 @@ module BaseModel
           type = XML_TYPE_NAMES[value.class.to_s]
           opts = {}
           opts[:type] = type if type
+          #NOTE: can be optimalized for primitive types like boolean or numbers to avoid XML escaping
           builder.tag!(name,value.to_s,opts)
         end
       end

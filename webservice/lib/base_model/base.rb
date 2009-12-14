@@ -110,21 +110,27 @@ module BaseModel
       true
     end
 
-#remove overwritten method_missing from activeRecord
+#remove overwritten method_missing from activeRecord (as Base model doesn't know attributes)
     alias :method_missing_orig :method_missing
+    #required by validations
     include ActiveRecord::AttributeMethods
     alias :method_missing :method_missing_orig
-#remove overwritten respond_to
+#remove overwritten respond_to (as Base model doesn't have attributes
     alias :respond_to? :respond_to_without_attributes?
 
+    #Validations in model
     include ActiveRecord::Validations
+    #Callbacks in model
     include ActiveRecord::Callbacks
 
 
+    #Mass assignment support
     include BaseModel::MassAssignment
+    #serialization of models
     include BaseModel::Serialization
 
-    include YastRoles #to access permission check in models
+    #permission check in models
+    include YastRoles 
 
   end
 end
