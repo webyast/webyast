@@ -32,28 +32,29 @@ class SystemtimeTest < ActiveSupport::TestCase
   READ_RESPONSE = {
       "zones"=> TEST_TIMEZONES,
       "timezone"=> "Europe/Prague",
-      "utcstatus"=> "true",
+      "utcstatus"=> "UTC",
       "time" => "2009-07-02 - 12:18:00"
     }  
 
   WRITE_ARGUMENTS_NONE = {
       "timezone"=> "America/Kentucky/Monticello",
-      "utcstatus"=> "false"
+      "utcstatus"=> "localtime"
     }
 
   WRITE_ARGUMENTS_TIME = {
       "timezone"=> "America/Kentucky/Monticello",
-      "utcstatus"=> "false",
+      "utcstatus"=> "localtime",
       "time" => "2009-07-02 - 12:18:00"
     }
 
   WRITE_ARGUMENTS_NTP = {
       :timezone=> "America/Kentucky/Monticello",
-      :utcstatus=> "false",
+      :utcstatus=> "localtime",
     }
 
   def setup    
     @model = Systemtime.new
+    Systemtime.stubs(:permission_check)
   end
 
   
@@ -61,11 +62,11 @@ class SystemtimeTest < ActiveSupport::TestCase
     YastService.stubs(:Call).with("YaPI::TIME::Read",READ_ARGUMENTS).returns(READ_RESPONSE)
 
     @model = Systemtime.find
-    assert_equal("02/07/2009", @model.date)
-    assert_equal("12:18:00", @model.time)
-    assert_equal("Europe/Prague", @model.timezone)
-    assert_equal("true", @model.utcstatus)
-    assert_equal(TEST_TIMEZONES,Systemtime.timezones)
+    assert_equal "02/07/2009", @model.date
+    assert_equal "12:18:00", @model.time
+    assert_equal "Europe/Prague", @model.timezone
+    assert_equal true, @model.utcstatus
+    assert_equal TEST_TIMEZONES, @model.timezones
   end
 
   def test_setter_without_time
@@ -77,8 +78,9 @@ class SystemtimeTest < ActiveSupport::TestCase
           }).once
 
     @model.timezone = "America/Kentucky/Monticello"
-    @model.utcstatus = "false"
-    @model.save
+    @model.utcstatus = false
+    @model.timezones = TEST_TIMEZONES
+    assert @model.save, "Errors during saving: "+@model.errors.collect{ |e| e.inspect}.join("\n")
   end
 
   def test_setter_with_time
@@ -90,10 +92,11 @@ class SystemtimeTest < ActiveSupport::TestCase
           }).once
 
     @model.timezone = "America/Kentucky/Monticello"
-    @model.utcstatus = "false"
+    @model.utcstatus = false
     @model.date = "02/07/2009"
     @model.time = "12:18:00"
-    @model.save
+    @model.timezones = TEST_TIMEZONES
+    assert @model.save, "Errors during saving: "+@model.errors.collect{ |e| e.inspect}.join("\n")
   end
 
   def test_setter_with_move_to_future
@@ -109,19 +112,16 @@ class SystemtimeTest < ActiveSupport::TestCase
           }).once
 
     @model.timezone = "America/Kentucky/Monticello"
-    @model.utcstatus = "false"
+    @model.utcstatus = false
     @model.date = "02/07/2009"
     @model.time = "12:18:00"
+    @model.timezones = TEST_TIMEZONES
     assert_nothing_raised do
-      @model.save
+      assert @model.save, "Errors during saving: "+@model.errors.collect{ |e| e.inspect}.join("\n")
     end
   end
 
   def test_xml
-    #inject Timezones to set available timezone for direct testing
-    def @model.timezones=(val)
-      @@timezones=val
-    end
 
     data = READ_RESPONSE
     @model.timezone = data["timezone"]
@@ -139,24 +139,11 @@ class SystemtimeTest < ActiveSupport::TestCase
     assert_equal("02/07/2009", response["date"])
 
     zone_response = TEST_TIMEZONES
-    zone_response.each { |zone|
-      entries = []
-      zone["entries"].each { |k,v|
-        entries.push({"id"=>k,"name"=>v})
-      }
-      zone["entries"] = entries
-    }
-
     assert_equal(zone_response.sort { |a,b| a["name"] <=> b["name"] },
       response["timezones"].sort { |a,b| a["name"] <=> b["name"] })
   end
 
   def test_json
-    #inject Timezones to set available timezone for direct testing
-    def @model.timezones=(val)
-      @@timezones=val
-    end
-    
 
     data = READ_RESPONSE
     @model.timezone = data["timezone"]
