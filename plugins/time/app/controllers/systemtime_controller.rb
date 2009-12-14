@@ -38,8 +38,8 @@ class SystemtimeController < ApplicationController
     systemtime = Systemtime.find
 
     respond_to do |format|
-      format.xml { render  :xml => systemtime.to_xml( :root => "systemtime", :dasherize => false ) }
-      format.json { render :json => systemtime.to_json( :root => "systemtime", :dasherize => false ) }
+      format.xml { render  :xml => systemtime.to_xml( :dasherize => false ) }
+      format.json { render :json => systemtime.to_json( :dasherize => false ) }
     end
 
   end

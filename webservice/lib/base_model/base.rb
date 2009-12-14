@@ -128,5 +128,14 @@ module BaseModel
     include BaseModel::MassAssignment
     #serialization of models
     include BaseModel::Serialization
+
+  end
+end
+#Hack to properly generate error message without ActiveRecord special methods
+module ActiveRecord
+  class Error
+    def generate_message(message,options)
+      message
+    end
   end
 end
