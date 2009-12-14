@@ -162,12 +162,12 @@ public
 
       if bg_stat
         proxy.on_signal("StatusChanged") do |s|
-          Rails.logger.debug "Background process: StatusChanged: #{s}"
+          Rails.logger.debug "PackageKit progress: StatusChanged: #{s}"
           bg_stat.status = s
         end
 
         proxy.on_signal("ProgressChanged") do |p1, p2, p3, p4|
-          Rails.logger.debug "Background process: ProgressChanged: #{p1}%"
+          Rails.logger.debug "PackageKit progress: ProgressChanged: #{p1}%"
           bg_stat.progress = p1
           # 101% means no subprogress available
           bg_stat.subprogress = p2 < 101 ? p2 : nil

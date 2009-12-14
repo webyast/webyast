@@ -35,6 +35,46 @@ class Patch < Resolvable
     return patch_updates
   end
 
+  def self.subprocess_find(what, bs)
+
+    # open subprocess
+    subproc = IO.popen(subprocess_command)
+
+    result = nil
+
+    while !subproc.eof? do
+      begin
+        line = subproc.readline
+
+        unless line.blank?
+          received = Hash.from_xml(line)
+
+          # is it a progress or the final list?
+          if received.has_key? 'patches'
+            Rails.logger.debug "Found #{received['patches'].size} patches"
+            result = received['patches']
+          elsif received.has_key? 'background_status'
+            s = received['background_status']
+            @@mutex.synchronize do
+              bs.status = s['status']
+              bs.progress = s['progress']
+              bs.subprogress = s['subprogress']
+            end
+          end
+        end
+      rescue Exception => e
+        Rails.logger.error "Background thread: Could not evaluate output: #{line.chomp}, exception: #{e}"
+        Rails.logger.error "Background thread: Backtrace: #{e.backtrace.join("\n")}"
+
+        # rethrow the exception
+        raise e
+      end
+    end
+
+    result
+  end
+
+
   # find patches
   # Patch.find(:available)
   # Patch.find(:available, :background => true) - read patches in background
@@ -73,7 +113,7 @@ class Patch < Resolvable
       Rails.logger.info "Starting background thread for reading patches..."
       # run the patch query in a separate thread
       Thread.new do
-        res = do_find(what, bs)
+        res = subprocess_find(what, bs)
         Rails.logger.info "*** Patches thread: Found #{res.size} applicable patches"
         @@mutex.synchronize do
           @@running.delete(what)
@@ -108,4 +148,26 @@ class Patch < Resolvable
     end
   end
 
+  private
+
+  def self.subprocess_script
+    # find the helper script
+    script = File.join(RAILS_ROOT, 'vendor/plugin/patches/scripts/list_patches.rb')
+
+    unless File.exists? script
+      script = File.join(RAILS_ROOT, '../plugins/patches/scripts/list_patches.rb')
+
+      unless File.exists? script
+        raise 'File patches/scripts/list_patches.rb was not found!'
+      end
+    end
+
+    Rails.logger.debug "Using #{script} script file"
+    script
+  end
+
+  def self.subprocess_command
+    'cd ' + RAILS_ROOT + ' && ' + File.join(RAILS_ROOT, 'script/runner') + ' -e ' +
+      (ENV["RAILS_ENV"] || 'development') + ' ' + subprocess_script
+  end
 end
