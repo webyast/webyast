@@ -128,9 +128,5 @@ module BaseModel
     include BaseModel::MassAssignment
     #serialization of models
     include BaseModel::Serialization
-
-    #permission check in models
-    include YastRoles 
-
   end
 end
