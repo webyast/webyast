@@ -31,12 +31,7 @@ class Status
                 :metrics,
                 :limits
 
-  # currently running status requests in background (current states)
-  @@running = Hash.new
-  # finished requests (actual results)
-  @@done = Hash.new
-  # a mutex which guards access to the shared class variables above
-  @@mutex = Mutex.new
+  include BackgroundManager
 
   def to_xml(options = {})
     if @data.class == Hash && @data.size == 1 && @data[:progress].class == BackgroundStatus
@@ -177,51 +172,48 @@ class Status
   def draw_graph(heigth=nil, width=nil)
   end
 
+  def create_unique_key(start, stop, data)
+    start.to_i.to_s + '_' + stop.to_i.to_s + '_' + data.to_s
+  end
+
   # this is a wrapper to collect_data
   def collect_data(start=nil, stop=nil, data = %w{cpu memory disk}, background = false)
     # background reading doesn't work correctly if class reloading is active
     # (static class members are lost between requests)
-    if background && !Rails.configuration.cache_classes
+    if background && !background_enabled?
       Rails.logger.info "Class reloading is active, cannot use background thread (set config.cache_classes = true)"
       background = false
     end
 
     if background
-      # background status
-      bs = nil
-      key = start.to_i.to_s + '_' + stop.to_i.to_s + '_' + data.to_s
-      @@mutex.synchronize do
-        if @@done.has_key?(key)
-          Rails.logger.debug "Request #{key} is done"
-          @data = @@done.delete key
-          @data.delete :progress
-          return @data
-        end
+      key = create_unique_key(start, stop, data)
 
-        running = @@running[key]
-        if running
-          Rails.logger.debug "Request #{key} is already running: #{running.inspect}"
-          @data = {:progress => running}
-          return @data
-        end
-
-        bs = BackgroundStatus.new
-        @@running[key] = bs
+      if process_finished? key
+        Rails.logger.debug "Request #{key} is done"
+        @data = get_value key
+        @data.delete :progress
+        return @data
       end
+
+      running = get_progress key
+      if running
+        Rails.logger.debug "Request #{key} is already running: #{running.inspect}"
+        @data = {:progress => running}
+        return @data
+      end
+
+      add_process(key)
       
       # read the status in a separate thread
       Thread.new do
         Rails.logger.info '*** Background thread for reading status started...'
-        res = collect_status_data(start, stop, data, bs)
-        @@mutex.synchronize do
-          @@running.delete(key)
-          @@done[key] = res
-        end
+        res = collect_status_data(start, stop, data, true)
+        finish_process(key, res)
         Rails.logger.info '*** Finishing background status thread'
       end
 
       # return current progress
-      @data = {:progress => bs}
+      @data = {:progress => get_progress(key)}
       return @data
     else
       collect_status_data(start, stop, data)
@@ -229,8 +221,8 @@ class Status
   end
 
   # creates several metrics for a defined period
-  def collect_status_data(start=nil, stop=nil, data = %w{cpu memory disk}, progress=nil)
-
+  def collect_status_data(start=nil, stop=nil, data = %w{cpu memory disk}, progress=false)
+    key = create_unique_key(start, stop, data) if progress
     metrics = available_metrics
     #puts metrics.inspect
     result = Hash.new
@@ -238,16 +230,14 @@ class Status
       current_step = 0 if progress
       case data
         when nil, "all", "All" # all metrics
-          if progress
-            total_steps = metrics.size
-          end
+          total_steps = metrics.size if progress
 
           metrics.each_pair do |m, n|
             if progress
-              @@mutex.synchronize do
-                progress.status = m.to_s
-                progress.progress = 100 * current_step / total_steps
-                Rails.logger.debug "*** Reading status: #{progress.status}: #{progress.progress}%"
+              update_progress key do |stat|
+                stat.status = m.to_s
+                stat.progress = 100 * current_step / total_steps
+                Rails.logger.debug "*** Reading status: #{stat.status}: #{stat.progress}%"
               end
             end
 
@@ -263,10 +253,10 @@ class Status
           total_steps = data.size if progress
           data.each do |d|
             if progress
-              @@mutex.synchronize do
-                progress.status = d.to_s
-                progress.progress = 100 * current_step / total_steps
-                Rails.logger.debug "*** Reading status: #{progress.status}: #{progress.progress}%"
+              update_progress key do |stat|
+                stat.status = d.to_s
+                stat.progress = 100 * current_step / total_steps
+                Rails.logger.debug "*** Reading status: #{stat.status}: #{stat.progress}%"
               end
             end
 

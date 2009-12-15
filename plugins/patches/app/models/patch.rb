@@ -3,14 +3,10 @@ require 'resolvable'
 # Model for patches available via package kit
 class Patch < Resolvable
 
-  # class variables - they keep the information between requests
-  #
-  # currently running patch requests in background (current states)
-  @@running = Hash.new
-  # finished requests (actual results)
-  @@done = Hash.new
-  # a mutex which guards access to the shared class variables above
-  @@mutex = Mutex.new
+  # extend adds the module methods as class methods
+  # (used instead of include because background processes
+  # are used in class methods here)
+  extend BackgroundManager
 
   def to_xml( options = {} )
     super :patch_update, options
@@ -35,7 +31,7 @@ class Patch < Resolvable
     return patch_updates
   end
 
-  def self.subprocess_find(what, bs)
+  def self.subprocess_find(what)
 
     # open subprocess
     subproc = IO.popen(subprocess_command)
@@ -55,7 +51,8 @@ class Patch < Resolvable
             result = received['patches']
           elsif received.has_key? 'background_status'
             s = received['background_status']
-            @@mutex.synchronize do
+
+            update_progress what do |bs|
               bs.status = s['status']
               bs.progress = s['progress']
               bs.subprogress = s['subprogress']
@@ -86,42 +83,34 @@ class Patch < Resolvable
 
     # background reading doesn't work correctly if class reloading is active
     # (static class members are lost between requests)
-    if background && !Rails.configuration.cache_classes
+    if background && !background_enabled?
       Rails.logger.info "Class reloading is active, cannot use background thread (set config.cache_classes = true)"
       background = false
     end
 
     if background
-      # background status
-      bs = nil
-      @@mutex.synchronize do
-        if @@done.has_key?(what)
-          Rails.logger.debug "Request #{what} is done"
-          return @@done.delete(what)
-        end
-
-        running = @@running[what]
-        if running
-          Rails.logger.debug "Request #{what} is already running: #{running.inspect}"
-          return [running]
-        end
-
-        bs = BackgroundStatus.new
-        @@running[what] = bs
+      if process_finished? what
+        Rails.logger.debug "Request #{what} is done"
+        return get_value what
       end
+
+      running = get_progress what
+      if running
+        Rails.logger.debug "Request #{what} is already running: #{running.inspect}"
+        return [running]
+      end
+
+      add_process what
 
       Rails.logger.info "Starting background thread for reading patches..."
       # run the patch query in a separate thread
       Thread.new do
-        res = subprocess_find(what, bs)
+        res = subprocess_find what
         Rails.logger.info "*** Patches thread: Found #{res.size} applicable patches"
-        @@mutex.synchronize do
-          @@running.delete(what)
-          @@done[what] = res
-        end
+        finish_process(what, res)
       end
 
-      return [bs]
+      return [ get_progress(what) ]
     else
       return do_find(what)
     end
