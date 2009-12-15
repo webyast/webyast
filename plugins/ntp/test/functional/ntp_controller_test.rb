@@ -12,6 +12,7 @@ class SystemControllerTest < ActionController::TestCase
     @request = ActionController::TestRequest.new
     # http://railsforum.com/viewtopic.php?id=1719
     @request.session[:account_id] = 1 # defined in fixtures    
+    YastService.stubs(:Call).with("YaPI::NTP::Available").returns(true)
   end
 
 
@@ -19,18 +20,18 @@ class SystemControllerTest < ActionController::TestCase
     ret = get :show
     assert_response :success
     response = Hash.from_xml(ret.body)
-    assert response["actions"]["synchronize"] == false
+    assert response["ntp"]["actions"]["synchronize"] == false
   end
 
   def test_update
-    YastService.stubs(:Call).with("YaPI::NTP::Synchronize").once.returns("OK")
-    post :update, {"ntp"=>{"synchronize"=>true}}
+    YastService.stubs(:Call).with("YaPI::NTP::Synchronize",true).once.returns("OK")
+    post :update, {"ntp"=>{"actions" => {"synchronize"=>true,"synchronize_utc"=>true}}}
     assert_response :success
   end
 
   def test_update_failed
-    YastService.stubs(:Call).with("YaPI::NTP::Synchronize").once.returns("Failed")
-    post :update, {"ntp"=>{"synchronize"=>true}}
+    YastService.stubs(:Call).with("YaPI::NTP::Synchronize",false).once.returns("Failed")
+    post :update, {"ntp"=>{"actions" => {"synchronize"=>true,"synchronize_utc" => false}}}
     assert_response 503
   end
 

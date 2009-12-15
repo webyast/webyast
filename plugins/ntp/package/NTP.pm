@@ -6,11 +6,12 @@ use YaST::YCP qw(:LOGGING);
 
 our %TYPEINFO;
 
-BEGIN{$TYPEINFO{Synchronize} = ["function",
+BEGIN{$TYPEINFO{Synchronize} = ["function","boolean"
     "string"];
 }
 sub Synchronize {
   my $self = shift;
+  my $use_utc = shift;
   my $servers = getServers();
   my $out = undef;
 
@@ -24,13 +25,26 @@ sub Synchronize {
     y2warning($out);
   }
   return "NOSERVERS" unless (defined ($out));
-  my $ret = `/sbin/hwclock --utc --systohc`;
+  my $local = "--utc"
+  unless $use_utc {
+    my $local = "--localtime"
+  }
+  my $ret = `/sbin/hwclock $local --systohc`;
   y2milestone("hwclock returns $?: $ret");
   if ($? == 0){
     return "OK";
   }
   return $out.$ret;
 }
+
+BEGIN{$TYPEINFO{Available} = ["function",
+    "boolean"];
+}
+sub Available {
+  my $self = shift;
+  return ((scalar @{getServers()}) != 0) && (getServers()->[0] ne "")
+}
+
 
 sub getServers {
   my $servers = `grep "^[:space:]*NETCONFIG_NTP_STATIC_SERVERS" /etc/sysconfig/network/config | sed 's/.*="\\(.*\\)"/\\1/'`;

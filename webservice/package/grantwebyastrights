@@ -15,15 +15,16 @@ $debug = 0
 
 def usage why
 	STDERR.puts why
+  STDERR.puts ""
 	STDERR.puts "Usage: grantwebyastrights --user <user> --action (show|grant|revoke)"
-        STDERR.puts "NOTE: This program should be run by user root"
-        STDERR.puts ""
-        STDERR.puts "This call grant/revoke ALL permissions for the YaST Webservice."
-        STDERR.puts "In order to grant/revoke single rights use:"
-        STDERR.puts "polkit-auth --user <user> (--grant|-revoke) <policyname>"
-        STDERR.puts ""
-        STDERR.puts "In order to show all possible permissions use:"
-        STDERR.puts "polkit-action"
+  STDERR.puts "NOTE: This program should be run by user root"
+  STDERR.puts ""
+  STDERR.puts "This call grant/revoke ALL permissions for the YaST Webservice."
+  STDERR.puts "In order to grant/revoke single rights use:"
+  STDERR.puts "polkit-auth --user <user> (--grant|-revoke) <policyname>"
+  STDERR.puts ""
+  STDERR.puts "In order to show all possible permissions use:"
+  STDERR.puts "polkit-action"
 	exit 1
 end
 
@@ -36,70 +37,65 @@ user = nil
 action = nil
 
 
-begin
 options.each do |opt, arg|
   case opt
     when "--user": user = arg
     when "--action": action = arg
     when "--debug": $debug += 1
     else
-	STDERR.puts "Ignoring unrecognized option #{opt}"
+	    usage "Unrecognized option #{opt}"
   end
-end
-rescue
 end
 
 $debug = nil if $debug == 0
 
-usage "excessive arguments" unless ARGV.empty?
-usage "--user parameter missing" unless user
-usage "--action parameter (show|grant|revoke) missing" unless action
+usage "excessive arguments"  unless ARGV.empty?
+usage "user parameter missing" unless user
+usage "action parameter (show|grant|revoke) missing" unless action
 
-begin
-   SuseString = "org.opensuse.yast"
-   if action == "grant"
-      # run "polkit-action" to list all registered policies
-      IO.popen( "polkit-action", 'r+' ) do |pipe|
-         loop do
-            break if pipe.eof?
-            l = pipe.read
-	    # polkit-action prints one policy per line
-            policies = l.split("\n")
-	    # now 'blindly' grant org.opensuse.yast.*
-            policies.each do |policy|
-               if policy.include? SuseString and not policy.include? ".scr"
-                  STDOUT.puts "granting: #{policy}"
-                  command = "polkit-auth --user " + user + " --grant " + policy
-                  unless system(command)
-		    STDERR.puts "#{command} failed !"
-		  end
-               end
-            end
-         end
-      end
-   else
-      command = "polkit-auth --user " + user + " --explicit"
-      IO.popen( command, 'r+' ) do |pipe|
-         loop do
-            break if pipe.eof?
-            l = pipe.read
-            case action
-               when "show"
-                  STDOUT.puts l
-               when "revoke"
-                  policies = l.split("\n")
-                  policies.each do |policy|
-                    if policy.include? SuseString and not policy.include? ".scr"
-                      STDOUT.puts "revoking: #{policy}"
-                      command = "polkit-auth --user " + user + " --revoke " + policy
-		      unless system(command)
-			STDERR.puts "#{command} failed !"
-		      end
-                    end
-                 end
-            end
-         end
-      end
-   end
+SuseString = "org.opensuse.yast"
+
+def webyast_perm?(perm)
+  return (perm.include? SuseString) && (not perm.include? ".scr")
 end
 
+def granted_perms(user)
+  perms = `polkit-auth --user '#{user}' --explicit`
+  raise "polkit-auth failed with ret code #{$?.exitstatus}. Output: #{perms}" unless $?.exitstatus.zero?
+  perms = perms.split "\n"
+  perms.reject! { |perm| not webyast_perm?(perm) }
+  return perms
+end
+
+def webyast_perms
+  perms = `polkit-action`
+  raise "polkit-action failed with ret code #{$?.exitstatus}. Output: #{perms}" unless $?.exitstatus.zero?
+  perms = perms.split "\n"
+  perms.reject! { |perm| not webyast_perm?(perm) }
+  return perms
+end
+
+begin
+  case action
+  when "grant" then
+    granted = granted_perms user
+    non_granted = webyast_perms.reject{ |perm| granted.include? perm }
+    non_granted.each do |policy|
+      STDOUT.puts "granting: #{policy}"
+      out = `polkit-auth --user '#{user}' --grant '#{policy}'`
+      raise "Granting permissions failed with ret code #{$?.exitstatus}. Output: #{out}" unless $?.exitstatus.zero?
+    end
+  when "show"
+    STDOUT.puts granted_perms(user).join("\n")
+  when "revoke"
+    granted = granted_perms user
+    granted.each do |policy|
+      STDOUT.puts "revoking: #{policy}"
+      out = `polkit-auth --user '#{user}' --revoke '#{policy}'`
+      raise "Revoking permissions failed with ret code #{$?.exitstatus}. Output: #{out}" unless $?.exitstatus.zero?
+    end
+  end
+rescue Exception => e
+  STDERR.puts e.message
+  Process.exit! 1
+end

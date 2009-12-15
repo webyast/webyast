@@ -65,6 +65,7 @@ rm -rf $RPM_BUILD_ROOT
 
 %post
 # granting all permissions for the web user
+#FIXME don't silently fail
 polkit-auth --user %{pkg_user} --grant org.freedesktop.hal.power-management.shutdown >& /dev/null || true
 polkit-auth --user %{pkg_user} --grant org.freedesktop.hal.power-management.shutdown-multiple-sessions >& /dev/null || true
 polkit-auth --user %{pkg_user} --grant org.freedesktop.hal.power-management.reboot >& /dev/null || true

@@ -118,16 +118,18 @@ public
   #
   def self.execute(method, args, signal, &block)
     begin
+      dbusloop = DBus::Main.new
       transaction_iface, packagekit_iface = self.packagekit_connect
     
       proxy = transaction_iface.object
     
       proxy.on_signal(signal.to_s, &block)
-      transaction_iface.send(method.to_sym, *args)
-    
-      dbusloop = DBus::Main.new
       proxy.on_signal("Error") {|u1,u2| dbusloop.quit }
       proxy.on_signal("Finished") {|u1,u2| dbusloop.quit }
+      # Do the call only when all signal handlers are in place,
+      # otherwise Finished can arrive early and dbusloop will never
+      # quit, bnc#561578
+      transaction_iface.send(method.to_sym, *args)
 
       dbusloop << DBus::SystemBus.instance
       dbusloop.run

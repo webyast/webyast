@@ -16,14 +16,13 @@ class SystemtimeController < ApplicationController
   # Sets time settings. Requires write permissions for time YaPI.
   def update
     yapi_perm_check "time.write"
-    
     root = params[:systemtime]
     if root == nil
       logger.error "Response doesn't contain systemtime key"
       raise InvalidParameters.new :timezone => "Missing"
     end
     
-    systemtime = Systemtime.create_from_xml(root)    
+    systemtime = Systemtime.new(root)    
     systemtime.save
     show
   end
@@ -36,12 +35,11 @@ class SystemtimeController < ApplicationController
   # Shows time settings. Requires read permission for time YaPI.
   def show
     yapi_perm_check "time.read"
-    
     systemtime = Systemtime.find
 
     respond_to do |format|
-      format.xml { render  :xml => systemtime.to_xml( :root => "systemtime", :dasherize => false ) }
-      format.json { render :json => systemtime.to_json( :root => "systemtime", :dasherize => false ) }
+      format.xml { render  :xml => systemtime.to_xml( :dasherize => false ) }
+      format.json { render :json => systemtime.to_json( :dasherize => false ) }
     end
 
   end

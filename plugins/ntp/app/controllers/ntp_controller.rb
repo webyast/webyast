@@ -1,4 +1,3 @@
-
 class NtpController < ApplicationController
 
   before_filter :login_required
@@ -7,25 +6,22 @@ class NtpController < ApplicationController
    	ntp = Ntp.find
 
     respond_to do |format|
-	    format.xml  { render :xml => ntp.actions.to_xml(:root => :actions)}
-	    format.json { render :json => ntp.actions.to_json }
+	    format.xml  { render :xml => ntp.to_xml}
+	    format.json { render :json => ntp.to_json }
     end
   end
    
   def update
+    yapi_perm_check "ntp.synchronize"
     root = params["ntp"]
     if root == nil || root == {} #FIXME exception for this
       raise InvalidParameters.new :ntp => "Missing"
     end
 	
-    @ntp = Ntp.find
+    ntp = Ntp.new(root)
+	yapi_perm_check "ntp.synchroize" if ntp.actions[:synchronize]
+	ntp.save	
 
-    if root["synchronize"]
-      yapi_perm_check "ntp.synchronize"
-      @ntp.actions[:synchronize] = true
-    end
-
-    @ntp.save
     show
   end
 
