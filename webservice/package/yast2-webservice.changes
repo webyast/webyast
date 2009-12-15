@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Tue Dec 15 14:28:16 CET 2009 - schubi@suse.de
+
+- unify checking permissions (bnc#555208)
+- nicer date/time format in control center (bnc#558360) 
+
+-------------------------------------------------------------------
 Fri Dec  4 14:28:39 CET 2009 - mvidner@suse.cz
 
 - Require fixes in other packages so that rclighttpd does not kill
