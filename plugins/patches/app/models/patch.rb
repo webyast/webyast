@@ -32,11 +32,12 @@ class Patch < Resolvable
   end
 
   def self.subprocess_find(what)
-
     # open subprocess
-    subproc = IO.popen(subprocess_command)
+    subproc = IO.popen(subprocess_command what)
 
     result = nil
+
+    process_id = what
 
     while !subproc.eof? do
       begin
@@ -52,7 +53,7 @@ class Patch < Resolvable
           elsif received.has_key? 'background_status'
             s = received['background_status']
 
-            update_progress what do |bs|
+            update_progress process_id do |bs|
               bs.status = s['status']
               bs.progress = s['progress']
               bs.subprogress = s['subprogress']
@@ -155,8 +156,10 @@ class Patch < Resolvable
     script
   end
 
-  def self.subprocess_command
-    'cd ' + RAILS_ROOT + ' && ' + File.join(RAILS_ROOT, 'script/runner') + ' -e ' +
-      (ENV["RAILS_ENV"] || 'development') + ' ' + subprocess_script
+  def self.subprocess_command(what)
+    raise "Invalid parameter" if what.to_s.include?("'") or what.to_s.include?('\\')
+    ret = "cd #{RAILS_ROOT} && #{File.join(RAILS_ROOT, 'script/runner')} -e #{ENV['RAILS_ENV'] || 'development'} #{subprocess_script}"
+    ret += " #{what}" if what != :available
+    ret
   end
 end

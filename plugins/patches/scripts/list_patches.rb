@@ -12,6 +12,8 @@ bs = BackgroundStatus.new do
   $stdout.flush
 end
 
-patches = Patch.do_find(:all, bs)
+what = ARGV[0] || :available
+
+patches = Patch.do_find(what, bs)
 
 puts patches.to_xml(:root => "patches", :dasherize => false).gsub!("\n", '')
