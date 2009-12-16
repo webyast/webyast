@@ -111,12 +111,12 @@ module BaseModel
     end
 
 #remove overwritten method_missing from activeRecord (as Base model doesn't know attributes)
-    alias :method_missing_orig :method_missing
+    alias_method :method_missing_orig, :method_missing
     #required by validations
     include ActiveRecord::AttributeMethods
-    alias :method_missing :method_missing_orig
+    alias_method :method_missing, :method_missing_orig
 #remove overwritten respond_to (as Base model doesn't have attributes
-    alias :respond_to? :respond_to_without_attributes?
+    alias_method :respond_to?, :respond_to_without_attributes?
 
     #Validations in model
     include ActiveRecord::Validations
