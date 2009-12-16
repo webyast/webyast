@@ -6,7 +6,7 @@ class BackgroundStatus
 		  :progress,
 		  :subprogress
 
-  def initialize(stat = 'unknown', progress = 0, subprogress = nil, &block)
+  def initialize(stat = 'unknown', progress = 0, subprogress = -1, &block)
     @status = stat
     @progress = progress
     @subprogress = subprogress
