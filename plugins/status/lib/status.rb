@@ -31,7 +31,14 @@ class Status
                 :metrics,
                 :limits
 
-  include BackgroundManager
+  private
+
+  # just a short cut for accessing the singleton object
+  def bm
+    BackgroundManager.instance
+  end
+
+  public
 
   def to_xml(options = {})
     if @data.class == Hash && @data.size == 1 && @data[:progress].class == BackgroundStatus
@@ -173,14 +180,14 @@ class Status
   end
 
   def create_unique_key(start, stop, data)
-    start.to_i.to_s + '_' + stop.to_i.to_s + '_' + data.to_s
+    'status_' + start.to_i.to_s + '_' + stop.to_i.to_s + '_' + data.to_s
   end
 
   # this is a wrapper to collect_data
   def collect_data(start=nil, stop=nil, data = %w{cpu memory disk}, background = false)
     # background reading doesn't work correctly if class reloading is active
     # (static class members are lost between requests)
-    if background && !background_enabled?
+    if background && !bm.background_enabled?
       Rails.logger.info "Class reloading is active, cannot use background thread (set config.cache_classes = true)"
       background = false
     end
@@ -188,32 +195,32 @@ class Status
     if background
       key = create_unique_key(start, stop, data)
 
-      if process_finished? key
+      if bm.process_finished? key
         Rails.logger.debug "Request #{key} is done"
-        @data = get_value key
+        @data = bm.get_value key
         @data.delete :progress
         return @data
       end
 
-      running = get_progress key
+      running = bm.get_progress key
       if running
         Rails.logger.debug "Request #{key} is already running: #{running.inspect}"
         @data = {:progress => running}
         return @data
       end
 
-      add_process(key)
+      bm.add_process(key)
       
       # read the status in a separate thread
       Thread.new do
         Rails.logger.info '*** Background thread for reading status started...'
         res = collect_status_data(start, stop, data, true)
-        finish_process(key, res)
+        bm.finish_process(key, res)
         Rails.logger.info '*** Finishing background status thread'
       end
 
       # return current progress
-      @data = {:progress => get_progress(key)}
+      @data = {:progress => bm.get_progress(key)}
       return @data
     else
       collect_status_data(start, stop, data)
@@ -234,7 +241,7 @@ class Status
 
           metrics.each_pair do |m, n|
             if progress
-              update_progress key do |stat|
+              bm.update_progress key do |stat|
                 stat.status = m.to_s
                 stat.progress = 100 * current_step / total_steps
                 Rails.logger.debug "*** Reading status: #{stat.status}: #{stat.progress}%"
@@ -253,7 +260,7 @@ class Status
           total_steps = data.size if progress
           data.each do |d|
             if progress
-              update_progress key do |stat|
+              bm.update_progress key do |stat|
                 stat.status = d.to_s
                 stat.progress = 100 * current_step / total_steps
                 Rails.logger.debug "*** Reading status: #{stat.status}: #{stat.progress}%"
