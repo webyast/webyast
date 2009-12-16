@@ -24,7 +24,7 @@ module BaseModel
           @attributes.each do |attr|
             value = @model.instance_variable_get(attr)
             name = attr.to_s[1..-1]
-            serialize_value(name,value,builder)
+            serialize_value(name,value,builder) unless value.nil?
           end
         }
       end
