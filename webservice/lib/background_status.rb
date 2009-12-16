@@ -13,9 +13,9 @@ class BackgroundStatus
     @callback = block_given? ? block : nil
   end
 
-  def status=(status)
-    if @status != status
-      @status = status
+  def status=(stat)
+    if @status != stat
+      @status = stat
       trigger_callback
     end
   end
@@ -27,6 +27,7 @@ class BackgroundStatus
     end
   end
 
+  # returns -1 if there is no subprogress
   def subprogress=(s)
     if @subprogress != s
       @subprogress = s
@@ -48,9 +49,7 @@ class BackgroundStatus
   private
 
   def trigger_callback
-    if @callback
-      @callback.call
-    end
+    @callback.try(:call)
   end
 
 end
