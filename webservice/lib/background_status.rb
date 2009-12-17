@@ -2,36 +2,41 @@
 
 class BackgroundStatus
 
+  # use Observable design pattern for reporting changes
+  include Observable
+
   attr_reader	  :status,
 		  :progress,
 		  :subprogress
 
-  def initialize(stat = 'unknown', progress = 0, subprogress = -1, &block)
+  def initialize(stat = 'unknown', progress = 0, subprogress = -1)
     @status = stat
     @progress = progress
     @subprogress = subprogress
-    @callback = block_given? ? block : nil
   end
 
   def status=(stat)
     if @status != stat
+      changed
       @status = stat
-      trigger_callback
+      notify_observers self
     end
   end
 
   def progress=(p)
     if @progress != p
+      changed
       @progress = p
-      trigger_callback
+      notify_observers self
     end
   end
 
   # returns -1 if there is no subprogress
   def subprogress=(s)
     if @subprogress != s
+      changed
       @subprogress = s
-      trigger_callback
+      notify_observers self
     end
   end
 
@@ -44,12 +49,6 @@ class BackgroundStatus
       xml.tag!(:progress, @progress.to_i, {:type => "integer"} )
       xml.tag!(:subprogress, @subprogress.to_i, {:type => "integer"})
     end
-  end
-
-  private
-
-  def trigger_callback
-    @callback.try(:call)
   end
 
 end
