@@ -168,9 +168,9 @@ public
 
         proxy.on_signal("ProgressChanged") do |p1, p2, p3, p4|
           Rails.logger.debug "PackageKit progress: ProgressChanged: #{p1}%"
-          bg_stat.progress = p1
-          # 101% means no subprogress available
-          bg_stat.subprogress = p2 < 101 ? p2 : nil
+          # 101% means no progress/subprogress available
+          bg_stat.progress = p1 < 101 ? p1 : -1
+          bg_stat.subprogress = p2 < 101 ? p2 : -1
         end
       end
 
