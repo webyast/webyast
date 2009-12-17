@@ -27,20 +27,16 @@ class BackgroundManager
 
   # is the process running?
   def process_running?(id)
-    ret = false
     @mutex.synchronize do
-      ret = @running.has_key? id
+      @running.has_key? id
     end
-    ret
   end
 
   # is the process finished?
   def process_finished?(id)
-    ret = false
     @mutex.synchronize do
-      ret = @done.has_key? id
+      @done.has_key? id
     end
-    ret
   end
 
   # remove the progress status and remember the real final value
@@ -54,21 +50,18 @@ class BackgroundManager
   # get the current progress
   # returns a copy, use update_progress() for updating the progress
   def get_progress(id)
-    ret = nil
     @mutex.synchronize do
       ret = @running[id]
       ret = ret.dup unless ret.nil?
+      ret
     end
-    ret
   end
 
   # get the final value, the value is removed from the internal structure
   def get_value(id)
-    ret = nil
     @mutex.synchronize do
-      ret = @done.delete id
+      @done.delete id
     end
-    ret
   end
 
   # update the progress

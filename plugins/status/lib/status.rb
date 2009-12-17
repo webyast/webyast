@@ -180,7 +180,7 @@ class Status
   end
 
   def create_unique_key(start, stop, data)
-    'status_' + start.to_i.to_s + '_' + stop.to_i.to_s + '_' + data.to_s
+    "status_#{start}_#{stop}_#{data}"
   end
 
   # this is a wrapper to collect_data
