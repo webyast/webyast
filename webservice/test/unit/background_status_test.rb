@@ -38,7 +38,7 @@ class BackgroundStatusTest < ActiveSupport::TestCase
   end
 
   def test_observing
-    ot = ObserverTest.new(@bs, changed_flag)
+    ot = ObserverTest.new(@bs)
     s = 'dummy status'
     p = 10
     sp = 5

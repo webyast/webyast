@@ -20,10 +20,14 @@ class BackgroundManagerTest < ActiveSupport::TestCase
     @bm.update_progress(:dummy)
     assert_equal nil, @bm.get_progress(:dummy)
 
+    changed = false
     @bm.update_progress(:dummy) do |s|
+      # this block must NOT be executed
       s.progress = 10
+      changed = true
     end
     assert_equal nil, @bm.get_progress(:dummy)
+    assert !changed
 
 
     # register a process
