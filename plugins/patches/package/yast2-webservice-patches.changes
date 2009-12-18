@@ -1,4 +1,9 @@
 -------------------------------------------------------------------
+Fri Dec 18 13:09:28 CET 2009 - schubi@suse.de
+
+- handle PackageKit errors (bnc #559233) 
+
+-------------------------------------------------------------------
 Tue Dec  8 18:24:24 CET 2009 - mvidner@suse.cz
 
 - Fixed a hang when PackageKit responded too fast (bnc#561578).
