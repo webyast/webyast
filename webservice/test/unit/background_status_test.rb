@@ -19,54 +19,52 @@ class ObserverTest
   end
 end
 
+TEST_STATUS = 'testing status'
+TEST_PROGRESS = 10
+TEST_SUBPROGRESS = 5
+
 class BackgroundStatusTest < ActiveSupport::TestCase
   def setup
      @bs = BackgroundStatus.new
   end
 
   def test_assignemnt
-    s = 'status'
-    p = 10
-    sp = 5
-    @bs.status = s
-    @bs.progress = p
-    @bs.subprogress = sp
+    @bs.status = TEST_STATUS
+    @bs.progress = TEST_PROGRESS
+    @bs.subprogress = TEST_SUBPROGRESS
 
-    assert_equal s, @bs.status
-    assert_equal p, @bs.progress
-    assert_equal sp, @bs.subprogress
+    assert_equal TEST_STATUS, @bs.status
+    assert_equal TEST_PROGRESS, @bs.progress
+    assert_equal TEST_SUBPROGRESS, @bs.subprogress
   end
 
   def test_observing
     ot = ObserverTest.new(@bs)
-    s = 'dummy status'
-    p = 10
-    sp = 5
 
     # test progress change
     ot.reset
-    @bs.progress = p
+    @bs.progress = TEST_PROGRESS
     assert ot.changed?
 
     ot.reset
-    @bs.subprogress = sp
+    @bs.subprogress = TEST_SUBPROGRESS
     assert ot.changed?
 
     ot.reset
-    @bs.status = s
+    @bs.status = TEST_STATUS
     assert ot.changed?
 
     # no change must not emit change event
     ot.reset
-    @bs.progress = p
+    @bs.progress = TEST_PROGRESS
     assert !ot.changed?
 
     ot.reset
-    @bs.subprogress = sp
+    @bs.subprogress = TEST_SUBPROGRESS
     assert !ot.changed?
 
     ot.reset
-    @bs.status = s
+    @bs.status = TEST_STATUS
     assert !ot.changed?
   end
 
