@@ -1,10 +1,10 @@
-Locale (user): <%= @language.language -%><br/>
+Locale (user): <%= @language.current -%><br/>
 Locale (root): <%= @language.rootlocale -%><br/>
 UTF-8?: <%= @language.utf8 -%><br/>
 <p/>
 Available:
 <ul>
-<% @language.available.each do |k,v| -%>
-  <li><%= "#{k}: #{v.inspect}" -%></li>
+<% @language.available.each do |v| -%>
+  <li><%= "#{v[:id]}: #{v[:name]}" -%></li>
 <% end -%>
 </ul>

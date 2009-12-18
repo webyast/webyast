@@ -30,23 +30,12 @@ class LanguageTest < ActiveSupport::TestCase
     "languages" => "true"
   }
 
-  ARGS_PARTIAL = {
-    "current"=> "true",
-    "utf8"=> "true",
-    "rootlang"=> "true"
-  }
-  
   RESPONSE_FULL = {
     "current" => "en_US",
     "utf8" => "true",
     "rootlang" => "ctype",
     "languages" => LANGUAGES }
 
-  RESPONSE_PARTIAL = {
-    "current" => "en_US",
-    "utf8" => "true",
-    "rootlang" => "ctype" }
-  
   ARGS_WRITE = {
     "current" => "de_DE",
     "utf8" => "false",
@@ -54,7 +43,6 @@ class LanguageTest < ActiveSupport::TestCase
 
   def setup    
     YastService.stubs(:Call).with("YaPI::LANGUAGE::Read",ARGS_FULL).returns(RESPONSE_FULL)
-    YastService.stubs(:Call).with("YaPI::LANGUAGE::Read",ARGS_PARTIAL).returns(RESPONSE_PARTIAL)
     YastService.stubs(:Call).with("YaPI::LANGUAGE::Write",ARGS_WRITE).returns(true)
   end
 
@@ -62,15 +50,14 @@ class LanguageTest < ActiveSupport::TestCase
     lang = Language.find
 #    pp Language.available
 
-    assert_equal("en_US", lang.language)
+    assert_equal("en_US", lang.current)
     assert_equal("ctype", lang.rootlocale)
     assert_equal("true", lang.utf8)
-    assert_equal(LANGUAGES,lang.available)
   end
 
   def test_setter
     lang = Language.find
-    lang.language = "de_DE"
+    lang.current = "de_DE"
     lang.rootlocale = "false"
     lang.utf8 = "false"
     lang.save
@@ -78,7 +65,7 @@ class LanguageTest < ActiveSupport::TestCase
 
   def test_xml
     lang = Language.find
-    lang.language = "de_DE"
+    lang.current = "de_DE"
     lang.rootlocale = "false"
     lang.utf8 = "false"
 
@@ -98,7 +85,7 @@ class LanguageTest < ActiveSupport::TestCase
 
   def test_json
     lang = Language.find
-    lang.language = "de_DE"
+    lang.current = "de_DE"
     lang.rootlocale = "false"
     lang.utf8 = "false"
  

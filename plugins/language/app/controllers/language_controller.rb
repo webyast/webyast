@@ -12,20 +12,16 @@ class LanguageController < ApplicationController
 
   # Actualizes language settings. Requires write permissions for language YaPI.
   def update    
+    yapi_perm_check "language.write"
     if params.has_key?(:language)
-      yapi_perm_check "language.write"
 
-      @language = Language.new
-      @language.language = params[:language][:current]
-      @language.utf8 = params[:language][:utf8]
-      @language.rootlocale = params[:language][:rootlocale]
+      @language = Language.new params[:language]
       @language.save
-       
     else
       logger.warn("No argument to update")
       raise InvalidParameters.new :language => "Missing"
     end
-    render :show
+    show
   end
 
   # See update
@@ -38,6 +34,12 @@ class LanguageController < ApplicationController
     yapi_perm_check "language.read"
 
     @language = Language.find
+
+    respond_to do |format|
+      format.html { render :show  }
+      format.xml { render  :xml => systemtime.to_xml( :dasherize => false ) }
+      format.json { render :json => systemtime.to_json( :dasherize => false ) }
+    end
   end
 
 end

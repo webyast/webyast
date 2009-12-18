@@ -5,6 +5,7 @@ require File.expand_path( File.join("test","plugin_basic_tests"), RailsParent.pa
 
 class LanguageControllerTest < ActionController::TestCase
   fixtures :accounts
+  include PluginBasicTests
   
   def setup
 #    @model_class = Language
@@ -12,50 +13,26 @@ class LanguageControllerTest < ActionController::TestCase
     @request = ActionController::TestRequest.new
     # http://railsforum.com/viewtopic.php?id=1719
     @request.session[:account_id] = 1 # defined in fixtures
-    @data = DATA
-
-    Language.stubs(:available).returns(
-      {  'rootlang' => 'ctype',                 
-         'languages' => {
-           'en_US' => [            
-             'English (US)',
-             'English (US)',
-             '.UTF-8',      
-             '',            
-             'English (US)' ],               
-           'fr_FR' => [
-              'Français',
-              'Francais',
-              '.UTF-8',
-              '@euro',
-              'French' ],
-            'de_DE' => [
-              'Deutsch',
-              'Deutsch',
-              '.UTF-8',
-              '@euro',
-              'German' ]
-         },
-         'current' => 'en_US',
-         'utf8' => 'true'
-        } )
-
-   @lang = Language.new
-   @lang.language = "de_DE"
-   @lang.rootlocale = "false"
-   @lang.utf8 = "false"
-
-   Language.stubs(:find).returns(@lang)
-    
+    lang = Language.new(DATA[:language])
+    lang.instance_variable_set(:'@available',AVAILABLE) #set available, but it doesn't has accessor, so it is little tricky
+    Language.stubs(:find).returns(lang)
   end
 
-  include PluginBasicTests
 
   DATA = {:language => {
       :current => "cs_CZ",
       :utf8 => "true",
-      :rootlocale => "false"
+      :rootlocale => "false",
     }}
+  AVAILABLE = [
+          { :id => 'en_US',
+            :name => 'English (US)'},
+          { :id => 'fr_FR',
+            :name => 'Français' },
+          { :id => 'de_DE',
+            :name => 'Deutsch',
+          }
+        ]
 
   def test_update   
     Language.any_instance.stubs(:save)
@@ -73,7 +50,7 @@ class LanguageControllerTest < ActionController::TestCase
     assert_response :success
     lang = assigns(:language)
     assert lang
-    assert_equal lang.language, DATA[:language][:current]
+    assert_equal lang.current, DATA[:language][:current]
     assert_equal lang.utf8, DATA[:language][:utf8]
     assert_equal lang.rootlocale, DATA[:language][:rootlocale]
   end
