@@ -65,6 +65,9 @@ class Patch < Resolvable
               bs.progress = s['progress']
               bs.subprogress = s['subprogress']
             end
+          elsif received.has_key? 'error'
+            return PackageKitError.new(received['error']['description']) if received['error']['type'] == 'PACKAGEKIT_ERROR'
+            return BackendException.new(received['error']['description'])
           end
         end
       rescue Exception => e

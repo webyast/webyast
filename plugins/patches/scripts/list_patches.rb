@@ -14,8 +14,8 @@ class ProgressPrinter
 
   # this is the callback method
   def update(progress)
-    # print the progress in XML format
-    puts progress.to_xml
+    # print the progress in XML format on single line
+    puts progress.to_xml.gsub("\n", '')
 
     # print it immediately, flush the output buffer
     $stdout.flush
@@ -29,6 +29,13 @@ ProgressPrinter.new(bs)
 
 what = ARGV[0] || :available
 
-patches = Patch.do_find(what, bs)
-
-puts patches.to_xml(:root => "patches", :dasherize => false).gsub!("\n", '')
+begin
+  patches = Patch.do_find(what, bs)
+  puts patches.to_xml(:root => "patches", :dasherize => false).gsub("\n", '')
+rescue Exception => e
+  if e.respond_to? :to_xml
+    puts e.to_xml.gsub("\n", '')
+  else
+    puts BackendException.new(e.message).to_xml.gsub("\n", '')
+  end
+end
