@@ -30,7 +30,7 @@ class PatchesControllerTest < ActionController::TestCase
             :repo => "openSUSE-11.1-Updates")
 
     Patch.stubs(:mtime).returns(Time.now)
-    Patch.stubs(:find).with(:available).returns([@p1, @p2])
+    Patch.stubs(:find).with(:available, {:background => nil}).returns([@p1, @p2])
     Patch.stubs(:find).with('462').returns(@p1)
     Patch.stubs(:find).with('wrong_id').returns(nil)
     Patch.stubs(:find).with('not_found').returns(nil)
