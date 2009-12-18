@@ -141,18 +141,20 @@ public
     
       proxy = transaction_iface.object
     
+      error = nil
+
       proxy.on_signal(signal.to_s, &block)
       proxy.on_signal("ErrorCode") {|u1,u2| 
         error_string = "#{u1}: #{u2}"
         Rails.logger.error error_string
-        dbusloop.quit 
-        raise PackageKitError.new(error_string) 
+        dbusloop.quit
+        error =  PackageKitError.new(error_string)
       }
       proxy.on_signal("RepoSignatureRequired") {|u1,u2,u3,u4,u5,u6,u7,u8| 
         error_string = "Repository #{u2} needs to be signed"
         Rails.logger.error error_string
-        dbusloop.quit 
-        raise PackageKitError.new(error_string) 
+        dbusloop.quit
+        error = PackageKitError.new(error_string)
       }
       proxy.on_signal("Finished") {|u1,u2| dbusloop.quit }
       # Do the call only when all signal handlers are in place,
@@ -178,6 +180,9 @@ public
       dbusloop.run
 
       packagekit_iface.SuggestDaemonQuit
+
+      raise error if error
+
     rescue DBus::Error => dbus_error
       # check if it is a known error
       raise ServiceNotAvailable.new('PackageKit') if dbus_error.message =~ /org.freedesktop.DBus.Error.ServiceUnknown/
