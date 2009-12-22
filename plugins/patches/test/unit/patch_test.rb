@@ -48,8 +48,29 @@ class PatchTest < ActiveSupport::TestCase
     assert_equal 2, patches.size
     patch = patches.first
     assert_equal "847", patch.resolvable_id
+  end
 
-    
+  SCRIPT_OUTPUT_ERROR = [
+    '<?xml version="1.0" encoding="UTF-8"?><background_status><status>running</status><progress type="integer">0</progress><subprogress type="integer">-1</subprogress></background_status>',
+    '<?xml version="1.0" encoding="UTF-8"?><background_status><status>setup</status><progress type="integer">0</progress><subprogress type="integer">-1</subprogress></background_status>',
+    '<?xml version="1.0" encoding="UTF-8"?><background_status><status>query</status><progress type="integer">0</progress><subprogress type="integer">-1</subprogress></background_status>',
+    '<?xml version="1.0" encoding="UTF-8"?><background_status><status>refresh-cache</status><progress type="integer">0</progress><subprogress type="integer">-1</subprogress></background_status>',
+    '<?xml version="1.0" encoding="UTF-8"?><background_status><status>refresh-cache</status><progress type="integer">9</progress><subprogress type="integer">-1</subprogress></background_status>',
+    '<?xml version="1.0" encoding="UTF-8"?><error><type>PACKAGEKIT_ERROR</type><description>gpg-failure: Signature verification for Repository Factory_(Non-OSS) failed</description></error>'
+  ]
+
+  def test_available_patches_background_mode
+    Patch.stubs(:open_subprocess).returns(nil)
+    Patch.stubs(:read_subprocess).returns(*SCRIPT_OUTPUT_ERROR)
+
+    # return EOF when all lines are read
+    Patch.stubs(:eof_subprocess?).returns(*(Array.new(SCRIPT_OUTPUT_ERROR.size, false) << true))
+
+    # note: Patch.find(:available, {:background => true})
+    # cannot be used here, Threading support in test mode doesn't work :-(
+    patches = Patch.subprocess_find(:available)
+
+    assert_equal PackageKitError, patches.class
   end
   
 end

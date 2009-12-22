@@ -42,13 +42,13 @@ class Patch < Resolvable
 
   def self.subprocess_find(what)
     # open subprocess
-    subproc = IO.popen(subprocess_command what)
+    subproc = open_subprocess what
 
     result = nil
 
-    while !subproc.eof? do
+    while !eof_subprocess?(subproc) do
       begin
-        line = subproc.readline
+        line = read_subprocess subproc
 
         unless line.blank?
           received = Hash.from_xml(line)
@@ -65,6 +65,9 @@ class Patch < Resolvable
               bs.progress = s['progress']
               bs.subprogress = s['subprogress']
             end
+          elsif received.has_key? 'error'
+            return PackageKitError.new(received['error']['description']) if received['error']['type'] == 'PACKAGEKIT_ERROR'
+            return BackendException.new(received['error']['description'])
           end
         end
       rescue Exception => e
@@ -100,7 +103,14 @@ class Patch < Resolvable
       proc_id = id(what)
       if bm.process_finished? proc_id
         Rails.logger.debug "Request #{proc_id} is done"
-        return bm.get_value proc_id
+        ret = bm.get_value proc_id
+
+        # check for exception
+        if ret.is_a? StandardError
+          raise ret
+        end
+
+        ret
       end
 
       running = bm.get_progress proc_id
@@ -116,7 +126,13 @@ class Patch < Resolvable
       # run the patch query in a separate thread
       Thread.new do
         res = subprocess_find what
-        Rails.logger.info "*** Patches thread: Found #{res.size} applicable patches"
+
+        # check for exception
+        unless res.is_a? StandardError
+          Rails.logger.info "*** Patches thread: Found #{res.size} applicable patches"
+        else
+          Rails.logger.debug "*** Exception raised: #{res.inspect}"
+        end
         bm.finish_process(proc_id, res)
       end
 
@@ -171,4 +187,19 @@ class Patch < Resolvable
     ret += " #{what}" if what != :available
     ret
   end
+
+  # IO functions moved to separate methods for easy mocking/testing
+
+  def self.open_subprocess(what)
+    IO.popen(subprocess_command what)
+  end
+
+  def self.read_subprocess(subproc)
+    subproc.readline
+  end
+
+  def self.eof_subprocess?(subproc)
+    subproc.eof?
+  end
+
 end
