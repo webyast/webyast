@@ -58,20 +58,10 @@ class MetricsController < ApplicationController
     end
     limits = Hash.new
     limits = create_limit(params["status"])
-    f = File.open(File.join(plugin_config_dir, "status_limits.yaml"), "w")
+    f = File.open(File.join(plugin_config_dir, "status_configuration.yaml"), "w")
     f.write(limits.to_yaml)
     f.close
-
-    @status = Status.new
-    # use now if time is not valid
-    begin
-      stop = params[:stop].blank? ? Time.now : Time.at(params[:stop].to_i)
-      start = params[:start].blank? ? stop - 300 : Time.at(params[:start].to_i)
-      @status.collect_data(start, stop, params[:data])
-      render :show
-    rescue Exception => e
-      render :text => e.to_s, :status => 400    # bad request
-    end
+    render :text => "OK"
   end
 
   # GET /status
@@ -88,12 +78,13 @@ class MetricsController < ApplicationController
       end
     end
     
-    @metrics = Metric.find(:all, conditions)
-    
-    respond_to do |format|
-      format.xml { render :xml => @metrics.to_xml(:root => 'metrics', :data => false) }
-    end
+    @metric = Metric.find(:all, conditions)
 
+    @data = false
+    @start = nil
+    @stop = nil
+ 
+    render :show    
   end
 
   # GET /status/1
@@ -102,14 +93,11 @@ class MetricsController < ApplicationController
     #permission_check("org.opensuse.yast.system.status.read")
     begin
       @metric = Metric.find(params[:id])
-      stop = params[:stop].blank? ? Time.now : Time.at(params[:stop].to_i)
-      start = params[:start].blank? ? stop - 300 : Time.at(params[:start].to_i)
-
-      respond_to do |format|
-        format.xml { render :xml => @metric.to_xml(:start => start, :stop => stop) }
-      end
+      @stop = params[:stop].blank? ? Time.now : Time.at(params[:stop].to_i)
+      @start = params[:start].blank? ? @stop - 300 : Time.at(params[:start].to_i)
+      @data = true
     rescue Exception => e
-      render :text => e.to_s, :status => 400    # bad request
+      render ErrorResult.error(400, 108, e.to_s) and return
     end
   end
 end
