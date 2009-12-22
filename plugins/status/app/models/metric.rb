@@ -211,7 +211,7 @@ class Metric
       matched = true
       # match each attribute passed in opts
       opts.each do |key, val|
-        raise "Unknown attribute #{key}" if not metric.respond_to?(key)
+        raise InvalidParameters.new :key => key if not metric.respond_to?(key)
         # if the val is a regexp we do different matching
         if val.is_a?(Regexp)
           matched = false if not metric.send(key) =~ val

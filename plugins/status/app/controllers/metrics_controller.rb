@@ -17,6 +17,8 @@ require 'uri'
 class MetricsController < ApplicationController
   before_filter :login_required
 
+  DEFAULT_TIMEFRAME=300
+
   private
 
   def create_limit(status, label = "", limits = {})
@@ -91,13 +93,9 @@ class MetricsController < ApplicationController
   # GET /status/1.xml
   def show
     #permission_check("org.opensuse.yast.system.status.read")
-    begin
-      @metric = Metric.find(params[:id])
-      @stop = params[:stop].blank? ? Time.now : Time.at(params[:stop].to_i)
-      @start = params[:start].blank? ? @stop - 300 : Time.at(params[:start].to_i)
-      @data = true
-    rescue Exception => e
-      render ErrorResult.error(400, 108, e.to_s) and return
-    end
+    @metric = Metric.find(params[:id])
+    @stop = params[:stop].blank? ? Time.now : Time.at(params[:stop].to_i)
+    @start = params[:start].blank? ? @stop - DEFAULT_TIMEFRAME : Time.at(params[:start].to_i)
+    @data = true
   end
 end
