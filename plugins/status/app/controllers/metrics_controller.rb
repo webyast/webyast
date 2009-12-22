@@ -1,6 +1,5 @@
 include ApplicationHelper
 
-require 'scr'
 require 'metric'
 require 'uri'
 

@@ -5,7 +5,26 @@
 # @author Duncan Mac-Vicar P. <dmacvicar@suse.de>
 # @author Stefan Schubert <schubi@suse.de>
 #
-require 'yaml'
+require 'exceptions'
+
+class CollectdOutOfSyncError < BackendException
+  def initialize(timestamp)
+    @timestamp = timestamp
+    super("Collectd is out of sync.")
+  end
+
+  def to_xml
+    xml = Builder::XmlMarkup.new({})
+    xml.instruct!
+
+    xml.error do
+      xml.type "COLLECTD_SYNC_ERROR"
+      xml.description "Collectd is out of sync. Status information can be expected at #{Time.at(@timestamp.to_i).ctime}."
+
+      xml.timestamp @timestamp
+    end
+  end
+end
 
 #
 # This class acts as a model for metrics provided by collectd
@@ -30,6 +49,7 @@ require 'yaml'
 # end
 #
 class Metric
+  require 'yaml'
 
   COLLECTD_BASE = "/var/lib/collectd"
 
@@ -41,6 +61,7 @@ class Metric
   # convenience, plugin and instance
   attr_reader :plugin_full
   attr_reader :type_full
+  attr_reader :config
 
   # like identifier, but to be used as a REST id
   # so / are replaced by +
@@ -123,6 +144,18 @@ class Metric
     # these values can be extracted from the file but we cache
     # them
     @host, @plugin, @plugin_instance, @type, @type_instance = Metric.parse_file_path(path)
+
+    #find the correct plugin path for the config file
+    plugin_config_dir = "#{RAILS_ROOT}/config" #default
+    Rails.configuration.plugin_paths.each do |plugin_path|
+      if File.directory?(File.join(plugin_path, "status"))
+        plugin_config_dir = plugin_path+"/status/config"
+        Dir.mkdir(plugin_config_dir) unless File.directory?(plugin_config_dir)
+        break
+      end
+    end
+    #reading configuration file
+    @conf = YAML.load(File.open(File.join(plugin_config_dir, "status_configuration.yaml"))) if File.exists?(File.join(plugin_config_dir, "status_configuration.yaml"))
   end
 
   # parses the host, plugin, plugin_instance, type and type_instance
@@ -226,6 +259,13 @@ class Metric
       xml.type type
       xml.type_instance type_instance
 
+      if @conf and @conf.has_key?(id)
+        xml.limits() do
+          xml.max(@conf["#{id}"]["max"]) 
+          xml.min(@conf["#{id}"]["min"])
+        end
+      end
+
       # serialize data unless it is disabled
       unless opts.has_key?(:data) and !opts[:data]
         metric_data = data(data_opts)
@@ -242,6 +282,12 @@ class Metric
     end
 
   end
+
+  #get last entry of rrd database
+  def self.last_db_entry(file)
+    `/bin/sh -c "LC_ALL=C rrdtool last #{file}"`    
+  end
+
   
   # runs the rddtool on file with start time and end time
   #
@@ -250,6 +296,15 @@ class Metric
   #
   # default last 5 minutes from now
   def self.run_rrdtool(file, opts={})
+
+    #checking if collectd is running
+    ServiceNotRunning.new('collectd') unless collectd_running?
+
+    #checking if systemtime is BEHIND the last entry of collectd. 
+    #If yes, no data will be available.
+    timestamp = last_db_entry(file)
+    raise CollectdOutOfSyncError.new(timestamp) if Time.now < Time.at(timestamp.to_i)
+
     stop = opts.has_key?(:stop) ? opts[:stop] : Time.now
     start = opts.has_key?(:start) ? opts[:start] : stop - 300
     
