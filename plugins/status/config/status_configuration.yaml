@@ -1,0 +1,87 @@
+--- 
+CPU:
+  y_label: Percent
+  y_scale: 1
+  graphs:
+    - cummulated: false
+      headline: CPU
+      lines:
+        - id: cpu-0+cpu-idle
+          limits: 
+            min: 0
+            max: 0
+          label: Used
+        - id: cpu-0+cpu-user
+          limits: 
+            min: 0
+            max: 0
+          label: Free
+Memory:
+  y_label: MByte
+  y_scale: 1024
+  graphs:
+    - cummulated: true
+      headline: Memory
+      lines:
+        - id: memory+memory-used
+          limits: 
+            min: 0
+            max: 0
+          label: Used
+        - id: memory+memory-free
+          limits: 
+            min: 0
+            max: 0
+          label: Free
+        - id: memory+memory-cached
+          limits: 
+            min: 0
+            max: 0
+          label: Cached
+Network:
+  y_label: 
+  y_scale: 1
+  graphs:
+    - cummulated: false
+      headline: Network
+      lines:
+        - id: interface+if_errors-eth0
+          limits: 
+            min: 0
+            max: 0
+          label: Errors eth0
+        - id: if_packets-eth0
+          limits: 
+            min: 0
+            max: 0
+          label: Packages eth0
+Disk:
+  y_label: MByte
+  y_scale: 1024
+  graphs:
+    - cummulated: true
+      headline: root
+      lines:
+        - id: df+df-root+free
+          limits: 
+            min: 0
+            max: 0
+          label: Errors eth0
+        - id: df+df-root+used
+          limits: 
+            min: 0
+            max: 0
+          label: Packages eth0
+    - cummulated: true
+      headline: dev
+      lines:
+        - id: df+df-dev+free
+          limits: 
+            min: 0
+            max: 0
+          label: Errors eth0
+        - id: df+df-dev+used
+          limits: 
+            min: 0
+            max: 0
+          label: Packages eth0

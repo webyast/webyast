@@ -258,12 +258,25 @@ class Metric
       xml.plugin_instance plugin_instance
       xml.type type
       xml.type_instance type_instance
-
-      if @conf and @conf.has_key?(id)
+      if @conf 
+        line_id = id[host.length+1..id.length-1]  #remove hostname from id
+        limits = nil
+        @conf.each_value{|group|
+          group["graphs"].each{|graph|
+            graph["lines"].each{|line|
+              if line["id"] == line_id            
+                limits = line["limits"]
+                break
+              end
+            }
+            break unless limits == nil 
+          }
+          break unless limits == nil
+        }
         xml.limits() do
-          xml.max(@conf["#{id}"]["max"]) 
-          xml.min(@conf["#{id}"]["min"])
-        end
+          xml.max(limits["max"]) 
+          xml.min(limits["min"])
+        end if limits
       end
 
       # serialize data unless it is disabled
@@ -298,7 +311,7 @@ class Metric
   def self.run_rrdtool(file, opts={})
 
     #checking if collectd is running
-    ServiceNotRunning.new('collectd') unless collectd_running?
+    raise ServiceNotRunning.new('collectd') unless collectd_running?
 
     #checking if systemtime is BEHIND the last entry of collectd. 
     #If yes, no data will be available.

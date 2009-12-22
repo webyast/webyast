@@ -58,7 +58,6 @@ Authors:
 mkdir -p $RPM_BUILD_ROOT/srv/www/%{pkg_user}/vendor/plugins/%{plugin_name}
 cp -a * $RPM_BUILD_ROOT/srv/www/%{pkg_user}/vendor/plugins/%{plugin_name}
 rm -f $RPM_BUILD_ROOT/srv/www/%{pkg_user}/vendor/plugins/%{plugin_name}/COPYING
-#rm $RPM_BUILD_ROOT/srv/www/%{pkg_user}/vendor/plugins/%{plugin_name}/config/status_limits.yaml
 
 # Policies
 mkdir -p $RPM_BUILD_ROOT/usr/share/PolicyKit/policy
@@ -109,7 +108,7 @@ rccollectd restart
 %dir /srv/www/%{pkg_user}/vendor/plugins
 %dir /srv/www/%{pkg_user}/vendor/plugins/%{plugin_name}
 %dir /srv/www/%{pkg_user}/vendor/plugins/%{plugin_name}/doc
-%attr(-,%{pkg_user},%{pkg_user}) %dir /srv/www/%{pkg_user}/vendor/plugins/%{plugin_name}/config
+%dir /srv/www/%{pkg_user}/vendor/plugins/%{plugin_name}/config
 %dir /usr/share/PolicyKit
 %dir /usr/share/PolicyKit/policy
 /srv/www/%{pkg_user}/vendor/plugins/%{plugin_name}/*
@@ -117,6 +116,8 @@ rccollectd restart
 %attr(644,root,root) %config /usr/share/PolicyKit/policy/org.opensuse.yast.modules.logfile.policy
 /srv/www/%{pkg_user}/vendor/plugins/%{plugin_name}/doc/README_FOR_APP
 /srv/www/%{pkg_user}/vendor/plugins/%{plugin_name}/doc/logs.yml
+%attr(-,%{pkg_user},%{pkg_user}) /srv/www/%{pkg_user}/vendor/plugins/%{plugin_name}/config/status_configuration.yaml
+
 %doc COPYING
 
 %changelog
