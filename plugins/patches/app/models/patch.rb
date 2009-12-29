@@ -56,7 +56,8 @@ class Patch < Resolvable
           # is it a progress or the final list?
           if received.has_key? 'patches'
             Rails.logger.debug "Found #{received['patches'].size} patches"
-            result = received['patches']
+            # create Patch objects
+            result = received['patches'].map{|patch| Patch.new(patch.symbolize_keys) }
           elsif received.has_key? 'background_status'
             s = received['background_status']
 
@@ -67,7 +68,10 @@ class Patch < Resolvable
             end
           elsif received.has_key? 'error'
             return PackageKitError.new(received['error']['description']) if received['error']['type'] == 'PACKAGEKIT_ERROR'
+            Rails.logger.warn "*** Patch thread: Received unknown error: #{received['error'].inspect}"
             return BackendException.new(received['error']['description'])
+          else
+            Rails.logger.warn "*** Patch thread: Received unknown input: #{line}"
           end
         end
       rescue Exception => e
@@ -110,7 +114,7 @@ class Patch < Resolvable
           raise ret
         end
 
-        ret
+        return ret
       end
 
       running = bm.get_progress proc_id
