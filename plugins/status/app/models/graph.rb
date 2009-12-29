@@ -12,15 +12,23 @@ class Graph
 
   private
 
+  # 
+  # reading data from Metric
+  #
+  def read_data(id)
+    data = {}
+    metric = Metric.find(id)
+    data = metric.data() if metric
+    return data
+  end
+
   #
   # Checking limit. Return true if a limit has been reached.
   #
   def check_limits(metric_id, metric_column, limits)
     id = Metric.default_host + "+" + metric_id
     metric_column ||= "value"
-    data = {}
-    metric = Metric.find(id)
-    data = metric.data() if metric
+    data = read_data(id)
     limit_reached = false
     data.each do |key, values|
       if key == metric_column
@@ -134,7 +142,7 @@ class Graph
     limits
   end
 
-  # converts the graphik to xml
+  # converts the graph to xml
   def to_xml(opts={})
     checklimits = opts.has_key?(:checklimits) ? opts[:checklimits] : false
     xml = opts[:builder] ||= Builder::XmlMarkup.new(opts)

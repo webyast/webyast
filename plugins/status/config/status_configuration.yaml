@@ -10,12 +10,12 @@ CPU:
           limits: 
             min: 0
             max: 0
-          label: Used
+          label: Idle
         - metric_id: cpu-0+cpu-user
           limits: 
             min: 0
             max: 0
-          label: Free
+          label: Used
 Memory:
   y_label: MByte
   y_scale: 1024
