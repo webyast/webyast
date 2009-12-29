@@ -151,12 +151,12 @@ class Graph
       xml.id group_name
       xml.y_scale y_scale
       xml.y_label y_label
-      xml.single_graphs do
+      xml.single_graphs(:type => :array) do
         graphs.each do |graph|
           xml.single_graph do
             xml.cummulated graph["cummulated"]
             xml.headline graph["headline"]
-            xml.lines do
+            xml.lines(:type => :array) do
               graph["lines"].each do |line|
                 xml.line do
                   xml.metric_id line["metric_id"]
