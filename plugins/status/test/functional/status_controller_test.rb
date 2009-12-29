@@ -56,6 +56,18 @@ class StatusControllerTest < ActionController::TestCase
 
   include PluginBasicTests
 
+  # background request requires at least 'stop' parameter
+  def test_backround_mode_missing_param
+    get :show, { :background => true }
+    assert_response 422
+  end
+
+  def test_backround_mode_param_ok
+    get :show, { :background => true, :stop => 1248092370 }
+    assert_response :success
+  end
+
+
   def test_update_noparams
     # nothing
   end

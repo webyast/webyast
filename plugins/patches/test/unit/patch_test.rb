@@ -9,6 +9,10 @@ require File.expand_path(File.dirname(__FILE__) + "/../test_helper")
 require File.join(File.dirname(__FILE__), "..", "packagekit_stub")
 require 'patch'
 
+def read_test_data(name)
+  File.readlines File.join(File.dirname(__FILE__), "data", name)
+end
+
 class PatchTest < ActiveSupport::TestCase
 
   SERVICE = "org.freedesktop.PackageKit"
@@ -50,16 +54,9 @@ class PatchTest < ActiveSupport::TestCase
     assert_equal "847", patch.resolvable_id
   end
 
-  SCRIPT_OUTPUT_ERROR = [
-    '<?xml version="1.0" encoding="UTF-8"?><background_status><status>running</status><progress type="integer">0</progress><subprogress type="integer">-1</subprogress></background_status>',
-    '<?xml version="1.0" encoding="UTF-8"?><background_status><status>setup</status><progress type="integer">0</progress><subprogress type="integer">-1</subprogress></background_status>',
-    '<?xml version="1.0" encoding="UTF-8"?><background_status><status>query</status><progress type="integer">0</progress><subprogress type="integer">-1</subprogress></background_status>',
-    '<?xml version="1.0" encoding="UTF-8"?><background_status><status>refresh-cache</status><progress type="integer">0</progress><subprogress type="integer">-1</subprogress></background_status>',
-    '<?xml version="1.0" encoding="UTF-8"?><background_status><status>refresh-cache</status><progress type="integer">9</progress><subprogress type="integer">-1</subprogress></background_status>',
-    '<?xml version="1.0" encoding="UTF-8"?><error><type>PACKAGEKIT_ERROR</type><description>gpg-failure: Signature verification for Repository Factory_(Non-OSS) failed</description></error>'
-  ]
+  SCRIPT_OUTPUT_ERROR = read_test_data('patch_test-script_error.out')
 
-  def test_available_patches_background_mode
+  def test_available_patches_background_mode_error
     Patch.stubs(:open_subprocess).returns(nil)
     Patch.stubs(:read_subprocess).returns(*SCRIPT_OUTPUT_ERROR)
 
@@ -71,6 +68,24 @@ class PatchTest < ActiveSupport::TestCase
     patches = Patch.subprocess_find(:available)
 
     assert_equal PackageKitError, patches.class
+  end
+
+  SCRIPT_OUTPUT_OK = read_test_data('patch_test-script_ok.out')
+
+  def test_available_patches_background_mode_ok
+    Patch.stubs(:open_subprocess).returns(nil)
+    Patch.stubs(:read_subprocess).returns(*SCRIPT_OUTPUT_OK)
+
+    # return EOF when all lines are read
+    Patch.stubs(:eof_subprocess?).returns(*(Array.new(SCRIPT_OUTPUT_OK.size, false) << true))
+
+    # note: Patch.find(:available, {:background => true})
+    # cannot be used here, Threading support in test mode doesn't work :-(
+    patches = Patch.subprocess_find(:available)
+
+    assert_equal 4, patches.size
+    assert_equal 1579, patches.first.resolvable_id
+    assert_equal 'slessp0-openslp', patches.first.name
   end
   
 end

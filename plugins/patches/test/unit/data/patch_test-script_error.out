@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?><background_status><status>running</status><progress type="integer">0</progress><subprogress type="integer">-1</subprogress></background_status>
+<?xml version="1.0" encoding="UTF-8"?><background_status><status>setup</status><progress type="integer">0</progress><subprogress type="integer">-1</subprogress></background_status>
+<?xml version="1.0" encoding="UTF-8"?><background_status><status>query</status><progress type="integer">0</progress><subprogress type="integer">-1</subprogress></background_status>
+<?xml version="1.0" encoding="UTF-8"?><background_status><status>refresh-cache</status><progress type="integer">0</progress><subprogress type="integer">-1</subprogress></background_status>
+<?xml version="1.0" encoding="UTF-8"?><background_status><status>refresh-cache</status><progress type="integer">9</progress><subprogress type="integer">-1</subprogress></background_status>
+<?xml version="1.0" encoding="UTF-8"?><error><type>PACKAGEKIT_ERROR</type><description>gpg-failure: Signature verification for Repository Factory_(Non-OSS) failed</description></error>
