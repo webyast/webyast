@@ -83,6 +83,11 @@ class StatusController < ApplicationController
   # GET /status/1.xml
   def show
     bgr = params['background']
+
+    # at least 'stop' parameter must be present if background mode is used,
+    # needed for identifying the request when polling for the result
+    raise InvalidParameters.new(:stop => 'MISSING') if bgr && params[:stop].blank?
+
     Rails.logger.info "Reading status in background" if bgr
 
     permission_check("org.opensuse.yast.system.status.read")
