@@ -6,6 +6,7 @@
 # @author Stefan Schubert <schubi@suse.de>
 #
 require 'exceptions'
+require 'graph'
 
 class CollectdOutOfSyncError < BackendException
   def initialize(timestamp)
@@ -61,7 +62,6 @@ class Metric
   # convenience, plugin and instance
   attr_reader :plugin_full
   attr_reader :type_full
-  attr_reader :config
 
   # like identifier, but to be used as a REST id
   # so / are replaced by +
@@ -145,17 +145,6 @@ class Metric
     # them
     @host, @plugin, @plugin_instance, @type, @type_instance = Metric.parse_file_path(path)
 
-    #find the correct plugin path for the config file
-    plugin_config_dir = "#{RAILS_ROOT}/config" #default
-    Rails.configuration.plugin_paths.each do |plugin_path|
-      if File.directory?(File.join(plugin_path, "status"))
-        plugin_config_dir = plugin_path+"/status/config"
-        Dir.mkdir(plugin_config_dir) unless File.directory?(plugin_config_dir)
-        break
-      end
-    end
-    #reading configuration file
-    @conf = YAML.load(File.open(File.join(plugin_config_dir, "status_configuration.yaml"))) if File.exists?(File.join(plugin_config_dir, "status_configuration.yaml"))
   end
 
   # parses the host, plugin, plugin_instance, type and type_instance
@@ -245,7 +234,7 @@ class Metric
     data_opts[:start] = opts[:start] if opts.has_key?(:start)
     data_opts[:stop] = opts[:stop] if opts.has_key?(:stop)
 
-    Rails.logger.info "rendering metric #{id} from #{data_opts[:start].to_i} to #{data_opts[:stop].to_i}"
+#    Rails.logger.info "rendering metric #{id} from #{data_opts[:start].to_i} to #{data_opts[:stop].to_i}"
     
     xml = opts[:builder] ||= Builder::XmlMarkup.new(opts)
     xml.instruct! unless opts[:skip_instruct]
@@ -258,25 +247,18 @@ class Metric
       xml.plugin_instance plugin_instance
       xml.type type
       xml.type_instance type_instance
-      if @conf 
-        line_id = id[host.length+1..id.length-1]  #remove hostname from id
-        limits = nil
-        @conf.each_value{|group|
-          group["graphs"].each{|graph|
-            graph["lines"].each{|line|
-              if line["id"] == line_id            
-                limits = line["limits"]
-                break
-              end
-            }
-            break unless limits == nil 
-          }
-          break unless limits == nil
-        }
+      line_id = id[host.length+1..id.length-1]  #remove hostname from id
+      limits = Graph.find_limits(line_id)
+      unless limits.blank?
         xml.limits() do
-          xml.max(limits["max"]) 
-          xml.min(limits["min"])
-        end if limits
+          limits.each do |limit|
+            xml.limit() do
+              xml.metric_column(limit["metric_column"]) 
+              xml.max(limit["max"]) 
+              xml.min(limit["min"])
+            end
+          end
+        end 
       end
 
       # serialize data unless it is disabled

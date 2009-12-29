@@ -1,0 +1,4 @@
+interface: org.opensuse.yast.system.graphs
+controller: graphs
+singular: false
+

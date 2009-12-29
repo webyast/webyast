@@ -6,12 +6,12 @@ CPU:
     - cummulated: false
       headline: CPU
       lines:
-        - id: cpu-0+cpu-idle
+        - metric_id: cpu-0+cpu-idle
           limits: 
             min: 0
             max: 0
           label: Used
-        - id: cpu-0+cpu-user
+        - metric_id: cpu-0+cpu-user
           limits: 
             min: 0
             max: 0
@@ -23,17 +23,17 @@ Memory:
     - cummulated: true
       headline: Memory
       lines:
-        - id: memory+memory-used
+        - metric_id: memory+memory-used
           limits: 
             min: 0
             max: 0
           label: Used
-        - id: memory+memory-free
+        - metric_id: memory+memory-free
           limits: 
             min: 0
             max: 0
           label: Free
-        - id: memory+memory-cached
+        - metric_id: memory+memory-cached
           limits: 
             min: 0
             max: 0
@@ -45,12 +45,12 @@ Network:
     - cummulated: false
       headline: Network
       lines:
-        - id: interface+if_errors-eth0
+        - metric_id: interface+if_errors-eth0
           limits: 
             min: 0
             max: 0
           label: Errors eth0
-        - id: if_packets-eth0
+        - metric_id: interface+if_packets-eth0
           limits: 
             min: 0
             max: 0
@@ -62,26 +62,30 @@ Disk:
     - cummulated: true
       headline: root
       lines:
-        - id: df+df-root+free
+        - metric_id: df+df-root
+          metric_column: free
           limits: 
             min: 0
             max: 0
-          label: Errors eth0
-        - id: df+df-root+used
+          label: free
+        - metric_id: df+df-root
+          metric_column: used
           limits: 
             min: 0
             max: 0
-          label: Packages eth0
+          label: used
     - cummulated: true
       headline: dev
       lines:
-        - id: df+df-dev+free
+        - metric_id: df+df-dev
+          metric_column: free
           limits: 
             min: 0
             max: 0
-          label: Errors eth0
-        - id: df+df-dev+used
+          label: free
+        - metric_id: df+df-dev
+          metric_column: used
           limits: 
             min: 0
             max: 0
-          label: Packages eth0
+          label: used
