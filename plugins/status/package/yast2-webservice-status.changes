@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Wed Dec 30 13:19:15 UTC 2009 - lslezak@suse.cz
+
+- read status in background, do not block the REST service
+  (bnc#550934)
+
+-------------------------------------------------------------------
 Tue Nov 24 16:07:14 CET 2009 - schubi@suse.de
 
 - raising an exception if collectd is out of sync with the systemtime (#bnc555204) 
