@@ -77,7 +77,7 @@ init = Rails::Initializer.run do |config|
 
   # reload all plugins, changes in *.rb files take effect immediately
   # it's here because of https://rails.lighthouseapp.com/projects/8994/tickets/2324-configreload_plugins-true-only-works-in-environmentrb
-  #config.reload_plugins = true if ENV['RAILS_ENV'] == 'development'
+  config.reload_plugins = true if ENV['RAILS_ENV'] == 'development'
 
   # In order to prevent unloading of AuthenticatedSystem
   config.load_once_paths += %W( #{RAILS_ROOT}/lib )
