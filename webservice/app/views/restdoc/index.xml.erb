@@ -1,0 +1,10 @@
+<%=
+    xml = Builder::XmlMarkup.new
+    xml.instruct!
+
+    xml.restdocs({:type => "array"}) do
+      @restdocs.each do |r|
+       xml.tag!(:restdoc, r)
+      end
+    end
+-%>

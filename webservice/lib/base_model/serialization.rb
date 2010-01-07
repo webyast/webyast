@@ -54,5 +54,8 @@ module BaseModel
 
   end
 end
-require 'base_model/serializers/xml_serializer'
-require 'base_model/serializers/json_serializer'
+
+#FIXME Strange, in some case (use server instead of console and load from remote service) require doesn't work
+# it looks like it create problematic dependency load and doesn't add to_xml method, change to load help
+load 'base_model/serializers/json_serializer.rb'
+load 'base_model/serializers/xml_serializer.rb'
