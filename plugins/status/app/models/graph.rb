@@ -113,7 +113,13 @@ class Graph
     config.each {|key,value|
       ret << Graph.new(key,value)
     }
-    ret    
+
+    if what == :all || ret.blank?
+      return ret    
+    else
+      Rails.logger.error "There are more results for #{what} -> #{ret.inspect} Taking the first one..." if ret.size > 1
+      return ret.first
+    end
   end
 
   #

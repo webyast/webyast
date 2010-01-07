@@ -250,7 +250,7 @@ class Metric
       line_id = id[host.length+1..id.length-1]  #remove hostname from id
       limits = Graph.find_limits(line_id)
       unless limits.blank?
-        xml.limits() do
+        xml.limits(:type => :array) do
           limits.each do |limit|
             xml.limit() do
               xml.metric_column(limit["metric_column"]) 
@@ -270,7 +270,7 @@ class Metric
         metric_data.each do |col, values|
           next if col == "starttime"
           next if col == "interval"
-          xml.data(:column => col, :start => starttime.to_i, :interval => interval ) { values.sort.each { |x| xml.comment!(x[0].to_i.to_s) if RAILS_ENV == "development"; xml.value x[1] } }
+          xml.values(:column => col, :start => starttime.to_i, :interval => interval ,:type => :hash) { values.sort.each { |x| xml.comment!(x[0].to_i.to_s) if RAILS_ENV == "development"; xml.value '"'+x[1].to_s+'"' } }
         end
       end
       
