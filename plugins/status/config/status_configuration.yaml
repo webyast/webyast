@@ -18,7 +18,7 @@ CPU:
           label: Used
 Memory:
   y_label: MByte
-  y_scale: 1024
+  y_scale: 1048567
   graphs:
     - cummulated: true
       headline: Memory
@@ -41,51 +41,39 @@ Memory:
 Network:
   y_label: 
   y_scale: 1
+  y_label: MByte
   graphs:
     - cummulated: false
       headline: Network
       lines:
-        - metric_id: interface+if_errors-eth0
-          limits: 
-            min: 0
-            max: 0
-          label: Errors eth0
         - metric_id: interface+if_packets-eth0
+          metric_column: rx
           limits: 
             min: 0
             max: 0
-          label: Packages eth0
+          label: received
+        - metric_id: interface+if_packets-eth0
+          metric_column: tx
+          limits: 
+            min: 0
+            max: 0
+          label: send
 Disk:
-  y_label: MByte
-  y_scale: 1024
+  y_label: GByte
+  y_scale: 1073741824
   graphs:
     - cummulated: true
       headline: root
       lines:
         - metric_id: df+df-root
-          metric_column: free
+          metric_column: used
           limits: 
             min: 0
             max: 0
-          label: free
+          label: used
         - metric_id: df+df-root
-          metric_column: used
-          limits: 
-            min: 0
-            max: 0
-          label: used
-    - cummulated: true
-      headline: dev
-      lines:
-        - metric_id: df+df-dev
           metric_column: free
           limits: 
             min: 0
             max: 0
           label: free
-        - metric_id: df+df-dev
-          metric_column: used
-          limits: 
-            min: 0
-            max: 0
-          label: used
