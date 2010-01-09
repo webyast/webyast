@@ -33,11 +33,11 @@ class Graph
     data.each do |key, values|
       if key == metric_column
         values.each do |date, value| 
-          if limits.has_key?("max") && limits["max"] > 0 && limits["max"] < value
+          if limits.has_key?("max") && limits["max"] > 0 && value && limits["max"] < value
             Rails.logger.info "Max #{limits['max']} for #{metric_id}(#{metric_column}) has been reached"
             limit_reached = true
           end 
-          if limits.has_key?("min") && limits["min"] > 0 && limits["min"] > value
+          if limits.has_key?("min") && limits["min"] > 0 && value && limits["min"] > value
             Rails.logger.info "Min #{limits['min']} for #{metric_id}(#{metric_column}) has been reached"
             limit_reached = true
           end 
@@ -72,21 +72,29 @@ class Graph
   end
 
   # initialize on element
-  def initialize(group_id,value)
+  def initialize(group_id,value,limitcheck=false)
     @group_name = group_id
     @y_scale = value["y_scale"]
     @y_label = value["y_label"]
+    if limitcheck
+      value["graphs"].each do |graph|
+        graph["lines"].each do |line|
+          line["limits"]["reached"] = check_limits(line["metric_id"], line["metric_column"], line["limits"])
+        end
+      end
+    end
     @graphs = value["graphs"]
   end
 
   #
   # find 
-  # Graph.find(:all)
-  # Graph.find(id) 
+  # Graph.find(:all, limitcheck)
+  # Graph.find(id, limitcheck) 
   # "id" could be the graph group (CPU, Disc) or the path of the collectd entry (metric_id)
-  # (e.g. cpu-0+cpu-system)
+  #      (e.g. cpu-0+cpu-system)
+  # "limitcheck" checking if limit has been reached (default: false)
   #
-  def self.find(what)
+  def self.find(what, limitcheck = false)
     config = parse_config
     return nil if config==nil
 
@@ -111,7 +119,7 @@ class Graph
 
     ret = []
     config.each {|key,value|
-      ret << Graph.new(key,value)
+      ret << Graph.new(key,value,limitcheck)
     }
 
     if what == :all || ret.blank?
@@ -150,7 +158,6 @@ class Graph
 
   # converts the graph to xml
   def to_xml(opts={})
-    checklimits = opts.has_key?(:checklimits) ? opts[:checklimits] : false
     xml = opts[:builder] ||= Builder::XmlMarkup.new(opts)
     xml.instruct! unless opts[:skip_instruct]
     xml.graph do
@@ -171,9 +178,7 @@ class Graph
                   xml.limits do
                     xml.max line["limits"]["max"] 
                     xml.min line["limits"]["min"]
-                    if checklimits
-                      xml.reached check_limits(line["metric_id"], line["metric_column"], line["limits"])
-                    end
+                    xml.reached check_limits(line["metric_id"], line["metric_column"], line["limits"]) if line["limits"].has_key? "reached"
                   end 
                 end
               end

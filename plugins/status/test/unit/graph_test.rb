@@ -35,9 +35,8 @@ class GraphTest < ActiveSupport::TestCase
     assert ret.map{|x| x.y_label}.include?('Percent')
     
     ret = Graph.find('CPU')
-    assert_equal 1, ret.size
-    assert ret.map{|x| x.y_scale}.include?(1)
-    assert ret.map{|x| x.y_label}.include?('Percent')
+    assert ret.y_scale == 1
+    assert ret.y_label == 'Percent'
 
     ret = Graph.find('notfound')
     assert_equal 0, ret.size
@@ -60,9 +59,7 @@ class GraphTest < ActiveSupport::TestCase
   end
 
   def test_check_limits_and_xml
-    ret = Graph.find('CPU')
-    assert_equal 1, ret.size
-    graph = ret.first
+    graph = Graph.find('CPU', true)
 
     graph.stubs(:read_data).with('waerden+cpu-0+cpu-idle').returns({ "value"=>
       {Time.at(1252071700) =>"6.1514301440e+01".to_f,
@@ -99,11 +96,11 @@ class GraphTest < ActiveSupport::TestCase
       xml.id "CPU"
       xml.y_scale 1
       xml.y_label "Percent"
-      xml.single_graphs do
+      xml.single_graphs(:type => :array) do
         xml.single_graph do
           xml.cummulated false
           xml.headline "CPU"
-          xml.lines do
+          xml.lines(:type => :array)do
             xml.line do
               xml.metric_id "cpu-0+cpu-idle"
               xml.label "Idle"

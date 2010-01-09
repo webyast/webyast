@@ -57,7 +57,7 @@ Network:
           limits: 
             min: 0
             max: 0
-          label: send
+          label: sent
 Disk:
   y_label: GByte
   y_scale: 1073741824

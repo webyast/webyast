@@ -1,4 +1,11 @@
 -------------------------------------------------------------------
+Tue Jan 12 14:33:16 CET 2010 - schubi@suse.de
+
+- moved code to metric/graph controller
+- removed status controller
+- version 0.0.10 
+
+-------------------------------------------------------------------
 Wed Dec 30 13:19:15 UTC 2009 - lslezak@suse.cz
 
 - read status in background, do not block the REST service

@@ -23,32 +23,29 @@ class MetricsController < ApplicationController
   # GET /metrics.xml
   #
   def index
-
+    permission_check("org.opensuse.yast.system.status.read")
     conditions = {}
-    
     # support filtering by host, plugin, plugin_instance ...
     [:host, :plugin, :type, :plugin_instance, :type_instance, :plugin_full, :type_full ].each do |key|
       if params.has_key?(key)
         conditions[key] = params[key]
       end
     end
-    
     @metric = Metric.find(:all, conditions)
-
-    @data = false
-    @start = nil
-    @stop = nil
- 
+    @data = nil
     render :show    
   end
 
   # GET /metrics/1
   # GET /metrics/1.xml
   def show
-    #permission_check("org.opensuse.yast.system.status.read")
+    permission_check("org.opensuse.yast.system.status.read")
     @metric = Metric.find(params[:id])
-    @stop = params[:stop].blank? ? Time.now : Time.at(params[:stop].to_i)
-    @start = params[:start].blank? ? @stop - DEFAULT_TIMEFRAME : Time.at(params[:start].to_i)
-    @data = true
+    data_opts = {}
+    data_opts[:stop] = params[:stop].blank? ? Time.now : Time.at(params[:stop].to_i)
+    data_opts[:start] = params[:start].blank? ? data_opts[:stop] - DEFAULT_TIMEFRAME : Time.at(params[:start].to_i)
+#    Rails.logger.info "rendering metric #{id} from #{data_opts[:start].to_i} to #{data_opts[:stop].to_i}"
+
+    @data = @metric.data(data_opts)
   end
 end

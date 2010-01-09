@@ -230,12 +230,6 @@ class Metric
   
   # converts the metric to xml
   def to_xml(opts={})
-    data_opts = {}
-    data_opts[:start] = opts[:start] if opts.has_key?(:start)
-    data_opts[:stop] = opts[:stop] if opts.has_key?(:stop)
-
-#    Rails.logger.info "rendering metric #{id} from #{data_opts[:start].to_i} to #{data_opts[:stop].to_i}"
-    
     xml = opts[:builder] ||= Builder::XmlMarkup.new(opts)
     xml.instruct! unless opts[:skip_instruct]
 
@@ -263,14 +257,12 @@ class Metric
 
       # serialize data unless it is disabled
       unless opts.has_key?(:data) and !opts[:data]
-        metric_data = data(data_opts)
-        starttime = metric_data['starttime']
-        interval = metric_data['interval']
-      
-        metric_data.each do |col, values|
+        starttime = opts[:data]['starttime']
+        interval = opts[:data]['interval']
+        opts[:data].each do |col, values|
           next if col == "starttime"
           next if col == "interval"
-          xml.values(:column => col, :start => starttime.to_i, :interval => interval ,:type => :hash) { values.sort.each { |x| xml.comment!(x[0].to_i.to_s) if RAILS_ENV == "development"; xml.value '"'+x[1].to_s+'"' } }
+          xml.value(:column => col, :start => starttime.to_i, :interval => interval ,:type => :hash) { values.sort.each { |x| xml.comment!(x[0].to_i.to_s) if RAILS_ENV == "development"; xml.value '"'+x[1].to_s+'"' } }
         end
       end
       

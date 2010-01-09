@@ -44,9 +44,43 @@ module BaseModel
   # Framework to support serialization. By default is support xml and json serialization (method to_xml and to_json)
   # and deserialization (from_xml and from_json).
   # 
-  # TODO add example
+  # === Example
+  #   class Systemtime < BaseModel::Base
+  #
+  #     # Date settings format is dd/mm/yyyy
+  #     attr_accessor :date
+  #     validates_format_of :date, :with => /^\d{2}\/\d{2}\/\d{4}$/, :allow_nil => true
+  #     # time settings format is hh:mm:ss
+  #     attr_accessor :time
+  #     validates_format_of :time, :with => /^\d{2}:\d{2}:\d{2}$/, :allow_nil => true
+  #     # Current timezone as id
+  #     attr_accessor :timezone
+  #     #check if zone exists
+  #     validates_each :timezone, :allow_nil => true do |model,attr,zone|
+  #       contain = false
+  #       unless model.timezones.nil?
+  #         model.timezones.each do |z|
+  #           contain = true if z["entries"][zone]
+  #         end
+  #         model.errors.add attr, "Unknown timezone" unless contain
+  #       end
+  #     end
+  #     # Utc status possible values is UTCOnly, UTC and localtime see yast2-country doc
+  #     attr_accessor :utcstatus
+  #     validates_inclusion_of :utcstatus, :in => [true,false], :allow_nil => true
+  #     attr_accessor :timezones
+  #     validates_presence_of :timezones
+  #     # do not massload timezones, as it is read-only
+  #     attr_protected :timezones
+  #
+  #     after_save :restart_collectd
+  #     # to_xml and to_json is automatic provided
+  #     # load and new(options) is also automatic provided
+  #   end  
+
 
   class Base
+
 
     # requirement for class which should be used in ActiveModel
     # see http://www.engineyard.com/blog/2009/my-five-favorite-things-about-rails-3/ (paragraph 4)
@@ -70,9 +104,9 @@ module BaseModel
     # same as save but throws exception if error occur
     # see save
     def save!
-      create_or_update
-      #TODO raise exception
+      create_or_save || raise("Internal error: Should be redefined")
     end
+
 
     # identification if create new source or update already existing one
     # by default return false ( always update )
@@ -110,12 +144,12 @@ module BaseModel
       true
     end
 
-#remove overwritten method_missing from activeRecord (as Base model doesn't know attributes)
+    #remove overwritten method_missing from activeRecord (as Base model doesn't know attributes)
     alias_method :method_missing_orig, :method_missing
     #required by validations
     include ActiveRecord::AttributeMethods
     alias_method :method_missing, :method_missing_orig
-#remove overwritten respond_to (as Base model doesn't have attributes
+    #remove overwritten respond_to (as Base model doesn't have attributes
     alias_method :respond_to?, :respond_to_without_attributes?
 
     #Validations in model
@@ -129,13 +163,33 @@ module BaseModel
     #serialization of models
     include BaseModel::Serialization
 
+    #here is redefined save! from ActiveRecord, as we want to throw own exceptions
+    def save!
+      save
+      unless valid?
+        report = {}
+        errors.each { |attr,msg| report[attr.to_sym] = msg }
+        raise InvalidParameters.new report
+      end
+    end
   end
 end
 #Hack to properly generate error message without ActiveRecord special methods
 module ActiveRecord
   class Error
+    # do not call any record specific methods
     def generate_message(message,options)
       message
+    end
+
+    # do not call any record specific methods
+    def generate_full_message(message,options)
+      message
+    end
+
+    # do not call any record specific methods
+    def default_options
+      {}
     end
   end
 end

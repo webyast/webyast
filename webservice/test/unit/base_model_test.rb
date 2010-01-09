@@ -41,6 +41,15 @@ class BaseModelTest < ActiveSupport::TestCase
     assert test.invalid?
   end
 
+  def test_save!
+    test = Test.new
+    test.arg1 = nil
+    test.arg2 = "sda"
+    assert_raise InvalidParameters do
+      test.save!
+    end
+  end
+
   def test_callbacks
     test = Test.new
     test.callback_used = false
