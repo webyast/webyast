@@ -5,6 +5,20 @@ require 'rake/packagetask'
 require File.join(File.dirname(__FILE__), 'config', 'rails_parent')
 require File.join(RailsParent.parent, 'config', 'boot')
 require 'tasks/rails'
+# load the shared rake files from the package itself
+# skip 'deploy_local' task, it's redefined here
+require 'tasks/webservice_tasks'
+WebserviceTasks.loadTasks(:exclude => ["deploy_local.rake"])
 
 desc 'Default: run unit tests.'
 task :default => :test
+
+require 'fileutils'
+
+desc "Deploy for development - create basic dirs and install config files."
+task :deploy_local do |t|
+  FileUtils.mkdir_p "/etc/webyast"
+  FileUtils.mkdir_p "/var/lib/yastws/eulas/accepted-licenses"
+  FileUtils.install "package/eulas-sles11.yml", "/etc/webyast/eulas.yml", :mode => 0644
+  FileUtils.cp_r    "config/resources/licenses", "/var/lib/yastws/eulas"
+end

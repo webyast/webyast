@@ -12,14 +12,14 @@ end
 vars = ['PKG_BUILD', 'RCOV_PARAMS', 'RAILS_ENV', 'RAILS_PARENT']
 ENV['RAILS_PARENT'] = File.join(Dir.pwd, 'webservice')
 
-env = ENV.map { |key,val| (ENV[key] && vars.include?( key )) ? %(#{key}="#{ENV[key]}") : nil }.reject {|x| x.nil?}.join(' ')
+env = ENV.map { |key,val| (ENV[key] && vars.include?( key )) ? %(#{key}="#{ENV[key]}") : nil }.compact.join(' ')
 
 plugins = Dir.glob('plugins/*')#.reject{|x| ['users'].include?(File.basename(x))}
 PROJECTS = ['webservice', *plugins]
 desc 'Run all tests by default'
 task :default => :test
 
-%w(test rdoc pgem package release install install_policies check_syntax package-local buildrpm buildrpm-local test:test:rcov restdoc).each do |task_name|
+%w(test rdoc pgem package release install install_policies check_syntax package-local buildrpm buildrpm-local test:test:rcov restdoc deploy_local).each do |task_name|
   desc "Run #{task_name} task for all projects"
 
   task task_name do
@@ -66,6 +66,10 @@ task :doc do
   system "sed -i 's:%%PLUGINS%%:#{code}:' doc/index.html"
   puts "documentation successfully generated"
 end
+
+desc "Deploy for development - create dirs, install configuration files and custom yast modules. Then install and update PolKit policies for root."
+# :install policies uses grantwebyastrights, which is installed in :deploy_local
+task :deploy_local_all => [:deploy_local,:install_policies]
 
 =begin
 require 'metric_fu'
