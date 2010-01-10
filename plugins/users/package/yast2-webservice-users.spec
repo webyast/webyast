@@ -38,6 +38,8 @@ Authors:
 %setup -q -n www
 
 %build
+#do not package generated doc
+rm -rf doc
 
 %install
 

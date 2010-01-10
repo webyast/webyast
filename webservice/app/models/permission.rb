@@ -95,7 +95,7 @@ private
   end
 
   def all_actions
-    `polkit-action`
+    `/usr/bin/polkit-action`
   end
 
   def filter_nonsuse_permissions (str)

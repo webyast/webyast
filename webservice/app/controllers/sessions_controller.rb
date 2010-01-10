@@ -18,13 +18,18 @@ class SessionsController < ApplicationController
   end
 
   def show
+    #FIXME this is cryptic. @ret = { :hash => { :login => 'nobody' } } but do we need so complex hash and why set nobody ENODOC!
     @ret = Hash.new
     @ret[:hash] = Hash.new
     @ret[:hash][:login] = 'nobody'
   end
   
   def create
-    if params["hash"].is_a? Hash
+    #FIXME make rendering more clear
+    #FIXME proper document this security sensitive part
+    #FIXME better structuralize this method
+    #FIXME document all possible parameters
+    if params["hash"].is_a? Hash #FIXME report that "hash" value is not hash
       #checking if the session description is hosted in a own Hash
       params["hash"].each do |name,value|
          params[name] = value

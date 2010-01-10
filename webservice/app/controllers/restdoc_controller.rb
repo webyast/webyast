@@ -10,7 +10,7 @@ class RestdocController < ApplicationController
       plugins = Dir["#{path}/*"]
 
       plugins.each do |plugin|
-	if File.directory? "#{plugin}/app" and File.directory? "#{plugin}/public"
+	if File.directory?("#{plugin}/app") && File.directory?("#{plugin}/public")
 	  
 	  Dir["#{plugin}/public/**/restdoc/index.html"].each do |restdoc_path|
 	    if File.file? "#{restdoc_path}"

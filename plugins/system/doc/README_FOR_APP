@@ -1,0 +1,13 @@
+System
+======
+
+REST interface for accessing low-level basic system components
+
+
+It uses HAL for reboot/shutdown, the reasons are:
+
+- no need to create new public YaST functions
+- HAL access rights are used, no need to define/setup extra rights for YaST
+
+
+Copyright (c) 2009 Novell

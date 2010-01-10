@@ -178,13 +178,13 @@ end
 module ActiveRecord
   class Error
     # do not call any record specific methods
-    def generate_message(message,options)
-      message
+    def generate_message(*args)
+      @message
     end
 
     # do not call any record specific methods
-    def generate_full_message(message,options)
-      message
+    def generate_full_message(*args)
+      @message
     end
 
     # do not call any record specific methods

@@ -1,4 +1,12 @@
 -------------------------------------------------------------------
+Mon Jan 18 14:27:39 CET 2010 - jsuchome@suse.cz
+
+- require also correct 11.2 version of yast2 package
+- read service descriptions (bnc#570298)
+- get service status using the read call (bnc#570968)
+- 0.0.14 
+
+-------------------------------------------------------------------
 Tue Nov 10 14:04:58 CET 2009 - jsuchome@suse.cz
 
 - require SLE11 version of yast2 package

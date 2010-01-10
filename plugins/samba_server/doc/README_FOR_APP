@@ -1,0 +1,16 @@
+SambaServer
+===========
+
+REST API for Samba server Yast module.
+
+
+Example
+=======
+
+Get list of configured shares:
+http://localhost:4984/sambashares.xml
+
+Get properties of a share:
+http://localhost:4984/sambashares/homes.xml
+
+Copyright (c) 2009 Novell

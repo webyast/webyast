@@ -94,7 +94,7 @@ class PermissionsController < ApplicationController
 
   def update
 
-  #implementation is wrong so not mark as not implemented
+  #implementation is wrong so mark as not implemented
   ret = { :error => "not implemented" }
     respond_to do |format|
       format.json { render :json => ret.to_json }

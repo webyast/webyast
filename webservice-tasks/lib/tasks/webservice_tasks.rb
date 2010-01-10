@@ -3,8 +3,14 @@ require 'rake'
 
 class WebserviceTasks
 
+    # a flag - load the tasks just once, multiple loading
+    # leads to multiple invocation of the same task
+    @@tasks_loaded = false
+
     # load webservice *.rake files, exclude/include list can be specified
     def WebserviceTasks.loadTasks(params = {:include => ["*.rake"], :exclude => []})
+	return if @@tasks_loaded
+
 	exclude_list = []
 	if params[:exclude].nil?
 	    params[:exclude] = []
@@ -27,6 +33,8 @@ class WebserviceTasks
 		load ext
 	    end
 	}
+
+	@@tasks_loaded = true
     end
 
 end
