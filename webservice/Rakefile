@@ -37,5 +37,8 @@ task :deploy_local => :"db:migrate" do |t|
   FileUtils.mkdir_p "/var/lib/yastws"
   FileUtils.mkdir_p "/usr/share/yastws"
   FileUtils.install "package/grantwebyastrights", "/usr/sbin", :mode => 0555
+  system "/usr/bin/polkit-auth --user root --grant org.opensuse.yast.module-manager.import > /dev/null"
+  system "/usr/bin/polkit-auth --user root --grant org.freedesktop.policykit.read > /dev/null"
+  system "/usr/bin/polkit-auth --user root --grant org.freedesktop.packagekit.system-update > /dev/null"
 end
 
