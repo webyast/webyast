@@ -51,8 +51,7 @@ class GraphsController < ApplicationController
   #
   def index
     permission_check("org.opensuse.yast.system.status.read")
-    @graph = Graph.find(:all)
-    @checklimits = params['checklimits']
+    @graph = Graph.find(:all,  params[:checklimits] || false )
     render :show    
   end
 
@@ -60,7 +59,6 @@ class GraphsController < ApplicationController
   # GET /graphs/1.xml
   def show
     permission_check("org.opensuse.yast.system.status.read")
-    @graph = Graph.find(params[:id])
-    @checklimits = params['checklimits']
+    @graph = Graph.find(params[:id], params[:checklimits] || false)
   end
 end
