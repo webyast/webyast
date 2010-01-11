@@ -44,7 +44,40 @@ module BaseModel
   # Framework to support serialization. By default is support xml and json serialization (method to_xml and to_json)
   # and deserialization (from_xml and from_json).
   # 
-  # TODO add example
+  # === Example
+  #   class Systemtime < BaseModel::Base
+  #
+  #     # Date settings format is dd/mm/yyyy
+  #     attr_accessor :date
+  #     validates_format_of :date, :with => /^\d{2}\/\d{2}\/\d{4}$/, :allow_nil => true
+  #     # time settings format is hh:mm:ss
+  #     attr_accessor :time
+  #     validates_format_of :time, :with => /^\d{2}:\d{2}:\d{2}$/, :allow_nil => true
+  #     # Current timezone as id
+  #     attr_accessor :timezone
+  #     #check if zone exists
+  #     validates_each :timezone, :allow_nil => true do |model,attr,zone|
+  #       contain = false
+  #       unless model.timezones.nil?
+  #         model.timezones.each do |z|
+  #           contain = true if z["entries"][zone]
+  #         end
+  #         model.errors.add attr, "Unknown timezone" unless contain
+  #       end
+  #     end
+  #     # Utc status possible values is UTCOnly, UTC and localtime see yast2-country doc
+  #     attr_accessor :utcstatus
+  #     validates_inclusion_of :utcstatus, :in => [true,false], :allow_nil => true
+  #     attr_accessor :timezones
+  #     validates_presence_of :timezones
+  #     # do not massload timezones, as it is read-only
+  #     attr_protected :timezones
+  #
+  #     after_save :restart_collectd
+  #     # to_xml and to_json is automatic provided
+  #     # load and new(options) is also automatic provided
+  #   end  
+
 
   class Base
 
