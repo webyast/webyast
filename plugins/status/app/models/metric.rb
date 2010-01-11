@@ -262,7 +262,7 @@ class Metric
         opts[:data].each do |col, values|
           next if col == "starttime"
           next if col == "interval"
-          xml.values(:column => col, :start => starttime.to_i, :interval => interval ,:type => :hash) { values.sort.each { |x| xml.comment!(x[0].to_i.to_s) if RAILS_ENV == "development"; xml.value '"'+x[1].to_s+'"' } }
+          xml.value(:column => col, :start => starttime.to_i, :interval => interval ,:type => :hash) { values.sort.each { |x| xml.comment!(x[0].to_i.to_s) if RAILS_ENV == "development"; xml.value '"'+x[1].to_s+'"' } }
         end
       end
       
