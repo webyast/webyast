@@ -105,29 +105,28 @@ class MetricTest < ActiveSupport::TestCase
       xml.type "packets"
       xml.type_instance ""
 
-      xml.data(:interval => "10", :column => "tx", :start=>"1252075500") do
-        xml.value 7.79
-        xml.value 61.66
-        xml.value 159.22
-        xml.value 425.76
-        xml.value nil
-        xml.value nil
+      xml.value(:interval => "10", :column => "tx", :start=>"1252075500", :type => :hash ) do
+        xml.value '"7.79"'
+        xml.value '"61.66"'
+        xml.value '"159.22"'
+        xml.value '"425.76"'
+        xml.value '""'
+        xml.value '""'
       end
 
-      xml.data(:interval => "10", :column => "rx", :start=>"1252075500") do
-        xml.value 22.15
-        xml.value 258.14
-        xml.value 339.62
-        xml.value 280.69
-        xml.value nil
-        xml.value nil
+      xml.value(:interval => "10", :column => "rx", :start=>"1252075500", :type => :hash) do
+        xml.value '"22.15"'
+        xml.value '"258.14"'
+        xml.value '"339.62"'
+        xml.value '"280.69"'
+        xml.value '""'
+        xml.value '""'
       end
     end
-    
-    ptx = packets.to_xml(:start => start, :stop => stop)
+    ptx = packets.to_xml(:data => packets.data(:start => start, :stop => stop))
 #    puts "packets.to_xml #{ptx.inspect}"
     xtg = xml.target!
-#    puts "xml.target #{xtg.inspect}"    
+#    puts "    xml.target #{xtg.inspect}"    
     assert xml_cmp ptx, xtg
   end
 
