@@ -33,11 +33,11 @@ class Graph
     data.each do |key, values|
       if key == metric_column
         values.each do |date, value| 
-          if limits.has_key?("max") && limits["max"] > 0 && limits["max"] < value
+          if limits.has_key?("max") && limits["max"] > 0 && value && limits["max"] < value
             Rails.logger.info "Max #{limits['max']} for #{metric_id}(#{metric_column}) has been reached"
             limit_reached = true
           end 
-          if limits.has_key?("min") && limits["min"] > 0 && limits["min"] > value
+          if limits.has_key?("min") && limits["min"] > 0 && value && limits["min"] > value
             Rails.logger.info "Min #{limits['min']} for #{metric_id}(#{metric_column}) has been reached"
             limit_reached = true
           end 
