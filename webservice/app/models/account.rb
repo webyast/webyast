@@ -28,7 +28,10 @@ class Account < ActiveRecord::Base
      cmd = "/sbin/unix2_chkpwd rpam '#{login}'"
      se = Session.new
      result, err = se.execute cmd, :stdin => passwd #password needn't to be escaped as it is on stdin
-     return (se.get_status == 0)
+     ret = se.get_status.zero?
+     # close the running shell
+     se.close
+     ret
   end
 
   # Authenticates a user by their login name and unencrypted password.  Returns the user or nil.
