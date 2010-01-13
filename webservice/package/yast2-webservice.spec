@@ -32,7 +32,7 @@ Requires:	yast2-dbus-server
 # gamin gives problems with lighttpd, so better conflict with it for now
 Conflicts:      gamin
 PreReq:         PolicyKit, PackageKit, rubygem-rake, rubygem-sqlite3
-PreReq:         rubygem-rails-2_3 = 2.3.4
+PreReq:         rubygem-rails-2_3 >= 2.3.4
 PreReq:         ruby-rpam, ruby-polkit, rubygem-test-unit
 License:	LGPL v2.1 only
 Group:          Productivity/Networking/Web/Utilities
@@ -58,7 +58,7 @@ BuildRequires:  ruby, pkg-config, rubygem-mocha
 BuildRequires:  rubygem-yast2-webservice-tasks, rubygem-restility
 BuildRequires:  yast2-core, yast2-dbus-server, ruby-dbus, sqlite, dbus-1
 BuildRequires:  PolicyKit, PackageKit, rubygem-sqlite3
-BuildRequires:  rubygem-rails-2_3 = 2.3.4
+BuildRequires:  rubygem-rails-2_3 >= 2.3.4
 BuildRequires:  ruby-rpam, ruby-polkit
 
 # This is for Hudson (build service) to setup the build env correctly
