@@ -81,6 +81,7 @@ module BaseModel
 
   class Base
 
+
     # requirement for class which should be used in ActiveModel
     # see http://www.engineyard.com/blog/2009/my-five-favorite-things-about-rails-3/ (paragraph 4)
     def to_model
@@ -103,9 +104,9 @@ module BaseModel
     # same as save but throws exception if error occur
     # see save
     def save!
-      create_or_update
-      #TODO raise exception
+      create_or_save || raise("Internal error: Should be redefined")
     end
+
 
     # identification if create new source or update already existing one
     # by default return false ( always update )
@@ -143,12 +144,12 @@ module BaseModel
       true
     end
 
-#remove overwritten method_missing from activeRecord (as Base model doesn't know attributes)
+    #remove overwritten method_missing from activeRecord (as Base model doesn't know attributes)
     alias_method :method_missing_orig, :method_missing
     #required by validations
     include ActiveRecord::AttributeMethods
     alias_method :method_missing, :method_missing_orig
-#remove overwritten respond_to (as Base model doesn't have attributes
+    #remove overwritten respond_to (as Base model doesn't have attributes
     alias_method :respond_to?, :respond_to_without_attributes?
 
     #Validations in model
@@ -162,12 +163,25 @@ module BaseModel
     #serialization of models
     include BaseModel::Serialization
 
+    #here is redefined save! from ActiveRecord, as we want to throw own exceptions
+    def save!
+      save
+      unless valid?
+        report = {}
+        errors.each { |attr,msg| report[attr.to_sym] = msg }
+        raise InvalidParameters.new report
+      end
+    end
   end
 end
 #Hack to properly generate error message without ActiveRecord special methods
 module ActiveRecord
   class Error
     def generate_message(message,options)
+      message
+    end
+
+    def generate_full_message(message,options)
       message
     end
   end
