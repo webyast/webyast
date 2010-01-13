@@ -177,12 +177,19 @@ end
 #Hack to properly generate error message without ActiveRecord special methods
 module ActiveRecord
   class Error
+    # do not call any record specific methods
     def generate_message(message,options)
       message
     end
 
+    # do not call any record specific methods
     def generate_full_message(message,options)
       message
+    end
+
+    # do not call any record specific methods
+    def default_options
+      {}
     end
   end
 end
