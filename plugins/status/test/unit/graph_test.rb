@@ -24,7 +24,8 @@ class GraphTest < ActiveSupport::TestCase
   def setup
     # standard setup
     Metric.stubs(:default_host).returns('waerden')
-    Graph.stubs(:parse_config).returns({"Network"=>{"y_scale"=>1, "graphs"=>[{"lines"=>[{"label"=>"Errors eth0", "limits"=>{"max"=>0, "min"=>0}, "metric_id"=>"interface+if_errors-eth0"}, {"label"=>"Packages eth0", "limits"=>{"max"=>0, "min"=>0}, "metric_id"=>"interface+if_packets-eth0"}], "headline"=>"Network", "cummulated"=>false}], "y_label"=>nil}, "CPU"=>{"y_scale"=>1, "graphs"=>[{"lines"=>[{"label"=>"Idle", "limits"=>{"max"=>0, "min"=>0}, "metric_id"=>"cpu-0+cpu-idle"}, {"label"=>"Used", "limits"=>{"max"=>10, "min"=>0}, "metric_id"=>"cpu-0+cpu-user"}], "headline"=>"CPU", "cummulated"=>false}], "y_label"=>"Percent"}, "Disk"=>{"y_scale"=>1024, "graphs"=>[{"lines"=>[{"label"=>"free", "limits"=>{"max"=>0, "min"=>0}, "metric_column"=>"free", "metric_id"=>"df+df-root"}, {"label"=>"used", "limits"=>{"max"=>0, "min"=>0}, "metric_column"=>"used", "metric_id"=>"df+df-root"}], "headline"=>"root", "cummulated"=>true}, {"lines"=>[{"label"=>"free", "limits"=>{"max"=>0, "min"=>0}, "metric_column"=>"free", "metric_id"=>"df+df-dev"}, {"label"=>"used", "limits"=>{"max"=>0, "min"=>0}, "metric_column"=>"used", "metric_id"=>"df+df-dev"}], "headline"=>"dev", "cummulated"=>true}], "y_label"=>"MByte"}, "Memory"=>{"y_scale"=>1024, "graphs"=>[{"lines"=>[{"label"=>"Used", "limits"=>{"max"=>0, "min"=>0}, "metric_id"=>"memory+memory-used"}, {"label"=>"Free", "limits"=>{"max"=>0, "min"=>0}, "metric_id"=>"memory+memory-free"}, {"label"=>"Cached", "limits"=>{"max"=>0, "min"=>0}, "metric_id"=>"memory+memory-cached"}], "headline"=>"Memory", "cummulated"=>true}], "y_label"=>"MByte"}})
+    Graph.stubs(:parse_config).returns({"Network"=>{"y_scale"=>1, "y_label"=>"MByte", "single_graphs"=>[{"lines"=>[{"label"=>"received", "limits"=>{"max"=>"0", "min"=>"0"}, "metric_column"=>"rx", "metric_id"=>"interface+if_packets-eth0"}, {"label"=>"sent", "limits"=>{"max"=>"0", "min"=>"0"}, "metric_column"=>"tx", "metric_id"=>"interface+if_packets-eth0"}], "headline"=>"Network", "cummulated"=>"false"}]}, "CPU"=>{"y_scale"=>1, "y_label"=>"Percent", "single_graphs"=>[{"lines"=>[{"label"=>"Idle", "limits"=>{"max"=>"0", "min"=>"0"}, "metric_id"=>"cpu-0+cpu-idle"}, {"label"=>"Used", "limits"=>{"max"=>"10", "min"=>"0"}, "metric_id"=>"cpu-0+cpu-user"}], "headline"=>"CPU", "cummulated"=>"false"}]}, "Disk"=>{"y_scale"=>1073741824, "y_label"=>"GByte", "single_graphs"=>[{"lines"=>[{"label"=>"used", "limits"=>{"max"=>"0", "min"=>"0"}, "metric_column"=>"used", "metric_id"=>"df+df-root"}, {"label"=>"free", "limits"=>{"max"=>"0", "min"=>"0"}, "metric_column"=>"free", "metric_id"=>"df+df-root"}], "headline"=>"root", "cummulated"=>"true"}]}, "Memory"=>{"y_scale"=>1048567, "y_label"=>"MByte", "single_graphs"=>[{"lines"=>[{"label"=>"Used", "limits"=>{"max"=>"0", "min"=>"0"}, "metric_id"=>"memory+memory-used"}, {"label"=>"Free", "limits"=>{"max"=>"0", "min"=>"0"}, "metric_id"=>"memory+memory-free"}, {"label"=>"Cached", "limits"=>{"max"=>"0", "min"=>"0"}, "metric_id"=>"memory+memory-cached"}], "headline"=>"Memory", "cummulated"=>"true"}]}})
+
   end
 
   def test_finders
@@ -45,11 +46,11 @@ class GraphTest < ActiveSupport::TestCase
   def test_find_limits
     ret = Graph.find_limits('cpu-0+cpu-user')
     assert_equal 1, ret.size
-    assert_equal [{"max"=>10, "min"=>0}], ret
+    assert_equal [{"max"=>"10", "min"=>"0"}], ret
 
     ret = Graph.find_limits('cpu-0+cpu-user', 'CPU')
     assert_equal 1, ret.size
-    assert_equal [{"max"=>10, "min"=>0}], ret
+    assert_equal [{"max"=>"10", "min"=>"0"}], ret
 
     ret = Graph.find_limits('cpu-0+cpu-user', 'notfound')
     assert_equal 0, ret.size
