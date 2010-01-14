@@ -11,5 +11,7 @@ task :install_policies do |t|
   Dir.glob("**/*.policy").each do |policy|
     FileUtils.cp("#{policy}", "/usr/share/PolicyKit/policy")
   end
+  system "/usr/sbin/grantwebyastrights --user root --action grant >/dev/null 2>&1"
+  raise "Error on execute '#{$0} #{tracing} #{verbose} #{task_name}'" if $?.exitstatus != 0
 end
 
