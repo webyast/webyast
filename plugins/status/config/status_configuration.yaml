@@ -1,79 +1,91 @@
 --- 
-CPU:
+Network: 
+  y_scale: 1
+  y_label: MByte
+  single_graphs: 
+  - !map:HashWithIndifferentAccess 
+    lines: 
+    - !map:HashWithIndifferentAccess 
+      label: received
+      limits: !map:HashWithIndifferentAccess 
+        max: "0"
+        min: "0"
+      metric_column: rx
+      metric_id: interface+if_packets-eth0
+    - !map:HashWithIndifferentAccess 
+      label: sent
+      limits: !map:HashWithIndifferentAccess 
+        max: "0"
+        min: "0"
+      metric_column: tx
+      metric_id: interface+if_packets-eth0
+    headline: Network
+    cummulated: "false"
+CPU: 
+  y_scale: 1
   y_label: Percent
-  y_scale: 1
-  graphs:
-    - cummulated: false
-      headline: CPU
-      lines:
-        - metric_id: cpu-0+cpu-idle
-          limits: 
-            min: 0
-            max: 0
-          label: Idle
-        - metric_id: cpu-0+cpu-user
-          limits: 
-            min: 0
-            max: 0
-          label: Used
-Memory:
-  y_label: MByte
-  y_scale: 1048567
-  graphs:
-    - cummulated: true
-      headline: Memory
-      lines:
-        - metric_id: memory+memory-used
-          limits: 
-            min: 0
-            max: 0
-          label: Used
-        - metric_id: memory+memory-free
-          limits: 
-            min: 0
-            max: 0
-          label: Free
-        - metric_id: memory+memory-cached
-          limits: 
-            min: 0
-            max: 0
-          label: Cached
-Network:
-  y_label: 
-  y_scale: 1
-  y_label: MByte
-  graphs:
-    - cummulated: false
-      headline: Network
-      lines:
-        - metric_id: interface+if_packets-eth0
-          metric_column: rx
-          limits: 
-            min: 0
-            max: 0
-          label: received
-        - metric_id: interface+if_packets-eth0
-          metric_column: tx
-          limits: 
-            min: 0
-            max: 0
-          label: sent
-Disk:
-  y_label: GByte
+  single_graphs: 
+  - !map:HashWithIndifferentAccess 
+    lines: 
+    - !map:HashWithIndifferentAccess 
+      label: Idle
+      limits: !map:HashWithIndifferentAccess 
+        max: "0"
+        min: "0"
+      metric_id: cpu-0+cpu-idle
+    - !map:HashWithIndifferentAccess 
+      label: Used
+      limits: !map:HashWithIndifferentAccess 
+        max: "0"
+        min: "0"
+      metric_id: cpu-0+cpu-user
+    headline: CPU
+    cummulated: "false"
+Disk: 
   y_scale: 1073741824
-  graphs:
-    - cummulated: true
-      headline: root
-      lines:
-        - metric_id: df+df-root
-          metric_column: used
-          limits: 
-            min: 0
-            max: 0
-          label: used
-        - metric_id: df+df-root
-          metric_column: free
-          limits: 
-            min: 0
-            max: 0
-          label: free
+  y_label: GByte
+  single_graphs: 
+  - !map:HashWithIndifferentAccess 
+    lines: 
+    - !map:HashWithIndifferentAccess 
+      label: used
+      limits: !map:HashWithIndifferentAccess 
+        max: "0"
+        min: "0"
+      metric_column: used
+      metric_id: df+df-root
+    - !map:HashWithIndifferentAccess 
+      label: free
+      limits: !map:HashWithIndifferentAccess 
+        max: "0"
+        min: "0"
+      metric_column: free
+      metric_id: df+df-root
+    headline: root
+    cummulated: "true"
+Memory: 
+  y_scale: 1048567
+  y_label: MByte
+  single_graphs: 
+  - !map:HashWithIndifferentAccess 
+    lines: 
+    - !map:HashWithIndifferentAccess 
+      label: Used
+      limits: !map:HashWithIndifferentAccess 
+        max: "0"
+        min: "0"
+      metric_id: memory+memory-used
+    - !map:HashWithIndifferentAccess 
+      label: Free
+      limits: !map:HashWithIndifferentAccess 
+        max: "0"
+        min: "0"
+      metric_id: memory+memory-free
+    - !map:HashWithIndifferentAccess 
+      label: Cached
+      limits: !map:HashWithIndifferentAccess 
+        max: "0"
+        min: "0"
+      metric_id: memory+memory-cached
+    headline: Memory
+    cummulated: "true"

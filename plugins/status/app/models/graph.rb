@@ -8,7 +8,9 @@ class Graph
   attr_reader :group_name
   attr_reader :y_scale
   attr_reader :y_label
-  attr_reader :graphs
+  attr_reader :single_graphs
+
+  CONFIGURATION_FILE = "status_configuration.yaml"
 
   private
 
@@ -22,6 +24,7 @@ class Graph
     return data
   end
 
+
   #
   # Checking limit. Return true if a limit has been reached.
   #
@@ -33,11 +36,11 @@ class Graph
     data.each do |key, values|
       if key == metric_column
         values.each do |date, value| 
-          if limits.has_key?("max") && limits["max"] > 0 && value && limits["max"] < value
+          if limits.has_key?("max") && limits["max"].to_i > 0 && value && limits["max"].to_i < value/y_scale
             Rails.logger.info "Max #{limits['max']} for #{metric_id}(#{metric_column}) has been reached"
             limit_reached = true
           end 
-          if limits.has_key?("min") && limits["min"] > 0 && value && limits["min"] > value
+          if limits.has_key?("min") && limits["min"].to_i > 0 && value && limits["min"].to_i > value/y_scale
             Rails.logger.info "Min #{limits['min']} for #{metric_id}(#{metric_column}) has been reached"
             limit_reached = true
           end 
@@ -49,23 +52,28 @@ class Graph
     return limit_reached
   end
 
+  #
+  # evalualte config directory of the status plugin
+  #
+  def self.plugin_config_dir()
+    dir = "#{RAILS_ROOT}/config" #default
+    Rails.configuration.plugin_paths.each do |plugin_path|
+      if File.directory?(File.join(plugin_path, "status"))
+        dir = plugin_path+"/status/config"
+        break
+      end
+    end
+    dir
+  end
+
   public
 
   #
   # reading configuration file
   #
   def self.parse_config(path = nil)
-    if path == nil
-      #find the correct plugin path for the config file
-      plugin_config_dir = "#{RAILS_ROOT}/config" #default
-      Rails.configuration.plugin_paths.each do |plugin_path|
-        if File.directory?(File.join(plugin_path, "status"))
-          plugin_config_dir = plugin_path+"/status/config"
-          break
-        end
-      end
-      path = File.join(plugin_config_dir, "status_configuration.yaml")
-    end
+    path = File.join(Graph.plugin_config_dir(), CONFIGURATION_FILE ) if path == nil
+
     #reading configuration file
     return YAML.load(File.open(path)) if File.exists?(path)
     return nil
@@ -77,13 +85,13 @@ class Graph
     @y_scale = value["y_scale"]
     @y_label = value["y_label"]
     if limitcheck
-      value["graphs"].each do |graph|
+      value["single_graphs"].each do |graph|
         graph["lines"].each do |line|
           line["limits"]["reached"] = check_limits(line["metric_id"], line["metric_column"], line["limits"])
         end
       end
     end
-    @graphs = value["graphs"]
+    @single_graphs = value["single_graphs"]
   end
 
   #
@@ -103,7 +111,7 @@ class Graph
         found = key == what #checking for group
         unless found
           #checking for collectd entry
-          value["graphs"].each{|graph|
+          value["single_graphs"].each{|graph|
             graph["lines"].each{|line|
               if line["metric_id"] == what           
                 found = true
@@ -146,7 +154,7 @@ class Graph
     config.each {|key,value|
       next if group_id != nil && key != group_id
       #checking for collectd entry
-      value["graphs"].each{|graph|
+      value["single_graphs"].each{|graph|
         graph["lines"].each{|line|
           line["limits"]["metric_column"] = line["metric_column"] if line.has_key?("metric_column")
           limits << line["limits"] if line["metric_id"] == metric_id
@@ -154,6 +162,22 @@ class Graph
       }    
     }
     limits
+  end
+
+  #
+  # save()
+  # Saving graph definition to <plugin_config_dir>/<CONFIGURATION_FILE>
+  #
+  def save
+    config = Graph.parse_config
+    if config.has_key? group_name
+      config[group_name]["single_graphs"] = single_graphs
+    else
+      raise "#{group_name} not found in configuration file"
+    end
+    f = File.open(File.join(Graph.plugin_config_dir(), CONFIGURATION_FILE), "w")
+    f.write(config.to_yaml)
+    f.close
   end
 
   # converts the graph to xml
@@ -165,7 +189,7 @@ class Graph
       xml.y_scale y_scale
       xml.y_label y_label
       xml.single_graphs(:type => :array) do
-        graphs.each do |graph|
+        single_graphs.each do |graph|
           xml.single_graph do
             xml.cummulated graph["cummulated"]
             xml.headline graph["headline"]
