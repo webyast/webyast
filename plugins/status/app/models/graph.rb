@@ -66,6 +66,89 @@ class Graph
     dir
   end
 
+  #
+  # Create a default configriation file based on the return values of
+  # the metrics
+  #
+  def self.create_config(filename)
+    config = Hash.new
+    metrics = Metric.find(:all)
+
+    #Disk
+    disk = {"y_scale"=>1073741824, 
+            "y_label"=>"GByte", 
+            "single_graphs"=>[]}
+    metrics.each do |metric|
+      if metric.type == "df" && metric.type_instance != "dev"
+        metric_id = metric.id[metric.host.length+1..metric.id.length-1] #cut off host-id
+        disk["single_graphs"] << {"lines"=>[{"label"=>"used", "limits"=>{"max"=>"0", "min"=>"0"}, 
+                                              "metric_column"=>"used", "metric_id"=>metric_id}, 
+                                             {"label"=>"free", "limits"=>{"max"=>"0", "min"=>"0"}, 
+                                              "metric_column"=>"free", "metric_id"=>metric_id}], 
+                                   "headline"=>metric.type_instance, 
+                                   "cummulated"=>"true"}
+      end
+    end
+    config["Disk"] = disk
+    
+    #Network
+    network = {"y_scale"=>1, 
+               "y_label"=>"MByte", 
+               "single_graphs"=>[]}
+    metrics.each do |metric|
+      if metric.type == "if_packets" && metric.type_instance.start_with?("eth")
+        metric_id = metric.id[metric.host.length+1..metric.id.length-1] #cut off host-id
+        network["single_graphs"] << {"lines"=>[{"label"=>"received", "limits"=>{"max"=>"0", "min"=>"0"}, 
+                                              "metric_column"=>"rx", "metric_id"=>metric_id}, 
+                                             {"label"=>"sent", "limits"=>{"max"=>"0", "min"=>"0"}, 
+                                              "metric_column"=>"tx", "metric_id"=>metric_id}], 
+                                   "headline"=>metric.type_instance, 
+                                   "cummulated"=>"false"}
+      end
+    end
+    config["Network"] = network
+
+    #Memory
+    memory = {"y_scale"=>1048567, 
+              "y_label"=>"MByte", 
+              "single_graphs"=>[]}
+    lines = []
+    metrics.each do |metric|
+      if metric.type == "memory" && ["free", "used", "cached"].include?(metric.type_instance)
+        metric_id = metric.id[metric.host.length+1..metric.id.length-1] #cut off host-id
+        lines << {"label"=>metric.type_instance, "limits"=>{"max"=>"0", "min"=>"0"}, "metric_id"=>metric_id}
+      end
+    end
+    memory["single_graphs"] << {"lines"=>lines,
+                                "headline"=>"Memory", 
+                                "cummulated"=>"true"} unless lines.blank?
+    config["Memory"] = memory
+
+    #CPU
+    cpu = {"y_scale"=>1, 
+           "y_label"=>"Percent", 
+           "single_graphs"=>[]}
+    graphs = {}
+    metrics.each do |metric|
+      if metric.plugin == "cpu" && ["idle", "user"].include?(metric.type_instance)
+        lines = graphs[metric.plugin_instance] || []
+        metric_id = metric.id[metric.host.length+1..metric.id.length-1] #cut off host-id
+        lines << {"label"=>metric.type_instance, "limits"=>{"max"=>"0", "min"=>"0"}, "metric_id"=>metric_id}
+        graphs[metric.plugin_instance] = lines
+      end
+    end
+    graphs.each do |key, lines|
+      cpu["single_graphs"] << {"lines"=>lines,
+                               "headline"=>"CPU-" + key, 
+                               "cummulated"=>"false"} unless lines.blank?
+    end
+    config["CPU"] = cpu
+
+    f = File.open(filename, "w")
+    f.write(config.to_yaml)
+    f.close
+  end
+
   public
 
   #
@@ -73,6 +156,9 @@ class Graph
   #
   def self.parse_config(path = nil)
     path = File.join(Graph.plugin_config_dir(), CONFIGURATION_FILE ) if path == nil
+
+    #create default configuration file
+    Graph.create_config(path) unless File.exists?(path)
 
     #reading configuration file
     return YAML.load(File.open(path)) if File.exists?(path)
