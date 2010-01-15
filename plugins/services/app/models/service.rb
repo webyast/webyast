@@ -18,7 +18,7 @@ class Service
 
   # factored out because of testing
   def self.run_runlevel
-    `runlevel`
+    `/sbin/runlevel`
   end
 
   public
