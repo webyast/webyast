@@ -12,15 +12,14 @@ class NtpController < ApplicationController
   end
    
   def update
-    yapi_perm_check "ntp.synchronize"
     root = params["ntp"]
     if root == nil || root == {} #FIXME exception for this
       raise InvalidParameters.new :ntp => "Missing"
     end
 	
     ntp = Ntp.new(root)
-	yapi_perm_check "ntp.synchroize" if ntp.actions[:synchronize]
-	ntp.save	
+  	yapi_perm_check "ntp.synchronize" if ntp.actions[:synchronize]
+	  ntp.save	
 
     show
   end
