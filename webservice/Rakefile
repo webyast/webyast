@@ -24,11 +24,6 @@ namespace :doc do
   }
 end
 
-# load the shared rake files from the package itself
-# skip 'deploy_local' task, it's redefined here
-require 'tasks/webservice_tasks'
-WebserviceTasks.loadTasks(:exclude => ["deploy_local.rake"])
-
 require 'fileutils'
 
 desc "Deploy for development - run db:migrate, create basic dirs and install grantwebyastrights."
