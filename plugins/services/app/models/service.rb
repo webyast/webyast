@@ -12,6 +12,7 @@ class Service
 
   def initialize(name)
     @name = name
+    @description	= ""
   end
 
   private
@@ -49,7 +50,9 @@ class Service
     args	= {
 	"runlevel"	=> [ "i", rl ],
 	"read_status"	=> [ "b", read_status],
-	"custom"	=> [ "b", params.has_key?("custom")]
+	"custom"	=> [ "b", params.has_key?("custom")],
+#	"shortdescription"	=> [ "b", true],
+	"description"	=> [ "b", true]
     }
 	
     yapi_ret = YastService.Call("YaPI::SERVICES::Read", args)
@@ -61,6 +64,7 @@ class Service
 	  service	= Service.new(s["name"])
 	  service.status= s["status"] if s.has_key?("status")
 	  service.description	= s["description"] if s.has_key?("description")
+#	  service.description	= s["shortdescription"] if s.has_key?("shortdescription") && !s["shortdescription"].empty?
 	  Rails.logger.debug "service: #{service.inspect}"
 	  services << service
         end
@@ -76,10 +80,18 @@ class Service
   # load the status of the service
   def read_status(params)
     args	= {
-	"execute"	=> 'status',
+	"service"	=> [ "s", self.name ],
+	"custom"	=> [ "b", params.has_key?("custom")],
     }
-    args["custom"]	= 1 if params.has_key?("custom")
-    @status = save(args)[:exit]
+    yapi_ret = YastService.Call("YaPI::SERVICES::Read", args)
+
+    Rails.logger.debug "Command returns: #{yapi_ret.inspect}"
+
+    if yapi_ret.nil?
+        raise "Can't get service status"
+    else
+	@status	= yapi_ret.first["status"] if !yapi_ret.empty? && yapi_ret.first.has_key?("status")
+    end
   end
 
   # execute a service command (start, stop, ...)
