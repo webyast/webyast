@@ -116,7 +116,6 @@ rccollectd restart
 %attr(644,root,root) %config /usr/share/PolicyKit/policy/org.opensuse.yast.modules.logfile.policy
 /srv/www/%{pkg_user}/vendor/plugins/%{plugin_name}/doc/README_FOR_APP
 /srv/www/%{pkg_user}/vendor/plugins/%{plugin_name}/doc/logs.yml
-%attr(-,%{pkg_user},%{pkg_user}) /srv/www/%{pkg_user}/vendor/plugins/%{plugin_name}/config/status_configuration.yaml
 
 %doc COPYING
 
