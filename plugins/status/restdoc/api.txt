@@ -1,0 +1,79 @@
+= YaST REST Service Documentation
+== Status Module
+
+  Only authenticated users are allowed to access the API. Authentication is done
+  by sending a Basic HTTP Authorisation header.
+
+  All names aren't allowed to contain spaces, slashes or colons.
+
+
+== Table of Contents
+
+Contents:
+
+== Formats
+
+  The status REST service supports only XML and JSON input/output formats.
+
+== Overview
+
+  This module provides an overview about system state like CPU, Memory or Disk usage. 
+
+  The information will be provided by the service "collectd" which has to run.
+
+== PolicyKit Access Rights
+
+  The following PolicyKit permission are needed:
+
+  Reading system information: org.opensuse.yast.system.status.read
+
+  Writing limits:             org.opensuse.yast.system.status.writelimits         
+
+== System Actions
+
+
+GET /graphs
+
+  Get the graph description which data has to be shown and how the data has to be shown in
+  the graphs.
+
+  <component>        : component like CPU, memory,... (optional)
+  <checklimits=true> : checking if a defined limit has been reached for all or only one component (optional)
+
+  CURL Example: curl -u user http://localhost:4984/graphs.xml
+                curl -u user http://localhost:4984/graphs.xml?checklimits=true
+                curl -u user http://localhost:4984/graphs/Memory.xml
+                curl -u user http://localhost:4984/graphs/Memory.xml?checklimits=true
+
+XmlResult: graphs
+
+GET /metrics
+
+  Getting the information which data is available (CPU, Network,..). This call does not return the current values
+  of e.G. free Memory.
+
+  CURL Example: curl -u user http://localhost:4984/metrics.xml
+
+XmlResult: metrics
+
+GET /metrics/<metrics-id>
+
+  This call returns the current values of the given metrics-id (e.g.waerden+cpu-0+cpu-idle)
+
+  <start> : starttime in seconds (unix format) (optional)
+  <stop>  : endtime in seconds (unix format) (optional)
+
+  CURL Example: curl -u user http://localhost:4984/metrics/waerden+memory+memory-used.xml
+                curl -u user http://localhost:4984/metrics/waerden+memory+memory-used.xml?start=1262701653&stop=1262701953
+
+XmlResult: waerden+memory+memory-used
+
+PUT /graphs/<group-id>
+
+  Set limits of of system states which should not be exceeded or undercut.
+
+XmlBody: memory
+  
+XmlResult: memory
+
+
