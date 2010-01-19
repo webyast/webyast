@@ -49,7 +49,7 @@ Authors:
 
 %build
 # create the output directory for the generated documentation
- mkdir public/%{plugin_name}/restdoc
+ mkdir -p public/%{plugin_name}/restdoc
  # build restdoc documentation
  export RAILS_PARENT=/srv/www/%{pkg_user}
  env LANG=en rake restdoc
