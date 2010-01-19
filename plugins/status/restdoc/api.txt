@@ -32,18 +32,24 @@ Contents:
 == System Actions
 
 
-GET /graphs
+GET /graphs/<component>?<checklimits>=true
 
   Get the graph description which data has to be shown and how the data has to be shown in
   the graphs.
 
-  <component>        : component like CPU, memory,... (optional)
-  <checklimits=true> : checking if a defined limit has been reached for all or only one component (optional)
+  <b>component</b>: component like CPU, memory,... (optional)
 
-  CURL Example: curl -u user http://localhost:4984/graphs.xml
-                curl -u user http://localhost:4984/graphs.xml?checklimits=true
-                curl -u user http://localhost:4984/graphs/Memory.xml
-                curl -u user http://localhost:4984/graphs/Memory.xml?checklimits=true
+  <b>checklimits</b>: checking if a defined limit has been reached for all or only one component (optional)
+
+  CURL Example: 
+
+  curl -u user http://localhost:4984/graphs.xml
+
+  curl -u user http://localhost:4984/graphs.xml?checklimits=true
+
+  curl -u user http://localhost:4984/graphs/Memory.xml
+
+  curl -u user http://localhost:4984/graphs/Memory.xml?checklimits=true
 
 XmlResult: graphs
 
@@ -56,21 +62,29 @@ GET /metrics
 
 XmlResult: metrics
 
-GET /metrics/<metrics-id>
+GET /metrics/<metrics-id>?<start>=value&<stop>=value
 
   This call returns the current values of the given metrics-id (e.g.waerden+cpu-0+cpu-idle)
 
-  <start> : starttime in seconds (unix format) (optional)
-  <stop>  : endtime in seconds (unix format) (optional)
+  <b>metrics-id</b>: collectd id like "waerden+memory+memory-used"
 
-  CURL Example: curl -u user http://localhost:4984/metrics/waerden+memory+memory-used.xml
-                curl -u user http://localhost:4984/metrics/waerden+memory+memory-used.xml?start=1262701653&stop=1262701953
+  <b>start</b>: starttime in seconds (unix format) (optional)
+
+  <b>stop</b>: endtime in seconds (unix format) (optional)
+
+  CURL Example: 
+
+  curl -u user http://localhost:4984/metrics/waerden+memory+memory-used.xml
+
+  curl -u user http://localhost:4984/metrics/waerden+memory+memory-used.xml?start=1262701653&stop=1262701953
 
 XmlResult: waerden+memory+memory-used
 
 PUT /graphs/<group-id>
 
   Set limits of of system states which should not be exceeded or undercut.
+
+  <b>group-id</b>: Graph group id like Memory, CPU, Disk,...
 
   CURL Example: curl -u user -X PUT -H 'Content-type: text/xml' -d @memory.xml http://localhost:4984/graphs/Memory.xml
 
