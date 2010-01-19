@@ -40,6 +40,9 @@ Authors:
 
 %build
 
+#remove generated doc
+rm -rf doc
+
 %install
 
 #
