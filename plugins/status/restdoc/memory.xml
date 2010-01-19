@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<graph>
+<graphs>
    <id>Memory</id>
    <y_scale>1048567</y_scale>
    <y_label>MByte</y_label>
@@ -35,4 +35,4 @@
           </lines>
        </single_graph>
    </single_graphs>
-</graph>
+</graphs>

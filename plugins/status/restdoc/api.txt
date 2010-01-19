@@ -72,6 +72,8 @@ PUT /graphs/<group-id>
 
   Set limits of of system states which should not be exceeded or undercut.
 
+  CURL Example: curl -u user -X PUT -H 'Content-type: text/xml' -d @memory.xml http://localhost:4984/graphs/Memory.xml
+
 XmlBody: memory
   
 XmlResult: memory
