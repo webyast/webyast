@@ -44,9 +44,9 @@ task :doc do
   #handle rest service separate from plugins
   puts "create framework documentation"
   Dir.chdir('webservice') do
-    system "rake doc:app"
+    raise "generating documentation fail" unless system "rake doc:app"
   end
-    system "cp -r webservice/doc/app doc/webservice"
+  system "cp -r webservice/doc/app doc/webservice"
   puts "create plugins documentation"
   plugins_names = []
   Dir.chdir('plugins') do
@@ -54,7 +54,7 @@ task :doc do
   end
   plugins_names.each do |plugin|
     Dir.chdir("plugins/#{plugin}") do
-      system "rake doc:app"
+      raise "generating documentation fail" unless system "rake doc:app"
     end
     system "cp -r plugins/#{plugin}/doc/app doc/#{plugin}"
   end
