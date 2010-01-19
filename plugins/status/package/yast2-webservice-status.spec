@@ -27,10 +27,7 @@ Requires:       rrdtool
 # for calling ruby module via YastService:
 Requires:	yast2-ruby-bindings >= 0.3.2.1
 
-# This is for Hudson (build server) to prepare the build env correctly.
-%if 0
-BuildRequires:  collectd
-%endif
+BuildRequires:  rubygem-yast2-webservice-tasks rubygem-restility
 
 #
 %define pkg_user yastws
@@ -43,12 +40,22 @@ YaST2 - Webservice - REST based interface of YaST in order to handle firewall an
 Authors:
 --------
     Björn Geuken <bgeuken@suse.de>
+    Duncan Mac-Vicar Prett <dmacvicar@suse.de>
+    Stefan Schubert <schubi@suse.de>
 
 %prep
 %setup -q -n www
 
 
 %build
+# create the output directory for the generated documentation
+ mkdir public/%{plugin_name}/restdoc
+ # build restdoc documentation
+ export RAILS_PARENT=/srv/www/%{pkg_user}
+ env LANG=en rake restdoc
+
+ # do not package restdoc sources
+ rm -rf restdoc
 
 %install
 
