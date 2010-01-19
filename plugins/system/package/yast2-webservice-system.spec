@@ -49,6 +49,8 @@ env LANG=en rake restdoc
 
 # do not package restdoc sources
 rm -rf restdoc
+#do not package generated doc
+rm -rf doc
 
 %install
 
