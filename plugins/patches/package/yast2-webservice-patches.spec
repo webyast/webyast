@@ -43,6 +43,9 @@ Authors:
 
 %build
 
+#do not package developer doc
+rm -rf doc
+
 %install
 
 #
