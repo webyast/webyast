@@ -12,7 +12,8 @@ class RepositoryTest < ActiveSupport::TestCase
 #  TODO FIXME: there seems to be a bug in PackageKit stubbing,
 #  it works only at the first call then it hangs :-(
 #  so this test can be run only if one test is uncommented
-#  and running just this test file, not the whole test suite:
+#  and running just this test file, not the whole test suite
+#  (because it interferes with the patches test):
 #    rake test:units TEST=test/unit/repository_test.rb
 #
 #  def setup
