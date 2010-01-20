@@ -2,10 +2,7 @@
 
 require 'resolvable'
 
-# TODO FIXME: repository is NOT a resolvable, unfortunately we need to
-# call private method execute() somehow, it should be probably factored
-# out to a separate class/module
-class Repository < Resolvable
+class Repository
 
   attr_accessor   :repo_alias,
     :name,
@@ -37,6 +34,8 @@ class Repository < Resolvable
         repositories << Repository.new(repo_alias, name, enabled)
       end
     }
+
+    # TODO FIXME: read other attributes: autorefresh, url, keep_packages, priority
 
     return repositories
   end
@@ -72,7 +71,7 @@ class Repository < Resolvable
       Rails.logger.debug "RepoDetail signal received: #{repo_alias}, #{name}, #{enabled}"
     }
 
-    # TODO FIXME: libzypp backend cannot change repo url, keep packages flag, name
+    # TODO FIXME: libzypp backend cannot change repo url, keep packages flag and name
 
     return true
   end
@@ -100,6 +99,11 @@ class Repository < Resolvable
       xml.tag!(:keep_packages, @keep_packages, {:type => "boolean"})
       xml.tag!(:priority, @priority, {:type => "integer"})
     end
+  end
+
+  def to_json(options = {})
+    hash = Hash.from_xml(to_xml(options))
+    return hash.to_json
   end
 
 end
