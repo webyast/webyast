@@ -68,6 +68,9 @@ rm -rf $RPM_BUILD_ROOT
 #
 /usr/sbin/grantwebyastrights --user root --action grant > /dev/null
 
+# grant the permission for the webservice user
+polkit-auth --user %{pkg_user} --grant org.freedesktop.packagekit.system-sources-configure >& /dev/null || true
+
 %files
 %defattr(-,root,root)
 %dir /srv/www/%{pkg_user}

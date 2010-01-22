@@ -18,7 +18,7 @@ class RepositoriesController < ApplicationController
     repos = Repository.find(params[:id])
     if repos.nil? || repos.size.zero?
       Rails.logger.error "Repository #{params[:id]} not found."
-      render ErrorResult.error(404, 1, "Repository #{params[:id]} not found.") and return
+      render ErrorResult.error(404, 1, "Repository #{params[:id]} was not found.") and return
     end
 
     @repo = repos.first
@@ -32,10 +32,10 @@ class RepositoriesController < ApplicationController
 
     if repos.nil? || repos.size.zero?
       Rails.logger.error "Repository #{params[:id]} not found."
-      render ErrorResult.error(404, 1, "Patch: #{params[:id]} not found.") and return
+      render ErrorResult.error(404, 1, "Repository '#{params[:id]}' was not found.") and return
     end
 
-    @repo = @repos.first
+    @repo = repos.first
 
     unless @repo.save
       render ErrorResult.error(404, 2, "packagekit error") and return
@@ -44,21 +44,35 @@ class RepositoriesController < ApplicationController
     render :show
   end
 
-  # POST /patch_updates/
+  # POST /repositories/
   def create
     permission_check "org.opensuse.yast.system.repositories.write"
 
-    @repo = Repository.new(params[:repositories][:repo_alias].to_s,
+    @repo = Repository.new(params[:repositories][:id].to_s,
       params[:repositories][:name].to_s, params[:repositories][:enabled])
 
-    if @repo.nil?
-      Rails.logger.error "Repository: #{params[:repositories][:repo_alias]} not found."
-      render ErrorResult.error(404, 1, "Repository #{params[:repositories][:repo_alias]} not found.") and return
+    unless @repo.save
+      render ErrorResult.error(404, 2, "Cannot save repository '#{@repo.id}'") and return
+    end
+    render :show
+  end
+
+  def destroy
+    permission_check "org.opensuse.yast.system.repositories.write"
+
+    repos = Repository.find(params[:id])
+
+    if repos.nil? || repos.size.zero?
+      Rails.logger.error "Repository #{params[:id]} was not found."
+      render ErrorResult.error(404, 1, "Repository '#{params[:id]}' not found.") and return
     end
 
-    unless @repo.save
-      render ErrorResult.error(404, 2, "Cannot save repository #{@repo.repo_alias}") and return
+    @repo = repos.first
+
+    unless @repo.destroy
+      render ErrorResult.error(404, 2, "packagekit error") and return
     end
+
     render :show
   end
 

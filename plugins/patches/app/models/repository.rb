@@ -4,7 +4,7 @@ require 'resolvable'
 
 class Repository
 
-  attr_accessor   :repo_alias,
+  attr_accessor   :id,
     :name,
     :enabled,
     :autorefresh,
@@ -12,8 +12,8 @@ class Repository
     :priority,
     :keep_packages
 
-  def initialize(repo_alias, name, enabled)
-    @repo_alias = repo_alias
+  def initialize(id, name, enabled)
+    @id = id
     @name = name
     @enabled = enabled
 
@@ -27,11 +27,11 @@ class Repository
   def self.find(what)
     repositories = Array.new
 
-    Resolvable.execute('GetRepoList', 'NONE', 'RepoDetail') { |repo_alias, name, enabled|
-      Rails.logger.debug "RepoDetail signal received: #{repo_alias}, #{name}, #{enabled}"
+    Resolvable.execute('GetRepoList', 'NONE', 'RepoDetail') { |id, name, enabled|
+      Rails.logger.debug "RepoDetail signal received: #{id}, #{name}, #{enabled}"
 
-      if what == :all || repo_alias == what
-        repositories << Repository.new(repo_alias, name, enabled)
+      if what == :all || id == what
+        repositories << Repository.new(id, name, enabled)
       end
     }
 
@@ -40,35 +40,35 @@ class Repository
     return repositories
   end
 
-  def self.exists?(repo_alias)
+  def self.exists?(id)
     self.find(:all).any? {|repo|
-      repo.repo_alias == repo_alias
+      repo.id == id
     }
   end
 
   def save
-    return false if @repo_alias.blank?
+    return false if @id.blank?
 
     # create a new repository if it does not exist yet
-    if !Repository.exists?(@repo_alias)
-      Resolvable.execute('RepoSetData', [@repo_alias, 'add', @url], 'RepoDetail') { |repo_alias, name, enabled|
-        Rails.logger.debug "RepoDetail signal received: #{repo_alias}, #{name}, #{enabled}"
+    if !Repository.exists?(@id)
+      Resolvable.execute('RepoSetData', [@id, 'add', @url], 'RepoDetail') { |id, name, enabled|
+        Rails.logger.debug "RepoDetail signal received: #{id}, #{name}, #{enabled}"
       }
     end
 
     # TODO: save repository properties here...
-    Resolvable.execute('RepoEnable', [@repo_alias, @enabled], 'RepoDetail') { |repo_alias, name, enabled|
-      Rails.logger.debug "RepoDetail signal received: #{repo_alias}, #{name}, #{enabled}"
+    Resolvable.execute('RepoEnable', [@id, @enabled], 'RepoDetail') { |id, name, enabled|
+      Rails.logger.debug "RepoDetail signal received: #{id}, #{name}, #{enabled}"
     }
 
     # set priority
-    Resolvable.execute('RepoSetData', [@repo_alias, 'prio', @priority], 'RepoDetail') { |repo_alias, name, enabled|
-      Rails.logger.debug "RepoDetail signal received: #{repo_alias}, #{name}, #{enabled}"
+    Resolvable.execute('RepoSetData', [@id, 'prio', @priority], 'RepoDetail') { |id, name, enabled|
+      Rails.logger.debug "RepoDetail signal received: #{id}, #{name}, #{enabled}"
     }
 
     # set autorefresh
-    Resolvable.execute('RepoSetData', [@repo_alias, 'refresh', @autorefresh], 'RepoDetail') { |repo_alias, name, enabled|
-      Rails.logger.debug "RepoDetail signal received: #{repo_alias}, #{name}, #{enabled}"
+    Resolvable.execute('RepoSetData', [@id, 'refresh', @autorefresh], 'RepoDetail') { |id, name, enabled|
+      Rails.logger.debug "RepoDetail signal received: #{id}, #{name}, #{enabled}"
     }
 
     # TODO FIXME: libzypp backend cannot change repo url, keep packages flag and name
@@ -77,10 +77,10 @@ class Repository
   end
 
   def destroy
-    return false if @repo_alias.blank?
+    return false if @id.blank?
 
-    Resolvable.execute('RepoSetData', [@repo_alias, 'remove', 'NONE'], 'RepoDetail') { |repo_alias, name, enabled|
-      Rails.logger.debug "RepoDetail signal received: #{repo_alias}, #{name}, #{enabled}"
+    Resolvable.execute('RepoSetData', [@id, 'remove', 'NONE'], 'RepoDetail') { |id, name, enabled|
+      Rails.logger.debug "RepoDetail signal received: #{id}, #{name}, #{enabled}"
     }
     
     return true
@@ -91,7 +91,7 @@ class Repository
     xml.instruct! unless options[:skip_instruct]
 
     xml.tag! :repository do
-      xml.tag!(:repo_alias, @repo_alias)
+      xml.tag!(:id, @id)
       xml.tag!(:name, @name)
       xml.tag!(:url, @url)
       xml.tag!(:enabled, @enabled, {:type => "boolean"})
