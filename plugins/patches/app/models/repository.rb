@@ -51,23 +51,29 @@ class Repository
 
     # create a new repository if it does not exist yet
     if !Repository.exists?(@id)
+      Rails.logger.info "Adding a new repository '#{@id}'"
       Resolvable.execute('RepoSetData', [@id, 'add', @url], 'RepoDetail') { |id, name, enabled|
         Rails.logger.debug "RepoDetail signal received: #{id}, #{name}, #{enabled}"
       }
+    else
+      Rails.logger.info "Modifying repository '#{@id}'"
     end
 
-    # TODO: save repository properties here...
+    # TODO: save all repository properties here...
+    # FIXME: 'RepoDetail' signal handler is not needed here, remove it
     Resolvable.execute('RepoEnable', [@id, @enabled], 'RepoDetail') { |id, name, enabled|
       Rails.logger.debug "RepoDetail signal received: #{id}, #{name}, #{enabled}"
     }
 
     # set priority
-    Resolvable.execute('RepoSetData', [@id, 'prio', @priority], 'RepoDetail') { |id, name, enabled|
+    # FIXME: 'RepoDetail' signal handler is not needed here, remove it
+    Resolvable.execute('RepoSetData', [@id, 'prio', @priority.to_s], 'RepoDetail') { |id, name, enabled|
       Rails.logger.debug "RepoDetail signal received: #{id}, #{name}, #{enabled}"
     }
 
     # set autorefresh
-    Resolvable.execute('RepoSetData', [@id, 'refresh', @autorefresh], 'RepoDetail') { |id, name, enabled|
+    # FIXME: 'RepoDetail' signal handler is not needed here, remove it
+    Resolvable.execute('RepoSetData', [@id, 'refresh', @autorefresh.to_s], 'RepoDetail') { |id, name, enabled|
       Rails.logger.debug "RepoDetail signal received: #{id}, #{name}, #{enabled}"
     }
 
@@ -79,6 +85,7 @@ class Repository
   def destroy
     return false if @id.blank?
 
+    # FIXME: 'RepoDetail' signal handler is not needed here, remove it
     Resolvable.execute('RepoSetData', [@id, 'remove', 'NONE'], 'RepoDetail') { |id, name, enabled|
       Rails.logger.debug "RepoDetail signal received: #{id}, #{name}, #{enabled}"
     }

@@ -2,6 +2,8 @@ class RepositoriesController < ApplicationController
 
   before_filter :login_required
 
+#  TODO: implement caching - PackageKit query is quite slow
+
   public
 
   # GET /repositories.xml
