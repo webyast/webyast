@@ -1,5 +1,5 @@
 #
-# spec file for package yast2-webservice-administrator
+# spec file for package webyast-root-user-ws
 #
 # Copyright (c) 2008 SUSE LINUX Products GmbH, Nuernberg, Germany.
 # This file and all modifications and additions to the pristine
@@ -9,7 +9,9 @@
 #
 
 
-Name:           yast2-webservice-administrator
+Name:           webyast-root-user-ws
+Provides:       yast2-webservice-administrator = %{version}
+Obsoletes:      yast2-webservice-administrator < %{version}
 PreReq:         yast2-webservice
 License:	GPL v2 only
 Group:          Productivity/Networking/Web/Utilities
