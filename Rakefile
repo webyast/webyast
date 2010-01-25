@@ -67,9 +67,17 @@ task :doc do
   puts "documentation successfully generated"
 end
 
+desc "Grant policies installed in /usr/share/PolicyKit/policy to root"
+task :grant_policies do |t|
+  puts "Running from #{__FILE__}"
+  puts "You must deploy webservice first!" and return unless File.exists? "/usr/sbin/grantwebyastrights"
+  system "/usr/sbin/grantwebyastrights --user root --action grant >/dev/null 2>&1"
+  raise "Error on execute '/usr/sbin/grantwebyastrights --user root --action grant '" if $?.exitstatus != 0
+end
+
 desc "Deploy for development - create dirs, install configuration files and custom yast modules. Then install and update PolKit policies for root."
 # :install policies uses grantwebyastrights, which is installed in :deploy_local
-task :deploy_devel_all => [:deploy_local,:install_policies]
+task :deploy_devel_all => [:deploy_local,:install_policies,:grant_policies]
 
 =begin
 require 'metric_fu'
