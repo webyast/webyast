@@ -1,4 +1,9 @@
 -------------------------------------------------------------------
+Mon Jan 25 17:13:58 CET 2010 - mvidner@suse.cz
+
+- renamed yast2-webservice to webyast-base-ws
+
+-------------------------------------------------------------------
 Fri Dec  4 14:28:39 CET 2009 - mvidner@suse.cz
 
 - Require fixes in other packages so that rclighttpd does not kill
