@@ -1,4 +1,9 @@
 -------------------------------------------------------------------
+Mon Jan 25 22:53:17 CET 2010 - mvidner@suse.cz
+
+- renamed rubygem-yast2-webservice-tasks to rubygem-webyast-rake-tasks
+
+-------------------------------------------------------------------
 Tue Nov 10 18:50:54 CET 2009 - jreidinger@suse.cz
 
 - fix removing of files in "osc_submit"
