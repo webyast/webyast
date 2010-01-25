@@ -1,4 +1,9 @@
 -------------------------------------------------------------------
+Mon Jan 25 21:25:07 CET 2010 - mvidner@suse.cz
+
+- renamed yast2-webservice-status to webyast-status-ws
+
+-------------------------------------------------------------------
 Tue Nov 24 16:07:14 CET 2009 - schubi@suse.de
 
 - raising an exception if collectd is out of sync with the systemtime (#bnc555204) 
