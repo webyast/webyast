@@ -1,5 +1,5 @@
 #
-# spec file for package yast2-webservice-basesystem (Version 0.1)
+# spec file for package webyast-firstboot-ws (Version 0.1)
 #
 # Copyright (c) 2008-09 SUSE LINUX Products GmbH, Nuernberg, Germany.
 # This file and all modifications and additions to the pristine
@@ -9,7 +9,9 @@
 #
 
 
-Name:           yast2-webservice-basesystem
+Name:           webyast-firstboot-ws
+Provides:       yast2-webservice-basesystem = %{version}
+Obsoletes:      yast2-webservice-basesystem < %{version}
 PreReq:         yast2-webservice
 License:	GPL v2 only
 Group:          Productivity/Networking/Web/Utilities
