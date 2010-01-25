@@ -1,5 +1,5 @@
 #
-# spec file for package yast2-webservice-mailsettings
+# spec file for package webyast-mail-ws
 #
 # Copyright (c) 2008 SUSE LINUX Products GmbH, Nuernberg, Germany.
 # This file and all modifications and additions to the pristine
@@ -9,7 +9,9 @@
 #
 
 
-Name:           yast2-webservice-mailsettings
+Name:           webyast-mail-ws
+Provides:       yast2-webservice-mailsettings = %{version}
+Obsoletes:      yast2-webservice-mailsettings < %{version}
 PreReq:         yast2-webservice
 License:	GPL v2 only
 Group:          Productivity/Networking/Web/Utilities
