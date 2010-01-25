@@ -1,5 +1,5 @@
 #
-# spec file for package yast2-webservice-registration
+# spec file for package webyast-registration-ws
 #
 # Copyright (c) 2009 SUSE LINUX Products GmbH, Nuernberg, Germany.
 # This file and all modifications and additions to the pristine
@@ -9,7 +9,9 @@
 #
 
 
-Name:           yast2-webservice-registration
+Name:           webyast-registration-ws
+Provides:       yast2-webservice-registration = %{version}
+Obsoletes:      yast2-webservice-registration < %{version}
 PreReq:         yast2-webservice
 License:        GPL v2 only
 Group:          Productivity/Networking/Web/Utilities
