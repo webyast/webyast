@@ -1,5 +1,5 @@
 #
-# spec file for package yast2-webservice-patches (Version 0.1)
+# spec file for package webyast-software-ws (Version 0.1)
 #
 # Copyright (c) 2008 SUSE LINUX Products GmbH, Nuernberg, Germany.
 # This file and all modifications and additions to the pristine
@@ -9,7 +9,9 @@
 #
 
 
-Name:           yast2-webservice-patches
+Name:           webyast-software-ws
+Provides:       yast2-webservice-patches = %{version}
+Obsoletes:      yast2-webservice-patches < %{version}
 PreReq:         yast2-webservice
 # ruby-dbus is required by yast2-webservice already
 # but here we use a recent feature of DBus::Main.quit

@@ -1,4 +1,9 @@
 -------------------------------------------------------------------
+Mon Jan 25 17:22:54 CET 2010 - mvidner@suse.cz
+
+- renamed yast2-webservice-patches to webyast-software-ws
+
+-------------------------------------------------------------------
 Tue Dec  8 18:24:24 CET 2009 - mvidner@suse.cz
 
 - Fixed a hang when PackageKit responded too fast (bnc#561578).
