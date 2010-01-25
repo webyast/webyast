@@ -1,5 +1,5 @@
 #
-# spec file for package yast2-webservice-services (Version 0.1)
+# spec file for package webyast-services-ws (Version 0.1)
 #
 # Copyright (c) 2008 SUSE LINUX Products GmbH, Nuernberg, Germany.
 # This file and all modifications and additions to the pristine
@@ -9,7 +9,9 @@
 #
 
 
-Name:           yast2-webservice-services
+Name:           webyast-services-ws
+Provides:       yast2-webservice-services = %{version}
+Obsoletes:      yast2-webservice-services < %{version}
 PreReq:         yast2-webservice
 License:	GPL v2 only
 Group:          Productivity/Networking/Web/Utilities
