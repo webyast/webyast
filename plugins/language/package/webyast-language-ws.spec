@@ -1,5 +1,5 @@
 #
-# spec file for package yast2-webservice-language (Version 0.1)
+# spec file for package webyast-language-ws (Version 0.1)
 #
 # Copyright (c) 2008 SUSE LINUX Products GmbH, Nuernberg, Germany.
 # This file and all modifications and additions to the pristine
@@ -9,7 +9,9 @@
 #
 
 
-Name:           yast2-webservice-language
+Name:           webyast-language-ws
+Provides:       yast2-webservice-language = %{version}
+Obsoletes:      yast2-webservice-language < %{version}
 PreReq:         yast2-webservice
 License:	GPL v2 only
 Group:          Productivity/Networking/Web/Utilities
