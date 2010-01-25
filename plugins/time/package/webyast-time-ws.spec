@@ -9,7 +9,9 @@
 #
 
 
-Name:           yast2-webservice-time
+Name:           webyast-time-ws
+Provides:       yast2-webservice-time = %{version}
+Obsoletes:      yast2-webservice-time < %{version}
 PreReq:         yast2-webservice
 License:	GPL v2 only
 Group:          Productivity/Networking/Web/Utilities
