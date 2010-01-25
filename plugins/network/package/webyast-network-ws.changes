@@ -1,4 +1,9 @@
 -------------------------------------------------------------------
+Fri Jan 22 16:10:42 CET 2010 - mvidner@suse.cz
+
+- renamed yast2-webservice-network to webyast-network-ws
+
+-------------------------------------------------------------------
 Wed Nov 18 15:40:12 CET 2009 - mvidner@suse.cz
 
 - Fixed building the REST docs (bnc#537188#c2).
