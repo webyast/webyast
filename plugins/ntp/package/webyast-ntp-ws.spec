@@ -1,5 +1,5 @@
 #
-# spec file for package yast2-webservice-ntp
+# spec file for package webyast-ntp-ws
 #
 # Copyright (c) 2008 SUSE LINUX Products GmbH, Nuernberg, Germany.
 # This file and all modifications and additions to the pristine
@@ -9,7 +9,9 @@
 #
 
 
-Name:           yast2-webservice-ntp
+Name:           webyast-ntp-ws
+Provides:       yast2-webservice-ntp = %{version}
+Obsoletes:      yast2-webservice-ntp < %{version}
 #webservice already require yast2-dbus-server which is needed for yapi
 PreReq:         yast2-webservice
 #for YaPI needs ntp

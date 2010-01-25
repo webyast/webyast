@@ -1,4 +1,9 @@
 -------------------------------------------------------------------
+Mon Jan 25 17:22:19 CET 2010 - mvidner@suse.cz
+
+- renamed yast2-webservice-ntp to webyast-ntp-ws
+
+-------------------------------------------------------------------
 Fri Nov 20 12:29:33 UTC 2009 - jreidinger@novell.com
 
 - fix writing ntp to hardware clock (use absolute path) (bnc#553980)
