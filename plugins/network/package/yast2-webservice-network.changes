@@ -1,4 +1,9 @@
 -------------------------------------------------------------------
+Mon Nov 30 10:53:35 CET 2009 - jreidinger@suse.cz
+
+- don't hide failure of granting permissions (bnc#554946)
+
+-------------------------------------------------------------------
 Wed Nov 18 15:40:12 CET 2009 - mvidner@suse.cz
 
 - Fixed building the REST docs (bnc#537188#c2).
