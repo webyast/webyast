@@ -31,13 +31,56 @@ class Repository
       Rails.logger.debug "RepoDetail signal received: #{id}, #{name}, #{enabled}"
 
       if what == :all || id == what
-        repositories << Repository.new(id, name, enabled)
+        repo = Repository.new(id, name, enabled)
+        # read other attributes directly from *.repo file,
+        # because PackageKit doesn't have API for that
+        repo.read_file
+
+        repositories << repo
       end
     }
 
-    # TODO FIXME: read other attributes: autorefresh, url, keep_packages, priority
-
     return repositories
+  end
+
+  # read autorefresh, URL, keep_packages and priority directly from *.repo file
+  def read_file
+    Rails.logger.debug "Reading repofile: /etc/zypp/repos.d/#{@id}.repo"
+    file = File.new "/etc/zypp/repos.d/#{@id}.repo"
+
+    while line = file.gets
+      # remove comments
+      line.match /^([^#].*)#.*$/
+      l = $1
+
+      if !l.blank?
+        l.match /^[ \t]*([^=].*)[ \t]*=[ \t]*(.*)[ \t]*$/
+
+        key = $1
+        value = $2
+
+        if !key.blank? && !value.blank?
+          Rails.logger.debug "Read key: #{key}, value: #{value}"
+
+          case key
+            when 'autorefresh'
+              @autorefresh = (value == 'true' || value = '1')
+            when 'keeppackages'
+              @keep_packages = (value == 'true' || value = '1')
+            when 'priority'
+              if value.match /'[0-9]+'/
+                @priority = value.to_i
+              else
+                Rails.logger.error "Non-number value for priority key: #{value}"
+              end
+            when 'baseurl'
+              @url = value
+            # other values are returned by PackageKit, just ignore them
+          end
+        end
+
+      end
+    end
   end
 
   def self.exists?(id)
@@ -81,11 +124,9 @@ class Repository
       Rails.logger.debug "RepoDetail signal received: #{id}, #{name}, #{enabled}"
     }
 
-    Resolvable.execute('RepoSetData', [@id, 'url', @keep_packages.to_s], 'RepoDetail') { |id, name, enabled|
+    Resolvable.execute('RepoSetData', [@id, 'url', @url], 'RepoDetail') { |id, name, enabled|
       Rails.logger.debug "RepoDetail signal received: #{id}, #{name}, #{enabled}"
     }
-
-    # TODO FIXME: libzypp backend cannot change repo url, keep packages flag and name
 
     return true
   end
