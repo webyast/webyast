@@ -26,26 +26,16 @@ class RepositoriesController < ApplicationController
     @repo = repos.first
   end
 
-  # GET /repositories/my_repo.xml
   def update
     permission_check "org.opensuse.yast.system.repositories.write"
-
-    repos = Repository.find(params[:id])
-
-    if repos.nil? || repos.size.zero?
-      Rails.logger.error "Repository #{params[:id]} not found."
-      render ErrorResult.error(404, 1, "Repository '#{params[:id]}' was not found.") and return
-    end
-
-    @repo = repos.first
 
     param = params[:repositories]
     if param.blank?
       render ErrorResult.error(404, 1, "Missing parameters for repository #{params[:id]}") and return
     end
 
-    @repo.name = param[:name]
-    @repo.enabled = param[:enabled] == 'true' || param[:enabled] == '1'
+    @repo = Repository.new(param[:id], param[:name], (param[:enabled] == 'true' || param[:enabled] == '1'))
+
     @repo.autorefresh = param[:autorefresh] == 'true' || param[:enabled] == '1'
     @repo.keep_packages = param[:keep_packages] == 'true' || param[:keep_packages] == '1'
     @repo.url = param[:url]
@@ -62,8 +52,12 @@ class RepositoriesController < ApplicationController
   def create
     permission_check "org.opensuse.yast.system.repositories.write"
 
-    @repo = Repository.new(params[:repositories][:id].to_s,
-      params[:repositories][:name].to_s, params[:repositories][:enabled])
+    param = params[:repositories]
+    if param.blank?
+      render ErrorResult.error(404, 1, "Missing parameters for repository #{params[:id]}") and return
+    end
+
+    @repo = Repository.new(param[:id].to_s, param[:name].to_s, param[:enabled])
 
     unless @repo.save
       render ErrorResult.error(404, 2, "Cannot save repository '#{@repo.id}'") and return
