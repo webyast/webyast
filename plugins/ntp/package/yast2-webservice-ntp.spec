@@ -53,6 +53,8 @@ env LANG=en rake restdoc
 
 # do not package restdoc sources
 rm -rf restdoc
+#do not package development documentation
+rm -rf doc
 
 %install
 
