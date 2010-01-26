@@ -50,11 +50,11 @@ class Repository
 
     while line = file.gets
       # remove comments
-      line.match /^([^#].*)#.*$/
+      line.match /^([^#]*)#*.*$/
       l = $1
 
       if !l.blank?
-        l.match /^[ \t]*([^=].*)[ \t]*=[ \t]*(.*)[ \t]*$/
+        l.match /^[ \t]*([^=]*)[ \t]*=[ \t]*(.*)[ \t]*$/
 
         key = $1
         value = $2
@@ -95,38 +95,24 @@ class Repository
     # create a new repository if it does not exist yet
     if !Repository.exists?(@id)
       Rails.logger.info "Adding a new repository '#{@id}'"
-      Resolvable.execute('RepoSetData', [@id, 'add', @url], 'RepoDetail') { |id, name, enabled|
-        Rails.logger.debug "RepoDetail signal received: #{id}, #{name}, #{enabled}"
-      }
+      Resolvable.execute('RepoSetData', [@id, 'add', @url])
     else
       Rails.logger.info "Modifying repository '#{@id}'"
+      # set url
+      Resolvable.execute('RepoSetData', [@id, 'url', @url]) unless added
     end
 
-    # TODO: save all repository properties here...
-    # FIXME: 'RepoDetail' signal handler is not needed here, remove it
-    Resolvable.execute('RepoEnable', [@id, @enabled], 'RepoDetail') { |id, name, enabled|
-      Rails.logger.debug "RepoDetail signal received: #{id}, #{name}, #{enabled}"
-    }
+    # set enabled flag
+    Resolvable.execute('RepoEnable', [@id, @enabled])
 
     # set priority
-    # FIXME: 'RepoDetail' signal handler is not needed here, remove it
-    Resolvable.execute('RepoSetData', [@id, 'prio', @priority.to_s], 'RepoDetail') { |id, name, enabled|
-      Rails.logger.debug "RepoDetail signal received: #{id}, #{name}, #{enabled}"
-    }
+    Resolvable.execute('RepoSetData', [@id, 'prio', @priority.to_s])
 
     # set autorefresh
-    # FIXME: 'RepoDetail' signal handler is not needed here, remove it
-    Resolvable.execute('RepoSetData', [@id, 'refresh', @autorefresh.to_s], 'RepoDetail') { |id, name, enabled|
-      Rails.logger.debug "RepoDetail signal received: #{id}, #{name}, #{enabled}"
-    }
+    Resolvable.execute('RepoSetData', [@id, 'refresh', @autorefresh.to_s])
 
-    Resolvable.execute('RepoSetData', [@id, 'name', @name.to_s], 'RepoDetail') { |id, name, enabled|
-      Rails.logger.debug "RepoDetail signal received: #{id}, #{name}, #{enabled}"
-    }
-
-    Resolvable.execute('RepoSetData', [@id, 'url', @url], 'RepoDetail') { |id, name, enabled|
-      Rails.logger.debug "RepoDetail signal received: #{id}, #{name}, #{enabled}"
-    }
+    # set name
+    Resolvable.execute('RepoSetData', [@id, 'name', @name.to_s])
 
     return true
   end
@@ -134,10 +120,7 @@ class Repository
   def destroy
     return false if @id.blank?
 
-    # FIXME: 'RepoDetail' signal handler is not needed here, remove it
-    Resolvable.execute('RepoSetData', [@id, 'remove', 'NONE'], 'RepoDetail') { |id, name, enabled|
-      Rails.logger.debug "RepoDetail signal received: #{id}, #{name}, #{enabled}"
-    }
+    Resolvable.execute('RepoSetData', [@id, 'remove', 'NONE'])
     
     return true
   end
