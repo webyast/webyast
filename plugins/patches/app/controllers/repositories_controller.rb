@@ -39,6 +39,18 @@ class RepositoriesController < ApplicationController
 
     @repo = repos.first
 
+    param = params[:repositories]
+    if param.blank?
+      render ErrorResult.error(404, 1, "Missing parameters for repository #{params[:id]}") and return
+    end
+
+    @repo.name = param[:name]
+    @repo.enabled = param[:enabled] == 'true' || param[:enabled] == '1'
+    @repo.autorefresh = param[:autorefresh] == 'true' || param[:enabled] == '1'
+    @repo.keep_packages = param[:keep_packages] == 'true' || param[:keep_packages] == '1'
+    @repo.url = param[:url]
+    @repo.priority = param[:priority].to_i
+
     unless @repo.save
       render ErrorResult.error(404, 2, "packagekit error") and return
     end

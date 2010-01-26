@@ -77,6 +77,14 @@ class Repository
       Rails.logger.debug "RepoDetail signal received: #{id}, #{name}, #{enabled}"
     }
 
+    Resolvable.execute('RepoSetData', [@id, 'name', @name.to_s], 'RepoDetail') { |id, name, enabled|
+      Rails.logger.debug "RepoDetail signal received: #{id}, #{name}, #{enabled}"
+    }
+
+    Resolvable.execute('RepoSetData', [@id, 'url', @keep_packages.to_s], 'RepoDetail') { |id, name, enabled|
+      Rails.logger.debug "RepoDetail signal received: #{id}, #{name}, #{enabled}"
+    }
+
     # TODO FIXME: libzypp backend cannot change repo url, keep packages flag and name
 
     return true
