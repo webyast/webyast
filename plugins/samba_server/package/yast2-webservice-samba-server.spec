@@ -37,6 +37,8 @@ Authors:
 %setup -q -n www
 
 %build
+#remove generated doc
+rm -rf doc 
 
 %install
 

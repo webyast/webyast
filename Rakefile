@@ -44,9 +44,9 @@ task :doc do
   #handle rest service separate from plugins
   puts "create framework documentation"
   Dir.chdir('webservice') do
-    system "rake doc:app"
+    raise "generating documentation fail" unless system "rake doc:app"
   end
-    system "cp -r webservice/doc/app doc/webservice"
+  system "cp -r webservice/doc/app doc/webservice"
   puts "create plugins documentation"
   plugins_names = []
   Dir.chdir('plugins') do
@@ -54,7 +54,7 @@ task :doc do
   end
   plugins_names.each do |plugin|
     Dir.chdir("plugins/#{plugin}") do
-      system "rake doc:app"
+      raise "generating documentation fail" unless system "rake doc:app"
     end
     system "cp -r plugins/#{plugin}/doc/app doc/#{plugin}"
   end
@@ -69,7 +69,7 @@ end
 
 desc "Deploy for development - create dirs, install configuration files and custom yast modules. Then install and update PolKit policies for root."
 # :install policies uses grantwebyastrights, which is installed in :deploy_local
-task :deploy_local_all => [:deploy_local,:install_policies]
+task :deploy_devel_all => [:deploy_local,:install_policies]
 
 =begin
 require 'metric_fu'
