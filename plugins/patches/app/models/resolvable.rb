@@ -130,11 +130,11 @@ public
   #
   # method: method to execute
   # args: arguments to method
-  # signal: signal to intercept (usually "Package")
+  # signal: signal to intercept (usually "Package") (optional)
   # bg_stat: BackgroundStatus object for reporting progress (optional)
-  # block: block to run on signal
+  # block: block to run on signal (optional)
   #
-  def self.execute(method, args, signal, bg_stat = nil, &block)
+  def self.execute(method, args, signal = nil, bg_stat = nil, &block)
     begin
       dbusloop = DBus::Main.new
       transaction_iface, packagekit_iface = self.packagekit_connect
@@ -143,7 +143,9 @@ public
     
       error = nil
 
-      proxy.on_signal(signal.to_s, &block)
+      # set the custom signal handler if set
+      proxy.on_signal(signal.to_s, &block) if !signal.blank? && block_given?
+
       proxy.on_signal("ErrorCode") {|u1,u2| 
         error_string = "#{u1}: #{u2}"
         Rails.logger.error error_string

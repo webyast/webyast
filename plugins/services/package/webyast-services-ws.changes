@@ -1,4 +1,9 @@
 -------------------------------------------------------------------
+Wed Jan 27 15:58:12 CET 2010 - jsuchome@suse.cz
+
+- 0.1.1 
+
+-------------------------------------------------------------------
 Mon Jan 25 17:24:26 CET 2010 - mvidner@suse.cz
 
 - renamed yast2-webservice-services to webyast-services-ws

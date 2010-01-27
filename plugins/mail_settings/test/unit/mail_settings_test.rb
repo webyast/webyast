@@ -7,105 +7,63 @@ class MailSettingsTest < ActiveSupport::TestCase
   def setup    
     @model = MailSettings.instance
     YastService.stubs(:Call).with('YaPI::MailSettings::Read').returns({ })
-    YastService.stubs(:Call).with('YaPI::SERVICES::Execute', {"name" => [ "s", "postfix" ], "action" => [ "s", "restart"]}).returns({ "stdout" => "", "exit" => 0, "stderr" => ""})
     @model.read
   end
 
   def test_read_notls
     YastService.stubs(:Call).with('YaPI::MailSettings::Read').returns({
-	"SendingMail" => {
-	    "RelayHost"	=> {
-		"Name"	=> "smtp.domain.com"
-	    }
-	}
+	"smtp_server" => "smtp.domain.com"
     })
     ret = @model.read
-    assert @model.transport_layer_security == "NONE"
+    assert @model.transport_layer_security == "no"
   end
 
   def test_read
     YastService.stubs(:Call).with('YaPI::MailSettings::Read').returns({
-	"SendingMail" => {
-	    "TLS"	=> "MUST",
-	    "RelayHost"	=> {
-		"Name"	=> "smtp.domain.com"
-	    }
-	}
+	"smtp_server"	=> "smtp.domain.com",
+	"TLS"		=> "must"
     })
     ret = @model.read
     assert @model.smtp_server == "smtp.domain.com"
-    assert @model.transport_layer_security == "MUST"
+    assert @model.transport_layer_security == "must"
   end
 
 
   def test_save_no_change
     YastService.stubs(:Call).with('YaPI::MailSettings::Read').returns({
-	"SendingMail" => {
-	    "TLS"	=> "MUST",
-	    "RelayHost"	=> {
-		"Name"	=> "smtp.domain.com"
-	    }
-	}
+	"smtp_server"	=> "smtp.domain.com",
+	"TLS"		=> "must",
+	"user"		=> "",
+	"password"	=> ""
     })
     ret = @model.read
     ret = @model.save({
 	"smtp_server"	=> "smtp.domain.com",
 	"user"		=> "",
 	"password"	=> "",
-	"transport_layer_security"	=> "MUST"
+	"transport_layer_security"	=> "must"
     })
     assert ret
   end
 
   def test_save
     YastService.stubs(:Call).with('YaPI::MailSettings::Write', {
-      "Changed" => [ "i", 1],
-      "MaximumMailSize" => [ "i", 10485760],
-      "SendingMail" => ["a{sv}", {
-	  "Type"	=> [ "s", "relayhost"],
-	  "TLS"		=> [ "s", "NONE"],
-	  "RelayHost"	=> [ "a{sv}", {
-	      "Name"	=> [ "s", "smtp.newdomain.com"],
-	      "Auth"	=> [ "i", 0],
-	      "Account"	=> [ "s", ""],
-	      "Password"=> [ "s", ""]
-	  }]
-      }]
-   
+	"smtp_server"	=> [ "s", "smtp.newdomain.com"],
+	"TLS"		=> [ "s", "no"],
+	"user"		=> [ "s", ""],
+	"password"	=> [ "s", ""]
     }).returns("")
     ret = @model.save({
 	"smtp_server"	=> "smtp.newdomain.com",
 	"user"		=> "",
 	"password"	=> "",
-	"transport_layer_security"	=> "NONE"
+	"transport_layer_security"	=> "no"
     })
     assert ret
   end
 
 
-  def test_save_failure
-    YastService.stubs(:Call).with('YaPI::MailSettings::Write', {
-      "Changed" => [ "i", 1],
-      "MaximumMailSize" => [ "i", 10485760],
-      "SendingMail" => ["a{sv}", {
-	  "Type"	=> [ "s", "relayhost"],
-	  "TLS"		=> [ "s", ""],
-	  "RelayHost"	=> [ "a{sv}", {
-	      "Name"	=> [ "s", "smtp.newdomain.com"],
-	      "Auth"	=> [ "i", 0],
-	      "Account"	=> [ "s", ""],
-	      "Password"=> [ "s", ""]
-	  }]
-      }]
-   
-    }).returns("Unknown mail sending TLS type. Allowed values are: NONE | MAY | MUST | MUST_NOPEERMATCH")
-    assert_raise MailSettingsError do
-      @model.save({
-	"smtp_server"	=> "smtp.newdomain.com",
-	"user"		=> "",
-	"password"	=> ""
-      })
-    end
-  end
+#  def test_save_failure
+#  end
 
 end

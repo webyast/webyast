@@ -1,4 +1,9 @@
 -------------------------------------------------------------------
+Wed Jan 27 15:00:00 UTC 2010 - lslezak@suse.cz
+
+- 0.1.1
+
+-------------------------------------------------------------------
 Mon Jan 25 22:53:17 CET 2010 - mvidner@suse.cz
 
 - renamed rubygem-yast2-webservice-tasks to rubygem-webyast-rake-tasks

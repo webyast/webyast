@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Wed Jan 27 13:59:41 UTC 2010 - lslezak@suse.cz
+
+- added repository manager service
+- 0.1.1
+
+-------------------------------------------------------------------
 Mon Jan 25 17:22:54 CET 2010 - mvidner@suse.cz
 
 - renamed yast2-webservice-patches to webyast-software-ws
