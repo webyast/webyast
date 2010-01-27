@@ -186,7 +186,7 @@ fi
 #
 # granting all permissions for root 
 #
-/usr/sbin/grantwebyastrights --user root --action grant > /dev/null
+/usr/sbin/grantwebyastrights --user root --action grant > /dev/null ||:
 #
 # create database 
 #
