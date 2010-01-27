@@ -1,4 +1,11 @@
 -------------------------------------------------------------------
+Wed Jan 27 16:11:12 UTC 2010 - lslezak@suse.cz
+
+- workaround for failing post install script (ignore polkit-auth
+  errors), has to be fixed properly
+- 0.1.1
+
+-------------------------------------------------------------------
 Mon Jan 25 17:13:58 CET 2010 - mvidner@suse.cz
 
 - renamed yast2-webservice to webyast-base-ws

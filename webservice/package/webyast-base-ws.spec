@@ -39,7 +39,7 @@ PreReq:         ruby-rpam, ruby-polkit
 License:	LGPL v2.1 only
 Group:          Productivity/Networking/Web/Utilities
 Autoreqprov:    on
-Version:        0.0.20
+Version:        0.1.1
 Release:        0
 Summary:        YaST2 - Webservice 
 Source:         www.tar.bz2
@@ -172,13 +172,16 @@ rm -rf $RPM_BUILD_ROOT
 #granting permissions for yastws
 #
 if [ `/usr/bin/polkit-auth --user yastws | grep -c "org.freedesktop.packagekit.system-update"` -eq 0 ]; then
-  /usr/bin/polkit-auth --user yastws --grant org.freedesktop.packagekit.system-update > /dev/null
+  # FIXME: remove ||: (don't hide errors), has to be correctly implemented for package update...
+  /usr/bin/polkit-auth --user yastws --grant org.freedesktop.packagekit.system-update > /dev/null ||:
 fi
 if [ `/usr/bin/polkit-auth --user yastws | grep -c "org.freedesktop.policykit.read"` -eq 0 ]; then
-  /usr/bin/polkit-auth --user yastws --grant org.freedesktop.policykit.read > /dev/null
+  # FIXME: remove ||: (don't hide errors), has to be correctly implemented for package update...
+  /usr/bin/polkit-auth --user yastws --grant org.freedesktop.policykit.read > /dev/null ||:
 fi
 if [ `/usr/bin/polkit-auth --user yastws | grep -c "org.opensuse.yast.module-manager.import"` -eq 0 ]; then
-  /usr/bin/polkit-auth --user yastws --grant org.opensuse.yast.module-manager.import > /dev/null
+  # FIXME: remove ||: (don't hide errors), has to be correctly implemented for package update...
+  /usr/bin/polkit-auth --user yastws --grant org.opensuse.yast.module-manager.import > /dev/null ||:
 fi
 #
 # granting all permissions for root 
