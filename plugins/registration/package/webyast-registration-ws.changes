@@ -1,4 +1,9 @@
 -------------------------------------------------------------------
+Mon Jan 25 17:23:44 CET 2010 - mvidner@suse.cz
+
+- renamed yast2-webservice-registration to webyast-registration-ws
+
+-------------------------------------------------------------------
 Wed Nov 18 16:47:37 CET 2009 - jdsn@suse.de
 
 - fix success message of registration

@@ -1,7 +1,7 @@
 #
-# spec file for package yast2-webservice-systemtime (Version 0.1)
+# spec file for package webyast-registration-ws
 #
-# Copyright (c) 2008 SUSE LINUX Products GmbH, Nuernberg, Germany.
+# Copyright (c) 2009 SUSE LINUX Products GmbH, Nuernberg, Germany.
 # This file and all modifications and additions to the pristine
 # package are under the same license as the package itself.
 #
@@ -9,40 +9,43 @@
 #
 
 
-Name:           yast2-webservice-time
+Name:           webyast-registration-ws
+Provides:       yast2-webservice-registration = %{version}
+Obsoletes:      yast2-webservice-registration < %{version}
 PreReq:         yast2-webservice
-License:	GPL v2 only
+License:        GPL v2 only
 Group:          Productivity/Networking/Web/Utilities
 Autoreqprov:    on
-Version:        0.0.11
+Version:        0.0.8
 Release:        0
-Summary:        YaST2 - Webservice - Time
+Summary:        YaST2 - Webservice - Registration
 Source:         www.tar.bz2
 BuildRoot:      %{_tmppath}/%{name}-%{version}-build
 BuildArch:      noarch
 BuildRequires:  rubygem-mocha
 
-# YaPI/TIME.pm
-%if 0%{?suse_version} == 0 || %suse_version > 1110
-# 11.2 or newer
-Requires:       yast2-country >= 2.18.10
-%else
-# 11.1 or SLES11
-Requires:       yast2-country >= 2.17.34.2
-%endif
+# YaST2/modules/YSR.pm  
+%if 0%{?suse_version} == 0 || %suse_version > 1110  
+# 11.2 or newer  
+Requires:       yast2-registration > 2.18.2
+%else  
+# 11.1 or SLES11  
+Requires:       yast2-registration > 2.17.27
+%endif  
 
 #
 %define pkg_user yastws
-%define plugin_name time
+%define plugin_name registration
 #
 
 
 %description
-YaST2 - Webservice - REST based interface of YaST in order to handle time and date.
+YaST2 - Webservice - REST based interface for the registration of a system at NCC, SMT or SLMS
+
 Authors:
 --------
-    Stefan Schubert <schubi@opensuse.org>
-    Josef Reidinger <jreidinger@suse.cz>
+    J. Daniel Schmidt <jdsn@novell.com>
+    Stefan Schubert <schubi@novell.com>
 
 %prep
 %setup -q -n www
@@ -57,7 +60,6 @@ Authors:
 mkdir -p $RPM_BUILD_ROOT/srv/www/%{pkg_user}/vendor/plugins/%{plugin_name}
 cp -a * $RPM_BUILD_ROOT/srv/www/%{pkg_user}/vendor/plugins/%{plugin_name}
 rm -f $RPM_BUILD_ROOT/srv/www/%{pkg_user}/vendor/plugins/%{plugin_name}/COPYING
-mkdir -p $RPM_BUILD_ROOT/usr/share/PolicyKit/policy
 
 %clean
 rm -rf $RPM_BUILD_ROOT
@@ -67,8 +69,6 @@ rm -rf $RPM_BUILD_ROOT
 # granting all permissions for root 
 #
 /usr/sbin/grantwebyastrights --user root --action grant > /dev/null
-# XXX not nice to get yastws all permissions, but now not better solution
-/usr/sbin/grantwebyastrights --user yastws --action grant > /dev/null
 
 %files 
 %defattr(-,root,root)
@@ -77,8 +77,6 @@ rm -rf $RPM_BUILD_ROOT
 %dir /srv/www/%{pkg_user}/vendor/plugins
 %dir /srv/www/%{pkg_user}/vendor/plugins/%{plugin_name}
 %dir /srv/www/%{pkg_user}/vendor/plugins/%{plugin_name}/doc
-%dir /usr/share/PolicyKit
-%dir /usr/share/PolicyKit/policy/
 /srv/www/%{pkg_user}/vendor/plugins/%{plugin_name}/README
 /srv/www/%{pkg_user}/vendor/plugins/%{plugin_name}/Rakefile
 /srv/www/%{pkg_user}/vendor/plugins/%{plugin_name}/init.rb

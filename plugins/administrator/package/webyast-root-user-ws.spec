@@ -1,5 +1,5 @@
 #
-# spec file for package yast2-webservice-network (Version 0.1)
+# spec file for package webyast-root-user-ws
 #
 # Copyright (c) 2008 SUSE LINUX Products GmbH, Nuernberg, Germany.
 # This file and all modifications and additions to the pristine
@@ -9,45 +9,50 @@
 #
 
 
-Name:           yast2-webservice-network
+Name:           webyast-root-user-ws
+Provides:       yast2-webservice-administrator = %{version}
+Obsoletes:      yast2-webservice-administrator < %{version}
+PreReq:         yast2-webservice
 License:	GPL v2 only
 Group:          Productivity/Networking/Web/Utilities
 Autoreqprov:    on
-Version:        0.0.12
+Version:        0.0.9
 Release:        0
-Summary:        YaST2 - Webservice - Network
+Summary:        YaST2 - Webservice - Administrator
 Source:         www.tar.bz2
-Source1:        org.opensuse.yast.modules.yapi.network.policy
+Source1:	org.opensuse.yast.modules.yapi.administrator.policy
 BuildRoot:      %{_tmppath}/%{name}-%{version}-build
 BuildArch:      noarch
 BuildRequires:  rubygem-yast2-webservice-tasks rubygem-restility
-PreReq:         yast2-webservice
-# YaPI/NETWORK.pm
+
+# requires YaPI::USERS
 %if 0%{?suse_version} == 0 || %suse_version > 1110
-Requires:       yast2-network >= 2.18.51
+# 11.2 or newer
+Requires:       yast2-users >= 2.18.13
 %else
-Requires:       yast2-network >= 2.17.78.1
+# 11.1 or SLES11
+Requires:       yast2-users >= 2.17.28.1
 %endif
 
 #
 %define pkg_user yastws
-%define plugin_name network
+%define plugin_name administrator
 #
 
 
 %description
-YaST2 - Webservice - REST based interface of YaST in order to handle firewall and ssh settings.
+YaST2 - Webservice - REST based interface for administrator's attributes
+
 Authors:
 --------
-    Michael Zugec <mzugec@suse.cz>
+    Jiri Suchomel <jsuchome@novell.com>
 
 %prep
 %setup -q -n www
 
-
 %build
 # build restdoc documentation
-mkdir -p public/network/restdoc
+mkdir -p public/administrator/restdoc
 export RAILS_PARENT=/srv/www/yastws
 env LANG=en rake restdoc
 
@@ -71,21 +76,31 @@ install -m 0644 %SOURCE1 $RPM_BUILD_ROOT/usr/share/PolicyKit/policy/
 rm -rf $RPM_BUILD_ROOT
 
 %post
-#
-# granting all permissions for root
-#
+# granting all permissions for the web user
 /usr/sbin/grantwebyastrights --user root --action grant > /dev/null
-# and for yastws
-/usr/sbin/grantwebyastrights --user %{pkg_user} --action grant > /dev/null
+/usr/sbin/grantwebyastrights --user yastws --action grant > /dev/null
 
-%files
+%postun
+
+%files 
 %defattr(-,root,root)
 %dir /srv/www/%{pkg_user}
 %dir /srv/www/%{pkg_user}/vendor
 %dir /srv/www/%{pkg_user}/vendor/plugins
 %dir /srv/www/%{pkg_user}/vendor/plugins/%{plugin_name}
-/srv/www/%{pkg_user}/vendor/plugins/%{plugin_name}/*
+/srv/www/%{pkg_user}/vendor/plugins/%{plugin_name}/README
+/srv/www/%{pkg_user}/vendor/plugins/%{plugin_name}/Rakefile
+/srv/www/%{pkg_user}/vendor/plugins/%{plugin_name}/init.rb
+/srv/www/%{pkg_user}/vendor/plugins/%{plugin_name}/install.rb
+/srv/www/%{pkg_user}/vendor/plugins/%{plugin_name}/uninstall.rb
+/srv/www/%{pkg_user}/vendor/plugins/%{plugin_name}/app
+/srv/www/%{pkg_user}/vendor/plugins/%{plugin_name}/config
+/srv/www/%{pkg_user}/vendor/plugins/%{plugin_name}/doc
+/srv/www/%{pkg_user}/vendor/plugins/%{plugin_name}/public
 %dir /usr/share/PolicyKit
 %dir /usr/share/PolicyKit/policy
 %attr(644,root,root) %config /usr/share/PolicyKit/policy/org.opensuse.yast.modules.yapi.%{plugin_name}.policy
 %doc COPYING
+
+
+%changelog

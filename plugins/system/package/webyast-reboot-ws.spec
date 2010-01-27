@@ -1,5 +1,5 @@
 #
-# spec file for package yast2-webservice-system
+# spec file for package webyast-reboot-ws
 #
 # Copyright (c) 2008 SUSE LINUX Products GmbH, Nuernberg, Germany.
 # This file and all modifications and additions to the pristine
@@ -9,7 +9,9 @@
 #
 
 
-Name:           yast2-webservice-system
+Name:           webyast-reboot-ws
+Provides:       yast2-webservice-system = %{version}
+Obsoletes:      yast2-webservice-system < %{version}
 PreReq:         yast2-webservice
 # requires HAL for reboot/shutdown actions
 Requires:	hal

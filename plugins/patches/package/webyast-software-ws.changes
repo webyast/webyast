@@ -1,4 +1,9 @@
 -------------------------------------------------------------------
+Mon Jan 25 17:22:54 CET 2010 - mvidner@suse.cz
+
+- renamed yast2-webservice-patches to webyast-software-ws
+
+-------------------------------------------------------------------
 Wed Dec 30 13:19:15 UTC 2009 - lslezak@suse.cz
 
 - read patches in background, do not block the REST service

@@ -2,7 +2,7 @@
 Gem::Specification.new do |spec|
 
 # gem name and description
-spec.name	= "yast2-webservice-tasks"
+spec.name	= "webyast-rake-tasks"
 spec.version	= "@VERSION@"
 spec.summary	= "Rake tasks shared by all YaST webservice packages"
 spec.license    = "LGPL v2.1"

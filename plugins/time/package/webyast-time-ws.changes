@@ -1,4 +1,9 @@
 -------------------------------------------------------------------
+Mon Jan 25 21:26:04 CET 2010 - mvidner@suse.cz
+
+- renamed yast2-webservice-time to webyast-time-ws
+
+-------------------------------------------------------------------
 Tue Nov 24 15:46:56 UTC 2009 - jreidinger@novell.com
 
 - optionally(if not possible, then ignore it) restart collectd if
