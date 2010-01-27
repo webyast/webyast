@@ -1,0 +1,6 @@
+Firewall
+========
+
+REST interface for opening/closing ports in external zone.
+
+Copyright (c) 2009 Novell
