@@ -1,4 +1,9 @@
 -------------------------------------------------------------------
+Mon Jan 25 17:17:29 CET 2010 - mvidner@suse.cz
+
+- renamed yast2-webservice-basesystem to webyast-firstboot-ws
+
+-------------------------------------------------------------------
 Tue Nov 10 16:23:53 CET 2009 - jreidinger@suse.cz
 
 - remove deprecated provisions in spec file

@@ -1,5 +1,5 @@
 #
-# spec file for package yast2-webservice (Version 0.1)
+# spec file for package webyast-base-ws (Version 0.1)
 #
 # Copyright (c) 2008 SUSE LINUX Products GmbH, Nuernberg, Germany.
 # This file and all modifications and additions to the pristine
@@ -9,7 +9,9 @@
 #
 
 
-Name:           yast2-webservice
+Name:           webyast-base-ws
+Provides:       yast2-webservice = %{version}
+Obsoletes:      yast2-webservice < %{version}
 
 %if 0%{?suse_version} == 0 || %suse_version > 1110
 # 11.2 or newer
@@ -27,7 +29,7 @@ PreReq:         lighttpd > 1.4.20-2.29.1
 %endif
 
 Requires:	lighttpd-mod_magnet, ruby-fcgi, ruby-dbus, sqlite
-Requires:       rubygem-yast2-webservice-tasks
+Requires:       rubygem-webyast-rake-tasks
 Requires:	yast2-dbus-server
 # gamin gives problems with lighttpd, so better conflict with it for now
 Conflicts:      gamin
@@ -55,7 +57,7 @@ BuildRoot:      %{_tmppath}/%{name}-%{version}-build
 BuildRequires:  ruby, pkg-config, rubygem-mocha
 # if we run the tests during build, we need most of Requires here too,
 # except for deployment specific stuff
-BuildRequires:  rubygem-yast2-webservice-tasks, rubygem-restility
+BuildRequires:  rubygem-webyast-rake-tasks, rubygem-restility
 BuildRequires:  yast2-core, yast2-dbus-server, ruby-dbus, sqlite, dbus-1
 BuildRequires:  PolicyKit, PackageKit, rubygem-sqlite3
 BuildRequires:  rubygem-rails-2_3 >= 2.3.4

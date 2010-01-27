@@ -1,5 +1,5 @@
 #
-# spec file for package yast2-webservice-mailsettings
+# spec file for package webyast-software-ws (Version 0.1)
 #
 # Copyright (c) 2008 SUSE LINUX Products GmbH, Nuernberg, Germany.
 # This file and all modifications and additions to the pristine
@@ -9,63 +9,44 @@
 #
 
 
-Name:           yast2-webservice-mailsettings
+Name:           webyast-software-ws
+Provides:       yast2-webservice-patches = %{version}
+Obsoletes:      yast2-webservice-patches < %{version}
 PreReq:         yast2-webservice
+# ruby-dbus is required by yast2-webservice already
+# but here we use a recent feature of DBus::Main.quit
+Requires:       ruby-dbus >= 0.2.9
 License:	GPL v2 only
 Group:          Productivity/Networking/Web/Utilities
 Autoreqprov:    on
-Version:        0.0.10
+Version:        0.0.9
 Release:        0
-Summary:        YaST2 - Webservice - Mail Settings
+Summary:        YaST2 - Webservice - Patches
 Source:         www.tar.bz2
-Source1:        MailSettings.pm
-Source2:	org.opensuse.yast.modules.yapi.mailsettings.policy
+Source1:        org.opensuse.yast.system.patches.policy
+Source2:        org.opensuse.yast.system.packages.policy
 BuildRoot:      %{_tmppath}/%{name}-%{version}-build
 BuildArch:      noarch
-BuildRequires:  rubygem-yast2-webservice-tasks rubygem-restility
-
-# install these packages into Hudson chroot environment
-# the exact versions are checked in checks.rake task
-%if 0
-BuildRequires:  yast2 yast2-mail
-%endif
-
-# YaPI::MailServer (standard edition)
-Requires:	yast2-mail postfix
-
-# YaPI::SERVICES (for postfix)
-%if 0%{?suse_version} == 0 || %suse_version > 1110
-# 11.2 or newer
-Requires:       yast2 >= 2.18.24
-%else
-# 11.1 or SLES11
-Requires:       yast2 >= 2.17.70.1
-%endif
 
 #
 %define pkg_user yastws
-%define plugin_name mailsettings
+%define plugin_name patches
 #
 
 
 %description
-YaST2 - Webservice - REST based interface for mail settings
-
+YaST2 - Webservice - REST based interface of YaST in order to handle patches and packages.
 Authors:
 --------
-    Jiri Suchomel <jsuchome@novell.com>
+    Stefan Schubert <schubi@opensuse.org>
 
 %prep
 %setup -q -n www
 
 %build
-# build restdoc documentation
-mkdir -p public/mail_settings/restdoc
-export RAILS_PARENT=/srv/www/yastws
-env LANG=en rake restdoc
 
-# do not package restdoc sources
-rm -rf restdoc
+#do not package developer doc
+rm -rf doc
 
 %install
 
@@ -78,44 +59,37 @@ rm -f $RPM_BUILD_ROOT/srv/www/%{pkg_user}/vendor/plugins/%{plugin_name}/COPYING
 
 # Policies
 mkdir -p $RPM_BUILD_ROOT/usr/share/PolicyKit/policy
+install -m 0644 %SOURCE1 $RPM_BUILD_ROOT/usr/share/PolicyKit/policy/
 install -m 0644 %SOURCE2 $RPM_BUILD_ROOT/usr/share/PolicyKit/policy/
-
-#YaPI
-mkdir -p $RPM_BUILD_ROOT/usr/share/YaST2/modules/YaPI/
-cp %{SOURCE1} $RPM_BUILD_ROOT/usr/share/YaST2/modules/YaPI/
 
 %clean
 rm -rf $RPM_BUILD_ROOT
 
 %post
-# granting all permissions for the web user
+#
+# granting all permissions for root
+#
 /usr/sbin/grantwebyastrights --user root --action grant > /dev/null
-/usr/sbin/grantwebyastrights --user yastws --action grant > /dev/null
 
-%postun
-
-%files 
+%files
 %defattr(-,root,root)
 %dir /srv/www/%{pkg_user}
 %dir /srv/www/%{pkg_user}/vendor
 %dir /srv/www/%{pkg_user}/vendor/plugins
 %dir /srv/www/%{pkg_user}/vendor/plugins/%{plugin_name}
-%dir /usr/share/YaST2/
-%dir /usr/share/YaST2/modules/
-%dir /usr/share/YaST2/modules/YaPI/
+%dir /usr/share/PolicyKit
+%dir /usr/share/PolicyKit/policy
 /srv/www/%{pkg_user}/vendor/plugins/%{plugin_name}/README
 /srv/www/%{pkg_user}/vendor/plugins/%{plugin_name}/Rakefile
 /srv/www/%{pkg_user}/vendor/plugins/%{plugin_name}/init.rb
 /srv/www/%{pkg_user}/vendor/plugins/%{plugin_name}/install.rb
 /srv/www/%{pkg_user}/vendor/plugins/%{plugin_name}/uninstall.rb
 /srv/www/%{pkg_user}/vendor/plugins/%{plugin_name}/app
+/srv/www/%{pkg_user}/vendor/plugins/%{plugin_name}/scripts
 /srv/www/%{pkg_user}/vendor/plugins/%{plugin_name}/config
-/srv/www/%{pkg_user}/vendor/plugins/%{plugin_name}/doc
-/srv/www/%{pkg_user}/vendor/plugins/%{plugin_name}/public
-/usr/share/YaST2/modules/YaPI/MailSettings.pm
-%dir /usr/share/PolicyKit
-%dir /usr/share/PolicyKit/policy
-%attr(644,root,root) %config /usr/share/PolicyKit/policy/org.opensuse.yast.modules.yapi.%{plugin_name}.policy
+/srv/www/%{pkg_user}/vendor/plugins/%{plugin_name}/tasks
+%attr(644,root,root) %config /usr/share/PolicyKit/policy/org.opensuse.yast.system.%{plugin_name}.policy
+%attr(644,root,root) %config /usr/share/PolicyKit/policy/org.opensuse.yast.system.packages.policy
 %doc COPYING
 
 %changelog

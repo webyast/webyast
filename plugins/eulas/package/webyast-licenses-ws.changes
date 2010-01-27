@@ -1,4 +1,9 @@
 -------------------------------------------------------------------
+Mon Jan 25 17:18:11 CET 2010 - mvidner@suse.cz
+
+- renamed yast2-webservice-eulas to webyast-licenses-ws
+
+-------------------------------------------------------------------
 Thu Nov 26 10:59:51 CET 2009 - mkudlvasr@suse.cz
 
 - enhance documentation in doc/README_FOR_APP

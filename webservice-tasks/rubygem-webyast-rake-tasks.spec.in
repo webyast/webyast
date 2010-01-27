@@ -1,5 +1,5 @@
 #
-# spec file for package rubygem-yast2-webservice-tasks (Version @VERSION@)
+# spec file for package rubygem-webyast-rake-tasks (Version @VERSION@)
 #
 # Copyright (c) 2009 SUSE LINUX Products GmbH, Nuernberg, Germany.
 #
@@ -16,14 +16,16 @@
 #
 
 # norootforbuild
-Name:           rubygem-yast2-webservice-tasks
+Name:           rubygem-webyast-rake-tasks
+Provides:       rubygem-yast2-webservice-tasks = @VERSION@
+Obsoletes:      rubygem-yast2-webservice-tasks < @VERSION@
 Version:        @VERSION@
 Release:        0
 
 # Nope, doesn't work. Gems are installed below /usr/lib{64}
 # BuildArch:      noarch
 
-%define mod_name yast2-webservice-tasks
+%define mod_name webyast-rake-tasks
 #
 Group:          Development/Languages/Ruby
 License:        LGPL v2.1

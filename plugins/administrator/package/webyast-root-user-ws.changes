@@ -1,4 +1,9 @@
 -------------------------------------------------------------------
+Mon Jan 25 17:15:27 CET 2010 - mvidner@suse.cz
+
+- renamed yast2-webservice-administrator to webyast-root-user-ws
+
+-------------------------------------------------------------------
 Tue Nov 10 14:06:27 CET 2009 - jsuchome@suse.cz
 
 - require SLE11 version of yast2-users package

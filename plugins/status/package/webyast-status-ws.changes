@@ -1,4 +1,9 @@
 -------------------------------------------------------------------
+Mon Jan 25 21:25:07 CET 2010 - mvidner@suse.cz
+
+- renamed yast2-webservice-status to webyast-status-ws
+
+-------------------------------------------------------------------
 Tue Jan 12 14:33:16 CET 2010 - schubi@suse.de
 
 - moved code to metric/graph controller

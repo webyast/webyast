@@ -1,4 +1,9 @@
 -------------------------------------------------------------------
+Mon Jan 25 17:19:41 CET 2010 - mvidner@suse.cz
+
+- renamed yast2-webservice-language to webyast-language-ws
+
+-------------------------------------------------------------------
 Fri Nov 13 07:03:56 UTC 2009 - jreidinger@novell.com
 
 - make language more robust to changes in UI (bnc#555157)

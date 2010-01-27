@@ -1,5 +1,5 @@
 #
-# spec file for package yast2-webservice-eula (Version 0.0.1)
+# spec file for package webyast-firstboot-ws (Version 0.1)
 #
 # Copyright (c) 2008-09 SUSE LINUX Products GmbH, Nuernberg, Germany.
 # This file and all modifications and additions to the pristine
@@ -9,33 +9,35 @@
 #
 
 
-Name:           yast2-webservice-eulas
+Name:           webyast-firstboot-ws
+Provides:       yast2-webservice-basesystem = %{version}
+Obsoletes:      yast2-webservice-basesystem < %{version}
 PreReq:         yast2-webservice
 License:	GPL v2 only
 Group:          Productivity/Networking/Web/Utilities
 Autoreqprov:    on
-Version:        0.0.5
+Version:        0.0.10
 Release:        0
-Summary:        YaST2 - Webservice - EULA
+Summary:        YaST2 - Webservice - Basesystem
 Source:         www.tar.bz2
-Source1:        eulas-sles11.yml
+Source1:        basesystem.yml
 BuildRoot:      %{_tmppath}/%{name}-%{version}-build
 BuildArch:      noarch
 BuildRequires:  rubygem-mocha
 
 #
 %define pkg_user yastws
-%define plugin_name eulas
+%define plugin_name basesystem
 #
 
 
 %description
-YaST2 - Webservice - REST based interface of YaST in order to handle user acceptation of EULAs.
+YaST2 - Webservice - REST based interface of YaST in order to handle initial basic system settings.
 
 Authors:
 --------
-    Martin Kudlvasr <mkudlvasr@suse.cz>
     Josef Reidinger <jreidinger@suse.cz>
+    Martin Kudlvasr <mkudlvasr@suse.cz>
 
 %prep
 %setup -q -n www
@@ -47,19 +49,14 @@ Authors:
 #
 # Install all web and frontend parts.
 #
-mkdir -p $RPM_BUILD_ROOT/usr/share/%{pkg_user}/%{plugin_name}
-rm -r "config/resources/licenses/openSUSE-11.1"
-mv config/resources/licenses $RPM_BUILD_ROOT/usr/share/%{pkg_user}/%{plugin_name}/
-
-mkdir -p $RPM_BUILD_ROOT/var/lib/%{pkg_user}/%{plugin_name}/accepted-licenses
-
+mkdir -p $RPM_BUILD_ROOT/var/lib/yastws/%{plugin_name}
 mkdir -p $RPM_BUILD_ROOT/srv/www/%{pkg_user}/vendor/plugins/%{plugin_name}
 cp -a * $RPM_BUILD_ROOT/srv/www/%{pkg_user}/vendor/plugins/%{plugin_name}
 rm -f $RPM_BUILD_ROOT/srv/www/%{pkg_user}/vendor/plugins/%{plugin_name}/COPYING
 #FIXME maybe location change in future
 
 mkdir -p $RPM_BUILD_ROOT/etc/webyast/
-cp %SOURCE1 $RPM_BUILD_ROOT/etc/webyast/eulas.yml
+cp %SOURCE1 $RPM_BUILD_ROOT/etc/webyast/
 
 %clean
 rm -rf $RPM_BUILD_ROOT
@@ -72,10 +69,11 @@ rm -rf $RPM_BUILD_ROOT
 %dir /srv/www/%{pkg_user}/vendor/plugins
 %dir /srv/www/%{pkg_user}/vendor/plugins/%{plugin_name}
 %dir /srv/www/%{pkg_user}/vendor/plugins/%{plugin_name}/doc
-%dir /usr/share/%{pkg_user}
-%dir /usr/share/%{pkg_user}/%{plugin_name}
-%dir /var/lib/%{pkg_user}
-%dir /var/lib/%{pkg_user}/%{plugin_name}
+#var dir to store basesystem status
+%dir %attr (-,%{pkg_user},root) /var/lib/yastws
+%dir %attr (-,%{pkg_user},root) /var/lib/yastws/%{plugin_name}
+%dir /etc/webyast/
+%config /etc/webyast/basesystem.yml
 /srv/www/%{pkg_user}/vendor/plugins/%{plugin_name}/README
 /srv/www/%{pkg_user}/vendor/plugins/%{plugin_name}/Rakefile
 /srv/www/%{pkg_user}/vendor/plugins/%{plugin_name}/init.rb
@@ -86,11 +84,5 @@ rm -rf $RPM_BUILD_ROOT
 #/srv/www/%{pkg_user}/vendor/plugins/%{plugin_name}/tasks
 #/srv/www/%{pkg_user}/vendor/plugins/%{plugin_name}/test
 /srv/www/%{pkg_user}/vendor/plugins/%{plugin_name}/doc/README_FOR_APP
-/srv/www/%{pkg_user}/vendor/plugins/%{plugin_name}/doc/eulas_example.yml
-/usr/share/%{pkg_user}/%{plugin_name}/licenses
-%dir /etc/webyast/
-%config /etc/webyast/eulas.yml
-%defattr(-,%{pkg_user},%{pkg_user})
-%dir /var/lib/%{pkg_user}/%{plugin_name}/accepted-licenses
 %doc COPYING
 

@@ -1,4 +1,9 @@
 -------------------------------------------------------------------
+Mon Jan 25 21:25:38 CET 2010 - mvidner@suse.cz
+
+- renamed yast2-webservice-system to webyast-reboot-ws
+
+-------------------------------------------------------------------
 Fri Nov 13 15:19:07 CET 2009 - jreidinger@suse.cz
 
 - remove deprecated provisions

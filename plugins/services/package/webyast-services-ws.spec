@@ -1,5 +1,5 @@
 #
-# spec file for package yast2-webservice-systemtime (Version 0.1)
+# spec file for package webyast-services-ws (Version 0.1)
 #
 # Copyright (c) 2008 SUSE LINUX Products GmbH, Nuernberg, Germany.
 # This file and all modifications and additions to the pristine
@@ -9,45 +9,62 @@
 #
 
 
-Name:           yast2-webservice-time
+Name:           webyast-services-ws
+Provides:       yast2-webservice-services = %{version}
+Obsoletes:      yast2-webservice-services < %{version}
 PreReq:         yast2-webservice
 License:	GPL v2 only
 Group:          Productivity/Networking/Web/Utilities
 Autoreqprov:    on
-Version:        0.0.11
+Version:        0.0.14
 Release:        0
-Summary:        YaST2 - Webservice - Time
+Summary:        YaST2 - Webservice - Services
 Source:         www.tar.bz2
+Source1:        org.opensuse.yast.modules.yapi.services.policy
+Source2:	      YML.rb
 BuildRoot:      %{_tmppath}/%{name}-%{version}-build
 BuildArch:      noarch
-BuildRequires:  rubygem-mocha
+BuildRequires:  rubygem-yast2-webservice-tasks rubygem-restility
 
-# YaPI/TIME.pm
+# so SERVICES.pm is able to call YML.rb
+Requires:       yast2-ruby-bindings >= 0.3.2.1
+
+# YaPI/SERVICES.pm using ruby-bindings
 %if 0%{?suse_version} == 0 || %suse_version > 1110
 # 11.2 or newer
-Requires:       yast2-country >= 2.18.10
+Requires:       yast2 >= 2.18.29
 %else
 # 11.1 or SLES11
-Requires:       yast2-country >= 2.17.34.2
+Requires:       yast2 >= 2.17.70.1
 %endif
+
 
 #
 %define pkg_user yastws
-%define plugin_name time
+%define plugin_name services
 #
 
 
 %description
-YaST2 - Webservice - REST based interface of YaST in order to handle time and date.
+YaST2 - Webservice - REST based interface of YaST in order to handle services.
 Authors:
 --------
     Stefan Schubert <schubi@opensuse.org>
-    Josef Reidinger <jreidinger@suse.cz>
+    Jiri Suchomel <jsuchome@suse.cz>
+    Ladislav Slezak <lslezak@suse.cz>
 
 %prep
 %setup -q -n www
 
 %build
+
+# build restdoc documentation
+mkdir -p public/services/restdoc
+export RAILS_PARENT=/srv/www/yastws
+env LANG=en rake restdoc
+
+# do not package restdoc sources
+rm -rf restdoc
 
 %install
 
@@ -57,7 +74,14 @@ Authors:
 mkdir -p $RPM_BUILD_ROOT/srv/www/%{pkg_user}/vendor/plugins/%{plugin_name}
 cp -a * $RPM_BUILD_ROOT/srv/www/%{pkg_user}/vendor/plugins/%{plugin_name}
 rm -f $RPM_BUILD_ROOT/srv/www/%{pkg_user}/vendor/plugins/%{plugin_name}/COPYING
+
+# Policies
 mkdir -p $RPM_BUILD_ROOT/usr/share/PolicyKit/policy
+install -m 0644 %SOURCE1 $RPM_BUILD_ROOT/usr/share/PolicyKit/policy/
+
+# YML.rb
+mkdir -p $RPM_BUILD_ROOT/usr/share/YaST2/modules/
+cp %{SOURCE2} $RPM_BUILD_ROOT/usr/share/YaST2/modules/
 
 %clean
 rm -rf $RPM_BUILD_ROOT
@@ -67,7 +91,6 @@ rm -rf $RPM_BUILD_ROOT
 # granting all permissions for root 
 #
 /usr/sbin/grantwebyastrights --user root --action grant > /dev/null
-# XXX not nice to get yastws all permissions, but now not better solution
 /usr/sbin/grantwebyastrights --user yastws --action grant > /dev/null
 
 %files 
@@ -77,8 +100,10 @@ rm -rf $RPM_BUILD_ROOT
 %dir /srv/www/%{pkg_user}/vendor/plugins
 %dir /srv/www/%{pkg_user}/vendor/plugins/%{plugin_name}
 %dir /srv/www/%{pkg_user}/vendor/plugins/%{plugin_name}/doc
+%dir /usr/share/YaST2/
+%dir /usr/share/YaST2/modules/
 %dir /usr/share/PolicyKit
-%dir /usr/share/PolicyKit/policy/
+%dir /usr/share/PolicyKit/policy
 /srv/www/%{pkg_user}/vendor/plugins/%{plugin_name}/README
 /srv/www/%{pkg_user}/vendor/plugins/%{plugin_name}/Rakefile
 /srv/www/%{pkg_user}/vendor/plugins/%{plugin_name}/init.rb
@@ -87,7 +112,10 @@ rm -rf $RPM_BUILD_ROOT
 /srv/www/%{pkg_user}/vendor/plugins/%{plugin_name}/app
 /srv/www/%{pkg_user}/vendor/plugins/%{plugin_name}/config
 /srv/www/%{pkg_user}/vendor/plugins/%{plugin_name}/tasks
-#/srv/www/%{pkg_user}/vendor/plugins/%{plugin_name}/test
-/srv/www/%{pkg_user}/vendor/plugins/%{plugin_name}/doc/README_FOR_APP
+/srv/www/%{pkg_user}/vendor/plugins/%{plugin_name}/doc
+/srv/www/%{pkg_user}/vendor/plugins/%{plugin_name}/public
+/usr/share/YaST2/modules/YML.rb
+
+%attr(644,root,root) %config /usr/share/PolicyKit/policy/org.opensuse.yast.modules.yapi.%{plugin_name}.policy
 %doc COPYING
 
