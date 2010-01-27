@@ -11,7 +11,7 @@
 
 Name:           webyast-firewall-ws
 PreReq:         webyast-base-ws
-License:	GPL v2 only
+License:        GPL v2 only
 Group:          Productivity/Networking/Web/Utilities
 Autoreqprov:    on
 Version:        0.0.1
@@ -22,6 +22,7 @@ Source1:        org.opensuse.yast.modules.yapi.firewall.policy
 Source2:        FIREWALL.pm
 BuildRoot:      %{_tmppath}/%{name}-%{version}-build
 BuildArch:      noarch
+BuildRequires:  rubygem-yast2-webservice-tasks rubygem-restility
 
 #
 %define pkg_user yastws
