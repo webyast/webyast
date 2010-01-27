@@ -19,6 +19,7 @@ Release:        0
 Summary:        YaST2 - Webservice - Firewall
 Source:         www.tar.bz2
 Source1:        org.opensuse.yast.modules.yapi.firewall.policy
+Source2:        FIREWALL.pm
 BuildRoot:      %{_tmppath}/%{name}-%{version}-build
 BuildArch:      noarch
 
@@ -55,6 +56,10 @@ rm -f $RPM_BUILD_ROOT/srv/www/%{pkg_user}/vendor/plugins/%{plugin_name}/COPYING
 mkdir -p $RPM_BUILD_ROOT/usr/share/PolicyKit/policy
 install -m 0644 %SOURCE1 $RPM_BUILD_ROOT/usr/share/PolicyKit/policy/
 
+#YaPI
+mkdir -p $RPM_BUILD_ROOT/usr/share/YaST2/modules/YaPI/
+cp %{SOURCE2} $RPM_BUILD_ROOT/usr/share/YaST2/modules/YaPI/
+
 %clean
 rm -rf $RPM_BUILD_ROOT
 
@@ -70,6 +75,9 @@ rm -rf $RPM_BUILD_ROOT
 %dir /srv/www/%{pkg_user}/vendor
 %dir /srv/www/%{pkg_user}/vendor/plugins
 %dir /srv/www/%{pkg_user}/vendor/plugins/%{plugin_name}
+%dir /usr/share/YaST2/
+%dir /usr/share/YaST2/modules/
+%dir /usr/share/YaST2/modules/YaPI/
 %dir /usr/share/PolicyKit
 %dir /usr/share/PolicyKit/policy
 %config /srv/www/%{pkg_user}/vendor/plugins/%{plugin_name}/README
@@ -81,5 +89,6 @@ rm -rf $RPM_BUILD_ROOT
 %config /srv/www/%{pkg_user}/vendor/plugins/%{plugin_name}/config
 %config /srv/www/%{pkg_user}/vendor/plugins/%{plugin_name}/tasks
 #%config /srv/www/%{pkg_user}/vendor/plugins/%{plugin_name}/test
+/usr/share/YaST2/modules/YaPI/FIREWALL.pm
 %attr(644,root,root) %config /usr/share/PolicyKit/policy/org.opensuse.yast.modules.yapi.%{plugin_name}.policy
 %doc COPYING
