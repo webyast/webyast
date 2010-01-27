@@ -95,6 +95,7 @@ polkit-auth --user %{pkg_user} --grant org.freedesktop.packagekit.system-sources
 /srv/www/%{pkg_user}/vendor/plugins/%{plugin_name}/tasks
 %attr(644,root,root) %config /usr/share/PolicyKit/policy/org.opensuse.yast.system.%{plugin_name}.policy
 %attr(644,root,root) %config /usr/share/PolicyKit/policy/org.opensuse.yast.system.packages.policy
+%attr(644,root,root) %config /usr/share/PolicyKit/policy/org.opensuse.yast.system.repositories.policy
 %doc COPYING
 
 %changelog
