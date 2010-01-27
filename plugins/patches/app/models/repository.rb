@@ -64,9 +64,9 @@ class Repository
 
           case key
             when 'autorefresh'
-              @autorefresh = (value == 'true' || value = '1')
+              @autorefresh = (value == 'true' || value == '1')
             when 'keeppackages'
-              @keep_packages = (value == 'true' || value = '1')
+              @keep_packages = (value == 'true' || value == '1')
             when 'priority'
               if value.match /'[0-9]+'/
                 @priority = value.to_i
@@ -94,12 +94,12 @@ class Repository
 
     # create a new repository if it does not exist yet
     if !Repository.exists?(@id)
-      Rails.logger.info "Adding a new repository '#{@id}'"
+      Rails.logger.info "Adding a new repository '#{@id}': #{self.inspect}"
       Resolvable.execute('RepoSetData', [@id, 'add', @url])
     else
-      Rails.logger.info "Modifying repository '#{@id}'"
+      Rails.logger.info "Modifying repository '#{@id}': #{self.inspect}"
       # set url
-      Resolvable.execute('RepoSetData', [@id, 'url', @url]) unless added
+      Resolvable.execute('RepoSetData', [@id, 'url', @url])
     end
 
     # set enabled flag
