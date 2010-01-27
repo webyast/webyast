@@ -1,0 +1,90 @@
+#
+# This class handles the logfiles
+# The yaml file is located in config/logs.yaml
+#
+
+require 'yast/config_file'
+require 'yast_service'
+
+class Log
+  attr_reader :id
+  attr_reader :path
+  attr_reader :description
+  attr_reader :value
+
+  CONFIGURATION_FILE = "logs.yml"
+  VENDOR_DIR = "vendor"
+  DEFAULT_LINES = 50
+
+  public
+
+  #
+  # reading configuration file
+  #
+  def self.parse_config(path = nil)
+    path = File.join(Paths::CONFIG,VENDOR_DIR,CONFIGURATION_FILE) if path == nil
+
+    #reading configuration file
+    return YaST::ConfigFile.new(path) if File.exists?(path)
+    return nil
+  end
+
+  # initialize on element
+  def initialize(key, value)
+    @id = key
+    @path = value["path"]
+    @description = value["description"]
+    @value = ""
+  end
+
+  #
+  # find 
+  # LOG.find(:all, check_error)
+  # LOG.find(id, check_error) 
+  # "id" could be the log group (system,...)
+  # "check_error" check if ther is any error reported in the logfile(default: false)
+  #
+  def self.find(what, check_error = false)
+    config = parse_config
+    ret = []
+    return ret if config==nil
+
+    config.each {|key,value|
+      ret << Log.new(key,value) if key==what || what==:all
+    }
+
+    if what == :all || ret.blank?
+      return ret    
+    else
+      raise "#{what} not found in configuration file" if ret.blank?
+      Rails.logger.error "There are more results for #{what} -> #{ret.inspect} Taking the first one..." if ret.size > 1
+      return ret.first
+    end
+  end
+
+  #
+  # evaluate log lines
+  # 
+  def evaluate_content(lines = DEFAULT_LINES)
+    @value = YastService.Call("LogFile::Read", ["s",id], ["s",lines.to_s])
+    if @value=="___WEBYAST___INVALID"
+      Rails.logger.error "invalid id #{id} with path #{path}"
+      raise "Cannot Read logfiles of #{path}"
+    end
+#    Rails.logger.info @value
+    @value
+  end
+
+  # converts the graph to xml
+  def to_xml(opts={})
+    xml = opts[:builder] ||= Builder::XmlMarkup.new(opts)
+    xml.instruct! unless opts[:skip_instruct]
+    xml.log do
+      xml.id id
+      xml.path path
+      xml.description description
+      xml.value value unless value.blank?
+    end
+  end
+
+end

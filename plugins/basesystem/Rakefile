@@ -23,5 +23,5 @@ desc 'Deploy for development - create basic dirs and install config files.'
 task :deploy_local do |t|
   FileUtils.mkdir_p "/etc/webyast"
   FileUtils.mkdir_p "/var/lib/yastws/basesystem"
-  FileUtils.cp "package/basesystem.yml" "/etc/webyast"
+  FileUtils.cp "package/basesystem.yml", "/etc/webyast"
 end

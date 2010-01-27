@@ -69,7 +69,7 @@ end
 
 desc "Deploy for development - create dirs, install configuration files and custom yast modules. Then install and update PolKit policies for root."
 # :install policies uses grantwebyastrights, which is installed in :deploy_local
-task :deploy_local_all => [:deploy_local,:install_policies]
+task :deploy_devel_all => [:deploy_local,:install_policies]
 
 =begin
 require 'metric_fu'

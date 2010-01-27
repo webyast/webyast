@@ -23,6 +23,7 @@ desc "Deploy for development - create basic dirs and install config files."
 task :deploy_local do |t|
   FileUtils.mkdir_p "/etc/webyast"
   FileUtils.mkdir_p "/var/lib/yastws/eulas/accepted-licenses"
+  FileUtils.mkdir_p "/usr/share/yastws/eulas"
   FileUtils.install "package/eulas-sles11.yml", "/etc/webyast/eulas.yml", :mode => 0644
-  FileUtils.cp_r    "config/resources/licenses", "/var/lib/yastws/eulas"
+  FileUtils.cp_r    "config/resources/licenses", "/usr/share/yastws/eulas"
 end

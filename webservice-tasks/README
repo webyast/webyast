@@ -1,5 +1,5 @@
 
-This is 'yast2-webservice-tasks' Ruby gem package.
+This is 'webyast-rake-tasks' Ruby gem package.
 
 This gem contains all rake tasks which are shared in all Yast webservice packages.
 
@@ -68,7 +68,7 @@ Installing the gem
 
 Build the package ('rake package') and
 
-    call 'sudo gem install yast2-webservice-tasks'
+    call 'sudo gem install webyast-rake-tasks'
    
 or
     build RPM package from sources in package/ subdirectory and install it
