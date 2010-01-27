@@ -1,4 +1,11 @@
 -------------------------------------------------------------------
+Wed Jan 27 13:22:57 CET 2010 - jsuchome@suse.cz
+
+- used different YaST API (Mail.ycp), which is able to create
+  configuration understandable by SuSEconfig (bnc#559145)
+- 0.1.1 
+
+-------------------------------------------------------------------
 Mon Jan 25 17:20:59 CET 2010 - mvidner@suse.cz
 
 - renamed yast2-webservice-mailsettings to webyast-mail-ws

@@ -19,22 +19,14 @@ class MailSettings
 
   # read the settings from system
   def read
-    # reset the settings before read
-    @password	= ""
-    @user	= ""
-    @smtp_server= ""
-    @transport_layer_security	= "NONE"
     yapi_ret = YastService.Call("YaPI::MailSettings::Read")
-    if yapi_ret.has_key? "SendingMail"
-      sending_mail	= yapi_ret["SendingMail"]
-      if sending_mail.has_key? "RelayHost"
-        relay_host 	= sending_mail["RelayHost"]
-        @smtp_server 	= relay_host["Name"]
-        @user		= relay_host["Account"] if relay_host.has_key? "Account"
-        @password	= relay_host["Password"] if  relay_host.has_key? "Password"
-      end
-      @transport_layer_security = sending_mail["TLS"] if sending_mail.has_key? "TLS"
-    end
+    raise MailSettingsError.new("Cannot read from YaPI backend") if yapi_ret.nil?
+
+    @smtp_server	= yapi_ret["smtp_server"]
+    @user		= yapi_ret["user"]
+    @password		= yapi_ret["password"]
+    @transport_layer_security	= "no"
+    @transport_layer_security	= yapi_ret["TLS"] if yapi_ret.has_key? "TLS"
   end
 
 
@@ -52,31 +44,17 @@ class MailSettings
       Rails.logger.debug "nothing has been changed, not saving"
       return true
     end
+
     parameters	= {
-      "Changed" => [ "i", 1],
-      "MaximumMailSize" => [ "i", 10485760],
-      "SendingMail" => ["a{sv}", {
-	  "Type"	=> [ "s", "relayhost"],
-	  "TLS"		=> [ "s", settings["transport_layer_security"]],
-	  "RelayHost"	=> [ "a{sv}", {
-	      "Name"	=> [ "s", settings["smtp_server"]],
-	      "Auth"	=> [ "i", settings["user"] == "" ? 0 : 1],
-	      "Account"	=> [ "s", settings["user"]],
-	      "Password"=> [ "s", settings["password"]]
-	  }]
-      }]
+	"smtp_server"	=> [ "s", settings["smtp_server"]],
+	"user"		=> [ "s", settings["user"]],
+	"password"	=> [ "s", settings["password"]],
+	"TLS"		=> [ "s", settings["transport_layer_security"]]
     }
 
     yapi_ret = YastService.Call("YaPI::MailSettings::Write", parameters)
     Rails.logger.debug "YaPI returns: '#{yapi_ret}'"
     raise MailSettingsError.new(yapi_ret) unless yapi_ret.empty?
-
-    yapi_ret = YastService.Call("YaPI::SERVICES::Execute", {
-	"name"	=> [ "s", "postfix"],
-	"action"=> [ "s", "restart"]
-    })
-    Rails.logger.debug "YaPI returns: '#{yapi_ret.inspect}'"
-    raise MailSettingsError.new(yapi_ret["stderr"]) unless yapi_ret["stderr"].empty?
     true
   end
 

@@ -10,26 +10,34 @@ use Data::Dumper;
 
 our %TYPEINFO;
 
-YaST::YCP::Import ("YaPI::MailServer");
+YaST::YCP::Import ("Mail");
+YaST::YCP::Import ("Progress");
 
-# wrapper for MailServer::ReadGlobalSettings
+# Read part of mail configuration: SMTP server and authentication details
+# Uses Mail.ycp API
+# returns hash with keys smtp_server, user, password, TLS
 BEGIN { $TYPEINFO{Read}  =["function", ["map", "string", "any" ]]; }
 sub Read {
 
-    my $global_settings	= YaPI::MailServer->ReadGlobalSettings ("");
+    my $progress_orig	= Progress->set (0);
+    Mail->Read (undef);
+    Progress->set ($progress_orig);
 
-    # check for nil values...
-    while (my ($key, $value) = each %{$global_settings}) {
-	if (!defined $value) {
-	    $global_settings->{$key}	= "";
-	    y2warning ("value for key $key not defined!");
-	}
+    my $ex		= Mail->Export ();
+    my $smtp_auth	= {};
+    $smtp_auth		= $ex->{"smtp_auth"}[0] if defined $ex->{"smtp_auth"} && ref ($ex->{"smtp_auth"}) eq "ARRAY";
+
+    return {
+	"smtp_server"	=> $ex->{"outgoing_mail_server"} || "",
+	"user"		=> $smtp_auth->{"user"} || "",
+	"password"	=> $smtp_auth->{"password"} || "",
+	"TLS"		=> $ex->{"smtp_use_TLS"} || "no"
     }
-    return $global_settings;
 }
 
-# wrapper for MailServer::WriteGlobalSettings
-# returns value is error message 
+# Writes simple mail configuration: SMTP server and authentication details
+# parameters: hash with keys smtp_server, user, password, TLS
+# returns error message 
 BEGIN { $TYPEINFO{Write}  =["function", "string", ["map", "string", "any" ]]; }
 sub Write {
 
@@ -37,11 +45,28 @@ sub Write {
     my $settings	= shift;
     my $ret		= "";
 
-    if (!defined YaPI::MailServer->WriteGlobalSettings ($settings, "")) {
-	my $error	= YaPI->Error ();
-	$ret		=  $error->{'summary'} || "";
+    my $smtp_server	= $settings->{"smtp_server"} || "";
+    my @smtp_auth	= ();
+    if (($settings->{"user"} || "") ne "") {
+	push @smtp_auth, {
+	    "server"		=> $smtp_server,
+	    "user"		=> $settings->{"user"} || "",
+	    "password"		=> $settings->{"password"} || ""
+	};
     }
-    return $ret;
+    Mail->Import ({
+	"mta"			=> "postfix",
+	"connection_type"	=> "permanent",
+	"postfix_mda"		=> "local",
+	"outgoing_mail_server"	=> $smtp_server,
+	"smtp_auth"		=> \@smtp_auth,
+	"smtp_use_TLS"		=> $settings->{"TLS"} || "no"
+    });
+    my $progress_orig	= Progress->set (0);
+    Mail->Write (undef);
+    Progress->set ($progress_orig);
+
+    return ""; # error message?
 }
 
 1;
