@@ -102,6 +102,9 @@ class PackageKitStub
     # stub:    @transaction_iface.SearchName(...)
     @transaction_iface.stubs(:SearchName).returns(true)
 
+    # stub:    @transaction_iface.GetRepoList(...)
+    @transaction_iface.stubs(:GetRepoList).returns(true)
+
   end # stub !
 
   # now mock DBus::Main.run to emit "Package" signals on the SystemBus

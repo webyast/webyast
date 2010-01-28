@@ -1,0 +1,33 @@
+
+Gem::Specification.new do |spec|
+
+# gem name and description
+spec.name	= "webyast-rake-tasks"
+spec.version	= "@VERSION@"
+spec.summary	= "Rake tasks shared by all YaST webservice packages"
+spec.license    = "LGPL v2.1"
+
+# author
+spec.author	= "The YaST Team"
+spec.email	= "yast-devel@opensuse.org"
+spec.homepage	= "http://en.opensuse.org/YaST"
+
+
+# gem content
+spec.files   = Dir["lib/tasks/*.rb", "lib/tasks/*.rake", "COPYING"]
+
+# define LOAD_PATH
+spec.require_path = "lib"
+
+# dependencies
+spec.add_dependency("rake")
+      
+
+# rdoc info
+#specification­.has_rdoc = true
+#specification­.extra_rdoc_fi­les = Dir[‚[A-Z]*‘]
+#specification­.rdoc_options << ‚–title‘ <<  ‚Builder – Easy XML Building‘
+   
+end
+
+

@@ -1,0 +1,45 @@
+-------------------------------------------------------------------
+Mon Jan 25 17:18:11 CET 2010 - mvidner@suse.cz
+
+- renamed yast2-webservice-eulas to webyast-licenses-ws
+
+-------------------------------------------------------------------
+Thu Nov 26 10:59:51 CET 2009 - mkudlvasr@suse.cz
+
+- enhance documentation in doc/README_FOR_APP
+  (part of bnc#554141 fix)
+- version 0.0.5
+
+Thu Nov 12 13:26:20 CET 2009 - mkudlvasr@novell.com
+
+- boolean value check + changed tests
+- version 0.0.4
+
+-------------------------------------------------------------------
+Thu Nov  5 13:04:54 CET 2009 - mkudlvasr@novell.com
+
+- show only the SLES EULA, not openSUSE
+- version 0.0.3
+
+-------------------------------------------------------------------
+Thu Oct 29 12:43:20 CET 2009 - mkudlvasr@novell.com
+
+- changed license to GPL v2 only
+
+-------------------------------------------------------------------
+Thu Oct 22 17:24:31 CEST 2009 - mkudlvasr@novell.com
+
+- added controller tests
+- removed unneeded dependencies
+- 0.0.2
+
+-------------------------------------------------------------------
+Tue Oct 20 18:06:57 CEST 2009 - mkudlvasr@novell.com
+
+- updated config files placement YaST2 -> webyast
+
+-------------------------------------------------------------------
+Wed Sep 30 17:34:07 CEST 2009 - mkudlvasr@novell.com
+
+- initial version 0.0.1
+

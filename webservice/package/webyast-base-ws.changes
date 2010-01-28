@@ -1,0 +1,267 @@
+-------------------------------------------------------------------
+Wed Jan 27 16:11:12 UTC 2010 - lslezak@suse.cz
+
+- workaround for failing post install script (ignore polkit-auth
+  errors), has to be fixed properly
+- 0.1.1
+
+-------------------------------------------------------------------
+Mon Jan 25 17:13:58 CET 2010 - mvidner@suse.cz
+
+- renamed yast2-webservice to webyast-base-ws
+
+-------------------------------------------------------------------
+Wed Jan 13 16:14:48 UTC 2010 - lslezak@suse.cz
+
+- close the running shell after verifying user's login/password
+  (bnc#561642)
+- 0.0.20
+
+-------------------------------------------------------------------
+Mon Jan  4 18:46:06 UTC 2010 - lslezak@suse.cz
+
+- added restdoc cotroller for accessing REST service documentation
+  (bnc#547216)
+
+-------------------------------------------------------------------
+Wed Dec 30 13:19:15 UTC 2009 - lslezak@suse.cz
+
+- cache permission results (bnc#561265)
+
+-------------------------------------------------------------------
+Tue Dec 15 14:28:16 CET 2009 - schubi@suse.de
+
+- unify checking permissions (bnc#555208)
+- nicer date/time format in control center (bnc#558360) 
+
+-------------------------------------------------------------------
+Fri Dec  4 14:28:39 CET 2009 - mvidner@suse.cz
+
+- Require fixes in other packages so that rclighttpd does not kill
+  WebYaST. Simplified the init script as a side effect (bnc#560302).
+ * Require startproc respecting -p, bnc#559534#c44
+ * Require lighttpd whose postun does not mass kill, bnc#559534#c19
+- 0.0.19
+
+-------------------------------------------------------------------
+Wed Dec  2 20:41:21 CET 2009 - kkaempf@suse.de
+
+- trigger service restart on lighttpd update (bnc#559534)
+- 0.0.18
+
+-------------------------------------------------------------------
+Wed Nov 25 16:43:58 CET 2009 - schubi@suse.de
+
+- Waiting for yastwc until he has really written his pid file (bnc#558307)
+- 0.0.17
+
+-------------------------------------------------------------------
+Tue Nov 24 13:04:49 UTC 2009 - lslezak@suse.cz
+
+- mark /srv/www/yastws/config/environment.rb as %config file
+  (bnc#557721)
+- 0.0.16
+
+-------------------------------------------------------------------
+Fri Nov 20 13:42:06 CET 2009 - mvidner@suse.cz
+
+- Added a service definition for SuSEfirewall2 (bnc#545627).
+- 0.0.15
+
+-------------------------------------------------------------------
+Thu Nov 12 12:49:39 UTC 2009 - jreidinger@novell.com
+
+- rename script for granting webyast permissions and move it to
+  correct place (bnc#542077)
+- 0.0.14
+
+-------------------------------------------------------------------
+Tue Nov 10 17:18:31 CET 2009 - jreidinger@suse.cz
+
+- refactor permissions controller 
+    -change it to single resource rest service
+    - move functionality to model, adapt test-suite
+    - remove Scr.Execute from permissions(bnc#472752)
+    - disable setting permissions as it is broken and insecure
+- Uncatched exception is reported in xml to provide real REST
+  response and to allow better report for user
+- remove whole scr library as it is security problem (bnc#472752)
+- 0.0.13
+
+-------------------------------------------------------------------
+Thu Nov  5 16:34:56 CET 2009 - jreidinger@suse.cz
+
+- kkaempf - clarify license
+- schubi - code cleanup of login tests (bnc#542658)
+- 0.0.12
+
+-------------------------------------------------------------------
+Tue Nov  3 17:48:28 CET 2009 - jreidinger@suse.cz
+
+- report uncaught YaST::ConfigFile::NotFoundError as 
+  BackendException (bnc#548721)
+
+-------------------------------------------------------------------
+Tue Nov  3 16:42:39 CET 2009 - schubi@suse.de
+
+- Code cleanup system_check; Code cleanup of plugin tests (bnc#542658)" 
+
+-------------------------------------------------------------------
+Tue Nov  3 14:34:58 CET 2009 - jreidinger@suse.cz
+
+- block only user which has too many attempts, so another user can 
+  login (bnc#550377)
+
+-------------------------------------------------------------------
+Mon Nov  2 16:52:08 CET 2009 - jreidinger@suse.cz
+
+- log all failed login (user and its ip) (bnc#550377)
+
+-------------------------------------------------------------------
+Mon Nov  2 16:12:32 CET 2009 - jreidinger@suse.cz
+
+- add brute force attack protection (bnc#550377)
+
+-------------------------------------------------------------------
+Thu Oct 29 12:37:42 CET 2009 - mvidner@suse.cz
+
+- Removed avahi (zeroconf) usage.
+- 0.0.11
+
+-------------------------------------------------------------------
+Thu Oct 29 10:55:32 CET 2009 - jreidinger@suse.cz
+
+- generate secret key for session during installation (bnc#550635)
+- 0.0.10
+
+-------------------------------------------------------------------
+Wed Oct 28 14:03:41 CET 2009 - kkaempf@suse.de
+
+- Tighten parameter checks in permission_controller
+
+-------------------------------------------------------------------
+Wed Oct 28 13:24:00 UTC 2009 - dmacvicar@suse.de
+
+- better error messages (bnc#550033)
+
+-------------------------------------------------------------------
+Wed Oct 28 13:05:14 CET 2009 - schubi@suse.de
+
+- Simplified starting script.           
+- Fixed: Race condition in init scripts (bnc#550340)
+
+-------------------------------------------------------------------
+Mon Oct 26 15:49:52 CET 2009 - kkaempf@suse.de
+
+- Enforce rubygem-rails 2.3.4
+
+-------------------------------------------------------------------
+Fri Oct 23 14:42:00 CEST 2009 - jreidinger@suse.cz
+
+- fix unescaped shell param in login (bnc#514382)
+- improve readme for generated documentation
+-  0.0.9
+
+-------------------------------------------------------------------
+Thu Oct 22 17:18:59 CEST 2009 - jreidinger@suse.cz
+
+- render uncaught exception as text to easy frontend display
+  (bnc#549132) 
+
+-------------------------------------------------------------------
+Tue Oct 20 17:05:00 CEST 2009 - jreidinger@suse.cz
+
+- change default configuration path to /etc/webyast 
+  (bnc#547614)
+- 0.0.8
+
+-------------------------------------------------------------------
+Tue Oct 20 14:57:53 CEST 2009 - jreidinger@suse.cz
+
+- define constant for used paths (bnc#545626)
+- lslezak,kkampf - fix build and hudson tests
+- schubi - ensure correct path in routing
+- lslezak - handle missing directory
+- mkudlvasr - enforce eula requirements
+- kkampf - don't fail on non-suse system
+- 0.0.7
+
+-------------------------------------------------------------------
+Thu Oct 15 13:45:03 CEST 2009 - lslezak@suse.cz
+
+- build fix - do not package non-existing vendor/ directory
+
+-------------------------------------------------------------------
+Fri Oct  9 09:35:39 CEST 2009 - mvidner@suse.cz
+
+- Using TCP ports 4984 (REST), 54984 (UI).
+- 0.0.6
+
+-------------------------------------------------------------------
+Wed Oct  7 19:59:58 CEST 2009 - lslezak@suse.cz
+
+- Fixed static overlay when running in lighttpd server (bnc#544355)
+- 0.0.5
+
+-------------------------------------------------------------------
+Tue Sep 29 10:13:45 CEST 2009 - schubi@suse.de
+
+- version 0.0.4 
+
+-------------------------------------------------------------------
+Thu Jul 23 12:41:40 CEST 2009 - mvidner@suse.cz
+
+- Repackaged with new webservice-tasks, omitting rails_rcov.
+  Klaus Kämpf (3):
+      Remove rcov from BuildRequires, tests aren't run during build
+      Fix package install
+      Explain why there's a conflict with gamin
+  Martin Vidner (1):
+      Let system_check show up in rake -T.
+- 0.0.3
+
+-------------------------------------------------------------------
+Wed Jul 22 17:01:46 CEST 2009 - mvidner@suse.cz
+
+- Too many changes. Please release often!
+    55  Klaus Kämpf
+    21  Stefan Schubert
+    14  Duncan Mac-Vicar P
+     7  Ladislav Slezak
+     6  Josef Reidinger
+     6  Martin Vidner
+     1  Jiří Šrain
+     1  Stanislav Visnovsky
+- 0.0.2
+
+-------------------------------------------------------------------
+Fri May 15 15:14:45 CEST 2009 - schubi@suse.de
+
+- new interface definitions
+- Testcase mechanism
+- plugin machanism
+- reset version to 0.0.1
+
+-------------------------------------------------------------------
+Tue Mar 31 13:11:49 CEST 2009 - schubi@suse.de
+
+- remove not needed activeRecords like user, patches,...
+- version 1.0.1-1 
+
+-------------------------------------------------------------------
+Thu Jan 29 18:09:45 CET 2009 - schubi@suse.de
+
+- removed old layout stuff, bugfixes, update doc
+- version 1.0.0-2 
+
+-------------------------------------------------------------------
+Wed Oct 22 17:04:50 CEST 2008 - schubi@suse.de
+
+- added policies
+- some API changes 
+
+-------------------------------------------------------------------
+Tue Sep  9 13:43:29 CEST 2008 - schubi@suse.de
+
+- initial 
+
