@@ -28,7 +28,7 @@ class LogsController < ApplicationController
   def show
     permission_check("org.opensuse.yast.system.status.read")
     @logs = Log.find(params[:id])
-    @logs.evaluate_content(params[:lines] || 5)
+    @logs.evaluate_content(params[:pos_begin], params[:lines])
     render :show    
   end
 

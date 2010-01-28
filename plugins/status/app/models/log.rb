@@ -10,7 +10,7 @@ class Log
   attr_reader :id
   attr_reader :path
   attr_reader :description
-  attr_reader :value
+  attr_reader :data
 
   CONFIGURATION_FILE = "logs.yml"
   VENDOR_DIR = "vendor"
@@ -30,11 +30,11 @@ class Log
   end
 
   # initialize on element
-  def initialize(key, value)
+  def initialize(key, val)
     @id = key
-    @path = value["path"]
-    @description = value["description"]
-    @value = ""
+    @path = val["path"]
+    @description = val["description"]
+    @data = {}
   end
 
   #
@@ -65,14 +65,14 @@ class Log
   #
   # evaluate log lines
   # 
-  def evaluate_content(lines = DEFAULT_LINES)
-    @value = YastService.Call("LogFile::Read", ["s",id], ["s",lines.to_s])
-    if @value=="___WEBYAST___INVALID"
+  def evaluate_content(pos_begin = 0, lines = DEFAULT_LINES)
+    @data = YastService.Call("LogFile::Read", ["s",id], ["s",pos_begin.to_s], ["s",lines.to_s])
+    if @data["`value"]=="___WEBYAST___INVALID"
       Rails.logger.error "invalid id #{id} with path #{path}"
       raise "Cannot Read logfiles of #{path}"
     end
-#    Rails.logger.info @value
-    @value
+#    Rails.logger.info @data.inspect
+    @data
   end
 
   # converts the graph to xml
@@ -83,7 +83,10 @@ class Log
       xml.id id
       xml.path path
       xml.description description
-      xml.value value unless value.blank?
+      xml.content do
+        xml.value data["`value"]
+        xml.position data["`position"]
+      end unless data.blank?
     end
   end
 
