@@ -135,14 +135,14 @@ Thu Oct 29 10:55:32 CET 2009 - jreidinger@suse.cz
 - 0.0.10
 
 -------------------------------------------------------------------
-Wed Oct 28 14:03:41 CET 2009 - kkaempf@suse.de
-
-- Tighten parameter checks in permission_controller
-
--------------------------------------------------------------------
 Wed Oct 28 13:24:00 UTC 2009 - dmacvicar@suse.de
 
 - better error messages (bnc#550033)
+
+-------------------------------------------------------------------
+Wed Oct 28 14:03:41 CET 2009 - kkaempf@suse.de
+
+- Tighten parameter checks in permission_controller
 
 -------------------------------------------------------------------
 Wed Oct 28 13:05:14 CET 2009 - schubi@suse.de

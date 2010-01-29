@@ -1,4 +1,9 @@
 -------------------------------------------------------------------
+Tue Feb  2 16:24:57 CET 2010 - mvidner@suse.cz
+
+- renamed yast2-webservice-users to webyast-users-ws
+
+-------------------------------------------------------------------
 Tue Sep 29 11:57:57 CEST 2009 - schubi@suse.de
 
 - version 0.0.2 

@@ -20,6 +20,7 @@ module LogFile
     path = parsed[id]["path"]
     p_begin = pos_begin.to_i rescue 1 #if someone pass type which doesn't have to_i
     lcount = lines.to_i rescue 50 #if someone pass type which doesn't have to_i
+    lcount = 50 if lcount<=0
     ret = `wc -l #{path}`
     file_length = ret.split()[0].to_i rescue 0 #if someone pass type which doesn't have to_i
     if p_begin > 0 && p_begin < file_length-lcount

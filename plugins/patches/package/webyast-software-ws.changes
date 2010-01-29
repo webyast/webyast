@@ -1,4 +1,9 @@
 -------------------------------------------------------------------
+Tue Feb  2 15:50:01 CET 2010 - schubi@suse.de
+
+- adapt to new PackageKit version for 11.2 (bnc #572159) 
+
+-------------------------------------------------------------------
 Wed Jan 27 13:59:41 UTC 2010 - lslezak@suse.cz
 
 - added repository manager service

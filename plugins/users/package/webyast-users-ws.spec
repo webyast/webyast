@@ -1,5 +1,5 @@
 #
-# spec file for package yast2-webservice-users (Version 0.1)
+# spec file for package webyast-users-ws (Version 0.1)
 #
 # Copyright (c) 2008 SUSE LINUX Products GmbH, Nuernberg, Germany.
 # This file and all modifications and additions to the pristine
@@ -9,7 +9,9 @@
 #
 
 
-Name:           yast2-webservice-users
+Name:           webyast-users-ws
+Provides:       yast2-webservice-users = %{version}
+Obsoletes:      yast2-webservice-users < %{version}
 PreReq:         yast2-webservice
 License:	GPL v2 only
 Group:          Productivity/Networking/Web/Utilities
@@ -61,7 +63,9 @@ rm -rf $RPM_BUILD_ROOT
 #
 # granting all permissions for root 
 #
-/usr/sbin/grantwebyastrights --user root --action grant > /dev/null
+/usr/sbin/grantwebyastrights --user root --action grant > /dev/null || :
+# and for yastws
+/usr/sbin/grantwebyastrights --user %{pkg_user} --action grant > /dev/null ||:
 
 %files 
 %defattr(-,root,root)

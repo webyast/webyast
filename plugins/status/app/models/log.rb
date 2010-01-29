@@ -39,12 +39,11 @@ class Log
 
   #
   # find 
-  # LOG.find(:all, check_error)
-  # LOG.find(id, check_error) 
+  # LOG.find(:all)
+  # LOG.find(id) 
   # "id" could be the log group (system,...)
-  # "check_error" check if ther is any error reported in the logfile(default: false)
   #
-  def self.find(what, check_error = false)
+  def self.find(what)
     config = parse_config
     ret = []
     return ret if config==nil
@@ -71,7 +70,7 @@ class Log
       Rails.logger.error "invalid id #{id} with path #{path}"
       raise "Cannot Read logfiles of #{path}"
     end
-#    Rails.logger.info @data.inspect
+    Rails.logger.info @data.inspect
     @data
   end
 
