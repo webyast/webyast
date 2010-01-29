@@ -77,11 +77,7 @@ class Systemtime < BaseModel::Base
     @timezones = @timezones.clone
     #transform hash before serialization
     @timezones.each do |zone|
-      newentry = []
-      zone["entries"].each do |k,v|
-        newentry << { "id" => k, "name" => v }
-      end
-      zone["entries"] = newentry
+      zone["entries"] = zone["entries"].collect {|k,v| { "id" => k, "name" => v } }
     end
     res = orig_to_xml options
     @timezones = tmp
