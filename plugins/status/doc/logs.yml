@@ -2,6 +2,10 @@
 # log_file_name:
 #	path: path to log file to be monitored
 #	description: file description shown in Status module
+#
+# This file is located in /etc/webyast/vendor/logs.yml
+#
+
 
 system:
   path: /var/log/messages
