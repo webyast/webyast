@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<log><id>system</id><path>/var/log/messages</path><description>System messages</description><content><value>Jan 28 12:04:27 f95 avahi-daemon[9245]: Received response from host 10.10.4.228 with invalid source port 33184 on interface 'eth0.0'
+Jan 28 12:04:28 f95 avahi-daemon[9245]: Received response from host 10.10.4.228 with invalid source port 33184 on interface 'eth0.0'
+</value><position>260</position></content></log>
