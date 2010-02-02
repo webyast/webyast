@@ -215,7 +215,15 @@ public
       ok = false
       dbusloop.quit
     end
-    transaction_iface.UpdatePackages([pk_id])
+    if transaction_iface.methods["UpdatePackages"].params.size == 2 &&
+       transaction_iface.methods["UpdatePackages"].params[0][0] == "only_trusted"
+      #PackageKit of 11.2
+      transaction_iface.UpdatePackages(true,  #only_trusted
+                                                              [pk_id])
+    else
+      #PackageKit older versions like SLES11
+      transaction_iface.UpdatePackages([pk_id])
+    end
 
     dbusloop.run
     packagekit_iface.SuggestDaemonQuit
