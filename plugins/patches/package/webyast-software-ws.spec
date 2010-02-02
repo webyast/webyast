@@ -17,15 +17,16 @@ PreReq:         yast2-webservice
 # but here we use a recent feature of DBus::Main.quit
 Requires:       ruby-dbus >= 0.2.9
 
-%if 0%{?suse_version} == 0 || %suse_version > 1120
+%if 0%{?suse_version} == 0 || 0%{?suse_version} > 1120
 # openSUSE-11.3 (Factory) or newer
 Requires:       PackageKit >= 0.5.1-6
-%else if %suse_version == 1120
+%if 0%{?suse_version} == 1120
 # openSUSE-11.2
 Requires:       PackageKit >= 0.5.1-4
 %else
 # openSUSE-11.1 or SLES11
 Requires:       PackageKit >= 0.3.14-3
+%endif
 %endif
 
 License:	GPL v2 only
