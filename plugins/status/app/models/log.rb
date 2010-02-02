@@ -71,7 +71,7 @@ class Log
       Rails.logger.error "invalid id #{id} with path #{path}"
       raise "Cannot Read logfiles of #{path}"
     end
-#    Rails.logger.info @data.inspect
+    Rails.logger.info @data.inspect
     @data
   end
 
