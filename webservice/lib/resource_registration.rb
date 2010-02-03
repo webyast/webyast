@@ -141,7 +141,9 @@ public
 	      toplevel = ns
 	    end
 	  end
-	  params = [ name, { :controller => namespaces.join("/"), :except => [ :new, :edit ] } ]
+	  params = [ name, { :controller => namespaces.join("/"), :except => [ :new, :edit ],
+	    :requirements => {:id => /[^\/]*(?=\.html|\.xml|\.json)|.+/ } } ]
+
 	  if implementation[:singular]
 	    toplevel.resource *params
 	  else
