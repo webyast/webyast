@@ -9,10 +9,12 @@ class Service
   attr_accessor :name
   attr_accessor :status
   attr_accessor :description
+  attr_accessor :summary
 
   def initialize(name)
     @name = name
     @description	= ""
+    @summary		= ""
   end
 
   private
@@ -51,7 +53,7 @@ class Service
 	"runlevel"	=> [ "i", rl ],
 	"read_status"	=> [ "b", read_status],
 	"custom"	=> [ "b", params.has_key?("custom")],
-#	"shortdescription"	=> [ "b", true],
+	"shortdescription"	=> [ "b", true],
 	"description"	=> [ "b", true]
     }
 	
@@ -64,6 +66,7 @@ class Service
 	  service	= Service.new(s["name"])
 	  service.status= s["status"] if s.has_key?("status")
 	  service.description	= s["description"] if s.has_key?("description")
+	  service.summary	= s["shortdescription"] if s.has_key?("shortdescription")
 #	  service.description	= s["shortdescription"] if s.has_key?("shortdescription") && !s["shortdescription"].empty?
 	  Rails.logger.debug "service: #{service.inspect}"
 	  services << service
@@ -116,6 +119,7 @@ class Service
     xml.service do
       xml.name name
       xml.description description
+      xml.summary summary
       xml.status status, {:type => "integer"}
     end  
   end
