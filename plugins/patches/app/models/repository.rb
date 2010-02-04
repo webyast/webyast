@@ -68,7 +68,7 @@ class Repository
             when 'keeppackages'
               @keep_packages = (value == 'true' || value == '1')
             when 'priority'
-              if value.match /'[0-9]+'/
+              if value.match /[0-9]+/
                 @priority = value.to_i
               else
                 Rails.logger.error "Non-number value for priority key: #{value}"
@@ -113,6 +113,9 @@ class Repository
 
     # set name
     Resolvable.execute('RepoSetData', [@id, 'name', @name.to_s])
+
+    # set name
+    Resolvable.execute('RepoSetData', [@id, 'keep', @keep_packages.to_s])
 
     return true
   end
