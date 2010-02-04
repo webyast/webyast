@@ -1,4 +1,9 @@
 -------------------------------------------------------------------
+Thu Feb  4 15:46:20 CET 2010 - jdsn@suse.de
+
+- adding recommends for openssl-certs to spec file
+
+-------------------------------------------------------------------
 Mon Jan 25 17:23:44 CET 2010 - mvidner@suse.cz
 
 - renamed yast2-webservice-registration to webyast-registration-ws
