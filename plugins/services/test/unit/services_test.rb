@@ -33,6 +33,7 @@ class ServiceTest < ActiveSupport::TestCase
 	"runlevel" => [ "i", 5 ],
 	"read_status" => [ "b", false],
 	'description' => ['b', true],
+	'shortdescription' => ['b', true],
 	'custom' => ['b', false]}).returns([])
 
     ret = Service.find_all(nil)
@@ -55,6 +56,7 @@ class ServiceTest < ActiveSupport::TestCase
 	"runlevel" => [ "i", 5 ],
 	"read_status" => [ "b", false],
 	'description' => ['b', true],
+	'shortdescription' => ['b', true],
 	'custom' => ['b', false]}).returns(srv)
 
     ret = Service.find_all(Hash.new)
