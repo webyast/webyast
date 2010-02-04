@@ -12,10 +12,14 @@
 Name:           webyast-software-ws
 Provides:       yast2-webservice-patches = %{version}
 Obsoletes:      yast2-webservice-patches < %{version}
+
+# for testing
+BuildRequires:  ruby-dbus > 0.2.11
+
 PreReq:         yast2-webservice
 # ruby-dbus is required by yast2-webservice already
 # but here we use a recent feature of DBus::Main.quit
-Requires:       ruby-dbus >= 0.2.9
+Requires:       ruby-dbus > 0.2.11
 
 %if 0%{?suse_version} == 0 || 0%{?suse_version} > 1120
 # openSUSE-11.3 (Factory) or newer
