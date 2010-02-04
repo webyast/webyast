@@ -1,5 +1,5 @@
 #
-# Testing PackageKit via D-Bus
+# Testing PackageKit access via D-Bus
 #
 # *** This test requires a 'live' system with D-Bus running ***
 #
