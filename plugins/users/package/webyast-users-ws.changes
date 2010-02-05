@@ -1,4 +1,9 @@
 -------------------------------------------------------------------
+Fri Feb  5 08:42:28 CET 2010 - hh@suse.de
+
+- fixed update user functionality (bnc#577348) 
+
+-------------------------------------------------------------------
 Tue Feb  2 16:24:57 CET 2010 - mvidner@suse.cz
 
 - renamed yast2-webservice-users to webyast-users-ws
