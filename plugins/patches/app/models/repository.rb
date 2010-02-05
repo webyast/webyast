@@ -27,7 +27,7 @@ class Repository
   def self.find(what)
     repositories = Array.new
 
-    PackageKit.execute('GetRepoList', 'NONE', 'RepoDetail') { |id, name, enabled|
+    PackageKit.transact('GetRepoList', 'NONE', 'RepoDetail') { |id, name, enabled|
       Rails.logger.debug "RepoDetail signal received: #{id}, #{name}, #{enabled}"
 
       if what == :all || id == what
@@ -95,27 +95,27 @@ class Repository
     # create a new repository if it does not exist yet
     if !Repository.exists?(@id)
       Rails.logger.info "Adding a new repository '#{@id}': #{self.inspect}"
-      PackageKit.execute('RepoSetData', [@id, 'add', @url])
+      PackageKit.transact('RepoSetData', [@id, 'add', @url])
     else
       Rails.logger.info "Modifying repository '#{@id}': #{self.inspect}"
       # set url
-      PackageKit.execute('RepoSetData', [@id, 'url', @url])
+      PackageKit.transact('RepoSetData', [@id, 'url', @url])
     end
 
     # set enabled flag
-    PackageKit.execute('RepoEnable', [@id, @enabled])
+    PackageKit.transact('RepoEnable', [@id, @enabled])
 
     # set priority
-    PackageKit.execute('RepoSetData', [@id, 'prio', @priority.to_s])
+    PackageKit.transact('RepoSetData', [@id, 'prio', @priority.to_s])
 
     # set autorefresh
-    PackageKit.execute('RepoSetData', [@id, 'refresh', @autorefresh.to_s])
+    PackageKit.transact('RepoSetData', [@id, 'refresh', @autorefresh.to_s])
 
     # set name
-    PackageKit.execute('RepoSetData', [@id, 'name', @name.to_s])
+    PackageKit.transact('RepoSetData', [@id, 'name', @name.to_s])
 
-    # set name
-    PackageKit.execute('RepoSetData', [@id, 'keep', @keep_packages.to_s])
+    # set keep_package
+    PackageKit.transact('RepoSetData', [@id, 'keep', @keep_packages.to_s])
 
     return true
   end
@@ -123,7 +123,7 @@ class Repository
   def destroy
     return false if @id.blank?
 
-    PackageKit.execute('RepoSetData', [@id, 'remove', 'NONE'])
+    PackageKit.transact('RepoSetData', [@id, 'remove', 'NONE'])
     
     return true
   end
