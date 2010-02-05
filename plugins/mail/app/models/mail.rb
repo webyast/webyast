@@ -5,7 +5,7 @@ require 'yast_service'
 # Proviceds access local mail settings (SMTP server to use)
 # Uses YaPI::MailSettings for read and write operations,
 # YaPI::SERVICES, for reloading postfix service.
-class MailSettings
+class Mail
 
   attr_accessor :smtp_server
   attr_accessor :user
@@ -20,7 +20,7 @@ class MailSettings
   # read the settings from system
   def read
     yapi_ret = YastService.Call("YaPI::MailSettings::Read")
-    raise MailSettingsError.new("Cannot read from YaPI backend") if yapi_ret.nil?
+    raise MailError.new("Cannot read from YaPI backend") if yapi_ret.nil?
 
     @smtp_server	= yapi_ret["smtp_server"]
     @user		= yapi_ret["user"]
@@ -54,7 +54,7 @@ class MailSettings
 
     yapi_ret = YastService.Call("YaPI::MailSettings::Write", parameters)
     Rails.logger.debug "YaPI returns: '#{yapi_ret}'"
-    raise MailSettingsError.new(yapi_ret) unless yapi_ret.empty?
+    raise MailError.new(yapi_ret) unless yapi_ret.empty?
     true
   end
 
@@ -62,7 +62,7 @@ class MailSettings
     xml = options[:builder] ||= Builder::XmlMarkup.new(options)
     xml.instruct! unless options[:skip_instruct]
     
-    xml.mail_settings do
+    xml.mail do
       xml.smtp_server smtp_server
       xml.user user
       xml.password password
@@ -78,7 +78,7 @@ class MailSettings
 end
 
 require 'exceptions'
-class MailSettingsError < BackendException
+class MailError < BackendException
 
   def initialize(message)
     @message = message
