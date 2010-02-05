@@ -24,7 +24,7 @@ class Patch < Resolvable
   # find patches using PackageKit
   def self.do_find(what, bg_status = nil)
     patch_updates = Array.new
-    self.execute("GetUpdates", "NONE", "Package", bg_status) { |line1,line2,line3|
+    PackageKit.transact("GetUpdates", "NONE", "Package", bg_status) { |line1,line2,line3|
       columns = line2.split ";"
       if what == :available || columns[1] == what
         update = Patch.new(:resolvable_id => columns[1],
@@ -144,11 +144,6 @@ class Patch < Resolvable
     else
       return do_find(what)
     end
-  end
-
-  # installs this
-  def install
-    self.class.install(id)
   end
 
   # Patch.install(patch)

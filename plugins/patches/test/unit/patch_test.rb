@@ -15,25 +15,25 @@ end
 
 class PatchTest < ActiveSupport::TestCase
 
-  SERVICE = "org.freedesktop.PackageKit"
-  PATH = "/org/freedesktop/PackageKit"
-  TRANSACTION = "#{SERVICE}.Transaction"
-  TID = 100 # transaction id
-
   def setup
     #
     # Patch model stubbing
     #
     
+    @pk_stub = PackageKitStub.new
+    @transaction, @packagekit = PackageKit.connect
+    
     # avoid accessing the rpm db
     Patch.stubs(:mtime).returns(Time.now)
 
-    @pk_stub = PackageKitStub.new
-    
+    Patch.stubs(:open_subprocess).returns(nil)
+
   end
   
   def test_available_patches
-    results = Array.new
+
+#    @transaction.stubs(:GetUpdates).with("NONE").returns(true)
+
     # Available updates in PackageKit format
     #
     # Format:
@@ -42,11 +42,9 @@ class PatchTest < ActiveSupport::TestCase
     # line2: <name>;<id>;<arch>;<repo>
     # line3: <summary>
     #
-    results << PackageKitResult.new( 'important', 'update-test-affects-package-manager;847;noarch;updates-test', 'update-test: Test updates for 11.2')
-    results << PackageKitResult.new( 'security', 'update-test;844;noarch;updates-test', 'update-test: Test update for 11.2')
-
-    signal = "Package"
-    @pk_stub.run signal, results
+    rset = PackageKitResultSet.new "Package", :info => :s, :id => :s, :summary => :s
+    rset << [ 'important', 'update-test-affects-package-manager;847;noarch;updates-test', 'update-test: Test updates for 11.2' ]
+    rset << [ 'security', 'update-test;844;noarch;updates-test', 'update-test: Test update for 11.2' ]
 
     patches = Patch.find(:available)
     assert_equal 2, patches.size
@@ -57,12 +55,9 @@ class PatchTest < ActiveSupport::TestCase
   SCRIPT_OUTPUT_ERROR = read_test_data('patch_test-script_error.out')
 
   def test_available_patches_background_mode_error
-    Patch.stubs(:open_subprocess).returns(nil)
+
     Patch.stubs(:read_subprocess).returns(*SCRIPT_OUTPUT_ERROR)
-
-    # return EOF when all lines are read
-    Patch.stubs(:eof_subprocess?).returns(*(Array.new(SCRIPT_OUTPUT_ERROR.size, false) << true))
-
+    
     # note: Patch.find(:available, {:background => true})
     # cannot be used here, Threading support in test mode doesn't work :-(
     patches = Patch.subprocess_find(:available)
@@ -73,7 +68,6 @@ class PatchTest < ActiveSupport::TestCase
   SCRIPT_OUTPUT_OK = read_test_data('patch_test-script_ok.out')
 
   def test_available_patches_background_mode_ok
-    Patch.stubs(:open_subprocess).returns(nil)
     Patch.stubs(:read_subprocess).returns(*SCRIPT_OUTPUT_OK)
 
     # return EOF when all lines are read

@@ -1,6 +1,6 @@
 # class Repository represents a software repository
 
-require 'resolvable'
+require 'packagekit'
 
 class Repository
 
@@ -27,7 +27,7 @@ class Repository
   def self.find(what)
     repositories = Array.new
 
-    Resolvable.execute('GetRepoList', 'NONE', 'RepoDetail') { |id, name, enabled|
+    PackageKit.execute('GetRepoList', 'NONE', 'RepoDetail') { |id, name, enabled|
       Rails.logger.debug "RepoDetail signal received: #{id}, #{name}, #{enabled}"
 
       if what == :all || id == what
@@ -95,27 +95,27 @@ class Repository
     # create a new repository if it does not exist yet
     if !Repository.exists?(@id)
       Rails.logger.info "Adding a new repository '#{@id}': #{self.inspect}"
-      Resolvable.execute('RepoSetData', [@id, 'add', @url])
+      PackageKit.execute('RepoSetData', [@id, 'add', @url])
     else
       Rails.logger.info "Modifying repository '#{@id}': #{self.inspect}"
       # set url
-      Resolvable.execute('RepoSetData', [@id, 'url', @url])
+      PackageKit.execute('RepoSetData', [@id, 'url', @url])
     end
 
     # set enabled flag
-    Resolvable.execute('RepoEnable', [@id, @enabled])
+    PackageKit.execute('RepoEnable', [@id, @enabled])
 
     # set priority
-    Resolvable.execute('RepoSetData', [@id, 'prio', @priority.to_s])
+    PackageKit.execute('RepoSetData', [@id, 'prio', @priority.to_s])
 
     # set autorefresh
-    Resolvable.execute('RepoSetData', [@id, 'refresh', @autorefresh.to_s])
+    PackageKit.execute('RepoSetData', [@id, 'refresh', @autorefresh.to_s])
 
     # set name
-    Resolvable.execute('RepoSetData', [@id, 'name', @name.to_s])
+    PackageKit.execute('RepoSetData', [@id, 'name', @name.to_s])
 
     # set name
-    Resolvable.execute('RepoSetData', [@id, 'keep', @keep_packages.to_s])
+    PackageKit.execute('RepoSetData', [@id, 'keep', @keep_packages.to_s])
 
     return true
   end
@@ -123,7 +123,7 @@ class Repository
   def destroy
     return false if @id.blank?
 
-    Resolvable.execute('RepoSetData', [@id, 'remove', 'NONE'])
+    PackageKit.execute('RepoSetData', [@id, 'remove', 'NONE'])
     
     return true
   end

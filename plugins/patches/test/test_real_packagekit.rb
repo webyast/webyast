@@ -32,7 +32,16 @@ class ResolvableTest < ActiveSupport::TestCase
     # use the (generic) 'PackageKit' interface
     packagekit_iface = packagekit_proxy[SERVICE]
     assert packagekit_iface
-    
+
+    # Print object interfaces  
+    packagekit_proxy.interfaces.each do |interface|  
+      puts "PackageKit Proxy #{packagekit_proxy.path} provides Interface '#{interface}' with these methods:"  
+      packagekit_proxy[interface].methods.each do |key,value|  
+	rets = value.rets.blank? ? "void" : value.rets
+	puts "\t#{rets} #{key}( #{value.params} )"  
+      end  
+    end  
+
     # get transaction id via this interface
     tid = packagekit_iface.GetTid
     assert tid
@@ -41,6 +50,15 @@ class ResolvableTest < ActiveSupport::TestCase
     transaction_proxy = pk_service.object(tid[0])
     assert transaction_proxy
     transaction_proxy.introspect
+    
+    # Print object interfaces  
+    transaction_proxy.interfaces.each do |interface|  
+      puts "Transaction Proxy #{transaction_proxy.path} provides Interface '#{interface}' with these methods"  
+      transaction_proxy[interface].methods.each do |key,value|  
+	rets = value.rets.blank? ? "void" : value.rets
+	puts "\t#{rets} #{key}( #{value.params} )"
+      end  
+    end  
     
     # use the 'Transaction' interface
     transaction_iface = transaction_proxy[TRANSACTION]

@@ -8,23 +8,46 @@
 require File.join(File.dirname(__FILE__), "test_helper")
 require File.expand_path( File.join("test","dbus_stub"), RailsParent.parent )
 
-class PackageKitResult
 
-  attr_reader :info, :id, :summary
+#
+# A result set as send from PackageKit
+# all members of this set have the same signal
+#
+
+class PackageKitResultSet
+
+  attr_reader :signal, :signature, :elements
+
+  #
+  # Create a PackageKitResultSet
+  #
+  # Example:
+  # set = PackageKitResultSet.new "Package", :info => :s, :id => s, :summary => :s
+  # set << ["info1", "id1", "summary1"]
+  # set << ["info2", "id2", "summary2"]
+  #
   
-  def initialize info, id, summary
-    @info = info
-    @id = id
-    @summary = summary
+  def initialize signal, signature
+    @signal = signal
+    @signature = signature
+    @elements = []
   end
   
-  def to_dbus
-    [ @info.to_s, @id.to_s, @summary.to_s ]
+  def << items
+    raise "Wrong number of items" unless items.size == @signature.size
+    @elements << (items.collect! { |v| v.to_s } )
   end
+  
+  def size
+    @elements.size
+  end
+  
 end
 
-class PackageKitStub
 
+class PackageKitStub
+  @@first = true
+  
   SERVICE = "org.freedesktop.PackageKit"
   PATH = "/org/freedesktop/PackageKit"
   TRANSACTION = "#{SERVICE}.Transaction"
@@ -57,60 +80,63 @@ class PackageKitStub
     #
     @transaction_iface = @pk_stub.interface @packagekit_proxy, TRANSACTION
     
-    # stub:    @transaction_iface.GetUpdates("NONE")
-    @transaction_iface.stubs(:GetUpdates).with("NONE").returns(true)
-    
-    # stub:    @transaction_iface.SearchName(...)
-    @transaction_iface.stubs(:SearchName).returns(true)
+    if @@first
+      @@first = false
 
-    # stub:    @transaction_iface.GetRepoList(...)
-    @transaction_iface.stubs(:GetRepoList).returns(true)
-
-  end # stub !
-
-  # now mock DBus::Main.run to emit "Package" signals on the SystemBus
-  # pass it an Array of 'PackageKitResult's
-  #
-  def run(signal, results)
-    # copy to local variables since instance vars are not(!) accessible inside the 'run' block
-    pks = @pk_service
-    ti = @transaction_iface
-    
-    # alias 'run' as 'orig_run'
-    DBus::Main.class_eval { alias :orig_run :run }
-
-    # Now overlay 'run' with our own implementation
-    # This will fake a sender (via .emit) sending signals
-    # then we call orig_run to process these signals
-    #
-    # Remark: This might look overly complex but emitting the signals
-    #  at PackageKitResult creation does not work. It seems as if the
-    #  buffer (socket?) is flushed so the previously emitted signals are
-    #  not received when calling 'run'.
-    #
-    #  So this implementation presents the only working solution: Emitting
-    #  the signals from inside a faked 'run' and the processing them by
-    #  calling 'orig_run'.
-    #
-    
-    # pass a closure(!) to 'run'
-    DBus::Main.send(:define_method, :run) do
-      sig = DBus::Signal.new(signal)
-      sig.add_param( [ "info", "s" ] )
-      sig.add_param( [ "id", "s" ] )
-      sig.add_param( [ "summary", "s" ] )
-      # this block is executed in DBus::Main context 
-      results.each do |result|
-	# emit(service, obj, intf, sig, *args)
-	DBus::SystemBus.instance.emit(pks, ti.object, ti, sig, *result.to_dbus)
+      # alias 'run' as 'orig_run'
+      DBus::Main.class_eval { alias :orig_run :run }
+      
+      # pass a dummy closure to run, see 'def result=' below
+      DBus::Main.send(:define_method, :run) do
+	return
       end
-      DBus::SystemBus.instance.emit(pks, ti.object, ti, DBus::Signal.new("Finished"))
+
+      ObjectSpace.define_finalizer(self, lambda do |id|
+				      DBus::Main.send(:undef_method, :run)
+				      DBus::Main.class_eval { alias :run :orig_run }
+				    end)
+      end # if @@first
+  end # initialize
+  
+  def result= result_set
+    
+    # create the signal from the signature
+    
+    signal = DBus::Signal.new(result_set.signal)
+    result_set.signature.each do |k,v|
+      signal.add_param( [ k.to_s, v.to_s ] )
+    end
+
+    # copy to local variables since instance vars are not(!) accessible inside the 'run' block
+    stub = @pk_stub
+    bus = @pk_stub.bus
+    service = @pk_service
+    iface_t = @transaction_iface
+    
+      # Now overlay 'run' with our own implementation
+      # This will fake a sender (via .emit) sending signals
+      # then we call orig_run to process these signals
+      #
+      # Remark: This might look overly complex but emitting the signals
+      #  at PackageKitResult creation does not work. It seems as if the
+      #  buffer (socket?) is flushed so the previously emitted signals are
+      #  not received when calling 'run'.
+      #
+      #  So this implementation presents the only working solution: Emitting
+      #  the signals from inside a faked 'run' and the processing them by
+      #  calling 'orig_run'.
+      #
+      
+    DBus::Main.send(:define_method, :run) do
+      result_set.elements.each do |result|
+	# emit(service, obj, intf, sig, *args)
+	bus.emit(service, iface_t.object, iface_t, signal, *result)
+      end
+      bus.emit(service, iface_t.object, iface_t, DBus::Signal.new("Finished"))
+	
       # now call the original 'run' to process the signals we just emitted
       self.orig_run
-      DBus::Main.send(:undef_method, :run)
-      DBus::Main.class_eval { alias :run :orig_run }
     end
-    
   end
-
+  
 end # PackageKitStub
