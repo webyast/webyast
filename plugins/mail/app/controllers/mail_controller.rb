@@ -30,7 +30,7 @@ class MailController < ApplicationController
     if params.has_key? "mail"
       @mail.save(params["mail"])
     else
-      logger.warn "mail_settings hash missing in request"
+      logger.warn "mail hash missing in request"
     end
     show
   end
