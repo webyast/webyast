@@ -1,7 +1,7 @@
 require 'singleton'
 require 'yast_service'
 
-# = MailSettings model
+# = Mail model
 # Proviceds access local mail settings (SMTP server to use)
 # Uses YaPI::MailSettings for read and write operations,
 # YaPI::SERVICES, for reloading postfix service.
