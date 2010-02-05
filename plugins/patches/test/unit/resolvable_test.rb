@@ -21,18 +21,26 @@ class ResolvableTest < ActiveSupport::TestCase
     
     @pk_stub.result = rset
     
-    # stub:    @transaction_iface.SearchName(...)
-    @transaction_iface.stubs(:SearchName).returns(true)
+    # Mock 'GetUpdates' by defining it
+    m = DBus::Method.new("SearchName")
+    m.from_prototype("in repos:s, in name:s")
+    @transaction.methods[m.name] = m
+    class <<@transaction
+      def SearchName repos, name
+	# dummy !
+      end
+    end
   end
 
   # (dummy) test 'SearchName'
   # this mostly tests correct stubbing
   def test_resolvable_search
     count = 0
+    results = @pk_stub.result
     PackageKit.transact( "SearchName", ["installed;~devel", "yast2"], "Package") do |info,id,summary|
-      assert_equal results[count].info, info
-      assert_equal results[count].id, id
-      assert_equal results[count].summary, summary
+      assert_equal results[count][0], info
+      assert_equal results[count][1], id
+      assert_equal results[count][2], summary
       count += 1
     end
     assert_equal results.size, count

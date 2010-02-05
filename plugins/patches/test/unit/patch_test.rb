@@ -45,6 +45,17 @@ class PatchTest < ActiveSupport::TestCase
     rset = PackageKitResultSet.new "Package", :info => :s, :id => :s, :summary => :s
     rset << [ 'important', 'update-test-affects-package-manager;847;noarch;updates-test', 'update-test: Test updates for 11.2' ]
     rset << [ 'security', 'update-test;844;noarch;updates-test', 'update-test: Test update for 11.2' ]
+    @pk_stub.result = rset
+    
+    # Mock 'GetUpdates' by defining it
+    m = DBus::Method.new("GetUpdates")
+    m.from_prototype("in kind:s")
+    @transaction.methods[m.name] = m
+    class <<@transaction
+      def GetUpdates kind
+	# dummy !
+      end
+    end
 
     patches = Patch.find(:available)
     assert_equal 2, patches.size
@@ -57,6 +68,8 @@ class PatchTest < ActiveSupport::TestCase
   def test_available_patches_background_mode_error
 
     Patch.stubs(:read_subprocess).returns(*SCRIPT_OUTPUT_ERROR)
+    # return EOF when all lines are read
+    Patch.stubs(:eof_subprocess?).returns(*(Array.new(SCRIPT_OUTPUT_ERROR.size, false) << true))
     
     # note: Patch.find(:available, {:background => true})
     # cannot be used here, Threading support in test mode doesn't work :-(

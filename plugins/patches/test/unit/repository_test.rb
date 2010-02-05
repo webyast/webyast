@@ -11,38 +11,31 @@ class RepositoryTest < ActiveSupport::TestCase
 
   def setup
     @pk_stub = PackageKitStub.new
+    @transaction, @packagekit = PackageKit.connect
+    
+    rset = PackageKitResultSet.new "Package", :info => :s, :id => :s, :summary => :s
+    rset << ["factory-oss", "FACTORY-OSS", "true"]
+    rset << ["factory-non-oss", "FACTORY-NON-OSS", "false"]
+    
+    @pk_stub.result = rset
+    
+    # Mock 'GetRepoList' by defining it
+    m = DBus::Method.new("GetRepoList")
+    m.from_prototype("in filter:s")
+    @transaction.methods[m.name] = m
+    class <<@transaction
+      def GetRepoList filter
+	# dummy !
+      end
+    end
 
-    # stub:    @transaction_iface.GetRepoList(...)
-    @transaction_iface.stubs(:GetRepoList).returns(true)
-
-    @results = Array.new
-    @results << PackageKitResult.new("factory-oss", "FACTORY-OSS", "true")
-    @results << PackageKitResult.new("factory-non-oss", "FACTORY-NON-OSS", "false")
-
-    @signal = "RepoDetail"
   end
 
   def test_repository_index
-    @pk_stub.run @signal, @results
     repos = Repository.find(:all)
 
     assert_equal repos.size, 2
     assert_equal repos.first.name, "FACTORY-OSS"
-  end
-
-
-  def test_non_existing_repo
-    @pk_stub.run @signal, @results
-    
-    repos = Repository.find('dummy_repo')
-    assert repos.size.zero?
-  end
-
-  def test_one_repo
-    @pk_stub.run @signal, @results
-    
-    repos = Repository.find('factory-oss')
-    assert_equal 1, repos.size
   end
   
 end
