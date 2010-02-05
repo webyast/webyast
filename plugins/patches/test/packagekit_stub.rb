@@ -42,10 +42,14 @@ class PackageKitResultSet
     @elements.size
   end
   
+  def [] idx
+    @elements[idx]
+  end
 end
 
 
 class PackageKitStub
+
   @@first = true
   
   SERVICE = "org.freedesktop.PackageKit"
@@ -98,6 +102,10 @@ class PackageKitStub
       end # if @@first
   end # initialize
   
+  def result
+    @result_set
+  end
+  
   def result= result_set
     
     # create the signal from the signature
@@ -137,6 +145,9 @@ class PackageKitStub
       # now call the original 'run' to process the signals we just emitted
       self.orig_run
     end
+    
+    @result_set = result_set
+
   end
   
 end # PackageKitStub
