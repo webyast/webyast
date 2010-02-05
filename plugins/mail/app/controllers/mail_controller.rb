@@ -1,6 +1,6 @@
-# = Mail Settings controller
+# = Mail controller
 # For configuration of which SMTP server use for sending mails
-class MailSettingsController < ApplicationController
+class MailController < ApplicationController
 
   before_filter :login_required
 
@@ -10,11 +10,11 @@ class MailSettingsController < ApplicationController
   def show
     yapi_perm_check "mailsettings.read"
 
-    @mail = MailSettings.instance
+    @mail = Mail.instance
     @mail.read
 
     respond_to do |format|
-      format.xml  { render :xml => @mail.to_xml(:root => "mail_settings", :dasherize => false, :indent=>2), :location => "none" }
+      format.xml  { render :xml => @mail.to_xml(:root => "mail", :dasherize => false, :indent=>2), :location => "none" }
       format.json { render :json => @mail.to_json, :location => "none" }
     end
   end
@@ -25,10 +25,10 @@ class MailSettingsController < ApplicationController
   def update
     yapi_perm_check "mailsettings.write"
 	
-    @mail = MailSettings.instance
+    @mail = Mail.instance
     @mail.read
-    if params.has_key? "mail_settings"
-      @mail.save(params["mail_settings"])
+    if params.has_key? "mail"
+      @mail.save(params["mail"])
     else
       logger.warn "mail_settings hash missing in request"
     end
