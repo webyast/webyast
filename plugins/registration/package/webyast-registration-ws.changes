@@ -1,0 +1,72 @@
+-------------------------------------------------------------------
+Thu Feb  4 15:46:20 CET 2010 - jdsn@suse.de
+
+- adding recommends for openssl-certs to spec file
+
+-------------------------------------------------------------------
+Mon Jan 25 17:23:44 CET 2010 - mvidner@suse.cz
+
+- renamed yast2-webservice-registration to webyast-registration-ws
+
+-------------------------------------------------------------------
+Wed Nov 18 16:47:37 CET 2009 - jdsn@suse.de
+
+- fix success message of registration
+- version 0.0.8 
+
+-------------------------------------------------------------------
+Sat Nov 14 04:00:37 CET 2009 - jdsn@suse.de
+
+- adaptions for the fix of the internal server error (bnc#553244)
+- version 0.0.7
+
+-------------------------------------------------------------------
+Fri Nov 13 14:04:04 UTC 2009 - jreidinger@novell.com
+
+- adapt to rename of policykit granting script (bnc#554946)
+  (mkudlvasr)
+- 0.0.6
+-------------------------------------------------------------------
+Thu Nov  5 13:42:03 CET 2009 - jdsn@suse.de
+
+- fix backend communication
+- fix parameter handling and xml rendering
+- version 0.0.5 
+
+-------------------------------------------------------------------
+Tue Nov  3 11:33:48 CET 2009 - schubi@suse.de
+
+- do NOT overwrite unrename_keys for HASH class generally; (bnc#551284) 
+
+-------------------------------------------------------------------
+Thu Oct 29 12:31:46 CET 2009 - jdsn@suse.de
+
+- version 0.0.4
+
+-------------------------------------------------------------------
+Thu Oct 29 12:00:08 CET 2009 - schubi@suse.de
+
+- only display missing values during registration
+
+-------------------------------------------------------------------
+Wed Oct 28 14:14:13 CET 2009 - jdsn@suse.de
+
+- better error handling
+- small fixes
+
+-------------------------------------------------------------------
+Mon Oct 26 11:43:42 CET 2009 - schubi@suse.de
+
+- added requirement yast2-registration 
+- version 0.0.3
+
+-------------------------------------------------------------------
+Mon Oct 26 10:10:13 CET 2009 - schubi@suse.de
+
+- first running version 
+
+-------------------------------------------------------------------
+Tue Sep 29 18:44:28 CEST 2009 - jdsn@suse.de
+
+- initial checkin 
+

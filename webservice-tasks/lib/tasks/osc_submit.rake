@@ -1,37 +1,32 @@
 require 'rake'
 
-
-
-desc "Submit package to Yast:Web osc repository"
+desc "Submit package to Yast:Web osc repository (override project via OBS_PROJECT=)"
 task :'osc_submit'  do
-  raise "No package/ directory found" if not File.exist?('package') and File.directory?('package')
-  package_name = ""
-  Dir.glob("package/*.spec").each do |file|
-    package_name = file.gsub( /package\/(.*).spec/, '\1')
-  end
-  puts "package is #{package_name}"
-  raise "cannot determine package name" if package_name.empty?  
-  puts "checking out osc package from build"
-  top_dir = Dir.pwd
+  require File.join(File.dirname(__FILE__), "osc_prepare")
+  
+  obs_project, package_name = osc_prepare
+  
+  puts "checking out package #{package_name} from project #{obs_project}"
+  
   begin
-    system("osc checkout 'YaST:Web' #{package_name}")
+    system("osc checkout '#{obs_project}' #{package_name}")
+    
     #clean www dir and also clean before copy old entries in osc dir to test if package build after remove some file
-    system("rm -vrf 'YaST:Web/#{package_name}/'*")  
-    system("cp -v package/* 'YaST:Web/#{package_name}'")
-    Dir.chdir File.join(Dir.pwd, "YaST:Web", package_name)
-    puts "submiting package"
-    # long running, `foo` would only show output at the end
-    system "osc addremove"
-    system "osc commit -m 'new version'"
-    if $?.exitstatus != 0
-      raise "Failed to submit"
+    system("rm -vrf '#{obs_project}/#{package_name}/'*")  
+    system("cp -v package/* '#{obs_project}/#{package_name}'")
+    
+    Dir.chdir File.join(Dir.pwd, obs_project, package_name) do
+      puts "submitting package..."
+      # long running, `foo` would only show output at the end
+      system "osc addremove"
+#      system "osc commit -m 'new version'"
+      if $?.exitstatus != 0
+        raise "Failed to submit"
+      end
+      puts "New package submitted to #{obs_project}"
     end
-    puts "package built"
   ensure
     puts "cleaning"
-    Dir.chdir top_dir
-    `rm -rf 'YaST:Web'`
+    `rm -rf '#{obs_project}'`
   end
 end
-
-

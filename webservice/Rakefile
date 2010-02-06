@@ -2,6 +2,7 @@
 # for example lib/tasks/capistrano.rake, and they will automatically be available to Rake.
 
 require(File.join(File.dirname(__FILE__), 'config', 'boot'))
+$:.unshift File.join(File.dirname(__FILE__), "..", "webservice-tasks", "lib")
 
 require 'rake'
 require 'rake/testtask'
@@ -39,8 +40,12 @@ task :deploy_local => :"db:migrate" do |t|
   FileUtils.mkdir_p "/var/lib/yastws"
   FileUtils.mkdir_p "/usr/share/yastws"
   FileUtils.install "package/grantwebyastrights", "/usr/sbin", :mode => 0555
-  system "/usr/bin/polkit-auth --user root --grant org.opensuse.yast.module-manager.import > /dev/null"
-  system "/usr/bin/polkit-auth --user root --grant org.freedesktop.policykit.read > /dev/null"
-  system "/usr/bin/polkit-auth --user root --grant org.freedesktop.packagekit.system-update > /dev/null"
+  # add user yastws
+  system "/usr/sbin/groupadd -r yastws &>/dev/null ||:"
+  system "/usr/sbin/useradd  -g yastws -s /bin/false -r -c 'User for YaST-Webservice' -d /var/lib/yastws yastws &>/dev/null ||:"
+  # grant rights to him
+  system "/usr/bin/polkit-auth --user yastws --grant org.opensuse.yast.module-manager.import > /dev/null"
+  system "/usr/bin/polkit-auth --user yastws --grant org.freedesktop.policykit.read > /dev/null"
+  system "/usr/bin/polkit-auth --user yastws --grant org.freedesktop.packagekit.system-update > /dev/null"
 end
 

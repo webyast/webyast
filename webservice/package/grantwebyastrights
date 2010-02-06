@@ -61,7 +61,8 @@ end
 
 def granted_perms(user)
   perms = `polkit-auth --user '#{user}' --explicit`
-  raise "polkit-auth failed with ret code #{$?.exitstatus}. Output: #{perms}" unless $?.exitstatus.zero?
+  #do NOT raise if an error happens here cause while the package installation this call returns always an error
+  #  raise "polkit-auth failed with ret code #{$?.exitstatus}. Output: #{perms}" unless $?.exitstatus.zero?
   perms = perms.split "\n"
   perms.reject! { |perm| not webyast_perm?(perm) }
   return perms
@@ -83,7 +84,9 @@ begin
     non_granted.each do |policy|
       STDOUT.puts "granting: #{policy}"
       out = `polkit-auth --user '#{user}' --grant '#{policy}'`
-      raise "Granting permissions failed with ret code #{$?.exitstatus}. Output: #{out}" unless $?.exitstatus.zero?
+      #do NOT raise if an error happens here cause while the package installation this call can return an error for already existing 
+      #permissions ( It is not possible to check this before)
+      #raise "Granting permissions failed with ret code #{$?.exitstatus}. Output: #{out}" unless $?.exitstatus.zero?
     end
   when "show"
     STDOUT.puts granted_perms(user).join("\n")

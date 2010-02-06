@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<logs type="array">
+  <log>
+    <id>system</id>
+    <path>/var/log/messages</path>
+    <description>System messages</description>
+  </log>
+</logs>

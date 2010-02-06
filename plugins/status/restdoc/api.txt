@@ -92,4 +92,24 @@ XmlBody: memory
   
 XmlResult: memory
 
+GET /logs
 
+  Getting the information which logfiles are available. This call does not return the content of a file.
+
+  CURL Example: curl -u user http://localhost:4984/logs.xml
+
+XmlResult: logs
+
+GET /logs/<log-id>?<pos_begin>=value&<lines>=value
+
+  Getting the content of a file.
+
+  <b>log-id</b>: File id. Defined in the description file.
+
+  <b>pos_begin</b>: Line number of the requested text.
+
+  <b>lines</b>: Number of lines which are requested.
+
+  CURL Example: curl -u user http://localhost:4984/logs/system.xml?pos_begin=260;lines=2
+
+XmlResult: system

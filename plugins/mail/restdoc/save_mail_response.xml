@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mail>
+  <smtp_server>smtp.domain.com</smtp_server>
+  <user>tux</user>
+  <password>linux</password>
+  <transport_layer_security>yes</transport_layer_security>
+</mail>

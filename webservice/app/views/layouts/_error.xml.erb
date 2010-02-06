@@ -1,4 +1,6 @@
 <error>
-  <code><%=code-%></code>
-  <message><%=message-%></message>
+  <% xm = Builder::XmlMarkup.new -%>
+  <% xm.code code -%>
+  <% xm.message message -%>
+  <%= xm %>
 </error>

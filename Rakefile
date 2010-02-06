@@ -8,16 +8,27 @@ def sudo(cmd)
   %x[sudo -p "Password: " #{cmd}]
 end
 
+#
 # recognized variables
+#
 vars = ['PKG_BUILD', 'RCOV_PARAMS', 'RAILS_ENV', 'RAILS_PARENT']
 ENV['RAILS_PARENT'] = File.join(Dir.pwd, 'webservice')
 
 env = ENV.map { |key,val| (ENV[key] && vars.include?( key )) ? %(#{key}="#{ENV[key]}") : nil }.compact.join(' ')
 
+#
+# Pick up the plugins as PROJECTS
+#
+
 plugins = Dir.glob('plugins/*')#.reject{|x| ['users'].include?(File.basename(x))}
 PROJECTS = ['webservice', *plugins]
+
 desc 'Run all tests by default'
 task :default => :test
+
+#
+# list of common tasks, being run for every plugin
+#
 
 %w(test rdoc pgem package release install install_policies check_syntax package-local buildrpm buildrpm-local test:test:rcov restdoc deploy_local).each do |task_name|
   desc "Run #{task_name} task for all projects"
@@ -73,6 +84,8 @@ task :grant_policies do |t|
   puts "You must deploy webservice first!" and return unless File.exists? "/usr/sbin/grantwebyastrights"
   system "/usr/sbin/grantwebyastrights --user root --action grant >/dev/null 2>&1"
   raise "Error on execute '/usr/sbin/grantwebyastrights --user root --action grant '" if $?.exitstatus != 0
+  system "/usr/sbin/grantwebyastrights --user yastws --action grant >/dev/null 2>&1"
+  raise "Error on execute '/usr/sbin/grantwebyastrights --user yastws --action grant '" if $?.exitstatus != 0
 end
 
 desc "Deploy for development - create dirs, install configuration files and custom yast modules. Then install and update PolKit policies for root."

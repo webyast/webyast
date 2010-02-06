@@ -1,7 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<mail_settings>
-  <smtp_server>smtp.domain.com</smtp_server>
-  <user>bb</user>
-  <password>q</password>
-  <transport_layer_security>MAY</transport_layer_security>
-</mail_settings>

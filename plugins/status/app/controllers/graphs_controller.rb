@@ -41,6 +41,7 @@ class GraphsController < ApplicationController
 
   # GET /graphs/1
   # GET /graphs/1.xml
+  #
   def show
     permission_check("org.opensuse.yast.system.status.read")
     @graph = Graph.find(params[:id], params[:checklimits] || false)
