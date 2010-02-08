@@ -34,7 +34,7 @@ class RepositoriesController < ApplicationController
       render ErrorResult.error(404, 1, "Missing parameters for repository #{params[:id]}") and return
     end
 
-    @repo = Repository.new(param[:id], param[:name], (param[:enabled] == 'true' || param[:enabled] == '1'))
+    @repo = Repository.new(params[:id], param[:name], (param[:enabled] == 'true' || param[:enabled] == '1'))
 
     @repo.autorefresh = param[:autorefresh] == 'true' || param[:enabled] == '1'
     @repo.keep_packages = param[:keep_packages] == 'true' || param[:keep_packages] == '1'
@@ -57,7 +57,7 @@ class RepositoriesController < ApplicationController
       render ErrorResult.error(404, 1, "Missing parameters for repository #{params[:id]}") and return
     end
 
-    @repo = Repository.new(param[:id].to_s, param[:name].to_s, param[:enabled])
+    @repo = Repository.new(params[:id].to_s, param[:name].to_s, param[:enabled])
 
     unless @repo.save
       render ErrorResult.error(404, 2, "Cannot save repository '#{@repo.id}'") and return
