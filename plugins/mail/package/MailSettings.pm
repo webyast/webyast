@@ -62,11 +62,13 @@ sub Write {
 	"smtp_auth"		=> \@smtp_auth,
 	"smtp_use_TLS"		=> $settings->{"TLS"} || "no"
     });
-    my $progress_orig	= Progress->set (0);
-    Mail->Write (undef);
-    Progress->set ($progress_orig);
-
-    return ""; # error message?
+    Mail->WriteGeneral ();
+    Mail->WriteSmtpAuth ();
+    return "Error writing config file(s)." unless Mail->WriteFlush ();
+    return "Error running SuSEconfig." unless Mail->WriteSuSEconfig ();
+    Mail->WriteServices (); # return value could be broken, bnc#577932
+    
+    return "";
 }
 
 1;
