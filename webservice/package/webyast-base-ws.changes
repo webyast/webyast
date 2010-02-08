@@ -1,4 +1,11 @@
 -------------------------------------------------------------------
+Mon Feb  8 13:46:34 CET 2010 - schubi@suse.de
+
+- Checking for already granted permission does not work while
+  installing the package in the build environment (bnc#576071)
+- 0.1.2
+
+-------------------------------------------------------------------
 Wed Feb  3 14:07:20 UTC 2010 - lslezak@suse.cz
 
 - improved routing: allow dots in :id
