@@ -23,6 +23,7 @@ Source:         www.tar.bz2
 BuildRoot:      %{_tmppath}/%{name}-%{version}-build
 BuildArch:      noarch
 BuildRequires:  rubygem-mocha
+Recommends:     openssl-certs
 
 # YaST2/modules/YSR.pm  
 %if 0%{?suse_version} == 0 || %suse_version > 1110  

@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Fri Feb  5 09:56:12 CET 2010 - jsuchome@suse.cz
+
+- plugin renamed to mail
+- 0.1.2 
+
+-------------------------------------------------------------------
 Wed Jan 27 13:22:57 CET 2010 - jsuchome@suse.cz
 
 - used different YaST API (Mail.ycp), which is able to create

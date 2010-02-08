@@ -16,7 +16,7 @@ PreReq:         yast2-webservice
 License:	GPL v2 only
 Group:          Productivity/Networking/Web/Utilities
 Autoreqprov:    on
-Version:        0.1.1
+Version:        0.1.2
 Release:        0
 Summary:        YaST2 - Webservice - Mail Settings
 Source:         www.tar.bz2
@@ -45,7 +45,7 @@ Requires:       yast2-mail >= 2.17.4
 
 #
 %define pkg_user yastws
-%define plugin_name mailsettings
+%define plugin_name mail
 #
 
 
@@ -61,7 +61,7 @@ Authors:
 
 %build
 # build restdoc documentation
-mkdir -p public/mail_settings/restdoc
+mkdir -p public/mail/restdoc
 export RAILS_PARENT=/srv/www/yastws
 env LANG=en rake restdoc
 
@@ -116,7 +116,7 @@ rm -rf $RPM_BUILD_ROOT
 /usr/share/YaST2/modules/YaPI/MailSettings.pm
 %dir /usr/share/PolicyKit
 %dir /usr/share/PolicyKit/policy
-%attr(644,root,root) %config /usr/share/PolicyKit/policy/org.opensuse.yast.modules.yapi.%{plugin_name}.policy
+%attr(644,root,root) %config /usr/share/PolicyKit/policy/org.opensuse.yast.modules.yapi.mailsettings.policy
 %doc COPYING
 
 %changelog

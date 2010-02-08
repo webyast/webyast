@@ -83,7 +83,7 @@ class User
 
   def save
     config = { "type" => [ "s", "local" ],
-      "uid" => [ "s", @user.uid ]
+      "uid" => [ "s", self.uid ]
     }
     data = retrieve_data
     ret = YastService.Call("YaPI::USERS::UserModify", config, data)

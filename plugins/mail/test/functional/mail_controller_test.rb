@@ -2,16 +2,16 @@ require File.expand_path(File.dirname(__FILE__) + "/../test_helper")
 require 'test/unit'
 
 
-class MailSettingsControllerTest < ActionController::TestCase
+class MailControllerTest < ActionController::TestCase
   fixtures :accounts
 
   def setup
-    @controller = MailSettingsController.new
+    @controller = MailController.new
     @request = ActionController::TestRequest.new
     # http://railsforum.com/viewtopic.php?id=1719
     @request.session[:account_id] = 1 # defined in fixtures
 
-    @model = MailSettings.instance
+    @model = Mail.instance
     @model.stubs(:read).returns(true)
   end
   
@@ -24,19 +24,19 @@ class MailSettingsControllerTest < ActionController::TestCase
     # is returned a valid XML?
     ret_hash = Hash.from_xml(ret.body)
     assert ret_hash
-    assert ret_hash.has_key?("mail_settings")
-    assert ret_hash["mail_settings"].has_key?("smtp_server")
+    assert ret_hash.has_key?("mail")
+    assert ret_hash["mail"].has_key?("smtp_server")
   end
 
   test "put success" do
     @model.stubs(:save).with({'smtp_server' => "newserver"}).returns(true)
 
-    ret = put :update, :mail_settings => {:smtp_server => "newserver"}
+    ret = put :update, :mail => {:smtp_server => "newserver"}
     ret_hash = Hash.from_xml(ret.body)
 
     assert_response :success
     assert ret_hash
-    assert ret_hash.has_key?("mail_settings")
+    assert ret_hash.has_key?("mail")
   end
 
 # shame, YaPI currently always succeedes

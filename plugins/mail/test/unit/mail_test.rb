@@ -1,11 +1,11 @@
 require File.expand_path(File.dirname(__FILE__) + "/../test_helper")
 
-require 'mail_settings'
+require 'mail'
 
-class MailSettingsTest < ActiveSupport::TestCase
+class MailTest < ActiveSupport::TestCase
 
   def setup    
-    @model = MailSettings.instance
+    @model = Mail.instance
     YastService.stubs(:Call).with('YaPI::MailSettings::Read').returns({ })
     @model.read
   end

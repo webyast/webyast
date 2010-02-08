@@ -36,7 +36,7 @@ Requires:       PackageKit >= 0.3.14-3
 License:	GPL v2 only
 Group:          Productivity/Networking/Web/Utilities
 Autoreqprov:    on
-Version:        0.1.1
+Version:        0.1.2
 Release:        0
 Summary:        YaST2 - Webservice - Patches
 Source:         www.tar.bz2
@@ -48,7 +48,7 @@ BuildArch:      noarch
 
 #
 %define pkg_user yastws
-%define plugin_name patches
+%define plugin_name software
 #
 
 
@@ -110,7 +110,7 @@ polkit-auth --user %{pkg_user} --grant org.freedesktop.packagekit.system-sources
 /srv/www/%{pkg_user}/vendor/plugins/%{plugin_name}/scripts
 /srv/www/%{pkg_user}/vendor/plugins/%{plugin_name}/config
 /srv/www/%{pkg_user}/vendor/plugins/%{plugin_name}/tasks
-%attr(644,root,root) %config /usr/share/PolicyKit/policy/org.opensuse.yast.system.%{plugin_name}.policy
+%attr(644,root,root) %config /usr/share/PolicyKit/policy/org.opensuse.yast.system.patches.policy
 %attr(644,root,root) %config /usr/share/PolicyKit/policy/org.opensuse.yast.system.packages.policy
 %attr(644,root,root) %config /usr/share/PolicyKit/policy/org.opensuse.yast.system.repositories.policy
 %doc COPYING

@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Fri Feb  5 10:54:20 UTC 2010 - lslezak@suse.cz
+
+- renamed plugin directory from 'patches' to 'software'
+- 0.1.2
+
+-------------------------------------------------------------------
 Tue Feb  2 15:50:01 CET 2010 - schubi@suse.de
 
 - adapt to new PackageKit version for 11.2 (bnc #572159) 
