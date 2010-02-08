@@ -10,22 +10,22 @@ require 'repository'
 class RepositoryTest < ActiveSupport::TestCase
 
   def setup
-    @pk_stub = PackageKitStub.new
+    @pkit_stub = PackageKitStub.new
     @transaction, @packagekit = PackageKit.connect
-    
-    rset = PackageKitResultSet.new "Package", :info => :s, :id => :s, :summary => :s
-    rset << ["factory-oss", "FACTORY-OSS", "true"]
-    rset << ["factory-non-oss", "FACTORY-NON-OSS", "false"]
-    
-    @pk_stub.result = rset
-    
+
     # Mock 'GetRepoList' by defining it
     m = DBus::Method.new("GetRepoList")
     m.from_prototype("in filter:s")
     @transaction.methods[m.name] = m
+    
+    @transaction.stubs(:pkit_stub).returns(@pkit_stub)
     class <<@transaction
       def GetRepoList filter
-	# dummy !
+	rset = PackageKitResultSet.new "RepoDetail", :info => :s, :id => :s, :summary => :s
+	rset << ["factory-oss", "FACTORY-OSS", "true"]
+	rset << ["factory-non-oss", "FACTORY-NON-OSS", "false"]
+    
+        self.pkit_stub.result = rset
       end
     end
 
@@ -34,8 +34,8 @@ class RepositoryTest < ActiveSupport::TestCase
   def test_repository_index
     repos = Repository.find(:all)
 
-    assert_equal repos.size, 2
-    assert_equal repos.first.name, "FACTORY-OSS"
+    assert_equal 2,repos.size
+    assert_equal "FACTORY-OSS", repos.first.name
   end
   
 end
