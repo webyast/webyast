@@ -1,4 +1,11 @@
 -------------------------------------------------------------------
+Mon Feb  8 14:15:24 CET 2010 - schubi@suse.de
+
+- cleanup logfile viewer
+- added REST docu
+- version 0.0.11 
+
+-------------------------------------------------------------------
 Mon Jan 25 21:25:07 CET 2010 - mvidner@suse.cz
 
 - renamed yast2-webservice-status to webyast-status-ws
