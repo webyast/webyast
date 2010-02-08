@@ -15,7 +15,7 @@ Obsoletes:      yast2-webservice-status < %{version}
 License:	GPL v2 only
 Group:          Productivity/Networking/Web/Utilities
 Autoreqprov:    on
-Version:        0.0.11
+Version:        0.0.12
 Release:        0
 Summary:        YaST2 - Webservice - Status
 Source:         www.tar.bz2
@@ -105,7 +105,7 @@ sed -i "s/^#Hostname[[:space:]].*/#If you change hostname please delete \/var\/l
 # enable and start  collectd
 # 
 %{fillup_and_insserv -Y collectd}
-rccollectd restart
+rccollectd try-restart
 
 %files
 %defattr(-,root,root)
