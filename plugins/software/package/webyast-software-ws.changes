@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Mon Feb  8 16:26:47 UTC 2010 - lslezak@suse.cz
+
+- repository manager - use unescaped alias string
+- 0.1.4
+
+-------------------------------------------------------------------
 Mon Feb  8 11:34:57 UTC 2010 - kkaempf@novell.com
 
 - Refactored testing, fix repository unit tests
