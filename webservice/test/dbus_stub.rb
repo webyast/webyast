@@ -42,6 +42,8 @@ class DBusStub
     proxy = @proxies[path]
     unless proxy
       proxy = DBus::ProxyObject.new(@bus, @service_name, path)
+      
+      proxy.stubs(:dbus_stub).returns(self)
 
       # stub:     @proxy = @service.object("/foo/bar/baz")
       @service.stubs(:object).with(path).returns(proxy)
