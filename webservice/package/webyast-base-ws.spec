@@ -28,7 +28,7 @@ Requires:       sysvinit > 2.86-195.3.1
 PreReq:         lighttpd > 1.4.20-2.29.1
 %endif
 
-Requires:	lighttpd-mod_magnet, ruby-fcgi, ruby-dbus, sqlite
+Requires:	lighttpd-mod_magnet, ruby-fcgi, ruby-dbus, sqlite, syslog-ng
 Requires:       rubygem-webyast-rake-tasks
 Requires:	yast2-dbus-server
 # gamin gives problems with lighttpd, so better conflict with it for now
@@ -39,7 +39,7 @@ PreReq:         ruby-rpam, ruby-polkit
 License:	LGPL v2.1 only
 Group:          Productivity/Networking/Web/Utilities
 Autoreqprov:    on
-Version:        0.1.2
+Version:        0.1.3
 Release:        0
 Summary:        YaST2 - Webservice 
 Source:         www.tar.bz2

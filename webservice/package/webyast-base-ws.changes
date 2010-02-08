@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Mon Feb  8 16:42:48 CET 2010 - schubi@suse.de
+
+- added req: syslog-ng
+- 0.1.3 
+
+-------------------------------------------------------------------
 Mon Feb  8 13:46:34 CET 2010 - schubi@suse.de
 
 - Checking for already granted permission does not work while
