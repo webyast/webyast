@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Mon Feb  8 11:34:57 UTC 2010 - kkaempf@novell.com
+
+- Refactored testing, fix repository unit tests
+- 0.1.3
+
+-------------------------------------------------------------------
 Fri Feb  5 10:54:20 UTC 2010 - lslezak@suse.cz
 
 - renamed plugin directory from 'patches' to 'software'

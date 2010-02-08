@@ -1,5 +1,5 @@
 #
-# spec file for package webyast-software-ws (Version 0.1)
+# spec file for package webyast-software-ws (Version 0.1.3)
 #
 # Copyright (c) 2008 SUSE LINUX Products GmbH, Nuernberg, Germany.
 # This file and all modifications and additions to the pristine
@@ -36,7 +36,7 @@ Requires:       PackageKit >= 0.3.14-3
 License:	GPL v2 only
 Group:          Productivity/Networking/Web/Utilities
 Autoreqprov:    on
-Version:        0.1.2
+Version:        0.1.3
 Release:        0
 Summary:        YaST2 - Webservice - Patches
 Source:         www.tar.bz2
@@ -107,6 +107,7 @@ polkit-auth --user %{pkg_user} --grant org.freedesktop.packagekit.system-sources
 /srv/www/%{pkg_user}/vendor/plugins/%{plugin_name}/install.rb
 /srv/www/%{pkg_user}/vendor/plugins/%{plugin_name}/uninstall.rb
 /srv/www/%{pkg_user}/vendor/plugins/%{plugin_name}/app
+/srv/www/%{pkg_user}/vendor/plugins/%{plugin_name}/lib
 /srv/www/%{pkg_user}/vendor/plugins/%{plugin_name}/scripts
 /srv/www/%{pkg_user}/vendor/plugins/%{plugin_name}/config
 /srv/www/%{pkg_user}/vendor/plugins/%{plugin_name}/tasks
