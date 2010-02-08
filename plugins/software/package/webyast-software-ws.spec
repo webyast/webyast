@@ -107,6 +107,7 @@ polkit-auth --user %{pkg_user} --grant org.freedesktop.packagekit.system-sources
 /srv/www/%{pkg_user}/vendor/plugins/%{plugin_name}/install.rb
 /srv/www/%{pkg_user}/vendor/plugins/%{plugin_name}/uninstall.rb
 /srv/www/%{pkg_user}/vendor/plugins/%{plugin_name}/app
+/srv/www/%{pkg_user}/vendor/plugins/%{plugin_name}/lib
 /srv/www/%{pkg_user}/vendor/plugins/%{plugin_name}/scripts
 /srv/www/%{pkg_user}/vendor/plugins/%{plugin_name}/config
 /srv/www/%{pkg_user}/vendor/plugins/%{plugin_name}/tasks
