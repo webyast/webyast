@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Tue Feb  9 14:59:00 CET 2010 - schubi@suse.de
+
+- disabled fixed hostname for collectd
+- 0.0.14 
+
+-------------------------------------------------------------------
 Tue Feb  9 12:24:54 CET 2010 - schubi@suse.de
 
 - Grant permissions for config directory in order to write settings
