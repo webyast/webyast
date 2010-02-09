@@ -4,5 +4,5 @@ steps:
   - controller: administrator
   - controller: network
   - controller: systemtime
-  - controller: mail_settings
+  - controller: mail
   - controller: registration

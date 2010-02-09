@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Tue Feb  9 10:51:33 CET 2010 - jsuchome@suse.cz
+
+- default basesystem.yml: mail_settings step renamed to mail
+- 0.1.1
+
+-------------------------------------------------------------------
 Mon Jan 25 17:17:29 CET 2010 - mvidner@suse.cz
 
 - renamed yast2-webservice-basesystem to webyast-firstboot-ws
