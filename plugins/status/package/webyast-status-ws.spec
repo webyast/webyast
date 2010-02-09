@@ -15,7 +15,7 @@ Obsoletes:      yast2-webservice-status < %{version}
 License:	GPL v2 only
 Group:          Productivity/Networking/Web/Utilities
 Autoreqprov:    on
-Version:        0.0.13
+Version:        0.0.14
 Release:        0
 Summary:        YaST2 - Webservice - Status
 Source:         www.tar.bz2
@@ -100,7 +100,9 @@ sed -i "s/^#LoadPlugin df.*/LoadPlugin df/" "/etc/collectd.conf"
 #
 # set "Hostname" to WebYaST
 #
-sed -i "s/^#Hostname[[:space:]].*/#If you change hostname please delete \/var\/lib\/collectd\/WebYaST\nHostname \"WebYaST\"/" "/etc/collectd.conf"
+#sed -i "s/^#Hostname[[:space:]].*/#If you change hostname please delete \/var\/lib\/collectd\/WebYaST\nHostname \"WebYaST\"/" "/etc/collectd.conf"
+# This is disabled cause currently it does not work due the change "restart" -> "try-restart"
+# of the service
 #
 # enable and start  collectd
 # 
