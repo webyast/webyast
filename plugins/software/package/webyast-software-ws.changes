@@ -1,4 +1,9 @@
 -------------------------------------------------------------------
+Tue Feb  9 09:36:59 UTC 2010 - lslezak@suse.cz
+
+- fixed Repository.to_xml - produce valid output
+
+-------------------------------------------------------------------
 Mon Feb  8 16:26:47 UTC 2010 - lslezak@suse.cz
 
 - repository manager - use unescaped alias string
