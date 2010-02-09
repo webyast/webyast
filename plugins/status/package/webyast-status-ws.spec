@@ -15,7 +15,7 @@ Obsoletes:      yast2-webservice-status < %{version}
 License:	GPL v2 only
 Group:          Productivity/Networking/Web/Utilities
 Autoreqprov:    on
-Version:        0.0.12
+Version:        0.0.13
 Release:        0
 Summary:        YaST2 - Webservice - Status
 Source:         www.tar.bz2
@@ -117,7 +117,7 @@ rccollectd try-restart
 %dir /srv/www/%{pkg_user}/vendor/plugins
 %dir /srv/www/%{pkg_user}/vendor/plugins/%{plugin_name}
 %dir /srv/www/%{pkg_user}/vendor/plugins/%{plugin_name}/doc
-%dir /srv/www/%{pkg_user}/vendor/plugins/%{plugin_name}/config
+%dir %attr (-,%{pkg_user},root) /srv/www/%{pkg_user}/vendor/plugins/%{plugin_name}/config
 %dir /usr/share/PolicyKit
 %dir /usr/share/PolicyKit/policy
 /srv/www/%{pkg_user}/vendor/plugins/%{plugin_name}/*

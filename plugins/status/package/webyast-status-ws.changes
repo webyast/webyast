@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Tue Feb  9 12:24:54 CET 2010 - schubi@suse.de
+
+- Grant permissions for config directory in order to write settings
+- 0.0.13 
+
+-------------------------------------------------------------------
 Mon Feb  8 17:49:11 CET 2010 - schubi@suse.de
 
 - restart collectd only when it has already run
