@@ -1,4 +1,9 @@
 -------------------------------------------------------------------
+Thu Feb 11 15:01:33 UTC 2010 - lslezak@suse.cz
+
+- fixed Repository.to_xml - produce valid output
+
+-------------------------------------------------------------------
 Thu Feb 11 13:40:20 UTC 2010 - lslezak@suse.cz
 
 - fixed loading patch status in the control center (path to

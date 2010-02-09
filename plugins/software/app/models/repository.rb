@@ -159,7 +159,6 @@ class Repository
       xml.tag!(:keep_packages, @keep_packages, {:type => "boolean"})
       xml.tag!(:priority, @priority, {:type => "integer"})
     end
-    xml
   end
 
   #
