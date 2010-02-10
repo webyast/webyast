@@ -13,4 +13,22 @@ class FirewallController < ApplicationController
       format.json { render :json => firewall.to_json( :dasherize => false ) }
     end
   end
+
+  def update
+    root = params["firewall"]
+    if root == nil || root == {}
+      raise InvalidParameters.new :firewall => "Missing"
+    end
+
+    firewall = Firewall.new(root)
+    yapi_perm_check "firewall.write"
+    firewall.save
+
+    show
+  end
+
+  # See update
+  def create
+    update
+  end
 end
