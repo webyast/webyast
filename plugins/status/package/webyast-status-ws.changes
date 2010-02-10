@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Wed Feb 10 14:19:40 CET 2010 - schubi@suse.de
+
+- enabling logviewer (default)
+- 0.0.15
+
+-------------------------------------------------------------------
 Tue Feb  9 14:59:00 CET 2010 - schubi@suse.de
 
 - disabled fixed hostname for collectd

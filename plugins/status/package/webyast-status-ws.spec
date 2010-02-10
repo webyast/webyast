@@ -15,7 +15,7 @@ Obsoletes:      yast2-webservice-status < %{version}
 License:	GPL v2 only
 Group:          Productivity/Networking/Web/Utilities
 Autoreqprov:    on
-Version:        0.0.14
+Version:        0.0.15
 Release:        0
 Summary:        YaST2 - Webservice - Status
 Source:         www.tar.bz2
@@ -76,6 +76,8 @@ install -m 0644 %SOURCE2 $RPM_BUILD_ROOT/usr/share/PolicyKit/policy/
 # LogFile.rb
 mkdir -p $RPM_BUILD_ROOT/usr/share/YaST2/modules/
 cp %{SOURCE3} $RPM_BUILD_ROOT/usr/share/YaST2/modules/
+mkdir -p $RPM_BUILD_ROOT/etc/webyast/vendor
+cp $RPM_BUILD_ROOT/srv/www/%{pkg_user}/vendor/plugins/%{plugin_name}/doc/logs.yml $RPM_BUILD_ROOT/etc/webyast/vendor
 
 %clean
 rm -rf $RPM_BUILD_ROOT
@@ -127,7 +129,8 @@ rccollectd try-restart
 %attr(644,root,root) %config /usr/share/PolicyKit/policy/org.opensuse.yast.modules.logfile.policy
 /srv/www/%{pkg_user}/vendor/plugins/%{plugin_name}/doc/README_FOR_APP
 /srv/www/%{pkg_user}/vendor/plugins/%{plugin_name}/doc/logs.yml
-
+%dir /etc/webyast/vendor
+/etc/webyast/vendor/logs.yml
 %doc COPYING
 
 %changelog
