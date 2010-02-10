@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Wed Feb 10 08:57:10 UTC 2010 - kkaempf@novell.com
+
+- Make mtime a class function (bnc#578611)
+- 0.1.5
+
+-------------------------------------------------------------------
 Mon Feb  8 16:26:47 UTC 2010 - lslezak@suse.cz
 
 - repository manager - use unescaped alias string

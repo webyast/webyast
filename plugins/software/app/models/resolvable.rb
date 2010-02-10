@@ -52,7 +52,7 @@ class Resolvable
     return hash.to_json
   end
 
-  def mtime
+  def self.mtime
     PackageKit.mtime
   end
   

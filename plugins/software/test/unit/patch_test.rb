@@ -95,4 +95,7 @@ class PatchTest < ActiveSupport::TestCase
     assert_equal 'slessp0-openslp', patches.first.name
   end
   
+  def test_mtime
+    assert Patch.mtime
+  end
 end
