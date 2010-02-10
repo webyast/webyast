@@ -66,7 +66,7 @@ sub Write {
     Mail->WriteSmtpAuth ();
     return "Error writing config file(s)." unless Mail->WriteFlush ();
     return "Error running SuSEconfig." unless Mail->WriteSuSEconfig ();
-    Mail->WriteServices (); # return value could be broken, bnc#577932
+    return "Error restarting service(s)." unless Mail->WriteServices ();
     
     return "";
 }

@@ -1,4 +1,9 @@
 -------------------------------------------------------------------
+Wed Feb 10 09:06:59 CET 2010 - jsuchome@suse.cz
+
+- possible to check return value of Mail->WriteServices (bnc#577932)
+
+-------------------------------------------------------------------
 Mon Feb  8 14:50:27 CET 2010 - jsuchome@suse.cz
 
 - call only subset of write functions from Mail.ycp, to not override
