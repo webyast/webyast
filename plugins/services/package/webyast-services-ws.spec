@@ -16,7 +16,7 @@ PreReq:         yast2-webservice
 License:	GPL v2 only
 Group:          Productivity/Networking/Web/Utilities
 Autoreqprov:    on
-Version:        0.1.1
+Version:        0.1.2
 Release:        0
 Summary:        YaST2 - Webservice - Services
 Source:         www.tar.bz2
@@ -32,7 +32,7 @@ Requires:       yast2-ruby-bindings >= 0.3.2.1
 # YaPI/SERVICES.pm using ruby-bindings
 %if 0%{?suse_version} == 0 || %suse_version > 1110
 # 11.2 or newer
-Requires:       yast2 >= 2.18.29
+Requires:       yast2 >= 2.17.83
 %else
 # 11.1 or SLES11
 Requires:       yast2 >= 2.17.70.1
