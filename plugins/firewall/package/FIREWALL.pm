@@ -48,4 +48,33 @@ sub mkServiceGenerator {
   return $generator;
 }
 
-
+#  Write firewall settings
+#  { "use_firewall" => 1,
+#    "services"     => [ { "id"      => "service:lighttpd-ssl",
+#                          "allowed" => 1 },
+#                        { "id"      => "service:samba-client",
+#                          "allowed" => 0 }
+#                      ]
+#  }
+#  Return structure
+#  { "result" => YaST::YCP::Boolean(1),
+#    "error"  => "error string"
+#  }
+BEGIN{$TYPEINFO{Write} = [ "function", 
+                          ["map","string","any"], 
+                          ["map","string","any"]]}
+sub Write {
+  my $self     = shift;
+  my $settings = shift;
+  y2milestone("YaPI::FIREWALL::Write - settings", Dumper($settings));
+  SuSEFirewall->SetEnableService ( $settings->{"use_firewall"} );
+  my @allowed_services = map {$_ ->{"id"}} (grep { $_->{"allowed"}} @{$settings->{"services"}} );
+  my @forbidden_services = map {$_->{"id"}} (grep { ! $_->{"allowed"} } @{$settings->{"services"}});
+  y2milestone("YaPI::FIREWALL::Write - allowing services", Dumper(\@allowed_services));
+  y2milestone("YaPI::FIREWALL::Write - forbidding services", Dumper(\@forbidden_services));
+  SuSEFirewall->SetServicesForZones( \@allowed_services, ["EXT"], 1 );
+  SuSEFirewall->SetServicesForZones( \@forbidden_services, ["EXT"], 0 );
+  SuSEFirewall->Write();
+  # SetServicesForZones should return boolean result according to description, but in code it never does.
+  return {"saved_ok" => YaST::YCP::Boolean(1), "error"=>""};
+}
