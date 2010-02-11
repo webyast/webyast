@@ -166,13 +166,13 @@ class Patch < Resolvable
 
   def self.subprocess_script
     # find the helper script
-    script = File.join(RAILS_ROOT, 'vendor/plugin/patches/scripts/list_patches.rb')
+    script = File.join(RAILS_ROOT, 'vendor/plugins/software/scripts/list_patches.rb')
 
     unless File.exists? script
-      script = File.join(RAILS_ROOT, '../plugins/patches/scripts/list_patches.rb')
+      script = File.join(RAILS_ROOT, '../plugins/software/scripts/list_patches.rb')
 
       unless File.exists? script
-        raise 'File patches/scripts/list_patches.rb was not found!'
+        raise 'File software/scripts/list_patches.rb was not found!'
       end
     end
 
