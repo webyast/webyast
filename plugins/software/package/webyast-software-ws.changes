@@ -1,7 +1,8 @@
 -------------------------------------------------------------------
 Thu Feb 11 15:01:33 UTC 2010 - lslezak@suse.cz
 
-- fixed Repository.to_xml - produce valid output
+- fixed Repository.to_xml - produce valid output (bnc#579039)
+- 0.1.7
 
 -------------------------------------------------------------------
 Thu Feb 11 13:40:20 UTC 2010 - lslezak@suse.cz
