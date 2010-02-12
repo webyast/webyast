@@ -12,7 +12,7 @@ Installing OBS
 Add repo
 - - - - - - - 
 
-zypper ar http://download.opensuse.org/repositories/openSUSE:/Tools/ obs
+zypper ar http://download.opensuse.org/repositories/openSUSE:/Tools:/Unstable/openSUSE_11.2/ obs
 
 Install needed packages
 - - - - - - - - - - - - - - - - - -
@@ -26,4 +26,9 @@ Generating spec and KIWI file
 
 Building
 -----------
-The needed files for building can be found in /tmp/sle-11-SP1-WebYaST
+
+check out Devel:WebYaST
+
+go to Devel:WebYaST/_product:sle-11-WebYaST-cd-cd-i586_x86_64
+
+osc build images i586
