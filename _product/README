@@ -1,6 +1,9 @@
 This directory contains information about the product.
-It should be added to the concerning build repository with the name "_product".
-The buildservice creates the concerning packages automatically.
+Documentation can be found here:
+http://en.opensuse.org/Build_Service/Concepts/Product_Definition
+
+The directory should be added to the concerning build repository with the name 
+"_product". The buildservice creates the concerning packages automatically.
 
 You can also check the syntax and build the packages with following steps:
 
