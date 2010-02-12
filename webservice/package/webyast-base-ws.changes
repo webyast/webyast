@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Fri Feb 12 12:35:58 UTC 2010 - jreidinger@novell.com
+
+- fix permissions controller to allow reading permissions for user
+  (bnc#579041)
+
+-------------------------------------------------------------------
 Mon Feb  8 16:42:48 CET 2010 - schubi@suse.de
 
 - added req: syslog-ng

@@ -11,7 +11,13 @@ class PermissionsController < ApplicationController
 
   # modify the cache path so it includes also the filter and user name parameters
   caches_action :show, :cache_path => Proc.new { |controller|
-      ret = controller.controller_path + '/' + controller.params[:user_id] + '/' + controller.params[:filter]
+      ret = controller.controller_path
+      unless controller.params[:user_id].blank?
+        ret = ret + '/' + controller.params[:user_id]
+      end
+      unless controller.params[:filter].blank?
+        ret = ret + '/' + controller.params[:filter]
+      end
       Rails.logger.info "Using cache path: #{ret}"
       ret
   }
