@@ -1,6 +1,6 @@
 class Firewall < BaseModel::Base
 
-  attr_accessor :use_firewall, :services
+  attr_accessor :use_firewall, :fw_services
 
   def self.find
     Firewall.new YastService.Call("YaPI::FIREWALL::Read")
@@ -8,7 +8,7 @@ class Firewall < BaseModel::Base
 
   def save
     result = {"saved_ok" => true}
-    fw_save_data = {'use_firewall' => @use_firewall, 'services' => @services.collect {|h| h.delete "name"; h} }
+    fw_save_data = {'use_firewall' => @use_firewall, 'fw_services' => @fw_services.collect {|h| h.delete "name"; h} }
     #begin
     result = YastService.Call("YaPI::FIREWALL::Write", Firewall.toVariantASV(fw_save_data) )
     #rescue Exception => e

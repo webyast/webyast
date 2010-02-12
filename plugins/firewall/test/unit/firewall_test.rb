@@ -3,7 +3,7 @@ require File.expand_path(File.dirname(__FILE__) + "/../test_helper")
 class FirewallTest < ActiveSupport::TestCase
 
   FIREWALL_READ_DATA = { "use_firewall" => true,
-                         "services"     => [ {"name"   =>"WebYaST UI", 
+                         "fw_services"  => [ {"name"   =>"WebYaST UI", 
                                               "id"     =>"service:webyast-ui", 
                                               "allowed"=>true}, 
                                              {"name"   =>"lighttpd", 
@@ -16,7 +16,7 @@ class FirewallTest < ActiveSupport::TestCase
                        }
 
   FIREWALL_WRITE_DATA = { "use_firewall" => true,
-                          "services"     => [ {"id"     =>"service:webyast-ui",
+                          "fw_services"  => [ {"id"     =>"service:webyast-ui",
                                                "allowed"=>true},
                                               {"id"     =>"service:lighttpd-ssl",
                                                "allowed"=>false},
@@ -35,12 +35,12 @@ class FirewallTest < ActiveSupport::TestCase
   def test_read
     assert_not_nil @model.use_firewall
     assert_instance_of(TrueClass, @model.use_firewall, "use_firewall() returns a TrueClass")
-    assert_instance_of(Array, @model.services, "services() returns an Array")
-    assert_instance_of(Hash, @model.services.first, "single service is a Hash")
+    assert_instance_of(Array, @model.fw_services, "fw_services() returns an Array")
+    assert_instance_of(Hash, @model.fw_services.first, "single service is a Hash")
   end
 
   def test_write
-    @model.services[0]["allowed"] = true
+    @model.fw_services[0]["allowed"] = true
     YastService.stubs(:Call).with("YaPI::FIREWALL::Write",Firewall.toVariantASV(FIREWALL_WRITE_DATA)).once.returns(OK_RESULT)
     assert_nothing_raised do
       @model.save
