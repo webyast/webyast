@@ -1,5 +1,4 @@
 steps:
-  - controller: language
   - controller: eulas
   - controller: administrator
   - controller: network

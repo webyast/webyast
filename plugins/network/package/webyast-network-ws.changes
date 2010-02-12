@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Fri Feb 12 10:02:39 UTC 2010 - kkaempf@novell.com
+
+- don't send nil values via D-Bus (bnc#579115)
+- 0.1.2
+
+-------------------------------------------------------------------
 Fri Jan 22 16:10:42 CET 2010 - mvidner@suse.cz
 
 - renamed yast2-webservice-network to webyast-network-ws

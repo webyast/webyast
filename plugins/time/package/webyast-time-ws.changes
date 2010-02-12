@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Thu Feb 18 15:20:33 UTC 2010 - jreidinger@novell.com
+
+- use BaseModel and add validations
+- 0.1.0
+
+-------------------------------------------------------------------
 Mon Jan 25 21:26:04 CET 2010 - mvidner@suse.cz
 
 - renamed yast2-webservice-time to webyast-time-ws

@@ -30,10 +30,11 @@ class Hostname
   # Saves data from model to system via YaPI. Saves only setted data,
   # so it support partial safe (e.g. save only new timezone if rest of fields is not set).
   def save
-    settings = {
-      "name" => @name,
-      "domain" => @domain,
-    }
+    settings = {}
+    settings["name"] = @name if @name
+    settings["domain"] = @domain if @domain
+    return if settings.empty?
+
     vsettings = [ "a{ss}", settings ] # bnc#538050
     YastService.Call("YaPI::NETWORK::Write",{"hostname" => vsettings})
     # TODO success or not?

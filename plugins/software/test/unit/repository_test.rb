@@ -29,6 +29,8 @@ class RepositoryTest < ActiveSupport::TestCase
       end
     end
 
+    # don't read system *.repo files
+    Repository.any_instance.stubs(:read_file).returns(nil)
   end
 
   def test_repository_index
@@ -37,5 +39,15 @@ class RepositoryTest < ActiveSupport::TestCase
     assert_equal 2,repos.size
     assert_equal "FACTORY-OSS", repos.first.name
   end
-  
+
+  # check to_xml producing correct (valid) output
+  def test_repository_to_xml
+    repo = Repository.new("factory-oss", "FACTORY-OSS", true)
+
+    xml = repo.to_xml
+    h = Hash.from_xml xml
+
+    assert_equal "factory-oss", h['repository']['id']
+  end
+
 end

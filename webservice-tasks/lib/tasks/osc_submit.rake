@@ -19,7 +19,7 @@ task :'osc_submit'  do
       puts "submitting package..."
       # long running, `foo` would only show output at the end
       system "osc addremove"
-#      system "osc commit -m 'new version'"
+      system "osc commit -m 'new version'"
       if $?.exitstatus != 0
         raise "Failed to submit"
       end

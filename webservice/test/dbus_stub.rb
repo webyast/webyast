@@ -3,8 +3,24 @@
 #
 # Stubs for D-Bus
 #
+# See http://en.opensuse.org/YaST/Web/Development/Testing/D-Bus
 #
-
+#
+# Example usage:
+#
+#   # create the stub
+#   dbus = DBusStub.new :system, "dbus.service.spec"
+#
+#   # create a service proxy
+#   proxy = dbus.proxy "/path/to/service"
+#
+#   # add an interface to this proxy
+#   interface = dbus.interface proxy, "dbus.service.spec.iface"
+#
+#   # the proxy and interface generation can be combined as
+#
+#   proxy,interface = dbus.proxy "/path/to/service", "dbus.service.spec.iface"
+#
 require 'dbus'
 
 class DBusStub
@@ -14,7 +30,10 @@ class DBusStub
   #
   # Initialize the service and stub bus.service
   #
-  
+  #  bus: symbol identifying the bus, either ':system' or ':session'
+  #  service: string identifying the service, something like "org.freedesktop.PackageKit"
+  #
+  #
   def initialize bus, service
 
     # Map pathes to stubbed proxies
@@ -36,6 +55,7 @@ class DBusStub
   
   #
   # get a proxy for a given object path
+  #
   # if service is given, also create the interface
   #
   def proxy path, service = nil

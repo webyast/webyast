@@ -1,4 +1,18 @@
 -------------------------------------------------------------------
+Wed Feb 24 12:43:40 UTC 2010 - jreidinger@novell.com
+
+- fix syntax errors in ntp YaPI (bnc#582188)
+- 0.1.1
+
+-------------------------------------------------------------------
+Thu Feb 18 15:26:24 UTC 2010 - jreidinger@novell.com
+
+- fix passing hardware clock settings to ntp (bnc#556467) 
+- use BaseModel and add validations
+- allow synchronize action only if ntp is available (bnc#552071)
+- 0.1.0
+
+-------------------------------------------------------------------
 Mon Jan 25 17:22:19 CET 2010 - mvidner@suse.cz
 
 - renamed yast2-webservice-ntp to webyast-ntp-ws

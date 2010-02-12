@@ -3,6 +3,7 @@
 #
 # Stubs for PackageKit/D-Bus
 #
+# See http://en.opensuse.org/YaST/Web/Development/Testing/PackageKit
 #
 
 require File.join(File.dirname(__FILE__), "test_helper")
@@ -21,10 +22,20 @@ class PackageKitResultSet
   #
   # Create a PackageKitResultSet
   #
+  # PackageKitResultSet.new <signal>, <signature-as-hash>
+  #
+  # (Since a trailing Hash can be passed without enclosing {}'s, it looks like a varargs call)
+  #
   # Example:
-  # set = PackageKitResultSet.new "Package", :info => :s, :id => s, :summary => :s
-  # set << ["info1", "id1", "summary1"]
-  # set << ["info2", "id2", "summary2"]
+  #   set = PackageKitResultSet.new "Package", :info => :s, :id => :s, :summary => :s
+  #
+  # Now add results to the set. Each result is an Array with values according to the signature
+  #
+  #   set << ["info1", "id1", "summary1"]
+  #
+  # :s-type arguments can be passed as strings or symbols
+  #
+  #   set << [:info2, :id2, "summary2"]
   #
   
   def initialize signal, signature
@@ -57,12 +68,13 @@ class PackageKitStub
   TRANSACTION = "#{SERVICE}.Transaction"
   TID = 42 # (dummy) transaction id
 
+  #
+  # Create stubbed PackageKit service instance
+  #
+  #
+  
   def initialize
 
-    #
-    # PackageKit service
-    #
-    
     # create (dormant) @pk_service
     @pk_stub = DBusStub.new :system, SERVICE
     @pk_service = @pk_stub.service
@@ -99,7 +111,7 @@ class PackageKitStub
 				      DBus::Main.send(:undef_method, :run)
 				      DBus::Main.class_eval { alias :run :orig_run }
 				    end)
-      end # if @@first
+    end # if @@first
   end # initialize
   
   def result
