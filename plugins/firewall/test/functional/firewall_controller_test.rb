@@ -7,7 +7,7 @@ class FirewallControllerTest < ActionController::TestCase
   fixtures :accounts
 
   INITIAL_DATA ={ "use_firewall" => true,
-                  "services"     => [ {"name"   =>"WebYaST UI",
+                  "fw_services"  => [ {"name"   =>"WebYaST UI",
                                        "id"     =>"service:webyast-ui",
                                        "allowed"=>false},
                                       {"name"   =>"lighttpd",
@@ -16,17 +16,17 @@ class FirewallControllerTest < ActionController::TestCase
                                     ]
                 }
   UPDATE_DATA = {"firewall" => { "use_firewall" => true,
-                                 "services"     => [ {"name"   =>"WebYaST UI",
+                                 "fw_services"  => [ {"name"   =>"WebYaST UI",
                                                       "id"     =>"service:webyast-ui",
                                                       "allowed"=>true},
                                                      {"name"   =>"lighttpd",
                                                       "id"     =>"service:lighttpd-ssl",
                                                       "allowed"=>false}
                                                    ]
-                               }
+                            }
                 }
   DATA = { "use_firewall" => true,
-           "services"     => [ {"id"     =>"service:webyast-ui",
+           "fw_services"  => [ {"id"     =>"service:webyast-ui",
                                 "allowed"=>true},
                                {"id"     =>"service:lighttpd-ssl",
                                 "allowed"=>false}

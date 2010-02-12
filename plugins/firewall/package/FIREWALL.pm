@@ -32,7 +32,7 @@ sub Read {
   my @services = map($mkService->($_),@service_ids);
   y2milestone "YaPI::FIREWALL::mkService -> '".($mkService->($service_ids[0]))."'";
   my %ret = ('use_firewall' => $status, 
-             'services'     => \@services
+             'fw_services'  => \@services
             );
   return \%ret;
 }
@@ -50,7 +50,7 @@ sub mkServiceGenerator {
 
 #  Write firewall settings
 #  { "use_firewall" => 1,
-#    "services"     => [ { "id"      => "service:lighttpd-ssl",
+#    "fw_services"     => [ { "id"      => "service:lighttpd-ssl",
 #                          "allowed" => 1 },
 #                        { "id"      => "service:samba-client",
 #                          "allowed" => 0 }
@@ -68,8 +68,8 @@ sub Write {
   my $settings = shift;
   y2milestone("YaPI::FIREWALL::Write - settings", Dumper($settings));
   SuSEFirewall->SetEnableService ( $settings->{"use_firewall"} );
-  my @allowed_services = map {$_ ->{"id"}} (grep { $_->{"allowed"}} @{$settings->{"services"}} );
-  my @forbidden_services = map {$_->{"id"}} (grep { ! $_->{"allowed"} } @{$settings->{"services"}});
+  my @allowed_services = map {$_ ->{"id"}} (grep { $_->{"allowed"}} @{$settings->{"fw_services"}} );
+  my @forbidden_services = map {$_->{"id"}} (grep { ! $_->{"allowed"} } @{$settings->{"fw_services"}});
   y2milestone("YaPI::FIREWALL::Write - allowing services", Dumper(\@allowed_services));
   y2milestone("YaPI::FIREWALL::Write - forbidding services", Dumper(\@forbidden_services));
   SuSEFirewall->SetServicesForZones( \@allowed_services, ["EXT"], 1 );
