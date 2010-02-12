@@ -86,11 +86,13 @@ class User
     self.class.destroy(uid)
   end
 
-  def save
-    config = { "type" => [ "s", "local" ],
-      "uid" => [ "s", self.uid ]
+  def save(id)
+    config = {
+      "type" => [ "s", "local" ],
+      "uid" => [ "s", id ]
     }
     data = retrieve_data
+
     ret = YastService.Call("YaPI::USERS::UserModify", config, data)
 
     Rails.logger.debug "Command returns: #{ret.inspect}"

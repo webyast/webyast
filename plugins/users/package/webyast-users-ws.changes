@@ -1,4 +1,9 @@
 -------------------------------------------------------------------
+Thu Feb 25 15:26:24 CET 2010 - jsuchome@suse.cz
+
+- fixed user renaming (bnc#580203)
+
+-------------------------------------------------------------------
 Wed Feb 17 16:22:09 CET 2010 - mzugec@suse.cz
 
 - groupsget permission check(bnc#580550) 

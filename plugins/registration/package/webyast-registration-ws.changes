@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Tue Feb 23 12:07:38 CET 2010 - jdsn@suse.de
+
+- fix workflow handling, do not show empty form (bnc#578684)
+- version 0.1.0
+
+-------------------------------------------------------------------
 Thu Feb 18 13:18:15 CET 2010 - schubi@suse.de
 
 - Bug 580861 - Granting permissions for yastws are missed in some webservice-plugins
