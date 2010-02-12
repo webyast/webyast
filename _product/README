@@ -1,0 +1,26 @@
+This directory contains information about the product.
+It should be added to the concerning build repository with the name "_product".
+The buildservice creates the concerning packages automatically.
+
+You can also check the syntax and build the packages with following steps:
+
+Installing OBS
+-------------------
+Add repo
+- - - - - - - 
+
+zypper ar http://download.opensuse.org/repositories/openSUSE:/Tools/ obs
+
+Install needed packages
+- - - - - - - - - - - - - - - - - -
+
+zypper in obs-productconverter
+
+Generating spec and KIWI file
+--------------------------------------
+
+/usr/lib/obs/server/bs_productconvert sle-11-SP1-WebYaST.product  /tmp/sle-11-SP1-WebYaST
+
+Building
+-----------
+The needed files for building can be found in /tmp/sle-11-SP1-WebYaST

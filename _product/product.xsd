@@ -1,0 +1,636 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!-- TODO: mark attributes as required -->
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:annotation>
+    <xs:documentation xml:lang="en">
+      Product definition schema for openSUSE and Novell products.
+      Copyright 2008 by Novell, Inc. 
+    </xs:documentation>
+  </xs:annotation>
+
+  <xs:element name="productdefinition">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="products"     type="tProductList" />
+        <xs:element name="conditionals" type="tConditionalList" minOccurs="0" />
+        <xs:element name="repositories" type="tRepositoryList" />
+        <xs:element name="archsets"     type="tArchitectureSets" />
+        <xs:element name="mediasets"    type="tMediaset" />
+        <xs:element name="group"        type="tGroup" minOccurs="0" maxOccurs="unbounded" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+
+  <xs:complexType name="tProductList">
+    <xs:sequence>
+      <xs:element name="product" type="tProduct" />
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="tProduct">
+    <xs:annotation>
+      <xs:documentation xml:lang="en">
+        For a detailed description, please visit 
+        http://en.opensuse.org/Build_Service/Product_Definition/XML
+
+        Tags equal to tags in RPM specfiles have the same behaviour. 
+        So for example:
+        - Summary => one line only
+        - Description => nearly all chars allowed, multiple lines allowed
+        - Requires/Obsoletes/Recommends/Suggests => dependencies
+      </xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element name="vendor" type="xs:string">
+        <xs:annotation>
+          <xs:documentation xml:lang="en">
+            The vendor or company who's responsible for the product.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="name"   type="xs:string">
+        <xs:annotation>
+          <xs:documentation xml:lang="en">
+            The name of the product. This name should not contain any 
+            whitespaces and is written into the content file.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="version" type="xs:decimal">
+        <xs:annotation>
+          <xs:documentation xml:lang="en">
+            The version of the product. A decimal value like "11" for 
+            SLES 11 or "11.1" for openSUSE 11.1.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="patchlevel" type="xs:integer">
+        <xs:annotation>
+          <xs:documentation xml:lang="en">
+            Patchlevel of the product. Mainly used for ServicePacks.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="release" type="xs:decimal">
+        <xs:annotation>
+          <xs:documentation xml:lang="en">
+            The official release number of the product. For official 
+            released new ISO images or Service Packs.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="productline" type="xs:string">
+        <xs:annotation>
+          <xs:documentation xml:lang="en">
+            The productline is used during the registration for the OEM key detection,
+            and it may also be helpfull in case of product renames.
+            With this, tag daughter products can be detected easier.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="register" type="tRegistrationInformation" minOccurs="0">
+        <xs:annotation>
+          <xs:documentation xml:lang="en">
+            Note: this Flag has to be discussed between PrjMgr and NCC-Team.
+            It shouldn't change the whole lifetime of the product.
+            Normally, just needed for Enterprise products.
+            FYI: the distribution tag will be generated during media creation.
+            * flavor will be replaced with the 'flavor' definition in the mediaset.
+            * target will be replaced with the ncc_target - the %{_target_cpu} macro
+              will be replaced with the basearch of the product.
+            * release is reserved for special versions of a product
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="updaterepokey" type="xs:string" minOccurs="0">
+        <xs:annotation>
+          <xs:documentation xml:lang="en">
+            This key is the same as in the corresponding online update repository.
+            Used to identify if an installed (add on-)product has an update 
+            repository and if this repository is enabled.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="summary" type="xs:string">
+        <xs:annotation>
+          <xs:documentation xml:lang="en">
+            Short (one line only!) description of the product.
+            Used in the media.1/media file.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="description" type="xs:string">
+        <xs:annotation>
+          <xs:documentation xml:lang="en">
+            A long description of the product. Currently not used.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="linguas" type="tLinguaList" minOccurs="0">
+        <xs:annotation>
+          <xs:documentation xml:lang="en">
+            Available languages (for collecting packages and) 
+            during installation and runtime.
+            YaST warns if user selects a language not listed 
+            as fully supported. (LANGUAGES tag in content file)
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="urls" type="tUrlList">
+        <xs:annotation>
+          <xs:documentation xml:lang="en">
+            List of URLs associated with the product.
+            Currently used for 'name' (place on media):
+            * releasenotes (content, product.xml)
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="buildconfig" type="tBuildConfig">
+        <xs:annotation>
+          <xs:documentation xml:lang="en">
+            This section is needed to generate the installation media.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="installconfig" type="tInstallConfig">
+        <xs:annotation>
+          <xs:documentation xml:lang="en">
+            All flags needed during installation.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="runtimeconfig" type="tRuntimeConfig">
+        <xs:annotation>
+          <xs:documentation xml:lang="en">
+            All Flags needed in the running system.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+    <xs:attribute name="id" type="xs:ID">
+      <xs:annotation>
+        <xs:documentation xml:lang="en">
+          Short ID for referencing in other configs.
+        </xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+  </xs:complexType>
+
+  <xs:complexType name="tRegistrationInformation">
+    <xs:sequence>
+      <xs:element name="target" type="xs:string">
+        <xs:annotation>
+          <xs:documentation xml:lang="en">
+			The target is important for NCC registration if an updatesource is
+            from type NU. The target is used as filter and is a directory in the path to
+            the update repository. All SUSE LINUX Enterprise Products (version 11) or
+            Add-Ons build for this OS should have the same target: sle-11-%{_target_cpu} .
+            %{_target_cpu} will be replaced with the architecture for what the product is
+            build. 
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="release" type="xs:string" minOccurs="0">
+        <xs:annotation>
+          <xs:documentation xml:lang="en">
+            Special release value used only for NCC registration. The default is empty.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="flavor" type="tMediaType" minOccurs="0">
+        <xs:annotation>
+          <xs:documentation xml:lang="en">
+            Will mostly describe the installation media. E.g. dvd5, dvd9, livedvd5, etc. 
+            It will be replaced with the media flavor definition in the mediaset. 
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="tUrlList">
+    <xs:sequence>
+      <xs:element name="url" maxOccurs="unbounded">
+        <xs:complexType>
+          <xs:simpleContent>
+            <!-- FIXME: %{_target_arch} is not valid in URL - we need another definition here... -->
+            <!-- <xs:extension base="xs:anyURI"> -->
+              <xs:extension base="xs:string">
+              <xs:attribute name="type" type="xs:string" />
+              <xs:attribute name="href" type="xs:anyURI" />
+              <!-- TODO: drop this if we finally use the xslt for generating the product files for yast -->
+              <xs:attribute name="name" type="xs:string" />
+            </xs:extension>
+          </xs:simpleContent>
+        </xs:complexType>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="tLinguaList">
+    <xs:sequence>
+      <!-- TODO: should be enum! -->
+      <xs:element name="language" type="tLanguage" maxOccurs="unbounded">
+        <xs:annotation>
+          <xs:documentation xml:lang="en">
+            Have a look at /usr/lib/locale/* to get 
+            an overview about the possible values.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:simpleType name="tLanguage">
+    <xs:restriction base="xs:string">
+    </xs:restriction>
+  </xs:simpleType>
+
+  <xs:complexType name="tBuildConfig">
+    <xs:sequence>
+      <xs:element name="producttheme" type="xs:string">
+        <xs:annotation>
+          <xs:documentation xml:lang="en">
+            Define the theme for YaST.
+            Applies to initial bootsplash and the installation workflow.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="betaversion"  type="xs:string" minOccurs="0">
+        <xs:annotation>
+          <xs:documentation xml:lang="en">
+            Define the current state of your product.
+            Note: starting with "RC*", Beta warnings will be disabled.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="allowresolving" type="tBoolean" minOccurs="0">
+        <xs:annotation>
+          <xs:documentation xml:lang="en">
+            NOTE: THIS IS NOT YET IMPLEMENTED !
+
+            Normally, only defined packages will end on the media.
+            If you like to resolve dependencies automatically, 
+            enable resolving. But if you want to keep control over 
+            all packages on your media, disable the automatic resolving.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <!-- TODO: should be enum? -->
+      <xs:element name="packagemanager" type="xs:string" minOccurs="0">
+        <xs:annotation>
+          <xs:documentation xml:lang="en">
+            If allowresolving is true, define the packagemanager
+            used to resolve dependencies.
+            Default: zypper for openSUSE
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="linguas" type="tLinguaList" minOccurs="0">
+        <xs:annotation>
+          <xs:documentation xml:lang="en">
+            Available languages on the media.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="tInstallConfig">
+    <xs:sequence>
+      <xs:element name="defaultlang" type="tLanguage">
+        <xs:annotation>
+          <xs:documentation xml:lang="en">
+            Defines the default language for YaST, if 
+            not defined by user.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="datadir" type="xs:string">
+        <xs:annotation>
+          <xs:documentation xml:lang="en">
+            DATADIR is the place where YaST looks for packages.
+            => DATADIR in content file
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="descriptiondir" type="xs:string">
+        <xs:annotation>
+          <xs:documentation xml:lang="en">
+            Place on the media, where YaST can find additional 
+            informations like pattern and package lists.
+            => DESCRDIR in content file
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="releasepackage">
+        <xs:annotation>
+          <xs:documentation xml:lang="en">
+            The releasepackage tag references a package 
+            on the installation media. This package should 
+            contain at least the base requirements/informations of a 
+            product.
+            Added as "REFERENCES" in the content file.
+          </xs:documentation>
+        </xs:annotation>
+      <!-- </xs:element> -->
+        <xs:complexType>
+          <xs:attribute name="name" type="xs:string" />
+          <xs:attribute name="version" type="xs:decimal">
+            <xs:annotation>
+              <xs:documentation xml:lang="en">
+                The version number of the releasepackage.
+              </xs:documentation>
+            </xs:annotation>
+          </xs:attribute>
+ 	      <xs:attribute name="release" type="xs:decimal">
+            <xs:annotation>
+              <xs:documentation xml:lang="en">
+                The release number of the releasepackage.
+              </xs:documentation>
+            </xs:annotation>
+          </xs:attribute>
+          <xs:attribute name="flag" type="xs:string">
+            <xs:annotation>
+              <xs:documentation xml:lang="en">
+                Flag for  relationships. Currently supported flags:
+                * EQ => equal
+                * LT => lower than
+                * GT => greater than
+              </xs:documentation>
+            </xs:annotation>
+          </xs:attribute>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="distribution"   type="xs:string">
+        <xs:annotation>
+          <xs:documentation xml:lang="en">
+            The name of the distribution - take it as "base" for your 
+            media. Main- and add on products should have the same 
+            distribution as base.
+            Currently placed as "DISTRIBUTION" in the content file and 
+            in the product.xml
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="tRuntimeConfig">
+  </xs:complexType>
+
+  <xs:complexType name="tConditionalList">
+    <xs:sequence>
+      <xs:element name="conditional" type="tConditional" maxOccurs="unbounded" />
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="tConditional">
+    <xs:sequence>
+      <xs:group ref="tConditionalsSelector"/>
+    </xs:sequence>
+    <xs:attribute name="name" type="xs:ID" />
+  </xs:complexType>
+
+  <xs:complexType name="tConditionalReference">
+     <xs:attribute name="ref" type="xs:IDREF" />
+  </xs:complexType>
+
+  <xs:group name="tConditionalsSelector">
+    <xs:choice>
+      <xs:element name="platform" type="tPlatformSpecification"  maxOccurs="unbounded" />
+      <!-- TODO: add other options -->
+    </xs:choice>
+  </xs:group>
+
+  <xs:simpleType name="tArchitectures">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="noarch" />
+      <xs:enumeration value="i386" />
+      <xs:enumeration value="i486" />
+      <xs:enumeration value="i586" />
+      <xs:enumeration value="i686" />
+      <xs:enumeration value="i786" />
+      <xs:enumeration value="x86_64" />
+      <xs:enumeration value="ppc" />
+      <xs:enumeration value="ppc64" />
+      <xs:enumeration value="ia64" />
+      <xs:enumeration value="s390" />
+      <xs:enumeration value="s390x" />
+    </xs:restriction>
+  </xs:simpleType>
+
+  <xs:complexType name="tArchitectureSets">
+    <xs:sequence>
+      <xs:element name="archset" maxOccurs="unbounded">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element name="arch" type="tArchitectures" maxOccurs="unbounded" />
+          </xs:sequence>
+          <xs:attribute name="name" type="xs:ID" />
+          <xs:attribute name="productarch" type="tArchitectures" />
+        </xs:complexType>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="tPlatformSpecification">
+    <xs:attribute name="arch" type="tArchitectures" /> <!-- package qualifies for this plattform architecture only-->
+    <xs:attribute name="onlyarch" type="tArchitectures" />
+    <xs:attribute name="baselibs_arch" type="tArchitectures" />
+    <xs:attribute name="addarch" type="tArchitectures" />
+  </xs:complexType>
+
+  <xs:complexType name="tMediaset">
+    <xs:sequence>
+      <xs:element name="media" type="tMedia" maxOccurs="unbounded" />
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:simpleType name="tMediaType">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="ftp" />
+      <xs:enumeration value="dvd5" />
+      <xs:enumeration value="dvd9" />
+      <xs:enumeration value="cd" />
+    </xs:restriction>
+  </xs:simpleType>
+
+  <xs:complexType name="tMedia">
+    <xs:sequence>
+        <xs:element name="archsets" maxOccurs="unbounded" minOccurs="0">
+        <xs:complexType>
+          <xs:sequence>
+              <xs:element name="archset" maxOccurs="unbounded">
+              <xs:complexType>
+                <xs:attribute name="ref" type="xs:IDREF" />
+              </xs:complexType>
+            </xs:element>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="use" type="tUseGroup" maxOccurs="unbounded" minOccurs="0"/>
+      <xs:element name="metadata" type="tMediaMetadata" minOccurs="0"/>
+    </xs:sequence>
+    <xs:attribute name="name" type="xs:ID" />
+    <xs:attribute name="type" type="tMediaType" />
+    <xs:attribute name="sourcemedia" type="xs:integer" />
+    <xs:attribute name="debugmedia" type="xs:integer" />
+    <xs:attributeGroup ref="agUseAttribute" />
+  </xs:complexType>
+
+  <xs:complexType name="tMediaMetadata">
+    <xs:sequence>
+      <xs:element name="package" maxOccurs="unbounded">
+        <xs:complexType>
+          <xs:attribute name="name" />
+        </xs:complexType>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:simpleType name="tBoolean">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="true" />
+      <xs:enumeration value="false" />
+    </xs:restriction>
+  </xs:simpleType>
+
+  <xs:attributeGroup name="agUseAttribute">
+    <xs:attribute name="create_pattern"    type="tBoolean" />
+    <xs:attribute name="use_required"      type="tBoolean" />
+    <xs:attribute name="use_recommended"   type="tBoolean" />
+    <xs:attribute name="use_suggested"     type="tBoolean" />
+    <xs:attribute name="allow_overflow"    type="tBoolean" />
+    <xs:attribute name="use_undecided"     type="tBoolean" />
+    <xs:attribute name="run_media_check"   type="tBoolean" />
+    <xs:attribute name="size"              type="xs:string" />
+    <xs:attribute name="next_media_in_set" type="xs:string" />
+    <xs:attribute name="flavor"            type="xs:string" />
+    <xs:attribute name="product"           type="xs:IDREF" />
+    <xs:attribute name="repository"        type="xs:IDREF" />
+  </xs:attributeGroup>
+
+  <xs:complexType name="tUseGroup">
+    <xs:sequence>
+      <xs:element name="package" type="tPackage" minOccurs="0" maxOccurs="unbounded" />
+    </xs:sequence>
+    <xs:attribute name="group" type="xs:IDREF" />
+    <xs:attributeGroup ref="agUseAttribute" />
+  </xs:complexType>
+
+  <xs:complexType name="tRepositoryList">
+    <xs:sequence>
+      <xs:element name="repository" maxOccurs="unbounded">
+        <xs:complexType>
+          <xs:attribute name="path"     type="xs:anyURI" />
+          <!-- TODO: it should be: xs:attribute name="href"     type="xs:anyURI" / -->
+          <!-- imho those should *not* be part of the repository configuration as
+          they are built environement specific -->
+          <xs:attribute name="username" type="xs:string" use="optional" />
+          <xs:attribute name="password" type="xs:string" use="optional" />
+        </xs:complexType>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="tPackages">
+    <xs:sequence>
+      <xs:element name="group" type="tGroup" maxOccurs="unbounded" />
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:simpleType name="tRelationships">
+    <xs:restriction base="xs:string">
+      <!-- TODO: decided whether to use requires or required -->
+      <xs:enumeration value="requires" />
+      <xs:enumeration value="recommends" />
+      <xs:enumeration value="suggests" />
+      <xs:enumeration value="suggested" />
+      <xs:enumeration value="enhances" />
+      <xs:enumeration value="supplements" />
+      <xs:enumeration value="freshens" />
+      <xs:enumeration value="obsoletes" />
+      <xs:enumeration value="provides" />
+    </xs:restriction>
+  </xs:simpleType>
+
+  <xs:attributeGroup name="agSubGroupAttributes">
+    <xs:attribute name="name" type="xs:string" />
+    <xs:attribute name="relationship" type="tRelationships" />
+  </xs:attributeGroup>
+
+  <xs:attributeGroup name="agPatternAttributes">
+    <xs:attribute name="pattern_ordernumber" type="xs:unsignedLong" />
+    <xs:attribute name="pattern_category" type="xs:string" />
+    <xs:attribute name="pattern_description" type="xs:string" />
+    <xs:attribute name="pattern_icon" type="xs:string" />
+    <xs:attribute name="pattern_summary" type="xs:string" />
+    <xs:attribute name="pattern_visible" type="tBoolean" />
+  </xs:attributeGroup>
+
+  <xs:complexType name="tPatternAttributes">
+    <xs:sequence>
+      <xs:element name="ordernumber" type="xs:unsignedLong" minOccurs="0" />
+      <xs:element name="category" type="xs:string" />
+      <xs:element name="description" type="xs:string" />
+      <xs:element name="icon" type="xs:string" minOccurs="0" />
+      <xs:element name="summary" type="xs:string" />
+      <xs:element name="visible" type="tBoolean" />
+      <!-- TODO: totally unneeded. the rename of packagelist has to be reverted and patterns should just be included there -->
+      <xs:element name="relationships">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element name="pattern" type="tPattern" maxOccurs="unbounded" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+    </xs:sequence>
+    <xs:attribute name="ordernumber" type="xs:unsignedLong" />
+  </xs:complexType>
+
+  <xs:complexType name="tGroup">
+    <xs:sequence>
+      <xs:element name="conditional" type="tConditionalReference" minOccurs="0" maxOccurs="unbounded" />
+      <xs:element name="pattern" type="tPatternAttributes" minOccurs="0" />
+      <xs:choice minOccurs="0" maxOccurs="unbounded">
+        <xs:element name="group"   type="tSubGroup" />
+        <xs:element name="packagelist"   type="tSubGroup" />
+        <xs:group   ref="gGroupElements" minOccurs="0" maxOccurs="unbounded" />
+      </xs:choice>
+    </xs:sequence>
+    <xs:attribute name="version" type="xs:string" />
+    <xs:attribute name="release" type="xs:string" />
+    <xs:attributeGroup ref="agSubGroupAttributes" />
+  </xs:complexType>
+
+  <xs:complexType name="tPattern">
+    <xs:attribute name="name" type="xs:IDREF" />
+    <xs:attribute name="relationship" type="tRelationships" />
+  </xs:complexType>
+
+  <xs:complexType name="tPackage">
+    <xs:sequence>
+      <xs:choice>
+        <xs:element name="conditional" type="tConditionalReference" minOccurs="0" maxOccurs="unbounded" />
+      </xs:choice>
+    </xs:sequence>
+    <xs:attribute name="name" type="xs:string" />
+    <xs:attribute name="relationship" type="tRelationships" />
+  </xs:complexType>
+
+  <xs:group name="gGroupElements">
+    <xs:sequence>
+      <xs:choice>
+        <xs:element name="pattern" type="tPattern" maxOccurs="unbounded" />
+        <xs:element name="package" type="tPackage" maxOccurs="unbounded" />
+      </xs:choice>
+    </xs:sequence>
+  </xs:group>
+
+  <xs:complexType name="tSubGroup">
+    <xs:group ref="gGroupElements" />
+    <xs:attributeGroup ref="agSubGroupAttributes" />
+    <xs:attribute name="id" type="xs:ID" />
+  </xs:complexType>
+</xs:schema>

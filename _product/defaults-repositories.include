@@ -1,0 +1,19 @@
+
+<!-- This is the defaults file, it define the common conditionals,
+     repositories and architecture sets for SLE 11 plattform.
+     This file is included in all product definitions for SLE 11.
+     So keep in mind:
+
+             **** THIS DEFINITIONS ARE USED BY SLES AND SLED ****
+
+-->
+
+
+    <repositories>
+      <!--<repository path="obs://build.suse.de/Devel:WebYaST/SUSE_SLE-11-SP1_Update"/>-->
+      <repository path="obs://build.suse.de/SUSE:SLE-11:GA/standard"/>
+      <repository path="obs://build.suse.de/SUSE:SLE-11:Update/standard"/>
+      <repository path="obs://build.suse.de/SUSE:SLE-11-SP1:GA/standard"/>
+      <repository path="obs://build.suse.de/SUSE:SLE-11-SP1:Update/standard"/>
+    </repositories>
+
