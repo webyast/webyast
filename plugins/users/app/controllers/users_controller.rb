@@ -45,7 +45,7 @@ class UsersController < ApplicationController
     begin
       @user = User.create(params[:users])
     rescue Exception => e
-      render ErrorResult.error(404, @error_id, @error_string) and return
+      render ErrorResult.error(404, 2, e.message) and return
     end
     
     render :show
