@@ -118,7 +118,16 @@ class User
   # hash with camel-cased values
   def retrieve_data
     data = { }
-    [ :cn, :uid, :uid_number, :gid_number, :grouplist, :groupname, :home_directory, :login_shell, :user_password, :addit_data, :type ].each do |attr_name|
+    if self.respond_to?(:grouplist)
+	attr = self.send(:grouplist)
+	groups	= {}
+	attr.each do |g|
+	  cn		= g["cn"]
+	  groups[cn]	= 1
+	end
+#	data.store("grouplist", ... FIXME contruct a value for dbus!
+    end
+    [ :cn, :uid, :uid_number, :gid_number, :groupname, :home_directory, :login_shell, :user_password, :addit_data, :type ].each do |attr_name|
       if self.respond_to?(attr_name)
         attr = self.send(attr_name)
         data.store(attr_name.to_s.camelize(:lower), ['s', attr]) unless attr.blank?
@@ -169,10 +178,10 @@ class User
       xml.tag!(:user_password, user_password )
       xml.tag!(:type, type )
       xml.grouplist({:type => "array"}) do
-         grouplist.each do |group, val| 
-            xml.group do
-               xml.tag!(:id, group)
-            end
+         grouplist.each do |group| 
+	    xml.group do
+	      xml.tag!(:cn, group[0])
+	    end
          end
       end
     end  
