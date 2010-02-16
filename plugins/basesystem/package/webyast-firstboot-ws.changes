@@ -1,4 +1,9 @@
 -------------------------------------------------------------------
+Tue Feb 16 16:57:56 UTC 2010 - jreidinger@novell.com
+
+- remove language module from default basesystem.yml (bnc#579453) 
+
+-------------------------------------------------------------------
 Tue Feb  9 10:51:33 CET 2010 - jsuchome@suse.cz
 
 - default basesystem.yml: mail_settings step renamed to mail
