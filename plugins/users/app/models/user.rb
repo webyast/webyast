@@ -123,9 +123,10 @@ class User
 	groups	= {}
 	attr.each do |g|
 	  cn		= g["cn"]
-	  groups[cn]	= 1
+	  groups[cn]	= ["i",1]
 	end
-#	data.store("grouplist", ... FIXME contruct a value for dbus!
+	data.store("grouplist", ["a{sv}",groups])
+
     end
     [ :cn, :uid, :uid_number, :gid_number, :groupname, :home_directory, :login_shell, :user_password, :addit_data, :type ].each do |attr_name|
       if self.respond_to?(attr_name)

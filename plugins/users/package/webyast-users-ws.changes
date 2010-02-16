@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Tue Feb 16 12:06:12 CET 2010 - mzugec@suse.cz
+
+- store grouplist into system (bnc#580136)
+- 0.1.4 
+
+-------------------------------------------------------------------
 Mon Feb 15 14:10:56 CET 2010 - mzugec@suse.cz
 
 - pass correct backend error message to client (preliminary solution) 

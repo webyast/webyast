@@ -16,7 +16,7 @@ PreReq:         yast2-webservice
 License:	GPL v2 only
 Group:          Productivity/Networking/Web/Utilities
 Autoreqprov:    on
-Version:        0.1.3
+Version:        0.1.4
 Release:        0
 Summary:        YaST2 - Webservice - Users
 Source:         www.tar.bz2
