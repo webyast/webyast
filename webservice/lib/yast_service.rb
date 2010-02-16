@@ -63,7 +63,7 @@ class YastService
 	    parms = dbe.dbus_message.params[0].split(' ')
 
             # throw a PolicyKit exception instead of the DBus exception
-            raise NoPermissionException.new(parms[0], ENV['USER'])
+            raise NoPermissionException.new(parms[0], "yastws")
 	end
 
 	# rethrow other DBus Errors
