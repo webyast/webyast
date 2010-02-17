@@ -1,4 +1,12 @@
 -------------------------------------------------------------------
+Wed Feb 17 17:17:49 UTC 2010 - lslezak@suse.cz
+
+- fixed a race condition - call PackageKit _after_ creating
+  a DBus loop object, the PackageKit signals can be sent
+  before the DBus loop is entered (bnc#579001)
+- 0.1.8
+
+-------------------------------------------------------------------
 Thu Feb 11 15:01:33 UTC 2010 - lslezak@suse.cz
 
 - fixed Repository.to_xml - produce valid output (bnc#579039)

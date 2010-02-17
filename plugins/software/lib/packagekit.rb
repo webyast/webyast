@@ -116,12 +116,6 @@ class PackageKit
       # set the custom signal handler if set
       proxy.on_signal(signal.to_s, &block) if !signal.blank? && block_given?
 
-      
-      # Do the call only when all signal handlers are in place,
-      # otherwise Finished can arrive early and dbusloop will never
-      # quit, bnc#561578
-      result = transaction_iface.send(method.to_sym, *args)
-
       if bg_stat
         proxy.on_signal("StatusChanged") do |s|
           Rails.logger.debug "PackageKit progress: StatusChanged: #{s}"
@@ -139,6 +133,14 @@ class PackageKit
       dbusloop = self.dbusloop proxy
 
       dbusloop << proxy.bus
+
+      # Do the call only when all signal handlers are in place,
+      # otherwise Finished can arrive early and dbusloop will never
+      # quit, bnc#561578
+      # call it after creating the DBus loop (bnc#579001)
+      result = transaction_iface.send(method.to_sym, *args)
+
+      # run the main loop, process the incoming signals
       dbusloop.run
 
       packagekit_iface.SuggestDaemonQuit
