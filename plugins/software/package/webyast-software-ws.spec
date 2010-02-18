@@ -36,7 +36,7 @@ Requires:       PackageKit >= 0.3.14-3
 License:	GPL v2 only
 Group:          Productivity/Networking/Web/Utilities
 Autoreqprov:    on
-Version:        0.1.8
+Version:        1.0.1
 Release:        0
 Summary:        YaST2 - Webservice - Patches
 Source:         www.tar.bz2
@@ -89,6 +89,7 @@ rm -rf $RPM_BUILD_ROOT
 # granting all permissions for root
 #
 /usr/sbin/grantwebyastrights --user root --action grant > /dev/null ||:
+/usr/sbin/grantwebyastrights --user %pkg_user} --action grant > /dev/null ||:
 
 # grant the permission for the webservice user
 polkit-auth --user %{pkg_user} --grant org.freedesktop.packagekit.system-sources-configure >& /dev/null || true

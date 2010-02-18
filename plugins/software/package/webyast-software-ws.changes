@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Thu Feb 18 12:53:54 UTC 2010 - jreidinger@novell.com
+
+- ensure that rights is granted also for yastws (bnc#580861)
+- 1.0.1
+
+-------------------------------------------------------------------
 Wed Feb 17 17:17:49 UTC 2010 - lslezak@suse.cz
 
 - fixed a race condition - call PackageKit _after_ creating
