@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Thu Feb 18 14:10:04 UTC 2010 - jreidinger@novell.com
+
+- ensure that rights is granted also for yastws (bnc#580861)
+- 0.1.0
+
+-------------------------------------------------------------------
 Mon Jan 25 15:40:47 CET 2010 - mkudlvasr@novell.com
 
 - version 0.0.1

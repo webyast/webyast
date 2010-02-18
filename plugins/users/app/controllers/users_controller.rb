@@ -19,6 +19,7 @@ class UsersController < ApplicationController
   # GET /users/1.xml
   def show
     yapi_perm_check "users.userget"
+    yapi_perm_check "users.groupsget"
     if params[:id].blank?
       render ErrorResult.error(404, 2, "empty parameter") and return
     end
@@ -55,6 +56,7 @@ class UsersController < ApplicationController
   # PUT /users/1.xml
   def update
     yapi_perm_check "users.usermodify"
+    yapi_perm_check "users.groupsget"
 
     if params[:users] && params[:users][:uid]
        params[:id] = params[:users][:uid] #for sync only

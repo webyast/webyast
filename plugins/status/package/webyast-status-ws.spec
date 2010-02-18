@@ -15,7 +15,7 @@ Obsoletes:      yast2-webservice-status < %{version}
 License:	GPL v2 only
 Group:          Productivity/Networking/Web/Utilities
 Autoreqprov:    on
-Version:        0.0.15
+Version:        0.1.0
 Release:        0
 Summary:        YaST2 - Webservice - Status
 Source:         www.tar.bz2
@@ -87,6 +87,7 @@ rm -rf $RPM_BUILD_ROOT
 # granting all permissions for root
 #
 /usr/sbin/grantwebyastrights --user root --action grant > /dev/null
+/usr/sbin/grantwebyastrights --user %{pkg_user} --action grant > /dev/null
 
 #
 # nslookup of static hostnames can result to an error. Due this error collectd

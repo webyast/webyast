@@ -1,4 +1,11 @@
 -------------------------------------------------------------------
+Thu Feb 18 13:18:15 CET 2010 - schubi@suse.de
+
+- Bug 580861 - Granting permissions for yastws are missed in some webservice-plugins
+- added yast2-registration to prereq
+- version 0.0.9 
+
+-------------------------------------------------------------------
 Thu Feb  4 15:46:20 CET 2010 - jdsn@suse.de
 
 - adding recommends for openssl-certs to spec file

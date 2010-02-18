@@ -2,6 +2,8 @@
 Wed Feb 10 09:06:59 CET 2010 - jsuchome@suse.cz
 
 - possible to check return value of Mail->WriteServices (bnc#577932)
+- require yast2-mail-2.18.3 for openSUSE
+- 0.1.4
 
 -------------------------------------------------------------------
 Mon Feb  8 14:50:27 CET 2010 - jsuchome@suse.cz
