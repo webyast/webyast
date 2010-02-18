@@ -12,7 +12,7 @@
 Name:           webyast-registration-ws
 Provides:       yast2-webservice-registration = %{version}
 Obsoletes:      yast2-webservice-registration < %{version}
-PreReq:         yast2-webservice
+PreReq:         yast2-webservice, yast2-registration
 License:        GPL v2 only
 Group:          Productivity/Networking/Web/Utilities
 Autoreqprov:    on

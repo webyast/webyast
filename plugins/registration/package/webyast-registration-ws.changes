@@ -2,6 +2,7 @@
 Thu Feb 18 13:18:15 CET 2010 - schubi@suse.de
 
 - Bug 580861 - Granting permissions for yastws are missed in some webservice-plugins
+- added yast2-registration to prereq
 - version 0.0.9 
 
 -------------------------------------------------------------------
