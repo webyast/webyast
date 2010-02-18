@@ -16,7 +16,7 @@ PreReq:         yast2-webservice
 License:        GPL v2 only
 Group:          Productivity/Networking/Web/Utilities
 Autoreqprov:    on
-Version:        0.0.8
+Version:        0.0.9
 Release:        0
 Summary:        YaST2 - Webservice - Registration
 Source:         www.tar.bz2
@@ -67,9 +67,10 @@ rm -rf $RPM_BUILD_ROOT
 
 %post
 #
-# granting all permissions for root 
+# granting all permissions for root and yastws
 #
 /usr/sbin/grantwebyastrights --user root --action grant > /dev/null
+/usr/sbin/grantwebyastrights --user yastws --action grant > /dev/null
 
 %files 
 %defattr(-,root,root)
