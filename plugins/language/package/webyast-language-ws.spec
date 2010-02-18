@@ -27,10 +27,10 @@ BuildRequires:  rubygem-yast2-webservice-tasks rubygem-restility
 # YaPI/LANGUAGE.pm
 %if 0%{?suse_version} == 0 || %suse_version > 1110
 # 11.2 or newer
-Requires:       yast2-country >= 2.18.10
+PreReq:       yast2-country >= 2.18.10
 %else
 # 11.1 or SLES11
-Requires:       yast2-country >= 2.17.34.1
+PreReq:       yast2-country >= 2.17.34.1
 %endif
 
 
