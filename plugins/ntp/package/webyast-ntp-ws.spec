@@ -21,7 +21,7 @@ Requires:	util-linux
 License:	GPL v2 only
 Group:          Productivity/Networking/Web/Utilities
 Autoreqprov:    on
-Version:        0.0.8
+Version:        0.1.0
 Release:        0
 Summary:        YaST2 - Webservice - NTP
 Source:         www.tar.bz2

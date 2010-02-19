@@ -29,6 +29,8 @@ class RepositoryTest < ActiveSupport::TestCase
       end
     end
 
+    # don't read system *.repo files
+    Repository.any_instance.stubs(:read_file).returns(nil)
   end
 
   def test_repository_index
