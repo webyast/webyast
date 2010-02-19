@@ -21,7 +21,7 @@ class ResolvableTest < ActiveSupport::TestCase
     
     @pk_stub.result = rset
     
-    # Mock 'GetUpdates' by defining it
+    # Mock 'SearchName' by defining it
     m = DBus::Method.new("SearchName")
     m.from_prototype("in repos:s, in name:s")
     @transaction.methods[m.name] = m
