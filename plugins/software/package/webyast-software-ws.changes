@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Fri Feb 19 07:47:19 UTC 2010 - lslezak@suse.cz
+
+- fixed a typo in post-install script (bnc#581165)
+- 0.1.10
+
+-------------------------------------------------------------------
 Thu Feb 18 12:53:54 UTC 2010 - jreidinger@novell.com
 
 - ensure that rights is granted also for yastws (bnc#580861)
