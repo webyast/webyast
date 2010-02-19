@@ -1,8 +1,0 @@
-#!/bin/sh
-if [ -n "$1" ]; then
-  xmllint -o /dev/null --schema XMLSchema.xsd product.xsd && xmllint -o /dev/null --xinclude --schema product.xsd "$1" || exit
-else
-for i in *.product; do
-  xmllint -o /dev/null --schema XMLSchema.xsd product.xsd && xmllint -o /dev/null --xinclude --schema product.xsd "$i" || exit
-done
-fi
