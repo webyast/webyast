@@ -35,7 +35,7 @@ Requires:	yast2-dbus-server
 Conflicts:      gamin
 PreReq:         PolicyKit, PackageKit, rubygem-rake, rubygem-sqlite3
 PreReq:         rubygem-rails-2_3 >= 2.3.4
-PreReq:         ruby-rpam, ruby-polkit
+PreReq:         rubygem-rpam, rubygem-polkit
 License:	LGPL v2.1 only
 Group:          Productivity/Networking/Web/Utilities
 Autoreqprov:    on
