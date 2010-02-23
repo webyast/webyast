@@ -133,15 +133,16 @@ class Register
     xml = options[:builder] ||= Builder::XmlMarkup.new(options)
     xml.instruct! unless options[:skip_instruct]
 
-    status = if !@reg ||  @reg['error'] then  'error'
-             elsif @reg['missinginfo']  then  'missinginfo'
-             elsif @reg['success']      then  'finished'
-             end
-
-    exitcode = if !@reg then 99
-               elsif @reg.has_key?('exitcode') then @reg['exitcode']
-               else 199
+    exitcode = if !@reg                        then 99
+               elsif @reg.has_key?('exitcode') then @reg['exitcode'].to_i
+                                               else 199
                end
+
+    status = if !@reg || @reg['error']                   then  'error'
+             elsif @reg['missinginfo'] && exitcode == 4  then  'missinginfo'
+             elsif @reg['success']                       then  'finished'
+                                                         else  'error'
+             end
 
     changedrepos = {}
     changedservices = {}
@@ -176,7 +177,7 @@ class Register
       xml.exitcode exitcode
       xml.guid self.guid || ''
 
-      if @arguments && exitcode != 0
+      if @arguments && @arguments.size > 0 && exitcode == 4
         xml.missingarguments({:type => "array"}) do
           @arguments.each do | k, v |
             if k && v.kind_of?(Hash)
