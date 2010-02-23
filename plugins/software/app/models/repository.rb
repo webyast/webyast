@@ -47,27 +47,31 @@ class Repository
   def read_file
     fname = "/etc/zypp/repos.d/#{@id}.repo"
     Rails.logger.debug "Reading repofile: #{fname}"
-    
+
+    read_from_file fname
+  end
+
+  def read_from_file fname
     return unless File.readable? fname
-    
+
     File.open(fname) do |file|
 
       while line = file.gets
 	# remove comments
 	line.match /^([^#]*)#*.*$/
 	l = $1
-	
+
 	next if l.blank?
-	  
+
 	l.match /^[ \t]*([^=]*)[ \t]*=[ \t]*(.*)[ \t]*$/
 
 	key = $1
 	next if key.blank?
 	value = $2
 	next if value.blank?
-	    
+
 	Rails.logger.debug "Read key: #{key}, value: #{value}"
-	    
+
 	case key
 	when 'autorefresh'
 	  @autorefresh = (value == 'true' || value == '1')
@@ -83,10 +87,12 @@ class Repository
 	  @url = value
 	  # other values are returned by PackageKit, just ignore them
 	end
-	
+
       end # while
     end # File.open
   end
+
+  private :read_from_file
 
   #
   #
@@ -139,8 +145,6 @@ class Repository
     return false if @id.blank?
 
     PackageKit.transact('RepoSetData', [@id, 'remove', 'NONE'])
-    
-    true
   end
 
   #
