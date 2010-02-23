@@ -6,7 +6,7 @@ use YaST::YCP qw(:LOGGING);
 
 our %TYPEINFO;
 
-BEGIN{$TYPEINFO{Synchronize} = ["function","boolean"
+BEGIN{$TYPEINFO{Synchronize} = ["function","boolean",
     "string"];
 }
 sub Synchronize {
@@ -25,9 +25,9 @@ sub Synchronize {
     y2warning($out);
   }
   return "NOSERVERS" unless (defined ($out));
-  my $local = "--utc"
-  unless $use_utc {
-    my $local = "--localtime"
+  my $local = "--utc";
+  unless ($use_utc) {
+    $local = "--localtime";
   }
   my $ret = `/sbin/hwclock $local --systohc`;
   y2milestone("hwclock returns $?: $ret");
