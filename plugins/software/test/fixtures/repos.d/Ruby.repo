@@ -1,0 +1,18 @@
+[Ruby]
+name = Ruby repository
+
+
+enabled = 0
+  autorefresh = 0# comment 
+# comment
+
+  # comment
+  # comment # comment enabled = 0
+
+baseurl=http://download.opensuse.org/repositories/devel:/languages:/ruby:/extensions/openSUSE_Factory
+	priority = 120#comment
+	path = /
+  type = rpm-md
+### keeppackages = 0
+                 
+                    

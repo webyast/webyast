@@ -63,7 +63,7 @@ class Repository
 
 	next if l.blank?
 
-	l.match /^[ \t]*([^=]*)[ \t]*=[ \t]*(.*)[ \t]*$/
+	l.match /^[ \t]*([^= \t]*)[ \t]*=[ \t]*(.*)[ \t]*$/
 
 	key = $1
 	next if key.blank?

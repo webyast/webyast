@@ -7,6 +7,12 @@ require File.join(File.dirname(__FILE__), "..", "packagekit_stub")
 
 require 'repository'
 
+# make the private method available for testing
+class Repository
+  public :read_from_file
+end
+
+
 class RepositoryTest < ActiveSupport::TestCase
 
   def setup
@@ -135,5 +141,25 @@ class RepositoryTest < ActiveSupport::TestCase
 
     assert_equal repo_from_json, {"repository"=>{"name"=>"FACTORY-OSS", "autorefresh"=>true, "url"=>nil,
         "priority"=>99, "id"=>"factory-oss", "enabled"=>true, "keep_packages"=>false}}
+  end
+
+  def test_repo_file_parsing
+    repo = Repository.new("factory-oss", "FACTORY-OSS", true)
+
+    fname = File.join(File.dirname(__FILE__), '..', 'fixtures', 'repos.d', 'Ruby.repo')
+    repo.read_from_file fname
+
+    # keep the alias, name and priority which was read from PackageKit
+    assert_equal 'FACTORY-OSS', repo.name
+    assert_equal 'factory-oss', repo.id
+    assert_equal true, repo.enabled
+
+    # check the read values
+    assert_equal 120, repo.priority
+    assert_equal false, repo.autorefresh
+    assert_equal 'http://download.opensuse.org/repositories/devel:/languages:/ruby:/extensions/openSUSE_Factory', repo.url
+
+    # use the default value if if the key is missing
+    assert_equal false, repo.keep_packages
   end
 end
