@@ -58,10 +58,6 @@ class UsersController < ApplicationController
     yapi_perm_check "users.usermodify"
     yapi_perm_check "users.groupsget"
 
-    if params[:users] && params[:users][:uid]
-       params[:id] = params[:users][:uid] #for sync only
-    end
-
     begin
       begin
         @user = User.find(params[:id])
@@ -69,7 +65,7 @@ class UsersController < ApplicationController
         render ErrorResult.error(404, 2, e.message) and return
       end
       @user.load_attributes(params[:users])
-      @user.save
+      @user.save(params[:id])
     rescue Exception => e
       # FIXME here should be internal error I guess
       render ErrorResult.error(404, 2, e.message) and return
