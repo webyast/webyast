@@ -11,7 +11,7 @@ class ApplicationController < ActionController::Base
   rescue_from BackendException, :with => :report_backend_exception
 
   rescue_from InvalidParameters do |exception|
-    logger.info "Raised resource Invalid exception - #{e.inspect}"
+    logger.info "Raised resource Invalid exception - #{exception.inspect}"
     render :xml => exception, :status => 422 #422-resource invalid
   end
 
