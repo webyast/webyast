@@ -26,7 +26,6 @@ class Systemtime < BaseModel::Base
   attr_accessor :utcstatus
   validates_inclusion_of :utcstatus, :in => [true,false], :allow_nil => true
   attr_accessor :timezones
-  validates_presence_of :timezones
   # do not massload timezones, as it is read-only
   attr_protected :timezones
 
