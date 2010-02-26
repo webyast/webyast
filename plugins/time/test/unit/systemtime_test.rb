@@ -36,6 +36,13 @@ class SystemtimeTest < ActiveSupport::TestCase
       "time" => "2009-07-02 - 12:18:00"
     }  
 
+  READ_RESPONSE_BROKEN_TIMEZONE = {
+      "zones"=> TEST_TIMEZONES,
+      "timezone"=> "",
+      "utcstatus"=> "UTC",
+      "time" => "2009-07-02 - 12:18:00"
+    }  
+
   WRITE_ARGUMENTS_NONE = {
       "timezone"=> "America/Kentucky/Monticello",
       "utcstatus"=> "local"
@@ -67,6 +74,13 @@ class SystemtimeTest < ActiveSupport::TestCase
     assert_equal "Europe/Prague", @model.timezone
     assert_equal true, @model.utcstatus
     assert_equal TEST_TIMEZONES, @model.timezones
+  end
+
+  def test_getter_with_not_set_timezone #bnc#582166    
+    YastService.stubs(:Call).with("YaPI::TIME::Read",READ_ARGUMENTS).returns(READ_RESPONSE_BROKEN_TIMEZONE)
+
+    @model = Systemtime.find
+    assert_equal "Europe/Prague", @model.timezone
   end
 
   def test_setter_without_time

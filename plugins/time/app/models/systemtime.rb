@@ -89,6 +89,7 @@ class Systemtime < BaseModel::Base
   def self.find
     ret = Systemtime.new()
     ret.parse_response YastService.Call("YaPI::TIME::Read",create_read_question)
+    ret.timezone = "Europe/Prague" if ret.timezone.blank? #last fallback if everything fail #bnc582166
     return ret
   end
 
