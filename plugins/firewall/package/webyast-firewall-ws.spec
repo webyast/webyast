@@ -14,7 +14,7 @@ PreReq:         webyast-base-ws
 License:        GPL v2 only
 Group:          Productivity/Networking/Web/Utilities
 Autoreqprov:    on
-Version:        0.1.0
+Version:        0.2.0
 Release:        0
 Summary:        YaST2 - Webservice - Firewall
 Source:         www.tar.bz2
@@ -82,15 +82,15 @@ rm -rf $RPM_BUILD_ROOT
 %dir /usr/share/YaST2/modules/YaPI/
 %dir /usr/share/PolicyKit
 %dir /usr/share/PolicyKit/policy
-%config /srv/www/%{pkg_user}/vendor/plugins/%{plugin_name}/README
-%config /srv/www/%{pkg_user}/vendor/plugins/%{plugin_name}/Rakefile
-%config /srv/www/%{pkg_user}/vendor/plugins/%{plugin_name}/init.rb
-%config /srv/www/%{pkg_user}/vendor/plugins/%{plugin_name}/install.rb
-%config /srv/www/%{pkg_user}/vendor/plugins/%{plugin_name}/uninstall.rb
-%config /srv/www/%{pkg_user}/vendor/plugins/%{plugin_name}/app
-%config /srv/www/%{pkg_user}/vendor/plugins/%{plugin_name}/config
-%config /srv/www/%{pkg_user}/vendor/plugins/%{plugin_name}/tasks
-#%config /srv/www/%{pkg_user}/vendor/plugins/%{plugin_name}/test
+/srv/www/%{pkg_user}/vendor/plugins/%{plugin_name}/README
+/srv/www/%{pkg_user}/vendor/plugins/%{plugin_name}/Rakefile
+/srv/www/%{pkg_user}/vendor/plugins/%{plugin_name}/init.rb
+/srv/www/%{pkg_user}/vendor/plugins/%{plugin_name}/install.rb
+/srv/www/%{pkg_user}/vendor/plugins/%{plugin_name}/uninstall.rb
+/srv/www/%{pkg_user}/vendor/plugins/%{plugin_name}/app
+/srv/www/%{pkg_user}/vendor/plugins/%{plugin_name}/config
+/srv/www/%{pkg_user}/vendor/plugins/%{plugin_name}/tasks
+#/srv/www/%{pkg_user}/vendor/plugins/%{plugin_name}/test
 /usr/share/YaST2/modules/YaPI/FIREWALL.pm
 %attr(644,root,root) %config /usr/share/PolicyKit/policy/org.opensuse.yast.modules.yapi.%{plugin_name}.policy
 %doc COPYING

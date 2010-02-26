@@ -1,4 +1,12 @@
 -------------------------------------------------------------------
+Thu Feb 25 16:51:56 CET 2010 - mkudlvasr@novell.com
+
+- change data structure, so that it doesn't use name of another
+  plugin (services). This was breaking ActiveRecord.
+- remove %config tags from spec-file
+- 0.2.0
+
+-------------------------------------------------------------------
 Thu Feb 18 14:10:04 UTC 2010 - jreidinger@novell.com
 
 - ensure that rights is granted also for yastws (bnc#580861)
