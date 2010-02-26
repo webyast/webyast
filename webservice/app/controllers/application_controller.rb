@@ -11,7 +11,8 @@ class ApplicationController < ActionController::Base
   rescue_from BackendException, :with => :report_backend_exception
 
   rescue_from InvalidParameters do |exception|
-      render :xml => exception, :status => 422 #422-resource invalid
+    logger.info "Raised resource Invalid exception - #{e.inspect}"
+    render :xml => exception, :status => 422 #422-resource invalid
   end
 
 #lazy load of YaST::Config library
