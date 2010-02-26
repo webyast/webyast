@@ -10,6 +10,7 @@ org.opensuse.yast.modules.ysr.setregistrationconfig
 org.freedesktop.network-manager-settings.system.modify
 org.opensuse.yast.module-manager.import
 org.opensuse.yast.module-manager.lock
+org.opensuse.yast.scr.read
 org.opensuse.yast.modules.yapi.users.usersget
 org.opensuse.yast.modules.yapi.users.userget
 org.opensuse.yast.modules.yapi.users.usermodify
@@ -28,8 +29,7 @@ EOF
     PolKit.stubs(:polkit_check).returns(:no)
     ["org.opensuse.yast.modules.ysr.statelessregister",
      "org.opensuse.yast.modules.ysr.getregistrationconfig",
-     "org.freedesktop.network-manager-settings.system.modify",
-     "org.opensuse.yast.module-manager.import"].each do |perm|
+     "org.freedesktop.network-manager-settings.system.modify"].each do |perm|
       PolKit.stubs(:polkit_check).with(perm,"test").returns(:yes)
     end
   end
@@ -37,7 +37,7 @@ EOF
   def test_find_all
     perm = Permission.find(:all)
 #test all yast perm is loaded
-    assert_equal 12,perm.permissions.size
+    assert_equal 10,perm.permissions.size
 #test that all have not granted
     perm.permissions.each do |p|
       assert !p[:granted]
@@ -48,7 +48,7 @@ EOF
   def test_find_for_user
     perm = Permission.find(:all,{:user_id => "test"})
 #test all loaded
-    assert_equal 12,perm.permissions.size
+    assert_equal 10,perm.permissions.size
 #check if is granted
     perm.permissions.each do |p|
       if p[:id]=="org.opensuse.yast.modules.ysr.statelessregister"
@@ -59,13 +59,13 @@ EOF
   end
 
   def test_find_with_filter
-    perm = Permission.find(:all,{:user_id => "test",:filter => "org.opensuse.yast.module-manager.import"})
+    perm = Permission.find(:all,{:user_id => "test",:filter => "org.opensuse.yast.permissions.write"})
 
 #test all loaded
     assert_equal 1,perm.permissions.size
 #check if is granted
     perm.permissions.each do |p|
-      assert p[:id] == "org.opensuse.yast.module-manager.import"
+      assert p[:id] == "org.opensuse.yast.permissions.write"
     end
   end
 end

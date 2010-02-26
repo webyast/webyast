@@ -98,9 +98,12 @@ private
     `/usr/bin/polkit-action`
   end
 
+SUSE_STRING = "org.opensuse.yast"
   def filter_nonsuse_permissions (str)
-    suse_string = "org.opensuse.yast"
-    str.select{ |s| s.include? suse_string }
+    str.select{ |s|
+      s.include?(SUSE_STRING) &&
+        !s.include?(SUSE_STRING+".scr") &&
+        !s.include?(SUSE_STRING+".module-manager")}
   end
 
 end
