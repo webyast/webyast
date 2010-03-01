@@ -1,6 +1,8 @@
-test: - jreidinger
-      - Santa
-      - tux
+test: 
+  - jreidinger
+  - Santa
+  - tux
 
-test2: - jreidinger
-       - Santa
+test2: 
+  - jreidinger
+  - Santa
