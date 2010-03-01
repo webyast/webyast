@@ -26,7 +26,7 @@ def self.find(what=:all,options={})
   when :all then
      result.values
   else
-    result.find { |r| r.name.to_sym == what }
+    result.find { |k,v| k.to_sym == what }[1] #return value, not key
   end
 end
 

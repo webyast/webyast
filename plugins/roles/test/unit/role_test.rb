@@ -17,4 +17,11 @@ class RoleTest < ActiveSupport::TestCase
     assert_equal 3,test_role.users.size
     assert_equal 2,test_role.permissions.size
   end
+
+  def test_find_id
+    test_role = Role.find :test
+    assert test_role
+    assert_equal 3,test_role.users.size
+    assert_equal 2,test_role.permissions.size
+  end
 end
