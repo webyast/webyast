@@ -12,6 +12,7 @@ our %TYPEINFO;
 
 YaST::YCP::Import ("Mail");
 YaST::YCP::Import ("Progress");
+YaST::YCP::Import ("SCR");
 
 # Read part of mail configuration: SMTP server and authentication details
 # Uses Mail.ycp API
@@ -67,6 +68,10 @@ sub Write {
     return "Error writing config file(s)." unless Mail->WriteFlush ();
     return "Error running SuSEconfig." unless Mail->WriteSuSEconfig ();
     return "Error restarting service(s)." unless Mail->WriteServices ();
+
+    SCR->Execute (".target.symlink",
+	"/etc/sysconfig/network/scripts/postfix-update-hostname",
+	"/etc/sysconfig/network/if-up.d/postfix-update-hostname");
     
     return "";
 }

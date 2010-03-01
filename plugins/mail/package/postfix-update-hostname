@@ -1,0 +1,122 @@
+#!/bin/bash
+#
+# Copyright (c) 2010 SUSE LINUX Products GmbH, Germany.
+# All rights reserved.
+#
+# This program is free software; you can redistribute it and/or modify it under
+# the terms of the GNU General Public License as published by the Free Software
+# Foundation; either version 2 of the License, or (at your option) any later
+# version.
+#
+# This program is distributed in the hope that it will be useful, but WITHOUT
+# ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
+# FOR A PARTICULAR PURPOSE.  See the GNU General Public License for more
+# details.
+#
+# You should have received a copy of the GNU General Public License along with
+# this program; if not, write to the Free Software Foundation, Inc., 59 Temple
+# Place, Suite 330, Boston, MA 02111-1307 USA
+#
+usage () {
+	echo $@
+	echo "usage: $SCRIPTNAME [<config>] <interface> [-o <options>]"
+	echo ""
+	echo "Options are:"
+	echo "    [on]boot : we are currently booting (or shutting down)"
+	echo "    debug    : be verbose"
+	echo "    dhcp     : indicates that we are called by dhcp client"
+	echo "    rc       : indicates that we are called from rcnetwork"
+	echo ""
+	echo "Any another options are ignored"
+	echo ""
+	exit $R_USAGE
+}
+
+######################################################################
+# change the working direcory and source some common files
+#
+R_INTERNAL=1      # internal error, e.g. no config or missing scripts
+cd /etc/sysconfig/network || exit $R_INTERNAL
+test -f ./config && . ./config
+test -f ./dhcp   && . ./dhcp
+test -f scripts/functions && . scripts/functions || exit $R_INTERNAL
+test -f /etc/sysconfig/mail && . /etc/sysconfig/mail
+
+######################################################################
+# check arguments and how we are called (in case of links)
+#
+SCRIPTNAME=${0##*/}
+debug $*
+case $1 in ""|-h|*help*) usage ;; esac
+CONFIG="$1"
+shift
+if [ "x$1" != x -a "x$1" != "x-o" ] ; then
+        INTERFACE="$1"
+else
+        INTERFACE="$CONFIG"
+fi
+shift
+test "x$1" = "x-o" && shift
+MODE=''
+RUN_FROM_RC=no
+DEBUG=${DEBUG:-no}
+DHCP=no
+while [ $# -gt 0 ]; do
+	case $1 in
+		boot|onboot) MODE=onboot ;;
+		debug)       DEBUG=yes ;;
+		dhcp)        DHCP=yes ;;
+		rc)          RUN_FROM_RC=yes ;;
+		*)           debug unknown option $1 ;;
+	esac
+	shift
+done
+
+# filter out some special interface types
+case "$INTERFACE" in
+	all|noiface|lo) exit 0 ;;
+esac
+
+# source interface config to get per interface settings
+test -f ./ifcfg-$CONFIG && . ./ifcfg-$CONFIG || exit 0
+
+# usage: ifprint <err_mesg|mesg|...> message text...
+ifprint() {
+	func=${1}  ; shift
+	test "x$func" = x -o "x$INTERFACE" = x && return 1
+	if [ "$RUN_FROM_RC" = yes -a "$INTERFACE" != all ] ; then
+		$func "`printf "    %-9s " "$INTERFACE"`$*"
+	else
+		$func "$*"
+	fi
+}
+
+case $0 in
+*if-up.d*)
+	if test "$MODE" != onboot -a "$DHCP" = yes ; then
+		test "$DHCLIENT_SET_HOSTNAME"   = yes || exit 0
+		test "$MAIL_CREATE_CONFIG"      = yes || exit 0
+
+		# additional guards?
+		#test "$POSTFIX_UPDATE_HOSTNAME" = yes || exit 0
+
+		old=`postconf -h myhostname 2>/dev/null`
+		cur=`hostname -f 2>/dev/null`
+		if test "x$cur" = x ; then
+			cur=`cat /etc/HOSTNAME 2>/dev/null`
+		fi
+		if test "x$cur" != x -a "x$cur" != "x$old" ; then
+			debug "changing postfix hostname from '$old' to '$cur'"
+			postconf -e myhostname="$cur"
+			rcpostfix status 2>/dev/null && \
+			rcpostfix reload 2>/dev/null
+		fi
+	fi
+;;
+*if-down.d*)
+;;
+*)
+	usage
+;;
+esac
+

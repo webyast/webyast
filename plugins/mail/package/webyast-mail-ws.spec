@@ -16,12 +16,13 @@ PreReq:         yast2-webservice
 License:	GPL v2 only
 Group:          Productivity/Networking/Web/Utilities
 Autoreqprov:    on
-Version:        0.1.4
+Version:        0.1.5
 Release:        0
 Summary:        YaST2 - Webservice - Mail Settings
 Source:         www.tar.bz2
 Source1:        MailSettings.pm
 Source2:	org.opensuse.yast.modules.yapi.mailsettings.policy
+Source3:        postfix-update-hostname
 BuildRoot:      %{_tmppath}/%{name}-%{version}-build
 BuildArch:      noarch
 BuildRequires:  rubygem-yast2-webservice-tasks rubygem-restility
@@ -35,12 +36,12 @@ BuildRequires:  yast2 yast2-mail
 Requires:	postfix
 
 # Mail.ycp
-%if 0%{?suse_version} == 0 || %suse_version > 1110
-# 11.2 or newer
+%if 0%{?suse_version} == 0 || 0%{?suse_version} >= 1120
+# openSUSE11.2, Factory
 Requires:       yast2-mail >= 2.18.3
 %else
-# 11.1 or SLES11
-Requires:       yast2-mail >= 2.17.4
+# SLE11SP1
+Requires:       yast2-mail >= 2.17.5
 %endif
 
 #
@@ -85,6 +86,10 @@ install -m 0644 %SOURCE2 $RPM_BUILD_ROOT/usr/share/PolicyKit/policy/
 mkdir -p $RPM_BUILD_ROOT/usr/share/YaST2/modules/YaPI/
 cp %{SOURCE1} $RPM_BUILD_ROOT/usr/share/YaST2/modules/YaPI/
 
+#hook script
+mkdir -p $RPM_BUILD_ROOT/etc/sysconfig/network/scripts/
+install -m 0755 %SOURCE3 $RPM_BUILD_ROOT/etc/sysconfig/network/scripts/
+
 %clean
 rm -rf $RPM_BUILD_ROOT
 
@@ -114,6 +119,7 @@ rm -rf $RPM_BUILD_ROOT
 /srv/www/%{pkg_user}/vendor/plugins/%{plugin_name}/doc
 /srv/www/%{pkg_user}/vendor/plugins/%{plugin_name}/public
 /usr/share/YaST2/modules/YaPI/MailSettings.pm
+/etc/sysconfig/network/scripts/postfix-update-hostname
 %dir /usr/share/PolicyKit
 %dir /usr/share/PolicyKit/policy
 %attr(644,root,root) %config /usr/share/PolicyKit/policy/org.opensuse.yast.modules.yapi.mailsettings.policy

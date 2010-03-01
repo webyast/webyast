@@ -1,4 +1,11 @@
 -------------------------------------------------------------------
+Mon Mar  1 11:34:18 CET 2010 - jsuchome@suse.cz
+
+- package postfix-update-hostname script for dhcpcd (bnc#559145)
+- require correct version of yast2-mail
+- 0.1.5
+
+-------------------------------------------------------------------
 Wed Feb 10 09:06:59 CET 2010 - jsuchome@suse.cz
 
 - possible to check return value of Mail->WriteServices (bnc#577932)
