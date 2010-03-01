@@ -152,7 +152,7 @@ class Patch < Resolvable
     if patch.is_a?(Patch)
       update_id = "#{patch.name};#{patch.resolvable_id};#{patch.arch};#{patch.repo}"
       Rails.logger.debug "Install Update: #{update_id}"
-      self.package_kit_install(update_id)
+      PackageKit.install update_id
     else
       # if is not an object, assume it is an id
       patch_id = patch

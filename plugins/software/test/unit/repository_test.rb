@@ -159,7 +159,7 @@ class RepositoryTest < ActiveSupport::TestCase
     assert_equal false, repo.autorefresh
     assert_equal 'http://download.opensuse.org/repositories/devel:/languages:/ruby:/extensions/openSUSE_Factory', repo.url
 
-    # use the default value if if the key is missing
+    # use the default value if the key is missing
     assert_equal false, repo.keep_packages
   end
 end

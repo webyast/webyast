@@ -172,6 +172,7 @@ class PackageKit
     end
 
     dbusloop = self.dbusloop proxy
+    dbusloop << proxy.bus
 
     proxy.on_signal("Error") do |u1,u2|
       ok = false
@@ -188,7 +189,6 @@ class PackageKit
       transaction_iface.UpdatePackages([pk_id])
     end
 
-    dbusloop << proxy.bus
     dbusloop.run
     packagekit_iface.SuggestDaemonQuit
 

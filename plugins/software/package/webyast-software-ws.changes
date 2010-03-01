@@ -1,4 +1,12 @@
 -------------------------------------------------------------------
+Mon Mar  1 15:41:24 UTC 2010 - lslezak@suse.cz
+
+- fixed Patch installation (bnc#579034), fixed possible race
+  condition (add system bus to dbusloop object before sending DBus
+  message)
+- 0.1.11
+
+-------------------------------------------------------------------
 Fri Feb 19 07:47:19 UTC 2010 - lslezak@suse.cz
 
 - fixed a typo in post-install script (bnc#581165)
