@@ -2,6 +2,7 @@
 # Permission class
 #
 require 'exceptions'
+require 'polkit'
 
 class Permission
 #list of hash { :name => id, :granted => boolean}
@@ -55,16 +56,8 @@ class Permission
   end
 
   def mark_granted_permissions_for_user(user)
-    res = actions_for_user(user).split(/\n/)
-    res = filter_nonsuse_permissions res
-    res.each do
-      |permission|
-      #not much effective n*m where n is count of permissions and
-      # m is count of granted permissions
-      val = @permissions.detect do
-        |value| value[:id]==permission
-      end
-      val[:granted] = true if val
+    @permissions.each do |perm|
+      perm[:granted] = (PolKit.polkit_check(perm[:id].to_s, user.to_s) == :yes)
     end
   end
 private
@@ -79,17 +72,6 @@ private
     unless user =~ USERNAME_REGEX
       raise InvalidParameters.new(:user_id => "INVALID")
     end
-  end
-
-  def actions_for_user(user_name)
-    check_username user_name
-    ret = `LC_ALL=C polkit-auth --user '#{user_name}'` #whitelist usernames so this is secure
-    Rails.logger.info ret
-    if $?.exitstatus != 0 || ret.include?("cannot look up uid for user")
-      Rails.logger.info "status: #{$?.exitstatus} unknown user:"+ret
-      raise InvalidParameters.new :user_id => "UNKNOWN" 
-    end
-    return ret || []
   end
 
   def all_actions
