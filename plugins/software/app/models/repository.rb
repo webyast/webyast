@@ -43,6 +43,10 @@ class Repository
     repositories
   end
 
+  def self.mtime
+    File.stat("/etc/zypp/repos.d").mtime
+  end
+
   # read autorefresh, URL, keep_packages and priority directly from *.repo file
   def read_file
     fname = "/etc/zypp/repos.d/#{@id}.repo"
