@@ -74,6 +74,9 @@ class Graph
     config = Hash.new
     metrics = Metric.find(:all)
 
+    #if metrics is empty the collectd deamon is not running
+    raise ServiceNotRunning.new('collectd') if metrics.blank?
+
     #Disk
     disk = {"y_scale"=>1073741824, 
             "y_label"=>"GByte", 
@@ -89,7 +92,7 @@ class Graph
                                    "cummulated"=>"true"}
       end
     end
-    config["Disk"] = disk
+    config["Disk"] = disk unless disk["single_graphs"].blank?
     
     #Network
     network = {"y_scale"=>1, 
@@ -106,7 +109,7 @@ class Graph
                                    "cummulated"=>"false"}
       end
     end
-    config["Network"] = network
+    config["Network"] = network unless network["single_graphs"].blank?
 
     #Memory
     memory = {"y_scale"=>1048567, 
@@ -122,7 +125,7 @@ class Graph
     memory["single_graphs"] << {"lines"=>lines,
                                 "headline"=>"Memory", 
                                 "cummulated"=>"true"} unless lines.blank?
-    config["Memory"] = memory
+    config["Memory"] = memory unless memory["single_graphs"].blank?
 
     #CPU
     cpu = {"y_scale"=>1, 
@@ -142,7 +145,7 @@ class Graph
                                "headline"=>"CPU-" + key, 
                                "cummulated"=>"false"} unless lines.blank?
     end
-    config["CPU"] = cpu
+    config["CPU"] = cpu unless cpu["single_graphs"].blank?
 
     f = File.open(filename, "w")
     f.write(config.to_yaml)
@@ -156,7 +159,6 @@ class Graph
   #
   def self.parse_config(path = nil)
     path = File.join(Graph.plugin_config_dir(), CONFIGURATION_FILE ) if path == nil
-
     #create default configuration file
     Graph.create_config(path) unless File.exists?(path)
 
