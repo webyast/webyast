@@ -65,6 +65,7 @@ class Log
   # evaluate log lines
   # 
   def evaluate_content(pos_begin = 0, lines = DEFAULT_LINES)
+    pos_begin = 1 if pos_begin.to_i<0 #just to be sure to be in the valid frame
     @data = YastService.Call("LogFile::Read", ["s",id], ["s",pos_begin.to_s], ["s",lines.to_s])
     if @data["`value"]=="___WEBYAST___INVALID"
       Rails.logger.error "invalid id #{id} with path #{path}"
