@@ -101,13 +101,13 @@ sed -i "s/^FQDNLookup.*/FQDNLookup false/" "/etc/collectd.conf"
 sed -i "s/^#LoadPlugin df.*/LoadPlugin df/" "/etc/collectd.conf"
 
 #
-# set "Hostname" to WebYaST
+# set "Hostname" to WebYaST and remove already generated old log files
 #
-#sed -i "s/^#Hostname[[:space:]].*/#If you change hostname please delete \/var\/lib\/collectd\/WebYaST\nHostname \"WebYaST\"/" "/etc/collectd.conf"
-# This is disabled cause currently it does not work due the change "restart" -> "try-restart"
-# of the service
+sed -i "s/^#Hostname[[:space:]].*/#If you change hostname please delete \/var\/lib\/collectd\/WebYaST\nHostname \"WebYaST\"/" "/etc/collectd.conf"
+rm -rf /var/lib/collectd/*
+
 #
-# enable and start  collectd
+# enable and restart  collectd if it running
 # 
 %{fillup_and_insserv -Y collectd}
 rccollectd try-restart
