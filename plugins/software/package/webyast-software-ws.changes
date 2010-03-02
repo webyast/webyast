@@ -1,4 +1,11 @@
 -------------------------------------------------------------------
+Tue Mar  2 13:56:52 UTC 2010 - lslezak@suse.cz
+
+- implemented basic caching (action caching for :index and :show
+  actions)
+- 0.1.12
+
+-------------------------------------------------------------------
 Mon Mar  1 15:41:24 UTC 2010 - lslezak@suse.cz
 
 - fixed Patch installation (bnc#579034), fixed possible race

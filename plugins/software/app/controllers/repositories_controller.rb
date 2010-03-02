@@ -2,20 +2,47 @@ class RepositoriesController < ApplicationController
 
   before_filter :login_required
 
-#  TODO: implement caching - PackageKit query is quite slow
+  # cache index and show action
+  before_filter :check_cache_status, :only => [:index, :show]
+  before_filter :check_read_permissions, :only => [:index, :show]
+  caches_action :index, :show
+
+  CACHE_ID = 'repositories:timestamp'
+
+  private
+
+  # check whether the cached result is still valid
+  def check_cache_status
+    cache_timestamp = Rails.cache.read(CACHE_ID)
+
+    if cache_timestamp.nil?
+	# this is the first run, the cache is not initialized yet, just return
+	Rails.cache.write(CACHE_ID, Time.now)
+    # the cache expires when /etc/zypp/repos.d is modified
+    elsif cache_timestamp < Repository.mtime
+	Rails.logger.debug "#### Repositories cache expired"
+	expire_action :action => :index, :format => params["format"]
+	expire_action :action => :show, :format => params["format"]
+	Rails.cache.write(CACHE_ID, Time.now)
+    end
+  end
+
+  def check_read_permissions
+    permission_check "org.opensuse.yast.system.repositories.read"
+  end
+
 
   public
 
   # GET /repositories.xml
   def index
-    permission_check "org.opensuse.yast.system.repositories.read"
-
+    # read permissions were checked in a before filter
     @repos = Repository.find(:all)
   end
 
   # GET /repositories/my_repo.xml
   def show
-    permission_check "org.opensuse.yast.system.repositories.read"
+    # read permissions were checked in a before filter
 
     repos = Repository.find(params[:id])
     if repos.nil? || repos.size.zero?
