@@ -4,6 +4,7 @@ Tue Mar  2 12:39:27 CET 2010 - schubi@suse.de
 - Improving checks while generating the config file (bnc#582735)
 - Set WebYaST as default hostname for collectd in order to prevent
   confusion while changing hostname (bnc#580215)
+- checking params in the logviewer(bnc#580216)
 
 -------------------------------------------------------------------
 Thu Feb 18 12:48:23 UTC 2010 - jreidinger@novell.com
