@@ -33,8 +33,14 @@ class Patch < Resolvable
                            :arch => columns[2],
                            :repo => columns[3],
                            :summary => line3 )
-        return update if columns[1] == what #only the first entry will be returned in a hash
-        patch_updates << update
+
+        if what == :available
+          # add the update to the list
+          patch_updates << update
+        else
+          # just return this single update
+          patch_updates = update
+        end
       end
     }
     return patch_updates

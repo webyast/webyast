@@ -46,7 +46,7 @@ class PatchTest < ActiveSupport::TestCase
     rset << [ 'important', 'update-test-affects-package-manager;847;noarch;updates-test', 'update-test: Test updates for 11.2' ]
     rset << [ 'security', 'update-test;844;noarch;updates-test', 'update-test: Test update for 11.2' ]
     @pk_stub.result = rset
-    
+
     # Mock 'GetUpdates' by defining it
     m = DBus::Method.new("GetUpdates")
     m.from_prototype("in kind:s")
@@ -57,10 +57,19 @@ class PatchTest < ActiveSupport::TestCase
       end
     end
 
+    # search all patches
     patches = Patch.find(:available)
     assert_equal 2, patches.size
     patch = patches.first
     assert_equal "847", patch.resolvable_id
+
+    # search one patch
+    patch = Patch.find('847')
+    assert_equal "847", patch.resolvable_id
+
+    # search non-existing patch
+    patch = Patch.find('888')
+    assert_equal [], patch
   end
 
   SCRIPT_OUTPUT_ERROR = read_test_data('patch_test-script_error.out')
@@ -70,7 +79,7 @@ class PatchTest < ActiveSupport::TestCase
     Patch.stubs(:read_subprocess).returns(*SCRIPT_OUTPUT_ERROR)
     # return EOF when all lines are read
     Patch.stubs(:eof_subprocess?).returns(*(Array.new(SCRIPT_OUTPUT_ERROR.size, false) << true))
-    
+
     # note: Patch.find(:available, {:background => true})
     # cannot be used here, Threading support in test mode doesn't work :-(
     patches = Patch.subprocess_find(:available)
@@ -94,8 +103,39 @@ class PatchTest < ActiveSupport::TestCase
     assert_equal 1579, patches.first.resolvable_id
     assert_equal 'slessp0-openslp', patches.first.name
   end
-  
-  def test_mtime
-    assert Patch.mtime
+
+
+  def test_patch_install
+    rset = PackageKitResultSet.new "Package", :info => :s, :id => :s, :summary => :s
+    rset << [ 'important', 'update-test-affects-package-manager;847;noarch;updates-test', 'update-test: Test updates for 11.2' ]
+    rset << [ 'security', 'update-test;844;noarch;updates-test', 'update-test: Test update for 11.2' ]
+    @pk_stub.result = rset
+
+    # Mock 'GetUpdates' by defining it
+    m = DBus::Method.new("GetUpdates")
+    m.from_prototype("in kind:s")
+    @transaction.methods[m.name] = m
+
+    m2 = DBus::Method.new("UpdatePackages")
+    m2.from_prototype("in kind:as")
+    @transaction.methods[m2.name] = m2
+
+    class <<@transaction
+      def GetUpdates kind
+	# dummy !
+      end
+      def UpdatePackages p_id
+	# dummy !
+      end
+    end
+
+    # install a patch
+    assert Patch.install('847')
+
+    # installing a non existing patch throws an exception
+    assert_raise RuntimeError do
+      Patch.install('888')
+    end
+
   end
 end
