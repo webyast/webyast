@@ -39,4 +39,23 @@ TEST_DATA = { :name => "create_test", :permissions => ["org.opensuse.test.lest"]
     assert_equal TEST_DATA[:permissions],test_role.permissions
 	end
 
+	def test_update_role
+		r = Role.find(:test)
+		r.users = TEST_DATA[:users]
+		r.permissions = TEST_DATA[:permissions]
+		r.save
+    roles = Role.find
+    assert_equal 3,roles.size
+    test_role = roles.find { |r| r.name.to_sym == :test }
+    assert test_role
+    assert_equal TEST_DATA[:users],test_role.users
+    assert_equal TEST_DATA[:permissions],test_role.permissions
+	end
+
+	def test_update_role
+		Role.delete(:test)
+    roles = Role.find
+    assert_equal 2,roles.size
+	end
+
 end

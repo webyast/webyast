@@ -57,7 +57,7 @@ end
 
 def self.delete (id)
 	roles = find_all
-	roles[name] = self
+	roles.delete id.to_s
 	write_definitions roles.values
 	write_assigns roles.values
 end
