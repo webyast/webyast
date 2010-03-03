@@ -6,9 +6,11 @@ class RolesControllerTest < ActionController::TestCase
   fixtures :accounts
 
   def setup
-    #set fixtures
-    Role.const_set(:ROLES_DEF_PATH, File.join( File.dirname(__FILE__), "..","fixtures","roles.yml"))
-    Role.const_set(:ROLES_ASSIGN_PATH, File.join( File.dirname(__FILE__), "..","fixtures","roles_assign.yml"))
+    #set fixtures, renew test files
+		test_path = File.join( File.dirname(__FILE__), "..")
+		`cp #{test_path}/fixtures/* #{test_path}/tmp/`
+    Role.const_set(:ROLES_DEF_PATH, File.join( File.dirname(__FILE__), "..","tmp","roles.yml"))
+    Role.const_set(:ROLES_ASSIGN_PATH, File.join( File.dirname(__FILE__), "..","tmp","roles_assign.yml"))
     @model_class = Role
     @request = ActionController::TestRequest.new
     # http://railsforum.com/viewtopic.php?id=1719
