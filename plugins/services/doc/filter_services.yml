@@ -1,0 +1,12 @@
+# Under 'services' write a list of services that should be shown in UI
+# (in this order).
+#
+# As service names, use both standard services defined in /etc/init.d and
+# the custom ones defined in /etc/webyast/custom_services.yml
+#
+# If the list is empty, all services will be shown.
+services:
+  - cron
+  - my_own_service
+  - nfs
+  - cups

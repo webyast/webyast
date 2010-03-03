@@ -1,3 +1,4 @@
+require 'yast/config_file'
 require 'yast_service'
 
 # = Service model
@@ -10,11 +11,15 @@ class Service
   attr_accessor :status
   attr_accessor :description
   attr_accessor :summary
+  attr_accessor :custom
+
+  FILTER_FILE	= "filter_services.yml"
 
   def initialize(name)
     @name = name
     @description	= ""
     @summary		= ""
+    @custom		= false
   end
 
   private
@@ -26,6 +31,19 @@ class Service
 
   public
 
+  # reading configuration file
+  #
+  def self.parse_filter(path = nil)
+    path = File.join(Paths::CONFIG,FILTER_FILE) if path == nil
+
+    #reading configuration file
+    if File.exists?(path)
+	file = YaST::ConfigFile.new(path)
+	return file["services"] || []
+    end
+    return []
+  end
+
   # Return current system runlevel,
   def self.current_runlevel
     rl = run_runlevel.split(" ").last
@@ -34,9 +52,6 @@ class Service
   end
  
   # Read the list of all services.
-  # If the key "custom" is present in the parameter hash, read the list of
-  # custom services from the file. Otherwise, read LSB services available in
-  # current system runlevel.
   #
   # If the key read_status is present in the parameter hash, read the status of
   # each service.
@@ -46,17 +61,20 @@ class Service
     params = {} if params.nil?
 
     services	= []
-    read_status	= params.has_key?("read_status") 
+    services_map= {} # helper structure
+
+    filter		= parse_filter
 
     rl = current_runlevel
     args	= {
 	"runlevel"	=> [ "i", rl ],
-	"read_status"	=> [ "b", read_status],
-	"custom"	=> [ "b", params.has_key?("custom")],
+	"read_status"	=> [ "b", params.has_key?("read_status")],
 	"shortdescription"	=> [ "b", true],
-	"description"	=> [ "b", true]
+	"description"	=> [ "b", true],
+	"filter"	=> [ "as", filter ]
     }
 	
+    # read list of all init.d services
     yapi_ret = YastService.Call("YaPI::SERVICES::Read", args)
 
     if yapi_ret.nil?
@@ -64,13 +82,38 @@ class Service
     else
 	yapi_ret.each do |s|
 	  service	= Service.new(s["name"])
-	  service.status= s["status"] if s.has_key?("status")
+	  service.status	= s["status"] if s.has_key?("status")
 	  service.description	= s["description"] if s.has_key?("description")
 	  service.summary	= s["shortdescription"] if s.has_key?("shortdescription")
-#	  service.description	= s["shortdescription"] if s.has_key?("shortdescription") && !s["shortdescription"].empty?
 	  Rails.logger.debug "service: #{service.inspect}"
-	  services << service
+	  services_map[s["name"]]	= service
         end
+    end
+
+    # read list of custom (user defined) services
+    args["custom"]	= [ "b", true]
+	
+    yapi_ret = YastService.Call("YaPI::SERVICES::Read", args)
+
+    if yapi_ret.nil?
+        raise "Can't get custom services list"
+    else
+	yapi_ret.each do |s|
+	  service	= Service.new(s["name"])
+	  service.status	= s["status"] if s.has_key?("status")
+	  service.description	= s["description"] if s.has_key?("description")
+	  service.summary	= s["shortdescription"] if s.has_key?("shortdescription")
+	  service.custom	= true
+	  Rails.logger.debug "service: #{service.inspect}"
+	  services_map[s["name"]]	= service
+        end
+    end
+    if filter.nil? || filter.empty?
+	services	= services_map.values.sort { |a,b|  a.name <=> b.name }
+    else
+	filter.each do |name|
+	    services << services_map[name] if services_map.has_key? name
+	end
     end
     services
   end
@@ -84,7 +127,7 @@ class Service
   def read_status(params)
     args	= {
 	"service"	=> [ "s", self.name ],
-	"custom"	=> [ "b", params.has_key?("custom")],
+	"custom"	=> [ "b", params["custom"] == "true"],
     }
     yapi_ret = YastService.Call("YaPI::SERVICES::Read", args)
 
@@ -99,11 +142,10 @@ class Service
 
   # execute a service command (start, stop, ...)
   def save(params)
-
     args	= {
 	"name"		=> [ "s", self.name ],
 	"action"	=> [ "s", params["execute"] ],
-	"custom"	=> [ "b", params.has_key?("custom") ]
+	"custom"	=> [ "b", params["custom"] == "true" ]
     }
     ret = YastService.Call("YaPI::SERVICES::Execute", args)
 
@@ -120,6 +162,7 @@ class Service
       xml.name name
       xml.description description
       xml.summary summary
+      xml.custom custom
       xml.status status, {:type => "integer"}
     end  
   end

@@ -5,6 +5,7 @@
 #
 # service name:
 #	description: Enhanced description of the service
+#	shortdescription: Short description of the service (one line summary)
 #	start: path to application that should start the service
 #	stop: path to application that should stop the service
 #	status: path to application that should query the service status

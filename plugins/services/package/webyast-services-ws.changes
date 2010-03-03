@@ -1,4 +1,13 @@
 -------------------------------------------------------------------
+Wed Mar  3 20:32:33 CET 2010 - jsuchome@suse.cz
+
+- added support for only showing specified services, using
+  filter_services.yml config file (fate#308409)
+- save  information if service is 'custom', it has different
+  handling in YaPI
+- 0.1.4
+
+-------------------------------------------------------------------
 Tue Feb 23 08:54:01 CET 2010 - jsuchome@suse.cz
 
 - require correct versions of yast2 package, no need to check for
