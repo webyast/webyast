@@ -108,8 +108,13 @@ class Metric
   # or the first hostname with data available
   def self.default_host
     # try to get the real hostname
-    hostname = this_hostname    
     hosts = available_hosts
+    return hosts.first if hosts.size==1 #there is only one host available
+                                        #thats normally "WebYaST" defined in collectd.conf
+
+    #there are more than one hosts entry in the collectd database. 
+    #So lets try to get the right one....
+    hostname = this_hostname    
     return case
     # if data exists for it, then this is the default
     when host_available?(hostname) then hostname    
