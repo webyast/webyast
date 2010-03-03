@@ -24,9 +24,11 @@ def self.find(what=:all,options={})
   result = find_all
   return case what
   when :all then
-     result.values
+    result.values || []
   else
-    result.find { |k,v| k.to_sym == what }[1] #return value, not key
+		Rails.logger.info "find role for id #{what}"
+    v = result.find { |k,v| k.to_sym == what.to_sym }
+		v[1] if v #return value, not key
   end
 end
 
@@ -34,12 +36,12 @@ private
 def self.find_all
   raise CorruptedFileException.new( ROLES_DEF_PATH ) unless File.exist? ROLES_DEF_PATH
   raise CorruptedFileException.new( ROLES_ASSIGN_PATH ) unless File.exist? ROLES_ASSIGN_PATH
-  definitions = YAML::load( IO.read( ROLES_DEF_PATH ) ) #FIXME convert yaml parse error to own exc
+  definitions = YAML::load( IO.read( ROLES_DEF_PATH ) ) || {}#FIXME convert yaml parse error to own exc
   result = {}
   definitions.each do |k,v|
     result[k] = Role.new( k, v )
   end
-  assigns = YAML::load( IO.read( ROLES_ASSIGN_PATH ) )
+  assigns = YAML::load( IO.read( ROLES_ASSIGN_PATH ) ) || {}
   assigns.each do |k,v|
     result[k] = Role.new(k) if result[k].nil? #incosistent files
     result[k].users = v.sort
