@@ -1,4 +1,11 @@
 -------------------------------------------------------------------
+Wed Mar  3 16:56:55 CET 2010 - mvidner@suse.cz
+
+- Read permissions via ruby-polkit.rpm instead of polkit-auth,
+  to work around a resistent bug (bnc#569987).
+- 0.0.21
+
+-------------------------------------------------------------------
 Wed Jan 13 16:14:48 UTC 2010 - lslezak@suse.cz
 
 - close the running shell after verifying user's login/password
