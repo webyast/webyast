@@ -31,6 +31,7 @@ module BaseModel
         next if blacklist && blacklist.include?(k.to_sym)
         instance_variable_set("@#{k.to_s}",v)
       end
+			self
     end
 
     def self.included(base)
