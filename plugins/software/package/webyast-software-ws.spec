@@ -1,5 +1,5 @@
 #
-# spec file for package webyast-software-ws (Version 0.1.12)
+# spec file for package webyast-software-ws (Version 0.1.13)
 #
 # Copyright (c) 2008 SUSE LINUX Products GmbH, Nuernberg, Germany.
 # This file and all modifications and additions to the pristine
@@ -36,7 +36,7 @@ Requires:       PackageKit >= 0.3.14-3
 License:	GPL v2 only
 Group:          Productivity/Networking/Web/Utilities
 Autoreqprov:    on
-Version:        0.1.12
+Version:        0.1.13
 Release:        0
 Summary:        YaST2 - Webservice - Patches
 Source:         www.tar.bz2

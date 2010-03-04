@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Thu Mar  4 15:25:09 UTC 2010 - lslezak@suse.cz
+
+- handle DBus errors
+- 0.1.13
+
+-------------------------------------------------------------------
 Tue Mar  2 13:56:52 UTC 2010 - lslezak@suse.cz
 
 - implemented basic caching (action caching for :index and :show

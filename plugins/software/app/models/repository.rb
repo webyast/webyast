@@ -154,7 +154,7 @@ class Repository
   #
   #
   #
-  def to_xml(options = {})
+  def to_xml(options = {:indent => 2})
     xml = options[:builder] ||= Builder::XmlMarkup.new(options)
     xml.instruct! unless options[:skip_instruct]
 

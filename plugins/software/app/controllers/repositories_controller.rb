@@ -37,14 +37,23 @@ class RepositoriesController < ApplicationController
   # GET /repositories.xml
   def index
     # read permissions were checked in a before filter
-    @repos = Repository.find(:all)
+    begin
+      @repos = Repository.find(:all)
+    rescue DBus::Error => exception
+        render ErrorResult.error(404, 20, "DBus Error: #{exception.dbus_message.error_name}") and return
+    end
+
   end
 
   # GET /repositories/my_repo.xml
   def show
     # read permissions were checked in a before filter
+    begin
+      repos = Repository.find(params[:id])
+    rescue DBus::Error => exception
+        render ErrorResult.error(404, 20, "DBus Error: #{exception.dbus_message.error_name}") and return
+    end
 
-    repos = Repository.find(params[:id])
     if repos.nil? || repos.size.zero?
       Rails.logger.error "Repository #{params[:id]} not found."
       render ErrorResult.error(404, 1, "Repository #{params[:id]} was not found.") and return
@@ -68,8 +77,12 @@ class RepositoriesController < ApplicationController
     @repo.url = param[:url]
     @repo.priority = param[:priority].to_i
 
-    unless @repo.save
-      render ErrorResult.error(404, 2, "packagekit error") and return
+    begin
+      unless @repo.save
+        render ErrorResult.error(404, 2, "packagekit error") and return
+      end
+    rescue DBus::Error => exception
+        render ErrorResult.error(404, 20, "DBus Error: #{exception.dbus_message.error_name}") and return
     end
 
     render :show
@@ -86,16 +99,31 @@ class RepositoriesController < ApplicationController
 
     @repo = Repository.new(params[:id].to_s, param[:name].to_s, param[:enabled])
 
-    unless @repo.save
-      render ErrorResult.error(404, 2, "Cannot save repository '#{@repo.id}'") and return
+    begin
+      unless @repo.save
+        render ErrorResult.error(404, 2, "Cannot save repository '#{@repo.id}'") and return
+      end
+    rescue DBus::Error => exception
+        render ErrorResult.error(404, 20, "DBus Error: #{exception.dbus_message.error_name}") and return
     end
+
     render :show
   end
 
   def destroy
     permission_check "org.opensuse.yast.system.repositories.write"
 
-    repos = Repository.find(params[:id])
+    begin
+      repos = Repository.find(params[:id])
+    rescue DBus::Error => exception
+        render ErrorResult.error(404, 20, "DBus Error: #{exception.dbus_message.error_name}") and return
+
+      if exception.dbus_message.error_name == "org.freedesktop.DBus.Error.Spawn.ChildExited"
+        render ErrorResult.error(404, 20, "Cannot start PackageKit") and return
+      else
+        render ErrorResult.error(404, 21, "DBus Error: #{exception.dbus_message.error_name}") and return
+      end
+    end
 
     if repos.nil? || repos.size.zero?
       Rails.logger.error "Repository #{params[:id]} was not found."
@@ -104,8 +132,12 @@ class RepositoriesController < ApplicationController
 
     @repo = repos.first
 
-    unless @repo.destroy
-      render ErrorResult.error(404, 2, "packagekit error") and return
+    begin
+      unless @repo.destroy
+        render ErrorResult.error(404, 2, "packagekit error") and return
+      end
+    rescue DBus::Error => exception
+        render ErrorResult.error(404, 20, "DBus Error: #{exception.dbus_message.error_name}") and return
     end
 
     render :show
