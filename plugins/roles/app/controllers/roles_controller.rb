@@ -14,10 +14,22 @@ class RolesController < ApplicationController
 
   # Sets time settings. Requires write permissions for time YaPI.
   def update
+		#TODO check if id exist
+		Role.find(params[:id]).load(params).save
+		show
   end
 
   def create
+		Role.new.load(params["roles"]).save
+		params[:id] = params["roles"]["name"]
+		show
   end
+
+	def delete
+		#TODO check if id exist
+		Role.delete params[:id]
+		index
+	end
 
   # Shows time settings. Requires read permission for time YaPI.
   def show
