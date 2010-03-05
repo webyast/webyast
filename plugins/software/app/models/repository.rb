@@ -122,9 +122,7 @@ class Repository < BaseModel::Base
   #
   #
   #
-  def save
-    return false if @id.blank?
-
+  def update
     # create a new repository if it does not exist yet
     if !Repository.exists?(@id)
       Rails.logger.info "Adding a new repository '#{@id}': #{self.inspect}"
@@ -149,8 +147,6 @@ class Repository < BaseModel::Base
 
     # set keep_package
     PackageKit.transact('RepoSetData', [@id, 'keep', @keep_packages.to_s])
-
-    true
   end
 
   #

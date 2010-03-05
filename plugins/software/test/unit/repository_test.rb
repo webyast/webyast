@@ -88,6 +88,79 @@ class RepositoryTest < ActiveSupport::TestCase
     end
   end
 
+  def test_validation_of_priority
+    assert_nothing_raised do
+      repo = Repository.new("factory-oss-new", "FACTORY-OSS-NEW", true)
+
+      repo.enabled = false
+      repo.autorefresh = false
+      repo.name = 'new name'
+      repo.url = 'http://test.com/repo'
+
+      repo.priority = -20
+
+      assert_false repo.save
+    end
+  end
+
+  def test_validation_of_enabled
+    assert_nothing_raised do
+      repo = Repository.new("factory-oss-new", "FACTORY-OSS-NEW", true)
+
+      repo.autorefresh = false
+      repo.name = 'new name'
+      repo.url = 'http://test.com/repo'
+      repo.priority = 20
+
+      repo.enabled = 'bflmpsvz'
+
+      assert_false repo.save
+    end
+  end
+
+  def test_validation_of_keep_packages
+    assert_nothing_raised do
+      repo = Repository.new("factory-oss-new", "FACTORY-OSS-NEW", true)
+
+      repo.autorefresh = false
+      repo.name = 'new name'
+      repo.url = 'http://test.com/repo'
+      repo.priority = 20
+
+      repo.keep_packages = 'bflmpsvz'
+
+      assert_false repo.save
+    end
+  end
+
+  def test_validation_of_autorefresh
+    assert_nothing_raised do
+      repo = Repository.new("factory-oss-new", "FACTORY-OSS-NEW", true)
+
+      repo.name = 'new name'
+      repo.url = 'http://test.com/repo'
+      repo.priority = 20
+
+      repo.autorefresh = 'asdf'
+
+      assert_false repo.save
+    end
+  end
+
+  def test_validation_of_url
+    assert_nothing_raised do
+      repo = Repository.new("factory-oss-new", "FACTORY-OSS-NEW", true)
+
+      repo.autorefresh = true
+      repo.name = 'new name'
+      repo.priority = 20
+
+      repo.url = ''
+
+      assert_false repo.save
+    end
+  end
+
   def test_repository_update
 
     repo = Repository.find('factory-oss').first
@@ -96,7 +169,6 @@ class RepositoryTest < ActiveSupport::TestCase
     repo.autorefresh = false
     repo.name = 'new name'
     repo.url = 'ftp://new.url.com/repo'
-    repo.priority = -20 # TODO FIXME this just for debugging, remove it!!
 
     repos = Repository.find(:all)
     Repository.expects(:find).with(:all).returns(repos)
