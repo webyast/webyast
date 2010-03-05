@@ -96,6 +96,7 @@ class RepositoryTest < ActiveSupport::TestCase
     repo.autorefresh = false
     repo.name = 'new name'
     repo.url = 'ftp://new.url.com/repo'
+    repo.priority = -20 # TODO FIXME this just for debugging, remove it!!
 
     repos = Repository.find(:all)
     Repository.expects(:find).with(:all).returns(repos)
@@ -139,7 +140,7 @@ class RepositoryTest < ActiveSupport::TestCase
 
     repo_from_json = ActiveSupport::JSON.decode(jsn)
 
-    assert_equal repo_from_json, {"repository"=>{"name"=>"FACTORY-OSS", "autorefresh"=>true, "url"=>nil,
+    assert_equal repo_from_json, {"repository"=>{"name"=>"FACTORY-OSS", "autorefresh"=>true, "url"=>'',
         "priority"=>99, "id"=>"factory-oss", "enabled"=>true, "keep_packages"=>false}}
   end
 
