@@ -48,12 +48,22 @@ class Permission
     end
   @permissions = semiresult.map do
     |value|
-      {
+      ret = {
         :id => value,
         :granted => false
       }
+			ret[:description] = get_description(value) if options[:with_description]
+			ret
     end
   end
+
+private
+	def get_description (action)
+		desc = `polkit-action --action #{action} | grep description: | sed 's/^description:[:space:]*\\(.\\+\\)$/\\1/'`
+		desc.strip!
+		Rails.logger.info "description for #{action} is #{desc}"
+		desc
+	end
 
   def mark_granted_permissions_for_user(user)
     @permissions.collect! do
@@ -80,7 +90,6 @@ class Permission
       perm
     end
   end
-private
 
   USERNAME_REGEX = /\A[\d\w_]+\z/
   #
