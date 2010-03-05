@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Fri Mar  5 16:15:48 CET 2010 - mzugec@suse.cz
+
+- create separate model for groups
+- 0.1.6 
+
+-------------------------------------------------------------------
 Thu Feb 25 15:26:24 CET 2010 - jsuchome@suse.cz
 
 - fixed user renaming (bnc#580203)

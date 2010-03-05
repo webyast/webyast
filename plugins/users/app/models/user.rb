@@ -10,7 +10,7 @@ class User
   attr_accessor_with_default :uid_number, ""
   attr_accessor_with_default :gid_number, ""
   attr_accessor_with_default :grouplist, {}
-  attr_accessor_with_default :allgroups, {}
+#  attr_accessor_with_default :allgroups, {}
   attr_accessor_with_default :groupname, ""
   attr_accessor_with_default :home_directory, ""
   attr_accessor_with_default :login_shell, ""
@@ -56,9 +56,9 @@ class User
     }
     user_map = YastService.Call("YaPI::USERS::UserGet", parameters)
 
-    system_groups = YastService.Call("YaPI::USERS::GroupsGet", {"index"=>["s","cn"],"type"=>["s","system"]})
-    local_groups = YastService.Call("YaPI::USERS::GroupsGet", {"index"=>["s","cn"],"type"=>["s","local"]})
-    user.allgroups = Hash[*(local_groups.keys | system_groups.keys).collect {|v| [v,1]}.flatten]
+#    system_groups = YastService.Call("YaPI::USERS::GroupsGet", {"index"=>["s","cn"],"type"=>["s","system"]})
+#    local_groups = YastService.Call("YaPI::USERS::GroupsGet", {"index"=>["s","cn"],"type"=>["s","local"]})
+#    user.allgroups = Hash[*(local_groups.keys | system_groups.keys).collect {|v| [v,1]}.flatten]
 
     raise "Got no data while loading user attributes" if user_map.empty?
 
@@ -192,13 +192,13 @@ class User
 	    end
          end
       end
-      xml.allgroups({:type => "array"}) do
-         allgroups.each do |group| 
-	    xml.group do
-	      xml.tag!(:cn, group[0])
-	    end
-         end
-      end
+#      xml.allgroups({:type => "array"}) do
+#         allgroups.each do |group| 
+#	    xml.group do
+#	      xml.tag!(:cn, group[0])
+#	    end
+#         end
+#      end
     end  
   end
 
