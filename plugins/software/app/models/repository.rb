@@ -2,7 +2,7 @@
 
 require 'packagekit'
 
-class Repository
+class Repository < BaseModel::Base
 
   attr_accessor   :id,
     :name,
@@ -11,6 +11,17 @@ class Repository
     :url,
     :priority,
     :keep_packages
+
+   # alias and URL must not be empty on save
+   validates_presence_of :id
+   validates_presence_of :url
+   # check for boolean flags
+   validates_inclusion_of :enabled, :in => [true, false]
+   validates_inclusion_of :autorefresh, :in => [true, false]
+   validates_inclusion_of :keep_packages, :in => [true, false]
+   # priority must be in range 0..200
+   validates_inclusion_of :priority, :in => 0..200
+
 
   def initialize(id, name, enabled)
     @id = id
@@ -151,30 +162,5 @@ class Repository
     PackageKit.transact('RepoSetData', [@id, 'remove', 'NONE'])
   end
 
-  #
-  #
-  #
-  def to_xml(options = {:indent => 2})
-    xml = options[:builder] ||= Builder::XmlMarkup.new(options)
-    xml.instruct! unless options[:skip_instruct]
-
-    xml.tag! :repository do
-      xml.tag!(:id, @id)
-      xml.tag!(:name, @name)
-      xml.tag!(:url, @url)
-      xml.tag!(:enabled, @enabled, {:type => "boolean"})
-      xml.tag!(:autorefresh, @autorefresh, {:type => "boolean"})
-      xml.tag!(:keep_packages, @keep_packages, {:type => "boolean"})
-      xml.tag!(:priority, @priority, {:type => "integer"})
-    end
-  end
-
-  #
-  #
-  #
-  def to_json(options = {})
-    hash = Hash.from_xml(to_xml(options))
-    hash.to_json
-  end
 
 end
