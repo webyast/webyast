@@ -117,12 +117,6 @@ class RepositoriesController < ApplicationController
       repos = Repository.find(params[:id])
     rescue DBus::Error => exception
         render ErrorResult.error(404, 20, "DBus Error: #{exception.dbus_message.error_name}") and return
-
-      if exception.dbus_message.error_name == "org.freedesktop.DBus.Error.Spawn.ChildExited"
-        render ErrorResult.error(404, 20, "Cannot start PackageKit") and return
-      else
-        render ErrorResult.error(404, 21, "DBus Error: #{exception.dbus_message.error_name}") and return
-      end
     end
 
     if repos.nil? || repos.size.zero?
