@@ -57,14 +57,6 @@ class Permission
     end
   end
 
-private
-	def get_description (action)
-		desc = `polkit-action --action #{action} | grep description: | sed 's/^description:[:space:]*\\(.\\+\\)$/\\1/'`
-		desc.strip!
-		Rails.logger.info "description for #{action} is #{desc}"
-		desc
-	end
-
   def mark_granted_permissions_for_user(user)
     @permissions.collect! do
       |perm| 
@@ -90,6 +82,14 @@ private
       perm
     end
   end
+
+private
+	def get_description (action)
+		desc = `polkit-action --action #{action} | grep description: | sed 's/^description:[:space:]*\\(.\\+\\)$/\\1/'`
+		desc.strip!
+		Rails.logger.info "description for #{action} is #{desc}"
+		desc
+	end
 
   USERNAME_REGEX = /\A[\d\w_]+\z/
   #
