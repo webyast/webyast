@@ -2,6 +2,6 @@ steps:
   - controller: eulas
   - controller: administrator
   - controller: network
-  - controller: systemtime
+  - controller: time
   - controller: mail
   - controller: registration
