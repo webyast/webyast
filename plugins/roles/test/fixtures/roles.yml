@@ -1,0 +1,6 @@
+test: 
+  - org.opensuse.yast.test
+  - org.opensuse.yast.test-lest
+test2:
+  - org.opensuse.yast.test2
+test3:
