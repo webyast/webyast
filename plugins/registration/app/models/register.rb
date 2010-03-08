@@ -90,7 +90,21 @@ class Register
     @arguments = HashWithoutKeyConversion.from_xml(@reg['missingarguments']) if @reg && @reg.has_key?('missingarguments')
     @arguments = @arguments["missingarguments"] if @arguments && @arguments.has_key?('missingarguments')
 
-    @reg['exitcode'].to_i rescue 99
+
+    if !@reg
+      exitcode = 99
+    elsif @reg.has_key?('error') && @reg.has_key?('errorcode')
+      exitcode = @reg['errorcode'].to_i
+      exitcode = 199 if exitcode == 0
+    elsif @reg.has_key?('exitcode')
+      exitcode = @reg['exitcode'].to_i
+      exitcode = 199 if (exitcode == 0 && @reg['exitcode'] != "0")
+    else
+      exitcode = 199
+    end
+
+    @reg['calculated_exitcode'] = exitcode
+    exitcode
   end
 
   def save
@@ -133,10 +147,7 @@ class Register
     xml = options[:builder] ||= Builder::XmlMarkup.new(options)
     xml.instruct! unless options[:skip_instruct]
 
-    exitcode = if !@reg                        then 99
-               elsif @reg.has_key?('exitcode') then @reg['exitcode'].to_i
-                                               else 199
-               end
+    exitcode = @reg['calculated_exitcode'] || 199
 
     status = if !@reg || @reg['error']                   then  'error'
              elsif @reg['missinginfo'] && exitcode == 4  then  'missinginfo'
