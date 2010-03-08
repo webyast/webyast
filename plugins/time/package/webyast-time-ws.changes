@@ -1,4 +1,13 @@
 -------------------------------------------------------------------
+Mon Mar  8 16:20:08 UTC 2010 - jreidinger@novell.com
+
+- add last fallback if every attempt to get timezone fails 
+  (bnc#582166)
+- fix issue with non-saving time (bnc#582810)
+- 0.1.1
+
+
+-------------------------------------------------------------------
 Thu Feb 18 15:20:33 UTC 2010 - jreidinger@novell.com
 
 - use BaseModel and add validations
