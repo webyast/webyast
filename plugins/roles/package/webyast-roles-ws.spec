@@ -21,6 +21,8 @@ Source:         www.tar.bz2
 BuildRoot:      %{_tmppath}/%{name}-%{version}-build
 BuildArch:      noarch
 BuildRequires:  rubygem-mocha
+Source1:        roles.yml
+Source2:        roles_assign.yml
 
 #
 %define pkg_user yastws
@@ -49,6 +51,8 @@ mkdir -p $RPM_BUILD_ROOT/srv/www/%{pkg_user}/vendor/plugins/%{plugin_name}
 cp -a * $RPM_BUILD_ROOT/srv/www/%{pkg_user}/vendor/plugins/%{plugin_name}
 rm -f $RPM_BUILD_ROOT/srv/www/%{pkg_user}/vendor/plugins/%{plugin_name}/COPYING
 mkdir -p $RPM_BUILD_ROOT/usr/share/PolicyKit/policy
+mkdir -p $RPM_BUILD_ROOT/var/lib/yastws/roles
+cp %{SOURCE1} %{SOURCE2} $RPM_BUILD_ROOT/var/lib/yastws/roles
 
 %clean
 rm -rf $RPM_BUILD_ROOT
@@ -80,5 +84,6 @@ rm -rf $RPM_BUILD_ROOT
 /srv/www/%{pkg_user}/vendor/plugins/%{plugin_name}/tasks
 #/srv/www/%{pkg_user}/vendor/plugins/%{plugin_name}/test
 /srv/www/%{pkg_user}/vendor/plugins/%{plugin_name}/doc/README_FOR_APP
-%doc COPYING
+%config /var/lib/yastws/roles
 
+%doc COPYING
