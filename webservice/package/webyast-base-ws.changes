@@ -1,4 +1,14 @@
 -------------------------------------------------------------------
+Mon Mar  8 16:28:03 UTC 2010 - jreidinger@novell.com
+
+- log invalid arguments exception
+- remove unrelevant permissions from ws (bnc#582245)
+- change plugin registration so rake routes now works
+- baseModel: load method return self
+- add abitility to return also description for permissions
+- 0.1.5
+
+-------------------------------------------------------------------
 Mon Feb 22 14:35:17 UTC 2010 - jreidinger@novell.com
 
 - update dependencies to use rubygems 
