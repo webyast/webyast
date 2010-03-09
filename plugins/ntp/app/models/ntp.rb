@@ -2,22 +2,20 @@ class Ntp < BaseModel::Base
 
   attr_accessor :actions
 
-  validates_inclusion_of :'actions[:synchronize]', :in => [ true, false ], :allow_nil => true
-
-
   public
     
     def self.find
       ret = Ntp.new
       ret.actions ||= {}
-      if YastService.Call("YaPI::NTP::Available")
-        ret.actions[:synchronize] = false
-        ret.actions[:synchronize_utc] = true
+      ret.actions[:synchronize] = false
+      ret.actions[:synchronize_utc] = true
+      unless YastService.Call("YaPI::NTP::Available")
+        ret.actions[:ntp_server] = ""
       end
       return ret
     end
 
-    def save
+    def update
       synchronize if @actions[:synchronize]
     end
 
@@ -25,7 +23,7 @@ class Ntp < BaseModel::Base
     def synchronize
       ret = "OK"
       begin
-        ret = YastService.Call("YaPI::NTP::Synchronize",@actions[:synchronize_utc])
+        ret = YastService.Call("YaPI::NTP::Synchronize",@actions[:synchronize_utc],@actions[:ntp_server]||"")
       rescue Exception => e
         Rails.logger.info "ntp synchronization cause probably timeout #{e.inspect}"
       end
