@@ -24,13 +24,13 @@ class SystemControllerTest < ActionController::TestCase
   end
 
   def test_update
-    YastService.stubs(:Call).with("YaPI::NTP::Synchronize",true).once.returns("OK")
+    YastService.stubs(:Call).with("YaPI::NTP::Synchronize",true,"").once.returns("OK")
     post :update, {"ntp"=>{"actions" => {"synchronize"=>true,"synchronize_utc"=>true}}}
     assert_response :success
   end
 
   def test_update_failed
-    YastService.stubs(:Call).with("YaPI::NTP::Synchronize",false).once.returns("Failed")
+    YastService.stubs(:Call).with("YaPI::NTP::Synchronize",false,"").once.returns("Failed")
     post :update, {"ntp"=>{"actions" => {"synchronize"=>true,"synchronize_utc" => false}}}
     assert_response 503
   end

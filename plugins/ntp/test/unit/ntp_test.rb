@@ -17,7 +17,7 @@ class NtpTest < ActiveSupport::TestCase
   def test_synchronize_ok
     @model.actions[:synchronize] = true
     @model.actions[:synchronize_utc] = true
-    YastService.stubs(:Call).with("YaPI::NTP::Synchronize",true).once.returns("OK")
+    YastService.stubs(:Call).with("YaPI::NTP::Synchronize",true,"").once.returns("OK")
     assert_nothing_raised do
       @model.save
     end
@@ -26,19 +26,19 @@ class NtpTest < ActiveSupport::TestCase
   def test_synchronize_error
     @model.actions[:synchronize] = true
     @model.actions[:synchronize_utc] = true
-    YastService.stubs(:Call).with("YaPI::NTP::Synchronize",true).once.returns("No server defined")
+    YastService.stubs(:Call).with("YaPI::NTP::Synchronize",true,"").once.returns("No server defined")
     assert_raise(NtpError.new "No server defined") do
       @model.save
     end
   end  
 
-  def test_synchronize_error
+  def test_synchronize_timeout
     @model.actions[:synchronize] = true
     @model.actions[:synchronize_utc] = true
     msg_mock = mock()
     msg_mock.stubs(:error_name).returns("org.freedesktop.DBus.Error.NoReply")
     msg_mock.stubs(:params).returns(["test","test"])
-    YastService.stubs(:Call).with("YaPI::NTP::Synchronize",true).once.raises(DBus::Error,msg_mock)
+    YastService.stubs(:Call).with("YaPI::NTP::Synchronize",true,"").once.raises(DBus::Error,msg_mock)
 
     assert_nothing_raised do
       @model.save
@@ -47,6 +47,6 @@ class NtpTest < ActiveSupport::TestCase
 
   def test_unavailable_NTP
     YastService.stubs(:Call).with("YaPI::NTP::Available").once.returns(false)
-    assert_equal nil, Ntp.find.actions[:synchronize]
+    assert Ntp.find.actions[:ntp_server]
   end
 end

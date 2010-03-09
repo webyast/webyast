@@ -6,14 +6,19 @@ use YaST::YCP qw(:LOGGING);
 
 our %TYPEINFO;
 
-BEGIN{$TYPEINFO{Synchronize} = ["function","boolean",
-    "string"];
+BEGIN{$TYPEINFO{Synchronize} = ["function","string",
+    "boolean","string"];
 }
 sub Synchronize {
   my $self = shift;
   my $use_utc = shift;
-  my $servers = getServers();
+  my $new_server = shift;
   my $out = undef;
+  my $servers = getServers();
+  if ($new_server ne ""){
+    my @srvs = [ $new_server ];
+    $servers = \@srvs;
+  }
 
   foreach my $server (@{$servers}){
     # -r: set the system time
@@ -32,6 +37,10 @@ sub Synchronize {
   my $ret = `/sbin/hwclock $local --systohc`;
   y2milestone("hwclock returns $?: $ret");
   if ($? == 0){
+    if ($new_server ne "")
+    {
+      `sed -i 's|^[:space:]*NETCONFIG_NTP_STATIC_SERVERS=.*\$|NETCONFIG_NTP_STATIC_SERVERS="$new_server"|' /etc/sysconfig/network/config `;
+    }
     return "OK";
   }
   return $out.$ret;
