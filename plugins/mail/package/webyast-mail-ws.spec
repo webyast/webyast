@@ -16,7 +16,7 @@ PreReq:         yast2-webservice
 License:	GPL v2 only
 Group:          Productivity/Networking/Web/Utilities
 Autoreqprov:    on
-Version:        0.1.5
+Version:        0.1.6
 Release:        0
 Summary:        YaST2 - Webservice - Mail Settings
 Source:         www.tar.bz2
@@ -33,7 +33,7 @@ BuildRequires:  rubygem-yast2-webservice-tasks rubygem-restility
 BuildRequires:  yast2 yast2-mail
 %endif
 
-Requires:	postfix
+Requires:	postfix mailx
 
 # Mail.ycp
 %if 0%{?suse_version} == 0 || 0%{?suse_version} >= 1120
@@ -109,6 +109,9 @@ rm -rf $RPM_BUILD_ROOT
 %dir /usr/share/YaST2/
 %dir /usr/share/YaST2/modules/
 %dir /usr/share/YaST2/modules/YaPI/
+#var dir to store mail test status
+%dir %attr (-,%{pkg_user},root) /var/lib/yastws
+%dir %attr (-,%{pkg_user},root) /var/lib/yastws/%{plugin_name}
 /srv/www/%{pkg_user}/vendor/plugins/%{plugin_name}/README
 /srv/www/%{pkg_user}/vendor/plugins/%{plugin_name}/Rakefile
 /srv/www/%{pkg_user}/vendor/plugins/%{plugin_name}/init.rb

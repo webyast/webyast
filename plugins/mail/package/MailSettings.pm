@@ -69,9 +69,18 @@ sub Write {
     return "Error running SuSEconfig." unless Mail->WriteSuSEconfig ();
     return "Error restarting service(s)." unless Mail->WriteServices ();
 
-    SCR->Execute (".target.symlink",
-	"/etc/sysconfig/network/scripts/postfix-update-hostname",
-	"/etc/sysconfig/network/if-up.d/postfix-update-hostname");
+    my $symlink	= "/etc/sysconfig/network/if-up.d/postfix-update-hostname";
+
+    if ($smtp_server) {
+	# link to dhcpcd hook that should update mail domain (bnc#559145)
+	y2milestone ("creating symlink '$symlink'");
+	SCR->Execute (".target.symlink",
+	"/etc/sysconfig/network/scripts/postfix-update-hostname", $symlink);
+    }
+    else {
+	y2milestone ("removing symlink '$symlink'");
+	SCR->Execute (".target.remove", $symlink);
+    }
     
     return "";
 }

@@ -24,11 +24,14 @@ class MailController < ApplicationController
   # Requires write permissions for mail server YaPI.
   def update
     yapi_perm_check "mailsettings.write"
-	
+
     @mail = Mail.instance
     @mail.read
     if params.has_key? "mail"
       @mail.save(params["mail"])
+      if params["mail"].has_key?("test_mail_address")
+	@mail.send_test_mail(params["mail"]["test_mail_address"])
+      end
     else
       logger.warn "mail hash missing in request"
     end

@@ -12,6 +12,8 @@ class Mail
   attr_accessor :password
   attr_accessor :transport_layer_security
 
+  TEST_MAIL_FILE = File.join(Paths::VAR,"mail","test_sent")
+
   include Singleton
 
   def initialize
@@ -56,6 +58,28 @@ class Mail
     Rails.logger.debug "YaPI returns: '#{yapi_ret}'"
     raise MailError.new(yapi_ret) unless yapi_ret.empty?
     true
+  end
+
+  def send_test_mail(to)
+    return if to.nil? || to.empty?
+
+    Rails.logger.debug "sending test mail to #{to}..."
+
+    message	= "This is the test mail, sent to you by webYaST.
+Go to status page and confirm you've got it."
+
+    `echo '#{message}' | mail #{to} -r root`
+
+    unless File.directory? File.join(Paths::VAR,"mail")
+      Rails.logger.debug "directory does not exists...."
+      return
+    end
+    begin
+      f = File.new(TEST_MAIL_FILE, 'w')
+      f.puts "#{to}"
+    rescue
+      Rails.logger.debug "writing #{TEST_MAIL_FILE} file failed - wrong permissions?"
+    end
   end
 
   def to_xml( options = {} )
