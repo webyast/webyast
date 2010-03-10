@@ -18,6 +18,9 @@ class PermissionsController < ApplicationController
       unless controller.params[:filter].blank?
         ret = ret + '/' + controller.params[:filter]
       end
+      if controller.params[:with_description]
+        ret = ret + '/with_description'
+      end
       Rails.logger.info "Using cache path: #{ret}"
       ret
   }
