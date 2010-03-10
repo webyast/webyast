@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Wed Mar 10 13:48:15 UTC 2010 - jreidinger@novell.com
+
+- store intermediate result of base system (bnc#555303)
+- 0.1.4
+
+-------------------------------------------------------------------
 Mon Mar  8 16:26:03 UTC 2010 - jreidinger@novell.com
 
 - reflect rename of time module in default configuration
