@@ -1,4 +1,5 @@
 require File.dirname(__FILE__) + '/../test_helper'
+require 'polkit'
 
 # Test Permission class
 
@@ -20,18 +21,17 @@ org.opensuse.yast.permissions.read
 org.opensuse.yast.permissions.write
 EOF
 
-TEST_NONEXIST = <<EOF
-  polkit-auth: cannot look up uid for user 'nonexist'
-EOF
+TEST_DATA_GRANT = [
+"org.opensuse.yast.modules.ysr.statelessregister",
+"org.opensuse.yast.modules.ysr.getregistrationconfig",
+"org.freedesktop.network-manager-settings.system.modify",
+"org.opensuse.yast.module-manager.import"]
+
 
   def setup
     Permission.any_instance.stubs(:all_actions).returns(TEST_DATA_ACTIONS)
-    PolKit.stubs(:polkit_check).returns(:no)
-    ["org.opensuse.yast.modules.ysr.statelessregister",
-     "org.opensuse.yast.modules.ysr.getregistrationconfig",
-     "org.freedesktop.network-manager-settings.system.modify"].each do |perm|
-      PolKit.stubs(:polkit_check).with(perm,"test").returns(:yes)
-    end
+    PolKit.stubs(:polkit_check).with(){ |p,u| TEST_DATA_GRANT.include? p.to_s}.returns(:yes)
+    PolKit.stubs(:polkit_check).with(){ |p,u| !TEST_DATA_GRANT.include?(p.to_s)}.returns(:no)
   end
 
   def test_find_all
