@@ -165,12 +165,12 @@ module BaseModel
 
     #here is redefined save! from ActiveRecord, as we want to throw own exceptions
     def save!
-      save
       unless valid?
         report = {}
         errors.each { |attr,msg| report[attr.to_sym] = msg }
         raise InvalidParameters.new report
       end
+      save
     end
   end
 end
