@@ -46,8 +46,8 @@ class InvalidParameters < ArgumentError
     xml = Builder::XmlMarkup.new(options)
     xml.instruct! unless options[:skip_instruct]
 
-    xml.errors(:type => "array") do
-      @constrains.each {
+    xml.errors do #do not use type = array as it break validation in ActiveResource bnc#587016
+     @constrains.each {
         |k,v|
         xml.error "#{k.to_s.humanize} --- #{v}"
       }
