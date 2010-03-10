@@ -1,4 +1,17 @@
 -------------------------------------------------------------------
+Wed Mar 10 15:38:25 UTC 2010 - jreidinger@novell.com
+
+- adapt caching to permissions with/without description
+- 0.1.7
+
+-------------------------------------------------------------------
+Wed Mar 10 15:25:04 UTC 2010 - jreidinger@novell.com
+
+- add hack which avoid problem with ActiveResource reading errors
+  from xml (bnc#587016)
+- 0.1.6
+
+-------------------------------------------------------------------
 Mon Mar  8 16:28:03 UTC 2010 - jreidinger@novell.com
 
 - log invalid arguments exception

@@ -1,4 +1,11 @@
 -------------------------------------------------------------------
+Tue Mar  9 15:45:24 CET 2010 - jsuchome@suse.cz
+
+- added function for writing testing mail (bnc#580458)
+- new version of postfix-update-hostname
+- 0.1.6 
+
+-------------------------------------------------------------------
 Mon Mar  1 11:34:18 CET 2010 - jsuchome@suse.cz
 
 - package postfix-update-hostname script for dhcpcd (bnc#559145)

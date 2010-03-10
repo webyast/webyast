@@ -40,7 +40,8 @@ cd /etc/sysconfig/network || exit $R_INTERNAL
 test -f ./config && . ./config
 test -f ./dhcp   && . ./dhcp
 test -f scripts/functions && . scripts/functions || exit $R_INTERNAL
-test -f /etc/sysconfig/mail && . /etc/sysconfig/mail
+test -f /etc/sysconfig/mail    && . /etc/sysconfig/mail
+test -f /etc/sysconfig/postfix && . /etc/sysconfig/postfix
 
 ######################################################################
 # check arguments and how we are called (in case of links)
@@ -80,40 +81,57 @@ esac
 # source interface config to get per interface settings
 test -f ./ifcfg-$CONFIG && . ./ifcfg-$CONFIG || exit 0
 
-# usage: ifprint <err_mesg|mesg|...> message text...
-ifprint() {
-	func=${1}  ; shift
-	test "x$func" = x -o "x$INTERFACE" = x && return 1
-	if [ "$RUN_FROM_RC" = yes -a "$INTERFACE" != all ] ; then
-		$func "`printf "    %-9s " "$INTERFACE"`$*"
-	else
-		$func "$*"
-	fi
-}
+# the hostname where we write it for the session time
+POSTFIX_DHCP_HOSTNAME_FILE="/var/run/dhcp-hostname"
 
 case $0 in
 *if-up.d*)
-	if test "$MODE" != onboot -a "$DHCP" = yes ; then
-		test "$DHCLIENT_SET_HOSTNAME"   = yes || exit 0
-		test "$MAIL_CREATE_CONFIG"      = yes || exit 0
+	# run only as post if-up.d script
+	test "x$DHCP"                                = xyes || exit 0
 
-		# additional guards?
-		#test "$POSTFIX_UPDATE_HOSTNAME" = yes || exit 0
+	# allow the user to disable this feature
+	test "x${POSTFIX_DHCP_HOSTNAME_UPDATE:-yes}" = xyes || exit 0
 
-		old=`postconf -h myhostname 2>/dev/null`
-		cur=`hostname -f 2>/dev/null`
-		if test "x$cur" = x ; then
-			cur=`cat /etc/HOSTNAME 2>/dev/null`
-		fi
-		if test "x$cur" != x -a "x$cur" != "x$old" ; then
-			debug "changing postfix hostname from '$old' to '$cur'"
-			postconf -e myhostname="$cur"
-			rcpostfix status 2>/dev/null && \
-			rcpostfix reload 2>/dev/null
-		fi
-	fi
+	# only when dhcp is allowed to set the hostname anyway
+	test "x$DHCLIENT_SET_HOSTNAME"               = xyes || exit 0
+
+	# and when SuSEconfig.postfix handles postfix config
+        test "x$MAIL_CREATE_CONFIG"                  = xyes || exit 0
+
+	# update when we are the primary (first) dhcp interface
+	is_dhcp_primary=`read_cached_config_data primary $INTERFACE`
+	test "x$is_dhcp_primary"                     = xyes || exit 0
+
+	# write it down and call SuSEconfig.postfix to pickup it
+	fqhn=`hostname -f 2>/dev/null`
+	rm -f "$POSTFIX_DHCP_HOSTNAME_FILE"
+	case $fqhn in
+	".") ;;
+	*.*)
+		{
+			echo "FQHOSTNAME=$fqhn"
+			echo "INTERFACE=$INTERFACE"
+		} > "$POSTFIX_DHCP_HOSTNAME_FILE"
+	;;
+	esac
+	/sbin/SuSEconfig -module postfix
 ;;
 *if-down.d*)
+	# cleanup when the we are interface that wrote it
+	if test -f "$POSTFIX_DHCP_HOSTNAME_FILE" ; then
+		while read line ; do
+			case $line in
+			""|\#*) continue ;;
+			esac
+			eval "_$line"
+		done < <(cat "$POSTFIX_DHCP_HOSTNAME_FILE" 2>/dev/null)
+
+		if test "x$_INTERFACE" != "x" -a \
+                        "x$_INTERFACE"  = "x$INTERFACE" ; then
+			rm -f "$POSTFIX_DHCP_HOSTNAME_FILE"
+			/sbin/SuSEconfig -module postfix &>/dev/null
+		fi
+	fi
 ;;
 *)
 	usage

@@ -6,16 +6,20 @@ class BasesystemController < ApplicationController
   before_filter :login_required
 
    def show
-     @basesystem = Basesystem.find
-     logger.warn "No steps defined for Basesystem" if @basesystem.steps.nil? or @basesystem.steps.empty?
-     logger.debug @basesystem.inspect
+     basesystem = Basesystem.find
+     logger.warn "No steps defined for Basesystem" if basesystem.steps.nil? or basesystem.steps.empty?
+     logger.debug basesystem.inspect
+     
+     respond_to do |format|
+      format.xml { render  :xml => basesystem.to_xml( :dasherize => false ) }
+      format.json { render :json => basesystem.to_json( :dasherize => false ) }
+     end
    end
 
    def update
-     @basesystem = Basesystem.new     
-     @basesystem.finish = params[:basesystem][:finish]
+     @basesystem = Basesystem.new params[:basesystem]     
      @basesystem.save
-     render :show
+     show
    end
 
    def create

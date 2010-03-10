@@ -1,4 +1,9 @@
 -------------------------------------------------------------------
+Wed Mar 10 17:15:48 CET 2010 - schubi@suse.de
+
+- Do not take CDROM,DVD,... for showing disk space (bnc#583204) 
+
+-------------------------------------------------------------------
 Tue Mar  2 12:39:27 CET 2010 - schubi@suse.de
 
 - Improving checks while generating the config file (bnc#582735)
@@ -8,6 +13,7 @@ Tue Mar  2 12:39:27 CET 2010 - schubi@suse.de
 - removed old status.yml (bnc#582099)
 - Do not search for default host via network if there is only one
   host ("WebYaST") defined for collectd (bnc#580017)
+- 0.1.1
 
 -------------------------------------------------------------------
 Thu Feb 18 12:48:23 UTC 2010 - jreidinger@novell.com
