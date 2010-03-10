@@ -49,7 +49,7 @@ class InvalidParameters < ArgumentError
     xml.errors do #do not use type = array as it break validation in ActiveResource bnc#587016
      @constrains.each {
         |k,v|
-        xml.error "#{k.to_s.humanize} --- #{v}"
+        xml.error "#{k.to_s.humanize} #{v}"
       }
     end
   end
