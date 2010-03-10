@@ -1,4 +1,9 @@
 -------------------------------------------------------------------
+Wed Mar 10 17:15:48 CET 2010 - schubi@suse.de
+
+- Do not take CDROM,DVD,... for showing disk space (bnc#583204) 
+
+-------------------------------------------------------------------
 Tue Mar  2 12:39:27 CET 2010 - schubi@suse.de
 
 - Improving checks while generating the config file (bnc#582735)
