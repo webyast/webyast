@@ -5,7 +5,7 @@ module BaseModel
     # +WARNING+:: keys from hash is get to tags unescaped, so don't use hash with keys which can break XML tag (this behavior might change in future)
     # options:: recognizes common Builder::XmlMarkup options (if root is not given, it uses singular of model name )
     # block:: not used now
-    def to_xml(options={},&block)
+    def to_xml(options={:indent => 2},&block)
       serializer = XmlSerializer.new(self,options)
       block_given? ? serializer.serialize(&block) : serializer.serialize
     end
