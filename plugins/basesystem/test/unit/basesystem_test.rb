@@ -5,12 +5,12 @@ class BasesystemTest < ActiveSupport::TestCase
 
 YAML_CONTENT = <<EOF
 steps:
-  - controller: systemtimes
+  - controller: time
   - controller: language
     action: show
 EOF
 
-  TEST_STEPS = [{ "controller" => "systemtimes"},{"controller" => "language", "action" => "show"}]
+  TEST_STEPS = [{ "controller" => "time"},{"controller" => "language", "action" => "show"}]
   def setup
     #set const to run test in this directory
     Basesystem.const_set "FINISH_FILE", File.expand_path(File.join(File.dirname(__FILE__),"finish")) 
@@ -37,8 +37,17 @@ EOF
   def test_save
     @basesystem.finish = true
     @basesystem.save
-    assert @basesystem.finish
+    nbase = Basesystem.find
+    assert nbase.finish
   end  
+
+  def test_save_step
+    @basesystem.done = "time"
+    @basesystem.save
+    nbase = Basesystem.find
+    assert !nbase.finish
+    assert_equal "time", nbase.done
+  end
 
   def test_to_xml
     assert_not_nil @basesystem.to_xml
