@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Wed Mar 10 19:32:23 CET 2010 - jdsn@suse.de
+
+- fix calculation of backend exitcode and error status
+- version 0.1.1 
+
+-------------------------------------------------------------------
 Tue Feb 23 12:07:38 CET 2010 - jdsn@suse.de
 
 - fix workflow handling, do not show empty form (bnc#578684)
