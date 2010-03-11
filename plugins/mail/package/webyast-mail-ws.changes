@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Thu Mar 11 14:54:03 CET 2010 - jsuchome@suse.cz
+
+- always save mail settings (bnc#587442)
+- fixed sending of the test mail (bnc#587432)
+
+-------------------------------------------------------------------
 Tue Mar  9 15:45:24 CET 2010 - jsuchome@suse.cz
 
 - added function for writing testing mail (bnc#580458)

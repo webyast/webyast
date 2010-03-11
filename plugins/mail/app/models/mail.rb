@@ -40,13 +40,6 @@ class Mail
 	settings[key] = "" if (!settings.has_key? key) || settings[key].nil?
     end
 
-    if settings["transport_layer_security"] == @transport_layer_security &&
-       settings["smtp_server"] == @smtp_server &&
-       settings["user"] == @user && settings["password"] == @password
-      Rails.logger.debug "nothing has been changed, not saving"
-      return true
-    end
-
     parameters	= {
 	"smtp_server"	=> [ "s", settings["smtp_server"]],
 	"user"		=> [ "s", settings["user"]],
@@ -65,10 +58,9 @@ class Mail
 
     Rails.logger.debug "sending test mail to #{to}..."
 
-    message	= "This is the test mail, sent to you by webYaST.
-Go to status page and confirm you've got it."
+    message	= "This is the test mail, sent to you by webYaST. Go to status page and confirm you've got it."
 
-    `echo '#{message}' | mail #{to} -r root`
+    `/bin/echo "#{message}" | /bin/mail -s "WebYaST Test Mail" #{to} -r root`
 
     unless File.directory? File.join(Paths::VAR,"mail")
       Rails.logger.debug "directory does not exists...."
@@ -78,7 +70,7 @@ Go to status page and confirm you've got it."
       f = File.new(TEST_MAIL_FILE, 'w')
       f.puts "#{to}"
     rescue
-      Rails.logger.debug "writing #{TEST_MAIL_FILE} file failed - wrong permissions?"
+      Rails.logger.error "writing #{TEST_MAIL_FILE} file failed - wrong permissions?"
     end
   end
 
