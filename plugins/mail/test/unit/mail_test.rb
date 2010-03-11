@@ -29,23 +29,6 @@ class MailTest < ActiveSupport::TestCase
   end
 
 
-  def test_save_no_change
-    YastService.stubs(:Call).with('YaPI::MailSettings::Read').returns({
-	"smtp_server"	=> "smtp.domain.com",
-	"TLS"		=> "must",
-	"user"		=> "",
-	"password"	=> ""
-    })
-    ret = @model.read
-    ret = @model.save({
-	"smtp_server"	=> "smtp.domain.com",
-	"user"		=> "",
-	"password"	=> "",
-	"transport_layer_security"	=> "must"
-    })
-    assert ret
-  end
-
   def test_save
     YastService.stubs(:Call).with('YaPI::MailSettings::Write', {
 	"smtp_server"	=> [ "s", "smtp.newdomain.com"],
