@@ -40,23 +40,25 @@ Contents:
 
 GET /services
 
-  Get the list of all available services. With 'custom' argument, it returns list of custom services (defined in 
-  /etc/webyast/custom_services.yml config file), otherwise it is a list of system (/etc/init.d) services.
-
-  The information about service status is not read in this call.
+  Get the list of all available services, both system (/etc/init.d) and custom (defined in 
+  /etc/webyast/custom_services.yml config file) ones. But result is filtered by the content of the
+  /etc/webyast/filter_services.yml file. If filter file is not present or empty, returns everything.
+  
+  The information about service status is read with read_status=true argument.
 
   CURL Example: curl -u &lt;user> http://localhost:4984/services.xml
 
+
 XmlResult: services
 
-  CURL Example: curl -u &lt;user> http://localhost:4984/services.xml?custom=1
-
-XmlResult: custom_services
+  CURL Example: curl -u &lt;user> http://localhost:4984/services.xml?read_status=true
 
 
 GET /services/service_name.xml
 
   Return information about service with given name, including service status.
+
+  CURL Example: curl -u &lt;user> http://localhost:4984/services/database.xml?custom=true
 
   CURL Example: curl -u &lt;user> http://localhost:4984/services/cron.xml
 

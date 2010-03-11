@@ -1,4 +1,9 @@
 -------------------------------------------------------------------
+Thu Mar 11 16:29:59 CET 2010 - jsuchome@suse.cz
+
+- updated documentation 
+
+-------------------------------------------------------------------
 Wed Mar  3 20:32:33 CET 2010 - jsuchome@suse.cz
 
 - added support for only showing specified services, using

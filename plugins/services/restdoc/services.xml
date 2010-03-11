@@ -1,193 +1,45 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <services type="array">
   <service>
-    <name>SuSEfirewall</name>
-    <description></description>
-    <status type="integer"></status>
-  </service>
-  <service>
-    <name>acpid</name>
-    <description></description>
-    <status type="integer"></status>
-  </service>
-  <service>
-    <name>dbus</name>
-    <description></description>
-    <status type="integer"></status>
-  </service>
-  <service>
-    <name>earlysyslog</name>
-    <description></description>
-    <status type="integer"></status>
-  </service>
-  <service>
-    <name>fbset</name>
-    <description></description>
-    <status type="integer"></status>
-  </service>
-  <service>
-    <name>random</name>
-    <description></description>
-    <status type="integer"></status>
-  </service>
-  <service>
-    <name>vboxadd</name>
-    <description></description>
-    <status type="integer"></status>
-  </service>
-  <service>
-    <name>haldaemon</name>
-    <description></description>
-    <status type="integer"></status>
-  </service>
-  <service>
-    <name>network</name>
-    <description></description>
-    <status type="integer"></status>
-  </service>
-  <service>
-    <name>vboxvfs</name>
-    <description></description>
-    <status type="integer"></status>
-  </service>
-  <service>
-    <name>syslog</name>
-    <description></description>
-    <status type="integer"></status>
-  </service>
-  <service>
-    <name>auditd</name>
-    <description></description>
-    <status type="integer"></status>
-  </service>
-  <service>
-    <name>rpcbind</name>
-    <description></description>
-    <status type="integer"></status>
-  </service>
-  <service>
-    <name>splash_early</name>
-    <description></description>
-    <status type="integer"></status>
-  </service>
-  <service>
-    <name>vboxdrv</name>
-    <description></description>
-    <status type="integer"></status>
-  </service>
-  <service>
-    <name>nfs</name>
-    <description></description>
-    <status type="integer"></status>
-  </service>
-  <service>
-    <name>smbfs</name>
-    <description></description>
-    <status type="integer"></status>
-  </service>
-  <service>
-    <name>kbd</name>
-    <description></description>
+    <name>cron</name>
+    <description>Cron job service</description>
+    <summary>Cron job service</summary>
+    <custom>false</custom>
     <status type="integer"></status>
   </service>
   <service>
     <name>alsasound</name>
-    <description></description>
+    <description>Loading ALSA drivers and store/restore the current setting</description>
+    <summary>Set up ALSA sound system</summary>
+    <custom>false</custom>
     <status type="integer"></status>
   </service>
   <service>
-    <name>avahi-daemon</name>
-    <description></description>
+    <name>nfs</name>
+    <description>All necessary services for NFS clients</description>
+    <summary>NFS client services </summary>
+    <custom>false</custom>
     <status type="integer"></status>
   </service>
   <service>
-    <name>bluetooth-coldplug</name>
-    <description></description>
+    <name>collectd</name>
+    <description>Statistics Collection Daemon for filling RRD Files</description>
+    <summary></summary>
+    <custom>true</custom>
     <status type="integer"></status>
   </service>
   <service>
-    <name>java.binfmt_misc</name>
-    <description></description>
+    <name>database</name>
+    <description>Long description of my database</description>
+    <summary>Label for my database</summary>
+    <custom>true</custom>
     <status type="integer"></status>
   </service>
   <service>
-    <name>ldap</name>
-    <description></description>
-    <status type="integer"></status>
-  </service>
-  <service>
-    <name>libvirtd</name>
-    <description></description>
-    <status type="integer"></status>
-  </service>
-  <service>
-    <name>network-remotefs</name>
-    <description></description>
-    <status type="integer"></status>
-  </service>
-  <service>
-    <name>sshd</name>
-    <description></description>
-    <status type="integer"></status>
-  </service>
-  <service>
-    <name>cups</name>
-    <description></description>
-    <status type="integer"></status>
-  </service>
-  <service>
-    <name>earlyxdm</name>
-    <description></description>
-    <status type="integer"></status>
-  </service>
-  <service>
-    <name>irq_balancer</name>
-    <description></description>
-    <status type="integer"></status>
-  </service>
-  <service>
-    <name>nfsserver</name>
-    <description></description>
-    <status type="integer"></status>
-  </service>
-  <service>
-    <name>nscd</name>
-    <description></description>
-    <status type="integer"></status>
-  </service>
-  <service>
-    <name>postfix</name>
-    <description></description>
-    <status type="integer"></status>
-  </service>
-  <service>
-    <name>splash</name>
-    <description></description>
-    <status type="integer"></status>
-  </service>
-  <service>
-    <name>cron</name>
-    <description></description>
-    <status type="integer"></status>
-  </service>
-  <service>
-    <name>smartd</name>
-    <description></description>
-    <status type="integer"></status>
-  </service>
-  <service>
-    <name>xdm</name>
-    <description></description>
-    <status type="integer"></status>
-  </service>
-  <service>
-    <name>SuSEfirewall</name>
-    <description></description>
-    <status type="integer"></status>
-  </service>
-  <service>
-    <name>stopblktrace</name>
-    <description></description>
+    <name>ntp</name>
+    <description>Start network time protocol daemon (NTPD).</description>
+    <summary>Network time protocol daemon (ntpd)</summary>
+    <custom>false</custom>
     <status type="integer"></status>
   </service>
 </services>
