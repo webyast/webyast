@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Thu Mar 11 12:40:23 UTC 2010 - jreidinger@novell.com
+
+- allow set ntp server if not defined (bnc#585783)
+- 0.1.2
+
+-------------------------------------------------------------------
 Wed Feb 24 12:43:40 UTC 2010 - jreidinger@novell.com
 
 - fix syntax errors in ntp YaPI (bnc#582188)
