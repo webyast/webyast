@@ -65,20 +65,17 @@ class RepositoriesController < ApplicationController
   def update
     permission_check "org.opensuse.yast.system.repositories.write"
 
-    param = params[:repositories]
-    if param.blank?
-      render ErrorResult.error(404, 1, "Missing parameters for repository #{params[:id]}") and return
-    end
+    param = params[:repositories] || {}
 
     @repo = Repository.new(params[:id], param[:name], (param[:enabled] == true || param[:enabled] == 'true' || param[:enabled] == '1'))
 
     @repo.autorefresh = param[:autorefresh] == 'true' || param[:enabled] == '1'
     @repo.keep_packages = param[:keep_packages] == 'true' || param[:keep_packages] == '1'
     @repo.url = param[:url]
-    @repo.priority = param[:priority].to_i
+    @repo.priority = param[:priority]
 
     begin
-      unless @repo.save
+      unless @repo.save!
         render ErrorResult.error(404, 2, "packagekit error") and return
       end
     rescue DBus::Error => exception
@@ -92,15 +89,13 @@ class RepositoriesController < ApplicationController
   def create
     permission_check "org.opensuse.yast.system.repositories.write"
 
-    param = params[:repositories]
-    if param.blank?
-      render ErrorResult.error(404, 1, "Missing parameters for repository #{params[:id]}") and return
-    end
+    param = params[:repositories] || {}
 
     @repo = Repository.new(params[:id].to_s, param[:name].to_s, param[:enabled])
+    @repo.load param
 
     begin
-      unless @repo.save
+      unless @repo.save!
         render ErrorResult.error(404, 2, "Cannot save repository '#{@repo.id}'") and return
       end
     rescue DBus::Error => exception

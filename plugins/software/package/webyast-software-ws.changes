@@ -1,4 +1,11 @@
 -------------------------------------------------------------------
+Thu Mar 11 08:00:24 UTC 2010 - lslezak@suse.cz
+
+- use @repo.save! so validation errors are reported via exception
+  (with return code 422), adapted and extended the testsuite
+- 0.1.14
+
+-------------------------------------------------------------------
 Thu Mar  4 15:25:09 UTC 2010 - lslezak@suse.cz
 
 - handle DBus errors

@@ -17,6 +17,11 @@ class RepositoriesControllerTest < ActionController::TestCase
     Repository.stubs(:find).with(:all).returns([@r1, @r2])
     Repository.stubs(:find).with('factory-oss').returns([@r1])
     Repository.stubs(:find).with('none').returns([])
+
+    @repo_opts = {:id => 'repo-oss', :name => 'name',
+      :url => 'http://example.com', :priority => 99, :keep_packages => false,
+      :enabled => true, :autorefresh => true
+    }
   end
   
   test "access index" do
@@ -84,44 +89,44 @@ class RepositoriesControllerTest < ActionController::TestCase
   end
 
   test "update" do
-    Repository.any_instance.expects(:save).returns(true)
+    Repository.any_instance.stubs(:update).returns(true)
 
-    put :update, :id => "factory-oss", :repositories => {:name => 'New name'}
+    put :update, :id => "factory-oss", :repositories => @repo_opts
     assert_response :success
   end
 
   test "update - save failed" do
-    Repository.any_instance.expects(:save).returns(false)
+    Repository.any_instance.expects(:update).returns(false)
 
-    put :update, :id => "factory-oss", :repositories => {:name => 'New name'}
+    put :update, :id => "factory-oss", :repositories => @repo_opts
     assert_response :missing
   end
 
   test "update empty parameters" do
-    Repository.any_instance.expects(:save).never
+    Repository.any_instance.expects(:update).never
 
     put :update, :id => "factory-oss", :repositories => {}
-    assert_response :missing
+    assert_response 422
   end
 
   test "create" do
-    Repository.any_instance.expects(:save).returns(true)
+    Repository.any_instance.expects(:update).returns(true)
 
-    put :create, :id => "factory-oss", :repositories => {:name => 'name'}
+    put :create, :id => "factory-oss", :repositories => @repo_opts
     assert_response :success
   end
 
   test "create empty parameters" do
-    Repository.any_instance.expects(:save).never
+    Repository.any_instance.expects(:update).never
 
     put :create, :id => "factory-oss", :repositories => {}
-    assert_response :missing
+    assert_response 422
   end
 
   test "create save failed" do
-    Repository.any_instance.expects(:save).returns(false)
+    Repository.any_instance.expects(:update).returns(false)
 
-    put :create, :id => "factory-oss", :repositories => {:name => 'name'}
+    put :create, :id => "factory-oss", :repositories => @repo_opts
     assert_response :missing
   end
 
@@ -153,9 +158,9 @@ class RepositoriesControllerTest < ActionController::TestCase
     msg_err = DBus::Message.new(DBus::Message::ERROR)
     msg_err.error_name = 'DBus error'
 
-    Repository.any_instance.stubs(:save).raises(DBus::Error, msg_err)
+    Repository.any_instance.stubs(:update).raises(DBus::Error, msg_err)
 
-    put :update, :id => "factory-oss", :repositories => {:name => 'name'}
+    put :update, :id => "factory-oss", :repositories => @repo_opts
     assert_response :missing
   end
 
@@ -164,9 +169,9 @@ class RepositoriesControllerTest < ActionController::TestCase
     msg_err = DBus::Message.new(DBus::Message::ERROR)
     msg_err.error_name = 'DBus error'
 
-    Repository.any_instance.stubs(:save).raises(DBus::Error, msg_err)
+    Repository.any_instance.stubs(:update).raises(DBus::Error, msg_err)
 
-    post :create, :id => "factory-oss", :repositories => {:name => 'name'}
+    post :create, :id => "factory-oss", :repositories => @repo_opts
     assert_response :missing
   end
 
@@ -245,5 +250,85 @@ class RepositoriesControllerTest < ActionController::TestCase
     get :index
   end
 
+  # Test validations
+  test "create with invalid priority" do
+    Repository.any_instance.expects(:update).never
+
+    r = @repo_opts
+    r[:priority] = 'assdfdsf'
+
+    put :create, :id => "factory-oss", :repositories => r
+    assert_response 422
+  end
+
+  test "create with too low priority" do
+    Repository.any_instance.expects(:update).never
+
+    r = @repo_opts
+    r[:priority] = -20
+
+    put :create, :id => "factory-oss", :repositories => r
+    assert_response 422
+  end
+
+  test "create with too high priority" do
+    Repository.any_instance.expects(:update).never
+
+    r = @repo_opts
+    r[:priority] = 2000
+
+    put :create, :id => "factory-oss", :repositories => r
+    assert_response 422
+  end
+
+  test "create with empty url" do
+    Repository.any_instance.expects(:update).never
+
+    r = @repo_opts
+    r[:url] = ''
+
+    put :create, :id => "factory-oss", :repositories => r
+    assert_response 422
+  end
+
+  test "create with empty id" do
+    Repository.any_instance.expects(:update).never
+
+    r = @repo_opts
+    r[:id] = ''
+
+    put :create, :id => '', :repositories => r
+    assert_response 422
+  end
+
+  test "create with invalid enabled" do
+    Repository.any_instance.expects(:update).never
+
+    r = @repo_opts
+    r[:enabled] = 'asdsad'
+
+    put :create, :id => 'factory-oss', :repositories => r
+    assert_response 422
+  end
+
+  test "create with invalid keep_packages" do
+    Repository.any_instance.expects(:update).never
+
+    r = @repo_opts
+    r[:keep_packages] = 'asdsad'
+
+    put :create, :id => 'factory-oss', :repositories => r
+    assert_response 422
+  end
+
+  test "create with invalid autorefresh" do
+    Repository.any_instance.expects(:update).never
+
+    r = @repo_opts
+    r[:autorefresh] = 'asdsad'
+
+    put :create, :id => 'factory-oss', :repositories => r
+    assert_response 422
+  end
 
 end
