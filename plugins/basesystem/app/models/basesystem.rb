@@ -37,6 +37,7 @@ class Basesystem < BaseModel::Base
     end
     if File.exist?(FINISH_FILE)
       base.done = IO.read(FINISH_FILE)
+      base.done = FINISH_STR if base.done.blank? #backward compatibility, when touch indicate finished bs
       if base.done == FINISH_STR
         base.finish = true
       end
