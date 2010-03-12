@@ -67,12 +67,8 @@ class RepositoriesController < ApplicationController
 
     param = params[:repositories] || {}
 
-    @repo = Repository.new(params[:id], param[:name], (param[:enabled] == true || param[:enabled] == 'true' || param[:enabled] == '1'))
-
-    @repo.autorefresh = param[:autorefresh] == 'true' || param[:enabled] == '1'
-    @repo.keep_packages = param[:keep_packages] == 'true' || param[:keep_packages] == '1'
-    @repo.url = param[:url]
-    @repo.priority = param[:priority]
+    @repo = Repository.new(params[:id], param[:name], param[:enabled])
+    @repo.load param
 
     begin
       unless @repo.save!

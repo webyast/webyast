@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Fri Mar 12 15:30:14 UTC 2010 - lslezak@suse.cz
+
+- use mass assignment for loading attributes
+- 0.1.15
+
+-------------------------------------------------------------------
 Thu Mar 11 08:00:24 UTC 2010 - lslezak@suse.cz
 
 - use @repo.save! so validation errors are reported via exception
