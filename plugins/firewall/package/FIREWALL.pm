@@ -8,6 +8,7 @@ use Data::Dumper;
 # --------------- imported modules
 YaST::YCP::Import ("SuSEFirewall");
 YaST::YCP::Import ("SuSEFirewallServices");
+YaST::YCP::Import ("Mode");
 # --------------------------------
 
 our $VERSION            = '1.0.0';
@@ -66,15 +67,19 @@ BEGIN{$TYPEINFO{Write} = [ "function",
 sub Write {
   my $self     = shift;
   my $settings = shift;
+  y2milestone("YaPI::FIREWALL::Write - setting Mode::_test to none");
+  Mode->testMode();
+  Mode->SetTest("none");
   y2milestone("YaPI::FIREWALL::Write - settings", Dumper($settings));
   SuSEFirewall->SetEnableService ( $settings->{"use_firewall"} );
+  SuSEFirewall->SetStartService ( $settings->{"use_firewall"} );
   my @allowed_services = map {$_ ->{"id"}} (grep { $_->{"allowed"}} @{$settings->{"fw_services"}} );
   my @forbidden_services = map {$_->{"id"}} (grep { ! $_->{"allowed"} } @{$settings->{"fw_services"}});
   y2milestone("YaPI::FIREWALL::Write - allowing services", Dumper(\@allowed_services));
   y2milestone("YaPI::FIREWALL::Write - forbidding services", Dumper(\@forbidden_services));
   SuSEFirewall->SetServicesForZones( \@allowed_services, ["EXT"], 1 );
   SuSEFirewall->SetServicesForZones( \@forbidden_services, ["EXT"], 0 );
-  SuSEFirewall->Write();
+  my $result = SuSEFirewall->Write();
   # SetServicesForZones should return boolean result according to description, but in code it never does.
-  return {"saved_ok" => YaST::YCP::Boolean(1), "error"=>""};
+  return {"saved_ok" => YaST::YCP::Boolean($result), "error"=>""};
 }

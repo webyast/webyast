@@ -1,4 +1,3 @@
-#
 # spec file for package yast2-webservice-firewall (Version 0.1)
 #
 # Copyright (c) 2008 SUSE LINUX Products GmbH, Nuernberg, Germany.
@@ -10,11 +9,10 @@
 
 
 Name:           webyast-firewall-ws
-PreReq:         webyast-base-ws
 License:        GPL v2 only
 Group:          Productivity/Networking/Web/Utilities
 Autoreqprov:    on
-Version:        0.2.0
+Version:        0.2.1
 Release:        0
 Summary:        YaST2 - Webservice - Firewall
 Source:         www.tar.bz2
@@ -23,6 +21,8 @@ Source2:        FIREWALL.pm
 BuildRoot:      %{_tmppath}/%{name}-%{version}-build
 BuildArch:      noarch
 BuildRequires:  rubygem-yast2-webservice-tasks rubygem-restility
+PreReq:         webyast-base-ws
+Requires:       SuSEfirewall2 yast2
 
 #
 %define pkg_user yastws
