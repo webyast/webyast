@@ -20,6 +20,7 @@ module BaseModel
       def serialize
         root = options[:root] || @model.class.model_name.singular
         builder = options[:builder] || Builder::XmlMarkup.new(options)
+        builder.instruct! unless options[:skip_instruct]
         builder.tag!(root){
           @attributes.each do |attr|
             value = @model.instance_variable_get(attr)
