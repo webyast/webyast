@@ -79,14 +79,19 @@ private
     end
   end
 
+  def all_actions
+    `/usr/bin/polkit-action`
+  end
+
+
 	def get_description (action)
 		desc = `polkit-action --action #{action} | grep description: | sed 's/^description:[:space:]*\\(.\\+\\)$/\\1/'`
 		desc.strip!
 		Rails.logger.info "description for #{action} is #{desc}"
 		desc
-	end
+  end
 
-SUSE_STRING = "org.opensuse.yast"
+  SUSE_STRING = "org.opensuse.yast"
   def filter_nonsuse_permissions (str)
     str.select{ |s|
       s.include?(SUSE_STRING) &&
