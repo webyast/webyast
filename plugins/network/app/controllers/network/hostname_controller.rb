@@ -17,7 +17,7 @@ class Network::HostnameController < ApplicationController
     
     @hostname = Hostname.new(root)
     respond_to do |format|    
-	if @hostname.save 
+	if ( @hostname.save || !@hostname.respond_to?(:errors) )
 	  format.xml { head :ok } 
 	  else  
 	    format.xml { render :xml => @hostname.errors,  :status => :unprocessable_entity } 

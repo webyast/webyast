@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Tue Mar 16 14:32:08 CET 2010 - mzugec@suse.cz
+
+- don't crash with empty hostname or domain (bnc#577064)
+- 0.1.3 
+
+-------------------------------------------------------------------
 Fri Feb 12 10:02:39 UTC 2010 - kkaempf@novell.com
 
 - don't send nil values via D-Bus (bnc#579115)
