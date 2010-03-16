@@ -1,4 +1,12 @@
 -------------------------------------------------------------------
+Tue Mar 16 17:46:36 CET 2010 - mkudlvasr@novell.com
+
+- fix bnc#587862 (work around bnc#243624 - Mode::testsuite() == true 
+  in YaPI call)
+- fix bnc#587859 (package dependencies)
+- version 0.2.1
+
+-------------------------------------------------------------------
 Thu Feb 25 16:51:56 CET 2010 - mkudlvasr@novell.com
 
 - change data structure, so that it doesn't use name of another
