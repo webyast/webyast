@@ -68,4 +68,26 @@ TEST_DATA_GRANT = [
       assert p[:id] == "org.opensuse.yast.permissions.write"
     end
   end
+
+  def test_serialization
+    perm = Permission.find(:all)
+    assert_not_nil perm.to_xml
+    assert_not_nil perm.to_json
+    perm = Permission.find(:all,{:user_id => "test"})
+    assert_not_nil perm.to_xml
+    assert_not_nil perm.to_json
+  end
+
+GENERIC_EXCEPTION_MESSAGE = "Polkit not run"
+  def test_exception_handling
+    PolKit.stubs(:polkit_check).raises(RuntimeError.new("PolicyKit exception: test does not exist"))
+    assert_raise (InvalidParameters.new( :user_id => "UNKNOWN")) do
+      perm = Permission.find(:all,{:user_id => "test",:filter => "org.opensuse.yast.permissions.write"})
+    end
+
+    PolKit.stubs(:polkit_check).raises(RuntimeError.new(GENERIC_EXCEPTION_MESSAGE))
+    assert_raise (PolicyKitException.new(GENERIC_EXCEPTION_MESSAGE,"test","org.opensuse.yast.permissions.write")) do
+      perm = Permission.find(:all,{:user_id => "test",:filter => "org.opensuse.yast.permissions.write"})
+    end
+  end
 end

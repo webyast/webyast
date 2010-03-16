@@ -5,7 +5,7 @@ require 'exceptions'
 require 'polkit'
 
 class Permission
-#list of hash { :name => id, :granted => boolean}
+#list of hash { :name => id, :granted => boolean, :description => string (optional)}
   attr_reader :permissions
 
   def initialize
@@ -15,8 +15,6 @@ class Permission
   def self.find(type,restrictions={})
     permission = Permission.new
     permission.load_permissions restrictions
-    user = restrictions[:user_id]
-    permission.mark_granted_permissions_for_user user if user
     return permission
   end
 
@@ -46,8 +44,7 @@ class Permission
     if (options[:filter])
       semiresult.delete_if { |perm| !perm.include? options[:filter] }
     end
-  @permissions = semiresult.map do
-    |value|
+  @permissions = semiresult.map do |value|
       ret = {
         :id => value,
         :granted => false
@@ -55,11 +52,13 @@ class Permission
 			ret[:description] = get_description(value) if options[:with_description]
 			ret
     end
+    user = options[:user_id]
+    mark_granted_permissions_for_user user if user
   end
 
+private
   def mark_granted_permissions_for_user(user)
-    @permissions.collect! do
-      |perm| 
+    @permissions.collect! do |perm| 
       begin
         if PolKit.polkit_check( perm[:id], user) == :yes
           perm[:granted] = true
@@ -75,37 +74,17 @@ class Permission
         else
           raise PolicyKitException.new(e.message, user, perm[:id])
         end
-      rescue Exception => e
-        Rails.logger.info e
-        raise
       end
       perm
     end
   end
 
-private
 	def get_description (action)
 		desc = `polkit-action --action #{action} | grep description: | sed 's/^description:[:space:]*\\(.\\+\\)$/\\1/'`
 		desc.strip!
 		Rails.logger.info "description for #{action} is #{desc}"
 		desc
 	end
-
-  USERNAME_REGEX = /\A[\d\w_]+\z/
-  #
-  # check if the username is valid (letters, digits, underscores)
-  #
-  #
-  
-  def check_username user
-    unless user =~ USERNAME_REGEX
-      raise InvalidParameters.new(:user_id => "INVALID")
-    end
-  end
-
-  def all_actions
-    `/usr/bin/polkit-action`
-  end
 
 SUSE_STRING = "org.opensuse.yast"
   def filter_nonsuse_permissions (str)
