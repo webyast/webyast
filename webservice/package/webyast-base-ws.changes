@@ -1,4 +1,12 @@
 -------------------------------------------------------------------
+Tue Mar 16 18:23:45 UTC 2010 - jreidinger@novell.com
+
+- refactor permissions model and add tests for this model (bnc#581744)
+- add standard xlm header to default to_xml (bnc#588398)
+- 0.1.9
+
+
+-------------------------------------------------------------------
 Thu Mar 11 07:52:49 UTC 2010 - lslezak@suse.cz
 
 - BaseModel: fixed validation in save!, use :indent=>2 default
