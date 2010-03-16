@@ -163,6 +163,12 @@ class Metric
 
     type, type_instance = type_full.split('-', 2)
     plugin, plugin_instance = plugin_full.split('-', 2)
+
+    host = "" if host.nil?
+    plugin = "" if plugin.nil?
+    plugin_instance = "" if plugin_instance.nil?
+    type = "" if type.nil?
+    type_instance = "" if type_instance.nil?
     
     return host, plugin, plugin_instance, type, type_instance
   end    
