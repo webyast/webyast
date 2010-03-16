@@ -10,6 +10,7 @@ use Data::Dumper;
 
 our %TYPEINFO;
 
+YaST::YCP::Import ("FileUtils");
 YaST::YCP::Import ("Mail");
 YaST::YCP::Import ("Progress");
 YaST::YCP::Import ("SCR");
@@ -71,13 +72,21 @@ sub Write {
 
     my $symlink	= "/etc/sysconfig/network/if-up.d/postfix-update-hostname";
 
-    if ($smtp_server) {
+    if ($smtp_server && !FileUtils->Exists ($symlink)) {
 	# link to dhcpcd hook that should update mail domain (bnc#559145)
 	y2milestone ("creating symlink '$symlink'");
 	SCR->Execute (".target.symlink",
 	"/etc/sysconfig/network/scripts/postfix-update-hostname", $symlink);
+
+	my $out	= SCR->Execute (".target.bash_output", "ip r|grep default|cut -d' ' -f5");
+	my $name= $out->{"stdout"} || "";
+	if ($name) {
+	    chomp $name;
+	    y2milestone ("executing '$symlink $name -o dhcp'...");
+	    SCR->Execute (".target.bash", "$symlink $name -o dhcp");
+	}
     }
-    else {
+    elsif (FileUtils->Exists ($symlink) && !$smtp_server) {
 	y2milestone ("removing symlink '$symlink'");
 	SCR->Execute (".target.remove", $symlink);
     }

@@ -1,4 +1,11 @@
 -------------------------------------------------------------------
+Tue Mar 16 15:13:23 CET 2010 - jsuchome@suse.cz
+
+- execute postfix-update-hostname script explicitely, so the test
+  mail could be sent with current address (bnc#559145)
+- 0.1.8 
+
+-------------------------------------------------------------------
 Fri Mar 12 09:18:04 CET 2010 - jsuchome@suse.cz
 
 - always save mail settings (bnc#587442)
