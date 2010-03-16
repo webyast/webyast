@@ -12,6 +12,7 @@ class Service
   attr_accessor :description
   attr_accessor :summary
   attr_accessor :custom
+  attr_accessor :enabled
 
   FILTER_FILE	= "filter_services.yml"
 
@@ -20,6 +21,7 @@ class Service
     @description	= ""
     @summary		= ""
     @custom		= false
+    @enabled		= true
   end
 
   private
@@ -85,6 +87,7 @@ class Service
 	  service.status	= s["status"] if s.has_key?("status")
 	  service.description	= s["description"] if s.has_key?("description")
 	  service.summary	= s["shortdescription"] if s.has_key?("shortdescription")
+	  service.enabled	= s["enabled"] if s.has_key?("enabled")
 	  Rails.logger.debug "service: #{service.inspect}"
 	  services_map[s["name"]]	= service
         end
@@ -104,6 +107,7 @@ class Service
 	  service.description	= s["description"] if s.has_key?("description")
 	  service.summary	= s["shortdescription"] if s.has_key?("shortdescription")
 	  service.custom	= true
+	  # service.enabled cannot be checked, we do not know how for custom service
 	  Rails.logger.debug "service: #{service.inspect}"
 	  services_map[s["name"]]	= service
         end
@@ -163,6 +167,7 @@ class Service
       xml.description description
       xml.summary summary
       xml.custom custom
+      xml.enabled enabled
       xml.status status, {:type => "integer"}
     end  
   end

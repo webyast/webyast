@@ -16,28 +16,20 @@ PreReq:         yast2-webservice
 License:	GPL v2 only
 Group:          Productivity/Networking/Web/Utilities
 Autoreqprov:    on
-Version:        0.1.4
+Version:        0.1.5
 Release:        0
 Summary:        YaST2 - Webservice - Services
 Source:         www.tar.bz2
 Source1:        org.opensuse.yast.modules.yapi.services.policy
 Source2:	YML.rb
 Source3:	filter_services.yml
+Source4:	SERVICES.pm
 BuildRoot:      %{_tmppath}/%{name}-%{version}-build
 BuildArch:      noarch
 BuildRequires:  rubygem-yast2-webservice-tasks rubygem-restility
 
 # so SERVICES.pm is able to call YML.rb
 Requires:       yast2-ruby-bindings >= 0.3.2.1
-
-# YaPI/SERVICES.pm using ruby-bindings
-%if 0%{?suse_version} == 0 || 0%{?suse_version} >= 1120
-# openSUSE11.2, Factory
-Requires:       yast2 >= 2.18.30
-%else
-# SLE11SP1
-Requires:       yast2 >= 2.17.87
-%endif
 
 
 #
@@ -84,6 +76,10 @@ install -m 0644 %SOURCE1 $RPM_BUILD_ROOT/usr/share/PolicyKit/policy/
 mkdir -p $RPM_BUILD_ROOT/usr/share/YaST2/modules/
 cp %{SOURCE2} $RPM_BUILD_ROOT/usr/share/YaST2/modules/
 
+# SERVICES.pm
+mkdir -p $RPM_BUILD_ROOT/usr/share/YaST2/modules/YaPI/
+cp %{SOURCE4} $RPM_BUILD_ROOT/usr/share/YaST2/modules/YaPI/
+
 # copy example filter_services.yml
 mkdir -p $RPM_BUILD_ROOT/etc/webyast/
 cp %SOURCE3 $RPM_BUILD_ROOT/etc/webyast/
@@ -108,6 +104,7 @@ rm -rf $RPM_BUILD_ROOT
 %dir /srv/www/%{pkg_user}/vendor/plugins/%{plugin_name}/doc
 %dir /usr/share/YaST2/
 %dir /usr/share/YaST2/modules/
+%dir /usr/share/YaST2/modules/YaPI/
 %dir /usr/share/PolicyKit
 %dir /usr/share/PolicyKit/policy
 %dir /etc/webyast/
@@ -123,6 +120,7 @@ rm -rf $RPM_BUILD_ROOT
 /srv/www/%{pkg_user}/vendor/plugins/%{plugin_name}/doc
 /srv/www/%{pkg_user}/vendor/plugins/%{plugin_name}/public
 /usr/share/YaST2/modules/YML.rb
+/usr/share/YaST2/modules/YaPI/SERVICES.pm
 
 %attr(644,root,root) %config /usr/share/PolicyKit/policy/org.opensuse.yast.modules.yapi.%{plugin_name}.policy
 %doc COPYING

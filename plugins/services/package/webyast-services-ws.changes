@@ -1,4 +1,11 @@
 -------------------------------------------------------------------
+Tue Mar 16 15:09:59 CET 2010 - jsuchome@suse.cz
+
+- SERVICES.pm now resides here, not in yast2 (bnc#587876)
+- remember 'enabled' status of each service (bmc#587879)
+- 0.1.5 
+
+-------------------------------------------------------------------
 Thu Mar 11 16:29:59 CET 2010 - jsuchome@suse.cz
 
 - updated documentation 
