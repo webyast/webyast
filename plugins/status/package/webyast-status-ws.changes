@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Tue Mar 16 17:49:54 CET 2010 - schubi@suse.de
+
+- handle wrong graph data (bnc#588304)
+- 0.1.2
+
+-------------------------------------------------------------------
 Wed Mar 10 17:15:48 CET 2010 - schubi@suse.de
 
 - Do not take CDROM,DVD,... for showing disk space (bnc#583204) 
