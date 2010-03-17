@@ -279,7 +279,7 @@ sub Execute {
   my $name	= $args->{"name"} || "";
   my $action	= $args->{"action"} || "";
 
-  return self->Enable ($args) if ($action eq "enable" || $action eq "disable");
+  return $self->Enable ($args) if ($action eq "enable" || $action eq "disable");
 
   if ($args->{"custom"} || 0) {
     return execute_custom_script ($name, $action);
