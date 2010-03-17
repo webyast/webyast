@@ -1,4 +1,11 @@
 -------------------------------------------------------------------
+Wed Mar 17 14:22:40 CET 2010 - jsuchome@suse.cz
+
+- SERVICES.pm: fixed self->Enable call
+- return also "enabled" when asked for service status
+- 0.1.6
+
+-------------------------------------------------------------------
 Tue Mar 16 15:09:59 CET 2010 - jsuchome@suse.cz
 
 - SERVICES.pm now resides here, not in yast2 (bnc#587876)

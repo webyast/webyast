@@ -175,14 +175,16 @@ sub Read {
 
   # only read status of one service if the name was given
   if ($args->{"service"} || "") {
+    my $name	= $args->{"service"} || "";
     my $exec	= $self->Execute ({
-	"name" 		=> $args->{"service"} || "",
+	"name" 		=> $name,
 	"action"	=> "status",
 	"custom"	=> $args->{"custom"} || 0
     });
     my $s	= {
-	"name"  	=> $args->{"service"} || "",
-	"status"	=> $exec->{"exit"} || 0
+	"name"  	=> $name,
+	"status"	=> $exec->{"exit"} || 0,
+	"enabled"	=> YaST::YCP::Boolean (Service->Enabled ($name))
     };
     push @ret, $s;
     return \@ret;
