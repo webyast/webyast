@@ -183,15 +183,63 @@ class Graph
     @single_graphs = value["single_graphs"]
   end
 
+  # just a short cut for accessing the singleton object
+  def self.bm
+    BackgroundManager.instance
+  end
+
+  # create unique id for the background manager
+  def self.id(what)
+    "system_status_#{what}"
+  end
+
+  def self.find(what, limitcheck = false, opts = {})
+    background = opts[:background]
+
+    # background reading doesn't work correctly if class reloading is active
+    # (static class members are lost between requests)
+    if background && !bm.background_enabled?
+      Rails.logger.info "Class reloading is active, cannot use background thread (set config.cache_classes = true)"
+      background = false
+    end
+
+    if background
+      proc_id = id(what)
+      if bm.process_finished? proc_id
+        Rails.logger.debug "Request #{proc_id} is done"
+        return bm.get_value proc_id
+      end
+
+      running = bm.get_progress proc_id
+      if running
+        Rails.logger.debug "Request #{proc_id} is already running: #{running.inspect}"
+        return [running]
+      end
+
+      bm.add_process proc_id
+      Rails.logger.info "Starting background thread for reading status..."
+
+      # read the status in a separate thread
+      Thread.new do
+        res = do_find what, limitcheck, bm
+        bm.finish_process(proc_id, res)
+      end
+
+      return [ bm.get_progress(proc_id) ]
+    else
+      return do_find(what, limitcheck)
+    end
+  end
+
   #
-  # find 
+  # find
   # Graph.find(:all, limitcheck)
-  # Graph.find(id, limitcheck) 
+  # Graph.find(id, limitcheck)
   # "id" could be the graph group (CPU, Disc) or the path of the collectd entry (metric_id)
   #      (e.g. cpu-0+cpu-system)
   # "limitcheck" checking if limit has been reached (default: false)
   #
-  def self.find(what, limitcheck = false)
+  def self.do_find(what, limitcheck = false, bg = nil)
     config = parse_config
     return nil if config==nil
 
@@ -215,8 +263,21 @@ class Graph
     end
 
     ret = []
+
+    # for reporing the progress
+    idx = 0
+    len = config.size
+
     config.each {|key,value|
+      if !bg.nil?
+        bg.update_progress id(what) do |bs|
+          bs.progress = (idx.to_f/len*100).to_i
+          Rails.logger.info "Reading status: progress: #{bs.progress}%%"
+        end
+      end
+
       ret << Graph.new(key,value,limitcheck)
+      idx += 1
     }
 
     if what == :all || ret.blank?
