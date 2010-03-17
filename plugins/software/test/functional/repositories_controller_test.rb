@@ -130,8 +130,17 @@ class RepositoriesControllerTest < ActionController::TestCase
     assert_response :missing
   end
 
-  test "destroy" do
-    Repository.any_instance.expects(:destroy).returns(true)
+  test "destroy failed" do
+    Repository.any_instance.expects(:destroy)
+
+    post :destroy, :id => "factory-oss"
+    assert_response :missing
+  end
+
+  test "destroy success" do
+    Repository.any_instance.expects(:destroy)
+    # the first find is successful, the second (after removal) is empty
+    Repository.stubs(:find).with('factory-oss').returns([@r1]).then.returns([])
 
     post :destroy, :id => "factory-oss"
     assert_response :success
@@ -143,14 +152,6 @@ class RepositoriesControllerTest < ActionController::TestCase
     post :destroy, :id => "none"
     assert_response :missing
   end
-
-  test "destroy failed" do
-    Repository.any_instance.expects(:destroy).returns(false)
-
-    post :destroy, :id => "factory-oss"
-    assert_response :missing
-  end
-
 
   # Test Dbus exception handling
   test "update - dbus_exception" do

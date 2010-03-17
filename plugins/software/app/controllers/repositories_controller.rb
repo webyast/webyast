@@ -118,8 +118,12 @@ class RepositoriesController < ApplicationController
     @repo = repos.first
 
     begin
-      unless @repo.destroy
-        render ErrorResult.error(404, 2, "packagekit error") and return
+      @repo.destroy
+
+      # PackageKit doesn't return any status, check whether the repository is still present
+      reps = Repository.find(params[:id])
+      if reps.size > 0
+        render ErrorResult.error(404, 2, "Cannot remove repository #{@repo.id}") and return
       end
     rescue DBus::Error => exception
         render ErrorResult.error(404, 20, "DBus Error: #{exception.dbus_message.error_name}") and return
