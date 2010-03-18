@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Thu Mar 18 15:22:47 CET 2010 - vgorobets@suse.de
+
+- WebYaST appears to crash after installing webclient patch (bnc#560701)
+- 0.0.10 
+
+-------------------------------------------------------------------
 Tue Dec  8 18:24:24 CET 2009 - mvidner@suse.cz
 
 - Fixed a hang when PackageKit responded too fast (bnc#561578).
