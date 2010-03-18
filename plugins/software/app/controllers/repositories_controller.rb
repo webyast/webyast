@@ -3,9 +3,9 @@ class RepositoriesController < ApplicationController
   before_filter :login_required
 
   # cache index and show action
-  before_filter :check_cache_status, :only => [:index, :show]
-  before_filter :check_read_permissions, :only => [:index, :show]
-  caches_action :index, :show
+  before_filter :check_cache_status, :only => [:index]
+  before_filter :check_read_permissions, :only => [:index]
+  caches_action :index
 
   CACHE_ID = 'repositories:timestamp'
 
@@ -22,7 +22,6 @@ class RepositoriesController < ApplicationController
     elsif cache_timestamp < Repository.mtime
 	Rails.logger.debug "#### Repositories cache expired"
 	expire_action :action => :index, :format => params["format"]
-	expire_action :action => :show, :format => params["format"]
 	Rails.cache.write(CACHE_ID, Time.now)
     end
   end
@@ -47,6 +46,8 @@ class RepositoriesController < ApplicationController
 
   # GET /repositories/my_repo.xml
   def show
+    permission_check "org.opensuse.yast.system.repositories.read"
+
     # read permissions were checked in a before filter
     begin
       repos = Repository.find(params[:id])

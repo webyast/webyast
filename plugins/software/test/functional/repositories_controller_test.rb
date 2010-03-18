@@ -210,7 +210,6 @@ class RepositoriesControllerTest < ActionController::TestCase
 
     # check that the actions are expired
     @controller.expects(:expire_action).with(:action => :index, :format => nil)
-    @controller.expects(:expire_action).with(:action => :show, :format => nil)
 
     Rails.cache.expects(:write).with(RepositoriesController::CACHE_ID, current_time)
 
