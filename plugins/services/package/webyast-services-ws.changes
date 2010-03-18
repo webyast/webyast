@@ -1,4 +1,9 @@
 -------------------------------------------------------------------
+Thu Mar 18 07:54:13 CET 2010 - jsuchome@suse.cz
+
+- SERVICES.pm: do not check on-boot status of custom service 
+
+-------------------------------------------------------------------
 Wed Mar 17 14:22:40 CET 2010 - jsuchome@suse.cz
 
 - SERVICES.pm: fixed self->Enable call

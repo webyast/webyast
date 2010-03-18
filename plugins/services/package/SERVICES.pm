@@ -184,7 +184,8 @@ sub Read {
     my $s	= {
 	"name"  	=> $name,
 	"status"	=> $exec->{"exit"} || 0,
-	"enabled"	=> YaST::YCP::Boolean (Service->Enabled ($name))
+	# custom service is always 'enabled' (in fact, we can't check)
+	"enabled"	=> ($args->{"custom"} || 0) || YaST::YCP::Boolean (Service->Enabled ($name))
     };
     push @ret, $s;
     return \@ret;
