@@ -142,6 +142,7 @@ class Service
     else
 	@status	= yapi_ret.first["status"] if !yapi_ret.empty? && yapi_ret.first.has_key?("status")
 	@enabled= yapi_ret.first["enabled"] if !yapi_ret.empty? && yapi_ret.first.has_key?("enabled")
+	@custom	= params["custom"] == "true"
     end
   end
 
