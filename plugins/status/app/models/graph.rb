@@ -14,6 +14,11 @@ class Graph
 
   private
 
+  # avoid race conditions when creating the config file
+  # at background - allow only one thread writing it
+  #
+  @@mutex = Mutex.new
+
   # 
   # reading data from Metric
   #
@@ -148,9 +153,12 @@ class Graph
     end
     config["CPU"] = cpu unless cpu["single_graphs"].blank?
 
-    f = File.open(filename, "w")
-    f.write(config.to_yaml)
-    f.close
+    # avoid multiple threads creating a config in parallel
+    @@mutex.synchronize do
+      f = File.open(filename, "w")
+      f.write(config.to_yaml)
+      f.close
+    end
   end
 
   public
@@ -325,9 +333,12 @@ class Graph
     else
       raise "#{group_name} not found in configuration file"
     end
-    f = File.open(File.join(Graph.plugin_config_dir(), CONFIGURATION_FILE), "w")
-    f.write(config.to_yaml)
-    f.close
+    # avoid race condition in writing the config
+    @@mutex.synchronize do
+      f = File.open(File.join(Graph.plugin_config_dir(), CONFIGURATION_FILE), "w")
+      f.write(config.to_yaml)
+      f.close
+    end
   end
 
   # converts the graph to xml
