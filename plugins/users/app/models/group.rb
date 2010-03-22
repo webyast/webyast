@@ -19,28 +19,43 @@ class Group < BaseModel::Base
 
 private
 
-  def group_get(type,gid)
+  def self.group_get(type,gid)
+    Rails.logger.debug( 'YastService.Call("YaPI::USERS::GroupGet", {"type"=>["s","'+type+'"}], "gidNumber"=>["i",'+gid.to_s+']})')
     YastService.Call("YaPI::USERS::GroupGet", {"type"=>["s",type], "gidNumber"=>["i",gid]})
   end
 
-public:
+  def self.groups_get(type)
+    YastService.Call("YaPI::USERS::GroupsGet", {"type"=>["s",type]})
+  end
+
+  def self.make_group(group_hash)
+    group_hash[:gid]             = group_hash["gidNumber"]
+    group_hash[:old_gid]         = group_hash["gidNumber"]
+    group_hash[:default_members] = group_hash["more_users"].keys()
+    group_hash[:members]         = group_hash["listusers"].keys()
+    Group.new group_hash
+  end
+
+public
 
   def self.find (gid)
-    result = group_get ("system", gid)
-    result = group_get ("local", gid)  if result.empty?
+    result = group_get( "system", gid )
+    result = group_get( "local", gid )  if result.empty?
     return nil if result.empty?
-    result[:gid]             = result["gidNumber"]
-    result[:old_gid]         = result["gidNumber"]
-    result[:default_members] = result["more_users"].keys()
-    result[:members]         = result["listusers"].keys()
-    Group.new result
+    make_group result
+  end
+
+  def self.find_all
+    result = groups_get "local"
+    result.update( groups_get "system")
+    result.collect { |k,v| make_group v }
   end
 
   def save
-    result = YaSTService.Call("YaPI::USERS::GroupModify"
-                             , { "type"      => ["s", type],
-                                 "gidNumber" => ["i", old_gid]  }
-                             , { "gidNumber" => ["i", gid],
+    result = YaSTService.Call("YaPI::USERS::GroupModify",
+                               { "type"      => ["s", type],
+                                 "gidNumber" => ["i", old_gid]  },
+                               { "gidNumber" => ["i", gid],
                                  "cn"        => ["s",cn],
                                  "listusers" => ["as", members] } 
                              )
