@@ -1,44 +1,51 @@
 require 'yast_service'
 
-# User model, not ActiveRecord based, but a
-# thin model over the YaPI, with some
-# ActiveRecord like convenience API
-class Group
-  
-  attr_accessor_with_default :allgroups, {}
+# Group model, YastModel based
+class Group < BaseModel::Base
+  attr_accessor :cn              # group name
+  attr_accessor :gid             # group number
+  attr_accessor :old_gid         # for group identification when changing group id
+  attr_accessor :default_members # list of user names, which have this group as default
+  attr_accessor :members         # list of users explicitaly added into this group
+  attr_accessor :type            # type of the group ... system or local
 
-  def initialize    
-  end
-  
-  # load the attributes of the user
-  def self.find()
-    group = Group.new
+  attr_accessible :cn, :gid, :old_gid, :default_members, :members, :type
 
-    system_groups = YastService.Call("YaPI::USERS::GroupsGet", {"index"=>["s","cn"],"type"=>["s","system"]})
-    local_groups = YastService.Call("YaPI::USERS::GroupsGet", {"index"=>["s","cn"],"type"=>["s","local"]})
-    group.allgroups = Hash[*(local_groups.keys | system_groups.keys).collect {|v| [v,1]}.flatten]
+  validates_presence_of     :members
+  validates_inclusion_of    :type, :in => ["system","local"]
+  validates_format_of       :cn, :with => /[a-z]+/
+  validates_numericality_of :gid
+  validates_numericality_of :old_gid
 
-    group
-  end
+private
 
-  def to_xml( options = {} )
-    xml = options[:builder] ||= Builder::XmlMarkup.new(options)
-    xml.instruct! unless options[:skip_instruct]
-    
-    xml.user do
-      xml.allgroups({:type => "array"}) do
-         allgroups.each do |group| 
-	    xml.group do
-	      xml.tag!(:cn, group[0])
-	    end
-         end
-      end
-    end  
+  def group_get(type,gid)
+    YastService.Call("YaPI::USERS::GroupGet", {"type"=>["s",type], "gidNumber"=>["i",gid]})
   end
 
-  def to_json( options = {} )
-    hash = Hash.from_xml(to_xml())
-    return hash.to_json
+public:
+
+  def self.find (gid)
+    result = group_get ("system", gid)
+    result = group_get ("local", gid)  if result.empty?
+    return nil if result.empty?
+    result[:gid]             = result["gidNumber"]
+    result[:old_gid]         = result["gidNumber"]
+    result[:default_members] = result["more_users"].keys()
+    result[:members]         = result["listusers"].keys()
+    Group.new result
   end
 
+  def save
+    result = YaSTService.Call("YaPI::USERS::GroupModify"
+                             , { "type"      => ["s", type],
+                                 "gidNumber" => ["i", old_gid]  }
+                             , { "gidNumber" => ["i", gid],
+                                 "cn"        => ["s",cn],
+                                 "listusers" => ["as", members] } 
+                             )
+    if ! result.empty?
+      raise result # result is empty string on success, error message otherwise
+    end
+  end
 end
