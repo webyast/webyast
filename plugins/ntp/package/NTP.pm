@@ -40,6 +40,7 @@ sub Synchronize {
     if ($new_server ne "")
     {
       `sed -i 's|^[:space:]*NETCONFIG_NTP_STATIC_SERVERS=.*\$|NETCONFIG_NTP_STATIC_SERVERS="$new_server"|' /etc/sysconfig/network/config `;
+      `netconfig update -m ntp`; #update ntp confiration immediatelly bnc#589303
     }
     return "OK";
   }
