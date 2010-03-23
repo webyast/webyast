@@ -41,7 +41,7 @@ class SessionsController < ApplicationController
     @cmd_ret = Hash.new
     if BruteForceProtection.instance.blocked? params[:login]
       @cmd_ret["login"] = "blocked"
-      @cmd_ret["remain"] = BruteForceProtection.instance.last_fail(params[:login]) + BruteForceProtection::BAN_TIMEOUT
+      @cmd_ret["remain"] = BruteForceProtection.instance.last_failed(params[:login]) + BruteForceProtection::BAN_TIMEOUT
     elsif logged_in?
       if params[:remember_me]
         current_account.remember_me unless current_account.remember_token?
