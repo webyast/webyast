@@ -95,7 +95,8 @@ class Graph
                                              {"label"=>"free", "limits"=>{"max"=>"0", "min"=>"0"}, 
                                               "metric_column"=>"free", "metric_id"=>metric_id}], 
                                    "headline"=>metric.type_instance, 
-                                   "cummulated"=>"true"}
+                                   "cummulated"=>"true",
+                                   "linegraph"=>"false"}
       end
     end
     config["Disk"] = disk unless disk["single_graphs"].blank?
@@ -112,7 +113,8 @@ class Graph
                                              {"label"=>"sent", "limits"=>{"max"=>"0", "min"=>"0"}, 
                                               "metric_column"=>"tx", "metric_id"=>metric_id}], 
                                    "headline"=>metric.type_instance, 
-                                   "cummulated"=>"false"}
+                                   "cummulated"=>"false",
+                                   "linegraph"=>"true"}
       end
     end
     config["Network"] = network unless network["single_graphs"].blank?
@@ -130,7 +132,8 @@ class Graph
     end
     memory["single_graphs"] << {"lines"=>lines,
                                 "headline"=>"Memory", 
-                                "cummulated"=>"true"} unless lines.blank?
+                                "cummulated"=>"true",
+                                "linegraph"=>"false"} unless lines.blank?
     config["Memory"] = memory unless memory["single_graphs"].blank?
 
     #CPU
@@ -149,7 +152,8 @@ class Graph
     graphs.each do |key, lines|
       cpu["single_graphs"] << {"lines"=>lines,
                                "headline"=>"CPU-" + key, 
-                               "cummulated"=>"false"} unless lines.blank?
+                               "cummulated"=>"false",
+                               "linegraph"=>"false"} unless lines.blank?
     end
     config["CPU"] = cpu unless cpu["single_graphs"].blank?
 
@@ -353,6 +357,7 @@ class Graph
         single_graphs.each do |graph|
           xml.single_graph do
             xml.cummulated graph["cummulated"]
+            xml.linegraph graph["linegraph"]
             xml.headline graph["headline"]
             xml.lines(:type => :array) do
               graph["lines"].each do |line|

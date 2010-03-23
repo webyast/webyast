@@ -6,6 +6,7 @@
    <single_graphs type="array">
        <single_graph>
           <cummulated>true</cummulated>
+          <linegraph>false</linegraph>
           <headline>Memory</headline>
           <lines type="array">
              <line>
