@@ -13,6 +13,8 @@ class Service
   attr_accessor :summary
   attr_accessor :custom
   attr_accessor :enabled
+  attr_accessor :required_for_start
+  attr_accessor :required_for_stop
 
   FILTER_FILE	= "filter_services.yml"
 
@@ -22,6 +24,8 @@ class Service
     @summary		= ""
     @custom		= false
     @enabled		= true
+    @required_for_start	= []
+    @required_for_stop	= []
   end
 
   private
@@ -73,6 +77,7 @@ class Service
 	"read_status"	=> [ "b", params.has_key?("read_status")],
 	"shortdescription"	=> [ "b", true],
 	"description"	=> [ "b", true],
+	"dependencies"	=> [ "b", true],
 	"filter"	=> [ "as", filter ]
     }
 	
@@ -88,6 +93,8 @@ class Service
 	  service.description	= s["description"] if s.has_key?("description")
 	  service.summary	= s["shortdescription"] if s.has_key?("shortdescription")
 	  service.enabled	= s["enabled"] if s.has_key?("enabled")
+	  service.required_for_start		= s["required_for_start"] if s.has_key?("required_for_start")
+	  service.required_for_stop		= s["required_for_stop"] if s.has_key?("required_for_stop")
 	  Rails.logger.debug "service: #{service.inspect}"
 	  services_map[s["name"]]	= service
         end
@@ -95,6 +102,7 @@ class Service
 
     # read list of custom (user defined) services
     args["custom"]	= [ "b", true]
+    args["dependencies"]= [ "b", false]
 	
     yapi_ret = YastService.Call("YaPI::SERVICES::Read", args)
 
