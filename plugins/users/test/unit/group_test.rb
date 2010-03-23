@@ -12,13 +12,13 @@ class GroupsTest < ActiveSupport::TestCase
                       'type' => 'local'
                     };
 
-  GROUP_LOCAL_CONFIG = { "type" => ["s","local"], "gidNumber" => ["i",100] }
+  GROUP_LOCAL_CONFIG = { "type" => ["s","local"], "cn" => ["s","users"] }
   
-  GROUP_SYSTEM_CONFIG = { "type" => ["s","system"], "gidNumber" => ["i",100] }
+  GROUP_SYSTEM_CONFIG = { "type" => ["s","system"], "cn" => ["s","users"] }
 
   GROUP_WRITE_DATA= { 'userlist' => ["as", [] ],
-                      'gidNumber' => ["i", 101],
-                      'cn' => ["s",'users']
+                      'gidNumber' => ["i", 100],
+                      'cn' => ["s",'new_users']
                     };
 
   OK_RESULT = ""
@@ -29,14 +29,14 @@ class GroupsTest < ActiveSupport::TestCase
     YastService.stubs(:Call).with("YaPI::USERS::GroupGet",GROUP_SYSTEM_CONFIG).once.returns({})
     YastService.stubs(:Call).with("YaPI::USERS::GroupsGet",{"type"=>["s","system"]}).once.returns({100 => GROUP_READ_DATA})
     YastService.stubs(:Call).with("YaPI::USERS::GroupsGet",{"type"=>["s","local"]}).once.returns({100 => GROUP_READ_DATA})
-    @model  = Group.find 100
+    @model  = Group.find "users"
     @models = Group.find_all
   end
 
   def test_read
     assert_not_nil @model.gid
     assert_not_nil @model.cn
-    assert_not_nil @model.old_gid
+    assert_not_nil @model.old_cn
     assert_instance_of(Array, @model.default_members)
     assert_instance_of(Array, @model.members)
     assert_not_nil @model.type
@@ -46,8 +46,9 @@ class GroupsTest < ActiveSupport::TestCase
   end
 
   def test_write
-    @model.gid = 101
+    @model.cn = "new_users"
     assert_nothing_raised do
+      YastService.stubs(:Call).with("YaPI::USERS::GroupGet",GROUP_LOCAL_CONFIG).once.returns(GROUP_READ_DATA)
       YastService.stubs(:Call).with("YaPI::USERS::GroupModify",GROUP_LOCAL_CONFIG,GROUP_WRITE_DATA).once.returns(OK_RESULT)
       @model.save
     end

@@ -21,8 +21,8 @@ private
 
 public
 
-  # GET /groups/1
-  # GET /groups/1.xml
+  # GET /groups/users
+  # GET /groups/users.xml
   def show
     begin
       # try to find the grouplist, and 404 if it does not exist
@@ -55,20 +55,63 @@ public
     end
   end
 
-  # POST /groups/1/
+  # POST /groups/users/
   def update
     group_params = params[:groups] || {}
     group_params[:old_gid] = params[:id]
-    group = Group.new group_params
-    group.save
+    @group = Group.new group_params
+    begin
+      result = @group.save
+      unless result.empty?
+        render ErrorResult.error(404, 2, "Group update error:'"+result+"'") and return
+      end
+    rescue DBus::Error => exception
+        render ErrorResult.error(404, 20, "DBus Error: #{exception.dbus_message.error_name}") and return
+    end
+    render :show
   end
 
   # PUT /groups/
   def create
     group_params = params[:groups] || {}
     group_params[:old_gid] = group_params[:gid]
-    group = Group.new group_params
-    group.save
+    @group = Group.new group_params
+    begin
+      result = @group.save
+      unless result.empty?
+        render ErrorResult.error(404, 2, "Group create error:'"+result+"'") and return
+      end
+    rescue DBus::Error => exception
+        render ErrorResult.error(404, 20, "DBus Error: #{exception.dbus_message.error_name}") and return
+    end
+    render :show
+  end
+
+  # DELETE /groups/users
+  def destroy
+    yapi_perm_check "users.groupdelete"
+
+    begin
+      @group = Group.find(params[:id])
+    rescue DBus::Error => exception
+        render ErrorResult.error(404, 20, "DBus Error: #{exception.dbus_message.error_name}") and return
+    end
+
+    if @group.nil?
+      Rails.logger.error "Group #{params[:id]} was not found."
+      render ErrorResult.error(404, 1, "Group '#{params[:id]}' not found.") and return
+    end
+
+    begin
+      result = @group.destroy
+      unless result.empty?
+        render ErrorResult.error(404, 2, "Cannot remove group #{@group.cn}: #{result}") and return
+      end
+    rescue DBus::Error => exception
+        render ErrorResult.error(404, 20, "DBus Error: #{exception.dbus_message.error_name}") and return
+    end
+
+    render :show
   end
 end
 
