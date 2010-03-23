@@ -12,6 +12,8 @@ services:
 EOF
 
   def setup    
+    Paths.const_set 'CONFIG', File.join(File.dirname(__FILE__),"..","..","test","etc")
+    YaST::ConfigFile.any_instance.stubs(:path).returns(__FILE__)
     YaST::ConfigFile.stubs(:read_file).returns(YAML_CONTENT)
     @read_args = {
 	'runlevel'		=> [ 'i', 5 ],
