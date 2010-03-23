@@ -30,7 +30,7 @@ class GroupsControllerTest < ActionController::TestCase
 
   UPDATE_DATA = { "id" => "100", "group" => GROUP_PARAM_DATA }
 
-  GROUP_WRITE_DATA= { 'userlist' => ["as", ['games', 'tux'] ],
+  GROUP_WRITE_DATA= { 'userlist' => ["as", [] ],
                       'gidNumber' => ["i", 101],
                       'cn' => ["s",'users']
                     }
@@ -40,13 +40,13 @@ class GroupsControllerTest < ActionController::TestCase
   def setup
     @model_class = Group
     group_mock = Group.new(GROUP_READ_DATA)
-    Group.stubs(:find).returns(fw_mock)
+    Group.stubs(:find).returns(group_mock)
 
-    @controller = GroupController.new
+    @controller = GroupsController.new
     @request = ActionController::TestRequest.new
     # http://railsforum.com/viewtopic.php?id=1719
     @request.session[:account_id] = 1 # defined in fixtures
-    @data = GROUP_UPDATE_DATA
+    @data = UPDATE_DATA
   end
 
   include PluginBasicTests

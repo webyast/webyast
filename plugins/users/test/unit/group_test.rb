@@ -1,6 +1,6 @@
 require File.expand_path(File.dirname(__FILE__) + "/../test_helper")
 
-class GroupTest < ActiveSupport::TestCase
+class GroupsTest < ActiveSupport::TestCase
 
   GROUP_READ_DATA = { 'more_users' => { 'games' => 1,
                                         'tux' => 1
@@ -16,7 +16,7 @@ class GroupTest < ActiveSupport::TestCase
   
   GROUP_SYSTEM_CONFIG = { "type" => ["s","system"], "gidNumber" => ["i",100] }
 
-  GROUP_WRITE_DATA= { 'userlist' => ["as", ['games', 'tux'] ],
+  GROUP_WRITE_DATA= { 'userlist' => ["as", [] ],
                       'gidNumber' => ["i", 101],
                       'cn' => ["s",'users']
                     };
@@ -24,13 +24,13 @@ class GroupTest < ActiveSupport::TestCase
   OK_RESULT = ""
 
   def setup
-    #YastService.stubs(:Call).with("YaPI::USERS::GroupGet",GROUP_LOCAL_CONFIG).once.returns(GROUP_READ_DATA)
-    #YastService.stubs(:Call).with("YaPI::USERS::GroupsGet",{"type"=>["s","system"]}).once.returns({100 => GROUP_READ_DATA})
-    #YastService.stubs(:Call).with("YaPI::USERS::GroupsGet",{"type"=>["s","local"]}).once.returns({100 => GROUP_READ_DATA})
-    debugger
-    #YastService.stubs(:Call).with("YaPI::USERS::GroupGet",GROUP_SYSTEM_CONFIG).once.returns({})
-    YastService.stubs(:Call).once.returns({})
-    @model = Group.find 100
+    Group # make ruby load this class before stubbing
+    YastService.stubs(:Call).with("YaPI::USERS::GroupGet",GROUP_LOCAL_CONFIG).once.returns(GROUP_READ_DATA)
+    YastService.stubs(:Call).with("YaPI::USERS::GroupGet",GROUP_SYSTEM_CONFIG).once.returns({})
+    YastService.stubs(:Call).with("YaPI::USERS::GroupsGet",{"type"=>["s","system"]}).once.returns({100 => GROUP_READ_DATA})
+    YastService.stubs(:Call).with("YaPI::USERS::GroupsGet",{"type"=>["s","local"]}).once.returns({100 => GROUP_READ_DATA})
+    @model  = Group.find 100
+    @models = Group.find_all
   end
 
   def test_read
@@ -40,6 +40,9 @@ class GroupTest < ActiveSupport::TestCase
     assert_instance_of(Array, @model.default_members)
     assert_instance_of(Array, @model.members)
     assert_not_nil @model.type
+    
+    assert_not_nil @models
+    assert_instance_of(Array, @models)
   end
 
   def test_write

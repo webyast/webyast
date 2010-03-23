@@ -4,20 +4,22 @@ class GroupsController < ApplicationController
   
   before_filter :login_required
 
-  before_filter :check_read_permissions, :only => [:index,:show]
-  before_filter :check_write_permissions, :only => [:create, :update]
+  before_filter :check_read_permission, :only => [:index,:show]
+  before_filter :check_write_permission, :only => [:create, :update]
 
-private:
+private
 
   def check_read_permission
     yapi_perm_check "users.groupsget"
+    yapi_perm_check "users.groupget"
   end
 
   def check_write_permission
-    yapi_perm_check "users.groupsmodify"
+    yapi_perm_check "users.groupmodify"
+    yapi_perm_check "users.groupadd"
   end
 
-public:
+public
 
   # GET /groups/1
   # GET /groups/1.xml

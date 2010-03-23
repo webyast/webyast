@@ -32,13 +32,14 @@ private
     group_hash[:gid]             = group_hash["gidNumber"]
     group_hash[:old_gid]         = group_hash["gidNumber"]
     group_hash[:default_members] = group_hash["more_users"].keys()
-    group_hash[:members]         = group_hash["listusers"].keys()
+    group_hash[:members]         = group_hash["userlist"].keys()
     Group.new group_hash
   end
 
 public
 
   def self.find (gid)
+    gid = gid.to_i
     result = group_get( "system", gid )
     result = group_get( "local", gid )  if result.empty?
     return nil if result.empty?
@@ -52,13 +53,20 @@ public
   end
 
   def save
-    result = YaSTService.Call("YaPI::USERS::GroupModify",
-                               { "type"      => ["s", type],
-                                 "gidNumber" => ["i", old_gid]  },
-                               { "gidNumber" => ["i", gid],
-                                 "cn"        => ["s",cn],
-                                 "listusers" => ["as", members] } 
-                             )
+    existing_group = group_get( type, old_gid )
+    if existing_group.empty?
+      result = YastService.Call( "YaPI::USERS::GroupAdd",
+                                 { "type"      => ["s", type] },
+                                 { "cn"        => ["s",cn], "userlist"  => ["as", members] } )
+    else
+      result = YastService.Call( "YaPI::USERS::GroupModify",
+                                 { "type"      => ["s", type],
+                                   "gidNumber" => ["i", old_gid]  },
+                                 { "gidNumber" => ["i", gid],
+                                   "cn"        => ["s",cn],
+                                   "userlist"  => ["as", members] } 
+                               )
+    end
     if ! result.empty?
       raise result # result is empty string on success, error message otherwise
     end

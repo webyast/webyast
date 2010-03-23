@@ -16,7 +16,27 @@
     </defaults>
   </action>
 
-  <action id="org.opensuse.yast.modules.yapi.users.groupsmodify">
+  <action id="org.opensuse.yast.modules.yapi.users.groupget">
+    <description>Get a single groups.</description>
+    <message>System policy prevents the Yast DBus service from reading groups.</message>
+    <defaults>
+      <allow_any>no</allow_any>
+      <allow_inactive>no</allow_inactive>
+      <allow_active>auth_admin_keep_session</allow_active>
+    </defaults>
+  </action>
+
+  <action id="org.opensuse.yast.modules.yapi.users.groupadd">
+    <description>Create a new group.</description>
+    <message>Authentication is required to create a new group.</message>
+    <defaults>
+      <allow_any>no</allow_any>
+      <allow_inactive>no</allow_inactive>
+      <allow_active>auth_admin_keep_session</allow_active>
+    </defaults>
+  </action>
+
+  <action id="org.opensuse.yast.modules.yapi.users.groupmodify">
     <description>Update settings of a group.</description>
     <message>Authentication is required to update group settings.</message>
     <defaults>
