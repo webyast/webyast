@@ -18,6 +18,7 @@ EOF
 	'read_status'		=> [ 'b', false],
 	'description'		=> ['b', true],
 	'shortdescription' 	=> ['b', true],
+	'dependencies'		=> [ 'b', true],
 	'filter'		=> [ 'as', ['acpid', 'dbus','my_app']]
     }
     @custom_args = {
@@ -26,6 +27,7 @@ EOF
 	'description'		=> ['b', true],
 	'shortdescription'	=> ['b', true],
 	'filter'		=> [ 'as', ['acpid', 'dbus','my_app']],
+	'dependencies'		=> [ 'b', false],
 	'custom'		=> ['b', true]
     }
    end

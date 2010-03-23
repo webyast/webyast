@@ -9,8 +9,11 @@ use Data::Dumper;
 YaST::YCP::Import ("Directory");
 YaST::YCP::Import ("FileUtils");
 YaST::YCP::Import ("Package");
+YaST::YCP::Import ("Progress");
 YaST::YCP::Import ("Service");
 YaST::YCP::Import ("SCR");
+YaST::YCP::Import ("Report");
+YaST::YCP::Import ("RunlevelEd");
 # -------------------------------------
 
 our $VERSION            = '1.0.0';
@@ -179,6 +182,8 @@ sub Read {
     my $exec	= $self->Execute ({
 	"name" 		=> $name,
 	"action"	=> "status",
+	"only_execute"	=> 1,
+	"only_this"	=> 1,
 	"custom"	=> $args->{"custom"} || 0
     });
     my $s	= {
@@ -213,34 +218,44 @@ sub Read {
     }
   }
   else {
-    my $details = SCR->Read (".init.scripts.runlevels");
-    
-    # copied from RunlevelEd::Read
-    my $full_services	= SCR->Read (".init.scripts.comments");
+    my $progress_orig   = Progress->set (0);
+    Report->DisplayErrors (0, 0);
+    RunlevelEd->Read ();
+    my $full_services	= RunlevelEd->services ();
     while (my ($name, $info) = each %$full_services) {
 
 	next if (@filter && !defined $filter_map->{$name}); # should not be returned
-
-	my $second_service = $details->{$name} || {};
+	next if (contains ($info->{"defstart"} || [], "B", 1));
 
 	my $s      = {
 	    "name"		=> $name
 	};
-	next if (contains ($info->{"defstart"} || [], "B", 1));
 
 	if ($args->{"start_runlevels"} || 0) {
-	    $s->{"start_runlevels"}	= $second_service->{"start"} || [];
+	    $s->{"start_runlevels"}	= $info->{"start"} || [];
 	}
 	else {
-	    my $start		= $second_service->{"start"} || [];
+	    my $start		= $info->{"start"} || [];
 	    # for "B" check, see RunlevelEd::StartContainsImplicitly
 	    $s->{"enabled"}	= YaST::YCP::Boolean (contains ($start, $runlevel, 1) || contains ($start, "B", 1));
+	}
+	# return start and stop dependencies for each service
+	if ($args->{"dependencies"} || 0) {
+	    my @required_for_start	= ();
+	    # filter out services started on boot by default:
+	    foreach my $rq (@{RunlevelEd->ServiceDependencies ($name, 1)}) {
+		my $start	= $full_services->{$rq}{"start"} || [];
+		push @required_for_start, $rq unless contains ($start, "B", 1);
+	    }
+	    $s->{"required_for_start"}	= \@required_for_start;
+	    $s->{"required_for_stop"}	= RunlevelEd->ServiceDependencies ($name, 0);
 	}
 	$s->{"status"}		= Service->Status ($name) if ($args->{"read_status"} || 0);
 	$s->{"description"}	= ($info->{"description"} || "") if $args->{"description"} || 0;
 	$s->{"shortdescription"}= ($info->{"shortdescription"} || "") if $args->{"shortdescription"} || 0;
 	push @ret, $s;
     }
+    Progress->set ($progress_orig);
   }
 
   return \@ret;
@@ -281,15 +296,23 @@ sub Execute {
   my $args	= shift;
   my $name	= $args->{"name"} || "";
   my $action	= $args->{"action"} || "";
+  my $ret	= {};
+  # no enable/disable
+  my $only_execute 	= $args->{"only_execute"} || 0;
+  # do not solve dependencies
+  my $only_this 	= $args->{"only_this"} || 0;
 
+  # just a shurtcut, so Execute function can be used for Enable only
   return $self->Enable ($args) if ($action eq "enable" || $action eq "disable");
 
+  # custom service has special handling
   if ($args->{"custom"} || 0) {
     return execute_custom_script ($name, $action);
   }
-  else {
-    my $ret = Service->RunInitScriptOutput ($name, $action);
-    if (($action eq "start" || $action eq "stop") && !($args->{"only_execute"} || 0)) {
+  # only handle given service, not dependencies
+  elsif ($only_this) {
+    $ret = Service->RunInitScriptOutput ($name, $action);
+    unless ($only_execute) {
 	if (($ret->{"exit"} || 0) ne 0) {
 	    y2error ("action '$action' failed");
 	    return $ret;
@@ -302,8 +325,70 @@ sub Execute {
 	}
 	return $self->Enable ($args);
     }
-    return $ret;
   }
+  # full action: start/stop and enable/disable required service
+  else {
+    my $progress_orig   = Progress->set (0);
+    RunlevelEd->Read ();
+    Progress->set ($progress_orig);
+
+    my $full_services	= RunlevelEd->services ();
+    my $runlevel	= RunlevelEd->GetCurrentRunlevel ();
+
+    # in fact, this is "start & enable"
+    my $start		= $action eq "start";
+
+    # list of runlevels where the service should be enabled
+    my $rls = $start? ($full_services->{$name}{"defstart"} || []) : undef;
+
+    # list of dependencies
+    my $dep_s	= RunlevelEd->ServiceDependencies ($name, $start);
+
+    # filtered list; unfortunatelly it does not really check for current status
+    $dep_s	= RunlevelEd->FilterAlreadyDoneServices ($dep_s, $rls, $start, 1, 1);
+
+    my $enable_args	= {
+	"action"	=> ($action eq "start") ? "enable" : "disable",
+	# we're solving dependencies here, so no need to do it in Enable call again
+	"only_this"	=> 1
+    };
+
+    foreach my $s (@$dep_s) {
+	# check if service is not already running
+	my $status	= Service->Status ($s);
+	if (($start && $status != 0) || ($status == 0 && !$start)) {
+	    # RunInitScriptWithTimeOut would be better, but does not return stderr
+	    $ret	= Service->RunInitScriptOutput ($s, $action);
+	}
+	if (($ret->{"exit"} || 0) ne 0) {
+	    y2error ("action '$action' for service '$s' failed");
+	    return $ret;
+	}
+	next if $only_execute;
+
+	my $startlist		= $full_services->{$s}{"start"} || [];
+	my $service_enabled	= contains ($startlist, $runlevel, 1) || contains ($startlist, "B", 1);
+	if (($start && !$service_enabled) || (!$start && $service_enabled)) {
+	    $enable_args->{"name"}	= $s;
+	    $ret	= $self->Enable ($enable_args);
+	}
+	if (($ret->{"exit"} || 0) ne 0) {
+	    y2error ("insserv call for service '$s' failed");
+	    return $ret;
+	}
+    }
+    # now, finally start/stop our service...
+    $ret	= Service->RunInitScriptOutput ($name, $action);
+    if (($ret->{"exit"} || 0) ne 0) {
+	y2error ("action '$action' for service '$name' failed");
+	return $ret;
+    }
+    return $ret if $only_execute;
+    # ... and enable/disable it
+    $enable_args->{"name"}      = $name;
+    $ret	= $self->Enable ($enable_args);
+  }
+  return $ret;
 }
 
 # Enable/Disable given service in current runlevel
@@ -324,15 +409,49 @@ sub Enable {
       "stderr"	=> "",
       "exit"	=> 0
   };
+  # do not solve dependencies
+  my $only_this 	= $args->{"only_this"} || 0;
+
+  # enable/disable with dependencies
+  unless ($only_this) {
+    my $progress_orig   = Progress->set (0);
+    Report->DisplayErrors (0, 0);
+    RunlevelEd->Read ();
+    my $exit	= 0;
+    if ($action eq "enable") {
+	$exit	= RunlevelEd->ServiceInstall ($name, undef);
+	if ($exit == 1) {
+	    $ret->{"stderr"}	= "Failed to enable service $name.";
+	    $ret->{"stdout"}	= $name;
+	    $ret->{"exit"}	= 1000;
+	}
+    } elsif ($action eq "disable") {
+	$exit	= RunlevelEd->ServiceRemove ($name, undef);
+	if ($exit == 1) {
+	    $ret->{"stderr"}	= "Failed to disable service $name.";
+	    $ret->{"stdout"}	= $name;
+	    $ret->{"exit"}	= 2000;
+	}
+    }
+    unless (RunlevelEd->Write ()) {
+	$ret->{"stderr"}	= "Failed during writing runlevel settings.";
+	$ret->{"exit"}		= 3000;
+    }
+    Progress->set ($progress_orig);
+    return $ret;
+  }
+
   if ($action eq "enable") {
     unless (Service->Enable ($name)) {
 	$ret->{"stderr"}	= "Failed to enable service $name.";
+	$ret->{"stdout"}	= $name;
 	$ret->{"exit"}		= 1000;
     }
   }
   elsif ($action eq "disable") {
     unless (Service->Disable ($name)) {
 	$ret->{"stderr"}	= "Failed to disable service $name.";
+	$ret->{"stdout"}	= $name;
 	$ret->{"exit"}		= 2000;
     }
   }
