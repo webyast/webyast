@@ -82,8 +82,8 @@ class Graph
             "y_label"=>"GByte", 
             "single_graphs"=>[]}
     metrics.each do |metric|
-      if metric.type == "df" && metric.type_instance != "dev" && 
-         !metric.type_instance.downcase.start_with?("media") #no plugable media and CDROM,DVD,...
+      if (metric.type == "df" && !metric.type_instance.start_with?("dev") && 
+          !metric.type_instance.downcase.start_with?("media")) #no plugable media and CDROM,DVD,...
         metric_id = metric.id[metric.host.length+1..metric.id.length-1] #cut off host-id
         disk["single_graphs"] << {"lines"=>[{"label"=>"used", "limits"=>{"max"=>"0", "min"=>"0"}, 
                                               "metric_column"=>"used", "metric_id"=>metric_id}, 

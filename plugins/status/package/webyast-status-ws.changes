@@ -1,4 +1,9 @@
 -------------------------------------------------------------------
+Tue Mar 23 10:53:56 UTC 2010 - schubi@novell.com
+
+- Do not propose dev-shm in the status module (bnc#589425) 
+
+-------------------------------------------------------------------
 Tue Mar 16 17:49:54 CET 2010 - schubi@suse.de
 
 - handle wrong graph data (bnc#588304)
