@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Tue Mar 23 11:34:28 UTC 2010 - lslezak@suse.cz
+
+- optionally collect status at background, do not block the
+  server (bnc#579540)
+
+-------------------------------------------------------------------
 Tue Mar 23 10:53:56 UTC 2010 - schubi@novell.com
 
 - Do not propose dev-shm in the status module (bnc#589425) 
