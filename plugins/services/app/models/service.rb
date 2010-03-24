@@ -179,6 +179,16 @@ class Service
       xml.custom custom
       xml.enabled enabled
       xml.status status, {:type => "integer"}
+      xml.required_for_start({:type => "array"}) do
+	required_for_start.each do |s|
+	    xml.service s
+	end
+      end
+      xml.required_for_stop({:type => "array"}) do
+	required_for_stop.each do |s|
+	    xml.service s
+	end
+      end
     end  
   end
 
