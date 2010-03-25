@@ -39,7 +39,7 @@ class GroupsTest < ActiveSupport::TestCase
     assert_not_nil @model.old_cn
     assert_instance_of(Array, @model.default_members)
     assert_instance_of(Array, @model.members)
-    assert_not_nil @model.type
+    assert_not_nil @model.group_type
     
     assert_not_nil @models
     assert_instance_of(Array, @models)
