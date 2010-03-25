@@ -1,4 +1,9 @@
 -------------------------------------------------------------------
+Thu Mar 25 13:46:12 CET 2010 - jsuchome@suse.cz
+
+- filter out dependencies not usable in UI 
+
+-------------------------------------------------------------------
 Wed Mar 24 16:34:17 CET 2010 - jsuchome@suse.cz
 
 - SERVICES.pm: do Execute and Enable actions for required services

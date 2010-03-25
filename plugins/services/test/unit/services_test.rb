@@ -115,4 +115,20 @@ EOF
     assert s.status == '255'
   end
 
+  test "check service filtering" do
+    srv = [
+	{"name" => "dbus", "description" => "DBUS service description", "required_for_stop" => [ "network", "nfs", "my_app"] },
+	{"name" => "network", "description" => "network service description", "required_for_start" => [ "dbus"] }
+    ]
+    custom = [{"name" => "my_app" } ]
+  
+    Service.stubs(:run_runlevel).returns("N 5")
+    YastService.stubs(:Call).with('YaPI::SERVICES::Read', @read_args).returns(srv)
+    YastService.stubs(:Call).with('YaPI::SERVICES::Read', @custom_args).returns(custom)
+
+    ret = Service.find_all(Hash.new)
+    assert ret.map {|s| s.name} == ['dbus', 'my_app'] # network filtered out
+    assert ret[0].required_for_stop == [ "my_app" ] # network, nfs filtered out
+  end
+
 end

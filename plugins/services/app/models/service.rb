@@ -13,6 +13,8 @@ class Service
   attr_accessor :summary
   attr_accessor :custom
   attr_accessor :enabled
+  # :required_for_start is a list of services that need to be started if our service is started
+  # the list is not complete, it is affected by filter, so only services that appear in the UI will stay there
   attr_accessor :required_for_start
   attr_accessor :required_for_stop
 
@@ -124,7 +126,13 @@ class Service
 	services	= services_map.values.sort { |a,b|  a.name <=> b.name }
     else
 	filter.each do |name|
-	    services << services_map[name] if services_map.has_key? name
+	    if services_map.has_key? name
+		s = services_map[name]
+		# filter out dependent services, which are not present in filter
+		s.required_for_start.reject! { |rs| !filter.include? rs }
+		s.required_for_stop.reject! { |rs| !filter.include? rs }
+		services << s
+	    end
 	end
     end
     services
