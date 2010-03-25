@@ -20,7 +20,7 @@ class Group < BaseModel::Base
 private
 
   def self.group_get(group_type,cn)
-    Rails.logger.debug( 'YastService.Call("YaPI::USERS::GroupGet", {"type"=>["s","'+group_type+'"}], "cn"=>["s",'+cn.to_s+']})')
+    Rails.logger.debug( 'YastService.Call("YaPI::USERS::GroupGet", {"type"=>["s","'+group_type+'"}], "cn"=>["s","'+cn.to_s+'"]})')
     YastService.Call("YaPI::USERS::GroupGet", {"type"=>["s",group_type], "cn"=>["s",cn]})
   end
 
@@ -63,7 +63,7 @@ public
       result = YastService.Call( "YaPI::USERS::GroupModify",
                                  { "type"      => ["s", group_type],
                                    "cn"        => ["s", old_cn]  },
-                                 { "gidNumber" => ["i", gid.to_i],
+                                 { "gidNumber" => ["i", gid],
                                    "cn"        => ["s",cn],
                                    "userlist"  => ["as", members] } 
                                )

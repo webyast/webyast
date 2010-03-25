@@ -1,7 +1,7 @@
 require File.expand_path(File.dirname(__FILE__) + "/../test_helper")
 require 'test/unit'
 require 'mocha'
-require File.expand_path( File.join("test","plugin_basic_tests"), RailsParent.parent )
+#require File.expand_path( File.join("test","plugin_basic_tests"), RailsParent.parent )
 
 class GroupsControllerTest < ActionController::TestCase
   fixtures :accounts
@@ -16,23 +16,37 @@ class GroupsControllerTest < ActionController::TestCase
                       'type' => 'local'
                     }
 
-  GROUP_LOCAL_CONFIG = { "type" => ["s","local"], "gidNumber" => ["i",100] }
-``
-  GROUP_SYSTEM_CONFIG = { "type" => ["s","system"], "gidNumber" => ["i",100] }
+  GROUP_LOCAL_CONFIG = { "type" => ["s","local"], "cn" => ["s","users"] }
 
-  GROUP_PARAM_DATA = { "old_gid" => 100,
-                       "gid" => 101,
-                       "members" => ["games","tux"],
-                       "cn" => "users"
+  CREATE_LOCAL_CONFIG = { "type" => ["s","local"]}
+``
+  GROUP_SYSTEM_CONFIG = { "type" => ["s","system"], "cn" => ["s","users"] }
+
+  UPDATE_PARAM_DATA = { "old_cn" => "users",
+                       "gid" => 100,
+                       "members" => [],
+                       "cn" => "users2",
+                       "group_type" => "local"
                      }
 
-  CREATE_DATA = { "group" => GROUP_PARAM_DATA }
+  CREATE_PARAM_DATA = { "old_cn" => "users",
+                       "gid" => 100,
+                       "members" => [],
+                       "cn" => "users",
+                       "group_type" => "local"
+                     }
 
-  UPDATE_DATA = { "id" => "100", "group" => GROUP_PARAM_DATA }
+  CREATE_DATA = { "groups" => CREATE_PARAM_DATA }
 
-  GROUP_WRITE_DATA= { 'userlist' => ["as", [] ],
-                      'gidNumber' => ["i", 101],
-                      'cn' => ["s",'users']
+  UPDATE_DATA = { "id" => "users", "groups" => UPDATE_PARAM_DATA }
+
+  CREATE_WRITE_DATA= { 'userlist' => ["as", [] ],
+                       'cn' => ["s",'users']
+                     }
+
+  UPDATE_WRITE_DATA= { 'userlist' => ["as", [] ],
+                      'gidNumber' => ["i", 100],
+                      'cn' => ["s",'users2']
                     }
 
   OK_RESULT = ""
@@ -49,22 +63,33 @@ class GroupsControllerTest < ActionController::TestCase
     @data = UPDATE_DATA
   end
 
-  include PluginBasicTests
+#  include PluginBasicTests
 
   def test_update
-    mock_save
+    mock_update
     put :update, UPDATE_DATA
     assert_response :success
   end
 
   def test_create
-    mock_save
+    mock_create
     put :create, CREATE_DATA
     assert_response :success
   end
 
-  def mock_save
-    YastService.stubs(:Call).with( "YaPI::USERS::GroupsModify", GROUP_LOCAL_CONFIG, GROUP_WRITE_DATA).once.returns(OK_RESULT)
+  def mock_get
+    YastService.stubs(:Call).with("YaPI::USERS::GroupGet",GROUP_LOCAL_CONFIG).once.returns(GROUP_READ_DATA)
+  end
+
+  def mock_update
+    YastService.stubs(:Call).with("YaPI::USERS::GroupGet",GROUP_LOCAL_CONFIG).once.returns(GROUP_READ_DATA)
+    YastService.stubs(:Call).with( "YaPI::USERS::GroupModify", GROUP_LOCAL_CONFIG, UPDATE_WRITE_DATA).once.returns(OK_RESULT)
+    Group.stubs(:permission_check)
+  end
+
+  def mock_create
+    YastService.stubs(:Call).with("YaPI::USERS::GroupGet",GROUP_LOCAL_CONFIG).once.returns({})
+    YastService.stubs(:Call).with( "YaPI::USERS::GroupAdd", CREATE_LOCAL_CONFIG, CREATE_WRITE_DATA).once.returns(OK_RESULT)
     Group.stubs(:permission_check)
   end
 end

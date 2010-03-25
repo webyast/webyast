@@ -58,7 +58,7 @@ public
   # POST /groups/users/
   def update
     group_params = params[:groups] || {}
-    group_params[:old_gid] = params[:id]
+    group_params[:old_cn] = params[:id]
     @group = Group.new group_params
     begin
       result = @group.save
@@ -74,7 +74,7 @@ public
   # PUT /groups/
   def create
     group_params = params[:groups] || {}
-    group_params[:old_gid] = group_params[:gid]
+    group_params[:old_cn] = group_params[:cn]
     @group = Group.new group_params
     begin
       result = @group.save
