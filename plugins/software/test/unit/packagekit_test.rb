@@ -28,11 +28,6 @@ class PackageKitTest < ActiveSupport::TestCase
     assert @packagekit
   end
   
-  def test_mtime
-    mtime = PackageKit.mtime
-    assert mtime > Time.at(0)
-  end
-
   def test_transact
     @transaction.stubs(:GetUpdates).with("NONE").returns(true)
     

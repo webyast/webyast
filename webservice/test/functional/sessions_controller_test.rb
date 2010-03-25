@@ -38,6 +38,17 @@ class SessionsControllerTest < ActionController::TestCase
     assert_response :success
   end
   
+  test "sessions create fail with login and password" do
+    get :create, :hash => { :login => "test_user", :password => "bad_password" }
+    assert_response :success
+  end
+  
+  test "sessions create fail with brute force protection" do
+    BruteForceProtection.any_instance.stubs(:blocked?).returns(true)
+    get :create, :hash => { :login => "test_user", :password => "bad_password" }
+    assert_response :success
+  end
+
   test "sessions create remember_me" do
     @request.session[:account_id] = 1 # defined in fixtures
     get :create, :remember_me => true
@@ -61,6 +72,5 @@ class SessionsControllerTest < ActionController::TestCase
     assert_response :success
     assert @response.headers['Content-Type'] =~ %r{text/html}
   end
-  
   
 end

@@ -16,7 +16,7 @@ PreReq:         yast2-webservice
 License:	GPL v2 only
 Group:          Productivity/Networking/Web/Utilities
 Autoreqprov:    on
-Version:        0.1.6
+Version:        0.1.7
 Release:        0
 Summary:        YaST2 - Webservice - Services
 Source:         www.tar.bz2
@@ -30,7 +30,8 @@ BuildRequires:  rubygem-yast2-webservice-tasks rubygem-restility
 
 # so SERVICES.pm is able to call YML.rb
 Requires:       yast2-ruby-bindings >= 0.3.2.1
-
+# for SERVICES.pm
+Requires:	yast2-runlevel
 
 #
 %define pkg_user yastws

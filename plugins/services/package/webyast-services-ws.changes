@@ -1,4 +1,17 @@
 -------------------------------------------------------------------
+Thu Mar 25 13:46:12 CET 2010 - jsuchome@suse.cz
+
+- filter out dependencies not usable in UI 
+
+-------------------------------------------------------------------
+Wed Mar 24 16:34:17 CET 2010 - jsuchome@suse.cz
+
+- SERVICES.pm: do Execute and Enable actions for required services
+  as well (bnc#587876c13)
+- return the service dependencies in the data model
+- 0.1.7 
+
+-------------------------------------------------------------------
 Thu Mar 18 07:54:13 CET 2010 - jsuchome@suse.cz
 
 - SERVICES.pm: do not check on-boot status of custom service 

@@ -13,6 +13,10 @@ class Service
   attr_accessor :summary
   attr_accessor :custom
   attr_accessor :enabled
+  # :required_for_start is a list of services that need to be started if our service is started
+  # the list is not complete, it is affected by filter, so only services that appear in the UI will stay there
+  attr_accessor :required_for_start
+  attr_accessor :required_for_stop
 
   FILTER_FILE	= "filter_services.yml"
 
@@ -22,6 +26,8 @@ class Service
     @summary		= ""
     @custom		= false
     @enabled		= true
+    @required_for_start	= []
+    @required_for_stop	= []
   end
 
   private
@@ -73,6 +79,7 @@ class Service
 	"read_status"	=> [ "b", params.has_key?("read_status")],
 	"shortdescription"	=> [ "b", true],
 	"description"	=> [ "b", true],
+	"dependencies"	=> [ "b", true],
 	"filter"	=> [ "as", filter ]
     }
 	
@@ -88,6 +95,8 @@ class Service
 	  service.description	= s["description"] if s.has_key?("description")
 	  service.summary	= s["shortdescription"] if s.has_key?("shortdescription")
 	  service.enabled	= s["enabled"] if s.has_key?("enabled")
+	  service.required_for_start		= s["required_for_start"] if s.has_key?("required_for_start")
+	  service.required_for_stop		= s["required_for_stop"] if s.has_key?("required_for_stop")
 	  Rails.logger.debug "service: #{service.inspect}"
 	  services_map[s["name"]]	= service
         end
@@ -95,6 +104,7 @@ class Service
 
     # read list of custom (user defined) services
     args["custom"]	= [ "b", true]
+    args["dependencies"]= [ "b", false]
 	
     yapi_ret = YastService.Call("YaPI::SERVICES::Read", args)
 
@@ -116,7 +126,13 @@ class Service
 	services	= services_map.values.sort { |a,b|  a.name <=> b.name }
     else
 	filter.each do |name|
-	    services << services_map[name] if services_map.has_key? name
+	    if services_map.has_key? name
+		s = services_map[name]
+		# filter out dependent services, which are not present in filter
+		s.required_for_start.reject! { |rs| !filter.include? rs }
+		s.required_for_stop.reject! { |rs| !filter.include? rs }
+		services << s
+	    end
 	end
     end
     services
@@ -171,6 +187,16 @@ class Service
       xml.custom custom
       xml.enabled enabled
       xml.status status, {:type => "integer"}
+      xml.required_for_start({:type => "array"}) do
+	required_for_start.each do |s|
+	    xml.service s
+	end
+      end
+      xml.required_for_stop({:type => "array"}) do
+	required_for_stop.each do |s|
+	    xml.service s
+	end
+      end
     end  
   end
 

@@ -36,8 +36,10 @@ task :default => :test
   task task_name do
     PROJECTS.each do |project|
       Dir.chdir(project) do
-        system %(#{env} #{$0} #{tracing} #{task_name})
-        raise "Error on execute '#{$0} #{tracing} #{verbose} #{task_name}' inside #{project}/" if $?.exitstatus != 0
+        if File.exist? "Rakefile"
+          system %(#{env} #{$0} #{tracing} #{task_name})
+          raise "Error on execute '#{$0} #{tracing} #{verbose} #{task_name}' inside #{project}/" if $?.exitstatus != 0
+        end
       end
     end
   end
@@ -65,7 +67,9 @@ task :doc do
   end
   plugins_names.each do |plugin|
     Dir.chdir("plugins/#{plugin}") do
-      raise "generating documentation fail" unless system "rake doc:app"
+      if File.exist? "Rakefile"
+        raise "generating documentation fail" unless system "rake doc:app"
+      end
     end
     system "cp -r plugins/#{plugin}/doc/app doc/#{plugin}"
   end

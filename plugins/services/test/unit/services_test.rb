@@ -12,12 +12,15 @@ services:
 EOF
 
   def setup    
+    Paths.const_set 'CONFIG', File.join(File.dirname(__FILE__),"..","..","test","etc")
+    YaST::ConfigFile.any_instance.stubs(:path).returns(__FILE__)
     YaST::ConfigFile.stubs(:read_file).returns(YAML_CONTENT)
     @read_args = {
 	'runlevel'		=> [ 'i', 5 ],
 	'read_status'		=> [ 'b', false],
 	'description'		=> ['b', true],
 	'shortdescription' 	=> ['b', true],
+	'dependencies'		=> [ 'b', true],
 	'filter'		=> [ 'as', ['acpid', 'dbus','my_app']]
     }
     @custom_args = {
@@ -26,6 +29,7 @@ EOF
 	'description'		=> ['b', true],
 	'shortdescription'	=> ['b', true],
 	'filter'		=> [ 'as', ['acpid', 'dbus','my_app']],
+	'dependencies'		=> [ 'b', false],
 	'custom'		=> ['b', true]
     }
    end
@@ -109,6 +113,22 @@ EOF
     s = Service.new('my_app')
     s.read_status({"custom" => "true"})
     assert s.status == '255'
+  end
+
+  test "check service filtering" do
+    srv = [
+	{"name" => "dbus", "description" => "DBUS service description", "required_for_stop" => [ "network", "nfs", "my_app"] },
+	{"name" => "network", "description" => "network service description", "required_for_start" => [ "dbus"] }
+    ]
+    custom = [{"name" => "my_app" } ]
+  
+    Service.stubs(:run_runlevel).returns("N 5")
+    YastService.stubs(:Call).with('YaPI::SERVICES::Read', @read_args).returns(srv)
+    YastService.stubs(:Call).with('YaPI::SERVICES::Read', @custom_args).returns(custom)
+
+    ret = Service.find_all(Hash.new)
+    assert ret.map {|s| s.name} == ['dbus', 'my_app'] # network filtered out
+    assert ret[0].required_for_stop == [ "my_app" ] # network, nfs filtered out
   end
 
 end

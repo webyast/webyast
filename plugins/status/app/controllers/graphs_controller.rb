@@ -35,7 +35,11 @@ class GraphsController < ApplicationController
   #
   def index
     permission_check("org.opensuse.yast.system.status.read")
-    @graph = Graph.find(:all,  params[:checklimits] || false )
+
+    bgr = params['background'] == 'true'
+    Rails.logger.info "Reading status in background" if bgr
+
+    @graph = Graph.find(:all, params[:checklimits] || false, {:background => bgr})
     render :show    
   end
 

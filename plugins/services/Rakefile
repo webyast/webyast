@@ -20,4 +20,5 @@ desc "Deploy for development - create basic dirs and install yast modules."
 task :deploy_local do |t|
   FileUtils.mkdir_p "/usr/share/YaST2/modules/"
   FileUtils.cp_r    "package/YML.rb", "/usr/share/YaST2/modules/"
+  FileUtils.cp_r    "package/SERVICES.pm", "/usr/share/YaST2/modules/YaPI"
 end

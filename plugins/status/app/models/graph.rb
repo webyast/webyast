@@ -14,6 +14,11 @@ class Graph
 
   private
 
+  # avoid race conditions when creating the config file
+  # at background - allow only one thread writing it
+  #
+  @@mutex = Mutex.new
+
   # 
   # reading data from Metric
   #
@@ -82,15 +87,16 @@ class Graph
             "y_label"=>"GByte", 
             "single_graphs"=>[]}
     metrics.each do |metric|
-      if metric.type == "df" && metric.type_instance != "dev" && 
-         !metric.type_instance.downcase.start_with?("media") #no plugable media and CDROM,DVD,...
+      if (metric.type == "df" && !metric.type_instance.start_with?("dev") && 
+          !metric.type_instance.downcase.start_with?("media")) #no plugable media and CDROM,DVD,...
         metric_id = metric.id[metric.host.length+1..metric.id.length-1] #cut off host-id
         disk["single_graphs"] << {"lines"=>[{"label"=>"used", "limits"=>{"max"=>"0", "min"=>"0"}, 
                                               "metric_column"=>"used", "metric_id"=>metric_id}, 
                                              {"label"=>"free", "limits"=>{"max"=>"0", "min"=>"0"}, 
                                               "metric_column"=>"free", "metric_id"=>metric_id}], 
                                    "headline"=>metric.type_instance, 
-                                   "cummulated"=>"true"}
+                                   "cummulated"=>"true",
+                                   "linegraph"=>"false"}
       end
     end
     config["Disk"] = disk unless disk["single_graphs"].blank?
@@ -107,7 +113,8 @@ class Graph
                                              {"label"=>"sent", "limits"=>{"max"=>"0", "min"=>"0"}, 
                                               "metric_column"=>"tx", "metric_id"=>metric_id}], 
                                    "headline"=>metric.type_instance, 
-                                   "cummulated"=>"false"}
+                                   "cummulated"=>"false",
+                                   "linegraph"=>"true"}
       end
     end
     config["Network"] = network unless network["single_graphs"].blank?
@@ -125,7 +132,8 @@ class Graph
     end
     memory["single_graphs"] << {"lines"=>lines,
                                 "headline"=>"Memory", 
-                                "cummulated"=>"true"} unless lines.blank?
+                                "cummulated"=>"true",
+                                "linegraph"=>"false"} unless lines.blank?
     config["Memory"] = memory unless memory["single_graphs"].blank?
 
     #CPU
@@ -144,13 +152,17 @@ class Graph
     graphs.each do |key, lines|
       cpu["single_graphs"] << {"lines"=>lines,
                                "headline"=>"CPU-" + key, 
-                               "cummulated"=>"false"} unless lines.blank?
+                               "cummulated"=>"false",
+                               "linegraph"=>"false"} unless lines.blank?
     end
     config["CPU"] = cpu unless cpu["single_graphs"].blank?
 
-    f = File.open(filename, "w")
-    f.write(config.to_yaml)
-    f.close
+    # avoid multiple threads creating a config in parallel
+    @@mutex.synchronize do
+      f = File.open(filename, "w")
+      f.write(config.to_yaml)
+      f.close
+    end
   end
 
   public
@@ -183,15 +195,63 @@ class Graph
     @single_graphs = value["single_graphs"]
   end
 
+  # just a short cut for accessing the singleton object
+  def self.bm
+    BackgroundManager.instance
+  end
+
+  # create unique id for the background manager
+  def self.id(what)
+    "system_status_#{what}"
+  end
+
+  def self.find(what, limitcheck = false, opts = {})
+    background = opts[:background]
+
+    # background reading doesn't work correctly if class reloading is active
+    # (static class members are lost between requests)
+    if background && !bm.background_enabled?
+      Rails.logger.info "Class reloading is active, cannot use background thread (set config.cache_classes = true)"
+      background = false
+    end
+
+    if background
+      proc_id = id(what)
+      if bm.process_finished? proc_id
+        Rails.logger.debug "Request #{proc_id} is done"
+        return bm.get_value proc_id
+      end
+
+      running = bm.get_progress proc_id
+      if running
+        Rails.logger.debug "Request #{proc_id} is already running: #{running.inspect}"
+        return [running]
+      end
+
+      bm.add_process proc_id
+      Rails.logger.info "Starting background thread for reading status..."
+
+      # read the status in a separate thread
+      Thread.new do
+        res = do_find what, limitcheck, bm
+        bm.finish_process(proc_id, res)
+      end
+
+      return [ bm.get_progress(proc_id) ]
+    else
+      return do_find(what, limitcheck)
+    end
+  end
+
   #
-  # find 
+  # find
   # Graph.find(:all, limitcheck)
-  # Graph.find(id, limitcheck) 
+  # Graph.find(id, limitcheck)
   # "id" could be the graph group (CPU, Disc) or the path of the collectd entry (metric_id)
   #      (e.g. cpu-0+cpu-system)
   # "limitcheck" checking if limit has been reached (default: false)
   #
-  def self.find(what, limitcheck = false)
+  def self.do_find(what, limitcheck = false, bg = nil)
     config = parse_config
     return nil if config==nil
 
@@ -215,8 +275,21 @@ class Graph
     end
 
     ret = []
+
+    # for reporing the progress
+    idx = 0
+    len = config.size
+
     config.each {|key,value|
+      if !bg.nil?
+        bg.update_progress id(what) do |bs|
+          bs.progress = (idx.to_f/len*100).to_i
+          Rails.logger.info "Reading status: progress: #{bs.progress}%%"
+        end
+      end
+
       ret << Graph.new(key,value,limitcheck)
+      idx += 1
     }
 
     if what == :all || ret.blank?
@@ -264,9 +337,12 @@ class Graph
     else
       raise "#{group_name} not found in configuration file"
     end
-    f = File.open(File.join(Graph.plugin_config_dir(), CONFIGURATION_FILE), "w")
-    f.write(config.to_yaml)
-    f.close
+    # avoid race condition in writing the config
+    @@mutex.synchronize do
+      f = File.open(File.join(Graph.plugin_config_dir(), CONFIGURATION_FILE), "w")
+      f.write(config.to_yaml)
+      f.close
+    end
   end
 
   # converts the graph to xml
@@ -281,6 +357,7 @@ class Graph
         single_graphs.each do |graph|
           xml.single_graph do
             xml.cummulated graph["cummulated"]
+            xml.linegraph graph["linegraph"]
             xml.headline graph["headline"]
             xml.lines(:type => :array) do
               graph["lines"].each do |line|
