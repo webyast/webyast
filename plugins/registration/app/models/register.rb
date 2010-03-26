@@ -71,6 +71,15 @@ class Register
     config
   end
 
+  def is_registered?
+    begin
+      return ( @guid  &&  @guid.size > 0  &&  @guid != 0 ) == true
+    rescue
+      Rails.logger.error "Error when reading the registration status information."
+      return false
+    end
+  end
+
   def register
     # don't know how to pass only one hash, so split it into two. FIXME change later if possible!
     # @reg = YastService.Call("YSR::statelessregister", { 'ctx' => ctx, 'arguments' => args } )
@@ -121,7 +130,7 @@ class Register
     xml.instruct! unless options[:skip_instruct]
 
     xml.registration do
-      xml.guid @guid if @guid && @guid.size > 0
+      xml.guid @guid if self.is_registered?
     end
   end
 
