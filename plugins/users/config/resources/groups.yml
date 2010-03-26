@@ -1,3 +1,4 @@
 interface: org.opensuse.yast.modules.yapi.groups
+policy: org.opensuse.yast.modules.yapi.users
 controller: groups
 nested: permissions

@@ -63,7 +63,7 @@ public
       result = YastService.Call( "YaPI::USERS::GroupModify",
                                  { "type"      => ["s", group_type],
                                    "cn"        => ["s", old_cn]  },
-                                 { "gidNumber" => ["i", gid],
+                                 { "gidNumber" => ["i", gid.to_i],
                                    "cn"        => ["s",cn],
                                    "userlist"  => ["as", members] } 
                                )
@@ -72,7 +72,7 @@ public
   end
 
   def destroy
-    existing_group = group_get( group_type, old_cn )
+    existing_group = Group.group_get( group_type, old_cn )
     if existing_group.empty?
       ""
     else
