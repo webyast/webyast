@@ -1,4 +1,9 @@
 -------------------------------------------------------------------
+Mon Mar 29 15:39:58 CEST 2010 - jsuchome@suse.cz
+
+- 0.1.0 
+
+-------------------------------------------------------------------
 Mon Mar 29 13:42:15 CEST 2010 - mvidner@suse.cz
 
 - RPM-Provide WebYaST(org.opensuse.yast.modules.FOO) (bnc#583561)
