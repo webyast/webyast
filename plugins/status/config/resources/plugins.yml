@@ -1,0 +1,4 @@
+interface: org.opensuse.yast.system.plugins
+controller: plugins
+singular: false
+
