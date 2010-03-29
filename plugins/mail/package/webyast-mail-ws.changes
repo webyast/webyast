@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Mon Mar 29 16:25:01 CEST 2010 - jsuchome@suse.cz
+
+- enhanced confirmation messages (bnc#580458)
+- 0.1.11 
+
+-------------------------------------------------------------------
 Mon Mar 29 12:57:32 UTC 2010 - schubi@novell.com
 
 - Confirmation that a testmail has been sent.
