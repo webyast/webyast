@@ -1,4 +1,11 @@
 -------------------------------------------------------------------
+Mon Mar 29 13:03:47 UTC 2010 - schubi@novell.com
+
+- Make controller accessable in resource.rb. Needed for 
+  Systemstatus should be 'amber' if registration failed (bnc#588613)
+- 0.1.10  
+
+-------------------------------------------------------------------
 Tue Mar 16 18:23:45 UTC 2010 - jreidinger@novell.com
 
 - refactor permissions model and add tests for this model (bnc#581744)
