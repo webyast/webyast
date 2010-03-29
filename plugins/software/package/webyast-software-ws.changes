@@ -1,4 +1,9 @@
 -------------------------------------------------------------------
+Mon Mar 29 15:28:58 CEST 2010 - mvidner@suse.cz
+
+- Fixed for ruby-dbus-0.3.0 (incompatible change in its internals).
+
+-------------------------------------------------------------------
 Mon Mar 29 13:42:15 CEST 2010 - mvidner@suse.cz
 
 - RPM-Provide WebYaST(org.opensuse.yast.modules.FOO) (bnc#583561)
