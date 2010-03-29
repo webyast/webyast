@@ -1,4 +1,11 @@
 -------------------------------------------------------------------
+Mon Mar 29 12:57:32 UTC 2010 - schubi@novell.com
+
+- Confirmation that a testmail has been sent.
+  (bnc#580458)
+- 0.1.9
+
+-------------------------------------------------------------------
 Mon Mar 29 13:42:15 CEST 2010 - mvidner@suse.cz
 
 - RPM-Provide WebYaST(org.opensuse.yast.modules.FOO) (bnc#583561)
