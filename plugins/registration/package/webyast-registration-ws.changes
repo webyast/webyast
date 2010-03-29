@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Mon Mar 29 19:57:36 CEST 2010 - jdsn@suse.de
+
+- fix version number
+- version 0.1.3 
+
+-------------------------------------------------------------------
 Mon Mar 29 19:46:41 CEST 2010 - jdsn@suse.de
 
 - add status query function for the new status model
