@@ -10,6 +10,7 @@
 
 
 Name:           webyast-reboot-ws
+Provides:       WebYaST(org.opensuse.yast.system.system)
 Provides:       yast2-webservice-system = %{version}
 Obsoletes:      yast2-webservice-system < %{version}
 PreReq:         yast2-webservice

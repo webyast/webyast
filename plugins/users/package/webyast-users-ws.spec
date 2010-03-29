@@ -10,6 +10,8 @@
 
 
 Name:           webyast-users-ws
+Provides:       WebYaST(org.opensuse.yast.modules.yapi.users)
+Provides:       WebYaST(org.opensuse.yast.modules.yapi.groups)
 Provides:       yast2-webservice-users = %{version}
 Obsoletes:      yast2-webservice-users < %{version}
 PreReq:         yast2-webservice

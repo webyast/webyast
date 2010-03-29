@@ -10,6 +10,7 @@
 
 
 Name:           webyast-licenses-ws
+Provides:       WebYaST(org.opensuse.yast.modules.eulas)
 Provides:       yast2-webservice-eulas = %{version}
 Obsoletes:      yast2-webservice-eulas < %{version}
 PreReq:         yast2-webservice

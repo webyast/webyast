@@ -10,6 +10,7 @@
 
 
 Name:           webyast-roles-ws
+Provides:       WebYaST(org.opensuse.yast.roles)
 PreReq:         yast2-webservice
 License:	GPL v2 only
 Group:          Productivity/Networking/Web/Utilities

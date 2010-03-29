@@ -10,6 +10,8 @@
 
 
 Name:           webyast-registration-ws
+Provides:       WebYaST(org.opensuse.yast.modules.registration.registration)
+Provides:       WebYaST(org.opensuse.yast.modules.registration.configuration)
 Provides:       yast2-webservice-registration = %{version}
 Obsoletes:      yast2-webservice-registration < %{version}
 PreReq:         yast2-webservice, yast2-registration

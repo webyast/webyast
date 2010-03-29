@@ -10,6 +10,7 @@
 
 
 Name:           webyast-language-ws
+Provides:       WebYaST(org.opensuse.yast.modules.yapi.language)
 Provides:       yast2-webservice-language = %{version}
 Obsoletes:      yast2-webservice-language < %{version}
 PreReq:         yast2-webservice

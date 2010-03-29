@@ -10,6 +10,7 @@
 
 
 Name:           webyast-ntp-ws
+Provides:       WebYaST(org.opensuse.yast.modules.yapi.ntp)
 Provides:       yast2-webservice-ntp = %{version}
 Obsoletes:      yast2-webservice-ntp < %{version}
 #webservice already require yast2-dbus-server which is needed for yapi

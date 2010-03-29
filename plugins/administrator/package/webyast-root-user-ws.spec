@@ -10,6 +10,7 @@
 
 
 Name:           webyast-root-user-ws
+Provides:       WebYaST(org.opensuse.yast.modules.yapi.administrator)
 Provides:       yast2-webservice-administrator = %{version}
 Obsoletes:      yast2-webservice-administrator < %{version}
 PreReq:         yast2-webservice

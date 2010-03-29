@@ -10,6 +10,7 @@
 
 
 Name:           webyast-services-ws
+Provides:       WebYaST(org.opensuse.yast.modules.yapi.services)
 Provides:       yast2-webservice-services = %{version}
 Obsoletes:      yast2-webservice-services < %{version}
 PreReq:         yast2-webservice

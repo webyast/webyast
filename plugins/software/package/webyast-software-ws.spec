@@ -10,6 +10,9 @@
 
 
 Name:           webyast-software-ws
+Provides:       WebYaST(org.opensuse.yast.system.repositories)
+Provides:       WebYaST(org.opensuse.yast.system.patches)
+Provides:       WebYaST(org.opensuse.yast.system.packages)
 Provides:       yast2-webservice-patches = %{version}
 Obsoletes:      yast2-webservice-patches < %{version}
 

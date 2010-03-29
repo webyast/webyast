@@ -10,6 +10,7 @@
 
 
 Name:           webyast-time-ws
+Provides:       WebYaST(org.opensuse.yast.modules.yapi.time)
 Provides:       yast2-webservice-time = %{version}
 Obsoletes:      yast2-webservice-time < %{version}
 PreReq:         yast2-webservice

@@ -1,4 +1,9 @@
 -------------------------------------------------------------------
+Mon Mar 29 13:42:15 CEST 2010 - mvidner@suse.cz
+
+- RPM-Provide WebYaST(org.opensuse.yast.modules.FOO) (bnc#583561)
+
+-------------------------------------------------------------------
 Wed Mar 10 13:48:15 UTC 2010 - jreidinger@novell.com
 
 - store intermediate result of base system (bnc#555303)
