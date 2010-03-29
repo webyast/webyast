@@ -4,7 +4,7 @@
 
 class Resource
   require 'resource_registration'
-  attr_accessor :implementations, :interface
+  attr_accessor :implementations, :interface, :controller
 
   def initialize (interface, impl_hash)
     @interface = interface

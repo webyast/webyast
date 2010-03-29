@@ -75,7 +75,7 @@ class Log
     @data
   end
 
-  # converts the graph to xml
+  # converts the log to xml
   def to_xml(opts={})
     xml = opts[:builder] ||= Builder::XmlMarkup.new(opts)
     xml.instruct! unless opts[:skip_instruct]
