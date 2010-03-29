@@ -124,7 +124,7 @@ class PackageKitStub
     
     signal = DBus::Signal.new(result_set.signal)
     result_set.signature.each do |k,v|
-      signal.add_param( [ k.to_s, v.to_s ] )
+      signal.add_fparam(k.to_s, v.to_s)
     end
 
     # copy to local variables since instance vars are not(!) accessible inside the 'run' block
