@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Mon Mar 29 19:46:41 CEST 2010 - jdsn@suse.de
+
+- add status query function for the new status model
+- version 0.1.2 
+
+-------------------------------------------------------------------
 Mon Mar 29 13:00:35 UTC 2010 - schubi@novell.com
 
 - System status should be 'amber' if registration failed (bnc#588613) 
