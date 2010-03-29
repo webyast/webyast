@@ -10,6 +10,10 @@
 
 
 Name:           webyast-network-ws
+Provides:       WebYaST(org.opensuse.yast.modules.yapi.network.routes)
+Provides:       WebYaST(org.opensuse.yast.modules.yapi.network.interfaces)
+Provides:       WebYaST(org.opensuse.yast.modules.yapi.network.hostname)
+Provides:       WebYaST(org.opensuse.yast.modules.yapi.network.dns)
 Provides:       yast2-webservice-network = %{version}
 Obsoletes:      yast2-webservice-network < %{version}
 License:	GPL v2 only

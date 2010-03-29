@@ -1,4 +1,9 @@
 -------------------------------------------------------------------
+Mon Mar 29 13:42:15 CEST 2010 - mvidner@suse.cz
+
+- RPM-Provide WebYaST(org.opensuse.yast.modules.FOO) (bnc#583561)
+
+-------------------------------------------------------------------
 Fri Mar  5 16:15:48 CET 2010 - mzugec@suse.cz
 
 - create separate model for groups

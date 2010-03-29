@@ -1,4 +1,9 @@
 -------------------------------------------------------------------
+Mon Mar 29 13:42:15 CEST 2010 - mvidner@suse.cz
+
+- RPM-Provide WebYaST(org.opensuse.yast.modules.FOO) (bnc#583561)
+
+-------------------------------------------------------------------
 Tue Mar 23 14:01:46 UTC 2010 - schubi@novell.com
 
 - Use line graph for network (bnc#585740)

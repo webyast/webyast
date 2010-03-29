@@ -10,6 +10,9 @@
 
 
 Name:           webyast-status-ws
+Provides:       WebYaST(org.opensuse.yast.system.metrics)
+Provides:       WebYaST(org.opensuse.yast.system.logs)
+Provides:       WebYaST(org.opensuse.yast.system.graphs)
 Provides:       yast2-webservice-status = %{version}
 Obsoletes:      yast2-webservice-status < %{version}
 License:	GPL v2 only

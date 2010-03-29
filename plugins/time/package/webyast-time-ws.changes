@@ -1,4 +1,9 @@
 -------------------------------------------------------------------
+Mon Mar 29 13:42:15 CEST 2010 - mvidner@suse.cz
+
+- RPM-Provide WebYaST(org.opensuse.yast.modules.FOO) (bnc#583561)
+
+-------------------------------------------------------------------
 Mon Mar  8 16:20:08 UTC 2010 - jreidinger@novell.com
 
 - add last fallback if every attempt to get timezone fails 

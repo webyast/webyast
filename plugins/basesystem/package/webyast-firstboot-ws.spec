@@ -10,6 +10,7 @@
 
 
 Name:           webyast-firstboot-ws
+Provides:       WebYaST(org.opensuse.yast.modules.basesystem)
 Provides:       yast2-webservice-basesystem = %{version}
 Obsoletes:      yast2-webservice-basesystem < %{version}
 PreReq:         yast2-webservice

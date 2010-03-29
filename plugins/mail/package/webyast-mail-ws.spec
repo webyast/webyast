@@ -10,6 +10,7 @@
 
 
 Name:           webyast-mail-ws
+Provides:       WebYaST(org.opensuse.yast.modules.yapi.mailsettings)
 Provides:       yast2-webservice-mailsettings = %{version}
 Obsoletes:      yast2-webservice-mailsettings < %{version}
 PreReq:         yast2-webservice

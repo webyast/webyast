@@ -9,6 +9,7 @@
 
 
 Name:           webyast-firewall-ws
+Provides:       WebYaST(org.opensuse.yast.modules.yapi.firewall)
 License:        GPL v2 only
 Group:          Productivity/Networking/Web/Utilities
 Autoreqprov:    on

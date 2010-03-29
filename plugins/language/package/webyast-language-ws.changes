@@ -1,4 +1,9 @@
 -------------------------------------------------------------------
+Mon Mar 29 13:42:15 CEST 2010 - mvidner@suse.cz
+
+- RPM-Provide WebYaST(org.opensuse.yast.modules.FOO) (bnc#583561)
+
+-------------------------------------------------------------------
 Thu Feb 18 12:25:36 UTC 2010 - jreidinger@novell.com
 
 - ensure that rights is granted also for yastws (bnc#580861)

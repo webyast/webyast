@@ -1,4 +1,9 @@
 -------------------------------------------------------------------
+Mon Mar 29 13:42:15 CEST 2010 - mvidner@suse.cz
+
+- RPM-Provide WebYaST(org.opensuse.yast.modules.FOO) (bnc#583561)
+
+-------------------------------------------------------------------
 Tue Mar 16 14:32:08 CET 2010 - mzugec@suse.cz
 
 - don't crash with empty hostname or domain (bnc#577064)

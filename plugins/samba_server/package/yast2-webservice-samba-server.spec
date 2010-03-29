@@ -12,6 +12,7 @@
 %define plugin_name samba-server
 
 Name:           yast2-webservice-samba-server
+Provides:       WebYaST(org.opensuse.yast.system.sambashares)
 PreReq:         yast2-webservice
 Provides:       yast2-webservice:/srv/www/%{pkg_user}/vendor/plugins/%{plugin_name}/app/controllers/sambashares_controller.rb
 License:	GPL v2 only

@@ -10,6 +10,7 @@
 
 
 Name:           yast2-webservice-security
+Provides:       WebYaST(org.opensuse.yast.system.security)
 PreReq:         yast2-webservice
 License:	GPL v2 only
 Group:          Productivity/Networking/Web/Utilities
