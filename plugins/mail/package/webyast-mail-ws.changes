@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Tue Mar 30 12:48:59 UTC 2010 - schubi@novell.com
+
+- due a bug in scanf there must be a blank after the format %s
+- 0.1.12 
+
+-------------------------------------------------------------------
 Mon Mar 29 16:25:01 CEST 2010 - jsuchome@suse.cz
 
 - enhanced confirmation messages (bnc#580458)
