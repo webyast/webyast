@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Tue Mar 30 08:18:54 UTC 2010 - jreidinger@novell.com
+
+- add backward compatibility for empty finish file
+- 0.1.5
+
+-------------------------------------------------------------------
 Mon Mar 29 13:42:15 CEST 2010 - mvidner@suse.cz
 
 - RPM-Provide WebYaST(org.opensuse.yast.modules.FOO) (bnc#583561)
