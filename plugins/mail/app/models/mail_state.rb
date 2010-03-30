@@ -9,9 +9,7 @@ class MailState
       return { :level => "warning",
                :message_id => "MAIL_SENT",
                :short_description => "Mail configuration test not confirmed",
-               :long_description => "During Mail configuration, test mail was sent to '%s'.
-Was the mail delivered to this address?<br>
-If so, confirm it by pressing the button. Otherwise, check your mail confiuration again, even the '/var/log/mail' file." % mail,
+               :long_description => "During Mail configuration, test mail was sent to %s . Was the mail delivered to this address?<br> If so, confirm it by pressing the button. Otherwise, check your mail confiuration again, even the '/var/log/mail' file." % mail,
                :confirmation_host => "service",
                :confirmation_link => "/mail/state",
                :confirmation_label => "Test mail received" }
