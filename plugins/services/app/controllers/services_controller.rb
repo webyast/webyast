@@ -48,12 +48,7 @@ class ServicesController < ApplicationController
       render ErrorResult.error(404, 106, "no such service") and return
     end
 
-    begin
-      ret	= @service.save(params)
-    rescue Exception => e
-      logger.debug e
-      render ErrorResult.error(404, @error_id, @error_string) and return
-    end
+    ret	= @service.save(params)
 
     render :xml => ret
   end

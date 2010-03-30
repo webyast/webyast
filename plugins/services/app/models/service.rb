@@ -169,8 +169,23 @@ class Service
 	"action"	=> [ "s", params["execute"] ],
 	"custom"	=> [ "b", params["custom"] == "true" ]
     }
-    ret = YastService.Call("YaPI::SERVICES::Execute", args)
-
+    begin
+      ret = YastService.Call("YaPI::SERVICES::Execute", args)
+    rescue DBus::Error => e
+      Rails.logger.warn "DBUS error, probably timeout #{e.inspect}"
+      if (self.name == "ntp") # with ntp, timeout is expected (bnc#582810)
+	  ret = {
+	      "exit"	=> 0,
+	      "stdout"	=> "",
+	      "stderr"	=> ""
+	  }
+	  Rails.logger.info "faking return value...."
+      else raise e
+      end
+    rescue Exception => e
+      Rails.logger.error "Generic exception #{e.inspect})"
+      raise e
+    end
     Rails.logger.debug "Command returns: #{ret.inspect}"
     ret.symbolize_keys!
   end

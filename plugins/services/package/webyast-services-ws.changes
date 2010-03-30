@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Tue Mar 30 11:18:10 CEST 2010 - jsuchome@suse.cz
+
+- ignore DBUS timeout exception when handling ntp (bnc#582810)
+- 0.1.9
+
+-------------------------------------------------------------------
 Mon Mar 29 13:42:15 CEST 2010 - mvidner@suse.cz
 
 - RPM-Provide WebYaST(org.opensuse.yast.modules.FOO) (bnc#583561)
