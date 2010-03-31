@@ -14,9 +14,9 @@ require 'getoptlong'
 $debug = 0
 
 def usage why
-	STDERR.puts why
+  STDERR.puts why
   STDERR.puts ""
-	STDERR.puts "Usage: grantwebyastrights --user <user> --action (show|grant|revoke)"
+  STDERR.puts "Usage: grantwebyastrights --user <user> --action (show|grant|revoke)"
   STDERR.puts "NOTE: This program should be run by user root"
   STDERR.puts ""
   STDERR.puts "This call grant/revoke ALL permissions for the YaST Webservice."
@@ -25,7 +25,7 @@ def usage why
   STDERR.puts ""
   STDERR.puts "In order to show all possible permissions use:"
   STDERR.puts "polkit-action"
-	exit 1
+  exit 1
 end
 
 options = GetoptLong.new(
@@ -36,15 +36,16 @@ options = GetoptLong.new(
 user = nil
 action = nil
 
-
-options.each do |opt, arg|
-  case opt
+begin
+  options.each do |opt, arg|
+    case opt
     when "--user": user = arg
     when "--action": action = arg
     when "--debug": $debug += 1
-    else
-	    usage "Unrecognized option #{opt}"
+    end
   end
+rescue GetoptLong::InvalidOption => o
+  usage "Invalid option #{o}"
 end
 
 $debug = nil if $debug == 0
