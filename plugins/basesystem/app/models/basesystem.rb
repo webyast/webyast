@@ -32,17 +32,22 @@ class Basesystem < BaseModel::Base
       rescue Exception => e
       	raise CorruptedFileException.new(config.path)
       end
-    else
-      base.steps = []
-    end
-    if File.exist?(FINISH_FILE)
-      base.done = IO.read(FINISH_FILE)
-      base.done = FINISH_STR if base.done.blank? #backward compatibility, when touch indicate finished bs
-      if base.done == FINISH_STR
-        base.finish = true
+      if File.exist?(FINISH_FILE)
+	begin
+	  base.done = IO.read(FINISH_FILE)
+	rescue Exception => e
+	  raise CorruptedFileException.new(FINISH_FILE)
+	end
+	base.done = FINISH_STR if base.done.blank? #backward compatibility, when touch indicate finished bs
+	if base.done == FINISH_STR
+	  base.finish = true
+	end
+      else
+	base.done = base.steps.first["controller"]
       end
     else
-      base.done = base.steps.first["controller"]
+      base.steps = []
+      base.done = true
     end
     return base
   end

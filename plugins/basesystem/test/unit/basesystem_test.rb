@@ -57,4 +57,10 @@ EOF
     assert_not_nil @basesystem.to_json
   end
 
+  # Test what happens if the config file is not found
+  # bnc#592584
+  def test_broken_config
+    YaST::ConfigFile.any_instance.stubs(:path).returns("")
+    assert_nothing_raised do Basesystem.find end
+  end
 end
