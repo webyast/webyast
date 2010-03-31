@@ -8,14 +8,6 @@ task :git_check do
     # run 'git status' command to get the current status of the repository
     out = `git status`
 
-    # exit status 0 indicates uncommitted changes
-    if $?.exitstatus == 0
-	puts "ERROR: Uncommitted changes found:\n\n"
-	puts out
-	puts "\nUse 'git commit -a' and 'git push' to commit the changes to the remote server.\n"
-	exit 1
-    end
-
     # Check the unpushed changes
     if out =~ /Your branch is ahead of '.*' by .* commit/
 	puts "ERROR: The local repository has these changes:\n\n"
@@ -33,6 +25,7 @@ task :git_check do
 
     if out =~ /modified:/
 	puts "ERROR: there is an uncommited change"
+	puts out
 	puts "\nUse 'git commit' and 'git push' to commit the changes to the remote server.\n"
 	exit 1
     end
