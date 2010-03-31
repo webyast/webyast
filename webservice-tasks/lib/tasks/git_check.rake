@@ -5,8 +5,8 @@ task :git_check do
     puts "* Checking GIT repository status..."
 
     # STEP 1: check the local changes
-    # run 'git status -a' command to get the current status of the repository
-    out = `git status -a`
+    # run 'git status' command to get the current status of the repository
+    out = `git status`
 
     # exit status 0 indicates uncommitted changes
     if $?.exitstatus == 0
@@ -21,6 +21,19 @@ task :git_check do
 	puts "ERROR: The local repository has these changes:\n\n"
 	puts `git log origin..HEAD`
 	puts "\nUse 'git push' to push the local changes to the remote repository.\n"
+	exit 1
+    end
+
+    # check changes in the index
+    if out =~ /new file:/
+	puts "ERROR: there is a new uncommited file"
+	puts "\nUse 'git commit' and 'git push' to commit the changes to the remote server.\n"
+	exit 1
+    end
+
+    if out =~ /modified:/
+	puts "ERROR: there is an uncommited change"
+	puts "\nUse 'git commit' and 'git push' to commit the changes to the remote server.\n"
 	exit 1
     end
 
