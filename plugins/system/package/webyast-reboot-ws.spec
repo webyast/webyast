@@ -21,7 +21,7 @@ Group:          Productivity/Networking/Web/Utilities
 Autoreqprov:    on
 Version:        0.0.8
 Release:        0
-Summary:        Webyast - basic system service
+Summary:        Webyast - reboot/shutdown service
 Source:         www.tar.bz2
 Url:            http://en.opensuse.org/YaST/Web
 BuildRoot:      %{_tmppath}/%{name}-%{version}-build
@@ -35,7 +35,7 @@ BuildRequires:  rubygem-yast2-webservice-tasks rubygem-restility
 
 
 %description
-Webyast - - Plugin provides REST based interface for basic system access like power management
+Webyast - - Plugin provides REST based interface for reboot/shutdown system.
 
 Authors:
 --------
