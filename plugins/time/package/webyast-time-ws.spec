@@ -19,7 +19,7 @@ Group:          Productivity/Networking/Web/Utilities
 Autoreqprov:    on
 Version:        0.1.1
 Release:        0
-Summary:        YaST2 - Webservice - Time
+Summary:        Webyast - time management
 Source:         www.tar.bz2
 BuildRoot:      %{_tmppath}/%{name}-%{version}-build
 BuildArch:      noarch
@@ -41,7 +41,8 @@ Requires:       yast2-country >= 2.17.34.2
 
 
 %description
-YaST2 - Webservice - REST based interface of YaST in order to handle time and date.
+Webyast - Plugin provides REST based interface to handle timezone, time and date.
+
 Authors:
 --------
     Stefan Schubert <schubi@opensuse.org>

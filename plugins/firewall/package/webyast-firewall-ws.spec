@@ -15,7 +15,7 @@ Group:          Productivity/Networking/Web/Utilities
 Autoreqprov:    on
 Version:        0.2.1
 Release:        0
-Summary:        YaST2 - Webservice - Firewall
+Summary:        Webyast - Firewall management service
 Source:         www.tar.bz2
 Source1:        org.opensuse.yast.modules.yapi.firewall.policy
 Source2:        FIREWALL.pm
@@ -32,7 +32,7 @@ Requires:       SuSEfirewall2 yast2
 
 
 %description
-YaST2 - Webservice - REST based interface of YaST in order to handle firewall settings.
+Webyast - Plugin provides REST based interface to handle firewall settings.
 Authors:
 --------
     Martin Kudlvasr<mkudlvasr@novell.com>

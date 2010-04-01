@@ -21,7 +21,7 @@ Group:          Productivity/Networking/Web/Utilities
 Autoreqprov:    on
 Version:        0.0.8
 Release:        0
-Summary:        YaST2 - Webservice - System
+Summary:        Webyast - basic system service
 Source:         www.tar.bz2
 Url:            http://en.opensuse.org/YaST/Web
 BuildRoot:      %{_tmppath}/%{name}-%{version}-build
@@ -35,7 +35,7 @@ BuildRequires:  rubygem-yast2-webservice-tasks rubygem-restility
 
 
 %description
-YaST2 - Webservice - REST based interface for basic system access
+Webyast - - Plugin provides REST based interface for basic system access like power management
 
 Authors:
 --------

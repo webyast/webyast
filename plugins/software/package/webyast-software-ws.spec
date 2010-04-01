@@ -41,7 +41,7 @@ Group:          Productivity/Networking/Web/Utilities
 Autoreqprov:    on
 Version:        0.1.17
 Release:        0
-Summary:        YaST2 - Webservice - Patches
+Summary:        Webyast - software management service
 Source:         www.tar.bz2
 Source1:        org.opensuse.yast.system.patches.policy
 Source2:        org.opensuse.yast.system.packages.policy
@@ -56,7 +56,8 @@ BuildArch:      noarch
 
 
 %description
-YaST2 - Webservice - REST based interface of YaST in order to handle patches and packages.
+Webyast - Plugin provides REST based interface to handle repositories, patches and packages.
+
 Authors:
 --------
     Stefan Schubert <schubi@opensuse.org>

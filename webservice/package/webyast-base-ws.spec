@@ -41,7 +41,7 @@ Group:          Productivity/Networking/Web/Utilities
 Autoreqprov:    on
 Version:        0.1.10
 Release:        0
-Summary:        YaST2 - Webservice 
+Summary:        Webyast - base components for rest service
 Source:         www.tar.bz2
 Source1:        yast.conf
 Source2:        rails.include
@@ -84,7 +84,7 @@ BuildArch:      noarch
 
 
 %description
-YaST2 - Webservice - REST based interface of YaST.
+Webyast - Core components for REST based interface to system manipulation.
 Authors:
 --------
     Duncan Mac-Vicar Prett <dmacvicar@suse.de>

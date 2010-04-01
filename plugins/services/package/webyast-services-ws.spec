@@ -19,7 +19,7 @@ Group:          Productivity/Networking/Web/Utilities
 Autoreqprov:    on
 Version:        0.1.9
 Release:        0
-Summary:        YaST2 - Webservice - Services
+Summary:        Webyast - system services management service
 Source:         www.tar.bz2
 Source1:        org.opensuse.yast.modules.yapi.services.policy
 Source2:	YML.rb
@@ -41,7 +41,7 @@ Requires:	yast2-runlevel
 
 
 %description
-YaST2 - Webservice - REST based interface of YaST in order to handle services.
+Webyast - Plugin provides REST based interface to handle system services.
 Authors:
 --------
     Stefan Schubert <schubi@opensuse.org>

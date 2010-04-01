@@ -19,7 +19,7 @@ Group:          Productivity/Networking/Web/Utilities
 Autoreqprov:    on
 Version:        0.1.12
 Release:        0
-Summary:        YaST2 - Webservice - Mail Settings
+Summary:        Webyast - system mail settings service
 Source:         www.tar.bz2
 Source1:        MailSettings.pm
 Source2:	org.opensuse.yast.modules.yapi.mailsettings.policy
@@ -52,7 +52,8 @@ Requires:       yast2-mail >= 2.17.5
 
 
 %description
-YaST2 - Webservice - REST based interface for mail settings
+Webyast - Plugin provides REST based interface to system mail settings.
+It does not provide mail server configuration, just redirecting of system mails.
 
 Authors:
 --------

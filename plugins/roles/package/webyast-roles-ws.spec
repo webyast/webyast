@@ -17,7 +17,7 @@ Group:          Productivity/Networking/Web/Utilities
 Autoreqprov:    on
 Version:        0.1.0
 Release:        0
-Summary:        Webyast rest service which provides operations on roles
+Summary:        Webyast - role management service
 Source:         www.tar.bz2
 BuildRoot:      %{_tmppath}/%{name}-%{version}-build
 BuildArch:      noarch
@@ -32,10 +32,10 @@ Source2:        roles_assign.yml
 
 
 %description
-YaST2 - Webservice - REST based interface of YaST in order to handle time and date.
+Webyast - Plugin provides REST based interface for roles management.
+
 Authors:
 --------
-    Stefan Schubert <schubi@opensuse.org>
     Josef Reidinger <jreidinger@suse.cz>
 
 %prep
