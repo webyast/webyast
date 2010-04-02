@@ -1,4 +1,12 @@
 -------------------------------------------------------------------
+Fri Apr  2 15:47:17 UTC 2010 - lslezak@suse.cz
+
+- exceptions caught in the background thread must be rethrown
+  in the main thread later - report a problem instead of retrying
+  it again and again (bnc#591390)
+- 0.1.5
+
+-------------------------------------------------------------------
 Mon Mar 29 13:01:40 UTC 2010 - schubi@novell.com
 
 - System status should be 'amber' if registration failed (bnc#588613)

@@ -219,7 +219,16 @@ class Graph
       proc_id = id(what)
       if bm.process_finished? proc_id
         Rails.logger.debug "Request #{proc_id} is done"
-        return bm.get_value proc_id
+
+        ret = bm.get_value proc_id
+
+        # rethrow the exception from the background thread
+        if ret.kind_of?(Exception)
+          Rails.logger.info "Rethrowing the exception caught in the background thread: #{ret.inspect}"
+          raise ret
+        end
+
+        return ret
       end
 
       running = bm.get_progress proc_id
@@ -233,7 +242,14 @@ class Graph
 
       # read the status in a separate thread
       Thread.new do
-        res = do_find what, limitcheck, bm
+        begin
+          res = do_find what, limitcheck, bm
+        rescue Exception => ex
+          Rails.logger.info "Status background thread: Caught exception: #{ex}"
+          # remember the exception and rethrow it in the main thread later
+          res = ex
+        end
+
         bm.finish_process(proc_id, res)
       end
 
