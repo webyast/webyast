@@ -4,13 +4,15 @@ require 'packagekit'
 
 class Repository < BaseModel::Base
 
-  attr_accessor   :id,
-    :name,
+  attr_accessor :name,
     :enabled,
     :autorefresh,
     :url,
     :priority,
     :keep_packages
+
+  # don't change the id in mass assignment
+  attr_protected :id
 
    # alias and URL must not be empty on save
    validates_presence_of :id
