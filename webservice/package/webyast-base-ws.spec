@@ -41,7 +41,7 @@ Group:          Productivity/Networking/Web/Utilities
 Autoreqprov:    on
 Version:        0.1.10
 Release:        0
-Summary:        Webyast - base components for rest service
+Summary:        WebYaST - base components for rest service
 Source:         www.tar.bz2
 Source1:        yast.conf
 Source2:        rails.include
@@ -84,7 +84,7 @@ BuildArch:      noarch
 
 
 %description
-Webyast - Core components for REST based interface to system manipulation.
+WebYaST - Core components for REST based interface to system manipulation.
 Authors:
 --------
     Duncan Mac-Vicar Prett <dmacvicar@suse.de>

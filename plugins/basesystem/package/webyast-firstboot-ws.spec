@@ -19,7 +19,7 @@ Group:          Productivity/Networking/Web/Utilities
 Autoreqprov:    on
 Version:        0.1.5
 Release:        0
-Summary:        Webyast - initial settings service
+Summary:        WebYaST - initial settings service
 Source:         www.tar.bz2
 Source1:        basesystem.yml
 BuildRoot:      %{_tmppath}/%{name}-%{version}-build
@@ -33,7 +33,7 @@ BuildRequires:  rubygem-mocha
 
 
 %description
-Webyast - Plugin provides service for first run configuration of system.
+WebYaST - Plugin providing service for the first run of system configuration.
 
 Authors:
 --------

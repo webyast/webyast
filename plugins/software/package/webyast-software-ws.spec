@@ -41,7 +41,7 @@ Group:          Productivity/Networking/Web/Utilities
 Autoreqprov:    on
 Version:        0.1.17
 Release:        0
-Summary:        Webyast - software management service
+Summary:        WebYaST - software management service
 Source:         www.tar.bz2
 Source1:        org.opensuse.yast.system.patches.policy
 Source2:        org.opensuse.yast.system.packages.policy
@@ -56,7 +56,7 @@ BuildArch:      noarch
 
 
 %description
-Webyast - Plugin provides REST based interface to handle repositories, patches and packages.
+WebYaST - Plugin providing REST based interface to handle repositories, patches and packages.
 
 Authors:
 --------

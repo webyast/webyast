@@ -19,7 +19,7 @@ Group:          Productivity/Networking/Web/Utilities
 Autoreqprov:    on
 Version:        0.1.0
 Release:        0
-Summary:        Webyast - service for configuration of administrator account
+Summary:        WebYaST - service for configuration of root account
 Source:         www.tar.bz2
 Source1:	org.opensuse.yast.modules.yapi.administrator.policy
 BuildRoot:      %{_tmppath}/%{name}-%{version}-build
@@ -42,7 +42,7 @@ Requires:       yast2-users >= 2.17.28.1
 
 
 %description
-Webyast - Plugin which provide REST service for configuration of administrator account
+WebYaST - Plugin providing REST service for configuration of root user account
 
 Authors:
 --------

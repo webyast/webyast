@@ -6,6 +6,17 @@ class MailState
       mail = f.gets.chomp
       mail = "" if mail.nil?
       f.close
+
+      require "socket"
+
+      details	= ""
+
+      begin
+	host 	= Socket.gethostbyname(Socket.gethostname).first
+      rescue SocketError => e
+	details	= "It was not possible to retrieve full hostname of the machine. If the mail could not be delivered, consult the network and/or mail configuration with your network administrator."
+      end
+
       return { :level => "warning",
                :message_id => "MAIL_SENT",
                :short_description => "Mail configuration test not confirmed",

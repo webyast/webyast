@@ -17,7 +17,7 @@ Group:          Productivity/Networking/Web/Utilities
 Autoreqprov:    on
 Version:        0.1.0
 Release:        0
-Summary:        Webyast - role management service
+Summary:        WebYaST - role management service
 Source:         www.tar.bz2
 BuildRoot:      %{_tmppath}/%{name}-%{version}-build
 BuildArch:      noarch
@@ -32,7 +32,7 @@ Source2:        roles_assign.yml
 
 
 %description
-Webyast - Plugin provides REST based interface for roles management.
+WebYaST - Plugin providing REST based interface for roles management.
 
 Authors:
 --------

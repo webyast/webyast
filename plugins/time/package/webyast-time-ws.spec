@@ -19,7 +19,7 @@ Group:          Productivity/Networking/Web/Utilities
 Autoreqprov:    on
 Version:        0.1.1
 Release:        0
-Summary:        Webyast - time management
+Summary:        WebYaST - time management
 Source:         www.tar.bz2
 BuildRoot:      %{_tmppath}/%{name}-%{version}-build
 BuildArch:      noarch
@@ -41,7 +41,7 @@ Requires:       yast2-country >= 2.17.34.2
 
 
 %description
-Webyast - Plugin provides REST based interface to handle timezone, time and date.
+WebYaST - Plugin providing REST based interface to handle time zone, system time and date.
 
 Authors:
 --------
