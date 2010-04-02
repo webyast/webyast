@@ -39,7 +39,7 @@ Requires:       PackageKit >= 0.3.14-3
 License:	GPL v2 only
 Group:          Productivity/Networking/Web/Utilities
 Autoreqprov:    on
-Version:        0.1.17
+Version:        0.1.18
 Release:        0
 Summary:        WebYaST - software management service
 Source:         www.tar.bz2

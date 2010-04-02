@@ -55,7 +55,8 @@ class Repository < BaseModel::Base
   end
 
   def self.mtime
-    File.stat("/etc/zypp/repos.d").mtime
+    [ File.stat("/etc/zypp/repos.d").mtime,
+      * Dir["/etc/zypp/repos.d/*.repo"].map{ |x| File.stat(x).mtime } ].max
   end
 
   # read autorefresh, URL, keep_packages and priority directly from *.repo file
