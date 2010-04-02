@@ -37,6 +37,10 @@ class Repository < BaseModel::Base
     @keep_packages = false
   end
 
+  def id
+    @id
+  end
+
   def self.find(what)
     repositories = Array.new
 
