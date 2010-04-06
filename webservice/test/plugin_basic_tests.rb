@@ -43,7 +43,6 @@
 module PluginBasicTests
 
   def test_access_denied
-    debugger
     #mock model to test only controller
     @model_class.stubs(:find)
     @controller.stubs(:permission_check).raises(NoPermissionException.new("action", "test"));
