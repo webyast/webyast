@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Tue Apr  6 15:41:07 CEST 2010 - mkudlvasr@novell.com
+
+- fix bnc#593331 - firewall reported as used even if not running
+- version 0.2.2
+
+-------------------------------------------------------------------
 Mon Mar 29 13:42:15 CEST 2010 - mvidner@suse.cz
 
 - RPM-Provide WebYaST(org.opensuse.yast.modules.FOO) (bnc#583561)
