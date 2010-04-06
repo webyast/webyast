@@ -103,7 +103,7 @@ class Graph
     
     #Network
     network = {"y_scale"=>1, 
-               "y_label"=>"MByte", 
+               "y_label"=>"MByte/s", 
                "single_graphs"=>[]}
     metrics.each do |metric|
       if metric.type == "if_packets" && metric.type_instance.start_with?("eth")
