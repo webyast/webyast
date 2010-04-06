@@ -15,7 +15,7 @@ Provides:       WebYaST(org.opensuse.yast.modules.yapi.groups)
 Provides:       yast2-webservice-users = %{version}
 Obsoletes:      yast2-webservice-users < %{version}
 PreReq:         yast2-webservice
-License:	GPL v2 only
+License:        GPL v2 only
 Group:          Productivity/Networking/Web/Utilities
 Autoreqprov:    on
 Version:        0.1.7
