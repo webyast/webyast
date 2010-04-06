@@ -72,11 +72,23 @@ MASS_DATA = { :arg1 => "last", :arg2 => "5", :callback_used => false }
     assert test2.arg2.nil?
   end
 
+class TestSerializeItself
+  def to_xml(options={})
+    root = options[:root] || @model.class.model_name.singular
+    builder = options[:builder] || Builder::XmlMarkup.new(options)
+    builder.instruct! unless options[:skip_instruct]
+    builder.tag!(root) do
+      builder.test "lest"
+      builder.test2 "lest2"
+    end
+  end
+end
+
 COMPLEX_DATA = {
   "test" => [ "a","b"], #serializers doesn't differ symbol from string and always sue string
   "test2" => [ 5,6], #number test
   "test4" => [ true,false], #number boolean
-  "test3" => { "a" => "b","c"=> "d" }, #number after serializing is converted to string
+  "test3" => { "a" => "b","c"=> "d" }, 
   "test_escapes" => "<arg>/&\\test",
   "test_hash" => [{"a"=>"a"},{"b"=>"b"}]
 }
@@ -84,11 +96,12 @@ COMPLEX_DATA = {
   def test_xml_serialization
     test= Test.new(MASS_DATA)
     test.carg = COMPLEX_DATA
+    test.arg1 = TestSerializeItself.new
     xml = test.to_xml
     assert xml
     test2 = Test.new
     test2.from_xml xml
-    assert_equal "last", test2.arg1
+    assert_equal({"test" => "lest","test2" => "lest2"}, test2.arg1)
     assert_equal "5", test2.arg2
     assert_equal COMPLEX_DATA, test2.carg
   end

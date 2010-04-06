@@ -45,6 +45,8 @@ module BaseModel
               serialize_value(k,v,builder)
             end
           end
+        elsif value.respond_to? :to_xml #value has own serialization method
+          value.to_xml :root => name, :skip_instruct => true, :builder => builder
         else
           type = XML_TYPE_NAMES[value.class.to_s]
           opts = {}
