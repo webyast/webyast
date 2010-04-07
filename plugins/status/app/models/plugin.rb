@@ -11,6 +11,7 @@ class Plugin
   attr_reader :message_id
   attr_reader :short_description
   attr_reader :long_description
+  attr_reader :details
   attr_reader :confirmation_host
   attr_reader :confirmation_link
   attr_reader :confirmation_label
@@ -19,12 +20,13 @@ class Plugin
 
   # initialize on element
   def initialize(level, message_id, short_description, 
-                 long_description, confirmation_host, 
+                 long_description, details, confirmation_host, 
                  confirmation_link, confirmation_label)
     @level = level
     @message_id = message_id
     @short_description = short_description
     @long_description = long_description
+    @details = details
     @confirmation_host = confirmation_host
     @confirmation_link = confirmation_link
     @confirmation_label = confirmation_label
@@ -49,7 +51,7 @@ class Plugin
       if status.class != NameError && status.respond_to?(:read)
         stat = status.read
         ret << Plugin.new(stat[:level], stat[:message_id], 
-                          stat[:short_description], stat[:long_description], 
+                          stat[:short_description], stat[:long_description], stat[:details],
                           stat[:confirmation_host], stat[:confirmation_link], 
                           stat[:confirmation_label]) unless stat.blank?
       end
@@ -66,6 +68,7 @@ class Plugin
       xml.message_id message_id
       xml.short_description short_description
       xml.long_description long_description
+      xml.details details
       xml.confirmation_host confirmation_host
       xml.confirmation_link confirmation_link
       xml.confirmation_label confirmation_label
