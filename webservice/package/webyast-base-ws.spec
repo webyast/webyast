@@ -41,7 +41,7 @@ Group:          Productivity/Networking/Web/Utilities
 Autoreqprov:    on
 Version:        0.1.10
 Release:        0
-Summary:        YaST2 - Webservice 
+Summary:        WebYaST - base components for rest service
 Source:         www.tar.bz2
 Source1:        yast.conf
 Source2:        rails.include
@@ -84,7 +84,7 @@ BuildArch:      noarch
 
 
 %description
-YaST2 - Webservice - REST based interface of YaST.
+WebYaST - Core components for REST based interface to system manipulation.
 Authors:
 --------
     Duncan Mac-Vicar Prett <dmacvicar@suse.de>
@@ -191,8 +191,6 @@ fi
 # create database 
 #
 cd srv/www/%{pkg_user}
-#generate install specific secret key
-sed -i 's/9d11bfc98abcf9799082d9c34ec94dc1cc926f0f1bf4bea8c440b497d96b14c1f712c8784d0303ee7dd69e382c3e5e4d38d4c56d1b619eae7acaa6516cd733b1/'`rake -s secret`/ config/environment.rb
 #migrate database
 RAILS_ENV=production rake db:migrate
 chown -R yastws: db

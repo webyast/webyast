@@ -21,7 +21,7 @@ Group:          Productivity/Networking/Web/Utilities
 Autoreqprov:    on
 Version:        0.1.3
 Release:        0
-Summary:        YaST2 - Webservice - Network
+Summary:        WebYaST - Network service
 Source:         www.tar.bz2
 Source1:        org.opensuse.yast.modules.yapi.network.policy
 BuildRoot:      %{_tmppath}/%{name}-%{version}-build
@@ -42,7 +42,7 @@ Requires:       yast2-network >= 2.17.78.1
 
 
 %description
-YaST2 - Webservice - REST based interface of YaST in order to handle firewall and ssh settings.
+WebYaST - Plugin providing REST based interface for network configuration.
 Authors:
 --------
     Michael Zugec <mzugec@suse.cz>

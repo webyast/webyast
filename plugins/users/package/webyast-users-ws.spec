@@ -15,12 +15,12 @@ Provides:       WebYaST(org.opensuse.yast.modules.yapi.groups)
 Provides:       yast2-webservice-users = %{version}
 Obsoletes:      yast2-webservice-users < %{version}
 PreReq:         yast2-webservice
-License:	GPL v2 only
+License:        GPL v2 only
 Group:          Productivity/Networking/Web/Utilities
 Autoreqprov:    on
-Version:        0.1.6
+Version:        0.1.7
 Release:        0
-Summary:        YaST2 - Webservice - Users
+Summary:        WebYaST - users management
 Source:         www.tar.bz2
 Source1:        org.opensuse.yast.modules.yapi.users.policy
 BuildRoot:      %{_tmppath}/%{name}-%{version}-build
@@ -33,7 +33,8 @@ BuildArch:      noarch
 
 
 %description
-YaST2 - Webservice - REST based interface of YaST in order to handle users settings.
+WebYaST - Plugin providing REST based interface to handle users settings.
+
 Authors:
 --------
     Stefan Schubert <schubi@opensuse.org>

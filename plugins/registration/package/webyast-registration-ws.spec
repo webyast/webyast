@@ -20,7 +20,7 @@ Group:          Productivity/Networking/Web/Utilities
 Autoreqprov:    on
 Version:        0.1.3
 Release:        0
-Summary:        YaST2 - Webservice - Registration
+Summary:        WebYaST - Registration service
 Source:         www.tar.bz2
 BuildRoot:      %{_tmppath}/%{name}-%{version}-build
 BuildArch:      noarch
@@ -43,7 +43,7 @@ Requires:       yast2-registration > 2.17.27
 
 
 %description
-YaST2 - Webservice - REST based interface for the registration of a system at NCC, SMT or SLMS
+WebYaST - Plugin providing REST based interface for the system registration at NCC, SMT or SLMS
 
 Authors:
 --------

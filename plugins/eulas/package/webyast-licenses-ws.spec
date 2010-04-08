@@ -19,7 +19,7 @@ Group:          Productivity/Networking/Web/Utilities
 Autoreqprov:    on
 Version:        0.0.5
 Release:        0
-Summary:        YaST2 - Webservice - EULA
+Summary:        WebYaST - license management service
 Source:         www.tar.bz2
 Source1:        eulas-sles11.yml
 BuildRoot:      %{_tmppath}/%{name}-%{version}-build
@@ -33,7 +33,7 @@ BuildRequires:  rubygem-mocha
 
 
 %description
-YaST2 - Webservice - REST based interface of YaST in order to handle user acceptation of EULAs.
+WebYaST - Plugin providing REST based interface to handle user acceptation of EULAs.
 
 Authors:
 --------

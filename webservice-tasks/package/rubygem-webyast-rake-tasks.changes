@@ -1,4 +1,11 @@
 -------------------------------------------------------------------
+Wed Mar 31 13:09:49 UTC 2010 - lslezak@suse.cz
+
+- fixed git_check task - the latest git doesn't accept '-a' option
+  in status command, check also uncommitted changes in index
+- 0.1.2
+
+-------------------------------------------------------------------
 Wed Jan 27 15:00:00 UTC 2010 - lslezak@suse.cz
 
 - 0.1.1

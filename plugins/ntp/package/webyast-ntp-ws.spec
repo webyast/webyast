@@ -24,7 +24,7 @@ Group:          Productivity/Networking/Web/Utilities
 Autoreqprov:    on
 Version:        0.1.3
 Release:        0
-Summary:        YaST2 - Webservice - NTP
+Summary:        WebYaST - NTP service
 Source:         www.tar.bz2
 Source1:        NTP.pm
 Source2:        org.opensuse.yast.modules.yapi.ntp.policy
@@ -39,7 +39,7 @@ BuildRequires:  rubygem-yast2-webservice-tasks rubygem-restility
 
 
 %description
-YaST2 - Webservice - REST based interface for basic ntp access
+WebYaST - Plugin providing REST based interface to basic ntp time synchronization
 
 Authors:
 --------

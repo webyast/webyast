@@ -1,4 +1,5 @@
 interface: org.opensuse.yast.system.plugins
 controller: plugins
 singular: false
+policy: org.opensuse.yast.system.status
 

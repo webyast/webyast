@@ -4,13 +4,15 @@ require 'packagekit'
 
 class Repository < BaseModel::Base
 
-  attr_accessor   :id,
-    :name,
+  attr_accessor :name,
     :enabled,
     :autorefresh,
     :url,
     :priority,
     :keep_packages
+
+  # don't change the id in mass assignment
+  attr_protected :id
 
    # alias and URL must not be empty on save
    validates_presence_of :id
@@ -35,6 +37,10 @@ class Repository < BaseModel::Base
     @keep_packages = false
   end
 
+  def id
+    @id
+  end
+
   def self.find(what)
     repositories = Array.new
 
@@ -55,7 +61,8 @@ class Repository < BaseModel::Base
   end
 
   def self.mtime
-    File.stat("/etc/zypp/repos.d").mtime
+    [ File.stat("/etc/zypp/repos.d").mtime,
+      * Dir["/etc/zypp/repos.d/*.repo"].map{ |x| File.stat(x).mtime } ].max
   end
 
   # read autorefresh, URL, keep_packages and priority directly from *.repo file

@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Fri Apr  2 14:52:19 CEST 2010 - mzugec@suse.cz
+
+- delete user's home directory (bnc#591410)
+- 0.1.7 
+
+-------------------------------------------------------------------
 Mon Mar 29 13:42:15 CEST 2010 - mvidner@suse.cz
 
 - RPM-Provide WebYaST(org.opensuse.yast.modules.FOO) (bnc#583561)

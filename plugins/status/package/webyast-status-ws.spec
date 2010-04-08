@@ -18,9 +18,9 @@ Obsoletes:      yast2-webservice-status < %{version}
 License:	GPL v2 only
 Group:          Productivity/Networking/Web/Utilities
 Autoreqprov:    on
-Version:        0.1.4
+Version:        0.1.5
 Release:        0
-Summary:        YaST2 - Webservice - Status
+Summary:        WebYaST - system status service
 Source:         www.tar.bz2
 Source1:        org.opensuse.yast.system.status.policy
 Source2:	org.opensuse.yast.modules.logfile.policy
@@ -41,7 +41,8 @@ BuildRequires:  rubygem-yast2-webservice-tasks rubygem-restility
 
 
 %description
-YaST2 - Webservice - REST based interface of YaST in order to handle firewall and ssh settings.
+WebYaST - Plugin providing REST based interface to provide information about system status.
+
 Authors:
 --------
     Björn Geuken <bgeuken@suse.de>

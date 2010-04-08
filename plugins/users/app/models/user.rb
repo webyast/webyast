@@ -72,7 +72,8 @@ class User
     # delete existing local user
     config = {
       "type" => [ "s", "local" ],
-      "uid" => [ "s", uid ]
+      "uid" => [ "s", uid ],
+      "delete_home" => [ "b", true ]
     }
 
     ret = YastService.Call("YaPI::USERS::UserDelete", config)

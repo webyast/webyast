@@ -23,9 +23,9 @@ BEGIN{$TYPEINFO{Read} = ["function", ["map", "string", "any"]];
 
 sub Read {
   my $self = shift;
+  SuSEFirewall->ResetReadFlag();
   SuSEFirewall->Read();
   my $status  = YaST::YCP::Boolean( SuSEFirewall->GetEnableService () );
-  y2milestone "YaPI::FIREWALL::status -> '".$status."'";
   my $known_services = SuSEFirewallServices->GetSupportedServices();
   my @service_ids = keys %$known_services;
   my $service_zones = SuSEFirewall->GetServices(\@service_ids);

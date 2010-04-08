@@ -19,7 +19,7 @@ Group:          Productivity/Networking/Web/Utilities
 Autoreqprov:    on
 Version:        0.1.5
 Release:        0
-Summary:        YaST2 - Webservice - Basesystem
+Summary:        WebYaST - initial settings service
 Source:         www.tar.bz2
 Source1:        basesystem.yml
 BuildRoot:      %{_tmppath}/%{name}-%{version}-build
@@ -33,7 +33,7 @@ BuildRequires:  rubygem-mocha
 
 
 %description
-YaST2 - Webservice - REST based interface of YaST in order to handle initial basic system settings.
+WebYaST - Plugin providing service for the first run of system configuration.
 
 Authors:
 --------
