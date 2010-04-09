@@ -1,7 +1,14 @@
 -------------------------------------------------------------------
+Fri Apr  9 17:04:47 CEST 2010 - mvidner@suse.cz
+
+- Fixed "unexpected return" when installing multiple patches
+  (bnc#560701#c15)
+- 0.0.11
+
+-------------------------------------------------------------------
 Thu Mar 18 15:22:47 CET 2010 - vgorobets@suse.de
 
-- WebYaST appears to crash after installing webclient patch (bnc#560701)
+- WebYaST appears to crash after installing webclient patch (bnc#595221)
 - 0.0.10 
 
 -------------------------------------------------------------------
