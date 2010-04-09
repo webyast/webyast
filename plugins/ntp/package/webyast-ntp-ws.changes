@@ -1,4 +1,11 @@
 -------------------------------------------------------------------
+Fri Apr  9 09:04:48 UTC 2010 - jreidinger@novell.com
+
+- allow edit ntp server (bnc#591404)
+- improve package description
+- 0.1.4
+
+-------------------------------------------------------------------
 Mon Mar 29 13:42:15 CEST 2010 - mvidner@suse.cz
 
 - RPM-Provide WebYaST(org.opensuse.yast.modules.FOO) (bnc#583561)
