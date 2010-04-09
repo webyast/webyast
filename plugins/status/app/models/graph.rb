@@ -8,6 +8,8 @@ class Graph
   attr_reader :group_name
   attr_reader :y_scale
   attr_reader :y_label
+  attr_reader :y_max
+  attr_reader :y_decimal_places
   attr_reader :single_graphs
 
   CONFIGURATION_FILE = "status_configuration.yaml"
@@ -85,6 +87,8 @@ class Graph
     #Disk
     disk = {"y_scale"=>1073741824, 
             "y_label"=>"GByte", 
+            "y_max"=>nil,
+            "y_decimal_places"=>0,
             "single_graphs"=>[]}
     metrics.each do |metric|
       if (metric.type == "df" && !metric.type_instance.start_with?("dev") && 
@@ -104,6 +108,8 @@ class Graph
     #Network
     network = {"y_scale"=>1, 
                "y_label"=>"MByte/s", 
+               "y_max"=>nil,
+               "y_decimal_places"=>0,
                "single_graphs"=>[]}
     metrics.each do |metric|
       if metric.type == "if_packets" && metric.type_instance.start_with?("eth")
@@ -122,6 +128,8 @@ class Graph
     #Memory
     memory = {"y_scale"=>1048567, 
               "y_label"=>"MByte", 
+              "y_max"=>nil,
+              "y_decimal_places"=>0,
               "single_graphs"=>[]}
     lines = []
     metrics.each do |metric|
@@ -139,6 +147,8 @@ class Graph
     #CPU
     cpu = {"y_scale"=>1, 
            "y_label"=>"Percent", 
+           "y_max"=>100,
+           "y_decimal_places"=>0,
            "single_graphs"=>[]}
     graphs = {}
     metrics.each do |metric|
@@ -185,6 +195,8 @@ class Graph
     @group_name = group_id
     @y_scale = value["y_scale"]
     @y_label = value["y_label"]
+    @y_max = value["y_max"]
+    @y_decimal_places = value["y_decimal_places"]
     if limitcheck
       value["single_graphs"].each do |graph|
         graph["lines"].each do |line|
@@ -369,6 +381,8 @@ class Graph
       xml.id group_name
       xml.y_scale y_scale
       xml.y_label y_label
+      xml.y_max y_max
+      xml.y_decimal_places y_decimal_places
       xml.single_graphs(:type => :array) do
         single_graphs.each do |graph|
           xml.single_graph do

@@ -116,6 +116,8 @@ class GraphTest < ActiveSupport::TestCase
       xml.id "CPU"
       xml.y_scale 1
       xml.y_label "Percent"
+      xml.y_max nil
+      xml.y_decimal_places nil
       xml.single_graphs(:type => :array) do
         xml.single_graph do
           xml.cummulated false
