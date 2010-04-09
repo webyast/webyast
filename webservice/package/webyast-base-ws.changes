@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Fri Apr  9 13:13:13 UTC 2010 - lslezak@suse.cz
+
+- added restdoc test suite (bnc#581807), the functionality has been
+  moved from the controller to a separate model
+
+-------------------------------------------------------------------
 Mon Mar 29 13:03:47 UTC 2010 - schubi@novell.com
 
 - Make controller accessable in resource.rb. Needed for 
