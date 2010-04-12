@@ -58,7 +58,7 @@ class Mail
 
     Rails.logger.debug "sending test mail to #{to}..."
 
-    message	= "This is the test mail, sent to you by webYaST. Go to status page and confirm you've got it."
+    message	= "This is the test mail sent to you by webYaST. Go to the status page and confirm you've got it."
 
     `/bin/echo "#{message}" | /bin/mail -s "WebYaST Test Mail" #{to} -r root`
 

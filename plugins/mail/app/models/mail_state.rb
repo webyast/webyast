@@ -14,13 +14,13 @@ class MailState
       begin
 	host 	= Socket.gethostbyname(Socket.gethostname).first
       rescue SocketError => e
-	details	= "It was not possible to retrieve full hostname of the machine. If the mail could not be delivered, consult the network and/or mail configuration with your network administrator."
+	details	= "It was not possible to retrieve the full hostname of the machine. If the mail could not be delivered, consult the network and/or mail configuration with your network administrator."
       end
 
       return { :level => "warning",
                :message_id => "MAIL_SENT",
                :short_description => "Mail configuration test not confirmed",
-               :long_description => "During Mail configuration, test mail was sent to %s . Was the mail delivered to this address?<br> If so, confirm it by pressing the button. Otherwise, check your mail confiuration again." % mail,
+               :long_description => "While configuring mail, a test mail was sent to %s . Was the mail delivered to this address?<br>If so, confirm it by pressing the button. Otherwise check your mail configuration again." % mail,
 	       :details	=> details,
                :confirmation_host => "service",
                :confirmation_link => "/mail/state",

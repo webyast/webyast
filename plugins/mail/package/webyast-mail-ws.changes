@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Mon Apr 12 11:12:57 CEST 2010 - jsuchome@suse.cz
+
+- warning text corrections 
+- 0.1.14
+
+-------------------------------------------------------------------
 Mon Apr 12 10:08:47 CEST 2010 - jsuchome@suse.cz
 
 - send details info when hostname was not resolved (bnc#593910)
