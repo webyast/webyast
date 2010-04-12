@@ -1,4 +1,11 @@
 -------------------------------------------------------------------
+Mon Apr 12 12:12:44 UTC 2010 - jreidinger@novell.com
+
+- update summary and description of packages (bnc#588355)
+- Handle non-existant config file (bnc#592584)
+- 0.1.6
+
+-------------------------------------------------------------------
 Tue Mar 30 08:18:54 UTC 2010 - jreidinger@novell.com
 
 - add backward compatibility for empty finish file
