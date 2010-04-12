@@ -5,7 +5,7 @@ require 'system'
 class NtpTest < ActiveSupport::TestCase
 
   def setup    
-    YastService.stubs(:Call).with("YaPI::NTP::Available").once.returns(true)
+    Ntp.stubs(:get_server_list).returns("pool.ntp.org")
     @model = Ntp.find
   end
 
@@ -30,7 +30,7 @@ class NtpTest < ActiveSupport::TestCase
     assert_raise(NtpError.new "No server defined") do
       @model.save
     end
-  end  
+  end
 
   def test_synchronize_timeout
     @model.actions[:synchronize] = true
@@ -43,10 +43,10 @@ class NtpTest < ActiveSupport::TestCase
     assert_nothing_raised do
       @model.save
     end
-  end  
+  end
 
   def test_unavailable_NTP
-    YastService.stubs(:Call).with("YaPI::NTP::Available").once.returns(false)
+    Ntp.stubs(:get_server_list).returns("")
     assert Ntp.find.actions[:ntp_server]
   end
 end

@@ -19,6 +19,7 @@ class NtpController < ApplicationController
 	
     ntp = Ntp.new(root)
   	yapi_perm_check "ntp.synchronize" if ntp.actions[:synchronize]
+  	yapi_perm_check "ntp.setserver" if (ntp.actions[:ntp_server]!=Ntp.get_servers)
 	  ntp.save	
 
     show

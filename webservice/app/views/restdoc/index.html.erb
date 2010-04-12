@@ -4,6 +4,6 @@
   <i>No REST documentation available.</i>
 <% else %>
   <% @restdocs.each do |r| -%>
-    <a href="<%= r -%>"><%= /(.*)\/restdoc\/index\.html$/.match(r) && $1 -%></a><br>
+    <a href="<%= h r -%>"><%= h(/(.*)\/restdoc\/index\.html$/.match(r) && $1) -%></a><br>
   <% end -%>
 <% end %>

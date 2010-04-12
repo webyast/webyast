@@ -14,9 +14,9 @@ sub Synchronize {
   my $use_utc = shift;
   my $new_server = shift;
   my $out = undef;
-  my $servers = getServers();
+  my $servers = GetServers();
   if ($new_server ne ""){
-    my @srvs = [ $new_server ];
+    my @srvs = split(',',$new_server);
     $servers = \@srvs;
   }
 
@@ -30,6 +30,7 @@ sub Synchronize {
     y2warning($out);
   }
   return "NOSERVERS" unless (defined ($out));
+  return $out unless $?==0;
   my $local = "--utc";
   unless ($use_utc) {
     $local = "--localtime";
@@ -47,19 +48,12 @@ sub Synchronize {
   return $out.$ret;
 }
 
-BEGIN{$TYPEINFO{Available} = ["function",
-    "boolean"];
-}
-sub Available {
+sub GetServers {
   my $self = shift;
-  return ((scalar @{getServers()}) != 0) && (getServers()->[0] ne "")
-}
-
-
-sub getServers {
   my $servers = `grep "^[:space:]*NETCONFIG_NTP_STATIC_SERVERS" /etc/sysconfig/network/config | sed 's/.*="\\(.*\\)"/\\1/'`;
   my @serv = split(/\s+/,$servers);
   return \@serv;
 }
 
 1;
+#print join(",",@{GetServers()});

@@ -1,4 +1,17 @@
 -------------------------------------------------------------------
+Mon Apr 12 11:12:57 CEST 2010 - jsuchome@suse.cz
+
+- warning text corrections 
+- 0.1.14
+
+-------------------------------------------------------------------
+Mon Apr 12 10:08:47 CEST 2010 - jsuchome@suse.cz
+
+- send details info when hostname was not resolved (bnc#593910)
+- update summary and description of packages (bnc#588355)
+- 0.1.13 
+
+-------------------------------------------------------------------
 Tue Mar 30 12:48:59 UTC 2010 - schubi@novell.com
 
 - due a bug in scanf there must be a blank after the format %s

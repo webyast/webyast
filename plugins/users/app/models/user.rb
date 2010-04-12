@@ -27,7 +27,9 @@ class User
       # how to index hash with users
       "index"	=> ["s", "uid"],
       # attributes to return for each user
-      "user_attributes"	=> ["as", [ "cn" ]]
+      "user_attributes"	=>
+        [ "as", [ "cn", "uidNumber", "homeDirectory",
+                  "grouplist", "uid", "loginShell", "groupname" ] ]
     }
     users_map = YastService.Call("YaPI::USERS::UsersGet", parameters)
     if users_map.nil?
@@ -35,8 +37,7 @@ class User
     else
       users_map.each do |key, val|
         user = User.new
-        user.uid = key
-        user.cn = val["cn"]
+        user.load_data(val)
         users << user
       end
     end
@@ -193,13 +194,6 @@ class User
 	    end
          end
       end
-#      xml.allgroups({:type => "array"}) do
-#         allgroups.each do |group| 
-#	    xml.group do
-#	      xml.tag!(:cn, group[0])
-#	    end
-#         end
-#      end
     end  
   end
 

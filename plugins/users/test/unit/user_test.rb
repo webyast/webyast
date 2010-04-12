@@ -8,8 +8,12 @@ class UserTest < Test::Unit::TestCase
 
   def setup
 
-    parameters	= { "index" => ["s", "uid"], "user_attributes" => ["as", [ "cn" ]] }
-    YastService.stubs(:Call).with("YaPI::USERS::UsersGet", parameters).returns({"testuser1"=>{"cn"=>"testuser1"}, "testuser2"=>{"cn"=>"testuser2"}})    
+    parameters	= { "index" => ["s", "uid"], "user_attributes" =>  
+        [ "as", [ "cn", "uidNumber", "homeDirectory",
+                  "grouplist", "uid", "loginShell", "groupname" ] ]
+    }
+    YastService.stubs(:Call).with("YaPI::USERS::UsersGet", parameters).returns({"testuser1"=>{"cn"=>"testuser1", "groupname"=>"users", "uidNumber"=>1000, "homeDirectory"=>"/home/testuser1"},
+										"testuser2"=>{"cn"=>"testuser2", "groupname"=>"users", "uidNumber"=>1010, "homeDirectory"=>"/home/testuser1"}})    
   end
 
   def test_user
