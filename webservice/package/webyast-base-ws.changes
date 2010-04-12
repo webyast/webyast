@@ -1,4 +1,18 @@
 -------------------------------------------------------------------
+Mon Apr 12 13:02:00 UTC 2010 - jreidinger@novell.com
+
+- improve base model serialization - if any object is not array
+  or hash and can serialize itself, then use that serialization
+- update summary and description of packages (bnc#588355)
+- generate secret during first webyast start instead installation
+  to prevent problem with appliance with same secret (bnc#591345)
+- Catch invalid options (bnc#592634) (kkaempf)
+- mechanism for status-plugin communication (schubi)
+- improve test cases for session and bug fixed found problem
+  (bnc#581799)
+- 0.1.11
+
+-------------------------------------------------------------------
 Fri Apr  9 13:13:13 UTC 2010 - lslezak@suse.cz
 
 - added restdoc test suite (bnc#581807), the functionality has been
