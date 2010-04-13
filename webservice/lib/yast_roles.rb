@@ -34,8 +34,6 @@ module YastRoles
   #                  - _PolicyKitException_ for error during running policy kit
   #
   def permission_check(action)
-    # FIXME: PolicyKit/D-Bus should be mocked when testing (bnc#542447)
-    return true if ENV["RAILS_ENV"] == "test" and !defined? PERMISSION_CHECK_TESTING
     account = self.current_account
     raise NotLoggedException if account.nil? || account.login.size == 0
     action ||= "" #avoid nil action
