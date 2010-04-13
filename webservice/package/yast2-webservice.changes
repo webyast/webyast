@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Tue Apr 13 06:23:04 UTC 2010 - jreidinger@novell.com
+
+- generate secret key during first run to prevent same key for all
+  appliances (bnc#591345)
+
+-------------------------------------------------------------------
 Wed Mar  3 16:56:55 CET 2010 - mvidner@suse.cz
 
 - Read permissions via ruby-polkit.rpm instead of polkit-auth,
