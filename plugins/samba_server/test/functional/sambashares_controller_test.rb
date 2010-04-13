@@ -12,6 +12,10 @@ class SambasharesControllerTest < ActionController::TestCase
     @request.session[:account_id] = 1 # defined in fixtures
 
     SambaShare.stubs(:find_all).returns([SambaShare.new, SambaShare.new])
+    
+    #PolKit.polkit_check( action, account.login) == :yes
+    PolKit.stubs(:polkit_check).returns(:yes)
+	    
   end
   
   test "access index" do
