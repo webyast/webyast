@@ -1,4 +1,9 @@
 -------------------------------------------------------------------
+Tue Apr 13 10:32:34 UTC 2010 - schubi@novell.com
+
+- 0.1.7 
+
+-------------------------------------------------------------------
 Fri Apr  9 11:07:42 UTC 2010 - schubi@novell.com
 
 - new configuration flags: y_max,y_decimal_places (bnc#582611) 
