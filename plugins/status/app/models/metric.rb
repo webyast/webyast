@@ -119,7 +119,11 @@ class Metric
     # if data exists for it, then this is the default
     when host_available?(hostname) then hostname    
     when !hosts.empty? then hosts.first
-    else raise "Can't determine default host to read metric from"
+    else 
+      #checking if collectd is running
+      raise ServiceNotRunning.new('collectd') unless collectd_running?
+      #ok, there is another error
+      raise "Can't determine default host to read metric from"
     end
   end    
   
