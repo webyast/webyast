@@ -18,7 +18,7 @@ Obsoletes:      yast2-webservice-status < %{version}
 License:	GPL v2 only
 Group:          Productivity/Networking/Web/Utilities
 Autoreqprov:    on
-Version:        0.1.7
+Version:        0.1.8
 Release:        0
 Summary:        WebYaST - system status service
 Source:         www.tar.bz2

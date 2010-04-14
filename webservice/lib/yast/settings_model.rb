@@ -16,6 +16,7 @@ module YaST
     end
 
     def self.config_name
+      config
     end
 
     def self.config_name=(name)
