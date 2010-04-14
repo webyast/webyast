@@ -1,0 +1,21 @@
+#
+# common RPM macro definitions used by WebYaST
+#
+
+%webyast_ws_dir /srv/www/yastws
+%webyast_ui_dir /srv/www/yast
+
+%webyast_check \
+    rm -rf $TEST_DB_PATH \
+    RAILS_ENV=test rake db:create \
+    RAILS_ENV=test rake db:schema:load \
+    ADD_BUILD_PATH=1 rake test
+
+%webyast_ws_check \
+    export RAILS_PARENT=%{webyast_ws_dir} \
+    %webyast_check
+
+%webyast_ui_check \
+    export RAILS_PARENT=%{webyast_ui_dir} \
+    %webyast_check
+
