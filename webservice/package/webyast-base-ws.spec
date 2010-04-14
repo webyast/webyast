@@ -39,7 +39,7 @@ PreReq:         rubygem-rpam, rubygem-polkit
 License:	LGPL v2.1 only
 Group:          Productivity/Networking/Web/Utilities
 Autoreqprov:    on
-Version:        0.1.11
+Version:        0.1.12
 Release:        0
 Summary:        WebYaST - base components for rest service
 Source:         www.tar.bz2
