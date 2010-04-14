@@ -7,9 +7,8 @@ class VendorSettingsController < ApplicationController
     begin
       settings = VendorSetting.find(:all)
     rescue YaST::ConfigFile::NotFoundError
+      logger.info "vendor settings not found"
       render :nothing => true, :status => 404 and return
-    rescue Exception => e
-      render :nothing => true, :status => 500 and return
     end
     respond_to do |format|
       format.xml { render :xml => settings.to_xml }
@@ -25,9 +24,8 @@ class VendorSettingsController < ApplicationController
         render :nothing => true, :status => 404 and return
       end
     rescue YaST::ConfigFile::NotFoundError
+      logger.info "vendor settings not found"
       render :nothing => true, :status => 404 and return
-    rescue Exception => e
-      render :nothing => true, :status => 500 and return
     end
 
     respond_to do |format|

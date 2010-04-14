@@ -1,0 +1,18 @@
+# Custom url that will be displayed on crashes.
+bug_url: http://www.mycompany.com/report_bug
+# Important packages of your appliance, those versions are displayed
+# in the status information
+packages:
+  - mydb-server
+  - mydb-console
+# Important services of your appliances, those may be
+# remarked or hightlighted
+services:
+  - mydb-daemon
+  - syslog
+# Your appliance eula
+eula:
+  This is an evil eula that will
+  make you think twice before
+  clicking it
+
