@@ -27,6 +27,8 @@ Url:            http://en.opensuse.org/YaST/Web
 BuildRoot:      %{_tmppath}/%{name}-%{version}-build
 BuildArch:      noarch
 BuildRequires:  rubygem-yast2-webservice-tasks rubygem-restility
+# the testsuite is run during build
+BuildRequires:	rubygem-test-unit rubygem-mocha
 
 #
 %define pkg_user yastws
@@ -47,16 +49,17 @@ Authors:
 %build
 # build restdoc documentation
 mkdir -p public/system/restdoc
-export RAILS_PARENT=/srv/www/yastws
-env LANG=en rake restdoc
+%webyast_ws_restdoc
 
 # do not package restdoc sources
 rm -rf restdoc
 #do not package generated doc
 rm -rf doc
 
-%install
+%check
+%webyast_ws_check
 
+%install
 #
 # Install all web and frontend parts.
 #
@@ -64,6 +67,8 @@ mkdir -p $RPM_BUILD_ROOT/srv/www/%{pkg_user}/vendor/plugins/%{plugin_name}
 cp -a * $RPM_BUILD_ROOT/srv/www/%{pkg_user}/vendor/plugins/%{plugin_name}
 rm -f $RPM_BUILD_ROOT/srv/www/%{pkg_user}/vendor/plugins/%{plugin_name}/COPYING
 
+# don't package the tests (TODO create a -testsuite subpackage)
+rm -rf $RPM_BUILD_ROOT/srv/www/%{pkg_user}/vendor/plugins/%{plugin_name}/test
 
 %clean
 rm -rf $RPM_BUILD_ROOT

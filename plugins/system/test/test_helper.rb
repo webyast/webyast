@@ -7,6 +7,8 @@ require File.expand_path( File.join("config","environment"), RailsParent.parent 
 ENV["RAILS_ENV"] = "test"
 require 'test_help'
 
+require 'test/override_test_db'
+
 class ActiveSupport::TestCase
   # Transactional fixtures accelerate your tests by wrapping each test method
   # in a transaction that's rolled back on completion.  This ensures that the
