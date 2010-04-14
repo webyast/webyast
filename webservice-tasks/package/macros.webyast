@@ -1,11 +1,16 @@
 #
 # common RPM macro definitions used by WebYaST
 #
+# macros %webyast_ws_* are for webyast-*-ws packages,
+# macros %webyast_ui_* are for webyast-*-ui packages,
+# macros %webyast_ are generic for both webservice and client
+#
 
 %webyast_ws_dir /srv/www/yastws
 %webyast_ui_dir /srv/www/yast
 
 %webyast_check \
+    export TEST_DB_PATH=/tmp/webyast_test.sqlite3
     rm -rf $TEST_DB_PATH \
     RAILS_ENV=test rake db:create \
     RAILS_ENV=test rake db:schema:load \
@@ -18,4 +23,8 @@
 %webyast_ui_check \
     export RAILS_PARENT=%{webyast_ui_dir} \
     %webyast_check
+
+%webyast_ws_restdoc \
+    export RAILS_PARENT=%{webyast_ws_dir} \
+    env LANG=en rake restdoc
 
