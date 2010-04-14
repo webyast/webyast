@@ -19,14 +19,15 @@ Requires:	hal
 License:	GPL v2 only
 Group:          Productivity/Networking/Web/Utilities
 Autoreqprov:    on
-Version:        0.0.8
+Version:        0.1.0
 Release:        0
 Summary:        WebYaST - reboot/shutdown service
 Source:         www.tar.bz2
 Url:            http://en.opensuse.org/YaST/Web
 BuildRoot:      %{_tmppath}/%{name}-%{version}-build
 BuildArch:      noarch
-BuildRequires:  rubygem-yast2-webservice-tasks rubygem-restility
+BuildRequires:  rubygem-webyast-rake-tasks >= 0.1.3
+BuildRequires:	rubygem-restility
 # the testsuite is run during build
 BuildRequires:	rubygem-test-unit rubygem-mocha
 
