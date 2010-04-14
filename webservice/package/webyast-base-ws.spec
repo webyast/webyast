@@ -62,6 +62,8 @@ BuildRequires:  yast2-core, yast2-dbus-server, ruby-dbus, sqlite, dbus-1
 BuildRequires:  PolicyKit, PackageKit, rubygem-sqlite3
 BuildRequires:  rubygem-rails-2_3 >= 2.3.4
 BuildRequires:  ruby-rpam, ruby-polkit
+# the testsuite is run during build
+BuildRequires:	rubygem-test-unit rubygem-mocha
 
 # This is for Hudson (build service) to setup the build env correctly
 %if 0
@@ -96,6 +98,19 @@ Authors:
 %setup -q -n www
 
 %build
+
+%check
+# run the testsuite
+RAILS_ENV=test rake db:migrate
+RAILS_ENV=test rake test
+
+# remove the tests (TODO: move to separate -testsuite subpackage)
+rm -rf $RPM_BUILD_ROOT/srv/www/%{pkg_user}/test/*
+
+# keep only the fixtures and helpers (used by plugin testsuites)
+cp -a test/fixtures $RPM_BUILD_ROOT/srv/www/%{pkg_user}/test
+cp -a test/dbus_stub.rb $RPM_BUILD_ROOT/srv/www/%{pkg_user}/test
+cp -a test/plugin_basic_tests.rb $RPM_BUILD_ROOT/srv/www/%{pkg_user}/test
 
 #---------------------------------------------------------------
 %install
@@ -230,9 +245,7 @@ echo "Database is ready"
 %dir %{_datadir}/yastws
 %dir %attr(-,%{pkg_user},root) /var/lib/yastws
 %dir /srv/www/yastws/db
-%dir /srv/www/yastws/db
 /srv/www/yastws/app
-%dir /srv/www/yastws/db
 /srv/www/yastws/db/migrate
 %ghost /srv/www/yastws/db/schema.rb
 /srv/www/yastws/doc
@@ -240,14 +253,13 @@ echo "Database is ready"
 /srv/www/yastws/public
 /srv/www/yastws/Rakefile
 /srv/www/yastws/script
-#/srv/www/yastws/test
+/srv/www/yastws/test
 %dir /srv/www/yastws/config
 /srv/www/yastws/config/boot.rb
 /srv/www/yastws/config/database.yml
 /srv/www/yastws/config/environments
 /srv/www/yastws/config/initializers
 /srv/www/yastws/config/routes.rb
-/srv/www/yastws/start.sh
 #also users can run granting script, as permissions is handled by policyKit right for granting permissions
 %attr(555,root,root) %config /usr/sbin/grantwebyastrights
 %attr(755,root,root) /srv/www/yastws/start.sh
