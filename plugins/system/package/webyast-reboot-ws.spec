@@ -28,6 +28,7 @@ BuildRoot:      %{_tmppath}/%{name}-%{version}-build
 BuildArch:      noarch
 BuildRequires:  rubygem-webyast-rake-tasks >= 0.1.3
 BuildRequires:	rubygem-restility
+BuildRequires:  webyast-base-ws >= 0.1.12
 # the testsuite is run during build
 BuildRequires:	rubygem-test-unit rubygem-mocha
 
