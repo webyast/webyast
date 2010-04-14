@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Wed Apr 14 18:50:08 UTC 2010 - lslezak@suse.cz
+
+- fixed %webyast_check RPM macro
+- 0.1.4
+
+-------------------------------------------------------------------
 Wed Apr 14 17:45:34 UTC 2010 - lslezak@suse.cz
 
 - added override_test_db_path.rake task for overriding test DB

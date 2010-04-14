@@ -10,7 +10,7 @@
 %webyast_ui_dir /srv/www/yast
 
 %webyast_check \
-    export TEST_DB_PATH=/tmp/webyast_test.sqlite3
+    export TEST_DB_PATH=/tmp/webyast_test.sqlite3 \
     rm -rf $TEST_DB_PATH \
     RAILS_ENV=test rake db:create \
     RAILS_ENV=test rake db:schema:load \
