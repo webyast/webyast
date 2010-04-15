@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Wed Apr 14 18:08:01 UTC 2010 - lslezak@suse.cz
+
+- run the testsuite during RPM build (bnc#594343)
+- 0.1.12
+
+-------------------------------------------------------------------
 Mon Apr 12 13:02:00 UTC 2010 - jreidinger@novell.com
 
 - improve base model serialization - if any object is not array

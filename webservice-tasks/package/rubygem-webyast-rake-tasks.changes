@@ -1,4 +1,18 @@
 -------------------------------------------------------------------
+Wed Apr 14 18:50:08 UTC 2010 - lslezak@suse.cz
+
+- fixed %webyast_check RPM macro
+- 0.1.4
+
+-------------------------------------------------------------------
+Wed Apr 14 17:45:34 UTC 2010 - lslezak@suse.cz
+
+- added override_test_db_path.rake task for overriding test DB
+  path during RPM build (bnc#594343)
+- added WebYaST RPM macros (macros.webyast file) (bnc#537406)
+- 0.1.3
+
+-------------------------------------------------------------------
 Wed Mar 31 13:09:49 UTC 2010 - lslezak@suse.cz
 
 - fixed git_check task - the latest git doesn't accept '-a' option
