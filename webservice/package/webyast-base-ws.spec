@@ -79,6 +79,10 @@ BuildRequires:  rubygem-rcov >= 0.9.3.2
 
 BuildArch:      noarch
 
+%package testsuite
+Requires: webyast-base-ws = %{version}
+Summary:  Testsuite for webyast-base-ws package
+
 #
 %define pkg_user yastws
 %define pkg_home /var/lib/%{pkg_user}
@@ -94,6 +98,9 @@ Authors:
     Bjoern Geuken <bgeuken@suse.de>
     Stefan Schubert <schubi@suse.de>
 
+%description testsuite
+Testsuite for core WebYaST websevice package.
+
 %prep
 %setup -q -n www
 
@@ -103,14 +110,6 @@ Authors:
 # run the testsuite
 RAILS_ENV=test rake db:migrate
 RAILS_ENV=test rake test
-
-# remove the tests (TODO: move to separate -testsuite subpackage)
-rm -rf $RPM_BUILD_ROOT/srv/www/%{pkg_user}/test/*
-
-# keep only the fixtures and helpers (used by plugin testsuites)
-cp -a test/fixtures $RPM_BUILD_ROOT/srv/www/%{pkg_user}/test
-cp -a test/dbus_stub.rb $RPM_BUILD_ROOT/srv/www/%{pkg_user}/test
-cp -a test/plugin_basic_tests.rb $RPM_BUILD_ROOT/srv/www/%{pkg_user}/test
 
 #---------------------------------------------------------------
 %install
@@ -253,7 +252,6 @@ echo "Database is ready"
 /srv/www/yastws/public
 /srv/www/yastws/Rakefile
 /srv/www/yastws/script
-/srv/www/yastws/test
 %dir /srv/www/yastws/config
 /srv/www/yastws/config/boot.rb
 /srv/www/yastws/config/database.yml
@@ -278,6 +276,10 @@ echo "Database is ready"
 %config(noreplace)  %{_sysconfdir}/init.d/%{pkg_user}
 %{_sbindir}/rc%{pkg_user}
 %doc COPYING
+
+%files testsuite
+%defattr(-,root,root)
+/srv/www/yastws/test
 
 #---------------------------------------------------------------
 %changelog
