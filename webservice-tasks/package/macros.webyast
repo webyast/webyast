@@ -14,7 +14,7 @@
     rm -rf $TEST_DB_PATH \
     RAILS_ENV=test rake db:create \
     RAILS_ENV=test rake db:schema:load \
-    ADD_BUILD_PATH=1 rake test
+    RAILS_ENV=test ADD_BUILD_PATH=1 rake test
 
 %webyast_ws_check \
     export RAILS_PARENT=%{webyast_ws_dir} \
