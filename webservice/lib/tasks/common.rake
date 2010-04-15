@@ -5,5 +5,5 @@ begin
   $:.unshift(commondir) if File.directory?( commondir )
   require 'tasks/webservice'
 rescue LoadError => e
-  $stderr.puts "Install rubygem-yast2-webservice-tasks.rpm"
+  $stderr.puts "Install rubygem-webyast-rake-tasks.rpm"
 end
