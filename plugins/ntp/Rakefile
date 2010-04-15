@@ -1,22 +1,5 @@
-# Add your own tasks in files placed in lib/tasks ending in .rake,
-# for example lib/tasks/capistrano.rake, and they will automatically be available to Rake.
-require 'rake'
-require 'rake/testtask'
-require 'rake/rdoctask'
-
 require File.join(File.dirname(__FILE__), 'config', 'rails_parent')
-require(File.join(RailsParent.parent, 'config', 'boot'))
-
-# load the shared rake files from the package itself
-# skip 'deploy_local' task, it's redefined here
-require 'tasks/webservice_tasks'
-WebserviceTasks.loadTasks(:exclude => ["deploy_local.rake"])
-
-# this call also loads WebserviceTasks but the second call is ignored there
-# so this 'require' must be called _after_ WebserviceTasks.loadTasks
-require 'tasks/rails'
-
-require 'fileutils'
+require File.join(RailsParent.parent, 'lib', 'tasks', 'common')
 
 desc "Deploy for development - run db:migrate, create basic dirs and install grantwebyastrights."
 task :deploy_local do |t|

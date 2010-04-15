@@ -10,6 +10,8 @@ unless defined? USER_ROLES_CONFIG
   USER_ROLES_CONFIG = File.join(File.dirname(__FILE__), "..", "fixtures", "yast_user_roles")
 end
 
+TESTING_POLKIT = true
+
 require File.join(File.dirname(__FILE__),"..", "test_helper")
 
 class YastRolesTest < ActiveSupport::TestCase

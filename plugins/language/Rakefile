@@ -1,10 +1,2 @@
-require 'rake'
-require 'rake/testtask'
-require 'rake/rdoctask'
-require 'rake/packagetask'
 require File.join(File.dirname(__FILE__), 'config', 'rails_parent')
-require File.join(RailsParent.parent, 'config', 'boot')
-require 'tasks/rails'
-
-desc 'Default: run unit tests.'
-task :default => :test
+require File.join(RailsParent.parent, 'lib', 'tasks', 'common')
