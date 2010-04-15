@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Mon Apr 12 16:52:50 CEST 2010 - mkudlvasr@novell.com
+
+- changes in package description
+- version 0.0.6
+
+-------------------------------------------------------------------
 Mon Mar 29 13:42:15 CEST 2010 - mvidner@suse.cz
 
 - RPM-Provide WebYaST(org.opensuse.yast.modules.FOO) (bnc#583561)
