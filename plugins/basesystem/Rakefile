@@ -5,9 +5,20 @@ require 'rake/packagetask'
 require File.join(File.dirname(__FILE__), 'config', 'rails_parent')
 require File.join(RailsParent.parent, 'config', 'boot')
 
+# try the local (development) webservice_tasks copy first
+begin
+  require File.join(RailsParent.parent, '..', 'webservice-tasks', 'lib', 'tasks', 'webservice_tasks')
+rescue LoadError
+  begin
+    require 'tasks/webservice_tasks'
+  rescue LoadError
+    $stderr.puts "Install rubygem-webyast-rake-tasks"
+    exit 1
+  end
+end
+
 # load the shared rake files from the package itself
 # skip 'deploy_local' task, it's redefined here
-require 'tasks/webservice_tasks'
 WebserviceTasks.loadTasks(:exclude => ["deploy_local.rake"])
 
 # this call also loads WebserviceTasks but the second call is ignored there
