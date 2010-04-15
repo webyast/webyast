@@ -15,9 +15,6 @@ class SystemControllerTest < ActionController::TestCase
     @model.stubs(:hal_power_management).with(:reboot).returns(true)
     @model.stubs(:hal_power_management).with(:shutdown).returns(true)
 
-    PolKit.stubs(:polkit_check).with('org.freedesktop.hal.power-management.reboot', 'test_user').returns(:yes)
-    PolKit.stubs(:polkit_check).with('org.freedesktop.hal.power-management.shutdown', 'test_user').returns(:yes)
-
   end
   
   test "check 'show' result" do
