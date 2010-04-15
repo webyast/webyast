@@ -36,13 +36,18 @@ class Account < ActiveRecord::Base
 
   # Authenticates a user by their login name and unencrypted password.  Returns the user or nil.
   def self.authenticate(login, passwd)
-     # try rPAM first
-     granted = authpam(login, passwd) rescue false         #much more faster
-     # then chkpwd second
+     granted = false
+     begin
+       # try rPAM first, its fast
+       granted = Rpam.authpam(login, passwd)
+     rescue RuntimeError, SecurityError
+       # only catch authpam() exceptions
+     end
+     # then chkpwd second, slower than pam
      granted = unix2_chkpwd(login, passwd) unless granted  #slowly but need no more additional PAM rights
      return nil unless granted
      # find/create the correspoding account record
-     acc = find_by_login(login)
+     acc = Account.find_by_login(login)
      unless acc
        acc = Account.new
        acc.login = login
