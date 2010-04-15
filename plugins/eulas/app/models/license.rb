@@ -116,7 +116,7 @@ class License
       lang_str = (lang == 'en') ? "" : "."+@langs_hash[lang]
       license_filename = File.join(RESOURCES_DIR, 'licenses', self.name, 'license' + lang_str + ".txt")
       begin 
-        @text = File.open(license_filename).read
+        @text = File.open(license_filename).read.rstrip
         @text_lang = lang
       rescue Errno::ENOENT, Errno::EACCES
         raise CorruptedFileException.new license_filename

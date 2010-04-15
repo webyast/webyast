@@ -28,7 +28,7 @@ BuildRoot:      %{_tmppath}/%{name}-%{version}-build
 BuildArch:      noarch
 BuildRequires:  rubygem-webyast-rake-tasks >= 0.1.3
 BuildRequires:	rubygem-restility
-BuildRequires:  webyast-base-ws >= 0.1.12
+BuildRequires:  webyast-base-ws-testsuite
 # the testsuite is run during build
 BuildRequires:	rubygem-test-unit rubygem-mocha
 
@@ -37,6 +37,10 @@ BuildRequires:	rubygem-test-unit rubygem-mocha
 %define plugin_name system
 #
 
+%package testsuite
+Requires: webyast-reboot-ws = %{version}
+Requires: webyast-base-ws-testsuite
+Summary:  Testsuite for webyast-reboot-ws package
 
 %description
 WebYaST - Plugin providing REST based interface for system reboot/shutdown.
@@ -44,6 +48,9 @@ WebYaST - Plugin providing REST based interface for system reboot/shutdown.
 Authors:
 --------
     Ladislav Slezak <lslezak@novell.com>
+
+%description testsuite
+Testsuite for webyast-reboot-ws webservice package.
 
 %prep
 %setup -q -n www
@@ -68,9 +75,6 @@ rm -rf doc
 mkdir -p $RPM_BUILD_ROOT/srv/www/%{pkg_user}/vendor/plugins/%{plugin_name}
 cp -a * $RPM_BUILD_ROOT/srv/www/%{pkg_user}/vendor/plugins/%{plugin_name}
 rm -f $RPM_BUILD_ROOT/srv/www/%{pkg_user}/vendor/plugins/%{plugin_name}/COPYING
-
-# don't package the tests (TODO create a -testsuite subpackage)
-rm -rf $RPM_BUILD_ROOT/srv/www/%{pkg_user}/vendor/plugins/%{plugin_name}/test
 
 %clean
 rm -rf $RPM_BUILD_ROOT
@@ -115,5 +119,9 @@ fi
 /srv/www/%{pkg_user}/vendor/plugins/%{plugin_name}/config
 /srv/www/%{pkg_user}/vendor/plugins/%{plugin_name}/public
 %doc COPYING
+
+%files testsuite
+%defattr(-,root,root)
+%{webyast_ws_dir}/vendor/plugins/%{plugin_name}/test
 
 %changelog

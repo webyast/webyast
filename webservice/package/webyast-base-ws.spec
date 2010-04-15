@@ -99,7 +99,7 @@ Authors:
     Stefan Schubert <schubi@suse.de>
 
 %description testsuite
-Testsuite for core WebYaST websevice package.
+Testsuite for core WebYaST webservice package.
 
 %prep
 %setup -q -n www
