@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Fri Apr 16 12:04:36 UTC 2010 - schubi@novell.com
+
+- Stubbing reading configuration file in the testcase
+- 0.1.9 
+
+-------------------------------------------------------------------
 Fri Apr 16 09:33:30 UTC 2010 - schubi@novell.com
 
 - showing CPU in line graph (bnc#585738)
