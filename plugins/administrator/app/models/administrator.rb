@@ -36,6 +36,7 @@ class Administrator
     }
     yapi_ret = YastService.Call("YaPI::ADMINISTRATOR::Write", parameters)
     Rails.logger.debug "YaPI returns: '#{yapi_ret}'"
+    return true
   end
 
   # Changes the list of administrator's mail aliases.

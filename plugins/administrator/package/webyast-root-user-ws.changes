@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Fri Apr 16 14:47:29 CEST 2010 - jsuchome@suse.cz
+
+- fixed testsuite (save_password always returns true)
+- 0.1.2 
+
+-------------------------------------------------------------------
 Mon Apr 12 10:15:12 CEST 2010 - jsuchome@suse.cz
 
 - update summary and description of packages (bnc#588355)
