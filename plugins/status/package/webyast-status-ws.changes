@@ -1,4 +1,9 @@
 -------------------------------------------------------------------
+Fri Apr 16 09:33:30 UTC 2010 - schubi@novell.com
+
+- showing CPU in line graph (bnc#585738)
+
+-------------------------------------------------------------------
 Tue Apr 13 14:43:19 UTC 2010 - schubi@novell.com
 
 - Checking if collectd is already running (bnc#595665)
