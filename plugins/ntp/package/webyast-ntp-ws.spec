@@ -32,11 +32,18 @@ BuildRoot:      %{_tmppath}/%{name}-%{version}-build
 BuildArch:      noarch
 BuildRequires:  rubygem-yast2-webservice-tasks rubygem-restility
 
+BuildRequires:  webyast-base-ws-testsuite
+BuildRequires:	rubygem-test-unit rubygem-mocha
+
 #
 %define pkg_user yastws
 %define plugin_name ntp
 #
 
+%package testsuite
+Requires: %{name} = %{version}
+Requires: webyast-base-ws-testsuite
+Summary:  Testsuite for webyast-ntp-ws package
 
 %description
 WebYaST - Plugin providing REST based interface to basic ntp time synchronization
@@ -45,19 +52,27 @@ Authors:
 --------
     Josef Reidinger <jreidinger@novell.com>
 
+%description testsuite
+This package contains complete testsuite for webyast-ntp-ws webservice package.
+It's only needed for verifying the functionality of the module and it's not
+needed at runtime.
+
 %prep
 %setup -q -n www
 
 %build
 # build restdoc documentation
 mkdir -p public/ntp/restdoc
-export RAILS_PARENT=/srv/www/yastws
-env LANG=en rake restdoc
+%webyast_ws_restdoc
 
 # do not package restdoc sources
 rm -rf restdoc
 #do not package development documentation
 rm -rf doc
+
+%check
+# run the testsuite
+%webyast_ws_check
 
 %install
 
@@ -104,3 +119,8 @@ rm -rf $RPM_BUILD_ROOT
 /usr/share/PolicyKit/policy/org.opensuse.yast.modules.yapi.ntp.policy
 %doc COPYING
 
+%files testsuite
+%defattr(-,root,root)
+%{webyast_ws_dir}/vendor/plugins/%{plugin_name}/test
+
+%changelog

@@ -34,11 +34,18 @@ Requires:	yast2-ruby-bindings >= 0.3.2.1
 
 BuildRequires:  rubygem-yast2-webservice-tasks rubygem-restility
 
+BuildRequires:  webyast-base-ws-testsuite
+BuildRequires:	rubygem-test-unit rubygem-mocha
+
 #
 %define pkg_user yastws
 %define plugin_name status
 #
 
+%package testsuite
+Requires: %{name} = %{version}
+Requires: webyast-base-ws-testsuite
+Summary:  Testsuite for webyast-status-ws package
 
 %description
 WebYaST - Plugin providing REST based interface to provide information about system status.
@@ -49,6 +56,11 @@ Authors:
     Duncan Mac-Vicar Prett <dmacvicar@suse.de>
     Stefan Schubert <schubi@suse.de>
 
+%description testsuite
+This package contains complete testsuite for webyast-status-ws webservice package.
+It's only needed for verifying the functionality of the module and it's not
+needed at runtime.
+
 %prep
 %setup -q -n www
 
@@ -57,11 +69,14 @@ Authors:
 # create the output directory for the generated documentation
  mkdir -p public/%{plugin_name}/restdoc
  # build restdoc documentation
- export RAILS_PARENT=/srv/www/%{pkg_user}
- env LANG=en rake restdoc
-
+%webyast_ws_restdoc
+ 
  # do not package restdoc sources
  rm -rf restdoc
+
+%check
+# run the testsuite
+%webyast_ws_check
 
 %install
 
@@ -137,5 +152,9 @@ rccollectd try-restart
 %dir /etc/webyast/vendor
 /etc/webyast/vendor/logs.yml
 %doc COPYING
+
+%files testsuite
+%defattr(-,root,root)
+%{webyast_ws_dir}/vendor/plugins/%{plugin_name}/test
 
 %changelog

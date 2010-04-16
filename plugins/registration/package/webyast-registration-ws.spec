@@ -24,8 +24,10 @@ Summary:        WebYaST - Registration service
 Source:         www.tar.bz2
 BuildRoot:      %{_tmppath}/%{name}-%{version}-build
 BuildArch:      noarch
-BuildRequires:  rubygem-mocha
 Recommends:     openssl-certs
+
+BuildRequires:  webyast-base-ws-testsuite
+BuildRequires:	rubygem-test-unit rubygem-mocha
 
 # YaST2/modules/YSR.pm  
 %if 0%{?suse_version} == 0 || %suse_version > 1110  
@@ -41,6 +43,10 @@ Requires:       yast2-registration > 2.17.27
 %define plugin_name registration
 #
 
+%package testsuite
+Requires: %{name} = %{version}
+Requires: webyast-base-ws-testsuite
+Summary:  Testsuite for webyast-registration-ws package
 
 %description
 WebYaST - Plugin providing REST based interface for the system registration at NCC, SMT or SLMS
@@ -50,10 +56,19 @@ Authors:
     J. Daniel Schmidt <jdsn@novell.com>
     Stefan Schubert <schubi@novell.com>
 
+%description testsuite
+This package contains complete testsuite for webyast-registration-ws webservice package.
+It's only needed for verifying the functionality of the module and it's not
+needed at runtime.
+
 %prep
 %setup -q -n www
 
 %build
+
+%check
+# run the testsuite
+%webyast_ws_check
 
 %install
 
@@ -89,7 +104,11 @@ rm -rf $RPM_BUILD_ROOT
 /srv/www/%{pkg_user}/vendor/plugins/%{plugin_name}/app
 /srv/www/%{pkg_user}/vendor/plugins/%{plugin_name}/config
 /srv/www/%{pkg_user}/vendor/plugins/%{plugin_name}/tasks
-#/srv/www/%{pkg_user}/vendor/plugins/%{plugin_name}/test
 /srv/www/%{pkg_user}/vendor/plugins/%{plugin_name}/doc/README_FOR_APP
 %doc COPYING
 
+%files testsuite
+%defattr(-,root,root)
+%{webyast_ws_dir}/vendor/plugins/%{plugin_name}/test
+
+%changelog

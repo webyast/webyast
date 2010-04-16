@@ -21,15 +21,21 @@ Summary:        WebYaST - role management service
 Source:         www.tar.bz2
 BuildRoot:      %{_tmppath}/%{name}-%{version}-build
 BuildArch:      noarch
-BuildRequires:  rubygem-mocha
 Source1:        roles.yml
 Source2:        roles_assign.yml
+
+BuildRequires:  webyast-base-ws-testsuite
+BuildRequires:	rubygem-test-unit rubygem-mocha
 
 #
 %define pkg_user yastws
 %define plugin_name roles
 #
 
+%package testsuite
+Requires: %{name} = %{version}
+Requires: webyast-base-ws-testsuite
+Summary:  Testsuite for webyast-roles-ws package
 
 %description
 WebYaST - Plugin providing REST based interface for roles management.
@@ -38,10 +44,19 @@ Authors:
 --------
     Josef Reidinger <jreidinger@suse.cz>
 
+%description testsuite
+This package contains complete testsuite for webyast-roles-ws webservice package.
+It's only needed for verifying the functionality of the module and it's not
+needed at runtime.
+
 %prep
 %setup -q -n www
 
 %build
+
+%check
+# run the testsuite
+%webyast_ws_check
 
 %install
 
@@ -88,3 +103,9 @@ rm -rf $RPM_BUILD_ROOT
 %config /var/lib/yastws/roles
 
 %doc COPYING
+
+%files testsuite
+%defattr(-,root,root)
+%{webyast_ws_dir}/vendor/plugins/%{plugin_name}/test
+
+%changelog

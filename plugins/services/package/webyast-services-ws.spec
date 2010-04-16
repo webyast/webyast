@@ -29,6 +29,9 @@ BuildRoot:      %{_tmppath}/%{name}-%{version}-build
 BuildArch:      noarch
 BuildRequires:  rubygem-yast2-webservice-tasks rubygem-restility
 
+BuildRequires:  webyast-base-ws-testsuite
+BuildRequires:	rubygem-test-unit rubygem-mocha
+
 # so SERVICES.pm is able to call YML.rb
 Requires:       yast2-ruby-bindings >= 0.3.2.1
 # for SERVICES.pm
@@ -39,6 +42,10 @@ Requires:	yast2-runlevel
 %define plugin_name services
 #
 
+%package testsuite
+Requires: %{name} = %{version}
+Requires: webyast-base-ws-testsuite
+Summary:  Testsuite for webyast-services-ws package
 
 %description
 WebYaST - Plugin providing REST based interface to handle system services.
@@ -48,6 +55,11 @@ Authors:
     Jiri Suchomel <jsuchome@suse.cz>
     Ladislav Slezak <lslezak@suse.cz>
 
+%description testsuite
+This package contains complete testsuite for webyast-services-ws webservice package.
+It's only needed for verifying the functionality of the module and it's not
+needed at runtime.
+
 %prep
 %setup -q -n www
 
@@ -55,11 +67,14 @@ Authors:
 
 # build restdoc documentation
 mkdir -p public/services/restdoc
-export RAILS_PARENT=/srv/www/yastws
-env LANG=en rake restdoc
+%webyast_ws_restdoc
 
 # do not package restdoc sources
 rm -rf restdoc
+
+%check
+# run the testsuite
+%webyast_ws_check
 
 %install
 
@@ -127,3 +142,8 @@ rm -rf $RPM_BUILD_ROOT
 %attr(644,root,root) %config /usr/share/PolicyKit/policy/org.opensuse.yast.modules.yapi.%{plugin_name}.policy
 %doc COPYING
 
+%files testsuite
+%defattr(-,root,root)
+%{webyast_ws_dir}/vendor/plugins/%{plugin_name}/test
+
+%changelog

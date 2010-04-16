@@ -24,13 +24,19 @@ Source:         www.tar.bz2
 Source1:        eulas-sles11.yml
 BuildRoot:      %{_tmppath}/%{name}-%{version}-build
 BuildArch:      noarch
-BuildRequires:  rubygem-mocha
+
+BuildRequires:  webyast-base-ws-testsuite
+BuildRequires:	rubygem-test-unit rubygem-mocha
 
 #
 %define pkg_user yastws
 %define plugin_name eulas
 #
 
+%package testsuite
+Requires: %{name} = %{version}
+Requires: webyast-base-ws-testsuite
+Summary:  Testsuite for webyast-licenses-ws package
 
 %description
 WebYaST - Plugin providing REST based interface to handle user acceptation of EULAs.
@@ -40,10 +46,19 @@ Authors:
     Martin Kudlvasr <mkudlvasr@suse.cz>
     Josef Reidinger <jreidinger@suse.cz>
 
+%description testsuite
+This package contains complete testsuite for webyast-licenses-ws webservice package.
+It's only needed for verifying the functionality of the module and it's not
+needed at runtime.
+
 %prep
 %setup -q -n www
 
 %build
+
+%check
+# run the testsuite
+%webyast_ws_check
 
 %install
 
@@ -87,7 +102,6 @@ rm -rf $RPM_BUILD_ROOT
 /srv/www/%{pkg_user}/vendor/plugins/%{plugin_name}/app
 /srv/www/%{pkg_user}/vendor/plugins/%{plugin_name}/config
 #/srv/www/%{pkg_user}/vendor/plugins/%{plugin_name}/tasks
-#/srv/www/%{pkg_user}/vendor/plugins/%{plugin_name}/test
 /srv/www/%{pkg_user}/vendor/plugins/%{plugin_name}/doc/README_FOR_APP
 /srv/www/%{pkg_user}/vendor/plugins/%{plugin_name}/doc/eulas_example.yml
 /usr/share/%{pkg_user}/%{plugin_name}/licenses
@@ -97,3 +111,8 @@ rm -rf $RPM_BUILD_ROOT
 %dir /var/lib/%{pkg_user}/%{plugin_name}/accepted-licenses
 %doc COPYING
 
+%files testsuite
+%defattr(-,root,root)
+%{webyast_ws_dir}/vendor/plugins/%{plugin_name}/test
+
+%changelog

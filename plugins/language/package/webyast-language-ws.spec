@@ -25,6 +25,9 @@ BuildRoot:      %{_tmppath}/%{name}-%{version}-build
 BuildArch:      noarch
 BuildRequires:  rubygem-yast2-webservice-tasks rubygem-restility
 
+BuildRequires:  webyast-base-ws-testsuite
+BuildRequires:	rubygem-test-unit rubygem-mocha
+
 # YaPI/LANGUAGE.pm
 %if 0%{?suse_version} == 0 || %suse_version > 1110
 # 11.2 or newer
@@ -40,6 +43,10 @@ PreReq:       yast2-country >= 2.17.34.1
 %define plugin_name language
 #
 
+%package testsuite
+Requires: %{name} = %{version}
+Requires: webyast-base-ws-testsuite
+Summary:  Testsuite for webyast-language-ws package
 
 %description
 YaST2 - Webservice - REST based interface of YaST in order to handle language settings.
@@ -48,17 +55,25 @@ Authors:
     Stefan Schubert <schubi@opensuse.org>
     Josef Reidinger <jreidinger@suse.cz>
 
+%description testsuite
+This package contains complete testsuite for webyast-language-ws webservice package.
+It's only needed for verifying the functionality of the module and it's not
+needed at runtime.
+
 %prep
 %setup -q -n www
 
 %build
 # build restdoc documentation
 mkdir -p public/language/restdoc
-export RAILS_PARENT=/srv/www/yastws
-env LANG=en rake restdoc
+%webyast_ws_restdoc
 
 # do not package restdoc sources
 rm -rf restdoc
+
+%check
+# run the testsuite
+%webyast_ws_check
 
 %install
 
@@ -95,8 +110,12 @@ rm -rf $RPM_BUILD_ROOT
 /srv/www/%{pkg_user}/vendor/plugins/%{plugin_name}/config
 /srv/www/%{pkg_user}/vendor/plugins/%{plugin_name}/tasks
 /srv/www/%{pkg_user}/vendor/plugins/%{plugin_name}/public
-#/srv/www/%{pkg_user}/vendor/plugins/%{plugin_name}/test
 /srv/www/yastws/vendor/plugins/language/doc/README_FOR_APP
 %doc COPYING
 
 
+%files testsuite
+%defattr(-,root,root)
+%{webyast_ws_dir}/vendor/plugins/%{plugin_name}/test
+
+%changelog

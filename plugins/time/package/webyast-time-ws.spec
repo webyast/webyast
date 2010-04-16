@@ -23,7 +23,6 @@ Summary:        WebYaST - time management
 Source:         www.tar.bz2
 BuildRoot:      %{_tmppath}/%{name}-%{version}-build
 BuildArch:      noarch
-BuildRequires:  rubygem-mocha
 
 # YaPI/TIME.pm
 %if 0%{?suse_version} == 0 || %suse_version > 1110
@@ -34,11 +33,18 @@ Requires:       yast2-country >= 2.18.10
 Requires:       yast2-country >= 2.17.34.2
 %endif
 
+BuildRequires:  webyast-base-ws-testsuite
+BuildRequires:	rubygem-test-unit rubygem-mocha
+
 #
 %define pkg_user yastws
 %define plugin_name time
 #
 
+%package testsuite
+Requires: %{name} = %{version}
+Requires: webyast-base-ws-testsuite
+Summary:  Testsuite for webyast-time-ws package
 
 %description
 WebYaST - Plugin providing REST based interface to handle time zone, system time and date.
@@ -48,10 +54,19 @@ Authors:
     Stefan Schubert <schubi@opensuse.org>
     Josef Reidinger <jreidinger@suse.cz>
 
+%description testsuite
+This package contains complete testsuite for webyast-time-ws webservice package.
+It's only needed for verifying the functionality of the module and it's not
+needed at runtime.
+
 %prep
 %setup -q -n www
 
 %build
+
+%check
+# run the testsuite
+%webyast_ws_check
 
 %install
 
@@ -95,3 +110,8 @@ rm -rf $RPM_BUILD_ROOT
 /srv/www/%{pkg_user}/vendor/plugins/%{plugin_name}/doc/README_FOR_APP
 %doc COPYING
 
+%files testsuite
+%defattr(-,root,root)
+%{webyast_ws_dir}/vendor/plugins/%{plugin_name}/test
+
+%changelog

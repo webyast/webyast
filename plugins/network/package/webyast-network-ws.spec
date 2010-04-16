@@ -35,17 +35,29 @@ Requires:       yast2-network >= 2.18.51
 Requires:       yast2-network >= 2.17.78.1
 %endif
 
+BuildRequires:  webyast-base-ws-testsuite
+BuildRequires:	rubygem-test-unit rubygem-mocha
+
 #
 %define pkg_user yastws
 %define plugin_name network
 #
 
+%package testsuite
+Requires: %{name} = %{version}
+Requires: webyast-base-ws-testsuite
+Summary:  Testsuite for webyast-network-ws package
 
 %description
 WebYaST - Plugin providing REST based interface for network configuration.
 Authors:
 --------
     Michael Zugec <mzugec@suse.cz>
+
+%description testsuite
+This package contains complete testsuite for webyast-network-ws webservice package.
+It's only needed for verifying the functionality of the module and it's not
+needed at runtime.
 
 %prep
 %setup -q -n www
@@ -54,11 +66,14 @@ Authors:
 %build
 # build restdoc documentation
 mkdir -p public/network/restdoc
-export RAILS_PARENT=/srv/www/yastws
-env LANG=en rake restdoc
+%webyast_ws_restdoc
 
 # do not package restdoc sources
 rm -rf restdoc
+
+%check
+# run the testsuite
+%webyast_ws_check
 
 %install
 
@@ -95,3 +110,9 @@ rm -rf $RPM_BUILD_ROOT
 %dir /usr/share/PolicyKit/policy
 %attr(644,root,root) %config /usr/share/PolicyKit/policy/org.opensuse.yast.modules.yapi.%{plugin_name}.policy
 %doc COPYING
+
+%files testsuite
+%defattr(-,root,root)
+%{webyast_ws_dir}/vendor/plugins/%{plugin_name}/test
+
+%changelog

@@ -49,11 +49,18 @@ Source3:        org.opensuse.yast.system.repositories.policy
 BuildRoot:      %{_tmppath}/%{name}-%{version}-build
 BuildArch:      noarch
 
+BuildRequires:  webyast-base-ws-testsuite
+BuildRequires:	rubygem-test-unit rubygem-mocha
+
 #
 %define pkg_user yastws
 %define plugin_name software
 #
 
+%package testsuite
+Requires: %{name} = %{version}
+Requires: webyast-base-ws-testsuite
+Summary:  Testsuite for webyast-software-ws package
 
 %description
 WebYaST - Plugin providing REST based interface to handle repositories, patches and packages.
@@ -62,6 +69,11 @@ Authors:
 --------
     Stefan Schubert <schubi@opensuse.org>
 
+%description testsuite
+This package contains complete testsuite for webyast-software-ws package.
+It's only needed for verifying the functionality of the module and it's not
+needed at runtime.
+
 %prep
 %setup -q -n www
 
@@ -69,6 +81,10 @@ Authors:
 
 #do not package developer doc
 rm -rf doc
+
+%check
+# run the testsuite
+%webyast_ws_check
 
 %install
 
@@ -120,5 +136,9 @@ polkit-auth --user %{pkg_user} --grant org.freedesktop.packagekit.system-sources
 %attr(644,root,root) %config /usr/share/PolicyKit/policy/org.opensuse.yast.system.packages.policy
 %attr(644,root,root) %config /usr/share/PolicyKit/policy/org.opensuse.yast.system.repositories.policy
 %doc COPYING
+
+%files testsuite
+%defattr(-,root,root)
+%{webyast_ws_dir}/vendor/plugins/%{plugin_name}/test
 
 %changelog

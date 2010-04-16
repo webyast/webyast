@@ -26,11 +26,18 @@ Source1:        org.opensuse.yast.modules.yapi.users.policy
 BuildRoot:      %{_tmppath}/%{name}-%{version}-build
 BuildArch:      noarch
 
+BuildRequires:  webyast-base-ws-testsuite
+BuildRequires:	rubygem-test-unit rubygem-mocha
+
 #
 %define pkg_user yastws
 %define plugin_name users
 #
 
+%package testsuite
+Requires: %{name} = %{version}
+Requires: webyast-base-ws-testsuite
+Summary:  Testsuite for webyast-users-ws package
 
 %description
 WebYaST - Plugin providing REST based interface to handle users settings.
@@ -39,12 +46,21 @@ Authors:
 --------
     Stefan Schubert <schubi@opensuse.org>
 
+%description testsuite
+This package contains complete testsuite for webyast-users-ws webservice package.
+It's only needed for verifying the functionality of the module and it's not
+needed at runtime.
+
 %prep
 %setup -q -n www
 
 %build
 #do not package generated doc
 rm -rf doc
+
+%check
+# run the testsuite
+%webyast_ws_check
 
 %install
 
@@ -82,3 +98,8 @@ rm -rf $RPM_BUILD_ROOT
 %attr(644,root,root) %config /usr/share/PolicyKit/policy/org.opensuse.yast.modules.yapi.users.policy
 %doc COPYING
 
+%files testsuite
+%defattr(-,root,root)
+%{webyast_ws_dir}/vendor/plugins/%{plugin_name}/test
+
+%changelog

@@ -25,17 +25,29 @@ BuildRequires:  rubygem-yast2-webservice-tasks rubygem-restility
 PreReq:         webyast-base-ws
 Requires:       SuSEfirewall2 yast2
 
+BuildRequires:  webyast-base-ws-testsuite
+BuildRequires:	rubygem-test-unit rubygem-mocha
+
 #
 %define pkg_user yastws
 %define plugin_name firewall
 #
 
+%package testsuite
+Requires: %{name} = %{version}
+Requires: webyast-base-ws-testsuite
+Summary:  Testsuite for webyast-firewall-ws package
 
 %description
 WebYaST - Plugin provides REST based interface to handle firewall settings.
 Authors:
 --------
     Martin Kudlvasr<mkudlvasr@novell.com>
+
+%description testsuite
+This package contains complete testsuite for webyast-firewall-ws webservice package.
+It's only needed for verifying the functionality of the module and it's not
+needed at runtime.
 
 %prep
 %setup -q -n www
@@ -44,6 +56,10 @@ Authors:
 
 #remove generated doc
 rm -rf doc
+
+%check
+# run the testsuite
+%webyast_ws_check
 
 %install
 
@@ -91,7 +107,12 @@ rm -rf $RPM_BUILD_ROOT
 /srv/www/%{pkg_user}/vendor/plugins/%{plugin_name}/app
 /srv/www/%{pkg_user}/vendor/plugins/%{plugin_name}/config
 /srv/www/%{pkg_user}/vendor/plugins/%{plugin_name}/tasks
-#/srv/www/%{pkg_user}/vendor/plugins/%{plugin_name}/test
 /usr/share/YaST2/modules/YaPI/FIREWALL.pm
 %attr(644,root,root) %config /usr/share/PolicyKit/policy/org.opensuse.yast.modules.yapi.%{plugin_name}.policy
 %doc COPYING
+
+%files testsuite
+%defattr(-,root,root)
+%{webyast_ws_dir}/vendor/plugins/%{plugin_name}/test
+
+%changelog

@@ -26,6 +26,9 @@ BuildRoot:      %{_tmppath}/%{name}-%{version}-build
 BuildArch:      noarch
 BuildRequires:  rubygem-yast2-webservice-tasks rubygem-restility
 
+BuildRequires:  webyast-base-ws-testsuite
+BuildRequires:	rubygem-test-unit rubygem-mocha
+
 # requires YaPI::USERS
 %if 0%{?suse_version} == 0 || %suse_version > 1110
 # 11.2 or newer
@@ -40,6 +43,10 @@ Requires:       yast2-users >= 2.17.28.1
 %define plugin_name administrator
 #
 
+%package testsuite
+Requires: %{name} = %{version}
+Requires: webyast-base-ws-testsuite
+Summary:  Testsuite for webyast-root-user-ws package
 
 %description
 WebYaST - Plugin providing REST service for configuration of root user account
@@ -48,17 +55,25 @@ Authors:
 --------
     Jiri Suchomel <jsuchome@novell.com>
 
+%description testsuite
+This package contains complete testsuite for webyast-root-ws webservice package.
+It's only needed for verifying the functionality of the module and it's not
+needed at runtime.
+
 %prep
 %setup -q -n www
 
 %build
 # build restdoc documentation
 mkdir -p public/administrator/restdoc
-export RAILS_PARENT=/srv/www/yastws
-env LANG=en rake restdoc
+%webyast_ws_restdoc
 
 # do not package restdoc sources
 rm -rf restdoc
+
+%check
+# run the testsuite
+%webyast_ws_check
 
 %install
 
@@ -103,5 +118,8 @@ rm -rf $RPM_BUILD_ROOT
 %attr(644,root,root) %config /usr/share/PolicyKit/policy/org.opensuse.yast.modules.yapi.%{plugin_name}.policy
 %doc COPYING
 
+%files testsuite
+%defattr(-,root,root)
+%{webyast_ws_dir}/vendor/plugins/%{plugin_name}/test
 
 %changelog

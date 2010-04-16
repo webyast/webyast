@@ -28,6 +28,9 @@ BuildRoot:      %{_tmppath}/%{name}-%{version}-build
 BuildArch:      noarch
 BuildRequires:  rubygem-yast2-webservice-tasks rubygem-restility
 
+BuildRequires:  webyast-base-ws-testsuite
+BuildRequires:	rubygem-test-unit rubygem-mocha
+
 # install these packages into Hudson chroot environment
 # the exact versions are checked in checks.rake task
 %if 0
@@ -50,6 +53,10 @@ Requires:       yast2-mail >= 2.17.5
 %define plugin_name mail
 #
 
+%package testsuite
+Requires: %{name} = %{version}
+Requires: webyast-base-ws-testsuite
+Summary:  Testsuite for webyast-mail-ws package
 
 %description
 WebYaST - Plugin provides REST based interface to system mail settings.
@@ -59,17 +66,25 @@ Authors:
 --------
     Jiri Suchomel <jsuchome@novell.com>
 
+%description testsuite
+This package contains complete testsuite for webyast-mail-ws webservice package.
+It's only needed for verifying the functionality of the module and it's not
+needed at runtime.
+
 %prep
 %setup -q -n www
 
 %build
 # build restdoc documentation
 mkdir -p public/mail/restdoc
-export RAILS_PARENT=/srv/www/yastws
-env LANG=en rake restdoc
+%webyast_ws_restdoc
 
 # do not package restdoc sources
 rm -rf restdoc
+
+%check
+# run the testsuite
+%webyast_ws_check
 
 %install
 
@@ -130,5 +145,9 @@ rm -rf $RPM_BUILD_ROOT
 %dir /usr/share/PolicyKit/policy
 %attr(644,root,root) %config /usr/share/PolicyKit/policy/org.opensuse.yast.modules.yapi.mailsettings.policy
 %doc COPYING
+
+%files testsuite
+%defattr(-,root,root)
+%{webyast_ws_dir}/vendor/plugins/%{plugin_name}/test
 
 %changelog

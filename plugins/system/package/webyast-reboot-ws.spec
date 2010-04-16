@@ -38,7 +38,7 @@ BuildRequires:	rubygem-test-unit rubygem-mocha
 #
 
 %package testsuite
-Requires: webyast-reboot-ws = %{version}
+Requires: %{name} = %{version}
 Requires: webyast-base-ws-testsuite
 Summary:  Testsuite for webyast-reboot-ws package
 
