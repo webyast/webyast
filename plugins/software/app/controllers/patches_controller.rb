@@ -74,7 +74,7 @@ class PatchesController < ApplicationController
   def update
     permission_check "org.opensuse.yast.system.patches.install"
     @patch_update = Patch.find(params[:id])
-    if @patch_update.nil?
+    if @patch_update.blank?
       logger.error "Patch: #{params[:id]} not found."
       render ErrorResult.error(404, 1, "Patch: #{params[:id]} not found.") and return
     end
@@ -88,7 +88,7 @@ class PatchesController < ApplicationController
   def create
     permission_check "org.opensuse.yast.system.patches.install"
     @patch_update = Patch.find(params[:patches][:resolvable_id].to_s)
-    if @patch_update.nil?
+    if @patch_update.blank?
       logger.error "Patch: #{params[:patches][:resolvable_id]} not found."
       render ErrorResult.error(404, 1, "Patch: #{params[:patches][:resolvable_id]} not found.") and return
     end
