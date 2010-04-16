@@ -26,12 +26,16 @@ end
 
 class MetricTest < ActiveSupport::TestCase
 
+  PARSE_CONFIG_1 ={"Network"=>{"y_scale"=>1, "y_label"=>"MByte", "single_graphs"=>[{"lines"=>[{"label"=>"received", "limits"=>{"max"=>"0", "min"=>"0"}, "metric_column"=>"rx", "metric_id"=>"interface+if_packets-eth0"}, {"label"=>"sent", "limits"=>{"max"=>"0", "min"=>"0"}, "metric_column"=>"tx", "metric_id"=>"interface+if_packets-eth0"}], "headline"=>"Network", "cummulated"=>"false", "linegraph"=>"false"}]}, "CPU"=>{"y_scale"=>1, "y_label"=>"Percent", "single_graphs"=>[{"lines"=>[{"label"=>"Idle", "limits"=>{"max"=>"0", "min"=>"0"}, "metric_id"=>"cpu-0+cpu-idle"}, {"label"=>"Used", "limits"=>{"max"=>"10", "min"=>"0"}, "metric_id"=>"cpu-0+cpu-user"}], "headline"=>"CPU", "cummulated"=>"false", "linegraph"=>"false"}]}, "Disk"=>{"y_scale"=>1073741824, "y_label"=>"GByte", "single_graphs"=>[{"lines"=>[{"label"=>"used", "limits"=>{"max"=>"0", "min"=>"0"}, "metric_column"=>"used", "metric_id"=>"df+df-root"}, {"label"=>"free", "limits"=>{"max"=>"0", "min"=>"0"}, "metric_column"=>"free", "metric_id"=>"df+df-root"}], "headline"=>"root", "cummulated"=>"true", "linegraph"=>"false"}]}, "Memory"=>{"y_scale"=>1048567, "y_label"=>"MByte", "single_graphs"=>[{"lines"=>[{"label"=>"Used", "limits"=>{"max"=>"0", "min"=>"0"}, "metric_id"=>"memory+memory-used"}, {"label"=>"Free", "limits"=>{"max"=>"0", "min"=>"0"}, "metric_id"=>"memory+memory-free"}, {"label"=>"Cached", "limits"=>{"max"=>"0", "min"=>"0"}, "metric_id"=>"memory+memory-cached"}], "headline"=>"Memory", "cummulated"=>"true", "linegraph"=>"false"}]}}
+
+
   def setup
     # standard setup
     Metric.stubs(:this_hostname).returns('myhost.domain.de')
     Metric.stubs(:available_hosts).returns(['foo.com', 'myhost.domain.de'])
     Metric.stubs(:rrd_files).returns(['/var/lib/collectd/foo.com/cpu-0/cppudata-1.rrd', '/var/lib/collectd/myhost.domain.de/memory/memory-free.rrd', '/var/lib/collectd/myhost.domain.de/cpu-1/cpudata-1.rrd', '/var/lib/collectd/myhost.domain.de/cpu-1/cpudata-2.rrd', '/var/lib/collectd/myhost.domain.de/cpu-2/cpudata-1.rrd', '/var/lib/collectd/myhost.domain.de/interface/packets.rrd', '/var/lib/collectd/myhost.domain.de/interface/some-0.rrd'])
     Metric.stubs(:collectd_runnning?).returns(true)
+    Graph.stubs(:parse_config).returns(PARSE_CONFIG_1)
   end
 
   def teardown
