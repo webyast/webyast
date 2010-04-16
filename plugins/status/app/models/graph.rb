@@ -163,7 +163,7 @@ class Graph
       cpu["single_graphs"] << {"lines"=>lines,
                                "headline"=>"CPU-" + key, 
                                "cummulated"=>"false",
-                               "linegraph"=>"false"} unless lines.blank?
+                               "linegraph"=>"true"} unless lines.blank?
     end
     config["CPU"] = cpu unless cpu["single_graphs"].blank?
 
