@@ -23,26 +23,26 @@ class AccountTest < ActiveSupport::TestCase
     assert Account.unix2_chkpwd(@login, @passwd)
   end
   
-  test "authenticate with rpam" do
-    Rpam.expects(:authpam).with(@login, @passwd).returns(true)
-    Account.expects(:unix2_chkpwd).never # ensure chkpwd isn't called
-    assert Account.authenticate( @login, @passwd )
-  end
+#  test "authenticate with rpam" do
+#    Rpam.expects(:authpam).with(@login, @passwd).returns(true)
+#    Account.expects(:unix2_chkpwd).never # ensure chkpwd isn't called
+#    assert Account.authenticate( @login, @passwd )
+#  end
   
   test "authenticate with chkpwd" do
-    Rpam.expects(:authpam).with(@login, @passwd).returns(false)
+#Rpam.expects(:authpam).with(@login, @passwd).returns(false)
     Account.expects(:unix2_chkpwd).once.returns(true) # ensure chkpwd is called
     assert Account.authenticate( @login, @passwd )
   end
   
   test "failed authenticate with chkpwd" do
-    Rpam.expects(:authpam).with(@login, @passwd).returns(false)
+#Rpam.expects(:authpam).with(@login, @passwd).returns(false)
     Account.expects(:unix2_chkpwd).once.returns(false) # ensure chkpwd is called
     assert !Account.authenticate( @login, @passwd )
   end
   
   test "authenticate saves password" do
-    Rpam.expects(:authpam).with(@login, @passwd).returns(false)
+#Rpam.expects(:authpam).with(@login, @passwd).returns(false)
     Account.expects(:unix2_chkpwd).once.returns(true)
     acc = Account.authenticate( @login, @passwd )
     assert acc
@@ -57,7 +57,7 @@ class AccountTest < ActiveSupport::TestCase
   end
   
   test "instance encrypt" do
-    Rpam.expects(:authpam).with(@login, @passwd).returns(false)
+#    Rpam.expects(:authpam).with(@login, @passwd).returns(false)
     Account.expects(:unix2_chkpwd).once.returns(true)
     acc = Account.authenticate( @login, @passwd )
     assert acc
