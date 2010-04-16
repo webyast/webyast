@@ -44,6 +44,7 @@ Requires:       yast2-users >= 2.17.28.1
 #
 
 %package testsuite
+Group:    Productivity/Networking/Web/Utilities
 Requires: %{name} = %{version}
 Requires: webyast-base-ws-testsuite
 Summary:  Testsuite for webyast-root-user-ws package

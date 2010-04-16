@@ -44,6 +44,7 @@ Requires:       yast2-registration > 2.17.27
 #
 
 %package testsuite
+Group:    Productivity/Networking/Web/Utilities
 Requires: %{name} = %{version}
 Requires: webyast-base-ws-testsuite
 Summary:  Testsuite for webyast-registration-ws package

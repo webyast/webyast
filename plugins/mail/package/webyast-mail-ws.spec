@@ -54,6 +54,7 @@ Requires:       yast2-mail >= 2.17.5
 #
 
 %package testsuite
+Group:    Productivity/Networking/Web/Utilities
 Requires: %{name} = %{version}
 Requires: webyast-base-ws-testsuite
 Summary:  Testsuite for webyast-mail-ws package

@@ -43,6 +43,7 @@ Requires:	yast2-runlevel
 #
 
 %package testsuite
+Group:    Productivity/Networking/Web/Utilities
 Requires: %{name} = %{version}
 Requires: webyast-base-ws-testsuite
 Summary:  Testsuite for webyast-services-ws package

@@ -42,6 +42,7 @@ BuildRequires:	rubygem-test-unit rubygem-mocha
 #
 
 %package testsuite
+Group:    Productivity/Networking/Web/Utilities
 Requires: %{name} = %{version}
 Requires: webyast-base-ws-testsuite
 Summary:  Testsuite for webyast-time-ws package

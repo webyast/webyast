@@ -44,6 +44,7 @@ PreReq:       yast2-country >= 2.17.34.1
 #
 
 %package testsuite
+Group:    Productivity/Networking/Web/Utilities
 Requires: %{name} = %{version}
 Requires: webyast-base-ws-testsuite
 Summary:  Testsuite for webyast-language-ws package
