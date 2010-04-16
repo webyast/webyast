@@ -80,6 +80,7 @@ BuildRequires:  rubygem-rcov >= 0.9.3.2
 BuildArch:      noarch
 
 %package testsuite
+Group:    Productivity/Networking/Web/Utilities
 Requires: webyast-base-ws = %{version}
 Summary:  Testsuite for webyast-base-ws package
 
