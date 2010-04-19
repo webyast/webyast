@@ -1,4 +1,11 @@
 -------------------------------------------------------------------
+Mon Apr 19 17:49:24 UTC 2010 - lslezak@suse.cz
+
+- patches - don't pass any parameter to the helper script, always
+  search for all available patches (bnc#596120)
+- 0.1.20
+
+-------------------------------------------------------------------
 Fri Apr 16 12:43:36 UTC 2010 - schubi@novell.com
 
 - Finding packages can also returns an empty array which has to 

@@ -27,7 +27,7 @@ bs = BackgroundStatus.new
 # register a progress printer for the progress object
 ProgressPrinter.new(bs)
 
-what = ARGV[0] || :available
+what = :available
 
 begin
   patches = Patch.do_find(what, bs)

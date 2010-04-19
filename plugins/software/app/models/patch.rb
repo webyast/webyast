@@ -188,9 +188,7 @@ class Patch < Resolvable
 
   def self.subprocess_command(what)
     raise "Invalid parameter" if what.to_s.include?("'") or what.to_s.include?('\\')
-    ret = "cd #{RAILS_ROOT} && #{File.join(RAILS_ROOT, 'script/runner')} -e #{ENV['RAILS_ENV'] || 'development'} #{subprocess_script}"
-    ret += " #{what}" if what != :available
-    ret
+    "cd #{RAILS_ROOT} && #{File.join(RAILS_ROOT, 'script/runner')} -e #{ENV['RAILS_ENV'] || 'development'} #{subprocess_script}"
   end
 
   # IO functions moved to separate methods for easy mocking/testing
