@@ -28,20 +28,20 @@ end
 class PackageKit
 
   private
-  def self.dbusloop proxy
+  def self.dbusloop proxy, error = ''
     dbusloop = DBus::Main.new
     proxy.on_signal("ErrorCode") do |u1,u2| 
       error_string = "#{u1}: #{u2}"
       Rails.logger.error error_string
       dbusloop.quit
-      error =  PackageKitError.new(error_string)
+      error << error_string if error.empty?
     end
     
     proxy.on_signal("RepoSignatureRequired") do |u1,u2,u3,u4,u5,u6,u7,u8| 
       error_string = "Repository #{u2} needs to be signed"
       Rails.logger.error error_string
       dbusloop.quit
-      error = PackageKitError.new(error_string)
+      error << error_string if error.empty?
     end
     proxy.on_signal("Finished") {|u1,u2| dbusloop.quit }
     dbusloop
@@ -111,7 +111,7 @@ class PackageKit
     
       proxy = transaction_iface.object
     
-      error = nil
+      error = ''
 
       # set the custom signal handler if set
       proxy.on_signal(signal.to_s, &block) if !signal.blank? && block_given?
@@ -130,7 +130,7 @@ class PackageKit
         end
       end
 
-      dbusloop = self.dbusloop proxy
+      dbusloop = self.dbusloop proxy, error
 
       dbusloop << proxy.bus
 
@@ -145,7 +145,7 @@ class PackageKit
 
       packagekit_iface.SuggestDaemonQuit
 
-      raise error if error
+      raise PackageKitError.new(error) unless error.blank?
 
     rescue DBus::Error => dbus_error
       # check if it is a known error
@@ -171,7 +171,8 @@ class PackageKit
       Rails.logger.debug "  update package: #{line2}"
     end
 
-    dbusloop = self.dbusloop proxy
+    error = ''
+    dbusloop = self.dbusloop proxy, error
     dbusloop << proxy.bus
 
     proxy.on_signal("Error") do |u1,u2|
@@ -191,6 +192,8 @@ class PackageKit
 
     dbusloop.run
     packagekit_iface.SuggestDaemonQuit
+
+    ok &= error.blank?
 
     return ok
   end

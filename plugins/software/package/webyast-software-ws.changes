@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Tue Apr 20 10:40:38 UTC 2010 - lslezak@suse.cz
+
+- report untrusted GPG repo key error (bnc#559233)
+- 0.1.21
+
+-------------------------------------------------------------------
 Mon Apr 19 17:49:24 UTC 2010 - lslezak@suse.cz
 
 - patches - don't pass any parameter to the helper script, always
