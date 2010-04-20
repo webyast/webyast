@@ -1,4 +1,9 @@
 -------------------------------------------------------------------
+Tue Apr 20 13:45:57 UTC 2010 - kkaempf@novell.com
+
+- Temporarily disable testsuite during build.
+
+-------------------------------------------------------------------
 Tue Apr 20 10:40:38 UTC 2010 - lslezak@suse.cz
 
 - report untrusted GPG repo key error (bnc#559233)
