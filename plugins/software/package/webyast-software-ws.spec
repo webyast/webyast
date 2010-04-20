@@ -85,8 +85,7 @@ rm -rf doc
 
 %check
 # run the testsuite
-#TODO FIXME: reenable the tests when DBus mocking is improved (see bnc#597868)
-#webyast_ws_check
+%webyast_ws_check
 
 %install
 
