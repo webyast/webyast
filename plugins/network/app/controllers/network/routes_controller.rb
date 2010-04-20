@@ -33,22 +33,14 @@ class Network::RoutesController < ApplicationController
     if root == nil
       raise InvalidParameters.new :routes => "Missing"
     end
-    @route = Route.find(root[:id])
-    @route.via = root[:via]
-    respond_to do |format|    
-      ret = @route.save 
-      if ret["exit"]=="0"
-	format.xml { head :ok } 
-      else  
-	  raise RouteError.new ret["error"]
-      end
-    end
+    @route = Route.new(root[:id])
+    @route.save!
+    index
   end
 
 
   # Shows route settings. Requires read permission for network YaPI.
   def show
-    yapi_perm_check "network.read"
     @route = Route.find(params[:id])
 
     respond_to do |format|
@@ -67,21 +59,3 @@ class Network::RoutesController < ApplicationController
 
 end
 
-require 'exceptions'
-class RouteError < BackendException
-  def initialize(message)
-    @message = message
-    super("Failed to write route setting with this error: #{@message}.")
-  end
-
-  def to_xml
-    xml = Builder::XmlMarkup.new({})
-    xml.instruct!
-
-    xml.error do
-      xml.type "NETWORK_ROUTE_ERROR"
-      xml.description @message
-      xml.output @message
-    end
-  end
-end

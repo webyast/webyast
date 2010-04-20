@@ -35,14 +35,9 @@ class Network::HostnameController < ApplicationController
       raise InvalidParameters.new :hostname => "Missing"
     end
     
-    @hostname = Hostname.new(root)
-    respond_to do |format|    
-	if ( @hostname.save || !@hostname.respond_to?(:errors) )
-	  format.xml { head :ok } 
-	  else  
-	    format.xml { render :xml => @hostname.errors,  :status => :unprocessable_entity } 
-	end
-    end
+    hostname = Hostname.new(root)
+    hostname.save!
+    show
   end
 
   # See update

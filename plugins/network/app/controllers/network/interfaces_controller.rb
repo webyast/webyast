@@ -35,13 +35,8 @@ class Network::InterfacesController < ApplicationController
     end
     
     @iface = Interface.new(root)
-    respond_to do |format|    
-	if @iface.save 
-	  format.xml { head :ok } 
-	  else  
-	    format.xml { render :xml => @iface.errors,  :status => :unprocessable_entity } 
-	end
-    end
+	  @iface.save!
+    index
   end
 
   # Shows hostname settings. Requires read permission for network YaPI.
@@ -49,7 +44,7 @@ class Network::InterfacesController < ApplicationController
     @ifce = Interface.find(params[:id])
 
     respond_to do |format|
-      format.xml { render :xml => @ifce.to_xml( :root => "interfaces", :dasherize => false ) }
+      format.xml { render :xml => @ifce.to_xml( :root => "interface", :dasherize => false ) }
       format.json { render :json => @ifce.to_json }
     end
   end

@@ -38,14 +38,8 @@ class Network::DnsController < ApplicationController
     root["nameservers"] = (root["nameservers"] || "").split
     
     @dns = DNS.new(root)
-    @dns.save
-    respond_to do |format|    
-	if @dns.save 
-	  format.xml { head :ok } 
-        else  
-          format.xml { render :xml => @dns.errors,  :status => :unprocessable_entity } 
-	end
-    end
+    @dns.save!
+    show
   end
 
   # See update

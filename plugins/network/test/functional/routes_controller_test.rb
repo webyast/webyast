@@ -47,9 +47,7 @@ class RoutesControllerTest < ActionController::TestCase
   def test_validation
     @model_class.any_instance.stubs(:save).returns ERROR
     put :update, DATA
-    h = Hash.from_xml @response.body
-    assert_equal "NETWORK_ROUTE_ERROR", h["error"]["type"]
-    assert_response :error
+    assert_response 422
   end
 
 end

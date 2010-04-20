@@ -66,7 +66,26 @@ class Route < BaseModel::Base
     }
     vsettings = [ "a{sa{ss}}", settings ] # bnc#538050
     ret = YastService.Call("YaPI::NETWORK::Write",{"route" => vsettings})
-    # TODO success or not?
+    raise RouteError.new(ret["error"]) if ret["exit"] != "0"
   end
 
+end
+
+require 'exceptions'
+class RouteError < BackendException
+  def initialize(message)
+    @message = message
+    super("Failed to write route setting with this error: #{@message}.")
+  end
+
+  def to_xml
+    xml = Builder::XmlMarkup.new({})
+    xml.instruct!
+
+    xml.error do
+      xml.type "NETWORK_ROUTE_ERROR"
+      xml.description @message
+      xml.output @message
+    end
+  end
 end
