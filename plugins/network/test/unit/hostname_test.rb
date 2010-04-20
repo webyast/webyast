@@ -20,6 +20,17 @@ class HostnameTest < ActiveSupport::TestCase
    assert_equal("linux", hostname.name)
    assert_equal("suse.cz", hostname.domain)
  end
+
+ def test_validations
+   hostname=Hostname.find
+   assert hostname.valid?
+   hostname.name = nil
+   assert hostname.valid?
+   hostname.domain = "<script>"
+   assert hostname.invalid?
+   hostname.domain = "local"
+   assert hostname.valid?
+ end
  
 end
 
