@@ -85,7 +85,12 @@ rm -rf doc
 
 %check
 # run the testsuite
-%webyast_ws_check
+#
+# Disabled for now.
+# PackageKit/DBus need /proc and thus don't run in build environment.
+# But both are required for testing :-/
+# reference: bnc#597868
+#%webyast_ws_check
 
 %install
 
