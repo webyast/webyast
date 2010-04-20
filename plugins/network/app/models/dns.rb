@@ -22,34 +22,46 @@
 # Provides set and gets resources from YaPI network module.
 # Main goal is handle YaPI specific calls and data formats. Provides cleaned
 # and well defined data.
-class DNS
+class DNS < BaseModel::Base
 
   # the short hostname
   attr_accessor :searches
   # the domain name
   attr_accessor :nameservers
 
-  private
+  validates_each :nameservers, :allow_nil => false do |model,attr,value|
+    value.each do |nameserver|
+      #TODO use better regex
+      if nameserver.match(/^([0-9]{1,3}.){3}[0-9]{1,3}$/).nil?
+        model.errors.add attr, :invalid
+      end
+    end
+  end
+
+  validates_each :searches, :allow_nil => false do |model,attr,value|
+    value.each do |search|
+      begin
+        URI.parse search
+      rescue URI::InvalidURIError => e
+        Rails.logger.warn "Invalid uri: #{e.inspect}"
+        model.errors.add attr, :invalid
+      end
+    end
+  end
 
   public
-
-  def initialize(kwargs)
-    @searches = kwargs["searches"]
-    @nameservers = kwargs["nameservers"]
-  end
 
   # fills time instance with data from YaPI.
   #
   # +warn+: Doesn't take any parameters.
   def DNS.find
     response = YastService.Call("YaPI::NETWORK::Read") # hostname: true
-    ret = DNS.new(response["dns"])
-    return ret
+    ret = DNS.new response["dns"]
   end
 
   # Saves data from model to system via YaPI. Saves only setted data,
   # so it support partial safe (e.g. save only new timezone if rest of fields is not set).
-  def save
+  def update
     settings = {
       "searches" => @searches,
       "nameservers" => @nameservers,
@@ -57,29 +69,6 @@ class DNS
     vsettings = [ "a{sas}", settings ] # bnc#538050    
     YastService.Call("YaPI::NETWORK::Write",{"dns" => vsettings})
     # TODO success or not?
-  end
-
-  def to_xml( options = {} )
-    xml = options[:builder] ||= Builder::XmlMarkup.new(options)
-    xml.instruct! unless options[:skip_instruct]
-
-    xml.dns do
-      xml.nameservers({:type => "array"}) do
-      @nameservers.each do |s|
-        xml.nameserver s
-      end
-      end
-      xml.searches({:type => "array"}) do
-        @searches.each do |s|
-          xml.search s
-        end
-      end
-    end
-  end
-
-  def to_json( options = {} )
-    hash = Hash.from_xml(to_xml())
-    return hash.to_json
   end
 
 end
