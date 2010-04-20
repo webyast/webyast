@@ -313,11 +313,13 @@ RESPONSE_SUCCESS = {"changedservices"=>[ {"name"=>"nu_novell_com", "url"=>"https
     setup_registration_success
     register = Register.new()
     assert_equal(true, register.is_registered?)
+    assert_equal(0,register.register)
   end
 
-  def test_register
+  def test_is_not_registered
     setup_missing_arguments
     register = Register.new()
+    assert_equal(false, register.is_registered?)
     assert_equal(4,register.register) #missing argument
   end
 
