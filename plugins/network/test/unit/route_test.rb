@@ -28,6 +28,18 @@ class RouteTest < ActiveSupport::TestCase
    assert_equal 'default', route.id
  end
 
+ def test_validations
+   route=Route.find('default')
+   assert route.valid?
+   route.id = "10.10/24"
+   assert route.valid?
+   route.id = "| rm -rf /"
+   assert route.invalid?
+   route.id = "default"
+   route.via = "<malicaious>"
+   assert route.invalid?
+ end
+
  #FIXME: test for YaPI::NETWORK::Write with invalid IP of default route
 
  
