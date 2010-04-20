@@ -26,6 +26,7 @@ class BaseModelTest < ActiveSupport::TestCase
 
     attr_accessor :arg1, :arg2
     attr_serialized :arg1
+    validates_uri :arg1
     def call
       @callback_used = true;
     end
@@ -38,6 +39,11 @@ class BaseModelTest < ActiveSupport::TestCase
     assert test.valid?
     test.arg1 = nil
     test.arg2 = "sda"
+    assert test.invalid?
+    test = Test3.new
+    test.arg1 = "localhost:3000"
+    assert test.valid?
+    test.arg1 = "localhost:3000<script>frozen hell</script>"
     assert test.invalid?
   end
 

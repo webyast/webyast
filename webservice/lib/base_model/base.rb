@@ -154,6 +154,24 @@ module BaseModel
 
     #Validations in model
     include ActiveRecord::Validations
+    
+    #extend validation with site validation
+
+    # validates that in attributes is set valid URI
+    def self.validates_uri(*attr_names)
+      configuration = {}
+      configuration.update attr_names.extract_options!
+
+      validates_each(attr_names,configuration) do |record,attr_name,value|
+        begin
+          URI.parse value
+        rescue URI::InvalidURIError => e
+          Rails.logger.warn "Invalid URI: #{e.inspect}"
+          record.errors.add(attr_name, :invalid, :default => configuration[:message], :value => value)
+        end
+      end
+    end
+
     #Callbacks in model
     include ActiveRecord::Callbacks
 
