@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Wed Apr 21 15:04:45 UTC 2010 - schubi@novell.com
+
+- Showing patch messages (bnc#560710)
+- 0.1.22 
+
+-------------------------------------------------------------------
 Tue Apr 20 13:45:57 UTC 2010 - kkaempf@novell.com
 
 - Temporarily disable testsuite during build.
