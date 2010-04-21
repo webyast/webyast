@@ -182,12 +182,22 @@ class PackageKit
 
   # install an update, based on the PackageKit
   # id ("<name>;<id>;<arch>;<repo>")
+  # signal: signal to intercept (usually "Package") (optional)
+  # block: block to run on signal (optional)
   #
-  def self.install(pk_id)
+  def self.install(pk_id, signal_list = nil, &block)
     ok = true
     transaction_iface, packagekit_iface = self.connect
 
     proxy = transaction_iface.object
+    
+    if !signal_list.blank? && block_given?
+      signal_list.each { |signal|
+        # set the custom signal handle
+        proxy.on_signal(signal.to_s, &block) 
+      }
+    end
+
     proxy.on_signal("Package") do |line1,line2,line3|
       Rails.logger.debug "  update package: #{line2}"
     end

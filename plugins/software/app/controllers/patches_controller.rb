@@ -113,7 +113,7 @@ class PatchesController < ApplicationController
       logger.error "Patch: #{params[:patches][:resolvable_id]} not found."
       render ErrorResult.error(404, 1, "Patch: #{params[:patches][:resolvable_id]} not found.") and return
     end
-    unless Patch.install @patch_update
+    unless @patch_update.install 
       render ErrorResult.error(404, 2, "packagekit error") and return
     end
     render :show

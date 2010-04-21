@@ -151,12 +151,8 @@ class PatchTest < ActiveSupport::TestCase
     end
 
     # install a patch
-    assert Patch.install('847')
-
-    # installing a non existing patch throws an exception
-    assert_raise RuntimeError do
-      Patch.install('888')
-    end
+    patch = Patch.find('847')
+    assert patch.install
 
   end
 end

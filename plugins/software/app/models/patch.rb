@@ -24,6 +24,8 @@ require 'resolvable'
 # Model for patches available via package kit
 class Patch < Resolvable
 
+  attr_accessor :messages
+
   private
 
   # just a short cut for accessing the singleton object
@@ -39,7 +41,18 @@ class Patch < Resolvable
   public
 
   def to_xml( options = {} )
-    super :patch_update, options
+    super :patch_update, options, @messages
+  end
+
+  # install
+  def install
+    @messages=[]
+    update_id = "#{self.name};#{self.resolvable_id};#{self.arch};#{self.repo}"
+    Rails.logger.error "Install Update: #{update_id}"
+    PackageKit.install(update_id, ['RequireRestart','Message']) { |type, details|
+      Rails.logger.error "Message signal received: #{type}, #{details}"
+      @messages << {:kind => type, :details => details}
+    }
   end
 
   # find patches using PackageKit
@@ -173,21 +186,6 @@ class Patch < Resolvable
     end
   end
 
-  # Patch.install(patch)
-  # Patch.install(id)
-  def self.install(patch)
-    if patch.is_a?(Patch)
-      update_id = "#{patch.name};#{patch.resolvable_id};#{patch.arch};#{patch.repo}"
-      Rails.logger.debug "Install Update: #{update_id}"
-      PackageKit.install update_id
-    else
-      # if is not an object, assume it is an id
-      patch_id = patch
-      patch = Patch.find(patch_id)
-      raise "Can't install update #{patch_id} because it does not exist" if patch.nil? or not patch.is_a?(Patch)
-      self.install(patch)
-    end
-  end
 
   private
 

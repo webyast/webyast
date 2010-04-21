@@ -52,7 +52,7 @@ class Resolvable
   # get xml representation of instance
   # tag: name of toplevel tag (i.e. :package)
   #
-  def to_xml( tag, options = {} )
+  def to_xml( tag, options = {}, messages=[] )
     xml = options[:builder] ||= Builder::XmlMarkup.new(options)
     xml.instruct! unless options[:skip_instruct]
 
@@ -64,6 +64,16 @@ class Resolvable
       xml.tag!(:arch, @arch )
       xml.tag!(:repo, @repo )
       xml.tag!(:summary, @summary )
+      unless messages.blank?
+        xml.messages(:type => :array) do
+          messages.each do |message|
+            xml.message do
+              xml.tag!(:kind, message[:kind])
+              xml.tag!(:details, message[:details])
+            end
+          end
+        end
+      end
     end
 
   end
