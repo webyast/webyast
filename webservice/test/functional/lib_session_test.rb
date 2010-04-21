@@ -1,3 +1,4 @@
+# Source: http://www.codeforpeople.com/lib/ruby/session/session-2.4.0/test/session.rb
 #
 # Pulled from http://www.codeforpeople.com/lib/ruby/session/session-2.4.0/test/session.rb
 # License: Ruby (http://www.ruby-lang.org/en/LICENSE.txt)

@@ -1,3 +1,4 @@
+# Source: rcov plugin
 # This File Uses Magic
 # ====================
 # Here's an example of how this file works. As an example, let's say you typed
