@@ -30,7 +30,7 @@ def license_report
   filenames = `git ls-files`.split "\n"
   filenames.each do |fn|
     # file name checks
-    if fn =~ /\.yml\z/ || fn =~ /\.conf\z/
+    if fn =~ /\.yml\z/ || fn =~ /\.conf\z/ || fn =~ /\.xml\z/
       report[:skipped] << "#{fn}: skipped by name match (configuration file)"
       next
     elsif fn =~ /README/ 
@@ -45,8 +45,14 @@ def license_report
     elsif fn =~ /\.policy\z/
       report[:skipped] << "#{fn}: skipped by name match (polkit policy file)"
       next
-    elsif fn =~ /\.png\z/ || fn =~ /\.odg\z/
+    elsif fn =~ /\.png\z/ || fn =~ /\.odg\z/ || fn =~ /\.gif\z/ || fn =~ /\.swf\z/ || fn =~ /\.ico\z/
       report[:skipped] << "#{fn}: skipped by name match (binary file)"
+      next
+    elsif fn =~ /\.po\z/ || fn =~ /\.mo\z/
+      report[:skipped] << "#{fn}: skipped by name match (translation file)"
+      next
+    elsif fn =~ /\.curl\z/
+      report[:skipped] << "#{fn}: skipped by name match (test fixture)"
       next
     end
 
@@ -81,6 +87,7 @@ def license_report
 
   puts "\nMissing license:"
   report[:missing].each { |m| puts m }
+  exit 1 unless report[:missing].empty?
   verbose "\nSkipped files:"
   report[:skipped].each { |m| verbose m }
   verbose "\nCopyright find in these files:"
