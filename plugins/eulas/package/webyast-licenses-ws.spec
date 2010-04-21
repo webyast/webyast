@@ -23,6 +23,7 @@ Summary:        WebYaST - license management service
 Source:         www.tar.bz2
 Source1:        eulas-sles11.yml
 Source2:        org.opensuse.yast.modules.eulas.policy
+Source3:        eulas-opensuse11_1.yml
 BuildRoot:      %{_tmppath}/%{name}-%{version}-build
 BuildArch:      noarch
 
@@ -72,7 +73,15 @@ needed at runtime.
 # Install all web and frontend parts.
 #
 mkdir -p $RPM_BUILD_ROOT/usr/share/%{pkg_user}/%{plugin_name}
-rm -r "config/resources/licenses/openSUSE-11.1"
+%if 0%{?sles_version} == 0
+  # use an openSUSE license by default
+  SOURCE_CONFIG=%SOURCE3
+  rm -r "config/resources/licenses/SLES-11"
+%else
+  # use a sles11 license by default
+  SOURCE_CONFIG=%SOURCE1
+  rm -r "config/resources/licenses/openSUSE-11.1"
+%endif
 mv config/resources/licenses $RPM_BUILD_ROOT/usr/share/%{pkg_user}/%{plugin_name}/
 
 mkdir -p $RPM_BUILD_ROOT/var/lib/%{pkg_user}/%{plugin_name}/accepted-licenses
@@ -83,7 +92,7 @@ rm -f $RPM_BUILD_ROOT/srv/www/%{pkg_user}/vendor/plugins/%{plugin_name}/COPYING
 #FIXME maybe location change in future
 
 mkdir -p $RPM_BUILD_ROOT/etc/webyast/
-cp %SOURCE1 $RPM_BUILD_ROOT/etc/webyast/eulas.yml
+cp $SOURCE_CONFIG $RPM_BUILD_ROOT/etc/webyast/eulas.yml
 
 mkdir -p $RPM_BUILD_ROOT/usr/share/PolicyKit/policy
 cp %{SOURCE2} $RPM_BUILD_ROOT/usr/share/PolicyKit/policy/
