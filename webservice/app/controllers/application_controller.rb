@@ -36,7 +36,7 @@ class ApplicationController < ActionController::Base
   end
 
   rescue_from DBus::Error do |exception|
-    logger.info "Raised DBus::Error exception - #{exception.dbus_message}"
+    logger.info "Raised DBus::Error exception - #{exception.message}"
     report_backend_exception exception
   end
 
