@@ -1,4 +1,9 @@
 -------------------------------------------------------------------
+Thu Apr 22 13:40:42 UTC 2010 - kkaempf@novell.com
+
+- Catch DBus::Error in ApplicationController (bnc#598794)
+
+-------------------------------------------------------------------
 Thu Apr 22 09:51:35 CEST 2010 - jsuchome@suse.cz
 
 - 0.1.13 
