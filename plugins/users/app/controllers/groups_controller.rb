@@ -68,6 +68,8 @@ public
       @groups = Group.find_all
     rescue DBus::Error => exception
       render ErrorResult.error(404, 20, "DBus Error: #{exception.dbus_message.error_name}") and return
+    rescue Exception => e
+      render ErrorResult.error(500, 2, e.message) and return
     end
 
     respond_to do |format|
