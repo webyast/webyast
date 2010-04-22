@@ -48,8 +48,8 @@ class GroupsTest < ActiveSupport::TestCase
     Group # make ruby load this class before stubbing
     YastService.stubs(:Call).with("YaPI::USERS::GroupGet",GROUP_LOCAL_CONFIG).once.returns(GROUP_READ_DATA)
     YastService.stubs(:Call).with("YaPI::USERS::GroupGet",GROUP_SYSTEM_CONFIG).once.returns({})
-    YastService.stubs(:Call).with("YaPI::USERS::GroupsGet",{"type"=>["s","system"]}).once.returns({100 => GROUP_READ_DATA})
-    YastService.stubs(:Call).with("YaPI::USERS::GroupsGet",{"type"=>["s","local"]}).once.returns({100 => GROUP_READ_DATA})
+    YastService.stubs(:Call).with("YaPI::USERS::GroupsGet",{"type"=>["s","system"],"index"=>["s","cn"]}).once.returns({100 => GROUP_READ_DATA})
+    YastService.stubs(:Call).with("YaPI::USERS::GroupsGet",{"type"=>["s","local"],"index"=>["s","cn"]}).once.returns({100 => GROUP_READ_DATA})
     @model  = Group.find "users"
     @models = Group.find_all
   end
