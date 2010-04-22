@@ -1,4 +1,9 @@
 -------------------------------------------------------------------
+Thu Apr 22 09:51:35 CEST 2010 - jsuchome@suse.cz
+
+- 0.1.13 
+
+-------------------------------------------------------------------
 Wed Apr 21 14:39:26 CEST 2010 - mvidner@suse.cz
 
 - Require sysvinit-tools instead of sysvinit for oS-11.3 (bnc#598101).
