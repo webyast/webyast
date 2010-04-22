@@ -46,7 +46,7 @@ private
   end
 
   def self.groups_get(group_type)
-    YastService.Call("YaPI::USERS::GroupsGet", {"type"=>["s",group_type]})
+    YastService.Call("YaPI::USERS::GroupsGet", {"type"=>["s",group_type], "index" => ["s","cn"]})
   end
 
   def self.make_group(group_hash)
