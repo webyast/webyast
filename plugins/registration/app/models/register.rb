@@ -87,7 +87,9 @@ class Register
       @guid = config['guid']
     rescue Exception => e
       Rails.logger.error "YastService.Call('YSR::getregistrationconfig') failed"
-      raise
+      @config_error = true
+      return false
+      # raise
     end
     config
   end
@@ -152,6 +154,7 @@ class Register
 
     xml.registration do
       xml.guid @guid if self.is_registered?
+      xml.configerror 'true' if @config_error == true
     end
   end
 
@@ -161,14 +164,15 @@ class Register
     xml.instruct! unless options[:skip_instruct]
 
     xml.registrationconfig do
+      xml.configerror 'true' if @config_error == true
       xml.server do
         xml.url @registrationserver if @registrationserver
       end
-     xml.certificate do
-       xml.data do
-         xml.cdata!(@certificate) if @certificate && @certificate.size > 0
-       end
-     end
+      xml.certificate do
+        xml.data do
+          xml.cdata!(@certificate) if @certificate && @certificate.size > 0
+        end
+      end
     end
   end
 
