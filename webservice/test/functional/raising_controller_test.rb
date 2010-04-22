@@ -16,6 +16,10 @@
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA
 #++
 
+#
+# test ApplicationController::rescue_from
+#
+
 require File.expand_path(File.dirname(__FILE__) + "/../test_helper")
 
 class RaisingControllerTest < ActionController::TestCase
@@ -27,6 +31,11 @@ class RaisingControllerTest < ActionController::TestCase
 
     def raiseInvalidParameters
       raise InvalidParameters.new( :heaven => "MISSING" )
+    end
+
+    def raiseDBusError
+      m = DBus::Message.new
+      raise DBus::Error.new(DBus::Message.error(m, "DBusError", "testing DBus::Error"))
     end
 
     def raiseBackendException
@@ -70,6 +79,11 @@ class RaisingControllerTest < ActionController::TestCase
   def test_catch_exception
     get :raiseException
     assert_response 500
+  end
+
+  def test_dbus_error
+    get :raiseDBusError
+    assert_response 503
   end
 
 end

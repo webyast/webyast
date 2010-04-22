@@ -21,6 +21,8 @@
 
 require 'exceptions'
 
+require 'dbus'
+
 class ApplicationController < ActionController::Base
 
   #render only pure text to simple show it on frontend
@@ -31,6 +33,11 @@ class ApplicationController < ActionController::Base
   rescue_from InvalidParameters do |exception|
     logger.info "Raised resource Invalid exception - #{exception.inspect}"
     render :xml => exception, :status => 422 #422-resource invalid
+  end
+
+  rescue_from DBus::Error do |exception|
+    logger.info "Raised DBus::Error exception - #{exception.dbus_message}"
+    report_backend_exception exception
   end
 
 #lazy load of YaST::Config library
