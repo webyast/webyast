@@ -22,6 +22,7 @@ Release:        0
 Summary:        WebYaST - license management service
 Source:         www.tar.bz2
 Source1:        eulas-sles11.yml
+Source2:        org.opensuse.yast.modules.eulas.policy
 BuildRoot:      %{_tmppath}/%{name}-%{version}-build
 BuildArch:      noarch
 
@@ -61,6 +62,10 @@ needed at runtime.
 # run the testsuite
 %webyast_ws_check
 
+%post
+/usr/sbin/grantwebyastrights --user root --action grant > /dev/null
+/usr/sbin/grantwebyastrights --user yastws --action grant > /dev/null
+
 %install
 
 #
@@ -79,6 +84,9 @@ rm -f $RPM_BUILD_ROOT/srv/www/%{pkg_user}/vendor/plugins/%{plugin_name}/COPYING
 
 mkdir -p $RPM_BUILD_ROOT/etc/webyast/
 cp %SOURCE1 $RPM_BUILD_ROOT/etc/webyast/eulas.yml
+
+mkdir -p $RPM_BUILD_ROOT/usr/share/PolicyKit/policy
+cp %{SOURCE2} $RPM_BUILD_ROOT/usr/share/PolicyKit/policy/
 
 %clean
 rm -rf $RPM_BUILD_ROOT
@@ -110,6 +118,7 @@ rm -rf $RPM_BUILD_ROOT
 %config /etc/webyast/eulas.yml
 %defattr(-,%{pkg_user},%{pkg_user})
 %dir /var/lib/%{pkg_user}/%{plugin_name}/accepted-licenses
+/usr/share/PolicyKit/policy/org.opensuse.yast.modules.eulas.policy
 %doc COPYING
 
 %files testsuite

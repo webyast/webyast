@@ -56,6 +56,7 @@ class EulasController < ApplicationController
   
   # Save updated license data. The only changeable attribute is "accepted"
   def update
+    permission_check :'org.opensuse.yast.modules.eulas.accept'
     raise InvalidParameters.new({:id => 'MISSING'}) if params[:id].nil?
     raise InvalidParameters.new({:eulas_accepted => 'INVALID'}) unless [true,false,"true","false"].include? params[:eulas][:accepted]
     @license = License.find params[:id]
