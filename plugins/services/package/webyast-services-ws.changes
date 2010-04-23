@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Fri Apr 23 12:16:12 UTC 2010 - jreidinger@novell.com
+
+- add license headers (bnc#586620)
+- 0.1.11
+
+-------------------------------------------------------------------
 Mon Apr 12 10:16:54 CEST 2010 - jsuchome@suse.cz
 
 - update summary and description of packages (bnc#588355)
