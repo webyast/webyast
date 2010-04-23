@@ -26,6 +26,7 @@ def test_module name, package, develop = nil
   begin
     require name
   rescue Exception => e
+    puts "no"
     escape "#{name} not available", "install #{package}", develop
   end
   puts "ok"
