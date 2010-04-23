@@ -1,4 +1,14 @@
 -------------------------------------------------------------------
+Fri Apr 23 11:16:17 UTC 2010 - jreidinger@novell.com
+
+- add permission for accepting licenses (bnc#585786)
+- add license headers
+- added Group: line to all -testsuite subpackages
+- all plugins - defined -testsuite subpackge, run the test during build
+- licenses: rstrip blank lines at the end of license text
+- 0.1.0
+
+-------------------------------------------------------------------
 Mon Apr 12 16:52:50 CEST 2010 - mkudlvasr@novell.com
 
 - changes in package description
