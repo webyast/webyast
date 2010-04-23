@@ -58,10 +58,10 @@ end
 #
 # test if package is installed with minimum version
 #
-def test_version severity, package, version
-  ver = test_package package
+def test_version severity, package, version = nil
+  ver = test_package severity, package
   escape(severity, "#{package} not installed", "install #{package}") unless ver
-  escape(severity, "#{package} not up-to-date", "upgrade to #{package}-#{version}") if ver < version
+  escape(severity, "#{package} not up-to-date", "upgrade to #{package}-#{version}") if version && ver < version
   true
 end
 
@@ -83,6 +83,9 @@ def test_user severity, name
   end
 end
 
+def test_policy policy, user
+end
+
 ###
 # Tests
 #
@@ -94,9 +97,9 @@ end
 test_module :generic, 'rubygems', 'rubygems'
 test_module :generic, 'gettext', 'rubygem-gettext_rails'
 test_module :generic, 'dbus', 'ruby-dbus'
-test_package :generic, 'sqlite3'
+test_version :generic, 'sqlite3'
 test_module :generic, 'sqlite3', 'rubygem-sqlite3'
-test_package :generic, 'yast2-dbus-server'
+test_version :generic, 'yast2-dbus-server'
 
 test_module :generic, 'rpam', 'rubygem-rpam'
 test_module :generic, 'polkit', 'rubygem-polkit'
@@ -109,10 +112,18 @@ test_user :production, 'yastws'
 # development environment
 #
 
-test_module :development, 'test-unit', 'rubygem-test-unit'
+# Doesn't work, test/unit throws error:
+# test_module :development, 'test/unit', 'rubygem-test-unit'
+
+test_version :development, 'rubygem-test-unit'
 test_module :development, 'mocha', 'rubygem-mocha'
-test_package :development, 'rubygem-test-unit'
+test_version :development, 'rubygem-test-unit'
 test_module :development, 'rcov', 'rubygem-rcov'
+test_module :development, 'nokogiri', 'rubygem-nokogiri'
+test_module :development, 'tidy', 'rubygem-tidy'
+test_version :development, 'tidy'
+
+test_policy "org.opensuse.yast.system.status.read", Etc.login
 
 puts "Cannot run in production" if $production_errors > 0
 puts "Cannot run in development" if $development_errors > 0
