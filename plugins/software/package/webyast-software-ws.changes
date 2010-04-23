@@ -1,4 +1,11 @@
 -------------------------------------------------------------------
+Fri Apr 23 12:22:06 UTC 2010 - jreidinger@novell.com
+
+- add license headers (bnc#586620)
+- show patch messages
+- 0.1.23
+
+-------------------------------------------------------------------
 Wed Apr 21 15:04:45 UTC 2010 - schubi@novell.com
 
 - Showing patch messages (bnc#560710)
