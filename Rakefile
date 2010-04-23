@@ -30,7 +30,7 @@ task :default => :test
 # list of common tasks, being run for every plugin
 #
 
-%w(test rdoc pgem package release install install_policies check_syntax package-local buildrpm buildrpm-local test:test:rcov restdoc deploy_local).each do |task_name|
+%w(test rdoc pgem package release install install_policies check_syntax package-local buildrpm buildrpm-local test:test:rcov restdoc deploy_local license:report).each do |task_name|
   desc "Run #{task_name} task for all projects"
 
   task task_name do
