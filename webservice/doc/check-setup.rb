@@ -94,6 +94,8 @@ end
 test_module :generic, 'rubygems', 'rubygems'
 test_module :generic, 'gettext', 'rubygem-gettext_rails'
 test_module :generic, 'dbus', 'ruby-dbus'
+test_package :generic, 'sqlite3'
+test_module :generic, 'sqlite3', 'rubygem-sqlite3'
 test_package :generic, 'yast2-dbus-server'
 
 test_module :generic, 'rpam', 'rubygem-rpam'
@@ -107,6 +109,7 @@ test_user :production, 'yastws'
 # development environment
 #
 
+test_module :development, 'test-unit', 'rubygem-test-unit'
 test_module :development, 'mocha', 'rubygem-mocha'
 test_package :development, 'rubygem-test-unit'
 test_module :development, 'rcov', 'rubygem-rcov'
