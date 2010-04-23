@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Fri Apr 23 12:36:10 UTC 2010 - jreidinger@novell.com
+
+- add license headers (bnc#586620)
+- 0.1.3
+
+-------------------------------------------------------------------
 Mon Apr 12 14:22:38 UTC 2010 - jreidinger@novell.com
 
 - update summary and description of packages (bnc#588355)
