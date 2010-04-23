@@ -1,4 +1,12 @@
 -------------------------------------------------------------------
+Fri Apr 23 12:45:19 UTC 2010 - jreidinger@novell.com
+
+- add license headers(bnc#586620)
+- Catch and report DBus::Error generically (bnc#598794)
+- Catch generic exceptions in index (bnc#598794)
+- 0.1.9
+
+-------------------------------------------------------------------
 Mon May 12 16:49:19 CEST 2010 - mzugec@suse.cz
 
 - users: return full map in find_all
