@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Fri Apr 23 11:37:16 UTC 2010 - jreidinger@novell.com
+
+- add license header (bnc#586620)
+- 0.2.3
+
+-------------------------------------------------------------------
 Tue Apr  6 15:41:07 CEST 2010 - mkudlvasr@novell.com
 
 - fix bnc#593331 - firewall reported as used even if not running
