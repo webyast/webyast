@@ -1,4 +1,11 @@
 -------------------------------------------------------------------
+Fri Apr 23 11:49:37 UTC 2010 - jreidinger@novell.com
+
+- add license headers (bnc#586620)
+- add validations to models to prevent fuzzing service (bnc#561438)
+- 0.1.5
+
+-------------------------------------------------------------------
 Mon Apr 12 14:16:00 UTC 2010 - jreidinger@novell.com
 
 - update summary and description of packages (bnc#588355)
