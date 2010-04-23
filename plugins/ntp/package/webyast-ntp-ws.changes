@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Fri Apr 23 11:54:44 UTC 2010 - jreidinger@novell.com
+
+- add license headers (bnc#586620)
+- 0.1.5
+
+-------------------------------------------------------------------
 Fri Apr  9 09:04:48 UTC 2010 - jreidinger@novell.com
 
 - allow edit ntp server (bnc#591404)
