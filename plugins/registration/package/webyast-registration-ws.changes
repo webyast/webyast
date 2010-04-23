@@ -1,4 +1,13 @@
 -------------------------------------------------------------------
+Fri Apr 23 15:43:47 CEST 2010 - jdsn@suse.de
+
+- error handling for missing YSR module in backend (bnc#592620)
+- adding license header to plugin
+- adding unit tests and improving test cases
+- creating -testsuite subpackage
+- version 0.1.5 
+
+-------------------------------------------------------------------
 Mon Apr 12 18:24:45 CEST 2010 - jdsn@suse.de
 
 - fixes in spec file
