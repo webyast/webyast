@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Fri Apr 23 12:33:37 UTC 2010 - jreidinger@novell.com
+
+- add license headers (bnc#586620)
+- 0.1.1
+
+-------------------------------------------------------------------
 Wed Apr 14 18:12:48 UTC 2010 - lslezak@suse.cz
 
 - run the tests during RPM build (bnc#594343)
