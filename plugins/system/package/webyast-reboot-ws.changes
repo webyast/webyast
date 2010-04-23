@@ -1,4 +1,12 @@
 -------------------------------------------------------------------
+Fri Apr 23 16:41:07 CEST 2010 - mvidner@suse.cz
+
+-  Make a fresh connection to DBus, to be able to reboot
+   after DBus is restarted. Otherwise Broken pipe would be reported
+   (bnc#582759)
+- 0.1.2
+
+-------------------------------------------------------------------
 Fri Apr 23 12:33:37 UTC 2010 - jreidinger@novell.com
 
 - add license headers (bnc#586620)

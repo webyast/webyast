@@ -55,7 +55,9 @@ class System
 
 	begin
 	    # connect to the system bus
-	    system_bus = DBus::SystemBus.instance
+            # Make a fresh connection, to be able to reboot
+            # after DBus is restarted, bnc#582759
+	    system_bus = DBus::SystemBus.send :new
 
 	    # get the HAL service
 	    hal_service = system_bus.service('org.freedesktop.Hal')
