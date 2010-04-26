@@ -34,6 +34,10 @@ class UsersController < ApplicationController
   def index
     yapi_perm_check "users.usersget"
     @users = User.find_all
+    if @users.nil?
+      Rails.logger.error "No users found."
+      render ErrorResult.error(404, 2, "No users found") and return
+    end
   end
 
   # GET /users/1
