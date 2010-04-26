@@ -1,4 +1,11 @@
 -------------------------------------------------------------------
+Mon Apr 26 13:44:38 UTC 2010 - lslezak@suse.cz
+
+- package(-local) task - don't put .gitignore files to www.tar.bz2,
+  use "grep -v" for ignoring (a workaround for git bug bnc#599664)
+- 0.1.5
+
+-------------------------------------------------------------------
 Wed Apr 14 18:50:08 UTC 2010 - lslezak@suse.cz
 
 - fixed %webyast_check RPM macro

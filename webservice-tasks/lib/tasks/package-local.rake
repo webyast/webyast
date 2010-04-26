@@ -27,7 +27,7 @@ end
 # add all GIT files under the current directory to the package_task
 def add_git_files(package_task)
   # package only the files which are available in the GIT repository
-  filelist = `git ls-files . --exclude=.gitignore`.split("\n")
+  filelist = `git ls-files . | grep -v \\.gitignore`.split("\n")
 
   if $?.exitstatus.zero?
       # add ./ prefix so the exclude patterns match
