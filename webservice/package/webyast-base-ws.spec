@@ -50,8 +50,6 @@ Release:        0
 Summary:        WebYaST - base components for rest service
 Source:         www.tar.bz2
 Source1:        yast.conf
-Source2:        rails.include
-Source3:        cleanurl-v5.lua
 Source4:        org.opensuse.yast.permissions.policy
 Source5:        grantwebyastrights
 Source6:        yast_user_roles
@@ -146,8 +144,6 @@ touch $RPM_BUILD_ROOT/srv/www/%{pkg_user}/db/schema.rb
 # configure lighttpd web service
 mkdir -p $RPM_BUILD_ROOT/etc/yastws/vhosts.d/
 install -m 0644 %SOURCE1 $RPM_BUILD_ROOT/etc/yastws/vhosts.d/
-install -m 0644 %SOURCE2 $RPM_BUILD_ROOT/etc/yastws/vhosts.d/rails.inc
-install -m 0644 %SOURCE3 $RPM_BUILD_ROOT/etc/yastws/
 install -m 0644 %SOURCE7 $RPM_BUILD_ROOT/etc/yastws/
 install -m 0644 %SOURCE8 $RPM_BUILD_ROOT/etc/yastws/
 
@@ -273,8 +269,6 @@ echo "Database is ready"
 %attr(-,%{pkg_user},%{pkg_user}) /srv/www/yastws/tmp
 %config(noreplace) /etc/yastws/vhosts.d/yast.conf
 %config(noreplace) /etc/yastws/lighttpd.conf
-%config /etc/yastws/vhosts.d/rails.inc
-%config /etc/yastws/cleanurl-v5.lua
 %config /etc/yastws/modules.conf
 %config /etc/sysconfig/SuSEfirewall2.d/services/webyast
 %config /usr/share/PolicyKit/policy/org.opensuse.yast.permissions.policy
