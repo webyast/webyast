@@ -27,6 +27,7 @@ class RolesControllerTest < ActionController::TestCase
   def setup
     #set fixtures, renew test files
 		test_path = File.join( File.dirname(__FILE__), "..")
+    `mkdir -p #{test_path}/tmp`
 		`cp #{test_path}/fixtures/* #{test_path}/tmp/`
     Role.const_set(:ROLES_DEF_PATH, File.join( File.dirname(__FILE__), "..","tmp","roles.yml"))
     Role.const_set(:ROLES_ASSIGN_PATH, File.join( File.dirname(__FILE__), "..","tmp","roles_assign.yml"))
@@ -35,6 +36,11 @@ class RolesControllerTest < ActionController::TestCase
     # http://railsforum.com/viewtopic.php?id=1719
     @request.session[:account_id] = 1 # defined in fixtures
   end  
+
+  def teardown
+		test_path = File.join( File.dirname(__FILE__), "..")
+    `rm -rf #{test_path}/tmp`
+  end
 
   def test_index
     get :index
