@@ -1,3 +1,0 @@
-interface: org.opensuse.yast.system.security
-controller: securities
-singular: true
