@@ -50,12 +50,12 @@ class Resource
         resources << new(interface,impl)
       end
     end
-    Resources.new resources
+    return resources
   end
 
   def self.find(interface)
     implementations = ResourceRegistration.resources[interface]
-    unless implementations then return nil end
+    return nil unless implementations
     new(interface, implementations.first)
   end
 
@@ -71,20 +71,6 @@ class Resource
   end
 
   def to_json( options = {} )
-    Hash.from_xml(to_xml).to_json
-  end
-end
-
-class Resources < Array
-  def to_xml( options = {} )
-    xml = options[:builder] ||= Builder::XmlMarkup.new(options)
-    xml.instruct! unless options[:skip_instruct]
-    xml.resources(:type => :array) do
-      each {|resource| resource.to_xml(:builder => xml, :skip_instruct => true)}
-    end
-  end
-
-  def to_json
     Hash.from_xml(to_xml).to_json
   end
 end
