@@ -138,7 +138,7 @@ public
     return if resources.empty?
     
     ActionController::Routing::Routes.draw do |map|
-      map.root :controller => "resources", :action => "index"
+#map.root :controller => "resources", :action => "index"
       resources.each do |interface,implementations|
 	
 	implementations.each do |implementation|

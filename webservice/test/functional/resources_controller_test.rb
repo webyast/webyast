@@ -50,11 +50,16 @@ class ResourcesControllerTest < ActionController::TestCase
     assert_response :success
   end
   
-  test "resources index with interface" do
-    get :index, :id => "org.opensuse.test"
+  test "resources show with interface" do
+    get :show, :id => "org-opensuse-yast-modules-yapi-time"
     assert_response :success
   end
   
+  test "resources show with unknown interface" do
+    get :show, :id => "org-opensuse-yast-modules-yapi-bad-time"
+    assert_response :missing
+  end
+
   test "resources output xml format" do
     get :index, :format => "xml"
     assert_response :success
@@ -69,7 +74,7 @@ class ResourcesControllerTest < ActionController::TestCase
   
   test "resources by interfaces query" do
     ResourceRegistration.resources.each do |interface,implementations|
-      get :index, :params => { "id" => interface }
+      get :show, "id" => interface.tr('.','-')
       assert_response :success
     end
   end  
