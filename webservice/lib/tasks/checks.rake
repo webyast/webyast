@@ -161,7 +161,7 @@ EOF
   # scr and others. This can be achieved in 2 ways:
   # manually polkit-auth, or as pattern matching in /etc/PolicyKit/PolicyKit.conf
 
-  scr_actions = `polkit-action`.split.reject { |item| not item.include?('org.opensuse.yast.scr.') }
+  scr_actions = `polkit-action`.split.reject { |item| not item.include?('org.opensuse.yast.') }.reject { |item| item.include? "org.opensuse.yast.scr."}
   webservice_actions = [ 'org.freedesktop.packagekit.system-update', 'org.freedesktop.packagekit.package-install',  'org.freedesktop.policykit.read', *scr_actions]
 
   hint_message = "Use utility script grantwebyastrights to grant them all. See http://en.opensuse.org/YaST/Web/Development\nAlternatively, you can add the following to /etc/PolicyKit/PolicyKit.conf config tag section:\n#{policykit_conf}\n"
@@ -196,7 +196,7 @@ EOF
   end
 
   #
-  # yast-dbus, scr
+  # yast-dbus
   #
 
   test "YaST D-Bus service available" do
@@ -207,24 +207,9 @@ EOF
     end
     escape "System error, cannot access D-Bus SystemBus" unless bus
 
-    begin
-      proxy = bus.introspect( "org.opensuse.yast.SCR", "/SCR" )
-    rescue Exception => e
-      # catched by 'unless proxy' below
-    end
-
     package = "yast2-dbus-server"
     version = (os_version == "11.2")?"2.18.1":"2.17.0"
-    unless proxy
-      $stderr.puts "YaST D-Bus service not available"
-      test_version package, version
-      escape "#{package} not correctly installed", "reinstall #{package} >= #{version}"
-    end
-    begin
-      scr = proxy["org.opensuse.yast.SCR.Methods"]
-    rescue Exception => e
-    end
-    escape "YaST D-Bus does not provide the right data", "reinstall #{package}-#{version}" unless scr
+    test_version package, version
   end
 
   #
