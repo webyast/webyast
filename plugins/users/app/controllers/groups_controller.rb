@@ -69,7 +69,7 @@ public
     @groups = Group.find_all
     if @groups.nil?
       Rails.logger.error "No groups found."
-      render ErrorResult.error(404, 2, "No groups not found") and return
+      render ErrorResult.error(404, 2, "No groups found") and return
     end
 
     respond_to do |format|
