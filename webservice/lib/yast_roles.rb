@@ -41,7 +41,7 @@ module YastRoles
   #    permission_check "org.opensuse.yast.modules.yapi.time.read"
   # for more details see permission_check
   def yapi_perm_check(action)
-    permission_check "org.opensuse.yast.modules.yapi.#{action.to_s}"
+    permission_check "org.opensuse.yast.modules.yapi.#{action}"
   end
 
   # Check if permission user can do selected action. Check also roles in which user act.
