@@ -27,7 +27,8 @@ class Interface < BaseModel::Base
   attr_accessor :bootproto
   validates_inclusion_of :bootproto, :in => ["static","dhcp"]
   attr_accessor :ipaddr
-  validates_format_of :ipaddr, :allow_nil => true,
+  # blank instead of nil as specified in restdoc, bnc#600097
+  validates_format_of :ipaddr, :allow_blank => true,
       :with => /^([0-9]{1,3}.){3}[0-9]{1,3}\/[0-9]{1,2}$/
   attr_accessor	:id
   validates_format_of :id, :allow_nil => false,
@@ -38,6 +39,7 @@ class Interface < BaseModel::Base
   def initialize(args, id=nil)
     super args
     @id ||= id
+    @ipaddr ||= ""
   end
 
   def self.find( which )

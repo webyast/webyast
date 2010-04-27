@@ -40,6 +40,7 @@ class InterfaceTest < ActiveSupport::TestCase
    iface=Interface.find('eth0')
    assert_equal 'dhcp', iface.bootproto
    assert_equal 'eth0', iface.id
+   assert_equal '', iface.ipaddr
  end
  
  def test_getter2
