@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Tue Apr 27 11:41:42 UTC 2010 - jreidinger@novell.com
+
+- fix routing issue in resource controller (bnc#600060)
+- 0.1.16
+
+-------------------------------------------------------------------
 Tue Apr 27 07:55:20 UTC 2010 - jreidinger@novell.com
 
 - permission check accept also symbol
