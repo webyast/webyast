@@ -6,9 +6,19 @@
 # macros %webyast_ are generic for both webservice and client
 #
 
+# target directories
 %webyast_ws_dir /srv/www/yastws
 %webyast_ui_dir /srv/www/yast
 
+# users who run the services
+%webyast_ws_user yastws
+%webyast_ui_user lighttpd
+
+# service names (init script names in /etc/init.d)
+%webyast_ws_service yastws
+%webyast_ui_service yastwc
+
+# run the testsuite
 %webyast_check \
     export TEST_DB_PATH=/tmp/webyast_test.sqlite3 \
     rm -rf $TEST_DB_PATH \
@@ -24,6 +34,7 @@
     export RAILS_PARENT=%{webyast_ui_dir} \
     %webyast_check
 
+# build REST documentation
 %webyast_ws_restdoc \
     export RAILS_PARENT=%{webyast_ws_dir} \
     env LANG=en rake restdoc

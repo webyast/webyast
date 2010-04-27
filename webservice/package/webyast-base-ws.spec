@@ -89,8 +89,7 @@ Requires: webyast-base-ws = %{version}
 Summary:  Testsuite for webyast-base-ws package
 
 #
-%define pkg_user yastws
-%define pkg_home /var/lib/%{pkg_user}
+%define pkg_home /var/lib/%{webyast_ws_user}
 #
 
 
@@ -122,23 +121,23 @@ RAILS_ENV=test rake test
 #
 # Install all web and frontend parts.
 #
-mkdir -p $RPM_BUILD_ROOT/srv/www/%{pkg_user}/log/
-cp -a * $RPM_BUILD_ROOT/srv/www/%{pkg_user}/
-rm -f $RPM_BUILD_ROOT/srv/www/%{pkg_user}/log/*
-rm -f $RPM_BUILD_ROOT/srv/www/%{pkg_user}/COPYING
-touch $RPM_BUILD_ROOT/srv/www/%{pkg_user}/db/schema.rb
+mkdir -p $RPM_BUILD_ROOT%{webyast_ws_dir}/log/
+cp -a * $RPM_BUILD_ROOT%{webyast_ws_dir}/
+rm -f $RPM_BUILD_ROOT%{webyast_ws_dir}/log/*
+rm -f $RPM_BUILD_ROOT%{webyast_ws_dir}/COPYING
+touch $RPM_BUILD_ROOT%{webyast_ws_dir}/db/schema.rb
 
 %{__install} -d -m 0755                            \
     %{buildroot}%{pkg_home}/sockets/               \
     %{buildroot}%{pkg_home}/cache/                 \
     %{buildroot}%{_sbindir}                        \
-    %{buildroot}%{_var}/log/%{pkg_user}
+    %{buildroot}%{_var}/log/%{webyast_ws_user}
 #
 # init script
 #
 %{__install} -D -m 0755 %SOURCE9 \
-    %{buildroot}%{_sysconfdir}/init.d/%{pkg_user}
-%{__ln_s} -f %{_sysconfdir}/init.d/%{pkg_user} %{buildroot}%{_sbindir}/rc%{pkg_user}
+    %{buildroot}%{_sysconfdir}/init.d/%{webyast_ws_service}
+%{__ln_s} -f %{_sysconfdir}/init.d/%{webyast_ws_service} %{buildroot}%{_sbindir}/rc%{webyast_ws_service}
 #
 
 # configure lighttpd web service
@@ -163,11 +162,11 @@ mkdir -p $RPM_BUILD_ROOT/var/lib/yastws
 mkdir -p $RPM_BUILD_ROOT/usr/share/yastws
 
 #  create empty tmp directory
-mkdir -p $RPM_BUILD_ROOT/srv/www/%{pkg_user}/tmp
-mkdir -p $RPM_BUILD_ROOT/srv/www/%{pkg_user}/tmp/cache
-mkdir -p $RPM_BUILD_ROOT/srv/www/%{pkg_user}/tmp/pids
-mkdir -p $RPM_BUILD_ROOT/srv/www/%{pkg_user}/tmp/sessions
-mkdir -p $RPM_BUILD_ROOT/srv/www/%{pkg_user}/tmp/sockets
+mkdir -p $RPM_BUILD_ROOT%{webyast_ws_dir}/tmp
+mkdir -p $RPM_BUILD_ROOT%{webyast_ws_dir}/tmp/cache
+mkdir -p $RPM_BUILD_ROOT%{webyast_ws_dir}/tmp/pids
+mkdir -p $RPM_BUILD_ROOT%{webyast_ws_dir}/tmp/sessions
+mkdir -p $RPM_BUILD_ROOT%{webyast_ws_dir}/tmp/sockets
 
 
 #---------------------------------------------------------------
@@ -179,26 +178,26 @@ rm -rf $RPM_BUILD_ROOT
 #
 # e.g. adding user
 #
-/usr/sbin/groupadd -r %{pkg_user} &>/dev/null ||:
-/usr/sbin/useradd  -g %{pkg_user} -s /bin/false -r -c "User for YaST-Webservice" -d %{pkg_home} %{pkg_user} &>/dev/null ||:
+/usr/sbin/groupadd -r %{webyast_ws_user} &>/dev/null ||:
+/usr/sbin/useradd  -g %{webyast_ws_user} -s /bin/false -r -c "User for YaST-Webservice" -d %{pkg_home} %{webyast_ws_user} &>/dev/null ||:
 
 #---------------------------------------------------------------
 %post
-%fillup_and_insserv %{pkg_user}
+%fillup_and_insserv %{webyast_ws_service}
 #
 #granting permissions for yastws
 #
-if [ `/usr/bin/polkit-auth --user yastws | grep -c "org.freedesktop.packagekit.system-update"` -eq 0 ]; then
+if [ `/usr/bin/polkit-auth --user %{webyast_ws_user} | grep -c "org.freedesktop.packagekit.system-update"` -eq 0 ]; then
   # FIXME: remove ||: (don't hide errors), has to be correctly implemented for package update...
-  /usr/bin/polkit-auth --user yastws --grant org.freedesktop.packagekit.system-update > /dev/null ||:
+  /usr/bin/polkit-auth --user %{webyast_ws_user} --grant org.freedesktop.packagekit.system-update > /dev/null ||:
 fi
-if [ `/usr/bin/polkit-auth --user yastws | grep -c "org.freedesktop.policykit.read"` -eq 0 ]; then
+if [ `/usr/bin/polkit-auth --user %{webyast_ws_user} | grep -c "org.freedesktop.policykit.read"` -eq 0 ]; then
   # FIXME: remove ||: (don't hide errors), has to be correctly implemented for package update...
-  /usr/bin/polkit-auth --user yastws --grant org.freedesktop.policykit.read > /dev/null ||:
+  /usr/bin/polkit-auth --user %{webyast_ws_user} --grant org.freedesktop.policykit.read > /dev/null ||:
 fi
-if [ `/usr/bin/polkit-auth --user yastws | grep -c "org.opensuse.yast.module-manager.import"` -eq 0 ]; then
+if [ `/usr/bin/polkit-auth --user %{webyast_ws_user} | grep -c "org.opensuse.yast.module-manager.import"` -eq 0 ]; then
   # FIXME: remove ||: (don't hide errors), has to be correctly implemented for package update...
-  /usr/bin/polkit-auth --user yastws --grant org.opensuse.yast.module-manager.import > /dev/null ||:
+  /usr/bin/polkit-auth --user %{webyast_ws_user} --grant org.opensuse.yast.module-manager.import > /dev/null ||:
 fi
 #
 # granting all permissions for root 
@@ -207,80 +206,80 @@ fi
 #
 # create database 
 #
-cd srv/www/%{pkg_user}
+cd %{webyast_ws_dir}
 #migrate database
 RAILS_ENV=production rake db:migrate
-chown -R yastws: db
-chown -R yastws: log
+chown -R %{webyast_ws_user}: db
+chown -R %{webyast_ws_user}: log
 echo "Database is ready"
 
 #---------------------------------------------------------------
 %preun
-%stop_on_removal %{pkg_user}
+%stop_on_removal %{webyast_ws_service}
 
 #---------------------------------------------------------------
 %postun
-%restart_on_update %{pkg_user}
+%restart_on_update %{webyast_ws_service}
 %{insserv_cleanup}
 
 #---------------------------------------------------------------
 # restart yastws on lighttpd update (bnc#559534)
 %triggerin -- lighttpd
-%restart_on_update %{pkg_user}
+%restart_on_update %{webyast_ws_service}
 
 #---------------------------------------------------------------
 %files 
 %defattr(-,root,root)
 #this /etc/yastws is for ligght conf for yastws
 %dir /etc/yastws
-%dir /srv/www/yastws
+%dir %{webyast_ws_dir}
 %dir /etc/yastws/vhosts.d
 %dir %{_datadir}/PolicyKit
 %dir %{_datadir}/PolicyKit/policy
-%attr(-,%{pkg_user},%{pkg_user}) %dir %{pkg_home}
-%attr(-,%{pkg_user},%{pkg_user}) %dir %{pkg_home}/sockets
-%attr(-,%{pkg_user},%{pkg_user}) %dir %{pkg_home}/cache
-%attr(-,%{pkg_user},%{pkg_user}) %dir %{_var}/log/%{pkg_user}
+%attr(-,%{webyast_ws_user},%{webyast_ws_user}) %dir %{pkg_home}
+%attr(-,%{webyast_ws_user},%{webyast_ws_user}) %dir %{pkg_home}/sockets
+%attr(-,%{webyast_ws_user},%{webyast_ws_user}) %dir %{pkg_home}/cache
+%attr(-,%{webyast_ws_user},%{webyast_ws_user}) %dir %{_var}/log/%{webyast_ws_user}
 
 #this /etc/webyast is for webyast configuration files
 %dir /etc/webyast/
 %dir %{_datadir}/yastws
-%dir %attr(-,%{pkg_user},root) /var/lib/yastws
-%dir /srv/www/yastws/db
-/srv/www/yastws/app
-/srv/www/yastws/db/migrate
-%ghost /srv/www/yastws/db/schema.rb
-/srv/www/yastws/doc
-/srv/www/yastws/lib
-/srv/www/yastws/public
-/srv/www/yastws/Rakefile
-/srv/www/yastws/script
-%dir /srv/www/yastws/config
-/srv/www/yastws/config/boot.rb
-/srv/www/yastws/config/database.yml
-/srv/www/yastws/config/environments
-/srv/www/yastws/config/initializers
-/srv/www/yastws/config/routes.rb
+%dir %attr(-,%{webyast_ws_user},root) /var/lib/yastws
+%dir %{webyast_ws_dir}/db
+%{webyast_ws_dir}/app
+%{webyast_ws_dir}/db/migrate
+%ghost %{webyast_ws_dir}/db/schema.rb
+%{webyast_ws_dir}/doc
+%{webyast_ws_dir}/lib
+%{webyast_ws_dir}/public
+%{webyast_ws_dir}/Rakefile
+%{webyast_ws_dir}/script
+%dir %{webyast_ws_dir}/config
+%{webyast_ws_dir}/config/boot.rb
+%{webyast_ws_dir}/config/database.yml
+%{webyast_ws_dir}/config/environments
+%{webyast_ws_dir}/config/initializers
+%{webyast_ws_dir}/config/routes.rb
 #also users can run granting script, as permissions is handled by policyKit right for granting permissions
 %attr(555,root,root) %config /usr/sbin/grantwebyastrights
-%attr(755,root,root) /srv/www/yastws/start.sh
-%doc /srv/www/yastws/README
-%attr(-,%{pkg_user},%{pkg_user}) /srv/www/yastws/log
-%attr(-,%{pkg_user},%{pkg_user}) /srv/www/yastws/tmp
+%attr(755,root,root) %{webyast_ws_dir}/start.sh
+%doc %{webyast_ws_dir}/README
+%attr(-,%{webyast_ws_user},%{webyast_ws_user}) %{webyast_ws_dir}/log
+%attr(-,%{webyast_ws_user},%{webyast_ws_user}) %{webyast_ws_dir}/tmp
 %config(noreplace) /etc/yastws/vhosts.d/yast.conf
 %config(noreplace) /etc/yastws/lighttpd.conf
 %config /etc/yastws/modules.conf
 %config /etc/sysconfig/SuSEfirewall2.d/services/webyast
 %config /usr/share/PolicyKit/policy/org.opensuse.yast.permissions.policy
-%config /srv/www/yastws/config/environment.rb
+%config %{webyast_ws_dir}/config/environment.rb
 %config(noreplace) /etc/yast_user_roles
-%config(noreplace)  %{_sysconfdir}/init.d/%{pkg_user}
-%{_sbindir}/rc%{pkg_user}
+%config(noreplace)  %{_sysconfdir}/init.d/%{webyast_ws_service}
+%{_sbindir}/rc%{webyast_ws_service}
 %doc COPYING
 
 %files testsuite
 %defattr(-,root,root)
-/srv/www/yastws/test
+%{webyast_ws_dir}/test
 
 #---------------------------------------------------------------
 %changelog
