@@ -190,6 +190,12 @@ class Service
 	"action"	=> [ "s", params["execute"] ],
 	"custom"	=> [ "b", params["custom"] == "true" ]
     }
+    # for restart, do not solve dependencies, do not touch onb-oot status
+    if (params["execute"] == "restart")
+	args["only_execute"]	= [ "b", true ]
+	args["only_this"]	= [ "b", true ]
+    end
+
     begin
       ret = YastService.Call("YaPI::SERVICES::Execute", args)
     rescue DBus::Error => e
