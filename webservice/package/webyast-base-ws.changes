@@ -1,4 +1,11 @@
 -------------------------------------------------------------------
+Wed Apr 28 10:31:30 UTC 2010 - jreidinger@novell.com
+
+- remove from configuration rails.inc which is removed and cleanup
+  lighttpd configuration (bnc#600389)
+- 0.1.17
+
+-------------------------------------------------------------------
 Tue Apr 27 11:41:42 UTC 2010 - jreidinger@novell.com
 
 - fix routing issue in resource controller (bnc#600060)
