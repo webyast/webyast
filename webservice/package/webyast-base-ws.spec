@@ -232,7 +232,6 @@ echo "Database is ready"
 #this /etc/yastws is for ligght conf for yastws
 %dir /etc/yastws
 %dir /srv/www/yastws
-%dir /etc/yastws/vhosts.d
 %dir %{_datadir}/PolicyKit
 %dir %{_datadir}/PolicyKit/policy
 %attr(-,%{pkg_user},%{pkg_user}) %dir %{pkg_home}
@@ -265,7 +264,6 @@ echo "Database is ready"
 %doc /srv/www/yastws/README
 %attr(-,%{pkg_user},%{pkg_user}) /srv/www/yastws/log
 %attr(-,%{pkg_user},%{pkg_user}) /srv/www/yastws/tmp
-%config(noreplace) /etc/yastws/vhosts.d/yast.conf
 %config(noreplace) /etc/yastws/lighttpd.conf
 %config /etc/yastws/modules.conf
 %config /etc/sysconfig/SuSEfirewall2.d/services/webyast
