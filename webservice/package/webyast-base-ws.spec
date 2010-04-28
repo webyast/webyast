@@ -49,7 +49,6 @@ Version:        0.1.16
 Release:        0
 Summary:        WebYaST - base components for rest service
 Source:         www.tar.bz2
-Source1:        yast.conf
 Source4:        org.opensuse.yast.permissions.policy
 Source5:        grantwebyastrights
 Source6:        yast_user_roles
@@ -142,8 +141,7 @@ touch $RPM_BUILD_ROOT/srv/www/%{pkg_user}/db/schema.rb
 #
 
 # configure lighttpd web service
-mkdir -p $RPM_BUILD_ROOT/etc/yastws/vhosts.d/
-install -m 0644 %SOURCE1 $RPM_BUILD_ROOT/etc/yastws/vhosts.d/
+mkdir -p $RPM_BUILD_ROOT/etc/yastws/
 install -m 0644 %SOURCE7 $RPM_BUILD_ROOT/etc/yastws/
 install -m 0644 %SOURCE8 $RPM_BUILD_ROOT/etc/yastws/
 
