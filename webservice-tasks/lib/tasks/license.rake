@@ -42,6 +42,9 @@ def license_report
     elsif fn =~ /licenses\//
       report[:skipped] << "#{fn}: skipped by name match (already contain license)"
       next
+    elsif fn =~ /\/rrdtool.*\.txt/
+      report[:skipped] << "#{fn}: skipped by name match (rrdtool output is not licensed)"
+      next
     elsif fn =~ /\.changes\z/
       report[:skipped] << "#{fn}: skipped by name match (changes file)"
       next
