@@ -39,6 +39,9 @@ def license_report
     elsif fn =~ /^db\//
       report[:skipped] << "#{fn}: skipped by name match (generated DB migration or schema)"
       next
+    elsif fn =~ /licenses\//
+      report[:skipped] << "#{fn}: skipped by name match (already contain license)"
+      next
     elsif fn =~ /\.changes\z/
       report[:skipped] << "#{fn}: skipped by name match (changes file)"
       next
