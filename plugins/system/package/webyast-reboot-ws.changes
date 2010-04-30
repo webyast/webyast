@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Fri Apr 30 14:40:35 UTC 2010 - jreidinger@novell.com
+
+- fix spec file consistency (bnc#560061)
+- 0.1.2
+
+-------------------------------------------------------------------
 Fri Apr 23 16:41:07 CEST 2010 - mvidner@suse.cz
 
 -  Make a fresh connection to DBus, to be able to reboot
