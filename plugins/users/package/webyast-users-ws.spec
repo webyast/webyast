@@ -93,7 +93,15 @@ rm -rf $RPM_BUILD_ROOT
 %dir %{webyast_ws_dir}/vendor
 %dir %{webyast_ws_dir}/vendor/plugins
 %dir %{plugin_dir}
-%{plugin_dir}/*
+%{plugin_dir}/app
+%{plugin_dir}/config
+%{plugin_dir}/init.rb
+%{plugin_dir}/install.rb
+%{plugin_dir}/uninstall.rb
+%{plugin_dir}/Rakefile
+%{plugin_dir}/README
+%{plugin_dir}/tasks
+
 %dir /usr/share/PolicyKit
 %dir /usr/share/PolicyKit/policy
 %attr(644,root,root) %config /usr/share/PolicyKit/policy/org.opensuse.yast.modules.yapi.users.policy
