@@ -10,6 +10,9 @@
 %webyast_ws_dir /srv/www/yastws
 %webyast_ui_dir /srv/www/yast
 
+# variable directories
+%webyast_ws_vardir /var/lib/yastws/
+
 # users who run the services
 %webyast_ws_user yastws
 %webyast_ui_user lighttpd

@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Fri Apr 30 10:52:13 UTC 2010 - jreidinger@novell.com
+
+- webyast rpm macros contain link to /var/lib/yastws
+- 0.1.6
+
+-------------------------------------------------------------------
 Mon Apr 26 13:44:38 UTC 2010 - lslezak@suse.cz
 
 - package(-local) task - don't put .gitignore files to www.tar.bz2,
