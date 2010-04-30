@@ -31,7 +31,6 @@ require File.expand_path(rails_parent + "/test/test_helper")
 require 'fileutils'
 require 'getoptlong'
 require 'test/unit'
-require "scr"
 
 options = GetoptLong.new(
   [ "--plugin",   GetoptLong::REQUIRED_ARGUMENT ]

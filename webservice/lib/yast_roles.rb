@@ -52,6 +52,7 @@ module YastRoles
   #                  - _PolicyKitException_ for error during running policy kit
   #
   def permission_check(action)
+    action = action.to_s #avoid problems if action is symbol
     account = self.current_account
     raise NotLoggedException if account.nil? || account.login.size == 0
     action ||= "" #avoid nil action

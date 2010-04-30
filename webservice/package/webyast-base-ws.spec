@@ -45,11 +45,10 @@ PreReq:         rubygem-rpam, rubygem-polkit
 License:	LGPL v2.1 only
 Group:          Productivity/Networking/Web/Utilities
 Autoreqprov:    on
-Version:        0.1.14
+Version:        0.1.17
 Release:        0
 Summary:        WebYaST - base components for rest service
 Source:         www.tar.bz2
-Source1:        yast.conf
 Source4:        org.opensuse.yast.permissions.policy
 Source5:        grantwebyastrights
 Source6:        yast_user_roles
@@ -141,8 +140,7 @@ touch $RPM_BUILD_ROOT%{webyast_ws_dir}/db/schema.rb
 #
 
 # configure lighttpd web service
-mkdir -p $RPM_BUILD_ROOT/etc/yastws/vhosts.d/
-install -m 0644 %SOURCE1 $RPM_BUILD_ROOT/etc/yastws/vhosts.d/
+mkdir -p $RPM_BUILD_ROOT/etc/yastws/
 install -m 0644 %SOURCE7 $RPM_BUILD_ROOT/etc/yastws/
 install -m 0644 %SOURCE8 $RPM_BUILD_ROOT/etc/yastws/
 
@@ -233,7 +231,6 @@ echo "Database is ready"
 #this /etc/yastws is for ligght conf for yastws
 %dir /etc/yastws
 %dir %{webyast_ws_dir}
-%dir /etc/yastws/vhosts.d
 %dir %{_datadir}/PolicyKit
 %dir %{_datadir}/PolicyKit/policy
 %attr(-,%{webyast_ws_user},%{webyast_ws_user}) %dir %{pkg_home}
@@ -266,7 +263,6 @@ echo "Database is ready"
 %doc %{webyast_ws_dir}/README
 %attr(-,%{webyast_ws_user},%{webyast_ws_user}) %{webyast_ws_dir}/log
 %attr(-,%{webyast_ws_user},%{webyast_ws_user}) %{webyast_ws_dir}/tmp
-%config(noreplace) /etc/yastws/vhosts.d/yast.conf
 %config(noreplace) /etc/yastws/lighttpd.conf
 %config /etc/yastws/modules.conf
 %config /etc/sysconfig/SuSEfirewall2.d/services/webyast

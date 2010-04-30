@@ -67,6 +67,7 @@ public
   def index
     # read permissions were checked in a before filter
     @groups = Group.find_all
+    @groups.sort! {|x,y| x.cn <=> y.cn}
     if @groups.nil?
       Rails.logger.error "No groups found."
       render ErrorResult.error(404, 2, "No groups found") and return

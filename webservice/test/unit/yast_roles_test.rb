@@ -65,6 +65,14 @@ class YastRolesTest < ActiveSupport::TestCase
     assert permission_check("test_polkit_override")
   end
 
+  def test_accept_string_polkit
+    def PolKit.polkit_check(action,login) 
+      raise "Polkit accept only string" unless action.instance_of? String
+      return :yes if action == "test_polkit_override"
+    end
+    assert permission_check(:"test_polkit_override")
+  end
+
   # test/fixtures/yast_user_roles assign "network_admin" role to user "root"
   def test_role_ok
     def PolKit.polkit_check(action,login) return :yes if login == "network_admin" end

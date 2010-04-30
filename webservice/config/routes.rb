@@ -19,7 +19,10 @@
 # route sessions statically, it is a singleton controller
 ActionController::Routing::Routes.draw do |map|
   map.resource :session
-  map.resources :resources, :requirements => { :id => /[-\w]+/ }
+#resources is not restful as it allows only read only access. It is more likely inspection
+  map.connect 'resources/:id.:format',  :controller => 'resources', :action => 'show', :requirements => { :id => /[-\w]+/ }
+  map.all_resources 'resources.:format',  :controller => 'resources', :action => 'index'
+  map.root :all_resources
   map.resource :permissions
   map.resources :vendor_settings
   

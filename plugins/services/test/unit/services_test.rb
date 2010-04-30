@@ -152,4 +152,32 @@ EOF
     assert ret[0].required_for_stop == [ "my_app" ] # network, nfs filtered out
   end
 
+  test "restart service" do
+    ret = {"exit" => "0", "stderr" => "", "stdout" => "restarted"}
+    # because of restart, extra parameters were added:
+    YastService.stubs(:Call).with('YaPI::SERVICES::Execute', {
+	"name" => [ "s", "dbus" ],
+	"action" => [ "s", "restart"],
+	'custom' => ['b', false],
+	'only_execute' => ['b', true],
+	'only_this' => ['b', true],
+    }).returns(ret)
+
+    s = Service.new('dbus')
+    assert s.save({"execute" => 'restart'}) == ret
+  end
+
+  test "stop service" do
+    ret = {"exit" => "0", "stderr" => "", "stdout" => "stopped"}
+    # because of restart, extra parameters were added:
+    YastService.stubs(:Call).with('YaPI::SERVICES::Execute', {
+	"name" => [ "s", "dbus" ],
+	"action" => [ "s", "stop"],
+	'custom' => ['b', false]
+    }).returns(ret)
+
+    s = Service.new('dbus')
+    assert s.save({"execute" => 'stop'}) == ret
+  end
+
 end

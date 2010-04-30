@@ -1,4 +1,23 @@
 -------------------------------------------------------------------
+Wed Apr 28 10:31:30 UTC 2010 - jreidinger@novell.com
+
+- remove from configuration rails.inc which is removed and cleanup
+  lighttpd configuration (bnc#600389)
+- 0.1.17
+
+-------------------------------------------------------------------
+Tue Apr 27 11:41:42 UTC 2010 - jreidinger@novell.com
+
+- fix routing issue in resource controller (bnc#600060)
+- 0.1.16
+
+-------------------------------------------------------------------
+Tue Apr 27 07:55:20 UTC 2010 - jreidinger@novell.com
+
+- permission check accept also symbol
+- 0.1.15
+
+-------------------------------------------------------------------
 Mon Apr 26 13:43:44 UTC 2010 - schubi@novell.com
 
 - removed not needed cleanurl-v5.lua  

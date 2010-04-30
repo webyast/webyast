@@ -21,6 +21,7 @@
 
 require File.expand_path(File.dirname(__FILE__) + "/../test_helper")
 require "yast/config_file"
+require 'tempfile'
 
 class BasesystemTest < ActiveSupport::TestCase
 
@@ -34,7 +35,9 @@ EOF
   TEST_STEPS = [{ "controller" => "time"},{"controller" => "language", "action" => "show"}]
   def setup
     #set const to run test in this directory
-    Basesystem.const_set "FINISH_FILE", File.expand_path(File.join(File.dirname(__FILE__),"finish")) 
+    tmpfile = Tempfile.new('finish').path 
+    File.delete tmpfile #remove it by default
+    Basesystem.const_set "FINISH_FILE", tmpfile
     YaST::ConfigFile.stubs(:read_file).returns(YAML_CONTENT)
     YaST::ConfigFile.any_instance.stubs(:path).returns(__FILE__)
     @basesystem = Basesystem.find

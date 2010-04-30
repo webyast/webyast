@@ -39,8 +39,20 @@ def license_report
     elsif fn =~ /^db\//
       report[:skipped] << "#{fn}: skipped by name match (generated DB migration or schema)"
       next
+    elsif fn =~ /licenses\//
+      report[:skipped] << "#{fn}: skipped by name match (already contain license)"
+      next
+    elsif fn =~ /COPYING/
+      report[:skipped] << "#{fn}: skipped by name match (already contain license)"
+      next
+    elsif fn =~ /\/rrdtool.*\.txt/
+      report[:skipped] << "#{fn}: skipped by name match (rrdtool output is not licensed)"
+      next
     elsif fn =~ /\.changes\z/
       report[:skipped] << "#{fn}: skipped by name match (changes file)"
+      next
+    elsif fn =~ /vendor\/plugins/
+      report[:skipped] << "#{fn}: skipped by name match (polkit policy file)"
       next
     elsif fn =~ /\.policy\z/
       report[:skipped] << "#{fn}: skipped by name match (polkit policy file)"

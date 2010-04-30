@@ -318,6 +318,9 @@ sub Execute {
   my $name	= $args->{"name"} || "";
   my $action	= $args->{"action"} || "";
   my $ret	= {};
+
+  y2debug ("Execute args: ", Dumper ($args));
+
   # no enable/disable
   my $only_execute 	= $args->{"only_execute"} || 0;
   # do not solve dependencies
@@ -432,6 +435,8 @@ sub Enable {
   };
   # do not solve dependencies
   my $only_this 	= $args->{"only_this"} || 0;
+
+  y2debug ("Enable args: ", Dumper ($args));
 
   # enable/disable with dependencies
   unless ($only_this) {
