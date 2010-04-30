@@ -39,8 +39,8 @@ Requires:       yast2-registration > 2.17.27
 %endif  
 
 #
-%define pkg_user yastws
 %define plugin_name registration
+%define plugin_dir %{webyast_ws_dir}/vendor/plugins/%{plugin_name}
 #
 
 %package testsuite
@@ -76,9 +76,10 @@ needed at runtime.
 #
 # Install all web and frontend parts.
 #
-mkdir -p $RPM_BUILD_ROOT/srv/www/%{pkg_user}/vendor/plugins/%{plugin_name}
-cp -a * $RPM_BUILD_ROOT/srv/www/%{pkg_user}/vendor/plugins/%{plugin_name}
-rm -f $RPM_BUILD_ROOT/srv/www/%{pkg_user}/vendor/plugins/%{plugin_name}/COPYING
+mkdir -p $RPM_BUILD_ROOT%{plugin_dir}
+cp -a * $RPM_BUILD_ROOT%{plugin_dir}/
+rm -f $RPM_BUILD_ROOT%{plugin_dir}/COPYING
+
 
 %clean
 rm -rf $RPM_BUILD_ROOT
@@ -88,28 +89,30 @@ rm -rf $RPM_BUILD_ROOT
 # granting all permissions for root and yastws
 #
 /usr/sbin/grantwebyastrights --user root --action grant > /dev/null
-/usr/sbin/grantwebyastrights --user yastws --action grant > /dev/null
+/usr/sbin/grantwebyastrights --user %{webyast_ws_user} --action grant > /dev/null
 
 %files 
 %defattr(-,root,root)
-%dir /srv/www/%{pkg_user}
-%dir /srv/www/%{pkg_user}/vendor
-%dir /srv/www/%{pkg_user}/vendor/plugins
-%dir /srv/www/%{pkg_user}/vendor/plugins/%{plugin_name}
-%dir /srv/www/%{pkg_user}/vendor/plugins/%{plugin_name}/doc
-/srv/www/%{pkg_user}/vendor/plugins/%{plugin_name}/README
-/srv/www/%{pkg_user}/vendor/plugins/%{plugin_name}/Rakefile
-/srv/www/%{pkg_user}/vendor/plugins/%{plugin_name}/init.rb
-/srv/www/%{pkg_user}/vendor/plugins/%{plugin_name}/install.rb
-/srv/www/%{pkg_user}/vendor/plugins/%{plugin_name}/uninstall.rb
-/srv/www/%{pkg_user}/vendor/plugins/%{plugin_name}/app
-/srv/www/%{pkg_user}/vendor/plugins/%{plugin_name}/config
-/srv/www/%{pkg_user}/vendor/plugins/%{plugin_name}/tasks
-/srv/www/%{pkg_user}/vendor/plugins/%{plugin_name}/doc/README_FOR_APP
+%dir %{webyast_ws_dir}
+%dir %{webyast_ws_dir}/vendor
+%dir %{webyast_ws_dir}/vendor/plugins
+%dir %{plugin_dir}
+%dir %{plugin_dir}/doc
+
+%{plugin_dir}/README
+%{plugin_dir}/Rakefile
+%{plugin_dir}/init.rb
+%{plugin_dir}/install.rb
+%{plugin_dir}/uninstall.rb
+%{plugin_dir}/app
+%{plugin_dir}/config
+%{plugin_dir}/tasks
+%{plugin_dir}/doc/README_FOR_APP
+
 %doc COPYING
 
 %files testsuite
 %defattr(-,root,root)
-%{webyast_ws_dir}/vendor/plugins/%{plugin_name}/test
+%{plugin_dir}/test
 
 %changelog

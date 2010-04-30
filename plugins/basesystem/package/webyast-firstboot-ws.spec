@@ -29,8 +29,8 @@ BuildRequires:  webyast-base-ws-testsuite
 BuildRequires:	rubygem-test-unit rubygem-mocha
 
 #
-%define pkg_user yastws
 %define plugin_name basesystem
+%define plugin_dir %{webyast_ws_dir}/vendor/plugins/%{plugin_name}
 #
 
 %package testsuite
@@ -66,11 +66,11 @@ needed at runtime.
 #
 # Install all web and frontend parts.
 #
-mkdir -p $RPM_BUILD_ROOT/var/lib/yastws/%{plugin_name}
-mkdir -p $RPM_BUILD_ROOT/srv/www/%{pkg_user}/vendor/plugins/%{plugin_name}
-cp -a * $RPM_BUILD_ROOT/srv/www/%{pkg_user}/vendor/plugins/%{plugin_name}
-rm -f $RPM_BUILD_ROOT/srv/www/%{pkg_user}/vendor/plugins/%{plugin_name}/COPYING
-#FIXME maybe location change in future
+mkdir -p $RPM_BUILD_ROOT%{webyast_ws_vardir}%{plugin_name}
+
+mkdir -p $RPM_BUILD_ROOT%{plugin_dir}
+cp -a * $RPM_BUILD_ROOT%{plugin_dir}/
+rm -f $RPM_BUILD_ROOT%{plugin_dir}/COPYING
 
 mkdir -p $RPM_BUILD_ROOT/etc/webyast/
 cp %SOURCE1 $RPM_BUILD_ROOT/etc/webyast/
@@ -81,29 +81,32 @@ rm -rf $RPM_BUILD_ROOT
 
 %files 
 %defattr(-,root,root)
-%dir /srv/www/%{pkg_user}
-%dir /srv/www/%{pkg_user}/vendor
-%dir /srv/www/%{pkg_user}/vendor/plugins
-%dir /srv/www/%{pkg_user}/vendor/plugins/%{plugin_name}
-%dir /srv/www/%{pkg_user}/vendor/plugins/%{plugin_name}/doc
+%dir %{webyast_ws_dir}
+%dir %{webyast_ws_dir}/vendor
+%dir %{webyast_ws_dir}/vendor/plugins
+%dir %{plugin_dir}
+%dir %{plugin_dir}/doc
+
 #var dir to store basesystem status
-%dir %attr (-,%{pkg_user},root) /var/lib/yastws
-%dir %attr (-,%{pkg_user},root) /var/lib/yastws/%{plugin_name}
+%dir %attr (-,%{webyast_ws_user},root) %{webyast_ws_vardir}
+%dir %attr (-,%{webyast_ws_user},root) %{webyast_ws_vardir}/%{plugin_name}
 %dir /etc/webyast/
+
 %config /etc/webyast/basesystem.yml
-/srv/www/%{pkg_user}/vendor/plugins/%{plugin_name}/README
-/srv/www/%{pkg_user}/vendor/plugins/%{plugin_name}/Rakefile
-/srv/www/%{pkg_user}/vendor/plugins/%{plugin_name}/init.rb
-/srv/www/%{pkg_user}/vendor/plugins/%{plugin_name}/install.rb
-/srv/www/%{pkg_user}/vendor/plugins/%{plugin_name}/uninstall.rb
-/srv/www/%{pkg_user}/vendor/plugins/%{plugin_name}/app
-/srv/www/%{pkg_user}/vendor/plugins/%{plugin_name}/config
-#/srv/www/%{pkg_user}/vendor/plugins/%{plugin_name}/tasks
-/srv/www/%{pkg_user}/vendor/plugins/%{plugin_name}/doc/README_FOR_APP
+
+%{plugin_dir}/README
+%{plugin_dir}/Rakefile
+%{plugin_dir}/init.rb
+%{plugin_dir}/install.rb
+%{plugin_dir}/uninstall.rb
+%{plugin_dir}/app
+%{plugin_dir}/config
+%{plugin_dir}/doc/README_FOR_APP
+
 %doc COPYING
 
 %files testsuite
 %defattr(-,root,root)
-%{webyast_ws_dir}/vendor/plugins/%{plugin_name}/test
+%{plugin_dir}/test
 
 %changelog

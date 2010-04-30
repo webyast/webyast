@@ -38,8 +38,8 @@ Requires:       yast2-ruby-bindings >= 0.3.2.1
 Requires:	yast2-runlevel
 
 #
-%define pkg_user yastws
 %define plugin_name services
+%define plugin_dir %{webyast_ws_dir}/vendor/plugins/%{plugin_name}
 #
 
 %package testsuite
@@ -82,9 +82,9 @@ rm -rf restdoc
 #
 # Install all web and frontend parts.
 #
-mkdir -p $RPM_BUILD_ROOT/srv/www/%{pkg_user}/vendor/plugins/%{plugin_name}
-cp -a * $RPM_BUILD_ROOT/srv/www/%{pkg_user}/vendor/plugins/%{plugin_name}
-rm -f $RPM_BUILD_ROOT/srv/www/%{pkg_user}/vendor/plugins/%{plugin_name}/COPYING
+mkdir -p $RPM_BUILD_ROOT%{plugin_dir}
+cp -a * $RPM_BUILD_ROOT%{plugin_dir}/
+rm -f $RPM_BUILD_ROOT%{plugin_dir}/COPYING
 
 # Policies
 mkdir -p $RPM_BUILD_ROOT/usr/share/PolicyKit/policy
@@ -111,40 +111,47 @@ rm -rf $RPM_BUILD_ROOT
 # granting all permissions for root 
 #
 /usr/sbin/grantwebyastrights --user root --action grant > /dev/null ||:
-/usr/sbin/grantwebyastrights --user yastws --action grant > /dev/null ||:
+/usr/sbin/grantwebyastrights --user %{webyast_ws_user} --action grant > /dev/null ||:
 
 %files 
 %defattr(-,root,root)
-%dir /srv/www/%{pkg_user}
-%dir /srv/www/%{pkg_user}/vendor
-%dir /srv/www/%{pkg_user}/vendor/plugins
-%dir /srv/www/%{pkg_user}/vendor/plugins/%{plugin_name}
-%dir /srv/www/%{pkg_user}/vendor/plugins/%{plugin_name}/doc
+%dir %{webyast_ws_dir}
+%dir %{webyast_ws_dir}/vendor
+%dir %{webyast_ws_dir}/vendor/plugins
+%dir %{plugin_dir}
+%dir %{plugin_dir}/doc
+
 %dir /usr/share/YaST2/
 %dir /usr/share/YaST2/modules/
 %dir /usr/share/YaST2/modules/YaPI/
+
 %dir /usr/share/PolicyKit
 %dir /usr/share/PolicyKit/policy
+
 %dir /etc/webyast/
 %config /etc/webyast/filter_services.yml
-/srv/www/%{pkg_user}/vendor/plugins/%{plugin_name}/README
-/srv/www/%{pkg_user}/vendor/plugins/%{plugin_name}/Rakefile
-/srv/www/%{pkg_user}/vendor/plugins/%{plugin_name}/init.rb
-/srv/www/%{pkg_user}/vendor/plugins/%{plugin_name}/install.rb
-/srv/www/%{pkg_user}/vendor/plugins/%{plugin_name}/uninstall.rb
-/srv/www/%{pkg_user}/vendor/plugins/%{plugin_name}/app
-/srv/www/%{pkg_user}/vendor/plugins/%{plugin_name}/config
-/srv/www/%{pkg_user}/vendor/plugins/%{plugin_name}/tasks
-/srv/www/%{pkg_user}/vendor/plugins/%{plugin_name}/doc
-/srv/www/%{pkg_user}/vendor/plugins/%{plugin_name}/public
+
+%{plugin_dir}/README
+%{plugin_dir}/Rakefile
+%{plugin_dir}/init.rb
+%{plugin_dir}/install.rb
+%{plugin_dir}/uninstall.rb
+%{plugin_dir}/app
+%{plugin_dir}/config
+%{plugin_dir}/public
+%{plugin_dir}/doc
+%{plugin_dir}/tasks
+
 /usr/share/YaST2/modules/YML.rb
 /usr/share/YaST2/modules/YaPI/SERVICES.pm
 
-%attr(644,root,root) %config /usr/share/PolicyKit/policy/org.opensuse.yast.modules.yapi.%{plugin_name}.policy
+%attr(644,root,root) %config /usr/share/PolicyKit/policy/org.opensuse.yast.modules.yapi.services.policy
+
 %doc COPYING
+
 
 %files testsuite
 %defattr(-,root,root)
-%{webyast_ws_dir}/vendor/plugins/%{plugin_name}/test
+%{plugin_dir}/test
 
 %changelog

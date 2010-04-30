@@ -31,8 +31,8 @@ BuildRequires:  webyast-base-ws-testsuite
 BuildRequires:	rubygem-test-unit rubygem-mocha
 
 #
-%define pkg_user yastws
 %define plugin_name eulas
+%define plugin_dir %{webyast_ws_dir}/vendor/plugins/%{plugin_name}
 #
 
 %package testsuite
@@ -65,14 +65,14 @@ needed at runtime.
 
 %post
 /usr/sbin/grantwebyastrights --user root --action grant > /dev/null
-/usr/sbin/grantwebyastrights --user yastws --action grant > /dev/null
+/usr/sbin/grantwebyastrights --user %{webyast_ws_user} --action grant > /dev/null
 
 %install
 
 #
 # Install all web and frontend parts.
 #
-mkdir -p $RPM_BUILD_ROOT/usr/share/%{pkg_user}/%{plugin_name}
+mkdir -p $RPM_BUILD_ROOT/usr/share/%{webyast_ws_user}/%{plugin_name}
 %if 0%{?sles_version} == 0
   # use an openSUSE license by default
   SOURCE_CONFIG=%SOURCE3
@@ -82,14 +82,13 @@ mkdir -p $RPM_BUILD_ROOT/usr/share/%{pkg_user}/%{plugin_name}
   SOURCE_CONFIG=%SOURCE1
   rm -r "config/resources/licenses/openSUSE-11.1"
 %endif
-mv config/resources/licenses $RPM_BUILD_ROOT/usr/share/%{pkg_user}/%{plugin_name}/
+mv config/resources/licenses $RPM_BUILD_ROOT/usr/share/%{webyast_ws_user}/%{plugin_name}/
 
-mkdir -p $RPM_BUILD_ROOT/var/lib/%{pkg_user}/%{plugin_name}/accepted-licenses
+mkdir -p $RPM_BUILD_ROOT%{webyast_ws_vardir}/%{plugin_name}/accepted-licenses
 
-mkdir -p $RPM_BUILD_ROOT/srv/www/%{pkg_user}/vendor/plugins/%{plugin_name}
-cp -a * $RPM_BUILD_ROOT/srv/www/%{pkg_user}/vendor/plugins/%{plugin_name}
-rm -f $RPM_BUILD_ROOT/srv/www/%{pkg_user}/vendor/plugins/%{plugin_name}/COPYING
-#FIXME maybe location change in future
+mkdir -p $RPM_BUILD_ROOT%{plugin_dir}
+cp -a * $RPM_BUILD_ROOT%{plugin_dir}/
+rm -f $RPM_BUILD_ROOT%{plugin_dir}/COPYING
 
 mkdir -p $RPM_BUILD_ROOT/etc/webyast/
 cp $SOURCE_CONFIG $RPM_BUILD_ROOT/etc/webyast/eulas.yml
@@ -103,35 +102,36 @@ rm -rf $RPM_BUILD_ROOT
 
 %files 
 %defattr(-,root,root)
-%dir /srv/www/%{pkg_user}
-%dir /srv/www/%{pkg_user}/vendor
-%dir /srv/www/%{pkg_user}/vendor/plugins
-%dir /srv/www/%{pkg_user}/vendor/plugins/%{plugin_name}
-%dir /srv/www/%{pkg_user}/vendor/plugins/%{plugin_name}/doc
-%dir /usr/share/%{pkg_user}
-%dir /usr/share/%{pkg_user}/%{plugin_name}
-%dir /var/lib/%{pkg_user}
-%dir /var/lib/%{pkg_user}/%{plugin_name}
-/srv/www/%{pkg_user}/vendor/plugins/%{plugin_name}/README
-/srv/www/%{pkg_user}/vendor/plugins/%{plugin_name}/Rakefile
-/srv/www/%{pkg_user}/vendor/plugins/%{plugin_name}/init.rb
-/srv/www/%{pkg_user}/vendor/plugins/%{plugin_name}/install.rb
-/srv/www/%{pkg_user}/vendor/plugins/%{plugin_name}/uninstall.rb
-/srv/www/%{pkg_user}/vendor/plugins/%{plugin_name}/app
-/srv/www/%{pkg_user}/vendor/plugins/%{plugin_name}/config
+%dir %{webyast_ws_dir}
+%dir %{webyast_ws_dir}/vendor
+%dir %{webyast_ws_dir}/vendor/plugins
+%dir %{plugin_dir}
+%dir %{plugin_dir}/doc
+%dir /usr/share/%{webyast_ws_user}
+%dir /usr/share/%{webyast_ws_user}/%{plugin_name}
+%dir %{webyast_ws_vardir}
+%dir %{webyast_ws_vardir}/%{plugin_name}
+%{plugin_dir}/README
+%{plugin_dir}/Rakefile
+%{plugin_dir}/init.rb
+%{plugin_dir}/install.rb
+%{plugin_dir}/uninstall.rb
+%{plugin_dir}/app
+%{plugin_dir}/lib
+%{plugin_dir}/config
 #/srv/www/%{pkg_user}/vendor/plugins/%{plugin_name}/tasks
-/srv/www/%{pkg_user}/vendor/plugins/%{plugin_name}/doc/README_FOR_APP
-/srv/www/%{pkg_user}/vendor/plugins/%{plugin_name}/doc/eulas_example.yml
-/usr/share/%{pkg_user}/%{plugin_name}/licenses
+%{plugin_dir}/doc/README_FOR_APP
+%{plugin_dir}/doc/eulas_example.yml
+/usr/share/%{webyast_ws_user}/%{plugin_name}/licenses
 %dir /etc/webyast/
 %config /etc/webyast/eulas.yml
-%defattr(-,%{pkg_user},%{pkg_user})
-%dir /var/lib/%{pkg_user}/%{plugin_name}/accepted-licenses
+
+%attr(-,%{webyast_ws_user},%{webyast_ws_user}) %dir /var/lib/%{pkg_user}/%{plugin_name}/accepted-licenses
 /usr/share/PolicyKit/policy/org.opensuse.yast.modules.eulas.policy
 %doc COPYING
 
 %files testsuite
 %defattr(-,root,root)
-%{webyast_ws_dir}/vendor/plugins/%{plugin_name}/test
+%{plugin_dir}/test
 
 %changelog

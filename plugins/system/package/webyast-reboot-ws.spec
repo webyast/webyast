@@ -33,8 +33,8 @@ BuildRequires:  webyast-base-ws-testsuite
 BuildRequires:	rubygem-test-unit rubygem-mocha
 
 #
-%define pkg_user yastws
 %define plugin_name system
+%define plugin_dir %{webyast_ws_dir}/vendor/plugins/%{plugin_name}
 #
 
 %package testsuite
@@ -58,7 +58,7 @@ Testsuite for webyast-reboot-ws webservice package.
 
 %build
 # build restdoc documentation
-mkdir -p public/system/restdoc
+mkdir -p public/%{plugin_name}/restdoc
 %webyast_ws_restdoc
 
 # do not package restdoc sources
@@ -73,9 +73,9 @@ rm -rf doc
 #
 # Install all web and frontend parts.
 #
-mkdir -p $RPM_BUILD_ROOT/srv/www/%{pkg_user}/vendor/plugins/%{plugin_name}
-cp -a * $RPM_BUILD_ROOT/srv/www/%{pkg_user}/vendor/plugins/%{plugin_name}
-rm -f $RPM_BUILD_ROOT/srv/www/%{pkg_user}/vendor/plugins/%{plugin_name}/COPYING
+mkdir -p $RPM_BUILD_ROOT%{plugin_dir}
+cp -a * $RPM_BUILD_ROOT%{plugin_dir}/
+rm -f $RPM_BUILD_ROOT%{plugin_dir}/COPYING
 
 %clean
 rm -rf $RPM_BUILD_ROOT
@@ -83,10 +83,10 @@ rm -rf $RPM_BUILD_ROOT
 %post
 # granting all permissions for the web user
 #FIXME don't silently fail
-polkit-auth --user %{pkg_user} --grant org.freedesktop.hal.power-management.shutdown >& /dev/null || true
-polkit-auth --user %{pkg_user} --grant org.freedesktop.hal.power-management.shutdown-multiple-sessions >& /dev/null || true
-polkit-auth --user %{pkg_user} --grant org.freedesktop.hal.power-management.reboot >& /dev/null || true
-polkit-auth --user %{pkg_user} --grant org.freedesktop.hal.power-management.reboot-multiple-sessions >& /dev/null || true
+polkit-auth --user %{webyast_ws_user} --grant org.freedesktop.hal.power-management.shutdown >& /dev/null || true
+polkit-auth --user %{webyast_ws_user} --grant org.freedesktop.hal.power-management.shutdown-multiple-sessions >& /dev/null || true
+polkit-auth --user %{webyast_ws_user} --grant org.freedesktop.hal.power-management.reboot >& /dev/null || true
+polkit-auth --user %{webyast_ws_user} --grant org.freedesktop.hal.power-management.reboot-multiple-sessions >& /dev/null || true
 
 # granting all permissions for root
 polkit-auth --user root --grant org.freedesktop.hal.power-management.shutdown >& /dev/null || true
@@ -99,30 +99,33 @@ polkit-auth --user root --grant org.freedesktop.hal.power-management.reboot-mult
 # see https://fedoraproject.org/wiki/Packaging/ScriptletSnippets#Syntax for details
 if [ $1 -eq 0 ] ; then
   # discard all configured permissions for the web user
-  polkit-auth --user %{pkg_user} --revoke org.freedesktop.hal.power-management.shutdown >& /dev/null || :
-  polkit-auth --user %{pkg_user} --revoke org.freedesktop.hal.power-management.shutdown-multiple-sessions >& /dev/null || :
-  polkit-auth --user %{pkg_user} --revoke org.freedesktop.hal.power-management.reboot >& /dev/null || :
-  polkit-auth --user %{pkg_user} --revoke org.freedesktop.hal.power-management.reboot-multiple-sessions >& /dev/null || :
+  polkit-auth --user %{webyast_ws_user} --revoke org.freedesktop.hal.power-management.shutdown >& /dev/null || :
+  polkit-auth --user %{webyast_ws_user} --revoke org.freedesktop.hal.power-management.shutdown-multiple-sessions >& /dev/null || :
+  polkit-auth --user %{webyast_ws_user} --revoke org.freedesktop.hal.power-management.reboot >& /dev/null || :
+  polkit-auth --user %{webyast_ws_user} --revoke org.freedesktop.hal.power-management.reboot-multiple-sessions >& /dev/null || :
 fi
 
 %files 
+
 %defattr(-,root,root)
-%dir /srv/www/%{pkg_user}
-%dir /srv/www/%{pkg_user}/vendor
-%dir /srv/www/%{pkg_user}/vendor/plugins
-%dir /srv/www/%{pkg_user}/vendor/plugins/%{plugin_name}
-/srv/www/%{pkg_user}/vendor/plugins/%{plugin_name}/README
-/srv/www/%{pkg_user}/vendor/plugins/%{plugin_name}/Rakefile
-/srv/www/%{pkg_user}/vendor/plugins/%{plugin_name}/init.rb
-/srv/www/%{pkg_user}/vendor/plugins/%{plugin_name}/install.rb
-/srv/www/%{pkg_user}/vendor/plugins/%{plugin_name}/uninstall.rb
-/srv/www/%{pkg_user}/vendor/plugins/%{plugin_name}/app
-/srv/www/%{pkg_user}/vendor/plugins/%{plugin_name}/config
-/srv/www/%{pkg_user}/vendor/plugins/%{plugin_name}/public
+%dir %{webyast_ws_dir}
+%dir %{webyast_ws_dir}/vendor
+%dir %{webyast_ws_dir}/vendor/plugins
+%dir %{plugin_dir}
+
+%{plugin_dir}/README
+%{plugin_dir}/Rakefile
+%{plugin_dir}/init.rb
+%{plugin_dir}/install.rb
+%{plugin_dir}/uninstall.rb
+%{plugin_dir}/app
+%{plugin_dir}/config
+%{plugin_dir}/public
+
 %doc COPYING
 
 %files testsuite
 %defattr(-,root,root)
-%{webyast_ws_dir}/vendor/plugins/%{plugin_name}/test
+%{plugin_dir}/test
 
 %changelog

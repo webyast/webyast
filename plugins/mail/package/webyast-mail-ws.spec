@@ -49,8 +49,8 @@ Requires:       yast2-mail >= 2.17.5
 %endif
 
 #
-%define pkg_user yastws
 %define plugin_name mail
+%define plugin_dir %{webyast_ws_dir}/vendor/plugins/%{plugin_name}
 #
 
 %package testsuite
@@ -92,10 +92,10 @@ rm -rf restdoc
 #
 # Install all web and frontend parts.
 #
-mkdir -p $RPM_BUILD_ROOT/var/lib/yastws/%{plugin_name}
-mkdir -p $RPM_BUILD_ROOT/srv/www/%{pkg_user}/vendor/plugins/%{plugin_name}
-cp -a * $RPM_BUILD_ROOT/srv/www/%{pkg_user}/vendor/plugins/%{plugin_name}
-rm -f $RPM_BUILD_ROOT/srv/www/%{pkg_user}/vendor/plugins/%{plugin_name}/COPYING
+mkdir -p $RPM_BUILD_ROOT%{webyast_ws_vardir}%{plugin_name}
+mkdir -p $RPM_BUILD_ROOT%{plugin_dir}
+cp -a * $RPM_BUILD_ROOT%{plugin_dir}
+rm -f $RPM_BUILD_ROOT%{plugin_dir}/COPYING
 
 # Policies
 mkdir -p $RPM_BUILD_ROOT/usr/share/PolicyKit/policy
@@ -115,31 +115,32 @@ rm -rf $RPM_BUILD_ROOT
 %post
 # granting all permissions for the web user
 /usr/sbin/grantwebyastrights --user root --action grant > /dev/null ||:
-/usr/sbin/grantwebyastrights --user yastws --action grant > /dev/null ||:
+/usr/sbin/grantwebyastrights --user %{webyast_ws_user} --action grant > /dev/null ||:
 
 %postun
 
 %files 
 %defattr(-,root,root)
-%dir /srv/www/%{pkg_user}
-%dir /srv/www/%{pkg_user}/vendor
-%dir /srv/www/%{pkg_user}/vendor/plugins
-%dir /srv/www/%{pkg_user}/vendor/plugins/%{plugin_name}
+%dir %{webyast_ws_dir}
+%dir %{webyast_ws_dir}/vendor
+%dir %{webyast_ws_dir}/vendor/plugins
+%dir %{plugin_dir}
+# YaPI dir
 %dir /usr/share/YaST2/
 %dir /usr/share/YaST2/modules/
 %dir /usr/share/YaST2/modules/YaPI/
 #var dir to store mail test status
-%dir %attr (-,%{pkg_user},root) /var/lib/yastws
-%dir %attr (-,%{pkg_user},root) /var/lib/yastws/%{plugin_name}
-/srv/www/%{pkg_user}/vendor/plugins/%{plugin_name}/README
-/srv/www/%{pkg_user}/vendor/plugins/%{plugin_name}/Rakefile
-/srv/www/%{pkg_user}/vendor/plugins/%{plugin_name}/init.rb
-/srv/www/%{pkg_user}/vendor/plugins/%{plugin_name}/install.rb
-/srv/www/%{pkg_user}/vendor/plugins/%{plugin_name}/uninstall.rb
-/srv/www/%{pkg_user}/vendor/plugins/%{plugin_name}/app
-/srv/www/%{pkg_user}/vendor/plugins/%{plugin_name}/config
-/srv/www/%{pkg_user}/vendor/plugins/%{plugin_name}/doc
-/srv/www/%{pkg_user}/vendor/plugins/%{plugin_name}/public
+%dir %attr (-,%{webyast_ws_user},root) %{webyast_ws_vardir}
+%dir %attr (-,%{webyast_ws_user},root) %{webyast_ws_vardir}/%{plugin_name}
+%{plugin_dir}/README
+%{plugin_dir}/Rakefile
+%{plugin_dir}/init.rb
+%{plugin_dir}/install.rb
+%{plugin_dir}/uninstall.rb
+%{plugin_dir}/app
+%{plugin_dir}/config
+%{plugin_dir}/doc
+%{plugin_dir}/public
 /usr/share/YaST2/modules/YaPI/MailSettings.pm
 /etc/sysconfig/network/scripts/postfix-update-hostname
 %dir /usr/share/PolicyKit
@@ -149,6 +150,6 @@ rm -rf $RPM_BUILD_ROOT
 
 %files testsuite
 %defattr(-,root,root)
-%{webyast_ws_dir}/vendor/plugins/%{plugin_name}/test
+%{plugin_dir}/test
 
 %changelog
