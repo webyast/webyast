@@ -8,7 +8,7 @@
 
 
 task :override_test_db do
-  if !ENV['TEST_DB_PATH'].blank?
+  unless ENV['TEST_DB_PATH'].nil? || ENV['TEST_DB_PATH'].empty?
     puts "Using DB file for tests: #{ENV['TEST_DB_PATH']}"
 
     # redefine the database config value in Rails::Configuration class
