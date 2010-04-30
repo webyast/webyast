@@ -1,4 +1,11 @@
 -------------------------------------------------------------------
+Fri Apr 30 14:50:26 UTC 2010 - jreidinger@novell.com
+
+- fix spec file consistency (bnc#560061)
+- sort groups list (bnc#600020)
+- 0.1.12
+
+-------------------------------------------------------------------
 Tue Apr 27 15:23:05 CEST 2010 - mzugec@suse.cz
 
 - sort groups list (bnc#600020)
