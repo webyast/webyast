@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Fri Apr 30 14:37:56 UTC 2010 - jreidinger@novell.com
+
+- fix spec file consistency (bnc#560061)
+- 0.1.11
+
+-------------------------------------------------------------------
 Fri Apr 23 12:27:56 UTC 2010 - jreidinger@novell.com
 
 - add license headers(bnc#586620)
