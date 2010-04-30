@@ -1,4 +1,11 @@
 -------------------------------------------------------------------
+Fri Apr 30 13:25:50 UTC 2010 - jreidinger@novell.com
+
+- fix spec file consistency (bnc#560061)
+- fix testsuite so it writes to temporary directory (bnc#599703)
+- 0.1.8
+
+-------------------------------------------------------------------
 Fri Apr 23 11:26:59 UTC 2010 - jreidinger@novell.com
 
 - add license headers (bnc#586620)
