@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Fri Apr 30 13:47:18 UTC 2010 - jreidinger@novell.com
+
+- fix spec file consistency (bnc#560061)
+- 0.1.6
+
+-------------------------------------------------------------------
 Fri Apr 23 15:43:47 CEST 2010 - jdsn@suse.de
 
 - error handling for missing YSR module in backend (bnc#592620)
