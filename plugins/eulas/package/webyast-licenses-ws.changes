@@ -1,4 +1,11 @@
 -------------------------------------------------------------------
+Fri Apr 30 13:29:35 UTC 2010 - jreidinger@novell.com
+
+- fix spec file consistency (bnc#560061)
+- use opensuse license when building for opensuse target
+- 0.1.1
+
+-------------------------------------------------------------------
 Fri Apr 23 11:16:17 UTC 2010 - jreidinger@novell.com
 
 - add permission for accepting licenses (bnc#585786)
