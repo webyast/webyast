@@ -359,8 +359,8 @@ sub Execute {
     my $full_services	= RunlevelEd->services ();
     my $runlevel	= RunlevelEd->GetCurrentRunlevel ();
 
-    # in fact, this is "start & enable"
-    my $start		= $action eq "start";
+    # in fact, this may mean "start & enable" (depends on $only_execute)
+    my $start		= ($action eq "start") || ($action eq "restart");
 
     # list of runlevels where the service should be enabled
     my $rls = $start? ($full_services->{$name}{"defstart"} || []) : undef;
@@ -380,12 +380,14 @@ sub Execute {
     foreach my $s (@$dep_s) {
 	# check if service is not already running
 	my $status	= Service->Status ($s);
+	# action for required service: when restarting selected, only start required ones
+	my $req_action	= ($action eq "restart") ? "start" : $action;
 	if (($start && $status != 0) || ($status == 0 && !$start)) {
 	    # RunInitScriptWithTimeOut would be better, but does not return stderr
-	    $ret	= Service->RunInitScriptOutput ($s, $action);
+	    $ret	= Service->RunInitScriptOutput ($s, $req_action);
 	}
 	if (($ret->{"exit"} || 0) ne 0) {
-	    y2error ("action '$action' for service '$s' failed");
+	    y2error ("action '$req_action' for service '$s' failed");
 	    return $ret;
 	}
 	next if $only_execute;

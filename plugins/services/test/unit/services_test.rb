@@ -159,8 +159,7 @@ EOF
 	"name" => [ "s", "dbus" ],
 	"action" => [ "s", "restart"],
 	'custom' => ['b', false],
-	'only_execute' => ['b', true],
-	'only_this' => ['b', true],
+	'only_execute' => ['b', true]
     }).returns(ret)
 
     s = Service.new('dbus')

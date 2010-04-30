@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Fri Apr 30 09:04:34 CEST 2010 - jsuchome@suse.cz
+
+- start required services on selected service restart (bnc#600489)
+- 0.1.13 
+
+-------------------------------------------------------------------
 Wed Apr 28 13:36:56 CEST 2010 - jsuchome@suse.cz
 
 - do not change on-boot status with restart action (bnc#600373)
