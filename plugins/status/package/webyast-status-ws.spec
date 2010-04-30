@@ -159,7 +159,7 @@ rccollectd try-restart
 %attr(644,root,root) %config /usr/share/PolicyKit/policy/org.opensuse.yast.system.status.policy
 %attr(644,root,root) %config /usr/share/PolicyKit/policy/org.opensuse.yast.modules.logfile.policy
 %dir /etc/webyast/vendor
-/etc/webyast/vendor/logs.yml
+%config /etc/webyast/vendor/logs.yml
 %doc COPYING
 
 %files testsuite
