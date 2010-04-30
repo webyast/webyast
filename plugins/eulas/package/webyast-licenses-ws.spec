@@ -117,16 +117,14 @@ rm -rf $RPM_BUILD_ROOT
 %{plugin_dir}/install.rb
 %{plugin_dir}/uninstall.rb
 %{plugin_dir}/app
-%{plugin_dir}/lib
 %{plugin_dir}/config
-#/srv/www/%{pkg_user}/vendor/plugins/%{plugin_name}/tasks
 %{plugin_dir}/doc/README_FOR_APP
 %{plugin_dir}/doc/eulas_example.yml
 /usr/share/%{webyast_ws_user}/%{plugin_name}/licenses
 %dir /etc/webyast/
 %config /etc/webyast/eulas.yml
 
-%attr(-,%{webyast_ws_user},%{webyast_ws_user}) %dir /var/lib/%{pkg_user}/%{plugin_name}/accepted-licenses
+%attr(-,%{webyast_ws_user},%{webyast_ws_user}) %dir %{webyast_ws_vardir}/%{plugin_name}/accepted-licenses
 /usr/share/PolicyKit/policy/org.opensuse.yast.modules.eulas.policy
 %doc COPYING
 
