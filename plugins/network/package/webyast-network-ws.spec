@@ -106,7 +106,11 @@ rm -rf $RPM_BUILD_ROOT
 %dir %{webyast_ws_dir}/vendor
 %dir %{webyast_ws_dir}/vendor/plugins
 %dir %{plugin_dir}
-%{plugin_dir}/*
+%{plugin_dir}/Rakefile
+%{plugin_dir}/app
+%{plugin_dir}/config
+%{plugin_dir}/doc
+%{plugin_dir}/public
 
 %dir /usr/share/PolicyKit
 %dir /usr/share/PolicyKit/policy
