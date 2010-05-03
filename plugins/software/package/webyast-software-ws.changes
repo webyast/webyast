@@ -1,4 +1,9 @@
 -------------------------------------------------------------------
+Mon May  3 10:56:30 UTC 2010 - schubi@novell.com
+
+- Remove BackendException from Patch management (bnc#600490) 
+
+-------------------------------------------------------------------
 Fri Apr 30 14:35:59 UTC 2010 - jreidinger@novell.com
 
 - unify *.spec files (bnc#560061)

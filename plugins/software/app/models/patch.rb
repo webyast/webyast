@@ -107,9 +107,7 @@ class Patch < Resolvable
               bs.subprogress = s['subprogress']
             end
           elsif received.has_key? 'error'
-            return PackageKitError.new(received['error']['description']) if received['error']['type'] == 'PACKAGEKIT_ERROR'
-            Rails.logger.warn "*** Patch thread: Received unknown error: #{received['error'].inspect}"
-            return BackendException.new(received['error']['description'])
+            return PackageKitError.new(received['error']['description'])
           else
             Rails.logger.warn "*** Patch thread: Received unknown input: #{line}"
           end
