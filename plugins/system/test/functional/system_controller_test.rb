@@ -108,7 +108,7 @@ class SystemControllerTest < ActionController::TestCase
 
     ret = put :update, :system => {:reboot => {:active => true}}
     # expect 403 Forbidden error code
-    assert_response 503
+    assert_response 403
 
     # set permissions back for the other tests
     @controller.stubs(:permission_check).returns(true);
