@@ -79,9 +79,11 @@ class YastService
 	# handle org.freedesktop.PolicyKit.Error.NotAuthorized DBus Error
 	if dbe.dbus_message.error_name == 'org.freedesktop.PolicyKit.Error.NotAuthorized' && dbe.dbus_message.params.size == 1
 	    parms = dbe.dbus_message.params[0].split(' ')
-
+	    
+	    # Etc helps to retrieve the login of the REST service
+	    require 'etc'
             # throw a PolicyKit exception instead of the DBus exception
-            raise NoPermissionException.new(parms[0], "yastws")
+            raise NoPermissionException.new(parms[0], Etc.getlogin)
 	end
 
 	# rethrow other DBus Errors

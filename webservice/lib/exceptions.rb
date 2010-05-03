@@ -73,6 +73,8 @@ class InvalidParameters < ArgumentError
 end
 
 class NoPermissionException < BackendException
+  attr_reader :permission, :user
+  
   def initialize(permission,user)
     @permission = permission
     @user = user
