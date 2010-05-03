@@ -60,7 +60,7 @@ module Registration
       #mock model to test only controller
       @controller.stubs(:permission_check).raises(NoPermissionException.new("action", "test"));
       get :show
-      assert_response 503
+      assert_response 403
     end
 
 # FIXME: temporarily disabled - mocking is missing, it calls the DBus service and fails!
@@ -85,7 +85,7 @@ module Registration
     def test_register_noperm
       @controller.stubs(:permission_check).raises(NoPermissionException.new("action", "test"));
       put :create, @data
-      assert_response  503
+      assert_response 403
   end
 
   def test_register
