@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Mon May  3 12:50:32 UTC 2010 - kkaempf@novell.com
+
+- Report missing permission as 403:Forbidden (bnc#598794)
+- 0.1.19
+
+-------------------------------------------------------------------
 Fri Apr 30 12:52:05 UTC 2010 - jreidinger@novell.com
 
 - unify *.spec files (bnc#560061)

@@ -1,5 +1,5 @@
 #
-# spec file for package webyast-base-ws (Version 0.1)
+# spec file for package webyast-base-ws (Version 0.1.19)
 #
 # Copyright (c) 2008 SUSE LINUX Products GmbH, Nuernberg, Germany.
 # This file and all modifications and additions to the pristine
@@ -45,7 +45,7 @@ PreReq:         rubygem-rpam, rubygem-polkit
 License:	LGPL v2.1 only
 Group:          Productivity/Networking/Web/Utilities
 Autoreqprov:    on
-Version:        0.1.18
+Version:        0.1.19
 Release:        0
 Summary:        WebYaST - base components for rest service
 Source:         www.tar.bz2
