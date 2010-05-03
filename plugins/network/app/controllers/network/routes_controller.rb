@@ -29,11 +29,12 @@ class Network::RoutesController < ApplicationController
 
   # Sets route settings. Requires write permissions for network YaPI.
   def update
-    root = params[:routes]
+    # :route is specified, :routes is sent by the ui :-/
+    root = params[:route] || params[:routes]
     if root == nil
-      raise InvalidParameters.new :routes => "Missing"
+      raise InvalidParameters.new :route => "Missing", :routes => "Missing"
     end
-    @route = Route.new(root[:id])
+    @route = Route.new(root)
     @route.save!
     index
   end

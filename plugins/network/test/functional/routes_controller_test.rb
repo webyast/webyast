@@ -54,20 +54,53 @@ class RoutesControllerTest < ActionController::TestCase
     assert_equal "default",   h["routes"][0]["id"]
   end
 
-  DATA={"routes"=>{
-       "id"=>"default",
-       "via"=>"10.20.30"
+  DATA_GOOD_UI = {
+    "routes" => {
+      "id" => "default",
+      "via" => "10.7.7.7"
+    },
+    "id"=>"default"
+  }
+  DATA_GOOD_DOC = {
+    "route" => {
+      "id" => "default",
+      "via" => "10.7.7.7"
+    },
+    "id"=>"default"
+  }
+  DATA_BAD = {"routes"=>{
+      "id"=>"default",
+      "via"=>"10.20.30"
 	 },
       "id"=>"default"
      }
-  ERROR = {
-    "exit" => "-1",
-    "error" => "invalid ip",
+  # looks good, but has wrong structure
+  DATA_BAD2 = {
+    "id" => "default",
+    "via" => "10.7.7.7"
   }
 
+  def test_valid_update_as_sent_by_ui
+    @model_class.any_instance.stubs(:save).returns true
+    put :update, DATA_GOOD_UI
+    assert_response 200
+  end
+
+  def test_valid_update_as_documented
+    # no need to stub :save, validation does not let it run
+    put :update, DATA_GOOD_DOC
+    assert_response 200
+  end
+
   def test_validation
-    @model_class.any_instance.stubs(:save).returns ERROR
-    put :update, DATA
+    # no need to stub :save, validation does not let it run
+    put :update, DATA_BAD
+    assert_response 422
+  end
+
+  def test_validation2
+    # no need to stub :save, validation does not let it run
+    put :update, DATA_BAD2
     assert_response 422
   end
 
