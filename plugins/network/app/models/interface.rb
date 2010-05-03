@@ -24,12 +24,13 @@
 # and well defined data.
 class Interface < BaseModel::Base
 
+  IPADDR_REGEX = /([0-9]{1,3}.){3}[0-9]{1,3}/
   attr_accessor :bootproto
   validates_inclusion_of :bootproto, :in => ["static","dhcp"]
   attr_accessor :ipaddr
   # blank instead of nil as specified in restdoc, bnc#600097
   validates_format_of :ipaddr, :allow_blank => true,
-      :with => /^([0-9]{1,3}.){3}[0-9]{1,3}\/[0-9]{1,2}$/
+      :with => /^#{IPADDR_REGEX}\/(#{IPADDR_REGEX}|[0-9]{1,2})$/
   attr_accessor	:id
   validates_format_of :id, :allow_nil => false,
       :with => /^[a-zA-Z0-9_-]+$/
