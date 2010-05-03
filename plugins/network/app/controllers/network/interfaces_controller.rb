@@ -36,7 +36,7 @@ class Network::InterfacesController < ApplicationController
     end
     @iface = Interface.new(root)
     @iface.save!
-    index
+    show
   end
 
   # Shows interface settings. Requires read permission for network YaPI.

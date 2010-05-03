@@ -36,7 +36,7 @@ class Network::RoutesController < ApplicationController
     end
     @route = Route.new(root)
     @route.save!
-    index
+    show
   end
 
 
