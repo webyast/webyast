@@ -141,7 +141,10 @@ test_module :development, 'nokogiri', 'rubygem-nokogiri'
 test_module :development, 'tidy', 'rubygem-tidy'
 test_version :development, 'tidy'
 
-test_policy "org.opensuse.yast.system.status.read", Etc.login
+test_policy "org.opensuse.yast.system.status.read", Etc.getlogin
+
+# reqd for Users mgmt
+test_policy "org.opensuse.yast.modules.yapi.users.groupsget", Etc.getlogin
 
 puts "Cannot run in production" if $production_errors > 0
 puts "Cannot run in development" if $development_errors > 0
