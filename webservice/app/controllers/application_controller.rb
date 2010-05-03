@@ -30,6 +30,11 @@ class ApplicationController < ActionController::Base
 
   rescue_from BackendException, :with => :report_backend_exception
 
+  rescue_from NoPermissionException do |exception|
+    logger.info "No permission: #{exception.message}"
+    render :xml => exception, :status => 403 #403-forbidden
+  end
+
   rescue_from InvalidParameters do |exception|
     logger.info "Raised resource Invalid exception - #{exception.inspect}"
     render :xml => exception, :status => 422 #422-resource invalid
@@ -49,7 +54,6 @@ class ApplicationController < ActionController::Base
 
   end
 
-
   include AuthenticatedSystem
 
   include YastRoles
@@ -67,6 +71,7 @@ class ApplicationController < ActionController::Base
 
   private
   def report_backend_exception(exception) 
+      logger.info "Backend exception: #{exception}"
       render :xml => exception, :status => 503
   end
 

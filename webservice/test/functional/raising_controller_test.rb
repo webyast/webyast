@@ -22,11 +22,13 @@
 
 require File.expand_path(File.dirname(__FILE__) + "/../test_helper")
 
+require 'exceptions'
+
 class RaisingControllerTest < ActionController::TestCase
 
   class RaisingController < ApplicationController
     def noPermission
-      raise NoPermissionError.new("test.permission", "test_user")
+      raise NoPermissionException.new("test.permission", "test_user")
     end
     
     def raiseNotFound
