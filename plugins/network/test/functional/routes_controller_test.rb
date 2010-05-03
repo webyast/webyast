@@ -28,6 +28,7 @@ require File.expand_path( File.join("test","plugin_basic_tests"), RailsParent.pa
 class RoutesControllerTest < ActionController::TestCase
 
   def setup
+    YastService.expects(:Call).never
     @model_class = Route
     d = Route.new({"id" => "default", "via" => "42.42.42.42"})
     Route.stubs(:find).with("default").returns(d)
@@ -38,8 +39,7 @@ class RoutesControllerTest < ActionController::TestCase
     @request.session[:account_id] = 1 # defined in fixtures
   end  
 
-  # some cases fail because PluginBasicTests expects a singular controller
-  #include PluginBasicTests
+  include CollectionResourceTests
 
   def test_show_xml
     get :show, :format => 'xml', :id => 'default'
@@ -74,11 +74,6 @@ class RoutesControllerTest < ActionController::TestCase
 	 },
       "id"=>"default"
      }
-  # looks good, but has wrong structure
-  DATA_BAD2 = {
-    "id" => "default",
-    "via" => "10.7.7.7"
-  }
 
   def test_valid_update_as_sent_by_ui
     @model_class.any_instance.stubs(:save).returns true
@@ -87,22 +82,16 @@ class RoutesControllerTest < ActionController::TestCase
   end
 
   def test_valid_update_as_documented
-    # no need to stub :save, validation does not let it run
+    @model_class.any_instance.stubs(:save).returns true
     put :update, DATA_GOOD_DOC
     assert_response 200
   end
 
   def test_validation
-    # no need to stub :save, validation does not let it run
+    #ensure that nothing is saved
+    @model_class.expects(:save).never
     put :update, DATA_BAD
     assert_response 422
   end
-
-  def test_validation2
-    # no need to stub :save, validation does not let it run
-    put :update, DATA_BAD2
-    assert_response 422
-  end
-
 end
 

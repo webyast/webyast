@@ -27,19 +27,19 @@ class Network::InterfacesController < ApplicationController
   before_filter(:only => [:index, :show]) { |c|    c.yapi_perm_check "network.read" }
   before_filter(:only => [:create, :update]) { |c| c.yapi_perm_check "network.write"}
 
-  # Sets hostname settings. Requires write permissions for network YaPI.
+  # Sets interface settings. Requires write permissions for network YaPI.
   def update
-    root = params[:interfaces]
+    # :interface is specified, :interfaces is sent by the ui :-/
+    root = params[:interface] || params[:interfaces]
     if root == nil
-      raise InvalidParameters.new :interfaces => "Missing"
+      raise InvalidParameters.new :interface => "Missing", :interfaces => "Missing"
     end
-    
     @iface = Interface.new(root)
-	  @iface.save!
+    @iface.save!
     index
   end
 
-  # Shows hostname settings. Requires read permission for network YaPI.
+  # Shows interface settings. Requires read permission for network YaPI.
   def show
     @ifce = Interface.find(params[:id])
 
