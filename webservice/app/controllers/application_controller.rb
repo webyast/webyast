@@ -31,7 +31,7 @@ class ApplicationController < ActionController::Base
   rescue_from BackendException, :with => :report_backend_exception
 
   rescue_from NoPermissionException do |exception|
-    logger.info "No permission: #{exception.message}"
+    logger.info "No permission: #{exception.permission} for #{exception.user}"
     render :xml => exception, :status => 403 #403-forbidden
   end
 
