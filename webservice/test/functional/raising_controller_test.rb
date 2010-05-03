@@ -25,6 +25,10 @@ require File.expand_path(File.dirname(__FILE__) + "/../test_helper")
 class RaisingControllerTest < ActionController::TestCase
 
   class RaisingController < ApplicationController
+    def noPermission
+      raise NoPermissionError.new("test.permission", "test_user")
+    end
+    
     def raiseNotFound
       raise YaST::ConfigFile::NotFoundError.new("/dev/null") #frozen hell
     end
@@ -84,6 +88,12 @@ class RaisingControllerTest < ActionController::TestCase
   def test_dbus_error
     get :raiseDBusError
     assert_response 503
+  end
+
+  # NoPermissionException should return 403 - Forbidden
+  def test_no_permission
+    get :noPermission
+    assert_response 403
   end
 
 end
