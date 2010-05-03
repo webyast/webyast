@@ -45,5 +45,29 @@ class HostnameControllerTest < ActionController::TestCase
 
   include PluginBasicTests
 
+  DATA_GOOD = {
+    "hostname" => {
+      "name" => "foo",
+      "domain" => "bar"
+    }
+  }
+  DATA_BAD = {
+    "hostname" => {
+      "name" => ">weird\\characters"
+    }
+  }
+
+  def test_valid_update
+    @model_class.any_instance.stubs(:save).returns true
+    put :update, DATA_GOOD
+    assert_response 200
+  end
+
+  def test_validation
+    #ensure that nothing is saved
+    @model_class.expects(:save).never
+    put :update, DATA_BAD
+    assert_response 422
+  end
 end
 
