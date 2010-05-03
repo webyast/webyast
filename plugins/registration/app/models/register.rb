@@ -86,7 +86,9 @@ class Register
       @certificate = config['regserverca']
       @guid = config['guid']
     rescue Exception => e
-      Rails.logger.error "YastService.Call('YSR::getregistrationconfig') failed"
+# FIXME: Don't catch generic exceptions but try to find out what went wrong
+# and report/log more details
+      Rails.logger.error "YastService.Call('YSR::getregistrationconfig') failed with #{e}"
       @config_error = true
       return false
       # raise
@@ -98,6 +100,7 @@ class Register
     begin
       return ( @guid  &&  @guid.size > 0  &&  @guid != 0 ) == true
     rescue
+# FIXME: Log details      
       Rails.logger.error "Error when reading the registration status information."
       return false
     end
@@ -113,6 +116,7 @@ class Register
       self.context.each   { |k, v|  ctx[k.to_s] = [ 's', v.to_s ] } if self.context.kind_of?(Hash)
       self.arguments.each { |k, v| args[k.to_s] = [ 's', v.to_s ] } if self.arguments.kind_of?(Hash)
     rescue
+# FIXME: Log which arg is wrong      
       Rails.logger.error "When registration was called, the context or the arguments data was invalid."
       raise InvalidParameters.new :registrationdata => "Invalid"
     end
