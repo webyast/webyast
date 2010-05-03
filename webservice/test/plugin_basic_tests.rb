@@ -65,7 +65,7 @@ module PluginBasicTests
     @model_class.stubs(:find)
     @controller.stubs(:permission_check).raises(NoPermissionException.new("action", "test"));
     get :show
-    assert_response 503
+    assert_response 403 # Forbidden
   end
 
   def test_access_show_xml
@@ -94,7 +94,7 @@ module PluginBasicTests
 
     put :update, @data
 
-    assert_response  503
+    assert_response  403 # Forbidden
   end
 end
 
