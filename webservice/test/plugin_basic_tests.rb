@@ -58,7 +58,40 @@
 #      #or specific exceptions
 #     end
 
+# TODO use better names (aliased for compatibility),
+# PluginBasicTests -> SingleResourceTests
+
+module CommonResourceTests
+  # A parameter hash that contains :id => "test" for the collection tests
+  # and nothing for the singleton tests, so that routing works for both cases.
+  def just_id
+    raise NotImplementedError
+  end
+
+  def test_update_noparams
+    @model_class.stubs(:save)
+    put :update, just_id
+    assert_response 422
+  end
+
+  def test_update_noperm
+    #ensure that nothing is saved
+    @model_class.expects(:save).never
+
+    @controller.stubs(:permission_check).raises(NoPermissionException.new("action", "test"));
+
+    put :update, just_id.merge(@data || {})
+
+    assert_response  403 # Forbidden
+  end
+end
+
 module PluginBasicTests
+  include CommonResourceTests
+
+  def just_id
+    Hash.new                    # no :id
+  end
 
   def test_access_denied
     #mock model to test only controller
@@ -79,22 +112,24 @@ module PluginBasicTests
     get :show, :format => 'json'
     assert_equal mime.to_s, @response.content_type
   end
-
-  def test_update_noparams
-    @model_class.stubs(:save)
-    put :update    
-    assert_response 422
-  end
-
-  def test_update_noperm
-    #ensure that nothing is saved
-    @model_class.expects(:save).never
-
-    @controller.stubs(:permission_check).raises(NoPermissionException.new("action", "test"));
-
-    put :update, @data
-
-    assert_response  403 # Forbidden
-  end
 end
 
+module CollectionResourceTests
+  include CommonResourceTests
+
+  def just_id
+    { :id => "test" }
+  end
+
+  def test_access_index_xml
+    mime = Mime::XML
+    get :index, :format => 'xml'
+    assert_equal mime.to_s, @response.content_type
+  end
+
+  def test_access_index_json
+    mime = Mime::JSON
+    get :index, :format => 'json'
+    assert_equal mime.to_s, @response.content_type
+  end
+end
