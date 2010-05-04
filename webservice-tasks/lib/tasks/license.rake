@@ -115,4 +115,4 @@ namespace "license" do
   end
 end
 
-task :default => "license:report"
+task :package => "license:report"
