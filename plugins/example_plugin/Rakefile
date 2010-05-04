@@ -1,16 +1,19 @@
+# -*- ruby -*-
 require File.join(File.dirname(__FILE__), 'config', 'rails_parent')
 require File.join(RailsParent.parent, 'lib', 'tasks', 'common')
+
+include FileUtils::Verbose
 
 #adapt to easyli local deploy of working plugin (for developement, release use rpm-based way)
 desc "Deploy for development - run db:migrate, create basic dirs and install grantwebyastrights."
 task :deploy_local do |t|
-  FileUtils.mkdir_p "/etc/dbus-1/system.d/"
-  FileUtils.cp_r    "package/example.service.conf", "/etc/dbus-1/system.d/"
-  FileUtils.mkdir_p "/usr/local/sbin/"
-  FileUtils.cp_r    "package/exampleService.rb", "/usr/local/sbin/"
-  FileUtils.chmod  744, "/usr/local/sbin/exampleService.rb"
-  FileUtils.mkdir_p "/usr/share/dbus-1/system-services/"
-  FileUtils.cp_r    "package/example.service.service", "/usr/share/dbus-1/system-services/"
-  FileUtils.mkdir_p "/usr/share/PolicyKit/policy/"
-  FileUtils.cp_r    "package/org.example.plugin.policy", "/usr/share/PolicyKit/policy/"
+  mkdir_p "/etc/dbus-1/system.d/"
+  cp_r    "package/example.service.conf", "/etc/dbus-1/system.d/"
+  mkdir_p "/usr/local/sbin/"
+  cp_r    "package/exampleService.rb", "/usr/local/sbin/"
+  chmod  744, "/usr/local/sbin/exampleService.rb"
+  mkdir_p "/usr/share/dbus-1/system-services/"
+  cp_r    "package/example.service.service", "/usr/share/dbus-1/system-services/"
+  mkdir_p "/usr/share/PolicyKit/policy/"
+  cp_r    "package/org.example.plugin.policy", "/usr/share/PolicyKit/policy/"
 end
