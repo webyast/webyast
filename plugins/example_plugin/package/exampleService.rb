@@ -13,18 +13,23 @@ class ExampleService < DBus::Object
   dbus_interface "example.service.Interface" do
     # Define D-Bus methods of the service
     # This method reads whole file which name it gets as a parameter and returns its contents
-    dbus_method :read, "out contents:s" do |filename|
-      f = File.open(FILENAME, "r") {|f| f.read } || ""
+    dbus_method :read, "out contents:s" do
+      begin
+        File.open(FILENAME, "r") {|f| out = f.read }
+      rescue
+        out = "NOTHING"
+      end
+      out
     end
     # This method dumps a string into a file
-    dbus_method :write, "in contents:s" do |filename,contents|
+    dbus_method :write, "in contents:s" do |contents|
       File.open(FILENAME, 'w') {|f| f.write(contents) }
     end
   end
 end
 
 # Set the object path
-obj = ExampleService.new("/example/service/Interface")
+obj = ExampleService.new("/org/example/service/Interface")
 # Export it!
 service.export(obj)
 
