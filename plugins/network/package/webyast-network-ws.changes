@@ -1,4 +1,11 @@
 -------------------------------------------------------------------
+Tue May  4 08:46:45 CEST 2010 - mvidner@suse.cz
+
+- Fixed multiple bugs in writing the confuguration introduced in
+  version 0.1.5 (bnc#600097)
+- 0.1.7
+
+-------------------------------------------------------------------
 Fri Apr 30 13:36:15 UTC 2010 - jreidinger@novell.com
 
 - fix spec file consistency (bnc#560061)
