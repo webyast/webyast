@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE policyconfig PUBLIC
+ "-//freedesktop//DTD PolicyKit Policy Configuration 1.0//EN"
+ "http://www.freedesktop.org/standards/PolicyKit/1.0/policyconfig.dtd">
+<policyconfig>
+
+  <vendor>YaST Webservice Project</vendor>
+  <vendor_url>http://en.opensuse.org/YAST</vendor_url>
+
+  <action id="org.example.plugin.read">
+    <description>Description of action</description>
+    <message>Authentication message which appear on desktop (not affect webyast)</message>
+    <defaults>
+      <allow_inactive>no</allow_inactive>
+      <allow_active>no</allow_active>
+    </defaults>
+  </action>
+
+  <action id="org.example.plugin.write">
+    <description>Description of action</description>
+    <message>Authentication message which appear on desktop (not affect webyast)</message>
+    <defaults>
+      <allow_inactive>no</allow_inactive>
+      <allow_active>no</allow_active>
+    </defaults>
+  </action>
+</policyconfig>
