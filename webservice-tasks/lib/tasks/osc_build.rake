@@ -26,11 +26,7 @@ task :'osc_build'  do
     Dir.chdir File.join(Dir.pwd, obs_project, package_name) do
       puts "building package..."
 
-      system "osc build --no-verify --release=1 --root=/var/tmp/build-root-#{build_dist} --keep-pkgs=#{pkg_dir} --prefer-pkgs=#{pkg_dir} #{build_dist} > /dev/null"
-
-      if $?.exitstatus != 0
-        raise "Failed to submit"
-      end
+      sh "osc build --no-verify --release=1 --root=/var/tmp/build-root-#{build_dist} --keep-pkgs=#{pkg_dir} --prefer-pkgs=#{pkg_dir} #{build_dist} > /dev/null"
     end
   ensure
     puts "cleaning"

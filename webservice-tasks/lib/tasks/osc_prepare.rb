@@ -5,7 +5,7 @@
 #
 
 def osc_prepare
-  raise "No package/ directory found" if not File.exist?('package') and File.directory?('package')
+  File.directory?('package') || raise("No package/ directory found")
   obs_project = ENV["OBS_PROJECT"] || "YaST:Web"
   package_name = ""
   Dir.glob("package/*.spec").each do |file|

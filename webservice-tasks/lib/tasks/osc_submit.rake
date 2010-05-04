@@ -17,12 +17,8 @@ task :'osc_submit'  do
     
     Dir.chdir File.join(Dir.pwd, obs_project, package_name) do
       puts "submitting package..."
-      # long running, `foo` would only show output at the end
       system "osc addremove"
-      system "osc commit -m 'new version'"
-      if $?.exitstatus != 0
-        raise "Failed to submit"
-      end
+      sh "osc", "commit", "-m", "new version"
       puts "New package submitted to #{obs_project}"
     end
   ensure
