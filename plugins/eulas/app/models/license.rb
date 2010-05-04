@@ -121,8 +121,11 @@ class License
   # Save a license. Only "accepted" attribute is saved.
   # @return [nil]
   def save
+    license_filename = File.join(VAR_DIR, "accepted-licenses",self.name)
     if @accepted then
-      FileUtils.touch File.join(VAR_DIR, "accepted-licenses",self.name)
+      FileUtils.touch license_filename
+    else
+      FileUtils.rm license_filename, :force => true # do not raise exception, if file does not exist
     end
   end
 
