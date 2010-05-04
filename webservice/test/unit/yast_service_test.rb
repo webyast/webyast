@@ -37,6 +37,7 @@ IFACE = "org.opensuse.YaST.Values"
 
 class YastServiceTest < ActiveSupport::TestCase
   def setup
+    DBus::SystemBus.stubs(:instance).returns(DBus::SessionBus.instance)
     @y_stub = DBusStub.new :system, SERVICE
     @y_service = @y_stub.service
 	

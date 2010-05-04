@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Tue May  4 14:26:35 CEST 2010 - mvidner@suse.cz
+
+- Run a separate session bus for build-time tests (broken in 0.1.19)
+- 0.1.21
+
+-------------------------------------------------------------------
 Tue May  4 08:42:00 CEST 2010 - mvidner@suse.cz
 
 - Added CollectionResourceTests, companion to PluginBasicTests
