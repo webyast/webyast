@@ -1,6 +1,5 @@
 require 'rake'
 
-include FileUtils::Verbose
 
 desc "Submit package to Yast:Web osc repository (override project via OBS_PROJECT=)"
 task :'osc_submit'  do
@@ -10,12 +9,13 @@ task :'osc_submit'  do
   
   puts "checking out package #{package_name} from project #{obs_project}"
   
+  include FileUtils::Verbose
   begin
     sh "osc", "checkout", obs_project, package_name
     
-    #clean www dir and also clean before copy old entries in osc dir to test if package build after remove some file
-    rm_rf "#{obs_project}/#{package_name}/*"
-    cp "package/*" "#{obs_project}/#{package_name}"
+    # clean www dir, and also clean old entries in osc dir to test if package builds after removing some file
+    rm_rf Dir.glob("#{obs_project}/#{package_name}/*")
+    cp Dir.glob("package/*"), "#{obs_project}/#{package_name}"
     
     Dir.chdir File.join(Dir.pwd, obs_project, package_name) do
       puts "submitting package..."
@@ -26,6 +26,6 @@ task :'osc_submit'  do
     end
   ensure
     puts "cleaning"
-    `rm -rf '#{obs_project}'`
+    rm_rf obs_project
   end
 end
