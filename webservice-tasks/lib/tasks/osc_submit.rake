@@ -18,7 +18,8 @@ task :'osc_submit'  do
     Dir.chdir File.join(Dir.pwd, obs_project, package_name) do
       puts "submitting package..."
       system "osc addremove"
-      sh "osc", "commit", "-m", "new version"
+      changes = `osc diff *.changes | sed -n '/^+---/,+2b;/^+++/b;s/^+//;T;p'`
+      sh "osc", "commit", "-m", changes
       puts "New package submitted to #{obs_project}"
     end
   ensure
