@@ -119,10 +119,11 @@ module BaseModel
       create_or_update
     end
 
-    # same as save but throws exception if error occur
+    # Initial fake implementation which allows ActiveRecord::Validation to alias it, but we use our own version defined below.
     # see save
     def save!
-      create_or_save || raise("Internal error: Should be redefined")
+      raise("Internal error: Save! is only to allow alias of activeRecord in validations, but we redefine it so
+          this implementation should not be ever called")
     end
 
 
@@ -199,7 +200,9 @@ module BaseModel
     #serialization of models
     include BaseModel::Serialization
 
-    #here is redefined save! from ActiveRecord, as we want to throw own exceptions
+    # This is redefined save! from ActiveRecord, as we want to throw own exceptions
+    # throws InvalidParameters exception when validation failed. Return same value as return save.
+    # if exception is not raised it is correctly reported to webclient as failed validation see ActiveResource#validations
     def save!
       unless valid?
         report = {}
