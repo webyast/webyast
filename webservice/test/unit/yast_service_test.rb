@@ -55,11 +55,9 @@ class YastServiceTest < ActiveSupport::TestCase
     @yast_iface.stubs(YASTMETHOD).raises(dbe)
 	
     # bnc#601939
-    begin
+    e = assert_raise NoPermissionException do
       YastService.Call(YASTSERVICE + "::#{YASTMETHOD}")
-    rescue Exception => e
-      assert e.is_a? NoPermissionException
-      assert_equal Etc.getlogin, e.user
     end
+    assert_equal Etc.getlogin, e.user
   end
 end
