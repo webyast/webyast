@@ -31,7 +31,7 @@ class ExampleControllerTest < ActionController::TestCase
     @request = ActionController::TestRequest.new
     # http://railsforum.com/viewtopic.php?id=1719
     @request.session[:account_id] = 1 # defined in fixtures
-    dbus = DBusStub.new :system, "example.Service"
+    dbus = DBusStub.new :system, "example.service"
     proxy,@interface = dbus.proxy "/org/example/service/Interface", "example.service.Interface"
     @interface.stubs(:read).returns(TEST_STRING)
     @interface.stubs(:write)

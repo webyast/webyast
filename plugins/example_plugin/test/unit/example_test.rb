@@ -27,7 +27,7 @@ require File.expand_path( File.join("test","dbus_stub"), RailsParent.parent )
 class NtpTest < ActiveSupport::TestCase
 
   def setup
-    dbus = DBusStub.new :system, "example.Service"
+    dbus = DBusStub.new :system, "example.service"
     proxy,@interface = dbus.proxy "/org/example/service/Interface", "example.service.Interface"
   end
   

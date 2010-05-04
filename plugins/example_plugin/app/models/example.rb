@@ -45,7 +45,7 @@ class Example < BaseModel::Base
     
     def dbus_obj
       bus = DBus.system_bus
-      ruby_service = bus.service("example.Service")
+      ruby_service = bus.service("example.service")
       obj = ruby_service.object("/org/example/service/Interface")
       obj.introspect
       obj.default_iface = "example.service.Interface"

@@ -117,7 +117,7 @@ polkit-auth --user %{webyast_ws_user} --grant org.example.plugin.read org.exampl
 %{plugin_dir}/uninstall.rb
 %{plugin_dir}/app
 %{plugin_dir}/config
-%attr(644,root,root) /usr/local/sbin/exampleService.rb
+%attr(744,root,root) /usr/local/sbin/exampleService.rb
 %attr(644,root,root) /usr/share/PolicyKit/policy/org.example.plugin.policy
 %attr(644,root,root) /etc/dbus-1/system.d/example.service.org
 %attr(644,root,root) /usr/share/dbus-1/system-services/example.service.service

@@ -8,6 +8,7 @@ task :deploy_local do |t|
   FileUtils.cp_r    "package/example.service.conf", "/etc/dbus-1/system.d/"
   FileUtils.mkdir_p "/usr/local/sbin/"
   FileUtils.cp_r    "package/exampleService.rb", "/usr/local/sbin/"
+  FileUtils.chmod  744, "/usr/local/sbin/exampleService.rb"
   FileUtils.mkdir_p "/usr/share/dbus-1/system-services/"
   FileUtils.cp_r    "package/example.service.service", "/usr/share/dbus-1/system-services/"
   FileUtils.mkdir_p "/usr/share/PolicyKit/policy/"
