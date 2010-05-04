@@ -42,15 +42,17 @@ class User
   end
   
   # users = User.find_all
-  def self.find_all
+  def self.find_all(params={})
+    attributes	= [ "cn", "uidNumber", "homeDirectory", "grouplist", "uid", "loginShell", "groupname" ]
+    if params.has_key? "attributes"
+	attributes	= params["attributes"].split(",")
+    end
     users = []
     parameters	= {
       # how to index hash with users
       "index"	=> ["s", "uid"],
       # attributes to return for each user
-      "user_attributes"	=>
-        [ "as", [ "cn", "uidNumber", "homeDirectory",
-                  "grouplist", "uid", "loginShell", "groupname" ] ]
+      "user_attributes"	=> [ "as", attributes ]
     }
     users_map = YastService.Call("YaPI::USERS::UsersGet", parameters)
     if users_map.nil?

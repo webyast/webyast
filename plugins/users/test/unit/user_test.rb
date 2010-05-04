@@ -35,11 +35,27 @@ class UserTest < Test::Unit::TestCase
     }
     YastService.stubs(:Call).with("YaPI::USERS::UsersGet", parameters).returns({"testuser1"=>{"cn"=>"testuser1", "groupname"=>"users", "uidNumber"=>1000, "homeDirectory"=>"/home/testuser1"},
 										"testuser2"=>{"cn"=>"testuser2", "groupname"=>"users", "uidNumber"=>1010, "homeDirectory"=>"/home/testuser1"}})    
+
+    short_parameters	= {
+	"index"			=> ["s", "uid"],
+	"user_attributes"	=>  [ "as", [ "uid", "cn"]]
+    }
+    YastService.stubs(:Call).with("YaPI::USERS::UsersGet", short_parameters).returns({
+	"testuser1"=>{"cn"=>"testuser1", "uid" => "testuser1"},
+	"testuser2"=>{"cn"=>"Test user2", "uid" => "testuser2"}}
+    )
   end
 
   def test_user
     users = User.find_all
     assert_equal(2, users.size)
+  end
+
+  def test_user_uid
+    users = User.find_all ({ "attributes" => "uid,cn"})
+    assert_equal(2, users.size)
+    assert users[0].uid_number == ""
+    assert users[0].uid == "testuser1"
   end
   
 end
