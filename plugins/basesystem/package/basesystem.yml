@@ -1,7 +1,8 @@
 steps:
-  - controller: eulas
-  - controller: administrator
-  - controller: network
-  - controller: time
-  - controller: mail
-  - controller: registration
+# example values, value is controller in webclient
+#  - controller: eulas
+#  - controller: administrator
+#  - controller: network
+#  - controller: time
+#  - controller: mail
+#  - controller: registration
