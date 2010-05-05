@@ -4,7 +4,7 @@
 
   Permission is granted to copy, distribute and/or modify this document under the terms of the GNU Free Documentation License, Version 1.2 or (at your option) version 1.3; with the Invariant Section being this copyright notice and license. A copy of the license version 1.2 is included in the section entitled "GNU Free Documentation License". 
 
-== System syervices
+== System services
 
   Only authenticated users are allowed to access the API. Authentication is done
   by sending a Basic HTTP Authorisation header.
@@ -45,17 +45,25 @@ Contents:
 GET /services
 
   Get the list of all available services, both system (/etc/init.d) and custom (defined in 
-  /etc/webyast/custom_services.yml config file) ones. But result is filtered by the content of the
-  /etc/webyast/filter_services.yml file. If filter file is not present or empty, returns everything.
+  /etc/webyast/custom_services.yml config file) ones.
   
-  The information about service status is read with read_status=true argument.
+  The result is filtered by the content of the /etc/webyast/filter_services.yml file.
+  If filter file is not present or empty, returns everything.
+  
+  Each service has a name, description and short description (summary). It provides also the
+  infomration about dependencies (based on the service definition under /etc/init.d/):
+  which other services need to be started or stopped when selected service is started or stopped. 
 
   CURL Example: curl -u &lt;user> http://localhost:4984/services.xml
 
 
 XmlResult: services
 
+  The information about service status is read with read_status=true argument.
+
   CURL Example: curl -u &lt;user> http://localhost:4984/services.xml?read_status=true
+
+XmlResult: services-with-status
 
 
 GET /services/service_name.xml

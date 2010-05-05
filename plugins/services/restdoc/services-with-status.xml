@@ -6,7 +6,7 @@
     <summary>Set up ALSA sound system</summary>
     <custom>false</custom>
     <enabled>true</enabled>
-    <status type="integer"></status>
+    <status type="integer">0</status>
     <required_for_start type="array">
     </required_for_start>
     <required_for_stop type="array">
@@ -19,7 +19,7 @@
     <summary>Sound daemon with network support</summary>
     <custom>false</custom>
     <enabled>false</enabled>
-    <status type="integer"></status>
+    <status type="integer">3</status>
     <required_for_start type="array">
       <service>alsasound</service>
     </required_for_start>
@@ -32,7 +32,7 @@
     <summary>NFS client services </summary>
     <custom>false</custom>
     <enabled>true</enabled>
-    <status type="integer"></status>
+    <status type="integer">3</status>
     <required_for_start type="array">
     </required_for_start>
     <required_for_stop type="array">
@@ -44,7 +44,7 @@
     <summary>Collectd daemon collecting system statistics</summary>
     <custom>false</custom>
     <enabled>true</enabled>
-    <status type="integer"></status>
+    <status type="integer">0</status>
     <required_for_start type="array">
     </required_for_start>
     <required_for_stop type="array">
@@ -56,7 +56,7 @@
     <summary>Label for my database</summary>
     <custom>true</custom>
     <enabled>true</enabled>
-    <status type="integer"></status>
+    <status type="integer">0</status>
     <required_for_start type="array">
     </required_for_start>
     <required_for_stop type="array">
@@ -68,7 +68,7 @@
     <summary>Network time protocol daemon (ntpd)</summary>
     <custom>false</custom>
     <enabled>true</enabled>
-    <status type="integer"></status>
+    <status type="integer">0</status>
     <required_for_start type="array">
     </required_for_start>
     <required_for_stop type="array">

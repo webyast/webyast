@@ -4,5 +4,10 @@
   <description></description>
   <summary></summary>
   <custom>false</custom>
+  <enabled>true</enabled>
   <status type="integer">0</status>
+  <required_for_start type="array">
+  </required_for_start>
+  <required_for_stop type="array">
+  </required_for_stop>
 </service>
