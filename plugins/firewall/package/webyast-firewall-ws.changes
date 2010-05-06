@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Thu May  6 17:09:02 CEST 2010 - mkudlvasr@novell.com
+
+- add very basic documentation about firewall-ws
+- version 0.2.5
+
+-------------------------------------------------------------------
 Fri Apr 30 13:31:49 UTC 2010 - jreidinger@novell.com
 
 - fix spec file consistency (bnc#560061)

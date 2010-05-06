@@ -13,7 +13,7 @@ Provides:       WebYaST(org.opensuse.yast.modules.yapi.firewall)
 License:        GPL v2 only
 Group:          Productivity/Networking/Web/Utilities
 Autoreqprov:    on
-Version:        0.2.4
+Version:        0.2.5
 Release:        0
 Summary:        WebYaST - Firewall management service
 Source:         www.tar.bz2
