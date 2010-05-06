@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Thu May  6 17:09:02 CEST 2010 - mkudlvasr@novell.com
+
+- fix bnc#600115 (cannot refuse license once it has been accepted)
+- version 0.1.2
+
+-------------------------------------------------------------------
 Fri Apr 30 13:29:35 UTC 2010 - jreidinger@novell.com
 
 - fix spec file consistency (bnc#560061)
