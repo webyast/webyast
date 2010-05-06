@@ -1,6 +1,7 @@
 Firewall
 ========
 
-REST interface for opening/closing ports in external zone.
+REST interface for opening/closing ports in external zone. There is no
+custom configuration available.
 
 Copyright (c) 2009 Novell
