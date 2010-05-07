@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Fri May  7 11:35:13 UTC 2010 - jreidinger@novell.com
+
+- do not add any initial step by default (bnc#602364)
+- 0.1.9
+
+-------------------------------------------------------------------
 Fri Apr 30 13:25:50 UTC 2010 - jreidinger@novell.com
 
 - fix spec file consistency (bnc#560061)
