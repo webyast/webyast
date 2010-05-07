@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Fri May  7 11:02:07 UTC 2010 - jreidinger@novell.com
+
+- user is logged in for 2 hours (instead 1 day) (bnc#583237)
+- 0.1.22
+
+-------------------------------------------------------------------
 Tue May  4 14:26:35 CEST 2010 - mvidner@suse.cz
 
 - Run a separate session bus for build-time tests (broken in 0.1.19)
