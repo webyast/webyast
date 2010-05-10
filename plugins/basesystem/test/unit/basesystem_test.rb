@@ -32,6 +32,13 @@ steps:
     action: show
 EOF
 
+DEF_YAML_CONTENT = <<EOF
+steps:
+#  - controller: time
+#  - controller: language
+#    action: show
+EOF
+
   TEST_STEPS = [{ "controller" => "time"},{"controller" => "language", "action" => "show"}]
   def setup
     #set const to run test in this directory
@@ -86,5 +93,11 @@ EOF
   def test_broken_config
     YaST::ConfigFile.any_instance.stubs(:path).returns("")
     assert_nothing_raised do Basesystem.find end
+  end
+
+  def test_default_find
+    YaST::ConfigFile.stubs(:read_file).returns(DEF_YAML_CONTENT)
+    basesystem = Basesystem.find
+    assert basesystem.finish
   end
 end
