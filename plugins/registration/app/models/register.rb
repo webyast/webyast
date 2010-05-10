@@ -86,12 +86,12 @@ class Register
       @certificate = config['regserverca']
       @guid = config['guid']
     rescue Exception => e
-# FIXME: Don't catch generic exceptions but try to find out what went wrong
-# and report/log more details
+      # catch the error of  missing YSR function(s)
+      # in case a wrong yast2-registration version is installed
+      # TODO: catch error cases of YastService.Call individually and write more detailed log
       Rails.logger.error "YastService.Call('YSR::getregistrationconfig') failed with #{e}"
       @config_error = true
       return false
-      # raise
     end
     config
   end
@@ -100,14 +100,13 @@ class Register
     begin
       return ( @guid  &&  @guid.size > 0  &&  @guid != 0 ) == true
     rescue
-# FIXME: Log details      
-      Rails.logger.error "Error when reading the registration status information."
+      Rails.logger.error "Error when reading the registration status information. The GUID could not be determined."
       return false
     end
   end
 
   def register
-    # don't know how to pass only one hash, so split it into two. FIXME change later if possible!
+    # don't know how to pass only one hash, so split it into two. TODO change later if possible!
     # @reg = YastService.Call("YSR::statelessregister", { 'ctx' => ctx, 'arguments' => args } )
 
     ctx = Hash.new
@@ -116,8 +115,9 @@ class Register
       self.context.each   { |k, v|  ctx[k.to_s] = [ 's', v.to_s ] } if self.context.kind_of?(Hash)
       self.arguments.each { |k, v| args[k.to_s] = [ 's', v.to_s ] } if self.arguments.kind_of?(Hash)
     rescue
-# FIXME: Log which arg is wrong      
       Rails.logger.error "When registration was called, the context or the arguments data was invalid."
+      Rails.logger.error "Registration Context Data: #{ self.context.inspect }"
+      Rails.logger.error "Registration Argument Data: #{ self.arguments.inspect }"
       raise InvalidParameters.new :registrationdata => "Invalid"
     end
 
