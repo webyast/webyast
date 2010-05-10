@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Mon May 10 08:21:17 UTC 2010 - jreidinger@novell.com
+
+- fix reading empty initial steps (previous fix)
+- 0.1.10
+
+-------------------------------------------------------------------
 Fri May  7 11:35:13 UTC 2010 - jreidinger@novell.com
 
 - do not add any initial step by default (bnc#602364)
