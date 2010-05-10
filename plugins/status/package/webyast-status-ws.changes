@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Mon May 10 08:43:01 UTC 2010 - schubi@novell.com
+
+- background mode: checking if collectd is running at first (bnc#602362)
+- 0.1.12 
+
+-------------------------------------------------------------------
 Fri Apr 30 14:37:56 UTC 2010 - jreidinger@novell.com
 
 - fix spec file consistency (bnc#560061)
