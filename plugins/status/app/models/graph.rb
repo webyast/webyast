@@ -249,6 +249,9 @@ class Graph
     end
 
     if background
+      #checking if collectd is running
+      raise ServiceNotRunning.new('collectd') unless Metric.collectd_running?
+
       proc_id = id(what)
       if bm.process_finished? proc_id
         Rails.logger.debug "Request #{proc_id} is done"
@@ -285,8 +288,12 @@ class Graph
 
         bm.finish_process(proc_id, res)
       end
-
-      return [ bm.get_progress(proc_id) ]
+      process = bm.get_progress(proc_id)
+      if process
+        return [ process ]
+      else
+        return []
+      end
     else
       return do_find(what, limitcheck)
     end
