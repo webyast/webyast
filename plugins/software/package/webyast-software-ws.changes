@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Fri May 14 11:15:47 UTC 2010 - jreidinger@novell.com
+
+- do not hide dbus error by universal exception error (bnc#605164)
+- 0.1.26
+
+-------------------------------------------------------------------
 Mon May  3 10:56:30 UTC 2010 - schubi@novell.com
 
 - Remove BackendException from Patch management (bnc#600490) 
