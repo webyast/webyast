@@ -57,6 +57,6 @@ rescue Exception => e
   if e.respond_to? :to_xml
     puts e.to_xml.gsub("\n", '')
   else
-    puts BackendException.new(e.message).to_xml.gsub("\n", '')
+    puts PackageKitError.new(e.message).to_xml.gsub("\n", '')
   end
 end
