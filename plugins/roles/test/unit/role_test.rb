@@ -24,16 +24,15 @@ require File.expand_path(File.dirname(__FILE__) + "/../test_helper")
 class RoleTest < ActiveSupport::TestCase
   def setup
     #set fixtures, renew test files
-		test_path = File.join( File.dirname(__FILE__), "..")
-    `mkdir -p #{test_path}/tmp`
-		`cp #{test_path}/fixtures/* #{test_path}/tmp/`
-    Role.const_set(:ROLES_DEF_PATH, File.join( File.dirname(__FILE__), "..","tmp","roles.yml"))
-    Role.const_set(:ROLES_ASSIGN_PATH, File.join( File.dirname(__FILE__), "..","tmp","roles_assign.yml"))
+		@test_path = File.join( Dir.tmpdir(), "webyast-roles-testsuite-tmpdir")
+    `mkdir -p #{@test_path}`
+		`cp #{File.join(File.dirname(__FILE__),'..','fixtures')}/* #{@test_path}`
+    Role.const_set(:ROLES_DEF_PATH, File.join( @test_path, "roles.yml"))
+    Role.const_set(:ROLES_ASSIGN_PATH, File.join( @test_path, "roles_assign.yml"))
   end
 
   def teardown
-		test_path = File.join( File.dirname(__FILE__), "..")
-    `rm -rf #{test_path}/tmp`
+    `rm -rf #{@test_path}`
   end
 
   def test_find_all
