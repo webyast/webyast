@@ -65,14 +65,27 @@ class Register
       @certificate = config['regserverca']
       @guid = config['guid']
     rescue Exception => e
-      Rails.logger.error "YastService.Call('YSR::getregistrationconfig') failed"
-      raise
+      # catch the error of  missing YSR function(s)
+      # in case a wrong yast2-registration version is installed
+      # TODO: catch error cases of YastService.Call individually and write more detailed log
+      Rails.logger.error "YastService.Call('YSR::getregistrationconfig') failed with #{e}"
+      @config_error = true
+      return false
     end
     config
   end
 
+  def is_registered?
+    begin
+      return ( @guid  &&  @guid.size > 0  &&  @guid != 0 ) == true
+    rescue
+      Rails.logger.error "Error when reading the registration status information. The GUID could not be determined."
+      return false
+    end
+  end
+
   def register
-    # don't know how to pass only one hash, so split it into two. FIXME change later if possible!
+    # don't know how to pass only one hash, so split it into two. TODO change later if possible!
     # @reg = YastService.Call("YSR::statelessregister", { 'ctx' => ctx, 'arguments' => args } )
 
     ctx = Hash.new
@@ -82,6 +95,8 @@ class Register
       self.arguments.each { |k, v| args[k.to_s] = [ 's', v.to_s ] } if self.arguments.kind_of?(Hash)
     rescue
       Rails.logger.error "When registration was called, the context or the arguments data was invalid."
+      Rails.logger.error "Registration Context Data: #{ self.context.inspect }"
+      Rails.logger.error "Registration Argument Data: #{ self.arguments.inspect }"
       raise InvalidParameters.new :registrationdata => "Invalid"
     end
 
@@ -90,7 +105,22 @@ class Register
     @arguments = HashWithoutKeyConversion.from_xml(@reg['missingarguments']) if @reg && @reg.has_key?('missingarguments')
     @arguments = @arguments["missingarguments"] if @arguments && @arguments.has_key?('missingarguments')
 
-    @reg['exitcode'].to_i rescue 99
+
+    # port exitcode calculation from SP1 development
+    if !@reg
+      exitcode = 99
+    elsif @reg.has_key?('error') && @reg.has_key?('errorcode')
+      exitcode = @reg['errorcode'].to_i
+      exitcode = 199 if exitcode == 0
+    elsif @reg.has_key?('exitcode')
+      exitcode = @reg['exitcode'].to_i
+      exitcode = 199 if (exitcode == 0 && @reg['exitcode'] != "0")
+    else
+      exitcode = 199
+    end
+
+    @reg['calculated_exitcode'] = exitcode
+    exitcode
   end
 
   def save
@@ -107,7 +137,8 @@ class Register
     xml.instruct! unless options[:skip_instruct]
 
     xml.registration do
-      xml.guid @guid if @guid && @guid.size > 0
+      xml.guid @guid if self.is_registered?
+      xml.configerror 'true' if @config_error == true
     end
   end
 
@@ -117,14 +148,15 @@ class Register
     xml.instruct! unless options[:skip_instruct]
 
     xml.registrationconfig do
+      xml.configerror 'true' if @config_error == true
       xml.server do
         xml.url @registrationserver if @registrationserver
       end
-     xml.certificate do
-       xml.data do
-         xml.cdata!(@certificate) if @certificate && @certificate.size > 0
-       end
-     end
+      xml.certificate do
+        xml.data do
+          xml.cdata!(@certificate) if @certificate && @certificate.size > 0
+        end
+      end
     end
   end
 
@@ -133,15 +165,13 @@ class Register
     xml = options[:builder] ||= Builder::XmlMarkup.new(options)
     xml.instruct! unless options[:skip_instruct]
 
-    status = if !@reg ||  @reg['error'] then  'error'
-             elsif @reg['missinginfo']  then  'missinginfo'
-             elsif @reg['success']      then  'finished'
-             end
+    exitcode = @reg['calculated_exitcode'] || 199
 
-    exitcode = if !@reg then 99
-               elsif @reg.has_key?('exitcode') then @reg['exitcode']
-               else 199
-               end
+    status = if !@reg || @reg['error']                   then  'error'
+             elsif @reg['missinginfo'] && exitcode == 4  then  'missinginfo'
+             elsif @reg['success']                       then  'finished'
+                                                         else  'error'
+             end
 
     changedrepos = {}
     changedservices = {}
@@ -176,7 +206,7 @@ class Register
       xml.exitcode exitcode
       xml.guid self.guid || ''
 
-      if @arguments && exitcode != 0
+      if !@arguments.blank? && exitcode == 4
         xml.missingarguments({:type => "array"}) do
           @arguments.each do | k, v |
             if k && v.kind_of?(Hash)
@@ -191,7 +221,7 @@ class Register
         end
       end
 
-      if changedrepos && changedrepos.size > 0
+      if !changedrepos.blank?
         xml.changedrepos({:type => "array"}) do
           changedrepos.each do | k, v |
             if k && v && v.kind_of?(Hash) && v.has_key?('TASK') && v['TASK'] != "le" && v['TASK'] != "ld" #only changed repos
@@ -206,7 +236,7 @@ class Register
           end
         end
       end
-      if changedservices && changedservices.size > 0
+      if !changedservices.blank?
         xml.changedservices({:type => "array"}) do
           changedservices.each do | k, v |
             if k && v.kind_of?(Hash)
