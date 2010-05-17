@@ -25,6 +25,12 @@ class BackendException < StandardError
   end
 
   protected
+# protected initialize as this is just abstract class.
+# message make sense just for logging purpose
+  def initialize(message="BackendException")
+    super message
+  end
+
   #create xml without arguments, so only error type and description
   def no_arg_to_xml(options,type,descr)
     xml = Builder::XmlMarkup.new(options)
