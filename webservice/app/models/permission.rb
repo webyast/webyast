@@ -132,7 +132,8 @@ private
         !s.include?(SUSE_STRING+".module-manager")}
   end
 
-  def dbus_obj
+public
+  def self.dbus_obj
     bus = DBus.system_bus
     ruby_service = bus.service("webyast.permissions.service")
     obj = ruby_service.object("/webyast/permissions/Interface")
