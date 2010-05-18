@@ -31,6 +31,19 @@ class Permission
     @permissions = []
   end
 
+  def self.set_permissions(user,permissions)
+    service = dbus_obj
+#FIXME vendor permission with different prefix is not reset
+    all_perm = filter_nonsuse_permissions all_actions.split(/\n/)
+    #reset all permissions
+    service.revoke all_perm, user
+    unless permissions.empty?
+      response = service.grant permissions, user
+      Rails.logger.info "set_permissions: #{response.inspect}"
+      #TODO convert response to exceptions in case of error
+    end
+  end
+
   def self.find(type,restrictions={})
     permission = Permission.new
     permission.load_permissions restrictions
@@ -119,4 +132,12 @@ private
         !s.include?(SUSE_STRING+".module-manager")}
   end
 
+  def dbus_obj
+    bus = DBus.system_bus
+    ruby_service = bus.service("webyast.permissions.service")
+    obj = ruby_service.object("/webyast/permissions/Interface")
+    obj.introspect
+    obj.default_iface = "webyast.permissions.Interface"
+    obj
+  end
 end
