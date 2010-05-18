@@ -63,8 +63,20 @@ end
 
 def update
 	roles = Role.find_all
-	#check what really changes to avoid unneccesary write and also better permissions
+  old = roles[name]
 	roles[name] = self
+#if changed users renew its permissions
+  if old.users.sort != @users.sort
+    (@users+old.users).uniq.each do |user|
+      Permission.set_permissions user, Role.permissions_for_user(roles.values,user)
+    end
+#if permissions in role is changed, then regenerate permission setup for each affected user
+  elsif old.permissions.sort != @permissions.sort
+    @users.each do |user|
+      Permission.set_permissions user, Role.permissions_for_user(roles.values,user)
+    end
+  end
+
 	Role.write_definitions roles.values
 	Role.write_assigns roles.values
 end
@@ -72,6 +84,10 @@ end
 def create
 	roles = Role.find_all
 	roles[name] = self
+#set permission for users of new role
+  @users.each do |user|
+    Permission.set_permissions user, Role.permissions_for_user(roles.values,user)
+  end
 	Role.write_definitions roles.values
 	Role.write_assigns roles.values
 end
@@ -81,6 +97,16 @@ def self.delete (id)
 	roles.delete id.to_s
 	write_definitions roles.values
 	write_assigns roles.values
+end
+
+def changed_users?
+  old = Role.find @name
+  return @users.sort == old.users.sort
+end
+
+def changed_permissions?
+  old = Role.find @name
+  return @permissions.sort == old.permissions.sort
 end
 
 private 
@@ -123,4 +149,15 @@ def self.write_assigns(roles)
 		io.write result.to_yaml
 	end
 end
+
+def self.permissions_for_user(roles,user)
+  permissions = []
+  roles.each do |role|
+    if role.users.include? user
+      permissions.concat role.permissions
+    end
+  end
+  permissions.uniq
+end
+
 end

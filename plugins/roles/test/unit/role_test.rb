@@ -29,6 +29,7 @@ class RoleTest < ActiveSupport::TestCase
 		`cp #{test_path}/fixtures/* #{test_path}/tmp/`
     Role.const_set(:ROLES_DEF_PATH, File.join( File.dirname(__FILE__), "..","tmp","roles.yml"))
     Role.const_set(:ROLES_ASSIGN_PATH, File.join( File.dirname(__FILE__), "..","tmp","roles_assign.yml"))
+    Permission.stubs :set_permissions
   end
 
   def teardown
