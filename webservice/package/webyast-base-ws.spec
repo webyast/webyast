@@ -265,7 +265,7 @@ echo "Database is ready"
 %{webyast_ws_dir}/config/initializers
 %{webyast_ws_dir}/config/routes.rb
 #also users can run granting script, as permissions is handled by policyKit right for granting permissions
-%attr(555,root,root) %config /usr/sbin/grantwebyastrights
+%attr(555,root,root) /usr/sbin/grantwebyastrights
 %attr(755,root,root) %{webyast_ws_dir}/start.sh
 %attr(500,root,root) /usr/local/bin/webyastPermissionsService.rb
 %attr(444,root,root) /usr/share/dbus-1/system-services/webyast.permissions.service
