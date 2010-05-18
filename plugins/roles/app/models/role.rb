@@ -101,12 +101,12 @@ end
 
 def changed_users?
   old = Role.find @name
-  return @users.sort == old.users.sort
+  return @users.sort != old.users.sort
 end
 
 def changed_permissions?
   old = Role.find @name
-  return @permissions.sort == old.permissions.sort
+  return @permissions.sort != old.permissions.sort
 end
 
 private 
