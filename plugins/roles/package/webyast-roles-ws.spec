@@ -23,6 +23,7 @@ BuildRoot:      %{_tmppath}/%{name}-%{version}-build
 BuildArch:      noarch
 Source1:        roles.yml
 Source2:        roles_assign.yml
+Source3:        org.opensuse.yast.roles.policy
 
 BuildRequires:  webyast-base-ws-testsuite
 BuildRequires:	rubygem-test-unit rubygem-mocha
@@ -73,6 +74,8 @@ mkdir -p $RPM_BUILD_ROOT/usr/share/PolicyKit/policy
 mkdir -p $RPM_BUILD_ROOT%{webyast_ws_vardir}/roles
 cp %{SOURCE1} %{SOURCE2} $RPM_BUILD_ROOT%{webyast_ws_vardir}/roles
 
+cp %{SOURCE3} $RPM_BUILD_ROOT/usr/share/PolicyKit/policy/
+
 %clean
 rm -rf $RPM_BUILD_ROOT
 
@@ -104,6 +107,7 @@ rm -rf $RPM_BUILD_ROOT
 %{plugin_dir}/tasks
 %{plugin_dir}/doc/README_FOR_APP
 %attr(-,%{webyast_ws_user},%{webyast_ws_user}) %config %{webyast_ws_vardir}/roles
+/usr/share/PolicyKit/policy/org.opensuse.yast.roles.policy
 
 %doc COPYING
 
