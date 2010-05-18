@@ -49,6 +49,9 @@ Version:        0.1.22
 Release:        0
 Summary:        WebYaST - base components for rest service
 Source:         www.tar.bz2
+Source1:        webyastPermissionsService.rb
+Source2:        webyast.permissions.conf
+Source3:        webyast.permissions.service
 Source4:        org.opensuse.yast.permissions.policy
 Source5:        grantwebyastrights
 Source6:        yast_user_roles
@@ -166,6 +169,10 @@ mkdir -p $RPM_BUILD_ROOT%{webyast_ws_dir}/tmp/pids
 mkdir -p $RPM_BUILD_ROOT%{webyast_ws_dir}/tmp/sessions
 mkdir -p $RPM_BUILD_ROOT%{webyast_ws_dir}/tmp/sockets
 
+# install permissions service
+install -m 0500 %SOURCE1 $RPM_BUILD_ROOT/usr/local/bin/
+install -m 0644 %SOURCE2 $RPM_BUILD_ROOT/etc/dbus-1/system.d/
+install -m 0444 %SOURCE3 $RPM_BUILD_ROOT/usr/share/dbus-1/system-services/
 
 #---------------------------------------------------------------
 %clean
@@ -260,6 +267,9 @@ echo "Database is ready"
 #also users can run granting script, as permissions is handled by policyKit right for granting permissions
 %attr(555,root,root) %config /usr/sbin/grantwebyastrights
 %attr(755,root,root) %{webyast_ws_dir}/start.sh
+%attr(500,root,root) /usr/local/bin/webyastPermissionsService.rb
+%attr(444,root,root) /usr/share/dbus-1/system-services/webyast.permissions.service
+%attr(644,root,root) %config /etc/dbus-1/system.d/webyast.permissions.conf
 %doc %{webyast_ws_dir}/README
 %attr(-,%{webyast_ws_user},%{webyast_ws_user}) %{webyast_ws_dir}/log
 %attr(-,%{webyast_ws_user},%{webyast_ws_user}) %{webyast_ws_dir}/tmp
