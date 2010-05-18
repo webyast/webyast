@@ -59,9 +59,10 @@ class Permission
 
   def load_permissions(options)
     semiresult = all_actions.split(/\n/)
-    semiresult = filter_nonsuse_permissions semiresult
     if (options[:filter])
       semiresult.delete_if { |perm| !perm.include? options[:filter] }
+    else
+      semiresult = filter_nonsuse_permissions semiresult
     end
   @permissions = semiresult.map do |value|
       ret = {
