@@ -167,6 +167,13 @@ class Register
 
     exitcode = @reg['calculated_exitcode'] || 199
 
+    # catch error 2 and pass error message on (bnc#604777)
+    if ( exitcode == 2  &&  !@reg['invaliddataerrormessage'].blank? ) then
+      invaliddatamessage = @reg['invaliddataerrormessage']
+    else
+      invaliddatamessage = nil
+    end
+
     status = if !@reg || @reg['error']                   then  'error'
              elsif @reg['missinginfo'] && exitcode == 4  then  'missinginfo'
              elsif @reg['success']                       then  'finished'
@@ -204,6 +211,7 @@ class Register
     xml.registration do
       xml.status status
       xml.exitcode exitcode
+      xml.invaliddatamessage invaliddatamessage if !invaliddatamessage.blank?
       xml.guid self.guid || ''
 
       if !@arguments.blank? && exitcode == 4
