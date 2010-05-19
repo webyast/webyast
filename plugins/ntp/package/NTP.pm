@@ -56,7 +56,7 @@ sub Synchronize {
   unless ($use_utc) {
     $local = "--localtime";
   }
-  my $ret = `/sbin/hwclock $local --systohc`;
+  my $ret = `/sbin/hwclock $local --systohc 2>&1`;
   y2milestone("hwclock returns $?: $ret");
   if ($? == 0){
     if ($new_server ne "")
