@@ -1,4 +1,12 @@
 -------------------------------------------------------------------
+Thu May 20 20:36:16 CEST 2010 - jdsn@suse.de
+
+- port registration backend from latest development to get
+  proper error handling and reporting
+- handle backend error 2 and show error message (bnc#604777)
+- 0.0.8.1
+
+-------------------------------------------------------------------
 Wed Nov 18 16:47:37 CET 2009 - jdsn@suse.de
 
 - fix success message of registration
