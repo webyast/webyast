@@ -187,8 +187,14 @@ sub Read {
   my $self	= shift;
   my $args	= shift;
   my @ret	= ();
-  my $runlevel	= SCR->Read (".init.scripts.current_runlevel");
-  $runlevel	= $args->{"runlevel"} if defined $args->{"runlevel"};
+  my $runlevel	= $args->{"runlevel"} || "";
+
+  $runlevel	= SCR->Read (".init.scripts.current_runlevel") unless ($runlevel);
+
+  unless ($runlevel) {
+    $runlevel  = SCR->Read (".init.scripts.default_runlevel");
+    y2warning ("current runlevel not available, using default ('$runlevel')");
+  }
 
   my @filter	= ();
   @filter	= @{$args->{"filter"}} if defined $args->{"filter"};
@@ -358,6 +364,11 @@ sub Execute {
 
     my $full_services	= RunlevelEd->services ();
     my $runlevel	= RunlevelEd->GetCurrentRunlevel ();
+
+    if ($runlevel eq "unknown") {
+	$runlevel        = RunlevelEd->GetDefaultRunlevel ();
+	y2warning ("current runlevel not available, using default ('$runlevel')");
+    }
 
     # in fact, this may mean "start & enable" (depends on $only_execute)
     my $start		= ($action eq "start") || ($action eq "restart");

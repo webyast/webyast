@@ -37,7 +37,6 @@ EOF
     YaST::ConfigFile.any_instance.stubs(:path).returns(__FILE__)
     YaST::ConfigFile.stubs(:read_file).returns(YAML_CONTENT)
     @read_args = {
-	'runlevel'		=> [ 'i', 5 ],
 	'read_status'		=> [ 'b', false],
 	'description'		=> ['b', true],
 	'shortdescription' 	=> ['b', true],
@@ -45,7 +44,6 @@ EOF
 	'filter'		=> [ 'as', ['acpid', 'dbus','my_app']]
     }
     @custom_args = {
-	'runlevel'		=> [ 'i', 5 ],
 	'read_status'		=> [ 'b', false],
 	'description'		=> ['b', true],
 	'shortdescription'	=> ['b', true],
@@ -84,19 +82,10 @@ EOF
     assert ret == []
   end
 
-  test "find all in unknown current runlevel" do
-    Service.stubs(:run_runlevel).returns("unknown")
-
-    assert_raise Exception do
-	Service.find_all(nil)
-    end
-  end
-
   test "check find LSB service" do
     srv = [{"name" => "acpid"}, {"name" => "dbus", "description" => "DBUS service description"}]
     custom = [{"name" => "my_app", "description" => "My application long description", "shortdescription" => "summary"}]
   
-    Service.stubs(:run_runlevel).returns("N 5")
     YastService.stubs(:Call).with('YaPI::SERVICES::Read', @read_args).returns(srv)
     YastService.stubs(:Call).with('YaPI::SERVICES::Read', @custom_args).returns(custom)
 
@@ -143,7 +132,6 @@ EOF
     ]
     custom = [{"name" => "my_app" } ]
   
-    Service.stubs(:run_runlevel).returns("N 5")
     YastService.stubs(:Call).with('YaPI::SERVICES::Read', @read_args).returns(srv)
     YastService.stubs(:Call).with('YaPI::SERVICES::Read', @custom_args).returns(custom)
 
