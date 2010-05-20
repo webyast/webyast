@@ -211,7 +211,7 @@ class Register
     xml.registration do
       xml.status status
       xml.exitcode exitcode
-      xml.invaliddatamessage invaliddatamessage if !invaliddatamessage.blank?
+      xml.invaliddataerrormessage invaliddatamessage if !invaliddatamessage.blank?
       xml.guid self.guid || ''
 
       if !@arguments.blank? && exitcode == 4
