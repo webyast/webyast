@@ -58,7 +58,7 @@ sub Synchronize {
   }
   my $ret = `/sbin/hwclock $local --systohc 2>&1`;
   y2milestone("hwclock returns $?: $ret");
-  if ($? == 0){
+  if ( $? == 0 || not -f "/sbin/hwclock"){ #on s390x is no hwclock so don't fail in this case bnc#607158
     if ($new_server ne "")
     {
       `sed -i 's|^[:space:]*NETCONFIG_NTP_STATIC_SERVERS=.*\$|NETCONFIG_NTP_STATIC_SERVERS="$new_server"|' /etc/sysconfig/network/config `;
