@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Thu May 20 14:35:22 CEST 2010 - jsuchome@suse.cz
+
+- backup to default runlevel when current is not known (bnc#607098) 
+- 0.2.0
+
+-------------------------------------------------------------------
 Wed May  5 10:22:59 CEST 2010 - jsuchome@suse.cz
 
 - update rest service documentation

@@ -94,9 +94,7 @@ class Service
 
     filter		= parse_filter
 
-    rl = current_runlevel
     args	= {
-	"runlevel"	=> [ "i", rl ],
 	"read_status"	=> [ "b", params.has_key?("read_status")],
 	"shortdescription"	=> [ "b", true],
 	"description"	=> [ "b", true],
