@@ -1,6 +1,7 @@
 #!/usr/bin/env ruby
 
 require 'dbus'
+require 'etc'
 
 # Choose the bus (could also be DBus::session_bus, which is not suitable for a system service)
 bus = DBus::system_bus

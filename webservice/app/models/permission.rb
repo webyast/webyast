@@ -71,7 +71,7 @@ class Permission
   end
 
   def load_permissions(options)
-    semiresult = all_actions.split(/\n/)
+    semiresult = Permissions.all_actions.split(/\n/)
     if (options[:filter])
       semiresult.delete_if { |perm| !perm.include? options[:filter] }
     else
@@ -112,9 +112,6 @@ private
     end
   end
 
-  def all_actions
-    `/usr/bin/polkit-action`
-  end
 
 
 	def get_description (action)
@@ -124,15 +121,19 @@ private
 		desc
   end
 
+public
+  def self.all_actions
+    `/usr/bin/polkit-action`
+  end
+
   SUSE_STRING = "org.opensuse.yast"
-  def filter_nonsuse_permissions (str)
+  def self.filter_nonsuse_permissions (str)
     str.select{ |s|
       s.include?(SUSE_STRING) &&
         !s.include?(SUSE_STRING+".scr") &&
         !s.include?(SUSE_STRING+".module-manager")}
   end
 
-public
   def self.dbus_obj
     bus = DBus.system_bus
     ruby_service = bus.service("webyast.permissions.service")
