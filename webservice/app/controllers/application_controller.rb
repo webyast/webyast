@@ -42,7 +42,8 @@ class ApplicationController < ActionController::Base
 
   rescue_from DBus::Error do |exception|
     logger.info "Raised DBus::Error exception - #{exception.message}"
-    report_backend_exception exception
+    logger.info "#{exception.inspect}"
+    report_backend_exception DBusException.new(exception.message)
   end
 
 #lazy load of YaST::Config library

@@ -209,3 +209,14 @@ class ServiceNotRunning < BackendException
   end
 end
 
+class DBusException < BackendException
+  def to_xml(options={})
+    xml = Builder::XmlMarkup.new(options)
+    xml.instruct! unless options[:skip_instruct]
+    xml.error do
+      xml.type "DBUS_ERROR"
+      xml.description "DBus return error: #{message}"
+      xml.output message
+    end
+  end
+end
