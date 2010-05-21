@@ -47,7 +47,7 @@ USER_REGEX=/^[ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz_][ABCDEFGHIJK
     uid = DBus::SystemBus.instance.proxy.GetConnectionUnixUser(sender)[0]
     user = Etc.getpwuid(uid).name
     begin
-      return PolKit.polkit_check(PERMISSION, user) == :yes}
+      return PolKit.polkit_check(PERMISSION, user) == :yes
     rescue Exception => e
       return false
     end
