@@ -21,6 +21,18 @@
 
 require File.expand_path(File.dirname(__FILE__) + "/../test_helper")
 
+class FakeDbus
+	attr_reader :last_perms, :last_user
+	def revoke(perms,user)
+		@last_perms = perms
+		@last_user = user
+	end
+
+	def grant(perms,user)
+		revoke perms,user
+	end
+end
+
 class RoleTest < ActiveSupport::TestCase
   def setup
     #set fixtures, renew test files
@@ -29,6 +41,8 @@ class RoleTest < ActiveSupport::TestCase
 		`cp #{File.join(File.dirname(__FILE__),'..','fixtures')}/* #{@test_path}`
     Role.const_set(:ROLES_DEF_PATH, File.join( @test_path, "roles.yml"))
     Role.const_set(:ROLES_ASSIGN_PATH, File.join( @test_path, "roles_assign.yml"))
+		@dbus_obj = FakeDbus.new
+		Permission.stubs(:dbus_obj).returns(@dbus_obj)
   end
 
   def teardown
