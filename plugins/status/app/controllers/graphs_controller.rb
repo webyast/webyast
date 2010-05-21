@@ -56,6 +56,9 @@ class GraphsController < ApplicationController
   #
   def index
     permission_check("org.opensuse.yast.system.status.read")
+    Rails.logger.error "xxxxxxxxxxxxxxxxx #{request.env.inspect}"
+    Rails.logger.error "xxxxxxxxxxxxxxxxx #{request.env["HTTP_ACCEPT_LANGUAGE"]}"
+
 
     bgr = params['background'] == 'true'
     Rails.logger.info "Reading status in background" if bgr
