@@ -267,7 +267,7 @@ echo "Database is ready"
 #also users can run granting script, as permissions is handled by policyKit right for granting permissions
 %attr(555,root,root) /usr/sbin/grantwebyastrights
 %attr(755,root,root) %{webyast_ws_dir}/start.sh
-%attr(500,root,root) /usr/local/bin/webyastPermissionsService.rb
+%attr(500,root,root) /usr/local/sbin/webyastPermissionsService.rb
 %attr(444,root,root) /usr/share/dbus-1/system-services/webyast.permissions.service.service
 %attr(644,root,root) %config /etc/dbus-1/system.d/webyast.permissions.conf
 %doc %{webyast_ws_dir}/README
