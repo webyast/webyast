@@ -51,7 +51,7 @@ Summary:        WebYaST - base components for rest service
 Source:         www.tar.bz2
 Source1:        webyastPermissionsService.rb
 Source2:        webyast.permissions.conf
-Source3:        webyast.permissions.service
+Source3:        webyast.permissions.service.service
 Source4:        org.opensuse.yast.permissions.policy
 Source5:        grantwebyastrights
 Source6:        yast_user_roles
@@ -268,7 +268,7 @@ echo "Database is ready"
 %attr(555,root,root) /usr/sbin/grantwebyastrights
 %attr(755,root,root) %{webyast_ws_dir}/start.sh
 %attr(500,root,root) /usr/local/bin/webyastPermissionsService.rb
-%attr(444,root,root) /usr/share/dbus-1/system-services/webyast.permissions.service
+%attr(444,root,root) /usr/share/dbus-1/system-services/webyast.permissions.service.service
 %attr(644,root,root) %config /etc/dbus-1/system.d/webyast.permissions.conf
 %doc %{webyast_ws_dir}/README
 %attr(-,%{webyast_ws_user},%{webyast_ws_user}) %{webyast_ws_dir}/log
