@@ -47,7 +47,7 @@ TEST_DATA_GRANT = [
 
 
   def setup
-    Permission.any_instance.stubs(:all_actions).returns(TEST_DATA_ACTIONS)
+    Permission.stubs(:all_actions).returns(TEST_DATA_ACTIONS)
     PolKit.stubs(:polkit_check).with(){ |p,u| TEST_DATA_GRANT.include? p.to_s}.returns(:yes)
     PolKit.stubs(:polkit_check).with(){ |p,u| !TEST_DATA_GRANT.include?(p.to_s)}.returns(:no)
   end
