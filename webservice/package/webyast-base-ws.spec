@@ -170,7 +170,8 @@ mkdir -p $RPM_BUILD_ROOT%{webyast_ws_dir}/tmp/sessions
 mkdir -p $RPM_BUILD_ROOT%{webyast_ws_dir}/tmp/sockets
 
 # install permissions service
-install -m 0500 %SOURCE1 $RPM_BUILD_ROOT/usr/local/bin/
+mkdir -p $RPM_BUILD_ROOT/usr/local/sbin/
+install -m 0500 %SOURCE1 $RPM_BUILD_ROOT/usr/local/sbin/
 install -m 0644 %SOURCE2 $RPM_BUILD_ROOT/etc/dbus-1/system.d/
 install -m 0444 %SOURCE3 $RPM_BUILD_ROOT/usr/share/dbus-1/system-services/
 
