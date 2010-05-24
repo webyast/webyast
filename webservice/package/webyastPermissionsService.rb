@@ -2,6 +2,7 @@
 
 require 'dbus'
 require 'etc'
+require 'polkit'
 
 # Choose the bus (could also be DBus::session_bus, which is not suitable for a system service)
 bus = DBus::system_bus
@@ -22,10 +23,10 @@ class WebyastPermissionsService < DBus::Object
   # Create an interface.
   dbus_interface "webyast.permissions.Interface" do
     dbus_method :grant, "out result:as, in permissions:as, in user:s" do |permissions,user,sender|
-      execute "grant", permissions, user,sender
+      [execute("grant", permissions, user,sender)]
     end
     dbus_method :revoke, "out result:as, in permissions:as, in user:s" do |permissions,user,sender|
-      execute "revoke", permissions, user,sender
+      [execute("revoke", permissions, user,sender)]
     end
   end
 
@@ -40,7 +41,7 @@ USER_REGEX=/^[ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz_][ABCDEFGHIJK
       result << "perm #{p} is INVALID" if p.match(/^[a-zA-Z0-9.-]+$/).nil?
       result << `polkit-auth --user '#{user}' --#{command} '#{p}' 2>&1`
     end
-    result
+    return result
   end
 
   PERMISSION="org.opensuse.yast.permissions.write"
