@@ -63,8 +63,7 @@ task :deploy_local => :"db:migrate" do |t|
   FileUtils.install "package/grantwebyastrights", "/usr/sbin", :mode => 0555
   mkdir_p "/etc/dbus-1/system.d/"
   cp_r    "package/webyast.permissions.conf", "/etc/dbus-1/system.d/"
-  mkdir_p "/usr/local/sbin/"
-  cp_r    "package/webyastPermissionsService.rb", "/usr/local/sbin/"
+  cp_r    "package/webyastPermissionsService.rb", "/usr/sbin/"
   chmod  0744, "/usr/local/sbin/webyastPermissionsService.rb"
   mkdir_p "/usr/share/dbus-1/system-services/"
   cp_r    "package/webyast.permissions.service.service", "/usr/share/dbus-1/system-services/"

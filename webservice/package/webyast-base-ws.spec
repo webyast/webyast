@@ -170,9 +170,11 @@ mkdir -p $RPM_BUILD_ROOT%{webyast_ws_dir}/tmp/sessions
 mkdir -p $RPM_BUILD_ROOT%{webyast_ws_dir}/tmp/sockets
 
 # install permissions service
-mkdir -p $RPM_BUILD_ROOT/usr/local/sbin/
-install -m 0500 %SOURCE1 $RPM_BUILD_ROOT/usr/local/sbin/
+mkdir -p $RPM_BUILD_ROOT/usr/sbin/
+install -m 0500 %SOURCE1 $RPM_BUILD_ROOT/usr/sbin/
+mkdir -p $RPM_BUILD_ROOT/etc/dbus-1/system.d/
 install -m 0644 %SOURCE2 $RPM_BUILD_ROOT/etc/dbus-1/system.d/
+mkdir -p $RPM_BUILD_ROOT/usr/share/dbus-1/system-services/
 install -m 0444 %SOURCE3 $RPM_BUILD_ROOT/usr/share/dbus-1/system-services/
 
 #---------------------------------------------------------------
@@ -268,7 +270,7 @@ echo "Database is ready"
 #also users can run granting script, as permissions is handled by policyKit right for granting permissions
 %attr(555,root,root) /usr/sbin/grantwebyastrights
 %attr(755,root,root) %{webyast_ws_dir}/start.sh
-%attr(500,root,root) /usr/local/sbin/webyastPermissionsService.rb
+%attr(500,root,root) /usr/sbin/webyastPermissionsService.rb
 %attr(444,root,root) /usr/share/dbus-1/system-services/webyast.permissions.service.service
 %attr(644,root,root) %config /etc/dbus-1/system.d/webyast.permissions.conf
 %doc %{webyast_ws_dir}/README

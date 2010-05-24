@@ -1,5 +1,5 @@
 # DBus service activation config
 [D-BUS Service]
 Name=webyast.permissions.service
-Exec=/usr/local/sbin/webyastPermissionsService.rb
+Exec=/usr/sbin/webyastPermissionsService.rb
 User=root

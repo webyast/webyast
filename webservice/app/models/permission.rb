@@ -35,6 +35,7 @@ class Permission
     service = dbus_obj
 #FIXME vendor permission with different prefix is not reset
     all_perm = filter_nonsuse_permissions all_actions.split(/\n/)
+    Rails.logger.info "all_perm: #{all_perm.inspect}"
     #reset all permissions
     service.revoke all_perm, user
     unless permissions.empty?
@@ -117,7 +118,6 @@ private
 	def get_description (action)
 		desc = `polkit-action --action #{action} | grep description: | sed 's/^description:[:space:]*\\(.\\+\\)$/\\1/'`
 		desc.strip!
-		Rails.logger.info "description for #{action} is #{desc}"
 		desc
   end
 
