@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<firewall>
+  <use_firewall type="boolean">false</use_firewall>
+  <fw_services type="array">
+    <fw_services>
+      <id>service:hplip</id>
+      <allowed type="boolean">false</allowed>
+    </fw_services>
+    <fw_services>
+      <id>service:dnsmasq-dns</id>
+      <allowed type="boolean">true</allowed>
+    </fw_services>
+    <fw_services>
+      <id>service:dnsmasq-dhcp</id>
+      <allowed type="boolean">false</allowed>
+    </fw_services>
+    <fw_services>
+      <id>service:webyast-ui</id>
+      <allowed type="boolean">true</allowed>
+    </fw_services>
+  </fw_services>
+</firewall>
