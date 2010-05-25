@@ -64,7 +64,7 @@ task :deploy_local => :"db:migrate" do |t|
   mkdir_p "/etc/dbus-1/system.d/"
   cp_r    "package/webyast.permissions.conf", "/etc/dbus-1/system.d/"
   cp_r    "package/webyastPermissionsService.rb", "/usr/sbin/"
-  chmod  0744, "/usr/local/sbin/webyastPermissionsService.rb"
+  chmod  0744, "/usr/sbin/webyastPermissionsService.rb"
   mkdir_p "/usr/share/dbus-1/system-services/"
   cp_r    "package/webyast.permissions.service.service", "/usr/share/dbus-1/system-services/"
   # add user yastws
