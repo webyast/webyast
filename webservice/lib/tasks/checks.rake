@@ -187,15 +187,6 @@ EOF
   end
 
   #
-  # /etc/yast_user_roles
-  #
-  test "User roles configured" do
-    unless File.exists? "/etc/yast_user_roles"
-      warn "/etc/yast_user_roles does not exist", "Create /etc/yast_user_roles using template in webservice/package/yast_user_roles"
-    end
-  end
-
-  #
   # yast-dbus
   #
 

@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<user>
-  <defaultGroup>users</defaultGroup>
-  <fullName>tux4 tux4</fullName>
-  <groups>users</groups>
-  <homeDirectory>/home/tux2</homeDirectory>
-  <loginShell>/bin/bash</loginShell>
-  <password>tuxtux</password>
-</user>
