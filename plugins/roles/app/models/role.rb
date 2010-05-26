@@ -55,7 +55,6 @@ def self.find(what=:all,options={})
   when :all then
     result.values || []
   else
-		Rails.logger.info "find role for id #{what}"
     v = result.find { |k,v| k.to_sym == what.to_sym }
 		v[1] if v #return value, not key
   end

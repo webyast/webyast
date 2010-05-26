@@ -35,12 +35,12 @@ class Permission
     service = dbus_obj
 #FIXME vendor permission with different prefix is not reset
     all_perm = filter_nonsuse_permissions all_actions.split(/\n/)
-    Rails.logger.info "all_perm: #{all_perm.inspect}"
     #reset all permissions
     service.revoke all_perm, user
+    Rails.logger.info "revoke perms for user #{user} perms: #{all_perm.inspect}"
     unless permissions.empty?
       response = service.grant permissions, user
-      Rails.logger.info "set_permissions: #{response.inspect}"
+      Rails.logger.info "grant perms #{permissions.inspect} for user #{user}"
       #TODO convert response to exceptions in case of error
     end
   end
