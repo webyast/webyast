@@ -19,11 +19,12 @@ class ExampleService < DBus::Object
       rescue
         out = "NOTHING"
       end
-      out
+      [out] #return value must be array, as DBus allow multiple return value, so it expect array of return values
     end
     # This method dumps a string into a file
     dbus_method :write, "in contents:s" do |contents|
       File.open(FILENAME, 'w') {|f| f.write(contents) }
+      []
     end
   end
 end
