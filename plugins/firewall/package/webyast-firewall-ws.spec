@@ -54,7 +54,12 @@ needed at runtime.
 %setup -q -n www
 
 %build
+# build restdoc documentation
+mkdir -p public/firewall/restdoc
+%webyast_ws_restdoc
 
+# do not package restdoc sources
+rm -rf restdoc
 #remove generated doc
 rm -rf doc
 
@@ -109,6 +114,7 @@ rm -rf $RPM_BUILD_ROOT
 %{plugin_dir}/uninstall.rb
 %{plugin_dir}/app
 %{plugin_dir}/config
+%{plugin_dir}/public
 %{plugin_dir}/tasks
 /usr/share/YaST2/modules/YaPI/FIREWALL.pm
 %attr(644,root,root) %config /usr/share/PolicyKit/policy/org.opensuse.yast.modules.yapi.firewall.policy
