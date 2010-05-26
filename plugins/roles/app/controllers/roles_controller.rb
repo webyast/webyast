@@ -36,9 +36,10 @@ class RolesController < ApplicationController
   # Sets time settings. Requires write permissions for time YaPI.
   def update
 		#TODO check if id exist
-		role = Role.find(params[:id]).load(params)
+		role = Role.find(params[:id]).load(params[:roles])
     permission_check "org.opensuse.yast.roles.modify" if role.changed_permissions?
     permission_check "org.opensuse.yast.roles.assign" if role.changed_users?
+    logger.info "update role #{params[:id]}. New record? #{role.new_record?}"
     role.save
 		show
   end
