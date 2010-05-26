@@ -20,13 +20,23 @@ class WebyastPermissionsService < DBus::Object
     super(msg)
   end
 
+  def log(msg)
+    f = File.new("/srv/www/yastws/log/permission_service.log","a",0600)
+    f.write (msg+"\n")
+    f.close
+  end
+
   # Create an interface.
   dbus_interface "webyast.permissions.Interface" do
     dbus_method :grant, "out result:as, in permissions:as, in user:s" do |permissions,user,sender|
-      [execute("grant", permissions, user,sender)]
+      result = execute("grant", permissions, user,sender)
+      log "Grant permissions #{permissions.inspect} for user #{user} with result #{result.inspect}"
+      [result]
     end
     dbus_method :revoke, "out result:as, in permissions:as, in user:s" do |permissions,user,sender|
-      [execute("revoke", permissions, user,sender)]
+      result = execute("revoke", permissions, user,sender)
+      log "Revoke permissions #{permissions.inspect} for user #{user} with result #{result.inspect}"
+      [result]
     end
   end
 
