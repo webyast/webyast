@@ -43,7 +43,7 @@ task :updatepot do
   yml_files = Dir.glob("./**/*.{yml,yaml}")
   yml_files.each do |yml_file|
     src_file = File.join(Dir.pwd,yml_file)
-    FileUtils.cp (src_file, src_file+"save")
+    FileUtils.cp(src_file, src_file+"save")
     src_array = IO.readlines(src_file)
     dst = File.new(src_file, "w")
     src_array.each {|line|
