@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Fri May 28 06:26:38 UTC 2010 - schubi@novell.com
+
+- added gettext tasks
+- 0.1.7 
+
+-------------------------------------------------------------------
 Fri Apr 30 10:52:13 UTC 2010 - jreidinger@novell.com
 
 - webyast rpm macros contain link to /var/lib/yastws
