@@ -4,7 +4,7 @@ require File.join(RailsParent.parent, 'lib', 'tasks', 'common')
 include FileUtils::Verbose
 
 #adapt to easyli local deploy of working plugin (for developement, release use rpm-based way)
-desc "Deploy for development - run db:migrate, create basic dirs and install grantwebyastrights."
+desc "Deploy for development - install necessary files for roles plugin."
 task :deploy_local do |t|
   mkdir_p "/usr/share/PolicyKit/policy/"
   cp_r    "package/org.opensuse.yast.roles.policy", "/usr/share/PolicyKit/policy/"
