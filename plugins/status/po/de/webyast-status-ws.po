@@ -1,0 +1,57 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: webyast-status-ws 1.0.0\n"
+"POT-Creation-Date: 2010-05-31 10:10+0200\n"
+"PO-Revision-Date: 2010-05-28 14:53+0200\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
+
+#: app/models/graph.rb:115 config/status_configuration.yaml:64
+#: app/models/graph.rb:115 config/status_configuration.yaml:64
+msgid "GByte"
+msgstr "GByte"
+
+#: app/models/graph.rb:116 config/status_configuration.yaml:63
+#: app/models/graph.rb:116 config/status_configuration.yaml:63
+msgid "Disk"
+msgstr "Festplatte"
+
+#: app/models/graph.rb:139 config/status_configuration.yaml:6
+#: app/models/graph.rb:139 config/status_configuration.yaml:6
+msgid "MByte/s"
+msgstr "MByte/s"
+
+#: app/models/graph.rb:140 config/status_configuration.yaml:5
+#: app/models/graph.rb:140 config/status_configuration.yaml:5
+msgid "Network"
+msgstr "Netzwerk"
+
+#: app/models/graph.rb:162 config/status_configuration.yaml:87
+#: app/models/graph.rb:162 config/status_configuration.yaml:87
+msgid "MByte"
+msgstr "MByte"
+
+#: app/models/graph.rb:163 config/status_configuration.yaml:86
+#: app/models/graph.rb:163 config/status_configuration.yaml:86
+msgid "Memory"
+msgstr "Hauptspeicher"
+
+#: app/models/graph.rb:184 config/status_configuration.yaml:29
+#: app/models/graph.rb:184 config/status_configuration.yaml:29
+msgid "Percent"
+msgstr "Prozent"
+
+#: app/models/graph.rb:185 config/status_configuration.yaml:28
+#: app/models/graph.rb:185 config/status_configuration.yaml:28
+msgid "CPU"
+msgstr "Prozessor"
