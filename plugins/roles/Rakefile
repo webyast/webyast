@@ -5,13 +5,18 @@ include FileUtils::Verbose
 
 #adapt to easyli local deploy of working plugin (for developement, release use rpm-based way)
 desc "Deploy for development - run db:migrate, create basic dirs and install grantwebyastrights."
-task :deploy_local do |t|
+task :deploy_local, [:user] do |t, args|
+  args.with_defaults :user => "yastws"
+
   mkdir_p "/usr/share/PolicyKit/policy/"
   cp_r    "package/org.opensuse.yast.roles.policy", "/usr/share/PolicyKit/policy/"
   mkdir_p "/var/lib/yastws/roles/"
   cp_r    "package/roles.yml", "/var/lib/yastws/roles/" unless File.exists? "/var/lib/yastws/roles/roles.yml"
   cp_r    "package/roles_assign.yml", "/var/lib/yastws/roles/" unless File.exists? "/var/lib/yastws/roles/roles_assign.yml"
-  chmod   0777, "/var/lib/yastws/roles/"
-  chmod   0666, "/var/lib/yastws/roles/roles.yml"
-  chmod   0666, "/var/lib/yastws/roles/roles_assign.yml"
+  chmod 0700, "/var/lib/yastws/roles/"
+  chmod 0600, "/var/lib/yastws/roles/roles.yml"
+  chmod 0600, "/var/lib/yastws/roles/roles_assign.yml"
+  chown args.user, nil, "/var/lib/yastws/roles/"
+  chown args.user, nil, "/var/lib/yastws/roles/roles.yml"
+  chown args.user, nil, "/var/lib/yastws/roles/roles_assign.yml"
 end
