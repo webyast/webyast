@@ -20,7 +20,7 @@
 #++
 
 include ApplicationHelper
-
+require 'http_accept_language'
 require 'plugin'
 
 #
@@ -33,12 +33,36 @@ require 'plugin'
 #
 
 class PluginsController < ApplicationController
+
+protected
+
+def load_translations
+  Resource.all.each {|resource|
+    name = resource.controller.split("/").last
+    #searching directory for translation
+    model_files = Dir.glob(File.join(RAILS_ROOT, "**", "#{name}_state.rb"))
+    #trying plugin directory in the git 
+    model_files = Dir.glob(File.join(RAILS_ROOT, "..","**", "#{name}_state.rb")) if model_files.empty? 
+    unless model_files.empty?
+      locale_path = File.join(File.dirname(File.dirname(File.dirname(model_files.first))),"locale")
+      mo_files = Dir.glob(File.join(locale_path, "**", "*.mo"))
+      unless mo_files.empty?
+        domainname = File.basename(mo_files.first,".mo")
+        opt = {:locale_path => locale_path}
+        init_gettext(domainname, request.user_preferred_languages, opt)
+      end
+    end
+  }
+end
+
+public
     
   # GET /plugins
   # GET /plugins.xml
   #
   def index
     permission_check("org.opensuse.yast.system.status.read")
+    load_translations
     @plugins = Plugin.find(:all)
     render :show    
   end
@@ -48,6 +72,7 @@ class PluginsController < ApplicationController
   #
   def show
     permission_check("org.opensuse.yast.system.status.read")
+    load_translations
     @plugins = Plugin.find(params[:id])
     render :show    
   end

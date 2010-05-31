@@ -98,7 +98,7 @@ class ApplicationController < ActionController::Base
     
   end
 
-  def init_gettext(domainname, language, options = {})
+  def init_gettext(domainname, preferred_languages, options = {})
     locale_path = options[:locale_path]
     unless locale_path
       #If path of the translation has not been set we are trying to default translations
@@ -127,6 +127,11 @@ class ApplicationController < ActionController::Base
     languages = Dir[ File.join(locale_path, '*') ].collect{|v| File.basename(v)}
     I18n.supported_locales = languages
     logger.info "Supported languages: #{languages.inspect}"
+    unless languages.empty?
+      language = (preferred_languages & languages).first unless (preferred_languages & languages).blank?
+      logger.info "Set language to #{language}"
+      set_locale language
+    end
   end
 
 
