@@ -20,7 +20,6 @@
 #++
 
 require File.expand_path(File.dirname(__FILE__) + "/../test_helper")
-require File.expand_path( File.join("test","plugin_basic_tests"), RailsParent.parent )
 
 class RolesControllerTest < ActionController::TestCase
   fixtures :accounts

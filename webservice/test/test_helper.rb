@@ -20,6 +20,9 @@ ENV["RAILS_ENV"] = "test"
 require File.join(File.dirname(__FILE__), "..", "config", "environment")
 require 'test_help'
 require 'mocha'
+require 'test/unit'
+#provide basic test for controllers
+require File.join(File.dirname(__FILE__),"plugin_basic_tests")
 
 unless defined?(TESTING_POLKIT)
   def PolKit.polkit_check(action,login)

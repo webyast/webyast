@@ -20,10 +20,7 @@
 #++
 
 require File.expand_path(File.dirname(__FILE__) + "/../test_helper")
-require 'test/unit'
 require 'interface'
-require 'mocha'
-require File.expand_path( File.join("test","plugin_basic_tests"), RailsParent.parent )
 
 class InterfacesControllerTest < ActionController::TestCase
 
