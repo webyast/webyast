@@ -54,4 +54,16 @@ class RolesControllerTest < ActionController::TestCase
     h=Hash.from_xml @response.body
     assert_equal 3,h['role']['users'].size
   end
+
+  def test_create
+    post :create, "roles" => { "name" => "role02._-  test"}
+    assert_response :success
+  end
+
+  def test_show
+    get :show, :format => 'xml', :id => "test"
+    assert_response :success
+    h=Hash.from_xml @response.body
+    assert_equal 3,h['role']['users'].size
+  end
 end

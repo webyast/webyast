@@ -26,7 +26,7 @@ require 'exceptions'
 class RolesController < ApplicationController
 
   before_filter :login_required
-  before_filter :check_role_name, :only => [:create,:update,:delete]
+  before_filter :check_role_name, :only => [:update,:delete]
 
   #--------------------------------------------------------------------------------
   #
@@ -48,7 +48,7 @@ class RolesController < ApplicationController
 
   def create
     permission_check "org.opensuse.yast.roles.modify"
-		role = Role.find(params[:id])
+		role = Role.find(params["roles"]["name"])
     raise InvalidParameters.new(:id => "EXIST") unless role.nil? #role already exists
 		role = Role.new.load(params["roles"])
     permission_check "org.opensuse.yast.roles.assign" unless role.users.empty?
@@ -88,7 +88,7 @@ class RolesController < ApplicationController
   end
 
   private
-  def check_role_name
-    raise InvalidParameters.new(:id => "INVALID") if params[:id].match(/^[a-zA-Z0-9_-. ]+$/).nil?
+  def check_role_name(id=params[:id])
+    raise InvalidParameters.new(:id => "INVALID") if params[:id].match(/^[a-zA-Z0-9_\-. ]+$/).nil?
   end
 end
