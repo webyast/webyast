@@ -20,6 +20,7 @@
 #++
 
 require File.expand_path(File.dirname(__FILE__) + "/../test_helper")
+require File.expand_path( File.join("test","plugin_basic_tests"), RailsParent.parent )
 
 class RolesControllerTest < ActionController::TestCase
   fixtures :accounts
@@ -35,7 +36,14 @@ class RolesControllerTest < ActionController::TestCase
     @request = ActionController::TestRequest.new
     # http://railsforum.com/viewtopic.php?id=1719
     @request.session[:account_id] = 1 # defined in fixtures
-  end  
+#data for test update
+    @data = {"roles" => { "name" => "test", "roles"=> [], "permissions" => []}}
+#stub DBus
+		@dbus_obj = FakeDbus.new
+		Permission.stubs(:dbus_obj).returns(@dbus_obj)
+  end
+
+  include CollectionResourceTests
 
   def teardown
     `rm -rf #{@test_path}`
@@ -55,15 +63,30 @@ class RolesControllerTest < ActionController::TestCase
     assert_equal 3,h['role']['users'].size
   end
 
+  def test_show_nonexist
+    get :show, :format => 'xml', :id => "nonexist"
+    assert_response 422
+  end
+
+  def test_destroy
+    post :destroy, :id => "test"
+    assert_response :success
+    h=Hash.from_xml @response.body
+    assert_equal 2, h['roles'].size
+  end
+
   def test_create
     post :create, "roles" => { "name" => "role02._-  test"}
     assert_response :success
   end
 
-  def test_show
-    get :show, :format => 'xml', :id => "test"
+  def test_create_bad_name
+    post :create, "roles" => { "name" => "role02._-<dangerscript/>  test"}
+    assert_response 422
+  end
+
+  def test_update
+    post :update, @data.merge(:id => "test")
     assert_response :success
-    h=Hash.from_xml @response.body
-    assert_equal 3,h['role']['users'].size
   end
 end

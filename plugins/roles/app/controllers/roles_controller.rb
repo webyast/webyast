@@ -26,7 +26,7 @@ require 'exceptions'
 class RolesController < ApplicationController
 
   before_filter :login_required
-  before_filter :check_role_name, :only => [:update,:delete]
+  before_filter :check_role_name, :only => [:update,:delete, :show]
 
   #--------------------------------------------------------------------------------
   #
@@ -38,6 +38,7 @@ class RolesController < ApplicationController
   def update
 		role = Role.find(params[:id])
     raise InvalidParameters.new(:id => "NONEXIST") if role.nil?
+    raise InvalidParameters.new(:roles => "MISSING") if params[:roles].nil?
     role.load(params[:roles])
     permission_check "org.opensuse.yast.roles.modify" if role.changed_permissions?
     permission_check "org.opensuse.yast.roles.assign" if role.changed_users?
@@ -47,6 +48,7 @@ class RolesController < ApplicationController
   end
 
   def create
+    check_role_name params["roles"]["name"]
     permission_check "org.opensuse.yast.roles.modify"
 		role = Role.find(params["roles"]["name"])
     raise InvalidParameters.new(:id => "EXIST") unless role.nil? #role already exists
@@ -57,7 +59,7 @@ class RolesController < ApplicationController
 		show
   end
 
-	def delete
+	def destroy
     permission_check "org.opensuse.yast.roles.modify"
     permission_check "org.opensuse.yast.roles.assign" unless Role.find(params[:id]).users.empty?
 		Role.delete params[:id]
@@ -89,6 +91,6 @@ class RolesController < ApplicationController
 
   private
   def check_role_name(id=params[:id])
-    raise InvalidParameters.new(:id => "INVALID") if params[:id].match(/^[a-zA-Z0-9_\-. ]+$/).nil?
+    raise InvalidParameters.new(:id => "INVALID") if id.match(/^[a-zA-Z0-9_\-. ]+$/).nil?
   end
 end
