@@ -47,7 +47,8 @@ class MailState
 	       :details	=> details,
                :confirmation_host => "service",
                :confirmation_link => "/mail/state",
-               :confirmation_label => _("Test mail received") }
+               :confirmation_label => _("Test mail received"),
+               :confirmation_kind => "button" } 
       # TODO what about passing :log_file => '/var/log/mail', so status page could show its content?
     else
       return {}

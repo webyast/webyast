@@ -31,7 +31,8 @@ class RegistrationState
                :long_description => _("Please register your system in order to get updates."),
                :confirmation_host => "client",
                :confirmation_link => "/registration",
-               :confirmation_label => "register" }
+               :confirmation_label => "register",
+               :confirmation_kind => "link" } 
      else
        return {}
      end
