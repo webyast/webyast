@@ -20,9 +20,9 @@
 #++
 
 require 'exceptions'
-# = Systemtime controller
-# Provides access to time settings for authentificated users.
-# Main goal is checking permissions.
+# = Roles controller
+# Provides access to roles settings for authentificated users.
+# Main goal is checking permissions, validate id and pass request to model.
 class RolesController < ApplicationController
 
   before_filter :login_required
@@ -34,7 +34,8 @@ class RolesController < ApplicationController
   #
   #--------------------------------------------------------------------------------
 
-  # Sets time settings. Requires write permissions for time YaPI.
+  # Update role. Requires modify permissions if permission is changed and
+  # assign permission if assigned users changed.
   def update
 		role = Role.find(params[:id])
     raise InvalidParameters.new(:id => "NONEXIST") if role.nil?
@@ -47,6 +48,8 @@ class RolesController < ApplicationController
 		show
   end
 
+  # Create new role. Requires modify permissions and
+  # assign permission if there is initial users.
   def create
     check_role_name params["roles"]["name"]
     permission_check "org.opensuse.yast.roles.modify"
@@ -59,6 +62,7 @@ class RolesController < ApplicationController
 		show
   end
 
+  # Deletes roles. Needs modify permissions and assign if role contain any users.
 	def destroy
     permission_check "org.opensuse.yast.roles.modify"
     permission_check "org.opensuse.yast.roles.assign" unless Role.find(params[:id]).users.empty?
@@ -66,6 +70,7 @@ class RolesController < ApplicationController
 		index
 	end
 
+  # shows information about role with name.
   def show
 		role = Role.find params[:id]
 		unless role
@@ -79,6 +84,7 @@ class RolesController < ApplicationController
     end
   end
 
+  # Shows all roles
   def index
     #TODO check permissions
     roles = Role.find

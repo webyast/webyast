@@ -22,10 +22,9 @@
 require 'yaml'
 require 'exceptions'
 
-# = Systemtime model
-# Provides set and gets resources from YaPI time module.
-# Main goal is handle YaPI specific calls and data formats. Provides cleaned
-# and well defined data.
+# = Role model
+# Provides information and editing of roles for webyast.
+# Main goal is handle roles management. Use BaseModel.
 class Role < BaseModel::Base
 
 attr_accessor :users
@@ -35,7 +34,9 @@ attr_writer :new_record
 #specify serialized attributes to prevent new_record serialization
 attr_serialized :users, :permissions, :name
 
+# Path to roles definition file which contain role and its permissions
 ROLES_DEF_PATH = File.join Paths::VAR, "roles", "roles.yml"
+# Path to role assign file which contain role and users which has the role
 ROLES_ASSIGN_PATH = File.join Paths::VAR, "roles", "roles_assign.yml"
 
 def initialize(name="",permissions=[],users=[])
@@ -45,10 +46,14 @@ def initialize(name="",permissions=[],users=[])
 	@new_record = true
 end
 
+#own new_record specification to specify when create and when update is needed
 def new_record?
 	@new_record
 end
 
+# find role or roles
+# what:: specificy role name or :all to get all roles
+# options:: hash for future extension, not used yet
 def self.find(what=:all,options={})
   result = find_all
   return case what
@@ -60,6 +65,8 @@ def self.find(what=:all,options={})
   end
 end
 
+# Updates roles and permissions for users which loose, gain role or role
+# change its permission
 def update
 	roles = Role.find_all
   old = roles[name]
@@ -80,6 +87,7 @@ def update
 	Role.write_assigns roles.values
 end
 
+# Creates a new role and assign permissions for users which is in the role
 def create
 	roles = Role.find_all
 	roles[name] = self
@@ -91,6 +99,8 @@ def create
 	Role.write_assigns roles.values
 end
 
+# Deletes role
+# FIXME remove permissions from users in deleted role
 def self.delete (id)
 	roles = find_all
 	roles.delete id.to_s
@@ -98,11 +108,13 @@ def self.delete (id)
 	write_assigns roles.values
 end
 
+# Tests if users for role is changed
 def changed_users?
   old = Role.find @name
   return @users.sort != old.users.sort
 end
 
+# Tests if permissions for role is changed
 def changed_permissions?
   old = Role.find @name
   return @permissions.sort != old.permissions.sort
