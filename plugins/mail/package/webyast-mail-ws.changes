@@ -1,4 +1,9 @@
 -------------------------------------------------------------------
+Wed Jun  2 14:00:43 UTC 2010 - schubi@novell.com
+
+- showing a link for registration in the status module (bnc#604679)
+
+-------------------------------------------------------------------
 Fri Apr 30 13:34:10 UTC 2010 - jreidinger@novell.com
 
 - fix spec file consistency (bnc#560061)

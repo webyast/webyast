@@ -1,4 +1,9 @@
 -------------------------------------------------------------------
+Wed Jun  2 14:00:27 UTC 2010 - schubi@novell.com
+
+- showing a link for registration in the status module (bnc#604679)" 
+
+-------------------------------------------------------------------
 Mon May 10 18:26:35 CEST 2010 - jdsn@suse.de
 
 - adapt permission testcases to new error handling
