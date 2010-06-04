@@ -122,22 +122,33 @@ end
 
 private 
 def self.find_all
-  raise CorruptedFileException.new( ROLES_DEF_PATH ) unless File.exist? ROLES_DEF_PATH
-  raise CorruptedFileException.new( ROLES_ASSIGN_PATH ) unless File.exist? ROLES_ASSIGN_PATH
-  definitions = YAML::load( IO.read( ROLES_DEF_PATH ) ) || {}#FIXME convert yaml parse error to own exc
+#  raise CorruptedFileException.new( ROLES_DEF_PATH ) unless File.exist? ROLES_DEF_PATH
+#  raise CorruptedFileException.new( ROLES_ASSIGN_PATH ) unless File.exist? ROLES_ASSIGN_PATH
   result = {}
-  definitions.each do |k,v|
-    result[k] = Role.new( k, v )
-		result[k].new_record = false #already known role
+
+  begin
+    definitions = YAML::load( IO.read( ROLES_DEF_PATH ) ) || {}#FIXME convert yaml parse error to own exc
+    definitions.each do |k,v|
+      result[k] = Role.new( k, v )
+  		result[k].new_record = false #already known role
+    end
+  rescue IOError,SystemCallError
+    raise CorruptedFileException.new( ROLES_DEF_PATH )
   end
-  assigns = YAML::load( IO.read( ROLES_ASSIGN_PATH ) ) || {}
-  assigns.each do |k,v|
-    if result[k].nil? #incosistent files
-			result[k] = Role.new(k)
-			result[k].new_record = false
-		end
-    result[k].users = v.sort
+
+  begin
+    assigns = YAML::load( IO.read( ROLES_ASSIGN_PATH ) ) || {}
+    assigns.each do |k,v|
+      if result[k].nil? #incosistent files
+			  result[k] = Role.new(k)
+  			result[k].new_record = false
+	  	end
+      result[k].users = v.sort
+    end
+  rescue IOError,SystemCallError
+    raise CorruptedFileException.new( ROLES_ASSIGN_PATH )
   end
+
   return result
 end
 
