@@ -92,9 +92,9 @@ class ApplicationController < ActionController::Base
         end
       end
     end
-    logger.warn "Uncaught exception: #{exception.message} \n Backtrace: #{exception.backtrace.join('\n')}"
+    logger.warn "Uncaught exception #{exception.class}: #{exception.message} \n Backtrace: #{exception.backtrace.join('\n')}"
       
-    render :xml => exception, :status => 500
+    render :xml => exception, :status => 503
     
   end
 
