@@ -23,10 +23,15 @@
 # This class handles the graph configuration for the status module
 # The yaml file is located in config/status_configuration.yaml
 #
+
+require 'gettext'
+
 class Graph
   require 'yaml'
+  include GetText
 
   attr_reader :group_name
+  attr_reader :headline
   attr_reader :y_scale
   attr_reader :y_label
   attr_reader :y_max
@@ -34,6 +39,8 @@ class Graph
   attr_reader :single_graphs
 
   CONFIGURATION_FILE = "status_configuration.yaml"
+  TRANSLATE = true
+
 
   private
 
@@ -106,8 +113,11 @@ class Graph
     raise ServiceNotRunning.new('collectd') if metrics.blank?
 
     #Disk
-    disk = {"y_scale"=>1073741824, 
-            "y_label"=>"GByte", 
+    _("GByte") #just for translation
+    _("Disk") #just for translation
+    disk = {"headline"=>'_("Disk")',
+            "y_scale"=>1073741824, 
+            "y_label"=>'_("GByte")', 
             "y_max"=>nil,
             "y_decimal_places"=>0,
             "single_graphs"=>[]}
@@ -127,8 +137,11 @@ class Graph
     config["Disk"] = disk unless disk["single_graphs"].blank?
     
     #Network
-    network = {"y_scale"=>1, 
-               "y_label"=>"MByte/s", 
+    _("MByte/s") #just for translation
+    _("Network") #just for translation
+    network = {"headline"=>'_("Network")',
+               "y_scale"=>1, 
+               "y_label"=>'_("MByte/s")', 
                "y_max"=>nil,
                "y_decimal_places"=>0,
                "single_graphs"=>[]}
@@ -147,8 +160,11 @@ class Graph
     config["Network"] = network unless network["single_graphs"].blank?
 
     #Memory
-    memory = {"y_scale"=>1048567, 
-              "y_label"=>"MByte", 
+    _("MByte") #just for translation
+    _("Memory") #just for translation
+    memory = {"headline"=>'_("Memory")',
+              "y_scale"=>1048567, 
+              "y_label"=>'_("MByte")', 
               "y_max"=>nil,
               "y_decimal_places"=>0,
               "single_graphs"=>[]}
@@ -166,8 +182,11 @@ class Graph
     config["Memory"] = memory unless memory["single_graphs"].blank?
 
     #CPU
-    cpu = {"y_scale"=>1, 
-           "y_label"=>"Percent", 
+    _("Percent") #just for translation
+    _("CPU") #just for translation
+    cpu = {"headline"=>'_("CPU")',
+           "y_scale"=>1, 
+           "y_label"=>'_("Percent")', 
            "y_max"=>100,
            "y_decimal_places"=>0,
            "single_graphs"=>[]}
@@ -199,21 +218,49 @@ class Graph
   public
 
   #
+  # translate headlines, labels,....
+  #
+  def self.translate_config_data(node)
+    if node.is_a? Hash
+      node.each do |key,data|
+        node[key] = translate_config_data data
+      end
+    elsif node.is_a? Array
+      counter = 0
+      node.each do |data|
+        node[counter] = translate_config_data data
+        counter +=1
+      end
+    elsif node.is_a? String
+      node = node.strip
+      if node =~ /^_\(\"/ && node =~ /\"\)$/
+        node = _(node[3..node.length-3]) #try to translate it
+      end
+    end
+    return node
+  end 
+
+  #
   # reading configuration file
   #
-  def self.parse_config(path = nil)
+  def self.parse_config(translate = false, path = nil)
     path = File.join(Graph.plugin_config_dir(), CONFIGURATION_FILE ) if path == nil
     #create default configuration file
     Graph.create_config(path) unless File.exists?(path)
 
     #reading configuration file
-    return YAML.load(File.open(path)) if File.exists?(path)
-    return nil
+    ret = YAML.load(File.open(path))
+    if translate
+      return translate_config_data(ret) 
+    else
+      return ret
+    end
   end
 
   # initialize on element
   def initialize(group_id,value,limitcheck=false)
     @group_name = group_id
+    @headline = value["headline"]
     @y_scale = value["y_scale"]
     @y_label = value["y_label"]
     @y_max = value["y_max"]
@@ -308,7 +355,7 @@ class Graph
   # "limitcheck" checking if limit has been reached (default: false)
   #
   def self.do_find(what, limitcheck = false, bg = nil)
-    config = parse_config
+    config = parse_config(TRANSLATE)
     return nil if config==nil
 
     unless what == :all
@@ -366,7 +413,7 @@ class Graph
   # return array of hashes of {"max"=>0, "min"=>0, "metric_column"=>nil} or nil
   #
   def self.find_limits(metric_id, group_id=nil )
-    config = parse_config
+    config = parse_config(TRANSLATE)
     return nil if config==nil
     limits = []
     config.each {|key,value|
@@ -407,6 +454,7 @@ class Graph
     xml.instruct! unless opts[:skip_instruct]
     xml.graph do
       xml.id group_name
+      xml.headline headline
       xml.y_scale y_scale
       xml.y_label y_label
       xml.y_max y_max

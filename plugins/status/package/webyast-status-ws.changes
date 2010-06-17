@@ -1,4 +1,9 @@
 -------------------------------------------------------------------
+Wed Jun  2 13:59:56 UTC 2010 - schubi@novell.com
+
+- showing a link for registration in the status module (bnc#604679)" 
+
+-------------------------------------------------------------------
 Mon May 10 08:43:01 UTC 2010 - schubi@novell.com
 
 - background mode: checking if collectd is running at first (bnc#602362)

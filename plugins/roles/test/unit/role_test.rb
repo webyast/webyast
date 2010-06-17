@@ -20,19 +20,6 @@
 #++
 
 require File.expand_path(File.dirname(__FILE__) + "/../test_helper")
-
-class FakeDbus
-	attr_reader :last_perms, :last_user
-	def revoke(perms,user)
-		@last_perms = perms
-		@last_user = user
-	end
-
-	def grant(perms,user)
-		revoke perms,user
-	end
-end
-
 class RoleTest < ActiveSupport::TestCase
   def setup
     #set fixtures, renew test files
@@ -68,7 +55,9 @@ class RoleTest < ActiveSupport::TestCase
 TEST_DATA = { :name => "create_test", :permissions => ["org.opensuse.test.lest"],
 							:users => ["tux"] }
 	def test_create_role
-		Role.new.load(TEST_DATA).save
+		r = Role.new.load(TEST_DATA)
+    assert r.new_record?
+    r.save
     roles = Role.find
     assert_equal 4,roles.size
     test_role = roles.find { |r| r.name.to_s == TEST_DATA[:name] }
@@ -79,6 +68,7 @@ TEST_DATA = { :name => "create_test", :permissions => ["org.opensuse.test.lest"]
 
 	def test_update_role
 		r = Role.find(:test)
+    assert !r.new_record?
 		r.users = TEST_DATA[:users]
 		r.permissions = TEST_DATA[:permissions]
 		r.save
@@ -90,10 +80,22 @@ TEST_DATA = { :name => "create_test", :permissions => ["org.opensuse.test.lest"]
     assert_equal TEST_DATA[:permissions],test_role.permissions
 	end
 
-	def test_update_role
+	def test_delete_role
 		Role.delete(:test)
     roles = Role.find
     assert_equal 2,roles.size
 	end
+
+  def test_changed
+		r = Role.find(:test)
+    assert !r.changed_users?
+    assert !r.changed_permissions?
+    r.users << "nonexist"
+    assert r.changed_users?
+    assert !r.changed_permissions?
+    r.permissions << "nonexist"
+    assert r.changed_users?
+    assert r.changed_permissions?
+  end
 
 end

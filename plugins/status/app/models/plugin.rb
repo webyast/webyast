@@ -36,13 +36,15 @@ class Plugin
   attr_reader :confirmation_host
   attr_reader :confirmation_link
   attr_reader :confirmation_label
+  attr_reader :confirmation_kind
 
   public
 
   # initialize on element
   def initialize(level, message_id, short_description, 
                  long_description, details, confirmation_host, 
-                 confirmation_link, confirmation_label)
+                 confirmation_link, confirmation_label,
+                 confirmation_kind)
     @level = level
     @message_id = message_id
     @short_description = short_description
@@ -51,6 +53,7 @@ class Plugin
     @confirmation_host = confirmation_host
     @confirmation_link = confirmation_link
     @confirmation_label = confirmation_label
+    @confirmation_kind = confirmation_kind
   end
 
   #
@@ -74,7 +77,7 @@ class Plugin
         ret << Plugin.new(stat[:level], stat[:message_id], 
                           stat[:short_description], stat[:long_description], stat[:details],
                           stat[:confirmation_host], stat[:confirmation_link], 
-                          stat[:confirmation_label]) unless stat.blank?
+                          stat[:confirmation_label], stat[:confirmation_kind] ) unless stat.blank?
       end
     }
     return ret
@@ -93,6 +96,7 @@ class Plugin
       xml.confirmation_host confirmation_host
       xml.confirmation_link confirmation_link
       xml.confirmation_label confirmation_label
+      xml.confirmation_kind confirmation_kind
     end
   end
 

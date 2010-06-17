@@ -55,8 +55,13 @@ require 'tasks/rails'
 
 require 'fileutils'
 
+def grant(user, right)
+  sh "/usr/bin/polkit-auth --user #{user} --grant #{right} ||:"
+end
+
 desc "Deploy for development - run db:migrate, create basic dirs and install grantwebyastrights."
-task :deploy_local => :"db:migrate" do |t|
+task :deploy_local, [:user] => :"db:migrate" do |t, args|
+  args.with_defaults :user => "yastws"
   FileUtils.mkdir_p "/etc/webyast"
   FileUtils.mkdir_p "/var/lib/yastws"
   FileUtils.mkdir_p "/usr/share/yastws"
@@ -67,12 +72,16 @@ task :deploy_local => :"db:migrate" do |t|
   chmod  0744, "/usr/sbin/webyastPermissionsService.rb"
   mkdir_p "/usr/share/dbus-1/system-services/"
   cp_r    "package/webyast.permissions.service.service", "/usr/share/dbus-1/system-services/"
-  # add user yastws
-  system "/usr/sbin/groupadd -r yastws &>/dev/null ||:"
-  system "/usr/sbin/useradd  -g yastws -s /bin/false -r -c 'User for YaST-Webservice' -d /var/lib/yastws yastws &>/dev/null ||:"
+  FileUtils.mkdir_p "/usr/share/PolicyKit/policy/"
+  FileUtils.cp_r    "package/org.opensuse.yast.permissions.policy",  "/usr/share/PolicyKit/policy/"
+  if args.user == "yastws"
+    # add user yastws
+    sh "/usr/sbin/groupadd -r yastws ||:" #&>/dev/null ||:
+    sh "/usr/sbin/useradd  -g yastws -s /bin/false -r -c 'User for YaST-Webservice' -d /var/lib/yastws yastws ||:"
+  end
   # grant rights to him
-  system "/usr/bin/polkit-auth --user yastws --grant org.opensuse.yast.module-manager.import > /dev/null"
-  system "/usr/bin/polkit-auth --user yastws --grant org.freedesktop.policykit.read > /dev/null"
-  system "/usr/bin/polkit-auth --user yastws --grant org.freedesktop.packagekit.system-update > /dev/null"
+  grant args.user, "org.opensuse.yast.module-manager.import"
+  grant args.user, "org.freedesktop.policykit.read"
+  grant args.user, "org.freedesktop.packagekit.system-update"
 end
 

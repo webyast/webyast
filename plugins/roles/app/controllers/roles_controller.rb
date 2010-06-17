@@ -20,12 +20,13 @@
 #++
 
 require 'exceptions'
-# = Systemtime controller
-# Provides access to time settings for authentificated users.
-# Main goal is checking permissions.
+# = Roles controller
+# Provides access to roles settings for authentificated users.
+# Main goal is checking permissions, validate id and pass request to model.
 class RolesController < ApplicationController
 
   before_filter :login_required
+  before_filter :check_role_name, :only => [:update,:delete, :show]
 
   #--------------------------------------------------------------------------------
   #
@@ -33,10 +34,13 @@ class RolesController < ApplicationController
   #
   #--------------------------------------------------------------------------------
 
-  # Sets time settings. Requires write permissions for time YaPI.
+  # Update role. Requires modify permissions if permission is changed and
+  # assign permission if assigned users changed.
   def update
-		#TODO check if id exist
-		role = Role.find(params[:id]).load(params[:roles])
+		role = Role.find(params[:id])
+    raise InvalidParameters.new(:id => "NONEXIST") if role.nil?
+    raise InvalidParameters.new(:roles => "MISSING") if params[:roles].nil?
+    role.load(params[:roles])
     permission_check "org.opensuse.yast.roles.modify" if role.changed_permissions?
     permission_check "org.opensuse.yast.roles.assign" if role.changed_users?
     logger.info "update role #{params[:id]}. New record? #{role.new_record?}"
@@ -44,9 +48,13 @@ class RolesController < ApplicationController
 		show
   end
 
+  # Create new role. Requires modify permissions and
+  # assign permission if there is initial users.
   def create
-		#TODO check if id do not exist
+    check_role_name params["roles"]["name"]
     permission_check "org.opensuse.yast.roles.modify"
+		role = Role.find(params["roles"]["name"])
+    raise InvalidParameters.new(:id => "EXIST") unless role.nil? #role already exists
 		role = Role.new.load(params["roles"])
     permission_check "org.opensuse.yast.roles.assign" unless role.users.empty?
     role.save
@@ -54,15 +62,15 @@ class RolesController < ApplicationController
 		show
   end
 
-	def delete
-		#TODO check if id exist
+  # Deletes roles. Needs modify permissions and assign if role contain any users.
+	def destroy
     permission_check "org.opensuse.yast.roles.modify"
     permission_check "org.opensuse.yast.roles.assign" unless Role.find(params[:id]).users.empty?
 		Role.delete params[:id]
 		index
 	end
 
-  # Shows time settings. Requires read permission for time YaPI.
+  # shows information about role with name.
   def show
 		role = Role.find params[:id]
 		unless role
@@ -76,6 +84,7 @@ class RolesController < ApplicationController
     end
   end
 
+  # Shows all roles
   def index
     #TODO check permissions
     roles = Role.find
@@ -86,4 +95,8 @@ class RolesController < ApplicationController
     end
   end
 
+  private
+  def check_role_name(id=params[:id])
+    raise InvalidParameters.new(:id => "INVALID") if id.match(/^[a-zA-Z0-9_\-. ]+$/).nil?
+  end
 end

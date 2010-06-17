@@ -2,3 +2,8 @@ require File.join(File.dirname(__FILE__), 'config', 'rails_parent')
 require File.join(RailsParent.parent, 'lib', 'tasks', 'common')
 
 # Deploy ?!
+desc "Deploy for development - create basic dirs and install yast modules."
+task :deploy_local do |t|
+  FileUtils.mkdir_p "/usr/share/PolicyKit/policy/"
+  FileUtils.cp_r    "package/org.opensuse.yast.modules.yapi.administrator.policy",  "/usr/share/PolicyKit/policy/"
+end

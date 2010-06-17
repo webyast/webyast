@@ -20,7 +20,7 @@
 # Likewise, all the methods added will be available for all controllers.
 
 require 'exceptions'
-
+require 'gettext_rails'
 require 'dbus'
 
 class ApplicationController < ActionController::Base
@@ -92,9 +92,65 @@ class ApplicationController < ActionController::Base
         end
       end
     end
-    logger.warn "Uncaught exception: #{exception.message} \n Backtrace: #{exception.backtrace.join('\n')}"
+    logger.warn "Uncaught exception #{exception.class}: #{exception.message} \n Backtrace: #{exception.backtrace.join('\n')}"
       
-    render :xml => exception, :status => 500
+    render :xml => exception, :status => 503
     
   end
+
+  def init_gettext(domainname, preferred_languages, options = {})
+    locale_path = options[:locale_path]
+    unless locale_path
+      #If path of the translation has not been set we are trying to default translations
+      locale_path = ""
+      #searching in RAILS_ROOT
+      mo_files = Dir.glob(File.join(RAILS_ROOT, "**", "#{domainname}.mo"))
+      if mo_files.size > 0
+        locale_path = File.dirname(File.dirname(File.dirname(mo_files.first)))
+      else
+        # trying plugin directory in the git 
+        mo_files = Dir.glob(File.join(RAILS_ROOT, "..", "**", "#{domainname}.mo"))
+        locale_path = File.dirname(File.dirname(File.dirname(mo_files.first))) if mo_files.size > 0
+      end
+      unless locale_path.blank?
+        logger.info "Loading standard textdomain #{domainname} from #{locale_path}"
+        opt = {:locale_path => locale_path}.merge(options)
+        ActionController::Base.init_gettext(domainname, opt)
+      else
+        logger.error "Cannot find translation for #{domainname}"
+      end
+    else
+      #load default if the path has been given
+      logger.info "Loading textdomain #{domainname} from #{locale_path}"
+      ActionController::Base.init_gettext(domainname, options)
+    end
+    languages = Dir[ File.join(locale_path, '*') ].collect{|v| File.basename(v)}
+    I18n.supported_locales = languages
+    logger.info "Supported languages: #{languages.inspect}"
+    unless languages.empty?
+      language = (preferred_languages & languages).first unless (preferred_languages & languages).blank?
+      logger.info "Set language to #{language}"
+      set_locale language
+    end
+  end
+
+
+=begin
+  # You can set callback methods. These methods are called on the each WWW request.
+  def before_init_gettext(cgi)
+    p "before_init_gettext"
+  end
+  def after_init_gettext(cgi)
+    p "after_init_gettext"
+  end
+=end
+
+
+=begin
+  # you can redefined the title/explanation of the top of the error message.
+  ActionView::Helpers::ActiveRecordHelper::L10n.set_error_message_title(N_("An error is occured on %{record}"), N_("%{num} errors are occured on %{record}"))
+  ActionView::Helpers::ActiveRecordHelper::L10n.set_error_message_explanation(N_("The error is:"), N_("The errors are:"))
+=end
+
+
 end

@@ -24,6 +24,7 @@ include ApplicationHelper
 require 'metric'
 require 'graph'
 require 'uri'
+require 'http_accept_language'
 
 #
 # Controller that exposes graph description in a RESTful
@@ -35,6 +36,10 @@ require 'uri'
 #
 class GraphsController < ApplicationController
   before_filter :login_required
+
+  def init_translation
+    init_gettext("webyast-status-ws", request.user_preferred_languages)
+  end
 
   public
 
@@ -56,9 +61,7 @@ class GraphsController < ApplicationController
   #
   def index
     permission_check("org.opensuse.yast.system.status.read")
-    Rails.logger.error "xxxxxxxxxxxxxxxxx #{request.env.inspect}"
-    Rails.logger.error "xxxxxxxxxxxxxxxxx #{request.env["HTTP_ACCEPT_LANGUAGE"]}"
-
+    init_translation
 
     bgr = params['background'] == 'true'
     Rails.logger.info "Reading status in background" if bgr
@@ -72,6 +75,7 @@ class GraphsController < ApplicationController
   #
   def show
     permission_check("org.opensuse.yast.system.status.read")
+    init_translation
     @graph = Graph.find(params[:id], params[:checklimits] || false)
   end
 end

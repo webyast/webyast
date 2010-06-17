@@ -5,4 +5,6 @@ desc "Deploy for development - run db:migrate, create basic dirs and install gra
 task :deploy_local do |t|
   FileUtils.mkdir_p "/usr/share/YaST2/modules/"
   FileUtils.cp_r    "package/FIREWALL.pm", "/usr/share/YaST2/modules/YaPI"
+  FileUtils.mkdir_p "/usr/share/PolicyKit/policy/"
+  FileUtils.cp_r    "package/org.opensuse.yast.modules.yapi.firewall.policy",  "/usr/share/PolicyKit/policy/"
 end

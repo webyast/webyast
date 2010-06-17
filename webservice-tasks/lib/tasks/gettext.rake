@@ -38,7 +38,6 @@ end
 desc "Update pot/po files to match new version."
 task :updatepot do
   require 'gettext_rails/tools'
-
   #generate a ruby file include the translation. This tmp file is needed for generating pot files
   yml_files = Dir.glob("./**/*.{yml,yaml}")
   yml_files.each do |yml_file|
@@ -57,9 +56,8 @@ task :updatepot do
     dst.close
   end
 
-  destdir = File.join(File.dirname(__FILE__),"../../..", "pot")
+  destdir = File.join(Dir.pwd,"../..", "pot")
   Dir.mkdir destdir unless File.directory?(destdir)
-
   spec_files = Dir.glob("package/**/*.spec")
   unless spec_files.empty?
     package_name = File.basename(spec_files.first,".spec")
