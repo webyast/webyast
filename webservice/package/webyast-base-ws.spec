@@ -77,6 +77,10 @@ BuildRequires:  rubygem-test-unit
 BuildRequires:  rubygem-rcov >= 0.9.3.2
 %endif
 
+# we do not necessarily need any UI in case of WebYaST
+Provides:       yast2_ui
+Provides:       yast2_ui_pkg
+
 # rpmlint warns about file duplicates, this should take care but
 # doesn't build (?!)
 #%if 0%{?suse_version} > 1020
