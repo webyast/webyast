@@ -73,11 +73,14 @@ def update
 	roles[name] = self
 #if changed users renew its permissions
   if old.users.sort != @users.sort
-    (@users+old.users).uniq.each do |user|
+    all_users = (@users+old.users).uniq
+    intersect = @users&old.users
+    affected_users = all_users.reject { |e| intersect.include? e }
+    affected_users.each do |user|
       Permission.set_permissions user, Role.permissions_for_user(roles.values,user)
     end
 #if permissions in role is changed, then regenerate permission setup for each affected user
-  elsif old.permissions.sort != @permissions.sort
+  if old.permissions.sort != @permissions.sort
     @users.each do |user|
       Permission.set_permissions user, Role.permissions_for_user(roles.values,user)
     end
