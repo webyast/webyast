@@ -79,6 +79,7 @@ def update
     affected_users.each do |user|
       Permission.set_permissions user, Role.permissions_for_user(roles.values,user)
     end
+  end
 #if permissions in role is changed, then regenerate permission setup for each affected user
   if old.permissions.sort != @permissions.sort
     @users.each do |user|
