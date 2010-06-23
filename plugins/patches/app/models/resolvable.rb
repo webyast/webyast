@@ -124,7 +124,7 @@ public
       proxy = transaction_iface.object
     
       proxy.on_signal(signal.to_s, &block)
-      proxy.on_signal("Error") {|u1,u2| dbusloop.quit }
+      proxy.on_signal("ErrorCode") {|u1,u2| dbusloop.quit }
       proxy.on_signal("Finished") {|u1,u2| dbusloop.quit }
       # Do the call only when all signal handlers are in place,
       # otherwise Finished can arrive early and dbusloop will never
@@ -161,7 +161,7 @@ public
     dbusloop << DBus::SystemBus.instance
 
     proxy.on_signal("Finished") {|u1,u2| dbusloop.quit }
-    proxy.on_signal("Error") do |u1,u2|
+    proxy.on_signal("ErrorCode") do |u1,u2|
       ok = false
       dbusloop.quit
     end
