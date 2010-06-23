@@ -43,6 +43,8 @@ class PatchesController < ApplicationController
   def index
     # note: permission check was performed in :before_filter
     @patches = Patch.find(:available)
+    logger.debug "Running requests: #{BackgroundManager.instance.running.inspect}"
+    logger.debug "Done requests: #{BackgroundManager.instance.done.inspect}"
     respond_to do |format|
       format.xml { render  :xml => @patches.to_xml( :root => "patches", :dasherize => false ) }
       format.json { render :json => @patches.to_json( :root => "patches", :dasherize => false ) }
@@ -79,6 +81,10 @@ class PatchesController < ApplicationController
     permission_check "org.opensuse.yast.system.patches.install"
     @patch_update = Patch.find(params[:patches][:resolvable_id].to_s)
 
+#    bgr = params['background']
+#    bgr = true
+#    Rails.logger.info "Installing patch #{params[:patches][:resolvable_id]} in background" if bgr
+
     #Patch for Bug 560701 - [build 24.1] webYaST appears to crash after installing webclient patch
     #Packagekit returns empty string if the patch is allready installed.
     if @patch_update.is_a?(Array) && @patch_update.empty?
@@ -90,9 +96,22 @@ class PatchesController < ApplicationController
       logger.error "Patch: #{params[:patches][:resolvable_id]} not found."
       render ErrorResult.error(404, 1, "Patch: #{params[:patches][:resolvable_id]} not found.") and return
     end
-    unless @patch_update.install
-      render ErrorResult.error(404, 2, "packagekit error") and return
+
+    res = @patch_update.install(true)
+
+    if (res.is_a? BackgroundStatus)
+      logger.debug "received background status: #{res.inspect}"
+      respond_to do |format|
+        format.xml { render  :xml => res.to_xml( :root => "status", :dasherize => false ) }
+        format.json { render :json => res.to_json( :root => "status", :dasherize => false ) }
+      end
+
+      return
     end
+
+#    unless error
+#      render ErrorResult.error(404, 2, "packagekit error") and return
+#    end
     render :show
   end
 

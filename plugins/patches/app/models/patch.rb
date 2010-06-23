@@ -35,23 +35,23 @@ class Patch < Resolvable
   end
 
   # installs this
-  def install
-    self.class.install(id)
+  def install(background = false)
+    self.class.install(id, background)
   end
 
   # Patch.install(patch)
   # Patch.install(id)
-  def self.install(patch)
+  def self.install(patch, background = false)
     if patch.is_a?(Patch)
       update_id = "#{patch.name};#{patch.resolvable_id};#{patch.arch};#{patch.repo}"
       Rails.logger.debug "Install Update: #{update_id}"
-      self.package_kit_install(update_id)
+      self.package_kit_install(update_id, background)
     else
       # if is not an object, assume it is an id
       patch_id = patch
       patch = Patch.find(patch_id)
       raise "Can't install update #{patch_id} because it does not exist" if patch.nil? or not patch.is_a?(Patch)
-      self.install(patch)
+      self.install(patch, background)
     end
   end
 

@@ -145,17 +145,81 @@ public
     end
   end
 
+  # create a unique ID for BackgroundManager
+  def self.bgid(what)
+    "packagekit_install_#{what}"
+  end
+
   # install an update, based on the PackageKit
   # id ("<name>;<id>;<arch>;<repo>")
   #
-  def self.package_kit_install(pk_id)
+  def self.package_kit_install(pk_id, background = false)
+
+    puts "Installing #{pk_id}, background: #{background.inspect}"
+
+    # background process doesn't work correctly if class reloading is active
+    # (static class members are lost between requests)
+    if background && !bm.background_enabled?
+      Rails.logger.info "Class reloading is active, cannot use background thread (set config.cache_classes = true)"
+      background = false
+    end
+    puts "Background: #{background.inspect}"
+
+    if background
+      proc_id = bgid(pk_id)
+      if bm.process_finished? proc_id
+        Rails.logger.debug "Patch installation request #{proc_id} is done"
+        ret = bm.get_value proc_id
+
+        # check for exception
+        if ret.is_a? StandardError
+          raise ret
+        end
+
+        return ret
+      end
+
+      running = bm.get_progress proc_id
+      if running
+        Rails.logger.debug "Request #{proc_id} is already running: #{running.inspect}"
+        return running
+      end
+
+      bm.add_process proc_id
+
+      Rails.logger.info "Starting background thread for installing patches..."
+      # run the patch query in a separate thread
+      Thread.new do
+        res = subprocess_install pk_id
+
+        # check for exception
+        unless res.is_a? StandardError
+          Rails.logger.info "*** Patch install thread: Result: #{res.inspect}"
+        else
+          Rails.logger.debug "*** Patch install thread: Exception raised: #{res.inspect}"
+        end
+        bm.finish_process(proc_id, res)
+      end
+
+      return bm.get_progress(proc_id)
+    else
+      return do_package_kit_install(pk_id)
+    end
+  end
+
+  def self.do_package_kit_install(pk_id, bs = nil)
     ok = true
     transaction_iface, packagekit_iface = self.packagekit_connect
 
     proxy = transaction_iface.object
     proxy.on_signal("Package") do |line1,line2,line3|
       Rails.logger.debug "  update package: #{line2}"
+      if bs
+        bs.status = "#{line1} #{line2}"
+      end
     end
+
+    $stderr.puts "do_package_kit_install: installing #{pk_id}"
 
     dbusloop = DBus::Main.new
     dbusloop << DBus::SystemBus.instance
@@ -165,7 +229,7 @@ public
       ok = false
       dbusloop.quit
     end
-    transaction_iface.UpdatePackages([pk_id])
+    transaction_iface.UpdatePackages(true, [pk_id]) # FIXME revert back !!!!!
 
     dbusloop.run
     packagekit_iface.SuggestDaemonQuit
@@ -193,4 +257,93 @@ public
       self.install(patch)
     end
   end
+
+
+  private
+
+  def self.subprocess_script
+    # find the helper script
+    script = File.join(RAILS_ROOT, 'vendor/plugins/patches/scripts/install_patches.rb')
+
+    unless File.exists? script
+      script = File.join(RAILS_ROOT, '../plugins/patches/scripts/install_patches.rb')
+
+      unless File.exists? script
+        raise 'File patches/scripts/install_patches.rb was not found!'
+      end
+    end
+
+    Rails.logger.debug "Using #{script} script file"
+    script
+  end
+
+  def self.subprocess_command(what)
+    raise "Invalid parameter" if what.to_s.include?("'") or what.to_s.include?('\\')
+    "cd #{RAILS_ROOT} && #{File.join(RAILS_ROOT, 'script/runner')} -e #{ENV['RAILS_ENV'] || 'development'} #{subprocess_script} '#{what}'"
+  end
+
+  # IO functions moved to separate methods for easy mocking/testing
+
+  def self.open_subprocess(what)
+    IO.popen(subprocess_command what)
+  end
+
+  def self.read_subprocess(subproc)
+    subproc.readline
+  end
+
+  def self.eof_subprocess?(subproc)
+    subproc.eof?
+  end
+
+
+  def self.subprocess_install(what)
+    # open subprocess
+    subproc = open_subprocess what
+
+    result = nil
+
+    while !eof_subprocess?(subproc) do
+      begin
+        line = read_subprocess subproc
+
+        unless line.blank?
+          received = Hash.from_xml(line)
+
+          # is it a progress or the final list?
+          if received.has_key? 'patch_installation'
+            Rails.logger.debug "Received background patch installation result: #{received['patch_installation'].inspect}"
+            # create Patch objects
+            result = received['patch_installation']['result']
+          elsif received.has_key? 'background_status'
+            s = received['background_status']
+
+            bm.update_progress bgid(what) do |bs|
+              bs.status = s['status']
+              bs.progress = s['progress']
+              bs.subprogress = s['subprogress']
+            end
+          elsif received.has_key? 'error'
+            return PackageKitError.new(received['error']['description'])
+          else
+            Rails.logger.warn "*** Patch installtion thread: Received unknown input: #{line}"
+          end
+        end
+      rescue Exception => e
+        Rails.logger.error "Background thread: Could not evaluate output: #{line.chomp}, exception: #{e}"
+        Rails.logger.error "Background thread: Backtrace: #{e.backtrace.join("\n")}"
+
+        # rethrow the exception
+        raise e
+      end
+    end
+
+    result
+  end
+
+  # just a short cut for accessing the singleton object
+  def self.bm
+    BackgroundManager.instance
+  end
+
 end
