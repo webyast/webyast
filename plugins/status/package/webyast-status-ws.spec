@@ -27,14 +27,14 @@ Source2:	org.opensuse.yast.modules.logfile.policy
 Source3:	LogFile.rb
 BuildRoot:      %{_tmppath}/%{name}-%{version}-build
 BuildArch:      noarch
-PreReq:         yast2-webservice, collectd, %insserv_prereq
+PreReq:         yast2-webservice, collectd, rubygem-gettext_rails, %insserv_prereq
 Requires:       rrdtool
 # for calling ruby module via YastService:
 Requires:	yast2-ruby-bindings >= 0.3.2.1
 
 BuildRequires:  rubygem-yast2-webservice-tasks rubygem-restility
 
-BuildRequires:  webyast-base-ws-testsuite
+BuildRequires:  webyast-base-ws-testsuite rubygem-gettext_rails
 BuildRequires:	rubygem-test-unit rubygem-mocha
 
 #
@@ -75,6 +75,9 @@ needed at runtime.
  # do not package restdoc sources
  rm -rf restdoc
 
+export RAILS_PARENT=%{webyast_ws_dir}
+env LANG=en rake makemo
+
 %check
 # run the testsuite
 %webyast_ws_check
@@ -99,6 +102,12 @@ cp %{SOURCE3} $RPM_BUILD_ROOT/usr/share/YaST2/modules/
 
 mkdir -p $RPM_BUILD_ROOT/etc/webyast/vendor
 cp $RPM_BUILD_ROOT/%{plugin_dir}/doc/logs.yml $RPM_BUILD_ROOT/etc/webyast/vendor
+
+# remove .po files (no longer needed)
+rm -rf $RPM_BUILD_ROOT/%{plugin_dir}/po
+
+# search locale files
+%find_lang webyast-status-ws
 
 %clean
 rm -rf $RPM_BUILD_ROOT
@@ -133,7 +142,7 @@ rm -rf /var/lib/collectd/*
 %{fillup_and_insserv -Y collectd}
 rccollectd try-restart
 
-%files
+%files  -f webyast-status-ws.lang
 %defattr(-,root,root)
 %dir /usr/share/YaST2/
 %dir /usr/share/YaST2/modules/
