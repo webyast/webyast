@@ -14,11 +14,11 @@ Provides:       WebYaST(org.opensuse.yast.modules.registration.registration)
 Provides:       WebYaST(org.opensuse.yast.modules.registration.configuration)
 Provides:       yast2-webservice-registration = %{version}
 Obsoletes:      yast2-webservice-registration < %{version}
-PreReq:         yast2-webservice, yast2-registration
+PreReq:         yast2-webservice, yast2-registration, rubygem-gettext_rails
 License:        GPL v2 only
 Group:          Productivity/Networking/Web/Utilities
 Autoreqprov:    on
-Version:        0.1.7
+Version:        0.1.8
 Release:        0
 Summary:        WebYaST - Registration service
 Source:         www.tar.bz2
@@ -26,7 +26,7 @@ BuildRoot:      %{_tmppath}/%{name}-%{version}-build
 BuildArch:      noarch
 Recommends:     openssl-certs
 
-BuildRequires:  webyast-base-ws-testsuite
+BuildRequires:  webyast-base-ws-testsuite rubygem-gettext_rails
 BuildRequires:	rubygem-test-unit rubygem-mocha
 
 # YaST2/modules/YSR.pm  
@@ -67,6 +67,9 @@ needed at runtime.
 
 %build
 
+export RAILS_PARENT=%{webyast_ws_dir}
+env LANG=en rake makemo
+
 %check
 # run the testsuite
 %webyast_ws_check
@@ -80,6 +83,11 @@ mkdir -p $RPM_BUILD_ROOT%{plugin_dir}
 cp -a * $RPM_BUILD_ROOT%{plugin_dir}/
 rm -f $RPM_BUILD_ROOT%{plugin_dir}/COPYING
 
+# remove .po files (no longer needed)
+rm -rf $RPM_BUILD_ROOT/%{plugin_dir}/po
+
+# search locale files
+%find_lang webyast-registration-ws
 
 %clean
 rm -rf $RPM_BUILD_ROOT
@@ -91,7 +99,7 @@ rm -rf $RPM_BUILD_ROOT
 /usr/sbin/grantwebyastrights --user root --action grant > /dev/null
 /usr/sbin/grantwebyastrights --user %{webyast_ws_user} --action grant > /dev/null
 
-%files 
+%files -f webyast-registration-ws.lang
 %defattr(-,root,root)
 %dir %{webyast_ws_dir}
 %dir %{webyast_ws_dir}/vendor
