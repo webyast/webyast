@@ -84,7 +84,7 @@ class RaisingControllerTest < ActionController::TestCase
 
   def test_catch_exception
     get :raiseException
-    assert_response 500
+    assert_response 503
   end
 
   def test_dbus_error
