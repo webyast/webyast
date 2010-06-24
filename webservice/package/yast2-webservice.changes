@@ -1,4 +1,11 @@
 -------------------------------------------------------------------
+Thu Jun 24 14:19:38 UTC 2010 - lslezak@suse.cz
+
+- install patches asynchronously - avoid timeouts when installing
+  large set of patches (or when network is very slow) (bnc#607684)
+- 0.0.22
+
+-------------------------------------------------------------------
 Tue Apr 13 06:23:04 UTC 2010 - jreidinger@novell.com
 
 - generate secret key during first run to prevent same key for all
