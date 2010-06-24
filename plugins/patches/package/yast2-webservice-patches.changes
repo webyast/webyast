@@ -1,4 +1,11 @@
 -------------------------------------------------------------------
+Thu Jun 24 14:26:06 UTC 2010 - lslezak@suse.cz
+
+- install patches asynchronously - avoid timeouts when installing
+  large set of patches (or when network is very slow) (bnc#607684)
+- 0.0.12
+
+-------------------------------------------------------------------
 Wed Jun 23 17:32:41 CEST 2010 - mvidner@suse.cz
 
 - Don't ignore PackageKit errors when applying updates (bnc#616742).

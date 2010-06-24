@@ -17,7 +17,7 @@ Requires:       ruby-dbus >= 0.2.9
 License:	GPL v2 only
 Group:          Productivity/Networking/Web/Utilities
 Autoreqprov:    on
-Version:        0.0.11
+Version:        0.0.12
 Release:        0
 Summary:        YaST2 - Webservice - Patches
 Source:         www.tar.bz2
