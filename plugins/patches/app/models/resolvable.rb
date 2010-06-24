@@ -20,6 +20,9 @@ class Resolvable
 
 private
 
+  # allow only one thread accessing PackageKit
+  @@package_kit_mutex = Mutex.new
+
   #
   # Resolvable.packagekit_connect
   #
@@ -191,15 +194,17 @@ public
       Rails.logger.info "Starting background thread for installing patches..."
       # run the patch query in a separate thread
       Thread.new do
-        res = subprocess_install pk_id
+        @@package_kit_mutex.synchronize do
+          res = subprocess_install pk_id
 
-        # check for exception
-        unless res.is_a? StandardError
-          Rails.logger.info "*** Patch install thread: Result: #{res.inspect}"
-        else
-          Rails.logger.debug "*** Patch install thread: Exception raised: #{res.inspect}"
+          # check for exception
+          unless res.is_a? StandardError
+            Rails.logger.info "*** Patch install thread: Result: #{res.inspect}"
+          else
+            Rails.logger.debug "*** Patch install thread: Exception raised: #{res.inspect}"
+          end
+          bm.finish_process(proc_id, res)
         end
-        bm.finish_process(proc_id, res)
       end
 
       return bm.get_progress(proc_id)
