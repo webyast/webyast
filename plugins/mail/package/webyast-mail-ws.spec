@@ -119,7 +119,7 @@ rm -rf $RPM_BUILD_ROOT
 
 %postun
 
-%files 
+%files -f webyast-mail-ws.lang
 %defattr(-,root,root)
 %dir %{webyast_ws_dir}
 %dir %{webyast_ws_dir}/vendor
