@@ -15,7 +15,8 @@ class Resolvable
 		  :version,
                   :arch,
                   :repo,
-                  :summary
+                  :summary,
+                  :installing
 
 private
 
@@ -89,6 +90,7 @@ public
       xml.tag!(:arch, @arch )
       xml.tag!(:repo, @repo )
       xml.tag!(:summary, @summary )
+      xml.tag!(:installing, @installing, {:type => "boolean"} )
     end
 
   end

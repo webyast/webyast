@@ -22,6 +22,9 @@ class Patch < Resolvable
                            :repo => columns[3],
                            :summary => line3 )
 
+        update.installing = BackgroundManager.instance.running.has_key?\
+          "packagekit_install_#{update.name};#{update.resolvable_id};#{update.arch};#{update.repo}"
+
         if what == :available
           # add the update to the list
           patch_updates << update
