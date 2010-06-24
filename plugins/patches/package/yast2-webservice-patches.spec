@@ -82,6 +82,8 @@ rm -rf $RPM_BUILD_ROOT
 /srv/www/%{pkg_user}/vendor/plugins/%{plugin_name}/app
 /srv/www/%{pkg_user}/vendor/plugins/%{plugin_name}/config
 /srv/www/%{pkg_user}/vendor/plugins/%{plugin_name}/tasks
+/srv/www/%{pkg_user}/vendor/plugins/%{plugin_name}/lib
+/srv/www/%{pkg_user}/vendor/plugins/%{plugin_name}/scripts
 %attr(644,root,root) %config /usr/share/PolicyKit/policy/org.opensuse.yast.system.%{plugin_name}.policy
 %attr(644,root,root) %config /usr/share/PolicyKit/policy/org.opensuse.yast.system.packages.policy
 %doc COPYING
