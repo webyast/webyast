@@ -11,9 +11,7 @@
 
 Name:           webyast-ldap-ws
 Provides:       WebYaST(org.opensuse.yast.modules.yapi.ldap)
-Provides:       yast2-webservice-ldap = %{version}
-Obsoletes:      yast2-webservice-ldap < %{version}
-PreReq:         yast2-webservice
+PreReq:         webyast-base-ws
 License:	GPL v2 only
 Group:          Productivity/Networking/Web/Utilities
 Autoreqprov:    on
@@ -102,6 +100,8 @@ rm -rf $RPM_BUILD_ROOT
 %dir %{webyast_ws_dir}/vendor/plugins
 %dir %{plugin_dir}
 # YaPI dir
+%dir /usr/share/YaST2/
+%dir /usr/share/YaST2/modules/
 %dir /usr/share/YaST2/modules/YaPI/
 /usr/share/YaST2/modules/YaPI/LDAP.pm
 %{plugin_dir}/README
