@@ -10,7 +10,7 @@
 
 
 Name:           yast2-webservice-patches
-PreReq:         yast2-webservice
+PreReq:         yast2-webservice >= 0.0.22
 # ruby-dbus is required by yast2-webservice already
 # but here we use a recent feature of DBus::Main.quit
 Requires:       ruby-dbus >= 0.2.9
