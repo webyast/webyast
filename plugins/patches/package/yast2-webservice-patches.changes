@@ -1,4 +1,9 @@
 -------------------------------------------------------------------
+Wed Jun 23 17:32:41 CEST 2010 - mvidner@suse.cz
+
+- Don't ignore PackageKit errors when applying updates (bnc#616742).
+
+-------------------------------------------------------------------
 Fri Apr  9 17:04:47 CEST 2010 - mvidner@suse.cz
 
 - Fixed "unexpected return" when installing multiple patches
