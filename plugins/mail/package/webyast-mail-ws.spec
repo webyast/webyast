@@ -13,7 +13,7 @@ Name:           webyast-mail-ws
 Provides:       WebYaST(org.opensuse.yast.modules.yapi.mailsettings)
 Provides:       yast2-webservice-mailsettings = %{version}
 Obsoletes:      yast2-webservice-mailsettings < %{version}
-PreReq:         yast2-webservice
+PreReq:         yast2-webservice rubygem-gettext_rails
 License:	GPL v2 only
 Group:          Productivity/Networking/Web/Utilities
 Autoreqprov:    on
@@ -28,7 +28,7 @@ BuildRoot:      %{_tmppath}/%{name}-%{version}-build
 BuildArch:      noarch
 BuildRequires:  rubygem-yast2-webservice-tasks rubygem-restility
 
-BuildRequires:  webyast-base-ws-testsuite
+BuildRequires:  webyast-base-ws-testsuite rubygem-gettext_rails
 BuildRequires:	rubygem-test-unit rubygem-mocha
 
 # install these packages into Hudson chroot environment
@@ -83,6 +83,9 @@ mkdir -p public/mail/restdoc
 # do not package restdoc sources
 rm -rf restdoc
 
+export RAILS_PARENT=%{webyast_ws_dir}
+env LANG=en rake makemo
+
 %check
 # run the testsuite
 %webyast_ws_check
@@ -108,6 +111,12 @@ cp %{SOURCE1} $RPM_BUILD_ROOT/usr/share/YaST2/modules/YaPI/
 #hook script
 mkdir -p $RPM_BUILD_ROOT/etc/sysconfig/network/scripts/
 install -m 0755 %SOURCE3 $RPM_BUILD_ROOT/etc/sysconfig/network/scripts/
+
+# remove .po files (no longer needed)
+rm -rf $RPM_BUILD_ROOT/%{plugin_dir}/po
+
+# search locale files
+%find_lang webyast-mail-ws
 
 %clean
 rm -rf $RPM_BUILD_ROOT
