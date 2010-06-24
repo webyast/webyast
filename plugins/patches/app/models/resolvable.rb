@@ -156,8 +156,7 @@ public
   # id ("<name>;<id>;<arch>;<repo>")
   #
   def self.package_kit_install(pk_id, background = false)
-
-    puts "Installing #{pk_id}, background: #{background.inspect}"
+    Rails.logger.debug "Installing #{pk_id}, background: #{background.inspect}"
 
     # background process doesn't work correctly if class reloading is active
     # (static class members are lost between requests)
@@ -165,7 +164,7 @@ public
       Rails.logger.info "Class reloading is active, cannot use background thread (set config.cache_classes = true)"
       background = false
     end
-    puts "Background: #{background.inspect}"
+    Rails.logger.debug "Background: #{background.inspect}"
 
     if background
       proc_id = bgid(pk_id)
