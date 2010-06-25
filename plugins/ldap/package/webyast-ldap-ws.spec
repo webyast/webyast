@@ -28,6 +28,9 @@ BuildRequires:  rubygem-yast2-webservice-tasks rubygem-restility
 BuildRequires:  webyast-base-ws-testsuite
 BuildRequires:	rubygem-test-unit rubygem-mocha
 
+# LDAP.pm is using yast2-ldap-client API
+Requires:	yast2-ldap-client
+
 #
 %define plugin_name ldap
 %define plugin_dir %{webyast_ws_dir}/vendor/plugins/%{plugin_name}
