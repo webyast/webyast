@@ -5,8 +5,6 @@ use YaST::YCP qw(:LOGGING);
 use YaPI;
 use Data::Dumper;
 
-textdomain ("users");
-
 # ------------------- imported modules
 YaST::YCP::Import ("Ldap");
 YaST::YCP::Import ("Progress");
@@ -56,8 +54,6 @@ sub Write {
     my $args	= shift;
     my $ret	= 0;
 
-y2internal ("-------- args: ", Dumper ($args));
-
     # transform integers to real booleans
     if (defined $args->{"start_ldap"}) {
 	$args->{"start_ldap"}	= YaST::YCP::Boolean ($args->{"start_ldap"});
@@ -65,8 +61,6 @@ y2internal ("-------- args: ", Dumper ($args));
     if (defined $args->{"ldap_tls"}) {
 	$args->{"ldap_tls"}	= YaST::YCP::Boolean ($args->{"ldap_tls"});
     }
-
-y2internal ("-------- args: ", Dumper ($args));
 
     Progress->set (0);
     Ldap->Read ();
