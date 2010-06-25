@@ -36,6 +36,37 @@ class PatchesController < ApplicationController
     end
   end
 
+  def collect_done_patches
+    done = []
+
+    BackgroundManager.instance.done.each do |k,v|
+      if k.match(/^packagekit_install_(.*)/)
+        patch_id = $1
+        if BackgroundManager.instance.process_finished? k
+          Rails.logger.debug "Patch installation request #{patch_id} is done"
+          ret = BackgroundManager.instance.get_value k
+
+          # check for exception
+          if ret.is_a? StandardError
+            raise ret
+          end
+
+          # e.g.: 'suse-build-key;1.0-907.30;noarch;@System'
+          attrs = patch_id.split(';')
+
+          done << Patch.new(:resolvable_id => attrs[1],
+                           :name => attrs[0],
+                           :arch => attrs[2],
+                           :repo => attrs[3],
+                           :installing => false,
+                           :installed => ret)
+        end
+      end
+    end
+
+    return done
+  end
+
   public
 
   # GET /patch_updates
@@ -43,6 +74,15 @@ class PatchesController < ApplicationController
   def index
     # note: permission check was performed in :before_filter
     @patches = Patch.find(:available)
+
+    results = collect_done_patches
+    # invalidate cache when patch installation is running
+    if @patches.find {|p| p.installing == true} || !results.empty?
+      Rails.cache.write('patches:timestamp', Time.at(0))
+    end
+
+    @patches += results
+
     logger.debug "Running requests: #{BackgroundManager.instance.running.inspect}"
     logger.debug "Done requests: #{BackgroundManager.instance.done.inspect}"
     respond_to do |format|

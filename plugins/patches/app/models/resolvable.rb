@@ -16,7 +16,8 @@ class Resolvable
                   :arch,
                   :repo,
                   :summary,
-                  :installing
+                  :installing,
+                  :installed
 
 private
 
@@ -94,6 +95,7 @@ public
       xml.tag!(:repo, @repo )
       xml.tag!(:summary, @summary )
       xml.tag!(:installing, @installing, {:type => "boolean"} )
+      xml.tag!(:installed, @installed )
     end
 
   end
@@ -171,17 +173,6 @@ public
 
     if background
       proc_id = bgid(pk_id)
-      if bm.process_finished? proc_id
-        Rails.logger.debug "Patch installation request #{proc_id} is done"
-        ret = bm.get_value proc_id
-
-        # check for exception
-        if ret.is_a? StandardError
-          raise ret
-        end
-
-        return ret
-      end
 
       running = bm.get_progress proc_id
       if running
