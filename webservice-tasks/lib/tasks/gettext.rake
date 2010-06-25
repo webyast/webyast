@@ -40,6 +40,9 @@ task :updatepot do
   require 'gettext_rails/tools'
   #generate a ruby file include the translation. This tmp file is needed for generating pot files
   yml_files = Dir.glob("./**/*.{yml,yaml}")
+  #don't touch config files as this breaks database.yml needed for activerecord
+  yml_files.delete_if {|filename| filename.include? "config/database.yml" }
+
   yml_files.each do |yml_file|
     src_file = File.join(Dir.pwd,yml_file)
     FileUtils.cp(src_file, src_file+"save")
