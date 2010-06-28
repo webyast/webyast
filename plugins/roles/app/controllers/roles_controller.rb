@@ -45,6 +45,8 @@ class RolesController < ApplicationController
     permission_check "org.opensuse.yast.roles.assign" if role.changed_users?
     logger.info "update role #{params[:id]}. New record? #{role.new_record?}"
     role.save
+#invalidate permission cache as it is changed
+    Rails.cache.write(PermissionsController::CACHE_ID, Time.at(0))
 		show
   end
 
