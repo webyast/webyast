@@ -9,6 +9,7 @@ use Data::Dumper;
 YaST::YCP::Import ("Progress");
 YaST::YCP::Import ("Samba");
 YaST::YCP::Import ("SambaAD");
+YaST::YCP::Import ("SambaConfig");
 YaST::YCP::Import ("SambaNetJoin");
 # -------------------------------------
 
@@ -21,21 +22,39 @@ C<$hash Read ();>
 
 Returns the Samba client configuration
 
+Can return different kind of result, based on passed arguments:
+-  if "check_membership" key is present in argument hash, check if the machine
+      is member of given domain (the string value of check_membership key);
+      if domain is empty, the one saved in samba config file will be checked
+
 =cut
 
 BEGIN{$TYPEINFO{Read} = ["function",
+    [ "map", "string", "any" ],
     [ "map", "string", "any" ]];
 }
 sub Read {
 
     my $self	= shift;
+    my $args	= shift;
+    my $ret	= {};
 
     Progress->set (0);
     Samba->Read ();
+
+    # only check for domain membership
+    if (defined ($args->{"check_membership"})) {
+	my $domain	= $args->{"check_membership"} || SambaConfig->GlobalGetStr("workgroup", "");
+
+	SambaAD->ReadADS ($domain);
+	SambaAD->ReadRealm () if (SambaAD->ADS ());
+
+	$ret->{"result"}	= YaST::YCP::Boolean (SambaNetJoin->Test ($domain));
+	return $ret;
+    }
+
     my $export	= Samba->Export ();
 
-# FIXME do not export whole map, we do not need it
-    my $ret	= {};
     $ret->{"workgroup"}	= $export->{"global"}{"workgroup"} || "";
     $ret->{"winbind"}	= $export->{"winbind"} || "0";
     $ret->{"mkhomedir"}	= Samba->mkhomedir();

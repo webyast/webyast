@@ -37,7 +37,7 @@ class Activedirectory < BaseModel::Base
 
 public
   def self.find
-    ret = YastService.Call("YaPI::ActiveDirectory::Read")
+    ret = YastService.Call("YaPI::ActiveDirectory::Read", {})
     Rails.logger.info "Read Samba config: #{ret.inspect}"
     ad	= Activedirectory.new({
 	:domain		=> ret["workgroup"],
@@ -46,6 +46,13 @@ public
     })
     ad	= {} if ad.nil?
     return ad
+  end
+
+  def check_membership(check_domain)
+    check_domain	= "" if check_domain.nil?
+    ret = YastService.Call("YaPI::ActiveDirectory::Read", { "check_membership"	=> ["s", check_domain]})
+    Rails.logger.info "Is member of domain #{check_domain}: #{ret.inspect}"
+    return ret
   end
 
   def save
