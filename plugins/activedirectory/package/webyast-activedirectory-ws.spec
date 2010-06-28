@@ -19,7 +19,7 @@ Version:        0.1.0
 Release:        0
 Summary:        WebYaST - service for configuration of Active Directory client
 Source:         www.tar.bz2
-Source1:	org.opensuse.yast.modules.yapi.ad.policy
+Source1:	org.opensuse.yast.modules.yapi.activedirectory.policy
 Source2:	ActiveDirectory.pm
 BuildRoot:      %{_tmppath}/%{name}-%{version}-build
 BuildArch:      noarch
@@ -29,7 +29,7 @@ BuildRequires:  webyast-base-ws-testsuite
 BuildRequires:	rubygem-test-unit rubygem-mocha
 
 # ActiveDirectory.pm is using yast2-samba-client API
-Requires:	yast2-samba-client
+Requires:	yast2-samba-client samba-winbind samba-client pam_mount
 
 #
 %define plugin_name activedirectory
@@ -118,7 +118,7 @@ rm -rf $RPM_BUILD_ROOT
 %{plugin_dir}/public
 %dir /usr/share/PolicyKit
 %dir /usr/share/PolicyKit/policy
-%attr(644,root,root) %config /usr/share/PolicyKit/policy/org.opensuse.yast.modules.yapi.ad.policy
+%attr(644,root,root) %config /usr/share/PolicyKit/policy/org.opensuse.yast.modules.yapi.activedirectory.policy
 %doc COPYING
 
 %files testsuite
