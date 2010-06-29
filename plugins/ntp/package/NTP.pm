@@ -44,7 +44,7 @@ sub Synchronize {
   foreach my $server (@{$servers}){
     # -r: set the system time
     # -P no: do not ask if time difference is too large
-    # -c 1 -d 15: delay 15s, only one try (bnc#442287)
+    # -c 3 -d 15: delay 15s, three attempts (bnc#442287)
     $out = `/usr/sbin/sntp -c 3 -d 15 -r -P no '$server' 2>&1`;
     last if ($?==0);
     $out = "Error for server $server: $out";
@@ -58,7 +58,10 @@ sub Synchronize {
   }
   my $ret = `/sbin/hwclock $local --systohc 2>&1`;
   y2milestone("hwclock returns $?: $ret");
-  if ( $? == 0 || not -f "/sbin/hwclock"){ #on s390x is no hwclock so don't fail in this case bnc#607158
+  if ( $? == 0 ||
+      not -f "/sbin/hwclock" || #on s390x is no hwclock so don't fail in this case bnc#607158
+      ( -d "/proc/xen" && not -f "/proc/xen/xsd_port" ) #hwclock fail on xen host bnc#614353
+      ){
     if ($new_server ne "")
     {
       `sed -i 's|^[:space:]*NETCONFIG_NTP_STATIC_SERVERS=.*\$|NETCONFIG_NTP_STATIC_SERVERS="$new_server"|' /etc/sysconfig/network/config `;
