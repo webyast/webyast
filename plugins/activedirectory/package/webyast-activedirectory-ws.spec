@@ -29,7 +29,7 @@ BuildRequires:  webyast-base-ws-testsuite
 BuildRequires:	rubygem-test-unit rubygem-mocha
 
 # ActiveDirectory.pm is using yast2-samba-client API
-Requires:	yast2-samba-client samba-winbind samba-client pam_mount
+Requires:	yast2-samba-client samba-winbind samba-client pam_mount krb5-client
 
 #
 %define plugin_name activedirectory
