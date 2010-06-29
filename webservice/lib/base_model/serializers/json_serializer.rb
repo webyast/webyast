@@ -27,8 +27,7 @@ module BaseModel
 
     # restore model from json
     def from_json(json)
-      hash = ActiveSupport::JSON.decode(json)
-      load(hash.values.first)
+      load(ActiveSupport::JSON.decode(json))
     end
 
 private
