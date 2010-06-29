@@ -38,7 +38,7 @@ private
         val = instance_variable_get(attr)
         hash[attr.to_s[1..-1]] = val unless val.nil? #remove nil values
       end
-      hash = { self.class.model_name.singular => hash }
+#      hash = { self.class.model_name.singular => hash }
       hash
     end
 
