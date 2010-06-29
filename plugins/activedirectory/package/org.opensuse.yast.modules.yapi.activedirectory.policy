@@ -26,14 +26,5 @@
     </defaults>
   </action>
 
-  <action id="org.opensuse.yast.modules.yapi.activedirectory.join">
-    <description>Join to Active Directory domain</description>
-    <message>Authentication is required for joining Active Directory domain</message>
-    <defaults>
-      <allow_inactive>no</allow_inactive>
-      <allow_active>no</allow_active>
-      <allow_active>auth_admin_keep_session</allow_active>
-    </defaults>
-  </action>
 </policyconfig> 
 
