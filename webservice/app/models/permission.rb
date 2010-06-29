@@ -68,7 +68,7 @@ class Permission
 
   def to_json( options = {} )
     hash = Hash.from_xml(to_xml())
-    return hash.to_json
+    return hash["permission"].to_json
   end
 
   def load_permissions(options)
