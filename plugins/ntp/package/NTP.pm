@@ -24,8 +24,12 @@ sub Synchronize {
     y2warning($out);
   }
   return "NOSERVERS" unless (defined ($out));
-  my $ret = `/sbin/hwclock --utc --systohc`;
-  y2milestone("hwclock returns $?: $ret");
+  my $ret = "";
+  unless ( -d "/proc/xen" && !(-f "/proc/xen/xsd_port"))
+  {
+    $ret = `/sbin/hwclock --utc --systohc`;
+    y2milestone("hwclock returns $?: $ret");
+  }
   if ($? == 0){
     return "OK";
   }
