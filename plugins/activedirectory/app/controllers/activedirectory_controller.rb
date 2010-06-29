@@ -42,7 +42,8 @@ class ActivedirectoryController < ApplicationController
   def update
     yapi_perm_check "activedirectory.write"
 
-    args	= params["ad"]
+    args	= params["activedirectory"]
+    args	= {} if args.nil?
 		  	
     ad = Activedirectory.find
     ad.load args
