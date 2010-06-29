@@ -24,7 +24,7 @@ ActionController::Routing::Routes.draw do |map|
   map.all_resources 'resources.:format',  :controller => 'resources', :action => 'index'
   map.root :all_resources
   map.resource :permissions
-  map.resources :vendor_settings
+  map.resource :vendor_settings
   
   # login uses POST for both
   map.login "/login.:format", :controller => 'sessions', :action => 'create'
