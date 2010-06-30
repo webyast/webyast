@@ -60,10 +60,8 @@ sub Read {
 	return $ret;
     }
 
-    my $export	= Samba->Export ();
-
     $ret->{"domain"}	= Samba->GetWorkgroupOrRealm ();
-    $ret->{"winbind"}	= $export->{"winbind"} || "0";
+    $ret->{"winbind"}	= Samba->GetWinbind ();
     $ret->{"mkhomedir"}	= Samba->mkhomedir();
     return $ret;
 }
