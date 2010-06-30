@@ -221,7 +221,23 @@ class User
   end
 
   def to_json( options = {} )
-    hash = Hash.from_xml(to_xml()).values.first
+    gr_list=[]
+    grouplist.keys.each do |group|
+     gr_list.push( :cn=> group )
+    end
+    hash = {
+	:id => id,
+	:cn => cn,
+        :groupname => groupname,
+        :gid_number => gid_number,
+        :home_directory => home_directory,
+        :login_shell => login_shell,
+        :uid => uid,
+        :uid_number => uid_number,
+        :user_password => user_password,
+        :type => type,
+	:grouplist => gr_list
+	}
     return hash.to_json
   end
 

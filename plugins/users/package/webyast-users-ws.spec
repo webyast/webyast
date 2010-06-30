@@ -1,3 +1,8 @@
+-------------------------------------------------------------------
+Wed Jun 30 14:05:59 CEST 2010 - mzugec@suse.cz
+
+- 
+
 #
 # spec file for package webyast-users-ws (Version 0.1)
 #
@@ -18,7 +23,7 @@ PreReq:         yast2-webservice
 License:        GPL v2 only
 Group:          Productivity/Networking/Web/Utilities
 Autoreqprov:    on
-Version:        0.1.13
+Version:        0.1.14
 Release:        0
 Summary:        WebYaST - users management
 Source:         www.tar.bz2
