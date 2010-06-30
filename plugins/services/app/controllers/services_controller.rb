@@ -35,6 +35,10 @@ class ServicesController < ApplicationController
     rescue Exception => e
 	render ErrorResult.error(404, 107, e.to_s) and return
     end
+    respond_to do |format|
+    	format.xml  { render :xml => @services.to_xml }
+    	format.json { render :json => @services.to_json }
+    end
   end
 
   # GET /services/service_name

@@ -26,7 +26,7 @@ require 'yast_service'
 # Proviceds access to configured services.
 # Uses YaPI for accessing standard system services (/etc/init.d)
 # and vendor specific services (defined in config file).
-class Service
+class Service < BaseModel::Base
   
   attr_accessor :name
   attr_accessor :status
@@ -212,36 +212,6 @@ class Service
     end
     Rails.logger.debug "Command returns: #{ret.inspect}"
     ret.symbolize_keys!
-  end
-
-  
-  def to_xml( options = {} )
-    xml = options[:builder] ||= Builder::XmlMarkup.new(options)
-    xml.instruct! unless options[:skip_instruct]
-    
-    xml.service do
-      xml.name name
-      xml.description description
-      xml.summary summary
-      xml.custom custom
-      xml.enabled enabled
-      xml.status status, {:type => "integer"}
-      xml.required_for_start({:type => "array"}) do
-	required_for_start.each do |s|
-	    xml.service s
-	end
-      end
-      xml.required_for_stop({:type => "array"}) do
-	required_for_stop.each do |s|
-	    xml.service s
-	end
-      end
-    end  
-  end
-
-  def to_json( options = {} )
-    hash = Hash.from_xml(to_xml())
-    return hash.to_json
   end
 
 end
