@@ -55,9 +55,9 @@ TEST_DATA_GRANT = [
   def test_find_all
     perm = Permission.find(:all)
 #test all yast perm is loaded
-    assert_equal 10,perm.permissions.size
+    assert_equal 10,perm.size
 #test that all have not granted
-    perm.permissions.each do |p|
+    perm.each do |p|
       assert !p[:granted]
       assert !p[:id].blank?
     end
@@ -66,9 +66,9 @@ TEST_DATA_GRANT = [
   def test_find_for_user
     perm = Permission.find(:all,{:user_id => "test"})
 #test all loaded
-    assert_equal 10,perm.permissions.size
+    assert_equal 10,perm.size
 #check if is granted
-    perm.permissions.each do |p|
+    perm.each do |p|
       if p[:id]=="org.opensuse.yast.modules.ysr.statelessregister"
         assert p[:granted] 
       end
@@ -80,9 +80,9 @@ TEST_DATA_GRANT = [
     perm = Permission.find(:all,{:user_id => "test",:filter => "org.opensuse.yast.permissions.write"})
 
 #test all loaded
-    assert_equal 1,perm.permissions.size
+    assert_equal 1,perm.size
 #check if is granted
-    perm.permissions.each do |p|
+    perm.each do |p|
       assert p[:id] == "org.opensuse.yast.permissions.write"
     end
   end
