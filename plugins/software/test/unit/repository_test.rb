@@ -233,8 +233,8 @@ class RepositoryTest < ActiveSupport::TestCase
 
     repo_from_json = ActiveSupport::JSON.decode(jsn)
 
-    assert_equal repo_from_json, {"repository"=>{"name"=>"FACTORY-OSS", "autorefresh"=>true, "url"=>'',
-        "priority"=>99, "id"=>"factory-oss", "enabled"=>true, "keep_packages"=>false}}
+    assert_equal repo_from_json, {"name"=>"FACTORY-OSS", "autorefresh"=>true, "url"=>'',
+        "priority"=>99, "id"=>"factory-oss", "enabled"=>true, "keep_packages"=>false}
   end
 
   def test_repo_file_parsing
