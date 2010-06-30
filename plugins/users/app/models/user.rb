@@ -221,7 +221,7 @@ class User
   end
 
   def to_json( options = {} )
-    hash = Hash.from_xml(to_xml())
+    hash = Hash.from_xml(to_xml()).values.first
     return hash.to_json
   end
 
