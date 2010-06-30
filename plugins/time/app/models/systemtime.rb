@@ -51,7 +51,7 @@ class Systemtime < BaseModel::Base
   attr_protected :timezones
 
   after_save :restart_collectd
-  
+
   private
 
   # Creates argument for dbus call which specify what data is requested.
@@ -88,20 +88,9 @@ class Systemtime < BaseModel::Base
     end
     @timezone = response["timezone"]
     @timezones = response["zones"]
-  end
-
-#super sometime doesn't work (need more investigation - in test work always, in real code sometime report no method in superclass)
-  alias orig_to_xml to_xml
-  def to_xml(options={})
-    tmp =@timezones
-    @timezones = @timezones.clone
-    #transform hash before serialization
     @timezones.each do |zone|
-      zone["entries"] = zone["entries"].collect {|k,v| { "id" => k, "name" => v } }
+      zone["entries"] = zone["entries"].collect {|k,v| { "id" => k, "name" => v } } #hack to avoid colission in xml tag
     end
-    res = orig_to_xml options
-    @timezones = tmp
-    return res
   end
 
   # fills time instance with data from YaPI.
