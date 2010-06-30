@@ -31,24 +31,17 @@ class ResourceTest < ActiveSupport::TestCase
   end
 
   def test_all
-    services = Resource.all
+    services = Resource.find :all
     assert_equal 2, services.size
     assert services.any? {|s| s.interface == "interface"}
     assert services.to_xml
   end
 
-  def test_action
-    res = Resource.new "interface",TEST_RESOURCE_S
-    assert_equal :show, res.action
-    res = Resource.new "interface",TEST_RESOURCE
-    assert_equal :index, res.action
-  end
-
   def test_find_and_link_to
     res = Resource.find "sinterface"
     assert res
-    assert_equal "stest",res.controller
-    assert_equal "/stest", res.link_to
+    assert_equal "/stest", res.href
     assert res.to_xml
+    assert res.to_json
   end
 end

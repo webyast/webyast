@@ -26,17 +26,10 @@ class VendorSettingsControllerTest < ActionController::TestCase
   end
 
   def test_index
-   get :index, :format => "xml"
+   get :show, :format => "xml"
    assert_response :success
    response = Hash.from_xml @response.body
    assert_equal 4, response["vendor_settings"].size
   end
 
-  def test_show
-   get :show, :format => "xml", :id=>"bug_url"
-   assert_response :success
-   response = Hash.from_xml @response.body
-   assert_equal "http://www.mycompany.com/report_bug", response["vendor_setting"]["value"]
-  end
-  
 end

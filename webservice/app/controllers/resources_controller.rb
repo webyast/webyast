@@ -22,13 +22,13 @@ class ResourcesController < ApplicationController
   caches_action :index
   
   def index
-    @resources = Resource.all
+    @resources = Resource.find :all
     @node = "Yast"
 
     respond_to do |format|
       format.html
       format.xml { render :xml => @resources.to_xml }
-      format.json{ render :json=> Hash.from_xml(@resources.to_xml)["resources"].to_json} #XXX use Basemodel which handle it with option, problem is that it generates array of hashes with model instead array of models
+      format.json{ render :json=> @resources.to_json}
     end
   end
 

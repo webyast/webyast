@@ -1,2 +1,2 @@
 <h1><%= @node -%> resources</h1>
-   <%= link_to @resource.interface, :only_path => :true, :controller => @resource.link_to, :action => @resource.action -%><br/>
+   <%= link_to @resource.interface, @resource.href -%><br/>

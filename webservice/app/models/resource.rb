@@ -21,56 +21,30 @@
 # Resource class
 #
 
-class Resource
+class Resource < BaseModel::Base
   require 'resource_registration'
-  attr_accessor :implementations, :interface, :controller
+  attr_accessor :policy, :interface, :href, :singular
 
   def initialize (interface, impl_hash)
     @interface = interface
-    @policy    = impl_hash[:policy]
+    @policy    = impl_hash[:policy] || ""
     @singular  = impl_hash[:singular]
-    @controller= impl_hash[:controller]
+    @href = "/#{impl_hash[:controller]}"
   end
 
-  def link_to
-    "/#{@controller}"
-    #               url_for :only_path => :true,
-    #                       :controller => @controller,
-    #                       :action => (@singular ? :show : :index)
-  end
-
-  def action
-    @singular ? :show : :index
-  end
-
-  def self.all
-    resources = []
-    ResourceRegistration.resources.sort.each do |interface,implementations|
-      implementations.each do |impl|
-        resources << new(interface,impl)
-      end
+  def self.find(what)
+    return case what
+      when :all then
+        resources = []
+        ResourceRegistration.resources.sort.each do |interface,implementations|
+          implementations.each do |impl|
+            resources << new(interface,impl)
+          end
+        end
+        resources
+      else
+        implementations = ResourceRegistration.resources[what]
+        implementations ? new(what, implementations.first) : nil
     end
-    return resources
-  end
-
-  def self.find(interface)
-    implementations = ResourceRegistration.resources[interface]
-    return nil unless implementations
-    new(interface, implementations.first)
-  end
-
-  def to_xml( options = {} )
-    xml = options[:builder] ||= Builder::XmlMarkup.new(options)
-    xml.instruct! unless options[:skip_instruct]
-    xml.resource do
-      xml.interface(@interface)
-      xml.policy(@policy)
-      xml.singular(@singular, :type => :boolean)
-      xml.href(link_to)
-    end
-  end
-
-  def to_json( options = {} )
-    Hash.from_xml(to_xml).to_json
   end
 end
