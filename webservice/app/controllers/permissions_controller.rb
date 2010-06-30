@@ -111,7 +111,7 @@ class PermissionsController < ApplicationController
     permission = Permission.find(:all,params)
     respond_to do |format|
       format.json { render :json => permission.to_json }
-      format.xml { render :xml => permission.to_xml }
+      format.xml { render :xml => permission.to_xml(:root => "permissions") }
     end
   end
 
@@ -126,7 +126,7 @@ class PermissionsController < ApplicationController
   ret = { :error => "not implemented" }
     respond_to do |format|
       format.json { render :json => ret.to_json }
-      format.xml { render :xml => ret.to_xml }
+      format.xml { render :xml => ret.to_xml(:root => "permissions")}
     end
 
   end

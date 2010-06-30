@@ -48,27 +48,11 @@ class Permission
   def self.find(type,restrictions={})
     permission = Permission.new
     permission.load_permissions restrictions
-    return permission
+    return permission.permissions
   end
 
   def save
     raise "Unimplemented"
-  end
-
-  def to_xml( options = {} )
-    xml = options[:builder] ||= Builder::XmlMarkup.new(options)
-    xml.instruct! unless options[:skip_instruct]
-
-    xml.permissions(:type => "array") do 
-      @permissions.each do
-        |perm| perm.to_xml({:builder => xml, :skip_instruct => true, :root => "permission"})
-      end
-    end  
-  end
-
-  def to_json( options = {} )
-    hash = Hash.from_xml(to_xml())
-    return hash["permissions"].to_json
   end
 
   def load_permissions(options)
