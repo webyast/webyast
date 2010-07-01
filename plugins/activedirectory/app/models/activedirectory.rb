@@ -63,9 +63,11 @@ public
 	"mkhomedir"	=> [ "b", @create_dirs ]
     }
 
+    if !@enabled
+	Rails.logger.debug "disabling"
     # if credentials not present, call check_membership:
     # - if not member, ask for credentials (exception), otherwise write settings
-    if @administrator.nil?
+    elsif @administrator.nil?
 	ret	= check_membership(@domain)
 	raise ActivedirectoryError.new("not_member","") unless ret["result"]
     else
