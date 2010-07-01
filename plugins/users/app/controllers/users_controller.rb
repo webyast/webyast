@@ -33,6 +33,13 @@ class UsersController < ApplicationController
   # GET /users.json
   def index
     yapi_perm_check "users.usersget"
+    if params[:getent] == "1"
+      respond_to do |format|
+        format.xml { render  :xml => GetentPasswd.find.to_xml }
+        format.json { render :json => GetentPasswd.find.to_json }
+      end
+      return
+    end
     @users = User.find_all params
     if @users.nil?
       Rails.logger.error "No users found."
