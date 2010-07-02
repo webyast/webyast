@@ -17,6 +17,7 @@
 #++
 
 require File.dirname(__FILE__) + '/../test_helper'
+require "active_resource/http_mock"
 class BaseModelTest < ActiveSupport::TestCase
   class  Test < BaseModel::Base
     validates_presence_of :arg1
@@ -49,6 +50,12 @@ class BaseModelTest < ActiveSupport::TestCase
       @callback_used = true;
     end
   end
+
+  class TestClient < ActiveResource::Base
+    self.element_name = "test"
+    self.site = "http://localhost"
+  end
+
 
   def test_validations
     test = Test.new
@@ -135,8 +142,11 @@ COMPLEX_DATA = {
     test.carg = COMPLEX_DATA
     json = test.to_json
     assert json
-    test2 = Test.new
-    test2.from_json json
+    ActiveResource::HttpMock.respond_to do |mock|
+      mock.get "test.json",{},json,200
+    end
+    TestClient.format = :json
+    test2 = TestClient.find :one, :from => "test.json"
     assert_equal "last", test2.arg1
     assert_equal "5", test2.arg2
     assert_equal COMPLEX_DATA, test2.carg
@@ -148,10 +158,13 @@ COMPLEX_DATA = {
     test.arg2 = "null"
     xml = test.to_xml
     assert xml
-    test2 = Test3.new
-    test2.from_xml xml
+    ActiveResource::HttpMock.respond_to do |mock|
+      mock.get "test.xml",{},xml,200
+    end
+    TestClient.format = ActiveResource::Formats::XmlFormat
+    test2 = TestClient.find :one, :from => "test.xml"
     assert_equal "dev",test2.arg1
-    assert_nil test2.arg2
+    assert !test2.respond_to?(:arg2)
     test = Test3.new
     test.arg1 = "dev"
     test.arg2 = "null"
