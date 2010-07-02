@@ -135,9 +135,14 @@ class ActivedirectoryTest < ActiveSupport::TestCase
     }).returns({
 	"join_error"	=> "something got wrong"
     })
-    assert_raise ActivedirectoryError do
+    exception = nil
+    begin
       ad.save
+    rescue ActivedirectoryError => e
+      exception = e
     end
+    assert_not_nil exception, "should raise exception"
+    assert_equal "not_joined",exception.id
   end
 
 end

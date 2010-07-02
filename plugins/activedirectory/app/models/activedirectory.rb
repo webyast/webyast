@@ -91,6 +91,7 @@ end
 
 require 'exceptions'
 class ActivedirectoryError < BackendException
+  attr_reader :id
 
   def initialize(id,message)
     @id		= id
