@@ -116,10 +116,10 @@ class TestSerializeItself
 end
 
 COMPLEX_DATA = {
-  "test" => [ "a","b"], #serializers doesn't differ symbol from string and always sue string
-  "test2" => [ 5,6], #number test
-  "test4" => [ true,false], #number boolean
-  "test3" => { "a" => "b","c"=> "d" }, 
+  "test_data" => [ "a","b"], #serializers doesn't differ symbol from string and always sue string
+  "test_data2" => [ 5,6], #number test
+#  "test4" => [ true,false], # boolean doesn't work https://rails.lighthouseapp.com/projects/8994/tickets/5036-activeresource-load-problem-with-array-of-booleans#ticket-5036-1
+  "test_data3" => { "a" => "b","c"=> "d" }, 
   "test_escapes" => "<arg>/&\\test",
   "test_hash" => [{"a"=>"a"},{"b"=>"b"}]
 }
@@ -135,9 +135,13 @@ COMPLEX_DATA = {
     end
     TestClient.format = ActiveResource::Formats::XmlFormat
     test2 = TestClient.find :one, :from => "test.xml"
-    assert_equal({"test" => "lest","test2" => "lest2"}, test2.arg1)
+    assert_equal "lest", test2.arg1.test
     assert_equal "5", test2.arg2
-    assert_equal COMPLEX_DATA, test2.carg
+    assert_equal COMPLEX_DATA["test_data"], test2.carg.test_data
+    assert_equal COMPLEX_DATA["test_data2"], test2.carg.test_data2
+    assert_equal COMPLEX_DATA["test_data3"]["a"], test2.carg.test_data3.a
+    assert_equal COMPLEX_DATA["test_escapes"], test2.carg.test_escapes
+    assert_equal COMPLEX_DATA["test_hash"][0]["a"], test2.carg.test_hash[0].a
   end
 
   def test_json_serialization
@@ -152,7 +156,11 @@ COMPLEX_DATA = {
     test2 = TestClient.find :one, :from => "test.json"
     assert_equal "last", test2.arg1
     assert_equal "5", test2.arg2
-    assert_equal COMPLEX_DATA, test2.carg
+    assert_equal COMPLEX_DATA["test_data"], test2.carg.test_data
+    assert_equal COMPLEX_DATA["test_data2"], test2.carg.test_data2
+    assert_equal COMPLEX_DATA["test_data3"]["a"], test2.carg.test_data3.a
+    assert_equal COMPLEX_DATA["test_escapes"], test2.carg.test_escapes
+    assert_equal COMPLEX_DATA["test_hash"][0]["a"], test2.carg.test_hash[0].a
   end
 
   def test_attr_serializable
