@@ -80,7 +80,7 @@ public
     yapi_ret = YastService.Call("YaPI::ActiveDirectory::Write", params)
     Rails.logger.debug "Write YaPI returns: '#{yapi_ret}'"
     if yapi_ret["join_error"]
-	raise ActivedirectoryError.new("not_joined",yapi_ret["join_error"])
+	raise ActivedirectoryError.new("join_error",yapi_ret["join_error"])
     elsif yapi_ret["write_error"]
 	raise ActivedirectoryError.new("write_failed","")
     end
@@ -102,7 +102,7 @@ class ActivedirectoryError < BackendException
     xml.instruct!
 
     xml.error do
-      xml.type "ADMINISTRATOR_ERROR"
+      xml.type "ACTIVEDIRECTORY_ERROR"
       xml.id @id
       xml.message @message
     end
