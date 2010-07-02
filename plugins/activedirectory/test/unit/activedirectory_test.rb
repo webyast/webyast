@@ -61,9 +61,14 @@ class ActivedirectoryTest < ActiveSupport::TestCase
     }).returns({
 	"result"		=> false
     })
-    assert_raise ActivedirectoryError do
+    exception = nil
+    begin
       ad.save
+    rescue ActivedirectoryError => e
+      exception = e
     end
+    assert_not_nil exception, "should raise exception"
+    assert_equal "not_member",exception.id
   end
 
   def test_write_already_joined
@@ -98,9 +103,14 @@ class ActivedirectoryTest < ActiveSupport::TestCase
     }).returns({
 	"write_error"	=> true
     })
-    assert_raise ActivedirectoryError do
+    exception = nil
+    begin
       ad.save
+    rescue ActivedirectoryError => e
+      exception = e
     end
+    assert_not_nil exception, "should raise exception"
+    assert_equal "write_error",exception.id
   end
 
   # when credentials are given, there's only one write call
@@ -142,7 +152,7 @@ class ActivedirectoryTest < ActiveSupport::TestCase
       exception = e
     end
     assert_not_nil exception, "should raise exception"
-    assert_equal "not_joined",exception.id
+    assert_equal "join_error",exception.id
   end
 
 end

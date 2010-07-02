@@ -82,7 +82,7 @@ public
     if yapi_ret["join_error"]
 	raise ActivedirectoryError.new("join_error",yapi_ret["join_error"])
     elsif yapi_ret["write_error"]
-	raise ActivedirectoryError.new("write_failed","")
+	raise ActivedirectoryError.new("write_error","")
     end
     return true
   end
