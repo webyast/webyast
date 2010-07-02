@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Thu Jul  1 13:45:17 UTC 2010 - jreidinger@novell.com
+
+- don't set hwclock on xen host (bnc#614353)
+- 0.0.9
+
+-------------------------------------------------------------------
 Fri Nov 20 12:29:33 UTC 2009 - jreidinger@novell.com
 
 - fix writing ntp to hardware clock (use absolute path) (bnc#553980)
