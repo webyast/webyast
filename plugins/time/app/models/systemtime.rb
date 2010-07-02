@@ -33,16 +33,6 @@ class Systemtime < BaseModel::Base
   validates_format_of :time, :with => /^\d{2}:\d{2}:\d{2}$/, :allow_nil => true
   # Current timezone as id
   attr_accessor :timezone
-  #check if zone exists
-  validates_each :timezone, :allow_nil => true do |model,attr,zone|
-    contain = false
-    unless model.timezones.nil?
-      model.timezones.each do |z|
-        contain = true if z["entries"][zone]
-      end
-      model.errors.add attr, "Unknown timezone" unless contain
-    end
-  end
   # Utc status possible values is UTCOnly, UTC and localtime see yast2-country doc
   attr_accessor :utcstatus
   validates_inclusion_of :utcstatus, :in => [true,false], :allow_nil => true
