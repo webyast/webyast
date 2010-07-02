@@ -1,8 +1,3 @@
--------------------------------------------------------------------
-Wed Jun 30 14:05:59 CEST 2010 - mzugec@suse.cz
-
-- 
-
 #
 # spec file for package webyast-users-ws (Version 0.1)
 #
