@@ -35,7 +35,7 @@ PreReq:         lighttpd > 1.4.20-2.29.1
 %endif
 
 Requires:	lighttpd-mod_magnet, ruby-fcgi, ruby-dbus, sqlite, syslog-ng
-Requires:       rubygem-webyast-rake-tasks, rubgem-http_accept_language
+Requires:       rubygem-webyast-rake-tasks, rubygem-http_accept_language
 Requires:	yast2-dbus-server
 # gamin gives problems with lighttpd, so better conflict with it for now
 Conflicts:      gamin
