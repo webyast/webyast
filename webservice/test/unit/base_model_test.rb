@@ -130,8 +130,11 @@ COMPLEX_DATA = {
     test.arg1 = TestSerializeItself.new
     xml = test.to_xml
     assert xml
-    test2 = Test.new
-    test2.from_xml xml
+    ActiveResource::HttpMock.respond_to do |mock|
+      mock.get "test.xml",{},xml,200
+    end
+    TestClient.format = ActiveResource::Formats::XmlFormat
+    test2 = TestClient.find :one, :from => "test.xml"
     assert_equal({"test" => "lest","test2" => "lest2"}, test2.arg1)
     assert_equal "5", test2.arg2
     assert_equal COMPLEX_DATA, test2.carg
