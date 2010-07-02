@@ -1,4 +1,33 @@
 -------------------------------------------------------------------
+Wed Jun 30 15:06:57 CEST 2010 - jreidinger@novell.com
+
+- simplify permissions module
+- switched Resource to BaseModel (maintenance, better to_json performance)
+- fixed setting a custom bug reporting URL(bnc#596558)
+- changed the format of JSON output to be parsable by ActiveResource
+- test for failure of generating the session secret (bnc#614037)
+- rename session_key to key as it is key from rails-2_3
+- improve logging of unknown exception and properly report it to frontend
+- move other testsuite requires to shared helper
+- enabled deploying for other users than yastws (mvidner)
+
+-------------------------------------------------------------------
+Mon May 31 11:59:22 CEST 2010 - schubi@suse.de
+
+- enabled translation, with rubygem-http_accept_language
+
+-------------------------------------------------------------------
+Fri May 28 13:55:47 UTC 2010 - jreidinger@novell.com
+
+- removed obsolete tests
+- properly pack DBus error as backend exception
+- BackendException is abstract exception (bnc#601941)
+- add granting method to permission model
+- filter nonsuse permission only if no filter is passed
+- grantwebyastrights is not a config file
+- add service for granting and revoking permissions
+
+-------------------------------------------------------------------
 Fri May  7 11:02:07 UTC 2010 - jreidinger@novell.com
 
 - user is logged in for 2 hours (instead 1 day) (bnc#583237)
