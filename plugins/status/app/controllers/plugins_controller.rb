@@ -37,8 +37,9 @@ class PluginsController < ApplicationController
 protected
 
 def load_translations
-  Resource.all.each {|resource|
-    name = resource.controller.split("/").last
+  resources = Resource.find :all
+  resources.each {|resource|
+    name = resource.href.split("/").last
     #searching directory for translation
     model_files = Dir.glob(File.join(RAILS_ROOT, "**", "#{name}_state.rb"))
     #trying plugin directory in the git 

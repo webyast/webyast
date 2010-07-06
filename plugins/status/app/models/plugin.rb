@@ -65,8 +65,9 @@ class Plugin
   def self.find(what)
     models = []
     ret = []
-    Resource.all.each {|resource|
-      name = resource.controller.split("/").last
+    resources = Resource.find :all
+    resources.each {|resource|
+      name = resource.href.split("/").last
       models << (name+"_state").classify if name==what || what==:all
     }
     
