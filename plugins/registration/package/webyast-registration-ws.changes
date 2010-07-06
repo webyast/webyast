@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Tue Jul  6 17:31:19 CEST 2010 - jdsn@suse.de
+
+- handle backend error 2 and show error message (bnc#604777) 
+  ported from maintenance-webyast-1.0 branch
+
+-------------------------------------------------------------------
 Thu Jun 24 15:33:37 UTC 2010 - schubi@novell.com
 
 - added translations

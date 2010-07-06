@@ -187,6 +187,13 @@ class Register
 
     exitcode = @reg['calculated_exitcode'] || 199
 
+    # catch error 2 and pass error message on (bnc#604777)
+    if ( exitcode == 2  &&  !@reg['invaliddataerrormessage'].blank? ) then
+      invaliddatamessage = @reg['invaliddataerrormessage']
+    else
+      invaliddatamessage = nil
+    end
+
     status = if !@reg || @reg['error']                   then  'error'
              elsif @reg['missinginfo'] && exitcode == 4  then  'missinginfo'
              elsif @reg['success']                       then  'finished'
@@ -224,9 +231,10 @@ class Register
     xml.registration do
       xml.status status
       xml.exitcode exitcode
+      xml.invaliddataerrormessage invaliddatamessage if !invaliddatamessage.blank?
       xml.guid self.guid || ''
 
-      if @arguments && @arguments.size > 0 && exitcode == 4
+      if !@arguments.blank? && exitcode == 4
         xml.missingarguments({:type => "array"}) do
           @arguments.each do | k, v |
             if k && v.kind_of?(Hash)
@@ -241,7 +249,7 @@ class Register
         end
       end
 
-      if changedrepos && changedrepos.size > 0
+      if !changedrepos.blank?
         xml.changedrepos({:type => "array"}) do
           changedrepos.each do | k, v |
             if k && v && v.kind_of?(Hash) && v.has_key?('TASK') && v['TASK'] != "le" && v['TASK'] != "ld" #only changed repos
@@ -256,7 +264,7 @@ class Register
           end
         end
       end
-      if changedservices && changedservices.size > 0
+      if !changedservices.blank?
         xml.changedservices({:type => "array"}) do
           changedservices.each do | k, v |
             if k && v.kind_of?(Hash)
