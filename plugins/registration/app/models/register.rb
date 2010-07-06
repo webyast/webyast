@@ -188,10 +188,10 @@ class Register
     exitcode = @reg['calculated_exitcode'] || 199
 
     # catch error 2 and pass error message on (bnc#604777)
-    if ( exitcode == 2  &&  !@reg['invaliddataerrormessage'].blank? ) then
-      invaliddatamessage = @reg['invaliddataerrormessage']
+    invaliddatamessage = if ( exitcode == 2  &&  !@reg['invaliddataerrormessage'].blank? ) then
+      @reg['invaliddataerrormessage']
     else
-      invaliddatamessage = nil
+      nil
     end
 
     status = if !@reg || @reg['error']                   then  'error'
