@@ -21,18 +21,6 @@ module YastRoles
   require 'polkit'
   require 'exceptions'
 
-  private
-  def user_roles(user)
-    IO.foreach( USER_ROLES_CONFIG ) do |line|
-      line.chomp!
-      next if line[0] == "#"
-      roles = line.split(/[\s,]+/)
-      return roles if ( roles.size > 1 and roles[0] == user )
-    end if File.exists?(USER_ROLES_CONFIG)
-    
-    return []
-  end
-
   public
 
   # Shortcut for yapi permission so it is enought to write
@@ -44,7 +32,7 @@ module YastRoles
     permission_check "org.opensuse.yast.modules.yapi.#{action}"
   end
 
-  # Check if permission user can do selected action. Check also roles in which user act.
+  # Check if permission user can do selected action.
   # <b>action</b>:: name of target action
   # <b>throws</b> :: throwed exceptions:
   #                  - _NotLoggedException_ if no user is logged
@@ -61,15 +49,6 @@ module YastRoles
       if PolKit.polkit_check( action, account.login) == :yes
         Rails.logger.debug "Action: #{action} User: #{account.login} Result: ok"
         return true
-      end
-      #checking roles
-      roles = (defined?(session) && session && session['user_roles']) ? session['services'] : user_roles(account.login)
-      roles.each do |role|
-        if ( role != account.login and
-              PolKit.polkit_check( action, role) == :yes)
-          Rails.logger.debug "Action: #{action} User: #{account.login} WITH role #{role} Result: ok"
-          return true
-        end
       end
       Rails.logger.debug "Action: #{action} User: #{account.login} Result: NOT granted"
       raise NoPermissionException.new(action, account.login)
