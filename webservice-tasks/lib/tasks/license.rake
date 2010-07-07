@@ -66,6 +66,9 @@ def license_report
     elsif fn =~ /\.curl\z/
       report[:skipped] << "#{fn}: skipped by name match (test fixture)"
       next
+    elsif fn =~ /\.gitignore\z/
+      report[:skipped] << "#{fn}: skipped by name match (version system file)"
+      next
     end
 
     # file content checks
