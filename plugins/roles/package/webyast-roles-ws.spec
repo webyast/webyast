@@ -106,6 +106,7 @@ rm -rf $RPM_BUILD_ROOT
 %{plugin_dir}/config
 %{plugin_dir}/tasks
 %{plugin_dir}/doc/README_FOR_APP
+%attr(0700,%{webyast_ws_user},%{webyast_ws_user}) %dir %{webyast_ws_vardir}/roles
 %attr(0600,%{webyast_ws_user},%{webyast_ws_user}) %config %{webyast_ws_vardir}/roles
 /usr/share/PolicyKit/policy/org.opensuse.yast.roles.policy
 
