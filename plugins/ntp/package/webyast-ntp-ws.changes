@@ -1,4 +1,11 @@
 -------------------------------------------------------------------
+Thu Jul  8 10:47:55 UTC 2010 - jreidinger@novell.com
+
+- increase number of attempts for ntp server (bnc#604629)
+- expect hwclock fail on xen host (bnc#614353)
+- 0.1.7
+
+-------------------------------------------------------------------
 Thu May 20 12:54:36 UTC 2010 - jreidinger@novell.com
 
 - allow setting of ntp on s390 (bnc#607158) 

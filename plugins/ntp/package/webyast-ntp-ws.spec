@@ -22,7 +22,7 @@ Requires:	util-linux
 License:	GPL v2 only
 Group:          Productivity/Networking/Web/Utilities
 Autoreqprov:    on
-Version:        0.1.6
+Version:        0.1.7
 Release:        0
 Summary:        WebYaST - NTP service
 Source:         www.tar.bz2
