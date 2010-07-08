@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Thu Jul  8 11:42:55 UTC 2010 - jreidinger@novell.com
+
+- unify structure of json and xml output
+- 0.1.5
+
+-------------------------------------------------------------------
 Fri Apr 30 14:42:32 UTC 2010 - jreidinger@novell.com
 
 - fix spec file consistency (bnc#560061)
