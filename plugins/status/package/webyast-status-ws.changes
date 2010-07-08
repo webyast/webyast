@@ -1,4 +1,11 @@
 -------------------------------------------------------------------
+Thu Jul  8 11:25:10 UTC 2010 - jreidinger@novell.com
+
+- adapted to new Resource API (schubi) 
+- add translation support (schubi)
+- 0.1.13
+
+-------------------------------------------------------------------
 Wed Jun  2 13:59:56 UTC 2010 - schubi@novell.com
 
 - showing a link for registration in the status module (bnc#604679)" 
