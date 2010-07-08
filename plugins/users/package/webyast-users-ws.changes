@@ -1,4 +1,11 @@
 -------------------------------------------------------------------
+Thu Jul  8 11:47:04 UTC 2010 - jreidinger@novell.com
+
+- add getent possibility to get read-only list of users which can
+  login into machine
+- 0.1.15
+
+-------------------------------------------------------------------
 Wed Jun 30 14:05:09 CEST 2010 - mzugec@suse.cz
 
 - users: don't use xml parser for JSON
