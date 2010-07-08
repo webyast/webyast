@@ -1,4 +1,11 @@
 -------------------------------------------------------------------
+Thu Jul  8 14:27:42 UTC 2010 - jreidinger@novell.com
+
+- fix caching issue as only String is supported object for all
+  rails caching backends
+- 0.1.28
+
+-------------------------------------------------------------------
 Thu Jul  8 11:18:59 UTC 2010 - jreidinger@novell.com
 
 - test again correct json which can ARes parse

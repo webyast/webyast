@@ -41,19 +41,19 @@ class PatchesController < ApplicationController
 
   # check whether the cached result is still valid
   def check_cache_status
-    cache_timestamp = Rails.cache.read('patches:timestamp')
+ #cache contain string as it is only object supported by all caching backends
+    cache_timestamp = Rails.cache.read('patches:timestamp').to_i
 
     if cache_timestamp.nil?
 	# this is the first run, the cache is not initialized yet, just return
-	Rails.cache.write('patches:timestamp', Time.now)
-	return
+	Rails.cache.write('patches:timestamp', Time.now.to_i.to_s)
     # the cache expires after 5 minutes, repository metadata
     # or RPM database update invalidates the cache immediately
     # (new patches might be applicable)
-    elsif cache_timestamp < 15.minutes.ago || cache_timestamp < Patch.mtime
+    elsif cache_timestamp < 15.minutes.ago.to_i || cache_timestamp < Patch.mtime.to_i
 	logger.debug "#### Patch cache expired"
 	expire_action :action => :index, :format => params["format"]
-	Rails.cache.write('patches:timestamp', Time.now)
+	Rails.cache.write('patches:timestamp', Time.now.to_i.to_s)
     end
   end
 
