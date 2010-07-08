@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Thu Jul  8 11:52:32 UTC 2010 - jreidinger@novell.com
+
+- add license checker
+- 0.1.8
+
+-------------------------------------------------------------------
 Fri May 28 06:26:38 UTC 2010 - schubi@novell.com
 
 - added gettext tasks
