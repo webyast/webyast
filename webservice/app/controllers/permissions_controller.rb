@@ -77,22 +77,23 @@ class PermissionsController < ApplicationController
       File.mtime('/var/lib/PolicyKit-public/'),
     ]
 
-    lst.delete_if { |item| item.nil? }
+    lst.compact!
 
     lst.max.to_i
   end
 
   def cache_valid
-    cache_timestamp = Rails.cache.read(CACHE_ID)
+ #cache contain string as it is only object supported by all caching backends
+    cache_timestamp = Rails.cache.read(CACHE_ID).to_i
     current_timestamp = get_cache_timestamp
 
     if !cache_timestamp
-        Rails.cache.write(CACHE_ID, current_timestamp)
+        Rails.cache.write(CACHE_ID, current_timestamp.to_s)
     elsif cache_timestamp < current_timestamp
         Rails.logger.debug "#### Permissions cache expired"
         # expire all cached values using a regexp (for all users/filters)
         expire_fragment(%r{#{controller_path}/.*})
-        Rails.cache.write(CACHE_ID, current_timestamp)
+        Rails.cache.write(CACHE_ID, current_timestamp.to_s)
     end
   end
 
