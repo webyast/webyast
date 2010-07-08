@@ -153,6 +153,7 @@ rccollectd try-restart
 %dir %{webyast_ws_dir}/vendor/plugins
 %dir %{plugin_dir}
 %dir %{plugin_dir}/doc
+%dir %{plugin_dir}/locale
 %{plugin_dir}/app
 %{plugin_dir}/doc/README_FOR_APP
 %{plugin_dir}/doc/logs.yml
