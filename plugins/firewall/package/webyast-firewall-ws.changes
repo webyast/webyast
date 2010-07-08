@@ -1,4 +1,11 @@
 -------------------------------------------------------------------
+Thu Jul  8 10:30:28 UTC 2010 - jreidinger@novell.com
+
+- add REST API documentation (mkudlvasr)
+- remove shared test structures
+- 0.2.6
+
+-------------------------------------------------------------------
 Thu May  6 17:09:02 CEST 2010 - mkudlvasr@novell.com
 
 - add very basic documentation about firewall-ws
