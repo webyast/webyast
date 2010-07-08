@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Thu Jul  8 14:11:06 UTC 2010 - jreidinger@novell.com
+
+- include in getent user with minimal uid
+- 0.1.16
+
+-------------------------------------------------------------------
 Thu Jul  8 11:47:04 UTC 2010 - jreidinger@novell.com
 
 - add getent possibility to get read-only list of users which can

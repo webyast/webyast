@@ -33,7 +33,7 @@ class GetentPasswd < BaseModel::Base
     lines = res.split "\n"
     lines.each do |l|
       elements = l.split ":"
-      result << GetentPasswd.new(:login => elements[0], :full_name => elements[4]) if elements[2].to_i > minimum
+      result << GetentPasswd.new(:login => elements[0], :full_name => elements[4]) if elements[2].to_i >= minimum
     end
     result
   end
