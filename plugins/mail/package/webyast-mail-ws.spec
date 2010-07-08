@@ -141,6 +141,7 @@ rm -rf $RPM_BUILD_ROOT
 #var dir to store mail test status
 %dir %attr (-,%{webyast_ws_user},root) %{webyast_ws_vardir}
 %dir %attr (-,%{webyast_ws_user},root) %{webyast_ws_vardir}/%{plugin_name}
+%dir %{plugin_dir}/locale
 %{plugin_dir}/README
 %{plugin_dir}/Rakefile
 %{plugin_dir}/init.rb
