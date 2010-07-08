@@ -1,4 +1,11 @@
 -------------------------------------------------------------------
+Thu Jul  8 10:20:22 UTC 2010 - jreidinger@novell.com
+
+- add test with real activeResource
+- remove obsolete roles configuration
+- 0.1.23
+
+-------------------------------------------------------------------
 Wed Jun 30 15:06:57 CEST 2010 - jreidinger@novell.com
 
 - simplify permissions module
