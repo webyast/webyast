@@ -1,4 +1,11 @@
 -------------------------------------------------------------------
+Fri Jul  9 15:22:04 CEST 2010 - mvidner@suse.cz
+
+- Avoid Error.LimitsExceeded when installing for a long time
+  (bnc#617350)
+- 0.0.13
+
+-------------------------------------------------------------------
 Thu Jun 24 14:26:06 UTC 2010 - lslezak@suse.cz
 
 - install patches asynchronously - avoid timeouts when installing

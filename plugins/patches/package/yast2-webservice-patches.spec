@@ -12,12 +12,12 @@
 Name:           yast2-webservice-patches
 PreReq:         yast2-webservice >= 0.0.22
 # ruby-dbus is required by yast2-webservice already
-# but here we use a recent feature of DBus::Main.quit
-Requires:       ruby-dbus >= 0.2.9
+# but here we use a recent feature of on_signal
+Requires:       ruby-dbus >= 0.2.11.1
 License:	GPL v2 only
 Group:          Productivity/Networking/Web/Utilities
 Autoreqprov:    on
-Version:        0.0.12
+Version:        0.0.13
 Release:        0
 Summary:        YaST2 - Webservice - Patches
 Source:         www.tar.bz2

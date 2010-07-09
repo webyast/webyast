@@ -141,6 +141,11 @@ public
       dbusloop << DBus::SystemBus.instance
       dbusloop.run
 
+      # bnc#617350, remove signals
+      proxy.on_signal(signal.to_s)
+      proxy.on_signal("ErrorCode")
+      proxy.on_signal("Finished")
+
       packagekit_iface.SuggestDaemonQuit
     rescue DBus::Error => dbus_error
       # check if it is a known error
@@ -239,6 +244,12 @@ public
     end
 
     dbusloop.run
+
+    # bnc#617350, remove signals
+    proxy.on_signal("Package")
+    proxy.on_signal("ErrorCode")
+    proxy.on_signal("Finished")
+ 
     packagekit_iface.SuggestDaemonQuit
 
     return ok
