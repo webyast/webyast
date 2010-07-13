@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Tue Jul 13 10:58:38 UTC 2010 - jreidinger@novell.com
+
+- use common params instead manual parsing of input as it is broken
+  for rails 2.3.8 (it uses rewindle input instead of string)
+
+-------------------------------------------------------------------
 Tue Jul  6 17:31:19 CEST 2010 - jdsn@suse.de
 
 - handle backend error 2 and show error message (bnc#604777) 
