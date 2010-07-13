@@ -1,4 +1,11 @@
 -------------------------------------------------------------------
+Tue Jul 13 11:21:24 UTC 2010 - jreidinger@novell.com
+
+- reduce dependency ( provide own yast-ui so it need not install
+  yast2-gtk with all of its dependencies )
+- 0.1.25
+
+-------------------------------------------------------------------
 Thu Jul  8 14:25:21 UTC 2010 - jreidinger@novell.com
 
 - fix caching for permissions
