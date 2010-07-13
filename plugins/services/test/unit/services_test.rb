@@ -113,7 +113,7 @@ EOF
 
     s = Service.new('ntp')
     s.read_status({})
-    assert s.status == '0'
+    assert s.status == 0
   end
 
   test "check custom service status" do
@@ -122,7 +122,7 @@ EOF
 
     s = Service.new('my_app')
     s.read_status({"custom" => "true"})
-    assert s.status == '255'
+    assert s.status == 255
   end
 
   test "check service filtering" do

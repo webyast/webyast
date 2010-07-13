@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <service>
-  <name>cron</name>
-  <description></description>
-  <summary></summary>
-  <custom>false</custom>
-  <enabled>true</enabled>
-  <status type="integer">0</status>
-  <required_for_start type="array">
-  </required_for_start>
   <required_for_stop type="array">
   </required_for_stop>
+  <name>cron</name>
+  <required_for_start type="array">
+  </required_for_start>
+  <status type="integer">0</status>
+  <enabled type="boolean">true</enabled>
+  <summary></summary>
+  <description></description>
+  <custom type="boolean">false</custom>
 </service>

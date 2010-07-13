@@ -110,7 +110,7 @@ class Service < BaseModel::Base
     else
 	yapi_ret.each do |s|
 	  service	= Service.new(s["name"])
-	  service.status	= s["status"] if s.has_key?("status")
+	  service.status	= s["status"].to_i if s.has_key?("status")
 	  service.description	= s["description"] if s.has_key?("description")
 	  service.summary	= s["shortdescription"] if s.has_key?("shortdescription")
 	  service.enabled	= s["enabled"] if s.has_key?("enabled")
@@ -132,7 +132,7 @@ class Service < BaseModel::Base
     else
 	yapi_ret.each do |s|
 	  service	= Service.new(s["name"])
-	  service.status	= s["status"] if s.has_key?("status")
+	  service.status	= s["status"].to_i if s.has_key?("status")
 	  service.description	= s["description"] if s.has_key?("description")
 	  service.summary	= s["shortdescription"] if s.has_key?("shortdescription")
 	  service.custom	= true
@@ -175,7 +175,7 @@ class Service < BaseModel::Base
     if yapi_ret.nil?
         raise "Can't get service status"
     else
-	@status	= yapi_ret.first["status"] if !yapi_ret.empty? && yapi_ret.first.has_key?("status")
+	@status	= yapi_ret.first["status"].to_i if !yapi_ret.empty? && yapi_ret.first.has_key?("status")
 	@enabled= yapi_ret.first["enabled"] if !yapi_ret.empty? && yapi_ret.first.has_key?("enabled")
 	@custom	= params["custom"] == "true"
     end

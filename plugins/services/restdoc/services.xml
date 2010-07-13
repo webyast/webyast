@@ -1,77 +1,71 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <services type="array">
   <service>
+    <required_for_stop type="array">
+      <required_for_stop>esound</required_for_stop>
+    </required_for_stop>
     <name>alsasound</name>
-    <description>Loading ALSA drivers and store/restore the current setting</description>
+    <required_for_start type="array">
+    </required_for_start>
+    <enabled type="boolean">true</enabled>
     <summary>Set up ALSA sound system</summary>
-    <custom>false</custom>
-    <enabled>true</enabled>
-    <status type="integer"></status>
-    <required_for_start type="array">
-    </required_for_start>
-    <required_for_stop type="array">
-      <service>esound</service>
-    </required_for_stop>
+    <description>Loading ALSA drivers and store/restore the current setting</description>
+    <custom type="boolean">false</custom>
   </service>
   <service>
+    <required_for_stop type="array">
+    </required_for_stop>
     <name>esound</name>
-    <description>Starts esound server to allow remote access to sound card. To use esound locally, you do not need to start this server on boot. You should edit server settings before starting it via sysconfig editor: Network/Sound/Esound</description>
+    <required_for_start type="array">
+      <required_for_start>alsasound</required_for_start>
+    </required_for_start>
+    <enabled type="boolean">false</enabled>
     <summary>Sound daemon with network support</summary>
-    <custom>false</custom>
-    <enabled>false</enabled>
-    <status type="integer"></status>
-    <required_for_start type="array">
-      <service>alsasound</service>
-    </required_for_start>
-    <required_for_stop type="array">
-    </required_for_stop>
+    <description>Starts esound server to allow remote access to sound card. To use esound locally, you do not need to start this server on boot. You should edit server settings before starting it via sysconfig editor: Network/Sound/Esound</description>
+    <custom type="boolean">false</custom>
   </service>
   <service>
+    <required_for_stop type="array">
+    </required_for_stop>
     <name>nfs</name>
-    <description>All necessary services for NFS clients</description>
+    <required_for_start type="array">
+    </required_for_start>
+    <enabled type="boolean">true</enabled>
     <summary>NFS client services </summary>
-    <custom>false</custom>
-    <enabled>true</enabled>
-    <status type="integer"></status>
-    <required_for_start type="array">
-    </required_for_start>
-    <required_for_stop type="array">
-    </required_for_stop>
+    <description>All necessary services for NFS clients</description>
+    <custom type="boolean">false</custom>
   </service>
   <service>
+    <required_for_stop type="array">
+    </required_for_stop>
     <name>collectd</name>
-    <description>Start Collectd to collect system statistics</description>
+    <required_for_start type="array">
+    </required_for_start>
+    <enabled type="boolean">true</enabled>
     <summary>Collectd daemon collecting system statistics</summary>
-    <custom>false</custom>
-    <enabled>true</enabled>
-    <status type="integer"></status>
-    <required_for_start type="array">
-    </required_for_start>
-    <required_for_stop type="array">
-    </required_for_stop>
+    <description>Start Collectd to collect system statistics</description>
+    <custom type="boolean">false</custom>
   </service>
   <service>
+    <required_for_stop type="array">
+    </required_for_stop>
     <name>database</name>
-    <description>Long description of my database</description>
-    <summary>Label for my database</summary>
-    <custom>true</custom>
-    <enabled>true</enabled>
-    <status type="integer"></status>
     <required_for_start type="array">
     </required_for_start>
-    <required_for_stop type="array">
-    </required_for_stop>
+    <enabled type="boolean">true</enabled>
+    <summary>Label for my database</summary>
+    <description>Long description of my database</description>
+    <custom type="boolean">true</custom>
   </service>
   <service>
-    <name>ntp</name>
-    <description>Start network time protocol daemon (NTPD).</description>
-    <summary>Network time protocol daemon (ntpd)</summary>
-    <custom>false</custom>
-    <enabled>true</enabled>
-    <status type="integer"></status>
-    <required_for_start type="array">
-    </required_for_start>
     <required_for_stop type="array">
     </required_for_stop>
+    <name>ntp</name>
+    <required_for_start type="array">
+    </required_for_start>
+    <enabled type="boolean">true</enabled>
+    <summary>Network time protocol daemon (ntpd)</summary>
+    <description>Start network time protocol daemon (NTPD).</description>
+    <custom type="boolean">false</custom>
   </service>
 </services>
