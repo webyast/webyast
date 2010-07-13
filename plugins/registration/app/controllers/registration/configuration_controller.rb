@@ -29,30 +29,21 @@ class Registration::ConfigurationController < ApplicationController
   def update
     permission_check("org.opensuse.yast.modules.ysr.setregistrationconfig")
 
-    #request.env.each do |k,v |  puts "==#{k}==  =>  ==#{v.inspect}==" end
-
-    if request.env["rack.input"].size>0
-      req = Hash.from_xml request.env["rack.input"].read
-    else
-      req = Hash.new
-    end
-
     newurl = nil
     newca  = nil
 
     # read registration server url
-    if req['registrationconfig'] &&
-       req['registrationconfig']['server'] &&
-       req['registrationconfig']['server']['url']
-       newurl = req['registrationconfig']['server']['url'].strip
+    if params['registrationconfig'] &&
+       params['registrationconfig']['server'] &&
+       params['registrationconfig']['server']['url']
+       newurl = params['registrationconfig']['server']['url'].strip
     end
 
     # read ca certificate file
-    if req['registrationconfig'] &&
-       req['registrationconfig']['certificate'] &&
-       req['registrationconfig']['certificate']['data']
-       newca = req['registrationconfig']['certificate']['data'].strip + "\n"
-
+    if params['registrationconfig'] &&
+       params['registrationconfig']['certificate'] &&
+       params['registrationconfig']['certificate']['data']
+       newca = params['registrationconfig']['certificate']['data'].strip + "\n"
     end
 
     @register = Register.new
