@@ -109,6 +109,14 @@ class PatchesController < ApplicationController
   def create
     permission_check "org.opensuse.yast.system.patches.install"
     @patch_update = Patch.find(params[:patches][:resolvable_id].to_s)
+
+    #Patch for Bug 560701 - [build 24.1] webYaST appears to crash after installing webclient patch
+    #Packagekit returns empty string if the patch is allready installed.
+    if @patch_update.is_a?(Array) && @patch_update.empty?
+       logger.error "Patch is allready installed or not found #{@patch_update.inspect}"
+       render ErrorResult.error(404, 1, "Patch is not required.") and return
+    end
+
     if @patch_update.blank?
       logger.error "Patch: #{params[:patches][:resolvable_id]} not found."
       render ErrorResult.error(404, 1, "Patch: #{params[:patches][:resolvable_id]} not found.") and return
