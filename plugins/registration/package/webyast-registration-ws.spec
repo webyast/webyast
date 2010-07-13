@@ -18,7 +18,7 @@ PreReq:         yast2-webservice, yast2-registration, rubygem-gettext_rails
 License:        GPL v2 only
 Group:          Productivity/Networking/Web/Utilities
 Autoreqprov:    on
-Version:        0.1.9
+Version:        0.1.10
 Release:        0
 Summary:        WebYaST - Registration service
 Source:         www.tar.bz2
