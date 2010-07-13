@@ -45,7 +45,7 @@ PreReq:         rubygem-rpam, rubygem-polkit, rubygem-gettext_rails
 License:	LGPL v2.1 only
 Group:          Productivity/Networking/Web/Utilities
 Autoreqprov:    on
-Version:        0.1.24
+Version:        0.1.25
 Release:        0
 Summary:        WebYaST - base components for rest service
 Source:         www.tar.bz2
@@ -76,6 +76,10 @@ BuildRequires:	rubygem-test-unit rubygem-mocha
 BuildRequires:  rubygem-test-unit
 BuildRequires:  rubygem-rcov >= 0.9.3.2
 %endif
+
+# we do not necessarily need any UI in case of WebYaST
+Provides:       yast2_ui
+Provides:       yast2_ui_pkg
 
 # rpmlint warns about file duplicates, this should take care but
 # doesn't build (?!)
