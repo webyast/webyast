@@ -69,12 +69,26 @@ public
     # - if not member, ask for credentials (exception), otherwise write settings
     elsif @administrator.nil?
 	ret	= check_membership(@domain)
+	Rails.cache.write('activedirectory:domain', @domain)
+	Rails.cache.write('activedirectory:ads', ret["ads"]) if ret["ads"]
+	Rails.cache.write('activedirectory:realm', ret["realm"]) if ret["realm"]
+	Rails.cache.write('activedirectory:workgroup', ret["workgroup"]) if ret["workgroup"]
 	raise ActivedirectoryError.new("not_member","") unless ret["result"]
     else
 	# join args are present
 	params["administrator"]	= [ "s", @administrator]
 	params["password"]	= [ "s", @password ] unless @password.nil?
 	params["machine"]	= [ "s", @machine ] unless @machine.nil?
+    end
+
+    domain_cache	= Rails.cache.read('activedirectory:domain')
+    if (domain_cache == @domain)
+	ads		= Rails.cache.read('activedirectory:ads')
+	realm		= Rails.cache.read('activedirectory:realm')
+	workgroup	= Rails.cache.read('activedirectory:workgroup')
+	params["ads"]	= [ "s", ads ] unless ads.empty?
+	params["realm"]	= [ "s", realm ] unless realm.empty?
+	params["workgroup"]	= [ "s", workgroup ] unless workgroup.empty?
     end
 
     yapi_ret = YastService.Call("YaPI::ActiveDirectory::Write", params)
@@ -84,6 +98,12 @@ public
     elsif yapi_ret["write_error"]
 	raise ActivedirectoryError.new("write_error","")
     end
+
+    Rails.cache.write('activedirectory:domain', "")
+    Rails.cache.write('activedirectory:ads', "")
+    Rails.cache.write('activedirectory:realm', "")
+    Rails.cache.write('activedirectory:workgroup', "")
+
     return true
   end
 

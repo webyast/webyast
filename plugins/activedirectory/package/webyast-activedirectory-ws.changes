@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Wed Jul 14 10:57:19 CEST 2010 - jsuchome@suse.cz
+
+- cache AD values (server, workgroup) obtained from network 
+- require bind-utils
+
+-------------------------------------------------------------------
 Fri Jul  2 12:35:10 CEST 2010 - jsuchome@suse.cz
 
 - check specific exceptions in tests

@@ -53,10 +53,10 @@ sub Read {
 	}
 
 	$ret->{"result"}	= YaST::YCP::Boolean (SambaNetJoin->Test ($domain));
-# TODO return the parts that could be omited later, like AD server, workgroup realm?
+	# return the parts that could be omited later, like AD server, workgroup, realm?
 	$ret->{"ads"}		= SambaAD->ADS ();
 	$ret->{"workgroup"}	= $domain;
-	$ret->{"realm"}		= SambaAD->Realm ();
+	$ret->{"realm"}         = SambaAD->Realm ();
 	return $ret;
     }
 
@@ -91,7 +91,7 @@ sub Write {
     # try to join AD domain when credentials are present
     if ($args->{"administrator"}) {
 	$ret	= $self->Join ($args);
-	if (%{$ret}) {
+	if ($ret->{"join_error"}) {
 	    y2warning ("join failed, ending write");
 	    return $ret;
 	}
@@ -99,17 +99,34 @@ sub Write {
 
     my $domain	= $args->{"domain"} || Samba->GetWorkgroupOrRealm ();
 
-# FIXME these lines should not be needed, filled by some cache...
-    SambaAD->ReadADS ($domain);
-    if (SambaAD->ADS ()) {
-	$domain = SambaAD->GetWorkgroup ($domain);
+    # after join, AD data are already read
+    unless ($args->{"administrator"}) {
+    
+	if ($args->{"ads"}) {
+	    SambaAD->SetADS ($args->{"ads"});
+	}
+	else {
+	    SambaAD->ReadADS ($domain);
+	}
+
+	# work group = "Pre-Win2k Domain"
+	if ($args->{"workgroup"}) {
+	    $domain	= $args->{"workgroup"};
+	}
+	else {
+	    $domain = SambaAD->GetWorkgroup ($domain);
+	}
 	Samba->SetWorkgroup ($domain);
+
+	# FIXME can't set realm from outside...
 	SambaAD->ReadRealm ();
     }
 
     Samba->SetWinbind ($args->{"winbind"} || 0);
     Samba->SetMkHomeDir ($args->{"mkhomedir"} || 0);
+
     $ret->{"write_error"}	= 1 unless Samba->Write (0);
+
     return $ret;
 }
 
@@ -125,12 +142,23 @@ sub Join {
 
     my $domain	= $args->{"domain"} || Samba->GetWorkgroupOrRealm ();
 
-# FIXME these lines should not be needed, filled by some cache...
-    SambaAD->ReadADS ($domain);
-    if (SambaAD->ADS ()) {
-	$domain = SambaAD->GetWorkgroup ($domain);
-	SambaAD->ReadRealm ();
+
+    if ($args->{"ads"}) {
+	SambaAD->SetADS ($args->{"ads"});
     }
+    else {
+	SambaAD->ReadADS ($domain);
+    }
+
+    # work group = "Pre-Win2k Domain"
+    if ($args->{"workgroup"}) {
+	$domain	= $args->{"workgroup"};
+    }
+    else {
+	$domain = SambaAD->GetWorkgroup ($domain);
+    }
+    Samba->SetWorkgroup ($domain);
+    SambaAD->ReadRealm ();
 
     my $result = SambaNetJoin->Join ($domain, "member", $args->{"administrator"}, $args->{"password"} || "", $args->{"machine"});
     $ret->{"join_error"}	= $result if $result;
