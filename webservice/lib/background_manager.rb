@@ -23,6 +23,7 @@ class BackgroundManager
 
   include Singleton
 
+  attr_reader :running, :done
   # instance variables - they keep the information between requests
 
   def initialize

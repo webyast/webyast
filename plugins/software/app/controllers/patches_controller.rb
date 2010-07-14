@@ -57,6 +57,37 @@ class PatchesController < ApplicationController
     end
   end
 
+  def collect_done_patches
+    done = []
+
+    BackgroundManager.instance.done.each do |k,v|
+      if k.match(/^packagekit_install_(.*)/)
+        patch_id = $1
+        if BackgroundManager.instance.process_finished? k
+          Rails.logger.debug "Patch installation request #{patch_id} is done"
+          ret = BackgroundManager.instance.get_value k
+
+          # check for exception
+          if ret.is_a? StandardError
+            raise ret
+          end
+
+          # e.g.: 'suse-build-key;1.0-907.30;noarch;@System'
+          attrs = patch_id.split(';')
+
+          done << Patch.new(:resolvable_id => attrs[1],
+                           :name => attrs[0],
+                           :arch => attrs[2],
+                           :repo => attrs[3],
+                           :installing => false,
+                           :installed => ret)
+        end
+      end
+    end
+
+    return done
+  end
+
   public
 
   # GET /patch_updates
@@ -110,6 +141,10 @@ class PatchesController < ApplicationController
     permission_check "org.opensuse.yast.system.patches.install"
     @patch_update = Patch.find(params[:patches][:resolvable_id].to_s)
 
+#    bgr = params['background']
+#    bgr = true
+#    Rails.logger.info "Installing patch #{params[:patches][:resolvable_id]} in background" if bgr
+
     #Patch for Bug 560701 - [build 24.1] webYaST appears to crash after installing webclient patch
     #Packagekit returns empty string if the patch is allready installed.
     if @patch_update.is_a?(Array) && @patch_update.empty?
@@ -121,9 +156,22 @@ class PatchesController < ApplicationController
       logger.error "Patch: #{params[:patches][:resolvable_id]} not found."
       render ErrorResult.error(404, 1, "Patch: #{params[:patches][:resolvable_id]} not found.") and return
     end
-    unless @patch_update.install 
-      render ErrorResult.error(404, 2, "packagekit error") and return
+
+    res = @patch_update.install(true)
+
+    if (res.is_a? BackgroundStatus)
+      logger.debug "received background status: #{res.inspect}"
+      respond_to do |format|
+        format.xml { render  :xml => res.to_xml( :root => "status", :dasherize => false ) }
+        format.json { render :json => res.to_json( :root => "status", :dasherize => false ) }
+      end
+
+      return
     end
+
+#    unless error
+#      render ErrorResult.error(404, 2, "packagekit error") and return
+#    end
     render :show
   end
 

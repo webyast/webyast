@@ -185,7 +185,53 @@ class PackageKit
   # signal: signal to intercept (usually "Package") (optional)
   # block: block to run on signal (optional)
   #
-  def self.install(pk_id, signal_list = nil, &block)
+  def self.install(pk_id, background = false, signal_list = nil, &block)
+		Rails.logger.debug "Installing #{pk_id}, background: #{background.inspect}"
+
+    # background process doesn't work correctly if class reloading is active
+    # (static class members are lost between requests)
+		bm = BackgroundManager.instance
+    if background && !bm.background_enabled?
+      Rails.logger.info "Class reloading is active, cannot use background thread (set config.cache_classes = true)"
+      background = false
+    end
+    Rails.logger.debug "Background: #{background.inspect}"
+
+    if background
+      proc_id = bgid(pk_id)
+
+      running = bm.get_progress proc_id
+      if running
+        Rails.logger.debug "Request #{proc_id} is already running: #{running.inspect}"
+        return running
+      end
+
+      bm.add_process proc_id
+
+      Rails.logger.info "Starting background thread for installing patches..."
+      # run the patch query in a separate thread
+      Thread.new do
+        @@package_kit_mutex.synchronize do
+          res = subprocess_install pk_id
+
+          # check for exception
+          unless res.is_a? StandardError
+            Rails.logger.info "*** Patch install thread: Result: #{res.inspect}"
+          else
+            Rails.logger.debug "*** Patch install thread: Exception raised: #{res.inspect}"
+          end
+          bm.finish_process(proc_id, res)
+        end
+      end
+
+      return bm.get_progress(proc_id)
+    else
+      return do_install(pk_id,signal_list,&block)
+    end
+	end
+
+private
+	def self.do_install(pk_id, signal_list = nil, &block)
     ok = true
     transaction_iface, packagekit_iface = self.connect
 
@@ -229,4 +275,7 @@ class PackageKit
     return ok
   end
 
+  def self.bgid(what)
+    "packagekit_install_#{what}"
+  end
 end

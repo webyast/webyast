@@ -45,11 +45,11 @@ class Patch < Resolvable
   end
 
   # install
-  def install
+  def install(background=false)
     @messages=[]
     update_id = "#{self.name};#{self.resolvable_id};#{self.arch};#{self.repo}"
     Rails.logger.error "Install Update: #{update_id}"
-    PackageKit.install(update_id, ['RequireRestart','Message']) { |type, details|
+    PackageKit.install(update_id, background, ['RequireRestart','Message']) { |type, details|
       Rails.logger.error "Message signal received: #{type}, #{details}"
       @messages << {:kind => type, :details => details}
     }
