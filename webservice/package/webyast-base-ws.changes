@@ -1,4 +1,11 @@
 -------------------------------------------------------------------
+Thu Jul 15 14:12:29 UTC 2010 - jreidinger@novell.com
+
+- reingrate changes from 1.0 maintenance
+- enable again rpam as it provide speed up for LDAP and AD
+- 0.1.26
+
+-------------------------------------------------------------------
 Tue Jul 13 11:21:24 UTC 2010 - jreidinger@novell.com
 
 - reduce dependency ( provide own yast-ui so it need not install
