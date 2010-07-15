@@ -32,6 +32,9 @@ BuildRequires:	rubygem-test-unit rubygem-mocha
 Requires:	samba-winbind samba-client pam_mount yast2-kerberos-client krb5
 # for dig
 Requires:	bind-utils
+# reasonable PATH set (bnc#617442)
+Requires:       yast2-dbus-server >= 2.17.3
+
 
 # ActiveDirectory.pm is using yast2-samba-client API
 # specific versin for SambaAD::SetRealm

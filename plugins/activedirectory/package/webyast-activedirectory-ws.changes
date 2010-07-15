@@ -1,8 +1,9 @@
 -------------------------------------------------------------------
-Thu Jul 15 12:47:59 CEST 2010 - jsuchome@suse.cz
+Thu Jul 15 15:04:30 CEST 2010 - jsuchome@suse.cz
 
 - use SambaAD->SetRealm with known realm
 - require new yast2-samba-client
+- require yast2-dbus-server that sets the PATH (bnc#617442)
 - 0.2.1
 
 -------------------------------------------------------------------
