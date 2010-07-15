@@ -32,8 +32,7 @@ class MailControllerTest < ActionController::TestCase
     # http://railsforum.com/viewtopic.php?id=1719
     @request.session[:account_id] = 1 # defined in fixtures
 
-    @model = Mail.instance
-    @model.stubs(:read).returns(true)
+    @model = Mail.new
   end
   
   test "check 'show' result" do

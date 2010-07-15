@@ -31,12 +31,11 @@ class MailController < ApplicationController
   def show
     yapi_perm_check "mailsettings.read"
 
-    @mail = Mail.instance
-    @mail.read
+    mail = Mail.find
 
     respond_to do |format|
-      format.xml  { render :xml => @mail.to_xml(:root => "mail", :dasherize => false, :indent=>2), :location => "none" }
-      format.json { render :json => @mail.to_json, :location => "none" }
+      format.xml  { render :xml => mail.to_xml(:root => "mail", :dasherize => false, :indent=>2), :location => "none" }
+      format.json { render :json => mail.to_json, :location => "none" }
     end
   end
    
@@ -46,12 +45,12 @@ class MailController < ApplicationController
   def update
     yapi_perm_check "mailsettings.write"
 
-    @mail = Mail.instance
-    @mail.read
+    mail = Mail.find
     if params.has_key? "mail"
-      @mail.save(params["mail"])
+      mail.load params["mail"]
+      mail.save
       if params["mail"].has_key?("test_mail_address")
-	@mail.send_test_mail(params["mail"]["test_mail_address"])
+      	Mail.send_test_mail(params["mail"]["test_mail_address"])
       end
     else
       logger.warn "mail hash missing in request"

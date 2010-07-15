@@ -26,7 +26,7 @@ require 'yast_service'
 # Proviceds access local mail settings (SMTP server to use)
 # Uses YaPI::MailSettings for read and write operations,
 # YaPI::SERVICES, for reloading postfix service.
-class Mail
+class Mail < BaseModel::Base
 
   attr_accessor :smtp_server
   attr_accessor :user
@@ -35,37 +35,23 @@ class Mail
 
   TEST_MAIL_FILE = File.join(Paths::VAR,"mail","test_sent")
 
-  include Singleton
-
-  def initialize
-  end
-
   # read the settings from system
-  def read
+  def self.find
     yapi_ret = YastService.Call("YaPI::MailSettings::Read")
     raise MailError.new("Cannot read from YaPI backend") if yapi_ret.nil?
-
-    @smtp_server	= yapi_ret["smtp_server"]
-    @user		= yapi_ret["user"]
-    @password		= yapi_ret["password"]
-    @transport_layer_security	= "no"
-    @transport_layer_security	= yapi_ret["TLS"] if yapi_ret.has_key? "TLS"
+    yapi_ret["transport_layer_security"] = yapi_ret.delete("TLS") || "no"
+    Mail.new yapi_ret
   end
 
 
   # Save new mail settings
-  def save(settings)
-
-    # fill settings hash if it misses some keys
-    ["transport_layer_security", "smtp_server", "user", "password"].each do |key|
-	settings[key] = "" if (!settings.has_key? key) || settings[key].nil?
-    end
+  def update
 
     parameters	= {
-	"smtp_server"	=> [ "s", settings["smtp_server"]],
-	"user"		=> [ "s", settings["user"]],
-	"password"	=> [ "s", settings["password"]],
-	"TLS"		=> [ "s", settings["transport_layer_security"]]
+	"smtp_server"	=> [ "s", smtp_server ||""],
+	"user"		=> [ "s", user ||""],
+	"password"	=> [ "s", password ||""],
+	"TLS"		=> [ "s", transport_layer_security ||""]
     }
 
     yapi_ret = YastService.Call("YaPI::MailSettings::Write", parameters)
@@ -74,7 +60,7 @@ class Mail
     true
   end
 
-  def send_test_mail(to)
+  def self.send_test_mail(to)
     return if to.nil? || to.empty?
 
     Rails.logger.debug "sending test mail to #{to}..."
@@ -94,24 +80,6 @@ class Mail
       Rails.logger.error "writing #{TEST_MAIL_FILE} file failed - wrong permissions?"
     end
   end
-
-  def to_xml( options = {} )
-    xml = options[:builder] ||= Builder::XmlMarkup.new(options)
-    xml.instruct! unless options[:skip_instruct]
-    
-    xml.mail do
-      xml.smtp_server smtp_server
-      xml.user user
-      xml.password password
-      xml.transport_layer_security transport_layer_security
-    end  
-  end
-
-  def to_json( options = {} )
-    hash = Hash.from_xml(to_xml())
-    return hash.to_json
-  end
-
 end
 
 require 'exceptions'

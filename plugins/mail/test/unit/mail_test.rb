@@ -26,17 +26,16 @@ require 'mail'
 class MailTest < ActiveSupport::TestCase
 
   def setup    
-    @model = Mail.instance
     YastService.stubs(:Call).with('YaPI::MailSettings::Read').returns({ })
-    @model.read
+    @model = Mail.find
   end
 
   def test_read_notls
     YastService.stubs(:Call).with('YaPI::MailSettings::Read').returns({
 	"smtp_server" => "smtp.domain.com"
     })
-    ret = @model.read
-    assert @model.transport_layer_security == "no"
+    ret = Mail.find
+    assert ret.transport_layer_security == "no"
   end
 
   def test_read
@@ -44,9 +43,9 @@ class MailTest < ActiveSupport::TestCase
 	"smtp_server"	=> "smtp.domain.com",
 	"TLS"		=> "must"
     })
-    ret = @model.read
-    assert @model.smtp_server == "smtp.domain.com"
-    assert @model.transport_layer_security == "must"
+    ret = Mail.find
+    assert ret.smtp_server == "smtp.domain.com"
+    assert ret.transport_layer_security == "must"
   end
 
 
@@ -57,7 +56,7 @@ class MailTest < ActiveSupport::TestCase
 	"user"		=> [ "s", ""],
 	"password"	=> [ "s", ""]
     }).returns("")
-    ret = @model.save({
+    ret = Mail.new({
 	"smtp_server"	=> "smtp.newdomain.com",
 	"user"		=> "",
 	"password"	=> "",
