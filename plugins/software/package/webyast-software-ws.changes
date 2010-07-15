@@ -1,4 +1,11 @@
 -------------------------------------------------------------------
+Thu Jul 15 14:09:21 UTC 2010 - jreidinger@novell.com
+
+- install patches in background to avoid timeout (lslezak, adapted
+  from apptoolkit 1.0 patch)
+- 0.1.29
+
+-------------------------------------------------------------------
 Thu Jul  8 14:27:42 UTC 2010 - jreidinger@novell.com
 
 - fix caching issue as only String is supported object for all
