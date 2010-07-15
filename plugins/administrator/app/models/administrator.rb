@@ -89,7 +89,7 @@ class Administrator
 
   def to_json( options = {} )
     hash = Hash.from_xml(to_xml())
-    return hash.to_json
+    return hash["administrator"].to_json
   end
 
 end
