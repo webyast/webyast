@@ -32,13 +32,12 @@ class AdministratorControllerTest < ActionController::TestCase
     # http://railsforum.com/viewtopic.php?id=1719
     @request.session[:account_id] = 1 # defined in fixtures
 
-    @model = Administrator.instance
-    @model.stubs(:read_aliases).returns("")
+    Administrator.stubs(:find).returns Administrator.new({:aliases => ""})
   end
   
   test "check 'show' result" do
 
-    ret = get :show
+    ret = get :show, :format => "xml"
     # success (200 OK)
     assert_response :success
 

@@ -30,12 +30,11 @@ class AdministratorController < ApplicationController
   def show
     yapi_perm_check "administrator.read"
 
-    @admin = Administrator.instance
-    @admin.read_aliases
+    admin = Administrator.find
 
     respond_to do |format|
-      format.xml  { render :xml => @admin.to_xml(:root => "administrator", :indent=>2), :location => "none" }
-      format.json { render :json => @admin.to_json, :location => "none" }
+      format.xml  { render :xml => admin.to_xml(:root => "administrator", :indent=>2), :location => "none" }
+      format.json { render :json => admin.to_json, :location => "none" }
     end
   end
    
@@ -46,15 +45,8 @@ class AdministratorController < ApplicationController
     yapi_perm_check "administrator.write"
 	
     data = params["administrator"]
-    @admin = Administrator.instance
-    @admin.read_aliases
-
-    if data.has_key?(:password) && !data[:password].nil? && !data[:password].empty?
-      @admin.save_password(data[:password])
-    end
-
-    if data.has_key?(:aliases) && !data[:aliases].nil?
-      @admin.save_aliases(data[:aliases])
+    if data
+      Administrator.new(data).save
     end
     show
   end
