@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Thu Jul 15 13:40:49 UTC 2010 - jreidinger@novell.com
+
+- use BaseModel
+- 0.1.5
+
+-------------------------------------------------------------------
 Fri Apr 30 13:22:30 UTC 2010 - jreidinger@novell.com
 
 - fix spec file consistency (bnc#560061)
