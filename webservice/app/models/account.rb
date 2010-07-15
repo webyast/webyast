@@ -56,12 +56,13 @@ class Account < ActiveRecord::Base
   # Authenticates a user by their login name and unencrypted password.  Returns the user or nil.
   def self.authenticate(login, passwd)
      granted = false
-     #begin
-       # try rPAM first (do not work for yastws user see bnc#582238)
-       #granted = Rpam.authpam(login, passwd)
-     #rescue RuntimeError, SecurityError
+     begin
+       # try rPAM first (do not work for local users with yastws account see bnc#582238)
+       granted = Rpam.authpam(login, passwd)
+     rescue RuntimeError, SecurityError => e
+       Rails.logger.info "rpam auth failed with #{e.inspect}"
        # only catch authpam() exceptions
-     #end
+     end
      # then chkpwd second, slower than pam
      granted = unix2_chkpwd(login, passwd) unless granted  #slowly but need no more additional PAM rights
      return nil unless granted
