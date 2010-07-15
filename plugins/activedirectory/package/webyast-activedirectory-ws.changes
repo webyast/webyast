@@ -1,4 +1,11 @@
 -------------------------------------------------------------------
+Thu Jul 15 12:47:59 CEST 2010 - jsuchome@suse.cz
+
+- use SambaAD->SetRealm with known realm
+- require new yast2-samba-client
+- 0.2.1
+
+-------------------------------------------------------------------
 Wed Jul 14 10:57:19 CEST 2010 - jsuchome@suse.cz
 
 - cache AD values (server, workgroup) obtained from network 

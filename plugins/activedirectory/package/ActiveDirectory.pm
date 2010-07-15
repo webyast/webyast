@@ -118,8 +118,12 @@ sub Write {
 	}
 	Samba->SetWorkgroup ($domain);
 
-	# FIXME can't set realm from outside...
-	SambaAD->ReadRealm ();
+	if ($args->{"realm"}) {
+	    SambaAD->SetRealm ($args->{"realm"});
+	}
+	else {
+	    SambaAD->ReadRealm ();
+	}
     }
 
     Samba->SetWinbind ($args->{"winbind"} || 0);
@@ -158,7 +162,13 @@ sub Join {
 	$domain = SambaAD->GetWorkgroup ($domain);
     }
     Samba->SetWorkgroup ($domain);
-    SambaAD->ReadRealm ();
+
+    if ($args->{"realm"}) {
+	SambaAD->SetRealm ($args->{"realm"});
+    }
+    else {
+	SambaAD->ReadRealm ();
+    }
 
     my $result = SambaNetJoin->Join ($domain, "member", $args->{"administrator"}, $args->{"password"} || "", $args->{"machine"});
     $ret->{"join_error"}	= $result if $result;

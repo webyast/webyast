@@ -15,7 +15,7 @@ PreReq:         webyast-base-ws
 License:	GPL v2 only
 Group:          Productivity/Networking/Web/Utilities
 Autoreqprov:    on
-Version:        0.2.0
+Version:        0.2.1
 Release:        0
 Summary:        WebYaST - service for configuration of Active Directory client
 Source:         www.tar.bz2
@@ -28,10 +28,14 @@ BuildRequires:  rubygem-yast2-webservice-tasks rubygem-restility
 BuildRequires:  webyast-base-ws-testsuite
 BuildRequires:	rubygem-test-unit rubygem-mocha
 
-# ActiveDirectory.pm is using yast2-samba-client API
-Requires:	yast2-samba-client samba-winbind samba-client pam_mount krb5-client
+# for enabling winbind and Kerberos configuration
+Requires:	samba-winbind samba-client pam_mount yast2-kerberos-client krb5
 # for dig
 Requires:	bind-utils
+
+# ActiveDirectory.pm is using yast2-samba-client API
+# specific versin for SambaAD::SetRealm
+Requires:	yast2-samba-client >= 2.17.18
 
 #
 %define plugin_name activedirectory
