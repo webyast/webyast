@@ -15,7 +15,7 @@ PreReq:         webyast-base-ws
 License:	GPL v2 only
 Group:          Productivity/Networking/Web/Utilities
 Autoreqprov:    on
-Version:        0.1.0
+Version:        0.2.0
 Release:        0
 Summary:        WebYaST - service for configuration of LDAP client
 Source:         www.tar.bz2
@@ -29,7 +29,9 @@ BuildRequires:  webyast-base-ws-testsuite
 BuildRequires:	rubygem-test-unit rubygem-mocha
 
 # LDAP.pm is using yast2-ldap-client API
-Requires:	yast2-ldap-client
+Requires:	yast2-ldap-client pam_ldap nss_ldap
+# reasonable PATH set (bnc#617442) 
+Requires:       yast2-dbus-server >= 2.17.3
 
 #
 %define plugin_name ldap

@@ -1,4 +1,11 @@
 -------------------------------------------------------------------
+Thu Jul 15 15:02:11 CEST 2010 - jsuchome@suse.cz
+
+- require pam_ldap, nss_ldap
+- require yast2-dbus-server that sets the PATH (bnc#617442)
+- 0.2.0
+
+-------------------------------------------------------------------
 Wed Jun 23 13:47:19 CEST 2010 - jsuchome@suse.cz
 
 - initial version 
