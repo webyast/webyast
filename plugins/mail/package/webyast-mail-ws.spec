@@ -17,7 +17,7 @@ PreReq:         yast2-webservice rubygem-gettext_rails
 License:	GPL v2 only
 Group:          Productivity/Networking/Web/Utilities
 Autoreqprov:    on
-Version:        0.1.17
+Version:        0.1.18
 Release:        0
 Summary:        WebYaST - system mail settings service
 Source:         www.tar.bz2

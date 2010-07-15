@@ -32,7 +32,7 @@ class MailControllerTest < ActionController::TestCase
     # http://railsforum.com/viewtopic.php?id=1719
     @request.session[:account_id] = 1 # defined in fixtures
 
-    @model = Mail.new
+    Mail.stubs(:find).returns Mail.new({:smtp_server => ""})
   end
   
   test "check 'show' result" do
@@ -49,9 +49,9 @@ class MailControllerTest < ActionController::TestCase
   end
 
   test "put success" do
-    @model.stubs(:save).with({'smtp_server' => "newserver"}).returns(true)
+    Mail.any_instance.stubs(:save).returns(true).once
 
-    ret = put :update, :mail => {:smtp_server => "newserver"}
+    ret = put :update, :mail => {:smtp_server => "newserver"}, :format => "xml"
     ret_hash = Hash.from_xml(ret.body)
 
     assert_response :success
