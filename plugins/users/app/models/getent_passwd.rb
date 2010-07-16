@@ -35,6 +35,14 @@ class GetentPasswd < BaseModel::Base
       elements = l.split ":"
       result << GetentPasswd.new(:login => elements[0], :full_name => elements[4]) if elements[2].to_i >= minimum
     end
+    active_directory_users = `which wbinfo >/dev/null && wbinfo -u --domain .`
+    if $?
+      lines = active_directory_users.split "\n"
+      lines.each do |l|
+        l.chomp!
+        result << GetentPasswd.new(:login => l, :full_name => l)
+      end
+    end
     result
   end
 end
