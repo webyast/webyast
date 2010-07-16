@@ -34,10 +34,10 @@ class Mail::StateController < ApplicationController
     logger.warn "Confirmation of testmail"
     File.delete Mail::TEST_MAIL_FILE
 
-    @mail = Mail.instance
+    mail = Mail.find
     respond_to do |format|
-      format.xml  { render :xml => @mail.to_xml(:root => "mail", :dasherize => false, :indent=>2), :location => "none" }
-      format.json { render :json => @mail.to_json, :location => "none" }
+      format.xml  { render :xml => mail.to_xml(:root => "mail", :dasherize => false, :indent=>2), :location => "none" }
+      format.json { render :json => mail.to_json, :location => "none" }
     end
   end
 
