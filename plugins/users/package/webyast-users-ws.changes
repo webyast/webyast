@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Fri Jul 16 11:16:34 UTC 2010 - jreidinger@novell.com
+
+- read also ActiveDirectory users in getent
+- 0.1.17
+
+-------------------------------------------------------------------
 Thu Jul  8 14:11:06 UTC 2010 - jreidinger@novell.com
 
 - include in getent user with minimal uid
