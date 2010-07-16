@@ -90,18 +90,22 @@ sub Write {
 
     # try to join AD domain when credentials are present
     if ($args->{"administrator"}) {
-	$ret	= $self->Join ($args);
+	$ret	= $args->{"leave"} ? $self->Leave ($args) : $self->Join ($args);
 	if ($ret->{"join_error"}) {
 	    y2warning ("join failed, ending write");
+	    return $ret;
+	}
+    	elsif ($ret->{"leave_error"}) {
+	    y2warning ("leave failed, ending write");
 	    return $ret;
 	}
     }
 
     my $domain	= $args->{"domain"} || Samba->GetWorkgroupOrRealm ();
 
-    # after join, AD data are already read
-    unless ($args->{"administrator"}) {
-    
+    # - after join, AD data are already read
+    # - do not do the reads when only disabling
+    if ((! $args->{"administrator"}) && ($args->{"winbind"} || 0)) {
 	if ($args->{"ads"}) {
 	    SambaAD->SetADS ($args->{"ads"});
 	}
@@ -134,6 +138,9 @@ sub Write {
     return $ret;
 }
 
+# Join given AD domain
+# Argument map must contain domain and administrator credentials
+# It may contain information about workgroup (short name), AD server and realm
 BEGIN{$TYPEINFO{Join} = ["function",
     [ "map", "string", "any" ],
     [ "map", "string", "any" ]];
@@ -172,5 +179,25 @@ sub Join {
 
     my $result = SambaNetJoin->Join ($domain, "member", $args->{"administrator"}, $args->{"password"} || "", $args->{"machine"});
     $ret->{"join_error"}	= $result if $result;
+    return $ret;
+}
+
+# Leave current AD domain
+# Argument map must contain administrator credentials
+BEGIN{$TYPEINFO{Leave} = ["function",
+    [ "map", "string", "any" ],
+    [ "map", "string", "any" ]];
+}
+sub Leave {
+
+    my $self	= shift;
+    my $args	= shift;
+    my $ret	= {};
+
+    # domain is currently not used in leave command
+    my $domain	= $args->{"domain"} || Samba->GetWorkgroupOrRealm ();
+
+    my $result = SambaNetJoin->Leave ($domain, $args->{"administrator"}, $args->{"password"} || "");
+    $ret->{"leave_error"}	= $result if $result;
     return $ret;
 }

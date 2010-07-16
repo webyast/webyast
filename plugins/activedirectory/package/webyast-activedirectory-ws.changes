@@ -1,4 +1,9 @@
 -------------------------------------------------------------------
+Fri Jul 16 14:23:51 CEST 2010 - jsuchome@suse.cz
+
+- added YaPI for leaving AD domain 
+
+-------------------------------------------------------------------
 Thu Jul 15 15:04:30 CEST 2010 - jsuchome@suse.cz
 
 - use SambaAD->SetRealm with known realm
