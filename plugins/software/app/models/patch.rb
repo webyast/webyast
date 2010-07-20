@@ -234,7 +234,6 @@ class Patch < Resolvable
     end
   end
 
-private
   def self.do_install(pk_id, signal_list = nil, &block)
     ok = true
     transaction_iface, packagekit_iface = PackageKit.connect
@@ -279,6 +278,8 @@ private
     return ok
   end
 
+private
+
   def self.bgid(what)
     "packagekit_install_#{what}"
   end
@@ -306,7 +307,7 @@ private
 
   def self.subprocess_command(type,what)
     raise "Invalid parameter" if what.to_s.include?("'") or what.to_s.include?('\\')
-    ret = "cd #{RAILS_ROOT} && #{File.join(RAILS_ROOT, 'script/runner')} -e #{ENV['RAILS_ENV'] || 'development'} #{subprocess_script type} "
+    ret = "cd #{RAILS_ROOT} && RAILS_ENV=#{ENV['RAILS_ENV'] || 'development'} #{File.join(RAILS_ROOT, 'script/runner')} #{subprocess_script type} "
     ret = ret + "'#{what}'" if type == :install #only install use specified patches
     return ret
   end

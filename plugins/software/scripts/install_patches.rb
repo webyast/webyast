@@ -48,10 +48,10 @@ bs = BackgroundStatus.new
 # register a progress printer for the progress object
 ProgressPrinter.new(bs)
 
-pk_id = ARGV[2]
+pk_id = ARGV[0]
 
 begin
-  result = Resolvable.do_package_kit_install(pk_id, bs)
+  result = Patch.do_install(pk_id, bs)
   puts ({'result' => result}).to_xml(:root => "patch_installation", :dasherize => false).gsub("\n", '')
 rescue Exception => e
   if e.respond_to? :to_xml
