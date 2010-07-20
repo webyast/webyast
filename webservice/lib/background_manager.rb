@@ -75,6 +75,16 @@ class BackgroundManager
     end
   end
 
+  # gets all ids of precess matching regex running and also done
+  def get_matching_process_ids(regex)
+    @mutex.synchronize do
+      ret = []
+      ret.merge @running.keys.select{ |k| k.to_s =~ regex }
+      ret.merge @done.keys.select{ |k| k.to_s =~ regex }
+      ret
+    end
+  end
+
   # get the final value, the value is removed from the internal structure
   def get_value(id)
     @mutex.synchronize do
