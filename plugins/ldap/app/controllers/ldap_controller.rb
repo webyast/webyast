@@ -47,7 +47,7 @@ class LdapController < ApplicationController
     args	= params["ldap"]
 		  	
     ldap = Ldap.find
-    ldap.load args
+    ldap.load args unless args.nil?
     ldap.save
 
     respond_to do |format|
@@ -56,8 +56,14 @@ class LdapController < ApplicationController
     end
   end
 
+  def fetch(args)
+    Ldap.fetch(args["server"])
+  end
+
   # See update
   def create
+    args	= params["ldap"]
+    return fetch(args) if args["fetch_dn"]
     update
   end
 
