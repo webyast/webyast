@@ -57,33 +57,14 @@ public
   end
 
 
+  # ask given LDAP server for available base DN
   def self.fetch(server)
-    dn	= ""
+    ret	= {
+	"dn"	=> ""
+    }
     out	= `/usr/bin/ldapsearch -x -h #{server} -b '' -s base namingContexts | grep "namingContexts:" | cut -d" " -f 2`
-    if out
-	dn	= out.split("\n")[0]
-    end
-    raise LdapError.new("fetched",dn)
+    ret["dn"]	= out.split("\n")[0] if out
+    return ret
   end
 end
 
-require 'exceptions'
-class LdapError < BackendException
-  attr_reader :id
-
-  def initialize(id,message)
-    @id		= id
-    @message	= message
-  end
-
-  def to_xml
-    xml = Builder::XmlMarkup.new({})
-    xml.instruct!
-
-    xml.error do
-      xml.type "LDAP_ERROR"
-      xml.id @id
-      xml.message @message
-    end
-  end
-end

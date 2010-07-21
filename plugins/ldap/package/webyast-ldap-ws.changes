@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Wed Jul 21 10:43:50 CEST 2010 - jsuchome@suse.cz
+
+- option to fetch suported DN from given server
+- 0.2.1 
+
+-------------------------------------------------------------------
 Thu Jul 15 15:02:11 CEST 2010 - jsuchome@suse.cz
 
 - require pam_ldap, nss_ldap

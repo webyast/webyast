@@ -26,9 +26,20 @@ class LdapController < ApplicationController
 
   # GET action
   # Read LDAP client settings
+  # If special parameter 'fetch_dn' is present, return base DN supported by given server
+  #
   # Requires read permissions for LDAP client YaPI.
   def show
     yapi_perm_check "ldap.read"
+
+    if params["fetch_dn"]
+	dn	= Ldap.fetch(params["server"])
+	respond_to do |format|
+	    format.xml  { render :xml => dn.to_xml}
+	    format.json { render :json => dn.to_json}
+	end
+	return
+    end
 
     ldap = Ldap.find
 
@@ -56,14 +67,8 @@ class LdapController < ApplicationController
     end
   end
 
-  def fetch(args)
-    Ldap.fetch(args["server"])
-  end
-
   # See update
   def create
-    args	= params["ldap"]
-    return fetch(args) if args["fetch_dn"]
     update
   end
 
