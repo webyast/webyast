@@ -172,7 +172,7 @@ case "$1" in
     start)
 	echo -n "Starting yastws "
   #generate deployment specific secret key (bnc#591345)
-  SECRET=`cd /srv/www/yast/ && rake -s secret`
+  SECRET=`cd /srv/www/yastws/ && rake -s secret`
   if [ -z $SECRET ]; then
     echo -n "Can generate secret for session. Run 'cd /srv/www/yastws/ && rake -s secret' for details."
     rc_failed
