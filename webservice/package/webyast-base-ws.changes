@@ -1,4 +1,11 @@
 -------------------------------------------------------------------
+Wed Jul 21 09:53:57 UTC 2010 - jreidinger@novell.com
+
+- fix path in yastws service
+- add ability to tell matching background process
+- 0.1.27
+
+-------------------------------------------------------------------
 Thu Jul 15 14:12:29 UTC 2010 - jreidinger@novell.com
 
 - reingrate changes from 1.0 maintenance
