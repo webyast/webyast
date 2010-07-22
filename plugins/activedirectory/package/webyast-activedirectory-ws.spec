@@ -15,7 +15,7 @@ PreReq:         webyast-base-ws
 License:	GPL v2 only
 Group:          Productivity/Networking/Web/Utilities
 Autoreqprov:    on
-Version:        0.2.1
+Version:        0.2.2
 Release:        0
 Summary:        WebYaST - service for configuration of Active Directory client
 Source:         www.tar.bz2
@@ -29,7 +29,7 @@ BuildRequires:  webyast-base-ws-testsuite
 BuildRequires:	rubygem-test-unit rubygem-mocha
 
 # for enabling winbind and Kerberos configuration
-Requires:	samba-winbind samba-client pam_mount yast2-kerberos-client krb5
+Requires:	samba-winbind samba-client pam_mount yast2-kerberos-client krb5 krb5-client
 # for dig
 Requires:	bind-utils
 # reasonable PATH set (bnc#617442)

@@ -50,13 +50,14 @@ sub Read {
 	if (SambaAD->ADS ()) {
 	    $domain = SambaAD->GetWorkgroup ($domain);
 	    SambaAD->ReadRealm ();
+
+	    # return the parts that could be omited later, like AD server, workgroup, realm?
+	    $ret->{"ads"}	= SambaAD->ADS ();
+	    $ret->{"workgroup"}	= $domain;
+	    $ret->{"realm"}     = SambaAD->Realm ();
 	}
 
 	$ret->{"result"}	= YaST::YCP::Boolean (SambaNetJoin->Test ($domain));
-	# return the parts that could be omited later, like AD server, workgroup, realm?
-	$ret->{"ads"}		= SambaAD->ADS ();
-	$ret->{"workgroup"}	= $domain;
-	$ret->{"realm"}         = SambaAD->Realm ();
 	return $ret;
     }
 
