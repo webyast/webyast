@@ -79,8 +79,7 @@ class PatchesController < ApplicationController
                            :name => attrs[0],
                            :arch => attrs[2],
                            :repo => attrs[3],
-                           :installing => false,
-                           :installed => ret)
+                           :installed => true)
         end
       end
     end
@@ -109,7 +108,7 @@ class PatchesController < ApplicationController
     Rails.logger.info "Reading patches in background" if bgr
 
     @patches = Patch.find(:available, {:background => bgr})
-
+		@patches.merge collect_done_patches #report also which patches is installed
     respond_to do |format|
       format.xml { render  :xml => @patches.to_xml( :root => "patches", :dasherize => false ) }
       format.json { render :json => @patches.to_json( :root => "patches", :dasherize => false ) }
