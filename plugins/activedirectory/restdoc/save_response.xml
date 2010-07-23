@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<error>
+    <type>ACTIVEDIRECTORY_ERROR</type>
+    <id>not_member</id>
+    <message></message>
+</error>

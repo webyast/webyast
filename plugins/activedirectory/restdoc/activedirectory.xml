@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<activedirectory>
+  <domain>LURCH</domain>
+  <create_dirs type="boolean">true</create_dirs>
+  <enabled type="boolean">false</enabled>
+</activedirectory>

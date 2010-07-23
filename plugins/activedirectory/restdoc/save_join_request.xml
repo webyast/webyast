@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<activedirectory>
+  <domain>MYDOMAIN.MYCOMPANY.COM</domain>
+  <administrator>Administrator</administrator>
+  <password>plaintextpassword</password>
+  <enabled type="boolean">true</enabled>
+</activedirectory>

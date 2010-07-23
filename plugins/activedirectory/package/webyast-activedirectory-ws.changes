@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Fri Jul 23 15:25:07 CEST 2010 - jsuchome@suse.cz
+
+- added REST API documentation
+- 0.2.3
+
+-------------------------------------------------------------------
 Thu Jul 22 10:39:32 CEST 2010 - jsuchome@suse.cz
 
 - YaPI: return dns data only when AD was detected

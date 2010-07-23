@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<error>
+    <type>ACTIVEDIRECTORY_ERROR</type>
+    <id>join_error</id>
+    <message>Unable to find a suitable server for domain MYDOMAIN.MYCOMPANY.COM
+Unable to find a suitable server for domain MYDOMAIN.MYCOMPANY.COM
+    </message>
+</error>
