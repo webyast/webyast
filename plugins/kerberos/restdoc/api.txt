@@ -1,0 +1,59 @@
+= YaST REST Service Documentation
+
+  Copyright © 2009-10 Novell, Inc.
+
+  Permission is granted to copy, distribute and/or modify this document under the terms of the GNU Free Documentation License, Version 1.2 or (at your option) version 1.3; with the Invariant Section being this copyright notice and license. A copy of the license version 1.2 is included in the section entitled "GNU Free Documentation License". 
+
+== Kerberos Client
+
+  Only authenticated users are allowed to access the API. Authentication is done
+  by sending a Basic HTTP Authorisation header.
+
+  All names aren't allowed to contain spaces, slashes or colons.
+
+== Table of Contents
+
+Contents:
+
+== Formats
+
+  The system REST service supports only XML and JSON input/output formats.
+
+== Overview
+
+  This module provides access to system's configuration as Kerberos client.
+  
+  It is possible to set default realm, default domain and KDC address.
+
+
+== PolicyKit Access Rights
+
+  The following PolicyKit permission is needed to perform write actions:
+
+  <i>org.opensuse.yast.modules.yapi.kerberos.write</i>
+
+  For read access, it is needed
+
+  <i>org.opensuse.yast.modules.yapi.kerberos.read</i>
+
+== Actions
+
+
+GET /kerberos
+
+  Get Kerberos client configuration data.
+
+  CURL Example: curl -u &lt;user> http://localhost:4984/kerberos.xml
+
+XmlResult: kerberos
+
+
+PUT /kerberos
+
+  Update the Kerberos client configuration. New configuratin is returned as a result.
+
+  CURL example: curl -u <user> -X PUT -H 'Content-type: text/xml' -d @save_request.xml http://localhost:4984/kerberos.xml
+
+XmlBody: save_request
+  
+XmlResult: save_response

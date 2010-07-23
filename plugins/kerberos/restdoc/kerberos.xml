@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<kerberos>
+  <default_domain>my.company.com</default_domain>
+  <default_realm>MY.COMPANY.COM</default_realm>
+  <kdc>kdc.my.company.com</kdc>
+  <enabled type="boolean">false</enabled>
+</kerberos>
