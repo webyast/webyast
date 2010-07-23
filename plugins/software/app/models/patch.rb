@@ -215,6 +215,7 @@ class Patch < Resolvable
       Rails.logger.info "Starting background thread for installing patches..."
       # run the patch query in a separate thread
       Thread.new do
+				@@package_kit_mutex ||= Mutex.new #TODO move to packagekit lib
         @@package_kit_mutex.synchronize do
           res = subprocess_install pk_id
 
