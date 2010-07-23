@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Fri Jul 23 13:51:13 CEST 2010 - jsuchome@suse.cz
+
+- added REST API documentation
+- 0.2.2 
+
+-------------------------------------------------------------------
 Wed Jul 21 10:43:50 CEST 2010 - jsuchome@suse.cz
 
 - option to fetch suported DN from given server

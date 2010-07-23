@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ldap>
+  <tls type="boolean">false</tls>
+  <server>ldap.suse.cz</server>
+  <base_dn>dc=suse,dc=cz</base_dn>
+  <enabled type="boolean">false</enabled>
+</ldap>
