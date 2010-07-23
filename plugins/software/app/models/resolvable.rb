@@ -29,13 +29,15 @@ class Resolvable
   attr_accessor   :resolvable_id,
                   :kind,
                   :name,
-		  :version,
+								  :version,
                   :arch,
                   :repo,
-                  :summary
+                  :summary,
+									:installed
 
   # default constructor
   def initialize(attributes)
+		@installed = false
     attributes.each do |key, value|
       instance_variable_set("@#{key}", value)
     end
@@ -64,6 +66,7 @@ class Resolvable
       xml.tag!(:arch, @arch )
       xml.tag!(:repo, @repo )
       xml.tag!(:summary, @summary )
+      xml.tag!(:installed, @installed, :type => :boolean )
       unless messages.blank?
         xml.messages(:type => :array) do
           messages.each do |message|

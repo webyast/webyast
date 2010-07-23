@@ -88,11 +88,22 @@ class PatchesController < ApplicationController
     return done
   end
 
+	def check_running_install
+    BackgroundManager.instance.running.each do |k,v|
+      if k.match(/^packagekit_install_(.*)/)
+        patch_id = $1
+				status = BackgroundManager.instance.get_progress
+				raise InstallInProgressException.new status
+			end
+		end
+	end
+
   public
 
   # GET /patch_updates
   # GET /patch_updates.xml
   def index
+		check_running_install
     # note: permission check was performed in :before_filter
     bgr = params['background']
     Rails.logger.info "Reading patches in background" if bgr
