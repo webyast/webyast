@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Mon Jul 26 18:35:05 CEST 2010 - jsuchome@suse.cz
+
+- do not read settings twice before writing
+- 0.2.2 
+
+-------------------------------------------------------------------
 Fri Jul 23 14:36:05 CEST 2010 - jsuchome@suse.cz
 
 - added REST API documentation

@@ -76,9 +76,9 @@ sub Write {
     if (defined $args->{"dns_used"}) {
 	Kerberos->dns_used ($args->{"dns_used"});
     }
-    Kerberos->default_domain ($args->{"default_domain"} || "");
-    Kerberos->default_realm ($args->{"default_realm"} || "");
-    Kerberos->kdc ($args->{"kdc"} || "");
+    Kerberos->default_domain ($args->{"default_domain"} || "") if defined $args->{"default_domain"};
+    Kerberos->default_realm ($args->{"default_realm"} || "") if defined $args->{"default_realm"};
+    Kerberos->kdc ($args->{"kdc"} || "") if defined $args->{"kdc"};
 
     Kerberos->modified (1);
 

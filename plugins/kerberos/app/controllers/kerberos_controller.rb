@@ -46,7 +46,7 @@ class KerberosController < ApplicationController
 
     args	= params["kerberos"]
 		  	
-    kerberos = Kerberos.find
+    kerberos = Kerberos.new
     kerberos.load args
     kerberos.save
 
