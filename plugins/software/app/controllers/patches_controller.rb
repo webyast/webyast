@@ -88,13 +88,21 @@ class PatchesController < ApplicationController
   end
 
 	def check_running_install
+    running = 0
+    max_progress = 0
+    status = nil
     BackgroundManager.instance.running.each do |k,v|
       if k.match(/^packagekit_install_(.*)/)
         patch_id = $1
-				status = BackgroundManager.instance.get_progress
-				raise InstallInProgressException.new status
+				tmp = BackgroundManager.instance.get_progress
+        if tmp.progress > max_progress
+          max_progress = tmp.progress
+          status = tmp
+        end
+        running += 1
 			end
 		end
+    raise InstallInProgressException.new running,status if running > 0 #there is process which runs installation
 	end
 
   public
@@ -108,7 +116,7 @@ class PatchesController < ApplicationController
     Rails.logger.info "Reading patches in background" if bgr
 
     @patches = Patch.find(:available, {:background => bgr})
-		@patches << collect_done_patches #report also which patches is installed
+		@patches + collect_done_patches #report also which patches is installed
     respond_to do |format|
       format.xml { render  :xml => @patches.to_xml( :root => "patches", :dasherize => false ) }
       format.json { render :json => @patches.to_json( :root => "patches", :dasherize => false ) }
