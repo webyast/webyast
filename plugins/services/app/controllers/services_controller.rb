@@ -30,11 +30,8 @@ class ServicesController < ApplicationController
   def index
     yapi_perm_check "services.read"
 
-    begin
-	@services	= Service.find_all params
-    rescue Exception => e
-	render ErrorResult.error(404, 107, e.to_s) and return
-    end
+    @services	= Service.find_all params
+
     respond_to do |format|
     	format.xml  { render :xml => @services.to_xml }
     	format.json { render :json => @services.to_json }
@@ -49,11 +46,7 @@ class ServicesController < ApplicationController
 
     @service = Service.new(params[:id])
 
-    begin
-	@service.read_status(params)
-    rescue Exception => e
-	render ErrorResult.error(404, 108, e.to_s) and return
-    end
+    @service.read_status(params)
 
     respond_to do |format|
 	format.xml  { render :xml => @service.to_xml(:root => 'service', :dasherize => false, :indent => 2), :location => "none" }
@@ -66,13 +59,8 @@ class ServicesController < ApplicationController
   # Requires execute permission for services YaPI.
   def update
     yapi_perm_check "services.execute"
-    begin
-      @service = Service.find params[:id]
-    rescue Exception => e
-      logger.debug e
-      render ErrorResult.error(404, 106, "no such service") and return
-    end
 
+    @service = Service.find params[:id]
     ret	= @service.save(params)
 
     render :xml => ret

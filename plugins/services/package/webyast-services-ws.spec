@@ -17,7 +17,7 @@ PreReq:         yast2-webservice
 License:	GPL v2 only
 Group:          Productivity/Networking/Web/Utilities
 Autoreqprov:    on
-Version:        0.2.2
+Version:        0.2.3
 Release:        0
 Summary:        WebYaST - system services management service
 Source:         www.tar.bz2

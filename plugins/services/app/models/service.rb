@@ -76,7 +76,7 @@ class Service < BaseModel::Base
   # Return current system runlevel,
   def self.current_runlevel
     rl = run_runlevel.split(" ").last
-    raise Exception.new('Non-number runlevel') if !/^[0-9]*$/.match rl and rl != "S"
+    raise ServiceError.new('non-number-runlevel', 'Non-number runlevel') if !/^[0-9]*$/.match rl and rl != "S"
     rl == "S" ? -1 : rl.to_i
   end
  
@@ -106,7 +106,7 @@ class Service < BaseModel::Base
     yapi_ret = YastService.Call("YaPI::SERVICES::Read", args)
 
     if yapi_ret.nil?
-        raise "Can't get services list"
+	raise ServiceError.new("no-services", "Can't get services list")
     else
 	yapi_ret.each do |s|
 	  service	= Service.new(s["name"])
@@ -128,7 +128,7 @@ class Service < BaseModel::Base
     yapi_ret = YastService.Call("YaPI::SERVICES::Read", args)
 
     if yapi_ret.nil?
-        raise "Can't get custom services list"
+	raise ServiceError.new("no-custom-services", "Can't get custom services list")
     else
 	yapi_ret.each do |s|
 	  service	= Service.new(s["name"])
@@ -173,7 +173,7 @@ class Service < BaseModel::Base
     Rails.logger.debug "Command returns: #{yapi_ret.inspect}"
 
     if yapi_ret.nil?
-        raise "Can't get service status"
+	raise ServiceError.new("no-status", "Can't get service status")
     else
 	@status	= yapi_ret.first["status"].to_i if !yapi_ret.empty? && yapi_ret.first.has_key?("status")
 	@enabled= yapi_ret.first["enabled"] if !yapi_ret.empty? && yapi_ret.first.has_key?("enabled")
@@ -213,5 +213,24 @@ class Service < BaseModel::Base
     Rails.logger.debug "Command returns: #{ret.inspect}"
     ret.symbolize_keys!
   end
+end
 
+require 'exceptions'
+class ServiceError < BackendException
+
+  def initialize(id,message)
+    @id		= id
+    @message	= message
+  end
+
+  def to_xml
+    xml = Builder::XmlMarkup.new({})
+    xml.instruct!
+
+    xml.error do
+      xml.type "SERVICE_ERROR"
+      xml.id @id
+      xml.message @message
+    end
+  end
 end

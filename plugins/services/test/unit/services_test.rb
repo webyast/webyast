@@ -62,7 +62,7 @@ EOF
   test "test uknown current runlevel" do
     Service.stubs(:run_runlevel).returns("unknown")
 
-    assert_raise Exception do
+    assert_raise ServiceError do
 	Service.current_runlevel
     end
   end

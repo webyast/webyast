@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Tue Jul 27 12:26:30 CEST 2010 - jsuchome@suse.cz
+
+- raise ServiceError on errors (bnc#625831)
+- 0.2.3 
+
+-------------------------------------------------------------------
 Tue Jul 13 10:26:53 CEST 2010 - jsuchome@suse.cz
 
 - specify type of integer and boolean in xml (bnc#621822)
