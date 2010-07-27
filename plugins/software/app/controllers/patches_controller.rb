@@ -160,10 +160,6 @@ class PatchesController < ApplicationController
     permission_check "org.opensuse.yast.system.patches.install"
     @patch_update = Patch.find(params[:patches][:resolvable_id].to_s)
 
-#    bgr = params['background']
-#    bgr = true
-#    Rails.logger.info "Installing patch #{params[:patches][:resolvable_id]} in background" if bgr
-
     #Patch for Bug 560701 - [build 24.1] webYaST appears to crash after installing webclient patch
     #Packagekit returns empty string if the patch is allready installed.
     if @patch_update.is_a?(Array) && @patch_update.empty?
@@ -176,7 +172,7 @@ class PatchesController < ApplicationController
       render ErrorResult.error(404, 1, "Patch: #{params[:patches][:resolvable_id]} not found.") and return
     end
 
-    res = @patch_update.install(true)
+    res = @patch_update.install(true) #always install in backend otherwise there is problem with long running updates
     Rails.cache.write('patches:timestamp', Time.at(0)) #invalidate cache
     index
   end
