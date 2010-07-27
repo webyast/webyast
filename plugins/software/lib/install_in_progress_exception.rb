@@ -31,7 +31,7 @@ class InstallInProgressException < BackendException
 
     xml.error do
       xml.type "PACKAGEKIT_INSTALL"
-      xml.description "Cannot obtain patches, installation in progress. Remain #{@count} packages. Status of currently installed package #{@status.progress}"
+      xml.description "Cannot obtain patches, installation in progress. Remain #{@count} packages. Status of currently installed package #{@progress.progress}"
 			xml.progress @progress
       xml.count @count, :type => "integer"
     end

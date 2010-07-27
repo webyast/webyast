@@ -89,16 +89,17 @@ class PatchesController < ApplicationController
 
 	def check_running_install
     running = 0
-    max_progress = 0
+    max_progress = nil
     status = nil
     BackgroundManager.instance.running.each do |k,v|
       if k.match(/^packagekit_install_(.*)/)
         patch_id = $1
-				tmp = BackgroundManager.instance.get_progress
-        if tmp.progress > max_progress
+				tmp = BackgroundManager.instance.get_progress k
+        if max_progress.nil? || tmp.progress > max_progress
           max_progress = tmp.progress
           status = tmp
         end
+        logger.info "installation in progress. Patch #{k}"
         running += 1
 			end
 		end
@@ -176,21 +177,8 @@ class PatchesController < ApplicationController
     end
 
     res = @patch_update.install(true)
-
-    if (res.is_a? BackgroundStatus)
-      logger.debug "received background status: #{res.inspect}"
-      respond_to do |format|
-        format.xml { render  :xml => res.to_xml( :root => "status", :dasherize => false ) }
-        format.json { render :json => res.to_json( :root => "status", :dasherize => false ) }
-      end
-
-      return
-    end
-
-#    unless error
-#      render ErrorResult.error(404, 2, "packagekit error") and return
-#    end
-    render :show
+    Rails.cache.write('patches:timestamp', Time.at(0)) #invalidate cache
+    index
   end
 
 
