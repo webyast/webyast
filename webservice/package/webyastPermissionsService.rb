@@ -60,10 +60,11 @@ class WebyastPermissionsService < DBus::Object
   end
 
 USER_REGEX=/^[ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz_][ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789_.-]*[ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789_.$-]?$/
+USER_WITH_DOMAIN_REGEX=/^[a-zA-Z0-9][a-zA-Z0-9\-.]*\\[ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz_][ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789_.-]*[ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789_.$-]?$/
   def execute (command, permissions, user, sender)
     #TODO polkit check, user escaping, perm whitespacing
     return ["NOPERM"] unless check_polkit sender
-    return ["USER_INVALID"] if user.match(USER_REGEX).nil?
+    return ["USER_INVALID"] if invalid_user_name? user 
     result = []
     permissions.each do |p|
       #whitespace check for valid permission string to avoid attack
@@ -82,6 +83,13 @@ USER_REGEX=/^[ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz_][ABCDEFGHIJK
     rescue Exception => e
       return false
     end
+  end
+
+  def invalid_user_name? user
+    active_directory_enabled = `/usr/sbin/pam-config -q --winbind 2>/dev/null | wc -w`.to_i > 0
+    return false if user.match(USER_REGEX)
+    return false if active_directory_enabled && user.match(USER_WITH_DOMAIN_REGEX)
+    return true
   end
 end
 
