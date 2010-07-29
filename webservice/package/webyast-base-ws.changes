@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Thu Jul 29 08:14:08 UTC 2010 - jreidinger@novell.com
+
+- fix setting permissions to Samba users (bnc#624243)
+- 0.2.0
+
+-------------------------------------------------------------------
 Wed Jul 21 09:53:57 UTC 2010 - jreidinger@novell.com
 
 - fix path in yastws service
