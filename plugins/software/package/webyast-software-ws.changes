@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Thu Jul 29 08:05:00 UTC 2010 - jreidinger@novell.com
+
+- add cooperation of background reading patches and installing
+- 0.2.0
+
+-------------------------------------------------------------------
 Thu Jul 15 14:09:21 UTC 2010 - jreidinger@novell.com
 
 - install patches in background to avoid timeout (lslezak, adapted
