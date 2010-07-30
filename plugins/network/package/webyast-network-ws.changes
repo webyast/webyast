@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Fri Jul 30 10:31:42 CEST 2010 - mzugec@suse.cz
+
+- static hostname with dhcp feature (bnc#624655)
+- 0.1.8 
+
+-------------------------------------------------------------------
 Tue May  4 08:46:45 CEST 2010 - mvidner@suse.cz
 
 - Fixed multiple bugs in writing the confuguration introduced in

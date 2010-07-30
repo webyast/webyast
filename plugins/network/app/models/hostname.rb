@@ -46,6 +46,7 @@ class Hostname < BaseModel::Base
     settings = {}
     settings["name"] = @name if @name
     settings["domain"] = @domain if @domain
+    settings["dhcp_hostname"] = @dhcp_hostname if @dhcp_hostname
     return if settings.empty?
 
     vsettings = [ "a{ss}", settings ] # bnc#538050
