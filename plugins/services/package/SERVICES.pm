@@ -41,7 +41,8 @@ our $VERSION            = '1.0.0';
 our @CAPABILITIES       = ('SLES11');
 our %TYPEINFO;
 
-my $custom_services_file	= "/etc/webyast/custom_services.yml";
+my $custom_services_dir		= "/etc/webyast";
+my $custom_services_file	= "custom_services.yml";
 
 my $error_message		= "";
 
@@ -69,8 +70,15 @@ sub report_error {
 # parse the file with custom services and return the hash describing the file
 sub parse_custom_services {
 
-  if (!FileUtils->Exists ($custom_services_file)) {
-    report_error ("$custom_services_file file not present");
+  my $custom_services_path	= "$custom_services_dir/vendor/$custom_services_file";
+
+  unless (FileUtils->Exists ($custom_services_path)) {
+    y2milestone ("$custom_services_path not available, using default");
+    $custom_services_path		= "$custom_services_dir/$custom_services_file" 
+  }
+
+  if (!FileUtils->Exists ($custom_services_path)) {
+    report_error ("$custom_services_path file not present");
     return {};
   }
 
@@ -86,7 +94,7 @@ sub parse_custom_services {
   
   YaST::YCP::Import ("YML");
 
-  my $parsed = YML->parse ($custom_services_file);
+  my $parsed = YML->parse ($custom_services_path);
 
   if (!defined $parsed || ref ($parsed) ne "HASH") {
     report_error ("custom services file could not be read");

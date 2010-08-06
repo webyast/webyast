@@ -40,6 +40,7 @@ class Service < BaseModel::Base
   attr_accessor :required_for_stop
 
   FILTER_FILE	= "filter_services.yml"
+  VENDOR	= "vendor"
 
   def initialize(name)
     @name = name
@@ -63,7 +64,8 @@ class Service < BaseModel::Base
   # reading configuration file
   #
   def self.parse_filter(path = nil)
-    path = File.join(Paths::CONFIG,FILTER_FILE) if path == nil
+    path = File.join(Paths::CONFIG,VENDOR,FILTER_FILE) if path == nil
+    path = File.join(Paths::CONFIG,FILTER_FILE) unless File.exists? path
 
     #reading configuration file
     if File.exists?(path)
