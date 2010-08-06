@@ -43,6 +43,7 @@ class License
 
   VAR_DIR       = File.join(Paths::VAR,"eulas")
   RESOURCES_DIR = File.join(Paths::DATAS,"eulas")
+  EULAS_VENDOR	= File.join(Paths::CONFIG,"vendor","eulas.yml")
 
   ##
   # Create a license object using the name of the license.
@@ -93,7 +94,9 @@ class License
   # @raise [CorruptedFileException] in case of malformed config file (eulas.yml)
   # @return [[String]] list of license names
   def self.license_names
-    config = YaST::ConfigFile.new(:eulas)
+    config_id	= :eulas
+    config_id	= EULAS_VENDOR if File.exists? EULAS_VENDOR
+    config = YaST::ConfigFile.new(config_id)
     begin
       config["licenses"] || []
     rescue YaST::ConfigFile::NotFoundError
