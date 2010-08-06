@@ -34,6 +34,7 @@ class Basesystem < BaseModel::Base
 
   # path to file which defines module queue
   BASESYSTEM_CONF = :basesystem
+  BASESYSTEM_CONF_VENDOR	= File.join(Paths::CONFIG,"vendor","basesystem.yml")
   # path to file which store module then is next in queue or END_STRING if all steps is done
   FINISH_FILE = File.join(Paths::VAR,"basesystem","finish")
   FINISH_STR = "FINISH"
@@ -46,7 +47,9 @@ class Basesystem < BaseModel::Base
   #Gets instance of Basesystem with initialized steps queue and if basic settings is done
   def Basesystem.find
     base = Basesystem.new
-    config = YaST::ConfigFile.new(BASESYSTEM_CONF)
+    basesystem_conf	= BASESYSTEM_CONF
+    basesystem_conf	= BASESYSTEM_CONF_VENDOR if File.exists? BASESYSTEM_CONF_VENDOR
+    config = YaST::ConfigFile.new(basesystem_conf)
     if File.exist?(config.path)
       begin
       	base.steps = config["steps"] || []

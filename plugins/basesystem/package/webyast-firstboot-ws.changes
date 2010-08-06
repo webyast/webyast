@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Fri Aug  6 13:20:34 CEST 2010 - jsuchome@suse.cz
+
+- check vendor subdirectory for config file (bnc#628654)
+- 0.2.0
+
+-------------------------------------------------------------------
 Mon May 10 08:21:17 UTC 2010 - jreidinger@novell.com
 
 - fix reading empty initial steps (previous fix)

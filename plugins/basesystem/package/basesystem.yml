@@ -1,3 +1,5 @@
+# This file needs to be located under /etc/webyast/ or /etc/webyast/vendor/
+# (the 'vendor' directory has higher priority).
 steps:
 # example values, value is controller in webclient
 #  - controller: eulas
