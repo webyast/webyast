@@ -15,7 +15,7 @@ PreReq:         webyast-base-ws
 License:	GPL v2 only
 Group:          Productivity/Networking/Web/Utilities
 Autoreqprov:    on
-Version:        0.2.3
+Version:        0.2.4
 Release:        0
 Summary:        WebYaST - service for configuration of Active Directory client
 Source:         www.tar.bz2

@@ -155,4 +155,49 @@ class ActivedirectoryTest < ActiveSupport::TestCase
     assert_equal "join_error",exception.id
   end
 
+  def test_leave
+    ad		= Activedirectory.find
+    ad.domain	= "DIFFERENT.DOMAIN.COM"
+    ad.administrator	= "Administrator"
+    ad.password		= "heslo"
+    ad.leave		= true
+
+    YastService.stubs(:Call).with('YaPI::ActiveDirectory::Write', {
+	"domain"	=> [ "s", "DIFFERENT.DOMAIN.COM"],
+	"winbind"	=> [ "b", true],
+	"mkhomedir"	=> [ "b", false],
+	"administrator"	=> [ "s", "Administrator" ],
+	"password"	=> [ "s",  "heslo" ],
+	"leave"		=> [ "b",  true ]
+    }).returns({})
+    ad.save
+  end
+
+  def test_leave_failure
+    ad		= Activedirectory.find
+    ad.domain	= "DIFFERENT.DOMAIN.COM"
+    ad.administrator	= "Administrator"
+    ad.password		= "heslo"
+    ad.leave		= true
+
+    YastService.stubs(:Call).with('YaPI::ActiveDirectory::Write', {
+	"domain"	=> [ "s", "DIFFERENT.DOMAIN.COM"],
+	"winbind"	=> [ "b", true],
+	"mkhomedir"	=> [ "b", false],
+	"administrator"	=> [ "s", "Administrator" ],
+	"password"	=> [ "s",  "heslo" ],
+	"leave"		=> [ "b",  true ]
+    }).returns({
+	"leave_error"	=> "something got wrong"
+    })
+    exception = nil
+    begin
+      ad.save
+    rescue ActivedirectoryError => e
+      exception = e
+    end
+    assert_not_nil exception, "should raise exception"
+    assert_equal "leave_error",exception.id
+  end
+
 end

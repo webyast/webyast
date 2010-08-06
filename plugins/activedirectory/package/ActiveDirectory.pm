@@ -131,8 +131,8 @@ sub Write {
 	}
     }
 
-    Samba->SetWinbind ($args->{"winbind"} || 0);
-    Samba->SetMkHomeDir ($args->{"mkhomedir"} || 0);
+    Samba->SetWinbind ($args->{"winbind"} || 0) if (defined $args->{"winbind"});;
+    Samba->SetMkHomeDir ($args->{"mkhomedir"} || 0) if (defined $args->{"mkhomedir"});
 
     $ret->{"write_error"}	= 1 unless Samba->Write (0);
 

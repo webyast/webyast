@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Fri Aug  6 11:36:17 CEST 2010 - jsuchome@suse.cz
+
+- added support for leaving AD domain
+- 0.2.4 
+
+-------------------------------------------------------------------
 Fri Jul 23 15:25:07 CEST 2010 - jsuchome@suse.cz
 
 - added REST API documentation

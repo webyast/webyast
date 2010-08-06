@@ -34,6 +34,9 @@ class Activedirectory < BaseModel::Base
   attr_accessor :password
   attr_accessor :machine
 
+  # boolean value: if we should leave domain
+  attr_accessor :leave
+
 public
   def self.find
     ret = YastService.Call("YaPI::ActiveDirectory::Read", {})
@@ -43,6 +46,7 @@ public
 	:create_dirs	=> ret["mkhomedir"] == "1",
 	:enabled	=> ret["winbind"] == "1"
     })
+    leave	= false
     ad	= {} if ad.nil?
     return ad
   end
@@ -55,13 +59,14 @@ public
   end
 
   def save
-    # FIXME cache the information from check_membership (ADS, realm) and use them for join... ?
 
     params	= {
 	"domain"	=> [ "s", @domain ],
 	"winbind"	=> [ "b", @enabled ],
 	"mkhomedir"	=> [ "b", @create_dirs ]
     }
+    # only pass if @leave was intentionally set to true
+    params["leave"]	=  [ "b", @leave ] if @leave
 
     if !@enabled
 	Rails.logger.debug "disabling"
@@ -81,12 +86,12 @@ public
 	params["machine"]	= [ "s", @machine ] unless @machine.nil?
     end
 
-    domain_cache	= Rails.cache.read('activedirectory:domain')
+    domain_cache	= Rails.cache.read('activedirectory:domain') || ""
     if (domain_cache == @domain)
-	ads		= Rails.cache.read('activedirectory:ads')
-	realm		= Rails.cache.read('activedirectory:realm')
-	workgroup	= Rails.cache.read('activedirectory:workgroup')
-	params["ads"]	= [ "s", ads ] unless ads.empty?
+	ads		= Rails.cache.read('activedirectory:ads') || ""
+	realm		= Rails.cache.read('activedirectory:realm') || ""
+	workgroup	= Rails.cache.read('activedirectory:workgroup') || ""
+	params["ads"]	= [ "s", ads ] unless ads.nil? || ads.empty?
 	params["realm"]	= [ "s", realm ] unless realm.empty?
 	params["workgroup"]	= [ "s", workgroup ] unless workgroup.empty?
     end
@@ -95,6 +100,8 @@ public
     Rails.logger.debug "Write YaPI returns: '#{yapi_ret}'"
     if yapi_ret["join_error"]
 	raise ActivedirectoryError.new("join_error",yapi_ret["join_error"])
+    elsif yapi_ret["leave_error"]
+	raise ActivedirectoryError.new("leave_error",yapi_ret["leave_error"])
     elsif yapi_ret["write_error"]
 	raise ActivedirectoryError.new("write_error","")
     end
