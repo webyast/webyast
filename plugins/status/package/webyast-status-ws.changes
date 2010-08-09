@@ -1,4 +1,11 @@
 -------------------------------------------------------------------
+Mon Aug  9 13:42:05 CEST 2010 - jsuchome@suse.cz
+
+- check vendor subdirectory for config files (bnc#628654),
+  install default logs.yml to /etc/webyast
+- 0.2.0
+
+-------------------------------------------------------------------
 Thu Jul  8 11:25:10 UTC 2010 - jreidinger@novell.com
 
 - adapted to new Resource API (schubi) 

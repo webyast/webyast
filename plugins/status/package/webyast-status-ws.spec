@@ -18,7 +18,7 @@ Obsoletes:      yast2-webservice-status < %{version}
 License:	GPL v2 only
 Group:          Productivity/Networking/Web/Utilities
 Autoreqprov:    on
-Version:        0.1.13
+Version:        0.2.0
 Release:        0
 Summary:        WebYaST - system status service
 Source:         www.tar.bz2
@@ -101,7 +101,7 @@ mkdir -p $RPM_BUILD_ROOT/usr/share/YaST2/modules/
 cp %{SOURCE3} $RPM_BUILD_ROOT/usr/share/YaST2/modules/
 
 mkdir -p $RPM_BUILD_ROOT/etc/webyast/vendor
-cp $RPM_BUILD_ROOT/%{plugin_dir}/doc/logs.yml $RPM_BUILD_ROOT/etc/webyast/vendor
+cp $RPM_BUILD_ROOT/%{plugin_dir}/doc/logs.yml $RPM_BUILD_ROOT/etc/webyast
 
 # remove .po files (no longer needed)
 rm -rf $RPM_BUILD_ROOT/%{plugin_dir}/po
@@ -169,7 +169,7 @@ rccollectd try-restart
 %attr(644,root,root) %config /usr/share/PolicyKit/policy/org.opensuse.yast.system.status.policy
 %attr(644,root,root) %config /usr/share/PolicyKit/policy/org.opensuse.yast.modules.logfile.policy
 %dir /etc/webyast/vendor
-%config /etc/webyast/vendor/logs.yml
+%config /etc/webyast/logs.yml
 %doc COPYING
 
 %files testsuite
