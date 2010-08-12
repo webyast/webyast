@@ -11,8 +11,10 @@
 #	status: path to application that should query the service status
 #
 #
-# The file needs to be located under /etc/webyast/. The file should be root only
-# writable, because start, stop and status scripts defined here are called by root.
+# The file needs to be located under /etc/webyast/ or /etc/webyast/vendor/
+# (the 'vendor' directory has higher priority).
+# The file should be root only writable, because start, stop and status scripts
+# defined here are called by root.
 # 
 # ------------------------------------------------------------------------------
 #

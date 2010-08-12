@@ -5,6 +5,11 @@
 # the custom ones defined in /etc/webyast/custom_services.yml
 #
 # If the list is empty, all services will be shown.
+#
+# The file is by default installed as /etc/webyast/filter_services.yml,
+# but higher priority has a file /etc/webyast/vendor/filter_services.yml.
+# So to package vendor specific configuration, use /etc/webyast/vendor/
+# subdirectory to avoid file conflicts.
 services:
   - cron
   - my_own_service

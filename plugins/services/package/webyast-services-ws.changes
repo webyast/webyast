@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Thu Aug 12 11:23:11 CEST 2010 - jsuchome@suse.cz
+
+- updated documentation of config files
+- 0.2.5 
+
+-------------------------------------------------------------------
 Fri Aug  6 09:23:45 CEST 2010 - jsuchome@suse.cz
 
 - check vendor subdirectory for config files (bnc#628654)
