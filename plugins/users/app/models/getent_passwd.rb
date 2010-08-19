@@ -26,9 +26,9 @@ class GetentPasswd < BaseModel::Base
 
   def self.find
     result = []
-    res = `getent passwd`
+    res = pure_getent
     raise "cannot obtain passwd" unless res
-    minimum = (`cat /etc/login.defs | grep '^UID_MIN' | sed 's/^UID_MIN[^0-9]*\\([0-9]\\+\\).*$/\\1/'`).to_i
+    minimum = system_minimum
     minimum = 1000 if minimum == 0 #fallback
     lines = res.split "\n"
     lines.each do |l|
@@ -38,7 +38,7 @@ class GetentPasswd < BaseModel::Base
         result << GetentPasswd.new(:login => elements[0], :full_name => elements[4])
       end
     end
-    active_directory_users = `which wbinfo >/dev/null && wbinfo -u --domain .`
+    active_directory_users = pure_wbinfo
     if $?
       lines = active_directory_users.split "\n"
       lines.each do |l|
@@ -47,5 +47,18 @@ class GetentPasswd < BaseModel::Base
       end
     end
     result
+  end
+
+private
+  def self.system_minimum
+    (`cat /etc/login.defs | grep '^UID_MIN' | sed 's/^UID_MIN[^0-9]*\\([0-9]\\+\\).*$/\\1/'`).to_i
+  end
+
+  def self.pure_getent
+    `getent passwd`
+  end
+
+  def self.pure_wbinfo
+    `which wbinfo >/dev/null && wbinfo -u --domain .`
   end
 end
