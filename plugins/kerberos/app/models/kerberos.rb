@@ -45,12 +45,12 @@ public
   end
 
   def save
-    params	= {
-	"kdc" 		=> [ "s", @kdc],
-	"default_realm"	=> [ "s", @default_realm],
-	"default_domain"=> [ "s", @default_domain],
-	"use_kerberos"	=> [ "b", @enabled]
-    }
+    params	= {}
+    params["kdc"]		= [ "s", @kdc] unless @kdc.nil?
+    params["default_realm"]	= [ "s", @default_realm] unless @default_realm.nil?
+    params["default_domain"]	= [ "s", @default_domain] unless @default_domain.nil?
+    params["use_kerberos"]	= [ "b", @enabled] unless @enabled.nil?
+
     yapi_ret = YastService.Call("YaPI::KERBEROS::Write", params)
     Rails.logger.debug "YaPI returns: '#{yapi_ret}'"
     return true

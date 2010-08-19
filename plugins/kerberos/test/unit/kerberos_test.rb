@@ -41,14 +41,12 @@ class KerberosTest < ActiveSupport::TestCase
   end
 
   def test_write
-    kerberos			= Kerberos.find
+    kerberos			= Kerberos.new
     kerberos.kdc		= "kdc.novell.com"
     kerberos.default_domain	= "novell.com"
     YastService.stubs(:Call).with('YaPI::KERBEROS::Write', {
 	"kdc"		=> [ "s", "kdc.novell.com"],
-	"default_domain"=> [ "s", "novell.com"],
-	"default_realm"	=> [ "s", "SUSE.CZ"],
-	"use_kerberos"	=> [ "b", true]
+	"default_domain"=> [ "s", "novell.com"]
     }).returns(0)
     kerberos.save
   end

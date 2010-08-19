@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Thu Aug 19 08:50:52 CEST 2010 - jsuchome@suse.cz
+
+- do not try to save undefined values (bnc#632669)
+- 0.2.3 
+
+-------------------------------------------------------------------
 Mon Jul 26 18:35:05 CEST 2010 - jsuchome@suse.cz
 
 - do not read settings twice before writing

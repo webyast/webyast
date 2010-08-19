@@ -46,7 +46,7 @@ class KerberosController < ApplicationController
 
     args	= params["kerberos"]
 		  	
-    kerberos = Kerberos.new
+    kerberos = Kerberos.new # do not read, it can take much time because of DNS
     kerberos.load args
     kerberos.save
 
