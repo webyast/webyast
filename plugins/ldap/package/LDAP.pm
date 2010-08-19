@@ -54,17 +54,29 @@ sub Write {
     my $args	= shift;
     my $ret	= 0;
 
-    # transform integers to real booleans
-    if (defined $args->{"start_ldap"}) {
-	$args->{"start_ldap"}	= YaST::YCP::Boolean ($args->{"start_ldap"});
-    }
-    if (defined $args->{"ldap_tls"}) {
-	$args->{"ldap_tls"}	= YaST::YCP::Boolean ($args->{"ldap_tls"});
-    }
-
     Progress->set (0);
     Ldap->Read ();
-    Ldap->Import ($args);
+
+    # transform integers to real booleans
+    if (defined $args->{"start_ldap"}) {
+	Ldap->start (YaST::YCP::Boolean ($args->{"start_ldap"}));
+    }
+    if (defined $args->{"ldap_tls"}) {
+	Ldap->ldap_tls (YaST::YCP::Boolean ($args->{"ldap_tls"}));
+    }
+
+    Ldap->server ($args->{"ldap_server"}) if defined $args->{"ldap_server"};
+    if (defined $args->{"ldap_domain"}) {
+	my $base_dn	= $args->{"ldap_domain"} || "";
+	Ldap->SetBaseDN ($base_dn);
+	Ldap->nss_base_passwd ($base_dn);
+	Ldap->nss_base_shadow ($base_dn);
+	Ldap->nss_base_group ($base_dn);
+    }
+
+    Ldap->modified (1);
+    Ldap->openldap_modified (1);
+
     Ldap->Write (undef);
     return $ret;
 }
