@@ -104,7 +104,7 @@ rm -rf $RPM_BUILD_ROOT
 %{plugin_dir}/uninstall.rb
 %{plugin_dir}/app
 %{plugin_dir}/config
-%{plugin_dir}/tasks
+%{plugin_dir}/lib
 %{plugin_dir}/doc/README_FOR_APP
 %attr(0700,%{webyast_ws_user},%{webyast_ws_user}) %dir %{webyast_ws_vardir}/roles
 %attr(0600,%{webyast_ws_user},%{webyast_ws_user}) %config %{webyast_ws_vardir}/roles/*
