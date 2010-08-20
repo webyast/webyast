@@ -115,7 +115,7 @@ rm -rf $RPM_BUILD_ROOT
 %{plugin_dir}/uninstall.rb
 %{plugin_dir}/app
 %{plugin_dir}/config
-%{plugin_dir}/tasks
+%{plugin_dir}/lib
 %{plugin_dir}/doc/README_FOR_APP
 
 %doc COPYING
