@@ -159,7 +159,7 @@ rccollectd try-restart
 %{plugin_dir}/doc/logs.yml
 %{plugin_dir}/Rakefile
 %{plugin_dir}/README
-%{plugin_dir}/tasks
+%{plugin_dir}/lib
 %{plugin_dir}/public
 %{plugin_dir}/config/*
 %dir %attr (-,%{webyast_ws_user},root) %{plugin_dir}/config
