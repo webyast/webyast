@@ -18,7 +18,7 @@ PreReq:         yast2-webservice, yast2-registration, rubygem-gettext_rails
 License:        GPL v2 only
 Group:          Productivity/Networking/Web/Utilities
 Autoreqprov:    on
-Version:        0.1.10
+Version:        0.1.11
 Release:        0
 Summary:        WebYaST - Registration service
 Source:         www.tar.bz2
@@ -30,14 +30,18 @@ BuildRequires:  webyast-base-ws-testsuite rubygem-gettext_rails
 BuildRequires:	rubygem-test-unit rubygem-mocha
 
 # YaST2/modules/YSR.pm  
-%if 0%{?suse_version} == 0 || %suse_version > 1110  
-# 11.2 or newer  
-Requires:       yast2-registration > 2.18.2
-%else  
-# 11.1 or SLES11  
-Requires:       yast2-registration > 2.17.27
-%endif  
-
+%if 0%{?suse_version} == 0 || 0%{?suse_version} > 1120
+# non-suse, factory, and YaST:HEAD
+Requires:       yast2-registration >= 2.19.6
+%else
+%if 0%{?suse_version} == 1120
+Requires:       yast2-registration >= 2.18.4
+%endif
+%if 0%{?suse_version} <= 1110
+# SLE11 and 11.1
+Requires:       yast2-registration >= 2.17.34
+%endif
+%endif
 #
 %define plugin_name registration
 %define plugin_dir %{webyast_ws_dir}/vendor/plugins/%{plugin_name}
