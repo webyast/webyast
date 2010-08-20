@@ -115,7 +115,7 @@ rm -rf $RPM_BUILD_ROOT
 %{plugin_dir}/app
 %{plugin_dir}/config
 %{plugin_dir}/public
-%{plugin_dir}/tasks
+%{plugin_dir}/lib
 /usr/share/YaST2/modules/YaPI/FIREWALL.pm
 %attr(644,root,root) %config /usr/share/PolicyKit/policy/org.opensuse.yast.modules.yapi.firewall.policy
 %doc COPYING
