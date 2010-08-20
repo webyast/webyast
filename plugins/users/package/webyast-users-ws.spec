@@ -100,7 +100,7 @@ rm -rf $RPM_BUILD_ROOT
 %{plugin_dir}/uninstall.rb
 %{plugin_dir}/Rakefile
 %{plugin_dir}/README
-%{plugin_dir}/tasks
+%{plugin_dir}/lib
 
 %dir /usr/share/PolicyKit
 %dir /usr/share/PolicyKit/policy
