@@ -140,7 +140,7 @@ rm -rf $RPM_BUILD_ROOT
 %{plugin_dir}/config
 %{plugin_dir}/public
 %{plugin_dir}/doc
-%{plugin_dir}/tasks
+%{plugin_dir}/lib
 
 /usr/share/YaST2/modules/YML.rb
 /usr/share/YaST2/modules/YaPI/SERVICES.pm
