@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Mon Aug 23 13:15:37 UTC 2010 - jreidinger@novell.com
+
+- add url to spec file (bnc#625537)
+- 0.2.0
+
+-------------------------------------------------------------------
 Mon Aug 23 09:42:02 UTC 2010 - schubi@novell.com
 
 - Regarding empty mail file (bnc#630600 )
