@@ -1,4 +1,11 @@
 -------------------------------------------------------------------
+Mon Aug 23 13:48:40 UTC 2010 - jreidinger@novell.com
+
+- add url to spec file (bnc#625537)
+- move tasks to lib directory (bnc#622957)
+- 0.2.6
+
+-------------------------------------------------------------------
 Thu Aug 12 11:23:11 CEST 2010 - jsuchome@suse.cz
 
 - updated documentation of config files
