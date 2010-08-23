@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Mon Aug 23 12:52:44 UTC 2010 - jreidinger@novell.com
+
+- add url to spec file (bnc#625537)
+- 0.2.1
+
+-------------------------------------------------------------------
 Fri Aug  6 14:13:36 CEST 2010 - jsuchome@suse.cz
 
 - check vendor subdirectory for config file (bnc#628654)
