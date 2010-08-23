@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Mon Aug 23 12:43:06 UTC 2010 - jreidinger@novell.com
+
+- add url to spec file (bnc#625537)
+- 0.2.5
+
+-------------------------------------------------------------------
 Fri Aug  6 11:36:17 CEST 2010 - jsuchome@suse.cz
 
 - added support for leaving AD domain
