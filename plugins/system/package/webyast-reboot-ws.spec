@@ -24,7 +24,6 @@ Version:        0.2.0
 Release:        0
 Summary:        WebYaST - reboot/shutdown service
 Source:         www.tar.bz2
-Url:            http://en.opensuse.org/YaST/Web
 BuildRoot:      %{_tmppath}/%{name}-%{version}-build
 BuildArch:      noarch
 BuildRequires:  rubygem-webyast-rake-tasks >= 0.1.3
