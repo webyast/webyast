@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Mon Aug 23 13:19:02 UTC 2010 - jreidinger@novell.com
+
+- add url to spec file (bnc#625537)
+- 0.2.0
+
+-------------------------------------------------------------------
 Fri Jul 30 10:31:42 CEST 2010 - mzugec@suse.cz
 
 - static hostname with dhcp feature (bnc#624655)
