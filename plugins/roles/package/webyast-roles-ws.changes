@@ -1,4 +1,12 @@
 -------------------------------------------------------------------
+Mon Aug 23 13:37:04 UTC 2010 - jreidinger@novell.com
+
+- add url to spec file (bnc#625537)
+- move tasks to lib directory (bnc#622957)
+- more precise specify permissions of directory
+- 0.2.0
+
+-------------------------------------------------------------------
 Thu Jul  8 10:57:40 UTC 2010 - jreidinger@novell.com
 
 - initial release of roles backend
