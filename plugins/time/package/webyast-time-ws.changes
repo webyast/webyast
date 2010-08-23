@@ -1,4 +1,11 @@
 -------------------------------------------------------------------
+Mon Aug 23 14:39:51 UTC 2010 - jreidinger@novell.com
+
+- add url to spec file (bnc#625537)
+- move tasks to lib directory (bnc#622957)
+- 0.2.0
+
+-------------------------------------------------------------------
 Thu Jul  8 11:42:55 UTC 2010 - jreidinger@novell.com
 
 - unify structure of json and xml output
