@@ -18,6 +18,7 @@ Provides:       yast2-webservice-network = %{version}
 Obsoletes:      yast2-webservice-network < %{version}
 License:	GPL v2 only
 Group:          Productivity/Networking/Web/Utilities
+URL:            http://en.opensuse.org/Portal:WebYaST
 Autoreqprov:    on
 Version:        0.1.8
 Release:        0

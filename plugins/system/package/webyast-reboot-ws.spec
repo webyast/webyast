@@ -18,6 +18,7 @@ PreReq:         yast2-webservice
 Requires:	hal
 License:	GPL v2 only
 Group:          Productivity/Networking/Web/Utilities
+URL:            http://en.opensuse.org/Portal:WebYaST
 Autoreqprov:    on
 Version:        0.1.4
 Release:        0

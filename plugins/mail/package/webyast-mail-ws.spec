@@ -16,6 +16,7 @@ Obsoletes:      yast2-webservice-mailsettings < %{version}
 PreReq:         yast2-webservice rubygem-gettext_rails
 License:	GPL v2 only
 Group:          Productivity/Networking/Web/Utilities
+URL:            http://en.opensuse.org/Portal:WebYaST
 Autoreqprov:    on
 Version:        0.1.19
 Release:        0

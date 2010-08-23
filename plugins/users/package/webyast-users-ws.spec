@@ -17,6 +17,7 @@ Obsoletes:      yast2-webservice-users < %{version}
 PreReq:         yast2-webservice
 License:        GPL v2 only
 Group:          Productivity/Networking/Web/Utilities
+URL:            http://en.opensuse.org/Portal:WebYaST
 Autoreqprov:    on
 Version:        0.1.17
 Release:        0

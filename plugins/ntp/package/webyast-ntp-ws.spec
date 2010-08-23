@@ -21,6 +21,7 @@ Requires:	ntp
 Requires:	util-linux
 License:	GPL v2 only
 Group:          Productivity/Networking/Web/Utilities
+URL:            http://en.opensuse.org/Portal:WebYaST
 Autoreqprov:    on
 Version:        0.1.7
 Release:        0

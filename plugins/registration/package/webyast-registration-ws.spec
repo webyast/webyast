@@ -17,6 +17,7 @@ Obsoletes:      yast2-webservice-registration < %{version}
 PreReq:         yast2-webservice, yast2-registration, rubygem-gettext_rails
 License:        GPL v2 only
 Group:          Productivity/Networking/Web/Utilities
+URL:            http://en.opensuse.org/Portal:WebYaST
 Autoreqprov:    on
 Version:        0.1.11
 Release:        0

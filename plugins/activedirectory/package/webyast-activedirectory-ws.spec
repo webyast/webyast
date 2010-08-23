@@ -14,6 +14,7 @@ Provides:       WebYaST(org.opensuse.yast.modules.yapi.activedirectory)
 PreReq:         webyast-base-ws
 License:	GPL v2 only
 Group:          Productivity/Networking/Web/Utilities
+URL:            http://en.opensuse.org/Portal:WebYaST
 Autoreqprov:    on
 Version:        0.2.4
 Release:        0

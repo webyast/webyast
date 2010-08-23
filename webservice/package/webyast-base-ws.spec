@@ -44,6 +44,7 @@ PreReq:         rubygem-rails-2_3 >= 2.3.4
 PreReq:         rubygem-rpam, rubygem-polkit, rubygem-gettext_rails
 License:	LGPL v2.1 only
 Group:          Productivity/Networking/Web/Utilities
+URL:            http://en.opensuse.org/Portal:WebYaST
 Autoreqprov:    on
 Version:        0.2.0
 Release:        0

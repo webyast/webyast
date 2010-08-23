@@ -16,6 +16,7 @@ Provides:       WebYaST(org.example.plugin)
 PreReq:         yast2-webservice
 License:	      BSD
 Group:          Productivity/Networking/Web/Utilities
+URL:            http://en.opensuse.org/Portal:WebYaST
 Autoreqprov:    on
 Version:        0.1
 Release:        0
