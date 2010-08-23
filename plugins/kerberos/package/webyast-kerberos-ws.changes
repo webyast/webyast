@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Mon Aug 23 12:58:41 UTC 2010 - jreidinger@novell.com
+
+- add url to spec file (bnc#625537)
+- 0.2.4
+
+-------------------------------------------------------------------
 Thu Aug 19 08:50:52 CEST 2010 - jsuchome@suse.cz
 
 - do not try to save undefined values (bnc#632669)
