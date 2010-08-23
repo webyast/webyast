@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Mon Aug 23 13:20:31 UTC 2010 - jreidinger@novell.com
+
+- add url to spec file (bnc#625537)
+- 0.2.0
+
+-------------------------------------------------------------------
 Thu Jul  8 10:47:55 UTC 2010 - jreidinger@novell.com
 
 - increase number of attempts for ntp server (bnc#604629)
