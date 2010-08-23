@@ -26,7 +26,7 @@ class MailState
   def self.read()
     if File.exist? Mail::TEST_MAIL_FILE
       f = File.new(Mail::TEST_MAIL_FILE, 'r')
-      mail = f.gets.chomp
+      mail = f.gets
       mail = "" if mail.nil?
       f.close
 
@@ -43,7 +43,7 @@ class MailState
       return { :level => "warning",
                :message_id => "MAIL_SENT",
                :short_description => _("Mail configuration test not confirmed"),
-               :long_description => _("While configuring mail, a test mail was sent to %s . Was the mail delivered to this address?<br>If so, confirm it by pressing the button. Otherwise check your mail configuration again.") % mail,
+               :long_description => _("While configuring mail, a test mail was sent to %s . Was the mail delivered to this address?<br>If so, confirm it by pressing the button. Otherwise check your mail configuration again.") % mail.chomp,
 	       :details	=> details,
                :confirmation_host => "service",
                :confirmation_link => "/mail/state",
