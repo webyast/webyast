@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Mon Aug 23 13:21:55 UTC 2010 - jreidinger@novell.com
+
+- add url to spec file (bnc#625537)
+- 0.2.0
+
+-------------------------------------------------------------------
 Fri Aug 20 19:03:55 CEST 2010 - jdsn@suse.de
 
 - adapt requires, a new yast2-registration is needed (bnc#633183)
