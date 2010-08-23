@@ -1,3 +1,6 @@
+- Avoid Error.LimitsExceeded when installing for a long time
+  (bnc#617350)
+
 -------------------------------------------------------------------
 Thu Jul 29 08:05:00 UTC 2010 - jreidinger@novell.com
 

@@ -235,13 +235,13 @@ class Patch < Resolvable
     end
   end
 
-  def self.do_install(pk_id, signal_list = nil, &block)
+  def self.do_install(pk_id, signal_list = [], &block)
     ok = true
     transaction_iface, packagekit_iface = PackageKit.connect
 
     proxy = transaction_iface.object
     
-    if !signal_list.blank? && block_given?
+    if block_given?
       signal_list.each { |signal|
         # set the custom signal handle
         proxy.on_signal(signal.to_s, &block) 
@@ -275,6 +275,15 @@ class Patch < Resolvable
     packagekit_iface.SuggestDaemonQuit
 
     ok &= error.blank?
+
+    # bnc#617350, remove signals
+    proxy.on_signal "Error"
+    proxy.on_signal "Package"
+    if block_given?
+      signal_list.each { |signal|
+        proxy.on_signal signal.to_s
+      }
+    end
 
     return ok
   end

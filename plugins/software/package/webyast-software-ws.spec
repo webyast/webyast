@@ -17,12 +17,12 @@ Provides:       yast2-webservice-patches = %{version}
 Obsoletes:      yast2-webservice-patches < %{version}
 
 # for testing
-BuildRequires:  ruby-dbus >= 0.3.0
+BuildRequires:  ruby-dbus >= 0.3.1
 
 PreReq:         yast2-webservice
 # ruby-dbus is required by webyast-base-ws already
-# but here we use a recent feature, InterfaceElement#add_fparam
-Requires:       ruby-dbus >= 0.3.0
+# but here we use a recent feature of on_signal
+Requires:       ruby-dbus >= 0.3.1
 
 %if 0%{?suse_version} == 0 || 0%{?suse_version} > 1120
 # openSUSE-11.3 (Factory) or newer

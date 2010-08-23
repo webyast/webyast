@@ -67,7 +67,14 @@ class PackageKit
     proxy.on_signal("Finished") {|u1,u2| dbusloop.quit }
     dbusloop
   end
-  
+
+  # bnc#617350, remove signals
+  def self.dbusloop_unregister(proxy)
+    proxy.on_signal("Finished")
+    proxy.on_signal("RepoSignatureRequired")
+    proxy.on_signal("ErrorCode")
+  end
+
   public
   #
   # PackageKit.connect
@@ -163,6 +170,14 @@ class PackageKit
 
       # run the main loop, process the incoming signals
       dbusloop.run
+
+      # bnc#617350, remove signals
+      self.dbusloop_unregister proxy
+      if bg_stat
+        proxy.on_signal("ProgressChanged")
+        proxy.on_signal("StatusChanged")
+      end
+      proxy.on_signal(signal.to_s) if !signal.blank? && block_given?
 
       packagekit_iface.SuggestDaemonQuit
 
