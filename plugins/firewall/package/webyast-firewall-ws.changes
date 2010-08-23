@@ -1,4 +1,11 @@
 -------------------------------------------------------------------
+Mon Aug 23 12:54:23 UTC 2010 - jreidinger@novell.com
+
+- add url to spec file (bnc#625537)
+- move tasks to lib directory (bnc#622957)
+- 0.2.7
+
+-------------------------------------------------------------------
 Thu Jul  8 10:30:28 UTC 2010 - jreidinger@novell.com
 
 - add REST API documentation (mkudlvasr)
