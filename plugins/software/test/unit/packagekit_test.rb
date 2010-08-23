@@ -62,4 +62,27 @@ class PackageKitTest < ActiveSupport::TestCase
     result = Patch.install :id1
     assert result
   end
+
+  def test_zypp_error
+    msg = DBus::Message.new
+    msg.error_name = "org.freedesktop.DBus.Error.Spawn.ChildExited"
+    @transaction.stubs(:GetUpdates).with("NONE").raises(DBus::Error.new(msg))
+    File.stubs(:read).with("/var/run/zypp.pid").returns "42\n"
+
+    assert_raises PackageKitError do
+      result = PackageKit.transact "GetUpdates", "NONE"
+    end
+  end
+  
+  def test_packagekit_missing_error
+    msg = DBus::Message.new
+    msg.error_name = "org.freedesktop.DBus.Error.ServiceUnknown"
+    msg.add_param(DBus::Type::STRING, "WTF PackageKit?!")
+    @transaction.stubs(:GetUpdates).with("NONE").raises(DBus::Error.new(msg))
+
+    assert_raises ServiceNotAvailable do
+      result = PackageKit.transact "GetUpdates", "NONE"
+    end
+  end
+  
 end

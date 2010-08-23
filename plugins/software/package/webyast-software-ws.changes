@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Mon Aug 23 16:36:53 CEST 2010 - mvidner@suse.cz
+
+- Better message if PackageKit fails on ZYpp lock (bnc#559473).
+- 0.2.2
+
+-------------------------------------------------------------------
 Mon Aug 23 13:58:42 UTC 2010 - jreidinger@novell.com
 
 - fix reporting installed package

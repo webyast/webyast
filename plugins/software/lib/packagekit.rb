@@ -49,6 +49,29 @@ end
 class PackageKit
 
   private
+  def self.improve_error(dbus_error)
+    # check if it is a known error
+    if dbus_error.message =~ /org.freedesktop.DBus.Error.([A-Za-z.]*)/
+      case $1
+      when "ServiceUnknown"
+        return ServiceNotAvailable.new('PackageKit')
+      # bnc#559473
+      when "Spawn.ChildExited"
+        locked = nil
+        begin
+          pid = File.read("/var/run/zypp.pid").to_i
+          locked = PackageKitError.new "The ZYpp package manager is locked by process #{pid}. Retry later."
+        rescue Exception => e
+          # it may have got unlocked already
+          Rails.logger.error "OOPS #{e}"
+        end
+        return locked unless locked.nil?
+      end
+    end
+    # otherwise unchanged
+    dbus_error
+  end
+
   def self.dbusloop proxy, error = ''
     dbusloop = DBus::Main.new
     proxy.on_signal("ErrorCode") do |u1,u2| 
@@ -112,6 +135,8 @@ class PackageKit
     transaction_proxy.default_iface = "org.freedesktop.PackageKit.Transaction"
 
     [transaction_iface, packagekit_iface]
+  rescue DBus::Error => dbus_error
+    raise self.improve_error dbus_error
   end
 
   # returns the modification time of the resolvable
@@ -184,10 +209,7 @@ class PackageKit
       raise PackageKitError.new(error) unless error.blank?
 
     rescue DBus::Error => dbus_error
-      # check if it is a known error
-      raise ServiceNotAvailable.new('PackageKit') if dbus_error.message =~ /org.freedesktop.DBus.Error.ServiceUnknown/
-      # otherwise rethrow
-      raise dbus_error
+      raise self.improve_error dbus_error
     rescue Exception => e
       raise e
     end
