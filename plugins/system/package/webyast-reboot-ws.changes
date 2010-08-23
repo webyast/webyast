@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Mon Aug 23 14:31:21 UTC 2010 - jreidinger@novell.com
+
+- add url to spec file (bnc#625537)
+- 0.2.0
+
+-------------------------------------------------------------------
 Mon May 10 14:00:56 UTC 2010 - jreidinger@novell.com
 
 - expect 403 when there is not enough permission in test suite
