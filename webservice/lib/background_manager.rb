@@ -57,6 +57,13 @@ class BackgroundManager
     end
   end
 
+  # does process exist? (you can also match id using a regexp - see get_matching_process_ids)
+  def process_exists?(id)
+    @mutex.synchronize do
+      @done.has_key?(id) || @running.has_key?(id)
+    end
+  end
+
   # remove the progress status and remember the real final value
   def finish_process(id, value)
     @mutex.synchronize do
