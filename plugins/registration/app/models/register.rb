@@ -71,11 +71,20 @@ class Register
     @context = { 'yastcall'     => '1',
                  'norefresh'    => '1',
                  'restoreRepos' => '1',
-                 'forcereg'     => '1',
                  'nohwdata'     => '0',
                  'nooptional'   => '0',
                  'debug'        => '2',
                  'logfile'      => Paths::REGISTRATION_LOG }
+
+    # read system proxy settings and set proxy in the suseRegister context (bnc#626965)
+    sc_proxy = "/etc/sysconfig/proxy"
+    proxy_enabled = `grep "^[[:space:]]*PROXY_ENABLED[[:space:]]*=" #{sc_proxy} | head -1 `.to_s.chomp.sub(/^[^=]*=\s*"(.*)".*$/, '\1')
+    http_proxy    = `grep "^[[:space:]]*HTTP_PROXY[[:space:]]*="    #{sc_proxy} | head -1 `.to_s.chomp.sub(/^[^=]*=\s*"(.*)".*$/, '\1')
+    https_proxy   = `grep "^[[:space:]]*HTTPS_PROXY[[:space:]]*="   #{sc_proxy} | head -1 `.to_s.chomp.sub(/^[^=]*=\s*"(.*)".*$/, '\1')
+
+    # TODO write to context if proxy is enabled 
+
+    # last action: overwrite the context settings with the settings that were sent with the request
     @context.merge! hash if hash.kind_of?(Hash)
   end
 
