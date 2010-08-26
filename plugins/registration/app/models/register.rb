@@ -84,8 +84,8 @@ class Register
 
     # set proxy settings in context for suseRegister backend
     if proxy_enabled.match %r/^yes$/i then
-      @context['http_proxy']  = http_proxy
-      @context['https_proxy'] = https_proxy
+      @context['proxy-http_proxy']  = http_proxy
+      @context['proxy-https_proxy'] = https_proxy
     end
 
     # last action: overwrite the context settings with the settings that were sent with the request
@@ -140,8 +140,9 @@ class Register
     @arguments = @arguments["missingarguments"] if @arguments && @arguments.has_key?('missingarguments')
 
 
-    if !@reg
+    if !@reg.kind_of?(Hash)
       exitcode = 99
+      @reg = Hash.new
     elsif @reg.has_key?('error') && @reg.has_key?('errorcode')
       exitcode = @reg['errorcode'].to_i
       exitcode = 199 if exitcode == 0
