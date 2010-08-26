@@ -82,7 +82,11 @@ class Register
     http_proxy    = `grep "^[[:space:]]*HTTP_PROXY[[:space:]]*="    #{sc_proxy} | head -1 `.to_s.chomp.sub(/^[^=]*=\s*"(.*)".*$/, '\1')
     https_proxy   = `grep "^[[:space:]]*HTTPS_PROXY[[:space:]]*="   #{sc_proxy} | head -1 `.to_s.chomp.sub(/^[^=]*=\s*"(.*)".*$/, '\1')
 
-    # TODO write to context if proxy is enabled 
+    # set proxy settings in context for suseRegister backend
+    if proxy_enabled.match %r/^yes$/i then
+      @context['http_proxy']  = http_proxy
+      @context['https_proxy'] = https_proxy
+    end
 
     # last action: overwrite the context settings with the settings that were sent with the request
     @context.merge! hash if hash.kind_of?(Hash)
