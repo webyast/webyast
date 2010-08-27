@@ -1,7 +1,8 @@
 -------------------------------------------------------------------
 Thu Aug 26 16:57:14 CEST 2010 - jdsn@suse.de
 
-- fix configuration of system proxy setting (bnc#626965)
+- fix registration proxy configuration (bnc#626965)
+- 0.2.1
 
 -------------------------------------------------------------------
 Mon Aug 23 13:21:55 UTC 2010 - jreidinger@novell.com

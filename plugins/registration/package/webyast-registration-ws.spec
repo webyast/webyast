@@ -19,7 +19,7 @@ License:        GPL v2 only
 Group:          Productivity/Networking/Web/Utilities
 URL:            http://en.opensuse.org/Portal:WebYaST
 Autoreqprov:    on
-Version:        0.2.0
+Version:        0.2.1
 Release:        0
 Summary:        WebYaST - Registration service
 Source:         www.tar.bz2
@@ -33,14 +33,14 @@ BuildRequires:	rubygem-test-unit rubygem-mocha
 # YaST2/modules/YSR.pm  
 %if 0%{?suse_version} == 0 || 0%{?suse_version} > 1120
 # non-suse, factory, and YaST:HEAD
-Requires:       yast2-registration >= 2.19.6
+Requires:       yast2-registration >= 2.19.7
 %else
 %if 0%{?suse_version} == 1120
-Requires:       yast2-registration >= 2.18.4
+Requires:       yast2-registration >= 2.18.5
 %endif
 %if 0%{?suse_version} <= 1110
 # SLE11 and 11.1
-Requires:       yast2-registration >= 2.17.34
+Requires:       yast2-registration >= 2.17.35
 %endif
 %endif
 #
