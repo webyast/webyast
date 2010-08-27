@@ -5,6 +5,11 @@ Fri Aug 27 14:45:07 CEST 2010 - mzugec@suse.cz
 - 0.2.2 
 
 -------------------------------------------------------------------
+Wed Aug 25 18:08:09 CEST 2010 - mkudlvasr@suse.cz
+
+- Added BackgroundManager.process_exists? (for SLMS)
+
+-------------------------------------------------------------------
 Mon Aug 23 12:37:45 UTC 2010 - jreidinger@novell.com
 
 - add url to spec file (bnc#625537)
