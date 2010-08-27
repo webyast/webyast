@@ -254,7 +254,7 @@ echo "Database is ready"
 %attr(-,%{webyast_ws_user},%{webyast_ws_user}) %dir %{_var}/log/%{webyast_ws_user}
 
 #logrotate configuration file
-%config(noreplace) /etc/logrotate.d/webyast-ws.lr
+%config(noreplace) /etc/logrotate.d/webyast-ws.lr.conf
 
 #this /etc/webyast is for webyast configuration files
 %dir /etc/webyast/
