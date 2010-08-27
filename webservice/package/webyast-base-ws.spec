@@ -37,6 +37,8 @@ PreReq:         lighttpd > 1.4.20-2.29.1
 Requires:	lighttpd-mod_magnet, ruby-fcgi, ruby-dbus, sqlite, syslog-ng
 Requires:       rubygem-webyast-rake-tasks, rubygem-http_accept_language
 Requires:	yast2-dbus-server
+# 634404
+Recommends:     logrotate
 # gamin gives problems with lighttpd, so better conflict with it for now
 Conflicts:      gamin
 PreReq:         PolicyKit, PackageKit, rubygem-rake, rubygem-sqlite3
@@ -164,8 +166,8 @@ mkdir -p $RPM_BUILD_ROOT/etc/sysconfig/SuSEfirewall2.d/services
 install -m 0644 %SOURCE10 $RPM_BUILD_ROOT/etc/sysconfig/SuSEfirewall2.d/services
 
 # logrotate configuration bnc#634404
-mkdir %SOURCE11 $RPM_BUILD_ROOT/etc/logrotate.d/
-install -m 0644 %SOURCE11 $RPM_BUILD_ROOT/etc/logrotate.d/
+mkdir $RPM_BUILD_ROOT/etc/logrotate.d
+install -m 0644 %SOURCE11 $RPM_BUILD_ROOT/etc/logrotate.d
 
 #  create yastwsdirs (config, var and data)
 mkdir -p $RPM_BUILD_ROOT/etc/webyast
