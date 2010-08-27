@@ -59,7 +59,7 @@ class Registration::RegistrationController < ApplicationController
     #overwriting default options
     if params[:registration].has_key?(:options) && params[:registration][:options].is_a?(Hash)
       params[:registration][:options].each do |key, value|
-        @register.context[key] = value if @register.context.has_key? key
+        @register.context[key] = value
       end
     end
 
