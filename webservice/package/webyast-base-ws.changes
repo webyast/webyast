@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Fri Aug 27 14:45:07 CEST 2010 - mzugec@suse.cz
+
+- configuration for logrotate (bnc#634404)
+- 0.2.2 
+
+-------------------------------------------------------------------
 Mon Aug 23 12:37:45 UTC 2010 - jreidinger@novell.com
 
 - add url to spec file (bnc#625537)

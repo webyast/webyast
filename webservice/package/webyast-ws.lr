@@ -1,0 +1,14 @@
+/srv/www/yastws/log/production.log /srv/www/yastws/log/development.log /srv/www/yastws/log/lighttpd.access.log /srv/www/yastws/log/lighttpd.error.log {
+    compress
+    dateext
+    maxage 365
+    rotate 99
+    size=+4096k
+    notifempty
+    missingok
+    create 600 yastws yastws
+    postrotate
+     /etc/init.d/yastws reload
+    endscript
+}
+

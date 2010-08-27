@@ -46,7 +46,7 @@ License:	LGPL v2.1 only
 Group:          Productivity/Networking/Web/Utilities
 URL:            http://en.opensuse.org/Portal:WebYaST
 Autoreqprov:    on
-Version:        0.2.1
+Version:        0.2.2
 Release:        0
 Summary:        WebYaST - base components for rest service
 Source:         www.tar.bz2
@@ -252,6 +252,9 @@ echo "Database is ready"
 %attr(-,%{webyast_ws_user},%{webyast_ws_user}) %dir %{pkg_home}/sockets
 %attr(-,%{webyast_ws_user},%{webyast_ws_user}) %dir %{pkg_home}/cache
 %attr(-,%{webyast_ws_user},%{webyast_ws_user}) %dir %{_var}/log/%{webyast_ws_user}
+
+#logrotate configuration file
+%config(noreplace) /etc/logrotate.d/webyast-ws.lr
 
 #this /etc/webyast is for webyast configuration files
 %dir /etc/webyast/
