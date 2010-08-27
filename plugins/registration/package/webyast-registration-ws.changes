@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Sat Aug 28 01:25:55 CEST 2010 - jdsn@suse.de
+
+- small remaining fixes related to proxy issue fix (bnc#626965)
+- 0.2.2
+
+-------------------------------------------------------------------
 Thu Aug 26 16:57:14 CEST 2010 - jdsn@suse.de
 
 - fix registration proxy configuration (bnc#626965)
