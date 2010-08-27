@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: webyast-registration-ws\n"
 "POT-Creation-Date: 2010-08-02 12:59+0200\n"
-"PO-Revision-Date: 2010-08-26 08:58\n"
+"PO-Revision-Date: 2010-08-26 09:27\n"
 "Last-Translator: Novell Language <language@novell.com>\n"
 "Language-Team: Novell Language <language@novell.com>\n"
 "MIME-Version: 1.0\n"
@@ -15,13 +15,13 @@ msgstr ""
 
 #: app/models/registration_state.rb:30 ./app/models/registration_state.rb:30
 msgid "Registration is missing"
-msgstr "Registrierung fehlt"
+msgstr "Registrazione mancante"
 
 #: app/models/registration_state.rb:31 ./app/models/registration_state.rb:31
 msgid "Please register your system in order to get updates."
-msgstr "Wenn Sie Aktualisierungen erhalten wollen, müssen Sie Ihr System registrieren."
+msgstr "Registrare il sistema per ricevere gli aggiornamenti."
 
 #: app/models/registration_state.rb:34 ./app/models/registration_state.rb:34
 msgid "register"
-msgstr "Registrieren"
+msgstr "registra"
 

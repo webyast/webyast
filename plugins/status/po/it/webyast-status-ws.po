@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: webyast-status-ws\n"
 "POT-Creation-Date: 2010-08-02 12:58+0200\n"
-"PO-Revision-Date: 2010-08-26 08:58\n"
+"PO-Revision-Date: 2010-08-26 09:27\n"
 "Last-Translator: Novell Language <language@novell.com>\n"
 "Language-Team: Novell Language <language@novell.com>\n"
 "MIME-Version: 1.0\n"
@@ -16,37 +16,37 @@ msgstr ""
 #: app/models/graph.rb:116 config/status_configuration.yaml:64 ./app/models/graph.rb:116
 #: ./config/status_configuration.yaml:64
 msgid "GByte"
-msgstr "GB"
+msgstr "GByte"
 
 #: app/models/graph.rb:117 config/status_configuration.yaml:63 ./app/models/graph.rb:117
 #: ./config/status_configuration.yaml:63
 msgid "Disk"
-msgstr "Datenträger"
+msgstr "Disco"
 
 #: app/models/graph.rb:140 config/status_configuration.yaml:6 ./app/models/graph.rb:140
 #: ./config/status_configuration.yaml:6
 msgid "MByte/s"
-msgstr "MB/s"
+msgstr "MByte/s"
 
 #: app/models/graph.rb:141 config/status_configuration.yaml:5 ./app/models/graph.rb:141
 #: ./config/status_configuration.yaml:5
 msgid "Network"
-msgstr "Netzwerk"
+msgstr "Rete"
 
 #: app/models/graph.rb:163 config/status_configuration.yaml:87 ./app/models/graph.rb:163
 #: ./config/status_configuration.yaml:87
 msgid "MByte"
-msgstr "MB"
+msgstr "MByte"
 
 #: app/models/graph.rb:164 config/status_configuration.yaml:86 ./app/models/graph.rb:164
 #: ./config/status_configuration.yaml:86
 msgid "Memory"
-msgstr "Speicher"
+msgstr "Memoria"
 
 #: app/models/graph.rb:185 config/status_configuration.yaml:29 ./app/models/graph.rb:185
 #: ./config/status_configuration.yaml:29
 msgid "Percent"
-msgstr "Prozent"
+msgstr "Percentuale"
 
 #: app/models/graph.rb:186 config/status_configuration.yaml:28 ./app/models/graph.rb:186
 #: ./config/status_configuration.yaml:28

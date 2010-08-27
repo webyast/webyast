@@ -5,27 +5,27 @@ msgid ""
 msgstr ""
 "Project-Id-Version: webyast-mail-ws\n"
 "POT-Creation-Date: 2010-08-02 12:59+0200\n"
-"PO-Revision-Date: 2010-08-26 08:58\n"
+"PO-Revision-Date: 2010-08-26 09:25\n"
 "Last-Translator: Novell Language <language@novell.com>\n"
 "Language-Team: Novell Language <language@novell.com>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
 
 #: app/models/mail_state.rb:40 ./app/models/mail_state.rb:40
 msgid "It was not possible to retrieve the full hostname of the machine. If the mail could not be delivered, consult the network and/or mail configuration with your network administrator."
-msgstr "Es war nicht möglich, den vollständigen Hostnamen des Computers abzurufen. Falls die E-Mail nicht zugestellt wurde, prüfen Sie die Netzwerk- und/oder E-Mail-Konfiguration zusammen mit Ihrem Netzwerkadministrator."
+msgstr "La récupération du nom d'hôte entier de la machine a échoué. Si le message n'a pas pu être transmis, vérifiez le réseau et/ou la configuration de la messagerie avec votre administrateur réseau."
 
 #: app/models/mail_state.rb:45 ./app/models/mail_state.rb:45
 msgid "Mail configuration test not confirmed"
-msgstr "Der E-Mail-Konfigurationstest wurde nicht bestätigt."
+msgstr "Test de configuration de messagerie non confirmé"
 
 #: app/models/mail_state.rb:46 ./app/models/mail_state.rb:46
 msgid "While configuring mail, a test mail was sent to %s . Was the mail delivered to this address?<br>If so, confirm it by pressing the button. Otherwise check your mail configuration again."
-msgstr "Während der E-Mail-Konfiguration wurde eine Testnachricht an %s gesendet. Wurde die Nachricht dieser Adresse zugestellt?<br> Wenn ja, bestätigen Sie den Empfang durch Drücken der Schaltfläche. Überprüfen Sie anderenfalls Ihre E-Mail-Konfiguration."
+msgstr "Lors de la configuration de la messagerie, un message de test a été envoyé à %s. Le message est-il parvenu à cette adresse ?<br>Si oui, confirmez la réception en appuyant sur le bouton. Si non, revérifiez la configuration de votre messagerie."
 
 #: app/models/mail_state.rb:50 ./app/models/mail_state.rb:50
 msgid "Test mail received"
-msgstr "Testnachricht erhalten"
+msgstr "Message de test reçu"
 
