@@ -26,8 +26,7 @@ require 'mocha'
 
 class RegisterTest < ActiveSupport::TestCase
 
-  CONTEXT =  {"forcereg"=>["s", "1"],
-              "logfile"=>["s", "/root/.suse_register.log"],
+  CONTEXT =  {"logfile"=>["s", "/root/.suse_register.log"],
               "restoreRepos"=>["s", "1"],
               "nooptional"=>["s", "0"],
               "yastcall"=>["s", "1"],
