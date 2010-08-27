@@ -60,6 +60,7 @@ Source7:        lighttpd.conf
 Source8:        modules.conf
 Source9:        yastws
 Source10:       webyast
+Source11:	webyast-ws.lr.conf
 BuildRoot:      %{_tmppath}/%{name}-%{version}-build
 BuildRequires:  ruby, pkg-config, rubygem-mocha
 # if we run the tests during build, we need most of Requires here too,
@@ -161,6 +162,10 @@ install -m 0555 %SOURCE5 $RPM_BUILD_ROOT/usr/sbin/
 # firewall service definition, bnc#545627
 mkdir -p $RPM_BUILD_ROOT/etc/sysconfig/SuSEfirewall2.d/services
 install -m 0644 %SOURCE10 $RPM_BUILD_ROOT/etc/sysconfig/SuSEfirewall2.d/services
+
+# logrotate configuration bnc#634404
+mkdir %SOURCE11 $RPM_BUILD_ROOT/etc/logrotate.d/
+install -m 0644 %SOURCE11 $RPM_BUILD_ROOT/etc/logrotate.d/
 
 #  create yastwsdirs (config, var and data)
 mkdir -p $RPM_BUILD_ROOT/etc/webyast
