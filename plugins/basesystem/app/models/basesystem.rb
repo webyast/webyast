@@ -49,6 +49,7 @@ class Basesystem < BaseModel::Base
     base = Basesystem.new
     basesystem_conf	= BASESYSTEM_CONF
     basesystem_conf	= BASESYSTEM_CONF_VENDOR if File.exists? BASESYSTEM_CONF_VENDOR
+    Rails.logger.info "Reading config file: #{basesystem_conf}"
     config = YaST::ConfigFile.new(basesystem_conf)
     if File.exist?(config.path)
       begin

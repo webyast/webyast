@@ -96,6 +96,7 @@ class License
   def self.license_names
     config_id	= :eulas
     config_id	= EULAS_VENDOR if File.exists? EULAS_VENDOR
+    Rails.logger.info "Reading config file: #{config_id}"
     config = YaST::ConfigFile.new(config_id)
     begin
       config["licenses"] || []
