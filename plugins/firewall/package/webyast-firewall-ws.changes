@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Tue Aug 31 07:17:40 UTC 2010 - schubi@novell.com
+
+- resubmit due ULR changes
+- 0.2.8 
+
+-------------------------------------------------------------------
 Mon Aug 23 12:54:23 UTC 2010 - jreidinger@novell.com
 
 - add url to spec file (bnc#625537)
