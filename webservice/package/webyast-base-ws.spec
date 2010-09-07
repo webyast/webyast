@@ -48,7 +48,7 @@ License:	LGPL v2.1 only
 Group:          Productivity/Networking/Web/Utilities
 URL:            http://en.opensuse.org/Portal:WebYaST
 Autoreqprov:    on
-Version:        0.2.2
+Version:        0.2.3
 Release:        0
 Summary:        WebYaST - base components for rest service
 Source:         www.tar.bz2
@@ -232,6 +232,10 @@ RAILS_ENV=production rake db:migrate
 chown -R %{webyast_ws_user}: db
 chown -R %{webyast_ws_user}: log
 echo "Database is ready"
+#
+# try-reload D-Bus config (bnc#635826)
+#
+dbus-send --print-reply --system --dest=org.freedesktop.DBus / org.freedesktop.DBus.ReloadConfig >/dev/null ||:
 
 #---------------------------------------------------------------
 %preun

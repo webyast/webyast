@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Tue Sep  7 14:45:46 CEST 2010 - mvidner@suse.cz
+
+- reload D-Bus config explicitly (bnc#635826).
+- 0.2.3
+
+-------------------------------------------------------------------
 Fri Aug 27 14:45:07 CEST 2010 - mzugec@suse.cz
 
 - configuration for logrotate (bnc#634404)
