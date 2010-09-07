@@ -2,6 +2,7 @@
 Tue Sep  7 14:45:46 CEST 2010 - mvidner@suse.cz
 
 - reload D-Bus config explicitly (bnc#635826).
+- BuildRequire the more recent rubygem variants of polkit and rpam (bnc#636781)
 - 0.2.3
 
 -------------------------------------------------------------------

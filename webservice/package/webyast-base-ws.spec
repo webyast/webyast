@@ -71,7 +71,7 @@ BuildRequires:  rubygem-webyast-rake-tasks, rubygem-restility
 BuildRequires:  yast2-core, yast2-dbus-server, ruby-dbus, sqlite, dbus-1
 BuildRequires:  PolicyKit, PackageKit, rubygem-sqlite3
 BuildRequires:  rubygem-rails-2_3 >= 2.3.4
-BuildRequires:  ruby-rpam, ruby-polkit
+BuildRequires:  rubygem-rpam, rubygem-polkit
 # the testsuite is run during build
 BuildRequires:	rubygem-test-unit rubygem-mocha
 
