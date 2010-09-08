@@ -1,4 +1,11 @@
 -------------------------------------------------------------------
+Wed Sep  8 19:58:18 UTC 2010 - lslezak@suse.cz
+
+- added .pkla file for polkit-1 (needed by PackageKit in
+  openSUSE >= 11.3)
+- 0.2.3
+
+-------------------------------------------------------------------
 Mon Aug 23 16:36:53 CEST 2010 - mvidner@suse.cz
 
 - Better message if PackageKit fails on ZYpp lock (bnc#559473).

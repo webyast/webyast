@@ -40,13 +40,14 @@ License:	GPL v2 only
 Group:          Productivity/Networking/Web/Utilities
 URL:            http://en.opensuse.org/Portal:WebYaST
 Autoreqprov:    on
-Version:        0.2.2
+Version:        0.2.3
 Release:        0
 Summary:        WebYaST - software management service
 Source:         www.tar.bz2
 Source1:        org.opensuse.yast.system.patches.policy
 Source2:        org.opensuse.yast.system.packages.policy
 Source3:        org.opensuse.yast.system.repositories.policy
+Source4:	01-org.opensuse.yast.software.pkla
 BuildRoot:      %{_tmppath}/%{name}-%{version}-build
 BuildArch:      noarch
 
@@ -107,6 +108,12 @@ install -m 0644 %SOURCE1 $RPM_BUILD_ROOT/usr/share/PolicyKit/policy/
 install -m 0644 %SOURCE2 $RPM_BUILD_ROOT/usr/share/PolicyKit/policy/
 install -m 0644 %SOURCE3 $RPM_BUILD_ROOT/usr/share/PolicyKit/policy/
 
+%if 0%{?suse_version} == 0 || 0%{?suse_version} > 1120
+# openSUSE-11.3+ has policykit-1
+mkdir -p $RPM_BUILD_ROOT/etc/polkit-1/localauthority/10-vendor.d
+install -m 0644 %SOURCE4 $RPM_BUILD_ROOT/etc/polkit-1/localauthority/10-vendor.d/
+%endif
+
 %clean
 rm -rf $RPM_BUILD_ROOT
 
@@ -141,6 +148,9 @@ polkit-auth --user %{webyast_ws_user} --grant org.freedesktop.packagekit.system-
 %attr(644,root,root) %config /usr/share/PolicyKit/policy/org.opensuse.yast.system.packages.policy
 %attr(644,root,root) %config /usr/share/PolicyKit/policy/org.opensuse.yast.system.repositories.policy
 %doc COPYING
+%if 0%{?suse_version} == 0 || 0%{?suse_version} > 1120
+%config /etc/polkit-1/localauthority/10-vendor.d/*
+%endif
 
 %files testsuite
 %defattr(-,root,root)
