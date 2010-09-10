@@ -29,6 +29,7 @@ module LogFile
   def self.Read(id, pos_begin, lines)
     parsed	= {}
     file_name	= "/etc/webyast/vendor/logs.yml"
+    file_name	= "/etc/webyast/logs.yml" unless File.exists?(file_name) # bnc#637398
     if File.exists?(file_name)
       parsed = YAML::load(File.open(file_name));
       parsed = {} unless parsed.is_a? Hash

@@ -1,4 +1,11 @@
 -------------------------------------------------------------------
+Fri Sep 10 12:55:37 CEST 2010 - mvidner@suse.cz
+
+- fixed System messages display by looking for default logs.yml also
+  in LogFile.rb (bnc#637398)
+- 0.2.3
+
+-------------------------------------------------------------------
 Mon Aug 30 12:25:57 CEST 2010 - mvidner@suse.cz
 
 - updated translations
