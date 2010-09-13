@@ -52,7 +52,8 @@ class User
       # how to index hash with users
       "index"	=> ["s", "uid"],
       # attributes to return for each user
-      "user_attributes"	=> [ "as", attributes ]
+      "user_attributes"	=> [ "as", attributes ],
+      "type" => params["type"]||="local"
     }
     users_map = YastService.Call("YaPI::USERS::UsersGet", parameters)
     if users_map.nil?
