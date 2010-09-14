@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Tue Sep 14 10:49:15 UTC 2010 - jreidinger@novell.com
+
+- VUL0: fix regex in permission service (bnc#616267)
+- 0.2.4
+
+-------------------------------------------------------------------
 Tue Sep  7 14:45:46 CEST 2010 - mvidner@suse.cz
 
 - reload D-Bus config explicitly (bnc#635826).
