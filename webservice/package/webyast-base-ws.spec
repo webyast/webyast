@@ -326,7 +326,6 @@ dbus-send --print-reply --system --dest=org.freedesktop.DBus / org.freedesktop.D
 %files testsuite
 %defattr(-,root,root)
 %{webyast_ws_dir}/test
-%ghost %attr(755,root,root) /var/adm/update-scripts/%name-%version-%release-1
 
 #---------------------------------------------------------------
 %changelog
