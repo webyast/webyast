@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Wed Sep 15 16:13:01 UTC 2010 - schubi@novell.com
+
+- restart service correctly if the package has been renamed (bnc#637779)
+- 0.2.5 
+
+-------------------------------------------------------------------
 Tue Sep 14 10:49:15 UTC 2010 - jreidinger@novell.com
 
 - VUL0: fix regex in permission service (bnc#616267)

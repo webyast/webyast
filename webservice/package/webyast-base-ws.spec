@@ -48,7 +48,7 @@ License:	LGPL v2.1 only
 Group:          Productivity/Networking/Web/Utilities
 URL:            http://en.opensuse.org/Portal:WebYaST
 Autoreqprov:    on
-Version:        0.2.4
+Version:        0.2.5
 Release:        0
 Summary:        WebYaST - base components for rest service
 Source:         www.tar.bz2
@@ -195,11 +195,29 @@ rm -rf $RPM_BUILD_ROOT
 
 #---------------------------------------------------------------
 %pre
+
 #
 # e.g. adding user
 #
 /usr/sbin/groupadd -r %{webyast_ws_user} &>/dev/null ||:
 /usr/sbin/useradd  -g %{webyast_ws_user} -s /bin/false -r -c "User for YaST-Webservice" -d %{pkg_home} %{webyast_ws_user} &>/dev/null ||:
+
+# services will not be restarted correctly if
+# the package name will changed while the update
+# So the service will be restarted by an update-script
+# which will be called AFTER the installation
+if /bin/rpm -q yast2-webservice > /dev/null ; then
+  echo "renaming yast2-webservice to webyast-base-ws"
+  if /usr/sbin/rcyastws status > /dev/null ; then
+    echo "yastws is running"
+    echo "#!/bin/sh" > %name-%version-%release-1
+    echo "/usr/sbin/rcyastws restart" >> %name-%version-%release-1
+    install -D -m 755 %name-%version-%release-1 /var/adm/update-scripts
+    rm %name-%version-%release-1
+    echo "Please restart WebYaST service with \"rcyastws restart\" if the update has not been called with zypper,yast or packagekit"
+  fi
+fi
+exit 0
 
 #---------------------------------------------------------------
 %post
@@ -308,6 +326,7 @@ dbus-send --print-reply --system --dest=org.freedesktop.DBus / org.freedesktop.D
 %files testsuite
 %defattr(-,root,root)
 %{webyast_ws_dir}/test
+%ghost %attr(755,root,root) /var/adm/update-scripts/%name-%version-%release-1
 
 #---------------------------------------------------------------
 %changelog
