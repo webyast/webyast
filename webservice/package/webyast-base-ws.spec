@@ -228,7 +228,7 @@ if /bin/rpm -q yast2-webservice > /dev/null ; then
   if [ -f %name-%version-%release-1 ] ; then
     install -D -m 755 %name-%version-%release-1 /var/adm/update-scripts
     rm %name-%version-%release-1
-    echo "Please check the service runlevels and restart WebYaST client with \"rcyastws restart\" if the update has not been called with zypper,yast or packagekit"
+    echo "Please check the service runlevels and restart WebYaST service with \"rcyastws restart\" if the update has not been called with zypper,yast or packagekit"
   fi
 fi
 exit 0
