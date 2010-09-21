@@ -26,6 +26,8 @@ class Patch < Resolvable
 
   attr_accessor :messages
 
+  MESSAGES_FILE = File.join(Paths::VAR,"software","patch_installion_messages")
+
   private
 
   # just a short cut for accessing the singleton object
@@ -52,6 +54,15 @@ class Patch < Resolvable
     Patch.install(update_id, background, ['RequireRestart','Message']) { |type, details|
       Rails.logger.error "Message signal received: #{type}, #{details}"
       @messages << {:kind => type, :details => details}
+      begin
+        dirname = File.dirname(MESSAGES_FILE)
+        File.makedirs(dirname) unless File.directory?(dirname)
+        f = File.new(MESSAGES_FILE, 'a+')
+        f.puts "<br>#{details}"
+        f.close
+      rescue
+        Rails.logger.error "writing #{MESSAGES_FILE} file failed - wrong permissions?"
+      end
     }
   end
 
