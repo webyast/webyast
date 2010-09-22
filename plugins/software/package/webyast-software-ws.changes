@@ -1,7 +1,9 @@
 -------------------------------------------------------------------
-Wed Sep 22 12:52:35 UTC 2010 - lslezak@suse.cz
+Wed Sep 22 15:38:36 UTC 2010 - lslezak@suse.cz
 
-- fixed saving messages in backround process (bnc#639144)
+- fixed saving patch messages in background process (bnc#639144),
+  added API for direct reading patch messages
+- 0.2.4
 
 -------------------------------------------------------------------
 Tue Sep 21 10:05:15 UTC 2010 - schubi@novell.com

@@ -30,8 +30,10 @@ class PatchesController < ApplicationController
    before_filter :check_read_permissions, :only => [:index, :show]
    before_filter :check_cache_status, :only => :index
 
-   # cache 'index' method result
-   caches_action :index
+   # cache 'index' method result, but don't cache message requests
+   # (caching messages would complicate the cache invalidation code
+   #  and it's fast anyway so it is actually not important)
+   caches_action :index, :unless => Proc.new { |ctrl| ctrl.params['messages'] }
 
   private
 
@@ -106,11 +108,30 @@ class PatchesController < ApplicationController
     raise InstallInProgressException.new running,status if running > 0 #there is process which runs installation
 	end
 
+  def read_messages
+    if File.exists?(Patch::MESSAGES_FILE)
+      msg = File.read(Patch::MESSAGES_FILE)
+      return [{:message => msg}]
+    end
+
+    return []
+  end
+
   public
 
   # GET /patch_updates
   # GET /patch_updates.xml
   def index
+    if params['messages']
+      Rails.logger.debug "Reading patch messages"
+      @msgs = read_messages
+
+      respond_to do |format|
+        format.xml { render  :xml => @msgs.to_xml( :root => "messages", :dasherize => false ) }
+        format.json { render :json => @msgs.to_json( :root => "messages", :dasherize => false ) }
+      end
+      return
+    end
 		check_running_install
     # note: permission check was performed in :before_filter
     bgr = params['background']

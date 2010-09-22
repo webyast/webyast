@@ -112,5 +112,29 @@ class PatchesControllerTest < ActionController::TestCase
     assert_response 404
   end
 
+  test "read patch messages" do
+    # simulate a message in the messages file
+    msg = 'Patch message'
+    File.expects(:exists?).with('/var/lib/yastws/software/patch_installion_messages').returns(true)
+    File.expects(:read).with('/var/lib/yastws/software/patch_installion_messages').returns(msg)
+
+    get :index, :messages => true
+
+    assert_response :success
+    # check the content
+    assert Hash.from_xml(@response.body)["messages"][0]["message"] == msg
+  end
+
+  test "no patch message" do
+    # simulate non-existing messages file
+    File.expects(:exists?).with('/var/lib/yastws/software/patch_installion_messages').returns(false)
+    File.expects(:read).with('/var/lib/yastws/software/patch_installion_messages').never
+
+    get :index, :messages => true
+
+    assert_response :success
+    # no message
+    assert Hash.from_xml(@response.body)["messages"].empty?
+  end
 
 end
