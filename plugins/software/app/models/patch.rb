@@ -52,16 +52,19 @@ class Patch < Resolvable
     update_id = "#{self.name};#{self.resolvable_id};#{self.arch};#{self.repo}"
     Rails.logger.error "Install Update: #{update_id}"
     Patch.install(update_id, background, ['RequireRestart','Message']) { |type, details|
-      Rails.logger.error "Message signal received: #{type}, #{details}"
+      Rails.logger.info "Message signal received: #{type}, #{details}"
       @messages << {:kind => type, :details => details}
       begin
         dirname = File.dirname(MESSAGES_FILE)
-        File.makedirs(dirname) unless File.directory?(dirname)
+        FileUtils.mkdir_p(dirname) unless File.directory?(dirname)
         f = File.new(MESSAGES_FILE, 'a+')
-        f.puts "<br>#{details}"
-        f.close
-      rescue
-        Rails.logger.error "writing #{MESSAGES_FILE} file failed - wrong permissions?"
+        f.puts '<br/>' unless File.size(MESSAGES_FILE).zero?
+        # TODO: make the message traslatable
+        f.puts "#{details}"
+      rescue Exception => e
+        Rails.logger.error "writing #{MESSAGES_FILE} file failed: #{e.try(:message)}"
+      ensure
+        f.try(:close)
       end
     }
   end

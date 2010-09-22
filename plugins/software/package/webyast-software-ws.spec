@@ -114,6 +114,8 @@ mkdir -p $RPM_BUILD_ROOT/etc/polkit-1/localauthority/10-vendor.d
 install -m 0644 %SOURCE4 $RPM_BUILD_ROOT/etc/polkit-1/localauthority/10-vendor.d/
 %endif
 
+mkdir -p $RPM_BUILD_ROOT/var/lib/yastws/software
+
 %clean
 rm -rf $RPM_BUILD_ROOT
 
@@ -147,6 +149,7 @@ polkit-auth --user %{webyast_ws_user} --grant org.freedesktop.packagekit.system-
 %attr(644,root,root) %config /usr/share/PolicyKit/policy/org.opensuse.yast.system.patches.policy
 %attr(644,root,root) %config /usr/share/PolicyKit/policy/org.opensuse.yast.system.packages.policy
 %attr(644,root,root) %config /usr/share/PolicyKit/policy/org.opensuse.yast.system.repositories.policy
+%attr(775,%{webyast_ws_user},root) /var/lib/yastws/software
 %doc COPYING
 %if 0%{?suse_version} == 0 || 0%{?suse_version} > 1120
 %config /etc/polkit-1/localauthority/10-vendor.d/*

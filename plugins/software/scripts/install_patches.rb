@@ -51,7 +51,22 @@ ProgressPrinter.new(bs)
 pk_id = ARGV[0]
 
 begin
-  result = Patch.do_install(pk_id, bs)
+  result = Patch.do_install(pk_id, ['RequireRestart','Message']) { |type, details|
+    Rails.logger.info "** Background process: Message signal received: #{type}, #{details}"
+    begin
+      dirname = File.dirname(Patch::MESSAGES_FILE)
+      FileUtils.mkdir_p(dirname) unless File.directory?(dirname)
+      f = File.new(Patch::MESSAGES_FILE, 'a+')
+      f.puts '<br/>' unless File.size(Patch::MESSAGES_FILE).zero?
+      # TODO: make the message traslatable
+      f.puts "#{details}"
+    rescue Exception => e
+      Rails.logger.error "writing #{Patch::MESSAGES_FILE} file failed: #{e.try(:message)}"
+    ensure
+      f.try(:close)
+    end
+  }
+
   puts ({'result' => result}).to_xml(:root => "patch_installation", :dasherize => false).gsub("\n", '')
 rescue Exception => e
   if e.respond_to? :to_xml
