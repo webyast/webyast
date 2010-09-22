@@ -1,4 +1,9 @@
 -------------------------------------------------------------------
+Wed Sep 22 11:51:41 UTC 2010 - schubi@novell.com
+
+- Setting env. language while calling "rake makemo" (bnc#634058)
+
+-------------------------------------------------------------------
 Thu Jul  8 11:52:32 UTC 2010 - jreidinger@novell.com
 
 - add license checker

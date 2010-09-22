@@ -24,6 +24,7 @@ require 'fileutils'
 
 desc "Create mo-files for L10n"
 task :makemo do
+  ENV['LANGUAGE'] = ENV['LANG']
   require 'gettext_rails/tools'
   GetText.create_mofiles
   destdir = File.join(File.dirname(__FILE__),"../../..", "webclient", "public", "vendor", "text")
