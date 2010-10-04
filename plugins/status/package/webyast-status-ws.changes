@@ -1,4 +1,11 @@
 -------------------------------------------------------------------
+Fri Oct  1 10:42:29 UTC 2010 - vgorobets@novell.com
+
+- Missing text in tab headers (jquery.accordion) in Status module after update from WebYaST-SP1 to WebYaST 1.1 (bnc#636616)
+- added ruby script to check the status_configuration.yaml file
+- 0.2.4
+
+-------------------------------------------------------------------
 Fri Sep 10 12:55:37 CEST 2010 - mvidner@suse.cz
 
 - fixed System messages display by looking for default logs.yml also
