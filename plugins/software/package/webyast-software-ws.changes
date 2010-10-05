@@ -1,4 +1,16 @@
 -------------------------------------------------------------------
+Wed Sep 22 15:38:36 UTC 2010 - lslezak@suse.cz
+
+- fixed saving patch messages in background process (bnc#639144),
+  added API for direct reading patch messages
+- 0.2.4
+
+-------------------------------------------------------------------
+Tue Sep 21 10:05:15 UTC 2010 - schubi@novell.com
+
+- showing installation messages in the status module (bnc#639144) 
+
+-------------------------------------------------------------------
 Wed Sep  8 19:58:18 UTC 2010 - lslezak@suse.cz
 
 - added .pkla file for polkit-1 (needed by PackageKit in

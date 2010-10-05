@@ -44,11 +44,12 @@ Conflicts:      gamin
 PreReq:         PolicyKit, PackageKit, rubygem-rake, rubygem-sqlite3
 PreReq:         rubygem-rails-2_3 >= 2.3.4
 PreReq:         rubygem-rpam, rubygem-polkit, rubygem-gettext_rails
+PreReq:         yast2-runlevel
 License:	LGPL v2.1 only
 Group:          Productivity/Networking/Web/Utilities
 URL:            http://en.opensuse.org/Portal:WebYaST
 Autoreqprov:    on
-Version:        0.2.3
+Version:        0.2.5
 Release:        0
 Summary:        WebYaST - base components for rest service
 Source:         www.tar.bz2
@@ -189,17 +190,48 @@ install -m 0644 %SOURCE2 $RPM_BUILD_ROOT/etc/dbus-1/system.d/
 mkdir -p $RPM_BUILD_ROOT/usr/share/dbus-1/system-services/
 install -m 0444 %SOURCE3 $RPM_BUILD_ROOT/usr/share/dbus-1/system-services/
 
+#create dummy update-script
+mkdir -p %buildroot/var/adm/update-scripts
+touch %buildroot/var/adm/update-scripts/%name-%version-%release-1
+
 #---------------------------------------------------------------
 %clean
 rm -rf $RPM_BUILD_ROOT
 
 #---------------------------------------------------------------
 %pre
+
 #
 # e.g. adding user
 #
 /usr/sbin/groupadd -r %{webyast_ws_user} &>/dev/null ||:
 /usr/sbin/useradd  -g %{webyast_ws_user} -s /bin/false -r -c "User for YaST-Webservice" -d %{pkg_home} %{webyast_ws_user} &>/dev/null ||:
+
+# services will not be restarted correctly if
+# the package name will changed while the update
+# So the service will be restarted by an update-script
+# which will be called AFTER the installation
+if /bin/rpm -q yast2-webservice > /dev/null ; then
+  echo "renaming yast2-webservice to webyast-base-ws"
+  if /sbin/yast runlevel summary service=yastws 2>&1|grep " 3 "|grep yastws >/dev/null ; then
+    echo "yastws is inserted into the runlevel"
+    echo "#!/bin/sh" > %name-%version-%release-1
+    echo "/sbin/yast runlevel add service=yastws" >> %name-%version-%release-1
+    echo "/usr/sbin/rcyastws restart" >> %name-%version-%release-1
+  else
+    if /usr/sbin/rcyastws status > /dev/null ; then
+      echo "yastws is running"
+      echo "#!/bin/sh" > %name-%version-%release-1
+      echo "/usr/sbin/rcyastws restart" >> %name-%version-%release-1
+    fi
+  fi
+  if [ -f %name-%version-%release-1 ] ; then
+    install -D -m 755 %name-%version-%release-1 /var/adm/update-scripts
+    rm %name-%version-%release-1
+    echo "Please check the service runlevels and restart WebYaST service with \"rcyastws restart\" if the update has not been called with zypper,yast or packagekit"
+  fi
+fi
+exit 0
 
 #---------------------------------------------------------------
 %post
@@ -304,6 +336,7 @@ dbus-send --print-reply --system --dest=org.freedesktop.DBus / org.freedesktop.D
 %config(noreplace)  %{_sysconfdir}/init.d/%{webyast_ws_service}
 %{_sbindir}/rc%{webyast_ws_service}
 %doc COPYING
+%ghost %attr(755,root,root) /var/adm/update-scripts/%name-%version-%release-1
 
 %files testsuite
 %defattr(-,root,root)

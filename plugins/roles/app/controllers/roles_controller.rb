@@ -99,6 +99,6 @@ class RolesController < ApplicationController
 
   private
   def check_role_name(id=params[:id])
-    raise InvalidParameters.new(:id => "INVALID") if id.match(/^[a-zA-Z0-9_\-. ]+$/).nil?
+    raise InvalidParameters.new(:id => "INVALID") if id.nil? or id.match(/^[a-zA-Z0-9_\-. ]+$/).nil?
   end
 end

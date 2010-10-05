@@ -59,8 +59,8 @@ class WebyastPermissionsService < DBus::Object
     end
   end
 
-USER_REGEX=/^[ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz_][ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789_.-]*[ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789_.$-]?$/
-USER_WITH_DOMAIN_REGEX=/^[a-zA-Z0-9][a-zA-Z0-9\-.]*\\[ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz_][ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789_.-]*[ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789_.$-]?$/
+USER_REGEX=/\A[ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz_][ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789_.-]*[ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789_.$-]?\Z/
+USER_WITH_DOMAIN_REGEX=/\A[a-zA-Z0-9][a-zA-Z0-9\-.]*\\[ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz_][ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789_.-]*[ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789_.$-]?\Z/
   def execute (command, permissions, user, sender)
     #TODO polkit check, user escaping, perm whitespacing
     return ["NOPERM"] unless check_polkit sender
@@ -68,8 +68,11 @@ USER_WITH_DOMAIN_REGEX=/^[a-zA-Z0-9][a-zA-Z0-9\-.]*\\[ABCDEFGHIJKLMNOPQRSTUVWXYZ
     result = []
     permissions.each do |p|
       #whitespace check for valid permission string to avoid attack
-      result << "perm #{p} is INVALID" if p.match(/^[a-zA-Z0-9.-]+$/).nil?
-      result << `polkit-auth --user '#{user}' --#{command} '#{p}' 2>&1`
+      if p.match(/^[a-zA-Z][a-zA-Z0-9.-]*$/)
+        result << `polkit-auth --user '#{user}' --#{command} '#{p}' 2>&1`
+      else
+        result << "perm #{p} is INVALID"
+      end
     end
     return result
   end

@@ -19,7 +19,7 @@ License:	GPL v2 only
 Group:          Productivity/Networking/Web/Utilities
 URL:            http://en.opensuse.org/Portal:WebYaST
 Autoreqprov:    on
-Version:        0.2.2
+Version:        0.2.4
 Release:        0
 Summary:        WebYaST - system status service
 Source:         www.tar.bz2
@@ -130,6 +130,11 @@ sed -i "s/^FQDNLookup.*/FQDNLookup false/" "/etc/collectd.conf"
 # enable "df" plugin of collectd
 #
 sed -i "s/^#LoadPlugin df.*/LoadPlugin df/" "/etc/collectd.conf"
+
+#
+# check status_configuration.yaml bnc#636616
+#
+ruby %{plugin_dir}/lib/configcheck.rb
 
 #
 # set "Hostname" to WebYaST and remove already generated old log files
