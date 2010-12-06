@@ -1,4 +1,11 @@
 -------------------------------------------------------------------
+Mon Dec  6 16:01:13 UTC 2010 - lslezak@suse.cz
+
+- fixed compatibility issue with PackageKit-0.6.x
+  (openSUSE-11.4/Factory)
+- 0.3.0
+
+-------------------------------------------------------------------
 Wed Sep 22 15:38:36 UTC 2010 - lslezak@suse.cz
 
 - fixed saving patch messages in background process (bnc#639144),

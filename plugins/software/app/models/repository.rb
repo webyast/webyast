@@ -65,7 +65,7 @@ class Repository < BaseModel::Base
   def self.find(what)
     repositories = Array.new
 
-    PackageKit.transact('GetRepoList', 'NONE', 'RepoDetail') { |id, name, enabled|
+    PackageKit.transact('GetRepoList', 'none', 'RepoDetail') { |id, name, enabled|
       Rails.logger.debug "RepoDetail signal received: #{id}, #{name}, #{enabled}"
 
       if what == :all || id == what
