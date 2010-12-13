@@ -64,7 +64,8 @@ sub mkServiceGenerator {
   my $generator = sub { my $service_id = shift;
                        { 'id'      => $service_id,
                          'name'    => $service_names->{$service_id},
-                         'allowed' => YaST::YCP::Boolean( $service_zones->{$service_id}->{$zone} )
+                         'allowed' => YaST::YCP::Boolean( $service_zones->{$service_id}->{$zone} ),
+			 'description' => SuSEFirewallServices->GetDescription($service_id)
                        }
                       };
   return $generator;
