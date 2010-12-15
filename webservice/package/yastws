@@ -1,37 +1,35 @@
-#! /bin/sh
-# Copyright (c) 1995-2009 SUSE Linux AG, Nuernberg, Germany.
-# All rights reserved.
+#!/bin/sh
 #
-# Author: Kurt Garloff, Stefan Schubert
-# Please send feedback to http://www.suse.de/feedback/
+#     Copyright (C) 1995--2007  Marcus Rückert, SUSE / Novell Inc.
+#          
+#     This library is free software; you can redistribute it and/or modify it
+#     under the terms of the GNU Lesser General Public License as published by
+#     the Free Software Foundation; either version 2.1 of the License, or (at
+#     your option) any later version.
+#			      
+#     This library is distributed in the hope that it will be useful, but
+#     WITHOUT ANY WARRANTY; without even the implied warranty of
+#     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+#     Lesser General Public License for more details.
+#      
+#     You should have received a copy of the GNU Lesser General Public
+#     License along with this library; if not, write to the Free Software
+#     Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307,
+#     USA.
 #
 # /etc/init.d/yastws
 #   and its symbolic link
 # /(usr/)sbin/rcyastws
 #
-#    This program is free software; you can redistribute it and/or modify 
-#    it under the terms of the GNU General Public License as published by 
-#    the Free Software Foundation; either version 2 of the License, or 
-#    (at your option) any later version. 
-# 
-#    This program is distributed in the hope that it will be useful, 
-#    but WITHOUT ANY WARRANTY; without even the implied warranty of 
-#    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the 
-#    GNU General Public License for more details. 
-# 
-#    You should have received a copy of the GNU General Public License 
-#    along with this program; if not, write to the Free Software 
-#    Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
-#
-# Template system startup script for some example service/daemon yastws
 #
 # LSB compatible service control script; see http://www.linuxbase.org/spec/
 # 
 # Note: This template uses functions rc_XXX defined in /etc/rc.status on
-# UnitedLinux (UL) based Linux distributions. If you want to base your 
+# UnitedLinux/SUSE/Novell based Linux distributions. If you want to base your
 # script on this template and ensure that it works on non UL based LSB 
 # compliant Linux distributions, you either have to provide the rc.status
 # functions from UL or change the script to work without them.
+# See skeleton.compat for a template that works with other distros as well.
 #
 ### BEGIN INIT INFO
 # Provides:          yastws
@@ -41,8 +39,8 @@
 # Should-Stop: $time ypbind sendmail yastwc
 # Default-Start:     3 5
 # Default-Stop:      0 1 2 6
-# Short-Description: yastws 
-# Description:       Start yastws 
+# Short-Description: yastws
+# Description:       Start yastws
 ### END INIT INFO
 # 
 # Any extensions to the keywords given above should be preceeded by 
@@ -114,14 +112,14 @@
 
 # Check for missing binaries (stale symlinks should not happen)
 # Note: Special treatment of stop for LSB conformance
-LIGHTTPD_BIN=/usr/sbin/lighttpd
-test -x $LIGHTTPD_BIN || { echo "$LIGHTTPD_BIN not installed"; 
+NGINX_BIN=/usr/sbin/nginx
+test -x $NGINX_BIN || { echo "$NGINX_BIN not installed"; 
 	if [ "$1" = "stop" ]; then exit 0;
 	else exit 5; fi; }
 
 # Check for existence of needed config file and read it
-LIGHTTPD_CONFIG=/etc/yastws/lighttpd.conf
-test -r $LIGHTTPD_CONFIG || { echo "$LIGHTTPD_CONFIG not existing";
+NGINX_CONFIG=/etc/yastws/nginx.conf
+test -r $NGINX_CONFIG || { echo "$NGINX_CONFIG not existing";
 	if [ "$1" = "stop" ]; then exit 0;
 	else exit 6; fi; }
 
@@ -170,7 +168,7 @@ rc_reset
 
 case "$1" in
     start)
-	echo -n "Starting yastws "
+       echo -n "Starting yastws "
   #generate deployment specific secret key (bnc#591345)
   SECRET=`cd /srv/www/yastws/ && rake -s secret`
   if [ -z $SECRET ]; then
@@ -181,10 +179,9 @@ case "$1" in
   fi
   sed -i 's/9d11bfc98abcf9799082d9c34ec94dc1cc926f0f1bf4bea8c440b497d96b14c1f712c8784d0303ee7dd69e382c3e5e4d38d4c56d1b619eae7acaa6516cd733b1/'"$SECRET"/ /srv/www/yastws/config/environment.rb
 
-        #Waiting for yastwc until he has really written his pid file (currently just a hack)
-        sleep 4 
-
-	startproc -p $PID_FILE $LIGHTTPD_BIN -f $LIGHTTPD_CONFIG
+	## Start daemon with startproc(8). If this fails
+	## the return value is set appropriately by startproc.
+	/sbin/startproc -p $PID_FILE $NGINX_BIN -c $NGINX_CONFIG
 
 	# Remember status and be verbose
 	rc_status -v
@@ -193,7 +190,8 @@ case "$1" in
 	echo -n "Shutting down yastws "
 	## Stop daemon with killproc(8) and if this fails
 	## killproc sets the return value according to LSB.
-	killproc -TERM -p $PID_FILE $LIGHTTPD_BIN
+
+	/sbin/killproc -TERM -p $PID_FILE $NGINX_BIN
 
 	# Remember status and be verbose
 	rc_status -v
@@ -226,12 +224,12 @@ case "$1" in
     force-reload)
 	## Signal the daemon to reload its config. Most daemons
 	## do this on signal 1 (SIGHUP).
-	## If it does not support it, restart.
+	## If it does not support it, restart the service if it
+	## is running.
 
 	echo -n "Reload service yastws "
 	## if it supports it:
-	killproc -HUP -p $PID_FILE $LIGHTTPD_BIN
-	#touch /var/run/lighttpd.pid
+	/sbin/killproc -p $PID_FILE -HUP $NGINX_BIN
 	rc_status -v
 
 	## Otherwise:
@@ -244,8 +242,8 @@ case "$1" in
 
 	# If it supports signaling:
 	echo -n "Reload service yastws "
-	killproc -HUP -p $PID_FILE $LIGHTTPD_BIN
-	#touch /var/run/lighttpd.pid
+	/sbin/killproc -HUP -p $PID_FILE $NGINX_BIN
+	#touch /var/run/yastws.pid
 	rc_status -v
 	
 	## Otherwise if it does not support reload:
@@ -266,10 +264,17 @@ case "$1" in
 	# 5--199 reserved (5--99 LSB, 100--149 distro, 150--199 appl.)
 	
 	# NOTE: checkproc returns LSB compliant status values.
-	checkproc -p $PID_FILE $LIGHTTPD_BIN
+	/sbin/checkproc -p $PID_FILE $NGINX_BIN
 	# NOTE: rc_status knows that we called this init script with
 	# "status" option and adapts its messages accordingly.
 	rc_status -v
+	;;
+    probe)
+	## Optional: Probe for the necessity of a reload, print out the
+	## argument to this init script which is required for a reload.
+	## Note: probe is not (yet) part of LSB (as of 1.9)
+
+	test $NGINX_CONFIG /var/run/yastws.pid && echo reload
 	;;
     *)
 	echo "Usage: $0 {start|stop|status|try-restart|restart|force-reload|reload|probe}"

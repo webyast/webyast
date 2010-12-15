@@ -24,23 +24,17 @@ Requires:       sysvinit-tools
 Requires:       sysvinit > 2.86-215.2
 %endif
 Requires:       yast2-core >= 2.18.10
-# Require lighttpd whose postun does not mass kill, bnc#559534#c19
-# (Updating it later does not work because postun uses the old version.)
-PreReq:         lighttpd > 1.4.20-3.6
 %else
 # 11.1 or SLES11
 Requires:       yast2-core >= 2.17.30.1
 Requires:       sysvinit > 2.86-195.3.1
-PreReq:         lighttpd > 1.4.20-2.29.1
 %endif
-
-Requires:	lighttpd-mod_magnet, ruby-fcgi, ruby-dbus, sqlite, syslog-ng
+Requires:       nginx-passenger
+Requires:	ruby-fcgi, ruby-dbus, sqlite, syslog-ng
 Requires:       rubygem-webyast-rake-tasks, rubygem-http_accept_language
 Requires:	yast2-dbus-server
 # 634404
 Recommends:     logrotate
-# gamin gives problems with lighttpd, so better conflict with it for now
-Conflicts:      gamin
 PreReq:         PolicyKit, PackageKit, rubygem-rake, rubygem-sqlite3
 PreReq:         rubygem-rails-2_3 >= 2.3.4
 PreReq:         rubygem-rpam, rubygem-polkit, rubygem-gettext_rails
@@ -49,7 +43,7 @@ License:	LGPL v2.1 only
 Group:          Productivity/Networking/Web/Utilities
 URL:            http://en.opensuse.org/Portal:WebYaST
 Autoreqprov:    on
-Version:        0.2.5
+Version:        0.2.6
 Release:        0
 Summary:        WebYaST - base components for rest service
 Source:         www.tar.bz2
@@ -59,11 +53,18 @@ Source3:        webyast.permissions.service.service
 Source4:        org.opensuse.yast.permissions.policy
 Source5:        grantwebyastrights
 Source6:        yast_user_roles
-Source7:        lighttpd.conf
-Source8:        modules.conf
 Source9:        yastws
 Source10:       webyast
 Source11:	webyast-ws.lr.conf
+Source12:       fastcgi.conf
+Source13:       fastcgi_params
+Source14:       koi-utf
+Source15:       koi-win
+Source16:       mime.types
+Source17:       nginx.conf
+Source18:       scgi_params
+Source19:       uwsgi_params
+Source20:       win-utf
 BuildRoot:      %{_tmppath}/%{name}-%{version}-build
 BuildRequires:  ruby, pkg-config, rubygem-mocha
 # if we run the tests during build, we need most of Requires here too,
@@ -151,10 +152,17 @@ touch $RPM_BUILD_ROOT%{webyast_ws_dir}/db/schema.rb
 %{__ln_s} -f %{_sysconfdir}/init.d/%{webyast_ws_service} %{buildroot}%{_sbindir}/rc%{webyast_ws_service}
 #
 
-# configure lighttpd web service
+# configure nginx web service
 mkdir -p $RPM_BUILD_ROOT/etc/yastws/
-install -m 0644 %SOURCE7 $RPM_BUILD_ROOT/etc/yastws/
-install -m 0644 %SOURCE8 $RPM_BUILD_ROOT/etc/yastws/
+install -m 0644 %SOURCE12 $RPM_BUILD_ROOT/etc/yastws/
+install -m 0644 %SOURCE13 $RPM_BUILD_ROOT/etc/yastws/
+install -m 0644 %SOURCE14 $RPM_BUILD_ROOT/etc/yastws/
+install -m 0644 %SOURCE15 $RPM_BUILD_ROOT/etc/yastws/
+install -m 0644 %SOURCE16 $RPM_BUILD_ROOT/etc/yastws/
+install -m 0644 %SOURCE17 $RPM_BUILD_ROOT/etc/yastws/
+install -m 0644 %SOURCE18 $RPM_BUILD_ROOT/etc/yastws/
+install -m 0644 %SOURCE19 $RPM_BUILD_ROOT/etc/yastws/
+install -m 0644 %SOURCE20 $RPM_BUILD_ROOT/etc/yastws/
 
 # Policies
 mkdir -p $RPM_BUILD_ROOT/usr/share/PolicyKit/policy
@@ -265,6 +273,12 @@ chown -R %{webyast_ws_user}: db
 chown -R %{webyast_ws_user}: log
 echo "Database is ready"
 #
+# patching nginx configuration
+#
+if [ -d /usr/lib64 ]; then
+  sed -i "s/passenger_root \/usr\/lib/passenger_root \/usr\/lib64/" /etc/yastws/nginx.conf
+fi
+#
 # try-reload D-Bus config (bnc#635826)
 #
 dbus-send --print-reply --system --dest=org.freedesktop.DBus / org.freedesktop.DBus.ReloadConfig >/dev/null ||:
@@ -279,8 +293,8 @@ dbus-send --print-reply --system --dest=org.freedesktop.DBus / org.freedesktop.D
 %{insserv_cleanup}
 
 #---------------------------------------------------------------
-# restart yastws on lighttpd update (bnc#559534)
-%triggerin -- lighttpd
+# restart yastws on nginx update (bnc#559534)
+%triggerin -- nginx
 %restart_on_update %{webyast_ws_service}
 
 #---------------------------------------------------------------
@@ -327,8 +341,17 @@ dbus-send --print-reply --system --dest=org.freedesktop.DBus / org.freedesktop.D
 %doc %{webyast_ws_dir}/README
 %attr(-,%{webyast_ws_user},%{webyast_ws_user}) %{webyast_ws_dir}/log
 %attr(-,%{webyast_ws_user},%{webyast_ws_user}) %{webyast_ws_dir}/tmp
-%config(noreplace) /etc/yastws/lighttpd.conf
-%config /etc/yastws/modules.conf
+#nginx stuff
+%config(noreplace) /etc/yastws/nginx.conf
+%config /etc/yastws/fastcgi.conf
+%config /etc/yastws/fastcgi_params
+%config /etc/yastws/koi-utf
+%config /etc/yastws/koi-win
+%config /etc/yastws/mime.types
+%config /etc/yastws/scgi_params
+%config /etc/yastws/uwsgi_params
+%config /etc/yastws/win-utf
+
 %config /etc/sysconfig/SuSEfirewall2.d/services/webyast
 %config /usr/share/PolicyKit/policy/org.opensuse.yast.permissions.policy
 %config %{webyast_ws_dir}/config/environment.rb

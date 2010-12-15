@@ -1,4 +1,11 @@
 -------------------------------------------------------------------
+Wed Dec 15 13:40:50 UTC 2010 - schubi@novell.com
+
+- switching to nginx
+  http://lists.opensuse.org/yast-devel/2010-12/msg00000.html
+- 0.1.9 
+
+-------------------------------------------------------------------
 Wed Sep 22 11:51:41 UTC 2010 - schubi@novell.com
 
 - Setting env. language while calling "rake makemo" (bnc#634058)
