@@ -62,11 +62,19 @@ sub Read {
 sub mkServiceGenerator {
   my($service_names,$service_zones,$zone) = @_;
   my $generator = sub { my $service_id = shift;
-                       { 'id'      => $service_id,
-                         'name'    => $service_names->{$service_id},
-                         'allowed' => YaST::YCP::Boolean( $service_zones->{$service_id}->{$zone} ),
-			 'description' => SuSEFirewallServices->GetDescription($service_id)
-                       }
+			if (defined(SuSEFirewallServices->GetDescription($service_id))) {
+	       	        	{ 'id'      => $service_id,
+	                          'name'    => $service_names->{$service_id},
+			          'allowed' => YaST::YCP::Boolean( $service_zones->{$service_id}->{$zone} ),
+			          'description' => SuSEFirewallServices->GetDescription($service_id)
+		                }
+			} else {
+	        	        { 'id'      => $service_id,
+                        	   'name'    => $service_names->{$service_id},
+	                           'allowed' => YaST::YCP::Boolean( $service_zones->{$service_id}->{$zone} ),
+                                   'description' => ''
+        	                }
+			}
                       };
   return $generator;
 }
