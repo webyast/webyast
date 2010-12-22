@@ -72,7 +72,7 @@ sub mkServiceGenerator {
 	        	        { 'id'      => $service_id,
                         	   'name'    => $service_names->{$service_id},
 	                           'allowed' => YaST::YCP::Boolean( $service_zones->{$service_id}->{$zone} ),
-                                   'description' => ''
+                                   'description' => ' '
         	                }
 			}
                       };

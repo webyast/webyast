@@ -1,4 +1,9 @@
 -------------------------------------------------------------------
+Wed Dec 22 12:05:20 UTC 2010 - vgorobets@novell.com
+
+- fixed "Unknown variant type!" exception if description for firewall services is missing
+
+-------------------------------------------------------------------
 Mon Dec 13 09:35:36 UTC 2010 - vgorobets@novell.com
 
 - added services description
