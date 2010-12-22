@@ -30,7 +30,12 @@ Requires:       yast2-core >= 2.17.30.1
 Requires:       sysvinit > 2.86-195.3.1
 %endif
 Requires:       nginx-passenger
-Requires:	ruby-fcgi, ruby-dbus, sqlite, syslog-ng
+Requires:	ruby-fcgi, sqlite, syslog-ng
+%if 0%{?suse_version} == 0 || %suse_version <= 1130
+Requires:	ruby-dbus
+%else
+Requires:	rubygem-ruby-dbus
+%endif
 Requires:       rubygem-webyast-rake-tasks, rubygem-http_accept_language
 Requires:	yast2-dbus-server
 # 634404
@@ -43,7 +48,7 @@ License:	LGPL v2.1 only
 Group:          Productivity/Networking/Web/Utilities
 URL:            http://en.opensuse.org/Portal:WebYaST
 Autoreqprov:    on
-Version:        0.2.7
+Version:        0.2.8
 Release:        0
 Summary:        WebYaST - base components for rest service
 Source:         www.tar.bz2
@@ -70,7 +75,12 @@ BuildRequires:  ruby, pkg-config, rubygem-mocha
 # if we run the tests during build, we need most of Requires here too,
 # except for deployment specific stuff
 BuildRequires:  rubygem-webyast-rake-tasks, rubygem-restility
-BuildRequires:  yast2-core, yast2-dbus-server, ruby-dbus, sqlite, dbus-1
+BuildRequires:  yast2-core, yast2-dbus-server, sqlite, dbus-1
+%if 0%{?suse_version} == 0 || %suse_version <= 1130
+BuildRequires:	ruby-dbus
+%else
+BuildRequires:	rubygem-ruby-dbus
+%endif
 BuildRequires:  PolicyKit, PackageKit, rubygem-sqlite3
 BuildRequires:  rubygem-rails-2_3 >= 2.3.4
 BuildRequires:  rubygem-rpam, rubygem-polkit

@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Wed Dec 22 12:06:26 UTC 2010 - lslezak@suse.cz
+
+- use rubygem-ruby-dbus instead of ruby-dbus in FACTORY/11.4
+- 0.2.8
+
+-------------------------------------------------------------------
 Wed Dec 22 10:22:48 UTC 2010 - lslezak@suse.cz
 
 - added webyast-base-ws-rpmlintrc with disabled Dbus and PolicyKit
