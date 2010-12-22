@@ -1,0 +1,3 @@
+# ignore security warnings (unauthorized DBus service and it's permissions) for now
+addFilter("E: suse-dbus-unauthorized-service")
+addFilter("I: polkit-unauthorized-privilege")

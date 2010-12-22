@@ -1,4 +1,11 @@
 -------------------------------------------------------------------
+Wed Dec 22 10:22:48 UTC 2010 - lslezak@suse.cz
+
+- added webyast-base-ws-rpmlintrc with disabled Dbus and PolicyKit
+  checks (so it builds in FACTORY/11.4)
+- 0.2.7
+
+-------------------------------------------------------------------
 Wed Dec 15 13:48:20 UTC 2010 - schubi@novell.com
 
 - switching to nginx 
