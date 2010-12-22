@@ -1,0 +1,2 @@
+# ignore security warnings (unauthorized PolicyKit permissions) for now
+addFilter("I: polkit-unauthorized-privilege")
