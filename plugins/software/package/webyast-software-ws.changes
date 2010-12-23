@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Thu Dec 23 14:01:01 UTC 2010 - lslezak@suse.cz
+
+- Fixed granting permissions to yastws user in openSUSE-11.4
+- 0.3.1
+
+-------------------------------------------------------------------
 Mon Dec  6 16:01:13 UTC 2010 - lslezak@suse.cz
 
 - fixed compatibility issue with PackageKit-0.6.x

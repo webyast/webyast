@@ -40,7 +40,7 @@ License:	GPL v2 only
 Group:          Productivity/Networking/Web/Utilities
 URL:            http://en.opensuse.org/Portal:WebYaST
 Autoreqprov:    on
-Version:        0.3.0
+Version:        0.3.1
 Release:        0
 Summary:        WebYaST - software management service
 Source:         www.tar.bz2
@@ -108,10 +108,15 @@ install -m 0644 %SOURCE1 $RPM_BUILD_ROOT/usr/share/PolicyKit/policy/
 install -m 0644 %SOURCE2 $RPM_BUILD_ROOT/usr/share/PolicyKit/policy/
 install -m 0644 %SOURCE3 $RPM_BUILD_ROOT/usr/share/PolicyKit/policy/
 
-%if 0%{?suse_version} == 0 || 0%{?suse_version} > 1120
-# openSUSE-11.3+ has policykit-1
+%if 0%{?suse_version} == 0 || 0%{?suse_version} > 1130
+# openSUSE-11.4 has policykit-1 which uses .pkla files
+mkdir -p $RPM_BUILD_ROOT/var/lib/polkit-1/localauthority/10-vendor.d
+install -m 0644 %SOURCE4 $RPM_BUILD_ROOT/var/lib/polkit-1/localauthority/10-vendor.d/
+%if 0%{?suse_version} == 1130
+# openSUSE-11.3+ has policykit-1 which uses .pkla files
 mkdir -p $RPM_BUILD_ROOT/etc/polkit-1/localauthority/10-vendor.d
 install -m 0644 %SOURCE4 $RPM_BUILD_ROOT/etc/polkit-1/localauthority/10-vendor.d/
+%endif
 %endif
 
 mkdir -p $RPM_BUILD_ROOT/var/lib/yastws/software
@@ -126,8 +131,10 @@ rm -rf $RPM_BUILD_ROOT
 /usr/sbin/grantwebyastrights --user root --action grant > /dev/null ||:
 /usr/sbin/grantwebyastrights --user %{webyast_ws_user} --action grant > /dev/null ||:
 
+
 # grant the permission for the webservice user
 polkit-auth --user %{webyast_ws_user} --grant org.freedesktop.packagekit.system-sources-configure >& /dev/null || true
+polkit-auth --user %{webyast_ws_user} --grant org.freedesktop.packagekit.system-update >& /dev/null || true
 
 %files
 %defattr(-,root,root)
@@ -151,8 +158,13 @@ polkit-auth --user %{webyast_ws_user} --grant org.freedesktop.packagekit.system-
 %attr(644,root,root) %config /usr/share/PolicyKit/policy/org.opensuse.yast.system.repositories.policy
 %attr(775,%{webyast_ws_user},root) /var/lib/yastws/software
 %doc COPYING
-%if 0%{?suse_version} == 0 || 0%{?suse_version} > 1120
+%if 0%{?suse_version} == 0 || 0%{?suse_version} > 1130
+%dir /var/lib/polkit-1/localauthority
+%dir /var/lib/polkit-1/localauthority/10-vendor.d
+%config /var/lib/polkit-1/localauthority/10-vendor.d/*
+%if 0%{?suse_version} == 1130
 %config /etc/polkit-1/localauthority/10-vendor.d/*
+%endif
 %endif
 
 %files testsuite
