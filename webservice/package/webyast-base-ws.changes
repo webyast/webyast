@@ -1,4 +1,11 @@
 -------------------------------------------------------------------
+Mon Dec 27 10:57:28 UTC 2010 - lslezak@suse.cz
+
+- temporarily disabled YastServiceTest - it gets stuck in
+  FACTORY/i586 build (workaround for bnc#661473)
+- 0.2.9
+
+-------------------------------------------------------------------
 Wed Dec 22 12:06:26 UTC 2010 - lslezak@suse.cz
 
 - use rubygem-ruby-dbus instead of ruby-dbus in FACTORY/11.4
