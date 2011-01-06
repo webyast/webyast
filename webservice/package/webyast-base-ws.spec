@@ -48,7 +48,7 @@ License:	LGPL v2.1 only
 Group:          Productivity/Networking/Web/Utilities
 URL:            http://en.opensuse.org/Portal:WebYaST
 Autoreqprov:    on
-Version:        0.2.9
+Version:        0.2.10
 Release:        0
 Summary:        WebYaST - base components for rest service
 Source:         www.tar.bz2
@@ -61,15 +61,8 @@ Source6:        yast_user_roles
 Source9:        yastws
 Source10:       webyast
 Source11:	webyast-ws.lr.conf
-Source12:       fastcgi.conf
-Source13:       fastcgi_params
-Source14:       koi-utf
-Source15:       koi-win
-Source16:       mime.types
-Source17:       nginx.conf
-Source18:       scgi_params
-Source19:       uwsgi_params
-Source20:       win-utf
+Source12:       nginx.conf
+
 BuildRoot:      %{_tmppath}/%{name}-%{version}-build
 BuildRequires:  ruby, pkg-config, rubygem-mocha
 # if we run the tests during build, we need most of Requires here too,
@@ -86,6 +79,7 @@ BuildRequires:  rubygem-rails-2_3 >= 2.3.4
 BuildRequires:  rubygem-rpam, rubygem-polkit
 # the testsuite is run during build
 BuildRequires:	rubygem-test-unit rubygem-mocha
+BuildRequires:	nginx-passenger
 
 # This is for Hudson (build service) to setup the build env correctly
 %if 0
@@ -165,14 +159,15 @@ touch $RPM_BUILD_ROOT%{webyast_ws_dir}/db/schema.rb
 # configure nginx web service
 mkdir -p $RPM_BUILD_ROOT/etc/yastws/
 install -m 0644 %SOURCE12 $RPM_BUILD_ROOT/etc/yastws/
-install -m 0644 %SOURCE13 $RPM_BUILD_ROOT/etc/yastws/
-install -m 0644 %SOURCE14 $RPM_BUILD_ROOT/etc/yastws/
-install -m 0644 %SOURCE15 $RPM_BUILD_ROOT/etc/yastws/
-install -m 0644 %SOURCE16 $RPM_BUILD_ROOT/etc/yastws/
-install -m 0644 %SOURCE17 $RPM_BUILD_ROOT/etc/yastws/
-install -m 0644 %SOURCE18 $RPM_BUILD_ROOT/etc/yastws/
-install -m 0644 %SOURCE19 $RPM_BUILD_ROOT/etc/yastws/
-install -m 0644 %SOURCE20 $RPM_BUILD_ROOT/etc/yastws/
+# create symlinks to nginx config files
+ln -s /etc/nginx/fastcgi.conf $RPM_BUILD_ROOT/etc/yastws
+ln -s /etc/nginx/fastcgi_params $RPM_BUILD_ROOT/etc/yastws
+ln -s /etc/nginx/koi-utf $RPM_BUILD_ROOT/etc/yastws
+ln -s /etc/nginx/koi-win $RPM_BUILD_ROOT/etc/yastws
+ln -s /etc/nginx/mime.types $RPM_BUILD_ROOT/etc/yastws
+ln -s /etc/nginx/scgi_params $RPM_BUILD_ROOT/etc/yastws
+ln -s /etc/nginx/uwsgi_params $RPM_BUILD_ROOT/etc/yastws
+ln -s /etc/nginx/win-utf $RPM_BUILD_ROOT/etc/yastws
 
 # Policies
 mkdir -p $RPM_BUILD_ROOT/usr/share/PolicyKit/policy
@@ -366,7 +361,7 @@ dbus-send --print-reply --system --dest=org.freedesktop.DBus / org.freedesktop.D
 %config /usr/share/PolicyKit/policy/org.opensuse.yast.permissions.policy
 %config %{webyast_ws_dir}/config/environment.rb
 %config(noreplace) /etc/yast_user_roles
-%config(noreplace)  %{_sysconfdir}/init.d/%{webyast_ws_service}
+%config %{_sysconfdir}/init.d/%{webyast_ws_service}
 %{_sbindir}/rc%{webyast_ws_service}
 %doc COPYING
 %ghost %attr(755,root,root) /var/adm/update-scripts/%name-%version-%release-1
