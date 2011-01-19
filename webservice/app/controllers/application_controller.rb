@@ -124,13 +124,15 @@ class ApplicationController < ActionController::Base
       logger.info "Loading textdomain #{domainname} from #{locale_path}"
       ActionController::Base.init_gettext(domainname, options)
     end
-    languages = Dir[ File.join(locale_path, '*') ].collect{|v| File.basename(v)}
-    I18n.supported_locales = languages
-    logger.info "Supported languages: #{languages.inspect}"
-    unless languages.empty?
-      language = (preferred_languages & languages).first unless (preferred_languages & languages).blank?
-      logger.info "Set language to #{language}"
-      set_locale language
+    unless locale_path.blank?
+      languages = Dir[ File.join(locale_path, '*') ].collect{|v| File.basename(v)}  
+      I18n.supported_locales = languages
+      logger.info "Supported languages: #{languages.inspect}"
+      unless languages.empty?
+        language = (preferred_languages & languages).first unless (preferred_languages & languages).blank?
+        logger.info "Set language to #{language}"
+        set_locale language
+      end
     end
   end
 
