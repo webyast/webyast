@@ -78,9 +78,9 @@ class Register
 
     # read system proxy settings and set proxy in the suseRegister context (bnc#626965)
     sc_proxy = "/etc/sysconfig/proxy"
-    proxy_enabled = `grep "^[[:space:]]*PROXY_ENABLED[[:space:]]*=" #{sc_proxy} | head -1 `.to_s.chomp.sub(/^[^=]*=\s*"(.*)".*$/, '\1')
-    http_proxy    = `grep "^[[:space:]]*HTTP_PROXY[[:space:]]*="    #{sc_proxy} | head -1 `.to_s.chomp.sub(/^[^=]*=\s*"(.*)".*$/, '\1')
-    https_proxy   = `grep "^[[:space:]]*HTTPS_PROXY[[:space:]]*="   #{sc_proxy} | head -1 `.to_s.chomp.sub(/^[^=]*=\s*"(.*)".*$/, '\1')
+    proxy_enabled = `grep "^[[:space:]]*PROXY_ENABLED[[:space:]]*=" #{sc_proxy} | head -1 `.to_s.chomp.sub(/^[^=]*=\s*"(.*)".*$/, '\1') # RORSCAN_ITL
+    http_proxy    = `grep "^[[:space:]]*HTTP_PROXY[[:space:]]*="    #{sc_proxy} | head -1 `.to_s.chomp.sub(/^[^=]*=\s*"(.*)".*$/, '\1') # RORSCAN_ITL
+    https_proxy   = `grep "^[[:space:]]*HTTPS_PROXY[[:space:]]*="   #{sc_proxy} | head -1 `.to_s.chomp.sub(/^[^=]*=\s*"(.*)".*$/, '\1') # RORSCAN_ITL
 
     # set proxy settings in context for suseRegister backend
     if proxy_enabled.match %r/^yes$/i then

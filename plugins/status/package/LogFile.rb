@@ -43,7 +43,7 @@ module LogFile
     p_begin = pos_begin.to_i rescue 1 #if someone pass type which doesn't have to_i
     lcount = lines.to_i rescue 50 #if someone pass type which doesn't have to_i
     lcount = 50 if lcount<=0
-    ret = `wc -l #{path}`
+    ret = `wc -l #{path}` # RORSCAN_ITL
     file_length = ret.split()[0].to_i rescue 0 #if someone pass type which doesn't have to_i
     if p_begin > 0 && p_begin < file_length-lcount
       tail_pos = file_length-p_begin
@@ -51,7 +51,7 @@ module LogFile
       tail_pos = lcount
     end
     #it is secure, because vendor specify path and lines is always number
-    ret	= `tail -n #{tail_pos} #{path}|head -n #{lcount}`
+    ret	= `tail -n #{tail_pos} #{path}|head -n #{lcount}` # RORSCAN_ITL
     return {:value=>ret, :position=>"#{file_length-tail_pos}"}
   end
 end

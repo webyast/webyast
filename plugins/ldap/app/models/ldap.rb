@@ -62,7 +62,7 @@ public
     ret	= {
 	"dn"	=> ""
     }
-    out	= `/usr/bin/ldapsearch -x -h #{server} -b '' -s base namingContexts | grep "namingContexts:" | cut -d" " -f 2`
+    out	= `/usr/bin/ldapsearch -x -h #{server} -b '' -s base namingContexts | grep "namingContexts:" | cut -d" " -f 2` # RORSCAN_ITL
     ret["dn"]	= out.split("\n")[0] if out
     return ret
   end

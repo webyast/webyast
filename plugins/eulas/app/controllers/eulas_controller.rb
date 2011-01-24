@@ -57,8 +57,8 @@ class EulasController < ApplicationController
   # Save updated license data. The only changeable attribute is "accepted"
   def update
     permission_check :'org.opensuse.yast.modules.eulas.accept'
-    raise InvalidParameters.new({:id => 'MISSING'}) if params[:id].nil?
-    raise InvalidParameters.new({:eulas_accepted => 'INVALID'}) unless [true,false,"true","false"].include? params[:eulas][:accepted]
+    raise InvalidParameters.new({:id => 'MISSING'}) if params[:id].nil? # RORSCAN_ITL
+    raise InvalidParameters.new({:eulas_accepted => 'INVALID'}) unless [true,false,"true","false"].include? params[:eulas][:accepted] # RORSCAN_ITL
     @license = License.find params[:id]
     render ErrorResult.error(404, 1, "License not found") and return if @license.nil?
     @license.accepted = ([true,"true"].include? params[:eulas][:accepted]) ? true : false
@@ -72,7 +72,7 @@ class EulasController < ApplicationController
   private
 
   def ensure_license
-    raise InvalidParameters.new({:id => 'MISSING'}) if params[:id].nil?
+    raise InvalidParameters.new({:id => 'MISSING'}) if params[:id].nil? # RORSCAN_ITL
     @id      = params[:id].to_i
     @license = License.find @id
     render ErrorResult.error(404, 1, "License not found") and return if @license.nil?

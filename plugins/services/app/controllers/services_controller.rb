@@ -58,7 +58,7 @@ class ServicesController < ApplicationController
   # Execute service command (start or stop).
   # Requires execute permission for services YaPI.
   def update
-    yapi_perm_check "services.execute"
+    yapi_perm_check "services.execute" # RORSCAN_ITL
 
     @service = Service.find params[:id]
     ret	= @service.save(params)

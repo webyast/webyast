@@ -69,9 +69,9 @@ USER_WITH_DOMAIN_REGEX=/\A[a-zA-Z0-9][a-zA-Z0-9\-.]*\\[ABCDEFGHIJKLMNOPQRSTUVWXY
     permissions.each do |p|
       #whitespace check for valid permission string to avoid attack
       if p.match(/^[a-zA-Z][a-zA-Z0-9.-]*$/)
-        result << `polkit-auth --user '#{user}' --#{command} '#{p}' 2>&1`
+        result << `polkit-auth --user '#{user}' --#{command} '#{p}' 2>&1` # RORSCAN_ITL
       else
-        result << "perm #{p} is INVALID"
+        result << "perm #{p} is INVALID" # XXX tom: better don't include invalif perms here, we do not know what the calling function is doing with it, like displaying it via the browser, passing it to the shell etc.
       end
     end
     return result
@@ -89,7 +89,7 @@ USER_WITH_DOMAIN_REGEX=/\A[a-zA-Z0-9][a-zA-Z0-9\-.]*\\[ABCDEFGHIJKLMNOPQRSTUVWXY
   end
 
   def invalid_user_name? user
-    active_directory_enabled = `/usr/sbin/pam-config -q --winbind 2>/dev/null | wc -w`.to_i > 0
+    active_directory_enabled = `/usr/sbin/pam-config -q --winbind 2>/dev/null | wc -w`.to_i > 0 # RORSCAN_ITL
     return false if user.match(USER_REGEX)
     return false if active_directory_enabled && user.match(USER_WITH_DOMAIN_REGEX)
     return true

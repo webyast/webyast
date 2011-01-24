@@ -30,7 +30,7 @@ class Package < Resolvable
   def self.find(what)
     if what == :installed
       package_list = Array.new
-      self.execute("GetPackages", what.to_s, "Package") { |line1,line2,line3|
+      self.execute("GetPackages", what.to_s, "Package") { |line1,line2,line3| # RORSCAN_ITL
         columns = line2.split ";"
         package = Package.new(:resolvable_id => line2,
                               :name => columns[0],

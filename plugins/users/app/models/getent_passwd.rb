@@ -51,14 +51,14 @@ class GetentPasswd < BaseModel::Base
 
 private
   def self.system_minimum
-    (`cat /etc/login.defs | grep '^UID_MIN' | sed 's/^UID_MIN[^0-9]*\\([0-9]\\+\\).*$/\\1/'`).to_i
+    (`cat /etc/login.defs | grep '^UID_MIN' | sed 's/^UID_MIN[^0-9]*\\([0-9]\\+\\).*$/\\1/'`).to_i # RORSCAN_ITL
   end
 
   def self.pure_getent
-    `getent passwd`
+    `getent passwd` # RORSCAN_ITL
   end
 
   def self.pure_wbinfo
-    `which wbinfo >/dev/null && wbinfo -u --domain .`
+    `which wbinfo >/dev/null && wbinfo -u --domain .` # RORSCAN_ITL
   end
 end

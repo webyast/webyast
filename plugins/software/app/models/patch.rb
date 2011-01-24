@@ -325,7 +325,7 @@ private
       end
     end
 
-    Rails.logger.debug "Using #{script} script file"
+    Rails.logger.debug "Using #{script} script file" # RORSCAN_ITL
     script
   end
 

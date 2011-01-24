@@ -23,7 +23,7 @@ class ExampleService < DBus::Object
     end
     # This method dumps a string into a file
     dbus_method :write, "in contents:s" do |contents|
-      File.open(FILENAME, 'w') {|f| f.write(contents) }
+      File.open(FILENAME, 'w') {|f| f.write(contents) } # XXX tom: insecure tmp file handling
       []
     end
   end

@@ -154,7 +154,7 @@ class Metric
     # but because it is not fatal information and if someone hackly run process
     # which itself identify as collectd, then he runs into problems, but no
     # security problem occur
-    ret = `ps xaf | grep '/usr/sbin/collectd' | grep -vc 'grep'`
+    ret = `ps xaf | grep '/usr/sbin/collectd' | grep -vc 'grep'` # RORSCAN_ITL
     ret.to_i > 0
   end
 
@@ -308,7 +308,7 @@ class Metric
 
   #get last entry of rrd database
   def self.last_db_entry(file)
-    `/bin/sh -c "LC_ALL=C rrdtool last #{file}"`    
+    `/bin/sh -c "LC_ALL=C rrdtool last #{file}"` # RORSCAN_ITL ok, as long as no user input
   end
 
   
@@ -331,7 +331,7 @@ class Metric
     stop = opts.has_key?(:stop) ? opts[:stop] : Time.now
     start = opts.has_key?(:start) ? opts[:start] : stop - 300
     
-    output = `/bin/sh -c "LC_ALL=C rrdtool fetch #{file} AVERAGE --start #{start.to_i} --end #{stop.to_i}"`
+    output = `/bin/sh -c "LC_ALL=C rrdtool fetch #{file} AVERAGE --start #{start.to_i} --end #{stop.to_i}"` # RORSCAN_ITL as long as no user input
     raise output unless $?.exitstatus.zero?
 
     output

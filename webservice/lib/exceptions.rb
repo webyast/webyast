@@ -137,7 +137,7 @@ end
 class CorruptedFileException < BackendException
   def initialize(file)
     @file = file
-    super "Target system is not consistent: Missing or corrupted file #{@file}"
+    super "Target system is not consistent: Missing or corrupted file #{@file}" # RORSCAN_ITL
   end
 
   def to_xml(options={})
@@ -179,7 +179,7 @@ class EulaNotAcceptedException < BackendException
   end
 
   def to_xml(options={})
-    no_arg_to_xml(options,"EULA_NOT_ACCEPTED", "Functionality of the target system was required, but its EULA was not accepted yet.")
+    no_arg_to_xml(options,"EULA_NOT_ACCEPTED", "Functionality of the target system was required, but its EULA was not accepted yet.") # RORSCAN_ITL
   end
 end
 

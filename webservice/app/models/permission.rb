@@ -107,7 +107,7 @@ private
 
 public
   def self.all_actions
-    `/usr/bin/polkit-action`
+    `/usr/bin/polkit-action` # RORSCAN_ITL
   end
 
   SUSE_STRING = "org.opensuse.yast"

@@ -65,7 +65,7 @@ end
 #  else version string
 #
 def test_package severity, package
-  v = `rpm -q #{package}`
+  v = `rpm -q #{package}` # RORSCAN_ITL
   return nil if v =~ /is not installed/
   nvr = v.split("-") # split name-version-release
   escape(severity, "can't extract version from #{v}", "check your installation") unless nvr.size > 2

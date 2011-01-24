@@ -48,6 +48,7 @@ class SessionsController < ApplicationController
     #FIXME proper document this security sensitive part
     #FIXME better structuralize this method
     #FIXME document all possible parameters
+    #FIXME XXX tom: also reset_session here to fix possible session fixation attack etc.
     if params["hash"].is_a? Hash #FIXME report that "hash" value is not hash
       #checking if the session description is hosted in a own Hash
       params["hash"].each do |name,value|
@@ -79,7 +80,7 @@ class SessionsController < ApplicationController
   def destroy
     self.current_account.forget_me if logged_in?
     cookies.delete :auth_token
-    reset_session
+    reset_session # RORSCAN_ITL
     @cmd_ret = Hash.new
     @cmd_ret["logout"] = "Goodbye!"
   end

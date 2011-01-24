@@ -39,7 +39,7 @@ class RolesController < ApplicationController
   def update
 		role = Role.find(params[:id])
     raise InvalidParameters.new(:id => "NONEXIST") if role.nil?
-    raise InvalidParameters.new(:roles => "MISSING") if params[:roles].nil?
+    raise InvalidParameters.new(:roles => "MISSING") if params[:roles].nil? # RORSCAN_ITL
     role.load(params[:roles])
     permission_check "org.opensuse.yast.roles.modify" if role.changed_permissions?
     permission_check "org.opensuse.yast.roles.assign" if role.changed_users?

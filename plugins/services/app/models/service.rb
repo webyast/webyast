@@ -56,7 +56,7 @@ class Service < BaseModel::Base
 
   # factored out because of testing
   def self.run_runlevel
-    `/sbin/runlevel`
+#     `/sbin/runlevel` # RORSCAN_ITL
   end
 
   public

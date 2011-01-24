@@ -45,7 +45,7 @@ class Ntp < BaseModel::Base
   private
     
     def self.get_servers_string
-      ret = `grep "^[:space:]*NETCONFIG_NTP_STATIC_SERVERS" /etc/sysconfig/network/config | sed 's/.*="\\(.*\\)"/\\1/'`
+      ret = `grep "^[:space:]*NETCONFIG_NTP_STATIC_SERVERS" /etc/sysconfig/network/config | sed 's/.*="\\(.*\\)"/\\1/'` # RORSCAN_ITL
       Rails.logger.info "greped server list is #{ret}"
       ret
     end
