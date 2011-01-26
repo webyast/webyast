@@ -38,7 +38,7 @@ class PatchesController < ApplicationController
   private
 
   def check_read_permissions
-    permission_check "org.opensuse.yast.system.patches.read"
+    permission_check "org.opensuse.yast.system.patches.read"  # RORSCAN_ITL
   end
 
   # check whether the cached result is still valid
@@ -164,7 +164,7 @@ class PatchesController < ApplicationController
   # PUT /patch_updates/1
   # PUT /patch_updates/1.xml
   def update
-    permission_check "org.opensuse.yast.system.patches.install"
+    permission_check "org.opensuse.yast.system.patches.install" # RORSCAN_ITL
     @patch_update = Patch.find(params[:id])
     if @patch_update.blank?
       logger.error "Patch: #{params[:id]} not found."
@@ -178,7 +178,7 @@ class PatchesController < ApplicationController
 
   # POST /patch_updates/
   def create
-    permission_check "org.opensuse.yast.system.patches.install"
+    permission_check "org.opensuse.yast.system.patches.install" # RORSCAN_ITL
     @patch_update = Patch.find(params[:patches][:resolvable_id].to_s)
 
     #Patch for Bug 560701 - [build 24.1] webYaST appears to crash after installing webclient patch

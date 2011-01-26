@@ -33,10 +33,10 @@ class YastService
     def YastService.Call(function, *arguments)
 
 	# connect to the system bus
-	system_bus = DBus::SystemBus.instance
+	system_bus = DBus::SystemBus.instance # RORSCAN_ITL
 
 	# get the Yast namespace service
-	yast = system_bus.service('org.opensuse.YaST.modules')
+	yast = system_bus.service('org.opensuse.YaST.modules') # RORSCAN_ITL
 
 	# parse the function name
 	parts = function.split('::')

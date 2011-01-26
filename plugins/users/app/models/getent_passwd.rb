@@ -28,7 +28,7 @@ class GetentPasswd < BaseModel::Base
     result = []
     res = pure_getent
     raise "cannot obtain passwd" unless res
-    minimum = system_minimum
+    minimum = system_minimum # RORSCAN_ITL
     minimum = 1000 if minimum == 0 #fallback
     lines = res.split "\n"
     lines.each do |l|

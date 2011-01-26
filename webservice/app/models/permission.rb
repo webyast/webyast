@@ -119,7 +119,7 @@ public
   end
 
   def self.dbus_obj
-    bus = DBus.system_bus
+    bus = DBus.system_bus # RORSCAN_ITL
     ruby_service = bus.service("webyast.permissions.service")
     obj = ruby_service.object("/webyast/permissions/Interface")
     obj.introspect

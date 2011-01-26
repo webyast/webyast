@@ -45,7 +45,7 @@ class GraphsController < ApplicationController
 
   # PUT /graphs
   def update
-    permission_check("org.opensuse.yast.system.status.writelimits")      
+    permission_check("org.opensuse.yast.system.status.writelimits") # RORSCAN_ITL
     if params.has_key?(:graphs)
       @graph = Graph.new(params[:id], params[:graphs])
       @graph.save
@@ -60,7 +60,7 @@ class GraphsController < ApplicationController
   # GET /graphs.xml
   #
   def index
-    permission_check("org.opensuse.yast.system.status.read")
+    permission_check("org.opensuse.yast.system.status.read") # RORSCAN_ITL
     init_translation
 
     bgr = params['background'] == 'true'
@@ -74,7 +74,7 @@ class GraphsController < ApplicationController
   # GET /graphs/1.xml
   #
   def show
-    permission_check("org.opensuse.yast.system.status.read")
+    permission_check("org.opensuse.yast.system.status.read") # RORSCAN_ITL
     init_translation
     @graph = Graph.find(params[:id], params[:checklimits] || false)
   end

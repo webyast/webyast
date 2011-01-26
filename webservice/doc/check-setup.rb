@@ -141,7 +141,7 @@ test_module :development, 'nokogiri', 'rubygem-nokogiri'
 test_module :development, 'tidy', 'rubygem-tidy'
 test_version :development, 'tidy'
 
-test_policy "org.opensuse.yast.system.status.read", Etc.getlogin
+test_policy "org.opensuse.yast.system.status.read", Etc.getlogin # RORSCAN_ITL
 
 # reqd for Users mgmt
 test_policy "org.opensuse.yast.modules.yapi.users.groupsget", Etc.getlogin

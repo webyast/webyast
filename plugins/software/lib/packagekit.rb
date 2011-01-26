@@ -110,9 +110,9 @@ class PackageKit
   #
 
   def self.connect
-    system_bus = DBus::SystemBus.instance
+    system_bus = DBus::SystemBus.instance # RORSCAN_ITL
     # connect to PackageKit service via SystemBus
-    pk_service = system_bus.service("org.freedesktop.PackageKit")
+    pk_service = system_bus.service("org.freedesktop.PackageKit") # RORSCAN_ITL
     
     # Create PackageKit proxy object
     packagekit_proxy = pk_service.object("/org/freedesktop/PackageKit")

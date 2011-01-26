@@ -127,7 +127,7 @@ class Patch < Resolvable
           end
         end
       rescue Exception => e
-        Rails.logger.error "Background thread: Could not evaluate output: #{line.chomp}, exception: #{e}"
+        Rails.logger.error "Background thread: Could not evaluate output: #{line.chomp}, exception: #{e}" # RORSCAN_ITL
         Rails.logger.error "Background thread: Backtrace: #{e.backtrace.join("\n")}"
 
         # rethrow the exception
@@ -315,13 +315,13 @@ private
 			else raise "unsupported type"
 			end
     # find the helper script
-    script = File.join(RAILS_ROOT, 'vendor/plugins/software/scripts',file)
+    script = File.join(RAILS_ROOT, 'vendor/plugins/software/scripts',file) # RORSCAN_ITL
 
-    unless File.exists? script
-      script = File.join(RAILS_ROOT, '../plugins/software/scripts',file)
+    unless File.exists? script # RORSCAN_ITL
+      script = File.join(RAILS_ROOT, '../plugins/software/scripts',file) # RORSCAN_ITL
 
-      unless File.exists? script
-        raise "File software/scripts/#{file} was not found!"
+      unless File.exists? script # RORSCAN_ITL
+        raise "File software/scripts/#{file} was not found!" # RORSCAN_ITL
       end
     end
 
@@ -383,7 +383,7 @@ private
           end
         end
       rescue Exception => e
-        Rails.logger.error "Background thread: Could not evaluate output: #{line.chomp}, exception: #{e}"
+        Rails.logger.error "Background thread: Could not evaluate output: #{line.chomp}, exception: #{e}" # RORSCAN_ITL
         Rails.logger.error "Background thread: Backtrace: #{e.backtrace.join("\n")}"
 
         # rethrow the exception

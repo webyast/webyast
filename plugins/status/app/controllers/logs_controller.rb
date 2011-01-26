@@ -38,7 +38,7 @@ class LogsController < ApplicationController
   # GET /logs.xml
   #
   def index
-    permission_check("org.opensuse.yast.system.status.read")
+    permission_check("org.opensuse.yast.system.status.read") # RORSCAN_ITL
     @logs = Log.find(:all)
     render :show    
   end
@@ -47,7 +47,7 @@ class LogsController < ApplicationController
   # GET /logs/system.xml
   #
   def show
-    permission_check("org.opensuse.yast.system.status.read")
+    permission_check("org.opensuse.yast.system.status.read") # RORSCAN_ITL
     @logs = Log.find(params[:id])
     @logs.evaluate_content(params[:pos_begin], params[:lines])
     render :show    

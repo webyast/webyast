@@ -62,7 +62,7 @@ public
   # GET /plugins.xml
   #
   def index
-    permission_check("org.opensuse.yast.system.status.read")
+    permission_check("org.opensuse.yast.system.status.read") # RORSCAN_ITL
     load_translations
     @plugins = Plugin.find(:all)
     render :show    
@@ -72,7 +72,7 @@ public
   # GET /plugins/users.xml
   #
   def show
-    permission_check("org.opensuse.yast.system.status.read")
+    permission_check("org.opensuse.yast.system.status.read") # RORSCAN_ITL
     load_translations
     @plugins = Plugin.find(params[:id])
     render :show    

@@ -19,7 +19,7 @@
 # you may find current contact information at www.novell.com
 #++
 
-require 'systemtime'
+require 'systemtime' # RORSCAN_ITL
 
 # = Systemtime controller
 # Provides access to time settings for authentificated users.
@@ -39,12 +39,12 @@ class SystemtimeController < ApplicationController
     yapi_perm_check "time.write"
     root = params[:systemtime]
     if root == nil
-      logger.error "Response doesn't contain systemtime key"
+      logger.error "Response doesn't contain systemtime key" # RORSCAN_ITL
       raise InvalidParameters.new :timezone => "Missing"
     end
     
-    systemtime = Systemtime.new(root)    
-    systemtime.save
+    systemtime = Systemtime.new(root) # RORSCAN_ITL    
+    systemtime.save # RORSCAN_ITL
     show
   end
 
@@ -56,11 +56,11 @@ class SystemtimeController < ApplicationController
   # Shows time settings. Requires read permission for time YaPI.
   def show
     yapi_perm_check "time.read"
-    systemtime = Systemtime.find
+    systemtime = Systemtime.find # RORSCAN_ITL
 
     respond_to do |format|
-      format.xml { render  :xml => systemtime.to_xml( :dasherize => false ) }
-      format.json { render :json => systemtime.to_json( :dasherize => false ) }
+      format.xml { render  :xml => systemtime.to_xml( :dasherize => false ) } # RORSCAN_ITL
+      format.json { render :json => systemtime.to_json( :dasherize => false ) } # RORSCAN_ITL
     end
 
   end

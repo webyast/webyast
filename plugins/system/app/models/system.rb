@@ -57,14 +57,14 @@ class System
 	    # connect to the system bus
             # Make a fresh connection, to be able to reboot
             # after DBus is restarted, bnc#582759
-	    system_bus = DBus::SystemBus.send :new
+	    system_bus = DBus::SystemBus.send :new # RORSCAN_ITL
 
 	    # get the HAL service
-	    hal_service = system_bus.service('org.freedesktop.Hal')
+	    hal_service = system_bus.service('org.freedesktop.Hal') # RORSCAN_ITL
 
 	    computer = hal_service.object('/org/freedesktop/Hal/devices/computer')
 	    computer.introspect
-	    computer.default_iface = 'org.freedesktop.Hal.Device.SystemPowerManagement'
+	    computer.default_iface = 'org.freedesktop.Hal.Device.SystemPowerManagement' # RORSCAN_ITL
 
 	    case action
 

@@ -48,7 +48,7 @@ class RepositoriesController < ApplicationController
   end
 
   def check_read_permissions
-    permission_check "org.opensuse.yast.system.repositories.read"
+    permission_check "org.opensuse.yast.system.repositories.read" # RORSCAN_ITL
   end
 
 
@@ -67,7 +67,7 @@ class RepositoriesController < ApplicationController
 
   # GET /repositories/my_repo.xml
   def show
-    permission_check "org.opensuse.yast.system.repositories.read"
+    permission_check "org.opensuse.yast.system.repositories.read" # RORSCAN_ITL
 
     # read permissions were checked in a before filter
     begin
@@ -85,7 +85,7 @@ class RepositoriesController < ApplicationController
   end
 
   def update
-    permission_check "org.opensuse.yast.system.repositories.write"
+    permission_check "org.opensuse.yast.system.repositories.write" # RORSCAN_ITL
 
     param = params[:repositories] || {}
 
@@ -105,7 +105,7 @@ class RepositoriesController < ApplicationController
 
   # POST /repositories/
   def create
-    permission_check "org.opensuse.yast.system.repositories.write"
+    permission_check "org.opensuse.yast.system.repositories.write" # RORSCAN_ITL
 
     param = params[:repositories] || {}
 
@@ -124,7 +124,7 @@ class RepositoriesController < ApplicationController
   end
 
   def destroy
-    permission_check "org.opensuse.yast.system.repositories.write"
+    permission_check "org.opensuse.yast.system.repositories.write" # RORSCAN_ITL
 
     begin
       repos = Repository.find(params[:id])
