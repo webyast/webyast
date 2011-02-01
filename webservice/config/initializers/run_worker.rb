@@ -6,7 +6,7 @@ end
   
 def run 
   if ENV["RUN_WORKER"] = 'true'
-    require File.join(File.dirname(__FILE__) + "/../../lib/plugin.rb")
+    require File.join(File.dirname(__FILE__) + "/../../lib/cache_plugin.rb")
     
     
     @container = Hash.new
