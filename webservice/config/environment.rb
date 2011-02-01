@@ -38,6 +38,10 @@ STDERR.puts "\n\n\t***RAILS_ENV environment variable isn't set !\n\n" unless RAI
 require File.join(File.dirname(__FILE__), 'boot')
 
 init = Rails::Initializer.run do |config|
+  
+  #just for test
+  #ENV['DISABLE_INITIALIZER_FROM_RAKE'] = 'false'
+  
   # Settings in config/environments/* take precedence over those specified here.
   # Application configuration should go into files in config/initializers
   # -- all .rb files in that directory are automatically loaded.
@@ -109,6 +113,16 @@ init = Rails::Initializer.run do |config|
   # located in /usr/src/packages/... during build)
   config.plugin_paths << '/usr/src/packages/BUILD' unless ENV['ADD_BUILD_PATH'].nil?
 
+  config.after_initialize do
+    puts "AFTER INITIALIZER RUN WORKER -> #{ENV["RUN_WORKER"]}"
+    
+    if ENV["RUN_WORKER"]
+      Thread::new do 
+	ENV["RUN_WORKER"] = 'false'
+	Delayed::Worker.new.start 
+      end
+    end
+  end
 end
 
 # don't load all plugins while just testing resource registration
@@ -138,3 +152,4 @@ plugin_assets = init.loaded_plugins.map { |plugin| File.join(plugin.directory, '
 require 'yast/rack/static_overlay'
 init.configuration.middleware.use YaST::Rack::StaticOverlay, :roots => plugin_assets
 
+     
