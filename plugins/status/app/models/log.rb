@@ -26,6 +26,7 @@
 
 require 'yast/config_file'
 require 'yast_service'
+require 'yast_cache'
 
 class Log
   attr_reader :id
@@ -66,21 +67,18 @@ class Log
   # "id" could be the log group (system,...)
   #
   def self.find(what)
-    config = parse_config
-    ret = []
-    return ret if config==nil
-
-    config.each {|key,value|
-      ret << Log.new(key,value) if key==what || what==:all
+    YastCache.fetch("log:find") {
+      config = parse_config || {}
+      ret = []
+      config.each {|key,value|
+        ret << Log.new(key,value) if key==what || what==:all
+      }
+      if ret.size > 1
+        Rails.logger.error "There are more results for #{what} -> #{ret.inspect} Taking the first one..." 
+        ret = ret.first
+      end
+      ret
     }
-
-    if what == :all || ret.blank?
-      return ret    
-    else
-      raise "#{what} not found in configuration file" if ret.blank?
-      Rails.logger.error "There are more results for #{what} -> #{ret.inspect} Taking the first one..." if ret.size > 1
-      return ret.first
-    end
   end
 
   #

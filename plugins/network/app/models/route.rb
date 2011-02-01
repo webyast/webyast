@@ -22,6 +22,9 @@
 # Provides set and gets resources from YaPI network module.
 # Main goal is handle YaPI specific calls and data formats. Provides cleaned
 # and well defined data.
+
+require 'yast_cache'
+
 class Route < BaseModel::Base
 
   # default gateway
@@ -44,17 +47,19 @@ class Route < BaseModel::Base
   #
   # +warn+: YaPI implements default only.
   def self.find( which )
-    response = YastService.Call("YaPI::NETWORK::Read")
-    routes_h = response["routes"]
-    if which == :all
-      ret = Hash.new
-      routes_h.each do |id, route_h|
-        ret[id] = Route.new(route_h, id)
+    YastCache.fetch("route:find") {
+      response = YastService.Call("YaPI::NETWORK::Read")
+      routes_h = response["routes"]
+      if which == :all
+        ret = Hash.new
+        routes_h.each do |id, route_h|
+          ret[id] = Route.new(route_h, id)
+        end
+      else
+        ret = Route.new(routes_h[which], which)
       end
-    else
-      ret = Route.new(routes_h[which], which)
-    end
-    return ret
+      ret
+    }
   end
 
   # Saves data from model to system via YaPI. Saves only setted data,
@@ -66,6 +71,7 @@ class Route < BaseModel::Base
     }
     vsettings = [ "a{sa{ss}}", settings ] # bnc#538050
     ret = YastService.Call("YaPI::NETWORK::Write",{"route" => vsettings})
+    YastCache.reset("route:find")
     raise RouteError.new(ret["error"]) if ret["exit"] != "0"
   end
 

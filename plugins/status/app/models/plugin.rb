@@ -26,6 +26,7 @@
 #
 
 require 'yast_service'
+require 'yast_cache'
 
 class Plugin
   attr_reader :level
@@ -63,25 +64,27 @@ class Plugin
   # "id" is the plugin name
   #
   def self.find(what)
-    models = []
-    ret = []
-    resources = Resource.find :all
-    resources.each {|resource|
-      name = resource.href.split("/").last
-      models << (name+"_state").classify if name==what || what==:all
-    }
+    YastCache.fetch("plugin:find:#{what}") {
+      models = []
+      ret = []
+      resources = Resource.find :all
+      resources.each {|resource|
+        name = resource.href.split("/").last
+        models << (name+"_state").classify if name==what || what==:all
+      }
     
-    models.each {|model|
-      status = Object.const_get(model) rescue $!
-      if status.class != NameError && status.respond_to?(:read)
-        stat = status.read
-        ret << Plugin.new(stat[:level], stat[:message_id], 
-                          stat[:short_description], stat[:long_description], stat[:details],
-                          stat[:confirmation_host], stat[:confirmation_link], 
-                          stat[:confirmation_label], stat[:confirmation_kind] ) unless stat.blank?
-      end
+      models.each {|model|
+        status = Object.const_get(model) rescue $!
+        if status.class != NameError && status.respond_to?(:read)
+          stat = status.read
+          ret << Plugin.new(stat[:level], stat[:message_id], 
+                            stat[:short_description], stat[:long_description], stat[:details],
+                            stat[:confirmation_host], stat[:confirmation_link], 
+                            stat[:confirmation_label], stat[:confirmation_kind] ) unless stat.blank?
+        end
+      }
+      ret
     }
-    return ret
   end
 
   # converts the status to xml

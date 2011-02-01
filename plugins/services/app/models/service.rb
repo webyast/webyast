@@ -21,6 +21,7 @@
 
 require 'yast/config_file'
 require 'yast_service'
+require 'yast_cache'
 
 # = Service model
 # Proviceds access to configured services.
@@ -56,7 +57,7 @@ class Service < BaseModel::Base
 
   # factored out because of testing
   def self.run_runlevel
-#     `/sbin/runlevel` # RORSCAN_ITL
+#    `/sbin/runlevel` # RORSCAN_ITL
   end
 
   public
@@ -89,27 +90,28 @@ class Service < BaseModel::Base
   #
   # services = Service.find_all
   def self.find_all(params)
-    params = {} if params.nil?
+    YastCache.fetch("service:find:#{params.inspect}") {
+      params = {} if params.nil?
 
-    services	= []
-    services_map= {} # helper structure
+      services	= []
+      services_map= {} # helper structure
 
-    filter		= parse_filter
+      filter		= parse_filter
 
-    args	= {
+      args	= {
 	"read_status"	=> [ "b", params.has_key?("read_status")],
 	"shortdescription"	=> [ "b", true],
 	"description"	=> [ "b", true],
 	"dependencies"	=> [ "b", true],
 	"filter"	=> [ "as", filter ]
-    }
+      }
 	
-    # read list of all init.d services
-    yapi_ret = YastService.Call("YaPI::SERVICES::Read", args)
+      # read list of all init.d services
+      yapi_ret = YastService.Call("YaPI::SERVICES::Read", args)
 
-    if yapi_ret.nil?
-	raise ServiceError.new("no-services", "Can't get services list")
-    else
+      if yapi_ret.nil?
+        raise ServiceError.new("no-services", "Can't get services list")
+      else
 	yapi_ret.each do |s|
 	  service	= Service.new(s["name"])
 	  service.status	= s["status"].to_i if s.has_key?("status")
@@ -121,42 +123,43 @@ class Service < BaseModel::Base
 	  Rails.logger.debug "service: #{service.inspect}"
 	  services_map[s["name"]]	= service
         end
-    end
+      end
 
-    # read list of custom (user defined) services
-    args["custom"]	= [ "b", true]
-    args["dependencies"]= [ "b", false]
+      # read list of custom (user defined) services
+      args["custom"]	= [ "b", true]
+      args["dependencies"]= [ "b", false]
 	
-    yapi_ret = YastService.Call("YaPI::SERVICES::Read", args)
+      yapi_ret = YastService.Call("YaPI::SERVICES::Read", args)
 
-    if yapi_ret.nil?
-	raise ServiceError.new("no-custom-services", "Can't get custom services list")
-    else
-	yapi_ret.each do |s|
-	  service	= Service.new(s["name"])
-	  service.status	= s["status"].to_i if s.has_key?("status")
-	  service.description	= s["description"] if s.has_key?("description")
-	  service.summary	= s["shortdescription"] if s.has_key?("shortdescription")
-	  service.custom	= true
-	  # service.enabled cannot be checked, we do not know how for custom service
-	  Rails.logger.debug "service: #{service.inspect}"
-	  services_map[s["name"]]	= service
+      if yapi_ret.nil?
+        raise ServiceError.new("no-custom-services", "Can't get custom services list")
+      else
+        yapi_ret.each do |s|
+          service	= Service.new(s["name"])
+          service.status	= s["status"].to_i if s.has_key?("status")
+          service.description	= s["description"] if s.has_key?("description")
+          service.summary	= s["shortdescription"] if s.has_key?("shortdescription")
+          service.custom	= true
+          # service.enabled cannot be checked, we do not know how for custom service
+          Rails.logger.debug "service: #{service.inspect}"
+          services_map[s["name"]]	= service
         end
-    end
-    if filter.nil? || filter.empty?
-	services	= services_map.values.sort { |a,b|  a.name <=> b.name }
-    else
-	filter.each do |name|
-	    if services_map.has_key? name
-		s = services_map[name]
-		# filter out dependent services, which are not present in filter
-		s.required_for_start.reject! { |rs| !filter.include? rs }
-		s.required_for_stop.reject! { |rs| !filter.include? rs }
-		services << s
-	    end
-	end
-    end
-    services
+      end
+      if filter.nil? || filter.empty?
+        services	= services_map.values.sort { |a,b|  a.name <=> b.name }
+      else
+        filter.each do |name|
+          if services_map.has_key? name
+            s = services_map[name]
+            # filter out dependent services, which are not present in filter
+            s.required_for_start.reject! { |rs| !filter.include? rs }
+            s.required_for_stop.reject! { |rs| !filter.include? rs }
+              services << s
+           end
+        end
+      end
+      services
+    }
   end
 
   def self.find(id)
@@ -213,6 +216,7 @@ class Service < BaseModel::Base
       raise e
     end
     Rails.logger.debug "Command returns: #{ret.inspect}"
+    YastCache.reset("service:find")
     ret.symbolize_keys!
   end
 end

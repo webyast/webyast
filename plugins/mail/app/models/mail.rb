@@ -21,6 +21,7 @@
 
 require 'singleton'
 require 'yast_service'
+require 'yast_cache'
 
 # = Mail model
 # Proviceds access local mail settings (SMTP server to use)
@@ -37,10 +38,12 @@ class Mail < BaseModel::Base
 
   # read the settings from system
   def self.find
-    yapi_ret = YastService.Call("YaPI::MailSettings::Read")
-    raise MailError.new("Cannot read from YaPI backend") if yapi_ret.nil?
-    yapi_ret["transport_layer_security"] = yapi_ret.delete("TLS") || "no"
-    Mail.new yapi_ret
+    YastCache.fetch("mail:find") {
+      yapi_ret = YastService.Call("YaPI::MailSettings::Read")
+      raise MailError.new("Cannot read from YaPI backend") if yapi_ret.nil?
+      yapi_ret["transport_layer_security"] = yapi_ret.delete("TLS") || "no"
+      Mail.new yapi_ret
+    }
   end
 
 
@@ -56,6 +59,7 @@ class Mail < BaseModel::Base
 
     yapi_ret = YastService.Call("YaPI::MailSettings::Write", parameters)
     Rails.logger.debug "YaPI returns: '#{yapi_ret}'"
+    YastCache.reset("mail:find")
     raise MailError.new(yapi_ret) unless yapi_ret.empty?
     true
   end
@@ -67,7 +71,7 @@ class Mail < BaseModel::Base
 
     message	= "This is the test mail sent to you by webYaST. Go to the status page and confirm you've got it."
 
-    `/bin/echo "#{message}" | /bin/mail -s "WebYaST Test Mail" #{to} -r root` # XXX tom take care of injection via 'message' and 'to', can be very dangerous
+    `/bin/echo "#{message}" | /bin/mail -s "WebYaST Test Mail" #{to} -r root`  # XXX tom take care of injection via 'message' and 'to', can be very dangerous
 
     unless File.directory? File.join(Paths::VAR,"mail")
       Rails.logger.debug "directory does not exists...."

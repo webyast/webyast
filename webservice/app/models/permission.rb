@@ -22,6 +22,7 @@
 #
 require 'exceptions'
 require 'polkit'
+require 'yast_cache'
 
 class Permission
 #list of hash { :name => id, :granted => boolean, :description => string (optional)}
@@ -32,6 +33,7 @@ class Permission
   end
 
   def self.set_permissions(user,permissions)
+
     service = dbus_obj
 #FIXME vendor permission with different prefix is not reset
     all_perm = filter_nonsuse_permissions all_actions.split(/\n/)
@@ -43,12 +45,15 @@ class Permission
       Rails.logger.info "grant perms for user #{user} :\n#{permissions.inspect}\nwith result #{response.inspect}"
       #TODO convert response to exceptions in case of error
     end
+    YastCache.reset("permission:find")
   end
 
   def self.find(type,restrictions={})
-    permission = Permission.new
-    permission.load_permissions restrictions
-    return permission.permissions
+    YastCache.fetch("permission:find:#{type}:#{restrictions.inspect}") {
+      permission = Permission.new
+      permission.load_permissions restrictions
+      permission.permissions
+    }
   end
 
   def save

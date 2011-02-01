@@ -19,6 +19,7 @@
 # you may find current contact information at www.novell.com
 #++
 require 'yast_service'
+require 'yast_cache'
 
 # = Active Directory model
 # Proviceds access to Active Directory client configuration
@@ -39,16 +40,18 @@ class Activedirectory < BaseModel::Base
 
 public
   def self.find
-    ret = YastService.Call("YaPI::ActiveDirectory::Read", {})
-    Rails.logger.info "Read Samba config: #{ret.inspect}"
-    ad	= Activedirectory.new({
+    YastCache.fetch("activedirectory:find") {
+      ret = YastService.Call("YaPI::ActiveDirectory::Read", {})
+      Rails.logger.info "Read Samba config: #{ret.inspect}"
+      ad = Activedirectory.new({
 	:domain		=> ret["domain"],
 	:create_dirs	=> ret["mkhomedir"] == "1",
 	:enabled	=> ret["winbind"] == "1"
-    })
-    leave	= false
-    ad	= {} if ad.nil?
-    return ad
+      })
+      leave = false
+      ad = {} if ad.nil?
+      ad
+    }
   end
 
   def check_membership(check_domain)
@@ -59,7 +62,6 @@ public
   end
 
   def save
-
     params	= {
 	"domain"	=> [ "s", @domain ],
 	"winbind"	=> [ "b", @enabled ],
@@ -111,6 +113,7 @@ public
     Rails.cache.write('activedirectory:realm', "")
     Rails.cache.write('activedirectory:workgroup', "")
 
+    YastCache.reset("activedirectory:find")
     return true
   end
 

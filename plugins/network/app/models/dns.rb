@@ -22,6 +22,9 @@
 # Provides set and gets resources from YaPI network module.
 # Main goal is handle YaPI specific calls and data formats. Provides cleaned
 # and well defined data.
+
+require 'yast_cache'
+
 class DNS < BaseModel::Base
 
   # the short hostname
@@ -55,8 +58,10 @@ class DNS < BaseModel::Base
   #
   # +warn+: Doesn't take any parameters.
   def DNS.find
-    response = YastService.Call("YaPI::NETWORK::Read") # hostname: true
-    ret = DNS.new response["dns"]
+    YastCache.fetch("dns:find") {
+      response = YastService.Call("YaPI::NETWORK::Read") # hostname: true
+      ret = DNS.new response["dns"]
+    }
   end
 
   # Saves data from model to system via YaPI. Saves only setted data,
@@ -69,6 +74,7 @@ class DNS < BaseModel::Base
     vsettings = [ "a{sas}", settings ] # bnc#538050    
     YastService.Call("YaPI::NETWORK::Write",{"dns" => vsettings})
     # TODO success or not?
+    YastCache.reset("dns:find")
   end
 
 end

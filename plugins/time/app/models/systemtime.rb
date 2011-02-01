@@ -23,6 +23,11 @@
 # Provides set and gets resources from YaPI time module.
 # Main goal is handle YaPI specific calls and data formats. Provides cleaned
 # and well defined data.
+
+# CACHING makes currently no sense cause the current time has to be 
+# evaluate everytime which will be also made by YaST:YAPI 
+# (It is not so easy as it sounds :-))
+
 class Systemtime < BaseModel::Base
 
   # Date settings format is dd/mm/yyyy

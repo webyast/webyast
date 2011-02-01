@@ -28,6 +28,7 @@
 #
 require 'exceptions'
 require 'graph'
+require 'yast_cache'
 
 class CollectdOutOfSyncError < BackendException
   def initialize(timestamp)
@@ -205,15 +206,17 @@ class Metric
   # Metric.find(id)
   # Where id is host:group:name (whithout rrd extension)
   def self.find(what, opts={})
-    case what
-    when :all then opts.empty? ? find_all : find_multiple(opts)
-    # in this case, the options are the first
-    # parameter
-    when Hash then find_multiple(what.merge(opts))
-    when String
-      find_multiple({:id => what}).first rescue nil
-    else nil     
-    end
+    YastCache.fetch("metric:find:#{what.inspect}:#{opts.inspect}") {
+      case what
+      when :all then opts.empty? ? find_all : find_multiple(opts)
+      # in this case, the options are the first
+      # parameter
+      when Hash then find_multiple(what.merge(opts))
+      when String
+        find_multiple({:id => what}).first rescue nil
+      else nil     
+      end
+    }
   end
   
   # find all values

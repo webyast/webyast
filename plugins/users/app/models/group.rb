@@ -20,6 +20,7 @@
 #++
 
 require 'yast_service'
+require 'yast_cache'
 
 # Group model, YastModel based
 class Group < BaseModel::Base
@@ -59,19 +60,29 @@ private
     Group.new group_hash
   end
 
+  def self.reset_cache(id)
+    YastCache.reset("group:find_all")
+    YastCache.reset("group:find:{id}")
+  end
+
 public
 
   def self.find (cn)
-    result = group_get( "system", cn )
-    result = group_get( "local", cn )  if result.empty?
-    return nil if result.empty?
-    make_group result
+    YastCache.fetch("group:find:#{cn}") {
+      result = group_get( "system", cn )
+      result = group_get( "local", cn )  if result.empty?
+      return nil if result.empty?
+      make_group result
+    }
   end
 
   def self.find_all
-    result = groups_get "local"
-    result.update( groups_get "system")
-    result.collect { |k,v| make_group v }
+    YastCache.fetch("group:find_all") {
+      result = groups_get "local"
+      result.update( groups_get "system")
+      result.collect! { |k,v| make_group v } unless result.empty?
+      result.sort! {|x,y| x.cn <=> y.cn} unless result.empty?
+    }
   end
 
   def save
@@ -89,15 +100,18 @@ public
                                    "userlist"  => ["as", members] } 
                                )
     end
+    reset_cache(old_cn)
     result # result is empty string on success, error message otherwise
   end
 
   def destroy
     existing_group = Group.group_get( group_type, old_cn )
     if existing_group.empty?
-      ""
+      ret = ""
     else
-      YastService.Call( "YaPI::USERS::GroupDelete", {"type" => ["s",group_type], "cn" => ["s",old_cn]})
+      ret = YastService.Call( "YaPI::USERS::GroupDelete", {"type" => ["s",group_type], "cn" => ["s",old_cn]})
     end
+    reset_cache(old_cn)
+    ret
   end
 end

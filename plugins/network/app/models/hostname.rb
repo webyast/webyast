@@ -22,6 +22,9 @@
 # Provides set and gets resources from YaPI network module.
 # Main goal is handle YaPI specific calls and data formats. Provides cleaned
 # and well defined data.
+
+require 'yast_cache'
+
 class Hostname < BaseModel::Base
 
   # the short hostname
@@ -36,8 +39,10 @@ class Hostname < BaseModel::Base
   #
   # +warn+: Doesn't take any parameters.
   def self.find
-    response = YastService.Call("YaPI::NETWORK::Read") # hostname: true
-    Hostname.new response["hostname"]
+    YastCache.fetch("hostname:find") {  
+      response = YastService.Call("YaPI::NETWORK::Read") # hostname: true
+      Hostname.new response["hostname"]
+    }
   end
 
   # Saves data from model to system via YaPI. Saves only setted data,
@@ -52,6 +57,7 @@ class Hostname < BaseModel::Base
     vsettings = [ "a{ss}", settings ] # bnc#538050
     YastService.Call("YaPI::NETWORK::Write",{"hostname" => vsettings})
     # TODO success or not?
+    YastCache.reset("hostname:find")
   end
 
 end
