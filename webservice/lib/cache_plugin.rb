@@ -1,4 +1,4 @@
-class Plugin
+class CachePlugin
   def self.find(what, container)
     models = []
     resources = Resource.find :all

@@ -1,3 +1,4 @@
+
 def set
     ENV["RUN_WORKER"] = 'true'
     puts "SET #{ENV["RUN_WORKER"]}"
@@ -9,7 +10,7 @@ def run
     
     
     @container = Hash.new
-    plugins = Plugin.find(:all, @container)
+    plugins = CachePlugin.find(:all, @container)
     
     @container.each do |key, value|
       puts "KEY #{key} VALUE #{value}"
@@ -20,7 +21,7 @@ def run
     
     puts "START DELAYED JOB"
     Delayed::Job.enqueue(UsersJob.new, 3, 1.seconds.from_now)
-    Delayed::Job.enqueue(StatusJob.new, -3, 1.seconds.from_now)
+#    Delayed::Job.enqueue(StatusJob.new, -3, 1.seconds.from_now)
   end
 end
 
