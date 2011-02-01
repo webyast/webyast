@@ -80,11 +80,9 @@ public
     YastCache.fetch("group:find_all") {
       result = groups_get "local"
       result.update( groups_get "system")
-      unless (result.empty? || result.is_a?(Hash))
-        result.collect! { |k,v| make_group v }
-        result.sort! {|x,y| x.cn <=> y.cn}
-      end
-      result
+      result_array = []
+      result.each { |k,v| result_array << make_group(v) }
+      result_array.sort! {|x,y| x.cn <=> y.cn}
     }
   end
 
