@@ -40,7 +40,7 @@ class Graph
   attr_reader :single_graphs
 
   CONFIGURATION_FILE = "status_configuration.yaml"
-  TRANSLATE = true
+  TRANSLATE = false #FIXME again
 
 
   private

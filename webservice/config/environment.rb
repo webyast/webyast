@@ -38,7 +38,6 @@ STDERR.puts "\n\n\t***RAILS_ENV environment variable isn't set !\n\n" unless RAI
 require File.join(File.dirname(__FILE__), 'boot')
 
 init = Rails::Initializer.run do |config|
-  
   #just for test
   #ENV['DISABLE_INITIALIZER_FROM_RAKE'] = 'false'
   
@@ -152,4 +151,3 @@ plugin_assets = init.loaded_plugins.map { |plugin| File.join(plugin.directory, '
 require 'yast/rack/static_overlay'
 init.configuration.middleware.use YaST::Rack::StaticOverlay, :roots => plugin_assets
 
-     
