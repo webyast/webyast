@@ -20,12 +20,28 @@ class PluginJob < Struct.new(:function_string)
   def perform
     function_array = function_string.split(":")
     raise "Invalid job entry: #{function_string}" if function_array.size < 2
-    function_class = (function_array.first).classify
+    function_class = (function_array.shift).classify
+    function_method = function_array.shift
+    function_args = []
+    symbol_found = false
+    #building argument list. Evaluating symbols
+    function_array.each { |arg|
+      if arg.blank?
+        symbol_found = true  
+      else
+        if symbol_found
+          symbol_found = false
+          function_args << arg.to_sym
+        else
+          function_args << arg
+        end
+      end
+    }
     object = Object.const_get(function_class) rescue $!
-    if object.class != NameError && object.respond_to?(function_array[1])
-      Rails.logger.info "Calling job: #{function_string}"
-#      ret = object.method(function_array[1]).call
-      ret = object.send(function_array[1])
+    if object.class != NameError && object.respond_to?(function_method)
+      Rails.logger.info "Calling job: #{function_class}:#{function_method}"
+      Rails.logger.info "             args: #{function_args}" unless function_args.blank?
+      ret = object.send(function_method, *function_args)
       Rails.logger.info "Job returns: #{ret.inspect}"
     end
   end    

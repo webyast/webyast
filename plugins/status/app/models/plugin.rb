@@ -64,7 +64,7 @@ class Plugin
   # "id" is the plugin name
   #
   def self.find(what)
-    YastCache.fetch("plugin:find:#{what}") {
+    YastCache.fetch("plugin:find:#{what.inspect}") {
       models = []
       ret = []
       resources = Resource.find :all

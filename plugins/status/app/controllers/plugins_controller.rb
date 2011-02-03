@@ -64,7 +64,7 @@ public
   def index
     permission_check("org.opensuse.yast.system.status.read") # RORSCAN_ITL
     what = :all
-    load_translations unless Rails.cache.exist?("plugin:find:#{what}")
+    load_translations unless Rails.cache.exist?("plugin:find:#{what.inspect}")
     @plugins = Plugin.find(what)
     render :show    
   end

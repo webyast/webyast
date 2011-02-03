@@ -82,6 +82,9 @@ public
 
   # load the attributes of the user
   def self.find(id)
+
+    return find_all if id == :all
+
     YastCache.fetch("user:find:#{id}") {
       user = User.new
       parameters	= {

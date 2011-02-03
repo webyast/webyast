@@ -289,7 +289,7 @@ class Graph
   def self.find(what, limitcheck = false, opts = {})
     background = opts[:background]
 
-    return YastCache.fetch("graph:find:#{what}") if Rails.cache.exist?("graph:find:#{what}")
+    return YastCache.fetch("graph:find:#{what.inspect}") if Rails.cache.exist?("graph:find:#{what.inspect}")
 
     # background reading doesn't work correctly if class reloading is active
     # (static class members are lost between requests)
@@ -313,7 +313,7 @@ class Graph
           raise ret
         end
 
-        Rails.cache.write("graph:find:#{what}", ret)
+        Rails.cache.write("graph:find:#{what.inspect}", ret)
 
         return ret
       end
@@ -347,7 +347,7 @@ class Graph
       end
     else
       ret = do_find(what, limitcheck)
-      Rails.cache.write("graph:find:#{what}", ret)
+      Rails.cache.write("graph:find:#{what.inspect}", ret)
       return ret 
     end
   end

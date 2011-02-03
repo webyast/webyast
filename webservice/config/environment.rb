@@ -157,15 +157,21 @@ unless ENV['RAILS_ENV'] == 'test'
   resources = Resource.find :all
   resources.each  do |resource|
     name = resource.href.split("/").last
-    status = Object.const_get((name).classify) rescue $!
-    if status.class != NameError 
-      if status.respond_to?(:find)
-#        puts "xxxxxxxxxx #{name}:find:all"
-#         Delayed::Job.enqueue(PluginJob.new("#{name}:find:all"), -3, 5.seconds.from_now)
+    object = Object.const_get((name).classify) rescue $!
+    if object.class != NameError 
+      if object.respond_to?(:find)
+        if object.method(:find).arity != 0
+          puts "Inserting job #{name}:find::all"
+          Delayed::Job.enqueue(PluginJob.new("#{name}:find::all"), -3)# if name == "plugins"
+        else
+#          puts "Inserting job #{name}:find"
+          #find method has no parameter
+          Delayed::Job.enqueue(PluginJob.new("#{name}:find"), -3)
+        end
       end
-      if status.respond_to?(:find_all) 
+      if object.respond_to?(:find_all) 
 #        puts "Inserting job #{name}:find_all"
-#        Delayed::Job.enqueue(PluginJob.new("#{name}:find_all"), -3)# if name == "users"
+        Delayed::Job.enqueue(PluginJob.new("#{name}:find_all"), -3)
       end
     end
   end
