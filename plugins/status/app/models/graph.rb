@@ -259,7 +259,7 @@ class Graph
   end
 
   # initialize on element
-  def initialize(group_id,value,limitcheck=false)
+  def initialize(group_id,value,limitcheck=true)
     @group_name = group_id
     @headline = value["headline"]
     @y_scale = value["y_scale"]
@@ -286,7 +286,7 @@ class Graph
     "system_status_#{what}"
   end
 
-  def self.find(what, limitcheck = false, opts = {})
+  def self.find(what, limitcheck = true, opts = {})
     background = opts[:background]
 
     return YastCache.fetch("graph:find:#{what.inspect}") if Rails.cache.exist?("graph:find:#{what.inspect}")
@@ -360,7 +360,7 @@ class Graph
   #      (e.g. cpu-0+cpu-system)
   # "limitcheck" checking if limit has been reached (default: false)
   #
-  def self.do_find(what, limitcheck = false, bg = nil)
+  def self.do_find(what, limitcheck = true, bg = nil)
     config = parse_config(TRANSLATE)
     return nil if config==nil
 
