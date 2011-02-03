@@ -113,12 +113,12 @@ init = Rails::Initializer.run do |config|
   config.plugin_paths << '/usr/src/packages/BUILD' unless ENV['ADD_BUILD_PATH'].nil?
 
   config.after_initialize do
-    puts "AFTER INITIALIZER RUN WORKER -> #{ENV["RUN_WORKER"]}"
-    
-    if ENV["RUN_WORKER"]
-      Thread::new do 
-	ENV["RUN_WORKER"] = 'false'
-	Delayed::Worker.new.start 
+    unless ENV['RAILS_ENV'] == 'test'
+      if ENV["RUN_WORKER"]
+        Thread::new do 
+          ENV["RUN_WORKER"] = 'false'
+	  Delayed::Worker.new.start 
+        end
       end
     end
   end
@@ -150,4 +150,24 @@ plugin_assets = init.loaded_plugins.map { |plugin| File.join(plugin.directory, '
 
 require 'yast/rack/static_overlay'
 init.configuration.middleware.use YaST::Rack::StaticOverlay, :roots => plugin_assets
+
+unless ENV['RAILS_ENV'] == 'test'
+  #Construct initial job queue in order to fillup the cache
+  Delayed::Job.delete_all
+  resources = Resource.find :all
+  resources.each  do |resource|
+    name = resource.href.split("/").last
+    status = Object.const_get((name).classify) rescue $!
+    if status.class != NameError 
+      if status.respond_to?(:find)
+#        puts "xxxxxxxxxx #{name}:find:all"
+#         Delayed::Job.enqueue(PluginJob.new("#{name}:find:all"), -3, 5.seconds.from_now)
+      end
+      if status.respond_to?(:find_all) 
+#        puts "Inserting job #{name}:find_all"
+#        Delayed::Job.enqueue(PluginJob.new("#{name}:find_all"), -3)# if name == "users"
+      end
+    end
+  end
+end
 

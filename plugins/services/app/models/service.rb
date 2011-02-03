@@ -89,7 +89,7 @@ class Service < BaseModel::Base
   # each service.
   #
   # services = Service.find_all
-  def self.find_all(params)
+  def self.find_all(params = nil)
     YastCache.fetch("service:find:#{params.inspect}") {
       params = {} if params.nil?
 
