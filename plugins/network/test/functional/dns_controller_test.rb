@@ -24,14 +24,14 @@ require File.expand_path(File.dirname(__FILE__) + "/../test_helper")
 class DnsControllerTest < ActionController::TestCase
 
   def setup
-    @model_class = DNS
-    # FIXME: bad mock for DNS (field name mismatch):
-    # DNS.stubs(:find).returns(DNS.new({"BAD" => ["d1", "d2"], "KEYS"=> ["s1", "s2"]}))
+    @model_class = Dns
+    # FIXME: bad mock for Dns (field name mismatch):
+    # Dns.stubs(:find).returns(Dns.new({"BAD" => ["d1", "d2"], "KEYS"=> ["s1", "s2"]}))
 
     # in test_access_show_xml:
     # add assert_response :success)
     # in case of error: give a nicer error than 500
-    DNS.stubs(:find).returns(DNS.new({"searches" => ["d1", "d2"], "nameservers" => ["s1", "s2"]}))
+    Dns.stubs(:find).returns(Dns.new({"searches" => ["d1", "d2"], "nameservers" => ["s1", "s2"]}))
     @controller = Network::DnsController.new
     @request = ActionController::TestRequest.new
     # http://railsforum.com/viewtopic.php?id=1719

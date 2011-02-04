@@ -21,7 +21,7 @@
 
 require File.expand_path(File.dirname(__FILE__) + "/../test_helper")
 
-class DNSTest < ActiveSupport::TestCase
+class DnsTest < ActiveSupport::TestCase
 
    RESPONSE_FULL = {
 		   'interfaces'=>{
@@ -37,13 +37,13 @@ class DNSTest < ActiveSupport::TestCase
  end
 
  def test_index
-   dns = DNS.find
+   dns = Dns.find
    assert_instance_of Array, dns.searches
    assert_instance_of Array, dns.nameservers
  end
 
  def test_validations
-   dns = DNS.find
+   dns = Dns.find
    assert dns.valid?
    dns.nameservers = ["<danger script>"]
    assert dns.invalid?
