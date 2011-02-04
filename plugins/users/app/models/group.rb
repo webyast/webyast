@@ -68,6 +68,7 @@ private
 public
 
   def self.find (cn)
+    return find_all if cn == :all
     YastCache.fetch("group:find:#{cn}") {
       result = group_get( "system", cn )
       result = group_get( "local", cn )  if result.empty?

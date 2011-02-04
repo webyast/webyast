@@ -16,8 +16,14 @@
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA
 #++
 
+require 'gettext_rails'
+
 class PluginJob < Struct.new(:function_string)
   def perform
+
+    # Fixme: this is a workaround only    
+    I18n.supported_locales = ["en"]
+
     function_array = function_string.split(":")
     raise "Invalid job entry: #{function_string}" if function_array.size < 2
     function_class = (function_array.shift).classify
