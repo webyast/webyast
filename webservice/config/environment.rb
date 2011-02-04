@@ -155,10 +155,18 @@ unless ENV['RAILS_ENV'] == 'test'
   #Construct initial job queue in order to fillup the cache
   Delayed::Job.delete_all
   resources = Resource.find :all
+
   resources.each  do |resource|
     name = resource.href.split("/").last
     object = Object.const_get((name).classify) rescue $!
-    if object.class != NameError && name != "example"
+    if object.class == NameError && name.end_with?("s")
+      #trying real "s" like "dn" -> "dns", "kerbero" -> "kerberos",...
+      name = (name).classify + "s"
+      object = Object.const_get(name) rescue $!
+    else
+      name = (name).classify
+    end
+    if object.class != NameError && name != "Example" #do not use demo plugin
       if object.respond_to?(:find)
         if object.method(:find).arity != 0
 #          puts "Inserting job #{name}:find::all"

@@ -26,7 +26,7 @@ class PluginJob < Struct.new(:function_string)
 
     function_array = function_string.split(":")
     raise "Invalid job entry: #{function_string}" if function_array.size < 2
-    function_class = (function_array.shift).classify
+    function_class = function_array.shift
     function_method = function_array.shift
     function_args = []
     symbol_found = false
