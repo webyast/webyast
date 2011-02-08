@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Tue Feb  8 16:32:43 UTC 2011 - schubi@novell.com
+
+- removed webyast-root-user-ws-rpmlintrc
+- 0.2.1 
+
+-------------------------------------------------------------------
 Mon Aug 23 12:46:07 UTC 2010 - jreidinger@novell.com
 
 - add url to spec file (bnc#625537)
