@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Tue Feb  8 16:40:21 UTC 2011 - schubi@novell.com
+
+- removed webyast-firewall-ws-rpmlintrc
+- 0.2.10 
+
+-------------------------------------------------------------------
 Wed Dec 22 12:05:20 UTC 2010 - vgorobets@novell.com
 
 - fixed "Unknown variant type!" exception if description for firewall services is missing
