@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Tue Feb  8 16:51:12 UTC 2011 - schubi@novell.com
+
+- removed webyast-roles-ws-rpmlintrc
+- 0.2.2 
+
+-------------------------------------------------------------------
 Thu Sep 16 07:53:03 UTC 2010 - vgorobets@novell.com
 
 - Create new role with empty name field ends with "undefined method 'match' for nil:NilClass" (bnc#639504) 
