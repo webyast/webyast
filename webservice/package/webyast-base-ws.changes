@@ -1,4 +1,11 @@
 -------------------------------------------------------------------
+Tue Feb  8 15:41:51 UTC 2011 - schubi@novell.com
+
+- rm webyast-base-ws-rpmlintrc
+- added security flas
+- 0.2.11
+
+-------------------------------------------------------------------
 Thu Jan  6 13:14:29 UTC 2011 - lslezak@suse.cz
 
 - fixed patching passenger_root in nginx.conf file
