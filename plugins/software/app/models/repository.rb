@@ -22,6 +22,7 @@
 # class Repository represents a software repository
 
 require 'packagekit'
+require 'yast_cache'
 
 class Repository < BaseModel::Base
 
@@ -63,22 +64,24 @@ class Repository < BaseModel::Base
   end
 
   def self.find(what)
-    repositories = Array.new
+     YastCache.fetch("repository:find:#{what.inspect}") {
+      repositories = Array.new
 
-    PackageKit.transact('GetRepoList', 'none', 'RepoDetail') { |id, name, enabled|
-      Rails.logger.debug "RepoDetail signal received: #{id}, #{name}, #{enabled}"
+      PackageKit.transact('GetRepoList', 'none', 'RepoDetail') { |id, name, enabled|
+        Rails.logger.debug "RepoDetail signal received: #{id}, #{name}, #{enabled}"
 
-      if what == :all || id == what
-        repo = Repository.new(id, name, enabled)
-        # read other attributes directly from *.repo file,
-        # because PackageKit doesn't have API for that
-        repo.read_file
+        if what == :all || id == what
+          repo = Repository.new(id, name, enabled)
+          # read other attributes directly from *.repo file,
+          # because PackageKit doesn't have API for that
+          repo.read_file
 
-        repositories << repo
-      end
+          repositories << repo
+        end
+      }
+
+      repositories
     }
-
-    repositories
   end
 
   def self.mtime
@@ -175,6 +178,7 @@ class Repository < BaseModel::Base
 
     # set keep_package
     PackageKit.transact('RepoSetData', [@id, 'keep', @keep_packages.to_s])
+    YastCache.reset("repository:find")
   end
 
   #
@@ -182,8 +186,8 @@ class Repository < BaseModel::Base
   #
   def destroy
     return false if @id.blank?
-
     PackageKit.transact('RepoSetData', [@id, 'remove', 'NONE'])
+    YastCache.reset("repository:find")
   end
 
 

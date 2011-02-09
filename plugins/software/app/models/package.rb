@@ -20,6 +20,7 @@
 #++
 
 require 'resolvable'
+require 'yast_cache'
 
 class Package < Resolvable
 
@@ -28,20 +29,23 @@ class Package < Resolvable
   end
 
   def self.find(what)
+    what = :installed if what == :all #default search for cache
     if what == :installed
-      package_list = Array.new
-      self.execute("GetPackages", what.to_s, "Package") { |line1,line2,line3| # RORSCAN_ITL
-        columns = line2.split ";"
-        package = Package.new(:resolvable_id => line2,
-                              :name => columns[0],
-                              :version => columns[1]
-                             )
-                            # :arch => columns[2],
-                            # :repo => columns[3],
-                            # :summary => line3 )
-       package_list << package
-     }
-    package_list
+      YastCache.fetch("package:find:#{what.inspect}") {
+        package_list = Array.new
+        PackageKit.transact("GetPackages", what.to_s, "Package") { |line1,line2,line3| # RORSCAN_ITL
+          columns = line2.split ";"
+          package = Package.new(:resolvable_id => line2,
+                                :name => columns[0],
+                                :version => columns[1]
+                               )
+                              # :arch => columns[2],
+                              # :repo => columns[3],
+                              # :summary => line3 )
+         package_list << package
+       }
+      package_list
+      }
     end
   end
 end

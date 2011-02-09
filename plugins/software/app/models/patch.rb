@@ -20,6 +20,7 @@
 #++
 
 require 'resolvable'
+require 'yast_cache'
 
 # Model for patches available via package kit
 class Patch < Resolvable
@@ -147,6 +148,9 @@ class Patch < Resolvable
   # Patch.find(212)
   def self.find(what, opts = {})
     background = opts[:background]
+    what = :available if what == :all #default search for cache
+
+    return YastCache.fetch("patch:find:#{what.inspect}") if Rails.cache.exist?("patch:find:#{what.inspect}")
 
     # background reading doesn't work correctly if class reloading is active
     # (static class members are lost between requests)
@@ -165,6 +169,8 @@ class Patch < Resolvable
         if ret.is_a? StandardError
           raise ret
         end
+
+        Rails.cache.write("patch:find:#{what.inspect}", ret)
 
         return ret
       end
@@ -194,7 +200,9 @@ class Patch < Resolvable
 
       return [ bm.get_progress(proc_id) ]
     else
-      return do_find(what)
+      ret = do_find(what)
+      Rails.cache.write("patch:find:#{what.inspect}", ret)
+      return ret
     end
   end
 
@@ -239,13 +247,16 @@ class Patch < Resolvable
           else
             Rails.logger.debug "*** Patch install thread: Exception raised: #{res.inspect}"
           end
+          YastCache.reset("patch:find")
           bm.finish_process(proc_id, res)
         end
       end
 
       return bm.get_progress(proc_id)
     else
-      return do_install(pk_id,signal_list,&block)
+      ret = do_install(pk_id,signal_list,&block)
+      YastCache.reset("patch:find")
+      return ret
     end
   end
 
