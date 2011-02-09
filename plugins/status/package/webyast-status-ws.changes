@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Wed Feb  9 08:21:46 UTC 2011 - schubi@novell.com
+
+- webyast-status-ws-rpmlintrc removed
+- 0.2.5 
+
+-------------------------------------------------------------------
 Fri Oct  1 10:42:29 UTC 2010 - vgorobets@novell.com
 
 - Missing text in tab headers (jquery.accordion) in Status module after update from WebYaST-SP1 to WebYaST 1.1 (bnc#636616)
