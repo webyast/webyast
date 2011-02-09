@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Wed Feb  9 09:05:58 UTC 2011 - schubi@novell.com
+
+- webyast-users-ws-rpmlintrc removed
+- 0.2.2 
+
+-------------------------------------------------------------------
 Fri Nov 26 10:14:36 CET 2010 - mzugec@suse.cz
 
 - accept system users (bnc#638476)
