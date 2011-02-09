@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Wed Feb  9 09:32:08 UTC 2011 - schubi@novell.com
+
+- webyast-kerberos-ws-rpmlintrc removed
+- 0.2.5 
+
+-------------------------------------------------------------------
 Mon Aug 23 12:58:41 UTC 2010 - jreidinger@novell.com
 
 - add url to spec file (bnc#625537)
