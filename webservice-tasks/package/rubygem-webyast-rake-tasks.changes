@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Thu Feb 10 11:26:45 UTC 2011 - schubi@novell.com
+
+- Change default user for client: nobody->nginx (bnc #670547) 
+- 0.1.10
+
+-------------------------------------------------------------------
 Wed Dec 15 13:40:50 UTC 2010 - schubi@novell.com
 
 - switching to nginx

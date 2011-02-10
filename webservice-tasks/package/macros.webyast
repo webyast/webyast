@@ -33,7 +33,7 @@
 
 # users who run the services
 %webyast_ws_user yastws
-%webyast_ui_user nobody
+%webyast_ui_user nginx
 
 # service names (init script names in /etc/init.d)
 %webyast_ws_service yastws
