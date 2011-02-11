@@ -23,8 +23,6 @@
 # Main goal is handle YaPI specific calls and data formats. Provides cleaned
 # and well defined data.
 
-require 'yast_cache'
-
 class Route < BaseModel::Base
 
   # default gateway

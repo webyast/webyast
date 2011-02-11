@@ -25,7 +25,6 @@
 #
 
 require 'gettext'
-require 'yast_cache'
 
 class Graph
   require 'yaml'
@@ -39,16 +38,16 @@ class Graph
   attr_reader :y_decimal_places
   attr_reader :single_graphs
 
-  CONFIGURATION_FILE = "status_configuration.yaml"
-  TRANSLATE = true
-
-
   private
 
   # avoid race conditions when creating the config file
   # at background - allow only one thread writing it
   #
   @@mutex = Mutex.new
+
+  #global variables
+  @@configuration_file = "status_configuration.yaml" 
+  @@translate = true
 
   # 
   # reading data from Metric
@@ -245,7 +244,7 @@ class Graph
   # reading configuration file
   #
   def self.parse_config(translate = false, path = nil)
-    path = File.join(Graph.plugin_config_dir(), CONFIGURATION_FILE ) if path == nil
+    path = File.join(Graph.plugin_config_dir(), @@configuration_file ) if path == nil
     #create default configuration file
     Graph.create_config(path) unless File.exists?(path)
 
@@ -259,7 +258,7 @@ class Graph
   end
 
   # initialize on element
-  def initialize(group_id,value,limitcheck=true)
+  def initialize(group_id,value,limitcheck=true )
     @group_name = group_id
     @headline = value["headline"]
     @y_scale = value["y_scale"]
@@ -361,7 +360,7 @@ class Graph
   # "limitcheck" checking if limit has been reached (default: false)
   #
   def self.do_find(what, limitcheck = true, bg = nil)
-    config = parse_config(TRANSLATE)
+    config = parse_config(@@translate)
     return nil if config==nil
 
     unless what == :all
@@ -420,7 +419,7 @@ class Graph
   #
   def self.find_limits(metric_id, group_id=nil )
     YastCache.fetch("graph:find_limits") {
-      config = parse_config(TRANSLATE) || {}
+      config = parse_config(@@translate) || {}
       limits = []
       config.each {|key,value|
         next if group_id != nil && key != group_id
@@ -449,7 +448,7 @@ class Graph
     end
     # avoid race condition in writing the config
     @@mutex.synchronize do
-      f = File.open(File.join(Graph.plugin_config_dir(), CONFIGURATION_FILE), "w")
+      f = File.open(File.join(Graph.plugin_config_dir(), @@configuration_file), "w")
       f.write(config.to_yaml)
       f.close
     end

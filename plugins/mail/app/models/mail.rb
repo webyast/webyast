@@ -21,7 +21,6 @@
 
 require 'singleton'
 require 'yast_service'
-require 'yast_cache'
 
 # = Mail model
 # Proviceds access local mail settings (SMTP server to use)

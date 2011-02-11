@@ -28,7 +28,6 @@
 #
 require 'exceptions'
 require 'graph'
-require 'yast_cache'
 
 class CollectdOutOfSyncError < BackendException
   def initialize(timestamp)

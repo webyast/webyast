@@ -20,7 +20,6 @@
 #++
 
 require 'resolvable'
-require 'yast_cache'
 
 class Package < Resolvable
 

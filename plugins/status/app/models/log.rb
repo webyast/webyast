@@ -25,8 +25,6 @@
 #
 
 require 'yast/config_file'
-require 'yast_service'
-require 'yast_cache'
 
 class Log
   attr_reader :id

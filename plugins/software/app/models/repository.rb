@@ -22,7 +22,6 @@
 # class Repository represents a software repository
 
 require 'packagekit'
-require 'yast_cache'
 
 class Repository < BaseModel::Base
 

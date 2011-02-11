@@ -21,7 +21,6 @@
 
 require 'yast/config_file'
 require 'yast_service'
-require 'yast_cache'
 
 # = Service model
 # Proviceds access to configured services.

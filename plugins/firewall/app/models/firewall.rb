@@ -19,8 +19,6 @@
 # you may find current contact information at www.novell.com
 #++
 
-require 'yast_cache'
-
 class Firewall < BaseModel::Base
 
   attr_accessor :use_firewall, :fw_services

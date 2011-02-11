@@ -23,8 +23,6 @@
 # Main goal is handle YaPI specific calls and data formats. Provides cleaned
 # and well defined data.
 
-require 'yast_cache'
-
 class Interface < BaseModel::Base
 
   IPADDR_REGEX = /([0-9]{1,3}.){3}[0-9]{1,3}/

@@ -20,7 +20,6 @@
 #++
 
 require 'resolvable'
-require 'yast_cache'
 
 # Model for patches available via package kit
 class Patch < Resolvable

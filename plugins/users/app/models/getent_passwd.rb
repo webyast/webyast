@@ -19,8 +19,6 @@
 # you may find current contact information at www.novell.com
 #++
 
-require 'yast_cache'
-
 # Group model, YastModel based
 class GetentPasswd < BaseModel::Base
   attr_reader :login

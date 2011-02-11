@@ -26,7 +26,6 @@
 #
 
 require 'yast_service'
-require 'yast_cache'
 
 class Plugin
   attr_reader :level

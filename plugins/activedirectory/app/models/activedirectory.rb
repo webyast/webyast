@@ -19,7 +19,6 @@
 # you may find current contact information at www.novell.com
 #++
 require 'yast_service'
-require 'yast_cache'
 
 # = Active Directory model
 # Proviceds access to Active Directory client configuration
