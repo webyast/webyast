@@ -149,7 +149,7 @@ class Patch < Resolvable
     background = opts[:background]
     what = :available if what == :all #default search for cache
 
-    return YastCache.fetch("patch:find:#{what.inspect}") if Rails.cache.exist?("patch:find:#{what.inspect}")
+    return YastCache.fetch("patch:find:#{what}") if Rails.cache.exist?("patch:find:#{what}")
 
     # background reading doesn't work correctly if class reloading is active
     # (static class members are lost between requests)
@@ -169,7 +169,7 @@ class Patch < Resolvable
           raise ret
         end
 
-        Rails.cache.write("patch:find:#{what.inspect}", ret)
+        Rails.cache.write("patch:find:#{what}", ret)
 
         return ret
       end
@@ -200,7 +200,7 @@ class Patch < Resolvable
       return [ bm.get_progress(proc_id) ]
     else
       ret = do_find(what)
-      Rails.cache.write("patch:find:#{what.inspect}", ret)
+      Rails.cache.write("patch:find:#{what}", ret)
       return ret
     end
   end

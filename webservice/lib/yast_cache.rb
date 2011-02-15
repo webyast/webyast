@@ -16,17 +16,46 @@
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA
 #++
 
+require 'digest/md5'
+
 class YastCache
 
-    def YastCache.fetch(key, options = {})
-      if  block_given?
-        Rails.cache.fetch(key, options) {yield}
-      else
-        Rails.cache.fetch(key, options)
-      end
+  def YastCache.reset(key)
+    Rails.cache.delete(key)
+    re_load = Rails.cache.exist?(key) ?  true : false
+    Delayed::Job.enqueue(PluginJob.new(key),0, 3.seconds.from_now )
+  end
+    
+  def YastCache.fetch(key, options = {})
+    re_load = false
+    re_load = true if Rails.cache.exist?(key)
+    if  block_given?
+      ret = Rails.cache.fetch(key, options) {
+        block_ret = yield
+        if block_ret == nil
+          #no data found -> remove entry from the cache table
+          cache_data = DataCache.all(:conditions => "path = '#{key}'")
+          cache_data.each { |cache|
+            cache.destroy
+          } unless cache_data.blank? 
+        else
+          #update MD5 if needed
+          md5 = Digest::MD5.hexdigest(block_ret.to_json)
+          cache_data = DataCache.all(:conditions => "path = '#{key}' AND ( refreshed_md5 is NULL OR refreshed_md5 != '#{md5}')")
+          cache_data.each { |cache|
+            cache.refreshed_md5 = md5
+            cache.picked_md5 = md5 if cache.picked_md5.blank?
+            cache.save
+          } unless cache_data.blank? 
+        end
+        block_ret
+      }
+    else
+      ret = Rails.cache.fetch(key, options)
     end
-    def YastCache.reset(key, options = {})
-      Rails.cache.delete_matched(/#{key}/)
-    end
+    YastCache.reset(key) if re_load #add reload into the job queue
+     
+    ret
+  end
 end
 

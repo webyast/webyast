@@ -60,7 +60,7 @@ private
   end
 
   def self.reset_cache(id)
-    YastCache.reset("group:find_all")
+    YastCache.reset("group:find::all")
     YastCache.reset("group:find:{id}")
   end
 
@@ -77,7 +77,7 @@ public
   end
 
   def self.find_all
-    YastCache.fetch("group:find_all") {
+    YastCache.fetch("group::all") {
       result = groups_get "local"
       result.update( groups_get "system")
       result_array = []

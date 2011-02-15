@@ -41,7 +41,7 @@ class User
 private
 
   def self.reset_cache(id)
-    YastCache.reset("user:find_all")
+    YastCache.reset("user:find::all")
     YastCache.reset("user:find:{id}")
   end
 
@@ -52,7 +52,7 @@ public
   
   # users = User.find_all
   def self.find_all(params={})
-    YastCache.fetch("user:find_all") {
+    YastCache.fetch("user:find::all") {
       attributes = [ "cn", "uidNumber", "homeDirectory", "grouplist", "uid", "loginShell", "groupname" ]
       if params.has_key? "attributes"
         attributes = params["attributes"].split(",")

@@ -69,8 +69,52 @@ class ApplicationController < ActionController::Base
   # Uncomment this to filter the contents of submitted sensitive data parameters
   # from your application log (in this case, all fields with names like "password").
   filter_parameter_logging :password # RORSCAN_ITL
+  before_filter :init_cache
 
   private
+
+  def init_cache
+    if request && request.request_method == :get
+      return unless (request.parameters["action"] == "show" || 
+                     request.parameters["action"] == "index")
+      path = request.parameters["controller"]
+      #finding the correct cache name 
+      #(has to be the model class name and not the controller name)
+      object = Object.const_get((path).classify) rescue $!
+      if object.class == NameError && path.end_with?("s")
+        #trying real "s" like "dn" -> "dns", "kerbero" -> "kerberos",...
+        path = (path).classify + "s"
+        object = Object.const_get(path) rescue $!
+      else
+        path = (path).classify
+      end
+      if object.class == NameError
+        logger.info("Cache for model #{path} not found")
+        return
+      end
+      path.downcase!
+
+      if request.parameters["action"] == "index"
+        path += ":find::all"
+      elsif request.parameters["action"] == "show"
+        path += ":find:" + request.parameters["id"]
+      else
+        return #do nothing
+      end
+      found = false
+      data_cache = DataCache.all(:conditions => "path = '#{path}' AND session = '#{request.session[:session_id]}'")
+      data_cache.each { |cache|
+        found = true
+        if cache.picked_md5 != cache.refreshed_md5
+          cache.picked_md5 = cache.refreshed_md5
+          cache.save
+        end
+      } unless data_cache.blank?
+      DataCache.create(:path => path, :session => request.session[:session_id],
+                       :picked_md5 => nil, :refreshed_md5 => nil) unless found
+    end
+  end
+
   def report_backend_exception(exception) 
       logger.info "Backend exception: #{exception}"
       render :xml => exception, :status => 503

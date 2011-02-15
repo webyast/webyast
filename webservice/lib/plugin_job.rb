@@ -26,7 +26,7 @@ class PluginJob < Struct.new(:function_string)
 
     function_array = function_string.split(":")
     raise "Invalid job entry: #{function_string}" if function_array.size < 2
-    function_class = function_array.shift
+    function_class = function_array.shift.capitalize
     function_method = function_array.shift
     function_args = []
     symbol_found = false
@@ -49,6 +49,8 @@ class PluginJob < Struct.new(:function_string)
       Rails.logger.info "             args: #{function_args}" unless function_args.blank?
       ret = object.send(function_method, *function_args)
       Rails.logger.info "Job returns: #{ret.inspect}"
+    else
+      Rails.logger.error "Method #{function_class}:#{function_method} not available"
     end
   end    
 end  

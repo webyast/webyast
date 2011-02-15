@@ -1,0 +1,23 @@
+<p>
+  <b>Id:</b>
+  <%=h @data_cache.id %>
+</p>
+
+<p>
+  <b>Session:</b>
+  <%=h @data_cache.session_id %>
+</p>
+
+<p>
+  <b>Picked md5:</b>
+  <%=h @data_cache.picked_md5 %>
+</p>
+
+<p>
+  <b>Refreshed md5:</b>
+  <%=h @data_cache.refreshed_md5 %>
+</p>
+
+
+<%= link_to 'Edit', edit_data_cache_path(@data_cache) %> |
+<%= link_to 'Back', data_caches_path %>

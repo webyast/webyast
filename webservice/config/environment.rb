@@ -179,7 +179,7 @@ unless ENV['RAILS_ENV'] == 'test'
       end
       if object.respond_to?(:find_all) 
 #        puts "Inserting job #{name}:find_all"
-        Delayed::Job.enqueue(PluginJob.new("#{name}:find_all"), -3)
+        Delayed::Job.enqueue(PluginJob.new("#{name}:find::all"), -3)
       end
     end
   end
