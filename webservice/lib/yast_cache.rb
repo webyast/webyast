@@ -52,7 +52,7 @@ class YastCache
           end
         rescue Exception => raised_exception
           Rails.logger.error "YastCache.fetch(#{key}) failed: #{raised_exception.inspect}"        
-          Rails.logger.error "Trying again in #{job_delay} seconds" if reload
+          Rails.logger.error "Trying again in #{job_delay} seconds" if re_load
         end
         block_ret
       }
