@@ -94,15 +94,18 @@ class ApplicationController < ActionController::Base
       end
       path.downcase!
 
-      if request.parameters["action"] == "index"
-        path += ":find::all"
-      elsif request.parameters["action"] == "show"
-        path += ":find:" + (request.parameters["id"] || ":all")
+      if (request.parameters["action"] == "index" || 
+          request.parameters["action"] == "show")
+        if object.method(:find).arity != 0 #has "find" an argument ?
+          path += ":find:" + (request.parameters["id"] || ":all")
+        else
+          path += ":find"
+        end
       else
         return #do nothing
       end
       found = false
-      data_cache = DataCache.all(:conditions => "path = '#{path}' AND session = '#{request.session[:session_id]}'")
+      data_cache = DataCache.all(:conditions => "path = '#{path}' AND session = '#{current_account.remember_token}'")
       data_cache.each { |cache|
         found = true
         if cache.picked_md5 != cache.refreshed_md5
@@ -110,7 +113,7 @@ class ApplicationController < ActionController::Base
           cache.save
         end
       } unless data_cache.blank?
-      DataCache.create(:path => path, :session => request.session[:session_id],
+      DataCache.create(:path => path, :session => current_account.remember_token,
                        :picked_md5 => nil, :refreshed_md5 => nil) unless found
     end
   end

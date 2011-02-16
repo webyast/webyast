@@ -89,7 +89,7 @@ class Service < BaseModel::Base
   #
   # services = Service.find_all
   def self.find_all(params = nil)
-    YastCache.fetch("service:find:#{params.inspect}") {
+    YastCache.fetch("service:find::all:#{params.inspect}") {
       params = {} if params.nil?
 
       services	= []
@@ -162,6 +162,7 @@ class Service < BaseModel::Base
   end
 
   def self.find(id)
+    return find_all if id == :all
     # actually we do not need to read the real status now
     Service.new(id)
   end

@@ -77,7 +77,7 @@ public
   end
 
   def self.find_all
-    YastCache.fetch("group::all") {
+    YastCache.fetch("group:find::all") {
       result = groups_get "local"
       result.update( groups_get "system")
       result_array = []
