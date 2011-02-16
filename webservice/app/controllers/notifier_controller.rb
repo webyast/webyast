@@ -16,18 +16,20 @@
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA
 #++
 
-#
-# DataCache class
-#
+class NotifierController < ApplicationController
 
-class DataCache < ActiveRecord::Base
-  def self.updated?(model, id, session)
-    id = ":all" if id == "all"
-    path = model+":find:"+id
-    data_cache = DataCache.all(:conditions => "path = '#{path}' AND session = '#{session}'")
-    data_cache.each { |cache|
-      return true if cache.picked_md5 != cache.refreshed_md5
-    } unless data_cache.blank?
-    return false
+  before_filter :login_required
+
+  # GET /notifier
+  # GET /notifier.xml
+  def index
+    if (DataCache.updated?(params[:plugin],
+                                params[:id] || ":all", 
+                                request.session[:session_id]))
+      render :nothing => true, :status => 200 and return
+    else
+      render :nothing => true, :status => 304 and return
+    end
   end
+
 end
