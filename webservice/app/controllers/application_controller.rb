@@ -97,7 +97,7 @@ class ApplicationController < ActionController::Base
       if request.parameters["action"] == "index"
         path += ":find::all"
       elsif request.parameters["action"] == "show"
-        path += ":find:" + request.parameters["id"]
+        path += ":find:" + (request.parameters["id"] || ":all")
       else
         return #do nothing
       end
