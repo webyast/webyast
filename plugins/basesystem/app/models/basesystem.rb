@@ -46,39 +46,41 @@ class Basesystem < BaseModel::Base
 
   #Gets instance of Basesystem with initialized steps queue and if basic settings is done
   def Basesystem.find
-    base = Basesystem.new
-    basesystem_conf	= BASESYSTEM_CONF
-    basesystem_conf	= BASESYSTEM_CONF_VENDOR if File.exists? BASESYSTEM_CONF_VENDOR
-    Rails.logger.info "Reading config file: #{basesystem_conf}"
-    config = YaST::ConfigFile.new(basesystem_conf)
-    if File.exist?(config.path)
-      begin
-      	base.steps = config["steps"] || []
-      rescue Exception => e
-      	raise CorruptedFileException.new(config.path)
-      end
-      if File.exist?(FINISH_FILE)
-      	begin
-      	  base.done = IO.read(FINISH_FILE)
-      	rescue Exception => e
-      	  raise CorruptedFileException.new(FINISH_FILE)
-      	end
-      	base.done = FINISH_STR if base.done.blank? #backward compatibility, when touch indicate finished bs
-      	if base.done == FINISH_STR
-      	  base.finish = true
-      	end
-      else
-        if base.steps.empty? #empty step definition
-          base.finish = true
-        else
-        	base.done = base.steps.first["controller"]
+    YastCache.fetch("basesystem:find") {
+      base = Basesystem.new
+      basesystem_conf	= BASESYSTEM_CONF
+      basesystem_conf	= BASESYSTEM_CONF_VENDOR if File.exists? BASESYSTEM_CONF_VENDOR
+      Rails.logger.info "Reading config file: #{basesystem_conf}"
+      config = YaST::ConfigFile.new(basesystem_conf)
+      if File.exist?(config.path)
+        begin
+       	  base.steps = config["steps"] || []
+        rescue Exception => e
+          raise CorruptedFileException.new(config.path)
         end
+        if File.exist?(FINISH_FILE)
+          begin
+            base.done = IO.read(FINISH_FILE)
+          rescue Exception => e
+            raise CorruptedFileException.new(FINISH_FILE)
+          end
+          base.done = FINISH_STR if base.done.blank? #backward compatibility, when touch indicate finished bs
+          if base.done == FINISH_STR
+            base.finish = true
+          end
+        else
+          if base.steps.empty? #empty step definition
+            base.finish = true
+          else
+            base.done = base.steps.first["controller"]
+          end
+        end
+      else
+        base.steps = []
+        base.finish = true
       end
-    else
-      base.steps = []
-      base.finish = true
-    end
-    return base
+      base
+    }
   end
 
   #stores to system Basesystem settings
@@ -87,6 +89,7 @@ class Basesystem < BaseModel::Base
     File.open(FINISH_FILE,"w") do |io|
       io.write str
     end
+    YastCache.reset("basesystem:find")
   end
 end
 
