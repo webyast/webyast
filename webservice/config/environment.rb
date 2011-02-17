@@ -169,10 +169,10 @@ unless ENV['RAILS_ENV'] == 'test'
     if object.class != NameError && name != "Example" #do not use demo plugin
       if object.respond_to?(:find)
         if object.method(:find).arity != 0
-          puts "Inserting job #{name}:find::all"
+          STDERR.puts "Inserting job #{name}:find::all"
           Delayed::Job.enqueue(PluginJob.new("#{name}:find::all"), -3)
         else
-          puts "Inserting job #{name}:find"
+          STDERR.puts "Inserting job #{name}:find"
           #find method has no parameter
           Delayed::Job.enqueue(PluginJob.new("#{name}:find"), -3)
         end

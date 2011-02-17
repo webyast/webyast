@@ -74,6 +74,8 @@ class ApplicationController < ActionController::Base
   private
 
   def init_cache
+    return unless logged_in? #Does not make sense if no session id is available
+
     if request && request.request_method == :get
       return unless (request.parameters["action"] == "show" || 
                      request.parameters["action"] == "index")
@@ -105,7 +107,7 @@ class ApplicationController < ActionController::Base
         return #do nothing
       end
       found = false
-      data_cache = DataCache.all(:conditions => "path = '#{path}' AND session = '#{current_account.remember_token}'")
+      data_cache = DataCache.all(:conditions => "path = '#{path}' AND session = '#{self.current_account.remember_token}'")
       data_cache.each { |cache|
         found = true
         if cache.picked_md5 != cache.refreshed_md5
@@ -113,7 +115,7 @@ class ApplicationController < ActionController::Base
           cache.save
         end
       } unless data_cache.blank?
-      DataCache.create(:path => path, :session => current_account.remember_token,
+      DataCache.create(:path => path, :session => self.current_account.remember_token,
                        :picked_md5 => nil, :refreshed_md5 => nil) unless found
     end
   end
