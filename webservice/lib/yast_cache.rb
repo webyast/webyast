@@ -22,7 +22,16 @@ class YastCache
 
   def YastCache.reset(key, delay = 0)
     Rails.cache.delete(key)
-    Delayed::Job.enqueue(PluginJob.new(key),0, (delay).seconds.from_now )
+    jobs = Delayed::Job.find(:all)
+    found = false
+    jobs.each { |job|
+      found = true if key == job.handler.split("\n")[1].split[1]
+    } unless jobs.blank?
+    if found
+      Rails.logger.info("Job #{key} already inserted")
+    else
+      Delayed::Job.enqueue(PluginJob.new(key),0, (delay).seconds.from_now )
+    end
   end
     
   def YastCache.fetch(key, options = {})
