@@ -21,7 +21,7 @@ require 'gettext_rails'
 class PluginJob < Struct.new(:function_string)
   def perform
 
-    # Fixme: this is a workaround only    
+    #FIXME: this is a workaround only    
     I18n.supported_locales = ["en"]
 
     function_array = function_string.split(":")

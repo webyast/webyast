@@ -18,10 +18,13 @@
 
 # route sessions statically, it is a singleton controller
 ActionController::Routing::Routes.draw do |map|
-  map.resources :notifier
 
+  #FIXME: this is a workaround only
+  map.notifier "/notifiers/index.:format", :controller => 'notifier', :action => 'index'
+  
   map.resource :session
-#resources is not restful as it allows only read only access. It is more likely inspection
+  
+  #resources is not restful as it allows only read only access. It is more likely inspection
   map.connect 'resources/:id.:format',  :controller => 'resources', :action => 'show', :requirements => { :id => /[-\w]+/ }
   map.all_resources 'resources.:format',  :controller => 'resources', :action => 'index'
   map.root :all_resources
