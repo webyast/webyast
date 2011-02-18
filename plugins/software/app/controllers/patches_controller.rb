@@ -137,7 +137,7 @@ class PatchesController < ApplicationController
     bgr = params['background']
     Rails.logger.info "Reading patches in background" if bgr
 
-    @patches = Patch.find(:available, {:background => bgr})
+    @patches = Patch.find(:all, {:background => bgr})
     @patches = @patches + collect_done_patches #report also which patches is installed
     respond_to do |format|
       format.xml { render  :xml => @patches.to_xml( :root => "patches", :dasherize => false ) }

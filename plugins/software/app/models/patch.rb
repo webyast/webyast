@@ -146,10 +146,10 @@ class Patch < Resolvable
   #   call this function in a loop until a patch list (or an error) is received
   # Patch.find(212)
   def self.find(what, opts = {})
-    background = opts[:background]
-    what = :available if what == :all #default search for cache
+    background = opts[:background] || false
+    search_id = what == :all ? :available : what
 
-    return YastCache.fetch("patch:find:#{what}") if Rails.cache.exist?("patch:find:#{what}")
+    return YastCache.fetch("patch:find:#{what.inspect}") if Rails.cache.exist?("patch:find:#{what.inspect}")
 
     # background reading doesn't work correctly if class reloading is active
     # (static class members are lost between requests)
@@ -157,9 +157,8 @@ class Patch < Resolvable
       Rails.logger.info "Class reloading is active, cannot use background thread (set config.cache_classes = true)"
       background = false
     end
-
     if background
-      proc_id = id(what)
+      proc_id = id(search_id)
       if bm.process_finished? proc_id
         Rails.logger.debug "Request #{proc_id} is done"
         ret = bm.get_value proc_id
@@ -169,7 +168,7 @@ class Patch < Resolvable
           raise ret
         end
 
-        Rails.cache.write("patch:find:#{what}", ret)
+        Rails.cache.write("patch:find:#{what.inspect}", ret)
 
         return ret
       end
@@ -186,7 +185,7 @@ class Patch < Resolvable
       Rails.logger.info "Starting background thread for reading patches..."
       # run the patch query in a separate thread
       Thread.new do
-        res = subprocess_find what
+        res = subprocess_find search_id
 
         # check for exception
         unless res.is_a? StandardError
@@ -199,8 +198,8 @@ class Patch < Resolvable
 
       return [ bm.get_progress(proc_id) ]
     else
-      ret = do_find(what)
-      Rails.cache.write("patch:find:#{what}", ret)
+      ret = do_find(search_id)
+      Rails.cache.write("patch:find:#{what.inspect}", ret)
       return ret
     end
   end
