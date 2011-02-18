@@ -20,8 +20,8 @@ require 'digest/md5'
 
 class YastCache
 
-  def YastCache.reset(key, delay = 0)
-    Rails.cache.delete(key)
+  def YastCache.reset(key, delay = 0, delete_cache = true)
+    Rails.cache.delete(key) if delete_cache
     jobs = Delayed::Job.find(:all)
     found = false
     jobs.each { |job|
@@ -30,6 +30,7 @@ class YastCache
     if found
       Rails.logger.info("Job #{key} already inserted")
     else
+      Rails.logger.info("Inserting job #{key}")
       Delayed::Job.enqueue(PluginJob.new(key),0, (delay).seconds.from_now )
     end
   end
@@ -67,8 +68,15 @@ class YastCache
       }
     else
       ret = Rails.cache.fetch(key, options)
+      md5 = Digest::MD5.hexdigest(ret.to_json)
+      cache_data = DataCache.all(:conditions => "path = '#{key}' AND ( picked_md5 is NULL OR picked_md5 != '#{md5}')")
+      cache_data.each { |cache|
+        cache.picked_md5 = md5
+        cache.save
+      } unless cache_data.blank? 
     end
-    YastCache.reset(key,job_delay) if re_load #add reload into the job queue
+    delete_cache = false
+    YastCache.reset(key,job_delay,delete_cache) if re_load #add reload into the job queue
     raise raised_exception unless raised_exception.nil? #raising exception to the next level
     ret
   end
