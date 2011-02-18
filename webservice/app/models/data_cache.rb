@@ -26,7 +26,7 @@ class DataCache < ActiveRecord::Base
     path = model+":find:"+id
     data_cache = DataCache.all(:conditions => "path = '#{path}' AND session = '#{session}'")
     data_cache.each { |cache|
-      return true if cache.picked_md5 != cache.refreshed_md5
+      return true if !cache.refreshed_md5.blank? && cache.picked_md5 != cache.refreshed_md5
     } unless data_cache.blank?
     return false
   end
