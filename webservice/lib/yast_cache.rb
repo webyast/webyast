@@ -78,6 +78,7 @@ class YastCache
     delete_cache = false
     YastCache.reset(key,job_delay,delete_cache) if re_load #add reload into the job queue
     raise raised_exception unless raised_exception.nil? #raising exception to the next level
+    return ret if ret.nil?
     ret.dup #has to be dup cause the cache value is frozen
   end
 end
