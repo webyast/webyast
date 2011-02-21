@@ -18,18 +18,15 @@
 
 class NotifierController < ApplicationController
   before_filter :login_required
+  layout nil
 
   # GET /notifier
   # GET /notifier.xml
-  def index
+  def status
     if (DataCache.updated?(params[:plugin], params[:id] || ":all", current_account.remember_token))
-      respond_to do |format|
-	format.xml  { render :nothing => true, :status => 200 and return }
-      end
+      render :nothing=>true, :status=>200 and return
     else
-      respond_to do |format|
-	format.xml  { render :nothing => true, :status => 304 and return }
-      end
+      render :nothing=>true, :status=>304 and return
     end
   end
 end
