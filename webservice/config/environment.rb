@@ -166,7 +166,9 @@ unless ENV['RAILS_ENV'] == 'test'
     else
       name = (name).classify
     end
-    if object.class != NameError && name != "Example" #do not use demo plugin
+    if object.class != NameError && 
+       name != "Example" &&  #do not use demo plugin
+       name != "Package" #currently not needed
       if object.respond_to?(:find)
         if object.method(:find).arity != 0
           STDERR.puts "Inserting job #{name}:find::all"
@@ -177,6 +179,8 @@ unless ENV['RAILS_ENV'] == 'test'
           Delayed::Job.enqueue(PluginJob.new("#{name}:find"), -3)
         end
       end
+    else
+      STDERR.puts "Ignoring job #{name}:find*"
     end
   end
   #added special request for none plugins
