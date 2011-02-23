@@ -48,7 +48,7 @@ class Permission
   end
 
   def self.find(type,restrictions={})
-    cache_key = "permission:find:#{type}"
+    cache_key = "permission:find:#{type.inspect}"
     cache_key += ":#{restrictions.inspect}" unless restrictions.blank? 
     YastCache.fetch(cache_key) {
       permission = Permission.new

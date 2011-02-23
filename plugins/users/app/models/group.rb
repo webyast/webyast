@@ -60,7 +60,6 @@ private
   end
 
   def self.reset_cache(id)
-    YastCache.reset("group:find::all")
     YastCache.reset("group:find:{id}")
   end
 

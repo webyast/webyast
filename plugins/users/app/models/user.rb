@@ -41,7 +41,6 @@ class User
 private
 
   def self.reset_cache(id)
-    YastCache.reset("user:find::all")
     YastCache.reset("user:find:{id}")
   end
 

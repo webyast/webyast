@@ -50,7 +50,8 @@ class PluginJob < Struct.new(:function_string)
       Rails.cache.delete(function_string) #cache reset. This dedicates that
                                           #the values has been re-read
       ret = object.send(function_method, *function_args)
-      Rails.logger.info "Job returns: #{ret.inspect}"
+      Rails.logger.info "Job returned"
+#      Rails.logger.info "Job returns: #{ret.inspect}"
     else
       Rails.logger.error "Method #{function_class}:#{function_method} not available"
     end
