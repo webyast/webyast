@@ -152,6 +152,8 @@ require 'yast/rack/static_overlay'
 init.configuration.middleware.use YaST::Rack::StaticOverlay, :roots => plugin_assets
 
 unless ENV['RAILS_ENV'] == 'test'
+  #remove cache information 
+  DataCache.delete_all
   #Construct initial job queue in order to fillup the cache
   Delayed::Job.delete_all
   resources = Resource.find :all

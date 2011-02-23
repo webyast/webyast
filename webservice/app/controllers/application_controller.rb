@@ -75,10 +75,10 @@ class ApplicationController < ActionController::Base
 
   def init_cache
     return unless logged_in? #Does not make sense if no session id is available
-
     if request && request.request_method == :get
       return unless (request.parameters["action"] == "show" || 
                      request.parameters["action"] == "index")
+      found = false
       path = request.parameters["controller"]
       #finding the correct cache name 
       #(has to be the model class name and not the controller name)
@@ -106,7 +106,6 @@ class ApplicationController < ActionController::Base
       else
         return #do nothing
       end
-      found = false
       data_cache = DataCache.all(:conditions => "path = '#{path}' AND session = '#{self.current_account.remember_token}'")
       data_cache.each { |cache|
         found = true

@@ -20,19 +20,40 @@ require 'digest/md5'
 
 class YastCache
 
-  def YastCache.reset(key, delay = 0, delete_cache = true)
-    Rails.cache.delete(key) if delete_cache
-    jobs = Delayed::Job.find(:all)
-    found = false
-    jobs.each { |job|
-      found = true if key == job.handler.split("\n")[1].split[1]
-    } unless jobs.blank?
-    if found
-      Rails.logger.info("Job #{key} already inserted")
-    else
-      Rails.logger.info("Inserting job #{key}")
-      Delayed::Job.enqueue(PluginJob.new(key),0, (delay).seconds.from_now )
+  def YastCache.reset(cache_key, delay = 0, delete_cache = true)
+    #finding involved keys e.g. user:find:<id> includes user:find::all
+    function_array = cache_key.split(":")
+    raise "Invalid job entry: #{function_string}" if function_array.size < 2
+    keys = [cache_key]
+    unless (function_array.size == 2 ||
+            (function_array.size == 4 && function_array == "all")) 
+      #add general <module>:find to the list
+      function_class = function_array.shift.capitalize
+      function_method = function_array.shift
+      object = Object.const_get((name).classify) rescue $!
+      if object.class != NameError && object.respond_to?(:find)
+        if object.method(:find).arity != 0
+          keys << "#{function_class}:find::all"
+        else
+          keys << "#{function_class}:find"
+        end
+      end
     end
+
+    keys.each { |key|
+      Rails.cache.delete(key) if delete_cache
+      jobs = Delayed::Job.find(:all)
+      found = false
+      jobs.each { |job|
+        found = true if key == job.handler.split("\n")[1].split[1]
+      } unless jobs.blank?
+      if found
+        Rails.logger.info("Job #{key} already inserted")
+      else
+        Rails.logger.info("Inserting job #{key}")
+        Delayed::Job.enqueue(PluginJob.new(key),0, (delay).seconds.from_now )
+      end
+    }
   end
     
   def YastCache.fetch(key, options = {})
