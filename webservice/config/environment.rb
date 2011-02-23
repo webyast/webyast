@@ -154,43 +154,27 @@ init.configuration.middleware.use YaST::Rack::StaticOverlay, :roots => plugin_as
 
 unless ENV['RAILS_ENV'] == 'test'
   #check if table for caches exist
-  if ActiveRecord::Base.connection.tables.include?('data_caches')
+  if ActiveRecord::Base.connection.tables.include?('data_caches') &&
+     ActiveRecord::Base.connection.tables.include?('delayed_jobs')
     #remove cache information 
     DataCache.delete_all
     #Construct initial job queue in order to fillup the cache
     Delayed::Job.delete_all
     resources = Resource.find :all
-
     resources.each  do |resource|
       name = resource.href.split("/").last
-      object = Object.const_get((name).classify) rescue $!
-      if object.class == NameError && name.end_with?("s")
-        #trying real "s" like "dn" -> "dns", "kerbero" -> "kerberos",...
-        name = (name).classify + "s"
-        object = Object.const_get(name) rescue $!
-      else
-        name = (name).classify
-      end
-      if object.class != NameError && 
-         name != "Example" &&  #do not use demo plugin
-         name != "Package" #currently not needed
-        if object.respond_to?(:find)
-          if object.method(:find).arity != 0
-            STDERR.puts "Inserting job #{name}:find::all"
-            Delayed::Job.enqueue(PluginJob.new("#{name}:find::all"), -3)
-          else
-            STDERR.puts "Inserting job #{name}:find"
-            #find method has no parameter
-            Delayed::Job.enqueue(PluginJob.new("#{name}:find"), -3)
-          end
-        end
+      job_key = YastCache.find_key(name)
+      if (!job_key.blank? &&
+          name != "Example" &&  #do not use demo plugin
+          name != "Packages") #currently not needed
+        STDERR.puts "Inserting job #{job_key}"
+        Delayed::Job.enqueue(PluginJob.new(job_key), -3)
       else
         STDERR.puts "Ignoring job #{name}:find*"
       end
+      #added special request for none plugins
+      STDERR.puts "Inserting job Permission:find::all"
+      Delayed::Job.enqueue(PluginJob.new("Permission:find::all"), -3)
     end
-    #added special request for none plugins
-    STDERR.puts "Inserting job Permission:find::all"
-    Delayed::Job.enqueue(PluginJob.new("Permission:find::all"), -3)
   end
 end
-
