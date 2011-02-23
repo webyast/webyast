@@ -172,9 +172,9 @@ unless ENV['RAILS_ENV'] == 'test'
       else
         STDERR.puts "Ignoring job #{name}:find*"
       end
-      #added special request for none plugins
-      STDERR.puts "Inserting job Permission:find::all"
-      Delayed::Job.enqueue(PluginJob.new("Permission:find::all"), -3)
     end
+    #added special request for none plugins
+    STDERR.puts "Inserting job Permission:find::all"
+    Delayed::Job.enqueue(PluginJob.new("Permission:find::all"), -3)
   end
 end
