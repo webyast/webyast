@@ -23,7 +23,7 @@ class NotifierController < ApplicationController
   # GET /notifier
   # GET /notifier.xml
   def status
-    if (DataCache.updated?(params[:plugin], params[:id] || ":all", current_account.remember_token))
+    if(DataCache.updated?(params[:plugin], params[:id], current_account.remember_token))
       render :nothing=>true, :status=>200 and return
     else
       render :nothing=>true, :status=>304 and return

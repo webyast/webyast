@@ -22,8 +22,8 @@
 
 class DataCache < ActiveRecord::Base
   def self.updated?(model, id, session)
-    id = ":all" if id == "all"
-    path = model+":find:"+id
+    (id.nil?)?  path = model+":find" : path = model+":find:"+id
+    
     data_cache = DataCache.all(:conditions => "path = '#{path}' AND session = '#{session}'")
     data_cache.each { |cache|
       return true if !cache.refreshed_md5.blank? && cache.picked_md5 != cache.refreshed_md5
