@@ -30,6 +30,7 @@ class YastCache
     else
       model_name = (model_name).classify
     end
+    model_name.downcase!
     if object.class != NameError && object.respond_to?(:find)
       if object.method(:find).arity != 0 
         #has :all parameter
