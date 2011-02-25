@@ -1,2 +1,11 @@
 interface: org.opensuse.yast.system.patches
 controller: patches
+
+#cache:
+#  enabled: true/false
+#  priority: -100..100
+#  reload_after: seconds (0 == do not reload)
+cache:
+  enabled: true
+  priority: 20
+  reload_after: 300

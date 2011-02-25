@@ -4,3 +4,10 @@ interface: org.example.plugin
 controller: example
 #singular set if it is singular REST service or not
 singular: true
+
+#cache:
+#  enabled: true/false
+#  priority: -100..100
+#  reload_after: seconds (0 == do not reload)
+cache:
+  enabled: false

@@ -162,15 +162,17 @@ unless ENV['RAILS_ENV'] == 'test'
     Delayed::Job.delete_all
     resources = Resource.find :all
     resources.each  do |resource|
-      name = resource.href.split("/").last
-      job_key = YastCache.find_key(name)
-      if (!job_key.blank? &&
-          name != "Example" &&  #do not use demo plugin
-          name != "Packages") #currently not needed
-        STDERR.puts "Inserting job #{job_key}"
-        Delayed::Job.enqueue(PluginJob.new(job_key), -3)
+      if resource.cache_enabled
+        name = resource.href.split("/").last
+        job_key = YastCache.find_key(name)
+        if !job_key.blank?
+          STDERR.puts "Inserting job #{job_key}"
+          Delayed::Job.enqueue(PluginJob.new(job_key), resource.cache_priority)
+        else
+          STDERR.puts "Ignoring job #{name}:find* (not runable)"
+        end
       else
-        STDERR.puts "Ignoring job #{name}:find*"
+        STDERR.puts "Ignoring job #{name}:find (configured)"
       end
     end
     #added special request for none plugins
