@@ -43,6 +43,7 @@ class Firewall < BaseModel::Base
   end
 
   def self.toVariant(value)
+    Rails.logger.error("ERRRRRRRRRRRRRORRRRRRRRRRRRR: #{value.inspect}")
     if    value.is_a? TrueClass
       ["b",true]
     elsif value.is_a? FalseClass
@@ -57,8 +58,10 @@ class Firewall < BaseModel::Base
       ["a{sv}", value.to_a.collect {|kv| [ (kv[0].to_s), toVariant(kv[1])] } ]
     elsif value.is_a? Array
       ["av", value.collect {|v| toVariant v}]
+    elsif value.nil?
+      Rails.logger.error "WARNING: Firewall service description is missing"
     else
-      raise "Unknown variant type!"
+      raise "Unknown variant type! #{value}"
     end
   end
 
