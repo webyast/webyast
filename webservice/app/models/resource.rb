@@ -23,7 +23,7 @@
 
 class Resource < BaseModel::Base
   require 'resource_registration'
-  attr_accessor :policy, :interface, :href, :singular, :cache_enabled, :cache_priority, :cache_reload
+  attr_accessor :policy, :interface, :href, :singular, :cache_enabled, :cache_priority, :cache_reload_after
 
   def initialize (interface, impl_hash)
     @interface = interface

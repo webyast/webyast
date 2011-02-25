@@ -166,7 +166,7 @@ unless ENV['RAILS_ENV'] == 'test'
         name = resource.href.split("/").last
         job_key = YastCache.find_key(name)
         if !job_key.blank?
-          STDERR.puts "Inserting job #{job_key}"
+          STDERR.puts "Inserting job #{job_key} with priority #{resource.cache_priority}"
           Delayed::Job.enqueue(PluginJob.new(job_key), resource.cache_priority)
         else
           STDERR.puts "Ignoring job #{name}:find* (not runable)"

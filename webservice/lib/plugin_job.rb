@@ -52,6 +52,17 @@ class PluginJob < Struct.new(:function_string)
       ret = object.send(function_method, *function_args)
       Rails.logger.info "Job returned"
 #      Rails.logger.info "Job returns: #{ret.inspect}"
+      resources = Resource.find :all
+      resources.each  do |resource|
+        if resource.cache_reload_after > 0
+          name = resource.href.split("/").last
+          if YastCache.find_key(name) == function_string
+            Rails.logger.info "Enqueuing job again (sleep #{resource.cache_reload_after} seconds)"
+            Delayed::Job.enqueue(PluginJob.new(function_string), resource.cache_priority, 
+                                 (resource.cache_reload_after).seconds.from_now)
+          end
+        end
+      end
     else
       Rails.logger.error "Method #{function_class}:#{function_method} not available"
     end
