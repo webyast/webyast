@@ -43,7 +43,6 @@ class Firewall < BaseModel::Base
   end
 
   def self.toVariant(value)
-    Rails.logger.error("ERRRRRRRRRRRRRORRRRRRRRRRRRR: #{value.inspect}")
     if    value.is_a? TrueClass
       ["b",true]
     elsif value.is_a? FalseClass
