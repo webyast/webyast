@@ -54,6 +54,8 @@ class Firewall < BaseModel::Base
       ["a{sv}", value.to_a.collect {|kv| [ (kv[0].to_s), toVariant(kv[1])] } ]
     elsif value.is_a? Array
       ["av", value.collect {|v| toVariant v}]
+    elsif value.nil?
+      Rails.logger.error "WARNING: Firewall service description is missing"
     else
       raise "Unknown variant type!"
     end
