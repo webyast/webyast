@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Fri Feb 25 10:27:38 UTC 2011 - vgorobets@novell.com
+
+- Fixed bug: WebYaST firewall module crashes if firewall service description is missing 
+- 0.2.11
+
+-------------------------------------------------------------------
 Tue Feb  8 16:40:21 UTC 2011 - schubi@novell.com
 
 - removed webyast-firewall-ws-rpmlintrc
