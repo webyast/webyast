@@ -36,18 +36,21 @@ class Resource < BaseModel::Base
   end
 
   def self.find(what)
-    return case what
-      when :all then
-        resources = []
-        ResourceRegistration.resources.sort.each do |interface,implementations|
-          implementations.each do |impl|
-            resources << new(interface,impl)
+    # There is no reload mechansim for the cache. So fetch it directly
+    return Rails.cache.fetch("resource:find:#{what.inspect}") {
+      case what
+        when :all then
+          resources = []
+          ResourceRegistration.resources.sort.each do |interface,implementations|
+            implementations.each do |impl|
+              resources << new(interface,impl)
+            end
           end
-        end
-        resources
-      else
-        implementations = ResourceRegistration.resources[what]
-        implementations ? new(what, implementations.first) : nil
-    end
+          resources
+        else
+          implementations = ResourceRegistration.resources[what]
+          implementations ? new(what, implementations.first) : nil
+      end
+    }
   end
 end

@@ -113,8 +113,9 @@ init = Rails::Initializer.run do |config|
   config.plugin_paths << '/usr/src/packages/BUILD' unless ENV['ADD_BUILD_PATH'].nil?
 
   config.after_initialize do
+    YastCache.active = config.action_controller.perform_caching 
     unless ENV['RAILS_ENV'] == 'test'
-      if ENV["RUN_WORKER"]
+      if ENV["RUN_WORKER"] && YastCache.active
         Thread::new do 
           ENV["RUN_WORKER"] = 'false'
 	  Delayed::Worker.new.start 
@@ -153,17 +154,19 @@ init.configuration.middleware.use YaST::Rack::StaticOverlay, :roots => plugin_as
 
 
 unless ENV['RAILS_ENV'] == 'test'
-  #check if table for caches exist
+  #check if table for caches exist and cache is active
   if ActiveRecord::Base.connection.tables.include?('data_caches') &&
-     ActiveRecord::Base.connection.tables.include?('delayed_jobs')
+     ActiveRecord::Base.connection.tables.include?('delayed_jobs') &&
+     YastCache.active
+
     #remove cache information 
     DataCache.delete_all
     #Construct initial job queue in order to fillup the cache
     Delayed::Job.delete_all
     resources = Resource.find :all
     resources.each  do |resource|
+      name = resource.href.split("/").last
       if resource.cache_enabled
-        name = resource.href.split("/").last
         job_key = YastCache.find_key(name)
         if !job_key.blank?
           STDERR.puts "Inserting job #{job_key} with priority #{resource.cache_priority}"

@@ -25,38 +25,13 @@ class PatchesController < ApplicationController
 
    before_filter :login_required
 
-   # always check permissions and cache expiration
-   # even if the result is already created and cached
+   # always check permissions
    before_filter :check_read_permissions, :only => [:index, :show]
-   before_filter :check_cache_status, :only => :index
-
-   # cache 'index' method result, but don't cache message requests
-   # (caching messages would complicate the cache invalidation code
-   #  and it's fast anyway so it is actually not important)
-   caches_action :index, :unless => Proc.new { |ctrl| ctrl.params['messages'] }
 
   private
 
   def check_read_permissions
     permission_check "org.opensuse.yast.system.patches.read"  # RORSCAN_ITL
-  end
-
-  # check whether the cached result is still valid
-  def check_cache_status
- #cache contain string as it is only object supported by all caching backends
-    cache_timestamp = Rails.cache.read('patches:timestamp').to_i
-
-    if cache_timestamp.nil?
-	# this is the first run, the cache is not initialized yet, just return
-	Rails.cache.write('patches:timestamp', Time.now.to_i.to_s)
-    # the cache expires after 5 minutes, repository metadata
-    # or RPM database update invalidates the cache immediately
-    # (new patches might be applicable)
-    elsif cache_timestamp < 15.minutes.ago.to_i || cache_timestamp < Patch.mtime.to_i
-	logger.debug "#### Patch cache expired"
-	expire_action :action => :index, :format => params["format"]
-	Rails.cache.write('patches:timestamp', Time.now.to_i.to_s)
-    end
   end
 
   def collect_done_patches
@@ -89,24 +64,24 @@ class PatchesController < ApplicationController
     return done
   end
 
-	def check_running_install
+  def check_running_install
     running = 0
     max_progress = nil
     status = nil
     BackgroundManager.instance.running.each do |k,v|
       if k.match(/^packagekit_install_(.*)/)
         patch_id = $1
-				tmp = BackgroundManager.instance.get_progress k
+        tmp = BackgroundManager.instance.get_progress k
         if max_progress.nil? || tmp.progress > max_progress
           max_progress = tmp.progress
           status = tmp
         end
         logger.info "installation in progress. Patch #{k}"
         running += 1
-			end
-		end
+      end
+    end
     raise InstallInProgressException.new running,status if running > 0 #there is process which runs installation
-	end
+  end
 
   def read_messages
     if File.exists?(Patch::MESSAGES_FILE)
@@ -132,7 +107,7 @@ class PatchesController < ApplicationController
       end
       return
     end
-		check_running_install
+    check_running_install
     # note: permission check was performed in :before_filter
     bgr = params['background']
     Rails.logger.info "Reading patches in background" if bgr
@@ -142,12 +117,6 @@ class PatchesController < ApplicationController
     respond_to do |format|
       format.xml { render  :xml => @patches.to_xml( :root => "patches", :dasherize => false ) }
       format.json { render :json => @patches.to_json( :root => "patches", :dasherize => false ) }
-    end
-
-    # do not cache the background progress status
-    # (expire the cache in the next request)
-    if bgr && @patches.first.class == BackgroundStatus
-      Rails.cache.write('patches:timestamp', Time.at(0))
     end
   end
 
@@ -194,7 +163,6 @@ class PatchesController < ApplicationController
     end
 
     res = @patch_update.install(true) #always install in backend otherwise there is problem with long running updates
-    Rails.cache.write('patches:timestamp', Time.at(0)) #invalidate cache
     index
   end
 

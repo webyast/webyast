@@ -20,6 +20,11 @@ require 'digest/md5'
 
 class YastCache
 
+  include Singleton
+
+  def YastCache.active; @active ||= false; end
+  def YastCache.active= a; @active = a; end
+
   def YastCache.find_key(model_name, key = ":all")
     model_name.capitalize!
     object = Object.const_get((model_name).classify) rescue $!
@@ -43,6 +48,10 @@ class YastCache
   end
 
   def YastCache.reset(cache_key, delay = 0, delete_cache = true)
+    unless YastCache.active
+      Rails.logger.debug "YastCache.reset: Cache is not active"
+      return
+    end
     #finding involved keys e.g. user:find:<id> includes user:find::all
     function_array = cache_key.split(":")
     raise "Invalid job entry: #{function_string}" if function_array.size < 2
@@ -70,6 +79,16 @@ class YastCache
   end
     
   def YastCache.fetch(key, options = {})
+    unless YastCache.active
+      Rails.logger.debug "YastCache.fetch: Cache is not active"
+      if  block_given?
+        return yield
+      else
+        Rails.logger.error "YastCache.fetch: No block is given"       
+        return nil
+      end
+    end
+
     job_delay = 3
     raised_exception = nil
     re_load = Rails.cache.exist?(key) ?  true : false
