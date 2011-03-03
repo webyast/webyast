@@ -26,6 +26,8 @@ require "rpam"
 require 'digest/sha1'
 
 class Account < ActiveRecord::Base
+  acts_as_static_record :key => :remember_token
+
   # Virtual attribute for the unencrypted password
   attr_accessor :password
 

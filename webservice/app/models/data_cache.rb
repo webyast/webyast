@@ -21,9 +21,25 @@
 #
 
 class DataCache < ActiveRecord::Base
+  acts_as_static_record
+
+  def DataCache.find_by_path(path)
+    data_cache = DataCache.find(:all) || [] #only find:all is cached
+    data_cache.delete_if{ |item|
+      item.path != path
+    }
+  end
+
+  def DataCache.find_by_path_and_session(path,session)
+    data_cache = DataCache.find(:all) || [] #only find:all is cached
+    data_cache.delete_if{ |item|
+      item.path != path || item.session != session 
+    }
+  end
+
   def self.updated?(model, id, session)
     path = YastCache.find_key(model, id)
-    data_cache = DataCache.all(:conditions => "path = '#{path}' AND session = '#{session}'")
+    data_cache = DataCache.find_by_path_and_session(path,session)
     data_cache.each { |cache|
       return true if !cache.refreshed_md5.blank? && cache.picked_md5 != cache.refreshed_md5
     } unless data_cache.blank?

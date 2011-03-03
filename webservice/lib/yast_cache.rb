@@ -99,18 +99,20 @@ class YastCache
           block_ret = yield
           if block_ret == nil
             #no data found -> remove entry from the cache table
-            cache_data = DataCache.all(:conditions => "path = '#{key}'")
+            cache_data = DataCache.find_by_path key
             cache_data.each { |cache|
               cache.destroy
             } unless cache_data.blank? 
           else
             #update MD5 if needed
             md5 = Digest::MD5.hexdigest(block_ret.to_json)
-            cache_data = DataCache.all(:conditions => "path = '#{key}' AND ( refreshed_md5 is NULL OR refreshed_md5 != '#{md5}')")
+            cache_data = DataCache.find_by_path key
             cache_data.each { |cache|
-              cache.refreshed_md5 = md5
-              cache.picked_md5 = md5 if cache.picked_md5.blank?
-              cache.save
+              if cache.refreshed_md5.blank? || cache.refreshed_md5 != md5
+                cache.refreshed_md5 = md5
+                cache.picked_md5 = md5 if cache.picked_md5.blank?
+                cache.save
+              end
             } unless cache_data.blank? 
           end
         rescue Exception => raised_exception
@@ -122,10 +124,12 @@ class YastCache
     else
       ret = Rails.cache.fetch(key, options)
       md5 = Digest::MD5.hexdigest(ret.to_json)
-      cache_data = DataCache.all(:conditions => "path = '#{key}' AND ( picked_md5 is NULL OR picked_md5 != '#{md5}')")
+      cache_data = DataCache.find_by_path key
       cache_data.each { |cache|
-        cache.picked_md5 = md5
-        cache.save
+        if cache.picked_md5.blank? || cache.picked_md5 != md5
+          cache.picked_md5 = md5
+          cache.save
+        end
       } unless cache_data.blank? 
     end
     delete_cache = false

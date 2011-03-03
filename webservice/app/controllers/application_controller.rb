@@ -74,7 +74,8 @@ class ApplicationController < ActionController::Base
   private
 
   def init_cache
-    return unless logged_in? #Does not make sense if no session id is available
+    return unless (logged_in? && YastCache.active) #Does not make sense if no session id is available or
+                                                   #cache is not active
     if request && request.request_method == :get
       return unless (request.parameters["action"] == "show" || 
                      request.parameters["action"] == "index")
@@ -86,7 +87,7 @@ class ApplicationController < ActionController::Base
         return
       end
       path.downcase!
-      data_cache = DataCache.all(:conditions => "path = '#{path}' AND session = '#{self.current_account.remember_token}'")
+      data_cache = DataCache.find_by_path_and_session(path, self.current_account.remember_token)
       found = false
       data_cache.each { |cache|
         found = true
