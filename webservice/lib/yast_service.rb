@@ -24,6 +24,10 @@ class YastService
     # cache the importer object, avoid recreation in every Import call
     @@importer = nil
 
+    # avoid race conditions while accessing YaST
+    #
+    @@yast_mutex = Mutex.new
+
     # cache for imported namespaces, avoid importing an Yast name space
     # and introspecting the DBus object in every call
     # key: name space name, value: DBus object
@@ -31,6 +35,8 @@ class YastService
 
     # call a Yast function using DBus service
     def YastService.Call(function, *arguments)
+
+        @@yast_mutex.lock #locking for other thread
 
 	# connect to the system bus
 	system_bus = DBus::SystemBus.instance # RORSCAN_ITL
@@ -94,6 +100,8 @@ class YastService
 
 	# rethow generic exceptions
 	raise e
+    ensure
+      @@yast_mutex.unlock #unlocking for other thread
     end
 end
 
