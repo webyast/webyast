@@ -48,6 +48,10 @@ end
 
 class PackageKit
 
+  # avoid race conditions while accessing PackageKit
+  #
+  @@packagekit_mutex = Mutex.new
+
   private
   def self.improve_error(dbus_error)
     # check if it is a known error
@@ -99,6 +103,34 @@ class PackageKit
   end
 
   public
+
+  #
+  # PackageKit.lock
+  #
+  # Lock PackagKit for single use
+  #
+  def self.lock
+    Rails.logger.info "PackageKit locking"
+    @@packagekit_mutex.lock
+    Rails.logger.info "PackageKit locked"
+  end
+
+  #
+  # PackageKit.unlock
+  #
+  # Unlock PackagKit
+  #
+  def self.unlock
+    if @@packagekit_mutex.locked?
+      begin
+        @@packagekit_mutex.unlock 
+      rescue Exception => e
+        Rails.logger.debug "PackageKit is not locked"
+      end
+      Rails.logger.info "PackageKit unlocked"
+    end
+  end
+
   #
   # PackageKit.connect
   #
@@ -160,15 +192,14 @@ class PackageKit
   #
   def self.transact(method, args, signal = nil, bg_stat = nil, &block)
     begin
+      error = ''
+      result = nil
       transaction_iface, packagekit_iface = self.connect
     
       proxy = transaction_iface.object
     
-      error = ''
-
       # set the custom signal handler if set
       proxy.on_signal(signal.to_s, &block) if !signal.blank? && block_given?
-
       if bg_stat
         proxy.on_signal("StatusChanged") do |s|
           Rails.logger.debug "PackageKit progress: StatusChanged: #{s}"
@@ -182,17 +213,13 @@ class PackageKit
           bg_stat.subprogress = p2 < 101 ? p2 : -1
         end
       end
-
       dbusloop = self.dbusloop proxy, error
-
       dbusloop << proxy.bus
-
       # Do the call only when all signal handlers are in place,
       # otherwise Finished can arrive early and dbusloop will never
       # quit, bnc#561578
       # call it after creating the DBus loop (bnc#579001)
       result = transaction_iface.send(method.to_sym, *args)
-
       # run the main loop, process the incoming signals
       dbusloop.run
 
@@ -203,8 +230,6 @@ class PackageKit
         proxy.on_signal("StatusChanged")
       end
       proxy.on_signal(signal.to_s) if !signal.blank? && block_given?
-
-      packagekit_iface.SuggestDaemonQuit
 
       raise PackageKitError.new(error) unless error.blank?
 

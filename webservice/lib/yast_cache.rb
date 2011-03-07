@@ -22,6 +22,8 @@ class YastCache
 
   include Singleton
 
+
+
   def YastCache.active; @active ||= false; end
   def YastCache.active= a; @active = a; end
 
@@ -54,10 +56,10 @@ class YastCache
     end
     #finding involved keys e.g. user:find:<id> includes user:find::all
     function_array = cache_key.split(":")
-    raise "Invalid job entry: #{function_string}" if function_array.size < 2
+    raise "Invalid job entry: #{cache_key}" if function_array.size < 2
     keys = [cache_key]
     unless (function_array.size == 2 ||
-            (function_array.size == 4 && function_array == "all")) 
+            (function_array.size == 4 && function_array[3] == "all")) 
       #add general <module>:find to the list
       keys << YastCache.find_key(function_array.shift)
     end
@@ -76,6 +78,18 @@ class YastCache
         Delayed::Job.enqueue(PluginJob.new(key),0, (delay).seconds.from_now )
       end
     }
+  end
+
+  def YastCache.delete(cache_key)
+    unless YastCache.active
+      Rails.logger.debug "YastCache.delete: Cache is not active"
+      return
+    end
+    Rails.cache.delete(cache_key)
+    #finding involved keys e.g. user:find:<id> includes user:find::all
+    function_array = cache_key.split(":")
+    raise "Invalid job entry: #{cache_key}" if function_array.size < 2
+    YastCache.reset(YastCache.find_key(function_array[0]))
   end
     
   def YastCache.fetch(key, options = {})

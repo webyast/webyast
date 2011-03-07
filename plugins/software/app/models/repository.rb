@@ -64,21 +64,25 @@ class Repository < BaseModel::Base
 
   def self.find(what)
      YastCache.fetch("repository:find:#{what.inspect}") {
-      repositories = Array.new
+      PackageKit.lock #locking
+      begin
+        repositories = Array.new
 
-      PackageKit.transact('GetRepoList', 'none', 'RepoDetail') { |id, name, enabled|
-        Rails.logger.debug "RepoDetail signal received: #{id}, #{name}, #{enabled}"
+        PackageKit.transact('GetRepoList', 'none', 'RepoDetail') { |id, name, enabled|
+          Rails.logger.debug "RepoDetail signal received: #{id}, #{name}, #{enabled}"
 
-        if what == :all || id == what
-          repo = Repository.new(id, name, enabled)
-          # read other attributes directly from *.repo file,
-          # because PackageKit doesn't have API for that
-          repo.read_file
+          if what == :all || id == what
+            repo = Repository.new(id, name, enabled)
+            # read other attributes directly from *.repo file,
+            # because PackageKit doesn't have API for that
+            repo.read_file
 
-          repositories << repo
-        end
-      }
-
+            repositories << repo
+          end
+        }
+      ensure
+        PackageKit.unlock #locking
+      end
       repositories
     }
   end
@@ -154,30 +158,41 @@ class Repository < BaseModel::Base
   #
   def update
     # create a new repository if it does not exist yet
-    if !Repository.exists?(@id)
-      Rails.logger.info "Adding a new repository '#{@id}': #{self.inspect}"
-      PackageKit.transact('RepoSetData', [@id, 'add', @url])
-    else
-      Rails.logger.info "Modifying repository '#{@id}': #{self.inspect}"
-      # set url
-      PackageKit.transact('RepoSetData', [@id, 'url', @url])
+    is_new = false
+    PackageKit.lock #locking
+    begin
+      if !Repository.exists?(@id)
+        is_new = true
+        Rails.logger.info "Adding a new repository '#{@id}': #{self.inspect}"
+        PackageKit.transact('RepoSetData', [@id, 'add', @url])
+      else
+        Rails.logger.info "Modifying repository '#{@id}': #{self.inspect}"
+        # set url
+        PackageKit.transact('RepoSetData', [@id, 'url', @url])
+      end
+
+      # set enabled flag
+      PackageKit.transact('RepoEnable', [@id, @enabled])
+
+      # set priority
+      PackageKit.transact('RepoSetData', [@id, 'prio', @priority.to_s])
+
+      # set autorefresh
+      PackageKit.transact('RepoSetData', [@id, 'refresh', @autorefresh.to_s])
+
+      # set name
+      PackageKit.transact('RepoSetData', [@id, 'name', @name.to_s])
+
+      # set keep_package
+      PackageKit.transact('RepoSetData', [@id, 'keep', @keep_packages.to_s])
+    ensure
+      PackageKit.unlock #locking
     end
-
-    # set enabled flag
-    PackageKit.transact('RepoEnable', [@id, @enabled])
-
-    # set priority
-    PackageKit.transact('RepoSetData', [@id, 'prio', @priority.to_s])
-
-    # set autorefresh
-    PackageKit.transact('RepoSetData', [@id, 'refresh', @autorefresh.to_s])
-
-    # set name
-    PackageKit.transact('RepoSetData', [@id, 'name', @name.to_s])
-
-    # set keep_package
-    PackageKit.transact('RepoSetData', [@id, 'keep', @keep_packages.to_s])
-    YastCache.reset("repository:find")
+    if is_new
+      YastCache.reset("repository:find::all")
+    else
+      YastCache.reset("repository:find:#{@id.inspect}")
+    end
   end
 
   #
@@ -185,8 +200,13 @@ class Repository < BaseModel::Base
   #
   def destroy
     return false if @id.blank?
-    PackageKit.transact('RepoSetData', [@id, 'remove', 'NONE'])
-    YastCache.reset("repository:find")
+    PackageKit.lock #locking
+    begin
+      PackageKit.transact('RepoSetData', [@id, 'remove', 'NONE'])
+    ensure
+      PackageKit.unlock #locking
+    end
+    YastCache.delete("repository:find:#{@id.inspect}")
   end
 
 

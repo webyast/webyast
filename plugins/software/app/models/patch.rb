@@ -72,25 +72,31 @@ class Patch < Resolvable
   # find patches using PackageKit
   def self.do_find(what, bg_status = nil)
     patch_updates = Array.new
-    PackageKit.transact("GetUpdates", "none", "Package", bg_status) { |line1,line2,line3|
-      columns = line2.split ";"
-      if what == :available || columns[1] == what
-        update = Patch.new(:resolvable_id => columns[1],
-                           :kind => line1,
-                           :name => columns[0],
-                           :arch => columns[2],
-                           :repo => columns[3],
-                           :summary => line3 )
+    PackageKit.lock #locking
+    begin
+      PackageKit.transact("GetUpdates", "none", "Package", bg_status) { |line1,line2,line3|
+        columns = line2.split ";"
+        if what == :available || columns[1] == what
+          update = Patch.new(:resolvable_id => columns[1],
+                             :kind => line1,
+                             :name => columns[0],
+                             :arch => columns[2],
+                             :repo => columns[3],
+                             :summary => line3 )
 
-        if what == :available
-          # add the update to the list
-          patch_updates << update
-        else
-          # just return this single update
-          patch_updates = update
+          if what == :available
+            # add the update to the list
+            patch_updates << update
+          else
+            # just return this single update
+            patch_updates = update
+          end
         end
-      end
-    }
+      }
+    ensure
+      #unlocking PackageKit
+      PackageKit.unlock
+    end
     return patch_updates
   end
 
@@ -235,19 +241,16 @@ class Patch < Resolvable
       Rails.logger.info "Starting background thread for installing patches..."
       # run the patch query in a separate thread
       Thread.new do
-				@@package_kit_mutex ||= Mutex.new #TODO move to packagekit lib
-        @@package_kit_mutex.synchronize do
-          res = subprocess_install pk_id
+        res = subprocess_install pk_id
 
-          # check for exception
-          unless res.is_a? StandardError
-            Rails.logger.info "*** Patch install thread: Result: #{res.inspect}"
-          else
-            Rails.logger.debug "*** Patch install thread: Exception raised: #{res.inspect}"
-          end
-          YastCache.reset("patch:find")
-          bm.finish_process(proc_id, res)
+        # check for exception
+        unless res.is_a? StandardError
+          Rails.logger.info "*** Patch install thread: Result: #{res.inspect}"
+        else
+          Rails.logger.debug "*** Patch install thread: Exception raised: #{res.inspect}"
         end
+        YastCache.reset("patch:find")
+        bm.finish_process(proc_id, res)
       end
 
       return bm.get_progress(proc_id)
@@ -259,53 +262,61 @@ class Patch < Resolvable
   end
 
   def self.do_install(pk_id, signal_list = [], &block)
+    #locking PackageKit for single use
+    PackageKit.lock
+
     ok = true
-    transaction_iface, packagekit_iface = PackageKit.connect
+    begin
+      transaction_iface, packagekit_iface = PackageKit.connect
 
-    proxy = transaction_iface.object
+      proxy = transaction_iface.object
     
-    if block_given?
-      signal_list.each { |signal|
-        # set the custom signal handle
-        proxy.on_signal(signal.to_s, &block) 
-      }
-    end
+      if block_given?
+        signal_list.each { |signal|
+          # set the custom signal handle
+          proxy.on_signal(signal.to_s, &block) 
+        }
+      end
 
-    proxy.on_signal("Package") do |line1,line2,line3|
-      Rails.logger.debug "  update package: #{line2}"
-    end
+      proxy.on_signal("Package") do |line1,line2,line3|
+        Rails.logger.debug "  update package: #{line2}"
+      end
 
-    error = ''
-    dbusloop = PackageKit.dbusloop proxy, error
-    dbusloop << proxy.bus
+      error = ''
+      dbusloop = PackageKit.dbusloop proxy, error
+      dbusloop << proxy.bus
 
-    proxy.on_signal("Error") do |u1,u2|
-      ok = false
-      dbusloop.quit
-    end
-    if transaction_iface.methods["UpdatePackages"] && # catch mocking
-       transaction_iface.methods["UpdatePackages"].params.size == 2 &&
-       transaction_iface.methods["UpdatePackages"].params[0][0] == "only_trusted"
-      #PackageKit of 11.2
-      transaction_iface.UpdatePackages(true,  #only_trusted
-                                                              [pk_id])
-    else
-      #PackageKit older versions like SLES11
-      transaction_iface.UpdatePackages([pk_id])
-    end
+      proxy.on_signal("Error") do |u1,u2|
+        ok = false
+        dbusloop.quit
+      end
+      if transaction_iface.methods["UpdatePackages"] && # catch mocking
+         transaction_iface.methods["UpdatePackages"].params.size == 2 &&
+         transaction_iface.methods["UpdatePackages"].params[0][0] == "only_trusted"
+        #PackageKit of 11.2
+        transaction_iface.UpdatePackages(true,  #only_trusted
+                                         [pk_id])
+      else
+        #PackageKit older versions like SLES11
+        transaction_iface.UpdatePackages([pk_id])
+      end
 
-    dbusloop.run
-    packagekit_iface.SuggestDaemonQuit
+      dbusloop.run
+      packagekit_iface.SuggestDaemonQuit
 
-    ok &= error.blank?
+      ok &= error.blank?
 
-    # bnc#617350, remove signals
-    proxy.on_signal "Error"
-    proxy.on_signal "Package"
-    if block_given?
-      signal_list.each { |signal|
-        proxy.on_signal signal.to_s
-      }
+      # bnc#617350, remove signals
+      proxy.on_signal "Error"
+      proxy.on_signal "Package"
+      if block_given?
+        signal_list.each { |signal|
+          proxy.on_signal signal.to_s
+        }
+      end
+    ensure
+      #unlocking PackageKit
+      PackageKit.unlock
     end
 
     return ok
