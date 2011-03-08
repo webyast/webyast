@@ -37,6 +37,10 @@ STDERR.puts "\n\n\t***RAILS_ENV environment variable isn't set !\n\n" unless RAI
 # Bootstrap the Rails environment, frameworks, and default configuration
 require File.join(File.dirname(__FILE__), 'boot')
 
+# mutex block for starting the worker AFTER all jobs have been inserted
+delay_job_mutex = Mutex::new
+
+
 init = Rails::Initializer.run do |config|
   #just for test
   #ENV['DISABLE_INITIALIZER_FROM_RAKE'] = 'false'
@@ -115,9 +119,11 @@ init = Rails::Initializer.run do |config|
   config.after_initialize do
     YastCache.active = config.action_controller.perform_caching 
     unless ENV['RAILS_ENV'] == 'test'
+      delay_job_mutex.lock
       if ENV["RUN_WORKER"] && YastCache.active
         Thread::new do 
           ENV["RUN_WORKER"] = 'false'
+          delay_job_mutex.lock #do not start before all jobs have been inserted
 	  Delayed::Worker.new.start 
         end
       end
@@ -181,5 +187,6 @@ unless ENV['RAILS_ENV'] == 'test'
     #added special request for none plugins
     STDERR.puts "Inserting job Permission:find::all"
     Delayed::Job.enqueue(PluginJob.new("Permission:find::all"), -3)
+    delay_job_mutex.unlock #start delay job worker
   end
 end
