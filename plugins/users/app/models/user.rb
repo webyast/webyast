@@ -38,12 +38,6 @@ class User
   attr_accessor_with_default :user_password, ""
   attr_accessor_with_default :type, "local"
 
-private
-
-  def self.reset_cache(id)
-    YastCache.reset("user:find:{id}")
-  end
-
 public
 
   def initialize    
@@ -83,7 +77,7 @@ public
 
     return find_all if id == :all
 
-    YastCache.fetch("user:find:#{id}") {
+    YastCache.fetch("user:find:#{id.inspect}") {
       user = User.new
       parameters	= {
         # user to find
@@ -118,7 +112,7 @@ public
 
     ret = YastService.Call("YaPI::USERS::UserDelete", config)
     Rails.logger.debug "Command returns: #{ret}"
-    reset_cache(uid)
+    YastCache.delete("user:find:#{uid.inspect}")
     raise ret if not ret.blank?
     return (ret == "")
   end
@@ -138,7 +132,7 @@ public
     ret = YastService.Call("YaPI::USERS::UserModify", config, data)
 
     Rails.logger.debug "Command returns: #{ret.inspect}"
-    reset_cache(id)
+    YastCache.reset("user:find:#{id}")
     raise ret if not ret.blank?
     true
   end

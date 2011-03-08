@@ -89,7 +89,7 @@ class Service < BaseModel::Base
   #
   # services = Service.find_all
   def self.find_all(params = nil)
-    YastCache.fetch("service:find::all:#{params.inspect}") {
+    YastCache.fetch("service:find::all") {
       params = {} if params.nil?
 
       services	= []
@@ -216,7 +216,7 @@ class Service < BaseModel::Base
       raise e
     end
     Rails.logger.debug "Command returns: #{ret.inspect}"
-    YastCache.reset("service:find")
+    YastCache.reset("service:find::all")
     ret.symbolize_keys!
   end
 end

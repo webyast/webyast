@@ -249,14 +249,14 @@ class Patch < Resolvable
         else
           Rails.logger.debug "*** Patch install thread: Exception raised: #{res.inspect}"
         end
-        YastCache.reset("patch:find")
+        YastCache.reset("patch:find:#{pk_id.inspect}")
         bm.finish_process(proc_id, res)
       end
 
       return bm.get_progress(proc_id)
     else
       ret = do_install(pk_id,signal_list,&block)
-      YastCache.reset("patch:find")
+      YastCache.reset("patch:find:#{pk_id.inspect}")
       return ret
     end
   end

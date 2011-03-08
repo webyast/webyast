@@ -59,15 +59,11 @@ private
     Group.new group_hash
   end
 
-  def self.reset_cache(id)
-    YastCache.reset("group:find:{id}")
-  end
-
 public
 
   def self.find (cn)
     return find_all if cn == :all
-    YastCache.fetch("group:find:#{cn}") {
+    YastCache.fetch("group:find:#{cn.inspect}") {
       result = group_get( "system", cn )
       result = group_get( "local", cn )  if result.empty?
       return nil if result.empty?
@@ -100,7 +96,7 @@ public
                                    "userlist"  => ["as", members] } 
                                )
     end
-    reset_cache(old_cn)
+    YastCache.reset("group:find:{old_cn.inspect}")
     result # result is empty string on success, error message otherwise
   end
 
@@ -111,7 +107,7 @@ public
     else
       ret = YastService.Call( "YaPI::USERS::GroupDelete", {"type" => ["s",group_type], "cn" => ["s",old_cn]})
     end
-    reset_cache(old_cn)
+    YastCache.delete("group:find:{old_cn.inspect}")
     ret
   end
 end

@@ -45,7 +45,7 @@ class Interface < BaseModel::Base
   end
 
   def self.find( which )
-    YastCache.fetch("interface:find") {
+    YastCache.fetch("interface:find:#{which.inspect}") {
       response = YastService.Call("YaPI::NETWORK::Read")
       ifaces_h = response["interfaces"]
       if which == :all
@@ -76,7 +76,7 @@ class Interface < BaseModel::Base
     vsettings = [ "a{sa{ss}}", settings ] # bnc#538050
     YastService.Call("YaPI::NETWORK::Write",{"interface" => vsettings})
     # TODO success or not?
-    YastCache.reset("interface:find")
+    YastCache.reset("interface:find:#{@id.inspect}")
   end
 
 end
