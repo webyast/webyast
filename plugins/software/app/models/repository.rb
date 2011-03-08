@@ -158,11 +158,10 @@ class Repository < BaseModel::Base
   #
   def update
     # create a new repository if it does not exist yet
-    is_new = false
+    repo_exist = Repository.exists?(@id)
     PackageKit.lock #locking
     begin
-      if !Repository.exists?(@id)
-        is_new = true
+      unless repo_exist
         Rails.logger.info "Adding a new repository '#{@id}': #{self.inspect}"
         PackageKit.transact('RepoSetData', [@id, 'add', @url])
       else
@@ -188,11 +187,7 @@ class Repository < BaseModel::Base
     ensure
       PackageKit.unlock #locking
     end
-    if is_new
-      YastCache.reset("repository:find::all")
-    else
-      YastCache.reset("repository:find:#{@id.inspect}")
-    end
+    YastCache.reset("repository:find:#{@id.inspect}")
   end
 
   #

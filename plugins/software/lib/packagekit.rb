@@ -48,10 +48,6 @@ end
 
 class PackageKit
 
-  # avoid race conditions while accessing PackageKit
-  #
-  @@packagekit_mutex = Mutex.new
-
   private
   def self.improve_error(dbus_error)
     # check if it is a known error
@@ -110,8 +106,10 @@ class PackageKit
   # Lock PackagKit for single use
   #
   def self.lock
-    Rails.logger.info "PackageKit locking"
-    @@packagekit_mutex.lock
+    Rails.logger.info "PackageKit locking via DBUS lock"
+    YastService.lock # Only one thread have access to DBUS. 
+                     # So we have to synchronize with YastService calls
+                     # Otherwise DBUS hangs
     Rails.logger.info "PackageKit locked"
   end
 
@@ -121,14 +119,8 @@ class PackageKit
   # Unlock PackagKit
   #
   def self.unlock
-    if @@packagekit_mutex.locked?
-      begin
-        @@packagekit_mutex.unlock 
-      rescue Exception => e
-        Rails.logger.debug "PackageKit is not locked"
-      end
-      Rails.logger.info "PackageKit unlocked"
-    end
+    YastService.unlock
+    Rails.logger.info "PackageKit unlocked via DBUS unlock"
   end
 
   #

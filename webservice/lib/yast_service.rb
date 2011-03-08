@@ -33,10 +33,37 @@ class YastService
     # key: name space name, value: DBus object
     @@imported = {}
 
+    #
+    # YastService.lock
+    #
+    # Lock YastService for single use
+    #
+    def YastService.lock
+      Rails.logger.info "DBUS locking"
+      @@yast_mutex.lock
+      Rails.logger.info "DBUS locked"
+    end
+
+    #
+    # YastService.unlock
+    #
+    # Unlock YastService
+    #
+    def YastService.unlock
+      if @@yast_mutex.locked?
+        begin
+          @@yast_mutex.unlock 
+        rescue Exception => e
+          Rails.logger.debug "DBUS is not locked"
+        end
+        Rails.logger.info "DBUS unlocked"
+      end
+    end
+
     # call a Yast function using DBus service
     def YastService.Call(function, *arguments)
 
-        @@yast_mutex.lock #locking for other thread
+        YastService.lock #locking for other thread
 
 	# connect to the system bus
 	system_bus = DBus::SystemBus.instance # RORSCAN_ITL
@@ -101,7 +128,7 @@ class YastService
 	# rethow generic exceptions
 	raise e
     ensure
-      @@yast_mutex.unlock #unlocking for other thread
+      YastService.unlock #unlocking for other thread
     end
 end
 
