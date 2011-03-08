@@ -81,7 +81,7 @@ class ApplicationController < ActionController::Base
                      request.parameters["action"] == "index")
       #finding the correct cache name 
       #(has to be the model class name and not the controller name)
-      path = YastCache.find_key(request.parameters["controller"], (request.parameters["id"] || ":all"))
+      path = YastCache.find_key(request.parameters["controller"], (request.parameters["id"] || :all))
       if path.blank?
         logger.info("Cache for model #{path} not found")
         return

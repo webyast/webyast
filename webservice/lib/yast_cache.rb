@@ -27,7 +27,7 @@ class YastCache
   def YastCache.active; @active ||= false; end
   def YastCache.active= a; @active = a; end
 
-  def YastCache.find_key(model_name, key = ":all")
+  def YastCache.find_key(model_name, key = :all)
     model_name.capitalize!
     object = Object.const_get((model_name).classify) rescue $!
     if object.class == NameError && model_name.end_with?("s")
@@ -41,7 +41,7 @@ class YastCache
     if object.class != NameError && object.respond_to?(:find)
       if object.method(:find).arity != 0 
         #has :all parameter
-        return "#{model_name}:find:#{key}"
+        return "#{model_name}:find:#{key.inspect}"
       else
         return "#{model_name}:find"
       end
