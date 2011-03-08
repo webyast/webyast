@@ -32,7 +32,7 @@ class Mail::StateController < ApplicationController
     yapi_perm_check "mailsettings.write"
 
     logger.warn "Confirmation of testmail"
-    File.delete Mail::TEST_MAIL_FILE
+    File.delete Mail::TEST_MAIL_FILE if File.exist? Mail::TEST_MAIL_FILE
 
     mail = Mail.find
     respond_to do |format|
