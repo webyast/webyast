@@ -1,4 +1,11 @@
 -------------------------------------------------------------------
+Wed Mar  9 13:05:49 CET 2011 - jsuchome@suse.cz
+
+- remove potential problematic characters from email address
+- remove file only when present (bnc#645379) 
+- 0.2.3
+
+-------------------------------------------------------------------
 Wed Feb  9 09:10:24 UTC 2011 - schubi@novell.com
 
 - webyast-mail-ws-rpmlintrc removed

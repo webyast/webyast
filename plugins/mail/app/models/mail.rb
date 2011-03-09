@@ -67,7 +67,10 @@ class Mail < BaseModel::Base
 
     message	= "This is the test mail sent to you by webYaST. Go to the status page and confirm you've got it."
 
-    `/bin/echo "#{message}" | /bin/mail -s "WebYaST Test Mail" #{to} -r root` # XXX tom take care of injection via 'message' and 'to', can be very dangerous
+    # remove potential problematic characters from email address
+    to.tr!("~'\"<>","")
+
+    `/bin/echo "#{message}" | /bin/mail -s "WebYaST Test Mail" '#{to}' -r root`
 
     unless File.directory? File.join(Paths::VAR,"mail")
       Rails.logger.debug "directory does not exists...."
