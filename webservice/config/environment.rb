@@ -185,8 +185,15 @@ unless ENV['RAILS_ENV'] == 'test'
       end
     end
     #added special request for none plugins
-    STDERR.puts "Inserting job Permission:find::all"
-    Delayed::Job.enqueue(PluginJob.new("Permission:find::all"), -3)
+    key = "Permission:find::all"
+    STDERR.puts "Inserting job #{key}"
+    Delayed::Job.enqueue(PluginJob.new(key), 0)
+    key = 'Permission:find::all:{"with_description"=>"1"}'
+    STDERR.puts "Inserting job #{key}"
+    Delayed::Job.enqueue(PluginJob.new(key), 0)
+    key = "getentpasswd:find"
+    STDERR.puts "Inserting job #{key}"
+    Delayed::Job.enqueue(PluginJob.new(key), -3)
     delay_job_mutex.unlock #start delay job worker
   end
 end

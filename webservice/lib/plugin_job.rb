@@ -39,7 +39,7 @@ class PluginJob < Struct.new(:function_string)
           symbol_found = false
           function_args << arg.to_sym
         else
-          function_args << arg
+          function_args << eval(arg) #translate it back to array,hash,string..
         end
       end
     }

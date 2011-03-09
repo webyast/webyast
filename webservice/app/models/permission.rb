@@ -44,15 +44,20 @@ class Permission
       Rails.logger.info "grant perms for user #{user} :\n#{permissions.inspect}\nwith result #{response.inspect}"
       #TODO convert response to exceptions in case of error
     end
-    YastCache.reset("permission:find")
+    YastCache.reset("permission:find::all")
   end
 
   def self.find(type,restrictions={})
+    filters = {}
+    #filter out only needed parameters
+    restrictions.each {|key, value|  
+                        filters[key.to_sym] = value if %w( filter with_description user_id ).index(key.to_s)
+    }   
     cache_key = "permission:find:#{type.inspect}"
-    cache_key += ":#{restrictions.inspect}" unless restrictions.blank? 
+    cache_key += ":#{filters.inspect}" unless filters.blank? 
     YastCache.fetch(cache_key) {
       permission = Permission.new
-      permission.load_permissions restrictions
+      permission.load_permissions filters
       permission.permissions
     }
   end
@@ -68,13 +73,13 @@ class Permission
     else
       semiresult = Permission.filter_nonsuse_permissions semiresult
     end
-  @permissions = semiresult.map do |value|
+    @permissions = semiresult.map do |value|
       ret = {
         :id => value,
         :granted => false
       }
-			ret[:description] = get_description(value) if options[:with_description]
-			ret
+      ret[:description] = get_description(value) if options[:with_description]
+      ret
     end
     user = options[:user_id]
     mark_granted_permissions_for_user user if user
