@@ -86,6 +86,7 @@ class YastCache
       return
     end
     Rails.cache.delete(cache_key)
+
     #finding involved keys e.g. user:find:<id> includes user:find::all
     function_array = cache_key.split(":")
     raise "Invalid job entry: #{cache_key}" if function_array.size < 2
@@ -111,7 +112,7 @@ class YastCache
         block_ret = nil
         begin
           block_ret = yield
-          if block_ret == nil
+          if block_ret.blank?
             #no data found -> remove entry from the cache table
             cache_data = DataCache.find_by_path key
             cache_data.each { |cache|
@@ -135,6 +136,10 @@ class YastCache
         end
         block_ret
       }
+      if ret.blank?
+        Rails.cache.delete(key)
+        Rails.logger.debug "deleting empty cache #{key} #{!Rails.cache.exist?(key)}"
+      end
     else
       ret = Rails.cache.fetch(key, options)
       md5 = Digest::MD5.hexdigest(ret.to_json)
