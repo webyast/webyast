@@ -59,7 +59,7 @@ class YastCache
     raise "Invalid job entry: #{cache_key}" if function_array.size < 2
     keys = [cache_key]
     unless (function_array.size == 2 ||
-            (function_array.size == 4 && function_array[3] == "all")) 
+            (function_array.size >= 4 && function_array[3] == "all")) 
       #add general <module>:find to the list
       keys << YastCache.find_key(function_array.shift)
     end

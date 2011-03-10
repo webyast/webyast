@@ -23,17 +23,28 @@
 class DataCache < ActiveRecord::Base
   acts_as_static_record
 
+  def DataCache.extract_path_args(path)
+    path_array = path.split(":")
+    ret_array = path_array[0,2]
+    if path_array.size >= 4 && path_array[3] == "all"
+      ret_array << ":all"
+    elsif path_array.size >= 3
+      ret_array << path_array[2]
+    end
+    ret_array.join(":")
+  end
+
   def DataCache.find_by_path(path)
     data_cache = DataCache.find(:all) || [] #only find:all is cached
     data_cache.delete_if{ |item|
-      item.path != path
+      self.extract_path_args(item.path) != self.extract_path_args(path)
     }
   end
 
   def DataCache.find_by_path_and_session(path,session)
     data_cache = DataCache.find(:all) || [] #only find:all is cached
     data_cache.delete_if{ |item|
-      item.path != path || item.session != session 
+      self.extract_path_args(item.path) != self.extract_path_args(path) || item.session != session 
     }
   end
 

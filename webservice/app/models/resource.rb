@@ -23,7 +23,7 @@
 
 class Resource < BaseModel::Base
   require 'resource_registration'
-  attr_accessor :policy, :interface, :href, :singular, :cache_enabled, :cache_priority, :cache_reload_after
+  attr_accessor :policy, :interface, :href, :singular, :cache_enabled, :cache_priority, :cache_reload_after, :cache_arguments
 
   def initialize (interface, impl_hash)
     @interface = interface
@@ -33,6 +33,7 @@ class Resource < BaseModel::Base
     @cache_enabled = impl_hash[:cache_enabled]
     @cache_priority = impl_hash[:cache_priority]
     @cache_reload_after = impl_hash[:cache_reload_after]
+    @cache_arguments = impl_hash[:cache_arguments]
   end
 
   def self.find(what)

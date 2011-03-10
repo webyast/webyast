@@ -104,6 +104,9 @@ public
     # cache_reload_after: is optional, default to 0 (no reload)
     cache_reload_after = (resource["cache"]["reload_after"].to_i unless resource["cache"].blank?) || 0
 
+    # cache_arguments: is optional, default to ""
+    cache_arguments = (resource["cache"]["arguments"] unless resource["cache"].blank? ) || ""
+
     error "#{file}: has non-plural interface #{interface} without being flagged as singular" if !singular and name != name.pluralize
 
     # nested: is optional, defaults to nil
@@ -112,7 +115,8 @@ public
 
     resources[interface] ||= Array.new
     resources[interface] << { :controller => controller, :singular => singular, :nested => nested, :policy => policy,
-                              :cache_enabled => cache_enabled, :cache_priority => cache_priority, :cache_reload_after => cache_reload_after }
+                              :cache_enabled => cache_enabled, :cache_priority => cache_priority, :cache_reload_after => cache_reload_after,
+                              :cache_arguments => cache_arguments }
   end
 
   # register routes from a plugin

@@ -46,7 +46,7 @@ class PluginJob < Struct.new(:function_string)
     object = Object.const_get(function_class) rescue $!
     if object.class != NameError && object.respond_to?(function_method)
       Rails.logger.info "Calling job: #{function_class}:#{function_method}"
-      Rails.logger.info "             args: #{function_args}" unless function_args.blank?
+      Rails.logger.info "             args: #{function_args.inspect}" unless function_args.blank?
       Rails.cache.delete(function_string) #cache reset. This dedicates that
                                           #the values has been re-read
       ret = object.send(function_method, *function_args)

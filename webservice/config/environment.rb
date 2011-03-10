@@ -175,6 +175,7 @@ unless ENV['RAILS_ENV'] == 'test'
       if resource.cache_enabled
         job_key = YastCache.find_key(name)
         if !job_key.blank?
+          job_key += ":" + resource.cache_arguments unless resource.cache_arguments.blank?
           STDERR.puts "Inserting job #{job_key} with priority #{resource.cache_priority}"
           Delayed::Job.enqueue(PluginJob.new(job_key), resource.cache_priority)
         else

@@ -59,7 +59,15 @@ class Service < BaseModel::Base
 #    `/sbin/runlevel` # RORSCAN_ITL
   end
 
+
   public
+
+  def self.cache_key
+    ret = "service:find::all"
+    resource = Resource.find("org.opensuse.yast.modules.yapi.services")
+    ret += ":" + resource.cache_arguments if resource && !resource.cache_arguments.blank?
+    ret
+  end
 
   # reading configuration file
   #
@@ -89,7 +97,7 @@ class Service < BaseModel::Base
   #
   # services = Service.find_all
   def self.find_all(params = nil)
-    YastCache.fetch("service:find::all") {
+    YastCache.fetch(cache_key) {
       params = {} if params.nil?
 
       services	= []
@@ -161,8 +169,8 @@ class Service < BaseModel::Base
     }
   end
 
-  def self.find(id)
-    return find_all if id == :all
+  def self.find(id, params = nil)
+    return find_all(params) if id == :all
     # actually we do not need to read the real status now
     Service.new(id)
   end
@@ -216,7 +224,7 @@ class Service < BaseModel::Base
       raise e
     end
     Rails.logger.debug "Command returns: #{ret.inspect}"
-    YastCache.reset("service:find::all")
+    YastCache.reset(Service.cache_key)
     ret.symbolize_keys!
   end
 end
