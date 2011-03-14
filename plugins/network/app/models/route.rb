@@ -45,6 +45,7 @@ class Route < BaseModel::Base
   #
   # +warn+: YaPI implements default only.
   def self.find( which )
+    which = "default" if which == :all
     YastCache.fetch("route:find:#{which.inspect}") {
       response = YastService.Call("YaPI::NETWORK::Read")
       routes_h = response["routes"]
