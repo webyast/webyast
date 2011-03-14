@@ -174,9 +174,9 @@ class Patch < Resolvable
           raise ret
         end
 
-        Rails.cache.write("patch:find:#{what.inspect}", ret) if YastCache.active
-
-        return ret
+        Rails.cache.write("patch:find:#{what.inspect}", ret) if YastCache.active && !ret.nil?
+        return nil if ret.nil?
+        return ret.dup #has to be dup cause value in cache is frozen now
       end
 
       running = bm.get_progress proc_id
@@ -205,8 +205,9 @@ class Patch < Resolvable
       return [ bm.get_progress(proc_id) ]
     else
       ret = do_find(search_id)
-      Rails.cache.write("patch:find:#{what.inspect}", ret) if YastCache.active
-      return ret
+      Rails.cache.write("patch:find:#{what.inspect}", ret) if YastCache.active && !ret.nil?
+      return nil if ret.nil?
+      return ret.dup #has to be dup cause value in cache is frozen now
     end
   end
 
@@ -302,7 +303,6 @@ class Patch < Resolvable
       end
 
       dbusloop.run
-      packagekit_iface.SuggestDaemonQuit
 
       ok &= error.blank?
 
