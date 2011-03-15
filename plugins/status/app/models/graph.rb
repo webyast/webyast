@@ -275,80 +275,21 @@ class Graph
     @single_graphs = value["single_graphs"]
   end
 
-  # just a short cut for accessing the singleton object
-  def self.bm
-    BackgroundManager.instance
-  end
-
   # create unique id for the background manager
   def self.id(what)
     "system_status_#{what}"
   end
 
   def self.find(what, limitcheck = true, opts = {})
-    background = opts[:background]
 
     return YastCache.fetch("graph:find:#{what.inspect}") if Rails.cache.exist?("graph:find:#{what.inspect}")
 
-    # background reading doesn't work correctly if class reloading is active
-    # (static class members are lost between requests)
-    if background && !bm.background_enabled?
-      Rails.logger.info "Class reloading is active, cannot use background thread (set config.cache_classes = true)"
-      background = false
-    end
-    if background
-      #checking if collectd is running
-      raise ServiceNotRunning.new('collectd') unless Metric.collectd_running?
+    #checking if collectd is running
+    raise ServiceNotRunning.new('collectd') unless Metric.collectd_running?
 
-      proc_id = id(what)
-      if bm.process_finished? proc_id
-        Rails.logger.debug "Request #{proc_id} is done"
-
-        ret = bm.get_value proc_id
-
-        # rethrow the exception from the background thread
-        if ret.kind_of?(Exception)
-          Rails.logger.info "Rethrowing the exception caught in the background thread: #{ret.inspect}"
-          raise ret
-        end
-
-        Rails.cache.write("graph:find:#{what.inspect}", ret)
-
-        return ret
-      end
-
-      running = bm.get_progress proc_id
-      if running
-        Rails.logger.debug "Request #{proc_id} is already running: #{running.inspect}"
-        return [running]
-      end
-
-      bm.add_process proc_id
-      Rails.logger.info "Starting background thread for reading status..."
-
-      # read the status in a separate thread
-      Thread.new do
-        begin
-          res = do_find what, limitcheck, bm
-        rescue Exception => ex
-          Rails.logger.info "Status background thread: Caught exception: #{ex}"
-          # remember the exception and rethrow it in the main thread later
-          res = ex
-        end
-
-        bm.finish_process(proc_id, res)
-      end
-      process = bm.get_progress(proc_id)
-      if process
-        return [ process ]
-      else
-        return []
-      end
-    else
-      ret = do_find(what, limitcheck)
-      Rails.cache.write("graph:find:#{what.inspect}", ret)
-      return ret 
-    end
+    ret = do_find(what, limitcheck)
+    Rails.cache.write("graph:find:#{what.inspect}", ret)
+    return ret 
   end
 
   #
