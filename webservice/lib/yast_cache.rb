@@ -26,6 +26,7 @@ class YastCache
 
   def YastCache.active; @active ||= false; end
   def YastCache.active= a; @active = a; end
+  def YastCache.job_queue_enabled?; YastCache.active; end
 
   def YastCache.find_key(model_name, key = :all)
     model_name.capitalize!

@@ -36,51 +36,29 @@ class PatchesController < ApplicationController
 
   def collect_done_patches
     done = []
-
-    BackgroundManager.instance.done.each do |k,v|
-      if k.match(/^packagekit_install_(.*)/)
-        patch_id = $1
-        if BackgroundManager.instance.process_finished? k
-          Rails.logger.debug "Patch installation request #{patch_id} is done"
-          ret = BackgroundManager.instance.get_value k
-
-          # check for exception
-          if ret.is_a? StandardError
-            raise ret
-          end
-
-          # e.g.: 'suse-build-key;1.0-907.30;noarch;@System'
-          attrs = patch_id.split(';')
-
-          done << Patch.new(:resolvable_id => attrs[1],
-                           :name => attrs[0],
-                           :arch => attrs[2],
-                           :repo => attrs[3],
-                           :installed => true)
-        end
-      end
-    end
-
+    installed = Rails.cache.fetch("patch:installed") || []
+    installed.each { |patch_id|
+      # e.g.: 'suse-build-key;1.0-907.30;noarch;@System'
+      attrs = patch_id.split(';')
+      done << Patch.new(:resolvable_id => attrs[1],
+                        :name => attrs[0],
+                        :arch => attrs[2],
+                        :repo => attrs[3],
+                        :installed => true)
+    }
     return done
   end
 
   def check_running_install
     running = 0
-    max_progress = nil
-    status = nil
-    BackgroundManager.instance.running.each do |k,v|
-      if k.match(/^packagekit_install_(.*)/)
-        patch_id = $1
-        tmp = BackgroundManager.instance.get_progress k
-        if max_progress.nil? || tmp.progress > max_progress
-          max_progress = tmp.progress
-          status = tmp
-        end
-        logger.info "installation in progress. Patch #{k}"
-        running += 1
-      end
-    end
-    raise InstallInProgressException.new running,status if running > 0 #there is process which runs installation
+    jobs = Delayed::Job.find(:all)
+    jobs.each { |job|
+      running += 1 if job.handler.split("\n")[1].split[1].start_with?("patch:install:")
+    } unless jobs.blank?
+    Rails.logger.info("#{running} installation jobs in the queue")
+    Rails.cache.delete("patch:installed") if running == 0 #remove installed patches from cache if the installation
+                                                          #has been finished
+    raise InstallInProgressException.new running if running > 0 #there is process which runs installation
   end
 
   def read_messages
@@ -109,10 +87,7 @@ class PatchesController < ApplicationController
     end
     check_running_install
     # note: permission check was performed in :before_filter
-    bgr = params['background']
-    Rails.logger.info "Reading patches in background" if bgr
-
-    @patches = Patch.find(:all, {:background => bgr})
+    @patches = Patch.find(:all)
     @patches = @patches + collect_done_patches #report also which patches is installed
     respond_to do |format|
       format.xml { render  :xml => @patches.to_xml( :root => "patches", :dasherize => false ) }
@@ -149,7 +124,6 @@ class PatchesController < ApplicationController
   def create
     permission_check "org.opensuse.yast.system.patches.install" # RORSCAN_ITL
     @patch_update = Patch.find(params[:patches][:resolvable_id].to_s)
-
     #Patch for Bug 560701 - [build 24.1] webYaST appears to crash after installing webclient patch
     #Packagekit returns empty string if the patch is allready installed.
     if @patch_update.is_a?(Array) && @patch_update.empty?
@@ -163,7 +137,7 @@ class PatchesController < ApplicationController
     end
 
     res = @patch_update.install(true) #always install in backend otherwise there is problem with long running updates
-    index
+    render :show
   end
 
 

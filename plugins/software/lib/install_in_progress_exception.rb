@@ -20,21 +20,19 @@
 #++
 
 class InstallInProgressException < BackendException
-	def initialize(count,progress)
-		@progress = progress
+  def initialize(count)
     @count = count
-	end
+  end
 
-	def to_xml
+  def to_xml
     xml = Builder::XmlMarkup.new({})
     xml.instruct!
 
     xml.error do
       xml.type "PACKAGEKIT_INSTALL"
-      xml.description "Cannot obtain patches, installation in progress. Remain #{@count} packages. Status of currently installed package #{@progress.progress}"
-			xml.progress @progress
+      xml.description "Cannot obtain patches, installation in progress. Remain #{@count} packages."
       xml.count @count, :type => "integer"
       xml.bug false, :type => "boolean"
     end
-	end
+  end
 end
