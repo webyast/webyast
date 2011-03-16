@@ -70,7 +70,13 @@ class YastCache
       jobs = Delayed::Job.find(:all)
       found = false
       jobs.each { |job|
-        found = true if key == job.handler.split("\n")[1].split[1]
+        if key == job.handler.split("\n")[1].split[1]
+          found = true 
+          if delete_cache
+            job.run_at = Time.now #set starttime to now in order to fill cache as fast as possible
+            job.save 
+          end
+        end
       } unless jobs.blank?
       if found
         Rails.logger.info("Job #{key} already inserted")
