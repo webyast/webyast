@@ -33,7 +33,7 @@ class PatchUpdate::StateController < ApplicationController
 
     logger.warn "Confirmation of reading patch messages"
     File.delete Patch::MESSAGES_FILE
-
+    YastCache.delete("plugin:find:patch")
     respond_to do |format|
       format.xml  { head :ok }
       format.json { head :ok }
