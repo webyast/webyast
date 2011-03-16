@@ -53,7 +53,7 @@ class PatchesController < ApplicationController
     running = 0
     jobs = Delayed::Job.find(:all)
     jobs.each { |job|
-      running += 1 if job.handler.split("\n")[1].split[1].start_with?("patch:install:")
+      running += 1 if job.handler.split("\n")[1].split[1].include?("patch:install:")
     } unless jobs.blank?
     Rails.logger.info("#{running} installation jobs in the queue")
     Rails.cache.delete("patch:installed") if running == 0 #remove installed patches from cache if the installation
