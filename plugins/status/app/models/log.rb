@@ -73,9 +73,8 @@ class Log
       }
       if ret.size > 1
         Rails.logger.error "There are more results for #{what} -> #{ret.inspect} Taking the first one..." 
-        ret = ret.first
       end
-      ret
+      ret.first
     }
   end
 
