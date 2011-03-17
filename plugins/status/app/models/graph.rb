@@ -281,15 +281,12 @@ class Graph
   end
 
   def self.find(what, limitcheck = true, opts = {})
-
-    return YastCache.fetch("graph:find:#{what.inspect}") if Rails.cache.exist?("graph:find:#{what.inspect}")
-
     #checking if collectd is running
     raise ServiceNotRunning.new('collectd') unless Metric.collectd_running?
 
-    ret = do_find(what, limitcheck)
-    Rails.cache.write("graph:find:#{what.inspect}", ret)
-    return ret 
+    YastCache.fetch("graph:find:#{what.inspect}") {
+      do_find(what, limitcheck)
+    }
   end
 
   #
