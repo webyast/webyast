@@ -71,10 +71,15 @@ class Log
       config.each {|key,value|
         ret << Log.new(key,value) if key==what || what==:all
       }
-      if ret.size > 1
-        Rails.logger.error "There are more results for #{what} -> #{ret.inspect} Taking the first one..." 
+      unless what==:all
+        if ret.size >= 1
+          Rails.logger.error "There are more results for #{what} -> #{ret.inspect} Taking the first one..." 
+          ret = ret.first
+        else
+          ret = nil
+        end
       end
-      ret.first
+      ret
     }
   end
 
