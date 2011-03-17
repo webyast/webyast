@@ -52,7 +52,7 @@ class YastCache
 
   def YastCache.reset(cache_key, delay = 0, delete_cache = true)
     unless YastCache.active
-      Rails.logger.debug "YastCache.reset: Cache is not active"
+#      Rails.logger.debug "YastCache.reset: Cache is not active"
       return
     end
     #finding involved keys e.g. user:find:<id> includes user:find::all
@@ -89,7 +89,7 @@ class YastCache
 
   def YastCache.delete(cache_key)
     unless YastCache.active
-      Rails.logger.debug "YastCache.delete: Cache is not active"
+#      Rails.logger.debug "YastCache.delete: Cache is not active"
       return
     end
     Rails.cache.delete(cache_key)
@@ -102,7 +102,7 @@ class YastCache
     
   def YastCache.fetch(key, options = {})
     unless YastCache.active
-      Rails.logger.debug "YastCache.fetch: Cache is not active"
+#      Rails.logger.debug "YastCache.fetch: Cache is not active"
       if  block_given?
         return yield
       else
