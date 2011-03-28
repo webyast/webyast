@@ -40,7 +40,9 @@ class Interface < BaseModel::Base
   def initialize(args, id=nil)
     super args
     @id ||= id
-    @ipaddr ||= ""
+    #@ipaddr ||= ""
+    #@ipaddr ||= "" causes exception if bootproto=dhcp: "Raised resource Invalid exception - #<InvalidParameters: Invalid arguments: {:ipaddr=>:invalid}>"
+    bootproto == "dhcp"? @ipaddr = "" : @ipaddr = ipaddr
   end
 
   def self.find( which )
