@@ -75,7 +75,7 @@ class Account < ActiveRecord::Base
        acc.login = login
      end
      @password = passwd
-     acc.password = passwd   # Uh, oh, this saves a cleartext password ?!
+     acc.password = passwd   # Uh, oh, this saves a cleartext password ?! ... No, it will be crypted.
      acc.save
      return acc
   end
@@ -113,6 +113,7 @@ class Account < ActiveRecord::Base
 
   def forget_me
     self.remember_token_expires_at = nil
+    DataCache.delete_all( [ "session = ?", self.remember_token] ) if YastCache.active
     self.remember_token            = nil
     save(false)
   end
