@@ -56,7 +56,7 @@ class Account < ActiveRecord::Base
   end
 
   # Authenticates a user by their login name and unencrypted password.  Returns the user or nil.
-  def self.authenticate(login, passwd)
+  def self.authenticate(login, passwd, remote_ip = "localhost")
      granted = false
      begin
        # try rPAM first (do not work for local users with yastws account see bnc#582238)
@@ -69,10 +69,11 @@ class Account < ActiveRecord::Base
      granted = unix2_chkpwd(login, passwd) unless granted  #slowly but need no more additional PAM rights
      return nil unless granted
      # find/create the correspoding account record
-     acc = Account.find_by_login(login)
+     acc = Account.find(:first, :conditions => [ "login = ? AND remote_ip= ?", login, remote_ip])
      unless acc
        acc = Account.new
        acc.login = login
+       acc.remote_ip = remote_ip
      end
      @password = passwd
      acc.password = passwd   # Uh, oh, this saves a cleartext password ?! ... No, it will be crypted.
