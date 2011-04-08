@@ -51,7 +51,7 @@ class PackageKit
   private
   def self.improve_error(dbus_error)
     # check if it is a known error
-    if dbus_error.message =~ /org.freedesktop.DBus.Error.([A-Za-z.]*)/
+    if dbus_error.name =~ /org.freedesktop.DBus.Error.([A-Za-z.]*)/
       case $1
       when "ServiceUnknown"
         return ServiceNotAvailable.new('PackageKit')

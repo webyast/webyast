@@ -195,13 +195,16 @@ class Repository < BaseModel::Base
   #
   def destroy
     return false if @id.blank?
+    ret = false
     PackageKit.lock #locking
     begin
-      PackageKit.transact('RepoSetData', [@id, 'remove', 'NONE'])
+      ret = PackageKit.transact('RepoSetData', [@id, 'remove', 'NONE'])
     ensure
       PackageKit.unlock #locking
+      return ret
     end
     YastCache.delete("repository:find:#{@id.inspect}")
+    return ret
   end
 
 

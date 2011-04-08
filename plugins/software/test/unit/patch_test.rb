@@ -93,39 +93,6 @@ class PatchTest < ActiveSupport::TestCase
     assert_equal [], patch
   end
 
-  SCRIPT_OUTPUT_ERROR = read_test_data('patch_test-script_error.out')
-
-  def test_available_patches_background_mode_error
-
-    Patch.stubs(:read_subprocess).returns(*SCRIPT_OUTPUT_ERROR)
-    # return EOF when all lines are read
-    Patch.stubs(:eof_subprocess?).returns(*(Array.new(SCRIPT_OUTPUT_ERROR.size, false) << true))
-
-    # note: Patch.find(:available, {:background => true})
-    # cannot be used here, Threading support in test mode doesn't work :-(
-    patches = Patch.subprocess_find(:available)
-
-    assert_equal PackageKitError, patches.class
-  end
-
-  SCRIPT_OUTPUT_OK = read_test_data('patch_test-script_ok.out')
-
-  def test_available_patches_background_mode_ok
-    Patch.stubs(:read_subprocess).returns(*SCRIPT_OUTPUT_OK)
-
-    # return EOF when all lines are read
-    Patch.stubs(:eof_subprocess?).returns(*(Array.new(SCRIPT_OUTPUT_OK.size, false) << true))
-
-    # note: Patch.find(:available, {:background => true})
-    # cannot be used here, Threading support in test mode doesn't work :-(
-    patches = Patch.subprocess_find(:available)
-
-    assert_equal 4, patches.size
-    assert_equal 1579, patches.first.resolvable_id
-    assert_equal 'slessp0-openslp', patches.first.name
-  end
-
-
   def test_patch_install
     rset = PackageKitResultSet.new "Package", :info => :s, :id => :s, :summary => :s
     rset << [ 'important', 'update-test-affects-package-manager;847;noarch;updates-test', 'update-test: Test updates for 11.2' ]

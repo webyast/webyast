@@ -219,58 +219,6 @@ class RepositoriesControllerTest < ActionController::TestCase
     assert_response :missing
   end
 
-  # Test cache expiration
-  test "cache expired" do
-    cached = Time.utc(2010,"jan",1,20,0,0)  #=> Fri Jan 01 20:00:00 UTC 2010
-    modified = cached + 60                   # modified 1 minute after caching
-    current_time = modified + 60             # now it's 1 minute after the modification
-    Time.stubs(:now).returns(current_time)
-
-    Rails.cache.expects(:read).with(RepositoriesController::CACHE_ID).returns(cached)
-    Repository.expects(:mtime).returns(modified)
-
-    # check that the actions are expired
-    @controller.expects(:expire_action).with(:action => :index, :format => nil)
-
-    Rails.cache.expects(:write).with(RepositoriesController::CACHE_ID, current_time)
-
-    get :index
-  end
-
-  test "cache still valid" do
-    cached = Time.utc(2010,"jan",1,20,0,0)  #=> Fri Jan 01 20:00:00 UTC 2010
-    modified = cached - 60                   # modified 1 minute before caching
-    current_time = cached + 60               # now it's 1 minute after caching the first call
-    Time.stubs(:now).returns(current_time)
-
-    Rails.cache.expects(:read).with(RepositoriesController::CACHE_ID).returns(cached)
-    Repository.expects(:mtime).returns(modified)
-
-    # check that the actions are not expired
-    @controller.expects(:expire_action).never
-    # do not update the cache time stamp
-    Rails.cache.expects(:write).never
-
-    get :index
-  end
-
-  test "not cached yet" do
-    cached = nil                               # not cached yet
-    modified = Time.utc(2010,"jan",1,20,0,0)  #=> Fri Jan 01 20:00:00 UTC 2010
-    current_time = modified + 60               # now it's 1 minute after the modification
-    Time.stubs(:now).returns(current_time)
-
-    Rails.cache.expects(:read).with(RepositoriesController::CACHE_ID).returns(cached)
-
-    # check that the actions are not expired
-    @controller.expects(:expire_action).never
-
-    # just update the cache time stamp
-    Rails.cache.expects(:write).with(RepositoriesController::CACHE_ID, current_time)
-
-    get :index
-  end
-
   # Test validations
   test "create with invalid priority" do
     Repository.any_instance.expects(:update).never

@@ -129,7 +129,8 @@ class Patch < Resolvable
       end
     }
     #save installed patches in cache
-    installed = Rails.cache.fetch("patch:installed") || []
+    i = Rails.cache.fetch("patch:installed") || []
+    installed = i.dup #cache is frozen
     installed << pk_id
     Rails.cache.write("patch:installed", installed)
     
