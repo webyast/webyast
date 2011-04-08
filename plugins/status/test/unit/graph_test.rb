@@ -100,9 +100,7 @@ class GraphTest < ActiveSupport::TestCase
 
   def test_check_limits_and_xml
     Graph.stubs(:parse_config).returns(PARSE_CONFIG_3)
-    graph = Graph.find('CPU', true)
-
-    graph.stubs(:read_data).with('waerden+cpu-0+cpu-idle').returns({ "value"=>
+    Graph.stubs(:read_data).with('waerden+cpu-0+cpu-idle').returns({ "value"=>
       {Time.at(1252071700) =>"6.1514301440e+01".to_f,
       Time.at(1252071690) =>"6.1518643200e+01".to_f,
       Time.at(1252071680) =>"6.1513154560e+01".to_f,
@@ -112,11 +110,10 @@ class GraphTest < ActiveSupport::TestCase
       Time.at(1252071660) =>"6.1664133120e+01".to_f,
       Time.at(1252071750) =>"6.1545021440e+01".to_f,
       Time.at(1252071760) =>"6.1678837760e+01".to_f},
-      
       "interval" => 10,
       "starttime" => Time.at(1252071660) })
     
-    graph.stubs(:read_data).with('waerden+cpu-0+cpu-user').returns({ "value"=>
+    Graph.stubs(:read_data).with('waerden+cpu-0+cpu-user').returns({ "value"=>
       {Time.at(1252071700) =>"6.1514301440e+01".to_f,
       Time.at(1252071690) =>"6.1518643200e+01".to_f,
       Time.at(1252071680) =>"6.1513154560e+01".to_f,
@@ -126,9 +123,11 @@ class GraphTest < ActiveSupport::TestCase
       Time.at(1252071660) =>"6.1664133120e+01".to_f,
       Time.at(1252071750) =>"6.1545021440e+01".to_f,
       Time.at(1252071760) =>"6.1678837760e+01".to_f},
-      
       "interval" => 10,
       "starttime" => Time.at(1252071660) })
+
+    graph = Graph.find('CPU', true)
+
 
 
     xml = Builder::XmlMarkup.new

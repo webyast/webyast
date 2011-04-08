@@ -205,7 +205,7 @@ class Metric
   # Metric.find(id)
   # Where id is host:group:name (whithout rrd extension)
   def self.find(what, opts={})
-    return find_all if what == :all
+    return find_all if what == :all && opts.empty?
     YastCache.fetch("metric:find:#{what.inspect}:#{opts.inspect}") {
       case what
       when :all then opts.empty? ? find_all : find_multiple(opts)

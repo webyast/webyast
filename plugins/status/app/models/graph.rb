@@ -52,7 +52,7 @@ class Graph
   # 
   # reading data from Metric
   #
-  def read_data(id)
+  def self.read_data(id)
     data = {}
     metric = Metric.find(id)
     data = metric.data() if metric
@@ -66,7 +66,7 @@ class Graph
   def check_limits(metric_id, metric_column, limits)
     id = Metric.default_host + "+" + metric_id
     metric_column ||= "value"
-    data = read_data(id)
+    data = Graph.read_data(id)
     limit_reached = false
     data.each do |key, values|
       if key == metric_column
