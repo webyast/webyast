@@ -107,11 +107,15 @@ module AuthenticatedSystem
       self.current_account = Account.find(session[:account_id]) if session[:account_id]
     end
 
+    #used for stubbing in the testcases
+    def remote_ip
+      request.remote_ip
+    end
     # Called from #current_account.  Now, attempt to login by basic authentication information.
     def login_from_basic_auth
       authenticate_with_http_basic do |username, password|
         if username.length > 0
-           self.current_account = Account.authenticate(username, password, request.remote_ip)
+           self.current_account = Account.authenticate(username, password, remote_ip)
         else # try it with auth_token
            account = password && Account[password]
            if account && account.remember_token?
