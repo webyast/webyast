@@ -62,16 +62,23 @@ private
 public
 
   def self.find (cn)
-    result = group_get( "system", cn )
-    result = group_get( "local", cn )  if result.empty?
-    return nil if result.empty?
-    make_group result
+    return find_all if cn == :all
+    YastCache.fetch("group:find:#{cn.inspect}") {
+      result = group_get( "system", cn )
+      result = group_get( "local", cn )  if result.empty?
+      return nil if result.empty?
+      make_group result
+    }
   end
 
   def self.find_all
-    result = groups_get "local"
-    result.update( groups_get "system")
-    result.collect { |k,v| make_group v }
+    YastCache.fetch("group:find::all") {
+      result = groups_get "local"
+      result.update( groups_get "system")
+      result_array = []
+      result.each { |k,v| result_array << make_group(v) }
+      result_array.sort! {|x,y| x.cn <=> y.cn}
+    }
   end
 
   def save
@@ -89,15 +96,18 @@ public
                                    "userlist"  => ["as", members] } 
                                )
     end
+    YastCache.reset("group:find:{old_cn.inspect}")
     result # result is empty string on success, error message otherwise
   end
 
   def destroy
     existing_group = Group.group_get( group_type, old_cn )
     if existing_group.empty?
-      ""
+      ret = ""
     else
-      YastService.Call( "YaPI::USERS::GroupDelete", {"type" => ["s",group_type], "cn" => ["s",old_cn]})
+      ret = YastService.Call( "YaPI::USERS::GroupDelete", {"type" => ["s",group_type], "cn" => ["s",old_cn]})
     end
+    YastCache.delete("group:find:{old_cn.inspect}")
+    ret
   end
 end

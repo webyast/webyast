@@ -37,10 +37,12 @@ class Mail < BaseModel::Base
 
   # read the settings from system
   def self.find
-    yapi_ret = YastService.Call("YaPI::MailSettings::Read")
-    raise MailError.new("Cannot read from YaPI backend") if yapi_ret.nil?
-    yapi_ret["transport_layer_security"] = yapi_ret.delete("TLS") || "no"
-    Mail.new yapi_ret
+    YastCache.fetch("mail:find") {
+      yapi_ret = YastService.Call("YaPI::MailSettings::Read")
+      raise MailError.new("Cannot read from YaPI backend") if yapi_ret.nil?
+      yapi_ret["transport_layer_security"] = yapi_ret.delete("TLS") || "no"
+      Mail.new yapi_ret
+    }
   end
 
 
@@ -56,6 +58,7 @@ class Mail < BaseModel::Base
 
     yapi_ret = YastService.Call("YaPI::MailSettings::Write", parameters)
     Rails.logger.debug "YaPI returns: '#{yapi_ret}'"
+    YastCache.reset("mail:find")
     raise MailError.new(yapi_ret) unless yapi_ret.empty?
     true
   end
@@ -69,7 +72,6 @@ class Mail < BaseModel::Base
 
     # remove potential problematic characters from email address
     to.tr!("~'\"<>","")
-
     `/bin/echo "#{message}" | /bin/mail -s "WebYaST Test Mail" '#{to}' -r root`
 
     unless File.directory? File.join(Paths::VAR,"mail")

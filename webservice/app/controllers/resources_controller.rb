@@ -19,7 +19,6 @@
 
 class ResourcesController < ApplicationController
   require "resource_registration"
-  caches_action :index
   
   def index
     @resources = Resource.find :all

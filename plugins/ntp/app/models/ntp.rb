@@ -26,12 +26,14 @@ class Ntp < BaseModel::Base
   public
     
     def self.find
-      ret = Ntp.new
-      ret.actions ||= {}
-      ret.actions[:synchronize] = false
-      ret.actions[:synchronize_utc] = true
-      ret.actions[:ntp_server] = get_servers_string
-      return ret
+      YastCache.fetch("ntp:find") {
+        ret = Ntp.new
+        ret.actions ||= {}
+        ret.actions[:synchronize] = false
+        ret.actions[:synchronize_utc] = true
+        ret.actions[:ntp_server] = get_servers_string
+        ret
+      }
     end
 
     def update
@@ -39,7 +41,7 @@ class Ntp < BaseModel::Base
     end
 
     def self.get_servers
-      get_servers_string
+      Ntp.find.actions[:ntp_server]
     end
 
   private

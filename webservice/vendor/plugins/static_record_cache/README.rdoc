@@ -1,0 +1,138 @@
+= Static Record Cache
+This plugin has two options for caching records of Static classes which change rarely or never
+=acts_as_static_record
+Permanently caches subclasses of ActiveRecord that contains data that changes rarely.
+
+Includes support for:
+* Find by Id, all, first (association lookups)
+* Cached caluculations: <tt>Neighborhood.count</tt>s, sum, max, min
+* Convenience lookups: <tt>Neighborhood[:seattle]</tt>
+* Additional support for column name lookups: <tt>Neighborhood.find_by_name 'Seattle'</tt>
+
+== Install
+
+  sudo gem install static_record_cache --source=http://gemcutter.org
+
+  script/plugin install git://github.com/blythedunham/static_record_cache.git
+
+== Usage
+  class SomeMostlyStaticClass < ActiveRecord::Base
+    acts_as_static_record
+  end
+
+Any finds that do not contain additional conditions, joins, and other arguments
+become a cache call. One advantage over the query cache is that the static cache is searched
+eliminating the need for  +ActiveRecord+ to generate SQL
+
+When a cache key is specified with option <tt>:key</tt>, additional
+finder methods for ids and fields such as +find_by_id+ and +find_by_name_and_mother+
+are overwritten to search the cache when no arguments (conditions) are specified.
+If the cache key is not a column, then a finder method will be defined.
+  acts_as_static_record :key => :some_instance_method
+Will define <tt>find_by_some_instance_method(value)</tt>
+
+=== Options
+* <tt>:key</tt> - a method or column of the instance used to specify a cache key. This should be unique.
+* <tt>:find</tt> an additional find scope to specify <tt>:conditions</tt>,<tt>:joins</tt>, <tt>:select</tt>, <tt>:joins</ff> etc
+* <tt>:find_by_attribute_support</tt> - set to true to add additional functionality for finders such as +find_by_id_and_name+ to use a cache search. This option is probably best for Rails 2.3
+* <tt>:lookup_key</tt> - access the record from the class by a key name like <tt>User[:snowgiraffe]</tt>. <tt>:lookup_key</tt> is the column on which do do the lookup.
+
+=== Examples
+Caches on Id and telephone carrier name
+ class TelephoneCarrier < ActiveRecord::Base
+   acts_as_static_method :key => :name
+ end
+
+Caches the WhiteList on phone_number_digits (in addition to ID)
+ create_table :sms_white_list, :force => true do |t|
+   t.column :phone_number_id, :integer, :null => false
+   t.column :notes, :string, :length => 100, :default => nil
+ end
+
+ class SmsWhiteList < ActiveRecord::Base
+   belongs_to :phone_number
+
+   acts_as_static_record :key => :phone_number_digits,
+              :find => :select => 'carriers.*, phone_number.number as phone_number_digits'
+                       :joins => 'inner join phone_numbers on phone_numbers.carrier_id = carriers.id'
+
+   def phone_number_digits
+     self['phone_number_digits']||self.phone_number.number
+   end
+ end
+
+Direct cache hits
+ SmsWhiteList.find_by_phone_number_digits('12065551234')
+ SmsWhiteList.find_by_id(5)
+ SmsWhiteList.find :all
+
+Searched cache hits
+ SmsWhiteList.find_by_notes('Some note')
+
+==Calculation Support
+Now with +calculate+ support for +sum+, +min+, and +max+ for integer columns and +count+ for all columns
+Cache hits do not occur if options other than +distinct+ are used.
+
+Cache hits:
+ Neighborhood.count
+ Neighborhood.count :name, :distinct => true
+ Neighborhood.sum :id
+ Neighborhood.max :id
+Not cache hits:
+ Neighborhood.max :name
+ Neighborhood.count :zip_code, :conditions => ['name = ?', 'Seattle']
+
+==Convenience lookup
+Similar to acts_as_enumeration model returns the record where the
+<tt>acts_as_static_record :key</tt> option matches +lookup+
+If no key is specified, the primary_id column is used
+
+  class User < ActiveRecord::Base
+    acts_as_static_record :key => :user_name
+  end
+
+Then later we can reference the objects by the user_name
+  User[:blythe]
+  User['snowgiraffe']
+
+The key used will be the underscore version of the name. Punctuation marks
+are removed. The following are equivalent:
+ User[:blythe_snowgiraffeawesome]
+ User['blythe-SNOWGIRaffe   AWESome']
+
+ user = User.first
+ User[user.user_name] == user
+
+
+
+= StaticActiveRecordContext
+
+Extends the active_record_context plugin,
+http://svn.techno-weenie.net/projects/plugins/active_record_context/
+to permanently cache records for an ActiveRecord subclass
+
+Finds on records IDS (as used by associations)  will be cached for the life of the class.
+This works both in and outside a  with_context block.
+
+== Example
+
+  class TelephoneCarriers < ActiveRecord::Base
+    extend StaticActiveRecordContext
+  end
+
+  phone_number.carrier
+
+=== Developers
+* Blythe Dunham http://snowgiraffe.com
+
+=== Docs
+* Rdoc:           http://snowgiraffe.com/rdocs/static_record_cache/
+=== Homepage
+* Github Project: http://github.com/blythedunham/static_record_cache/tree/master
+* Install:  <tt>script/plugin install git://github.com/blythedunham/static_record_cache.git</tt>
+
+
+
+
+
+

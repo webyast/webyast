@@ -104,16 +104,20 @@ module AuthenticatedSystem
 
     # Called from #current_account.  First attempt to login by the account id stored in the session.
     def login_from_session
-      self.current_account = Account.find_by_id(session[:account_id]) if session[:account_id]
+      self.current_account = Account.find(session[:account_id]) if session[:account_id]
     end
 
+    #used for stubbing in the testcases
+    def remote_ip
+      request.remote_ip
+    end
     # Called from #current_account.  Now, attempt to login by basic authentication information.
     def login_from_basic_auth
       authenticate_with_http_basic do |username, password|
         if username.length > 0
-           self.current_account = Account.authenticate(username, password)
+           self.current_account = Account.authenticate(username, password, remote_ip)
         else # try it with auth_token
-           account = password && Account.find_by_remember_token(password)
+           account = password && Account[password]
            if account && account.remember_token?
               cookies[:auth_token] = { :value => account.remember_token, :expires => account.remember_token_expires_at }
               self.current_account = account
@@ -124,7 +128,7 @@ module AuthenticatedSystem
 
     # Called from #current_account.  Finaly, attempt to login by an expiring token in the cookie.
     def login_from_cookie
-      account = cookies[:auth_token] && Account.find_by_remember_token(cookies[:auth_token])
+      account = cookies[:auth_token] && Account[cookies[:auth_token]]
       if account && account.remember_token?
         cookies[:auth_token] = { :value => account.remember_token, :expires => account.remember_token_expires_at }
         self.current_account = account

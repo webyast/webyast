@@ -63,22 +63,28 @@ class Repository < BaseModel::Base
   end
 
   def self.find(what)
-    repositories = Array.new
+     YastCache.fetch("repository:find:#{what.inspect}") {
+      PackageKit.lock #locking
+      begin
+        repositories = Array.new
 
-    PackageKit.transact('GetRepoList', 'none', 'RepoDetail') { |id, name, enabled|
-      Rails.logger.debug "RepoDetail signal received: #{id}, #{name}, #{enabled}"
+        PackageKit.transact('GetRepoList', 'none', 'RepoDetail') { |id, name, enabled|
+          Rails.logger.debug "RepoDetail signal received: #{id}, #{name}, #{enabled}"
 
-      if what == :all || id == what
-        repo = Repository.new(id, name, enabled)
-        # read other attributes directly from *.repo file,
-        # because PackageKit doesn't have API for that
-        repo.read_file
+          if what == :all || id == what
+            repo = Repository.new(id, name, enabled)
+            # read other attributes directly from *.repo file,
+            # because PackageKit doesn't have API for that
+            repo.read_file
 
-        repositories << repo
+            repositories << repo
+          end
+        }
+      ensure
+        PackageKit.unlock #locking
       end
+      repositories
     }
-
-    repositories
   end
 
   def self.mtime
@@ -152,29 +158,36 @@ class Repository < BaseModel::Base
   #
   def update
     # create a new repository if it does not exist yet
-    if !Repository.exists?(@id)
-      Rails.logger.info "Adding a new repository '#{@id}': #{self.inspect}"
-      PackageKit.transact('RepoSetData', [@id, 'add', @url])
-    else
-      Rails.logger.info "Modifying repository '#{@id}': #{self.inspect}"
-      # set url
-      PackageKit.transact('RepoSetData', [@id, 'url', @url])
+    repo_exist = Repository.exists?(@id)
+    PackageKit.lock #locking
+    begin
+      unless repo_exist
+        Rails.logger.info "Adding a new repository '#{@id}': #{self.inspect}"
+        PackageKit.transact('RepoSetData', [@id, 'add', @url])
+      else
+        Rails.logger.info "Modifying repository '#{@id}': #{self.inspect}"
+        # set url
+        PackageKit.transact('RepoSetData', [@id, 'url', @url])
+      end
+
+      # set enabled flag
+      PackageKit.transact('RepoEnable', [@id, @enabled])
+
+      # set priority
+      PackageKit.transact('RepoSetData', [@id, 'prio', @priority.to_s])
+
+      # set autorefresh
+      PackageKit.transact('RepoSetData', [@id, 'refresh', @autorefresh.to_s])
+
+      # set name
+      PackageKit.transact('RepoSetData', [@id, 'name', @name.to_s])
+
+      # set keep_package
+      PackageKit.transact('RepoSetData', [@id, 'keep', @keep_packages.to_s])
+    ensure
+      PackageKit.unlock #locking
     end
-
-    # set enabled flag
-    PackageKit.transact('RepoEnable', [@id, @enabled])
-
-    # set priority
-    PackageKit.transact('RepoSetData', [@id, 'prio', @priority.to_s])
-
-    # set autorefresh
-    PackageKit.transact('RepoSetData', [@id, 'refresh', @autorefresh.to_s])
-
-    # set name
-    PackageKit.transact('RepoSetData', [@id, 'name', @name.to_s])
-
-    # set keep_package
-    PackageKit.transact('RepoSetData', [@id, 'keep', @keep_packages.to_s])
+    YastCache.reset("repository:find:#{@id.inspect}")
   end
 
   #
@@ -182,8 +195,16 @@ class Repository < BaseModel::Base
   #
   def destroy
     return false if @id.blank?
-
-    PackageKit.transact('RepoSetData', [@id, 'remove', 'NONE'])
+    ret = false
+    PackageKit.lock #locking
+    begin
+      ret = PackageKit.transact('RepoSetData', [@id, 'remove', 'NONE'])
+    ensure
+      PackageKit.unlock #locking
+      return ret
+    end
+    YastCache.delete("repository:find:#{@id.inspect}")
+    return ret
   end
 
 

@@ -32,16 +32,18 @@ class Ldap < BaseModel::Base
 
 public
   def self.find
-    ret = YastService.Call("YaPI::LDAP::Read")
-    Rails.logger.info "Read LDAP config: #{ret.inspect}"
-    ldap	= Ldap.new({
+    YastCache.fetch("ldap:find") {
+      ret = YastService.Call("YaPI::LDAP::Read")
+      Rails.logger.info "Read LDAP config: #{ret.inspect}"
+      ldap	= Ldap.new({
 	:server		=> ret["ldap_server"],
 	:base_dn	=> ret["ldap_domain"],
 	:tls		=> ret["ldap_tls"] == "1",
 	:enabled	=> ret["start_ldap"] == "1"
-    })
-    ldap	= {} if ldap.nil?
-    return ldap
+      })
+      ldap	= {} if ldap.nil?
+      ldap
+    }
   end
 
   def save
@@ -53,6 +55,7 @@ public
     }
     yapi_ret = YastService.Call("YaPI::LDAP::Write", params)
     Rails.logger.debug "YaPI returns: '#{yapi_ret}'"
+    YastCache.reset("ldap:find")
     return true
   end
 

@@ -59,7 +59,7 @@ class PackageKitTest < ActiveSupport::TestCase
   def test_install
     @transaction.stubs(:UpdatePackages).returns(true)
 
-    result = Patch.install :id1
+    result = Patch.install "id1"
     assert result
   end
 

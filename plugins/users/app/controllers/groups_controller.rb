@@ -71,7 +71,6 @@ public
       Rails.logger.error "No groups found."
       render ErrorResult.error(404, 2, "No groups found") and return
     end
-    @groups.sort! {|x,y| x.cn <=> y.cn}
 
     respond_to do |format|
       format.xml { render  :xml => @groups.to_xml(:root => "groups", :dasherize => false ) }

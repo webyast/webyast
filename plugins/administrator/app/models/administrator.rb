@@ -37,13 +37,15 @@ class Administrator < BaseModel::Base
   # Read mail aliases for root.
   # return value:: comma-separated string
   def self.find
-    yapi_ret = YastService.Call("YaPI::ADMINISTRATOR::Read")
-    if yapi_ret.nil?
-      raise "Can't read administrator data"
-    elsif yapi_ret.has_key?("aliases")
-      yapi_ret["aliases"]	= yapi_ret["aliases"].join(",")
-    end
-    Administrator.new yapi_ret
+    YastCache.fetch("administrator:find") {
+      yapi_ret = YastService.Call("YaPI::ADMINISTRATOR::Read")
+      if yapi_ret.nil?
+        raise "Can't read administrator data"
+      elsif yapi_ret.has_key?("aliases")
+        yapi_ret["aliases"]	= yapi_ret["aliases"].join(",")
+      end
+      Administrator.new yapi_ret
+    }
   end
 
   # Changes the list of administrator's mail aliases.
@@ -57,6 +59,7 @@ class Administrator < BaseModel::Base
     
     yapi_ret = YastService.Call("YaPI::ADMINISTRATOR::Write", parameters)
     Rails.logger.debug "YaPI returns: '#{yapi_ret}'"
+    YastCache.reset("administrator:find")
     raise AdministratorError.new(yapi_ret) unless yapi_ret.empty?
   end
 end

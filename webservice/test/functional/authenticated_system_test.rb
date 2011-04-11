@@ -31,6 +31,10 @@ class AuthenticatedSystemTest < ActionController::TestCase
   def authenticate_with_http_basic &block
     yield "test_user", "password"
   end
+
+  def remote_ip
+    "localhost"
+  end
     
   include AuthenticatedSystem
 

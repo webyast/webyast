@@ -69,8 +69,38 @@ class ApplicationController < ActionController::Base
   # Uncomment this to filter the contents of submitted sensitive data parameters
   # from your application log (in this case, all fields with names like "password").
   filter_parameter_logging :password # RORSCAN_ITL
+  before_filter :init_cache
 
   private
+
+  def init_cache
+    return unless (logged_in? && YastCache.active) #Does not make sense if no session id is available or
+                                                   #cache is not active
+    if request && request.request_method == :get
+      return unless (request.parameters["action"] == "show" || 
+                     request.parameters["action"] == "index")
+      #finding the correct cache name 
+      #(has to be the model class name and not the controller name)
+      path = YastCache.find_key(request.parameters["controller"], (request.parameters["id"] || :all))
+      if path.blank?
+        logger.info("Cache for model #{path} not found")
+        return
+      end
+      path.downcase!
+      data_cache = DataCache.find_by_path_and_session(path, self.current_account.remember_token)
+      found = false
+      data_cache.each { |cache|
+        found = true
+        if cache.picked_md5 != cache.refreshed_md5
+          cache.picked_md5 = cache.refreshed_md5
+          cache.save
+        end
+      } unless data_cache.blank?
+      DataCache.create(:path => path, :session => self.current_account.remember_token,
+                       :picked_md5 => nil, :refreshed_md5 => nil) unless found
+    end
+  end
+
   def report_backend_exception(exception) 
       logger.info "Backend exception: #{exception}"
       render :xml => exception, :status => 503

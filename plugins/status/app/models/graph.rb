@@ -38,10 +38,6 @@ class Graph
   attr_reader :y_decimal_places
   attr_reader :single_graphs
 
-  CONFIGURATION_FILE = "status_configuration.yaml"
-  TRANSLATE = true
-
-
   private
 
   # avoid race conditions when creating the config file
@@ -49,10 +45,14 @@ class Graph
   #
   @@mutex = Mutex.new
 
+  #global variables
+  @@configuration_file = "status_configuration.yaml" 
+  @@translate = true
+
   # 
   # reading data from Metric
   #
-  def read_data(id)
+  def self.read_data(id)
     data = {}
     metric = Metric.find(id)
     data = metric.data() if metric
@@ -66,7 +66,7 @@ class Graph
   def check_limits(metric_id, metric_column, limits)
     id = Metric.default_host + "+" + metric_id
     metric_column ||= "value"
-    data = read_data(id)
+    data = Graph.read_data(id)
     limit_reached = false
     data.each do |key, values|
       if key == metric_column
@@ -84,7 +84,7 @@ class Graph
       end
       break if limit_reached
     end
-    return limit_reached
+    limit_reached
   end
 
   #
@@ -244,7 +244,7 @@ class Graph
   # reading configuration file
   #
   def self.parse_config(translate = false, path = nil)
-    path = File.join(Graph.plugin_config_dir(), CONFIGURATION_FILE ) if path == nil
+    path = File.join(Graph.plugin_config_dir(), @@configuration_file ) if path == nil
     #create default configuration file
     Graph.create_config(path) unless File.exists?(path)
 
@@ -258,7 +258,7 @@ class Graph
   end
 
   # initialize on element
-  def initialize(group_id,value,limitcheck=false)
+  def initialize(group_id,value,limitcheck=true )
     @group_name = group_id
     @headline = value["headline"]
     @y_scale = value["y_scale"]
@@ -275,75 +275,18 @@ class Graph
     @single_graphs = value["single_graphs"]
   end
 
-  # just a short cut for accessing the singleton object
-  def self.bm
-    BackgroundManager.instance
-  end
-
   # create unique id for the background manager
   def self.id(what)
     "system_status_#{what}"
   end
 
-  def self.find(what, limitcheck = false, opts = {})
-    background = opts[:background]
+  def self.find(what, limitcheck = true, opts = {})
+    #checking if collectd is running
+    raise ServiceNotRunning.new('collectd') unless Metric.collectd_running?
 
-    # background reading doesn't work correctly if class reloading is active
-    # (static class members are lost between requests)
-    if background && !bm.background_enabled?
-      Rails.logger.info "Class reloading is active, cannot use background thread (set config.cache_classes = true)"
-      background = false
-    end
-
-    if background
-      #checking if collectd is running
-      raise ServiceNotRunning.new('collectd') unless Metric.collectd_running?
-
-      proc_id = id(what)
-      if bm.process_finished? proc_id
-        Rails.logger.debug "Request #{proc_id} is done"
-
-        ret = bm.get_value proc_id
-
-        # rethrow the exception from the background thread
-        if ret.kind_of?(Exception)
-          Rails.logger.info "Rethrowing the exception caught in the background thread: #{ret.inspect}"
-          raise ret
-        end
-
-        return ret
-      end
-
-      running = bm.get_progress proc_id
-      if running
-        Rails.logger.debug "Request #{proc_id} is already running: #{running.inspect}"
-        return [running]
-      end
-
-      bm.add_process proc_id
-      Rails.logger.info "Starting background thread for reading status..."
-
-      # read the status in a separate thread
-      Thread.new do
-        begin
-          res = do_find what, limitcheck, bm
-        rescue Exception => ex
-          Rails.logger.info "Status background thread: Caught exception: #{ex}"
-          # remember the exception and rethrow it in the main thread later
-          res = ex
-        end
-
-        bm.finish_process(proc_id, res)
-      end
-      process = bm.get_progress(proc_id)
-      if process
-        return [ process ]
-      else
-        return []
-      end
-    else
-      return do_find(what, limitcheck)
-    end
+    YastCache.fetch("graph:find:#{what.inspect}") {
+      do_find(what, limitcheck)
+    }
   end
 
   #
@@ -354,8 +297,8 @@ class Graph
   #      (e.g. cpu-0+cpu-system)
   # "limitcheck" checking if limit has been reached (default: false)
   #
-  def self.do_find(what, limitcheck = false, bg = nil)
-    config = parse_config(TRANSLATE)
+  def self.do_find(what, limitcheck = true, bg = nil)
+    config = parse_config(@@translate)
     return nil if config==nil
 
     unless what == :all
@@ -413,20 +356,21 @@ class Graph
   # return array of hashes of {"max"=>0, "min"=>0, "metric_column"=>nil} or nil
   #
   def self.find_limits(metric_id, group_id=nil )
-    config = parse_config(TRANSLATE)
-    return nil if config==nil
-    limits = []
-    config.each {|key,value|
-      next if group_id != nil && key != group_id
-      #checking for collectd entry
-      value["single_graphs"].each{|graph|
-        graph["lines"].each{|line|
-          line["limits"]["metric_column"] = line["metric_column"] if line.has_key?("metric_column")
-          limits << line["limits"] if line["metric_id"] == metric_id
-        }
-      }    
+    YastCache.fetch("graph:find_limits") {
+      config = parse_config(@@translate) || {}
+      limits = []
+      config.each {|key,value|
+        next if group_id != nil && key != group_id
+        #checking for collectd entry
+        value["single_graphs"].each{|graph|
+          graph["lines"].each{|line|
+            line["limits"]["metric_column"] = line["metric_column"] if line.has_key?("metric_column")
+            limits << line["limits"] if line["metric_id"] == metric_id
+          }
+        }    
+      }
+      limits
     }
-    limits
   end
 
   #
@@ -442,10 +386,11 @@ class Graph
     end
     # avoid race condition in writing the config
     @@mutex.synchronize do
-      f = File.open(File.join(Graph.plugin_config_dir(), CONFIGURATION_FILE), "w")
+      f = File.open(File.join(Graph.plugin_config_dir(), @@configuration_file), "w")
       f.write(config.to_yaml)
       f.close
     end
+    YastCache.reset("graph:find_limits")
   end
 
   # converts the graph to xml
@@ -474,7 +419,7 @@ class Graph
                   xml.limits do
                     xml.max line["limits"]["max"] 
                     xml.min line["limits"]["min"]
-                    xml.reached check_limits(line["metric_id"], line["metric_column"], line["limits"]) if line["limits"].has_key? "reached"
+                    xml.reached line["limits"]["reached"] if line["limits"].has_key? "reached"
                   end 
                 end
               end

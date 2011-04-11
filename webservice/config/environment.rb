@@ -37,7 +37,14 @@ STDERR.puts "\n\n\t***RAILS_ENV environment variable isn't set !\n\n" unless RAI
 # Bootstrap the Rails environment, frameworks, and default configuration
 require File.join(File.dirname(__FILE__), 'boot')
 
+# mutex block for starting the worker AFTER all jobs have been inserted
+delay_job_mutex = Mutex::new
+
+
 init = Rails::Initializer.run do |config|
+  #just for test
+  #ENV['DISABLE_INITIALIZER_FROM_RAKE'] = 'false'
+  
   # Settings in config/environments/* take precedence over those specified here.
   # Application configuration should go into files in config/initializers
   # -- all .rb files in that directory are automatically loaded.
@@ -109,6 +116,19 @@ init = Rails::Initializer.run do |config|
   # located in /usr/src/packages/... during build)
   config.plugin_paths << '/usr/src/packages/BUILD' unless ENV['ADD_BUILD_PATH'].nil?
 
+  config.after_initialize do
+    YastCache.active = config.action_controller.perform_caching 
+    unless ENV['RAILS_ENV'] == 'test'
+      delay_job_mutex.lock
+      if ENV["RUN_WORKER"] && YastCache.active
+        Thread::new do 
+          ENV["RUN_WORKER"] = 'false'
+          delay_job_mutex.lock #do not start before all jobs have been inserted
+	  Delayed::Worker.new.start 
+        end
+      end
+    end
+  end
 end
 
 # don't load all plugins while just testing resource registration
@@ -138,3 +158,43 @@ plugin_assets = init.loaded_plugins.map { |plugin| File.join(plugin.directory, '
 require 'yast/rack/static_overlay'
 init.configuration.middleware.use YaST::Rack::StaticOverlay, :roots => plugin_assets
 
+
+unless ENV['RAILS_ENV'] == 'test'
+  #check if table for caches exist and cache is active
+  if ActiveRecord::Base.connection.tables.include?('data_caches') &&
+     ActiveRecord::Base.connection.tables.include?('delayed_jobs') &&
+     YastCache.active
+
+    #remove cache information 
+    DataCache.delete_all
+    #Construct initial job queue in order to fillup the cache
+    Delayed::Job.delete_all
+    resources = Resource.find :all
+    resources.each  do |resource|
+      name = resource.href.split("/").last
+      if resource.cache_enabled
+        job_key = YastCache.find_key(name)
+        if !job_key.blank?
+          job_key += ":" + resource.cache_arguments unless resource.cache_arguments.blank?
+          STDERR.puts "Inserting job #{job_key} with priority #{resource.cache_priority}"
+          Delayed::Job.enqueue(PluginJob.new(job_key), resource.cache_priority)
+        else
+          STDERR.puts "Ignoring job #{name}:find* (not runable)"
+        end
+      else
+        STDERR.puts "Ignoring job #{name}:find (configured)"
+      end
+    end
+    #added special request for none plugins
+    key = "Permission:find::all"
+    STDERR.puts "Inserting job #{key}"
+    Delayed::Job.enqueue(PluginJob.new(key), 0)
+    key = 'Permission:find::all:{"with_description"=>"1"}'
+    STDERR.puts "Inserting job #{key}"
+    Delayed::Job.enqueue(PluginJob.new(key), 0)
+    key = "getentpasswd:find"
+    STDERR.puts "Inserting job #{key}"
+    Delayed::Job.enqueue(PluginJob.new(key), -3)
+    delay_job_mutex.unlock #start delay job worker
+  end
+end

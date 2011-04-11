@@ -151,7 +151,6 @@ polkit-auth --user %{webyast_ws_user} --grant org.freedesktop.packagekit.system-
 %{plugin_dir}/uninstall.rb
 %{plugin_dir}/app
 %{plugin_dir}/lib
-%{plugin_dir}/scripts
 %{plugin_dir}/config
 %attr(644,root,root) %config /usr/share/PolicyKit/policy/org.opensuse.yast.system.patches.policy
 %attr(644,root,root) %config /usr/share/PolicyKit/policy/org.opensuse.yast.system.packages.policy

@@ -38,58 +38,67 @@ class User
   attr_accessor_with_default :user_password, ""
   attr_accessor_with_default :type, "local"
 
+public
+
   def initialize    
   end
   
   # users = User.find_all
   def self.find_all(params={})
-    attributes	= [ "cn", "uidNumber", "homeDirectory", "grouplist", "uid", "loginShell", "groupname" ]
-    if params.has_key? "attributes"
-	attributes	= params["attributes"].split(",")
-    end
-    users = []
-    parameters	= {
-      # how to index hash with users
-      "index"	=> ["s", "uid"],
-      # attributes to return for each user
-      "user_attributes"	=> [ "as", attributes ],
-      "type" => params["type"]||="local"
-    }
-    users_map = YastService.Call("YaPI::USERS::UsersGet", parameters)
-    if users_map.nil?
-      raise "Can't get user list"
-    else
-      users_map.each do |key, val|
-        user = User.new
-        user.load_data(val)
-        users << user
+    YastCache.fetch("user:find::all") {
+      attributes = [ "cn", "uidNumber", "homeDirectory", "grouplist", "uid", "loginShell", "groupname" ]
+      if params.has_key? "attributes"
+        attributes = params["attributes"].split(",")
       end
-    end
-    users
+      users = []
+      parameters = {
+        # how to index hash with users
+        "index"	=> ["s", "uid"],
+        # attributes to return for each user
+        "user_attributes"	=> [ "as", attributes ],
+        "type" => params["type"]||="local"
+      }
+      users_map = YastService.Call("YaPI::USERS::UsersGet", parameters)
+      if users_map.nil?
+        raise "Can't get user list"
+      else
+        users_map.each do |key, val|
+          user = User.new
+          user.load_data(val)
+          users << user
+        end
+      end
+      users
+    }
   end
 
   # load the attributes of the user
   def self.find(id)
-    user = User.new
-    parameters	= {
-      # user to find
-      "uid" => [ "s", id ],
-      # list of attributes to return;
-      "user_attributes"	=>
-        [ "as", [ "cn", "uidNumber", "homeDirectory",
+
+    return find_all if id == :all
+
+    YastCache.fetch("user:find:#{id.inspect}") {
+      user = User.new
+      parameters	= {
+        # user to find
+        "uid" => [ "s", id ],
+        # list of attributes to return;
+        "user_attributes" =>
+          [ "as", [ "cn", "uidNumber", "homeDirectory",
                   "grouplist", "uid", "loginShell", "groupname" ] ]
-    }
-    user_map = YastService.Call("YaPI::USERS::UserGet", parameters)
+      }
+      user_map = YastService.Call("YaPI::USERS::UserGet", parameters)
 
 #    system_groups = YastService.Call("YaPI::USERS::GroupsGet", {"index"=>["s","cn"],"type"=>["s","system"]})
 #    local_groups = YastService.Call("YaPI::USERS::GroupsGet", {"index"=>["s","cn"],"type"=>["s","local"]})
 #    user.allgroups = Hash[*(local_groups.keys | system_groups.keys).collect {|v| [v,1]}.flatten]
 
-    raise "Got no data while loading user attributes" if user_map.empty?
+      raise "Got no data while loading user attributes" if user_map.empty?
 
-    user.load_data(user_map)
-    user.uid = id
-    user
+      user.load_data(user_map)
+      user.uid = id
+      user
+    }
   end
 
   # User.destroy("joe")
@@ -103,6 +112,7 @@ class User
 
     ret = YastService.Call("YaPI::USERS::UserDelete", config)
     Rails.logger.debug "Command returns: #{ret}"
+    YastCache.delete("user:find:#{uid.inspect}")
     raise ret if not ret.blank?
     return (ret == "")
   end
@@ -122,6 +132,7 @@ class User
     ret = YastService.Call("YaPI::USERS::UserModify", config, data)
 
     Rails.logger.debug "Command returns: #{ret.inspect}"
+    YastCache.reset("user:find:#{id}")
     raise ret if not ret.blank?
     true
   end

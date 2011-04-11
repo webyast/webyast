@@ -85,3 +85,9 @@ task :deploy_local, [:user] => :"db:migrate" do |t, args|
   grant args.user, "org.freedesktop.packagekit.system-update"
 end
 
+#set constant to disable initializer for Delayed Job
+task :environment => :disable_initializer
+
+task :disable_initializer do
+  ENV["DISABLE_INITIALIZER"] = 'true'
+end

@@ -24,7 +24,9 @@ class Firewall < BaseModel::Base
   attr_accessor :use_firewall, :fw_services
 
   def self.find
-    Firewall.new YastService.Call("YaPI::FIREWALL::Read")
+    YastCache.fetch("firewall:find") {
+      Firewall.new YastService.Call("YaPI::FIREWALL::Read")
+    }
   end
 
   def save
@@ -36,6 +38,7 @@ class Firewall < BaseModel::Base
     #  Rails.logger.info "firewall configuration saving error: #{e.inspect}"
     #  
     #end
+    YastCache.reset("firewall:find")
     raise FirewallException.new(result["error"]) unless result["saved_ok"]
   end
 
@@ -57,7 +60,7 @@ class Firewall < BaseModel::Base
     elsif value.nil?
       Rails.logger.error "WARNING: Firewall service description is missing"
     else
-      raise "Unknown variant type!"
+      raise "Unknown variant type! #{value}"
     end
   end
 

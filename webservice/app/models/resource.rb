@@ -23,28 +23,35 @@
 
 class Resource < BaseModel::Base
   require 'resource_registration'
-  attr_accessor :policy, :interface, :href, :singular
+  attr_accessor :policy, :interface, :href, :singular, :cache_enabled, :cache_priority, :cache_reload_after, :cache_arguments
 
   def initialize (interface, impl_hash)
     @interface = interface
     @policy    = impl_hash[:policy] || ""
     @singular  = impl_hash[:singular]
     @href = "/#{impl_hash[:controller]}"
+    @cache_enabled = impl_hash[:cache_enabled]
+    @cache_priority = impl_hash[:cache_priority]
+    @cache_reload_after = impl_hash[:cache_reload_after]
+    @cache_arguments = impl_hash[:cache_arguments]
   end
 
   def self.find(what)
-    return case what
-      when :all then
-        resources = []
-        ResourceRegistration.resources.sort.each do |interface,implementations|
-          implementations.each do |impl|
-            resources << new(interface,impl)
+    # There is no reload mechansim for the cache. So fetch it directly
+    return Rails.cache.fetch("resource:find:#{what.inspect}") {
+      case what
+        when :all then
+          resources = []
+          ResourceRegistration.resources.sort.each do |interface,implementations|
+            implementations.each do |impl|
+              resources << new(interface,impl)
+            end
           end
-        end
-        resources
-      else
-        implementations = ResourceRegistration.resources[what]
-        implementations ? new(what, implementations.first) : nil
-    end
+          resources
+        else
+          implementations = ResourceRegistration.resources[what]
+          implementations ? new(what, implementations.first) : nil
+      end
+    }
   end
 end

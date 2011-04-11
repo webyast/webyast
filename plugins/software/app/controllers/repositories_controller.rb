@@ -22,30 +22,9 @@
 class RepositoriesController < ApplicationController
 
   before_filter :login_required
-
-  # cache index and show action
-  before_filter :check_cache_status, :only => [:index]
   before_filter :check_read_permissions, :only => [:index]
-  caches_action :index
-
-  CACHE_ID = 'repositories:timestamp'
 
   private
-
-  # check whether the cached result is still valid
-  def check_cache_status
-    cache_timestamp = Rails.cache.read(CACHE_ID)
-
-    if cache_timestamp.nil?
-	# this is the first run, the cache is not initialized yet, just return
-	Rails.cache.write(CACHE_ID, Time.now)
-    # the cache expires when /etc/zypp/repos.d is modified
-    elsif cache_timestamp < Repository.mtime
-	Rails.logger.debug "#### Repositories cache expired"
-	expire_action :action => :index, :format => params["format"]
-	Rails.cache.write(CACHE_ID, Time.now)
-    end
-  end
 
   def check_read_permissions
     permission_check "org.opensuse.yast.system.repositories.read" # RORSCAN_ITL

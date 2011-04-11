@@ -3,3 +3,11 @@ controller: plugins
 singular: false
 policy: org.opensuse.yast.system.status
 
+#cache:
+#  enabled: true/false
+#  priority: -100..100
+#  reload_after: seconds (0 == do not reload)
+cache:
+  enabled: true
+  priority: 20
+  reload_after: 300

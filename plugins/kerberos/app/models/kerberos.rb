@@ -32,16 +32,18 @@ class Kerberos < BaseModel::Base
 
 public
   def self.find
-    ret = YastService.Call("YaPI::KERBEROS::Read", {})
-    Rails.logger.info "Read KERBEROS config: #{ret.inspect}"
-    kerberos	= Kerberos.new({
+    YastCache.fetch("kerberos:find") {
+      ret = YastService.Call("YaPI::KERBEROS::Read", {})
+      Rails.logger.info "Read KERBEROS config: #{ret.inspect}"
+      kerberos	= Kerberos.new({
 	:kdc		=> ret["kdc"],
 	:default_realm	=> ret["default_realm"],
 	:default_domain	=> ret["default_domain"],
 	:enabled	=> ret["use_kerberos"] == "1"
-    })
-    kerberos	= {} if kerberos.nil?
-    return kerberos
+      })
+      kerberos	= {} if kerberos.nil?
+      kerberos
+    }
   end
 
   def save
@@ -53,6 +55,7 @@ public
 
     yapi_ret = YastService.Call("YaPI::KERBEROS::Write", params)
     Rails.logger.debug "YaPI returns: '#{yapi_ret}'"
+    YastCache.reset("kerberos:find")
     return true
   end
 

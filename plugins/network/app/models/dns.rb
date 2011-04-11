@@ -18,11 +18,12 @@
 # To contact Novell about this file by physical or electronic mail,
 # you may find current contact information at www.novell.com
 #++
-# = DNS model
+# = Dns model
 # Provides set and gets resources from YaPI network module.
 # Main goal is handle YaPI specific calls and data formats. Provides cleaned
 # and well defined data.
-class DNS < BaseModel::Base
+
+class Dns < BaseModel::Base
 
   # the short hostname
   attr_accessor :searches
@@ -54,9 +55,11 @@ class DNS < BaseModel::Base
   # fills time instance with data from YaPI.
   #
   # +warn+: Doesn't take any parameters.
-  def DNS.find
-    response = YastService.Call("YaPI::NETWORK::Read") # hostname: true
-    ret = DNS.new response["dns"]
+  def Dns.find
+    YastCache.fetch("dns:find") {
+      response = YastService.Call("YaPI::NETWORK::Read") # hostname: true
+      ret = Dns.new response["dns"]
+    }
   end
 
   # Saves data from model to system via YaPI. Saves only setted data,
@@ -69,6 +72,7 @@ class DNS < BaseModel::Base
     vsettings = [ "a{sas}", settings ] # bnc#538050    
     YastService.Call("YaPI::NETWORK::Write",{"dns" => vsettings})
     # TODO success or not?
+    YastCache.reset("dns:find")
   end
 
 end

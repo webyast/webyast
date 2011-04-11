@@ -22,6 +22,7 @@
 # Provides set and gets resources from YaPI network module.
 # Main goal is handle YaPI specific calls and data formats. Provides cleaned
 # and well defined data.
+
 class Interface < BaseModel::Base
 
   IPADDR_REGEX = /([0-9]{1,3}.){3}[0-9]{1,3}/
@@ -46,19 +47,20 @@ class Interface < BaseModel::Base
   end
 
   def self.find( which )
-    response = YastService.Call("YaPI::NETWORK::Read")
-    ifaces_h = response["interfaces"]
-    if which == :all
-      ret = Hash.new
-      ifaces_h.each do |id, ifaces_h|
-        ret[id] = Interface.new(ifaces_h, id)
+    YastCache.fetch("interface:find:#{which.inspect}") {
+      response = YastService.Call("YaPI::NETWORK::Read")
+      ifaces_h = response["interfaces"]
+      if which == :all
+        ret = Hash.new
+        ifaces_h.each do |id, ifaces_h|
+          ret[id] = Interface.new(ifaces_h, id)
+        end
+      else
+        ret = Interface.new(ifaces_h[which], which)
       end
-    else
-      ret = Interface.new(ifaces_h[which], which)
-    end
-    return ret
+      ret
+    }
   end
-
 
   # Saves data from model to system via YaPI. Saves only setted data,
   # so it support partial safe (e.g. save only new timezone if rest of fields is not set).
@@ -76,6 +78,7 @@ class Interface < BaseModel::Base
     vsettings = [ "a{sa{ss}}", settings ] # bnc#538050
     YastService.Call("YaPI::NETWORK::Write",{"interface" => vsettings})
     # TODO success or not?
+    YastCache.reset("interface:find:#{@id.inspect}")
   end
 
 end

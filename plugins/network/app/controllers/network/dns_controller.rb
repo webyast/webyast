@@ -37,7 +37,7 @@ class Network::DnsController < ApplicationController
     root["searches"] = (root["searches"] || "").split
     root["nameservers"] = (root["nameservers"] || "").split
     
-    @dns = DNS.new(root)
+    @dns = Dns.new(root)
     @dns.save!
     show
   end
@@ -49,7 +49,7 @@ class Network::DnsController < ApplicationController
 
   # Shows hostname settings. Requires read permission for network YaPI.
   def show
-    @dns = DNS.find
+    @dns = Dns.find
 
     respond_to do |format|
       format.xml { render :xml => @dns.to_xml( :root => "dns", :dasherize => false ) }

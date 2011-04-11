@@ -51,7 +51,7 @@ class PackageKit
   private
   def self.improve_error(dbus_error)
     # check if it is a known error
-    if dbus_error.message =~ /org.freedesktop.DBus.Error.([A-Za-z.]*)/
+    if dbus_error.name =~ /org.freedesktop.DBus.Error.([A-Za-z.]*)/
       case $1
       when "ServiceUnknown"
         return ServiceNotAvailable.new('PackageKit')
@@ -99,6 +99,30 @@ class PackageKit
   end
 
   public
+
+  #
+  # PackageKit.lock
+  #
+  # Lock PackagKit for single use
+  #
+  def self.lock
+    Rails.logger.info "PackageKit locking via DBUS lock"
+    YastService.lock # Only one thread have access to DBUS. 
+                     # So we have to synchronize with YastService calls
+                     # Otherwise DBUS hangs
+    Rails.logger.info "PackageKit locked"
+  end
+
+  #
+  # PackageKit.unlock
+  #
+  # Unlock PackagKit
+  #
+  def self.unlock
+    YastService.unlock
+    Rails.logger.info "PackageKit unlocked via DBUS unlock"
+  end
+
   #
   # PackageKit.connect
   #
@@ -160,15 +184,14 @@ class PackageKit
   #
   def self.transact(method, args, signal = nil, bg_stat = nil, &block)
     begin
+      error = ''
+      result = nil
       transaction_iface, packagekit_iface = self.connect
     
       proxy = transaction_iface.object
     
-      error = ''
-
       # set the custom signal handler if set
       proxy.on_signal(signal.to_s, &block) if !signal.blank? && block_given?
-
       if bg_stat
         proxy.on_signal("StatusChanged") do |s|
           Rails.logger.debug "PackageKit progress: StatusChanged: #{s}"
@@ -182,17 +205,13 @@ class PackageKit
           bg_stat.subprogress = p2 < 101 ? p2 : -1
         end
       end
-
       dbusloop = self.dbusloop proxy, error
-
       dbusloop << proxy.bus
-
       # Do the call only when all signal handlers are in place,
       # otherwise Finished can arrive early and dbusloop will never
       # quit, bnc#561578
       # call it after creating the DBus loop (bnc#579001)
       result = transaction_iface.send(method.to_sym, *args)
-
       # run the main loop, process the incoming signals
       dbusloop.run
 
@@ -203,8 +222,6 @@ class PackageKit
         proxy.on_signal("StatusChanged")
       end
       proxy.on_signal(signal.to_s) if !signal.blank? && block_given?
-
-      packagekit_iface.SuggestDaemonQuit
 
       raise PackageKitError.new(error) unless error.blank?
 

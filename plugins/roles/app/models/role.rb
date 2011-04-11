@@ -19,6 +19,8 @@
 # you may find current contact information at www.novell.com
 #++
 
+#caching makes no sense here cause the info comes from a Yaml file
+
 require 'yaml'
 require 'exceptions'
 

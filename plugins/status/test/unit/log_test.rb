@@ -62,7 +62,7 @@ class LogTest < ActiveSupport::TestCase
     assert ret.description == 'System messages'
 
     ret = Log.find('notfound')
-    assert_equal 0, ret.size
+    assert_equal nil, ret
   end
 
   def test_read_log_file

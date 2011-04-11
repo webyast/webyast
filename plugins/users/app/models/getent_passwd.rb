@@ -25,28 +25,30 @@ class GetentPasswd < BaseModel::Base
   attr_reader :full_name
 
   def self.find
-    result = []
-    res = pure_getent
-    raise "cannot obtain passwd" unless res
-    minimum = system_minimum # RORSCAN_ITL
-    minimum = 1000 if minimum == 0 #fallback
-    lines = res.split "\n"
-    lines.each do |l|
-      elements = l.split ":"
-      if elements[2].to_i >= minimum &&
-        elements[0] != "nobody" #bnc#632326
-        result << GetentPasswd.new(:login => elements[0], :full_name => elements[4])
-      end
-    end
-    active_directory_users = pure_wbinfo
-    if $?
-      lines = active_directory_users.split "\n"
+    YastCache.fetch("getentpasswd:find") {
+      result = []
+      res = pure_getent
+      raise "cannot obtain passwd" unless res
+      minimum = system_minimum # RORSCAN_ITL
+      minimum = 1000 if minimum == 0 #fallback
+      lines = res.split "\n"
       lines.each do |l|
-        l.chomp!
-        result << GetentPasswd.new(:login => l, :full_name => l)
+        elements = l.split ":"
+        if elements[2].to_i >= minimum &&
+          elements[0] != "nobody" #bnc#632326
+          result << GetentPasswd.new(:login => elements[0], :full_name => elements[4])
+        end
       end
-    end
-    result
+      active_directory_users = pure_wbinfo
+      if $?
+        lines = active_directory_users.split "\n"
+        lines.each do |l|
+          l.chomp!
+          result << GetentPasswd.new(:login => l, :full_name => l)
+        end
+      end
+      result
+    }
   end
 
 private

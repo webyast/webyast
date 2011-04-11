@@ -56,7 +56,8 @@ class SessionsController < ApplicationController
       end
     end
     if params.has_key?(:login) && params[:password]
-       self.current_account = Account.authenticate(params[:login], params[:password])
+       ip = params[:ip] || request.remote_ip
+       self.current_account = Account.authenticate(params[:login], params[:password], ip)
     end
     @cmd_ret = Hash.new
     if BruteForceProtection.instance.blocked? params[:login]
