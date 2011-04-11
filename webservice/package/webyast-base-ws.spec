@@ -37,7 +37,7 @@ Requires:	ruby-dbus
 Requires:	rubygem-ruby-dbus
 %endif
 Requires:       rubygem-webyast-rake-tasks, rubygem-http_accept_language
-Requires:       rubygem-delayed_job
+Requires:       rubygem-delayed_job, rubygem-static_record_cache
 Requires:	yast2-dbus-server
 # 634404
 Recommends:     logrotate
