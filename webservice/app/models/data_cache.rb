@@ -52,6 +52,7 @@ class DataCache < ActiveRecord::Base
 
   def self.updated?(model, id, session)
     path = YastCache.find_key(model, id)
+    raise InvalidParameters.new({ :description => "Model #{model.inspect} not found on service side" }) if path.blank?
     data_cache = DataCache.find_by_path_and_session(path,session)
     data_cache.each { |cache|
       return true if !cache.refreshed_md5.blank? && cache.picked_md5 != cache.refreshed_md5
