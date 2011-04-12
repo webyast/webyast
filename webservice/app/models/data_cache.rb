@@ -20,6 +20,8 @@
 # DataCache class
 #
 
+require 'static_record_cache'
+
 class DataCache < ActiveRecord::Base
   acts_as_static_record
 

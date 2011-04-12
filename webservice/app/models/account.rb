@@ -21,7 +21,7 @@
 # http://github.com/technoweenie/restful-authentication/tree/master
 
 require 'session'
-
+require 'static_record_cache'
 require "rpam"
 require 'digest/sha1'
 
