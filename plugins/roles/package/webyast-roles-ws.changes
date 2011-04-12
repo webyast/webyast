@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Tue Apr 12 13:26:01 UTC 2011 - schubi@novell.com
+
+- new caching
+- 0.2.3 
+
+-------------------------------------------------------------------
 Tue Feb  8 16:51:12 UTC 2011 - schubi@novell.com
 
 - removed webyast-roles-ws-rpmlintrc
