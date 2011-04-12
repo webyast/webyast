@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Tue Apr 12 13:11:51 UTC 2011 - schubi@novell.com
+
+- new caching
+- 0.2.12 
+
+-------------------------------------------------------------------
 Fri Feb 25 10:27:38 UTC 2011 - vgorobets@novell.com
 
 - Fixed bug: WebYaST firewall module crashes if firewall service description is missing 
