@@ -65,7 +65,7 @@ Source11:	webyast-ws.lr.conf
 Source12:       nginx.conf
 
 BuildRoot:      %{_tmppath}/%{name}-%{version}-build
-BuildRequires:  ruby, pkg-config, rubygem-mocha
+BuildRequires:  ruby, pkg-config, rubygem-mocha, rubygem-static_record_cache
 # if we run the tests during build, we need most of Requires here too,
 # except for deployment specific stuff
 BuildRequires:  rubygem-webyast-rake-tasks, rubygem-restility
