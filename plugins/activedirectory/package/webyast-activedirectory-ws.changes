@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Tue Apr 12 10:19:03 UTC 2011 - schubi@novell.com
+
+- new caching
+- 0.2.8 
+
+-------------------------------------------------------------------
 Wed Feb  9 08:30:41 UTC 2011 - schubi@novell.com
 
 - webyast-activedirectory-ws-rpmlintrc removed
