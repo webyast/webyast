@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Tue Apr 12 13:13:34 UTC 2011 - schubi@novell.com
+
+- new caching
+- 0.2.6 
+
+-------------------------------------------------------------------
 Wed Feb  9 09:32:08 UTC 2011 - schubi@novell.com
 
 - webyast-kerberos-ws-rpmlintrc removed
