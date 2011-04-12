@@ -332,6 +332,7 @@ dbus-send --print-reply --system --dest=org.freedesktop.DBus / org.freedesktop.D
 %{webyast_ws_dir}/public
 %{webyast_ws_dir}/Rakefile
 %{webyast_ws_dir}/script
+%{webyast_ws_dir}/vendor
 %dir %{webyast_ws_dir}/config
 %{webyast_ws_dir}/config/boot.rb
 %{webyast_ws_dir}/config/database.yml
