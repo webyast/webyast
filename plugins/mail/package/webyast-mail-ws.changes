@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Tue Apr 12 13:16:29 UTC 2011 - schubi@novell.com
+
+- new caching
+- 0.2.4
+
+-------------------------------------------------------------------
 Wed Mar  9 13:05:49 CET 2011 - jsuchome@suse.cz
 
 - remove potential problematic characters from email address
