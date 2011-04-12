@@ -23,7 +23,6 @@ class YastCache
   include Singleton
 
 
-
   def YastCache.active; @active ||= false; end
   def YastCache.active= a; @active = a; end
   def YastCache.job_queue_enabled?; YastCache.active; end

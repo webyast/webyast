@@ -24,10 +24,14 @@ class NotifierController < ApplicationController
   # GET /notifier.xml
   def status
     id = params[:id] || :all
-    if(DataCache.updated?(params[:plugin], id, current_account.remember_token))
-      render :nothing=>true, :status=>200 and return
+    unless YastCache.active
+      render :nothing=>true, :status=>404 and return
     else
-      render :nothing=>true, :status=>304 and return
+      if(DataCache.updated?(params[:plugin], id, current_account.remember_token))
+        render :nothing=>true, :status=>200 and return
+      else
+        render :nothing=>true, :status=>304 and return
+      end
     end
   end
 end
