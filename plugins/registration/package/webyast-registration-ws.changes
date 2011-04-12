@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Tue Apr 12 13:21:00 UTC 2011 - schubi@novell.com
+
+- new caching
+- 0.2.3 
+
+-------------------------------------------------------------------
 Sat Aug 28 01:25:55 CEST 2010 - jdsn@suse.de
 
 - small remaining fixes related to proxy issue fix (bnc#626965)
