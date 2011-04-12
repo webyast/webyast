@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Tue Apr 12 13:14:55 UTC 2011 - schubi@novell.com
+
+- new caching
+- 0.2.6 
+
+-------------------------------------------------------------------
 Wed Feb  9 09:49:16 UTC 2011 - schubi@novell.com
 
 - webyast-ldap-ws-rpmlintrc removed
