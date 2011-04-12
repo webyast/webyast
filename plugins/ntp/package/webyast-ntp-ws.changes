@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Tue Apr 12 13:19:36 UTC 2011 - schubi@novell.com
+
+- new caching
+- 0.2.2 
+
+-------------------------------------------------------------------
 Wed Feb  9 09:35:05 UTC 2011 - schubi@novell.com
 
 - webyast-ntp-ws-rpmlintrc removed
