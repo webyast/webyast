@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Tue Apr 12 07:18:47 UTC 2011 - schubi@novell.com
+
+- new cache machanism
+- 0.2.12 
+
+-------------------------------------------------------------------
 Tue Feb  8 15:41:51 UTC 2011 - schubi@novell.com
 
 - rm webyast-base-ws-rpmlintrc
