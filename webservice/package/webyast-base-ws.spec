@@ -80,7 +80,7 @@ BuildRequires:  rubygem-rails-2_3 >= 2.3.4
 BuildRequires:  rubygem-rpam, rubygem-polkit
 # the testsuite is run during build
 BuildRequires:	rubygem-test-unit rubygem-mocha
-BuildRequires:	nginx-passenger
+BuildRequires:	rubygem-passenger-nginx
 
 # This is for Hudson (build service) to setup the build env correctly
 %if 0
