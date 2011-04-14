@@ -64,6 +64,7 @@ class GraphTest < ActiveSupport::TestCase
   end
 
   def test_finders
+    Metric.stubs(:collectd_running?).returns(true)
     Graph.stubs(:parse_config).returns(PARSE_CONFIG_1)
 
     ret = Graph.find(:all)
@@ -82,6 +83,7 @@ class GraphTest < ActiveSupport::TestCase
   end
 
   def test_find_limits
+    Metric.stubs(:collectd_running?).returns(true)
     Graph.stubs(:parse_config).returns(PARSE_CONFIG_2)
     ret = Graph.find_limits('cpu-0+cpu-user')
     assert_equal 1, ret.size
@@ -99,6 +101,7 @@ class GraphTest < ActiveSupport::TestCase
   end
 
   def test_check_limits_and_xml
+    Metric.stubs(:collectd_running?).returns(true)
     Graph.stubs(:parse_config).returns(PARSE_CONFIG_3)
     Graph.stubs(:read_data).with('waerden+cpu-0+cpu-idle').returns({ "value"=>
       {Time.at(1252071700) =>"6.1514301440e+01".to_f,
