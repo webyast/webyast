@@ -29,7 +29,7 @@ Requires:       yast2-core >= 2.18.10
 Requires:       yast2-core >= 2.17.30.1
 Requires:       sysvinit > 2.86-195.3.1
 %endif
-Requires:       nginx-passenger
+Requires:       nginx, rubygem-passenger-nginx
 Requires:	ruby-fcgi, sqlite, syslog-ng
 %if 0%{?suse_version} == 0 || %suse_version <= 1130
 Requires:	ruby-dbus
