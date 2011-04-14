@@ -2,6 +2,7 @@
 Tue Apr 12 07:18:47 UTC 2011 - schubi@novell.com
 
 - new cache machanism
+- changed nginx dependencies
 - 0.2.12 
 
 -------------------------------------------------------------------
