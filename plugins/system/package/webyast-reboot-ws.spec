@@ -20,7 +20,7 @@ License:	GPL v2 only
 Group:          Productivity/Networking/Web/Utilities
 URL:            http://en.opensuse.org/Portal:WebYaST
 Autoreqprov:    on
-Version:        0.2.1
+Version:        0.2.2
 Release:        0
 Summary:        WebYaST - reboot/shutdown service
 Source:         www.tar.bz2
@@ -80,7 +80,10 @@ rm -f $RPM_BUILD_ROOT%{plugin_dir}/COPYING
 %clean
 rm -rf $RPM_BUILD_ROOT
 
-%post
+# %posttrans is used instead of %post so it ensures the rights are
+# granted even after upgrading from old package (before renaming) (bnc#645310)
+# (see https://fedoraproject.org/wiki/Packaging/ScriptletSnippets#Syntax )
+%posttrans
 # granting all permissions for the web user
 #FIXME don't silently fail
 polkit-auth --user %{webyast_ws_user} --grant org.freedesktop.hal.power-management.shutdown >& /dev/null || true
