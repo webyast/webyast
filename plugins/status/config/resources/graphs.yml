@@ -9,5 +9,5 @@ policy: org.opensuse.yast.system.status
 cache:
   enabled: true
   priority: 20
-  reload_after: 300
+  reload_after: 360
 
