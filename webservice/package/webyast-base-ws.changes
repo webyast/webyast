@@ -44,7 +44,11 @@ Wed Dec 15 13:48:20 UTC 2010 - schubi@novell.com
 
 - switching to nginx 
   http://lists.opensuse.org/yast-devel/2010-12/msg00000.html
-- 0.2.6 
+- 0.2.6
+
+-------------------------------------------------------------------
+Thu Nov 25 15:26:05 CET 2010 - mvidner@suse.cz
+- Obsolete webyast-language-ws (bnc#643811#c11) 
 
 -------------------------------------------------------------------
 Wed Sep 15 16:13:01 UTC 2010 - schubi@novell.com
