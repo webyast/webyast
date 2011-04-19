@@ -44,7 +44,7 @@ Requires:	yast2-dbus-server
 # 634404
 Recommends:     logrotate
 PreReq:         PolicyKit, PackageKit, rubygem-rake, rubygem-sqlite3
-PreReq:         rubygem-rails-2_3 >= 2.3.4
+PreReq:         rubygem-rails-2_3 >= 2.3.8
 PreReq:         rubygem-rpam, rubygem-polkit, rubygem-gettext_rails
 PreReq:         yast2-runlevel
 License:	LGPL v2.1 only
@@ -78,7 +78,7 @@ BuildRequires:	ruby-dbus
 BuildRequires:	rubygem-ruby-dbus
 %endif
 BuildRequires:  PolicyKit, PackageKit, rubygem-sqlite3
-BuildRequires:  rubygem-rails-2_3 >= 2.3.4
+BuildRequires:  rubygem-rails-2_3 >= 2.3.8
 BuildRequires:  rubygem-rpam, rubygem-polkit
 # the testsuite is run during build
 BuildRequires:	rubygem-test-unit rubygem-mocha

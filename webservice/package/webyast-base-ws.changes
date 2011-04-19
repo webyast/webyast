@@ -51,6 +51,11 @@ Thu Nov 25 15:26:05 CET 2010 - mvidner@suse.cz
 - Obsolete webyast-language-ws (bnc#643811#c11) 
 
 -------------------------------------------------------------------
+Mon Nov 22 15:09:21 CET 2010 - mvidner@suse.cz
+
+- Fixed the RPM requirements: Rails 2.3.8 is required (bnc#643811)
+
+-------------------------------------------------------------------
 Wed Sep 15 16:13:01 UTC 2010 - schubi@novell.com
 
 - restart service correctly if the package has been renamed (bnc#637779)
