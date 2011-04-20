@@ -5,6 +5,12 @@ Tue Apr 12 13:29:12 UTC 2011 - schubi@novell.com
 - 0.3.3 
 
 -------------------------------------------------------------------
+Fri Feb 11 09:42:29 UTC 2011 - jreidinger@novell.com
+
+- fix installing patches which require EULA confirmation
+  (bnc#669470)
+
+-------------------------------------------------------------------
 Wed Feb  9 09:17:46 UTC 2011 - schubi@novell.com
 
 - webyast-software-ws-rpmlintrc removed

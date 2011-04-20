@@ -119,7 +119,7 @@ install -m 0644 %SOURCE4 $RPM_BUILD_ROOT/etc/polkit-1/localauthority/10-vendor.d
 %endif
 %endif
 
-mkdir -p $RPM_BUILD_ROOT/var/lib/yastws/software
+mkdir -p $RPM_BUILD_ROOT/var/lib/yastws/software/licenses/accepted
 
 %clean
 rm -rf $RPM_BUILD_ROOT
@@ -135,6 +135,7 @@ rm -rf $RPM_BUILD_ROOT
 # grant the permission for the webservice user
 polkit-auth --user %{webyast_ws_user} --grant org.freedesktop.packagekit.system-sources-configure >& /dev/null || true
 polkit-auth --user %{webyast_ws_user} --grant org.freedesktop.packagekit.system-update >& /dev/null || true
+polkit-auth --user %{webyast_ws_user} --grant org.freedesktop.packagekit.package-eula-accept >& /dev/null || true
 
 %files
 %defattr(-,root,root)

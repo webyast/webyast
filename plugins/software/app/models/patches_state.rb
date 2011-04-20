@@ -24,7 +24,21 @@ require 'gettext'
 class PatchesState
   include GetText
   def self.read()
-    if File.exist? Patch::MESSAGES_FILE
+    licenses_to_confirm = Dir.glob(File.join(Patch::LICENSES_DIR,"*")).select {|f| File.file? f}
+    if !licenses_to_confirm.empty?
+      file = licenses_to_confirm[0] #take first one
+      text = File.read file
+      return { :level => "warning",
+               :message_id => "PATCH_EULA",
+               :short_description => _("EULA accept required"),
+               :long_description => _("Package require accept specific EULA before its installation. Please follow bellowed link."),
+               :details => "",
+               :confirmation_host => "client",
+               :confirmation_link => "/patch_updates/license",
+               :confirmation_label => _("decide"),
+               :confirmation_kind => "link" }
+
+    elsif File.exist? Patch::MESSAGES_FILE
       f = File.new(Patch::MESSAGES_FILE, 'r')
       messages = f.gets(nil) || ""
 
@@ -32,13 +46,14 @@ class PatchesState
                :message_id => "PATCH_MESSAGES",
                :short_description => _("Patch installation messages not confirmed"),
                :long_description => messages,
-	       :details	=> "",
+               :details => "",
                :confirmation_host => "service",
                :confirmation_link => "/patch_update/state",
                :confirmation_label => _("OK"),
-               :confirmation_kind => "button" } 
+               :confirmation_kind => "button" }
     else
       return {}
-    end   
+    end
   end
+
 end

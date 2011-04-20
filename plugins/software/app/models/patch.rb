@@ -27,9 +27,20 @@ class Patch < Resolvable
   attr_accessor :messages
 
   MESSAGES_FILE = File.join(Paths::VAR,"software","patch_installion_messages")
+  LICENSES_DIR = File.join(Paths::VAR,"software","licenses")
+  ACCEPTED_LICENSES_DIR = File.join(Paths::VAR,"software","licenses","accepted")
   JOB_PRIO = -30
 
   private
+
+  def self.decide_license(accept)
+    #we don't know eula id, but as it block package kit, then there is only one license file to decide
+    if accept
+      `find #{LICENSES_DIR} -type f -exec mv {} #{ACCEPTED_LICENSES_DIR} \\;`
+    else
+      `find #{LICENSES_DIR} -type f -delete`
+    end
+  end
 
   # create unique id for the background manager
   def self.job_id(what)
@@ -37,6 +48,14 @@ class Patch < Resolvable
   end
 
   public
+
+  def self.accept_license
+    decide_license true
+  end
+
+  def self.reject_license
+    decide_license false
+  end
 
   def to_xml( options = {} )
     super :patch_update, options, @messages
@@ -138,6 +157,19 @@ class Patch < Resolvable
     return ret
   end
 
+  def self.license
+    Dir.glob(File.join(LICENSES_DIR,"*")).reduce([]) do |res,f|
+      if File.file? f
+        res << ({
+            :name => File.basename(f),
+            :text => File.read(f)
+            })
+      end
+      res
+    end
+  end
+
+
   def self.do_install(pk_id, signal_list = [], &block)
     #locking PackageKit for single use
     PackageKit.lock
@@ -167,6 +199,17 @@ class Patch < Resolvable
         ok = false
         dbusloop.quit
       end
+      proxy.on_signal("EulaRequired") do |eula_id,package_id,vendor_name,license_text|
+        #FIXME check if user already agree with license
+        if handle_eula(eula_id,license_text)
+          PackageKit.transact :AcceptEula, [eula_id],nil,nil
+          PackageKit.transact :UpdatePackages, [[pk_id]], nil, nil
+          dbusloop.quit
+        else
+          ok = false
+          dbusloop.quit
+        end
+      end
       if transaction_iface.methods["UpdatePackages"] && # catch mocking
          transaction_iface.methods["UpdatePackages"].params.size == 2 &&
          transaction_iface.methods["UpdatePackages"].params[0][0] == "only_trusted"
@@ -185,6 +228,7 @@ class Patch < Resolvable
       # bnc#617350, remove signals
       proxy.on_signal "Error"
       proxy.on_signal "Package"
+      proxy.on_signal "EulaRequired"
       if block_given?
         signal_list.each { |signal|
           proxy.on_signal signal.to_s
@@ -198,5 +242,17 @@ class Patch < Resolvable
     return ok
   end
 
+  def self.handle_eula(eula_id,license_text)
+  #TODO check if user already accept exactly same license
+    license_file = File.join(LICENSES_DIR,eula_id)
+    File.open(license_file,"w") { |f| f.write license_text }
+    while File.exists?(license_file)
+      sleep 1 #prevent turning server into radiator
+    end
+    accepted_path = File.join(ACCEPTED_LICENSES_DIR,eula_id)
+    ret = File.exists?(accepted_path) #eula is in accepted dir
+    File.delete accepted_path if ret #require new confirmation every patch same as zypper
+    ret
+  end
 
 end

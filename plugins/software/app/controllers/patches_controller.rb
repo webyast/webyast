@@ -49,6 +49,12 @@ class PatchesController < ApplicationController
     return done
   end
 
+  def check_license_required
+    if PatchesState.read[:message_id] == "PATCH_EULA"
+      raise LicenseRequiredException.new
+    end
+  end
+
   def check_running_install
     running = 0
     jobs = Delayed::Job.find(:all)
@@ -85,6 +91,14 @@ class PatchesController < ApplicationController
       end
       return
     end
+    if params[:license].present?
+      respond_to do |format|
+        format.xml { render  :xml => Patch.license.to_xml( :root => "licenses", :dasherize => false ) }
+        format.json { render :json => Patch.license.to_json( :root => "licenses", :dasherize => false ) }
+      end
+      return
+    end
+    check_license_required
     check_running_install
     # note: permission check was performed in :before_filter
     @patches = Patch.find(:all)
@@ -123,6 +137,12 @@ class PatchesController < ApplicationController
   # POST /patch_updates/
   def create
     permission_check "org.opensuse.yast.system.patches.install" # RORSCAN_ITL
+   if params[:patches][:accept_license].present? || params[:patches][:reject_license].present?
+      params[:patches][:accept_license].present? ? Patch.accept_license : Patch.reject_license
+      index
+      return
+    end
+
     @patch_update = Patch.find(params[:patches][:resolvable_id].to_s)
     #Patch for Bug 560701 - [build 24.1] webYaST appears to crash after installing webclient patch
     #Packagekit returns empty string if the patch is allready installed.
