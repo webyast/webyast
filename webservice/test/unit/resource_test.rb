@@ -27,6 +27,7 @@ class ResourceTest < ActiveSupport::TestCase
   REGISTERED_SERVICES = { "interface" => [TEST_RESOURCE], "sinterface" => [TEST_RESOURCE_S]}
 
   def setup
+    Rails.cache.clear
     ResourceRegistration.stubs(:resources).returns(REGISTERED_SERVICES)
   end
 
