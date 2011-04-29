@@ -76,6 +76,7 @@ needed at runtime.
 mkdir -p $RPM_BUILD_ROOT/usr/share/%{webyast_ws_user}/%{plugin_name}
 
 #sles_version does not exist any more (bnc#689901)
+#to use openSUSE license, the OBS project must be named accordingly
 case "%{_project}" in 
  *openSUSE:*)
   # use an openSUSE license by default
