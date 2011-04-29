@@ -18,7 +18,7 @@ License:	GPL v2 only
 Group:          Productivity/Networking/Web/Utilities
 URL:            http://en.opensuse.org/Portal:WebYaST
 Autoreqprov:    on
-Version:        0.2.3
+Version:        0.2.4
 Release:        0
 Summary:        WebYaST - license management service
 Source:         www.tar.bz2
@@ -74,15 +74,20 @@ needed at runtime.
 # Install all web and frontend parts.
 #
 mkdir -p $RPM_BUILD_ROOT/usr/share/%{webyast_ws_user}/%{plugin_name}
-%if 0%{?sles_version} == 0
+
+#sles_version does not exist any more (bnc#689901)
+case "%{_project}" in 
+ *openSUSE:*)
   # use an openSUSE license by default
   SOURCE_CONFIG=%SOURCE3
   rm -r "config/resources/licenses/SLES-11"
-%else
+  ;;
+ *)
   # use a sles11 license by default
   SOURCE_CONFIG=%SOURCE1
   rm -r "config/resources/licenses/openSUSE-11.1"
-%endif
+  ;;
+esac
 mv config/resources/licenses $RPM_BUILD_ROOT/usr/share/%{webyast_ws_user}/%{plugin_name}/
 
 mkdir -p $RPM_BUILD_ROOT%{webyast_ws_vardir}/%{plugin_name}/accepted-licenses
