@@ -25,7 +25,7 @@ class GetentPasswd < BaseModel::Base
   attr_reader :full_name
 
   def self.find
-    YastCache.fetch("getentpasswd:find") {
+    YastCache.fetch(self) {
       result = []
       res = pure_getent
       raise "cannot obtain passwd" unless res

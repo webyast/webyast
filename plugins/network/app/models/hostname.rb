@@ -37,7 +37,7 @@ class Hostname < BaseModel::Base
   #
   # +warn+: Doesn't take any parameters.
   def self.find
-    YastCache.fetch("hostname:find") {  
+    YastCache.fetch(self) {  
       response = YastService.Call("YaPI::NETWORK::Read") # hostname: true
       Hostname.new response["hostname"]
     }
@@ -55,7 +55,7 @@ class Hostname < BaseModel::Base
     vsettings = [ "a{ss}", settings ] # bnc#538050
     YastService.Call("YaPI::NETWORK::Write",{"hostname" => vsettings})
     # TODO success or not?
-    YastCache.reset("hostname:find")
+    YastCache.reset(self)
   end
 
 end

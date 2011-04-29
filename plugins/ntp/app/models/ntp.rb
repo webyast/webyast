@@ -26,7 +26,7 @@ class Ntp < BaseModel::Base
   public
     
     def self.find
-      YastCache.fetch("ntp:find") {
+      YastCache.fetch(self) {
         ret = Ntp.new
         ret.actions ||= {}
         ret.actions[:synchronize] = false

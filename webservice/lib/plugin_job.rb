@@ -76,18 +76,18 @@ class PluginJob < Struct.new(:class_name,:method,:arguments)
     if object.class != NameError && object.respond_to?(function_method)
       Rails.logger.info "Calling job: #{object}:#{function_method}"
       Rails.logger.info "             args: #{function_args.inspect}" unless function_args.blank?
-      call_identifier = "#{object};#{function_method},#{function_args}"
+      call_identifier = YastCache.key(object,function_method,function_args)
       Rails.cache.delete(call_identifier) #cache reset. This dedicates that
                                           #the values has been re-read
       ret = object.send(function_method, *function_args)
-      Rails.logger.info "Job returned"
+      Rails.logger.info "Job returned"  #{ret.inspect}
       resources = Resource.find :all
       resources.each  do |resource|
         if resource.cache_reload_after > 0
           name = resource.href.split("/").last
           if YastCache.find_key(name) == call_identifier
             Rails.logger.info "Enqueuing job again (sleep #{resource.cache_reload_after} seconds)"
-            Delayed::Job.enqueue(PluginJob.new(object,function_method,function_args), resource.cache_priority, 
+            Delayed::Job.enqueue(PluginJob.new(self[:class_name],function_method,function_args), resource.cache_priority, 
                                  (resource.cache_reload_after).seconds.from_now)
           end
         end

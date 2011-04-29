@@ -24,7 +24,7 @@ class Firewall < BaseModel::Base
   attr_accessor :use_firewall, :fw_services
 
   def self.find
-    YastCache.fetch("firewall:find") {
+    YastCache.fetch(self) {
       Firewall.new YastService.Call("YaPI::FIREWALL::Read")
     }
   end
@@ -38,7 +38,7 @@ class Firewall < BaseModel::Base
     #  Rails.logger.info "firewall configuration saving error: #{e.inspect}"
     #  
     #end
-    YastCache.reset("firewall:find")
+    YastCache.reset(self)
     raise FirewallException.new(result["error"]) unless result["saved_ok"]
   end
 

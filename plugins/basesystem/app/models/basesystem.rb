@@ -46,7 +46,7 @@ class Basesystem < BaseModel::Base
 
   #Gets instance of Basesystem with initialized steps queue and if basic settings is done
   def Basesystem.find
-    YastCache.fetch("basesystem:find") {
+    YastCache.fetch(self) {
       base = Basesystem.new
       basesystem_conf	= BASESYSTEM_CONF
       basesystem_conf	= BASESYSTEM_CONF_VENDOR if File.exists? BASESYSTEM_CONF_VENDOR
@@ -89,7 +89,7 @@ class Basesystem < BaseModel::Base
     File.open(FINISH_FILE,"w") do |io|
       io.write str
     end
-    YastCache.reset("basesystem:find")
+    YastCache.reset(self)
   end
 end
 

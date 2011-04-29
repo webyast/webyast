@@ -284,7 +284,7 @@ class Graph
     #checking if collectd is running
     raise ServiceNotRunning.new('collectd') unless Metric.collectd_running?
 
-    YastCache.fetch("graph:find:#{what.inspect}") {
+    YastCache.fetch(self,what) {
       do_find(what, limitcheck)
     }
   end
@@ -356,21 +356,19 @@ class Graph
   # return array of hashes of {"max"=>0, "min"=>0, "metric_column"=>nil} or nil
   #
   def self.find_limits(metric_id, group_id=nil )
-    YastCache.fetch("graph:find_limits") {
-      config = parse_config(@@translate) || {}
-      limits = []
-      config.each {|key,value|
-        next if group_id != nil && key != group_id
-        #checking for collectd entry
-        value["single_graphs"].each{|graph|
-          graph["lines"].each{|line|
-            line["limits"]["metric_column"] = line["metric_column"] if line.has_key?("metric_column")
-            limits << line["limits"] if line["metric_id"] == metric_id
-          }
-        }    
-      }
-      limits
+    config = parse_config(@@translate) || {}
+    limits = []
+    config.each {|key,value|
+      next if group_id != nil && key != group_id
+      #checking for collectd entry
+      value["single_graphs"].each{|graph|
+        graph["lines"].each{|line|
+          line["limits"]["metric_column"] = line["metric_column"] if line.has_key?("metric_column")
+          limits << line["limits"] if line["metric_id"] == metric_id
+        }
+      }    
     }
+    limits
   end
 
   #
@@ -390,7 +388,6 @@ class Graph
       f.write(config.to_yaml)
       f.close
     end
-    YastCache.reset("graph:find_limits")
   end
 
   # converts the graph to xml

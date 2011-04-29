@@ -63,7 +63,7 @@ public
 
   def self.find (cn)
     return find_all if cn == :all
-    YastCache.fetch("group:find:#{cn.inspect}") {
+    YastCache.fetch(self, cn) {
       result = group_get( "system", cn )
       result = group_get( "local", cn )  if result.empty?
       return nil if result.empty?
@@ -72,7 +72,7 @@ public
   end
 
   def self.find_all
-    YastCache.fetch("group:find::all") {
+    YastCache.fetch(self, :all) {
       result = groups_get "local"
       result.update( groups_get "system")
       result_array = []
@@ -96,7 +96,7 @@ public
                                    "userlist"  => ["as", members] } 
                                )
     end
-    YastCache.reset("group:find:{old_cn.inspect}")
+    YastCache.reset(self, old_cn)
     result # result is empty string on success, error message otherwise
   end
 
@@ -107,7 +107,7 @@ public
     else
       ret = YastService.Call( "YaPI::USERS::GroupDelete", {"type" => ["s",group_type], "cn" => ["s",old_cn]})
     end
-    YastCache.delete("group:find:{old_cn.inspect}")
+    YastCache.delete(self,old_cn.inspect)
     ret
   end
 end

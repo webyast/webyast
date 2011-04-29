@@ -62,11 +62,10 @@ class Service < BaseModel::Base
 
   public
 
-  def self.cache_key
-    ret = "service:find::all"
+  def self.cache_argument
     resource = Resource.find("org.opensuse.yast.modules.yapi.services")
-    ret += ":" + resource.cache_arguments if resource && !resource.cache_arguments.blank?
-    ret
+    return resource.cache_arguments if resource && !resource.cache_arguments.blank?
+    return nil
   end
 
   # reading configuration file
@@ -97,7 +96,7 @@ class Service < BaseModel::Base
   #
   # services = Service.find_all
   def self.find_all(params = nil)
-    YastCache.fetch(cache_key) {
+    YastCache.fetch(self,cache_argument) {
       params = {} if params.nil?
 
       services	= []
@@ -224,7 +223,7 @@ class Service < BaseModel::Base
       raise e
     end
     Rails.logger.debug "Command returns: #{ret.inspect}"
-    YastCache.reset(Service.cache_key)
+    YastCache.reset(self, Service.cache_argument)
     ret.symbolize_keys!
   end
 end

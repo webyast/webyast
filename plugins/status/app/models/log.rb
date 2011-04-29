@@ -65,7 +65,7 @@ class Log
   # "id" could be the log group (system,...)
   #
   def self.find(what)
-    YastCache.fetch("log:find:#{what.inspect}") {
+    YastCache.fetch(self,what) {
       config = parse_config || {}
       ret = []
       config.each {|key,value|

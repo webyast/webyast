@@ -45,7 +45,7 @@ public
   
   # users = User.find_all
   def self.find_all(params={})
-    YastCache.fetch("user:find::all") {
+    YastCache.fetch(self, :all) {
       attributes = [ "cn", "uidNumber", "homeDirectory", "grouplist", "uid", "loginShell", "groupname" ]
       if params.has_key? "attributes"
         attributes = params["attributes"].split(",")
@@ -77,7 +77,7 @@ public
 
     return find_all if id == :all
 
-    YastCache.fetch("user:find:#{id.inspect}") {
+    YastCache.fetch(self, id) {
       user = User.new
       parameters	= {
         # user to find
@@ -112,7 +112,7 @@ public
 
     ret = YastService.Call("YaPI::USERS::UserDelete", config)
     Rails.logger.debug "Command returns: #{ret}"
-    YastCache.delete("user:find:#{uid.inspect}")
+    YastCache.delete(self, uid)
     raise ret if not ret.blank?
     return (ret == "")
   end
@@ -132,7 +132,7 @@ public
     ret = YastService.Call("YaPI::USERS::UserModify", config, data)
 
     Rails.logger.debug "Command returns: #{ret.inspect}"
-    YastCache.reset("user:find:#{id}")
+    YastCache.reset(self, id)
     raise ret if not ret.blank?
     true
   end

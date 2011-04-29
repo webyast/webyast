@@ -39,7 +39,7 @@ class Activedirectory < BaseModel::Base
 
 public
   def self.find
-    YastCache.fetch("activedirectory:find") {
+    YastCache.fetch(self) {
       ret = YastService.Call("YaPI::ActiveDirectory::Read", {})
       Rails.logger.info "Read Samba config: #{ret.inspect}"
       ad = Activedirectory.new({
@@ -112,7 +112,7 @@ public
     Rails.cache.write('activedirectory:realm', "")
     Rails.cache.write('activedirectory:workgroup', "")
 
-    YastCache.reset("activedirectory:find")
+    YastCache.reset(self)
     return true
   end
 

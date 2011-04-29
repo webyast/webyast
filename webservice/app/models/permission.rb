@@ -44,7 +44,7 @@ class Permission
       Rails.logger.info "grant perms for user #{user} :\n#{permissions.inspect}\nwith result #{response.inspect}"
       #TODO convert response to exceptions in case of error
     end
-    YastCache.reset("permission:find::all")
+    YastCache.reset(self)
   end
 
   def self.find(type,restrictions={})
@@ -52,10 +52,8 @@ class Permission
     #filter out only needed parameters
     restrictions.each {|key, value|  
                         filters[key.to_sym] = value if %w( filter with_description user_id ).index(key.to_s)
-    }   
-    cache_key = "permission:find:#{type.inspect}"
-    cache_key += ":#{filters.inspect}" unless filters.blank? 
-    YastCache.fetch(cache_key) {
+    }  
+    YastCache.fetch(self, type, filters) {
       permission = Permission.new
       permission.load_permissions filters
       permission.permissions

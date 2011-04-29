@@ -42,11 +42,6 @@ class Patch < Resolvable
     end
   end
 
-  # create unique id for the background manager
-  def self.job_id(what)
-    "patch:install:#{what.inspect}"
-  end
-
   public
 
   def self.accept_license
@@ -76,8 +71,8 @@ class Patch < Resolvable
       Patch.install(update_id) #install at once
     else
       #inserting job in background
-      key = Patch.job_id(update_id)
       Rails.logger.info("Inserting job #{key}")
+      PluginJob.run_async(JOB_PRIO, :Patch, :install, update_id )
       Delayed::Job.enqueue(PluginJob.new(key),JOB_PRIO)
     end
   end
@@ -120,7 +115,7 @@ class Patch < Resolvable
   # Patch.find(212)
   def self.find(what, opts = {})
     search_id = what == :all ? :available : what
-    YastCache.fetch("patch:find:#{what.inspect}") {
+    YastCache.fetch(self, what) {
       do_find(search_id)
     }
   end
@@ -153,7 +148,7 @@ class Patch < Resolvable
     installed << pk_id
     Rails.cache.write("patch:installed", installed)
     
-    YastCache.delete("patch:find:#{pk_id.split(';')[1].inspect}")
+    YastCache.delete(self,pk_id.split(';')[1])
     return ret
   end
 
