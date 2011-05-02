@@ -20,12 +20,6 @@ require 'digest/md5'
 
 module Kernel
 private
-  def this_method
-    caller[0] =~ /`([^']*)'/ and $1
-  end
-  def calling_method
-    caller[1] =~ /`([^']*)'/ and $1
-  end
   def model_symbol(object)
     if object.instance_of? Class
       object.to_s.to_sym
