@@ -104,7 +104,7 @@ class YastCache
       if !arguments.empty? #all args
         found = model == data[:class_name] &&
                 :find == data[:method] &&
-                arguments == data[:arguments][0]
+                arguments == data[:arguments]
       else
         found = model == data[:class_name] &&
                 :find == data[:method] &&
@@ -122,7 +122,7 @@ class YastCache
     if start_job
       Rails.logger.info("Inserting job #{key}")
       unless arguments.empty?
-        PluginJob.run_async((delay).seconds.from_now, model, :find, arguments) 
+        PluginJob.run_async((delay).seconds.from_now, model, :find, *arguments) 
       else
         PluginJob.run_async((delay).seconds.from_now, model, :find)
       end
@@ -152,7 +152,7 @@ class YastCache
         return nil
       end
     end
-    key = YastCache.key(model_symbol(calling_object), calling_method, options)
+    key = YastCache.key(model_symbol(calling_object), :find, options)
     job_delay = 3
     raised_exception = nil
     re_load = Rails.cache.exist?(key) ?  true : false
