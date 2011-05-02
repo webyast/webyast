@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Mon May  2 12:00:46 UTC 2011 - schubi@novell.com
+
+- adapt caching to the new running job mechanism
+- 0.2.15
+
+-------------------------------------------------------------------
 Thu Apr 28 12:00:57 UTC 2011 - jreidinger@novell.com
 
 - change implementation of plugin job to reuse existing
