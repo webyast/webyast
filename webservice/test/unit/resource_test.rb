@@ -22,8 +22,8 @@
 require File.join(File.dirname(__FILE__),"..", "test_helper")
 
 class ResourceTest < ActiveSupport::TestCase
-  TEST_RESOURCE_S = { :policy => "", :singular => true, :controller => "stest" }
-  TEST_RESOURCE = { :policy => "own", :singular => false, :controller => "test" }
+  TEST_RESOURCE_S = { :policy => "", :singular => true, :controller => "stest", :cache_enabled => false, :cache_priority => -10, :cache_reload_after => 0, :cache_arguments => '' }
+  TEST_RESOURCE = { :policy => "own", :singular => false, :controller => "test" , :cache_enabled => false, :cache_priority => -10, :cache_reload_after => 0, :cache_arguments => '' }
   REGISTERED_SERVICES = { "interface" => [TEST_RESOURCE], "sinterface" => [TEST_RESOURCE_S]}
 
   def setup
