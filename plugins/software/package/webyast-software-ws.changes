@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Mon May  2 12:43:38 UTC 2011 - schubi@novell.com
+
+- adapt caching to the new job handling
+- 0.3.4 
+
+-------------------------------------------------------------------
 Tue Apr 12 13:29:12 UTC 2011 - schubi@novell.com
 
 - new caching
