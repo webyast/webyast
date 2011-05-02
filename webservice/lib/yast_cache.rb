@@ -91,7 +91,7 @@ class YastCache
       return
     end
     model = model_symbol(calling_object)
-    if arguments && arguments[0] !=  :all
+    if !arguments.empty? && arguments[0] !=  :all
       #reset also find.all caches
       YastCache.reset_and_restart(calling_object, delay, delete_cache, :all)
     end
@@ -107,7 +107,8 @@ class YastCache
                 arguments == data[:arguments][0]
       else
         found = model == data[:class_name] &&
-                :find == data[:method]
+                :find == data[:method] &&
+                data[:arguments].empty?
       end
       if found 
         if delete_cache
@@ -120,7 +121,11 @@ class YastCache
     }
     if start_job
       Rails.logger.info("Inserting job #{key}")
-      PluginJob.run_async((delay).seconds.from_now, model, :find, arguments)
+      unless arguments.empty?
+        PluginJob.run_async((delay).seconds.from_now, model, :find, arguments) 
+      else
+        PluginJob.run_async((delay).seconds.from_now, model, :find)
+      end
     end
   end
 
@@ -137,6 +142,7 @@ class YastCache
   end
     
   def YastCache.fetch(calling_object, *options)
+
     unless YastCache.active
 #      Rails.logger.debug "YastCache.fetch: Cache is not active"
       if  block_given?
