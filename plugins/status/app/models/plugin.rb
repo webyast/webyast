@@ -41,10 +41,15 @@ class Plugin
   public
 
   # initialize on element
-  def initialize(level, message_id, short_description, 
-                 long_description, details, confirmation_host, 
-                 confirmation_link, confirmation_label,
-                 confirmation_kind)
+  def initialize(level = "", 
+                 message_id = "", 
+                 short_description = "", 
+                 long_description = "", 
+                 details = "", 
+                 confirmation_host = "", 
+                 confirmation_link = "", 
+                 confirmation_label = "",
+                 confirmation_kind = "")
     @level = level
     @message_id = message_id
     @short_description = short_description
