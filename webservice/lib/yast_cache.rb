@@ -39,7 +39,7 @@ class YastCache
 
   def YastCache.key(model, method, *args)
     unless args.empty?
-      return "#{model.to_s.downcase}:#{method.to_s.downcase}:#{args}"
+      return "#{model.to_s.downcase}:#{method.to_s.downcase}:#{args.join(":")}"
     else
       return "#{model.to_s.downcase}:#{method.to_s.downcase}"
     end        
@@ -89,7 +89,7 @@ class YastCache
       #reset also find.all caches
       YastCache.reset_and_restart(calling_object, delay, delete_cache, :all)
     end
-    key = YastCache.key(model, :find, arguments)
+    key = YastCache.key(model, :find, *arguments)
     Rails.cache.delete(key) if delete_cache
     jobs = Delayed::Job.find(:all)
     start_job = true
@@ -128,7 +128,7 @@ class YastCache
 #      Rails.logger.debug "YastCache.delete: Cache is not active"
       return
     end
-    cache_key = YastCache.key(model_symbol(calling_object), :find, arguments)
+    cache_key = YastCache.key(model_symbol(calling_object), :find, *arguments)
     Rails.cache.delete(cache_key)
 
     #finding involved keys e.g. user:find:<id> includes user:find::all
@@ -146,7 +146,7 @@ class YastCache
         return nil
       end
     end
-    key = YastCache.key(model_symbol(calling_object), :find, options)
+    key = YastCache.key(model_symbol(calling_object), :find, *options)
     job_delay = 3
     raised_exception = nil
     re_load = Rails.cache.exist?(key) ?  true : false

@@ -283,7 +283,6 @@ class Graph
   def self.find(what, limitcheck = true, opts = {})
     #checking if collectd is running
     raise ServiceNotRunning.new('collectd') unless Metric.collectd_running?
-
     YastCache.fetch(self,what) {
       do_find(what, limitcheck)
     }

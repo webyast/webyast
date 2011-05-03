@@ -76,7 +76,7 @@ class PluginJob < Struct.new(:class_name,:method,:arguments)
     if object.class != NameError && object.respond_to?(function_method)
       Rails.logger.info "Calling job: #{object}:#{function_method}"
       Rails.logger.info "             args: #{function_args.inspect}" unless function_args.blank?
-      call_identifier = YastCache.key(object,function_method,function_args)
+      call_identifier = YastCache.key(object,function_method,*function_args)
       Rails.cache.delete(call_identifier) #cache reset. This dedicates that
                                           #the values has been re-read
       ret = object.send(function_method, *function_args)

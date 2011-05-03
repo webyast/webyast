@@ -38,7 +38,7 @@ class Resource < BaseModel::Base
 
   def self.find(what)
     # There is no reload mechansim for the cache. So fetch it directly
-    return Rails.cache.fetch("resource:find:#{what.inspect}") {
+    return Rails.cache.fetch("resource:find:#{what}") {
       case what
         when :all then
           resources = []
