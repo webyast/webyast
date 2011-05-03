@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Tue May  3 08:52:52 UTC 2011 - schubi@novell.com
+
+- fixes in generating job and cache IDs
+- 0.2.16 
+
+-------------------------------------------------------------------
 Mon May  2 12:00:46 UTC 2011 - schubi@novell.com
 
 - adapt caching to the new running job mechanism

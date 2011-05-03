@@ -86,7 +86,6 @@ class ApplicationController < ActionController::Base
         logger.info("Cache for model #{path} not found")
         return
       end
-      path.downcase!
       data_cache = DataCache.find_by_path_and_session(path, self.current_account.remember_token)
       found = false
       data_cache.each { |cache|

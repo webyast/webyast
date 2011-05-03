@@ -63,15 +63,15 @@ class YastCache
     return nil
   end
 
-  def YastCache.find_key(model_name, key = [[:all]])
+  def YastCache.find_key(model_name, key = :all)
     mod_name, dummy = YastCache.has_find_method(model_name)
     return nil if mod_name.blank?
     object = Object.const_get(mod_name) rescue $!
     if object.method(:find).arity != 0 
       #has :all parameter
-      return "#{mod_name.downcase}:find:#{key.inspect}"
+      return YastCache.key(mod_name, :find, key)
     else
-      return "#{mod_name.downcase}:find"
+      return YastCache.key(mod_name, :find)
     end
   end
 
