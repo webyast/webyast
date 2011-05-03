@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Tue May  3 09:01:34 UTC 2011 - schubi@novell.com
+
+- adapted deleting cache key
+- 0.3.5 
+
+-------------------------------------------------------------------
 Mon May  2 12:43:38 UTC 2011 - schubi@novell.com
 
 - adapt caching to the new job handling
