@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Tue May  3 14:55:32 UTC 2011 - schubi@novell.com
+
+- fixes in argument list of cache handling
+- 0.2.17 
+
+-------------------------------------------------------------------
 Tue May  3 08:52:52 UTC 2011 - schubi@novell.com
 
 - fixes in generating job and cache IDs
