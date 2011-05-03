@@ -64,7 +64,7 @@ class Service < BaseModel::Base
 
   def self.cache_argument
     resource = Resource.find("org.opensuse.yast.modules.yapi.services")
-    return resource.cache_arguments if resource && !resource.cache_arguments.blank?
+    return [:all,resource.cache_arguments] if resource && !resource.cache_arguments.blank?
     return nil
   end
 
@@ -96,7 +96,7 @@ class Service < BaseModel::Base
   #
   # services = Service.find_all
   def self.find_all(params = nil)
-    YastCache.fetch(self,cache_argument) {
+    YastCache.fetch(self,*cache_argument) {
       params = {} if params.nil?
 
       services	= []
@@ -223,7 +223,7 @@ class Service < BaseModel::Base
       raise e
     end
     Rails.logger.debug "Command returns: #{ret.inspect}"
-    YastCache.reset(self, Service.cache_argument)
+    YastCache.reset(self, *Service.cache_argument)
     ret.symbolize_keys!
   end
 end
