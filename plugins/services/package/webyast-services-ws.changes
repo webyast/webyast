@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Tue May  3 14:51:25 UTC 2011 - schubi@novell.com
+
+- corrected argument list of fetching cache
+- 0.2.10 
+
+-------------------------------------------------------------------
 Mon May  2 12:41:48 UTC 2011 - schubi@novell.com
 
 - adapt caching to the new job handling
