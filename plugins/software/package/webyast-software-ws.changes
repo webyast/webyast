@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Wed May  4 14:18:47 UTC 2011 - schubi@novell.com
+
+- fix in installing patches
+- 0.3.6 
+
+-------------------------------------------------------------------
 Tue May  3 09:01:34 UTC 2011 - schubi@novell.com
 
 - adapted deleting cache key
