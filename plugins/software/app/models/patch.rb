@@ -71,9 +71,8 @@ class Patch < Resolvable
       Patch.install(update_id) #install at once
     else
       #inserting job in background
-      Rails.logger.info("Inserting job #{key}")
+      Rails.logger.info("Inserting job: :Patch, :install, #{update_id}  ")
       PluginJob.run_async(JOB_PRIO, :Patch, :install, update_id )
-      Delayed::Job.enqueue(PluginJob.new(key),JOB_PRIO)
     end
   end
 

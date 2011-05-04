@@ -59,7 +59,7 @@ class Resolvable
     xml.instruct! unless options[:skip_instruct]
 
     xml.tag! tag do
-      xml.tag!(:resolvable_id, @resolvable_id, {:type => "integer"} )
+      xml.tag!(:resolvable_id, @resolvable_id )
       xml.tag!(:kind, @kind )
       xml.tag!(:name, @name )
       xml.tag!(:version, @version )
