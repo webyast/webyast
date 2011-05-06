@@ -56,11 +56,7 @@ class PatchesController < ApplicationController
   end
 
   def check_running_install
-    running = 0
-    jobs = Delayed::Job.find(:all)
-    jobs.each { |job|
-      running += 1 if job.handler.split("\n")[1].split[1].include?("patch:install:")
-    } unless jobs.blank?
+    running = PluginJob.running(:Patch, :install)
     Rails.logger.info("#{running} installation jobs in the queue")
     Rails.cache.delete("patch:installed") if running == 0 #remove installed patches from cache if the installation
                                                           #has been finished

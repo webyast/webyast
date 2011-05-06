@@ -38,25 +38,35 @@ class PluginJob < Struct.new(:class_name,:method,:arguments)
       Delayed::Job.enqueue(PluginJob.new(object,method,args),prio)
     end
 
+    # Counts the jobs which are running
+    # @param[Object,String,Symbol] object on which job should run
+    # @param[Symbol,nil] method called method or all method if nil passed
+    # @param[Array] args list of all parameters or empty array which match any arguments
+    def running (object, method = nil, *args)
+      count = 0
+      jobs = Delayed::Job.all
+      jobs.any? do |job|
+        data = YAML.load job.handler
+        if !args.empty? #all args
+          count += 1 if object == data[:class_name] &&
+                        method == data[:method] &&
+                        args == data[:arguments]
+        elsif method
+          count += 1 if object == data[:class_name] &&
+                        method == data[:method]
+        else
+          count += 1 if object == data[:class_name]
+        end
+      end
+      count
+    end
+
     # Checks if job is running
     # @param[Object,String,Symbol] object on which job should run
     # @param[Symbol,nil] method called method or all method if nil passed
     # @param[Array] args list of all parameters or empty array which match any arguments
     def running? (object, method = nil, *args)
-      jobs = Delayed::Job.all
-      jobs.any? do |job|
-        data = YAML.load job.handler
-        if !args.empty? #all args
-          object == data[:class_name] &&
-              method == data[:method] &&
-              args == data[:arguments]
-        elsif method
-          object == data[:class_name] &&
-              method == data[:method]
-        else
-          object == data[:class_name]
-        end
-      end
+      PluginJob.running (object, method, *args) > 0 ? true : false
     end
   end
 
