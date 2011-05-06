@@ -1,4 +1,9 @@
 -------------------------------------------------------------------
+Fri May  6 14:27:17 UTC 2011 - schubi@novell.com
+
+- handle/checking running installation jobs 
+
+-------------------------------------------------------------------
 Wed May  4 14:18:47 UTC 2011 - schubi@novell.com
 
 - fix in installing patches
