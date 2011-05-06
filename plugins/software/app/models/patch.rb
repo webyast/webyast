@@ -127,6 +127,11 @@ class Patch < Resolvable
     @messages=[]
     ret = do_install(pk_id,['RequireRestart','Message']) { |type, details|
       Rails.logger.info "Message signal received: #{type}, #{details}"
+      if ["system", "application", "session"].include? type
+        # RequireRestart received
+        type = "notice"
+        details = _("Please reboot your system.")
+      end
       @messages << {:kind => type, :details => details}
       begin
         dirname = File.dirname(MESSAGES_FILE)
@@ -148,6 +153,8 @@ class Patch < Resolvable
     Rails.cache.write("patch:installed", installed)
     
     YastCache.delete(self,pk_id.split(';')[1])
+    #resetting status in order to get install messagas, EULAs,....
+    YastCache.reset(Plugin.new(),"patch")
     return ret
   end
 
