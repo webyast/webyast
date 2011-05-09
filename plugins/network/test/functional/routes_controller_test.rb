@@ -47,8 +47,11 @@ class RoutesControllerTest < ActionController::TestCase
   def test_index_xml
     get :index, :format => 'xml'
     h = Hash.from_xml @response.body
-    assert_instance_of Array, h["routes"]
-    assert_equal "default",   h["routes"][0]["id"]
+   
+    assert_instance_of Hash, h["routes"]
+    #assert_instance_of Array, h["routes"]
+    assert_equal "default", h["routes"]["default"]["id"]
+    #assert_equal "default",  h["routes"][0]["id"]
   end
 
   DATA_GOOD_UI = {
