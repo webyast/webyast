@@ -174,7 +174,6 @@ class Patch < Resolvable
   def self.do_install(pk_id, signal_list = [], &block)
     #locking PackageKit for single use
     PackageKit.lock
-
     ok = true
     begin
       transaction_iface, packagekit_iface = PackageKit.connect
@@ -204,7 +203,17 @@ class Patch < Resolvable
         #FIXME check if user already agree with license
         if handle_eula(eula_id,license_text)
           PackageKit.transact :AcceptEula, [eula_id],nil,nil
-          PackageKit.transact :UpdatePackages, [[pk_id]], nil, nil
+          iface, dummy = PackageKit.connect
+          if iface.methods["UpdatePackages"] && # catch mocking
+             iface.methods["UpdatePackages"].params.size == 2 &&
+             iface.methods["UpdatePackages"].params[0][0] == "only_trusted"
+            #PackageKit of 11.2
+            iface.UpdatePackages(true,  #only_trusted
+                                 [pk_id])
+          else
+            #PackageKit older versions like SLES11
+            iface.UpdatePackages([pk_id])
+          end
           dbusloop.quit
         else
           ok = false
@@ -239,20 +248,18 @@ class Patch < Resolvable
       #unlocking PackageKit
       PackageKit.unlock
     end
-
     return ok
   end
 
   def self.handle_eula(eula_id,license_text)
-  #TODO check if user already accept exactly same license
-    license_file = File.join(LICENSES_DIR,eula_id)
-    File.open(license_file,"w") { |f| f.write license_text }
-    while File.exists?(license_file)
-      sleep 1 #prevent turning server into radiator
-    end
     accepted_path = File.join(ACCEPTED_LICENSES_DIR,eula_id)
     ret = File.exists?(accepted_path) #eula is in accepted dir
-    File.delete accepted_path if ret #require new confirmation every patch same as zypper
+    if ret
+      File.delete accepted_path if ret #require new confirmation every patch same as zypper
+    else
+      license_file = File.join(LICENSES_DIR,eula_id)
+      File.open(license_file,"w") { |f| f.write license_text }
+    end
     ret
   end
 
