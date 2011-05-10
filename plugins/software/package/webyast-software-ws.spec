@@ -36,7 +36,7 @@ Requires:       PackageKit >= 0.3.14-3
 %endif
 %endif
 
-License:	GPL v2
+License:	GPL v2 only
 Group:          Productivity/Networking/Web/Utilities
 URL:            http://en.opensuse.org/Portal:WebYaST
 Autoreqprov:    on
