@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Tue May 10 11:57:20 UTC 2011 - schubi@novell.com
+
+- fixed writing limits (bnc#691982)
+- 0.2.8
+
+-------------------------------------------------------------------
 Mon May  2 12:45:10 UTC 2011 - schubi@novell.com
 
 - adapt caching to the new job handling

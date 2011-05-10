@@ -71,11 +71,11 @@ class Graph
     data.each do |key, values|
       if key == metric_column
         values.each do |date, value| 
-          if limits.has_key?("max") && limits["max"].to_i > 0 && value && limits["max"].to_i < value/y_scale
+          if limits.has_key?("max") && limits["max"].to_i > 0 && value && limits["max"].to_i < value/y_scale.to_i
             Rails.logger.info "Max #{limits['max']} for #{metric_id}(#{metric_column}) has been reached"
             limit_reached = true
           end 
-          if limits.has_key?("min") && limits["min"].to_i > 0 && value && limits["min"].to_i > value/y_scale
+          if limits.has_key?("min") && limits["min"].to_i > 0 && value && limits["min"].to_i > value/y_scale.to_i
             Rails.logger.info "Min #{limits['min']} for #{metric_id}(#{metric_column}) has been reached"
             limit_reached = true
           end 
