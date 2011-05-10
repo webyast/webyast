@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Tue May 10 10:27:56 UTC 2011 - schubi@novell.com
+
+- EULA handling fixed
+- 0.3.7 
+
+-------------------------------------------------------------------
 Fri May  6 14:27:17 UTC 2011 - schubi@novell.com
 
 - handle/checking running installation jobs 

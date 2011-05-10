@@ -36,11 +36,11 @@ Requires:       PackageKit >= 0.3.14-3
 %endif
 %endif
 
-License:	GPL v2 only
+License:	GPL v2
 Group:          Productivity/Networking/Web/Utilities
 URL:            http://en.opensuse.org/Portal:WebYaST
 Autoreqprov:    on
-Version:        0.3.6
+Version:        0.3.7
 Release:        0
 Summary:        WebYaST - software management service
 Source:         www.tar.bz2
