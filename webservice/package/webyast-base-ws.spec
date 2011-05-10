@@ -47,7 +47,7 @@ PreReq:         PolicyKit, PackageKit, rubygem-rake, rubygem-sqlite3
 PreReq:         rubygem-rails-2_3 >= 2.3.8
 PreReq:         rubygem-rpam, rubygem-polkit, rubygem-gettext_rails
 PreReq:         yast2-runlevel
-License:	LGPL v2.1
+License:	LGPL v2.1 only
 Group:          Productivity/Networking/Web/Utilities
 URL:            http://en.opensuse.org/Portal:WebYaST
 Autoreqprov:    on
