@@ -16,14 +16,14 @@ Obsoletes:      yast2-webservice-ntp < %{version}
 #webservice already require yast2-dbus-server which is needed for yapi
 PreReq:         yast2-webservice
 #for YaPI needs ntp
-Requires:	ntp
+Requires:	ntp >= 4.2.6p3
 #for YaPI hwclock
 Requires:	util-linux
 License:	GPL v2 only
 Group:          Productivity/Networking/Web/Utilities
 URL:            http://en.opensuse.org/Portal:WebYaST
 Autoreqprov:    on
-Version:        0.2.3
+Version:        0.2.4
 Release:        0
 Summary:        WebYaST - NTP service
 Source:         www.tar.bz2
