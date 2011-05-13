@@ -42,10 +42,19 @@ sub Synchronize {
   }
 
   foreach my $server (@{$servers}){
-    # -s:Set (step) the time with settimeofday()
-    # -t 15: delay 15s (bnc#442287)
-    $out = `/usr/sbin/sntp -t 15 -s '$server' 2>&1`;
-    last if ($?==0);
+    # -r: set the system time
+    # -P no: do not ask if time difference is too large
+    # -c 3 -d 15: delay 15s, three attempts (bnc#442287)
+    $out = `/usr/sbin/sntp -c 3 -d 15 -r -P no '$server' 2>&1`;
+    unless ($?==0) {
+      # try 
+      # -s:Set (step) the time with settimeofday()
+      # -t 15: delay 15s (bnc#442287)
+      $out = `/usr/sbin/sntp -t 15 -s '$server' 2>&1`;
+      last if ($?==0);
+    } else {
+      last 
+    }
     $out = "Error for server $server: $out";
     y2warning($out);
   }
