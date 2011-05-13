@@ -2,7 +2,8 @@
 Thu May 12 13:06:46 UTC 2011 - schubi@novell.com
 
 - corrected call of sntp (bnc #685465)
-- 0.2.4 
+  handle sntp calls in different versions
+- 0.2.4
 
 -------------------------------------------------------------------
 Mon May  2 12:38:17 UTC 2011 - schubi@novell.com
