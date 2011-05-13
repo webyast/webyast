@@ -16,7 +16,7 @@ Obsoletes:      yast2-webservice-ntp < %{version}
 #webservice already require yast2-dbus-server which is needed for yapi
 PreReq:         yast2-webservice
 #for YaPI needs ntp
-Requires:	ntp >= 4.2.6p3
+Requires:	ntp
 #for YaPI hwclock
 Requires:	util-linux
 License:	GPL v2 only
