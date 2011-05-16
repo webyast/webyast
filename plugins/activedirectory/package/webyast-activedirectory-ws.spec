@@ -12,7 +12,7 @@
 Name:           webyast-activedirectory-ws
 Provides:       WebYaST(org.opensuse.yast.modules.yapi.activedirectory)
 PreReq:         webyast-base-ws
-License:        GPLv2	
+License:        GPL-2.0	
 Group:          Productivity/Networking/Web/Utilities
 URL:            http://en.opensuse.org/Portal:WebYaST
 Autoreqprov:    on
