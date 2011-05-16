@@ -1,4 +1,11 @@
 -------------------------------------------------------------------
+Mon May 16 07:27:25 UTC 2011 - schubi@novell.com
+
+- Added new right org.opensuse.yast.system.power-management.policy
+  (bnc #687807)
+- 0.2.3 
+
+-------------------------------------------------------------------
 Tue Apr 12 13:33:13 UTC 2011 - schubi@novell.com
 
 - new caching
