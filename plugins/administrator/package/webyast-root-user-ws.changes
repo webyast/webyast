@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Mon May 16 10:05:49 UTC 2011 - schubi@novell.com
+
+- changed licence to the correct name GPL-2.0
+- 0.2.4 
+
+-------------------------------------------------------------------
 Mon May  2 12:18:59 UTC 2011 - schubi@novell.com
 
 - adapt caching to the new job handling

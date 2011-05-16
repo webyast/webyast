@@ -14,11 +14,11 @@ Provides:       WebYaST(org.opensuse.yast.modules.yapi.administrator)
 Provides:       yast2-webservice-administrator = %{version}
 Obsoletes:      yast2-webservice-administrator < %{version}
 PreReq:         yast2-webservice
-License:	GPL v2 only
+License:        GPL-2.0	
 Group:          Productivity/Networking/Web/Utilities
 URL:            http://en.opensuse.org/Portal:WebYaST
 Autoreqprov:    on
-Version:        0.2.3
+Version:        0.2.4
 Release:        0
 Summary:        WebYaST - service for configuration of root account
 Source:         www.tar.bz2
