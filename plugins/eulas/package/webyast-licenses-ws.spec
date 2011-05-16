@@ -14,11 +14,11 @@ Provides:       WebYaST(org.opensuse.yast.modules.eulas)
 Provides:       yast2-webservice-eulas = %{version}
 Obsoletes:      yast2-webservice-eulas < %{version}
 PreReq:         yast2-webservice
-License:	GPL v2 only
+License:        GPL-2.0	
 Group:          Productivity/Networking/Web/Utilities
 URL:            http://en.opensuse.org/Portal:WebYaST
 Autoreqprov:    on
-Version:        0.2.4
+Version:        0.2.5
 Release:        0
 Summary:        WebYaST - license management service
 Source:         www.tar.bz2
