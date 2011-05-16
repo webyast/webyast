@@ -16,7 +16,7 @@ Obsoletes:      yast2-webservice-system < %{version}
 PreReq:         yast2-webservice
 # requires HAL for reboot/shutdown actions
 Requires:	hal
-License:	GPLv2
+License:	GPL-2.0
 Group:          Productivity/Networking/Web/Utilities
 URL:            http://en.opensuse.org/Portal:WebYaST
 Autoreqprov:    on
