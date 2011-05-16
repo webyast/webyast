@@ -135,8 +135,8 @@ class License
 
   ##
   # Load license translation from disk
-  # @raise [CorruptedFileException] in case license translation name does not exist
-  # @param [String] lang lang or locale code of the desired license translation
+  # @raise  [CorruptedFileException] in case license translation name does not exist
+  # @param  [String] lang lang or locale code of the desired license translation
   # @return [nil] @text and @text_lang instance variables are set
   def load_text(lang)
     lang = make_lang_acceptable lang
