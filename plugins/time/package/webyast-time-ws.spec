@@ -14,11 +14,11 @@ Provides:       WebYaST(org.opensuse.yast.modules.yapi.time)
 Provides:       yast2-webservice-time = %{version}
 Obsoletes:      yast2-webservice-time < %{version}
 PreReq:         yast2-webservice
-License:	GPL v2 only
+License:        GPL-2.0	
 Group:          Productivity/Networking/Web/Utilities
 URL:            http://en.opensuse.org/Portal:WebYaST
 Autoreqprov:    on
-Version:        0.2.1
+Version:        0.2.2
 Release:        0
 Summary:        WebYaST - time management
 Source:         www.tar.bz2
