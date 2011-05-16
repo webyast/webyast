@@ -19,11 +19,11 @@ PreReq:         yast2-webservice
 Requires:	ntp
 #for YaPI hwclock
 Requires:	util-linux
-License:	GPL v2 only
+License:        GPL-2.0	
 Group:          Productivity/Networking/Web/Utilities
 URL:            http://en.opensuse.org/Portal:WebYaST
 Autoreqprov:    on
-Version:        0.2.4
+Version:        0.2.5
 Release:        0
 Summary:        WebYaST - NTP service
 Source:         www.tar.bz2
