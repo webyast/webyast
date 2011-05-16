@@ -47,11 +47,11 @@ PreReq:         PolicyKit, PackageKit, rubygem-rake, rubygem-sqlite3
 PreReq:         rubygem-rails-2_3 >= 2.3.8
 PreReq:         rubygem-rpam, rubygem-polkit, rubygem-gettext_rails
 PreReq:         yast2-runlevel
-License:	LGPL v2.1 only
+License:	LGPL-2.0
 Group:          Productivity/Networking/Web/Utilities
 URL:            http://en.opensuse.org/Portal:WebYaST
 Autoreqprov:    on
-Version:        0.2.18
+Version:        0.2.19
 Release:        0
 Summary:        WebYaST - base components for rest service
 Source:         www.tar.bz2
