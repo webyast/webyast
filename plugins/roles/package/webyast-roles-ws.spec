@@ -12,11 +12,11 @@
 Name:           webyast-roles-ws
 Provides:       WebYaST(org.opensuse.yast.roles)
 PreReq:         yast2-webservice
-License:	GPL v2 only
+License:        GPL-2.0	
 Group:          Productivity/Networking/Web/Utilities
 URL:            http://en.opensuse.org/Portal:WebYaST
 Autoreqprov:    on
-Version:        0.2.4
+Version:        0.2.5
 Release:        0
 Summary:        WebYaST - role management service
 Source:         www.tar.bz2
