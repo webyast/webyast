@@ -40,7 +40,7 @@ License:	GPL-2.0
 Group:          Productivity/Networking/Web/Utilities
 URL:            http://en.opensuse.org/Portal:WebYaST
 Autoreqprov:    on
-Version:        0.3.8
+Version:        0.3.9
 Release:        0
 Summary:        WebYaST - software management service
 Source:         www.tar.bz2

@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Tue May 17 10:44:17 UTC 2011 - schubi@novell.com
+
+- remove signals correctly
+- 0.3.9 
+
+-------------------------------------------------------------------
 Mon May 16 10:45:08 UTC 2011 - schubi@novell.com
 
 - changed licence to the correct name GPL-2.0

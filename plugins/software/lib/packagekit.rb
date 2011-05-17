@@ -96,6 +96,7 @@ class PackageKit
     proxy.on_signal("Finished")
     proxy.on_signal("RepoSignatureRequired")
     proxy.on_signal("ErrorCode")
+    proxy.on_signal("RepoDetail")
   end
 
   public
