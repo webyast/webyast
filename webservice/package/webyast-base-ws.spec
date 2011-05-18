@@ -51,7 +51,7 @@ License:	LGPL-2.0
 Group:          Productivity/Networking/Web/Utilities
 URL:            http://en.opensuse.org/Portal:WebYaST
 Autoreqprov:    on
-Version:        0.2.19
+Version:        0.2.20
 Release:        0
 Summary:        WebYaST - base components for rest service
 Source:         www.tar.bz2

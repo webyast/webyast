@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Wed May 18 11:32:01 UTC 2011 - schubi@novell.com
+
+- reduced loglevel of nginx (bnc#694495)
+- 0.2.20 
+
+-------------------------------------------------------------------
 Mon May 16 10:58:04 UTC 2011 - schubi@novell.com
 
 - changed licence to the correct name LGPL-2.0 
