@@ -1,7 +1,7 @@
 -------------------------------------------------------------------
 Wed May 18 11:08:18 UTC 2011 - schubi@novell.com
 
-- Taking the correct cache for User:find (bnc#693928)
+- splitting in diffent caches for user:index (bnc#693928)
 - 0.2.6 
 
 -------------------------------------------------------------------

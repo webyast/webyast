@@ -1,4 +1,11 @@
 -------------------------------------------------------------------
+Thu May 19 08:09:54 UTC 2011 - schubi@novell.com
+
+- init_cache has the controller name as an argument. This is needed
+  for (bnc#693928)
+- 0.2.21 
+
+-------------------------------------------------------------------
 Wed May 18 11:32:01 UTC 2011 - schubi@novell.com
 
 - reduced loglevel of nginx (bnc#694495)

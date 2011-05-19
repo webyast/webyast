@@ -25,6 +25,18 @@ class UsersController < ApplicationController
   
   before_filter :login_required
 
+  private
+
+  def init_cache(controller_name = request.parameters["controller"])
+    if params[:getent] == "1"
+      super "getent_passwd"
+    else
+      super
+    end
+  end
+
+  public
+
   def initialize
   end
 

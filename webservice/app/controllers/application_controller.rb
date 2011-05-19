@@ -73,7 +73,7 @@ class ApplicationController < ActionController::Base
 
   private
 
-  def init_cache
+  def init_cache(controller_name = request.parameters["controller"])
     return unless (logged_in? && YastCache.active) #Does not make sense if no session id is available or
                                                    #cache is not active
     if request && request.request_method == :get
@@ -81,7 +81,7 @@ class ApplicationController < ActionController::Base
                      request.parameters["action"] == "index")
       #finding the correct cache name 
       #(has to be the model class name and not the controller name)
-      path = YastCache.find_key(request.parameters["controller"], (request.parameters["id"] || :all))
+      path = YastCache.find_key(controller_name, (request.parameters["id"] || :all))
       if path.blank?
         logger.info("Cache for model #{path} not found")
         return
