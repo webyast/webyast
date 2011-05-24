@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Tue May 24 09:27:35 UTC 2011 - schubi@novell.com
+
+- revmoved single caching (bnc#694831)
+- 0.2.7 
+
+-------------------------------------------------------------------
 Wed May 18 11:08:18 UTC 2011 - schubi@novell.com
 
 - splitting in diffent caches for user:index (bnc#693928)
