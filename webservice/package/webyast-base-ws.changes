@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Tue May 24 12:51:44 UTC 2011 - schubi@novell.com
+
+- moving task of delay-job (bnc#694566)
+- 0.2.22 
+
+-------------------------------------------------------------------
 Thu May 19 08:09:54 UTC 2011 - schubi@novell.com
 
 - init_cache has the controller name as an argument. This is needed
