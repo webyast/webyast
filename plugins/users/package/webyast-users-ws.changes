@@ -1,7 +1,13 @@
 -------------------------------------------------------------------
+Tue May 24 10:09:20 UTC 2011 - vgorobets@suse.de
+
+- added workaround for the users which UID < 1000, since a lot of netowrk users don't appear in roles ui 
+- 0.2.8
+
+-------------------------------------------------------------------
 Tue May 24 09:27:35 UTC 2011 - schubi@novell.com
 
-- revmoved single caching (bnc#694831)
+- removed single caching (bnc#694831)
 - 0.2.7 
 
 -------------------------------------------------------------------
