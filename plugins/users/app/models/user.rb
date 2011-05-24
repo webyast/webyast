@@ -77,28 +77,26 @@ public
 
     return find_all if id == :all
 
-    YastCache.fetch(self, id) {
-      user = User.new
-      parameters	= {
+    user = User.new
+    parameters	= {
         # user to find
         "uid" => [ "s", id ],
         # list of attributes to return;
         "user_attributes" =>
           [ "as", [ "cn", "uidNumber", "homeDirectory",
                   "grouplist", "uid", "loginShell", "groupname" ] ]
-      }
-      user_map = YastService.Call("YaPI::USERS::UserGet", parameters)
+    }
+    user_map = YastService.Call("YaPI::USERS::UserGet", parameters)
 
 #    system_groups = YastService.Call("YaPI::USERS::GroupsGet", {"index"=>["s","cn"],"type"=>["s","system"]})
 #    local_groups = YastService.Call("YaPI::USERS::GroupsGet", {"index"=>["s","cn"],"type"=>["s","local"]})
 #    user.allgroups = Hash[*(local_groups.keys | system_groups.keys).collect {|v| [v,1]}.flatten]
 
-      raise "Got no data while loading user attributes" if user_map.empty?
+    raise "Got no data while loading user attributes" if user_map.empty?
 
-      user.load_data(user_map)
-      user.uid = id
-      user
-    }
+    user.load_data(user_map)
+    user.uid = id
+    user
   end
 
   # User.destroy("joe")
