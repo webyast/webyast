@@ -31,7 +31,8 @@ Requires:       yast2-core >= 2.18.10
 Requires:       yast2-core >= 2.17.30.1
 Requires:       sysvinit > 2.86-195.3.1
 %endif
-Requires:       nginx, rubygem-passenger-nginx
+Requires:       rubygem-passenger-nginx
+Requires:       nginx >= 1.0
 Requires:	ruby-fcgi, sqlite, syslog-ng
 %if 0%{?suse_version} == 0 || %suse_version <= 1130
 Requires:	ruby-dbus
@@ -82,7 +83,7 @@ BuildRequires:  rubygem-rails-2_3 >= 2.3.8
 BuildRequires:  rubygem-rpam, rubygem-polkit
 # the testsuite is run during build
 BuildRequires:	rubygem-test-unit rubygem-mocha
-BuildRequires:	nginx, rubygem-passenger-nginx
+BuildRequires:	nginx >= 1.0, rubygem-passenger-nginx
 
 # This is for Hudson (build service) to setup the build env correctly
 %if 0

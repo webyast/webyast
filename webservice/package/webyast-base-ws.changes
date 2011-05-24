@@ -2,6 +2,7 @@
 Tue May 24 12:51:44 UTC 2011 - schubi@novell.com
 
 - moving task of delay-job (bnc#694566)
+- requires nginx1.0 expl. (needed for autobuild)
 - 0.2.22 
 
 -------------------------------------------------------------------
