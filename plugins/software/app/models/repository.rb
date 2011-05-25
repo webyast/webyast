@@ -201,9 +201,9 @@ class Repository < BaseModel::Base
       ret = PackageKit.transact('RepoSetData', [@id, 'remove', 'NONE'])
     ensure
       PackageKit.unlock #locking
+      YastCache.delete(self,@id)
       return ret
     end
-    YastCache.delete(self,@id)
     return ret
   end
 
