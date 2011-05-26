@@ -2,6 +2,7 @@
 Wed May 25 11:45:04 UTC 2011 - schubi@novell.com
 
 - ensure that the repositiory cache is reset after deletion.
+  (bnc#694800)
 - 0.3.11 
 
 -------------------------------------------------------------------
