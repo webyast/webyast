@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Fri May 27 13:38:54 UTC 2011 - schubi@novell.com
+
+- taking care about s390 network (bnc#696496)
+- 0.2.10 
+
+-------------------------------------------------------------------
 Mon May 16 10:49:47 UTC 2011 - schubi@novell.com
 
 - changed licence to the correct name GPL-2.0

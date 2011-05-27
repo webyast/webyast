@@ -146,7 +146,8 @@ class Graph
                "y_decimal_places"=>0,
                "single_graphs"=>[]}
     metrics.each do |metric|
-      if metric.type == "if_packets" && metric.type_instance.start_with?("eth")
+      if metric.type == "if_packets" && 
+         (metric.type_instance.start_with?("eth") || metric.type_instance.start_with?("ctc"))
         metric_id = metric.id[metric.host.length+1..metric.id.length-1] #cut off host-id
         network["single_graphs"] << {"lines"=>[{"label"=>"received", "limits"=>{"max"=>"0", "min"=>"0"}, 
                                               "metric_column"=>"rx", "metric_id"=>metric_id}, 
