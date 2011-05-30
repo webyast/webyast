@@ -52,7 +52,7 @@ License:	LGPL-2.0
 Group:          Productivity/Networking/Web/Utilities
 URL:            http://en.opensuse.org/Portal:WebYaST
 Autoreqprov:    on
-Version:        0.2.22
+Version:        0.2.23
 Release:        0
 Summary:        WebYaST - base components for rest service
 Source:         www.tar.bz2
@@ -242,11 +242,21 @@ if /bin/rpm -q yast2-webservice > /dev/null ; then
       echo "/usr/sbin/rcyastws restart" >> %name-%version-%release-1
     fi
   fi
-  if [ -f %name-%version-%release-1 ] ; then
-    install -D -m 755 %name-%version-%release-1 /var/adm/update-scripts
-    rm %name-%version-%release-1
-    echo "Please check the service runlevels and restart WebYaST service with \"rcyastws restart\" if the update has not been called with zypper,yast or packagekit"
+fi
+#We are switching from lighttpd to nginx. So lighttpd has to be killed
+#at first
+if rpm -q --requires %{name}|grep lighttpd > /dev/null ; then
+  if /usr/sbin/rcyastws status > /dev/null ; then
+    echo "yastws is running under lighttpd -> switching to nginx"
+    /usr/sbin/rcyastws stop > /dev/null
+    echo "#!/bin/sh" > %name-%version-%release-1
+    echo "/usr/sbin/rcyastws restart" >> %name-%version-%release-1
   fi
+fi
+if [ -f %name-%version-%release-1 ] ; then
+  install -D -m 755 %name-%version-%release-1 /var/adm/update-scripts
+  rm %name-%version-%release-1
+  echo "Please check the service runlevels and restart WebYaST service with \"rcyastws restart\" if the update has not been called with zypper,yast or packagekit"
 fi
 exit 0
 

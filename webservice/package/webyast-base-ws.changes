@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Mon May 30 12:06:49 UTC 2011 - schubi@novell.com
+
+- shutdown lighttpd when we are switching to nginx (bnc#696011)
+- 0.2.23
+
+-------------------------------------------------------------------
 Tue May 24 12:51:44 UTC 2011 - schubi@novell.com
 
 - moving task of delay-job (bnc#694566)
