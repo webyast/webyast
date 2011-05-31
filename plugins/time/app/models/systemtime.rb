@@ -96,7 +96,7 @@ class Systemtime < BaseModel::Base
     ret = Systemtime.new()
     ret.parse_response YastService.Call("YaPI::TIME::Read",create_read_question)
     ret.timezone = "Europe/Prague" if ret.timezone.blank? #last fallback if everything fail #bnc582166
-    File.exist?("/sbin/hwclock") ? ret.hwclock = true : ret.hwclock = false
+    ret.hwclock = File.exist? "/sbin/hwclock"
     return ret
   end
 
