@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Wed Jun  1 09:30:52 UTC 2011 - schubi@novell.com
+
+- Allow _ in http headers (bnc#696578)
+- 0.2.24
+
+-------------------------------------------------------------------
 Mon May 30 12:06:49 UTC 2011 - schubi@novell.com
 
 - shutdown lighttpd when we are switching to nginx (bnc#696011)
