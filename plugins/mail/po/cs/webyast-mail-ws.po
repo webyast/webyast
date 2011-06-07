@@ -1,0 +1,31 @@
+# Vojtěch Zeisek <Vojtech.Zeisek@opensuse.org>, 2010.
+msgid ""
+msgstr ""
+"Project-Id-Version: @PACKAGE@\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2011-03-04 11:25+0100\n"
+"PO-Revision-Date: 2010-06-05 18:56+0200\n"
+"Last-Translator: Vojtěch Zeisek <Vojtech.Zeisek@opensuse.org>\n"
+"Language-Team: Czech <opensuse-translation@opensuse.org>\n"
+"Language: cs\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Lokalize 1.0\n"
+"Plural-Forms: nplurals=3; plural=(n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2;\n"
+
+#: app/models/mail_state.rb:40 app/models/mail_state.rb:40
+msgid "It was not possible to retrieve the full hostname of the machine. If the mail could not be delivered, consult the network and/or mail configuration with your network administrator."
+msgstr "Nepodařilo se získat plné jméno hostitele stroje. Pokud mail nemohl být doručen, zkontrolujte síť a/nebo nastavení mailu s vaším správcem sítě."
+
+#: app/models/mail_state.rb:45 app/models/mail_state.rb:45
+msgid "Mail configuration test not confirmed"
+msgstr "Test nastavení mailu nebyl potvrzen"
+
+#: app/models/mail_state.rb:46 app/models/mail_state.rb:46
+msgid "While configuring mail, a test mail was sent to %s . Was the mail delivered to this address?<br>If so, confirm it by pressing the button. Otherwise check your mail configuration again."
+msgstr "Během nastavování mailu byl testovací mail odeslán na %s. Byl na tuto adresu doručen mail?<br>Pokud ano, potvrďte to stiskem tlačítka. V opačném případě opětovně zkontrolujte nastavení vašeho mailu."
+
+#: app/models/mail_state.rb:50 app/models/mail_state.rb:50
+msgid "Test mail received"
+msgstr "Testovací mail byl obdržen"
