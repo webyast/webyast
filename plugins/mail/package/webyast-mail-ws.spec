@@ -18,7 +18,7 @@ License:        GPL-2.0
 Group:          Productivity/Networking/Web/Utilities
 URL:            http://en.opensuse.org/Portal:WebYaST
 Autoreqprov:    on
-Version:        0.2.7
+Version:        0.2.8
 Release:        0
 Summary:        WebYaST - system mail settings service
 Source:         www.tar.bz2
