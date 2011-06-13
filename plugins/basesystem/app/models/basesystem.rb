@@ -31,7 +31,7 @@ class Basesystem < BaseModel::Base
   # Flag if base system configuration is  finished
   attr_accessor   :finish
   attr_accessor   :done
-
+  attr_accessible :finish
   # path to file which defines module queue
   BASESYSTEM_CONF = :basesystem
   BASESYSTEM_CONF_VENDOR	= File.join(Paths::CONFIG,"vendor","basesystem.yml")

@@ -88,6 +88,13 @@ EOF
     assert_not_nil @basesystem.to_json
   end
 
+  def test_mass_loading
+    bs = Basesystem.new :finish => true, :steps => [:lest], :done => :lest
+    assert bs.finish #only finish is set
+    assert bs.steps.nil?
+    assert bs.done.nil?
+  end
+
   # Test what happens if the config file is not found
   # bnc#592584
   def test_broken_config
