@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Mon Jun 13 13:52:18 UTC 2011 - jreidinger@novell.com
+
+- fix security issue with mass loading in basesystem
+- 0.2.5
+
+-------------------------------------------------------------------
 Mon May 16 10:08:24 UTC 2011 - schubi@novell.com
 
 - changed licence to the correct name GPL-2.0
