@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Mon Jun 13 14:15:38 UTC 2011 - jreidinger@novell.com
+
+- fix potential security issue in mass loading 
+- 0.2.9
+
+-------------------------------------------------------------------
 Tue May 24 10:09:20 UTC 2011 - vgorobets@suse.de
 
 - added workaround for the users which UID < 1000, since a lot of netowrk users don't appear in roles ui 

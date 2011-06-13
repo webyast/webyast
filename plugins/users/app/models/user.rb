@@ -145,11 +145,14 @@ public
     load_attributes(attrs)
   end
 
+#XXX USE base model which already contain such functionality it automatic
+ATTR_ACCESSIBLE = [:cn, :uid, :uid_number, :gid_number, :grouplist, :groupname,
+                :home_directory, :login_shell, :user_password, :type ]
   # load a hash of attributes
   def load_attributes(attrs)
     return false if attrs.nil?
     attrs.each do |key, value|
-      if self.respond_to?(key.to_sym)
+      if ATTR_ACCESSIBLE.include?(key.to_sym)
         self.send("#{key}=".to_sym, value)
       end
     end
