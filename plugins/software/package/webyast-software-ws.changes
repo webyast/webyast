@@ -1,8 +1,13 @@
 -------------------------------------------------------------------
+Thu Jun 16 08:39:25 UTC 2011 - schubi@novell.com
+
+- accepting more than one EULA in a patch (bnc#698416)
+- 0.3.12 
+
+-------------------------------------------------------------------
 Tue Jun  7 08:34:55 UTC 2011 - vlewin@novell.com
 
 - Updated Czech translations (jsrain)
-- 0.3.12 
 
 -------------------------------------------------------------------
 Wed May 25 11:45:04 UTC 2011 - schubi@novell.com

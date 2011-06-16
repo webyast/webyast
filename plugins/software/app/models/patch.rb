@@ -194,32 +194,20 @@ class Patch < Resolvable
       error = ''
       dbusloop = PackageKit.dbusloop proxy, error
       dbusloop << proxy.bus
+      accept_eulas()
 
       proxy.on_signal("Error") do |u1,u2|
         ok = false
         dbusloop.quit
       end
+
       proxy.on_signal("EulaRequired") do |eula_id,package_id,vendor_name,license_text|
         #FIXME check if user already agree with license
-        if handle_eula(eula_id,license_text)
-          PackageKit.transact :AcceptEula, [eula_id],nil,nil
-          iface, dummy = PackageKit.connect
-          if iface.methods["UpdatePackages"] && # catch mocking
-             iface.methods["UpdatePackages"].params.size == 2 &&
-             iface.methods["UpdatePackages"].params[0][0] == "only_trusted"
-            #PackageKit of 11.2
-            iface.UpdatePackages(true,  #only_trusted
-                                 [pk_id])
-          else
-            #PackageKit older versions like SLES11
-            iface.UpdatePackages([pk_id])
-          end
-          dbusloop.quit
-        else
-          ok = false
-          dbusloop.quit
-        end
+        create_eula(eula_id,license_text)
+        ok = false
+        dbusloop.quit
       end
+
       if transaction_iface.methods["UpdatePackages"] && # catch mocking
          transaction_iface.methods["UpdatePackages"].params.size == 2 &&
          transaction_iface.methods["UpdatePackages"].params[0][0] == "only_trusted"
@@ -248,19 +236,40 @@ class Patch < Resolvable
       #unlocking PackageKit
       PackageKit.unlock
     end
+    remove_eulas() if ok 
     return ok
   end
 
-  def self.handle_eula(eula_id,license_text)
+  def self.create_eula(eula_id,license_text)
     accepted_path = File.join(ACCEPTED_LICENSES_DIR,eula_id)
     ret = File.exists?(accepted_path) #eula is in accepted dir
-    if ret
-      File.delete accepted_path if ret #require new confirmation every patch same as zypper
-    else
+    unless ret
       license_file = File.join(LICENSES_DIR,eula_id)
       File.open(license_file,"w") { |f| f.write license_text }
     end
     ret
   end
+
+  def self.accept_eulas()
+    dir = Dir.new(ACCEPTED_LICENSES_DIR)
+    dir.each  {|filename|
+       unless File.directory? filename
+         eula_id = File.basename filename
+         Rails.logger.info "accepting #{eula_id.inspect} ."
+         begin
+           PackageKit.transact :AcceptEula, [eula_id],nil,nil      
+         rescue Exception => e
+           Rails.logger.info "accepting eula #{eula_id} failed: #{e.inspect}"
+         end
+       end
+    }
+  end
+
+  def self.remove_eulas()
+    dir = Dir.new(ACCEPTED_LICENSES_DIR)
+    dir.each  {|filename|
+      File.delete(File.join(ACCEPTED_LICENSES_DIR,filename)) unless File.directory? filename
+    }
+  end    
 
 end
