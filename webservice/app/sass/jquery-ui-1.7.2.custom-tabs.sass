@@ -1,0 +1,48 @@
+/*
+ ** Source: jQuery tab CSS Framework
+@import _colors
+@import _borders
+
+$border_outset_base_color: $c_fieldset
+.fieldset-group
+  &.ui-corner-all
+    +no-round-corners
+    border: none
+  &.ui-tabs
+    margin: 1em
+    padding: 0px
+    color: $c_text
+    font: 1em "lsLucida Grande", "Trebuchet MS", Verdana, sans-serif
+  fieldset.ui-tabs-panel
+    +round-corners
+    +border-outset
+    margin: 0px
+    background-color: $c_fieldset
+  .ui-widget-header
+    border: none
+    background: transparent
+    margin: 0px 5px 0px
+  &.ui-tabs .ui-tabs-nav li a
+    padding-top: 0
+    padding-bottom: 0
+    border: 0 none transparent
+  .ui-tabs-nav
+    .ui-state-default, .ui-state-active
+      +round-corners-top
+      +border-outset
+      position: relative
+      bottom: -1
+      color: mix($c_fieldset, $c_text, 50%)
+    .ui-state-active
+      color: $c_text
+      border-bottom-style: none
+  &.ui-widget-content
+    .ui-tabs-nav
+      .ui-state-default, .ui-state-active
+        background-color: $c_fieldset
+        background-image: none
+        font-weight: bold
+    background: transparent
+  &.ui-tabs .ui-tabs-panel
+    padding-left: 8px
+    padding-right: 8px

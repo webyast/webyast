@@ -91,3 +91,14 @@ task :environment => :disable_initializer
 task :disable_initializer do
   ENV["DISABLE_INITIALIZER"] = 'true'
 end
+
+namespace :sass do
+  desc 'Updates stylesheets if necessary from their Sass templates.'
+  task :update do
+    require 'sass/plugin'
+    Sass::Plugin.options = { :template_location => "app/sass" }
+    Sass::Plugin.update_stylesheets
+    #run css minifier task after sass to css converter
+    Rake::Task['css:min'].invoke
+  end
+end

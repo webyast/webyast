@@ -50,7 +50,7 @@ def load_translations
       unless mo_files.empty?
         domainname = File.basename(mo_files.first,".mo")
         opt = {:locale_path => locale_path}
-        init_gettext(domainname, request.user_preferred_languages, opt)
+        init_gettext(domainname, opt)
       end
     end
   }

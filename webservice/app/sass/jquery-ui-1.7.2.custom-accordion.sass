@@ -1,0 +1,58 @@
+/*
+ ** Source: jQuery UI CSS Framework
+ ** Copyright (c) 2009 AUTHORS.txt (http://jqueryui.com/about)
+ ** Dual licensed under the MIT (MIT-LICENSE.txt) and GPL (GPL-LICENSE.txt) licenses.
+
+/*Accordion
+ *----------------------------------
+@import _colors
+@import _borders
+
+.ui-accordion
+  .ui-accordion-header, .ui-state-default
+  .wrapper
+    min-height: 1em
+
+.no-min-height
+  min-height: 0 !important
+
+.ui-accordion
+  .ui-accordion-li-fix
+    display: inline
+  .ui-accordion-header a
+    display: block
+    font-size: 1em
+    padding: 0
+
+.accordion.ui-accordion .ui-accordion-content
+  display: none
+  border: none
+  background: none
+  padding: 0px
+
+.ui-accordion
+  .ui-accordion-content-active
+    display: block
+  .status-icon
+    position: relative
+    top: -2px
+  .ui-corner-top
+    -moz-border-radius-topleft: 0px
+    -moz-border-radius-topright: 0px
+  .ui-state-active, .ui-widget-content .ui-state-active, .ui-state-default, .ui-widget-content .ui-state-default
+    background: none
+    border: none
+    color: $c_text
+  legend.ui-state-active, .ui-widget-content legend.ui-state-active, legend.ui-state-default, .ui-widget-content legend.ui-state-default
+    font-weight: bold
+    font-size: 1em
+  .ui-accordion-header .ui-icon
+    float: left
+    left: 0.5em
+    margin-top: 0px
+    position: inherit
+    padding-right: 5px
+  .ui-corner-all
+    +no-round-corners
+
+/* Reset regular jquery-ui styles inside accordion

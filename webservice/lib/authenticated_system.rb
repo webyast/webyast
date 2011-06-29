@@ -79,7 +79,12 @@ module AuthenticatedSystem
     # to access the requested action.  For example, a popup window might
     # simply close itself.
     def access_denied
-       request_http_basic_authentication 'YaST-Webservice Login' # RORSCAN_ITL
+       if request.format.html?
+         store_location
+         redirect_to :controller => "session", :action => "new", :hostid => "localhost" #redirect by default to locahost appliance (bnc#602807)
+       else
+         request_http_basic_authentication 'YaST-Webservice Login' # RORSCAN_ITL
+       end
     end
 
     # Store the URI of the current request in the session.
@@ -104,7 +109,7 @@ module AuthenticatedSystem
 
     # Called from #current_account.  First attempt to login by the account id stored in the session.
     def login_from_session
-      self.current_account = Account.find(session[:account_id]) if session[:account_id]
+      self.current_account = Account.find_by_id(session[:account_id]) if session[:account_id]
     end
 
     #used for stubbing in the testcases
@@ -128,9 +133,12 @@ module AuthenticatedSystem
 
     # Called from #current_account.  Finaly, attempt to login by an expiring token in the cookie.
     def login_from_cookie
-      account = cookies[:auth_token] && Account[cookies[:auth_token]]
+      account = cookies[:auth_token] && Account.find_by_remember_token(cookies[:auth_token])
       if account && account.remember_token?
-        cookies[:auth_token] = { :value => account.remember_token, :expires => account.remember_token_expires_at }
+	auth_token = { :value => account.remember_token, :expires => account.remember_token_expires_at }
+	# make cookie accessible via https only
+	auth_token[:secure] = true if ENV["RAILS_ENV"] == "production"
+        cookies[:auth_token] = auth_token
         self.current_account = account
       end
     end

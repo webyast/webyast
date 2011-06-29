@@ -128,44 +128,57 @@ class ApplicationController < ActionController::Base
     
   end
 
-  def init_gettext(domainname, preferred_languages, options = {})
+protected
+  def self.init_gettext(domainname, options = {})
     locale_path = options[:locale_path]
     unless locale_path
-      #If path of the translation has not been set we are trying to default translations
-      locale_path = ""
-      #searching in RAILS_ROOT
-      mo_files = Dir.glob(File.join(RAILS_ROOT, "**", "#{domainname}.mo"))
-      if mo_files.size > 0
-        locale_path = File.dirname(File.dirname(File.dirname(mo_files.first)))
-      else
-        # trying plugin directory in the git 
-        mo_files = Dir.glob(File.join(RAILS_ROOT, "..", "**", "#{domainname}.mo"))
-        locale_path = File.dirname(File.dirname(File.dirname(mo_files.first))) if mo_files.size > 0
-      end
-      unless locale_path.blank?
-        logger.info "Loading standard textdomain #{domainname} from #{locale_path}"
+      #If path of the translation has not been set we are trying to load
+      #vendor specific translations too
+      if Dir.glob(File.join("**", "public", "**", "#{domainname}.mo")).size > 0
+        vendor_text_path = "public/vendor/text/locale"
+        locale_path = File.join(RAILS_ROOT, vendor_text_path)
         opt = {:locale_path => locale_path}.merge(options)
+        logger.info "Loading textdomain #{domainname} from #{vendor_text_path}"
         ActionController::Base.init_gettext(domainname, opt)
       else
-        logger.error "Cannot find translation for #{domainname}"
+        #load default no vendor translation available
+        locale_path = ""
+        #searching in RAILS_ROOT
+        mo_files = Dir.glob(File.join(RAILS_ROOT, "**", "#{domainname}.mo"))
+        if mo_files.size > 0
+          locale_path = File.dirname(File.dirname(File.dirname(mo_files.first)))
+        else
+          # trying plugin directory in the git 
+          mo_files = Dir.glob(File.join(RAILS_ROOT, "..", "**", "#{domainname}.mo"))
+          locale_path = File.dirname(File.dirname(File.dirname(mo_files.first))) if mo_files.size > 0
+        end
+        unless locale_path.blank?
+          logger.info "Loading standard textdomain #{domainname} from #{locale_path}"
+          opt = {:locale_path => locale_path}.merge(options)
+          ActionController::Base.init_gettext(domainname, opt)
+        else
+          logger.error "Cannot find translation for #{domainname}"
+        end
       end
     else
       #load default if the path has been given
       logger.info "Loading textdomain #{domainname} from #{locale_path}"
       ActionController::Base.init_gettext(domainname, options)
     end
-    unless locale_path.blank?
-      languages = Dir[ File.join(locale_path, '*') ].collect{|v| File.basename(v)}  
-      I18n.supported_locales = languages
-      logger.info "Supported languages: #{languages.inspect}"
-      unless languages.empty?
-        language = (preferred_languages & languages).first unless (preferred_languages & languages).blank?
-        logger.info "Set language to #{language}"
-        set_locale language
-      end
-    end
   end
 
+
+
+  # Initialize GetText and Content-Type.
+  # You need to call this once a request from WWW browser.
+  # You can select the scope of the textdomain.
+  # 1. If you call init_gettext in ApplicationControler,
+  #    The textdomain apply whole your application.
+  # 2. If you call init_gettext in each controllers
+  #    (In this sample, blog_controller.rb is applicable)
+  #    The textdomains are applied to each controllers/views.
+  init_gettext "webyast-base-ui"  # textdomain, options(:charset, :content_type)
+  I18n.supported_locales = Dir[ File.join(RAILS_ROOT, 'locale/*') ].collect{|v| File.basename(v)}
 
 =begin
   # You can set callback methods. These methods are called on the each WWW request.
@@ -183,6 +196,27 @@ class ApplicationController < ActionController::Base
   ActionView::Helpers::ActiveRecordHelper::L10n.set_error_message_title(N_("An error is occured on %{record}"), N_("%{num} errors are occured on %{record}"))
   ActionView::Helpers::ActiveRecordHelper::L10n.set_error_message_explanation(N_("The error is:"), N_("The errors are:"))
 =end
+  # See ActionController::RequestForgeryProtection for details
+  # Uncomment the :secret if you're not using the cookie session store
+  protect_from_forgery # :secret => 'b1aeb693a1ee49ab70c6b6bf514963a3' RORSCAN_ITL
+
+  # See ActionController::Base for details
+  # Uncomment this to filter the contents of submitted sensitive data parameters
+  # from your application log (in this case, all fields with names like "password").
+  filter_parameter_logging :password # RORSCAN_ITL
+
+  # Translation mapping for ActiveResource validation errors
+  def error_mapping
+    # TODO: is it complete?
+    # ActiveRecord::Errors.default_error_messages defines more messages
+    # but it seems that they cannot be used with YaST model...
+    {
+      :blank => _("can't be blank"),
+      :inclusion => _("is out of allowed values"),
+      :empty => _("can't be empty"),
+      :invalid => _("is invalid")
+    }
+  end
 
 
 end

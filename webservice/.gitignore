@@ -1,8 +1,14 @@
 *~
 .#*
+._*
 db/*.sqlite3
 db/schema.rb
 log/*.log
 coverage
 package/www
 package/www.tar.bz2
+.sass-cache/
+public/stylesheets/jquery-ui-1.7.2.custom-accordion.css
+public/stylesheets/jquery-ui-1.7.2.custom-tabs.css
+public/stylesheets/style.css
+diff.diff

@@ -38,7 +38,7 @@ class GraphsController < ApplicationController
   before_filter :login_required
 
   def init_translation
-    init_gettext("webyast-status-ws", request.user_preferred_languages)
+    init_gettext("webyast-status-ws")
   end
 
   public
