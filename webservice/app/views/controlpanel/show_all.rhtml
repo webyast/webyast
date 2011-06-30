@@ -1,0 +1,47 @@
+<!--
+# Webyast Webclient framework
+#
+# Copyright (C) 2009, 2010 Novell, Inc.
+#   This library is free software; you can redistribute it and/or modify
+# it only under the terms of version 2.1 of the GNU Lesser General Public
+# License as published by the Free Software Foundation.
+#
+#   This library is distributed in the hope that it will be useful, but WITHOUT
+# ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
+# FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public License for more
+# details.
+#
+#   You should have received a copy of the GNU Lesser General Public
+# License along with this library; if not, write to the Free Software
+# Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA
+-->
+<h2><%= image_tag("/images/yast-config.png", :height=>"23", :width=>"23", :border=>"0") %> <%= _("Configuration") %></h2>
+
+<% @shortcut_groups.each do |name, shortcuts| %>
+  <% line_counter = 0 %>
+  <% shortcuts_counter = 0 %>
+  <div class="list-row highlight-bg">
+    <h3><%= name %></h3>
+    <% shortcuts.each do |data| %>
+      <% if line_counter*5 == shortcuts_counter %>
+        <% if line_counter > 0 %>
+          </div>
+        <% end %>
+        <% line_counter +=1 %>
+          <div>
+      <% end %>
+
+      <% link_to (data['url']) do %>
+        <%= image_tag(data['icon']) %>
+        <p><%= _(data['original-title']) %></p>
+      <% end %>
+
+      <% shortcuts_counter +=1 %>
+    <% end %>
+    <% if line_counter*5 != shortcuts_counter-1 %>
+    </div>
+    <% end %>
+
+  </div>
+<% end %>
+

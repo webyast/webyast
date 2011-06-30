@@ -1,9 +1,0 @@
-require File.join(File.dirname(__FILE__), 'config', 'rails_parent')
-require File.join(RailsParent.parent, 'lib', 'tasks', 'common')
-
-desc 'Deploy for development - create basic dirs and install config files.'
-task :deploy_local do |t|
-  FileUtils.mkdir_p "/etc/webyast"
-  FileUtils.mkdir_p "/var/lib/yastws/basesystem"
-  FileUtils.cp "package/basesystem.yml", "/etc/webyast"
-end

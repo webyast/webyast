@@ -1,0 +1,208 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<!--
+# Webyast Webclient framework
+#
+# Copyright (C) 2009, 2010 Novell, Inc.
+#   This library is free software; you can redistribute it and/or modify
+# it only under the terms of version 2.1 of the GNU Lesser General Public
+# License as published by the Free Software Foundation.
+#
+#   This library is distributed in the hope that it will be useful, but WITHOUT
+# ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
+# FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public License for more
+# details.
+#
+#   You should have received a copy of the GNU Lesser General Public
+# License along with this library; if not, write to the Free Software
+# Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA
+#-->
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <meta http-equiv="Content-type" content="text/html; charset=utf-8" />
+  <link rel="apple-touch-icon" href="images/webyast-iphone-icon.png" />
+  <!--[if IE]>
+    <%= stylesheet_link_tag "ie/ie_fixes" %>
+  <![endif]-->
+
+  <% if JSMIN == true %>
+    <%= stylesheet_link_tag "css-min", :title=>"default", :charset=>"utf-8" %>
+    <%= javascript_include_tag "min/base-min" %>
+    <%= yield :before_script %>
+    <%= yield :head %>
+  <% else %>
+    <%= stylesheet_link_tag "yast","grid","style","jquery.jqplot.css", "jquery-ui-1.7.2.custom.css", "jquery-ui-1.7.2.custom-accordion.css", "jquery-ui-1.7.2.custom-tabs.css", :title=>"default", :charset=>"utf-8" %>
+    <%= stylesheet_link_tag "new_inputs", "tipsy", "slidernav", "webyast-modal-dialog", "webyast-online-help", "webyast-controlpanel" %>
+    <%= stylesheet_link_tag "webyast-forms" %>
+    
+    <%= javascript_include_tag 	  "jquery-1.4.2",
+          "jquery.query", #FIXME write reason
+          "jquery.timers",
+          "jquery.ui.custom",
+          "jquery.validate",
+          "validation.js",
+          "jqbrowser-compressed", #our browser detection extension
+          "jquery.badbrowser", #original browser detection plugin
+          "yast.widgets",
+          "yast.helpers",
+          "digitalspaghetti.password",
+          "browser_fixes"
+    %>
+
+    <%= javascript_include_tag "jquerytimer", "jquerySessionTimeout", "jquery.blockUI", "jqueryDisableOnSubmit" %>
+    <%= javascript_include_tag "jquery.tipsy", "jquery-effects.min", "jquery.tinysort", "slidernav", "webyast-online-help", "webyast-modal-dialog", "jquery.activity", "notifier" %>
+    <%= javascript_include_tag "webyast-localstorage", "webyast-controlpanel" %> 
+
+    <%= yield :before_script %>
+      <%= javascript_include_tag "script", "application" #FIXME it can be problem if plugin also have own application specific js
+    %>
+    <%= yield :head %>
+  <% end %>
+
+  <title><%= _("WebYaST") %></title>
+
+  <script type="text/javascript">
+    $(document).ready(function() {
+      //$('div.overview a.controlpanel-shortcut').tipsy({gravity: 'n', delayIn: 800, opacity: 0.8 });
+      <% if session[:expires] !=nil && session[:expires].class == Time %>
+        // get current time from back end and check if time zone set to UTC (client) bnc#631763
+        var current_utc_time = "<%=Time.now.to_time.utc.to_time.to_i%>";
+        <% if session[:expires].utc? == false %>
+          //if time zone is not UTC convert it
+          var expiration_date = "<%= session[:expires].utc.to_time.to_i %>";
+          sessionTimeout(current_utc_time, expiration_date);
+        <% else %>
+          var expiration_date = "<%=session[:expires].to_time.to_i %>";
+          sessionTimeout(current_utc_time, expiration_date);
+        <% end %>
+      <%end%>
+    });
+  </script>
+</head>
+  <body id="shell">
+    <div id='browserWarning' style="display: none">
+      <%= ( _("You are using an unsupported browser. Please switch to %sFireFox 3.5 or better%s or %sInternet Explorer 8%s. Thanks! [%sclose%s]") %
+            ["<a href='http://getfirefox.com'>","</a>",
+             "<a href='http://www.microsoft.com/windows/downloads/ie/getitnow.mspx'>", "</a>",
+             "<a href='#' id='warningClose'>", "</a>"] ) %>
+    </div>
+    <noscript>
+      <div id="no_js_warning">
+        <%= ( _("JavaScript support is missing or disabled. Please turn JavaScript on or use a supported browser (%sFireFox 3.5%s or %sInternet Explorer 8%s).") %
+            ["<a href='http://getfirefox.com'>","</a>",
+             "<a href='http://www.microsoft.com/windows/downloads/ie/getitnow.mspx'>", "</a>"] ) %>
+      </div>
+    </noscript>
+
+    <div id="header">
+      <% appliance_label = ControlPanelConfig.read 'appliance_label', _("My Appliance") %>
+      <% appliance_label = appliance_label.strip %>
+      <% if appliance_label =~ /^_\(\"/ && appliance_label =~ /\"\)$/ %>
+        <% appliance_label = _(appliance_label[3..appliance_label.length-3]) %>
+      <% end %>
+
+      <%= link_to(image_tag("/images/webyast-logo.png", :width=>"130", :height=>"42", :alt =>"webyast"),"/" )%>
+      <% host = Host.find(session[:host]) rescue nil %>
+      <% user = session[:user] %>
+
+      <% if host.blank? || user.blank? %>
+        <span id="userbar">
+          <span class="userbar-icon" style=" text-align:center;">
+            <span class="language-icon">
+              <%= language_code(current_locale_name).upcase  %>
+            </span>
+            <%= link_to_remote(current_locale_name, :update =>"language_selection", :url => { :controller => :main, :action => :select_language} ) %>
+          </span>
+        </span>
+      <% else -%>
+        <span id="userbar">
+          <span id="userbar-container">
+            <span class="userbar-icon home-icon">
+              <%= link_to _("Home"), '/controlpanel'%>
+            </span>
+            <span class="userbar-icon user-icon">
+              <%=link_to(user, :controller => :users) %>
+            </span>
+            <span class="userbar-icon" style=" text-align:center;">
+              <span class="language-icon">
+                <%= language_code(current_locale_name).upcase  %>
+              </span>
+              <%= link_to_remote(current_locale_name, :update =>"language_selection", :url => { :controller => :main, :action => :select_language} ) %>
+            </span>
+            <span class="userbar-icon logout-icon">
+              <%= link_to _("Logout"), '/logout' %>
+            </span>
+
+            <form id="test" style="display:none;">
+              <div style="display:inline-block; width:100%; background-color:#c5c5c5; color:#222; text-align:center; font-weight:bold; font-size:16px;">Add new user</div>
+              <p>
+                <label style="display:inline-block; min-width:25%;">User:</label>
+                <input id="name" type="text" value="User" style="display:inline-block; width:70%; float:right"/>
+              </p>
+              <p>
+                <label style="display:inline-block; min-width:25%;">Password:</label>
+                <input id="name" type="text" value="********" style="display:inline-block; width:70%; float:right"/>
+              </p>
+              <p>
+                <input type="button" value="Submit" style="width:48%; display:inline-block; float:left;" />
+                <span style="width:2%; display:inline-block; float:left; text-align:center; color:#a0a0a0">&nbsp;</span>
+                <input type="button" value="Cancel" style="width:48%; display:inline-block; float:right;" />
+              </p>
+            </form>
+          </span>
+        </span>
+      <% end -%>
+      <h1><%= appliance_label %></h1>
+    </div>
+
+    <div id="timeoutMessage">
+      <%= link_to(image_tag("/images/webyast-logo.png", :width=>"130", :height=>"42", :style=>"margin-top:4px;", :alt =>"webyast"),"/" )%>
+      <%= _("You will be logged off in")-%><span id="counter"><!-- countdown place holder --></span><%= _("seconds due to session timeout. ")-%>
+    </div>
+
+    <div id="content">
+      <!-- here both flash and dynamic notifications should be added -->
+      <div id="flash-messages" class="alpha">
+        <div id="language_selection"></div>
+        <!-- show the flash messages -->
+
+        <% flash.each do |flash_type, message| %>
+          <%
+            flash_icon = case flash_type
+              when :error then "ui-icon-alert"
+              when :warning then "ui-icon-notice"
+              else "ui-icon-info"
+            end
+            flash_style = case flash_type
+              when :error then "ui-state-error"
+              when :warning then "ui-state-warning"
+              else "ui-state-highlight"
+            end
+          %>
+
+          <div class="flash-message <%= flash_style %> ui-corner-all">
+            <p><span class="ui-icon <%= flash_icon %>"></span><strong><%= message %></strong></p>
+          </div>
+          <% flash.delete flash_type -%>
+        <% end %>
+      </div> <!-- flash messages -->
+
+      <div id="progress" style="display: none;">
+        <%= image_tag("/images/working.gif", :class => "small-working-icon" ) %><%=_("...Wait...")%>
+      </div>
+
+
+
+      <!-- debug info session tieout -->
+      <!-- <fieldset class="example"><div class="timer_logpanel">dd</div><div class="time_left"></div></fieldset> -->
+      <%= yield %>
+    </div>
+
+    <div id="footer" style="clear:both; overflow:hidden;">
+      <div class="copy">&copy; 2009-2011 Novell, Inc.</div>
+    </div>
+
+  </body>
+</html>
+

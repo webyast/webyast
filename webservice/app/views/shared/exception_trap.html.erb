@@ -1,0 +1,46 @@
+<%#
+#--
+# Webyast Webclient framework
+#
+# Copyright (C) 2009, 2010 Novell, Inc. 
+#   This library is free software; you can redistribute it and/or modify
+# it only under the terms of version 2.1 of the GNU Lesser General Public
+# License as published by the Free Software Foundation. 
+#
+#   This library is distributed in the hope that it will be useful, but WITHOUT
+# ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
+# FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public License for more 
+# details. 
+#
+#   You should have received a copy of the GNU Lesser General Public
+# License along with this library; if not, write to the Free Software 
+# Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA
+#++
+%>
+
+<h1><%= _("This is embarrasing....") %></h1>
+
+<p><%= _("We are sorry, but there are some problems.") %></p>
+
+<h3><%= _("Problem:") %></h3>
+
+<p><pre>
+  <%= h error.message %>
+</pre></p>
+
+<p><span class="bug-icon"></span><%= _("Please Report a bug so we can fix the problem!.") %><a target="_blank" href="<%= controller.class.bug_url %>"><%= _("(report link)") %></a></p>
+<p><%= _("Don't forget to include the bug details.") %></p>
+
+  <%
+  backtrace = _("No information available")
+  backtrace = error.backtrace.join("\n") unless (error.nil? || error.backtrace.nil? || error.backtrace.blank?)
+  %>
+
+<p><a href="#" id="details-link">Show details...</a><%= clippy("message: #{error.message}\n backtrace :\n #{backtrace}") %><p>
+
+<pre id="backtrace" style="display: none">
+<%= h backtrace  %>
+</pre>
+<script type="text/javascript">
+  $('#details-link').click(function() { $('#backtrace').hide();$('#backtrace').show();return false; });
+</script>

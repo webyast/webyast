@@ -30,10 +30,10 @@
 #
 #
 class SessionsController < ApplicationController
+  layout 'main'
 
-  # render new.rhtml
-  def new
-    redirect_back_or_default('/')
+  def index
+    redirect_to "/"
   end
 
   def show
@@ -41,13 +41,25 @@ class SessionsController < ApplicationController
     @ret = Hash.new
     @ret[:hash] = Hash.new
     @ret[:hash][:login] = 'nobody'
+    respond_to do |format|
+      format.html { redirect_to "/" }
+      format.json {}
+      format.xml {}
+    end
+  end
+
+  #
+  # Start new session
+  #  render login screen
+  #
+  def new
+    # Set @host to display info at login screen
+    @host = "localhost"
+
+    # render login screen, asking for username/password
   end
   
   def create
-    #FIXME make rendering more clear
-    #FIXME proper document this security sensitive part
-    #FIXME better structuralize this method
-    #FIXME document all possible parameters
     #FIXME XXX tom: also reset_session here to fix possible session fixation attack etc.
     if params["hash"].is_a? Hash #FIXME report that "hash" value is not hash
       #checking if the session description is hosted in a own Hash
@@ -55,6 +67,16 @@ class SessionsController < ApplicationController
          params[name] = value
       end
     end
+    if request.format.html?
+      if params[:login].blank?
+        flash[:warning] = _("No login specified")
+        redirect_to :action => "new"
+      elsif params[:password].blank?
+        flash[:warning] = _("No password specified")
+        redirect_to :action => "new", :login => params[:login]
+      else
+    end
+
     if params.has_key?(:login) && params[:password]
        ip = params[:ip] || request.remote_ip
        self.current_account = Account.authenticate(params[:login], params[:password], ip)
@@ -71,12 +93,30 @@ class SessionsController < ApplicationController
 
       @cmd_ret["login"] = "granted"
       @cmd_ret["auth_token"] = { :value => self.current_account.remember_token , :expires => self.current_account.remember_token_expires_at }
+      logger.info "Login success."
+      respond_to do |format|
+        format.html { redirect_back_or_default("/") }
+        format.json {}
+        format.xml {}
+      end
+      
     else
       logger.warn "Login failed from ip #{request.remote_ip} with user #{params[:login] ||""}"
       @cmd_ret["login"] = "denied"
       BruteForceProtection.instance.fail_attempt params[:login]
+      respond_to do |format|
+        format.html { 
+          flash[:warning] = _("Login incorrect. Check your username and password.")
+          redirect_to :action => "new"
+        }
+        format.json {}
+        format.xml {}
+      end
     end
+
   end
+
+
 
   def destroy
     self.current_account.forget_me if logged_in?
@@ -84,5 +124,21 @@ class SessionsController < ApplicationController
     reset_session # RORSCAN_ITL
     @cmd_ret = Hash.new
     @cmd_ret["logout"] = "Goodbye!"
+    respond_to do |format|
+      format.html { 
+        # reset_session clears all flash messages, make a backup before the call
+        flash_backup = flash
+
+        reset_session # RORSCAN_ITL
+
+        # restore the values from backup
+        flash.replace(flash_backup)
+
+        flash[:notice] = _("You have been logged out.") unless flash[:notice]
+        redirect_to :controller => "session", :action => "new"
+      }
+      format.json {}
+      format.xml {}
+    end
   end
 end

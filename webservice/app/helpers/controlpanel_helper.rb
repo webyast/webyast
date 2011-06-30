@@ -1,0 +1,2 @@
+module ControlpanelHelper
+end

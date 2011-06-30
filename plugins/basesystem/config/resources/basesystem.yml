@@ -1,5 +1,0 @@
-
-interface: org.opensuse.yast.modules.basesystem
-controller: basesystem
-singular: true
-
