@@ -1,0 +1,9 @@
+main:
+  icon: '/icons/yast-ntp-client.png'
+  url: /time
+  groups: [ System ]
+  tags: [ time, clock, timezone, ntp]
+  title: _("Time")
+  description: _("Set the clock")
+  resources: [ time ]
+  read_permissions: [ org.opensuse.yast.modules.yapi.time.read ]

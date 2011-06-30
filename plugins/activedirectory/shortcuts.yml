@@ -1,0 +1,8 @@
+main:
+  icon: '../icons/yast-samba-client.png'
+  url: /activedirectory
+  groups: [ Network ]
+  tags: [ AD, Samba, Active Directory ]
+  title: _("Active Directory")
+  description: _("Configure the connection to Active Directory")
+  read_permissions: [ org.opensuse.yast.modules.yapi.activedirectory.read ]

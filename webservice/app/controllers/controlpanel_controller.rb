@@ -137,8 +137,8 @@ class ControlpanelController < ApplicationController
   # reads shortcuts of a specific plugin directory
   def plugin_shortcuts(plugin)
     permissions = {}
-    ResourceCache.instance.permissions.each do |p|
-      permissions[p.id] = p.granted
+    Permission.find(:all).each do |p|
+      permissions[p[:id]] = p[:granted]
     end
     shortcuts = {}
     shortcuts_fn = File.join(plugin.directory, 'shortcuts.yml')

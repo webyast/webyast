@@ -1,0 +1,9 @@
+main:
+  icon: '/icons/yast-system-user.png'
+  url: /administrator
+  groups: [ Accounts ]
+  tags: [ users, administrator, security]
+  title:  _("Administrator Settings")
+  description: _("Manage system administrator")
+  read_permissions: [ org.opensuse.yast.modules.yapi.administrator.read ]
+

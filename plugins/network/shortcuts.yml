@@ -1,0 +1,8 @@
+main:
+  icon: '/icons/yast-network.png'
+  url: /network
+  groups: [ Network ]
+  tags: [ LAN, NIC, TCP/IP, Internet, DNS, hostname, nameserver, route ]
+  title: _("Network")
+  description: _("Manage network devices")
+  read_permissions: [ org.opensuse.yast.modules.yapi.network.read ]

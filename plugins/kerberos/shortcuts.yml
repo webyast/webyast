@@ -1,0 +1,8 @@
+main:
+  icon: '/icons/yast-kerberos.png'
+  url: /kerberos
+  groups: [ Network ]
+  tags: [ kerberos ]
+  title: _("Kerberos")
+  description: _("Configure Kerberos client")
+  read_permissions: [ org.opensuse.yast.modules.yapi.kerberos.read ]

@@ -1,0 +1,11 @@
+main:
+  icon: '/icons/monitoring.png'
+  url: /status
+  groups: [ System ]
+  main: [true]
+  tags: [ access]
+  title: _("Status")
+  description: _("Show system status")
+  resources: [ status ]
+  read_permissions: [ org.opensuse.yast.system.status.read ]
+

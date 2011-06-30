@@ -204,3 +204,15 @@ unless ENV['RAILS_ENV'] == 'test'
     delay_job_mutex.unlock #start delay job worker
   end
 end
+
+# Enforce https and pass cookie only via https
+ActionController::Base.session_options[:session_secure] = true if ENV['RAILS_ENV'] == 'production'
+
+# save loaded plugins, which are used to scan shortcuts laters
+module YaST
+end
+YaST::LOADED_PLUGINS = init.loaded_plugins
+
+# look for all existing loaded plugin's public/ directories
+plugin_assets = init.loaded_plugins.map { |plugin| File.join(plugin.directory, 'public') }.reject { |dir| not (File.directory?(dir) and File.exist?(dir)) }
+init.configuration.middleware.use YaST::Rack::StaticOverlay, :roots => plugin_assets

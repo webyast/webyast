@@ -1,0 +1,8 @@
+main:
+  icon: '/icons/yast-ldap.png'
+  url: /ldap
+  groups: [ Network ]
+  tags: [ ldap ]
+  title: _("LDAP")
+  description: _("Configure LDAP client")
+  read_permissions: [ org.opensuse.yast.modules.yapi.ldap.read ]
