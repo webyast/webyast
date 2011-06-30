@@ -56,7 +56,7 @@ class Basesystem < BaseModel::Base
   #
   # Note:: See first argument, which is additional to ordinary find method
   def self.find(session,*args)
-    bs = load_from_file
+    bs = self.load_from_file
     if bs.steps.empty? or bs.finish
       session[:wizard_current] = FINISH_STEP
     else
@@ -155,7 +155,7 @@ class Basesystem < BaseModel::Base
     @session[:wizard_current]
   end
 
-  def load_from_file
+  def self.load_from_file
     YastCache.fetch("basesystem:find") {
       base = Basesystem.new
       basesystem_conf	= BASESYSTEM_CONF

@@ -42,6 +42,12 @@ delay_job_mutex = Mutex::new
 
 
 init = Rails::Initializer.run do |config|
+
+  #Set JSMIN constant to true/false 
+  #true: load minified javascript files for speed up
+  #false: load source javascript files for debugging
+  JSMIN = true
+
   #just for test
   #ENV['DISABLE_INITIALIZER_FROM_RAKE'] = 'false'
   

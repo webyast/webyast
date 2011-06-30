@@ -129,6 +129,21 @@ class ApplicationController < ActionController::Base
   end
 
 protected
+
+  def ensure_login
+    unless logged_in?
+      flash[:notice] = _("Please login to continue")
+      redirect_to :controller => "session", :action => "new", :hostid => "localhost" #redirect by default to locahost appliance (bnc#602807)
+    end
+  end
+
+  def ensure_logout
+    if logged_in?
+      flash[:notice] = _("You must logout before you can login")
+      redirect_to root_url
+    end
+  end
+
   def self.init_gettext(domainname, options = {})
     locale_path = options[:locale_path]
     unless locale_path
@@ -177,7 +192,7 @@ protected
   # 2. If you call init_gettext in each controllers
   #    (In this sample, blog_controller.rb is applicable)
   #    The textdomains are applied to each controllers/views.
-  init_gettext "webyast-base-ui"  # textdomain, options(:charset, :content_type)
+  init_gettext "webyast-base"  # textdomain, options(:charset, :content_type)
   I18n.supported_locales = Dir[ File.join(RAILS_ROOT, 'locale/*') ].collect{|v| File.basename(v)}
 
 =begin

@@ -86,7 +86,7 @@ class SessionsController < ApplicationController
       @cmd_ret["login"] = "blocked"
       @cmd_ret["remain"] = BruteForceProtection.instance.last_failed(params[:login]) + BruteForceProtection::BAN_TIMEOUT
     elsif logged_in?
-      if params[:remember_me]
+      if params[:remember_me] || request.format.html?
         current_account.remember_me unless current_account.remember_token?
         cookies[:auth_token] = { :value => self.current_account.remember_token , :expires => self.current_account.remember_token_expires_at }
       end
@@ -103,6 +103,7 @@ class SessionsController < ApplicationController
     else
       logger.warn "Login failed from ip #{request.remote_ip} with user #{params[:login] ||""}"
       @cmd_ret["login"] = "denied"
+      session[:user] = nil
       BruteForceProtection.instance.fail_attempt params[:login]
       respond_to do |format|
         format.html { 
