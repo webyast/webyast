@@ -1,0 +1,223 @@
+/*
+#--
+# Webyast Webservice framework
+#
+# Copyright (C) 2009, 2010 Novell, Inc.
+#   This library is free software; you can redistribute it and/or modify
+# it only under the terms of version 2.1 of the GNU Lesser General Public
+# License as published by the Free Software Foundation.
+#
+#   This library is distributed in the hope that it will be useful, but WITHOUT
+# ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
+# FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public License for more
+# details.
+#
+#   You should have received a copy of the GNU Lesser General Public
+# License along with this library; if not, write to the Free Software
+# Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA
+#++
+*/
+
+#parent {
+  display: none;
+  top:0; left:0;
+  position: absolute;
+  width:100%;
+  margin: auto; /* Div centered */
+  min-height: 100%; /* min height for modern browser */
+  height:auto !important; /* Important rule for modern browser */
+  height:100%; /* min height for IE */
+  overflow: hidden !important; /* hide FF scroll bar */
+  z-index:2000;
+}
+
+#shade {
+  width:100%;
+  margin: auto; /* Div centered */
+  min-height: 100%; /* min height for modern browser */
+  height:auto !important; /* Important rule for modern browser */
+  height:100%; /* min height for IE */
+  overflow: hidden !important; /* hide FF scroll bar */
+
+  -moz-box-shadow: inset 0px 0px 300px #111;
+  -webkit-box-shadow: inset 0px 0px 300px #111;
+
+	background-color:#eee;
+
+  opacity:0.5;
+  -moz-opacity:0.5;
+
+  border: medium none;
+  cursor: wait;
+
+  left: 0;
+  top: 0;
+
+  margin: 0;
+  padding: 0;
+  position: fixed;
+  z-index: 1000;
+}
+
+#wait {
+  border-radius: 3px;
+  -moz-border-radius: 3px;
+  -khtml-border-radius: 3px;
+  -webkit-border-radius:3px;
+  position: relative;
+  background-color: #fff;
+  border: 5px solid grey;
+  font-size:20px;
+  color:#1C94C4;
+  margin-left: auto;
+  margin-right: auto;
+  width:auto;
+  padding:10px;
+  text-align:center;
+  z-index:3000;
+}
+
+#updates_panel { margin:10px 16px; padding:0px; float:left; clear:both; }
+
+#updates_panel button[type="submit"] {
+  display:block;
+  float:left;
+  border:1px solid #999;
+  text-decoration:none;
+  font-weight:bold;
+
+  cursor:pointer;
+
+  color:#444;
+  background:url('/images/gradientx40.png') repeat-x #fff;
+  text-shadow: 0 1px 0 rgba(255,255,255,0.7);
+}
+
+#updates_panel button[type=submit]{
+  width:auto;
+  overflow:visible;
+  padding:3px 10px 1px 7px; /* IE6 */
+}
+
+#updates_panel button[type=submit] {
+  padding:6px 10px 5px 7px; /* Firefox */
+  line-height:18px; /* Safari */
+  vertical-align:bottom;
+}
+
+*:first-child+html button[type]{
+  padding:3px 10px 1px 7px; /* IE7 */
+}
+
+#updates_panel button img, #updates_panel a img{
+  margin:0px 5px 0px 0px !important;
+  padding:0;
+  vertical-align:inherit;
+  border:none;
+  width:18px;
+  height:18px;
+}
+
+#updates_panel button.left {
+  border-right-width:1px;
+  border-radius: 2px 0px 0px 2px;
+  -khtml-border-radius: 2px 0px 0px 2px;
+  -moz-border-radius: 2px 0px 0px 2px;
+  -webkit-border-radius: 2px 0px 0px 2px;
+  border-left:1px solid #a0a0a0;
+}
+
+#updates_panel button.left:hover, #updates_panel button.middle:hover, #updates_panel button.right:hover{
+  background: url("/images/gradientx40.png") #eee;
+}
+
+#updates_panel button.middle {
+  border-right:1px solid #a0a0a0;
+  border-left:0px;
+
+  border-right-width:1px;
+  border-radius: 0px;
+  -khtml-border-radius: 0px;
+  -moz-border-radius: 0px;
+  -webkit-border-radius: 0px;
+}
+
+#updates_panel button.right {
+  border-left:0px;
+  border-right:1px solid #a0a0a0;
+
+  border-radius: 0px 2px 2px 0px;
+  -khtml-border-radius: 0px 2px 2px 0px;
+  -moz-border-radius: 0px 2px 2px 0px;
+  -webkit-border-radius: 0px 2px 2px 0px;
+}
+
+#updates_panel button.active {
+  color:#222;
+  box-shadow: 0 0 3px #666 inset;
+  -moz-box-shadow: 0px 0px 30px #a0a0a0 inset, 0px 0px 2px #333 inset;
+  -webkit-box-shadow: 0px 0px 30px #a0a0a0 inset, 0px 0px 2px #333 inset;    
+/*  text-shadow: 0px 1px 0 #eee!important;*/
+}
+
+.patches { width:100%; }
+.patches a {border:0px;}
+
+#patchesd { background-color:#fff; }
+#patchesd h3 { font-size:20px; line-height:20px; vertical-align:middle; text-align:center; margin:10px; padding:2px; color:#aaaaaa; }
+
+table.patches th { font-size:13px; padding:0 3px; }
+table.patches td img { vertical-align:middle; }
+table.patches th.checkbox { border-right:1px solid #ccc; }
+table.patches td.checkbox {
+  border-right:1px solid #ccc;
+  background-color:#fafafa;
+  text-align:center;
+}
+
+table.patches .kind { text-align:center; }
+
+table.patches th span {
+  display:inline-block;
+  width:17px;
+  height:17px;
+  padding:1px;
+  text-align:center;
+  line-height:16px;
+}
+
+th.first input[type="checkbox"] { margin:2px 0 0 2px;  display:inline-block; border:none; background-color:#eee; }
+
+table.patches {
+  font-size:12px;
+  color:#555;
+  text-align:left;
+  margin:0px;
+  border-spacing: 0;
+  border-collapse: collapse;
+  background-color: white;
+}
+
+table.patches td {
+  margin: 0;
+  padding: 0px 2px;
+  border: 1px solid #f0f0f0;
+  border-width:0px 0px 1px 0px;
+}
+
+td.icon { width:18px; }
+
+#patches-form th {
+  text-shadow: 0 1px 0 #fff;
+}
+
+#patches-form .webyast_fieldset { padding:0px; background-color:#fff; }
+
+
+td.install { text-align:center; }
+td.install img.icon { margin:0px auto; }
+td.install img.icon:hover { background-color:#f5f5f5; border-radius:100%; border:1px solid #888; }
+
+#system_uptodate { padding:10px 0px; }
+#system_uptodate img { height:30px; width:30px; margin:0px 10px 0px 4px; vertical-align:middle; }
+

@@ -74,7 +74,7 @@ class SessionsController < ApplicationController
       elsif params[:password].blank?
         flash[:warning] = _("No password specified")
         redirect_to :action => "new", :login => params[:login]
-      else
+      end
     end
 
     if params.has_key?(:login) && params[:password]
@@ -115,8 +115,6 @@ class SessionsController < ApplicationController
     end
 
   end
-
-
 
   def destroy
     self.current_account.forget_me if logged_in?

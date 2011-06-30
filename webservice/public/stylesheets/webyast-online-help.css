@@ -1,0 +1,131 @@
+/*#--
+ *# Webyast Webservice framework
+ *#
+ *# Copyright (C) 2009, 2010 Novell, Inc.
+ *#   This library is free software; you can redistribute it and/or modify
+ *# it only under the terms of version 2.1 of the GNU Lesser General Public
+ *# License as published by the Free Software Foundation.
+ *#
+ *#   This library is distributed in the hope that it will be useful, but WITHOUT
+ *# ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
+ *# FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public License for more
+ *# details.
+ *#
+ *#   You should have received a copy of the GNU Lesser General Public
+ *# License along with this library; if not, write to the Free Software
+ *# Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA
+ *#++ */
+
+#questionMark {
+  float:right;
+  font-size:20px;
+  padding:1px;
+  color:#fff;
+  background-color:#666;
+  font-family:'Arial';
+  font-weight:bold;
+  vertical-align:middle;
+  display:inline-block;
+  height:22px;
+  width:22px;
+  text-align:center;
+  -webkit-border-radius:100%;
+  -webkit-border-radius:22px;
+  -moz-border-radius:100%;
+
+  float:right;
+  margin:15px 0px 0px 0px;
+
+  background: -moz-linear-gradient(center top , #aaa 10%, #888 30%, #777 51%, #666 100%) repeat scroll 0 0 transparent;
+  background: -webkit-gradient(linear, left top, left bottom, color-stop(0.10, #aaa), color-stop(0.30, #888), color-stop(0.51, #777), color-stop(1.00, #666));
+  text-shadow: 0 -1px 0 #222;
+}
+
+#questionMark:active {
+  background: -moz-linear-gradient(center top , #75C3FF 10%, #1E90FF 30%, #1E90FF 50%, #0C64A8 100%) repeat scroll 0 0 transparent!important;
+  background: -webkit-gradient(linear, left top, left bottom, color-stop(0.10, #75C3FF), color-stop(0.30, #1E90FF), color-stop(0.51, #1E90FF), color-stop(1.00, #0C64A8))!important;
+}
+
+#questionMark:hover {
+  cursor:pointer;
+  background: -moz-linear-gradient(center top , #bbb 10%, #aaa 30%, #999 51%,  #888 100%) repeat scroll 0 0 transparent;
+  background: -webkit-gradient(linear, left top, left bottom, color-stop(0.10, #bbb), color-stop(0.30, #aaa), color-stop(0.51, #999), color-stop(1.00, #888));
+}
+
+#onlineHelpContent {
+  margin-left:4px;
+  width:40%;
+  top:22%;
+  left:30%;
+
+  font-size:12px;
+  font-weight:normal;
+  line-height:14px;
+  text-align:left;
+  font-family:'Arial';
+
+  position:absolute;
+  display:block;
+  z-index:1000;
+
+  -moz-box-shadow: 0 0 10px #474747;
+  -webkit-box-shadow: 0 0 10px #474747;
+   box-shadow: 0 0 10px #474747;
+
+  -moz-border-radius:4px;
+  -webkit-border-radius:4px;
+
+  background-color:#fafafa;
+  background: -moz-linear-gradient(90deg, #fff, #f2f2f2) repeat scroll 0 0 transparent;
+  background: -webkit-gradient(linear, left top, left bottom, from(#fff), to(#f2f2f2));
+  border: 2px solid #666;
+}
+
+#onlineHelpLoading {
+  font-size:18px;
+  line-height:18px;
+  text-align:center;
+  font-family:'Arial';
+  background: -moz-linear-gradient(90deg, #fff, #f2f2f2) repeat scroll 0 0 transparent;
+  background: -webkit-gradient(linear, left top, left bottom, from(#fff), to(#f2f2f2));
+  padding: 15px;
+  margin:10px;
+  background-color:#fff;
+  border:0px solid #eee;
+  display:block;
+}
+
+#onlineHelpLoading span { text-decoration: blink; color:#474747; font-weight:bold; font-size:20px; vertical-align:middle; text-align:center; }
+#onlineHelpSpinner { height:32px; width:32px; vertical-align:middle; margin-right:5px; }
+#onlineHelpContent div.sect1, #onlineHelpContent div.sect2 { margin: 5px; padding: 20px; }
+#onlineHelpContent h2.title { font-size:16px; line-height:16px; }
+#onlineHelpContent tr.head th { background: none; }
+#onlineHelpContent div.note th:before, div.tip th:before { content:"[Note] "; color:#0C64A8; }
+#onlineHelpContent div.warning th:before, div.caution th:before, div.caution th.important { content:"[Warning] "; color:#900000; }
+
+#onlineHelpModalShade {
+  background: -moz-linear-gradient(270deg, #ccc, #ddd) repeat scroll 0 0 transparent;
+  background: -webkit-gradient(linear, left top, left bottom, from(#ccc), to(#ddd));
+  position:absolute;
+  display:block;
+  width:100%;
+  height:100%;
+  opacity:0.6;
+  -moz-opacity:0.6;
+  top:0; left:0;
+  z-index:100;
+}
+
+#closeOnlineHelpDialog { position: absolute; width:24px; height:24px; top: -12px; right: -12px; }
+#onlineHelpContent div.note, #onlineHelpContent div.tip { border: 1px solid #C2E0E6; background-color:#C2E0E6; }
+#onlineHelpContent .warning, #onlineHelpContent .caution, #onlineHelpContent .important { border: 1px solid #FFC0C0; background-color:#FFC0C0; }
+#onlineHelpContent div.important, #onlineHelpContent div.warning, #onlineHelpContent div.tip, #onlineHelpContent div.caution, #onlineHelpContent div.note {
+  overflow: auto;
+  margin: 1em 0;
+  width: 95%;
+  -moz-border-radius:4px;
+  -webkit-border-radius:4px;
+  padding:2px 5px;
+  line-height:12px;
+}
+

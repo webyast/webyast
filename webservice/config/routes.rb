@@ -19,14 +19,19 @@
 # route sessions statically, it is a singleton controller
 ActionController::Routing::Routes.draw do |map|
   map.resource :session
+  map.resources :notifier
+  map.resources :onlinehelp
   
   #resources is not restful as it allows only read only access. It is more likely inspection
   map.connect 'resources/:id.:format',  :controller => 'resources', :action => 'show', :requirements => { :id => /[-\w]+/ }
-  map.all_resources 'resources.:format',  :controller => 'resources', :action => 'index'
-  map.root :all_resources
+  map.connect 'resources.:format',  :controller => 'resources', :action => 'index'
   map.resource :permissions
   map.resource :vendor_settings
-  
+
+  map.connect '/validate_uri', :controller => 'hosts', :action => 'validate_uri'
+  map.root :controller => "main"
+ 
+  map.login '/login.html', :controller => 'sessions', :action => 'new'
   # login uses POST for both
   map.login "/login.:format", :controller => 'sessions', :action => 'create'
   map.logout "/logout.:format", :controller => 'sessions', :action => 'destroy'
@@ -37,4 +42,9 @@ ActionController::Routing::Routes.draw do |map|
   
   #FIXME: this is a workaround only
   map.notifier "/notifiers/status.:format",  :controller => "notifier", :action => "status"
+
+  # Install the default routes as the lowest priority.
+  map.connect ':controller/:action/:id'
+  map.connect ':controller/:action/:id.:format', :requirements => {:id => /[^\/]*(?=\.html|\.js)|.+/ }
+
 end

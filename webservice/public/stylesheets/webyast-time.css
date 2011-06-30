@@ -1,0 +1,27 @@
+/*#--
+ *# Webyast Webservice framework
+ *#
+ *# Copyright (C) 2009, 2010 Novell, Inc.
+ *#   This library is free software; you can redistribute it and/or modify
+ *# it only under the terms of version 2.1 of the GNU Lesser General Public
+ *# License as published by the Free Software Foundation.
+ *#
+ *#   This library is distributed in the hope that it will be useful, but WITHOUT
+ *# ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
+ *# FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public License for more
+ *# details.
+ *#
+ *#   You should have received a copy of the GNU Lesser General Public
+ *# License along with this library; if not, write to the Free Software
+ *# Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA
+ *#++ */
+
+#utc { vertical-align: middle; padding:0; margin:0;}
+
+/* Fix for bug 601309 - Radio buttons and checkboxes look ugly in IE8  */
+input[type="radio"], input[type="checkbox"] { border: none; background: none; vertical-align: bottom; }
+
+.time_filedset { border: 1px solid #ddd;  border-radius: 0px; padding:5px 7px; margin-bottom:10px;  }
+.time_filedset legend { font-size:12px; background-color: #FAFAFA; padding:2px 5px 2px 0px; color:#666; vertical-align:middle;  text-shadow: 1px 1px #FDFDFD; }
+.time_filedset label { width: 190px!important; }
+
