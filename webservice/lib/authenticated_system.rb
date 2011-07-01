@@ -33,6 +33,8 @@ module AuthenticatedSystem
     # Store the given account id in the session.
     def current_account=(new_account)
       session[:account_id] = new_account ? new_account.id : nil
+      session[:user] = new_account ? new_account.login : nil
+      session[:expires] = new_account ? new_account.remember_token_expires_at : nil
       @current_account = new_account || false
     end
 

@@ -24,6 +24,7 @@ require 'gettext_rails'
 require 'dbus'
 
 class ApplicationController < ActionController::Base
+  layout 'main'  
 
   #render only pure text to simple show it on frontend
   rescue_from Exception, :with => :report_exception

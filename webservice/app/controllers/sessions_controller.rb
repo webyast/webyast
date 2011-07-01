@@ -103,7 +103,6 @@ class SessionsController < ApplicationController
     else
       logger.warn "Login failed from ip #{request.remote_ip} with user #{params[:login] ||""}"
       @cmd_ret["login"] = "denied"
-      session[:user] = nil
       BruteForceProtection.instance.fail_attempt params[:login]
       respond_to do |format|
         format.html { 

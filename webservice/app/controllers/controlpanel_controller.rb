@@ -103,11 +103,12 @@ class ControlpanelController < ApplicationController
     # read shortcuts from plugins
     #logger.debug Rails::Plugin::Loader.all_plugins.inspect
     #logger.debug Rails.configuration.load_paths
+    permissions = Permission.find(:all, {:user_id => session[:user]})
     YaST::LOADED_PLUGINS.each do |plugin|
       logger.debug "looking into #{plugin.directory}"
       #Skip obsolete permissions module
       #unless plugin.name == "permissions"
-      shortcuts.merge!(plugin_shortcuts(plugin))
+      shortcuts.merge!(plugin_shortcuts(plugin, permissions))
       #end
     end
     #logger.debug shortcuts.inspect
@@ -135,9 +136,9 @@ class ControlpanelController < ApplicationController
   end 
 
   # reads shortcuts of a specific plugin directory
-  def plugin_shortcuts(plugin)
+  def plugin_shortcuts(plugin, all_permissions)
     permissions = {}
-    Permission.find(:all).each do |p|
+    all_permissions.each do |p|
       permissions[p[:id]] = p[:granted]
     end
     shortcuts = {}
