@@ -1,9 +1,9 @@
 all:
-	(cd webservice; rake db:migrate)
+	(cd webyast; rake db:migrate)
 
 install_test:
 	grep webyast_guest /etc/passwd || yast2 users add username=webyast_guest password=test no-home; 
-	cp webservice/package/org.opensuse.yast.permissions.policy /usr/share/PolicyKit/policy/ ; \
+	cp webyast/package/org.opensuse.yast.permissions.policy /usr/share/PolicyKit/policy/ ; \
         /usr/bin/polkit-auth --user webyast_guest --grant org.freedesktop.packagekit.system-update ; \
         /usr/bin/polkit-auth --user webyast_guest --grant org.freedesktop.policykit.read ; \
         /usr/bin/polkit-auth --user webyast_guest --grant org.opensuse.yast.scr.read ; \
@@ -20,17 +20,17 @@ install_test:
         /usr/bin/polkit-auth --user webyast_guest --grant org.opensuse.yast.module-manager.import ; \
         /usr/bin/polkit-auth --user webyast_guest --grant org.opensuse.yast.modules.yapi.time.read ; \
         /usr/bin/polkit-auth --user webyast_guest --grant org.opensuse.yast.modules.yapi.time.write ; \
-        ruby webservice/package/grantwebyastrights --user webyast_guest --action grant ; \
+        ruby webyast/package/grantwebyastrights --user webyast_guest --action grant ; \
         echo "NOTE:"; \
         echo "NOTE: Please take care that all needed packages with the correct version are installed !"; \
-        echo "NOTE: Have a look to the requirements defined in webservice/package/yast2-webservice.spec."; \
+        echo "NOTE: Have a look to the requirements defined in webyast/package/webyast-base.spec."; \
         echo "NOTE:"; \
-        echo "NOTE: You can start the server with root privileges by calling start.sh in webservice directory." ; \
+        echo "NOTE: You can start the server with root privileges by calling start.sh in webyast directory." ; \
         echo "NOTE:";
 
 install:
-	cp webservice/package/yast_user_roles /etc ; \
-	cp webservice/package/org.opensuse.yast.permissions.policy /usr/share/PolicyKit/policy/ ; \
+	cp webyast/package/yast_user_roles /etc ; \
+	cp webyast/package/org.opensuse.yast.permissions.policy /usr/share/PolicyKit/policy/ ; \
         /usr/bin/polkit-auth --user root --grant org.freedesktop.packagekit.system-update ; \
         /usr/bin/polkit-auth --user root --grant org.freedesktop.policykit.read ; \
         /usr/bin/polkit-auth --user root --grant org.opensuse.yast.scr.read ; \
@@ -46,12 +46,12 @@ install:
         /usr/bin/polkit-auth --user root --grant org.opensuse.yast.module-manager.import ; \
         /usr/bin/polkit-auth --user root --grant org.opensuse.yast.modules.yapi.time.read ; \
         /usr/bin/polkit-auth --user root --grant org.opensuse.yast.modules.yapi.time.write ; \
-        ruby webservice/package/grantwebyastrights --user root --action grant ; \
+        ruby webyast/package/grantwebyastrights --user root --action grant ; \
         echo "NOTE:"; \
         echo "NOTE: Please take care that all needed packages with the correct version are installed !"; \
-        echo "NOTE: Have a look to the requirements defined in webservice/package/yast2-webservice.spec."; \
+        echo "NOTE: Have a look to the requirements defined in webyast/package/webyast-base.spec."; \
         echo "NOTE:"; \
-        echo "NOTE: You can start the server with root privileges by calling start.sh in webservice directory." ; \
+        echo "NOTE: You can start the server with root privileges by calling start.sh in webyast directory." ; \
         echo "NOTE:";
 
 distclean: 
@@ -61,8 +61,8 @@ distclean:
 dist: distclean
 	mkdir package; \
 	cp dist/* package; \
-        cp -R webservice www; \
-        cp webservice/public/doc*.html www; \
+        cp -R webyast www; \
+        cp webyast/public/doc*.html www; \
         find www -name "*.auto" -exec rm {} \;; \
         find www -name ".gitignore" -exec rm {} \;; \
         rm www/db/*.sqlite3; \
