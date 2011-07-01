@@ -1,6 +1,6 @@
 #!/usr/bin/env ruby
 #--
-# Webyast Webservice framework
+# Webyast framework
 #
 # Copyright (C) 2009, 2010 Novell, Inc. 
 #   This library is free software; you can redistribute it and/or modify
@@ -20,7 +20,7 @@
 #
 # check-setup.rb
 #
-# Tests correct setup of webclient
+# Tests correct setup of webyast
 #
 
 $production_errors = 0
@@ -97,7 +97,7 @@ def test_user severity, name
   begin
     Etc.getpwnam name
   rescue ArgumentError
-    escape severity, "User '#{name}' does not exist", "run 'useradd  -g #{name} -s /bin/false -r -c \"User for WebYaST-Service\" -d /var/lib/#{name} #{name}' as root"
+    escape severity, "User '#{name}' does not exist", "run 'useradd  -g #{name} -s /bin/false -r -c \"User for WebYaST\" -d /var/lib/#{name} #{name}' as root"
   end
 end
 
@@ -149,4 +149,4 @@ test_policy "org.opensuse.yast.modules.yapi.users.groupsget", Etc.getlogin
 puts "Cannot run in production" if $production_errors > 0
 puts "Cannot run in development" if $development_errors > 0
   
-puts "All fine, webservice is ready to run" if $production_errors + $development_errors == 0
+puts "All fine, WebYaST is ready to run" if $production_errors + $development_errors == 0

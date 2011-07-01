@@ -1,5 +1,5 @@
 #--
-# Webyast Webservice framework
+# Webyast framework
 #
 # Copyright (C) 2009, 2010 Novell, Inc. 
 #   This library is free software; you can redistribute it and/or modify
@@ -19,14 +19,14 @@
 require 'rake'
 
 
-class WebserviceTasks
+class WebyastTasks
 
     # a flag - load the tasks just once, multiple loading
     # leads to multiple invocation of the same task
     @@tasks_loaded = false
 
-    # load webservice *.rake files, exclude/include list can be specified
-    def WebserviceTasks.loadTasks(params = {:include => ["*.rake"], :exclude => []})
+    # load webyast *.rake files, exclude/include list can be specified
+    def WebyastTasks.loadTasks(params = {:include => ["*.rake"], :exclude => []})
 	return if @@tasks_loaded
 
 	exclude_list = []

@@ -1,5 +1,5 @@
 #--
-# Webyast Webservice framework
+# Webyast framework
 #
 # Copyright (C) 2009, 2010 Novell, Inc. 
 #   This library is free software; you can redistribute it and/or modify
@@ -21,8 +21,8 @@ require 'rake/rdoctask'
 
 # load the shared rake files from the package itself
 # skip 'package-local' task, it's redefined here
-require 'lib/tasks/webservice_tasks'
-WebserviceTasks.loadTasks(:exclude => ["package-local.rake"])
+require 'lib/tasks/webyast_tasks'
+WebyastTasks.loadTasks(:exclude => ["package-local.rake"])
 
 
 # define clean and clobber tasks

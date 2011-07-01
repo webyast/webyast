@@ -1,7 +1,7 @@
 
 This is 'webyast-rake-tasks' Ruby gem package.
 
-This gem contains all rake tasks which are shared in all Yast webservice packages.
+This gem contains all rake tasks which are shared in all WebYaST packages.
 
 
 Loading shared tasks in other packages
@@ -9,7 +9,7 @@ Loading shared tasks in other packages
 
 Just add
 
-    require 'tasks/webservice'
+    require 'tasks/webyast'
 
 line to your Rakefile. All shared tasks will be found and loaded automatically,
 you can verify it with 'rake -T' command.
@@ -29,15 +29,15 @@ the best solution is to not load it at all so there is no need to redefine it.
 
 There is a predefined class for this task, just put this your Rakefile:
 
-    require 'lib/tasks/webservice_tasks'
-    WebserviceTasks.loadTasks(:exclude => ["package.rake"])
+    require 'lib/tasks/webyast_tasks'
+    WebyastTasks.loadTasks(:exclude => ["package.rake"])
 
 This example loads all tasks except package task which you can define yourselves.
 Wildcards are supported, use e.g. "*_check.rake" parameter to exclude all checking tasks.
 
 On the other hand, if you want to load just one or more tasks (and ignore all other tasks) use:
 
-    WebserviceTasks.loadTasks(:include => ["dist.rake"])
+    WebyastTasks.loadTasks(:include => ["dist.rake"])
 
 Wildcards are also supported here.
 

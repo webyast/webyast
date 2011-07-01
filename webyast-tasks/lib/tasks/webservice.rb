@@ -1,5 +1,5 @@
 #--
-# Webyast Webservice framework
+# Webyast framework
 #
 # Copyright (C) 2009, 2010 Novell, Inc. 
 #   This library is free software; you can redistribute it and/or modify
@@ -17,7 +17,7 @@
 #++
 
 
-# load all webservice *.rake files
-require 'tasks/webservice_tasks'
-WebserviceTasks.loadTasks
+# load all webyast *.rake files
+require 'tasks/webyast_tasks'
+WebyastTasks.loadTasks
 

@@ -1,5 +1,5 @@
 #--
-# Webyast Webservice framework
+# Webyast framework
 #
 # Copyright (C) 2009, 2010 Novell, Inc. 
 #   This library is free software; you can redistribute it and/or modify
@@ -21,6 +21,6 @@ desc "Audits source code"
 namespace :audit do
   task :roodi do
     system 'find app/ lib/ -name \*.rb | xargs roodi > log/code-analysis/roodi.log'
-    system "echo 'log in webservice/log/roodi.log'"
+    system "echo 'log in webyast/log/roodi.log'"
   end
 end

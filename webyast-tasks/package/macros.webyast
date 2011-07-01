@@ -1,5 +1,5 @@
 #--
-# Webyast Webservice framework
+# Webyast framework
 #
 # Copyright (C) 2009, 2010 Novell, Inc. 
 #   This library is free software; you can redistribute it and/or modify
@@ -19,25 +19,20 @@
 #
 # common RPM macro definitions used by WebYaST
 #
-# macros %webyast_ws_* are for webyast-*-ws packages,
-# macros %webyast_ui_* are for webyast-*-ui packages,
 # macros %webyast_ are generic for both webservice and client
 #
 
 # target directories
-%webyast_ws_dir /srv/www/yastws
-%webyast_ui_dir /srv/www/yast
+%webyast_dir /srv/www/webyast
 
 # variable directories
-%webyast_ws_vardir /var/lib/yastws/
+%webyast_vardir /var/lib/webyast
 
 # users who run the services
-%webyast_ws_user yastws
-%webyast_ui_user nginx
+%webyast_user webyast
 
 # service names (init script names in /etc/init.d)
-%webyast_ws_service yastws
-%webyast_ui_service yastwc
+%webyast_service webyast
 
 # run the testsuite
 %webyast_check \
@@ -47,16 +42,12 @@
     RAILS_ENV=test rake db:schema:load \
     RAILS_ENV=test ADD_BUILD_PATH=1 rake test
 
-%webyast_ws_check \
-    export RAILS_PARENT=%{webyast_ws_dir} \
-    %webyast_check
-
-%webyast_ui_check \
-    export RAILS_PARENT=%{webyast_ui_dir} \
+%webyast_check \
+    export RAILS_PARENT=%{webyast_dir} \
     %webyast_check
 
 # build REST documentation
-%webyast_ws_restdoc \
-    export RAILS_PARENT=%{webyast_ws_dir} \
+%webyast_restdoc \
+    export RAILS_PARENT=%{webyast_dir} \
     env LANG=en rake restdoc
 

@@ -1,5 +1,5 @@
 #--
-# Webyast Webservice framework
+# Webyast framework
 #
 # Copyright (C) 2009, 2010 Novell, Inc. 
 #   This library is free software; you can redistribute it and/or modify
@@ -30,7 +30,7 @@ task :makemo do
   destdir = File.join(File.dirname(__FILE__),"../../..", "webclient", "public", "vendor", "text")
   if File.directory?(destdir)
     # I am a plugin. In order to get the translation available the concerning mo files have to be
-    # available in webservice/public/vendor/text/locale. That is needed in the development environment ONLY.
+    # available in webyast/public/vendor/text/locale. That is needed in the development environment ONLY.
     srcdir = File.join(Dir.pwd,"locale")
     FileUtils.cp_r(srcdir, destdir) if File.directory?(srcdir)
   end

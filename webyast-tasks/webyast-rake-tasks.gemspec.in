@@ -1,5 +1,5 @@
 #--
-# Webyast Webservice framework
+# Webyast framework
 #
 # Copyright (C) 2009, 2010 Novell, Inc. 
 #   This library is free software; you can redistribute it and/or modify
@@ -22,7 +22,7 @@ Gem::Specification.new do |spec|
 # gem name and description
 spec.name	= "webyast-rake-tasks"
 spec.version	= "@VERSION@"
-spec.summary	= "Rake tasks shared by all YaST webservice packages"
+spec.summary	= "Rake tasks shared by all WebYaST packages"
 spec.license    = "LGPL v2.1"
 
 # author
