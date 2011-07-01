@@ -17,9 +17,9 @@
 #++
 
 # = PluginBasicTests module
-# The module is designed to perform few basic tests of webservice plugin
+# The module is designed to perform few basic tests of WebYaST plugin
 # controller behavior. Its goal is provide same unify behavior to each
-# webservice plugin like unified response if user doesn't have permissions
+# WebYaST plugin like unified response if user doesn't have permissions
 # or same content type.
 # == Prerequisites
 # The module expect some hints from controller test file for correct work.

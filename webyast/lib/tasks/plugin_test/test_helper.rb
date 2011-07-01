@@ -18,9 +18,9 @@
 
 rails_parent = ENV["RAILS_PARENT"]
 unless rails_parent
-  if File.directory?("../../webservice/")
-     $stderr.puts "Taking ../../webservice/ for RAILS_PARENT"  
-     rails_parent="../../webservice/"
+  if File.directory?("../../webyast/")
+     $stderr.puts "Taking ../../webyast/ for RAILS_PARENT"  
+     rails_parent="../../webyast/"
   else
      $stderr.puts "Please set RAILS_PARENT environment"
      exit

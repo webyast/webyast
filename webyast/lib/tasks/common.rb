@@ -16,7 +16,7 @@
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA
 #++
 
-# load common (rest-service, web-client) rake task
+# load common webyast rake task
 require 'rake'
 require 'rake/testtask'
 require 'rake/rdoctask'
@@ -26,19 +26,19 @@ require File.join(File.dirname(__FILE__), '..', '..', 'config', 'boot')
 
 begin
   # assume development environment
-  commondir = File.expand_path(File.join('..','..','..', 'webservice-tasks', 'lib'), File.dirname(__FILE__))
+  commondir = File.expand_path(File.join('..','..','..', 'webyast-tasks', 'lib'), File.dirname(__FILE__))
   $:.unshift(commondir) if File.directory?( commondir )
-  require 'tasks/webservice'
+  require 'tasks/webyast'
 rescue LoadError => e
   $stderr.puts "Install rubygem-webyast-rake-tasks.rpm"
 end
 
 # load the shared rake files from the package itself
 # skip 'deploy_local' task, it's redefined here
-WebserviceTasks.loadTasks(:exclude => ["deploy_local.rake"])
+WebyastTasks.loadTasks(:exclude => ["deploy_local.rake"])
 
-# this call also loads WebserviceTasks but the second call is ignored there
-# so this 'require' must be called _after_ WebserviceTasks.loadTasks
+# this call also loads WebyastTasks but the second call is ignored there
+# so this 'require' must be called _after_ WebyastTasks.loadTasks
 require 'tasks/rails'
 
 require 'fileutils'

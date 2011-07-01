@@ -158,8 +158,8 @@ task :system_check do
   </match>
 EOF
 
-  # will the webservice be able to run?
-  webservice_permissions_ok = false
+  # will webyast be able to run?
+  webyast_permissions_ok = false
 
   # get all granted policies
   granted = `polkit-auth --user #{user}`.split
@@ -169,13 +169,13 @@ EOF
   # manually polkit-auth, or as pattern matching in /etc/PolicyKit/PolicyKit.conf
 
   scr_actions = `polkit-action`.split.reject { |item| not item.include?('org.opensuse.yast.') }.reject { |item| item.include? "org.opensuse.yast.scr."}
-  webservice_actions = [ 'org.freedesktop.packagekit.system-update', 'org.freedesktop.packagekit.package-install',  'org.freedesktop.policykit.read', *scr_actions]
+  webyast_actions = [ 'org.freedesktop.packagekit.system-update', 'org.freedesktop.packagekit.package-install',  'org.freedesktop.policykit.read', *scr_actions]
 
   hint_message = "Use utility script grantwebyastrights to grant them all. See http://en.opensuse.org/YaST/Web/Development\nAlternatively, you can add the following to /etc/PolicyKit/PolicyKit.conf config tag section:\n#{policykit_conf}\n"
 
-  webservice_actions.each do | action|
+  webyast_actions.each do | action|
     if not granted.include?(action)
-      escape "policy #{action} is not granted and it is needed to run the webservice as #{user}.", "Run 'polkit-auth --user #{user} --grant #{action}' to grant the permission.\n"+hint_message
+      escape "policy #{action} is not granted and it is needed to run webyast as #{user}.", "Run 'polkit-auth --user #{user} --grant #{action}' to grant the permission.\n"+hint_message
       hint_message = ""
     end
   end

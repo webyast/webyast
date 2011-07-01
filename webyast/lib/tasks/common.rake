@@ -16,12 +16,12 @@
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA
 #++
 
-# load common (rest-service, web-client) rake task
+# load common webyast rake task
 begin
   # assume development environment
-  commondir = File.expand_path(File.join('..','..','..', 'webservice-tasks', 'lib'), File.dirname(__FILE__))
+  commondir = File.expand_path(File.join('..','..','..', 'webyast-tasks', 'lib'), File.dirname(__FILE__))
   $:.unshift(commondir) if File.directory?( commondir )
-  require 'tasks/webservice'
+  require 'tasks/webyast'
 rescue LoadError => e
   $stderr.puts "Install rubygem-webyast-rake-tasks.rpm"
 end

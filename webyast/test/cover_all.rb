@@ -18,7 +18,7 @@
 #++
 
 #
-# Do full coverage test for .../webservice and .../../plugins/*
+# Do full coverage test for .../webyast and .../../plugins/*
 #
 # Usage:
 #

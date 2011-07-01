@@ -85,7 +85,7 @@ module AuthenticatedSystem
          store_location
          redirect_to :controller => "session", :action => "new", :hostid => "localhost" #redirect by default to locahost appliance (bnc#602807)
        else
-         request_http_basic_authentication 'YaST-Webservice Login' # RORSCAN_ITL
+         request_http_basic_authentication 'WebYaST Login' # RORSCAN_ITL
        end
     end
 

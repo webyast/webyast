@@ -17,7 +17,7 @@
 #
 # file : test/fixtures/yast_user_roles
 #
-# This file describes roles of a user accounts for the YaST Webservice
+# This file describes roles of a user accounts for the WebYaST
 # "user accounts": System account which is accessable e.g. via PAM.
 # "roles"        : Describes user accounts for which policies have
 #                  been generated

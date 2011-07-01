@@ -20,7 +20,7 @@
 #
 # grantwebyastrights
 #
-# show, grant and revoke policies for YaST webservice
+# show, grant and revoke policies for WebYaST
 #
 # run: grantwebyastrights
 #
@@ -37,7 +37,7 @@ def usage why
   STDERR.puts "Usage: grantwebyastrights --user <user> --action (show|grant|revoke)"
   STDERR.puts "NOTE: This program should be run by user root"
   STDERR.puts ""
-  STDERR.puts "This call grant/revoke ALL permissions for the YaST Webservice."
+  STDERR.puts "This call grant/revoke ALL permissions for WebYaST."
   STDERR.puts "In order to grant/revoke single rights use:"
   STDERR.puts "polkit-auth --user <user> (--grant|-revoke) <policyname>"
   STDERR.puts ""
