@@ -110,13 +110,11 @@
 
     <% if ActionController::Routing.possible_controllers.include?("system") %>
       <div id="statusbar-actions">
-          <% host = Host.find(session[:host]) rescue nil %>
-          <% host_name = host.nil? ? 'the machine' : "'#{host.name}'" %>
           <div class="statusbar_row">
-            <%= link_to _('Reboot'), {:controller => 'system', :action => 'reboot'}, :confirm => _("Really reboot %s?") % host_name, :method => :put, :class => 'button' %>
+            <%= link_to _('Reboot'), {:controller => 'system', :action => 'reboot'}, :confirm => _("Really reboot the machine?"), :method => :put, :class => 'button' %>
           </div>
           <div class="statusbar_row">
-            <%= link_to _('Shutdown'), {:controller => 'system', :action => 'shutdown'}, :confirm => _("Really shutdown %s?") % host_name, :method => :put, :class => 'button' %>
+            <%= link_to _('Shutdown'), {:controller => 'system', :action => 'shutdown'}, :confirm => _("Really shutdown the machine?"), :method => :put, :class => 'button' %>
           </div>
       </div>
     <% end %>

@@ -103,10 +103,8 @@
       <% end %>
 
       <%= link_to(image_tag("/images/webyast-logo.png", :width=>"130", :height=>"42", :alt =>"webyast"),"/" )%>
-      <% host = Host.find(session[:host]) rescue nil %>
       <% user = session[:user] %>
-
-      <% if host.blank? || user.blank? %>
+      <% if user.blank? %>
         <span id="userbar">
           <span class="userbar-icon" style=" text-align:center;">
             <span class="language-icon">

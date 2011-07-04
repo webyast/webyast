@@ -126,12 +126,8 @@ class SessionsController < ApplicationController
       format.html { 
         # reset_session clears all flash messages, make a backup before the call
         flash_backup = flash
-
-        reset_session # RORSCAN_ITL
-
         # restore the values from backup
         flash.replace(flash_backup)
-
         flash[:notice] = _("You have been logged out.") unless flash[:notice]
         redirect_to :controller => "session", :action => "new"
       }
