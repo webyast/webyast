@@ -1,0 +1,418 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: @PACKAGE@\n"
+"Report-Msgid-Bugs-To: translation@suse.de\n"
+"POT-Creation-Date: 2009-11-20 14:33+0100\n"
+"PO-Revision-Date: 2002-10-08 13:38+0200\n"
+"Last-Translator: I Made Wiryana <made@nakula.rvs.uni-bielefeld.de>\n"
+"Language-Team: Indonesian <i18n@suse.de>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+
+#: app/controllers/application_controller.rb:53
+msgid "You must accept all EULAs before using this product!"
+msgstr ""
+
+#: app/controllers/application_controller.rb:57
+msgid "Cannot redirect to EULA. Make sure yast2-webclient-eulas package is installed"
+msgstr ""
+
+#: app/controllers/application_controller.rb:111
+msgid "Please login to continue"
+msgstr ""
+
+#: app/controllers/application_controller.rb:118
+msgid "You must logout before you can login"
+msgstr ""
+
+#: app/controllers/hosts_controller.rb:25
+msgid "Can't connect to host %s."
+msgstr ""
+
+#: app/controllers/hosts_controller.rb:26
+msgid "Make sure the host is up and that the YaST web service is running."
+msgstr ""
+
+#: app/controllers/hosts_controller.rb:28
+msgid "Please select a host to connect to."
+msgstr ""
+
+#: app/controllers/hosts_controller.rb:31
+msgid "The host '%s' cannot be found."
+msgstr ""
+
+#: app/controllers/hosts_controller.rb:32
+msgid "Please double-check the host URL."
+msgstr ""
+
+#: app/controllers/sessions_controller.rb:51
+msgid "You need to specify the host"
+msgstr ""
+
+#: app/controllers/sessions_controller.rb:54
+msgid "No login specified"
+msgstr ""
+
+#: app/controllers/sessions_controller.rb:57
+msgid "No password specified"
+msgstr ""
+
+#: app/controllers/sessions_controller.rb:76
+msgid "Host has blocked user %s. It cannot login until  %s"
+msgstr ""
+
+#: app/controllers/sessions_controller.rb:99
+msgid "Login incorrect. Check your username and password."
+msgstr ""
+
+#: app/controllers/sessions_controller.rb:132
+msgid "You have been logged out."
+msgstr ""
+
+#: app/models/account.rb:-
+msgid "account"
+msgstr ""
+
+#: app/models/account.rb:-
+msgid "Account|Login"
+msgstr ""
+
+#: app/models/account.rb:-
+msgid "Account|Created at"
+msgstr ""
+
+#: app/models/account.rb:-
+msgid "Account|Updated at"
+msgstr ""
+
+#: app/models/account.rb:-
+msgid "Account|Remember token"
+msgstr ""
+
+#: app/models/account.rb:-
+msgid "Account|Remember token expires at"
+msgstr ""
+
+#: app/models/account.rb:-
+msgid "Account|Salt"
+msgstr ""
+
+#: app/models/host.rb:-
+msgid "host"
+msgstr ""
+
+#: app/models/host.rb:-
+msgid "Host|Name"
+msgstr ""
+
+#: app/models/host.rb:-
+msgid "Host|Url"
+msgstr ""
+
+#: app/models/host.rb:-
+#, fuzzy
+#| msgid "Description"
+msgid "Host|Description"
+msgstr "Deskripsi"
+
+#: app/models/host.rb:-
+msgid "Host|Created at"
+msgstr ""
+
+#: app/models/host.rb:-
+msgid "Host|Updated at"
+msgstr ""
+
+#: app/helpers/application_helper.rb:15
+msgid " or "
+msgstr ""
+
+# FR
+#: app/helpers/application_helper.rb:20 app/views/hosts/new.html.erb:46
+msgid "Cancel"
+msgstr "Batal"
+
+#: app/helpers/application_helper.rb:28
+msgid "Save"
+msgstr ""
+
+#: app/helpers/application_helper.rb:30
+msgid "Next"
+msgstr ""
+
+#: app/helpers/view_helpers/label_helper.rb:6
+#: app/views/hosts/index.html.erb:33
+msgid "Add"
+msgstr ""
+
+#: app/helpers/view_helpers/label_helper.rb:10
+msgid "Edit"
+msgstr ""
+
+#: app/helpers/view_helpers/label_helper.rb:14
+msgid "Delete"
+msgstr ""
+
+#: app/helpers/view_helpers/html_helper.rb:10
+msgid "Are you sure?"
+msgstr ""
+
+#: app/helpers/view_helpers/html_helper.rb:132
+#, fuzzy
+#| msgid "Unknown network status"
+msgid "Unknown error"
+msgstr "Status network tidak diketahui"
+
+#: app/helpers/view_helpers/html_helper.rb:136
+#: app/views/shared/exception_trap.html.erb:22
+#, fuzzy
+#| msgid "No information available."
+msgid "No information available"
+msgstr "Tak ada informasi yang tersedia."
+
+#: app/helpers/view_helpers/html_helper.rb:139
+msgid "There was a problem retrieving information from the server."
+msgstr ""
+
+#: app/views/hosts/index.html.erb:6
+msgid "Please choose a service:"
+msgstr ""
+
+#: app/views/hosts/index.html.erb:26
+msgid "Really delete host %s ?"
+msgstr ""
+
+#: app/views/hosts/edit.html.erb:1
+msgid "Editing YaST-Web-Service"
+msgstr ""
+
+#: app/views/hosts/edit.html.erb:22
+msgid "YaST-Web-Service"
+msgstr ""
+
+#: app/views/hosts/edit.html.erb:25 app/views/hosts/new.html.erb:31
+msgid "Name"
+msgstr ""
+
+#: app/views/hosts/edit.html.erb:29 app/views/hosts/new.html.erb:36
+msgid "Url"
+msgstr ""
+
+#: app/views/hosts/edit.html.erb:33 app/views/hosts/new.html.erb:41
+msgid "Description"
+msgstr "Deskripsi"
+
+#: app/views/hosts/edit.html.erb:38
+msgid "Ok"
+msgstr ""
+
+#: app/views/hosts/edit.html.erb:39
+msgid "Back"
+msgstr "Kembali"
+
+#: app/views/hosts/show.html.erb:7
+msgid "Index"
+msgstr ""
+
+#: app/views/hosts/new.html.erb:4
+msgid "New WebYaST Host"
+msgstr ""
+
+#: app/views/hosts/new.html.erb:47
+msgid "Create"
+msgstr ""
+
+#: app/views/shared/exception_trap.html.erb:8
+#: app/views/shared/backendexception_trap.html.erb:2
+msgid "This is embarrasing...."
+msgstr ""
+
+#: app/views/shared/exception_trap.html.erb:10
+msgid "We are sorry, but WebYaST is still in alpha and there are some problems."
+msgstr ""
+
+#: app/views/shared/exception_trap.html.erb:12
+#: app/views/shared/backendexception_trap.html.erb:6
+msgid "Problem:"
+msgstr ""
+
+#: app/views/shared/exception_trap.html.erb:18
+msgid "Please Report a bug so we can fix the problem!."
+msgstr ""
+
+#: app/views/shared/exception_trap.html.erb:18
+msgid "(report link)"
+msgstr ""
+
+#: app/views/shared/exception_trap.html.erb:19
+msgid "Don't forget to include the bug details."
+msgstr ""
+
+#: app/views/shared/backendexception_trap.html.erb:4
+msgid "Problem occured on target machine."
+msgstr ""
+
+#: app/views/layouts/main.rhtml:34
+msgid "WebYaST"
+msgstr ""
+
+#: app/views/layouts/main.rhtml:48
+msgid "My Appliance"
+msgstr ""
+
+#: app/views/layouts/main.rhtml:56
+#, fuzzy
+#| msgid "Connections"
+msgid "Connected host:"
+msgstr "Sambungan"
+
+#: app/views/layouts/main.rhtml:57
+msgid "User:"
+msgstr ""
+
+#: app/views/layouts/main.rhtml:60
+msgid "Control panel"
+msgstr ""
+
+#: app/views/layouts/main.rhtml:61
+msgid "Logout"
+msgstr ""
+
+#: app/views/layouts/main.rhtml:93
+msgid "...Wait..."
+msgstr ""
+
+#: app/views/sessions/new.rhtml:4 app/views/sessions/new.rhtml:16
+#, fuzzy
+#| msgid "login: "
+msgid "Login"
+msgstr "login: "
+
+#: app/views/sessions/new.rhtml:6
+msgid "Enter login credentials for host %s."
+msgstr ""
+
+#: app/views/sessions/new.rhtml:10
+msgid "Username:"
+msgstr ""
+
+#: app/views/sessions/new.rhtml:13
+#, fuzzy
+#| msgid "Password: "
+msgid "Password:"
+msgstr "Password: "
+
+#: app/views/controlpanel/basesystem.rhtml:1
+msgid "Base system setup"
+msgstr ""
+
+#: app/views/controlpanel/basesystem.rhtml:3
+msgid "Your system setup was not completed. Please continue with setting up the modules."
+msgstr ""
+
+#: app/views/controlpanel/basesystem.rhtml:4
+#, fuzzy
+#| msgid "Halt the system now?"
+msgid "Set up the system"
+msgstr "Halt sistem sekarang?"
+
+#: app/views/controlpanel/show_all.rhtml:1
+#: app/views/controlpanel/index.rhtml:61
+msgid "Configuration"
+msgstr "Konfigurasi"
+
+#: app/views/controlpanel/index.rhtml:24
+#, fuzzy
+#| msgid "Network Status"
+msgid "Status"
+msgstr "Status Network"
+
+#: app/views/controlpanel/index.rhtml:33
+msgid "System actions"
+msgstr ""
+
+# reboot button label
+#: app/views/controlpanel/index.rhtml:34
+msgid "Reboot"
+msgstr "Reboot"
+
+#: app/views/controlpanel/index.rhtml:35
+msgid "Really reboot %s?"
+msgstr ""
+
+#: app/views/controlpanel/index.rhtml:36
+msgid "Shutdown"
+msgstr ""
+
+#: app/views/controlpanel/index.rhtml:37
+msgid "Really shutdown %s?"
+msgstr ""
+
+#: app/views/controlpanel/index.rhtml:44
+#, fuzzy
+#| msgid "Looking for CPU information..."
+msgid "Loading patch information"
+msgstr "Mencari informasi CPU..."
+
+#: app/views/controlpanel/index.rhtml:46
+msgid "Patch plugin is not installed."
+msgstr ""
+
+#: app/views/controlpanel/index.rhtml:52
+#, fuzzy
+#| msgid "Looking for memory information..."
+msgid "Loading system information"
+msgstr "Mencari informasi memori..."
+
+#: app/views/controlpanel/index.rhtml:54
+msgid "Status plugin is not installed."
+msgstr ""
+
+#: app/views/controlpanel/index.rhtml:93
+msgid "Show all modules"
+msgstr ""
+
+#: lib/error_constructor.rb:12
+msgid "Service %s is not available in the target machine"
+msgstr ""
+
+#: lib/error_constructor.rb:14
+msgid "Service %s is not running on the target machine"
+msgstr ""
+
+#: lib/error_constructor.rb:16
+msgid "Permission %s is not granted for user %s"
+msgstr ""
+
+#: lib/error_constructor.rb:18
+msgid "Policy kit exception for user %s and permission %s (untranslated message): %s"
+msgstr ""
+
+#: lib/error_constructor.rb:20
+msgid "A user is no longer logged to target machine. Please log in again."
+msgstr ""
+
+#: lib/error_constructor.rb:22
+msgid "Target system is not consistent: Missing or corrupted file %s"
+msgstr ""
+
+#: lib/error_constructor.rb:26
+msgid "There is no predefined ntp server at /etc/sysconfig/network/config - NETCONFIG_NTP_STATIC_SERVERS"
+msgstr ""
+
+#: lib/error_constructor.rb:28
+msgid "Error occured during ntp synchronization: %s"
+msgstr ""
+
+#: lib/error_constructor.rb:31
+#, fuzzy
+#| msgid "Error while closing old shadow file: %m"
+msgid "Error while saving administrator settings: %s"
+msgstr "Kesalahan ketika menutup file shadow lama: %m"
+
+#, fuzzy
+#~| msgid "Language"
+#~ msgid "Langugage:"
+#~ msgstr "Bahasa"

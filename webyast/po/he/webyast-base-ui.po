@@ -1,0 +1,1218 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: @PACKAGE@\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2006-06-19 15:33+0200\n"
+"PO-Revision-Date: 2004-08-09 10:24+0200\n"
+"Last-Translator: xxx <yyy@example.org>\n"
+"Language-Team: Hebrew <i18n@suse.de>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+
+#: RELEASE-NOTES-openSUSE.xml:120(title)
+msgid "Update"
+msgstr "עדכון"
+
+#: ../Reports.pm:443 ../Reports.pm:532 ../Reports.pm:1480
+#, perl-format
+msgid "DBI Execution failed: %s."
+msgstr "DBI Execution failed: %s."
+
+#: ../Reports.pm:556
+#, perl-format
+msgid "Couldn't open file: %s."
+msgstr "Couldn't open file: %s."
+
+#: ../Reports.pm:560
+msgid "No type value passed.  Unable to determine page count."
+msgstr "No type value passed.  Unable to determine page count."
+
+#: ../Reports.pm:626
+#, perl-format
+msgid "Failed copying %s."
+msgstr "Failed copying %s."
+
+#: ../Reports.pm:750
+#, perl-format
+msgid "Export Log Error: Couldn't open %s"
+msgstr "Export Log Error: Couldn't open %s"
+
+#: ../Reports.pm:772
+msgid "Fatal error.  No report name given. Exiting."
+msgstr "Fatal error.  No report name given. Exiting."
+
+#: ../Reports.pm:828
+#, perl-format
+msgid "Failed to parse: %s."
+msgstr "Failed to parse: %s."
+
+#: ../Reports.pm:837
+#, perl-format
+msgid "Fatal Error.  Couldn't open %s."
+msgstr "Fatal Error.  Couldn't open %s."
+
+#: ../Reports.pm:885
+#, perl-format
+msgid "Fatal Error.  Can't run %s.  Exiting."
+msgstr "Fatal Error.  Can't run %s.  Exiting."
+
+#: ../Reports.pm:925
+#, perl-format
+msgid "Fatal Error.  No directory, %s, found.  Exiting."
+msgstr "Fatal Error.  No directory, %s, found.  Exiting."
+
+#: ../Reports.pm:943
+#, perl-format
+msgid "Fatal Error.  Couldn't open %s.  Exiting"
+msgstr "Fatal Error.  Couldn't open %s.  Exiting"
+
+#: ../Reports.pm:970 ../Reports.pm:983 ../Reports.pm:991
+#, perl-format
+msgid "DBI Execution failed: %s"
+msgstr "DBI Execution failed: %s"
+
+#: ../Reports.pm:1592
+#, perl-format
+msgid "Fatal Error.  getArchReport() couldn't open %s"
+msgstr "Fatal Error.  getArchReport() couldn't open %s"
+
+#. txt_help
+msgid "Help"
+msgstr "עזרה"
+
+#. txt_yes
+msgid "Yes"
+msgstr "כן"
+
+#. txt_no
+msgid "No"
+msgstr "לא"
+
+#. install source menu title
+#. ** please keep it really short (comparable to the english text) **
+#. txt_install_source
+msgid "Source"
+msgstr "מקור"
+
+#: ../src/restreewidget.cpp:91
+#: ../build/_CPack_Packages/Linux-Source/TZ/libqdialogsolver1-0.1.1-Source/src/restreewidget.cpp:72
+#: ../build/_CPack_Packages/Linux-Source/TGZ/libqdialogsolver1-0.1.1-Source/src/restreewidget.cpp:72
+#: ../build/_CPack_Packages/Linux-Source/TBZ2/libqdialogsolver1-1.2.0/src/restreewidget.cpp:91
+msgid "Description"
+msgstr "תיאור"
+
+#  table header texts
+#: ../src/restreewidget.cpp:94 ../src/restreewidget.cpp:102
+#: ../build/_CPack_Packages/Linux-Source/TZ/libqdialogsolver1-0.1.1-Source/src/restreewidget.cpp:75
+#: ../build/_CPack_Packages/Linux-Source/TZ/libqdialogsolver1-0.1.1-Source/src/restreewidget.cpp:83
+#: ../build/_CPack_Packages/Linux-Source/TGZ/libqdialogsolver1-0.1.1-Source/src/restreewidget.cpp:75
+#: ../build/_CPack_Packages/Linux-Source/TGZ/libqdialogsolver1-0.1.1-Source/src/restreewidget.cpp:83
+#: ../build/_CPack_Packages/Linux-Source/TBZ2/libqdialogsolver1-1.2.0/src/restreewidget.cpp:94
+#: ../build/_CPack_Packages/Linux-Source/TBZ2/libqdialogsolver1-1.2.0/src/restreewidget.cpp:102
+msgid "Name"
+msgstr "שם"
+
+#: ../src/restreewidget.cpp:95 ../src/restreewidget.cpp:103
+#: ../build/_CPack_Packages/Linux-Source/TZ/libqdialogsolver1-0.1.1-Source/src/restreewidget.cpp:76
+#: ../build/_CPack_Packages/Linux-Source/TZ/libqdialogsolver1-0.1.1-Source/src/restreewidget.cpp:84
+#: ../build/_CPack_Packages/Linux-Source/TGZ/libqdialogsolver1-0.1.1-Source/src/restreewidget.cpp:76
+#: ../build/_CPack_Packages/Linux-Source/TGZ/libqdialogsolver1-0.1.1-Source/src/restreewidget.cpp:84
+#: ../build/_CPack_Packages/Linux-Source/TBZ2/libqdialogsolver1-1.2.0/src/restreewidget.cpp:95
+#: ../build/_CPack_Packages/Linux-Source/TBZ2/libqdialogsolver1-1.2.0/src/restreewidget.cpp:103
+msgid "Version"
+msgstr "גרסה"
+
+#: ../libslab/app-shell.c:900
+msgid "Other"
+msgstr "אחר"
+
+#: ../libslab/bookmark-agent.c:1143
+msgid "Home"
+msgstr "בית"
+
+#: ../main-menu/src/network-status-tile.c:355
+#: ../main-menu/src/network-status-tile.c:365
+#, c-format
+msgid "Unknown"
+msgstr "לא ידוע"
+
+#  heading text
+#: ../main-menu/src/slab-window.glade.h:15
+msgid "Status"
+msgstr "סטטוס"
+
+#: ../main-menu/src/slab-window.glade.h:16
+msgid "System"
+msgstr "מערכת"
+
+# IT
+#: ../data/gpk-application.glade.h:9 ../src/gpk-client.c:987
+#: ../src/gpk-client.c:1415 ../src/gpk-client.c:1513 ../src/gpk-client.c:1684
+#: ../src/gpk-client.c:1998 ../src/gpk-client.c:2277 ../src/gpk-client.c:2360
+#: ../src/gpk-client.c:2426 ../src/gpk-client-dialog.c:932
+msgid "Install"
+msgstr "התקן"
+
+#  Column header
+#. translators: this is the update type, e.g. security
+#: ../src/gpk-application.c:950 ../src/gpk-update-viewer.c:900
+msgid "Type"
+msgstr "סוג"
+
+#: ../src/gpk-enum.c:1267
+msgid "Security"
+msgstr "אבטחה"
+
+#: ../src/gpk-log.c:332
+msgid "Action"
+msgstr "פעולה"
+
+#: gnome-applets-2.0/modemlights/modemlights.c:117
+msgid "translator_credits"
+msgstr "גיל אשר <dolfin@rpg.org.il>"
+
+#: gnome-applets-2.0/modemlights/modemlights.c:130
+#: ../modemlights/modemlights.c:1595
+msgid "Modem Lights"
+msgstr "נוריות מודם"
+
+#: gnome-applets-2.0/modemlights/modemlights.c:132
+msgid ""
+"Released under the GNU general public license.\n"
+"A modem status indicator and dialer.\n"
+"Lights in order from the top or left are Send data and Receive data."
+msgstr ""
+"משוחרר תחת הרישיון הציבורי הכללי של GNU.\n"
+"מציג מצב מודם וחייגן.\n"
+"הנוריות בסדר מלמעלה או משמאל הן שליחת נתונים וקבלת נתונים."
+
+#: gnome-applets-2.0/modemlights/modemlights.c:513
+msgid ""
+"You are currently connected.\n"
+"Do you want to disconnect?"
+msgstr ""
+"אתה כרגע מחובר.\n"
+"האם ברצונך להתנתק?"
+
+#: gnome-applets-2.0/modemlights/modemlights.c:583
+#, c-format
+msgid "%#.1fMb received / %#.1fMb sent / time: %.1d:%.2d"
+msgstr "%#.1fMb התקבלו / %#.1fMb נשלחו / זמן: %.1d:%.2d"
+
+#: gnome-applets-2.0/modemlights/modemlights.c:588
+msgid "not connected"
+msgstr "לא מחובר"
+
+#: gnome-applets-2.0/modemlights/modemlights.schemas.in.h:1
+msgid "Ask for confirmation when connecting/disconnecting"
+msgstr "בקש אישור כאשר מתחברים/מתנתקים"
+
+#: gnome-applets-2.0/modemlights/modemlights.schemas.in.h:2
+msgid "Blink when connecting"
+msgstr "הבהב כאשר מתחברים"
+
+#: gnome-applets-2.0/modemlights/modemlights.schemas.in.h:3
+msgid "Command executed when connecting"
+msgstr "פקודה לביצוע כאשר מתחברים"
+
+#: gnome-applets-2.0/modemlights/modemlights.schemas.in.h:4
+msgid "Command executed when disconnecting"
+msgstr "פקודה לביצוע כאשר מתנתקים"
+
+#: gnome-applets-2.0/modemlights/modemlights.schemas.in.h:5
+msgid "Display a confirmation dialog when connecting or disconnecting."
+msgstr "הצג דו-שיח אישור כאשר מתחברים או מתנתקים."
+
+#: gnome-applets-2.0/modemlights/modemlights.schemas.in.h:6
+msgid "Make the applet blink when the modem is connecting."
+msgstr "עשה שהיישומון יהבהב כאשר המודם מתחבר."
+
+#: gnome-applets-2.0/modemlights/modemlights.schemas.in.h:7
+msgid "Modem device name"
+msgstr "שם התקן המודם"
+
+#: gnome-applets-2.0/modemlights/modemlights.schemas.in.h:8
+msgid "Modem lock file"
+msgstr "קובץ נעילת מודם"
+
+#: gnome-applets-2.0/modemlights/modemlights.schemas.in.h:9
+msgid "Receive background color"
+msgstr "קבל את צבע הרקע"
+
+#: gnome-applets-2.0/modemlights/modemlights.schemas.in.h:10
+msgid "Receive foreground color"
+msgstr "קבל את צבע החזית"
+
+#: gnome-applets-2.0/modemlights/modemlights.schemas.in.h:11
+msgid "Send background color"
+msgstr "שלח צבע רקע"
+
+#: gnome-applets-2.0/modemlights/modemlights.schemas.in.h:12
+msgid "Send foreground color"
+msgstr "שלח צבע חזית"
+
+#: gnome-applets-2.0/modemlights/modemlights.schemas.in.h:13
+msgid "Show connect time and throughput"
+msgstr "הצג זמן חיבור וקצב העברה"
+
+#: gnome-applets-2.0/modemlights/modemlights.schemas.in.h:14
+msgid "Show extra information about the connect time and amount of data transmitted and received."
+msgstr "הצג מידע נוסף על זמן החיבור וכמות המידע שנשלחה והתקבלה."
+
+#: gnome-applets-2.0/modemlights/modemlights.schemas.in.h:15
+msgid "Status connected color"
+msgstr "צבע מצב מחובר"
+
+#: gnome-applets-2.0/modemlights/modemlights.schemas.in.h:16
+msgid "Status not connected color"
+msgstr "צבע מצב לא מחובר"
+
+#: gnome-applets-2.0/modemlights/modemlights.schemas.in.h:17
+msgid "Status waiting connection color"
+msgstr "צבע מצב ממתין לחיבור"
+
+#: gnome-applets-2.0/modemlights/modemlights.schemas.in.h:18
+msgid "Text background color"
+msgstr "צבע רקע הטקסט"
+
+#: gnome-applets-2.0/modemlights/modemlights.schemas.in.h:19
+msgid "Text foreground color"
+msgstr "צבע חזית הטקסט"
+
+#: gnome-applets-2.0/modemlights/modemlights.schemas.in.h:20
+msgid "Text outline color"
+msgstr "צבע מתאר טקסט"
+
+#: gnome-applets-2.0/modemlights/modemlights.schemas.in.h:21
+msgid "The background color of the button used to indicate data received."
+msgstr "צבע הרקע של הכפתור המשמש לציון המידע שהתקבל."
+
+#: gnome-applets-2.0/modemlights/modemlights.schemas.in.h:22
+msgid "The background color of the button used to indicate data sent."
+msgstr "צבע הרקע של הכפתור המשמש לציון המידע שנשלח."
+
+#: gnome-applets-2.0/modemlights/modemlights.schemas.in.h:23
+msgid "The color used to display the status button when the modem is connected."
+msgstr "הצבע המשמש להצגת כפתור המצב כאשר המודם מחובר."
+
+#: gnome-applets-2.0/modemlights/modemlights.schemas.in.h:24
+msgid "The color used to display the status button when the modem is connecting."
+msgstr "הצבע המשמש להצגת כפתור המצב כאשר המודם מתחבר."
+
+#: gnome-applets-2.0/modemlights/modemlights.schemas.in.h:25
+msgid "The color used to display the status button when the modem is not connected."
+msgstr "הצבע המשמש להצגת כפתור המצב כאשר המודם לא מחובר."
+
+#: gnome-applets-2.0/modemlights/modemlights.schemas.in.h:26
+msgid "The color used to indicate that data has been received."
+msgstr "הצבע המשמש לציון מידע שהתקבל."
+
+#: gnome-applets-2.0/modemlights/modemlights.schemas.in.h:27
+msgid "The color used to indicate that data has been sent."
+msgstr "הצבע המשמש לציון מידע שנשלח."
+
+#: gnome-applets-2.0/modemlights/modemlights.schemas.in.h:28
+msgid "The fraction of a second until the applet updates."
+msgstr "חלק השניה עד שהיישומון מתעדכן."
+
+#: gnome-applets-2.0/modemlights/modemlights.schemas.in.h:29
+msgid "The name of the modem device."
+msgstr "שם התקן המודם."
+
+#: gnome-applets-2.0/modemlights/modemlights.schemas.in.h:30
+msgid "The name of the modem lock file."
+msgstr "שם קובץ נעילת המודם."
+
+#: gnome-applets-2.0/modemlights/modemlights.schemas.in.h:32
+msgid "Use isdn"
+msgstr "השתמש ב ISDN"
+
+#: gnome-applets-2.0/modemlights/modemlights.schemas.in.h:33
+msgid "Use isdn instead of ppp to connect the modem."
+msgstr "השתמש ב ISDN במקום PPP לחיבור המודם."
+
+#: gnome-applets-2.0/modemlights/modemlights.schemas.in.h:34
+msgid "Use this command to connect the modem."
+msgstr "השתמש בפקודה זו לחיבור המודם."
+
+#: gnome-applets-2.0/modemlights/modemlights.schemas.in.h:35
+msgid "Use this command to disconnect the modem."
+msgstr "השתמש בפקודה זו לניתוק המודם."
+
+#: gnome-applets-2.0/modemlights/modemlights.schemas.in.h:36
+msgid "Verify owner of lock file"
+msgstr "ודא בעלים של קובץ הנעילה"
+
+#: gnome-applets-2.0/modemlights/properties.c:423
+msgid "Modem Lights Preferences"
+msgstr "העדפות נוריות מודם"
+
+#: gnome-applets-2.0/modemlights/properties.c:451
+msgid "U_pdate every:"
+msgstr "_עדכן כל:"
+
+#: gnome-applets-2.0/modemlights/properties.c:468
+msgid "seconds"
+msgstr "שניות"
+
+#. extra info checkbox
+#: gnome-applets-2.0/modemlights/properties.c:476
+msgid "Sho_w connect time and throughput"
+msgstr "הצ_ג זמן חיבור וקצב העברה"
+
+#: gnome-applets-2.0/modemlights/properties.c:486
+msgid "B_link connection status when connecting"
+msgstr "ה_בהב מצב חיבור כאשר מתחברים"
+
+#: gnome-applets-2.0/modemlights/properties.c:496
+msgid "Connections"
+msgstr "חיבורים"
+
+#: gnome-applets-2.0/modemlights/properties.c:505
+msgid "Co_nnection command:"
+msgstr "פקודת הת_חברות:"
+
+#: gnome-applets-2.0/modemlights/properties.c:531
+msgid "_Disconnection command:"
+msgstr "פקודת הת_נתקות:"
+
+#. confirmation checkbox
+#: gnome-applets-2.0/modemlights/properties.c:553
+msgid "Con_firm connection"
+msgstr "א_שר התחברות"
+
+#: gnome-applets-2.0/modemlights/properties.c:572
+msgid "Receive Data"
+msgstr "קבלת מידע"
+
+#: gnome-applets-2.0/modemlights/properties.c:578
+msgid "_Foreground:"
+msgstr "_חזית:"
+
+#: gnome-applets-2.0/modemlights/properties.c:583
+msgid "Send Data"
+msgstr "שליחת מידע"
+
+#: gnome-applets-2.0/modemlights/properties.c:588
+msgid "Foregroun_d:"
+msgstr "ח_זית:"
+
+#: gnome-applets-2.0/modemlights/properties.c:590
+msgid "Backg_round:"
+msgstr "ר_קע:"
+
+#: gnome-applets-2.0/modemlights/properties.c:593
+msgid "Connection Status"
+msgstr "מצב התחברות"
+
+#: gnome-applets-2.0/modemlights/properties.c:601
+msgid "Co_nnected:"
+msgstr "מ_חובר:"
+
+#: gnome-applets-2.0/modemlights/properties.c:603
+msgid "Disconnec_ted:"
+msgstr "מ_נותק:"
+
+#: gnome-applets-2.0/modemlights/properties.c:606
+msgid "C_onnecting:"
+msgstr "מ_תחבר:"
+
+#: gnome-applets-2.0/modemlights/properties.c:617
+msgid "For_eground:"
+msgstr "חז_ית:"
+
+#: gnome-applets-2.0/modemlights/properties.c:619
+msgid "Bac_kground:"
+msgstr "רק_ע:"
+
+#: gnome-applets-2.0/modemlights/properties.c:633
+msgid "Modem Options"
+msgstr "אפשרויות מודם"
+
+#: gnome-applets-2.0/modemlights/properties.c:642
+msgid "_Device:"
+msgstr "_התקן:"
+
+#: gnome-applets-2.0/modemlights/properties.c:668
+msgid "_Lock file:"
+msgstr "קובץ _נעילה:"
+
+#: gnome-applets-2.0/modemlights/properties.c:689
+msgid "_Verify owner of lock file"
+msgstr "_ודא בעלים של קובץ הנעילה"
+
+#. ISDN checkbox
+#: gnome-applets-2.0/modemlights/properties.c:700
+msgid "U_se ISDN"
+msgstr "ה_שתמש ב ISDN"
+
+#: gnome-applets-2.0/modemlights/properties.c:717
+msgid "Advanced"
+msgstr "מתקדם"
+
+#: gnome-control-center-2.0/capplets/passwd/gnome-passwd.glade.h:1
+msgid "*"
+msgstr "*"
+
+#: settings.cpp:385
+msgid "Server"
+msgstr "שרת"
+
+#  header text
+#  Column header
+#  header text
+#: sysinfo.cpp:334
+msgid "Device"
+msgstr "התקן"
+
+#  column description, if disk space is not known
+#  label text
+#: detaileddialog.cpp:253 detaileddialog.cpp:441 detaileddialog.cpp:468
+msgid "unknown"
+msgstr "לא ידוע"
+
+#: kpowersave.cpp:1641
+msgid "Error"
+msgstr "שגיאה"
+
+#. FIXME driverList->setColumnWidthMode( COLUMN_NAME, QTreeWidget::Maximum );
+#. FIXME patchList->setColumnWidthMode( COLUMN_NAME, QTreeWidget::Maximum );
+#. FIXME packageList->setColumnWidthMode( COLUMN_NAME, QTreeWidget::Maximum );
+#: ../src/mainwindow.cpp:65 ../src/mainwindow.cpp:104
+#: ../src/mainwindow.cpp:157
+msgid "Summary"
+msgstr "סיכום"
+
+#: config_dialog.cpp:107
+msgid "Configuration"
+msgstr "הגדרות"
+
+#. Yes Button text
+msgid "&Yes"
+msgstr "&Yes"
+
+#. XKBFile extension text
+msgid "Morocco"
+msgstr "מרוקו"
+
+# CN
+#. XKBFile extension text
+msgid "China"
+msgstr "סין"
+
+#. XKBFile extension text
+msgid "Arabic"
+msgstr "ערבית"
+
+# IQ
+#. XKBFile extension text
+msgid "Iraq"
+msgstr "עירק"
+
+# EE
+#. XKBFile extension text
+msgid "Estonia"
+msgstr "אסטוניה"
+
+# NO
+#. XKBFile extension text
+msgid "Norway"
+msgstr "נורבגיה"
+
+# DE
+#. XKBFile extension text
+msgid "Germany"
+msgstr "גרמניה"
+
+#. XKBFile extension text
+msgid "Bangladesh"
+msgstr "בנגלדש"
+
+# BE
+#. XKBFile extension text
+msgid "Belgium"
+msgstr "בלגיה"
+
+# FI
+#. XKBFile extension text
+msgid "Finland"
+msgstr "פינלנד"
+
+# IL
+#. XKBFile extension text
+msgid "Israel"
+msgstr "ישראל"
+
+# SE
+#. XKBFile extension text
+msgid "Sweden"
+msgstr "שבדיה"
+
+# PT
+#. XKBFile extension text
+msgid "Portugal"
+msgstr "פורטוגל"
+
+#. XKBFile extension text
+msgid "Korean"
+msgstr "קוריאנית"
+
+#. XKBFile extension text
+msgid "Maori"
+msgstr "מאורית"
+
+#. XKBFile extension text
+msgid "Uzbekistan"
+msgstr "אוסביקיסטן"
+
+# BG
+#. XKBFile extension text
+msgid "Bulgaria"
+msgstr "בולגריה"
+
+# TH
+#. XKBFile extension text
+msgid "Thailand"
+msgstr "תאילנד"
+
+# IN
+#. XKBFile extension text
+msgid "India"
+msgstr "הודו"
+
+#. XKBFile extension text
+msgid "Bengali"
+msgstr "בנגאלית"
+
+# CH
+#. XKBFile extension text
+msgid "Switzerland"
+msgstr "שוייץ"
+
+# JP
+#. XKBFile extension text
+msgid "Japan"
+msgstr "יפן"
+
+# BY
+#. XKBFile extension text
+msgid "Belarus"
+msgstr "בלרוס"
+
+# TW
+#. XKBFile extension text
+msgid "Tajikistan"
+msgstr "טאג'יקיסטן"
+
+# DK
+#. XKBFile extension text
+msgid "Denmark"
+msgstr "דנמרק"
+
+# SI
+#. XKBFile extension text
+msgid "Slovenia"
+msgstr "סלובניה"
+
+# MT
+#. XKBFile extension text
+msgid "Malta"
+msgstr "מלטה"
+
+# LT
+#. XKBFile extension text
+msgid "Lithuania"
+msgstr "ליטא"
+
+# IE
+#. XKBFile extension text
+msgid "Faroe Islands"
+msgstr "איי פר-אר"
+
+# ZA
+#. XKBFile extension text
+msgid "South Africa"
+msgstr "דרום אפריקה"
+
+# SK
+#. XKBFile extension text
+msgid "Slovakia"
+msgstr "סלובקיה"
+
+# IS
+#. XKBFile extension text
+msgid "Iceland"
+msgstr "איסלנד"
+
+# HR
+#. XKBFile extension text
+msgid "Croatia"
+msgstr "קרואטיה"
+
+# LV
+#. XKBFile extension text
+msgid "Latvia"
+msgstr "לטביה"
+
+#. XKBFile extension text
+msgid "Albania"
+msgstr "אלבניה"
+
+# IT
+#. XKBFile extension text
+msgid "Italy"
+msgstr "איטליה"
+
+# GR
+#. XKBFile extension text
+msgid "Greece"
+msgstr "יוון"
+
+# FR
+#. XKBFile extension text
+msgid "France"
+msgstr "צרפת"
+
+#. XKBFile extension text
+msgid "Pakistan"
+msgstr "פקיסטן"
+
+# PL
+#. XKBFile extension text
+msgid "Poland"
+msgstr "פולין"
+
+# IE
+#. XKBFile extension text
+msgid "Ireland"
+msgstr "אירלנד"
+
+# HU
+#. XKBFile extension text
+msgid "Hungary"
+msgstr "הונגריה"
+
+# ES
+#. XKBFile extension text
+msgid "Spain"
+msgstr "ספרד"
+
+# UA
+#. XKBFile extension text
+msgid "Ukraine"
+msgstr "אוקראינה"
+
+# RO
+#. XKBFile extension text
+msgid "Romania"
+msgstr "רומניה"
+
+#. XKBFile extension text
+msgid "Georgia"
+msgstr " ג'ורג'יה"
+
+#. XKBFile extension text
+msgid "Turkish"
+msgstr "טורקית"
+
+# NL
+#. XKBFile extension text
+msgid "Netherlands"
+msgstr "הולנד"
+
+# MK
+#. XKBFile extension text
+msgid "Macedonia"
+msgstr "מקדונית"
+
+# CA
+#. XKBFile extension text
+msgid "Canada"
+msgstr "קנדה"
+
+#. XKBFile extension text
+msgid "Esperanto"
+msgstr "אספרנטו"
+
+# TR
+#. XKBFile extension text
+msgid "Turkey"
+msgstr "טורקיה"
+
+msgid "Ok"
+msgstr "בסדר"
+
+#. language code: afr af
+#: ../zypp/LanguageCode.cc:254
+msgid "Afrikaans"
+msgstr "אפריקנס"
+
+# BG
+#. :DOM:214:
+#: ../zypp/CountryCode.cc:284
+msgid "Algeria"
+msgstr "אלג'יר"
+
+# AR
+#. :ATA:010:
+#: ../zypp/CountryCode.cc:234
+msgid "Argentina"
+msgstr "ארגנטינה"
+
+# AU
+#. :AUT:040:
+#: ../zypp/CountryCode.cc:237
+msgid "Australia"
+msgstr "אוסטרליה"
+
+# AT
+#. :ASM:016:
+#: ../zypp/CountryCode.cc:236
+msgid "Austria"
+msgstr "אוסטריה"
+
+#. language code: aze az
+#: ../zypp/LanguageCode.cc:312
+msgid "Azerbaijani"
+msgstr "אזרביג'נית"
+
+# BB
+#. :BIH:070:
+#: ../zypp/CountryCode.cc:242
+msgid "Barbados"
+msgstr "ברבדוס"
+
+#. language code: baq eus eu
+#: ../zypp/LanguageCode.cc:326 ../zypp/LanguageCode.cc:328
+msgid "Basque"
+msgstr "בסקית"
+
+# BO
+#. :BRN:096:
+#: ../zypp/CountryCode.cc:252
+msgid "Bolivia"
+msgstr "בוליביה"
+
+#. :BVT:074:
+#: ../zypp/CountryCode.cc:257
+msgid "Botswana"
+msgstr "בוטסואנה"
+
+#. language code: bre br
+#: ../zypp/LanguageCode.cc:362
+msgid "Breton"
+msgstr "ברטונית"
+
+#. language code: bul bg
+#: ../zypp/LanguageCode.cc:370
+msgid "Bulgarian"
+msgstr "בולגרית"
+
+#. language code: cat ca
+#: ../zypp/LanguageCode.cc:384
+msgid "Catalan"
+msgstr "קטלונית"
+
+# CL
+#. :COK:184:
+#: ../zypp/CountryCode.cc:268
+msgid "Chile"
+msgstr "צ'ילה"
+
+#. language code: chi zho zh
+#: ../zypp/LanguageCode.cc:400 ../zypp/LanguageCode.cc:402
+msgid "Chinese"
+msgstr "סינית"
+
+#. :CHN:156:
+#: ../zypp/CountryCode.cc:271
+msgid "Colombia"
+msgstr "קולומביה"
+
+#. :COL:170:
+#: ../zypp/CountryCode.cc:272
+msgid "Costa Rica"
+msgstr "קוסטה ריקה"
+
+#. language code: scr hrv hr
+#: ../zypp/LanguageCode.cc:1008 ../zypp/LanguageCode.cc:1010
+msgid "Croatian"
+msgstr "קרואטית"
+
+#. language code: cze ces cs
+#: ../zypp/LanguageCode.cc:446 ../zypp/LanguageCode.cc:448
+msgid "Czech"
+msgstr "צ'כית"
+
+#. language code: dan da
+#: ../zypp/LanguageCode.cc:452
+msgid "Danish"
+msgstr "דנית"
+
+# DO
+#. :DMA:212:
+#: ../zypp/CountryCode.cc:283
+msgid "Dominican Republic"
+msgstr "הרפובליקה הדומיניקנית"
+
+#. language code: dut nld nl
+#: ../zypp/LanguageCode.cc:478 ../zypp/LanguageCode.cc:480
+msgid "Dutch"
+msgstr "הולנדית"
+
+#. :DZA:012:
+#: ../zypp/CountryCode.cc:285
+msgid "Ecuador"
+msgstr "אקוודור"
+
+# EG
+#. :EST:233:
+#: ../zypp/CountryCode.cc:287
+msgid "Egypt"
+msgstr "מצרים"
+
+# SV
+#. :STP:678:
+#: ../zypp/CountryCode.cc:426
+msgid "El Salvador"
+msgstr "אל סלבדור"
+
+#. language code: est et
+#: ../zypp/LanguageCode.cc:500
+msgid "Estonian"
+msgstr "אסטונית"
+
+#. language code: fin fi
+#: ../zypp/LanguageCode.cc:516
+msgid "Finnish"
+msgstr "פינית"
+
+#. language code: fre fra fr
+#: ../zypp/LanguageCode.cc:522 ../zypp/LanguageCode.cc:524
+msgid "French"
+msgstr "צרפתית"
+
+#. language code: ger deu de
+#: ../zypp/LanguageCode.cc:548 ../zypp/LanguageCode.cc:550
+msgid "German"
+msgstr "גרמנית"
+
+# GD
+#. :GIB:292:
+#: ../zypp/CountryCode.cc:306
+msgid "Greenland"
+msgstr "גרינלנד"
+
+# GD
+#. :GBR:826:
+#: ../zypp/CountryCode.cc:301
+msgid "Grenada"
+msgstr "גרנדה"
+
+# GT
+#. :SGS:239:
+#: ../zypp/CountryCode.cc:313
+msgid "Guatemala"
+msgstr "גואטמלה"
+
+#. language code: heb he
+#: ../zypp/LanguageCode.cc:596
+msgid "Hebrew"
+msgstr "עברית"
+
+# HN
+#. :HMD:334:
+#: ../zypp/CountryCode.cc:319
+msgid "Honduras"
+msgstr "הונדורס"
+
+#. :GUY:328:
+#: ../zypp/CountryCode.cc:317
+msgid "Hong Kong"
+msgstr "הונג-קונג"
+
+#. language code: hun hu
+#: ../zypp/LanguageCode.cc:614
+msgid "Hungarian"
+msgstr "הונגרית"
+
+#. language code: ice isl is
+#: ../zypp/LanguageCode.cc:622 ../zypp/LanguageCode.cc:624
+msgid "Icelandic"
+msgstr "איסלנדית"
+
+# ID
+#. :HUN:348:
+#: ../zypp/CountryCode.cc:323
+msgid "Indonesia"
+msgstr "אינדונזיה"
+
+#. language code: ind id
+#: ../zypp/LanguageCode.cc:642
+msgid "Indonesian"
+msgstr "אינדונזית"
+
+#. language code: gle ga
+#: ../zypp/LanguageCode.cc:558
+msgid "Irish"
+msgstr "אירית"
+
+#. language code: ita it
+#: ../zypp/LanguageCode.cc:654
+msgid "Italian"
+msgstr "איטלקית"
+
+#. language code: jpn ja
+#: ../zypp/LanguageCode.cc:660
+msgid "Japanese"
+msgstr "יפנית"
+
+# JO
+#. :JAM:388:
+#: ../zypp/CountryCode.cc:333
+msgid "Jordan"
+msgstr "ירדן"
+
+#. language code: kur ku
+#: ../zypp/LanguageCode.cc:728
+msgid "Kurdish"
+msgstr "כורדית"
+
+#. :KOR:410:
+#: ../zypp/CountryCode.cc:343
+msgid "Kuwait"
+msgstr "כווית "
+
+#. language code: lav lv
+#: ../zypp/LanguageCode.cc:742
+msgid "Latvian"
+msgstr "לטבית"
+
+#. :LAO:418:
+#: ../zypp/CountryCode.cc:347
+msgid "Lebanon"
+msgstr "לבנון"
+
+#. language code: lit lt
+#: ../zypp/LanguageCode.cc:750
+msgid "Lithuanian"
+msgstr "ליטאית"
+
+# LU
+#. :LTU:440:
+#: ../zypp/CountryCode.cc:354
+msgid "Luxembourg"
+msgstr "לוקסמבורג"
+
+#. language code: mac mkd mk
+#: ../zypp/LanguageCode.cc:772 ../zypp/LanguageCode.cc:774
+msgid "Macedonian"
+msgstr "מקדונית"
+
+# MT
+#. :MEX:484:
+#: ../zypp/CountryCode.cc:376
+msgid "Malaysia"
+msgstr "מלזיה "
+
+#. language code: mlt mt
+#: ../zypp/LanguageCode.cc:822
+msgid "Maltese"
+msgstr "מלטזית"
+
+# MX
+#. :MWI:454:
+#: ../zypp/CountryCode.cc:375
+msgid "Mexico"
+msgstr "מקסיקו"
+
+# NZ
+#. :NIU:570:
+#: ../zypp/CountryCode.cc:389
+msgid "New Zealand"
+msgstr "ניו זילנד"
+
+# PY
+#. :NGA:566:
+#: ../zypp/CountryCode.cc:383
+msgid "Nicaragua"
+msgstr "ניקאראגואה"
+
+#. language code: nor no
+#: ../zypp/LanguageCode.cc:888
+msgid "Norwegian"
+msgstr "הנורבגית"
+
+#. :NZL:554:
+#: ../zypp/CountryCode.cc:390
+msgid "Oman"
+msgstr "עומן"
+
+# PA
+#. :OMN:512:
+#: ../zypp/CountryCode.cc:391
+msgid "Panama"
+msgstr "פנמה"
+
+# PY
+#. :PLW:585:
+#: ../zypp/CountryCode.cc:404
+msgid "Paraguay"
+msgstr "פרגואי"
+
+# PE
+#. :PAN:591:
+#: ../zypp/CountryCode.cc:392
+msgid "Peru"
+msgstr "פרו"
+
+#. :PNG:598:
+#: ../zypp/CountryCode.cc:395
+msgid "Philippines"
+msgstr "הפיליפינים"
+
+#. language code: pol pl
+#: ../zypp/LanguageCode.cc:948
+msgid "Polish"
+msgstr "פולנית"
+
+#. language code: por pt
+#: ../zypp/LanguageCode.cc:952
+msgid "Portuguese"
+msgstr "פורטוגזית"
+
+#. :PCN:612:
+#: ../zypp/CountryCode.cc:400
+msgid "Puerto Rico"
+msgstr "פורטו ריקו"
+
+# MT
+#. :PRY:600:
+#: ../zypp/CountryCode.cc:405
+msgid "Qatar"
+msgstr "קטאר"
+
+#. language code: rum ron ro
+#: ../zypp/LanguageCode.cc:974 ../zypp/LanguageCode.cc:976
+msgid "Romanian"
+msgstr "רומנית"
+
+#. language code: rus ru
+#: ../zypp/LanguageCode.cc:980
+msgid "Russian"
+msgstr "רוסית"
+
+#. :RWA:646:
+#: ../zypp/CountryCode.cc:410
+msgid "Saudi Arabia"
+msgstr "ערב הסעודית"
+
+#. language code: scc srp sr
+#: ../zypp/LanguageCode.cc:1000 ../zypp/LanguageCode.cc:1002
+msgid "Serbian"
+msgstr "סרבית"
+
+#. :SWE:752:
+#: ../zypp/CountryCode.cc:415
+msgid "Singapore"
+msgstr "סינגפור"
+
+#. language code: slo slk sk
+#: ../zypp/LanguageCode.cc:1032 ../zypp/LanguageCode.cc:1034
+msgid "Slovak"
+msgstr "סלובקית"
+
+#. language code: slv sl
+#: ../zypp/LanguageCode.cc:1036
+msgid "Slovenian"
+msgstr "סלובנית"
+
+#. language code: spa es
+#: ../zypp/LanguageCode.cc:1066
+msgid "Spanish"
+msgstr "ספרדית"
+
+# SD
+#. :SYC:690:
+#: ../zypp/CountryCode.cc:413
+msgid "Sudan"
+msgstr "סודן"
+
+#. language code: swe sv
+#: ../zypp/LanguageCode.cc:1086
+msgid "Swedish"
+msgstr "שבדית"
+
+#. language code: tam ta
+#: ../zypp/LanguageCode.cc:1094
+msgid "Tamil"
+msgstr "טמילית"
+
+#. language code: tha th
+#: ../zypp/LanguageCode.cc:1110
+msgid "Thai"
+msgstr "תאילנדית"
+
+#. :TKM:795:
+#: ../zypp/CountryCode.cc:437
+msgid "Tunisia"
+msgstr "טוניס"
+
+# UA
+#. language code: ukr uk
+#: ../zypp/LanguageCode.cc:1164
+msgid "Ukrainian"
+msgstr "אוקראינית"
+
+#. :AND:020:
+#: ../zypp/CountryCode.cc:225
+msgid "United Arab Emirates"
+msgstr "איחוד הנסיכויות הערביות"
+
+# UY
+#. :USA:840:
+#: ../zypp/CountryCode.cc:449
+msgid "Uruguay"
+msgstr "אורוגואי"
+
+# VE
+#. :VCT:670:
+#: ../zypp/CountryCode.cc:453
+msgid "Venezuela"
+msgstr "ונצואלה"
+
+#. language code: vie vi
+#: ../zypp/LanguageCode.cc:1178
+msgid "Vietnamese"
+msgstr "וייטנאמית"
+
+#. language code: wel cym cy
+#: ../zypp/LanguageCode.cc:1192 ../zypp/LanguageCode.cc:1194
+msgid "Welsh"
+msgstr "וולשית"
+
+#. language code: xho xh
+#: ../zypp/LanguageCode.cc:1204
+msgid "Xhosa"
+msgstr "קוזה"
+
+#. :WSM:882:
+#: ../zypp/CountryCode.cc:460
+msgid "Yemen"
+msgstr "תימן"
+
+#. :ZMB:894:
+#: ../zypp/CountryCode.cc:464
+msgid "Zimbabwe"
+msgstr "זימבבואה "
+
+#. language code: zul zu
+#: ../zypp/LanguageCode.cc:1224
+msgid "Zulu"
+msgstr "זולו"
+
+#: ../src/info.cc:46
+msgid "Description: "
+msgstr "תיאור:"

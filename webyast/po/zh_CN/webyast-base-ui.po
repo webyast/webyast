@@ -1,0 +1,491 @@
+# Copyright (C) 2006 SuSE Linux Products GmbH, Nuernberg
+# This file is distributed under the same license as the package.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: webyast-base-ui\n"
+"POT-Creation-Date: 2010-09-01 10:38+0200\n"
+"PO-Revision-Date: 2010-09-03 15:08\n"
+"Last-Translator: Novell Language <language@novell.com>\n"
+"Language-Team: Novell Language <language@novell.com>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+
+#: app/helpers/application_helper.rb:39 ./app/helpers/application_helper.rb:39
+msgid " or "
+msgstr " 或 "
+
+#: app/helpers/application_helper.rb:43 ./app/helpers/application_helper.rb:43
+msgid " - "
+msgstr " - "
+
+#: app/helpers/application_helper.rb:52 app/helpers/application_helper.rb:66
+#: app/views/hosts/edit.html.erb:40 ./app/helpers/application_helper.rb:52
+#: ./app/helpers/application_helper.rb:66 ./app/views/hosts/edit.html.erb:40
+msgid "Back"
+msgstr "上一步"
+
+#: app/helpers/application_helper.rb:56 app/views/hosts/new.html.erb:53
+#: ./app/helpers/application_helper.rb:56 ./app/views/hosts/new.html.erb:53
+msgid "Cancel"
+msgstr "取消"
+
+#: app/helpers/application_helper.rb:71 ./app/helpers/application_helper.rb:71
+msgid "Save"
+msgstr "保存"
+
+#: app/helpers/application_helper.rb:74 ./app/helpers/application_helper.rb:74
+msgid "Next"
+msgstr "下一步"
+
+#: app/helpers/application_helper.rb:75 ./app/helpers/application_helper.rb:75
+msgid "Finish"
+msgstr "完成"
+
+#: app/helpers/view_helpers/html_helper.rb:27 ./app/helpers/view_helpers/html_helper.rb:27
+msgid "Are you sure?"
+msgstr "您确定吗？"
+
+#: app/helpers/view_helpers/html_helper.rb:153 ./app/helpers/view_helpers/html_helper.rb:153
+msgid "Unknown error"
+msgstr "未知错误"
+
+#: app/helpers/view_helpers/html_helper.rb:157 app/views/shared/exception_trap.html.erb:17
+#: ./app/helpers/view_helpers/html_helper.rb:157 ./app/views/shared/exception_trap.html.erb:17
+msgid "No information available"
+msgstr "无信息可用"
+
+#: app/helpers/view_helpers/html_helper.rb:160 ./app/helpers/view_helpers/html_helper.rb:160
+msgid "There was a problem retrieving information from the server."
+msgstr "从服务器检索信息时出现问题。"
+
+#: app/helpers/view_helpers/effect_helper.rb:50 ./app/helpers/view_helpers/effect_helper.rb:50
+msgid "Hide Details"
+msgstr "隐藏细节"
+
+#: app/helpers/view_helpers/effect_helper.rb:51 ./app/helpers/view_helpers/effect_helper.rb:51
+msgid "Show Details"
+msgstr "显示细节"
+
+#: app/helpers/view_helpers/label_helper.rb:24 app/views/hosts/index.html.erb:32
+#: ./app/helpers/view_helpers/label_helper.rb:24 ./app/views/hosts/index.html.erb:32
+msgid "Add"
+msgstr "添加"
+
+#: app/helpers/view_helpers/label_helper.rb:28 ./app/helpers/view_helpers/label_helper.rb:28
+msgid "Edit"
+msgstr "编辑"
+
+#: app/helpers/view_helpers/label_helper.rb:32 ./app/helpers/view_helpers/label_helper.rb:32
+msgid "Delete"
+msgstr "删除"
+
+#: app/controllers/sessions_controller.rb:67 ./app/controllers/sessions_controller.rb:67
+msgid "You need to specify the host"
+msgstr "您需要指定主机"
+
+#: app/controllers/sessions_controller.rb:70 ./app/controllers/sessions_controller.rb:70
+msgid "No login specified"
+msgstr "未指定登录信息"
+
+#: app/controllers/sessions_controller.rb:73 ./app/controllers/sessions_controller.rb:73
+msgid "No password specified"
+msgstr "未指定密码"
+
+#: app/controllers/sessions_controller.rb:92 ./app/controllers/sessions_controller.rb:92
+msgid "Host has blocked user %s. It cannot login until  %s"
+msgstr "主机已阻止了用户 %s。它在 %s 后才能登录"
+
+#: app/controllers/sessions_controller.rb:119 ./app/controllers/sessions_controller.rb:119
+msgid "Login incorrect. Check your username and password."
+msgstr "登录错误。请检查您的用户名和密码。"
+
+#: app/controllers/sessions_controller.rb:152 ./app/controllers/sessions_controller.rb:152
+msgid "You have been logged out."
+msgstr "您已注销。"
+
+#: app/controllers/application_controller.rb:44 ./app/controllers/application_controller.rb:44
+msgid "Session timeout"
+msgstr "会话超时"
+
+#: app/controllers/application_controller.rb:103 ./app/controllers/application_controller.rb:103
+msgid "Operation is forbidden. If you have to do it, please contact system administrator"
+msgstr "操作被禁止。如果必须执行，请联系系统管理员"
+
+#: app/controllers/application_controller.rb:148 ./app/controllers/application_controller.rb:148
+msgid "Please login to continue"
+msgstr "请登录以继续操作"
+
+#: app/controllers/application_controller.rb:155 ./app/controllers/application_controller.rb:155
+msgid "You must logout before you can login"
+msgstr "您必须先注销才能登录"
+
+#: app/controllers/application_controller.rb:244 ./app/controllers/application_controller.rb:244
+msgid "can't be blank"
+msgstr "不能为空白"
+
+#: app/controllers/application_controller.rb:245 ./app/controllers/application_controller.rb:245
+msgid "is out of allowed values"
+msgstr "超出允许值范围"
+
+#: app/controllers/application_controller.rb:246 ./app/controllers/application_controller.rb:246
+msgid "can't be empty"
+msgstr "不能为空"
+
+#: app/controllers/application_controller.rb:247 ./app/controllers/application_controller.rb:247
+msgid "is invalid"
+msgstr "无效"
+
+#: app/controllers/application_controller.rb:262 ./app/controllers/application_controller.rb:262
+msgid "Invalid parameters:"
+msgstr "无效参数："
+
+#: app/controllers/hosts_controller.rb:43 ./app/controllers/hosts_controller.rb:43
+msgid "Can't connect to host %s."
+msgstr "无法连接到主机 %s。"
+
+#: app/controllers/hosts_controller.rb:44 ./app/controllers/hosts_controller.rb:44
+msgid "Make sure the host is up and that the YaST web service is running."
+msgstr "确保主机已启动，YaST Web 服务已运行。"
+
+#: app/controllers/hosts_controller.rb:46 ./app/controllers/hosts_controller.rb:46
+msgid "Please select a host to connect to."
+msgstr "请选择要连接到的主机。"
+
+#: app/controllers/hosts_controller.rb:49 ./app/controllers/hosts_controller.rb:49
+msgid "The host '%s' cannot be found."
+msgstr "找不到主机 %s。"
+
+#: app/controllers/hosts_controller.rb:50 ./app/controllers/hosts_controller.rb:50
+msgid "Please double-check the host URL."
+msgstr "请再次检查主机 URL。"
+
+#: app/models/account.rb:-
+msgid "account"
+msgstr "帐户"
+
+#: app/models/account.rb:-
+msgid "Account|Login"
+msgstr "帐户|登录"
+
+#: app/models/account.rb:-
+msgid "Account|Created at"
+msgstr "帐户|创建于"
+
+#: app/models/account.rb:-
+msgid "Account|Updated at"
+msgstr "帐户|更新于"
+
+#: app/models/account.rb:-
+msgid "Account|Remember token"
+msgstr "帐户|记住令牌"
+
+#: app/models/account.rb:-
+msgid "Account|Remember token expires at"
+msgstr "帐户|记住令牌失效于"
+
+#: app/models/account.rb:-
+msgid "Account|Salt"
+msgstr "帐户|Salt"
+
+#: app/models/host.rb:-
+msgid "host"
+msgstr "主机"
+
+#: app/models/host.rb:-
+msgid "Host|Name"
+msgstr "主机|名称"
+
+#: app/models/host.rb:-
+msgid "Host|Url"
+msgstr "主机|Url"
+
+#: app/models/host.rb:-
+msgid "Host|Description"
+msgstr "主机|描述"
+
+#: app/models/host.rb:-
+msgid "Host|Created at"
+msgstr "主机|创建于"
+
+#: app/models/host.rb:-
+msgid "Host|Updated at"
+msgstr "主机|更新于"
+
+#: app/views/main/_select_language.html.erb:19 ./app/views/main/_select_language.html.erb:19
+msgid "Language Selection"
+msgstr "语言选择"
+
+#: app/views/shared/exception_trap.html.erb:3 app/views/shared/backendexception_trap.html.erb:2
+#: ./app/views/shared/exception_trap.html.erb:3 ./app/views/shared/backendexception_trap.html.erb:2
+msgid "This is embarrasing...."
+msgstr "我们感到很尴尬...."
+
+#: app/views/shared/exception_trap.html.erb:5 ./app/views/shared/exception_trap.html.erb:5
+msgid "We are sorry, but there are some problems."
+msgstr "抱歉，出了一些问题。"
+
+#: app/views/shared/exception_trap.html.erb:7 app/views/shared/backendexception_trap.html.erb:6
+#: ./app/views/shared/exception_trap.html.erb:7 ./app/views/shared/backendexception_trap.html.erb:6
+msgid "Problem:"
+msgstr "问题："
+
+#: app/views/shared/exception_trap.html.erb:13 ./app/views/shared/exception_trap.html.erb:13
+msgid "Please Report a bug so we can fix the problem!."
+msgstr "请报告 bug，以便我们解决此问题！"
+
+#: app/views/shared/exception_trap.html.erb:13 ./app/views/shared/exception_trap.html.erb:13
+msgid "(report link)"
+msgstr "（报告链接）"
+
+#: app/views/shared/exception_trap.html.erb:14 ./app/views/shared/exception_trap.html.erb:14
+msgid "Don't forget to include the bug details."
+msgstr "请不要忘记写上 bug 细节。"
+
+#: app/views/shared/backendexception_trap.html.erb:4 ./app/views/shared/backendexception_trap.html.erb:4
+msgid "Problem occured on target machine."
+msgstr "目标计算机出现问题。"
+
+#: app/views/shared/_missing_write_permissions.html.erb:1 ./app/views/shared/_missing_write_permissions.html.erb:1
+msgid "You do not have permissions to modify the settings."
+msgstr "您无权修改设置。"
+
+#: app/views/hosts/edit.html.erb:2 ./app/views/hosts/edit.html.erb:2
+msgid "Editing YaST-Web-Service"
+msgstr "正在编辑 YaST-Web-Service"
+
+#: app/views/hosts/edit.html.erb:23 ./app/views/hosts/edit.html.erb:23
+msgid "YaST-Web-Service"
+msgstr "YaST-Web-Service"
+
+#: app/views/hosts/edit.html.erb:26 app/views/hosts/new.html.erb:37 ./app/views/hosts/edit.html.erb:26
+#: ./app/views/hosts/new.html.erb:37
+msgid "Name"
+msgstr "名称"
+
+#: app/views/hosts/edit.html.erb:30 ./app/views/hosts/edit.html.erb:30
+msgid "Url"
+msgstr "Url"
+
+#: app/views/hosts/edit.html.erb:34 app/views/hosts/new.html.erb:47 ./app/views/hosts/edit.html.erb:34
+#: ./app/views/hosts/new.html.erb:47
+msgid "Description"
+msgstr "描述"
+
+#: app/views/hosts/edit.html.erb:39 ./app/views/hosts/edit.html.erb:39
+msgid "Ok"
+msgstr "确定"
+
+#: app/views/hosts/index.html.erb:5 ./app/views/hosts/index.html.erb:5
+msgid "Please choose a service:"
+msgstr "请选择服务："
+
+#: app/views/hosts/index.html.erb:25 ./app/views/hosts/index.html.erb:25
+msgid "Really delete host %s ?"
+msgstr "真的要删除主机 %s 吗？"
+
+#: app/views/hosts/new.html.erb:10 ./app/views/hosts/new.html.erb:10
+msgid "New WebYaST Host"
+msgstr "新的 WebYaST 主机"
+
+#: app/views/hosts/new.html.erb:42 ./app/views/hosts/new.html.erb:42
+msgid "URL"
+msgstr "URL"
+
+#: app/views/hosts/new.html.erb:54 ./app/views/hosts/new.html.erb:54
+msgid "Create"
+msgstr "创建"
+
+#: app/views/hosts/show.html.erb:8 ./app/views/hosts/show.html.erb:8
+msgid "Index"
+msgstr "索引"
+
+#: app/views/controlpanel/show_all.rhtml:18 app/views/controlpanel/index.rhtml:71
+#: ./app/views/controlpanel/show_all.rhtml:18 ./app/views/controlpanel/index.rhtml:71
+msgid "Configuration"
+msgstr "配置"
+
+#: app/views/controlpanel/index.rhtml:29 ./app/views/controlpanel/index.rhtml:29
+msgid "Status"
+msgstr "状态"
+
+#: app/views/controlpanel/index.rhtml:34 ./app/views/controlpanel/index.rhtml:34
+msgid "Loading patch information"
+msgstr "正在装载增补程序信息"
+
+#: app/views/controlpanel/index.rhtml:36 ./app/views/controlpanel/index.rhtml:36
+msgid "Patch status summary is disabled in the config file."
+msgstr "配置文件中禁用了增补程序状态摘要。"
+
+#: app/views/controlpanel/index.rhtml:39 ./app/views/controlpanel/index.rhtml:39
+msgid "Patch plugin is not installed."
+msgstr "未安装增补程序插件。"
+
+#: app/views/controlpanel/index.rhtml:45 ./app/views/controlpanel/index.rhtml:45
+msgid "Loading system information"
+msgstr "正在装载系统信息"
+
+#: app/views/controlpanel/index.rhtml:47 ./app/views/controlpanel/index.rhtml:47
+msgid "System status summary is disabled in the config file."
+msgstr "配置文件中禁用了系统状态摘要。"
+
+#: app/views/controlpanel/index.rhtml:50 ./app/views/controlpanel/index.rhtml:50
+msgid "Status plugin is not installed."
+msgstr "未安装状态插件。"
+
+#: app/views/controlpanel/index.rhtml:61 ./app/views/controlpanel/index.rhtml:61
+msgid "System actions"
+msgstr "系统操作"
+
+#: app/views/controlpanel/index.rhtml:63 ./app/views/controlpanel/index.rhtml:63
+msgid "Reboot"
+msgstr "重引导"
+
+#: app/views/controlpanel/index.rhtml:64 ./app/views/controlpanel/index.rhtml:64
+msgid "Really reboot %s?"
+msgstr "真的要重引导 %s 吗？"
+
+#: app/views/controlpanel/index.rhtml:65 ./app/views/controlpanel/index.rhtml:65
+msgid "Shutdown"
+msgstr "关闭"
+
+#: app/views/controlpanel/index.rhtml:66 ./app/views/controlpanel/index.rhtml:66
+msgid "Really shutdown %s?"
+msgstr "真的要关闭 %s 吗？"
+
+#: app/views/controlpanel/index.rhtml:78 ./app/views/controlpanel/index.rhtml:78
+msgid "WebYaST modules are not installed on your system!"
+msgstr "您的系统上未安装 WebYaST 模块！"
+
+#: app/views/controlpanel/index.rhtml:83 ./app/views/controlpanel/index.rhtml:83
+msgid "You have no permissions to see or change the modules, please contact the administrator to set up permissions first!"
+msgstr "您无权查看或更改这些模块，请先联系管理员设置许可权限！"
+
+#: app/views/controlpanel/basesystem.rhtml:18 ./app/views/controlpanel/basesystem.rhtml:18
+msgid "Base system setup"
+msgstr "基本系统设置"
+
+#: app/views/controlpanel/basesystem.rhtml:20 ./app/views/controlpanel/basesystem.rhtml:20
+msgid "Your initial system setup was not completed. Please continue with setting up the modules."
+msgstr "您的初始系统设置未完成。请继续设置这些模块。"
+
+#: app/views/controlpanel/basesystem.rhtml:21 ./app/views/controlpanel/basesystem.rhtml:21
+msgid "Continue initial system setup"
+msgstr "继续初始系统设置"
+
+#: app/views/layouts/main.rhtml:59 ./app/views/layouts/main.rhtml:59
+msgid "WebYaST"
+msgstr "WebYaST"
+
+#: app/views/layouts/main.rhtml:85 ./app/views/layouts/main.rhtml:85
+msgid "You are using an unsupported browser. Please switch to %sFireFox 3.5 or better%s or %sInternet Explorer 8%s. Thanks! [%sclose%s]"
+msgstr "您使用的浏览器不受支持。请改用 %sFireFox 3.5 或更高版本%s或 %sInternet Explorer 8%s。谢谢！[%s关闭%s]"
+
+#: app/views/layouts/main.rhtml:92 ./app/views/layouts/main.rhtml:92
+msgid "JavaScript support is missing or disabled. Please turn JavaScript on or use a supported browser (%sFireFox 3.5%s or %sInternet Explorer 8%s)."
+msgstr "缺少或禁用了 JavaScript 支持。请打开 JavaScript 或使用支持的浏览器（%sFireFox 3.5%s 或 %sInternet Explorer 8%s）。"
+
+#: app/views/layouts/main.rhtml:100 ./app/views/layouts/main.rhtml:100 ./package/control_panel.yml:26
+msgid "My Appliance"
+msgstr "我的设备"
+
+#: app/views/layouts/main.rhtml:113 app/views/layouts/main.rhtml:117 ./app/views/layouts/main.rhtml:113
+#: ./app/views/layouts/main.rhtml:117
+msgid "Language:"
+msgstr "语言："
+
+#: app/views/layouts/main.rhtml:119 ./app/views/layouts/main.rhtml:119
+msgid "Connected host:"
+msgstr "连接的主机："
+
+#: app/views/layouts/main.rhtml:120 ./app/views/layouts/main.rhtml:120
+msgid "User:"
+msgstr "用户："
+
+#: app/views/layouts/main.rhtml:123 ./app/views/layouts/main.rhtml:123
+msgid "Control panel"
+msgstr "控制面板"
+
+#: app/views/layouts/main.rhtml:124 ./app/views/layouts/main.rhtml:124
+msgid "Logout"
+msgstr "注销"
+
+#: app/views/layouts/main.rhtml:132 ./app/views/layouts/main.rhtml:132
+msgid "You will be logged off in"
+msgstr "由于会话超时，您将在"
+
+#: app/views/layouts/main.rhtml:132 ./app/views/layouts/main.rhtml:132
+msgid "seconds due to session timeout. "
+msgstr "秒后注销。"
+
+#: app/views/layouts/main.rhtml:163 ./app/views/layouts/main.rhtml:163
+msgid "...Wait..."
+msgstr "...等待..."
+
+#: app/views/sessions/new.rhtml:21 app/views/sessions/new.rhtml:33 ./app/views/sessions/new.rhtml:21
+#: ./app/views/sessions/new.rhtml:33
+msgid "Login"
+msgstr "登录"
+
+#: app/views/sessions/new.rhtml:23 ./app/views/sessions/new.rhtml:23
+msgid "Enter login credentials for host %s."
+msgstr "输入主机 %s 的登录身份凭证。"
+
+#: app/views/sessions/new.rhtml:27 ./app/views/sessions/new.rhtml:27
+msgid "Username:"
+msgstr "用户名："
+
+#: app/views/sessions/new.rhtml:30 ./app/views/sessions/new.rhtml:30
+msgid "Password:"
+msgstr "密码："
+
+#: lib/error_constructor.rb:30 ./lib/error_constructor.rb:30
+msgid "Service %s is not available in the target machine"
+msgstr "服务 %s 在目标计算机中不可用"
+
+#: lib/error_constructor.rb:32 ./lib/error_constructor.rb:32
+msgid "Service %s is not running on the target machine"
+msgstr "服务 %s 未在目标计算机上运行"
+
+#: lib/error_constructor.rb:36 ./lib/error_constructor.rb:36
+msgid "Permission %s is not granted for user %s"
+msgstr "权限 %s 未授予用户 %s"
+
+#: lib/error_constructor.rb:38 ./lib/error_constructor.rb:38
+msgid "Policy kit exception for user %s and permission %s (untranslated message): %s"
+msgstr "用户 %s 和许可权限 %s 的策略套件异常（未转换消息）：%s"
+
+#: lib/error_constructor.rb:40 ./lib/error_constructor.rb:40
+msgid "A user is no longer logged to target machine. Please log in again."
+msgstr "用户目前未登录目标计算机。请再次登录。"
+
+#: lib/error_constructor.rb:42 ./lib/error_constructor.rb:42
+msgid "Target system is not consistent: Missing or corrupted file %s"
+msgstr "目标系统不一致：文件 %s 缺少或损坏"
+
+#: lib/error_constructor.rb:46 ./lib/error_constructor.rb:46
+msgid "There is no predefined ntp server at /etc/sysconfig/network/config - NETCONFIG_NTP_STATIC_SERVERS"
+msgstr "在 /etc/sysconfig/network/config 中没有预定义的 ntp 服务器 - NETCONFIG_NTP_STATIC_SERVERS"
+
+#: lib/error_constructor.rb:48 ./lib/error_constructor.rb:48
+msgid "Error occurred during ntp synchronization: %s"
+msgstr "ntp 同步时发生错误：%s"
+
+#: lib/error_constructor.rb:51 ./lib/error_constructor.rb:51
+msgid "Error while saving administrator settings: %s"
+msgstr "保存管理员设置时出错：%s"
+
+#: lib/error_constructor.rb:54 ./lib/error_constructor.rb:54
+msgid "PACKAGEKIT_INSTALL"
+msgstr "PACKAGEKIT_INSTALL"
+
+#: lib/error_constructor.rb:56 ./lib/error_constructor.rb:56
+msgid "Installation in progress. Remaining %i patches. The installation time depends on patch size."
+msgstr "安装正在进行。还剩 %i 个增补程序。安装所需时间取决于增补程序大小。"
+
+#: ./vendor/plugins/lang_helper/lib/lang_helper.rb:63
+msgid "Select locale"
+msgstr "选择区域设置"
+

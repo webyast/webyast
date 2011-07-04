@@ -1,0 +1,1220 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: webyast-base-ui 1.0.0\n"
+"Report-Msgid-Bugs-To: i18n@suse.de\n"
+"POT-Creation-Date: 2010-08-02 09:15+0200\n"
+"PO-Revision-Date: 2005-11-08 12:26+8\n"
+"Last-Translator: Steve Beattie <steve@immunix.com>\n"
+"Language-Team: English\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+
+#: app/helpers/application_helper.rb:39 app/helpers/application_helper.rb:39
+msgid " or "
+msgstr ""
+
+#: app/helpers/application_helper.rb:43 app/helpers/application_helper.rb:43
+msgid " - "
+msgstr ""
+
+#: app/helpers/application_helper.rb:52 app/helpers/application_helper.rb:66
+#: app/views/hosts/edit.html.erb:40 app/helpers/application_helper.rb:52
+#: app/helpers/application_helper.rb:66 app/views/hosts/edit.html.erb:40
+msgid "Back"
+msgstr ""
+
+#: app/helpers/application_helper.rb:56 app/views/hosts/new.html.erb:53
+#: app/helpers/application_helper.rb:56 app/views/hosts/new.html.erb:53
+#, fuzzy
+msgid "Cancel"
+msgstr "C&ancel"
+
+#: app/helpers/application_helper.rb:71 app/helpers/application_helper.rb:71
+#, fuzzy
+msgid "Save"
+msgstr "Server"
+
+#: app/helpers/application_helper.rb:74 app/helpers/application_helper.rb:74
+msgid "Next"
+msgstr ""
+
+#: app/helpers/application_helper.rb:75 app/helpers/application_helper.rb:75
+msgid "Finish"
+msgstr ""
+
+#: app/helpers/view_helpers/html_helper.rb:27
+#: app/helpers/view_helpers/html_helper.rb:27
+msgid "Are you sure?"
+msgstr ""
+
+#: app/helpers/view_helpers/html_helper.rb:153
+#: app/helpers/view_helpers/html_helper.rb:153
+#, fuzzy
+msgid "Unknown error"
+msgstr "Unknown error\n"
+
+#: app/helpers/view_helpers/html_helper.rb:157
+#: app/views/shared/exception_trap.html.erb:17
+#: app/helpers/view_helpers/html_helper.rb:157
+#: app/views/shared/exception_trap.html.erb:17
+msgid "No information available"
+msgstr ""
+
+#: app/helpers/view_helpers/html_helper.rb:160
+#: app/helpers/view_helpers/html_helper.rb:160
+msgid "There was a problem retrieving information from the server."
+msgstr ""
+
+#: app/helpers/view_helpers/effect_helper.rb:50
+#: app/helpers/view_helpers/effect_helper.rb:50
+msgid "Hide Details"
+msgstr ""
+
+#: app/helpers/view_helpers/effect_helper.rb:51
+#: app/helpers/view_helpers/effect_helper.rb:51
+msgid "Show Details"
+msgstr ""
+
+#: app/helpers/view_helpers/label_helper.rb:24
+#: app/views/hosts/index.html.erb:32
+#: app/helpers/view_helpers/label_helper.rb:24
+#: app/views/hosts/index.html.erb:32
+msgid "Add"
+msgstr ""
+
+#: app/helpers/view_helpers/label_helper.rb:28
+#: app/helpers/view_helpers/label_helper.rb:28
+msgid "Edit"
+msgstr ""
+
+#: app/helpers/view_helpers/label_helper.rb:32
+#: app/helpers/view_helpers/label_helper.rb:32
+msgid "Delete"
+msgstr ""
+
+#: app/controllers/sessions_controller.rb:67
+#: app/controllers/sessions_controller.rb:67
+msgid "You need to specify the host"
+msgstr ""
+
+#: app/controllers/sessions_controller.rb:70
+#: app/controllers/sessions_controller.rb:70
+msgid "No login specified"
+msgstr ""
+
+#: app/controllers/sessions_controller.rb:73
+#: app/controllers/sessions_controller.rb:73
+msgid "No password specified"
+msgstr ""
+
+#: app/controllers/sessions_controller.rb:92
+#: app/controllers/sessions_controller.rb:92
+msgid "Host has blocked user %s. It cannot login until  %s"
+msgstr ""
+
+#: app/controllers/sessions_controller.rb:119
+#: app/controllers/sessions_controller.rb:119
+msgid "Login incorrect. Check your username and password."
+msgstr ""
+
+#: app/controllers/sessions_controller.rb:152
+#: app/controllers/sessions_controller.rb:152
+msgid "You have been logged out."
+msgstr ""
+
+#: app/controllers/application_controller.rb:42
+#: app/controllers/application_controller.rb:42
+msgid "Session timeout"
+msgstr ""
+
+#: app/controllers/application_controller.rb:101
+#: app/controllers/application_controller.rb:101
+msgid ""
+"Operation is forbidden. If you have to do it, please contact system "
+"administrator"
+msgstr ""
+
+#: app/controllers/application_controller.rb:146
+#: app/controllers/application_controller.rb:146
+msgid "Please login to continue"
+msgstr ""
+
+#: app/controllers/application_controller.rb:153
+#: app/controllers/application_controller.rb:153
+msgid "You must logout before you can login"
+msgstr ""
+
+#: app/controllers/application_controller.rb:242
+#: app/controllers/application_controller.rb:242
+msgid "can't be blank"
+msgstr ""
+
+#: app/controllers/application_controller.rb:243
+#: app/controllers/application_controller.rb:243
+msgid "is out of allowed values"
+msgstr ""
+
+#: app/controllers/application_controller.rb:244
+#: app/controllers/application_controller.rb:244
+msgid "can't be empty"
+msgstr ""
+
+#: app/controllers/application_controller.rb:245
+#: app/controllers/application_controller.rb:245
+msgid "is invalid"
+msgstr ""
+
+#: app/controllers/application_controller.rb:260
+#: app/controllers/application_controller.rb:260
+msgid "Invalid parameters:"
+msgstr ""
+
+#: app/controllers/hosts_controller.rb:43
+#: app/controllers/hosts_controller.rb:43
+msgid "Can't connect to host %s."
+msgstr ""
+
+#: app/controllers/hosts_controller.rb:44
+#: app/controllers/hosts_controller.rb:44
+msgid "Make sure the host is up and that the YaST web service is running."
+msgstr ""
+
+#: app/controllers/hosts_controller.rb:46
+#: app/controllers/hosts_controller.rb:46
+msgid "Please select a host to connect to."
+msgstr ""
+
+#: app/controllers/hosts_controller.rb:49
+#: app/controllers/hosts_controller.rb:49
+#, fuzzy
+msgid "The host '%s' cannot be found."
+msgstr "Requirement %s cannot be fulfilled."
+
+#: app/controllers/hosts_controller.rb:50
+#: app/controllers/hosts_controller.rb:50
+#, fuzzy
+msgid "Please double-check the host URL."
+msgstr "%s does not exist. Double-check the path."
+
+#: app/models/account.rb:-
+msgid "account"
+msgstr ""
+
+#: app/models/account.rb:-
+msgid "Account|Login"
+msgstr ""
+
+#: app/models/account.rb:-
+msgid "Account|Created at"
+msgstr ""
+
+#: app/models/account.rb:-
+msgid "Account|Updated at"
+msgstr ""
+
+#: app/models/account.rb:-
+msgid "Account|Remember token"
+msgstr ""
+
+#: app/models/account.rb:-
+msgid "Account|Remember token expires at"
+msgstr ""
+
+#: app/models/account.rb:-
+msgid "Account|Salt"
+msgstr ""
+
+#: app/models/host.rb:-
+msgid "host"
+msgstr ""
+
+#: app/models/host.rb:-
+#, fuzzy
+msgid "Host|Name"
+msgstr "Name"
+
+#: app/models/host.rb:-
+msgid "Host|Url"
+msgstr ""
+
+#: app/models/host.rb:-
+#, fuzzy
+msgid "Host|Description"
+msgstr "Description"
+
+#: app/models/host.rb:-
+msgid "Host|Created at"
+msgstr ""
+
+#: app/models/host.rb:-
+msgid "Host|Updated at"
+msgstr ""
+
+#: app/views/main/_select_language.html.erb:18
+#: app/views/main/_select_language.html.erb:18
+msgid "Language Selection"
+msgstr ""
+
+#: app/views/shared/exception_trap.html.erb:3
+#: app/views/shared/backendexception_trap.html.erb:2
+#: app/views/shared/exception_trap.html.erb:3
+#: app/views/shared/backendexception_trap.html.erb:2
+msgid "This is embarrasing...."
+msgstr ""
+
+#: app/views/shared/exception_trap.html.erb:5
+#: app/views/shared/exception_trap.html.erb:5
+msgid "We are sorry, but there are some problems."
+msgstr ""
+
+#: app/views/shared/exception_trap.html.erb:7
+#: app/views/shared/backendexception_trap.html.erb:6
+#: app/views/shared/exception_trap.html.erb:7
+#: app/views/shared/backendexception_trap.html.erb:6
+#, fuzzy
+msgid "Problem:"
+msgstr "Profile"
+
+#: app/views/shared/exception_trap.html.erb:13
+#: app/views/shared/exception_trap.html.erb:13
+msgid "Please Report a bug so we can fix the problem!."
+msgstr ""
+
+#: app/views/shared/exception_trap.html.erb:13
+#: app/views/shared/exception_trap.html.erb:13
+msgid "(report link)"
+msgstr ""
+
+#: app/views/shared/exception_trap.html.erb:14
+#: app/views/shared/exception_trap.html.erb:14
+msgid "Don't forget to include the bug details."
+msgstr ""
+
+#: app/views/shared/backendexception_trap.html.erb:4
+#: app/views/shared/backendexception_trap.html.erb:4
+msgid "Problem occured on target machine."
+msgstr ""
+
+#: app/views/shared/_missing_write_permissions.html.erb:1
+#: app/views/shared/_missing_write_permissions.html.erb:1
+msgid "You do not have permissions to modify the settings."
+msgstr ""
+
+#: app/views/hosts/edit.html.erb:2 app/views/hosts/edit.html.erb:2
+msgid "Editing YaST-Web-Service"
+msgstr ""
+
+#: app/views/hosts/edit.html.erb:23 app/views/hosts/edit.html.erb:23
+msgid "YaST-Web-Service"
+msgstr ""
+
+#: app/views/hosts/edit.html.erb:26 app/views/hosts/new.html.erb:37
+#: app/views/hosts/edit.html.erb:26 app/views/hosts/new.html.erb:37
+msgid "Name"
+msgstr "Name"
+
+#: app/views/hosts/edit.html.erb:30 app/views/hosts/edit.html.erb:30
+msgid "Url"
+msgstr ""
+
+#: app/views/hosts/edit.html.erb:34 app/views/hosts/new.html.erb:47
+#: app/views/hosts/edit.html.erb:34 app/views/hosts/new.html.erb:47
+msgid "Description"
+msgstr "Description"
+
+#: app/views/hosts/edit.html.erb:39 app/views/hosts/edit.html.erb:39
+msgid "Ok"
+msgstr ""
+
+#: app/views/hosts/index.html.erb:5 app/views/hosts/index.html.erb:5
+msgid "Please choose a service:"
+msgstr ""
+
+#: app/views/hosts/index.html.erb:25 app/views/hosts/index.html.erb:25
+msgid "Really delete host %s ?"
+msgstr ""
+
+#: app/views/hosts/new.html.erb:10 app/views/hosts/new.html.erb:10
+msgid "New WebYaST Host"
+msgstr ""
+
+#: app/views/hosts/new.html.erb:42 app/views/hosts/new.html.erb:42
+msgid "URL"
+msgstr ""
+
+#: app/views/hosts/new.html.erb:54 app/views/hosts/new.html.erb:54
+#, fuzzy
+msgid "Create"
+msgstr "Bit rate"
+
+#: app/views/hosts/show.html.erb:8 app/views/hosts/show.html.erb:8
+msgid "Index"
+msgstr ""
+
+#: app/views/controlpanel/show_all.rhtml:18
+#: app/views/controlpanel/index.rhtml:72
+#: app/views/controlpanel/show_all.rhtml:18
+#: app/views/controlpanel/index.rhtml:72
+#, fuzzy
+msgid "Configuration"
+msgstr "Configuration on display"
+
+#: app/views/controlpanel/index.rhtml:29 app/views/controlpanel/index.rhtml:29
+msgid "Status"
+msgstr "Status"
+
+#: app/views/controlpanel/index.rhtml:34 app/views/controlpanel/index.rhtml:34
+msgid "Loading patch information"
+msgstr ""
+
+#: app/views/controlpanel/index.rhtml:36 app/views/controlpanel/index.rhtml:36
+msgid "Patch status summary is disabled in the config file."
+msgstr ""
+
+#: app/views/controlpanel/index.rhtml:39 app/views/controlpanel/index.rhtml:39
+msgid "Patch plugin is not installed."
+msgstr ""
+
+#: app/views/controlpanel/index.rhtml:45 app/views/controlpanel/index.rhtml:45
+msgid "Loading system information"
+msgstr ""
+
+#: app/views/controlpanel/index.rhtml:47 app/views/controlpanel/index.rhtml:47
+msgid "System status summary is disabled in the config file."
+msgstr ""
+
+#: app/views/controlpanel/index.rhtml:50 app/views/controlpanel/index.rhtml:50
+msgid "Status plugin is not installed."
+msgstr ""
+
+#: app/views/controlpanel/index.rhtml:61 app/views/controlpanel/index.rhtml:61
+#, fuzzy
+msgid "System actions"
+msgstr "System"
+
+#: app/views/controlpanel/index.rhtml:63 app/views/controlpanel/index.rhtml:63
+msgid "Reboot"
+msgstr ""
+
+#: app/views/controlpanel/index.rhtml:64 app/views/controlpanel/index.rhtml:64
+msgid "Really reboot %s?"
+msgstr ""
+
+#: app/views/controlpanel/index.rhtml:65 app/views/controlpanel/index.rhtml:65
+msgid "Shutdown"
+msgstr ""
+
+#: app/views/controlpanel/index.rhtml:66 app/views/controlpanel/index.rhtml:66
+msgid "Really shutdown %s?"
+msgstr ""
+
+#: app/views/controlpanel/basesystem.rhtml:18
+#: app/views/controlpanel/basesystem.rhtml:18
+msgid "Base system setup"
+msgstr ""
+
+#: app/views/controlpanel/basesystem.rhtml:20
+#: app/views/controlpanel/basesystem.rhtml:20
+msgid ""
+"Your initial system setup was not completed. Please continue with setting up "
+"the modules."
+msgstr ""
+
+#: app/views/controlpanel/basesystem.rhtml:21
+#: app/views/controlpanel/basesystem.rhtml:21
+msgid "Continue initial system setup"
+msgstr ""
+
+#: app/views/layouts/main.rhtml:59 app/views/layouts/main.rhtml:59
+msgid "WebYaST"
+msgstr ""
+
+#: app/views/layouts/main.rhtml:105 app/views/layouts/main.rhtml:105
+msgid ""
+"You are using an unsupported browser. Please switch to %sFireFox 3.5 or "
+"better%s or %sInternet Explorer 8%s. Thanks! [%sclose%s]"
+msgstr ""
+
+#: app/views/layouts/main.rhtml:112 app/views/layouts/main.rhtml:112
+msgid ""
+"JavaScript support is missing or disabled. Please turn JavaScript on or use "
+"a supported browser (%sFireFox 3.5%s or %sInternet Explorer 8%s)."
+msgstr ""
+
+#: app/views/layouts/main.rhtml:119 app/views/layouts/main.rhtml:119
+msgid "My Appliance"
+msgstr ""
+
+#: app/views/layouts/main.rhtml:126 app/views/layouts/main.rhtml:130
+#: app/views/layouts/main.rhtml:126 app/views/layouts/main.rhtml:130
+msgid "Language:"
+msgstr ""
+
+#: app/views/layouts/main.rhtml:132 app/views/layouts/main.rhtml:132
+msgid "Connected host:"
+msgstr ""
+
+#: app/views/layouts/main.rhtml:133 app/views/layouts/main.rhtml:133
+#, fuzzy
+msgid "User:"
+msgstr "Username: "
+
+#: app/views/layouts/main.rhtml:136 app/views/layouts/main.rhtml:136
+msgid "Control panel"
+msgstr ""
+
+#: app/views/layouts/main.rhtml:137 app/views/layouts/main.rhtml:137
+msgid "Logout"
+msgstr ""
+
+#: app/views/layouts/main.rhtml:145 app/views/layouts/main.rhtml:145
+msgid "You will be logged off in"
+msgstr ""
+
+#: app/views/layouts/main.rhtml:145 app/views/layouts/main.rhtml:145
+msgid "seconds due to inactivity. "
+msgstr ""
+
+#: app/views/layouts/main.rhtml:176 app/views/layouts/main.rhtml:176
+msgid "...Wait..."
+msgstr ""
+
+#: app/views/sessions/new.rhtml:21 app/views/sessions/new.rhtml:33
+#: app/views/sessions/new.rhtml:21 app/views/sessions/new.rhtml:33
+msgid "Login"
+msgstr ""
+
+#: app/views/sessions/new.rhtml:23 app/views/sessions/new.rhtml:23
+msgid "Enter login credentials for host %s."
+msgstr ""
+
+#: app/views/sessions/new.rhtml:27 app/views/sessions/new.rhtml:27
+#, fuzzy
+msgid "Username:"
+msgstr "Username: "
+
+#: app/views/sessions/new.rhtml:30 app/views/sessions/new.rhtml:30
+msgid "Password:"
+msgstr ""
+
+#: lib/error_constructor.rb:30 lib/error_constructor.rb:30
+msgid "Service %s is not available in the target machine"
+msgstr ""
+
+#: lib/error_constructor.rb:32 lib/error_constructor.rb:32
+msgid "Service %s is not running on the target machine"
+msgstr ""
+
+#: lib/error_constructor.rb:36 lib/error_constructor.rb:36
+msgid "Permission %s is not granted for user %s"
+msgstr ""
+
+#: lib/error_constructor.rb:38 lib/error_constructor.rb:38
+msgid ""
+"Policy kit exception for user %s and permission %s (untranslated message): %s"
+msgstr ""
+
+#: lib/error_constructor.rb:40 lib/error_constructor.rb:40
+msgid "A user is no longer logged to target machine. Please log in again."
+msgstr ""
+
+#: lib/error_constructor.rb:42 lib/error_constructor.rb:42
+msgid "Target system is not consistent: Missing or corrupted file %s"
+msgstr ""
+
+#: lib/error_constructor.rb:46 lib/error_constructor.rb:46
+msgid ""
+"There is no predefined ntp server at /etc/sysconfig/network/config - "
+"NETCONFIG_NTP_STATIC_SERVERS"
+msgstr ""
+
+#: lib/error_constructor.rb:48 lib/error_constructor.rb:48
+msgid "Error occurred during ntp synchronization: %s"
+msgstr ""
+
+#: lib/error_constructor.rb:51 lib/error_constructor.rb:51
+msgid "Error while saving administrator settings: %s"
+msgstr ""
+
+#: lib/error_constructor.rb:54 lib/error_constructor.rb:54
+msgid "PACKAGEKIT_INSTALL"
+msgstr ""
+
+#: lib/error_constructor.rb:56 lib/error_constructor.rb:56
+msgid ""
+"Installation in progress. Remain %i patches. Time of installation depend on "
+"patch size."
+msgstr ""
+
+#: vendor/plugins/lang_helper/lib/lang_helper.rb:63
+msgid "Select locale"
+msgstr ""
+
+#~ msgid "Bad write position\n"
+#~ msgstr "Bad write position\n"
+
+#~ msgid "Permission denied\n"
+#~ msgstr "Permission denied\n"
+
+#~ msgid "Out of memory\n"
+#~ msgstr "Out of memory\n"
+
+#~ msgid "Couldn't copy profile Bad memory address\n"
+#~ msgstr "Couldn't copy profile Bad memory address\n"
+
+#~ msgid "Profile doesn't conform to protocol\n"
+#~ msgstr "Profile doesn't conform to protocol\n"
+
+#~ msgid "Profile does not match signature\n"
+#~ msgstr "Profile does not match signature\n"
+
+#~ msgid "Profile doesn't exist\n"
+#~ msgstr "Profile doesn't exist\n"
+
+#~ msgid "%s: Unable to add \"%s\".  "
+#~ msgstr "%s: Unable to add \"%s\".  "
+
+#~ msgid "%s: Unable to replace \"%s\".  "
+#~ msgstr "%s: Unable to replace \"%s\".  "
+
+#~ msgid "%s: Unable to remove \"%s\".  "
+#~ msgstr "%s: Unable to remove \"%s\".  "
+
+#~ msgid "%s: Unable to write to stdout\n"
+#~ msgstr "%s: Unable to write to stdout\n"
+
+#~ msgid "%s: ASSERT: Invalid option: %d\n"
+#~ msgstr "%s: ASSERT: Invalid option: %d\n"
+
+#~ msgid "Addition succeeded for \"%s\".\n"
+#~ msgstr "Addition succeeded for \"%s\".\n"
+
+#~ msgid "Replacement succeeded for \"%s\".\n"
+#~ msgstr "Replacement succeeded for \"%s\".\n"
+
+#~ msgid "Removal succeeded for \"%s\".\n"
+#~ msgstr "Removal succeeded for \"%s\".\n"
+
+#~ msgid "PANIC bad increment buffer %p pos %p ext %p size %d res %p\n"
+#~ msgstr "PANIC bad increment buffer %p pos %p ext %p size %d res %p\n"
+
+#~ msgid "unable to create work area\n"
+#~ msgstr "unable to create work area\n"
+
+#~ msgid "unable to serialize profile %s\n"
+#~ msgstr "unable to serialize profile %s\n"
+
+#~ msgid "%s: Unable to write entire profile entry\n"
+#~ msgstr "%s: Unable to write entire profile entry\n"
+
+#~ msgid "Found unexpected character: '%s'"
+#~ msgstr "Found unexpected character: '%s'"
+
+#~ msgid "%s: Could not allocate memory for subdomainbase mount point\n"
+#~ msgstr "%s: Could not allocate memory for subdomainbase mount point\n"
+
+#~ msgid "%s: Errors found in file. Aborting.\n"
+#~ msgstr "%s: Errors found in file. Aborting.\n"
+
+#~ msgid "Memory allocation error."
+#~ msgstr "Memory allocation error."
+
+#~ msgid "Exec qualifier 'i' invalid, conflicting qualifier already specified"
+#~ msgstr "Exec qualifier 'i' invalid, conflicting qualifier already specified"
+
+#~ msgid "profile %s: has merged rule %s with multiple x modifiers\n"
+#~ msgstr "profile %s: has merged rule %s with multiple x modifiers\n"
+
+#~ msgid "Assert: `rule' returned NULL."
+#~ msgstr "Assert: `rule' returned NULL."
+
+#~ msgid "Assert: 'hat rule' returned NULL."
+#~ msgstr "Assert: 'hat rule' returned NULL."
+
+#~ msgid "link perms are not allowed on a named profile transtion.\n"
+#~ msgstr "link perms are not allowed on a named profile transition.\n"
+
+#~ msgid "missing an end of line character? (entry: %s)"
+#~ msgstr "missing an end of line character? (entry: %s)"
+
+#~ msgid "%s: Illegal open {, nesting groupings not allowed\n"
+#~ msgstr "%s: Illegal open {, nesting groupings not allowed\n"
+
+#~ msgid "%s: Regex grouping error: Invalid number of items between {}\n"
+#~ msgstr "%s: Regex grouping error: Invalid number of items between {}\n"
+
+#~ msgid ""
+#~ "%s: Regex grouping error: Invalid close }, no matching open { detected\n"
+#~ msgstr ""
+#~ "%s: Regex grouping error: Invalid close }, no matching open { detected\n"
+
+#~ msgid "%s: Internal buffer overflow detected, %d characters exceeded\n"
+#~ msgstr "%s: Internal buffer overflow detected, %d characters exceeded\n"
+
+#~ msgid "%s: Unable to parse input line '%s'\n"
+#~ msgstr "%s: Unable to parse input line '%s'\n"
+
+#~ msgid "%s: Failed to compile regex '%s' [original: '%s']\n"
+#~ msgstr "%s: Failed to compile regex '%s' [original: '%s']\n"
+
+#~ msgid "%s: error near               "
+#~ msgstr "%s: error near               "
+
+#~ msgid "%s: error reason: '%s'\n"
+#~ msgstr "%s: error reason: '%s'\n"
+
+#~ msgid "%s: Failed to compile regex '%s' [original: '%s'] - malloc failed\n"
+#~ msgstr "%s: Failed to compile regex '%s' [original: '%s'] - malloc failed\n"
+
+#~ msgid "ERROR in profile %s, failed to load\n"
+#~ msgstr "ERROR in profile %s, failed to load\n"
+
+#~ msgid "%s: Errors found in combining rules postprocessing. Aborting.\n"
+#~ msgstr "%s: Errors found in combining rules postprocessing. Aborting.\n"
+
+#~ msgid ""
+#~ "SubDomain does not appear to be started.  Please enable SubDomain and try "
+#~ "again."
+#~ msgstr ""
+#~ "SubDomain does not appear to be started.  Enable SubDomain and try again."
+
+#~ msgid "Please enter the program to profile: "
+#~ msgstr "Program to Profile"
+
+#~ msgid ""
+#~ "Can't find %s in the system path list.  If the name of the application is "
+#~ "correct, please run 'which %s' in the other window in order to find the "
+#~ "fully-qualified path."
+#~ msgstr ""
+#~ "Cannot find %s in the system path list.  If the name of the application "
+#~ "is correct, run 'which %s' in the other window to find the fully-"
+#~ "qualified path."
+
+#~ msgid ""
+#~ "Please start the application to be profiled in \n"
+#~ "another window and exercise its functionality now.\n"
+#~ "\n"
+#~ "Once completed, select the \"Scan\" button below in \n"
+#~ "order to scan the system logs for AppArmor events.  \n"
+#~ "\n"
+#~ "For each AppArmor event, you will be given the  \n"
+#~ "opportunity to choose whether the access should be  \n"
+#~ "allowed or denied."
+#~ msgstr ""
+#~ "Please start the application to be profiled in \n"
+#~ "another window and exercise its functionality now.\n"
+#~ "\n"
+#~ "Once completed, select the \"Scan\" button below in \n"
+#~ "order to scan the system logs for AppArmor events.  \n"
+#~ "\n"
+#~ "For each AppArmor event, you will be given the  \n"
+#~ "opportunity to choose whether the access should be  \n"
+#~ "allowed or denied."
+
+#~ msgid "Reloaded SubDomain profiles in enforce mode."
+#~ msgstr "Reloaded SubDomain profiles in enforce mode."
+
+#~ msgid "Finished generating profile for %s."
+#~ msgstr "Finished generating profile for %s."
+
+#~ msgid ""
+#~ "usage: %s [ -d /path/to/profiles ] [ -f /path/to/logfile ] [ program to "
+#~ "profile ]"
+#~ msgstr ""
+#~ "usage: %s [ -d /path/to/profiles ] [ -f /path/to/logfile ] [ program to "
+#~ "profile ]"
+
+#~ msgid ""
+#~ "usage: %s [ -d /path/to/profiles ] [ -f /path/to/logfile ] [ -m \"mark in "
+#~ "log to start processing after\""
+#~ msgstr ""
+#~ "usage: %s [ -d /path/to/profiles ] [ -f /path/to/logfile ] [ -m \"mark in "
+#~ "log to start processing after\""
+
+#~ msgid ""
+#~ "%s is currently marked as a program that should not have it's own "
+#~ "profile.  Usually, programs are marked this way if creating a profile for "
+#~ "them is likely to break the rest of the system.  If you know what you're "
+#~ "doing and are certain you want to create a profile for this program, edit "
+#~ "the corresponding entry in the [qualifiers] section in /etc/apparmor/"
+#~ "logprof.conf."
+#~ msgstr ""
+#~ "%s is currently marked as a program that should not have its own "
+#~ "profile.  Usually, programs are marked this way if creating a profile for "
+#~ "them is likely to break the rest of the system.  If you know what you are "
+#~ "doing and are certain you want to create a profile for this program, edit "
+#~ "the corresponding entry in the [qualifiers] section in /etc/apparmor/"
+#~ "logprof.conf."
+
+#~ msgid "Profile for %s already exists - skipping."
+#~ msgstr "Profile for %s already exists. Skipping."
+
+#~ msgid ""
+#~ "usage: %s [ -d /path/to/profiles ] [ program to switch to audit mode ]"
+#~ msgstr ""
+#~ "usage: %s [ -d /path/to/profiles ] [ program to switch to audit mode ]"
+
+#~ msgid "Setting %s to complain mode."
+#~ msgstr "Setting %s to complain mode."
+
+#~ msgid ""
+#~ "usage: %s [ -d /path/to/profiles ] [ program to switch to complain mode ]"
+#~ msgstr ""
+#~ "usage: %s [ -d /path/to/profiles ] [ program to switch to complain mode ]"
+
+#~ msgid "Setting %s to enforce mode."
+#~ msgstr "Setting %s to enforce mode."
+
+#~ msgid ""
+#~ "usage: %s [ -d /path/to/profiles ] [ program to switch to enforce mode ]"
+#~ msgstr ""
+#~ "usage: %s [ -d /path/to/profiles ] [ program to switch to enforce mode ]"
+
+#~ msgid "Can't find %s."
+#~ msgstr "Can't find %s."
+
+#~ msgid "(Y)es"
+#~ msgstr "(Y)es"
+
+#~ msgid "(N)o"
+#~ msgstr "(N)o"
+
+#~ msgid ""
+#~ "Are you sure you want to abandon this set of profile changes and exit?"
+#~ msgstr "Abandon this set of profile changes and exit?"
+
+#~ msgid "Abandoning all changes."
+#~ msgstr "Abandoning all changes."
+
+#~ msgid "Default Hat"
+#~ msgstr "Default Hat"
+
+#~ msgid "Requested Hat"
+#~ msgstr "Requested Hat"
+
+#~ msgid "Execute"
+#~ msgstr "Execute"
+
+#~ msgid "Severity"
+#~ msgstr "Severity"
+
+#~ msgid "Complain-mode changes:"
+#~ msgstr "Complain-mode changes:"
+
+#~ msgid "Enforce-mode changes:"
+#~ msgstr "Enforce-mode changes:"
+
+#~ msgid "Invalid mode found: %s"
+#~ msgstr "Invalid mode found: %s"
+
+#~ msgid "Capability"
+#~ msgstr "Capability"
+
+#~ msgid "Adding #include <%s> to profile."
+#~ msgstr "Adding #include <%s> to profile."
+
+#~ msgid "Deleted %s previous matching profile entries."
+#~ msgstr "Deleted %s previous matching profile entries."
+
+#~ msgid "Adding capability %s to profile."
+#~ msgstr "Adding capability %s to profile."
+
+#~ msgid "Denying capability %s to profile."
+#~ msgstr "Denying capability %s to profile."
+
+#~ msgid "Path"
+#~ msgstr "Path"
+
+#~ msgid "Old Mode"
+#~ msgstr "Old Mode"
+
+#~ msgid "New Mode"
+#~ msgstr "New Mode"
+
+#~ msgid "Adding %s %s to profile."
+#~ msgstr "Adding %s %s to profile."
+
+#~ msgid "Enter new path: "
+#~ msgstr "Enter new path: "
+
+#~ msgid "The specified path does not match this log entry:"
+#~ msgstr "The specified path does not match this log entry:"
+
+#~ msgid "Log Entry"
+#~ msgstr "Log Entry"
+
+#~ msgid "Entered Path"
+#~ msgstr "Entered Path"
+
+#~ msgid "Do you really want to use this path?"
+#~ msgstr "Do you really want to use this path?"
+
+#~ msgid "Reading log entries from %s."
+#~ msgstr "Reading log entries from %s."
+
+#~ msgid ""
+#~ "The profile analyzer has completed processing the log files.\n"
+#~ "\n"
+#~ "All updated profiles will be reloaded"
+#~ msgstr ""
+#~ "The profile analyzer has completed processing the log files.\n"
+#~ "\n"
+#~ "All updated profiles will be reloaded"
+
+#~ msgid "No unhandled AppArmor events were found in the system log."
+#~ msgstr "No unhandled AppArmor events were found in the system log."
+
+#~ msgid "%s contains syntax errors."
+#~ msgstr "%s contains syntax errors."
+
+#~ msgid "Profile %s contains invalid regexp %s."
+#~ msgstr "Profile %s contains invalid regexp %s."
+
+#~ msgid "Writing updated profile for %s."
+#~ msgstr "Writing updated profile for %s."
+
+#~ msgid "DBI Execution failed: %s."
+#~ msgstr "DBI Execution failed: %s."
+
+#~ msgid "Couldn't open file: %s."
+#~ msgstr "Couldn't open file: %s."
+
+#~ msgid "No type value passed.  Unable to determine page count."
+#~ msgstr "No type value passed.  Unable to determine page count."
+
+#~ msgid "Failed copying %s."
+#~ msgstr "Failed copying %s."
+
+#~ msgid "Export Log Error: Couldn't open %s"
+#~ msgstr "Export Log Error: Couldn't open %s"
+
+#~ msgid "Fatal error.  No report name given. Exiting."
+#~ msgstr "Fatal error.  No report name given. Exiting."
+
+#~ msgid "Failed to parse: %s."
+#~ msgstr "Failed to parse: %s."
+
+#~ msgid "Fatal Error.  Couldn't open %s."
+#~ msgstr "Fatal Error.  Couldn't open %s."
+
+#~ msgid "Fatal Error.  Can't run %s.  Exiting."
+#~ msgstr "Fatal Error.  Can't run %s.  Exiting."
+
+#~ msgid "Fatal Error.  No directory, %s, found.  Exiting."
+#~ msgstr "Fatal Error.  No directory, %s, found.  Exiting."
+
+#~ msgid "Fatal Error.  Couldn't open %s.  Exiting"
+#~ msgstr "Fatal Error.  Couldn't open %s.  Exiting"
+
+#~ msgid "DBI Execution failed: %s"
+#~ msgstr "DBI Execution failed: %s"
+
+#~ msgid "Fatal Error.  getArchReport() couldn't open %s"
+#~ msgstr "Fatal Error.  getArchReport() couldn't open %s"
+
+#~ msgid "Yes"
+#~ msgstr "Yes"
+
+#~ msgid "No"
+#~ msgstr "No"
+
+#~ msgid "Arch"
+#~ msgstr "Arch"
+
+#~ msgid "Version"
+#~ msgstr "Version"
+
+#~ msgid "Type"
+#~ msgstr "Type"
+
+#~ msgid "Action"
+#~ msgstr "Action"
+
+#~ msgid "Obsoletes"
+#~ msgstr "Obsoletes"
+
+#~ msgid "Advanced"
+#~ msgstr "Advanced"
+
+#~ msgid "no name server found in `%1'"
+#~ msgstr "No name server found in `%1'"
+
+#~ msgid "waiting for reply"
+#~ msgstr "Waiting for reply"
+
+#~ msgid "unable to fork (internal error)"
+#~ msgstr "Unable to fork (internal error)"
+
+#~ msgid "address lookup does not work"
+#~ msgstr "Address lookup does not work"
+
+#~ msgid "Value"
+#~ msgstr "Value"
+
+#~ msgid "Enter the dial prefix for the interface `%1':"
+#~ msgstr "Enter the dial prefix for the interface '%1':"
+
+#~ msgid ""
+#~ "The dial prefix `%1' is not allowed. It must\n"
+#~ "match the regular expression `%2'."
+#~ msgstr ""
+#~ "The dial prefix '%1' is not allowed. It must\n"
+#~ "match the regular expression '%2'."
+
+#~ msgid "KInternet - Internet Tool"
+#~ msgstr "KInternet--Internet Tool"
+
+#~ msgid "Enter the password for the provider `%1':"
+#~ msgstr "Enter the password for the provider '%1':"
+
+#~ msgid "WEP - Key Input Dialog"
+#~ msgstr "WEP--Key Input Dialog"
+
+#~ msgid "Wireless LAN - Dialog"
+#~ msgstr "Wireless LAN--Dialog"
+
+#~ msgid "Auto refresh"
+#~ msgstr "Auto refresh"
+
+#~ msgid ""
+#~ "Could not connect to local server. Maybe\n"
+#~ "smpppd is not running or you are not\n"
+#~ "member of the group \"dialout\".\n"
+#~ "Also check the server settings in\n"
+#~ "the dialog \"Various Settings\"."
+#~ msgstr ""
+#~ "Could not connect to local server. Maybe\n"
+#~ "smpppd is not running or you are not\n"
+#~ "a member of the group \"dialout\".\n"
+#~ "Also check the server settings in\n"
+#~ "the dialog \"Various Settings\"."
+
+#~ msgid ""
+#~ "Connection to local and remote server\n"
+#~ "refused. Maybe smpppd is not running\n"
+#~ "or you are not member of the group \"dialout\".\n"
+#~ "Also check the server settings in\n"
+#~ "the dialog \"Various Settings\"."
+#~ msgstr ""
+#~ "Connection to local and remote server\n"
+#~ "refused. Maybe smpppd is not running\n"
+#~ "or you are not a member of the group \"dialout\".\n"
+#~ "Also check the server settings in\n"
+#~ "the dialog \"Various Settings\"."
+
+#~ msgid "Keep Active Provider on Start-up"
+#~ msgstr "Keep Active Provider on Start-Up"
+
+#~ msgid "S&witch KDE network status"
+#~ msgstr "S&witch KDE Network Status"
+
+#~ msgid "Use this button to connect to the above selected accesspoint."
+#~ msgstr "Use this button to connect to the selected access point."
+
+#~ msgid ""
+#~ "This load the list of current known accesspoints and don't start a active "
+#~ "scan."
+#~ msgstr ""
+#~ "This loads the list of current known access points and does not start an "
+#~ "active scan."
+
+#~ msgid ""
+#~ "This start a active scan. During a active scan it could happen, that you "
+#~ "lost \n"
+#~ " your current wireless connection."
+#~ msgstr ""
+#~ "This starts an active scan. During an active scan, you may lose \n"
+#~ " your current wireless connection."
+
+#~ msgid ""
+#~ "This activate accoustic for the next 'Refresh' or 'Active Scan'. \n"
+#~ " To stop this, untoggle this checkbox."
+#~ msgstr ""
+#~ "This activates an acoustic for the next 'Refresh' or 'Active Scan'. \n"
+#~ " To stop this, untoggle this check box."
+
+#~ msgid ""
+#~ "This activate auto refresh scan for the next 'Refresh' or 'Active "
+#~ "Scan'. \n"
+#~ " To stop this, untoggle this checkbox."
+#~ msgstr ""
+#~ "This activates an auto refresh scan for the next 'Refresh' or 'Active "
+#~ "Scan'. \n"
+#~ " To stop this, untoggle this check box."
+
+#~ msgid "Could not start YaST Network Module, is it already installed?"
+#~ msgstr "Could not start YaST Network Module. Is it installed?"
+
+#~ msgid "Networkaddress"
+#~ msgstr "Network address"
+
+#~ msgid "Conntection details"
+#~ msgstr "Connection details"
+
+#~ msgid "unknown"
+#~ msgstr "unknown"
+
+#~ msgid "Catalog"
+#~ msgstr "Catalog"
+
+#~ msgid "&Yes"
+#~ msgstr "&Yes"
+
+#~ msgid "&No"
+#~ msgstr "&No"
+
+#~ msgid "Aborted"
+#~ msgstr "Aborted"
+
+#~ msgid "Name: "
+#~ msgstr "Name: "
+
+#~ msgid "Version: "
+#~ msgstr "Version: "
+
+#~ msgid "Arch: "
+#~ msgstr "Arch: "
+
+#~ msgid "Summary: "
+#~ msgstr "Summary: "
+
+#~ msgid "Description: "
+#~ msgstr "Description: "
+
+#~ msgid "Requirement"
+#~ msgstr "Requirement"
+
+#~ msgid "Provided By"
+#~ msgstr "Provided By"
+
+#~ msgid "Catalog: "
+#~ msgstr "Catalog: "
+
+#~ msgid "Installed: "
+#~ msgstr "Installed: "
+
+#~ msgid "Status: "
+#~ msgstr "Status: "
+
+#~ msgid "up-to-date"
+#~ msgstr "up-to-date"
+
+#~ msgid "Installed Size: "
+#~ msgstr "Installed Size: "
+
+#~ msgid "Alias"
+#~ msgstr "Alias"
+
+#~ msgid "Bundle"
+#~ msgstr "Bundle"
+
+#~ msgid "Too many arguments."
+#~ msgstr "Too many arguments."
+
+#~ msgid ""
+#~ "search (se) [options] [querystring] ...\n"
+#~ "\n"
+#~ "Search for packages matching given search strings.\n"
+#~ "\n"
+#~ "  Command options:\n"
+#~ "    --match-all            Search for a match with all search strings "
+#~ "(default).\n"
+#~ "    --match-any            Search for a match with any of the search "
+#~ "strings.\n"
+#~ "    --match-substrings     Search for a match to partial words "
+#~ "(default).\n"
+#~ "    --match-words          Search for a match to whole words only.\n"
+#~ "    --match-exact          Searches for an exact package name.\n"
+#~ "-d, --search-descriptions  Search also in package summaries and "
+#~ "descriptions.\n"
+#~ "-C, --case-sensitive       Perform case-sensitive search.\n"
+#~ "-i, --installed-only       Show only packages that are already "
+#~ "installed.\n"
+#~ "-u, --uninstalled-only     Show only packages that are not currently "
+#~ "installed.\n"
+#~ "-t, --type <type>          Search only for packages of the specified "
+#~ "type.\n"
+#~ "-r, --repo <alias|#|URI>   Search only in the specified repository.\n"
+#~ "    --sort-by-name         Sort packages by name (default).\n"
+#~ "    --sort-by-repo         Sort packages by repository.\n"
+#~ "-s, --details              Show each available version in each "
+#~ "repository\n"
+#~ "                           on a separate line.\n"
+#~ "\n"
+#~ "* and ? wildcards can also be used within search strings.\n"
+#~ msgstr ""
+#~ "search (se) [options] [querystring] ...\n"
+#~ "\n"
+#~ "Search for packages matching given search strings.\n"
+#~ "\n"
+#~ "  Command options:\n"
+#~ "    --match-all            Search for a match with all search strings "
+#~ "(default).\n"
+#~ "    --match-any            Search for a match with any of the search "
+#~ "strings.\n"
+#~ "    --match-substrings     Search for a match to partial words "
+#~ "(default).\n"
+#~ "    --match-words          Search for a match to whole words only.\n"
+#~ "    --match-exact          Searches for an exact package name.\n"
+#~ "-d, --search-descriptions  Search also in package summaries and "
+#~ "descriptions.\n"
+#~ "-C, --case-sensitive       Perform case-sensitive search.\n"
+#~ "-i, --installed-only       Show only packages that are already "
+#~ "installed.\n"
+#~ "-u, --uninstalled-only     Show only packages that are not currently "
+#~ "installed.\n"
+#~ "-t, --type <type>          Search only for packages of the specified "
+#~ "type.\n"
+#~ "-r, --repo <alias|#|URI>   Search only in the specified repository.\n"
+#~ "    --sort-by-name         Sort packages by name (default).\n"
+#~ "    --sort-by-repo         Sort packages by repository.\n"
+#~ "-s, --details              Show each available version in each "
+#~ "repository\n"
+#~ "                           on a separate line.\n"
+#~ "\n"
+#~ "* and ? wildcards can also be used within search strings.\n"
+
+#~ msgid "(ip_mode) Found unexpected character: '%s'"
+#~ msgstr "(ip_mode) Found unexpected character: '%s'"
+
+#~ msgid "Exec qualifier 'i' must be followed by 'x'"
+#~ msgstr "Exec qualifier 'i' must be followed by 'x'"
+
+#~ msgid "Assert: `netrule' returned NULL."
+#~ msgstr "Assert: `netrule' returned NULL."
+
+#~ msgid "Assert: `addresses' returned NULL."
+#~ msgstr "Assert: `addresses' returned NULL."
+
+#~ msgid "Network entries can only have one TO address."
+#~ msgstr "Network entries can only have one TO address."
+
+#~ msgid "Network entries can only have one FROM address."
+#~ msgstr "Network entries can only have one FROM address."
+
+#~ msgid "`%s' is not a valid ip address."
+#~ msgstr "`%s' is not a valid ip address."
+
+#~ msgid "`/%d' is not a valid netmask."
+#~ msgstr "`/%d' is not a valid netmask."
+
+#~ msgid "`%s' is not a valid netmask."
+#~ msgstr "`%s' is not a valid netmask."
+
+#~ msgid "ports must be between %d and %d"
+#~ msgstr "ports must be between %d and %d"
+
+#~ msgid ""
+#~ "Are you sure you want to save the current set of profile changes and exit?"
+#~ msgstr "Save the current set of profile changes and exit?"
+
+#~ msgid "Saving all changes."
+#~ msgstr "Saving all changes."
+
+#~ msgid "Download failed: "
+#~ msgstr "Download failed: "
+
+#~ msgid "system"
+#~ msgstr "system"

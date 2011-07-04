@@ -1,0 +1,596 @@
+# @TITLE@
+# Copyright (C) 2006, SUSE Linux GmbH, Nuremberg
+#
+# This file is distributed under the same license as @PACKAGE@ package. FIRST
+#
+# A S Alam <aalam@users.sf.net>, 2009.
+msgid ""
+msgstr ""
+"Project-Id-Version: webyast-base-ui 1.0.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2010-08-02 09:15+0200\n"
+"PO-Revision-Date: 2009-10-10 22:39+0530\n"
+"Last-Translator: A S Alam <aalam@users.sf.net>\n"
+"Language-Team: Punjabi/Panjabi <punjabi-users@lists.sf.net>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Lokalize 1.0\n"
+"Plural-Forms: Plural-Forms: Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: app/helpers/application_helper.rb:39 app/helpers/application_helper.rb:39
+msgid " or "
+msgstr ""
+
+#: app/helpers/application_helper.rb:43 app/helpers/application_helper.rb:43
+msgid " - "
+msgstr ""
+
+#: app/helpers/application_helper.rb:52 app/helpers/application_helper.rb:66
+#: app/views/hosts/edit.html.erb:40 app/helpers/application_helper.rb:52
+#: app/helpers/application_helper.rb:66 app/views/hosts/edit.html.erb:40
+msgid "Back"
+msgstr "ਪਿੱਛੇ"
+
+# cancel button label
+#: app/helpers/application_helper.rb:56 app/views/hosts/new.html.erb:53
+#: app/helpers/application_helper.rb:56 app/views/hosts/new.html.erb:53
+msgid "Cancel"
+msgstr "ਰੱਦ ਕਰੋ"
+
+#: app/helpers/application_helper.rb:71 app/helpers/application_helper.rb:71
+msgid "Save"
+msgstr "ਸੰਭਾਲੋ"
+
+#: app/helpers/application_helper.rb:74 app/helpers/application_helper.rb:74
+msgid "Next"
+msgstr "ਅੱਗੇ"
+
+#: app/helpers/application_helper.rb:75 app/helpers/application_helper.rb:75
+#, fuzzy
+msgid "Finish"
+msgstr "ਫੈਨਿਸ਼"
+
+#: app/helpers/view_helpers/html_helper.rb:27
+#: app/helpers/view_helpers/html_helper.rb:27
+msgid "Are you sure?"
+msgstr "ਕੀ ਪੱਕਾ ਹੈ?"
+
+#: app/helpers/view_helpers/html_helper.rb:153
+#: app/helpers/view_helpers/html_helper.rb:153
+#, fuzzy
+msgid "Unknown error"
+msgstr "ਅਣਜਾਣ ਗਲਤੀ\n"
+
+#: app/helpers/view_helpers/html_helper.rb:157
+#: app/views/shared/exception_trap.html.erb:17
+#: app/helpers/view_helpers/html_helper.rb:157
+#: app/views/shared/exception_trap.html.erb:17
+msgid "No information available"
+msgstr "ਕੋਈ ਜਾਣਕਾਰੀ ਉਪਲੱਬਧ ਨਹੀ ਹੈ"
+
+#: app/helpers/view_helpers/html_helper.rb:160
+#: app/helpers/view_helpers/html_helper.rb:160
+msgid "There was a problem retrieving information from the server."
+msgstr ""
+
+#: app/helpers/view_helpers/effect_helper.rb:50
+#: app/helpers/view_helpers/effect_helper.rb:50
+#, fuzzy
+msgid "Hide Details"
+msgstr "ਵੇਰਵਾ"
+
+#: app/helpers/view_helpers/effect_helper.rb:51
+#: app/helpers/view_helpers/effect_helper.rb:51
+#, fuzzy
+msgid "Show Details"
+msgstr "ਵੇਰਵਾ"
+
+#: app/helpers/view_helpers/label_helper.rb:24
+#: app/views/hosts/index.html.erb:32
+#: app/helpers/view_helpers/label_helper.rb:24
+#: app/views/hosts/index.html.erb:32
+msgid "Add"
+msgstr "ਸ਼ਾਮਲ"
+
+#: app/helpers/view_helpers/label_helper.rb:28
+#: app/helpers/view_helpers/label_helper.rb:28
+msgid "Edit"
+msgstr "ਸੋਧ"
+
+#: app/helpers/view_helpers/label_helper.rb:32
+#: app/helpers/view_helpers/label_helper.rb:32
+msgid "Delete"
+msgstr "ਹਟਾਓ"
+
+#: app/controllers/sessions_controller.rb:67
+#: app/controllers/sessions_controller.rb:67
+msgid "You need to specify the host"
+msgstr "ਤੁਹਾਨੂੰ ਹੋਸਟ ਦੇਣ ਦੀ ਲੋੜ ਹੈ"
+
+#: app/controllers/sessions_controller.rb:70
+#: app/controllers/sessions_controller.rb:70
+msgid "No login specified"
+msgstr "ਲਾਗਇਨ ਨਹੀਂ ਦਿੱਤਾ"
+
+#: app/controllers/sessions_controller.rb:73
+#: app/controllers/sessions_controller.rb:73
+msgid "No password specified"
+msgstr "ਪਾਸਵਰਡ ਨਹੀਂ ਦਿੱਤਾ"
+
+#: app/controllers/sessions_controller.rb:92
+#: app/controllers/sessions_controller.rb:92
+msgid "Host has blocked user %s. It cannot login until  %s"
+msgstr ""
+
+#: app/controllers/sessions_controller.rb:119
+#: app/controllers/sessions_controller.rb:119
+msgid "Login incorrect. Check your username and password."
+msgstr "ਲਾਗਇਨ ਗਲਤ ਹੈ। ਆਪਣਾ ਯੂਜ਼ਰ ਨਾਂ ਅਤੇ ਪਾਸਵਰਡ ਜਾਂਚ ਕੇ ਮੁੜ ਕੋਸ਼ਿਸ਼ ਕਰੋ ਜੀ"
+
+#: app/controllers/sessions_controller.rb:152
+#: app/controllers/sessions_controller.rb:152
+msgid "You have been logged out."
+msgstr "ਤੁਸੀਂ ਲਾਗਆਉਟ ਹੋ ਚੁੱਕੇ ਹੋ।"
+
+#: app/controllers/application_controller.rb:42
+#: app/controllers/application_controller.rb:42
+#, fuzzy
+msgid "Session timeout"
+msgstr "ਐਕਟਿਵ ਸ਼ੈਸ਼ਨ:"
+
+#: app/controllers/application_controller.rb:101
+#: app/controllers/application_controller.rb:101
+msgid ""
+"Operation is forbidden. If you have to do it, please contact system "
+"administrator"
+msgstr ""
+
+# %s is FTP or HTTP
+#: app/controllers/application_controller.rb:146
+#: app/controllers/application_controller.rb:146
+msgid "Please login to continue"
+msgstr "ਜਾਰੀ ਰੱਖਣ ਲਈ ਲਾਗਇਨ ਕਰੋ"
+
+#: app/controllers/application_controller.rb:153
+#: app/controllers/application_controller.rb:153
+msgid "You must logout before you can login"
+msgstr "ਤੁਹਾਨੂੰ ਲਾਗਇਨ ਕਰਨ ਤੋਂ ਪਹਿਲਾਂ ਲਾਗ-ਆਉਟ ਕਰਨਾ ਪਵੇਗਾ"
+
+#: app/controllers/application_controller.rb:242
+#: app/controllers/application_controller.rb:242
+msgid "can't be blank"
+msgstr ""
+
+#: app/controllers/application_controller.rb:243
+#: app/controllers/application_controller.rb:243
+msgid "is out of allowed values"
+msgstr ""
+
+#: app/controllers/application_controller.rb:244
+#: app/controllers/application_controller.rb:244
+msgid "can't be empty"
+msgstr ""
+
+#: app/controllers/application_controller.rb:245
+#: app/controllers/application_controller.rb:245
+#, fuzzy
+msgid "is invalid"
+msgstr "ਦਿੱਤਾ URL ਗਲਤ ਹੈ।"
+
+#: app/controllers/application_controller.rb:260
+#: app/controllers/application_controller.rb:260
+#, fuzzy
+msgid "Invalid parameters:"
+msgstr "ਗਲਤ caName: %1."
+
+# %s is FTP or HTTP
+#: app/controllers/hosts_controller.rb:43
+#: app/controllers/hosts_controller.rb:43
+#, fuzzy
+msgid "Can't connect to host %s."
+msgstr "ਸਰਵਰ %s ਨਾਲ ਜੁੜਨ ਦੀ ਕੋਸ਼ਸ਼ ਕੀਤੀ ਜਾ ਰਹੀ ਹੈ..."
+
+#: app/controllers/hosts_controller.rb:44
+#: app/controllers/hosts_controller.rb:44
+#, fuzzy
+msgid "Make sure the host is up and that the YaST web service is running."
+msgstr "ਪੋਰਟ ਨੰਬਰ ਦਿਓ, ਜਿਸ ਰਾਹੀਂ NFS ਸਰਵਰ ਚੱਲ ਰਿਹਾ ਹੈ।"
+
+#: app/controllers/hosts_controller.rb:46
+#: app/controllers/hosts_controller.rb:46
+msgid "Please select a host to connect to."
+msgstr "ਕੁਨੈਕਟ ਕਰਨ ਲਈ ਹੋਸਟ ਚੁਣੋ ਜੀ।"
+
+#: app/controllers/hosts_controller.rb:49
+#: app/controllers/hosts_controller.rb:49
+#, fuzzy
+msgid "The host '%s' cannot be found."
+msgstr "ਹੋਸਟ %s ਨਹੀਂ ਲੱਭਿਆ।"
+
+#: app/controllers/hosts_controller.rb:50
+#: app/controllers/hosts_controller.rb:50
+#, fuzzy
+msgid "Please double-check the host URL."
+msgstr "%s ਮੌਜੂਦ ਨਹੀ ਹੈ, ਧਿਆਨ ਨਾਲ ਮਾਰਗ ਵੇਖੋ ਜੀ।"
+
+#: app/models/account.rb:-
+msgid "account"
+msgstr "ਅਕਾਊਂਟ"
+
+#: app/models/account.rb:-
+msgid "Account|Login"
+msgstr "ਲਾਗਇਨ"
+
+#: app/models/account.rb:-
+msgid "Account|Created at"
+msgstr "ਬਣਾਇਆ ਗਿਆ"
+
+#: app/models/account.rb:-
+msgid "Account|Updated at"
+msgstr "ਅੱਪਡੇਟ ਕੀਤਾ"
+
+#: app/models/account.rb:-
+msgid "Account|Remember token"
+msgstr "ਟੋਕਨ ਯਾਦ ਰੱਖੋ"
+
+#: app/models/account.rb:-
+msgid "Account|Remember token expires at"
+msgstr "ਯਾਦ ਰੱਖੇ ਟੋਕਨ ਦੀ ਮਿਆਦ ਪੁੱਗੇ"
+
+#: app/models/account.rb:-
+msgid "Account|Salt"
+msgstr ""
+
+#: app/models/host.rb:-
+msgid "host"
+msgstr "ਹੋਸਟ"
+
+#: app/models/host.rb:-
+msgid "Host|Name"
+msgstr "ਨਾਂ"
+
+#: app/models/host.rb:-
+msgid "Host|Url"
+msgstr "URL"
+
+#: app/models/host.rb:-
+msgid "Host|Description"
+msgstr "ਵੇਰਵਾ"
+
+#: app/models/host.rb:-
+msgid "Host|Created at"
+msgstr "ਬਣਾਇਆ ਗਿਆ"
+
+#: app/models/host.rb:-
+msgid "Host|Updated at"
+msgstr "ਅੱਪਡੇਟ ਕੀਤਾ"
+
+#: app/views/main/_select_language.html.erb:18
+#: app/views/main/_select_language.html.erb:18
+#, fuzzy
+msgid "Language Selection"
+msgstr "ਪੈਕੇਜ ਚੋਣ ਸਾਫ਼ ਕਰੋ"
+
+#: app/views/shared/exception_trap.html.erb:3
+#: app/views/shared/backendexception_trap.html.erb:2
+#: app/views/shared/exception_trap.html.erb:3
+#: app/views/shared/backendexception_trap.html.erb:2
+msgid "This is embarrasing...."
+msgstr ""
+
+#: app/views/shared/exception_trap.html.erb:5
+#: app/views/shared/exception_trap.html.erb:5
+msgid "We are sorry, but there are some problems."
+msgstr ""
+
+#: app/views/shared/exception_trap.html.erb:7
+#: app/views/shared/backendexception_trap.html.erb:6
+#: app/views/shared/exception_trap.html.erb:7
+#: app/views/shared/backendexception_trap.html.erb:6
+msgid "Problem:"
+msgstr "ਸਮੱਸਿਆ: "
+
+#: app/views/shared/exception_trap.html.erb:13
+#: app/views/shared/exception_trap.html.erb:13
+msgid "Please Report a bug so we can fix the problem!."
+msgstr ""
+
+#: app/views/shared/exception_trap.html.erb:13
+#: app/views/shared/exception_trap.html.erb:13
+msgid "(report link)"
+msgstr ""
+
+#: app/views/shared/exception_trap.html.erb:14
+#: app/views/shared/exception_trap.html.erb:14
+msgid "Don't forget to include the bug details."
+msgstr ""
+
+#: app/views/shared/backendexception_trap.html.erb:4
+#: app/views/shared/backendexception_trap.html.erb:4
+msgid "Problem occured on target machine."
+msgstr ""
+
+#: app/views/shared/_missing_write_permissions.html.erb:1
+#: app/views/shared/_missing_write_permissions.html.erb:1
+msgid "You do not have permissions to modify the settings."
+msgstr ""
+
+#: app/views/hosts/edit.html.erb:2 app/views/hosts/edit.html.erb:2
+msgid "Editing YaST-Web-Service"
+msgstr "YaST-ਵੈੱਬ-ਸਰਵਿਸ ਸੋਧ"
+
+#: app/views/hosts/edit.html.erb:23 app/views/hosts/edit.html.erb:23
+msgid "YaST-Web-Service"
+msgstr ""
+
+#: app/views/hosts/edit.html.erb:26 app/views/hosts/new.html.erb:37
+#: app/views/hosts/edit.html.erb:26 app/views/hosts/new.html.erb:37
+msgid "Name"
+msgstr "ਨਾਂ"
+
+#: app/views/hosts/edit.html.erb:30 app/views/hosts/edit.html.erb:30
+msgid "Url"
+msgstr "Url"
+
+#: app/views/hosts/edit.html.erb:34 app/views/hosts/new.html.erb:47
+#: app/views/hosts/edit.html.erb:34 app/views/hosts/new.html.erb:47
+msgid "Description"
+msgstr "ਵੇਰਵਾ"
+
+#: app/views/hosts/edit.html.erb:39 app/views/hosts/edit.html.erb:39
+msgid "Ok"
+msgstr "ਠੀਕ ਹੈ"
+
+#: app/views/hosts/index.html.erb:5 app/views/hosts/index.html.erb:5
+msgid "Please choose a service:"
+msgstr "ਸਰਵਿਸ ਚੁਣੋ ਜੀ:"
+
+#: app/views/hosts/index.html.erb:25 app/views/hosts/index.html.erb:25
+msgid "Really delete host %s ?"
+msgstr ""
+
+#: app/views/hosts/new.html.erb:10 app/views/hosts/new.html.erb:10
+msgid "New WebYaST Host"
+msgstr "ਨਵਾਂ ਵੈੱਬ-ਯਾਸਟ ਹੋਸਟ"
+
+#: app/views/hosts/new.html.erb:42 app/views/hosts/new.html.erb:42
+msgid "URL"
+msgstr ""
+
+#: app/views/hosts/new.html.erb:54 app/views/hosts/new.html.erb:54
+msgid "Create"
+msgstr "ਬਣਾਇਆ"
+
+#: app/views/hosts/show.html.erb:8 app/views/hosts/show.html.erb:8
+msgid "Index"
+msgstr "ਇੰਡੈਕਸ"
+
+#: app/views/controlpanel/show_all.rhtml:18
+#: app/views/controlpanel/index.rhtml:72
+#: app/views/controlpanel/show_all.rhtml:18
+#: app/views/controlpanel/index.rhtml:72
+msgid "Configuration"
+msgstr "ਸੰਰਚਨਾ"
+
+#: app/views/controlpanel/index.rhtml:29 app/views/controlpanel/index.rhtml:29
+msgid "Status"
+msgstr "ਹਾਲਤ"
+
+#: app/views/controlpanel/index.rhtml:34 app/views/controlpanel/index.rhtml:34
+msgid "Loading patch information"
+msgstr "ਪੈਂਚ ਜਾਣਕਾਰੀ ਲੋਡ ਕੀਤੀ ਜਾ ਰਹੀ ਹੈ"
+
+#: app/views/controlpanel/index.rhtml:36 app/views/controlpanel/index.rhtml:36
+msgid "Patch status summary is disabled in the config file."
+msgstr ""
+
+# %s is either BOOTP or DHCP
+#: app/views/controlpanel/index.rhtml:39 app/views/controlpanel/index.rhtml:39
+#, fuzzy
+msgid "Patch plugin is not installed."
+msgstr "ਸੰਰਚਨਾ ਸ਼ੁਰੂ ਨਹੀਂ ਕੀਤੀ ਜਾ ਸਕਦੀ ਹੈ।"
+
+#: app/views/controlpanel/index.rhtml:45 app/views/controlpanel/index.rhtml:45
+msgid "Loading system information"
+msgstr "ਸਿਸਟਮ ਜਾਣਕਾਰੀ ਲੋਡ ਕੀਤੀ ਜਾ ਰਹੀ ਹੈ"
+
+#: app/views/controlpanel/index.rhtml:47 app/views/controlpanel/index.rhtml:47
+msgid "System status summary is disabled in the config file."
+msgstr ""
+
+#: app/views/controlpanel/index.rhtml:50 app/views/controlpanel/index.rhtml:50
+msgid "Status plugin is not installed."
+msgstr ""
+
+#: app/views/controlpanel/index.rhtml:61 app/views/controlpanel/index.rhtml:61
+msgid "System actions"
+msgstr "ਸਿਸਟਮ ਐਕਸ਼ਨ"
+
+# reboot button label
+#: app/views/controlpanel/index.rhtml:63 app/views/controlpanel/index.rhtml:63
+msgid "Reboot"
+msgstr "ਮੁੜ-ਚਾਲੂ"
+
+#: app/views/controlpanel/index.rhtml:64 app/views/controlpanel/index.rhtml:64
+msgid "Really reboot %s?"
+msgstr ""
+
+#: app/views/controlpanel/index.rhtml:65 app/views/controlpanel/index.rhtml:65
+msgid "Shutdown"
+msgstr "ਬੰਦ ਕਰੋ"
+
+#: app/views/controlpanel/index.rhtml:66 app/views/controlpanel/index.rhtml:66
+msgid "Really shutdown %s?"
+msgstr ""
+
+#: app/views/controlpanel/basesystem.rhtml:18
+#: app/views/controlpanel/basesystem.rhtml:18
+msgid "Base system setup"
+msgstr "ਬੇਸ ਸਿਸਟਮ ਸੈਟਅੱਪ"
+
+#: app/views/controlpanel/basesystem.rhtml:20
+#: app/views/controlpanel/basesystem.rhtml:20
+msgid ""
+"Your initial system setup was not completed. Please continue with setting up "
+"the modules."
+msgstr ""
+
+#: app/views/controlpanel/basesystem.rhtml:21
+#: app/views/controlpanel/basesystem.rhtml:21
+#, fuzzy
+msgid "Continue initial system setup"
+msgstr "ਬੇਸ ਸਿਸਟਮ ਸੈਟਅੱਪ"
+
+#: app/views/layouts/main.rhtml:59 app/views/layouts/main.rhtml:59
+msgid "WebYaST"
+msgstr "WebYaST"
+
+#: app/views/layouts/main.rhtml:105 app/views/layouts/main.rhtml:105
+msgid ""
+"You are using an unsupported browser. Please switch to %sFireFox 3.5 or "
+"better%s or %sInternet Explorer 8%s. Thanks! [%sclose%s]"
+msgstr ""
+
+#: app/views/layouts/main.rhtml:112 app/views/layouts/main.rhtml:112
+msgid ""
+"JavaScript support is missing or disabled. Please turn JavaScript on or use "
+"a supported browser (%sFireFox 3.5%s or %sInternet Explorer 8%s)."
+msgstr ""
+
+#: app/views/layouts/main.rhtml:119 app/views/layouts/main.rhtml:119
+#, fuzzy
+msgid "My Appliance"
+msgstr "ਲਾਗੂ ਕੀਤਾ"
+
+# label for language selection
+#: app/views/layouts/main.rhtml:126 app/views/layouts/main.rhtml:130
+#: app/views/layouts/main.rhtml:126 app/views/layouts/main.rhtml:130
+#, fuzzy
+msgid "Language:"
+msgstr "ਭਾਸ਼ਾ"
+
+#: app/views/layouts/main.rhtml:132 app/views/layouts/main.rhtml:132
+#, fuzzy
+msgid "Connected host:"
+msgstr "ਕੁਨੈਕਟ ਹੋਇਆ ਹੋਸਟ"
+
+#: app/views/layouts/main.rhtml:133 app/views/layouts/main.rhtml:133
+msgid "User:"
+msgstr "ਯੂਜ਼ਰ:"
+
+#: app/views/layouts/main.rhtml:136 app/views/layouts/main.rhtml:136
+msgid "Control panel"
+msgstr "ਕੰਟਰੋਲ ਪੈਨਲ"
+
+#: app/views/layouts/main.rhtml:137 app/views/layouts/main.rhtml:137
+msgid "Logout"
+msgstr "ਲਾਗਆਉਟ"
+
+#: app/views/layouts/main.rhtml:145 app/views/layouts/main.rhtml:145
+#, fuzzy
+msgid "You will be logged off in"
+msgstr "ਤੁਸੀਂ ਲਾਗਆਉਟ ਹੋ ਚੁੱਕੇ ਹੋ।"
+
+#: app/views/layouts/main.rhtml:145 app/views/layouts/main.rhtml:145
+msgid "seconds due to inactivity. "
+msgstr ""
+
+#: app/views/layouts/main.rhtml:176 app/views/layouts/main.rhtml:176
+msgid "...Wait..."
+msgstr "...ਉਡੀਕੋ..."
+
+#: app/views/sessions/new.rhtml:21 app/views/sessions/new.rhtml:33
+#: app/views/sessions/new.rhtml:21 app/views/sessions/new.rhtml:33
+msgid "Login"
+msgstr "ਲਾਗਇਨ"
+
+#: app/views/sessions/new.rhtml:23 app/views/sessions/new.rhtml:23
+#, fuzzy
+msgid "Enter login credentials for host %s."
+msgstr "ਚਿੱਪਸੈੱਟ \"%s\" ਲਈ ਖਾਸ ਪੈਰਾਮੀਟਰ ਦਿਓ ਜੀ।"
+
+#: app/views/sessions/new.rhtml:27 app/views/sessions/new.rhtml:27
+msgid "Username:"
+msgstr "ਯੂਜ਼ਰ ਨਾਂ: "
+
+#: app/views/sessions/new.rhtml:30 app/views/sessions/new.rhtml:30
+msgid "Password:"
+msgstr "ਪਾਸਵਰਡ:"
+
+#: lib/error_constructor.rb:30 lib/error_constructor.rb:30
+msgid "Service %s is not available in the target machine"
+msgstr ""
+
+#: lib/error_constructor.rb:32 lib/error_constructor.rb:32
+msgid "Service %s is not running on the target machine"
+msgstr ""
+
+#: lib/error_constructor.rb:36 lib/error_constructor.rb:36
+#, fuzzy
+msgid "Permission %s is not granted for user %s"
+msgstr "ਕਾਰਵਾਈ '%1' ਸਰਵਿਸ '%2' ਲਈ ਮਨਜ਼ੂਰ ਨਹੀਂ ਹੈ।"
+
+#: lib/error_constructor.rb:38 lib/error_constructor.rb:38
+msgid ""
+"Policy kit exception for user %s and permission %s (untranslated message): %s"
+msgstr ""
+
+#: lib/error_constructor.rb:40 lib/error_constructor.rb:40
+msgid "A user is no longer logged to target machine. Please log in again."
+msgstr ""
+
+#: lib/error_constructor.rb:42 lib/error_constructor.rb:42
+msgid "Target system is not consistent: Missing or corrupted file %s"
+msgstr ""
+
+#: lib/error_constructor.rb:46 lib/error_constructor.rb:46
+msgid ""
+"There is no predefined ntp server at /etc/sysconfig/network/config - "
+"NETCONFIG_NTP_STATIC_SERVERS"
+msgstr ""
+
+#: lib/error_constructor.rb:48 lib/error_constructor.rb:48
+#, fuzzy
+msgid "Error occurred during ntp synchronization: %s"
+msgstr "ਇੰਸਟਾਲੇਸ਼ਨ ਦੌਰਾਨ ਇੱਕ ਗਲਤੀ ਆਈ ਹੈ।"
+
+#: lib/error_constructor.rb:51 lib/error_constructor.rb:51
+#, fuzzy
+msgid "Error while saving administrator settings: %s"
+msgstr "ਪੁਰਾਣੀ ਸ਼ੈਡੋ ਫਾਇਲ ਬੰਦ ਕਰਨ ਦੌਰਾਨ ਗਲਤੀ: %m"
+
+#: lib/error_constructor.rb:54 lib/error_constructor.rb:54
+msgid "PACKAGEKIT_INSTALL"
+msgstr ""
+
+#: lib/error_constructor.rb:56 lib/error_constructor.rb:56
+msgid ""
+"Installation in progress. Remain %i patches. Time of installation depend on "
+"patch size."
+msgstr ""
+
+#: vendor/plugins/lang_helper/lib/lang_helper.rb:63
+msgid "Select locale"
+msgstr ""
+
+#, fuzzy
+#~| msgid "Show Loaded Modules"
+#~ msgid "Show all modules"
+#~ msgstr "ਲੋਡ ਕੀਤੇ ਮੋਡੀਊਲ ਵੇਖਾਓ"
+
+#, fuzzy
+#~| msgid "Reboot the system now?"
+#~ msgid "Set up the system"
+#~ msgstr "ਕੀ ਸਿਸਟਮ ਹੁਣੇ ਮੁੜ-ਚਾਲੂ ਕਰਨਾ ਹੈ?"
+
+#~ msgid "Name:"
+#~ msgstr "ਨਾਂ: "
+
+#, fuzzy
+#~| msgid "A kioslave to browse services"
+#~ msgid "Noone is logged to rest service."
+#~ msgstr "ਸਰਵਿਸਾਂ ਵੇਖਣ ਲਈ kioslave"
+
+#~ msgid "ADMINISTRATOR_ERROR"
+#~ msgstr "ADMINISTRATOR_ERROR"

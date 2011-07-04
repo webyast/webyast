@@ -1,0 +1,160 @@
+# Sinhala message file for YaST2 (@memory@).
+# Copyright (C) 2007 SUSE Linux Products GmbH.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: YaST (@memory@)\n"
+"Report-Msgid-Bugs-To: i18n@suse.de\n"
+"POT-Creation-Date: 2005-07-29 06:17+0000\n"
+"PO-Revision-Date: 2005-07-29 15:37+0530\n"
+"Last-Translator: i18n@suse.de\n"
+"Language-Team: Sinhala <i18n@suse.de>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n!=1);\n"
+
+#: ../Reports.pm:443 ../Reports.pm:532 ../Reports.pm:1480
+#, perl-format
+msgid "DBI Execution failed: %s."
+msgstr "DBI Execution failed: %s."
+
+#: ../Reports.pm:556
+#, perl-format
+msgid "Couldn't open file: %s."
+msgstr "Couldn't open file: %s."
+
+#: ../Reports.pm:560
+msgid "No type value passed.  Unable to determine page count."
+msgstr "No type value passed.  Unable to determine page count."
+
+#: ../Reports.pm:626
+#, perl-format
+msgid "Failed copying %s."
+msgstr "Failed copying %s."
+
+#: ../Reports.pm:750
+#, perl-format
+msgid "Export Log Error: Couldn't open %s"
+msgstr "Export Log Error: Couldn't open %s"
+
+#: ../Reports.pm:772
+msgid "Fatal error.  No report name given. Exiting."
+msgstr "Fatal error.  No report name given. Exiting."
+
+#: ../Reports.pm:828
+#, perl-format
+msgid "Failed to parse: %s."
+msgstr "Failed to parse: %s."
+
+#: ../Reports.pm:837
+#, perl-format
+msgid "Fatal Error.  Couldn't open %s."
+msgstr "Fatal Error.  Couldn't open %s."
+
+#: ../Reports.pm:885
+#, perl-format
+msgid "Fatal Error.  Can't run %s.  Exiting."
+msgstr "Fatal Error.  Can't run %s.  Exiting."
+
+#: ../Reports.pm:925
+#, perl-format
+msgid "Fatal Error.  No directory, %s, found.  Exiting."
+msgstr "Fatal Error.  No directory, %s, found.  Exiting."
+
+#: ../Reports.pm:943
+#, perl-format
+msgid "Fatal Error.  Couldn't open %s.  Exiting"
+msgstr "Fatal Error.  Couldn't open %s.  Exiting"
+
+#: ../Reports.pm:970 ../Reports.pm:983 ../Reports.pm:991
+#, perl-format
+msgid "DBI Execution failed: %s"
+msgstr "DBI Execution failed: %s"
+
+#: ../Reports.pm:1592
+#, perl-format
+msgid "Fatal Error.  getArchReport() couldn't open %s"
+msgstr "Fatal Error.  getArchReport() couldn't open %s"
+
+#: gnome-applets-2.0/modemlights/modemlights.schemas.in.h:31
+msgid "Update interval"
+msgstr "යාවත්කාල විරාමය"
+
+#. Yes Button text
+msgid "&Yes"
+msgstr "&Yes"
+
+#. No Button text
+msgid "&No"
+msgstr "&No"
+
+#. XKBFile extension text
+msgid "Germany"
+msgstr "ජර්මනිය"
+
+#. XKBFile extension text
+msgid "Belgium"
+msgstr "බෙල්ජියම"
+
+#. XKBFile extension text
+msgid "Finland"
+msgstr "පින්ලන්තය"
+
+#. XKBFile extension text
+msgid "Portugal"
+msgstr "පෘතුගාලය"
+
+#. XKBFile extension text
+msgid "Denmark"
+msgstr "ඩෙන්මාර්කය"
+
+#. XKBFile extension text
+msgid "Slovenia"
+msgstr "ස්ලෝවෙනියාව"
+
+#. XKBFile extension text
+msgid "Slovakia"
+msgstr "ස්ලෝවැකියාව"
+
+#. XKBFile extension text
+msgid "Greece"
+msgstr "ග්‍රිසිය"
+
+#. XKBFile extension text
+msgid "United Kingdom"
+msgstr "එක්සත් රාජධානිය"
+
+#. XKBFile extension text
+msgid "Ireland"
+msgstr "අයර්ලන්තය"
+
+#. XKBFile extension text
+msgid "Hungary"
+msgstr "හන්ගේරියාව"
+
+#. XKBFile extension text
+msgid "Ukraine"
+msgstr "යුක්රේනය"
+
+#. XKBFile extension text
+msgid "Romania"
+msgstr "රුමෙනියාව"
+
+#. XKBFile extension text
+msgid "Netherlands"
+msgstr "නෙදර්ලන්තය"
+
+#. XKBFile extension text
+msgid "Turkey"
+msgstr "තුර්කිය"
+
+#. :LTU:440:
+#: ../zypp/CountryCode.cc:354
+msgid "Luxembourg"
+msgstr "ලක්සන්බර්ග්"
+
+#. :MCO:492:
+#: ../zypp/CountryCode.cc:359
+msgid "Moldova"
+msgstr "මෝල්ඩෝව"

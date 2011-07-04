@@ -1,0 +1,590 @@
+# Jan Madsen <jan-portugal@opensuse.org>, 2009.
+msgid ""
+msgstr ""
+"Project-Id-Version: webyast-base-ui 1.0.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2010-08-02 09:15+0200\n"
+"PO-Revision-Date: 2009-10-06 21:42+0100\n"
+"Last-Translator: Jan Madsen <jan-portugal@opensuse.org>\n"
+"Language-Team: Danish <opensuse-da@opensuse.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Lokalize 0.3\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: app/helpers/application_helper.rb:39 app/helpers/application_helper.rb:39
+msgid " or "
+msgstr ""
+
+#: app/helpers/application_helper.rb:43 app/helpers/application_helper.rb:43
+msgid " - "
+msgstr ""
+
+#: app/helpers/application_helper.rb:52 app/helpers/application_helper.rb:66
+#: app/views/hosts/edit.html.erb:40 app/helpers/application_helper.rb:52
+#: app/helpers/application_helper.rb:66 app/views/hosts/edit.html.erb:40
+msgid "Back"
+msgstr "Tilbage"
+
+# cancel button label
+#: app/helpers/application_helper.rb:56 app/views/hosts/new.html.erb:53
+#: app/helpers/application_helper.rb:56 app/views/hosts/new.html.erb:53
+msgid "Cancel"
+msgstr "Annullér"
+
+#: app/helpers/application_helper.rb:71 app/helpers/application_helper.rb:71
+msgid "Save"
+msgstr "Gem"
+
+#: app/helpers/application_helper.rb:74 app/helpers/application_helper.rb:74
+msgid "Next"
+msgstr "Næste"
+
+#: app/helpers/application_helper.rb:75 app/helpers/application_helper.rb:75
+#, fuzzy
+msgid "Finish"
+msgstr "Finsk"
+
+#: app/helpers/view_helpers/html_helper.rb:27
+#: app/helpers/view_helpers/html_helper.rb:27
+msgid "Are you sure?"
+msgstr "Er du sikker?"
+
+#: app/helpers/view_helpers/html_helper.rb:153
+#: app/helpers/view_helpers/html_helper.rb:153
+#, fuzzy
+msgid "Unknown error"
+msgstr "Ukendt fejl\n"
+
+#: app/helpers/view_helpers/html_helper.rb:157
+#: app/views/shared/exception_trap.html.erb:17
+#: app/helpers/view_helpers/html_helper.rb:157
+#: app/views/shared/exception_trap.html.erb:17
+msgid "No information available"
+msgstr "Ingen information tilgængelig"
+
+#: app/helpers/view_helpers/html_helper.rb:160
+#: app/helpers/view_helpers/html_helper.rb:160
+msgid "There was a problem retrieving information from the server."
+msgstr ""
+
+#: app/helpers/view_helpers/effect_helper.rb:50
+#: app/helpers/view_helpers/effect_helper.rb:50
+#, fuzzy
+msgid "Hide Details"
+msgstr "Detaljer"
+
+#: app/helpers/view_helpers/effect_helper.rb:51
+#: app/helpers/view_helpers/effect_helper.rb:51
+#, fuzzy
+msgid "Show Details"
+msgstr "Detaljer"
+
+#: app/helpers/view_helpers/label_helper.rb:24
+#: app/views/hosts/index.html.erb:32
+#: app/helpers/view_helpers/label_helper.rb:24
+#: app/views/hosts/index.html.erb:32
+msgid "Add"
+msgstr "Tilføj"
+
+#: app/helpers/view_helpers/label_helper.rb:28
+#: app/helpers/view_helpers/label_helper.rb:28
+msgid "Edit"
+msgstr "Redigér"
+
+#: app/helpers/view_helpers/label_helper.rb:32
+#: app/helpers/view_helpers/label_helper.rb:32
+msgid "Delete"
+msgstr "Slet"
+
+#: app/controllers/sessions_controller.rb:67
+#: app/controllers/sessions_controller.rb:67
+msgid "You need to specify the host"
+msgstr "Du skal angive en vært"
+
+#: app/controllers/sessions_controller.rb:70
+#: app/controllers/sessions_controller.rb:70
+msgid "No login specified"
+msgstr "Ingen login angivet"
+
+#: app/controllers/sessions_controller.rb:73
+#: app/controllers/sessions_controller.rb:73
+msgid "No password specified"
+msgstr "Ingen adgangskode angivet"
+
+#: app/controllers/sessions_controller.rb:92
+#: app/controllers/sessions_controller.rb:92
+msgid "Host has blocked user %s. It cannot login until  %s"
+msgstr ""
+
+#: app/controllers/sessions_controller.rb:119
+#: app/controllers/sessions_controller.rb:119
+msgid "Login incorrect. Check your username and password."
+msgstr "Login forkert. Tjek dit brugernavn og adgangskode."
+
+#: app/controllers/sessions_controller.rb:152
+#: app/controllers/sessions_controller.rb:152
+msgid "You have been logged out."
+msgstr "Du er blevet logget ud."
+
+#: app/controllers/application_controller.rb:42
+#: app/controllers/application_controller.rb:42
+#, fuzzy
+msgid "Session timeout"
+msgstr "Session aktiv:"
+
+#: app/controllers/application_controller.rb:101
+#: app/controllers/application_controller.rb:101
+#, fuzzy
+msgid ""
+"Operation is forbidden. If you have to do it, please contact system "
+"administrator"
+msgstr "Din konto er deaktiveret. Kontakt din systemadministrator"
+
+#: app/controllers/application_controller.rb:146
+#: app/controllers/application_controller.rb:146
+msgid "Please login to continue"
+msgstr "Log ind for at fortsætte"
+
+#: app/controllers/application_controller.rb:153
+#: app/controllers/application_controller.rb:153
+msgid "You must logout before you can login"
+msgstr "Du skal logge ud før du kan logge ind"
+
+#: app/controllers/application_controller.rb:242
+#: app/controllers/application_controller.rb:242
+msgid "can't be blank"
+msgstr ""
+
+#: app/controllers/application_controller.rb:243
+#: app/controllers/application_controller.rb:243
+msgid "is out of allowed values"
+msgstr ""
+
+#: app/controllers/application_controller.rb:244
+#: app/controllers/application_controller.rb:244
+msgid "can't be empty"
+msgstr ""
+
+#: app/controllers/application_controller.rb:245
+#: app/controllers/application_controller.rb:245
+#, fuzzy
+msgid "is invalid"
+msgstr "ugyldig"
+
+#: app/controllers/application_controller.rb:260
+#: app/controllers/application_controller.rb:260
+#, fuzzy
+msgid "Invalid parameters:"
+msgstr "Ugyldig pakkefil"
+
+#: app/controllers/hosts_controller.rb:43
+#: app/controllers/hosts_controller.rb:43
+#, fuzzy
+msgid "Can't connect to host %s."
+msgstr "Kan ikke skifte rodmappe til '%s' (%s)."
+
+#: app/controllers/hosts_controller.rb:44
+#: app/controllers/hosts_controller.rb:44
+msgid "Make sure the host is up and that the YaST web service is running."
+msgstr "Tilsikr at værten er oppe og at YaST-webtjenesten kører."
+
+#: app/controllers/hosts_controller.rb:46
+#: app/controllers/hosts_controller.rb:46
+msgid "Please select a host to connect to."
+msgstr "Vælg en vært at forbinde til."
+
+#: app/controllers/hosts_controller.rb:49
+#: app/controllers/hosts_controller.rb:49
+#, fuzzy
+msgid "The host '%s' cannot be found."
+msgstr "Softwarekilden '%s' blev ikke fundet."
+
+#: app/controllers/hosts_controller.rb:50
+#: app/controllers/hosts_controller.rb:50
+#, fuzzy
+msgid "Please double-check the host URL."
+msgstr "%s eksisterer ikke, dobbelttjek venligst søgestien."
+
+#: app/models/account.rb:-
+msgid "account"
+msgstr "konto"
+
+#: app/models/account.rb:-
+msgid "Account|Login"
+msgstr "Konto|Login"
+
+#: app/models/account.rb:-
+msgid "Account|Created at"
+msgstr "Konto|Oprettet d."
+
+#: app/models/account.rb:-
+msgid "Account|Updated at"
+msgstr "Konto|Opdateret d."
+
+#: app/models/account.rb:-
+msgid "Account|Remember token"
+msgstr "Konto|Husk symbol"
+
+#: app/models/account.rb:-
+msgid "Account|Remember token expires at"
+msgstr "Konto|Husk symbol udløber d."
+
+#: app/models/account.rb:-
+msgid "Account|Salt"
+msgstr "Konto|Salt"
+
+#: app/models/host.rb:-
+msgid "host"
+msgstr "vært"
+
+#: app/models/host.rb:-
+msgid "Host|Name"
+msgstr "Vært|Navn"
+
+#: app/models/host.rb:-
+msgid "Host|Url"
+msgstr "Vært|URL"
+
+#: app/models/host.rb:-
+msgid "Host|Description"
+msgstr "Vært|Beskrivelse"
+
+#: app/models/host.rb:-
+msgid "Host|Created at"
+msgstr "Vært|Oprettet d."
+
+#: app/models/host.rb:-
+msgid "Host|Updated at"
+msgstr "Vært|Opdateret d."
+
+#: app/views/main/_select_language.html.erb:18
+#: app/views/main/_select_language.html.erb:18
+#, fuzzy
+msgid "Language Selection"
+msgstr "Ryd pakkeudvalg"
+
+#: app/views/shared/exception_trap.html.erb:3
+#: app/views/shared/backendexception_trap.html.erb:2
+#: app/views/shared/exception_trap.html.erb:3
+#: app/views/shared/backendexception_trap.html.erb:2
+msgid "This is embarrasing...."
+msgstr "Dette er flovt..."
+
+#: app/views/shared/exception_trap.html.erb:5
+#: app/views/shared/exception_trap.html.erb:5
+#, fuzzy
+msgid "We are sorry, but there are some problems."
+msgstr ""
+"Vi er kede af det - men WebYaST er stadig under udvikling og der er nogle "
+"problemer."
+
+#: app/views/shared/exception_trap.html.erb:7
+#: app/views/shared/backendexception_trap.html.erb:6
+#: app/views/shared/exception_trap.html.erb:7
+#: app/views/shared/backendexception_trap.html.erb:6
+msgid "Problem:"
+msgstr "Problem: "
+
+#: app/views/shared/exception_trap.html.erb:13
+#: app/views/shared/exception_trap.html.erb:13
+msgid "Please Report a bug so we can fix the problem!."
+msgstr "Vær venlig at rapportere en fejl så vi kan løse problemet!"
+
+#: app/views/shared/exception_trap.html.erb:13
+#: app/views/shared/exception_trap.html.erb:13
+msgid "(report link)"
+msgstr "(rapport-link)"
+
+#: app/views/shared/exception_trap.html.erb:14
+#: app/views/shared/exception_trap.html.erb:14
+msgid "Don't forget to include the bug details."
+msgstr "Glem ikke at inkludere fejldetaljerne."
+
+#: app/views/shared/backendexception_trap.html.erb:4
+#: app/views/shared/backendexception_trap.html.erb:4
+#, fuzzy
+msgid "Problem occured on target machine."
+msgstr "Problem opstår på målmaskine."
+
+#: app/views/shared/_missing_write_permissions.html.erb:1
+#: app/views/shared/_missing_write_permissions.html.erb:1
+msgid "You do not have permissions to modify the settings."
+msgstr ""
+
+#: app/views/hosts/edit.html.erb:2 app/views/hosts/edit.html.erb:2
+msgid "Editing YaST-Web-Service"
+msgstr "Redigerer YaST-webtjeneste"
+
+#: app/views/hosts/edit.html.erb:23 app/views/hosts/edit.html.erb:23
+msgid "YaST-Web-Service"
+msgstr "YaST-webtjeneste"
+
+#: app/views/hosts/edit.html.erb:26 app/views/hosts/new.html.erb:37
+#: app/views/hosts/edit.html.erb:26 app/views/hosts/new.html.erb:37
+msgid "Name"
+msgstr "Navn"
+
+#: app/views/hosts/edit.html.erb:30 app/views/hosts/edit.html.erb:30
+msgid "Url"
+msgstr "URL"
+
+#: app/views/hosts/edit.html.erb:34 app/views/hosts/new.html.erb:47
+#: app/views/hosts/edit.html.erb:34 app/views/hosts/new.html.erb:47
+msgid "Description"
+msgstr "Beskrivelse"
+
+#: app/views/hosts/edit.html.erb:39 app/views/hosts/edit.html.erb:39
+msgid "Ok"
+msgstr "OK"
+
+#: app/views/hosts/index.html.erb:5 app/views/hosts/index.html.erb:5
+msgid "Please choose a service:"
+msgstr "Vælg en tjeneste:"
+
+#: app/views/hosts/index.html.erb:25 app/views/hosts/index.html.erb:25
+msgid "Really delete host %s ?"
+msgstr ""
+
+#: app/views/hosts/new.html.erb:10 app/views/hosts/new.html.erb:10
+msgid "New WebYaST Host"
+msgstr "Ny WebYaST-vært"
+
+#: app/views/hosts/new.html.erb:42 app/views/hosts/new.html.erb:42
+#, fuzzy
+msgid "URL"
+msgstr "URI"
+
+#: app/views/hosts/new.html.erb:54 app/views/hosts/new.html.erb:54
+msgid "Create"
+msgstr "Opret"
+
+#: app/views/hosts/show.html.erb:8 app/views/hosts/show.html.erb:8
+msgid "Index"
+msgstr "Indeks"
+
+#: app/views/controlpanel/show_all.rhtml:18
+#: app/views/controlpanel/index.rhtml:72
+#: app/views/controlpanel/show_all.rhtml:18
+#: app/views/controlpanel/index.rhtml:72
+msgid "Configuration"
+msgstr "Konfiguration"
+
+#: app/views/controlpanel/index.rhtml:29 app/views/controlpanel/index.rhtml:29
+msgid "Status"
+msgstr "Status"
+
+#: app/views/controlpanel/index.rhtml:34 app/views/controlpanel/index.rhtml:34
+msgid "Loading patch information"
+msgstr "Indlæser rettelsesinformation"
+
+#: app/views/controlpanel/index.rhtml:36 app/views/controlpanel/index.rhtml:36
+msgid "Patch status summary is disabled in the config file."
+msgstr ""
+
+#: app/views/controlpanel/index.rhtml:39 app/views/controlpanel/index.rhtml:39
+msgid "Patch plugin is not installed."
+msgstr "Rettelse-plugin er ikke installeret."
+
+#: app/views/controlpanel/index.rhtml:45 app/views/controlpanel/index.rhtml:45
+msgid "Loading system information"
+msgstr "Indlæser systeminformation"
+
+#: app/views/controlpanel/index.rhtml:47 app/views/controlpanel/index.rhtml:47
+msgid "System status summary is disabled in the config file."
+msgstr ""
+
+#: app/views/controlpanel/index.rhtml:50 app/views/controlpanel/index.rhtml:50
+msgid "Status plugin is not installed."
+msgstr "Status-plugin er ikke installeret."
+
+#: app/views/controlpanel/index.rhtml:61 app/views/controlpanel/index.rhtml:61
+msgid "System actions"
+msgstr "Systemhandlinger"
+
+# reboot button label
+#: app/views/controlpanel/index.rhtml:63 app/views/controlpanel/index.rhtml:63
+msgid "Reboot"
+msgstr "Genstart"
+
+#: app/views/controlpanel/index.rhtml:64 app/views/controlpanel/index.rhtml:64
+msgid "Really reboot %s?"
+msgstr ""
+
+#: app/views/controlpanel/index.rhtml:65 app/views/controlpanel/index.rhtml:65
+msgid "Shutdown"
+msgstr "Luk ned"
+
+#: app/views/controlpanel/index.rhtml:66 app/views/controlpanel/index.rhtml:66
+msgid "Really shutdown %s?"
+msgstr ""
+
+#: app/views/controlpanel/basesystem.rhtml:18
+#: app/views/controlpanel/basesystem.rhtml:18
+msgid "Base system setup"
+msgstr "Basissystemets opsætning"
+
+#: app/views/controlpanel/basesystem.rhtml:20
+#: app/views/controlpanel/basesystem.rhtml:20
+#, fuzzy
+msgid ""
+"Your initial system setup was not completed. Please continue with setting up "
+"the modules."
+msgstr ""
+"Din systemopsætning blev ikke færdiggjort. Fortsæt med opsætning af "
+"modulerne."
+
+#: app/views/controlpanel/basesystem.rhtml:21
+#: app/views/controlpanel/basesystem.rhtml:21
+#, fuzzy
+msgid "Continue initial system setup"
+msgstr "Basissystemets opsætning"
+
+#: app/views/layouts/main.rhtml:59 app/views/layouts/main.rhtml:59
+msgid "WebYaST"
+msgstr "WebYaST"
+
+#: app/views/layouts/main.rhtml:105 app/views/layouts/main.rhtml:105
+msgid ""
+"You are using an unsupported browser. Please switch to %sFireFox 3.5 or "
+"better%s or %sInternet Explorer 8%s. Thanks! [%sclose%s]"
+msgstr ""
+
+#: app/views/layouts/main.rhtml:112 app/views/layouts/main.rhtml:112
+msgid ""
+"JavaScript support is missing or disabled. Please turn JavaScript on or use "
+"a supported browser (%sFireFox 3.5%s or %sInternet Explorer 8%s)."
+msgstr ""
+
+#: app/views/layouts/main.rhtml:119 app/views/layouts/main.rhtml:119
+msgid "My Appliance"
+msgstr "Min anvendelse"
+
+# label for language selection
+#: app/views/layouts/main.rhtml:126 app/views/layouts/main.rhtml:130
+#: app/views/layouts/main.rhtml:126 app/views/layouts/main.rhtml:130
+#, fuzzy
+msgid "Language:"
+msgstr "Sprog"
+
+#: app/views/layouts/main.rhtml:132 app/views/layouts/main.rhtml:132
+#, fuzzy
+msgid "Connected host:"
+msgstr "Forbundet vært"
+
+#: app/views/layouts/main.rhtml:133 app/views/layouts/main.rhtml:133
+msgid "User:"
+msgstr "Bruger:"
+
+#: app/views/layouts/main.rhtml:136 app/views/layouts/main.rhtml:136
+msgid "Control panel"
+msgstr "Kontrolpanel"
+
+#: app/views/layouts/main.rhtml:137 app/views/layouts/main.rhtml:137
+msgid "Logout"
+msgstr "Log ud"
+
+#: app/views/layouts/main.rhtml:145 app/views/layouts/main.rhtml:145
+#, fuzzy
+msgid "You will be logged off in"
+msgstr "Du er blevet logget ud."
+
+#: app/views/layouts/main.rhtml:145 app/views/layouts/main.rhtml:145
+msgid "seconds due to inactivity. "
+msgstr ""
+
+#: app/views/layouts/main.rhtml:176 app/views/layouts/main.rhtml:176
+msgid "...Wait..."
+msgstr "...Vent..."
+
+#: app/views/sessions/new.rhtml:21 app/views/sessions/new.rhtml:33
+#: app/views/sessions/new.rhtml:21 app/views/sessions/new.rhtml:33
+msgid "Login"
+msgstr "Login"
+
+#: app/views/sessions/new.rhtml:23 app/views/sessions/new.rhtml:23
+#, fuzzy
+msgid "Enter login credentials for host %s."
+msgstr "Indtast specifikke parametre for chipsæt \"%s\"."
+
+#: app/views/sessions/new.rhtml:27 app/views/sessions/new.rhtml:27
+msgid "Username:"
+msgstr "Brugernavn:"
+
+#: app/views/sessions/new.rhtml:30 app/views/sessions/new.rhtml:30
+msgid "Password:"
+msgstr "Adgangskode:"
+
+#: lib/error_constructor.rb:30 lib/error_constructor.rb:30
+msgid "Service %s is not available in the target machine"
+msgstr ""
+
+#: lib/error_constructor.rb:32 lib/error_constructor.rb:32
+msgid "Service %s is not running on the target machine"
+msgstr ""
+
+#: lib/error_constructor.rb:36 lib/error_constructor.rb:36
+#, fuzzy
+msgid "Permission %s is not granted for user %s"
+msgstr "Handlingen '%1' er ikke tilladt for tjenesten '%2'."
+
+#: lib/error_constructor.rb:38 lib/error_constructor.rb:38
+msgid ""
+"Policy kit exception for user %s and permission %s (untranslated message): %s"
+msgstr ""
+
+#: lib/error_constructor.rb:40 lib/error_constructor.rb:40
+msgid "A user is no longer logged to target machine. Please log in again."
+msgstr ""
+
+#: lib/error_constructor.rb:42 lib/error_constructor.rb:42
+msgid "Target system is not consistent: Missing or corrupted file %s"
+msgstr ""
+
+#: lib/error_constructor.rb:46 lib/error_constructor.rb:46
+msgid ""
+"There is no predefined ntp server at /etc/sysconfig/network/config - "
+"NETCONFIG_NTP_STATIC_SERVERS"
+msgstr ""
+
+#: lib/error_constructor.rb:48 lib/error_constructor.rb:48
+#, fuzzy
+msgid "Error occurred during ntp synchronization: %s"
+msgstr "Der opstod en fejl under installationen."
+
+#: lib/error_constructor.rb:51 lib/error_constructor.rb:51
+#, fuzzy
+msgid "Error while saving administrator settings: %s"
+msgstr "Fejl under lukning af gammel shadow-fil: %m"
+
+#: lib/error_constructor.rb:54 lib/error_constructor.rb:54
+msgid "PACKAGEKIT_INSTALL"
+msgstr ""
+
+#: lib/error_constructor.rb:56 lib/error_constructor.rb:56
+msgid ""
+"Installation in progress. Remain %i patches. Time of installation depend on "
+"patch size."
+msgstr ""
+
+#: vendor/plugins/lang_helper/lib/lang_helper.rb:63
+msgid "Select locale"
+msgstr ""
+
+#~ msgid "Show all modules"
+#~ msgstr "Vis alle moduler"
+
+#~ msgid "Set up the system"
+#~ msgstr "Sæt systemet op"
+
+#~ msgid "Name:"
+#~ msgstr "Navn:"
+
+#, fuzzy
+#~| msgid "Problem occur on target machine."
+#~ msgid "Problem occured on target machine"
+#~ msgstr "Problem opstår på målmaskine."
+
+#~ msgid "Noone is logged to rest service."
+#~ msgstr "Ingen er logget til rest-tjeneste."

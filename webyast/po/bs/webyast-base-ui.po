@@ -1,0 +1,2158 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: @PACKAGE@\n"
+"Report-Msgid-Bugs-To: translation@suse.de\n"
+"POT-Creation-Date: 2006-05-15 15:07+0200\n"
+"PO-Revision-Date: 2002-07-23 18:27+0200\n"
+"Last-Translator: Damir Bjelobradic <Nagual@lugbih.org>\n"
+"Language-Team: Bosnian <i18n@suse.de>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=3; plural=n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
+
+#: ../Reports.pm:556
+#, perl-format
+msgid "Couldn't open file: %s."
+msgstr "Couldn't open file: %s."
+
+#: ../Reports.pm:560
+msgid "No type value passed.  Unable to determine page count."
+msgstr "No type value passed.  Unable to determine page count."
+
+#: ../Reports.pm:626
+#, perl-format
+msgid "Failed copying %s."
+msgstr "Failed copying %s."
+
+#: ../Reports.pm:750
+#, perl-format
+msgid "Export Log Error: Couldn't open %s"
+msgstr "Export Log Error: Couldn't open %s"
+
+#: ../Reports.pm:772
+msgid "Fatal error.  No report name given. Exiting."
+msgstr "Fatal error.  No report name given. Exiting."
+
+#: ../Reports.pm:828
+#, perl-format
+msgid "Failed to parse: %s."
+msgstr "Failed to parse: %s."
+
+#: ../Reports.pm:837
+#, perl-format
+msgid "Fatal Error.  Couldn't open %s."
+msgstr "Fatal Error.  Couldn't open %s."
+
+#: ../Reports.pm:885
+#, perl-format
+msgid "Fatal Error.  Can't run %s.  Exiting."
+msgstr "Fatal Error.  Can't run %s.  Exiting."
+
+#: ../Reports.pm:925
+#, perl-format
+msgid "Fatal Error.  No directory, %s, found.  Exiting."
+msgstr "Fatal Error.  No directory, %s, found.  Exiting."
+
+#: ../Reports.pm:943
+#, perl-format
+msgid "Fatal Error.  Couldn't open %s.  Exiting"
+msgstr "Fatal Error.  Couldn't open %s.  Exiting"
+
+#: ../Reports.pm:1592
+#, perl-format
+msgid "Fatal Error.  getArchReport() couldn't open %s"
+msgstr "Fatal Error.  getArchReport() couldn't open %s"
+
+#. ok button label
+#. txt_ok
+msgid "OK"
+msgstr "U redu"
+
+#. continue button label
+#. txt_continue
+msgid "Continue"
+msgstr "Nastavi"
+
+#. txt_help
+msgid "Help"
+msgstr "Pomoć"
+
+#. label for language selection
+#. txt_language
+msgid "Language"
+msgstr "Jezik"
+
+#. txt_yes
+msgid "Yes"
+msgstr "Da"
+
+#. txt_no
+msgid "No"
+msgstr "Ne"
+
+#: ../src/restreewidget.cpp:91
+#: ../build/_CPack_Packages/Linux-Source/TZ/libqdialogsolver1-0.1.1-Source/src/restreewidget.cpp:72
+#: ../build/_CPack_Packages/Linux-Source/TGZ/libqdialogsolver1-0.1.1-Source/src/restreewidget.cpp:72
+#: ../build/_CPack_Packages/Linux-Source/TBZ2/libqdialogsolver1-1.2.0/src/restreewidget.cpp:91
+msgid "Description"
+msgstr "Opis"
+
+#: ../src/restreewidget.cpp:94 ../src/restreewidget.cpp:102
+#: ../build/_CPack_Packages/Linux-Source/TZ/libqdialogsolver1-0.1.1-Source/src/restreewidget.cpp:75
+#: ../build/_CPack_Packages/Linux-Source/TZ/libqdialogsolver1-0.1.1-Source/src/restreewidget.cpp:83
+#: ../build/_CPack_Packages/Linux-Source/TGZ/libqdialogsolver1-0.1.1-Source/src/restreewidget.cpp:75
+#: ../build/_CPack_Packages/Linux-Source/TGZ/libqdialogsolver1-0.1.1-Source/src/restreewidget.cpp:83
+#: ../build/_CPack_Packages/Linux-Source/TBZ2/libqdialogsolver1-1.2.0/src/restreewidget.cpp:94
+#: ../build/_CPack_Packages/Linux-Source/TBZ2/libqdialogsolver1-1.2.0/src/restreewidget.cpp:102
+msgid "Name"
+msgstr "Naziv"
+
+#: ../application-browser/src/application-browser.c:90
+msgid "Groups"
+msgstr "Grupe"
+
+#: ../libslab/bookmark-agent.c:1143
+msgid "Home"
+msgstr "Početak"
+
+#: ../libslab/bookmark-agent.c:1194
+msgid "Search"
+msgstr "Traži"
+
+#: ../libslab/directory-tile.c:238 ../libslab/directory-tile.c:456
+#: ../libslab/document-tile.c:294 ../libslab/document-tile.c:831
+msgid "Delete"
+msgstr "Izbrii"
+
+#: ../main-menu/src/network-status-tile.c:355
+#: ../main-menu/src/network-status-tile.c:365
+#, c-format
+msgid "Unknown"
+msgstr "Nepoznato"
+
+#: ../main-menu/src/slab-window.glade.h:15
+msgid "Status"
+msgstr "Status"
+
+#: ../main-menu/src/slab-window.glade.h:16
+msgid "System"
+msgstr "Sistem"
+
+#. translators: this is the update type, e.g. security
+#: ../src/gpk-application.c:950 ../src/gpk-update-viewer.c:900
+msgid "Type"
+msgstr "Vrsta"
+
+#: ../src/gpk-enum.c:1276
+msgid "Network"
+msgstr "Mreža"
+
+#: gnome-applets-2.0/modemlights/modemlights.c:117
+msgid "translator_credits"
+msgstr "Kenan Hadžiavdić <kenanh@gmail.com>"
+
+#: gnome-applets-2.0/modemlights/modemlights.c:130
+#: ../modemlights/modemlights.c:1595
+msgid "Modem Lights"
+msgstr "Lampice modema"
+
+#: gnome-applets-2.0/modemlights/modemlights.c:132
+msgid ""
+"Released under the GNU general public license.\n"
+"A modem status indicator and dialer.\n"
+"Lights in order from the top or left are Send data and Receive data."
+msgstr ""
+"Izdano pod licencom GNU general public licence.\n"
+"Pokazivač statusa modema.\n"
+"Lampice po redu od vrha ili s lijeva su slanje podataka i primanje podataka."
+
+#: gnome-applets-2.0/modemlights/modemlights.c:513
+msgid ""
+"You are currently connected.\n"
+"Do you want to disconnect?"
+msgstr ""
+"Trenutno ste spojeni.\n"
+"Želite prekinuti vezu?"
+
+#: gnome-applets-2.0/modemlights/modemlights.c:583
+#, c-format
+msgid "%#.1fMb received / %#.1fMb sent / time: %.1d:%.2d"
+msgstr "%#.1fMb primljeno / %#.1fMb poslano / vrijeme: %.1d:%.2d"
+
+#: gnome-applets-2.0/modemlights/modemlights.c:588
+msgid "not connected"
+msgstr "niste spojeni"
+
+#: gnome-applets-2.0/modemlights/modemlights.schemas.in.h:1
+msgid "Ask for confirmation when connecting/disconnecting"
+msgstr "Traži potvrdu pri spajanju/prekidanju veze"
+
+#: gnome-applets-2.0/modemlights/modemlights.schemas.in.h:2
+msgid "Blink when connecting"
+msgstr "Treperi tokom spajanja"
+
+#: gnome-applets-2.0/modemlights/modemlights.schemas.in.h:3
+msgid "Command executed when connecting"
+msgstr "Naredba koja se izvršava pri spajanju"
+
+#: gnome-applets-2.0/modemlights/modemlights.schemas.in.h:4
+msgid "Command executed when disconnecting"
+msgstr "Naredba koja se izvršava pri prekidanju veze"
+
+#: gnome-applets-2.0/modemlights/modemlights.schemas.in.h:5
+msgid "Display a confirmation dialog when connecting or disconnecting."
+msgstr "Prikaži dijalog za potvrdu pri spajanju ili prekidanju veze."
+
+#: gnome-applets-2.0/modemlights/modemlights.schemas.in.h:6
+msgid "Make the applet blink when the modem is connecting."
+msgstr "Neka aplet treperi tokom spajanja modema."
+
+#: gnome-applets-2.0/modemlights/modemlights.schemas.in.h:7
+msgid "Modem device name"
+msgstr "Ime modema"
+
+#: gnome-applets-2.0/modemlights/modemlights.schemas.in.h:8
+msgid "Modem lock file"
+msgstr "Datoteka za zaključavanje modema"
+
+#: gnome-applets-2.0/modemlights/modemlights.schemas.in.h:9
+msgid "Receive background color"
+msgstr "Boja pozadine za primanje"
+
+#: gnome-applets-2.0/modemlights/modemlights.schemas.in.h:10
+msgid "Receive foreground color"
+msgstr "Boja za primanje"
+
+#: gnome-applets-2.0/modemlights/modemlights.schemas.in.h:11
+msgid "Send background color"
+msgstr "Boju pozadine za slanje"
+
+#: gnome-applets-2.0/modemlights/modemlights.schemas.in.h:12
+msgid "Send foreground color"
+msgstr "Boja za slanje"
+
+#: gnome-applets-2.0/modemlights/modemlights.schemas.in.h:13
+msgid "Show connect time and throughput"
+msgstr "Pokaži dužinu spojenosti i prijenos"
+
+#: gnome-applets-2.0/modemlights/modemlights.schemas.in.h:14
+msgid "Show extra information about the connect time and amount of data transmitted and received."
+msgstr "Pokaži dodatne podatke o dužini spojenosti i količini poslanih i primljenih podataka."
+
+#: gnome-applets-2.0/modemlights/modemlights.schemas.in.h:15
+msgid "Status connected color"
+msgstr "Boja kada je spojen"
+
+#: gnome-applets-2.0/modemlights/modemlights.schemas.in.h:16
+msgid "Status not connected color"
+msgstr "Boja kada nije spojen"
+
+#: gnome-applets-2.0/modemlights/modemlights.schemas.in.h:17
+msgid "Status waiting connection color"
+msgstr "Boja kada čeka konekciju"
+
+#: gnome-applets-2.0/modemlights/modemlights.schemas.in.h:18
+msgid "Text background color"
+msgstr "Boja pozadine teksta"
+
+#: gnome-applets-2.0/modemlights/modemlights.schemas.in.h:19
+msgid "Text foreground color"
+msgstr "Boja teksta"
+
+#: gnome-applets-2.0/modemlights/modemlights.schemas.in.h:20
+msgid "Text outline color"
+msgstr "Boja okvira teksta"
+
+#: gnome-applets-2.0/modemlights/modemlights.schemas.in.h:21
+msgid "The background color of the button used to indicate data received."
+msgstr "Boja pozadine dugmeta koji pokazuje primljene podatke."
+
+#: gnome-applets-2.0/modemlights/modemlights.schemas.in.h:22
+msgid "The background color of the button used to indicate data sent."
+msgstr "Boja pozadine dugmeta koji pokazuje poslane podatke."
+
+#: gnome-applets-2.0/modemlights/modemlights.schemas.in.h:23
+msgid "The color used to display the status button when the modem is connected."
+msgstr "Boja dugmeta statusa kada je modem spojen."
+
+#: gnome-applets-2.0/modemlights/modemlights.schemas.in.h:24
+msgid "The color used to display the status button when the modem is connecting."
+msgstr "Boja dugmeta statusa kada se modem spaja."
+
+#: gnome-applets-2.0/modemlights/modemlights.schemas.in.h:25
+msgid "The color used to display the status button when the modem is not connected."
+msgstr "Boja dugmeta statusa kada modem nije spojen."
+
+#: gnome-applets-2.0/modemlights/modemlights.schemas.in.h:26
+msgid "The color used to indicate that data has been received."
+msgstr "Boja koja pokazuje da su podaci primljeni."
+
+#: gnome-applets-2.0/modemlights/modemlights.schemas.in.h:27
+msgid "The color used to indicate that data has been sent."
+msgstr "Boja koja pokazuje da su podaci poslani."
+
+#: gnome-applets-2.0/modemlights/modemlights.schemas.in.h:28
+msgid "The fraction of a second until the applet updates."
+msgstr "Dio sekunde između ažuriranja apleta."
+
+#: gnome-applets-2.0/modemlights/modemlights.schemas.in.h:29
+msgid "The name of the modem device."
+msgstr "Ime modema."
+
+#: gnome-applets-2.0/modemlights/modemlights.schemas.in.h:30
+msgid "The name of the modem lock file."
+msgstr "Ime datoteke za zaključavanje modema."
+
+#: gnome-applets-2.0/modemlights/modemlights.schemas.in.h:32
+msgid "Use isdn"
+msgstr "Koristi isdn"
+
+#: gnome-applets-2.0/modemlights/modemlights.schemas.in.h:33
+msgid "Use isdn instead of ppp to connect the modem."
+msgstr "Koristi isdn umjesto ppp za spajanje modema."
+
+#: gnome-applets-2.0/modemlights/modemlights.schemas.in.h:34
+msgid "Use this command to connect the modem."
+msgstr "Koristi ovu naredbu za spajanje modema."
+
+#: gnome-applets-2.0/modemlights/modemlights.schemas.in.h:35
+msgid "Use this command to disconnect the modem."
+msgstr "Koristi ovu naredbu za prekidanje veze modema."
+
+#: gnome-applets-2.0/modemlights/modemlights.schemas.in.h:36
+msgid "Verify owner of lock file"
+msgstr "Provjeri vlasnika datoteke za zaključavanje"
+
+#: gnome-applets-2.0/modemlights/properties.c:423
+msgid "Modem Lights Preferences"
+msgstr "Opcije lampica modema"
+
+#: gnome-applets-2.0/modemlights/properties.c:451
+msgid "U_pdate every:"
+msgstr "_Ažuriraj svakih:"
+
+#: gnome-applets-2.0/modemlights/properties.c:468
+msgid "seconds"
+msgstr "sekundi"
+
+#. extra info checkbox
+#: gnome-applets-2.0/modemlights/properties.c:476
+msgid "Sho_w connect time and throughput"
+msgstr "_Pokaži dužinu spajanja i prijenos"
+
+#: gnome-applets-2.0/modemlights/properties.c:486
+msgid "B_link connection status when connecting"
+msgstr "_Treperi status spajanja pri spajanju"
+
+#: gnome-applets-2.0/modemlights/properties.c:496
+msgid "Connections"
+msgstr "Spajanje"
+
+#: gnome-applets-2.0/modemlights/properties.c:505
+msgid "Co_nnection command:"
+msgstr "Naredba za _spajanje:"
+
+#: gnome-applets-2.0/modemlights/properties.c:531
+msgid "_Disconnection command:"
+msgstr "Naredba za pre_kid veze:"
+
+#. confirmation checkbox
+#: gnome-applets-2.0/modemlights/properties.c:553
+msgid "Con_firm connection"
+msgstr "Pot_vrdi spajanje"
+
+#: gnome-applets-2.0/modemlights/properties.c:572
+msgid "Receive Data"
+msgstr "Primanje podataka"
+
+#: gnome-applets-2.0/modemlights/properties.c:578
+msgid "_Foreground:"
+msgstr "_Boja:"
+
+#: gnome-applets-2.0/modemlights/properties.c:583
+msgid "Send Data"
+msgstr "Slanje podataka"
+
+#: gnome-applets-2.0/modemlights/properties.c:588
+msgid "Foregroun_d:"
+msgstr "Bo_ja:"
+
+#: gnome-applets-2.0/modemlights/properties.c:590
+msgid "Backg_round:"
+msgstr "Po_zadina:"
+
+#: gnome-applets-2.0/modemlights/properties.c:593
+msgid "Connection Status"
+msgstr "Status spojenosti"
+
+#: gnome-applets-2.0/modemlights/properties.c:601
+msgid "Co_nnected:"
+msgstr "_Spojen:"
+
+#: gnome-applets-2.0/modemlights/properties.c:603
+msgid "Disconnec_ted:"
+msgstr "_Nije spojen:"
+
+#: gnome-applets-2.0/modemlights/properties.c:606
+msgid "C_onnecting:"
+msgstr "S_pajam se:"
+
+#: gnome-applets-2.0/modemlights/properties.c:617
+msgid "For_eground:"
+msgstr "Boja t_eksta:"
+
+#: gnome-applets-2.0/modemlights/properties.c:619
+msgid "Bac_kground:"
+msgstr "Po_zadina:"
+
+#: gnome-applets-2.0/modemlights/properties.c:621
+msgid "O_utline:"
+msgstr "O_kvir:"
+
+#: gnome-applets-2.0/modemlights/properties.c:633
+msgid "Modem Options"
+msgstr "Opcije modema"
+
+#: gnome-applets-2.0/modemlights/properties.c:642
+msgid "_Device:"
+msgstr "_Uređaj:"
+
+#: gnome-applets-2.0/modemlights/properties.c:668
+msgid "_Lock file:"
+msgstr "_Datoteka zaključavanja:"
+
+#: gnome-applets-2.0/modemlights/properties.c:689
+msgid "_Verify owner of lock file"
+msgstr "_Provjeri vlasnika datoteke za zaključavanje"
+
+#. ISDN checkbox
+#: gnome-applets-2.0/modemlights/properties.c:700
+msgid "U_se ISDN"
+msgstr "_Koristi ISDN"
+
+#: gnome-applets-2.0/modemlights/properties.c:717
+msgid "Advanced"
+msgstr "Napredno"
+
+#: gnome-control-center-2.0/capplets/passwd/gnome-passwd.glade.h:1
+msgid "*"
+msgstr "*"
+
+#: configview.cpp:44
+msgid "Value"
+msgstr "Vrijednost"
+
+#. i18n: tag string
+#. i18n: file connection_setting_serial.ui line 52
+#: knetworkmanager-connection_setting_wireless_security_widget.cpp:234
+#: knetworkmanager-connection_setting_wireless_security_widget.cpp:467
+#: rc.cpp:217
+msgid "None"
+msgstr "Nijedan"
+
+#: detaileddialog.cpp:253 detaileddialog.cpp:441 detaileddialog.cpp:468
+msgid "unknown"
+msgstr "nepoznat"
+
+#: dummy.cpp:51
+msgid "Devices"
+msgstr "Uređaji"
+
+#: kpowersave.cpp:1641
+msgid "Error"
+msgstr "Greška"
+
+#: configure_Dialog.cpp:852
+msgid "Settings"
+msgstr "Postavke"
+
+#. TXT_CANCEL
+msgid "Back"
+msgstr "Nazad"
+
+#. TXT_COLOR_DISPLAY
+msgid "Color display"
+msgstr "Ekran u boji"
+
+#. TXT_MONO_DISPLAY
+msgid "Monochrome display"
+msgstr "Monohromatski ekran"
+
+#. TXT_MENU_DISPLAY
+msgid "Display"
+msgstr "Ekran"
+
+#. TXT_MENU_KEYMAP
+msgid "Keymap"
+msgstr "Raspored tipki"
+
+#. TXT_CDROM
+msgid "CD-ROM"
+msgstr "CD-ROM"
+
+#. TXT_FLOPPY
+msgid "Floppy"
+msgstr "Disketa"
+
+#. TXT_SEARCH_FOR_RI
+#, c-format
+msgid "Searching for image \"%s\"..."
+msgstr "Tražim 'image' \"%s\"..."
+
+#. TXT_INFO_CPU
+msgid "Processor"
+msgstr "Procesor"
+
+#. TXT_INFO_DMA
+msgid "DMA"
+msgstr "DMA"
+
+#. TXT_INFO_IRQS
+msgid "Interrupts"
+msgstr "Interapti"
+
+#. TXT_INFO_IOPORTS
+msgid "I/O Ports"
+msgstr "U/I portovi"
+
+#. TXT_INFO_MEM
+msgid "Memory"
+msgstr "Memorija"
+
+#. TXT_INFO_MODULES
+msgid "Modules"
+msgstr "Moduli"
+
+#. TXT_INFO_PCI
+msgid "PCI"
+msgstr "PCI"
+
+#. TXT_TRY_NFS_MOUNT
+#, c-format
+msgid ""
+"Trying to mount the directory\n"
+"\n"
+"\"%s:%s\"..."
+msgstr ""
+"Pokušavam montirati direktorij\n"
+"\n"
+"\"%s:%s\"..."
+
+#. TXT_AUTO_RUNNING
+#, c-format
+msgid "Autoprobing (%s)...      "
+msgstr "Automatsko ispitivanje (%s)...      "
+
+#. TXT_NET_ETH0
+msgid "ethernet network card"
+msgstr "ethernet mrežna karta"
+
+#. TXT_NET_PLIP
+msgid "parallel port"
+msgstr "paralelni port"
+
+#. TXT_NET_TR0
+msgid "token ring network card"
+msgstr "token ring mrežna karta"
+
+#. TXT_NET_ARC0
+msgid "arcnet network card"
+msgstr "arcnet mrežna karta"
+
+#. TXT_NET_FDDI
+msgid "FDDI network card"
+msgstr "FDDI mrežna karta"
+
+#. TXT_NET_HIPPI
+msgid "HIPPI network card"
+msgstr "HIPPI mrežna karta"
+
+#. TXT_START_CARDMGR
+msgid "Starting card manager..."
+msgstr "Pokrećem menadžera za karte..."
+
+#. TXT_PCMCIA_SUCCESS
+msgid "Successfully started PCMCIA card services."
+msgstr "Uspješno pokrenuti servisi za PCMCIA kartu."
+
+#. TXT_EXAMPLE_PAR
+msgid ""
+"\n"
+"\n"
+"Example: "
+msgstr ""
+"\n"
+"\n"
+"Primjer:"
+
+#. TXT_TRY_CD_MOUNT
+msgid "Trying to mount the CD-ROM..."
+msgstr "Pokušavam montirati CD-ROM..."
+
+#. TXT_ASK_ANIMATE
+msgid "Animation"
+msgstr "Animacija"
+
+#. TXT_MENU_EXPERT
+msgid "Debug (expert)"
+msgstr "Debug (za eksperte)"
+
+#. TXT_NO_INFO_AVAIL
+msgid "No information available."
+msgstr "Nema dostupnih informacija."
+
+#. TXT_PREPARE_INST
+msgid "Preparing installation..."
+msgstr "Pripremam instalaciju..."
+
+#. TXT_ERROR_FTP
+#, c-format
+msgid ""
+"Error while accessing the FTP server:\n"
+"\n"
+"%s"
+msgstr ""
+"Greška prilikom pristupa FTP serveru:\n"
+"\n"
+"%s"
+
+#. TXT_INIT_PARPORT
+msgid "Initializing parallel port..."
+msgstr "Inicijaliziram paralelni port..."
+
+#. TXT_EJECT_CD
+msgid "Eject CD"
+msgstr "Izbaci CD"
+
+#. TXT_NET_CTC
+msgid "channel to channel connection"
+msgstr "channel to channel konekcija"
+
+#. TXT_NET_ESCON
+msgid "ESCON connection"
+msgstr "ESCON konekcija"
+
+#. TXT_NET_IUCV
+msgid "IUCV connection"
+msgstr "IUCV konekcija"
+
+#. TXT_NET_CLAW
+msgid "channel attached cisco router"
+msgstr "channel attached cisco router"
+
+#. TXT_SMB_TRYING_MOUNT
+#, c-format
+msgid ""
+"Trying to mount the share\n"
+"\n"
+"\"//%s/%s\""
+msgstr ""
+"Pokušavam montirati share\n"
+"\n"
+"\"//%s/%s\""
+
+# %s is either BOOTP or DHCP
+#. %s is either BOOTP or DHCP
+#. TXT_ASK_DHCP
+#, c-format
+msgid "Automatic configuration via %s?"
+msgstr "Automatska konfiguracija preko %s?"
+
+# %s is either BOOTP or DHCP
+#. %s is either BOOTP or DHCP
+#. TXT_SEND_DHCP
+#, c-format
+msgid "Sending %s request..."
+msgstr "Šaljem %s zahtjev..."
+
+# %s is either BOOTP or DHCP
+#. %s is either BOOTP or DHCP
+#. TXT_ERROR_DHCP
+#, c-format
+msgid "%s configuration failed."
+msgstr "%s podešavanje nije uspjelo."
+
+#. TXT_DHCP_VS_BOOTP
+msgid "Use DHCP instead of BOOTP?"
+msgstr "Koristi DHCP umjesto BOOTP?"
+
+# %s is FTP or HTTP
+#. %s is FTP or HTTP
+#. TXT_TRY_REACH_SERVER
+#, c-format
+msgid "Trying to connect to the %s server..."
+msgstr "Pokušavam se spojiti na %s server..."
+
+# %s is e.g. ext3 or reiserfs
+#. %s is e.g. ext3 or reiserfs
+#. TXT_FILE_SYSTEM
+#, c-format
+msgid "%s file system found."
+msgstr "Pronađen %s datotečni sistem."
+
+#. TXT_ABORT
+msgid "Abort"
+msgstr "Odustani"
+
+#. TXT_NO_NEW_MODULES
+msgid "No new modules found."
+msgstr "Novi moduli nisu pronađeni."
+
+#. TXT_LOW_MEMORY1
+msgid "There is not enough memory to load all data."
+msgstr "Nema dovoljno memorije za učitavanje svih podataka."
+
+#. TXT_ADD_SWAP
+msgid "To continue, activate some swap space."
+msgstr "Da nastavite, aktivirajte još swap prostora."
+
+#. TXT_ERROR_SWAP
+msgid "Error activating swap space."
+msgstr "Greška prilikom aktiviranja swap prostora."
+
+#. Yes Button text
+msgid "&Yes"
+msgstr "&Da"
+
+#. No Button text
+msgid "&No"
+msgstr "&Ne"
+
+#. XKBFile extension text
+msgid "Morocco"
+msgstr "Moroko"
+
+# ET
+#. XKBFile extension text
+msgid "Ethiopia"
+msgstr "Etiopija"
+
+# GN
+#. XKBFile extension text
+msgid "Guinea"
+msgstr "Gvineja"
+
+#. XKBFile extension text
+msgid "China"
+msgstr "Kina"
+
+#. XKBFile extension text
+msgid "Arabic"
+msgstr "Arapski"
+
+# NP
+#. XKBFile extension text
+msgid "Nepal"
+msgstr "Nepal"
+
+#. XKBFile extension text
+msgid "Iraq"
+msgstr "Irak"
+
+# NG
+#. XKBFile extension text
+msgid "Nigeria"
+msgstr "Nigerija"
+
+#. XKBFile extension text
+msgid "Estonia"
+msgstr "Estonija"
+
+# MM
+#. XKBFile extension text
+msgid "Myanmar"
+msgstr "Myanmar"
+
+#. XKBFile extension text
+msgid "Norway"
+msgstr "Norveška"
+
+#. XKBFile extension text
+msgid "Germany"
+msgstr "Njemačka"
+
+# MN
+#. XKBFile extension text
+msgid "Mongolia"
+msgstr "Mongolija"
+
+# BT
+#. XKBFile extension text
+msgid "Bhutan"
+msgstr "Butan"
+
+# BD
+#. XKBFile extension text
+msgid "Bangladesh"
+msgstr "Bangladeš"
+
+#. XKBFile extension text
+msgid "Belgium"
+msgstr "Belgija"
+
+#. XKBFile extension text
+msgid "Finland"
+msgstr "Finska"
+
+#. XKBFile extension text
+msgid "Israel"
+msgstr "Izrael"
+
+#. XKBFile extension text
+msgid "Sweden"
+msgstr "Švedska"
+
+#. XKBFile extension text
+msgid "Portugal"
+msgstr "Portugal"
+
+#. XKBFile extension text
+msgid "Korean"
+msgstr "Korejski"
+
+#. XKBFile extension text
+msgid "Maori"
+msgstr "Maorski"
+
+#. XKBFile extension text
+msgid "Uzbekistan"
+msgstr "Uzbekistan"
+
+#. XKBFile extension text
+msgid "Bulgaria"
+msgstr "Bugarska"
+
+#. XKBFile extension text
+msgid "Thailand"
+msgstr "Tajland"
+
+#. XKBFile extension text
+msgid "India"
+msgstr "Indija"
+
+#. XKBFile extension text
+msgid "Switzerland"
+msgstr "Švicarska"
+
+#. XKBFile extension text
+msgid "Japan"
+msgstr "Japan"
+
+# SY
+# fuzzy
+#. XKBFile extension text
+msgid "Syria"
+msgstr "Surinam"
+
+#. XKBFile extension text
+msgid "Belarus"
+msgstr "Bjelorusija"
+
+#. XKBFile extension text
+msgid "Tajikistan"
+msgstr "Tadžikistan"
+
+#. XKBFile extension text
+msgid "Denmark"
+msgstr "Danska"
+
+#. XKBFile extension text
+msgid "Slovenia"
+msgstr "Slovenija"
+
+#. XKBFile extension text
+msgid "Malta"
+msgstr "Malta"
+
+# AZ
+#. XKBFile extension text
+msgid "Azerbaijan"
+msgstr "Azerbejdžan"
+
+#. XKBFile extension text
+msgid "Lithuania"
+msgstr "Litvanija"
+
+# VN
+# fuzzy
+#. XKBFile extension text
+msgid "Vietnam"
+msgstr "Vijetnam"
+
+#. XKBFile extension text
+msgid "Faroe Islands"
+msgstr "Faroe Otoci"
+
+#. XKBFile extension text
+msgid "South Africa"
+msgstr "Južna Afrika"
+
+#. XKBFile extension text
+msgid "Slovakia"
+msgstr "Slovačka"
+
+# MV
+# fuzzy
+#. XKBFile extension text
+msgid "Maldives"
+msgstr "Mali"
+
+#. XKBFile extension text
+msgid "Iceland"
+msgstr "Iceland"
+
+#. XKBFile extension text
+msgid "Croatia"
+msgstr "Hrvatska"
+
+#. XKBFile extension text
+msgid "Latvia"
+msgstr "Latvija"
+
+#. XKBFile extension text
+msgid "Albania"
+msgstr "Albanija"
+
+#. XKBFile extension text
+msgid "Italy"
+msgstr "Italija"
+
+#. XKBFile extension text
+msgid "Greece"
+msgstr "Grčka"
+
+#. XKBFile extension text
+msgid "United Kingdom"
+msgstr "Ujedinjeno Kraljevstvo (Velika Britanija)"
+
+#. XKBFile extension text
+msgid "France"
+msgstr "Francuska"
+
+# AM
+#. XKBFile extension text
+msgid "Armenia"
+msgstr "Armenija"
+
+#. XKBFile extension text
+msgid "Pakistan"
+msgstr "Pakistan"
+
+#. XKBFile extension text
+msgid "Poland"
+msgstr "Poljska"
+
+# KG
+# fuzzy
+#. XKBFile extension text
+msgid "Kyrgyzstan"
+msgstr "Kirgistan"
+
+#. XKBFile extension text
+msgid "Ireland"
+msgstr "Irska"
+
+#. XKBFile extension text
+msgid "Hungary"
+msgstr "Mađarska"
+
+# KH
+#. XKBFile extension text
+msgid "Cambodia"
+msgstr "Kambođa"
+
+#. XKBFile extension text
+msgid "Spain"
+msgstr "Španija"
+
+#. XKBFile extension text
+msgid "Ukraine"
+msgstr "Ukrajina"
+
+#. XKBFile extension text
+msgid "Romania"
+msgstr "Rumunija"
+
+# KZ
+# fuzzy
+#. XKBFile extension text
+msgid "Kazakhstan"
+msgstr "Kazahstan"
+
+#. XKBFile extension text
+msgid "Georgia"
+msgstr "Džordžija"
+
+#. XKBFile extension text
+msgid "Turkish"
+msgstr "Turski"
+
+#. XKBFile extension text
+msgid "Netherlands"
+msgstr "Nizozemska"
+
+#. XKBFile extension text
+msgid "Macedonia"
+msgstr "Makedonija"
+
+#. XKBFile extension text
+msgid "Canada"
+msgstr "Kanada"
+
+# LK
+#. XKBFile extension text
+msgid "Sri Lanka"
+msgstr "Šri Lanka"
+
+# BA
+#. XKBFile extension text
+msgid "Bosnia and Herzegovina"
+msgstr "Bosna i Hercegovina"
+
+# BR
+#. XKBFile extension text
+msgid "Brazil"
+msgstr "Brazil"
+
+# GH
+#. XKBFile extension text
+msgid "Ghana"
+msgstr "Gana"
+
+# AD
+#. XKBFile extension text
+msgid "Andorra"
+msgstr "Andora"
+
+# AF
+#. XKBFile extension text
+msgid "Afghanistan"
+msgstr "Afganistan"
+
+#. XKBFile extension text
+msgid "Esperanto"
+msgstr "Esperanto"
+
+#. XKBFile extension text
+msgid "Turkey"
+msgstr "Turska"
+
+msgid "Ok"
+msgstr "U redu"
+
+#: src/vminstall/msg.py:169
+msgid "Hardware"
+msgstr "Hardware"
+
+#. language code: abk ab
+#: ../zypp/LanguageCode.cc:240
+msgid "Abkhazian"
+msgstr "Azerbejdđanski"
+
+#. language code: afr af
+#: ../zypp/LanguageCode.cc:254
+msgid "Afrikaans"
+msgstr "Afrikaans"
+
+#. :DOM:214:
+#: ../zypp/CountryCode.cc:284
+msgid "Algeria"
+msgstr "Algerija"
+
+# AS
+#. :ARG:032:
+#: ../zypp/CountryCode.cc:235
+msgid "American Samoa"
+msgstr "Američka Samoa"
+
+# AO
+#. :ANT:530:
+#: ../zypp/CountryCode.cc:232
+msgid "Angola"
+msgstr "Angola"
+
+# AI
+#. :ATG:028:
+#: ../zypp/CountryCode.cc:228
+msgid "Anguilla"
+msgstr "Anguilla"
+
+# AQ
+#. :AGO:024:
+#: ../zypp/CountryCode.cc:233
+msgid "Antarctica"
+msgstr "Antarktik"
+
+# AG
+#. :AFG:004:
+#: ../zypp/CountryCode.cc:227
+msgid "Antigua and Barbuda"
+msgstr "Antigua i Barbuda"
+
+#. :ATA:010:
+#: ../zypp/CountryCode.cc:234
+msgid "Argentina"
+msgstr "Argentina"
+
+# AW
+#. :AUS:036:
+#: ../zypp/CountryCode.cc:238
+msgid "Aruba"
+msgstr "Aruba"
+
+#. :AUT:040:
+#: ../zypp/CountryCode.cc:237
+msgid "Australia"
+msgstr "Australija"
+
+#. :ASM:016:
+#: ../zypp/CountryCode.cc:236
+msgid "Austria"
+msgstr "Austrija"
+
+#. language code: aze az
+#: ../zypp/LanguageCode.cc:312
+msgid "Azerbaijani"
+msgstr "Azerbejđanski"
+
+# BS
+#. :BRA:076:
+#: ../zypp/CountryCode.cc:254
+msgid "Bahamas"
+msgstr "Bahami"
+
+#. :BGR:100:
+#: ../zypp/CountryCode.cc:247
+msgid "Bahrain"
+msgstr "Bahrein"
+
+#. :BIH:070:
+#: ../zypp/CountryCode.cc:242
+msgid "Barbados"
+msgstr "Barbados"
+
+#. language code: baq eus eu
+#: ../zypp/LanguageCode.cc:326 ../zypp/LanguageCode.cc:328
+msgid "Basque"
+msgstr "Baskijski"
+
+#. language code: bel be
+#: ../zypp/LanguageCode.cc:336
+msgid "Belarusian"
+msgstr "Bjeloruski"
+
+# BZ
+#. :BLR:112:
+#: ../zypp/CountryCode.cc:259
+msgid "Belize"
+msgstr "Belize"
+
+# BJ
+#. :BDI:108:
+#: ../zypp/CountryCode.cc:249
+msgid "Benin"
+msgstr "Benin"
+
+#. :BEN:204:
+#: ../zypp/CountryCode.cc:250
+msgid "Bermuda"
+msgstr "Bermuda"
+
+#. :BRN:096:
+#: ../zypp/CountryCode.cc:252
+msgid "Bolivia"
+msgstr "Bolivija"
+
+#. :BVT:074:
+#: ../zypp/CountryCode.cc:257
+msgid "Botswana"
+msgstr "Bocvana"
+
+# BV
+#. :BTN:064:
+#: ../zypp/CountryCode.cc:256
+msgid "Bouvet Island"
+msgstr "Ostrvo Bouvet"
+
+#. language code: bre br
+#: ../zypp/LanguageCode.cc:362
+msgid "Breton"
+msgstr "Bretonski"
+
+# IO
+#. :IND:356:
+#: ../zypp/CountryCode.cc:327
+msgid "British Indian Ocean Territory"
+msgstr "Britansko-Indijska morska teritorija"
+
+# BN
+#. :BMU:060:
+#: ../zypp/CountryCode.cc:251
+msgid "Brunei Darussalam"
+msgstr "Bruneji"
+
+#. language code: bul bg
+#: ../zypp/LanguageCode.cc:370
+msgid "Bulgarian"
+msgstr "Bugarski"
+
+# BF
+#. :BEL:056:
+#: ../zypp/CountryCode.cc:245
+msgid "Burkina Faso"
+msgstr "Burkina Faso"
+
+# BI
+#. :BHR:048:
+#: ../zypp/CountryCode.cc:248
+msgid "Burundi"
+msgstr "Burundi"
+
+# CM
+#. :CHL:152:
+#: ../zypp/CountryCode.cc:269
+msgid "Cameroon"
+msgstr "Kamerun"
+
+# CV
+#. :CUB:192:
+#: ../zypp/CountryCode.cc:275
+msgid "Cape Verde"
+msgstr "Zelenortsko otočje"
+
+#. language code: cat ca
+#: ../zypp/LanguageCode.cc:384
+msgid "Catalan"
+msgstr "Katalanski"
+
+# KY
+#. :KWT:414:
+#: ../zypp/CountryCode.cc:344
+msgid "Cayman Islands"
+msgstr "Kajmanska ostrva"
+
+# TD
+#. :TCA:796:
+#: ../zypp/CountryCode.cc:430
+msgid "Chad"
+msgstr "Čad"
+
+#. :COK:184:
+#: ../zypp/CountryCode.cc:268
+msgid "Chile"
+msgstr "Čile"
+
+#. language code: chi zho zh
+#: ../zypp/LanguageCode.cc:400 ../zypp/LanguageCode.cc:402
+msgid "Chinese"
+msgstr "Kineski"
+
+# CX
+#. :CPV:132:
+#: ../zypp/CountryCode.cc:276
+msgid "Christmas Island"
+msgstr "Uskršnje ostrvo"
+
+# CC
+#. :CAN:124:
+#: ../zypp/CountryCode.cc:261
+msgid "Cocos (Keeling) Islands"
+msgstr "Kokosova ostrva"
+
+#. :CHN:156:
+#: ../zypp/CountryCode.cc:271
+msgid "Colombia"
+msgstr "Kolumbija"
+
+# KM
+#. :KIR:296:
+#: ../zypp/CountryCode.cc:339
+msgid "Comoros"
+msgstr "Komori"
+
+# CG
+#. :CCK:166:
+#. :CAF:140:
+#: ../zypp/CountryCode.cc:262 ../zypp/CountryCode.cc:264
+msgid "Congo"
+msgstr "Kongo"
+
+# CK
+#. :CIV:384:
+#: ../zypp/CountryCode.cc:267
+msgid "Cook Islands"
+msgstr "Cook ostrva"
+
+#. :COL:170:
+#: ../zypp/CountryCode.cc:272
+msgid "Costa Rica"
+msgstr "Kosta Rika"
+
+#. language code: scr hrv hr
+#: ../zypp/LanguageCode.cc:1008 ../zypp/LanguageCode.cc:1010
+msgid "Croatian"
+msgstr "Hrvatski"
+
+# CU
+#. :SCG:891:
+#: ../zypp/CountryCode.cc:274
+msgid "Cuba"
+msgstr "Kuba"
+
+# CY
+#. :CXR:162:
+#: ../zypp/CountryCode.cc:277
+msgid "Cyprus"
+msgstr "Kipar"
+
+#. language code: cze ces cs
+#: ../zypp/LanguageCode.cc:446 ../zypp/LanguageCode.cc:448
+msgid "Czech"
+msgstr "Češki"
+
+#. :CYP:196:
+#: ../zypp/CountryCode.cc:278
+msgid "Czech Republic"
+msgstr "Češka Republika"
+
+#. language code: dan da
+#: ../zypp/LanguageCode.cc:452
+msgid "Danish"
+msgstr "Danski"
+
+#. :DEU:276:
+#: ../zypp/CountryCode.cc:280
+msgid "Djibouti"
+msgstr "Džibuti"
+
+#. :DNK:208:
+#: ../zypp/CountryCode.cc:282
+msgid "Dominica"
+msgstr "Dominikanska Republika"
+
+#. :DMA:212:
+#: ../zypp/CountryCode.cc:283
+msgid "Dominican Republic"
+msgstr "Dominikanska Republika"
+
+#. language code: dut nld nl
+#: ../zypp/LanguageCode.cc:478 ../zypp/LanguageCode.cc:480
+msgid "Dutch"
+msgstr "Holandski"
+
+#. :DZA:012:
+#: ../zypp/CountryCode.cc:285
+msgid "Ecuador"
+msgstr "Ekvador"
+
+#. :EST:233:
+#: ../zypp/CountryCode.cc:287
+msgid "Egypt"
+msgstr "Egipat"
+
+#. :STP:678:
+#: ../zypp/CountryCode.cc:426
+msgid "El Salvador"
+msgstr "El Salvador"
+
+#. language code: eng en
+#: ../zypp/LanguageCode.cc:494
+msgid "English"
+msgstr "Engleski"
+
+# GQ
+#. :GLP:312:
+#: ../zypp/CountryCode.cc:310
+msgid "Equatorial Guinea"
+msgstr "Ekvatorijalna Gvineja"
+
+# ER
+#. :ESH:732:
+#: ../zypp/CountryCode.cc:289
+msgid "Eritrea"
+msgstr "Eritreja"
+
+#. language code: est et
+#: ../zypp/LanguageCode.cc:500
+msgid "Estonian"
+msgstr "Estonski"
+
+# FK
+#. :FJI:242:
+#: ../zypp/CountryCode.cc:294
+msgid "Falkland Islands (Malvinas)"
+msgstr "Falklandsko otočje"
+
+#. :FIN:246:
+#: ../zypp/CountryCode.cc:293
+msgid "Fiji"
+msgstr "Fidži"
+
+#. language code: fin fi
+#: ../zypp/LanguageCode.cc:516
+msgid "Finnish"
+msgstr "Finski"
+
+#. language code: fre fra fr
+#: ../zypp/LanguageCode.cc:522 ../zypp/LanguageCode.cc:524
+msgid "French"
+msgstr "Francuski"
+
+# GF
+# fuzzy
+#. :GEO:268:
+#: ../zypp/CountryCode.cc:303
+msgid "French Guiana"
+msgstr "Francuska Gvineja"
+
+# PF
+#. :PER:604:
+#: ../zypp/CountryCode.cc:393
+msgid "French Polynesia"
+msgstr "Francuska Polinezija"
+
+# GA
+#. :FXX:249:
+#: ../zypp/CountryCode.cc:299
+msgid "Gabon"
+msgstr "Gabon"
+
+# GM
+#. :GRL:304:
+#: ../zypp/CountryCode.cc:307
+msgid "Gambia"
+msgstr "Gambija"
+
+#. language code: ger deu de
+#: ../zypp/LanguageCode.cc:548 ../zypp/LanguageCode.cc:550
+msgid "German"
+msgstr "Njemački"
+
+#. :GHA:288:
+#: ../zypp/CountryCode.cc:305
+msgid "Gibraltar"
+msgstr "Gibraltar"
+
+#. :GIB:292:
+#: ../zypp/CountryCode.cc:306
+msgid "Greenland"
+msgstr "Greenland"
+
+#. :GBR:826:
+#: ../zypp/CountryCode.cc:301
+msgid "Grenada"
+msgstr "Grenada"
+
+#. :GIN:324:
+#: ../zypp/CountryCode.cc:309
+msgid "Guadeloupe"
+msgstr "Guadelupa"
+
+#. :GTM:320:
+#: ../zypp/CountryCode.cc:314
+msgid "Guam"
+msgstr "Guam"
+
+#. :SGS:239:
+#: ../zypp/CountryCode.cc:313
+msgid "Guatemala"
+msgstr "Guatemala"
+
+# GW
+#. :GUM:316:
+#: ../zypp/CountryCode.cc:315
+msgid "Guinea-Bissau"
+msgstr "Gvineja Bisau"
+
+# GY
+#. :GNB:624:
+#: ../zypp/CountryCode.cc:316
+msgid "Guyana"
+msgstr "Gvajana"
+
+# HT
+#. :HRV:191:
+#: ../zypp/CountryCode.cc:321
+msgid "Haiti"
+msgstr "Haiti"
+
+#. language code: heb he
+#: ../zypp/LanguageCode.cc:596
+msgid "Hebrew"
+msgstr "Hebrejski"
+
+# VA
+# fuzzy
+#. :UZB:860:
+#: ../zypp/CountryCode.cc:451
+msgid "Holy See (Vatican City State)"
+msgstr "Vatikan (Sveta Zemlja)"
+
+#. :HMD:334:
+#: ../zypp/CountryCode.cc:319
+msgid "Honduras"
+msgstr "Hondoras"
+
+#. :GUY:328:
+#: ../zypp/CountryCode.cc:317
+msgid "Hong Kong"
+msgstr "Hong Kong"
+
+#. language code: hun hu
+#: ../zypp/LanguageCode.cc:614
+msgid "Hungarian"
+msgstr "Mađarski"
+
+#. language code: ice isl is
+#: ../zypp/LanguageCode.cc:622 ../zypp/LanguageCode.cc:624
+msgid "Icelandic"
+msgstr "Islandski"
+
+#. :HUN:348:
+#: ../zypp/CountryCode.cc:323
+msgid "Indonesia"
+msgstr "Indonesija"
+
+#. language code: ind id
+#: ../zypp/LanguageCode.cc:642
+msgid "Indonesian"
+msgstr "Infoneziski"
+
+# IR
+# fuzzy
+#. :IRQ:368:
+#: ../zypp/CountryCode.cc:329
+msgid "Iran"
+msgstr "Irak"
+
+#. language code: gle ga
+#: ../zypp/LanguageCode.cc:558
+msgid "Irish"
+msgstr "Irski"
+
+#. language code: ita it
+#: ../zypp/LanguageCode.cc:654
+msgid "Italian"
+msgstr "Italijanski"
+
+#. :ITA:380:
+#: ../zypp/CountryCode.cc:332
+msgid "Jamaica"
+msgstr "Jamajka"
+
+#. language code: jpn ja
+#: ../zypp/LanguageCode.cc:660
+msgid "Japanese"
+msgstr "Japanski"
+
+#. :JAM:388:
+#: ../zypp/CountryCode.cc:333
+msgid "Jordan"
+msgstr "Jordan"
+
+# KE
+#. :JPN:392:
+#: ../zypp/CountryCode.cc:335
+msgid "Kenya"
+msgstr "Kenija"
+
+# KI
+#. :KHM:116:
+#: ../zypp/CountryCode.cc:338
+msgid "Kiribati"
+msgstr "Kiribati"
+
+#. language code: kur ku
+#: ../zypp/LanguageCode.cc:728
+msgid "Kurdish"
+msgstr "Kurdski"
+
+#. :KOR:410:
+#: ../zypp/CountryCode.cc:343
+msgid "Kuwait"
+msgstr "Kuvajt"
+
+#. language code: lav lv
+#: ../zypp/LanguageCode.cc:742
+msgid "Latvian"
+msgstr "Latviski"
+
+#. :LAO:418:
+#: ../zypp/CountryCode.cc:347
+msgid "Lebanon"
+msgstr "Libanon"
+
+# LS
+#. :LBR:430:
+#: ../zypp/CountryCode.cc:352
+msgid "Lesotho"
+msgstr "Lesoto"
+
+# LR
+#. :LKA:144:
+#: ../zypp/CountryCode.cc:351
+msgid "Liberia"
+msgstr "Liberija"
+
+# LY
+# fuzzy
+#. :LVA:428:
+#: ../zypp/CountryCode.cc:356
+msgid "Libya"
+msgstr "Liberija"
+
+#. :LCA:662:
+#: ../zypp/CountryCode.cc:349
+msgid "Liechtenstein"
+msgstr "Linhenštajn"
+
+#. language code: lit lt
+#: ../zypp/LanguageCode.cc:750
+msgid "Lithuanian"
+msgstr "Litvanski"
+
+#. :LTU:440:
+#: ../zypp/CountryCode.cc:354
+msgid "Luxembourg"
+msgstr "Luksemburg"
+
+#. :MNG:496:
+#: ../zypp/CountryCode.cc:366
+msgid "Macao"
+msgstr "Makao"
+
+#. language code: mac mkd mk
+#: ../zypp/LanguageCode.cc:772 ../zypp/LanguageCode.cc:774
+msgid "Macedonian"
+msgstr "Makedonski"
+
+# MG
+#. :MDA:498:
+#: ../zypp/CountryCode.cc:360
+msgid "Madagascar"
+msgstr "Madagaskar"
+
+# MW
+#. :MDV:462:
+#: ../zypp/CountryCode.cc:374
+msgid "Malawi"
+msgstr "Malavi"
+
+#. :MEX:484:
+#: ../zypp/CountryCode.cc:376
+msgid "Malaysia"
+msgstr "Malezija"
+
+# ML
+#. :MKD:807:
+#: ../zypp/CountryCode.cc:363
+msgid "Mali"
+msgstr "Mali"
+
+#. language code: mlt mt
+#: ../zypp/LanguageCode.cc:822
+msgid "Maltese"
+msgstr "Maltski"
+
+# MH
+#. :MDG:450:
+#: ../zypp/CountryCode.cc:361
+msgid "Marshall Islands"
+msgstr "Maršalova ostrva"
+
+#. :MNP:580:
+#: ../zypp/CountryCode.cc:368
+msgid "Martinique"
+msgstr "Martinik"
+
+# MR
+#. :MTQ:474:
+#: ../zypp/CountryCode.cc:369
+msgid "Mauritania"
+msgstr "Mauritanija"
+
+# MU
+# fuzzy
+#. :MLT:470:
+#: ../zypp/CountryCode.cc:372
+msgid "Mauritius"
+msgstr "Mauricijus"
+
+# YT
+#. :YEM:887:
+#: ../zypp/CountryCode.cc:461
+msgid "Mayotte"
+msgstr "Mayotte"
+
+#. :MWI:454:
+#: ../zypp/CountryCode.cc:375
+msgid "Mexico"
+msgstr "Meksiko"
+
+#. :MCO:492:
+#: ../zypp/CountryCode.cc:359
+msgid "Moldova"
+msgstr "Moldova"
+
+#. :MAR:504:
+#: ../zypp/CountryCode.cc:358
+msgid "Monaco"
+msgstr "Monako"
+
+# MS
+#. :MRT:478:
+#: ../zypp/CountryCode.cc:370
+msgid "Montserrat"
+msgstr "Montserrat"
+
+# MZ
+#. :MYS:458:
+#: ../zypp/CountryCode.cc:377
+msgid "Mozambique"
+msgstr "Mozambik"
+
+# NA
+#. :MOZ:508:
+#: ../zypp/CountryCode.cc:378
+msgid "Namibia"
+msgstr "Namibija"
+
+#. language code: nau na
+#. :NPL:524:
+#: ../zypp/LanguageCode.cc:858 ../zypp/CountryCode.cc:387
+msgid "Nauru"
+msgstr "Nauru"
+
+#. language code: nav nv
+#: ../zypp/LanguageCode.cc:860
+msgid "Navajo"
+msgstr "Navaho"
+
+# AN
+#. :ARM:051:
+#: ../zypp/CountryCode.cc:231
+msgid "Netherlands Antilles"
+msgstr "Nizozemski Antili"
+
+# NC
+#. :NAM:516:
+#: ../zypp/CountryCode.cc:379
+msgid "New Caledonia"
+msgstr "Nova Kaledonija"
+
+#. :NIU:570:
+#: ../zypp/CountryCode.cc:389
+msgid "New Zealand"
+msgstr "Novi Zeland"
+
+#. :NGA:566:
+#: ../zypp/CountryCode.cc:383
+msgid "Nicaragua"
+msgstr "Nikaragva"
+
+# NE
+#. :NCL:540:
+#: ../zypp/CountryCode.cc:380
+msgid "Niger"
+msgstr "Niger"
+
+# NU
+#. :NRU:520:
+#: ../zypp/CountryCode.cc:388
+msgid "Niue"
+msgstr "Niue"
+
+# NF
+#. :NER:562:
+#: ../zypp/CountryCode.cc:381
+msgid "Norfolk Island"
+msgstr "Norfolk ostrvo"
+
+# MP
+#. :MAC:446:
+#: ../zypp/CountryCode.cc:367
+msgid "Northern Mariana Islands"
+msgstr "Sjeverna Marijanska ostrva"
+
+#. language code: nor no
+#: ../zypp/LanguageCode.cc:888
+msgid "Norwegian"
+msgstr "Norveški"
+
+#. :NZL:554:
+#: ../zypp/CountryCode.cc:390
+msgid "Oman"
+msgstr "Oman"
+
+#. :PRT:620:
+#: ../zypp/CountryCode.cc:403
+msgid "Palau"
+msgstr "Palau"
+
+#. :OMN:512:
+#: ../zypp/CountryCode.cc:391
+msgid "Panama"
+msgstr "Panama"
+
+# PG
+#. :PYF:258:
+#: ../zypp/CountryCode.cc:394
+msgid "Papua New Guinea"
+msgstr "Papua Nova Gvineja"
+
+#. :PLW:585:
+#: ../zypp/CountryCode.cc:404
+msgid "Paraguay"
+msgstr "Paragvaj"
+
+#. :PAN:591:
+#: ../zypp/CountryCode.cc:392
+msgid "Peru"
+msgstr "Peru"
+
+#. :PNG:598:
+#: ../zypp/CountryCode.cc:395
+msgid "Philippines"
+msgstr "Filipini"
+
+#. :SPM:666:
+#: ../zypp/CountryCode.cc:399
+msgid "Pitcairn"
+msgstr "Pitkairn"
+
+#. language code: pol pl
+#: ../zypp/LanguageCode.cc:948
+msgid "Polish"
+msgstr "Poljski"
+
+#. language code: por pt
+#: ../zypp/LanguageCode.cc:952
+msgid "Portuguese"
+msgstr "Portugalski"
+
+#. :PCN:612:
+#: ../zypp/CountryCode.cc:400
+msgid "Puerto Rico"
+msgstr "Puerto Riko"
+
+#. :PRY:600:
+#: ../zypp/CountryCode.cc:405
+msgid "Qatar"
+msgstr "Katar"
+
+# RE
+#. :QAT:634:
+#: ../zypp/CountryCode.cc:406
+msgid "Reunion"
+msgstr "Reunion"
+
+#. language code: rum ron ro
+#: ../zypp/LanguageCode.cc:974 ../zypp/LanguageCode.cc:976
+msgid "Romanian"
+msgstr "Rumunjki"
+
+#. language code: rus ru
+#: ../zypp/LanguageCode.cc:980
+msgid "Russian"
+msgstr "Ruski"
+
+# RU
+#. :ROU:642:
+#: ../zypp/CountryCode.cc:408
+msgid "Russian Federation"
+msgstr "Ruska Federacija"
+
+# RW
+#. :RUS:643:
+#: ../zypp/CountryCode.cc:409
+msgid "Rwanda"
+msgstr "Ruanda"
+
+# SH
+#. :SGP:702:
+#: ../zypp/CountryCode.cc:416
+msgid "Saint Helena"
+msgstr "Saint Helena"
+
+#. :WLF:876:
+#: ../zypp/CountryCode.cc:459
+msgid "Samoa"
+msgstr "Samoa"
+
+# SM
+#. :SLE:694:
+#: ../zypp/CountryCode.cc:421
+msgid "San Marino"
+msgstr "San Marino"
+
+# ST
+#. :SUR:740:
+#: ../zypp/CountryCode.cc:425
+msgid "Sao Tome and Principe"
+msgstr "Sao Tome i Principe"
+
+#. :RWA:646:
+#: ../zypp/CountryCode.cc:410
+msgid "Saudi Arabia"
+msgstr "Saudijska Arabija"
+
+# SN
+#. :SMR:674:
+#: ../zypp/CountryCode.cc:422
+msgid "Senegal"
+msgstr "Senegal"
+
+#. language code: scc srp sr
+#: ../zypp/LanguageCode.cc:1000 ../zypp/LanguageCode.cc:1002
+msgid "Serbian"
+msgstr "Srpski"
+
+# SC
+#. :SLB:090:
+#: ../zypp/CountryCode.cc:412
+msgid "Seychelles"
+msgstr "Sejšelsko otočje"
+
+# SL
+#. :SVK:703:
+#: ../zypp/CountryCode.cc:420
+msgid "Sierra Leone"
+msgstr "Sierra Leone"
+
+#. :SWE:752:
+#: ../zypp/CountryCode.cc:415
+msgid "Singapore"
+msgstr "Singapur"
+
+#. language code: slo slk sk
+#: ../zypp/LanguageCode.cc:1032 ../zypp/LanguageCode.cc:1034
+msgid "Slovak"
+msgstr "Slovački"
+
+#. language code: slv sl
+#: ../zypp/LanguageCode.cc:1036
+msgid "Slovenian"
+msgstr "Slovenski"
+
+# SB
+#. :SAU:682:
+#: ../zypp/CountryCode.cc:411
+msgid "Solomon Islands"
+msgstr "Solomoska ostrva"
+
+# SO
+#. :SEN:686:
+#: ../zypp/CountryCode.cc:423
+msgid "Somalia"
+msgstr "Somalija"
+
+# GS
+# fuzzy
+#. :GRC:300:
+#: ../zypp/CountryCode.cc:312
+msgid "South Georgia and the South Sandwich Islands"
+msgstr "South Georgia i South Sandwich ostrvo"
+
+#. language code: spa es
+#: ../zypp/LanguageCode.cc:1066
+msgid "Spanish"
+msgstr "Španski"
+
+#. :SYC:690:
+#: ../zypp/CountryCode.cc:413
+msgid "Sudan"
+msgstr "Sudan"
+
+# SR
+#. :SOM:706:
+#: ../zypp/CountryCode.cc:424
+msgid "Suriname"
+msgstr "Surinam"
+
+# SJ
+# fuzzy
+#. :SVN:705:
+#: ../zypp/CountryCode.cc:418
+msgid "Svalbard and Jan Mayen"
+msgstr "Svalbard and Jan Mayen ostrva"
+
+# SZ
+#. :SYR:760:
+#: ../zypp/CountryCode.cc:428
+msgid "Swaziland"
+msgstr "Svazilend"
+
+#. language code: swe sv
+#: ../zypp/LanguageCode.cc:1086
+msgid "Swedish"
+msgstr "Švedski"
+
+# TW
+# fuzzy
+#. :TUV:798:
+#: ../zypp/CountryCode.cc:443
+msgid "Taiwan"
+msgstr "Tajland"
+
+#. language code: tam ta
+#: ../zypp/LanguageCode.cc:1094
+msgid "Tamil"
+msgstr "Tamilski"
+
+#. language code: tha th
+#: ../zypp/LanguageCode.cc:1110
+msgid "Thai"
+msgstr "Tajlandski"
+
+# TG
+#. :ATF:260:
+#: ../zypp/CountryCode.cc:432
+msgid "Togo"
+msgstr "Togo"
+
+# TK
+#. language code: tkl
+#. :TJK:762:
+#: ../zypp/LanguageCode.cc:1122 ../zypp/CountryCode.cc:435
+msgid "Tokelau"
+msgstr "Tokelau"
+
+# TO
+#. :TUN:788:
+#: ../zypp/CountryCode.cc:438
+msgid "Tonga"
+msgstr "Tonga"
+
+# TT
+#. :TUR:792:
+#: ../zypp/CountryCode.cc:441
+msgid "Trinidad and Tobago"
+msgstr "Trinidad i Tobago"
+
+#. :TKM:795:
+#: ../zypp/CountryCode.cc:437
+msgid "Tunisia"
+msgstr "Tunisia"
+
+# TM
+#. :TKL:772:
+#: ../zypp/CountryCode.cc:436
+msgid "Turkmenistan"
+msgstr "Turkmenistan"
+
+# TV
+#. language code: tvl
+#. :TTO:780:
+#: ../zypp/LanguageCode.cc:1152 ../zypp/CountryCode.cc:442
+msgid "Tuvalu"
+msgstr "Tuvalu"
+
+# UG
+#. :UKR:804:
+#: ../zypp/CountryCode.cc:446
+msgid "Uganda"
+msgstr "Uganda"
+
+#. :AND:020:
+#: ../zypp/CountryCode.cc:225
+msgid "United Arab Emirates"
+msgstr "Ujedinjeni Arapski Emirati"
+
+# US
+#. :UMI:581:
+#: ../zypp/CountryCode.cc:448
+msgid "United States"
+msgstr "SAD"
+
+# UM
+#. :UGA:800:
+#: ../zypp/CountryCode.cc:447
+msgid "United States Minor Outlying Islands"
+msgstr "United States Minor Outlying Islands"
+
+#. :USA:840:
+#: ../zypp/CountryCode.cc:449
+msgid "Uruguay"
+msgstr "Urugvaj"
+
+# VU
+#. :VNM:704:
+#: ../zypp/CountryCode.cc:457
+msgid "Vanuatu"
+msgstr "Vanuatu"
+
+#. :VCT:670:
+#: ../zypp/CountryCode.cc:453
+msgid "Venezuela"
+msgstr "Venecuela"
+
+#. language code: vie vi
+#: ../zypp/LanguageCode.cc:1178
+msgid "Vietnamese"
+msgstr "Vijetnamski"
+
+# VI
+# fuzzy
+#. :VGB:092:
+#: ../zypp/CountryCode.cc:455
+msgid "Virgin Islands, U.S."
+msgstr "Djevičansko otočje (U.S.)"
+
+# WF
+# fuzzy
+#. :VUT:548:
+#: ../zypp/CountryCode.cc:458
+msgid "Wallis and Futuna"
+msgstr "Wallis i Futuna ostrva"
+
+#. language code: wln wa
+#: ../zypp/LanguageCode.cc:1198
+msgid "Walloon"
+msgstr "Valonski"
+
+#. language code: wel cym cy
+#: ../zypp/LanguageCode.cc:1192 ../zypp/LanguageCode.cc:1194
+msgid "Welsh"
+msgstr "Welsh"
+
+# EH
+#. :EGY:818:
+#: ../zypp/CountryCode.cc:288
+msgid "Western Sahara"
+msgstr "Zapadna Sahara"
+
+#. language code: xho xh
+#: ../zypp/LanguageCode.cc:1204
+msgid "Xhosa"
+msgstr "Xhosa"
+
+#. :WSM:882:
+#: ../zypp/CountryCode.cc:460
+msgid "Yemen"
+msgstr "Jemen"
+
+# ZM
+#. :ZAF:710:
+#: ../zypp/CountryCode.cc:463
+msgid "Zambia"
+msgstr "Zambija"
+
+#. :ZMB:894:
+#: ../zypp/CountryCode.cc:464
+msgid "Zimbabwe"
+msgstr "Zimbabve"
+
+#. language code: zul zu
+#: ../zypp/LanguageCode.cc:1224
+msgid "Zulu"
+msgstr "Zulu"
+
+#: ../src/info.cc:46
+msgid "Description: "
+msgstr "Opis:"
+
+#: gnome-panel-2.0/gnome-panel/panel-run-dialog.c:341
+#, c-format
+msgid "Cannot launch command '%s'"
+msgstr "Ne mogu pokrenuti naredbu \"%s\""

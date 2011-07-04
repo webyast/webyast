@@ -1,0 +1,5403 @@
+# @TITLE@
+# Copyright (C) 2006, SUSE Linux GmbH, Nuremberg
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+# This file is distributed under the same license as @PACKAGE@ package. FIRST
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: webyast-base-ui 1.0.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2010-08-02 09:15+0200\n"
+"PO-Revision-Date: 2005-08-24 17:37+0200\n"
+"Last-Translator: Janez Krek <janez.krek@euroteh.si>\n"
+"Language-Team: Slovenščina <sl@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: KBabel 1.3.1\n"
+"Plural-Forms: nplurals=4; plural=(n%100==1 ? 0 : n%100==2 ? 1 : n%100==3 || n"
+"%100==4 ? 2 : 3);\n"
+
+#: app/helpers/application_helper.rb:39 app/helpers/application_helper.rb:39
+msgid " or "
+msgstr ""
+
+#: app/helpers/application_helper.rb:43 app/helpers/application_helper.rb:43
+msgid " - "
+msgstr ""
+
+#: app/helpers/application_helper.rb:52 app/helpers/application_helper.rb:66
+#: app/views/hosts/edit.html.erb:40 app/helpers/application_helper.rb:52
+#: app/helpers/application_helper.rb:66 app/views/hosts/edit.html.erb:40
+msgid "Back"
+msgstr "Nazaj"
+
+# cancel button label
+#: app/helpers/application_helper.rb:56 app/views/hosts/new.html.erb:53
+#: app/helpers/application_helper.rb:56 app/views/hosts/new.html.erb:53
+msgid "Cancel"
+msgstr "Prekini"
+
+#: app/helpers/application_helper.rb:71 app/helpers/application_helper.rb:71
+msgid "Save"
+msgstr "Shrani"
+
+#: app/helpers/application_helper.rb:74 app/helpers/application_helper.rb:74
+#, fuzzy
+msgid "Next"
+msgstr "&Naprej"
+
+#: app/helpers/application_helper.rb:75 app/helpers/application_helper.rb:75
+#, fuzzy
+msgid "Finish"
+msgstr "Finska"
+
+#: app/helpers/view_helpers/html_helper.rb:27
+#: app/helpers/view_helpers/html_helper.rb:27
+msgid "Are you sure?"
+msgstr ""
+
+#: app/helpers/view_helpers/html_helper.rb:153
+#: app/helpers/view_helpers/html_helper.rb:153
+#, fuzzy
+msgid "Unknown error"
+msgstr "Neznano"
+
+#: app/helpers/view_helpers/html_helper.rb:157
+#: app/views/shared/exception_trap.html.erb:17
+#: app/helpers/view_helpers/html_helper.rb:157
+#: app/views/shared/exception_trap.html.erb:17
+#, fuzzy
+msgid "No information available"
+msgstr "Informacij ni na voljo."
+
+#: app/helpers/view_helpers/html_helper.rb:160
+#: app/helpers/view_helpers/html_helper.rb:160
+msgid "There was a problem retrieving information from the server."
+msgstr ""
+
+#: app/helpers/view_helpers/effect_helper.rb:50
+#: app/helpers/view_helpers/effect_helper.rb:50
+#, fuzzy
+msgid "Hide Details"
+msgstr "Po&drobnosti"
+
+#: app/helpers/view_helpers/effect_helper.rb:51
+#: app/helpers/view_helpers/effect_helper.rb:51
+#, fuzzy
+msgid "Show Details"
+msgstr "Po&drobnosti"
+
+#: app/helpers/view_helpers/label_helper.rb:24
+#: app/views/hosts/index.html.erb:32
+#: app/helpers/view_helpers/label_helper.rb:24
+#: app/views/hosts/index.html.erb:32
+msgid "Add"
+msgstr "Dodaj"
+
+#: app/helpers/view_helpers/label_helper.rb:28
+#: app/helpers/view_helpers/label_helper.rb:28
+#, fuzzy
+msgid "Edit"
+msgstr "&Uredi"
+
+#: app/helpers/view_helpers/label_helper.rb:32
+#: app/helpers/view_helpers/label_helper.rb:32
+msgid "Delete"
+msgstr "Zbriši"
+
+#: app/controllers/sessions_controller.rb:67
+#: app/controllers/sessions_controller.rb:67
+msgid "You need to specify the host"
+msgstr ""
+
+#: app/controllers/sessions_controller.rb:70
+#: app/controllers/sessions_controller.rb:70
+msgid "No login specified"
+msgstr ""
+
+#: app/controllers/sessions_controller.rb:73
+#: app/controllers/sessions_controller.rb:73
+msgid "No password specified"
+msgstr ""
+
+#: app/controllers/sessions_controller.rb:92
+#: app/controllers/sessions_controller.rb:92
+msgid "Host has blocked user %s. It cannot login until  %s"
+msgstr ""
+
+#: app/controllers/sessions_controller.rb:119
+#: app/controllers/sessions_controller.rb:119
+msgid "Login incorrect. Check your username and password."
+msgstr ""
+
+#: app/controllers/sessions_controller.rb:152
+#: app/controllers/sessions_controller.rb:152
+msgid "You have been logged out."
+msgstr ""
+
+#: app/controllers/application_controller.rb:42
+#: app/controllers/application_controller.rb:42
+msgid "Session timeout"
+msgstr ""
+
+#: app/controllers/application_controller.rb:101
+#: app/controllers/application_controller.rb:101
+msgid ""
+"Operation is forbidden. If you have to do it, please contact system "
+"administrator"
+msgstr ""
+
+#: app/controllers/application_controller.rb:146
+#: app/controllers/application_controller.rb:146
+msgid "Please login to continue"
+msgstr ""
+
+#: app/controllers/application_controller.rb:153
+#: app/controllers/application_controller.rb:153
+msgid "You must logout before you can login"
+msgstr ""
+
+#: app/controllers/application_controller.rb:242
+#: app/controllers/application_controller.rb:242
+msgid "can't be blank"
+msgstr ""
+
+#: app/controllers/application_controller.rb:243
+#: app/controllers/application_controller.rb:243
+msgid "is out of allowed values"
+msgstr ""
+
+#: app/controllers/application_controller.rb:244
+#: app/controllers/application_controller.rb:244
+msgid "can't be empty"
+msgstr ""
+
+#: app/controllers/application_controller.rb:245
+#: app/controllers/application_controller.rb:245
+msgid "is invalid"
+msgstr ""
+
+#: app/controllers/application_controller.rb:260
+#: app/controllers/application_controller.rb:260
+#, fuzzy
+msgid "Invalid parameters:"
+msgstr "Napačna privzeta pot (default route):"
+
+# %s is FTP or HTTP
+#: app/controllers/hosts_controller.rb:43
+#: app/controllers/hosts_controller.rb:43
+#, fuzzy
+msgid "Can't connect to host %s."
+msgstr "Poizkus povezave na %s strežnik..."
+
+#: app/controllers/hosts_controller.rb:44
+#: app/controllers/hosts_controller.rb:44
+#, fuzzy
+msgid "Make sure the host is up and that the YaST web service is running."
+msgstr "Vnesite številko vrata, na katerih deluje NFS strežnik."
+
+#: app/controllers/hosts_controller.rb:46
+#: app/controllers/hosts_controller.rb:46
+#, fuzzy
+msgid "Please select a host to connect to."
+msgstr "Prosim izberite tip vaše omrežne naprave."
+
+#: app/controllers/hosts_controller.rb:49
+#: app/controllers/hosts_controller.rb:49
+#, fuzzy
+msgid "The host '%s' cannot be found."
+msgstr "Gostitelja %s ni."
+
+#: app/controllers/hosts_controller.rb:50
+#: app/controllers/hosts_controller.rb:50
+msgid "Please double-check the host URL."
+msgstr ""
+
+#: app/models/account.rb:-
+#, fuzzy
+msgid "account"
+msgstr "Izgled"
+
+#: app/models/account.rb:-
+msgid "Account|Login"
+msgstr ""
+
+#: app/models/account.rb:-
+msgid "Account|Created at"
+msgstr ""
+
+#: app/models/account.rb:-
+msgid "Account|Updated at"
+msgstr ""
+
+#: app/models/account.rb:-
+msgid "Account|Remember token"
+msgstr ""
+
+#: app/models/account.rb:-
+msgid "Account|Remember token expires at"
+msgstr ""
+
+#: app/models/account.rb:-
+msgid "Account|Salt"
+msgstr ""
+
+#: app/models/host.rb:-
+msgid "host"
+msgstr ""
+
+#: app/models/host.rb:-
+#, fuzzy
+msgid "Host|Name"
+msgstr "Imena računalnikov (host names)"
+
+#: app/models/host.rb:-
+msgid "Host|Url"
+msgstr ""
+
+#: app/models/host.rb:-
+#, fuzzy
+msgid "Host|Description"
+msgstr "Opis"
+
+#: app/models/host.rb:-
+msgid "Host|Created at"
+msgstr ""
+
+#: app/models/host.rb:-
+msgid "Host|Updated at"
+msgstr ""
+
+# label for language selection
+#: app/views/main/_select_language.html.erb:18
+#: app/views/main/_select_language.html.erb:18
+#, fuzzy
+msgid "Language Selection"
+msgstr "Jezik"
+
+#: app/views/shared/exception_trap.html.erb:3
+#: app/views/shared/backendexception_trap.html.erb:2
+#: app/views/shared/exception_trap.html.erb:3
+#: app/views/shared/backendexception_trap.html.erb:2
+msgid "This is embarrasing...."
+msgstr ""
+
+#: app/views/shared/exception_trap.html.erb:5
+#: app/views/shared/exception_trap.html.erb:5
+msgid "We are sorry, but there are some problems."
+msgstr ""
+
+#: app/views/shared/exception_trap.html.erb:7
+#: app/views/shared/backendexception_trap.html.erb:6
+#: app/views/shared/exception_trap.html.erb:7
+#: app/views/shared/backendexception_trap.html.erb:6
+msgid "Problem:"
+msgstr ""
+
+#: app/views/shared/exception_trap.html.erb:13
+#: app/views/shared/exception_trap.html.erb:13
+msgid "Please Report a bug so we can fix the problem!."
+msgstr ""
+
+#: app/views/shared/exception_trap.html.erb:13
+#: app/views/shared/exception_trap.html.erb:13
+msgid "(report link)"
+msgstr ""
+
+#: app/views/shared/exception_trap.html.erb:14
+#: app/views/shared/exception_trap.html.erb:14
+msgid "Don't forget to include the bug details."
+msgstr ""
+
+#: app/views/shared/backendexception_trap.html.erb:4
+#: app/views/shared/backendexception_trap.html.erb:4
+msgid "Problem occured on target machine."
+msgstr ""
+
+#: app/views/shared/_missing_write_permissions.html.erb:1
+#: app/views/shared/_missing_write_permissions.html.erb:1
+msgid "You do not have permissions to modify the settings."
+msgstr ""
+
+#: app/views/hosts/edit.html.erb:2 app/views/hosts/edit.html.erb:2
+msgid "Editing YaST-Web-Service"
+msgstr ""
+
+#: app/views/hosts/edit.html.erb:23 app/views/hosts/edit.html.erb:23
+msgid "YaST-Web-Service"
+msgstr ""
+
+#: app/views/hosts/edit.html.erb:26 app/views/hosts/new.html.erb:37
+#: app/views/hosts/edit.html.erb:26 app/views/hosts/new.html.erb:37
+msgid "Name"
+msgstr "Ime"
+
+#: app/views/hosts/edit.html.erb:30 app/views/hosts/edit.html.erb:30
+msgid "Url"
+msgstr ""
+
+#: app/views/hosts/edit.html.erb:34 app/views/hosts/new.html.erb:47
+#: app/views/hosts/edit.html.erb:34 app/views/hosts/new.html.erb:47
+msgid "Description"
+msgstr "Opis"
+
+#: app/views/hosts/edit.html.erb:39 app/views/hosts/edit.html.erb:39
+msgid "Ok"
+msgstr "V redu"
+
+#: app/views/hosts/index.html.erb:5 app/views/hosts/index.html.erb:5
+#, fuzzy
+msgid "Please choose a service:"
+msgstr "Prosim izberite vmesnik CCW vodila."
+
+#: app/views/hosts/index.html.erb:25 app/views/hosts/index.html.erb:25
+msgid "Really delete host %s ?"
+msgstr ""
+
+#: app/views/hosts/new.html.erb:10 app/views/hosts/new.html.erb:10
+msgid "New WebYaST Host"
+msgstr ""
+
+#: app/views/hosts/new.html.erb:42 app/views/hosts/new.html.erb:42
+msgid "URL"
+msgstr ""
+
+#: app/views/hosts/new.html.erb:54 app/views/hosts/new.html.erb:54
+#, fuzzy
+msgid "Create"
+msgstr "Hitrost"
+
+#: app/views/hosts/show.html.erb:8 app/views/hosts/show.html.erb:8
+msgid "Index"
+msgstr "Kazalo"
+
+#: app/views/controlpanel/show_all.rhtml:18
+#: app/views/controlpanel/index.rhtml:72
+#: app/views/controlpanel/show_all.rhtml:18
+#: app/views/controlpanel/index.rhtml:72
+msgid "Configuration"
+msgstr "Nastavitev"
+
+#: app/views/controlpanel/index.rhtml:29 app/views/controlpanel/index.rhtml:29
+msgid "Status"
+msgstr "Status "
+
+#: app/views/controlpanel/index.rhtml:34 app/views/controlpanel/index.rhtml:34
+#, fuzzy
+msgid "Loading patch information"
+msgstr "Informacije o preklopu"
+
+#: app/views/controlpanel/index.rhtml:36 app/views/controlpanel/index.rhtml:36
+msgid "Patch status summary is disabled in the config file."
+msgstr ""
+
+#: app/views/controlpanel/index.rhtml:39 app/views/controlpanel/index.rhtml:39
+msgid "Patch plugin is not installed."
+msgstr ""
+
+#: app/views/controlpanel/index.rhtml:45 app/views/controlpanel/index.rhtml:45
+#, fuzzy
+msgid "Loading system information"
+msgstr "Informacije o sistemu"
+
+#: app/views/controlpanel/index.rhtml:47 app/views/controlpanel/index.rhtml:47
+msgid "System status summary is disabled in the config file."
+msgstr ""
+
+#: app/views/controlpanel/index.rhtml:50 app/views/controlpanel/index.rhtml:50
+msgid "Status plugin is not installed."
+msgstr ""
+
+#: app/views/controlpanel/index.rhtml:61 app/views/controlpanel/index.rhtml:61
+#, fuzzy
+msgid "System actions"
+msgstr "Informacije o sistemu"
+
+# reboot button label
+#: app/views/controlpanel/index.rhtml:63 app/views/controlpanel/index.rhtml:63
+msgid "Reboot"
+msgstr "Ponovni zagon"
+
+#: app/views/controlpanel/index.rhtml:64 app/views/controlpanel/index.rhtml:64
+msgid "Really reboot %s?"
+msgstr ""
+
+#: app/views/controlpanel/index.rhtml:65 app/views/controlpanel/index.rhtml:65
+#, fuzzy
+msgid "Shutdown"
+msgstr "Sudan"
+
+#: app/views/controlpanel/index.rhtml:66 app/views/controlpanel/index.rhtml:66
+msgid "Really shutdown %s?"
+msgstr ""
+
+#: app/views/controlpanel/basesystem.rhtml:18
+#: app/views/controlpanel/basesystem.rhtml:18
+msgid "Base system setup"
+msgstr ""
+
+#: app/views/controlpanel/basesystem.rhtml:20
+#: app/views/controlpanel/basesystem.rhtml:20
+msgid ""
+"Your initial system setup was not completed. Please continue with setting up "
+"the modules."
+msgstr ""
+
+#: app/views/controlpanel/basesystem.rhtml:21
+#: app/views/controlpanel/basesystem.rhtml:21
+msgid "Continue initial system setup"
+msgstr ""
+
+#: app/views/layouts/main.rhtml:59 app/views/layouts/main.rhtml:59
+msgid "WebYaST"
+msgstr ""
+
+#: app/views/layouts/main.rhtml:105 app/views/layouts/main.rhtml:105
+msgid ""
+"You are using an unsupported browser. Please switch to %sFireFox 3.5 or "
+"better%s or %sInternet Explorer 8%s. Thanks! [%sclose%s]"
+msgstr ""
+
+#: app/views/layouts/main.rhtml:112 app/views/layouts/main.rhtml:112
+msgid ""
+"JavaScript support is missing or disabled. Please turn JavaScript on or use "
+"a supported browser (%sFireFox 3.5%s or %sInternet Explorer 8%s)."
+msgstr ""
+
+#: app/views/layouts/main.rhtml:119 app/views/layouts/main.rhtml:119
+msgid "My Appliance"
+msgstr ""
+
+# label for language selection
+#: app/views/layouts/main.rhtml:126 app/views/layouts/main.rhtml:130
+#: app/views/layouts/main.rhtml:126 app/views/layouts/main.rhtml:130
+#, fuzzy
+msgid "Language:"
+msgstr "Jezik"
+
+#: app/views/layouts/main.rhtml:132 app/views/layouts/main.rhtml:132
+#, fuzzy
+msgid "Connected host:"
+msgstr "Priključen na"
+
+#: app/views/layouts/main.rhtml:133 app/views/layouts/main.rhtml:133
+#, fuzzy
+msgid "User:"
+msgstr "&Uporabniško ime:"
+
+#: app/views/layouts/main.rhtml:136 app/views/layouts/main.rhtml:136
+#, fuzzy
+msgid "Control panel"
+msgstr "SaX Nadzorna plošča"
+
+#: app/views/layouts/main.rhtml:137 app/views/layouts/main.rhtml:137
+#, fuzzy
+msgid "Logout"
+msgstr "Dnevnik"
+
+#: app/views/layouts/main.rhtml:145 app/views/layouts/main.rhtml:145
+msgid "You will be logged off in"
+msgstr ""
+
+#: app/views/layouts/main.rhtml:145 app/views/layouts/main.rhtml:145
+#, fuzzy
+msgid "seconds due to inactivity. "
+msgstr "Onemogoči akcije pri neaktivnosti"
+
+#: app/views/layouts/main.rhtml:176 app/views/layouts/main.rhtml:176
+msgid "...Wait..."
+msgstr ""
+
+#: app/views/sessions/new.rhtml:21 app/views/sessions/new.rhtml:33
+#: app/views/sessions/new.rhtml:21 app/views/sessions/new.rhtml:33
+msgid "Login"
+msgstr "Uporabniško ime"
+
+#: app/views/sessions/new.rhtml:23 app/views/sessions/new.rhtml:23
+#, fuzzy
+msgid "Enter login credentials for host %s."
+msgstr "Vnesite specifične parametre za čipovje \"%s\"."
+
+#: app/views/sessions/new.rhtml:27 app/views/sessions/new.rhtml:27
+#, fuzzy
+msgid "Username:"
+msgstr "&Uporabniško ime:"
+
+#: app/views/sessions/new.rhtml:30 app/views/sessions/new.rhtml:30
+msgid "Password:"
+msgstr "Geslo:"
+
+#: lib/error_constructor.rb:30 lib/error_constructor.rb:30
+msgid "Service %s is not available in the target machine"
+msgstr ""
+
+#: lib/error_constructor.rb:32 lib/error_constructor.rb:32
+msgid "Service %s is not running on the target machine"
+msgstr ""
+
+#: lib/error_constructor.rb:36 lib/error_constructor.rb:36
+msgid "Permission %s is not granted for user %s"
+msgstr ""
+
+#: lib/error_constructor.rb:38 lib/error_constructor.rb:38
+msgid ""
+"Policy kit exception for user %s and permission %s (untranslated message): %s"
+msgstr ""
+
+#: lib/error_constructor.rb:40 lib/error_constructor.rb:40
+msgid "A user is no longer logged to target machine. Please log in again."
+msgstr ""
+
+#: lib/error_constructor.rb:42 lib/error_constructor.rb:42
+msgid "Target system is not consistent: Missing or corrupted file %s"
+msgstr ""
+
+#: lib/error_constructor.rb:46 lib/error_constructor.rb:46
+msgid ""
+"There is no predefined ntp server at /etc/sysconfig/network/config - "
+"NETCONFIG_NTP_STATIC_SERVERS"
+msgstr ""
+
+#: lib/error_constructor.rb:48 lib/error_constructor.rb:48
+#, fuzzy
+msgid "Error occurred during ntp synchronization: %s"
+msgstr "Med namestitvijo je prišlo do napake."
+
+#: lib/error_constructor.rb:51 lib/error_constructor.rb:51
+msgid "Error while saving administrator settings: %s"
+msgstr ""
+
+#: lib/error_constructor.rb:54 lib/error_constructor.rb:54
+msgid "PACKAGEKIT_INSTALL"
+msgstr ""
+
+#: lib/error_constructor.rb:56 lib/error_constructor.rb:56
+msgid ""
+"Installation in progress. Remain %i patches. Time of installation depend on "
+"patch size."
+msgstr ""
+
+#: vendor/plugins/lang_helper/lib/lang_helper.rb:63
+#, fuzzy
+msgid "Select locale"
+msgstr "izberi samodejno"
+
+#~ msgid "Update"
+#~ msgstr "Posodobi"
+
+#~ msgid "translator-credits"
+#~ msgstr "podatki o prevajalcih"
+
+#~ msgid "Error loading %1"
+#~ msgstr "Napaka pri nalaganju %1"
+
+#~ msgid "CLOSE"
+#~ msgstr "ZAPRI"
+
+#~ msgid "SUSEgreeter"
+#~ msgstr "SUSE pozdravnik"
+
+#~ msgid "Path"
+#~ msgstr "Pot"
+
+#~ msgid "Couldn't open file: %s."
+#~ msgstr "Couldn't open file: %s."
+
+#~ msgid "No type value passed.  Unable to determine page count."
+#~ msgstr "No type value passed.  Unable to determine page count."
+
+#~ msgid "Export Log Error: Couldn't open %s"
+#~ msgstr "Export Log Error: Couldn't open %s"
+
+#~ msgid "Fatal error.  No report name given. Exiting."
+#~ msgstr "Fatal error.  No report name given. Exiting."
+
+#~ msgid "Fatal Error.  Couldn't open %s."
+#~ msgstr "Fatal Error.  Couldn't open %s."
+
+#~ msgid "Fatal Error.  Can't run %s.  Exiting."
+#~ msgstr "Fatal Error.  Can't run %s.  Exiting."
+
+#~ msgid "Fatal Error.  No directory, %s, found.  Exiting."
+#~ msgstr "Fatal Error.  No directory, %s, found.  Exiting."
+
+#~ msgid "Fatal Error.  getArchReport() couldn't open %s"
+#~ msgstr "Fatal Error.  getArchReport() couldn't open %s"
+
+# ok button label
+#~ msgid "OK"
+#~ msgstr "V redu"
+
+# continue button label
+#~ msgid "Continue"
+#~ msgstr "Nadaljevanje"
+
+#~ msgid "Installation"
+#~ msgstr "Namestitev"
+
+#~ msgid "Manual Installation"
+#~ msgstr "Ročna namestitev"
+
+#~ msgid "Installation--ACPI Disabled"
+#~ msgstr "Namestitev--izključen ACPI"
+
+#~ msgid "Installation--Safe Settings"
+#~ msgstr "Namestitev--varne nastavitve"
+
+#~ msgid "Linux--Safe Settings"
+#~ msgstr "Linux--varne nastavitve"
+
+#~ msgid "Boot from Hard Disk"
+#~ msgstr "Zagon s trdega diska"
+
+#~ msgid "Rescue System"
+#~ msgstr "Sistem za reševanje"
+
+#~ msgid "Memory Test"
+#~ msgstr "Testiranje pomnilnika"
+
+#~ msgid "Boot Options"
+#~ msgstr "Možnosti pri zagonu"
+
+# window title for exit dialog
+#~ msgid "Exiting..."
+#~ msgstr "Zaključevanje..."
+
+#~ msgid ""
+#~ "You are leaving the graphical boot menu and\n"
+#~ "starting the text mode interface."
+#~ msgstr ""
+#~ "Zapustili boste grafični zagonski menu in\n"
+#~ "nadaljevali v tekstovnem načinu."
+
+#~ msgid "Help"
+#~ msgstr "Pomoč"
+
+# window title for kernel loading (see txt_load_kernel)
+#~ msgid "Starting..."
+#~ msgstr "Zagon..."
+
+# Keep the three newlines!
+#~ msgid ""
+#~ "Loading Linux Kernel\n"
+#~ "\n"
+#~ "\n"
+#~ msgstr ""
+#~ "Nalaganje Linux jedra\n"
+#~ "\n"
+#~ "\n"
+
+# Keep the three newlines!
+#~ msgid ""
+#~ "Loading memtest86\n"
+#~ "\n"
+#~ "\n"
+#~ msgstr ""
+#~ "Nalaganje memtest86\n"
+#~ "\n"
+#~ "\n"
+
+# boot disk change dialog title
+#~ msgid "Change Boot Disk"
+#~ msgstr "Zamenjava zagonske diskete"
+
+#~ msgid "Insert boot disk %u."
+#~ msgstr "Vstavite zagonsko disketo %u."
+
+#~ msgid ""
+#~ "This is boot disk %u.\n"
+#~ "Insert boot disk %u."
+#~ msgstr ""
+#~ "To je zagonska disketa %u.\n"
+#~ "Vstavite zagonsko disketo %u."
+
+# password dialog title
+#~ msgid "Password"
+#~ msgstr "Geslo"
+
+#~ msgid "Get your driver update floppy ready."
+#~ msgstr "Prosim pripravite disketo za posodobitev gonilnikov."
+
+# dvd warning title
+#~ msgid "DVD Error"
+#~ msgstr "Napaka na DVDju"
+
+#~ msgid ""
+#~ "This is a two-sided DVD. You have booted from the second side.\n"
+#~ "\n"
+#~ "Turn the DVD over then continue."
+#~ msgstr ""
+#~ "DVD je dvostranski in sistem ste zagnali z druge strani.\n"
+#~ "\n"
+#~ "Prosim obrnite DVD in nadaljujte."
+
+# power off dialog title
+#~ msgid "Power Off"
+#~ msgstr "Zaustavitev sistema"
+
+#~ msgid "Halt the system now?"
+#~ msgstr "Želite sedaj zaustaviti sistem?"
+
+# menu entry for hard disk installation
+#~ msgid "Hard Disk"
+#~ msgstr "Trdi disk"
+
+# dialog title for hard disk installation
+#~ msgid "Hard Disk Installation"
+#~ msgstr "Namestitev na trdi disk"
+
+#~ msgid "Directory\n"
+#~ msgstr "Imenik\n"
+
+# dialog title for ftp installation
+#~ msgid "FTP Installation"
+#~ msgstr "Namestitev preko FTP"
+
+#~ msgid "Server\n"
+#~ msgstr "Strežnik\n"
+
+#~ msgid "Password\n"
+#~ msgstr "Geslo\n"
+
+# dialog title for nfs installation
+#~ msgid "NFS Installation"
+#~ msgstr "Namestitev preko NFS"
+
+# dialog title for smb installation
+#~ msgid "SMB (Windows Share) Installation"
+#~ msgstr "Namestitev preko SMB (Windows vir v skupini rabi)"
+
+# dialog title for http installation
+#~ msgid "HTTP Installation"
+#~ msgstr "Namestitev preko HTTP"
+
+# 'driver' as in '(hardware) driver update'
+#~ msgid "Driver"
+#~ msgstr "Gonilnik"
+
+# as in Windows Authentication Domain
+#~ msgid "Domain\n"
+#~ msgstr "Domena\n"
+
+# button label for other/more options
+#~ msgid "Other Options"
+#~ msgstr "Ostale možnosti"
+
+#~ msgid "Installation--IOAPIC Disabled"
+#~ msgstr "Namestitev--izključen IOAPIC"
+
+#~ msgid "Yes"
+#~ msgstr "Da"
+
+#~ msgid "No"
+#~ msgstr "Ne"
+
+#~ msgid "Source"
+#~ msgstr "Izvor"
+
+#~ msgid "Keyboard"
+#~ msgstr "Tipkovnca"
+
+#~ msgid "Version"
+#~ msgstr "Verzija"
+
+#~ msgid "Groups"
+#~ msgstr "Skupine"
+
+#~ msgid "Other"
+#~ msgstr "Ostalo"
+
+#~ msgid "Lock Screen"
+#~ msgstr "Zakleni zaslon"
+
+#~ msgid "Home"
+#~ msgstr "Doma"
+
+#~ msgid "Search"
+#~ msgstr "Išči"
+
+#~ msgid "Main Menu"
+#~ msgstr "Glavni menu"
+
+#~ msgid "Computer"
+#~ msgstr "Računalnik"
+
+#~ msgid "System"
+#~ msgstr "Sistem"
+
+#~ msgid "Install"
+#~ msgstr "Namesti"
+
+#~ msgid "Remove"
+#~ msgstr "Odstrani"
+
+#~ msgid "Type"
+#~ msgstr "Tip"
+
+#~ msgid "Installed"
+#~ msgstr "Nameščeno"
+
+#~ msgid "Icon"
+#~ msgstr "Ikona"
+
+#~ msgid "Games"
+#~ msgstr "Igre"
+
+#~ msgid "Multimedia"
+#~ msgstr "Večpredstavnost"
+
+#~ msgid "Fonts"
+#~ msgstr "Pisave"
+
+#~ msgid "Security"
+#~ msgstr "Varnost"
+
+#~ msgid "Network"
+#~ msgstr "Omrežje"
+
+#~ msgid "Action"
+#~ msgstr "Akcija"
+
+#~ msgid "Never"
+#~ msgstr "Nikoli"
+
+#~ msgid "Enabled"
+#~ msgstr "omogočeno"
+
+#~ msgid "Obsoletes"
+#~ msgstr "Zastarelo"
+
+#~ msgid "Refresh"
+#~ msgstr "Osvežitev"
+
+#~ msgid "Modem Lights"
+#~ msgstr "Vstavek Luči modema"
+
+#~ msgid ""
+#~ "Released under the GNU general public license.\n"
+#~ "A modem status indicator and dialer.\n"
+#~ "Lights in order from the top or left are Send data and Receive data."
+#~ msgstr ""
+#~ "Izdan pod GNU splošno javno licenco.\n"
+#~ "Klic in prikaz stanja modema.\n"
+#~ "Luči od zgoraj ali od leve so pošiljanje in sprejemanje podatkov."
+
+#~ msgid ""
+#~ "You are currently connected.\n"
+#~ "Do you want to disconnect?"
+#~ msgstr ""
+#~ "Trenutno je povezava vzpostavljena.\n"
+#~ "Ali jo želite prekiniti?"
+
+#~ msgid "%#.1fMb received / %#.1fMb sent / time: %.1d:%.2d"
+#~ msgstr "%#.1fMb prejeto / %#.1fMb poslano / čas: %.1d:%.2d"
+
+#~ msgid "not connected"
+#~ msgstr "ni povezave"
+
+#~ msgid "Ask for confirmation when connecting/disconnecting"
+#~ msgstr "Ob povezovanju/odklapljanju vprašaj za potrditev"
+
+#~ msgid "Blink when connecting"
+#~ msgstr "Utripaj ob povezovanju"
+
+#~ msgid "Command executed when connecting"
+#~ msgstr "Ukaz, ki naj se izvede ob povezovanju"
+
+#~ msgid "Command executed when disconnecting"
+#~ msgstr "Ukaz, ki naj se izvede ob odklapljanju"
+
+#~ msgid "Display a confirmation dialog when connecting or disconnecting."
+#~ msgstr "Ob povezovanju/odklapljanju vprašaj za potrditev"
+
+#~ msgid "Make the applet blink when the modem is connecting."
+#~ msgstr "Vstavek naj utripa, ko se modem povezuje"
+
+#~ msgid "Modem device name"
+#~ msgstr "Ime naprave modema"
+
+#~ msgid "Modem lock file"
+#~ msgstr "Datoteka za zaklepanje modema"
+
+#~ msgid "Receive background color"
+#~ msgstr "Barva ozadja sprejemanja"
+
+#~ msgid "Receive foreground color"
+#~ msgstr "Barva ospredja sprejemanja"
+
+#~ msgid "Send background color"
+#~ msgstr "Barva ozadja pošiljanja"
+
+#~ msgid "Send foreground color"
+#~ msgstr "Barva ospredja pošiljanja"
+
+#~ msgid "Show connect time and throughput"
+#~ msgstr "Kaži trajanje povezave in pretok"
+
+#~ msgid ""
+#~ "Show extra information about the connect time and amount of data "
+#~ "transmitted and received."
+#~ msgstr ""
+#~ "Kaži dodatne podatke o času trajanja povezave in količini oddanih in "
+#~ "prejetih podatkov."
+
+#~ msgid "Status connected color"
+#~ msgstr "Barva stanja, ko je modem povezan"
+
+#~ msgid "Status not connected color"
+#~ msgstr "Barva stanja, ko modem ni povezan"
+
+#~ msgid "Status waiting connection color"
+#~ msgstr "Barva stanja, ob čakanju"
+
+#~ msgid "Text background color"
+#~ msgstr "Barva ozadja besedila"
+
+#~ msgid "Text foreground color"
+#~ msgstr "Barva ospredja besedila"
+
+#~ msgid "Text outline color"
+#~ msgstr "Barva obrobe besedila"
+
+#~ msgid "The background color of the button used to indicate data received."
+#~ msgstr "Barva ozadja gumba, ki kaže prejete podatke"
+
+#~ msgid "The background color of the button used to indicate data sent."
+#~ msgstr "Barva ozadja gumba, ki kaže oddane podatke"
+
+#~ msgid ""
+#~ "The color used to display the status button when the modem is connected."
+#~ msgstr "Barva, ki naj se uporabi za prikaz stanja, ko je modem povezan."
+
+#~ msgid ""
+#~ "The color used to display the status button when the modem is connecting."
+#~ msgstr "Barva, ki naj se uporabi za gumb stanja, ko se modem povezuje."
+
+#~ msgid ""
+#~ "The color used to display the status button when the modem is not "
+#~ "connected."
+#~ msgstr "Barva, ki naj se uporabi za gumb stanja, ko modem ni povezan."
+
+#~ msgid "The color used to indicate that data has been received."
+#~ msgstr "Barva, ki naj označuje prejete podatke."
+
+#~ msgid "The color used to indicate that data has been sent."
+#~ msgstr "Barva, ki naj označuje poslane podatke"
+
+#~ msgid "The fraction of a second until the applet updates."
+#~ msgstr "Delček sekunde v katerem naj se vstavek posodobi."
+
+#~ msgid "The name of the modem device."
+#~ msgstr "Ime naprave modema"
+
+#~ msgid "The name of the modem lock file."
+#~ msgstr "Ime zaklepalne datoteke modema"
+
+#~ msgid "Use isdn"
+#~ msgstr "Uporabi ISDN"
+
+#~ msgid "Use isdn instead of ppp to connect the modem."
+#~ msgstr "Namesto PPP uporabi ISDN za povezavo modema."
+
+#~ msgid "Use this command to connect the modem."
+#~ msgstr "Uporabi ta ukaz za vzpostavitev modemove povezave."
+
+#~ msgid "Use this command to disconnect the modem."
+#~ msgstr "Uporabi ta ukaz za prekinitev modemove povezave."
+
+#~ msgid "Verify owner of lock file"
+#~ msgstr "Preveri lastnika zaklepalne datoteke"
+
+#~ msgid "Modem Lights Preferences"
+#~ msgstr "Nastavitve Luči modema"
+
+#~ msgid "U_pdate every:"
+#~ msgstr "_Posodobi vsakih:"
+
+#~ msgid "Sho_w connect time and throughput"
+#~ msgstr "_Kaži trajanje povezave in pretok"
+
+#~ msgid "B_link connection status when connecting"
+#~ msgstr "Ob povezovanju _utripaj"
+
+#~ msgid "Connections"
+#~ msgstr "Povezave"
+
+#~ msgid "Co_nnection command:"
+#~ msgstr "Ukaz za _vzpostavitev povezave:"
+
+#~ msgid "_Disconnection command:"
+#~ msgstr "Ukaz za _prekinitev povezave:"
+
+#~ msgid "Con_firm connection"
+#~ msgstr "Po_trdi povezavo"
+
+#~ msgid "Receive Data"
+#~ msgstr "Podatki o prejemu"
+
+#~ msgid "_Foreground:"
+#~ msgstr "Os_predje:"
+
+#~ msgid "Send Data"
+#~ msgstr "Podatki o pošiljanju"
+
+#~ msgid "Foregroun_d:"
+#~ msgstr "Ospre_dje:"
+
+#~ msgid "Backg_round:"
+#~ msgstr "_Ozadje:"
+
+#~ msgid "Connection Status"
+#~ msgstr "Stanje povezave"
+
+#~ msgid "Co_nnected:"
+#~ msgstr "_Povezan:"
+
+#~ msgid "Disconnec_ted:"
+#~ msgstr "_Nepovezan:"
+
+#~ msgid "C_onnecting:"
+#~ msgstr "_Povezujem se:"
+
+#~ msgid "For_eground:"
+#~ msgstr "Os_predje:"
+
+#~ msgid "Bac_kground:"
+#~ msgstr "_Ozadje:"
+
+#~ msgid "Modem Options"
+#~ msgstr "Možnosti modema"
+
+#~ msgid "_Device:"
+#~ msgstr "_Naprava:"
+
+#~ msgid "_Lock file:"
+#~ msgstr "Datoteka za zaklepanje _modema:"
+
+#~ msgid "_Verify owner of lock file"
+#~ msgstr "Pre_veri lastnika datoteke za zaklepanje"
+
+#~ msgid "U_se ISDN"
+#~ msgstr "Uporabi _ISDN"
+
+#~ msgid "Advanced"
+#~ msgstr "Napredno"
+
+#~ msgid "*"
+#~ msgstr "*"
+
+#~ msgid "&Add"
+#~ msgstr "Dod&aj"
+
+#~ msgid "&Suspend Computer"
+#~ msgstr "&Zaustavitev računalnika"
+
+#~ msgid "Suspend to Disk"
+#~ msgstr "Zaustavitev s shranjenjem na disk"
+
+#~ msgid "Suspend to RAM"
+#~ msgstr "Začasna zaustavitev v RAM"
+
+#~ msgid "Standby"
+#~ msgstr "Stanje pripravljenosti"
+
+#~ msgid "kfiledialog"
+#~ msgstr "kfiledialog"
+
+#~ msgid "Check Connection"
+#~ msgstr "Preveri povezavo"
+
+#~ msgid "Default Route"
+#~ msgstr "Privzeta pot (default route)"
+
+#~ msgid "Name Server"
+#~ msgstr "Imenski strežnik (name server)"
+
+#~ msgid "Cannot read `%1': %2"
+#~ msgstr "Datoteke '%1' ni možno brati: %2"
+
+#~ msgid "Default route ok."
+#~ msgstr "Privzeta pot (default route) je v redu."
+
+#~ msgid "Gateway Address"
+#~ msgstr "Naslov prehoda (gateway)"
+
+#~ msgid "Own Address"
+#~ msgstr "Lasten naslov"
+
+#~ msgid "Kernel Interface"
+#~ msgstr "Vmesnik jedra"
+
+#~ msgid "Name server failure:"
+#~ msgstr "Napaka imenskega strežnika:"
+
+#~ msgid "no name server found in `%1'"
+#~ msgstr "v '%1' ni možno najti imenskega strežnika (name server)"
+
+#~ msgid "waiting for reply"
+#~ msgstr "čakanje na odgovor"
+
+#~ msgid "unable to fork (internal error)"
+#~ msgstr "ni možno podvojiti trenutnega procesa (fork) (notranja napaka)"
+
+#~ msgid "Name server ok."
+#~ msgstr "Imenski strežnik (name server) je v redu."
+
+#~ msgid "Name Server Address"
+#~ msgstr "Naslov imenskega strežnika (name server)"
+
+#~ msgid "address lookup does not work"
+#~ msgstr "iskanje naslova ne deluje"
+
+#~ msgid ""
+#~ "Configuration of the selected interface\n"
+#~ "and provider:"
+#~ msgstr "Nastavitev izbranega vmesnika in ponudnika:"
+
+#~ msgid "Parameter"
+#~ msgstr "Parameter"
+
+#~ msgid "Value"
+#~ msgstr "Vrednost"
+
+#~ msgid "%1 B/s"
+#~ msgstr "%1 B/s"
+
+#~ msgid "%1 kB/s"
+#~ msgstr "%1 kB/s"
+
+#~ msgid "%1 MB/s"
+#~ msgstr "%1 MB/s"
+
+#~ msgid "%1 GB/s"
+#~ msgstr "%1 GB/s"
+
+#~ msgid "%1 TB/s"
+#~ msgstr "%1 TB/s"
+
+#~ msgid "Data Rate"
+#~ msgstr "Hitrost prenosa"
+
+#~ msgid "Dial Prefix"
+#~ msgstr "Predpona za klicanje"
+
+#~ msgid "Enter the dial prefix for the interface `%1':"
+#~ msgstr "Vnesite predpono za klicanje za vmesnik `%1':"
+
+#~ msgid ""
+#~ "The dial prefix `%1' is not allowed. It must\n"
+#~ "match the regular expression `%2'."
+#~ msgstr ""
+#~ "Predpona za klicanje `%1' ni dovoljena. Predpona mora \n"
+#~ "ustrezati regularnemu izrazu `%2'."
+
+#~ msgid "KInternet"
+#~ msgstr "KInternet"
+
+#~ msgid "QInternet"
+#~ msgstr "QInternet"
+
+#~ msgid "KInternet - Internet Tool"
+#~ msgstr "KInternet - Orodje za povezavo v internet"
+
+#~ msgid "Various Settings"
+#~ msgstr "Različne nastavitve"
+
+#~ msgid "Configure with YaST2..."
+#~ msgstr "Nastavi z YaST2"
+
+#~ msgid "Set Dial Prefix..."
+#~ msgstr "Določitev predpone za klicanje..."
+
+#~ msgid "View Log"
+#~ msgstr "Pregled dnevnika"
+
+#~ msgid "View Data Rate"
+#~ msgstr "Pregled hitrosti povezave"
+
+#~ msgid "Reconnect to Server"
+#~ msgstr "Ponovna povezava s strežikom"
+
+#~ msgid "&Interface"
+#~ msgstr "Vmesn&ik"
+
+#~ msgid "&Provider"
+#~ msgstr "&Ponudnik"
+
+#~ msgid "St&art"
+#~ msgstr "&Zaženi"
+
+#~ msgid "&Add Link"
+#~ msgstr "Dod&aj povezavo"
+
+#~ msgid "&Remove Link"
+#~ msgstr "Odst&rani povezavo"
+
+#~ msgid ""
+#~ "Should KInternet start automatically\n"
+#~ "when you log in?"
+#~ msgstr ""
+#~ "Naj se KInternet samodejno naloži\n"
+#~ "ob vsaki prijavi v sistem?"
+
+#~ msgid "This is the complete log:"
+#~ msgstr "Celoten dnevnik:"
+
+#~ msgid "Save to File..."
+#~ msgstr "Shrani v datoteko..."
+
+#~ msgid "Save Log As"
+#~ msgstr "Shrani dnevnik kot"
+
+#~ msgid "Cannot open file for writing."
+#~ msgstr "Datoteke ni mogoče odpreti za pisanje."
+
+#~ msgid ""
+#~ "KInternet is already running. It is the small\n"
+#~ "icon showing a connector in your panel."
+#~ msgstr ""
+#~ "KInternet že deluje. Na delovanje KInterneta\n"
+#~ "vas opozarja majhna ikonca z vtikačem na\n"
+#~ "pultu."
+
+#~ msgid "Enter the password for the provider `%1':"
+#~ msgstr "Vnesite geslo za ponudnika dostopa do interneta `%1':"
+
+#~ msgid "WEP - Key Input Dialog"
+#~ msgstr "WEP - pogovorno okno za vnos ključa"
+
+#~ msgid "Insert WEP key:"
+#~ msgstr "Vnesite WEP ključ:"
+
+#~ msgid "Select WEP key type:"
+#~ msgstr "Izberite tip WEP ključa:"
+
+#~ msgid "Select WEP authentication mode:"
+#~ msgstr "Izberite način WEP avtentikacije:"
+
+#~ msgid "Wireless LAN - Dialog"
+#~ msgstr "Brezžični (wireless) LAN - pogovorno okno"
+
+#~ msgid "Value(s)"
+#~ msgstr "Vrednost(i)"
+
+#~ msgid "Associated:"
+#~ msgstr "Povezano:"
+
+#~ msgid "Scan for Wireless &Networks"
+#~ msgstr "Preglej za brezžič&na omrežja"
+
+#~ msgid "Auto refresh"
+#~ msgstr "Samodejna osvežitev"
+
+#~ msgid "Start Active Scan"
+#~ msgstr "Začni aktivni pregled"
+
+#~ msgid "Start &YaST"
+#~ msgstr "Zaženi &YaST"
+
+#~ msgid "Connect"
+#~ msgstr "Poveži se"
+
+#~ msgid "Name/ESSID"
+#~ msgstr "Ime/ESSID"
+
+#~ msgid "Signal"
+#~ msgstr "Signal"
+
+#~ msgid "WEP"
+#~ msgstr "WEP"
+
+#~ msgid "Frequency"
+#~ msgstr "Frekvenca"
+
+#~ msgid "Channel"
+#~ msgstr "Kanal"
+
+#~ msgid "Authentication with the server failed."
+#~ msgstr "Avtentikacija s strežnikom ni uspela."
+
+#~ msgid "Connection closed by server."
+#~ msgstr "Strežnik je prekinil povezavo."
+
+#~ msgid "Connection to server lost."
+#~ msgstr "Povezava s strežnikom se je izgubila."
+
+#~ msgid ""
+#~ "Could not connect to local server. Maybe\n"
+#~ "smpppd is not running or you are not\n"
+#~ "member of the group \"dialout\".\n"
+#~ "Also check the server settings in\n"
+#~ "the dialog \"Various Settings\"."
+#~ msgstr ""
+#~ "Ne morem se povezati s lokalnim strežnikom.\n"
+#~ "Mogoče smpppd ni zagnan ali pa niste član\n"
+#~ "skupine \"dialout\". Preverite tudi nastavitve\n"
+#~ "strežnika v pogovornem oknu \n"
+#~ "\"Različne nastavitve\"."
+
+#~ msgid ""
+#~ "Connection to remote server refused.\n"
+#~ "Maybe smpppd is not running.\n"
+#~ "Also check the server settings in\n"
+#~ "the dialog \"Various Settings\"."
+#~ msgstr ""
+#~ "Povezava na oddaljeni strežnik je bila\n"
+#~ "zavrnjena. Mogoče smpppd ni zagnan.\n"
+#~ "Preverite tudi nastavitve strežnika v \n"
+#~ "pogovornem oknu \"Različne nastavitve\"."
+
+#~ msgid ""
+#~ "Connection to local and remote server\n"
+#~ "refused. Maybe smpppd is not running\n"
+#~ "or you are not member of the group \"dialout\".\n"
+#~ "Also check the server settings in\n"
+#~ "the dialog \"Various Settings\"."
+#~ msgstr ""
+#~ "Povezava na lokalni in oddaljeni strežnik je \n"
+#~ "bila zavrnjena. Mogoče smpppd ni zagnan ali\n"
+#~ "pa niste član skupine \"dialout\". Preverite tudi \n"
+#~ "nastavitve strežnika v pogovornem oknu \n"
+#~ "\"Različne nastavitve\"."
+
+#~ msgid "No Action"
+#~ msgstr "Brez akcije"
+
+#~ msgid "Menu"
+#~ msgstr "Menu"
+
+#~ msgid "Start or Stop Connection"
+#~ msgstr "Zaženi ali Zaustavi povezavo"
+
+#~ msgid "Interface"
+#~ msgstr "Vmesnik"
+
+#~ msgid "Interface to select on start-up:"
+#~ msgstr "Uporaba vmesnika ob zagonu:"
+
+#~ msgid "Provider"
+#~ msgstr "Ponudnik"
+
+#~ msgid "Provider to select on start-up:"
+#~ msgstr "Uporaba ponudnika ob zagonu:"
+
+#~ msgid "Keep Active Provider on Start-up"
+#~ msgstr "Obdrži aktivnega ponudnika ob zagonu"
+
+#~ msgid "Window"
+#~ msgstr "Okno"
+
+#~ msgid "Mouse Buttons"
+#~ msgstr "Gumbi miške"
+
+#~ msgid "Chart Type"
+#~ msgstr "Tip grafikona"
+
+#~ msgid "Update Interval"
+#~ msgstr "Interval posodabljanja"
+
+#~ msgid "KDE"
+#~ msgstr "KDE"
+
+#~ msgid "S&witch KDE network status"
+#~ msgstr "&Preklop statusa KDE omrežja"
+
+#~ msgid "Trigger connect on request of application"
+#~ msgstr "Vključi/izključi povezavo na zahtevo aplikacije"
+
+#~ msgid "Occasion"
+#~ msgstr "Priložnost"
+
+#~ msgid "When should the scripts be executed:"
+#~ msgstr "Kdaj naj se skripta izvede:"
+
+#~ msgid "Script to execute after connect:"
+#~ msgstr "Skripta, ki se izvede po povezavi:"
+
+#~ msgid "Disconnect"
+#~ msgstr "Prekini povezavo"
+
+#~ msgid "Script to execute after disconnect:"
+#~ msgstr "Skripta, ki se izvede po prekinitni povezave:"
+
+#~ msgid "Scripts"
+#~ msgstr "Skripte"
+
+#~ msgid "Location of smpppd"
+#~ msgstr "Lokacija smpppd"
+
+#~ msgid "Manual Settings"
+#~ msgstr "Ročne nastavitve"
+
+#~ msgid "Server:"
+#~ msgstr "Strežnik:"
+
+#~ msgid "Server"
+#~ msgstr "Strežnik"
+
+#~ msgid "DNS Check"
+#~ msgstr "DNS preverjanje"
+
+#~ msgid "Select Script"
+#~ msgstr "Izberi skripto"
+
+#~ msgid "Use this button to start YaST for permanent configuration."
+#~ msgstr "Z gumbom zaženete YaST za ureditev stalne nastavitve."
+
+#~ msgid "Use this button to connect to the above selected accesspoint."
+#~ msgstr "Gumb omogoča povezavo do zgoraj izbrane dostopne točke."
+
+#~ msgid ""
+#~ "This load the list of current known accesspoints and don't start a active "
+#~ "scan."
+#~ msgstr ""
+#~ "Možnost naloži seznam trenutnik dostopnih točk in ne zažene aktivnega "
+#~ "pregleda."
+
+#~ msgid ""
+#~ "This start a active scan. During a active scan it could happen, that you "
+#~ "lost \n"
+#~ " your current wireless connection."
+#~ msgstr ""
+#~ "Zažene se aktivni pregled. Med aktivnim pregledom se lahko zgodi, da se\n"
+#~ "trenutna brezžična povezava prekine."
+
+#~ msgid ""
+#~ "This activate accoustic for the next 'Refresh' or 'Active Scan'. \n"
+#~ " To stop this, untoggle this checkbox."
+#~ msgstr ""
+#~ "Možnost omogoča aktiviranje akustike za naslednjo 'Osvežitev' ali "
+#~ "'Aktivni pregled'. \n"
+#~ "Za izklop te možnosti, iz okvirčka odstranite izbiro."
+
+#~ msgid ""
+#~ "This activate auto refresh scan for the next 'Refresh' or 'Active "
+#~ "Scan'. \n"
+#~ " To stop this, untoggle this checkbox."
+#~ msgstr ""
+#~ "Za aktiviranje samodejnega osveževanja pregleda za 'Osvežitev' ali "
+#~ "'Aktivni pregled' \n"
+#~ "izberite to možnost. Za izklop te možnosti, iz okvirčka odstranite izbiro."
+
+#~ msgid "WARNING"
+#~ msgstr "OPOZORILO"
+
+#~ msgid "Could not start YaST Network Module. Is it installed?"
+#~ msgstr "Zagon YaST Omrežnega Modula ni uspelo. Ali je modul nameščen?"
+
+#~ msgid "Could not start YaST Network Module, is it already installed?"
+#~ msgstr "Zagon YaST Omrežnega Modula ni uspelo. Ali je modul že nameščen?"
+
+#~ msgid "AP ESSID"
+#~ msgstr "AP ESSID"
+
+#~ msgid "Networkaddress"
+#~ msgstr "Omrežni naslov"
+
+#~ msgid "Link Quality"
+#~ msgstr "Kakovost povezave"
+
+#~ msgid "Signal level"
+#~ msgstr "Nivo signala"
+
+#~ msgid "Noise level"
+#~ msgstr "Nivo šuma"
+
+#~ msgid "Conntection details"
+#~ msgstr "Podrobnosti povezave"
+
+#~ msgid "WEP Key"
+#~ msgstr "WEP ključ"
+
+#~ msgid "Encryption"
+#~ msgstr "Šifriranje"
+
+#~ msgid "WEP Key Size"
+#~ msgstr "Velikost WEP ključa"
+
+#~ msgid "KSysinfo"
+#~ msgstr "Podatki o sistemu"
+
+#~ msgid "%1 GB"
+#~ msgstr "%1 GB"
+
+#~ msgid "%1 MB"
+#~ msgstr "%1 MB"
+
+#~ msgid "%1 KB"
+#~ msgstr "%1 KB"
+
+#~ msgid "Looking for CPU information..."
+#~ msgstr "Pridobivanje podatkov o centralni procesni enoti (CPU)"
+
+#~ msgid "My Computer"
+#~ msgstr "Moj računalnik"
+
+#~ msgid ""
+#~ "Folders, Harddisks, Removable Devices, System Information and more..."
+#~ msgstr ""
+#~ "Mape, trdi diski, prenosne naprave, sistemska sporočila in še mnogo več..."
+
+#~ msgid "Looking for disk information..."
+#~ msgstr "Iskanje podatkov o disku..."
+
+#~ msgid "Disk Information"
+#~ msgstr "Podatki o disku"
+
+#~ msgid "OS Information"
+#~ msgstr "Podatki o operacijskem sistemu"
+
+#~ msgid "OS:"
+#~ msgstr "Operacijski sistem:"
+
+#~ msgid "Current user:"
+#~ msgstr "Trenutni uporabnik:"
+
+#~ msgid "System:"
+#~ msgstr "Sistem:"
+
+#~ msgid "KDE:"
+#~ msgstr "KDE:"
+
+#~ msgid "Display Info"
+#~ msgstr "Prikaži podatke"
+
+#~ msgid "Vendor:"
+#~ msgstr "Proizvajalec:"
+
+#~ msgid "Model:"
+#~ msgstr "Model:"
+
+#~ msgid "Driver:"
+#~ msgstr "Gonilnik:"
+
+#~ msgid "Getting OS information...."
+#~ msgstr "Pridobivanje podatkov o operacijskem sistemu..."
+
+#~ msgid "Common Folders"
+#~ msgstr "Običajne mape"
+
+#~ msgid "My Documents"
+#~ msgstr "Moji dokumenti"
+
+#~ msgid "My Home Folder"
+#~ msgstr "Domači imenik"
+
+#~ msgid "Root Folder"
+#~ msgstr "Imenik uporabnika root"
+
+#~ msgid "Network Folders"
+#~ msgstr "Omrežni imeniki"
+
+#~ msgid "Looking up network status..."
+#~ msgstr "Preverjanje omrežja..."
+
+#~ msgid "Network Status"
+#~ msgstr "Stanje omrežja"
+
+#~ msgid "CPU Information"
+#~ msgstr "Podatki o CPU"
+
+#~ msgid "Processor (CPU):"
+#~ msgstr "Procesor (CPU):"
+
+#~ msgid "Speed:"
+#~ msgstr "Hitrost:"
+
+#~ msgid "%1 MHz"
+#~ msgstr "%1 MHz"
+
+#~ msgid "Looking for memory information..."
+#~ msgstr "Pridobivanje podatkov o pomnilniku.."
+
+#~ msgid "Memory Information"
+#~ msgstr "Podatki o pomnilniku"
+
+#~ msgid "Total memory (RAM):"
+#~ msgstr "Celoten pomnilnik (RAM):"
+
+#~ msgid "Free memory:"
+#~ msgstr "Prosti pomnilnik:"
+
+#~ msgid "Used Memory"
+#~ msgstr "Uporabljeni pomnilnik:"
+
+#~ msgid "Total swap:"
+#~ msgstr "Skupna velikost izmenjalnega razdelka (swap): "
+
+#~ msgid "Free swap:"
+#~ msgstr "Prosti izmenjalni razdelek:"
+
+#~ msgid "%1 (+ %2 Caches)"
+#~ msgstr "%1 (+ %2 Caches)"
+
+#~ msgid "Device"
+#~ msgstr "Naprava"
+
+#~ msgid "Filesystem"
+#~ msgstr "Datotečni sistem"
+
+#~ msgid "Total space"
+#~ msgstr "Celotni prostor: "
+
+#~ msgid "Available space"
+#~ msgstr "Razpoložljivi prostor"
+
+#~ msgid "Press the right mouse button for more options like Mount or Eject"
+#~ msgstr "Za več možnosti pritisnite desno miškino tipko"
+
+#~ msgid "%1 (3D Support)"
+#~ msgstr "%1 (S podporo za 3D)"
+
+#~ msgid "%1 (No 3D Support)"
+#~ msgstr "%1 (Brez podpore za 3D)"
+
+#~ msgid "Network is <strong>unreachable</strong>"
+#~ msgstr "Omrežna povezava ni <strong>dosegljiva</strong>"
+
+#~ msgid "You are <strong>offline</strong>"
+#~ msgstr "Ste <strong>brez povezave</strong>"
+
+#~ msgid "Network is <strong>shutting down</strong>"
+#~ msgstr " <strong>Prekinjanje</strong> omrežne povezave"
+
+#~ msgid "<strong>Establishing</strong> connection to the network"
+#~ msgstr "<strong>Vzpostavljanje</strong> omrežne povezave"
+
+#~ msgid "You are <strong>online</strong>"
+#~ msgstr "Povezava je <strong>vzpostavljena</strong>"
+
+#~ msgid "Unknown network status"
+#~ msgstr "Nezano stanje omrežne povezave "
+
+#~ msgid "None"
+#~ msgstr "brez izbire"
+
+#~ msgid "&Password:"
+#~ msgstr "&Geslo:"
+
+#~ msgid "General Blacklist"
+#~ msgstr "Splošna črna lista"
+
+#~ msgid "Selected entry removed."
+#~ msgstr "Izbran vnos je odstranjen."
+
+#~ msgid "Could not remove the selected entry."
+#~ msgstr "Izbranega vnosa ni možno odstraniti."
+
+#~ msgid "Inserted new entry."
+#~ msgstr "Nov vnos je bil dodan."
+
+#~ msgid "Entry exists already. Did not insert new entry."
+#~ msgstr "Vnos že obstja. Nov vnos ni bil dodan."
+
+#~ msgid "Empty entry was not inserted."
+#~ msgstr "Prazen vnos ni bil dodan."
+
+#~ msgid "Autosuspend Blacklist Edit"
+#~ msgstr "Urejanje črne liste za samodejno zaustavitev"
+
+#~ msgid "Performance"
+#~ msgstr "Zmogljivost"
+
+#~ msgid "Powersave"
+#~ msgstr "Varčevanje z energijo"
+
+#~ msgid "Presentation"
+#~ msgstr "Predstavitve"
+
+#~ msgid "Acoustic"
+#~ msgstr "Tihi način"
+
+#~ msgid ""
+#~ "This enables specific screen saver settings. \n"
+#~ "Note: If selected, the global screen saver settings are \n"
+#~ "overwritten while kpowersave runs."
+#~ msgstr ""
+#~ "Možnost omogoči (vključi) specifične nastavitve ohranjevalnika zaslona. \n"
+#~ "Opomba: če so izbrane specifične nastavitve, le-te med delovanjem "
+#~ "kpowersave prepišejo globalne nastavitve. "
+
+#~ msgid ""
+#~ "This disables the screen saver. \n"
+#~ "Note: If selected, the global screen saver settings are \n"
+#~ "overwritten while kpowersave runs."
+#~ msgstr ""
+#~ "Onemogoči (izključi) ohranjevalnik zaslona. \n"
+#~ "Opomba: če so izbrane specifične nastavitve, le-te med delovanjem "
+#~ "kpowersave prepišejo globalne nastavitve. "
+
+#~ msgid ""
+#~ "This blanks the screen instead of using a specific screen saver. \n"
+#~ "Note: This may work only with KScreensaver."
+#~ msgstr ""
+#~ "Uporabi se prazen ohranjevalnik zaslona namesto posameznega "
+#~ "ohranjevalnika.\n"
+#~ "Opomba: možno je, da ohranjevalnik zaslova deluje le s KScreensaver."
+
+#~ msgid ""
+#~ "This enables specific DPMS settings. \n"
+#~ "Note: If selected, the global DPMS settings are \n"
+#~ "overwritten while kpowersave runs."
+#~ msgstr ""
+#~ "Omogoči specifične nastavitve za DPMS. \n"
+#~ "Opomba: če so izbrane specifične nastavitve, le-te med delovanjem "
+#~ "kpowersave prepišejo globalne nastavitve DMPS. "
+
+#~ msgid "This disables DPMS support."
+#~ msgstr "Omenogoči (izključi) podporo DMPS."
+
+#~ msgid "If selected, the screen is locked on suspend or standby."
+#~ msgstr ""
+#~ "Če je možnost izbrana, je ekran zaklenjen med 'Zaustavitvijo' (Suspend) "
+#~ "in 'Stanju pripravljenosti' (Standby)"
+
+#~ msgid ""
+#~ "If selected, the screen is locked if the lid close event is triggered."
+#~ msgstr ""
+#~ "Če je možnost izbrana, je ekran zaklenjen ob prejemu dogodka 'Ekran "
+#~ "zapri' (Lid close)."
+
+#~ msgid ""
+#~ "Check this box to enable or disable automatic suspension of the computer."
+#~ msgstr ""
+#~ "Izberite kvadratek za vključitev ali izključitev samodejne zaustavitve "
+#~ "(Suspend) računalnika."
+
+#~ msgid ""
+#~ "Activate this action if the user was inactive for the defined time \n"
+#~ "(greater than 0 minutes). If empty, nothing happens."
+#~ msgstr ""
+#~ "Aktiviraj podprto akcijo, če je uporabnik določen čas \n"
+#~ "(> 0 minut) neaktiven. Če pustite vnos prazen, se ne bo zgodilo nič."
+
+#~ msgid "All scheme-related screen saver and DPMS settings."
+#~ msgstr "Vse nastavitve sheme v povezavi z ohranjevalnikom zaslona in DPMS."
+
+#~ msgid "All scheme-related automatic suspend settings."
+#~ msgstr "Vse nastavitve sheme v povezavi s samodejno zaustavitvijo."
+
+#~ msgid "KScreensaver"
+#~ msgstr "KScreensaver"
+
+#~ msgid "XScreensaver"
+#~ msgstr "XScreensaver"
+
+#~ msgid "xlock"
+#~ msgstr "xlock"
+
+#~ msgid ""
+#~ "There are unsaved changes in the active scheme.\n"
+#~ "Apply the changes before jumping to the next scheme or discard the "
+#~ "changes?"
+#~ msgstr ""
+#~ "V trenutno aktivni shemi obstajajo neshranjene spremembe.\n"
+#~ "Želite uveljaviti te spremembe pred skokom na naslednjo shemo ali želite "
+#~ "spremembe pozabiti? "
+
+#~ msgid "Unsaved Changes"
+#~ msgstr "Neshranjene spremembe"
+
+#~ msgid ""
+#~ "There are unsaved changes.\n"
+#~ "Apply the changes before cancel or discard the changes?"
+#~ msgstr ""
+#~ "Obstajajo spremembe, ki niso shranjene,.\n"
+#~ "Želite uveljaviti te spremembe pred izhodom ali želite spremembe pozabiti?"
+
+#~ msgid ""
+#~ "<b>Note:</b> If you select this option, the computer will suspend or "
+#~ "standby if the current user is inactive for the defined time even if "
+#~ "somebody is logged in remotely to the X server.<br><br> This feature can "
+#~ "also produce problems with some programs, such as video players or cd "
+#~ "burner. These programs can be blacklisted by checking <b>Enable scheme-"
+#~ "specific blacklist</b> and click <b>Edit Blacklist...</b>. If this does "
+#~ "not help, report the problem or deactivate autosuspend.<br><br> Really "
+#~ "use this option?"
+#~ msgstr ""
+#~ "<b>Opomba:</b> Z izbiro te možnosti se bo računalnik samodejno zaustavil "
+#~ "ali prešel v stanje pripravljenosti, ko uporabnik določen čas ne bo "
+#~ "aktiven (tudi v primeru, da je kdo na računalnik prijavljen z oddajemnega "
+#~ "računalnika).<br><br> Izbira te možnosti lahko povzroči težave nekaterim "
+#~ "programom, kot so npr. video igre ali program ya peko CDjev. Te programe "
+#~ "je možno dodati na t.i. \"črno listo\" z izbiro možnosti<b>Omogoči "
+#~ "uporabo črne liste za posamezno shemo</b> in izbiro <b>Urejanje črne "
+#~ "liste...</b>. Če to ne pomaga, sporočite težavo ali odstranite samodejno "
+#~ "zaustavitev računalnika.<br><br> Resnično želite uporabiti to možnost?"
+
+#~ msgid ""
+#~ "The blacklist of the selected scheme is empty. Import the general "
+#~ "blacklist?"
+#~ msgstr ""
+#~ "Črna lista izbrane sheme je prazna. Želite narediti uvoz splošne črne "
+#~ "liste?"
+
+#~ msgid "Current maintainer"
+#~ msgstr "Trenutni vzdrževalec paketa"
+
+#~ msgid "Miscellaneous"
+#~ msgstr "Razno"
+
+#~ msgid "unknown"
+#~ msgstr "neznano"
+
+#~ msgid "Dynamic"
+#~ msgstr "Dinamično"
+
+#~ msgid "Critical"
+#~ msgstr "Kritično"
+
+#~ msgid "Low"
+#~ msgstr "Nizko"
+
+#~ msgid "Warning"
+#~ msgstr "Opozorilo"
+
+#~ msgid "Information"
+#~ msgstr "Informacije"
+
+#~ msgid "Devices"
+#~ msgstr "Naprave"
+
+#~ msgid ""
+#~ "<b>Note:</b> If you select this option, the computer will suspend or "
+#~ "standby if the current user is inactive for the defined time. <br><br> "
+#~ "This feature can also produce problems with some programs, such as video "
+#~ "players or cd burner. These programs can be blacklisted by checking "
+#~ "<b>Enable scheme-specific blacklist</b> and click <b>Edit Blacklist...</"
+#~ "b>. If this does not help, report the problem or deactivate autosuspend."
+#~ "<br><br> Really use this option?"
+#~ msgstr ""
+#~ "<b>Opomba:</b> Z izbiro te možnosti se bo računalnik samodejno zaustavil "
+#~ "ali prešel v stanje pripravljenosti, ko uporabnik določen čas ne bo "
+#~ "aktiven.<br><br> Izbira te možnosti lahko povzroči težave nekaterim "
+#~ "programom, kot so npr. video igre ali program ya peko CDjev. Te programe "
+#~ "je možno dodati na t.i. \"črno listo\" z izbiro možnosti<b>Omogoči "
+#~ "uporabo črne liste za posamezno shemo</b> in izbiro <b>Urejanje črne "
+#~ "liste...</b>. Če to ne pomaga, sporočite težavo ali odstranite samodejno "
+#~ "zaustavitev računalnika.<br><br> Resnično želite uporabiti to možnost?"
+
+#~ msgid "Could not load the global configuration."
+#~ msgstr "Globalnih nastavitev ni možno naložiti."
+
+#~ msgid "Could not load the requested scheme configuration."
+#~ msgstr "Zahtevane nastavitvene sheme ni možno naložiti."
+
+#~ msgid "Configure the current scheme."
+#~ msgstr "Nastavi trenutno shemo."
+
+#~ msgid "Try loading the default configuration."
+#~ msgstr "Poizkus naložiti privzeto nastavitev."
+
+#~ msgid "Maybe the global configuration file is empty or missing."
+#~ msgstr "Mogoče je globalna nastavitvena datoteka prazna ali se je izgubila."
+
+#~ msgid "KScreensaver not found."
+#~ msgstr "KScreensaver-ja ni možno najti."
+
+#~ msgid "Try locking with XScreensaver or xlock."
+#~ msgstr "Poizkus zaklepanja z XScreensaver ali xlock."
+
+#~ msgid "XScreensaver not found."
+#~ msgstr "XScreensaver-ja ni možno najti."
+
+#~ msgid "Try locking the screen with xlock."
+#~ msgstr "Poizkus zaklepanja zaslona z xlock."
+
+#~ msgid ""
+#~ "XScreensaver and xlock not found. It is not possible to lock the screen. "
+#~ "Check your installation."
+#~ msgstr ""
+#~ "Programov XScreensaver ali xlock ni možno najti zato zaslona ni možno "
+#~ "zakleniti. Prosim, preverite namestitev (če je eden od programov "
+#~ "nameščen)."
+
+#~ msgid "Close"
+#~ msgstr "Zapri"
+
+#~ msgid "Preparing Suspend..."
+#~ msgstr "Priprava na zaustavitev..."
+
+#~ msgid "Configure KPowersave..."
+#~ msgstr "Nastavi KPowersave..."
+
+#~ msgid "Start YaST2 Power Management Module..."
+#~ msgstr "Zaženi YaST2 modul za upravljanje z energijo..."
+
+#~ msgid "Set CPU Frequency Policy"
+#~ msgstr "Nastavi politiko frekvence procesorja"
+
+#~ msgid "Set Active Scheme"
+#~ msgstr "Nastavi aktivno shemo"
+
+#~ msgid "&Help"
+#~ msgstr "&Pomoč"
+
+#~ msgid "Plugged in -- fully charged"
+#~ msgstr "Priključen na električno omrežje -- baterija v celoti napolnjena"
+
+#~ msgid "Plugged in"
+#~ msgstr "Priključen na električno omrežje"
+
+#~ msgid "Plugged in -- %1% charged (%2:%3 remaining hours)"
+#~ msgstr ""
+#~ "Priključen na električno omrežje -- baterija napolnjena %1% (ostane še %2:"
+#~ "%3 ur)"
+
+#~ msgid "Plugged in -- %1% charged"
+#~ msgstr "Priključen na električno omrežje -- baterija napolnjena %1%"
+
+#~ msgid "Plugged in -- no battery"
+#~ msgstr "Priključen na električno omrežje -- brez baterije"
+
+#~ msgid "Running on batteries -- %1% charged (%2:%3 hours remaining)"
+#~ msgstr ""
+#~ "Delovanje na baterijah -- baterija napolnjena %1% (ostane še %2:%3 ur)"
+
+#~ msgid "Running on batteries -- %1% charged"
+#~ msgstr "Delovanje na baterijah -- baterija napolnjena %1%"
+
+#~ msgid " -- battery is charging"
+#~ msgstr " -- baterije se polnijo"
+
+#~ msgid ""
+#~ "Could not start YaST Power Management Module. Check if it is installed."
+#~ msgstr ""
+#~ "YaST2 modula za upravljanje z energijo ni možno zagnati. Preverite, če je "
+#~ "modul nameščen?"
+
+#~ msgid "Suspend to disk disabled by administrator."
+#~ msgstr "Administrator je onemogočil zaustavitev s shranjenjem na disk"
+
+#~ msgid "Suspend to RAM disabled by administrator."
+#~ msgstr "Administrator je onemogočil zaustavitev v pomnilnik."
+
+#~ msgid "Standby disabled by administrator."
+#~ msgstr "Administrator je omenogočil uporabo stanja pripravljenosti."
+
+#~ msgid ""
+#~ "Could not lock the screen. There may be a problem with the selected \n"
+#~ "lock method or something else."
+#~ msgstr ""
+#~ "Ekrana ni možno zakleniti. Mogoče je težava v izbrani metodi za "
+#~ "zaklepanje\n"
+#~ " ali pa kaj drugega."
+
+#~ msgid "Start KPowersave automatically when you log in?"
+#~ msgstr "Naj se KPowersave samodejno zažene ob prijavi v sistem?"
+
+#~ msgid "CPU Freq Policy %1 could not be set."
+#~ msgstr "Politike za frekvenco procesorja  %1 ni možno nastaviti."
+
+#~ msgid "Scheme %1 could not be activated."
+#~ msgstr "Sheme %1 ni možno aktivirati."
+
+#~ msgid "Error"
+#~ msgstr "Napaka"
+
+#~ msgid ""
+#~ "Battery state changed to WARNING -- remaining time: %1 hours and %2 "
+#~ "minutes."
+#~ msgstr ""
+#~ "Status baterije spremenjen v OPOZORILO -- preostali čas: %1 ur in %2 "
+#~ "minut."
+
+#~ msgid ""
+#~ "Battery state changed to LOW -- remaining time: %1 hours and %2 minutes."
+#~ msgstr ""
+#~ "Status baterije spremenjen v NIZKO -- preostali čas: %1 ur in %2 minut."
+
+#~ msgid "KPowersave Settings"
+#~ msgstr "KPowersave nastavitve"
+
+#~ msgid "Enable specific display power management"
+#~ msgstr "Omogoči posebno upravljanje z energijo za zaslon"
+
+#~ msgid "Standby after:"
+#~ msgstr "Pojdi v stanje pripravljenosti po:"
+
+#~ msgid "Only blank the screen"
+#~ msgstr "Samo prazen ekran"
+
+#~ msgid "Disable screen saver"
+#~ msgstr "Onemogočili ohranjevalnik zaslona"
+
+#~ msgid "Enable specific screensaver settings"
+#~ msgstr "Omogoči posebne nastavitve ohranjevalnika zaslona"
+
+#~ msgid "Suspend after:"
+#~ msgstr "Začasna zaustavitev po:"
+
+#~ msgid "Power off after:"
+#~ msgstr "Ugasni računalnik po:"
+
+#~ msgid "Disable display power management"
+#~ msgstr "Onemogoči upravljanje z energijo zaslona"
+
+#~ msgid " min"
+#~ msgstr " min"
+
+#~ msgid "Screen Saver and DPMS"
+#~ msgstr "Ohranjevalnik zaslona in DPMS"
+
+#~ msgid "Reset"
+#~ msgstr "Ponastavi"
+
+#~ msgid "Enable autosuspend"
+#~ msgstr "Omogoči samodejno zaustavitev"
+
+#~ msgid "Enable scheme-specific blacklist"
+#~ msgstr "Omogoči uporabo Črne liste za posamezno shemo"
+
+#~ msgid "after:"
+#~ msgstr "po:"
+
+#~ msgid "Edit Blacklist..."
+#~ msgstr "Urejanje črne liste..."
+
+#~ msgid "If the current desktop user is inactive the computer will:"
+#~ msgstr "Če je trenutno prijavljen uporabnik neaktiven, bo računalnik:"
+
+#~ msgid "Autosuspend"
+#~ msgstr "Samodejna zaustavitev"
+
+#~ msgid "Scheme Settings"
+#~ msgstr "Nastavitve sheme"
+
+#~ msgid "Lock screen before suspend or standby"
+#~ msgstr ""
+#~ "Zakleni zaslon pred zaustavitvijo ali prehodom v stanje pripravljenosti."
+
+#~ msgid "Lock screen with:"
+#~ msgstr "Zakleni zaslon z/s:"
+
+#~ msgid "Lock screen on lid close"
+#~ msgstr "Zakleni zaslon ob zaprtju LCD zaslona."
+
+#~ msgid "Autostart"
+#~ msgstr "Samodejni zagon"
+
+#~ msgid "Never ask me again on exit"
+#~ msgstr "Ob izhodu me nikoli ne vprašaj."
+
+#~ msgid "KPowersave starts automatically on login"
+#~ msgstr "KPowersave se samodejno zažene ob prijavi v sistem."
+
+#~ msgid "General Settings"
+#~ msgstr "Splošne nastavitve"
+
+#~ msgid "&Cancel"
+#~ msgstr "&Prekini"
+
+#~ msgid "&Close"
+#~ msgstr "&Zapri"
+
+#~ msgid "&Quit"
+#~ msgstr "&Izhod"
+
+#~ msgid "Alt+C"
+#~ msgstr "Alt+P"
+
+#~ msgid "Alt+D"
+#~ msgstr "Alt+D"
+
+#~ msgid "Alt+O"
+#~ msgstr "Alt+R"
+
+#~ msgid "Ctrl+Q"
+#~ msgstr "Ctrl+I"
+
+#~ msgid "Ctrl+R"
+#~ msgstr "Ctrl+D"
+
+#~ msgid "Ctrl+S"
+#~ msgstr "Ctrl+E"
+
+#~ msgid "Install Package with YaST"
+#~ msgstr "Namesti paket z YaST2"
+
+#~ msgid "Use Directory as Source with YaST"
+#~ msgstr "Uporabi imenik kot izvor z YaST2"
+
+#~ msgid "Dependencies"
+#~ msgstr "Odvisnosti"
+
+#~ msgid "Provides"
+#~ msgstr "Priskrbi"
+
+#~ msgid "Requires"
+#~ msgstr "Zahteva"
+
+#~ msgid "Conflicts"
+#~ msgstr "Konflikti"
+
+#~ msgid "Project Page: "
+#~ msgstr "Stran projekta: "
+
+#~ msgid "Parsing complete."
+#~ msgstr "Pregled kočan."
+
+#~ msgid "krpmview"
+#~ msgstr "krpmview"
+
+#~ msgid "Ignore"
+#~ msgstr "Prezri"
+
+#~ msgid "Summary"
+#~ msgstr "Povzetek"
+
+#~ msgid "Available Updates"
+#~ msgstr "Razpoložljive posodobitve"
+
+#~ msgid "Settings"
+#~ msgstr "Nastavitve"
+
+#~ msgid "Select the language."
+#~ msgstr "Izbira jezika."
+
+#~ msgid "Color display"
+#~ msgstr "Barvni zaslon"
+
+#~ msgid "Monochrome display"
+#~ msgstr "Enobarvni zaslon"
+
+#~ msgid "Select the display type."
+#~ msgstr "Izbira tipa zaslona."
+
+#~ msgid "Kernel Modules (Hardware Drivers)"
+#~ msgstr "Moduli jedra (gonilniki strojne opreme)"
+
+#~ msgid "Start Installation or System"
+#~ msgstr "Začetek namestitve ali zagon sistema"
+
+#~ msgid "Display"
+#~ msgstr "Zaslon"
+
+#~ msgid "Keymap"
+#~ msgstr "Preslikave tipk"
+
+#~ msgid "Load Network Card Modules"
+#~ msgstr "Naloži module za omrežno kartico"
+
+#~ msgid "Show Loaded Modules"
+#~ msgstr "Prikaz naloženih modulov"
+
+#~ msgid "Load Modules Automatically"
+#~ msgstr "Naloži module samodejno"
+
+#~ msgid "Unload Modules"
+#~ msgstr "Odstrani module"
+
+#~ msgid ""
+#~ "Trying to load module \"%s\"...\n"
+#~ "\n"
+#~ "During loading, you may want to watch the kernel messages on virtual "
+#~ "console 4 (ALT-F4). Use ALT-F1 to switch back to this menu."
+#~ msgstr ""
+#~ "Poizkus nalaganja modula \"%s\"...\n"
+#~ "\n"
+#~ "Med nalaganjem lahko preklopite na navidezno konzolo 4 (ALT+F4) za "
+#~ "pregled sporočil jedra. Za vrnitev na trenutno konzolo, pritisnite ALT-F1."
+
+#~ msgid "Module \"%s\" loaded successfully."
+#~ msgstr "Modul \"%s\" je uspešno naložen."
+
+#~ msgid "Failed to load module \"%s\"."
+#~ msgstr "Napaka pri nalaganju modula \"%s\"."
+
+#~ msgid "CD-ROM"
+#~ msgstr "CD-ROM"
+
+#~ msgid "Floppy"
+#~ msgstr "Disketa"
+
+#~ msgid "Start Installation or Update"
+#~ msgstr "Začetek namestitve ali nadgradnje"
+
+#~ msgid "Start Rescue System"
+#~ msgstr "Zagon sistema za reševanje"
+
+#~ msgid "Load Rescue System via NFS"
+#~ msgstr "Naloži sistema za reševanje preko NFS"
+
+#~ msgid "Boot Installed System"
+#~ msgstr "Zagon nameščenega sistema"
+
+#~ msgid "Searching for image \"%s\"..."
+#~ msgstr "Iskanje slike \"%s\"..."
+
+#~ msgid "Kernel Messages"
+#~ msgstr "Sporočila jedra"
+
+#~ msgid "Processor"
+#~ msgstr "Procesor"
+
+#~ msgid "Network Cards"
+#~ msgstr "Omrežne kartice"
+
+#~ msgid "DMA"
+#~ msgstr "DMA"
+
+#~ msgid "Interrupts"
+#~ msgstr "Prekinitve"
+
+#~ msgid "I/O Ports"
+#~ msgstr "V/I vrata"
+
+#~ msgid "Memory"
+#~ msgstr "Pomnilnik"
+
+#~ msgid "Modules"
+#~ msgstr "Moduli"
+
+#~ msgid "PCI"
+#~ msgstr "PCI"
+
+#~ msgid "Insert the disk and press ENTER."
+#~ msgstr "Vstavite disketo in pritisnite ENTER."
+
+#~ msgid "Error reading from floppy disk."
+#~ msgstr "Napaka pri branju z disketne enote."
+
+#~ msgid "Enter your root partition (e.g., /dev/sda3)"
+#~ msgstr "Vpišite vaš korensk (root) razdelek (npr. /dev/hda3)"
+
+#~ msgid "Invalid root device."
+#~ msgstr "Napačna korenska (root) naprava."
+
+#~ msgid "Invalid input."
+#~ msgstr "Napačen vnos."
+
+#~ msgid "Enter your IP address."
+#~ msgstr "Vnesite vaš IP naslov."
+
+#~ msgid ""
+#~ "Enter your netmask. For a normal class C network, this is usually "
+#~ "255.255.255.0."
+#~ msgstr ""
+#~ "Vnesite vašo omrežno masko. Za običajna C omrežja, je omrežna maska "
+#~ "255.255.255.0."
+
+#~ msgid ""
+#~ "If you need a gateway to reach the server, enter the IP address of the "
+#~ "gateway. If you do not need a gateway, enter your own IP address."
+#~ msgstr ""
+#~ "Če za dostop do strežnika uporabljate prehod (gateway), vnesite IP naslov "
+#~ "prehoda.Če ne potrebujete prehoda, vnesite IP naslov vašega računalnika."
+
+#~ msgid ""
+#~ "Enter the IP address of your name server. If you do not use a name "
+#~ "server, press ESC."
+#~ msgstr ""
+#~ "Vnesite IP naslov vašega imenskega strežnika. Če imenskega strežnika ne "
+#~ "uporabljate, pritisnite ECS."
+
+#~ msgid ""
+#~ "The following data has been retrieved:\n"
+#~ "\n"
+#~ "IP address: %s\n"
+#~ "Name: %s\n"
+#~ "Domain: %s"
+#~ msgstr ""
+#~ "Pridobljeni so bili naslednji podatki:\n"
+#~ "\n"
+#~ "IP naslov: %s\n"
+#~ "Ime: %s\n"
+#~ "Domena: %s"
+
+#~ msgid ""
+#~ "An error occurred during the network configuration. Your network card "
+#~ "probably was not recognized by the kernel."
+#~ msgstr ""
+#~ "Med prilagoditvijo omrežnih nastavitev je prišlo do napake. V večini "
+#~ "primerov to pomeni, da jedro ni prepoznalo vaše omrežne kartice."
+
+#~ msgid "Enter the IP address of the NFS server."
+#~ msgstr "Vnesite IP naslov NFS strežnika."
+
+#~ msgid "Enter the IP address of the FTP server."
+#~ msgstr "Vnesite IP naslov FTP strežnika."
+
+#~ msgid "Enter the directory on the server."
+#~ msgstr "Vnesite imenik na strežniku."
+
+#~ msgid "Enter parameters for \"%s\"."
+#~ msgstr "Vnesite parametre za \"%s\"."
+
+#~ msgid ""
+#~ "Trying to mount the directory\n"
+#~ "\n"
+#~ "\"%s:%s\"..."
+#~ msgstr ""
+#~ "Poizkus priklopa imenika\n"
+#~ "\n"
+#~ "\"%s:%s\"..."
+
+#~ msgid ""
+#~ "An error occurred while trying to mount the NFS directory.\n"
+#~ "\n"
+#~ "Reason given by server: %s"
+#~ msgstr ""
+#~ "Napaka pri poizkusu priklopa NFS imenika.\n"
+#~ "\n"
+#~ "Razlog, ki ga je dal strežnik: %s"
+
+#~ msgid ""
+#~ "Choose a keyboard map.\n"
+#~ "YaST will offer additional keyboard tables later."
+#~ msgstr ""
+#~ "Izberite preslikavo za tipkovnico.\n"
+#~ "YaST vam bo kasneje ponudil dodatne tabele za tipkovnico."
+
+#~ msgid "Choose the module to unload."
+#~ msgstr "Izberite modul za odstranitev."
+
+#~ msgid "No modules currently loaded."
+#~ msgstr "Trenutno ni naloženih modulov."
+
+#~ msgid "Autoprobing (%s)...      "
+#~ msgstr "Samopoizkušanje (%s)...       "
+
+#~ msgid "Search for additional SCSI host adaptors?"
+#~ msgstr "Iskanje dodatnih SCSI krmilnikov?"
+
+#~ msgid "Search for additional network cards?"
+#~ msgstr "Iskanje dodatnih omrežnih kartic?"
+
+#~ msgid "Search for additional CD-ROM drives?"
+#~ msgstr "Iskanje dodatnih CD-ROM enot?"
+
+#~ msgid "ethernet network card"
+#~ msgstr "ethernet omrežna kartica"
+
+#~ msgid "parallel port"
+#~ msgstr "vzporedna vrata"
+
+#~ msgid "token ring network card"
+#~ msgstr "token ring omrežna kartica"
+
+#~ msgid "arcnet network card"
+#~ msgstr "arcnet omrežna kartica"
+
+#~ msgid "FDDI network card"
+#~ msgstr "FDDI omrežna kartica"
+
+#~ msgid "HIPPI network card"
+#~ msgstr "HIPPI omrežna kartica"
+
+#~ msgid "Choose the network device."
+#~ msgstr "Izberite omrežno napravo."
+
+#~ msgid "Enter the IP address of the PLIP partner."
+#~ msgstr "Vnesite IP naslov PLIP partnerja."
+
+#~ msgid ""
+#~ "The PCMCIA chipset could not be detectedautomatically. Specify it "
+#~ "manually."
+#~ msgstr ""
+#~ "PCMCIA čipovja ni možno samodejno zaznati. Tip čipovja določite ročno."
+
+#~ msgid ""
+#~ "Found PCMCIA chipset \"%s\".\n"
+#~ "\n"
+#~ "Enter parameters for PCMCIA core modules."
+#~ msgstr ""
+#~ "Našel PCMCIA čipovje \"%s\".\n"
+#~ "\n"
+#~ "Vnesite parametre za osnovne (core) PCMCIA module."
+
+#~ msgid "Starting card manager..."
+#~ msgstr "Zagon upravljalnika kartic..."
+
+#~ msgid "Successfully started PCMCIA card services."
+#~ msgstr "Storitve za PCMCIA kartice so bile uspešno zagnane."
+
+#~ msgid "Start of PCMCIA card services failed."
+#~ msgstr "Zagon storitev za PCMCIA kartice ni bil uspešen."
+
+#~ msgid "PCMCIA card services already running."
+#~ msgstr "Storitev za PCMCIA kartice že deluje."
+
+#~ msgid ""
+#~ "You can leave Linuxrc only via \n"
+#~ "\n"
+#~ "\"Start Installation or System\"\n"
+#~ "\n"
+#~ "You may need to load some drivers (modules) to support your hardware."
+#~ msgstr ""
+#~ "Linuxrc lahko zapustite z izbiro možnosti\n"
+#~ "\n"
+#~ "\"Start Installation or System\"\n"
+#~ "\n"
+#~ "Možno je, da boste za podporo strojne opreme morali naložiti dodatne "
+#~ "gonilnike (module)."
+
+#~ msgid "You cannot exit Linuxrc with <Ctrl-C>."
+#~ msgstr "Linuxrc-ja ne morete zapustiti s kombinacijo tipk <Ctrl-C>."
+
+#~ msgid "Remove the disk from the drive now."
+#~ msgstr "Odstranite disketo iz enote."
+
+#~ msgid ""
+#~ "\n"
+#~ "\n"
+#~ "Example: "
+#~ msgstr ""
+#~ "\n"
+#~ "\n"
+#~ "Primer: "
+
+#~ msgid "Choose the source medium."
+#~ msgstr "Izberite izvorni medij."
+
+#~ msgid "Trying to mount the CD-ROM..."
+#~ msgstr "Poizkus priklopa CD-ROMa..."
+
+#~ msgid "Unable to mount the CD-ROM."
+#~ msgstr "Priklop CD-ROMa ni mogoč."
+
+#~ msgid "Reboot the system now?"
+#~ msgstr "Ponovni zagon sistema?"
+
+#~ msgid ""
+#~ "The base system has been successfully installed. This newly installed "
+#~ "system will now be started to commit the installation."
+#~ msgstr ""
+#~ "Osnovi sistem je bil uspešno nameščen. Z zagonom na novo nameščenega "
+#~ "sistema se bo namestitev nadaljevala."
+
+#~ msgid "Enter the hard disk partition (e.g., /dev/sda1)"
+#~ msgstr "Vnesite razdelek na trdem disku (npr. /dev/sda1)"
+
+#~ msgid "Could not mount the specified partition."
+#~ msgstr "Priklop razdelka ni uspel."
+
+#~ msgid "Enter the source directory."
+#~ msgstr "Vnesite izvorni imenik."
+
+#~ msgid "Hard Disks or CD-ROMs"
+#~ msgstr "Trdi diski ali CD-ROMi"
+
+#~ msgid ""
+#~ "Your computer has extremely little memory.\n"
+#~ "\n"
+#~ "Before you acknowledge this message, you must switch to virtual console 2 "
+#~ "(press ALT-F2) to create and activate some swap space."
+#~ msgstr ""
+#~ "Vaš računalnik ima zelo malo pomnilnika.\n"
+#~ "\n"
+#~ "Pred potrditvijo tega sporočila preklopite v navidezno konzolo 2 "
+#~ "(pritisnite ALT-F2) in naredite ter aktiviratje nekaj izmenjalnega "
+#~ "prostora (swap space!)."
+
+#~ msgid "Animation"
+#~ msgstr "Animacija"
+
+#~ msgid "Use animated windows?"
+#~ msgstr "Uporaba animiranih oken?"
+
+#~ msgid "No hard disks or CD-ROM drives have been detected so far."
+#~ msgstr "Do sedaj ni detektiranih trdih diskov ali CD-ROM enot."
+
+#~ msgid "Debug (expert)"
+#~ msgstr "Razhroščevanje (za strokovnjake)"
+
+#~ msgid "Load Root Image into RAM Disk"
+#~ msgstr "Naloži glavno (root) sliko v pomnilniški disk"
+
+#~ msgid "Enter Root Image"
+#~ msgstr "Vnesite glavno sliko (root image)"
+
+#~ msgid "Should the root image be loaded into the RAM disk?"
+#~ msgstr "Želite, da se glavna slika (root image) naloži v pomnilniški disk?"
+
+#~ msgid ""
+#~ "Enter the path and name of the file to load into the RAM disk as the root "
+#~ "file system."
+#~ msgstr ""
+#~ "Vnesite pot in ime do datoteke, ki se bo naložila na pomnilniški disk kot "
+#~ "glavna slika."
+
+#~ msgid "Not yet implemented."
+#~ msgstr "Še ni narejeno."
+
+#~ msgid "Preparing installation..."
+#~ msgstr "Priprava namestitve..."
+
+#~ msgid "Exit or Reboot"
+#~ msgstr "Izhod ali ponovni zagon"
+
+#~ msgid "Searching for info file..."
+#~ msgstr "Iskanje datoteke z informacijami..."
+
+#~ msgid "Specify the NFS port."
+#~ msgstr "Določite NFS vrata."
+
+#~ msgid "Asking name server..."
+#~ msgstr "Spraševanje imenskega strežnika..."
+
+#~ msgid "Your network is already configured. Keep this configuration?"
+#~ msgstr ""
+#~ "Vaše omrežje je že nastavljeno. Želite obdržati obstoječe nastavitve?"
+
+#~ msgid "Abort?"
+#~ msgstr "Prekinitev?"
+
+#~ msgid ""
+#~ "No network device found.\n"
+#~ "Load a network module first."
+#~ msgstr ""
+#~ "Ni omrežnih naprav.\n"
+#~ "Najprej naložite ustrezni modul."
+
+#~ msgid "A %s was already found in your system.\n"
+#~ msgstr "%s je že prepoznano v vašem sistemum.\n"
+
+#~ msgid ""
+#~ "Error while accessing the FTP server:\n"
+#~ "\n"
+#~ "%s"
+#~ msgstr ""
+#~ "Napaka pri dostopu do FTP strežnika:\n"
+#~ "\n"
+#~ "%s"
+
+#~ msgid "Enter the user name with which to access the FTP server."
+#~ msgstr "Vnesite uporabniško ime za dostop do FTP strežnika."
+
+#~ msgid "Enter the password for the FTP user account."
+#~ msgstr "Vnesite geslo za uporabniški račun na FTP strežniku."
+
+#~ msgid "Enter the address of the FTP proxy."
+#~ msgstr "Vnesite naslov FTP posrednika (proxy)."
+
+#~ msgid "Enter the port of the FTP proxy."
+#~ msgstr "Vnesite vrata FTP posrednika (proxy)."
+
+#~ msgid "Use an FTP proxy?"
+#~ msgstr "Želite uporabiti FTP posrednika (proxy)?"
+
+#~ msgid ""
+#~ "Your computer does not have enough RAM to install via FTP (%d MB RAM "
+#~ "required)."
+#~ msgstr ""
+#~ "Vaš računalnik nima dovolj pomnilnika za namestitev preko FTP (zahteva se "
+#~ "najmanj %d MB pomnilnika)."
+
+#~ msgid ""
+#~ "Usually an FTP installation is performed via anonymous FTP. It is "
+#~ "possible to specify a user name and password for the FTP server access.\n"
+#~ "Use a user name and password?"
+#~ msgstr ""
+#~ "Navadno se namestitev preko FTP naredi z uporabo anonimne prijave "
+#~ "(anonymous FTP), vendar je možno vpisati uporabniško ime in geslo za "
+#~ "dostop do FTP strežnika.\n"
+#~ "Želite uporabiti uporabniško ime in geslo?"
+
+#~ msgid "-- More Modules --"
+#~ msgstr "-- več modulov --"
+
+#~ msgid "Initializing parallel port..."
+#~ msgstr "Inicializacija vzporednih vrat..."
+
+#~ msgid "Make sure that CD number %d is in your drive."
+#~ msgstr "Preverite, da je v enoti CD številka %d."
+
+#~ msgid "Eject CD"
+#~ msgstr "Izvrzi CD"
+
+#~ msgid "Bootp Time-Out"
+#~ msgstr "Čas čakanja pri Bootp"
+
+#~ msgid "Enter the time-out value for bootp."
+#~ msgstr "Vnesite vrednost za čas čakanja pri bootp."
+
+#~ msgid "channel to channel connection"
+#~ msgstr "povazava kanal-kanal"
+
+#~ msgid "ESCON connection"
+#~ msgstr "ESCON povezava"
+
+#~ msgid "IUCV connection"
+#~ msgstr "IUCV povezava"
+
+#~ msgid "channel attached cisco router"
+#~ msgstr "CISCO usmerjevalnik priključen preko kanala"
+
+#~ msgid "Enter the share name on the SMB server."
+#~ msgstr "Vnesite vir v skupni rabi na SMB strežniku."
+
+#~ msgid ""
+#~ "If you want to access the share as guest,you do not need to specify user "
+#~ "name, password, and workgroup.\n"
+#~ "Access the share as guest?"
+#~ msgstr ""
+#~ "Če želite dostopati do vira v skupni rabi kot gost, vam ni potrebno "
+#~ "vnesti uporabniškega imena, gesla in delovne skupine. \n"
+#~ "Želite dostopati kot gost?"
+
+#~ msgid "Enter your user name on the SMB server."
+#~ msgstr "Vnesite vaše uporabniško ime na SMB strežniku."
+
+#~ msgid "Enter your password on the SMB server."
+#~ msgstr "Vnesite vaše geslo na SMB strežniku."
+
+#~ msgid ""
+#~ "Enter your workgroup.If you do not need to specify a workgroup,leave the "
+#~ "field empty."
+#~ msgstr ""
+#~ "Vnesite vašo delovno skupino. Če ne želite določiti delovne skupine, "
+#~ "pustite polje prazno."
+
+#~ msgid ""
+#~ "Trying to mount the share\n"
+#~ "\n"
+#~ "\"//%s/%s\""
+#~ msgstr ""
+#~ "Poizkus priklopa vira v skupni rabi\n"
+#~ "\n"
+#~ "\"//%s/%s\""
+
+# %s is either BOOTP or DHCP
+#~ msgid "Automatic configuration via %s?"
+#~ msgstr "Samodejna prilagoditev preko %s?"
+
+# %s is either BOOTP or DHCP
+#~ msgid "Sending %s request..."
+#~ msgstr "Pošiljanje zahteve %s..."
+
+# %s is either BOOTP or DHCP
+#~ msgid "%s configuration failed."
+#~ msgstr "Prilagoditev %s ni bila uspešna."
+
+#~ msgid "Use DHCP instead of BOOTP?"
+#~ msgstr "Uporaba DHCP namesto BOOTP?"
+
+#~ msgid "Insert a modules disk."
+#~ msgstr "Vstavite disketo z moduli."
+
+#~ msgid "Insert modules disk %d."
+#~ msgstr "Vstavite disketo z moduli %d."
+
+#~ msgid "Find instructions for creating it in boot/README on CD1 or DVD1."
+#~ msgstr ""
+#~ "Navodila za izdelavo so shranjena v datoteki boot/README na CD1 ali DVD1."
+
+#~ msgid "Choose the network protocol."
+#~ msgstr "Izberite omrežni protokol."
+
+# %s is NFS, FTP, HTTP or SMB
+#~ msgid "Enter the IP address of the %s server."
+#~ msgstr "Vnesite IP naslov %s strežnika."
+
+# %s is e.g. SCSI, CD-ROM, USB
+#~ msgid "Load %s Modules"
+#~ msgstr "Naloži %s module"
+
+#~ msgid "Load File System Modules"
+#~ msgstr "Naloži module datotečnega sistema"
+
+#~ msgid "Load Unknown Modules"
+#~ msgstr "Naloži neznane module"
+
+# %s is e.g. ext3 or reiserfs
+#~ msgid "%s file system found."
+#~ msgstr "našel datotečni sistem %s"
+
+#~ msgid "Abort"
+#~ msgstr "Prekini"
+
+#~ msgid "No new modules found."
+#~ msgstr "Ni dodatnih novih modulov."
+
+#~ msgid "Choose the hard disk partition."
+#~ msgstr "Izberite razdelek na trdem disku."
+
+#~ msgid "Choose the root partition."
+#~ msgstr "Izberite korenski (root) razdelek."
+
+#~ msgid "Choose the swap partition."
+#~ msgstr "Izberite izmenjalni (swap) razdelek."
+
+#~ msgid "There is not enough memory to load all data."
+#~ msgstr "Za shranitev vseh podatkov ni dovolj pomnilnika."
+
+#~ msgid "Your computer does not have enough memory to run YaST."
+#~ msgstr "Vaš računalnik nima dovolj pomnilnika za zagon YaSTa."
+
+#~ msgid "To continue, activate some swap space."
+#~ msgstr "Za nadaljevanje, aktivirajte izmenjalni (swap) prostor."
+
+#~ msgid "Error activating swap space."
+#~ msgstr "Napaka pri aktiviranju izmenjalnega (swap) prostora."
+
+#~ msgid "Enter the swap partition (e.g., /dev/sda2)"
+#~ msgstr "Vnesite izmenjalni (swap) razdelek (npr. /dev/sda2)"
+
+#~ msgid "Enter the user name with which to access the %s server."
+#~ msgstr "Vnesite uporabniško ime za dostop do %s strežnika."
+
+#~ msgid "Enter the password for the %s server."
+#~ msgstr "Vnesite geslo za dostop do %s strežnika."
+
+#~ msgid "Use a %s proxy?"
+#~ msgstr "Želite uporabiti %s posrednika (proxy)?"
+
+#~ msgid "Enter the address of the %s proxy."
+#~ msgstr "Vnesite naslov za %s posrednika (proxy)."
+
+#~ msgid "Enter the port of the %s proxy."
+#~ msgstr "Vnesite vrata %s posrednika (proxy)."
+
+#~ msgid "VNC Enable or Disable"
+#~ msgstr "Omogoči ali onemogoči VNC"
+
+#~ msgid "Use VNC for install?"
+#~ msgstr "Želite uporabiti VNC za namesititev?"
+
+#~ msgid "Enable or Disable SSH Mode"
+#~ msgstr "Omogoči ali onemogoči SSH način"
+
+#~ msgid "Start SSH for Text Install?"
+#~ msgstr "Zaženem SSH za namestitev v tekstovnem načinu?"
+
+#~ msgid "Enter your VNC password."
+#~ msgstr "Vnesite vaše VNC geslo."
+
+#~ msgid "Enter your temporary SSH password."
+#~ msgstr "Vnesite vaše začasno SSH geslo."
+
+#~ msgid ""
+#~ "The base system was successfully installed. Your machine must now be "
+#~ "rebooted. Remove all installation media (CD-ROM, floppy).\n"
+#~ "Do not remove the floppy disk if the boot manager was installed on it."
+#~ msgstr ""
+#~ "Osnovni sistem je bil uspešno nameščen in vaš računalnik je potrebno "
+#~ "ponovno zagnati. Iz enot odstranite vse namestitvene medije (CD-ROM, "
+#~ "floppy).\n"
+#~ "Če ste zagonski upravljalnik namestili na disketo, je NE odstranite iz "
+#~ "enote."
+
+#~ msgid "Add Driver Update"
+#~ msgstr "Dodaj nadgradnjo gonilnika"
+
+#~ msgid "Show Driver Updates"
+#~ msgstr "Prikaži nadgradnje gonilnika"
+
+#~ msgid "Enter the IP of name server %u or press ESC."
+#~ msgstr "Vnestite IP naslov imenskega strežnika %u ali pritisnite tipko ECS."
+
+#~ msgid ""
+#~ "Enter temporary root password.\n"
+#~ "You will be required to change this password on initial root user login."
+#~ msgstr ""
+#~ "Vnesite začasno geslo root uporabnika.\n"
+#~ "Pri prvi prijavi kot uporabnik root, boste morali geslo zamenjati."
+
+#~ msgid ""
+#~ "Your computer does not have enough RAM for the installation of %s. You "
+#~ "need at least %d MB."
+#~ msgstr ""
+#~ "Vaš računalnik nima dovolj pomnilnika za namestitev %s. Imeti morate "
+#~ "najmanj %d MB pomnilnika."
+
+#~ msgid "Enter the IP address of the host running the X11 server."
+#~ msgstr "Vnesite IP naslov gostitelja, na katerem teče X11 strežnik."
+
+#~ msgid "Please enter the name (user ID) of the target VM guest."
+#~ msgstr "Prosim vnesite ime (ID uporabnika) ciljnega VM gosta."
+
+#~ msgid "ESCON"
+#~ msgstr "ESCON"
+
+#~ msgid "Device address for read channel"
+#~ msgstr "Naslov naprave za bralni kanal"
+
+#~ msgid "Device address for write channel"
+#~ msgstr "Naslov naprave za pisalni kanal"
+
+#~ msgid "Device address for data channel"
+#~ msgstr "Naslov naprave za podatkovni kanal"
+
+#~ msgid "Select protocol for this CTC device."
+#~ msgstr "Izberite protokol za CTC napravo."
+
+#~ msgid "Compatibility mode (default)"
+#~ msgstr "Združljivostni način (privzeto)"
+
+#~ msgid "Extended mode"
+#~ msgstr "Razširjen način"
+
+#~ msgid "Compatibility mode for OS/390 and z/OS peers"
+#~ msgstr "Zrdužljiv način za OS/390 in z/OS odjemalce"
+
+#~ msgid "Portname to use"
+#~ msgstr "Ime vrat (portname) za uporabo"
+
+#~ msgid "Fully qualified hostname"
+#~ msgstr "Celotno ime dostitelja"
+
+#~ msgid "Enter the relative port number"
+#~ msgstr "Vnesite relativno številko vrat"
+
+#~ msgid "Verify Installation CD-ROM/DVD"
+#~ msgstr "Preveri namestitvene CD-ROM/DVD"
+
+# turn the computer off
+#~ msgid "Power off"
+#~ msgstr "Zaustavitev sistema"
+
+#~ msgid "Failed to access Driver Update medium."
+#~ msgstr "Neuspešen dostop do media za posodobitev gonilnika."
+
+#~ msgid "Reading Driver Update..."
+#~ msgstr "Branje posodobitve gonilnika."
+
+#~ msgid "No new Driver Updates found"
+#~ msgstr "Posodobitev gonilnika ni."
+
+#~ msgid "Driver Updates added"
+#~ msgstr "Dodane posodobitve gonilnika"
+
+# shown if driver update succeeded
+#~ msgid "Driver Update ok"
+#~ msgstr "Vse v redu s posodobitvijo gonilnika"
+
+#~ msgid "Please choose the Driver Update medium."
+#~ msgstr "Prosim izberite medij za posodobitev gonilnika."
+
+#~ msgid "Please enter the Driver Update device."
+#~ msgstr "Prosim vnesite napravo za posodobitev gonilnika."
+
+#~ msgid "Invalid device name."
+#~ msgstr "Nepravilno ime naprave."
+
+#~ msgid "Looking for CD-ROM drives..."
+#~ msgstr "Iskanje CD-ROM enot..."
+
+#~ msgid "No CD-ROM drives found."
+#~ msgstr "Ni CD-ROM enot."
+
+#~ msgid "Looking for floppy disks..."
+#~ msgstr "Iskanje disketnih enot..."
+
+#~ msgid "No floppy disk found."
+#~ msgstr "Ni disketnih enot."
+
+# heading for a listing of updates
+#~ msgid "Driver Update list"
+#~ msgstr "Seznam posodobitev gonilnika"
+
+#~ msgid "No Driver Updates so far."
+#~ msgstr "Do sedaj še ni posodobitev gonilnika"
+
+#~ msgid "Insert Installation CD-ROM or DVD."
+#~ msgstr "Vstavite namestitveni CD-ROM ali DVD."
+
+#~ msgid "No CD-ROM or DVD found."
+#~ msgstr "Ni CD-ROMa ali DVDja."
+
+# e.g 'not a SUSE LINUX CD-ROM'
+#~ msgid "This is not a %s CD-ROM."
+#~ msgstr "To ni %s CD-ROM."
+
+#~ msgid "No errors found."
+#~ msgstr "Ni napak."
+
+#~ msgid "Checksum wrong."
+#~ msgstr "Napačna preizkusna vsota (checksum)."
+
+#~ msgid "Error reading sector %u."
+#~ msgstr "Napaka pri branju odseka %u."
+
+# %s is CD-ROM or DVD
+#~ msgid ""
+#~ "\n"
+#~ "This %s is broken."
+#~ msgstr ""
+#~ "\n"
+#~ "%s je pokvarjen."
+
+#~ msgid "Choose an installation source"
+#~ msgstr "Izberite izvor namestitve"
+
+#~ msgid "This is not a valid fully qualified hostname."
+#~ msgstr "Niste vnesli celotnega imena gostitelja."
+
+# e.g 'not a SUSE LINUX CD-ROM'
+#~ msgid "This is not a valid CCW address."
+#~ msgstr "To ni veljaven CCW naslov."
+
+#~ msgid "Do you want to halt the system now?"
+#~ msgstr "Želite zaustaviti sistem?"
+
+#~ msgid "OSA-2 or OSA Express"
+#~ msgstr "OSA-2 ali OSA Express"
+
+#~ msgid "Ethernet"
+#~ msgstr "Ethernet"
+
+#~ msgid "Token Ring"
+#~ msgstr "Token Ring"
+
+#~ msgid "LCS"
+#~ msgstr "LCS"
+
+#~ msgid "QDIO"
+#~ msgstr "QDIO"
+
+#~ msgid "Please choose the physical medium."
+#~ msgstr "Prosil izberite fizični medij."
+
+#~ msgid "Loading Modules"
+#~ msgstr "Nalaganje modulov"
+
+#~ msgid "Loading Installation System"
+#~ msgstr "Nalaganje nameščenega sistema"
+
+# progress indicator label
+#~ msgid "Loading Additional Fonts"
+#~ msgstr "Nalaganje dodatnih pisav"
+
+#~ msgid "Loading Driver Update"
+#~ msgstr "Nalaganje posodobitve gonilnika"
+
+#~ msgid "Loading Rescue System"
+#~ msgstr "Nalaganje sistema za reševanje"
+
+#~ msgid "32-Bit Runtime Environment"
+#~ msgstr "32-bitno delovno okolje"
+
+#~ msgid "64-Bit Runtime Environment"
+#~ msgstr "64-bitno delovno okolje"
+
+#~ msgid "C/C++ Compiler and Tools"
+#~ msgstr "C/C++ prevajalnik in orodja"
+
+#~ msgid "GNOME Development"
+#~ msgstr "Razvoj za okolje GNOME"
+
+#~ msgid "KDE Development"
+#~ msgstr "Razvoj za okolje KDE"
+
+#~ msgid "Help and Support Documentation"
+#~ msgstr "Dokumentacija za pomoč in podporo"
+
+#~ msgid "KDE Desktop Environment"
+#~ msgstr "Namizno okolje KDE"
+
+#~ msgid "Kernel Development"
+#~ msgstr "Razvoj jedra"
+
+#~ msgid "&Remove"
+#~ msgstr "O&dstrani"
+
+#~ msgid "..."
+#~ msgstr "..."
+
+#~ msgid "Run in terminal"
+#~ msgstr "Zaženi v terminalu"
+
+#~ msgid "Allow switching by non-root users"
+#~ msgstr "Dovoli zamenjavo ne-root uporabnikom"
+
+#~ msgid "&Accept"
+#~ msgstr "&Sprejmi"
+
+#~ msgid ""
+#~ "You selected to allow profile switching by normal users.\n"
+#~ "The SUID bit of the configured switch application will be set. This may "
+#~ "be a security risk, especially when using an SCPM front-end that lacks "
+#~ "SCPM user management.\n"
+#~ "Enable this feature?"
+#~ msgstr ""
+#~ "Izbrali ste, da lahko profile zamenjato tudi običajni (ne-root) "
+#~ "uporabniki.\n"
+#~ "S tem bo nastavljen SUID bit nastavljene aplikacije za zamenjavo.  To "
+#~ "lahko predstavlja varnostno tveganje, predvsem, ker uporabniški vmesnik "
+#~ "SCPM nima podpore za upravljanje z uporabniki.\n"
+#~ "Želite omogočiti zamenjavo profilov običajnim uporabnikom?"
+
+#~ msgid "Really enable non-root switch support?"
+#~ msgstr "Resnično omogočim podporo zamenjavi tudi ne-root uporabnikom?"
+
+#~ msgid "Enable"
+#~ msgstr "Omogoči"
+
+#~ msgid "Click to switch profile"
+#~ msgstr "Klitnite za zamenjavo profila"
+
+#~ msgid ""
+#~ "SCPM Profile Chooser Applet\n"
+#~ "(c) 2004 SuSE Linux AG\n"
+#~ "(c) 2005 SUSE LINUX Products GmbH"
+#~ msgstr ""
+#~ "Izbira profilov SCPM\n"
+#~ "(c) 2004 SuSE Linux AG\n"
+#~ "(c) 2005 SUSE LINUX Products GmbH"
+
+#~ msgid ""
+#~ "SCPM Profile Chooser Applet\n"
+#~ "This applet provides a convenient way to choose between your installed "
+#~ "SCPM profiles. Just click the icon and choose a profile to switch to. If "
+#~ "you do not get a list of available profiles but instead just \"SCPM not "
+#~ "available\", SCPM is probably not set up or may be locked. Use YaST2 "
+#~ "Profile Manager to set up or unlock SCPM. Refer to the SCPM info pages "
+#~ "more information."
+#~ msgstr ""
+#~ "Izbira profilov SCPM\n"
+#~ "Programček nudi enostaven način izbire med nameščenimi SCPM profili. "
+#~ "Izberite ikono in iz seznama izberite profil, s katerim ćelite zamenjati "
+#~ "trenutnega. Če se namesto seznama profilov prikaže \"SCPM ni na voljo\", "
+#~ "sistem SCPM najverjetneje ni nastavljen ali je dostop do njega zaklenjen. "
+#~ "Za nastavitev ali odklepanje dostopa uporabite YaST2 modul za upravljanje "
+#~ "s profili. Za dodatne informacije poglejte v informacijske strani sistema "
+#~ "SCPM."
+
+#~ msgid "SCPM not available"
+#~ msgstr "SCPM ni na voljo"
+
+#~ msgid "No profiles available"
+#~ msgstr "Na voljo ni nobenega profila"
+
+#~ msgid "Should Profile Chooser start automatically when you log in?"
+#~ msgstr "Naj se Izbira profilov samodejno zažene ob prijavi v sistem?"
+
+#~ msgid ""
+#~ "<b>SaX2 Suggestion</b><hr>The currently-started graphics system is based "
+#~ "on a suggestion made by SaX2. If this is acceptable, click <b>OK</b>. "
+#~ "Otherwise, change the configuration."
+#~ msgstr ""
+#~ "<b>SaX2 predlog</b><hr>Trenutno zagnan grafični sistem temelji na "
+#~ "predlogih, ki jih je podal SaX2. Če vam je okolje všeč, ga lahko potrdite "
+#~ "s pritiskom na <b>V redu</b> ali nastavitve sistema spremenite po svojih "
+#~ "željah."
+
+#~ msgid "Automatic Graphics System Setup"
+#~ msgstr "Samodejna nastavitev grafičnega sistema"
+
+#~ msgid "Information..."
+#~ msgstr "Informacije..."
+
+#~ msgid "&Yes"
+#~ msgstr "&Da"
+
+#~ msgid "&No"
+#~ msgstr "&Ne"
+
+#~ msgid "<b>Exit SaX2</b><hr>Exit SaX2 now?"
+#~ msgstr "<b>Zapustitev programa SaX2:</b><hr>Ali želite zapustiti SaX2?"
+
+#~ msgid "Message"
+#~ msgstr "Sporočilo"
+
+#~ msgid "C&hange Configuration"
+#~ msgstr "&Spremeni prilagoditev"
+
+#~ msgid "Monitor"
+#~ msgstr "Monitor"
+
+#~ msgid "Card and Monitor Properties"
+#~ msgstr "Nastavitev lastnosti monitorja in kartice"
+
+#~ msgid "Mouse"
+#~ msgstr "Miška"
+
+#~ msgid "Mouse Properties"
+#~ msgstr "Lastnosti miške"
+
+#~ msgid "Keyboard Properties"
+#~ msgstr "Lastnosti tipkovnice"
+
+#~ msgid "Tablet"
+#~ msgstr "Tableta"
+
+#~ msgid "Tablet Properties"
+#~ msgstr "Lastnosti tablete"
+
+#~ msgid "Touchscreen"
+#~ msgstr "Zaslon na dotik"
+
+#~ msgid "Touchscreen Properties"
+#~ msgstr "Lastnosti zaslona na dotik"
+
+#~ msgid "Remote Access Properties"
+#~ msgstr "Lastnosti oddaljenega dostopa"
+
+#~ msgid "Activate This Display"
+#~ msgstr "Aktiviraj ta zaslon"
+
+#~ msgid "Activate This Pointer"
+#~ msgstr "Aktiviraj ta kazalec"
+
+#~ msgid "Card"
+#~ msgstr "Kartica"
+
+#~ msgid "&Change..."
+#~ msgstr "&Spremeni..."
+
+#~ msgid "&Options..."
+#~ msgstr "M&ožnosti..."
+
+#~ msgid "Con&figure..."
+#~ msgstr "&Prilagodi..."
+
+#~ msgid "Dual Head Mode"
+#~ msgstr "Način z dvema izhodoma"
+
+#~ msgid "Options"
+#~ msgstr "Možnosti"
+
+#~ msgid "Activate Mouse Wheel"
+#~ msgstr "Aktiviraj kolešček na miški"
+
+#~ msgid "Activate 3-Button Emulation"
+#~ msgstr "Aktiviraj posnemanje 3 gumbov"
+
+#~ msgid "Emulate Wheel with Mouse Button"
+#~ msgstr "Posnemaj kolešček z gumbom miške"
+
+#~ msgid "Rotate Screen"
+#~ msgstr "Zasukaj zaslon"
+
+#~ msgid "Test"
+#~ msgstr "Test"
+
+#~ msgid "&Test"
+#~ msgstr "&Test"
+
+#~ msgid "&Save"
+#~ msgstr "&Shrani"
+
+#~ msgid "Test ready"
+#~ msgstr "Test pripravljen"
+
+#~ msgid "Single Click: Done"
+#~ msgstr "Enojni pritisk na gumb: Opravljen"
+
+#~ msgid "Double Click: Done"
+#~ msgstr "Dvojni pritisk na gumb: Opravljen"
+
+#~ msgid "Scrolling"
+#~ msgstr "Pomikanje"
+
+#~ msgid "Button pressed"
+#~ msgstr "Gumb pritisnjen"
+
+#~ msgid "Button released"
+#~ msgstr "Gumb spuščen"
+
+#~ msgid "Stopped: Done"
+#~ msgstr "Zaustavitev koleščka: Opravljeno"
+
+#~ msgid "Properties"
+#~ msgstr "Lastnosti"
+
+#~ msgid "Activate Dual Head Mode"
+#~ msgstr "Aktiviraj način z dvema izhodoma"
+
+#~ msgid "Resolution"
+#~ msgstr "Ločljivost"
+
+#~ msgid "Colors"
+#~ msgstr "Barve"
+
+#~ msgid "Activate 3D Acceleration"
+#~ msgstr "Aktiviraj 3D pospeševanje"
+
+#~ msgid "Monitor for Card"
+#~ msgstr "Monitor za kartico"
+
+#~ msgid "Second Monitor for Card"
+#~ msgstr "Drugi monitor za kartico"
+
+#~ msgid "Sync Frequencies"
+#~ msgstr "Sync frekvence"
+
+#~ msgid "Display Size"
+#~ msgstr "Velikost zaslona"
+
+#~ msgid "Arrangement"
+#~ msgstr "Ureditev"
+
+#~ msgid "Activated in %1 mode with %2"
+#~ msgstr "Aktiviran v %1 načinu z %2"
+
+#~ msgid "Activated in driver default mode"
+#~ msgstr "Aktiviran v gonilniku prevzetem načinu"
+
+#~ msgid "Unconfigured"
+#~ msgstr "Neprilagojeno"
+
+#~ msgid ""
+#~ "<b>Cannot Deactivate All Displays</b><hr><nobr>At least one display must "
+#~ "be active.</nobr>"
+#~ msgstr ""
+#~ "<b>Vseh zaslonov ni možno deaktivirati</b><hr><nobr>Najmanj en zaslon "
+#~ "mora biti aktiviran.</nobr>"
+
+#~ msgid "No configuration available"
+#~ msgstr "Nastavitev ni na voljo"
+
+#~ msgid ""
+#~ "Traditional Multihead:\n"
+#~ "Each screen is an independent display"
+#~ msgstr ""
+#~ "Tradicionalni večizhodni način:\n"
+#~ "Zasloni so med seboj neodvisni (vsak je samostojen)"
+
+#~ msgid ""
+#~ "Cloned Multihead:\n"
+#~ "Each display is a clone of the primary display"
+#~ msgstr ""
+#~ "Kopirni večizhodni način:\n"
+#~ "Vsak zaslon je kopija osnovnega zaslona"
+
+#~ msgid ""
+#~ "Xinerama Multihead:\n"
+#~ "Build one big display out of all screens"
+#~ msgstr ""
+#~ "Xinerama večizhodni način:\n"
+#~ "Iz vseh zaslonov sestavi enega velikega"
+
+#~ msgid "Multihead Mode"
+#~ msgstr "Način z večimi izhodi"
+
+#~ msgid "Unknown Monitor:"
+#~ msgstr "Neznan monitor:"
+
+#~ msgid "Primary Monitor:"
+#~ msgstr "Osnovni monitor:"
+
+#~ msgid "Monitor Settings"
+#~ msgstr "Nastvitve monitorja"
+
+#~ msgid "Mouse Settings"
+#~ msgstr "Nastavitve miške"
+
+#~ msgid "Graphics Card Settings"
+#~ msgstr "Nastavitve grafične kartice"
+
+#~ msgid "Dual Head Settings"
+#~ msgstr "Nastavitev način z dvema izhodoma"
+
+#~ msgid "Not Rotated"
+#~ msgstr "Ni zasukan"
+
+#~ msgid "To the Left"
+#~ msgstr "V levo"
+
+#~ msgid "To the Right"
+#~ msgstr "V desno"
+
+#~ msgid ""
+#~ "<b>Option Needs a Value</b><hr><nobr>Set up a value for option %1.</nobr>"
+#~ msgstr ""
+#~ "<b>Možnost mora imeti vrednost</b><hr><nobr>Prosim vnesite vrednost za "
+#~ "možnost %1.</nobr>"
+
+#~ msgid "Monitor: Vendor and Name Selection"
+#~ msgstr "Monitor: izbira proizvajalca in imena"
+
+#~ msgid "Mouse: Vendor and Name Selection"
+#~ msgstr "Miška: izbira proizvajalca in imena"
+
+#~ msgid "Manual Sync Frequency Setup"
+#~ msgstr "Ročna nastavitev sync frekvenc"
+
+#~ msgid "Diagonal and Aspect Ratio"
+#~ msgstr "Diagonala in razmerje stranic"
+
+#~ msgid "Display Size in [ mm ]"
+#~ msgstr "Velikost zaslona v [mm]"
+
+#~ msgid ""
+#~ "<b>Note:</b> Wrong sync ranges may damage your monitor. Consult the "
+#~ "monitor manual for the settings.<br><br>If you want your monitor not to "
+#~ "use its maximum rating, decrease the sync ranges."
+#~ msgstr ""
+#~ "<b>Opomba:</b><hr>Napačno območje sync frekvenc lahko poškoduje vaš "
+#~ "monitor. Za naslednje nastavitve poglejte navodila za monitor.<br><br>Če "
+#~ "ne želite uporabljati največjih vrednosti frekvenc, zmanjšanje njihovo "
+#~ "območje."
+
+#~ msgid "Activate DPMS"
+#~ msgstr "Aktiviraj DPMS"
+
+#~ msgid "Utility Disk..."
+#~ msgstr "Disketa s priročnimi orodji..."
+
+#~ msgid "Horizontal"
+#~ msgstr "Vodoravno"
+
+#~ msgid "Second Monitor:"
+#~ msgstr "Drugi monitor:"
+
+#~ msgid "Second Monitor Resolution"
+#~ msgstr "Ločljivost drugega monitorja"
+
+#~ msgid "Vertical"
+#~ msgstr "Navpično"
+
+#~ msgid "KHz"
+#~ msgstr "KHz"
+
+#~ msgid "Hz"
+#~ msgstr "Hz"
+
+#~ msgid "Aspect Ratio"
+#~ msgstr "Razmerje stranic"
+
+#~ msgid "Diagonal"
+#~ msgstr "Diagonala"
+
+#~ msgid "X Axis [mm]"
+#~ msgstr "X os [mm]"
+
+#~ msgid "Y Axis [mm]"
+#~ msgstr "Y os [mm]"
+
+#~ msgid "Not configured"
+#~ msgstr "Neprilagojeno"
+
+#~ msgid "inches"
+#~ msgstr "inčev"
+
+#~ msgid ""
+#~ "<b>Insert CD or Disk</b><hr>Insert the display utility CD or disk from "
+#~ "the monitor vendor."
+#~ msgstr ""
+#~ "<b>Vstavite CD ali disketo</b><hr>Prosim vstavite CD ali disketo "
+#~ "proizvajalca monitorja."
+
+#~ msgid ""
+#~ "<b>Read Error</b><hr>Could not read from CD or disk. This may point to a "
+#~ "damaged medium or incorrectly formatted information files."
+#~ msgstr ""
+#~ "<b>Napaka pri branju</b><hr>S CDja ali diskete ni možno brati. To je "
+#~ "lahko posledica poškodovanega diska ali napačne oblike datotek(e) z "
+#~ "informacijami na mediju."
+
+#~ msgid "Traditional"
+#~ msgstr "tradicionalni"
+
+#~ msgid "Clone"
+#~ msgstr "kopirni"
+
+#~ msgid "Xinerama"
+#~ msgstr "Xinerama"
+
+#~ msgid "Mouse Model"
+#~ msgstr "Model miške"
+
+#~ msgid "Primary Setup"
+#~ msgstr "Glavna nastavitev"
+
+#~ msgid "Variant"
+#~ msgstr "Varianta"
+
+#~ msgid "Additional Layouts"
+#~ msgstr "Dodatni izgled(i)"
+
+#~ msgid "Keytable"
+#~ msgstr "Tabela tipk"
+
+#~ msgid "Group Shift/Lock Behavior"
+#~ msgstr "Shift/Lock vedenje skupine"
+
+#~ msgid "Use Keyboard LED to Show Alternate Group"
+#~ msgstr "Uporabi LED na tipkovnici za prikaz alternativne skupine"
+
+#~ msgid "Compose Key Position"
+#~ msgstr "Položaj tipke Compose"
+
+#~ msgid "Control Key Position"
+#~ msgstr "Položaj tipke Control"
+
+#~ msgid "Third Level Chooser"
+#~ msgstr "Izbira tretjega nivoja"
+
+#~ msgid "Alt/Win Key Behavior"
+#~ msgstr "Vedenje tipk Alt/Win"
+
+#~ msgid "CapsLock Key Behavior"
+#~ msgstr "Vedenje tipke CapsLock"
+
+#~ msgid "Morocco"
+#~ msgstr "Maroko"
+
+# ET
+#~ msgid "Ethiopia"
+#~ msgstr "Etiopija"
+
+#~ msgid "Left Alt key switches group while pressed."
+#~ msgstr "Zamenajva skupine s pritiskom na levo tipko Alt."
+
+#~ msgid "Both Ctrl keys together change group."
+#~ msgstr "Obe tipki Control skupaj zamenjata skupino."
+
+#~ msgid "Right Shift key changes group."
+#~ msgstr "Desna tipka Shift zamenja skupino."
+
+#~ msgid "Left Win key changes group."
+#~ msgstr "Leva Win-tipka zamenja skupino."
+
+#~ msgid "Left Alt key changes group."
+#~ msgstr "Leva tipka Alt zamenja skupino."
+
+#~ msgid "Both Win keys switch group while pressed."
+#~ msgstr "Zamenjava skupine s pritiskom na obe Win-tipki."
+
+#~ msgid "Right Ctrl key switches group while pressed."
+#~ msgstr "Zamenjava skupine s pritiskom na desno Win-tipko."
+
+#~ msgid "CapsLock just locks the Shift modifier."
+#~ msgstr "Tipka CapsLock zaklene Shift spremembe."
+
+#~ msgid "CapsLock toggles normal capitalization of alphabetic characters."
+#~ msgstr "Tipka CapsLock vključi/izključi navaden izpis velikih črk."
+
+#~ msgid "CapsLock toggles Shift so all keys are affected."
+#~ msgstr ""
+#~ "Tipka CapsLock vključi/izključi Shift tako, da to vpliva na vse tipke."
+
+#~ msgid "Right Win-key is Compose."
+#~ msgstr "Desna Win-tipka sodeluje pri sestavljanju."
+
+#~ msgid "Shift+CapsLock changes group."
+#~ msgstr "Tipki Shift in CapsLock zamenjata skupino."
+
+#~ msgid "R-Alt switches group while pressed."
+#~ msgstr "Zamenajva skupine s pritiskom na desni tipki Alt."
+
+#~ msgid "Right Control key works as Right Alt."
+#~ msgstr "Desna tipka Control deluje kot desna tipka Alt."
+
+#~ msgid "Control key at bottom left"
+#~ msgstr "Tipka Control, ki je spodaj levo"
+
+#~ msgid "Press any of Win-keys to choose 3rd level."
+#~ msgstr "Pritisnite eno od Win tipk za izbiro tretjega nivoja."
+
+#~ msgid "Press Right Alt key to choose 3rd level."
+#~ msgstr "Pritisnite desno Win-tipko za izbiro tretjega nivoja."
+
+#~ msgid "Right Ctrl key changes group."
+#~ msgstr "Desna tipka Control zamenja skupino."
+
+#~ msgid "Right Alt is Compose."
+#~ msgstr "Desna tipka Alt sodeluje pri sestavljanju."
+
+#~ msgid "Right Ctrl is Compose."
+#~ msgstr "Desna tipka Ctrl sodeluje pri sestavljanju."
+
+#~ msgid "ScrollLock LED shows alternative group."
+#~ msgstr "ScrollLock LED prikazuje alternativno skupino."
+
+#~ msgid "Control key at left of -A-"
+#~ msgstr "Tipka Control levo od tipke -A-"
+
+#~ msgid "Third level choosers"
+#~ msgstr "Izbira tretjega nivoja"
+
+#~ msgid "Both Shift keys together change group."
+#~ msgstr "Obe tipki Shift skupaj zamenjata skupino."
+
+#~ msgid "CapsLock uses internal capitalization. Shift cancels CapsLock."
+#~ msgstr ""
+#~ "Tipka CaspLock uporabi notranjo spremembo velikosti črk. Tipka Shift "
+#~ "prekine delovanje tipke CapsLock."
+
+#~ msgid "Make CapsLock an additional Control."
+#~ msgstr "Naredi CapsLock kot dodatno Control."
+
+#~ msgid "Press Left Win-key to choose 3rd level."
+#~ msgstr "Pritisnite levo Win-tipko za izbiro tretjega nivoja."
+
+#~ msgid "Right Win-key changes group."
+#~ msgstr "Desna Win-tipka zamenja skupino."
+
+#~ msgid "Meta is mapped to the left Win-key."
+#~ msgstr "Tipka Meta je preslikana v levo Win-tipko."
+
+#~ msgid "CapsLock LED shows alternative group."
+#~ msgstr "CapsLock LED prikazuje alternativno skupino."
+
+#~ msgid "NumLock LED shows alternative group."
+#~ msgstr "NumLock LED prikazuje alternativno skupino."
+
+#~ msgid "Left Shift key changes group."
+#~ msgstr "Zamenajva skupine s pritiskom na levo tipko Shift."
+
+#~ msgid "Left Win-key switches group while pressed."
+#~ msgstr "Desna tipka Alt zamenja skupino, če je pritisnjena."
+
+#~ msgid "Menu is Compose."
+#~ msgstr "Tipka Menu je tipka za sestavljanje."
+
+#~ msgid "Both Alt keys together change group."
+#~ msgstr "Obe tipki Alt skupaj zamenjata skupino."
+
+#~ msgid "CapsLock key changes group."
+#~ msgstr "Tipka CapsLock zamenja skupino."
+
+#~ msgid "Swap Control and CapsLock."
+#~ msgstr "Zamenjanj tipki Control in CapsLock."
+
+#~ msgid "Press any of Alt keys to choose 3rd level."
+#~ msgstr "Pritisnite eno od Win-tipk za izbiro tretjega nivoja."
+
+#~ msgid "Right Alt key changes group."
+#~ msgstr "Desna Alt tipka zamenja skupino."
+
+#~ msgid "Shift with numpad keys works as in MS Windows."
+#~ msgstr ""
+#~ "Tipka Shift skupaj s tipkami na numeričnem delu deluje kot v MS Windows."
+
+#~ msgid "Special keys (Ctrl+Alt+<key>) handled in a server."
+#~ msgstr "Posebne tipke (Ctrl+Alt+<key>) se obdelajo v strežniku."
+
+#~ msgid "Hyper is mapped to the Win-keys."
+#~ msgstr "Hyper je preslikan v Win+tipke."
+
+#~ msgid "Alt is mapped to the right Win-key and Super to Menu."
+#~ msgstr "Tipka Meta je preslikana v levo Win-tipko in Super v Menu."
+
+#~ msgid "Super is mapped to the Win-keys (default)."
+#~ msgstr "Super je preslikan v Win+tipke (privzeto)."
+
+#~ msgid "Alt and Meta on the Alt keys (default)."
+#~ msgstr "Alt in Meta na tipkah Alt (privzeto)."
+
+#~ msgid "Add the standard behavior to Menu key."
+#~ msgstr "Dodaj običajno vedenje tipki Menu."
+
+#~ msgid "Alt and Meta are on the Alt keys (default)."
+#~ msgstr "Alt in Meta na tipkah Alt (privzeto)."
+
+#~ msgid "Press Right Control to choose 3rd level."
+#~ msgstr "Pritisnite desno tipko Control za izbiro tretjega nivoja."
+
+#~ msgid "Alt+Shift changes group."
+#~ msgstr "Pritisk na tipki Alt in Shift zamenja skupino."
+
+#~ msgid "Control+Shift changes group."
+#~ msgstr "Pritisk na tipki Control in Shift zamenja skupino."
+
+#~ msgid "CapsLock acts as Shift with locking. Shift cancels CapsLock."
+#~ msgstr ""
+#~ "Tipka CapsLock se vede kot tipka Shift z zaklepanjem. Tipka Shift "
+#~ "izključi CapsLock."
+
+#~ msgid "Use keyboard LED to show alternative group."
+#~ msgstr "Uporabi LED na tipkovnici za prikaz alternativne skupine."
+
+#~ msgid "Press Right Win-key to choose 3rd level."
+#~ msgstr "Pritisnite desno Win-tipko za izbiro tretjega nivoja."
+
+#~ msgid "Press Left Alt key to choose 3rd level."
+#~ msgstr "Pritisnite levo Win-tipko za izbiro tretjega nivoja."
+
+#~ msgid "Meta is mapped to the Win-keys."
+#~ msgstr "Tipka Meta je preslikana v Win-tipke."
+
+#~ msgid "Press Menu key to choose 3rd level."
+#~ msgstr "Pritisnite tipko Menu za izbiro tretjega nivoja."
+
+#~ msgid "Left Ctrl key changes group."
+#~ msgstr "Leva tipka Control zamenja skupino."
+
+#~ msgid "Menu key changes group."
+#~ msgstr "Tipka Menu zamenja skupino."
+
+#~ msgid "Alt+Control changes group."
+#~ msgstr "Pritisk na tipki Alt in Control zamenja skupino."
+
+#~ msgid "Right Win-key switches group while pressed."
+#~ msgstr "Zamenajva skupine s pritiskom na desno Win-tipko."
+
+# GN
+#~ msgid "Guinea"
+#~ msgstr "Gvineja"
+
+#~ msgid "China"
+#~ msgstr "Kitajska"
+
+#~ msgid "Port and Mode"
+#~ msgstr "Vrata in način"
+
+#~ msgid "Electronic Pens"
+#~ msgstr "Električna peresa"
+
+#~ msgid "Activate This Tablet"
+#~ msgstr "Aktiviraj to tableto"
+
+#~ msgid "Tablet: Vendor and Name Selection"
+#~ msgstr "Tableta: izbira proizvajalca in imena"
+
+#~ msgid "Connection Port"
+#~ msgstr "Povezava na vrata"
+
+#~ msgid "Primary Tablet Mode"
+#~ msgstr "Glavni način dela tablete"
+
+#~ msgid "Pen or Eraser Mode"
+#~ msgstr "Način peresa ali radirke"
+
+#~ msgid "Relative"
+#~ msgstr "Relativno"
+
+#~ msgid "Absolute"
+#~ msgstr "Absolutno"
+
+#~ msgid "USB"
+#~ msgstr "USB"
+
+#~ msgid "COM-1 [ /dev/ttyS0 ]"
+#~ msgstr "COM-1 [ /dev/ttyS0 ]"
+
+#~ msgid "COM-2 [ /dev/ttyS1 ]"
+#~ msgstr "COM-2 [ /dev/ttyS1 ]"
+
+#~ msgid "Tools"
+#~ msgstr "Orodja"
+
+#~ msgid "Add Pen"
+#~ msgstr "Dodaj pero"
+
+#~ msgid "Add Eraser"
+#~ msgstr "Dodaj radirko"
+
+#~ msgid "Pen or Eraser Settings"
+#~ msgstr "Nastavitve peresa ali radirke"
+
+#~ msgid "Pen Properties"
+#~ msgstr "Lastnosti peresa"
+
+#~ msgid "Eraser Properties"
+#~ msgstr "Lastnosti radirke"
+
+#~ msgid "Assign a Touchscreen to Display Number %1"
+#~ msgstr "Določi zaslon na dotik na zaslon številka %1"
+
+#~ msgid "Touchscreen: Vendor and Name Selection"
+#~ msgstr "Zaslon na dotik: izbira proizvajalca in imena"
+
+#~ msgid "Activate Password Protection"
+#~ msgstr "Aktiviraj zaščito z geslom"
+
+#~ msgid "<Enter new password>"
+#~ msgstr "<Vpišite novo geslo>"
+
+#~ msgid "<Change password>"
+#~ msgstr "<Spremenite geslo>"
+
+#~ msgid "<Verify password>"
+#~ msgstr "<Ponovno vpišite geslo>"
+
+#~ msgid "Activate HTTP Access"
+#~ msgstr "Aktiviraj HTTP dostop"
+
+#~ msgid "HTTP Port"
+#~ msgstr "HTTP vrata"
+
+#~ msgid ""
+#~ "<b>Software Installation:</b><hr>Some packages are missing. Install the "
+#~ "missing packages now?"
+#~ msgstr ""
+#~ "<b>Namestitev programske opreme:</b><hr>Nekateri paketki manjkajo. \n"
+#~ "Ali želite sedaj namestiti manjkajoče paketke?"
+
+#~ msgid "Package Installation"
+#~ msgstr "Namestitev paketa"
+
+#~ msgid "Importing module"
+#~ msgstr "Uvoz modula"
+
+#~ msgid "SaX2: Importing data..."
+#~ msgstr "SaX2: uvoz podatkov..."
+
+#~ msgid "Initialize cache..."
+#~ msgstr "Inicializacija medpomnilnika..."
+
+#~ msgid ""
+#~ "<b>Saving Configuration Failed</b><hr>The following report has been "
+#~ "created:"
+#~ msgstr ""
+#~ "<b>Shranitev nastavitev ni uspela</b><hr>Izdelano je bilo naslednje "
+#~ "poročilo:"
+
+#~ msgid ""
+#~ "<b>Configuration Saved</b><hr>Your modifications will take effect the "
+#~ "next time the graphics system is restarted. Exit SaX2 now?"
+#~ msgstr ""
+#~ "<b>Prilagoditev shranjena</b><hr>Vaše spremembe bodo upoštevane ob "
+#~ "naslednjem zagonu grafičnega sistema. Želite zaključiti z uporabo "
+#~ "programa SaX2?"
+
+#~ msgid ""
+#~ "<b>Testing Configuration Failed</b><hr>For further information, refer to "
+#~ "the file <tt>/var/log/Xorg.99.log</tt>. The following report has been "
+#~ "created from the calling instance:"
+#~ msgstr ""
+#~ "<b>Testna prilagoditev ni uspela</b><hr>Za dodatne informacije poglejte "
+#~ "vsebino datoteke <tt>/var/log/Xorg.99.log</tt>. Izdelano je bilo "
+#~ "naslednje poročilo:"
+
+#~ msgid "Arabic"
+#~ msgstr "Arabski"
+
+# NP
+#~ msgid "Nepal"
+#~ msgstr "Nepal"
+
+#~ msgid "Iraq"
+#~ msgstr "Irak"
+
+# NG
+#~ msgid "Nigeria"
+#~ msgstr "Nigerija"
+
+#~ msgid "Estonia"
+#~ msgstr "Estonija"
+
+# MM
+#~ msgid "Myanmar"
+#~ msgstr "Mjanmar"
+
+#~ msgid "Germany"
+#~ msgstr "Nemčija"
+
+# MN
+#~ msgid "Mongolia"
+#~ msgstr "Mongolija"
+
+# BT
+#~ msgid "Bhutan"
+#~ msgstr "Butan"
+
+#~ msgid "Bangladesh"
+#~ msgstr "Bangladeš"
+
+#~ msgid "Belgium"
+#~ msgstr "Belgija"
+
+#~ msgid "Finland"
+#~ msgstr "Finska"
+
+#~ msgid "Israel"
+#~ msgstr "Izrael"
+
+#~ msgid "Portugal"
+#~ msgstr "Portugalska"
+
+#~ msgid "Korean"
+#~ msgstr "Korejščina"
+
+#~ msgid "Uzbekistan"
+#~ msgstr "Uzbekistan"
+
+#~ msgid "Bulgaria"
+#~ msgstr "Bolgarija"
+
+#~ msgid "Thailand"
+#~ msgstr "Tajska"
+
+#~ msgid "India"
+#~ msgstr "Indija"
+
+# SN
+#~ msgid "Bengali"
+#~ msgstr "Bengali"
+
+#~ msgid "Switzerland"
+#~ msgstr "Švica"
+
+#~ msgid "Japan"
+#~ msgstr "Japonska"
+
+# SY
+#~ msgid "Syria"
+#~ msgstr "Sirija"
+
+#~ msgid "Belarus"
+#~ msgstr "Belorusija"
+
+#~ msgid "Tajikistan"
+#~ msgstr "Tadžikistan"
+
+#~ msgid "Denmark"
+#~ msgstr "Danska"
+
+#~ msgid "Slovenia"
+#~ msgstr "Slovenija"
+
+#~ msgid "Malta"
+#~ msgstr "Malta"
+
+# AZ
+#~ msgid "Azerbaijan"
+#~ msgstr "Azerbajdžan"
+
+#~ msgid "Lithuania"
+#~ msgstr "Litva"
+
+# VN
+# fuzzy
+#~ msgid "Vietnam"
+#~ msgstr "Vietnam"
+
+#~ msgid "Faroe Islands"
+#~ msgstr "Farerski otoki"
+
+#~ msgid "South Africa"
+#~ msgstr "Južna Afrika"
+
+#~ msgid "Slovakia"
+#~ msgstr "Slovaška"
+
+# MV
+# fuzzy
+#~ msgid "Maldives"
+#~ msgstr "Malta"
+
+#~ msgid "Iceland"
+#~ msgstr "Islandija"
+
+#~ msgid "Croatia"
+#~ msgstr "Hrvaška"
+
+#~ msgid "Latvia"
+#~ msgstr "Latvija"
+
+#~ msgid "Albania"
+#~ msgstr "Albanija"
+
+#~ msgid "Italy"
+#~ msgstr "Italija"
+
+#~ msgid "Greece"
+#~ msgstr "Grčija"
+
+#~ msgid "United Kingdom"
+#~ msgstr "Velika Britanija"
+
+# AM
+#~ msgid "Armenia"
+#~ msgstr "Armenija"
+
+#~ msgid "Pakistan"
+#~ msgstr "Pakistan"
+
+#~ msgid "Poland"
+#~ msgstr "Poljska"
+
+# KG
+# fuzzy
+#~ msgid "Kyrgyzstan"
+#~ msgstr "Kirgizstan"
+
+#~ msgid "Ireland"
+#~ msgstr "Irska"
+
+#~ msgid "Hungary"
+#~ msgstr "Madžarska"
+
+# KH
+#~ msgid "Cambodia"
+#~ msgstr "Kambodža"
+
+#~ msgid "Spain"
+#~ msgstr "Španija"
+
+#~ msgid "Ukraine"
+#~ msgstr "Ukrajina"
+
+#~ msgid "Romania"
+#~ msgstr "Romunija"
+
+# Shouldn't this be "Kazakhstan"?
+# KZ
+# fuzzy
+#~ msgid "Kazakhstan"
+#~ msgstr "Kazahstan"
+
+#~ msgid "Georgia"
+#~ msgstr "Gruzija"
+
+#~ msgid "Turkish"
+#~ msgstr "Turška"
+
+#~ msgid "Netherlands"
+#~ msgstr "Nizozemska"
+
+#~ msgid "Macedonia"
+#~ msgstr "Makedonija"
+
+# LK
+#~ msgid "Sri Lanka"
+#~ msgstr "Sri Lanka"
+
+# BA
+#~ msgid "Bosnia and Herzegovina"
+#~ msgstr "Bosna in Hercegovina"
+
+# BR
+#~ msgid "Brazil"
+#~ msgstr "Brazilija"
+
+# GH
+#~ msgid "Ghana"
+#~ msgstr "Gana"
+
+# AD
+#~ msgid "Andorra"
+#~ msgstr "Andorra"
+
+# AF
+#~ msgid "Afghanistan"
+#~ msgstr "Afganistan"
+
+#~ msgid "Esperanto"
+#~ msgstr "Esperanto"
+
+#~ msgid "Turkey"
+#~ msgstr "Turčija"
+
+#~ msgid "&Step size"
+#~ msgstr "Veliko&st koraka"
+
+#~ msgid "Small"
+#~ msgstr "Majhen"
+
+#~ msgid "Normal"
+#~ msgstr "Navaden"
+
+#~ msgid "Big"
+#~ msgstr "Velik"
+
+#~ msgid "Huge"
+#~ msgstr "Ogromen"
+
+#~ msgid "&Next Screen"
+#~ msgstr "&Naslednji zaslon"
+
+#~ msgid "S&ave"
+#~ msgstr "Shr&ani"
+
+#~ msgid "Change &Position"
+#~ msgstr "Sprememba &položaja"
+
+#~ msgid "C&hange Size"
+#~ msgstr "Sprememba &velikosti"
+
+#~ msgid "Screen"
+#~ msgstr "Zaslon"
+
+#~ msgid "No video mode tuning available"
+#~ msgstr "Prilagoditev video načina ni na voljo"
+
+#~ msgid "Configuration on display"
+#~ msgstr "Prilagoditev na zaslonu"
+
+#~ msgid "Idle timer..."
+#~ msgstr "Idle timer..."
+
+#~ msgid "openSUSE.org"
+#~ msgstr "openSUSE.org"
+
+#~ msgid "Connect and Communicate"
+#~ msgstr "Povežite se s svetovnim spletom!"
+
+#~ msgid "Graphics, Graphics, Graphics"
+#~ msgstr "Grafika, grafika, grafika"
+
+#~ msgid "Computing On-the-Go"
+#~ msgstr "Računalništvo na poti"
+
+#~ msgid "Novell and Linux"
+#~ msgstr "Novell in Linux"
+
+#~ msgid "Resource"
+#~ msgstr "Vir"
+
+#~ msgid "Resource Group Details"
+#~ msgstr "Podrobnosti skupine vira"
+
+#~ msgid "Resource Group"
+#~ msgstr "Skupina vira"
+
+#~ msgid "Modified Resources"
+#~ msgstr "Spremenjeni viri"
+
+#~ msgid "Selected Resource"
+#~ msgstr "Izbrani viri"
+
+#~ msgid "All Resources"
+#~ msgstr "Vsi viri"
+
+#~ msgid "Save changes"
+#~ msgstr "Shrani spremembe"
+
+#~ msgid "Drop changes"
+#~ msgstr "Opusti spremembe"
+
+#~ msgid "Save to all profiles"
+#~ msgstr "Shrani v vse profile"
+
+#~ msgid "Patch all profiles"
+#~ msgstr "Popravi vse profile"
+
+#~ msgid "&Show changes"
+#~ msgstr "Prikaži &spremembe"
+
+#~ msgid "Alt+S"
+#~ msgstr "Alt+S"
+
+#~ msgid "save"
+#~ msgstr "shrani"
+
+#~ msgid "all"
+#~ msgstr "vse"
+
+#~ msgid "patch"
+#~ msgstr "popravi"
+
+#~ msgid "drop"
+#~ msgstr "opusti"
+
+#~ msgid "apply"
+#~ msgstr "uveljavi"
+
+#~ msgid "Resource Changes"
+#~ msgstr "Spremembe virov"
+
+#~ msgid "Edit profile"
+#~ msgstr "Uredi profil"
+
+#~ msgid "Switch scripts"
+#~ msgstr "Skripta za zamenjavo"
+
+#~ msgid "Prestart"
+#~ msgstr "Pred zagonom"
+
+#~ msgid "Poststart"
+#~ msgstr "Po zagonu"
+
+#~ msgid "Prestop"
+#~ msgstr "Pred zaustavitvijo"
+
+#~ msgid "Poststop"
+#~ msgstr "Po zaustavitvi"
+
+#~ msgid "clear"
+#~ msgstr "počisti"
+
+#~ msgid "Profile settings"
+#~ msgstr "Nastavitve profila"
+
+#~ msgid "&OK"
+#~ msgstr "V &redu"
+
+#~ msgid "Choose prestart script"
+#~ msgstr "Izberite skripto za pred zagonom"
+
+#~ msgid "Choose poststart script"
+#~ msgstr "Izberite skripto za po zagonu"
+
+#~ msgid "Choose prestop script"
+#~ msgstr "Izberite skrito za pred zaustavitvijo"
+
+#~ msgid "Choose poststop script"
+#~ msgstr "Izberite skripto za po zaustavitvi"
+
+#~ msgid "Root privileges are required to use this program."
+#~ msgstr "Za uporabo program se zahteva root privilegij."
+
+#~ msgid "You are not authorized to use this program."
+#~ msgstr "Nimate dovoljenj za uporabo programa."
+
+#~ msgid "Initializing"
+#~ msgstr "Prva priprava"
+
+#~ msgid "Initialize SCPM"
+#~ msgstr "Pripravi SCPM"
+
+#~ msgid "Run YaST"
+#~ msgstr "Zaženi YaST"
+
+#~ msgid "Reinitialize SCPM"
+#~ msgstr "Ponovno pripravi SCPM"
+
+#~ msgid ""
+#~ "SCPM has detected a changed system installation and must be "
+#~ "reinitialized. This means that the data saved in your existing profiles "
+#~ "may be out of date. If you reinitialize SCPM now, your profiles will be "
+#~ "lost. You can also try to update the data saved in your profiles. Read "
+#~ "the SCPM info page for more information about this.\n"
+#~ "Renitialize SCPM now?"
+#~ msgstr ""
+#~ "SCPM je zaznal spremenjeno namestitev sistem in mora biti ponovno "
+#~ "pripravljen (inicializiran). To pomeni, da so lahko podatki v vaših "
+#~ "profilih zastareli (zapisani s starejšem formatu). Če sedaj ponovno "
+#~ "pripravite SCPM, se bodo vsi vaši profili izgubili. Lahko poizkusite "
+#~ "posodobiti shranjene podatke v vaših profilih. Več informacij je na voljo "
+#~ "v informacijskih straneh ua SCPM.\n"
+#~ "Želite sedaj ponovno pripraviti SCPM?"
+
+#~ msgid "Recover SCPM"
+#~ msgstr "Obnovi SCPM"
+
+#~ msgid ""
+#~ "SCPM needs recovery\n"
+#~ "SCPM is currently locked and needs recovery. This is usually the case "
+#~ "after an unexpected abort of an SCPM operation, for example, caused by a "
+#~ "critical error. SCPM can be recovered by replaying the command executed "
+#~ "before the abort. This basically completes the previous command. You can "
+#~ "also rollback the previous command. This leads to a system status equal "
+#~ "or at least similar to the status before the aborted operation. If in "
+#~ "doubt, choose 'Replay'."
+#~ msgstr ""
+#~ "SCPM potrenuje obnovo\n"
+#~ "SCPM je trenutno zaklenjen in potrebuje obnovo. To je navadno posledica "
+#~ "nenadne zaključitve SCPM operacije; npr. zaradi kritične napake. SCPM se "
+#~ "lahko obnovi tako, da se ponovno poženejo ukazi pred nenadnega zaključka "
+#~ "operacije. V osnovi to konča prejšno operacijo, lahko pa tudi prejšno "
+#~ "operaciji povrnete nazaj (rollback). S tem povrnete sistem na stanje "
+#~ "enako (ali vsaj najbližje temu stanju), kot je bilo pred zagonom "
+#~ "operacije. Če ste v dvomih, izberite 'Ponovi'."
+
+#~ msgid "Replay"
+#~ msgstr "Ponovi"
+
+#~ msgid "Rollback"
+#~ msgstr "Povrni nazaj"
+
+#~ msgid "Initialization failed"
+#~ msgstr "Priprava ni uspela"
+
+#~ msgid "Saving database"
+#~ msgstr "Shranjevanje zbirke podatkov"
+
+#~ msgid "Active"
+#~ msgstr "Aktivno"
+
+#~ msgid "SCPM Universal Management Front-End"
+#~ msgstr "Uporabniški vmesnik za SCPM upravljalnik"
+
+#~ msgid "Available profiles"
+#~ msgstr "Profili na voljo"
+
+#~ msgid "Co&py"
+#~ msgstr "Ko&piraj"
+
+#~ msgid "Create a new profile by copying the selected one"
+#~ msgstr "Izdelaj nov profil s kopiranjem izbranega profila."
+
+#~ msgid "Ctrl+P"
+#~ msgstr "Ctrl+P"
+
+#~ msgid "Quit"
+#~ msgstr "Izhod"
+
+#~ msgid "Contents"
+#~ msgstr "Vsebina"
+
+#~ msgid "&Contents..."
+#~ msgstr "&Vsebina..."
+
+#~ msgid "&Index..."
+#~ msgstr "&Kazalo..."
+
+#~ msgid "About"
+#~ msgstr "O programu"
+
+#~ msgid "&About"
+#~ msgstr "&O programu"
+
+#~ msgid "Edit selected profile properties"
+#~ msgstr "Uredi izbrane lastnosti profila"
+
+#~ msgid "Ctrl+E"
+#~ msgstr "Ctrl+U"
+
+#~ msgid "Create a new profile"
+#~ msgstr "Ustvari nov profil"
+
+#~ msgid "Ctrl+A"
+#~ msgstr "Ctrl+A"
+
+#~ msgid "Remove selected profile"
+#~ msgstr "Odstrani izbran profil"
+
+#~ msgid "&Switch"
+#~ msgstr "Pr&eklopi"
+
+#~ msgid "Switch to selected profile"
+#~ msgstr "Preklopi v izbran profil"
+
+#~ msgid "Disable"
+#~ msgstr "Onemogoči"
+
+#~ msgid "Reinitialize"
+#~ msgstr "Ponovno pripravi"
+
+#~ msgid "Close Progress Window automatically"
+#~ msgstr "Samodejni zapri okno prikaza napredka"
+
+#~ msgid "Show Progress Messages"
+#~ msgstr "Prikaži sporočila napredka"
+
+#~ msgid "Always show Switch Window"
+#~ msgstr "Vedno prikaži okno preklopa"
+
+#~ msgid "&Profiles"
+#~ msgstr "&Profili"
+
+#~ msgid "&SCPM"
+#~ msgstr "&SCPM"
+
+#~ msgid "&Options"
+#~ msgstr "M&ožnosti"
+
+#~ msgid "About SUMF"
+#~ msgstr "O SUMF"
+
+#~ msgid ""
+#~ "Copyright 2005 SUSE LINUX Products GmbH\n"
+#~ "Released under the terms of GNU General Public License"
+#~ msgstr ""
+#~ "Pravice 2005 SUSE LINUX Products GmbH\n"
+#~ "Izdano v skladu s pogoji GNU General Public License"
+
+#~ msgid "SCPM is already disabled."
+#~ msgstr "SCPM je že onemogočen."
+
+#~ msgid "Name of the new profile"
+#~ msgstr "Ime novega profila"
+
+#~ msgid "Should the new profile be the active one?"
+#~ msgstr "Naj bo nov profil tudi aktiven?"
+
+#~ msgid "Select the profile to edit first."
+#~ msgstr "Pred urejanjem, najprej izberite profil."
+
+#~ msgid "Select the profile to copy first."
+#~ msgstr "Pred kopiranjem, najprej izberite profil."
+
+#~ msgid "Copy profile "
+#~ msgstr "Kopiraj profil "
+
+#~ msgid "Select the profile to remove first."
+#~ msgstr "Pred brisanjem, najprej izberite profil."
+
+#~ msgid "Select the profile to switch to first."
+#~ msgstr "Pred preklopom, najprej izberite profil."
+
+#~ msgid ""
+#~ "All profiles will be lost.\n"
+#~ "Really discard the database and reinitialize SCPM?\n"
+#~ msgstr ""
+#~ "Vsi profili bodo izgubljeni.\n"
+#~ "Resnično želite počistiti zbirko in povnovni pripraviti SCPM?\n"
+
+#~ msgid "Error: SCPM is locked"
+#~ msgstr "Napaka: SCPM je zaklenjen"
+
+#~ msgid "Error:"
+#~ msgstr "Napaka:"
+
+#~ msgid "Progress"
+#~ msgstr "Napredek"
+
+#~ msgid "Switching Profile"
+#~ msgstr "Preklop profila"
+
+#~ msgid "Active profile"
+#~ msgstr "Aktivni profil"
+
+#~ msgid "Destination profile"
+#~ msgstr "Ciljni profil"
+
+#~ msgid "Modified resources"
+#~ msgstr "Spremenjen profil"
+
+#~ msgid "Drop &changes"
+#~ msgstr "&Zavrzi spremembe"
+
+#~ msgid "C&ancel"
+#~ msgstr "Z&avrzi"
+
+#~ msgid "Alt+A"
+#~ msgstr "Alt+A"
+
+#~ msgid "mixed"
+#~ msgstr "mešano"
+
+#~ msgid "SUSEPlugger"
+#~ msgstr "SUSEPlugger"
+
+# workflow: "Software-Auswahl"
+# -ke-
+#~ msgid "SUSE Hardware Detection"
+#~ msgstr "SUSE zaznavanje strojne opreme"
+
+#~ msgid "Configure scanner?"
+#~ msgstr "Nastavitev optičnega bralnika (scannerja)?"
+
+#~ msgid "New Hardware Found"
+#~ msgstr "Zazana je nova strojna oprema"
+
+#~ msgid "Network Interface"
+#~ msgstr "Omrežni vmesnik"
+
+#~ msgid "Printer"
+#~ msgstr "Tiskalnik"
+
+#~ msgid "Scanner"
+#~ msgstr "Optični bralnik (scanner)"
+
+#~ msgid "Modem"
+#~ msgstr "Modem"
+
+#~ msgid "Joystick"
+#~ msgstr "Igralna palica"
+
+#~ msgid "Chipcard"
+#~ msgstr "Kartica s čipom"
+
+#~ msgid "Sound Device"
+#~ msgstr "Zvočna naprava"
+
+#~ msgid "TV Card"
+#~ msgstr "TV kartica"
+
+#~ msgid "ISDN Controller"
+#~ msgstr "ISDN Krmilnik"
+
+#~ msgid "Configure the %1?"
+#~ msgstr "Želite prilagoditi %1?"
+
+#~ msgid "Configure the %1 \"%2\"?"
+#~ msgstr "Želite prilagoditi %1 \"%2\"?"
+
+#~ msgid ""
+#~ "Your monitor did not report its X and Y Size. This might cause display "
+#~ "problems like unreadable fonts.\n"
+#~ "Configure your monitor geometry manually?"
+#~ msgstr ""
+#~ "Vaš monitor ni sporočil svojih X in Y dimenzij, kar lahko prinese težave "
+#~ "v obliki težko berljivih pisav.\n"
+#~ "Ali želite ročno nastaviti geometrijo vašega monitorja?"
+
+#~ msgid "Country or region:"
+#~ msgstr "Država ali področje:"
+
+#~ msgid ""
+#~ "Here you can choose your country or region. The settings for languages, "
+#~ "numbers etc. will automatically switch to the corresponding values."
+#~ msgstr ""
+#~ "Tukaj lahko izberete državo ali področje. Nastavitev jezika, številk, "
+#~ "datuma, itd. se bo samodejno nastavila na ustrezne vrednosti."
+
+#~ msgid ""
+#~ "<h1>Country/Region & Language</h1>\n"
+#~ "<p>From here you can configure language, numeric, and time \n"
+#~ "settings for your particular region. In most cases it will be \n"
+#~ "sufficient to choose the country you live in. For instance KDE \n"
+#~ "will automatically choose \"German\" as language if you choose \n"
+#~ "\"Germany\" from the list. It will also change the time format \n"
+#~ "to use 24 hours and and use comma as decimal separator.</p>\n"
+#~ msgstr ""
+#~ "<h1>Država/področje in jezik</h1>\n"
+#~ "<p>Tukaj lahko nastavite jezik, izpis številk in datuma/časa\n"
+#~ "za vašo državo/področje. V večini primerov je dovolj izbrati \n"
+#~ "državo, v kateri živite. Na primer, KDE bo samodejno izbral \n"
+#~ "\"German\" kot jezik, če kot državi s seznama izberete \n"
+#~ "\"Germany\". Ustrezno bo tudi stremenil obliko izpisa časa, da bo \n"
+#~ "uporabil 24 urni način in uporabo vejice pri izpisu decimalnih števil .</"
+#~ "p>\n"
+
+#~ msgid ""
+#~ "This is where you live. KDE will use the defaults for this country or "
+#~ "region."
+#~ msgstr ""
+#~ "Tukaj živite. KDE bo uporabil privzete nastavitve za to državo ali "
+#~ "področje."
+
+#~ msgid "XFree theme %1 - incomplete for KDE"
+#~ msgstr "XFree tema %1 - nepopolna za KDE"
+
+#~ msgid "&Language"
+#~ msgstr "&Jezik"
+
+#~ msgid "&System"
+#~ msgstr "&Sistem"
+
+#~ msgid "&Disconnect"
+#~ msgstr "&Odklop"
+
+#~ msgid "Power O&ff"
+#~ msgstr "&Izključitev"
+
+#~ msgid "S&uspend"
+#~ msgstr "Za&ustavitev"
+
+#~ msgid "&Reboot"
+#~ msgstr "&Ponoven zagon"
+
+#~ msgid "Caps Lock is enabled."
+#~ msgstr "Vključitev Caps Lock"
+
+#~ msgid "User %s will log in in %d seconds"
+#~ msgstr "Uporabnik %s bo prijavljen v %d sekundah."
+
+#~ msgid "Press '/' to search..."
+#~ msgstr "Za iskanje pritisnite '/'..."
+
+#~ msgid "Suspend failed"
+#~ msgstr "Zaustavitev ni uspela"
+
+#~ msgid "Abkhazian"
+#~ msgstr "Abkhazijski"
+
+#~ msgid "Afar"
+#~ msgstr "Afar"
+
+#~ msgid "Afrikaans"
+#~ msgstr "Afrikanščina"
+
+# KY
+#~ msgid "Aland Islands"
+#~ msgstr "Aland Islands"
+
+#~ msgid "Albanian"
+#~ msgstr "Albanščina"
+
+#~ msgid "Algeria"
+#~ msgstr "Alžirija"
+
+# AS
+#~ msgid "American Samoa"
+#~ msgstr "Ameriška Samoa"
+
+#~ msgid "Amharic"
+#~ msgstr "Amharic"
+
+# AO
+#~ msgid "Angola"
+#~ msgstr "Angola"
+
+# AI
+#~ msgid "Anguilla"
+#~ msgstr "Angvila"
+
+# AQ
+#~ msgid "Antarctica"
+#~ msgstr "Antarktika"
+
+# AG
+#~ msgid "Antigua and Barbuda"
+#~ msgstr "Antigva in Barbuda"
+
+#~ msgid "Argentina"
+#~ msgstr "Argentina"
+
+# AM
+#~ msgid "Armenian"
+#~ msgstr "Armenski"
+
+# AW
+#~ msgid "Aruba"
+#~ msgstr "Aruba"
+
+#~ msgid "Assamese"
+#~ msgstr "Assamski"
+
+#~ msgid "Australia"
+#~ msgstr "Avstralija"
+
+#~ msgid "Austria"
+#~ msgstr "Avstrija"
+
+#~ msgid "Avestan"
+#~ msgstr "Avestan"
+
+# MM
+#~ msgid "Aymara"
+#~ msgstr "Aymara"
+
+#~ msgid "Azerbaijani"
+#~ msgstr "Azerbaižanščina"
+
+# BS
+#~ msgid "Bahamas"
+#~ msgstr "Bahami"
+
+#~ msgid "Bahrain"
+#~ msgstr "Bahrein"
+
+#~ msgid "Barbados"
+#~ msgstr "Barbados"
+
+#~ msgid "Bashkir"
+#~ msgstr "Bashkir"
+
+#~ msgid "Basque"
+#~ msgstr "Baskovščina"
+
+#~ msgid "Belarusian"
+#~ msgstr "Belorusščina"
+
+# BZ
+#~ msgid "Belize"
+#~ msgstr "Belize"
+
+# BJ
+#~ msgid "Benin"
+#~ msgstr "Benin"
+
+#~ msgid "Bermuda"
+#~ msgstr "Bermuda"
+
+#~ msgid "Bihari"
+#~ msgstr "Bihari"
+
+#~ msgid "Bislama"
+#~ msgstr "Bislama"
+
+#~ msgid "Bolivia"
+#~ msgstr "Bolivija"
+
+# BJ
+#~ msgid "Bosnian"
+#~ msgstr "Bosanski"
+
+#~ msgid "Botswana"
+#~ msgstr "Botsvana"
+
+# BV
+#~ msgid "Bouvet Island"
+#~ msgstr "Bouvetov otok"
+
+#~ msgid "Breton"
+#~ msgstr "Bretonščina"
+
+# IO
+#~ msgid "British Indian Ocean Territory"
+#~ msgstr "Britansko ozemlje v Indijskem oceanu"
+
+# VI
+# fuzzy
+#~ msgid "British Virgin Islands"
+#~ msgstr "Britanski Deviški otoki"
+
+# BN
+#~ msgid "Brunei Darussalam"
+#~ msgstr "Brunej"
+
+#~ msgid "Bulgarian"
+#~ msgstr "Bulgarščina"
+
+# BF
+#~ msgid "Burkina Faso"
+#~ msgstr "Burkina Faso"
+
+# BI
+#~ msgid "Burundi"
+#~ msgstr "Burundi"
+
+# CM
+#~ msgid "Cameroon"
+#~ msgstr "Kamerun"
+
+#~ msgid "Canada"
+#~ msgstr "Kanada"
+
+# CV
+#~ msgid "Cape Verde"
+#~ msgstr "Zelenortski otoki"
+
+#~ msgid "Catalan"
+#~ msgstr "Katalanščina"
+
+# KY
+#~ msgid "Cayman Islands"
+#~ msgstr "Kajmanski otoki"
+
+# TD
+#~ msgid "Chad"
+#~ msgstr "Čad"
+
+# KM
+#~ msgid "Chamorro"
+#~ msgstr "Komorski"
+
+#~ msgid "Chechen"
+#~ msgstr "Češki"
+
+#~ msgid "Chile"
+#~ msgstr "Čile"
+
+#~ msgid "Chinese"
+#~ msgstr "Kitajščina"
+
+# CX
+#~ msgid "Christmas Island"
+#~ msgstr "Božični otok"
+
+#~ msgid "Church Slavic"
+#~ msgstr "Cerkveno Slovanski"
+
+#~ msgid "Chuvash"
+#~ msgstr "Chuvash"
+
+# CC
+#~ msgid "Cocos (Keeling) Islands"
+#~ msgstr "Kokosovi otoki"
+
+#~ msgid "Colombia"
+#~ msgstr "Kolumbija"
+
+# KM
+#~ msgid "Comoros"
+#~ msgstr "Komori"
+
+# CG
+#~ msgid "Congo"
+#~ msgstr "Kongo"
+
+# CK
+#~ msgid "Cook Islands"
+#~ msgstr "Cookovi otoki"
+
+#~ msgid "Cornish"
+#~ msgstr "Kornščina"
+
+#~ msgid "Corsican"
+#~ msgstr "Korziški"
+
+#~ msgid "Costa Rica"
+#~ msgstr "Kostarika"
+
+# CI
+# fuzzy
+#~ msgid "Cote D'Ivoire"
+#~ msgstr "Slonokoščena obala"
+
+#~ msgid "Croatian"
+#~ msgstr "Hrvaška"
+
+# CU
+#~ msgid "Cuba"
+#~ msgstr "Kuba"
+
+# CY
+#~ msgid "Cyprus"
+#~ msgstr "Ciper"
+
+#~ msgid "Czech"
+#~ msgstr "Češka"
+
+#~ msgid "Czech Republic"
+#~ msgstr "Češka republika"
+
+#~ msgid "Danish"
+#~ msgstr "Danska"
+
+#~ msgid "Djibouti"
+#~ msgstr "Dschibuti"
+
+#~ msgid "Dominica"
+#~ msgstr "Dominika"
+
+#~ msgid "Dominican Republic"
+#~ msgstr "Dominikanska republika"
+
+#~ msgid "Dutch"
+#~ msgstr "Nizozemska"
+
+# TO
+#~ msgid "Dzongkha"
+#~ msgstr "Dzongkha"
+
+#~ msgid "East Timor"
+#~ msgstr "Vzhodni Timor"
+
+#~ msgid "Ecuador"
+#~ msgstr "Ekvador"
+
+#~ msgid "Egypt"
+#~ msgstr "Egipt"
+
+#~ msgid "El Salvador"
+#~ msgstr "Salvador"
+
+#~ msgid "English"
+#~ msgstr "Angleščina"
+
+# GQ
+#~ msgid "Equatorial Guinea"
+#~ msgstr "Ekvatorialna Gvineja"
+
+# ER
+#~ msgid "Eritrea"
+#~ msgstr "Eritreja"
+
+#~ msgid "Estonian"
+#~ msgstr "Estonska"
+
+# FK
+#~ msgid "Falkland Islands (Malvinas)"
+#~ msgstr "Falklandski otoki"
+
+#~ msgid "Faroese"
+#~ msgstr "Faerščina"
+
+#~ msgid "Federated States of Micronesia"
+#~ msgstr "Federalne države Mikronezija"
+
+#~ msgid "Fiji"
+#~ msgstr "Fidji"
+
+#~ msgid "Fijian"
+#~ msgstr "Fijian"
+
+#~ msgid "France"
+#~ msgstr "Francija"
+
+#~ msgid "French"
+#~ msgstr "Francoska"
+
+# Shouldn't this be French Guyane?
+# GF
+# fuzzy
+#~ msgid "French Guiana"
+#~ msgstr "Francoska Gvineja"
+
+# PF
+#~ msgid "French Polynesia"
+#~ msgstr "Francoska Polinezija"
+
+# TF
+# fuzzy
+#~ msgid "French Southern Territories"
+#~ msgstr "Francoska južna ozemlja"
+
+#~ msgid "Frisian"
+#~ msgstr "Frizijski"
+
+# GA
+#~ msgid "Gabon"
+#~ msgstr "Gabon"
+
+# GM
+#~ msgid "Gambia"
+#~ msgstr "Gambija"
+
+#~ msgid "Georgian"
+#~ msgstr "Gruzijski"
+
+#~ msgid "German"
+#~ msgstr "Nemška"
+
+#~ msgid "Gibraltar"
+#~ msgstr "Gibraltar"
+
+#~ msgid "Greenland"
+#~ msgstr "Grenlandija"
+
+#~ msgid "Grenada"
+#~ msgstr "Grenada"
+
+#~ msgid "Guadeloupe"
+#~ msgstr "Guadeloupe"
+
+#~ msgid "Guam"
+#~ msgstr "Guam"
+
+#~ msgid "Guarani"
+#~ msgstr "Guarani"
+
+#~ msgid "Guatemala"
+#~ msgstr "Gvatemala"
+
+# GW
+#~ msgid "Guinea-Bissau"
+#~ msgstr "Gvineja Bissau"
+
+#~ msgid "Gujarati"
+#~ msgstr "Gujarati"
+
+# GY
+#~ msgid "Guyana"
+#~ msgstr "Gvajana"
+
+# HT
+#~ msgid "Haiti"
+#~ msgstr "Haiti"
+
+#~ msgid "Hausa"
+#~ msgstr "Hausa"
+
+# HM
+# fuzzy
+#~ msgid "Heard Island and McDonald Islands"
+#~ msgstr "Heardov otok in McDonaldov otok"
+
+#~ msgid "Hebrew"
+#~ msgstr "Hebrejski"
+
+#~ msgid "Herero"
+#~ msgstr "Herero"
+
+#~ msgid "Hindi"
+#~ msgstr "Hindi"
+
+# VA
+# fuzzy
+#~ msgid "Holy See (Vatican City State)"
+#~ msgstr "Vatikanska država (Sveti sedež)"
+
+#~ msgid "Honduras"
+#~ msgstr "Honduras"
+
+#~ msgid "Hong Kong"
+#~ msgstr "Hong Kong"
+
+#~ msgid "Hungarian"
+#~ msgstr "Madžarska"
+
+#~ msgid "Icelandic"
+#~ msgstr "Islandska"
+
+#~ msgid "Indonesia"
+#~ msgstr "Indonezija"
+
+#~ msgid "Indonesian"
+#~ msgstr "Indonezijščina"
+
+#~ msgid "Interlingue"
+#~ msgstr "Medzejični"
+
+#~ msgid "Inuktitut"
+#~ msgstr "Inuktitut"
+
+#~ msgid "Inupiaq"
+#~ msgstr "Inupiaq"
+
+# IR
+#~ msgid "Iran"
+#~ msgstr "Iran"
+
+#~ msgid "Irish"
+#~ msgstr "Irščina"
+
+#~ msgid "Italian"
+#~ msgstr "Italijanska"
+
+#~ msgid "Jamaica"
+#~ msgstr "Jamajka"
+
+#~ msgid "Japanese"
+#~ msgstr "Japonska"
+
+#~ msgid "Javanese"
+#~ msgstr "Javanski"
+
+#~ msgid "Jordan"
+#~ msgstr "Jordanija"
+
+#~ msgid "Kalaallisut"
+#~ msgstr "Kalaallisut"
+
+#~ msgid "Kannada"
+#~ msgstr "Kanada"
+
+#~ msgid "Kashmiri"
+#~ msgstr "Kašmir"
+
+# Shouldn't this be "Kazakhstan"?
+# KZ
+# fuzzy
+#~ msgid "Kazakh"
+#~ msgstr "Kazaški"
+
+# KE
+#~ msgid "Kenya"
+#~ msgstr "Kenija"
+
+#~ msgid "Khmer"
+#~ msgstr "Khmer"
+
+#~ msgid "Kikuyu"
+#~ msgstr "Kikuyu"
+
+#~ msgid "Kirghiz"
+#~ msgstr "Kirghiz"
+
+# KI
+#~ msgid "Kiribati"
+#~ msgstr "Kiribati"
+
+#~ msgid "Komi"
+#~ msgstr "Komi"
+
+#~ msgid "Kuanyama"
+#~ msgstr "Kuanyama"
+
+#~ msgid "Kurdish"
+#~ msgstr "Kurdsko"
+
+#~ msgid "Kuwait"
+#~ msgstr "Kuvajt"
+
+# CD
+# fuzzy
+#~ msgid "Lao People's Democratic Republic"
+#~ msgstr "Lao, ljudska demokratična republika"
+
+#~ msgid "Latvian"
+#~ msgstr "Latvijščina"
+
+#~ msgid "Lebanon"
+#~ msgstr "Libanon"
+
+# LS
+#~ msgid "Lesotho"
+#~ msgstr "Lesoto"
+
+# LR
+#~ msgid "Liberia"
+#~ msgstr "Liberija"
+
+# LY
+#~ msgid "Libya"
+#~ msgstr "Libija"
+
+#~ msgid "Liechtenstein"
+#~ msgstr "Liechtenstein"
+
+#~ msgid "Lithuanian"
+#~ msgstr "Litvanska"
+
+#~ msgid "Luxembourg"
+#~ msgstr "Luksemburg"
+
+#~ msgid "Macao"
+#~ msgstr "Macao"
+
+#~ msgid "Macedonian"
+#~ msgstr "Makedonščina"
+
+# MG
+#~ msgid "Madagascar"
+#~ msgstr "Madagaskar"
+
+# MW
+#~ msgid "Malawi"
+#~ msgstr "Malavi"
+
+#~ msgid "Malaysia"
+#~ msgstr "Malezija"
+
+# ML
+#~ msgid "Mali"
+#~ msgstr "Mali"
+
+#~ msgid "Manx"
+#~ msgstr "Manx"
+
+# MH
+#~ msgid "Marshall Islands"
+#~ msgstr "Marshallovi otoki"
+
+#~ msgid "Martinique"
+#~ msgstr "Martinique"
+
+# MR
+#~ msgid "Mauritania"
+#~ msgstr "Mavretanija"
+
+# Shouldn't this be "Mauritius"?
+# MU
+# fuzzy
+#~ msgid "Mauritius"
+#~ msgstr "Mavricij"
+
+# YT
+#~ msgid "Mayotte"
+#~ msgstr "Mayotte"
+
+#~ msgid "Metropolitan France"
+#~ msgstr "Metropolitan France"
+
+#~ msgid "Mexico"
+#~ msgstr "Mehika"
+
+#~ msgid "Moldova"
+#~ msgstr "Moldavija"
+
+#~ msgid "Monaco"
+#~ msgstr "Monako"
+
+# MS
+#~ msgid "Montserrat"
+#~ msgstr "Montserrat"
+
+# MZ
+#~ msgid "Mozambique"
+#~ msgstr "Mozambik"
+
+# NA
+#~ msgid "Namibia"
+#~ msgstr "Namibija"
+
+#~ msgid "Nauru"
+#~ msgstr "Nauru"
+
+#~ msgid "Navajo"
+#~ msgstr "Navajo"
+
+# AN
+#~ msgid "Netherlands Antilles"
+#~ msgstr "Nizozemski Antili"
+
+# NC
+#~ msgid "New Caledonia"
+#~ msgstr "Nova Kaledonija"
+
+#~ msgid "New Zealand"
+#~ msgstr "Nova Zelandija"
+
+#~ msgid "Nicaragua"
+#~ msgstr "Nikaragva"
+
+# NE
+#~ msgid "Niger"
+#~ msgstr "Niger"
+
+# NU
+#~ msgid "Niue"
+#~ msgstr "Niue"
+
+# NF
+#~ msgid "Norfolk Island"
+#~ msgstr "Norfolški otok"
+
+#~ msgid "North Korea"
+#~ msgstr "Severna Korea"
+
+# MP
+#~ msgid "Northern Mariana Islands"
+#~ msgstr "Severni Marianski otoki"
+
+#~ msgid "Norway"
+#~ msgstr "Norveška"
+
+#~ msgid "Norwegian"
+#~ msgstr "Norveška"
+
+#~ msgid "Oman"
+#~ msgstr "Oman"
+
+#~ msgid "Palau"
+#~ msgstr "Palau"
+
+# IO
+#~ msgid "Palestinian Territory"
+#~ msgstr "Palestinskoo ozemlje "
+
+#~ msgid "Panama"
+#~ msgstr "Panama"
+
+# PG
+#~ msgid "Papua New Guinea"
+#~ msgstr "Papua Nova Gvineja"
+
+#~ msgid "Paraguay"
+#~ msgstr "Paragvaj"
+
+#~ msgid "Persian"
+#~ msgstr "Perzijski"
+
+#~ msgid "Peru"
+#~ msgstr "Peru"
+
+#~ msgid "Philippines"
+#~ msgstr "Filipini"
+
+#~ msgid "Pitcairn"
+#~ msgstr "Pitcairn"
+
+#~ msgid "Polish"
+#~ msgstr "Poljska"
+
+#~ msgid "Portuguese"
+#~ msgstr "Portugalska"
+
+#~ msgid "Puerto Rico"
+#~ msgstr "Portoriko"
+
+#~ msgid "Qatar"
+#~ msgstr "Katar"
+
+# RE
+#~ msgid "Reunion"
+#~ msgstr "Reunion"
+
+#~ msgid "Romanian"
+#~ msgstr "Romunščina"
+
+#~ msgid "Russian"
+#~ msgstr "Ruska"
+
+# RU
+#~ msgid "Russian Federation"
+#~ msgstr "Ruska federacija"
+
+# RW
+#~ msgid "Rwanda"
+#~ msgstr "Ruanda"
+
+# SH
+#~ msgid "Saint Helena"
+#~ msgstr "Sveta Helena"
+
+# KN
+# fuzzy
+#~ msgid "Saint Kitts and Nevis"
+#~ msgstr "Saint Kitts in Nevis"
+
+# LC
+# fuzzy
+#~ msgid "Saint Lucia"
+#~ msgstr "Sv. Lucija"
+
+# PM
+# fuzzy
+#~ msgid "Saint Pierre and Miquelon"
+#~ msgstr "Sveti Pierre in Miquelon"
+
+# VC
+# fuzzy
+#~ msgid "Saint Vincent and the Grenadines"
+#~ msgstr "Sv. Vincent in Grenadini"
+
+#~ msgid "Samoa"
+#~ msgstr "Samoa"
+
+# SM
+#~ msgid "San Marino"
+#~ msgstr "San Marino"
+
+# ST
+#~ msgid "Sao Tome and Principe"
+#~ msgstr "Sao Tome in Principe"
+
+#~ msgid "Saudi Arabia"
+#~ msgstr "Saudova Arabija"
+
+# SN
+#~ msgid "Senegal"
+#~ msgstr "Senegal"
+
+#~ msgid "Serbia and Montenegro"
+#~ msgstr "Srbija in Črna gora"
+
+#~ msgid "Serbian"
+#~ msgstr "Srbščina"
+
+# SC
+#~ msgid "Seychelles"
+#~ msgstr "Sejšeli"
+
+# SL
+#~ msgid "Sierra Leone"
+#~ msgstr "Sierra Leone"
+
+#~ msgid "Singapore"
+#~ msgstr "Singapur"
+
+#~ msgid "Slovak"
+#~ msgstr "Slovaška"
+
+#~ msgid "Slovenian"
+#~ msgstr "Slovenščina"
+
+# SB
+#~ msgid "Solomon Islands"
+#~ msgstr "Solomonovi otoki"
+
+# SO
+#~ msgid "Somalia"
+#~ msgstr "Somalija"
+
+# GS
+#~ msgid "South Georgia and the South Sandwich Islands"
+#~ msgstr "Južna Georgia in Južni Sandwichevi otoki"
+
+#~ msgid "South Korea"
+#~ msgstr "Južna Koreja"
+
+#~ msgid "Spanish"
+#~ msgstr "Španska"
+
+# SR
+#~ msgid "Suriname"
+#~ msgstr "Surinam"
+
+# SJ
+#~ msgid "Svalbard and Jan Mayen"
+#~ msgstr "Svalbard in Jan Mayen"
+
+# SZ
+#~ msgid "Swaziland"
+#~ msgstr "Svazi"
+
+#~ msgid "Sweden"
+#~ msgstr "Švedska"
+
+#~ msgid "Swedish"
+#~ msgstr "Švedska"
+
+#~ msgid "Taiwan"
+#~ msgstr "Tajska"
+
+# TZ
+#~ msgid "Tanzania"
+#~ msgstr "Tanzanija"
+
+#~ msgid "Thai"
+#~ msgstr "Tajski"
+
+# TW
+#~ msgid "Tibetan"
+#~ msgstr "Tibetanski"
+
+# TG
+#~ msgid "Togo"
+#~ msgstr "Togo"
+
+# TK
+#~ msgid "Tokelau"
+#~ msgstr "Tokelau"
+
+# TO
+#~ msgid "Tonga"
+#~ msgstr "Tonga"
+
+# TT
+#~ msgid "Trinidad and Tobago"
+#~ msgstr "Trinidad in Tabago"
+
+#~ msgid "Tunisia"
+#~ msgstr "Tunizija"
+
+# TM
+#~ msgid "Turkmenistan"
+#~ msgstr "Turkmenistan"
+
+# Perhaps "Turks and Caicos Islands"?
+# TC
+# fuzzy
+#~ msgid "Turks and Caicos Islands"
+#~ msgstr "otočji Turks in Caicos"
+
+# TV
+#~ msgid "Tuvalu"
+#~ msgstr "Tuvalu"
+
+# UG
+#~ msgid "Uganda"
+#~ msgstr "Uganda"
+
+#~ msgid "Ukrainian"
+#~ msgstr "Ukrajinska"
+
+#~ msgid "United Arab Emirates"
+#~ msgstr "Združeni arabski emirati"
+
+# US
+#~ msgid "United States"
+#~ msgstr "Združene države"
+
+# UM
+#~ msgid "United States Minor Outlying Islands"
+#~ msgstr "manjši otoki Združenih držav Amerike"
+
+#~ msgid "Uruguay"
+#~ msgstr "Urugvaj"
+
+# VU
+#~ msgid "Vanuatu"
+#~ msgstr "Vanuatu"
+
+#~ msgid "Venezuela"
+#~ msgstr "Venezuela"
+
+#~ msgid "Vietnamese"
+#~ msgstr "Vietnamski"
+
+# VI
+# fuzzy
+#~ msgid "Virgin Islands, U.S."
+#~ msgstr "Ameriški Deviški otoki"
+
+# This should be Wallis, not Wallace
+# WF
+# fuzzy
+#~ msgid "Wallis and Futuna"
+#~ msgstr "otočji Wallis in Futuna"
+
+#~ msgid "Welsh"
+#~ msgstr "Welški"
+
+# EH
+#~ msgid "Western Sahara"
+#~ msgstr "Zahodna Sahara"
+
+#~ msgid "Yemen"
+#~ msgstr "Jemen"
+
+# ZM
+#~ msgid "Zambia"
+#~ msgstr "Zambija"
+
+#~ msgid "Zimbabwe"
+#~ msgstr "Zimbabve"
+
+#~ msgid "Zulu"
+#~ msgstr "Zulu"
+
+#~ msgid "Description: "
+#~ msgstr "Opis: "
+
+#~ msgid "Provides:"
+#~ msgstr "Zagotovi:"
+
+#~ msgid "Requires:"
+#~ msgstr "Zahteva:"
+
+#~ msgid "Alias"
+#~ msgstr "Vzdevek"
+
+# error box title
+#~ msgid "I/O error"
+#~ msgstr "V/I napaka"
+
+#~ msgid "Done"
+#~ msgstr "Končano"
+
+#~ msgid ""
+#~ "<b>Final Steps</b><hr>The last step is saving your new configuration. It "
+#~ "is recommended to test the new configuration before saving it. If the "
+#~ "test server shows a corrupted desktop, press <b>[ Ctrl+Alt+Backspace ]</"
+#~ "b> to kill the server."
+#~ msgstr ""
+#~ "<b>Zaključni koraki:</b><hr>Zadnji korak je shranitev vaših nastavitev. "
+#~ "Priporočljivo je nove nastavitve preizkusiti, preden jih shranite. Če se "
+#~ "testni strežnik naloži z nepopolnim namizjem, pritisnite <b>[ Ctrl+Alt"
+#~ "+Backspace ]</b> za zaustavitev strežnika."

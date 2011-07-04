@@ -1,0 +1,586 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: webyast-base-ui 1.0.0\n"
+"Report-Msgid-Bugs-To: translation@suse.de\n"
+"POT-Creation-Date: 2010-08-02 09:15+0200\n"
+"PO-Revision-Date: 2002-02-08 15:47+0100\n"
+"Last-Translator: Jordi Bruguera i Cortada <jordi@grn.es>\n"
+"Language-Team: Catalan\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: app/helpers/application_helper.rb:39 app/helpers/application_helper.rb:39
+msgid " or "
+msgstr " o "
+
+#: app/helpers/application_helper.rb:43 app/helpers/application_helper.rb:43
+msgid " - "
+msgstr " - "
+
+#: app/helpers/application_helper.rb:52 app/helpers/application_helper.rb:66
+#: app/views/hosts/edit.html.erb:40 app/helpers/application_helper.rb:52
+#: app/helpers/application_helper.rb:66 app/views/hosts/edit.html.erb:40
+msgid "Back"
+msgstr "Enrere"
+
+# FR
+#: app/helpers/application_helper.rb:56 app/views/hosts/new.html.erb:53
+#: app/helpers/application_helper.rb:56 app/views/hosts/new.html.erb:53
+msgid "Cancel"
+msgstr "Anul·la"
+
+#: app/helpers/application_helper.rb:71 app/helpers/application_helper.rb:71
+msgid "Save"
+msgstr "Desa"
+
+#: app/helpers/application_helper.rb:74 app/helpers/application_helper.rb:74
+msgid "Next"
+msgstr "Següent"
+
+#: app/helpers/application_helper.rb:75 app/helpers/application_helper.rb:75
+msgid "Finish"
+msgstr "Acaba"
+
+#: app/helpers/view_helpers/html_helper.rb:27
+#: app/helpers/view_helpers/html_helper.rb:27
+msgid "Are you sure?"
+msgstr "N'esteu segurs?"
+
+#: app/helpers/view_helpers/html_helper.rb:153
+#: app/helpers/view_helpers/html_helper.rb:153
+msgid "Unknown error"
+msgstr "S'ha produït un error desconegut"
+
+#: app/helpers/view_helpers/html_helper.rb:157
+#: app/views/shared/exception_trap.html.erb:17
+#: app/helpers/view_helpers/html_helper.rb:157
+#: app/views/shared/exception_trap.html.erb:17
+msgid "No information available"
+msgstr "No hi ha informació disponible."
+
+#: app/helpers/view_helpers/html_helper.rb:160
+#: app/helpers/view_helpers/html_helper.rb:160
+msgid "There was a problem retrieving information from the server."
+msgstr "Hi ha hagut un problema en recuperar la informació del servidor."
+
+#: app/helpers/view_helpers/effect_helper.rb:50
+#: app/helpers/view_helpers/effect_helper.rb:50
+msgid "Hide Details"
+msgstr "Amaga els detalls"
+
+#: app/helpers/view_helpers/effect_helper.rb:51
+#: app/helpers/view_helpers/effect_helper.rb:51
+msgid "Show Details"
+msgstr "Mostra els detalls"
+
+#: app/helpers/view_helpers/label_helper.rb:24
+#: app/views/hosts/index.html.erb:32
+#: app/helpers/view_helpers/label_helper.rb:24
+#: app/views/hosts/index.html.erb:32
+msgid "Add"
+msgstr "Afegeix"
+
+#: app/helpers/view_helpers/label_helper.rb:28
+#: app/helpers/view_helpers/label_helper.rb:28
+msgid "Edit"
+msgstr "Edita"
+
+#: app/helpers/view_helpers/label_helper.rb:32
+#: app/helpers/view_helpers/label_helper.rb:32
+msgid "Delete"
+msgstr "Suprimeix"
+
+#: app/controllers/sessions_controller.rb:67
+#: app/controllers/sessions_controller.rb:67
+msgid "You need to specify the host"
+msgstr "Heu d'especificar l'ordinador central"
+
+#: app/controllers/sessions_controller.rb:70
+#: app/controllers/sessions_controller.rb:70
+msgid "No login specified"
+msgstr "No s'ha especificat cap nom de sessió"
+
+#: app/controllers/sessions_controller.rb:73
+#: app/controllers/sessions_controller.rb:73
+msgid "No password specified"
+msgstr "No s'ha especificat cap contrasenya"
+
+#: app/controllers/sessions_controller.rb:92
+#: app/controllers/sessions_controller.rb:92
+msgid "Host has blocked user %s. It cannot login until  %s"
+msgstr ""
+"L'ordinador central ha bloquejat l'usuari %s. No podrà iniciar la sessió "
+"fins  %s"
+
+#: app/controllers/sessions_controller.rb:119
+#: app/controllers/sessions_controller.rb:119
+msgid "Login incorrect. Check your username and password."
+msgstr "Inici de sessió incorrecte. Comproveu el nom d'usuari i la contrasenya"
+
+#: app/controllers/sessions_controller.rb:152
+#: app/controllers/sessions_controller.rb:152
+msgid "You have been logged out."
+msgstr "La vostra sessió ha finalitzat."
+
+#: app/controllers/application_controller.rb:42
+#: app/controllers/application_controller.rb:42
+msgid "Session timeout"
+msgstr "La sessió ha expirat"
+
+#: app/controllers/application_controller.rb:101
+#: app/controllers/application_controller.rb:101
+#, fuzzy
+msgid ""
+"Operation is forbidden. If you have to do it, please contact system "
+"administrator"
+msgstr ""
+"Aquesta acció no us està permesa. Si heu de dur a terme aquesta acció, "
+"contacteu amb l'administrador del sistema"
+
+#: app/controllers/application_controller.rb:146
+#: app/controllers/application_controller.rb:146
+msgid "Please login to continue"
+msgstr "Inicieu la sessió per continuar"
+
+#: app/controllers/application_controller.rb:153
+#: app/controllers/application_controller.rb:153
+msgid "You must logout before you can login"
+msgstr "Heu de sortir de la sessió per poder iniciar la sessió"
+
+#: app/controllers/application_controller.rb:242
+#: app/controllers/application_controller.rb:242
+msgid "can't be blank"
+msgstr "no pot quedar en blanc"
+
+#: app/controllers/application_controller.rb:243
+#: app/controllers/application_controller.rb:243
+msgid "is out of allowed values"
+msgstr "no és un valor permès"
+
+#: app/controllers/application_controller.rb:244
+#: app/controllers/application_controller.rb:244
+msgid "can't be empty"
+msgstr "no pot quedar buit"
+
+#: app/controllers/application_controller.rb:245
+#: app/controllers/application_controller.rb:245
+msgid "is invalid"
+msgstr "no és vàlid"
+
+#: app/controllers/application_controller.rb:260
+#: app/controllers/application_controller.rb:260
+msgid "Invalid parameters:"
+msgstr "Paràmetres incorrectes:"
+
+# %s is FTP or HTTP
+#: app/controllers/hosts_controller.rb:43
+#: app/controllers/hosts_controller.rb:43
+msgid "Can't connect to host %s."
+msgstr "No s'ha pogut connectar al servidor %s."
+
+#: app/controllers/hosts_controller.rb:44
+#: app/controllers/hosts_controller.rb:44
+msgid "Make sure the host is up and that the YaST web service is running."
+msgstr ""
+"Assegureu-vos que l'ordinador central està connectat i que el servei WebYaST "
+"està en funcionament."
+
+#: app/controllers/hosts_controller.rb:46
+#: app/controllers/hosts_controller.rb:46
+msgid "Please select a host to connect to."
+msgstr "Seleccioneu l'ordinador central al que voleu connectar-vos."
+
+#: app/controllers/hosts_controller.rb:49
+#: app/controllers/hosts_controller.rb:49
+msgid "The host '%s' cannot be found."
+msgstr "No s'ha trobat l'ordinador central %s."
+
+#: app/controllers/hosts_controller.rb:50
+#: app/controllers/hosts_controller.rb:50
+msgid "Please double-check the host URL."
+msgstr "Comproveu la URL de l'ordinador central."
+
+#: app/models/account.rb:-
+msgid "account"
+msgstr "compte"
+
+#: app/models/account.rb:-
+msgid "Account|Login"
+msgstr "Compte|Inici de sessió"
+
+#: app/models/account.rb:-
+msgid "Account|Created at"
+msgstr "Compte|Creat a"
+
+#: app/models/account.rb:-
+msgid "Account|Updated at"
+msgstr "Compte|Actualitzat a"
+
+#: app/models/account.rb:-
+msgid "Account|Remember token"
+msgstr "Compte|Recorda la fitxa"
+
+#: app/models/account.rb:-
+msgid "Account|Remember token expires at"
+msgstr "Compte|La fitxa memoritzada caduca el"
+
+#: app/models/account.rb:-
+msgid "Account|Salt"
+msgstr "Compte|Salt"
+
+#: app/models/host.rb:-
+msgid "host"
+msgstr "ordinador central"
+
+#: app/models/host.rb:-
+msgid "Host|Name"
+msgstr "Ordinador central|Nom"
+
+#: app/models/host.rb:-
+msgid "Host|Url"
+msgstr "Ordinador central|Url"
+
+#: app/models/host.rb:-
+msgid "Host|Description"
+msgstr "Ordinador central|Descripció"
+
+#: app/models/host.rb:-
+msgid "Host|Created at"
+msgstr "Ordinador central|Creat el"
+
+#: app/models/host.rb:-
+msgid "Host|Updated at"
+msgstr "Ordinador central|Actualitzat el"
+
+#: app/views/main/_select_language.html.erb:18
+#: app/views/main/_select_language.html.erb:18
+msgid "Language Selection"
+msgstr "Selecció d'idioma"
+
+#: app/views/shared/exception_trap.html.erb:3
+#: app/views/shared/backendexception_trap.html.erb:2
+#: app/views/shared/exception_trap.html.erb:3
+#: app/views/shared/backendexception_trap.html.erb:2
+msgid "This is embarrasing...."
+msgstr "Això és vergonyòs..."
+
+#: app/views/shared/exception_trap.html.erb:5
+#: app/views/shared/exception_trap.html.erb:5
+msgid "We are sorry, but there are some problems."
+msgstr "Ho sentim, però hi ha alguns problemes."
+
+#: app/views/shared/exception_trap.html.erb:7
+#: app/views/shared/backendexception_trap.html.erb:6
+#: app/views/shared/exception_trap.html.erb:7
+#: app/views/shared/backendexception_trap.html.erb:6
+msgid "Problem:"
+msgstr "Problema:"
+
+#: app/views/shared/exception_trap.html.erb:13
+#: app/views/shared/exception_trap.html.erb:13
+msgid "Please Report a bug so we can fix the problem!."
+msgstr "Si us plau reporteu l'errada per poder corregir el problema !."
+
+#: app/views/shared/exception_trap.html.erb:13
+#: app/views/shared/exception_trap.html.erb:13
+msgid "(report link)"
+msgstr "(enllaç per reportar)"
+
+#: app/views/shared/exception_trap.html.erb:14
+#: app/views/shared/exception_trap.html.erb:14
+msgid "Don't forget to include the bug details."
+msgstr "No oblideu incloure-hi els detalls de l'errada."
+
+#: app/views/shared/backendexception_trap.html.erb:4
+#: app/views/shared/backendexception_trap.html.erb:4
+msgid "Problem occured on target machine."
+msgstr "El problema ha succeït a la màquina destí."
+
+#: app/views/shared/_missing_write_permissions.html.erb:1
+#: app/views/shared/_missing_write_permissions.html.erb:1
+msgid "You do not have permissions to modify the settings."
+msgstr "No teniu permisos per canviar els paràmetres."
+
+#: app/views/hosts/edit.html.erb:2 app/views/hosts/edit.html.erb:2
+msgid "Editing YaST-Web-Service"
+msgstr "S'està editant el servei web del YaST"
+
+#: app/views/hosts/edit.html.erb:23 app/views/hosts/edit.html.erb:23
+msgid "YaST-Web-Service"
+msgstr "Servei web del YaST"
+
+#: app/views/hosts/edit.html.erb:26 app/views/hosts/new.html.erb:37
+#: app/views/hosts/edit.html.erb:26 app/views/hosts/new.html.erb:37
+msgid "Name"
+msgstr "Nom"
+
+#: app/views/hosts/edit.html.erb:30 app/views/hosts/edit.html.erb:30
+msgid "Url"
+msgstr "Url"
+
+#: app/views/hosts/edit.html.erb:34 app/views/hosts/new.html.erb:47
+#: app/views/hosts/edit.html.erb:34 app/views/hosts/new.html.erb:47
+msgid "Description"
+msgstr "Descripció"
+
+#: app/views/hosts/edit.html.erb:39 app/views/hosts/edit.html.erb:39
+msgid "Ok"
+msgstr "Bé"
+
+#: app/views/hosts/index.html.erb:5 app/views/hosts/index.html.erb:5
+msgid "Please choose a service:"
+msgstr "Triecolliu un servei:"
+
+#: app/views/hosts/index.html.erb:25 app/views/hosts/index.html.erb:25
+msgid "Really delete host %s ?"
+msgstr "Esteu segur que voleu suprimir l'ordinador central %s ?"
+
+#: app/views/hosts/new.html.erb:10 app/views/hosts/new.html.erb:10
+msgid "New WebYaST Host"
+msgstr "Nou ordinador central de WebYaST"
+
+#: app/views/hosts/new.html.erb:42 app/views/hosts/new.html.erb:42
+msgid "URL"
+msgstr "URL"
+
+#: app/views/hosts/new.html.erb:54 app/views/hosts/new.html.erb:54
+msgid "Create"
+msgstr "Crea"
+
+#: app/views/hosts/show.html.erb:8 app/views/hosts/show.html.erb:8
+msgid "Index"
+msgstr "Índex"
+
+#: app/views/controlpanel/show_all.rhtml:18
+#: app/views/controlpanel/index.rhtml:72
+#: app/views/controlpanel/show_all.rhtml:18
+#: app/views/controlpanel/index.rhtml:72
+msgid "Configuration"
+msgstr "Configuració"
+
+#: app/views/controlpanel/index.rhtml:29 app/views/controlpanel/index.rhtml:29
+msgid "Status"
+msgstr "Estat"
+
+#: app/views/controlpanel/index.rhtml:34 app/views/controlpanel/index.rhtml:34
+msgid "Loading patch information"
+msgstr "S'està carregant la informació del pedaç"
+
+#: app/views/controlpanel/index.rhtml:36 app/views/controlpanel/index.rhtml:36
+msgid "Patch status summary is disabled in the config file."
+msgstr ""
+"El resum d'estat del pedaç es troba deshabilitat al fitxer de configuració."
+
+#: app/views/controlpanel/index.rhtml:39 app/views/controlpanel/index.rhtml:39
+msgid "Patch plugin is not installed."
+msgstr "El connector dels pedaços no està instal·lat."
+
+#: app/views/controlpanel/index.rhtml:45 app/views/controlpanel/index.rhtml:45
+msgid "Loading system information"
+msgstr "S'està llegint la informació del sistema"
+
+#: app/views/controlpanel/index.rhtml:47 app/views/controlpanel/index.rhtml:47
+msgid "System status summary is disabled in the config file."
+msgstr ""
+"El resum de l'estat del sistema es troba deshabilitat al fitxer de "
+"configuració."
+
+#: app/views/controlpanel/index.rhtml:50 app/views/controlpanel/index.rhtml:50
+msgid "Status plugin is not installed."
+msgstr "El connector d'estat no està instal·lat"
+
+#: app/views/controlpanel/index.rhtml:61 app/views/controlpanel/index.rhtml:61
+msgid "System actions"
+msgstr "Accions del sistema"
+
+# reboot button label
+#: app/views/controlpanel/index.rhtml:63 app/views/controlpanel/index.rhtml:63
+msgid "Reboot"
+msgstr "Reinicia"
+
+#: app/views/controlpanel/index.rhtml:64 app/views/controlpanel/index.rhtml:64
+msgid "Really reboot %s?"
+msgstr "Esteu segurs que voleu reiniciar %s ?"
+
+#: app/views/controlpanel/index.rhtml:65 app/views/controlpanel/index.rhtml:65
+msgid "Shutdown"
+msgstr "Atura"
+
+#: app/views/controlpanel/index.rhtml:66 app/views/controlpanel/index.rhtml:66
+msgid "Really shutdown %s?"
+msgstr "Esteu segur que voleu aturar %s ?"
+
+#: app/views/controlpanel/basesystem.rhtml:18
+#: app/views/controlpanel/basesystem.rhtml:18
+msgid "Base system setup"
+msgstr "Configuració del sistema base"
+
+#: app/views/controlpanel/basesystem.rhtml:20
+#: app/views/controlpanel/basesystem.rhtml:20
+msgid ""
+"Your initial system setup was not completed. Please continue with setting up "
+"the modules."
+msgstr ""
+"La configuració inicial del sistema no ha estat completada. Si us plau "
+"continueu configurant els mòduls."
+
+#: app/views/controlpanel/basesystem.rhtml:21
+#: app/views/controlpanel/basesystem.rhtml:21
+msgid "Continue initial system setup"
+msgstr "Continua amb la reparació del sistema"
+
+#: app/views/layouts/main.rhtml:59 app/views/layouts/main.rhtml:59
+msgid "WebYaST"
+msgstr "WebYaST"
+
+#: app/views/layouts/main.rhtml:105 app/views/layouts/main.rhtml:105
+msgid ""
+"You are using an unsupported browser. Please switch to %sFireFox 3.5 or "
+"better%s or %sInternet Explorer 8%s. Thanks! [%sclose%s]"
+msgstr ""
+
+#: app/views/layouts/main.rhtml:112 app/views/layouts/main.rhtml:112
+msgid ""
+"JavaScript support is missing or disabled. Please turn JavaScript on or use "
+"a supported browser (%sFireFox 3.5%s or %sInternet Explorer 8%s)."
+msgstr ""
+
+#: app/views/layouts/main.rhtml:119 app/views/layouts/main.rhtml:119
+msgid "My Appliance"
+msgstr "La meva aplicació incrustada"
+
+# label for language selection
+#: app/views/layouts/main.rhtml:126 app/views/layouts/main.rhtml:130
+#: app/views/layouts/main.rhtml:126 app/views/layouts/main.rhtml:130
+msgid "Language:"
+msgstr "Idioma:"
+
+#: app/views/layouts/main.rhtml:132 app/views/layouts/main.rhtml:132
+msgid "Connected host:"
+msgstr "Ordinador central connectat:"
+
+#: app/views/layouts/main.rhtml:133 app/views/layouts/main.rhtml:133
+msgid "User:"
+msgstr "Nom d'usuari:"
+
+#: app/views/layouts/main.rhtml:136 app/views/layouts/main.rhtml:136
+msgid "Control panel"
+msgstr "Panell de control"
+
+#: app/views/layouts/main.rhtml:137 app/views/layouts/main.rhtml:137
+msgid "Logout"
+msgstr "Surt"
+
+#: app/views/layouts/main.rhtml:145 app/views/layouts/main.rhtml:145
+#, fuzzy
+msgid "You will be logged off in"
+msgstr "La vostra sessió ha finalitzat."
+
+#: app/views/layouts/main.rhtml:145 app/views/layouts/main.rhtml:145
+msgid "seconds due to inactivity. "
+msgstr ""
+
+#: app/views/layouts/main.rhtml:176 app/views/layouts/main.rhtml:176
+msgid "...Wait..."
+msgstr "...Espereu..."
+
+#: app/views/sessions/new.rhtml:21 app/views/sessions/new.rhtml:33
+#: app/views/sessions/new.rhtml:21 app/views/sessions/new.rhtml:33
+msgid "Login"
+msgstr "Inici de la sessió"
+
+#: app/views/sessions/new.rhtml:23 app/views/sessions/new.rhtml:23
+msgid "Enter login credentials for host %s."
+msgstr "Entreu les credencials de la sessió per a l'ordinador central %s."
+
+#: app/views/sessions/new.rhtml:27 app/views/sessions/new.rhtml:27
+msgid "Username:"
+msgstr "Nom d'usuari:"
+
+#: app/views/sessions/new.rhtml:30 app/views/sessions/new.rhtml:30
+msgid "Password:"
+msgstr "Contrasenya:"
+
+#: lib/error_constructor.rb:30 lib/error_constructor.rb:30
+msgid "Service %s is not available in the target machine"
+msgstr "El servei %s no es troba disponible a la màquina de destí"
+
+#: lib/error_constructor.rb:32 lib/error_constructor.rb:32
+msgid "Service %s is not running on the target machine"
+msgstr "No s'està executant el servei %s a la màquina de destí"
+
+#: lib/error_constructor.rb:36 lib/error_constructor.rb:36
+msgid "Permission %s is not granted for user %s"
+msgstr "El permís %s no està garantit per l'usuari %s"
+
+#: lib/error_constructor.rb:38 lib/error_constructor.rb:38
+msgid ""
+"Policy kit exception for user %s and permission %s (untranslated message): %s"
+msgstr ""
+"S'ha produït una excepció del Policy kit per l'usuari %s i els permisos %s "
+"(missatge no traduït): %s"
+
+#: lib/error_constructor.rb:40 lib/error_constructor.rb:40
+msgid "A user is no longer logged to target machine. Please log in again."
+msgstr ""
+"La sessió de l'usuari ja no es troba activa a la màquina de destí. Torneu a "
+"iniciar la sessió"
+
+#: lib/error_constructor.rb:42 lib/error_constructor.rb:42
+msgid "Target system is not consistent: Missing or corrupted file %s"
+msgstr ""
+"El sistema de destí es troba en un estat incosistent: El fitxer %s es troba "
+"en mal estat o no existeix"
+
+#: lib/error_constructor.rb:46 lib/error_constructor.rb:46
+msgid ""
+"There is no predefined ntp server at /etc/sysconfig/network/config - "
+"NETCONFIG_NTP_STATIC_SERVERS"
+msgstr ""
+"No hi ha cap servidor ntp predefinit a /etc/sysconfig/network/config - "
+"NETCONFIG_NTP_STATIC_SERVERS"
+
+#: lib/error_constructor.rb:48 lib/error_constructor.rb:48
+msgid "Error occurred during ntp synchronization: %s"
+msgstr "S'ha produït un error durant la sincronització ntp: %s"
+
+#: lib/error_constructor.rb:51 lib/error_constructor.rb:51
+msgid "Error while saving administrator settings: %s"
+msgstr "S'ha produït un error en desar els paràmetres de l'administrador: %s"
+
+#: lib/error_constructor.rb:54 lib/error_constructor.rb:54
+msgid "PACKAGEKIT_INSTALL"
+msgstr ""
+
+#: lib/error_constructor.rb:56 lib/error_constructor.rb:56
+msgid ""
+"Installation in progress. Remain %i patches. Time of installation depend on "
+"patch size."
+msgstr ""
+
+#: vendor/plugins/lang_helper/lib/lang_helper.rb:63
+msgid "Select locale"
+msgstr ""
+
+#~| msgid "Show Loaded Modules"
+#~ msgid "Show all modules"
+#~ msgstr "Mostra tots els mòduls"
+
+#~ msgid ""
+#~ "Broken permission setup on rest-service. Can be fixed by "
+#~ "grantwebyastrights script."
+#~ msgstr ""
+#~ "l servei rest té la configuració dels permisos incorrecte. Es pot "
+#~ "corregir amb el programa grantwebyastrights."
+
+#, fuzzy
+#~| msgid "Reboot the system now?"
+#~ msgid "Set up the system"
+#~ msgstr "Voleu reiniciar el sistema ara?"
+
+#, fuzzy
+#~| msgid "Name: "
+#~ msgid "Name:"
+#~ msgstr "Nom:"

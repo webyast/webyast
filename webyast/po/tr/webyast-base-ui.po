@@ -1,0 +1,3909 @@
+# @TITLE@
+# Copyright (C) 2006, SUSE Linux GmbH, Nuremberg
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+# This file is distributed under the same license as @PACKAGE@ package. FIRST
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: @PACKAGE@\n"
+"Report-Msgid-Bugs-To: translation@suse.de\n"
+"POT-Creation-Date: 2006-05-15 15:07+0200\n"
+"PO-Revision-Date: 2001-10-18 10:13+0200\n"
+"Last-Translator: Görkem Çetin <gorkem@gelecek.com.tr>\n"
+"Language-Team: turkish <i18n@suse.de>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+
+#: RELEASE-NOTES-openSUSE.xml:120(title)
+msgid "Update"
+msgstr "Güncelleştir"
+
+#: greetings.cpp:64 greetings.cpp:83 greetings.cpp:101 greetings.cpp:107
+#: greetings.cpp:149
+msgid "Error loading %1"
+msgstr "%1 yüklemesinde bir hata oluştu"
+
+#: greetings.cpp:161
+msgid "CLOSE"
+msgstr "KAPAT"
+
+#: main.cpp:31 main.cpp:44
+msgid "SUSEgreeter"
+msgstr "SUSE karşılayıcısı"
+
+#: _translatorinfo.cpp:1
+msgid ""
+"_: NAME OF TRANSLATORS\n"
+"Your names"
+msgstr "Emre Aladağ"
+
+#: _translatorinfo.cpp:3
+msgid ""
+"_: EMAIL OF TRANSLATORS\n"
+"Your emails"
+msgstr "emre@emrealadag.com"
+
+#: ../parser_include.c:96 ../parser_main.c:450
+#, c-format
+msgid "Error: Could not read profile %s: %s.\n"
+msgstr "Hata: %s profili okunamadı: %s.\n"
+
+#: ../parser_include.c:115
+msgid "Error: Could not allocate temporary file.\n"
+msgstr "Hata: Geçici dosya tahsis edilemedi.\n"
+
+#: ../parser_include.c:166
+msgid "Error: Out of memory.\n"
+msgstr "Hata: Yetersiz bellek.\n"
+
+#: ../parser_include.c:176
+#, c-format
+msgid "Error: basedir %s is not a directory, skipping.\n"
+msgstr "Hata: %s temel dizini bir dizin değil, atlanıyor.\n"
+
+#: ../parser_include.c:190
+#, c-format
+msgid "Error: Could not add directory %s to search path.\n"
+msgstr "Hata:  %s dizini arama yollarına eklenemedi.\n"
+
+#: ../parser_include.c:200
+msgid "Error: Could not allocate memory.\n"
+msgstr "Hata: Bellek tahsis edilemedi.\n"
+
+#: ../parser_include.c:297
+#, c-format
+msgid "Error: Could not allocate buffer for include at line %d in %s.\n"
+msgstr "Hata: %d. satırdaki içerme için ara bellek ayrılamadı. Dosya %s.\n"
+
+#: ../parser_include.c:313 ../parser_include.c:333
+#, c-format
+msgid "Error: Bad include at line %d in %s.\n"
+msgstr "Hata: %d. satırda hatalı içerme. Dosya %s.\n"
+
+#: ../parser_include.c:378
+#, c-format
+msgid "Error: #include %s%c not found at line %d in %s.\n"
+msgstr "Hata: #include %s%c bulunamadı. %d. satır, %s dosyası.\n"
+
+#: ../parser_include.c:459
+#, c-format
+msgid "Error: Exceeded %d levels of includes.  Not processing %s include.\n"
+msgstr "Hata: %d seviye içerme aşıldı. %s içerme işlenmeyecek.\n"
+
+#: ../parser_interface.c:72
+msgid "Bad write position\n"
+msgstr "Hatalı yazma pozisyonu\n"
+
+#: ../parser_interface.c:75
+msgid "Permission denied\n"
+msgstr "İzin verilmedi\n"
+
+#: ../parser_interface.c:78
+msgid "Out of memory\n"
+msgstr "Yetersiz bellek\n"
+
+#: ../parser_interface.c:81
+msgid "Couldn't copy profile Bad memory address\n"
+msgstr "Hatalı bellek adresi, profil kopyalanamadı\n"
+
+#: ../parser_interface.c:84
+msgid "Profile doesn't conform to protocol\n"
+msgstr "Profil protokole uymuyor\n"
+
+#: ../parser_interface.c:87
+msgid "Profile does not match signature\n"
+msgstr "Profil imzası tutmuyor\n"
+
+#: ../parser_interface.c:90
+msgid "Profile version not supported by Apparmor module\n"
+msgstr "Profil sürümü Apparmor modülü tarafından desteklenmiyor\n"
+
+#: ../parser_interface.c:93
+msgid "Profile already exists\n"
+msgstr "Profil zaten mevcut\n"
+
+#: ../parser_interface.c:96
+msgid "Profile doesn't exist\n"
+msgstr "Profil mevcut değil\n"
+
+#: ../parser_interface.c:99
+msgid "Unknown error\n"
+msgstr "Bilinmeyen hata\n"
+
+#: ../parser_interface.c:116
+#, c-format
+msgid "%s: Unable to add \"%s\".  "
+msgstr "%s: \"%s\" eklenemedi."
+
+#: ../parser_interface.c:121
+#, c-format
+msgid "%s: Unable to replace \"%s\".  "
+msgstr "%s: \"%s\" değiştirilemedi."
+
+#: ../parser_interface.c:126
+#, c-format
+msgid "%s: Unable to remove \"%s\".  "
+msgstr "%s: \"%s\" silinemedi."
+
+#: ../parser_interface.c:131
+#, c-format
+msgid "%s: Unable to write to stdout\n"
+msgstr "%s: stdout'a yazılamadı.\n"
+
+#: ../parser_interface.c:135 ../parser_interface.c:158
+#, c-format
+msgid "%s: ASSERT: Invalid option: %d\n"
+msgstr "%s: ASSERT: Geçersiz seçenek: %d\n"
+
+#: ../parser_interface.c:144
+#, c-format
+msgid "Addition succeeded for \"%s\".\n"
+msgstr "\"%s\" için ekleme başarılı oldu.\n"
+
+#: ../parser_interface.c:148
+#, c-format
+msgid "Replacement succeeded for \"%s\".\n"
+msgstr "\"%s\" için değiştirme başarılı oldu.\n"
+
+#: ../parser_interface.c:152
+#, c-format
+msgid "Removal succeeded for \"%s\".\n"
+msgstr "\"%s\" için silme başarılı oldu.\n"
+
+#: ../parser_interface.c:247
+#, c-format
+msgid "PANIC bad increment buffer %p pos %p ext %p size %d res %p\n"
+msgstr "PANİK hatalı arttırma arabelleği %p pozisyon %p ext %p boyut %d res %p\n"
+
+#: ../parser_interface.c:798 ../parser_interface.c:931
+#, c-format
+msgid "Unable to open %s - %s\n"
+msgstr "%s açılamadı - %s\n"
+
+#: ../parser_interface.c:854
+msgid "unable to create work area\n"
+msgstr "çalışma alanı oluşturulamadı\n"
+
+#: ../parser_interface.c:862
+#, c-format
+msgid "unable to serialize profile %s\n"
+msgstr "%s profili seri hale getirilemedi\n"
+
+#: ../parser_interface.c:872 ../parser_interface.c:943
+#, c-format
+msgid "%s: Unable to write entire profile entry\n"
+msgstr "%s: Profil girdisinin tamamı yazılamadı\n"
+
+#: parser_lex.l:122 parser_lex.l:155 parser_lex.l:354 parser_lex.l:123
+#: parser_lex.l:158 parser_lex.l:191 parser_lex.l:392
+#, c-format
+msgid "Found unexpected character: '%s'"
+msgstr "Beklenmeyen karakter bulundu: '%s'"
+
+#: ../parser_main.c:137 ../parser_main.c:146
+#, c-format
+msgid "Warning (%s line %d): %s"
+msgstr "Uyarı (%s satır %d): %s"
+
+#: ../parser_main.c:264 ../parser_main.c:275
+#, c-format
+msgid "%s: Could not allocate memory for subdomainbase mount point\n"
+msgstr "%s: subdomainbase bağlantı noktası için bellek ayrılamadı\n"
+
+#: ../parser_main.c:330 ../parser_main.c:341
+#, c-format
+msgid ""
+"%s: Sorry. You need root privileges to run this program.\n"
+"\n"
+msgstr ""
+"%s: Bu programı çalıştırabilmek için root yetkilerine ihtiyacınız var.\n"
+"\n"
+
+#: ../parser_main.c:337 ../parser_main.c:348
+#, c-format
+msgid ""
+"%s: Warning! You've set this program setuid root.\n"
+"Anybody who can run this program can update your AppArmor profiles.\n"
+"\n"
+msgstr ""
+"%s: Uyarı! Bu programın setuid değeri root olarak ayarlanmış.\n"
+"Bu programı çalıştıracak herkes AppArmor profillerinizi değiştirebilir.\n"
+"\n"
+
+#: ../parser_main.c:415 ../parser_main.c:509
+#, c-format
+msgid "%s: Errors found in file. Aborting.\n"
+msgstr "%s: Dosyada hatalar bulundu. Durduruluyor.\n"
+
+#: ../parser_misc.c:281 parser_yacc.y:216 parser_yacc.y:240 parser_yacc.y:346
+#: parser_yacc.y:358 parser_yacc.y:426 parser_yacc.y:528 parser_yacc.y:566
+#: parser_yacc.y:884 parser_yacc.y:893 parser_yacc.y:904 parser_yacc.y:914
+#: parser_yacc.y:985 parser_yacc.y:1033 parser_yacc.y:1044 parser_yacc.y:1119
+#: parser_yacc.y:1134 parser_yacc.y:1141 parser_yacc.y:1152
+#: ../parser_main.c:464 ../parser_misc.c:288 parser_yacc.y:243
+#: parser_yacc.y:352 parser_yacc.y:364 parser_yacc.y:432 parser_yacc.y:534
+#: parser_yacc.y:572 parser_yacc.y:902 parser_yacc.y:974 parser_yacc.y:1022
+#: parser_yacc.y:1108 parser_yacc.y:1126 parser_yacc.y:1133 parser_yacc.y:1144
+#: ../parser_misc.c:292
+msgid "Memory allocation error."
+msgstr "Bellek ayırma hatası."
+
+#: ../parser_misc.c:437 ../parser_misc.c:444 ../parser_misc.c:448
+msgid ""
+"Uppercase qualifiers \"RWLIMX\" are deprecated, please convert to lowercase\n"
+"See the apparmor.d(5) manpage for details.\n"
+msgstr ""
+"Büyük harfli niteleyiciler \"RWLIMX\" yakında eskiyecektir, bunları küçük harfe çevirin\n"
+"Ayrıntılar için apparmor.d(5) manual sayfasına bakın.\n"
+
+#: ../parser_misc.c:497 ../parser_misc.c:504 ../parser_misc.c:508
+msgid "Exec qualifier 'i' invalid, conflicting qualifier already specified"
+msgstr "Çalıştırma niteleyicisi 'i' geçersiz, çakışan niteleyici zaten belirtilmiş"
+
+#: ../parser_misc.c:516 ../parser_misc.c:549 ../parser_misc.c:523
+#: ../parser_misc.c:556 ../parser_misc.c:527 ../parser_misc.c:560
+#, c-format
+msgid "Exec qualifier '%c' invalid, conflicting qualifier already specified"
+msgstr "Çalıştırma niteleyicisi '%c' geçersiz, çakışan niteleyici zaten belirtilmiş"
+
+#: ../parser_misc.c:591 ../parser_misc.c:598 ../parser_misc.c:602
+#, c-format
+msgid "Internal: unexpected mode character '%c' in input"
+msgstr "Dahili: girdide beklenmeyen mod karakteri '%c'"
+
+#: ../parser_misc.c:833 ../parser_symtab.c:556 ../parser_regex.c:658
+#: ../parser_variable.c:227 ../parser_misc.c:840 ../parser_regex.c:660
+#: ../parser_misc.c:844
+#, c-format
+msgid "AppArmor parser error: %s\n"
+msgstr "AppArmor inceleyici hatası: %s\n"
+
+#: ../parser_merge.c:94
+msgid "Couldn't merge entries. Out of Memory\n"
+msgstr "Girdiler birleştirilemiyor. Yetersiz bellek\n"
+
+#: ../parser_merge.c:113
+#, c-format
+msgid "profile %s: has merged rule %s with multiple x modifiers\n"
+msgstr "profil %s: çoklu x değiştiricili, birleştirilmiş bir kuralı (%s) içeriyor\n"
+
+#: parser_yacc.y:440 parser_yacc.y:462 parser_yacc.y:446 parser_yacc.y:468
+msgid "Assert: `rule' returned NULL."
+msgstr "Assert: `rule' NULL döndürdü."
+
+#: parser_yacc.y:491 parser_yacc.y:497
+msgid "Invalid mode, 'x' must be preceded by exec qualifier 'i', 'p', or 'u'"
+msgstr "Geçersiz mod; 'x', çalıştırma değişkenleri 'i', 'p' ya da 'u'dan sonra gelmelidir."
+
+#: parser_yacc.y:631 parser_yacc.y:628
+msgid "Assert: 'hat rule' returned NULL."
+msgstr "Assert: `hat rule' NULL döndürdü."
+
+#: parser_yacc.y:772
+#, c-format
+msgid "Unset boolean variable %s used in if-expression"
+msgstr "If deyimi içinde ayarlanmamış boolean değişkeni %s"
+
+#: parser_yacc.y:866
+#, c-format
+msgid "missing an end of line character? (entry: %s)"
+msgstr "eksik satır sonu karakteri? (girdi: %s)"
+
+#: parser_yacc.y:1089 parser_yacc.y:1078
+#, c-format
+msgid "AppArmor parser error in %s at line %d: %s\n"
+msgstr "AppArmor inceleme hatası, %s dosyası, satır %d: %s\n"
+
+#: parser_yacc.y:1092 parser_yacc.y:1081
+#, c-format
+msgid "AppArmor parser error, line %d: %s\n"
+msgstr "AppArmor inceleme hatası, satır %d: %s\n"
+
+#: ../parser_regex.c:283
+#, c-format
+msgid "%s: Illegal open {, nesting groupings not allowed\n"
+msgstr "%s: Kural dışı açık {, iç içe konan gruplamalara izin verilmez\n"
+
+#: ../parser_regex.c:303
+#, c-format
+msgid "%s: Regex grouping error: Invalid number of items between {}\n"
+msgstr "%s: Regex gruplama hatası: {} içinde geçersiz öğe sayısı\n"
+
+#: ../parser_regex.c:309
+#, c-format
+msgid "%s: Regex grouping error: Invalid close }, no matching open { detected\n"
+msgstr "%s: Regex gruplama hatası: Geçersiz kapama }, karşılığı olan bir { bulunamadı\n"
+
+#: ../parser_regex.c:375
+#, c-format
+msgid "%s: Regex grouping error: Unclosed grouping or character class, expecting close }\n"
+msgstr "%s: Regex gruplama hatası: Kapatılmamış gruplama ya da karakter sınıfı, kapama karakteri } bekleniyor\n"
+
+#: ../parser_regex.c:389
+#, c-format
+msgid "%s: Internal buffer overflow detected, %d characters exceeded\n"
+msgstr "%s: Dahili ara bellek taşması saptandı, %d karakter aşıldı\n"
+
+#: ../parser_regex.c:393
+#, c-format
+msgid "%s: Unable to parse input line '%s'\n"
+msgstr "%s: Giriş satırı '%s' incelenemedi\n"
+
+#: ../parser_regex.c:445
+#, c-format
+msgid "%s: Failed to compile regex '%s' [original: '%s']\n"
+msgstr "%s: Regex '%s' derlenemedi [orijinal: '%s']\n"
+
+#: ../parser_regex.c:449
+#, c-format
+msgid "%s: error near               "
+msgstr "%s: yakınında hata: "
+
+#: ../parser_regex.c:459
+#, c-format
+msgid "%s: error reason: '%s'\n"
+msgstr "%s: hata nedeni: '%s'\n"
+
+#: ../parser_regex.c:468
+#, c-format
+msgid "%s: Failed to compile regex '%s' [original: '%s'] - malloc failed\n"
+msgstr "%s: Regex '%s' derlenemedi [orijinal: '%s'] - malloc başarısız oldu\n"
+
+#: ../parser_policy.c:194 ../parser_policy.c:200
+#, c-format
+msgid "ERROR merging rules for profile %s, failed to load\n"
+msgstr "HATA: %s profilinin kuralları birleştirilemedi, yükleme başarısız oldu\n"
+
+#: ../parser_policy.c:226 ../parser_policy.c:232
+#, c-format
+msgid ""
+"ERROR profile %s contains policy elements not usable with this kernel:\n"
+"\t'*', '?', character ranges, and alternations are not allowed.\n"
+"\t'**' may only be used at the end of a rule.\n"
+msgstr ""
+"HATA: %s profili bu kernel ile kullanılamayacak bazı ilke öğeleri içeriyor:\n"
+"\t'*', '?', karakter aralıkları ve sırayla birbirini izlemelere izin verilmiyor.\n"
+"\t'**' sadece bir kuralın sonunda kullanılabilir.\n"
+
+#: ../parser_policy.c:271 ../parser_policy.c:277
+#, c-format
+msgid "ERROR processing regexs for profile %s, failed to load\n"
+msgstr "HATA: %s profilinin regex'leri işlenemedi, yükleme başarısız oldu\n"
+
+#: ../parser_policy.c:298 ../parser_policy.c:304
+#, c-format
+msgid "ERROR expanding variables for profile %s, failed to load\n"
+msgstr "HATA: %s profili için değişkenler genişletilemedi, yükleme başarısız oldu\n"
+
+#: ../parser_policy.c:481 ../parser_policy.c:486
+#, c-format
+msgid "ERROR in profile %s, failed to load\n"
+msgstr "HATA: %s profili, yükleme başarısız oldu\n"
+
+#: ../parser_policy.c:666 ../parser_policy.c:687 ../parser_policy.c:675
+#: ../parser_policy.c:696
+#, c-format
+msgid "%s: Errors found during regex postprocess.  Aborting.\n"
+msgstr "%s: Regex sonrası işlemlerde hata bulundu. Durduruluyor.\n"
+
+#: ../parser_policy.c:680 ../parser_policy.c:689
+#, c-format
+msgid "%s: Errors found in combining rules postprocessing. Aborting.\n"
+msgstr "%s: Kural birleştirme sonrası işlemlerde hata bulundu. Durduruluyor.\n"
+
+#: ../genprof:55
+msgid "SubDomain does not appear to be started.  Please enable SubDomain and try again."
+msgstr "SubDomain başlatılmış gözükmüyor. Lütfen SubDomain'i başlatın ve yeniden deneyin."
+
+#: ../genprof:69
+msgid "Please enter the program to profile: "
+msgstr "Profil oluşturulacak programı girin:"
+
+#: ../genprof:88
+#, perl-format
+msgid "Can't find %s in the system path list.  If the name of the application is correct, please run 'which %s' in the other window in order to find the fully-qualified path."
+msgstr "%s sistem yol listesinde bulunamadı. Eğer programın adı doğruysa diğer pencerede 'which %s' komutunu çalıştırarak programın tam dizin yolunu bulun."
+
+#: ../genprof:90 ../autodep:112 ../audit:122 ../complain:122 ../enforce:122
+#, perl-format
+msgid "%s does not exist, please double-check the path."
+msgstr "%s mevcut değil, lütfen dizini tekrar kontrol edin."
+
+#: ../genprof:115
+msgid ""
+"Please start the application to be profiled in \n"
+"another window and exercise its functionality now.\n"
+"\n"
+"Once completed, select the \"Scan\" button below in \n"
+"order to scan the system logs for AppArmor events.  \n"
+"\n"
+"For each AppArmor event, you will be given the  \n"
+"opportunity to choose whether the access should be  \n"
+"allowed or denied."
+msgstr ""
+"Şimdi profil oluşturulmuş programı başka bir\n"
+"pencerede çalıştırarak işlevini yerine getirtin.\n"
+"\n"
+"İşi bitince, aşağıdaki \"Tara\" düğmesine basarak sistem\n"
+"günlüklerinde AppArmor olaylarını aratın.\n"
+"\n"
+"Her AppArmor olayı için erişime izin verileceği ya da\n"
+"verilmeyeceği size sorulacaktır."
+
+#: ../genprof:135
+msgid "Profiling"
+msgstr "Profil oluşturuluyor"
+
+#: ../genprof:169
+msgid "Reloaded SubDomain profiles in enforce mode."
+msgstr "Zorla uygulama modunda yeniden yüklenmiş SubDomain profilleri."
+
+#: ../genprof:170
+#, perl-format
+msgid "Finished generating profile for %s."
+msgstr "%s için profil oluşturma sonlandı."
+
+#: ../genprof:174
+#, perl-format
+msgid "usage: %s [ -d /path/to/profiles ] [ -f /path/to/logfile ] [ program to profile ]"
+msgstr "kullanım %s [ -d /profillere/giden/yol ] [ -f /kayıtdosyasına/giden/yol ] [ profillenecek program ]"
+
+#: ../logprof:72
+#, perl-format
+msgid "usage: %s [ -d /path/to/profiles ] [ -f /path/to/logfile ] [ -m \"mark in log to start processing after\""
+msgstr "kullanım %s [ -d /profillere/giden/yol ] [ -f /kayıtdosyasına/giden/yol ] [ -m \"Günlük dosyasına devamında işleme için işaretle\""
+
+#: ../autodep:63
+#, perl-format
+msgid "Can't find subdomain profiles in %s."
+msgstr "%s içinde subdomain profilleri bulunamadı."
+
+#: ../autodep:71
+msgid "Please enter the program to create a profile for: "
+msgstr "Profil oluşturulacak programı girin."
+
+#: ../autodep:95 ../SubDomain.pm:6156
+#, perl-format
+msgid "%s is currently marked as a program that should not have it's own profile.  Usually, programs are marked this way if creating a profile for them is likely to break the rest of the system.  If you know what you're doing and are certain you want to create a profile for this program, edit the corresponding entry in the [qualifiers] section in /etc/apparmor/logprof.conf."
+msgstr "%s şu anda kendi profili olmaması gereken bir program olarak işaretlenmiş. Normalde bir profil oluşturmak sistemin geri kalanını bozabilecek durumdaysa programlar bu şekilde işaretlenir. Eğer ne yaptığınızı biliyorsanız ve bu program için bir profil oluşturmak istiyorsanız /etc/apparmor/logprof.conf dosyasındaki [qualifiers] bölümündeki ilişkili girdiyi düzenleyin."
+
+#: ../autodep:102
+#, perl-format
+msgid "Profile for %s already exists - skipping."
+msgstr "%s için bir profil zaten mevcut - atlanıyor."
+
+#: ../SubDomain.pm:2989
+msgid "Username: "
+msgstr "Kullanıcı adı:"
+
+#: ../Reports.pm:560
+msgid "No type value passed.  Unable to determine page count."
+msgstr "No type value passed.  Unable to determine page count."
+
+#: ../Reports.pm:626
+#, perl-format
+msgid "Failed copying %s."
+msgstr "Failed copying %s."
+
+#: ../Reports.pm:750
+#, perl-format
+msgid "Export Log Error: Couldn't open %s"
+msgstr "Export Log Error: Couldn't open %s"
+
+#: ../Reports.pm:772
+msgid "Fatal error.  No report name given. Exiting."
+msgstr "Fatal error.  No report name given. Exiting."
+
+#: ../Reports.pm:828
+#, perl-format
+msgid "Failed to parse: %s."
+msgstr "Failed to parse: %s."
+
+#: ../Reports.pm:837
+#, perl-format
+msgid "Fatal Error.  Couldn't open %s."
+msgstr "Fatal Error.  Couldn't open %s."
+
+#: ../Reports.pm:885
+#, perl-format
+msgid "Fatal Error.  Can't run %s.  Exiting."
+msgstr "Fatal Error.  Can't run %s.  Exiting."
+
+#: ../Reports.pm:925
+#, perl-format
+msgid "Fatal Error.  No directory, %s, found.  Exiting."
+msgstr "Fatal Error.  No directory, %s, found.  Exiting."
+
+#: ../Reports.pm:1592
+#, perl-format
+msgid "Fatal Error.  getArchReport() couldn't open %s"
+msgstr "Fatal Error.  getArchReport() couldn't open %s"
+
+# ok button label
+#. ok button label
+#. txt_ok
+msgid "OK"
+msgstr "Tamam"
+
+# /usr/lib/YaST2/keyboard_raw.ycp:139
+#. cancel button label
+#. txt_cancel
+msgid "Cancel"
+msgstr "Vazgeç"
+
+# reboot button label
+#. reboot button label
+#. txt_reboot
+msgid "Reboot"
+msgstr "Yeniden başlat"
+
+# continue button label
+#. continue button label
+#. txt_continue
+msgid "Continue"
+msgstr "Devam et"
+
+#. txt_install
+msgid "Installation"
+msgstr "Kurulum"
+
+#. txt_manual_install
+msgid "Manual Installation"
+msgstr "Elle kurulum"
+
+#. txt_noacpi_install
+msgid "Installation--ACPI Disabled"
+msgstr "Kurulum--ACPI kapalı"
+
+#. txt_safe_install
+msgid "Installation--Safe Settings"
+msgstr "Kurulum--Güvenli ayarlar"
+
+#. txt_safe_linux
+msgid "Linux--Safe Settings"
+msgstr "Linux--Güvenli ayarlar"
+
+#. txt_boot_harddisk
+msgid "Boot from Hard Disk"
+msgstr "Sistemi sabit diskten aç"
+
+#. txt_rescue
+msgid "Rescue System"
+msgstr "Kurtarma sistemi"
+
+#. txt_memtest
+msgid "Memory Test"
+msgstr "Bellek testi"
+
+#. txt_bootoptions
+msgid "Boot Options"
+msgstr "Açılış seçenekleri"
+
+# window title for exit dialog
+#. window title for exit dialog
+#. txt_exit_title (see txt_exit_dialog)
+msgid "Exiting..."
+msgstr "Çıkılıyor..."
+
+#. txt_exit_dialog
+msgid ""
+"You are leaving the graphical boot menu and\n"
+"starting the text mode interface."
+msgstr ""
+"Grafik arabirimini kullanan açılış menüsünden çıkıyor ve\n"
+"yazı tabanlı arabirimi başlatıyorsunuz."
+
+#. txt_help
+msgid "Help"
+msgstr "Yardım"
+
+# window title for kernel loading (see txt_load_kernel)
+#. window title for kernel loading (see txt_load_kernel)
+#. txt_load_kernel_title
+msgid "Starting..."
+msgstr "Başlatılıyor..."
+
+# Keep the three newlines!
+#. Keep the three newlines!
+#. txt_load_kernel
+msgid ""
+"Loading Linux Kernel\n"
+"\n"
+"\n"
+msgstr ""
+"Linux kernel'i yükleniyor\n"
+"\n"
+"\n"
+
+# Keep the three newlines!
+#. Keep the three newlines!
+#. txt_load_memtest
+msgid ""
+"Loading memtest86\n"
+"\n"
+"\n"
+msgstr ""
+"memtest86 yükleniyor\n"
+"\n"
+"\n"
+
+# info box title
+#. info box title
+#. txt_info_title
+msgid "Boot Loader"
+msgstr "Açılış yükleyicisi"
+
+# include/ui/common_messages.ycp:95
+#. error box title
+#. txt_error_title
+msgid "I/O Error"
+msgstr "Giriş/Çıkış hatası"
+
+# boot disk change dialog title
+#. boot disk change dialog title
+#. txt_change_disk_title
+msgid "Change Boot Disk"
+msgstr "Sistem açılış diskini değiştir"
+
+#. txt_insert_disk
+#, c-format
+msgid "Insert boot disk %u."
+msgstr "%u açılış diskini takın."
+
+#. txt_insert_disk2
+#, c-format
+msgid ""
+"This is boot disk %u.\n"
+"Insert boot disk %u."
+msgstr ""
+"Bu açılış diski %u.\n"
+"%u açılış diskini takın."
+
+# <product> is e.g. SuSE Linux X.Y or Enterprise Server Z
+#. <product> is e.g. SuSE Linux X.Y or Enterprise Server Z
+#. txt_insert_disk3
+#, c-format
+msgid ""
+"This is not a <product> boot disk.\n"
+"Insert boot disk %u."
+msgstr ""
+"Bu <product> açılış diski değil.\n"
+"%u açılış diskini takın."
+
+#. password dialog title
+#. txt_password_title
+msgid "Password"
+msgstr "Parola"
+
+#. txt_dud_ready
+msgid "Get your driver update floppy ready."
+msgstr "Sürücü güncelleme disketini hazır bulundurun."
+
+# include/ui/common_messages.ycp:95
+#. dvd warning title
+#. txt_dvd_warning_title
+msgid "DVD Error"
+msgstr "DVD hatası"
+
+#. txt_dvd_warning2
+msgid ""
+"This is a two-sided DVD. You have booted from the second side.\n"
+"\n"
+"Turn the DVD over then continue."
+msgstr ""
+"Bu çift taraflı bir DVD'dir. İkinci tarafı kullanarak sistemi açtınız.\n"
+"\n"
+"DVD'yi çevirip devam edin."
+
+# power off dialog title
+#. power off dialog title
+#. txt_power_off_title
+msgid "Power Off"
+msgstr "Sistemi kapat"
+
+#. txt_power_off
+msgid "Halt the system now?"
+msgstr "Sistem şimdi kapatılsın mı?"
+
+# menu entry for hard disk installation
+#. menu entry for hard disk installation
+#. txt_harddisk
+msgid "Hard Disk"
+msgstr "Sabit disk"
+
+# dialog title for hard disk installation
+#. dialog title for hard disk installation
+#. txt_harddisk_title
+msgid "Hard Disk Installation"
+msgstr "Sabit disk kurulumu"
+
+#. txt_hd_diskdevice
+msgid "Disk Device (Scans All Disks If Empty)\n"
+msgstr "Disk aygıtı (Boş bırakılırsa tüm diskler taranacak)\n"
+
+#. txt_directory
+msgid "Directory\n"
+msgstr "Dizin\n"
+
+#. dialog title for ftp installation
+#. txt_ftp_title
+msgid "FTP Installation"
+msgstr "FTP kurulumu"
+
+#. txt_server
+msgid "Server\n"
+msgstr "Sunucu\n"
+
+#. txt_password
+msgid "Password\n"
+msgstr "Parola\n"
+
+# label for ftp user input
+#. label for ftp user input
+#. txt_user1
+msgid "User (Anonymous Login If Empty)\n"
+msgstr "Kullanıcı (Boş bırakılırsa anonim olarak giriş yapılacak)\n"
+
+#. dialog title for nfs installation
+#. txt_nfs_title
+msgid "NFS Installation"
+msgstr "NFS kurulumu"
+
+# label for smb user input
+#. label for smb user input
+#. txt_user2
+msgid "User (Uses \"guest\" If Empty)\n"
+msgstr "Kullanıcı (Boş bırakılırsa \"guest\" kullanılacak)\n"
+
+# dialog title for smb installation
+#. dialog title for smb installation
+#. txt_smb_title
+msgid "SMB (Windows Share) Installation"
+msgstr "SMB (Windows paylaşımı) kurulumu"
+
+# dialog title for http installation
+#. dialog title for http installation
+#. txt_http_title
+msgid "HTTP Installation"
+msgstr "HTTP kurulumu"
+
+# 'driver' as in '(hardware) driver update'
+#. 'driver' as in '(hardware) driver update'
+#. txt_driver_update
+msgid "Driver"
+msgstr "Sürücü"
+
+# as in Windows Authentication Domain
+#. as in Windows Authentication Domain
+#. txt_domain
+msgid "Domain\n"
+msgstr "Alan\n"
+
+# button label for other/more options
+#. button label for other/more options
+#. txt_other_options
+msgid "Other Options"
+msgstr "Diğer seçenekler"
+
+# label for language selection
+#. label for language selection
+#. txt_language
+msgid "Language"
+msgstr "Dil"
+
+#. txt_apic
+msgid "Installation--IOAPIC Enabled"
+msgstr "Kurulum--IOAPIC etkin"
+
+#. txt_noapic_install
+msgid "Installation--IOAPIC Disabled"
+msgstr "Kurulum--IOAPIC kapalı"
+
+#. txt_nolapic_install
+msgid "Installation--Local APIC Disabled"
+msgstr "Kurulum--Yerel APIC kapalı"
+
+#. txt_yes
+msgid "Yes"
+msgstr "Evet"
+
+#. txt_no
+msgid "No"
+msgstr "Hayır"
+
+# menu item for selecting a file
+#. menu item for selecting a file
+#. txt_file
+msgid "File"
+msgstr "Dosya"
+
+# input label: share as in "Windows share" (SMB)
+#. input label: share as in "Windows share" (SMB)
+#. txt_share
+msgid "Share\n"
+msgstr "Paylaşım\n"
+
+#. txt_zenAuto
+msgid "Automatic Mode"
+msgstr "Otomatik mod"
+
+#. txt_zenManual
+msgid "Manual Mode"
+msgstr "Elle kullanma modu"
+
+#. txt_zenConfig
+msgid "Configure Parameters on ZEN Partition"
+msgstr "ZEN disk bölümündeki parametreleri ayarla"
+
+#. txt_zenInstall
+msgid "Install or Update ZEN Partition"
+msgstr "Bir ZEN disk bölümü kur/güncelle"
+
+#. txt_zenLilo
+msgid "Reinstall ZEN Partition Boot Loader"
+msgstr "ZEN bölümü açılış yükleyicisini yeniden kur"
+
+#. txt_zenDisable
+msgid "Disable ZEN Partition"
+msgstr "ZEN bölümünü devre dışı bırak"
+
+#. txt_zenEnable
+msgid "Enable ZEN Partition"
+msgstr "ZEN bölümünü etkinleştir"
+
+# video mode menu item
+#. video mode menu item
+#. txt_text_mode
+msgid "Text Mode"
+msgstr "Yazı modu"
+
+# menu item, like 'memory test'
+#. menu item, like 'memory test'
+#. txt_firmware
+msgid "Firmware Test"
+msgstr "Aygıt yazılımı testi"
+
+#. txt_dud_file_msg
+msgid ""
+"To load driver updates directly from CD-ROM,\n"
+"enter the driver update file names (separated\n"
+"by commas ',') here:\n"
+msgstr ""
+"Sürücü güncellemelerini doğrudan CD-ROM'dan\n"
+"yüklemek için sürücü güncelleme dosya adlarını girin:\n"
+"(virgüllerle ',' ayırarak)\n"
+
+# clients/hwinfo.ycp:54
+#. install source menu title
+#. ** please keep it really short (comparable to the english text) **
+#. txt_install_source
+msgid "Source"
+msgstr "Kaynak"
+
+#. menu label for selecting (cpu) architecture
+#. like i386, x86-64, ppc
+#. ** please keep it really short (comparable to the english text) **
+#. txt_arch
+msgid "Arch"
+msgstr "Mimari"
+
+#. menu item for keyboard layout (please keep it short)
+#. txt_keyboard
+msgid "Keyboard"
+msgstr "Klavye"
+
+#: ../src/restreewidget.cpp:91
+#: ../build/_CPack_Packages/Linux-Source/TZ/libqdialogsolver1-0.1.1-Source/src/restreewidget.cpp:72
+#: ../build/_CPack_Packages/Linux-Source/TGZ/libqdialogsolver1-0.1.1-Source/src/restreewidget.cpp:72
+#: ../build/_CPack_Packages/Linux-Source/TBZ2/libqdialogsolver1-1.2.0/src/restreewidget.cpp:91
+msgid "Description"
+msgstr "Tanım"
+
+#: ../src/restreewidget.cpp:94 ../src/restreewidget.cpp:102
+#: ../build/_CPack_Packages/Linux-Source/TZ/libqdialogsolver1-0.1.1-Source/src/restreewidget.cpp:75
+#: ../build/_CPack_Packages/Linux-Source/TZ/libqdialogsolver1-0.1.1-Source/src/restreewidget.cpp:83
+#: ../build/_CPack_Packages/Linux-Source/TGZ/libqdialogsolver1-0.1.1-Source/src/restreewidget.cpp:75
+#: ../build/_CPack_Packages/Linux-Source/TGZ/libqdialogsolver1-0.1.1-Source/src/restreewidget.cpp:83
+#: ../build/_CPack_Packages/Linux-Source/TBZ2/libqdialogsolver1-1.2.0/src/restreewidget.cpp:94
+#: ../build/_CPack_Packages/Linux-Source/TBZ2/libqdialogsolver1-1.2.0/src/restreewidget.cpp:102
+msgid "Name"
+msgstr "Ad"
+
+# clients/inst_sw_single.ycp:1461
+#: ../src/restreewidget.cpp:95 ../src/restreewidget.cpp:103
+#: ../build/_CPack_Packages/Linux-Source/TZ/libqdialogsolver1-0.1.1-Source/src/restreewidget.cpp:76
+#: ../build/_CPack_Packages/Linux-Source/TZ/libqdialogsolver1-0.1.1-Source/src/restreewidget.cpp:84
+#: ../build/_CPack_Packages/Linux-Source/TGZ/libqdialogsolver1-0.1.1-Source/src/restreewidget.cpp:76
+#: ../build/_CPack_Packages/Linux-Source/TGZ/libqdialogsolver1-0.1.1-Source/src/restreewidget.cpp:84
+#: ../build/_CPack_Packages/Linux-Source/TBZ2/libqdialogsolver1-1.2.0/src/restreewidget.cpp:95
+#: ../build/_CPack_Packages/Linux-Source/TBZ2/libqdialogsolver1-1.2.0/src/restreewidget.cpp:103
+msgid "Version"
+msgstr "Sürüm"
+
+#: ../application-browser/src/application-browser.c:90
+msgid "Groups"
+msgstr "Gruplar"
+
+# include/cups/ui.ycp:346
+#: ../libslab/app-shell.c:900
+msgid "Other"
+msgstr "Diğer"
+
+#: ../libslab/bookmark-agent.c:1143
+msgid "Home"
+msgstr "Ev"
+
+#: ../libslab/bookmark-agent.c:1194
+msgid "Search"
+msgstr "Ara"
+
+#: ../libslab/directory-tile.c:238 ../libslab/directory-tile.c:456
+#: ../libslab/document-tile.c:294 ../libslab/document-tile.c:831
+msgid "Delete"
+msgstr "Silinecek"
+
+#: ../main-menu/src/network-status-tile.c:355
+#: ../main-menu/src/network-status-tile.c:365
+#, c-format
+msgid "Unknown"
+msgstr "Bilinmeyen"
+
+# clients/lan_inetd_custom.ycp:748
+#: ../main-menu/src/slab-window.glade.h:15
+msgid "Status"
+msgstr "Durum"
+
+#: ../main-menu/src/slab-window.glade.h:16
+msgid "System"
+msgstr "Sistem"
+
+#: ../data/gpk-application.glade.h:9 ../src/gpk-client.c:987
+#: ../src/gpk-client.c:1415 ../src/gpk-client.c:1513 ../src/gpk-client.c:1684
+#: ../src/gpk-client.c:1998 ../src/gpk-client.c:2277 ../src/gpk-client.c:2360
+#: ../src/gpk-client.c:2426 ../src/gpk-client-dialog.c:932
+msgid "Install"
+msgstr "Kur"
+
+# clients/hwinfo.ycp:55
+#: ../data/gpk-application.glade.h:22 ../src/gpk-client.c:1272
+msgid "Remove"
+msgstr "Kaldır"
+
+#. translators: this is the update type, e.g. security
+#: ../src/gpk-application.c:950 ../src/gpk-update-viewer.c:900
+msgid "Type"
+msgstr "Tür"
+
+#: ../src/gpk-application.c:1663 ../src/gpk-enum.c:912 ../src/gpk-enum.c:971
+msgid "Installed"
+msgstr "Kuruldu"
+
+#: ../src/gpk-client-chooser.c:133 ../src/gpk-client-run.c:156
+msgid "Icon"
+msgstr "İkon"
+
+# clients/inst_sw_single.ycp:160
+#: ../src/gpk-enum.c:1267
+msgid "Security"
+msgstr "Güvenlik"
+
+#: ../src/gpk-log.c:332
+msgid "Action"
+msgstr "Hareket"
+
+#: ../src/gpk-prefs.c:47
+msgid "Never"
+msgstr "Hiç bir zaman"
+
+#. translators: this is a list of packages that are obsoleted
+#: ../src/gpk-update-viewer.c:942
+msgid "Obsoletes"
+msgstr "Eskitiyor"
+
+#: gnome-applets-2.0/modemlights/modemlights.c:117
+msgid "translator_credits"
+msgstr ""
+"Barış Çiçek <baris@teamforce.name.tr>\n"
+"Emre Kadıoğlu <kadiogluemre@gmail.com>"
+
+#: gnome-applets-2.0/modemlights/modemlights.c:130
+#: ../modemlights/modemlights.c:1595
+msgid "Modem Lights"
+msgstr "Modem Işıkları"
+
+#: gnome-applets-2.0/modemlights/modemlights.c:132
+msgid ""
+"Released under the GNU general public license.\n"
+"A modem status indicator and dialer.\n"
+"Lights in order from the top or left are Send data and Receive data."
+msgstr ""
+"GNU genel kamu lisansına göre yayınlanmıştır.\n"
+"Modem durum göstergesi ve arayıcısıdır.\n"
+"Yukarıdan ya da soldan başlayan ışıklar Veri gönderimi ve Veri alımıdır."
+
+#: gnome-applets-2.0/modemlights/modemlights.c:513
+msgid ""
+"You are currently connected.\n"
+"Do you want to disconnect?"
+msgstr ""
+"Şu an bağlısınız.\n"
+"Bağlantıyı kesmek istiyor musunuz?"
+
+#: gnome-applets-2.0/modemlights/modemlights.c:583
+#, c-format
+msgid "%#.1fMb received / %#.1fMb sent / time: %.1d:%.2d"
+msgstr "%#.1fMb alındı / %#.1fMb gönderildi / süre: %.1d:%.2d"
+
+#: gnome-applets-2.0/modemlights/modemlights.c:588
+msgid "not connected"
+msgstr "bağlı değil"
+
+#: gnome-applets-2.0/modemlights/modemlights.schemas.in.h:1
+msgid "Ask for confirmation when connecting/disconnecting"
+msgstr "Bağlanırken/bağlantı kesilirken onay için sor"
+
+#: gnome-applets-2.0/modemlights/modemlights.schemas.in.h:2
+msgid "Blink when connecting"
+msgstr "Bağlanırken yanıp sön"
+
+#: gnome-applets-2.0/modemlights/modemlights.schemas.in.h:3
+msgid "Command executed when connecting"
+msgstr "Bağlanıken çalıştırılacak komut"
+
+#: gnome-applets-2.0/modemlights/modemlights.schemas.in.h:4
+msgid "Command executed when disconnecting"
+msgstr "Bağlantı kesilirken calıştırılacak komut"
+
+#: gnome-applets-2.0/modemlights/modemlights.schemas.in.h:5
+msgid "Display a confirmation dialog when connecting or disconnecting."
+msgstr "Bağlanırken ve bağlantı kesilirken onay kutusu göster."
+
+#: gnome-applets-2.0/modemlights/modemlights.schemas.in.h:6
+msgid "Make the applet blink when the modem is connecting."
+msgstr "Modem bağlanırken uygulamacığı yanıp söndür."
+
+#: gnome-applets-2.0/modemlights/modemlights.schemas.in.h:7
+msgid "Modem device name"
+msgstr "Modem aygıtı adı"
+
+#: gnome-applets-2.0/modemlights/modemlights.schemas.in.h:8
+msgid "Modem lock file"
+msgstr "Modem kilit dosyası"
+
+#: gnome-applets-2.0/modemlights/modemlights.schemas.in.h:9
+msgid "Receive background color"
+msgstr "Arkaplan rengini al"
+
+#: gnome-applets-2.0/modemlights/modemlights.schemas.in.h:10
+msgid "Receive foreground color"
+msgstr "Önalan rengini al"
+
+#: gnome-applets-2.0/modemlights/modemlights.schemas.in.h:11
+msgid "Send background color"
+msgstr "Arkaplan rengini gönder"
+
+#: gnome-applets-2.0/modemlights/modemlights.schemas.in.h:12
+msgid "Send foreground color"
+msgstr "Önalan rengini gönder"
+
+#: gnome-applets-2.0/modemlights/modemlights.schemas.in.h:13
+msgid "Show connect time and throughput"
+msgstr "Bağlantı süresini ve veri akışını göster"
+
+#: gnome-applets-2.0/modemlights/modemlights.schemas.in.h:14
+msgid "Show extra information about the connect time and amount of data transmitted and received."
+msgstr "Bağlantı süresi ve iletilen ve alınan veri miktari hakkında ek bilgi göster."
+
+#: gnome-applets-2.0/modemlights/modemlights.schemas.in.h:15
+msgid "Status connected color"
+msgstr "Bağlandı durum rengi"
+
+#: gnome-applets-2.0/modemlights/modemlights.schemas.in.h:16
+msgid "Status not connected color"
+msgstr "Bağlı değil durum rengi"
+
+#: gnome-applets-2.0/modemlights/modemlights.schemas.in.h:17
+msgid "Status waiting connection color"
+msgstr "Bağlantı bekleniyor durum rengi"
+
+#: gnome-applets-2.0/modemlights/modemlights.schemas.in.h:18
+msgid "Text background color"
+msgstr "Metin arkaplan rengi"
+
+#: gnome-applets-2.0/modemlights/modemlights.schemas.in.h:19
+msgid "Text foreground color"
+msgstr "Metin önalan rengi"
+
+#: gnome-applets-2.0/modemlights/modemlights.schemas.in.h:20
+msgid "Text outline color"
+msgstr "Metin çevresi rengi"
+
+#: gnome-applets-2.0/modemlights/modemlights.schemas.in.h:21
+msgid "The background color of the button used to indicate data received."
+msgstr "Veri alındığını belirten düğmenin arkaplan rengi."
+
+#: gnome-applets-2.0/modemlights/modemlights.schemas.in.h:22
+msgid "The background color of the button used to indicate data sent."
+msgstr "Veri gönderildiğini belirten düğmenin arkaplan rengi."
+
+#: gnome-applets-2.0/modemlights/modemlights.schemas.in.h:23
+msgid "The color used to display the status button when the modem is connected."
+msgstr "Modem bağlandığında gösterilen durum düğmesinde kullanılacak renk."
+
+#: gnome-applets-2.0/modemlights/modemlights.schemas.in.h:24
+msgid "The color used to display the status button when the modem is connecting."
+msgstr "Modem bağlanırken gösterilen durum düğmesinde kullanılacak renk."
+
+#: gnome-applets-2.0/modemlights/modemlights.schemas.in.h:25
+msgid "The color used to display the status button when the modem is not connected."
+msgstr "Modem bağlı değilken gösterilen durum düğmesinde kullanılacak renk."
+
+#: gnome-applets-2.0/modemlights/modemlights.schemas.in.h:26
+msgid "The color used to indicate that data has been received."
+msgstr "Veri alındığını belirtmek için kullanılacak renk."
+
+#: gnome-applets-2.0/modemlights/modemlights.schemas.in.h:27
+msgid "The color used to indicate that data has been sent."
+msgstr "Veri gönderildiğini belirtmek için kullanılacak renk."
+
+#: gnome-applets-2.0/modemlights/modemlights.schemas.in.h:28
+msgid "The fraction of a second until the applet updates."
+msgstr "Uygulamacığın güncellenmesi için geçmesi gereken saniye."
+
+#: gnome-applets-2.0/modemlights/modemlights.schemas.in.h:29
+msgid "The name of the modem device."
+msgstr "Modem aygıtının adı."
+
+#: gnome-applets-2.0/modemlights/modemlights.schemas.in.h:30
+msgid "The name of the modem lock file."
+msgstr "Modem kilit dosyasının adı."
+
+#: gnome-applets-2.0/modemlights/modemlights.schemas.in.h:32
+msgid "Use isdn"
+msgstr "Isdn kullan"
+
+#: gnome-applets-2.0/modemlights/modemlights.schemas.in.h:33
+msgid "Use isdn instead of ppp to connect the modem."
+msgstr "Modemle bağlanmak için ppp yerine isdn kullan."
+
+#: gnome-applets-2.0/modemlights/modemlights.schemas.in.h:34
+msgid "Use this command to connect the modem."
+msgstr "Modemle bağlanmak için bu komutu kullan."
+
+#: gnome-applets-2.0/modemlights/modemlights.schemas.in.h:35
+msgid "Use this command to disconnect the modem."
+msgstr "Modemle bağlantıyı kesmek için bu komutu kullan."
+
+#: gnome-applets-2.0/modemlights/modemlights.schemas.in.h:36
+msgid "Verify owner of lock file"
+msgstr "Kilit dosyasının sahibini doğrula"
+
+#: gnome-applets-2.0/modemlights/properties.c:423
+msgid "Modem Lights Preferences"
+msgstr "Modem Işıkları Tercihleri"
+
+#: gnome-applets-2.0/modemlights/properties.c:451
+msgid "U_pdate every:"
+msgstr "_Güncelleme sıklığı:"
+
+#: gnome-applets-2.0/modemlights/properties.c:468
+msgid "seconds"
+msgstr "saniye"
+
+#. extra info checkbox
+#: gnome-applets-2.0/modemlights/properties.c:476
+msgid "Sho_w connect time and throughput"
+msgstr "Bağlantı _süresini ve veri akışını göster"
+
+#: gnome-applets-2.0/modemlights/properties.c:486
+msgid "B_link connection status when connecting"
+msgstr "Bağlanırken _bağlantı durumunu yanıp söndür"
+
+#: gnome-applets-2.0/modemlights/properties.c:496
+msgid "Connections"
+msgstr "Bağlantılar"
+
+#: gnome-applets-2.0/modemlights/properties.c:505
+msgid "Co_nnection command:"
+msgstr "_Bağlantı komutu:"
+
+#: gnome-applets-2.0/modemlights/properties.c:531
+msgid "_Disconnection command:"
+msgstr "Bağlantıyı _kesme komutu:"
+
+#. confirmation checkbox
+#: gnome-applets-2.0/modemlights/properties.c:553
+msgid "Con_firm connection"
+msgstr "Bağlantı için _onay iste"
+
+#: gnome-applets-2.0/modemlights/properties.c:572
+msgid "Receive Data"
+msgstr "Veri Alımı"
+
+#: gnome-applets-2.0/modemlights/properties.c:578
+msgid "_Foreground:"
+msgstr "Ö_nalan:"
+
+#: gnome-applets-2.0/modemlights/properties.c:583
+msgid "Send Data"
+msgstr "Veri Gönder"
+
+#: gnome-applets-2.0/modemlights/properties.c:588
+msgid "Foregroun_d:"
+msgstr "Ön_alan:"
+
+#: gnome-applets-2.0/modemlights/properties.c:590
+msgid "Backg_round:"
+msgstr "A_rkaplan:"
+
+#: gnome-applets-2.0/modemlights/properties.c:593
+msgid "Connection Status"
+msgstr "Bağlantı Durumu"
+
+#: gnome-applets-2.0/modemlights/properties.c:601
+msgid "Co_nnected:"
+msgstr "_Bağlı:"
+
+#: gnome-applets-2.0/modemlights/properties.c:603
+msgid "Disconnec_ted:"
+msgstr "Bağlantıyı _kesili:"
+
+#: gnome-applets-2.0/modemlights/properties.c:606
+msgid "C_onnecting:"
+msgstr "_Bağlanılıyor:"
+
+#: gnome-applets-2.0/modemlights/properties.c:617
+msgid "For_eground:"
+msgstr "Ö_nalan:"
+
+#: gnome-applets-2.0/modemlights/properties.c:619
+msgid "Bac_kground:"
+msgstr "A_rkaplan:"
+
+#: gnome-applets-2.0/modemlights/properties.c:621
+msgid "O_utline:"
+msgstr "Ana _Hatlar:"
+
+#: gnome-applets-2.0/modemlights/properties.c:633
+msgid "Modem Options"
+msgstr "Modem Seçenekleri"
+
+#: gnome-applets-2.0/modemlights/properties.c:642
+msgid "_Device:"
+msgstr "_Aygıt:"
+
+#: gnome-applets-2.0/modemlights/properties.c:668
+msgid "_Lock file:"
+msgstr "_Kilit dosyası:"
+
+#: gnome-applets-2.0/modemlights/properties.c:689
+msgid "_Verify owner of lock file"
+msgstr "_Kilit dosyasının sahibini doğrula"
+
+#. ISDN checkbox
+#: gnome-applets-2.0/modemlights/properties.c:700
+msgid "U_se ISDN"
+msgstr "ISDN _Kullan"
+
+#: gnome-applets-2.0/modemlights/properties.c:717
+msgid "Advanced"
+msgstr "Gelişmiş"
+
+#: gnome-control-center-2.0/capplets/passwd/gnome-passwd.glade.h:1
+msgid "*"
+msgstr "*"
+
+#: kdmshutdown.cpp:528 core/leavemodel.cpp:93
+msgid "Suspend to Disk"
+msgstr "Diske kaydedip uyut"
+
+#: kdmshutdown.cpp:536 core/leavemodel.cpp:88
+msgid "Standby"
+msgstr "Bekleme moduna gir"
+
+#: main.cpp:18
+msgid "Front-end for the KDE file dialog"
+msgstr "KDE dosya iletişim kutusu"
+
+#: main.cpp:24
+msgid "Set dialog mode to single file (default)"
+msgstr "İletişim şeklini tek dosya (öntanımlı) olarak ayarla"
+
+#: main.cpp:25
+msgid "Set dialog mode to multiple file"
+msgstr "İletişim şeklini çoklu dosya olarak ayarla"
+
+#: main.cpp:26
+msgid "Set dialog mode to directory"
+msgstr "İletişim şeklini dizin olarak ayarla"
+
+#: main.cpp:27
+msgid "Print selected files"
+msgstr "Seçili dosyaları yazdır"
+
+#: main.cpp:28
+msgid "Accept nonlocal files"
+msgstr "Yerel olmayan dosyaları kabul et"
+
+#: main.cpp:29
+msgid "Set initial directory"
+msgstr "Başlangıç dizinini ayarla"
+
+#: main.cpp:30
+msgid "Set filter"
+msgstr "Filtreyi ayarla"
+
+#: main.cpp:55
+msgid "kfiledialog"
+msgstr "kfile iletişim kutusu"
+
+#. desc: dialog title
+#: check.cpp:69 kinternet.cpp:317
+msgid "Check Connection"
+msgstr "Bağlantıyı kontrol et"
+
+#: check.cpp:71
+msgid "Default Route"
+msgstr "Öntanımlı yol"
+
+#: check.cpp:79 check.cpp:233
+msgid "Name Server"
+msgstr "Ad sunucusu"
+
+#: check.cpp:151
+msgid "Invalid default route:"
+msgstr "Geçersiz yol:"
+
+#. desc: %1 is a filename, %2 an error message
+#: check.cpp:153 check.cpp:197
+msgid "Cannot read `%1': %2"
+msgstr "%1 dosyası okunamıyor: %2"
+
+#: check.cpp:161
+msgid "Default route ok."
+msgstr "Öntanımlı yol geçerli."
+
+#: check.cpp:177
+msgid "Gateway Address"
+msgstr "Ağ geçidi"
+
+#: check.cpp:181
+msgid "Own Address"
+msgstr "Yerel adres"
+
+#: check.cpp:195 check.cpp:224 check.cpp:272
+msgid "Name server failure:"
+msgstr "Ad sunucusu hatası:"
+
+#: check.cpp:225
+msgid "no name server found in `%1'"
+msgstr "'%1' içinde ad sunucusu bulunamadı."
+
+#: check.cpp:234
+msgid "waiting for reply"
+msgstr "cevap bekleniyor"
+
+#: check.cpp:245
+msgid "unable to fork (internal error)"
+msgstr "'fork' işlemi yürütülemedi (dahili hata)"
+
+#: check.cpp:249 check.cpp:267
+msgid "Name server ok."
+msgstr "Ad sunucusu geçerli."
+
+#: check.cpp:250 check.cpp:268
+msgid "Name Server Address"
+msgstr "Ad sunucusu adresi"
+
+#: check.cpp:273
+msgid "address lookup does not work"
+msgstr "adres araması başarısız"
+
+#: configview.cpp:39
+msgid ""
+"Configuration of the selected interface\n"
+"and provider:"
+msgstr ""
+"Seçili arayüz ve servis sağlayıcısının\n"
+"yapılandırması:"
+
+#: configview.cpp:43
+msgid "Parameter"
+msgstr "Parametre"
+
+#: configview.cpp:44
+msgid "Value"
+msgstr "Değer"
+
+#. desc: B/s means bytes per second
+#: datarateview.cpp:47
+msgid "%1 B/s"
+msgstr "%1 B/s"
+
+#. desc: kB/s means kilo bytes per second
+#: datarateview.cpp:49
+msgid "%1 kB/s"
+msgstr "%1 KB/s"
+
+#. desc: MB/s means mega bytes per second
+#: datarateview.cpp:51
+msgid "%1 MB/s"
+msgstr "%1 MB/s"
+
+#. desc: GB/s means giga bytes per second
+#: datarateview.cpp:53
+msgid "%1 GB/s"
+msgstr "%1 GB/s"
+
+#. desc: TB/s means tera bytes per second
+#: datarateview.cpp:55
+msgid "%1 TB/s"
+msgstr "%1 TB/s"
+
+#. desc: dialog title
+#: datarateview.cpp:89 settings.cpp:261
+msgid "Data Rate"
+msgstr "Veri transfer hızı"
+
+#. desc: dialog title
+#: kinternet.cpp:77 kinternet.cpp:1087 utils.cpp:84
+msgid "KInternet"
+msgstr "KInternet"
+
+#. desc: dialog title
+#: kinternet.cpp:80 kinternet.cpp:1091 utils.cpp:87
+msgid "QInternet"
+msgstr "QInternet"
+
+#. desc: menu title
+#: kinternet.cpp:92 kinternet.cpp:276
+msgid "KInternet - Internet Tool"
+msgstr "KInternet - Internet Aracı"
+
+#. desc: dialog title
+#: kinternet.cpp:285 settings.cpp:44
+msgid "Various Settings"
+msgstr "Genel ayarlar"
+
+#: kinternet.cpp:294
+msgid "Configure with YaST2..."
+msgstr "YaST2 ile yapılandır..."
+
+#: kinternet.cpp:319 settings.cpp:54
+msgid "View Log"
+msgstr "Kayıt dosyasını göster"
+
+#: kinternet.cpp:321 settings.cpp:55
+msgid "View Data Rate"
+msgstr "Veri transfer hızını göster"
+
+#: kinternet.cpp:331
+msgid "Reconnect to Server"
+msgstr "Sunucuyla yeniden bağlantı kur"
+
+#: kinternet.cpp:341
+msgid "&Interface"
+msgstr "A&rayüz"
+
+#: kinternet.cpp:342
+msgid "&Provider"
+msgstr "&Servis sağlayıcı"
+
+#: kinternet.cpp:346
+msgid "St&art"
+msgstr "&Başlat"
+
+#. desc: menu entry to add a link/channel (e.g. for isdn channel bundling)
+#: kinternet.cpp:354
+msgid "&Add Link"
+msgstr "Bağlantı &ekle"
+
+#. desc: menu entry to remove a link/channel (e.g. for isdn channel bundling)
+#: kinternet.cpp:356
+msgid "&Remove Link"
+msgstr "Bağlantı &kaldır"
+
+#: kinternet.cpp:486
+msgid ""
+"Should KInternet start automatically\n"
+"when you log in?"
+msgstr ""
+"KInternet'in her sistem açılışında otomatik\n"
+"olarak açılmasını istiyor musunuz?"
+
+#. desc: dialog title
+#: logview.cpp:79
+msgid "Log"
+msgstr "Kayıt dosyası"
+
+#: logview.cpp:83
+msgid "This is the complete log:"
+msgstr "Aşağıda kaydın tamamı gösterilmektedir:"
+
+#: logview.cpp:92
+msgid "Save to File..."
+msgstr "Dosyaya kaydet..."
+
+#: logview.cpp:113 logview.cpp:117
+msgid "Save Log As"
+msgstr "Kaydı farklı kaydet"
+
+#: logview.cpp:132
+msgid "Cannot open file for writing."
+msgstr "Dosyaya yazılamıyor."
+
+#: main.cpp:146
+msgid ""
+"KInternet is already running. It is the small\n"
+"icon showing a connector in your panel."
+msgstr ""
+"KInternet zaten çalışır durumda ve panelde\n"
+"küçük bir fiş ikonu olarak duruyor."
+
+#: rc.cpp:62 settings.cpp:302
+#, no-c-format
+msgid "Connect"
+msgstr "Bağlantı kurulumu"
+
+#: server.cpp:89
+msgid "Authentication with the server failed."
+msgstr "Sunucu ile kimlik doğrulama başarısız oldu."
+
+#: server.cpp:91
+msgid "Connection closed by server."
+msgstr "Bağlantı sunucu tarafından kesildi."
+
+#: server.cpp:93
+msgid "Connection to server lost."
+msgstr "Sunucuyla olan bağlantı koptu."
+
+#: server.cpp:518
+msgid ""
+"Could not connect to local server. Maybe\n"
+"smpppd is not running or you are not\n"
+"member of the group \"dialout\".\n"
+"Also check the server settings in\n"
+"the dialog \"Various Settings\"."
+msgstr ""
+"Yerel sunucuya bağlanılamadı. smpppd\n"
+"çalışmıyor olabilir ya da şu anki kullanıcı\n"
+"\"dialout\" grubunun bir üyesi olmayabilir.\n"
+"Ayrıca \"Genel ayarlar\" penceresindeki\n"
+"ayarları da kontrol edin."
+
+#: server.cpp:524
+msgid ""
+"Connection to remote server refused.\n"
+"Maybe smpppd is not running.\n"
+"Also check the server settings in\n"
+"the dialog \"Various Settings\"."
+msgstr ""
+"Uzak sunucuyla bağlantıya izin verilmedi.\n"
+"smpppd çalışmıyor olabilir.\n"
+"Ayrıca \"Genel ayarlar\" penceresinden\n"
+"sunucu ayarlarını da kontrol edin."
+
+#: server.cpp:529
+msgid ""
+"Connection to local and remote server\n"
+"refused. Maybe smpppd is not running\n"
+"or you are not member of the group \"dialout\".\n"
+"Also check the server settings in\n"
+"the dialog \"Various Settings\"."
+msgstr ""
+"Yerel ve uzak sunuculara bağlantı\n"
+"kurulmasına izin verilmedi.smpppd\n"
+"çalışmıyor olabilir ya da şu anki kullanıcı\n"
+"\"dialout\" grubunun bir üyesi olmayabilir.\n"
+"Ayrıca \"Genel ayarlar\" penceresinden\n"
+"sunucu ayarlarını da kontrol edin."
+
+#: settings.cpp:51
+msgid "No Action"
+msgstr "Bir işlem yapma"
+
+#: settings.cpp:52
+msgid "Menu"
+msgstr "Menü"
+
+#: settings.cpp:53
+msgid "Start or Stop Connection"
+msgstr "Bağlantı kur ya da bağlantıyı kes"
+
+#: settings.cpp:143
+msgid "Login"
+msgstr "Kullanıcı girişi"
+
+#: settings.cpp:150
+msgid "Interface"
+msgstr "Arayüz"
+
+#: settings.cpp:152
+msgid "Interface to select on start-up:"
+msgstr "Başlangıçta seçilecek arayüz:"
+
+#: settings.cpp:167
+msgid "Provider"
+msgstr "Servis sağlayıcı"
+
+#: settings.cpp:169
+msgid "Provider to select on start-up:"
+msgstr "Başlangıçta seçilecek servis sağlayıcı:"
+
+#: settings.cpp:174
+msgid "Keep Active Provider on Start-up"
+msgstr "Aktif servis sağlayıcıyı başlangıçta koru"
+
+#: settings.cpp:204
+msgid "Window"
+msgstr "Pencere"
+
+#: settings.cpp:212
+msgid "Mouse Buttons"
+msgstr "Fare tuşları"
+
+#: settings.cpp:234
+msgid "Chart Type"
+msgstr "Grafik türü"
+
+#: settings.cpp:246
+msgid "Update Interval"
+msgstr "Tazeleme aralığı"
+
+#: settings.cpp:283
+msgid "Occasion"
+msgstr "Durum"
+
+#: settings.cpp:286
+msgid "When should the scripts be executed:"
+msgstr "Komut dosyaları ne zaman çalıştırılacak:"
+
+#: settings.cpp:304
+msgid "Script to execute after connect:"
+msgstr "Bağlantı kurulduktan sonra çalıştırılacak komut dosyası:"
+
+#: settings.cpp:314
+msgid "Disconnect"
+msgstr "Bağlantı kesilmesi"
+
+#: settings.cpp:316
+msgid "Script to execute after disconnect:"
+msgstr "Bağlantı kesildikten sonra çalıştırılacak komut dosyası:"
+
+#: settings.cpp:329
+msgid "Scripts"
+msgstr "Komut dosyaları"
+
+#: settings.cpp:340
+msgid "Location of smpppd"
+msgstr "smpppd'nin yeri"
+
+#: settings.cpp:360
+msgid "Manual Settings"
+msgstr "El ile ayarlama"
+
+#: settings.cpp:362
+msgid "Server:"
+msgstr "Sunucu:"
+
+#: settings.cpp:375
+msgid "Password:"
+msgstr "Şifre:"
+
+#: settings.cpp:385
+msgid "Server"
+msgstr "Sunucu"
+
+#: settings.cpp:397
+msgid "Host Names"
+msgstr "Makine adları"
+
+#: settings.cpp:411
+msgid "DNS Check"
+msgstr "DNS testi"
+
+#: settings.cpp:563 settings.cpp:566
+msgid "Select Script"
+msgstr "Komut dosyası seçin"
+
+#: wirelessdialog.cpp:346 wirelessdialog.cpp:352
+msgid "WARNING"
+msgstr "UYARI"
+
+#: ksysinfopart.cpp:72
+msgid "KSysinfo"
+msgstr "K sistem bilgisi"
+
+#: sysinfo.cpp:68
+msgid "%1 GB"
+msgstr "%1 GB"
+
+#: sysinfo.cpp:71
+msgid "%1 MB"
+msgstr "%1 MB"
+
+#: sysinfo.cpp:73
+msgid "%1 KB"
+msgstr "%1 KB"
+
+#: sysinfo.cpp:129
+msgid "Looking for CPU information..."
+msgstr "CPU bilgisi araştırılıyor..."
+
+#: sysinfo.cpp:138 sysinfo.cpp:140
+msgid "My Computer"
+msgstr "Bilgisayarım"
+
+#: sysinfo.cpp:141
+msgid "Folders, Harddisks, Removable Devices, System Information and more..."
+msgstr "Klasörler, Sabit Disk Sürücüler, Tak-Çıkar Aygıtlar, Sistem Bilgisi ve daha fazlası..."
+
+#: sysinfo.cpp:147
+msgid "Looking for disk information..."
+msgstr "Disk içeriği araştırılıyor..."
+
+#: sysinfo.cpp:148
+msgid "Disk Information"
+msgstr "Disk Bilgisi"
+
+#: sysinfo.cpp:152
+msgid "OS Information"
+msgstr "İşletim Sistemi Bilgisi"
+
+#: sysinfo.cpp:154
+msgid "OS:"
+msgstr "İşletim Sistemi:"
+
+#: sysinfo.cpp:156
+msgid "Current user:"
+msgstr "Aktif kullanıcı:"
+
+#: sysinfo.cpp:158
+msgid "System:"
+msgstr "Sistem"
+
+#: sysinfo.cpp:159
+msgid "KDE:"
+msgstr "KDE:"
+
+#: sysinfo.cpp:165
+msgid "Display Info"
+msgstr "Görüntü Özellikleri"
+
+#: sysinfo.cpp:167
+msgid "Vendor:"
+msgstr "Üretici:"
+
+#: sysinfo.cpp:168
+msgid "Model:"
+msgstr "Model:"
+
+#: sysinfo.cpp:170
+msgid "Driver:"
+msgstr "Sürücü:"
+
+#: sysinfo.cpp:177
+msgid "Getting OS information...."
+msgstr "İşletim Sistemi bilgisi alınıyor..."
+
+#: sysinfo.cpp:180
+msgid "Common Folders"
+msgstr "Ortak Klasörler"
+
+#: sysinfo.cpp:183
+msgid "My Documents"
+msgstr "Belgelerim"
+
+#: sysinfo.cpp:184
+msgid "My Home Folder"
+msgstr "Ana Klasörüm"
+
+#: sysinfo.cpp:185
+msgid "Root Folder"
+msgstr "Kök Klasör"
+
+#: sysinfo.cpp:186
+msgid "Network Folders"
+msgstr "Ağ Klasörlerim"
+
+#: sysinfo.cpp:190
+msgid "Looking up network status..."
+msgstr "Ağ bağlantı durumu kontrol ediliyor..."
+
+#: sysinfo.cpp:193
+msgid "Network Status"
+msgstr "Ağ Bağlantı Durumu"
+
+#: sysinfo.cpp:201
+msgid "CPU Information"
+msgstr "CPU Bilgisi"
+
+# classnames.ycp:93 clients/hwinfo.ycp:103
+#: sysinfo.cpp:203
+msgid "Processor (CPU):"
+msgstr "İşlemci (CPU)"
+
+#: sysinfo.cpp:204
+msgid "Speed:"
+msgstr "Hız:"
+
+# clients/inst_sunfb.ycp:204
+#: sysinfo.cpp:205
+msgid "%1 MHz"
+msgstr "%1 MHz"
+
+#: sysinfo.cpp:220
+msgid "Looking for memory information..."
+msgstr "Hafıza bilgisi araştırılıyor..."
+
+# clients/online_update.ycp:214
+#: sysinfo.cpp:222
+msgid "Memory Information"
+msgstr "Hafıza Bilgisi"
+
+#: sysinfo.cpp:224
+msgid "Total memory (RAM):"
+msgstr "Toplam bellek (RAM):"
+
+# classnames.ycp:45
+#: sysinfo.cpp:225
+msgid "Free memory:"
+msgstr "Boş bellek"
+
+# classnames.ycp:45
+#: sysinfo.cpp:226
+msgid "Used Memory"
+msgstr "Kullanılan Bellek"
+
+#: sysinfo.cpp:227
+msgid "Total swap:"
+msgstr "Toplam takas belleği:"
+
+#: sysinfo.cpp:228
+msgid "Free swap:"
+msgstr "Boş takas belleği:"
+
+#: sysinfo.cpp:292
+msgid "%1 (+ %2 Caches)"
+msgstr "%1 (+ %2 ön bellek)"
+
+#: sysinfo.cpp:334
+msgid "Device"
+msgstr "Aygıtlar"
+
+# include/partitioning/custom_part_dialogs.ycp:288
+#: sysinfo.cpp:334
+msgid "Filesystem"
+msgstr "Dosya sistemi"
+
+#: sysinfo.cpp:335
+msgid "Total space"
+msgstr "Kapasite:"
+
+# include/ui/wizard_hw.ycp:48
+#: sysinfo.cpp:335
+msgid "Available space"
+msgstr "Kullanılabilir alan:"
+
+#: sysinfo.cpp:341
+msgid "Press the right mouse button for more options like Mount or Eject"
+msgstr "Yükle veya Çıkar gibi komutları sağ fare tuşuna basarak görebilirsiniz"
+
+#: sysinfo.cpp:577
+msgid "%1 (3D Support)"
+msgstr "%1 (3D Desteği)"
+
+#: sysinfo.cpp:581
+msgid "%1 (No 3D Support)"
+msgstr "%1 (3D Desteği YOK)"
+
+#: sysinfo.cpp:595
+msgid "Network is <strong>unreachable</strong>"
+msgstr "Ağa <strong>ulaşılamıyor</strong>"
+
+#: sysinfo.cpp:597
+msgid "You are <strong>offline</strong>"
+msgstr "<strong>Çevrimdışı</strong> gözüküyorsunuz"
+
+#: sysinfo.cpp:599
+msgid "Network is <strong>shutting down</strong>"
+msgstr "Ağ bağlantısı <strong>sonlandırılıyor</strong>"
+
+#: sysinfo.cpp:601
+msgid "<strong>Establishing</strong> connection to the network"
+msgstr "Ağ Bağlantısı <strong>kuruluyor</strong>"
+
+#: sysinfo.cpp:603
+msgid "You are <strong>online</strong>"
+msgstr "<strong>Çevrimiçi</strong> gözüküyorsunuz"
+
+#: sysinfo.cpp:605
+msgid "Unknown network status"
+msgstr "Bilinmeyen ağ bağlantı durumu"
+
+#. i18n: tag string
+#. i18n: file connection_setting_serial.ui line 52
+#: knetworkmanager-connection_setting_wireless_security_widget.cpp:234
+#: knetworkmanager-connection_setting_wireless_security_widget.cpp:467
+#: rc.cpp:217
+msgid "None"
+msgstr "Hiçbiri"
+
+#: knetworkmanager-connection_setting_wireless_security_widget.cpp:479
+msgid "TLS"
+msgstr "TLS"
+
+#: knetworkmanager-connection_setting_wireless_security_widget.cpp:480
+msgid "PEAP"
+msgstr "PEAP"
+
+#: knetworkmanager-connection_setting_wireless_security_widget.cpp:481
+msgid "TTLS"
+msgstr "TTLS"
+
+#: knetworkmanager-connection_setting_wireless_security_widget.cpp:652
+#: knetworkmanager-connection_setting_wireless_security_widget.cpp:677
+msgid "WPA Personal"
+msgstr "WPA Kişisel"
+
+#: knetworkmanager-tray.cpp:624
+msgid "Disable Wireless"
+msgstr "Kablosuzu Kapat"
+
+#: knetworkmanager-tray.cpp:628
+msgid "Enable Wireless"
+msgstr "Kablosuzu Etkinleştir"
+
+#: main.cpp:39
+msgid "A NetworkManager front-end for KDE"
+msgstr "KDE ön-yüzü için bir Ağ Yöneticisi"
+
+#: main.cpp:40
+msgid "Copyright (C) 2005, 2006 Novell, Inc."
+msgstr "Telif Hakkı (C) 2005,2006 Novell, Inc."
+
+#: main.cpp:54
+msgid "KWallet integration"
+msgstr "KWallet tümleşimi"
+
+#. i18n: tag string
+#. i18n: file connection_setting_wireless_security_eap.ui line 49
+#: rc.cpp:308
+msgid "Identity:"
+msgstr "Kimlik:"
+
+#: configuredialog.cpp:150 configuredialog.cpp:317 detaileddialog.cpp:432
+#: kpowersave.cpp:192 settings.cpp:66 configure_Dialog.cpp:876
+msgid "Performance"
+msgstr "Performans"
+
+#: configuredialog.cpp:154 configuredialog.cpp:319 detaileddialog.cpp:438
+#: kpowersave.cpp:194 settings.cpp:68 configure_Dialog.cpp:878
+msgid "Powersave"
+msgstr "Güç koruma"
+
+#: configuredialog.cpp:159 configuredialog.cpp:321 kpowersave.cpp:1478
+#: settings.cpp:70
+msgid "Presentation"
+msgstr "Sunum"
+
+#: configuredialog.cpp:164 configuredialog.cpp:323 kpowersave.cpp:1473
+#: settings.cpp:72
+msgid "Acoustic"
+msgstr "Sessiz"
+
+#: main.cpp:59
+msgid "Current maintainer"
+msgstr "Güncel bakım yardımcısı"
+
+# include/cups/ui.ycp:2577 include/cups/ui.ycp:2598
+#: detaileddialog.cpp:253 detaileddialog.cpp:441 detaileddialog.cpp:468
+msgid "unknown"
+msgstr "bilinmeyen"
+
+#: detaileddialog.cpp:435 kpowersave.cpp:193 configure_Dialog.cpp:877
+msgid "Dynamic"
+msgstr "Dinamik"
+
+#: detaileddialog.cpp:462 kpowersave.cpp:277 kpowersave.cpp:652
+#: kpowersave.cpp:659 kpowersave.cpp:705 kpowersave.cpp:713 kpowersave.cpp:761
+#: kpowersave.cpp:769 kpowersave.cpp:817 kpowersave.cpp:824
+#: kpowersave.cpp:1131 kpowersave.cpp:1243 kpowersave.cpp:1272
+#: kpowersave.cpp:1610 kpowersave.cpp:1670 kpowersave.cpp:2186
+msgid "Warning"
+msgstr "Uyarı"
+
+#: kpowersave.cpp:175
+msgid "Start YaST2 Power Management Module..."
+msgstr "YaST2 güç yönetim modülünü başlat..."
+
+#: kpowersave.cpp:456
+msgid "Plugged in -- fully charged"
+msgstr "Fişe takılı -- tam şarj edilmiş"
+
+#: kpowersave.cpp:460
+msgid "Plugged in"
+msgstr "Fişe takılı"
+
+#: kpowersave.cpp:467
+msgid "Plugged in -- %1% charged (%2:%3 remaining hours)"
+msgstr "Fişe takılı -- %1% şarj edilmiş (kalan süre %2:%3)"
+
+#: kpowersave.cpp:471 kpowersave.cpp:475
+#, c-format
+msgid "Plugged in -- %1% charged"
+msgstr "Fişe takılı -- %1% şarj edilmiş"
+
+#: kpowersave.cpp:474
+msgid "Plugged in -- no battery"
+msgstr "Fişe takılı -- Pil yok"
+
+#: kpowersave.cpp:480
+msgid "Running on batteries -- %1% charged (%2:%3 hours remaining)"
+msgstr "Pil ile çalışıyor -- %1% şarj edilmiş (kalan süre %2:%3)"
+
+#: kpowersave.cpp:484
+#, c-format
+msgid "Running on batteries -- %1% charged"
+msgstr "Pil ile çalışıyor -- %1% şarj edilmiş"
+
+#: kpowersave.cpp:711
+msgid "Suspend to disk disabled by administrator."
+msgstr "Diske kaydedip uyut sistem yöneticisi tarafından kapatılmış."
+
+#: kpowersave.cpp:822
+msgid "Standby disabled by administrator."
+msgstr "Bekleme modu sistem yöneticisi tarafından kapatılmış."
+
+# include/ui/common_messages.ycp:95
+#: kpowersave.cpp:1641
+msgid "Error"
+msgstr "Hata"
+
+#: kpowersave.cpp:1912
+msgid "Battery state changed to WARNING -- remaining time: %1 hours and %2 minutes."
+msgstr "Pil seviyesi UYARI durumuna indi -- kalan süre: %1 saat %2 dakika. "
+
+#: krpmview.cpp:56
+msgid "Install Package with YaST"
+msgstr "Paketi YaST ile yükle"
+
+#: krpmview.cpp:62
+msgid "Use Directory as Source with YaST"
+msgstr "Dizini YaST ile birlikte kaynak olarak kullan"
+
+# clients/inst_sw_single.ycp:742
+#: krpmview.cpp:85
+msgid "Dependencies"
+msgstr "Bağımlılıklar"
+
+# clients/hwinfo.ycp:54
+#: krpmview.cpp:269
+msgid "Requires"
+msgstr "Gerekenler"
+
+#: krpmview.cpp:288
+msgid "Project Page: "
+msgstr "Proje Sayfası: "
+
+#: krpmview.cpp:305
+msgid "Parsing complete."
+msgstr "Sözdizimi Tamamlandı."
+
+#: krpmview.cpp:332
+msgid "krpmview"
+msgstr "krpmview"
+
+#: krpmview.cpp:334
+msgid "Viewer for RPM files"
+msgstr "RPM dosyaları için görüntüleyici"
+
+#: krpmview.cpp:337
+msgid "KRPMView views the content of RPM archives and can use YaST to install them"
+msgstr "KRPMView, RPM arşiv dosyalarının içeriğini gösterir ve yüklenmesi için YaST'ı kullanabilir"
+
+#. FIXME driverList->setColumnWidthMode( COLUMN_NAME, QTreeWidget::Maximum );
+#. FIXME patchList->setColumnWidthMode( COLUMN_NAME, QTreeWidget::Maximum );
+#. FIXME packageList->setColumnWidthMode( COLUMN_NAME, QTreeWidget::Maximum );
+#: ../src/mainwindow.cpp:65 ../src/mainwindow.cpp:104
+#: ../src/mainwindow.cpp:157
+msgid "Summary"
+msgstr "Özet"
+
+# /usr/lib/YaST2/keyboard_raw.ycp:230
+#: ../src/mainwindow.cpp:68 ../src/mainwindow.cpp:160
+msgid "Catalog"
+msgstr "Katalog"
+
+# clients/hwinfo.ycp:71
+#. TXT_MENU_DISPLAY
+msgid "Display"
+msgstr "Ekran"
+
+# classnames.ycp:165
+#. TXT_CDROM
+msgid "CD-ROM"
+msgstr "CD-ROM"
+
+# clients/inst_sw_single.ycp:1647
+#. TXT_FLOPPY
+msgid "Floppy"
+msgstr "Disket"
+
+#. TXT_ABORT
+msgid "Abort"
+msgstr "Durdur"
+
+#: config_dialog.cpp:107
+msgid "Configuration"
+msgstr "Yapılandırma"
+
+# include/ui/common_messages.ycp:27
+#. Yes Button text
+msgid "&Yes"
+msgstr "&Evet"
+
+# include/ui/common_messages.ycp:31
+#. No Button text
+msgid "&No"
+msgstr "&Hayır"
+
+#. Short description of the Monitor module
+#. Monitor name label
+msgid "Monitor"
+msgstr "Monitör"
+
+#. Short description of the Mouse module
+#. Simple mouse text for the mouse tab
+msgid "Mouse"
+msgstr "Fare"
+
+#. XKBFile extension text
+msgid "Morocco"
+msgstr "Fas"
+
+# ET
+#. XKBFile extension text
+msgid "Ethiopia"
+msgstr "Etiyopya"
+
+# GN
+#. XKBFile extension text
+msgid "Guinea"
+msgstr "Gine"
+
+#. XKBFile extension text
+msgid "China"
+msgstr "Çin"
+
+# classnames.ycp:189
+#. Combobox item text for tablet port: USB
+msgid "USB"
+msgstr "USB"
+
+#. XKBFile extension text
+msgid "Arabic"
+msgstr "Arapça"
+
+# NP
+#. XKBFile extension text
+msgid "Nepal"
+msgstr "Nepal"
+
+#. XKBFile extension text
+msgid "Iraq"
+msgstr "Irak"
+
+# NG
+#. XKBFile extension text
+msgid "Nigeria"
+msgstr "Nigeria"
+
+#. XKBFile extension text
+msgid "Estonia"
+msgstr "Estonya"
+
+# MM
+#. XKBFile extension text
+msgid "Myanmar"
+msgstr "Miyanmar"
+
+# /usr/lib/YaST2/keyboard_raw.ycp:410
+#. XKBFile extension text
+msgid "Norway"
+msgstr "Norveç"
+
+# /usr/lib/YaST2/keyboard_raw.ycp:79
+#. XKBFile extension text
+msgid "Germany"
+msgstr "Almanya"
+
+# MN
+#. XKBFile extension text
+msgid "Mongolia"
+msgstr "Moğolistan"
+
+# BT
+#. XKBFile extension text
+msgid "Bhutan"
+msgstr "Bütan"
+
+# menuentries/menuentry_language.ycp:13
+#. XKBFile extension text
+msgid "Bangladesh"
+msgstr "Bangladeş"
+
+# /usr/lib/YaST2/keyboard_raw.ycp:410
+#. XKBFile extension text
+msgid "Belgium"
+msgstr "Belçika"
+
+#. XKBFile extension text
+msgid "Finland"
+msgstr "Finlandiya"
+
+#. XKBFile extension text
+msgid "Israel"
+msgstr "İsrail"
+
+# /usr/lib/YaST2/keyboard_raw.ycp:440
+#. XKBFile extension text
+msgid "Sweden"
+msgstr "İsveç"
+
+# /usr/lib/YaST2/keyboard_raw.ycp:260
+#. XKBFile extension text
+msgid "Portugal"
+msgstr "Portekiz"
+
+#. XKBFile extension text
+msgid "Korean"
+msgstr "Kore dili"
+
+#. XKBFile extension text
+msgid "Uzbekistan"
+msgstr "Özbekistan"
+
+# /usr/lib/YaST2/keyboard_raw.ycp:570
+#. XKBFile extension text
+msgid "Bulgaria"
+msgstr "Bulgaristan"
+
+#. XKBFile extension text
+msgid "Thailand"
+msgstr "Tayland"
+
+#. XKBFile extension text
+msgid "India"
+msgstr "Hindistan"
+
+# /usr/lib/YaST2/keyboard_raw.ycp:169
+#. XKBFile extension text
+msgid "Switzerland"
+msgstr "İsviçre"
+
+# /usr/lib/YaST2/keyboard_raw.ycp:700
+#. XKBFile extension text
+msgid "Japan"
+msgstr "Japonya"
+
+# SY
+# fuzzy
+#. XKBFile extension text
+msgid "Syria"
+msgstr "Surinam"
+
+#. XKBFile extension text
+msgid "Belarus"
+msgstr "Belarus"
+
+#. XKBFile extension text
+msgid "Tajikistan"
+msgstr "Tacikistan"
+
+#. XKBFile extension text
+msgid "Denmark"
+msgstr "Danimarka"
+
+#. XKBFile extension text
+msgid "Slovenia"
+msgstr "Slovenya"
+
+#. XKBFile extension text
+msgid "Malta"
+msgstr "Malta"
+
+# AZ
+#. XKBFile extension text
+msgid "Azerbaijan"
+msgstr "Azerbaycan"
+
+#. XKBFile extension text
+msgid "Lithuania"
+msgstr "Litvanya"
+
+# VN
+# fuzzy
+#. XKBFile extension text
+msgid "Vietnam"
+msgstr "Vietnam"
+
+#. XKBFile extension text
+msgid "Faroe Islands"
+msgstr "Faroe Adaları"
+
+#. XKBFile extension text
+msgid "South Africa"
+msgstr "Güney Afrika"
+
+#. XKBFile extension text
+msgid "Slovakia"
+msgstr "Slovakya"
+
+# MV
+# fuzzy
+#. XKBFile extension text
+msgid "Maldives"
+msgstr "Mali"
+
+#. XKBFile extension text
+msgid "Iceland"
+msgstr "İzlanda"
+
+#. XKBFile extension text
+msgid "Croatia"
+msgstr "Hırvatistan"
+
+#. XKBFile extension text
+msgid "Latvia"
+msgstr "Letonya"
+
+#. XKBFile extension text
+msgid "Albania"
+msgstr "Arnavutluk"
+
+# /usr/lib/YaST2/keyboard_raw.ycp:230
+#. XKBFile extension text
+msgid "Italy"
+msgstr "İtalya"
+
+# /usr/lib/YaST2/keyboard_raw.ycp:320
+#. XKBFile extension text
+msgid "Greece"
+msgstr "Yunanistan"
+
+# /usr/lib/YaST2/timezone_raw.ycp:390
+#. XKBFile extension text
+msgid "United Kingdom"
+msgstr "İngiltere"
+
+# /usr/lib/YaST2/keyboard_raw.ycp:139
+#. XKBFile extension text
+msgid "France"
+msgstr "Fransa"
+
+# AM
+#. XKBFile extension text
+msgid "Armenia"
+msgstr "Ermenistan"
+
+#. XKBFile extension text
+msgid "Pakistan"
+msgstr "Pakistan"
+
+#. XKBFile extension text
+msgid "Poland"
+msgstr "Polonya"
+
+# KG
+# fuzzy
+#. XKBFile extension text
+msgid "Kyrgyzstan"
+msgstr "Kırgızistan"
+
+#. XKBFile extension text
+msgid "Ireland"
+msgstr "İrlanda"
+
+# /usr/lib/YaST2/keyboard_raw.ycp:570
+#. XKBFile extension text
+msgid "Hungary"
+msgstr "Macaristan"
+
+# KH
+#. XKBFile extension text
+msgid "Cambodia"
+msgstr "Kamboçya"
+
+# /usr/lib/YaST2/keyboard_raw.ycp:200
+#. XKBFile extension text
+msgid "Spain"
+msgstr "İspanya"
+
+#. XKBFile extension text
+msgid "Ukraine"
+msgstr "Ukrayna"
+
+#. XKBFile extension text
+msgid "Romania"
+msgstr "Romanya"
+
+# KZ
+# fuzzy
+#. XKBFile extension text
+msgid "Kazakhstan"
+msgstr "Kazakistan"
+
+# /usr/lib/YaST2/keyboard_raw.ycp:410
+#. XKBFile extension text
+msgid "Georgia"
+msgstr "Gürcistan"
+
+# /usr/lib/YaST2/keyboard_raw.ycp:668
+#. XKBFile extension text
+msgid "Turkish"
+msgstr "Türkçe"
+
+#. XKBFile extension text
+msgid "Netherlands"
+msgstr "Hollanda"
+
+#. XKBFile extension text
+msgid "Macedonia"
+msgstr "Makedonya"
+
+#. XKBFile extension text
+msgid "Canada"
+msgstr "Kanada"
+
+# LK
+#. XKBFile extension text
+msgid "Sri Lanka"
+msgstr "Sri Lanka"
+
+# BA
+#. XKBFile extension text
+msgid "Bosnia and Herzegovina"
+msgstr "Bosna-Hersek"
+
+# BR
+#. XKBFile extension text
+msgid "Brazil"
+msgstr "Brezilya"
+
+# GH
+#. XKBFile extension text
+msgid "Ghana"
+msgstr "Gana"
+
+# AD
+#. XKBFile extension text
+msgid "Andorra"
+msgstr "Andora"
+
+# AF
+#. XKBFile extension text
+msgid "Afghanistan"
+msgstr "Afganistan"
+
+#. XKBFile extension text
+msgid "Esperanto"
+msgstr "Esperanto"
+
+# /usr/lib/YaST2/keyboard_raw.ycp:668
+#. XKBFile extension text
+msgid "Turkey"
+msgstr "Türkiye"
+
+msgid "Ok"
+msgstr "Tamam"
+
+# clients/online_update_details.ycp:88 clients/online_update_select.ycp:112
+msgid "patch"
+msgstr "yama"
+
+# classnames.ycp:171 classnames.ycp:176
+#: susehwitem.cpp:161
+msgid "Network Interface"
+msgstr "Ağ arabirimi"
+
+# include/cups/ui.ycp:342
+#: susehwitem.cpp:211
+msgid "Printer"
+msgstr "Yazıcı"
+
+# menuentries/menuentry_scanner.ycp:36
+#: susehwitem.cpp:219
+msgid "Scanner"
+msgstr "Tarayıcı"
+
+#: susehwitem.cpp:236
+msgid "Modem"
+msgstr "Modem"
+
+#: susehwitem.cpp:254
+msgid "Joystick"
+msgstr "Oyun çubuğu"
+
+# clients/hwinfo.ycp:87
+#: susehwitem.cpp:257
+msgid "TV Card"
+msgstr "TV kartı"
+
+# classnames.ycp:72
+#: susehwitem.cpp:258
+msgid "ISDN Controller"
+msgstr "ISDN denetleyicisi"
+
+# clients/inst_startup.ycp:90
+#: src/vminstall/msg.py:169
+msgid "Hardware"
+msgstr "Donanım"
+
+#. language code: afr af
+#: ../zypp/LanguageCode.cc:254
+msgid "Afrikaans"
+msgstr "Afrikanca"
+
+#. language code: alb sqi sq
+#: ../zypp/LanguageCode.cc:262 ../zypp/LanguageCode.cc:264
+msgid "Albanian"
+msgstr "Arnavutça"
+
+#. :DOM:214:
+#: ../zypp/CountryCode.cc:284
+msgid "Algeria"
+msgstr "Cezayir"
+
+# AS
+#. :ARG:032:
+#: ../zypp/CountryCode.cc:235
+msgid "American Samoa"
+msgstr "Amerikan Samoası"
+
+# AO
+#. :ANT:530:
+#: ../zypp/CountryCode.cc:232
+msgid "Angola"
+msgstr "Angola"
+
+# AI
+#. :ATG:028:
+#: ../zypp/CountryCode.cc:228
+msgid "Anguilla"
+msgstr "Angula"
+
+# AQ
+#. :AGO:024:
+#: ../zypp/CountryCode.cc:233
+msgid "Antarctica"
+msgstr "Antartika"
+
+# AG
+#. :AFG:004:
+#: ../zypp/CountryCode.cc:227
+msgid "Antigua and Barbuda"
+msgstr "Antiga ve Barbuda"
+
+#. :ATA:010:
+#: ../zypp/CountryCode.cc:234
+msgid "Argentina"
+msgstr "Arjantin"
+
+# AW
+#. :AUS:036:
+#: ../zypp/CountryCode.cc:238
+msgid "Aruba"
+msgstr "Aruba"
+
+# /usr/lib/YaST2/keyboard_raw.ycp:230
+#. :AUT:040:
+#: ../zypp/CountryCode.cc:237
+msgid "Australia"
+msgstr "Avusturalya"
+
+#. :ASM:016:
+#: ../zypp/CountryCode.cc:236
+msgid "Austria"
+msgstr "Avusturya"
+
+#. language code: aze az
+#: ../zypp/LanguageCode.cc:312
+msgid "Azerbaijani"
+msgstr "Azerice"
+
+# BS
+#. :BRA:076:
+#: ../zypp/CountryCode.cc:254
+msgid "Bahamas"
+msgstr "Bahamalar"
+
+#. :BGR:100:
+#: ../zypp/CountryCode.cc:247
+msgid "Bahrain"
+msgstr "Bahreyn"
+
+# /usr/lib/YaST2/timezone_raw.ycp:58
+#. :BIH:070:
+#: ../zypp/CountryCode.cc:242
+msgid "Barbados"
+msgstr "Barbados"
+
+#. language code: baq eus eu
+#: ../zypp/LanguageCode.cc:326 ../zypp/LanguageCode.cc:328
+msgid "Basque"
+msgstr "Bask Dili"
+
+#. language code: bel be
+#: ../zypp/LanguageCode.cc:336
+msgid "Belarusian"
+msgstr "Beyaz Rusça"
+
+# BZ
+#. :BLR:112:
+#: ../zypp/CountryCode.cc:259
+msgid "Belize"
+msgstr "Belize"
+
+# BJ
+#. :BDI:108:
+#: ../zypp/CountryCode.cc:249
+msgid "Benin"
+msgstr "Benin"
+
+# /usr/lib/YaST2/keyboard_raw.ycp:79
+#. :BEN:204:
+#: ../zypp/CountryCode.cc:250
+msgid "Bermuda"
+msgstr "Bermuda"
+
+#. :BRN:096:
+#: ../zypp/CountryCode.cc:252
+msgid "Bolivia"
+msgstr "Bolivya"
+
+#. :BVT:074:
+#: ../zypp/CountryCode.cc:257
+msgid "Botswana"
+msgstr "Botswana"
+
+# BV
+#. :BTN:064:
+#: ../zypp/CountryCode.cc:256
+msgid "Bouvet Island"
+msgstr "Bouvet Adası"
+
+#. language code: bre br
+#: ../zypp/LanguageCode.cc:362
+msgid "Breton"
+msgstr "Britanyaca"
+
+# IO
+#. :IND:356:
+#: ../zypp/CountryCode.cc:327
+msgid "British Indian Ocean Territory"
+msgstr "Hint Okyanusu İngiliz Sömürgeleri"
+
+# BN
+#. :BMU:060:
+#: ../zypp/CountryCode.cc:251
+msgid "Brunei Darussalam"
+msgstr "Bruney Darüsselam"
+
+#. language code: bul bg
+#: ../zypp/LanguageCode.cc:370
+msgid "Bulgarian"
+msgstr "Bulgarca"
+
+# BF
+#. :BEL:056:
+#: ../zypp/CountryCode.cc:245
+msgid "Burkina Faso"
+msgstr "Burkina Faso"
+
+# BI
+#. :BHR:048:
+#: ../zypp/CountryCode.cc:248
+msgid "Burundi"
+msgstr "Burundi"
+
+# CM
+#. :CHL:152:
+#: ../zypp/CountryCode.cc:269
+msgid "Cameroon"
+msgstr "Kamerun"
+
+# CV
+#. :CUB:192:
+#: ../zypp/CountryCode.cc:275
+msgid "Cape Verde"
+msgstr "Verde Burnu"
+
+#. language code: cat ca
+#: ../zypp/LanguageCode.cc:384
+msgid "Catalan"
+msgstr "Katalanca"
+
+# KY
+#. :KWT:414:
+#: ../zypp/CountryCode.cc:344
+msgid "Cayman Islands"
+msgstr "Seyman Adaları"
+
+# TD
+#. :TCA:796:
+#: ../zypp/CountryCode.cc:430
+msgid "Chad"
+msgstr "Çad"
+
+#. :COK:184:
+#: ../zypp/CountryCode.cc:268
+msgid "Chile"
+msgstr "Şili"
+
+#. language code: chi zho zh
+#: ../zypp/LanguageCode.cc:400 ../zypp/LanguageCode.cc:402
+msgid "Chinese"
+msgstr "Çince"
+
+# CX
+#. :CPV:132:
+#: ../zypp/CountryCode.cc:276
+msgid "Christmas Island"
+msgstr "Christmas Adası"
+
+# CC
+#. :CAN:124:
+#: ../zypp/CountryCode.cc:261
+msgid "Cocos (Keeling) Islands"
+msgstr "Cocos (Keeling) Adaları"
+
+#. :CHN:156:
+#: ../zypp/CountryCode.cc:271
+msgid "Colombia"
+msgstr "Kolombiya"
+
+# KM
+#. :KIR:296:
+#: ../zypp/CountryCode.cc:339
+msgid "Comoros"
+msgstr "Komoros"
+
+# CG
+#. :CCK:166:
+#. :CAF:140:
+#: ../zypp/CountryCode.cc:262 ../zypp/CountryCode.cc:264
+msgid "Congo"
+msgstr "Kongo"
+
+# CK
+#. :CIV:384:
+#: ../zypp/CountryCode.cc:267
+msgid "Cook Islands"
+msgstr "Cook Adaları"
+
+#. :COL:170:
+#: ../zypp/CountryCode.cc:272
+msgid "Costa Rica"
+msgstr "Kosta Rika"
+
+#. language code: scr hrv hr
+#: ../zypp/LanguageCode.cc:1008 ../zypp/LanguageCode.cc:1010
+msgid "Croatian"
+msgstr "Hırvatça"
+
+# CU
+#. :SCG:891:
+#: ../zypp/CountryCode.cc:274
+msgid "Cuba"
+msgstr "Küba"
+
+# CY
+#. :CXR:162:
+#: ../zypp/CountryCode.cc:277
+msgid "Cyprus"
+msgstr "Kıbrıs"
+
+# /usr/lib/YaST2/keyboard_raw.ycp:500
+#. language code: cze ces cs
+#: ../zypp/LanguageCode.cc:446 ../zypp/LanguageCode.cc:448
+msgid "Czech"
+msgstr "Çekçe"
+
+#. :CYP:196:
+#: ../zypp/CountryCode.cc:278
+msgid "Czech Republic"
+msgstr "Çek Cumhuriyeti"
+
+# /usr/lib/YaST2/keyboard_raw.ycp:380
+#. language code: dan da
+#: ../zypp/LanguageCode.cc:452
+msgid "Danish"
+msgstr "Danca"
+
+# /usr/lib/YaST2/timezone_raw.ycp:18
+#. :DEU:276:
+#: ../zypp/CountryCode.cc:280
+msgid "Djibouti"
+msgstr "Cibuti"
+
+# /usr/lib/YaST2/timezone_raw.ycp:76
+#. :DNK:208:
+#: ../zypp/CountryCode.cc:282
+msgid "Dominica"
+msgstr "Dominica"
+
+#. :DMA:212:
+#: ../zypp/CountryCode.cc:283
+msgid "Dominican Republic"
+msgstr "Dominik Cumhuriyeti"
+
+# /usr/lib/YaST2/keyboard_raw.ycp:350
+#. language code: dut nld nl
+#: ../zypp/LanguageCode.cc:478 ../zypp/LanguageCode.cc:480
+msgid "Dutch"
+msgstr "Felemenkçe"
+
+#. :DZA:012:
+#: ../zypp/CountryCode.cc:285
+msgid "Ecuador"
+msgstr "Ekvator"
+
+#. :EST:233:
+#: ../zypp/CountryCode.cc:287
+msgid "Egypt"
+msgstr "Mısır"
+
+#. :STP:678:
+#: ../zypp/CountryCode.cc:426
+msgid "El Salvador"
+msgstr "El Salvador"
+
+#. language code: eng en
+#: ../zypp/LanguageCode.cc:494
+msgid "English"
+msgstr "İngilizce"
+
+# GQ
+#. :GLP:312:
+#: ../zypp/CountryCode.cc:310
+msgid "Equatorial Guinea"
+msgstr "Ekvatoral Gine"
+
+# ER
+#. :ESH:732:
+#: ../zypp/CountryCode.cc:289
+msgid "Eritrea"
+msgstr "Eritre"
+
+#. language code: est et
+#: ../zypp/LanguageCode.cc:500
+msgid "Estonian"
+msgstr "Estonyaca"
+
+# FK
+#. :FJI:242:
+#: ../zypp/CountryCode.cc:294
+msgid "Falkland Islands (Malvinas)"
+msgstr "Falkland Adaları (Malvinas)"
+
+#. language code: fao fo
+#: ../zypp/LanguageCode.cc:508
+msgid "Faroese"
+msgstr "Faroece"
+
+# include/nis_server/ui.ycp:45
+#. :FIN:246:
+#: ../zypp/CountryCode.cc:293
+msgid "Fiji"
+msgstr "Fiji"
+
+# /usr/lib/YaST2/keyboard_raw.ycp:470
+#. language code: fin fi
+#: ../zypp/LanguageCode.cc:516
+msgid "Finnish"
+msgstr "Fince"
+
+# /usr/lib/YaST2/keyboard_raw.ycp:139
+#. language code: fre fra fr
+#: ../zypp/LanguageCode.cc:522 ../zypp/LanguageCode.cc:524
+msgid "French"
+msgstr "Fransızca"
+
+# GF
+# fuzzy
+#. :GEO:268:
+#: ../zypp/CountryCode.cc:303
+msgid "French Guiana"
+msgstr "Fransız Guyanası"
+
+# PF
+#. :PER:604:
+#: ../zypp/CountryCode.cc:393
+msgid "French Polynesia"
+msgstr "Fransız Polinezyası"
+
+# GA
+#. :FXX:249:
+#: ../zypp/CountryCode.cc:299
+msgid "Gabon"
+msgstr "Gabon"
+
+# GM
+#. :GRL:304:
+#: ../zypp/CountryCode.cc:307
+msgid "Gambia"
+msgstr "Gambiya"
+
+# /usr/lib/YaST2/keyboard_raw.ycp:79
+#. language code: ger deu de
+#: ../zypp/LanguageCode.cc:548 ../zypp/LanguageCode.cc:550
+msgid "German"
+msgstr "Almanca"
+
+# /usr/lib/YaST2/timezone_raw.ycp:384
+#. :GHA:288:
+#: ../zypp/CountryCode.cc:305
+msgid "Gibraltar"
+msgstr "Cebelitarık"
+
+#. :GIB:292:
+#: ../zypp/CountryCode.cc:306
+msgid "Greenland"
+msgstr "Grönland"
+
+#. :GBR:826:
+#: ../zypp/CountryCode.cc:301
+msgid "Grenada"
+msgstr "Grenada"
+
+# /usr/lib/YaST2/timezone_raw.ycp:85
+#. :GIN:324:
+#: ../zypp/CountryCode.cc:309
+msgid "Guadeloupe"
+msgstr "Guadeloupe"
+
+#. :GTM:320:
+#: ../zypp/CountryCode.cc:314
+msgid "Guam"
+msgstr "Guam"
+
+#. :SGS:239:
+#: ../zypp/CountryCode.cc:313
+msgid "Guatemala"
+msgstr "Guatemala"
+
+# GW
+#. :GUM:316:
+#: ../zypp/CountryCode.cc:315
+msgid "Guinea-Bissau"
+msgstr "Gine-Bissau"
+
+# GY
+#. :GNB:624:
+#: ../zypp/CountryCode.cc:316
+msgid "Guyana"
+msgstr "Guyana"
+
+# HT
+#. :HRV:191:
+#: ../zypp/CountryCode.cc:321
+msgid "Haiti"
+msgstr "Haiti"
+
+#. language code: heb he
+#: ../zypp/LanguageCode.cc:596
+msgid "Hebrew"
+msgstr "İbranice"
+
+# VA
+# fuzzy
+#. :UZB:860:
+#: ../zypp/CountryCode.cc:451
+msgid "Holy See (Vatican City State)"
+msgstr "Vatikan"
+
+#. :HMD:334:
+#: ../zypp/CountryCode.cc:319
+msgid "Honduras"
+msgstr "Honduras"
+
+#. :GUY:328:
+#: ../zypp/CountryCode.cc:317
+msgid "Hong Kong"
+msgstr "Hong Kong"
+
+# /usr/lib/YaST2/keyboard_raw.ycp:570
+#. language code: hun hu
+#: ../zypp/LanguageCode.cc:614
+msgid "Hungarian"
+msgstr "Macarca"
+
+#. language code: ice isl is
+#: ../zypp/LanguageCode.cc:622 ../zypp/LanguageCode.cc:624
+msgid "Icelandic"
+msgstr "İzlandaca"
+
+#. :HUN:348:
+#: ../zypp/CountryCode.cc:323
+msgid "Indonesia"
+msgstr "Endonezya"
+
+#. language code: ind id
+#: ../zypp/LanguageCode.cc:642
+msgid "Indonesian"
+msgstr "Endonezyaca"
+
+# IR
+# fuzzy
+#. :IRQ:368:
+#: ../zypp/CountryCode.cc:329
+msgid "Iran"
+msgstr "Irak"
+
+#. language code: gle ga
+#: ../zypp/LanguageCode.cc:558
+msgid "Irish"
+msgstr "İrlandaca"
+
+# /usr/lib/YaST2/keyboard_raw.ycp:230
+#. language code: ita it
+#: ../zypp/LanguageCode.cc:654
+msgid "Italian"
+msgstr "İtalyanca"
+
+# /usr/lib/YaST2/timezone_raw.ycp:347
+#. :ITA:380:
+#: ../zypp/CountryCode.cc:332
+msgid "Jamaica"
+msgstr "Jamaika"
+
+# /usr/lib/YaST2/keyboard_raw.ycp:700
+#. language code: jpn ja
+#: ../zypp/LanguageCode.cc:660
+msgid "Japanese"
+msgstr "Japonca"
+
+#. :JAM:388:
+#: ../zypp/CountryCode.cc:333
+msgid "Jordan"
+msgstr "Ürdün"
+
+# KE
+#. :JPN:392:
+#: ../zypp/CountryCode.cc:335
+msgid "Kenya"
+msgstr "Kenya"
+
+# KI
+#. :KHM:116:
+#: ../zypp/CountryCode.cc:338
+msgid "Kiribati"
+msgstr "Kiribati"
+
+#. :KOR:410:
+#: ../zypp/CountryCode.cc:343
+msgid "Kuwait"
+msgstr "Kuveyt"
+
+#. language code: lav lv
+#: ../zypp/LanguageCode.cc:742
+msgid "Latvian"
+msgstr "Letonyaca"
+
+#. :LAO:418:
+#: ../zypp/CountryCode.cc:347
+msgid "Lebanon"
+msgstr "Lübnan"
+
+# LS
+#. :LBR:430:
+#: ../zypp/CountryCode.cc:352
+msgid "Lesotho"
+msgstr "Lesoto"
+
+# LR
+#. :LKA:144:
+#: ../zypp/CountryCode.cc:351
+msgid "Liberia"
+msgstr "Liberya"
+
+# LY
+# fuzzy
+#. :LVA:428:
+#: ../zypp/CountryCode.cc:356
+msgid "Libya"
+msgstr "Liberya"
+
+# /usr/lib/YaST2/timezone_raw.ycp:407
+#. :LCA:662:
+#: ../zypp/CountryCode.cc:349
+msgid "Liechtenstein"
+msgstr "Liechtenstein"
+
+#. language code: lit lt
+#: ../zypp/LanguageCode.cc:750
+msgid "Lithuanian"
+msgstr "Litvanyaca"
+
+#. :LTU:440:
+#: ../zypp/CountryCode.cc:354
+msgid "Luxembourg"
+msgstr "Lüksemburg"
+
+# /usr/lib/YaST2/timezone_raw.ycp:207
+#. :MNG:496:
+#: ../zypp/CountryCode.cc:366
+msgid "Macao"
+msgstr "Macao"
+
+#. language code: mac mkd mk
+#: ../zypp/LanguageCode.cc:772 ../zypp/LanguageCode.cc:774
+msgid "Macedonian"
+msgstr "Makedonyaca"
+
+# MG
+#. :MDA:498:
+#: ../zypp/CountryCode.cc:360
+msgid "Madagascar"
+msgstr "Madagaskar"
+
+# MW
+#. :MDV:462:
+#: ../zypp/CountryCode.cc:374
+msgid "Malawi"
+msgstr "Malavi"
+
+#. :MEX:484:
+#: ../zypp/CountryCode.cc:376
+msgid "Malaysia"
+msgstr "Malezya"
+
+# ML
+#. :MKD:807:
+#: ../zypp/CountryCode.cc:363
+msgid "Mali"
+msgstr "Mali"
+
+# MH
+#. :MDG:450:
+#: ../zypp/CountryCode.cc:361
+msgid "Marshall Islands"
+msgstr "Marşal Adaları"
+
+# /usr/lib/YaST2/timezone_raw.ycp:99
+#. :MNP:580:
+#: ../zypp/CountryCode.cc:368
+msgid "Martinique"
+msgstr "Martinique"
+
+# MR
+#. :MTQ:474:
+#: ../zypp/CountryCode.cc:369
+msgid "Mauritania"
+msgstr "Moritanya"
+
+# MU
+# fuzzy
+#. :MLT:470:
+#: ../zypp/CountryCode.cc:372
+msgid "Mauritius"
+msgstr "Mauritius"
+
+# YT
+#. :YEM:887:
+#: ../zypp/CountryCode.cc:461
+msgid "Mayotte"
+msgstr "Mayotte"
+
+#. :MWI:454:
+#: ../zypp/CountryCode.cc:375
+msgid "Mexico"
+msgstr "Meksika"
+
+# /usr/lib/YaST2/timezone_raw.ycp:381
+#. :MCO:492:
+#: ../zypp/CountryCode.cc:359
+msgid "Moldova"
+msgstr "Moldova"
+
+# /usr/lib/YaST2/timezone_raw.ycp:394
+#. :MAR:504:
+#: ../zypp/CountryCode.cc:358
+msgid "Monaco"
+msgstr "Monako"
+
+# MS
+#. :MRT:478:
+#: ../zypp/CountryCode.cc:370
+msgid "Montserrat"
+msgstr "Monserat"
+
+# MZ
+#. :MYS:458:
+#: ../zypp/CountryCode.cc:377
+msgid "Mozambique"
+msgstr "Mozambik"
+
+# NA
+#. :MOZ:508:
+#: ../zypp/CountryCode.cc:378
+msgid "Namibia"
+msgstr "Namibya"
+
+#. language code: nau na
+#. :NPL:524:
+#: ../zypp/LanguageCode.cc:858 ../zypp/CountryCode.cc:387
+msgid "Nauru"
+msgstr "Nauru"
+
+# /usr/lib/YaST2/timezone_raw.ycp:356
+#. language code: nav nv
+#: ../zypp/LanguageCode.cc:860
+msgid "Navajo"
+msgstr "Navajo"
+
+# AN
+#. :ARM:051:
+#: ../zypp/CountryCode.cc:231
+msgid "Netherlands Antilles"
+msgstr "Hollanda Antilleri"
+
+# NC
+#. :NAM:516:
+#: ../zypp/CountryCode.cc:379
+msgid "New Caledonia"
+msgstr "Yeni İskoçya"
+
+#. :NIU:570:
+#: ../zypp/CountryCode.cc:389
+msgid "New Zealand"
+msgstr "Yeni Zelenda"
+
+#. :NGA:566:
+#: ../zypp/CountryCode.cc:383
+msgid "Nicaragua"
+msgstr "Nikaragua"
+
+# NE
+#. :NCL:540:
+#: ../zypp/CountryCode.cc:380
+msgid "Niger"
+msgstr "Nijer"
+
+# NU
+#. :NRU:520:
+#: ../zypp/CountryCode.cc:388
+msgid "Niue"
+msgstr "Nie"
+
+# NF
+#. :NER:562:
+#: ../zypp/CountryCode.cc:381
+msgid "Norfolk Island"
+msgstr "Norfolk Adası"
+
+# MP
+#. :MAC:446:
+#: ../zypp/CountryCode.cc:367
+msgid "Northern Mariana Islands"
+msgstr "Kuzey Meryem Adaları"
+
+# /usr/lib/YaST2/keyboard_raw.ycp:410
+#. language code: nor no
+#: ../zypp/LanguageCode.cc:888
+msgid "Norwegian"
+msgstr "Norveççe"
+
+# /usr/lib/YaST2/keyboard_raw.ycp:79
+#. :NZL:554:
+#: ../zypp/CountryCode.cc:390
+msgid "Oman"
+msgstr "Umman"
+
+#. :PRT:620:
+#: ../zypp/CountryCode.cc:403
+msgid "Palau"
+msgstr "Palau"
+
+#. :OMN:512:
+#: ../zypp/CountryCode.cc:391
+msgid "Panama"
+msgstr "Panama"
+
+# PG
+#. :PYF:258:
+#: ../zypp/CountryCode.cc:394
+msgid "Papua New Guinea"
+msgstr "Papua Yeni Gine"
+
+#. :PLW:585:
+#: ../zypp/CountryCode.cc:404
+msgid "Paraguay"
+msgstr "Paraguay"
+
+#. :PAN:591:
+#: ../zypp/CountryCode.cc:392
+msgid "Peru"
+msgstr "Peru"
+
+#. :PNG:598:
+#: ../zypp/CountryCode.cc:395
+msgid "Philippines"
+msgstr "Flipinler"
+
+# /usr/lib/YaST2/timezone_raw.ycp:456
+#. :SPM:666:
+#: ../zypp/CountryCode.cc:399
+msgid "Pitcairn"
+msgstr "Pitcairn"
+
+# /usr/lib/YaST2/keyboard_raw.ycp:604
+#. language code: pol pl
+#: ../zypp/LanguageCode.cc:948
+msgid "Polish"
+msgstr "Lehçe"
+
+# /usr/lib/YaST2/keyboard_raw.ycp:260
+#. language code: por pt
+#: ../zypp/LanguageCode.cc:952
+msgid "Portuguese"
+msgstr "Portekizce"
+
+#. :PCN:612:
+#: ../zypp/CountryCode.cc:400
+msgid "Puerto Rico"
+msgstr "Porto Riko"
+
+#. :PRY:600:
+#: ../zypp/CountryCode.cc:405
+msgid "Qatar"
+msgstr "Katar"
+
+# RE
+#. :QAT:634:
+#: ../zypp/CountryCode.cc:406
+msgid "Reunion"
+msgstr "Reunion"
+
+#. language code: rum ron ro
+#: ../zypp/LanguageCode.cc:974 ../zypp/LanguageCode.cc:976
+msgid "Romanian"
+msgstr "Romence"
+
+# /usr/lib/YaST2/keyboard_raw.ycp:638
+#. language code: rus ru
+#: ../zypp/LanguageCode.cc:980
+msgid "Russian"
+msgstr "Rusça"
+
+# RU
+#. :ROU:642:
+#: ../zypp/CountryCode.cc:408
+msgid "Russian Federation"
+msgstr "Rusya Federasyonu"
+
+# RW
+#. :RUS:643:
+#: ../zypp/CountryCode.cc:409
+msgid "Rwanda"
+msgstr "Ruanda"
+
+# SH
+#. :SGP:702:
+#: ../zypp/CountryCode.cc:416
+msgid "Saint Helena"
+msgstr "Sen Helen"
+
+# /usr/lib/YaST2/timezone_raw.ycp:481
+#. :WLF:876:
+#: ../zypp/CountryCode.cc:459
+msgid "Samoa"
+msgstr "Samoa"
+
+# SM
+#. :SLE:694:
+#: ../zypp/CountryCode.cc:421
+msgid "San Marino"
+msgstr "San Marino"
+
+# ST
+#. :SUR:740:
+#: ../zypp/CountryCode.cc:425
+msgid "Sao Tome and Principe"
+msgstr "Sao Tome"
+
+#. :RWA:646:
+#: ../zypp/CountryCode.cc:410
+msgid "Saudi Arabia"
+msgstr "Suudi Arabistan"
+
+# SN
+#. :SMR:674:
+#: ../zypp/CountryCode.cc:422
+msgid "Senegal"
+msgstr "Senegal"
+
+#. language code: scc srp sr
+#: ../zypp/LanguageCode.cc:1000 ../zypp/LanguageCode.cc:1002
+msgid "Serbian"
+msgstr "Sırpça"
+
+# SC
+#. :SLB:090:
+#: ../zypp/CountryCode.cc:412
+msgid "Seychelles"
+msgstr "Seyşel Adaları"
+
+# SL
+#. :SVK:703:
+#: ../zypp/CountryCode.cc:420
+msgid "Sierra Leone"
+msgstr "Sierra Leone"
+
+#. :SWE:752:
+#: ../zypp/CountryCode.cc:415
+msgid "Singapore"
+msgstr "Singapur"
+
+#. language code: slo slk sk
+#: ../zypp/LanguageCode.cc:1032 ../zypp/LanguageCode.cc:1034
+msgid "Slovak"
+msgstr "Slovakça"
+
+#. language code: slv sl
+#: ../zypp/LanguageCode.cc:1036
+msgid "Slovenian"
+msgstr "Slovence"
+
+# SB
+#. :SAU:682:
+#: ../zypp/CountryCode.cc:411
+msgid "Solomon Islands"
+msgstr "Solomon Adaları"
+
+# SO
+#. :SEN:686:
+#: ../zypp/CountryCode.cc:423
+msgid "Somalia"
+msgstr "Somali"
+
+# GS
+# fuzzy
+#. :GRC:300:
+#: ../zypp/CountryCode.cc:312
+msgid "South Georgia and the South Sandwich Islands"
+msgstr "Güney Gürcistan ve Güney Sandoviç Adası"
+
+# /usr/lib/YaST2/keyboard_raw.ycp:200
+#. language code: spa es
+#: ../zypp/LanguageCode.cc:1066
+msgid "Spanish"
+msgstr "İspanyolca"
+
+#. :SYC:690:
+#: ../zypp/CountryCode.cc:413
+msgid "Sudan"
+msgstr "Sudan"
+
+# SR
+#. :SOM:706:
+#: ../zypp/CountryCode.cc:424
+msgid "Suriname"
+msgstr "Surinam"
+
+# SJ
+# fuzzy
+#. :SVN:705:
+#: ../zypp/CountryCode.cc:418
+msgid "Svalbard and Jan Mayen"
+msgstr "Svalbard ve Jan Mayen Adaları"
+
+# SZ
+#. :SYR:760:
+#: ../zypp/CountryCode.cc:428
+msgid "Swaziland"
+msgstr "Swaziland"
+
+# /usr/lib/YaST2/keyboard_raw.ycp:440
+#. language code: swe sv
+#: ../zypp/LanguageCode.cc:1086
+msgid "Swedish"
+msgstr "İsveççe"
+
+# TW
+# fuzzy
+#. :TUV:798:
+#: ../zypp/CountryCode.cc:443
+msgid "Taiwan"
+msgstr "Tayland"
+
+#. language code: tha th
+#: ../zypp/LanguageCode.cc:1110
+msgid "Thai"
+msgstr "Taylandça"
+
+# TG
+#. :ATF:260:
+#: ../zypp/CountryCode.cc:432
+msgid "Togo"
+msgstr "Togo"
+
+# TK
+#. language code: tkl
+#. :TJK:762:
+#: ../zypp/LanguageCode.cc:1122 ../zypp/CountryCode.cc:435
+msgid "Tokelau"
+msgstr "Tokelau"
+
+# TO
+#. :TUN:788:
+#: ../zypp/CountryCode.cc:438
+msgid "Tonga"
+msgstr "Tonga"
+
+# TT
+#. :TUR:792:
+#: ../zypp/CountryCode.cc:441
+msgid "Trinidad and Tobago"
+msgstr "Trinidad ve Tobako"
+
+#. :TKM:795:
+#: ../zypp/CountryCode.cc:437
+msgid "Tunisia"
+msgstr "Tunus"
+
+# TM
+#. :TKL:772:
+#: ../zypp/CountryCode.cc:436
+msgid "Turkmenistan"
+msgstr "Türkmenistan"
+
+# TV
+#. language code: tvl
+#. :TTO:780:
+#: ../zypp/LanguageCode.cc:1152 ../zypp/CountryCode.cc:442
+msgid "Tuvalu"
+msgstr "Tuvalu"
+
+# UG
+#. :UKR:804:
+#: ../zypp/CountryCode.cc:446
+msgid "Uganda"
+msgstr "Uganda"
+
+#. :AND:020:
+#: ../zypp/CountryCode.cc:225
+msgid "United Arab Emirates"
+msgstr "Birleşik Arap Emirlikleri"
+
+# US
+#. :UMI:581:
+#: ../zypp/CountryCode.cc:448
+msgid "United States"
+msgstr "Birleşik Devletler"
+
+# UM
+#. :UGA:800:
+#: ../zypp/CountryCode.cc:447
+msgid "United States Minor Outlying Islands"
+msgstr "United States Minor Outlying Islands"
+
+#. :USA:840:
+#: ../zypp/CountryCode.cc:449
+msgid "Uruguay"
+msgstr "Uruguay"
+
+# VU
+#. :VNM:704:
+#: ../zypp/CountryCode.cc:457
+msgid "Vanuatu"
+msgstr "Vanuatu"
+
+#. :VCT:670:
+#: ../zypp/CountryCode.cc:453
+msgid "Venezuela"
+msgstr "Venezüella"
+
+# src/mozilla_i18n.c:37
+#. language code: vie vi
+#: ../zypp/LanguageCode.cc:1178
+msgid "Vietnamese"
+msgstr "Vietnamca"
+
+# VI
+# fuzzy
+#. :VGB:092:
+#: ../zypp/CountryCode.cc:455
+msgid "Virgin Islands, U.S."
+msgstr "Virgin Adaları (U.S.)"
+
+# WF
+# fuzzy
+#. :VUT:548:
+#: ../zypp/CountryCode.cc:458
+msgid "Wallis and Futuna"
+msgstr "Wallis ve Futuna Adaları"
+
+# EH
+#. :EGY:818:
+#: ../zypp/CountryCode.cc:288
+msgid "Western Sahara"
+msgstr "Batı Sahra"
+
+#. :WSM:882:
+#: ../zypp/CountryCode.cc:460
+msgid "Yemen"
+msgstr "Yemen"
+
+# ZM
+#. :ZAF:710:
+#: ../zypp/CountryCode.cc:463
+msgid "Zambia"
+msgstr "Zambiya"
+
+#. :ZMB:894:
+#: ../zypp/CountryCode.cc:464
+msgid "Zimbabwe"
+msgstr "Zimbabwe"
+
+# /usr/lib/YaST2/timezone_raw.ycp:326
+#. language code: zul zu
+#: ../zypp/LanguageCode.cc:1224
+msgid "Zulu"
+msgstr "Zulu"
+
+#: ../src/info.cc:37
+msgid "Name: "
+msgstr "Ad: "
+
+# clients/inst_sw_single.ycp:1461
+#: ../src/info.cc:38
+msgid "Version: "
+msgstr "Sürüm: "
+
+#: ../src/info.cc:39
+msgid "Arch: "
+msgstr "Mimari: "
+
+#: ../src/info.cc:45
+msgid "Summary: "
+msgstr "Özet: "
+
+#: ../src/info.cc:46
+msgid "Description: "
+msgstr "Tanım: "
+
+# /usr/lib/YaST2/keyboard_raw.ycp:230
+#: ../src/info.cc:152 ../src/info.cc:274 ../src/info.cc:345
+msgid "Catalog: "
+msgstr "Katalog: "
+
+#: ../src/info.cc:157 ../src/info.cc:279
+msgid "Installed: "
+msgstr "Kurulu: "
+
+# clients/lan_inetd_custom.ycp:748
+#. ! \todo fix this - arch?
+#: ../src/info.cc:160 ../src/info.cc:209
+msgid "Status: "
+msgstr "Durum: "
+
+# clients/online_update_start.ycp:151
+#: ../src/info.cc:164
+msgid "up-to-date"
+msgstr "güncel"
+
+# clients/online_update.ycp:223
+#: ../src/info.cc:175
+msgid "Installed Size: "
+msgstr "Kurulum boyutu: "
+
+#: ../src/info.cc:212
+msgid "Category: "
+msgstr "Kategori:"
+
+# clients/inst_custom_part.ycp:2940
+#: ../src/info.cc:213
+msgid "Created On: "
+msgstr "Oluşturulma tarihi: "
+
+# clients/inst_sw_single.ycp:1542 clients/inst_sw_single.ycp:1573 clients/inst_sw_single.ycp:1695 clients/inst_sw_single.ycp:1883
+#: ../src/info.cc:214
+msgid "Reboot Required: "
+msgstr "Yeniden başlatma gerekiyor: "
+
+# clients/lan_inetd_custom.ycp:156
+#: ../src/info.cc:219
+msgid "Restart Required: "
+msgstr "Yeniden başlatma gerekiyor: "
+
+#: ../src/info.cc:222
+msgid "Interactive: "
+msgstr "İnteraktif:"
+
+#: ../src/info.cc:226
+msgid "Provides:"
+msgstr "Sağladıkları:"
+
+# clients/hwinfo.ycp:54
+#: ../src/info.cc:235
+msgid "Requires:"
+msgstr "Gereksinimleri:"
+
+#. translators: S for 'installed Status'
+#. translators: S for installed Status
+#. TranslatorExplanation S stands for Status
+#: ../src/info.cc:289 ../src/search.cc:38 ../src/search.cc:54
+#: ../src/search.cc:214 ../src/search.cc:385 ../src/search.cc:441
+#: ../src/search.cc:533 ../src/update.cc:397
+msgid "S"
+msgstr "S"
+
+# clients/support_question.ycp:91
+#. translators: patch category (recommended, security)
+#. translators: product category (the rug term)
+#: ../src/info.cc:351 ../src/search.cc:267 ../src/search.cc:538
+#: ../src/update.cc:152
+msgid "Category"
+msgstr "Kategori"
+
+#: ../src/repos.cc:703 ../src/repos.cc:2080 ../src/Zypper.cc:3973
+msgid "Alias"
+msgstr "Takma ad"
+
+# /usr/lib/YaST2/timezone_raw.ycp:185
+#. translators: Bundle is a term used in rug. See rug for how to translate it.
+#: ../src/search.cc:42 ../src/search.cc:444 ../src/update.cc:402
+msgid "Bundle"
+msgstr "Deste"
+
+#: ../src/update.cc:174 ../src/utils/misc.cc:113
+msgid "Needed"
+msgstr "Gerekli"
+
+# clients/lan_inetd_custom.ycp:758
+#: ../src/utils/messages.cc:41
+msgid "Too many arguments."
+msgstr "Çok fazla argüman."
+
+#: ../src/utils/misc.cc:118
+msgid "Not Applicable"
+msgstr "Uygun değil"
+
+#: internal key used: SoundText
+msgid "<b>Direct Access to the Sound Device Not Possible</b><br><hr><br>No sound card is available or sound support is not configured yet. However, the application uses or requires sound support."
+msgstr "<b>Ses aygıtına doğrudan erişim mümkün değil</b><br><hr><br>Mevcut bir ses kartı yok ya da ses desteği henüz yapılandırılmamış. Ancak bu program ses desteği kullanıyor ya da ses desteğine ihtiyaç duyuyor."
+
+#: internal key used: 3DText
+msgid "<b>3D Hardware Support Not Available</b><br><hr><br>No 3D graphics card is available or 3D support is not configured yet. However, the application uses or requires 3D hardware support."
+msgstr "<b>3D donanım desteği mevcut değil</b><br><hr><br>Mevcut bir 3D ekran kartı yok ya da 3D desteği henüz yapılandırılmamış. Ancak bu program 3D desteği kullanıyor ya da 3D desteğine ihtiyaç duyuyor."
+
+#: parser_lex.l:162
+#, c-format
+msgid "(ip_mode) Found unexpected character: '%s'"
+msgstr "(ip_mode) Beklenmeyen karakter bulundu: '%s'"
+
+#: parser_lex.l:177
+#, c-format
+msgid "Unexpected character in interface name: '%s'"
+msgstr "Arabirim adında beklenmeyen karakter bulundu: '%s'"
+
+#: parser_lex.l:216
+#, c-format
+msgid "Found unknown flag: '%s'"
+msgstr "Bilinmeyen bayrak bulundu: '%s'"
+
+#: parser_lex.l:356
+#, c-format
+msgid "Found unexpected keyword: '%s'"
+msgstr "Beklenmeyen anahtar kelime bulundu: '%s'"
+
+#: ../parser_misc.c:484
+msgid "Exec qualifier 'i' must be followed by 'x'"
+msgstr "Çalıştırma niteleyicisi 'i'yi 'x' takip etmelidir"
+
+#: ../parser_misc.c:505 ../parser_misc.c:526
+#, c-format
+msgid "Exec qualifier '%c' must be followed by 'x'"
+msgstr "Çalıştırma niteleyicisi '%c' değerini 'x' takip etmelidir"
+
+#: parser_yacc.y:379
+msgid "flags=(debug) is no longer supported, sorry."
+msgstr "flags(debug) artık desteklenmiyor."
+
+#: parser_yacc.y:424
+msgid "Assert: `netrule' returned NULL."
+msgstr "Assert: `netrule' NULL döndürdü."
+
+#: parser_yacc.y:687
+msgid "Assert: `addresses' returned NULL."
+msgstr "Assert: `addresses' NULL döndürdü."
+
+#: parser_yacc.y:798
+msgid "Network entries can only have one TO address."
+msgstr "Ağ girdilerinin sadece bir TO adresi olabilir."
+
+#: parser_yacc.y:803
+msgid "Network entries can only have one FROM address."
+msgstr "Ağ girdilerinin sadece bir FROM adresi olabilir."
+
+#: parser_yacc.y:821 parser_yacc.y:852
+#, c-format
+msgid "`%s' is not a valid ip address."
+msgstr "`%s' geçerli bir ip adresi değil."
+
+#: parser_yacc.y:865
+#, c-format
+msgid "`/%d' is not a valid netmask."
+msgstr "`/%d' geçerli bir ağ maskesi değil."
+
+#: parser_yacc.y:872
+#, c-format
+msgid "`%s' is not a valid netmask."
+msgstr "`%s' geçerli bir ağ maskesi değil."
+
+#: parser_yacc.y:898 parser_yacc.y:918
+#, c-format
+msgid "ports must be between %d and %d"
+msgstr "portlar %d ile %d arasında olmalıdır."
+
+#: gnome-panel-2.0/gnome-panel/panel-run-dialog.c:341
+#, c-format
+msgid "Cannot launch command '%s'"
+msgstr "'%s' komutu başlatılamadı"
+
+# clients/inst_suseconfig.ycp:174
+#. we have just started the transaction, download is now done
+#: ../updater/zmd/ZmdInstallWindow.cpp:179
+#: ../updater/zmd/ZmdInstallWindow.cpp:199
+msgid "Done"
+msgstr "Tamam"
+
+# clients/online_update_load.ycp:380
+#. This should never run
+#: ../updater/zmd/ZmdInstallWindow.cpp:186
+msgid "Download failed: "
+msgstr "İndirme işlemi başarısız oldu:"
+
+# clients/inst_sw_single.ycp:742
+#: ../updater/zmd/ZmdInstallWindow.cpp:278
+msgid "Resolving Dependencies..."
+msgstr "Bağımlılıklar çözümleniyor..."
+
+# include/cups/ui.ycp:1979 include/cups/ui.ycp:2123
+#: ../src/zypper-misc.cc:1073 ../src/zypper-info.cc:171
+msgid "Uninstalled"
+msgstr "Kaldırıldı"
+
+# clients/lvm_config.ycp:311
+#: ../src/zypper-misc.cc:1077 ../src/zypper-info.cc:175
+msgid "Applied"
+msgstr "Uygulandı"
+
+#: ../src/zypper-misc.cc:1079 ../src/zypper-info.cc:177
+msgid "Broken"
+msgstr "Bozuk"
