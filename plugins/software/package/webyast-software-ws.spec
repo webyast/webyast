@@ -1,5 +1,5 @@
 #
-# spec file for package webyast-software-ws (Version 0.1.x)
+# spec file for package webyast-software (Version 0.1.x)
 #
 # Copyright (c) 2008 SUSE LINUX Products GmbH, Nuernberg, Germany.
 # This file and all modifications and additions to the pristine
@@ -9,7 +9,7 @@
 #
 
 
-Name:           webyast-software-ws
+Name:           webyast-software
 Provides:       WebYaST(org.opensuse.yast.system.repositories)
 Provides:       WebYaST(org.opensuse.yast.system.patches)
 Provides:       WebYaST(org.opensuse.yast.system.packages)
@@ -20,7 +20,7 @@ Obsoletes:      yast2-webservice-patches < %{version}
 BuildRequires:  ruby-dbus >= 0.3.1
 
 PreReq:         yast2-webservice
-# ruby-dbus is required by webyast-base-ws already
+# ruby-dbus is required by webyast-base already
 # but here we use a recent feature of on_signal
 Requires:       ruby-dbus >= 0.3.1
 
@@ -51,18 +51,18 @@ Source4:	01-org.opensuse.yast.software.pkla
 BuildRoot:      %{_tmppath}/%{name}-%{version}-build
 BuildArch:      noarch
 
-BuildRequires:  webyast-base-ws-testsuite
+BuildRequires:  webyast-base-testsuite
 BuildRequires:	rubygem-test-unit rubygem-mocha
 
 #
-%define plugin_dir %{webyast_ws_dir}/vendor/plugins/software
+%define plugin_dir %{webyast_dir}/vendor/plugins/software
 #
 
 %package testsuite
 Group:    Productivity/Networking/Web/Utilities
 Requires: %{name} = %{version}
-Requires: webyast-base-ws-testsuite
-Summary:  Testsuite for webyast-software-ws package
+Requires: webyast-base-testsuite
+Summary:  Testsuite for webyast-software package
 
 %description
 WebYaST - Plugin providing REST based interface to handle repositories, patches and packages.
@@ -72,7 +72,7 @@ Authors:
     Stefan Schubert <schubi@opensuse.org>
 
 %description testsuite
-This package contains complete testsuite for webyast-software-ws package.
+This package contains complete testsuite for webyast-software package.
 It's only needed for verifying the functionality of the module and it's not
 needed at runtime.
 
@@ -91,7 +91,7 @@ rm -rf doc
 # PackageKit/DBus need /proc and thus don't run in build environment.
 # But both are required for testing :-/
 # reference: bnc#597868
-# -percent-webyast_ws_check
+# -percent-webyast_check
 
 %install
 
@@ -119,7 +119,7 @@ install -m 0644 %SOURCE4 $RPM_BUILD_ROOT/etc/polkit-1/localauthority/10-vendor.d
 %endif
 %endif
 
-mkdir -p $RPM_BUILD_ROOT/var/lib/yastws/software
+mkdir -p $RPM_BUILD_ROOT/var/lib/webyast/software
 
 %clean
 rm -rf $RPM_BUILD_ROOT
@@ -129,18 +129,18 @@ rm -rf $RPM_BUILD_ROOT
 # granting all permissions for root
 #
 /usr/sbin/grantwebyastrights --user root --action grant > /dev/null ||:
-/usr/sbin/grantwebyastrights --user %{webyast_ws_user} --action grant > /dev/null ||:
+/usr/sbin/grantwebyastrights --user %{webyast_user} --action grant > /dev/null ||:
 
 
-# grant the permission for the webservice user
-polkit-auth --user %{webyast_ws_user} --grant org.freedesktop.packagekit.system-sources-configure >& /dev/null || true
-polkit-auth --user %{webyast_ws_user} --grant org.freedesktop.packagekit.system-update >& /dev/null || true
+# grant the permission for the webyast user
+polkit-auth --user %{webyast_user} --grant org.freedesktop.packagekit.system-sources-configure >& /dev/null || true
+polkit-auth --user %{webyast_user} --grant org.freedesktop.packagekit.system-update >& /dev/null || true
 
 %files
 %defattr(-,root,root)
-%dir %{webyast_ws_dir}
-%dir %{webyast_ws_dir}/vendor
-%dir %{webyast_ws_dir}/vendor/plugins
+%dir %{webyast_dir}
+%dir %{webyast_dir}/vendor
+%dir %{webyast_dir}/vendor/plugins
 %dir %{plugin_dir}
 %dir /usr/share/PolicyKit
 %dir /usr/share/PolicyKit/policy
@@ -155,7 +155,7 @@ polkit-auth --user %{webyast_ws_user} --grant org.freedesktop.packagekit.system-
 %attr(644,root,root) %config /usr/share/PolicyKit/policy/org.opensuse.yast.system.patches.policy
 %attr(644,root,root) %config /usr/share/PolicyKit/policy/org.opensuse.yast.system.packages.policy
 %attr(644,root,root) %config /usr/share/PolicyKit/policy/org.opensuse.yast.system.repositories.policy
-%attr(775,%{webyast_ws_user},root) /var/lib/yastws/software
+%attr(775,%{webyast_user},root) /var/lib/webyast/software
 %doc COPYING
 %if 0%{?suse_version} == 0 || 0%{?suse_version} > 1130
 %dir /var/lib/polkit-1/localauthority

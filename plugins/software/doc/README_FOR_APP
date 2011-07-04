@@ -1,7 +1,7 @@
-PathesLanguage
-==========
+Patch Update; Repository handling
+===================================
 
-REST interface to manage patches.
+Plugin to manage patches and repositories
 
 
-Copyright (c) 2009 Novell
+Copyright (c) 2011 Novell

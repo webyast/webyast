@@ -26,6 +26,31 @@ require 'dbus'
 class ApplicationController < ActionController::Base
   layout 'main'  
 
+protected
+  def redirect_success
+    logger.debug session.inspect
+    if Basesystem.installed? && Basesystem.new.load_from_session(session).in_process?
+      logger.debug "wizard redirect DONE"
+      redirect_to :controller => "controlpanel", :action => "nextstep", :done => self.controller_name
+    else
+      logger.debug "Success non-wizard redirect"
+      redirect_to :controller => "controlpanel", :action => "index"
+    end
+  end
+
+  # helper to add details show link with details content as parameter
+  # Main usage is for flash message
+  #
+  # === usage ===
+  # flash[:error] = "Fatal error."+details("really interesting details")
+  def details(message, options={})
+    ret = "<br><a href=\"#\" onClick=\"$('.details',this.parentNode.parentNode.parentNode).toggle();\"><small>#{_('details')}</small></a>
+            <pre class=\"details\" style=\"display:none\"> #{CGI.escapeHTML message } </pre>"
+    ret
+  end
+
+public
+
   #render only pure text to simple show it on frontend
   rescue_from Exception, :with => :report_exception
 
