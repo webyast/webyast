@@ -77,7 +77,7 @@ TEST_DATA_GRANT = [
   end
 
   def test_find_with_filter
-    perm = Permission.find(:all,{:user_id => "test",:filter => "org.opensuse.yast.permissions.write"})
+    perm = Permission.find("org.opensuse.yast.permissions.write",{:user_id => "test"})
 
 #test all loaded
     assert_equal 1,perm.size
@@ -100,12 +100,12 @@ GENERIC_EXCEPTION_MESSAGE = "Polkit not run"
   def test_exception_handling
     PolKit.stubs(:polkit_check).raises(RuntimeError.new("PolicyKit exception: test does not exist"))
     assert_raise (InvalidParameters.new( :user_id => "UNKNOWN")) do
-      perm = Permission.find(:all,{:user_id => "test",:filter => "org.opensuse.yast.permissions.write"})
+      perm = Permission.find("org.opensuse.yast.permissions.write",{:user_id => "test"})
     end
 
     PolKit.stubs(:polkit_check).raises(RuntimeError.new(GENERIC_EXCEPTION_MESSAGE))
     assert_raise (PolicyKitException.new(GENERIC_EXCEPTION_MESSAGE,"test","org.opensuse.yast.permissions.write")) do
-      perm = Permission.find(:all,{:user_id => "test",:filter => "org.opensuse.yast.permissions.write"})
+      perm = Permission.find("org.opensuse.yast.permissions.write",{:user_id => "test"})
     end
   end
 end

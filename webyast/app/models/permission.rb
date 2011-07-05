@@ -27,6 +27,43 @@ class Permission
 #list of hash { :name => id, :granted => boolean, :description => string (optional)}
   attr_reader :permissions
 
+private
+
+  def self.get_cache_timestamp
+    lst = [
+      # the global config file
+      File.mtime('/etc/PolicyKit/PolicyKit.conf'),
+      # policies
+      File.mtime('/usr/share/PolicyKit/policy/'),
+      # explicit user authorizations
+      File.mtime('/var/lib/PolicyKit/'),
+      # default overrides
+      File.mtime('/var/lib/PolicyKit-public/'),
+    ]
+    lst.compact!
+    lst.max.to_i
+  end
+
+  def self.cache_valid
+    cache_id = 'permissions:timestamp'
+    #cache contain string as it is only object supported by all caching backends
+    cache_timestamp = Rails.cache.read(cache_id).to_i
+    current_timestamp = self.get_cache_timestamp
+
+    if !cache_timestamp
+      Rails.cache.write(cache_id, current_timestamp.to_s)
+    elsif cache_timestamp < current_timestamp
+      Rails.logger.debug "#### Permissions cache expired"
+      Rails.cache.write(cache_id, current_timestamp.to_s)
+      YastCache.reset("permission:find::all")
+      return false
+    end
+    return true
+  end
+
+
+public
+
   def initialize
     @permissions = []
   end
@@ -48,6 +85,7 @@ class Permission
   end
 
   def self.find(type,restrictions={})
+    self.cache_valid
     filters = {}
     #filter out only needed parameters
     restrictions.each {|key, value|  
@@ -57,7 +95,7 @@ class Permission
     cache_key += ":#{filters.inspect}" unless filters.blank? 
     YastCache.fetch(cache_key) {
       permission = Permission.new
-      permission.load_permissions filters
+      permission.load_permissions(type,filters)
       permission.permissions
     }
   end
@@ -66,10 +104,10 @@ class Permission
     raise "Unimplemented"
   end
 
-  def load_permissions(options)
+  def load_permissions(type, options)
     semiresult = Permission.all_actions.split(/\n/)
-    if (options[:filter])
-      semiresult.delete_if { |perm| !perm.include? options[:filter] }
+    if (type != :all)
+      semiresult.delete_if { |perm| !perm.include? type }
     else
       semiresult = Permission.filter_nonsuse_permissions semiresult
     end

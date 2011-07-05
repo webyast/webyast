@@ -24,27 +24,7 @@
 class PermissionsController < ApplicationController
 
   before_filter :login_required
-
-  # before filter is called even when the action is cached
-  before_filter :check_perms, :cache_valid, :only => :show
-
-  # modify the cache path so it includes also the filter and user name parameters
-  caches_action :show, :cache_path => Proc.new { |controller|
-      ret = controller.controller_path
-      unless controller.params[:user_id].blank?
-        ret = ret + '/' + controller.params[:user_id]
-      end
-      unless controller.params[:filter].blank?
-        ret = ret + '/' + controller.params[:filter]
-      end
-      if controller.params[:with_description]
-        ret = ret + '/with_description'
-      end
-      Rails.logger.info "Using cache path: #{ret}"
-      ret
-  }
-
-  CACHE_ID = 'permissions:timestamp'
+  before_filter :check_perms, :only => :show
 
   def initialize
     @permissions = []
@@ -65,39 +45,8 @@ class PermissionsController < ApplicationController
     end
   end
 
-  def get_cache_timestamp
-    lst = [
-      # the global config file
-      File.mtime('/etc/PolicyKit/PolicyKit.conf'),
-      # policies
-      File.mtime('/usr/share/PolicyKit/policy/'),
-      # explicit user authorizations
-      File.mtime('/var/lib/PolicyKit/'),
-      # default overrides
-      File.mtime('/var/lib/PolicyKit-public/'),
-    ]
 
-    lst.compact!
-
-    lst.max.to_i
-  end
-
-  def cache_valid
- #cache contain string as it is only object supported by all caching backends
-    cache_timestamp = Rails.cache.read(CACHE_ID).to_i
-    current_timestamp = get_cache_timestamp
-
-    if !cache_timestamp
-        Rails.cache.write(CACHE_ID, current_timestamp.to_s)
-    elsif cache_timestamp < current_timestamp
-        Rails.logger.debug "#### Permissions cache expired"
-        # expire all cached values using a regexp (for all users/filters)
-        expire_fragment(%r{#{controller_path}/.*})
-        Rails.cache.write(CACHE_ID, current_timestamp.to_s)
-    end
-  end
-
-  public
+public
 #--------------------------------------------------------------------------------
 #
 # actions
