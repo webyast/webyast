@@ -1,0 +1,152 @@
+<!--
+# Copyright (c) 2009-2010 Novell, Inc.
+# 
+# All Rights Reserved.
+# 
+# This program is free software; you can redistribute it and/or modify it
+# under the terms of version 2 of the GNU General Public License
+# as published by the Free Software Foundation.
+# 
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+# GNU General Public License for more details.
+# 
+# You should have received a copy of the GNU General Public License
+# along with this program; if not, contact Novell, Inc.
+# 
+# To contact Novell about this file by physical or electronic mail,
+# you may find current contact information at www.novell.com
+-->
+<% content_for :head do %>
+  <% unless JSMIN == true %>  
+    <%= javascript_include_tag "webyast-firewall" %>
+    <%= stylesheet_link_tag "webyast-firewall" %>
+  <% end %>
+<% end %>
+
+<!--<#%# #disabled = !@permissions[:write] #%#>-->
+<% disabled = !@permissions %>
+
+
+<div class="plugin-content plugin-border">
+  <%= render :partial => 'shared/missing_write_permissions' if disabled %>
+  <% form_tag '/firewall/update', {:id=>'firewallForm', :class => 'container, webyast_form', :onsubmit => "return validateNeededServices()" } do %>
+
+  <div id="firewallbar" class="plugin-header">
+    <div class="left" style="float:left">
+      <label class="plugin-icon-container"><img class="plugin-icon" src="/icons/firewall.png"></label>
+      <label class="plugin-name">Firewall</label><span id="questionMark" style="margin:0px 15px; float:none;">?</span>
+    </div>
+
+    <div class="right" >
+      <span class="right" style="padding:2px; background:#f5f5f5; -moz-border-radius:2px; -webkit-border-radius:2px;">
+      <% if @firewall.use_firewall %>
+        <button id="on" class="active" value="on"><%=_("Enabled")%></button>
+        <button id="off" value="off"><%=_("Disabled")%></button>
+      <% else %>
+        <button id="on" value="on"><%=_("Enabled")%></button>
+        <button id="off" class="active" value="off"><%=_("Disabled")%></button>
+      <% end %>
+     </span>
+    </div>
+    <div class="clearfix"></div>    
+  </div>
+  
+  <div id="fw_services_values">
+    <% @firewall.fw_services.each do |service| %>
+      <input type="hidden" 
+             name="<%= service["input_name"] %>" 
+             class="<%= service["css_class"] %>" 
+             value="<%= service["allowed"] ? 'true' : 'false' %>"
+             />
+    <% end %>
+  </div>
+
+  <input type="checkbox" name="use_firewall" id="use_firewall" value="true" <%=  "checked=\"checked\"" if @firewall.use_firewall %> <%=  "disabled=\"disabled\"" if disabled %> /> 
+
+  <div class="clearfix"></div>
+
+  <div id="firewall-wrapper">
+    <div id="allowedContainer">
+      <label><span class="icon-border"><img class="label-image" src="images/locko.png"></span><%= _("Allowed services") %></label>
+      <% if @firewall.use_firewall %>
+        <script type="text/javascript">jQuery(function($){ enableFirewallForm() })</script>
+        <div id="allowed_services" class="services round5">
+      <% else %>
+        <div id="allowed_services" class="services round5 firewallForm_disabled">
+      <% end %>
+      <% @firewall.fw_services.each do |service| %>
+        <span value="<%= service["css_class"] %>" class="firewall-service" original-title="<%= service["description"] if service["description"] %>"><%= service["name"] %></span>
+      <% end %>
+      </div>
+    </div> 
+
+    <div id="blockedContainer">
+      <label><span class="icon-border"><img class="label-image" src="images/lock.png"></span><%= _("Blocked services") %></label>
+      <% if @firewall.use_firewall %>
+        <div id="blocked_services" class="services round5">
+      <% else %>
+        <div id="blocked_services" class="services round5 firewallForm_disabled">
+      <% end %>
+
+      <% @firewall.fw_services.each do |service| %>
+        <span value="<%= service["css_class"] %>" class="firewall-service" original-title="<%= service["description"] if service["description"] %>"><%= service["name"] %></span>
+      <% end %>
+      </div>
+    </div>
+
+    <div class="clearfix"></div>
+    <div class="button_container" style="margin:0;">
+      <div class="hr">&nbsp;</div>
+      <div class="nav-buttons">
+        <%= form_send_buttons :disabled => disabled, :class => "button", :id=>"firewallSubmitButton" %>
+      </div>
+    </div>
+    <% end %>
+  </div>
+</div>
+
+<script>
+  $(document).ready(function(){
+    $("#blocked_services span").filter( function(index) {
+      return $("#fw_services_values input."+$(this).attr("value")).attr("value") == "true";
+    }).hide();
+
+    $("#allowed_services span").filter( function(index) {
+      return $("#fw_services_values input."+$(this).attr("value")).attr("value") == "false";
+    }).hide();
+  });
+
+  function validateNeededServices() {
+    var use_firewall_old = <%= @firewall.use_firewall ? "true" : "false" %>;
+    var needed_services = <%= @needed_services_js %>;
+    var confirm_text = <%= jss _("Some of needed services (%s) are going to be blocked. WebYaST may not be usable anymore. Do you really want to block them?") %>;
+
+    function isBlockedAndWasAllowed(service) {
+      var is_blocked  = ( $("#fw_services_values input[name='"+service["input_name"]+"']")[0].value == 'false' );
+      return is_blocked && (service.allowed || ! use_firewall_old);
+    }
+
+    function blockedNames(services) {
+      return services.filter( isBlockedAndWasAllowed ).map( function(s) { return s.name });
+    }
+
+    if ( $("#use_firewall")[0].checked ) {
+      if ( needed_services.some( isBlockedAndWasAllowed ) ) {
+	if (!confirm( confirm_text.replace("%s", blockedNames(needed_services).join(", ")) ) ){
+	  return false;
+	}
+      } 
+    }
+    
+    var message = <%= jss _("Please wait") -%>;
+    $.modalDialog.wait( {message: message});
+    return true;
+  }
+
+  var AUTH_TOKEN = 'authenticity_token=' + encodeURIComponent("<%= escape_javascript form_authenticity_token %>");
+  startNotifier({'module':'firewall', 'AUTH_TOKEN':AUTH_TOKEN}, 1000, 11000);
+
+  $(document).ready(initChagesTrack(<%= jss _("You have unsaved changes. Do you want to save your changes?") -%>));
+</script>
