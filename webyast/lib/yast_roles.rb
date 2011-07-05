@@ -23,13 +23,36 @@ module YastRoles
 
   public
 
-  # Shortcut for yapi permission so it is enought to write
+  # Shortcut for yapi permission so it is enough to write
   #    yapi_perm_check "time.read"
   # instead
   #    permission_check "org.opensuse.yast.modules.yapi.time.read"
   # for more details see permission_check
   def yapi_perm_check(action)
     permission_check "org.opensuse.yast.modules.yapi.#{action}"
+  end
+
+  # Shortcut for yapi permission so it is enough to write
+  #    yapi_perm_granted? "time.read"
+  # instead
+  #    permission_granted? "org.opensuse.yast.modules.yapi.time.read"
+  # Returns only true/false. Does not generate an exception.
+  def yapi_perm_granted?(action)
+    permission_granted? "org.opensuse.yast.modules.yapi.#{action}"
+  end
+
+
+  # Check if permission user can do selected action.
+  # <b>action</b>:: name of target action
+  # Returns only true/false. Does not generate an exception.
+  def permission_granted?(action)
+    begin
+      return permission_check action
+    rescue Exception => e
+      puts "permission_check2: #{e}"
+      Rails.logger.info e
+    end
+    return false
   end
 
   # Check if permission user can do selected action.
@@ -61,5 +84,6 @@ module YastRoles
       Rails.logger.info e
       raise
     end
+    return false
   end
 end

@@ -45,24 +45,19 @@ class FirewallController < ApplicationController
   public 
     def index
       yapi_perm_check "firewall.read"
-      @firewall = Firewall.find
 
-      
+      @firewall = Firewall.find
       #Rails.logger.error @firewall.use_firewall.inspect
       @firewall.fw_services.each do |service|
         service["css_class"] = CGI_PREFIX+"-"+service["id"].gsub(/^service:/,"service-")
         service["name"] = service["id"].gsub(/^service:/,"")
         service["input_name"] = CGI_PREFIX+"_"+service["id"]
       end
-      
+  
       @firewall.fw_services.sort! {|x,y| x["name"] <=> y["name"]}
-      #@permissions = Firewall.permissions
-      permissions = Permission.find("org.opensuse.yast.modules.yapi.firewall", {:user_id => session[:user]})
-      Rails.logger.error "*** PERMISSIONS #{permissions.inspect}"
-      @permissions = true #{:read => true, :write => false}
-      
       needed_services = @firewall.fw_services.find_all{|s| NEEDED_SERVICES.include? s.object_id}
       @needed_services_js = "["+needed_services.collect{|s| service_to_js s}.join(",")+"]"
+      @write_permission = yapi_perm_granted?("firewall.write")
       
       respond_to do |format|
         format.html
@@ -97,6 +92,8 @@ class FirewallController < ApplicationController
 #    end
     
     def update
+      yapi_perm_check "firewall.write"
+
       firewall = Firewall.find 
       
       if request.format.html?
@@ -119,9 +116,7 @@ class FirewallController < ApplicationController
         end
 
         firewall = Firewall.new(root)
-        yapi_perm_check "firewall.write"
         firewall.save
-
         show
       end
 

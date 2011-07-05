@@ -25,9 +25,7 @@
   <% end %>
 <% end %>
 
-<!--<#%# #disabled = !@permissions[:write] #%#>-->
-<% disabled = !@permissions %>
-
+<% disabled = !@write_permission %>
 
 <div class="plugin-content plugin-border">
   <%= render :partial => 'shared/missing_write_permissions' if disabled %>
