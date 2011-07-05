@@ -25,25 +25,21 @@ class Firewall < BaseModel::Base
 
   def self.find
     YastCache.fetch("firewall:find") {
-      Firewall.new YastService.Call("YaPI::FIREWALL::Read")
+      firewall = Firewall.new YastService.Call("YaPI::FIREWALL::Read")
+      return firewall
     }
   end
 
   def save
     result = {"saved_ok" => true}
     fw_save_data = {'use_firewall' => @use_firewall, 'fw_services' => @fw_services.collect {|h| h.delete "name"; h} }
-    #begin
     result = YastService.Call("YaPI::FIREWALL::Write", Firewall.toVariantASV(fw_save_data) )
-    #rescue Exception => e
-    #  Rails.logger.info "firewall configuration saving error: #{e.inspect}"
-    #  
-    #end
     YastCache.reset("firewall:find")
     raise FirewallException.new(result["error"]) unless result["saved_ok"]
   end
 
   def self.toVariant(value)
-    if    value.is_a? TrueClass
+    if value.is_a? TrueClass
       ["b",true]
     elsif value.is_a? FalseClass
       ["b",false]

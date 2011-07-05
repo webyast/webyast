@@ -57,7 +57,7 @@ module ApplicationHelper
   end
 
   def form_label_back_button( label, options = {}, html_options = {:class=>"action-link"})
-    if (!Basesystem.installed?) || Basesystem.new.load_from_session(session).completed?
+    if Basesystem.new.load_from_session(session).completed?
        if ! (options[:action] || options[:controller]) then
            options[:controller] = "controlpanel"
        end
@@ -69,11 +69,9 @@ module ApplicationHelper
 
   def form_next_button(send_options={})
     label = send_options[:label] || _("Save")
-    if Basesystem.installed?
       bs = Basesystem.new.load_from_session(session)
       label = _("Next") unless bs.completed?
       label = _("Finish") if bs.last_step?
-    end
     submit_tag label,send_options
   end
 end
