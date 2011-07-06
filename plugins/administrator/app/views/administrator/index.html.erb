@@ -1,0 +1,160 @@
+<!--
+# Copyright (c) 2009-2010 Novell, Inc.
+#
+# All Rights Reserved.
+#
+# This program is free software; you can redistribute it and/or modify it
+# under the terms of version 2 of the GNU General Public License
+# as published by the Free Software Foundation.
+#
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+# GNU General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with this program; if not, contact Novell, Inc.
+#
+# To contact Novell about this file by physical or electronic mail,
+# you may find current contact information at www.novell.com
+-->
+
+<% content_for :head do %>
+
+  <% unless JSMIN == true %>
+    <%= stylesheet_link_tag "webyast-administrator" %>
+    #<% javascript_include_tag "digitalspaghetti.password.js" %>
+    <%= javascript_include_tag "passwordStrengthMeter" %>
+  <% end %>
+
+  <script type="text/javascript">
+    var AUTH_TOKEN = 'authenticity_token=' + encodeURIComponent("<%= escape_javascript form_authenticity_token %>");
+    startNotifier({'module':'administrator', 'AUTH_TOKEN':AUTH_TOKEN}, 1000, 11000);
+    // define custom validation function
+    // alias is actually a list of email aliases
+    jQuery.validator.addMethod("emails", function(value, element) {
+      if (this.optional(element)) return true;
+
+      var emails = value.split(",");
+
+      for(i=0; i < emails.length; i++){
+        var email = $.trim(emails[i]);
+        // this is the email regexp from jQuery validator RORSCAN_INL
+        if (!/^((([a-z]|\d|[!#\$%&'\*\+\-\/=\?\^_`{\|}~]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])+(\.([a-z]|\d|[!#\$%&'\*\+\-\/=\?\^_`{\|}~]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])+)*)|((\x22)((((\x20|\x09)*(\x0d\x0a))?(\x20|\x09)+)?(([\x01-\x08\x0b\x0c\x0e-\x1f\x7f]|\x21|[\x23-\x5b]|[\x5d-\x7e]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(\\([\x01-\x09\x0b\x0c\x0d-\x7f]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF]))))*(((\x20|\x09)*(\x0d\x0a))?(\x20|\x09)+)?(\x22)))@((([a-z]|\d|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(([a-z]|\d|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])*([a-z]|\d|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])))\.)+(([a-z]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(([a-z]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])*([a-z]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])))\.?$/i.test(email))
+          return false;
+      }
+
+      return true;
+    }, <%= jss _("Enter a valid e-mail address.") -%>);
+
+    // disable global onsubmit validation, the relevant fields are validated explicitly in onclick handlers
+    $(document).ready(function() {
+      $("#adminForm").validate({
+      	onkeyup: function(element) { this.element(element); },
+      	submitHandler: function(form) {
+			    var message = <%= jss _("Please wait") -%>;
+          $.modalDialog.wait( {message: message});
+			    //disableFormOnSubmit(message);
+          form.submit();
+        }
+      })
+
+      // make the error message translatable - override the default messsage
+      $.extend($.validator.messages, {
+        qualTo: <%= jss _("The passwords do not match.") -%>,
+      	required: <%= jss _("A password is required.") -%>
+      });
+
+      checkPassword();
+
+      $("#adminForm input").keypress(function(e){
+      	if ((e.which && e.which == 13) || (e.keyCode && e.keyCode == 13)) {
+	        if ($('#adminForm').valid()) {
+        		$("input#default_submit").click();
+	        }
+	        return false;
+      	}
+      });
+    });
+
+  // start password validation workaround only when "Save" button has been pressed
+  password_validation_enabled = false;
+  </script>
+
+<% end %>
+
+<div class="plugin-content plugin-border">
+  <% disabled = !@write_permission %>
+  <%= render :partial => 'shared/missing_write_permissions' if disabled %>
+
+  <% form_for(:administrator, @administrator, :url => { :action => "update" }, :html => { :method => :put, :id => "adminForm", :class=>"webyast_form", :onsubmit => "disable_forms ()", :autocomplete => :off } ) do |f| %>
+    <%= f.error_messages %>
+
+    <div class="plugin-header">
+    	<div class="left">
+    	  <label class="plugin-icon-container"><img class="plugin-icon" src="/icons/administrator.png"></label>
+    	  <label class="plugin-name"><%=_("Administrator Settings")%></label>
+    	</div>
+      <div class="right" >
+  	    <span id="questionMark" class="right" style="margin:2px 5px;">?</span>
+      </div>
+      <div class="clearfix"></div>
+    </div>
+    <div class="clearfix">&nbsp;</div>
+    <fieldset id="password" class="webyast_fieldset">
+      <div class="fieldset_header">
+	      <span class="fieldset_header_title" ><%= _("Password Setup for User 'root'") -%></span>
+	    </div>
+
+	    <div class="fieldset_body">
+	      <div class="row password_container">
+
+       	  <label><%=_("New Password")%></label>
+	        <%= f.password_field :password, :disabled => disabled %>
+       		<span class="graybar" id="graybar"></span>
+          <span class="colorbar" id="colorbar"></span>
+
+          <span class="percent" id="percent">0%</span>
+          <label class="error" generated="true" id="validation_result" ></label>
+	      </div>
+
+        <div style="clear:both"></div>
+
+	      <div class="row">
+        	<label style="float:none;"><%=_("Confirm Password")%></label>
+ 	        <%= f.password_field :confirm_password, :disabled => disabled, :equalTo => "#administrator_password", :class => "required" %>
+
+        </div>
+   	  </div>
+
+    </fieldset>
+
+    <fieldset class="webyast_fieldset">
+      <div class="fieldset_header">
+       <span class="fieldset_header_title" ><%= _("Mail Setup for User 'root'") -%></span>
+	    </div>
+
+	    <div class="fieldset_body">
+        <div class="row">
+      	  <label style="float:left; display:inline-block; width:204px; line-height:24px;"><%=_("Forward system mail to")%></label> <!-- RORSCAN_ITL -->
+  	      <%= f.text_field :aliases, :disabled => disabled, :class => "emails" %>
+	        <% unless params.has_key? "firstboot" # during initial configuration, allow only main Save button %>
+        	  <%= f.submit _("Save Mail Only"), :name => "save_aliases", :disabled => disabled, :onclick=>"return $('#adminForm').validate().element('#administrator_aliases');", :class=>'cancel' %>
+        	  <label style="line-height:26px;" for="administrator_aliases" generated="true" class="error"></label>
+     	  	<% end %>
+
+          <div style="clear:both height:2px;"></div>
+	    </div>
+    </fieldset>
+
+    <div class="clearfix"></div>
+
+    <div class="button_container">
+ 	    <div class="hr">&nbsp;</div>
+      <div class="nav-buttons">
+        <%= form_send_buttons :onclick=>"password_validation_enabled = true; alias_valid = $('#adminForm').validate().element('#administrator_aliases'); return $('#adminForm').validate().element('#administrator_confirm_password') && alias_valid;", :id => "default_submit", :disabled => disabled %>
+      </div>
+    </div>
+  <% end %>
+</div>
+
