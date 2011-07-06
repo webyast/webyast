@@ -26,8 +26,9 @@ require 'yast_service'
 # Uses YaPI::ADMINISTRATOR for read and write operations.
 class Administrator < BaseModel::Base
 
-  attr_accessor	:aliases
-  attr_reader	:password
+  attr_accessor :aliases
+  attr_accessor :password
+  attr_accessor :confirm_password
 
   def initialize(params)
     super params

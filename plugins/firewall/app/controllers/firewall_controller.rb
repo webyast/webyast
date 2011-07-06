@@ -45,7 +45,8 @@ class FirewallController < ApplicationController
   public 
     def index
       yapi_perm_check "firewall.read"
-
+      @write_permission = yapi_perm_granted?("firewall.write")
+      
       @firewall = Firewall.find
       @firewall.fw_services.each do |service|
         service["css_class"] = CGI_PREFIX+"-"+service["id"].gsub(/^service:/,"service-")
@@ -56,7 +57,6 @@ class FirewallController < ApplicationController
       @firewall.fw_services.sort! {|x,y| x["name"] <=> y["name"]}
       needed_services = @firewall.fw_services.find_all{|s| NEEDED_SERVICES.include? s.object_id}
       @needed_services_js = "["+needed_services.collect{|s| service_to_js s}.join(",")+"]"
-      @write_permission = yapi_perm_granted?("firewall.write")
     end
     
 
