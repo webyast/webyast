@@ -47,7 +47,6 @@ class FirewallController < ApplicationController
       yapi_perm_check "firewall.read"
 
       @firewall = Firewall.find
-      #Rails.logger.error @firewall.use_firewall.inspect
       @firewall.fw_services.each do |service|
         service["css_class"] = CGI_PREFIX+"-"+service["id"].gsub(/^service:/,"service-")
         service["name"] = service["id"].gsub(/^service:/,"")
@@ -58,12 +57,6 @@ class FirewallController < ApplicationController
       needed_services = @firewall.fw_services.find_all{|s| NEEDED_SERVICES.include? s.object_id}
       @needed_services_js = "["+needed_services.collect{|s| service_to_js s}.join(",")+"]"
       @write_permission = yapi_perm_granted?("firewall.write")
-      
-      respond_to do |format|
-        format.html
-        format.xml { render  :xml => @firewall.to_xml( :dasherize => false ) }
-        format.json { render :json => @firewall.to_json( :dasherize => false ) }
-      end
     end
     
 
@@ -77,38 +70,23 @@ class FirewallController < ApplicationController
         format.json { render :json => firewall.to_json( :dasherize => false ) }
       end
     end
-
-#    def update
-#      root = params["firewall"]
-#      if root == nil || root == {}
-#        raise InvalidParameters.new :firewall => "Missing"
-#      end
-
-#      firewall = Firewall.new(root)
-#      yapi_perm_check "firewall.write"
-#      firewall.save
-
-#      show
-#    end
     
     def update
       yapi_perm_check "firewall.write"
-
       firewall = Firewall.find 
       
       if request.format.html?
-        Rails.logger.error "HTML"
-      
         firewall.use_firewall = checkbox_true? "use_firewall"
 
         firewall.fw_services.each do |service|
           service["allowed"] = checkbox_true?(CGI_PREFIX+"_" + service["id"])
         end
       
-        flash[:notice] = _('Firewall settings have been written.')
-        redirect_to :controller => "controlpanel"
-        
         firewall.save
+        flash[:notice] = _('Firewall settings have been written.')
+        #redirect_to :controller => "controlpanel"
+        redirect_success
+        
       else     
         root = params["firewall"]
         if root == nil || root == {}
@@ -119,9 +97,6 @@ class FirewallController < ApplicationController
         firewall.save
         show
       end
-
-        
-      #redirect_success
     end
 
     # See update
