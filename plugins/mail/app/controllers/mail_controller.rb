@@ -24,41 +24,115 @@
 class MailController < ApplicationController
 
   before_filter :login_required
+  
+  public
 
+  def index
+    yapi_perm_check "mailsettings.read"
+    
+    @mail = Mail.find
+    @mail.confirm_password	= @mail.password
+    @mail.test_mail_address	= ""
+    @mail.test_mail_address	= params["email"] if params.has_key? "email"
+    @mail.smtp_server = @mail.smtp_server.gsub(/^(\[)|(\])/, '') unless @mail.smtp_server.nil? #remove square brackets from smtp_server string
+    @write_permission = yapi_perm_check "mailsettings.write"
+  end
+  
+  def update
+    @mail = Mail.find
+    @mail.load params["mail"]
+
+    # validate data also here, if javascript in view is off
+    if @mail.password != @mail.confirm_password
+      flash[:error] = _("Passwords do not match.")
+      redirect_to :action => "index"
+      return
+    end
+
+    begin
+      response = @mail.save
+      notice = _('Mail settings have been written.')
+      unless @mail.test_mail_address.empty?
+        notice += " " + _('Test mail was sent to %s.') % @mail.test_mail_address
+      end
+      
+      flash[:notice] = notice
+      
+      rescue ActiveResource::ClientError => e
+        flash[:error] = YaST::ServiceResource.error(e)
+        logger.warn e.inspect
+        redirect_to :action => "index"
+        return
+          
+      rescue ActiveResource::ServerError => e
+        error = Hash.from_xml e.response.body
+        logger.warn error.inspect
+        if error["error"] && error["error"]["type"] == "MAIL_SETTINGS_ERROR"
+          flash[:error] = _("Error while saving mail settings: %s") % error["error"]["output"]
+        else
+          raise e
+        end
+      
+        redirect_to :action => "index"
+        return
+      end
+
+      smtp_server	= params["mail"]["smtp_server"]
+
+      # check if mail forwarning for root is configured
+      # during initial workflow, only warn if administrator configuration does not follow
+      if smtp_server.blank? && (!Basesystem.new.load_from_session(session).following_steps.any? { |h| h[:controller] == "administrator" })
+        @administrator      = Administrator.find
+      
+        if @administrator && !@administrator.aliases.nil? && ! @administrator.empty?
+          flash[:warning]	= _("No outgoing mail server is set, but administrator has mail forwarders defined.
+          Change %s<i>administrator</i>%s or %s<i>mail</i>%s configuration.") % ['<a href="/administrator">', '</a>', '<a href="/mail">', '</a>']
+        end
+      end
+      
+      if params.has_key?("send_mail")
+        redirect_to :action => "index", :email => params["mail"]["test_mail_address"]
+        return
+      end
+      redirect_success # redirect to next step
+  end
+
+end
+  
+  
   # GET action
   # Read mail settings
   # Requires read permissions for mail server YaPI.
-  def show
-    yapi_perm_check "mailsettings.read"
+#  def show
+#    yapi_perm_check "mailsettings.read"
+#    mail = Mail.find
 
-    mail = Mail.find
+#    respond_to do |format|
+#      format.xml  { render :xml => mail.to_xml(:root => "mail", :dasherize => false, :indent=>2), :location => "none" }
+#      format.json { render :json => mail.to_json, :location => "none" }
+#    end
+#  end
+#   
+#  # PUT action
+#  # Write mail settings
+#  # Requires write permissions for mail server YaPI.
+#  def update
+#    yapi_perm_check "mailsettings.write"
 
-    respond_to do |format|
-      format.xml  { render :xml => mail.to_xml(:root => "mail", :dasherize => false, :indent=>2), :location => "none" }
-      format.json { render :json => mail.to_json, :location => "none" }
-    end
-  end
-   
-  # PUT action
-  # Write mail settings
-  # Requires write permissions for mail server YaPI.
-  def update
-    yapi_perm_check "mailsettings.write"
+#    mail = Mail.find
+#    if params.has_key? "mail"
+#      mail.load params["mail"]
+#      mail.save
+#      if params["mail"].has_key?("test_mail_address")
+#      	Mail.send_test_mail(params["mail"]["test_mail_address"])
+#      end
+#    else
+#      logger.warn "mail hash missing in request"
+#    end
+#    show
+#  end
 
-    mail = Mail.find
-    if params.has_key? "mail"
-      mail.load params["mail"]
-      mail.save
-      if params["mail"].has_key?("test_mail_address")
-      	Mail.send_test_mail(params["mail"]["test_mail_address"])
-      end
-    else
-      logger.warn "mail hash missing in request"
-    end
-    show
-  end
-
-  def create
-    update
-  end
-end
+#  def create
+#    update
+#  end
+#end

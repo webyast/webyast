@@ -31,6 +31,8 @@ class Mail < BaseModel::Base
   attr_accessor :smtp_server
   attr_accessor :user
   attr_accessor :password
+  attr_accessor :confirm_password
+  attr_accessor :test_mail_address
   attr_accessor :transport_layer_security
 
   TEST_MAIL_FILE = File.join(Paths::VAR,"mail","test_sent")

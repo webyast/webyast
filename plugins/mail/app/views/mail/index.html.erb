@@ -1,0 +1,142 @@
+<!--
+# Copyright (c) 2009-2010 Novell, Inc.
+#
+# All Rights Reserved.
+#
+# This program is free software; you can redistribute it and/or modify it
+# under the terms of version 2 of the GNU General Public License
+# as published by the Free Software Foundation.
+#
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+# GNU General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with this program; if not, contact Novell, Inc.
+#
+# To contact Novell about this file by physical or electronic mail,
+# you may find current contact information at www.novell.com
+-->
+
+<% content_for :head do %>
+	<%= javascript_include_tag "validation.js" %>
+
+	<script type="text/javascript">
+		var AUTH_TOKEN = 'authenticity_token=' + encodeURIComponent("<%= escape_javascript form_authenticity_token %>");
+		startNotifier({'module':'mail', 'AUTH_TOKEN':AUTH_TOKEN}, 1000, 11000);
+
+			$(document).ready(function() {
+				validateDomainNameWithPortNumber("smtp_server");
+				$("#mailForm").validate({
+		onkeyup: function(element) { this.element(element); },
+		submitHandler: function(form) {
+			var message = <%= jss _("Please wait") -%>;
+			//disableFormOnSubmit(message);
+			$.modalDialog.wait( {message: message});
+			form.submit();
+		}
+				});
+				 // make the error message translatable - override the default messsage
+				 $.extend($.validator.messages, {
+				equalTo: <%= jss _("The passwords do not match.") -%>,
+				email: <%= jss _("Enter a valid e-mail address.") -%>,
+				smtp_server: <%= jss _("Enter a valid domain name or an IP address.") -%>
+				 });
+			});
+
+			$(document).ready(function() {
+				if ($("#mail_test_mail_address", "#mailForm").val() == "") {
+					$("#mail_submit").attr("disabled","disabled");
+				}
+				$("#mail_test_mail_address").keyup(function () {
+		if ($("#mail_test_mail_address", "#mailForm").val() == "") $("#mail_submit").attr("disabled","disabled");
+		else $("#mail_submit", "#mailForm").removeAttr("disabled");
+				});
+			});
+	</script>
+<% end %>
+
+<!--<div class='plugin-icon'><img alt="yast-mail-server" src='/icons/yast-mail-server.png'/><%=_("Mail Settings")%><span id="questionMark">?</span></div> -->
+
+<div class="plugin-content plugin-border">
+
+<% disabled = !@write_permission %>
+<%= render :partial => 'shared/missing_write_permissions' if disabled %>
+
+  <% form_for(:mail, @mail, :url => { :action => "update" }, :html => { :method => :put, :id => "mailForm", :class=>"webyast_form", :autocomplete => :off, :onsubmit => "if ($('#mailForm').valid()); disable_forms ()" } ) do |f| %>
+  <%= f.error_messages %>
+
+  <div class="plugin-header">
+    <div class="left">
+      <label class="plugin-icon-container"><img class="plugin-icon" src="/icons/mail.png"></label>
+      <label class="plugin-name"><%=_("Mail Settings")%></label>
+   	</div>
+
+    <div class="right" >
+        <span id="questionMark" style="margin:2px 5px; float:none;">?</span>
+    </div>
+   	<div class="clearfix"></div>
+  </div>
+
+  <div class="clearfix">&nbsp;</div>
+
+  <fieldset class="webyast_fieldset">
+    <div class="fieldset_header">
+      <span class="fieldset_header_title" ><%=_("Outgoing mail server settings")%></span>
+    </div>
+
+    <div class="fieldset_body">
+      <div class="row">
+        <label for="<%= :smtp_server %>"><%=_("Outgoing mail server")%></label>
+        <%=f.text_field :smtp_server, :disabled => disabled, :class => "smtp_server" %>
+   	  </div>
+
+      <div class="row">
+        <label><%=_("Use secure connection (TLS)")%></label>
+        <%= f.select :transport_layer_security, [ [_("Never"), "no" ], [_("If available"), "yes"], [_("Always"), "must"]], :disabled => disabled %>
+   	  </div>
+
+      <div class="row">
+        <label><%=_("User name")%></label>
+        <%= f.text_field :user, :disabled => disabled %>
+   	  </div>
+
+      <div class="row">
+        <label><%=_("Password")%></label>
+        <%= f.password_field :password, :disabled => disabled %>
+   	  </div>
+
+      <div class="row lastrow">
+        <label><%=_("Confirm password")%></label>
+        <%= f.password_field :confirm_password, :disabled => disabled, :equalTo => "#mail_password", :onkeyup => "$('#mailForm').validate().element('#mail_confirm_password');" %>
+   	  </div>
+    </div>
+  </fieldset>
+
+  <fieldset class="webyast_fieldset">
+    <div class="fieldset_header">
+     <span class="fieldset_header_title" ><%=_("Check mail server settings")%></span>
+    </div>
+    <div class="fieldset_body">
+      <div class="row lastrow">
+        <label id="mail_test_mail_label"><%=_("Send test mail to")%></label>
+        <%= f.text_field :test_mail_address, :disabled => disabled, :class => "email" %>
+      	<%= f.submit _("Send Mail"), :name => "send_mail" %>
+	      <label for="mail_test_mail_address" generated="true" class="error"></label>
+      </div>
+    </div>
+  </fieldset>
+
+  <div class="clearfix"></div>
+
+  <div class="button_container">
+    <div class="hr">&nbsp;</div>
+    <div class="nav-buttons" style="margin:0px 0px; padding:10px 0;">
+      <%= form_send_buttons :disabled => disabled %>
+    </div>
+  </div>
+
+  <% end %>
+</div>
+

@@ -29,7 +29,7 @@ class ApplicationController < ActionController::Base
 protected
   def redirect_success
     logger.debug session.inspect
-    if Basesystem.installed? && Basesystem.new.load_from_session(session).in_process?
+    if Basesystem.new.load_from_session(session).in_process?
       logger.debug "wizard redirect DONE"
       redirect_to :controller => "controlpanel", :action => "nextstep", :done => self.controller_name
     else
