@@ -44,22 +44,15 @@ ActionController::Routing::Routes.draw do |map|
 #  map.logout '/logout', :controller => 'sessions', :action => 'destroy'
 
   map.restdoc "/restdoc.:format", :controller => 'restdoc', :action => 'index'
-
   
   
   #FIXME: this is a workaround only
   map.notifier "/notifiers/status.:format",  :controller => "notifier", :action => "status"
 
-
   
   # Install the default routes as the lowest priority.
+
   map.connect ':controller/:action/:id'
   map.connect ':controller/:action/:id.:format', :requirements => {:id => /[^\/]*(?=\.html|\.js)|.+/ }
-  
-  
-  
-  
-
-  # Install the default routes as the lowest priority.
 
 end

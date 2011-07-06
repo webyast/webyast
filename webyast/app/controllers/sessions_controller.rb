@@ -67,6 +67,7 @@ class SessionsController < ApplicationController
          params[name] = value
       end
     end
+
     if request.format.html?
       if params[:login].blank?
         flash[:warning] = _("No login specified")

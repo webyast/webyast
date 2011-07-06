@@ -48,22 +48,16 @@ class ResourceRouteTest < ActiveSupport::TestCase
     ResourceRegistration.reset
     ResourceRegistration.register_plugin plugin
     ResourceRegistration.route ResourceRegistration.resources
-
 #    $stderr.puts ActionController::Routing::Routes.routes
-    
-    # root URI links to ResourcesController.index
-    assert_recognizes( { :controller => "resources", :action => "index" }, "/" )
+    # root URI links to main
+    assert_recognizes( { :controller => "main", :action => "index" }, "/" )
     # as does /resources
     assert_routing( { :path => "/resources", :method => :get }, { :controller => "resources", :action => "index" } )
-    
+
     # Ensure there is a route for every resource
     ResourceRegistration.resources.each do |interface,implementations|
       implementations.each do |implementation|
-	if implementation[:singular]
-	  assert_generates "#{implementation[:controller]}", { :controller => "#{implementation[:controller]}", :action => :show }
-	else
-	  assert_generates "#{implementation[:controller]}", { :controller => "#{implementation[:controller]}", :action => :index }
-	end
+        assert_generates "#{implementation[:controller]}", { :controller => "#{implementation[:controller]}", :action => :index }
       end
     end
   end

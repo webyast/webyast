@@ -30,52 +30,52 @@ class SessionsControllerTest < ActionController::TestCase
     # http://railsforum.com/viewtopic.php?id=1719
 #    @request.session[:account_id] = 1 # defined in fixtures    
   end
-  
+
   test "sessions new" do
-    get :new
-    assert_response 302 # redirect
+    get :new, :format => 'xml'
+    assert_response :success
   end
   
   test "sessions show" do
-    get :show
+    get :show, :format => 'xml'
     assert_response :success
   end
   
   test "sessions create" do
-    get :create
+    get :create, :format => 'xml'
     assert_response :success
   end
   
   test "sessions create with hash" do
-    get :create, :hash => { "foo" => "bar" }
+    get :create, :format => 'xml', :hash => { "foo" => "bar" }
     assert_response :success
   end
   
   test "sessions create with login and password" do
-    get :create, :hash => { :login => "test_user", :password => "test_password" }
+    get :create, :format => 'xml', :hash => { :login => "test_user", :password => "test_password" }
     assert_response :success
   end
   
   test "sessions create fail with login and password" do
-    get :create, :hash => { :login => "test_user", :password => "bad_password" }
+    get :create, :format => 'xml', :hash => { :login => "test_user", :password => "bad_password" }
     assert_response :success
   end
   
   test "sessions create fail with brute force protection" do
     BruteForceProtection.any_instance.stubs(:blocked?).returns(true)
-    get :create, :hash => { :login => "test_user", :password => "bad_password" }
+    get :create, :format => 'xml', :hash => { :login => "test_user", :password => "bad_password" }
     assert_response :success
   end
 
   test "sessions create remember_me" do
     @request.session[:account_id] = 1 # defined in fixtures
-    get :create, :remember_me => true
+    get :create, :format => 'xml', :remember_me => true
 # FIXME   assert cookies[:auth_token]
     assert_response :success
   end
   
   test "sessions destroy" do
-    get :destroy
+    get :destroy, :format => 'xml'
     assert_response :success
   end
   
@@ -87,7 +87,7 @@ class SessionsControllerTest < ActionController::TestCase
   
   test "output html format" do
     get :show, :format => "html"
-    assert_response :success
+    assert_response :redirect
     assert @response.headers['Content-Type'] =~ %r{text/html}
   end
   
