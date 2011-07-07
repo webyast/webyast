@@ -84,7 +84,7 @@ class RaisingControllerTest < ActionController::TestCase
 
   def test_catch_exception
     get :raiseException
-    assert_response 503
+    assert_response 500
   end
 
   def test_dbus_error
@@ -94,7 +94,7 @@ class RaisingControllerTest < ActionController::TestCase
 
   # NoPermissionException should return 403 - Forbidden
   def test_no_permission
-    get :noPermission
+    get :noPermission, :format => 'xml'
     assert_response 403
   end
 

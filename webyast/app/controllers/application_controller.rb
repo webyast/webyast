@@ -22,6 +22,7 @@
 require 'exceptions'
 require 'gettext_rails'
 require 'dbus'
+require 'url_rewriter' #monkey patch for url_for with port
 
 class ApplicationController < ActionController::Base
   layout 'main'  
@@ -58,7 +59,17 @@ public
 
   rescue_from NoPermissionException do |exception|
     logger.info "No permission: #{exception.permission} for #{exception.user}"
-    render :xml => exception, :status => 403 #403-forbidden
+    if request.xhr? || request.format.html?
+      flash[:error] = _("Operation is forbidden. If you have to do it, please contact system administrator")+
+                          details(exception.message) #already localized from error constructor
+      if request.xhr?
+        render :text => "<div>#{flash[:error]}</div>", :status => 403
+      else
+        redirect_to :controller => :controlpanel
+      end
+    else
+      render :xml => exception, :status => 403 #403-forbidden
+    end
   end
 
   rescue_from InvalidParameters do |exception|
@@ -129,10 +140,10 @@ public
 
   def report_backend_exception(exception) 
       logger.info "Backend exception: #{exception}"
-      render :xml => exception, :status => 503
+      report_exception(exception, 503)
   end
 
-  def report_exception(exception)
+  def report_exception(exception, status = 500)
     def exception.to_xml
       xml = Builder::XmlMarkup.new({})
       xml.instruct!
@@ -148,10 +159,39 @@ public
         end
       end
     end
-    logger.warn "Uncaught exception #{exception.class}: #{exception.message} \n Backtrace: #{exception.backtrace.join('\n')}"
-      
-    render :xml => exception, :status => 503
+    logger.warn "Uncaught exception #{exception.class}: #{exception.message}"
+    logger.warn "Backtrace: #{exception.backtrace.join('\n')}" unless exception.backtrace.blank?
     
+    # for ajax request render a different template, much less verbose
+    if request.xhr?
+      logger.error "Error during ajax request"
+      render :status => status, :partial => "shared/exception_trap", :locals => {:error => e} and return
+    end
+
+    if request.format.html?
+      case exception
+      when ActionController::InvalidAuthenticityToken
+        render :status => status, :template => "shared/cookies_disabled"
+      else
+        render :status => status, :template => "shared/exception_trap", :locals => {:error => exception}
+      end
+    else
+      render :xml => exception, :status => status
+    end
+  end
+
+  def self.bug_url
+    begin
+      return VendorSetting.bug_url if VendorSetting.bug_url
+    rescue Exception => vendor_excp
+      # there was a problem or the setting does not exist
+      # Here we should handle this always as an error
+      # the service should return a sane default if the
+      # url is not configured
+      logger.warn "Can't get vendor bug reporting url, Using Novell. Exception: #{vendor_excp.inspect}"
+    end
+    #fallback if bugurl is not defined
+    return "https://bugzilla.novell.com/enter_bug.cgi?product=WebYaST&format=guided"
   end
 
 protected
