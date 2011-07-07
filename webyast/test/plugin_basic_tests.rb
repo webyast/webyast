@@ -77,11 +77,8 @@ module CommonResourceTests
   def test_update_noperm
     #ensure that nothing is saved
     @model_class.expects(:save).never
-
     @controller.stubs(:permission_check).raises(NoPermissionException.new("action", "test"));
-
     put :update, just_id.merge(@data || {})
-
     assert_response  403 # Forbidden
   end
 end

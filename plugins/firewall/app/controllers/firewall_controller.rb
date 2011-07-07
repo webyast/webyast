@@ -46,7 +46,6 @@ class FirewallController < ApplicationController
     def index
       yapi_perm_check "firewall.read"
       @write_permission = yapi_perm_granted?("firewall.write")
-      
       @firewall = Firewall.find
       @firewall.fw_services.each do |service|
         service["css_class"] = CGI_PREFIX+"-"+service["id"].gsub(/^service:/,"service-")
@@ -77,14 +76,14 @@ class FirewallController < ApplicationController
       
       if request.format.html?
         firewall.use_firewall = checkbox_true? "use_firewall"
+        Rails.logger.error "\n*** USE FIREWALL #{params['firewall']["use_firewall"]}"
 
         firewall.fw_services.each do |service|
           service["allowed"] = checkbox_true?(CGI_PREFIX+"_" + service["id"])
         end
-      
+        
         firewall.save
         flash[:notice] = _('Firewall settings have been written.')
-        #redirect_to :controller => "controlpanel"
         redirect_success
         
       else     

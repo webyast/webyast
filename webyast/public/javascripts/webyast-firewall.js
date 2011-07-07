@@ -156,10 +156,12 @@ function disableFirewallForm() {
 $(document).ready(function(){
   var $on = $('#on');
   var $off = $('#off');
+  var $firewall = $('#firewall_use_firewall');
 
   function toggleMode($id) {
     if($id.val() == "on") {
       $on.addClass('active');
+      $firewall.val("true");
       $off.removeClass('active');
 
       $('#allowed_services').removeClass('firewallForm_disabled');
@@ -169,6 +171,7 @@ $(document).ready(function(){
       $('#use_firewall').click();
     } else {
       $off.addClass('active');
+      $firewall.val("false");
       $on.removeClass('active');
 
       $('#allowed_services').addClass('firewallForm_disabled');

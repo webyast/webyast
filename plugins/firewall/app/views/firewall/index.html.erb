@@ -42,9 +42,11 @@
       <% if @firewall.use_firewall %>
         <button id="on" class="active" value="on"><%=_("Enabled")%></button>
         <button id="off" value="off"><%=_("Disabled")%></button>
+        <%= hidden_field "firewall", "use_firewall" %> 
       <% else %>
         <button id="on" value="on"><%=_("Enabled")%></button>
         <button id="off" class="active" value="off"><%=_("Disabled")%></button>
+        <%= hidden_field "firewall", "use_firewall" %> 
       <% end %>
      </span>
     </div>
@@ -132,9 +134,9 @@
 
     if ( $("#use_firewall")[0].checked ) {
       if ( needed_services.some( isBlockedAndWasAllowed ) ) {
-	if (!confirm( confirm_text.replace("%s", blockedNames(needed_services).join(", ")) ) ){
-	  return false;
-	}
+        if (!confirm( confirm_text.replace("%s", blockedNames(needed_services).join(", ")) ) ){
+          return false;
+        }
       } 
     }
     
@@ -144,7 +146,7 @@
   }
 
   var AUTH_TOKEN = 'authenticity_token=' + encodeURIComponent("<%= escape_javascript form_authenticity_token %>");
-  startNotifier({'module':'firewall', 'AUTH_TOKEN':AUTH_TOKEN}, 1000, 11000);
+  //startNotifier({'module':'firewall', 'AUTH_TOKEN':AUTH_TOKEN}, 1000, 11000);
 
   $(document).ready(initChagesTrack(<%= jss _("You have unsaved changes. Do you want to save your changes?") -%>));
 </script>
