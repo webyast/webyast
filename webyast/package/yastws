@@ -17,9 +17,9 @@
 #     Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307,
 #     USA.
 #
-# /etc/init.d/yastws
+# /etc/init.d/webyast
 #   and its symbolic link
-# /(usr/)sbin/rcyastws
+# /(usr/)sbin/rcwebyast
 #
 #
 # LSB compatible service control script; see http://www.linuxbase.org/spec/
@@ -32,15 +32,15 @@
 # See skeleton.compat for a template that works with other distros as well.
 #
 ### BEGIN INIT INFO
-# Provides:          yastws
+# Provides:          webyast
 # Required-Start:    $syslog $remote_fs
 # Should-Start: $time ypbind sendmail yastwc
 # Required-Stop:     $syslog $remote_fs
 # Should-Stop: $time ypbind sendmail yastwc
 # Default-Start:     3 5
 # Default-Stop:      0 1 2 6
-# Short-Description: yastws
-# Description:       Start yastws
+# Short-Description: webyast
+# Description:       Start webyast
 ### END INIT INFO
 # 
 # Any extensions to the keywords given above should be preceeded by 
@@ -118,12 +118,12 @@ test -x $NGINX_BIN || { echo "$NGINX_BIN not installed";
 	else exit 5; fi; }
 
 # Check for existence of needed config file and read it
-NGINX_CONFIG=/etc/yastws/nginx.conf
+NGINX_CONFIG=/etc/webyast/nginx.conf
 test -r $NGINX_CONFIG || { echo "$NGINX_CONFIG not existing";
 	if [ "$1" = "stop" ]; then exit 0;
 	else exit 6; fi; }
 
-PID_FILE=/var/run/yastws.pid
+PID_FILE=/var/run/webyast.pid
 
 # Source LSB init functions
 # providing start_daemon, killproc, pidofproc, 
@@ -168,16 +168,16 @@ rc_reset
 
 case "$1" in
     start)
-       echo -n "Starting yastws "
+       echo -n "Starting webyast "
   #generate deployment specific secret key (bnc#591345)
-  SECRET=`cd /srv/www/yastws/ && rake -s secret`
+  SECRET=`cd /srv/www/webyast/ && rake -s secret`
   if [ -z $SECRET ]; then
-    echo -n "Can generate secret for session. Run 'cd /srv/www/yastws/ && rake -s secret' for details."
+    echo -n "Can generate secret for session. Run 'cd /srv/www/webyast/ && rake -s secret' for details."
     rc_failed
     rc_status -v
     rc_exit
   fi
-  sed -i 's/9d11bfc98abcf9799082d9c34ec94dc1cc926f0f1bf4bea8c440b497d96b14c1f712c8784d0303ee7dd69e382c3e5e4d38d4c56d1b619eae7acaa6516cd733b1/'"$SECRET"/ /srv/www/yastws/config/environment.rb
+  sed -i 's/9d11bfc98abcf9799082d9c34ec94dc1cc926f0f1bf4bea8c440b497d96b14c1f712c8784d0303ee7dd69e382c3e5e4d38d4c56d1b619eae7acaa6516cd733b1/'"$SECRET"/ /srv/www/webyast/config/environment.rb
 
 	# patch passenger config root if the current config is different (after updating passenger or on a different arch than the default)
 	grep -q "^[ \\t]*passenger_root[ \\t][ \\t]*`passenger-config --root`;" $NGINX_CONFIG ||
@@ -191,7 +191,7 @@ case "$1" in
 	rc_status -v
 	;;
     stop)
-	echo -n "Shutting down yastws "
+	echo -n "Shutting down webyast "
 	## Stop daemon with killproc(8) and if this fails
 	## killproc sets the return value according to LSB.
 
@@ -231,7 +231,7 @@ case "$1" in
 	## If it does not support it, restart the service if it
 	## is running.
 
-	echo -n "Reload service yastws "
+	echo -n "Reload service webyast "
 	## if it supports it:
 	/sbin/killproc -p $PID_FILE -HUP $NGINX_BIN
 	rc_status -v
@@ -245,9 +245,9 @@ case "$1" in
 	## signaling, do nothing (!)
 
 	# If it supports signaling:
-	echo -n "Reload service yastws "
+	echo -n "Reload service webyast "
 	/sbin/killproc -HUP -p $PID_FILE $NGINX_BIN
-	#touch /var/run/yastws.pid
+	#touch /var/run/webyast.pid
 	rc_status -v
 	
 	## Otherwise if it does not support reload:
@@ -255,7 +255,7 @@ case "$1" in
 	#rc_status -v
 	;;
     status)
-	echo -n "Checking for service yastws "
+	echo -n "Checking for service webyast "
 	## Check status with checkproc(8), if process is running
 	## checkproc will return with exit status 0.
 
@@ -278,7 +278,7 @@ case "$1" in
 	## argument to this init script which is required for a reload.
 	## Note: probe is not (yet) part of LSB (as of 1.9)
 
-	test $NGINX_CONFIG /var/run/yastws.pid && echo reload
+	test $NGINX_CONFIG /var/run/webyast.pid && echo reload
 	;;
     *)
 	echo "Usage: $0 {start|stop|status|try-restart|restart|force-reload|reload|probe}"

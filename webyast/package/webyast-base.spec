@@ -226,14 +226,14 @@ rm -rf $RPM_BUILD_ROOT
 # which will be called AFTER the installation
 if /bin/rpm -q webyast-base-ui > /dev/null ; then
   echo "renaming webyast-base-ui to webyast-base"
-  if /sbin/yast runlevel summary service=yastws 2>&1|grep " 3 "|grep yastws >/dev/null ; then
-    echo "yastws is inserted into the runlevel"
+  if /sbin/yast runlevel summary service=webyast 2>&1|grep " 3 "|grep webyast >/dev/null ; then
+    echo "webyast is inserted into the runlevel"
     echo "#!/bin/sh" > %name-%version-%release-1
     echo "/sbin/yast runlevel add service=webyast" >> %name-%version-%release-1
     echo "/usr/sbin/rcwebyast restart" >> %name-%version-%release-1
   else
-    if /usr/sbin/rcyastws status > /dev/null ; then
-      echo "yastws is running"
+    if /usr/sbin/rcwebyast status > /dev/null ; then
+      echo "webyast is running"
       echo "#!/bin/sh" > %name-%version-%release-1
       echo "/usr/sbin/rcwebyast restart" >> %name-%version-%release-1
     fi
