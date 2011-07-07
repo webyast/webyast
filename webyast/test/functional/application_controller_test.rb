@@ -105,7 +105,7 @@ class TestControllerTest < ActionController::TestCase
     TestController.any_instance.stubs(:logged_in?).returns false
     get :ensure_login
     assert_response :redirect
-    assert_redirected_to "/session/new?hostid=localhost"
+    assert_redirected_to "/session/new"
     assert flash
   end
   

@@ -54,7 +54,7 @@ class SessionsController < ApplicationController
   #
   def new
     # Set @host to display info at login screen
-    @host = "localhost"
+    @host = request.host
 
     # render login screen, asking for username/password
   end

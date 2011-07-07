@@ -19,7 +19,6 @@
 # route sessions statically, it is a singleton controller
 ActionController::Routing::Routes.draw do |map|
   map.resource :session
-  map.resources :hosts
   map.resources :notifier
   map.resources :onlinehelp
   map.resources :logs

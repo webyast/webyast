@@ -28,10 +28,9 @@
 class MainController < ApplicationController
   def index
     
-# FIXME: hostid should be configurable
     redirect_to(logged_in? ?
 		{ :controller => "controlpanel", :action => "index" } :
-		{ :controller => "session", :action => "new", :hostid => "localhost" })
+		{ :controller => "session", :action => "new" })
   end
 
   # POST /select_language

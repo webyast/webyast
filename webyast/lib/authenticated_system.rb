@@ -83,7 +83,7 @@ module AuthenticatedSystem
     def access_denied
        if request.format.html?
          store_location
-         redirect_to :controller => "session", :action => "new", :hostid => "localhost" #redirect by default to locahost appliance (bnc#602807)
+         redirect_to :controller => "session", :action => "new"
        else
          request_http_basic_authentication 'WebYaST Login' # RORSCAN_ITL
        end
