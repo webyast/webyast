@@ -40,7 +40,7 @@ class WebyastPermissionsService < DBus::Object
   end
 
   def log(msg)
-    f = File.new("/srv/www/yastws/log/permission_service.log","a",0600)
+    f = File.new("/srv/www/webyast/log/permission_service.log","a",0600)
     f.write(msg+"\n")
     f.close
   end
