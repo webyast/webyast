@@ -1,4 +1,22 @@
 -------------------------------------------------------------------
+Mon May 16 10:22:51 UTC 2011 - schubi@novell.com
+
+- changed licence to the correct name GPL-2.0
+- 0.2.8 
+
+-------------------------------------------------------------------
+Mon May  2 12:23:41 UTC 2011 - schubi@novell.com
+
+- adapt caching to the new job handling
+- 0.2.7 
+
+-------------------------------------------------------------------
+Tue Apr 12 13:13:34 UTC 2011 - schubi@novell.com
+
+- new caching
+- 0.2.6 
+
+-------------------------------------------------------------------
 Wed Feb  9 09:32:08 UTC 2011 - schubi@novell.com
 
 - webyast-kerberos-ws-rpmlintrc removed

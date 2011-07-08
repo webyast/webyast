@@ -1,4 +1,92 @@
 -------------------------------------------------------------------
+Wed Jun  1 09:30:52 UTC 2011 - schubi@novell.com
+
+- Allow _ in http headers (bnc#696578)
+- 0.2.24
+
+-------------------------------------------------------------------
+Mon May 30 12:06:49 UTC 2011 - schubi@novell.com
+
+- shutdown lighttpd when we are switching to nginx (bnc#696011)
+- 0.2.23
+
+-------------------------------------------------------------------
+Tue May 24 12:51:44 UTC 2011 - schubi@novell.com
+
+- moving task of delay-job (bnc#694566)
+- requires nginx1.0 expl. (needed for autobuild)
+- 0.2.22 
+
+-------------------------------------------------------------------
+Thu May 19 08:09:54 UTC 2011 - schubi@novell.com
+
+- init_cache has the controller name as an argument. This is needed
+  for (bnc#693928)
+- 0.2.21 
+
+-------------------------------------------------------------------
+Wed May 18 11:32:01 UTC 2011 - schubi@novell.com
+
+- reduced loglevel of nginx (bnc#694495)
+- 0.2.20 
+
+-------------------------------------------------------------------
+Mon May 16 10:58:04 UTC 2011 - schubi@novell.com
+
+- changed licence to the correct name LGPL-2.0 
+- 0.2.19
+
+-------------------------------------------------------------------
+Tue May 10 10:33:12 UTC 2011 - schubi@novell.com
+
+- 0.2.18
+
+-------------------------------------------------------------------
+Fri May  6 14:29:28 UTC 2011 - schubi@novell.com
+
+- call for evaluating running jobs 
+
+-------------------------------------------------------------------
+Tue May  3 14:55:32 UTC 2011 - schubi@novell.com
+
+- fixes in argument list of cache handling
+- 0.2.17 
+
+-------------------------------------------------------------------
+Tue May  3 08:52:52 UTC 2011 - schubi@novell.com
+
+- fixes in generating job and cache IDs
+- 0.2.16 
+
+-------------------------------------------------------------------
+Mon May  2 12:00:46 UTC 2011 - schubi@novell.com
+
+- adapt caching to the new running job mechanism
+- 0.2.15
+
+-------------------------------------------------------------------
+Thu Apr 28 12:00:57 UTC 2011 - jreidinger@novell.com
+
+- change implementation of plugin job to reuse existing
+  serialization and allow easy ask for running job
+- 0.2.14
+
+-------------------------------------------------------------------
+Tue Apr 26 09:13:05 UTC 2011 - schubi@novell.com
+
+- moved tmp path from /var/lib/nginx/ to /srv/www/yastws/tmp
+  (bnc #689061)
+- 0.2.13
+
+-------------------------------------------------------------------
+Tue Apr 12 07:18:47 UTC 2011 - schubi@novell.com
+
+- new cache machanism
+- changed nginx dependencies
+- cleanup logging of nginx
+- 0.2.12 
+
+-------------------------------------------------------------------
 Tue Feb  8 15:41:51 UTC 2011 - schubi@novell.com
 
 - rm webyast-base-ws-rpmlintrc
@@ -37,7 +125,16 @@ Wed Dec 15 13:48:20 UTC 2010 - schubi@novell.com
 
 - switching to nginx 
   http://lists.opensuse.org/yast-devel/2010-12/msg00000.html
-- 0.2.6 
+- 0.2.6
+
+-------------------------------------------------------------------
+Thu Nov 25 15:26:05 CET 2010 - mvidner@suse.cz
+- Obsolete webyast-language-ws (bnc#643811#c11) 
+
+-------------------------------------------------------------------
+Mon Nov 22 15:09:21 CET 2010 - mvidner@suse.cz
+
+- Fixed the RPM requirements: Rails 2.3.8 is required (bnc#643811)
 
 -------------------------------------------------------------------
 Wed Sep 15 16:13:01 UTC 2010 - schubi@novell.com

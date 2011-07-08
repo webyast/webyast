@@ -42,6 +42,7 @@ class Systemtime < BaseModel::Base
   attr_accessor :utcstatus
   validates_inclusion_of :utcstatus, :in => [true,false], :allow_nil => true
   attr_accessor :timezones
+  attr_accessor :hwclock
   # do not massload timezones, as it is read-only
   attr_protected :timezones
 
@@ -95,6 +96,7 @@ class Systemtime < BaseModel::Base
     ret = Systemtime.new()
     ret.parse_response YastService.Call("YaPI::TIME::Read",create_read_question)
     ret.timezone = "Europe/Prague" if ret.timezone.blank? #last fallback if everything fail #bnc582166
+    ret.hwclock = File.exist? "/sbin/hwclock"
     return ret
   end
 

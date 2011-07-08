@@ -1,4 +1,29 @@
 -------------------------------------------------------------------
+Mon May 16 10:34:32 UTC 2011 - schubi@novell.com
+
+- changed licence to the correct name GPL-2.0
+- 0.2.5 
+
+-------------------------------------------------------------------
+Thu May 12 13:06:46 UTC 2011 - schubi@novell.com
+
+- corrected call of sntp (bnc #685465)
+  handle sntp calls in different versions
+- 0.2.4
+
+-------------------------------------------------------------------
+Mon May  2 12:38:17 UTC 2011 - schubi@novell.com
+
+- adapt caching to the new job handling
+- 0.2.3 
+
+-------------------------------------------------------------------
+Tue Apr 12 13:19:36 UTC 2011 - schubi@novell.com
+
+- new caching
+- 0.2.2 
+
+-------------------------------------------------------------------
 Wed Feb  9 09:35:05 UTC 2011 - schubi@novell.com
 
 - webyast-ntp-ws-rpmlintrc removed

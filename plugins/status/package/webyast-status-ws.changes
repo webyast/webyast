@@ -1,4 +1,40 @@
 -------------------------------------------------------------------
+Tue Jun  7 08:50:11 UTC 2011 - vlewin@novell.com
+
+- Updated Czech translations (jsrain)
+- 0.2.11
+
+-------------------------------------------------------------------
+Fri May 27 13:38:54 UTC 2011 - schubi@novell.com
+
+- taking care about s390 network (bnc#696496)
+- 0.2.10 
+
+-------------------------------------------------------------------
+Mon May 16 10:49:47 UTC 2011 - schubi@novell.com
+
+- changed licence to the correct name GPL-2.0
+- 0.2.9 
+
+-------------------------------------------------------------------
+Tue May 10 11:57:20 UTC 2011 - schubi@novell.com
+
+- fixed writing limits (bnc#691982)
+- 0.2.8
+
+-------------------------------------------------------------------
+Mon May  2 12:45:10 UTC 2011 - schubi@novell.com
+
+- adapt caching to the new job handling
+- 0.2.7 
+
+-------------------------------------------------------------------
+Tue Apr 12 13:30:44 UTC 2011 - schubi@novell.com
+
+- new caching
+- 0.2.6 
+
+-------------------------------------------------------------------
 Wed Feb  9 08:21:46 UTC 2011 - schubi@novell.com
 
 - webyast-status-ws-rpmlintrc removed

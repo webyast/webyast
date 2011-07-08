@@ -27,16 +27,30 @@ class Patch < Resolvable
   attr_accessor :messages
 
   MESSAGES_FILE = File.join(Paths::VAR,"software","patch_installion_messages")
+  LICENSES_DIR = File.join(Paths::VAR,"software","licenses")
+  ACCEPTED_LICENSES_DIR = File.join(Paths::VAR,"software","licenses","accepted")
   JOB_PRIO = -30
 
   private
 
-  # create unique id for the background manager
-  def self.job_id(what)
-    "patch:install:#{what.inspect}"
+  def self.decide_license(accept)
+    #we don't know eula id, but as it block package kit, then there is only one license file to decide
+    if accept
+      `find #{LICENSES_DIR} -type f -exec mv {} #{ACCEPTED_LICENSES_DIR} \\;`
+    else
+      `find #{LICENSES_DIR} -type f -delete`
+    end
   end
 
   public
+
+  def self.accept_license
+    decide_license true
+  end
+
+  def self.reject_license
+    decide_license false
+  end
 
   def to_xml( options = {} )
     super :patch_update, options, @messages
@@ -57,9 +71,8 @@ class Patch < Resolvable
       Patch.install(update_id) #install at once
     else
       #inserting job in background
-      key = Patch.job_id(update_id)
-      Rails.logger.info("Inserting job #{key}")
-      Delayed::Job.enqueue(PluginJob.new(key),JOB_PRIO)
+      Rails.logger.info("Inserting job: :Patch, :install, #{update_id}  ")
+      PluginJob.run_async(JOB_PRIO, :Patch, :install, update_id )
     end
   end
 
@@ -101,7 +114,7 @@ class Patch < Resolvable
   # Patch.find(212)
   def self.find(what, opts = {})
     search_id = what == :all ? :available : what
-    YastCache.fetch("patch:find:#{what.inspect}") {
+    YastCache.fetch(self, what) {
       do_find(search_id)
     }
   end
@@ -114,6 +127,11 @@ class Patch < Resolvable
     @messages=[]
     ret = do_install(pk_id,['RequireRestart','Message']) { |type, details|
       Rails.logger.info "Message signal received: #{type}, #{details}"
+      if ["system", "application", "session"].include? type
+        # RequireRestart received
+        type = "notice"
+        details = _("Please reboot your system.")
+      end
       @messages << {:kind => type, :details => details}
       begin
         dirname = File.dirname(MESSAGES_FILE)
@@ -134,14 +152,28 @@ class Patch < Resolvable
     installed << pk_id
     Rails.cache.write("patch:installed", installed)
     
-    YastCache.delete("patch:find:#{pk_id.split(';')[1].inspect}")
+    YastCache.delete(self,pk_id.split(';')[1])
+    #resetting status in order to get install messagas, EULAs,....
+    YastCache.reset(Plugin.new(),"patch")
     return ret
   end
+
+  def self.license
+    Dir.glob(File.join(LICENSES_DIR,"*")).reduce([]) do |res,f|
+      if File.file? f
+        res << ({
+            :name => File.basename(f),
+            :text => File.read(f)
+            })
+      end
+      res
+    end
+  end
+
 
   def self.do_install(pk_id, signal_list = [], &block)
     #locking PackageKit for single use
     PackageKit.lock
-
     ok = true
     begin
       transaction_iface, packagekit_iface = PackageKit.connect
@@ -162,11 +194,20 @@ class Patch < Resolvable
       error = ''
       dbusloop = PackageKit.dbusloop proxy, error
       dbusloop << proxy.bus
+      accept_eulas()
 
       proxy.on_signal("Error") do |u1,u2|
         ok = false
         dbusloop.quit
       end
+
+      proxy.on_signal("EulaRequired") do |eula_id,package_id,vendor_name,license_text|
+        #FIXME check if user already agree with license
+        create_eula(eula_id,license_text)
+        ok = false
+        dbusloop.quit
+      end
+
       if transaction_iface.methods["UpdatePackages"] && # catch mocking
          transaction_iface.methods["UpdatePackages"].params.size == 2 &&
          transaction_iface.methods["UpdatePackages"].params[0][0] == "only_trusted"
@@ -185,6 +226,7 @@ class Patch < Resolvable
       # bnc#617350, remove signals
       proxy.on_signal "Error"
       proxy.on_signal "Package"
+      proxy.on_signal "EulaRequired"
       if block_given?
         signal_list.each { |signal|
           proxy.on_signal signal.to_s
@@ -194,9 +236,40 @@ class Patch < Resolvable
       #unlocking PackageKit
       PackageKit.unlock
     end
-
+    remove_eulas() if ok 
     return ok
   end
 
+  def self.create_eula(eula_id,license_text)
+    accepted_path = File.join(ACCEPTED_LICENSES_DIR,eula_id)
+    ret = File.exists?(accepted_path) #eula is in accepted dir
+    unless ret
+      license_file = File.join(LICENSES_DIR,eula_id)
+      File.open(license_file,"w") { |f| f.write license_text }
+    end
+    ret
+  end
+
+  def self.accept_eulas()
+    dir = Dir.new(ACCEPTED_LICENSES_DIR)
+    dir.each  {|filename|
+       unless File.directory? filename
+         eula_id = File.basename filename
+         Rails.logger.info "accepting #{eula_id.inspect} ."
+         begin
+           PackageKit.transact :AcceptEula, [eula_id],nil,nil      
+         rescue Exception => e
+           Rails.logger.info "accepting eula #{eula_id} failed: #{e.inspect}"
+         end
+       end
+    }
+  end
+
+  def self.remove_eulas()
+    dir = Dir.new(ACCEPTED_LICENSES_DIR)
+    dir.each  {|filename|
+      File.delete(File.join(ACCEPTED_LICENSES_DIR,filename)) unless File.directory? filename
+    }
+  end    
 
 end

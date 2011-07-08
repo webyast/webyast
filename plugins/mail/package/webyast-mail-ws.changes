@@ -1,4 +1,34 @@
 -------------------------------------------------------------------
+Tue Jun  7 08:24:14 UTC 2011 - vlewin@novell.com
+
+- Updated Czech translations (jsrain) 
+- 0.2.8
+
+-------------------------------------------------------------------
+Mon May 16 10:28:36 UTC 2011 - schubi@novell.com
+
+-  changed licence to the correct name GPL-2.0
+- 0.2.7 
+
+-------------------------------------------------------------------
+Tue May  3 08:59:17 UTC 2011 - schubi@novell.com
+
+- adapted deleting cache key
+- 0.2.6 
+
+-------------------------------------------------------------------
+Mon May  2 12:31:05 UTC 2011 - schubi@novell.com
+
+- adapt caching to the new job handling
+- 0.2.5 
+
+-------------------------------------------------------------------
+Tue Apr 12 13:16:29 UTC 2011 - schubi@novell.com
+
+- new caching
+- 0.2.4
+
+-------------------------------------------------------------------
 Wed Mar  9 13:05:49 CET 2011 - jsuchome@suse.cz
 
 - remove potential problematic characters from email address

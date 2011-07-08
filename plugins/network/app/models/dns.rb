@@ -56,7 +56,7 @@ class Dns < BaseModel::Base
   #
   # +warn+: Doesn't take any parameters.
   def Dns.find
-    YastCache.fetch("dns:find") {
+    YastCache.fetch(self) {
       response = YastService.Call("YaPI::NETWORK::Read") # hostname: true
       ret = Dns.new response["dns"]
     }
@@ -72,7 +72,7 @@ class Dns < BaseModel::Base
     vsettings = [ "a{sas}", settings ] # bnc#538050    
     YastService.Call("YaPI::NETWORK::Write",{"dns" => vsettings})
     # TODO success or not?
-    YastCache.reset("dns:find")
+    YastCache.reset(self)
   end
 
 end

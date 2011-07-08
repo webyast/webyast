@@ -8,4 +8,4 @@ controller: patches
 cache:
   enabled: true
   priority: 20
-  reload_after: 300
+  reload_after: 360

@@ -1,4 +1,22 @@
 -------------------------------------------------------------------
+Mon May 16 10:12:13 UTC 2011 - schubi@novell.com
+
+- changed licence to the correct name GPL-2.0
+- 0.2.14 
+
+-------------------------------------------------------------------
+Mon May  2 12:21:31 UTC 2011 - schubi@novell.com
+
+- adapt caching to the new job handling 
+- 0.2.13
+
+-------------------------------------------------------------------
+Tue Apr 12 13:11:51 UTC 2011 - schubi@novell.com
+
+- new caching
+- 0.2.12 
+
+-------------------------------------------------------------------
 Fri Feb 25 10:27:38 UTC 2011 - vgorobets@novell.com
 
 - Fixed bug: WebYaST firewall module crashes if firewall service description is missing 

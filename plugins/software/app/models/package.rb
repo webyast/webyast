@@ -30,7 +30,7 @@ class Package < Resolvable
   def self.find(what)
     what = :installed if what == :all #default search for cache
     if what == :installed
-      YastCache.fetch("package:find:#{what.inspect}") {
+      YastCache.fetch(self,what) {
         package_list = Array.new
         PackageKit.transact("GetPackages", what.to_s, "Package") { |line1,line2,line3| # RORSCAN_ITL
           columns = line2.split ";"

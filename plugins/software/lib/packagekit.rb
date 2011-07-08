@@ -51,7 +51,7 @@ class PackageKit
   private
   def self.improve_error(dbus_error)
     # check if it is a known error
-    if dbus_error.name =~ /org.freedesktop.DBus.Error.([A-Za-z.]*)/
+    if dbus_error.respond_to?('name') && dbus_error.name =~ /org.freedesktop.DBus.Error.([A-Za-z.]*)/
       case $1
       when "ServiceUnknown"
         return ServiceNotAvailable.new('PackageKit')
@@ -96,6 +96,7 @@ class PackageKit
     proxy.on_signal("Finished")
     proxy.on_signal("RepoSignatureRequired")
     proxy.on_signal("ErrorCode")
+    proxy.on_signal("RepoDetail")
   end
 
   public
@@ -192,6 +193,7 @@ class PackageKit
     
       # set the custom signal handler if set
       proxy.on_signal(signal.to_s, &block) if !signal.blank? && block_given?
+      proxy.on_signal("Error") { dbusloop.quit }
       if bg_stat
         proxy.on_signal("StatusChanged") do |s|
           Rails.logger.debug "PackageKit progress: StatusChanged: #{s}"
@@ -222,6 +224,7 @@ class PackageKit
         proxy.on_signal("StatusChanged")
       end
       proxy.on_signal(signal.to_s) if !signal.blank? && block_given?
+      proxy.on_signal("Error")
 
       raise PackageKitError.new(error) unless error.blank?
 

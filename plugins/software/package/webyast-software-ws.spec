@@ -36,11 +36,11 @@ Requires:       PackageKit >= 0.3.14-3
 %endif
 %endif
 
-License:	GPL v2 only
+License:	GPL-2.0
 Group:          Productivity/Networking/Web/Utilities
 URL:            http://en.opensuse.org/Portal:WebYaST
 Autoreqprov:    on
-Version:        0.3.2
+Version:        0.3.12
 Release:        0
 Summary:        WebYaST - software management service
 Source:         www.tar.bz2
@@ -102,6 +102,9 @@ mkdir -p $RPM_BUILD_ROOT%{plugin_dir}
 cp -a * $RPM_BUILD_ROOT%{plugin_dir}
 rm -f $RPM_BUILD_ROOT%{plugin_dir}/COPYING
 
+# remove .po files (no longer needed)
+rm -rf $RPM_BUILD_ROOT/%{plugin_dir}/po
+
 # Policies
 mkdir -p $RPM_BUILD_ROOT/usr/share/PolicyKit/policy
 install -m 0644 %SOURCE1 $RPM_BUILD_ROOT/usr/share/PolicyKit/policy/
@@ -119,7 +122,7 @@ install -m 0644 %SOURCE4 $RPM_BUILD_ROOT/etc/polkit-1/localauthority/10-vendor.d
 %endif
 %endif
 
-mkdir -p $RPM_BUILD_ROOT/var/lib/webyast/software
+mkdir -p $RPM_BUILD_ROOT/var/lib/yastws/software/licenses/accepted
 
 %clean
 rm -rf $RPM_BUILD_ROOT
@@ -132,9 +135,10 @@ rm -rf $RPM_BUILD_ROOT
 /usr/sbin/grantwebyastrights --user %{webyast_user} --action grant > /dev/null ||:
 
 
-# grant the permission for the webyast user
+# grant the permission for the webservice user
 polkit-auth --user %{webyast_user} --grant org.freedesktop.packagekit.system-sources-configure >& /dev/null || true
 polkit-auth --user %{webyast_user} --grant org.freedesktop.packagekit.system-update >& /dev/null || true
+polkit-auth --user %{webyast_user} --grant org.freedesktop.packagekit.package-eula-accept >& /dev/null || true
 
 %files
 %defattr(-,root,root)

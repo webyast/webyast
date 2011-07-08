@@ -1,4 +1,81 @@
 -------------------------------------------------------------------
+Thu Jun 16 08:39:25 UTC 2011 - schubi@novell.com
+
+- accepting more than one EULA in a patch (bnc#698416)
+- 0.3.12 
+
+-------------------------------------------------------------------
+Tue Jun  7 08:34:55 UTC 2011 - vlewin@novell.com
+
+- Updated Czech translations (jsrain)
+
+-------------------------------------------------------------------
+Wed May 25 11:45:04 UTC 2011 - schubi@novell.com
+
+- ensure that the repositiory cache is reset after deletion.
+  (bnc#694800)
+- 0.3.11 
+
+-------------------------------------------------------------------
+Thu May 19 10:51:08 UTC 2011 - schubi@novell.com
+
+- handle DBUS-error correctly (bnc#694578)
+- 0.3.10 
+
+-------------------------------------------------------------------
+Tue May 17 10:44:17 UTC 2011 - schubi@novell.com
+
+- remove signals correctly
+- 0.3.9 
+
+-------------------------------------------------------------------
+Mon May 16 10:45:08 UTC 2011 - schubi@novell.com
+
+- changed licence to the correct name GPL-2.0
+- 0.3.8 
+
+-------------------------------------------------------------------
+Tue May 10 10:27:56 UTC 2011 - schubi@novell.com
+
+- EULA handling fixed
+- 0.3.7 
+
+-------------------------------------------------------------------
+Fri May  6 14:27:17 UTC 2011 - schubi@novell.com
+
+- handle/checking running installation jobs 
+
+-------------------------------------------------------------------
+Wed May  4 14:18:47 UTC 2011 - schubi@novell.com
+
+- fix in installing patches
+- 0.3.6 
+
+-------------------------------------------------------------------
+Tue May  3 09:01:34 UTC 2011 - schubi@novell.com
+
+- adapted deleting cache key
+- 0.3.5 
+
+-------------------------------------------------------------------
+Mon May  2 12:43:38 UTC 2011 - schubi@novell.com
+
+- adapt caching to the new job handling
+- 0.3.4 
+
+-------------------------------------------------------------------
+Tue Apr 12 13:29:12 UTC 2011 - schubi@novell.com
+
+- new caching
+- 0.3.3 
+
+-------------------------------------------------------------------
+Fri Feb 11 09:42:29 UTC 2011 - jreidinger@novell.com
+
+- fix installing patches which require EULA confirmation
+  (bnc#669470)
+
+-------------------------------------------------------------------
 Wed Feb  9 09:17:46 UTC 2011 - schubi@novell.com
 
 - webyast-software-ws-rpmlintrc removed

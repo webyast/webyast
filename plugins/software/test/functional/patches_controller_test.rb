@@ -137,4 +137,12 @@ class PatchesControllerTest < ActionController::TestCase
     assert Hash.from_xml(@response.body)["messages"].empty?
   end
 
+  test "license required" do
+    PatchesState.stubs(:read).returns(:message_id => "PATCH_EULA").once
+
+    get :index
+    assert_response 503
+    assert_equal "PACKAGEKIT_LICENSE", Hash.from_xml(@response.body)["error"]["type"]
+  end
+
 end

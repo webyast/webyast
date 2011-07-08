@@ -61,13 +61,13 @@ class SystemController < ApplicationController
 
 	    case k
 		when 'reboot'
-		    permission_check( 'org.freedesktop.hal.power-management.reboot')
+		    permission_check( 'org.opensuse.yast.system.power-management.reboot')
 
 		    if v['active'] == true and @system.actions[k.to_sym][:active] == false
 			do_reboot = true
 		    end
 		when 'shutdown'
-		    permission_check( 'org.freedesktop.hal.power-management.shutdown')
+		    permission_check( 'org.opensuse.yast.system.power-management.shutdown')
 
 		    if v['active'] == true and @system.actions[k.to_sym][:active] == false
 			do_shutdown = true

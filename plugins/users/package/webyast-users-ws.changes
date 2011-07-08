@@ -1,4 +1,46 @@
 -------------------------------------------------------------------
+Mon Jun 13 14:15:38 UTC 2011 - jreidinger@novell.com
+
+- fix potential security issue in mass loading 
+- 0.2.9
+
+-------------------------------------------------------------------
+Tue May 24 10:09:20 UTC 2011 - vgorobets@suse.de
+
+- added workaround for the users which UID < 1000, since a lot of netowrk users don't appear in roles ui 
+- 0.2.8
+
+-------------------------------------------------------------------
+Tue May 24 09:27:35 UTC 2011 - schubi@novell.com
+
+- removed single caching (bnc#694831)
+- 0.2.7 
+
+-------------------------------------------------------------------
+Wed May 18 11:08:18 UTC 2011 - schubi@novell.com
+
+- splitting in diffent caches for user:index (bnc#693928)
+- 0.2.6 
+
+-------------------------------------------------------------------
+Mon May 16 10:54:32 UTC 2011 - schubi@novell.com
+
+- changed licence to the correct name GPL-2.0
+- 0.2.5 
+
+-------------------------------------------------------------------
+Mon May  2 12:47:34 UTC 2011 - schubi@novell.com
+
+- adapt caching to the new job handling
+- 0.2.4 
+
+-------------------------------------------------------------------
+Tue Apr 12 13:36:33 UTC 2011 - schubi@novell.com
+
+- new caching
+- 0.2.3 
+
+-------------------------------------------------------------------
 Wed Feb  9 09:05:58 UTC 2011 - schubi@novell.com
 
 - webyast-users-ws-rpmlintrc removed

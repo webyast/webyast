@@ -10,11 +10,11 @@
 
 Name:           webyast-firewall-ws
 Provides:       WebYaST(org.opensuse.yast.modules.yapi.firewall)
-License:        GPL v2 only
+License:        GPL-2.0 
 Group:          Productivity/Networking/Web/Utilities
 URL:            http://en.opensuse.org/Portal:WebYaST
 Autoreqprov:    on
-Version:        0.2.11
+Version:        0.2.14
 Release:        0
 Summary:        WebYaST - Firewall management service
 Source:         www.tar.bz2

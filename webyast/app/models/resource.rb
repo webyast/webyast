@@ -33,12 +33,12 @@ class Resource < BaseModel::Base
     @cache_enabled = impl_hash[:cache_enabled]
     @cache_priority = impl_hash[:cache_priority]
     @cache_reload_after = impl_hash[:cache_reload_after]
-    @cache_arguments = impl_hash[:cache_arguments]
+    @cache_arguments = eval(impl_hash[:cache_arguments]) #this is save cause it is defined in a configuration file
   end
 
   def self.find(what)
     # There is no reload mechansim for the cache. So fetch it directly
-    return Rails.cache.fetch("resource:find:#{what.inspect}") {
+    return Rails.cache.fetch("resource:find:#{what}") {
       case what
         when :all then
           resources = []

@@ -45,7 +45,7 @@ public
   
   # users = User.find_all
   def self.find_all(params={})
-    YastCache.fetch("user:find::all") {
+    YastCache.fetch(self, :all) {
       attributes = [ "cn", "uidNumber", "homeDirectory", "grouplist", "uid", "loginShell", "groupname" ]
       if params.has_key? "attributes"
         attributes = params["attributes"].split(",")
@@ -77,28 +77,26 @@ public
 
     return find_all if id == :all
 
-    YastCache.fetch("user:find:#{id.inspect}") {
-      user = User.new
-      parameters	= {
+    user = User.new
+    parameters	= {
         # user to find
         "uid" => [ "s", id ],
         # list of attributes to return;
         "user_attributes" =>
           [ "as", [ "cn", "uidNumber", "homeDirectory",
                   "grouplist", "uid", "loginShell", "groupname" ] ]
-      }
-      user_map = YastService.Call("YaPI::USERS::UserGet", parameters)
+    }
+    user_map = YastService.Call("YaPI::USERS::UserGet", parameters)
 
 #    system_groups = YastService.Call("YaPI::USERS::GroupsGet", {"index"=>["s","cn"],"type"=>["s","system"]})
 #    local_groups = YastService.Call("YaPI::USERS::GroupsGet", {"index"=>["s","cn"],"type"=>["s","local"]})
 #    user.allgroups = Hash[*(local_groups.keys | system_groups.keys).collect {|v| [v,1]}.flatten]
 
-      raise "Got no data while loading user attributes" if user_map.empty?
+    raise "Got no data while loading user attributes" if user_map.empty?
 
-      user.load_data(user_map)
-      user.uid = id
-      user
-    }
+    user.load_data(user_map)
+    user.uid = id
+    user
   end
 
   # User.destroy("joe")
@@ -112,7 +110,7 @@ public
 
     ret = YastService.Call("YaPI::USERS::UserDelete", config)
     Rails.logger.debug "Command returns: #{ret}"
-    YastCache.delete("user:find:#{uid.inspect}")
+    YastCache.delete(self, uid)
     raise ret if not ret.blank?
     return (ret == "")
   end
@@ -132,7 +130,7 @@ public
     ret = YastService.Call("YaPI::USERS::UserModify", config, data)
 
     Rails.logger.debug "Command returns: #{ret.inspect}"
-    YastCache.reset("user:find:#{id}")
+    YastCache.reset(self, id)
     raise ret if not ret.blank?
     true
   end
@@ -147,11 +145,14 @@ public
     load_attributes(attrs)
   end
 
+#XXX USE base model which already contain such functionality it automatic
+ATTR_ACCESSIBLE = [:cn, :uid, :uid_number, :gid_number, :grouplist, :groupname,
+                :home_directory, :login_shell, :user_password, :type ]
   # load a hash of attributes
   def load_attributes(attrs)
     return false if attrs.nil?
     attrs.each do |key, value|
-      if self.respond_to?(key.to_sym)
+      if ATTR_ACCESSIBLE.include?(key.to_sym)
         self.send("#{key}=".to_sym, value)
       end
     end

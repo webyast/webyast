@@ -1,4 +1,22 @@
 -------------------------------------------------------------------
+Tue May 31 11:39:55 UTC 2011 - vlewin@novell.com
+
+- WebYast - Failed to configure time by webyast manually on s390x (bnc#696856)
+- 0.2.3
+
+-------------------------------------------------------------------
+Mon May 16 10:51:52 UTC 2011 - schubi@novell.com
+
+- changed licence to the correct name GPL-2.0
+- 0.2.2 
+
+-------------------------------------------------------------------
+Tue Apr 12 13:35:10 UTC 2011 - schubi@novell.com
+
+- new caching
+- 0.2.1 
+
+-------------------------------------------------------------------
 Mon Aug 23 14:39:51 UTC 2010 - jreidinger@novell.com
 
 - add url to spec file (bnc#625537)

@@ -179,11 +179,26 @@ unless ENV['RAILS_ENV'] == 'test'
     resources.each  do |resource|
       name = resource.href.split("/").last
       if resource.cache_enabled
-        job_key = YastCache.find_key(name)
-        if !job_key.blank?
-          job_key += ":" + resource.cache_arguments unless resource.cache_arguments.blank?
-          STDERR.puts "Inserting job #{job_key} with priority #{resource.cache_priority}"
-          Delayed::Job.enqueue(PluginJob.new(job_key), resource.cache_priority)
+        model_name, arguments = YastCache.has_find_method(name)
+        if !model_name.blank?
+          if resource.cache_arguments.blank?
+            if arguments.blank?
+              STDERR.puts "Inserting job #{model_name}.find with priority #{resource.cache_priority}"
+              PluginJob.run_async(resource.cache_priority, model_name.to_sym, :find)
+            else
+              STDERR.puts "Inserting job #{model_name}.find(#{arguments.inspect}) with priority #{resource.cache_priority}"
+              PluginJob.run_async(resource.cache_priority, model_name.to_sym, :find, arguments)
+            end
+          else
+            arg_hash = resource.cache_arguments #this is save cause the string is fix defined in a config
+            if arguments.blank?
+              STDERR.puts "Inserting job #{model_name}.find(#{arg_hash.inspect}) with priority #{resource.cache_priority}"
+              PluginJob.run_async(resource.cache_priority, model_name.to_sym, :find, arg_hash )
+            else
+              STDERR.puts "Inserting find job of #{model_name}.find(#{arguments.inspect}, #{arg_hash.inspect}) with priority #{resource.cache_priority}"
+              PluginJob.run_async(resource.cache_priority, model_name.to_sym, :find, arguments, arg_hash )
+            end
+          end
         else
           STDERR.puts "Ignoring job #{name}:find* (not runable)"
         end
@@ -192,15 +207,13 @@ unless ENV['RAILS_ENV'] == 'test'
       end
     end
     #added special request for none plugins
-    key = "Permission:find::all"
-    STDERR.puts "Inserting job #{key}"
-    Delayed::Job.enqueue(PluginJob.new(key), 0)
-    key = 'Permission:find::all:{"with_description"=>"1"}'
-    STDERR.puts "Inserting job #{key}"
-    Delayed::Job.enqueue(PluginJob.new(key), 0)
-    key = "getentpasswd:find"
-    STDERR.puts "Inserting job #{key}"
-    Delayed::Job.enqueue(PluginJob.new(key), -3)
+    STDERR.puts "Inserting job :Permission :find :all"
+    PluginJob.run_async(0,:Permission, :find, :all)
+    STDERR.puts "Inserting job :Permission :find :all {'with_description'=>'1'}"
+    PluginJob.run_async(0,:Permission, :find, :all, {"with_description"=>"1"})
+    STDERR.puts "Inserting job :GetentPasswd :find"
+    PluginJob.run_async(-3,:GetentPasswd, :find)
+
     delay_job_mutex.unlock #start delay job worker
   end
 end

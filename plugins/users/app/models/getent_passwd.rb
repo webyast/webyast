@@ -25,7 +25,7 @@ class GetentPasswd < BaseModel::Base
   attr_reader :full_name
 
   def self.find
-    YastCache.fetch("getentpasswd:find") {
+    YastCache.fetch(self) {
       result = []
       res = pure_getent
       raise "cannot obtain passwd" unless res
@@ -34,9 +34,12 @@ class GetentPasswd < BaseModel::Base
       lines = res.split "\n"
       lines.each do |l|
         elements = l.split ":"
-        if elements[2].to_i >= minimum &&
-          elements[0] != "nobody" #bnc#632326
-          result << GetentPasswd.new(:login => elements[0], :full_name => elements[4])
+        #TODO: Find a better solution for user which UID < 1000
+        #possible solution could be config.yml where vendor can set UID range
+        #elements[1] != 'x' workaround, since some user has UID < 1000
+        if elements[2].to_i >= minimum && elements[0] != "nobody" || (elements[1] != 'x' && elements[2].to_i <= minimum ) #bnc#632326
+          name = elements[4].split(/\s*,\s*/)
+          result << GetentPasswd.new(:login => elements[0], :full_name => name[0])
         end
       end
       active_directory_users = pure_wbinfo

@@ -51,7 +51,9 @@ class Network::RoutesController < ApplicationController
   end
 
   def index
-    routes_a = Route.find(:all).values
+#    routes_a = Route.find(:all).values
+    routes_a = Route.find(:all)
+    logger.error "Route A #{routes_a.inspect}"
     respond_to do |format|
       format.xml { render :xml => routes_a.to_xml( :root => "routes", :dasherize => false ) }
       format.json { render :json => routes_a.to_json }

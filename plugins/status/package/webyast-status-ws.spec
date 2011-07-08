@@ -15,11 +15,11 @@ Provides:       WebYaST(org.opensuse.yast.system.logs)
 Provides:       WebYaST(org.opensuse.yast.system.graphs)
 Provides:       yast2-webservice-status = %{version}
 Obsoletes:      yast2-webservice-status < %{version}
-License:	GPL v2 only
+License:        GPL-2.0	
 Group:          Productivity/Networking/Web/Utilities
 URL:            http://en.opensuse.org/Portal:WebYaST
 Autoreqprov:    on
-Version:        0.2.5
+Version:        0.2.11
 Release:        0
 Summary:        WebYaST - system status service
 Source:         www.tar.bz2

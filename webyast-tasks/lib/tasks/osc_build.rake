@@ -22,7 +22,7 @@ desc "Build package locally"
 task :'osc_build'  do
   require File.join(File.dirname(__FILE__), "osc_prepare")
   
-  build_dist = ENV["DIST"] || "openSUSE_11.2"
+  build_dist = ENV["DIST"] || "openSUSE_Factory"
 
   obs_project, package_name = osc_prepare
   

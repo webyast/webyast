@@ -12,6 +12,8 @@
 Name:           webyast-base
 Provides:       yast2-webservice = %{version}
 Obsoletes:      yast2-webservice < %{version}
+Provides:       webyast-language-ws = 0.1.0
+Obsoletes:      webyast-language-ws <= 0.1.0
 
 %if 0%{?suse_version} == 0 || %suse_version > 1110
 # 11.2 or newer
@@ -29,26 +31,29 @@ Requires:       yast2-core >= 2.18.10
 Requires:       yast2-core >= 2.17.30.1
 Requires:       sysvinit > 2.86-195.3.1
 %endif
-Requires:       nginx-passenger
+Requires:       rubygem-passenger-nginx
+Requires:       nginx >= 1.0
 Requires:	ruby-fcgi, sqlite, syslog-ng
 %if 0%{?suse_version} == 0 || %suse_version <= 1130
 Requires:	ruby-dbus
 %else
 Requires:	rubygem-ruby-dbus
 %endif
+
 Requires:       rubygem-webyast-rake-tasks
+Requires:       rubygem-static_record_cache
 Requires:	yast2-dbus-server
 # 634404
 Recommends:     logrotate
 PreReq:         PolicyKit, PackageKit, rubygem-rake, rubygem-sqlite3
-PreReq:         rubygem-rails-2_3 >= 2.3.4
+PreReq:         rubygem-rails-2_3 >= 2.3.8
 PreReq:         rubygem-rpam, rubygem-polkit, rubygem-gettext_rails
 PreReq:         yast2-runlevel
-License:	LGPL v2.1 only
+License:	LGPL-2.0
 Group:          Productivity/Networking/Web/Utilities
 URL:            http://en.opensuse.org/Portal:WebYaST
 Autoreqprov:    on
-Version:        0.2.11
+Version:        0.2.24
 Release:        0
 Summary:        WebYaST - base components
 Source:         www.tar.bz2
@@ -64,7 +69,7 @@ Source11:	webyast.lr.conf
 Source12:       nginx.conf
 
 BuildRoot:      %{_tmppath}/%{name}-%{version}-build
-BuildRequires:  ruby, pkg-config, rubygem-mocha
+BuildRequires:  ruby, pkg-config, rubygem-mocha, rubygem-static_record_cache
 # if we run the tests during build, we need most of Requires here too,
 # except for deployment specific stuff
 BuildRequires:  rubygem-webyast-rake-tasks, rubygem-restility
@@ -75,11 +80,11 @@ BuildRequires:	ruby-dbus
 BuildRequires:	rubygem-ruby-dbus
 %endif
 BuildRequires:  PolicyKit, PackageKit, rubygem-sqlite3
-BuildRequires:  rubygem-rails-2_3 >= 2.3.4
+BuildRequires:  rubygem-rails-2_3 >= 2.3.8
 BuildRequires:  rubygem-rpam, rubygem-polkit
 # the testsuite is run during build
 BuildRequires:	rubygem-test-unit rubygem-mocha
-BuildRequires:	nginx-passenger
+BuildRequires:	nginx >= 1.0, rubygem-passenger-nginx
 
 # This is for Hudson (build service) to setup the build env correctly
 %if 0
@@ -238,11 +243,21 @@ if /bin/rpm -q webyast-base-ui > /dev/null ; then
       echo "/usr/sbin/rcwebyast restart" >> %name-%version-%release-1
     fi
   fi
-  if [ -f %name-%version-%release-1 ] ; then
-    install -D -m 755 %name-%version-%release-1 /var/adm/update-scripts
-    rm %name-%version-%release-1
-    echo "Please check the service runlevels and restart WebYaST with \"rcwebyast restart\" if the update has not been called with zypper,yast or packagekit"
+fi
+#We are switching from lighttpd to nginx. So lighttpd has to be killed
+#at first
+if rpm -q --requires %{name}|grep lighttpd > /dev/null ; then
+  if /usr/sbin/rcyastws status > /dev/null ; then
+    echo "yastws is running under lighttpd -> switching to nginx"
+    /usr/sbin/rcyastws stop > /dev/null
+    echo "#!/bin/sh" > %name-%version-%release-1
+    echo "/usr/sbin/rcywebyast restart" >> %name-%version-%release-1
   fi
+fi
+if [ -f %name-%version-%release-1 ] ; then
+  install -D -m 755 %name-%version-%release-1 /var/adm/update-scripts
+  rm %name-%version-%release-1
+  echo "Please check the service runlevels and restart WebYaST service with \"rcyastws restart\" if the update has not been called with zypper,yast or packagekit"
 fi
 exit 0
 
@@ -320,6 +335,7 @@ dbus-send --print-reply --system --dest=org.freedesktop.DBus / org.freedesktop.D
 
 #this /etc/webyast is for webyast configuration files
 %dir /etc/webyast/
+<<<<<<< HEAD:webyast/package/webyast-base.spec
 %dir %{_datadir}/webyast
 %dir %attr(-,%{webyast_user},root) /var/lib/webyast
 %dir %{webyast_dir}/db
@@ -337,6 +353,26 @@ dbus-send --print-reply --system --dest=org.freedesktop.DBus / org.freedesktop.D
 %{webyast_dir}/config/environments
 %{webyast_dir}/config/initializers
 %{webyast_dir}/config/routes.rb
+=======
+%dir %{_datadir}/yastws
+%dir %attr(-,%{webyast_ws_user},root) /var/lib/yastws
+%dir %{webyast_ws_dir}/db
+%{webyast_ws_dir}/app
+%{webyast_ws_dir}/db/migrate
+%ghost %{webyast_ws_dir}/db/schema.rb
+%{webyast_ws_dir}/doc
+%{webyast_ws_dir}/lib
+%{webyast_ws_dir}/public
+%{webyast_ws_dir}/Rakefile
+%{webyast_ws_dir}/script
+%{webyast_ws_dir}/vendor
+%dir %{webyast_ws_dir}/config
+%{webyast_ws_dir}/config/boot.rb
+%{webyast_ws_dir}/config/database.yml
+%{webyast_ws_dir}/config/environments
+%{webyast_ws_dir}/config/initializers
+%{webyast_ws_dir}/config/routes.rb
+>>>>>>> master:webservice/package/webyast-base-ws.spec
 #also users can run granting script, as permissions is handled by policyKit right for granting permissions
 %attr(555,root,root) /usr/sbin/grantwebyastrights
 %attr(755,root,root) %{webyast_dir}/start.sh

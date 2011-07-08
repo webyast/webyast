@@ -1,4 +1,22 @@
 -------------------------------------------------------------------
+Mon May 16 09:06:42 UTC 2011 - schubi@novell.com
+
+- changed licence to the correct name GPLv2
+- 0.2.10 
+
+-------------------------------------------------------------------
+Mon May  2 12:16:25 UTC 2011 - schubi@novell.com
+
+- adapt caching to the new job handling
+- 0.2.9 
+
+-------------------------------------------------------------------
+Tue Apr 12 10:19:03 UTC 2011 - schubi@novell.com
+
+- new caching
+- 0.2.8 
+
+-------------------------------------------------------------------
 Wed Feb  9 08:30:41 UTC 2011 - schubi@novell.com
 
 - webyast-activedirectory-ws-rpmlintrc removed

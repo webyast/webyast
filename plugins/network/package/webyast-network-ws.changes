@@ -1,4 +1,28 @@
 -------------------------------------------------------------------
+Mon May 16 10:32:06 UTC 2011 - schubi@novell.com
+
+- changed licence to the correct name GPL-2.0
+- 0.2.6 
+
+-------------------------------------------------------------------
+Mon May  9 09:31:07 UTC 2011 - vlewin@novell.com
+
+- fixed 'Undefined methode values' for routes (Network controller) 
+- 0.2.5
+
+-------------------------------------------------------------------
+Mon May  2 12:34:35 UTC 2011 - schubi@novell.com
+
+- adapt caching to the new job handling
+- 0.2.4
+
+-------------------------------------------------------------------
+Tue Apr 12 13:18:01 UTC 2011 - schubi@novell.com
+
+- new caching
+- 0.2.3 
+
+-------------------------------------------------------------------
 Mon Mar 28 13:49:35 UTC 2011 - vlewin@novell.com
 
 - undefined method `bootproto' for #<Interface:0xb67416c8> (bnc#645231) 

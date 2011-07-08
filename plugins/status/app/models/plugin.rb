@@ -41,10 +41,15 @@ class Plugin
   public
 
   # initialize on element
-  def initialize(level, message_id, short_description, 
-                 long_description, details, confirmation_host, 
-                 confirmation_link, confirmation_label,
-                 confirmation_kind)
+  def initialize(level = "", 
+                 message_id = "", 
+                 short_description = "", 
+                 long_description = "", 
+                 details = "", 
+                 confirmation_host = "", 
+                 confirmation_link = "", 
+                 confirmation_label = "",
+                 confirmation_kind = "")
     @level = level
     @message_id = message_id
     @short_description = short_description
@@ -63,7 +68,7 @@ class Plugin
   # "id" is the plugin name
   #
   def self.find(what)
-    YastCache.fetch("plugin:find:#{what.inspect}") {
+    YastCache.fetch(self,what) {
       models = []
       ret = []
       resources = Resource.find :all

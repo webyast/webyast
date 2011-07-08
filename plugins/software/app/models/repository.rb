@@ -63,7 +63,7 @@ class Repository < BaseModel::Base
   end
 
   def self.find(what)
-     YastCache.fetch("repository:find:#{what.inspect}") {
+     YastCache.fetch(self,what) {
       PackageKit.lock #locking
       begin
         repositories = Array.new
@@ -187,7 +187,7 @@ class Repository < BaseModel::Base
     ensure
       PackageKit.unlock #locking
     end
-    YastCache.reset("repository:find:#{@id.inspect}")
+    YastCache.reset(self,@id)
   end
 
   #
@@ -201,9 +201,9 @@ class Repository < BaseModel::Base
       ret = PackageKit.transact('RepoSetData', [@id, 'remove', 'NONE'])
     ensure
       PackageKit.unlock #locking
+      YastCache.delete(self,@id)
       return ret
     end
-    YastCache.delete("repository:find:#{@id.inspect}")
     return ret
   end
 

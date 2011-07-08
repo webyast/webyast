@@ -39,7 +39,7 @@ class Mail < BaseModel::Base
 
   # read the settings from system
   def self.find
-    YastCache.fetch("mail:find") {
+    YastCache.fetch(self) {
       yapi_ret = YastService.Call("YaPI::MailSettings::Read")
       raise MailError.new("Cannot read from YaPI backend") if yapi_ret.nil?
       yapi_ret["transport_layer_security"] = yapi_ret.delete("TLS") || "no"
@@ -60,7 +60,7 @@ class Mail < BaseModel::Base
 
     yapi_ret = YastService.Call("YaPI::MailSettings::Write", parameters)
     Rails.logger.debug "YaPI returns: '#{yapi_ret}'"
-    YastCache.reset("mail:find")
+    YastCache.reset(self)
     raise MailError.new(yapi_ret) unless yapi_ret.empty?
     true
   end

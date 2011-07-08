@@ -16,14 +16,15 @@ Obsoletes:      yast2-webservice-system < %{version}
 PreReq:         yast2-webservice
 # requires HAL for reboot/shutdown actions
 Requires:	hal
-License:	GPL v2 only
+License:	GPL-2.0
 Group:          Productivity/Networking/Web/Utilities
 URL:            http://en.opensuse.org/Portal:WebYaST
 Autoreqprov:    on
-Version:        0.2.0
+Version:        0.2.3
 Release:        0
 Summary:        WebYaST - reboot/shutdown service
 Source:         www.tar.bz2
+Source1:        org.opensuse.yast.system.power-management.policy
 BuildRoot:      %{_tmppath}/%{name}-%{version}-build
 BuildArch:      noarch
 BuildRequires:  rubygem-webyast-rake-tasks >= 0.1.3
@@ -77,10 +78,17 @@ mkdir -p $RPM_BUILD_ROOT%{plugin_dir}
 cp -a * $RPM_BUILD_ROOT%{plugin_dir}/
 rm -f $RPM_BUILD_ROOT%{plugin_dir}/COPYING
 
+# Policies
+mkdir -p $RPM_BUILD_ROOT/usr/share/PolicyKit/policy
+install -m 0644 %SOURCE1 $RPM_BUILD_ROOT/usr/share/PolicyKit/policy/
+
 %clean
 rm -rf $RPM_BUILD_ROOT
 
-%post
+# %posttrans is used instead of %post so it ensures the rights are
+# granted even after upgrading from old package (before renaming) (bnc#645310)
+# (see https://fedoraproject.org/wiki/Packaging/ScriptletSnippets#Syntax )
+%posttrans
 # granting all permissions for the web user
 #FIXME don't silently fail
 polkit-auth --user %{webyast_ws_user} --grant org.freedesktop.hal.power-management.shutdown >& /dev/null || true
@@ -121,6 +129,10 @@ fi
 %{plugin_dir}/app
 %{plugin_dir}/config
 %{plugin_dir}/public
+
+%dir /usr/share/PolicyKit
+%dir /usr/share/PolicyKit/policy
+%attr(644,root,root) %config /usr/share/PolicyKit/policy/org.opensuse.yast.system.power-management.policy
 
 %doc COPYING
 

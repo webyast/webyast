@@ -71,11 +71,11 @@ class Graph
     data.each do |key, values|
       if key == metric_column
         values.each do |date, value| 
-          if limits.has_key?("max") && limits["max"].to_i > 0 && value && limits["max"].to_i < value/y_scale
+          if limits.has_key?("max") && limits["max"].to_i > 0 && value && limits["max"].to_i < value/y_scale.to_i
             Rails.logger.info "Max #{limits['max']} for #{metric_id}(#{metric_column}) has been reached"
             limit_reached = true
           end 
-          if limits.has_key?("min") && limits["min"].to_i > 0 && value && limits["min"].to_i > value/y_scale
+          if limits.has_key?("min") && limits["min"].to_i > 0 && value && limits["min"].to_i > value/y_scale.to_i
             Rails.logger.info "Min #{limits['min']} for #{metric_id}(#{metric_column}) has been reached"
             limit_reached = true
           end 
@@ -146,7 +146,8 @@ class Graph
                "y_decimal_places"=>0,
                "single_graphs"=>[]}
     metrics.each do |metric|
-      if metric.type == "if_packets" && metric.type_instance.start_with?("eth")
+      if metric.type == "if_packets" && 
+         (metric.type_instance.start_with?("eth") || metric.type_instance.start_with?("ctc"))
         metric_id = metric.id[metric.host.length+1..metric.id.length-1] #cut off host-id
         network["single_graphs"] << {"lines"=>[{"label"=>"received", "limits"=>{"max"=>"0", "min"=>"0"}, 
                                               "metric_column"=>"rx", "metric_id"=>metric_id}, 
@@ -283,8 +284,7 @@ class Graph
   def self.find(what, limitcheck = true, opts = {})
     #checking if collectd is running
     raise ServiceNotRunning.new('collectd') unless Metric.collectd_running?
-
-    YastCache.fetch("graph:find:#{what.inspect}") {
+    YastCache.fetch(self,what) {
       do_find(what, limitcheck)
     }
   end
@@ -356,21 +356,19 @@ class Graph
   # return array of hashes of {"max"=>0, "min"=>0, "metric_column"=>nil} or nil
   #
   def self.find_limits(metric_id, group_id=nil )
-    YastCache.fetch("graph:find_limits") {
-      config = parse_config(@@translate) || {}
-      limits = []
-      config.each {|key,value|
-        next if group_id != nil && key != group_id
-        #checking for collectd entry
-        value["single_graphs"].each{|graph|
-          graph["lines"].each{|line|
-            line["limits"]["metric_column"] = line["metric_column"] if line.has_key?("metric_column")
-            limits << line["limits"] if line["metric_id"] == metric_id
-          }
-        }    
-      }
-      limits
+    config = parse_config(@@translate) || {}
+    limits = []
+    config.each {|key,value|
+      next if group_id != nil && key != group_id
+      #checking for collectd entry
+      value["single_graphs"].each{|graph|
+        graph["lines"].each{|line|
+          line["limits"]["metric_column"] = line["metric_column"] if line.has_key?("metric_column")
+          limits << line["limits"] if line["metric_id"] == metric_id
+        }
+      }    
     }
+    limits
   end
 
   #
@@ -390,7 +388,6 @@ class Graph
       f.write(config.to_yaml)
       f.close
     end
-    YastCache.reset("graph:find_limits")
   end
 
   # converts the graph to xml

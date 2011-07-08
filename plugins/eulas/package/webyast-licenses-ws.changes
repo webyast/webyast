@@ -1,4 +1,22 @@
 -------------------------------------------------------------------
+Mon May 16 10:10:10 UTC 2011 - schubi@novell.com
+
+- changed licence to the correct name GPL-2.0
+- 0.2.5 
+
+-------------------------------------------------------------------
+Fri Apr 29 13:49:31 CEST 2011 - jsrain@suse.cz
+
+- include license based on build repo (bnc#689901)
+- 0.2.4
+
+-------------------------------------------------------------------
+Tue Apr 12 13:09:29 UTC 2011 - schubi@novell.com
+
+- new caching
+- 0.2.3 
+
+-------------------------------------------------------------------
 Wed Feb  9 09:37:48 UTC 2011 - schubi@novell.com
 
 - webyast-licences-ws-rpmlintrc removed
