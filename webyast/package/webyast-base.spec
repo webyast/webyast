@@ -156,7 +156,7 @@ touch $RPM_BUILD_ROOT%{webyast_dir}/db/schema.rb
 #
 # init script
 #
-%{__install} -D -m 0755 -T %SOURCE9 webyast \
+%{__install} -D -m 0755 -T %SOURCE9 \
     %{buildroot}%{_sysconfdir}/init.d/%{webyast_service}
 %{__ln_s} -f %{_sysconfdir}/init.d/%{webyast_service} %{buildroot}%{_sbindir}/rc%{webyast_service}
 #
