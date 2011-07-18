@@ -1,0 +1,82 @@
+<%#
+#--
+# Copyright (c) 2009-2010 Novell, Inc.
+#
+# All Rights Reserved.
+#
+# This program is free software; you can redistribute it and/or modify it
+# under the terms of version 2 of the GNU General Public License
+# as published by the Free Software Foundation.
+#
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+# GNU General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with this program; if not, contact Novell, Inc.
+#
+# To contact Novell about this file by physical or electronic mail,
+# you may find current contact information at www.novell.com
+#++
+%>
+
+<% unauthorized = error.class == ActiveResource::UnauthorizedAccess -%>
+<%if error && !unauthorized %>
+  <%= report_error(error, _("An problem occured when loading status information.")) %>
+<% end %>
+
+<% unless status.blank? %>
+  <% status.split(';').each do | message | %>
+    <div class="statusbar_row">
+     	<img src="/images/status-warning.png">
+ 	    <a href="status" class="warning_message">
+        <span><%= message %></span>
+      </a>
+    </div>
+  <% end %>
+
+  <% javascript_tag do -%>
+    if($.browser.msie() && $.browser.version.number() == 8 ) {
+      $('#status-eye').css("background", "url(/images/circle-red.png)").addClass('eye_warning');
+    } else {
+      $('#status-eye').addClass('eye_warning');
+    }
+  <% end -%>
+
+<% else %>
+  <% if unauthorized -%>
+    <div class="statusbar_row">
+      <a href="status" class="warning_message">
+        <span><%= _("Cannot read system status - you have been logged out.") %></span><!-- RORSCAN_ITL -->
+      </a>
+    </div>
+  <% elsif !error %>
+    <% javascript_tag do -%>
+      if($('#status-eye').hasClass("eye_warning") == false) { 
+        $('#status-eye').addClass('eye_healthy'); 
+        if($.browser.msie() && $.browser.version.number() == 8 ) {
+          $('#status-eye').css("background", "url(/images/circle-green.png)");  
+        }
+      }
+    <% end -%>
+
+    <div class="statusbar_row">
+      <img src="/images/checkmark.gif" class="checked_health">
+      <span><%= _("Your system is healthy.") %></span> <!-- RORSCAN_ITL -->
+      <!-- #<#% link_to "status", :class=>"warning_message" do #%#> -->
+      <!-- #<#% end #%#> -->
+    </div>
+  <% end %>
+<% end %> <!- if else -->
+
+<% if refresh_timeout.to_i > 0 && !unauthorized -%>
+  <!-- refresh the status again after a timeout -->
+  <% javascript_tag do -%>
+    setTimeout(function() {
+      $('#statusbar-status').html('<%= image_tag("/images/working.gif", :class => "small-working-icon") %> <%= _("Loading system information") %>') <!-- RORSCAN_ITL -->
+      <%= remote_function(:update => "statusbar_status", :url => { :controller => :status, :action => :show_summary, :background => true }) %>
+      }, <%= refresh_timeout.to_i * 1000 -%>);
+  <% end -%>
+<% end %>
+

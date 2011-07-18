@@ -276,11 +276,6 @@ class Graph
     @single_graphs = value["single_graphs"]
   end
 
-  # create unique id for the background manager
-  def self.id(what)
-    "system_status_#{what}"
-  end
-
   def self.find(what, limitcheck = true, opts = {})
     #checking if collectd is running
     raise ServiceNotRunning.new('collectd') unless Metric.collectd_running?
@@ -388,6 +383,11 @@ class Graph
       f.write(config.to_yaml)
       f.close
     end
+  end
+
+  #returns a human readable value
+  def id()
+    @group_name
   end
 
   # converts the graph to xml

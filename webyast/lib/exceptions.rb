@@ -226,3 +226,23 @@ class DBusException < BackendException
     end
   end
 end
+
+class CollectdOutOfSyncError < BackendException
+  def initialize(timestamp)
+    @timestamp = timestamp
+    super("Collectd is out of sync.")
+  end
+
+  def to_xml
+    xml = Builder::XmlMarkup.new({})
+    xml.instruct!
+
+    xml.error do
+      xml.type "COLLECTD_SYNC_ERROR"
+      xml.description "Collectd is out of sync. Status information can be expected at #{Time.at(@timestamp.to_i).ctime}."
+
+      xml.timestamp @timestamp
+    end
+  end
+end
+

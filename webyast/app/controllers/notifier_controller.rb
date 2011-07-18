@@ -34,4 +34,10 @@ class NotifierController < ApplicationController
       end
     end
   end
+
+  # GET /notifier
+  # GET /notifier.xml
+  def index
+    status
+  end
 end

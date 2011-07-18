@@ -1,0 +1,40 @@
+<%#
+#--
+# Copyright (c) 2009-2010 Novell, Inc.
+#
+# All Rights Reserved.
+#
+# This program is free software; you can redistribute it and/or modify it
+# under the terms of version 2 of the GNU General Public License
+# as published by the Free Software Foundation.
+#
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+# GNU General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with this program; if not, contact Novell, Inc.
+#
+# To contact Novell about this file by physical or electronic mail,
+# you may find current contact information at www.novell.com
+#++
+%>
+<!-- <div class="status_status"> -->
+  <div class="statusbar_row">
+    <div style="float: left;">
+      <%= image_tag("/images/working.gif", :height=>"22", :width=>"22", :class=>"small-working-icon") %>
+     </div>
+     <div style="float: left; padding-left: 1em; padding-top:10px">
+    	<%= _("Checking system status") -%> <!-- RORSCAN_ITL -->
+     </div>
+   </div>
+
+  <%= progress_bar(progress) -%>
+
+  <!-- refresh the status again after 5 seconds -->
+  <% javascript_tag do -%>
+    setTimeout(function() { <%= remote_function(:update => "statusbar_status", :url => { :controller => :status, :action => :show_summary, :background => true }) %> }, 5000);
+  <% end -%>
+<!-- </div> -->
+
