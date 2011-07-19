@@ -282,7 +282,7 @@ class StatusController < ApplicationController
                 end
               end
               #checking limit min
-  if line["limits"]["min"].to_i > 0
+              if line["limits"]["min"].to_i > 0
                 limit_line = []
                 limit_reached = ""
                 single_line[:values].each do |entry|
@@ -302,7 +302,6 @@ class StatusController < ApplicationController
           logger.error "No description for #{group_id}/#{graph_id} found."
         end
       end
-
       #flatten the data of all lines to the same amount of entries
       min_hash = data[:lines].min {|a,b| a[:values].size <=> b[:values].size }
       count = 0
@@ -359,15 +358,15 @@ class StatusController < ApplicationController
           next if graph.id != slizes[1]
           graph.single_graphs.each do |single_graph|
             next if single_graph["headline"] != slizes[2]
-            single_graph.lines.each do |line|
+            single_graph["lines"].each do |line|
               next if line["label"] != slizes[3]
               #have limit with value --> setting values based on the corresponding min/max flag
               min_max = params["measurement/" +  slizes[1] + "/" +slizes[2] + "/" + slizes[3]]
               old_min = line["limits"]["min"]
               old_max = line["limits"]["max"]
               if value.empty?
-                line.limits.min = "0"
-                line.limits.max = "0"
+                line["limits"]["min"] = "0"
+                line["limits"]["max"] = "0"
               else
                 if min_max == "max"
                   line["limits"]["max"] = value

@@ -43,8 +43,8 @@
       function validateLimits() {
         <% @graphs.each do |group| %>
           <% group.single_graphs.each do |single_graph| %>
-            <% single_graph.lines.each do |line| %>
-              <% limit_key = "value_#{group.id}_#{single_graph.headline}_#{line.label}" %>
+            <% single_graph["lines"].each do |line| %>
+              <% limit_key = "value_#{group.id}_#{single_graph["headline"]}_#{line["label"]}" %>
               if (! validNumber($("#<%=limit_key%>")[0].value)) {
                 say_bad = "<%= _("Only numbers are valid !") %>"
                 focus_field("<%=limit_key%>");
@@ -98,17 +98,17 @@
       <legend id="<%= group.id %>"><%= group.id %></legend>
       <div style="padding:5px;">
         <% group.single_graphs.each do |single_graph| %>
-          <% group_name = (group.single_graphs.size > 1) ? single_graph.headline : "" %>
+          <% group_name = (group.single_graphs.size > 1) ? single_graph["headline"] : "" %>
           <label>Alarm, if <%= group_name %></label>
           <fieldset class="small-labels">
-          <% single_graph.lines.each do |line| %>
-            <% limit_key = "#{group.id}/#{single_graph.headline}/#{line.label}"
+          <% single_graph["lines"].each do |line| %>
+            <% limit_key = "#{group.id}/#{single_graph["headline"]}/#{line["label"]}"
                measurements = {_("undercuts") => "min", _("exceeds") => "max"}
-               if line.limits.max.to_i > 0
-                 val = line.limits.max.to_i
+               if line["limits"]["max"].to_i > 0
+                 val = line["limits"]["max"].to_i
                  measurement = "max"
-               elsif line.limits.min.to_i > 0
-                 val = line.limits.min.to_i
+               elsif line["limits"]["min"].to_i > 0
+                 val = line["limits"]["min"].to_i
                  measurement = "min"
                else
                  val = ""
@@ -116,7 +116,7 @@
                end
             %>
             <p>
-              <label for="#{limit_key}"><%="#{line.label}"%></label>
+              <label for="#{limit_key}"><%="#{line["label"]}"%></label>
               <%= select_tag("measurement/"+limit_key, options_for_select(measurements, measurement), :disabled => write_disabled)%>
               <%=text_field_tag "value/"+limit_key, val, :disabled => write_disabled %>
               <%= "#{group.y_label}" %>

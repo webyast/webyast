@@ -23,7 +23,7 @@ module StatusHelper
   def limits_reached group
     group.single_graphs.each do |single_graph|
       single_graph["lines"].each do |line|
-        return true if line["limits"]["reached"] == "true"
+        return true unless line["limits"]["reached"].blank?
       end    
     end
     return false
