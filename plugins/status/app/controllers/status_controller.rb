@@ -113,9 +113,10 @@ class StatusController < ApplicationController
     end
     lines = params[:lines].to_i || DEFAULT_LINES
     pos_begin = params[:pos_begin].to_i || 0
-    log = Log.find(params[:id], :params => { :pos_begin => pos_begin, :lines => lines })
-    content = log.content.value if log
-    position = log.content.position.to_i if log
+    log = Log.find(params[:id])
+    data = log.evaluate_content(pos_begin, lines)
+    content = data["`value"] if log
+    position = data["`position"].to_i if log
     render(:partial => 'status_log',
            :locals => { :content => content, :position => position, :lines => lines, :id => params[:id] }) and return
   end
