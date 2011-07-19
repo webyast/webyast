@@ -86,7 +86,7 @@ class StatusController < ApplicationController
 
 
  # Initialize GetText and Content-Type.
-  init_gettext "webyast-status-ui"
+  init_gettext "webyast-status"
 
   public
 

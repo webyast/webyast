@@ -54,7 +54,10 @@ class MetricsController < ApplicationController
     end
     @metric = Metric.find(:all, conditions)
     @data = nil
-    render :show    
+    respond_to do |format|
+      format.json { render :json => @metric.to_json }
+      format.xml { render :xml => @metric.to_xml(:root => "metrics", :data => @data, :dasherize => false) }
+    end
   end
 
   # GET /metrics/1
@@ -68,5 +71,9 @@ class MetricsController < ApplicationController
 #    Rails.logger.info "rendering metric #{id} from #{data_opts[:start].to_i} to #{data_opts[:stop].to_i}"
 
     @data = @metric.data(data_opts)
+    respond_to do |format|
+      format.json { render :json => @metric.to_json }
+      format.xml { render :xml => @metric.to_xml(:root => "metrics", :data => @data, :dasherize => false) }
+    end
   end
 end

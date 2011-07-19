@@ -36,6 +36,8 @@ class PluginsController < ApplicationController
 
 protected
 
+layout "main"
+
 def load_translations
   resources = Resource.find :all
   resources.each {|resource|
@@ -66,7 +68,10 @@ public
     what = :all
     load_translations unless Rails.cache.exist?("plugin:find:#{what.inspect}")
     @plugins = Plugin.find(what)
-    render :show    
+    respond_to do |format|
+      format.json { render :json => @plugins.to_json }
+      format.xml { render :xml => @plugins.to_xml( :root => "plugins", :dasherize => false ) }
+    end
   end
   
   # GET /plugins/users
@@ -76,7 +81,10 @@ public
     permission_check("org.opensuse.yast.system.status.read") # RORSCAN_ITL
     load_translations unless Rails.cache.exist?("plugin:find:#{params[:id]}")
     @plugins = Plugin.find(params[:id])
-    render :show    
+    respond_to do |format|
+      format.json { render :json => @plugins.to_json }
+      format.xml { render :xml => @plugins.to_xml( :root => "plugins", :dasherize => false ) }
+    end
   end
 
 end

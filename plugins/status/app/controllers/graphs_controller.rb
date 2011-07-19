@@ -24,7 +24,6 @@ include ApplicationHelper
 require 'metric'
 require 'graph'
 require 'uri'
-require 'http_accept_language'
 
 #
 # Controller that exposes graph description in a RESTful
@@ -36,10 +35,9 @@ require 'http_accept_language'
 #
 class GraphsController < ApplicationController
   before_filter :login_required
+  layout "main"
 
-  def init_translation
-    init_gettext("webyast-status-ws")
-  end
+  init_gettext("webyast-status")
 
   public
 
@@ -53,7 +51,10 @@ class GraphsController < ApplicationController
       logger.warn("No argument to update")
       raise InvalidParameters.new :graphs => "Missing"
     end
-    render :show
+    respond_to do |format|
+      format.json { render :json => @graph.to_json }
+      format.xml { render :xml => @graph.to_xml( :root => "graphs", :checklimits => false, :dasherize => false ) }
+    end
   end
 
   # GET /graphs
@@ -61,9 +62,11 @@ class GraphsController < ApplicationController
   #
   def index
     permission_check("org.opensuse.yast.system.status.read") # RORSCAN_ITL
-    init_translation
     @graph = Graph.find(:all, params[:checklimits] || true)
-    render :show    
+    respond_to do |format|
+      format.json { render :json => @graph.to_json }
+      format.xml { render :xml => @graph.to_xml( :root => "graphs", :checklimits => params[:checklimits] || true, :dasherize => false ) }
+    end
   end
 
   # GET /graphs/1
@@ -71,7 +74,10 @@ class GraphsController < ApplicationController
   #
   def show
     permission_check("org.opensuse.yast.system.status.read") # RORSCAN_ITL
-    init_translation
     @graph = Graph.find(params[:id], params[:checklimits] || true)
+    respond_to do |format|
+      format.json { render :json => @graph.to_json }
+      format.xml { render :xml => @graph.to_xml( :root => "graphs", :checklimits => params[:checklimits] || true, :dasherize => false ) }
+    end
   end
 end
