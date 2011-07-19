@@ -317,7 +317,6 @@ class Metric
 
     stop = opts.has_key?(:stop) ? opts[:stop] : Time.now
     start = opts.has_key?(:start) ? opts[:start] : stop - 300
-    
     output = `/bin/sh -c "LC_ALL=C rrdtool fetch #{file} AVERAGE --start #{start.to_i} --end #{stop.to_i}"` # RORSCAN_ITL as long as no user input
     raise output unless $?.exitstatus.zero?
 

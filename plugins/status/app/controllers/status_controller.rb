@@ -67,14 +67,15 @@ class StatusController < ApplicationController
     @limits_list[:reached] = String.new
     @data_group = Hash.new
 
-    status = Metric.find(id, :params => { :start => from.to_i.to_s, :stop => till.to_i.to_s } )
+    status = Metric.find(id)
     ret = Array.new
     column_id = "value" if column_id.blank?
     counter = 0
-    status.data[column_id].sort.each{ |t,value| 
-          ret << [(status.data["starttime"].to_i + counter*status.data["interval"].to_i)*1000, 
+    status_data = status.data( {:start => from.to_i.to_s, :stop => till.to_i.to_s} )
+    status_data[column_id].sort.each{ |t,value| 
+          ret << [(status_data["starttime"].to_i + counter*status_data["interval"].to_i)*1000, 
                   value.to_f/scale] # *1000 --> jlpot evalutas MSec for date format # RORSCAN_ITL
-          counter += 1
+          counter = counter +1
     }
     #strip zero values at the end of the array
     while ret.last && ret.last[1] == 0
