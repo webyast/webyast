@@ -335,7 +335,6 @@ dbus-send --print-reply --system --dest=org.freedesktop.DBus / org.freedesktop.D
 
 #this /etc/webyast is for webyast configuration files
 %dir /etc/webyast/
-<<<<<<< HEAD:webyast/package/webyast-base.spec
 %dir %{_datadir}/webyast
 %dir %attr(-,%{webyast_user},root) /var/lib/webyast
 %dir %{webyast_dir}/db
@@ -347,32 +346,13 @@ dbus-send --print-reply --system --dest=org.freedesktop.DBus / org.freedesktop.D
 %{webyast_dir}/public
 %{webyast_dir}/Rakefile
 %{webyast_dir}/script
+%{webyast_dir}/vendor
 %dir %{webyast_dir}/config
 %{webyast_dir}/config/boot.rb
 %{webyast_dir}/config/database.yml
 %{webyast_dir}/config/environments
 %{webyast_dir}/config/initializers
 %{webyast_dir}/config/routes.rb
-=======
-%dir %{_datadir}/yastws
-%dir %attr(-,%{webyast_ws_user},root) /var/lib/yastws
-%dir %{webyast_ws_dir}/db
-%{webyast_ws_dir}/app
-%{webyast_ws_dir}/db/migrate
-%ghost %{webyast_ws_dir}/db/schema.rb
-%{webyast_ws_dir}/doc
-%{webyast_ws_dir}/lib
-%{webyast_ws_dir}/public
-%{webyast_ws_dir}/Rakefile
-%{webyast_ws_dir}/script
-%{webyast_ws_dir}/vendor
-%dir %{webyast_ws_dir}/config
-%{webyast_ws_dir}/config/boot.rb
-%{webyast_ws_dir}/config/database.yml
-%{webyast_ws_dir}/config/environments
-%{webyast_ws_dir}/config/initializers
-%{webyast_ws_dir}/config/routes.rb
->>>>>>> master:webservice/package/webyast-base-ws.spec
 #also users can run granting script, as permissions is handled by policyKit right for granting permissions
 %attr(555,root,root) /usr/sbin/grantwebyastrights
 %attr(755,root,root) %{webyast_dir}/start.sh

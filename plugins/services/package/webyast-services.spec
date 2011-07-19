@@ -1,5 +1,5 @@
 #
-# spec file for package webyast-services-ws (Version 0.1)
+# spec file for package webyast-services (Version 0.1)
 #
 # Copyright (c) 2008 SUSE LINUX Products GmbH, Nuernberg, Germany.
 # This file and all modifications and additions to the pristine
@@ -9,7 +9,7 @@
 #
 
 
-Name:           webyast-services-ws
+Name:           webyast-services
 Provides:       WebYaST(org.opensuse.yast.modules.yapi.services)
 Provides:       yast2-webservice-services = %{version}
 Obsoletes:      yast2-webservice-services < %{version}
@@ -28,9 +28,9 @@ Source3:	filter_services.yml
 Source4:	SERVICES.pm
 BuildRoot:      %{_tmppath}/%{name}-%{version}-build
 BuildArch:      noarch
-BuildRequires:  rubygem-yast2-webservice-tasks rubygem-restility
+BuildRequires:  rubygem-yast2-webyast-tasks rubygem-restility
 
-BuildRequires:  webyast-base-ws-testsuite
+BuildRequires:  webyast-base-testsuite
 BuildRequires:	rubygem-test-unit rubygem-mocha
 
 # so SERVICES.pm is able to call YML.rb
@@ -40,14 +40,14 @@ Requires:	yast2-runlevel
 
 #
 %define plugin_name services
-%define plugin_dir %{webyast_ws_dir}/vendor/plugins/%{plugin_name}
+%define plugin_dir %{webyast_dir}/vendor/plugins/%{plugin_name}
 #
 
 %package testsuite
 Group:    Productivity/Networking/Web/Utilities
 Requires: %{name} = %{version}
-Requires: webyast-base-ws-testsuite
-Summary:  Testsuite for webyast-services-ws package
+Requires: webyast-base-testsuite
+Summary:  Testsuite for webyast-services package
 
 %description
 WebYaST - Plugin providing REST based interface to handle system services.
@@ -58,7 +58,7 @@ Authors:
     Ladislav Slezak <lslezak@suse.cz>
 
 %description testsuite
-This package contains complete testsuite for webyast-services-ws webservice package.
+This package contains complete testsuite for webyast-services package.
 It's only needed for verifying the functionality of the module and it's not
 needed at runtime.
 
@@ -69,14 +69,14 @@ needed at runtime.
 
 # build restdoc documentation
 mkdir -p public/services/restdoc
-%webyast_ws_restdoc
+%webyast_restdoc
 
 # do not package restdoc sources
 rm -rf restdoc
 
 %check
 # run the testsuite
-%webyast_ws_check
+%webyast_check
 
 %install
 
@@ -112,13 +112,13 @@ rm -rf $RPM_BUILD_ROOT
 # granting all permissions for root 
 #
 /usr/sbin/grantwebyastrights --user root --action grant > /dev/null ||:
-/usr/sbin/grantwebyastrights --user %{webyast_ws_user} --action grant > /dev/null ||:
+/usr/sbin/grantwebyastrights --user %{webyast_user} --action grant > /dev/null ||:
 
 %files 
 %defattr(-,root,root)
-%dir %{webyast_ws_dir}
-%dir %{webyast_ws_dir}/vendor
-%dir %{webyast_ws_dir}/vendor/plugins
+%dir %{webyast_dir}
+%dir %{webyast_dir}/vendor
+%dir %{webyast_dir}/vendor/plugins
 %dir %{plugin_dir}
 %dir %{plugin_dir}/doc
 

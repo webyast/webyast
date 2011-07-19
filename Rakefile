@@ -15,7 +15,7 @@ end
 # recognized variables
 #
 vars = ['PKG_BUILD', 'RCOV_PARAMS', 'RAILS_ENV', 'RAILS_PARENT']
-ENV['RAILS_PARENT'] = File.join(Dir.pwd, 'webservice')
+ENV['RAILS_PARENT'] = File.join(Dir.pwd, 'webyast')
 
 env = ENV.map { |key,val| (ENV[key] && vars.include?( key )) ? %(#{key}="#{ENV[key]}") : nil }.compact.join(' ')
 
@@ -24,7 +24,7 @@ env = ENV.map { |key,val| (ENV[key] && vars.include?( key )) ? %(#{key}="#{ENV[k
 #
 
 plugins = Dir.glob('plugins/*')#.reject{|x| ['users'].include?(File.basename(x))}
-PROJECTS = ['webservice', *plugins]
+PROJECTS = ['webyast', *plugins]
 
 desc 'Run all tests by default'
 task :default => :test
@@ -126,10 +126,10 @@ task :doc do
   copy 'index.html.template', "doc/index.html"
   #handle rest service separate from plugins
   puts "create framework documentation"
-  Dir.chdir('webservice') do
+  Dir.chdir('webyast') do
     raise "generating documentation fail" unless system "rake doc:app"
   end
-  system "cp -r webservice/doc/app doc/webservice"
+  system "cp -r webyast/doc/app doc/webyast"
   puts "create plugins documentation"
   plugins_names = []
   Dir.chdir('plugins') do
@@ -155,7 +155,7 @@ end
 desc "Grant policies installed in /usr/share/PolicyKit/policy to root"
 task :grant_policies do |t|
   puts "Running from #{__FILE__}"
-  puts "You must deploy webservice first!" and return unless File.exists? "/usr/sbin/grantwebyastrights"
+  puts "You must deploy webyast first!" and return unless File.exists? "/usr/sbin/grantwebyastrights"
   system "/usr/sbin/grantwebyastrights --user root --action grant >/dev/null 2>&1"
   raise "Error on execute '/usr/sbin/grantwebyastrights --user root --action grant '" if $?.exitstatus != 0
   system "/usr/sbin/grantwebyastrights --user yastws --action grant >/dev/null 2>&1"
@@ -172,19 +172,19 @@ MetricFu::Configuration.run do |config|
         #define which metrics you want to use
         config.metrics  = [:churn, :saikuro, :flog, :reek, :roodi, :rcov] #missing flay and stats both not working
         config.graphs   = [:flog, :reek, :roodi, :rcov]
-        config.flay     = { :dirs_to_flay => ['webservice', 'plugins']  } 
-        config.flog     = { :dirs_to_flog => ['webservice', 'plugins']  }
-        config.reek     = { :dirs_to_reek => ['webservice', 'plugins']  }
-        config.roodi    = { :dirs_to_roodi => ['webservice', 'plugins'] }
+        config.flay     = { :dirs_to_flay => ['webyast', 'plugins']  } 
+        config.flog     = { :dirs_to_flog => ['webyast', 'plugins']  }
+        config.reek     = { :dirs_to_reek => ['webyast', 'plugins']  }
+        config.roodi    = { :dirs_to_roodi => ['webyast', 'plugins'] }
         config.saikuro  = { :output_directory => 'tmp/metric_fu/output', 
-                            :input_directory => ['webservice', 'plugins'],
+                            :input_directory => ['webyast', 'plugins'],
                             :cyclo => "",
                             :filter_cyclo => "0",
                             :warn_cyclo => "5",
                             :error_cyclo => "7",
                             :formater => "html"} #this needs to be set to "text"
         config.churn    = { :start_date => "1 year ago", :minimum_churn_count => 10}
-        config.rcov     = { :test_files => ['webservice/test/**/*_test.rb', 
+        config.rcov     = { :test_files => ['webyast/test/**/*_test.rb', 
                                             'plugins/**/test/**/*_test.rb'],
                             :rcov_opts => ["--sort coverage", 
                                            "--no-html", 
@@ -199,7 +199,7 @@ MetricFu::Configuration.run do |config|
 =begin
 require 'yard'
 YARD::Rake::YardocTask.new do |t|
-  t.files   = ['webservice/app/**/*.rb','webservice/lib/**/*.rb','webservice/test/plugin_basic_tests.rb', 'plugins/*/app/**/*.rb', 'plugins/*/lib/**/*.rb','webservice/doc/README_FOR_APP', 'plugins/**/README_FOR_APP']   # optional
+  t.files   = ['webyast/app/**/*.rb','webyast/lib/**/*.rb','webyast/test/plugin_basic_tests.rb', 'plugins/*/app/**/*.rb', 'plugins/*/lib/**/*.rb','webyast/doc/README_FOR_APP', 'plugins/**/README_FOR_APP']   # optional
   t.options = ['--private', '--protected'] # optional
 end
 =end

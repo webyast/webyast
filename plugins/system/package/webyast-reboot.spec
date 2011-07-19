@@ -22,7 +22,7 @@ URL:            http://en.opensuse.org/Portal:WebYaST
 Autoreqprov:    on
 Version:        0.2.3
 Release:        0
-Summary:        WebYaST - reboot/shutdown service
+Summary:        WebYaST - reboot/shutdown 
 Source:         www.tar.bz2
 Source1:        org.opensuse.yast.system.power-management.policy
 BuildRoot:      %{_tmppath}/%{name}-%{version}-build
@@ -52,7 +52,7 @@ Authors:
     Ladislav Slezak <lslezak@novell.com>
 
 %description testsuite
-Testsuite for webyast-reboot-ws webservice package.
+Testsuite for webyast-reboot package.
 
 %prep
 %setup -q -n www

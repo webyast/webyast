@@ -1,5 +1,5 @@
 #
-# spec file for package webyast-mail-ws
+# spec file for package webyast-mail
 #
 # Copyright (c) 2008 SUSE LINUX Products GmbH, Nuernberg, Germany.
 # This file and all modifications and additions to the pristine
@@ -9,7 +9,7 @@
 #
 
 
-Name:           webyast-mail-ws
+Name:           webyast-mail
 Provides:       WebYaST(org.opensuse.yast.modules.yapi.mailsettings)
 Provides:       yast2-webservice-mailsettings = %{version}
 Obsoletes:      yast2-webservice-mailsettings < %{version}
@@ -29,7 +29,7 @@ BuildRoot:      %{_tmppath}/%{name}-%{version}-build
 BuildArch:      noarch
 BuildRequires:  rubygem-yast2-webservice-tasks rubygem-restility
 
-BuildRequires:  webyast-base-ws-testsuite rubygem-gettext_rails
+BuildRequires:  webyast-base-testsuite rubygem-gettext_rails
 BuildRequires:	rubygem-test-unit rubygem-mocha
 
 # install these packages into Hudson chroot environment
@@ -51,14 +51,14 @@ Requires:       yast2-mail >= 2.17.5
 
 #
 %define plugin_name mail
-%define plugin_dir %{webyast_ws_dir}/vendor/plugins/%{plugin_name}
+%define plugin_dir %{webyast_dir}/vendor/plugins/%{plugin_name}
 #
 
 %package testsuite
 Group:    Productivity/Networking/Web/Utilities
 Requires: %{name} = %{version}
-Requires: webyast-base-ws-testsuite
-Summary:  Testsuite for webyast-mail-ws package
+Requires: webyast-base-testsuite
+Summary:  Testsuite for webyast-mail package
 
 %description
 WebYaST - Plugin provides REST based interface to system mail settings.
@@ -69,7 +69,7 @@ Authors:
     Jiri Suchomel <jsuchome@novell.com>
 
 %description testsuite
-This package contains complete testsuite for webyast-mail-ws webservice package.
+This package contains complete testsuite for webyast-mail package.
 It's only needed for verifying the functionality of the module and it's not
 needed at runtime.
 
@@ -79,24 +79,24 @@ needed at runtime.
 %build
 # build restdoc documentation
 mkdir -p public/mail/restdoc
-%webyast_ws_restdoc
+%webyast_restdoc
 
 # do not package restdoc sources
 rm -rf restdoc
 
-export RAILS_PARENT=%{webyast_ws_dir}
+export RAILS_PARENT=%{webyast_dir}
 env LANG=en rake makemo
 
 %check
 # run the testsuite
-%webyast_ws_check
+%webyast_check
 
 %install
 
 #
 # Install all web and frontend parts.
 #
-mkdir -p $RPM_BUILD_ROOT%{webyast_ws_vardir}%{plugin_name}
+mkdir -p $RPM_BUILD_ROOT%{webyast_vardir}%{plugin_name}
 mkdir -p $RPM_BUILD_ROOT%{plugin_dir}
 cp -a * $RPM_BUILD_ROOT%{plugin_dir}
 rm -f $RPM_BUILD_ROOT%{plugin_dir}/COPYING
@@ -117,7 +117,7 @@ install -m 0755 %SOURCE3 $RPM_BUILD_ROOT/etc/sysconfig/network/scripts/
 rm -rf $RPM_BUILD_ROOT/%{plugin_dir}/po
 
 # search locale files
-%find_lang webyast-mail-ws
+%find_lang webyast-mail
 
 %clean
 rm -rf $RPM_BUILD_ROOT
@@ -125,23 +125,23 @@ rm -rf $RPM_BUILD_ROOT
 %post
 # granting all permissions for the web user
 /usr/sbin/grantwebyastrights --user root --action grant > /dev/null ||:
-/usr/sbin/grantwebyastrights --user %{webyast_ws_user} --action grant > /dev/null ||:
+/usr/sbin/grantwebyastrights --user %{webyast_user} --action grant > /dev/null ||:
 
 %postun
 
-%files -f webyast-mail-ws.lang
+%files -f webyast-mail.lang
 %defattr(-,root,root)
-%dir %{webyast_ws_dir}
-%dir %{webyast_ws_dir}/vendor
-%dir %{webyast_ws_dir}/vendor/plugins
+%dir %{webyast_dir}
+%dir %{webyast_dir}/vendor
+%dir %{webyast_dir}/vendor/plugins
 %dir %{plugin_dir}
 # YaPI dir
 %dir /usr/share/YaST2/
 %dir /usr/share/YaST2/modules/
 %dir /usr/share/YaST2/modules/YaPI/
 #var dir to store mail test status
-%dir %attr (-,%{webyast_ws_user},root) %{webyast_ws_vardir}
-%dir %attr (-,%{webyast_ws_user},root) %{webyast_ws_vardir}/%{plugin_name}
+%dir %attr (-,%{webyast_user},root) %{webyast_vardir}
+%dir %attr (-,%{webyast_user},root) %{webyast_vardir}/%{plugin_name}
 %dir %{plugin_dir}/locale
 %{plugin_dir}/README
 %{plugin_dir}/Rakefile
