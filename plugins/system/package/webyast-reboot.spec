@@ -1,5 +1,5 @@
 #
-# spec file for package webyast-reboot-ws
+# spec file for package webyast-reboot
 #
 # Copyright (c) 2008 SUSE LINUX Products GmbH, Nuernberg, Germany.
 # This file and all modifications and additions to the pristine
@@ -9,7 +9,7 @@
 #
 
 
-Name:           webyast-reboot-ws
+Name:           webyast-reboot
 Provides:       WebYaST(org.opensuse.yast.system.system)
 Provides:       yast2-webservice-system = %{version}
 Obsoletes:      yast2-webservice-system < %{version}
@@ -29,20 +29,20 @@ BuildRoot:      %{_tmppath}/%{name}-%{version}-build
 BuildArch:      noarch
 BuildRequires:  rubygem-webyast-rake-tasks >= 0.1.3
 BuildRequires:	rubygem-restility
-BuildRequires:  webyast-base-ws-testsuite
+BuildRequires:  webyast-base-testsuite
 # the testsuite is run during build
 BuildRequires:	rubygem-test-unit rubygem-mocha
 
 #
 %define plugin_name system
-%define plugin_dir %{webyast_ws_dir}/vendor/plugins/%{plugin_name}
+%define plugin_dir %{webyast_dir}/vendor/plugins/%{plugin_name}
 #
 
 %package testsuite
 Group:    Productivity/Networking/Web/Utilities
 Requires: %{name} = %{version}
-Requires: webyast-base-ws-testsuite
-Summary:  Testsuite for webyast-reboot-ws package
+Requires: webyast-base-testsuite
+Summary:  Testsuite for webyast-reboot package
 
 %description
 WebYaST - Plugin providing REST based interface for system reboot/shutdown.
@@ -60,7 +60,7 @@ Testsuite for webyast-reboot package.
 %build
 # build restdoc documentation
 mkdir -p public/%{plugin_name}/restdoc
-%webyast_ws_restdoc
+%webyast_restdoc
 
 # do not package restdoc sources
 rm -rf restdoc
@@ -68,7 +68,7 @@ rm -rf restdoc
 rm -rf doc
 
 %check
-%webyast_ws_check
+%webyast_check
 
 %install
 #
@@ -91,10 +91,10 @@ rm -rf $RPM_BUILD_ROOT
 %posttrans
 # granting all permissions for the web user
 #FIXME don't silently fail
-polkit-auth --user %{webyast_ws_user} --grant org.freedesktop.hal.power-management.shutdown >& /dev/null || true
-polkit-auth --user %{webyast_ws_user} --grant org.freedesktop.hal.power-management.shutdown-multiple-sessions >& /dev/null || true
-polkit-auth --user %{webyast_ws_user} --grant org.freedesktop.hal.power-management.reboot >& /dev/null || true
-polkit-auth --user %{webyast_ws_user} --grant org.freedesktop.hal.power-management.reboot-multiple-sessions >& /dev/null || true
+polkit-auth --user %{webyast_user} --grant org.freedesktop.hal.power-management.shutdown >& /dev/null || true
+polkit-auth --user %{webyast_user} --grant org.freedesktop.hal.power-management.shutdown-multiple-sessions >& /dev/null || true
+polkit-auth --user %{webyast_user} --grant org.freedesktop.hal.power-management.reboot >& /dev/null || true
+polkit-auth --user %{webyast_user} --grant org.freedesktop.hal.power-management.reboot-multiple-sessions >& /dev/null || true
 
 # granting all permissions for root
 polkit-auth --user root --grant org.freedesktop.hal.power-management.shutdown >& /dev/null || true
@@ -107,18 +107,18 @@ polkit-auth --user root --grant org.freedesktop.hal.power-management.reboot-mult
 # see https://fedoraproject.org/wiki/Packaging/ScriptletSnippets#Syntax for details
 if [ $1 -eq 0 ] ; then
   # discard all configured permissions for the web user
-  polkit-auth --user %{webyast_ws_user} --revoke org.freedesktop.hal.power-management.shutdown >& /dev/null || :
-  polkit-auth --user %{webyast_ws_user} --revoke org.freedesktop.hal.power-management.shutdown-multiple-sessions >& /dev/null || :
-  polkit-auth --user %{webyast_ws_user} --revoke org.freedesktop.hal.power-management.reboot >& /dev/null || :
-  polkit-auth --user %{webyast_ws_user} --revoke org.freedesktop.hal.power-management.reboot-multiple-sessions >& /dev/null || :
+  polkit-auth --user %{webyast_user} --revoke org.freedesktop.hal.power-management.shutdown >& /dev/null || :
+  polkit-auth --user %{webyast_user} --revoke org.freedesktop.hal.power-management.shutdown-multiple-sessions >& /dev/null || :
+  polkit-auth --user %{webyast_user} --revoke org.freedesktop.hal.power-management.reboot >& /dev/null || :
+  polkit-auth --user %{webyast_user} --revoke org.freedesktop.hal.power-management.reboot-multiple-sessions >& /dev/null || :
 fi
 
 %files 
 
 %defattr(-,root,root)
-%dir %{webyast_ws_dir}
-%dir %{webyast_ws_dir}/vendor
-%dir %{webyast_ws_dir}/vendor/plugins
+%dir %{webyast_dir}
+%dir %{webyast_dir}/vendor
+%dir %{webyast_dir}/vendor/plugins
 %dir %{plugin_dir}
 
 %{plugin_dir}/README

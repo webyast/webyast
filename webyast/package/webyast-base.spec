@@ -1,5 +1,5 @@
 #
-# spec file for package webyast-base-ws (Version 0.1.19)
+# spec file for package webyast-base (Version 0.1.19)
 #
 # Copyright (c) 2008 SUSE LINUX Products GmbH, Nuernberg, Germany.
 # This file and all modifications and additions to the pristine

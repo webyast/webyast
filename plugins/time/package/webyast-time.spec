@@ -1,5 +1,5 @@
 #
-# spec file for package yast2-webservice-systemtime (Version 0.1)
+# spec file for package webyast-time (Version 0.1)
 #
 # Copyright (c) 2008 SUSE LINUX Products GmbH, Nuernberg, Germany.
 # This file and all modifications and additions to the pristine
@@ -9,7 +9,7 @@
 #
 
 
-Name:           webyast-time-ws
+Name:           webyast-time
 Provides:       WebYaST(org.opensuse.yast.modules.yapi.time)
 Provides:       yast2-webservice-time = %{version}
 Obsoletes:      yast2-webservice-time < %{version}
@@ -34,19 +34,19 @@ Requires:       yast2-country >= 2.18.10
 Requires:       yast2-country >= 2.17.34.2
 %endif
 
-BuildRequires:  webyast-base-ws-testsuite
+BuildRequires:  webyast-base-testsuite
 BuildRequires:	rubygem-test-unit rubygem-mocha
 
 #
 %define plugin_name time
-%define plugin_dir %{webyast_ws_dir}/vendor/plugins/%{plugin_name}
+%define plugin_dir %{webyast_dir}/vendor/plugins/%{plugin_name}
 #
 
 %package testsuite
 Group:    Productivity/Networking/Web/Utilities
 Requires: %{name} = %{version}
-Requires: webyast-base-ws-testsuite
-Summary:  Testsuite for webyast-time-ws package
+Requires: webyast-base-testsuite
+Summary:  Testsuite for webyast-time package
 
 %description
 WebYaST - Plugin providing REST based interface to handle time zone, system time and date.
@@ -57,7 +57,7 @@ Authors:
     Josef Reidinger <jreidinger@suse.cz>
 
 %description testsuite
-This package contains complete testsuite for webyast-time-ws webservice package.
+This package contains complete testsuite for webyast-time package.
 It's only needed for verifying the functionality of the module and it's not
 needed at runtime.
 
@@ -68,7 +68,7 @@ needed at runtime.
 
 %check
 # run the testsuite
-%webyast_ws_check
+%webyast_check
 
 %install
 
@@ -88,14 +88,14 @@ rm -rf $RPM_BUILD_ROOT
 # granting all permissions for root 
 #
 /usr/sbin/grantwebyastrights --user root --action grant > /dev/null
-# XXX not nice to get yastws all permissions, but now not better solution
-/usr/sbin/grantwebyastrights --user %{webyast_ws_user} --action grant > /dev/null
+# XXX not nice to get webyast all permissions, but now not better solution
+/usr/sbin/grantwebyastrights --user %{webyast_user} --action grant > /dev/null
 
 %files 
 %defattr(-,root,root)
-%dir %{webyast_ws_dir}
-%dir %{webyast_ws_dir}/vendor
-%dir %{webyast_ws_dir}/vendor/plugins
+%dir %{webyast_dir}
+%dir %{webyast_dir}/vendor
+%dir %{webyast_dir}/vendor/plugins
 %dir %{plugin_dir}
 %dir %{plugin_dir}/doc
 %dir /usr/share/PolicyKit

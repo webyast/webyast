@@ -1,5 +1,5 @@
 #
-# spec file for package webyast-registration-ws
+# spec file for package webyast-registration
 #
 # Copyright (c) 2009 SUSE LINUX Products GmbH, Nuernberg, Germany.
 # This file and all modifications and additions to the pristine
@@ -9,7 +9,7 @@
 #
 
 
-Name:           webyast-registration-ws
+Name:           webyast-registration
 Provides:       WebYaST(org.opensuse.yast.modules.registration.registration)
 Provides:       WebYaST(org.opensuse.yast.modules.registration.configuration)
 Provides:       yast2-webservice-registration = %{version}
@@ -21,13 +21,13 @@ URL:            http://en.opensuse.org/Portal:WebYaST
 Autoreqprov:    on
 Version:        0.2.5
 Release:        0
-Summary:        WebYaST - Registration service
+Summary:        WebYaST - Registration
 Source:         www.tar.bz2
 BuildRoot:      %{_tmppath}/%{name}-%{version}-build
 BuildArch:      noarch
 Recommends:     openssl-certs
 
-BuildRequires:  webyast-base-ws-testsuite rubygem-gettext_rails
+BuildRequires:  webyast-base-testsuite rubygem-gettext_rails
 BuildRequires:	rubygem-test-unit rubygem-mocha
 
 # YaST2/modules/YSR.pm  
@@ -45,14 +45,14 @@ Requires:       yast2-registration >= 2.17.35
 %endif
 #
 %define plugin_name registration
-%define plugin_dir %{webyast_ws_dir}/vendor/plugins/%{plugin_name}
+%define plugin_dir %{webyast_dir}/vendor/plugins/%{plugin_name}
 #
 
 %package testsuite
 Group:    Productivity/Networking/Web/Utilities
 Requires: %{name} = %{version}
-Requires: webyast-base-ws-testsuite
-Summary:  Testsuite for webyast-registration-ws package
+Requires: webyast-base-testsuite
+Summary:  Testsuite for webyast-registration package
 
 %description
 WebYaST - Plugin providing REST based interface for the system registration at NCC, SMT or SLMS
@@ -63,7 +63,7 @@ Authors:
     Stefan Schubert <schubi@novell.com>
 
 %description testsuite
-This package contains complete testsuite for webyast-registration-ws webservice package.
+This package contains complete testsuite for webyast-registration package.
 It's only needed for verifying the functionality of the module and it's not
 needed at runtime.
 
@@ -72,12 +72,12 @@ needed at runtime.
 
 %build
 
-export RAILS_PARENT=%{webyast_ws_dir}
+export RAILS_PARENT=%{webyast_dir}
 env LANG=en rake makemo
 
 %check
 # run the testsuite
-%webyast_ws_check
+%webyast_check
 
 %install
 
@@ -92,23 +92,23 @@ rm -f $RPM_BUILD_ROOT%{plugin_dir}/COPYING
 rm -rf $RPM_BUILD_ROOT/%{plugin_dir}/po
 
 # search locale files
-%find_lang webyast-registration-ws
+%find_lang webyast-registration
 
 %clean
 rm -rf $RPM_BUILD_ROOT
 
 %post
 #
-# granting all permissions for root and yastws
+# granting all permissions for root and webyast
 #
 /usr/sbin/grantwebyastrights --user root --action grant > /dev/null
-/usr/sbin/grantwebyastrights --user %{webyast_ws_user} --action grant > /dev/null
+/usr/sbin/grantwebyastrights --user %{webyast_user} --action grant > /dev/null
 
-%files -f webyast-registration-ws.lang
+%files -f webyast-registration.lang
 %defattr(-,root,root)
-%dir %{webyast_ws_dir}
-%dir %{webyast_ws_dir}/vendor
-%dir %{webyast_ws_dir}/vendor/plugins
+%dir %{webyast_dir}
+%dir %{webyast_dir}/vendor
+%dir %{webyast_dir}/vendor/plugins
 %dir %{plugin_dir}
 %dir %{plugin_dir}/doc
 

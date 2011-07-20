@@ -1,5 +1,5 @@
 #
-# spec file for package webyast-network-ws
+# spec file for package webyast-network
 #
 # Copyright (c) 2008 SUSE LINUX Products GmbH, Nuernberg, Germany.
 # This file and all modifications and additions to the pristine
@@ -9,7 +9,7 @@
 #
 
 
-Name:           webyast-network-ws
+Name:           webyast-network
 Provides:       WebYaST(org.opensuse.yast.modules.yapi.network.routes)
 Provides:       WebYaST(org.opensuse.yast.modules.yapi.network.interfaces)
 Provides:       WebYaST(org.opensuse.yast.modules.yapi.network.hostname)
@@ -22,12 +22,12 @@ URL:            http://en.opensuse.org/Portal:WebYaST
 Autoreqprov:    on
 Version:        0.2.6
 Release:        0
-Summary:        WebYaST - Network service
+Summary:        WebYaST - Network 
 Source:         www.tar.bz2
 Source1:        org.opensuse.yast.modules.yapi.network.policy
 BuildRoot:      %{_tmppath}/%{name}-%{version}-build
 BuildArch:      noarch
-BuildRequires:  rubygem-yast2-webservice-tasks rubygem-restility
+BuildRequires:  rubygem-websyast-tasks rubygem-restility
 PreReq:         yast2-webservice
 # YaPI/NETWORK.pm
 %if 0%{?suse_version} == 0 || %suse_version > 1110
@@ -36,19 +36,19 @@ Requires:       yast2-network >= 2.18.51
 Requires:       yast2-network >= 2.17.78.1
 %endif
 
-BuildRequires:  webyast-base-ws-testsuite
+BuildRequires:  webyast-base-testsuite
 BuildRequires:	rubygem-test-unit rubygem-mocha
 
 #
 %define plugin_name network
-%define plugin_dir %{webyast_ws_dir}/vendor/plugins/%{plugin_name}
+%define plugin_dir %{webyast_dir}/vendor/plugins/%{plugin_name}
 #
 
 %package testsuite
 Group:    Productivity/Networking/Web/Utilities
 Requires: %{name} = %{version}
-Requires: webyast-base-ws-testsuite
-Summary:  Testsuite for webyast-network-ws package
+Requires: webyast-base-testsuite
+Summary:  Testsuite for webyast-network package
 
 %description
 WebYaST - Plugin providing REST based interface for network configuration.
@@ -57,7 +57,7 @@ Authors:
     Michael Zugec <mzugec@suse.cz>
 
 %description testsuite
-This package contains complete testsuite for webyast-network-ws webservice package.
+This package contains complete testsuite for webyast-network package.
 It's only needed for verifying the functionality of the module and it's not
 needed at runtime.
 
@@ -68,14 +68,14 @@ needed at runtime.
 %build
 # build restdoc documentation
 mkdir -p public/network/restdoc
-%webyast_ws_restdoc
+%webyast_restdoc
 
 # do not package restdoc sources
 rm -rf restdoc
 
 %check
 # run the testsuite
-%webyast_ws_check
+%webyast_check
 
 %install
 
@@ -98,14 +98,14 @@ rm -rf $RPM_BUILD_ROOT
 # granting all permissions for root
 #
 /usr/sbin/grantwebyastrights --user root --action grant > /dev/null ||:
-# and for yastws
-/usr/sbin/grantwebyastrights --user %{webyast_ws_user} --action grant > /dev/null ||:
+# and for webyast
+/usr/sbin/grantwebyastrights --user %{webyast_user} --action grant > /dev/null ||:
 
 %files
 %defattr(-,root,root)
-%dir %{webyast_ws_dir}
-%dir %{webyast_ws_dir}/vendor
-%dir %{webyast_ws_dir}/vendor/plugins
+%dir %{webyast_dir}
+%dir %{webyast_dir}/vendor
+%dir %{webyast_dir}/vendor/plugins
 %dir %{plugin_dir}
 %{plugin_dir}/Rakefile
 %{plugin_dir}/app

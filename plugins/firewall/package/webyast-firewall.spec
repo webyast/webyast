@@ -1,4 +1,4 @@
-# spec file for package yast2-webservice-firewall (Version 0.1)
+# spec file for package webyast-firewall (Version 0.1)
 #
 # Copyright (c) 2008 SUSE LINUX Products GmbH, Nuernberg, Germany.
 # This file and all modifications and additions to the pristine
@@ -8,7 +8,7 @@
 #
 
 
-Name:           webyast-firewall-ws
+Name:           webyast-firewall
 Provides:       WebYaST(org.opensuse.yast.modules.yapi.firewall)
 License:        GPL-2.0 
 Group:          Productivity/Networking/Web/Utilities
@@ -23,22 +23,22 @@ Source2:        FIREWALL.pm
 BuildRoot:      %{_tmppath}/%{name}-%{version}-build
 BuildArch:      noarch
 BuildRequires:  rubygem-yast2-webservice-tasks rubygem-restility
-PreReq:         webyast-base-ws
+PreReq:         webyast-base
 Requires:       SuSEfirewall2 yast2
 
-BuildRequires:  webyast-base-ws-testsuite
+BuildRequires:  webyast-base-testsuite
 BuildRequires:	rubygem-test-unit rubygem-mocha
 
 #
 %define plugin_name firewall
-%define plugin_dir %{webyast_ws_dir}/vendor/plugins/%{plugin_name}
+%define plugin_dir %{webyast_dir}/vendor/plugins/%{plugin_name}
 #
 
 %package testsuite
 Group:    Productivity/Networking/Web/Utilities
 Requires: %{name} = %{version}
-Requires: webyast-base-ws-testsuite
-Summary:  Testsuite for webyast-firewall-ws package
+Requires: webyast-base-testsuite
+Summary:  Testsuite for webyast-firewall package
 
 %description
 WebYaST - Plugin provides REST based interface to handle firewall settings.
@@ -47,7 +47,7 @@ Authors:
     Martin Kudlvasr<mkudlvasr@novell.com>
 
 %description testsuite
-This package contains complete testsuite for webyast-firewall-ws webservice package.
+This package contains complete testsuite for webyast-firewall package.
 It's only needed for verifying the functionality of the module and it's not
 needed at runtime.
 
@@ -57,7 +57,7 @@ needed at runtime.
 %build
 # build restdoc documentation
 mkdir -p public/firewall/restdoc
-%webyast_ws_restdoc
+%webyast_restdoc
 
 # do not package restdoc sources
 rm -rf restdoc
@@ -66,7 +66,7 @@ rm -rf doc
 
 %check
 # run the testsuite
-%webyast_ws_check
+%webyast_check
 
 %install
 
@@ -93,13 +93,13 @@ rm -rf $RPM_BUILD_ROOT
 # granting all permissions for root
 #
 /usr/sbin/grantwebyastrights --user root --action grant > /dev/null ||:
-/usr/sbin/grantwebyastrights --user %{webyast_ws_user} --action grant > /dev/null ||:
+/usr/sbin/grantwebyastrights --user %{webyast_user} --action grant > /dev/null ||:
 
 %files
 %defattr(-,root,root)
-%dir %{webyast_ws_dir}
-%dir %{webyast_ws_dir}/vendor
-%dir %{webyast_ws_dir}/vendor/plugins
+%dir %{webyast_dir}
+%dir %{webyast_dir}/vendor
+%dir %{webyast_dir}/vendor/plugins
 %dir %{plugin_dir}
 
 %dir /usr/share/YaST2/

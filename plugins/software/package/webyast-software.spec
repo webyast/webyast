@@ -42,7 +42,7 @@ URL:            http://en.opensuse.org/Portal:WebYaST
 Autoreqprov:    on
 Version:        0.3.12
 Release:        0
-Summary:        WebYaST - software management service
+Summary:        WebYaST - software management 
 Source:         www.tar.bz2
 Source1:        org.opensuse.yast.system.patches.policy
 Source2:        org.opensuse.yast.system.packages.policy
@@ -135,7 +135,7 @@ rm -rf $RPM_BUILD_ROOT
 /usr/sbin/grantwebyastrights --user %{webyast_user} --action grant > /dev/null ||:
 
 
-# grant the permission for the webservice user
+# grant the permission for the webyast user
 polkit-auth --user %{webyast_user} --grant org.freedesktop.packagekit.system-sources-configure >& /dev/null || true
 polkit-auth --user %{webyast_user} --grant org.freedesktop.packagekit.system-update >& /dev/null || true
 polkit-auth --user %{webyast_user} --grant org.freedesktop.packagekit.package-eula-accept >& /dev/null || true

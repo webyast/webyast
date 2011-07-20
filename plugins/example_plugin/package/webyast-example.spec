@@ -1,5 +1,5 @@
 #
-# example spec file for package webyast-example-ws
+# example spec file for package webyast-example
 #
 # Copyright (c) 2010 SUSE LINUX Products GmbH, Nuernberg, Germany.
 # This file and all modifications and additions to the pristine
@@ -9,7 +9,7 @@
 #
 
 
-Name:           webyast-example-ws
+Name:           webyast-example
 #allows to search for missing interface
 Provides:       WebYaST(org.example.plugin)
 #webservice already require yast2-dbus-server which is needed for yapi
@@ -20,7 +20,7 @@ URL:            http://en.opensuse.org/Portal:WebYaST
 Autoreqprov:    on
 Version:        0.1
 Release:        0
-Summary:        WebYaST - example plugin service
+Summary:        WebYaST - example plugin 
 Source:         www.tar.bz2
 Source1:        example.service.conf
 Source2:        exampleService.rb
@@ -30,18 +30,18 @@ BuildRoot:      %{_tmppath}/%{name}-%{version}-build
 BuildArch:      noarch
 BuildRequires:  rubygem-yast2-webservice-tasks rubygem-restility
 
-BuildRequires:  webyast-base-ws-testsuite
+BuildRequires:  webyast-base-testsuite
 BuildRequires:	rubygem-test-unit rubygem-mocha
 
 #
-%define plugin_dir %{webyast_ws_dir}/vendor/plugins/exampleplugin
+%define plugin_dir %{webyast_dir}/vendor/plugins/exampleplugin
 #
 
 %package testsuite
 Group:    Productivity/Networking/Web/Utilities
 Requires: %{name} = %{version}
-Requires: webyast-base-ws-testsuite
-Summary:  Testsuite for webyast-example-ws package
+Requires: webyast-base-testsuite
+Summary:  Testsuite for webyast-example package
 
 %description
 WebYaST - Plugin providing EXAMPLE REST based interface
@@ -51,7 +51,7 @@ Authors:
     Josef Reidinger <jreidinger@novell.com>
 
 %description testsuite
-This package contains complete testsuite for webyast-example-ws webservice package.
+This package contains complete testsuite for webyast-example package.
 It's only needed for verifying the functionality of the module and it's not
 needed at runtime.
 
@@ -61,7 +61,7 @@ needed at runtime.
 %build
 # build restdoc documentation
 #mkdir -p public/ntp/restdoc
-#%webyast_ws_restdoc
+#%webyast_restdoc
 
 # do not package restdoc sources
 rm -rf restdoc
@@ -70,7 +70,7 @@ rm -rf doc
 
 %check
 # run the testsuite
-%webyast_ws_check
+%webyast_check
 
 %install
 
@@ -98,18 +98,18 @@ cp %{SOURCE4} $RPM_BUILD_ROOT/usr/share/PolicyKit/policy/
 rm -rf $RPM_BUILD_ROOT
 
 %post
-# granting all permissions for the webservice user and root
+# granting all permissions for the webyast user and root
 #TODO don't silently fail
 polkit-auth --user root --grant org.example.plugin.read org.example.plugin.write > /dev/null || :
-polkit-auth --user %{webyast_ws_user} --grant org.example.plugin.read org.example.plugin.write > /dev/null || :
+polkit-auth --user %{webyast_user} --grant org.example.plugin.read org.example.plugin.write > /dev/null || :
 
 %postun
 
 %files 
 %defattr(-,root,root)
-%dir %{webyast_ws_dir}
-%dir %{webyast_ws_dir}/vendor
-%dir %{webyast_ws_dir}/vendor/plugins
+%dir %{webyast_dir}
+%dir %{webyast_dir}/vendor
+%dir %{webyast_dir}/vendor/plugins
 %dir %{plugin_dir}
 %{plugin_dir}/README
 %{plugin_dir}/Rakefile

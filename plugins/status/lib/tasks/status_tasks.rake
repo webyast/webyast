@@ -1,6 +1,6 @@
 begin
-  require 'tasks/webservice'
+  require 'tasks/webyast'
 rescue LoadError => e
-  $stderr.puts "Install rubygem-yast2-webservice-tasks.rpm"
+  $stderr.puts "Install rubygem-webyast-tasks.rpm"
 end
 

@@ -1,5 +1,5 @@
 #
-# spec file for package webyast-roles-ws (Version 0.1)
+# spec file for package webyast-roles (Version 0.1)
 #
 # Copyright (c) 2010 SUSE LINUX Products GmbH, Nuernberg, Germany.
 # This file and all modifications and additions to the pristine
@@ -9,7 +9,7 @@
 #
 
 
-Name:           webyast-roles-ws
+Name:           webyast-roles
 Provides:       WebYaST(org.opensuse.yast.roles)
 PreReq:         yast2-webservice
 License:        GPL-2.0	
@@ -18,7 +18,7 @@ URL:            http://en.opensuse.org/Portal:WebYaST
 Autoreqprov:    on
 Version:        0.2.5
 Release:        0
-Summary:        WebYaST - role management service
+Summary:        WebYaST - role management
 Source:         www.tar.bz2
 BuildRoot:      %{_tmppath}/%{name}-%{version}-build
 BuildArch:      noarch
@@ -26,19 +26,19 @@ Source1:        roles.yml
 Source2:        roles_assign.yml
 Source3:        org.opensuse.yast.roles.policy
 
-BuildRequires:  webyast-base-ws-testsuite
+BuildRequires:  webyast-base-testsuite
 BuildRequires:	rubygem-test-unit rubygem-mocha
 
 #
 %define plugin_name roles
-%define plugin_dir %{webyast_ws_dir}/vendor/plugins/%{plugin_name}
+%define plugin_dir %{webyast_dir}/vendor/plugins/%{plugin_name}
 #
 
 %package testsuite
 Group:    Productivity/Networking/Web/Utilities
 Requires: %{name} = %{version}
-Requires: webyast-base-ws-testsuite
-Summary:  Testsuite for webyast-roles-ws package
+Requires: webyast-base-testsuite
+Summary:  Testsuite for webyast-roles package
 
 %description
 WebYaST - Plugin providing REST based interface for roles management.
@@ -48,7 +48,7 @@ Authors:
     Josef Reidinger <jreidinger@suse.cz>
 
 %description testsuite
-This package contains complete testsuite for webyast-roles-ws webservice package.
+This package contains complete testsuite for webyast-roles package.
 It's only needed for verifying the functionality of the module and it's not
 needed at runtime.
 
@@ -59,7 +59,7 @@ needed at runtime.
 
 %check
 # run the testsuite
-%webyast_ws_check
+%webyast_check
 
 %install
 
@@ -72,8 +72,8 @@ rm -f $RPM_BUILD_ROOT%{plugin_dir}/COPYING
 
 mkdir -p $RPM_BUILD_ROOT/usr/share/PolicyKit/policy
 
-mkdir -p $RPM_BUILD_ROOT%{webyast_ws_vardir}/roles
-cp %{SOURCE1} %{SOURCE2} $RPM_BUILD_ROOT%{webyast_ws_vardir}/roles
+mkdir -p $RPM_BUILD_ROOT%{webyast_vardir}/roles
+cp %{SOURCE1} %{SOURCE2} $RPM_BUILD_ROOT%{webyast_vardir}/roles
 
 cp %{SOURCE3} $RPM_BUILD_ROOT/usr/share/PolicyKit/policy/
 
@@ -85,14 +85,14 @@ rm -rf $RPM_BUILD_ROOT
 # granting all permissions for root 
 #
 /usr/sbin/grantwebyastrights --user root --action grant > /dev/null
-# XXX not nice to get yastws all permissions, but now not better solution
-/usr/sbin/grantwebyastrights --user %{webyast_ws_user} --action grant > /dev/null
+# XXX not nice to get webyast all permissions, but now not better solution
+/usr/sbin/grantwebyastrights --user %{webyast_user} --action grant > /dev/null
 
 %files 
 %defattr(-,root,root)
-%dir %{webyast_ws_dir}
-%dir %{webyast_ws_dir}/vendor
-%dir %{webyast_ws_dir}/vendor/plugins
+%dir %{webyast_dir}
+%dir %{webyast_dir}/vendor
+%dir %{webyast_dir}/vendor/plugins
 %dir %{plugin_dir}
 %dir %{plugin_dir}/doc
 
@@ -107,8 +107,8 @@ rm -rf $RPM_BUILD_ROOT
 %{plugin_dir}/config
 %{plugin_dir}/lib
 %{plugin_dir}/doc/README_FOR_APP
-%attr(0700,%{webyast_ws_user},%{webyast_ws_user}) %dir %{webyast_ws_vardir}/roles
-%attr(0600,%{webyast_ws_user},%{webyast_ws_user}) %config %{webyast_ws_vardir}/roles/*
+%attr(0700,%{webyast_user},%{webyast_user}) %dir %{webyast_vardir}/roles
+%attr(0600,%{webyast_user},%{webyast_user}) %config %{webyast_vardir}/roles/*
 /usr/share/PolicyKit/policy/org.opensuse.yast.roles.policy
 
 %doc COPYING

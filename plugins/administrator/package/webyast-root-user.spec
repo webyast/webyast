@@ -1,5 +1,5 @@
 #
-# spec file for package webyast-root-user-ws
+# spec file for package webyast-root-user
 #
 # Copyright (c) 2008 SUSE LINUX Products GmbH, Nuernberg, Germany.
 # This file and all modifications and additions to the pristine
@@ -9,7 +9,7 @@
 #
 
 
-Name:           webyast-root-user-ws
+Name:           webyast-root-user
 Provides:       WebYaST(org.opensuse.yast.modules.yapi.administrator)
 Provides:       yast2-webservice-administrator = %{version}
 Obsoletes:      yast2-webservice-administrator < %{version}
@@ -20,14 +20,14 @@ URL:            http://en.opensuse.org/Portal:WebYaST
 Autoreqprov:    on
 Version:        0.2.4
 Release:        0
-Summary:        WebYaST - service for configuration of root account
+Summary:        WebYaST - configuration of root account
 Source:         www.tar.bz2
 Source1:	org.opensuse.yast.modules.yapi.administrator.policy
 BuildRoot:      %{_tmppath}/%{name}-%{version}-build
 BuildArch:      noarch
-BuildRequires:  rubygem-yast2-webservice-tasks rubygem-restility
+BuildRequires:  rubygem-webyast-tasks rubygem-restility
 
-BuildRequires:  webyast-base-ws-testsuite
+BuildRequires:  webyast-base-testsuite
 BuildRequires:	rubygem-test-unit rubygem-mocha
 
 # requires YaPI::USERS
@@ -41,24 +41,24 @@ Requires:       yast2-users >= 2.17.28.1
 
 #
 %define plugin_name administrator
-%define plugin_dir %{webyast_ws_dir}/vendor/plugins/%{plugin_name}
+%define plugin_dir %{webyast_dir}/vendor/plugins/%{plugin_name}
 #
 
 %package testsuite
 Group:    Productivity/Networking/Web/Utilities
 Requires: %{name} = %{version}
-Requires: webyast-base-ws-testsuite
-Summary:  Testsuite for webyast-root-user-ws package
+Requires: webyast-base-testsuite
+Summary:  Testsuite for webyast-root-user package
 
 %description
-WebYaST - Plugin providing REST service for configuration of root user account
+WebYaST - Plugin for configuration of root user account
 
 Authors:
 --------
     Jiri Suchomel <jsuchome@novell.com>
 
 %description testsuite
-This package contains complete testsuite for webyast-root-ws webservice package.
+This package contains complete testsuite for webyast-root package.
 It's only needed for verifying the functionality of the module and it's not
 needed at runtime.
 
@@ -68,14 +68,14 @@ needed at runtime.
 %build
 # build restdoc documentation
 mkdir -p public/administrator/restdoc
-%webyast_ws_restdoc
+%webyast_restdoc
 
 # do not package restdoc sources
 rm -rf restdoc
 
 %check
 # run the testsuite
-%webyast_ws_check
+%webyast_check
 
 %install
 
@@ -96,15 +96,15 @@ rm -rf $RPM_BUILD_ROOT
 %post
 # granting all permissions for the web user
 /usr/sbin/grantwebyastrights --user root --action grant > /dev/null
-/usr/sbin/grantwebyastrights --user %{webyast_ws_user} --action grant > /dev/null
+/usr/sbin/grantwebyastrights --user %{webyast_user} --action grant > /dev/null
 
 %postun
 
 %files 
 %defattr(-,root,root)
-%dir %{webyast_ws_dir}
-%dir %{webyast_ws_dir}/vendor
-%dir %{webyast_ws_dir}/vendor/plugins
+%dir %{webyast_dir}
+%dir %{webyast_dir}/vendor
+%dir %{webyast_dir}/vendor/plugins
 %dir %{plugin_dir}
 
 %{plugin_dir}/README
@@ -123,6 +123,6 @@ rm -rf $RPM_BUILD_ROOT
 
 %files testsuite
 %defattr(-,root,root)
-%{webyast_ws_dir}/vendor/plugins/%{plugin_name}/test
+%{webyast_dir}/vendor/plugins/%{plugin_name}/test
 
 %changelog

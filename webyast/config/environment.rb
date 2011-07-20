@@ -118,7 +118,7 @@ init = Rails::Initializer.run do |config|
   config.plugin_paths << File.join(RAILS_ROOT, '..', 'plugins') if ENV['RAILS_ENV'] != "production"
 
   # add extra plugin path - needed during RPM build
-  # (webyast-base-ws is already installed in /srv/www/... but plugins are
+  # (webyast-base is already installed in /srv/www/... but plugins are
   # located in /usr/src/packages/... during build)
   config.plugin_paths << '/usr/src/packages/BUILD' unless ENV['ADD_BUILD_PATH'].nil?
 

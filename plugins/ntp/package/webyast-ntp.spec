@@ -1,5 +1,5 @@
 #
-# spec file for package webyast-ntp-ws
+# spec file for package webyast-ntp
 #
 # Copyright (c) 2008 SUSE LINUX Products GmbH, Nuernberg, Germany.
 # This file and all modifications and additions to the pristine
@@ -9,7 +9,7 @@
 #
 
 
-Name:           webyast-ntp-ws
+Name:           webyast-ntp
 Provides:       WebYaST(org.opensuse.yast.modules.yapi.ntp)
 Provides:       yast2-webservice-ntp = %{version}
 Obsoletes:      yast2-webservice-ntp < %{version}
@@ -25,26 +25,26 @@ URL:            http://en.opensuse.org/Portal:WebYaST
 Autoreqprov:    on
 Version:        0.2.5
 Release:        0
-Summary:        WebYaST - NTP service
+Summary:        WebYaST - NTP 
 Source:         www.tar.bz2
 Source1:        NTP.pm
 Source2:        org.opensuse.yast.modules.yapi.ntp.policy
 BuildRoot:      %{_tmppath}/%{name}-%{version}-build
 BuildArch:      noarch
-BuildRequires:  rubygem-yast2-webservice-tasks rubygem-restility
+BuildRequires:  rubygem-webyast-tasks rubygem-restility
 
-BuildRequires:  webyast-base-ws-testsuite
+BuildRequires:  webyast-base-testsuite
 BuildRequires:	rubygem-test-unit rubygem-mocha
 
 #
-%define plugin_dir %{webyast_ws_dir}/vendor/plugins/ntp
+%define plugin_dir %{webyast_dir}/vendor/plugins/ntp
 #
 
 %package testsuite
 Group:    Productivity/Networking/Web/Utilities
 Requires: %{name} = %{version}
-Requires: webyast-base-ws-testsuite
-Summary:  Testsuite for webyast-ntp-ws package
+Requires: webyast-base-testsuite
+Summary:  Testsuite for webyast-ntp package
 
 %description
 WebYaST - Plugin providing REST based interface to basic ntp time synchronization
@@ -54,7 +54,7 @@ Authors:
     Josef Reidinger <jreidinger@novell.com>
 
 %description testsuite
-This package contains complete testsuite for webyast-ntp-ws webservice package.
+This package contains complete testsuite for webyast-ntp package.
 It's only needed for verifying the functionality of the module and it's not
 needed at runtime.
 
@@ -64,7 +64,7 @@ needed at runtime.
 %build
 # build restdoc documentation
 mkdir -p public/ntp/restdoc
-%webyast_ws_restdoc
+%webyast_restdoc
 
 # do not package restdoc sources
 rm -rf restdoc
@@ -73,7 +73,7 @@ rm -rf doc
 
 %check
 # run the testsuite
-%webyast_ws_check
+%webyast_check
 
 %install
 
@@ -96,15 +96,15 @@ rm -rf $RPM_BUILD_ROOT
 %post
 # granting all permissions for the webservice user and root
 /usr/sbin/grantwebyastrights --user root --action grant > /dev/null
-/usr/sbin/grantwebyastrights --user %{webyast_ws_user} --action grant > /dev/null
+/usr/sbin/grantwebyastrights --user %{webyast_user} --action grant > /dev/null
 
 %postun
 
 %files 
 %defattr(-,root,root)
-%dir %{webyast_ws_dir}
-%dir %{webyast_ws_dir}/vendor
-%dir %{webyast_ws_dir}/vendor/plugins
+%dir %{webyast_dir}
+%dir %{webyast_dir}/vendor
+%dir %{webyast_dir}/vendor/plugins
 %dir %{plugin_dir}
 # ntp require only yast2-dbus server, so it must ensure that directory exist
 %dir /usr/share/YaST2/

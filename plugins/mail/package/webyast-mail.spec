@@ -20,14 +20,14 @@ URL:            http://en.opensuse.org/Portal:WebYaST
 Autoreqprov:    on
 Version:        0.2.8
 Release:        0
-Summary:        WebYaST - system mail settings service
+Summary:        WebYaST - system mail settings
 Source:         www.tar.bz2
 Source1:        MailSettings.pm
 Source2:	org.opensuse.yast.modules.yapi.mailsettings.policy
 Source3:        postfix-update-hostname
 BuildRoot:      %{_tmppath}/%{name}-%{version}-build
 BuildArch:      noarch
-BuildRequires:  rubygem-yast2-webservice-tasks rubygem-restility
+BuildRequires:  rubygem-webyast-tasks rubygem-restility
 
 BuildRequires:  webyast-base-testsuite rubygem-gettext_rails
 BuildRequires:	rubygem-test-unit rubygem-mocha

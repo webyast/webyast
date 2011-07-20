@@ -1,5 +1,5 @@
 #
-# spec file for package webyast-status-ws (Version 0.1)
+# spec file for package webyast-status (Version 0.1)
 #
 # Copyright (c) 2008 SUSE LINUX Products GmbH, Nuernberg, Germany.
 # This file and all modifications and additions to the pristine
@@ -9,7 +9,7 @@
 #
 
 
-Name:           webyast-status-ws
+Name:           webyast-status
 Provides:       WebYaST(org.opensuse.yast.system.metrics)
 Provides:       WebYaST(org.opensuse.yast.system.logs)
 Provides:       WebYaST(org.opensuse.yast.system.graphs)
@@ -21,7 +21,7 @@ URL:            http://en.opensuse.org/Portal:WebYaST
 Autoreqprov:    on
 Version:        0.2.11
 Release:        0
-Summary:        WebYaST - system status service
+Summary:        WebYaST - system status 
 Source:         www.tar.bz2
 Source1:        org.opensuse.yast.system.status.policy
 Source2:	org.opensuse.yast.modules.logfile.policy
@@ -33,21 +33,21 @@ Requires:       rrdtool
 # for calling ruby module via YastService:
 Requires:	yast2-ruby-bindings >= 0.3.2.1
 
-BuildRequires:  rubygem-yast2-webservice-tasks rubygem-restility
+BuildRequires:  rubygem--webyast-tasks rubygem-restility
 
-BuildRequires:  webyast-base-ws-testsuite rubygem-gettext_rails
+BuildRequires:  webyast-base-testsuite rubygem-gettext_rails
 BuildRequires:	rubygem-test-unit rubygem-mocha
 
 #
 %define plugin_name status
-%define plugin_dir %{webyast_ws_dir}/vendor/plugins/%{plugin_name}
+%define plugin_dir %{webyast_dir}/vendor/plugins/%{plugin_name}
 #
 
 %package testsuite
 Group:    Productivity/Networking/Web/Utilities
 Requires: %{name} = %{version}
-Requires: webyast-base-ws-testsuite
-Summary:  Testsuite for webyast-status-ws package
+Requires: webyast-base-testsuite
+Summary:  Testsuite for webyast-status package
 
 %description
 WebYaST - Plugin providing REST based interface to provide information about system status.
@@ -59,7 +59,7 @@ Authors:
     Stefan Schubert <schubi@suse.de>
 
 %description testsuite
-This package contains complete testsuite for webyast-status-ws webservice package.
+This package contains complete testsuite for webyast-status package.
 It's only needed for verifying the functionality of the module and it's not
 needed at runtime.
 
@@ -71,17 +71,17 @@ needed at runtime.
 # create the output directory for the generated documentation
  mkdir -p public/%{plugin_name}/restdoc
  # build restdoc documentation
-%webyast_ws_restdoc
+%webyast_restdoc
  
  # do not package restdoc sources
  rm -rf restdoc
 
-export RAILS_PARENT=%{webyast_ws_dir}
+export RAILS_PARENT=%{webyast_dir}
 env LANG=en rake makemo
 
 %check
 # run the testsuite
-%webyast_ws_check
+%webyast_check
 
 %install
 
@@ -108,7 +108,7 @@ cp $RPM_BUILD_ROOT/%{plugin_dir}/doc/logs.yml $RPM_BUILD_ROOT/etc/webyast
 rm -rf $RPM_BUILD_ROOT/%{plugin_dir}/po
 
 # search locale files
-%find_lang webyast-status-ws
+%find_lang webyast-status
 
 %clean
 rm -rf $RPM_BUILD_ROOT
@@ -118,7 +118,7 @@ rm -rf $RPM_BUILD_ROOT
 # granting all permissions for root
 #
 /usr/sbin/grantwebyastrights --user root --action grant > /dev/null
-/usr/sbin/grantwebyastrights --user %{webyast_ws_user} --action grant > /dev/null
+/usr/sbin/grantwebyastrights --user %{webyast_user} --action grant > /dev/null
 
 #
 # nslookup of static hostnames can result to an error. Due this error collectd
@@ -148,15 +148,15 @@ rm -rf /var/lib/collectd/*
 %{fillup_and_insserv -Y collectd}
 rccollectd try-restart
 
-%files  -f webyast-status-ws.lang
+%files  -f webyast-status.lang
 %defattr(-,root,root)
 %dir /usr/share/YaST2/
 %dir /usr/share/YaST2/modules/
 /usr/share/YaST2/modules/LogFile.rb
 
-%dir %{webyast_ws_dir}
-%dir %{webyast_ws_dir}/vendor
-%dir %{webyast_ws_dir}/vendor/plugins
+%dir %{webyast_dir}
+%dir %{webyast_dir}/vendor
+%dir %{webyast_dir}/vendor/plugins
 %dir %{plugin_dir}
 %dir %{plugin_dir}/doc
 %dir %{plugin_dir}/locale
@@ -168,7 +168,7 @@ rccollectd try-restart
 %{plugin_dir}/lib
 %{plugin_dir}/public
 %{plugin_dir}/config/*
-%dir %attr (-,%{webyast_ws_user},root) %{plugin_dir}/config
+%dir %attr (-,%{webyast_user},root) %{plugin_dir}/config
 
 %dir /usr/share/PolicyKit
 %dir /usr/share/PolicyKit/policy

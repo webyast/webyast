@@ -1,5 +1,5 @@
 #
-# spec file for package webyast-kerberos-ws
+# spec file for package webyast-kerberos
 #
 # Copyright (c) 2008 SUSE LINUX Products GmbH, Nuernberg, Germany.
 # This file and all modifications and additions to the pristine
@@ -9,16 +9,16 @@
 #
 
 
-Name:           webyast-kerberos-ws
+Name:           webyast-kerberos
 Provides:       WebYaST(org.opensuse.yast.modules.yapi.kerberos)
-PreReq:         webyast-base-ws
+PreReq:         webyast-base
 License:        GPL-2.0	
 Group:          Productivity/Networking/Web/Utilities
 URL:            http://en.opensuse.org/Portal:WebYaST
 Autoreqprov:    on
 Version:        0.2.9
 Release:        0
-Summary:        WebYaST - service for configuration of Kerberos client
+Summary:        WebYaST - configuration of Kerberos client
 Source:         www.tar.bz2
 Source1:	org.opensuse.yast.modules.yapi.kerberos.policy
 Source2:	KERBEROS.pm
@@ -26,7 +26,7 @@ BuildRoot:      %{_tmppath}/%{name}-%{version}-build
 BuildArch:      noarch
 BuildRequires:  rubygem-yast2-webservice-tasks rubygem-restility
 
-BuildRequires:  webyast-base-ws-testsuite
+BuildRequires:  webyast-base-testsuite
 BuildRequires:	rubygem-test-unit rubygem-mocha
 
 # KERBEROS.pm is using yast2-kerberos-client API
@@ -36,24 +36,24 @@ Requires:       yast2-dbus-server >= 2.17.3
 
 #
 %define plugin_name kerberos
-%define plugin_dir %{webyast_ws_dir}/vendor/plugins/%{plugin_name}
+%define plugin_dir %{webyast_dir}/vendor/plugins/%{plugin_name}
 #
 
 %package testsuite
 Group:    Productivity/Networking/Web/Utilities
 Requires: %{name} = %{version}
-Requires: webyast-base-ws-testsuite
-Summary:  Testsuite for webyast-kerberos-ws package
+Requires: webyast-base-testsuite
+Summary:  Testsuite for webyast-kerberos package
 
 %description
-WebYaST - Plugin providing REST service for configuration of Kerberos client
+WebYaST - Plugin for configuration of Kerberos client
 
 Authors:
 --------
     Jiri Suchomel <jsuchome@novell.com>
 
 %description testsuite
-This package contains complete testsuite for webyast-kerberos-ws webservice package.
+This package contains complete testsuite for webyast-kerberos package.
 It's only needed for verifying the functionality of the module and it's not
 needed at runtime.
 
@@ -63,14 +63,14 @@ needed at runtime.
 %build
 # build restdoc documentation
 mkdir -p public/kerberos/restdoc
-%webyast_ws_restdoc
+%webyast_restdoc
 
 # do not package restdoc sources
 rm -rf restdoc
 
 %check
 # run the testsuite
-%webyast_ws_check
+%webyast_check
 
 %install
 
@@ -95,15 +95,15 @@ rm -rf $RPM_BUILD_ROOT
 %post
 # granting all permissions for the web user
 /usr/sbin/grantwebyastrights --user root --action grant > /dev/null
-/usr/sbin/grantwebyastrights --user %{webyast_ws_user} --action grant > /dev/null
+/usr/sbin/grantwebyastrights --user %{webyast_user} --action grant > /dev/null
 
 %postun
 
 %files 
 %defattr(-,root,root)
-%dir %{webyast_ws_dir}
-%dir %{webyast_ws_dir}/vendor
-%dir %{webyast_ws_dir}/vendor/plugins
+%dir %{webyast_dir}
+%dir %{webyast_dir}/vendor
+%dir %{webyast_dir}/vendor/plugins
 %dir %{plugin_dir}
 # YaPI dir
 %dir /usr/share/YaST2/
@@ -126,6 +126,6 @@ rm -rf $RPM_BUILD_ROOT
 
 %files testsuite
 %defattr(-,root,root)
-%{webyast_ws_dir}/vendor/plugins/%{plugin_name}/test
+%{webyast_dir}/vendor/plugins/%{plugin_name}/test
 
 %changelog

@@ -1,5 +1,5 @@
 #
-# spec file for package webyast-activedirectory-ws
+# spec file for package webyast-activedirectory
 #
 # Copyright (c) 2008 SUSE LINUX Products GmbH, Nuernberg, Germany.
 # This file and all modifications and additions to the pristine
@@ -9,24 +9,24 @@
 #
 
 
-Name:           webyast-activedirectory-ws
+Name:           webyast-activedirectory
 Provides:       WebYaST(org.opensuse.yast.modules.yapi.activedirectory)
-PreReq:         webyast-base-ws
+PreReq:         webyast-base
 License:        GPL-2.0	
 Group:          Productivity/Networking/Web/Utilities
 URL:            http://en.opensuse.org/Portal:WebYaST
 Autoreqprov:    on
 Version:        0.2.10
 Release:        0
-Summary:        WebYaST - service for configuration of Active Directory client
+Summary:        WebYaST - configuration of Active Directory client
 Source:         www.tar.bz2
 Source1:	org.opensuse.yast.modules.yapi.activedirectory.policy
 Source2:	ActiveDirectory.pm
 BuildRoot:      %{_tmppath}/%{name}-%{version}-build
 BuildArch:      noarch
-BuildRequires:  rubygem-yast2-webservice-tasks rubygem-restility
+BuildRequires:  rubygem-webyast-tasks rubygem-restility
 
-BuildRequires:  webyast-base-ws-testsuite
+BuildRequires:  webyast-base-testsuite
 BuildRequires:	rubygem-test-unit rubygem-mocha
 
 # for enabling winbind and Kerberos configuration
@@ -43,24 +43,24 @@ Requires:	yast2-samba-client >= 2.17.18
 
 #
 %define plugin_name activedirectory
-%define plugin_dir %{webyast_ws_dir}/vendor/plugins/%{plugin_name}
+%define plugin_dir %{webyast_dir}/vendor/plugins/%{plugin_name}
 #
 
 %package testsuite
 Group:    Productivity/Networking/Web/Utilities
 Requires: %{name} = %{version}
-Requires: webyast-base-ws-testsuite
-Summary:  Testsuite for webyast-activedirectory-ws package
+Requires: webyast-base-testsuite
+Summary:  Testsuite for webyast-activedirectory package
 
 %description
-WebYaST - Plugin providing REST service for configuration of Active Directory client
+WebYaST - Plugin for configuration of Active Directory client
 
 Authors:
 --------
     Jiri Suchomel <jsuchome@novell.com>
 
 %description testsuite
-This package contains complete testsuite for webyast-activedirectory-ws webservice package.
+This package contains complete testsuite for webyast-activedirectory package.
 It's only needed for verifying the functionality of the module and it's not
 needed at runtime.
 
@@ -70,14 +70,14 @@ needed at runtime.
 %build
 # build restdoc documentation
 mkdir -p public/activedirectory/restdoc
-%webyast_ws_restdoc
+%webyast_restdoc
 
 # do not package restdoc sources
 rm -rf restdoc
 
 %check
 # run the testsuite
-%webyast_ws_check
+%webyast_check
 
 %install
 
@@ -102,15 +102,15 @@ rm -rf $RPM_BUILD_ROOT
 %post
 # granting all permissions for the web user
 /usr/sbin/grantwebyastrights --user root --action grant > /dev/null
-/usr/sbin/grantwebyastrights --user %{webyast_ws_user} --action grant > /dev/null
+/usr/sbin/grantwebyastrights --user %{webyast_user} --action grant > /dev/null
 
 %postun
 
 %files 
 %defattr(-,root,root)
-%dir %{webyast_ws_dir}
-%dir %{webyast_ws_dir}/vendor
-%dir %{webyast_ws_dir}/vendor/plugins
+%dir %{webyast_dir}
+%dir %{webyast_dir}/vendor
+%dir %{webyast_dir}/vendor/plugins
 %dir %{plugin_dir}
 # YaPI dir
 %dir /usr/share/YaST2/
@@ -133,6 +133,6 @@ rm -rf $RPM_BUILD_ROOT
 
 %files testsuite
 %defattr(-,root,root)
-%{webyast_ws_dir}/vendor/plugins/%{plugin_name}/test
+%{webyast_dir}/vendor/plugins/%{plugin_name}/test
 
 %changelog
