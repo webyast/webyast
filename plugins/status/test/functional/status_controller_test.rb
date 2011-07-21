@@ -34,8 +34,20 @@ class StatusControllerTest < ActionController::TestCase
     ret
   end
 
+  def rights_enable(enable = true)
+    if enable
+      StatusController.any_instance.stubs(:permission_check).with("org.opensuse.yast.system.status.read").returns(true)
+      StatusController.any_instance.stubs(:permission_granted?).with("org.opensuse.yast.system.status.writelimits").returns(true)
+    else
+      @excpt =  NoPermissionException.new("org.opensuse.yast.system.status.read", "testuser")
+      StatusController.any_instance.stubs(:permission_check).with("org.opensuse.yast.system.status.read").raises(@excpt)
+      StatusController.any_instance.stubs(:permission_granted?).with("org.opensuse.yast.system.status.writelimits").returns(false)
+    end
+  end
+
   def setup
     StatusController.any_instance.stubs(:login_required)
+
     @controller = StatusController.new
     @request = ActionController::TestRequest.new
     # http://railsforum.com/viewtopic.php?id=1719
@@ -70,6 +82,7 @@ class StatusControllerTest < ActionController::TestCase
 
   #first index call
   def test_index
+    rights_enable
     get :index
     assert_response :success
     assert_valid_markup
@@ -79,14 +92,21 @@ class StatusControllerTest < ActionController::TestCase
 
   # now permissions in index
   def test_index_no_permissions
-
+    rights_enable(false)
     get :index
+    assert_response 302
+    assert_valid_markup
+    assert !assigns(:graphs)
+  end
+
+  #testing show summary AJAX call; limit CPU user reached
+  def test_show_summary_limit_reached
+    get :show_summary
     assert_response :success
     assert_valid_markup
-    assert assigns(:graphs)
-#    assert assigns(:permissions), "permissions is not assigned"
-#    assert !assigns(:permissions)[:read], "read permission is granted"
-#    assert !assigns(:permissions)[:writelimits], "writelimits permission is granted"
+    assert_tag :tag=>"a", :attributes => { :class => "warning_message"}, :parent => { :tag => "div"}, :content=> /Limits exceeded for Memory\/cached/
+    assert_tag :tag=>"a", :attributes => { :class => "warning_message"}, :parent => { :tag => "div"}, :content=>/Registration is missing/
+    assert_tag :tag=>"a", :attributes => { :class => "warning_message"}, :parent => { :tag => "div"}, :content=>/Mail configuration test not confirmed/
   end
 
 

@@ -30,7 +30,7 @@
       limits: 
         max: "50"
         min: "0"
-        reached: false
+        reached: true
       metric_id: memory+memory-cached
     - label: used
       limits: 

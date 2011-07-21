@@ -75,7 +75,7 @@
   <% javascript_tag do -%>
     setTimeout(function() {
       $('#statusbar-status').html('<%= image_tag("/images/working.gif", :class => "small-working-icon") %> <%= _("Loading system information") %>') <!-- RORSCAN_ITL -->
-      <%= remote_function(:update => "statusbar_status", :url => { :controller => :status, :action => :show_summary, :background => true }) %>
+      <%= remote_function(:update => "statusbar_status", :url => { :controller => :status, :action => :show_summary }) %>
       }, <%= refresh_timeout.to_i * 1000 -%>);
   <% end -%>
 <% end %>

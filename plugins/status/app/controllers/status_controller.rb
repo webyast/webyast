@@ -43,7 +43,7 @@ class StatusController < ApplicationController
     status = ""
     group.single_graphs.each do |single_graph|
       single_graph["lines"].each do |line|
-        if line["limits"]["reached"] == "true"
+        if line["limits"]["reached"] == true
           label = group.id
           label += "/" + single_graph["headline"] if group.single_graphs.size > 1
           label += "/" + line["label"] unless line["label"].blank?
@@ -154,7 +154,6 @@ class StatusController < ApplicationController
     ActionController::Base.benchmark("Graphs data read from the server") do
       begin
         graphs = Graph.find(:all, true ) || []
-
         # render
         graphs.each do |graph|
           label = limits_reached(graph)
