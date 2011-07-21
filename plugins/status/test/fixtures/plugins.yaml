@@ -1,0 +1,21 @@
+--- 
+- !ruby/object:Plugin 
+  confirmation_host: client
+  confirmation_kind: link
+  confirmation_label: register
+  confirmation_link: /registration
+  details: 
+  level: warning
+  long_description: Please register your system in order to get updates.
+  message_id: MISSING_REGISTRATION
+  short_description: Registration is missing
+- !ruby/object:Plugin 
+  confirmation_host: service
+  confirmation_kind: link
+  confirmation_label: Test mail received
+  confirmation_link: /mail/state
+  details: hostname
+  level: warning
+  long_description: While configuring mail, a test mail was sent to schubi@suse.de . Was the mail delivered to this address?&lt;br&gt; If so, confirm it by pressing the button. Otherwise check your mail configuration again.
+  message_id: MAIL_SENT
+  short_description: Mail configuration test not confirmed

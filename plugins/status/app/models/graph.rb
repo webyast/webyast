@@ -276,7 +276,7 @@ class Graph
     @single_graphs = value["single_graphs"]
   end
 
-  def self.find(what, limitcheck = true, opts = {})
+  def self.find(what, limitcheck = true)
     #checking if collectd is running
     raise ServiceNotRunning.new('collectd') unless Metric.collectd_running?
     YastCache.fetch(self,what) {
@@ -290,9 +290,9 @@ class Graph
   # Graph.find(id, limitcheck)
   # "id" could be the graph group (CPU, Disc) or the path of the collectd entry (metric_id)
   #      (e.g. cpu-0+cpu-system)
-  # "limitcheck" checking if limit has been reached (default: false)
+  # "limitcheck" checking if limit has been reached (default: true)
   #
-  def self.do_find(what, limitcheck = true, bg = nil)
+  def self.do_find(what, limitcheck = true)
     config = parse_config(@@translate)
     return nil if config==nil
 
@@ -322,13 +322,6 @@ class Graph
     len = config.size
 
     config.each {|key,value|
-      if !bg.nil?
-        bg.update_progress id(what) do |bs|
-          bs.progress = (idx.to_f/len*100).to_i
-          Rails.logger.info "Reading status: progress: #{bs.progress}%%"
-        end
-      end
-
       ret << Graph.new(key,value,limitcheck)
       idx += 1
     }

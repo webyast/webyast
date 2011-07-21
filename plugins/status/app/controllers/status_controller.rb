@@ -126,7 +126,7 @@ class StatusController < ApplicationController
     @logs = Log.find(:all)
     @plugins = Plugin.find(:all)
     begin
-      @graphs = Graph.find(:all, :params => { :checklimits => true })
+      @graphs = Graph.find(:all, params[:checklimits] || true)
       #sorting graphs via id
       @graphs.sort! {|x,y| y.id <=> x.id }
       flash[:notice] = _("No data found for showing system status.") if @graphs.blank? # RORSCAN_ITL
@@ -153,21 +153,7 @@ class StatusController < ApplicationController
     refresh = true
     ActionController::Base.benchmark("Graphs data read from the server") do
       begin
-        graphs = Graph.find(:all, :params => { :checklimits => true, :background => true }) || []
-
-        # is it a background progress?
-        if graphs.size == 1 && graphs.first.respond_to?(:status)
-          bg_stat = graphs.first
-
-          Rails.logger.info "Received background status progress: #{bg_stat.progress}%%"
-
-          respond_to do |format|
-            format.html { render :partial  => 'status_progress', :locals => {:progress => bg_stat.progress} }
-            format.json  { render :json => {:progress => bg_stat.progress} }
-          end
-
-          return
-        end
+        graphs = Graph.find(:all, true ) || []
 
         # render
         graphs.each do |graph|

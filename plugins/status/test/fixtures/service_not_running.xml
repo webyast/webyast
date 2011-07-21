@@ -1,0 +1,2 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<error><type>SERVICE_NOT_RUNNING</type><description>collectd is not running on the target machine</description><service>collectd</service></error>

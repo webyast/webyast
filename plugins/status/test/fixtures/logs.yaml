@@ -1,0 +1,14 @@
+---
+- !ruby/object:Log 
+  data: {}
+
+  description: System messages
+  id: system
+  path: /var/log/messages
+- !ruby/object:Log
+  data: {}
+
+  description: Apache
+  id: apache
+  path: /var/log/apache2/access_log
+

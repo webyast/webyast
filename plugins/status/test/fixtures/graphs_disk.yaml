@@ -1,0 +1,23 @@
+--- 
+- !ruby/object:Graph 
+  group_name: Disk
+  headline: Disk
+  single_graphs: 
+  - lines: 
+    - label: used
+      limits: 
+        max: "0"
+        reached: false
+        min: "0"
+      metric_column: used
+      metric_id: df+df-root
+    - label: free
+      limits: 
+        max: "0"
+        reached: false
+        min: "0"
+      metric_column: free
+      metric_id: df+df-root
+    headline: root
+    cummulated: "true"
+    linegraph: "false"

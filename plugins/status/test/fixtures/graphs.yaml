@@ -1,0 +1,54 @@
+--- 
+- !ruby/object:Graph 
+  group_name: Disk
+  headline: Disk
+  single_graphs: 
+  - lines: 
+    - label: used
+      limits: 
+        max: "0"
+        reached: false
+        min: "0"
+      metric_column: used
+      metric_id: df+df-root
+    - label: free
+      limits: 
+        max: "0"
+        reached: false
+        min: "0"
+      metric_column: free
+      metric_id: df+df-root
+    headline: root
+    cummulated: "true"
+    linegraph: "false"
+- !ruby/object:Graph 
+  group_name: Memory
+  headline: Memory
+  single_graphs: 
+  - lines: 
+    - label: cached
+      limits: 
+        max: "50"
+        min: "0"
+        reached: false
+      metric_id: memory+memory-cached
+    - label: used
+      limits: 
+        max: "0"
+        min: "0"
+        reached: false
+      metric_id: memory+memory-used
+    - label: free
+      limits: 
+        max: "0"
+        min: "0"
+        reached: false
+      metric_id: memory+memory-free
+    headline: Memory
+    cummulated: "true"
+    linegraph: "false"
+  y_decimal_places: 0
+  y_label: MByte
+  y_max: 
+  y_scale: 1048567
+

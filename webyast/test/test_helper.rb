@@ -20,6 +20,7 @@ ENV["RAILS_ENV"] = "test"
 require File.join(File.dirname(__FILE__), "..", "config", "environment")
 require 'test_help'
 require 'mocha'
+require File.join(File.dirname(__FILE__),'validation_assert') #validation of html
 require 'test/unit'
 #provide basic test for controllers
 require File.join(File.dirname(__FILE__),"plugin_basic_tests")

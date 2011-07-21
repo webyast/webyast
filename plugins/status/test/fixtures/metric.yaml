@@ -1,0 +1,36 @@
+--- 
+- !ruby/object:Metric 
+  host: WebYaST
+  path: /var/lib/collectd/WebYaST/memory/memory-cached.rrd
+  plugin: memory
+  plugin_instance: ""
+  type: memory
+  type_instance: cached
+- !ruby/object:Metric 
+  host: WebYaST
+  path: /var/lib/collectd/WebYaST/memory/memory-buffered.rrd
+  plugin: memory
+  plugin_instance: ""
+  type: memory
+  type_instance: buffered
+- !ruby/object:Metric 
+  host: WebYaST
+  path: /var/lib/collectd/WebYaST/memory/memory-used.rrd
+  plugin: memory
+  plugin_instance: ""
+  type: memory
+  type_instance: used
+- !ruby/object:Metric 
+  host: WebYaST
+  path: /var/lib/collectd/WebYaST/memory/memory-free.rrd
+  plugin: memory
+  plugin_instance: ""
+  type: memory
+  type_instance: free
+- !ruby/object:Metric
+  host: WebYaST
+  path: /var/lib/collectd/WebYaST/df/df-root.rrd
+  plugin: df
+  plugin_instance: ""
+  type: df
+  type_instance: root

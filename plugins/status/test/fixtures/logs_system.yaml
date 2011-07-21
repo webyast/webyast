@@ -1,0 +1,41 @@
+--- 
+`position: "34700"
+`value: |
+  Jul 20 15:11:31 f77 collectd[13063]: uc_update: Value too old: name = WebYaST/df/df-root; value time = 1311167491; last cache update = 1311167491;
+  Jul 20 15:11:31 f77 collectd[13063]: Filter subsystem: Built-in target `write': Dispatching value to all write plugins failed with status -1.
+  Jul 20 15:11:35 f77 dhclient: XMT: Solicit on eth0, interval 119610ms.
+  Jul 20 15:11:41 f77 collectd[13063]: uc_update: Value too old: name = WebYaST/df/df-root; value time = 1311167501; last cache update = 1311167501;
+  Jul 20 15:11:41 f77 collectd[13063]: Filter subsystem: Built-in target `write': Dispatching value to all write plugins failed with status -1.
+  Jul 20 15:11:51 f77 collectd[13063]: uc_update: Value too old: name = WebYaST/df/df-root; value time = 1311167511; last cache update = 1311167511;
+  Jul 20 15:11:51 f77 collectd[13063]: Filter subsystem: Built-in target `write': Dispatching value to all write plugins failed with status -1.
+  Jul 20 15:12:01 f77 collectd[13063]: uc_update: Value too old: name = WebYaST/df/df-root; value time = 1311167521; last cache update = 1311167521;
+  Jul 20 15:12:01 f77 collectd[13063]: Filter subsystem: Built-in target `write': Dispatching value to all write plugins failed with status -1.
+  Jul 20 15:12:11 f77 collectd[13063]: uc_update: Value too old: name = WebYaST/df/df-root; value time = 1311167531; last cache update = 1311167531;
+  Jul 20 15:12:11 f77 collectd[13063]: Filter subsystem: Built-in target `write': Dispatching value to all write plugins failed with status -1.
+  Jul 20 15:12:21 f77 collectd[13063]: uc_update: Value too old: name = WebYaST/df/df-root; value time = 1311167541; last cache update = 1311167541;
+  Jul 20 15:12:21 f77 collectd[13063]: Filter subsystem: Built-in target `write': Dispatching value to all write plugins failed with status -1.
+  Jul 20 15:12:31 f77 collectd[13063]: uc_update: Value too old: name = WebYaST/df/df-root; value time = 1311167551; last cache update = 1311167551;
+  Jul 20 15:12:31 f77 collectd[13063]: Filter subsystem: Built-in target `write': Dispatching value to all write plugins failed with status -1.
+  Jul 20 15:12:41 f77 collectd[13063]: uc_update: Value too old: name = WebYaST/df/df-root; value time = 1311167561; last cache update = 1311167561;
+  Jul 20 15:12:41 f77 collectd[13063]: Filter subsystem: Built-in target `write': Dispatching value to all write plugins failed with status -1.
+  Jul 20 15:12:51 f77 collectd[13063]: uc_update: Value too old: name = WebYaST/df/df-root; value time = 1311167571; last cache update = 1311167571;
+  Jul 20 15:12:51 f77 collectd[13063]: Filter subsystem: Built-in target `write': Dispatching value to all write plugins failed with status -1.
+  Jul 20 15:13:01 f77 collectd[13063]: uc_update: Value too old: name = WebYaST/df/df-root; value time = 1311167581; last cache update = 1311167581;
+  Jul 20 15:13:01 f77 collectd[13063]: Filter subsystem: Built-in target `write': Dispatching value to all write plugins failed with status -1.
+  Jul 20 15:13:11 f77 collectd[13063]: uc_update: Value too old: name = WebYaST/df/df-root; value time = 1311167591; last cache update = 1311167591;
+  Jul 20 15:13:11 f77 collectd[13063]: Filter subsystem: Built-in target `write': Dispatching value to all write plugins failed with status -1.
+  Jul 20 15:13:21 f77 collectd[13063]: uc_update: Value too old: name = WebYaST/df/df-root; value time = 1311167601; last cache update = 1311167601;
+  Jul 20 15:13:21 f77 collectd[13063]: Filter subsystem: Built-in target `write': Dispatching value to all write plugins failed with status -1.
+  Jul 20 15:13:31 f77 collectd[13063]: uc_update: Value too old: name = WebYaST/df/df-root; value time = 1311167611; last cache update = 1311167611;
+  Jul 20 15:13:31 f77 collectd[13063]: Filter subsystem: Built-in target `write': Dispatching value to all write plugins failed with status -1.
+  Jul 20 15:13:34 f77 dhclient: XMT: Solicit on eth0, interval 125170ms.
+  Jul 20 15:13:41 f77 collectd[13063]: uc_update: Value too old: name = WebYaST/df/df-root; value time = 1311167621; last cache update = 1311167621;
+  Jul 20 15:13:41 f77 collectd[13063]: Filter subsystem: Built-in target `write': Dispatching value to all write plugins failed with status -1.
+  Jul 20 15:13:51 f77 collectd[13063]: uc_update: Value too old: name = WebYaST/df/df-root; value time = 1311167631; last cache update = 1311167631;
+  Jul 20 15:13:51 f77 collectd[13063]: Filter subsystem: Built-in target `write': Dispatching value to all write plugins failed with status -1.
+  Jul 20 15:14:01 f77 collectd[13063]: uc_update: Value too old: name = WebYaST/df/df-root; value time = 1311167641; last cache update = 1311167641;
+  Jul 20 15:14:01 f77 collectd[13063]: Filter subsystem: Built-in target `write': Dispatching value to all write plugins failed with status -1.
+  Jul 20 15:14:11 f77 collectd[13063]: uc_update: Value too old: name = WebYaST/df/df-root; value time = 1311167651; last cache update = 1311167651;
+  Jul 20 15:14:11 f77 collectd[13063]: Filter subsystem: Built-in target `write': Dispatching value to all write plugins failed with status -1.
+  Jul 20 15:14:21 f77 collectd[13063]: uc_update: Value too old: name = WebYaST/df/df-root; value time = 1311167661; last cache update = 1311167661;
+  Jul 20 15:14:21 f77 collectd[13063]: Filter subsystem: Built-in target `write': Dispatching value to all write plugins failed with status -1.
