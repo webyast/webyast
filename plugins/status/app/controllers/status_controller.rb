@@ -145,66 +145,69 @@ class StatusController < ApplicationController
   # AJAX call for showing status overview
   #
   def show_summary
-    client_permissions
-
     level = "ok"
     status = ""
     ret_error = nil
     refresh = true
-    ActionController::Base.benchmark("Graphs data read from the server") do
-      begin
-        graphs = Graph.find(:all, true ) || []
-        # render
-        graphs.each do |graph|
-          label = limits_reached(graph)
-          unless label.blank?
-            if status.blank?
-              status = _("Limits exceeded for ") + label
-            else
-              status += "; " + label
+    unless permission_granted? "org.opensuse.yast.system.status.read"
+      status = _("Status not available (no permissions)")
+      level = "warning"  #it is a warning only
+    else
+      ActionController::Base.benchmark("Graphs data read from the server") do
+        begin
+          graphs = Graph.find(:all, true ) || []
+          # render
+          graphs.each do |graph|
+            label = limits_reached(graph)
+            unless label.blank?
+              if status.blank?
+                status = _("Limits exceeded for ") + label
+              else
+                status += "; " + label
+              end
             end
           end
-        end
-        level = "error" unless status.blank?
-      rescue ServiceNotRunning => error
-	logger.warn error.inspect
-        level = "warning"  #it is a warning only
-        flash[:error] = _("Status not available.")
-      rescue CollectdOutOfSyncError => error
-	logger.warn error.inspect
-        level = "warning"  #it is a warning only
-        flash[:error] = _("Collectd is out of sync.")
-      rescue Exception => e
-	logger.warn error.inspect
-        level = "error"
-        ret_error = error
-        refresh = false
-      end
-       #Checking WebYaST service plugins
-      begin
-        plugins = Plugin.find(:all)
-        plugins.each {|plugin|
-          level = plugin.level if plugin.level == "error" || (plugin.level == "warning" && level == "ok")
-          if status.blank?
-            status = plugin.short_description
-          else
-            status += "; " + plugin.short_description
-          end
-        }
-      rescue Exception => error
-	logger.warn error.inspect
-        level = "error"
-        refresh = false
-	error_hash = Hash.from_xml error.response.body
-	if error_hash["error"] && error_hash["error"]["type"] == "NO_PERM"
-          status = _("Status not available (no permissions)")
+          level = "error" unless status.blank?
+        rescue ServiceNotRunning => error
+          logger.warn error.inspect
           level = "warning"  #it is a warning only
-        else
-          status = error_hash["error"]["description"]
+          flash[:error] = _("Status not available.")
+        rescue CollectdOutOfSyncError => error
+          logger.warn error.inspect
+          level = "warning"  #it is a warning only
+          flash[:error] = _("Collectd is out of sync.")
+        rescue Exception => e
+	  logger.warn error.inspect
+          level = "error"
+          ret_error = error
+          refresh = false
         end
-        ret_error = error
-      end
-    end #benchmark
+        #Checking WebYaST service plugins
+        begin
+          plugins = Plugin.find(:all)
+          plugins.each {|plugin|
+            level = plugin.level if plugin.level == "error" || (plugin.level == "warning" && level == "ok")
+            if status.blank?
+              status = plugin.short_description
+            else
+              status += "; " + plugin.short_description
+            end
+          }
+        rescue Exception => error
+	  logger.warn error.inspect
+          level = "error"
+          refresh = false
+	  error_hash = Hash.from_xml error.response.body
+	  if error_hash["error"] && error_hash["error"]["type"] == "NO_PERM"
+            status = _("Status not available (no permissions)")
+            level = "warning"  #it is a warning only
+          else
+            status = error_hash["error"]["description"]
+          end
+          ret_error = error
+        end
+      end #benchmark
+    end
 
     render(:partial => "status_summary",
            :locals => { :status => status, :level => level, :error => ret_error,
