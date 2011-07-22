@@ -172,10 +172,20 @@ class StatusController < ApplicationController
           logger.warn error.inspect
           level = "warning"  #it is a warning only
           flash[:error] = _("Status not available.")
+          if status.blank?
+            status = _("Status not available.")
+          else
+            status += "; " + _("Status not available.")
+          end
         rescue CollectdOutOfSyncError => error
           logger.warn error.inspect
           level = "warning"  #it is a warning only
           flash[:error] = _("Collectd is out of sync.")
+          if status.blank?
+            status = error.message
+          else
+            status += "; " + error.message
+          end
         rescue Exception => e
 	  logger.warn error.inspect
           level = "error"

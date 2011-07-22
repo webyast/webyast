@@ -230,7 +230,7 @@ end
 class CollectdOutOfSyncError < BackendException
   def initialize(timestamp)
     @timestamp = timestamp
-    super("Collectd is out of sync.")
+    super("Collectd is out of sync. Status information can be expected at #{Time.at(@timestamp.to_i).ctime}.")
   end
 
   def to_xml
