@@ -106,6 +106,7 @@ class StatusController < ApplicationController
   end
 
   def ajax_log_custom
+    client_permissions
     # set the site to the view so it can load the log
     # dynamically
     if not params.has_key?(:id)
@@ -343,6 +344,8 @@ class StatusController < ApplicationController
 
   def save
     client_permissions
+    permission_check "org.opensuse.yast.system.status.writelimits"
+
     begin
       ActionController::Base.benchmark("Graph information from server") do
         @graphs = Graph.find(:all)
