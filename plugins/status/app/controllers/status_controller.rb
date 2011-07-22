@@ -244,20 +244,24 @@ class StatusController < ApplicationController
       ActionController::Base.benchmark("Graphs data read from the server") do
         graph = Graph.find(group_id)
         available_metrics = Metric.find(:all)
-        data[:y_scale] = graph.y_scale.to_f
-        data[:y_label] = graph.y_label
-        data[:y_max] = graph.y_max
-        data[:y_decimal_places] = graph.y_decimal_places
         data[:graph_id] = graph_id
         data[:group_id] = group_id
         data[:lines] = []
         data[:limits] = []
-        graph_descriptions = graph.single_graphs.select{|gr| gr["headline"] == graph_id}
+        graph_descriptions = []
+        unless (available_metrics.blank? || graph.blank?)
+          data[:y_scale] = graph.y_scale.to_f
+          data[:y_label] = graph.y_label
+          data[:y_max] = graph.y_max
+          data[:y_decimal_places] = graph.y_decimal_places
+          graph_descriptions = graph.single_graphs.select{|gr| gr["headline"] == graph_id} 
+        end
         unless graph_descriptions.empty?
           logger.warn "More than one graphs with the same haeadline #{graph_id}. --> taking first" if graph_descriptions.size > 1
           graph_description = graph_descriptions.first
           data[:cummulated] = graph_description["cummulated"]
           data[:linegraph] = graph_description["linegraph"]
+
           graph_description["lines"].each do |line|
             original_metrics = available_metrics.select{|me| me.id[(me.host.size+1)..(me.id.size-1)] == line["metric_id"]}
             unless original_metrics.empty?

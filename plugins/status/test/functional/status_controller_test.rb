@@ -52,7 +52,9 @@ class StatusControllerTest < ActionController::TestCase
     Log.any_instance.stubs(:evaluate_content).returns(@response_logs_system)
     Graph.stubs(:find).with(:all, true).returns(@response_graphs)
     Graph.stubs(:find).with("Memory",true).returns(@response_graphs_memory)
+    Graph.stubs(:find).with("Memory").returns(@response_graphs_memory)
     Graph.stubs(:find).with("Disk",true).returns(@response_graphs_disk)
+    Graph.stubs(:find).with("Disk").returns(@response_graphs_disk)
     Plugin.stubs(:find).with(:all).returns(@response_plugins)
     Metric.stubs(:find).with(:all).returns(@response_metric)
     Metric.stubs(:find).with("WebYaST+memory+memory-free").returns(@response_metrics_memory_free)
@@ -81,7 +83,6 @@ class StatusControllerTest < ActionController::TestCase
     @response_metrics_df_root = fixture "webyast+df+df-root.yaml"
   end
 
-
   #first index call
   def test_index
     init_data
@@ -91,7 +92,6 @@ class StatusControllerTest < ActionController::TestCase
     assert_valid_markup
     assert assigns(:graphs)
   end
-
 
   # now permissions in index
   def test_index_no_permissions
@@ -155,6 +155,46 @@ class StatusControllerTest < ActionController::TestCase
     assert_tag "Status not available."
   end
 
+  #testing evaluate_values AJAX call
+  def test_show_evaluate_values_1
+    rights_enable
+    init_data
+    Time.stubs(:now).returns(Time.at(1264006620))
+    get :evaluate_values,  { :group_id => "Memory", :graph_id => "Memory", :minutes => "5" }
+    assert_response :success
+    assert_valid_markup
+    assert_tag :tag =>"script",
+               :attributes => { :type => "text/javascript" }
+  end
+
+  #testing evaluate_values AJAX call
+  def test_show_evaluate_values_with_other_id
+    rights_enable
+    init_data
+    Time.stubs(:now).returns(Time.at(1264006620))
+    get :evaluate_values,  { :group_id => "Disk", :graph_id => "root" }
+    assert_response :success
+    assert_valid_markup
+    assert_tag :tag =>"script",
+               :attributes => { :type => "text/javascript" }
+  end
+
+  #testing evaluate_values AJAX call
+  def test_show_evaluate_values_with_invalid_id
+    rights_enable
+    init_data
+    Graph.stubs(:find).with('not_found').returns(nil)
+    Time.stubs(:now).returns(Time.at(1264006620))
+    get :evaluate_values,  { :group_id => "not_found", :graph_id => "not_found" }
+    assert_response :success
+    assert_valid_markup
+  end
+
+  #testing confirming status
+  def test_confirm_status
+    post :confirm_status, { :param=>"Test mail received", :url=>"/mail/state", }
+    assert_response :redirect
+  end
 
 
 end
