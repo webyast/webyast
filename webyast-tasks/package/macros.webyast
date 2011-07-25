@@ -36,15 +36,12 @@
 
 # run the testsuite
 %webyast_check \
+    export RAILS_PARENT=%{webyast_dir} \
     export TEST_DB_PATH=/tmp/webyast_test.sqlite3 \
     rm -rf $TEST_DB_PATH \
     RAILS_ENV=test rake db:create \
     RAILS_ENV=test rake db:schema:load \
     RAILS_ENV=test ADD_BUILD_PATH=1 rake test
-
-%webyast_check \
-    export RAILS_PARENT=%{webyast_dir} \
-    %webyast_check
 
 # build REST documentation
 %webyast_restdoc \
