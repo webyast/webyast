@@ -12,4 +12,5 @@ public/stylesheets/jquery-ui-1.7.2.custom-accordion.css
 public/stylesheets/jquery-ui-1.7.2.custom-tabs.css
 public/stylesheets/style.css
 public/stylesheets/css-min.css
+public/javascripts/min/base-min.js
 diff.diff
