@@ -31,7 +31,7 @@ Requires:       yast2-core >= 2.18.10
 Requires:       yast2-core >= 2.17.30.1
 Requires:       sysvinit > 2.86-195.3.1
 %endif
-Requires:       rubygem-passenger-nginx
+Requires:       rubygem-passenger-nginx, rubygem-nokogiri
 Requires:       nginx >= 1.0
 Requires:	ruby-fcgi, sqlite, syslog-ng
 %if 0%{?suse_version} == 0 || %suse_version <= 1130
@@ -84,6 +84,7 @@ BuildRequires:  rubygem-rails-2_3 >= 2.3.8
 BuildRequires:  rubygem-rpam, rubygem-polkit
 # the testsuite is run during build
 BuildRequires:	rubygem-test-unit rubygem-mocha
+BuildRequires:  tidy, rubygem-haml, rubygem-nokogiri, rubygem-sass
 BuildRequires:	nginx >= 1.0, rubygem-passenger-nginx
 
 # This is for Hudson (build service) to setup the build env correctly
@@ -145,6 +146,7 @@ RAILS_ENV=test $RPM_BUILD_ROOT%{webyast_dir}/test/dbus-launch-simple rake test
 mkdir -p $RPM_BUILD_ROOT%{webyast_dir}/log/
 cp -a * $RPM_BUILD_ROOT%{webyast_dir}/
 rm -f $RPM_BUILD_ROOT%{webyast_dir}/log/*
+rm -rf $RPM_BUILD_ROOT/%{webyast_dir}/po
 rm -f $RPM_BUILD_ROOT%{webyast_dir}/COPYING
 touch $RPM_BUILD_ROOT%{webyast_dir}/db/schema.rb
 
