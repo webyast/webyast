@@ -50,4 +50,4 @@ else
     echo "status-min.js not needed"
   fi
 fi
-ruby script/server
+ruby script/server -p 54984
