@@ -134,14 +134,15 @@ class StatusControllerTest < ActionController::TestCase
   def test_show_summary_server_error_1
     rights_enable
     init_data
-    @excpt = CollectdOutOfSyncError.new(Time.at(1264006620))
+    timestamp = Time.at(1264006620)
+    @excpt = CollectdOutOfSyncError.new(timestamp)
     Graph.stubs(:find).with(:all, true).raises(@excpt)
 
     get :show_summary
     assert_response :success
     assert_valid_markup
     assert_tag :tag=>"a", :attributes => { :class => "warning_message" }, :parent => { :tag => "div"}
-    assert_tag "Collectd is out of sync. Status information can be expected at Wed Jan 20 17:57:00 2010."
+    assert_tag "Collectd is out of sync. Status information can be expected at #{Time.at(timestamp).ctime}."
   end
 
   #testing show summary AJAX call; Server Error
