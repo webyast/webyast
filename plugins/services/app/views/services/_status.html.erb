@@ -1,0 +1,75 @@
+<%#
+#--
+# Copyright (c) 2009-2010 Novell, Inc.
+# 
+# All Rights Reserved.
+# 
+# This program is free software; you can redistribute it and/or modify it
+# under the terms of version 2 of the GNU General Public License
+# as published by the Free Software Foundation.
+# 
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+# GNU General Public License for more details.
+# 
+# You should have received a copy of the GNU General Public License
+# along with this program; if not, contact Novell, Inc.
+# 
+# To contact Novell about this file by physical or electronic mail,
+# you may find current contact information at www.novell.com
+#++
+%>
+<%
+# Show on-boot status if not custom service
+unless custom
+  classname	= "service_enabled"
+  if enabled
+    label	= _("Service will be started on boot.")
+  else
+    label	= _("Service will not be started on boot.")
+    classname	= "service_disabled"
+  end
+-%>
+  <div class=<%= classname %>><%=label%></div>
+<% end %>
+
+<%
+
+# Status values (see /etc/init.d/skeleton):
+#
+# 0 - service up and running
+# 1 - service dead, but /var/run/  pid  file exists
+# 2 - service dead, but /var/lock/ lock file exists
+# 3 - service not running (unused)
+# 4 - service status unknown :-(
+# 5--199 reserved (5--99 LSB, 100--149 distro, 150--199 appl.)
+-%>
+
+<%
+  color		= "silver"
+  classname	= "status_unknown"
+  
+  case status
+      when nil, 4
+	  label	= _("status unknown")
+      when 0
+	  label	= _("running")
+	  color	= "lime"
+	  classname	= "status_running"
+      when 1,2
+	  label	= _("dead")
+	  color	=  "red"
+	  classname	= "status_dead"
+      when 3
+	  label	= _("not running")
+	  color	= "black"
+	  classname	= "status_not_running"
+      else
+	  label	= _("status unknown: %d") % status
+  end
+-%>
+
+<%=_("Current status of the service:")%>
+
+<i><span class=<%=classname%> style="color: <%=color%>"><%=label%></span></i>

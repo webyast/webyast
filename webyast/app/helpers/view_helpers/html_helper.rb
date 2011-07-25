@@ -111,34 +111,34 @@ module ViewHelpers::HtmlHelper
     end
 
     # clipboard icon for a predefined text
-    def clippy(text, bgcolor='#FFFFFF')
-      text.gsub! "\"","''" #replace quotes in text as it breaks output (bnc#596023)
-      text.gsub! "&","%28" #escape & which is special in FlashVars (bnc#596023)
-  html = <<-EOF
-    <object classid="clsid:d27cdb6e-ae6d-11cf-96b8-444553540000"
-            width="110"
-            height="14"
-            id="clippy" >
-    <param name="movie" value="/flash/clippy.swf"/>
-    <param name="allowScriptAccess" value="always" />
-    <param name="quality" value="high" />
-    <param name="scale" value="noscale" />
-    <param NAME="FlashVars" value="text=#{text}">
-    <param name="bgcolor" value="#{bgcolor}">
-    <embed src="/flash/clippy.swf"
-           width="110"
-           height="14"
-           name="clippy"
-           quality="high"
-           allowScriptAccess="always"
-           type="application/x-shockwave-flash"
-           pluginspage="http://www.macromedia.com/go/getflashplayer"
-           FlashVars="text=#{text}"
-           bgcolor="#{bgcolor}"
-    />
-    </object>
-  EOF
-  end
+    #def clippy(text, bgcolor='#FFFFFF')
+    #  text.gsub! "\"","''" #replace quotes in text as it breaks output (bnc#596023)
+    #  text.gsub! "&","%28" #escape & which is special in FlashVars (bnc#596023)
+    #html = <<-EOF
+    #<object classid="clsid:d27cdb6e-ae6d-11cf-96b8-444553540000"
+    #        width="110"
+    #        height="14"
+    #        id="clippy" >
+    #<param name="movie" value="/flash/clippy.swf"/>
+    #<param name="allowScriptAccess" value="always" />
+    #<param name="quality" value="high" />
+    #<param name="scale" value="noscale" />
+    #<param NAME="FlashVars" value="text=#{text}">
+    #<param name="bgcolor" value="#{bgcolor}">
+    #<embed src="/flash/clippy.swf"
+    #       width="110"
+    #       height="14"
+    #       name="clippy"
+    #       quality="high"
+    #       allowScriptAccess="always"
+    #       type="application/x-shockwave-flash"
+    #       pluginspage="http://www.macromedia.com/go/getflashplayer"
+    #       FlashVars="text=#{text}"
+    #       bgcolor="#{bgcolor}"
+    #/>
+    #</object>
+    #EOF
+    #end
 
   # report an exception to the flash messages zone
   # a flash error message will be appended to the
@@ -165,8 +165,11 @@ module ViewHelpers::HtmlHelper
         <div>
           <p><strong>Error message:</strong>#{err_message}</p>
           <p><span class="bug-icon"></span><a target="_blank" href="#{::ApplicationController.bug_url}">Report bug</a></p>
-          <p><a href="#" id="error-#{error_id}-show-backtrace-link">Show details</a>
-          #{clippy("message: #{err_message}\n backtrace: #{backtrace_text}")}</p></p>
+          <p>
+            <a href="#" id="error-#{error_id}-show-backtrace-link">Show details</a>
+ <!--         {clippy("message: #{err_message}\n backtrace: #{backtrace_text}") } -->
+          </p>
+          </p>
           <pre id="error-#{error_id}-backtrace" style="display: none">
           #{backtrace_text}
           </pre>

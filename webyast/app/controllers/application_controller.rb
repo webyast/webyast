@@ -164,7 +164,7 @@ public
     # for ajax request render a different template, much less verbose
     if request.xhr?
       logger.error "Error during ajax request"
-      render :status => status, :partial => "shared/exception_trap", :locals => {:error => e} and return
+      render :status => status, :partial => "shared/exception_trap", :locals => {:error => exception } and return
     end
 
     if request.format.html?
