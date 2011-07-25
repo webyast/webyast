@@ -165,6 +165,7 @@ rccollectd try-restart
 %{plugin_dir}/doc/logs.yml
 %{plugin_dir}/Rakefile
 %{plugin_dir}/README
+%{plugin_dir}/shortcuts.yml
 %{plugin_dir}/lib
 %{plugin_dir}/public
 %{plugin_dir}/config/*
