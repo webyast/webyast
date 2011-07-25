@@ -17,9 +17,11 @@
 #++
 
 require "tempfile"
+#require "jsmin"
+
 vars = ['JSMIN', 'JAVASCRIPTS_PATH', 'MIN']
 
-JSMIN = File.join(RAILS_ROOT, '/script/javascript/jsmin.rb')
+JSMIN = File.join(RAILS_ROOT, '/lib/jsmin.rb')
 JAVASCRIPTS_PATH = "#{RAILS_ROOT}/public/javascripts"
 MIN = "#{RAILS_ROOT}/public/javascripts/min"
 
