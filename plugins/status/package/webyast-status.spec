@@ -33,7 +33,7 @@ Requires:       rrdtool
 # for calling ruby module via YastService:
 Requires:	yast2-ruby-bindings >= 0.3.2.1
 
-BuildRequires:  rubygem--webyast-tasks rubygem-restility
+BuildRequires:  rubygem-webyast-rake-tasks rubygem-restility
 
 BuildRequires:  webyast-base-testsuite rubygem-gettext_rails
 BuildRequires:	rubygem-test-unit rubygem-mocha

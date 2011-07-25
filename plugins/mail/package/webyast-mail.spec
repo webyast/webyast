@@ -27,7 +27,7 @@ Source2:	org.opensuse.yast.modules.yapi.mailsettings.policy
 Source3:        postfix-update-hostname
 BuildRoot:      %{_tmppath}/%{name}-%{version}-build
 BuildArch:      noarch
-BuildRequires:  rubygem-webyast-tasks rubygem-restility
+BuildRequires:  rubygem-webyast-rake-tasks rubygem-restility
 
 BuildRequires:  webyast-base-testsuite rubygem-gettext_rails
 BuildRequires:	rubygem-test-unit rubygem-mocha
