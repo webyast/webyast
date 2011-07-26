@@ -29,11 +29,11 @@ class Resolvable
   attr_accessor   :resolvable_id,
                   :kind,
                   :name,
-								  :version,
+		  :version,
                   :arch,
                   :repo,
                   :summary,
-									:installed
+		  :installed
 
   # default constructor
   def initialize(attributes)

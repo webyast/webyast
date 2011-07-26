@@ -1,6 +1,6 @@
 main:
   icon: '/icons/yast-online_update.png'
-  url: /patch_updates
+  url: /patches
   groups: [ System ]
   main: [true]
   tags: [ security, software, updates, patches]

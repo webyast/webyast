@@ -1,0 +1,169 @@
+<%#
+#--
+# Copyright (c) 2009-2010 Novell, Inc.
+#
+# All Rights Reserved.
+#
+# This program is free software; you can redistribute it and/or modify it
+# under the terms of version 2 of the GNU General Public License
+# as published by the Free Software Foundation.
+#
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+# GNU General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with this program; if not, contact Novell, Inc.
+#
+# To contact Novell about this file by physical or electronic mail,
+# you may find current contact information at www.novell.com
+#++
+%>
+
+<%
+  error_type = error ? :unknown : :none
+  if error.class == ClientException && error.backend_exception_type == "PACKAGEKIT_INSTALL"
+    error_type = :install
+  end
+
+  if error.class == ClientException
+    case error.backend_exception_type
+    when "PACKAGEKIT_INSTALL" then error_type = :install
+    when "PACKAGEKIT_LICENSE" then error_type = :license
+    end
+  end
+
+  if error.class == ActiveResource::UnauthorizedAccess
+    error_type = :unauthorized
+  end
+
+  unsigned_repo = nil
+
+  if !error_string.blank?
+    error_string.match /Repository (.*) needs to be signed/
+    unsigned_repo = $1
+    error_type = :unsigned unless unsigned_repo.blank?
+  end
+-%>
+
+
+<%= report_error(error, error_string) if error_type == :unknown %>
+
+<% unless patch %>
+  <% javascript_tag do %>
+    if($.browser.msie() && $.browser.version.number() == 8 ) {
+      $('#status-eye').css("background", "url(/images/circle-red.png)").addClass('eye_warning');
+    } else {
+      $('#status-eye').addClass('eye_warning');
+    }
+  <% end %>
+
+  <div class="statusbar_row">
+   	<img src="/images/status-warning.png">
+
+	  <% case error_type when :unauthorized then %>
+		    <% link_to "controlpanel" do %>
+	        <%= _("Cannot read patch updates - you have been logged out.") %>
+		    <% end %>
+	  <% when :unknown %>
+		  <%= _("No information about patches available") %>
+
+	  <% when :unsigned %>
+		  <%= _("Cannot read patch updates: GPG key for repository <em>%s</em> is not trusted.") % unsigned_repo %>
+
+	  <% when :install %>
+      <%= error.message %>
+	    <% javascript_tag do -%>
+	      setTimeout(function() {
+          $('#statusbar-patches').html('<%= image_tag("/images/working.gif", :class => "small-working-icon") %> <%= _("Loading patch information") %>')
+    		  <%= remote_function(:update => "statusbar_patches", :url => { :controller => :patches, :action => :show_summary }) %>
+  		  }, 15000);
+	    <% end -%>
+
+    <% when :license %>
+      <% link_to :controller => "patches", :action => "license" do %>
+        <%= _("Update needs EULA license confirmation. Please follow to patch module to decide about license.") %>
+      <% end %>
+
+	  <% end %>
+  </div>
+
+<% else %>
+  <% label = [] %>
+  <% update = false %>
+
+  <% if patch[:security] + patch[:important] > 0 %>
+    <% javascript_tag do -%>
+      if($.browser.msie() && $.browser.version.number() == 8 ) {
+       $('#status-eye').css("background", "url(/images/circle-red.png)").addClass('eye_warning');
+      } else {
+       $('#status-eye').addClass('eye_warning');
+      }
+    <% end -%>
+  <% else %>
+    <% javascript_tag do -%>
+      if($('#status-eye').hasClass("eye_warning") == false) { 
+        $('#status-eye').addClass('eye_healthy'); 
+        if($.browser.msie() && $.browser.version.number() == 8 ) {
+          $('#status-eye').css("background", "url(/images/circle-green.png)");  
+        }
+      }
+    <% end -%>
+  <% end %>
+
+    <% if patch[:security] > 0 %>
+      <% update = true %>
+      <div class="statusbar_row">
+        <img src="/icons/kupdateapplet_red.png" style="display:inline;">
+        <% link_to "patches", :class=>"warning_message" do %>
+          <%= _("Security Updates: %d") % patch[:security] %>
+        <% end %>
+      </div>
+    <% end %>
+
+    <% if patch[:important] > 0 %>
+      <% update = true %>
+      <div class="statusbar_row">
+        <img src="/icons/kupdateapplet_yellow.png">
+        <% link_to "patches", :class=>"warning_message" do %>
+          <%= _("Important Updates: %d") % patch[:important] %>
+        <% end %>
+      </div>
+    <% end %>
+
+    <% if patch[:optional] > 0 %>
+      <% update = true %>
+      <div class="statusbar_row">
+        <img src="/icons/kupdateapplet_optional.png">
+        <% link_to "patches", :class=>"warning_message" do %>
+          <%= _("Optional Updates: %d") % patch[:optional] %>
+        <% end %>
+      </div>
+    <% end %>
+
+    <% if update == false %>
+      <div class="statusbar_row">
+        <img src="/images/checkmark.gif" class="checked_health">
+        <%= _("Your system is up to date.") %> <!-- RORSCAN_ITL -->
+      </div>
+    <% end %>
+
+    <% if patch[:security] > 0 or patch[:important] > 0 or patch[:optional] > 0 %>
+      <div class="update_all">
+        <% link_to_remote _("Install all"), :update =>"statusbar_patches", :url => { :controller => :patches, :action => :start_install_all}, :confirm => _("Updating all. Are you sure?") %>
+      </div>
+    <% end %>
+
+  <% if refresh_timeout.to_i > 0 -%>
+    <!-- refresh the status again after a timeout -->
+    <% javascript_tag do -%>
+      setTimeout(function() {
+        $('#statusbar_patches').html('<div class="statusbar_row"><%= image_tag("/images/working.gif", :class => "small-working-icon") %><%= _("Loading patch information") %></div>')
+        <%= remote_function(:update => "statusbar_patches", :url => { :controller => :patches, :action => :show_summary, :background => true }) %>
+      }, <%= refresh_timeout.to_i * 1000 -%>);
+    <% end -%>
+  <% end -%>
+
+<% end %> <!-- else -->
+

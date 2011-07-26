@@ -1,1 +1,193 @@
-<%= @patch_updates.to_xml( :root => "patches", :dasherize => false ) -%>
+<!--
+# Copyright (c) 2009-2010 Novell, Inc.
+#
+# All Rights Reserved.
+#
+# This program is free software; you can redistribute it and/or modify it
+# under the terms of version 2 of the GNU General Public License
+# as published by the Free Software Foundation.
+#
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+# GNU General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with this program; if not, contact Novell, Inc.
+#
+# To contact Novell about this file by physical or electronic mail,
+# you may find current contact information at www.novell.com
+-->
+
+<script type="text/javascript">
+  var AUTH_TOKEN = 'authenticity_token=' + encodeURIComponent("<%= escape_javascript form_authenticity_token %>");
+  startNotifier({'module':'patches', 'AUTH_TOKEN':AUTH_TOKEN}, 1000, 11000);
+
+  $(document).ready(function() {
+    $(":button").click(function() {
+      $("button[type=submit].active").removeClass('active')
+      $(this).removeClass("left").addClass("active left");
+      return false;
+    });
+    $("form#form1").submit(function () { return false; }); // so it won't submit
+
+    var message = "<%= _("Please wait") -%>";
+    $("#update_submit_button").click(function() {
+      $.modalDialog.wait( {message: message});
+    });
+  });
+  
+  function disableForm(){
+    $(document).ready(function() {
+      var message = <%= jss _("Please wait") -%>;
+      $.modalDialog.wait( {message: message});
+    });
+  }
+
+  <% if @reload %>
+  // reload the page after 15 seconds
+    setTimeout(function() {
+      //$('#progress').show();
+      var message = <%= jss _("Please wait") -%>;
+      $.modalDialog.wait( {message: message});
+      window.location.reload();
+    } , 15000);
+  <% end %> 
+
+</script>
+
+<% if @patch_updates %>
+  <%= javascript_include_tag :defaults %>
+
+  <div class="plugin-content plugin-border">
+     <% if @patch_updates.empty? %>
+     <div class="webyast_form">
+      <div class="plugin-header">
+        <div class="left">
+          <label class="plugin-icon-container"><img class="plugin-icon" src="/icons/updates.png"></label>
+          <label class="plugin-name"><%=_("Updates") %></label>
+       	</div>
+
+        <div class="right" >
+          <span id="questionMark" style="margin:2px 5px; float:none;">?</span>
+        </div>
+       	<div class="clearfix"></div>
+      </div>
+
+      <div class="clearfix">&nbsp;</div>
+
+      <h3 class="module_header" id="system_uptodate">
+        <% unless @error %>
+          <img src='/images/checkmark.gif'/>
+        <%=_("Your system is up to date.")%>
+        <% else %>
+         <%= @flash_message unless @flash_message.nil? %>
+        <% end %>
+      </h3> <!-- RORSCAN_ITL -->
+
+
+      <div class="clearfix"></div>
+
+      <div class="button_container">
+   	    <div class="hr">&nbsp;</div>
+
+	      <div class="nav-buttons">
+          <% form_for :patches, :url => { :action => "install" }, :html => {:id => "patches-form"} do |form| %>
+           <% if Basesystem.new.load_from_session(session).completed? %>
+             <%= form_back_button %>
+           <% else %>
+             <%= form_send_buttons %>
+           <% end %>
+          <% end %>
+	      </div>
+      </div>
+    </div>
+
+    <% else %>
+      <% @hash = Hash.new(0)
+         counter=0
+      	@patch_updates.each do |p|
+      	  # don't count installed patches
+	        unless p.installed
+	          if @hash.has_key?(p.kind)
+	            @hash[p.kind]= @hash[p.kind]+1
+	            counter = counter+1
+	          else
+	            @hash[p.kind]=1
+	            counter = counter+1
+	          end
+	        end
+      end %>
+
+    <div id="parent">
+     	<div id="shade"></div>
+    	<div id="wait"><%= image_tag("/images/wait.gif", :style => "vertical-align:middle;") %><%=_("Please wait ...") %></div>
+    </div>
+
+    <form id="form1" class="webyast_form" style="z-index:0" method="post">
+      <div class="plugin-header">
+        <div class="left">
+          <label class="plugin-icon-container"><img class="plugin-icon" src="/icons/updates.png"></label>
+          <label class="plugin-name"><%=_("Updates") %></label>
+       	</div>
+
+        <div class="right" >
+          <span id="questionMark" style="margin:2px 5px; float:none;">?</span>
+        </div>
+       	<div class="clearfix"></div>
+      </div>
+
+      <div class="clearfix">&nbsp;</div>
+
+      <div id="updates_panel">
+        <script type="text/javascript">var message = <%= jss _("Please wait") -%>;</script>
+        <button type="submit" id="comment" class="left active" value="all"
+           onclick ="<%= remote_function(:update => :patchesd, :url => { :action => :load_filtered }, :with => "'value=' + value",
+           :loading => "pleaseWaitForUpdates(message)", :complete => "$.unblockUI()") %>">
+            <!-- <img src='/images/install.png'/>-->
+            <span style="display:inline-block; vertical-align: inherit; height:18px; width:1px;"></span>
+            <%=_("All updates") %>&nbsp;<span>(<%=counter%>)</span> 
+        </button>
+        <button type="submit" class="middle" value="security"
+            onclick ="<%= remote_function(:update => :patchesd, :url => { :action => :load_filtered }, :with => "'value=' + value",
+            :loading => "pleaseWaitForUpdates(message)", :complete => "$.unblockUI()") %>">
+            <img src='/icons/kupdateapplet_red.png'/><%=_("Security") %>&nbsp;<span>(<%=@hash["security"]%>)</span></button>
+        <button type="submit" class="middle" value="important"
+            onclick ="<%= remote_function(:update => :patchesd, :url => { :action => :load_filtered }, :with => "'value=' + value",
+            :loading => "pleaseWaitForUpdates(message)", :complete => "$.unblockUI()") %>">
+          <img src='/icons/kupdateapplet_yellow.png'/><%=_("Important") %>&nbsp;<span>(<%=@hash["important"]%>)</span>
+        </button>
+        <button type="submit" class="middle" value="green"
+            onclick ="<%= remote_function(:update => :patchesd, :url => { :action => :load_filtered }, :with => "'value=' + value",
+            :loading => "pleaseWaitForUpdates(message)", :complete => "$.unblockUI()") %>">
+            <img src='/icons/kupdateapplet_green.png'/><%=_("Recommended") %>&nbsp;<span>(<%=@hash["green"]%>)</span>
+        </button>
+        <button type="submit" class="right" value="optional"
+          onclick ="<%= remote_function(:update => :patchesd, :url => { :action => :load_filtered }, :with => "'value=' + value",
+            :loading => "pleaseWaitForUpdates(message)", :complete => "$.unblockUI()") %>">
+          <img src='/icons/kupdateapplet_optional.png'/><%=_("Optional") %>&nbsp;<span>(<%=@hash["optional"] + @hash["low"] %>)</span>
+        </button>
+      </div>
+    </form>
+
+    <div class="clearfix" style="height:10px;">&nbsp;</div>
+
+    <% form_for :patches, :url => { :action => "install" }, :html => {:id => "patches-form", :class=>"webyast_form" } do |form| %>
+      <fieldset  class="webyast_fieldset" style="margin:0px auto;">
+      	<div id="patchesd"><%= render :partial => "patches"%></div>
+      </fieldset>
+
+    <div class="clearfix" style="height:10px;">&nbsp;</div>
+
+      <div class="button_container">
+   	    <div class="hr">&nbsp;</div>
+        <div class="nav-buttons">
+         	<%= form_send_buttons :label => _("Update"), :id=>"update_submit_button", :action => 'install' %>
+        </div>
+      </div>
+
+    <% end %>
+  <% end %>
+</div>
+<% end %>
+

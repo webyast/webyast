@@ -23,10 +23,13 @@ require 'singleton'
 
 class PatchesController < ApplicationController
 
-   before_filter :login_required
+  before_filter :login_required
+  # always check permissions
+  before_filter :check_read_permissions, :only => [:index, :show, :show_summary, :load_filter, :license]
 
-   # always check permissions
-   before_filter :check_read_permissions, :only => [:index, :show]
+  layout 'main'
+  # Initialize GetText and Content-Type.
+  init_gettext "webyast-software"
 
   private
 
@@ -49,20 +52,6 @@ class PatchesController < ApplicationController
     return done
   end
 
-  def check_license_required
-    if PatchesState.read[:message_id] == "PATCH_EULA"
-      raise LicenseRequiredException.new
-    end
-  end
-
-  def check_running_install
-    running = PluginJob.running(:Patch, :install)
-    Rails.logger.info("#{running} installation jobs in the queue")
-    Rails.cache.delete("patch:installed") if running == 0 #remove installed patches from cache if the installation
-                                                          #has been finished
-    raise InstallInProgressException.new running if running > 0 #there is process which runs installation
-  end
-
   def read_messages
     if File.exists?(Patch::MESSAGES_FILE)
       msg = File.read(Patch::MESSAGES_FILE)
@@ -72,90 +61,230 @@ class PatchesController < ApplicationController
     return []
   end
 
+  def refresh_timeout
+    # the default is 24 hours
+    timeout = ControlPanelConfig.read 'patch_status_timeout', 24*60*60
+
+    if timeout.zero?
+      Rails.logger.info "Patch status autorefresh is disabled"
+    else
+      Rails.logger.info "Autorefresh patch status after #{timeout} seconds"
+    end
+
+    return timeout
+  end
+
+
   public
 
-  # GET /patch_updates
-  # GET /patch_updates.xml
+  # GET /patches
+  # GET /patches.xml
   def index
-    if params['messages']
-      Rails.logger.debug "Reading patch messages"
-      @msgs = read_messages
+    @msgs = read_messages
+    unless @msgs.blank?
+      if params['messages']
+        Rails.logger.debug "Reading patch messages"
+        respond_to do |format|
+          format.xml { render  :xml => @msgs.to_xml( :root => "messages", :dasherize => false ) }
+          format.json { render :json => @msgs.to_json( :root => "messages", :dasherize => false ) }
+        end
+        return
+      elsif request.format.html?
+        msg = @patch_messages[0].message
+        msg.gsub!('<br/>', ' ')
+        flash[:warning] = _("There are patch installation messages available") + details(msg)
+      end
+    end
 
-      respond_to do |format|
-        format.xml { render  :xml => @msgs.to_xml( :root => "messages", :dasherize => false ) }
-        format.json { render :json => @msgs.to_json( :root => "messages", :dasherize => false ) }
+    #checking if a license is requiredrequired
+    if PatchesState.read[:message_id] == "PATCH_EULA"
+      if request.format.html?
+        redirect_to :action => "license" #move to page for license confirmation
+      else
+        raise LicenseRequiredException.new
       end
-      return
     end
-    if params[:license].present?
-      respond_to do |format|
-        format.xml { render  :xml => Patch.license.to_xml( :root => "licenses", :dasherize => false ) }
-        format.json { render :json => Patch.license.to_json( :root => "licenses", :dasherize => false ) }
+
+    #checking if an installation is running
+    running = PluginJob.running(:Patch, :install)
+    Rails.logger.info("#{running} installation jobs in the queue")
+    Rails.cache.delete("patch:installed") if running == 0 #remove installed patches from cache if the installation
+                                                          #has been finished
+    if running > 0 #there is process which runs installation
+      raise InstallInProgressException.new( running )unless request.format.html?
+      # patch update installation in progress
+      # display the message and reload after a while
+      @flash_message = _("Cannot obtain patches, installation in progress. Remain %d packages.") % running
+      @patch_updates = []
+      @error = true
+      @reload = true      
+    else
+      #no installation process
+      begin
+        @patch_updates = Patch.find(:all)
+      rescue Exception => e
+        if e.message.match /Repository (.*) needs to be signed/
+          flash[:error] = _("Cannot read patch updates: GPG key for repository <em>%s</em> is not trusted.") % $1
+        else
+          flash[:error] = e.message
+        end
+        @patch_updates = []
+        @error = true
       end
-      return
+      @patch_updates = @patch_updates + collect_done_patches #report also which patches is installed
     end
-    check_license_required
-    check_running_install
-    # note: permission check was performed in :before_filter
-    @patches = Patch.find(:all)
-    @patches = @patches + collect_done_patches #report also which patches is installed
+    logger.info "All patches: #{@patch_updates.inspect}"
     respond_to do |format|
-      format.xml { render  :xml => @patches.to_xml( :root => "patches", :dasherize => false ) }
-      format.json { render :json => @patches.to_json( :root => "patches", :dasherize => false ) }
+      format.html {}
+      format.xml { render  :xml => @patch_updates.to_xml( :root => "patches", :dasherize => false ) }
+      format.json { render :json => @patch_updates.to_json( :root => "patches", :dasherize => false ) }
     end
   end
 
-  # GET /patch_updates/1
-  # GET /patch_updates/1.xml
+  # GET /patches/1
+  # GET /patches/1.xml
   def show
     @patch_update = Patch.find(params[:id])
     if @patch_update.nil?
       logger.error "Patch: #{params[:id]} not found."
       render ErrorResult.error(404, 1, "Patch: #{params[:id]} not found.") and return
     end
+    respond_to do |format|
+      format.xml { render  :xml => @patch_update.to_xml( :root => "patches", :dasherize => false ) }
+      format.json { render :json => @patch_update.to_json( :root => "patches", :dasherize => false ) }
+    end
   end
 
-  # PUT /patch_updates/1
-  # PUT /patch_updates/1.xml
-  def update
+  # this action is rendered as a partial, so it can't throw
+  def show_summary
+    error = nil
+    patch_updates = nil
+    refresh = false
+    refresh = true if PluginJob.running(:Patch, :install) #refresh state of installation
+    begin
+      patch_updates = Patch.find :all
+      patch_updates = @patchs_updates + collect_done_patches #report also which patches is installed
+      refresh = true
+    rescue Exception => error
+      if error.message.match /Repository (.*) needs to be signed/
+        error_string = _("Cannot read patch updates: GPG key for repository <em>%s</em> is not trusted.") % $1
+      else
+        error_string = e.message
+      end
+      patch_updates = nil
+    end
+
+    patches_summary = nil
+
+    if patch_updates
+      patches_summary = { :security => 0, :important => 0, :optional => 0}
+      [:security, :important, :optional].each do |patch_type|
+        patches_summary[patch_type] = patch_updates.find_all { |p| p.kind == patch_type.to_s }.size
+      end
+      # add 'low' patches to optional
+      patches_summary[:optional] += patch_updates.find_all { |p| p.kind == 'low' }.size
+    else
+      erase_redirect_results #reset all redirects
+      erase_render_results
+      flash.clear #no flash from load_proxy
+    end
+
+    # don't refresh if there was an error
+    ref_timeout = refresh ? refresh_timeout : nil
+
+    respond_to do |format|
+      format.html { render :partial => "patch_summary", :locals => { :patch => patches_summary, :error => error, :error_string => error_string, :refresh_timeout => ref_timeout } }
+      format.json  { render :json => patches_summary }
+    end
+  end
+
+  def load_filtered
+    @permission_install = permission_granted? "org.opensuse.yast.system.patches.install"  # RORSCAN_ITL
+    @patch_updates = Patch.find :all
+    kind = params[:value]
+    unless kind == "all"
+      patches = @patch_updates.find_all { |patch| patch.kind == kind }
+
+      # optional patches can also have kind 'low'
+      if kind == 'optional'
+        patches += @patch_updates.find_all { |patch| patch.kind == 'low' }
+      end
+
+      @patch_updates = patches
+    end
+    render :partial => "patches"
+  end
+
+
+  # POST /patch_updates/start_install_all
+  # Starting installation of all proposed patches
+  def start_install_all
     permission_check "org.opensuse.yast.system.patches.install" # RORSCAN_ITL
-    @patch_update = Patch.find(params[:id])
-    if @patch_update.blank?
-      logger.error "Patch: #{params[:id]} not found."
-      render ErrorResult.error(404, 1, "Patch: #{params[:id]} not found.") and return
+    logger.info "Start installation of all patches"
+    Patch.install_patches Patch.find(:all)
+    show_summary
+  end
+
+  # POST /patch_updates/install
+  # Installing one or more patches which has given via param
+
+  def install
+    permission_check "org.opensuse.yast.system.patches.install" # RORSCAN_ITL
+    update_array = []
+
+    #search for patches and collect the ids
+    params.each { |key, value|
+      if key =~ /\D*_\d/ || key == "id"
+        update_array << value
+      end
+    }
+    begin
+      Patch.install_patches_by_id update_array
+    rescue Exception => e
+      Rails.logger.info "Some patches are not needed in #{update_array.inspect} anymore: #{e.message}"
     end
-    unless @patch_update.install
-      render ErrorResult.error(404, 2, "packagekit error") and return
+
+    logger.debug "*** Check before redirect: basesystem setup compleate -> #{Basesystem.new.load_from_session(session).completed?}"
+    if request.format.html?
+      if Basesystem.new.load_from_session(session).completed?
+        redirect_to :controller => "controlpanel", :action => "index"
+      else
+        redirect_to :controller => "controlpanel", :action => "nextstep"
+      end
     end
+    @patch_update = Patch.new({})
     render :show
   end
 
-  # POST /patch_updates/
-  def create
+  def license
     permission_check "org.opensuse.yast.system.patches.install" # RORSCAN_ITL
-    if params[:patches][:accept_license].present? || params[:patches][:reject_license].present?
-       params[:patches][:accept_license].present? ? Patch.accept_license : Patch.reject_license
-      @patch_update = Patch.new({})
+    if params[:accept].present? || params[:reject].present?
+      params[:accept].present? ? Patch.accept_license : Patch.reject_license
       YastCache.delete(Plugin.new(),"patch")
-      render :show
+      if request.format.html?
+        redirect_to "/"
+      else
+        @patch_update = Patch.new({})
+        render :show
+      end
       return
     end
 
-    @patch_update = Patch.find(params[:patches][:resolvable_id].to_s)
-    #Patch for Bug 560701 - [build 24.1] webYaST appears to crash after installing webclient patch
-    #Packagekit returns empty string if the patch is allready installed.
-    if @patch_update.is_a?(Array) && @patch_update.empty?
-       logger.error "Patch is allready installed or not found #{@patch_update.inspect}"
-       render ErrorResult.error(404, 1, "Patch is not required.") and return
+    respond_to do |format|
+      format.html {
+        @license = Patch.find(:all, :params => {:license => 1}).first
+        @text = @license.text
+        if @text =~ /DT:Rich/ #text is richtext for packager
+          #rid of html tags
+          @text.gsub!(/&lt;.*&gt;/,'')
+          # unescape all ampersands
+          @text.gsub!(/&amp;([a-zA-Z0-9]+;)/,"&\\1")
+        end
+        render
+      }
+      format.xml { render  :xml => Patch.license.to_xml( :root => "licenses", :dasherize => false ) }
+      format.json { render :json => Patch.license.to_json( :root => "licenses", :dasherize => false ) }
     end
-
-    if @patch_update.blank?
-      logger.error "Patch: #{params[:patches][:resolvable_id]} not found."
-      render ErrorResult.error(404, 1, "Patch: #{params[:patches][:resolvable_id]} not found.") and return
-    end
-
-    res = @patch_update.install(true) #always install in backend otherwise there is problem with long running updates
-    render :show
   end
 
 

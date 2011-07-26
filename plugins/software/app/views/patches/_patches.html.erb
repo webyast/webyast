@@ -1,0 +1,86 @@
+<%#
+#--
+# Copyright (c) 2009-2010 Novell, Inc.
+#
+# All Rights Reserved.
+#
+# This program is free software; you can redistribute it and/or modify it
+# under the terms of version 2 of the GNU General Public License
+# as published by the Free Software Foundation.
+#
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+# GNU General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with this program; if not, contact Novell, Inc.
+#
+# To contact Novell about this file by physical or electronic mail,
+# you may find current contact information at www.novell.com
+#++
+%>
+  <% javascript_tag do -%>
+    function check_all() {
+        $("INPUT[type='checkbox']").attr('checked', $('#All').is(':checked'));
+    };
+  <% end %>
+
+<% if @patch_updates.any? {|pu| pu.name =~ /webyast-|nginx/} %>
+<p class="flash-message ui-state-highlight"><%=
+_("One of the patches seems to update WebYaST itself.
+You may need to reload the page after applying the patch.") -%></p>
+<% end %>
+
+<%# no patch or all patches are installed %>
+<% if @patch_updates.empty? || @patch_updates.all?{|p| p.installed} %>
+  <h3><%= _("No patches available") -%></h3>
+<% else %>
+<table summary="" class="patches" <%= @patch_updates.empty? ? "style=\"visibility: hidden;\"" : "" %> >
+  <tr class="fieldset_header">
+    <th class="first checkbox" width=3% ><span><input type="checkbox" name="All" onclick="check_all()" id="All"/></span></th>
+    <th class="kind" width=5%><%=_("Kind")%></th>
+    <th width=50%><%=_("Name")%></th>
+    <% if @permission_install %>
+      <th width=38%><%=_("Source")%></th>
+      <th class="last" width=4%><%=_("Install")%></th>
+    <% else %>
+      <th class="last" width=42%><%=_("Source")%></th>
+    <% end %>
+  </tr>
+  <%
+  # this should go to a helper?
+  kinds = { "security" => '/icons/kupdateapplet_red.png',
+    "important" => '/icons/kupdateapplet_yellow.png',
+    "green" => '/icons/kupdateapplet_green.png',
+    "optional" => '/icons/kupdateapplet_optional.png',
+    "low" => '/icons/kupdateapplet_optional.png',
+    "enhancement" => '/icons/kupdateapplet_green.png'
+    }
+  %>
+
+  <% @patch_updates.each do |patch_update| %>
+    <% unless patch_update.installed %>
+    <tr>
+      <td class="checkbox"><input type="checkbox" id=<%= "patch_#{patch_update.resolvable_id}" %> name=<%="patch_#{patch_update.resolvable_id}" %> value=<%=patch_update.resolvable_id%> /></td>
+
+      <% if kinds.has_key?(patch_update.kind) %>
+        <td class="icon kind" ><%= image_tag(kinds[patch_update.kind]) %> </td>
+      <% else %>
+        <td><%=h patch_update.kind %></td>
+      <% end %>
+
+      <td class="label"><div style="font-size:13px;"><strong><%=h patch_update.name %></strong></div><div style="color:#777777; font-size:11px;"><%=h patch_update.summary %></div></td>
+      <td class="icon"><%=h patch_update.repo %></td>
+      <% if @permission_install %>
+        <td class="install"><%= link_to image_tag("/images/update.png"\
+              , :alt =>  "install", :onclick=>"disableForm();", :class=>"icon", :style=>"width:24px; height:24px;", :border => "0"),\
+            :controller => 'patches', :id => patch_update.resolvable_id,\
+            :onclick=>"$('#progress').show()", :method => :post, :action => "install" %></td>
+        <% end %>
+    </tr>
+    <% end %>
+  <% end %>
+</table>
+<% end %>
+

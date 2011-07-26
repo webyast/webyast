@@ -42,6 +42,12 @@ class Patch < Resolvable
     end
   end
 
+  def self.do_install_patches to_install
+    to_install.each do |patch|
+      patch.install
+    end
+  end
+
   public
 
   def self.accept_license
@@ -55,6 +61,35 @@ class Patch < Resolvable
   def to_xml( options = {} )
     super :patch_update, options, @messages
   end
+
+  def self.install_patches patches
+    to_install = []
+    patches.each do |patch|
+      to_install << Patch.new({:repo=>nil,
+                             :kind=>nil,
+                             :name=>nil,
+                             :arch=>nil,
+                             :version=>nil,
+                             :summary=>nil,
+                             :resolvable_id=>patch.resolvable_id})
+    end
+    do_install_patches to_install
+  end
+
+  def self.install_patches_by_id ids
+    to_install = []
+    ids.each do |id|
+      to_install << Patch.new({:repo=>nil,
+                             :kind=>nil,
+                             :name=>nil,
+                             :arch=>nil,
+                             :version=>nil,
+                             :summary=>nil,
+                             :resolvable_id=>id})
+    end
+    do_install_patches to_install
+  end
+
 
   # install
   def install(background = false)
