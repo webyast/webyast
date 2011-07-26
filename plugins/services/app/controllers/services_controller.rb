@@ -39,7 +39,13 @@ class ServicesController < ApplicationController
     begin
 #      @response = Service.find(:one, :from => params[:id].intern, :params => { "custom" => params[:custom]})
       
-      @service = Service.read_status({ :id => params[:id], "custom" => params[:custom]})
+      @service = Service.new(params[:id])
+      @service.read_status(params)
+
+#      @service = Service.new(params[:id])
+#      @service = @service.read_status({ :id => params[:id], "custom" => params[:custom]})
+      
+#      @service = Service.find(params[:id], { "read_status" => 1, :name => params[:id], "custom" => params[:custom]})
       
       rescue ActiveResource::ServerError => e
         error = Hash.from_xml e.response.body
@@ -112,31 +118,25 @@ class ServicesController < ApplicationController
     
 
     begin
+      service = Service.new(params[:service_id])
+      response = service.save(args)
 
-    response = Service.save(args)
-    #response = Service.save(params[:service_id], args)
-    
-    # we get a hash with exit, stderr, stdout
-    
-    
-    #ret = Hash.from_xml(response.body)
-#    ret = ret["hash"]
-    
-    @result_string = ""
-    @result_string << response[:stdout] if response[:stdout]
-    @result_string << response[:stderr] if response[:stderr]
-    @error_string = response[:exit].to_s
+      # we get a hash with exit, stderr, stdout
+      @result_string = ""
+      @result_string << response[:stdout] if response[:stdout]
+      @result_string << response[:stderr] if response[:stderr]
+      @error_string = response[:exit].to_s
 
-    @error_string = case @error_string
-       when "0" then _("success")
-       when "1" then _("unspecified error")
-       when "2" then _("invalid or excess argument(s)")
-       when "3" then _("unimplemented feature")
-       when "4" then _("user had insufficient privilege")
-       when "5" then _("program is not installed")
-       when "6" then _("program is not configured")
-       when "7" then _("program is not running")
-    end
+      @error_string = case @error_string
+         when "0" then _("success")
+         when "1" then _("unspecified error")
+         when "2" then _("invalid or excess argument(s)")
+         when "3" then _("unimplemented feature")
+         when "4" then _("user had insufficient privilege")
+         when "5" then _("program is not installed")
+         when "6" then _("program is not configured")
+         when "7" then _("program is not running")
+      end
 
     rescue ActiveResource::ServerError => e
       error = Hash.from_xml e.response.body

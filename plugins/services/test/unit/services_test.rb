@@ -26,50 +26,48 @@ require 'service'
 class ServiceTest < ActiveSupport::TestCase
 
 YAML_CONTENT = <<EOF
-services:
-  - acpid
-  - dbus
-  - my_app
+  services:
+    - acpid
+    - dbus
+    - my_app
 EOF
 
   def setup    
     Paths.const_set 'CONFIG', File.join(File.dirname(__FILE__),"..","..","test","etc")
     YaST::ConfigFile.any_instance.stubs(:path).returns(__FILE__)
     YaST::ConfigFile.stubs(:read_file).returns(YAML_CONTENT)
+
     @read_args = {
-	'read_status'		=> [ 'b', false],
-	'description'		=> ['b', true],
-	'shortdescription' 	=> ['b', true],
-	'dependencies'		=> [ 'b', true],
-	'filter'		=> [ 'as', ['acpid', 'dbus','my_app']]
+      'read_status'		=> [ 'b', false],
+      'description'		=> ['b', true],
+      'shortdescription' 	=> ['b', true],
+      'dependencies'		=> [ 'b', true],
+      'filter'		=> [ 'as', ['acpid', 'dbus','my_app']]
     }
     @custom_args = {
-	'read_status'		=> [ 'b', false],
-	'description'		=> ['b', true],
-	'shortdescription'	=> ['b', true],
-	'filter'		=> [ 'as', ['acpid', 'dbus','my_app']],
-	'dependencies'		=> [ 'b', false],
-	'custom'		=> ['b', true]
+      'read_status'		=> [ 'b', false],
+      'description'		=> ['b', true],
+      'shortdescription'	=> ['b', true],
+      'filter'		=> [ 'as', ['acpid', 'dbus','my_app']],
+      'dependencies'		=> [ 'b', false],
+      'custom'		=> ['b', true]
     }
    end
 
   test "read current runlevel" do
     Service.stubs(:run_runlevel).returns("N 5")
-
     assert Service.current_runlevel == 5
   end
 
   test "test uknown current runlevel" do
     Service.stubs(:run_runlevel).returns("unknown")
-
     assert_raise ServiceError do
-	Service.current_runlevel
+      Service.current_runlevel
     end
   end
 
   test "test S runlevel" do
     Service.stubs(:run_runlevel).returns("N S")
-
     assert Service.current_runlevel == -1
   end
 
@@ -92,9 +90,10 @@ EOF
     ret = Service.find_all(Hash.new)
     assert ret.map {|s| s.name} == ['acpid', 'dbus', 'my_app']
     ret.each do |s|
-	assert !s.description.nil?
-	assert !s.summary.nil?
+      assert !s.description.nil?
+      assert !s.summary.nil?
     end
+    
     assert !ret[0].custom
     assert ret[2].custom # my_app is custom
   end
@@ -104,7 +103,7 @@ EOF
     YastService.stubs(:Call).with('YaPI::SERVICES::Execute', {"name" => [ "s", "non_existing_service" ], "action" => [ "s", "status"], 'custom' => ['b', false]}).returns(ret)
 
     s = Service.new('non_existing_service')
-    assert s.save({"execute" => 'status'}) == ret
+    assert s.save({:execute => 'status'}) == ret
   end
 
   test "check LSB service status" do
@@ -142,29 +141,29 @@ EOF
 
   test "restart service" do
     ret = {"exit" => "0", "stderr" => "", "stdout" => "restarted"}
+
     # because of restart, extra parameters were added:
     YastService.stubs(:Call).with('YaPI::SERVICES::Execute', {
-	"name" => [ "s", "dbus" ],
-	"action" => [ "s", "restart"],
-	'custom' => ['b', false],
-	'only_execute' => ['b', true]
+      "name" => [ "s", "dbus" ],
+      "action" => [ "s", "restart"],
+      'custom' => ['b', false],
+      'only_execute' => ['b', true]
     }).returns(ret)
 
     s = Service.new('dbus')
-    assert s.save({"execute" => 'restart'}) == ret
+    assert s.save({:execute => "restart"}) == ret
   end
 
   test "stop service" do
     ret = {"exit" => "0", "stderr" => "", "stdout" => "stopped"}
-    # because of restart, extra parameters were added:
     YastService.stubs(:Call).with('YaPI::SERVICES::Execute', {
-	"name" => [ "s", "dbus" ],
-	"action" => [ "s", "stop"],
-	'custom' => ['b', false]
+      "name" => [ "s", "dbus" ],
+      "action" => [ "s", "stop"],
+      "custom" => ['b', false]
     }).returns(ret)
 
     s = Service.new('dbus')
-    assert s.save({"execute" => 'stop'}) == ret
+    assert s.save({:execute => 'stop'}) == ret
   end
 
 end

@@ -100,7 +100,7 @@ class Service < BaseModel::Base
   
   def self.find_all(params = nil)
     
-    Rails.logger.error "FIND ALL: PARAMS #{params.inspect}"
+    Rails.logger.warn "** ACTION FIND ALL:  #{params.inspect }**"
     
     YastCache.fetch(self,*cache_argument) {
       params = {} if params.nil?
@@ -178,19 +178,18 @@ class Service < BaseModel::Base
   end
 
   def self.find(id, params = nil)
-    Rails.logger.error "FIND: ID #{id} and PARAMS #{params.inspect}"
+    Rails.logger.warn "** ACTION FIND ONE: ID #{id} and #{params.inspect }**"
     return find_all(params) if id == :all
     # actually we do not need to read the real status now
     Service.new(id)
   end
 
   # load the status of the service
-  def self.read_status(params)
-    Rails.logger.error "READ STATUS: PARAMS #{params.inspect} and ID #{params[:id].inspect}"
-    
+  def read_status(params)
+    Rails.logger.warn "** ACTION READ STATUS:  #{params.inspect }**"
     
     args = {
-      "service"	=> [ "s", params[:id] ],
+      "service"	=> [ "s", self.name ],
       "custom"	=> [ "b", params["custom"] == "true"]
      }
      
@@ -211,37 +210,39 @@ class Service < BaseModel::Base
 #      return {"status"=>@status, "enabled"=>@enabled, "custom"=> @custom}
       
 
-      service = Service.new(params[:id])
+#      service = Service.new(params[:id])
       
       Rails.logger.debug "STATUS: #{@status.inspect}"
       Rails.logger.debug "ENABLED: #{@enabled.inspect}"
       Rails.logger.debug "CUSTOM: #{@custom.inspect}"
       
-      service.status = @status
-      service.enabled = @enabled
-      service.custom = @custom
-      
-      service
+      self.status = yapi_ret.first["status"].to_i if !yapi_ret.empty? && yapi_ret.first.has_key?("status")
+      self.enabled = yapi_ret.first["enabled"] if !yapi_ret.empty? && yapi_ret.first.has_key?("enabled")
+      self.custom = params["custom"] == "true"
+      self
     end
   end
 
   # execute a service command (start, stop, ...)
-  def self.save(params)
+  def save(params)
+    Rails.logger.error "** ACTION SAVE:  #{params.inspect }**"
+    Rails.logger.error "NAME #{self.name}"
     
-    Rails.logger.warn "** PARAMS #{params.inspect }**"
-    
-    args	= {
-      "name"		=> [ "s", params[:name] ],
-      "action"	=> [ "s", params[:execute] ],
-      "custom"	=> [ "b", params["custom"] == "true" ]
+    args = {
+      "name" => [ "s", self.name ],
+      "action" => [ "s", params[:execute] ],
+      "custom" => [ "b", params["custom"] == "true" ]
     }
     
-    Rails.logger.warn "** ARGS #{args.inspect }**"
     
     # for restart, do not touch on-boot status
-    if (params["execute"] == "restart")
-      args["only_execute"]	= [ "b", true ]
+    if (params[:execute] == "restart")
+      Rails.logger.warn "** SET ONLY_EXECUTE **"
+      args["only_execute"] = [ "b", true ]
     end
+    
+    Rails.logger.error "\n*** ARGS BEFORE DBUS #{args.inspect }"
+    Rails.logger.error "\n ONLY_EXEC #{args["only_execute"].inspect}**"
 
     begin
       ret = YastService.Call("YaPI::SERVICES::Execute", args)
@@ -249,9 +250,9 @@ class Service < BaseModel::Base
       Rails.logger.warn "DBUS error, probably timeout #{e.inspect}"
       if (self.name == "ntp") # with ntp, timeout is expected (bnc#582810)
         ret = {
-          "exit"	=> 0,
-          "stdout"	=> "",
-          "stderr"	=> ""
+          "exit" => 0,
+          "stdout" => "",
+          "stderr" => ""
         }
       
         Rails.logger.info "faking return value...."
@@ -275,8 +276,8 @@ require 'exceptions'
 class ServiceError < BackendException
 
   def initialize(id,message)
-    @id		= id
-    @message	= message
+    @id = id
+    @message = message
   end
 
   def to_xml
