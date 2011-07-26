@@ -32,6 +32,7 @@ class Service < BaseModel::Base
   attr_accessor :status
   attr_accessor :description
   attr_accessor :summary
+  attr_accessor :status
   attr_accessor :custom
   attr_accessor :enabled
   # :required_for_start is a list of services that need to be started if our service is started
@@ -46,6 +47,7 @@ class Service < BaseModel::Base
     @name = name
     @description	= ""
     @summary		= ""
+    @status = ""
     @custom		= false
     @enabled		= true
     @required_for_start	= []
@@ -97,6 +99,9 @@ class Service < BaseModel::Base
   # services = Service.find_all
   
   def self.find_all(params = nil)
+    
+    Rails.logger.error "FIND ALL: PARAMS #{params.inspect}"
+    
     YastCache.fetch(self,*cache_argument) {
       params = {} if params.nil?
 
@@ -105,8 +110,6 @@ class Service < BaseModel::Base
 
       filter = parse_filter
       
-      Rails.logger.error "READ SERVICE STATUS #{params.inspect} CLASS #{params.class} HAS KEY #{params.has_key?("read_status")}"
-
       args = {
         "read_status"	=> [ "b", params.has_key?("read_status")],
         "shortdescription"	=> [ "b", true],
@@ -116,9 +119,6 @@ class Service < BaseModel::Base
       }
       
       
-      Rails.logger.error "READ SERVICE STATUS #{args.inspect}"
-      
-
       # read list of all init.d services
       yapi_ret = YastService.Call("YaPI::SERVICES::Read", args)
 
@@ -159,6 +159,7 @@ class Service < BaseModel::Base
           services_map[s["name"]] = service
         end
       end
+      
       if filter.nil? || filter.empty?
         services	= services_map.values.sort { |a,b|  a.name <=> b.name }
       else
@@ -177,25 +178,28 @@ class Service < BaseModel::Base
   end
 
   def self.find(id, params = nil)
-    debugger
-    
+    Rails.logger.error "FIND: ID #{id} and PARAMS #{params.inspect}"
     return find_all(params) if id == :all
     # actually we do not need to read the real status now
     Service.new(id)
   end
 
   # load the status of the service
-  def read_status(params)
+  def self.read_status(params)
+    Rails.logger.error "READ STATUS: PARAMS #{params.inspect} and ID #{params[:id].inspect}"
+    
+    
     args = {
-      "service"	=> [ "s", self.name ],
-      "custom"	=> [ "b", params["custom"] == "true"],
+      "service"	=> [ "s", params[:id] ],
+      "custom"	=> [ "b", params["custom"] == "true"]
      }
      
-     Rails.logger.debug "CUSTOM: #{custom.inspect}"
+     Rails.logger.error "ARGS PARAMS #{args.inspect}"
+     
     
     yapi_ret = YastService.Call("YaPI::SERVICES::Read", args)
 
-    #Rails.logger.debug "Command returns: #{yapi_ret.inspect}"
+    Rails.logger.debug "Command returns: #{yapi_ret.inspect}"
 
     if yapi_ret.nil?
       raise ServiceError.new("no-status", "Can't get service status")
@@ -203,6 +207,21 @@ class Service < BaseModel::Base
       @status	= yapi_ret.first["status"].to_i if !yapi_ret.empty? && yapi_ret.first.has_key?("status")
       @enabled= yapi_ret.first["enabled"] if !yapi_ret.empty? && yapi_ret.first.has_key?("enabled")
       @custom	= params["custom"] == "true"
+      
+#      return {"status"=>@status, "enabled"=>@enabled, "custom"=> @custom}
+      
+
+      service = Service.new(params[:id])
+      
+      Rails.logger.debug "STATUS: #{@status.inspect}"
+      Rails.logger.debug "ENABLED: #{@enabled.inspect}"
+      Rails.logger.debug "CUSTOM: #{@custom.inspect}"
+      
+      service.status = @status
+      service.enabled = @enabled
+      service.custom = @custom
+      
+      service
     end
   end
 

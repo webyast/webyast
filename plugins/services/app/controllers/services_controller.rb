@@ -37,11 +37,9 @@ class ServicesController < ApplicationController
 
   def show_status
     begin
-      @response = Service.find(:one, :from => params[:id].intern, :params => { "custom" => params[:custom]})
+#      @response = Service.find(:one, :from => params[:id].intern, :params => { "custom" => params[:custom]})
       
-      Rails.logger.error "\n\n\n SHOW RESPONSE"
-      Rails.logger.error "\n#{@response.inspect} \n\n\n"
-      
+      @service = Service.read_status({ :id => params[:id], "custom" => params[:custom]})
       
       rescue ActiveResource::ServerError => e
         error = Hash.from_xml e.response.body
@@ -55,8 +53,8 @@ class ServicesController < ApplicationController
       end
   
   
-      Rails.logger.error "\n\n\n RENDER STATUS #{@response.inspect}"
-      render( :partial =>'status', :locals	=> { :status => @response.status, :enabled => @response.enabled, :custom => @response.custom }, :params => params )
+      Rails.logger.error "\nRENDER STATUS RESPONSE: #{@service.inspect}"
+      render( :partial =>'status', :locals	=> { :status => @service.status, :enabled => @service.enabled, :custom => @service.custom }, :params => params )
   end
 
   # GET /services
