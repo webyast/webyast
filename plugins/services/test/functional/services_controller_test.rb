@@ -20,47 +20,70 @@
 #++
 
 require File.expand_path(File.dirname(__FILE__) + "/../test_helper")
-require 'test/unit'
-require 'mocha'
+require "service"
+require "yast_mock"
+require "mocha"
 
 
 class ServicesControllerTest < ActionController::TestCase
-  fixtures :accounts
+  
+  def fixture(file)
+    ret = open(File.join(File.dirname(__FILE__), "..", "fixtures", file)) { |f| YAML.load(f) }
+    ret
+  end
+
+
+  def rights_enable(enable = true)
+    if enable
+      puts "*** FAKE PERMISSIONS FOR EXECUTE ***"
+      ServicesController.any_instance.stubs(:yapi_perm_check).with("services.execute")
+      ServicesController.any_instance.stubs(:yapi_perm_granted?).with("services.execute")
+      
+      puts "*** FAKE PERMISSIONS FOR READ ***"
+      ServicesController.any_instance.stubs(:yapi_perm_check).with("services.read")
+      ServicesController.any_instance.stubs(:yapi_perm_granted?).with("services.read")
+    else
+      puts "*** NO PERMISSIONS ***"
+      @excpt =  NoPermissionException.new("org.opensuse.yast.modules.services.execute", "testuser")
+      ServicesController.any_instance.stubs(:yapi_perm_check).with("services.execute").raises(@excpt)
+      ServicesController.any_instance.stubs(:yapi_perm_granted?).with("services.execute").returns(false)
+      
+      ServicesController.any_instance.stubs(:yapi_perm_check).with("services.read").raises(@excpt)
+      ServicesController.any_instance.stubs(:yapi_perm_granted?).with("services.read").returns(false)
+    end
+  end
+  
+  def init_data
+    Service.stubs(:find).with(:all, {'read_status' => 1}).returns(@services)
+  end
+  
   def setup
     @controller = ServicesController.new
     @request = ActionController::TestRequest.new
-    # http://railsforum.com/viewtopic.php?id=1719
-    @request.session[:account_id] = 1 # defined in fixtures
-
-    s1 = Service.new("foo")
-    s1.status = 0
-
-    s2 = Service.new("cron")
-    s2.status = 1
+    @request.session[:account_id] = 1 
     
-    Service.stubs(:find_all).returns([s1, s2])
-    Service.stubs(:find).with("cron").returns([s2])
+    @services = fixture "services.yaml"
+    @status = fixture "show_status.yaml"
+    
+    ServicesController.any_instance.stubs(:login_required)
   end
   
-  test "access index" do
+  
+  def teardown
+    puts "\n *** Teardown"
+    ActiveResource::HttpMock.reset!
+  end
+
+  #first index call
+  def test_index
+    puts "\n *** Test index"
+    
+    init_data
+    rights_enable
     get :index
     assert_response :success
-  end
-
-  test "access index xml" do
-    mime = Mime::XML
-    @request.accept = mime.to_s
-    get :index, :format => "xml"
-    assert_response :success
-    assert_equal mime.to_s, @response.content_type
+    assert_valid_markup
+    assert_not_nil assigns(:services)
   end
   
-  test "access index json" do
-    mime = Mime::JSON
-    @request.accept = mime.to_s
-    get :index, :format => "json"
-    assert_response :success
-    assert_equal mime.to_s, @response.content_type
-  end
-
 end

@@ -1,0 +1,1003 @@
+#--
+# Webyast framework
+#
+# Copyright (C) 2009, 2010 Novell, Inc. 
+#   This library is free software; you can redistribute it and/or modify
+# it only under the terms of version 2.1 of the GNU Lesser General Public
+# License as published by the Free Software Foundation. 
+#
+#   This library is distributed in the hope that it will be useful, but WITHOUT
+# ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
+# FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public License for more 
+# details. 
+#
+#   You should have received a copy of the GNU Lesser General Public
+# License along with this library; if not, write to the Free Software 
+# Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA
+#++
+--- 
+- !ruby/object:Service 
+  custom: false
+  description: SuSEfirewall2_init does some basic setup and is the phase 1 of 2 of the SuSEfirewall initialization
+  enabled: false
+  name: SuSEfirewall2_init
+  required_for_start: []
+
+  required_for_stop: 
+  - SuSEfirewall2_setup
+  status: 3
+  summary: SuSEfirewall2 phase 1
+- !ruby/object:Service 
+  custom: false
+  description: SuSEfirewall2_setup does some basic setup and is the phase 2 of 2 of the SuSEfirewall initialization.
+  enabled: false
+  name: SuSEfirewall2_setup
+  required_for_start: 
+  - network
+  - SuSEfirewall2_init
+  required_for_stop: []
+
+  status: 3
+  summary: SuSEfirewall2 phase 2
+- !ruby/object:Service 
+  custom: false
+  description: acpid reads events from /proc/acpi/event and dispatches them (by SuSE default) to other "users" like powersaved, HAL and IAL. Actions for those events are (by SUSE default) configured in the powersaved configuration. Additionally this start script loads all needed modules.
+  enabled: false
+  name: acpid
+  required_for_start: []
+
+  required_for_stop: []
+
+  status: 0
+  summary: Listen and dispatch ACPI events from the kernel
+- !ruby/object:Service 
+  custom: false
+  description: Ajenti administration frontend
+  enabled: false
+  name: ajenti
+  required_for_start: 
+  - syslog
+  - network
+  required_for_stop: []
+
+  status: 1
+  summary: Ajenti
+- !ruby/object:Service 
+  custom: false
+  description: Loading ALSA drivers and store/restore the current setting
+  enabled: true
+  name: alsasound
+  required_for_start: []
+
+  required_for_stop: 
+  - joystick
+  status: 0
+  summary: Set up ALSA sound system
+- !ruby/object:Service 
+  custom: false
+  description: Start the Apache HTTP daemon
+  enabled: true
+  name: apache2
+  required_for_start: 
+  - network
+  required_for_stop: []
+
+  status: 0
+  summary: Apache 2.2 HTTP Server
+- !ruby/object:Service 
+  custom: false
+  description: Start AT batch job daemon
+  enabled: false
+  name: atd
+  required_for_start: []
+
+  required_for_stop: []
+
+  status: 3
+  summary: ""
+- !ruby/object:Service 
+  custom: false
+  description: Start the autofs daemon for automatic mounting of filesystems.
+  enabled: true
+  name: autofs
+  required_for_start: 
+  - syslog
+  - network
+  required_for_stop: []
+
+  status: 0
+  summary: automatic mounting of filesystems
+- !ruby/object:Service 
+  custom: false
+  description: Execute autoyast scripts
+  enabled: false
+  name: autoyast
+  required_for_start: 
+  - syslog
+  required_for_stop: []
+
+  status: 0
+  summary: A start script to execute autoyast scripts
+- !ruby/object:Service 
+  custom: false
+  description: Avahi, a ZeroConf daemon for mDNS and service registration
+  enabled: true
+  name: avahi-daemon
+  required_for_start: 
+  - network
+  - dbus
+  required_for_stop: 
+  - avahi-dnsconfd
+  status: 0
+  summary: ZeroConf daemon
+- !ruby/object:Service 
+  custom: false
+  description: Avahi, a ZeroConf daemon for mDNS and service registration
+  enabled: false
+  name: avahi-dnsconfd
+  required_for_start: 
+  - network
+  - dbus
+  - avahi-daemon
+  required_for_stop: []
+
+  status: 3
+  summary: ZeroConf daemon
+- !ruby/object:Service 
+  custom: false
+  description: handles udev coldplug of bluetooth dongles
+  enabled: true
+  name: bluez-coldplug
+  required_for_start: 
+  - dbus
+  required_for_stop: []
+
+  status: 0
+  summary: ""
+- !ruby/object:Service 
+  custom: false
+  description: Import remote SMB/ CIFS (MS Windows) file systems
+  enabled: false
+  name: cifs
+  required_for_start: 
+  - syslog
+  - network
+  required_for_stop: []
+
+  status: 3
+  summary: Import remote SMB/ CIFS (MS Windows) file systems
+- !ruby/object:Service 
+  custom: false
+  description: Start Collectd to collect system statistics
+  enabled: true
+  name: collectd
+  required_for_start: 
+  - network
+  required_for_stop: []
+
+  status: 0
+  summary: Collectd daemon collecting system statistics
+- !ruby/object:Service 
+  custom: false
+  description: This script loads the relevant CPUFreq modules in the kernel.
+  enabled: true
+  name: cpufreq
+  required_for_start: []
+
+  required_for_stop: []
+
+  status: 0
+  summary: CPUFreq modules loader
+- !ruby/object:Service 
+  custom: false
+  description: Cron job service
+  enabled: true
+  name: cron
+  required_for_start: 
+  - syslog
+  required_for_stop: []
+
+  status: 0
+  summary: Cron job service
+- !ruby/object:Service 
+  custom: false
+  description: Start CUPS to provide spooling and printing files functionality for local and remote printers. Also required if printers are broadcasted ("Browsing") by remote CUPS servers.
+  enabled: true
+  name: cups
+  required_for_start: 
+  - syslog
+  required_for_stop: []
+
+  status: 0
+  summary: CUPS printer daemon
+- !ruby/object:Service 
+  custom: false
+  description: D-Bus supplies both a system daemon and a per-user-login-session daemon. Also, the message bus is built on top of a general one-to-one message passing framework, which can be used by any two apps to communicate directly (without going through the message bus daemon).
+  enabled: true
+  name: dbus
+  required_for_start: []
+
+  required_for_stop: 
+  - avahi-dnsconfd
+  - xdm
+  - pm-profiler
+  - earlyxdm
+  - bluez-coldplug
+  - avahi-daemon
+  status: 0
+  summary: D-Bus is a message bus system for applications to talk to one another.
+- !ruby/object:Service 
+  custom: false
+  description: Starts internet name service masq caching server (DNS)
+  enabled: false
+  name: dnsmasq
+  required_for_start: 
+  - syslog
+  - network
+  required_for_stop: []
+
+  status: 3
+  summary: ""
+- !ruby/object:Service 
+  custom: false
+  description: Start the system logging daemons
+  enabled: true
+  name: earlysyslog
+  required_for_start: []
+
+  required_for_stop: 
+  - earlyxdm
+  status: 0
+  summary: ""
+- !ruby/object:Service 
+  custom: false
+  description: Quick X Display Manager
+  enabled: true
+  name: earlyxdm
+  required_for_start: 
+  - earlysyslog
+  - dbus
+  required_for_stop: []
+
+  status: 0
+  summary: Quick X Display Manager
+- !ruby/object:Service 
+  custom: false
+  description: Framebuffer setup
+  enabled: true
+  name: fbset
+  required_for_start: []
+
+  required_for_stop: []
+
+  status: 0
+  summary: Framebuffer setup
+- !ruby/object:Service 
+  custom: false
+  description: Start gpm to allow mouse on console
+  enabled: false
+  name: gpm
+  required_for_start: 
+  - syslog
+  required_for_stop: []
+
+  status: 6
+  summary: Console mouse support
+- !ruby/object:Service 
+  custom: false
+  description: ""
+  enabled: false
+  name: haldaemon
+  required_for_start: []
+
+  required_for_stop: 
+  - pm-profiler
+  status: -1
+  summary: ""
+- !ruby/object:Service 
+  custom: false
+  description: The haveged daemon uses the timing variations that occur in executing a fixed loop to generate random numbers that are fed into the random pool.
+  enabled: false
+  name: haveged
+  required_for_start: 
+  - syslog
+  required_for_stop: []
+
+  status: 3
+  summary: Daemon to feed entropy into /dev/urandom
+- !ruby/object:Service 
+  custom: false
+  description: Attaches drivers to serial devices
+  enabled: false
+  name: inputattach
+  required_for_start: []
+
+  required_for_stop: []
+
+  status: 3
+  summary: ""
+- !ruby/object:Service 
+  custom: false
+  description: Start irqbalance to allow interrrupt balancing over multiple CPUs usually all irqs are handled by cpu0, this daemon dynamcally uses all cpus for the irqs
+  enabled: true
+  name: irq_balancer
+  required_for_start: []
+
+  required_for_stop: []
+
+  status: 0
+  summary: irqbalance daemon providing irq balancing on MP-machines
+- !ruby/object:Service 
+  custom: false
+  description: Loading joystick drivers
+  enabled: false
+  name: joystick
+  required_for_start: 
+  - alsasound
+  required_for_stop: []
+
+  status: 0
+  summary: Set up analog joysticks
+- !ruby/object:Service 
+  custom: false
+  description: Kerberos 5 is a trusted third-party authentication system. This script starts and stops the Kerberos 5 administrative server, which should only be run on the master server for a realm.
+  enabled: true
+  name: kadmind
+  required_for_start: 
+  - syslog
+  - network
+  - krb5kdc
+  required_for_stop: []
+
+  status: 0
+  summary: Start and stop the Kerberos 5 administrative server.
+- !ruby/object:Service 
+  custom: false
+  description: Keyboard settings (don't disable!)
+  enabled: true
+  name: kbd
+  required_for_start: []
+
+  required_for_stop: []
+
+  status: 0
+  summary: Keyboard settings
+- !ruby/object:Service 
+  custom: false
+  description: Enables reboot through kexec
+  enabled: false
+  name: kexec
+  required_for_start: []
+
+  required_for_stop: []
+
+  status: 3
+  summary: Enables reboot through kexec
+- !ruby/object:Service 
+  custom: false
+  description: Kerberos 5 is a trusted third-party authentication system. \ This script starts and stops the service that allows this \ KDC to receive updates from your master KDC.
+  enabled: false
+  name: kpropd
+  required_for_start: 
+  - syslog
+  - network
+  required_for_stop: []
+
+  status: 3
+  summary: Start and stop the Kerberos 5 propagation client.
+- !ruby/object:Service 
+  custom: false
+  description: Kerberos 5 is a trusted third-party authentication system. This script starts and stops the server that Kerberos IV and 5 clients need to connect to in order to obtain credentials
+  enabled: true
+  name: krb5kdc
+  required_for_start: 
+  - syslog
+  - network
+  required_for_stop: 
+  - kadmind
+  status: 0
+  summary: Start and stop the Kerberos 5 servers.
+- !ruby/object:Service 
+  custom: false
+  description: The main task of lircd is to decode the infrared signals and provide an uniform interface for client applications
+  enabled: false
+  name: lirc
+  required_for_start: []
+
+  required_for_stop: []
+
+  status: 3
+  summary: lirc daemon
+- !ruby/object:Service 
+  custom: false
+  description: sensors is used for monitoring motherboard sensor values. Config file is /etc/sysconfig/lm_sensors
+  enabled: false
+  name: lm_sensors
+  required_for_start: []
+
+  required_for_stop: []
+
+  status: 3
+  summary: Load and configure hardware monitoring drivers
+- !ruby/object:Service 
+  custom: false
+  description: Depending on the configuration, the mcelog service will log HW initiated Machine Check Excpetions or also react on them intelligently
+  enabled: true
+  name: mcelog
+  required_for_start: []
+
+  required_for_stop: []
+
+  status: 3
+  summary: Machine Check Architecture/Error (MCA/MCE) implementations
+- !ruby/object:Service 
+  custom: false
+  description: Start mdadmd to allow monitoring MD devices aka Linux Software Raid. This is only meaningful for raid1, raid5 or multipath arrays as only these have interesting state. raid0 or linear never have missing, spare, or failed drives, so there is nothing to monitor.
+  enabled: false
+  name: mdadmd
+  required_for_start: []
+
+  required_for_stop: []
+
+  status: 3
+  summary: mdadmd daemon monitoring MD devices
+- !ruby/object:Service 
+  custom: false
+  description: update the Intel or AMD CPU microcode (both 32 and 64 bit)
+  enabled: true
+  name: microcode.ctl
+  required_for_start: []
+
+  required_for_stop: []
+
+  status: 4
+  summary: CPU microcode updater
+- !ruby/object:Service 
+  custom: false
+  description: Samba SMB/CIFS file and print server
+  enabled: false
+  name: minidlna
+  required_for_start: 
+  - syslog
+  - network
+  required_for_stop: []
+
+  status: 3
+  summary: MiniDLNA Samba SMB/CIFS file and print server
+- !ruby/object:Service 
+  custom: false
+  description: Starts the multipath daemon
+  enabled: false
+  name: multipathd
+  required_for_start: 
+  - syslog
+  required_for_stop: []
+
+  status: 3
+  summary: Starts multipath daemon
+- !ruby/object:Service 
+  custom: false
+  description: Start the MySQL database server
+  enabled: true
+  name: mysql
+  required_for_start: 
+  - network
+  required_for_stop: []
+
+  status: 0
+  summary: Start the MySQL database server
+- !ruby/object:Service 
+  custom: false
+  description: Berkeley Internet Name Domain (BIND) implementation of the Domain Name System (DNS) server named.
+  enabled: false
+  name: named
+  required_for_start: 
+  - syslog
+  - network
+  required_for_stop: []
+
+  status: 3
+  summary: Domain Name System (DNS) server, named
+- !ruby/object:Service 
+  custom: false
+  description: Configure the localfs depending network interfaces and set up routing
+  enabled: true
+  name: network
+  required_for_start: []
+
+  required_for_stop: 
+  - ypbind
+  - nfsserver
+  - nfs
+  - xfs
+  - postfix
+  - ntp
+  - kadmind
+  - avahi-dnsconfd
+  - xinetd
+  - winbind
+  - vmware
+  - vboxes
+  - sshd
+  - smb
+  - rpcbind
+  - puppetmasterd
+  - puppet
+  - postgresql
+  - openvpn
+  - nmb
+  - network-remotefs
+  - named
+  - mysql
+  - minidlna
+  - krb5kdc
+  - kpropd
+  - dnsmasq
+  - collectd
+  - cifs
+  - avahi-daemon
+  - autofs
+  - apache2
+  - ajenti
+  - SuSEfirewall2_setup
+  status: 0
+  summary: Configure the localfs depending network interfaces
+- !ruby/object:Service 
+  custom: false
+  description: Configure the remote-fs depending network interfaces as Wireless and set up routing or start the NetworkManager
+  enabled: true
+  name: network-remotefs
+  required_for_start: 
+  - network
+  required_for_stop: []
+
+  status: 0
+  summary: Configure the remote-fs depending network interfaces
+- !ruby/object:Service 
+  custom: false
+  description: All necessary services for NFS clients
+  enabled: false
+  name: nfs
+  required_for_start: 
+  - syslog
+  - network
+  - rpcbind
+  required_for_stop: []
+
+  status: 3
+  summary: "NFS client services "
+- !ruby/object:Service 
+  custom: false
+  description: ""
+  enabled: false
+  name: nfsserver
+  required_for_start: 
+  - syslog
+  - network
+  - rpcbind
+  required_for_stop: []
+
+  status: 3
+  summary: Start the kernel based NFS daemon
+- !ruby/object:Service 
+  custom: false
+  description: Samba NetBIOS naming service over IP
+  enabled: false
+  name: nmb
+  required_for_start: 
+  - syslog
+  - network
+  required_for_stop: []
+
+  status: 3
+  summary: Samba NetBIOS naming service over IP
+- !ruby/object:Service 
+  custom: false
+  description: Start Name Service Cache Daemon
+  enabled: true
+  name: nscd
+  required_for_start: []
+
+  required_for_stop: []
+
+  status: 0
+  summary: Start Name Service Cache Daemon
+- !ruby/object:Service 
+  custom: false
+  description: Start network time protocol daemon (NTPD).
+  enabled: false
+  name: ntp
+  required_for_start: 
+  - network
+  - syslog
+  required_for_stop: []
+
+  status: 3
+  summary: Network time protocol daemon (ntpd)
+- !ruby/object:Service 
+  custom: false
+  description: Start OpenVPN tunnel
+  enabled: false
+  name: openvpn
+  required_for_start: 
+  - network
+  required_for_stop: []
+
+  status: 3
+  summary: OpenVPN tunnel
+- !ruby/object:Service 
+  custom: false
+  description: Script infrastructure to enable/disable certain power management functions via simple configuration files
+  enabled: false
+  name: pm-profiler
+  required_for_start: 
+  - haldaemon
+  - dbus
+  required_for_stop: []
+
+  status: 0
+  summary: Script infrastructure to enable/disable certain power management functions
+- !ruby/object:Service 
+  custom: false
+  description: start the Postfix MTA
+  enabled: true
+  name: postfix
+  required_for_start: 
+  - network
+  - syslog
+  required_for_stop: []
+
+  status: 0
+  summary: ""
+- !ruby/object:Service 
+  custom: false
+  description: Start the PostgreSQL master daemon
+  enabled: false
+  name: postgresql
+  required_for_start: 
+  - network
+  required_for_stop: []
+
+  status: 3
+  summary: ""
+- !ruby/object:Service 
+  custom: false
+  description: Start the UPS monitoring daemon
+  enabled: false
+  name: powerd
+  required_for_start: 
+  - syslog
+  required_for_stop: []
+
+  status: 3
+  summary: Start the UPS monitoring daemon
+- !ruby/object:Service 
+  custom: false
+  description: Enables periodic system configuration checks through puppet.
+  enabled: false
+  name: puppet
+  required_for_start: 
+  - syslog
+  - network
+  required_for_stop: []
+
+  status: 3
+  summary: puppet
+- !ruby/object:Service 
+  custom: false
+  description: Server for the puppet system management tool.
+  enabled: false
+  name: puppetmasterd
+  required_for_start: 
+  - syslog
+  - network
+  required_for_stop: []
+
+  status: 3
+  summary: puppetmaster
+- !ruby/object:Service 
+  custom: false
+  description: Script to snapshot random state and reload it at boot time.
+  enabled: true
+  name: random
+  required_for_start: []
+
+  required_for_stop: []
+
+  status: 0
+  summary: Snapshot random state
+- !ruby/object:Service 
+  custom: false
+  description: raw-devices
+  enabled: false
+  name: raw
+  required_for_start: []
+
+  required_for_stop: []
+
+  status: 2
+  summary: raw devices
+- !ruby/object:Service 
+  custom: false
+  description: TI-RPC program number mapper
+  enabled: true
+  name: rpcbind
+  required_for_start: 
+  - syslog
+  - network
+  required_for_stop: 
+  - ypbind
+  - nfsserver
+  - nfs
+  status: 0
+  summary: TI-RPC program number mapper
+- !ruby/object:Service 
+  custom: false
+  description: rpm config file scan
+  enabled: false
+  name: rpmconfigcheck
+  required_for_start: []
+
+  required_for_stop: []
+
+  status: 4
+  summary: ""
+- !ruby/object:Service 
+  custom: false
+  description: Start the rsync server daemon
+  enabled: false
+  name: rsyncd
+  required_for_start: 
+  - syslog
+  required_for_stop: []
+
+  status: 3
+  summary: Start the rsync server daemon
+- !ruby/object:Service 
+  custom: false
+  description: Start S.M.A.R.T. disk and tape monitor.
+  enabled: true
+  name: smartd
+  required_for_start: 
+  - syslog
+  required_for_stop: []
+
+  status: 0
+  summary: Monitors disk and tape health via S.M.A.R.T.
+- !ruby/object:Service 
+  custom: false
+  description: Samba SMB/CIFS file and print server
+  enabled: false
+  name: smb
+  required_for_start: 
+  - syslog
+  - network
+  required_for_stop: []
+
+  status: 3
+  summary: Samba SMB/CIFS file and print server
+- !ruby/object:Service 
+  custom: false
+  description: Enable monthly update of Smolt
+  enabled: false
+  name: smolt
+  required_for_start: []
+
+  required_for_stop: []
+
+  status: 3
+  summary: Enables automated checkins with smolt
+- !ruby/object:Service 
+  custom: false
+  description: Splash screen setup
+  enabled: true
+  name: splash
+  required_for_start: []
+
+  required_for_stop: []
+
+  status: 0
+  summary: ""
+- !ruby/object:Service 
+  custom: false
+  description: kills animation after network start
+  enabled: true
+  name: splash_early
+  required_for_start: []
+
+  required_for_stop: []
+
+  status: 0
+  summary: ""
+- !ruby/object:Service 
+  custom: false
+  description: Start the sshd daemon
+  enabled: true
+  name: sshd
+  required_for_start: 
+  - network
+  required_for_stop: []
+
+  status: 0
+  summary: ""
+- !ruby/object:Service 
+  custom: false
+  description: Stopping and parsing the preloadtrace output
+  enabled: true
+  name: stoppreload
+  required_for_start: []
+
+  required_for_stop: []
+
+  status: 4
+  summary: Stop preload (and blktrace)
+- !ruby/object:Service 
+  custom: false
+  description: readonly access to a subversion repository
+  enabled: false
+  name: svnserve
+  required_for_start: []
+
+  required_for_stop: []
+
+  status: 3
+  summary: svnserve
+- !ruby/object:Service 
+  custom: false
+  description: Start the system logging daemons
+  enabled: true
+  name: syslog
+  required_for_start: []
+
+  required_for_stop: 
+  - ypbind
+  - nfsserver
+  - nfs
+  - vboxes
+  - kadmind
+  - winbind
+  - vmware
+  - vmtoolsd
+  - vboxdrv
+  - smb
+  - smartd
+  - rsyncd
+  - rpcbind
+  - puppetmasterd
+  - puppet
+  - powerd
+  - postfix
+  - ntp
+  - nmb
+  - named
+  - multipathd
+  - minidlna
+  - krb5kdc
+  - kpropd
+  - haveged
+  - gpm
+  - dnsmasq
+  - cups
+  - cron
+  - cifs
+  - autoyast
+  - autofs
+  - ajenti
+  status: 0
+  summary: ""
+- !ruby/object:Service 
+  custom: false
+  description: VirtualBox Linux Additions kernel modules
+  enabled: true
+  name: vboxadd
+  required_for_start: []
+
+  required_for_stop: []
+
+  status: 0
+  summary: VirtualBox Linux Additions kernel modules
+- !ruby/object:Service 
+  custom: false
+  description: VirtualBox Linux kernel module
+  enabled: true
+  name: vboxdrv
+  required_for_start: 
+  - syslog
+  required_for_stop: 
+  - vboxes
+  status: 0
+  summary: VirtualBox Linux kernel module
+- !ruby/object:Service 
+  custom: false
+  description: Autostart Virtual Box VMs that are mentioned in /etc/sysconfig/vbox file
+  enabled: false
+  name: vboxes
+  required_for_start: 
+  - syslog
+  - network
+  - vboxdrv
+  required_for_stop: []
+
+  status: 0
+  summary: Autostart Virtual Box VMs
+- !ruby/object:Service 
+  custom: false
+  description: Starts the Tools Daemon for a VMWare Virtual Machine
+  enabled: true
+  name: vmtoolsd
+  required_for_start: 
+  - syslog
+  required_for_stop: []
+
+  status: 3
+  summary: VMWare Tools Daemon
+- !ruby/object:Service 
+  custom: false
+  description: Manages the services needed to run VMware software
+  enabled: false
+  name: vmware
+  required_for_start: 
+  - syslog
+  - network
+  required_for_stop: []
+
+  status: 0
+  summary: Manages the services needed to run VMware software
+- !ruby/object:Service 
+  custom: false
+  description: NSS daemon for resolving names from Microsoft Windows servers
+  enabled: false
+  name: winbind
+  required_for_start: 
+  - syslog
+  - network
+  required_for_stop: []
+
+  status: 3
+  summary: NSS daemon for resolving names from Microsoft Windows servers
+- !ruby/object:Service 
+  custom: false
+  description: X Display Manager
+  enabled: true
+  name: xdm
+  required_for_start: 
+  - dbus
+  required_for_stop: []
+
+  status: 0
+  summary: ""
+- !ruby/object:Service 
+  custom: false
+  description: X Font Server
+  enabled: false
+  name: xfs
+  required_for_start: 
+  - network
+  required_for_stop: []
+
+  status: 3
+  summary: ""
+- !ruby/object:Service 
+  custom: false
+  description: Starts the xinet daemon. Be aware that xinetd doesn't start if no service is configured to run under it. To enable xinetd services go to YaST Network Services (xinetd) section.
+  enabled: false
+  name: xinetd
+  required_for_start: 
+  - network
+  required_for_stop: []
+
+  status: 3
+  summary: ""
+- !ruby/object:Service 
+  custom: false
+  description: ypbind finds the server for NIS domains and maintains the NIS binding information.
+  enabled: true
+  name: ypbind
+  required_for_start: 
+  - syslog
+  - network
+  - rpcbind
+  required_for_stop: []
+
+  status: 0
+  summary: Start ypbind (necessary for a NIS client)
