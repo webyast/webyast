@@ -16,16 +16,29 @@
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA
 #++
 
----
-- !ruby/object:Service 
-  custom: false
-  description: Start network time protocol daemon (NTPD).
-  enabled: false
-  name: ntp
-  required_for_start: 
+
+  
+--- !ruby/object:Service 
+custom: false
+description: "Start network time protocol daemon (NTPD)."
+enabled: false
+name: ntp
+required_for_start: 
   - network
   - syslog
-  required_for_stop: []
-  status: 3
-  summary: Network time protocol daemon (ntpd)
-  
+
+required_for_stop: []
+status: 3
+summary: "Network time protocol daemon (ntpd)"
+
+#---!ruby/object:Service 
+#  custom: false
+#  description: ""
+#  enabled: false
+#  name: ntp
+#  required_for_start: 
+#  - network
+#  - syslog
+#  required_for_stop: []
+#  status: 3
+#  summary: "Network time protocol daemon (ntpd)"

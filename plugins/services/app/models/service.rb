@@ -46,8 +46,8 @@ class Service < BaseModel::Base
   def initialize(name)
     @name = name
     @description	= ""
+    @status = nil
     @summary		= ""
-    @status = ""
     @custom		= false
     @enabled		= true
     @required_for_start	= []
@@ -78,8 +78,8 @@ class Service < BaseModel::Base
 
     #reading configuration file
     if File.exists?(path)
-      file = YaST::ConfigFile.new(path)
-      return file["services"] || []
+	    file = YaST::ConfigFile.new(path)
+	    return file["services"] || []
     end
     return []
   end
@@ -99,49 +99,48 @@ class Service < BaseModel::Base
   # services = Service.find_all
   
   def self.find_all(params = nil)
-    
-    Rails.logger.warn "** ACTION FIND ALL:  #{params.inspect }**"
+    Rails.logger.error "SELF FIND ALL with PARAMS #{params.inspect} \n"
     
     YastCache.fetch(self,*cache_argument) {
       params = {} if params.nil?
 
-      services = []
+      services	= []
       services_map= {} # helper structure
 
-      filter = parse_filter
-      
-      args = {
-        "read_status"	=> [ "b", params.has_key?("read_status")],
-        "shortdescription"	=> [ "b", true],
-        "description"	=> [ "b", true],
-        "dependencies"	=> [ "b", true],
-        "filter"	=> [ "as", filter ]
+      filter		= parse_filter
+
+      args	= {
+	      "read_status"	=> [ "b", params.has_key?(:read_status)],
+	      "shortdescription"	=> [ "b", true],
+	      "description"	=> [ "b", true],
+	      "dependencies"	=> [ "b", true],
+	      "filter"	=> [ "as", filter ]
       }
-      
-      
+	
       # read list of all init.d services
       yapi_ret = YastService.Call("YaPI::SERVICES::Read", args)
 
       if yapi_ret.nil?
         raise ServiceError.new("no-services", "Can't get services list")
       else
-        
-        yapi_ret.each do |s|
-          service	= Service.new(s["name"])
-          service.status	= s["status"].to_i if s.has_key?("status")
-          service.description	= s["description"] if s.has_key?("description")
-          service.summary	= s["shortdescription"] if s.has_key?("shortdescription")
-          service.enabled	= s["enabled"] if s.has_key?("enabled")
-          service.required_for_start		= s["required_for_start"] if s.has_key?("required_for_start")
-          service.required_for_stop		= s["required_for_stop"] if s.has_key?("required_for_stop")
-          services_map[s["name"]]	= service
+	      yapi_ret.each do |s|
+	        service	= Service.new(s["name"])
+	        service.status	= s["status"].to_i if s.has_key?("status")
+	        service.description	= s["description"] if s.has_key?("description")
+	        service.summary	= s["shortdescription"] if s.has_key?("shortdescription")
+	        service.enabled	= s["enabled"] if s.has_key?("enabled")
+	        service.required_for_start		= s["required_for_start"] if s.has_key?("required_for_start")
+	        service.required_for_stop		= s["required_for_stop"] if s.has_key?("required_for_stop")
+
+	        #Rails.logger.debug "service: #{service.inspect}"
+	        services_map[s["name"]]	= service
         end
       end
 
       # read list of custom (user defined) services
       args["custom"]	= [ "b", true]
       args["dependencies"]= [ "b", false]
-
+	
       yapi_ret = YastService.Call("YaPI::SERVICES::Read", args)
 
       if yapi_ret.nil?
@@ -149,17 +148,15 @@ class Service < BaseModel::Base
       else
         yapi_ret.each do |s|
           service	= Service.new(s["name"])
-          service.status = s["status"].to_i if s.has_key?("status")
-          service.description = s["description"] if s.has_key?("description")
-          service.summary = s["shortdescription"] if s.has_key?("shortdescription")
-          service.custom = true
-          
+          service.status	= s["status"].to_i if s.has_key?("status")
+          service.description	= s["description"] if s.has_key?("description")
+          service.summary	= s["shortdescription"] if s.has_key?("shortdescription")
+          service.custom	= true
           # service.enabled cannot be checked, we do not know how for custom service
           #Rails.logger.debug "service: #{service.inspect}"
-          services_map[s["name"]] = service
+          services_map[s["name"]]	= service
         end
       end
-      
       if filter.nil? || filter.empty?
         services	= services_map.values.sort { |a,b|  a.name <=> b.name }
       else
@@ -169,8 +166,8 @@ class Service < BaseModel::Base
             # filter out dependent services, which are not present in filter
             s.required_for_start.reject! { |rs| !filter.include? rs }
             s.required_for_stop.reject! { |rs| !filter.include? rs }
-            services << s
-          end
+              services << s
+           end
         end
       end
       services
@@ -178,97 +175,78 @@ class Service < BaseModel::Base
   end
 
   def self.find(id, params = nil)
-    Rails.logger.warn "** ACTION FIND ONE: ID #{id} and #{params.inspect }**"
+    Rails.logger.error "SELF FIND ONE with ID #{id} and PARAMS #{params.inspect} \n"
+    
     return find_all(params) if id == :all
+    
     # actually we do not need to read the real status now
     Service.new(id)
   end
 
-  # load the status of the service
+
+  #load the status of the service
   def read_status(params)
-    Rails.logger.warn "** ACTION READ STATUS:  #{params.inspect }**"
-    
-    args = {
-      "service"	=> [ "s", self.name ],
-      "custom"	=> [ "b", params["custom"] == "true"]
-     }
-     
-     Rails.logger.error "ARGS PARAMS #{args.inspect}"
-     
-    
+    args	= {
+	    "service"	=> [ "s", self.name ],
+	    "custom"	=> [ "b", params["custom"] == "true"],
+    }
+
     yapi_ret = YastService.Call("YaPI::SERVICES::Read", args)
 
     Rails.logger.debug "Command returns: #{yapi_ret.inspect}"
 
     if yapi_ret.nil?
-      raise ServiceError.new("no-status", "Can't get service status")
+	    raise ServiceError.new("no-status", "Can't get service status")
     else
-      @status	= yapi_ret.first["status"].to_i if !yapi_ret.empty? && yapi_ret.first.has_key?("status")
-      @enabled= yapi_ret.first["enabled"] if !yapi_ret.empty? && yapi_ret.first.has_key?("enabled")
-      @custom	= params["custom"] == "true"
-      
-#      return {"status"=>@status, "enabled"=>@enabled, "custom"=> @custom}
-      
-
-#      service = Service.new(params[:id])
-      
-      Rails.logger.debug "STATUS: #{@status.inspect}"
-      Rails.logger.debug "ENABLED: #{@enabled.inspect}"
-      Rails.logger.debug "CUSTOM: #{@custom.inspect}"
-      
-      self.status = yapi_ret.first["status"].to_i if !yapi_ret.empty? && yapi_ret.first.has_key?("status")
-      self.enabled = yapi_ret.first["enabled"] if !yapi_ret.empty? && yapi_ret.first.has_key?("enabled")
-      self.custom = params["custom"] == "true"
-      self
+	    self.status	= yapi_ret.first["status"].to_i if !yapi_ret.empty? && yapi_ret.first.has_key?("status")
+	    self.enabled= yapi_ret.first["enabled"] if !yapi_ret.empty? && yapi_ret.first.has_key?("enabled")
+    	self.custom	= params["custom"] == "true"
+    	
+#    	Rails.logger.error "Return value READ_STATUS"
+    	#puts "#{self.to_yaml}"
+    	self
     end
+    
+    
   end
 
   # execute a service command (start, stop, ...)
   def save(params)
-    Rails.logger.error "** ACTION SAVE:  #{params.inspect }**"
-    Rails.logger.error "NAME #{self.name}"
-    
-    args = {
-      "name" => [ "s", self.name ],
-      "action" => [ "s", params[:execute] ],
-      "custom" => [ "b", params["custom"] == "true" ]
+    args	= {
+	    "name"		=> [ "s", self.name ],
+	    "action"	=> [ "s", params[:execute] ],
+	    "custom"	=> [ "b", params[:custom] == "true" ]
     }
     
-    
     # for restart, do not touch on-boot status
-    if (params[:execute] == "restart")
-      Rails.logger.warn "** SET ONLY_EXECUTE **"
-      args["only_execute"] = [ "b", true ]
+    if (params["execute"] == "restart")
+	    args["only_execute"]	= [ "b", true ]
     end
-    
-    Rails.logger.error "\n*** ARGS BEFORE DBUS #{args.inspect }"
-    Rails.logger.error "\n ONLY_EXEC #{args["only_execute"].inspect}**"
 
     begin
+      Rails.logger.debug "YaPI ARGS: #{args.inspect}"
       ret = YastService.Call("YaPI::SERVICES::Execute", args)
     rescue DBus::Error => e
       Rails.logger.warn "DBUS error, probably timeout #{e.inspect}"
       if (self.name == "ntp") # with ntp, timeout is expected (bnc#582810)
-        ret = {
-          "exit" => 0,
-          "stdout" => "",
-          "stderr" => ""
-        }
-      
-        Rails.logger.info "faking return value...."
+	      ret = {
+	          "exit"	=> 0,
+	          "stdout"	=> "",
+	          "stderr"	=> ""
+	      }
+    	  Rails.logger.info "faking return value...."
       else raise e
-
       end
-
-    rescue Exception => e
-      Rails.logger.error "Generic exception #{e.inspect})"
-      raise e
-    end
-
-    Rails.logger.debug "Command returns: #{ret.inspect}"
     
+      rescue Exception => e
+        Rails.logger.error "Generic exception #{e.inspect})"
+        raise e
+      end
+      
+    Rails.logger.debug "Command returns: #{ret.inspect}"
     YastCache.reset(self, *Service.cache_argument)
-    ret.symbolize_keys!
+#    ret.symbolize_keys!
+    ret
   end
 end
 
@@ -276,8 +254,8 @@ require 'exceptions'
 class ServiceError < BackendException
 
   def initialize(id,message)
-    @id = id
-    @message = message
+    @id		= id
+    @message	= message
   end
 
   def to_xml

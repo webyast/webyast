@@ -31,7 +31,7 @@ unless custom
     classname	= "service_disabled"
   end
 -%>
-  <div class=<%= classname %>><%=label%></div>
+  <div class=<%=classname%>><%=label%></div>
 <% end %>
 
 <%
@@ -45,33 +45,27 @@ unless custom
 # 4 - service status unknown :-(
 # 5--199 reserved (5--99 LSB, 100--149 distro, 150--199 appl.)
 -%>
-
-<!--<p>Current status <% status.inspect%></p> -->
-
 <%
-  color		= "silver"
-  classname	= "status_unknown"
-  
-  case status
+color		= "silver"
+classname	= "status_unknown"
+case status
     when nil, 4
-	    label	= _("status unknown")
+	label	= _("status unknown")
     when 0
-	    label	= _("running")
-	    color	= "lime"
-	    classname	= "status_running"
+	label	= _("running")
+	color	= "lime"
+	classname	= "status_running"
     when 1,2
-	     label	= _("dead")
-	     color	=  "red"
-	     classname	= "status_dead"
+	label	= _("dead")
+	color	=  "red"
+	classname	= "status_dead"
     when 3
-	    label	= _("not running")
-	    color	= "black"
-	    classname	= "status_not_running"
+	label	= _("not running")
+	color	= "black"
+	classname	= "status_not_running"
     else
-	    label	= _("status unknown: %d") % status
-  end
+	label	= _("status unknown: %d") % status
+end
 -%>
-
 <%=_("Current status of the service:")%>
-
 <i><span class=<%=classname%> style="color: <%=color%>"><%=label%></span></i>

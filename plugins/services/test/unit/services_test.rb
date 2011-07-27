@@ -126,8 +126,8 @@ EOF
 
   test "check service filtering" do
     srv = [
-	{"name" => "dbus", "description" => "DBUS service description", "required_for_stop" => [ "network", "nfs", "my_app"] },
-	{"name" => "network", "description" => "network service description", "required_for_start" => [ "dbus"] }
+	    {"name" => "dbus", "description" => "DBUS service description", "required_for_stop" => [ "network", "nfs", "my_app"] },
+    	{"name" => "network", "description" => "network service description", "required_for_start" => [ "dbus"] }
     ]
     custom = [{"name" => "my_app" } ]
   

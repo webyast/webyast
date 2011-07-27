@@ -54,7 +54,13 @@ class ServicesControllerTest < ActionController::TestCase
   end
   
   def init_data
-    Service.stubs(:find).with(:all, {'read_status' => 1}).returns(@services)
+    Service.stubs(:find).with(:all, {:read_status => 1}).returns(@services)
+    Service.any_instance.stubs(:read_status).with({"custom" => false}).returns(@status)
+    
+    
+
+    Service.any_instance.stubs(:read_status).with({"custom" => false}).returns(@status)
+#    read_status('action' => 'show', 'id' => 'ntp', 'custom' => false, 'controller' => 'services')
   end
   
   def setup
@@ -69,21 +75,79 @@ class ServicesControllerTest < ActionController::TestCase
   end
   
   
-  def teardown
-    puts "\n *** Teardown"
-    ActiveResource::HttpMock.reset!
-  end
-
-  #first index call
-  def test_index
-    puts "\n *** Test index"
-    
+  test "access index html" do
     init_data
     rights_enable
-    get :index
+    
+    mime = Mime::HTML
+    @request.accept = mime.to_s
+
+    get :index, :format => "html"
     assert_response :success
     assert_valid_markup
-    assert_not_nil assigns(:services)
+    assert_equal mime.to_s, @response.content_type
   end
   
+  test "access index xml" do
+    init_data
+    rights_enable
+    
+    mime = Mime::XML
+    @request.accept = mime.to_s
+    get :index, :format => "xml"
+    assert_response :success
+    assert_equal mime.to_s, @response.content_type
+  end
+  
+  test "access index json" do
+    init_data
+    rights_enable
+    
+    mime = Mime::JSON
+    @request.accept = mime.to_s
+    get :index, :format => "json"
+    assert_response :success
+    assert_equal mime.to_s, @response.content_type
+  end  
+
+  test "get ntp status" do
+    init_data
+    rights_enable
+
+    ret = get :show_status, {:id => 'ntp', :custom => false}
+    assert_response :success
+    assert_valid_markup
+    assert !ret.body.index("not running").nil? # fixture status is 3 = not running
+  end
+  
+  test "get nonexistent service" do
+    init_data
+    rights_enable
+    
+    ret = get :show_status, {:id => 'aaa', :custom => false}
+    assert_response :success
+    puts ret.body
+    
+    #??????????
+#    assert_equal ret.body.index("cannot read status")
+  end
+
+#  ????????????????????????????????????
+#  def test_ntp_status
+#    init_data
+#    rights_enable
+#    
+#    service = Service.new('ntp')
+#    @response = service.read_status({"custom" => false})
+#    puts @response.inspect
+#    assert @response.status == 3
+#  end
+  
+  
+
+#  def test_execute
+#    put :execute, { :service_id => 'ntp', :id => 'stop', :custom => false}
+#    assert assigns(:error_string), "success"
+#    assert assigns(:result_string), "Shutting down network time protocol daemon (NTPD)\n"
+#  end
 end

@@ -20,16 +20,13 @@
 # you may find current contact information at www.novell.com
 #++
 %>
-
-
-
 <% if @result_string %>
 <p></p>
 <div class="table">
    <table class="listing form" cellpadding="0" cellspacing="0">
-   <!--<tr>
-     <th class=""><%=_("Service Call Result")%></th>
-   </tr>-->
+   <tr>
+       <th class="full"><%=_("Service Call Result")%></th>
+   </tr>
    <tr>
        <td class="first" width="120"><strong><%=_("Result")%></strong></td>
        <td class="last"><%=h @error_string %></td>
