@@ -74,6 +74,13 @@ class PatchesController < ApplicationController
     return timeout
   end
 
+  def running_install_jobs
+    running = PluginJob.running(:Patch, :install)
+    Rails.logger.info("#{running} installation jobs in the queue")
+    Rails.cache.delete("patch:installed") if running == 0 #remove installed patches from cache if the installation
+                                                          #has been finished
+    running
+  end
 
   public
 
@@ -106,10 +113,7 @@ class PatchesController < ApplicationController
     end
 
     #checking if an installation is running
-    running = PluginJob.running(:Patch, :install)
-    Rails.logger.info("#{running} installation jobs in the queue")
-    Rails.cache.delete("patch:installed") if running == 0 #remove installed patches from cache if the installation
-                                                          #has been finished
+    running = running_install_jobs
     if running > 0 #there is process which runs installation
       raise InstallInProgressException.new( running )unless request.format.html?
       # patch update installation in progress
@@ -160,18 +164,29 @@ class PatchesController < ApplicationController
     error = nil
     patch_updates = nil
     refresh = false
-    refresh = true if PluginJob.running(:Patch, :install) #refresh state of installation
-    begin
-      patch_updates = Patch.find :all
-      patch_updates = @patchs_updates + collect_done_patches #report also which patches is installed
-      refresh = true
-    rescue Exception => error
-      if error.message.match /Repository (.*) needs to be signed/
-        error_string = _("Cannot read patch updates: GPG key for repository <em>%s</em> is not trusted.") % $1
-      else
-        error_string = e.message
+    error_type = :none
+    running = running_install_jobs
+    if running > 0 #there is process which runs installation
+      refresh = true if running > 0 #refresh state of installation
+      error_string = _("Cannot obtain patches, installation in progress. Remain %d patches.") % running
+      error_type = :install
+    elsif PatchesState.read[:message_id] == "PATCH_EULA" #checking if there is a missing licence
+      error_type = :license
+    else
+      #evaluate available patches
+      begin
+        patch_updates = Patch.find :all
+        patch_updates = patch_updates + collect_done_patches #report also which patches is installed
+        refresh = true
+      rescue Exception => error
+        if error.message.match /Repository (.*) needs to be signed/
+          error_string = _("Cannot read patch updates: GPG key for repository <em>%s</em> is not trusted.") % $1
+          error_type = :unsign
+        else
+          error_string = error.message
+          error_type = :unknown
+        end
       end
-      patch_updates = nil
     end
 
     patches_summary = nil
@@ -193,7 +208,12 @@ class PatchesController < ApplicationController
     ref_timeout = refresh ? refresh_timeout : nil
 
     respond_to do |format|
-      format.html { render :partial => "patch_summary", :locals => { :patch => patches_summary, :error => error, :error_string => error_string, :refresh_timeout => ref_timeout } }
+      format.html { render :partial => "patch_summary", 
+                           :locals => { :patch => patches_summary, 
+                           :error => error, 
+                           :error_string => error_string, 
+                           :error_type => error_type,
+                           :refresh_timeout => ref_timeout } }
       format.json  { render :json => patches_summary }
     end
   end

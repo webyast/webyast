@@ -21,33 +21,6 @@
 #++
 %>
 
-<%
-  error_type = error ? :unknown : :none
-  if error.class == ClientException && error.backend_exception_type == "PACKAGEKIT_INSTALL"
-    error_type = :install
-  end
-
-  if error.class == ClientException
-    case error.backend_exception_type
-    when "PACKAGEKIT_INSTALL" then error_type = :install
-    when "PACKAGEKIT_LICENSE" then error_type = :license
-    end
-  end
-
-  if error.class == ActiveResource::UnauthorizedAccess
-    error_type = :unauthorized
-  end
-
-  unsigned_repo = nil
-
-  if !error_string.blank?
-    error_string.match /Repository (.*) needs to be signed/
-    unsigned_repo = $1
-    error_type = :unsigned unless unsigned_repo.blank?
-  end
--%>
-
-
 <%= report_error(error, error_string) if error_type == :unknown %>
 
 <% unless patch %>
@@ -61,31 +34,16 @@
 
   <div class="statusbar_row">
    	<img src="/images/status-warning.png">
-
-	  <% case error_type when :unauthorized then %>
-		    <% link_to "controlpanel" do %>
-	        <%= _("Cannot read patch updates - you have been logged out.") %>
-		    <% end %>
-	  <% when :unknown %>
-		  <%= _("No information about patches available") %>
-
+	  <% case error_type when :unknown %>
+            <%= _("No information about patches available") %>
 	  <% when :unsigned %>
-		  <%= _("Cannot read patch updates: GPG key for repository <em>%s</em> is not trusted.") % unsigned_repo %>
-
+            <%= _("Cannot read patch updates: GPG key for repository <em>%s</em> is not trusted.") % unsigned_repo %>
 	  <% when :install %>
-      <%= error.message %>
-	    <% javascript_tag do -%>
-	      setTimeout(function() {
-          $('#statusbar-patches').html('<%= image_tag("/images/working.gif", :class => "small-working-icon") %> <%= _("Loading patch information") %>')
-    		  <%= remote_function(:update => "statusbar_patches", :url => { :controller => :patches, :action => :show_summary }) %>
-  		  }, 15000);
-	    <% end -%>
-
-    <% when :license %>
-      <% link_to :controller => "patches", :action => "license" do %>
-        <%= _("Update needs EULA license confirmation. Please follow to patch module to decide about license.") %>
-      <% end %>
-
+            <%= error_string %>
+          <% when :license %>
+            <% link_to :controller => "patches", :action => "license" do %>
+              <%= _("Update needs EULA license confirmation. Please follow to patch module to decide about license.") %>
+            <% end %>
 	  <% end %>
   </div>
 

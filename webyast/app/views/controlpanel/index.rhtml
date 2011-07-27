@@ -33,10 +33,10 @@
 <% display_patches = ControlPanelConfig.read 'display_patch_status', true %>
 <% display_status = ControlPanelConfig.read 'display_system_status', true %>
 
-<% if ActionController::Routing.possible_controllers.include?("patch_updates") && display_patches %>
+<% if ActionController::Routing.possible_controllers.include?("patches") && display_patches %>
   <% javascript_tag do -%>
     $(document).ready( function() {
-      <%= remote_function(:update => "statusbar_patches", :url => { :controller => :patch_updates, :action => :show_summary, :background => true }) %>
+      <%= remote_function(:update => "statusbar_patches", :url => { :controller => :patches, :action => :show_summary, :background => true }) %>
     });
   <% end -%>
 <% end %>
@@ -88,7 +88,7 @@
         <label><%= _("System updates") %></label>
       </div>
       <div id="statusbar_patches">
-        <% if ActionController::Routing.possible_controllers.include?("patch_updates") %>
+        <% if ActionController::Routing.possible_controllers.include?("patches") %>
           <% if display_patches %>
           <div class="statusbar_row">
             <%= image_tag("/images/working.gif", :class => "small-working-icon") %>
