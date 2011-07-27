@@ -264,12 +264,12 @@ class PatchesController < ApplicationController
       Rails.logger.info "Some patches are not needed in #{update_array.inspect} anymore: #{e.message}"
     end
 
-    logger.debug "*** Check before redirect: basesystem setup compleate -> #{Basesystem.new.load_from_session(session).completed?}"
+    logger.debug "*** Check before redirect: basesystem setup completed -> #{Basesystem.new.load_from_session(session).completed?}"
     if request.format.html?
       if Basesystem.new.load_from_session(session).completed?
-        redirect_to :controller => "controlpanel", :action => "index"
+        redirect_to :controller => "controlpanel", :action => "index" and return
       else
-        redirect_to :controller => "controlpanel", :action => "nextstep"
+        redirect_to :controller => "controlpanel", :action => "nextstep" and return
       end
     end
     @patch_update = Patch.new({})

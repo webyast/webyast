@@ -42,7 +42,7 @@ class Patch < Resolvable
     end
   end
 
-  def self.do_install_patches to_install
+  def self.install_patches to_install
     to_install.each do |patch|
       patch.install
     end
@@ -62,34 +62,14 @@ class Patch < Resolvable
     super :patch_update, options, @messages
   end
 
-  def self.install_patches patches
-    to_install = []
-    patches.each do |patch|
-      to_install << Patch.new({:repo=>nil,
-                             :kind=>nil,
-                             :name=>nil,
-                             :arch=>nil,
-                             :version=>nil,
-                             :summary=>nil,
-                             :resolvable_id=>patch.resolvable_id})
-    end
-    do_install_patches to_install
-  end
-
   def self.install_patches_by_id ids
     to_install = []
     ids.each do |id|
-      to_install << Patch.new({:repo=>nil,
-                             :kind=>nil,
-                             :name=>nil,
-                             :arch=>nil,
-                             :version=>nil,
-                             :summary=>nil,
-                             :resolvable_id=>id})
+      patch = Patch.find(id)
+      to_install << patch if patch
     end
-    do_install_patches to_install
+    install_patches to_install
   end
-
 
   # install
   def install(background = false)
