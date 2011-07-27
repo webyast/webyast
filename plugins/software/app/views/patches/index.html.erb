@@ -109,13 +109,15 @@
       	@patch_updates.each do |p|
       	  # don't count installed patches
 	        unless p.installed
-	          if @hash.has_key?(p.kind)
-	            @hash[p.kind]= @hash[p.kind]+1
-	            counter = counter+1
+                  search_map = { "normal" => "green", "low" => "green", "security" => "security",
+                                 "important" => "important", "enhancement" => "optional" }
+                  key = search_map[p.kind] || p.kind
+	          if @hash.has_key?(key)
+	            @hash[key] += 1
 	          else
-	            @hash[p.kind]=1
-	            counter = counter+1
+	            @hash[key] = 1
 	          end
+                  counter += 1
 	        end
       end %>
 

@@ -222,15 +222,11 @@ class PatchesController < ApplicationController
     @permission_install = permission_granted? "org.opensuse.yast.system.patches.install"  # RORSCAN_ITL
     @patch_updates = Patch.find :all
     kind = params[:value]
+    search_map = { "green" => ["normal","low"], "security" => ["security"],
+                   "important" => "important", 'optional' => ["enhancement"] }
     unless kind == "all"
-      patches = @patch_updates.find_all { |patch| patch.kind == kind }
-
-      # optional patches can also have kind 'low'
-      if kind == 'optional'
-        patches += @patch_updates.find_all { |patch| patch.kind == 'low' }
-      end
-
-      @patch_updates = patches
+      search_list = search_map[kind] || [kind]
+      @patch_updates = @patch_updates.find_all { |patch| search_list.include?(patch.kind) }
     end
     render :partial => "patches"
   end
