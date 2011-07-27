@@ -30,6 +30,8 @@ require 'thread'
 require 'exceptions'
 
 class PackageKitError < BackendException
+  attr_reader :description
+
   def initialize(description)
     @description = description
     super("PackageKit error")

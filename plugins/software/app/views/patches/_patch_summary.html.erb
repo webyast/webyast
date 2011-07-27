@@ -37,7 +37,7 @@
 	  <% case error_type when :unknown %>
             <%= _("No information about patches available") %>
 	  <% when :unsigned %>
-            <%= _("Cannot read patch updates: GPG key for repository <em>%s</em> is not trusted.") % unsigned_repo %>
+            <%= error_string %>
 	  <% when :install %>
             <%= error_string %>
           <% when :license %>

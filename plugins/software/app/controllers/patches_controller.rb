@@ -127,7 +127,7 @@ class PatchesController < ApplicationController
       begin
         @patch_updates = Patch.find(:all)
       rescue Exception => e
-        if e.message.match /Repository (.*) needs to be signed/
+        if e.description.match /Repository (.*) needs to be signed/
           flash[:error] = _("Cannot read patch updates: GPG key for repository <em>%s</em> is not trusted.") % $1
         else
           flash[:error] = e.message
@@ -179,9 +179,9 @@ class PatchesController < ApplicationController
         patch_updates = patch_updates + collect_done_patches #report also which patches is installed
         refresh = true
       rescue Exception => error
-        if error.message.match /Repository (.*) needs to be signed/
+        if error.description.match /Repository (.*) needs to be signed/
           error_string = _("Cannot read patch updates: GPG key for repository <em>%s</em> is not trusted.") % $1
-          error_type = :unsign
+          error_type = :unsigned
         else
           error_string = error.message
           error_type = :unknown
@@ -206,7 +206,6 @@ class PatchesController < ApplicationController
 
     # don't refresh if there was an error
     ref_timeout = refresh ? refresh_timeout : nil
-
     respond_to do |format|
       format.html { render :partial => "patch_summary", 
                            :locals => { :patch => patches_summary, 
