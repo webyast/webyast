@@ -56,6 +56,11 @@ class RepositoriesController < ApplicationController
     @show = params["show"]
     Rails.logger.debug "Displaying repository #{@show}" unless @show.blank?
     Rails.logger.debug "Available repositories: #{@repos.inspect}"
+    respond_to do |format|
+      format.html {}
+      format.xml { render  :xml => @repos.to_xml( :root => "repositories", :dasherize => false ) }
+      format.json { render :json => @repos.to_json( :root => "repositories", :dasherize => false ) }
+    end
   end
 
   # GET /repositories/my_repo.xml
@@ -74,6 +79,11 @@ class RepositoriesController < ApplicationController
     end
 
     @repo = repos.first
+    respond_to do |format|
+      format.html {}
+      format.xml { render  :xml => @repo.to_xml( :dasherize => false ) }
+      format.json { render :json => @repo.to_json( :dasherize => false ) }
+    end
   end
 
   def update
