@@ -20,8 +20,10 @@
 # you may find current contact information at www.novell.com
 #++
 %>
+
 <% if @result_string %>
-<p></p>
+<p>&nbsp;</p>
+
 <div class="table">
    <table class="listing form" cellpadding="0" cellspacing="0">
    <tr>
@@ -31,6 +33,7 @@
        <td class="first" width="120"><strong><%=_("Result")%></strong></td>
        <td class="last"><%=h @error_string %></td>
    </tr>
+   
    <% unless @result_string.empty? %>
    <tr class="bg">
        <td class="first"><strong><%=_("Description")%></strong></td>
@@ -38,6 +41,5 @@
    </tr>
    <% end %>
    </table>
-   <p>
 </div>
 <% end %>

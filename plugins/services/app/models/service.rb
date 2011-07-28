@@ -212,20 +212,24 @@ class Service < BaseModel::Base
 
   # execute a service command (start, stop, ...)
   def save(params)
-    args	= {
+    args = {
 	    "name"		=> [ "s", self.name ],
 	    "action"	=> [ "s", params[:execute] ],
 	    "custom"	=> [ "b", params[:custom] == "true" ]
     }
     
+    #Rails.logger.debug "\nHTTP PARAMS: #{params.inspect}\n"
+    
     # for restart, do not touch on-boot status
-    if (params["execute"] == "restart")
-	    args["only_execute"]	= [ "b", true ]
+    if (params[:execute] == "restart")
+      args["only_execute"] = [ "b", true ]
     end
+    
+    Rails.logger.debug "\nYaPI ARGS: #{args.inspect}\n"
 
     begin
-      Rails.logger.debug "YaPI ARGS: #{args.inspect}"
       ret = YastService.Call("YaPI::SERVICES::Execute", args)
+      
     rescue DBus::Error => e
       Rails.logger.warn "DBUS error, probably timeout #{e.inspect}"
       if (self.name == "ntp") # with ntp, timeout is expected (bnc#582810)

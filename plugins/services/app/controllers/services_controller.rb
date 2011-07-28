@@ -40,17 +40,14 @@ class ServicesController < ApplicationController
     #yapi_perm_check "services.read"
     
     begin
-	  
 #	  @response = Service.find(:one, :from => params[:id].intern, :params => { "custom" => params[:custom]})
-
 #	  @response = Service.find({params[:id]})
 	  
 	  service = Service.new(params[:id])
 	  @response = service.read_status({ "custom" => params[:custom]})
 	  
-	  
 	  Rails.logger.error "RESPONSE \n"
-	  Rails.logger.error @response.inspect
+	  Rails.logger.error @response.to_yaml
 	  Rails.logger.error "++++++++++++++++"
 	  
 	  
@@ -120,16 +117,14 @@ class ServicesController < ApplicationController
 
   # PUT /services/1.xml
   def execute
-    args	= { :execute => params[:id], :custom => params[:custom] }
+    args = { :execute => params[:id], :custom => params[:custom] }
 
     begin
-
-#    response = Service.put(params[:service_id], args)
-    
+   
     service = Service.new(params["service_id"]) 
     ret = service.save(args)
     
-    
+    Rails.logger.debug "*** YaPI RETURNS \n #{ret} \n"
     
     # we get a hash with exit, stderr, stdout
     #ret = Hash.from_xml(response.body)
@@ -154,7 +149,7 @@ class ServicesController < ApplicationController
 
     rescue ActiveResource::ServerError => e
       error = Hash.from_xml e.response.body
-	    logger.warn error.inspect
+      logger.warn error.inspect
       @result_string	= error["error"]["description"] if error["error"]["description"]
       @error_string	= _("Unknown error on server side")
     end
@@ -172,7 +167,7 @@ class ServicesController < ApplicationController
     @service.read_status(params)
     
     respond_to do |format|
-	    format.xml  { render :xml => @service.to_xml(:root => 'service', :dasherize => false, :indent => 2), :location => "none" }
+	format.xml  { render :xml => @service.to_xml(:root => 'service', :dasherize => false, :indent => 2), :location => "none" }
     	format.json { render :json => @service.to_json, :location => "none" }
     end
   end

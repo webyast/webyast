@@ -19,14 +19,10 @@
 
 --- !ruby/object:Service 
 custom: false
-description: "Start network time protocol daemon (NTPD)."
+description: ""
 enabled: false
-name: ntp
-required_for_start: 
-  - network
-  - syslog
+name: aaa
+required_for_start: []
 required_for_stop: []
-status: 3
-summary: "Network time protocol daemon (ntpd)"
-
-
+status: 127
+summary: ""
