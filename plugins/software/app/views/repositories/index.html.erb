@@ -1,1 +1,281 @@
-<%= @repos.to_xml(:root => "repositories", :dasherize => false) -%>
+<!--
+# Copyright (c) 2009-2010 Novell, Inc.
+# 
+# All Rights Reserved.
+# 
+# This program is free software; you can redistribute it and/or modify it
+# under the terms of version 2 of the GNU General Public License
+# as published by the Free Software Foundation.
+# 
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+# GNU General Public License for more details.
+# 
+# You should have received a copy of the GNU General Public License
+# along with this program; if not, contact Novell, Inc.
+# 
+# To contact Novell about this file by physical or electronic mail,
+# you may find current contact information at www.novell.com
+-->
+<%# Sort by priority then by name %>
+<% @repos.sort! {|x,y| x.priority == y.priority ? x.name.upcase <=> y.name.upcase : x.priority <=> y.priority} -%>
+
+<%= javascript_include_tag :defaults %>
+<% javascript_include_tag "jquery.activity", "notifier" %>
+
+<% if JSMIN == false %>
+  <%= stylesheet_link_tag "webyast-repositories" %>
+  <%= stylesheet_link_tag "webyast-plugin-toolbar" %>
+  <%= javascript_include_tag "jquery.quicksearch.js"-%>
+<% end %>
+
+<!-- <div class='plugin-icon' style="display:block; width:101%; padding:0;"><img src='/icons/yast-online_update.png'/><%=_("Software Repositories") %>
+<span id="questionMark" style="vertical-align:middle; float:right; margin:15px 0px 0px 0px;">?</span></div>
+<div class='plugin-content'> -->
+<div class="plugin-content plugin-border">
+  <div class="plugin-header">
+    <div class="left">
+      <label class="plugin-icon-container"><img class="plugin-icon" src="/icons/repositories.png"></label>
+      <label class="plugin-name"><%=_("Software Repositories") %></label>
+      <span id="questionMark" style="margin:0px 5px; float:right;">?</span>
+    </div>
+  </div>
+
+  <div class="clearfix">&nbsp;</div>
+  
+<!--  <div class="loading"></div> -->
+  <% disabled = !@write_permission %>
+  
+  <div id="webyast-toolbar-container">
+    <%=link_to image_tag("home.png", :class=>"home-icon"), :controller=>"controlpanel", :action => :index %>
+
+    <form action="#" id="quicksearch">
+      <label><%= _("Quick Search") %></label>
+      <input type="text" id="repo_search"/>
+    </form>
+    
+    <label for="filter">
+      <%=  _("Filter repositories") %>
+      <% image_tag("/images/filter.png", :style=>"")%>
+    </label>
+    <%= select_tag "filter_repos", options_for_select([[ _("All"), "all"], [ _("Enabled"), "enabled"], [ _("Disabled"), "disabled"]]) %>
+    <%= observe_field("filter_repos", :function => "select_repositories(value)") %>
+
+    <span id="action_link_container">
+      <% if !disabled %>
+        <%= link_to image_tag("/icons/repositories.png", :class=>"action_link_icon") +  (_("New Repository") ), {:action => 'add'} %>
+      <% end %>
+    </span>
+  </div>
+
+  <div style="clear:both; overflow:hidden;"></div>
+  
+  <div id="repositories" class="accordion" style="margin:0 13px;">
+    <% @repos.each do |r| %>
+      <% sid = safe_id(r.id) %>
+      <div class="list-fieldset  <%= r.enabled ? 'repository-enabled' : 'repository-disabled' %>">
+	<div class="list-fieldset-header" id="repo_header_<%= sid -%>">
+	  <%# do quick search only in name and URL => use quicksearch_content class %>
+	  <span class="quicksearch_content">
+	    <div>
+	      <div class="status-icon <%= r.enabled ? 'ok' : 'unused' %>"></div>
+	      <%= h r.name %>
+	    </div>
+	    <small><%= h r.url %></small>
+	  </span>
+	  <span style="float: right; margin-right: 5em"><%= prio_summary r.priority -%></span>
+	</div>
+<!-- 	'<%= _('Please wait') -%>' -->
+	<div class='repository-content' style="display:none">
+	    <% form_for(:repository, r, :url => { :action => 'update', :id => r.id },
+	      :html => { :method => :put, :id => 'repositoryForm_' + sid, :onsubmit => "form_handler('#{sid}')" }
+	    ) do |f| %>
+
+	      <% content_for :head do %>
+		<script type="text/javascript">
+		    $(document).ready(function(){
+		      // validate the form
+		      $("#repositoryForm_<%= sid -%>").validate()
+		    });
+		</script>
+	      <% end %>
+
+	      <p><div class="option_name">Alias: </div><%= h r.id %></p>
+<!--	      <p><div class="option_name">Alias: </div><i><% h r.id %></i></p> -->
+	      
+	      <p><div class="option_name">Name: </div>
+		<%= f.text_field :name, :disabled => disabled, :class => 'required' -%></p>
+
+	      <p><div class="option_name">URL: </div>
+		<%= f.text_field :url, :disabled => disabled, :class => 'repo_url required' -%></p>
+
+	      <p><%= repo_status_msg r.enabled %>
+		<% if !disabled  %>
+		  <%= hidden_field_with_link f, sid, :enabled, r.enabled,
+		    repo_change_msg(!r.enabled) -%>
+		<% end %>
+	      </p>
+
+	      <p><%= refresh_status_msg r.autorefresh %>
+		<% if !disabled  %>
+		  <%= hidden_field_with_link f, sid, :autorefresh, r.autorefresh,
+		    refresh_change_msg(!r.autorefresh) -%>
+		<% end %>
+	      </p>
+
+	      <p><%= keep_status_msg r.keep_packages %>
+		<% if !disabled  %>
+		  <%= hidden_field_with_link f, sid, :keep_packages, r.keep_packages,
+		    keep_change_msg(!r.keep_packages) -%>
+		<% end %>
+	      </p>
+
+	      <div class="nav-buttons">
+		<% if !disabled -%>
+		<div id="progress_<%= sid -%>" style="display: none; margin-bottom: 10px"><img src="/images/working.gif" alt="Working"/><span style="vertical-align: 50%; margin-left: 5px">...Wait...</span></div>
+		  <%= submit_tag _("Save") %>
+		  <span onclick="delete_handler(this, '#progress_<%= sid -%>', '<%= sid -%>')"><%= link_to _("Delete"),
+			  {:action => 'destroy', :id => r.id},
+			  {:confirm => _("Really delete repository '%s'?") % h(r.name), :method => :destroy, :class => :button} %></span>
+		<% end -%>
+	      </div>
+
+	    <% end %>
+	</div>
+      </div>
+    <% end %>
+  </div>
+
+  <div class="clearfix">&nbsp;</div>
+  
+  <div class="button_container webyast_form" style="margin:5px 15px">
+    <div class="hr">&nbsp;</div>
+      <div class="nav-buttons">
+        <%= form_back_button %>
+      </div>
+  </div>
+</div>
+
+<script type="text/javascript">
+  $(document).ready(function(){
+    // define a custom validation function for repository URL
+    jQuery.validator.addMethod("repo_url", function(value, element) {
+      return this.optional(element)
+      // modified regexp from jQuery validation: accept any protocol, not only http(s) and ftp
+      || /^([a-zA-Z]+):\/\/(((([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(%[\da-f]{2})|[!\$&'\(\)\*\+,;=]|:)*@)?(((\d|[1-9]\d|1\d\d|2[0-4]\d|25[0-5])\.(\d|[1-9]\d|1\d\d|2[0-4]\d|25[0-5])\.(\d|[1-9]\d|1\d\d|2[0-4]\d|25[0-5])\.(\d|[1-9]\d|1\d\d|2[0-4]\d|25[0-5]))|((([a-z]|\d|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(([a-z]|\d|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])*([a-z]|\d|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])))\.)+(([a-z]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(([a-z]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])*([a-z]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])))\.?)(:\d*)?)(\/((([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(%[\da-f]{2})|[!\$&'\(\)\*\+,;=]|:|@)+(\/(([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(%[\da-f]{2})|[!\$&'\(\)\*\+,;=]|:|@)*)*)?)?(\?((([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(%[\da-f]{2})|[!\$&'\(\)\*\+,;=]|:|@)|[\uE000-\uF8FF]|\/|\?)*)?(\#((([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(%[\da-f]{2})|[!\$&'\(\)\*\+,;=]|:|@)|\/|\?)*)?$/i.test(value);
+
+    }, <%= jss _("Enter a valid repository URL.") -%>);
+
+    // define a custom validation function for repository alias
+    jQuery.validator.addMethod("repo_alias", function(value, element) {
+      return this.optional(element)
+      // PackageKit does not accept some special characters in alias
+      || /^[^`'"\\\[\]^$\{\}<>]*$/i.test(value);
+
+    }, <%= jss _("Symbols <b>%s</b> are not allowed in repository alias.") % "^${}[]&gt;&lt;`\\'\\\"\\\\" -%>);
+
+    // set custom translatable messages
+    $.extend($.validator.messages, {
+      required: "<%= _("This value cannot be empty.") -%>"
+    });
+
+    $(".accordion").accordion({
+	autoHeight : false,
+	navigation : true,
+	collapsible: true,
+	header     : 'div.list-fieldset div.list-fieldset-header',
+    animated : false
+    });
+
+    $(".accordion").accordion('activate', false);
+
+    <%# if show filter is present then simulate click on the header %>
+    <%# to unfold the repository content %>
+    <% if !@show.blank? && @repos.find{|x| x.id == @show} %>
+      $('#repo_header_<%= safe_id(@show) -%>').click();
+    <% end %>
+
+    $('input#repo_search').quicksearch('#repositories div.list-fieldset', {
+	selector: 'span.quicksearch_content',
+	delay: 100
+    });
+  });
+
+
+  // disable all submit buttons after submitting a form
+  // avoid double submit by accident
+  function disable_forms() {
+    // disable submit buttons
+    $(':submit').attr('disabled', 'disabled');
+    // make all input elements (text fields...) read only
+    $(':input').attr('readonly', 'readonly');
+    // disable all delete buttons
+    $('a.button').attr('onclick','return false;');
+    $('a.button').attr('href','');
+    $('a.button').attr('disabled', 'disabled');
+  };
+
+  // onsubmit handler
+  function form_handler(sid) {
+    if ($('#repositoryForm_' + sid).valid()) {
+      //define message for blockUI
+      var message = <%= jss _("Please wait") -%>;
+      blockForm('repositoryForm_'+sid, message)
+      return true;
+    } else { return false; }
+  }
+
+  // onclick handler for "delete" link parent
+  function delete_handler(elem, progress, sid)
+  {
+    // if there are two childrens then the delete was confirmed
+    // (rails create a dynanic form there)
+    if (elem.childNodes.length == 2)
+    {
+      elem.onclick="";
+      elem.childNodes[0].onclick="return false;";
+      elem.childNodes[0].href="";
+      
+      //define message for blockUI
+      var message = <%= jss _("Please wait") -%>;
+      blockForm('repositoryForm_'+sid, message);
+    }
+  }
+
+  // handler for the filter element
+  function select_repositories (val) {
+    if (val == "all") {
+	$("#repositories > div.list-fieldset").show();
+    }
+    else if (val == "enabled") {
+      $("#repositories > div.list-fieldset.repository-enabled").show();
+      $("#repositories > div.list-fieldset.repository-disabled").hide();
+    }
+    else if (val == "disabled") {
+      $("#repositories > div.list-fieldset.repository-enabled").hide();
+      $("#repositories > div.list-fieldset.repository-disabled").show();
+    };
+    };
+
+  function switch_flag(link, field, deflt, changes) {
+    // change the hidden field and the link text
+    if ($(field).val() == "true") {
+      $(field).val("false");
+      $(link).text(<%= jss _("enable") -%>);
+    } else {
+      $(field).val("true");
+      $(link).text(<%= jss _("disable") -%>);
+    };
+
+    // display/hide the changes text
+    if (deflt == $(field).val()) {
+      $(changes).hide();
+    } else {
+      $(changes).show();
+    };
+  };
+
+  var AUTH_TOKEN = 'authenticity_token=' + encodeURIComponent("<%= escape_javascript form_authenticity_token %>");
+  startNotifier({'module':'repository', 'AUTH_TOKEN':AUTH_TOKEN}, 1000, 11000);
+</script>

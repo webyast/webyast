@@ -46,7 +46,7 @@ class Repository < BaseModel::Base
    validates_inclusion_of :priority, :in => 0..200
 
 
-  def initialize(id, name, enabled)
+  def initialize(id = "", name = "", enabled = true)
     @id = id
     @name = name
     @enabled = enabled
