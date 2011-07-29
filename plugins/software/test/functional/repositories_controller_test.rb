@@ -53,14 +53,14 @@ class RepositoriesControllerTest < ActionController::TestCase
   test "access index xml" do
     mime = Mime::XML
     @request.accept = mime.to_s
-    get :index, :format => :xml
+    get :index
     assert_equal mime.to_s, @response.content_type
   end
 
   test "access index json" do
     mime = Mime::JSON
     @request.accept = mime.to_s
-    get :index, :format => :json
+    get :index
     assert_equal mime.to_s, @response.content_type
   end
 
@@ -72,14 +72,14 @@ class RepositoriesControllerTest < ActionController::TestCase
   test "access show xml" do
     mime = Mime::XML
     @request.accept = mime.to_s
-    get :show, :format => :xml, :id =>"factory-oss"
+    get :show, :id =>"factory-oss"
     assert_equal mime.to_s, @response.content_type
   end
 
   test "access show json" do
     mime = Mime::JSON
     @request.accept = mime.to_s
-    get :show, :format => :json, :id =>"factory-oss"
+    get :show, :id =>"factory-oss"
     assert_equal mime.to_s, @response.content_type
   end
 
@@ -94,8 +94,10 @@ class RepositoriesControllerTest < ActionController::TestCase
     msg_err.error_name = 'DBus error'
 
     Repository.stubs(:find).raises(DBus::Error, msg_err)
+    mime = Mime::XML
+    @request.accept = mime.to_s
 
-    get :index
+    get :index, :format => :xml
     assert_response :missing
   end
 
@@ -111,50 +113,62 @@ class RepositoriesControllerTest < ActionController::TestCase
 
   test "update" do
     Repository.any_instance.stubs(:update).returns(true)
-
-    put :update, :id => "factory-oss", :repositories => @repo_opts
+    mime = Mime::XML
+    @request.accept = mime.to_s
+    put :update, :format => :xml, :id => "factory-oss", :repository => @repo_opts
     assert_response :success
   end
 
   test "update - save failed" do
     Repository.any_instance.expects(:update).returns(false)
-
-    put :update, :id => "factory-oss", :repositories => @repo_opts
+    mime = Mime::XML
+    @request.accept = mime.to_s
+    put :update, :format => :xml, :id => "factory-oss", :repository => @repo_opts
     assert_response :missing
   end
 
   test "update empty parameters" do
     Repository.any_instance.expects(:update).never
 
-    put :update, :id => "factory-oss", :repositories => {}
+    put :update, :id => "factory-oss", :repository => {}
     assert_response 422
   end
 
-  test "create" do
+  test "create html" do
     Repository.any_instance.expects(:update).returns(true)
+    put :create, :id => "factory-oss", :repository => @repo_opts
+    assert_response 302 #redirect
+  end
 
-    put :create, :id => "factory-oss", :repositories => @repo_opts
+
+  test "create xml" do
+    Repository.any_instance.expects(:update).returns(true)
+    mime = Mime::XML
+    @request.accept = mime.to_s
+    put :create, :format => :xml, :id => "factory-oss", :repository => @repo_opts
     assert_response :success
   end
 
   test "create empty parameters" do
     Repository.any_instance.expects(:update).never
 
-    put :create, :id => "factory-oss", :repositories => {}
+    put :create, :id => "factory-oss", :repository => {}
     assert_response 422
   end
 
   test "create save failed" do
     Repository.any_instance.expects(:update).returns(false)
-
-    put :create, :id => "factory-oss", :repositories => @repo_opts
+    mime = Mime::XML
+    @request.accept = mime.to_s
+    put :create, :format => :xml, :id => "factory-oss", :repository => @repo_opts
     assert_response :missing
   end
 
   test "destroy failed" do
     Repository.any_instance.expects(:destroy)
-
-    post :destroy, :id => "factory-oss"
+    mime = Mime::XML
+    @request.accept = mime.to_s
+    post :destroy, :format => :xml, :id => "factory-oss"
     assert_response :missing
   end
 
@@ -162,15 +176,17 @@ class RepositoriesControllerTest < ActionController::TestCase
     Repository.any_instance.expects(:destroy)
     # the first find is successful, the second (after removal) is empty
     Repository.stubs(:find).with('factory-oss').returns([@r1]).then.returns([])
-
-    post :destroy, :id => "factory-oss"
+    mime = Mime::XML
+    @request.accept = mime.to_s
+    post :destroy, :format => :xml, :id => "factory-oss"
     assert_response :success
   end
 
   test "destroy non-existing repo" do
     Repository.any_instance.expects(:destroy).never
-
-    post :destroy, :id => "none"
+    mime = Mime::XML
+    @request.accept = mime.to_s
+    post :destroy, :format => :xml, :id => "none"
     assert_response :missing
   end
 
@@ -181,8 +197,9 @@ class RepositoriesControllerTest < ActionController::TestCase
     msg_err.error_name = 'DBus error'
 
     Repository.any_instance.stubs(:update).raises(DBus::Error, msg_err)
-
-    put :update, :id => "factory-oss", :repositories => @repo_opts
+    mime = Mime::XML
+    @request.accept = mime.to_s
+    put :update, :format => :xml, :id => "factory-oss", :repository => @repo_opts
     assert_response :missing
   end
 
@@ -192,8 +209,9 @@ class RepositoriesControllerTest < ActionController::TestCase
     msg_err.error_name = 'DBus error'
 
     Repository.any_instance.stubs(:update).raises(DBus::Error, msg_err)
-
-    post :create, :id => "factory-oss", :repositories => @repo_opts
+    mime = Mime::XML
+    @request.accept = mime.to_s
+    post :create, :format => :xml, :id => "factory-oss", :repository => @repo_opts
     assert_response :missing
   end
 
@@ -203,8 +221,10 @@ class RepositoriesControllerTest < ActionController::TestCase
     msg_err.error_name = 'DBus error'
 
     Repository.stubs(:find).raises(DBus::Error, msg_err)
+    mime = Mime::XML
+    @request.accept = mime.to_s
 
-    post :destroy, :id => "factory-oss"
+    post :destroy, :format => :xml, :id => "factory-oss"
     assert_response :missing
   end
 
@@ -214,8 +234,10 @@ class RepositoriesControllerTest < ActionController::TestCase
     msg_err.error_name = 'DBus error'
 
     Repository.any_instance.stubs(:destroy).raises(DBus::Error, msg_err)
+    mime = Mime::XML
+    @request.accept = mime.to_s
 
-    post :destroy, :id => "factory-oss"
+    post :destroy, :format => :xml, :id => "factory-oss"
     assert_response :missing
   end
 
@@ -225,8 +247,9 @@ class RepositoriesControllerTest < ActionController::TestCase
 
     r = @repo_opts
     r[:priority] = 'assdfdsf'
-
-    put :create, :id => "factory-oss", :repositories => r
+    mime = Mime::XML
+    @request.accept = mime.to_s
+    put :create, :format => :xml, :id => "factory-oss", :repository => r
     assert_response 422
   end
 
@@ -235,8 +258,9 @@ class RepositoriesControllerTest < ActionController::TestCase
 
     r = @repo_opts
     r[:priority] = -20
-
-    put :create, :id => "factory-oss", :repositories => r
+    mime = Mime::XML
+    @request.accept = mime.to_s
+    put :create, :format => :xml, :id => "factory-oss", :repository => r
     assert_response 422
   end
 
@@ -246,7 +270,7 @@ class RepositoriesControllerTest < ActionController::TestCase
     r = @repo_opts
     r[:priority] = 2000
 
-    put :create, :id => "factory-oss", :repositories => r
+    put :create, :id => "factory-oss", :repository => r
     assert_response 422
   end
 
@@ -256,7 +280,7 @@ class RepositoriesControllerTest < ActionController::TestCase
     r = @repo_opts
     r[:url] = ''
 
-    put :create, :id => "factory-oss", :repositories => r
+    put :create, :id => "factory-oss", :repository => r
     assert_response 422
   end
 
@@ -266,7 +290,7 @@ class RepositoriesControllerTest < ActionController::TestCase
     r = @repo_opts
     r[:id] = ''
 
-    put :create, :id => '', :repositories => r
+    put :create, :id => '', :repository => r
     assert_response 422
   end
 
@@ -276,7 +300,7 @@ class RepositoriesControllerTest < ActionController::TestCase
     r = @repo_opts
     r[:enabled] = 'asdsad'
 
-    put :create, :id => 'factory-oss', :repositories => r
+    put :create, :id => 'factory-oss', :repository => r
     assert_response 422
   end
 
@@ -286,7 +310,7 @@ class RepositoriesControllerTest < ActionController::TestCase
     r = @repo_opts
     r[:keep_packages] = 'asdsad'
 
-    put :create, :id => 'factory-oss', :repositories => r
+    put :create, :id => 'factory-oss', :repository => r
     assert_response 422
   end
 
@@ -295,8 +319,10 @@ class RepositoriesControllerTest < ActionController::TestCase
 
     r = @repo_opts
     r[:autorefresh] = 'asdsad'
+    mime = Mime::XML
+    @request.accept = mime.to_s
+    put :create, :format => :xml, :id => 'factory-oss', :repository => r
 
-    put :create, :id => 'factory-oss', :repositories => r
     assert_response 422
   end
 

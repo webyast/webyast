@@ -80,7 +80,6 @@ class RepositoriesController < ApplicationController
 
     @repo = repos.first
     respond_to do |format|
-      format.html {}
       format.xml { render  :xml => @repo.to_xml( :dasherize => false ) }
       format.json { render :json => @repo.to_json( :dasherize => false ) }
     end
@@ -92,9 +91,14 @@ class RepositoriesController < ApplicationController
 
     #id is either in params or in the struct (create method)
     @repo = Repository.new(params[:id] || param[:id] , param[:name], param[:enabled])
-    param[:autorefresh] = param[:autorefresh] == 'true'
-    param[:enabled] = param[:enabled] == 'true'
-    param[:keep_packages] = param[:keep_packages] == 'true'
+
+    raise InvalidParameters.new({:autorefresh => 'wrong'}) unless ["true","false"].include?(param[:autorefresh].to_s)
+    raise InvalidParameters.new({:enabled => 'wrong'}) unless ["true","false"].include?(param[:enabled].to_s)
+    raise InvalidParameters.new({:keep_packages => 'wrong'}) unless ["true","false"].include?(param[:keep_packages].to_s)
+
+    param[:autorefresh] = param[:autorefresh].to_s == 'true'
+    param[:enabled] = param[:enabled].to_s == 'true'
+    param[:keep_packages] = param[:keep_packages].to_s == 'true'
 
     @repo.load param
     begin
@@ -145,7 +149,8 @@ class RepositoriesController < ApplicationController
       repos = Repository.find(params[:id])
     rescue DBus::Error => exception
       unless request.format.html?
-        render ErrorResult.error(404, 20, "DBus Error: #{exception.dbus_message.error_name}") and return     end
+        render ErrorResult.error(404, 20, "DBus Error: #{exception.dbus_message.error_name}") and return     
+      end
     end
 
     if repos.nil? || repos.size.zero?
