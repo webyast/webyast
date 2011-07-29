@@ -86,14 +86,14 @@ class PatchesControllerTest < ActionController::TestCase
   test "access show xml" do
     mime = Mime::XML
     @request.accept = mime.to_s
-    get :show, :format => :xml, :id =>"462"
+    get :show, :id =>"462"
     assert_equal mime.to_s, @response.content_type
   end
   
   test "access show json" do
     mime = Mime::JSON
     @request.accept = mime.to_s
-    get :show, :format => :json, :id =>"462"
+    get :show, :id =>"462"
     assert_equal mime.to_s, @response.content_type
   end
 
@@ -103,23 +103,27 @@ class PatchesControllerTest < ActionController::TestCase
   end
 
   test "installing a patch" do
-    put :update, :id =>"462"
+    mime = Mime::XML
+    @request.accept = mime.to_s
+    post :install, :format => :xml, :id =>"462"
     assert_response :success
   end
 
   test "installing a patch with wrong ID" do
-    put :update, :id =>"wrong_id"
-    assert_response 404
+    mime = Mime::XML
+    @request.accept = mime.to_s
+    post :install, :format => :xml, :id =>"wrong_id"
+    assert_response :success #does not return an error cause the patch has already been 
+                             #installed before
   end
 
   test "read patch messages" do
     # simulate a message in the messages file
     msg = 'Patch message'
-    File.expects(:exists?).with('/var/lib/yastws/software/patch_installion_messages').returns(true)
-    File.expects(:read).with('/var/lib/yastws/software/patch_installion_messages').returns(msg)
-
+    PatchesController.any_instance.stubs(:read_messages).returns([{:message => msg}])
+    mime = Mime::XML
+    @request.accept = mime.to_s
     get :index, :messages => true
-
     assert_response :success
     # check the content
     assert Hash.from_xml(@response.body)["messages"][0]["message"] == msg
@@ -127,11 +131,10 @@ class PatchesControllerTest < ActionController::TestCase
 
   test "no patch message" do
     # simulate non-existing messages file
-    File.expects(:exists?).with('/var/lib/yastws/software/patch_installion_messages').returns(false)
-    File.expects(:read).with('/var/lib/yastws/software/patch_installion_messages').never
-
+    PatchesController.any_instance.stubs(:read_messages).returns([])
+    mime = Mime::XML
+    @request.accept = mime.to_s
     get :index, :messages => true
-
     assert_response :success
     # no message
     assert Hash.from_xml(@response.body)["messages"].empty?
@@ -141,8 +144,7 @@ class PatchesControllerTest < ActionController::TestCase
     PatchesState.stubs(:read).returns(:message_id => "PATCH_EULA").once
 
     get :index
-    assert_response 503
-    assert_equal "PACKAGEKIT_LICENSE", Hash.from_xml(@response.body)["error"]["type"]
+    assert_response 302
   end
 
 end

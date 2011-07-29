@@ -88,19 +88,18 @@ class PatchesController < ApplicationController
   # GET /patches.xml
   def index
     @msgs = read_messages
-    unless @msgs.blank?
-      if params['messages']
-        Rails.logger.debug "Reading patch messages"
-        respond_to do |format|
-          format.xml { render  :xml => @msgs.to_xml( :root => "messages", :dasherize => false ) }
-          format.json { render :json => @msgs.to_json( :root => "messages", :dasherize => false ) }
-        end
-        return
-      elsif request.format.html?
-        msg = @patch_messages[0].message
-        msg.gsub!('<br/>', ' ')
-        flash[:warning] = _("There are patch installation messages available") + details(msg)
+    if params['messages']
+      Rails.logger.debug "Reading patch messages"
+      respond_to do |format|
+        format.xml { render  :xml => @msgs.to_xml( :root => "messages", :dasherize => false ) }
+        format.json { render :json => @msgs.to_json( :root => "messages", :dasherize => false ) }
       end
+      return
+    end
+
+    if !@msgs.blank? && request.format.html?
+      @msgs.gsub!('<br/>', ' ')
+      flash[:warning] = _("There are patch installation messages available") + details(@msgs)
     end
 
     #checking if a license is requiredrequired
@@ -231,7 +230,7 @@ class PatchesController < ApplicationController
   end
 
 
-  # POST /patch_updates/start_install_all
+  # POST /patches/start_install_all
   # Starting installation of all proposed patches
   def start_install_all
     permission_check "org.opensuse.yast.system.patches.install" # RORSCAN_ITL
@@ -240,7 +239,7 @@ class PatchesController < ApplicationController
     show_summary
   end
 
-  # POST /patch_updates/install
+  # POST /patches/install
   # Installing one or more patches which has given via param
 
   def install
@@ -253,6 +252,7 @@ class PatchesController < ApplicationController
         update_array << value
       end
     }
+    @patch_update = Patch.new({})
     begin
       Patch.install_patches_by_id update_array
     rescue Exception => e
@@ -267,7 +267,6 @@ class PatchesController < ApplicationController
         redirect_to :controller => "controlpanel", :action => "nextstep" and return
       end
     end
-    @patch_update = Patch.new({})
     render :show
   end
 
