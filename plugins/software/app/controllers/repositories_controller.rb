@@ -90,7 +90,8 @@ class RepositoriesController < ApplicationController
     permission_check "org.opensuse.yast.system.repositories.write" # RORSCAN_ITL
     param = params[:repository] || {}
 
-    @repo = Repository.new(param[:id], param[:name], param[:enabled])
+    #id is either in params or in the struct (create method)
+    @repo = Repository.new(params[:id] || param[:id] , param[:name], param[:enabled])
     param[:autorefresh] = param[:autorefresh] == 'true'
     param[:enabled] = param[:enabled] == 'true'
     param[:keep_packages] = param[:keep_packages] == 'true'
