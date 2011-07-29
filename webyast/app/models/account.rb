@@ -59,7 +59,7 @@ class Account < ActiveRecord::Base
   def self.authenticate(login, passwd, remote_ip = "localhost")
      granted = false
      begin
-       # try rPAM first (do not work for local users with yastws account see bnc#582238)
+       # try rPAM first (do not work for local users with webyast account see bnc#582238)
        granted = Rpam.authpam(login, passwd)
      rescue RuntimeError, SecurityError => e
        Rails.logger.info "rpam auth failed with #{e.inspect}"

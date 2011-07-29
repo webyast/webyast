@@ -22,7 +22,7 @@ Configuration of EULAs
  Where EULA_name is the name of the directory containing text of the EULA. The full
  path to this directory is:
 
-   /usr/share/yastws/eulas/licenses/EULA_name/
+   /usr/share/webyast/eulas/licenses/EULA_name/
 
  The EULA_name directory contains plain text files with the text of the EULA. Text
  files should be named using the license.locale.txt format. If the file with an
@@ -39,7 +39,7 @@ Configuration of EULAs
 
   Single license configuration MUST contain english text of the license stored in:
 
-    /usr/share/yastws/eulas/licenses/EULA_name/license.txt
+    /usr/share/webyast/eulas/licenses/EULA_name/license.txt
 
   and /etc/webyast/eulas.yml configuration file:
 
@@ -51,7 +51,7 @@ Configuration of EULAs
 
   If the file:
 
-   /usr/share/yastws/eulas/licenses/EULA_name/no-acceptance-needed
+   /usr/share/webyast/eulas/licenses/EULA_name/no-acceptance-needed
 
   exists, there will be no Accept/Reject options displayed in the UI. After clicking
   Next, the license will be considered accepted.
@@ -59,7 +59,7 @@ Configuration of EULAs
  Translations
  ------------
 
-  All files in /usr/share/yastws/eulas/licenses/EULA_name/ with the name 
+  All files in /usr/share/webyast/eulas/licenses/EULA_name/ with the name 
   license.locale.txt are considered license translation files with 'locale' being 
   the language identification string. No other configuration of the translations 
   is needed.
@@ -70,8 +70,8 @@ Configuration of EULAs
   Sometimes, accepting the license from command line on the target appliance 
   is useful. Entering these commands:
 
-    touch /var/lib/yastws/eulas/accepted-licenses/EULA_name
-    chown yastws /var/lib/yastws/eulas/accepted-licenses/EULA_name
+    touch /var/lib/webyast/eulas/accepted-licenses/EULA_name
+    chown webyast /var/lib/webyast/eulas/accepted-licenses/EULA_name
 
   has the same effect as accepting the license via the UI.
 

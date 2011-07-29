@@ -99,7 +99,7 @@ class ServicesController < ApplicationController
     end
     
     # there's no sense in showing these in UI (bnc#587885)
-    killer_services	= [ "yastwc", "yastws", "dbus", "network", "lighttpd" ]
+    killer_services	= [ "webyast", "dbus", "network", "lighttpd" ]
     all_services.each do |s|
 	    # only leave dependent services that are shown in the UI
 	    s.required_for_start.reject! { |rs| killer_services.include? rs }

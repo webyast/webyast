@@ -122,7 +122,7 @@ install -m 0644 %SOURCE4 $RPM_BUILD_ROOT/etc/polkit-1/localauthority/10-vendor.d
 %endif
 %endif
 
-mkdir -p $RPM_BUILD_ROOT/var/lib/yastws/software/licenses/accepted
+mkdir -p $RPM_BUILD_ROOT/var/lib/webyast/software/licenses/accepted
 
 %clean
 rm -rf $RPM_BUILD_ROOT

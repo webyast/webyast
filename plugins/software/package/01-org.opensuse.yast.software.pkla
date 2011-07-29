@@ -1,5 +1,5 @@
 [Allow PackageKit operations for the WebYaST REST service]
-Identity=unix-user:yastws
+Identity=unix-user:webyast
 # allow package update and repository management
 Action=org.freedesktop.packagekit.system-update;org.freedesktop.packagekit.system-sources-configure
 ResultAny=yes

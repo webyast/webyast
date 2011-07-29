@@ -158,8 +158,8 @@ task :grant_policies do |t|
   puts "You must deploy webyast first!" and return unless File.exists? "/usr/sbin/grantwebyastrights"
   system "/usr/sbin/grantwebyastrights --user root --action grant >/dev/null 2>&1"
   raise "Error on execute '/usr/sbin/grantwebyastrights --user root --action grant '" if $?.exitstatus != 0
-  system "/usr/sbin/grantwebyastrights --user yastws --action grant >/dev/null 2>&1"
-  raise "Error on execute '/usr/sbin/grantwebyastrights --user yastws --action grant '" if $?.exitstatus != 0
+  system "/usr/sbin/grantwebyastrights --user webyast --action grant >/dev/null 2>&1"
+  raise "Error on execute '/usr/sbin/grantwebyastrights --user webyast --action grant '" if $?.exitstatus != 0
 end
 
 desc "Deploy for development - create dirs, install configuration files and custom yast modules. Then install and update PolKit policies for root."

@@ -122,8 +122,8 @@ test_version :generic, 'yast2-dbus-server'
 test_module :generic, 'rpam', 'rubygem-rpam'
 test_module :generic, 'polkit', 'rubygem-polkit'
 
-test_group :production, 'yastws'
-test_user :production, 'yastws'
+test_group :production, 'webyast'
+test_user :production, 'webyast'
 
 
 #
