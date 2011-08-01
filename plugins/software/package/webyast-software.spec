@@ -156,6 +156,7 @@ polkit-auth --user %{webyast_user} --grant org.freedesktop.packagekit.package-eu
 %{plugin_dir}/app
 %{plugin_dir}/lib
 %{plugin_dir}/config
+%{plugin_dir}/shortcuts.yml
 %attr(644,root,root) %config /usr/share/PolicyKit/policy/org.opensuse.yast.system.patches.policy
 %attr(644,root,root) %config /usr/share/PolicyKit/policy/org.opensuse.yast.system.packages.policy
 %attr(644,root,root) %config /usr/share/PolicyKit/policy/org.opensuse.yast.system.repositories.policy
