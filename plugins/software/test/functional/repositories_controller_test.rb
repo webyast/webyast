@@ -48,6 +48,9 @@ class RepositoriesControllerTest < ActionController::TestCase
   test "access index" do
     get :index
     assert_response :success
+    assert_valid_markup
+    assert_not_nil assigns(:repos)
+    assert flash.empty?
   end
 
   test "access index xml" do
@@ -129,7 +132,6 @@ class RepositoriesControllerTest < ActionController::TestCase
 
   test "update empty parameters" do
     Repository.any_instance.expects(:update).never
-
     put :update, :id => "factory-oss", :repository => {}
     assert_response 422
   end
@@ -137,7 +139,9 @@ class RepositoriesControllerTest < ActionController::TestCase
   test "create html" do
     Repository.any_instance.expects(:update).returns(true)
     put :create, :id => "factory-oss", :repository => @repo_opts
-    assert_response 302 #redirect
+    assert_valid_markup
+    assert flash[:message] == "Repository 'name' has been updated."
+    assert_response :redirect 
   end
 
 
@@ -151,7 +155,6 @@ class RepositoriesControllerTest < ActionController::TestCase
 
   test "create empty parameters" do
     Repository.any_instance.expects(:update).never
-
     put :create, :id => "factory-oss", :repository => {}
     assert_response 422
   end

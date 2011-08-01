@@ -287,7 +287,7 @@ class PatchesController < ApplicationController
     respond_to do |format|
       format.html {
         @license = Patch.license.first
-        @text = @license[:text]
+        @text = @license[:text] if @license
         if @text =~ /DT:Rich/ #text is richtext for packager
           #rid of html tags
           @text.gsub!(/&lt;.*&gt;/,'')

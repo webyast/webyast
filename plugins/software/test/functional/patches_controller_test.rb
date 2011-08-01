@@ -142,9 +142,13 @@ class PatchesControllerTest < ActionController::TestCase
 
   test "license required" do
     PatchesState.stubs(:read).returns(:message_id => "PATCH_EULA").once
-
     get :index
-    assert_response 302
+    assert_redirected_to :action => "license"
+  end
+
+  def test_show_license
+    get :license
+    assert_response :success
   end
 
 end
