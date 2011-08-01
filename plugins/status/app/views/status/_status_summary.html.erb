@@ -21,8 +21,7 @@
 #++
 %>
 
-<% unauthorized = error.class == ActiveResource::UnauthorizedAccess -%>
-<%if error && !unauthorized %>
+<%if error %>
   <%= report_error(error, _("An problem occured when loading status information.")) %>
 <% end %>
 
@@ -45,13 +44,7 @@
   <% end -%>
 
 <% else %>
-  <% if unauthorized -%>
-    <div class="statusbar_row">
-      <a href="status" class="warning_message">
-        <span><%= _("Cannot read system status - you have been logged out.") %></span><!-- RORSCAN_ITL -->
-      </a>
-    </div>
-  <% elsif !error %>
+  <% if !error %>
     <% javascript_tag do -%>
       if($('#status-eye').hasClass("eye_warning") == false) { 
         $('#status-eye').addClass('eye_healthy'); 
@@ -70,7 +63,7 @@
   <% end %>
 <% end %> <!- if else -->
 
-<% if refresh_timeout.to_i > 0 && !unauthorized -%>
+<% if refresh_timeout.to_i > 0 -%>
   <!-- refresh the status again after a timeout -->
   <% javascript_tag do -%>
     setTimeout(function() {
