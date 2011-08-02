@@ -1,0 +1,157 @@
+<!--
+# Copyright (c) 2009-2010 Novell, Inc.
+# 
+# All Rights Reserved.
+# 
+# This program is free software; you can redistribute it and/or modify it
+# under the terms of version 2 of the GNU General Public License
+# as published by the Free Software Foundation.
+# 
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+# GNU General Public License for more details.
+# 
+# You should have received a copy of the GNU General Public License
+# along with this program; if not, contact Novell, Inc.
+# 
+# To contact Novell about this file by physical or electronic mail,
+# you may find current contact information at www.novell.com
+-->
+
+  <% if JSMIN == true %>
+    <%= javascript_include_tag "min/users-min.js"-%>
+  <% else %>
+    <%= stylesheet_link_tag "webyast-users" %>
+    <%= javascript_include_tag "users.js" %>
+    <%= javascript_include_tag "select_dialog.js" %>
+  <% end %>
+
+  <% if @permissions[:usersget] != true %>
+    <script language="javascript">
+      function members_validation(which){ return true; }
+    </script>
+  <% end %>
+
+  <style type="text/css">
+    .GContainerUser, .GContainerGroups {
+        float: left;
+        margin: 3px;
+        border: #669999 2px solid;
+        padding: 5px;
+     }
+     .GBox {
+        border: #000 1px solid;
+        cursor: pointer;
+        display: block;
+        float: left;
+        font-family: verdana, tahoma, arial;
+        font-size: 10px;
+        margin-bottom: 5px;
+        padding: 2px;
+        width: 94px;
+     }
+     #ContainerUser .GBox {
+        background-color: #eee;
+     }
+  </style>
+
+<script language="javascript">
+
+  function select_users_dialog() {
+    var open_dialog = select_many_dialog({
+      kind : 'users',
+      title : <%= jss _('Select Members') %>,
+      selected_title : <%= jss _('Selected Members') %>,
+      unselected_title : <%= jss _('Available Members') %>,
+      tooltip : <%= jss _('Click user names to select/unselect members') %>,
+      loadItems : function (dialogId) { 
+        return $('#form_'+dialogId+' #group_members_string')[0].value.split(",");
+      },
+      storeItems : function (dialogId, items) { 
+        $('#form_'+dialogId+' #group_members_string')[0].value = items.join(",");
+      },
+      allItems : function (dialogId) { 
+        return $('#all_users_string')[0].value.split(",");
+      }
+    });
+    return open_dialog;
+  }
+
+  $(document).ready(function(){
+    select_users_open = select_users_dialog();
+  });  
+</script>
+<%
+ disabled = ! ((@permissions[:groupadd] && @adding) || (@permissions[:groupmodify] && !@adding)) %>
+
+<!-- <div class='plugin-icon'><img alt="yast-groups" src='/icons/yast-groups.png' alt="groups module"/>
+  <%=_("Groups") + header_spacer %><span id="questionMark">?</span>
+  <%= _("Add new group") %>
+</div> -->
+
+<!--<div class="plugin-content"> -->
+<div id="new_group" class="plugin-content plugin-border">
+  <%= render :partial => 'shared/missing_write_permissions' if disabled %>
+  
+  <div class="plugin-header">
+    <div class="left">
+      <label class="plugin-icon-container"><img class="plugin-icon" src="/icons/groups.png"></label>
+      <label class="plugin-name"><%= _("Groups") + header_spacer + _("Add new group")%></label>
+    </div>
+  </div>
+  
+  <div class="clearfix">&nbsp;</div>
+    <% form_for :group, :url => { :action => "create" }, :html => { :id => "form_", :class=>"webyast_form", :autocomplete => :off, :onsubmit => "form_handler('')"}  do |f| %>
+      <%= f.hidden_field :old_cn %>
+
+      <fieldset class="webyast_fieldset">
+        <div class="fieldset_header">
+           <span class="fieldset_header_title" >
+           <%= _("Add new group") %>
+            <!--<span style="float:none; color:#777777; font-size:10px; margin-left:2px;">(manual)</span>-->
+          </span>
+        </div>
+        
+        <div class="fieldset_body">
+          <div class="row manual">
+            <label><%=_("Group Name")%></label>
+            <%= f.text_field :cn, :disabled => false, :class => "required" %>
+          </div>
+          <div class="row manual">
+            <label><%=_("Members")%></label>
+            <%= f.text_field :members_string, :disabled => false, :onkeyup => "members_validation(this);" %>
+            <% if @permissions[:usersget] == true %>
+            <a href="#" id="manage_members" class="button" onClick="select_users_open('');return false;"><%= _("Manage Members") -%></a>
+            <%= f.hidden_field :group_type %><label class="error"></label>
+              <div class="clearfix">&nbsp;</div>
+          <% end %>
+          </div>
+       </div>
+      </fieldset>
+
+      <div style="padding:5px 5px;">
+       <div class="nav-buttons">
+         <div class="hr">&nbsp;</div>
+          <div class="clearfix">&nbsp;</div>
+        
+        <!--<div id="progress_" style="display: none; margin-bottom: 10px"><img src="/images/working.gif" alt="Working"/><span style="vertical-align: 50%; margin-left: 5px">...Wait...</span></div>-->
+          
+          <% message = _('Please wait')%>
+          <%= submit_tag _("Save"), 
+          :onclick=>"return $('#form_').validate({
+            submitHandler: function(form) {
+              var message = '#{message}'; 
+              $.modalDialog.wait( {message: message}); 
+              form.submit();
+            }
+          });" %>
+
+         <%= form_str_spacer %>
+         <%= form_cancel_button :action => :index %>
+      </div>
+    <% end %>
+
+    <div><input type="hidden" id="all_users_string" value="<%= @all_users_string %>" /></div>
+    <div><input type="hidden" id="system_users_string" value="<%= @all_sys_users_string %>" /></div>
+</div>

@@ -28,7 +28,8 @@ class Group < BaseModel::Base
   attr_accessor :old_cn          # for group identification when changing group name
   attr_accessor :default_members # list of user names, which have this group as default
   attr_accessor :members         # list of users explicitaly added into this group
-  attr_accessor :group_type            # type of the group ... system or local # RORSCAN_ITL
+  attr_accessor :group_type      # type of the group ... system or local # RORSCAN_ITL
+  attr_accessor :members_string
 
   attr_accessible :cn, :old_cn, :gid, :default_members, :members, :group_type
 

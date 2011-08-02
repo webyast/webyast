@@ -1,0 +1,165 @@
+<!--
+# Copyright (c) 2009-2010 Novell, Inc.
+# 
+# All Rights Reserved.
+# 
+# This program is free software; you can redistribute it and/or modify it
+# under the terms of version 2 of the GNU General Public License
+# as published by the Free Software Foundation.
+# 
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+# GNU General Public License for more details.
+# 
+# You should have received a copy of the GNU General Public License
+# along with this program; if not, contact Novell, Inc.
+# 
+# To contact Novell about this file by physical or electronic mail,
+# you may find current contact information at www.novell.com
+-->
+      <input type="hidden" id="all_users_string" value="<%= @all_users_string %>" />
+      <div class="fieldset-group tabs_<%= user.uid %>">
+
+      <fieldset id="tab_login_<%=  (new ? "" : user.uid) %>">
+       <legend><span><%= _("Login Settings") %></span></legend>
+       <table border=0>
+	<tr><td>
+          <div class="label"><%=_("Full Name")%></div>
+	</td><td colspan=2>
+          <%= f.text_field :cn , :disabled => disabled, :onblur => "propose_login(this.parentNode.parentNode);" %>
+	</td></tr>
+
+	<tr><td>
+          <div class="label"><%=_("Login Name")%></div>
+	</td><td>
+          <%= f.text_field :uid, :disabled => disabled, :onblur => "$('#form_"+ (new ? "" : user.uid)  +"').validate().element('#user_uid');", :onkeyup => "user_exists_validation(this);", :class => "required" %>
+	</td><td>
+          <label id="user_name-error" class="error" style="display:none"><%= _('User already exists.') %></label>
+          <%= f.hidden_field :id %>
+	</td></tr>
+
+	<tr><td>
+          <div class="label"><%=_("Password")%></div>
+	</td><td colspan=2 rowspan=2>
+          <%= f.password_field :user_password, :onkeyup => "$('#form_"+ (new ? "" : user.uid) +"').validate().element('#user_user_password');", :disabled => disabled, :class => (new ? "user-password required" : "user-password") %>
+	</td></tr>
+	<tr><td>&nbsp;</td></tr>
+
+	<tr><td>
+          <div class="label"><%=_("Confirm Password")%></div>
+	</td><td colspan=2>
+          <%= f.password_field :user_password2, :disabled => disabled, :equalTo => "#form_"+ (new ? "" : user.uid) +" #user_user_password", :onkeyup => "$('#form_"+ (new ? "" : user.uid) +"').validate().element('#form_"+ (new ? "" : user.uid) +" #user_user_password2');" %>
+	  <label for="user_user_password2" generated="true" class="error"></label>
+	</td></tr>
+      </table>
+     </fieldset>
+
+      <fieldset id="tab_groups_<%= (new ? "" : user.uid) %>">
+      <legend><span><%=_("Groups")%></span></legend>
+      <table>
+	<tr>
+	  <td>
+	      <div class="label"><%=_("Groups")%></div>
+	  </td>
+	  <td>
+	      <%= f.text_field :grp_string, :disabled => disabled, :onkeyup => "groups_validation(this);", :class => "grp-string" %>
+	  </td>
+	  <td>
+	    <% if @permissions[:groupsget] == true %>
+		<%= 
+		    action = (disabled) ? "" : "select_groups_open('"+(new ? "" : user.uid)+"');return false;"
+		    link_to _("Manage Groups"), {}, :href => "#", :onClick => action, :class => "button", :disabled => disabled
+		%>
+	    <% end %>
+	  </td>
+	  <td>
+	    <label id="groups-error" class="error"></label>  
+	  </td>
+	</tr>
+	<tr>
+	  <td>
+            <div class="label"><%=_("Default Group")%></div>
+	  </td>
+	  <td>
+            <%= f.text_field :groupname, :disabled => disabled, :class => "groupname", :onkeyup => "def_group_validation(this);" %>
+	  </td>
+	  <td>
+	  <% if @permissions[:groupsget] == true %>
+	      <%= 
+		  action = (disabled) ? "" : "select_default_group_open('"+user.uid.to_s+"');return false;"
+		  link_to _("Select Default Group"), {}, :href => "#", :onClick => action, :class => "button", :disabled => disabled
+	      %>
+	  <% end %>
+	  </td>
+	  <td>
+	      <label id="def-group-error" class="error"></label>
+	  </td>
+	</tr>
+       </table>
+      </fieldset>
+
+      <fieldset id="tab_advanced_<%= (new ? "" : user.uid) %>">
+      <legend><span><%= _("Advanced") %></span></legend>
+      <table>
+	<tr><td>
+            <div class="label"><%=_("Home Directory")%></div>
+	</td><td colspan=2>
+            <%= f.text_field :home_directory, :disabled => disabled %>
+	</td></tr>
+
+	<tr><td>
+            <div class="label"><%=_("Login Shell")%></div>
+	</td><td colspan=2>
+            <%= f.text_field :login_shell, :disabled => disabled %>
+	</td></tr>
+
+	<tr><td>
+            <div class="label"><%=_("UID Number")%></div>
+	</td><td colspan=2>
+            <%= f.text_field :uid_number, :disabled => disabled, :min => 1000, :class => "number", :onkeyup => "$('#form_"+ (new ? "" : user.uid) +"').validate().element('#user_uid_number');"  %>
+            <label id="uid-error" class="error"></label>
+	</td></tr>
+       </table>
+      </fieldset>
+
+      <fieldset id="tab_roles_<%= (new ? "" : user.uid) %>">
+      <legend><span><%= _("Roles") %></span></legend>
+       <table>
+	<tr>
+	  <td>
+	    <%= f.text_field :roles_string, :disabled => false, :class => "roles-string",  :onkeyup => "roles_validation(this);"  %>
+	  </td>
+	  <td>
+	    <%= 
+		action = (disabled) ? "" : "select_roles_open('"+user.uid.to_s+"');return false;"
+		link_to _("Manage Roles"), {}, :href => "#", :onClick => action, :class => "button", :disabled => disabled
+	    %>
+	 </td>
+	 <td>
+            <label id="roles-error" class="error"></label>
+	 </td>
+	</tr>
+       </table>
+      </fieldset>
+  </div>
+
+   <div style="padding:0px 0px;">
+   <div class="nav-buttons">
+    <div class="hr">&nbsp;</div>
+    <div id="progress_<%= (new ? "" : user.uid) -%>" style="display: none; margin-bottom: 10px"><img src="/images/working.gif" alt="Working"/><span style="vertical-align: 50%; margin-left: 5px">...Wait...</span></div>
+       <%= submit_tag _("Save"), :onclick=>"return user_validation(this, '"+ (new ? "" : user.uid) +"');", :disabled => disabled  %>
+       <% if @permissions[:userdelete] && !new %>
+         <span onclick="delete_handler(this, '#progress_<%= user.uid -%>', '<%= _('Please wait') -%>');">
+           <%= link_to _("Delete"),
+                       {:action => 'destroy', :id => user.uid},
+                       {:confirm => _("Are you sure to delete user '%s'?") % user.uid, :method => :destroy, :class => :button} %>
+         </span>
+       <% elsif new %>
+    	<%= form_str_spacer %>
+    	<%= form_cancel_button :action => :index%>
+       <% end %>
+    </div>
+ </div>
+
+

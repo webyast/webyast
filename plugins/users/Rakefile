@@ -30,3 +30,9 @@ task :deploy_local do |t|
   mkdir_p "/usr/share/PolicyKit/policy/"
   cp_r    "package/org.opensuse.yast.modules.yapi.users.policy", "/usr/share/PolicyKit/policy/"
 end
+
+#import rake task files from plugins directory 
+Dir.glob(File.dirname(__FILE__) + "/lib/tasks/*.rake").each do |rake_file|
+  import rake_file
+end
+

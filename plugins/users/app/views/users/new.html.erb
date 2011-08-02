@@ -1,0 +1,226 @@
+<!--
+# Copyright (c) 2009-2010 Novell, Inc.
+# 
+# All Rights Reserved.
+# 
+# This program is free software; you can redistribute it and/or modify it
+# under the terms of version 2 of the GNU General Public License
+# as published by the Free Software Foundation.
+# 
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+# GNU General Public License for more details.
+# 
+# You should have received a copy of the GNU General Public License
+# along with this program; if not, contact Novell, Inc.
+# 
+# To contact Novell about this file by physical or electronic mail,
+# you may find current contact information at www.novell.com
+-->
+<% content_for :head do %>
+  <% if JSMIN == true %>
+    <%= javascript_include_tag "min/users-min" -%>
+  <% else %>
+    <%= stylesheet_link_tag "webyast-users" %>
+    <%= javascript_include_tag "users.js" %>
+    <%= javascript_include_tag "select_dialog.js" %>
+  <% end %>
+
+<!-- if no groups, disable validation-->
+<% if @permissions[:groupsget] != true %>
+<script language="javascript">
+function groups_validation(which){ return true; }
+function def_group_validation(which){ return true; }
+</script>
+<% end %>       
+
+  <style type="text/css">
+    .GContainerUser, .GContainerGroups {
+        float: left;
+        margin: 3px;
+        border: #669999 2px solid;
+        padding: 5px;
+     }
+     .GContainerUser {
+        width: 100px;
+     }
+     .GContainerGroups {
+        width: 400px;
+     }
+     .GBox {
+        border: #000 1px solid;
+        cursor: pointer;
+	display: block;
+	float: left;
+        font-family: verdana, tahoma, arial;
+        font-size: 10px;
+        margin-bottom: 5px;
+        padding: 2px;
+        width: 94px;
+     }
+     #ContainerUser .GBox {
+        background-color: #eee;
+     }
+
+    #form_ label.error {margin-left:5px}
+    #password-strength {
+	left: 0em;
+    }
+  </style>
+
+<script language='javascript'>
+  function select_groups_dialog() {
+    var open_dialog = select_many_dialog({
+      kind : 'groups',
+      title : <%= jss _('Select Groups') %>,
+      selected_title : <%= jss _('Selected Groups') %>,
+      unselected_title : <%= jss _('Available Groups') %>,
+      tooltip : <%= jss _('Click group names to select/unselect groups') %>,
+      loadItems : function (dialogId) { 
+        return $('#form_ #user_grp_string')[0].value.split(",")
+      },
+      storeItems : function (dialogId, items) { 
+        $('#form_ #user_grp_string')[0].value = items.join(",");
+      },
+      allItems : function (dialogId) { 
+        return $('#all_grps_string')[0].value.split(",") 
+      }
+    });
+    return open_dialog;
+  };
+  
+  function select_default_group_dialog() {
+    var open_dialog = select_one_dialog({
+      kind : 'group',
+      title : <%= jss _('Select Default Group') %>,
+      tooltip : <%= jss _('Click a group name to choose users default group') %>,
+      allItems : function (dialogId) {
+        return $('#all_grps_string')[0].value.split(",")
+      },
+      storeItem : function (dialogId, item) {
+        $('#form_ #user_groupname')[0].value = item;
+      }
+    });
+    return open_dialog;
+  };
+
+  function select_roles_dialog() {
+    var open_dialog = select_many_dialog({
+      kind : 'roles',
+      title : <%= jss _('Select Roles') %>,
+      selected_title : <%= jss _('Selected Roles') %>,
+      unselected_title : <%= jss _('Available Roles') %>,
+      tooltip : <%= jss _('Click group names to select/unselect roles') %>,
+      loadItems : function (dialogId) { 
+        return $('#form_'+dialogId+' .roles-string')[0].value.split(",")
+      },
+      storeItems : function (dialogId, items) { 
+        $('#form_'+dialogId+' .roles-string')[0].value = items.join(",");
+      },
+      allItems : function (dialogId) { 
+        return $('#all_roles_string')[0].value.split(",") 
+      }
+    });
+    return open_dialog;
+  };
+
+  $(document).ready(function(){
+    select_groups_open = select_groups_dialog();
+    select_default_group_open = select_default_group_dialog();
+    select_roles_open = select_roles_dialog();
+
+// TODO: double validation? ask mzugec before remove it (fix for bnc#600765)
+// if it is a fix, then the second validation with rules will be never triggered
+//    $("#form_").validate({ 
+//       submitHandler: function(form) {
+//        alert("call1");
+//       }
+//    });
+
+// make the error message translatable - override the default messsage
+   $.extend($.validator.messages, {
+     equalTo:  "<%= _("The passwords do not match.") -%>",
+     required: "<%= _("This field is required.") -%>"
+   });
+
+   $("#form_").validate({
+    rules: {
+      user_password: "required",
+      user_password2: {
+        equalTo: "#user_password"
+      }
+    },
+    submitHandler: function(form) {
+      var message = <%= jss _("Please wait") -%>;
+      //disableFormOnSubmit(message);
+      $.modalDialog.wait( {message: message});
+      form.submit();
+    }
+    
+   });
+
+   $("#user_user_password").pstrength({
+      'displayMinChar'      : true,
+      'minCharText'      : <%= jss _("Password Strength:") %>, 
+      'verdicts'      : [
+            <%= jss _("Weak") %>,
+            <%= jss _("Normal") %>,
+            <%= jss _("Medium") %>,
+            <%= jss _("Strong") %>,
+            <%= jss _("Very Strong") %>
+          ],
+      });
+
+
+ })
+
+    // start password validation workaround only when "Save" button has been pressed
+    password_validation_enabled = false;
+</script>
+<% end %>
+
+<% content_for :before_script do %>
+  <% javascript_tag do %>
+    $(document).ready(function(){
+      // to switch from tabs to accordion, just uncomment this and comment the lower tabs section
+      /*
+      $(".fieldset-group").accordion({
+        autoHeight : false,
+        navigation : true,
+        header     : 'fieldset legend',
+        animated   : false,
+        collapsible: true
+      });
+      */
+      addTabsNavigation(".fieldset-group", "span");
+      $(".fieldset-group").tabs();
+    });
+  <% end %>
+<% end %>
+
+<% disabled = ! @permissions[:useradd] %>
+<!-- <div class='plugin-icon'><img src='/icons/yast-users.png' alt="users module"/>
+  <%_("Users") + header_spacer + _("Add new user")%>
+</div>
+
+<div class="plugin-content"> -->
+<div id="new_user" class="plugin-content plugin-border">
+
+  <div class="plugin-header">
+    <div class="left">
+      <label class="plugin-icon-container"><img class="plugin-icon" src="/icons/users.png"></label>
+      <label class="plugin-name"><%= _("Users") + header_spacer + _("Add new user")%></label>
+    </div>
+  </div>
+
+  <div class="clearfix">&nbsp;</div>
+
+ <% form_for :user, :url => { :action => "create"}, :html => { :id => "form_", :class=>"webyast_form", :autocomplete => :off, :onsubmit => "form_handler('')",}  do |f| %>
+  <%= render :partial => "user_form", :locals =>{ :f => f, :disabled => disabled, :user => @user, :new => true } %>
+
+ <% end %>
+	    <div><input type="hidden" id="all_grps_string" value="<%= @all_grps_string %>" /></div>
+            <div><input type="hidden" id="all_roles_string" value="<%= @all_roles_string %>" /></div>
+            <div><input type="hidden" id="all_users_string" value="<%= @all_users_string %>" /></div>
+</div>

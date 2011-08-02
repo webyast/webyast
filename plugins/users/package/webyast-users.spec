@@ -15,6 +15,7 @@ Provides:       WebYaST(org.opensuse.yast.modules.yapi.groups)
 Provides:       yast2-webservice-users = %{version}
 Obsoletes:      yast2-webservice-users < %{version}
 PreReq:         yast2-webservice
+Requires:       webyast-roles
 License:        GPL-2.0 
 Group:          Productivity/Networking/Web/Utilities
 URL:            http://en.opensuse.org/Portal:WebYaST
@@ -27,7 +28,7 @@ Source1:        org.opensuse.yast.modules.yapi.users.policy
 BuildRoot:      %{_tmppath}/%{name}-%{version}-build
 BuildArch:      noarch
 
-BuildRequires:  webyast-base-testsuite
+BuildRequires:  webyast-base-testsuite webyast-roles
 BuildRequires:	rubygem-test-unit rubygem-mocha
 
 #
@@ -38,7 +39,7 @@ BuildRequires:	rubygem-test-unit rubygem-mocha
 %package testsuite
 Group:    Productivity/Networking/Web/Utilities
 Requires: %{name} = %{version}
-Requires: webyast-base-testsuite
+Requires: webyast-base-testsuite webyast-roles
 Summary:  Testsuite for webyast-users package
 
 %description

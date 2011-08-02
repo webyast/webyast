@@ -36,7 +36,10 @@ class User
   attr_accessor_with_default :home_directory, ""
   attr_accessor_with_default :login_shell, ""
   attr_accessor_with_default :user_password, ""
+  attr_accessor_with_default :user_password2, ""
   attr_accessor_with_default :type, "local"
+  attr_accessor_with_default :grp_string, ""
+  attr_accessor_with_default :roles_string, ""
 
 public
 
@@ -111,8 +114,8 @@ public
     ret = YastService.Call("YaPI::USERS::UserDelete", config)
     Rails.logger.debug "Command returns: #{ret}"
     YastCache.delete(self, uid)
-    raise ret if not ret.blank?
-    return (ret == "")
+    raise ret unless ret.blank?
+    return true
   end
 
   # user.destroy
@@ -187,6 +190,14 @@ ATTR_ACCESSIBLE = [:cn, :uid, :uid_number, :gid_number, :grouplist, :groupname,
     config = {}
     user = User.new
     user.load_attributes(attrs)
+    user.grouplist = []
+    if user.grp_string != nil
+       user.grp_string.split(",").each do |groupname|
+	  group = { "cn" => groupname.strip }
+	  user.grouplist.push group
+       end
+    end
+
     data = user.retrieve_data
     
     config.store("type", [ "s", "local" ])
