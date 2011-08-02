@@ -63,6 +63,22 @@ class UsersController < ApplicationController
     end
   end
 
+  def all_users
+    all_users_list = []
+    all_users = User.find :all
+    all_users.each do |user|
+      all_users_list.push(user.uid)
+    end
+    all_users_list.join(",")
+  end
+
+  def permission_read
+    @permissions = {:groupsget => false, :useradd => false, :usermodify => false, :userdelete => false}
+    @permissions[:usermodify] = true if yapi_perm_granted? "users.usermodify"
+    @permissions[:groupsget] = true if yapi_perm_granted? "users.groupsget"
+    @permissions[:useradd] = true if yapi_perm_granted? "users.useradd"
+    @permissions[:userdelete] = true if yapi_perm_granted? "users.userdelete"
+  end
 
   # Initialize GetText and Content-Type.
   init_gettext "webyast-users"
@@ -76,6 +92,7 @@ class UsersController < ApplicationController
   # GET /users.xml
   # GET /users.json
   def index
+    permission_read
     yapi_perm_check "users.usersget"
     if params[:getent] == "1"
       respond_to do |format|
@@ -94,10 +111,6 @@ class UsersController < ApplicationController
         flash[:error] = _("No users found.")
       end
     else
-      @permissions = {:groupsget => false, :useradd => false, :usermodify => false}
-      @permissions[:usermodify] = true if permission_granted? "org.opensuse.yast.modules.yapi.users.usermodify"
-      @permissions[:groupsget] = true if permission_granted? "org.opensuse.yast.modules.yapi.users.groupsget"
-      @permissions[:useradd] = true if permission_granted? "org.opensuse.yast.modules.yapi.users.useradd"
       @users.each do |user|
         user.user_password2 = user.user_password
         user.uid_number	= user.uid_number
@@ -149,22 +162,9 @@ class UsersController < ApplicationController
   # GET /users/new
   # GET /users/new.xml
   def new
+    permission_read
     yapi_perm_check "users.useradd"
-    @user = User.new( :id => :nil,
-      :groupname	=> nil,
-      :cn		=> nil,
-      :grouplist	=> [],
-      :allgroups	=> [],
-      :home_directory	=> nil,
-      :cn		=> nil,
-      :uid		=> nil,
-      :uid_number	=> nil,
-      :login_shell	=> "/bin/bash",
-      :user_password	=> nil,
-      :user_password2	=> nil,
-      :type		=> "local",
-      :roles_string	=> ""
-    )
+    @user = User.new()
     @all_roles_string = ""
     all_roles=[]
     @roles = Role.find :all
@@ -202,16 +202,6 @@ class UsersController < ApplicationController
     @user.grp_string = ""
 
     @all_grps_string = ""
-
-    # FIXME hack, this must be done properly
-    # (my keys in camelCase were transformed to under_scored)
-    # XXX this looks like code which do nothing!!!
-#    @user.uid_number	= @user.uid_number
-#    @user.home_directory	= @user.home_directory
-#    @user.login_shell	= @user.login_shell
-#    @user.user_password	= @user.user_password
-#    @user.user_password2= @user.user_password
-
     @user.grouplist.each do |group|
        if @user.grp_string.blank?
           @user.grp_string = group.cn
@@ -233,17 +223,17 @@ class UsersController < ApplicationController
   # POST /users.xml
   # POST /users.json
   def create
+    permission_read
     yapi_perm_check "users.useradd"
     error = nil
     begin
-      @user = User.create(params[:users])
+      @user = User.create(params[:user])
       if @user.roles_string!=nil
         save_roles(@user.id,@user.roles_string)
       end
     rescue Exception => error
       logger.error(error.message)
     end
-
     if error
       respond_to do |format|
         format.xml  { render ErrorResult.error(404, 2, error.message) }
@@ -313,7 +303,6 @@ class UsersController < ApplicationController
   # DELETE /users/1.json
   def destroy
     yapi_perm_check "users.userdelete"
-
     begin
       @user = User.find(params[:id])
       @user.destroy

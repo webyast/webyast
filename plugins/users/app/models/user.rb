@@ -31,10 +31,9 @@ class User
   attr_accessor_with_default :uid_number, ""
   attr_accessor_with_default :gid_number, ""
   attr_accessor_with_default :grouplist, {}
-#  attr_accessor_with_default :allgroups, {}
   attr_accessor_with_default :groupname, ""
   attr_accessor_with_default :home_directory, ""
-  attr_accessor_with_default :login_shell, ""
+  attr_accessor_with_default :login_shell, "/bin/bash"
   attr_accessor_with_default :user_password, ""
   attr_accessor_with_default :user_password2, ""
   attr_accessor_with_default :type, "local"
@@ -90,11 +89,6 @@ public
                   "grouplist", "uid", "loginShell", "groupname" ] ]
     }
     user_map = YastService.Call("YaPI::USERS::UserGet", parameters)
-
-#    system_groups = YastService.Call("YaPI::USERS::GroupsGet", {"index"=>["s","cn"],"type"=>["s","system"]})
-#    local_groups = YastService.Call("YaPI::USERS::GroupsGet", {"index"=>["s","cn"],"type"=>["s","local"]})
-#    user.allgroups = Hash[*(local_groups.keys | system_groups.keys).collect {|v| [v,1]}.flatten]
-
     raise "Got no data while loading user attributes" if user_map.empty?
 
     user.load_data(user_map)
@@ -187,8 +181,8 @@ ATTR_ACCESSIBLE = [:cn, :uid, :uid_number, :gid_number, :grouplist, :groupname,
     config = {}
     user = User.new
     user.load_attributes(attrs)
-    user.grouplist = []
-    if user.grp_string != nil
+    user.grouplist = {}
+    unless user.grp_string.blank?
        user.grp_string.split(",").each do |groupname|
 	  group = { "cn" => groupname.strip }
 	  user.grouplist.push group
