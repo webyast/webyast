@@ -129,7 +129,6 @@ public
       "uid" => [ "s", id ]
     }
     data = retrieve_data
-
     ret = YastService.Call("YaPI::USERS::UserModify", config, data)
 
     Rails.logger.debug "Command returns: #{ret.inspect}"
@@ -167,14 +166,12 @@ ATTR_ACCESSIBLE = [:cn, :uid, :uid_number, :gid_number, :grouplist, :groupname,
   def retrieve_data
     data = { }
     if self.respond_to?(:grouplist)
-	attr = self.send(:grouplist)
+	attr = self.grouplist
 	groups	= {}
-	attr.each do |g|
-	  cn		= g["cn"]
+	attr.keys.each do |cn|
 	  groups[cn]	= ["i",1]
 	end
 	data.store("grouplist", ["a{sv}",groups])
-
     end
     [ :cn, :uid, :uid_number, :gid_number, :groupname, :home_directory, :login_shell, :user_password, :addit_data, :type ].each do |attr_name|
       if self.respond_to?(attr_name)

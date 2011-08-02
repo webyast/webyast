@@ -65,7 +65,7 @@ class UsersController < ApplicationController
 
 
   # Initialize GetText and Content-Type.
-  init_gettext "webyast-users-ui"
+  init_gettext "webyast-users"
 
   public
 
@@ -248,7 +248,7 @@ class UsersController < ApplicationController
       respond_to do |format|
         format.xml  { render ErrorResult.error(404, 2, error.message) }
         format.json { render ErrorResult.error(404, 2, error.message) }
-        format.html { flash[:error] = YaST::ServiceResource.error(error) 
+        format.html { flash[:error] = error.message
                       render :action => "new"
                     }
       end
@@ -270,7 +270,7 @@ class UsersController < ApplicationController
     error = nil
     begin
       begin
-        @user = User.find(params[:id])
+        @user = User.find(params[:user][:id])
       rescue Exception => error
         logger.error(error.message)
       end
@@ -280,17 +280,21 @@ class UsersController < ApplicationController
         end
         @user.load_attributes(params[:user])
         @user.type = "local"
-        @user.save(params[:id])
+        @user.grouplist = {}
+        params[:user][:grp_string].split(",").each do |groupname|
+         @user.grouplist[groupname.strip] = "1" 
+        end unless params[:user][:grp_string].blank? 
+        @user.save(params[:user][:id])
       end
     rescue Exception => error
-      logger.error(errot.message)
+      logger.error(error.message)
     end    
     if error
       respond_to do |format|
         format.xml  { render ErrorResult.error(404, 2, error.message) }
         format.json { render ErrorResult.error(404, 2, error.message) }
-        format.html { flash[:error] = YaST::ServiceResource.error(error) 
-                      render :action => "index"
+        format.html { flash[:error] = error.message
+                      redirect_to :action => "index"
                     }
       end
     else
@@ -318,7 +322,7 @@ class UsersController < ApplicationController
         format.xml  { render ErrorResult.error(404, 2, error.message) }
         format.json { render ErrorResult.error(404, 2, e.message) }
         format.html { flash[:error] = _("Error: Could not remove user <i>%s</i>.") % @user.uid 
-                      render :action => "index"
+                      redirect_to :action => "index"
                     }
        end
        return
