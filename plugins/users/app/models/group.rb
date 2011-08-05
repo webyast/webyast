@@ -111,4 +111,8 @@ public
     YastCache.delete(self,old_cn.inspect)
     ret
   end
+
+  def members_string
+    members.join(",")
+  end
 end
