@@ -74,7 +74,6 @@ public
   end
 
   def self.find_all
-debugger
     YastCache.fetch(self, :all) {
       result = groups_get "local"
       result.update( groups_get "system")
