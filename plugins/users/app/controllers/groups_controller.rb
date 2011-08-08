@@ -231,7 +231,7 @@ public
     @adding = true
     @all_users_string = ""
     users = User.find(:all) if @permissions[:usersget]
-    @users.each do |user|
+    users.each do |user|
       if @all_users_string.blank?
         @all_users_string = user.uid
       else
@@ -282,10 +282,10 @@ public
     validate_group_name( :new ) or return
     group_params = params[:group] || {}
     group_params[:old_cn] = group_params[:cn]
-    @group.members = group_params[:members_string].split(",").collect {|cn| cn.strip} unless group_params[:members_string].blank?
     validate_members( :new ) or return
     validate_group_type( :new ) or return
     @group = Group.new group_params
+    @group.members = group_params[:members_string].split(",").collect {|cn| cn.strip} unless group_params[:members_string].blank?
     result = @group.save
     Rails.logger.error "Cannot create group '#{@group.cn}': #{result}" unless result.blank?
     respond_to do |format|
@@ -328,12 +328,11 @@ public
     Rails.logger.error "Cannot destroy group '#{@group.cn}': #{result}" unless result.blank?
     respond_to do |format|
       format.html { unless result.blank?
-                      flash[:error] = _("Cannot remove group <i>%s</i>") % @group.cn
-                      redirect_to :action => :new
+                      flash[:error] = _("Cannot remove group <i>%{name}</i>: %{result}") % {:name => @group.cn, :result => result}
                     else
                       flash[:message] = _("Group <i>%s</i> has been deleted.") % @group.cn 
-                      redirect_to :action => :index 
                     end
+                    redirect_to :action => :index 
                   }
       format.xml  { unless result.blank?
                       render ErrorResult.error(404, 2, "Group destroy error:'"+result+"'")
