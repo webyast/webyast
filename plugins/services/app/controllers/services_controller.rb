@@ -36,36 +36,17 @@ class ServicesController < ApplicationController
   end
 
   def show_status
+    yapi_perm_check "services.read"
     
-    #yapi_perm_check "services.read"
-    
-    begin
-#	  @response = Service.find(:one, :from => params[:id].intern, :params => { "custom" => params[:custom]})
-#	  @response = Service.find({params[:id]})
-	  
-	  service = Service.new(params[:id])
-	  @response = service.read_status({ "custom" => params[:custom]})
-	  
-	  Rails.logger.error "RESPONSE \n"
-	  Rails.logger.error @response.to_yaml
-	  Rails.logger.error "++++++++++++++++"
-	  
-	  
-	  
-    rescue ActiveResource::ServerError => e
-    	error = Hash.from_xml e.response.body
-    	logger.warn error.inspect
-	    if error["error"] && error["error"]["type"] == "SERVICE_ERROR"
-	        render :text => _('(cannot read status)') and return
-	    else
-	        raise e
-	    end
-    end
+    service = Service.new(params[:id])
+    @response = service.read_status({ "custom" => params[:custom]})
+
+    #Rails.logger.info @response.to_yaml
 
     render(
-    	:partial =>'status',
-    	:locals	=> { :status => @response.status, :enabled => @response.enabled, :custom => @response.custom },
-    	:params => params
+      :partial =>'status',
+      :locals	=> { :status => @response.status, :enabled => @response.enabled, :custom => @response.custom },
+      :params => params
     )
   end
 
@@ -76,35 +57,16 @@ class ServicesController < ApplicationController
     
     @services = []
     all_services	= []
-    
-    begin
-      all_services	= Service.find(:all, { :read_status => 1 })
-      
-    rescue ActiveResource::ServerError => e
-      error = Hash.from_xml e.response.body
-    	logger.warn error.inspect
-    	
-	    if error["error"] && error["error"]["type"] == "SERVICE_ERROR"
-	      ee	= error["error"]
-	      if ee["id"] == "no-services"
-	        flash[:error] = _("List of services could not be read")
-	      elsif ee["id"] == "no-custom-services"
-	        flash[:error] = _("List of custom services could not be read")
-	      else
-	        flash[:error] = ee["message"]
-	      end
-	    else
-	      raise e
-	    end
-    end
+    all_services	= Service.find(:all, { :read_status => 1 })
     
     # there's no sense in showing these in UI (bnc#587885)
     killer_services	= [ "webyast", "dbus", "network", "lighttpd" ]
+
     all_services.each do |s|
-	    # only leave dependent services that are shown in the UI
-	    s.required_for_start.reject! { |rs| killer_services.include? rs }
-	    s.required_for_stop.reject! { |rs| killer_services.include? rs }
-	    @services.push s unless killer_services.include? s.name
+      # only leave dependent services that are shown in the UI
+      s.required_for_start.reject! { |rs| killer_services.include? rs }
+      s.required_for_stop.reject! { |rs| killer_services.include? rs }
+      @services.push s unless killer_services.include? s.name
     end
     
     respond_to do |format|
@@ -117,19 +79,14 @@ class ServicesController < ApplicationController
 
   # PUT /services/1.xml
   def execute
+    yapi_perm_check "services.execute"
+    
     args = { :execute => params[:id], :custom => params[:custom] }
-
-    begin
-   
     service = Service.new(params["service_id"]) 
     ret = service.save(args)
     
-    Rails.logger.debug "*** YaPI RETURNS \n #{ret} \n"
-    
-    # we get a hash with exit, stderr, stdout
-    #ret = Hash.from_xml(response.body)
-    #ret = ret["hash"]
-    logger.debug "returns #{ret.inspect}"
+    #Rails.logger.debug "*** YaPI RETURNS \n #{ret} \n"
+    #Rails.logger.debug "returns #{ret.inspect}"
     
     @result_string = ""
     @result_string << ret["stdout"] if ret["stdout"]
@@ -147,14 +104,7 @@ class ServicesController < ApplicationController
        when "7" then _("program is not running")
     end
 
-    rescue ActiveResource::ServerError => e
-      error = Hash.from_xml e.response.body
-      logger.warn error.inspect
-      @result_string	= error["error"]["description"] if error["error"]["description"]
-      @error_string	= _("Unknown error on server side")
-    end
-
-    Rails.logger.error "Render partial RESULT with PARAMS #{params.inspect}"
+    #Rails.logger.error "Render partial RESULT with PARAMS #{params.inspect}"
     render(:partial =>'result')
   end
 
@@ -167,8 +117,8 @@ class ServicesController < ApplicationController
     @service.read_status(params)
     
     respond_to do |format|
-	format.xml  { render :xml => @service.to_xml(:root => 'service', :dasherize => false, :indent => 2), :location => "none" }
-    	format.json { render :json => @service.to_json, :location => "none" }
+      format.xml  { render :xml => @service.to_xml(:root => 'service', :dasherize => false, :indent => 2), :location => "none" }
+      format.json { render :json => @service.to_json, :location => "none" }
     end
   end
   
@@ -177,10 +127,8 @@ class ServicesController < ApplicationController
   # Requires execute permission for services YaPI.
   def update
     yapi_perm_check "services.execute" # RORSCAN_ITL
-
     @service = Service.find params[:id]
-    ret	= @service.save(params)
-
+    ret = @service.save(params)
     render :xml => ret
   end
 
