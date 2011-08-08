@@ -38,6 +38,8 @@ class UsersControllerTest < ActionController::TestCase
   
   test "access index" do
     get :index
+    assert_valid_markup
+    assert assigns(:users)
     assert_response :success
   end
 
@@ -55,6 +57,18 @@ class UsersControllerTest < ActionController::TestCase
     assert_equal mime.to_s, @response.content_type
   end
 
+  def test_users_index_no_groupsget_permission
+    UsersController.any_instance.stubs(:yapi_perm_check).with("users.groupsget").returns(false)
+    UsersController.any_instance.stubs(:yapi_perm_check).with("users.groupget").returns(false)
+    UsersController.any_instance.stubs(:yapi_perm_check).with("users.usersget").returns(true)
+    get :index
+    assert_response :success
+    assert_valid_markup
+    assert assigns(:users)
+    assert_select '#all_grps_string[value=""]'
+  end
+
+
   test "access show" do
     u = User.new
     u.load_attributes({:uid => "schubi5"})
@@ -68,5 +82,16 @@ class UsersControllerTest < ActionController::TestCase
     get :show, :id => "schubi_not_found"
     assert_response 404
   end
+
+  def test_update_user
+   u = User.new
+   u.load_attributes({:uid => "schubi5"})
+   User.stubs(:find).with("schubi5").returns(u)
+   User.any_instance.stubs(:save).with("schubi5").returns(true)
+   post :update, {:user => { :id => "schubi5", :cn => "schubi5" }}
+   assert_response :success
+   assert flash.empty?
+  end  
+
 
 end
