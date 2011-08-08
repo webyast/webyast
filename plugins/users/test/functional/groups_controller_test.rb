@@ -43,6 +43,7 @@ class GroupsControllerTest < ActionController::TestCase
   UPDATE_PARAM_DATA = { "old_cn" => "users",
                        "gid" => 100,
                        "members" => [],
+                       "members_string" => "",
                        "cn" => "users2",
                        "group_type" => "local"
                      }
@@ -50,13 +51,14 @@ class GroupsControllerTest < ActionController::TestCase
   CREATE_PARAM_DATA = { "old_cn" => "users",
                        "gid" => 100,
                        "members" => [],
+                       "members_string" => "",
                        "cn" => "users",
                        "group_type" => "local"
                      }
 
-  CREATE_DATA = { "groups" => CREATE_PARAM_DATA }
+  CREATE_DATA = { "group" => CREATE_PARAM_DATA }
 
-  UPDATE_DATA = { "id" => "users", "groups" => UPDATE_PARAM_DATA }
+  UPDATE_DATA = { "id" => "users", "group" => UPDATE_PARAM_DATA }
 
   CREATE_WRITE_DATA= { 'userlist' => ["as", [] ],
                        'cn' => ["s",'users']
@@ -86,13 +88,13 @@ class GroupsControllerTest < ActionController::TestCase
   def test_update
     mock_update
     put :update, UPDATE_DATA
-    assert_response :success
+    assert_response :redirect
   end
 
   def test_create
     mock_create
     put :create, CREATE_DATA
-    assert_response :success
+    assert_response :redirect
   end
 
   def mock_get
