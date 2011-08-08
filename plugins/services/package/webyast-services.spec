@@ -28,10 +28,10 @@ Source3:	filter_services.yml
 Source4:	SERVICES.pm
 BuildRoot:      %{_tmppath}/%{name}-%{version}-build
 BuildArch:      noarch
-BuildRequires:  rubygem-yast2-webyast-tasks rubygem-restility
+BuildRequires:  rubygem-webyast-rake-tasks rubygem-restility
 
 BuildRequires:  webyast-base-testsuite
-BuildRequires:	rubygem-test-unit rubygem-mocha
+BuildRequires:  tidy rubygem-test-unit rubygem-mocha
 
 # so SERVICES.pm is able to call YML.rb
 Requires:       yast2-ruby-bindings >= 0.3.2.1
@@ -133,6 +133,7 @@ rm -rf $RPM_BUILD_ROOT
 %config /etc/webyast/filter_services.yml
 
 %{plugin_dir}/README
+%{plugin_dir}/shortcuts.yml
 %{plugin_dir}/Rakefile
 %{plugin_dir}/init.rb
 %{plugin_dir}/install.rb
