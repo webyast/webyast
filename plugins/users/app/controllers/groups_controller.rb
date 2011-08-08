@@ -241,25 +241,6 @@ public
     render :new
   end
 
-  def edit
-    @group = Group.find params[:id]
-    unless @group
-      flash[:error] = _("Group named <i>%s</i> was not found.") % @params[:id]
-      redirect_to :action => :index
-      return
-    end
-    @adding = false
-    users = User.find(:all)
-    @all_users_string = ""
-    users.each do |user|
-      if @all_users_string.blank?
-        @all_users_string = user.uid
-      else
-        @all_users_string += ",#{user.uid}"
-      end
-    end if users
-  end
-
   # POST /groups/users/
   def update
     validate_group_id(params[:group][:old_cn]) or return
@@ -267,7 +248,6 @@ public
     validate_group_name( :index ) or return
     validate_members( :index ) or return
     group_params = params[:group] || {}
-    group_params[:old_cn] = params[:id]
     @group = Group.new group_params
     @group.members = group_params[:members_string].split(",").collect {|cn| cn.strip} unless group_params[:members_string].blank?
     result = @group.save

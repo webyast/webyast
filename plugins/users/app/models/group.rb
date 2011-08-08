@@ -27,7 +27,7 @@ class Group < BaseModel::Base
   attr_accessor :gid             # group number
   attr_accessor :old_cn          # for group identification when changing group name
   attr_accessor :default_members # list of user names, which have this group as default
-  attr_accessor :members         # list of users explicitaly added into this group
+  attr_accessor_with_default :members,[]         # list of users explicitaly added into this group
   attr_accessor :group_type      # type of the group ... system or local # RORSCAN_ITL
   attr_accessor :members_string
 
@@ -51,7 +51,7 @@ private
   end
 
   def self.make_group(group_hash)
-    group_hash[:gid]             = group_hash["gidNumber"]
+    group_hash[:gid]             = group_hash["gidNumber"].to_i
     group_hash[:cn]              = group_hash["cn"]
     group_hash[:old_cn]          = group_hash["cn"]
     group_hash[:default_members] = group_hash["more_users"].keys()
@@ -90,10 +90,10 @@ public
                                  { "cn"        => ["s",cn], "userlist"  => ["as", members] } )
     else
       result = YastService.Call( "YaPI::USERS::GroupModify",
-                                 { "type"      => ["s", group_type],
-                                   "cn"        => ["s", old_cn]  },
-                                 { "gidNumber" => ["i", gid],
-                                   "cn"        => ["s",cn],
+                                 { "type"      => ["s",  group_type],
+                                   "cn"        => ["s",  old_cn]  },
+                                 { "gidNumber" => ["i",  gid.to_i],
+                                   "cn"        => ["s",  cn],
                                    "userlist"  => ["as", members] } 
                                )
     end

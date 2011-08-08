@@ -102,7 +102,6 @@ class YastService
 		@@imported[namespace] = dbusobj
 	     end
 	end
-
 	return dbusobj.send(fce, *arguments)[0]
 
 
