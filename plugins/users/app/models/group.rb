@@ -31,7 +31,7 @@ class Group < BaseModel::Base
   attr_accessor :group_type      # type of the group ... system or local # RORSCAN_ITL
   attr_accessor :members_string
 
-  attr_accessible :cn, :old_cn, :gid, :default_members, :members, :group_type
+  attr_accessible :cn, :old_cn, :gid, :default_members, :members, :group_type, :members_string
 
   validates_presence_of     :members
   validates_inclusion_of    :group_type, :in => ["system","local"]
@@ -57,6 +57,7 @@ private
     group_hash[:default_members] = group_hash["more_users"].keys()
     group_hash[:members]         = group_hash["userlist"].keys()
     group_hash[:group_type]      = group_hash["type"]
+    group_hash[:members_string]  = group_hash[:members].join(",") unless group_hash[:members].blank?
     Group.new group_hash
   end
 
@@ -73,6 +74,7 @@ public
   end
 
   def self.find_all
+debugger
     YastCache.fetch(self, :all) {
       result = groups_get "local"
       result.update( groups_get "system")
@@ -112,7 +114,4 @@ public
     ret
   end
 
-  def members_string
-    members.join(",")
-  end
 end
