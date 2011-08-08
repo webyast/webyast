@@ -266,8 +266,8 @@ class StatusController < ApplicationController
           graph_description["lines"].each do |line|
             original_metrics = available_metrics.select{|me| me.id[(me.host.size+1)..(me.id.size-1)] == line["metric_id"]}
             unless original_metrics.empty?
-              logger.warn "More than one metrics with the same id found: #{line.metric_id}. --> taking first" if original_metrics.size > 1
               original_metric = original_metrics.first
+              logger.warn "More than one metrics with the same id found: #{original_metric.id}. --> taking first" if original_metrics.size > 1
               single_line = Hash.new
               single_line[:label] = line["label"]
               single_line[:values] = get_data(original_metric.id, line["metric_column"], from, till, data[:y_scale])
