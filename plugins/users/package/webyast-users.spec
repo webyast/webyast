@@ -15,7 +15,7 @@ Provides:       WebYaST(org.opensuse.yast.modules.yapi.groups)
 Provides:       yast2-webservice-users = %{version}
 Obsoletes:      yast2-webservice-users < %{version}
 PreReq:         yast2-webservice
-Requires:       webyast-roles
+Requires:       webyast-roles-ws
 License:        GPL-2.0 
 Group:          Productivity/Networking/Web/Utilities
 URL:            http://en.opensuse.org/Portal:WebYaST
@@ -28,8 +28,8 @@ Source1:        org.opensuse.yast.modules.yapi.users.policy
 BuildRoot:      %{_tmppath}/%{name}-%{version}-build
 BuildArch:      noarch
 
-BuildRequires:  webyast-base-testsuite webyast-roles
-BuildRequires:	rubygem-test-unit rubygem-mocha
+BuildRequires:  webyast-base-testsuite webyast-roles-ws
+BuildRequires:	rubygem-test-unit rubygem-mocha tidy
 
 #
 %define plugin_name users
@@ -39,7 +39,7 @@ BuildRequires:	rubygem-test-unit rubygem-mocha
 %package testsuite
 Group:    Productivity/Networking/Web/Utilities
 Requires: %{name} = %{version}
-Requires: webyast-base-testsuite webyast-roles
+Requires: webyast-base-testsuite webyast-roles-ws
 Summary:  Testsuite for webyast-users package
 
 %description
@@ -102,6 +102,7 @@ rm -rf $RPM_BUILD_ROOT
 %{plugin_dir}/uninstall.rb
 %{plugin_dir}/Rakefile
 %{plugin_dir}/README
+%{plugin_dir}/shortcuts.yml
 %{plugin_dir}/lib
 
 %dir /usr/share/PolicyKit
