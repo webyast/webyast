@@ -30,10 +30,14 @@ class Dns < BaseModel::Base
   # the domain name
   attr_accessor :nameservers
 
+  
+  
   validates_each :nameservers, :allow_nil => false do |model,attr,value|
     value.each do |nameserver|
+
       #TODO use better regex
       if nameserver.match(/^([0-9]{1,3}.){3}[0-9]{1,3}$/).nil?
+        Rails.logger.error "NAMSERVER DOESN'T MATCH #{nameserver}"
         model.errors.add attr, :invalid
       end
     end
@@ -45,6 +49,7 @@ class Dns < BaseModel::Base
         URI.parse search
       rescue URI::InvalidURIError => e
         Rails.logger.warn "Invalid uri: #{e.inspect}"
+        Rails.logger.error "SEARCH DOESN'T MATCH #{search}"
         model.errors.add attr, :invalid
       end
     end
@@ -69,7 +74,10 @@ class Dns < BaseModel::Base
       "searches" => @searches,
       "nameservers" => @nameservers,
     }
+    
     vsettings = [ "a{sas}", settings ] # bnc#538050    
+    Rails.logger.error "DBUS PARAMS #{settings.inspect}"
+    
     YastService.Call("YaPI::NETWORK::Write",{"dns" => vsettings})
     # TODO success or not?
     YastCache.reset(self)

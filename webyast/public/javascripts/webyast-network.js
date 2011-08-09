@@ -30,7 +30,10 @@ $(function(){
   
   var $auto = $('#autoMode');
   var $manual = $('#manualMode');
-      
+
+  //bootproto attribute values (static | dhcp4 | dhcp6)
+//  $("#conf_mode").val().match("dhcp")? enableAuto(): enableStatic();
+  
   $("#conf_mode").val() == "dhcp"? enableAuto(): enableStatic();
   
   function enableAuto() {

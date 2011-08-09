@@ -30,11 +30,9 @@ class Interface < BaseModel::Base
   validates_inclusion_of :bootproto, :in => ["static","dhcp"]
   attr_accessor :ipaddr
   # blank instead of nil as specified in restdoc, bnc#600097
-  validates_format_of :ipaddr, :allow_blank => true,
-      :with => /^#{IPADDR_REGEX}\/(#{IPADDR_REGEX}|[0-9]{1,2})$/
+  validates_format_of :ipaddr, :allow_blank => true, :with => /^#{IPADDR_REGEX}\/(#{IPADDR_REGEX}|[0-9]{1,2})$/
   attr_accessor	:id
-  validates_format_of :id, :allow_nil => false,
-      :with => /^[a-zA-Z0-9_-]+$/
+  validates_format_of :id, :allow_nil => false, :with => /^[a-zA-Z0-9_-]+$/
 
   public
 
@@ -50,6 +48,7 @@ class Interface < BaseModel::Base
     YastCache.fetch(self, which) {
       response = YastService.Call("YaPI::NETWORK::Read")
       ifaces_h = response["interfaces"]
+
       if which == :all
         ret = Hash.new
         ifaces_h.each do |id, ifaces_h|
@@ -58,6 +57,7 @@ class Interface < BaseModel::Base
       else
         ret = Interface.new(ifaces_h[which], which)
       end
+
       ret
     }
   end

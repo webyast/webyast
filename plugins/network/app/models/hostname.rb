@@ -24,11 +24,10 @@
 # and well defined data.
 
 class Hostname < BaseModel::Base
-
-  # the short hostname
   attr_accessor :name
-  # the domain name
   attr_accessor :domain
+  attr_accessor :dhcp_hostname
+  
   validates_uri :name, :domain, :allow_nil => true
 
   public
