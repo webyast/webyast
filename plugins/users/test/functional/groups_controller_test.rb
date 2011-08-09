@@ -30,6 +30,8 @@ class GroupsControllerTest < ActionController::TestCase
                       'userlist' => {},
                       'gidNumber' => 100,
                       'cn' => 'users',
+                      'old_cn' => 'users',
+                      'group_type' => 'local',
                       'userPassword' => 'x',
                       'type' => 'local'
                     }
@@ -97,8 +99,41 @@ class GroupsControllerTest < ActionController::TestCase
     assert_response :redirect
   end
 
+  def test_delete_group
+    mock_get
+    mock_delete
+    post :destroy, {:id => "users"}
+    assert_response :redirect
+    assert_valid_markup
+    assert_redirected_to :action => :index
+    assert_valid_markup
+    assert_false flash.empty?
+  end
+
+  def test_rename_group
+    post :update, {"group" => {"cn"=>"new_name", "old_cn" => "users"} }
+    assert_response :redirect
+    assert_valid_markup
+    assert_redirected_to :action => :index
+    assert_valid_markup
+    assert_false flash.empty?
+  end
+
+  def test_groups_index_no_permissions
+    GroupsController.any_instance.stubs(:yapi_perm_check).with("users.groupsget").raises(NoPermissionException.new("users.groupsget", "test"));
+    GroupsController.any_instance.stubs(:yapi_perm_check).with("users.groupget").raises(NoPermissionException.new("users.groupget", "test"));
+    get :index
+    assert_response :redirect
+    assert_false flash.empty?
+    assert_valid_markup
+  end
+
   def mock_get
     YastService.stubs(:Call).with("YaPI::USERS::GroupGet",GROUP_LOCAL_CONFIG).once.returns(GROUP_READ_DATA)
+  end
+
+  def mock_delete
+    YastService.stubs(:Call).with('YaPI::USERS::GroupDelete', {'cn' => ['s', 'users'], 'type' => ['s', 'local']}).once.returns("")
   end
 
   def mock_update
