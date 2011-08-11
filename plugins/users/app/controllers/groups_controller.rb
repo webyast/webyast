@@ -34,11 +34,11 @@ class GroupsController < ApplicationController
 private
 
   def permission_read
-    @permissions = {:groupadd => false, :usersget => false, :groupmodify => false, :groupdelete => false}
-    @permissions[:groupmodify] = true if yapi_perm_granted? "users.groupmodify"
-    @permissions[:usersget] = true if yapi_perm_granted? "users.usersget"
-    @permissions[:groupadd] = true if yapi_perm_granted? "users.groupadd"
-    @permissions[:groupdelete] = true if yapi_perm_granted? "users.groupdelete"
+    @permissions = {}
+    @permissions[:groupmodify] = yapi_perm_granted? "users.groupmodify"
+    @permissions[:usersget] = yapi_perm_granted? "users.usersget"
+    @permissions[:groupadd] = yapi_perm_granted? "users.groupadd"
+    @permissions[:groupdelete] = yapi_perm_granted? "users.groupdelete"
   end
 
   def validate_group_id( id = params[:id] )
