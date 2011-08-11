@@ -100,26 +100,30 @@ class NetworkControllerTest < ActionController::TestCase
     NetworkController.any_instance.stubs(:yapi_perm_granted?).with("network.write")
   end
   
-  def stabs_functions
+  def stubs_functions
     puts "Stub actions"
     #@ifcs = Interface.find :all
     Interface.stubs(:find).with(:all).returns(@interfaces)
     #ifc = Interface.find(id)
     Interface.stubs(:find).with("eth0").returns(@eth0)
+    Interface.any_instance.stubs(:save).returns(true)
     
     #hn = Hostname.find 
     Hostname.stubs(:find).returns(@hostname)
+    Hostname.any_instance.stubs(:save).returns(true)
     
     #dns = Dns.find 
     Dns.stubs(:find).returns(@dns)
+    Dns.any_instance.stubs(:save).returns(true)
     
     #rt = Route.find "default"
     Route.stubs(:find).with("default").returns(@route)
+    Route.any_instance.stubs(:save).returns(true)
   end
   
   test "access index html" do
     fake_permissions
-    stabs_functions
+    stubs_functions
     
     mime = Mime::HTML
     @request.accept = mime.to_s
@@ -161,11 +165,14 @@ class NetworkControllerTest < ActionController::TestCase
 #    assert_not_nil assigns(:name)
 #  end
 
-#  def test_dhcp_without_change
-#    put :update, { :interface => "eth2", :conf_mode => "dhcp", :default_route => "192.168.1.1", :nameservers => "192.168.1.2 192.168.1.42", :searchdomains => "labs.example.com example.com", :hostname => "arthur", :domain => "britons" }
-#    assert_response :redirect
-#    assert_redirected_to :controller => "controlpanel", :action => "index"
-#  end
+  def test_dhcp_without_change
+    fake_permissions
+    stubs_functions
+
+    put :update, { :interface => "eth0", :conf_mode => "dhcp", :default_route => "192.168.1.1", :nameservers => "192.168.1.2 192.168.1.42", :searchdomains => "labs.example.com example.com", :hostname => "arthur", :domain => "britons" }
+    assert_response :redirect
+    assert_redirected_to :controller => "controlpanel", :action => "index"
+  end
 
 #  # TODO also test the case in sample appliance (dhcp-only)
 end
