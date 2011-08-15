@@ -27,6 +27,40 @@ require 'systemtime' # RORSCAN_ITL
 class SystemtimeController < ApplicationController
 
   before_filter :login_required
+  layout 'main'
+
+private
+
+  def class_exists?(class_name)
+    begin
+      cl = Module.const_get(class_name)
+      return cl.is_a?(Class)
+    rescue NameError
+      return false
+    end
+  end
+
+  def permission_read
+    @permissions = {}
+    @permissions[:ntp_synchronize] = yapi_perm_granted? "ntp.synchronize"
+    @permissions[:services_execute] = yapi_perm_granted? "services.execute"
+    @permissions[:ntp_setserver] = true if yapi_perm_granted? "ntp.setserver"
+    @permissions[:write] = true if yapi_perm_granted? "time.write"
+  end
+
+public
+
+  # Initialize GetText and Content-Type.
+  init_gettext "webyast-time"
+
+  def initialize
+    unless defined? @@timezones
+      @@timezones = {}
+    end
+    @valid = []    
+    @ntp_available = class_exists?("Ntp")
+    @serice_available = class_exists?("Service")
+  end
 
   #--------------------------------------------------------------------------------
   #
@@ -34,18 +68,76 @@ class SystemtimeController < ApplicationController
   #
   #--------------------------------------------------------------------------------
 
+  def index
+    yapi_perm_check "time.read"
+    permission_read
+    @ntp = @ntp_available ? Ntp.find : nil
+    @stime = Systemtime.find 
+    @stime.load_timezone params if params[:timezone] #do not reset timezone if ntp fail (bnc#600370)
+  end
+
+
   # Sets time settings. Requires write permissions for time YaPI.
   def update
     yapi_perm_check "time.write"
-    root = params[:systemtime]
-    if root == nil
-      logger.error "Response doesn't contain systemtime key" # RORSCAN_ITL
-      raise InvalidParameters.new :timezone => "Missing"
+    if @ntp_available
+      yapi_perm_check "services.execute"
+      yapi_perm_check "ntp.synchronize"
+      yapi_perm_check "ntp.setserver"
     end
-    
-    systemtime = Systemtime.new(root) # RORSCAN_ITL    
-    systemtime.save # RORSCAN_ITL
-    show
+    permission_read
+
+    t = Systemtime.find
+    t.load_timezone params
+    t.clear_time #do not set time by default
+    error = nil
+    case params[:timeconfig]
+    when "manual"
+      service = Service.new("ntp")
+      service.save({:execute => "stop" })
+      t.load_time params
+    when "ntp_sync"
+      #start ntp service
+      ntp = Ntp.find
+      ntp.actions[:synchronize] = true
+      ntp.actions[:synchronize_utc] = t.utcstatus
+      ntp.actions[:ntp_server] = params[:ntp_server] unless params[:ntp_server].blank?
+      begin 
+        ntp.update
+      rescue Exception => error
+        logger.error "ntp.update returns ERROR: #{error.inspect}" 
+      end
+      service = Service.new("ntp")
+      service.save({:execute => "start" })
+    when "none" 
+    else
+      logger.error "Unknown value for timeconfig #{params[:timeconfig]}"
+    end
+
+    t.save unless error
+
+    respond_to do |format|
+      format.html { if error
+                      flash[:error] = error.message
+                      redirect_to ({:action => "index"}.merge params)
+                    else
+                      flash[:notice] = _('Time settings have been written.')
+                      redirect_success
+                    end
+                  }
+      format.xml  { if error
+                      render ErrorResult.error(404, 2, "Time setting error:'"+error.message+"'")
+                    else
+                      render :show
+                    end
+                  }
+      format.json { unless result.blank?
+                      render ErrorResult.error(404, 2, "Time setting error:'"+error.message+"'")
+                    else
+                      render :show
+                    end
+                  }
+    end
   end
 
   # See update
@@ -63,6 +155,26 @@ class SystemtimeController < ApplicationController
       format.json { render :json => systemtime.to_json( :dasherize => false ) } # RORSCAN_ITL
     end
 
+  end
+
+  #AJAX function that renders new timezones for selected region. Expected
+  # initialized values from index call.
+  def timezones_for_region
+    #FIXME do not use AJAX use java script instead as reload of data is not needed
+    # since while calling this function there is different instance of the class
+    # than when calling index, @@timezones were empty; reinitialize them
+    # possible FIXME: how does it increase the amount of data transferred?
+    yapi_perm_check "time.read"
+    systemtime = Systemtime.find  # RORSCAN_ITL
+
+    timezones = systemtime.timezones # RORSCAN_ITL
+
+    region = timezones.find { |r| r.name == params[:value] } #possible FIXME later it gets class, not a string
+    return false unless region #possible FIXME: is returnign false for AJAX correct?
+
+    render(:partial => 'timezones',
+      :locals => {:region => region, :default => region.central,
+        :disabled => ! params[:disabled]=="true"})
   end
 
 end
