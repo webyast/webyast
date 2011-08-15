@@ -24,7 +24,7 @@ require 'systemtime' # RORSCAN_ITL
 # = Systemtime controller
 # Provides access to time settings for authentificated users.
 # Main goal is checking permissions.
-class SystemtimeController < ApplicationController
+class TimeController < ApplicationController
 
   before_filter :login_required
   layout 'main'
@@ -59,7 +59,7 @@ public
     end
     @valid = []    
     @ntp_available = class_exists?("Ntp")
-    @serice_available = class_exists?("Service")
+    @service_available = class_exists?("Service")
   end
 
   #--------------------------------------------------------------------------------
@@ -93,8 +93,12 @@ public
     error = nil
     case params[:timeconfig]
     when "manual"
-      service = Service.new("ntp")
-      service.save({:execute => "stop" })
+      if @service_available
+        service = Service.new("ntp")
+        service.save({:execute => "stop" })
+      else
+        logger.error "Service module is not installed -> cannot stop ntp"
+      end
       t.load_time params
     when "ntp_sync"
       #start ntp service
@@ -107,8 +111,12 @@ public
       rescue Exception => error
         logger.error "ntp.update returns ERROR: #{error.inspect}" 
       end
-      service = Service.new("ntp")
-      service.save({:execute => "start" })
+      if @service_available
+        service = Service.new("ntp")
+        service.save({:execute => "start" })
+      else
+        logger.error "Service module is not installed -> cannot start ntp"
+      end
     when "none" 
     else
       logger.error "Unknown value for timeconfig #{params[:timeconfig]}"
@@ -171,7 +179,6 @@ public
 
     region = timezones.find { |r| r.name == params[:value] } #possible FIXME later it gets class, not a string
     return false unless region #possible FIXME: is returnign false for AJAX correct?
-
     render(:partial => 'timezones',
       :locals => {:region => region, :default => region.central,
         :disabled => ! params[:disabled]=="true"})

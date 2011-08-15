@@ -143,21 +143,21 @@ class Systemtime < BaseModel::Base
 
   def region
     reg = @timezones.find { |region|
-      region.entries.find { |entry| entry.id==@timezone } }
-    raise _("Unknown timezone %s on host") % timezone unless reg
+      region["entries"].find { |entry| entry["id"]==@timezone } }
+    raise "Unknown timezone %s on host" % timezone unless reg
     return reg
   end
 
   def regions
     return @regions if @regions
-    @regions = @timezones.collect { |region| region.name }
+    @regions = @timezones.collect { |region| region["name"] }
   end
 
   def load_timezone(params)
-    treg = @timezones.find { |reg| reg.name == params[:region] } || Hash.new
+    treg = @timezones.find { |reg| reg["name"] == params[:region] } || Hash.new
 
-    tmz = treg.entries.find { |e| e.name == params[:timezone]}
-    @timezone = tmz.id if tmz
+    tmz = treg.entries.find { |e| e["name"] == params[:timezone]}
+    @timezone = tmz["id"] if tmz
     @utcstatus = params[:utc] == "true"
   end
 

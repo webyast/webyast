@@ -24,9 +24,9 @@
 #prepare array for options, maybe add to controller?
 list = []
 central = ""
-region.entries.each() do |timezone|
-  list.push timezone.name
-  central = timezone.name if timezone.id == default
+region["entries"].each() do |timezone|
+  list.push timezone["name"]
+  central = timezone["name"] if timezone["id"] == default
 end
 list.sort!
 %>
