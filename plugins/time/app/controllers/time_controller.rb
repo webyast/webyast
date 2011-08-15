@@ -123,26 +123,25 @@ public
     end
 
     t.save unless error
-
     respond_to do |format|
       format.html { if error
                       flash[:error] = error.message
-                      redirect_to ({:action => "index"}.merge params)
+                      redirect_to :action => "index" and return
                     else
                       flash[:notice] = _('Time settings have been written.')
-                      redirect_success
+                      redirect_success and return
                     end
                   }
       format.xml  { if error
-                      render ErrorResult.error(404, 2, "Time setting error:'"+error.message+"'")
+                      render ErrorResult.error(404, 2, "Time setting error:'"+error.message+"'") and return
                     else
-                      render :show
+                      render :show and return
                     end
                   }
       format.json { unless result.blank?
-                      render ErrorResult.error(404, 2, "Time setting error:'"+error.message+"'")
+                      render ErrorResult.error(404, 2, "Time setting error:'"+error.message+"'") and return
                     else
-                      render :show
+                      render :show and return
                     end
                   }
     end
@@ -177,10 +176,10 @@ public
 
     timezones = systemtime.timezones # RORSCAN_ITL
 
-    region = timezones.find { |r| r.name == params[:value] } #possible FIXME later it gets class, not a string
-    return false unless region #possible FIXME: is returnign false for AJAX correct?
+    region = timezones.find { |r| r["name"] == params[:value] } 
+    return false unless region 
     render(:partial => 'timezones',
-      :locals => {:region => region, :default => region.central,
+      :locals => {:region => region, :default => region["central"],
         :disabled => ! params[:disabled]=="true"})
   end
 

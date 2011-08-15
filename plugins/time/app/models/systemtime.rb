@@ -156,7 +156,7 @@ class Systemtime < BaseModel::Base
   def load_timezone(params)
     treg = @timezones.find { |reg| reg["name"] == params[:region] } || Hash.new
 
-    tmz = treg.entries.find { |e| e["name"] == params[:timezone]}
+    tmz = treg["entries"].find { |e| e["name"] == params[:timezone]}
     @timezone = tmz["id"] if tmz
     @utcstatus = params[:utc] == "true"
   end
