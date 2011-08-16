@@ -31,7 +31,7 @@ class DnsControllerTest < ActionController::TestCase
     stubs_functions # stubs actions defined in stubs.rb
   end  
   
-  #include PluginBasicTests ????????????????????????
+  include PluginBasicTests 
 
   def test_content_of_xml
     get :show, :format => 'xml'

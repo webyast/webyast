@@ -37,7 +37,7 @@ class InterfacesControllerTest < ActionController::TestCase
     stubs_functions # stubs actions defined in stubs.rb
   end  
 
-  #include CollectionResourceTests ??????????????????????????????
+  include CollectionResourceTests
 
   def test_content1_of_xml
     get :show, :format => 'xml', :id => 'eth0'
