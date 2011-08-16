@@ -24,35 +24,26 @@ require 'hostname'
 
 class HostnameControllerTest < ActionController::TestCase
 
+  DATA_GOOD = {"hostname" => {"name" => "foo", "domain" => "bar"}}
+  DATA_BAD = {"hostname" => {"name" => ">weird\\characters"}}
+  
   def setup
     @model_class = Hostname
-    Hostname.stubs(:find).returns(Hostname.new({"name" => "BAD", "domain" => "DOMAIN"}))
     @controller = Network::HostnameController.new
     @request = ActionController::TestRequest.new
-    # http://railsforum.com/viewtopic.php?id=1719
     @request.session[:account_id] = 1 # defined in fixtures
+    
+    stubs_functions # stubs actions defined in stubs.rb
   end  
+  
+  #include PluginBasicTests ????????????????????????????????????????
 
   def test_content_of_xml
     get :show, :format => 'xml'
     h=Hash.from_xml @response.body
-    assert_equal 'BAD', h['hostname']['name']
-    assert_equal 'DOMAIN', h['hostname']['domain']
+    assert_equal 'testhost', h['hostname']['name']
+    assert_equal 'suse.de', h['hostname']['domain']
   end
-
-  include PluginBasicTests
-
-  DATA_GOOD = {
-    "hostname" => {
-      "name" => "foo",
-      "domain" => "bar"
-    }
-  }
-  DATA_BAD = {
-    "hostname" => {
-      "name" => ">weird\\characters"
-    }
-  }
 
   def test_valid_update
     @model_class.any_instance.stubs(:save).returns true

@@ -54,12 +54,14 @@ class NetworkController < ApplicationController
   def index
     yapi_perm_check "network.read"
     @ifcs = Interface.find :all
-    
+   
+    # FIXED: MODULE CRASHED IF BOTH INTERFACES HAS ATTRIBUTE BOOTPROTO !!!
    
     unless @ifcs.nil? || @ifcs.empty? #No network interfaces found
       
-      unless @ifcs.length == 1 #More than one interface found, try to find active interface
+      unless @ifcs.length == 1
         logger.debug "***** More than one interface is attached -> #{ @ifcs.length } *****"
+        Rails.logger.error @ifcs.to_hash.inspect
         
         @ifcs.each do |id, interface| 
           unless interface.bootproto.nil?
@@ -69,12 +71,7 @@ class NetworkController < ApplicationController
           end
         end
       end  
-  # ??????????
-  #      else
-  #        ifc = @ifcs.find {|i| i.try(:bootproto)!=nil} || @ifcs[0]
-  #        @iface = ifc.id
-  #      end
-    
+   
     else
       logger.error "***ERROR: No network interface found!"
     end
@@ -82,25 +79,17 @@ class NetworkController < ApplicationController
     ifc = Interface.find @iface
     return false unless ifc
     
-    Rails.logger.error "TEST IFC FOUND"
-
     # TODO use rescue_from "AR::Base not found..."
     # http://api.rubyonrails.org/classes/ActiveSupport/Rescuable/ClassMethods.html
     
     hn = Hostname.find 
     return false unless hn
     
-    Rails.logger.error hn.to_yaml
-
     dns = Dns.find 
     return false unless dns
     
-    Rails.logger.error dns.to_yaml
-
     rt = Route.find "default"
     return false unless rt
-    
-    Rails.logger.error rt.to_yaml
     
     @write_permission = yapi_perm_granted?("network.write")
 
@@ -133,18 +122,7 @@ class NetworkController < ApplicationController
     @default_route = rt.via
  
     @conf_modes = {_("Manual")=>STATIC_BOOT_ID, _("Automatic")=>"dhcp"}
-#    @conf_modes = {_("Manual")=>STATIC_BOOT_ID, _("Automatic")=>"dhcp4"}
-
     @conf_modes[@conf_mode] =@conf_mode unless @conf_modes.has_value? @conf_mode
-    
-    
-#    Rails.logger.error "\n==== INDEX FIND ALL ===="
-#    Rails.logger.error "### INTERFACE #{ifc.inspect}"
-#    Rails.logger.error "### HOSTNAME #{hn.inspect}"
-#    Rails.logger.error "### DNS #{dns.inspect}"
-#    Rails.logger.error "### ROUTE #{rt.inspect}"
-#    Rails.logger.error "==== END INDEX ====\n\n\n"
-    
   end
 
 

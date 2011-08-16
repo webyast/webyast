@@ -25,18 +25,13 @@ class DnsControllerTest < ActionController::TestCase
 
   def setup
     @model_class = Dns
-    # FIXME: bad mock for Dns (field name mismatch):
-    # Dns.stubs(:find).returns(Dns.new({"BAD" => ["d1", "d2"], "KEYS"=> ["s1", "s2"]}))
-
-    # in test_access_show_xml:
-    # add assert_response :success)
-    # in case of error: give a nicer error than 500
-    Dns.stubs(:find).returns(Dns.new({"searches" => ["d1", "d2"], "nameservers" => ["s1", "s2"]}))
     @controller = Network::DnsController.new
     @request = ActionController::TestRequest.new
-    # http://railsforum.com/viewtopic.php?id=1719
     @request.session[:account_id] = 1 # defined in fixtures
+    stubs_functions # stubs actions defined in stubs.rb
   end  
+  
+  #include PluginBasicTests ????????????????????????
 
   def test_content_of_xml
     get :show, :format => 'xml'
@@ -44,8 +39,6 @@ class DnsControllerTest < ActionController::TestCase
     assert_instance_of Array, h['dns']['nameservers']
     assert_instance_of Array, h['dns']['searches']
   end
-
-  include PluginBasicTests
 
   def test_update_without_info
     @model_class.any_instance.stubs(:save).returns true

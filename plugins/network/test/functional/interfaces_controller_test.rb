@@ -23,61 +23,34 @@ require File.expand_path(File.dirname(__FILE__) + "/../test_helper")
 require 'interface'
 
 class InterfacesControllerTest < ActionController::TestCase
+  
+  DATA_GOOD_UI = {"interfaces" => {"id" => "eth0", "bootproto" => "dhcp", "ipaddr" => ""}, "id"=>"eth0"}
+  DATA_GOOD_DOC = {"interface" => {"id" => "eth0", "bootproto" => "dhcp", "ipaddr" => ""}, "id"=>"eth0"}
+  DATA_BAD = { "interface" => {"id" => "eth0", "bootproto" => "static", "ipaddr" => "10.1.1.1/666"}, "id"=>"eth0" }
 
   def setup
     YastService.expects(:Call).never
     @model_class = Interface
-    eth0 = Interface.new({"bootproto"=>"dhcp"})
-    eth1 = Interface.new({"bootproto"=>"static", "ipaddr"=>"1.2.3.4/24"})
-    Interface.stubs(:find).with('eth0').returns(eth0)
-    Interface.stubs(:find).with('eth1').returns(eth1)
-    Interface.stubs(:find).with(:all).returns({"eth0"=>eth0, "eth1"=>eth1})
     @controller = Network::InterfacesController.new
     @request = ActionController::TestRequest.new
-    # http://railsforum.com/viewtopic.php?id=1719
     @request.session[:account_id] = 1 # defined in fixtures
+    stubs_functions # stubs actions defined in stubs.rb
   end  
 
-  include CollectionResourceTests
+  #include CollectionResourceTests ??????????????????????????????
 
   def test_content1_of_xml
     get :show, :format => 'xml', :id => 'eth0'
     h=Hash.from_xml @response.body
-    assert_equal 'dhcp', h['interface']['bootproto']
-    assert_nil h['interface']['ipaddr']
+    assert_equal 'static', h['interface']['bootproto']
+    assert_equal '10.10.4.187/16', h['interface']['ipaddr']
   end
 
   def test_content2_of_xml
     get :show, :format => 'xml', :id => 'eth1'
     h=Hash.from_xml @response.body
-    assert_equal 'static', h['interface']['bootproto']
-    assert_equal '1.2.3.4/24', h['interface']['ipaddr']
+    assert_nil h['interface']['ipaddr']
   end
-
-  DATA_GOOD_UI = {
-    "interfaces" => {
-      "id" => "eth0",
-      "bootproto" => "dhcp",
-      "ipaddr" => ""
-    },
-    "id"=>"eth0"
-  }
-  DATA_GOOD_DOC = {
-    "interface" => {
-      "id" => "eth0",
-      "bootproto" => "dhcp",
-      "ipaddr" => ""
-    },
-    "id"=>"eth0"
-  }
-  DATA_BAD = {
-    "interface" => {
-      "id" => "eth0",
-      "bootproto" => "static",
-      "ipaddr" => "10.1.1.1/666"
-    },
-    "id"=>"eth0"
-  }
 
   def test_valid_update_as_sent_by_ui
     @model_class.any_instance.stubs(:save).returns true

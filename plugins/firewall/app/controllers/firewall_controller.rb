@@ -47,6 +47,7 @@ class FirewallController < ApplicationController
       yapi_perm_check "firewall.read"
       @write_permission = yapi_perm_granted?("firewall.write")
       @firewall = Firewall.find
+
       @firewall.fw_services.each do |service|
         service["css_class"] = CGI_PREFIX+"-"+service["id"].gsub(/^service:/,"service-")
         service["name"] = service["id"].gsub(/^service:/,"")
