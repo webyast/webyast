@@ -79,8 +79,9 @@ module CommonResourceTests
     @model_class.expects(:save).never
     @controller.stubs(:permission_check).raises(NoPermissionException.new("action", "test"));
     mime = Mime::XML
-    @data[:format] = 'xml'
-    put :update, just_id.merge(@data || {})
+    @data[:format] = 'xml' if @data
+    put :update, just_id.merge(@data || {:format => 'xml'})
+
     assert_response  403 # Forbidden
   end
 
