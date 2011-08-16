@@ -85,8 +85,9 @@ public
       yapi_perm_check "ntp.synchronize"
       yapi_perm_check "ntp.setserver"
     end
+    raise InvalidParameters.new :time => "missing params" unless params.has_key?(:region) && params.has_key?(:timezone)
+    
     permission_read
-
     t = Systemtime.find
     t.load_timezone params
     t.clear_time #do not set time by default
@@ -135,13 +136,13 @@ public
       format.xml  { if error
                       render ErrorResult.error(404, 2, "Time setting error:'"+error.message+"'") and return
                     else
-                      render :show and return
+                      show and return
                     end
                   }
       format.json { unless result.blank?
                       render ErrorResult.error(404, 2, "Time setting error:'"+error.message+"'") and return
                     else
-                      render :show and return
+                      show and return
                     end
                   }
     end

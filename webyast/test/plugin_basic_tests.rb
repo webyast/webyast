@@ -78,9 +78,12 @@ module CommonResourceTests
     #ensure that nothing is saved
     @model_class.expects(:save).never
     @controller.stubs(:permission_check).raises(NoPermissionException.new("action", "test"));
+    mime = Mime::XML
+    @data[:format] = 'xml'
     put :update, just_id.merge(@data || {})
     assert_response  403 # Forbidden
   end
+
 end
 
 module PluginBasicTests
@@ -90,12 +93,21 @@ module PluginBasicTests
     Hash.new                    # no :id
   end
 
+  def test_access_denied_xml
+    #mock model to test only controller
+    @model_class.stubs(:find)
+    @controller.stubs(:permission_check).raises(NoPermissionException.new("action", "test"));
+    mime = Mime::XML
+    get :show, :format => 'xml'
+    assert_response 403 # Forbidden
+  end
+
   def test_access_denied
     #mock model to test only controller
     @model_class.stubs(:find)
     @controller.stubs(:permission_check).raises(NoPermissionException.new("action", "test"));
     get :show
-    assert_response 403 # Forbidden
+    assert_response 302 # Forbidden
   end
 
   def test_access_show_xml
