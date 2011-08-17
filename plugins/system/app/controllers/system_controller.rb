@@ -24,6 +24,13 @@ class SystemController < ApplicationController
 
     before_filter :login_required
 
+    # Initialize GetText and Content-Type.
+    init_gettext "webyast-reboot"
+
+    def initialize
+	@sys = System.new rescue nil
+    end
+
     def show
    	@actions = System.instance.actions
 
@@ -86,6 +93,40 @@ class SystemController < ApplicationController
     # See update
     def create
 	update
+    end
+
+    def reboot
+        permission_check( 'org.opensuse.yast.system.power-management.reboot')
+	if request.put?
+          if !@sys.nil? and @sys.reboot
+            flash[:message] = _("Rebooting the machine...")
+            # logout from the service, reboot is in progress
+            redirect_to(logout_path) and return
+          else
+            flash[:error] = _("Cannot reboot the machine!")
+          end
+	else
+	    flash[:error] = 'Reboot request is accepted only via PUT method!'
+	end
+
+	redirect_to :controller => :controlpanel, :action => :index
+    end
+
+    def shutdown
+      permission_check( 'org.opensuse.yast.system.power-management.shutdown')
+      if request.put?
+        if !@sys.nil? and @sys.shutdown
+          flash[:message] = _("Shuting down the machine...")
+          # logout from the service, shut down is in progress
+          redirect_to(logout_path) and return
+        else
+          flash[:error] = _("Cannot shutdown the machine!")
+        end
+      else
+          flash[:error] = 'Shutdown request is accepted only via PUT method!'
+      end
+
+      redirect_to :controller => :controlpanel, :action => :index
     end
 
 end

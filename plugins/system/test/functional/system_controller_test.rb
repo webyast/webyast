@@ -94,8 +94,8 @@ class SystemControllerTest < ActionController::TestCase
     # remember the current setting
     session_backup = @request.session
     @request.session = {} # the session is not defined
-
-    ret = get :show
+    mime = Mime::XML
+    ret = get :show, :format=>'xml'
     # expect 401 Unauthorized error code
     assert_response :unauthorized
 
@@ -105,8 +105,8 @@ class SystemControllerTest < ActionController::TestCase
 
   test "return error when not permitted" do
     @controller.stubs(:permission_check).raises(NoPermissionException.new("action", "test"))
-
-    ret = put :update, :system => {:reboot => {:active => true}}
+    mime = Mime::XML
+    ret = put :update, :system => {:reboot => {:active => true}}, :format=>'xml'
     # expect 403 Forbidden error code
     assert_response 403
 
