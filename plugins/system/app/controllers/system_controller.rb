@@ -27,10 +27,6 @@ class SystemController < ApplicationController
     # Initialize GetText and Content-Type.
     init_gettext "webyast-reboot"
 
-    def initialize
-	@sys = System.new rescue nil
-    end
-
     def show
    	@actions = System.instance.actions
 
@@ -97,6 +93,7 @@ class SystemController < ApplicationController
 
     def reboot
         permission_check( 'org.opensuse.yast.system.power-management.reboot')
+	@sys = System.instance
 	if request.put?
           if !@sys.nil? and @sys.reboot
             flash[:message] = _("Rebooting the machine...")
@@ -114,6 +111,7 @@ class SystemController < ApplicationController
 
     def shutdown
       permission_check( 'org.opensuse.yast.system.power-management.shutdown')
+      @sys = System.instance
       if request.put?
         if !@sys.nil? and @sys.shutdown
           flash[:message] = _("Shuting down the machine...")

@@ -152,4 +152,74 @@ class SystemControllerTest < ActionController::TestCase
     assert_response :missing
   end
 
+  test "'reboot' not accpeted via GET" do
+    ret = get :reboot
+
+    # redirected to the control panel?
+    assert_response :found
+    assert_redirected_to :controller => :controlpanel, :action => :index
+
+    # error reported?
+    assert !ret.flash[:error].blank?
+  end
+
+  test "'shutdown' not accpeted via GET" do
+    ret = get :shutdown
+
+    # redirected to the control panel?
+    assert_response :found
+    assert_redirected_to :controller => :controlpanel, :action => :index
+
+    # error reported?
+    assert !ret.flash[:error].blank?
+  end
+
+  test "check 'shutdown' result" do
+    ret = put :shutdown
+    # redirected to the control panel?
+    assert_response :found
+    assert_redirected_to :controller => :logout
+
+    # no error and a message present?
+    assert ret.flash[:error].blank?
+    assert !ret.flash[:message].blank?
+  end
+
+  test "check 'reboot' result" do
+    ret = put :reboot
+
+    # redirected to the control panel?
+    assert_response :found
+    assert_redirected_to :controller => :logout
+
+    # no error and a message present?
+    assert ret.flash[:error].blank?
+    assert !ret.flash[:message].blank?
+  end
+
+  test "check 'shutdown' failed" do
+    @model.stubs(:shutdown).returns(false)
+    ret = put :shutdown
+
+    # redirected to the control panel?
+    assert_response :found
+    assert_redirected_to :controller => :controlpanel, :action => :index
+
+    # error reported?
+    assert !ret.flash[:error].blank?
+  end
+
+  test "check 'reboot' failed" do
+    @model.stubs(:reboot).returns(false)
+    ret = put :reboot
+
+    # redirected to the control panel?
+    assert_response :found
+    assert_redirected_to :controller => :controlpanel, :action => :index
+
+    # error reported?
+    assert !ret.flash[:error].blank?
+  end
+
+
 end
