@@ -27,7 +27,7 @@ Source:         www.tar.bz2
 Source1:        org.opensuse.yast.modules.yapi.network.policy
 BuildRoot:      %{_tmppath}/%{name}-%{version}-build
 BuildArch:      noarch
-BuildRequires:  rubygem-webyast-rake-tasks rubygem-restility
+BuildRequires:  tidy rubygem-webyast-rake-tasks rubygem-restility
 PreReq:         yast2-webservice
 # YaPI/NETWORK.pm
 %if 0%{?suse_version} == 0 || %suse_version > 1110
