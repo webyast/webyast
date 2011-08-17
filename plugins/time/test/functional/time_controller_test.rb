@@ -73,18 +73,70 @@ class TimeControllerTest < ActionController::TestCase
     assert_response :success
   end
 
-  def mock_save
+  def mock_save(use_ntp = false)
     YastService.stubs(:Call).with("YaPI::TIME::Write",{}).returns(true)
     YastService.stubs(:Call).with("YaPI::TIME::Write",
         {"utcstatus"=>"localtime", 
          "timezone"=>"Europe/Prague", 
           "currenttime"=>"2011-16-08 - 14:07:26"}).returns(true)
-    YastService.stubs(:Call).with("YaPI::SERVICES::Execute",
+    unless use_ntp
+      YastService.stubs(:Call).with("YaPI::SERVICES::Execute",
         {"name"=>["s", "ntp"], "action"=>["s", "stop"], 
          "custom"=>["b", false]}).once.returns(true)
+    else
+      YastService.stubs(:Call).with('YaPI::NTP::Synchronize', 
+                                  true, 'de.pool.ntp.org').once.returns("OK")
+      YastService.stubs(:Call).with("YaPI::SERVICES::Execute",
+        {"name"=>["s", "ntp"], "action"=>["s", "start"], 
+         "custom"=>["b", false]}).once.returns(true)
+    end
+
     YastService.stubs(:Call).with("YaPI::SERVICES::Execute",
         {'name' => ['s', 'collectd'], 'action' => ['s', 'restart']
         }).once.returns(true)
     Time.stubs(:permission_check)
   end
+
+  def test_index_html
+    get :index
+    assert_response :success
+    assert_valid_markup
+    assert assigns(:stime)
+  end
+
+  def test_commit
+    mock_save
+    Ntp.expects(:save).never #ntp is not called if time settings is manual
+    post :update, DATA
+    assert_response :redirect
+    assert_redirected_to :controller => "controlpanel", :action => "index"
+  end
+
+  def test_commit_wizard
+    mock_save
+    Ntp.expects(:save).never #ntp is not called if time settings is manual
+    Basesystem.stubs(:installed?).returns(true)
+    session[:wizard_current] = "test"
+    session[:wizard_steps] = "systemtime,language"
+    post :update, DATA
+    assert_response :redirect
+    assert_redirected_to :controller => "controlpanel", :action => "nextstep"
+  end
+
+  def test_ntp
+    mock_save(use_ntp=true)
+    post :update, {"region"=>"Europe", 
+                   "utc"=>"true", 
+                   "timeconfig"=>"ntp_sync", 
+                   "ntp_server"=>"de.pool.ntp.org",
+                   "timezone" => "Europe/Prague"}
+    assert_response :redirect
+    assert_redirected_to :controller => "controlpanel", :action => "index"
+  end
+
+  def test_timezones_ajax
+    post :timezones_for_region, { :value => "Europe" }
+    assert_response :success
+  end
+
 end

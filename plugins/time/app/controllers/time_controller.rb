@@ -85,7 +85,8 @@ public
       yapi_perm_check "ntp.synchronize"
       yapi_perm_check "ntp.setserver"
     end
-    raise InvalidParameters.new :time => "missing params" unless params.has_key?(:region) && params.has_key?(:timezone)
+    raise InvalidParameters.new :time => "missing region" unless params.has_key?(:region) 
+    raise InvalidParameters.new :time => "missing timezone" unless params.has_key?(:timezone)
     
     permission_read
     t = Systemtime.find
