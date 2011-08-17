@@ -34,8 +34,8 @@ Requires:       yast2-country >= 2.18.10
 Requires:       yast2-country >= 2.17.34.2
 %endif
 
-BuildRequires:  webyast-base-testsuite
-BuildRequires:	rubygem-test-unit rubygem-mocha
+BuildRequires:  webyast-base-testsuite webyast-services webyast-ntp
+BuildRequires:	rubygem-test-unit rubygem-mocha tidy vim
 
 #
 %define plugin_name time
@@ -101,6 +101,7 @@ rm -rf $RPM_BUILD_ROOT
 %dir /usr/share/PolicyKit
 %dir /usr/share/PolicyKit/policy/
 %{plugin_dir}/README
+%{plugin_dir}/shortcuts.yml
 %{plugin_dir}/Rakefile
 %{plugin_dir}/init.rb
 %{plugin_dir}/install.rb
