@@ -108,6 +108,7 @@ rm -rf $RPM_BUILD_ROOT
 %dir %{webyast_dir}/vendor/plugins
 %dir %{plugin_dir}
 %{plugin_dir}/Rakefile
+%{plugin_dir}/shortcuts.yml
 %{plugin_dir}/app
 %{plugin_dir}/config
 %{plugin_dir}/doc
