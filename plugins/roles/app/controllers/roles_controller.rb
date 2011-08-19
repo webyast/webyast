@@ -43,11 +43,11 @@ class RolesController < ApplicationController
     @write_permission = permission_granted?("org.opensuse.yast.permissions.write")
   end
 
-  def users_role_id (role_id)
+  def self.users_role_id (role_id)
     "users_of_" + role_id.gsub(/ /,"_") #replace space which cannot be in id - http://www.w3.org/TR/html4/types.html#type-name
   end
 
-  def permission_role_id (permission_id, role_id)
+  def self.permission_role_id (permission_id, role_id)
     permission_id + ":permission_of:" + role_id
   end
 
@@ -77,18 +77,16 @@ class RolesController < ApplicationController
   #
 
   def update
-    if params[:roles].nil? #REST interfce
+    unless params[:roles].nil? #REST interfce
       check_role_name
       role = Role.find(params[:id])
       raise InvalidParameters.new(:id => "NONEXIST") if role.nil?
       role.load(params[:roles])
       logger.info "update role #{params[:id]}. New record? #{role.new_record?}"
       role.save
-      #invalidate permission cache as it is changed
-      Rails.cache.write(PermissionsController::CACHE_ID, Time.at(0))
       show
     else #JavaScript
-      all_permissions = Permission.find(:all).collect {|p| p.id }
+      all_permissions = Permission.find(:all).collect {|p| p[:id] }
       changed_roles = []
     
       Role.find(:all).each do |role|
@@ -99,13 +97,10 @@ class RolesController < ApplicationController
         if new_permissions.sort != role.permissions.sort || new_users.sort != role.users.sort then
           role.permissions = new_permissions
           role.users = new_users
-          role.id = role.name
           changed_roles << role
         end
       end
       changed_roles.each {|role| role.save }
-      #invalidate permission cache as it is changed
-      Rails.cache.write(PermissionsController::CACHE_ID, Time.at(0))
       respond_to do |format|
         format.xml  { render :xml => Role.new.to_xml( :dasherize => false ) }
         format.json { render :json => Role.new.to_json( :dasherize => false ) }
@@ -116,9 +111,6 @@ class RolesController < ApplicationController
 
   # Create new role. 
   def create
-    flash[:warning] = _("Role name is already used or invalid. Allowed is combination of a-z, A-Z, numbers, space, dash and underscore only.") unless Role.new(:name => params[:role_name]).save
-    redirect_to "/roles/"
-
     error = nil
     begin
       check_role_name params[:role_name]
@@ -131,7 +123,6 @@ class RolesController < ApplicationController
                       redirect_to "/roles/" }
       end
     end
-
     role = Role.find(params[:role_name])
     unless role.nil? #role already exists
       respond_to do |format|
@@ -154,7 +145,7 @@ class RolesController < ApplicationController
   # Deletes roles.
   def destroy
     Role.delete params[:id]
-    flash[:notice] = _("Role <i>%s</i> was successfully removed.") % @role.id if request.format.html?
+    flash[:notice] = _("Role <i>%s</i> was successfully removed.") % params[:id] if request.format.html?
     index
   end
 
