@@ -32,7 +32,7 @@ class Role < BaseModel::Base
 attr_accessor :users
 attr_accessor :permissions
 attr_accessor :name
-attr_writer :new_record
+attr_writer   :new_record
 #specify serialized attributes to prevent new_record serialization
 attr_serialized :users, :permissions, :name
 
@@ -43,14 +43,14 @@ ROLES_ASSIGN_PATH = File.join Paths::VAR, "roles", "roles_assign.yml"
 
 def initialize(name="",permissions=[],users=[])
   @name = name
-  @permissions = (permissions||[]).sort
-  @users = (users||[]).sort
-	@new_record = true
+  @permissions = permissions.sort
+  @users = users.sort
+  @new_record = true
 end
 
 #own new_record specification to specify when create and when update is needed
 def new_record?
-	@new_record
+  @new_record
 end
 
 # find role or roles
@@ -63,16 +63,16 @@ def self.find(what=:all,options={})
     result.values || []
   else
     v = result.find { |k,v| k.to_sym == what.to_sym }
-		v[1] if v #return value, not key
+    v[1] if v #return value, not key
   end
 end
 
 # Updates roles and permissions for users which loose, gain role or role
 # change its permission
 def update
-	roles = Role.find_all
+  roles = Role.find_all
   old = roles[name]
-	roles[name] = self
+  roles[name] = self
 #if changed users renew its permissions
   if old.users.sort != @users.sort
     all_users = (@users+old.users).uniq
@@ -89,29 +89,29 @@ def update
     end
   end
 
-	Role.write_definitions roles.values
-	Role.write_assigns roles.values
+  Role.write_definitions roles.values
+  Role.write_assigns roles.values
 end
 
 # Creates a new role and assign permissions for users which is in the role
 def create
-	roles = Role.find_all
-	roles[name] = self
+  roles = Role.find_all
+  roles[name] = self
 #set permission for users of new role
   @users.each do |user|
     Permission.set_permissions user, Role.permissions_for_user(roles.values,user)
   end
-	Role.write_definitions roles.values
-	Role.write_assigns roles.values
+  Role.write_definitions roles.values
+  Role.write_assigns roles.values
 end
 
 # Deletes role
 # FIXME remove permissions from users in deleted role
 def self.delete (id)
-	roles = find_all
-	roles.delete id.to_s
-	write_definitions roles.values
-	write_assigns roles.values
+  roles = find_all
+  roles.delete id.to_s
+  write_definitions roles.values
+  write_assigns roles.values
 end
 
 # Tests if users for role is changed
@@ -136,7 +136,7 @@ def self.find_all
     definitions = YAML::load( IO.read( ROLES_DEF_PATH ) ) || {}#FIXME convert yaml parse error to own exc
     definitions.each do |k,v|
       result[k] = Role.new( k, v )
-  		result[k].new_record = false #already known role
+      result[k].new_record = false #already known role
     end
   rescue IOError,SystemCallError
     raise CorruptedFileException.new( ROLES_DEF_PATH )
@@ -146,9 +146,9 @@ def self.find_all
     assigns = YAML::load( IO.read( ROLES_ASSIGN_PATH ) ) || {}
     assigns.each do |k,v|
       if result[k].nil? #incosistent files
-			  result[k] = Role.new(k)
-  			result[k].new_record = false
-	  	end
+        result[k] = Role.new(k)
+        result[k].new_record = false
+      end
       result[k].users = v.sort
     end
   rescue IOError,SystemCallError
@@ -159,23 +159,23 @@ def self.find_all
 end
 
 def self.write_definitions(roles)
-	result = {}
-	roles.each do |v|
-		result[v.name] = v.permissions
-	end
-	File.open ROLES_DEF_PATH, "w" do |io|
-		io.write result.to_yaml
-	end
+  result = {}
+  roles.each do |v|
+    result[v.name] = v.permissions
+  end
+  File.open ROLES_DEF_PATH, "w" do |io|
+   io.write result.to_yaml
+  end
 end
 
 def self.write_assigns(roles)
-	result = {}
-	roles.each do |v|
-		result[v.name] = v.users
-	end
-	File.open ROLES_ASSIGN_PATH, "w" do |io|
-		io.write result.to_yaml
-	end
+  result = {}
+  roles.each do |v|
+    result[v.name] = v.users
+  end
+  File.open ROLES_ASSIGN_PATH, "w" do |io|
+    io.write result.to_yaml
+  end
 end
 
 def self.permissions_for_user(roles,user)
