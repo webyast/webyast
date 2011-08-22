@@ -1,0 +1,37 @@
+# Copyright (C) 2007 SuSE Linux Products GmbH, Nuernberg
+# This file is distributed under the same license as the package.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: base\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2009-10-28 11:30+0100\n"
+"PO-Revision-Date: 2006-11-03 14:26\n"
+"Last-Translator: Novell Language <language@novell.com>\n"
+"Language-Team: Novell Language <language@novell.com>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: app/controllers/system_controller.rb:16
+#, fuzzy
+#| msgid "Creating the Virtual Machine"
+msgid "Rebooting the machine..."
+msgstr "Idala Umatshini Wenyani"
+
+#: app/controllers/system_controller.rb:20
+#: app/controllers/system_controller.rb:23
+#, fuzzy
+#| msgid "Cannot create the file."
+msgid "Cannot reboot the machine!"
+msgstr "Ayikwazi kudaleka ifayili."
+
+#: app/controllers/system_controller.rb:36
+msgid "Shuting down the machine..."
+msgstr ""
+
+#: app/controllers/system_controller.rb:40
+#: app/controllers/system_controller.rb:43
+msgid "Cannot shutdown the machine!"
+msgstr ""

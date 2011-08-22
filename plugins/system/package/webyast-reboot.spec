@@ -62,6 +62,9 @@ Testsuite for webyast-reboot package.
 mkdir -p public/%{plugin_name}/restdoc
 %webyast_restdoc
 
+export RAILS_PARENT=%{webyast_dir}
+env LANG=en rake makemo
+
 # do not package restdoc sources
 rm -rf restdoc
 #do not package generated doc
@@ -81,6 +84,13 @@ rm -f $RPM_BUILD_ROOT%{plugin_dir}/COPYING
 # Policies
 mkdir -p $RPM_BUILD_ROOT/usr/share/PolicyKit/policy
 install -m 0644 %SOURCE1 $RPM_BUILD_ROOT/usr/share/PolicyKit/policy/
+
+# remove .po files (no longer needed)
+rm -rf $RPM_BUILD_ROOT/%{plugin_dir}/po
+
+# search locale files
+%find_lang webyast-reboot
+
 
 %clean
 rm -rf $RPM_BUILD_ROOT
@@ -113,7 +123,7 @@ if [ $1 -eq 0 ] ; then
   polkit-auth --user %{webyast_user} --revoke org.freedesktop.hal.power-management.reboot-multiple-sessions >& /dev/null || :
 fi
 
-%files 
+%files -f webyast-reboot.lang
 
 %defattr(-,root,root)
 %dir %{webyast_dir}
@@ -129,6 +139,7 @@ fi
 %{plugin_dir}/app
 %{plugin_dir}/config
 %{plugin_dir}/public
+%{plugin_dir}/locale
 
 %dir /usr/share/PolicyKit
 %dir /usr/share/PolicyKit/policy

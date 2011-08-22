@@ -1,0 +1,33 @@
+# translation of yast_webclient_system.fi.po to suomi
+# Jyri Palokangas <jyri.palokangas@opensuse.org>, 2009.
+msgid ""
+msgstr ""
+"Project-Id-Version: yast_webclient_system.fi\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2009-10-28 11:30+0100\n"
+"PO-Revision-Date: 2009-09-25 08:24+0300\n"
+"Last-Translator: Jyri Palokangas <jyri.palokangas@opensuse.org>\n"
+"Language-Team: suomi <fi@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: KBabel 1.11.4\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+
+#: app/controllers/system_controller.rb:16
+msgid "Rebooting the machine..."
+msgstr "Uudelleen käynnistetään tietokonetta..."
+
+#: app/controllers/system_controller.rb:20
+#: app/controllers/system_controller.rb:23
+msgid "Cannot reboot the machine!"
+msgstr "Tietokoneen uudelleen käynnistys ei onnistunut!"
+
+#: app/controllers/system_controller.rb:36
+msgid "Shuting down the machine..."
+msgstr "Sammutetaan tietokonetta..."
+
+#: app/controllers/system_controller.rb:40
+#: app/controllers/system_controller.rb:43
+msgid "Cannot shutdown the machine!"
+msgstr "Tietokoneen sammuttaminen ei onnistunut!"

@@ -1,0 +1,39 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: webyast-reboot-ui 1.0.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2010-08-02 09:18+0200\n"
+"PO-Revision-Date: 2005-08-24 17:53+0300\n"
+"Last-Translator: Hellenic SuSE Translation Team <hstg@billg.gr>\n"
+"Language-Team: Hellenic-Ελληνικά-Greek <hstg@billg.gr>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: KBabel 1.10\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+
+#: app/controllers/system_controller.rb:36
+#: app/controllers/system_controller.rb:36
+#, fuzzy
+msgid "Rebooting the machine..."
+msgstr "Δημιουργία της Εικονικής Μηχανής"
+
+#: app/controllers/system_controller.rb:40
+#: app/controllers/system_controller.rb:44
+#: app/controllers/system_controller.rb:40
+#: app/controllers/system_controller.rb:44
+#, fuzzy
+msgid "Cannot reboot the machine!"
+msgstr "Αδυναμία δημιουργίας του αρχείου."
+
+#: app/controllers/system_controller.rb:57
+#: app/controllers/system_controller.rb:57
+msgid "Shuting down the machine..."
+msgstr ""
+
+#: app/controllers/system_controller.rb:61
+#: app/controllers/system_controller.rb:65
+#: app/controllers/system_controller.rb:61
+#: app/controllers/system_controller.rb:65
+msgid "Cannot shutdown the machine!"
+msgstr ""

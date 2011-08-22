@@ -1,0 +1,39 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: webyast-reboot-ui 1.0.0\n"
+"Report-Msgid-Bugs-To: translation@suse.de\n"
+"POT-Creation-Date: 2010-08-02 09:18+0200\n"
+"PO-Revision-Date: 2010-04-30 16:32+0300\n"
+"Last-Translator: Lucian Oprea <oprea.luci@gmail.com>\n"
+"Language-Team: Comunitatea traducatorilor openSUSE Romania. Contact: <oprea."
+"luci@gmail.com><strainu10@gmail.com><traduceri@suseromania.ro>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms:  nplurals=3; plural=n==1 ? 0 : (n==0 || (n%100 > 0 && n%100 < "
+"20)) ? 1 : 2;\n"
+"X-Generator: Narro 0.9.4 on http://tradu.softwareliber.ro\n"
+
+#: app/controllers/system_controller.rb:36
+#: app/controllers/system_controller.rb:36
+msgid "Rebooting the machine..."
+msgstr "Repornesc calculatorul..."
+
+#: app/controllers/system_controller.rb:40
+#: app/controllers/system_controller.rb:44
+#: app/controllers/system_controller.rb:40
+#: app/controllers/system_controller.rb:44
+msgid "Cannot reboot the machine!"
+msgstr "Nu pot reporni calculatorul!"
+
+#: app/controllers/system_controller.rb:57
+#: app/controllers/system_controller.rb:57
+msgid "Shuting down the machine..."
+msgstr "Se opreşte calculatorul..."
+
+#: app/controllers/system_controller.rb:61
+#: app/controllers/system_controller.rb:65
+#: app/controllers/system_controller.rb:61
+#: app/controllers/system_controller.rb:65
+msgid "Cannot shutdown the machine!"
+msgstr "Nu pot opri calculatorul!"

@@ -1,0 +1,45 @@
+# Catalan message file for YaST2 (@memory@).
+# Copyright (C) 2005 SUSE Linux Products GmbH.
+# Copyright (C) 2002 SuSE Linux AG.
+# Copyright (C) 2000, 2001 SuSE GmbH.
+# Jaume Badiella <myotis@drac.com>, 2001.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: webyast-reboot-ui 1.0.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2010-08-02 09:18+0200\n"
+"PO-Revision-Date: 2002-02-08 15:47+0100\n"
+"Last-Translator: Jordi Bruguera i Cortada <jordi@grn.es>\n"
+"Language-Team: Catalan\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"#-#-#-#-#  compendi_yast_11.1_11.2_e.po (YaST (@memory@))  #-#-#-#-#\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"#-#-#-#-#  isns.ca.po (YaST (@memory@))  #-#-#-#-#\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: app/controllers/system_controller.rb:36
+#: app/controllers/system_controller.rb:36
+msgid "Rebooting the machine..."
+msgstr "S'està reiniciant la màquina..."
+
+#: app/controllers/system_controller.rb:40
+#: app/controllers/system_controller.rb:44
+#: app/controllers/system_controller.rb:40
+#: app/controllers/system_controller.rb:44
+msgid "Cannot reboot the machine!"
+msgstr "No s'ha pogut reiniciar la màquina!"
+
+#: app/controllers/system_controller.rb:57
+#: app/controllers/system_controller.rb:57
+msgid "Shuting down the machine..."
+msgstr "S'està aturant la màquina..."
+
+#: app/controllers/system_controller.rb:61
+#: app/controllers/system_controller.rb:65
+#: app/controllers/system_controller.rb:61
+#: app/controllers/system_controller.rb:65
+msgid "Cannot shutdown the machine!"
+msgstr "No s'ha pogut aturar la màquina!"

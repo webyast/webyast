@@ -1,0 +1,41 @@
+# Marathi message file for YaST2 (@memory@).
+# Copyright (C) 2007 SUSE Linux Products GmbH.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: webyast-reboot-ui 1.0.0\n"
+"Report-Msgid-Bugs-To: i18n@suse.de\n"
+"POT-Creation-Date: 2010-08-02 09:18+0200\n"
+"PO-Revision-Date: 2005-07-29 15:37+0530\n"
+"Last-Translator: i18n@suse.de\n"
+"Language-Team: Gujarati <i18n@suse.de>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n!=1);\n"
+
+#: app/controllers/system_controller.rb:36
+#: app/controllers/system_controller.rb:36
+#, fuzzy
+msgid "Rebooting the machine..."
+msgstr "ર્વચ્યૂઅલ મશીન બનાવી રહેલ છે"
+
+#: app/controllers/system_controller.rb:40
+#: app/controllers/system_controller.rb:44
+#: app/controllers/system_controller.rb:40
+#: app/controllers/system_controller.rb:44
+#, fuzzy
+msgid "Cannot reboot the machine!"
+msgstr "ફાઈલ બનાવી શકાતી નથી."
+
+#: app/controllers/system_controller.rb:57
+#: app/controllers/system_controller.rb:57
+msgid "Shuting down the machine..."
+msgstr ""
+
+#: app/controllers/system_controller.rb:61
+#: app/controllers/system_controller.rb:65
+#: app/controllers/system_controller.rb:61
+#: app/controllers/system_controller.rb:65
+msgid "Cannot shutdown the machine!"
+msgstr ""

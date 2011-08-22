@@ -1,0 +1,39 @@
+# translation of yast_webclient_system.hu.po to Hungarian
+# Kalman Kemenczy <kkemenczy@novell.com>, 2009.
+msgid ""
+msgstr ""
+"Project-Id-Version: webyast-reboot-ui 1.0.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2010-08-02 09:18+0200\n"
+"PO-Revision-Date: 2009-10-08 19:38+0200\n"
+"Last-Translator: Kalman Kemenczy <kkemenczy@novell.com>\n"
+"Language-Team: Hungarian <hu@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: KBabel 1.11.4\n"
+"Plural-Forms:  nplurals=2; plural=(n != 1);\n"
+
+#: app/controllers/system_controller.rb:36
+#: app/controllers/system_controller.rb:36
+msgid "Rebooting the machine..."
+msgstr "Számítógép újraindítása..."
+
+#: app/controllers/system_controller.rb:40
+#: app/controllers/system_controller.rb:44
+#: app/controllers/system_controller.rb:40
+#: app/controllers/system_controller.rb:44
+msgid "Cannot reboot the machine!"
+msgstr "A számítógép nem indítható újra!"
+
+#: app/controllers/system_controller.rb:57
+#: app/controllers/system_controller.rb:57
+msgid "Shuting down the machine..."
+msgstr "Számítógép leállítása..."
+
+#: app/controllers/system_controller.rb:61
+#: app/controllers/system_controller.rb:65
+#: app/controllers/system_controller.rb:61
+#: app/controllers/system_controller.rb:65
+msgid "Cannot shutdown the machine!"
+msgstr "A számítógép nem állítható le!"

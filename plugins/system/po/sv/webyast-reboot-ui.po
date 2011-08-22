@@ -1,0 +1,31 @@
+# Copyright (C) 2006 SuSE Linux Products GmbH, Nuernberg
+# This file is distributed under the same license as the package.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: yast_webclient_system\n"
+"POT-Creation-Date: 2009-11-20 14:34+0100\n"
+"PO-Revision-Date: 2010-02-02 11:19\n"
+"Last-Translator: Novell Language <language@novell.com>\n"
+"Language-Team: Novell Language <language@novell.com>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: app/controllers/system_controller.rb:16
+msgid "Rebooting the machine..."
+msgstr "Startar om maskinen..."
+
+#: app/controllers/system_controller.rb:20 app/controllers/system_controller.rb:23
+msgid "Cannot reboot the machine!"
+msgstr "Det går inte att starta om maskinen."
+
+#: app/controllers/system_controller.rb:36
+msgid "Shuting down the machine..."
+msgstr "Stänger av maskinen..."
+
+#: app/controllers/system_controller.rb:40 app/controllers/system_controller.rb:43
+msgid "Cannot shutdown the machine!"
+msgstr "Det går inte att stänga av maskinen."
+

@@ -1,0 +1,33 @@
+# Sinhala message file for YaST2 (@memory@).
+# Copyright (C) 2007 SUSE Linux Products GmbH.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: YaST (@memory@)\n"
+"Report-Msgid-Bugs-To: i18n@suse.de\n"
+"POT-Creation-Date: 2009-10-28 11:30+0100\n"
+"PO-Revision-Date: 2005-07-29 15:37+0530\n"
+"Last-Translator: i18n@suse.de\n"
+"Language-Team: Sinhala <i18n@suse.de>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n!=1);\n"
+
+#: app/controllers/system_controller.rb:16
+msgid "Rebooting the machine..."
+msgstr ""
+
+#: app/controllers/system_controller.rb:20
+#: app/controllers/system_controller.rb:23
+msgid "Cannot reboot the machine!"
+msgstr ""
+
+#: app/controllers/system_controller.rb:36
+msgid "Shuting down the machine..."
+msgstr ""
+
+#: app/controllers/system_controller.rb:40
+#: app/controllers/system_controller.rb:43
+msgid "Cannot shutdown the machine!"
+msgstr ""
