@@ -1,0 +1,359 @@
+# Copyright (C) 2006 SuSE Linux Products GmbH, Nuernberg
+# This file is distributed under the same license as the package.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: webyast-users-ui\n"
+"POT-Creation-Date: 2010-08-18 10:18+0200\n"
+"PO-Revision-Date: 2010-08-26 09:28\n"
+"Last-Translator: Novell Language <language@novell.com>\n"
+"Language-Team: Novell Language <language@novell.com>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+
+#: app/controllers/groups_controller.rb:36 ./app/controllers/groups_controller.rb:36
+msgid "Missing group name parameter"
+msgstr "누락된 그룹 이름 파라미터"
+
+#: app/controllers/groups_controller.rb:48 ./app/controllers/groups_controller.rb:48
+msgid "Missing group parameters"
+msgstr "누락된 그룹 파라미터"
+
+#: app/controllers/groups_controller.rb:58 ./app/controllers/groups_controller.rb:58
+msgid "Please enter a valid group name"
+msgstr "올바른 그룹 이름을 입력하십시오."
+
+#: app/controllers/groups_controller.rb:68 ./app/controllers/groups_controller.rb:68
+msgid "Please enter a valid GID"
+msgstr "올바른 GID를 입력하십시오."
+
+#: app/controllers/groups_controller.rb:78 ./app/controllers/groups_controller.rb:78
+msgid "Please enter a valid group type. Only \"system\" or \"local\" are allowed."
+msgstr "올바른 그룹 유형을 입력하십시오. \"시스템\" 또는 \"로컬\"만 허용됩니다."
+
+#: app/controllers/groups_controller.rb:89 ./app/controllers/groups_controller.rb:89
+msgid "Please enter a valid list of members"
+msgstr "올바른 구성원 목록을 입력하십시오."
+
+#: app/controllers/groups_controller.rb:106 ./app/controllers/groups_controller.rb:106
+msgid "Cannot read users list."
+msgstr "사용자 목록을 읽을 수 없습니다."
+
+#: app/controllers/groups_controller.rb:117 ./app/controllers/groups_controller.rb:117
+msgid "Group named <i>%s</i> was not found."
+msgstr "<i>%s</i> 그룹을 찾을 수 없습니다."
+
+#: app/controllers/groups_controller.rb:127 ./app/controllers/groups_controller.rb:127
+msgid "No groups found."
+msgstr "그룹을 찾을 수 없습니다."
+
+#: app/controllers/groups_controller.rb:155 ./app/controllers/groups_controller.rb:155
+msgid "Cannot read groups list."
+msgstr "그룹 목록을 읽을 수 없습니다."
+
+#: app/controllers/groups_controller.rb:228 ./app/controllers/groups_controller.rb:228
+msgid "Group <i>%s</i> has been added."
+msgstr "<i>%s</i> 그룹이 추가되었습니다."
+
+#: app/controllers/groups_controller.rb:243 ./app/controllers/groups_controller.rb:243
+msgid "Unknown backend error"
+msgstr "알 수 없는 백엔드 오류"
+
+#: app/controllers/groups_controller.rb:270 ./app/controllers/groups_controller.rb:270
+msgid "Group <i>%s</i> has been updated."
+msgstr "<i>%s</i> 그룹이 업데이트되었습니다."
+
+#: app/controllers/groups_controller.rb:276 ./app/controllers/groups_controller.rb:276
+msgid "Cannot update group <i>%s</i>: Unknown error"
+msgstr "<i>%s</i> 그룹을 업데이트할 수 없습니다. 알 수 없는 오류"
+
+#: app/controllers/groups_controller.rb:310 ./app/controllers/groups_controller.rb:310
+msgid "Group <i>%s</i> has been deleted."
+msgstr "<i>%s</i> 그룹이 삭제되었습니다."
+
+#: app/controllers/users_controller.rb:45 ./app/controllers/users_controller.rb:45
+msgid "No users found."
+msgstr "사용자를 찾을 수 없습니다."
+
+#: app/controllers/users_controller.rb:266 ./app/controllers/users_controller.rb:266
+msgid "User <i>%s</i> was successfully created."
+msgstr "사용자 <i>%s</i>이(가) 성공적으로 생성되었습니다."
+
+#: app/controllers/users_controller.rb:309 ./app/controllers/users_controller.rb:309
+msgid "User <i>%s</i> was successfully updated."
+msgstr "사용자 <i>%s</i>이(가) 성공적으로 업데이트되었습니다."
+
+#: app/controllers/users_controller.rb:327 ./app/controllers/users_controller.rb:327
+msgid "User <i>%s</i> was successfully removed."
+msgstr "사용자 <i>%s</i>이(가) 성공적으로 제거되었습니다."
+
+#: app/controllers/users_controller.rb:329 ./app/controllers/users_controller.rb:329
+msgid "Error: Could not remove user <i>%s</i>."
+msgstr "오류: 사용자 <i>%s</i>을(를) 제거할 수 없습니다."
+
+#: app/views/groups/index.html.erb:63 app/views/groups/new.html.erb:67
+#: ./app/views/groups/index.html.erb:63 ./app/views/groups/new.html.erb:67
+msgid "Select Members"
+msgstr "구성원 선택"
+
+#: app/views/groups/index.html.erb:64 app/views/groups/new.html.erb:68
+#: ./app/views/groups/index.html.erb:64 ./app/views/groups/new.html.erb:68
+msgid "Selected Members"
+msgstr "선택한 구성원"
+
+#: app/views/groups/index.html.erb:65 app/views/groups/new.html.erb:69
+#: ./app/views/groups/index.html.erb:65 ./app/views/groups/new.html.erb:69
+msgid "Available Members"
+msgstr "사용 가능한 구성원"
+
+#: app/views/groups/index.html.erb:66 app/views/groups/new.html.erb:70
+#: ./app/views/groups/index.html.erb:66 ./app/views/groups/new.html.erb:70
+msgid "Click user names to select/unselect members"
+msgstr "사용자 이름을 클릭하여 구성원을 선택/선택 취소"
+
+#: app/views/groups/index.html.erb:105 app/views/groups/new.html.erb:91 app/views/users/_user_form.erb:57
+#: app/views/users/_user_form.erb:61 ./app/views/groups/index.html.erb:105
+#: ./app/views/groups/new.html.erb:91 ./app/views/users/_user_form.erb:57
+#: ./app/views/users/_user_form.erb:61 ./shortcuts.yml:15
+msgid "Groups"
+msgstr "그룹"
+
+#: app/views/groups/index.html.erb:117 app/views/users/index.html.erb:200
+#: ./app/views/groups/index.html.erb:117 ./app/views/users/index.html.erb:200
+msgid "Filter:"
+msgstr "필터:"
+
+#: app/views/groups/index.html.erb:125 app/views/groups/index.html.erb:137
+#: ./app/views/groups/index.html.erb:125 ./app/views/groups/index.html.erb:137
+msgid "Add New Group"
+msgstr "새 그룹 추가"
+
+#: app/views/groups/index.html.erb:128 app/views/groups/index.html.erb:205
+#: ./app/views/groups/index.html.erb:128 ./app/views/groups/index.html.erb:205
+msgid "Manage Users"
+msgstr "사용자 관리"
+
+#: app/views/groups/index.html.erb:153 app/views/groups/new.html.erb:105
+#: ./app/views/groups/index.html.erb:153 ./app/views/groups/new.html.erb:105
+msgid "Group Name"
+msgstr "그룹 이름"
+
+#: app/views/groups/index.html.erb:157 ./app/views/groups/index.html.erb:157
+msgid "Group ID"
+msgstr "그룹 ID"
+
+#: app/views/groups/index.html.erb:161 app/views/groups/new.html.erb:109
+#: ./app/views/groups/index.html.erb:161 ./app/views/groups/new.html.erb:109
+msgid "Members"
+msgstr "구성원"
+
+#: app/views/groups/index.html.erb:164 app/views/groups/new.html.erb:113
+#: ./app/views/groups/index.html.erb:164 ./app/views/groups/new.html.erb:113
+msgid "Manage Members"
+msgstr "구성원 관리"
+
+#: app/views/groups/index.html.erb:171 app/views/groups/index.html.erb:186
+#: app/views/groups/new.html.erb:122 app/views/users/_user_form.erb:149
+#: app/views/users/index.html.erb:122 app/views/users/index.html.erb:147 app/views/users/new.html.erb:156
+#: ./app/views/groups/index.html.erb:171 ./app/views/groups/index.html.erb:186
+#: ./app/views/groups/new.html.erb:122 ./app/views/users/_user_form.erb:149
+#: ./app/views/users/index.html.erb:122 ./app/views/users/index.html.erb:147
+#: ./app/views/users/new.html.erb:156
+msgid "Please wait"
+msgstr "잠시 기다리십시오"
+
+#: app/views/groups/index.html.erb:172 app/views/groups/new.html.erb:123
+#: app/views/users/_user_form.erb:147 ./app/views/groups/index.html.erb:172
+#: ./app/views/groups/new.html.erb:123 ./app/views/users/_user_form.erb:147
+msgid "Save"
+msgstr "저장"
+
+#: app/views/groups/index.html.erb:187 app/views/users/_user_form.erb:150
+#: ./app/views/groups/index.html.erb:187 ./app/views/users/_user_form.erb:150
+msgid "Delete"
+msgstr "삭제"
+
+#: app/views/groups/index.html.erb:189 ./app/views/groups/index.html.erb:189
+msgid "Are you sure to delete group '%s'?"
+msgstr "그룹 '%s'을(를) 삭제하시겠습니까?"
+
+#: app/views/groups/new.html.erb:92 ./app/views/groups/new.html.erb:92
+msgid "Add new group"
+msgstr "새 그룹 추가"
+
+#: app/views/users/_user_form.erb:25 ./app/views/users/_user_form.erb:25
+msgid "Login Settings"
+msgstr "로그인 설정"
+
+#: app/views/users/_user_form.erb:28 ./app/views/users/_user_form.erb:28
+msgid "Full Name"
+msgstr "전체 이름"
+
+#: app/views/users/_user_form.erb:34 ./app/views/users/_user_form.erb:34
+msgid "Login Name"
+msgstr "로그인 이름"
+
+#: app/views/users/_user_form.erb:41 ./app/views/users/_user_form.erb:41
+msgid "Password"
+msgstr "비밀번호"
+
+#: app/views/users/_user_form.erb:48 ./app/views/users/_user_form.erb:48
+msgid "Confirm Password"
+msgstr "비밀번호 확인"
+
+#: app/views/users/_user_form.erb:70 app/views/users/index.html.erb:211
+#: app/views/users/index.html.erb:255 ./app/views/users/_user_form.erb:70
+#: ./app/views/users/index.html.erb:211 ./app/views/users/index.html.erb:255
+msgid "Manage Groups"
+msgstr "그룹 관리"
+
+#: app/views/users/_user_form.erb:80 ./app/views/users/_user_form.erb:80
+msgid "Default Group"
+msgstr "기본 그룹"
+
+#: app/views/users/_user_form.erb:89 app/views/users/index.html.erb:89 app/views/users/new.html.erb:96
+#: ./app/views/users/_user_form.erb:89 ./app/views/users/index.html.erb:89
+#: ./app/views/users/new.html.erb:96
+msgid "Select Default Group"
+msgstr "기본 그룹 선택"
+
+#: app/views/users/_user_form.erb:101 ./app/views/users/_user_form.erb:101
+msgid "Advanced"
+msgstr "고급"
+
+#: app/views/users/_user_form.erb:104 ./app/views/users/_user_form.erb:104
+msgid "Home Directory"
+msgstr "홈 디렉토리"
+
+#: app/views/users/_user_form.erb:110 ./app/views/users/_user_form.erb:110
+msgid "Login Shell"
+msgstr "로그인 셸"
+
+#: app/views/users/_user_form.erb:116 ./app/views/users/_user_form.erb:116
+msgid "UID Number"
+msgstr "UID 번호"
+
+#: app/views/users/_user_form.erb:125 ./app/views/users/_user_form.erb:125
+msgid "Roles"
+msgstr "역할"
+
+#: app/views/users/_user_form.erb:134 ./app/views/users/_user_form.erb:134
+msgid "Manage Roles"
+msgstr "역할 관리"
+
+#: app/views/users/_user_form.erb:152 ./app/views/users/_user_form.erb:152
+msgid "Are you sure to delete user '%s'?"
+msgstr "사용자 '%s'을(를) 삭제하시겠습니까?"
+
+#: app/views/users/index.html.erb:69 app/views/users/new.html.erb:76 ./app/views/users/index.html.erb:69
+#: ./app/views/users/new.html.erb:76
+msgid "Select Groups"
+msgstr "그룹 선택"
+
+#: app/views/users/index.html.erb:70 app/views/users/new.html.erb:77 ./app/views/users/index.html.erb:70
+#: ./app/views/users/new.html.erb:77
+msgid "Selected Groups"
+msgstr "선택한 그룹"
+
+#: app/views/users/index.html.erb:71 app/views/users/new.html.erb:78 ./app/views/users/index.html.erb:71
+#: ./app/views/users/new.html.erb:78
+msgid "Available Groups"
+msgstr "사용 가능한 그룹"
+
+#: app/views/users/index.html.erb:72 app/views/users/new.html.erb:79 ./app/views/users/index.html.erb:72
+#: ./app/views/users/new.html.erb:79
+msgid "Click group names to select/unselect groups"
+msgstr "그룹 이름을 클릭하여 그룹을 선택/선택 취소"
+
+#: app/views/users/index.html.erb:90 app/views/users/new.html.erb:97 ./app/views/users/index.html.erb:90
+#: ./app/views/users/new.html.erb:97
+msgid "Click a group name to choose users default group"
+msgstr "그룹 이름을 클릭하여 사용자 기본 그룹을 선택"
+
+#: app/views/users/index.html.erb:104 app/views/users/new.html.erb:111
+#: ./app/views/users/index.html.erb:104 ./app/views/users/new.html.erb:111
+msgid "Select Roles"
+msgstr "역할 선택"
+
+#: app/views/users/index.html.erb:105 app/views/users/new.html.erb:112
+#: ./app/views/users/index.html.erb:105 ./app/views/users/new.html.erb:112
+msgid "Selected Roles"
+msgstr "선택된 역할"
+
+#: app/views/users/index.html.erb:106 app/views/users/new.html.erb:113
+#: ./app/views/users/index.html.erb:106 ./app/views/users/new.html.erb:113
+msgid "Available Roles"
+msgstr "사용 가능한 역할"
+
+#: app/views/users/index.html.erb:107 app/views/users/new.html.erb:114
+#: ./app/views/users/index.html.erb:107 ./app/views/users/new.html.erb:114
+msgid "Click group names to select/unselect roles"
+msgstr "그룹 이름을 클릭하여 역할을 선택/선택 취소"
+
+#: app/views/users/index.html.erb:130 ./app/views/users/index.html.erb:130
+msgid " The passwords do not match."
+msgstr " 비밀번호가 일치하지 않습니다."
+
+#: app/views/users/index.html.erb:131 app/views/users/new.html.erb:145
+#: ./app/views/users/index.html.erb:131 ./app/views/users/new.html.erb:145
+msgid "This field is required."
+msgstr "이 필드는 필수입니다."
+
+#: app/views/users/index.html.erb:155 app/views/users/new.html.erb:165
+#: ./app/views/users/index.html.erb:155 ./app/views/users/new.html.erb:165
+msgid "Password Strength:"
+msgstr "비밀번호 강도:"
+
+#: app/views/users/index.html.erb:157 app/views/users/new.html.erb:167
+#: ./app/views/users/index.html.erb:157 ./app/views/users/new.html.erb:167
+msgid "Weak"
+msgstr "약함"
+
+#: app/views/users/index.html.erb:158 app/views/users/new.html.erb:168
+#: ./app/views/users/index.html.erb:158 ./app/views/users/new.html.erb:168
+msgid "Normal"
+msgstr "일반"
+
+#: app/views/users/index.html.erb:159 app/views/users/new.html.erb:169
+#: ./app/views/users/index.html.erb:159 ./app/views/users/new.html.erb:169
+msgid "Medium"
+msgstr "보통"
+
+#: app/views/users/index.html.erb:160 app/views/users/new.html.erb:170
+#: ./app/views/users/index.html.erb:160 ./app/views/users/new.html.erb:170
+msgid "Strong"
+msgstr "강함"
+
+#: app/views/users/index.html.erb:161 app/views/users/new.html.erb:171
+#: ./app/views/users/index.html.erb:161 ./app/views/users/new.html.erb:171
+msgid "Very Strong"
+msgstr "매우 강함"
+
+#: app/views/users/index.html.erb:188 app/views/users/new.html.erb:204
+#: ./app/views/users/index.html.erb:188 ./app/views/users/new.html.erb:204 ./shortcuts.yml:6
+msgid "Users"
+msgstr "사용자"
+
+#: app/views/users/index.html.erb:208 app/views/users/index.html.erb:220
+#: ./app/views/users/index.html.erb:208 ./app/views/users/index.html.erb:220
+msgid "Add New User"
+msgstr "새 사용자 추가"
+
+#: app/views/users/new.html.erb:144 ./app/views/users/new.html.erb:144
+msgid "The passwords do not match."
+msgstr "비밀번호가 일치하지 않습니다."
+
+#: app/views/users/new.html.erb:204 ./app/views/users/new.html.erb:204
+msgid "Add new user"
+msgstr "새 사용자 추가"
+
+#: ./shortcuts.yml:7
+msgid "Manage user accounts"
+msgstr "사용자 계정 관리"
+
+#: ./shortcuts.yml:16
+msgid "Manage groups"
+msgstr "그룹 관리"
+

@@ -1,0 +1,144 @@
+# Copyright (C) 2007 SuSE Linux Products GmbH, Nuernberg
+# This file is distributed under the same license as the package.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: base\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2009-11-20 14:34+0100\n"
+"PO-Revision-Date: 2006-11-03 14:26\n"
+"Last-Translator: Novell Language <language@novell.com>\n"
+"Language-Team: Novell Language <language@novell.com>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: app/controllers/users_controller.rb:18
+msgid "Invalid session, please login again."
+msgstr ""
+
+#: app/controllers/users_controller.rb:144
+msgid "User <i>%s</i> was successfully created."
+msgstr ""
+
+#: app/controllers/users_controller.rb:148
+#, fuzzy
+#| msgid "Empty CA name."
+msgid "Empty UID value"
+msgstr "Igama le-CA elikhamte."
+
+#: app/controllers/users_controller.rb:152
+msgid "UID: value >= 1000 is valid for local user only"
+msgstr ""
+
+#: app/controllers/users_controller.rb:197
+msgid "User <i>%s</i> was successfully updated."
+msgstr ""
+
+#: app/controllers/users_controller.rb:218
+msgid "User <i>%s</i> was successfully removed."
+msgstr ""
+
+#: app/controllers/users_controller.rb:220
+msgid "Error: Could not remove user <i>%s</i>."
+msgstr ""
+
+#: app/views/users/index.html.erb:1
+msgid "Local User"
+msgstr ""
+
+#: app/views/users/index.html.erb:6
+msgid "Login"
+msgstr "Ngena"
+
+#: app/views/users/index.html.erb:7 app/views/users/edit.html.erb:11
+#: app/views/users/new.html.erb:8
+#, fuzzy
+#| msgid "Name"
+msgid "Full Name"
+msgstr "Igama"
+
+#: app/views/users/index.html.erb:8
+#, fuzzy
+#| msgid "&Edit"
+msgid "Edit"
+msgstr "&Hlela"
+
+#: app/views/users/index.html.erb:27
+#, fuzzy
+#| msgid "You are <strong>online</strong>"
+msgid "<strong>[New User]</strong>"
+msgstr "Wena <womelele>ukwimo yokusebenza</womelele>"
+
+#: app/views/users/index.html.erb:31 app/views/users/edit.html.erb:43
+#: app/views/users/new.html.erb:44
+msgid "Back"
+msgstr "Emva"
+
+#: app/views/users/edit.html.erb:1
+msgid "Edit user %s"
+msgstr ""
+
+#: app/views/users/edit.html.erb:15 app/views/users/new.html.erb:12
+msgid "Groups"
+msgstr "Amaqela"
+
+#: app/views/users/edit.html.erb:19
+#, fuzzy
+#| msgid "Default Route"
+msgid "Default Group"
+msgstr "Indla eHlala ikhona"
+
+#: app/views/users/edit.html.erb:23 app/views/users/new.html.erb:20
+#, fuzzy
+#| msgid "Directory\n"
+msgid "Home Directory"
+msgstr "Uvimba weefayili\n"
+
+#: app/views/users/edit.html.erb:27 app/views/users/new.html.erb:28
+#, fuzzy
+#| msgid "Login"
+msgid "Login Shell"
+msgstr "Ngena"
+
+#: app/views/users/edit.html.erb:31 app/views/users/new.html.erb:32
+#, fuzzy
+#| msgid "Login"
+msgid "Login Name"
+msgstr "Ngena"
+
+#: app/views/users/edit.html.erb:35 app/views/users/new.html.erb:36
+msgid "UID Number"
+msgstr ""
+
+# password dialog title
+#: app/views/users/edit.html.erb:39 app/views/users/new.html.erb:40
+msgid "Password"
+msgstr "Igama lokugqithisa"
+
+#: app/views/users/edit.html.erb:43
+msgid "Update"
+msgstr "&Uhlaziyo"
+
+#: app/views/users/new.html.erb:1
+#, fuzzy
+#| msgid "New Version"
+msgid "New User"
+msgstr "Inguqulelo Entsha"
+
+#: app/views/users/new.html.erb:16
+#, fuzzy
+#| msgid "Default route ok."
+msgid "Default Group (GID)"
+msgstr "Indlela ehlala ikhona ilungile."
+
+#: app/views/users/new.html.erb:24
+#, fuzzy
+#| msgid "Cannot create directory %1: %2."
+msgid "Do not create home directory"
+msgstr "Akakwazi kudaleka uvimba weefayili %1: %2."
+
+#: app/views/users/new.html.erb:44
+msgid "Create"
+msgstr ""

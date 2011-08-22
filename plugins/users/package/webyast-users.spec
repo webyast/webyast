@@ -60,6 +60,9 @@ needed at runtime.
 %build
 #do not package generated doc
 rm -rf doc
+export RAILS_PARENT=/srv/www/yast
+env LANG=en rake makemo
+rake js:users
 
 %check
 # run the testsuite
@@ -78,6 +81,13 @@ rm -f $RPM_BUILD_ROOT%{plugin_dir}/COPYING
 mkdir -p $RPM_BUILD_ROOT/usr/share/PolicyKit/policy
 install -m 0644 %SOURCE1 $RPM_BUILD_ROOT/usr/share/PolicyKit/policy/
 
+# remove .po files (no longer needed)
+rm -rf $RPM_BUILD_ROOT/%{plugin_dir}/po
+
+# search locale files
+%find_lang webyast-users
+
+
 %clean
 rm -rf $RPM_BUILD_ROOT
 
@@ -89,7 +99,7 @@ rm -rf $RPM_BUILD_ROOT
 # and for webyast
 /usr/sbin/grantwebyastrights --user %{webyast_user} --action grant > /dev/null ||:
 
-%files 
+%files -f webyast-users.lang
 %defattr(-,root,root)
 %dir %{webyast_dir}
 %dir %{webyast_dir}/vendor

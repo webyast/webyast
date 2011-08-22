@@ -1,0 +1,444 @@
+# @TITLE@
+# Copyright (C) 2006, SUSE Linux GmbH, Nuremberg
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+# This file is distributed under the same license as @PACKAGE@ package. FIRST
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: webyast-users-ui 1.0.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2010-08-02 09:18+0200\n"
+"PO-Revision-Date: 2005-08-24 17:37+0200\n"
+"Last-Translator: Janez Krek <janez.krek@euroteh.si>\n"
+"Language-Team: Slovenščina <sl@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: KBabel 1.3.1\n"
+"Plural-Forms: nplurals=4; plural=(n%100==1 ? 0 : n%100==2 ? 1 : n%100==3 || n"
+"%100==4 ? 2 : 3);\n"
+
+#: app/controllers/groups_controller.rb:36
+#: app/controllers/groups_controller.rb:36
+msgid "Missing group name parameter"
+msgstr ""
+
+#: app/controllers/groups_controller.rb:48
+#: app/controllers/groups_controller.rb:48
+msgid "Missing group parameters"
+msgstr ""
+
+#: app/controllers/groups_controller.rb:58
+#: app/controllers/groups_controller.rb:58
+msgid "Please enter a valid group name"
+msgstr ""
+
+#: app/controllers/groups_controller.rb:68
+#: app/controllers/groups_controller.rb:68
+msgid "Please enter a valid GID"
+msgstr ""
+
+#: app/controllers/groups_controller.rb:78
+#: app/controllers/groups_controller.rb:78
+msgid ""
+"Please enter a valid group type. Only \"system\" or \"local\" are allowed."
+msgstr ""
+
+#: app/controllers/groups_controller.rb:89
+#: app/controllers/groups_controller.rb:89
+msgid "Please enter a valid list of members"
+msgstr ""
+
+#: app/controllers/groups_controller.rb:106
+#: app/controllers/groups_controller.rb:106
+#, fuzzy
+msgid "Cannot read users list."
+msgstr "Datoteke '%1' ni možno brati: %2"
+
+#: app/controllers/groups_controller.rb:117
+#: app/controllers/groups_controller.rb:117
+msgid "Group named <i>%s</i> was not found."
+msgstr ""
+
+#: app/controllers/groups_controller.rb:127
+#: app/controllers/groups_controller.rb:127
+msgid "No groups found."
+msgstr ""
+
+#: app/controllers/groups_controller.rb:155
+#: app/controllers/groups_controller.rb:155
+msgid "Cannot read groups list."
+msgstr ""
+
+#: app/controllers/groups_controller.rb:228
+#: app/controllers/groups_controller.rb:228
+msgid "Group <i>%s</i> has been added."
+msgstr ""
+
+#: app/controllers/groups_controller.rb:243
+#: app/controllers/groups_controller.rb:243
+msgid "Unknown backend error"
+msgstr ""
+
+#: app/controllers/groups_controller.rb:270
+#: app/controllers/groups_controller.rb:270
+msgid "Group <i>%s</i> has been updated."
+msgstr ""
+
+#: app/controllers/groups_controller.rb:276
+#: app/controllers/groups_controller.rb:276
+msgid "Cannot update group <i>%s</i>: Unknown error"
+msgstr ""
+
+#: app/controllers/groups_controller.rb:310
+#: app/controllers/groups_controller.rb:310
+msgid "Group <i>%s</i> has been deleted."
+msgstr ""
+
+#: app/controllers/users_controller.rb:45
+#: app/controllers/users_controller.rb:45
+msgid "No users found."
+msgstr ""
+
+#: app/controllers/users_controller.rb:247
+#: app/controllers/users_controller.rb:247
+msgid "User <i>%s</i> was successfully created."
+msgstr ""
+
+#: app/controllers/users_controller.rb:287
+#: app/controllers/users_controller.rb:287
+msgid "User <i>%s</i> was successfully updated."
+msgstr ""
+
+#: app/controllers/users_controller.rb:305
+#: app/controllers/users_controller.rb:305
+msgid "User <i>%s</i> was successfully removed."
+msgstr ""
+
+#: app/controllers/users_controller.rb:307
+#: app/controllers/users_controller.rb:307
+msgid "Error: Could not remove user <i>%s</i>."
+msgstr ""
+
+#: app/views/groups/index.html.erb:63 app/views/groups/new.html.erb:67
+#: app/views/groups/index.html.erb:63 app/views/groups/new.html.erb:67
+#, fuzzy
+msgid "Select Members"
+msgstr "Privzeta pot (default route)"
+
+#: app/views/groups/index.html.erb:64 app/views/groups/new.html.erb:68
+#: app/views/groups/index.html.erb:64 app/views/groups/new.html.erb:68
+#, fuzzy
+msgid "Selected Members"
+msgstr "Privzeta pot (default route)"
+
+#: app/views/groups/index.html.erb:65 app/views/groups/new.html.erb:69
+#: app/views/groups/index.html.erb:65 app/views/groups/new.html.erb:69
+msgid "Available Members"
+msgstr ""
+
+#: app/views/groups/index.html.erb:66 app/views/groups/new.html.erb:70
+#: app/views/groups/index.html.erb:66 app/views/groups/new.html.erb:70
+msgid "Click user names to select/unselect members"
+msgstr ""
+
+#: app/views/groups/index.html.erb:105 app/views/groups/new.html.erb:91
+#: app/views/users/_user_form.erb:57 app/views/users/_user_form.erb:61
+#: app/views/groups/index.html.erb:105 app/views/groups/new.html.erb:91
+#: app/views/users/_user_form.erb:57 app/views/users/_user_form.erb:61
+#: shortcuts.yml:15
+msgid "Groups"
+msgstr "Skupine"
+
+#: app/views/groups/index.html.erb:117 app/views/users/index.html.erb:193
+#: app/views/groups/index.html.erb:117 app/views/users/index.html.erb:193
+#, fuzzy
+msgid "Filter:"
+msgstr "po:"
+
+#: app/views/groups/index.html.erb:125 app/views/groups/index.html.erb:137
+#: app/views/groups/index.html.erb:125 app/views/groups/index.html.erb:137
+msgid "Add New Group"
+msgstr ""
+
+#: app/views/groups/index.html.erb:128 app/views/groups/index.html.erb:192
+#: app/views/groups/index.html.erb:128 app/views/groups/index.html.erb:192
+#, fuzzy
+msgid "Manage Users"
+msgstr "Skupine"
+
+#: app/views/groups/index.html.erb:153 app/views/groups/new.html.erb:105
+#: app/views/groups/index.html.erb:153 app/views/groups/new.html.erb:105
+#, fuzzy
+msgid "Group Name"
+msgstr "Ime"
+
+#: app/views/groups/index.html.erb:157 app/views/groups/index.html.erb:157
+#, fuzzy
+msgid "Group ID"
+msgstr "Skupine"
+
+#: app/views/groups/index.html.erb:161 app/views/groups/new.html.erb:109
+#: app/views/groups/index.html.erb:161 app/views/groups/new.html.erb:109
+msgid "Members"
+msgstr ""
+
+#: app/views/groups/index.html.erb:164 app/views/groups/new.html.erb:113
+#: app/views/groups/index.html.erb:164 app/views/groups/new.html.erb:113
+#, fuzzy
+msgid "Manage Members"
+msgstr "Skupine"
+
+#: app/views/groups/index.html.erb:171 app/views/groups/new.html.erb:122
+#: app/views/users/_user_form.erb:147 app/views/groups/index.html.erb:171
+#: app/views/groups/new.html.erb:122 app/views/users/_user_form.erb:147
+msgid "Save"
+msgstr "Shrani"
+
+#: app/views/groups/index.html.erb:174 app/views/users/_user_form.erb:150
+#: app/views/groups/index.html.erb:174 app/views/users/_user_form.erb:150
+msgid "Delete"
+msgstr "Zbriši"
+
+#: app/views/groups/index.html.erb:176 app/views/groups/index.html.erb:176
+msgid "Are you sure to delete group '%s'?"
+msgstr ""
+
+#: app/views/groups/new.html.erb:92 app/views/groups/new.html.erb:92
+msgid "Add new group"
+msgstr ""
+
+#: app/views/users/_user_form.erb:25 app/views/users/_user_form.erb:25
+#, fuzzy
+msgid "Login Settings"
+msgstr "Nastvitve monitorja"
+
+#: app/views/users/_user_form.erb:28 app/views/users/_user_form.erb:28
+#, fuzzy
+msgid "Full Name"
+msgstr "Ime"
+
+#: app/views/users/_user_form.erb:34 app/views/users/_user_form.erb:34
+#, fuzzy
+msgid "Login Name"
+msgstr "Uporabniško ime"
+
+# password dialog title
+#: app/views/users/_user_form.erb:41 app/views/users/_user_form.erb:41
+msgid "Password"
+msgstr "Geslo"
+
+# password dialog title
+#: app/views/users/_user_form.erb:48 app/views/users/_user_form.erb:48
+#, fuzzy
+msgid "Confirm Password"
+msgstr "Geslo"
+
+#: app/views/users/_user_form.erb:70 app/views/users/index.html.erb:204
+#: app/views/users/index.html.erb:248 app/views/users/_user_form.erb:70
+#: app/views/users/index.html.erb:204 app/views/users/index.html.erb:248
+#, fuzzy
+msgid "Manage Groups"
+msgstr "Skupine"
+
+#: app/views/users/_user_form.erb:80 app/views/users/_user_form.erb:80
+#, fuzzy
+msgid "Default Group"
+msgstr "Privzeta pot (default route)"
+
+#: app/views/users/_user_form.erb:89 app/views/users/index.html.erb:89
+#: app/views/users/new.html.erb:96 app/views/users/_user_form.erb:89
+#: app/views/users/index.html.erb:89 app/views/users/new.html.erb:96
+#, fuzzy
+msgid "Select Default Group"
+msgstr "Privzeta pot (default route)"
+
+#: app/views/users/_user_form.erb:101 app/views/users/_user_form.erb:101
+msgid "Advanced"
+msgstr "Napredno"
+
+#: app/views/users/_user_form.erb:104 app/views/users/_user_form.erb:104
+#, fuzzy
+msgid "Home Directory"
+msgstr "Imenik\n"
+
+#: app/views/users/_user_form.erb:110 app/views/users/_user_form.erb:110
+#, fuzzy
+msgid "Login Shell"
+msgstr "Uporabniško ime"
+
+#: app/views/users/_user_form.erb:116 app/views/users/_user_form.erb:116
+msgid "UID Number"
+msgstr ""
+
+#: app/views/users/_user_form.erb:125 app/views/users/_user_form.erb:125
+msgid "Roles"
+msgstr ""
+
+#: app/views/users/_user_form.erb:134 app/views/users/_user_form.erb:134
+#, fuzzy
+msgid "Manage Roles"
+msgstr "Skupine"
+
+#: app/views/users/_user_form.erb:152 app/views/users/_user_form.erb:152
+msgid "Are you sure to delete user '%s'?"
+msgstr ""
+
+#: app/views/users/index.html.erb:69 app/views/users/new.html.erb:76
+#: app/views/users/index.html.erb:69 app/views/users/new.html.erb:76
+#, fuzzy
+msgid "Select Groups"
+msgstr "Privzeta pot (default route)"
+
+#: app/views/users/index.html.erb:70 app/views/users/new.html.erb:77
+#: app/views/users/index.html.erb:70 app/views/users/new.html.erb:77
+#, fuzzy
+msgid "Selected Groups"
+msgstr "Privzeta pot (default route)"
+
+#: app/views/users/index.html.erb:71 app/views/users/new.html.erb:78
+#: app/views/users/index.html.erb:71 app/views/users/new.html.erb:78
+#, fuzzy
+msgid "Available Groups"
+msgstr "Skupine"
+
+#: app/views/users/index.html.erb:72 app/views/users/new.html.erb:79
+#: app/views/users/index.html.erb:72 app/views/users/new.html.erb:79
+msgid "Click group names to select/unselect groups"
+msgstr ""
+
+#: app/views/users/index.html.erb:90 app/views/users/new.html.erb:97
+#: app/views/users/index.html.erb:90 app/views/users/new.html.erb:97
+msgid "Click a group name to choose users default group"
+msgstr ""
+
+#: app/views/users/index.html.erb:104 app/views/users/new.html.erb:111
+#: app/views/users/index.html.erb:104 app/views/users/new.html.erb:111
+msgid "Select Roles"
+msgstr ""
+
+#: app/views/users/index.html.erb:105 app/views/users/new.html.erb:112
+#: app/views/users/index.html.erb:105 app/views/users/new.html.erb:112
+msgid "Selected Roles"
+msgstr ""
+
+#: app/views/users/index.html.erb:106 app/views/users/new.html.erb:113
+#: app/views/users/index.html.erb:106 app/views/users/new.html.erb:113
+msgid "Available Roles"
+msgstr ""
+
+#: app/views/users/index.html.erb:107 app/views/users/new.html.erb:114
+#: app/views/users/index.html.erb:107 app/views/users/new.html.erb:114
+msgid "Click group names to select/unselect roles"
+msgstr ""
+
+#: app/views/users/index.html.erb:129 app/views/users/index.html.erb:129
+msgid " The passwords do not match."
+msgstr ""
+
+#: app/views/users/index.html.erb:130 app/views/users/new.html.erb:140
+#: app/views/users/index.html.erb:130 app/views/users/new.html.erb:140
+msgid "This field is required."
+msgstr ""
+
+# password dialog title
+#: app/views/users/index.html.erb:148 app/views/users/new.html.erb:154
+#: app/views/users/index.html.erb:148 app/views/users/new.html.erb:154
+#, fuzzy
+msgid "Password Strength:"
+msgstr "Geslo"
+
+#: app/views/users/index.html.erb:150 app/views/users/new.html.erb:156
+#: app/views/users/index.html.erb:150 app/views/users/new.html.erb:156
+msgid "Weak"
+msgstr ""
+
+#: app/views/users/index.html.erb:151 app/views/users/new.html.erb:157
+#: app/views/users/index.html.erb:151 app/views/users/new.html.erb:157
+msgid "Normal"
+msgstr "Navaden"
+
+#: app/views/users/index.html.erb:152 app/views/users/new.html.erb:158
+#: app/views/users/index.html.erb:152 app/views/users/new.html.erb:158
+msgid "Medium"
+msgstr ""
+
+#: app/views/users/index.html.erb:153 app/views/users/new.html.erb:159
+#: app/views/users/index.html.erb:153 app/views/users/new.html.erb:159
+msgid "Strong"
+msgstr ""
+
+#: app/views/users/index.html.erb:154 app/views/users/new.html.erb:160
+#: app/views/users/index.html.erb:154 app/views/users/new.html.erb:160
+msgid "Very Strong"
+msgstr ""
+
+#: app/views/users/index.html.erb:181 app/views/users/new.html.erb:193
+#: app/views/users/index.html.erb:181 app/views/users/new.html.erb:193
+#: shortcuts.yml:6
+msgid "Users"
+msgstr ""
+
+#: app/views/users/index.html.erb:201 app/views/users/index.html.erb:213
+#: app/views/users/index.html.erb:201 app/views/users/index.html.erb:213
+#, fuzzy
+msgid "Add New User"
+msgstr "Dodaj radirko"
+
+#: app/views/users/new.html.erb:139 app/views/users/new.html.erb:139
+msgid "The passwords do not match."
+msgstr ""
+
+#: app/views/users/new.html.erb:193 app/views/users/new.html.erb:193
+msgid "Add new user"
+msgstr ""
+
+#: shortcuts.yml:7
+#, fuzzy
+msgid "Manage user accounts"
+msgstr "Skupine"
+
+#: shortcuts.yml:16
+#, fuzzy
+msgid "Manage groups"
+msgstr "Skupine"
+
+#, fuzzy
+#~| msgid "Modified resources"
+#~ msgid "Modify group"
+#~ msgstr "Spremenjen profil"
+
+#, fuzzy
+#~| msgid "Processor"
+#~ msgid "Processing ..."
+#~ msgstr "Procesor"
+
+#~ msgid "Login"
+#~ msgstr "Uporabniško ime"
+
+#, fuzzy
+#~| msgid "&Edit"
+#~ msgid "Edit"
+#~ msgstr "&Uredi"
+
+#, fuzzy
+#~| msgid "You are <strong>online</strong>"
+#~ msgid "<strong>[New User]</strong>"
+#~ msgstr "Povezava je <strong>vzpostavljena</strong>"
+
+#~ msgid "Back"
+#~ msgstr "Nazaj"
+
+#~ msgid "Update"
+#~ msgstr "Posodobi"
+
+#, fuzzy
+#~| msgid "Default route ok."
+#~ msgid "Default Group (GID)"
+#~ msgstr "Privzeta pot (default route) je v redu."
+
+#, fuzzy
+#~| msgid "Enter the source directory."
+#~ msgid "Do not create home directory"
+#~ msgstr "Vnesite izvorni imenik."

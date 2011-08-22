@@ -1,0 +1,158 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: @PACKAGE@\n"
+"Report-Msgid-Bugs-To: translation@suse.de\n"
+"POT-Creation-Date: 2009-11-20 14:34+0100\n"
+"PO-Revision-Date: 2006-02-18 09:47+0700\n"
+"Last-Translator: Keo Sophon <keosophon@khmeros.info>\n"
+"Language-Team: Khmer <support@khmeros.info>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+
+#: app/controllers/users_controller.rb:18
+msgid "Invalid session, please login again."
+msgstr ""
+
+#: app/controllers/users_controller.rb:144
+#, fuzzy
+#| msgid "Service '%s' has been successfully added."
+msgid "User <i>%s</i> was successfully created."
+msgstr "សេវា '%s' ត្រូវ​បាន​បន្ថែម​ដោយ​ជោគជ័យ ។"
+
+#: app/controllers/users_controller.rb:148
+#, fuzzy
+#| msgid "Empty CA name."
+msgid "Empty UID value"
+msgstr "ឈ្មោះ CA ទទេ ។"
+
+#: app/controllers/users_controller.rb:152
+msgid "UID: value >= 1000 is valid for local user only"
+msgstr ""
+
+#: app/controllers/users_controller.rb:197
+#, fuzzy
+#| msgid "Service '%s' has been successfully added."
+msgid "User <i>%s</i> was successfully updated."
+msgstr "សេវា '%s' ត្រូវ​បាន​បន្ថែម​ដោយ​ជោគជ័យ ។"
+
+#: app/controllers/users_controller.rb:218
+#, fuzzy
+#| msgid "Specified lock has been successfully removed."
+msgid "User <i>%s</i> was successfully removed."
+msgstr "សោ​ដែលបាន​បញ្ជាក់ ត្រូវបាន​យកចេញ​ដោយ​ជោគជ័យ ។"
+
+#: app/controllers/users_controller.rb:220
+#, fuzzy
+#| msgid "Error: Could not read profile %s: %s.\n"
+msgid "Error: Could not remove user <i>%s</i>."
+msgstr "កំហុស ៖ មិនអាច​អាន​ទម្រង់ %s: %s ។\n"
+
+#: app/views/users/index.html.erb:1
+#, fuzzy
+#| msgid "Local Network"
+msgid "Local User"
+msgstr "បណ្តាញ​មូលដ្ឋាន"
+
+#: app/views/users/index.html.erb:6
+msgid "Login"
+msgstr "ចូល"
+
+#: app/views/users/index.html.erb:7 app/views/users/edit.html.erb:11
+#: app/views/users/new.html.erb:8
+#, fuzzy
+#| msgid "Name"
+msgid "Full Name"
+msgstr "ឈ្មោះ"
+
+#: app/views/users/index.html.erb:8
+#, fuzzy
+#| msgid "&Edit"
+msgid "Edit"
+msgstr "កែសម្រួល"
+
+#: app/views/users/index.html.erb:27
+#, fuzzy
+#| msgid "You are <strong>online</strong>"
+msgid "<strong>[New User]</strong>"
+msgstr "អ្នក​នៅ <strong>លើ​បណ្ដាញ</strong>"
+
+#: app/views/users/index.html.erb:31 app/views/users/edit.html.erb:43
+#: app/views/users/new.html.erb:44
+msgid "Back"
+msgstr "ថយក្រោយ"
+
+#: app/views/users/edit.html.erb:1
+msgid "Edit user %s"
+msgstr ""
+
+#: app/views/users/edit.html.erb:15 app/views/users/new.html.erb:12
+msgid "Groups"
+msgstr "ក្រុម"
+
+#: app/views/users/edit.html.erb:19
+#, fuzzy
+#| msgid "Default Route"
+msgid "Default Group"
+msgstr "ផ្លូវ​លំនាំដើ៼ម"
+
+#: app/views/users/edit.html.erb:23 app/views/users/new.html.erb:20
+#, fuzzy
+#| msgid "Directory\n"
+msgid "Home Directory"
+msgstr "ថត\n"
+
+#: app/views/users/edit.html.erb:27 app/views/users/new.html.erb:28
+#, fuzzy
+#| msgid "Login"
+msgid "Login Shell"
+msgstr "ចូល"
+
+#: app/views/users/edit.html.erb:31 app/views/users/new.html.erb:32
+#, fuzzy
+#| msgid "Location Name"
+msgid "Login Name"
+msgstr "ឈ្មោះ​ទីតាំង"
+
+#: app/views/users/edit.html.erb:35 app/views/users/new.html.erb:36
+#, fuzzy
+#| msgid "Numbers"
+msgid "UID Number"
+msgstr "លេខ"
+
+# password dialog title
+#: app/views/users/edit.html.erb:39 app/views/users/new.html.erb:40
+msgid "Password"
+msgstr "ពាក្យសម្ងាត់"
+
+#: app/views/users/edit.html.erb:43
+msgid "Update"
+msgstr "ធ្វើ​ឲ្យ​ទាន់សម័យ"
+
+#: app/views/users/new.html.erb:1
+#, fuzzy
+#| msgid "Create New User?"
+msgid "New User"
+msgstr "បង្កើត​អ្នក​ប្រើថ្មី ?"
+
+#: app/views/users/new.html.erb:16
+#, fuzzy
+#| msgid "Default route ok."
+msgid "Default Group (GID)"
+msgstr "ផ្លូវ​លំនាំដើម​គ្មាន​បញ្ហា ។"
+
+#: app/views/users/new.html.erb:24
+#, fuzzy
+#| msgid "Cannot create directory %1: %2."
+msgid "Do not create home directory"
+msgstr "មិន​អាច​បង្កើត​ថត %1 ៖ %2 ។"
+
+#: app/views/users/new.html.erb:44
+msgid "Create"
+msgstr "បង្កើត"
+
+#, fuzzy
+#~| msgid "&Username"
+#~ msgid "User"
+#~ msgstr "ឈ្មោះអ្នក​ប្រើ​"

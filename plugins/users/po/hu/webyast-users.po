@@ -1,0 +1,457 @@
+# translation of yast_webclient_users.hu.po to
+# Kalman Kemenczy <kkemenczy@novell.com>, 2009, 2010.
+msgid ""
+msgstr ""
+"Project-Id-Version: webyast-users-ui 1.0.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2010-08-02 09:18+0200\n"
+"PO-Revision-Date: 2010-05-18 08:21+0200\n"
+"Last-Translator: kalman <kkemenczy@gmail.com>\n"
+"Language-Team: collection <kde-i18n-doc@kde.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: hu\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Pootle 2.0.2\n"
+
+#: app/controllers/groups_controller.rb:36
+#: app/controllers/groups_controller.rb:36
+msgid "Missing group name parameter"
+msgstr "Hiányzó csoportnév paraméter"
+
+#: app/controllers/groups_controller.rb:48
+#: app/controllers/groups_controller.rb:48
+msgid "Missing group parameters"
+msgstr "Hiányzó csoport paraméter"
+
+#: app/controllers/groups_controller.rb:58
+#: app/controllers/groups_controller.rb:58
+msgid "Please enter a valid group name"
+msgstr "Adjon meg érvényes csoportnevet"
+
+#: app/controllers/groups_controller.rb:68
+#: app/controllers/groups_controller.rb:68
+msgid "Please enter a valid GID"
+msgstr "Adjon meg érvényes GID értéket"
+
+#: app/controllers/groups_controller.rb:78
+#: app/controllers/groups_controller.rb:78
+msgid ""
+"Please enter a valid group type. Only \"system\" or \"local\" are allowed."
+msgstr ""
+"Adjon érvényes csoporttípust. Csak a \"system\" vagy a \"local\" "
+"engedélyezett."
+
+#: app/controllers/groups_controller.rb:89
+#: app/controllers/groups_controller.rb:89
+msgid "Please enter a valid list of members"
+msgstr "Adjon meg érvényes csoporttaglistát"
+
+#: app/controllers/groups_controller.rb:106
+#: app/controllers/groups_controller.rb:106
+msgid "Cannot read users list."
+msgstr "Nem olvasható a felhasználólista."
+
+#: app/controllers/groups_controller.rb:117
+#: app/controllers/groups_controller.rb:117
+msgid "Group named <i>%s</i> was not found."
+msgstr ""
+
+#: app/controllers/groups_controller.rb:127
+#: app/controllers/groups_controller.rb:127
+msgid "No groups found."
+msgstr "Nem található csoport."
+
+#: app/controllers/groups_controller.rb:155
+#: app/controllers/groups_controller.rb:155
+msgid "Cannot read groups list."
+msgstr "Nem olvasható a csoportok listája."
+
+#: app/controllers/groups_controller.rb:228
+#: app/controllers/groups_controller.rb:228
+msgid "Group <i>%s</i> has been added."
+msgstr ""
+
+#: app/controllers/groups_controller.rb:243
+#: app/controllers/groups_controller.rb:243
+msgid "Unknown backend error"
+msgstr "Ismeretlen rendszerhiba"
+
+#: app/controllers/groups_controller.rb:270
+#: app/controllers/groups_controller.rb:270
+#, fuzzy
+msgid "Group <i>%s</i> has been updated."
+msgstr "A(z) <i>%s</i> felhasználó frissítése megtörtént."
+
+#: app/controllers/groups_controller.rb:276
+#: app/controllers/groups_controller.rb:276
+msgid "Cannot update group <i>%s</i>: Unknown error"
+msgstr ""
+
+#: app/controllers/groups_controller.rb:310
+#: app/controllers/groups_controller.rb:310
+#, fuzzy
+msgid "Group <i>%s</i> has been deleted."
+msgstr "A(z) <i>%s</i> felhasználó sikeresen létrejött."
+
+#: app/controllers/users_controller.rb:45
+#: app/controllers/users_controller.rb:45
+msgid "No users found."
+msgstr "Nem található felhasználó."
+
+#: app/controllers/users_controller.rb:247
+#: app/controllers/users_controller.rb:247
+msgid "User <i>%s</i> was successfully created."
+msgstr "A(z) <i>%s</i> felhasználó sikeresen létrejött."
+
+#: app/controllers/users_controller.rb:287
+#: app/controllers/users_controller.rb:287
+msgid "User <i>%s</i> was successfully updated."
+msgstr "A(z) <i>%s</i> felhasználó frissítése megtörtént."
+
+#: app/controllers/users_controller.rb:305
+#: app/controllers/users_controller.rb:305
+msgid "User <i>%s</i> was successfully removed."
+msgstr "A(z) <i>%s</i> felhasználó eltávolítása megtörtént."
+
+#: app/controllers/users_controller.rb:307
+#: app/controllers/users_controller.rb:307
+msgid "Error: Could not remove user <i>%s</i>."
+msgstr "Hiba: A(z) <i>%s</i> felhasználó nem távolítható el."
+
+#: app/views/groups/index.html.erb:63 app/views/groups/new.html.erb:67
+#: app/views/groups/index.html.erb:63 app/views/groups/new.html.erb:67
+msgid "Select Members"
+msgstr "Csoporttagok kiválasztása"
+
+#: app/views/groups/index.html.erb:64 app/views/groups/new.html.erb:68
+#: app/views/groups/index.html.erb:64 app/views/groups/new.html.erb:68
+msgid "Selected Members"
+msgstr "Kiválasztott csoporttagok"
+
+#: app/views/groups/index.html.erb:65 app/views/groups/new.html.erb:69
+#: app/views/groups/index.html.erb:65 app/views/groups/new.html.erb:69
+msgid "Available Members"
+msgstr "Elérhető csoporttagok"
+
+#: app/views/groups/index.html.erb:66 app/views/groups/new.html.erb:70
+#: app/views/groups/index.html.erb:66 app/views/groups/new.html.erb:70
+msgid "Click user names to select/unselect members"
+msgstr "Kattintson rá a felhasználónévre a tagok kiválasztásához"
+
+#: app/views/groups/index.html.erb:105 app/views/groups/new.html.erb:91
+#: app/views/users/_user_form.erb:57 app/views/users/_user_form.erb:61
+#: app/views/groups/index.html.erb:105 app/views/groups/new.html.erb:91
+#: app/views/users/_user_form.erb:57 app/views/users/_user_form.erb:61
+#: shortcuts.yml:15
+msgid "Groups"
+msgstr "Csoportok"
+
+#: app/views/groups/index.html.erb:117 app/views/users/index.html.erb:193
+#: app/views/groups/index.html.erb:117 app/views/users/index.html.erb:193
+msgid "Filter:"
+msgstr "Szűrő:"
+
+#: app/views/groups/index.html.erb:125 app/views/groups/index.html.erb:137
+#: app/views/groups/index.html.erb:125 app/views/groups/index.html.erb:137
+msgid "Add New Group"
+msgstr "Új csoport hozzáadása"
+
+#: app/views/groups/index.html.erb:128 app/views/groups/index.html.erb:192
+#: app/views/groups/index.html.erb:128 app/views/groups/index.html.erb:192
+#, fuzzy
+msgid "Manage Users"
+msgstr "Csoporttagok kezelése"
+
+#: app/views/groups/index.html.erb:153 app/views/groups/new.html.erb:105
+#: app/views/groups/index.html.erb:153 app/views/groups/new.html.erb:105
+msgid "Group Name"
+msgstr "Csoportnév"
+
+#: app/views/groups/index.html.erb:157 app/views/groups/index.html.erb:157
+msgid "Group ID"
+msgstr "Csoportazonosító (ID)"
+
+#: app/views/groups/index.html.erb:161 app/views/groups/new.html.erb:109
+#: app/views/groups/index.html.erb:161 app/views/groups/new.html.erb:109
+msgid "Members"
+msgstr "Csoporttagok"
+
+#: app/views/groups/index.html.erb:164 app/views/groups/new.html.erb:113
+#: app/views/groups/index.html.erb:164 app/views/groups/new.html.erb:113
+msgid "Manage Members"
+msgstr "Csoporttagok kezelése"
+
+#: app/views/groups/index.html.erb:171 app/views/groups/new.html.erb:122
+#: app/views/users/_user_form.erb:147 app/views/groups/index.html.erb:171
+#: app/views/groups/new.html.erb:122 app/views/users/_user_form.erb:147
+msgid "Save"
+msgstr "Mentés"
+
+#: app/views/groups/index.html.erb:174 app/views/users/_user_form.erb:150
+#: app/views/groups/index.html.erb:174 app/views/users/_user_form.erb:150
+msgid "Delete"
+msgstr "Törlés"
+
+#: app/views/groups/index.html.erb:176 app/views/groups/index.html.erb:176
+msgid "Are you sure to delete group '%s'?"
+msgstr "Valóban törölni akarja a(z) '%s' csoportot?"
+
+#: app/views/groups/new.html.erb:92 app/views/groups/new.html.erb:92
+msgid "Add new group"
+msgstr "Új csoport hozzáadása"
+
+#: app/views/users/_user_form.erb:25 app/views/users/_user_form.erb:25
+msgid "Login Settings"
+msgstr "Bejelentkezési beállítások"
+
+#: app/views/users/_user_form.erb:28 app/views/users/_user_form.erb:28
+msgid "Full Name"
+msgstr "Teljes név"
+
+#: app/views/users/_user_form.erb:34 app/views/users/_user_form.erb:34
+msgid "Login Name"
+msgstr "Bejelentkezési név"
+
+# password dialog title
+#: app/views/users/_user_form.erb:41 app/views/users/_user_form.erb:41
+msgid "Password"
+msgstr "Jelszó"
+
+# password dialog title
+#: app/views/users/_user_form.erb:48 app/views/users/_user_form.erb:48
+msgid "Confirm Password"
+msgstr "Jelszó megerősítése"
+
+#: app/views/users/_user_form.erb:70 app/views/users/index.html.erb:204
+#: app/views/users/index.html.erb:248 app/views/users/_user_form.erb:70
+#: app/views/users/index.html.erb:204 app/views/users/index.html.erb:248
+msgid "Manage Groups"
+msgstr "Csoportok kezelése"
+
+#: app/views/users/_user_form.erb:80 app/views/users/_user_form.erb:80
+msgid "Default Group"
+msgstr "Alapértelmezett csoport"
+
+#: app/views/users/_user_form.erb:89 app/views/users/index.html.erb:89
+#: app/views/users/new.html.erb:96 app/views/users/_user_form.erb:89
+#: app/views/users/index.html.erb:89 app/views/users/new.html.erb:96
+msgid "Select Default Group"
+msgstr "Alapértelmezett csoport kiválasztása"
+
+#: app/views/users/_user_form.erb:101 app/views/users/_user_form.erb:101
+msgid "Advanced"
+msgstr "Haladó"
+
+#: app/views/users/_user_form.erb:104 app/views/users/_user_form.erb:104
+msgid "Home Directory"
+msgstr "Saját könyvtár"
+
+#: app/views/users/_user_form.erb:110 app/views/users/_user_form.erb:110
+msgid "Login Shell"
+msgstr "Parancsértelmező"
+
+#: app/views/users/_user_form.erb:116 app/views/users/_user_form.erb:116
+msgid "UID Number"
+msgstr "UID száma"
+
+#: app/views/users/_user_form.erb:125 app/views/users/_user_form.erb:125
+msgid "Roles"
+msgstr ""
+
+#: app/views/users/_user_form.erb:134 app/views/users/_user_form.erb:134
+#, fuzzy
+msgid "Manage Roles"
+msgstr "Csoportok kezelése"
+
+#: app/views/users/_user_form.erb:152 app/views/users/_user_form.erb:152
+msgid "Are you sure to delete user '%s'?"
+msgstr "Valóban törölni akarja a(z) '%s' felhasználót?"
+
+#: app/views/users/index.html.erb:69 app/views/users/new.html.erb:76
+#: app/views/users/index.html.erb:69 app/views/users/new.html.erb:76
+msgid "Select Groups"
+msgstr "Csoportok kiválasztása"
+
+#: app/views/users/index.html.erb:70 app/views/users/new.html.erb:77
+#: app/views/users/index.html.erb:70 app/views/users/new.html.erb:77
+msgid "Selected Groups"
+msgstr "Kiválasztott csoportok"
+
+#: app/views/users/index.html.erb:71 app/views/users/new.html.erb:78
+#: app/views/users/index.html.erb:71 app/views/users/new.html.erb:78
+msgid "Available Groups"
+msgstr "Elérhető csoportok"
+
+#: app/views/users/index.html.erb:72 app/views/users/new.html.erb:79
+#: app/views/users/index.html.erb:72 app/views/users/new.html.erb:79
+msgid "Click group names to select/unselect groups"
+msgstr "Kattintson rá a csoportnévre a csoport kiválasztásához."
+
+#: app/views/users/index.html.erb:90 app/views/users/new.html.erb:97
+#: app/views/users/index.html.erb:90 app/views/users/new.html.erb:97
+msgid "Click a group name to choose users default group"
+msgstr "Kattintson a csoportnévre az alapértelmezett csoport kiválasztásához"
+
+#: app/views/users/index.html.erb:104 app/views/users/new.html.erb:111
+#: app/views/users/index.html.erb:104 app/views/users/new.html.erb:111
+#, fuzzy
+msgid "Select Roles"
+msgstr "Csoportok kiválasztása"
+
+#: app/views/users/index.html.erb:105 app/views/users/new.html.erb:112
+#: app/views/users/index.html.erb:105 app/views/users/new.html.erb:112
+#, fuzzy
+msgid "Selected Roles"
+msgstr "Kiválasztott csoportok"
+
+#: app/views/users/index.html.erb:106 app/views/users/new.html.erb:113
+#: app/views/users/index.html.erb:106 app/views/users/new.html.erb:113
+#, fuzzy
+msgid "Available Roles"
+msgstr "Elérhető csoportok"
+
+#: app/views/users/index.html.erb:107 app/views/users/new.html.erb:114
+#: app/views/users/index.html.erb:107 app/views/users/new.html.erb:114
+#, fuzzy
+msgid "Click group names to select/unselect roles"
+msgstr "Kattintson rá a csoportnévre a csoport kiválasztásához."
+
+#: app/views/users/index.html.erb:129 app/views/users/index.html.erb:129
+msgid " The passwords do not match."
+msgstr " A jelszavak nem egyeznek."
+
+#: app/views/users/index.html.erb:130 app/views/users/new.html.erb:140
+#: app/views/users/index.html.erb:130 app/views/users/new.html.erb:140
+msgid "This field is required."
+msgstr "A mező megadása kötelező."
+
+# password dialog title
+#: app/views/users/index.html.erb:148 app/views/users/new.html.erb:154
+#: app/views/users/index.html.erb:148 app/views/users/new.html.erb:154
+msgid "Password Strength:"
+msgstr "Jelszóerősség:"
+
+#: app/views/users/index.html.erb:150 app/views/users/new.html.erb:156
+#: app/views/users/index.html.erb:150 app/views/users/new.html.erb:156
+msgid "Weak"
+msgstr "Gyenge"
+
+#: app/views/users/index.html.erb:151 app/views/users/new.html.erb:157
+#: app/views/users/index.html.erb:151 app/views/users/new.html.erb:157
+msgid "Normal"
+msgstr "Normál"
+
+#: app/views/users/index.html.erb:152 app/views/users/new.html.erb:158
+#: app/views/users/index.html.erb:152 app/views/users/new.html.erb:158
+msgid "Medium"
+msgstr "Közepes"
+
+#: app/views/users/index.html.erb:153 app/views/users/new.html.erb:159
+#: app/views/users/index.html.erb:153 app/views/users/new.html.erb:159
+msgid "Strong"
+msgstr "Erős"
+
+#: app/views/users/index.html.erb:154 app/views/users/new.html.erb:160
+#: app/views/users/index.html.erb:154 app/views/users/new.html.erb:160
+msgid "Very Strong"
+msgstr "Nagyon erős"
+
+#: app/views/users/index.html.erb:181 app/views/users/new.html.erb:193
+#: app/views/users/index.html.erb:181 app/views/users/new.html.erb:193
+#: shortcuts.yml:6
+msgid "Users"
+msgstr "Felhasználók"
+
+#: app/views/users/index.html.erb:201 app/views/users/index.html.erb:213
+#: app/views/users/index.html.erb:201 app/views/users/index.html.erb:213
+msgid "Add New User"
+msgstr "Új felhasználó hozzáadása"
+
+#: app/views/users/new.html.erb:139 app/views/users/new.html.erb:139
+msgid "The passwords do not match."
+msgstr "A jelszavak nem egyeznek."
+
+#: app/views/users/new.html.erb:193 app/views/users/new.html.erb:193
+msgid "Add new user"
+msgstr "Új felhasználó hozzáadása"
+
+#: shortcuts.yml:7
+#, fuzzy
+msgid "Manage user accounts"
+msgstr "Csoportok kezelése"
+
+#: shortcuts.yml:16
+#, fuzzy
+msgid "Manage groups"
+msgstr "Csoportok kezelése"
+
+#~ msgid "Processing ..."
+#~ msgstr "Feldolgozás…"
+
+#~ msgid "Default members"
+#~ msgstr "Alapértelmezett csoporttagok"
+
+#~ msgid "Edit user %s"
+#~ msgstr "%s felhasználó szerkesztése"
+
+#~ msgid "Modify group"
+#~ msgstr "Csoport módosítása"
+
+#~ msgid "Home directory will be deleted as well."
+#~ msgstr "A felhasználó saját (home) könyvtára is törlésre kerül."
+
+#~ msgid "Group Type"
+#~ msgstr "Csoport típusa"
+
+#~ msgid "Type group name ..."
+#~ msgstr "Adja meg a csoportnevet ..."
+
+#~ msgid "Type"
+#~ msgstr "Típus"
+
+#~ msgid "Action"
+#~ msgstr "Művelet"
+
+#~ msgid "Type user name or login ..."
+#~ msgstr "Adjon meg egy nevet vagy jelentkezzen be ..."
+
+#~ msgid "Cancel"
+#~ msgstr "Mégsem"
+
+#~ msgid "New User..."
+#~ msgstr "Új felhasználó..."
+
+#~ msgid "Default Group (GID)"
+#~ msgstr "Alapértelmezett csoport (GID)"
+
+#~ msgid "Do not create home directory"
+#~ msgstr "NE hozzon létre saját könyvtárat"
+
+#~ msgid "Invalid session, please login again."
+#~ msgstr "Érvénytelen munkamenet, lépjen be újra."
+
+#~ msgid "Empty UID value"
+#~ msgstr "Üres UID-érték."
+
+#~ msgid "UID: value >= 1000 is valid for local user only"
+#~ msgstr "UID: az 1000 vagy annál nagyobb érték csak helyi felhasználóknak jó"
+
+#~ msgid "Login"
+#~ msgstr "Azonosító"
+
+#~ msgid "Edit"
+#~ msgstr "Szerkesztés"
+
+#~ msgid "<strong>[New User]</strong>"
+#~ msgstr "<strong>[Új felhasználó]</strong>"
+
+#~ msgid "Back"
+#~ msgstr "Vissza"
+
+#~ msgid "Update"
+#~ msgstr "Frissítés"
+
+#~ msgid "Create"
+#~ msgstr "Létrehozás"
