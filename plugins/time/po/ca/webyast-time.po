@@ -1,0 +1,87 @@
+# Catalan message file for YaST2 (@memory@).
+# Copyright (C) 2005 SUSE Linux Products GmbH.
+# Copyright (C) 2002 SuSE Linux AG.
+# Copyright (C) 2000, 2001 SuSE GmbH.
+# Jaume Badiella <myotis@drac.com>, 2001.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: webyast-time-ui 1.0.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2010-08-02 09:18+0200\n"
+"PO-Revision-Date: 2002-02-08 15:47+0100\n"
+"Last-Translator: Jordi Bruguera i Cortada <jordi@grn.es>\n"
+"Language-Team: Catalan\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"#-#-#-#-#  compendi_yast_11.1_11.2_e.po (YaST (@memory@))  #-#-#-#-#\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"#-#-#-#-#  isns.ca.po (YaST (@memory@))  #-#-#-#-#\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: app/controllers/time_controller.rb:99
+#: app/controllers/time_controller.rb:103
+#: app/controllers/time_controller.rb:99
+#: app/controllers/time_controller.rb:103
+msgid "Time settings have been written."
+msgstr "S'han escrit els paràmetres de l'hora."
+
+#: app/models/systemtime.rb:29 app/models/systemtime.rb:29
+msgid "Unknown timezone %s on host"
+msgstr "La zona %1 és desconeguda en aquest ordinador central"
+
+#: app/views/time/index.rhtml:73 app/views/time/index.rhtml:77
+#: app/views/time/index.rhtml:102 app/views/time/index.rhtml:73
+#: app/views/time/index.rhtml:77 app/views/time/index.rhtml:102
+msgid "This field is required"
+msgstr "Aquest camp és necessari"
+
+#: app/views/time/index.rhtml:74 app/views/time/index.rhtml:103
+#: app/views/time/index.rhtml:74 app/views/time/index.rhtml:103
+msgid "Enter a valid domain name or an IP address"
+msgstr "Introduïu un nom de domini o una adreça IP vàlids"
+
+#: app/views/time/index.rhtml:78 app/views/time/index.rhtml:78
+msgid "Invalid time format. Correct one is hh:mm:ss"
+msgstr "El format de l'hora és incorrecte. Un format correcte és hh:mm:ss"
+
+#: app/views/time/index.rhtml:137 app/views/time/index.rhtml:171
+#: app/views/time/index.rhtml:185 app/views/time/index.rhtml:137
+#: app/views/time/index.rhtml:171 app/views/time/index.rhtml:185
+#: shortcuts.yml:6
+msgid "Time"
+msgstr "Hora"
+
+#: app/views/time/index.rhtml:145 app/views/time/index.rhtml:152
+#: app/views/time/index.rhtml:145 app/views/time/index.rhtml:152
+msgid "Timezone"
+msgstr "Zona horària"
+
+#: app/views/time/index.rhtml:147 app/views/time/index.rhtml:147
+msgid "Region"
+msgstr "Regió"
+
+#: app/views/time/index.rhtml:162 app/views/time/index.rhtml:162
+msgid "Hardware clock is set to UTC"
+msgstr "El rellotge del maquinari s'ha establert a UTC"
+
+#: app/views/time/index.rhtml:176 app/views/time/index.rhtml:176
+msgid "Manually configure time"
+msgstr "Configuració manual de l'hora"
+
+#: app/views/time/index.rhtml:181 app/views/time/index.rhtml:181
+msgid "Date"
+msgstr "Data"
+
+#: app/views/time/index.rhtml:192 app/views/time/index.rhtml:192
+msgid "Synchronize via Network Time Protocol (NTP)"
+msgstr "Sincronitza via Network Time Protocol (NTP)"
+
+#: app/views/time/index.rhtml:196 app/views/time/index.rhtml:196
+msgid "NTP server"
+msgstr "Servidor NTP"
+
+#: shortcuts.yml:7
+msgid "Set the clock"
+msgstr ""

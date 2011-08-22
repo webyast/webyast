@@ -1,0 +1,89 @@
+# @TITLE@
+# Copyright (C) 2006, SUSE Linux GmbH, Nuremberg
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+# This file is distributed under the same license as @PACKAGE@ package. FIRST
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: webyast-time-ui 1.0.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2010-08-02 09:18+0200\n"
+"PO-Revision-Date: 2010-05-13 22:03+0100\n"
+"Last-Translator: Mirek Rogozinski <miroslaw.rogozinski@opensuse.biz>\n"
+"Language-Team:  <pl@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: KBabel 1.9.1\n"
+"Plural-Forms: nplurals=3; plural=n==1 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 "
+"|| n%100>=20) ? 1 : 2;\n"
+
+#: app/controllers/time_controller.rb:99
+#: app/controllers/time_controller.rb:103
+#: app/controllers/time_controller.rb:99
+#: app/controllers/time_controller.rb:103
+msgid "Time settings have been written."
+msgstr "Ustawienia czasu zostały zapisane."
+
+#: app/models/systemtime.rb:29 app/models/systemtime.rb:29
+msgid "Unknown timezone %s on host"
+msgstr "Nieznana strefa czasowa %s na hoście"
+
+#: app/views/time/index.rhtml:73 app/views/time/index.rhtml:77
+#: app/views/time/index.rhtml:102 app/views/time/index.rhtml:73
+#: app/views/time/index.rhtml:77 app/views/time/index.rhtml:102
+msgid "This field is required"
+msgstr ""
+
+#: app/views/time/index.rhtml:74 app/views/time/index.rhtml:103
+#: app/views/time/index.rhtml:74 app/views/time/index.rhtml:103
+msgid "Enter a valid domain name or an IP address"
+msgstr ""
+
+#: app/views/time/index.rhtml:78 app/views/time/index.rhtml:78
+msgid "Invalid time format. Correct one is hh:mm:ss"
+msgstr "Nieprawidłowy format czasu. Prawidłowy format to gg:mm:ss"
+
+#: app/views/time/index.rhtml:137 app/views/time/index.rhtml:171
+#: app/views/time/index.rhtml:185 app/views/time/index.rhtml:137
+#: app/views/time/index.rhtml:171 app/views/time/index.rhtml:185
+#: shortcuts.yml:6
+msgid "Time"
+msgstr "Czas"
+
+#: app/views/time/index.rhtml:145 app/views/time/index.rhtml:152
+#: app/views/time/index.rhtml:145 app/views/time/index.rhtml:152
+msgid "Timezone"
+msgstr "Strefa czasowa"
+
+#: app/views/time/index.rhtml:147 app/views/time/index.rhtml:147
+msgid "Region"
+msgstr "Region"
+
+#: app/views/time/index.rhtml:162 app/views/time/index.rhtml:162
+msgid "Hardware clock is set to UTC"
+msgstr "Zegar sprzętowy jest ustawiony na UTC"
+
+#: app/views/time/index.rhtml:176 app/views/time/index.rhtml:176
+msgid "Manually configure time"
+msgstr "Ręczna konfiguracja czasu"
+
+#: app/views/time/index.rhtml:181 app/views/time/index.rhtml:181
+msgid "Date"
+msgstr "Data"
+
+#: app/views/time/index.rhtml:192 app/views/time/index.rhtml:192
+msgid "Synchronize via Network Time Protocol (NTP)"
+msgstr "Synchronizuj poprzez Network Time Protocol (NTP)"
+
+#: app/views/time/index.rhtml:196 app/views/time/index.rhtml:196
+msgid "NTP server"
+msgstr "Serwer NTP"
+
+#: shortcuts.yml:7
+msgid "Set the clock"
+msgstr ""
+
+#~ msgid "Invalid date format. Correct one is dd/mm/yyyy"
+#~ msgstr "Nieprawidłowy format daty. Prawidłowy format to dd/mm/rrrr"

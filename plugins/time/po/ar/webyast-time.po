@@ -1,0 +1,63 @@
+# Copyright (C) 2006 SuSE Linux Products GmbH, Nuernberg
+# This file is distributed under the same license as the package.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: yast_webclient_time\n"
+"POT-Creation-Date: 2010-04-13 13:36+0200\n"
+"PO-Revision-Date: 2010-04-22 11:47\n"
+"Last-Translator: Novell Language <language@novell.com>\n"
+"Language-Team: Novell Language <language@novell.com>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: app/controllers/time_controller.rb:77 app/controllers/time_controller.rb:81
+msgid "Time settings have been written."
+msgstr "تمت كتابة إعدادات الوقت."
+
+#: app/models/systemtime.rb:8
+msgid "Unknown timezone %s on host"
+msgstr "المنطقة الزمنية %s على المضيف غير معروفة"
+
+#: app/views/time/index.rhtml:56
+msgid "Invalid date format. Correct one is dd/mm/yyyy"
+msgstr "تنسيق البيانات غير صالح. والتنسيق الصحيح هو ي ي/ش ش/س س س س"
+
+#: app/views/time/index.rhtml:60
+msgid "Invalid time format. Correct one is hh:mm:ss"
+msgstr "تنسيق الوقت غير صالح. والتنسيق الصحيح هو س س:د د: ث ث"
+
+#: app/views/time/index.rhtml:84 app/views/time/index.rhtml:128
+msgid "Time"
+msgstr "الوقت"
+
+#: app/views/time/index.rhtml:92
+msgid "Region"
+msgstr "المنطقة"
+
+#: app/views/time/index.rhtml:96
+msgid "Timezone"
+msgstr "المنطقة الزمنية"
+
+#: app/views/time/index.rhtml:110
+msgid "Hardware clock is set to UTC"
+msgstr "تعيين ساعة الأجهزة على توقيت UTC"
+
+#: app/views/time/index.rhtml:119
+msgid "Manually configure time"
+msgstr "تكوين الوقت يدويًا"
+
+#: app/views/time/index.rhtml:124
+msgid "Date"
+msgstr "التاريخ"
+
+#: app/views/time/index.rhtml:135
+msgid "Synchronize via Network Time Protocol (NTP)"
+msgstr "المزامنة عبر بروتوكول وقت الشبكة (NTP)"
+
+#: app/views/time/index.rhtml:139
+msgid "NTP server"
+msgstr "خادم NTP"
+

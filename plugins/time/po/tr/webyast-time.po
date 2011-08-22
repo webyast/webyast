@@ -1,0 +1,68 @@
+# @TITLE@
+# Copyright (C) 2006, SUSE Linux GmbH, Nuremberg
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+# This file is distributed under the same license as @PACKAGE@ package. FIRST
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: @PACKAGE@\n"
+"Report-Msgid-Bugs-To: translation@suse.de\n"
+"POT-Creation-Date: 2010-04-13 13:36+0200\n"
+"PO-Revision-Date: 2001-10-18 10:13+0200\n"
+"Last-Translator: Görkem Çetin <gorkem@gelecek.com.tr>\n"
+"Language-Team: turkish <i18n@suse.de>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+
+#: app/controllers/time_controller.rb:77 app/controllers/time_controller.rb:81
+msgid "Time settings have been written."
+msgstr ""
+
+#: app/models/systemtime.rb:8
+msgid "Unknown timezone %s on host"
+msgstr ""
+
+#: app/views/time/index.rhtml:56
+msgid "Invalid date format. Correct one is dd/mm/yyyy"
+msgstr ""
+
+#: app/views/time/index.rhtml:60
+msgid "Invalid time format. Correct one is hh:mm:ss"
+msgstr ""
+
+#: app/views/time/index.rhtml:84 app/views/time/index.rhtml:128
+msgid "Time"
+msgstr ""
+
+#: app/views/time/index.rhtml:92
+msgid "Region"
+msgstr ""
+
+#: app/views/time/index.rhtml:96
+msgid "Timezone"
+msgstr ""
+
+#: app/views/time/index.rhtml:110
+msgid "Hardware clock is set to UTC"
+msgstr ""
+
+#: app/views/time/index.rhtml:119
+msgid "Manually configure time"
+msgstr ""
+
+#: app/views/time/index.rhtml:124
+msgid "Date"
+msgstr ""
+
+#: app/views/time/index.rhtml:135
+msgid "Synchronize via Network Time Protocol (NTP)"
+msgstr ""
+
+#: app/views/time/index.rhtml:139
+#, fuzzy
+#| msgid "Name Server"
+msgid "NTP server"
+msgstr "Ad sunucusu"

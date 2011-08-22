@@ -1,0 +1,80 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: webyast-time-ui 1.0.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2010-08-02 09:18+0200\n"
+"PO-Revision-Date: 2005-08-18 21:16+0300\n"
+"Last-Translator: Borislav Mitev <morbid_viper@tkzs.org>\n"
+"Language-Team: Bulgarian <bg@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: app/controllers/time_controller.rb:99
+#: app/controllers/time_controller.rb:103
+#: app/controllers/time_controller.rb:99
+#: app/controllers/time_controller.rb:103
+msgid "Time settings have been written."
+msgstr ""
+
+#: app/models/systemtime.rb:29 app/models/systemtime.rb:29
+msgid "Unknown timezone %s on host"
+msgstr ""
+
+#: app/views/time/index.rhtml:73 app/views/time/index.rhtml:77
+#: app/views/time/index.rhtml:102 app/views/time/index.rhtml:73
+#: app/views/time/index.rhtml:77 app/views/time/index.rhtml:102
+msgid "This field is required"
+msgstr ""
+
+#: app/views/time/index.rhtml:74 app/views/time/index.rhtml:103
+#: app/views/time/index.rhtml:74 app/views/time/index.rhtml:103
+msgid "Enter a valid domain name or an IP address"
+msgstr ""
+
+#: app/views/time/index.rhtml:78 app/views/time/index.rhtml:78
+msgid "Invalid time format. Correct one is hh:mm:ss"
+msgstr ""
+
+#: app/views/time/index.rhtml:137 app/views/time/index.rhtml:171
+#: app/views/time/index.rhtml:185 app/views/time/index.rhtml:137
+#: app/views/time/index.rhtml:171 app/views/time/index.rhtml:185
+#: shortcuts.yml:6
+msgid "Time"
+msgstr ""
+
+#: app/views/time/index.rhtml:145 app/views/time/index.rhtml:152
+#: app/views/time/index.rhtml:145 app/views/time/index.rhtml:152
+msgid "Timezone"
+msgstr ""
+
+#: app/views/time/index.rhtml:147 app/views/time/index.rhtml:147
+msgid "Region"
+msgstr ""
+
+#: app/views/time/index.rhtml:162 app/views/time/index.rhtml:162
+msgid "Hardware clock is set to UTC"
+msgstr ""
+
+#: app/views/time/index.rhtml:176 app/views/time/index.rhtml:176
+#, fuzzy
+msgid "Manually configure time"
+msgstr "Ръчна настройка на IP адреса"
+
+#: app/views/time/index.rhtml:181 app/views/time/index.rhtml:181
+msgid "Date"
+msgstr ""
+
+#: app/views/time/index.rhtml:192 app/views/time/index.rhtml:192
+msgid "Synchronize via Network Time Protocol (NTP)"
+msgstr ""
+
+#: app/views/time/index.rhtml:196 app/views/time/index.rhtml:196
+#, fuzzy
+msgid "NTP server"
+msgstr "Сървър за имена"
+
+#: shortcuts.yml:7
+msgid "Set the clock"
+msgstr ""

@@ -1,0 +1,81 @@
+# Copyright (C) 2006 SuSE Linux Products GmbH, Nuernberg
+# This file is distributed under the same license as the package.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: webyast-time-ui\n"
+"POT-Creation-Date: 2010-08-18 10:18+0200\n"
+"PO-Revision-Date: 2010-08-26 09:28\n"
+"Last-Translator: Novell Language <language@novell.com>\n"
+"Language-Team: Novell Language <language@novell.com>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+
+#: app/controllers/time_controller.rb:99 app/controllers/time_controller.rb:103
+#: ./app/controllers/time_controller.rb:99 ./app/controllers/time_controller.rb:103
+msgid "Time settings have been written."
+msgstr "시간 설정이 기록되었습니다."
+
+#: app/models/systemtime.rb:29 ./app/models/systemtime.rb:29
+msgid "Unknown timezone %s on host"
+msgstr "호스트에서 알 수 없는 시간대 %s"
+
+#: app/views/time/index.rhtml:71 ./app/views/time/index.rhtml:71
+msgid "Please wait"
+msgstr "잠시 기다리십시오"
+
+#: app/views/time/index.rhtml:78 app/views/time/index.rhtml:82 app/views/time/index.rhtml:107
+#: ./app/views/time/index.rhtml:78 ./app/views/time/index.rhtml:82 ./app/views/time/index.rhtml:107
+msgid "This field is required"
+msgstr "이 필드는 필수입니다."
+
+#: app/views/time/index.rhtml:79 app/views/time/index.rhtml:108 ./app/views/time/index.rhtml:79
+#: ./app/views/time/index.rhtml:108
+msgid "Enter a valid domain name or an IP address"
+msgstr "유효한 도메인 이름 또는 IP 주소를 입력하십시오."
+
+#: app/views/time/index.rhtml:83 ./app/views/time/index.rhtml:83
+msgid "Invalid time format. Correct one is hh:mm:ss"
+msgstr "시간 형식이 잘못되었습니다. 올바른 형식은 hh:mm:ss입니다."
+
+#: app/views/time/index.rhtml:142 app/views/time/index.rhtml:176 app/views/time/index.rhtml:190
+#: ./app/views/time/index.rhtml:142 ./app/views/time/index.rhtml:176 ./app/views/time/index.rhtml:190
+#: ./shortcuts.yml:6
+msgid "Time"
+msgstr "시간"
+
+#: app/views/time/index.rhtml:150 app/views/time/index.rhtml:157 ./app/views/time/index.rhtml:150
+#: ./app/views/time/index.rhtml:157
+msgid "Timezone"
+msgstr "시간대"
+
+#: app/views/time/index.rhtml:152 ./app/views/time/index.rhtml:152
+msgid "Region"
+msgstr "구/군"
+
+#: app/views/time/index.rhtml:167 ./app/views/time/index.rhtml:167
+msgid "Hardware clock is set to UTC"
+msgstr "하드웨어 시계를 UTC로 설정"
+
+#: app/views/time/index.rhtml:181 ./app/views/time/index.rhtml:181
+msgid "Manually configure time"
+msgstr "시간을 수동으로 구성"
+
+#: app/views/time/index.rhtml:186 ./app/views/time/index.rhtml:186
+msgid "Date"
+msgstr "날짜"
+
+#: app/views/time/index.rhtml:197 ./app/views/time/index.rhtml:197
+msgid "Synchronize via Network Time Protocol (NTP)"
+msgstr "NTP(Network Time Protocol)를 통해 동기화"
+
+#: app/views/time/index.rhtml:201 ./app/views/time/index.rhtml:201
+msgid "NTP server"
+msgstr "NTP 서버"
+
+#: ./shortcuts.yml:7
+msgid "Set the clock"
+msgstr "시계 설정"
+

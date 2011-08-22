@@ -1,0 +1,81 @@
+# Copyright (C) 2006 SuSE Linux Products GmbH, Nuernberg
+# This file is distributed under the same license as the package.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: webyast-time-ui\n"
+"POT-Creation-Date: 2010-08-18 10:18+0200\n"
+"PO-Revision-Date: 2010-08-27 09:29\n"
+"Last-Translator: Novell Language <language@novell.com>\n"
+"Language-Team: Novell Language <language@novell.com>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+
+#: app/controllers/time_controller.rb:99 app/controllers/time_controller.rb:103
+#: ./app/controllers/time_controller.rb:99 ./app/controllers/time_controller.rb:103
+msgid "Time settings have been written."
+msgstr "時間設定はすでに保存されています。"
+
+#: app/models/systemtime.rb:29 ./app/models/systemtime.rb:29
+msgid "Unknown timezone %s on host"
+msgstr "ホスト上で不明な時間帯 %s が設定されています"
+
+#: app/views/time/index.rhtml:71 ./app/views/time/index.rhtml:71
+msgid "Please wait"
+msgstr "しばらくお待ちください"
+
+#: app/views/time/index.rhtml:78 app/views/time/index.rhtml:82 app/views/time/index.rhtml:107
+#: ./app/views/time/index.rhtml:78 ./app/views/time/index.rhtml:82 ./app/views/time/index.rhtml:107
+msgid "This field is required"
+msgstr "このフィールドは必須です"
+
+#: app/views/time/index.rhtml:79 app/views/time/index.rhtml:108 ./app/views/time/index.rhtml:79
+#: ./app/views/time/index.rhtml:108
+msgid "Enter a valid domain name or an IP address"
+msgstr "有効なドメイン名かIPアドレスを入力してください"
+
+#: app/views/time/index.rhtml:83 ./app/views/time/index.rhtml:83
+msgid "Invalid time format. Correct one is hh:mm:ss"
+msgstr "時刻形式が正しくありません。 (時):(分):(秒) のように指定してください。"
+
+#: app/views/time/index.rhtml:142 app/views/time/index.rhtml:176 app/views/time/index.rhtml:190
+#: ./app/views/time/index.rhtml:142 ./app/views/time/index.rhtml:176 ./app/views/time/index.rhtml:190
+#: ./shortcuts.yml:6
+msgid "Time"
+msgstr "再生時間"
+
+#: app/views/time/index.rhtml:150 app/views/time/index.rhtml:157 ./app/views/time/index.rhtml:150
+#: ./app/views/time/index.rhtml:157
+msgid "Timezone"
+msgstr "タイムゾーン"
+
+#: app/views/time/index.rhtml:152 ./app/views/time/index.rhtml:152
+msgid "Region"
+msgstr "リージョン"
+
+#: app/views/time/index.rhtml:167 ./app/views/time/index.rhtml:167
+msgid "Hardware clock is set to UTC"
+msgstr "ハードウェアの時刻はUTCに設定"
+
+#: app/views/time/index.rhtml:181 ./app/views/time/index.rhtml:181
+msgid "Manually configure time"
+msgstr "手動で時刻を設定"
+
+#: app/views/time/index.rhtml:186 ./app/views/time/index.rhtml:186
+msgid "Date"
+msgstr "日付"
+
+#: app/views/time/index.rhtml:197 ./app/views/time/index.rhtml:197
+msgid "Synchronize via Network Time Protocol (NTP)"
+msgstr "ネットワーク時刻プロトコル(NTP)による同期"
+
+#: app/views/time/index.rhtml:201 ./app/views/time/index.rhtml:201
+msgid "NTP server"
+msgstr "NTPサーバ"
+
+#: ./shortcuts.yml:7
+msgid "Set the clock"
+msgstr "クロックを設定する"
+

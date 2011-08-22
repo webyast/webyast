@@ -1,0 +1,65 @@
+# translation of yast_webclient_time.km.po to Khmer
+# Khoem Sokhem <khoemsokhem@khmeros.info>, 2010.
+msgid ""
+msgstr ""
+"Project-Id-Version: yast_webclient_time.km\n"
+"Report-Msgid-Bugs-To: translation@suse.de\n"
+"POT-Creation-Date: 2010-04-13 13:36+0200\n"
+"PO-Revision-Date: 2010-04-20 11:02+0700\n"
+"Last-Translator: Khoem Sokhem <khoemsokhem@khmeros.info>\n"
+"Language-Team: Khmer <support@khmeros.info>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"X-Generator: KBabel 1.11.4\n"
+
+# %s is either BOOTP or DHCP
+#: app/controllers/time_controller.rb:77 app/controllers/time_controller.rb:81
+msgid "Time settings have been written."
+msgstr "ការ​កំណត់​ពេលវេលា​ត្រូ​វបាន​សរសេរ ។"
+
+#: app/models/systemtime.rb:8
+msgid "Unknown timezone %s on host"
+msgstr "មិន​ស្គាល់តំបន់​ពេលវេលា %s នៅ​លើ​ម៉ាស៊ីន"
+
+#: app/views/time/index.rhtml:56
+msgid "Invalid date format. Correct one is dd/mm/yyyy"
+msgstr "ទ្រង់ទ្រាយ​កាលបរិច្ឆេទ​មិន​ត្រឹមត្រូវ ។ ទ្រង់ទ្រាយដែលត្រឹមត្រូវ​គឺ dd/mm/yyyy"
+
+#: app/views/time/index.rhtml:60
+msgid "Invalid time format. Correct one is hh:mm:ss"
+msgstr "ទ្រង់ទ្រាយ​ពេលវេលា​មិន​ត្រឹមត្រូវ ។ ទ្រង់ទ្រាយ​ដែល​ត្រឹមត្រូវ​គឺ hh:mm:ss"
+
+#: app/views/time/index.rhtml:84 app/views/time/index.rhtml:128
+msgid "Time"
+msgstr "ពេលវេលា"
+
+#: app/views/time/index.rhtml:92
+msgid "Region"
+msgstr "តំបន់"
+
+#: app/views/time/index.rhtml:96
+msgid "Timezone"
+msgstr "តំបន់ពេលវេលា"
+
+#: app/views/time/index.rhtml:110
+msgid "Hardware clock is set to UTC"
+msgstr "នាឡិកា​ផ្នែក​រឹង​ត្រូវ​បានកំណត់​ទៅ UTC"
+
+# 55493 AttribValues/label
+#: app/views/time/index.rhtml:119
+msgid "Manually configure time"
+msgstr "កំណត់​រចនាសម្ព័ន្ធ​ពេលវេលា​ដោយដៃ"
+
+#: app/views/time/index.rhtml:124
+msgid "Date"
+msgstr "កាល​បរិច្ឆេទ"
+
+#: app/views/time/index.rhtml:135
+msgid "Synchronize via Network Time Protocol (NTP)"
+msgstr "ធ្វើ​សមកាលកម្ម​តាមរយៈ​ពិធីការ​ពេលវេលា​បណ្ដាញ (NTP)"
+
+#: app/views/time/index.rhtml:139
+msgid "NTP server"
+msgstr "ម៉ាស៊ីន​បម្រើ NTP"

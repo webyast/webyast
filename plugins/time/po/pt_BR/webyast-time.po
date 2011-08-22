@@ -1,0 +1,81 @@
+# Copyright (C) 2006 SuSE Linux Products GmbH, Nuernberg
+# This file is distributed under the same license as the package.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: webyast-time-ui\n"
+"POT-Creation-Date: 2010-08-18 10:18+0200\n"
+"PO-Revision-Date: 2010-08-26 09:31\n"
+"Last-Translator: Novell Language <language@novell.com>\n"
+"Language-Team: Novell Language <language@novell.com>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n>1;\n"
+
+#: app/controllers/time_controller.rb:99 app/controllers/time_controller.rb:103
+#: ./app/controllers/time_controller.rb:99 ./app/controllers/time_controller.rb:103
+msgid "Time settings have been written."
+msgstr "As configurações de horário já foram gravadas."
+
+#: app/models/systemtime.rb:29 ./app/models/systemtime.rb:29
+msgid "Unknown timezone %s on host"
+msgstr "Fuso horário desconhecido %s no host"
+
+#: app/views/time/index.rhtml:71 ./app/views/time/index.rhtml:71
+msgid "Please wait"
+msgstr "Aguarde"
+
+#: app/views/time/index.rhtml:78 app/views/time/index.rhtml:82 app/views/time/index.rhtml:107
+#: ./app/views/time/index.rhtml:78 ./app/views/time/index.rhtml:82 ./app/views/time/index.rhtml:107
+msgid "This field is required"
+msgstr "Este campo é obrigatório"
+
+#: app/views/time/index.rhtml:79 app/views/time/index.rhtml:108 ./app/views/time/index.rhtml:79
+#: ./app/views/time/index.rhtml:108
+msgid "Enter a valid domain name or an IP address"
+msgstr "Digitar um nome de domínio ou um endereço IP válido"
+
+#: app/views/time/index.rhtml:83 ./app/views/time/index.rhtml:83
+msgid "Invalid time format. Correct one is hh:mm:ss"
+msgstr "Formato de horário inválido. O correto é hh:mm:ss"
+
+#: app/views/time/index.rhtml:142 app/views/time/index.rhtml:176 app/views/time/index.rhtml:190
+#: ./app/views/time/index.rhtml:142 ./app/views/time/index.rhtml:176 ./app/views/time/index.rhtml:190
+#: ./shortcuts.yml:6
+msgid "Time"
+msgstr "Tempo"
+
+#: app/views/time/index.rhtml:150 app/views/time/index.rhtml:157 ./app/views/time/index.rhtml:150
+#: ./app/views/time/index.rhtml:157
+msgid "Timezone"
+msgstr "Fuso horário"
+
+#: app/views/time/index.rhtml:152 ./app/views/time/index.rhtml:152
+msgid "Region"
+msgstr "Região"
+
+#: app/views/time/index.rhtml:167 ./app/views/time/index.rhtml:167
+msgid "Hardware clock is set to UTC"
+msgstr "Relógio do hardware definido como UTC"
+
+#: app/views/time/index.rhtml:181 ./app/views/time/index.rhtml:181
+msgid "Manually configure time"
+msgstr "Configurar horário manualmente"
+
+#: app/views/time/index.rhtml:186 ./app/views/time/index.rhtml:186
+msgid "Date"
+msgstr "Data"
+
+#: app/views/time/index.rhtml:197 ./app/views/time/index.rhtml:197
+msgid "Synchronize via Network Time Protocol (NTP)"
+msgstr "Sincronizar via NTP (Network Time Protocol)"
+
+#: app/views/time/index.rhtml:201 ./app/views/time/index.rhtml:201
+msgid "NTP server"
+msgstr "Servidor NTP"
+
+#: ./shortcuts.yml:7
+msgid "Set the clock"
+msgstr "Definir o relógio"
+

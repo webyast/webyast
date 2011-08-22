@@ -1,0 +1,68 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: @PACKAGE@\n"
+"Report-Msgid-Bugs-To: translation@suse.de\n"
+"POT-Creation-Date: 2010-04-13 13:36+0200\n"
+"PO-Revision-Date: 2001-07-17 16:27+0200\n"
+"Last-Translator: James Ogley <ogley@suse.co.uk>\n"
+"Language-Team: English <i18n@suse.de>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8-bit\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+
+#: app/controllers/time_controller.rb:77 app/controllers/time_controller.rb:81
+msgid "Time settings have been written."
+msgstr ""
+
+#: app/models/systemtime.rb:8
+#, fuzzy
+#| msgid "Unknown option "
+msgid "Unknown timezone %s on host"
+msgstr "Unknown option "
+
+#: app/views/time/index.rhtml:56
+msgid "Invalid date format. Correct one is dd/mm/yyyy"
+msgstr ""
+
+#: app/views/time/index.rhtml:60
+msgid "Invalid time format. Correct one is hh:mm:ss"
+msgstr ""
+
+#: app/views/time/index.rhtml:84 app/views/time/index.rhtml:128
+msgid "Time"
+msgstr ""
+
+#: app/views/time/index.rhtml:92
+msgid "Region"
+msgstr ""
+
+#: app/views/time/index.rhtml:96
+msgid "Timezone"
+msgstr ""
+
+#: app/views/time/index.rhtml:110
+msgid "Hardware clock is set to UTC"
+msgstr ""
+
+#: app/views/time/index.rhtml:119
+msgid "Manually configure time"
+msgstr ""
+
+#: app/views/time/index.rhtml:124
+#, fuzzy
+#| msgid "Date: %1"
+msgid "Date"
+msgstr "Date: %1"
+
+#: app/views/time/index.rhtml:135
+#, fuzzy
+#| msgid "Network Time Protocol daemon"
+msgid "Synchronize via Network Time Protocol (NTP)"
+msgstr "Network Time Protocol daemon"
+
+#: app/views/time/index.rhtml:139
+#, fuzzy
+#| msgid "NFS server"
+msgid "NTP server"
+msgstr "NFS server"
