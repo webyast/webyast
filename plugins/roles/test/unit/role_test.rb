@@ -23,13 +23,13 @@ require File.expand_path(File.dirname(__FILE__) + "/../test_helper")
 class RoleTest < ActiveSupport::TestCase
   def setup
     #set fixtures, renew test files
-		@test_path = File.join( Dir.tmpdir(), "webyast-roles-testsuite-tmpdir")
+    @test_path = File.join( Dir.tmpdir(), "webyast-roles-testsuite-tmpdir")
     `mkdir -p #{@test_path}`
-		`cp #{File.join(File.dirname(__FILE__),'..','fixtures')}/* #{@test_path}`
+    `cp #{File.join(File.dirname(__FILE__),'..','fixtures')}/* #{@test_path}`
     Role.const_set(:ROLES_DEF_PATH, File.join( @test_path, "roles.yml"))
     Role.const_set(:ROLES_ASSIGN_PATH, File.join( @test_path, "roles_assign.yml"))
-		@dbus_obj = FakeDbus.new
-		Permission.stubs(:dbus_obj).returns(@dbus_obj)
+    @dbus_obj = FakeDbus.new
+    Permission.stubs(:dbus_obj).returns(@dbus_obj)
   end
 
   def teardown

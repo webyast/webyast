@@ -43,8 +43,8 @@ ROLES_ASSIGN_PATH = File.join Paths::VAR, "roles", "roles_assign.yml"
 
 def initialize(name="",permissions=[],users=[])
   @name = name
-  @permissions = permissions.sort
-  @users = users.sort
+  @permissions = (permissions||[]).sort
+  @users = (users||[]).sort
   @new_record = true
 end
 

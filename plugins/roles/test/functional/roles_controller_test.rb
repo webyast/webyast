@@ -42,10 +42,31 @@ class RolesControllerTest < ActionController::TestCase
 		Permission.stubs(:dbus_obj).returns(@dbus_obj)
   end
 
-  include CollectionResourceTests
-
   def teardown
     `rm -rf #{@test_path}`
+  end
+
+  def test_access_index_xml
+    mime = Mime::XML
+    get :index, :format => 'xml'
+    assert_equal mime.to_s, @response.content_type
+  end
+
+  def test_access_index_json
+    mime = Mime::JSON
+    get :index, :format => 'json'
+    assert_equal mime.to_s, @response.content_type
+  end
+
+  def test_update_noperm
+    #ensure that nothing is saved
+    @model_class.expects(:save).never
+
+    @controller.stubs(:permission_check).raises(NoPermissionException.new("action", "test"));
+    @data[:format] = 'xml'
+    put :update, @data
+
+    assert_response  403 # Forbidden
   end
 
   def test_index
@@ -75,12 +96,12 @@ class RolesControllerTest < ActionController::TestCase
   end
 
   def test_create
-    post :create, "roles" => { "name" => "role02._-  test"}
+    post :create, :role_name => "role02._-  test"
     assert_response :success
   end
 
   def test_create_bad_name
-    post :create, "roles" => { "name" => "role02._-<dangerscript/>  test"}
+    post :create, :role_name => "role02._-<dangerscript/>  test"
     assert_response 422
   end
 

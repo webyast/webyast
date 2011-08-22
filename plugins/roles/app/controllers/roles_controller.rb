@@ -93,7 +93,8 @@ class RolesController < ApplicationController
         new_permissions = all_permissions.find_all do |perm|
           params[RolesController.permission_role_id perm, role.name]
         end
-        new_users = params[RolesController.users_role_id role.name].split(",")
+        new_users = []
+        new_users = params[RolesController.users_role_id role.name].split(",") unless params[RolesController.users_role_id role.name].blank?
         if new_permissions.sort != role.permissions.sort || new_users.sort != role.users.sort then
           role.permissions = new_permissions
           role.users = new_users
@@ -114,7 +115,7 @@ class RolesController < ApplicationController
     error = nil
     begin
       check_role_name params[:role_name]
-    rescue error
+    rescue Exception => error
       logger.error "Wrong role name"
       respond_to do |format|
         format.xml  { raise error }
