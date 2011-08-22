@@ -152,6 +152,32 @@ task :doc do
   puts "documentation successfully generated"
 end
 
+desc "corrent po files from webyast-<plugin>-ui.po to webyast-<plugin>.po"
+task :correct_po do
+  plugins_names = []
+  Dir.chdir('plugins') do
+    plugins_names = Dir.glob '*'
+  end
+  plugins_names.each do |plugin|
+    puts "correct po files in module #{plugin}"
+    if File.exist? "plugins/#{plugin}/po"
+      Dir.chdir("plugins/#{plugin}/po") do
+        languages = Dir.glob '*'
+        languages.each do |language|
+          po_file = "#{language}/webyast-#{plugin}-ui.po"
+          if File.exist? po_file
+            puts "#{po_file} exists\n"
+            system "mv #{po_file} #{language}/webyast-#{plugin}.po"
+          else
+            puts "#{po_file} does NOT exist\n"
+          end
+        end
+      end
+    end
+  end
+end
+
+
 desc "Grant policies installed in /usr/share/PolicyKit/policy to root"
 task :grant_policies do |t|
   puts "Running from #{__FILE__}"
