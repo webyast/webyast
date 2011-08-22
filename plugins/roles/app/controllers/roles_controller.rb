@@ -35,13 +35,21 @@ class RolesController < ApplicationController
   # Initialize GetText and Content-Type.
   init_gettext "webyast-roles"
 
+private
+
+  def check_role_name(id=params[:id])
+    raise InvalidParameters.new(:id => "INVALID") if id.nil? or id.match(/^[a-zA-Z0-9_\-. ]+$/).nil?
+  end
+
   def check_write_permission
     permission_check("org.opensuse.yast.permissions.write") #goes back to controllcenter if not
   end
+
   def check_read_permission
     permission_check("org.opensuse.yast.permissions.read") #goes back to controllcenter if not
-    @write_permission = permission_granted?("org.opensuse.yast.permissions.write")
   end
+
+public
 
   def self.users_role_id (role_id)
     "users_of_" + role_id.gsub(/ /,"_") #replace space which cannot be in id - http://www.w3.org/TR/html4/types.html#type-name
@@ -188,8 +196,4 @@ class RolesController < ApplicationController
     end
   end
 
-  private
-  def check_role_name(id=params[:id])
-    raise InvalidParameters.new(:id => "INVALID") if id.nil? or id.match(/^[a-zA-Z0-9_\-. ]+$/).nil?
-  end
 end
