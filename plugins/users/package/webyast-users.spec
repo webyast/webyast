@@ -60,7 +60,7 @@ needed at runtime.
 %build
 #do not package generated doc
 rm -rf doc
-export RAILS_PARENT=/srv/www/yast
+export RAILS_PARENT=%{webyast_dir}
 env LANG=en rake makemo
 rake js:users
 
@@ -114,6 +114,8 @@ rm -rf $RPM_BUILD_ROOT
 %{plugin_dir}/README
 %{plugin_dir}/shortcuts.yml
 %{plugin_dir}/lib
+%{plugin_dir}/public
+%{plugin_dir}/locale
 
 %dir /usr/share/PolicyKit
 %dir /usr/share/PolicyKit/policy
