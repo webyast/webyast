@@ -99,7 +99,7 @@ rm -rf $RPM_BUILD_ROOT
 # XXX not nice to get webyast all permissions, but now not better solution
 /usr/sbin/grantwebyastrights --user %{webyast_user} --action grant > /dev/null
 
-%files -f webyast-time-ui.lang 
+%files -f webyast-time.lang 
 %defattr(-,root,root)
 %dir %{webyast_dir}
 %dir %{webyast_dir}/vendor
