@@ -92,6 +92,7 @@ rm -rf $RPM_BUILD_ROOT
 %dir %{plugin_dir}/doc
 
 %{plugin_dir}/README
+%{plugin_dir}/shortcuts.yml
 %{plugin_dir}/Rakefile
 %{plugin_dir}/init.rb
 %{plugin_dir}/install.rb
