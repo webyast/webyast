@@ -142,3 +142,43 @@ msgstr "正在檢查狀態"
 msgid "Show system status"
 msgstr "顯示系統狀態"
 
+#: app/models/graph.rb:116 config/status_configuration.yaml:64 ./app/models/graph.rb:116
+#: ./config/status_configuration.yaml:64
+msgid "GByte"
+msgstr "GB"
+
+#: app/models/graph.rb:117 config/status_configuration.yaml:63 ./app/models/graph.rb:117
+#: ./config/status_configuration.yaml:63
+msgid "Disk"
+msgstr "磁碟"
+
+#: app/models/graph.rb:140 config/status_configuration.yaml:6 ./app/models/graph.rb:140
+#: ./config/status_configuration.yaml:6
+msgid "MByte/s"
+msgstr "MB/s"
+
+#: app/models/graph.rb:141 config/status_configuration.yaml:5 ./app/models/graph.rb:141
+#: ./config/status_configuration.yaml:5
+msgid "Network"
+msgstr "網路"
+
+#: app/models/graph.rb:163 config/status_configuration.yaml:87 ./app/models/graph.rb:163
+#: ./config/status_configuration.yaml:87
+msgid "MByte"
+msgstr "MB"
+
+#: app/models/graph.rb:164 config/status_configuration.yaml:86 ./app/models/graph.rb:164
+#: ./config/status_configuration.yaml:86
+msgid "Memory"
+msgstr "記憶體"
+
+#: app/models/graph.rb:185 config/status_configuration.yaml:29 ./app/models/graph.rb:185
+#: ./config/status_configuration.yaml:29
+msgid "Percent"
+msgstr "百分比"
+
+#: app/models/graph.rb:186 config/status_configuration.yaml:28 ./app/models/graph.rb:186
+#: ./config/status_configuration.yaml:28
+msgid "CPU"
+msgstr "CPU"
+

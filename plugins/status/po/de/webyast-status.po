@@ -169,3 +169,44 @@ msgstr "Grenzwerte bearbeiten"
 #: shortcuts.yml:8
 msgid "Show system status"
 msgstr "Systemstatus anzeigen"
+
+#: app/models/graph.rb:116 config/status_configuration.yaml:64 ./app/models/graph.rb:116
+#: ./config/status_configuration.yaml:64
+msgid "GByte"
+msgstr "GB"
+
+#: app/models/graph.rb:117 config/status_configuration.yaml:63 ./app/models/graph.rb:117
+#: ./config/status_configuration.yaml:63
+msgid "Disk"
+msgstr "Datenträger"
+
+#: app/models/graph.rb:140 config/status_configuration.yaml:6 ./app/models/graph.rb:140
+#: ./config/status_configuration.yaml:6
+msgid "MByte/s"
+msgstr "MB/s"
+
+#: app/models/graph.rb:141 config/status_configuration.yaml:5 ./app/models/graph.rb:141
+#: ./config/status_configuration.yaml:5
+msgid "Network"
+msgstr "Netzwerk"
+
+#: app/models/graph.rb:163 config/status_configuration.yaml:87 ./app/models/graph.rb:163
+#: ./config/status_configuration.yaml:87
+msgid "MByte"
+msgstr "MB"
+
+#: app/models/graph.rb:164 config/status_configuration.yaml:86 ./app/models/graph.rb:164
+#: ./config/status_configuration.yaml:86
+msgid "Memory"
+msgstr "Speicher"
+
+#: app/models/graph.rb:185 config/status_configuration.yaml:29 ./app/models/graph.rb:185
+#: ./config/status_configuration.yaml:29
+msgid "Percent"
+msgstr "Prozent"
+
+#: app/models/graph.rb:186 config/status_configuration.yaml:28 ./app/models/graph.rb:186
+#: ./config/status_configuration.yaml:28
+msgid "CPU"
+msgstr "CPU"
+

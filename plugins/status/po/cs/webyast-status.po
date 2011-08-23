@@ -254,3 +254,42 @@ msgstr "Zobrazit stav systému"
 
 #~ msgid "Show details..."
 #~ msgstr "Zobrazit podrobnosti..."
+
+#: app/models/graph.rb:116 app/models/graph.rb:116
+msgid "GByte"
+msgstr "Gbytů"
+
+#: app/models/graph.rb:117 app/models/graph.rb:117
+msgid "Disk"
+msgstr "Disk"
+
+#: app/models/graph.rb:140 config/status_configuration.yaml:6
+#: app/models/graph.rb:140 config/status_configuration.yaml:6
+msgid "MByte/s"
+msgstr "Mbytů/s"
+
+#: app/models/graph.rb:141 config/status_configuration.yaml:4
+#: app/models/graph.rb:141 config/status_configuration.yaml:4
+msgid "Network"
+msgstr "Síť"
+
+#: app/models/graph.rb:163 config/status_configuration.yaml:64
+#: app/models/graph.rb:163 config/status_configuration.yaml:64
+msgid "MByte"
+msgstr "Mbytů"
+
+#: app/models/graph.rb:164 config/status_configuration.yaml:62
+#: app/models/graph.rb:164 config/status_configuration.yaml:62
+msgid "Memory"
+msgstr "Paměť"
+
+#: app/models/graph.rb:185 config/status_configuration.yaml:29
+#: app/models/graph.rb:185 config/status_configuration.yaml:29
+msgid "Percent"
+msgstr "Procento"
+
+#: app/models/graph.rb:186 config/status_configuration.yaml:27
+#: app/models/graph.rb:186 config/status_configuration.yaml:27
+msgid "CPU"
+msgstr "CPU"
+

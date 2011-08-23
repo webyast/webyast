@@ -142,3 +142,43 @@ msgstr "システムステータスを確認しています"
 msgid "Show system status"
 msgstr "システムステータスを表示する"
 
+#: app/models/graph.rb:116 config/status_configuration.yaml:64 ./app/models/graph.rb:116
+#: ./config/status_configuration.yaml:64
+msgid "GByte"
+msgstr "Gバイト"
+
+#: app/models/graph.rb:117 config/status_configuration.yaml:63 ./app/models/graph.rb:117
+#: ./config/status_configuration.yaml:63
+msgid "Disk"
+msgstr "ディスク"
+
+#: app/models/graph.rb:140 config/status_configuration.yaml:6 ./app/models/graph.rb:140
+#: ./config/status_configuration.yaml:6
+msgid "MByte/s"
+msgstr "Mバイト/秒"
+
+#: app/models/graph.rb:141 config/status_configuration.yaml:5 ./app/models/graph.rb:141
+#: ./config/status_configuration.yaml:5
+msgid "Network"
+msgstr "ネットワーク"
+
+#: app/models/graph.rb:163 config/status_configuration.yaml:87 ./app/models/graph.rb:163
+#: ./config/status_configuration.yaml:87
+msgid "MByte"
+msgstr "Mバイト"
+
+#: app/models/graph.rb:164 config/status_configuration.yaml:86 ./app/models/graph.rb:164
+#: ./config/status_configuration.yaml:86
+msgid "Memory"
+msgstr "メモリ"
+
+#: app/models/graph.rb:185 config/status_configuration.yaml:29 ./app/models/graph.rb:185
+#: ./config/status_configuration.yaml:29
+msgid "Percent"
+msgstr "パーセント"
+
+#: app/models/graph.rb:186 config/status_configuration.yaml:28 ./app/models/graph.rb:186
+#: ./config/status_configuration.yaml:28
+msgid "CPU"
+msgstr "CPU"
+

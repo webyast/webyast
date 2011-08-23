@@ -142,3 +142,43 @@ msgstr "Vérification de l'état du système"
 msgid "Show system status"
 msgstr "Afficher l'état du système"
 
+#: app/models/graph.rb:116 config/status_configuration.yaml:64 ./app/models/graph.rb:116
+#: ./config/status_configuration.yaml:64
+msgid "GByte"
+msgstr "Go"
+
+#: app/models/graph.rb:117 config/status_configuration.yaml:63 ./app/models/graph.rb:117
+#: ./config/status_configuration.yaml:63
+msgid "Disk"
+msgstr "Disque"
+
+#: app/models/graph.rb:140 config/status_configuration.yaml:6 ./app/models/graph.rb:140
+#: ./config/status_configuration.yaml:6
+msgid "MByte/s"
+msgstr "Mo/s"
+
+#: app/models/graph.rb:141 config/status_configuration.yaml:5 ./app/models/graph.rb:141
+#: ./config/status_configuration.yaml:5
+msgid "Network"
+msgstr "Réseau"
+
+#: app/models/graph.rb:163 config/status_configuration.yaml:87 ./app/models/graph.rb:163
+#: ./config/status_configuration.yaml:87
+msgid "MByte"
+msgstr "Mo"
+
+#: app/models/graph.rb:164 config/status_configuration.yaml:86 ./app/models/graph.rb:164
+#: ./config/status_configuration.yaml:86
+msgid "Memory"
+msgstr "Mémoire"
+
+#: app/models/graph.rb:185 config/status_configuration.yaml:29 ./app/models/graph.rb:185
+#: ./config/status_configuration.yaml:29
+msgid "Percent"
+msgstr "Pourcentage"
+
+#: app/models/graph.rb:186 config/status_configuration.yaml:28 ./app/models/graph.rb:186
+#: ./config/status_configuration.yaml:28
+msgid "CPU"
+msgstr "Processeur"
+
