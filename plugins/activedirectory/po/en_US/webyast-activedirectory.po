@@ -1,0 +1,78 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: webyast-activedirectory-ui 1.0.0\n"
+"Report-Msgid-Bugs-To: i18n@suse.de\n"
+"POT-Creation-Date: 2010-08-02 09:18+0200\n"
+"PO-Revision-Date: 2005-11-08 12:26+8\n"
+"Last-Translator: Steve Beattie <steve@immunix.com>\n"
+"Language-Team: English\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+
+#: app/controllers/activedirectory_controller.rb:40
+#: app/controllers/activedirectory_controller.rb:40
+msgid "Cannot read Active Directory client configuraton."
+msgstr ""
+
+#: app/controllers/activedirectory_controller.rb:56
+#: app/controllers/activedirectory_controller.rb:56
+msgid "Active Directory client configuraton successfully written."
+msgstr ""
+
+#: app/controllers/activedirectory_controller.rb:65
+#: app/controllers/activedirectory_controller.rb:65
+msgid ""
+"Machine is not member of given domain. Enter the credentials needed for join."
+msgstr ""
+
+#: app/controllers/activedirectory_controller.rb:71
+#: app/controllers/activedirectory_controller.rb:71
+msgid "Error while jooining Active Directory domain: %s"
+msgstr ""
+
+#: app/controllers/activedirectory_controller.rb:74
+#: app/controllers/activedirectory_controller.rb:74
+msgid "Error while saving Active Directory client configuration."
+msgstr ""
+
+#: app/views/activedirectory/index.html.erb:32
+#: app/views/activedirectory/index.html.erb:32
+msgid "This field is required."
+msgstr ""
+
+#: app/views/activedirectory/index.html.erb:60
+#: app/views/activedirectory/index.html.erb:60
+msgid "Active Directory"
+msgstr ""
+
+#: app/views/activedirectory/index.html.erb:72
+#: app/views/activedirectory/index.html.erb:72
+msgid "Enable Authentication of AD users"
+msgstr ""
+
+#: app/views/activedirectory/index.html.erb:75
+#: app/views/activedirectory/index.html.erb:75
+msgid "Active Directory Domain"
+msgstr ""
+
+#: app/views/activedirectory/index.html.erb:80
+#: app/views/activedirectory/index.html.erb:80
+msgid "Create Home Directory on Login"
+msgstr ""
+
+#: app/views/activedirectory/index.html.erb:86
+#: app/views/activedirectory/index.html.erb:86
+msgid "Adminstrator User Name"
+msgstr ""
+
+#: app/views/activedirectory/index.html.erb:90
+#: app/views/activedirectory/index.html.erb:90
+msgid "Password"
+msgstr ""
+
+#: app/views/activedirectory/index.html.erb:94
+#: app/views/activedirectory/index.html.erb:94
+msgid "Machine Account"
+msgstr ""

@@ -24,6 +24,9 @@ class ActivedirectoryController < ApplicationController
 
   before_filter :login_required
 
+  # Initialize GetText and Content-Type.
+  init_gettext 'webyast_activedirectory'
+
   # GET action
   # Read AD client settings
   def show

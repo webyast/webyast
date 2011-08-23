@@ -1,0 +1,71 @@
+# Copyright (C) 2006 SuSE Linux Products GmbH, Nuernberg
+# This file is distributed under the same license as the package.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: webyast-activedirectory-ui\n"
+"POT-Creation-Date: 2010-08-18 10:18+0200\n"
+"PO-Revision-Date: 2010-08-26 09:25\n"
+"Last-Translator: Novell Language <language@novell.com>\n"
+"Language-Team: Novell Language <language@novell.com>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+
+#: app/controllers/activedirectory_controller.rb:40 ./app/controllers/activedirectory_controller.rb:40
+msgid "Cannot read Active Directory client configuraton."
+msgstr "Impossible de lire la configuration du client Active Directory."
+
+#: app/controllers/activedirectory_controller.rb:55 ./app/controllers/activedirectory_controller.rb:55
+msgid "Active Directory client configuraton successfully written."
+msgstr "Succès de l'écriture de la configuration du client Active Directory."
+
+#: app/controllers/activedirectory_controller.rb:64 ./app/controllers/activedirectory_controller.rb:64
+msgid "Machine is not member of given domain. Enter the credentials needed for join."
+msgstr "La machine n'est pas membre du domaine indiqué. Saisissez les références requises pour adhérer."
+
+#: app/controllers/activedirectory_controller.rb:70 ./app/controllers/activedirectory_controller.rb:70
+msgid "Error while joining Active Directory domain: %s"
+msgstr "Erreur lors de l'adhésion au domaine Active Directory : %s"
+
+#: app/controllers/activedirectory_controller.rb:73 ./app/controllers/activedirectory_controller.rb:73
+msgid "Error while leaving Active Directory domain: %s"
+msgstr "Erreur lors du départ du domaine Active Directory : %s"
+
+#: app/controllers/activedirectory_controller.rb:76 ./app/controllers/activedirectory_controller.rb:76
+msgid "Error while saving Active Directory client configuration."
+msgstr "Erreur lors de l'enregistrement de la configuration du client Active Directory."
+
+#: app/views/activedirectory/index.html.erb:32 ./app/views/activedirectory/index.html.erb:32
+msgid "This field is required."
+msgstr "Ce champ est obligatoire."
+
+#: app/views/activedirectory/index.html.erb:57 ./app/views/activedirectory/index.html.erb:57 ./shortcuts.yml:6
+msgid "Active Directory"
+msgstr "Active Directory"
+
+#: app/views/activedirectory/index.html.erb:69 ./app/views/activedirectory/index.html.erb:69
+msgid "Enable Authentication of AD users"
+msgstr "Activer l'authentification des utilisateurs AD"
+
+#: app/views/activedirectory/index.html.erb:72 ./app/views/activedirectory/index.html.erb:72
+msgid "Active Directory Domain"
+msgstr "Domaine Active Directory"
+
+#: app/views/activedirectory/index.html.erb:79 ./app/views/activedirectory/index.html.erb:79
+msgid "Adminstrator User Name"
+msgstr "Nom d'utilisateur administrateur"
+
+#: app/views/activedirectory/index.html.erb:83 ./app/views/activedirectory/index.html.erb:83
+msgid "Password"
+msgstr "Mot de passe"
+
+#: app/views/activedirectory/index.html.erb:87 ./app/views/activedirectory/index.html.erb:87
+msgid "Machine Account"
+msgstr "Compte machine"
+
+#: ./shortcuts.yml:7
+msgid "Configure the connection to Active Directory"
+msgstr "Configurer la connexion à Active Directory"
+

@@ -1,0 +1,113 @@
+# Jiri Srain <jsrain@suse.cz>, 2011.
+msgid ""
+msgstr ""
+"Project-Id-Version: @PACKAGE@\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2011-05-30 16:17+0200\n"
+"PO-Revision-Date: 2011-06-02 16:07+0200\n"
+"Last-Translator: Jiri Srain <jsrain@suse.cz>\n"
+"Language-Team: American English <kde-i18n-doc@kde.org>\n"
+"Language: cs\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Lokalize 1.0\n"
+"Plural-Forms: nplurals=3; plural=(n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2;\n"
+
+#: app/controllers/activedirectory_controller.rb:41
+#: app/controllers/activedirectory_controller.rb:41
+#, fuzzy
+#| msgid "Cannot write repository configuration"
+msgid "Cannot read Active Directory client configuraton."
+msgstr "Nelze zapsat konfiguraci repozitáře"
+
+#: app/controllers/activedirectory_controller.rb:56
+#: app/controllers/activedirectory_controller.rb:56
+msgid "Active Directory client configuraton successfully written."
+msgstr "Konfigurace klienta Active Directory byla úspěšně zapsána "
+
+#: app/controllers/activedirectory_controller.rb:65
+#: app/controllers/activedirectory_controller.rb:65
+msgid "Machine is not member of given domain. Enter the credentials needed for join."
+msgstr "Počítač není členem uvedené domény. Pro připojení uveďte přihlašovací údaje"
+
+#: app/controllers/activedirectory_controller.rb:71
+#: app/controllers/activedirectory_controller.rb:71
+#| msgid "Error while modifying the repository:"
+msgid "Error while joining Active Directory domain: %s"
+msgstr "Chyba při připojování k doméně Active Directory: %s"
+
+#: app/controllers/activedirectory_controller.rb:74
+#: app/controllers/activedirectory_controller.rb:74
+#| msgid "Error while saving administrator settings: %s"
+msgid "Error while leaving Active Directory domain: %s"
+msgstr "Při opouštění domény Active Directory došlo k chybě: %s"
+
+#: app/controllers/activedirectory_controller.rb:77
+#: app/controllers/activedirectory_controller.rb:77
+#| msgid "Try loading the default configuration."
+msgid "Error while saving Active Directory client configuration."
+msgstr "Při ukládání konfigurace klienta Active Directory došlo k chybě."
+
+# 50168 AttribValues/delnotify
+#: app/views/activedirectory/index.html.erb:34
+#: app/views/activedirectory/index.html.erb:34
+#| msgid "The filename is required."
+msgid "This field is required."
+msgstr "Tato položka je požadována."
+
+#: app/views/activedirectory/index.html.erb:50
+#: app/views/activedirectory/index.html.erb:50
+#| msgid "Please wait..."
+msgid "Please wait"
+msgstr "Čekejte prosím"
+
+#: app/views/activedirectory/index.html.erb:60
+#: app/views/activedirectory/index.html.erb:68
+#: app/views/activedirectory/index.html.erb:60
+#: app/views/activedirectory/index.html.erb:68 shortcuts.yml:6
+#| msgid "Home Directory"
+msgid "Active Directory"
+msgstr "Active Directory"
+
+#: app/views/activedirectory/index.html.erb:81
+#: app/views/activedirectory/index.html.erb:81
+#| msgid "VPN Authentication for %1"
+msgid "Enable Authentication of AD users"
+msgstr "Povolit autentifikaci uživatelů AD"
+
+#: app/views/activedirectory/index.html.erb:88
+#: app/views/activedirectory/index.html.erb:88
+msgid "Active Directory Domain"
+msgstr "Doméne Active Directory"
+
+#: app/views/activedirectory/index.html.erb:99
+#: app/views/activedirectory/index.html.erb:99
+#| msgid "Printer settings"
+msgid "Account settings"
+msgstr "Nastavení účtu"
+
+# Tady si nejsem jistý zda nebude lepší: Administrátorská nastavení. Cervajzz
+#: app/views/activedirectory/index.html.erb:105
+#: app/views/activedirectory/index.html.erb:105
+#| msgid "Administrator Settings"
+msgid "Administrator User Name"
+msgstr "Uživatelské jméno administrátora"
+
+# password dialog title
+#: app/views/activedirectory/index.html.erb:112
+#: app/views/activedirectory/index.html.erb:112
+msgid "Password"
+msgstr "Heslo"
+
+#: app/views/activedirectory/index.html.erb:119
+#: app/views/activedirectory/index.html.erb:119
+#| msgid "account"
+msgid "Machine Account"
+msgstr "Účet počítače"
+
+#: shortcuts.yml:7
+#| msgid "Configure the current scheme."
+msgid "Configure the connection to Active Directory"
+msgstr "Nastavit připojení k Active Directory"
+
