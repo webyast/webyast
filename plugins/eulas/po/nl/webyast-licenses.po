@@ -1,0 +1,55 @@
+# Copyright (C) 2006 SuSE Linux Products GmbH, Nuernberg
+# This file is distributed under the same license as the package.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: yast_webclient_eulas\n"
+"POT-Creation-Date: 2010-03-30 10:01+0200\n"
+"PO-Revision-Date: 2010-04-08 12:01\n"
+"Last-Translator: Novell Language <language@novell.com>\n"
+"Language-Team: Novell Language <language@novell.com>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: app/controllers/eulas_controller.rb:72
+msgid "You cannot reject a license once it has been accepted!"
+msgstr "U kunt geen licentie afwijzen als deze al is geaccepteerd!"
+
+#: app/controllers/eulas_controller.rb:75
+msgid "You must accept all licences before using this product!"
+msgstr "U moet alle licenties accepteren alvorens dit product te gebruiken!"
+
+#: app/views/eulas/no_licenses.erb:1 app/views/eulas/all_accepted.erb:1
+msgid "Accept End User Licence Agreement"
+msgstr "Eindgebruikerlicentieovereenkomst accepteren"
+
+#: app/views/eulas/no_licenses.erb:2
+msgid "There are no licenses to accept."
+msgstr "Er zijn geen licenties om te accepteren."
+
+#: app/views/eulas/show.html.erb:2
+msgid "Licence Agreement"
+msgstr "Licentieovereenkomst"
+
+#: app/views/eulas/show.html.erb:8
+msgid "Available translations:"
+msgstr "Beschikbare vertalingen:"
+
+#: app/views/eulas/show.html.erb:26
+msgid "Yes, I agree to the license agreement."
+msgstr "Ja, ik accepteer de licentieovereenkomst."
+
+#: app/views/eulas/show.html.erb:32
+msgid "No, I do not agree."
+msgstr "Nee, ik ga niet akkoord."
+
+#: app/views/eulas/show.html.erb:43
+msgid "Back"
+msgstr "Terug"
+
+#: app/views/eulas/all_accepted.erb:2
+msgid "All licenses have already been accepted"
+msgstr "Alle licenties zijn al geaccepteerd"
+

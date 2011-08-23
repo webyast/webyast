@@ -26,6 +26,9 @@ class EulasController < ApplicationController
 
   before_filter :login_required
   before_filter :ensure_license, :only => [:show, :update]
+
+  # Initialize GetText and Content-Type.
+  init_gettext "webyast-licenses" 
   
   #--------------------------------------------------------------------------------
   #

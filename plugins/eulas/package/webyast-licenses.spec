@@ -59,6 +59,8 @@ needed at runtime.
 %setup -q -n www
 
 %build
+export RAILS_PARENT=%{webyast_dir}
+env LANG=en rake makemo
 
 %check
 # run the testsuite
@@ -103,11 +105,16 @@ cp $SOURCE_CONFIG $RPM_BUILD_ROOT/etc/webyast/eulas.yml
 mkdir -p $RPM_BUILD_ROOT/usr/share/PolicyKit/policy
 cp %{SOURCE2} $RPM_BUILD_ROOT/usr/share/PolicyKit/policy/
 
+# remove .po files (no longer needed)
+rm -rf $RPM_BUILD_ROOT/%{plugin_dir}/po
+# search locale files
+%find_lang webyast-licenses
+
 %clean
 rm -rf $RPM_BUILD_ROOT
 
 
-%files 
+%files -f webyast-licenses.lang
 %defattr(-,root,root)
 %dir %{webyast_dir}
 %dir %{webyast_dir}/vendor
@@ -118,6 +125,7 @@ rm -rf $RPM_BUILD_ROOT
 %dir /usr/share/%{webyast_user}/%{plugin_name}
 %dir %{webyast_vardir}
 %dir %{webyast_vardir}/%{plugin_name}
+%{plugin_dir}/locale
 %{plugin_dir}/README
 %{plugin_dir}/Rakefile
 %{plugin_dir}/init.rb

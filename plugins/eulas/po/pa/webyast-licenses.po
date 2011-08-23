@@ -1,0 +1,58 @@
+# @TITLE@
+# Copyright (C) 2006, SUSE Linux GmbH, Nuremberg
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+# This file is distributed under the same license as @PACKAGE@ package. FIRST
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: webyast-licenses-ui 1.0.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2010-08-02 09:19+0200\n"
+"PO-Revision-Date: 2005-08-15 12:20+0530\n"
+"Last-Translator: Amanpreet Singh Alam <amanpreetalam@yahoo.com>\n"
+"Language-Team: Punjabi <fedora-trans-pa@redhat.com>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: KBabel 1.10.1\n"
+"Plural-Forms: Plural-Forms: Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: app/controllers/eulas_controller.rb:93
+#: app/controllers/eulas_controller.rb:93
+msgid "You must accept all licences before using this product!"
+msgstr ""
+
+#: app/views/eulas/no_licenses.erb:1 app/views/eulas/all_accepted.erb:1
+#: app/views/eulas/no_licenses.erb:1 app/views/eulas/all_accepted.erb:1
+msgid "Accept End User Licence Agreement"
+msgstr ""
+
+#: app/views/eulas/no_licenses.erb:2 app/views/eulas/no_licenses.erb:2
+msgid "There are no licenses to accept."
+msgstr ""
+
+#: app/views/eulas/show.html.erb:37 app/views/eulas/show.html.erb:37
+msgid "Licence Agreement"
+msgstr ""
+
+#: app/views/eulas/show.html.erb:54 app/views/eulas/show.html.erb:54
+msgid "Yes, I agree to the license agreement."
+msgstr ""
+
+#: app/views/eulas/show.html.erb:57 app/views/eulas/show.html.erb:57
+msgid "No, I do not agree."
+msgstr ""
+
+#: app/views/eulas/show.html.erb:69 app/views/eulas/show.html.erb:69
+msgid "Back"
+msgstr "ਪਿੱਛੇ"
+
+#: app/views/eulas/all_accepted.erb:2 app/views/eulas/all_accepted.erb:2
+msgid "All licenses have already been accepted"
+msgstr ""
+
+#, fuzzy
+#~| msgid "Available Processors"
+#~ msgid "Available translations:"
+#~ msgstr "ਉਪਲੱਬਧ ਪਰੋਸੈਂਸਰ"

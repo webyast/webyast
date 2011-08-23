@@ -1,0 +1,48 @@
+# Copyright (C) 2006 SuSE Linux Products GmbH, Nuernberg
+# This file is distributed under the same license as the package.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: webyast-licenses-ui\n"
+"POT-Creation-Date: 2010-08-18 10:19+0200\n"
+"PO-Revision-Date: 2010-08-27 09:29\n"
+"Last-Translator: Novell Language <language@novell.com>\n"
+"Language-Team: Novell Language <language@novell.com>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+
+#: app/controllers/eulas_controller.rb:93 ./app/controllers/eulas_controller.rb:93
+msgid "You must accept all licences before using this product!"
+msgstr "この製品を使用する前に、すべての使用許諾契約(EULA)に同意しなければなりません！"
+
+#: app/views/eulas/no_licenses.erb:1 app/views/eulas/all_accepted.erb:1
+#: ./app/views/eulas/no_licenses.erb:1 ./app/views/eulas/all_accepted.erb:1
+msgid "Accept End User Licence Agreement"
+msgstr "エンドユーザライセンス契約に同意する"
+
+#: app/views/eulas/no_licenses.erb:2 ./app/views/eulas/no_licenses.erb:2
+msgid "There are no licenses to accept."
+msgstr "同意する使用許諾契約がありません。"
+
+#: app/views/eulas/show.html.erb:24 ./app/views/eulas/show.html.erb:24
+msgid "Licence Agreement"
+msgstr "ライセンス契約"
+
+#: app/views/eulas/show.html.erb:42 ./app/views/eulas/show.html.erb:42
+msgid "Yes, I agree to the license agreement."
+msgstr "はい、ライセンス契約に同意します。"
+
+#: app/views/eulas/show.html.erb:45 ./app/views/eulas/show.html.erb:45
+msgid "No, I do not agree."
+msgstr "いいえ、同意しません。"
+
+#: app/views/eulas/show.html.erb:57 ./app/views/eulas/show.html.erb:57
+msgid "Back"
+msgstr "戻る"
+
+#: app/views/eulas/all_accepted.erb:2 ./app/views/eulas/all_accepted.erb:2
+msgid "All licenses have already been accepted"
+msgstr "すべての使用許諾契約がすでに同意されています"
+

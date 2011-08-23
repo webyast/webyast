@@ -1,0 +1,47 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: @PACKAGE@\n"
+"Report-Msgid-Bugs-To: translation@suse.de\n"
+"POT-Creation-Date: 2009-11-12 12:06+0100\n"
+"PO-Revision-Date: 2001-07-17 16:27+0200\n"
+"Last-Translator: James Ogley <ogley@suse.co.uk>\n"
+"Language-Team: English <i18n@suse.de>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8-bit\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+
+#: app/controllers/eulas_controller.rb:78
+msgid "You cannot reject a license once it has been accepted!"
+msgstr ""
+
+#: app/controllers/eulas_controller.rb:81
+msgid "You must accept all licences before using this product!"
+msgstr ""
+
+#: app/views/eulas/show.html.erb:1 app/views/eulas/all_accepted.erb:1
+#: app/views/eulas/no_licenses.erb:1
+msgid "Accept End User Licence Agreement"
+msgstr ""
+
+#: app/views/eulas/show.html.erb:4
+#, fuzzy
+#| msgid "Available Processors"
+msgid "Available translations:"
+msgstr "Available Processors"
+
+#: app/views/eulas/show.html.erb:22
+msgid "Yes, I agree to the license agreement."
+msgstr ""
+
+#: app/views/eulas/show.html.erb:28
+msgid "No, I do not agree."
+msgstr ""
+
+#: app/views/eulas/all_accepted.erb:2
+msgid "All licenses have already been accepted"
+msgstr ""
+
+#: app/views/eulas/no_licenses.erb:2
+msgid "There are no licenses to accept."
+msgstr ""

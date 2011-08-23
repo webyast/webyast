@@ -1,0 +1,56 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: webyast-licenses-ui 1.0.0\n"
+"Report-Msgid-Bugs-To: translation@suse.de\n"
+"POT-Creation-Date: 2010-08-02 09:19+0200\n"
+"PO-Revision-Date: 2010-04-30 16:32+0300\n"
+"Last-Translator: Lucian Oprea <oprea.luci@gmail.com>\n"
+"Language-Team: Comunitatea traducatorilor openSUSE Romania. Contact: <oprea."
+"luci@gmail.com><strainu10@gmail.com><traduceri@suseromania.ro>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms:  nplurals=3; plural=n==1 ? 0 : (n==0 || (n%100 > 0 && n%100 < "
+"20)) ? 1 : 2;\n"
+"X-Generator: Narro 0.9.4 on http://tradu.softwareliber.ro\n"
+
+#: app/controllers/eulas_controller.rb:93
+#: app/controllers/eulas_controller.rb:93
+msgid "You must accept all licences before using this product!"
+msgstr ""
+"Trebuie să acceptaţi toate licenţele înainte de a utiliza acest produs!"
+
+#: app/views/eulas/no_licenses.erb:1 app/views/eulas/all_accepted.erb:1
+#: app/views/eulas/no_licenses.erb:1 app/views/eulas/all_accepted.erb:1
+msgid "Accept End User Licence Agreement"
+msgstr "Acceptaţi Acordul de licenţă pentru utilizatorul final"
+
+#: app/views/eulas/no_licenses.erb:2 app/views/eulas/no_licenses.erb:2
+msgid "There are no licenses to accept."
+msgstr "Nu există licenţe de acceptat."
+
+#: app/views/eulas/show.html.erb:37 app/views/eulas/show.html.erb:37
+msgid "Licence Agreement"
+msgstr "Licenţă de utilizare"
+
+#: app/views/eulas/show.html.erb:54 app/views/eulas/show.html.erb:54
+msgid "Yes, I agree to the license agreement."
+msgstr "Da, sunt de acord cu licenţa."
+
+#: app/views/eulas/show.html.erb:57 app/views/eulas/show.html.erb:57
+msgid "No, I do not agree."
+msgstr "Nu, nu sunt de acord."
+
+#: app/views/eulas/show.html.erb:69 app/views/eulas/show.html.erb:69
+msgid "Back"
+msgstr "Înapoi"
+
+#: app/views/eulas/all_accepted.erb:2 app/views/eulas/all_accepted.erb:2
+msgid "All licenses have already been accepted"
+msgstr "Toate licenţele au fost deja acceptate"
+
+#~ msgid "You cannot reject a license once it has been accepted!"
+#~ msgstr "Nu puteţi refuza o licenţă dacă aceasta a fost acceptată!"
+
+#~ msgid "Available translations:"
+#~ msgstr "Traduceri disponibile:"

@@ -1,0 +1,61 @@
+# Catalan message file for YaST2 (@memory@).
+# Copyright (C) 2005 SUSE Linux Products GmbH.
+# Copyright (C) 2002 SuSE Linux AG.
+# Copyright (C) 2000, 2001 SuSE GmbH.
+# Jaume Badiella <myotis@drac.com>, 2001.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: webyast-licenses-ui 1.0.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2010-08-02 09:19+0200\n"
+"PO-Revision-Date: 2002-02-08 15:47+0100\n"
+"Last-Translator: Jordi Bruguera i Cortada <jordi@grn.es>\n"
+"Language-Team: Catalan\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"#-#-#-#-#  compendi_yast_11.1_11.2_e.po (YaST (@memory@))  #-#-#-#-#\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"#-#-#-#-#  isns.ca.po (YaST (@memory@))  #-#-#-#-#\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: app/controllers/eulas_controller.rb:93
+#: app/controllers/eulas_controller.rb:93
+msgid "You must accept all licences before using this product!"
+msgstr "Heu d'acceptar totes les llicències abans d'usar aquest producte!"
+
+#: app/views/eulas/no_licenses.erb:1 app/views/eulas/all_accepted.erb:1
+#: app/views/eulas/no_licenses.erb:1 app/views/eulas/all_accepted.erb:1
+msgid "Accept End User Licence Agreement"
+msgstr "Accepteu o rebutgeu l'acord de llicència d'usuari final."
+
+#: app/views/eulas/no_licenses.erb:2 app/views/eulas/no_licenses.erb:2
+msgid "There are no licenses to accept."
+msgstr "No hi ha cap llicència per acceptar."
+
+#: app/views/eulas/show.html.erb:37 app/views/eulas/show.html.erb:37
+msgid "Licence Agreement"
+msgstr "Acord de llicència"
+
+#: app/views/eulas/show.html.erb:54 app/views/eulas/show.html.erb:54
+msgid "Yes, I agree to the license agreement."
+msgstr "Sí, accepto l'acord de llicència"
+
+#: app/views/eulas/show.html.erb:57 app/views/eulas/show.html.erb:57
+msgid "No, I do not agree."
+msgstr "No, no hi estic d'acord"
+
+#: app/views/eulas/show.html.erb:69 app/views/eulas/show.html.erb:69
+msgid "Back"
+msgstr "Enrere"
+
+#: app/views/eulas/all_accepted.erb:2 app/views/eulas/all_accepted.erb:2
+msgid "All licenses have already been accepted"
+msgstr "Totes les llicències ja han estat acceptades"
+
+#~ msgid "You cannot reject a license once it has been accepted!"
+#~ msgstr "No podeu refusar una llicència un cop ja ha estat acceptada!"
+
+#~ msgid "Available translations:"
+#~ msgstr "Traduccions disponibles:"

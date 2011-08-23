@@ -1,0 +1,55 @@
+# Vojtěch Zeisek <Vojtech.Zeisek@opensuse.org>, 2010.
+msgid ""
+msgstr ""
+"Project-Id-Version: @PACKAGE@\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2011-05-30 16:17+0200\n"
+"PO-Revision-Date: 2010-06-05 18:51+0200\n"
+"Last-Translator: Vojtěch Zeisek <Vojtech.Zeisek@opensuse.org>\n"
+"Language-Team: Czech <opensuse-translation@opensuse.org>\n"
+"Language: cs\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Lokalize 1.0\n"
+"Plural-Forms: nplurals=3; plural=(n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2;\n"
+
+#: app/controllers/eulas_controller.rb:93
+#: app/controllers/eulas_controller.rb:93
+msgid "You must accept all licences before using this product!"
+msgstr "Před používáním tohoto produktu musíte přijmout licenci!"
+
+#: app/views/eulas/all_accepted.erb:1 app/views/eulas/no_licenses.erb:1
+#: app/views/eulas/all_accepted.erb:1 app/views/eulas/no_licenses.erb:1
+msgid "Accept End User Licence Agreement"
+msgstr "Přijmout licenční ujednání pro koncového uživatele"
+
+#: app/views/eulas/all_accepted.erb:2 app/views/eulas/all_accepted.erb:2
+msgid "All licenses have already been accepted"
+msgstr "Všechny licence byly přijaty"
+
+#: app/views/eulas/show.html.erb:24 app/views/eulas/show.html.erb:34
+#: app/views/eulas/show.html.erb:24 app/views/eulas/show.html.erb:34
+msgid "Licence Agreement"
+msgstr "Licenční ujednání"
+
+#: app/views/eulas/show.html.erb:55 app/views/eulas/show.html.erb:55
+msgid "Yes, I agree to the license agreement."
+msgstr "Ano, souhlasím s licenčním ujednáním."
+
+#: app/views/eulas/show.html.erb:59 app/views/eulas/show.html.erb:59
+msgid "No, I do not agree."
+msgstr "Ne, nesouhlasím."
+
+#: app/views/eulas/show.html.erb:76 app/views/eulas/show.html.erb:76
+msgid "Back"
+msgstr "Zpět"
+
+#: app/views/eulas/no_licenses.erb:2 app/views/eulas/no_licenses.erb:2
+msgid "There are no licenses to accept."
+msgstr "Nejsou žádné licence ke schválení."
+
+#, fuzzy
+#~| msgid "Available Processors"
+#~ msgid "Available translations:"
+#~ msgstr "Dostupné procesory"
