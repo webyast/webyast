@@ -1,0 +1,113 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: @PACKAGE@\n"
+"Report-Msgid-Bugs-To: translation@suse.de\n"
+"POT-Creation-Date: 2010-04-13 13:36+0200\n"
+"PO-Revision-Date: 2001-07-17 16:27+0200\n"
+"Last-Translator: James Ogley <ogley@suse.co.uk>\n"
+"Language-Team: English <i18n@suse.de>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8-bit\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+
+#: app/controllers/mail_controller.rb:29
+msgid "Passwords do not match."
+msgstr "Passwords do not match."
+
+#: app/controllers/mail_controller.rb:36
+msgid "Mail settings have been written."
+msgstr ""
+
+#: app/controllers/mail_controller.rb:38
+msgid "Test mail was sent to %s."
+msgstr ""
+
+#: app/controllers/mail_controller.rb:50
+#, fuzzy
+#| msgid "Error while closing old opasswd file: %s"
+msgid "Error while saving mail settings: %s"
+msgstr "Error while closing old opasswd file: %s"
+
+#: app/controllers/mail_controller.rb:67
+msgid ""
+"No outgoing mail server is set, but administrator has mail forwarders defined.\n"
+"Change %s<i>administrator</i>%s or %s<i>mail</i>%s configuration."
+msgstr ""
+
+#: app/views/mail/index.html.erb:16
+#, fuzzy
+#| msgid "Passwords do not match."
+msgid "The passwords do not match."
+msgstr "Passwords do not match."
+
+#: app/views/mail/index.html.erb:17
+#, fuzzy
+#| msgid "`%s' is not a valid ip address."
+msgid "Enter a valid e-mail address."
+msgstr "`%s' is not a valid ip address."
+
+#: app/views/mail/index.html.erb:18
+#, fuzzy
+#| msgid "Enter your IP address."
+msgid "Enter a valid domain name or an IP address."
+msgstr "Enter your IP address."
+
+#: app/views/mail/index.html.erb:35
+#, fuzzy
+#| msgid "Manual Settings"
+msgid "Mail Settings"
+msgstr "Manual Settings"
+
+#: app/views/mail/index.html.erb:47
+msgid "Outgoing mail server"
+msgstr ""
+
+#: app/views/mail/index.html.erb:50
+msgid "Use secure connection (TLS)"
+msgstr ""
+
+#: app/views/mail/index.html.erb:51
+msgid "Never"
+msgstr "Never"
+
+#: app/views/mail/index.html.erb:51
+#, fuzzy
+#| msgid "(%1 available)"
+msgid "If available"
+msgstr "(%1 available)"
+
+#: app/views/mail/index.html.erb:51
+#, fuzzy
+#| msgid "Alwa&ys"
+msgid "Always"
+msgstr "Alwa&ys"
+
+#: app/views/mail/index.html.erb:53
+#, fuzzy
+#| msgid "Username: "
+msgid "User name"
+msgstr "Username: "
+
+# password dialog title
+#: app/views/mail/index.html.erb:56
+msgid "Password"
+msgstr "Password"
+
+#: app/views/mail/index.html.erb:59
+#, fuzzy
+#| msgid "Wrong password!"
+msgid "Confirm password"
+msgstr "Wrong password!"
+
+#: app/views/mail/index.html.erb:67
+#, fuzzy
+#| msgid "Send Email to %1"
+msgid "Send test mail to"
+msgstr "Send Email to %1"
+
+#: app/views/mail/index.html.erb:69
+#, fuzzy
+#| msgid "Suspend failed"
+msgid "Send Mail"
+msgstr "Suspend failed"

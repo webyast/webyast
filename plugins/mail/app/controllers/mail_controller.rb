@@ -28,6 +28,9 @@ class MailController < ApplicationController
 
   before_filter :login_required
   layout 'main'
+
+  # Initialize GetText and Content-Type.
+  init_gettext "webyast-mail"
   
   public
 

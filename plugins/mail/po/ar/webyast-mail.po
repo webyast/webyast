@@ -1,0 +1,91 @@
+# Copyright (C) 2006 SuSE Linux Products GmbH, Nuernberg
+# This file is distributed under the same license as the package.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: yast_webclient_mail\n"
+"POT-Creation-Date: 2010-04-13 13:36+0200\n"
+"PO-Revision-Date: 2010-04-22 11:47\n"
+"Last-Translator: Novell Language <language@novell.com>\n"
+"Language-Team: Novell Language <language@novell.com>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: app/controllers/mail_controller.rb:29
+msgid "Passwords do not match."
+msgstr "كلمتا السر غير متطابقين."
+
+#: app/controllers/mail_controller.rb:36
+msgid "Mail settings have been written."
+msgstr "تمت كتابة إعدادات البريد."
+
+#: app/controllers/mail_controller.rb:38
+msgid "Test mail was sent to %s."
+msgstr "تم إرسال البريد الاختباري إلى %s."
+
+#: app/controllers/mail_controller.rb:50
+msgid "Error while saving mail settings: %s"
+msgstr "حدث خطأ أثناء حفظ إعدادات البريد: %s"
+
+#: app/controllers/mail_controller.rb:67
+msgid "No outgoing mail server is set, but administrator has mail forwarders defined.\nChange %s<i>administrator</i>%s or %s<i>mail</i>%s configuration."
+msgstr "لم يتم تعيين خادم بريد صادر، لكن موجهي البريد معرَّفين لدى المسئول.\nتغيير %s<i>المسئول</i>%s أو %s<i>البريد</i>%s تكوين."
+
+#: app/views/mail/index.html.erb:16
+msgid "The passwords do not match."
+msgstr "كلمتا السر غير متطابقتين."
+
+#: app/views/mail/index.html.erb:17
+msgid "Enter a valid e-mail address."
+msgstr "أدخل عنوان بريد إلكتروني صالحًا."
+
+#: app/views/mail/index.html.erb:18
+msgid "Enter a valid domain name or an IP address."
+msgstr "أدخل اسم مجال صالحًا أو عنوان IP صالحًا."
+
+#: app/views/mail/index.html.erb:35
+msgid "Mail Settings"
+msgstr "إعدادات البريد"
+
+#: app/views/mail/index.html.erb:47
+msgid "Outgoing mail server"
+msgstr "خادم البريد الصادر"
+
+#: app/views/mail/index.html.erb:50
+msgid "Use secure connection (TLS)"
+msgstr "استخدام الاتصال الآمن (TLS)"
+
+#: app/views/mail/index.html.erb:51
+msgid "Never"
+msgstr "أبدًا"
+
+#: app/views/mail/index.html.erb:51
+msgid "If available"
+msgstr "في حالة التوفر"
+
+#: app/views/mail/index.html.erb:51
+msgid "Always"
+msgstr "دائمًا"
+
+#: app/views/mail/index.html.erb:53
+msgid "User name"
+msgstr "اسم المستخدم"
+
+#: app/views/mail/index.html.erb:56
+msgid "Password"
+msgstr "كلمة السر"
+
+#: app/views/mail/index.html.erb:59
+msgid "Confirm password"
+msgstr "تأكيد كلمة السر"
+
+#: app/views/mail/index.html.erb:67
+msgid "Send test mail to"
+msgstr "إرسال بريد اختباري إلى"
+
+#: app/views/mail/index.html.erb:69
+msgid "Send Mail"
+msgstr "إرسال بريد"
+

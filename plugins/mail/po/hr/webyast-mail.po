@@ -1,0 +1,105 @@
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+#
+# Krešimir Jozić <kjozic@gmail.com>, 2010.
+msgid ""
+msgstr ""
+"Project-Id-Version: webyast-mail-ui 1.0.0\n"
+"POT-Creation-Date: 2010-08-02 09:18+0200\n"
+"PO-Revision-Date: 2010-04-13 22:07+0200\n"
+"Last-Translator: Krešimir Jozić <kjozic@gmail.com>\n"
+"Language-Team: Croatian <kde-i18n-doc@kde.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%"
+"10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
+"X-Generator: Lokalize 1.0\n"
+
+#: app/controllers/mail_controller.rb:50 app/controllers/mail_controller.rb:50
+msgid "Passwords do not match."
+msgstr "Lozinke se ne podudaraju."
+
+#: app/controllers/mail_controller.rb:57 app/controllers/mail_controller.rb:57
+msgid "Mail settings have been written."
+msgstr "Postavke pošte su sačuvane."
+
+#: app/controllers/mail_controller.rb:59 app/controllers/mail_controller.rb:59
+msgid "Test mail was sent to %s."
+msgstr "Testna pošta je poslana prema %s."
+
+#: app/controllers/mail_controller.rb:71 app/controllers/mail_controller.rb:71
+msgid "Error while saving mail settings: %s"
+msgstr "Greška prilikom spremanja postavki pošte: %s"
+
+#: app/controllers/mail_controller.rb:88 app/controllers/mail_controller.rb:88
+msgid ""
+"No outgoing mail server is set, but administrator has mail forwarders "
+"defined.\n"
+"Change %s<i>administrator</i>%s or %s<i>mail</i>%s configuration."
+msgstr ""
+"Odlazni poslužitelj pošte nije podešen, ali je administrator podesio "
+"proslijeđivače pošte.\n"
+" Promijenite %s<i>administrator</i>%s ili %s<i>pošta</i>%s postavke."
+
+#: app/views/mail/index.html.erb:44 app/views/mail/index.html.erb:44
+msgid "The passwords do not match."
+msgstr "Lozinke se ne podudaraju."
+
+#: app/views/mail/index.html.erb:45 app/views/mail/index.html.erb:45
+msgid "Enter a valid e-mail address."
+msgstr "Unesite ispravnu adresu e-pošte."
+
+#: app/views/mail/index.html.erb:46 app/views/mail/index.html.erb:46
+msgid "Enter a valid domain name or an IP address."
+msgstr "Unesite ispravnu domenu ili IP adresu."
+
+#: app/views/mail/index.html.erb:63 app/views/mail/index.html.erb:63
+#: shortcuts.yml:6
+msgid "Mail Settings"
+msgstr "Postavke pošte"
+
+#: app/views/mail/index.html.erb:75 app/views/mail/index.html.erb:75
+msgid "Outgoing mail server"
+msgstr "Odlazni poslužitelj pošte"
+
+#: app/views/mail/index.html.erb:80 app/views/mail/index.html.erb:80
+msgid "Use secure connection (TLS)"
+msgstr "Koristi sigurnu vezu (TLS)"
+
+#: app/views/mail/index.html.erb:81 app/views/mail/index.html.erb:81
+msgid "Never"
+msgstr "Nikad"
+
+#: app/views/mail/index.html.erb:81 app/views/mail/index.html.erb:81
+msgid "If available"
+msgstr "Ako je dostupno"
+
+#: app/views/mail/index.html.erb:81 app/views/mail/index.html.erb:81
+msgid "Always"
+msgstr "Uvijek"
+
+#: app/views/mail/index.html.erb:84 app/views/mail/index.html.erb:84
+msgid "User name"
+msgstr "Korisničko ime"
+
+#: app/views/mail/index.html.erb:88 app/views/mail/index.html.erb:88
+msgid "Password"
+msgstr "Lozinka"
+
+#: app/views/mail/index.html.erb:92 app/views/mail/index.html.erb:92
+msgid "Confirm password"
+msgstr "Potvrda lozinke"
+
+#: app/views/mail/index.html.erb:100 app/views/mail/index.html.erb:100
+msgid "Send test mail to"
+msgstr "Pošalji testnu poštu prema"
+
+#: app/views/mail/index.html.erb:102 app/views/mail/index.html.erb:102
+msgid "Send Mail"
+msgstr "Pošalji poštu"
+
+#: shortcuts.yml:7
+#, fuzzy
+msgid "Manage outgoing mail settings"
+msgstr "Odlazni poslužitelj pošte"

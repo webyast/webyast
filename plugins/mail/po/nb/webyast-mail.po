@@ -1,0 +1,107 @@
+# @TITLE@
+# Copyright (C) 2006, SUSE Linux GmbH, Nuremberg
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+# This file is distributed under the same license as @PACKAGE@ package. FIRST
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: webyast-mail-ui 1.0.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2010-08-02 09:18+0200\n"
+"PO-Revision-Date: 2005-08-11 20:37+0200\n"
+"Last-Translator: Olav Pettershagen <olav.pet@online.no>\n"
+"Language-Team:  <nb@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: KBabel 1.10.2\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: app/controllers/mail_controller.rb:50 app/controllers/mail_controller.rb:50
+msgid "Passwords do not match."
+msgstr "Passordene samsvarer ikke."
+
+#: app/controllers/mail_controller.rb:57 app/controllers/mail_controller.rb:57
+msgid "Mail settings have been written."
+msgstr "E-postinnstillingene er lagret."
+
+#: app/controllers/mail_controller.rb:59 app/controllers/mail_controller.rb:59
+msgid "Test mail was sent to %s."
+msgstr "Test-e-post er sendt til %s."
+
+#: app/controllers/mail_controller.rb:71 app/controllers/mail_controller.rb:71
+msgid "Error while saving mail settings: %s"
+msgstr "Feil ved lagring av e-postinnstillinger: %s"
+
+#: app/controllers/mail_controller.rb:88 app/controllers/mail_controller.rb:88
+msgid ""
+"No outgoing mail server is set, but administrator has mail forwarders "
+"defined.\n"
+"Change %s<i>administrator</i>%s or %s<i>mail</i>%s configuration."
+msgstr ""
+"Ingen utgående e-postserver er definert, men administrator definert "
+"videresending av e-post.\n"
+"Endre oppsett for  %s<i>administrator</i>%s eller %s<i>e-post</i>%s."
+
+#: app/views/mail/index.html.erb:44 app/views/mail/index.html.erb:44
+msgid "The passwords do not match."
+msgstr "Passordene samsvarer ikke."
+
+#: app/views/mail/index.html.erb:45 app/views/mail/index.html.erb:45
+msgid "Enter a valid e-mail address."
+msgstr "Angi en gyldig e-postadresse."
+
+#: app/views/mail/index.html.erb:46 app/views/mail/index.html.erb:46
+msgid "Enter a valid domain name or an IP address."
+msgstr "Angi et gyldig domenenavn eller en IP-adresse."
+
+#: app/views/mail/index.html.erb:63 app/views/mail/index.html.erb:63
+#: shortcuts.yml:6
+msgid "Mail Settings"
+msgstr "Innstillinger for e-post"
+
+#: app/views/mail/index.html.erb:75 app/views/mail/index.html.erb:75
+msgid "Outgoing mail server"
+msgstr "Utgående e-postserver"
+
+#: app/views/mail/index.html.erb:80 app/views/mail/index.html.erb:80
+msgid "Use secure connection (TLS)"
+msgstr "Bruk sikker forbindelse (TLS)"
+
+#: app/views/mail/index.html.erb:81 app/views/mail/index.html.erb:81
+msgid "Never"
+msgstr "Aldri"
+
+#: app/views/mail/index.html.erb:81 app/views/mail/index.html.erb:81
+msgid "If available"
+msgstr "Hvis tilgjengelig"
+
+#: app/views/mail/index.html.erb:81 app/views/mail/index.html.erb:81
+msgid "Always"
+msgstr "Alltid"
+
+#: app/views/mail/index.html.erb:84 app/views/mail/index.html.erb:84
+msgid "User name"
+msgstr "Brukernavn"
+
+# password dialog title
+#: app/views/mail/index.html.erb:88 app/views/mail/index.html.erb:88
+msgid "Password"
+msgstr "Passord"
+
+#: app/views/mail/index.html.erb:92 app/views/mail/index.html.erb:92
+msgid "Confirm password"
+msgstr "Bekreft passord"
+
+#: app/views/mail/index.html.erb:100 app/views/mail/index.html.erb:100
+msgid "Send test mail to"
+msgstr "Send test-e-post til"
+
+#: app/views/mail/index.html.erb:102 app/views/mail/index.html.erb:102
+msgid "Send Mail"
+msgstr "Send e-post"
+
+#: shortcuts.yml:7
+#, fuzzy
+msgid "Manage outgoing mail settings"
+msgstr "Utgående e-postserver"

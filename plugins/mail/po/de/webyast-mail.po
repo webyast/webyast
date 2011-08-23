@@ -1,0 +1,130 @@
+# Copyright (C) 2011 SuSE Linux Products GmbH, Nuernberg
+# This file is distributed under the same license as the package.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: webyast-mail-ui\n"
+"POT-Creation-Date: 2011-05-30 16:17+0200\n"
+"PO-Revision-Date: 2011-05-31 11:22+0200\n"
+"Last-Translator: Karl Eichwalder <ke@suse.de>\n"
+"Language-Team: German <i18n@suse.de>\n"
+"Language: German\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: app/controllers/mail_controller.rb:53 app/controllers/mail_controller.rb:53
+msgid "Passwords do not match."
+msgstr "Die Passwörter sind nicht identisch."
+
+#: app/controllers/mail_controller.rb:60 app/controllers/mail_controller.rb:60
+msgid "Mail settings have been written."
+msgstr "Die E-Mail-Einstellungen wurden geschrieben."
+
+#: app/controllers/mail_controller.rb:62 app/controllers/mail_controller.rb:62
+msgid "Test mail was sent to %s."
+msgstr "Test-E-Mail wurde gesendet an %s."
+
+#: app/controllers/mail_controller.rb:74 app/controllers/mail_controller.rb:74
+msgid "Error while saving mail settings: %s"
+msgstr "Fehler beim Schreiben der E-Mail-Einstellungen: %s"
+
+#: app/controllers/mail_controller.rb:91 app/controllers/mail_controller.rb:91
+msgid ""
+"No outgoing mail server is set, but administrator has mail forwarders defined.\n"
+"Change %s<i>administrator</i>%s or %s<i>mail</i>%s configuration."
+msgstr ""
+"Es wurde kein Server für ausgehende E-Mails festgelegt, doch der Administrator hat E-Mail-Weiterleitungen definiert.\n"
+"Ändern Sie die Konfiguration von %s<i>Administrator</i>%s oder %s<i>E-Mail</i>%s."
+
+#: app/views/mail/index.html.erb:34 app/views/mail/index.html.erb:34
+msgid "Please wait"
+msgstr "Bitte warten"
+
+#: app/views/mail/index.html.erb:42 app/views/mail/index.html.erb:42
+msgid "The passwords do not match."
+msgstr "Die Passwörter stimmen nicht überein."
+
+#: app/views/mail/index.html.erb:43 app/views/mail/index.html.erb:43
+msgid "Enter a valid e-mail address."
+msgstr "Gültige E-Mail-Adresse eingeben."
+
+#: app/views/mail/index.html.erb:44 app/views/mail/index.html.erb:44
+msgid "Enter a valid domain name or an IP address."
+msgstr "Geben Sie einen gültigen Domänennamen oder eine IP-Adresse ein."
+
+#: app/views/mail/index.html.erb:60 app/views/mail/index.html.erb:74
+#: app/views/mail/index.html.erb:60 app/views/mail/index.html.erb:74
+#: shortcuts.yml:6
+msgid "Mail Settings"
+msgstr "E-Mail-Einstellungen"
+
+#: app/views/mail/index.html.erb:87 app/views/mail/index.html.erb:87
+msgid "Outgoing mail server settings"
+msgstr "Servereinstellungen für ausgehende E-Mails"
+
+#: app/views/mail/index.html.erb:92 app/views/mail/index.html.erb:92
+msgid "Outgoing mail server"
+msgstr "Server für ausgehende E-Mails"
+
+#: app/views/mail/index.html.erb:97 app/views/mail/index.html.erb:97
+msgid "Use secure connection (TLS)"
+msgstr "Sichere Verbindung (TLS) verwenden"
+
+#: app/views/mail/index.html.erb:98 app/views/mail/index.html.erb:98
+msgid "Never"
+msgstr "Nie"
+
+#: app/views/mail/index.html.erb:98 app/views/mail/index.html.erb:98
+msgid "If available"
+msgstr "Falls verfügbar"
+
+#: app/views/mail/index.html.erb:98 app/views/mail/index.html.erb:98
+msgid "Always"
+msgstr "Immer"
+
+#: app/views/mail/index.html.erb:102 app/views/mail/index.html.erb:102
+msgid "User name"
+msgstr "Benutzername"
+
+#: app/views/mail/index.html.erb:107 app/views/mail/index.html.erb:107
+msgid "Password"
+msgstr "Passwort"
+
+#: app/views/mail/index.html.erb:112 app/views/mail/index.html.erb:112
+msgid "Confirm password"
+msgstr "Passwort bestätigen"
+
+#: app/views/mail/index.html.erb:120 app/views/mail/index.html.erb:120
+msgid "Check mail server settings"
+msgstr "Mailserver-Einstellungen überprüfen"
+
+#: app/views/mail/index.html.erb:124 app/views/mail/index.html.erb:124
+msgid "Send test mail to"
+msgstr "Test-E-Mail senden an"
+
+#: app/views/mail/index.html.erb:126 app/views/mail/index.html.erb:126
+msgid "Send Mail"
+msgstr "Nachricht verschicken"
+
+#: shortcuts.yml:7
+msgid "Manage outgoing mail settings"
+msgstr "Einstellungen für ausgehende E-Mails verwalten"
+
+#: app/models/mail_state.rb:40 ./app/models/mail_state.rb:40
+msgid "It was not possible to retrieve the full hostname of the machine. If the mail could not be delivered, consult the network and/or mail configuration with your network administrator."
+msgstr "Es war nicht möglich, den vollständigen Hostnamen des Computers abzurufen. Falls die E-Mail nicht zugestellt wurde, prüfen Sie die Netzwerk- und/oder E-Mail-Konfiguration zusammen mit Ihrem Netzwerkadministrator."
+
+#: app/models/mail_state.rb:45 ./app/models/mail_state.rb:45
+msgid "Mail configuration test not confirmed"
+msgstr "Der E-Mail-Konfigurationstest wurde nicht bestätigt."
+
+#: app/models/mail_state.rb:46 ./app/models/mail_state.rb:46
+msgid "While configuring mail, a test mail was sent to %s . Was the mail delivered to this address?<br>If so, confirm it by pressing the button. Otherwise check your mail configuration again."
+msgstr "Während der E-Mail-Konfiguration wurde eine Testnachricht an %s gesendet. Wurde die Nachricht dieser Adresse zugestellt?<br> Wenn ja, bestätigen Sie den Empfang durch Drücken der Schaltfläche. Überprüfen Sie anderenfalls Ihre E-Mail-Konfiguration."
+
+#: app/models/mail_state.rb:50 ./app/models/mail_state.rb:50
+msgid "Test mail received"
+msgstr "Testnachricht erhalten"
+

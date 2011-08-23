@@ -1,0 +1,104 @@
+# @TITLE@
+# Copyright (C) 2006, SUSE Linux GmbH, Nuremberg
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+# This file is distributed under the same license as @PACKAGE@ package. FIRST
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: @PACKAGE@\n"
+"Report-Msgid-Bugs-To: translation@suse.de\n"
+"POT-Creation-Date: 2010-04-13 13:36+0200\n"
+"PO-Revision-Date: 2001-10-18 10:13+0200\n"
+"Last-Translator: Görkem Çetin <gorkem@gelecek.com.tr>\n"
+"Language-Team: turkish <i18n@suse.de>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+
+#: app/controllers/mail_controller.rb:29
+msgid "Passwords do not match."
+msgstr ""
+
+#: app/controllers/mail_controller.rb:36
+msgid "Mail settings have been written."
+msgstr ""
+
+#: app/controllers/mail_controller.rb:38
+msgid "Test mail was sent to %s."
+msgstr ""
+
+#: app/controllers/mail_controller.rb:50
+msgid "Error while saving mail settings: %s"
+msgstr ""
+
+#: app/controllers/mail_controller.rb:67
+msgid ""
+"No outgoing mail server is set, but administrator has mail forwarders defined.\n"
+"Change %s<i>administrator</i>%s or %s<i>mail</i>%s configuration."
+msgstr ""
+
+#: app/views/mail/index.html.erb:16
+msgid "The passwords do not match."
+msgstr ""
+
+#: app/views/mail/index.html.erb:17
+#, fuzzy
+#| msgid "`%s' is not a valid ip address."
+msgid "Enter a valid e-mail address."
+msgstr "`%s' geçerli bir ip adresi değil."
+
+#: app/views/mail/index.html.erb:18
+msgid "Enter a valid domain name or an IP address."
+msgstr ""
+
+#: app/views/mail/index.html.erb:35
+#, fuzzy
+#| msgid "Manual Settings"
+msgid "Mail Settings"
+msgstr "El ile ayarlama"
+
+#: app/views/mail/index.html.erb:47
+msgid "Outgoing mail server"
+msgstr ""
+
+#: app/views/mail/index.html.erb:50
+msgid "Use secure connection (TLS)"
+msgstr ""
+
+#: app/views/mail/index.html.erb:51
+msgid "Never"
+msgstr "Hiç bir zaman"
+
+#: app/views/mail/index.html.erb:51
+msgid "If available"
+msgstr ""
+
+#: app/views/mail/index.html.erb:51
+msgid "Always"
+msgstr ""
+
+#: app/views/mail/index.html.erb:53
+#, fuzzy
+#| msgid "Username: "
+msgid "User name"
+msgstr "Kullanıcı adı:"
+
+#: app/views/mail/index.html.erb:56
+msgid "Password"
+msgstr "Parola"
+
+#: app/views/mail/index.html.erb:59
+msgid "Confirm password"
+msgstr ""
+
+#: app/views/mail/index.html.erb:67
+msgid "Send test mail to"
+msgstr ""
+
+#: app/views/mail/index.html.erb:69
+#, fuzzy
+#| msgid "Send Data"
+msgid "Send Mail"
+msgstr "Veri Gönder"

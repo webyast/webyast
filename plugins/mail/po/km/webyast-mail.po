@@ -1,0 +1,96 @@
+# translation of yast_webclient_mail.km.po to Khmer
+# Khoem Sokhem <khoemsokhem@khmeros.info>, 2010.
+msgid ""
+msgstr ""
+"Project-Id-Version: yast_webclient_mail.km\n"
+"Report-Msgid-Bugs-To: translation@suse.de\n"
+"POT-Creation-Date: 2010-04-13 13:36+0200\n"
+"PO-Revision-Date: 2010-04-20 08:03+0700\n"
+"Last-Translator: Khoem Sokhem <khoemsokhem@khmeros.info>\n"
+"Language-Team: Khmer <support@khmeros.info>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"X-Generator: KBabel 1.11.4\n"
+
+#: app/controllers/mail_controller.rb:29
+msgid "Passwords do not match."
+msgstr "ពាក្យ​សម្ងាត់​មិន​ដូច​គ្នា​ទេ ។"
+
+#: app/controllers/mail_controller.rb:36
+msgid "Mail settings have been written."
+msgstr "ការ​កំណត់​សំបុត្រ​ត្រូវ​បាន​សរសេរ ។"
+
+#: app/controllers/mail_controller.rb:38
+msgid "Test mail was sent to %s."
+msgstr "សំបុត្រ​សាកល្បង​ត្រូវបាន​ផ្ញើ​ទៅកាន់ %s ។"
+
+#: app/controllers/mail_controller.rb:50
+msgid "Error while saving mail settings: %s"
+msgstr "មាន​កំហុសខណៈពេល​រក្សាទុក​ការ​កំណត់​សំបុត្រ ៖ %s"
+
+#: app/controllers/mail_controller.rb:67
+msgid ""
+"No outgoing mail server is set, but administrator has mail forwarders defined.\n"
+"Change %s<i>administrator</i>%s or %s<i>mail</i>%s configuration."
+msgstr ""
+"គ្មាន​ម៉ាស៊ីន​បម្រើ​សំបុត្រ​ចេញ​ត្រូវបានកំណត់​ទេ ប៉ុន្តែ​អ្នក​គ្រប់គ្រង​បាន​កំណត់​អ្នក​បញ្ជូន​សំបុត្រ​បន្ត ។\n"
+"ផ្លាស់ប្ដូរ %s<i>អ្នក​គ្រប់គ្រង</i>%s ឬ​ការ​កំណត់​រចនាសម្ព័ន្ធ %s<i>សំបុត្រ</i>%s ។"
+
+#: app/views/mail/index.html.erb:16
+msgid "The passwords do not match."
+msgstr "ពាក្យ​សម្ងាត់​មិន​ដូច​គ្នា​ទេ ។"
+
+#: app/views/mail/index.html.erb:17
+msgid "Enter a valid e-mail address."
+msgstr "បញ្ចូល​អាសយដ្ឋាន​អ៊ីមែល​ត្រឹមត្រូវ ។"
+
+#: app/views/mail/index.html.erb:18
+msgid "Enter a valid domain name or an IP address."
+msgstr "បញ្ចូល​ឈ្មោះ​ដែន​ត្រឹមត្រូវ ឬ​អាសយដ្ឋាន IP ។"
+
+#: app/views/mail/index.html.erb:35
+msgid "Mail Settings"
+msgstr "ការ​កំណត់​សំបុត្រ"
+
+#: app/views/mail/index.html.erb:47
+msgid "Outgoing mail server"
+msgstr "ម៉ាស៊ីន​បម្រើ​សំបុត្រ​ចេញ"
+
+#: app/views/mail/index.html.erb:50
+msgid "Use secure connection (TLS)"
+msgstr "ប្រើ​កា​រតភ្ជាប់ដែលមាន​សុវត្ថិភាព (TLS)"
+
+#: app/views/mail/index.html.erb:51
+msgid "Never"
+msgstr "កុំ"
+
+#: app/views/mail/index.html.erb:51
+msgid "If available"
+msgstr "ប្រសិន​បើ​អាច​ប្រើបាន"
+
+#: app/views/mail/index.html.erb:51
+msgid "Always"
+msgstr "ជានិច្ច"
+
+#: app/views/mail/index.html.erb:53
+msgid "User name"
+msgstr "ឈ្មោះ​អ្នក​ប្រើ"
+
+# password dialog title
+#: app/views/mail/index.html.erb:56
+msgid "Password"
+msgstr "ពាក្យសម្ងាត់"
+
+#: app/views/mail/index.html.erb:59
+msgid "Confirm password"
+msgstr "បញ្ជាក់​ពាក្យ​សម្ងាត់"
+
+#: app/views/mail/index.html.erb:67
+msgid "Send test mail to"
+msgstr "ផ្ញើ​សំបុត្រ​សាកល្បង​ទៅកាន់"
+
+#: app/views/mail/index.html.erb:69
+msgid "Send Mail"
+msgstr "ផ្ញើ​សំបុត្រ"

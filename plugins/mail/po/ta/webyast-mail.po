@@ -1,0 +1,111 @@
+# @TITLE@
+# Copyright (C) 2006, SUSE Linux GmbH, Nuremberg
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+# This file is distributed under the same license as @PACKAGE@ package. FIRST
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: webyast-mail-ui 1.0.0\n"
+"Report-Msgid-Bugs-To: translation@suse.de\n"
+"POT-Creation-Date: 2010-08-02 09:18+0200\n"
+"PO-Revision-Date: 2003-08-14 10:47+0200\n"
+"Last-Translator: xxx <yyy@example.org>\n"
+"Language-Team: Tamil <i18n@suse.de>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+
+#: app/controllers/mail_controller.rb:50 app/controllers/mail_controller.rb:50
+msgid "Passwords do not match."
+msgstr "கடவுச்சொற்கள் பொருந்தவில்லை."
+
+#: app/controllers/mail_controller.rb:57 app/controllers/mail_controller.rb:57
+msgid "Mail settings have been written."
+msgstr ""
+
+#: app/controllers/mail_controller.rb:59 app/controllers/mail_controller.rb:59
+msgid "Test mail was sent to %s."
+msgstr ""
+
+#: app/controllers/mail_controller.rb:71 app/controllers/mail_controller.rb:71
+#, fuzzy
+msgid "Error while saving mail settings: %s"
+msgstr "பழைய opasswd கோப்பு: %sஐ மூடும்போது பிழை"
+
+#: app/controllers/mail_controller.rb:88 app/controllers/mail_controller.rb:88
+msgid ""
+"No outgoing mail server is set, but administrator has mail forwarders "
+"defined.\n"
+"Change %s<i>administrator</i>%s or %s<i>mail</i>%s configuration."
+msgstr ""
+
+#: app/views/mail/index.html.erb:44 app/views/mail/index.html.erb:44
+#, fuzzy
+msgid "The passwords do not match."
+msgstr "கடவுச்சொற்கள் பொருந்தவில்லை."
+
+#: app/views/mail/index.html.erb:45 app/views/mail/index.html.erb:45
+#, fuzzy
+msgid "Enter a valid e-mail address."
+msgstr "`%s' ஒரு செல்லத்தக்க ip முகவரி அல்ல."
+
+#: app/views/mail/index.html.erb:46 app/views/mail/index.html.erb:46
+#, fuzzy
+msgid "Enter a valid domain name or an IP address."
+msgstr "IP முகவரியை உள்ளிடவும்"
+
+#: app/views/mail/index.html.erb:63 app/views/mail/index.html.erb:63
+#: shortcuts.yml:6
+#, fuzzy
+msgid "Mail Settings"
+msgstr "கைமுறை அமைப்புகள்"
+
+#: app/views/mail/index.html.erb:75 app/views/mail/index.html.erb:75
+msgid "Outgoing mail server"
+msgstr ""
+
+#: app/views/mail/index.html.erb:80 app/views/mail/index.html.erb:80
+msgid "Use secure connection (TLS)"
+msgstr ""
+
+#: app/views/mail/index.html.erb:81 app/views/mail/index.html.erb:81
+msgid "Never"
+msgstr "ஒருபோதும் இல்லை"
+
+#: app/views/mail/index.html.erb:81 app/views/mail/index.html.erb:81
+#, fuzzy
+msgid "If available"
+msgstr "உதவி கிடைக்கவில்லை"
+
+#: app/views/mail/index.html.erb:81 app/views/mail/index.html.erb:81
+#, fuzzy
+msgid "Always"
+msgstr "எப்போ&தும்"
+
+#: app/views/mail/index.html.erb:84 app/views/mail/index.html.erb:84
+msgid "User name"
+msgstr ""
+
+#: app/views/mail/index.html.erb:88 app/views/mail/index.html.erb:88
+msgid "Password"
+msgstr "கடவுச்சொல்"
+
+#: app/views/mail/index.html.erb:92 app/views/mail/index.html.erb:92
+#, fuzzy
+msgid "Confirm password"
+msgstr "(_P)கடவுச்சொல்:"
+
+#: app/views/mail/index.html.erb:100 app/views/mail/index.html.erb:100
+msgid "Send test mail to"
+msgstr ""
+
+#: app/views/mail/index.html.erb:102 app/views/mail/index.html.erb:102
+#, fuzzy
+msgid "Send Mail"
+msgstr "நிலைநிறுத்தம் தோல்வியுற்றது"
+
+#: shortcuts.yml:7
+msgid "Manage outgoing mail settings"
+msgstr ""

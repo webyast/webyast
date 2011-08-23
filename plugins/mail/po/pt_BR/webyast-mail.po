@@ -1,0 +1,99 @@
+# Copyright (C) 2006 SuSE Linux Products GmbH, Nuernberg
+# This file is distributed under the same license as the package.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: webyast-mail-ui\n"
+"POT-Creation-Date: 2010-08-18 10:19+0200\n"
+"PO-Revision-Date: 2010-08-26 09:31\n"
+"Last-Translator: Novell Language <language@novell.com>\n"
+"Language-Team: Novell Language <language@novell.com>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n>1;\n"
+
+#: app/controllers/mail_controller.rb:50 ./app/controllers/mail_controller.rb:50
+msgid "Passwords do not match."
+msgstr "As senhas não são iguais."
+
+#: app/controllers/mail_controller.rb:57 ./app/controllers/mail_controller.rb:57
+msgid "Mail settings have been written."
+msgstr "As configurações de correio já foram gravadas."
+
+#: app/controllers/mail_controller.rb:59 ./app/controllers/mail_controller.rb:59
+msgid "Test mail was sent to %s."
+msgstr "E-mail de teste enviado a %s."
+
+#: app/controllers/mail_controller.rb:71 ./app/controllers/mail_controller.rb:71
+msgid "Error while saving mail settings: %s"
+msgstr "Erro ao gravar as configurações de correio: %s"
+
+#: app/controllers/mail_controller.rb:88 ./app/controllers/mail_controller.rb:88
+msgid "No outgoing mail server is set, but administrator has mail forwarders defined.\nChange %s<i>administrator</i>%s or %s<i>mail</i>%s configuration."
+msgstr "Nenhum servidor de correio eletrônico de saída foi definido, mas o administrador tem encaminhadores de e-mail definidos.\nMudar %s<i>administrador</i>%s ou configuração de %s<i>correio</i>%s."
+
+#: app/views/mail/index.html.erb:42 ./app/views/mail/index.html.erb:42
+msgid "Please wait"
+msgstr "Aguarde"
+
+#: app/views/mail/index.html.erb:49 ./app/views/mail/index.html.erb:49
+msgid "The passwords do not match."
+msgstr "As senhas não correspondem."
+
+#: app/views/mail/index.html.erb:50 ./app/views/mail/index.html.erb:50
+msgid "Enter a valid e-mail address."
+msgstr "Digite um endereço de e-mail válido."
+
+#: app/views/mail/index.html.erb:51 ./app/views/mail/index.html.erb:51
+msgid "Enter a valid domain name or an IP address."
+msgstr "Digite um nome de domínio ou um endereço IP válido."
+
+#: app/views/mail/index.html.erb:68 ./app/views/mail/index.html.erb:68 ./shortcuts.yml:6
+msgid "Mail Settings"
+msgstr "Configurações de Correio"
+
+#: app/views/mail/index.html.erb:80 ./app/views/mail/index.html.erb:80
+msgid "Outgoing mail server"
+msgstr "Servidor de correio eletrônico de saída"
+
+#: app/views/mail/index.html.erb:85 ./app/views/mail/index.html.erb:85
+msgid "Use secure connection (TLS)"
+msgstr "Usar conexão segura (TLS)"
+
+#: app/views/mail/index.html.erb:86 ./app/views/mail/index.html.erb:86
+msgid "Never"
+msgstr "Nunca"
+
+#: app/views/mail/index.html.erb:86 ./app/views/mail/index.html.erb:86
+msgid "If available"
+msgstr "Se disponível"
+
+#: app/views/mail/index.html.erb:86 ./app/views/mail/index.html.erb:86
+msgid "Always"
+msgstr "Sempre"
+
+#: app/views/mail/index.html.erb:89 ./app/views/mail/index.html.erb:89
+msgid "User name"
+msgstr "Nome do usuário"
+
+#: app/views/mail/index.html.erb:93 ./app/views/mail/index.html.erb:93
+msgid "Password"
+msgstr "Senha"
+
+#: app/views/mail/index.html.erb:97 ./app/views/mail/index.html.erb:97
+msgid "Confirm password"
+msgstr "Confirmar senha"
+
+#: app/views/mail/index.html.erb:105 ./app/views/mail/index.html.erb:105
+msgid "Send test mail to"
+msgstr "Enviar e-mail de teste a"
+
+#: app/views/mail/index.html.erb:107 ./app/views/mail/index.html.erb:107
+msgid "Send Mail"
+msgstr "Enviar E-Mail"
+
+#: ./shortcuts.yml:7
+msgid "Manage outgoing mail settings"
+msgstr "Gerenciar configurações de correio enviado"
+

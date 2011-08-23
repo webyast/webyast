@@ -1,0 +1,110 @@
+# Jyri Palokangas <jmp@opensuse.org>, 2010.
+msgid ""
+msgstr ""
+"Project-Id-Version: @PACKAGE@\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2010-04-13 13:36+0200\n"
+"PO-Revision-Date: 2010-05-04 15:14+0300\n"
+"Last-Translator: Jyri Palokangas <jmp@opensuse.org>\n"
+"Language-Team: TRANSLATIONS <kde-i18n-doc@kde.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Lokalize 1.0\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+
+#: app/controllers/mail_controller.rb:29
+msgid "Passwords do not match."
+msgstr "Salasanat eivät täsmää."
+
+#: app/controllers/mail_controller.rb:36
+#| msgid "All services have been refreshed."
+msgid "Mail settings have been written."
+msgstr "Sähköpostiasetukset tallennettiin."
+
+#: app/controllers/mail_controller.rb:38
+msgid "Test mail was sent to %s."
+msgstr "Testi sähköposti lähetettiin osoitteeseen %s."
+
+#: app/controllers/mail_controller.rb:50
+#| msgid "Error while closing old opasswd file: %s"
+msgid "Error while saving mail settings: %s"
+msgstr "Virhe tallennettaessa sähköpostiasetuksia: %s"
+
+#: app/controllers/mail_controller.rb:67
+msgid ""
+"No outgoing mail server is set, but administrator has mail forwarders defined.\n"
+"Change %s<i>administrator</i>%s or %s<i>mail</i>%s configuration."
+msgstr ""
+"Lähtevän postin palvelinta ei ole asetettu, mutta järjestelmävalvojan "
+"sähköpostin ohjaus on määritetty.\n"
+"Muuta %s<i>administrator</i>%s tai %s<i>mail</i>%s määritystä."
+
+#: app/views/mail/index.html.erb:16
+#| msgid "Passwords do not match."
+msgid "The passwords do not match."
+msgstr "Salasanat eivät täsmää."
+
+#: app/views/mail/index.html.erb:17
+#| msgid "`%s' is not a valid ip address."
+msgid "Enter a valid e-mail address."
+msgstr "Anna toimiva sähköpostiosoite."
+
+#: app/views/mail/index.html.erb:18
+#| msgid "Enter your IP address."
+msgid "Enter a valid domain name or an IP address."
+msgstr "Anna toimiva toimialue tai IP-osoite."
+
+#: app/views/mail/index.html.erb:35
+#| msgid "Manual Settings"
+msgid "Mail Settings"
+msgstr "Sähköposti asetukset"
+
+#: app/views/mail/index.html.erb:47
+msgid "Outgoing mail server"
+msgstr "Lähtevän postin palvelin"
+
+#: app/views/mail/index.html.erb:50
+msgid "Use secure connection (TLS)"
+msgstr "Käytä salattua yhteyttä (TLS)"
+
+#: app/views/mail/index.html.erb:51
+msgid "Never"
+msgstr "Ei koskaan"
+
+#: app/views/mail/index.html.erb:51
+#| msgid "(%1 available)"
+msgid "If available"
+msgstr "Jos saatavilla"
+
+#: app/views/mail/index.html.erb:51
+#| msgid "Alwa&ys"
+msgid "Always"
+msgstr "Aina"
+
+#: app/views/mail/index.html.erb:53
+#| msgid "Username: "
+msgid "User name"
+msgstr "Käyttäjänimi"
+
+# password dialog title
+#: app/views/mail/index.html.erb:56
+msgid "Password"
+msgstr "Salasana"
+
+#: app/views/mail/index.html.erb:59
+#| msgid "_Confirm Password:"
+msgid "Confirm password"
+msgstr "Vahvista salasana"
+
+#: app/views/mail/index.html.erb:67
+#| msgid "Send Email to %1"
+msgid "Send test mail to"
+msgstr "Lähetä testi sähköposti osoitteeseen"
+
+#: app/views/mail/index.html.erb:69
+#| msgid "Send Data"
+msgid "Send Mail"
+msgstr "Lähetä sähköposti"
+
+

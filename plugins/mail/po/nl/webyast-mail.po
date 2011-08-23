@@ -1,0 +1,91 @@
+# Copyright (C) 2006 SuSE Linux Products GmbH, Nuernberg
+# This file is distributed under the same license as the package.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: yast_webclient_mail\n"
+"POT-Creation-Date: 2010-04-13 13:36+0200\n"
+"PO-Revision-Date: 2010-04-22 12:39\n"
+"Last-Translator: Novell Language <language@novell.com>\n"
+"Language-Team: Novell Language <language@novell.com>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: app/controllers/mail_controller.rb:29
+msgid "Passwords do not match."
+msgstr "Wachtwoorden komen niet overeen."
+
+#: app/controllers/mail_controller.rb:36
+msgid "Mail settings have been written."
+msgstr "Mailinstellingen zijn opgeslagen."
+
+#: app/controllers/mail_controller.rb:38
+msgid "Test mail was sent to %s."
+msgstr "Testmail verzonden naar %s."
+
+#: app/controllers/mail_controller.rb:50
+msgid "Error while saving mail settings: %s"
+msgstr "Fout tijdens het opslaan van mailinstellingen: %s"
+
+#: app/controllers/mail_controller.rb:67
+msgid "No outgoing mail server is set, but administrator has mail forwarders defined.\nChange %s<i>administrator</i>%s or %s<i>mail</i>%s configuration."
+msgstr "Er is geen server voor uitgaande mail ingesteld, maar de beheerder heeft doorstuuradressen opgegeven. \nWijzig de configuratie voor %s<i>administrator</i>%s of %s<i>mail</i>%s."
+
+#: app/views/mail/index.html.erb:16
+msgid "The passwords do not match."
+msgstr "De wachtwoorden komen niet overeen."
+
+#: app/views/mail/index.html.erb:17
+msgid "Enter a valid e-mail address."
+msgstr "Geef een geldig e-mailadres op."
+
+#: app/views/mail/index.html.erb:18
+msgid "Enter a valid domain name or an IP address."
+msgstr "Voer een geldige domeinnaam of een IP-adres in."
+
+#: app/views/mail/index.html.erb:35
+msgid "Mail Settings"
+msgstr "Mailinstellingen"
+
+#: app/views/mail/index.html.erb:47
+msgid "Outgoing mail server"
+msgstr "Server voor uitgaande mail"
+
+#: app/views/mail/index.html.erb:50
+msgid "Use secure connection (TLS)"
+msgstr "Beveiligde verbinding (TLS) gebruiken"
+
+#: app/views/mail/index.html.erb:51
+msgid "Never"
+msgstr "Nooit"
+
+#: app/views/mail/index.html.erb:51
+msgid "If available"
+msgstr "Indien beschikbaar"
+
+#: app/views/mail/index.html.erb:51
+msgid "Always"
+msgstr "Altijd"
+
+#: app/views/mail/index.html.erb:53
+msgid "User name"
+msgstr "Gebruikersnaam"
+
+#: app/views/mail/index.html.erb:56
+msgid "Password"
+msgstr "Wachtwoord"
+
+#: app/views/mail/index.html.erb:59
+msgid "Confirm password"
+msgstr "Wachtwoord bevestigen"
+
+#: app/views/mail/index.html.erb:67
+msgid "Send test mail to"
+msgstr "Testmail verzenden naar"
+
+#: app/views/mail/index.html.erb:69
+msgid "Send Mail"
+msgstr "E-mail sturen"
+

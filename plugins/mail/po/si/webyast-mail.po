@@ -1,0 +1,93 @@
+# Sinhala message file for YaST2 (@memory@).
+# Copyright (C) 2007 SUSE Linux Products GmbH.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: YaST (@memory@)\n"
+"Report-Msgid-Bugs-To: i18n@suse.de\n"
+"POT-Creation-Date: 2010-04-13 13:36+0200\n"
+"PO-Revision-Date: 2005-07-29 15:37+0530\n"
+"Last-Translator: i18n@suse.de\n"
+"Language-Team: Sinhala <i18n@suse.de>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n!=1);\n"
+
+#: app/controllers/mail_controller.rb:29
+msgid "Passwords do not match."
+msgstr ""
+
+#: app/controllers/mail_controller.rb:36
+msgid "Mail settings have been written."
+msgstr ""
+
+#: app/controllers/mail_controller.rb:38
+msgid "Test mail was sent to %s."
+msgstr ""
+
+#: app/controllers/mail_controller.rb:50
+msgid "Error while saving mail settings: %s"
+msgstr ""
+
+#: app/controllers/mail_controller.rb:67
+msgid ""
+"No outgoing mail server is set, but administrator has mail forwarders defined.\n"
+"Change %s<i>administrator</i>%s or %s<i>mail</i>%s configuration."
+msgstr ""
+
+#: app/views/mail/index.html.erb:16
+msgid "The passwords do not match."
+msgstr ""
+
+#: app/views/mail/index.html.erb:17
+msgid "Enter a valid e-mail address."
+msgstr ""
+
+#: app/views/mail/index.html.erb:18
+msgid "Enter a valid domain name or an IP address."
+msgstr ""
+
+#: app/views/mail/index.html.erb:35
+msgid "Mail Settings"
+msgstr ""
+
+#: app/views/mail/index.html.erb:47
+msgid "Outgoing mail server"
+msgstr ""
+
+#: app/views/mail/index.html.erb:50
+msgid "Use secure connection (TLS)"
+msgstr ""
+
+#: app/views/mail/index.html.erb:51
+msgid "Never"
+msgstr ""
+
+#: app/views/mail/index.html.erb:51
+msgid "If available"
+msgstr ""
+
+#: app/views/mail/index.html.erb:51
+msgid "Always"
+msgstr ""
+
+#: app/views/mail/index.html.erb:53
+msgid "User name"
+msgstr ""
+
+#: app/views/mail/index.html.erb:56
+msgid "Password"
+msgstr ""
+
+#: app/views/mail/index.html.erb:59
+msgid "Confirm password"
+msgstr ""
+
+#: app/views/mail/index.html.erb:67
+msgid "Send test mail to"
+msgstr ""
+
+#: app/views/mail/index.html.erb:69
+msgid "Send Mail"
+msgstr ""

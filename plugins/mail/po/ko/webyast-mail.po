@@ -1,0 +1,116 @@
+# Copyright (C) 2006 SuSE Linux Products GmbH, Nuernberg
+# This file is distributed under the same license as the package.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: webyast-mail-ui\n"
+"POT-Creation-Date: 2010-08-18 10:19+0200\n"
+"PO-Revision-Date: 2010-08-26 09:28\n"
+"Last-Translator: Novell Language <language@novell.com>\n"
+"Language-Team: Novell Language <language@novell.com>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+
+#: app/controllers/mail_controller.rb:50 ./app/controllers/mail_controller.rb:50
+msgid "Passwords do not match."
+msgstr "비밀번호가 일치하지 않습니다."
+
+#: app/controllers/mail_controller.rb:57 ./app/controllers/mail_controller.rb:57
+msgid "Mail settings have been written."
+msgstr "메일 설정이 기록되었습니다."
+
+#: app/controllers/mail_controller.rb:59 ./app/controllers/mail_controller.rb:59
+msgid "Test mail was sent to %s."
+msgstr "테스트 메일이 %s(으)로 전송되었습니다."
+
+#: app/controllers/mail_controller.rb:71 ./app/controllers/mail_controller.rb:71
+msgid "Error while saving mail settings: %s"
+msgstr "메일 설정을 저장하는 동안 오류 발생: %s"
+
+#: app/controllers/mail_controller.rb:88 ./app/controllers/mail_controller.rb:88
+msgid "No outgoing mail server is set, but administrator has mail forwarders defined.\nChange %s<i>administrator</i>%s or %s<i>mail</i>%s configuration."
+msgstr "보내는 메일 서버가 설정되지 않았지만 관리자가 메일 전달자를 정의했습니다.\n%s<i>관리자</i>%s 또는 %s<i>메일</i>%s 구성을 변경하십시오."
+
+#: app/views/mail/index.html.erb:42 ./app/views/mail/index.html.erb:42
+msgid "Please wait"
+msgstr "잠시 기다리십시오"
+
+#: app/views/mail/index.html.erb:49 ./app/views/mail/index.html.erb:49
+msgid "The passwords do not match."
+msgstr "비밀번호가 일치하지 않습니다."
+
+#: app/views/mail/index.html.erb:50 ./app/views/mail/index.html.erb:50
+msgid "Enter a valid e-mail address."
+msgstr "유효한 전자 메일 주소를 입력하십시오."
+
+#: app/views/mail/index.html.erb:51 ./app/views/mail/index.html.erb:51
+msgid "Enter a valid domain name or an IP address."
+msgstr "유효한 도메인 이름 또는 IP 주소를 입력하십시오."
+
+#: app/views/mail/index.html.erb:68 ./app/views/mail/index.html.erb:68 ./shortcuts.yml:6
+msgid "Mail Settings"
+msgstr "메일 설정"
+
+#: app/views/mail/index.html.erb:80 ./app/views/mail/index.html.erb:80
+msgid "Outgoing mail server"
+msgstr "보내는 메일 서버"
+
+#: app/views/mail/index.html.erb:85 ./app/views/mail/index.html.erb:85
+msgid "Use secure connection (TLS)"
+msgstr "보안 연결(TLS) 사용"
+
+#: app/views/mail/index.html.erb:86 ./app/views/mail/index.html.erb:86
+msgid "Never"
+msgstr "하지 않음"
+
+#: app/views/mail/index.html.erb:86 ./app/views/mail/index.html.erb:86
+msgid "If available"
+msgstr "사용 가능한 경우"
+
+#: app/views/mail/index.html.erb:86 ./app/views/mail/index.html.erb:86
+msgid "Always"
+msgstr "항상"
+
+#: app/views/mail/index.html.erb:89 ./app/views/mail/index.html.erb:89
+msgid "User name"
+msgstr "사용자 이름"
+
+#: app/views/mail/index.html.erb:93 ./app/views/mail/index.html.erb:93
+msgid "Password"
+msgstr "비밀번호"
+
+#: app/views/mail/index.html.erb:97 ./app/views/mail/index.html.erb:97
+msgid "Confirm password"
+msgstr "비밀번호 확인"
+
+#: app/views/mail/index.html.erb:105 ./app/views/mail/index.html.erb:105
+msgid "Send test mail to"
+msgstr "다음으로 테스트 메일 보내기"
+
+#: app/views/mail/index.html.erb:107 ./app/views/mail/index.html.erb:107
+msgid "Send Mail"
+msgstr "메일 보내기"
+
+#: ./shortcuts.yml:7
+msgid "Manage outgoing mail settings"
+msgstr "보내는 메일 설정 관리"
+
+#: app/models/mail_state.rb:40 ./app/models/mail_state.rb:40
+msgid "It was not possible to retrieve the full hostname of the machine. If the mail could not be delivered, consult the network and/or mail configuration with your network administrator."
+msgstr "시스템의 전체 호스트 이름을 검색할 수 없습니다. 메일을 배달할 수 없는 경우, 네트워크 관리자에게 네트워크 또는 메일 구성을 문의하십시오."
+
+#: app/models/mail_state.rb:45 ./app/models/mail_state.rb:45
+msgid "Mail configuration test not confirmed"
+msgstr "메일 구성 테스트가 확인되지 않았습니다."
+
+#: app/models/mail_state.rb:46 ./app/models/mail_state.rb:46
+msgid "While configuring mail, a test mail was sent to %s . Was the mail delivered to this address?<br>If so, confirm it by pressing the button. Otherwise check your mail configuration again."
+msgstr "메일을 구성하는 동안 테스트 메일이 %s(으)로 전송되었습니다. 메일이 이 주소로 배달되었습니까?<br>이 경우, 버튼을 눌러 확인하십시오. 그렇지 않으면 메일 구성을 다
+시 확인하십시오."
+
+#: app/models/mail_state.rb:50 ./app/models/mail_state.rb:50
+msgid "Test mail received"
+msgstr "테스트 메일이 수신되었습니다."
+

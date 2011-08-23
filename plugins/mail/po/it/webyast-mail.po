@@ -1,0 +1,115 @@
+# Copyright (C) 2006 SuSE Linux Products GmbH, Nuernberg
+# This file is distributed under the same license as the package.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: webyast-mail-ui\n"
+"POT-Creation-Date: 2010-08-18 10:19+0200\n"
+"PO-Revision-Date: 2010-08-26 09:27\n"
+"Last-Translator: Novell Language <language@novell.com>\n"
+"Language-Team: Novell Language <language@novell.com>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: app/controllers/mail_controller.rb:50 ./app/controllers/mail_controller.rb:50
+msgid "Passwords do not match."
+msgstr "Le password non corrispondono."
+
+#: app/controllers/mail_controller.rb:57 ./app/controllers/mail_controller.rb:57
+msgid "Mail settings have been written."
+msgstr "Le impostazioni della posta sono state scritte."
+
+#: app/controllers/mail_controller.rb:59 ./app/controllers/mail_controller.rb:59
+msgid "Test mail was sent to %s."
+msgstr "E-mail di prova inviata a %s."
+
+#: app/controllers/mail_controller.rb:71 ./app/controllers/mail_controller.rb:71
+msgid "Error while saving mail settings: %s"
+msgstr "Errore durante il salvataggio delle impostazioni della posta: %s"
+
+#: app/controllers/mail_controller.rb:88 ./app/controllers/mail_controller.rb:88
+msgid "No outgoing mail server is set, but administrator has mail forwarders defined.\nChange %s<i>administrator</i>%s or %s<i>mail</i>%s configuration."
+msgstr "Nessun server di posta in uscita è stato impostato, tuttavia l'amministratore dispone di server di inoltro definiti.\nModificare la configurazione di %s<i>amministratore</i>%s o %s<i>e-mail</i>%s."
+
+#: app/views/mail/index.html.erb:42 ./app/views/mail/index.html.erb:42
+msgid "Please wait"
+msgstr "Attendere"
+
+#: app/views/mail/index.html.erb:49 ./app/views/mail/index.html.erb:49
+msgid "The passwords do not match."
+msgstr "Le password non corrispondono."
+
+#: app/views/mail/index.html.erb:50 ./app/views/mail/index.html.erb:50
+msgid "Enter a valid e-mail address."
+msgstr "Immettere un indirizzo e-mail valido."
+
+#: app/views/mail/index.html.erb:51 ./app/views/mail/index.html.erb:51
+msgid "Enter a valid domain name or an IP address."
+msgstr "Immettere un nome di dominio valido o un indirizzo IP."
+
+#: app/views/mail/index.html.erb:68 ./app/views/mail/index.html.erb:68 ./shortcuts.yml:6
+msgid "Mail Settings"
+msgstr "Impostazioni posta"
+
+#: app/views/mail/index.html.erb:80 ./app/views/mail/index.html.erb:80
+msgid "Outgoing mail server"
+msgstr "Server di posta in uscita"
+
+#: app/views/mail/index.html.erb:85 ./app/views/mail/index.html.erb:85
+msgid "Use secure connection (TLS)"
+msgstr "Utilizza connessione sicura (TLS)"
+
+#: app/views/mail/index.html.erb:86 ./app/views/mail/index.html.erb:86
+msgid "Never"
+msgstr "Mai"
+
+#: app/views/mail/index.html.erb:86 ./app/views/mail/index.html.erb:86
+msgid "If available"
+msgstr "Se disponibile"
+
+#: app/views/mail/index.html.erb:86 ./app/views/mail/index.html.erb:86
+msgid "Always"
+msgstr "Sempre"
+
+#: app/views/mail/index.html.erb:89 ./app/views/mail/index.html.erb:89
+msgid "User name"
+msgstr "Nome utente"
+
+#: app/views/mail/index.html.erb:93 ./app/views/mail/index.html.erb:93
+msgid "Password"
+msgstr "Password"
+
+#: app/views/mail/index.html.erb:97 ./app/views/mail/index.html.erb:97
+msgid "Confirm password"
+msgstr "Conferma password"
+
+#: app/views/mail/index.html.erb:105 ./app/views/mail/index.html.erb:105
+msgid "Send test mail to"
+msgstr "Invia e-mail di prova a"
+
+#: app/views/mail/index.html.erb:107 ./app/views/mail/index.html.erb:107
+msgid "Send Mail"
+msgstr "Invia email"
+
+#: ./shortcuts.yml:7
+msgid "Manage outgoing mail settings"
+msgstr "Gestisci impostazioni posta in uscita"
+
+#: app/models/mail_state.rb:40 ./app/models/mail_state.rb:40
+msgid "It was not possible to retrieve the full hostname of the machine. If the mail could not be delivered, consult the network and/or mail configuration with your network administrator."
+msgstr "Non è stato possibile recuperare il nome host completo del computer. Se non è possibile inviare correttamente la posta elettronica, verificare con l'amministratore di rete la configurazione della posta e/o di rete."
+
+#: app/models/mail_state.rb:45 ./app/models/mail_state.rb:45
+msgid "Mail configuration test not confirmed"
+msgstr "Test di configurazione della posta non confermato"
+
+#: app/models/mail_state.rb:46 ./app/models/mail_state.rb:46
+msgid "While configuring mail, a test mail was sent to %s . Was the mail delivered to this address?<br>If so, confirm it by pressing the button. Otherwise check your mail configuration again."
+msgstr "Durante la configurazione della posta, è stata inviata una e-mail di prova a %s. È stato recapitata all'indirizzo?<br>In caso affermativo, confermare facendo clic sul pulsante, altrimenti verificare nuovamente la configurazione della posta."
+
+#: app/models/mail_state.rb:50 ./app/models/mail_state.rb:50
+msgid "Test mail received"
+msgstr "E-mail di prova ricevuta"
+
