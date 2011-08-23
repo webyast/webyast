@@ -1,0 +1,140 @@
+<!--
+# Copyright (c) 2010 Novell, Inc.
+# 
+# All Rights Reserved.
+# 
+# This program is free software; you can redistribute it and/or modify it
+# under the terms of version 2 of the GNU General Public License
+# as published by the Free Software Foundation.
+# 
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+# GNU General Public License for more details.
+# 
+# You should have received a copy of the GNU General Public License
+# along with this program; if not, contact Novell, Inc.
+# 
+# To contact Novell about this file by physical or electronic mail,
+# you may find current contact information at www.novell.com
+-->
+
+<% content_for :head do %>
+  <% javascript_include_tag "jquery.activity", "notifier" %>
+  <% javascript_include_tag "validation.js" %>
+  
+  <script type="text/javascript">
+    $(document).ready(function() {
+    
+      <% if @poll_for_updates %>
+        var AUTH_TOKEN = 'authenticity_token=' + encodeURIComponent("<%= escape_javascript form_authenticity_token %>");
+        startNotifier({'module':'activedirectory', 'AUTH_TOKEN':AUTH_TOKEN}, 1000, 11000);
+      <% end %>
+
+      $("#activedirectoryForm").validate();
+      // make the error message translatable - override the default messsage
+      $.extend($.validator.messages, { required: <%= jss _("This field is required.") -%> });
+    
+      if ($("#activedirectory_enabled:checked").length == 0) {
+        $("#activedirectory_domain").attr("disabled","disabled");
+      }
+
+      $("#activedirectory_enabled").click(function () {
+        if ($("#activedirectory_enabled:checked").length == 0) {
+          $("#activedirectory_domain").attr("disabled","disabled");
+        } else {
+          $("#activedirectory_domain", "#activedirectoryForm").removeAttr("disabled");
+        }
+      });
+
+      $('#activedirectoryForm input[type="submit"]').click(function() {
+        if ($('#activedirectoryForm').valid()) {
+          var message = <%= jss _("Please wait") -%>;
+          $.modalDialog.wait( {message: message});
+        }
+      });
+      
+    });
+  </script>
+<% end %>
+
+<% disabled = !@write_permission %>
+
+<div class="plugin-content plugin-border">
+  <%= render :partial => 'shared/missing_write_permissions' if disabled %>
+  
+  <% form_for(:activedirectory, @activedirectory, :url => { :action => 'update' }, :html => { :method => :put, :id => 'activedirectoryForm', :class=>"webyast_form", :autocomplete => :off }) do |f| %>
+    <div class="plugin-header">
+      <div class="left">
+        <label class="plugin-icon-container"><img class="plugin-icon" src="/icons/active_directory.png"></label>
+        <label class="plugin-name"><%= _("Active Directory") %></label>
+      </div>
+      <div class="right" >
+        <span id="questionMark" style="margin:2px 5px; float:none;">?</span>
+      </div>
+      <div class="clearfix"></div>
+    </div>
+
+    <div class="clearfix">&nbsp;</div>
+
+    <fieldset class="webyast_fieldset">
+      <div class="fieldset_header">
+        <span class="fieldset_header_title" >
+          <%= _("Enable Authentication of AD users") %>
+          <%= check_box 'activedirectory', :enabled, {:disabled => disabled, :checked => @activedirectory.enabled}, true,false -%>
+        </span>
+      </div>
+
+      <div class="fieldset_body">
+        <div class="row">
+          <%= label_tag :activedirectory_domain, _("Active Directory Domain") %>
+          <%= text_field :activedirectory, :domain, :disabled => disabled, :class => 'required'  %>
+        </div>
+      </div>
+    </fieldset>
+   
+    <% if @activedirectory.instance_variable_names.include?("@administrator") %>
+
+      <fieldset class="webyast_fieldset">
+        <div class="fieldset_header">
+          <span class="fieldset_header_title" >
+            <%= _("Account settings") %>
+          </span>
+        </div>
+
+        <div class="fieldset_body">
+          <div class="row">
+            <%= label_tag :activedirectory_administrator, _("Administrator User Name") %>
+            <%= text_field :activedirectory, :administrator, :disabled => disabled, :class => 'required'  %>
+          </div>
+        </div>
+          
+        <div class="fieldset_body">
+          <div class="row">
+            <%= label_tag :activedirectory_password, _("Password") %>
+            <%= password_field :activedirectory, :password, :disabled => disabled, :class => 'required'  %>
+          </div>
+        </div>
+          
+        <div class="fieldset_body">
+          <div class="row">
+            <%= label_tag :activedirectory_machine, _("Machine Account") %>
+            <%= text_field :activedirectory, :machine, :disabled => disabled  %>
+          </div>
+        </div>
+      </fieldset>
+  
+  <% end %>
+    
+  <div class="clearfix"></div>
+  
+  <div class="button_container">
+    <div class="hr">&nbsp;</div>
+    <div class="nav-buttons">
+      <%= form_send_buttons :disabled => disabled %>
+    </div>
+  </div>
+    
+  <% end %>
+</div>
+

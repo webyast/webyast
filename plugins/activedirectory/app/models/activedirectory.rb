@@ -25,7 +25,7 @@ require 'yast_service'
 # Uses YaPI::ActiveDirectory for read and write operations.
 class Activedirectory < BaseModel::Base
 
-  attr_accessor	:domain
+  attr_accessor :domain
   attr_accessor :enabled
   attr_accessor :create_dirs
 
@@ -33,20 +33,24 @@ class Activedirectory < BaseModel::Base
   attr_accessor :administrator
   attr_accessor :password
   attr_accessor :machine
+  
 
   # boolean value: if we should leave domain
   attr_accessor :leave
 
-public
+  public
+  
   def self.find
     YastCache.fetch(self) {
       ret = YastService.Call("YaPI::ActiveDirectory::Read", {})
       Rails.logger.info "Read Samba config: #{ret.inspect}"
+
       ad = Activedirectory.new({
-	:domain		=> ret["domain"],
-	:create_dirs	=> ret["mkhomedir"] == "1",
-	:enabled	=> ret["winbind"] == "1"
+        :domain => ret["domain"],
+        :create_dirs => ret["mkhomedir"],
+        :enabled => ret["winbind"] == "1"
       })
+      
       leave = false
       ad = {} if ad.nil?
       ad
@@ -54,57 +58,72 @@ public
   end
 
   def check_membership(check_domain)
-    check_domain	= "" if check_domain.nil?
-    ret = YastService.Call("YaPI::ActiveDirectory::Read", { "check_membership"	=> ["s", check_domain]})
+    check_domain  = "" if check_domain.nil?
+    Rails.logger.debug "Check membership of domain #{check_domain}"
+    ret = YastService.Call("YaPI::ActiveDirectory::Read", { "check_membership"  => ["s", check_domain]})
     Rails.logger.info "Is member of domain #{check_domain}: #{ret.inspect}"
     return ret
   end
 
   def save
-    params	= {
-	"domain"	=> [ "s", @domain ],
-	"winbind"	=> [ "b", @enabled ],
-	"mkhomedir"	=> [ "b", @create_dirs ]
+    Rails.logger.debug "ENABLEd  #{@enabled.inspect}"
+    Rails.logger.debug "CREATE DIR #{@create_dirs.inspect}"
+    
+    domain = @domain.nil? ? " " : [ "s", @domain ]
+    params  = {
+      "domain" => domain,
+      "winbind" => [ "b", @enabled ],
+      "mkhomedir" => [ "b", @create_dirs ] == "0"
     }
+    
     # only pass if @leave was intentionally set to true
-    params["leave"]	=  [ "b", @leave ] if @leave
+    params["leave"] =  [ "b", @leave ] if @leave
 
     if !@enabled
-	Rails.logger.debug "disabling"
-    # if credentials not present, call check_membership:
-    # - if not member, ask for credentials (exception), otherwise write settings
+      Rails.logger.debug "disabling"
+      # if credentials not present, call check_membership:
+      # if not member, ask for credentials (exception), otherwise write settings
+      
     elsif @administrator.nil?
-	ret	= check_membership(@domain)
-	Rails.cache.write('activedirectory:domain', @domain)
-	Rails.cache.write('activedirectory:ads', ret["ads"]) if ret["ads"]
-	Rails.cache.write('activedirectory:realm', ret["realm"]) if ret["realm"]
-	Rails.cache.write('activedirectory:workgroup', ret["workgroup"]) if ret["workgroup"]
-	raise ActivedirectoryError.new("not_member","") unless ret["result"]
+      ret = check_membership(@domain)
+      
+      Rails.logger.debug "Check membership returns #{ret.inspect}"
+      Rails.cache.write('activedirectory:domain', @domain)
+      Rails.cache.write('activedirectory:ads', ret["ads"]) if ret["ads"]
+      Rails.cache.write('activedirectory:realm', ret["realm"]) if ret["realm"]
+      Rails.cache.write('activedirectory:workgroup', ret["workgroup"]) if ret["workgroup"]
+
+      Rails.logger.debug "RAISE AD Error member not found --> #{ret["result"].inspect}!!!"
+      raise ActivedirectoryError.new("not_member", "") unless ret["result"]
+
     else
-	# join args are present
-	params["administrator"]	= [ "s", @administrator]
-	params["password"]	= [ "s", @password ] unless @password.nil?
-	params["machine"]	= [ "s", @machine ] unless @machine.nil?
+      # join args are present
+      params["administrator"] = [ "s", @administrator]
+      params["password"] = [ "s", @password ] unless @password.nil?
+      params["machine"] = [ "s", @machine ] unless @machine.nil?
     end
 
-    domain_cache	= Rails.cache.read('activedirectory:domain') || ""
+    domain_cache = Rails.cache.read('activedirectory:domain') || ""
+
     if (domain_cache == @domain)
-	ads		= Rails.cache.read('activedirectory:ads') || ""
-	realm		= Rails.cache.read('activedirectory:realm') || ""
-	workgroup	= Rails.cache.read('activedirectory:workgroup') || ""
-	params["ads"]	= [ "s", ads ] unless ads.nil? || ads.empty?
-	params["realm"]	= [ "s", realm ] unless realm.empty?
-	params["workgroup"]	= [ "s", workgroup ] unless workgroup.empty?
+      ads = Rails.cache.read('activedirectory:ads') || ""
+      realm = Rails.cache.read('activedirectory:realm') || ""
+      workgroup = Rails.cache.read('activedirectory:workgroup') || ""
+      params["ads"] = [ "s", ads ] unless ads.nil? || ads.empty?
+      params["realm"] = [ "s", realm ] unless realm.empty?
+      params["workgroup"] = [ "s", workgroup ] unless workgroup.empty?
     end
 
+    Rails.logger.debug "YaPI PARAMS: '#{params.inspect}'"
     yapi_ret = YastService.Call("YaPI::ActiveDirectory::Write", params)
     Rails.logger.debug "Write YaPI returns: '#{yapi_ret}'"
+
     if yapi_ret["join_error"]
-	raise ActivedirectoryError.new("join_error",yapi_ret["join_error"])
+      raise ActivedirectoryError.new("join_error", yapi_ret["join_error"])
     elsif yapi_ret["leave_error"]
-	raise ActivedirectoryError.new("leave_error",yapi_ret["leave_error"])
+      raise ActivedirectoryError.new("leave_error", yapi_ret["leave_error"])
     elsif yapi_ret["write_error"]
-	raise ActivedirectoryError.new("write_error","")
+      raise ActivedirectoryError.new("write_error","")
     end
 
     Rails.cache.write('activedirectory:domain', "")
@@ -119,15 +138,18 @@ public
 end
 
 require 'exceptions'
+
 class ActivedirectoryError < BackendException
   attr_reader :id
-
-  def initialize(id,message)
-    @id		= id
-    @message	= message
+  attr_reader :message
+  
+  def initialize(id, message)
+    @id = id
+    @message = message
   end
 
   def to_xml
+    Rails.logger.debug "TO XML"
     xml = Builder::XmlMarkup.new({})
     xml.instruct!
 
