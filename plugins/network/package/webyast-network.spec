@@ -73,7 +73,7 @@ mkdir -p public/network/restdoc
 # do not package restdoc sources
 rm -rf restdoc
 
-export RAILS_PARENT=%{webyast_ui_dir}
+export RAILS_PARENT=%{webyast_dir}
 env LANG=en rake makemo
 
 %check
