@@ -1,0 +1,84 @@
+# Sinhala message file for YaST2 (@memory@).
+# Copyright (C) 2007 SUSE Linux Products GmbH.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: YaST (@memory@)\n"
+"Report-Msgid-Bugs-To: i18n@suse.de\n"
+"POT-Creation-Date: 2009-11-20 14:34+0100\n"
+"PO-Revision-Date: 2005-07-29 15:37+0530\n"
+"Last-Translator: i18n@suse.de\n"
+"Language-Team: Sinhala <i18n@suse.de>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n!=1);\n"
+
+#: app/controllers/services_controller.rb:11
+msgid "Invalid session, please login again."
+msgstr ""
+
+#: app/controllers/services_controller.rb:34
+msgid "(cannot read status)"
+msgstr ""
+
+#: app/controllers/services_controller.rb:80
+msgid "success"
+msgstr ""
+
+#: app/views/services/_status.rhtml:14
+msgid "(unknown)"
+msgstr ""
+
+#: app/views/services/_status.rhtml:16
+msgid "(running)"
+msgstr ""
+
+#: app/views/services/_status.rhtml:18
+msgid "(dead)"
+msgstr ""
+
+#: app/views/services/_status.rhtml:20
+msgid "(not running)"
+msgstr ""
+
+#: app/views/services/_status.rhtml:22
+msgid "(unknown: %d)"
+msgstr ""
+
+#: app/views/services/_result.rhtml:5
+msgid "Service Call Result"
+msgstr ""
+
+#: app/views/services/_result.rhtml:8
+msgid "Result"
+msgstr ""
+
+#: app/views/services/_result.rhtml:12
+msgid "Description"
+msgstr ""
+
+#: app/views/services/_result.rhtml:18 app/views/services/_result.rhtml:20
+#: app/views/services/index.rhtml:102
+msgid "Back"
+msgstr ""
+
+#: app/views/services/index.rhtml:11
+msgid "Custom Services"
+msgstr ""
+
+#: app/views/services/index.rhtml:13
+msgid "System Services"
+msgstr ""
+
+#: app/views/services/index.rhtml:20
+msgid "No custom service is defined on target machine."
+msgstr ""
+
+#: app/views/services/index.rhtml:22
+msgid "You do not have permission to execute the services. The links are disabled."
+msgstr ""
+
+#: app/views/services/index.rhtml:94
+msgid "status"
+msgstr ""

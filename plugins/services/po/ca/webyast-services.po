@@ -1,0 +1,228 @@
+# Catalan message file for YaST2 (@memory@).
+# Copyright (C) 2005 SUSE Linux Products GmbH.
+# Copyright (C) 2002 SuSE Linux AG.
+# Copyright (C) 2000, 2001 SuSE GmbH.
+# Jaume Badiella <myotis@drac.com>, 2001.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: webyast-services-ui 1.0.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2010-08-02 09:19+0200\n"
+"PO-Revision-Date: 2002-02-08 15:47+0100\n"
+"Last-Translator: Jordi Bruguera i Cortada <jordi@grn.es>\n"
+"Language-Team: Catalan\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"#-#-#-#-#  compendi_yast_11.1_11.2_e.po (YaST (@memory@))  #-#-#-#-#\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"#-#-#-#-#  isns.ca.po (YaST (@memory@))  #-#-#-#-#\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: app/controllers/services_controller.rb:46
+#: app/controllers/services_controller.rb:46
+msgid "(cannot read status)"
+msgstr "(no es pot llegir l'estat)"
+
+#: app/controllers/services_controller.rb:74
+#: app/controllers/services_controller.rb:74
+msgid "List of services could not be read"
+msgstr ""
+
+#: app/controllers/services_controller.rb:76
+#: app/controllers/services_controller.rb:76
+msgid "List of custom services could not be read"
+msgstr ""
+
+#: app/controllers/services_controller.rb:112
+#: app/controllers/services_controller.rb:112
+msgid "success"
+msgstr "èxit"
+
+#: app/controllers/services_controller.rb:113
+#: app/controllers/services_controller.rb:113
+msgid "unspecified error"
+msgstr "no s'ha especificat l'error"
+
+#: app/controllers/services_controller.rb:114
+#: app/controllers/services_controller.rb:114
+msgid "invalid or excess argument(s)"
+msgstr "els arguments no són vàlids o bé són en excés"
+
+#: app/controllers/services_controller.rb:115
+#: app/controllers/services_controller.rb:115
+msgid "unimplemented feature"
+msgstr "no s'ha implementat la característica"
+
+#: app/controllers/services_controller.rb:116
+#: app/controllers/services_controller.rb:116
+msgid "user had insufficient privilege"
+msgstr "l'usuari no tenia suficients privilegis"
+
+#: app/controllers/services_controller.rb:117
+#: app/controllers/services_controller.rb:117
+msgid "program is not installed"
+msgstr "el programa no està instal·lat"
+
+#: app/controllers/services_controller.rb:118
+#: app/controllers/services_controller.rb:118
+msgid "program is not configured"
+msgstr "el programa no està configurat"
+
+#: app/controllers/services_controller.rb:119
+#: app/controllers/services_controller.rb:119
+#, fuzzy
+msgid "program is not running"
+msgstr "el programa no s'està executant"
+
+#: app/controllers/services_controller.rb:126
+#: app/controllers/services_controller.rb:126
+msgid "Unknown error on server side"
+msgstr ""
+
+#: app/views/services/_result.rhtml:7 app/views/services/_result.rhtml:7
+msgid "Service Call Result"
+msgstr "Resultat de la crida de servei"
+
+#: app/views/services/_result.rhtml:10 app/views/services/_result.rhtml:10
+msgid "Result"
+msgstr "Resultat"
+
+#: app/views/services/_result.rhtml:15 app/views/services/_result.rhtml:15
+msgid "Description"
+msgstr "Descripció"
+
+#: app/views/services/index.rhtml:191 app/views/services/index.rhtml:191
+#: shortcuts.yml:7
+msgid "System Services"
+msgstr "Serveis del sistema"
+
+#: app/views/services/index.rhtml:197 app/views/services/index.rhtml:197
+msgid "You do not have permission to execute the services."
+msgstr "No teniu permís per executar els serveis."
+
+#: app/views/services/index.rhtml:202 app/views/services/index.rhtml:247
+#: app/views/services/index.rhtml:202 app/views/services/index.rhtml:247
+msgid "Filter services"
+msgstr "Filtra els serveis"
+
+#: app/views/services/index.rhtml:204 app/views/services/index.rhtml:251
+#: app/views/services/index.rhtml:266 app/views/services/index.rhtml:204
+#: app/views/services/index.rhtml:251 app/views/services/index.rhtml:266
+msgid "All"
+msgstr "Tot"
+
+#: app/views/services/index.rhtml:205 app/views/services/index.rhtml:252
+#: app/views/services/index.rhtml:205 app/views/services/index.rhtml:252
+msgid "Running"
+msgstr "S'està executant"
+
+#: app/views/services/index.rhtml:206 app/views/services/index.rhtml:253
+#: app/views/services/index.rhtml:206 app/views/services/index.rhtml:253
+msgid "Not Running"
+msgstr "No s'està en executant"
+
+# RW
+#: app/views/services/index.rhtml:207 app/views/services/index.rhtml:254
+#: app/views/services/index.rhtml:207 app/views/services/index.rhtml:254
+msgid "Dead"
+msgstr "Aturat"
+
+#: app/views/services/index.rhtml:208 app/views/services/index.rhtml:255
+#: app/views/services/index.rhtml:208 app/views/services/index.rhtml:255
+msgid "Started on Boot"
+msgstr "Iniciat durant l'arrencada"
+
+#: app/views/services/index.rhtml:209 app/views/services/index.rhtml:256
+#: app/views/services/index.rhtml:209 app/views/services/index.rhtml:256
+msgid "Not Started on Boot"
+msgstr "No s'ha iniciat durant l'arrencada"
+
+#: app/views/services/index.rhtml:216 app/views/services/index.rhtml:231
+#: app/views/services/index.rhtml:235 app/views/services/index.rhtml:216
+#: app/views/services/index.rhtml:231 app/views/services/index.rhtml:235
+msgid "Quick Search"
+msgstr "Cerca ràpida"
+
+#: app/views/services/index.rhtml:242 app/views/services/index.rhtml:242
+msgid "Add New Repository"
+msgstr ""
+
+#: app/views/services/index.rhtml:262 app/views/services/index.rhtml:262
+#, fuzzy
+msgid "Filter repositories"
+msgstr "Filtra els serveis"
+
+#: app/views/services/index.rhtml:267 app/views/services/index.rhtml:267
+msgid "Enabled"
+msgstr ""
+
+#: app/views/services/index.rhtml:268 app/views/services/index.rhtml:268
+msgid "Disabled"
+msgstr ""
+
+#: app/views/services/index.rhtml:289 app/views/services/index.rhtml:289
+msgid "Description for service is not available"
+msgstr "La descripció del servei no està disponible."
+
+#: app/views/services/index.rhtml:313 app/views/services/index.rhtml:313
+msgid "(refresh)"
+msgstr "(refresca)"
+
+#: app/views/services/index.rhtml:345 app/views/services/index.rhtml:345
+msgid "Start"
+msgstr "Inici"
+
+#: app/views/services/index.rhtml:346 app/views/services/index.rhtml:346
+msgid "Stop"
+msgstr "Atura"
+
+#: app/views/services/index.rhtml:347 app/views/services/index.rhtml:347
+msgid "Restart"
+msgstr "Reinicia"
+
+#: app/views/services/index.rhtml:348 app/views/services/index.rhtml:348
+msgid "Start on Boot"
+msgstr "Inicia durant l'arrencada"
+
+#: app/views/services/index.rhtml:349 app/views/services/index.rhtml:349
+msgid "Do Not Start on Boot"
+msgstr "No iniciïs durant l'arrencada"
+
+#: app/views/services/_status.rhtml:7 app/views/services/_status.rhtml:7
+msgid "Service will be started on boot."
+msgstr "El servei s'iniciarà durant l'arrencada"
+
+#: app/views/services/_status.rhtml:9 app/views/services/_status.rhtml:9
+msgid "Service will not be started on boot."
+msgstr "El servei no s'iniciarà durant l'arrencada"
+
+#: app/views/services/_status.rhtml:32 app/views/services/_status.rhtml:32
+msgid "status unknown"
+msgstr "estat desconegut"
+
+#: app/views/services/_status.rhtml:34 app/views/services/_status.rhtml:34
+msgid "running"
+msgstr "s'està executant"
+
+# RW
+#: app/views/services/_status.rhtml:38 app/views/services/_status.rhtml:38
+msgid "dead"
+msgstr "aturat"
+
+#: app/views/services/_status.rhtml:42 app/views/services/_status.rhtml:42
+msgid "not running"
+msgstr "no està en funcionament"
+
+#: app/views/services/_status.rhtml:46 app/views/services/_status.rhtml:46
+msgid "status unknown: %d"
+msgstr "estat desconegut: %d"
+
+#: app/views/services/_status.rhtml:49 app/views/services/_status.rhtml:49
+msgid "Current status of the service:"
+msgstr "Estat actual del servei:"
+
+#: shortcuts.yml:8
+msgid "Manage the LSB init scripts"
+msgstr ""

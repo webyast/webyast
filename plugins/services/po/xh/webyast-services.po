@@ -1,0 +1,106 @@
+# Copyright (C) 2007 SuSE Linux Products GmbH, Nuernberg
+# This file is distributed under the same license as the package.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: base\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2009-11-20 14:34+0100\n"
+"PO-Revision-Date: 2006-11-03 14:26\n"
+"Last-Translator: Novell Language <language@novell.com>\n"
+"Language-Team: Novell Language <language@novell.com>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: app/controllers/services_controller.rb:11
+msgid "Invalid session, please login again."
+msgstr ""
+
+#: app/controllers/services_controller.rb:34
+msgid "(cannot read status)"
+msgstr ""
+
+#: app/controllers/services_controller.rb:80
+#, fuzzy
+#| msgid ""
+#| "Success:\n"
+#| "%s"
+msgid "success"
+msgstr ""
+"Impumelelo:\n"
+"%s"
+
+#: app/views/services/_status.rhtml:14
+#, fuzzy
+#| msgid "unknown"
+msgid "(unknown)"
+msgstr "akwaziwa"
+
+#: app/views/services/_status.rhtml:16
+#, fuzzy
+#| msgid "running"
+msgid "(running)"
+msgstr "kuyaqhutywa"
+
+#: app/views/services/_status.rhtml:18
+msgid "(dead)"
+msgstr ""
+
+#: app/views/services/_status.rhtml:20
+#, fuzzy
+#| msgid "not running"
+msgid "(not running)"
+msgstr "akuqhutywa"
+
+#: app/views/services/_status.rhtml:22
+#, fuzzy
+#| msgid "unknown"
+msgid "(unknown: %d)"
+msgstr "akwaziwa"
+
+#: app/views/services/_result.rhtml:5
+msgid "Service Call Result"
+msgstr ""
+
+#: app/views/services/_result.rhtml:8
+#, fuzzy
+#| msgid "Connect Result"
+msgid "Result"
+msgstr "Qhagamshela Isiphumo"
+
+#: app/views/services/_result.rhtml:12
+msgid "Description"
+msgstr "Inkcazelo"
+
+#: app/views/services/_result.rhtml:18 app/views/services/_result.rhtml:20
+#: app/views/services/index.rhtml:102
+msgid "Back"
+msgstr "Emva"
+
+#: app/views/services/index.rhtml:11
+#, fuzzy
+#| msgid "Novell Services"
+msgid "Custom Services"
+msgstr "Iinkonzo ze-Novell"
+
+#: app/views/services/index.rhtml:13
+#, fuzzy
+#| msgid "System Settings"
+msgid "System Services"
+msgstr "Imimiselo Yesixokelelwano"
+
+#: app/views/services/index.rhtml:20
+msgid "No custom service is defined on target machine."
+msgstr ""
+
+#: app/views/services/index.rhtml:22
+msgid "You do not have permission to execute the services. The links are disabled."
+msgstr ""
+
+#: app/views/services/index.rhtml:94
+#, fuzzy
+#| msgid "Status"
+msgid "status"
+msgstr "Isimo"

@@ -1,0 +1,98 @@
+# @TITLE@
+# Copyright (C) 2006, SUSE Linux GmbH, Nuremberg
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+# This file is distributed under the same license as @PACKAGE@ package. FIRST
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: @PACKAGE@\n"
+"Report-Msgid-Bugs-To: translation@suse.de\n"
+"POT-Creation-Date: 2009-11-20 14:34+0100\n"
+"PO-Revision-Date: 2001-10-18 10:13+0200\n"
+"Last-Translator: Görkem Çetin <gorkem@gelecek.com.tr>\n"
+"Language-Team: turkish <i18n@suse.de>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+
+#: app/controllers/services_controller.rb:11
+msgid "Invalid session, please login again."
+msgstr ""
+
+#: app/controllers/services_controller.rb:34
+msgid "(cannot read status)"
+msgstr ""
+
+#: app/controllers/services_controller.rb:80
+msgid "success"
+msgstr ""
+
+# include/cups/ui.ycp:2577 include/cups/ui.ycp:2598
+#: app/views/services/_status.rhtml:14
+#, fuzzy
+#| msgid "unknown"
+msgid "(unknown)"
+msgstr "bilinmeyen"
+
+#: app/views/services/_status.rhtml:16
+#, fuzzy
+#| msgid "Warning"
+msgid "(running)"
+msgstr "Uyarı"
+
+#: app/views/services/_status.rhtml:18
+msgid "(dead)"
+msgstr ""
+
+#: app/views/services/_status.rhtml:20
+msgid "(not running)"
+msgstr ""
+
+# include/cups/ui.ycp:2577 include/cups/ui.ycp:2598
+#: app/views/services/_status.rhtml:22
+#, fuzzy
+#| msgid "unknown"
+msgid "(unknown: %d)"
+msgstr "bilinmeyen"
+
+#: app/views/services/_result.rhtml:5
+msgid "Service Call Result"
+msgstr ""
+
+#: app/views/services/_result.rhtml:8
+msgid "Result"
+msgstr ""
+
+#: app/views/services/_result.rhtml:12
+msgid "Description"
+msgstr "Tanım"
+
+#: app/views/services/_result.rhtml:18 app/views/services/_result.rhtml:20
+#: app/views/services/index.rhtml:102
+msgid "Back"
+msgstr ""
+
+#: app/views/services/index.rhtml:11
+msgid "Custom Services"
+msgstr ""
+
+#: app/views/services/index.rhtml:13
+msgid "System Services"
+msgstr ""
+
+#: app/views/services/index.rhtml:20
+msgid "No custom service is defined on target machine."
+msgstr ""
+
+#: app/views/services/index.rhtml:22
+msgid "You do not have permission to execute the services. The links are disabled."
+msgstr ""
+
+# clients/lan_inetd_custom.ycp:748
+#: app/views/services/index.rhtml:94
+#, fuzzy
+#| msgid "Status"
+msgid "status"
+msgstr "Durum"

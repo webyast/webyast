@@ -1,0 +1,240 @@
+# translation of yast_webclient_services.cs.po to czech
+# Jaromír Červenka <cervajz@cervajz.com>, 2009.
+# Vojtěch Zeisek <vojta.sc@seznam.cz>, 2009.
+# Vojtěch Zeisek <Vojtech.Zeisek@opensuse.org>, 2010.
+# Jiri Srain <jsrain@suse.cz>, 2011.
+msgid ""
+msgstr ""
+"Project-Id-Version: @PACKAGE@\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2011-05-30 16:16+0200\n"
+"PO-Revision-Date: 2011-06-02 16:28+0200\n"
+"Last-Translator: Jiri Srain <jsrain@suse.cz>\n"
+"Language-Team: American English <kde-i18n-doc@kde.org>\n"
+"Language: cs\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Lokalize 1.0\n"
+"Plural-Forms: nplurals=3; plural=(n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2;\n"
+
+#: app/controllers/services_controller.rb:46
+#: app/controllers/services_controller.rb:46
+msgid "(cannot read status)"
+msgstr "(nelze zjistit stav)"
+
+#: app/controllers/services_controller.rb:74
+#: app/controllers/services_controller.rb:74
+#| msgid "Sorry, the server could not be added: "
+msgid "List of services could not be read"
+msgstr "Nepodařilo se načíst seznam služeb"
+
+#: app/controllers/services_controller.rb:76
+#: app/controllers/services_controller.rb:76
+#| msgid "Sorry, the server could not be added: "
+msgid "List of custom services could not be read"
+msgstr "Nepodarilo se načíst seznam vlastních služeb"
+
+#: app/controllers/services_controller.rb:112
+#: app/controllers/services_controller.rb:112
+msgid "success"
+msgstr "úspěch"
+
+#: app/controllers/services_controller.rb:113
+#: app/controllers/services_controller.rb:113
+msgid "unspecified error"
+msgstr "nespecifikovaná chyba"
+
+#: app/controllers/services_controller.rb:114
+#: app/controllers/services_controller.rb:114
+msgid "invalid or excess argument(s)"
+msgstr "neplatný/é nebo překročený/é argument/y"
+
+#: app/controllers/services_controller.rb:115
+#: app/controllers/services_controller.rb:115
+msgid "unimplemented feature"
+msgstr "neimplementovaná vlastnost"
+
+#: app/controllers/services_controller.rb:116
+#: app/controllers/services_controller.rb:116
+msgid "user had insufficient privilege"
+msgstr "uživatel má nedostatečná oprávnění"
+
+#: app/controllers/services_controller.rb:117
+#: app/controllers/services_controller.rb:117
+msgid "program is not installed"
+msgstr "program není nainstalován"
+
+#: app/controllers/services_controller.rb:118
+#: app/controllers/services_controller.rb:118
+msgid "program is not configured"
+msgstr "program není nastaven"
+
+#: app/controllers/services_controller.rb:119
+#: app/controllers/services_controller.rb:119
+#| msgid "program is not runnning"
+msgid "program is not running"
+msgstr "program neběží"
+
+#: app/controllers/services_controller.rb:126
+#: app/controllers/services_controller.rb:126
+#| msgid "Unknown error"
+msgid "Unknown error on server side"
+msgstr "Neznámá chyba na straně serveru"
+
+#: app/views/services/_status.rhtml:7 app/views/services/_status.rhtml:7
+msgid "Service will be started on boot."
+msgstr "Služba bude spuštěna během bootu."
+
+#: app/views/services/_status.rhtml:9 app/views/services/_status.rhtml:9
+msgid "Service will not be started on boot."
+msgstr "Služba nebude spuštěna během bootu."
+
+#: app/views/services/_status.rhtml:32 app/views/services/_status.rhtml:32
+msgid "status unknown"
+msgstr "neznámý stav"
+
+#: app/views/services/_status.rhtml:34 app/views/services/_status.rhtml:34
+msgid "running"
+msgstr "běží"
+
+#: app/views/services/_status.rhtml:38 app/views/services/_status.rhtml:38
+msgid "dead"
+msgstr "mrtvý"
+
+#: app/views/services/_status.rhtml:42 app/views/services/_status.rhtml:42
+msgid "not running"
+msgstr "neběží"
+
+#: app/views/services/_status.rhtml:46 app/views/services/_status.rhtml:46
+msgid "status unknown: %d"
+msgstr "neznámý stav: %d"
+
+#: app/views/services/_status.rhtml:49 app/views/services/_status.rhtml:49
+msgid "Current status of the service:"
+msgstr "Současný stav služby:"
+
+#: app/views/services/_result.rhtml:7 app/views/services/_result.rhtml:7
+msgid "Service Call Result"
+msgstr "Výsledek volání služby"
+
+#: app/views/services/_result.rhtml:10 app/views/services/_result.rhtml:10
+msgid "Result"
+msgstr "Výsledek"
+
+#: app/views/services/_result.rhtml:15 app/views/services/_result.rhtml:15
+msgid "Description"
+msgstr "Popis"
+
+#: app/views/services/index.rhtml:196 app/views/services/index.rhtml:203
+#: app/views/services/index.rhtml:196 app/views/services/index.rhtml:203
+#: shortcuts.yml:8
+msgid "System Services"
+msgstr "Služby systému"
+
+#: app/views/services/index.rhtml:213 app/views/services/index.rhtml:213
+msgid "You do not have permission to execute the services."
+msgstr "Nemáte dostatečná oprávnění ke spuštění služeb."
+
+#: app/views/services/index.rhtml:221 app/views/services/index.rhtml:221
+msgid "Quick Search"
+msgstr "Rychlé vyhledávání"
+
+#: app/views/services/index.rhtml:227 app/views/services/index.rhtml:227
+msgid "Filter services"
+msgstr "Filtrovat služby"
+
+#: app/views/services/index.rhtml:231 app/views/services/index.rhtml:231
+msgid "All"
+msgstr "Vše"
+
+#: app/views/services/index.rhtml:232 app/views/services/index.rhtml:232
+msgid "Running"
+msgstr "Běžící"
+
+#: app/views/services/index.rhtml:233 app/views/services/index.rhtml:233
+msgid "Not Running"
+msgstr "Neběžící"
+
+#: app/views/services/index.rhtml:234 app/views/services/index.rhtml:234
+msgid "Dead"
+msgstr "Mrtvý"
+
+#: app/views/services/index.rhtml:235 app/views/services/index.rhtml:235
+msgid "Started on Boot"
+msgstr "Spuštěno během bootu"
+
+#: app/views/services/index.rhtml:236 app/views/services/index.rhtml:236
+msgid "Not Started on Boot"
+msgstr "Nespuštěno během bootu"
+
+#: app/views/services/index.rhtml:253 app/views/services/index.rhtml:253
+msgid "Description for service is not available"
+msgstr "Popis není pro službu dostupný"
+
+#: app/views/services/index.rhtml:275 app/views/services/index.rhtml:275
+msgid "(refresh)"
+msgstr "(obnovit)"
+
+#: app/views/services/index.rhtml:306 app/views/services/index.rhtml:306
+msgid "Start"
+msgstr "Spustit"
+
+#: app/views/services/index.rhtml:307 app/views/services/index.rhtml:307
+msgid "Stop"
+msgstr "Stop"
+
+#: app/views/services/index.rhtml:308 app/views/services/index.rhtml:308
+msgid "Restart"
+msgstr "Restartovat"
+
+# 54880 AttribValues/label
+#: app/views/services/index.rhtml:309 app/views/services/index.rhtml:309
+msgid "Start on Boot"
+msgstr "Spustit během bootu"
+
+#: app/views/services/index.rhtml:310 app/views/services/index.rhtml:310
+msgid "Do Not Start on Boot"
+msgstr "Nespouštět během bootu"
+
+#: shortcuts.yml:9
+msgid "Manage the LSB init scripts"
+msgstr "Spravovat LSB init skripty"
+
+#, fuzzy
+#~| msgid "Repository"
+#~ msgid "Add New Repository"
+#~ msgstr "Repozitář"
+
+#, fuzzy
+#~| msgid "Filter services"
+#~ msgid "Filter repositories"
+#~ msgstr "Filtrovat služby"
+
+#~ msgid "Enabled"
+#~ msgstr "povoleno"
+
+#~ msgid "Disabled"
+#~ msgstr "Zakázáno"
+
+#~ msgid "Invalid session, please login again."
+#~ msgstr "Chybná session, prosím přihlaste se znova."
+
+#~ msgid "(unknown)"
+#~ msgstr "(neznámé)"
+
+#~ msgid "(running)"
+#~ msgstr "(běží)"
+
+#~ msgid "(not running)"
+#~ msgstr "(neběží)"
+
+#~ msgid "Back"
+#~ msgstr "Zpět"
+
+# Možná by bylo lepší. Vlastní služby. Cervajz.
+#~ msgid "Custom Services"
+#~ msgstr "Uživatelské služby"
+
+#~ msgid "status"
+#~ msgstr "stav"

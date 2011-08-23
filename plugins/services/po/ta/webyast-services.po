@@ -1,0 +1,273 @@
+# @TITLE@
+# Copyright (C) 2006, SUSE Linux GmbH, Nuremberg
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+# This file is distributed under the same license as @PACKAGE@ package. FIRST
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: webyast-services-ui 1.0.0\n"
+"Report-Msgid-Bugs-To: translation@suse.de\n"
+"POT-Creation-Date: 2010-08-02 09:19+0200\n"
+"PO-Revision-Date: 2003-08-14 10:47+0200\n"
+"Last-Translator: xxx <yyy@example.org>\n"
+"Language-Team: Tamil <i18n@suse.de>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+
+#: app/controllers/services_controller.rb:46
+#: app/controllers/services_controller.rb:46
+msgid "(cannot read status)"
+msgstr ""
+
+#: app/controllers/services_controller.rb:74
+#: app/controllers/services_controller.rb:74
+msgid "List of services could not be read"
+msgstr ""
+
+#: app/controllers/services_controller.rb:76
+#: app/controllers/services_controller.rb:76
+msgid "List of custom services could not be read"
+msgstr ""
+
+#: app/controllers/services_controller.rb:112
+#: app/controllers/services_controller.rb:112
+#, fuzzy
+msgid "success"
+msgstr ""
+"வெற்றி:\n"
+"%s"
+
+#: app/controllers/services_controller.rb:113
+#: app/controllers/services_controller.rb:113
+msgid "unspecified error"
+msgstr ""
+
+#: app/controllers/services_controller.rb:114
+#: app/controllers/services_controller.rb:114
+#, fuzzy
+msgid "invalid or excess argument(s)"
+msgstr "செல்லாத பயனிலை இலக்கணம்"
+
+#: app/controllers/services_controller.rb:115
+#: app/controllers/services_controller.rb:115
+#, fuzzy
+msgid "unimplemented feature"
+msgstr "இன்னும் செயல்படுத்தப்படவில்லை"
+
+#: app/controllers/services_controller.rb:116
+#: app/controllers/services_controller.rb:116
+msgid "user had insufficient privilege"
+msgstr ""
+
+#: app/controllers/services_controller.rb:117
+#: app/controllers/services_controller.rb:117
+#, fuzzy
+msgid "program is not installed"
+msgstr "நிறுவப்படவில்லை"
+
+#: app/controllers/services_controller.rb:118
+#: app/controllers/services_controller.rb:118
+#, fuzzy
+msgid "program is not configured"
+msgstr "உள்ளமைக்கப்படவில்லை"
+
+#: app/controllers/services_controller.rb:119
+#: app/controllers/services_controller.rb:119
+#, fuzzy
+msgid "program is not running"
+msgstr "இயக்கத்தில் இல்லை"
+
+#: app/controllers/services_controller.rb:126
+#: app/controllers/services_controller.rb:126
+msgid "Unknown error on server side"
+msgstr ""
+
+#: app/views/services/_result.rhtml:7 app/views/services/_result.rhtml:7
+msgid "Service Call Result"
+msgstr ""
+
+#: app/views/services/_result.rhtml:10 app/views/services/_result.rhtml:10
+#, fuzzy
+msgid "Result"
+msgstr "இணைப்பு முடிவு"
+
+#: app/views/services/_result.rhtml:15 app/views/services/_result.rhtml:15
+msgid "Description"
+msgstr "விளக்கம்"
+
+#: app/views/services/index.rhtml:191 app/views/services/index.rhtml:191
+#: shortcuts.yml:7
+#, fuzzy
+msgid "System Services"
+msgstr "கணினி மணி"
+
+#: app/views/services/index.rhtml:197 app/views/services/index.rhtml:197
+msgid "You do not have permission to execute the services."
+msgstr ""
+
+#: app/views/services/index.rhtml:202 app/views/services/index.rhtml:247
+#: app/views/services/index.rhtml:202 app/views/services/index.rhtml:247
+#, fuzzy
+msgid "Filter services"
+msgstr "inetd சேவை"
+
+#: app/views/services/index.rhtml:204 app/views/services/index.rhtml:251
+#: app/views/services/index.rhtml:266 app/views/services/index.rhtml:204
+#: app/views/services/index.rhtml:251 app/views/services/index.rhtml:266
+#, fuzzy
+msgid "All"
+msgstr "அனைத்தையும்"
+
+#: app/views/services/index.rhtml:205 app/views/services/index.rhtml:252
+#: app/views/services/index.rhtml:205 app/views/services/index.rhtml:252
+#, fuzzy
+msgid "Running"
+msgstr "இயக்கத்திலுள்ளது"
+
+#: app/views/services/index.rhtml:206 app/views/services/index.rhtml:253
+#: app/views/services/index.rhtml:206 app/views/services/index.rhtml:253
+#, fuzzy
+msgid "Not Running"
+msgstr "இயக்கத்தில் இல்லை"
+
+#: app/views/services/index.rhtml:207 app/views/services/index.rhtml:254
+#: app/views/services/index.rhtml:207 app/views/services/index.rhtml:254
+msgid "Dead"
+msgstr ""
+
+#: app/views/services/index.rhtml:208 app/views/services/index.rhtml:255
+#: app/views/services/index.rhtml:208 app/views/services/index.rhtml:255
+msgid "Started on Boot"
+msgstr ""
+
+#: app/views/services/index.rhtml:209 app/views/services/index.rhtml:256
+#: app/views/services/index.rhtml:209 app/views/services/index.rhtml:256
+msgid "Not Started on Boot"
+msgstr ""
+
+#: app/views/services/index.rhtml:216 app/views/services/index.rhtml:231
+#: app/views/services/index.rhtml:235 app/views/services/index.rhtml:216
+#: app/views/services/index.rhtml:231 app/views/services/index.rhtml:235
+#, fuzzy
+msgid "Quick Search"
+msgstr "தேடுதல்:"
+
+#: app/views/services/index.rhtml:242 app/views/services/index.rhtml:242
+msgid "Add New Repository"
+msgstr ""
+
+#: app/views/services/index.rhtml:262 app/views/services/index.rhtml:262
+#, fuzzy
+msgid "Filter repositories"
+msgstr "inetd சேவை"
+
+#: app/views/services/index.rhtml:267 app/views/services/index.rhtml:267
+msgid "Enabled"
+msgstr ""
+
+#: app/views/services/index.rhtml:268 app/views/services/index.rhtml:268
+msgid "Disabled"
+msgstr ""
+
+#: app/views/services/index.rhtml:289 app/views/services/index.rhtml:289
+#, fuzzy
+msgid "Description for service is not available"
+msgstr "'%1' சேவைக்கான செயல்பாடு காலியாக இல்லாமல் இருக்கலாம்."
+
+#: app/views/services/index.rhtml:313 app/views/services/index.rhtml:313
+#, fuzzy
+msgid "(refresh)"
+msgstr "புதுப்பிக்கவும்"
+
+#: app/views/services/index.rhtml:345 app/views/services/index.rhtml:345
+#, fuzzy
+msgid "Start"
+msgstr "துவக்குதல்"
+
+#: app/views/services/index.rhtml:346 app/views/services/index.rhtml:346
+msgid "Stop"
+msgstr ""
+
+#: app/views/services/index.rhtml:347 app/views/services/index.rhtml:347
+#, fuzzy
+msgid "Restart"
+msgstr "_மறுதுவக்கம் செய்யவும்"
+
+#: app/views/services/index.rhtml:348 app/views/services/index.rhtml:348
+msgid "Start on Boot"
+msgstr ""
+
+#: app/views/services/index.rhtml:349 app/views/services/index.rhtml:349
+#, fuzzy
+msgid "Do Not Start on Boot"
+msgstr "துவக்க வேண்டாம்"
+
+#: app/views/services/_status.rhtml:7 app/views/services/_status.rhtml:7
+msgid "Service will be started on boot."
+msgstr ""
+
+#: app/views/services/_status.rhtml:9 app/views/services/_status.rhtml:9
+msgid "Service will not be started on boot."
+msgstr ""
+
+#: app/views/services/_status.rhtml:32 app/views/services/_status.rhtml:32
+#, fuzzy
+msgid "status unknown"
+msgstr "தெரியாதது"
+
+#: app/views/services/_status.rhtml:34 app/views/services/_status.rhtml:34
+msgid "running"
+msgstr "இயக்கத்திலுள்ளது"
+
+#: app/views/services/_status.rhtml:38 app/views/services/_status.rhtml:38
+msgid "dead"
+msgstr ""
+
+#: app/views/services/_status.rhtml:42 app/views/services/_status.rhtml:42
+msgid "not running"
+msgstr "இயக்கத்தில் இல்லை"
+
+#: app/views/services/_status.rhtml:46 app/views/services/_status.rhtml:46
+#, fuzzy
+msgid "status unknown: %d"
+msgstr "தெரியாதது"
+
+#: app/views/services/_status.rhtml:49 app/views/services/_status.rhtml:49
+#, fuzzy
+msgid "Current status of the service:"
+msgstr "தேடுதல் பிரிவிற்கான லாக்-டவுன் நிலை"
+
+#: shortcuts.yml:8
+msgid "Manage the LSB init scripts"
+msgstr ""
+
+#, fuzzy
+#~| msgid "unknown"
+#~ msgid "(unknown)"
+#~ msgstr "தெரியாதது"
+
+#, fuzzy
+#~| msgid "running"
+#~ msgid "(running)"
+#~ msgstr "இயக்கத்திலுள்ளது"
+
+#, fuzzy
+#~| msgid "not running"
+#~ msgid "(not running)"
+#~ msgstr "இயக்கத்தில் இல்லை"
+
+#~ msgid "Back"
+#~ msgstr "பின்னால்"
+
+#, fuzzy
+#~| msgid "Novell Services"
+#~ msgid "Custom Services"
+#~ msgstr "நோவெல் சேவைகள்"
+
+#, fuzzy
+#~| msgid "Status"
+#~ msgid "status"
+#~ msgstr "நிலை"

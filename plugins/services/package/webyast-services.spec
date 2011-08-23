@@ -74,6 +74,9 @@ mkdir -p public/services/restdoc
 # do not package restdoc sources
 rm -rf restdoc
 
+export RAILS_PARENT=%{webyast_dir}
+env LANG=en rake makemo
+
 %check
 # run the testsuite
 %webyast_check
@@ -103,6 +106,11 @@ cp %{SOURCE4} $RPM_BUILD_ROOT/usr/share/YaST2/modules/YaPI/
 mkdir -p $RPM_BUILD_ROOT/etc/webyast/
 cp %SOURCE3 $RPM_BUILD_ROOT/etc/webyast/
 
+# remove .po files (no longer needed)
+rm -rf $RPM_BUILD_ROOT/%{plugin_dir}/po
+
+# search locale files
+%find_lang webyast-services
 
 %clean
 rm -rf $RPM_BUILD_ROOT
@@ -114,7 +122,7 @@ rm -rf $RPM_BUILD_ROOT
 /usr/sbin/grantwebyastrights --user root --action grant > /dev/null ||:
 /usr/sbin/grantwebyastrights --user %{webyast_user} --action grant > /dev/null ||:
 
-%files 
+%files -f webyast-services.lang 
 %defattr(-,root,root)
 %dir %{webyast_dir}
 %dir %{webyast_dir}/vendor
@@ -132,6 +140,7 @@ rm -rf $RPM_BUILD_ROOT
 %dir /etc/webyast/
 %config /etc/webyast/filter_services.yml
 
+%{plugin_dir}/locale
 %{plugin_dir}/README
 %{plugin_dir}/shortcuts.yml
 %{plugin_dir}/Rakefile

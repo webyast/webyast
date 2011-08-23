@@ -1,0 +1,220 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: webyast-services-ui 1.0.0\n"
+"Report-Msgid-Bugs-To: translation@suse.de\n"
+"POT-Creation-Date: 2010-08-02 09:19+0200\n"
+"PO-Revision-Date: 2010-04-30 16:32+0300\n"
+"Last-Translator: Lucian Oprea <oprea.luci@gmail.com>\n"
+"Language-Team: Comunitatea traducatorilor openSUSE Romania. Contact: <oprea."
+"luci@gmail.com><strainu10@gmail.com><traduceri@suseromania.ro>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms:  nplurals=3; plural=n==1 ? 0 : (n==0 || (n%100 > 0 && n%100 < "
+"20)) ? 1 : 2;\n"
+"X-Generator: Narro 0.9.4 on http://tradu.softwareliber.ro\n"
+
+#: app/controllers/services_controller.rb:46
+#: app/controllers/services_controller.rb:46
+msgid "(cannot read status)"
+msgstr "(nu pot citi statusul)"
+
+#: app/controllers/services_controller.rb:74
+#: app/controllers/services_controller.rb:74
+msgid "List of services could not be read"
+msgstr ""
+
+#: app/controllers/services_controller.rb:76
+#: app/controllers/services_controller.rb:76
+msgid "List of custom services could not be read"
+msgstr ""
+
+#: app/controllers/services_controller.rb:112
+#: app/controllers/services_controller.rb:112
+msgid "success"
+msgstr "succes"
+
+#: app/controllers/services_controller.rb:113
+#: app/controllers/services_controller.rb:113
+msgid "unspecified error"
+msgstr "eroare nespecificată"
+
+#: app/controllers/services_controller.rb:114
+#: app/controllers/services_controller.rb:114
+msgid "invalid or excess argument(s)"
+msgstr "argument(e) invalid(e) sau în exces"
+
+#: app/controllers/services_controller.rb:115
+#: app/controllers/services_controller.rb:115
+msgid "unimplemented feature"
+msgstr "funcţionalitate neimplementată"
+
+#: app/controllers/services_controller.rb:116
+#: app/controllers/services_controller.rb:116
+msgid "user had insufficient privilege"
+msgstr "utilizatorul nu are suficiente drepturi"
+
+#: app/controllers/services_controller.rb:117
+#: app/controllers/services_controller.rb:117
+msgid "program is not installed"
+msgstr "programul nu este instalat"
+
+#: app/controllers/services_controller.rb:118
+#: app/controllers/services_controller.rb:118
+msgid "program is not configured"
+msgstr "programul nu este configurat"
+
+#: app/controllers/services_controller.rb:119
+#: app/controllers/services_controller.rb:119
+#, fuzzy
+msgid "program is not running"
+msgstr "programul nu rulează"
+
+#: app/controllers/services_controller.rb:126
+#: app/controllers/services_controller.rb:126
+msgid "Unknown error on server side"
+msgstr ""
+
+#: app/views/services/_result.rhtml:7 app/views/services/_result.rhtml:7
+msgid "Service Call Result"
+msgstr "Rezultatul apelului către serviciu"
+
+#: app/views/services/_result.rhtml:10 app/views/services/_result.rhtml:10
+msgid "Result"
+msgstr "Rezultat"
+
+#: app/views/services/_result.rhtml:15 app/views/services/_result.rhtml:15
+msgid "Description"
+msgstr "Descriere"
+
+#: app/views/services/index.rhtml:191 app/views/services/index.rhtml:191
+#: shortcuts.yml:7
+msgid "System Services"
+msgstr "Servicii sistem"
+
+#: app/views/services/index.rhtml:197 app/views/services/index.rhtml:197
+msgid "You do not have permission to execute the services."
+msgstr "Nu aveţi permisiunea de a executa serviciile."
+
+#: app/views/services/index.rhtml:202 app/views/services/index.rhtml:247
+#: app/views/services/index.rhtml:202 app/views/services/index.rhtml:247
+msgid "Filter services"
+msgstr "Filtrează serviciile"
+
+#: app/views/services/index.rhtml:204 app/views/services/index.rhtml:251
+#: app/views/services/index.rhtml:266 app/views/services/index.rhtml:204
+#: app/views/services/index.rhtml:251 app/views/services/index.rhtml:266
+msgid "All"
+msgstr "Toate"
+
+#: app/views/services/index.rhtml:205 app/views/services/index.rhtml:252
+#: app/views/services/index.rhtml:205 app/views/services/index.rhtml:252
+msgid "Running"
+msgstr "Pornite"
+
+#: app/views/services/index.rhtml:206 app/views/services/index.rhtml:253
+#: app/views/services/index.rhtml:206 app/views/services/index.rhtml:253
+msgid "Not Running"
+msgstr "Nepornite"
+
+#: app/views/services/index.rhtml:207 app/views/services/index.rhtml:254
+#: app/views/services/index.rhtml:207 app/views/services/index.rhtml:254
+msgid "Dead"
+msgstr "Moarte"
+
+#: app/views/services/index.rhtml:208 app/views/services/index.rhtml:255
+#: app/views/services/index.rhtml:208 app/views/services/index.rhtml:255
+msgid "Started on Boot"
+msgstr "Pornit la boot"
+
+#: app/views/services/index.rhtml:209 app/views/services/index.rhtml:256
+#: app/views/services/index.rhtml:209 app/views/services/index.rhtml:256
+msgid "Not Started on Boot"
+msgstr "Nepornite la boot"
+
+#: app/views/services/index.rhtml:216 app/views/services/index.rhtml:231
+#: app/views/services/index.rhtml:235 app/views/services/index.rhtml:216
+#: app/views/services/index.rhtml:231 app/views/services/index.rhtml:235
+msgid "Quick Search"
+msgstr "Căutare rapidă"
+
+#: app/views/services/index.rhtml:242 app/views/services/index.rhtml:242
+msgid "Add New Repository"
+msgstr ""
+
+#: app/views/services/index.rhtml:262 app/views/services/index.rhtml:262
+#, fuzzy
+msgid "Filter repositories"
+msgstr "Filtrează serviciile"
+
+#: app/views/services/index.rhtml:267 app/views/services/index.rhtml:267
+msgid "Enabled"
+msgstr ""
+
+#: app/views/services/index.rhtml:268 app/views/services/index.rhtml:268
+msgid "Disabled"
+msgstr ""
+
+#: app/views/services/index.rhtml:289 app/views/services/index.rhtml:289
+msgid "Description for service is not available"
+msgstr "Descrierea serviciului nu este disponibilă"
+
+#: app/views/services/index.rhtml:313 app/views/services/index.rhtml:313
+msgid "(refresh)"
+msgstr "(reîncarcă)"
+
+#: app/views/services/index.rhtml:345 app/views/services/index.rhtml:345
+msgid "Start"
+msgstr "Start"
+
+#: app/views/services/index.rhtml:346 app/views/services/index.rhtml:346
+msgid "Stop"
+msgstr "Stop"
+
+#: app/views/services/index.rhtml:347 app/views/services/index.rhtml:347
+msgid "Restart"
+msgstr "Reporniţi"
+
+#: app/views/services/index.rhtml:348 app/views/services/index.rhtml:348
+msgid "Start on Boot"
+msgstr "Pornire la boot"
+
+#: app/views/services/index.rhtml:349 app/views/services/index.rhtml:349
+msgid "Do Not Start on Boot"
+msgstr "Nu porneşte la boot"
+
+#: app/views/services/_status.rhtml:7 app/views/services/_status.rhtml:7
+msgid "Service will be started on boot."
+msgstr "Serviciul va fi pornit la iniţierea sistemului."
+
+#: app/views/services/_status.rhtml:9 app/views/services/_status.rhtml:9
+msgid "Service will not be started on boot."
+msgstr "Serviciul nu va fi pornit la iniţierea sistemului."
+
+#: app/views/services/_status.rhtml:32 app/views/services/_status.rhtml:32
+msgid "status unknown"
+msgstr "stare necunoscută"
+
+#: app/views/services/_status.rhtml:34 app/views/services/_status.rhtml:34
+msgid "running"
+msgstr "rulează"
+
+#: app/views/services/_status.rhtml:38 app/views/services/_status.rhtml:38
+msgid "dead"
+msgstr "moarte"
+
+#: app/views/services/_status.rhtml:42 app/views/services/_status.rhtml:42
+msgid "not running"
+msgstr "nu rulează"
+
+#: app/views/services/_status.rhtml:46 app/views/services/_status.rhtml:46
+msgid "status unknown: %d"
+msgstr "stare necunoscută: %d"
+
+#: app/views/services/_status.rhtml:49 app/views/services/_status.rhtml:49
+msgid "Current status of the service:"
+msgstr "Starea curentă a serviciului:"
+
+#: shortcuts.yml:8
+msgid "Manage the LSB init scripts"
+msgstr ""

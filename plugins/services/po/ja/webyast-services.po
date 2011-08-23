@@ -1,0 +1,205 @@
+# Copyright (C) 2006 SuSE Linux Products GmbH, Nuernberg
+# This file is distributed under the same license as the package.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: webyast-services-ui\n"
+"POT-Creation-Date: 2010-08-18 10:19+0200\n"
+"PO-Revision-Date: 2010-08-27 09:29\n"
+"Last-Translator: Novell Language <language@novell.com>\n"
+"Language-Team: Novell Language <language@novell.com>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+
+#: app/controllers/services_controller.rb:46 ./app/controllers/services_controller.rb:46
+msgid "(cannot read status)"
+msgstr "(ステータスを読み取れません)"
+
+#: app/controllers/services_controller.rb:74 ./app/controllers/services_controller.rb:74
+msgid "List of services could not be read"
+msgstr "サービスのリストを読み込ませんでした"
+
+#: app/controllers/services_controller.rb:76 ./app/controllers/services_controller.rb:76
+msgid "List of custom services could not be read"
+msgstr "カスタムサービスのリストを読み込めませんでした"
+
+#: app/controllers/services_controller.rb:112 ./app/controllers/services_controller.rb:112
+msgid "success"
+msgstr "成功しました"
+
+#: app/controllers/services_controller.rb:113 ./app/controllers/services_controller.rb:113
+msgid "unspecified error"
+msgstr "原因不明のエラー"
+
+#: app/controllers/services_controller.rb:114 ./app/controllers/services_controller.rb:114
+msgid "invalid or excess argument(s)"
+msgstr "無効な引数か、または引数が多すぎます"
+
+#: app/controllers/services_controller.rb:115 ./app/controllers/services_controller.rb:115
+msgid "unimplemented feature"
+msgstr "この機能はまだ実装されていません"
+
+#: app/controllers/services_controller.rb:116 ./app/controllers/services_controller.rb:116
+msgid "user had insufficient privilege"
+msgstr "ユーザの権利が不十分です"
+
+#: app/controllers/services_controller.rb:117 ./app/controllers/services_controller.rb:117
+msgid "program is not installed"
+msgstr "プログラムはインストールされていません"
+
+#: app/controllers/services_controller.rb:118 ./app/controllers/services_controller.rb:118
+msgid "program is not configured"
+msgstr "プログラムは設定されていません"
+
+#: app/controllers/services_controller.rb:119 ./app/controllers/services_controller.rb:119
+msgid "program is not running"
+msgstr "プログラムが実行されていません"
+
+#: app/controllers/services_controller.rb:126 ./app/controllers/services_controller.rb:126
+msgid "Unknown error on server side"
+msgstr "サービス側の未知のエラー"
+
+#: app/views/services/_result.rhtml:7 ./app/views/services/_result.rhtml:7
+msgid "Service Call Result"
+msgstr "サービス呼び出し結果"
+
+#: app/views/services/_result.rhtml:10 ./app/views/services/_result.rhtml:10
+msgid "Result"
+msgstr "結果"
+
+#: app/views/services/_result.rhtml:15 ./app/views/services/_result.rhtml:15
+msgid "Description"
+msgstr "説明"
+
+#: app/views/services/index.rhtml:191 ./app/views/services/index.rhtml:191 ./shortcuts.yml:7
+msgid "System Services"
+msgstr "システムサービス"
+
+#: app/views/services/index.rhtml:197 ./app/views/services/index.rhtml:197
+msgid "You do not have permission to execute the services."
+msgstr "このサービスを実行するためのパーミッションがありません。"
+
+#: app/views/services/index.rhtml:202 app/views/services/index.rhtml:247
+#: ./app/views/services/index.rhtml:202 ./app/views/services/index.rhtml:247
+msgid "Filter services"
+msgstr "サービスをフィルタする"
+
+#: app/views/services/index.rhtml:204 app/views/services/index.rhtml:251
+#: app/views/services/index.rhtml:266 ./app/views/services/index.rhtml:204
+#: ./app/views/services/index.rhtml:251 ./app/views/services/index.rhtml:266
+msgid "All"
+msgstr "すべて"
+
+#: app/views/services/index.rhtml:205 app/views/services/index.rhtml:252
+#: ./app/views/services/index.rhtml:205 ./app/views/services/index.rhtml:252
+msgid "Running"
+msgstr "稼働中"
+
+#: app/views/services/index.rhtml:206 app/views/services/index.rhtml:253
+#: ./app/views/services/index.rhtml:206 ./app/views/services/index.rhtml:253
+msgid "Not Running"
+msgstr "実行していません"
+
+#: app/views/services/index.rhtml:207 app/views/services/index.rhtml:254
+#: ./app/views/services/index.rhtml:207 ./app/views/services/index.rhtml:254
+msgid "Dead"
+msgstr "無応答です"
+
+#: app/views/services/index.rhtml:208 app/views/services/index.rhtml:255
+#: ./app/views/services/index.rhtml:208 ./app/views/services/index.rhtml:255
+msgid "Started on Boot"
+msgstr "起動時に開始"
+
+#: app/views/services/index.rhtml:209 app/views/services/index.rhtml:256
+#: ./app/views/services/index.rhtml:209 ./app/views/services/index.rhtml:256
+msgid "Not Started on Boot"
+msgstr "起動時には開始しない"
+
+#: app/views/services/index.rhtml:216 app/views/services/index.rhtml:231
+#: app/views/services/index.rhtml:235 ./app/views/services/index.rhtml:216
+#: ./app/views/services/index.rhtml:231 ./app/views/services/index.rhtml:235
+msgid "Quick Search"
+msgstr "クィック検索"
+
+#: app/views/services/index.rhtml:242 ./app/views/services/index.rhtml:242
+msgid "Add New Repository"
+msgstr "新しいリポジトリを追加"
+
+#: app/views/services/index.rhtml:262 ./app/views/services/index.rhtml:262
+msgid "Filter repositories"
+msgstr "リポジトリのフィルタ"
+
+#: app/views/services/index.rhtml:267 ./app/views/services/index.rhtml:267
+msgid "Enabled"
+msgstr "有効"
+
+#: app/views/services/index.rhtml:268 ./app/views/services/index.rhtml:268
+msgid "Disabled"
+msgstr "無効"
+
+#: app/views/services/index.rhtml:289 ./app/views/services/index.rhtml:289
+msgid "Description for service is not available"
+msgstr "サービスの説明が利用できません。"
+
+#: app/views/services/index.rhtml:313 ./app/views/services/index.rhtml:313
+msgid "(refresh)"
+msgstr "(更新)"
+
+#: app/views/services/index.rhtml:345 ./app/views/services/index.rhtml:345
+msgid "Start"
+msgstr "開始"
+
+#: app/views/services/index.rhtml:346 ./app/views/services/index.rhtml:346
+msgid "Stop"
+msgstr "停止"
+
+#: app/views/services/index.rhtml:347 ./app/views/services/index.rhtml:347
+msgid "Restart"
+msgstr "再起動"
+
+#: app/views/services/index.rhtml:348 ./app/views/services/index.rhtml:348
+msgid "Start on Boot"
+msgstr "起動時に開始"
+
+#: app/views/services/index.rhtml:349 ./app/views/services/index.rhtml:349
+msgid "Do Not Start on Boot"
+msgstr "起動時には開始しません"
+
+#: app/views/services/_status.rhtml:7 ./app/views/services/_status.rhtml:7
+msgid "Service will be started on boot."
+msgstr "サービスは起動時に開始します。"
+
+#: app/views/services/_status.rhtml:9 ./app/views/services/_status.rhtml:9
+msgid "Service will not be started on boot."
+msgstr "サービスは起動時には開始しません。"
+
+#: app/views/services/_status.rhtml:32 ./app/views/services/_status.rhtml:32
+msgid "status unknown"
+msgstr "状態不明"
+
+#: app/views/services/_status.rhtml:34 ./app/views/services/_status.rhtml:34
+msgid "running"
+msgstr "稼働中"
+
+#: app/views/services/_status.rhtml:38 ./app/views/services/_status.rhtml:38
+msgid "dead"
+msgstr "無応答です"
+
+#: app/views/services/_status.rhtml:42 ./app/views/services/_status.rhtml:42
+msgid "not running"
+msgstr "実行していません"
+
+#: app/views/services/_status.rhtml:46 ./app/views/services/_status.rhtml:46
+msgid "status unknown: %d"
+msgstr "状態不明: %d"
+
+#: app/views/services/_status.rhtml:49 ./app/views/services/_status.rhtml:49
+msgid "Current status of the service:"
+msgstr "サービスの現在の状態:"
+
+#: ./shortcuts.yml:8
+msgid "Manage the LSB init scripts"
+msgstr "LSB initスクリプトを管理する"
+

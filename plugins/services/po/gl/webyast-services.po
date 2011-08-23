@@ -1,0 +1,257 @@
+# Galician translation of yast_webclient_services.gl.po
+# Manuel A. Vázquez <xixirei@yahoo.es>, 2009, 2010.
+# Manuel A. Vazquez <xixirei@yahoo.es>, 2010.
+msgid ""
+msgstr ""
+"Project-Id-Version: webyast-services-ui 1.0.0\n"
+"Report-Msgid-Bugs-To: translation@suse.de\n"
+"POT-Creation-Date: 2010-08-02 09:19+0200\n"
+"PO-Revision-Date: 2010-04-10 10:20+0200\n"
+"Last-Translator: Manuel A. Vázquez <xixirei@yahoo.es>\n"
+"Language-Team: Galician <proxecto@trasno.net>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n!=1);\n"
+"X-Generator: Lokalize 1.0\n"
+
+#: app/controllers/services_controller.rb:46
+#: app/controllers/services_controller.rb:46
+msgid "(cannot read status)"
+msgstr "(non se pode ler o estado)"
+
+#: app/controllers/services_controller.rb:74
+#: app/controllers/services_controller.rb:74
+msgid "List of services could not be read"
+msgstr ""
+
+#: app/controllers/services_controller.rb:76
+#: app/controllers/services_controller.rb:76
+msgid "List of custom services could not be read"
+msgstr ""
+
+#: app/controllers/services_controller.rb:112
+#: app/controllers/services_controller.rb:112
+msgid "success"
+msgstr "éxito"
+
+#: app/controllers/services_controller.rb:113
+#: app/controllers/services_controller.rb:113
+msgid "unspecified error"
+msgstr "erro non especificado"
+
+#: app/controllers/services_controller.rb:114
+#: app/controllers/services_controller.rb:114
+msgid "invalid or excess argument(s)"
+msgstr "exceso de argumento(s) ou non válido(s)"
+
+#: app/controllers/services_controller.rb:115
+#: app/controllers/services_controller.rb:115
+msgid "unimplemented feature"
+msgstr "función non implementada"
+
+#: app/controllers/services_controller.rb:116
+#: app/controllers/services_controller.rb:116
+msgid "user had insufficient privilege"
+msgstr "o usuario non ten privilexios suficientes"
+
+#: app/controllers/services_controller.rb:117
+#: app/controllers/services_controller.rb:117
+msgid "program is not installed"
+msgstr "programa non instalado"
+
+#: app/controllers/services_controller.rb:118
+#: app/controllers/services_controller.rb:118
+msgid "program is not configured"
+msgstr "programa non configurado"
+
+#: app/controllers/services_controller.rb:119
+#: app/controllers/services_controller.rb:119
+#, fuzzy
+msgid "program is not running"
+msgstr "o programa non se está a executar"
+
+#: app/controllers/services_controller.rb:126
+#: app/controllers/services_controller.rb:126
+msgid "Unknown error on server side"
+msgstr ""
+
+#: app/views/services/_result.rhtml:7 app/views/services/_result.rhtml:7
+msgid "Service Call Result"
+msgstr "Resultado do servizo de chamada"
+
+#: app/views/services/_result.rhtml:10 app/views/services/_result.rhtml:10
+msgid "Result"
+msgstr "Resultado"
+
+#: app/views/services/_result.rhtml:15 app/views/services/_result.rhtml:15
+msgid "Description"
+msgstr "Descrición"
+
+#: app/views/services/index.rhtml:191 app/views/services/index.rhtml:191
+#: shortcuts.yml:7
+msgid "System Services"
+msgstr "Servizos do sistema"
+
+#: app/views/services/index.rhtml:197 app/views/services/index.rhtml:197
+msgid "You do not have permission to execute the services."
+msgstr "Non ten permiso para executar estes servizos."
+
+#: app/views/services/index.rhtml:202 app/views/services/index.rhtml:247
+#: app/views/services/index.rhtml:202 app/views/services/index.rhtml:247
+msgid "Filter services"
+msgstr "Filtro de servizos"
+
+#: app/views/services/index.rhtml:204 app/views/services/index.rhtml:251
+#: app/views/services/index.rhtml:266 app/views/services/index.rhtml:204
+#: app/views/services/index.rhtml:251 app/views/services/index.rhtml:266
+msgid "All"
+msgstr "Todos"
+
+#: app/views/services/index.rhtml:205 app/views/services/index.rhtml:252
+#: app/views/services/index.rhtml:205 app/views/services/index.rhtml:252
+msgid "Running"
+msgstr "En execución"
+
+#: app/views/services/index.rhtml:206 app/views/services/index.rhtml:253
+#: app/views/services/index.rhtml:206 app/views/services/index.rhtml:253
+msgid "Not Running"
+msgstr "Non se está a executar"
+
+#: app/views/services/index.rhtml:207 app/views/services/index.rhtml:254
+#: app/views/services/index.rhtml:207 app/views/services/index.rhtml:254
+msgid "Dead"
+msgstr "Morto"
+
+#: app/views/services/index.rhtml:208 app/views/services/index.rhtml:255
+#: app/views/services/index.rhtml:208 app/views/services/index.rhtml:255
+msgid "Started on Boot"
+msgstr "Iniciado no arrinque"
+
+#: app/views/services/index.rhtml:209 app/views/services/index.rhtml:256
+#: app/views/services/index.rhtml:209 app/views/services/index.rhtml:256
+msgid "Not Started on Boot"
+msgstr "Non iniciado no arrinque"
+
+#: app/views/services/index.rhtml:216 app/views/services/index.rhtml:231
+#: app/views/services/index.rhtml:235 app/views/services/index.rhtml:216
+#: app/views/services/index.rhtml:231 app/views/services/index.rhtml:235
+msgid "Quick Search"
+msgstr "Procura rápida"
+
+#: app/views/services/index.rhtml:242 app/views/services/index.rhtml:242
+msgid "Add New Repository"
+msgstr ""
+
+#: app/views/services/index.rhtml:262 app/views/services/index.rhtml:262
+#, fuzzy
+msgid "Filter repositories"
+msgstr "Filtro de servizos"
+
+#: app/views/services/index.rhtml:267 app/views/services/index.rhtml:267
+msgid "Enabled"
+msgstr ""
+
+#: app/views/services/index.rhtml:268 app/views/services/index.rhtml:268
+msgid "Disabled"
+msgstr ""
+
+#: app/views/services/index.rhtml:289 app/views/services/index.rhtml:289
+msgid "Description for service is not available"
+msgstr "A descrición do servizo non está dispoñible"
+
+#: app/views/services/index.rhtml:313 app/views/services/index.rhtml:313
+msgid "(refresh)"
+msgstr "(actualizar)"
+
+#: app/views/services/index.rhtml:345 app/views/services/index.rhtml:345
+msgid "Start"
+msgstr "Iniciar"
+
+#: app/views/services/index.rhtml:346 app/views/services/index.rhtml:346
+msgid "Stop"
+msgstr "Parar"
+
+#: app/views/services/index.rhtml:347 app/views/services/index.rhtml:347
+msgid "Restart"
+msgstr "Reiniciar"
+
+#: app/views/services/index.rhtml:348 app/views/services/index.rhtml:348
+msgid "Start on Boot"
+msgstr "Iniciar ao arrincar"
+
+#: app/views/services/index.rhtml:349 app/views/services/index.rhtml:349
+msgid "Do Not Start on Boot"
+msgstr "Non iniciar co arrinque"
+
+#: app/views/services/_status.rhtml:7 app/views/services/_status.rhtml:7
+msgid "Service will be started on boot."
+msgstr "O servizo iniciarase no arrinque."
+
+#: app/views/services/_status.rhtml:9 app/views/services/_status.rhtml:9
+msgid "Service will not be started on boot."
+msgstr "O servizo non se iniciará no arrinque."
+
+#: app/views/services/_status.rhtml:32 app/views/services/_status.rhtml:32
+msgid "status unknown"
+msgstr "estado descoñecido"
+
+#: app/views/services/_status.rhtml:34 app/views/services/_status.rhtml:34
+msgid "running"
+msgstr "en execución"
+
+#: app/views/services/_status.rhtml:38 app/views/services/_status.rhtml:38
+msgid "dead"
+msgstr "morto"
+
+#: app/views/services/_status.rhtml:42 app/views/services/_status.rhtml:42
+msgid "not running"
+msgstr "non se está a executar"
+
+#: app/views/services/_status.rhtml:46 app/views/services/_status.rhtml:46
+msgid "status unknown: %d"
+msgstr "estado descoñecido: %d"
+
+#: app/views/services/_status.rhtml:49 app/views/services/_status.rhtml:49
+msgid "Current status of the service:"
+msgstr "Estado actual do servizo:"
+
+#: shortcuts.yml:8
+msgid "Manage the LSB init scripts"
+msgstr ""
+
+#~ msgid "Invalid session, please login again."
+#~ msgstr "Sesión non válida, inicie a sesión de novo."
+
+#~ msgid "(unknown)"
+#~ msgstr "(descoñecido)"
+
+#~ msgid "(running)"
+#~ msgstr "(en execución)"
+
+#~ msgid "(dead)"
+#~ msgstr "(non responde)"
+
+#~ msgid "(not running)"
+#~ msgstr "(non se está a executar)"
+
+#~ msgid "(unknown: %d)"
+#~ msgstr "(descoñecido: %d)"
+
+#~ msgid "Back"
+#~ msgstr "Atrás"
+
+#~ msgid "Custom Services"
+#~ msgstr "Servizos personalizados"
+
+#~ msgid "No custom service is defined on target machine."
+#~ msgstr "Non se definíu ningún servizo personalizado na máquina destino."
+
+#~ msgid ""
+#~ "You do not have permission to execute the services. The links are "
+#~ "disabled."
+#~ msgstr ""
+#~ "Non ten permiso para executar os servizos. As ligazóns están desactivadas."
+
+#~ msgid "status"
+#~ msgstr "estado"

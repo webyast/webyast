@@ -1,0 +1,89 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: @PACKAGE@\n"
+"Report-Msgid-Bugs-To: translation@suse.de\n"
+"POT-Creation-Date: 2009-11-20 14:34+0100\n"
+"PO-Revision-Date: 2002-10-08 13:38+0200\n"
+"Last-Translator: I Made Wiryana <made@nakula.rvs.uni-bielefeld.de>\n"
+"Language-Team: Indonesian <i18n@suse.de>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+
+#: app/controllers/services_controller.rb:11
+msgid "Invalid session, please login again."
+msgstr ""
+
+#: app/controllers/services_controller.rb:34
+msgid "(cannot read status)"
+msgstr ""
+
+#: app/controllers/services_controller.rb:80
+msgid "success"
+msgstr ""
+
+#: app/views/services/_status.rhtml:14
+#, fuzzy
+#| msgid "unknown"
+msgid "(unknown)"
+msgstr "tidak dikenal"
+
+#: app/views/services/_status.rhtml:16
+msgid "(running)"
+msgstr ""
+
+#: app/views/services/_status.rhtml:18
+msgid "(dead)"
+msgstr ""
+
+#: app/views/services/_status.rhtml:20
+msgid "(not running)"
+msgstr ""
+
+#: app/views/services/_status.rhtml:22
+#, fuzzy
+#| msgid "unknown"
+msgid "(unknown: %d)"
+msgstr "tidak dikenal"
+
+#: app/views/services/_result.rhtml:5
+msgid "Service Call Result"
+msgstr ""
+
+#: app/views/services/_result.rhtml:8
+msgid "Result"
+msgstr ""
+
+#: app/views/services/_result.rhtml:12
+msgid "Description"
+msgstr "Deskripsi"
+
+#: app/views/services/_result.rhtml:18 app/views/services/_result.rhtml:20
+#: app/views/services/index.rhtml:102
+msgid "Back"
+msgstr "Kembali"
+
+#: app/views/services/index.rhtml:11
+#, fuzzy
+#| msgid "Automounter service"
+msgid "Custom Services"
+msgstr "Layanan Automounter"
+
+#: app/views/services/index.rhtml:13
+#, fuzzy
+#| msgid "gpm service"
+msgid "System Services"
+msgstr "Layanan gpm"
+
+#: app/views/services/index.rhtml:20
+msgid "No custom service is defined on target machine."
+msgstr ""
+
+#: app/views/services/index.rhtml:22
+msgid "You do not have permission to execute the services. The links are disabled."
+msgstr ""
+
+#: app/views/services/index.rhtml:94
+msgid "status"
+msgstr ""

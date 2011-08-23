@@ -1,0 +1,163 @@
+# Copyright (C) 2006 SuSE Linux Products GmbH, Nuernberg
+# This file is distributed under the same license as the package.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: yast_webclient_services\n"
+"POT-Creation-Date: 2010-04-13 13:37+0200\n"
+"PO-Revision-Date: 2010-04-22 12:39\n"
+"Last-Translator: Novell Language <language@novell.com>\n"
+"Language-Team: Novell Language <language@novell.com>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: app/controllers/services_controller.rb:23
+msgid "(cannot read status)"
+msgstr "(kan de status niet lezen)"
+
+#: app/controllers/services_controller.rb:70
+msgid "success"
+msgstr "succes"
+
+#: app/controllers/services_controller.rb:71
+msgid "unspecified error"
+msgstr "niet-gespecificeerde foutmelding"
+
+#: app/controllers/services_controller.rb:72
+msgid "invalid or excess argument(s)"
+msgstr "ongeldige of te veel argumenten"
+
+#: app/controllers/services_controller.rb:73
+msgid "unimplemented feature"
+msgstr "niet-geïmplementeerde optie"
+
+#: app/controllers/services_controller.rb:74
+msgid "user had insufficient privilege"
+msgstr "gebruiker heeft onvoldoende privileges"
+
+#: app/controllers/services_controller.rb:75
+msgid "program is not installed"
+msgstr "programma is niet geïnstalleerd"
+
+#: app/controllers/services_controller.rb:76
+msgid "program is not configured"
+msgstr "programma is niet geconfigureerd"
+
+#: app/controllers/services_controller.rb:77
+msgid "program is not runnning"
+msgstr "programma draait niet"
+
+#: app/views/services/_result.rhtml:6
+msgid "Service Call Result"
+msgstr "Resultaat van service-call"
+
+#: app/views/services/_result.rhtml:9
+msgid "Result"
+msgstr "Resultaat"
+
+#: app/views/services/_result.rhtml:14
+msgid "Description"
+msgstr "Beschrijving"
+
+#: app/views/services/index.rhtml:141
+msgid "System Services"
+msgstr "Systeemservices"
+
+#: app/views/services/index.rhtml:147
+msgid "You do not have permission to execute the services."
+msgstr "U heeft geen toestemming voor het uitvoeren van services."
+
+#: app/views/services/index.rhtml:151
+msgid "Filter services"
+msgstr "Services filteren"
+
+#: app/views/services/index.rhtml:153
+msgid "All"
+msgstr "Alles"
+
+#: app/views/services/index.rhtml:154
+msgid "Running"
+msgstr "Actief"
+
+#: app/views/services/index.rhtml:155
+msgid "Not Running"
+msgstr "Niet actief"
+
+#: app/views/services/index.rhtml:156
+msgid "Dead"
+msgstr "Dood"
+
+#: app/views/services/index.rhtml:157
+msgid "Started on Boot"
+msgstr "Gestart bij opstarten"
+
+#: app/views/services/index.rhtml:158
+msgid "Not Started on Boot"
+msgstr "Niet gestart bij opstarten"
+
+#: app/views/services/index.rhtml:165
+msgid "Quick Search"
+msgstr "Snelzoeken"
+
+#: app/views/services/index.rhtml:180
+msgid "Description for service is not available"
+msgstr "Beschrijving voor service is niet beschikbaar"
+
+#: app/views/services/index.rhtml:203
+msgid "(refresh)"
+msgstr "(verversen)"
+
+#: app/views/services/index.rhtml:234
+msgid "Start"
+msgstr "Starten"
+
+#: app/views/services/index.rhtml:235
+msgid "Stop"
+msgstr "Stoppen"
+
+#: app/views/services/index.rhtml:236
+msgid "Restart"
+msgstr "Herstarten"
+
+#: app/views/services/index.rhtml:237
+msgid "Start on Boot"
+msgstr "Starten bij opstarten"
+
+#: app/views/services/index.rhtml:238
+msgid "Do Not Start on Boot"
+msgstr "Niet starten bij opstarten"
+
+#: app/views/services/_status.rhtml:6
+msgid "Service will be started on boot."
+msgstr "Dienst wordt gestart bij opstarten."
+
+#: app/views/services/_status.rhtml:8
+msgid "Service will not be started on boot."
+msgstr "Dienst wordt niet gestart bij opstarten."
+
+#: app/views/services/_status.rhtml:31
+msgid "status unknown"
+msgstr "status onbekend"
+
+#: app/views/services/_status.rhtml:33
+msgid "running"
+msgstr "wordt uitgevoerd"
+
+#: app/views/services/_status.rhtml:37
+msgid "dead"
+msgstr "dood"
+
+#: app/views/services/_status.rhtml:41
+msgid "not running"
+msgstr "niet actief"
+
+#: app/views/services/_status.rhtml:45
+msgid "status unknown: %d"
+msgstr "status onbekend: %d"
+
+#: app/views/services/_status.rhtml:48
+msgid "Current status of the service:"
+msgstr "Huidige status van dienst:"
+

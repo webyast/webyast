@@ -1,0 +1,233 @@
+# translation of yast_webclient_services.hu.po to
+# Kalman Kemenczy <kkemenczy@novell.com>, 2009, 2010.
+msgid ""
+msgstr ""
+"Project-Id-Version: webyast-services-ui 1.0.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2010-08-02 09:19+0200\n"
+"PO-Revision-Date: 2010-05-18 08:20+0200\n"
+"Last-Translator: kalman <kkemenczy@gmail.com>\n"
+"Language-Team: collection <kde-i18n-doc@kde.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: hu\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Pootle 2.0.2\n"
+
+#: app/controllers/services_controller.rb:46
+#: app/controllers/services_controller.rb:46
+msgid "(cannot read status)"
+msgstr "(az állapot nem olvasható be)"
+
+#: app/controllers/services_controller.rb:74
+#: app/controllers/services_controller.rb:74
+msgid "List of services could not be read"
+msgstr ""
+
+#: app/controllers/services_controller.rb:76
+#: app/controllers/services_controller.rb:76
+msgid "List of custom services could not be read"
+msgstr ""
+
+#: app/controllers/services_controller.rb:112
+#: app/controllers/services_controller.rb:112
+msgid "success"
+msgstr "sikeres"
+
+#: app/controllers/services_controller.rb:113
+#: app/controllers/services_controller.rb:113
+msgid "unspecified error"
+msgstr "meghatározatlan hiba"
+
+#: app/controllers/services_controller.rb:114
+#: app/controllers/services_controller.rb:114
+msgid "invalid or excess argument(s)"
+msgstr "érvénytelen vagy felesleges paraméter(ek)"
+
+#: app/controllers/services_controller.rb:115
+#: app/controllers/services_controller.rb:115
+msgid "unimplemented feature"
+msgstr "nem megvalósított funkció"
+
+#: app/controllers/services_controller.rb:116
+#: app/controllers/services_controller.rb:116
+msgid "user had insufficient privilege"
+msgstr "a felhasználónak nincs elegendő jogosultsága"
+
+#: app/controllers/services_controller.rb:117
+#: app/controllers/services_controller.rb:117
+msgid "program is not installed"
+msgstr "a program nincs telepítve"
+
+#: app/controllers/services_controller.rb:118
+#: app/controllers/services_controller.rb:118
+msgid "program is not configured"
+msgstr "a program nincs beállítva"
+
+#: app/controllers/services_controller.rb:119
+#: app/controllers/services_controller.rb:119
+#, fuzzy
+msgid "program is not running"
+msgstr "a program nem fut"
+
+#: app/controllers/services_controller.rb:126
+#: app/controllers/services_controller.rb:126
+msgid "Unknown error on server side"
+msgstr ""
+
+#: app/views/services/_result.rhtml:7 app/views/services/_result.rhtml:7
+msgid "Service Call Result"
+msgstr "Szolgáltatáshívás eredménye"
+
+#: app/views/services/_result.rhtml:10 app/views/services/_result.rhtml:10
+msgid "Result"
+msgstr "Eredmény"
+
+#: app/views/services/_result.rhtml:15 app/views/services/_result.rhtml:15
+msgid "Description"
+msgstr "Leírás"
+
+#: app/views/services/index.rhtml:191 app/views/services/index.rhtml:191
+#: shortcuts.yml:7
+msgid "System Services"
+msgstr "Rendszerszolgáltatások"
+
+#: app/views/services/index.rhtml:197 app/views/services/index.rhtml:197
+msgid "You do not have permission to execute the services."
+msgstr "Nincs megfelelő jogosultsága a szolgáltatás indításához."
+
+#: app/views/services/index.rhtml:202 app/views/services/index.rhtml:247
+#: app/views/services/index.rhtml:202 app/views/services/index.rhtml:247
+msgid "Filter services"
+msgstr "Szolgáltatások szűrése"
+
+#: app/views/services/index.rhtml:204 app/views/services/index.rhtml:251
+#: app/views/services/index.rhtml:266 app/views/services/index.rhtml:204
+#: app/views/services/index.rhtml:251 app/views/services/index.rhtml:266
+msgid "All"
+msgstr "Összes"
+
+#: app/views/services/index.rhtml:205 app/views/services/index.rhtml:252
+#: app/views/services/index.rhtml:205 app/views/services/index.rhtml:252
+msgid "Running"
+msgstr "Futó"
+
+#: app/views/services/index.rhtml:206 app/views/services/index.rhtml:253
+#: app/views/services/index.rhtml:206 app/views/services/index.rhtml:253
+msgid "Not Running"
+msgstr "Nem fut"
+
+#: app/views/services/index.rhtml:207 app/views/services/index.rhtml:254
+#: app/views/services/index.rhtml:207 app/views/services/index.rhtml:254
+msgid "Dead"
+msgstr "Elhalt"
+
+#: app/views/services/index.rhtml:208 app/views/services/index.rhtml:255
+#: app/views/services/index.rhtml:208 app/views/services/index.rhtml:255
+msgid "Started on Boot"
+msgstr "Indítás rendszerindításkor"
+
+#: app/views/services/index.rhtml:209 app/views/services/index.rhtml:256
+#: app/views/services/index.rhtml:209 app/views/services/index.rhtml:256
+msgid "Not Started on Boot"
+msgstr "Ne induljon rendszerindításkor"
+
+#: app/views/services/index.rhtml:216 app/views/services/index.rhtml:231
+#: app/views/services/index.rhtml:235 app/views/services/index.rhtml:216
+#: app/views/services/index.rhtml:231 app/views/services/index.rhtml:235
+msgid "Quick Search"
+msgstr "Gyorskeresés"
+
+#: app/views/services/index.rhtml:242 app/views/services/index.rhtml:242
+msgid "Add New Repository"
+msgstr ""
+
+#: app/views/services/index.rhtml:262 app/views/services/index.rhtml:262
+#, fuzzy
+msgid "Filter repositories"
+msgstr "Szolgáltatások szűrése"
+
+#: app/views/services/index.rhtml:267 app/views/services/index.rhtml:267
+msgid "Enabled"
+msgstr ""
+
+#: app/views/services/index.rhtml:268 app/views/services/index.rhtml:268
+msgid "Disabled"
+msgstr ""
+
+#: app/views/services/index.rhtml:289 app/views/services/index.rhtml:289
+msgid "Description for service is not available"
+msgstr "A szolgáltatáshoz nem tartozik leírás"
+
+#: app/views/services/index.rhtml:313 app/views/services/index.rhtml:313
+msgid "(refresh)"
+msgstr "(frissítés)"
+
+#: app/views/services/index.rhtml:345 app/views/services/index.rhtml:345
+msgid "Start"
+msgstr "Indítás"
+
+#: app/views/services/index.rhtml:346 app/views/services/index.rhtml:346
+msgid "Stop"
+msgstr "Leállítás"
+
+#: app/views/services/index.rhtml:347 app/views/services/index.rhtml:347
+msgid "Restart"
+msgstr "Újraindítás"
+
+#: app/views/services/index.rhtml:348 app/views/services/index.rhtml:348
+msgid "Start on Boot"
+msgstr "Indítás rendszerindításkor"
+
+#: app/views/services/index.rhtml:349 app/views/services/index.rhtml:349
+msgid "Do Not Start on Boot"
+msgstr "Ne induljon rendszerindításkor"
+
+#: app/views/services/_status.rhtml:7 app/views/services/_status.rhtml:7
+msgid "Service will be started on boot."
+msgstr "A szolgáltatás elindul rendszerindításkor."
+
+#: app/views/services/_status.rhtml:9 app/views/services/_status.rhtml:9
+msgid "Service will not be started on boot."
+msgstr "A szolgáltatás nem indul el rendszerindításkor."
+
+#: app/views/services/_status.rhtml:32 app/views/services/_status.rhtml:32
+msgid "status unknown"
+msgstr "ismeretlen állapot"
+
+#: app/views/services/_status.rhtml:34 app/views/services/_status.rhtml:34
+msgid "running"
+msgstr "futó"
+
+#: app/views/services/_status.rhtml:38 app/views/services/_status.rhtml:38
+msgid "dead"
+msgstr "elhalt"
+
+#: app/views/services/_status.rhtml:42 app/views/services/_status.rhtml:42
+msgid "not running"
+msgstr "nem fut"
+
+#: app/views/services/_status.rhtml:46 app/views/services/_status.rhtml:46
+msgid "status unknown: %d"
+msgstr "ismeretlen állapot: %d"
+
+#: app/views/services/_status.rhtml:49 app/views/services/_status.rhtml:49
+msgid "Current status of the service:"
+msgstr "A szolgáltatás jelenleg állapota:"
+
+#: shortcuts.yml:8
+msgid "Manage the LSB init scripts"
+msgstr ""
+
+#~ msgid "Invalid session, please login again."
+#~ msgstr "Érvénytelen munkamenet, lépjen be újra."
+
+#~ msgid "Back"
+#~ msgstr "Vissza"
+
+#~ msgid "Custom Services"
+#~ msgstr "Egyéni szolgáltatások"
+
+#~ msgid "No custom service is defined on target machine."
+#~ msgstr "A célgépen nincs egyéni szolgáltatás megadva."
