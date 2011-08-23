@@ -1,0 +1,227 @@
+# Krešimir Jozić <kjozic@gmail.com>, 2009, 2010.
+msgid ""
+msgstr ""
+"Project-Id-Version: webyast-network-ui 1.0.0\n"
+"Report-Msgid-Bugs-To: translation@suse.de\n"
+"POT-Creation-Date: 2010-08-02 09:18+0200\n"
+"PO-Revision-Date: 2010-04-18 18:44+0200\n"
+"Last-Translator: Krešimir Jozić <kjozic@gmail.com>\n"
+"Language-Team: Croatian <kde-i18n-doc@kde.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=3; plural=n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%"
+"10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
+"X-Generator: Lokalize 1.0\n"
+
+#: app/controllers/network_controller.rb:89
+#: app/controllers/network_controller.rb:89
+msgid "Manual"
+msgstr "Ručno"
+
+#: app/controllers/network_controller.rb:89
+#: app/controllers/network_controller.rb:89
+msgid "Automatic"
+msgstr "Automatski"
+
+#: app/controllers/network_controller.rb:163
+#: app/controllers/network_controller.rb:163
+msgid "Network settings have been written."
+msgstr "Mrežne postavke su zapisane."
+
+#: app/views/network/index.html.erb:143 app/views/network/index.html.erb:147
+#: app/views/network/index.html.erb:151 app/views/network/index.html.erb:155
+#: app/views/network/index.html.erb:158 app/views/network/index.html.erb:162
+#: app/views/network/index.html.erb:166 app/views/network/index.html.erb:143
+#: app/views/network/index.html.erb:147 app/views/network/index.html.erb:151
+#: app/views/network/index.html.erb:155 app/views/network/index.html.erb:158
+#: app/views/network/index.html.erb:162 app/views/network/index.html.erb:166
+msgid "This field is required"
+msgstr ""
+
+#: app/views/network/index.html.erb:144 app/views/network/index.html.erb:152
+#: app/views/network/index.html.erb:163 app/views/network/index.html.erb:144
+#: app/views/network/index.html.erb:152 app/views/network/index.html.erb:163
+msgid "Enter a valid IP address"
+msgstr ""
+
+#: app/views/network/index.html.erb:148 app/views/network/index.html.erb:148
+msgid "Enter a valid subnet mask or prefix"
+msgstr ""
+
+#: app/views/network/index.html.erb:159 app/views/network/index.html.erb:167
+#: app/views/network/index.html.erb:159 app/views/network/index.html.erb:167
+msgid "Enter a valid domain name"
+msgstr ""
+
+#: app/views/network/index.html.erb:229 app/views/network/index.html.erb:229
+msgid "whitespace - invalid character."
+msgstr "praznina - neispravan znak."
+
+#: app/views/network/index.html.erb:231 app/views/network/index.html.erb:231
+msgid " - can not start with a digit."
+msgstr " - ne može početi znamenkom."
+
+#: app/views/network/index.html.erb:233 app/views/network/index.html.erb:233
+msgid "periodic '-' is not allowed."
+msgstr "znak '-' nije dozvoljen."
+
+#: app/views/network/index.html.erb:235 app/views/network/index.html.erb:235
+msgid "can not end with (-) hyphen."
+msgstr "ne može završiti s (-) znakom."
+
+#: app/views/network/index.html.erb:238 app/views/network/index.html.erb:238
+msgid "can not start with (-) hyphen."
+msgstr "ne može početi s (-) znakom."
+
+#: app/views/network/index.html.erb:240 app/views/network/index.html.erb:240
+msgid " - is invalid character for hostname."
+msgstr " - je neispravan znak za naziv računala."
+
+#: app/views/network/index.html.erb:283 app/views/network/index.html.erb:283
+#: shortcuts.yml:6
+msgid "Network"
+msgstr "Mreža"
+
+#: app/views/network/index.html.erb:293 app/views/network/index.html.erb:293
+msgid "General settings"
+msgstr ""
+
+#: app/views/network/index.html.erb:295 app/views/network/index.html.erb:295
+msgid "Configuration mode"
+msgstr "Modul postavki"
+
+#: app/views/network/index.html.erb:301 app/views/network/index.html.erb:301
+#, fuzzy
+msgid "IP Address"
+msgstr "IP adresa"
+
+#: app/views/network/index.html.erb:304 app/views/network/index.html.erb:304
+msgid "IP address"
+msgstr "IP adresa"
+
+#: app/views/network/index.html.erb:309 app/views/network/index.html.erb:309
+#, fuzzy
+msgid "Subnet mask/Prefixlen"
+msgstr "Maska podmreže / duljina prefiksa"
+
+#: app/views/network/index.html.erb:314 app/views/network/index.html.erb:314
+msgid "Default route"
+msgstr "Pretpostavljena ruta"
+
+#: app/views/network/index.html.erb:321 app/views/network/index.html.erb:321
+msgid "DNS"
+msgstr "DNS"
+
+#: app/views/network/index.html.erb:324 app/views/network/index.html.erb:324
+msgid "Hostname"
+msgstr "Naziv računala"
+
+# as in Windows Authentication Domain
+#: app/views/network/index.html.erb:331 app/views/network/index.html.erb:331
+msgid "Domain"
+msgstr "Domena"
+
+#: app/views/network/index.html.erb:336 app/views/network/index.html.erb:336
+msgid "Change hostname by DHCP"
+msgstr ""
+
+#: app/views/network/index.html.erb:341 app/views/network/index.html.erb:341
+msgid "Name servers"
+msgstr "Poslužitelji imena"
+
+#: app/views/network/index.html.erb:346 app/views/network/index.html.erb:346
+msgid "Search domains"
+msgstr "Traži domene"
+
+#: shortcuts.yml:7
+#, fuzzy
+msgid "Manage network devices"
+msgstr "Uredi mrežni uređaj"
+
+#~ msgid "Not configured"
+#~ msgstr "Nije podešeno"
+
+#~ msgid ""
+#~ "Invalid IP address format. The correct one is nnn.nnn.nnn.nnn for nnn "
+#~ "between 0 and 255."
+#~ msgstr ""
+#~ "Neispravan format IP adrese. Ispravan je nnn.nnn.nnn.nnn za nnn između 0 "
+#~ "i 255."
+
+#~ msgid ""
+#~ "Invalid Prefix format. The correct one /nn where nn is between 0-32 (CIDR "
+#~ "format)."
+#~ msgstr ""
+#~ "Neispravan format prefiksa. Ispravan je /nn gdje je nn između 0-32 (CIDR "
+#~ "format)."
+
+#~ msgid ""
+#~ "Invalid default route format. The correct one is nnn.nnn.nnn.nnn for nnn "
+#~ "between 0 and 255."
+#~ msgstr ""
+#~ "Neispravan format pretpostavljene rute. Ispravan je nnn.nnn.nnn.nnn gdje "
+#~ "je nnn između 0 i 255."
+
+#~ msgid "Name servers are required. There must be at least one specified."
+#~ msgstr "Poslužitelji imena su obavezni. Mora biti naveden barem jedan."
+
+#~ msgid "Hostname is required. It must be specified."
+#~ msgstr "Naziv računala je obavezan. Mora biti naveden."
+
+#~ msgid "Domain is required. An empty domain is not supported."
+#~ msgstr "Domena je obavezna. Prrazna domena nije podržana."
+
+#~ msgid "Interface"
+#~ msgstr "Sučelje"
+
+#~ msgid "Select"
+#~ msgstr "Odabir"
+
+#~ msgid "No permissions for network module"
+#~ msgstr "Nema dozvola za mrežni modul"
+
+#~ msgid "not set"
+#~ msgstr "nije postavljeno"
+
+#~ msgid "static"
+#~ msgstr "statično"
+
+#~ msgid "dhcp"
+#~ msgstr "dhcp"
+
+#~ msgid "Prefixlen"
+#~ msgstr "Duljina prefiksa"
+
+#~ msgid "Routing"
+#~ msgstr "Usmjeravanje"
+
+#~ msgid "Save"
+#~ msgstr "Sačuvaj"
+
+#~ msgid "Cancel"
+#~ msgstr "Otkaži"
+
+#~ msgid "Configuration"
+#~ msgstr "Postavke"
+
+#~ msgid "ID"
+#~ msgstr "ID"
+
+#~ msgid "Description"
+#~ msgstr "Opis"
+
+#~ msgid "MAC"
+#~ msgstr "MAC"
+
+#~ msgid "Device Name"
+#~ msgstr "Naziv uređaja"
+
+#~ msgid "Startup"
+#~ msgstr "Pokretanje"
+
+#~ msgid "Update"
+#~ msgstr "Dogradnja"
+
+#~ msgid "Back"
+#~ msgstr "Natrag"

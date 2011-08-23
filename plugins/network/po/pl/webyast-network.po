@@ -1,0 +1,197 @@
+# Copyright (C) 2006 SuSE Linux Products GmbH, Nuernberg
+# This file is distributed under the same license as the package.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: webyast-network-ui 1.0.0\n"
+"POT-Creation-Date: 2010-08-02 09:18+0200\n"
+"PO-Revision-Date: 2010-05-13 21:54+0100\n"
+"Last-Translator: Mirek Rogozinski <miroslaw.rogozinski@opensuse.biz>\n"
+"Language-Team: Novell Language <language@novell.com>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=3; plural=n==1 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 "
+"|| n%100>=20) ? 1 : 2;\n"
+
+#: app/controllers/network_controller.rb:89
+#: app/controllers/network_controller.rb:89
+msgid "Manual"
+msgstr "Ręcznie"
+
+#: app/controllers/network_controller.rb:89
+#: app/controllers/network_controller.rb:89
+msgid "Automatic"
+msgstr "Automatycznie"
+
+#: app/controllers/network_controller.rb:163
+#: app/controllers/network_controller.rb:163
+msgid "Network settings have been written."
+msgstr "Ustawienia sieciowe zostały zapisane."
+
+#: app/views/network/index.html.erb:143 app/views/network/index.html.erb:147
+#: app/views/network/index.html.erb:151 app/views/network/index.html.erb:155
+#: app/views/network/index.html.erb:158 app/views/network/index.html.erb:162
+#: app/views/network/index.html.erb:166 app/views/network/index.html.erb:143
+#: app/views/network/index.html.erb:147 app/views/network/index.html.erb:151
+#: app/views/network/index.html.erb:155 app/views/network/index.html.erb:158
+#: app/views/network/index.html.erb:162 app/views/network/index.html.erb:166
+msgid "This field is required"
+msgstr "To pole jest wymagane"
+
+#: app/views/network/index.html.erb:144 app/views/network/index.html.erb:152
+#: app/views/network/index.html.erb:163 app/views/network/index.html.erb:144
+#: app/views/network/index.html.erb:152 app/views/network/index.html.erb:163
+msgid "Enter a valid IP address"
+msgstr "Proszę podać poprawny adres IP"
+
+#: app/views/network/index.html.erb:148 app/views/network/index.html.erb:148
+msgid "Enter a valid subnet mask or prefix"
+msgstr "Proszę podać poprawną maskę podsieci lub prefiks"
+
+#: app/views/network/index.html.erb:159 app/views/network/index.html.erb:167
+#: app/views/network/index.html.erb:159 app/views/network/index.html.erb:167
+msgid "Enter a valid domain name"
+msgstr "Proszę podać poprawną nazwę domeny"
+
+#: app/views/network/index.html.erb:229 app/views/network/index.html.erb:229
+msgid "whitespace - invalid character."
+msgstr "puste pole - nieprawidłowy znak."
+
+#: app/views/network/index.html.erb:231 app/views/network/index.html.erb:231
+msgid " - can not start with a digit."
+msgstr "- nie może rozpoczynać się kropką."
+
+#: app/views/network/index.html.erb:233 app/views/network/index.html.erb:233
+msgid "periodic '-' is not allowed."
+msgstr "znak '-' jest niedozwolony. "
+
+#: app/views/network/index.html.erb:235 app/views/network/index.html.erb:235
+msgid "can not end with (-) hyphen."
+msgstr "nie może kończyć się myślnikiem (-)."
+
+#: app/views/network/index.html.erb:238 app/views/network/index.html.erb:238
+msgid "can not start with (-) hyphen."
+msgstr "nie może zaczynać się myślnikiem (-)."
+
+#: app/views/network/index.html.erb:240 app/views/network/index.html.erb:240
+msgid " - is invalid character for hostname."
+msgstr "- nieprawidłowa nazwa hosta"
+
+#: app/views/network/index.html.erb:283 app/views/network/index.html.erb:283
+#: shortcuts.yml:6
+msgid "Network"
+msgstr "Sieć"
+
+#: app/views/network/index.html.erb:293 app/views/network/index.html.erb:293
+msgid "General settings"
+msgstr ""
+
+#: app/views/network/index.html.erb:295 app/views/network/index.html.erb:295
+msgid "Configuration mode"
+msgstr "Tryb konfiguracji"
+
+#: app/views/network/index.html.erb:301 app/views/network/index.html.erb:301
+#, fuzzy
+msgid "IP Address"
+msgstr "Adres IP"
+
+#: app/views/network/index.html.erb:304 app/views/network/index.html.erb:304
+msgid "IP address"
+msgstr "Adres IP"
+
+#: app/views/network/index.html.erb:309 app/views/network/index.html.erb:309
+msgid "Subnet mask/Prefixlen"
+msgstr "Maska podsieci / Prefiks"
+
+#: app/views/network/index.html.erb:314 app/views/network/index.html.erb:314
+msgid "Default route"
+msgstr "Trasa domyślna"
+
+#: app/views/network/index.html.erb:321 app/views/network/index.html.erb:321
+msgid "DNS"
+msgstr "adres DNS"
+
+#: app/views/network/index.html.erb:324 app/views/network/index.html.erb:324
+msgid "Hostname"
+msgstr "Nazwa hosta"
+
+#: app/views/network/index.html.erb:331 app/views/network/index.html.erb:331
+msgid "Domain"
+msgstr "Domena"
+
+#: app/views/network/index.html.erb:336 app/views/network/index.html.erb:336
+msgid "Change hostname by DHCP"
+msgstr ""
+
+#: app/views/network/index.html.erb:341 app/views/network/index.html.erb:341
+msgid "Name servers"
+msgstr "Serwery nazw"
+
+#: app/views/network/index.html.erb:346 app/views/network/index.html.erb:346
+msgid "Search domains"
+msgstr "Domeny wyszukiwania"
+
+#: shortcuts.yml:7
+msgid "Manage network devices"
+msgstr ""
+
+#~ msgid "Interface"
+#~ msgstr "Interfejs"
+
+#~ msgid "Select"
+#~ msgstr "Wybór"
+
+#~ msgid "Not configured"
+#~ msgstr "Nieskonfigurowane"
+
+#~ msgid ""
+#~ "Invalid IP address format. The correct one is nnn.nnn.nnn.nnn for nnn "
+#~ "between 0 and 255."
+#~ msgstr ""
+#~ "Niepoprawny format IP. Poprawny powinien mieć formę nnn.nnn.nnn.nnn gdzie "
+#~ "n to wartość od 0 do 255."
+
+#~ msgid ""
+#~ "Invalid Prefix format. The correct one /nn where nn is between 0-32 (CIDR "
+#~ "format)."
+#~ msgstr ""
+#~ "Niepoprawny format prefiksu. Poprawny powinien mieć formę /nn, gdzie nn "
+#~ "to wartość z zakresu 0-32 (format CIDR)."
+
+#~ msgid ""
+#~ "Invalid default route format. The correct one is nnn.nnn.nnn.nnn for nnn "
+#~ "between 0 and 255."
+#~ msgstr ""
+#~ "Niepoprawny format IP. Poprawny powinien mieć formę nnn.nnn.nnn.nnn gdzie "
+#~ "n to wartość od 0 do 255."
+
+#~ msgid "Name servers are required. There must be at least one specified."
+#~ msgstr "Wymagane są serwery nazw. Musi być określony co najmniej jeden."
+
+#~ msgid "Hostname is required. It must be specified."
+#~ msgstr "Wymagana jest nazwa hosta. Musi ona być określona."
+
+#~ msgid "Domain is required. An empty domain is not supported."
+#~ msgstr "Wymagana jest domena. Pusta domena nie jest obsługiwana."
+
+#~ msgid "No permissions for network module"
+#~ msgstr "Brak zezwolenia dla modułu sieciowego"
+
+#~ msgid "not set"
+#~ msgstr "nie ustawione"
+
+#~ msgid "static"
+#~ msgstr "statyczny"
+
+#~ msgid "dhcp"
+#~ msgstr "DHCP"
+
+#~ msgid "Prefixlen"
+#~ msgstr "wartość prefixlen"
+
+#~ msgid "Routing"
+#~ msgstr "ROuting"
+
+#~ msgid "Save"
+#~ msgstr "Zapisz"

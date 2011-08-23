@@ -1,0 +1,136 @@
+# Copyright (C) 2006 SuSE Linux Products GmbH, Nuernberg
+# This file is distributed under the same license as the package.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: webyast-network-ui\n"
+"POT-Creation-Date: 2010-08-18 10:18+0200\n"
+"PO-Revision-Date: 2010-08-26 09:34\n"
+"Last-Translator: Novell Language <language@novell.com>\n"
+"Language-Team: Novell Language <language@novell.com>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+
+#: app/controllers/network_controller.rb:89 ./app/controllers/network_controller.rb:89
+msgid "Manual"
+msgstr "使用者自定"
+
+#: app/controllers/network_controller.rb:89 ./app/controllers/network_controller.rb:89
+msgid "Automatic"
+msgstr "自動"
+
+#: app/controllers/network_controller.rb:163 ./app/controllers/network_controller.rb:163
+msgid "Network settings have been written."
+msgstr "已經寫入網路設定。"
+
+#: app/views/network/index.html.erb:143 app/views/network/index.html.erb:147
+#: app/views/network/index.html.erb:151 app/views/network/index.html.erb:155
+#: app/views/network/index.html.erb:158 app/views/network/index.html.erb:162
+#: app/views/network/index.html.erb:166 ./app/views/network/index.html.erb:143
+#: ./app/views/network/index.html.erb:147 ./app/views/network/index.html.erb:151
+#: ./app/views/network/index.html.erb:155 ./app/views/network/index.html.erb:158
+#: ./app/views/network/index.html.erb:162 ./app/views/network/index.html.erb:166
+msgid "This field is required"
+msgstr "此欄位是必要的"
+
+#: app/views/network/index.html.erb:144 app/views/network/index.html.erb:152
+#: app/views/network/index.html.erb:163 ./app/views/network/index.html.erb:144
+#: ./app/views/network/index.html.erb:152 ./app/views/network/index.html.erb:163
+msgid "Enter a valid IP address"
+msgstr "輸入有效的 IP 位址"
+
+#: app/views/network/index.html.erb:148 ./app/views/network/index.html.erb:148
+msgid "Enter a valid subnet mask or prefix"
+msgstr "輸入有效的子網路遮罩或字首"
+
+#: app/views/network/index.html.erb:159 app/views/network/index.html.erb:167
+#: ./app/views/network/index.html.erb:159 ./app/views/network/index.html.erb:167
+msgid "Enter a valid domain name"
+msgstr "輸入有效的網域名稱"
+
+#: app/views/network/index.html.erb:171 ./app/views/network/index.html.erb:171
+msgid "Please wait"
+msgstr "請稍候"
+
+#: app/views/network/index.html.erb:234 ./app/views/network/index.html.erb:234
+msgid "whitespace - invalid character."
+msgstr "空格 - 無效的字元。"
+
+#: app/views/network/index.html.erb:236 ./app/views/network/index.html.erb:236
+msgid " - can not start with a digit."
+msgstr " - 不能以數字開始。"
+
+#: app/views/network/index.html.erb:238 ./app/views/network/index.html.erb:238
+msgid "periodic '-' is not allowed."
+msgstr "不允許使用連字符「-」。"
+
+#: app/views/network/index.html.erb:240 ./app/views/network/index.html.erb:240
+msgid "can not end with (-) hyphen."
+msgstr "不得以連字號 (-) 結尾。"
+
+#: app/views/network/index.html.erb:243 ./app/views/network/index.html.erb:243
+msgid "can not start with (-) hyphen."
+msgstr "不得以連字號 (-) 開始。"
+
+#: app/views/network/index.html.erb:245 ./app/views/network/index.html.erb:245
+msgid " - is invalid character for hostname."
+msgstr " - 是無效的主機名稱字元。"
+
+#: app/views/network/index.html.erb:288 ./app/views/network/index.html.erb:288 ./shortcuts.yml:6
+msgid "Network"
+msgstr "網路"
+
+#: app/views/network/index.html.erb:298 ./app/views/network/index.html.erb:298
+msgid "General settings"
+msgstr "一般設定"
+
+#: app/views/network/index.html.erb:300 ./app/views/network/index.html.erb:300
+msgid "Configuration mode"
+msgstr "組態模式"
+
+#: app/views/network/index.html.erb:306 ./app/views/network/index.html.erb:306
+msgid "IP Address"
+msgstr "IP 位址"
+
+#: app/views/network/index.html.erb:309 ./app/views/network/index.html.erb:309
+msgid "IP address"
+msgstr "IP 位址"
+
+#: app/views/network/index.html.erb:314 ./app/views/network/index.html.erb:314
+msgid "Subnet mask/Prefixlen"
+msgstr "子網路遮罩/字首長度"
+
+#: app/views/network/index.html.erb:319 ./app/views/network/index.html.erb:319
+msgid "Default route"
+msgstr "預設路由"
+
+#: app/views/network/index.html.erb:326 ./app/views/network/index.html.erb:326
+msgid "DNS"
+msgstr "DNS"
+
+#: app/views/network/index.html.erb:329 ./app/views/network/index.html.erb:329
+msgid "Hostname"
+msgstr "主機名稱"
+
+#: app/views/network/index.html.erb:336 ./app/views/network/index.html.erb:336
+msgid "Domain"
+msgstr "網域"
+
+#: app/views/network/index.html.erb:341 ./app/views/network/index.html.erb:341
+msgid "Change hostname by DHCP"
+msgstr "透過 DHCP 變更主機名稱"
+
+#: app/views/network/index.html.erb:346 ./app/views/network/index.html.erb:346
+msgid "Name servers"
+msgstr "名稱伺服器"
+
+#: app/views/network/index.html.erb:351 ./app/views/network/index.html.erb:351
+msgid "Search domains"
+msgstr "搜尋網域"
+
+#: ./shortcuts.yml:7
+msgid "Manage network devices"
+msgstr "管理網路設備"
+

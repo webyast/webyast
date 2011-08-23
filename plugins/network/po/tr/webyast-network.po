@@ -1,0 +1,158 @@
+# @TITLE@
+# Copyright (C) 2006, SUSE Linux GmbH, Nuremberg
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+# This file is distributed under the same license as @PACKAGE@ package. FIRST
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: @PACKAGE@\n"
+"Report-Msgid-Bugs-To: translation@suse.de\n"
+"POT-Creation-Date: 2009-11-20 14:34+0100\n"
+"PO-Revision-Date: 2001-10-18 10:13+0200\n"
+"Last-Translator: Görkem Çetin <gorkem@gelecek.com.tr>\n"
+"Language-Team: turkish <i18n@suse.de>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+
+#: app/controllers/network_controller.rb:43
+msgid "No permissions for network module"
+msgstr ""
+
+#: app/controllers/network_controller.rb:66
+msgid "Not configured"
+msgstr ""
+
+#: app/controllers/network_controller.rb:66
+#, fuzzy
+#| msgid "Manual Mode"
+msgid "Manual"
+msgstr "Elle kullanma modu"
+
+#: app/controllers/network_controller.rb:66
+#, fuzzy
+#| msgid "Automatic Mode"
+msgid "Automatic"
+msgstr "Otomatik mod"
+
+#: app/controllers/network_controller.rb:105
+msgid "Network settings have been written."
+msgstr ""
+
+#: app/views/network/index.html.erb:88
+msgid "Invalid IP address format. The correct one is nnn.nnn.nnn.nnn for nnn between 0 and 255."
+msgstr ""
+
+#: app/views/network/index.html.erb:97
+msgid "Invalid Prefix format. The correct one /nn where nn is between 0-32 (CIDR format)."
+msgstr ""
+
+#: app/views/network/index.html.erb:103
+msgid "Invalid default route format. The correct one is nnn.nnn.nnn.nnn for nnn between 0 and 255."
+msgstr ""
+
+#: app/views/network/index.html.erb:109
+msgid "Name servers are required. There must be at least one specified."
+msgstr ""
+
+#: app/views/network/index.html.erb:115
+msgid "Hostname is required. It must be specified."
+msgstr ""
+
+#: app/views/network/index.html.erb:121
+msgid "Domain is required. It is not supported empty domain."
+msgstr ""
+
+#: app/views/network/index.html.erb:131
+#, fuzzy
+#| msgid "Network Status"
+msgid "Network"
+msgstr "Ağ Bağlantı Durumu"
+
+#: app/views/network/index.html.erb:140
+msgid "Interface"
+msgstr "Arayüz"
+
+#: app/views/network/index.html.erb:145
+#, fuzzy
+#| msgid "Select Script"
+msgid "Select"
+msgstr "Komut dosyası seçin"
+
+#: app/views/network/index.html.erb:166
+#, fuzzy
+#| msgid "Configuration"
+msgid "Configuration mode"
+msgstr "Yapılandırma"
+
+#: app/views/network/index.html.erb:170
+#, fuzzy
+#| msgid "Own Address"
+msgid "IP address"
+msgstr "Yerel adres"
+
+#: app/views/network/index.html.erb:174
+msgid "Subnet mask / Prefixlen"
+msgstr ""
+
+#: app/views/network/index.html.erb:181
+#, fuzzy
+#| msgid "Host Names"
+msgid "Hostname"
+msgstr "Makine adları"
+
+# as in Windows Authentication Domain
+#: app/views/network/index.html.erb:185
+#, fuzzy
+#| msgid "Domain\n"
+msgid "Domain"
+msgstr "Alan\n"
+
+#: app/views/network/index.html.erb:189
+#, fuzzy
+#| msgid "Name Server"
+msgid "Name servers"
+msgstr "Ad sunucusu"
+
+#: app/views/network/index.html.erb:193
+#, fuzzy
+#| msgid "Search"
+msgid "Search domains"
+msgstr "Ara"
+
+#: app/views/network/index.html.erb:201
+#, fuzzy
+#| msgid "Default Route"
+msgid "Default route"
+msgstr "Öntanımlı yol"
+
+#, fuzzy
+#~| msgid "not connected"
+#~ msgid "not set"
+#~ msgstr "bağlı değil"
+
+# /usr/lib/YaST2/keyboard_raw.ycp:139
+#~ msgid "Cancel"
+#~ msgstr "Vazgeç"
+
+# classnames.ycp:171 classnames.ycp:176
+#, fuzzy
+#~| msgid "Network Interface"
+#~ msgid "Edit Network Device"
+#~ msgstr "Ağ arabirimi"
+
+#~ msgid "Configuration"
+#~ msgstr "Yapılandırma"
+
+#~ msgid "Description"
+#~ msgstr "Tanım"
+
+#, fuzzy
+#~| msgid "Device"
+#~ msgid "Device Name"
+#~ msgstr "Aygıtlar"
+
+#~ msgid "Update"
+#~ msgstr "Güncelleştir"

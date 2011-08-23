@@ -1,0 +1,154 @@
+# @TITLE@
+# Copyright (C) 2006, SUSE Linux GmbH, Nuremberg
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+# This file is distributed under the same license as @PACKAGE@ package. FIRST
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: webyast-network-ui 1.0.0\n"
+"Report-Msgid-Bugs-To: Vietnamese <i18n@suse.de>\n"
+"POT-Creation-Date: 2010-08-02 09:18+0200\n"
+"PO-Revision-Date: 2006-07-12 07:32+0200\n"
+"Last-Translator: Phan Vĩnh Thịnh <teppi82@gmail.com>\n"
+"Language-Team: Vietnamese <i18n@suse.de>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0\n"
+
+#: app/controllers/network_controller.rb:89
+#: app/controllers/network_controller.rb:89
+msgid "Manual"
+msgstr ""
+
+#: app/controllers/network_controller.rb:89
+#: app/controllers/network_controller.rb:89
+msgid "Automatic"
+msgstr ""
+
+#: app/controllers/network_controller.rb:163
+#: app/controllers/network_controller.rb:163
+msgid "Network settings have been written."
+msgstr ""
+
+#: app/views/network/index.html.erb:143 app/views/network/index.html.erb:147
+#: app/views/network/index.html.erb:151 app/views/network/index.html.erb:155
+#: app/views/network/index.html.erb:158 app/views/network/index.html.erb:162
+#: app/views/network/index.html.erb:166 app/views/network/index.html.erb:143
+#: app/views/network/index.html.erb:147 app/views/network/index.html.erb:151
+#: app/views/network/index.html.erb:155 app/views/network/index.html.erb:158
+#: app/views/network/index.html.erb:162 app/views/network/index.html.erb:166
+msgid "This field is required"
+msgstr ""
+
+#: app/views/network/index.html.erb:144 app/views/network/index.html.erb:152
+#: app/views/network/index.html.erb:163 app/views/network/index.html.erb:144
+#: app/views/network/index.html.erb:152 app/views/network/index.html.erb:163
+msgid "Enter a valid IP address"
+msgstr ""
+
+#: app/views/network/index.html.erb:148 app/views/network/index.html.erb:148
+msgid "Enter a valid subnet mask or prefix"
+msgstr ""
+
+#: app/views/network/index.html.erb:159 app/views/network/index.html.erb:167
+#: app/views/network/index.html.erb:159 app/views/network/index.html.erb:167
+msgid "Enter a valid domain name"
+msgstr ""
+
+#: app/views/network/index.html.erb:229 app/views/network/index.html.erb:229
+msgid "whitespace - invalid character."
+msgstr ""
+
+#: app/views/network/index.html.erb:231 app/views/network/index.html.erb:231
+msgid " - can not start with a digit."
+msgstr ""
+
+#: app/views/network/index.html.erb:233 app/views/network/index.html.erb:233
+msgid "periodic '-' is not allowed."
+msgstr ""
+
+#: app/views/network/index.html.erb:235 app/views/network/index.html.erb:235
+msgid "can not end with (-) hyphen."
+msgstr ""
+
+#: app/views/network/index.html.erb:238 app/views/network/index.html.erb:238
+msgid "can not start with (-) hyphen."
+msgstr ""
+
+#: app/views/network/index.html.erb:240 app/views/network/index.html.erb:240
+msgid " - is invalid character for hostname."
+msgstr ""
+
+#: app/views/network/index.html.erb:283 app/views/network/index.html.erb:283
+#: shortcuts.yml:6
+msgid "Network"
+msgstr ""
+
+#: app/views/network/index.html.erb:293 app/views/network/index.html.erb:293
+msgid "General settings"
+msgstr ""
+
+#: app/views/network/index.html.erb:295 app/views/network/index.html.erb:295
+msgid "Configuration mode"
+msgstr ""
+
+#: app/views/network/index.html.erb:301 app/views/network/index.html.erb:301
+msgid "IP Address"
+msgstr ""
+
+#: app/views/network/index.html.erb:304 app/views/network/index.html.erb:304
+msgid "IP address"
+msgstr ""
+
+#: app/views/network/index.html.erb:309 app/views/network/index.html.erb:309
+msgid "Subnet mask/Prefixlen"
+msgstr ""
+
+#: app/views/network/index.html.erb:314 app/views/network/index.html.erb:314
+msgid "Default route"
+msgstr ""
+
+#: app/views/network/index.html.erb:321 app/views/network/index.html.erb:321
+msgid "DNS"
+msgstr ""
+
+#: app/views/network/index.html.erb:324 app/views/network/index.html.erb:324
+msgid "Hostname"
+msgstr ""
+
+#: app/views/network/index.html.erb:331 app/views/network/index.html.erb:331
+msgid "Domain"
+msgstr ""
+
+#: app/views/network/index.html.erb:336 app/views/network/index.html.erb:336
+msgid "Change hostname by DHCP"
+msgstr ""
+
+#: app/views/network/index.html.erb:341 app/views/network/index.html.erb:341
+msgid "Name servers"
+msgstr ""
+
+#: app/views/network/index.html.erb:346 app/views/network/index.html.erb:346
+msgid "Search domains"
+msgstr ""
+
+#: shortcuts.yml:7
+msgid "Manage network devices"
+msgstr ""
+
+#, fuzzy
+#~| msgid "not connected"
+#~ msgid "not set"
+#~ msgstr "chưa kết nối"
+
+#, fuzzy
+#~| msgid "Modem device name"
+#~ msgid "Device Name"
+#~ msgstr "Tên thiết bị modem"
+
+#, fuzzy
+#~| msgid "U_pdate every:"
+#~ msgid "Update"
+#~ msgstr "_Cập nhật mỗi:"

@@ -1,0 +1,181 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: webyast-network-ui 1.0.0\n"
+"Report-Msgid-Bugs-To: translation@suse.de\n"
+"POT-Creation-Date: 2010-08-02 09:18+0200\n"
+"PO-Revision-Date: 2010-04-30 16:32+0300\n"
+"Last-Translator: Lucian Oprea <oprea.luci@gmail.com>\n"
+"Language-Team: Comunitatea traducatorilor openSUSE Romania. Contact: <oprea."
+"luci@gmail.com><strainu10@gmail.com><traduceri@suseromania.ro>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms:  nplurals=3; plural=n==1 ? 0 : (n==0 || (n%100 > 0 && n%100 < "
+"20)) ? 1 : 2;\n"
+"X-Generator: Narro 0.9.4 on http://tradu.softwareliber.ro\n"
+
+#: app/controllers/network_controller.rb:89
+#: app/controllers/network_controller.rb:89
+msgid "Manual"
+msgstr "Mod manual"
+
+#: app/controllers/network_controller.rb:89
+#: app/controllers/network_controller.rb:89
+msgid "Automatic"
+msgstr "Mod automat"
+
+#: app/controllers/network_controller.rb:163
+#: app/controllers/network_controller.rb:163
+msgid "Network settings have been written."
+msgstr "Setările de reţea au fost scrise."
+
+#: app/views/network/index.html.erb:143 app/views/network/index.html.erb:147
+#: app/views/network/index.html.erb:151 app/views/network/index.html.erb:155
+#: app/views/network/index.html.erb:158 app/views/network/index.html.erb:162
+#: app/views/network/index.html.erb:166 app/views/network/index.html.erb:143
+#: app/views/network/index.html.erb:147 app/views/network/index.html.erb:151
+#: app/views/network/index.html.erb:155 app/views/network/index.html.erb:158
+#: app/views/network/index.html.erb:162 app/views/network/index.html.erb:166
+msgid "This field is required"
+msgstr ""
+
+#: app/views/network/index.html.erb:144 app/views/network/index.html.erb:152
+#: app/views/network/index.html.erb:163 app/views/network/index.html.erb:144
+#: app/views/network/index.html.erb:152 app/views/network/index.html.erb:163
+msgid "Enter a valid IP address"
+msgstr ""
+
+#: app/views/network/index.html.erb:148 app/views/network/index.html.erb:148
+msgid "Enter a valid subnet mask or prefix"
+msgstr ""
+
+#: app/views/network/index.html.erb:159 app/views/network/index.html.erb:167
+#: app/views/network/index.html.erb:159 app/views/network/index.html.erb:167
+msgid "Enter a valid domain name"
+msgstr ""
+
+#: app/views/network/index.html.erb:229 app/views/network/index.html.erb:229
+msgid "whitespace - invalid character."
+msgstr "spaţii albe - caractere invalide."
+
+#: app/views/network/index.html.erb:231 app/views/network/index.html.erb:231
+msgid " - can not start with a digit."
+msgstr " - nu poate începe cu o cifră."
+
+#: app/views/network/index.html.erb:233 app/views/network/index.html.erb:233
+msgid "periodic '-' is not allowed."
+msgstr "semnul '-' nu este permis."
+
+#: app/views/network/index.html.erb:235 app/views/network/index.html.erb:235
+msgid "can not end with (-) hyphen."
+msgstr "nu se poate termina cu (-) cratimă."
+
+#: app/views/network/index.html.erb:238 app/views/network/index.html.erb:238
+msgid "can not start with (-) hyphen."
+msgstr "nu poate începe cu (-) cratimă."
+
+#: app/views/network/index.html.erb:240 app/views/network/index.html.erb:240
+msgid " - is invalid character for hostname."
+msgstr " - este caracter invalid pentru numele gazdei."
+
+#: app/views/network/index.html.erb:283 app/views/network/index.html.erb:283
+#: shortcuts.yml:6
+msgid "Network"
+msgstr "Reţea"
+
+#: app/views/network/index.html.erb:293 app/views/network/index.html.erb:293
+msgid "General settings"
+msgstr ""
+
+#: app/views/network/index.html.erb:295 app/views/network/index.html.erb:295
+msgid "Configuration mode"
+msgstr "Mod de configurare"
+
+#: app/views/network/index.html.erb:301 app/views/network/index.html.erb:301
+#, fuzzy
+msgid "IP Address"
+msgstr "Adresă IP"
+
+#: app/views/network/index.html.erb:304 app/views/network/index.html.erb:304
+msgid "IP address"
+msgstr "Adresă IP"
+
+#: app/views/network/index.html.erb:309 app/views/network/index.html.erb:309
+#, fuzzy
+msgid "Subnet mask/Prefixlen"
+msgstr "Mască de reţea / Lunprefix"
+
+#: app/views/network/index.html.erb:314 app/views/network/index.html.erb:314
+msgid "Default route"
+msgstr "Rută implicită"
+
+#: app/views/network/index.html.erb:321 app/views/network/index.html.erb:321
+msgid "DNS"
+msgstr ""
+
+#: app/views/network/index.html.erb:324 app/views/network/index.html.erb:324
+msgid "Hostname"
+msgstr "Nume gazdă"
+
+# as in Windows Authentication Domain
+#: app/views/network/index.html.erb:331 app/views/network/index.html.erb:331
+msgid "Domain"
+msgstr "Domeniu"
+
+#: app/views/network/index.html.erb:336 app/views/network/index.html.erb:336
+msgid "Change hostname by DHCP"
+msgstr ""
+
+#: app/views/network/index.html.erb:341 app/views/network/index.html.erb:341
+msgid "Name servers"
+msgstr "Servere de nume"
+
+#: app/views/network/index.html.erb:346 app/views/network/index.html.erb:346
+msgid "Search domains"
+msgstr "Caută în domeniile"
+
+#: shortcuts.yml:7
+msgid "Manage network devices"
+msgstr ""
+
+#~ msgid "Not configured"
+#~ msgstr "Neconfigurat"
+
+#~ msgid ""
+#~ "Invalid IP address format. The correct one is nnn.nnn.nnn.nnn for nnn "
+#~ "between 0 and 255."
+#~ msgstr ""
+#~ "Formatul adresei IP este invalid. Corect este nnn.nnn.nnn.nnn pentru nnn "
+#~ "între 0 şi 255."
+
+#~ msgid ""
+#~ "Invalid Prefix format. The correct one /nn where nn is between 0-32 (CIDR "
+#~ "format)."
+#~ msgstr ""
+#~ "Formatul prefixului este invalid. Corect este /nn unde nn este cuprins "
+#~ "între 0-32 (format CIDR)."
+
+#~ msgid ""
+#~ "Invalid default route format. The correct one is nnn.nnn.nnn.nnn for nnn "
+#~ "between 0 and 255."
+#~ msgstr ""
+#~ "Formatul implicit al rutei este invalid. Corect este nnn.nnn.nnn.nnn "
+#~ "pentru nnn între 0 şi 255."
+
+#~ msgid "Name servers are required. There must be at least one specified."
+#~ msgstr ""
+#~ "Serverele de nume sunt necesare. Trebuie să existe cel puţin unul "
+#~ "specificat."
+
+#~ msgid "Hostname is required. It must be specified."
+#~ msgstr "Numele gazdă este necesar. Acesta trebuie să fie specificat."
+
+#~| msgid "Domain is required. It is not supported empty domain."
+#~ msgid "Domain is required. An empty domain is not supported."
+#~ msgstr "Un domeniu este necesar. Un domeniu gol nu este acceptat."
+
+#~ msgid "Interface"
+#~ msgstr "Interfaţă"
+
+#~ msgid "Select"
+#~ msgstr "Selectaţi"

@@ -40,7 +40,7 @@ class NetworkController < ApplicationController
   private
 
   # Initialize GetText and Content-Type.
-  init_gettext "webyast-network-ui" 
+  init_gettext "webyast-network" 
 
   public
   def initialize

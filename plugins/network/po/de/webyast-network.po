@@ -1,0 +1,150 @@
+# Copyright (C) 2011 SuSE Linux Products GmbH, Nuernberg
+# This file is distributed under the same license as the package.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: webyast-network-ui\n"
+"POT-Creation-Date: 2011-05-30 16:16+0200\n"
+"PO-Revision-Date: 2011-05-31 10:53+0200\n"
+"Last-Translator: Karl Eichwalder <ke@suse.de>\n"
+"Language-Team: German <i18n@suse.de>\n"
+"Language: German\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: app/controllers/network_controller.rb:123
+#: app/views/network/index.html.erb:137 app/views/network/index.html.erb:140
+#: app/controllers/network_controller.rb:123
+#: app/views/network/index.html.erb:137 app/views/network/index.html.erb:140
+msgid "Manual"
+msgstr "Manuell"
+
+#: app/controllers/network_controller.rb:123
+#: app/views/network/index.html.erb:136 app/views/network/index.html.erb:139
+#: app/controllers/network_controller.rb:123
+#: app/views/network/index.html.erb:136 app/views/network/index.html.erb:139
+msgid "Automatic"
+msgstr "Automatisch"
+
+#: app/controllers/network_controller.rb:206
+#: app/controllers/network_controller.rb:206
+msgid "Network settings have been written."
+msgstr "Die Netzwerk-Einstellungen wurden geschrieben."
+
+#: app/views/network/index.html.erb:80 app/views/network/index.html.erb:84
+#: app/views/network/index.html.erb:88 app/views/network/index.html.erb:92
+#: app/views/network/index.html.erb:96 app/views/network/index.html.erb:100
+#: app/views/network/index.html.erb:104 app/views/network/index.html.erb:80
+#: app/views/network/index.html.erb:84 app/views/network/index.html.erb:88
+#: app/views/network/index.html.erb:92 app/views/network/index.html.erb:96
+#: app/views/network/index.html.erb:100 app/views/network/index.html.erb:104
+msgid "This field is required"
+msgstr "Dies ist ein erforderliches Feld."
+
+#: app/views/network/index.html.erb:81 app/views/network/index.html.erb:89
+#: app/views/network/index.html.erb:101 app/views/network/index.html.erb:81
+#: app/views/network/index.html.erb:89 app/views/network/index.html.erb:101
+msgid "Enter a valid IP address"
+msgstr "Gültige IP-Adresse eingeben"
+
+#: app/views/network/index.html.erb:85 app/views/network/index.html.erb:85
+msgid "Enter a valid subnet mask or prefix"
+msgstr "Gültige Subnetz-Maske oder gültiges Präfix eingeben"
+
+#: app/views/network/index.html.erb:93 app/views/network/index.html.erb:93
+msgid "Enter a valid hostname"
+msgstr "Gültigen Hostnamen eingeben"
+
+#: app/views/network/index.html.erb:97 app/views/network/index.html.erb:105
+#: app/views/network/index.html.erb:97 app/views/network/index.html.erb:105
+msgid "Enter a valid domain name"
+msgstr "Gültigen Domänennamen eingeben"
+
+#: app/views/network/index.html.erb:109 app/views/network/index.html.erb:109
+msgid "Please wait"
+msgstr "Bitte warten"
+
+#: app/views/network/index.html.erb:129 app/views/network/index.html.erb:129
+#: shortcuts.yml:6
+msgid "Network"
+msgstr "Netzwerk"
+
+#: app/views/network/index.html.erb:152 app/views/network/index.html.erb:152
+msgid "DNS configuration"
+msgstr "DNS-Konfiguration"
+
+#: app/views/network/index.html.erb:159 app/views/network/index.html.erb:159
+msgid "Hostname"
+msgstr "Hostname"
+
+#: app/views/network/index.html.erb:163 app/views/network/index.html.erb:163
+msgid "Domain"
+msgstr "Domäne"
+
+#: app/views/network/index.html.erb:168 app/views/network/index.html.erb:168
+msgid "Name servers"
+msgstr "Namenserver"
+
+#: app/views/network/index.html.erb:174 app/views/network/index.html.erb:174
+msgid "Search domains"
+msgstr "Domänen durchsuchen"
+
+#: app/views/network/index.html.erb:181 app/views/network/index.html.erb:181
+msgid "Current IP address (DHCP)"
+msgstr "Derzeitige IP-Adresse (DHCP)"
+
+#: app/views/network/index.html.erb:187 app/views/network/index.html.erb:187
+msgid "Change hostname by DHCP"
+msgstr "Hostnamen über DHCP ändern"
+
+#: app/views/network/index.html.erb:199 app/views/network/index.html.erb:199
+msgid "IP configuration"
+msgstr "IP-Einrichtung"
+
+#: app/views/network/index.html.erb:206 app/views/network/index.html.erb:206
+msgid "IP address"
+msgstr "IP-Adresse"
+
+#: app/views/network/index.html.erb:210 app/views/network/index.html.erb:210
+msgid "Subnet mask/Prefixlen"
+msgstr "Subnetz-Maske/Präfix-Länge"
+
+#: app/views/network/index.html.erb:214 app/views/network/index.html.erb:214
+msgid "Default route"
+msgstr "Standard-Route"
+
+#: shortcuts.yml:7
+msgid "Manage network devices"
+msgstr "Netzwerkgeräte verwalten"
+
+#~ msgid "whitespace - invalid character."
+#~ msgstr "Leerzeichen - ungültig."
+
+#~ msgid " - can not start with a digit."
+#~ msgstr " - darf nicht mit einer Ziffer beginnen."
+
+#~ msgid "periodic '-' is not allowed."
+#~ msgstr "periodisches '-' ist nicht zulässig."
+
+#~ msgid "can not end with (-) hyphen."
+#~ msgstr "darf nicht mit einem Bindestrich (-) enden."
+
+#~ msgid "can not start with (-) hyphen."
+#~ msgstr "darf nicht mit einem Bindestrich (-) beginnen."
+
+#~ msgid " - is invalid character for hostname."
+#~ msgstr " - ist im Hostnamen ungültig."
+
+#~ msgid "General settings"
+#~ msgstr "Allgemeine Einstellungen"
+
+#~ msgid "Configuration mode"
+#~ msgstr "Konfigurationsmodus"
+
+#~ msgid "IP Address"
+#~ msgstr "IP-Adresse"
+
+#~ msgid "DNS"
+#~ msgstr "DNS"

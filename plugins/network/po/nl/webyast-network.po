@@ -1,0 +1,123 @@
+# Copyright (C) 2006 SuSE Linux Products GmbH, Nuernberg
+# This file is distributed under the same license as the package.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: yast_webclient_network\n"
+"POT-Creation-Date: 2010-04-13 13:36+0200\n"
+"PO-Revision-Date: 2010-04-22 12:39\n"
+"Last-Translator: Novell Language <language@novell.com>\n"
+"Language-Team: Novell Language <language@novell.com>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: app/controllers/network_controller.rb:64
+msgid "Not configured"
+msgstr "Niet geconfigureerd"
+
+#: app/controllers/network_controller.rb:64
+msgid "Manual"
+msgstr "Handmatig"
+
+#: app/controllers/network_controller.rb:64
+msgid "Automatic"
+msgstr "Automatisch"
+
+#: app/controllers/network_controller.rb:134
+msgid "Network settings have been written."
+msgstr "Netwerkinstellingen zijn opgeslagen."
+
+#: app/views/network/index.html.erb:118
+msgid "whitespace - invalid character."
+msgstr "spatie - ongeldig teken"
+
+#: app/views/network/index.html.erb:120
+msgid " - can not start with a digit."
+msgstr " - mag niet beginnen met een cijfer."
+
+#: app/views/network/index.html.erb:122
+msgid "periodic '-' is not allowed."
+msgstr "periodieke '-' is niet toegestaan."
+
+#: app/views/network/index.html.erb:124
+msgid "can not end with (-) hyphen."
+msgstr "mag niet eindigen met verbindingsstreepje (-)."
+
+#: app/views/network/index.html.erb:127
+msgid "can not start with (-) hyphen."
+msgstr "mag niet beginnen met verbindingsstreepje (-)."
+
+#: app/views/network/index.html.erb:129
+msgid " - is invalid character for hostname."
+msgstr " - is een ongeldig teken voor hostnaam."
+
+#: app/views/network/index.html.erb:154
+msgid "Invalid IP address format. The correct one is nnn.nnn.nnn.nnn for nnn between 0 and 255."
+msgstr "Ongeldige IP-adresindeling. De juiste is nnn.nnn.nnn.nnn met nnn tussen 0 en 255."
+
+#: app/views/network/index.html.erb:163
+msgid "Invalid Prefix format. The correct one /nn where nn is between 0-32 (CIDR format)."
+msgstr "Ongeldig prefix-indeling. De juiste is /nn met nn tussen 0 en 32 (CIDR-indeling)."
+
+#: app/views/network/index.html.erb:169
+msgid "Invalid default route format. The correct one is nnn.nnn.nnn.nnn for nnn between 0 and 255."
+msgstr "Ongeldige indeling van standaardroute. De juiste indeling is nnn.nnn.nnn.nnn waarbij nnn een waarde is tussen 0 en 255."
+
+#: app/views/network/index.html.erb:175
+msgid "Name servers are required. There must be at least one specified."
+msgstr "Naamservers zijn vereist. Er moet er minstens één zijn gedefinieerd."
+
+#: app/views/network/index.html.erb:181
+msgid "Hostname is required. It must be specified."
+msgstr "Hostnaam is vereist. Deze moet worden opgegeven."
+
+#: app/views/network/index.html.erb:187
+msgid "Domain is required. An empty domain is not supported."
+msgstr "Domein is vereist. Lege domeinen worden niet ondersteund."
+
+#: app/views/network/index.html.erb:210
+msgid "Network"
+msgstr "Netwerk"
+
+#: app/views/network/index.html.erb:221
+msgid "Interface"
+msgstr "Interface"
+
+#: app/views/network/index.html.erb:226
+msgid "Select"
+msgstr "Selecteren"
+
+#: app/views/network/index.html.erb:243
+msgid "Configuration mode"
+msgstr "Configuratiemodus"
+
+#: app/views/network/index.html.erb:252
+msgid "IP address"
+msgstr "IP-adres"
+
+#: app/views/network/index.html.erb:256
+msgid "Subnet mask / Prefixlen"
+msgstr "Subnetmasker / prefixlengte"
+
+#: app/views/network/index.html.erb:260
+msgid "Default route"
+msgstr "Standaardroute"
+
+#: app/views/network/index.html.erb:269
+msgid "Hostname"
+msgstr "Hostnaam"
+
+#: app/views/network/index.html.erb:274
+msgid "Domain"
+msgstr "Domein"
+
+#: app/views/network/index.html.erb:278
+msgid "Name servers"
+msgstr "Naamservers"
+
+#: app/views/network/index.html.erb:282
+msgid "Search domains"
+msgstr "Zoeken naar domeinen"
+

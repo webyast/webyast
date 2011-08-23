@@ -1,0 +1,149 @@
+# Catalan message file for YaST2 (@memory@).
+# Copyright (C) 2005 SUSE Linux Products GmbH.
+# Copyright (C) 2002 SuSE Linux AG.
+# Copyright (C) 2000, 2001 SuSE GmbH.
+# Jaume Badiella <myotis@drac.com>, 2001.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: webyast-network-ui 1.0.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2010-08-02 09:18+0200\n"
+"PO-Revision-Date: 2002-02-08 15:47+0100\n"
+"Last-Translator: Jordi Bruguera i Cortada <jordi@grn.es>\n"
+"Language-Team: Catalan\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"#-#-#-#-#  compendi_yast_11.1_11.2_e.po (YaST (@memory@))  #-#-#-#-#\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"#-#-#-#-#  isns.ca.po (YaST (@memory@))  #-#-#-#-#\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: app/controllers/network_controller.rb:89
+#: app/controllers/network_controller.rb:89
+msgid "Manual"
+msgstr "Manual"
+
+#: app/controllers/network_controller.rb:89
+#: app/controllers/network_controller.rb:89
+msgid "Automatic"
+msgstr "Automàtic"
+
+#: app/controllers/network_controller.rb:163
+#: app/controllers/network_controller.rb:163
+msgid "Network settings have been written."
+msgstr "S'ha desat la configuració de la xarxa."
+
+#: app/views/network/index.html.erb:143 app/views/network/index.html.erb:147
+#: app/views/network/index.html.erb:151 app/views/network/index.html.erb:155
+#: app/views/network/index.html.erb:158 app/views/network/index.html.erb:162
+#: app/views/network/index.html.erb:166 app/views/network/index.html.erb:143
+#: app/views/network/index.html.erb:147 app/views/network/index.html.erb:151
+#: app/views/network/index.html.erb:155 app/views/network/index.html.erb:158
+#: app/views/network/index.html.erb:162 app/views/network/index.html.erb:166
+msgid "This field is required"
+msgstr "Aquest camp és necessari"
+
+#: app/views/network/index.html.erb:144 app/views/network/index.html.erb:152
+#: app/views/network/index.html.erb:163 app/views/network/index.html.erb:144
+#: app/views/network/index.html.erb:152 app/views/network/index.html.erb:163
+msgid "Enter a valid IP address"
+msgstr "Introduïu una adreça IP vàlida."
+
+#: app/views/network/index.html.erb:148 app/views/network/index.html.erb:148
+msgid "Enter a valid subnet mask or prefix"
+msgstr "Introduïu una màscara de subxarxa o prefix vàlids."
+
+#: app/views/network/index.html.erb:159 app/views/network/index.html.erb:167
+#: app/views/network/index.html.erb:159 app/views/network/index.html.erb:167
+msgid "Enter a valid domain name"
+msgstr "Introduïu un nom de domini vàlid"
+
+#: app/views/network/index.html.erb:229 app/views/network/index.html.erb:229
+msgid "whitespace - invalid character."
+msgstr "espai en blanc - caràcter no vàlid"
+
+#: app/views/network/index.html.erb:231 app/views/network/index.html.erb:231
+msgid " - can not start with a digit."
+msgstr " - no pot començar amb un dígit."
+
+#: app/views/network/index.html.erb:233 app/views/network/index.html.erb:233
+msgid "periodic '-' is not allowed."
+msgstr "el caràcter '-' no està permès."
+
+#: app/views/network/index.html.erb:235 app/views/network/index.html.erb:235
+msgid "can not end with (-) hyphen."
+msgstr "no pot acabar amb un guió (-)."
+
+#: app/views/network/index.html.erb:238 app/views/network/index.html.erb:238
+msgid "can not start with (-) hyphen."
+msgstr "No pot començar amb un guió (-)."
+
+#: app/views/network/index.html.erb:240 app/views/network/index.html.erb:240
+msgid " - is invalid character for hostname."
+msgstr " - no és un caràcter vàlid per a nom d'ordinador central."
+
+#: app/views/network/index.html.erb:283 app/views/network/index.html.erb:283
+#: shortcuts.yml:6
+msgid "Network"
+msgstr "Xarxa"
+
+#: app/views/network/index.html.erb:293 app/views/network/index.html.erb:293
+msgid "General settings"
+msgstr ""
+
+#: app/views/network/index.html.erb:295 app/views/network/index.html.erb:295
+msgid "Configuration mode"
+msgstr "Mode de la configuració"
+
+#: app/views/network/index.html.erb:301 app/views/network/index.html.erb:301
+#, fuzzy
+msgid "IP Address"
+msgstr "Adreça IP"
+
+#: app/views/network/index.html.erb:304 app/views/network/index.html.erb:304
+msgid "IP address"
+msgstr "Adreça IP"
+
+#: app/views/network/index.html.erb:309 app/views/network/index.html.erb:309
+msgid "Subnet mask/Prefixlen"
+msgstr "Màscara de subxarxa/Longitud del prefix"
+
+#: app/views/network/index.html.erb:314 app/views/network/index.html.erb:314
+msgid "Default route"
+msgstr "Ruta predeterminada"
+
+#: app/views/network/index.html.erb:321 app/views/network/index.html.erb:321
+msgid "DNS"
+msgstr ""
+
+#: app/views/network/index.html.erb:324 app/views/network/index.html.erb:324
+msgid "Hostname"
+msgstr "Nom de l'ordinador central"
+
+#: app/views/network/index.html.erb:331 app/views/network/index.html.erb:331
+msgid "Domain"
+msgstr "Domini"
+
+#: app/views/network/index.html.erb:336 app/views/network/index.html.erb:336
+msgid "Change hostname by DHCP"
+msgstr ""
+
+#: app/views/network/index.html.erb:341 app/views/network/index.html.erb:341
+msgid "Name servers"
+msgstr "Servidors de noms"
+
+#: app/views/network/index.html.erb:346 app/views/network/index.html.erb:346
+msgid "Search domains"
+msgstr "Dominis de cerca"
+
+#: shortcuts.yml:7
+msgid "Manage network devices"
+msgstr ""
+
+#~ msgid "Interface"
+#~ msgstr "Interfície"
+
+#~ msgid "Select"
+#~ msgstr "Selecciona"

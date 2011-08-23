@@ -1,0 +1,191 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: @PACKAGE@\n"
+"Report-Msgid-Bugs-To: translation@suse.de\n"
+"POT-Creation-Date: 2009-11-20 14:34+0100\n"
+"PO-Revision-Date: 2006-02-18 09:47+0700\n"
+"Last-Translator: Keo Sophon <keosophon@khmeros.info>\n"
+"Language-Team: Khmer <support@khmeros.info>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+
+#: app/controllers/network_controller.rb:43
+msgid "No permissions for network module"
+msgstr ""
+
+#: app/controllers/network_controller.rb:66
+msgid "Not configured"
+msgstr "មិន​បាន​កំណត់​រចនាសម្ព័ន្ធ"
+
+#: app/controllers/network_controller.rb:66
+msgid "Manual"
+msgstr "សៀវភៅ​ដៃ​"
+
+#: app/controllers/network_controller.rb:66
+#, fuzzy
+#| msgid "Automatic Mode"
+msgid "Automatic"
+msgstr "របៀប​ស្វ័យប្រវត្តិ​"
+
+# %s is either BOOTP or DHCP
+#: app/controllers/network_controller.rb:105
+#, fuzzy
+#| msgid "The configuration file has been written."
+msgid "Network settings have been written."
+msgstr "ឯកសារ​កំណត់​រចនាសម្ព័ន្ធ​ត្រូវ​បានសរសេរ ។"
+
+#: app/views/network/index.html.erb:88
+msgid "Invalid IP address format. The correct one is nnn.nnn.nnn.nnn for nnn between 0 and 255."
+msgstr ""
+
+#: app/views/network/index.html.erb:97
+msgid "Invalid Prefix format. The correct one /nn where nn is between 0-32 (CIDR format)."
+msgstr ""
+
+#: app/views/network/index.html.erb:103
+msgid "Invalid default route format. The correct one is nnn.nnn.nnn.nnn for nnn between 0 and 255."
+msgstr ""
+
+#: app/views/network/index.html.erb:109
+msgid "Name servers are required. There must be at least one specified."
+msgstr ""
+
+#: app/views/network/index.html.erb:115
+#, fuzzy
+#| msgid "No valid request file specified."
+msgid "Hostname is required. It must be specified."
+msgstr "គ្មាន​ឯកសារ​សំណើ​ដែល​បាន​បញ្ជាក់​ត្រឹមត្រូវ​ទេ ។"
+
+#: app/views/network/index.html.erb:121
+msgid "Domain is required. It is not supported empty domain."
+msgstr ""
+
+#: app/views/network/index.html.erb:131
+msgid "Network"
+msgstr "បណ្តាញ"
+
+#: app/views/network/index.html.erb:140
+msgid "Interface"
+msgstr "ចំណុច​ប្រទាក់"
+
+#: app/views/network/index.html.erb:145
+#, fuzzy
+#| msgid "_Selection"
+msgid "Select"
+msgstr "ជម្រើស"
+
+#: app/views/network/index.html.erb:166
+#, fuzzy
+#| msgid "Configuration"
+msgid "Configuration mode"
+msgstr "កំណត់រចនាសម្ព័ន្ធ"
+
+#: app/views/network/index.html.erb:170
+#, fuzzy
+#| msgid "IP Address"
+msgid "IP address"
+msgstr "អាសយដ្ឋាន IP"
+
+#: app/views/network/index.html.erb:174
+msgid "Subnet mask / Prefixlen"
+msgstr ""
+
+#: app/views/network/index.html.erb:181
+#, fuzzy
+#| msgid "Host Names"
+msgid "Hostname"
+msgstr "ឈ្មោះ​ម៉ាស៊ីន"
+
+# as in Windows Authentication Domain
+#: app/views/network/index.html.erb:185
+#, fuzzy
+#| msgid "Domain\n"
+msgid "Domain"
+msgstr "ដែន\n"
+
+#: app/views/network/index.html.erb:189
+#, fuzzy
+#| msgid "Name Server"
+msgid "Name servers"
+msgstr "ម៉ាស៊ីន​បម្រើ​ឈ្មោះ"
+
+#: app/views/network/index.html.erb:193
+#, fuzzy
+#| msgid "&Search domains:"
+msgid "Search domains"
+msgstr "ដែន​ស្វែងរក ៖"
+
+#: app/views/network/index.html.erb:201
+#, fuzzy
+#| msgid "Default Route"
+msgid "Default route"
+msgstr "ផ្លូវ​លំនាំដើ៼ម"
+
+#, fuzzy
+#~| msgid "Do not start"
+#~ msgid "not set"
+#~ msgstr "កុំ​ចាប់ផ្ដើម"
+
+#, fuzzy
+#~| msgid "Static"
+#~ msgid "static"
+#~ msgstr "ឋិតិវន្ដ"
+
+#~ msgid "dhcp"
+#~ msgstr "dhcp"
+
+#, fuzzy
+#~| msgid "Dial Prefix"
+#~ msgid "Prefixlen"
+#~ msgstr "បុព្វបទ​ការ​ហៅ"
+
+#, fuzzy
+#~| msgid "NFS"
+#~ msgid "DNS"
+#~ msgstr "NFS"
+
+#~ msgid "Save"
+#~ msgstr "រក្សា​ទុក"
+
+# cancel button label
+#~ msgid "Cancel"
+#~ msgstr "បោះបង់"
+
+#, fuzzy
+#~| msgid "Network Servers"
+#~ msgid "Edit Network Device"
+#~ msgstr "ម៉ាស៊ីន​បម្រើ​បណ្ដាញ"
+
+#~ msgid "Configuration"
+#~ msgstr "កំណត់រចនាសម្ព័ន្ធ"
+
+#~ msgid "Description"
+#~ msgstr "សេចក្តី​ពិពណ៌នា"
+
+#, fuzzy
+#~| msgid "DMA"
+#~ msgid "MAC"
+#~ msgstr "DMA"
+
+#, fuzzy
+#~| msgid "Device"
+#~ msgid "Device Name"
+#~ msgstr "ឧបករណ៍"
+
+#, fuzzy
+#~| msgid "Start-Up"
+#~ msgid "Startup"
+#~ msgstr "ចាប់ផ្ដើម"
+
+#, fuzzy
+#~| msgid "Search Domains:"
+#~ msgid "Search Domains"
+#~ msgstr "ដែន​ស្វែងរក ៖"
+
+#~ msgid "Update"
+#~ msgstr "ធ្វើ​ឲ្យ​ទាន់សម័យ"
+
+#~ msgid "Back"
+#~ msgstr "ថយក្រោយ"

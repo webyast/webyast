@@ -1,0 +1,217 @@
+# @TITLE@
+# Copyright (C) 2006, SUSE Linux GmbH, Nuremberg
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+# This file is distributed under the same license as @PACKAGE@ package. FIRST
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: webyast-network-ui 1.0.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2010-08-02 09:18+0200\n"
+"PO-Revision-Date: 2005-03-09 13:54+0100\n"
+"Last-Translator: Novell Language <language@novell.com>\n"
+"Language-Team: Novell Language <language@novell.com>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: KBabel 1.9\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: app/controllers/network_controller.rb:89
+#: app/controllers/network_controller.rb:89
+#, fuzzy
+msgid "Manual"
+msgstr "Modo Manual"
+
+#: app/controllers/network_controller.rb:89
+#: app/controllers/network_controller.rb:89
+#, fuzzy
+msgid "Automatic"
+msgstr "Modo Automático"
+
+# %s is either BOOTP or DHCP
+#: app/controllers/network_controller.rb:163
+#: app/controllers/network_controller.rb:163
+#, fuzzy
+msgid "Network settings have been written."
+msgstr "O ficheiro de configuração foi escrito."
+
+#: app/views/network/index.html.erb:143 app/views/network/index.html.erb:147
+#: app/views/network/index.html.erb:151 app/views/network/index.html.erb:155
+#: app/views/network/index.html.erb:158 app/views/network/index.html.erb:162
+#: app/views/network/index.html.erb:166 app/views/network/index.html.erb:143
+#: app/views/network/index.html.erb:147 app/views/network/index.html.erb:151
+#: app/views/network/index.html.erb:155 app/views/network/index.html.erb:158
+#: app/views/network/index.html.erb:162 app/views/network/index.html.erb:166
+msgid "This field is required"
+msgstr ""
+
+#: app/views/network/index.html.erb:144 app/views/network/index.html.erb:152
+#: app/views/network/index.html.erb:163 app/views/network/index.html.erb:144
+#: app/views/network/index.html.erb:152 app/views/network/index.html.erb:163
+msgid "Enter a valid IP address"
+msgstr ""
+
+#: app/views/network/index.html.erb:148 app/views/network/index.html.erb:148
+msgid "Enter a valid subnet mask or prefix"
+msgstr ""
+
+#: app/views/network/index.html.erb:159 app/views/network/index.html.erb:167
+#: app/views/network/index.html.erb:159 app/views/network/index.html.erb:167
+msgid "Enter a valid domain name"
+msgstr ""
+
+#: app/views/network/index.html.erb:229 app/views/network/index.html.erb:229
+#, fuzzy
+msgid "whitespace - invalid character."
+msgstr "O texto da pesquisa contém caracteres inválidos"
+
+#: app/views/network/index.html.erb:231 app/views/network/index.html.erb:231
+#, fuzzy
+msgid " - can not start with a digit."
+msgstr "O nome da MV não pode iniciar com um dígito."
+
+#: app/views/network/index.html.erb:233 app/views/network/index.html.erb:233
+#, fuzzy
+msgid "periodic '-' is not allowed."
+msgstr "A opção 'escoar' não é autorizada"
+
+#: app/views/network/index.html.erb:235 app/views/network/index.html.erb:235
+msgid "can not end with (-) hyphen."
+msgstr ""
+
+#: app/views/network/index.html.erb:238 app/views/network/index.html.erb:238
+msgid "can not start with (-) hyphen."
+msgstr ""
+
+#: app/views/network/index.html.erb:240 app/views/network/index.html.erb:240
+msgid " - is invalid character for hostname."
+msgstr ""
+
+#: app/views/network/index.html.erb:283 app/views/network/index.html.erb:283
+#: shortcuts.yml:6
+msgid "Network"
+msgstr "Rede"
+
+#: app/views/network/index.html.erb:293 app/views/network/index.html.erb:293
+msgid "General settings"
+msgstr ""
+
+#: app/views/network/index.html.erb:295 app/views/network/index.html.erb:295
+#, fuzzy
+msgid "Configuration mode"
+msgstr "Configuração"
+
+#: app/views/network/index.html.erb:301 app/views/network/index.html.erb:301
+#, fuzzy
+msgid "IP Address"
+msgstr "Endereço IP:"
+
+#: app/views/network/index.html.erb:304 app/views/network/index.html.erb:304
+#, fuzzy
+msgid "IP address"
+msgstr "Endereço IP:"
+
+#: app/views/network/index.html.erb:309 app/views/network/index.html.erb:309
+#, fuzzy
+msgid "Subnet mask/Prefixlen"
+msgstr "Prefixo de Ligação"
+
+#: app/views/network/index.html.erb:314 app/views/network/index.html.erb:314
+#, fuzzy
+msgid "Default route"
+msgstr "Rota Pré-definida"
+
+#: app/views/network/index.html.erb:321 app/views/network/index.html.erb:321
+#, fuzzy
+msgid "DNS"
+msgstr "DSL"
+
+#: app/views/network/index.html.erb:324 app/views/network/index.html.erb:324
+#, fuzzy
+msgid "Hostname"
+msgstr "Nomes de Computador"
+
+# as in Windows Authentication Domain
+#: app/views/network/index.html.erb:331 app/views/network/index.html.erb:331
+#, fuzzy
+msgid "Domain"
+msgstr "Domínio\n"
+
+#: app/views/network/index.html.erb:336 app/views/network/index.html.erb:336
+msgid "Change hostname by DHCP"
+msgstr ""
+
+#: app/views/network/index.html.erb:341 app/views/network/index.html.erb:341
+#, fuzzy
+msgid "Name servers"
+msgstr "Servidor de Nomes"
+
+#: app/views/network/index.html.erb:346 app/views/network/index.html.erb:346
+#, fuzzy
+msgid "Search domains"
+msgstr "A procurar detalhes"
+
+#: shortcuts.yml:7
+#, fuzzy
+msgid "Manage network devices"
+msgstr "Servidores de Rede"
+
+#~ msgid "Not configured"
+#~ msgstr "Não configurado"
+
+#, fuzzy
+#~| msgid "No valid request file specified."
+#~ msgid "Hostname is required. It must be specified."
+#~ msgstr "Não foi especificado um ficheiro de pedido válido."
+
+#~ msgid "Interface"
+#~ msgstr "Interface"
+
+#, fuzzy
+#~| msgid "Select Script"
+#~ msgid "Select"
+#~ msgstr "Selecção de Script"
+
+#, fuzzy
+#~| msgid "Do not start"
+#~ msgid "not set"
+#~ msgstr "Não iniciar"
+
+#~ msgid "dhcp"
+#~ msgstr "dhcp"
+
+#~ msgid "Save"
+#~ msgstr "Guardar"
+
+# cancel button label
+#~ msgid "Cancel"
+#~ msgstr "Cancelar"
+
+#~ msgid "Configuration"
+#~ msgstr "Configuração"
+
+#~ msgid "Description"
+#~ msgstr "Descrição"
+
+#, fuzzy
+#~| msgid "DMA"
+#~ msgid "MAC"
+#~ msgstr "DMA"
+
+#, fuzzy
+#~| msgid "Device"
+#~ msgid "Device Name"
+#~ msgstr "Dispositivo"
+
+#, fuzzy
+#~| msgid "Start-Up"
+#~ msgid "Startup"
+#~ msgstr "Arranque"
+
+#~ msgid "Update"
+#~ msgstr "Actualizar"
+
+#~ msgid "Back"
+#~ msgstr "Retroceder"

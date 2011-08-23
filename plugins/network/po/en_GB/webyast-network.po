@@ -1,0 +1,174 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: @PACKAGE@\n"
+"Report-Msgid-Bugs-To: translation@suse.de\n"
+"POT-Creation-Date: 2009-11-20 14:34+0100\n"
+"PO-Revision-Date: 2001-07-17 16:27+0200\n"
+"Last-Translator: James Ogley <ogley@suse.co.uk>\n"
+"Language-Team: English <i18n@suse.de>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8-bit\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+
+#: app/controllers/network_controller.rb:43
+msgid "No permissions for network module"
+msgstr ""
+
+#: app/controllers/network_controller.rb:66
+msgid "Not configured"
+msgstr "Not configured"
+
+#: app/controllers/network_controller.rb:66
+#, fuzzy
+#| msgid "Manual Mode"
+msgid "Manual"
+msgstr "Manual Mode"
+
+#: app/controllers/network_controller.rb:66
+#, fuzzy
+#| msgid "Automatic Mode"
+msgid "Automatic"
+msgstr "Automatic Mode"
+
+#: app/controllers/network_controller.rb:105
+msgid "Network settings have been written."
+msgstr ""
+
+#: app/views/network/index.html.erb:88
+msgid "Invalid IP address format. The correct one is nnn.nnn.nnn.nnn for nnn between 0 and 255."
+msgstr ""
+
+#: app/views/network/index.html.erb:97
+msgid "Invalid Prefix format. The correct one /nn where nn is between 0-32 (CIDR format)."
+msgstr ""
+
+#: app/views/network/index.html.erb:103
+msgid "Invalid default route format. The correct one is nnn.nnn.nnn.nnn for nnn between 0 and 255."
+msgstr ""
+
+#: app/views/network/index.html.erb:109
+msgid "Name servers are required. There must be at least one specified."
+msgstr ""
+
+#: app/views/network/index.html.erb:115
+#, fuzzy
+#| msgid "No valid request file specified."
+msgid "Hostname is required. It must be specified."
+msgstr "No valid request file specified."
+
+#: app/views/network/index.html.erb:121
+msgid "Domain is required. It is not supported empty domain."
+msgstr ""
+
+#: app/views/network/index.html.erb:131
+msgid "Network"
+msgstr "Network"
+
+#: app/views/network/index.html.erb:140
+msgid "Interface"
+msgstr "Interface"
+
+#: app/views/network/index.html.erb:145
+#, fuzzy
+#| msgid "Select Script"
+msgid "Select"
+msgstr "Select Script"
+
+#: app/views/network/index.html.erb:166
+#, fuzzy
+#| msgid "Configuration"
+msgid "Configuration mode"
+msgstr "Configuration"
+
+#: app/views/network/index.html.erb:170
+#, fuzzy
+#| msgid "Own Address"
+msgid "IP address"
+msgstr "Own Address"
+
+#: app/views/network/index.html.erb:174
+msgid "Subnet mask / Prefixlen"
+msgstr ""
+
+#: app/views/network/index.html.erb:181
+#, fuzzy
+#| msgid "Host Names"
+msgid "Hostname"
+msgstr "Host Names"
+
+# as in Windows Authentication Domain
+#: app/views/network/index.html.erb:185
+#, fuzzy
+#| msgid "Domain\n"
+msgid "Domain"
+msgstr "Domain\n"
+
+#: app/views/network/index.html.erb:189
+#, fuzzy
+#| msgid "Name Server"
+msgid "Name servers"
+msgstr "Name Server"
+
+#: app/views/network/index.html.erb:193
+#, fuzzy
+#| msgid "Search Index"
+msgid "Search domains"
+msgstr "Search Index"
+
+#: app/views/network/index.html.erb:201
+#, fuzzy
+#| msgid "Default Route"
+msgid "Default route"
+msgstr "Default Route"
+
+#, fuzzy
+#~| msgid "Do not start"
+#~ msgid "not set"
+#~ msgstr "Do not start"
+
+#~ msgid "dhcp"
+#~ msgstr "dhcp"
+
+#, fuzzy
+#~| msgid "Dial Prefix"
+#~ msgid "Prefixlen"
+#~ msgstr "Dial Prefix"
+
+#~ msgid "Save"
+#~ msgstr "Save"
+
+#~ msgid "Cancel"
+#~ msgstr "Cancel"
+
+#, fuzzy
+#~| msgid "Choose the network device."
+#~ msgid "Edit Network Device"
+#~ msgstr "Choose the network device."
+
+#~ msgid "Configuration"
+#~ msgstr "Configuration"
+
+#~ msgid "Description"
+#~ msgstr "Description"
+
+#, fuzzy
+#~| msgid "DMA"
+#~ msgid "MAC"
+#~ msgstr "DMA"
+
+#, fuzzy
+#~| msgid "Device"
+#~ msgid "Device Name"
+#~ msgstr "Device"
+
+#, fuzzy
+#~| msgid "Start-Up"
+#~ msgid "Startup"
+#~ msgstr "Start-Up"
+
+#~ msgid "Update"
+#~ msgstr "Update"
+
+#~ msgid "Back"
+#~ msgstr "Back"

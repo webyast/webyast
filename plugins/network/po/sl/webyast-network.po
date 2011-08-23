@@ -1,0 +1,200 @@
+# @TITLE@
+# Copyright (C) 2006, SUSE Linux GmbH, Nuremberg
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+# This file is distributed under the same license as @PACKAGE@ package. FIRST
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: webyast-network-ui 1.0.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2010-08-02 09:18+0200\n"
+"PO-Revision-Date: 2005-08-24 17:37+0200\n"
+"Last-Translator: Janez Krek <janez.krek@euroteh.si>\n"
+"Language-Team: Slovenščina <sl@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: KBabel 1.3.1\n"
+"Plural-Forms: nplurals=4; plural=(n%100==1 ? 0 : n%100==2 ? 1 : n%100==3 || n"
+"%100==4 ? 2 : 3);\n"
+
+# VU
+#: app/controllers/network_controller.rb:89
+#: app/controllers/network_controller.rb:89
+#, fuzzy
+msgid "Manual"
+msgstr "Vanuatu"
+
+#: app/controllers/network_controller.rb:89
+#: app/controllers/network_controller.rb:89
+#, fuzzy
+msgid "Automatic"
+msgstr "Samodejni zagon"
+
+#: app/controllers/network_controller.rb:163
+#: app/controllers/network_controller.rb:163
+msgid "Network settings have been written."
+msgstr ""
+
+#: app/views/network/index.html.erb:143 app/views/network/index.html.erb:147
+#: app/views/network/index.html.erb:151 app/views/network/index.html.erb:155
+#: app/views/network/index.html.erb:158 app/views/network/index.html.erb:162
+#: app/views/network/index.html.erb:166 app/views/network/index.html.erb:143
+#: app/views/network/index.html.erb:147 app/views/network/index.html.erb:151
+#: app/views/network/index.html.erb:155 app/views/network/index.html.erb:158
+#: app/views/network/index.html.erb:162 app/views/network/index.html.erb:166
+msgid "This field is required"
+msgstr ""
+
+#: app/views/network/index.html.erb:144 app/views/network/index.html.erb:152
+#: app/views/network/index.html.erb:163 app/views/network/index.html.erb:144
+#: app/views/network/index.html.erb:152 app/views/network/index.html.erb:163
+msgid "Enter a valid IP address"
+msgstr ""
+
+#: app/views/network/index.html.erb:148 app/views/network/index.html.erb:148
+msgid "Enter a valid subnet mask or prefix"
+msgstr ""
+
+#: app/views/network/index.html.erb:159 app/views/network/index.html.erb:167
+#: app/views/network/index.html.erb:159 app/views/network/index.html.erb:167
+msgid "Enter a valid domain name"
+msgstr ""
+
+#: app/views/network/index.html.erb:229 app/views/network/index.html.erb:229
+msgid "whitespace - invalid character."
+msgstr ""
+
+#: app/views/network/index.html.erb:231 app/views/network/index.html.erb:231
+msgid " - can not start with a digit."
+msgstr ""
+
+#: app/views/network/index.html.erb:233 app/views/network/index.html.erb:233
+msgid "periodic '-' is not allowed."
+msgstr ""
+
+#: app/views/network/index.html.erb:235 app/views/network/index.html.erb:235
+msgid "can not end with (-) hyphen."
+msgstr ""
+
+#: app/views/network/index.html.erb:238 app/views/network/index.html.erb:238
+msgid "can not start with (-) hyphen."
+msgstr ""
+
+#: app/views/network/index.html.erb:240 app/views/network/index.html.erb:240
+msgid " - is invalid character for hostname."
+msgstr ""
+
+#: app/views/network/index.html.erb:283 app/views/network/index.html.erb:283
+#: shortcuts.yml:6
+msgid "Network"
+msgstr "Omrežje"
+
+#: app/views/network/index.html.erb:293 app/views/network/index.html.erb:293
+msgid "General settings"
+msgstr ""
+
+#: app/views/network/index.html.erb:295 app/views/network/index.html.erb:295
+#, fuzzy
+msgid "Configuration mode"
+msgstr "Nastavitev"
+
+#: app/views/network/index.html.erb:301 app/views/network/index.html.erb:301
+#, fuzzy
+msgid "IP Address"
+msgstr "Lasten naslov"
+
+#: app/views/network/index.html.erb:304 app/views/network/index.html.erb:304
+#, fuzzy
+msgid "IP address"
+msgstr "Lasten naslov"
+
+#: app/views/network/index.html.erb:309 app/views/network/index.html.erb:309
+#, fuzzy
+msgid "Subnet mask/Prefixlen"
+msgstr "Predpona za klicanje"
+
+#: app/views/network/index.html.erb:314 app/views/network/index.html.erb:314
+#, fuzzy
+msgid "Default route"
+msgstr "Privzeta pot (default route)"
+
+#: app/views/network/index.html.erb:321 app/views/network/index.html.erb:321
+msgid "DNS"
+msgstr ""
+
+#: app/views/network/index.html.erb:324 app/views/network/index.html.erb:324
+#, fuzzy
+msgid "Hostname"
+msgstr "Imena računalnikov (host names)"
+
+# as in Windows Authentication Domain
+#: app/views/network/index.html.erb:331 app/views/network/index.html.erb:331
+#, fuzzy
+msgid "Domain"
+msgstr "Domena\n"
+
+#: app/views/network/index.html.erb:336 app/views/network/index.html.erb:336
+msgid "Change hostname by DHCP"
+msgstr ""
+
+#: app/views/network/index.html.erb:341 app/views/network/index.html.erb:341
+#, fuzzy
+msgid "Name servers"
+msgstr "Imenski strežnik (name server)"
+
+#: app/views/network/index.html.erb:346 app/views/network/index.html.erb:346
+#, fuzzy
+msgid "Search domains"
+msgstr "Išči"
+
+#: shortcuts.yml:7
+#, fuzzy
+msgid "Manage network devices"
+msgstr "Izberite omrežno napravo."
+
+#~ msgid "Not configured"
+#~ msgstr "Neprilagojeno"
+
+#~ msgid "Interface"
+#~ msgstr "Vmesnik"
+
+#, fuzzy
+#~| msgid "Select Script"
+#~ msgid "Select"
+#~ msgstr "Izberi skripto"
+
+#, fuzzy
+#~| msgid "not connected"
+#~ msgid "not set"
+#~ msgstr "ni povezave"
+
+#~ msgid "Save"
+#~ msgstr "Shrani"
+
+# cancel button label
+#~ msgid "Cancel"
+#~ msgstr "Prekini"
+
+#~ msgid "Configuration"
+#~ msgstr "Nastavitev"
+
+#~ msgid "Description"
+#~ msgstr "Opis"
+
+#, fuzzy
+#~| msgid "DMA"
+#~ msgid "MAC"
+#~ msgstr "DMA"
+
+#, fuzzy
+#~| msgid "Device"
+#~ msgid "Device Name"
+#~ msgstr "Naprava"
+
+#~ msgid "Update"
+#~ msgstr "Posodobi"
+
+#~ msgid "Back"
+#~ msgstr "Nazaj"

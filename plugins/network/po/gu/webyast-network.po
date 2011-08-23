@@ -1,0 +1,206 @@
+# Marathi message file for YaST2 (@memory@).
+# Copyright (C) 2007 SUSE Linux Products GmbH.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: webyast-network-ui 1.0.0\n"
+"Report-Msgid-Bugs-To: i18n@suse.de\n"
+"POT-Creation-Date: 2010-08-02 09:18+0200\n"
+"PO-Revision-Date: 2005-07-29 15:37+0530\n"
+"Last-Translator: i18n@suse.de\n"
+"Language-Team: Gujarati <i18n@suse.de>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n!=1);\n"
+
+#: app/controllers/network_controller.rb:89
+#: app/controllers/network_controller.rb:89
+#, fuzzy
+msgid "Manual"
+msgstr "મેન્યુઅલ ઢબ"
+
+#: app/controllers/network_controller.rb:89
+#: app/controllers/network_controller.rb:89
+#, fuzzy
+msgid "Automatic"
+msgstr "સ્વયંચાલિત ઢબ"
+
+#: app/controllers/network_controller.rb:163
+#: app/controllers/network_controller.rb:163
+msgid "Network settings have been written."
+msgstr ""
+
+#: app/views/network/index.html.erb:143 app/views/network/index.html.erb:147
+#: app/views/network/index.html.erb:151 app/views/network/index.html.erb:155
+#: app/views/network/index.html.erb:158 app/views/network/index.html.erb:162
+#: app/views/network/index.html.erb:166 app/views/network/index.html.erb:143
+#: app/views/network/index.html.erb:147 app/views/network/index.html.erb:151
+#: app/views/network/index.html.erb:155 app/views/network/index.html.erb:158
+#: app/views/network/index.html.erb:162 app/views/network/index.html.erb:166
+msgid "This field is required"
+msgstr ""
+
+#: app/views/network/index.html.erb:144 app/views/network/index.html.erb:152
+#: app/views/network/index.html.erb:163 app/views/network/index.html.erb:144
+#: app/views/network/index.html.erb:152 app/views/network/index.html.erb:163
+msgid "Enter a valid IP address"
+msgstr ""
+
+#: app/views/network/index.html.erb:148 app/views/network/index.html.erb:148
+msgid "Enter a valid subnet mask or prefix"
+msgstr ""
+
+#: app/views/network/index.html.erb:159 app/views/network/index.html.erb:167
+#: app/views/network/index.html.erb:159 app/views/network/index.html.erb:167
+msgid "Enter a valid domain name"
+msgstr ""
+
+#: app/views/network/index.html.erb:229 app/views/network/index.html.erb:229
+msgid "whitespace - invalid character."
+msgstr ""
+
+#: app/views/network/index.html.erb:231 app/views/network/index.html.erb:231
+#, fuzzy
+msgid " - can not start with a digit."
+msgstr "VM નું નામ આંકડાથી શરૂ થઇ શકે નહીં."
+
+#: app/views/network/index.html.erb:233 app/views/network/index.html.erb:233
+#, fuzzy
+msgid "periodic '-' is not allowed."
+msgstr "ફ્લશ વિકલ્પની મંજૂરી નથી "
+
+#: app/views/network/index.html.erb:235 app/views/network/index.html.erb:235
+msgid "can not end with (-) hyphen."
+msgstr ""
+
+#: app/views/network/index.html.erb:238 app/views/network/index.html.erb:238
+msgid "can not start with (-) hyphen."
+msgstr ""
+
+#: app/views/network/index.html.erb:240 app/views/network/index.html.erb:240
+msgid " - is invalid character for hostname."
+msgstr ""
+
+#: app/views/network/index.html.erb:283 app/views/network/index.html.erb:283
+#: shortcuts.yml:6
+msgid "Network"
+msgstr "નેટવર્ક"
+
+#: app/views/network/index.html.erb:293 app/views/network/index.html.erb:293
+msgid "General settings"
+msgstr ""
+
+#: app/views/network/index.html.erb:295 app/views/network/index.html.erb:295
+#, fuzzy
+msgid "Configuration mode"
+msgstr "કન્ફિગરેશન"
+
+#: app/views/network/index.html.erb:301 app/views/network/index.html.erb:301
+#, fuzzy
+msgid "IP Address"
+msgstr "પોતાનું સરનામું"
+
+#: app/views/network/index.html.erb:304 app/views/network/index.html.erb:304
+#, fuzzy
+msgid "IP address"
+msgstr "પોતાનું સરનામું"
+
+#: app/views/network/index.html.erb:309 app/views/network/index.html.erb:309
+#, fuzzy
+msgid "Subnet mask/Prefixlen"
+msgstr "ડાયલ પ્રિફિક્સ "
+
+#: app/views/network/index.html.erb:314 app/views/network/index.html.erb:314
+#, fuzzy
+msgid "Default route"
+msgstr "પ્રાથમિક માર્ગ"
+
+#: app/views/network/index.html.erb:321 app/views/network/index.html.erb:321
+msgid "DNS"
+msgstr ""
+
+#: app/views/network/index.html.erb:324 app/views/network/index.html.erb:324
+#, fuzzy
+msgid "Hostname"
+msgstr "હોસ્ટ નામો"
+
+#: app/views/network/index.html.erb:331 app/views/network/index.html.erb:331
+#, fuzzy
+msgid "Domain"
+msgstr "ડોમેઇન\n"
+
+#: app/views/network/index.html.erb:336 app/views/network/index.html.erb:336
+msgid "Change hostname by DHCP"
+msgstr ""
+
+#: app/views/network/index.html.erb:341 app/views/network/index.html.erb:341
+#, fuzzy
+msgid "Name servers"
+msgstr "નામ સર્વર"
+
+#: app/views/network/index.html.erb:346 app/views/network/index.html.erb:346
+msgid "Search domains"
+msgstr ""
+
+#: shortcuts.yml:7
+#, fuzzy
+msgid "Manage network devices"
+msgstr "નેટવર્ક ઉપકરણ પસંદ કરો."
+
+#~ msgid "Not configured"
+#~ msgstr "કન્ફિગર થયું નથી"
+
+#, fuzzy
+#~| msgid "No valid request file specified."
+#~ msgid "Hostname is required. It must be specified."
+#~ msgstr "કોઈ માન્ય રિક્વેસ્ટ ફાઈલ જણાવાઈ નથી."
+
+#~ msgid "Interface"
+#~ msgstr "ઇન્ટરફેસ"
+
+#, fuzzy
+#~| msgid "Select Script"
+#~ msgid "Select"
+#~ msgstr "સ્ક્રિપ્ટ પસંદ કરો"
+
+#, fuzzy
+#~| msgid "Do not start"
+#~ msgid "not set"
+#~ msgstr "શરૂ થાઓ નહીં"
+
+#~ msgid "dhcp"
+#~ msgstr "dhcp"
+
+#~ msgid "Save"
+#~ msgstr "સાચવો"
+
+#~ msgid "Cancel"
+#~ msgstr "રદ કરો "
+
+#~ msgid "Configuration"
+#~ msgstr "કન્ફિગરેશન"
+
+#~ msgid "Description"
+#~ msgstr "વર્ણન"
+
+#, fuzzy
+#~| msgid "DMA"
+#~ msgid "MAC"
+#~ msgstr " DMA "
+
+#, fuzzy
+#~| msgid "Device"
+#~ msgid "Device Name"
+#~ msgstr "ડિવાઈસ"
+
+#, fuzzy
+#~| msgid "Start-Up"
+#~ msgid "Startup"
+#~ msgstr "સ્ટાર્ટ-અપ"
+
+#~ msgid "Update"
+#~ msgstr "અદ્યતન"
+
+#~ msgid "Back"
+#~ msgstr "પાછળ"

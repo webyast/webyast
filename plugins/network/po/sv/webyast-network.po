@@ -1,0 +1,123 @@
+# Copyright (C) 2006 SuSE Linux Products GmbH, Nuernberg
+# This file is distributed under the same license as the package.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: yast_webclient_network\n"
+"POT-Creation-Date: 2010-04-13 13:36+0200\n"
+"PO-Revision-Date: 2010-04-20 09:47\n"
+"Last-Translator: Novell Language <language@novell.com>\n"
+"Language-Team: Novell Language <language@novell.com>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: app/controllers/network_controller.rb:64
+msgid "Not configured"
+msgstr "Inte konfigurerad"
+
+#: app/controllers/network_controller.rb:64
+msgid "Manual"
+msgstr "Manuellt"
+
+#: app/controllers/network_controller.rb:64
+msgid "Automatic"
+msgstr "Automatiskt"
+
+#: app/controllers/network_controller.rb:134
+msgid "Network settings have been written."
+msgstr "Nätverksinställningarna har skrivits."
+
+#: app/views/network/index.html.erb:118
+msgid "whitespace - invalid character."
+msgstr "blanksteg - ogiltigt tecken."
+
+#: app/views/network/index.html.erb:120
+msgid " - can not start with a digit."
+msgstr " - kan inte börja med en siffra."
+
+#: app/views/network/index.html.erb:122
+msgid "periodic '-' is not allowed."
+msgstr "tankstreck, \"-\", är inte tillåtna."
+
+#: app/views/network/index.html.erb:124
+msgid "can not end with (-) hyphen."
+msgstr "kan inte sluta med ett bindestreck (-)."
+
+#: app/views/network/index.html.erb:127
+msgid "can not start with (-) hyphen."
+msgstr "kan inte börja med ett bindestreck (-)."
+
+#: app/views/network/index.html.erb:129
+msgid " - is invalid character for hostname."
+msgstr " - är ett ogiltigt tecken för värdnamn."
+
+#: app/views/network/index.html.erb:154
+msgid "Invalid IP address format. The correct one is nnn.nnn.nnn.nnn for nnn between 0 and 255."
+msgstr "Ogiltigt format för IP-adress. Det korrekta formatet är nnn.nnn.nnn.nnn där nnn är mellan 0 och 255."
+
+#: app/views/network/index.html.erb:163
+msgid "Invalid Prefix format. The correct one /nn where nn is between 0-32 (CIDR format)."
+msgstr "Ogiltigt prefixformat. Det korrekta formatet är /nn där nn är mellan 0 och 32 (CIDR-format)."
+
+#: app/views/network/index.html.erb:169
+msgid "Invalid default route format. The correct one is nnn.nnn.nnn.nnn for nnn between 0 and 255."
+msgstr "Ogiltigt format för standardroute. Det korrekta formatet är nnn.nnn.nnn.nnn där nnn är mellan 0 och 255."
+
+#: app/views/network/index.html.erb:175
+msgid "Name servers are required. There must be at least one specified."
+msgstr "Det krävs namnservrar. Ange minst en namnserver."
+
+#: app/views/network/index.html.erb:181
+msgid "Hostname is required. It must be specified."
+msgstr "Det krävs ett värdnamn. Ange ett värdnamn."
+
+#: app/views/network/index.html.erb:187
+msgid "Domain is required. An empty domain is not supported."
+msgstr "Domän krävs. Tomma domäner fungerar inte."
+
+#: app/views/network/index.html.erb:210
+msgid "Network"
+msgstr "Nätverk"
+
+#: app/views/network/index.html.erb:221
+msgid "Interface"
+msgstr "Gränssnitt"
+
+#: app/views/network/index.html.erb:226
+msgid "Select"
+msgstr "Välj"
+
+#: app/views/network/index.html.erb:243
+msgid "Configuration mode"
+msgstr "Konfigurationsläge"
+
+#: app/views/network/index.html.erb:252
+msgid "IP address"
+msgstr "IP-adress"
+
+#: app/views/network/index.html.erb:256
+msgid "Subnet mask / Prefixlen"
+msgstr "Delnätsmask/prefixlen"
+
+#: app/views/network/index.html.erb:260
+msgid "Default route"
+msgstr "Standardroute"
+
+#: app/views/network/index.html.erb:269
+msgid "Hostname"
+msgstr "Värdnamn"
+
+#: app/views/network/index.html.erb:274
+msgid "Domain"
+msgstr "Domän"
+
+#: app/views/network/index.html.erb:278
+msgid "Name servers"
+msgstr "Namnservrar"
+
+#: app/views/network/index.html.erb:282
+msgid "Search domains"
+msgstr "Sök domäner"
+

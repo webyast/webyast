@@ -1,0 +1,158 @@
+# translation of yast_webclient_network.fi.po to suomi
+# Jyri Palokangas <jyri.palokangas@opensuse.org>, 2009.
+# Jyri Palokangas <jmp@opensuse.org>, 2010.
+msgid ""
+msgstr ""
+"Project-Id-Version: yast_webclient_network.fi\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2010-04-13 13:36+0200\n"
+"PO-Revision-Date: 2010-05-20 15:23+0300\n"
+"Last-Translator: Jyri Palokangas <jmp@opensuse.org>\n"
+"Language-Team: Finnish <opensuse-fi@opensuse.fi>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Lokalize 1.0\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+
+#: app/controllers/network_controller.rb:64
+msgid "Not configured"
+msgstr "Ei määritetty"
+
+#: app/controllers/network_controller.rb:64
+msgid "Manual"
+msgstr "Käsin"
+
+#: app/controllers/network_controller.rb:64
+#| msgid "Automatic Mode"
+msgid "Automatic"
+msgstr "Automaattinen"
+
+# %s is either BOOTP or DHCP
+#: app/controllers/network_controller.rb:134
+#| msgid "Settings have been written."
+msgid "Network settings have been written."
+msgstr "Verkkoasetukset tallennettiin"
+
+# ”virheellinen” merkki, no joo
+#: app/views/network/index.html.erb:118
+#| msgid "The search text contains invalid characters"
+msgid "whitespace - invalid character."
+msgstr "välilyönti - virheellinen merkki."
+
+#: app/views/network/index.html.erb:120
+#| msgid "The VM's name cannot start with a digit."
+msgid " - can not start with a digit."
+msgstr " - ei voi alkaa numerolla."
+
+#: app/views/network/index.html.erb:122
+#| msgid "The option 'flush' is not allowed"
+msgid "periodic '-' is not allowed."
+msgstr "toistuva '-' ei ole sallittu."
+
+#: app/views/network/index.html.erb:124
+msgid "can not end with (-) hyphen."
+msgstr "Ei voi loppua (-) tavuviivaan."
+
+#: app/views/network/index.html.erb:127
+msgid "can not start with (-) hyphen."
+msgstr "ei voi alkaa (-) tavuviivalla."
+
+#: app/views/network/index.html.erb:129
+msgid " - is invalid character for hostname."
+msgstr " - ei kelpaa merkiksi konenimessä."
+
+#: app/views/network/index.html.erb:154
+msgid "Invalid IP address format. The correct one is nnn.nnn.nnn.nnn for nnn between 0 and 255."
+msgstr "Virheellinen IP-osoitteen muoto. Oikea muoto on nnn.nnn.nnn.nnn jossa nnn on 0 ja 255 väliltä."
+
+#: app/views/network/index.html.erb:163
+#| msgid "Invalid Prefix. The correct one /nn where nn is between 0-32 (CIDR format)."
+msgid "Invalid Prefix format. The correct one /nn where nn is between 0-32 (CIDR format)."
+msgstr "Virheellinen etuliitteen muoto. Oikea muoto on /nn jossa nn on 0 ja 32 väliltä (CIDR muoto)."
+
+#: app/views/network/index.html.erb:169
+#| msgid "Invalid default route. The correct one is nnn.nnn.nnn.nnn for nnn between 0 and 255."
+msgid "Invalid default route format. The correct one is nnn.nnn.nnn.nnn for nnn between 0 and 255."
+msgstr "Virheellinen oletusreitin muoto. Oikea muoto on nnn.nnn.nnn.nnn jossa nnn on 0 ja 255 väliltä."
+
+#: app/views/network/index.html.erb:175
+#| msgid "Name servers is not valid. There must be at least one specified."
+msgid "Name servers are required. There must be at least one specified."
+msgstr "Nimipalvelin vaaditaan. Ainakin yksi pitää olla määritettynä."
+
+#: app/views/network/index.html.erb:181
+#| msgid "Hostname is not valid. It must be specified."
+msgid "Hostname is required. It must be specified."
+msgstr "Konenimi vaaditaan. Se täytyy määrittää."
+
+#: app/views/network/index.html.erb:187
+#| msgid "Domain is not valid. It is not supported empty domain."
+msgid "Domain is required. An empty domain is not supported."
+msgstr "Toimialue vaaditaan. Tyhjää toimialuetta ei tueta."
+
+#: app/views/network/index.html.erb:210
+msgid "Network"
+msgstr "Verkko"
+
+#: app/views/network/index.html.erb:221
+msgid "Interface"
+msgstr "Liitäntä"
+
+#: app/views/network/index.html.erb:226
+msgid "Select"
+msgstr "Valitse"
+
+#: app/views/network/index.html.erb:243
+msgid "Configuration mode"
+msgstr "Määritystila"
+
+#: app/views/network/index.html.erb:252
+msgid "IP address"
+msgstr "IP-osoite"
+
+#: app/views/network/index.html.erb:256
+msgid "Subnet mask / Prefixlen"
+msgstr "Aliverkonpeitto / Prefixlen"
+
+#: app/views/network/index.html.erb:260
+msgid "Default route"
+msgstr "Oletusreitti"
+
+#: app/views/network/index.html.erb:269
+msgid "Hostname"
+msgstr "Palvelinnimi"
+
+# as in Windows Authentication Domain
+#: app/views/network/index.html.erb:274
+msgid "Domain"
+msgstr "Toimialue"
+
+#: app/views/network/index.html.erb:278
+msgid "Name servers"
+msgstr "Nimipalvelimet"
+
+#: app/views/network/index.html.erb:282
+msgid "Search domains"
+msgstr "Etsi toimialueita"
+
+#~ msgid "No permissions for network module"
+#~ msgstr "Ei käyttöoikeuksia verkko-moduuliin"
+
+#~ msgid "not set"
+#~ msgstr "ei asetettu"
+
+#~ msgid "static"
+#~ msgstr "kiinteä"
+
+#~ msgid "dhcp"
+#~ msgstr "dhcp"
+
+#~ msgid "Prefixlen"
+#~ msgstr "Prefixlen"
+
+#~ msgid "DNS"
+#~ msgstr "DNS"
+
+#~ msgid "Routing"
+#~ msgstr "Reititys"

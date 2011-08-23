@@ -1,0 +1,176 @@
+# Copyright (C) 2007 SuSE Linux Products GmbH, Nuernberg
+# This file is distributed under the same license as the package.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: base\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2009-11-20 14:34+0100\n"
+"PO-Revision-Date: 2006-11-03 14:26\n"
+"Last-Translator: Novell Language <language@novell.com>\n"
+"Language-Team: Novell Language <language@novell.com>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: app/controllers/network_controller.rb:43
+msgid "No permissions for network module"
+msgstr ""
+
+#: app/controllers/network_controller.rb:66
+msgid "Not configured"
+msgstr "Akwenziwanga Lubumbeko "
+
+#: app/controllers/network_controller.rb:66
+#, fuzzy
+#| msgid "Manual Mode"
+msgid "Manual"
+msgstr "Imo Yokusebenza Yokwenza Ngesandla"
+
+#: app/controllers/network_controller.rb:66
+#, fuzzy
+#| msgid "Automatic Mode"
+msgid "Automatic"
+msgstr "Imo Yokusebenza Ezenzekelayo"
+
+#: app/controllers/network_controller.rb:105
+msgid "Network settings have been written."
+msgstr ""
+
+#: app/views/network/index.html.erb:88
+msgid "Invalid IP address format. The correct one is nnn.nnn.nnn.nnn for nnn between 0 and 255."
+msgstr ""
+
+#: app/views/network/index.html.erb:97
+msgid "Invalid Prefix format. The correct one /nn where nn is between 0-32 (CIDR format)."
+msgstr ""
+
+#: app/views/network/index.html.erb:103
+msgid "Invalid default route format. The correct one is nnn.nnn.nnn.nnn for nnn between 0 and 255."
+msgstr ""
+
+#: app/views/network/index.html.erb:109
+msgid "Name servers are required. There must be at least one specified."
+msgstr ""
+
+#: app/views/network/index.html.erb:115
+#, fuzzy
+#| msgid "No valid request file specified."
+msgid "Hostname is required. It must be specified."
+msgstr "Akukho fayili yokucela ixeliweyo isebenzisekayo."
+
+#: app/views/network/index.html.erb:121
+msgid "Domain is required. It is not supported empty domain."
+msgstr ""
+
+#: app/views/network/index.html.erb:131
+msgid "Network"
+msgstr "Umsebenzi wothungelwano"
+
+#: app/views/network/index.html.erb:140
+msgid "Interface"
+msgstr "Indawo"
+
+#: app/views/network/index.html.erb:145
+#, fuzzy
+#| msgid "Select Script"
+msgid "Select"
+msgstr "Khetha Iskripti"
+
+#: app/views/network/index.html.erb:166
+#, fuzzy
+#| msgid "Configuration"
+msgid "Configuration mode"
+msgstr "Ubumbeko"
+
+#: app/views/network/index.html.erb:170
+#, fuzzy
+#| msgid "Own Address"
+msgid "IP address"
+msgstr "Idilesi Yakho"
+
+#: app/views/network/index.html.erb:174
+msgid "Subnet mask / Prefixlen"
+msgstr ""
+
+#: app/views/network/index.html.erb:181
+#, fuzzy
+#| msgid "Host Names"
+msgid "Hostname"
+msgstr "Amagama Omamkeli"
+
+# as in Windows Authentication Domain
+#: app/views/network/index.html.erb:185
+#, fuzzy
+#| msgid "Domain\n"
+msgid "Domain"
+msgstr "Ummandla wolawulo\n"
+
+#: app/views/network/index.html.erb:189
+#, fuzzy
+#| msgid "Name Server"
+msgid "Name servers"
+msgstr "Igama Leseva"
+
+#: app/views/network/index.html.erb:193
+msgid "Search domains"
+msgstr ""
+
+#: app/views/network/index.html.erb:201
+#, fuzzy
+#| msgid "Default Route"
+msgid "Default route"
+msgstr "Indla eHlala ikhona"
+
+#, fuzzy
+#~| msgid "Do not start"
+#~ msgid "not set"
+#~ msgstr "Musa ukuQalisa"
+
+#~ msgid "dhcp"
+#~ msgstr "i-dhcp"
+
+#, fuzzy
+#~| msgid "Dial Prefix"
+#~ msgid "Prefixlen"
+#~ msgstr "Nxibelelanisa Isimaphambili"
+
+#~ msgid "Save"
+#~ msgstr "Gcina"
+
+# cancel button label
+#~ msgid "Cancel"
+#~ msgstr "Rhoxisa"
+
+#, fuzzy
+#~| msgid "Choose the network device."
+#~ msgid "Edit Network Device"
+#~ msgstr "Khetha isixhobo somsebenzi wothungelwano."
+
+#~ msgid "Configuration"
+#~ msgstr "Ubumbeko"
+
+#~ msgid "Description"
+#~ msgstr "Inkcazelo"
+
+#, fuzzy
+#~| msgid "DMA"
+#~ msgid "MAC"
+#~ msgstr "i-DMA"
+
+#, fuzzy
+#~| msgid "Device"
+#~ msgid "Device Name"
+#~ msgstr "Isixhobo"
+
+#, fuzzy
+#~| msgid "Start-Up"
+#~ msgid "Startup"
+#~ msgstr "Ukuqalisa"
+
+#~ msgid "Update"
+#~ msgstr "&Uhlaziyo"
+
+#~ msgid "Back"
+#~ msgstr "Emva"
