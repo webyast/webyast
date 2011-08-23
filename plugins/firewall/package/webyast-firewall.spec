@@ -64,6 +64,9 @@ rm -rf restdoc
 #remove generated doc
 rm -rf doc
 
+export RAILS_PARENT=%{webyast_ui_dir}
+env LANG=en rake makemo
+
 %check
 # run the testsuite
 %webyast_check
@@ -85,6 +88,12 @@ install -m 0644 %SOURCE1 $RPM_BUILD_ROOT/usr/share/PolicyKit/policy/
 mkdir -p $RPM_BUILD_ROOT/usr/share/YaST2/modules/YaPI/
 cp %{SOURCE2} $RPM_BUILD_ROOT/usr/share/YaST2/modules/YaPI/
 
+# remove .po files (no longer needed)
+rm -rf $RPM_BUILD_ROOT/%{plugin_dir}/po
+
+# search locale files
+%find_lang webyast-firewall
+
 %clean
 rm -rf $RPM_BUILD_ROOT
 
@@ -95,7 +104,7 @@ rm -rf $RPM_BUILD_ROOT
 /usr/sbin/grantwebyastrights --user root --action grant > /dev/null ||:
 /usr/sbin/grantwebyastrights --user %{webyast_user} --action grant > /dev/null ||:
 
-%files
+%files -f webyast-firewall.lang
 %defattr(-,root,root)
 %dir %{webyast_dir}
 %dir %{webyast_dir}/vendor
@@ -107,7 +116,7 @@ rm -rf $RPM_BUILD_ROOT
 %dir /usr/share/YaST2/modules/YaPI/
 %dir /usr/share/PolicyKit
 %dir /usr/share/PolicyKit/policy
-
+%{plugin_dir}/locale
 %{plugin_dir}/README
 %{plugin_dir}/Rakefile
 %{plugin_dir}/init.rb

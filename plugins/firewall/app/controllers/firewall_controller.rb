@@ -25,6 +25,8 @@ require 'firewall'
 class FirewallController < ApplicationController
   before_filter :login_required
   
+  init_gettext "webyast-firewall"
+
   CGI_PREFIX="firewall"
   layout 'main'
   
