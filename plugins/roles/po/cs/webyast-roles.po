@@ -1,0 +1,134 @@
+# Vojtěch Zeisek <Vojtech.Zeisek@opensuse.org>, 2010.
+# Jiri Srain <jsrain@suse.cz>, 2011.
+msgid ""
+msgstr ""
+"Project-Id-Version: @PACKAGE@\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2011-05-30 16:17+0200\n"
+"PO-Revision-Date: 2011-06-02 16:53+0200\n"
+"Last-Translator: Jiri Srain <jsrain@suse.cz>\n"
+"Language-Team: American English <kde-i18n-doc@kde.org>\n"
+"Language: cs\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Lokalize 1.0\n"
+"Plural-Forms: nplurals=3; plural=(n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2;\n"
+
+#: app/controllers/roles_controller.rb:91
+#: app/controllers/roles_controller.rb:91
+msgid "Role name is already used or invalid. Allowed is combination of a-z, A-Z, numbers, space, dash and underscore only."
+msgstr ""
+
+#: app/controllers/roles_controller.rb:109
+#: app/controllers/roles_controller.rb:109
+#| msgid "User <i>%s</i> was successfully removed."
+msgid "Role <i>%s</i> was successfully removed."
+msgstr "Role <i>%s</i> byla úspěšně odebrána."
+
+#: app/controllers/roles_controller.rb:111
+#: app/controllers/roles_controller.rb:111
+#| msgid "Error: Could not remove user <i>%s</i>."
+msgid "Error: Could not remove role <i>%s</i>."
+msgstr "Chyba: Nelze odstranit roli <i>%s</i>."
+
+#: app/controllers/roles_controller.rb:124
+#: app/controllers/roles_controller.rb:124
+#| msgid "Can't find %s."
+msgid "Cannot find roles"
+msgstr "Nelze nalézt role"
+
+#: app/views/roles/index.rhtml:3 app/views/roles/index.rhtml:9
+#: app/views/roles/index.rhtml:3 app/views/roles/index.rhtml:9 shortcuts.yml:6
+msgid "Roles"
+msgstr "Role"
+
+#: app/views/roles/index.rhtml:27 app/views/roles/index.rhtml:27
+#| msgid "Users assigned to role"
+msgid "In order to assign the user to roles,"
+msgstr "K přiřazení uživateků rolím,"
+
+#: app/views/roles/index.rhtml:28 app/views/roles/index.rhtml:28
+msgid "Drag and Drop the user labels into Role containers"
+msgstr "přetáhněte uživatele do kontejneru odpovídajícímu vybrané roli"
+
+#: app/views/roles/index.rhtml:29 app/views/roles/index.rhtml:29
+#| msgid "Do not show me this again"
+msgid "Don't show this again"
+msgstr "Nezobrazovat tuto zprávu znovu."
+
+#: app/views/roles/index.rhtml:40 app/views/roles/index.rhtml:40
+#| msgid "Create"
+msgid "Create Role"
+msgstr "Vytvořit roli"
+
+#: app/views/roles/index.rhtml:45 app/views/roles/index.rhtml:45
+msgid "Assign Users"
+msgstr "Přiřadit uživatele"
+
+#: app/views/roles/index.rhtml:55 app/views/roles/index.rhtml:55
+#| msgid "Users assigned to role"
+msgid "User already assigned"
+msgstr "Uživatel již byl přiřazen"
+
+#: app/views/roles/index.rhtml:106 app/views/roles/index.rhtml:106
+#| msgid "User Permissions"
+msgid "Assign Permissions"
+msgstr "Přiradit oprávnění"
+
+#: app/views/roles/index.rhtml:109 app/views/roles/index.rhtml:109
+msgid "collapse all"
+msgstr ""
+
+# 50168 AttribValues/delnotify
+#: app/views/roles/index.rhtml:172 app/views/roles/index.rhtml:172
+#| msgid "The filename is required."
+msgid "This field is required"
+msgstr "Toto pole je vyžadováno"
+
+#: app/views/roles/index.rhtml:172 app/views/roles/index.rhtml:172
+msgid "Allowed is combination of a-z, A-Z, numbers, space, dash and underscore only."
+msgstr "Povolena je pouze kombinace a-z, A-Z, čísel, mezer, pomlček a podtržítek"
+
+#: app/views/roles/index.rhtml:238 app/views/roles/index.rhtml:238
+#| msgid "Please wait..."
+msgid "Please wait"
+msgstr "Čekejte prosím"
+
+#: shortcuts.yml:7
+msgid "Set permissions in roles and assign users to roles"
+msgstr "Nastavit oprávnění v rolích a přidat uživatelům role"
+
+#, fuzzy
+#~| msgid "Selected Resource"
+#~ msgid "Selected Users"
+#~ msgstr "Zvolený zdroj"
+
+#, fuzzy
+#~| msgid "Available Updates"
+#~ msgid "Available Users"
+#~ msgstr "Dostupné aktualizace"
+
+#~ msgid "Invalid role name"
+#~ msgstr "Chybné jméno role."
+
+#~ msgid "Permissions contained in role"
+#~ msgstr "Oprávnění obsažená v roli"
+
+#~ msgid "Permissions granted by role"
+#~ msgstr "Oprávnění daná rolí"
+
+#~ msgid "Available permissions"
+#~ msgstr "Dostupná oprávnění"
+
+#~ msgid "Description of permissions"
+#~ msgstr "Popis oprávnění"
+
+#~ msgid ")}-description"
+#~ msgstr ")}-popis"
+
+#~ msgid "Remaining users"
+#~ msgstr "Zbývající uživatelé"
+
+#~ msgid "Save"
+#~ msgstr "Uložit"

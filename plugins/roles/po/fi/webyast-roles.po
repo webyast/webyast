@@ -1,0 +1,45 @@
+# Jyri Palokangas <jmp@opensuse.org>, 2010.
+msgid ""
+msgstr ""
+"Project-Id-Version: @PACKAGE@\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2010-04-13 13:36+0200\n"
+"PO-Revision-Date: 2010-05-04 15:15+0300\n"
+"Last-Translator: Jyri Palokangas <jmp@opensuse.org>\n"
+"Language-Team: TRANSLATIONS <kde-i18n-doc@kde.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Lokalize 1.0\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+
+#: app/views/roles/_role_edit.erb:31
+#| msgid "Permissions denied"
+msgid "Permissions granted by role"
+msgstr "Rooli myönsi oikeudet"
+
+#: app/views/roles/_role_edit.erb:44
+#| msgid "Available Processors"
+msgid "Available permissions"
+msgstr "Käytettävissä olevat oikeudet"
+
+#: app/views/roles/_role_edit.erb:56
+#| msgid "Description: "
+msgid "Description of permissions"
+msgstr "Oikeuksien kuvaus"
+
+#: app/views/roles/_role_edit.erb:58
+#| msgid "description"
+msgid ")}-description"
+msgstr ")}-kuvaus"
+
+#: app/views/roles/_role_edit.erb:64
+msgid "Save"
+msgstr "Tallenna"
+
+#: app/views/roles/index.rhtml:12
+#| msgid "Role"
+msgid "Roles"
+msgstr "Roolit"
+
+

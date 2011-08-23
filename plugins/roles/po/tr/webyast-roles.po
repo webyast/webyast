@@ -1,0 +1,51 @@
+# @TITLE@
+# Copyright (C) 2006, SUSE Linux GmbH, Nuremberg
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+# This file is distributed under the same license as @PACKAGE@ package. FIRST
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: @PACKAGE@\n"
+"Report-Msgid-Bugs-To: translation@suse.de\n"
+"POT-Creation-Date: 2010-04-13 13:36+0200\n"
+"PO-Revision-Date: 2001-10-18 10:13+0200\n"
+"Last-Translator: Görkem Çetin <gorkem@gelecek.com.tr>\n"
+"Language-Team: turkish <i18n@suse.de>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+
+#: app/views/roles/_role_edit.erb:31
+#, fuzzy
+#| msgid "Permission denied\n"
+msgid "Permissions granted by role"
+msgstr "İzin verilmedi\n"
+
+# include/ui/wizard_hw.ycp:48
+#: app/views/roles/_role_edit.erb:44
+#, fuzzy
+#| msgid "Available space"
+msgid "Available permissions"
+msgstr "Kullanılabilir alan:"
+
+#: app/views/roles/_role_edit.erb:56
+#, fuzzy
+#| msgid "Description: "
+msgid "Description of permissions"
+msgstr "Tanım: "
+
+#: app/views/roles/_role_edit.erb:58
+#, fuzzy
+#| msgid "Description"
+msgid ")}-description"
+msgstr "Tanım"
+
+#: app/views/roles/_role_edit.erb:64
+msgid "Save"
+msgstr ""
+
+#: app/views/roles/index.rhtml:12
+msgid "Roles"
+msgstr ""

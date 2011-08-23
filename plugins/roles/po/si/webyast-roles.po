@@ -1,0 +1,39 @@
+# Sinhala message file for YaST2 (@memory@).
+# Copyright (C) 2007 SUSE Linux Products GmbH.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: YaST (@memory@)\n"
+"Report-Msgid-Bugs-To: i18n@suse.de\n"
+"POT-Creation-Date: 2010-04-13 13:36+0200\n"
+"PO-Revision-Date: 2005-07-29 15:37+0530\n"
+"Last-Translator: i18n@suse.de\n"
+"Language-Team: Sinhala <i18n@suse.de>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n!=1);\n"
+
+#: app/views/roles/_role_edit.erb:31
+msgid "Permissions granted by role"
+msgstr ""
+
+#: app/views/roles/_role_edit.erb:44
+msgid "Available permissions"
+msgstr ""
+
+#: app/views/roles/_role_edit.erb:56
+msgid "Description of permissions"
+msgstr ""
+
+#: app/views/roles/_role_edit.erb:58
+msgid ")}-description"
+msgstr ""
+
+#: app/views/roles/_role_edit.erb:64
+msgid "Save"
+msgstr ""
+
+#: app/views/roles/index.rhtml:12
+msgid "Roles"
+msgstr ""

@@ -1,0 +1,39 @@
+# translation of yast_webclient_roles.km.po to Khmer
+# Khoem Sokhem <khoemsokhem@khmeros.info>, 2010.
+msgid ""
+msgstr ""
+"Project-Id-Version: yast_webclient_roles.km\n"
+"Report-Msgid-Bugs-To: translation@suse.de\n"
+"POT-Creation-Date: 2010-04-13 13:36+0200\n"
+"PO-Revision-Date: 2010-04-20 09:04+0700\n"
+"Last-Translator: Khoem Sokhem <khoemsokhem@khmeros.info>\n"
+"Language-Team: Khmer <support@khmeros.info>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"X-Generator: KBabel 1.11.4\n"
+
+#: app/views/roles/_role_edit.erb:31
+msgid "Permissions granted by role"
+msgstr "សិទ្ធិ​បានផ្ដល់​ដោយ​តួនាទី"
+
+#: app/views/roles/_role_edit.erb:44
+msgid "Available permissions"
+msgstr "សិទ្ធិ​ដែលមាន"
+
+#: app/views/roles/_role_edit.erb:56
+msgid "Description of permissions"
+msgstr "សេចក្ដី​ពិពណ៌នា​សិទ្ធិ"
+
+#: app/views/roles/_role_edit.erb:58
+msgid ")}-description"
+msgstr ")}-សេចក្ដី​ពិពណ៌នា"
+
+#: app/views/roles/_role_edit.erb:64
+msgid "Save"
+msgstr "រក្សា​ទុក"
+
+#: app/views/roles/index.rhtml:12
+msgid "Roles"
+msgstr "តួនាទី"

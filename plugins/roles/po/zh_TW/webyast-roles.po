@@ -1,0 +1,76 @@
+# Copyright (C) 2006 SuSE Linux Products GmbH, Nuernberg
+# This file is distributed under the same license as the package.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: webyast-roles-ui\n"
+"POT-Creation-Date: 2010-08-23 14:39+0200\n"
+"PO-Revision-Date: 2010-08-26 09:34\n"
+"Last-Translator: Novell Language <language@novell.com>\n"
+"Language-Team: Novell Language <language@novell.com>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+
+#: app/controllers/roles_controller.rb:85 ./app/controllers/roles_controller.rb:85
+msgid "Role name is already used or invalid. Allowed is combination of a-z, A-Z, numbers, space, dash and underscore only."
+msgstr "角色名稱已被使用或無效。只允許使用 a-z、A-Z、數字、空格、破折號和底線的組合。"
+
+#: app/controllers/roles_controller.rb:103 ./app/controllers/roles_controller.rb:103
+msgid "Role <i>%s</i> was successfully removed."
+msgstr "角色 <i>%s</i> 已成功移除。"
+
+#: app/controllers/roles_controller.rb:105 ./app/controllers/roles_controller.rb:105
+msgid "Error: Could not remove role <i>%s</i>."
+msgstr "錯誤：無法移除角色 <i>%s</i>。"
+
+#: app/controllers/roles_controller.rb:118 ./app/controllers/roles_controller.rb:118
+msgid "Cannot find roles"
+msgstr "找不到角色"
+
+#: app/views/roles/index.rhtml:61 app/views/roles/index.rhtml:217 app/views/roles/index.rhtml:223
+#: ./app/views/roles/index.rhtml:61 ./app/views/roles/index.rhtml:217 ./app/views/roles/index.rhtml:223
+msgid "Assign Users"
+msgstr "指定使用者"
+
+#: app/views/roles/index.rhtml:62 ./app/views/roles/index.rhtml:62
+msgid "Selected Users"
+msgstr "選定使用者"
+
+#: app/views/roles/index.rhtml:63 ./app/views/roles/index.rhtml:63
+msgid "Available Users"
+msgstr "可用使用者"
+
+#: app/views/roles/index.rhtml:64 ./app/views/roles/index.rhtml:64
+msgid "Click user names to assign/remove users"
+msgstr "按一下使用者名稱以指定/移除使用者"
+
+#: app/views/roles/index.rhtml:121 ./app/views/roles/index.rhtml:121
+msgid "Please wait"
+msgstr "請稍候"
+
+#: app/views/roles/index.rhtml:159 ./app/views/roles/index.rhtml:159 ./shortcuts.yml:6
+msgid "Roles"
+msgstr "角色"
+
+#: app/views/roles/index.rhtml:163 ./app/views/roles/index.rhtml:163
+msgid "Create Role"
+msgstr "建立角色"
+
+#: app/views/roles/index.rhtml:175 ./app/views/roles/index.rhtml:175
+msgid "Assign Permissions"
+msgstr "指定許可權"
+
+#: app/views/roles/index.rhtml:178 ./app/views/roles/index.rhtml:178
+msgid "collapse all"
+msgstr "全部折疊"
+
+#: app/views/roles/index.rhtml:224 ./app/views/roles/index.rhtml:224
+msgid "Delete"
+msgstr "刪除"
+
+#: ./shortcuts.yml:7
+msgid "Set permissions in roles and assign users to roles"
+msgstr "設定角色的許可權並為其指定使用者"
+

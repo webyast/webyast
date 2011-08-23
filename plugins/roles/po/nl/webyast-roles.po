@@ -1,0 +1,39 @@
+# Copyright (C) 2006 SuSE Linux Products GmbH, Nuernberg
+# This file is distributed under the same license as the package.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: yast_webclient_roles\n"
+"POT-Creation-Date: 2010-03-11 15:45+0100\n"
+"PO-Revision-Date: 2010-03-25 08:04\n"
+"Last-Translator: Novell Language <language@novell.com>\n"
+"Language-Team: Novell Language <language@novell.com>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: app/views/roles/_role_edit.erb:31
+msgid "Permissions granted by role"
+msgstr "Machtiging toegestaan per rol"
+
+#: app/views/roles/_role_edit.erb:44
+msgid "Available permissions"
+msgstr "Beschikbare machtigingen"
+
+#: app/views/roles/_role_edit.erb:56
+msgid "Description of permissions"
+msgstr "Beschrijving van machtigingen"
+
+#: app/views/roles/_role_edit.erb:58
+msgid ")}-description"
+msgstr ")}-beschrijving"
+
+#: app/views/roles/_role_edit.erb:64
+msgid "Save"
+msgstr "Opslaan"
+
+#: app/views/roles/index.rhtml:12
+msgid "Roles"
+msgstr "Rollen"
+

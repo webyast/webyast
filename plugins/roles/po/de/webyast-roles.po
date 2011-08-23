@@ -1,0 +1,101 @@
+# Copyright (C) 2011 SuSE Linux Products GmbH, Nuernberg
+# This file is distributed under the same license as the package.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: webyast-roles-ui\n"
+"POT-Creation-Date: 2011-05-30 16:17+0200\n"
+"PO-Revision-Date: 2011-05-31 11:06+0200\n"
+"Last-Translator: Karl Eichwalder <ke@suse.de>\n"
+"Language-Team: German <i18n@suse.de>\n"
+"Language: German\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: app/controllers/roles_controller.rb:91
+#: app/controllers/roles_controller.rb:91
+msgid "Role name is already used or invalid. Allowed is combination of a-z, A-Z, numbers, space, dash and underscore only."
+msgstr "Der Rollenname wird bereits verwendet oder ist ungültig. Zulässig sind nur Kombinationen aus a-z, A-Z, Nummern, Leerzeichen, Bindestrichen und Unterstrichen."
+
+#: app/controllers/roles_controller.rb:109
+#: app/controllers/roles_controller.rb:109
+msgid "Role <i>%s</i> was successfully removed."
+msgstr "Rolle <i>%s</i> wurde entfernt."
+
+#: app/controllers/roles_controller.rb:111
+#: app/controllers/roles_controller.rb:111
+msgid "Error: Could not remove role <i>%s</i>."
+msgstr "Fehler: Rolle <i>%s</i> konnte nicht entfernt werden."
+
+#: app/controllers/roles_controller.rb:124
+#: app/controllers/roles_controller.rb:124
+msgid "Cannot find roles"
+msgstr "Rollen nicht gefunden"
+
+#: app/views/roles/index.rhtml:3 app/views/roles/index.rhtml:9
+#: app/views/roles/index.rhtml:3 app/views/roles/index.rhtml:9 shortcuts.yml:6
+msgid "Roles"
+msgstr "Rollen"
+
+#: app/views/roles/index.rhtml:27 app/views/roles/index.rhtml:27
+msgid "In order to assign the user to roles,"
+msgstr "Um Benutzern Rollen zuzuweisen,"
+
+#: app/views/roles/index.rhtml:28 app/views/roles/index.rhtml:28
+msgid "Drag and Drop the user labels into Role containers"
+msgstr "Ziehen Sie die Benutzerbezeichnungen auf die Rollenbehältnisse"
+
+#: app/views/roles/index.rhtml:29 app/views/roles/index.rhtml:29
+msgid "Don't show this again"
+msgstr "Dies nicht wieder zeigen"
+
+#: app/views/roles/index.rhtml:40 app/views/roles/index.rhtml:40
+msgid "Create Role"
+msgstr "Rolle erstellen"
+
+#: app/views/roles/index.rhtml:45 app/views/roles/index.rhtml:45
+msgid "Assign Users"
+msgstr "Benutzer zuweisen"
+
+#: app/views/roles/index.rhtml:55 app/views/roles/index.rhtml:55
+msgid "User already assigned"
+msgstr "Benutzer ist bereits zugewiesen"
+
+#: app/views/roles/index.rhtml:106 app/views/roles/index.rhtml:106
+msgid "Assign Permissions"
+msgstr "Berechtigungen zuweisen"
+
+#: app/views/roles/index.rhtml:109 app/views/roles/index.rhtml:109
+msgid "collapse all"
+msgstr "Alle minimieren"
+
+# 50168 AttribValues/delnotify
+#: app/views/roles/index.rhtml:172 app/views/roles/index.rhtml:172
+msgid "This field is required"
+msgstr "Dieses Feld ist erforderlich."
+
+#: app/views/roles/index.rhtml:172 app/views/roles/index.rhtml:172
+msgid "Allowed is combination of a-z, A-Z, numbers, space, dash and underscore only."
+msgstr "Zulässig sind nur Kombinationen aus a-z, A-Z, Nummern, Leerzeichen, Bindestrichen und Unterstrichen."
+
+#: app/views/roles/index.rhtml:238 app/views/roles/index.rhtml:238
+msgid "Please wait"
+msgstr "Bitte warten"
+
+#: shortcuts.yml:7
+msgid "Set permissions in roles and assign users to roles"
+msgstr "Berechtigungen in Rollen festlegen und Benutzern Rollen zuweisen"
+
+#~ msgid "Selected Users"
+#~ msgstr "Ausgewählte Benutzer"
+
+#~ msgid "Available Users"
+#~ msgstr "Verfügbare Benutzer"
+
+#~ msgid "Click user names to assign/remove users"
+#~ msgstr "Zum Zuweisen/Entfernen von Benutzern auf Benutzernamen klicken"
+
+#~ msgid "Delete"
+#~ msgstr "Löschen"

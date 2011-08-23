@@ -1,0 +1,80 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: webyast-roles-ui 1.0.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2010-08-02 09:18+0200\n"
+"PO-Revision-Date: 2005-07-29 15:37+0530\n"
+"Last-Translator: Prasanth Kurian <prasanth.kurian@agreeya.com>\n"
+"Language-Team: Hindi <i18n@suse.de>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"\n"
+"\n"
+"\n"
+"Plural-Forms: nplurals=2; plural=(n!=1);\n"
+"\n"
+
+#: app/controllers/roles_controller.rb:97
+#: app/controllers/roles_controller.rb:97
+msgid "Cannot find roles"
+msgstr ""
+
+#: app/views/roles/index.rhtml:61 app/views/roles/index.rhtml:207
+#: app/views/roles/index.rhtml:213 app/views/roles/index.rhtml:61
+#: app/views/roles/index.rhtml:207 app/views/roles/index.rhtml:213
+msgid "Assign Users"
+msgstr ""
+
+#: app/views/roles/index.rhtml:62 app/views/roles/index.rhtml:62
+msgid "Selected Users"
+msgstr ""
+
+#: app/views/roles/index.rhtml:63 app/views/roles/index.rhtml:63
+#, fuzzy
+msgid "Available Users"
+msgstr " उपलब्ध प्रोफाइलें "
+
+#: app/views/roles/index.rhtml:64 app/views/roles/index.rhtml:64
+msgid "Click user names to assign/remove users"
+msgstr ""
+
+#: app/views/roles/index.rhtml:149 app/views/roles/index.rhtml:149
+#: shortcuts.yml:6
+msgid "Roles"
+msgstr ""
+
+#: app/views/roles/index.rhtml:153 app/views/roles/index.rhtml:153
+msgid "Create Role"
+msgstr ""
+
+#: app/views/roles/index.rhtml:165 app/views/roles/index.rhtml:165
+#, fuzzy
+msgid "Assign Permissions"
+msgstr " उपलब्ध प्रोफाइलें "
+
+#: app/views/roles/index.rhtml:168 app/views/roles/index.rhtml:168
+msgid "collapse all"
+msgstr ""
+
+#: shortcuts.yml:7
+msgid "Set permissions in roles and assign users to roles"
+msgstr ""
+
+#, fuzzy
+#~| msgid "Permissions denied"
+#~ msgid "Permissions granted by role"
+#~ msgstr "अनुमति अस्वीकृत"
+
+#, fuzzy
+#~| msgid "Description: "
+#~ msgid "Description of permissions"
+#~ msgstr "विवरण:"
+
+#, fuzzy
+#~| msgid "Description"
+#~ msgid ")}-description"
+#~ msgstr "विवरण"
+
+#~ msgid "Save"
+#~ msgstr " रक्षित करें "

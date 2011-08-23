@@ -55,6 +55,8 @@ needed at runtime.
 %setup -q -n www
 
 %build
+export RAILS_PARENT=%{webyast_dir}
+env LANG=en rake makemo
 
 %check
 # run the testsuite
@@ -72,6 +74,13 @@ rm -f $RPM_BUILD_ROOT%{plugin_dir}/COPYING
 mkdir -p $RPM_BUILD_ROOT%{webyast_vardir}/roles
 cp %{SOURCE1} %{SOURCE2} $RPM_BUILD_ROOT%{webyast_vardir}/roles
 
+# remove .po files (no longer needed)
+rm -rf $RPM_BUILD_ROOT/%{plugin_dir}/po
+
+# search locale files
+%find_lang webyast-roles
+
+
 %clean
 rm -rf $RPM_BUILD_ROOT
 
@@ -83,7 +92,7 @@ rm -rf $RPM_BUILD_ROOT
 # XXX not nice to get webyast all permissions, but now not better solution
 /usr/sbin/grantwebyastrights --user %{webyast_user} --action grant > /dev/null
 
-%files 
+%files -f webyast-roles.lang
 %defattr(-,root,root)
 %dir %{webyast_dir}
 %dir %{webyast_dir}/vendor
@@ -91,6 +100,7 @@ rm -rf $RPM_BUILD_ROOT
 %dir %{plugin_dir}
 %dir %{plugin_dir}/doc
 
+%{plugin_dir}/locale
 %{plugin_dir}/README
 %{plugin_dir}/shortcuts.yml
 %{plugin_dir}/Rakefile

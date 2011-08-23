@@ -1,0 +1,76 @@
+# Copyright (C) 2006 SuSE Linux Products GmbH, Nuernberg
+# This file is distributed under the same license as the package.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: webyast-roles-ui\n"
+"POT-Creation-Date: 2010-08-23 14:39+0200\n"
+"PO-Revision-Date: 2010-08-26 09:27\n"
+"Last-Translator: Novell Language <language@novell.com>\n"
+"Language-Team: Novell Language <language@novell.com>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: app/controllers/roles_controller.rb:85 ./app/controllers/roles_controller.rb:85
+msgid "Role name is already used or invalid. Allowed is combination of a-z, A-Z, numbers, space, dash and underscore only."
+msgstr "Il nome del ruolo è già in uso o non è valido. Le combinazioni consentite sono composte solo da lettere a-z, A-Z, numeri, spazio, trattino e trattino basso."
+
+#: app/controllers/roles_controller.rb:103 ./app/controllers/roles_controller.rb:103
+msgid "Role <i>%s</i> was successfully removed."
+msgstr "Il ruolo <i>%s</i> è stato rimosso correttamente."
+
+#: app/controllers/roles_controller.rb:105 ./app/controllers/roles_controller.rb:105
+msgid "Error: Could not remove role <i>%s</i>."
+msgstr "Errore: impossibile rimuovere il ruolo <i>%s</i>."
+
+#: app/controllers/roles_controller.rb:118 ./app/controllers/roles_controller.rb:118
+msgid "Cannot find roles"
+msgstr "Impossibile trovare i ruoli"
+
+#: app/views/roles/index.rhtml:61 app/views/roles/index.rhtml:217 app/views/roles/index.rhtml:223
+#: ./app/views/roles/index.rhtml:61 ./app/views/roles/index.rhtml:217 ./app/views/roles/index.rhtml:223
+msgid "Assign Users"
+msgstr "Assegna utenti"
+
+#: app/views/roles/index.rhtml:62 ./app/views/roles/index.rhtml:62
+msgid "Selected Users"
+msgstr "Utenti selezionati"
+
+#: app/views/roles/index.rhtml:63 ./app/views/roles/index.rhtml:63
+msgid "Available Users"
+msgstr "Utenti disponibili"
+
+#: app/views/roles/index.rhtml:64 ./app/views/roles/index.rhtml:64
+msgid "Click user names to assign/remove users"
+msgstr "Per assegnare/rimuovere utenti, fare clic sui nomi utenti"
+
+#: app/views/roles/index.rhtml:121 ./app/views/roles/index.rhtml:121
+msgid "Please wait"
+msgstr "Attendere"
+
+#: app/views/roles/index.rhtml:159 ./app/views/roles/index.rhtml:159 ./shortcuts.yml:6
+msgid "Roles"
+msgstr "Ruoli"
+
+#: app/views/roles/index.rhtml:163 ./app/views/roles/index.rhtml:163
+msgid "Create Role"
+msgstr "Crea ruolo"
+
+#: app/views/roles/index.rhtml:175 ./app/views/roles/index.rhtml:175
+msgid "Assign Permissions"
+msgstr "Assegna autorizzazioni"
+
+#: app/views/roles/index.rhtml:178 ./app/views/roles/index.rhtml:178
+msgid "collapse all"
+msgstr "comprimi tutto"
+
+#: app/views/roles/index.rhtml:224 ./app/views/roles/index.rhtml:224
+msgid "Delete"
+msgstr "Cancella"
+
+#: ./shortcuts.yml:7
+msgid "Set permissions in roles and assign users to roles"
+msgstr "Imposta le autorizzazioni dei ruoli e assegna utenti ai ruoli"
+
