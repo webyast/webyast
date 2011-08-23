@@ -84,6 +84,9 @@ needed at runtime.
 #do not package developer doc
 rm -rf doc
 
+export RAILS_PARENT=%{webyast_dir}
+env LANG=en rake makemo
+
 %check
 # run the testsuite
 #
@@ -104,6 +107,9 @@ rm -f $RPM_BUILD_ROOT%{plugin_dir}/COPYING
 
 # remove .po files (no longer needed)
 rm -rf $RPM_BUILD_ROOT/%{plugin_dir}/po
+
+# search locale files
+%find_lang webyast-software
 
 # Policies
 mkdir -p $RPM_BUILD_ROOT/usr/share/PolicyKit/policy
@@ -140,7 +146,7 @@ polkit-auth --user %{webyast_user} --grant org.freedesktop.packagekit.system-sou
 polkit-auth --user %{webyast_user} --grant org.freedesktop.packagekit.system-update >& /dev/null || true
 polkit-auth --user %{webyast_user} --grant org.freedesktop.packagekit.package-eula-accept >& /dev/null || true
 
-%files
+%files -f webyast-software.lang
 %defattr(-,root,root)
 %dir %{webyast_dir}
 %dir %{webyast_dir}/vendor
@@ -156,6 +162,7 @@ polkit-auth --user %{webyast_user} --grant org.freedesktop.packagekit.package-eu
 %{plugin_dir}/app
 %{plugin_dir}/lib
 %{plugin_dir}/config
+%{plugin_dir}/locale
 %{plugin_dir}/shortcuts.yml
 %attr(644,root,root) %config /usr/share/PolicyKit/policy/org.opensuse.yast.system.patches.policy
 %attr(644,root,root) %config /usr/share/PolicyKit/policy/org.opensuse.yast.system.packages.policy

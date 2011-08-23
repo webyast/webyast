@@ -1,0 +1,447 @@
+# Copyright (C) 2006 SuSE Linux Products GmbH, Nuernberg
+# This file is distributed under the same license as the package.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: webyast-software-ui\n"
+"POT-Creation-Date: 2010-08-18 10:19+0200\n"
+"PO-Revision-Date: 2010-08-26 09:28\n"
+"Last-Translator: Novell Language <language@novell.com>\n"
+"Language-Team: Novell Language <language@novell.com>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+
+#: app/helpers/repositories_helper.rb:25 ./app/helpers/repositories_helper.rb:25
+msgid "Highest"
+msgstr "가장 높음"
+
+#: app/helpers/repositories_helper.rb:26 ./app/helpers/repositories_helper.rb:26
+msgid "Higher"
+msgstr "높음"
+
+#: app/helpers/repositories_helper.rb:27 ./app/helpers/repositories_helper.rb:27
+msgid "Default"
+msgstr "기본값"
+
+#: app/helpers/repositories_helper.rb:28 ./app/helpers/repositories_helper.rb:28
+msgid "Low"
+msgstr "낮음"
+
+#: app/helpers/repositories_helper.rb:29 ./app/helpers/repositories_helper.rb:29
+msgid "Lowest"
+msgstr "가장 낮음"
+
+#: app/helpers/repositories_helper.rb:35 ./app/helpers/repositories_helper.rb:35
+msgid "Highest priority"
+msgstr "가장 높은 우선순위"
+
+#: app/helpers/repositories_helper.rb:36 ./app/helpers/repositories_helper.rb:36
+msgid "Higher priority"
+msgstr "높은 우선순위"
+
+#: app/helpers/repositories_helper.rb:38 ./app/helpers/repositories_helper.rb:38
+msgid "Low priority"
+msgstr "낮은 우선순위"
+
+#: app/helpers/repositories_helper.rb:39 ./app/helpers/repositories_helper.rb:39
+msgid "Lowest priority"
+msgstr "가장 낮은 우선순위"
+
+#: app/helpers/repositories_helper.rb:44 ./app/helpers/repositories_helper.rb:44
+msgid "Custom priority"
+msgstr "사용자 지정 우선순위"
+
+#: app/helpers/repositories_helper.rb:49 ./app/helpers/repositories_helper.rb:49
+msgid "Custom"
+msgstr "사용자 지정"
+
+#: app/helpers/repositories_helper.rb:61 app/views/repositories/index.html.erb:174
+#: app/views/repositories/add.html.erb:90 ./app/helpers/repositories_helper.rb:61
+#: ./app/views/repositories/index.html.erb:174 ./app/views/repositories/add.html.erb:90
+msgid "enable"
+msgstr "활성화"
+
+#: app/helpers/repositories_helper.rb:61 app/views/repositories/index.html.erb:179
+#: app/views/repositories/add.html.erb:97 ./app/helpers/repositories_helper.rb:61
+#: ./app/views/repositories/index.html.erb:179 ./app/views/repositories/add.html.erb:97
+msgid "disable"
+msgstr "비활성화"
+
+#: app/helpers/repositories_helper.rb:66 ./app/helpers/repositories_helper.rb:66
+msgid "enabled"
+msgstr "활성화"
+
+#: app/helpers/repositories_helper.rb:66 ./app/helpers/repositories_helper.rb:66
+msgid "disabled"
+msgstr "비활성화"
+
+#: app/controllers/repositories_controller.rb:35 ./app/controllers/repositories_controller.rb:35
+msgid "Alias"
+msgstr "별칭"
+
+#: app/controllers/repositories_controller.rb:36 app/views/repositories/index.html.erb:230
+#: ./app/controllers/repositories_controller.rb:36 ./app/views/repositories/index.html.erb:230
+msgid "Enabled"
+msgstr "활성화됨"
+
+#: app/controllers/repositories_controller.rb:37 ./app/controllers/repositories_controller.rb:37
+msgid "Autorefresh"
+msgstr "자동 새로 고침"
+
+#: app/controllers/repositories_controller.rb:38 app/views/patch_updates/_patches.html.erb:24
+#: ./app/controllers/repositories_controller.rb:38 ./app/views/patch_updates/_patches.html.erb:24
+msgid "Name"
+msgstr "이름"
+
+#: app/controllers/repositories_controller.rb:39 ./app/controllers/repositories_controller.rb:39
+msgid "URL"
+msgstr "URL"
+
+#: app/controllers/repositories_controller.rb:40 ./app/controllers/repositories_controller.rb:40
+msgid "Priority"
+msgstr "우선 순위"
+
+#: app/controllers/repositories_controller.rb:41 ./app/controllers/repositories_controller.rb:41
+msgid "Keep downloaded packages"
+msgstr "다운로드된 패키지 유지"
+
+#: app/controllers/repositories_controller.rb:51 ./app/controllers/repositories_controller.rb:51
+msgid "Cannot read repository list."
+msgstr "리포지토리 목록을 읽을 수 없습니다."
+
+#: app/controllers/repositories_controller.rb:68 app/controllers/repositories_controller.rb:95
+#: ./app/controllers/repositories_controller.rb:68 ./app/controllers/repositories_controller.rb:95
+msgid "Missing repository parameter"
+msgstr "누락된 리포지토리 파라미터"
+
+#: app/controllers/repositories_controller.rb:76 app/controllers/repositories_controller.rb:104
+#: ./app/controllers/repositories_controller.rb:76 ./app/controllers/repositories_controller.rb:104
+msgid "Repository '%s' was not found."
+msgstr "'%s' 리포지토리를 찾을 수 없습니다."
+
+#: app/controllers/repositories_controller.rb:84 ./app/controllers/repositories_controller.rb:84
+msgid "Repository '%s' has been deleted."
+msgstr "'%s' 리포지토리가 삭제되었습니다."
+
+#: app/controllers/repositories_controller.rb:87 ./app/controllers/repositories_controller.rb:87
+msgid "Cannot remove repository '%s'"
+msgstr "'%s' 리포지토리를 제거할 수 없습니다"
+
+#: app/controllers/repositories_controller.rb:109 ./app/controllers/repositories_controller.rb:109
+msgid "Cannot update repository '%s': missing parameters."
+msgstr "'%s' 리포지토리를 업데이트할 수 없습니니다. 파라미터가 없습니다."
+
+#: app/controllers/repositories_controller.rb:123 app/controllers/repositories_controller.rb:204
+#: ./app/controllers/repositories_controller.rb:123 ./app/controllers/repositories_controller.rb:204
+msgid "Invalid priority"
+msgstr "잘못된 우선 순위"
+
+#: app/controllers/repositories_controller.rb:133 ./app/controllers/repositories_controller.rb:133
+msgid "Repository '%s' has been updated."
+msgstr "'%s' 리포지토리가 업데이트되었습니다."
+
+#: app/controllers/repositories_controller.rb:139 ./app/controllers/repositories_controller.rb:139
+msgid "Cannot update repository '%s': Unknown error"
+msgstr "'%s' 리포지토리를 업데이트할 수 없습니다. 알 수 없는 오류"
+
+#: app/controllers/repositories_controller.rb:151 ./app/controllers/repositories_controller.rb:151
+msgid "Cannot update repository '%s'"
+msgstr "'%s' 리포지토리를 업데이트할 수 없습니다"
+
+#: app/controllers/repositories_controller.rb:154 ./app/controllers/repositories_controller.rb:154
+msgid "Unknown backend error: %s"
+msgstr "알 수 없는 백엔드 오류: %s"
+
+#: app/controllers/repositories_controller.rb:192 ./app/controllers/repositories_controller.rb:192
+msgid "Missing repository parameters"
+msgstr "누락된 리포지토리 파라미터"
+
+#: app/controllers/repositories_controller.rb:215 ./app/controllers/repositories_controller.rb:215
+msgid "Repository '%s' has been added."
+msgstr "'%s' 리포지토리가 추가되었습니다."
+
+#: app/controllers/repositories_controller.rb:221 ./app/controllers/repositories_controller.rb:221
+msgid "Cannot create repository '%s': Unknown error"
+msgstr "'%s' 리포지토리를 작성할 수 없습니다. 알 수 없는 오류"
+
+#: app/controllers/repositories_controller.rb:233 ./app/controllers/repositories_controller.rb:233
+msgid "Cannot create repository '%s'"
+msgstr "'%s' 리포지토리를 작성할 수 없습니다"
+
+#: app/controllers/repositories_controller.rb:237 ./app/controllers/repositories_controller.rb:237
+msgid "Unknown backend error"
+msgstr "알 수 없는 백엔드 오류"
+
+#: app/controllers/patch_updates_controller.rb:42 ./app/controllers/patch_updates_controller.rb:42
+msgid "<p>Please reboot your system after all patches have been installed.</p>"
+msgstr "<p>모든 패치가 설치된 후 시스템을 다시 부팅하십시오.</p>"
+
+#: app/controllers/patch_updates_controller.rb:44 ./app/controllers/patch_updates_controller.rb:44
+msgid "<p>Please logout and login again after all patches have been installed.</p>"
+msgstr "<p>모든 패치가 설치된 후 로그아웃한 후 다시 로그인하십시오.</p>"
+
+#: app/controllers/patch_updates_controller.rb:64 app/views/patch_updates/_patch_summary.html.erb:30
+#: ./app/controllers/patch_updates_controller.rb:64 ./app/views/patch_updates/_patch_summary.html.erb:30
+msgid "Cannot read patch updates: GPG key for repository <em>%s</em> is not trusted."
+msgstr "패치 업데이트를 읽을 수 없음: 리포지토리 <em>%s</em>의 GPG 키가 트러스트되지 않았습니다."
+
+#: app/controllers/patch_updates_controller.rb:97 app/controllers/patch_updates_controller.rb:100
+#: app/views/patch_updates/_patch_progress.html.erb:2 ./app/controllers/patch_updates_controller.rb:97
+#: ./app/controllers/patch_updates_controller.rb:100 ./app/views/patch_updates/_patch_progress.html.erb:2
+msgid "A problem occured when loading patch information."
+msgstr "패치 정보를 로드하는 동안 문제가 발생했습니다."
+
+#: app/views/repositories/index.html.erb:43 app/views/repositories/add.html.erb:56
+#: ./app/views/repositories/index.html.erb:43 ./app/views/repositories/add.html.erb:56
+msgid "Enter a valid repository URL."
+msgstr "유효한 리포지토리 URL을 입력합니다."
+
+#: app/views/repositories/index.html.erb:51 app/views/repositories/add.html.erb:64
+#: ./app/views/repositories/index.html.erb:51 ./app/views/repositories/add.html.erb:64
+msgid "Symbols <b>%s</b> are not allowed in repository alias."
+msgstr "<b>%s</b> 기호는 리포지토리 별칭에서 허용되지 않습니다."
+
+#: app/views/repositories/index.html.erb:55 app/views/repositories/add.html.erb:79
+#: ./app/views/repositories/index.html.erb:55 ./app/views/repositories/add.html.erb:79
+msgid "This value cannot be empty."
+msgstr "이 값은 비워둘 수 없습니다."
+
+#: app/views/repositories/index.html.erb:99 app/views/repositories/index.html.erb:122
+#: app/views/repositories/index.html.erb:146 app/views/repositories/index.html.erb:254
+#: app/views/repositories/add.html.erb:71 app/views/patch_updates/index.html.erb:32
+#: app/views/patch_updates/index.html.erb:41 ./app/views/repositories/index.html.erb:99
+#: ./app/views/repositories/index.html.erb:122 ./app/views/repositories/index.html.erb:146
+#: ./app/views/repositories/index.html.erb:254 ./app/views/repositories/add.html.erb:71
+#: ./app/views/patch_updates/index.html.erb:32 ./app/views/patch_updates/index.html.erb:41
+msgid "Please wait"
+msgstr "잠시 기다리십시오"
+
+#: app/views/repositories/index.html.erb:195 app/views/repositories/add.html.erb:153
+#: ./app/views/repositories/index.html.erb:195 ./app/views/repositories/add.html.erb:153 ./shortcuts.yml:15
+msgid "Software Repositories"
+msgstr "소프트웨어 리포지토리"
+
+#: app/views/repositories/index.html.erb:200 ./app/views/repositories/index.html.erb:200
+msgid "Configured software repositories"
+msgstr "구성된 소프트웨어 리포지토리"
+
+#: app/views/repositories/index.html.erb:211 ./app/views/repositories/index.html.erb:211
+msgid "Quick Search"
+msgstr "빠른 검색"
+
+#: app/views/repositories/index.html.erb:219 ./app/views/repositories/index.html.erb:219
+msgid "Add New Repository"
+msgstr "새 리포지토리 추가"
+
+#: app/views/repositories/index.html.erb:225 ./app/views/repositories/index.html.erb:225
+msgid "Filter repositories"
+msgstr "필터 리포지토리"
+
+#: app/views/repositories/index.html.erb:229 ./app/views/repositories/index.html.erb:229
+msgid "All"
+msgstr "모두"
+
+#: app/views/repositories/index.html.erb:231 ./app/views/repositories/index.html.erb:231
+msgid "Disabled"
+msgstr "비활성화"
+
+#: app/views/repositories/index.html.erb:277 ./app/views/repositories/index.html.erb:277
+msgid "Repository is currently"
+msgstr "현재 리포지토리 상태"
+
+#: app/views/repositories/index.html.erb:280 app/views/repositories/add.html.erb:176
+#: app/views/repositories/add.html.erb:177 ./app/views/repositories/index.html.erb:280
+#: ./app/views/repositories/add.html.erb:176 ./app/views/repositories/add.html.erb:177
+msgid "Repository will be %s."
+msgstr "리포지토리가 %s입니다."
+
+#: app/views/repositories/index.html.erb:284 ./app/views/repositories/index.html.erb:284
+msgid "Autorefresh is currently"
+msgstr "현재 자동 새로 고침 상태"
+
+#: app/views/repositories/index.html.erb:287 app/views/repositories/add.html.erb:181
+#: app/views/repositories/add.html.erb:182 ./app/views/repositories/index.html.erb:287
+#: ./app/views/repositories/add.html.erb:181 ./app/views/repositories/add.html.erb:182
+msgid "Autorefresh will be %s."
+msgstr "자동 새로 고침이 %s입니다."
+
+#: app/views/repositories/index.html.erb:291 ./app/views/repositories/index.html.erb:291
+msgid "Keeping downloaded packages is currently"
+msgstr "현재 다운로드된 패키지 유지 상태"
+
+#: app/views/repositories/index.html.erb:294 app/views/repositories/add.html.erb:186
+#: app/views/repositories/add.html.erb:187 ./app/views/repositories/index.html.erb:294
+#: ./app/views/repositories/add.html.erb:186 ./app/views/repositories/add.html.erb:187
+msgid "Keep packages option will be %s."
+msgstr "패키지 유지 옵션이 %s입니다."
+
+#: app/views/repositories/index.html.erb:301 app/views/repositories/add.html.erb:195
+#: ./app/views/repositories/index.html.erb:301 ./app/views/repositories/add.html.erb:195
+msgid "Save"
+msgstr "저장"
+
+#: app/views/repositories/index.html.erb:302 ./app/views/repositories/index.html.erb:302
+msgid "Delete"
+msgstr "삭제"
+
+#: app/views/repositories/index.html.erb:304 ./app/views/repositories/index.html.erb:304
+msgid "Really delete repository '%s'?"
+msgstr "%s 리포지토리를 삭제하시겠습니까?"
+
+#: app/views/repositories/add.html.erb:125 ./app/views/repositories/add.html.erb:125
+msgid "A repository with this URL already exists.\nCreate a duplicate?"
+msgstr "이 URL을 가진 리포지토리가 이미 있습니다.\n사본을 만드시겠습니까?"
+
+#: app/views/repositories/add.html.erb:155 ./app/views/repositories/add.html.erb:155
+msgid "Add a new repository"
+msgstr "새 리포지토리 추가"
+
+#: app/views/repositories/add.html.erb:164 ./app/views/repositories/add.html.erb:164
+msgid "New Repository"
+msgstr "새 리포지토리"
+
+#: app/views/patch_updates/_patch_installation.html.erb:8 ./app/views/patch_updates/_patch_installation.html.erb:8
+msgid "An error occured while installing patches."
+msgstr "패치를 설치하는 동안 오류가 발생했습니다."
+
+#: app/views/patch_updates/_patch_installation.html.erb:35 ./app/views/patch_updates/_patch_installation.html.erb:35
+msgid "Patch Installation"
+msgstr "패치 설치"
+
+#: app/views/patch_updates/_patch_installation.html.erb:45 ./app/views/patch_updates/_patch_installation.html.erb:45
+msgid "Stop"
+msgstr "중지"
+
+#: app/views/patch_updates/_patch_installation.html.erb:45 ./app/views/patch_updates/_patch_installation.html.erb:45
+msgid "Are you sure?"
+msgstr "계속하시겠습니까?"
+
+#: app/views/patch_updates/index.html.erb:50 ./app/views/patch_updates/index.html.erb:50
+msgid "Updates"
+msgstr "업데이트"
+
+#: app/views/patch_updates/index.html.erb:55 app/views/patch_updates/_patch_summary.html.erb:55
+#: ./app/views/patch_updates/index.html.erb:55 ./app/views/patch_updates/_patch_summary.html.erb:55
+msgid "Your system is up to date."
+msgstr "시스템이 최신 상태입니다."
+
+#: app/views/patch_updates/index.html.erb:74 ./app/views/patch_updates/index.html.erb:74
+msgid "Please wait ..."
+msgstr "잠시 기다리십시오..."
+
+#: app/views/patch_updates/index.html.erb:78 ./app/views/patch_updates/index.html.erb:78
+msgid "Updates available"
+msgstr "업데이트 사용 가능"
+
+#: app/views/patch_updates/index.html.erb:83 ./app/views/patch_updates/index.html.erb:83
+msgid "All updates"
+msgstr "모든 업데이트"
+
+#: app/views/patch_updates/index.html.erb:88 ./app/views/patch_updates/index.html.erb:88
+msgid "Security"
+msgstr "보안"
+
+#: app/views/patch_updates/index.html.erb:92 ./app/views/patch_updates/index.html.erb:92
+msgid "Important"
+msgstr "중요"
+
+#: app/views/patch_updates/index.html.erb:97 ./app/views/patch_updates/index.html.erb:97
+msgid "Recommended"
+msgstr "추천"
+
+#: app/views/patch_updates/index.html.erb:102 ./app/views/patch_updates/index.html.erb:102
+msgid "Optional"
+msgstr "선택 사항"
+
+#: app/views/patch_updates/index.html.erb:113 ./app/views/patch_updates/index.html.erb:113
+msgid "Update"
+msgstr "업데이트"
+
+#: app/views/patch_updates/_patch_progress.html.erb:6 ./app/views/patch_updates/_patch_progress.html.erb:6
+msgid "Refreshing package cache"
+msgstr "패키지 캐시를 새로 고치는 중"
+
+#: app/views/patch_updates/_patch_progress.html.erb:7 ./app/views/patch_updates/_patch_progress.html.erb:7
+msgid "Starting package manager"
+msgstr "패키지 관리자 시작 중"
+
+#: app/views/patch_updates/_patch_progress.html.erb:8 ./app/views/patch_updates/_patch_progress.html.erb:8
+msgid "Waiting for the package manager lock"
+msgstr "패키지 관리자 잠금 대기 중"
+
+#: app/views/patch_updates/_patch_progress.html.erb:9 app/views/patch_updates/_patch_progress.html.erb:19
+#: ./app/views/patch_updates/_patch_progress.html.erb:9 ./app/views/patch_updates/_patch_progress.html.erb:19
+msgid "Evaluating available patches"
+msgstr "사용 가능한 패치 평가 중"
+
+#: app/views/patch_updates/_patch_progress.html.erb:10 ./app/views/patch_updates/_patch_progress.html.erb:10
+msgid "Finished reading patches"
+msgstr "패치 읽기 완료됨"
+
+#: app/views/patch_updates/_patches.html.erb:10 ./app/views/patch_updates/_patches.html.erb:10
+msgid "One of the patches seems to update WebYaST itself.\nYou may need to reload the page after applying the patch."
+msgstr "패치 중 하나가 WebYaST 원본을 업데이트한 것으로 보입니다.\n패치를 적용한 후 페이지를 다시 로드해야 할 수도 있습니다."
+
+#: app/views/patch_updates/_patches.html.erb:15 ./app/views/patch_updates/_patches.html.erb:15
+msgid "No patches available"
+msgstr "사용 가능한 패치가 없습니다."
+
+#: app/views/patch_updates/_patches.html.erb:21 ./app/views/patch_updates/_patches.html.erb:21
+msgid "Check"
+msgstr "확인"
+
+#: app/views/patch_updates/_patches.html.erb:23 ./app/views/patch_updates/_patches.html.erb:23
+msgid "Kind"
+msgstr "종류"
+
+#: app/views/patch_updates/_patches.html.erb:25 ./app/views/patch_updates/_patches.html.erb:25
+msgid "Summary"
+msgstr "요약"
+
+#: app/views/patch_updates/_patches.html.erb:27 app/views/patch_updates/_patches.html.erb:30
+#: ./app/views/patch_updates/_patches.html.erb:27 ./app/views/patch_updates/_patches.html.erb:30
+msgid "Source"
+msgstr "원본"
+
+#: app/views/patch_updates/_patches.html.erb:28 ./app/views/patch_updates/_patches.html.erb:28
+msgid "Install"
+msgstr "설치"
+
+#: app/views/patch_updates/_patch_summary.html.erb:25 ./app/views/patch_updates/_patch_summary.html.erb:25
+msgid "Cannot read patch updates - you have been logged out."
+msgstr "패치 업데이트를 읽을 수 없음 - 사용자가 로그아웃했습니다."
+
+#: app/views/patch_updates/_patch_summary.html.erb:28 ./app/views/patch_updates/_patch_summary.html.erb:28
+msgid "No information about patches available"
+msgstr "사용 가능한 패치 관련 정보가 없습니다."
+
+#: app/views/patch_updates/_patch_summary.html.erb:46 ./app/views/patch_updates/_patch_summary.html.erb:46
+msgid "Security Updates: %d"
+msgstr "보안 업데이트: %d"
+
+#: app/views/patch_updates/_patch_summary.html.erb:49 ./app/views/patch_updates/_patch_summary.html.erb:49
+msgid "Important Updates: %d"
+msgstr "중요 업데이트: %d"
+
+#: app/views/patch_updates/_patch_summary.html.erb:52 ./app/views/patch_updates/_patch_summary.html.erb:52
+msgid "Optional Updates: %d"
+msgstr "선택적 업데이트: %d"
+
+#: app/views/patch_updates/_patch_summary.html.erb:60 ./app/views/patch_updates/_patch_summary.html.erb:60
+msgid "Update All"
+msgstr "모두 업데이트"
+
+#: app/views/patch_updates/_patch_summary.html.erb:60 ./app/views/patch_updates/_patch_summary.html.erb:60
+msgid "Updating all. Are you sure?"
+msgstr "모두 업데이트 중입니다. 계속하시겠습니까?"
+
+#: app/views/patch_updates/_patch_summary.html.erb:67 ./app/views/patch_updates/_patch_summary.html.erb:67
+msgid "Loading patch information"
+msgstr "패치 정보 로드 중"
+
+#: ./shortcuts.yml:16
+msgid "See and manage configured software repositories"
+msgstr "구성된 소프트웨어 리포지토리 확인 및 관리"
+

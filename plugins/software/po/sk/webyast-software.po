@@ -1,0 +1,557 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: webyast-software-ui 1.0.0\n"
+"POT-Creation-Date: 2010-08-02 09:19+0200\n"
+"PO-Revision-Date: 2010-04-19 08:09+0100\n"
+"Last-Translator: Rastislav Krupanský <rastislav.krupansky@gmail.com>\n"
+"Language-Team: Slovak <sk-i18n@linux.sk>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=3; plural=(n==1) ? 1 : (n>=2 && n<=4) ? 2 : 0;\n"
+"X-Poedit-Language: Slovak\n"
+"X-Poedit-Country: SLOVAKIA\n"
+
+#: app/helpers/repositories_helper.rb:25 app/helpers/repositories_helper.rb:25
+msgid "Highest"
+msgstr "Najvyššia"
+
+#: app/helpers/repositories_helper.rb:26 app/helpers/repositories_helper.rb:26
+msgid "Higher"
+msgstr "Vyššia"
+
+#: app/helpers/repositories_helper.rb:27 app/helpers/repositories_helper.rb:27
+msgid "Default"
+msgstr "Predvolené"
+
+#: app/helpers/repositories_helper.rb:28 app/helpers/repositories_helper.rb:28
+msgid "Low"
+msgstr "Nízka"
+
+#: app/helpers/repositories_helper.rb:29 app/helpers/repositories_helper.rb:29
+msgid "Lowest"
+msgstr "Najnižšia"
+
+#: app/helpers/repositories_helper.rb:35 app/helpers/repositories_helper.rb:35
+msgid "Highest priority"
+msgstr "Najvyššia priorita"
+
+#: app/helpers/repositories_helper.rb:36 app/helpers/repositories_helper.rb:36
+msgid "Higher priority"
+msgstr "Vyššia priorita"
+
+#: app/helpers/repositories_helper.rb:38 app/helpers/repositories_helper.rb:38
+msgid "Low priority"
+msgstr "Nízka priorita"
+
+#: app/helpers/repositories_helper.rb:39 app/helpers/repositories_helper.rb:39
+msgid "Lowest priority"
+msgstr "Najnižšia priorita"
+
+#: app/helpers/repositories_helper.rb:44 app/helpers/repositories_helper.rb:44
+msgid "Custom priority"
+msgstr "Vlastná priorita"
+
+#: app/helpers/repositories_helper.rb:49 app/helpers/repositories_helper.rb:49
+msgid "Custom"
+msgstr "Vlastná"
+
+#: app/helpers/repositories_helper.rb:61
+#: app/views/repositories/index.html.erb:143
+#: app/views/repositories/add.html.erb:85
+#: app/helpers/repositories_helper.rb:61
+#: app/views/repositories/index.html.erb:143
+#: app/views/repositories/add.html.erb:85
+msgid "enable"
+msgstr "povoliť"
+
+#: app/helpers/repositories_helper.rb:61
+#: app/views/repositories/index.html.erb:148
+#: app/views/repositories/add.html.erb:92
+#: app/helpers/repositories_helper.rb:61
+#: app/views/repositories/index.html.erb:148
+#: app/views/repositories/add.html.erb:92
+msgid "disable"
+msgstr "zakázať"
+
+#: app/helpers/repositories_helper.rb:66 app/helpers/repositories_helper.rb:66
+msgid "enabled"
+msgstr "povolený"
+
+#: app/helpers/repositories_helper.rb:66 app/helpers/repositories_helper.rb:66
+msgid "disabled"
+msgstr "zakázaný"
+
+#: app/controllers/repositories_controller.rb:35
+#: app/controllers/repositories_controller.rb:35
+msgid "Alias"
+msgstr "Alias"
+
+#: app/controllers/repositories_controller.rb:36
+#: app/views/repositories/index.html.erb:199
+#: app/controllers/repositories_controller.rb:36
+#: app/views/repositories/index.html.erb:199
+msgid "Enabled"
+msgstr "Povolený"
+
+#: app/controllers/repositories_controller.rb:37
+#: app/controllers/repositories_controller.rb:37
+msgid "Autorefresh"
+msgstr "Automatické obnovenie"
+
+#: app/controllers/repositories_controller.rb:38
+#: app/views/patch_updates/_patches.html.erb:21
+#: app/controllers/repositories_controller.rb:38
+#: app/views/patch_updates/_patches.html.erb:21
+msgid "Name"
+msgstr "Názov"
+
+#: app/controllers/repositories_controller.rb:39
+#: app/controllers/repositories_controller.rb:39
+msgid "URL"
+msgstr "URL"
+
+#: app/controllers/repositories_controller.rb:40
+#: app/controllers/repositories_controller.rb:40
+msgid "Priority"
+msgstr "Priorita"
+
+#: app/controllers/repositories_controller.rb:41
+#: app/controllers/repositories_controller.rb:41
+msgid "Keep downloaded packages"
+msgstr "Ponechať stiahnuté balíky"
+
+#: app/controllers/repositories_controller.rb:51
+#: app/controllers/repositories_controller.rb:51
+msgid "Cannot read repository list."
+msgstr "Nedá sa načítať zoznam repozitárov."
+
+#: app/controllers/repositories_controller.rb:68
+#: app/controllers/repositories_controller.rb:95
+#: app/controllers/repositories_controller.rb:68
+#: app/controllers/repositories_controller.rb:95
+msgid "Missing repository parameter"
+msgstr "Chýbajúci parameter repozitára"
+
+#: app/controllers/repositories_controller.rb:123
+#: app/controllers/repositories_controller.rb:204
+#: app/controllers/repositories_controller.rb:123
+#: app/controllers/repositories_controller.rb:204
+msgid "Invalid priority"
+msgstr "Neplatná priorita"
+
+#: app/controllers/repositories_controller.rb:192
+#: app/controllers/repositories_controller.rb:192
+msgid "Missing repository parameters"
+msgstr "Chýbajúce parametre repozitára"
+
+#: app/controllers/repositories_controller.rb:230
+#: app/controllers/repositories_controller.rb:230
+msgid "Unknown backend error"
+msgstr "Neznáma chyba backendu"
+
+#: app/controllers/patch_updates_controller.rb:42
+#: app/controllers/patch_updates_controller.rb:42
+msgid "<p>Please reboot your system after all patches have been installed.</p>"
+msgstr ""
+
+#: app/controllers/patch_updates_controller.rb:44
+#: app/controllers/patch_updates_controller.rb:44
+msgid ""
+"<p>Please logout and login again after all patches have been installed.</p>"
+msgstr ""
+
+#: app/controllers/patch_updates_controller.rb:64
+#: app/views/patch_updates/_patch_summary.html.erb:30
+#: app/controllers/patch_updates_controller.rb:64
+#: app/views/patch_updates/_patch_summary.html.erb:30
+#, fuzzy
+msgid ""
+"Cannot read patch updates: GPG key for repository <em>%s</em> is not trusted."
+msgstr "Nedajú sa prečítať aktualizácie opráv - boli ste odhlásení."
+
+#: app/controllers/patch_updates_controller.rb:97
+#: app/controllers/patch_updates_controller.rb:100
+#: app/views/patch_updates/_patch_progress.html.erb:2
+#: app/controllers/patch_updates_controller.rb:97
+#: app/controllers/patch_updates_controller.rb:100
+#: app/views/patch_updates/_patch_progress.html.erb:2
+msgid "A problem occured when loading patch information."
+msgstr "Vyskytol sa problém počas načítavania informácií opravy."
+
+#: app/views/repositories/index.html.erb:43
+#: app/views/repositories/add.html.erb:56
+#: app/views/repositories/index.html.erb:43
+#: app/views/repositories/add.html.erb:56
+msgid "Enter a valid repository URL."
+msgstr "Zadajte platnú URL repozitára."
+
+#: app/views/repositories/index.html.erb:51
+#: app/views/repositories/add.html.erb:64
+#: app/views/repositories/index.html.erb:51
+#: app/views/repositories/add.html.erb:64
+msgid "Symbols <b>%s</b> are not allowed in repository alias."
+msgstr "Symboly <b>%s</b> nie sú povolené v aliasi repozitára."
+
+#: app/views/repositories/index.html.erb:55
+#: app/views/repositories/add.html.erb:74
+#: app/views/repositories/index.html.erb:55
+#: app/views/repositories/add.html.erb:74
+msgid "This value cannot be empty."
+msgstr "Táto hodnota nemôže byť prázdna."
+
+#: app/views/repositories/index.html.erb:164
+#: app/views/repositories/add.html.erb:148
+#: app/views/repositories/index.html.erb:164
+#: app/views/repositories/add.html.erb:148 shortcuts.yml:15
+msgid "Software Repositories"
+msgstr "Repozitáre softvéru"
+
+#: app/views/repositories/index.html.erb:169
+#: app/views/repositories/index.html.erb:169
+msgid "Configured software repositories"
+msgstr "Konfigurované repozitáre softvéru"
+
+#: app/views/repositories/index.html.erb:180
+#: app/views/repositories/index.html.erb:180
+msgid "Quick Search"
+msgstr "Rýchle hľadanie"
+
+#: app/views/repositories/index.html.erb:188
+#: app/views/repositories/index.html.erb:188
+msgid "Add New Repository"
+msgstr "Pridať nový repozitár"
+
+#: app/views/repositories/index.html.erb:194
+#: app/views/repositories/index.html.erb:194
+msgid "Filter repositories"
+msgstr "Repozitáre filtra"
+
+#: app/views/repositories/index.html.erb:198
+#: app/views/repositories/index.html.erb:198
+msgid "All"
+msgstr "Všetko"
+
+#: app/views/repositories/index.html.erb:200
+#: app/views/repositories/index.html.erb:200
+msgid "Disabled"
+msgstr "Vypnutý"
+
+#: app/views/repositories/index.html.erb:245
+#: app/views/repositories/index.html.erb:245
+msgid "Repository is currently"
+msgstr "Repozitár je aktuálny"
+
+#: app/views/repositories/index.html.erb:248
+#: app/views/repositories/add.html.erb:171
+#: app/views/repositories/add.html.erb:172
+#: app/views/repositories/index.html.erb:248
+#: app/views/repositories/add.html.erb:171
+#: app/views/repositories/add.html.erb:172
+msgid "Repository will be %s."
+msgstr "Repozitár bude %s."
+
+#: app/views/repositories/index.html.erb:252
+#: app/views/repositories/index.html.erb:252
+msgid "Autorefresh is currently"
+msgstr "Automatická aktualizácia je aktuálna"
+
+#: app/views/repositories/index.html.erb:255
+#: app/views/repositories/add.html.erb:176
+#: app/views/repositories/add.html.erb:177
+#: app/views/repositories/index.html.erb:255
+#: app/views/repositories/add.html.erb:176
+#: app/views/repositories/add.html.erb:177
+msgid "Autorefresh will be %s."
+msgstr "Automatická aktualizácia bude %s."
+
+#: app/views/repositories/index.html.erb:259
+#: app/views/repositories/index.html.erb:259
+msgid "Keeping downloaded packages is currently"
+msgstr "Ponechávanie stiahnutých balíkov je aktuálne"
+
+#: app/views/repositories/index.html.erb:262
+#: app/views/repositories/add.html.erb:181
+#: app/views/repositories/add.html.erb:182
+#: app/views/repositories/index.html.erb:262
+#: app/views/repositories/add.html.erb:181
+#: app/views/repositories/add.html.erb:182
+msgid "Keep packages option will be %s."
+msgstr "Ponechať možnosť balíkov bude %s."
+
+#: app/views/repositories/index.html.erb:269
+#: app/views/repositories/add.html.erb:190
+#: app/views/repositories/index.html.erb:269
+#: app/views/repositories/add.html.erb:190
+msgid "Save"
+msgstr "Uložiť"
+
+#: app/views/repositories/index.html.erb:270
+#: app/views/repositories/index.html.erb:270
+msgid "Delete"
+msgstr "Odstrániť"
+
+#: app/views/repositories/index.html.erb:272
+#: app/views/repositories/index.html.erb:272
+msgid "Really delete repository '%s'?"
+msgstr "Naozaj zmazať repozitár '%s'?"
+
+#: app/views/repositories/add.html.erb:120
+#: app/views/repositories/add.html.erb:120
+msgid ""
+"A repository with this URL already exists.\n"
+"Create a duplicate?"
+msgstr ""
+"Repozitár s touto URL už existuje.\n"
+"Vytvoriť duplikát?"
+
+#: app/views/repositories/add.html.erb:150
+#: app/views/repositories/add.html.erb:150
+msgid "Add a new repository"
+msgstr "Pridať nový repozitár"
+
+#: app/views/repositories/add.html.erb:159
+#: app/views/repositories/add.html.erb:159
+msgid "New Repository"
+msgstr "Nový repozitár"
+
+#: app/views/patch_updates/_patch_installation.html.erb:8
+#: app/views/patch_updates/_patch_installation.html.erb:8
+msgid "An error occured while installing patches."
+msgstr "Vyskytla sa chyba počas inštalácie opráv."
+
+#: app/views/patch_updates/_patch_installation.html.erb:35
+#: app/views/patch_updates/_patch_installation.html.erb:35
+#, fuzzy
+msgid "Patch Installation"
+msgstr "Inštalácia zastavená"
+
+#: app/views/patch_updates/_patch_installation.html.erb:45
+#: app/views/patch_updates/_patch_installation.html.erb:45
+msgid "Stop"
+msgstr "Zastaviť"
+
+#: app/views/patch_updates/_patch_installation.html.erb:45
+#: app/views/patch_updates/_patch_installation.html.erb:45
+msgid "Are you sure?"
+msgstr "Ste si istý?"
+
+#: app/views/patch_updates/index.html.erb:36
+#: app/views/patch_updates/index.html.erb:36
+msgid "Updates"
+msgstr "Aktualizácie"
+
+#: app/views/patch_updates/index.html.erb:41
+#: app/views/patch_updates/_patch_summary.html.erb:55
+#: app/views/patch_updates/index.html.erb:41
+#: app/views/patch_updates/_patch_summary.html.erb:55
+msgid "Your system is up to date."
+msgstr "Váš systém je aktuálny."
+
+#: app/views/patch_updates/index.html.erb:60
+#: app/views/patch_updates/index.html.erb:60
+msgid "Please wait ..."
+msgstr ""
+
+#: app/views/patch_updates/index.html.erb:64
+#: app/views/patch_updates/index.html.erb:64
+msgid "Updates available"
+msgstr "Dostupné aktualizácie"
+
+#: app/views/patch_updates/index.html.erb:69
+#: app/views/patch_updates/index.html.erb:69
+#, fuzzy
+msgid "All updates"
+msgstr "Aktualizácie"
+
+#: app/views/patch_updates/index.html.erb:74
+#: app/views/patch_updates/index.html.erb:74
+msgid "Security"
+msgstr ""
+
+#: app/views/patch_updates/index.html.erb:78
+#: app/views/patch_updates/index.html.erb:78
+#, fuzzy
+msgid "Important"
+msgstr "Dôležité aktualizácie: %d"
+
+#: app/views/patch_updates/index.html.erb:83
+#: app/views/patch_updates/index.html.erb:83
+msgid "Recommended"
+msgstr ""
+
+#: app/views/patch_updates/index.html.erb:88
+#: app/views/patch_updates/index.html.erb:88
+msgid "Optional"
+msgstr ""
+
+#: app/views/patch_updates/index.html.erb:99
+#: app/views/patch_updates/index.html.erb:99
+msgid "Update"
+msgstr "Aktualizovať"
+
+#: app/views/patch_updates/_patch_progress.html.erb:6
+#: app/views/patch_updates/_patch_progress.html.erb:6
+msgid "Refreshing package cache"
+msgstr "Obnovuje vyrovnávaciu pamäť"
+
+#: app/views/patch_updates/_patch_progress.html.erb:7
+#: app/views/patch_updates/_patch_progress.html.erb:7
+msgid "Starting package manager"
+msgstr "Spúšťam správcu balíkov"
+
+#: app/views/patch_updates/_patch_progress.html.erb:8
+#: app/views/patch_updates/_patch_progress.html.erb:8
+msgid "Waiting for the package manager lock"
+msgstr "Čakám na zámok správcu balíkov"
+
+#: app/views/patch_updates/_patch_progress.html.erb:9
+#: app/views/patch_updates/_patch_progress.html.erb:19
+#: app/views/patch_updates/_patch_progress.html.erb:9
+#: app/views/patch_updates/_patch_progress.html.erb:19
+msgid "Evaluating available patches"
+msgstr "Vyhodnocujem dostupné opravy"
+
+#: app/views/patch_updates/_patch_progress.html.erb:10
+#: app/views/patch_updates/_patch_progress.html.erb:10
+msgid "Finished reading patches"
+msgstr "Dokončené čítanie opráv"
+
+#: app/views/patch_updates/_patches.html.erb:10
+#: app/views/patch_updates/_patches.html.erb:10
+msgid ""
+"One of the patches seems to update WebYaST itself.\n"
+"You may need to reload the page after applying the patch."
+msgstr ""
+
+#: app/views/patch_updates/_patches.html.erb:18
+#: app/views/patch_updates/_patches.html.erb:18
+msgid "Check"
+msgstr "Skontrolovať"
+
+#: app/views/patch_updates/_patches.html.erb:20
+#: app/views/patch_updates/_patches.html.erb:20
+msgid "Kind"
+msgstr "Typ"
+
+#: app/views/patch_updates/_patches.html.erb:22
+#: app/views/patch_updates/_patches.html.erb:22
+msgid "Summary"
+msgstr "Súhrn"
+
+#: app/views/patch_updates/_patches.html.erb:24
+#: app/views/patch_updates/_patches.html.erb:27
+#: app/views/patch_updates/_patches.html.erb:24
+#: app/views/patch_updates/_patches.html.erb:27
+msgid "Source"
+msgstr "Zdroj"
+
+#: app/views/patch_updates/_patches.html.erb:25
+#: app/views/patch_updates/_patches.html.erb:25
+msgid "Install"
+msgstr "Inštalovať"
+
+#: app/views/patch_updates/_patch_summary.html.erb:25
+#: app/views/patch_updates/_patch_summary.html.erb:25
+msgid "Cannot read patch updates - you have been logged out."
+msgstr "Nedajú sa prečítať aktualizácie opráv - boli ste odhlásení."
+
+#: app/views/patch_updates/_patch_summary.html.erb:28
+#: app/views/patch_updates/_patch_summary.html.erb:28
+msgid "No information about patches available"
+msgstr "Nie sú dostupné informácie o opravách"
+
+#: app/views/patch_updates/_patch_summary.html.erb:46
+#: app/views/patch_updates/_patch_summary.html.erb:46
+msgid "Security Updates: %d"
+msgstr "Bezpečnostné aktualizácie: %d"
+
+#: app/views/patch_updates/_patch_summary.html.erb:49
+#: app/views/patch_updates/_patch_summary.html.erb:49
+msgid "Important Updates: %d"
+msgstr "Dôležité aktualizácie: %d"
+
+#: app/views/patch_updates/_patch_summary.html.erb:52
+#: app/views/patch_updates/_patch_summary.html.erb:52
+msgid "Optional Updates: %d"
+msgstr "Voliteľné aktualizácie: %d"
+
+#: app/views/patch_updates/_patch_summary.html.erb:60
+#: app/views/patch_updates/_patch_summary.html.erb:60
+msgid "Update All"
+msgstr "Aktualizovať všetko"
+
+#: app/views/patch_updates/_patch_summary.html.erb:60
+#: app/views/patch_updates/_patch_summary.html.erb:60
+msgid "Updating all. Are you sure?"
+msgstr "Aktualizujem všetko. Ste si istý?"
+
+#: app/views/patch_updates/_patch_summary.html.erb:67
+#: app/views/patch_updates/_patch_summary.html.erb:67
+msgid "Loading patch information"
+msgstr "Načítavam informácie o oprave"
+
+#: shortcuts.yml:16
+#, fuzzy
+msgid "See and manage configured software repositories"
+msgstr "Konfigurované repozitáre softvéru"
+
+#~ msgid "Installing all patches..."
+#~ msgstr "Inštalujem všetky opravy..."
+
+#~ msgid "Installation finished"
+#~ msgstr "Inštalácia dokončená"
+
+#~ msgid "%s installed."
+#~ msgstr "%s nainštalovaný."
+
+#~ msgid "Patch has been installed."
+#~ msgstr "Oprava bola nainštalovaná."
+
+#~ msgid "Priority for packages:"
+#~ msgstr "Priorita pre balíky:"
+
+#~ msgid "Error: Missing repository id."
+#~ msgstr "Chyba: Chýbajúce id repozitára."
+
+#~ msgid "Error: Missing 'enabled' parameter."
+#~ msgstr "Chyba: Chýbajúci parameter 'enabled'."
+
+#~ msgid "Unknown backend error."
+#~ msgstr "Neznáma chyba backendu."
+
+#~ msgid "No software repository configured."
+#~ msgstr "Nie je nakonfigurovaný repozitár softvéru."
+
+#~ msgid "Add"
+#~ msgstr "Pridať"
+
+#~ msgid "a new repository"
+#~ msgstr "nový repozitár"
+
+#~ msgid ""
+#~ "Enter a number in range 0 (the highest priority) to 200 (the lowest "
+#~ "priority)."
+#~ msgstr ""
+#~ "Zadajte číslo v rozsahu od 0 (najvyššia priorita) do 200 (najnižšia "
+#~ "priorita)."
+
+#~ msgid "Priority must be a positive number."
+#~ msgstr "Priorita musí byť kladné číslo."
+
+#~ msgid "Priority must be less than 200."
+#~ msgstr "Priorita musí byť menej ako 200."
+
+#~ msgid "Properties of"
+#~ msgstr "Vlastnosti"
+
+#~ msgid "Edit Properties of"
+#~ msgstr "Upraviť vlastnosti"
+
+#~ msgid "Create"
+#~ msgstr "Vytvoriť"

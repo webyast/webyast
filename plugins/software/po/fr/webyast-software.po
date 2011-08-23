@@ -1,0 +1,447 @@
+# Copyright (C) 2006 SuSE Linux Products GmbH, Nuernberg
+# This file is distributed under the same license as the package.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: webyast-software-ui\n"
+"POT-Creation-Date: 2010-08-18 10:19+0200\n"
+"PO-Revision-Date: 2010-08-26 09:25\n"
+"Last-Translator: Novell Language <language@novell.com>\n"
+"Language-Team: Novell Language <language@novell.com>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+
+#: app/helpers/repositories_helper.rb:25 ./app/helpers/repositories_helper.rb:25
+msgid "Highest"
+msgstr "Le plus élevé"
+
+#: app/helpers/repositories_helper.rb:26 ./app/helpers/repositories_helper.rb:26
+msgid "Higher"
+msgstr "Plus haut"
+
+#: app/helpers/repositories_helper.rb:27 ./app/helpers/repositories_helper.rb:27
+msgid "Default"
+msgstr "Par défaut"
+
+#: app/helpers/repositories_helper.rb:28 ./app/helpers/repositories_helper.rb:28
+msgid "Low"
+msgstr "Faible"
+
+#: app/helpers/repositories_helper.rb:29 ./app/helpers/repositories_helper.rb:29
+msgid "Lowest"
+msgstr "Le plus bas"
+
+#: app/helpers/repositories_helper.rb:35 ./app/helpers/repositories_helper.rb:35
+msgid "Highest priority"
+msgstr "Priorité la plus élevée"
+
+#: app/helpers/repositories_helper.rb:36 ./app/helpers/repositories_helper.rb:36
+msgid "Higher priority"
+msgstr "Priorité plus élevée"
+
+#: app/helpers/repositories_helper.rb:38 ./app/helpers/repositories_helper.rb:38
+msgid "Low priority"
+msgstr "Priorité faible"
+
+#: app/helpers/repositories_helper.rb:39 ./app/helpers/repositories_helper.rb:39
+msgid "Lowest priority"
+msgstr "Priorité la plus faible"
+
+#: app/helpers/repositories_helper.rb:44 ./app/helpers/repositories_helper.rb:44
+msgid "Custom priority"
+msgstr "Priorité personnalisée"
+
+#: app/helpers/repositories_helper.rb:49 ./app/helpers/repositories_helper.rb:49
+msgid "Custom"
+msgstr "Personnalisé"
+
+#: app/helpers/repositories_helper.rb:61 app/views/repositories/index.html.erb:174
+#: app/views/repositories/add.html.erb:90 ./app/helpers/repositories_helper.rb:61
+#: ./app/views/repositories/index.html.erb:174 ./app/views/repositories/add.html.erb:90
+msgid "enable"
+msgstr "activer"
+
+#: app/helpers/repositories_helper.rb:61 app/views/repositories/index.html.erb:179
+#: app/views/repositories/add.html.erb:97 ./app/helpers/repositories_helper.rb:61
+#: ./app/views/repositories/index.html.erb:179 ./app/views/repositories/add.html.erb:97
+msgid "disable"
+msgstr "désactiver"
+
+#: app/helpers/repositories_helper.rb:66 ./app/helpers/repositories_helper.rb:66
+msgid "enabled"
+msgstr "activé"
+
+#: app/helpers/repositories_helper.rb:66 ./app/helpers/repositories_helper.rb:66
+msgid "disabled"
+msgstr "désactivé"
+
+#: app/controllers/repositories_controller.rb:35 ./app/controllers/repositories_controller.rb:35
+msgid "Alias"
+msgstr "Alias"
+
+#: app/controllers/repositories_controller.rb:36 app/views/repositories/index.html.erb:230
+#: ./app/controllers/repositories_controller.rb:36 ./app/views/repositories/index.html.erb:230
+msgid "Enabled"
+msgstr "Activé"
+
+#: app/controllers/repositories_controller.rb:37 ./app/controllers/repositories_controller.rb:37
+msgid "Autorefresh"
+msgstr "Rafraîchissement automatique"
+
+#: app/controllers/repositories_controller.rb:38 app/views/patch_updates/_patches.html.erb:24
+#: ./app/controllers/repositories_controller.rb:38 ./app/views/patch_updates/_patches.html.erb:24
+msgid "Name"
+msgstr "Nom"
+
+#: app/controllers/repositories_controller.rb:39 ./app/controllers/repositories_controller.rb:39
+msgid "URL"
+msgstr "URL"
+
+#: app/controllers/repositories_controller.rb:40 ./app/controllers/repositories_controller.rb:40
+msgid "Priority"
+msgstr "Priorité"
+
+#: app/controllers/repositories_controller.rb:41 ./app/controllers/repositories_controller.rb:41
+msgid "Keep downloaded packages"
+msgstr "Conserver les paquetages téléchargés"
+
+#: app/controllers/repositories_controller.rb:51 ./app/controllers/repositories_controller.rb:51
+msgid "Cannot read repository list."
+msgstr "Impossible de lire la liste des dépôts."
+
+#: app/controllers/repositories_controller.rb:68 app/controllers/repositories_controller.rb:95
+#: ./app/controllers/repositories_controller.rb:68 ./app/controllers/repositories_controller.rb:95
+msgid "Missing repository parameter"
+msgstr "Paramètre de dépôt manquant"
+
+#: app/controllers/repositories_controller.rb:76 app/controllers/repositories_controller.rb:104
+#: ./app/controllers/repositories_controller.rb:76 ./app/controllers/repositories_controller.rb:104
+msgid "Repository '%s' was not found."
+msgstr "Le dépôt '%s' est introuvable."
+
+#: app/controllers/repositories_controller.rb:84 ./app/controllers/repositories_controller.rb:84
+msgid "Repository '%s' has been deleted."
+msgstr "Le dépôt '%s' a été supprimé."
+
+#: app/controllers/repositories_controller.rb:87 ./app/controllers/repositories_controller.rb:87
+msgid "Cannot remove repository '%s'"
+msgstr "Impossible de supprimer le dépôt '%s'"
+
+#: app/controllers/repositories_controller.rb:109 ./app/controllers/repositories_controller.rb:109
+msgid "Cannot update repository '%s': missing parameters."
+msgstr "Impossible de mettre à jour le dépôt '%s' : paramètres manquants."
+
+#: app/controllers/repositories_controller.rb:123 app/controllers/repositories_controller.rb:204
+#: ./app/controllers/repositories_controller.rb:123 ./app/controllers/repositories_controller.rb:204
+msgid "Invalid priority"
+msgstr "Priorité non valide"
+
+#: app/controllers/repositories_controller.rb:133 ./app/controllers/repositories_controller.rb:133
+msgid "Repository '%s' has been updated."
+msgstr "Le dépôt '%s' a été mis à jour."
+
+#: app/controllers/repositories_controller.rb:139 ./app/controllers/repositories_controller.rb:139
+msgid "Cannot update repository '%s': Unknown error"
+msgstr "Impossible de mettre à jour le dépôt '%s' : erreur inconnue"
+
+#: app/controllers/repositories_controller.rb:151 ./app/controllers/repositories_controller.rb:151
+msgid "Cannot update repository '%s'"
+msgstr "Impossible de mettre à jour le dépôt '%s'"
+
+#: app/controllers/repositories_controller.rb:154 ./app/controllers/repositories_controller.rb:154
+msgid "Unknown backend error: %s"
+msgstr "Erreur d'interface dorsale inconnue : %s"
+
+#: app/controllers/repositories_controller.rb:192 ./app/controllers/repositories_controller.rb:192
+msgid "Missing repository parameters"
+msgstr "Paramètres de dépôt manquants"
+
+#: app/controllers/repositories_controller.rb:215 ./app/controllers/repositories_controller.rb:215
+msgid "Repository '%s' has been added."
+msgstr "Le dépôt '%s' a été ajouté."
+
+#: app/controllers/repositories_controller.rb:221 ./app/controllers/repositories_controller.rb:221
+msgid "Cannot create repository '%s': Unknown error"
+msgstr "Impossible de créer le dépôt '%s' : erreur inconnue"
+
+#: app/controllers/repositories_controller.rb:233 ./app/controllers/repositories_controller.rb:233
+msgid "Cannot create repository '%s'"
+msgstr "Impossible de créer le dépôt '%s'"
+
+#: app/controllers/repositories_controller.rb:237 ./app/controllers/repositories_controller.rb:237
+msgid "Unknown backend error"
+msgstr "Erreur d'interface dorsale inconnue"
+
+#: app/controllers/patch_updates_controller.rb:42 ./app/controllers/patch_updates_controller.rb:42
+msgid "<p>Please reboot your system after all patches have been installed.</p>"
+msgstr "<p>Redémarrez votre système une fois tous les correctifs installés.</p>"
+
+#: app/controllers/patch_updates_controller.rb:44 ./app/controllers/patch_updates_controller.rb:44
+msgid "<p>Please logout and login again after all patches have been installed.</p>"
+msgstr "<p>Déconnectez-vous, puis reconnectez-vous une fois tous les correctifs installés.</p>"
+
+#: app/controllers/patch_updates_controller.rb:64 app/views/patch_updates/_patch_summary.html.erb:30
+#: ./app/controllers/patch_updates_controller.rb:64 ./app/views/patch_updates/_patch_summary.html.erb:30
+msgid "Cannot read patch updates: GPG key for repository <em>%s</em> is not trusted."
+msgstr "Impossible de lire les mises à jour de correctifs : la clé GPG du dépôt <em>%s</em> n'est pas approuvée."
+
+#: app/controllers/patch_updates_controller.rb:97 app/controllers/patch_updates_controller.rb:100
+#: app/views/patch_updates/_patch_progress.html.erb:2 ./app/controllers/patch_updates_controller.rb:97
+#: ./app/controllers/patch_updates_controller.rb:100 ./app/views/patch_updates/_patch_progress.html.erb:2
+msgid "A problem occured when loading patch information."
+msgstr "Un problème est survenu lors du chargement des informations sur les correctifs."
+
+#: app/views/repositories/index.html.erb:43 app/views/repositories/add.html.erb:56
+#: ./app/views/repositories/index.html.erb:43 ./app/views/repositories/add.html.erb:56
+msgid "Enter a valid repository URL."
+msgstr "Entrez une URL de dépôt valide."
+
+#: app/views/repositories/index.html.erb:51 app/views/repositories/add.html.erb:64
+#: ./app/views/repositories/index.html.erb:51 ./app/views/repositories/add.html.erb:64
+msgid "Symbols <b>%s</b> are not allowed in repository alias."
+msgstr "Les symboles <b>%s</b> ne sont pas autorisés dans les alias de dépôts."
+
+#: app/views/repositories/index.html.erb:55 app/views/repositories/add.html.erb:79
+#: ./app/views/repositories/index.html.erb:55 ./app/views/repositories/add.html.erb:79
+msgid "This value cannot be empty."
+msgstr "Cette valeur ne peut pas être vide."
+
+#: app/views/repositories/index.html.erb:99 app/views/repositories/index.html.erb:122
+#: app/views/repositories/index.html.erb:146 app/views/repositories/index.html.erb:254
+#: app/views/repositories/add.html.erb:71 app/views/patch_updates/index.html.erb:32
+#: app/views/patch_updates/index.html.erb:41 ./app/views/repositories/index.html.erb:99
+#: ./app/views/repositories/index.html.erb:122 ./app/views/repositories/index.html.erb:146
+#: ./app/views/repositories/index.html.erb:254 ./app/views/repositories/add.html.erb:71
+#: ./app/views/patch_updates/index.html.erb:32 ./app/views/patch_updates/index.html.erb:41
+msgid "Please wait"
+msgstr "Veuillez patienter"
+
+#: app/views/repositories/index.html.erb:195 app/views/repositories/add.html.erb:153
+#: ./app/views/repositories/index.html.erb:195 ./app/views/repositories/add.html.erb:153 ./shortcuts.yml:15
+msgid "Software Repositories"
+msgstr "Dépôts de logiciels"
+
+#: app/views/repositories/index.html.erb:200 ./app/views/repositories/index.html.erb:200
+msgid "Configured software repositories"
+msgstr "Dépôts de logiciels configurés"
+
+#: app/views/repositories/index.html.erb:211 ./app/views/repositories/index.html.erb:211
+msgid "Quick Search"
+msgstr "Recherche rapide"
+
+#: app/views/repositories/index.html.erb:219 ./app/views/repositories/index.html.erb:219
+msgid "Add New Repository"
+msgstr "Ajouter un nouveau référentiel"
+
+#: app/views/repositories/index.html.erb:225 ./app/views/repositories/index.html.erb:225
+msgid "Filter repositories"
+msgstr "Filtrer les dépôts"
+
+#: app/views/repositories/index.html.erb:229 ./app/views/repositories/index.html.erb:229
+msgid "All"
+msgstr "Tout"
+
+#: app/views/repositories/index.html.erb:231 ./app/views/repositories/index.html.erb:231
+msgid "Disabled"
+msgstr "Désactivé"
+
+#: app/views/repositories/index.html.erb:277 ./app/views/repositories/index.html.erb:277
+msgid "Repository is currently"
+msgstr "Le dépôt est actuellement"
+
+#: app/views/repositories/index.html.erb:280 app/views/repositories/add.html.erb:176
+#: app/views/repositories/add.html.erb:177 ./app/views/repositories/index.html.erb:280
+#: ./app/views/repositories/add.html.erb:176 ./app/views/repositories/add.html.erb:177
+msgid "Repository will be %s."
+msgstr "Le dépôt sera %s."
+
+#: app/views/repositories/index.html.erb:284 ./app/views/repositories/index.html.erb:284
+msgid "Autorefresh is currently"
+msgstr "Le rafraîchissement automatique est actuellement"
+
+#: app/views/repositories/index.html.erb:287 app/views/repositories/add.html.erb:181
+#: app/views/repositories/add.html.erb:182 ./app/views/repositories/index.html.erb:287
+#: ./app/views/repositories/add.html.erb:181 ./app/views/repositories/add.html.erb:182
+msgid "Autorefresh will be %s."
+msgstr "Le rafraîchissement automatique sera %s."
+
+#: app/views/repositories/index.html.erb:291 ./app/views/repositories/index.html.erb:291
+msgid "Keeping downloaded packages is currently"
+msgstr "La conservation des paquetages téléchargés est actuellement"
+
+#: app/views/repositories/index.html.erb:294 app/views/repositories/add.html.erb:186
+#: app/views/repositories/add.html.erb:187 ./app/views/repositories/index.html.erb:294
+#: ./app/views/repositories/add.html.erb:186 ./app/views/repositories/add.html.erb:187
+msgid "Keep packages option will be %s."
+msgstr "L'option de conservation des paquetages sera %s."
+
+#: app/views/repositories/index.html.erb:301 app/views/repositories/add.html.erb:195
+#: ./app/views/repositories/index.html.erb:301 ./app/views/repositories/add.html.erb:195
+msgid "Save"
+msgstr "Enregistrer"
+
+#: app/views/repositories/index.html.erb:302 ./app/views/repositories/index.html.erb:302
+msgid "Delete"
+msgstr "Effacer"
+
+#: app/views/repositories/index.html.erb:304 ./app/views/repositories/index.html.erb:304
+msgid "Really delete repository '%s'?"
+msgstr "Voulez-vous vraiment supprimer le dépôt '%s' ?"
+
+#: app/views/repositories/add.html.erb:125 ./app/views/repositories/add.html.erb:125
+msgid "A repository with this URL already exists.\nCreate a duplicate?"
+msgstr "Un dépôt avec cette URL existe déjà.\nCréer un doublon ?"
+
+#: app/views/repositories/add.html.erb:155 ./app/views/repositories/add.html.erb:155
+msgid "Add a new repository"
+msgstr "Ajouter un nouveau dépôt"
+
+#: app/views/repositories/add.html.erb:164 ./app/views/repositories/add.html.erb:164
+msgid "New Repository"
+msgstr "Nouveau dépôt"
+
+#: app/views/patch_updates/_patch_installation.html.erb:8 ./app/views/patch_updates/_patch_installation.html.erb:8
+msgid "An error occured while installing patches."
+msgstr "Une erreur est survenue lors de l'installation des correctifs."
+
+#: app/views/patch_updates/_patch_installation.html.erb:35 ./app/views/patch_updates/_patch_installation.html.erb:35
+msgid "Patch Installation"
+msgstr "Installation des correctifs"
+
+#: app/views/patch_updates/_patch_installation.html.erb:45 ./app/views/patch_updates/_patch_installation.html.erb:45
+msgid "Stop"
+msgstr "Arrêter"
+
+#: app/views/patch_updates/_patch_installation.html.erb:45 ./app/views/patch_updates/_patch_installation.html.erb:45
+msgid "Are you sure?"
+msgstr "Êtes-vous sûr ?"
+
+#: app/views/patch_updates/index.html.erb:50 ./app/views/patch_updates/index.html.erb:50
+msgid "Updates"
+msgstr "Mises à jour"
+
+#: app/views/patch_updates/index.html.erb:55 app/views/patch_updates/_patch_summary.html.erb:55
+#: ./app/views/patch_updates/index.html.erb:55 ./app/views/patch_updates/_patch_summary.html.erb:55
+msgid "Your system is up to date."
+msgstr "Votre système est à jour."
+
+#: app/views/patch_updates/index.html.erb:74 ./app/views/patch_updates/index.html.erb:74
+msgid "Please wait ..."
+msgstr "Veuillez patienter..."
+
+#: app/views/patch_updates/index.html.erb:78 ./app/views/patch_updates/index.html.erb:78
+msgid "Updates available"
+msgstr "Mises à jour disponibles"
+
+#: app/views/patch_updates/index.html.erb:83 ./app/views/patch_updates/index.html.erb:83
+msgid "All updates"
+msgstr "Toutes les mises à jour"
+
+#: app/views/patch_updates/index.html.erb:88 ./app/views/patch_updates/index.html.erb:88
+msgid "Security"
+msgstr "Sécurité"
+
+#: app/views/patch_updates/index.html.erb:92 ./app/views/patch_updates/index.html.erb:92
+msgid "Important"
+msgstr "Important"
+
+#: app/views/patch_updates/index.html.erb:97 ./app/views/patch_updates/index.html.erb:97
+msgid "Recommended"
+msgstr "Recommandé"
+
+#: app/views/patch_updates/index.html.erb:102 ./app/views/patch_updates/index.html.erb:102
+msgid "Optional"
+msgstr "Facultatif"
+
+#: app/views/patch_updates/index.html.erb:113 ./app/views/patch_updates/index.html.erb:113
+msgid "Update"
+msgstr "Mettre à jour"
+
+#: app/views/patch_updates/_patch_progress.html.erb:6 ./app/views/patch_updates/_patch_progress.html.erb:6
+msgid "Refreshing package cache"
+msgstr "Actualisation du cache des paquetages"
+
+#: app/views/patch_updates/_patch_progress.html.erb:7 ./app/views/patch_updates/_patch_progress.html.erb:7
+msgid "Starting package manager"
+msgstr "Démarrage du gestionnaire de paquetages"
+
+#: app/views/patch_updates/_patch_progress.html.erb:8 ./app/views/patch_updates/_patch_progress.html.erb:8
+msgid "Waiting for the package manager lock"
+msgstr "Verrouillage de gestionnaire de paquetages en attente"
+
+#: app/views/patch_updates/_patch_progress.html.erb:9 app/views/patch_updates/_patch_progress.html.erb:19
+#: ./app/views/patch_updates/_patch_progress.html.erb:9 ./app/views/patch_updates/_patch_progress.html.erb:19
+msgid "Evaluating available patches"
+msgstr "Évaluation des correctifs disponibles"
+
+#: app/views/patch_updates/_patch_progress.html.erb:10 ./app/views/patch_updates/_patch_progress.html.erb:10
+msgid "Finished reading patches"
+msgstr "Lecture des correctifs terminée"
+
+#: app/views/patch_updates/_patches.html.erb:10 ./app/views/patch_updates/_patches.html.erb:10
+msgid "One of the patches seems to update WebYaST itself.\nYou may need to reload the page after applying the patch."
+msgstr "Il semble que l'un des correctifs mette à jour WebYaST.\nIl sera peut-être nécessaire de recharger la page après l'application du correctif."
+
+#: app/views/patch_updates/_patches.html.erb:15 ./app/views/patch_updates/_patches.html.erb:15
+msgid "No patches available"
+msgstr "Pas de correctifs disponibles"
+
+#: app/views/patch_updates/_patches.html.erb:21 ./app/views/patch_updates/_patches.html.erb:21
+msgid "Check"
+msgstr "Vérifier"
+
+#: app/views/patch_updates/_patches.html.erb:23 ./app/views/patch_updates/_patches.html.erb:23
+msgid "Kind"
+msgstr "Type"
+
+#: app/views/patch_updates/_patches.html.erb:25 ./app/views/patch_updates/_patches.html.erb:25
+msgid "Summary"
+msgstr "Résumé"
+
+#: app/views/patch_updates/_patches.html.erb:27 app/views/patch_updates/_patches.html.erb:30
+#: ./app/views/patch_updates/_patches.html.erb:27 ./app/views/patch_updates/_patches.html.erb:30
+msgid "Source"
+msgstr "Source"
+
+#: app/views/patch_updates/_patches.html.erb:28 ./app/views/patch_updates/_patches.html.erb:28
+msgid "Install"
+msgstr "Installer"
+
+#: app/views/patch_updates/_patch_summary.html.erb:25 ./app/views/patch_updates/_patch_summary.html.erb:25
+msgid "Cannot read patch updates - you have been logged out."
+msgstr "Impossible de lire les mises à jour de correctif - vous avez été déconnecté."
+
+#: app/views/patch_updates/_patch_summary.html.erb:28 ./app/views/patch_updates/_patch_summary.html.erb:28
+msgid "No information about patches available"
+msgstr "Pas d'informations sur les correctifs disponibles"
+
+#: app/views/patch_updates/_patch_summary.html.erb:46 ./app/views/patch_updates/_patch_summary.html.erb:46
+msgid "Security Updates: %d"
+msgstr "Mises à jour de sécurité : %d"
+
+#: app/views/patch_updates/_patch_summary.html.erb:49 ./app/views/patch_updates/_patch_summary.html.erb:49
+msgid "Important Updates: %d"
+msgstr "Mises à jour importantes : %d"
+
+#: app/views/patch_updates/_patch_summary.html.erb:52 ./app/views/patch_updates/_patch_summary.html.erb:52
+msgid "Optional Updates: %d"
+msgstr "Mises à jour optionnelles : %d"
+
+#: app/views/patch_updates/_patch_summary.html.erb:60 ./app/views/patch_updates/_patch_summary.html.erb:60
+msgid "Update All"
+msgstr "Tout mettre à jour"
+
+#: app/views/patch_updates/_patch_summary.html.erb:60 ./app/views/patch_updates/_patch_summary.html.erb:60
+msgid "Updating all. Are you sure?"
+msgstr "Installation de toutes les mises à jour. Êtes-vous sûr ?"
+
+#: app/views/patch_updates/_patch_summary.html.erb:67 ./app/views/patch_updates/_patch_summary.html.erb:67
+msgid "Loading patch information"
+msgstr "Chargement des informations sur les correctifs"
+
+#: ./shortcuts.yml:16
+msgid "See and manage configured software repositories"
+msgstr "Afficher et gérer les dépôts de logiciels configurés"
+

@@ -1,0 +1,367 @@
+# translation of yast_webclient_software.km.po to Khmer
+# Khoem Sokhem <khoemsokhem@khmeros.info>, 2010.
+msgid ""
+msgstr ""
+"Project-Id-Version: yast_webclient_software.km\n"
+"Report-Msgid-Bugs-To: translation@suse.de\n"
+"POT-Creation-Date: 2010-04-13 13:37+0200\n"
+"PO-Revision-Date: 2010-04-21 08:26+0700\n"
+"Last-Translator: Khoem Sokhem <khoemsokhem@khmeros.info>\n"
+"Language-Team: Khmer <support@khmeros.info>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"X-Generator: KBabel 1.11.4\n"
+
+#: app/helpers/repositories_helper.rb:5
+msgid "Highest"
+msgstr "ខ្ពស់​បំផុត"
+
+#: app/helpers/repositories_helper.rb:6
+msgid "Higher"
+msgstr "ខ្ពស់​ជាង"
+
+#: app/helpers/repositories_helper.rb:7
+msgid "Default"
+msgstr "លំនាំដើម"
+
+#: app/helpers/repositories_helper.rb:8
+msgid "Low"
+msgstr "ខ្សោយ"
+
+#: app/helpers/repositories_helper.rb:9
+msgid "Lowest"
+msgstr "ទាប​​បំផុត"
+
+#: app/helpers/repositories_helper.rb:15
+msgid "Highest priority"
+msgstr "អាទិភាព​ខ្ពស់​បំផុត"
+
+#: app/helpers/repositories_helper.rb:16
+msgid "Higher priority"
+msgstr "អាទិភាព​ខ្ពស់​ជាង"
+
+#: app/helpers/repositories_helper.rb:18
+msgid "Low priority"
+msgstr "អាទិភាព​ទាប"
+
+#: app/helpers/repositories_helper.rb:19
+msgid "Lowest priority"
+msgstr "អាទិភាព​ទាប​បំផុត"
+
+#: app/helpers/repositories_helper.rb:24
+msgid "Custom priority"
+msgstr "អាទិភាព​ផ្ទាល់ខ្លួន"
+
+#: app/helpers/repositories_helper.rb:29
+msgid "Custom"
+msgstr "ផ្ទាល់ខ្លួន"
+
+#: app/helpers/repositories_helper.rb:41
+#: app/views/repositories/index.html.erb:119
+#: app/views/repositories/add.html.erb:42
+msgid "enable"
+msgstr "បើក"
+
+#: app/helpers/repositories_helper.rb:41
+#: app/views/repositories/index.html.erb:124
+#: app/views/repositories/add.html.erb:49
+msgid "disable"
+msgstr "បិទ"
+
+#: app/helpers/repositories_helper.rb:46
+msgid "enabled"
+msgstr "អនុញ្ញាត"
+
+#: app/helpers/repositories_helper.rb:46
+msgid "disabled"
+msgstr "បាន​បិទ"
+
+#: app/controllers/repositories_controller.rb:14
+msgid "Alias"
+msgstr "ឈ្មោះ​ក្លែងក្លាយ"
+
+#: app/controllers/repositories_controller.rb:15
+#: app/views/repositories/index.html.erb:151
+msgid "Enabled"
+msgstr "អនុញ្ញាត"
+
+#: app/controllers/repositories_controller.rb:16
+msgid "Autorefresh"
+msgstr "ធ្វើ​ឲ្យ​ស្រស់​ដោយ​ស្វ័យ​ប្រវត្តិ"
+
+#: app/controllers/repositories_controller.rb:17
+#: app/views/patch_updates/_patches.html.erb:14
+msgid "Name"
+msgstr "ឈ្មោះ"
+
+#: app/controllers/repositories_controller.rb:18
+msgid "URL"
+msgstr "URL"
+
+#: app/controllers/repositories_controller.rb:19
+msgid "Priority"
+msgstr "អទិភាព"
+
+#: app/controllers/repositories_controller.rb:20
+msgid "Keep downloaded packages"
+msgstr "ទុក​កញ្ចប់​ដែលបានទាញយក"
+
+#: app/controllers/repositories_controller.rb:30
+msgid "Cannot read repository list."
+msgstr "មិន​អាច​អាន​បញ្ជី​ឃ្លាំង​បាន​ទេ ។"
+
+#: app/controllers/repositories_controller.rb:47
+#: app/controllers/repositories_controller.rb:74
+msgid "Missing repository parameter"
+msgstr "បាត់​ប៉ារ៉ាម៉ែត្រ​ឃ្លាំង"
+
+#: app/controllers/repositories_controller.rb:102
+#: app/controllers/repositories_controller.rb:183
+msgid "Invalid priority"
+msgstr "អាទិភាព​មិន​ត្រឹមត្រូវ"
+
+#: app/controllers/repositories_controller.rb:171
+msgid "Missing repository parameters"
+msgstr "បាត់​ប៉ារ៉ាម៉ែត្រ​ខ្លាំង"
+
+#: app/controllers/repositories_controller.rb:209
+msgid "Unknown backend error"
+msgstr "មិនស្គាល់​កំហុស​កម្មវិធី​ខាង​ក្រោយ"
+
+#: app/controllers/patch_updates_controller.rb:45
+#: app/controllers/patch_updates_controller.rb:48
+#: app/views/patch_updates/_patch_progress.html.erb:1
+msgid "A problem occured when loading patch information."
+msgstr "បញ្ហា​មួយ​បានកើត​ឡើង​ នៅពេល​ផ្ទុក​ព័ត៌មាន​បំណះ ។"
+
+#: app/controllers/patch_updates_controller.rb:105
+msgid "Installing all patches..."
+msgstr "កំពុង​ដំឡើង​បំណះ​ទាំងអស់..."
+
+#: app/controllers/patch_updates_controller.rb:113
+msgid "Installation stopped"
+msgstr "កា​រដំឡើង​បានបញ្ឈប់​"
+
+#: app/controllers/patch_updates_controller.rb:150
+msgid "Installation finished"
+msgstr "ការ​ដំឡើង​បានបញ្ចប់"
+
+#: app/controllers/patch_updates_controller.rb:152
+msgid "%s installed."
+msgstr "បាន​ដំឡើង %s ។"
+
+#: app/controllers/patch_updates_controller.rb:181
+msgid "Patch has been installed."
+msgstr "បំណះ​ត្រូវ​បាន​ដំឡើង ។"
+
+#: app/views/repositories/index.html.erb:20
+#: app/views/repositories/add.html.erb:16
+msgid "Enter a valid repository URL."
+msgstr "បញ្ចូល URL ឃ្លាំង​ដែល​ត្រឹមត្រូវ ។"
+
+#: app/views/repositories/index.html.erb:28
+#: app/views/repositories/add.html.erb:24
+msgid "Symbols <b>%s</b> are not allowed in repository alias."
+msgstr "និមិត្តសញ្ញា <b>%s</b> មិន​ត្រូ​វបាន​អនុញ្ញាត​នៅ​ក្នុង​ឈ្មោះ​ក្លែងក្លាយ​របស់​ឃ្លាំងទេ ។"
+
+#: app/views/repositories/index.html.erb:32
+#: app/views/repositories/add.html.erb:31
+msgid "This value cannot be empty."
+msgstr "តម្លៃ​នេះ​មិនអាច​ទទេ"
+
+#: app/views/repositories/index.html.erb:140
+#: app/views/repositories/add.html.erb:105
+msgid "Software Repositories"
+msgstr "ឃ្លាំង​កម្មវិធី"
+
+#: app/views/repositories/index.html.erb:145
+msgid "Configured software repositories"
+msgstr "ឃ្លាំង​កម្មវិធី​ដែល​បានកំណត់​រចនាសម្ព័ន្ធ"
+
+#: app/views/repositories/index.html.erb:148
+msgid "Filter repositories"
+msgstr "ត្រង​ឃ្លាំង"
+
+#: app/views/repositories/index.html.erb:150
+msgid "All"
+msgstr "ទាំងអស់"
+
+#: app/views/repositories/index.html.erb:152
+msgid "Disabled"
+msgstr "បិទ"
+
+#: app/views/repositories/index.html.erb:159
+msgid "Quick Search"
+msgstr "ស្វែងរក​រហ័ស"
+
+#: app/views/repositories/index.html.erb:165
+msgid "Add New Repository"
+msgstr "បន្ថែម​ឃ្លាំង​ថ្មី"
+
+#: app/views/repositories/index.html.erb:208
+msgid "Repository is currently"
+msgstr "ឃ្លាំង​បច្ចុប្បន្ន"
+
+#: app/views/repositories/index.html.erb:211
+#: app/views/repositories/add.html.erb:128
+#: app/views/repositories/add.html.erb:129
+msgid "Repository will be %s."
+msgstr "ឃ្លាំង​នឹង​ក្លាយ​ជា %s ។"
+
+#: app/views/repositories/index.html.erb:215
+msgid "Autorefresh is currently"
+msgstr "ការ​ធ្វើ​ឲ្យ​ស្រស់​ដោយ​ស្វ័យ​ប្រវត្តិ​បច្ចុប្បន្ន"
+
+#: app/views/repositories/index.html.erb:218
+#: app/views/repositories/add.html.erb:133
+#: app/views/repositories/add.html.erb:134
+msgid "Autorefresh will be %s."
+msgstr "ធ្វើ​ឲ្យ​ស្រស់​ដោយ​ស្វ័យ​ប្រវត្តិ​នឹង​​ក្លាយ​ជា %s ។"
+
+#: app/views/repositories/index.html.erb:222
+msgid "Keeping downloaded packages is currently"
+msgstr "ទុក​កញ្ចប់​ដែល​បានទាញយក​បច្ចុប្បន្ន"
+
+#: app/views/repositories/index.html.erb:225
+#: app/views/repositories/add.html.erb:140
+#: app/views/repositories/add.html.erb:141
+msgid "Keep packages option will be %s."
+msgstr "ទុក​ជម្រើស​កញ្ចប់​នឹង​ជា %s ។"
+
+#: app/views/repositories/index.html.erb:232
+#: app/views/repositories/add.html.erb:149
+msgid "Save"
+msgstr "រក្សា​ទុក"
+
+#: app/views/repositories/index.html.erb:233
+msgid "Delete"
+msgstr "លុប"
+
+#: app/views/repositories/index.html.erb:235
+msgid "Really delete repository '%s'?"
+msgstr "ពិត​ជា​លុប​ឃ្លាំង '%s' ឬ ?"
+
+#: app/views/repositories/add.html.erb:77
+msgid ""
+"A repository with this URL already exists.\n"
+"Create a duplicate?"
+msgstr ""
+"មាន​ឃ្លាំង​ដែលមាន URL នេះ​រួច​ហើយ ។\n"
+"បង្កើត​ស្ទួន ?"
+
+#: app/views/repositories/add.html.erb:107
+msgid "Add a new repository"
+msgstr "បន្ថែម​ឃ្លាំង​ថ្មី"
+
+#: app/views/repositories/add.html.erb:116
+msgid "New Repository"
+msgstr "ឃ្លាំង​ថ្មី"
+
+#: app/views/repositories/add.html.erb:137
+msgid "Priority for packages:"
+msgstr "អាទិភាព​សម្រាប់​កញ្ចប់ ៖"
+
+#: app/views/patch_updates/_patch_installation.html.erb:7
+msgid "An error occured while installing patches."
+msgstr "កំហុស​មួយ​បានកើតឡើង ​ខណៈពេល​ដំឡើង​បំណះ ។"
+
+#: app/views/patch_updates/_patch_installation.html.erb:19
+msgid "Stop"
+msgstr "បញ្ឈប់"
+
+#: app/views/patch_updates/_patch_installation.html.erb:19
+msgid "Are you sure?"
+msgstr "តើ​អ្នក​ប្រាកដ​ឬ ?"
+
+#: app/views/patch_updates/index.html.erb:11
+msgid "Updates"
+msgstr "ភាព​ទាន់សម័យ"
+
+#: app/views/patch_updates/index.html.erb:16
+#: app/views/patch_updates/_patch_summary.html.erb:35
+msgid "Your system is up to date."
+msgstr "ប្រព័ន្ធ​របស់​អ្នក​ទាន់សម័យ ។"
+
+#: app/views/patch_updates/index.html.erb:21
+msgid "Updates available"
+msgstr "មាន​ភាព​ទាន់សម័យ"
+
+#: app/views/patch_updates/index.html.erb:38
+msgid "Update"
+msgstr "ធ្វើ​ឲ្យ​ទាន់សម័យ"
+
+#: app/views/patch_updates/_patch_progress.html.erb:5
+msgid "Refreshing package cache"
+msgstr "ធ្វើ​ឲ្យ​ឃ្លាំង​សម្ងាត់​កញ្ចប់​ស្រស់"
+
+#: app/views/patch_updates/_patch_progress.html.erb:6
+msgid "Starting package manager"
+msgstr "ចាប់ផ្ដើម​កម្មវិធី​គ្រប់គ្រង​កញ្ចប់"
+
+#: app/views/patch_updates/_patch_progress.html.erb:7
+msgid "Waiting for the package manager lock"
+msgstr "រង់ចាំ​កម្មវិធី​គ្រប់គ្រងកញ្ចប់​​ចាក់សោ"
+
+#: app/views/patch_updates/_patch_progress.html.erb:8
+#: app/views/patch_updates/_patch_progress.html.erb:18
+msgid "Evaluating available patches"
+msgstr "វាយតម្លៃ​បំណះ​ដែល​អាច​ប្រើបាន"
+
+#: app/views/patch_updates/_patch_progress.html.erb:9
+msgid "Finished reading patches"
+msgstr "បានបញ្ចប់​ការ​អាន​បំណះ"
+
+#: app/views/patch_updates/_patches.html.erb:11
+msgid "Check"
+msgstr "ពិនិត្យ​មើល"
+
+#: app/views/patch_updates/_patches.html.erb:13
+msgid "Kind"
+msgstr "ប្រភេទ"
+
+#: app/views/patch_updates/_patches.html.erb:15
+msgid "Summary"
+msgstr "សង្ខេប"
+
+#: app/views/patch_updates/_patches.html.erb:17
+#: app/views/patch_updates/_patches.html.erb:20
+msgid "Source"
+msgstr "ប្រភព"
+
+#: app/views/patch_updates/_patches.html.erb:18
+msgid "Install"
+msgstr "ដំឡើង"
+
+#: app/views/patch_updates/_patch_summary.html.erb:9
+msgid "Cannot read patch updates - you have been logged out."
+msgstr "មិនអាច​អាន​ភាព​ទាន់សម័យ​របស់​បំណះ​បាន​ទេ - អ្នក​ត្រូវ​បាន​ចេញ​ហើយ ។"
+
+#: app/views/patch_updates/_patch_summary.html.erb:12
+msgid "No information about patches available"
+msgstr "មិនមាន​ព័ត៌មាន​អំពី​បំណះ​ទេ"
+
+#: app/views/patch_updates/_patch_summary.html.erb:26
+msgid "Security Updates: %d"
+msgstr "ភាព​ទាន់សម័យ​សុវត្ថិភាព ៖ %d"
+
+#: app/views/patch_updates/_patch_summary.html.erb:29
+msgid "Important Updates: %d"
+msgstr "ភាព​ទាន់សម័យ​ដែល​សំខាន់ ៖ %d"
+
+#: app/views/patch_updates/_patch_summary.html.erb:32
+msgid "Optional Updates: %d"
+msgstr "ភាព​ទាន់សម័យ​ជា​ជម្រើស ៖ %d"
+
+#: app/views/patch_updates/_patch_summary.html.erb:40
+msgid "Update All"
+msgstr "ធ្វើ​ឲ្យ​​ទាន់សម័យ​ទាំងអស់"
+
+#: app/views/patch_updates/_patch_summary.html.erb:40
+msgid "Updating all. Are you sure?"
+msgstr "ធ្វើ​ឲ្យ​ទាន់សម័យ​ទាំងអស់ ។ តើ​អ្នក​ប្រាកដ​ទេ ?"
+
+#: app/views/patch_updates/_patch_summary.html.erb:47
+msgid "Loading patch information"
+msgstr "ផ្ទុក​ព័ត៌មាន​បំណះ"

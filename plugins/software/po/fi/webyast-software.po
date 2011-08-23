@@ -1,0 +1,419 @@
+# Jyri Palokangas <jmp@opensuse.org>, 2010.
+msgid ""
+msgstr ""
+"Project-Id-Version: @PACKAGE@\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2010-04-13 13:37+0200\n"
+"PO-Revision-Date: 2010-05-04 17:09+0300\n"
+"Last-Translator: Jyri Palokangas <jmp@opensuse.org>\n"
+"Language-Team: TRANSLATIONS <kde-i18n-doc@kde.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Lokalize 1.0\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+
+#: app/helpers/repositories_helper.rb:5
+msgid "Highest"
+msgstr "Korkein"
+
+#: app/helpers/repositories_helper.rb:6
+msgid "Higher"
+msgstr "Korkeampi"
+
+#: app/helpers/repositories_helper.rb:7
+msgid "Default"
+msgstr "Oletus"
+
+#: app/helpers/repositories_helper.rb:8
+msgid "Low"
+msgstr "Matala"
+
+#: app/helpers/repositories_helper.rb:9
+#| msgid "Lower"
+msgid "Lowest"
+msgstr "Matalin"
+
+#: app/helpers/repositories_helper.rb:15
+msgid "Highest priority"
+msgstr "Korkein tärkeys"
+
+#: app/helpers/repositories_helper.rb:16
+#| msgid "Priority"
+msgid "Higher priority"
+msgstr "Korkeampi tärkeys"
+
+#: app/helpers/repositories_helper.rb:18
+#| msgid "Priority"
+msgid "Low priority"
+msgstr "Matala tärkeys"
+
+#: app/helpers/repositories_helper.rb:19
+#| msgid "Priority"
+msgid "Lowest priority"
+msgstr "Matalin tärkeys"
+
+#: app/helpers/repositories_helper.rb:24
+#| msgid "Priority"
+msgid "Custom priority"
+msgstr "Muokattu tärkeysjärjestys"
+
+#: app/helpers/repositories_helper.rb:29
+msgid "Custom"
+msgstr "Muokattu"
+
+#: app/helpers/repositories_helper.rb:41
+#: app/views/repositories/index.html.erb:119
+#: app/views/repositories/add.html.erb:42
+#| msgid "enabled"
+msgid "enable"
+msgstr "ota käyttöön"
+
+#: app/helpers/repositories_helper.rb:41
+#: app/views/repositories/index.html.erb:124
+#: app/views/repositories/add.html.erb:49
+#| msgid "Disable"
+msgid "disable"
+msgstr "poista käytöstä"
+
+#: app/helpers/repositories_helper.rb:46
+msgid "enabled"
+msgstr "otettu käyttöön"
+
+#: app/helpers/repositories_helper.rb:46
+#| msgid "Disabled"
+msgid "disabled"
+msgstr "poistettu käytöstä"
+
+#: app/controllers/repositories_controller.rb:14
+msgid "Alias"
+msgstr "Alias"
+
+#: app/controllers/repositories_controller.rb:15
+#: app/views/repositories/index.html.erb:151
+msgid "Enabled"
+msgstr "Käytössä"
+
+#: app/controllers/repositories_controller.rb:16
+msgid "Autorefresh"
+msgstr "Automaattinen päivitys"
+
+#: app/controllers/repositories_controller.rb:17
+#: app/views/patch_updates/_patches.html.erb:14
+msgid "Name"
+msgstr "Nimi"
+
+#: app/controllers/repositories_controller.rb:18
+#| msgid "URI"
+msgid "URL"
+msgstr "URL"
+
+#: app/controllers/repositories_controller.rb:19
+msgid "Priority"
+msgstr "Tärkeysjärjestys"
+
+#: app/controllers/repositories_controller.rb:20
+#| msgid "Downloaded packages"
+msgid "Keep downloaded packages"
+msgstr "Pidä ladatut paketit"
+
+#: app/controllers/repositories_controller.rb:30
+#| msgid "Cannot write repository configuration"
+msgid "Cannot read repository list."
+msgstr "Asennuslähde-luetteloa ei voi lukea"
+
+#: app/controllers/repositories_controller.rb:47
+#: app/controllers/repositories_controller.rb:74
+#| msgid "Setting repository data"
+msgid "Missing repository parameter"
+msgstr "Puuttuva asennuslähteen parametri"
+
+#: app/controllers/repositories_controller.rb:102
+#: app/controllers/repositories_controller.rb:183
+#| msgid "Invalid capability %s."
+msgid "Invalid priority"
+msgstr "Virheellinen tärkeys"
+
+#: app/controllers/repositories_controller.rb:171
+#| msgid "Disabling repository '%s'."
+msgid "Missing repository parameters"
+msgstr "Puuttuvat asennuslähteen parametrit"
+
+#: app/controllers/repositories_controller.rb:209
+#| msgid "Unknown error\n"
+msgid "Unknown backend error"
+msgstr "Tuntematon taustaosan virhe"
+
+#: app/controllers/patch_updates_controller.rb:45
+#: app/controllers/patch_updates_controller.rb:48
+#: app/views/patch_updates/_patch_progress.html.erb:1
+#| msgid "Downloading update information"
+msgid "A problem occured when loading patch information."
+msgstr "Ilmeni ongelma ladattaessa tietoja korjauksista."
+
+#: app/controllers/patch_updates_controller.rb:105
+#| msgid "Installing updates..."
+msgid "Installing all patches..."
+msgstr "Asennetaan kaikki päivitykset..."
+
+#: app/controllers/patch_updates_controller.rb:113
+#| msgid "Installation Source"
+msgid "Installation stopped"
+msgstr "Asennus pysäytettiin"
+
+#: app/controllers/patch_updates_controller.rb:150
+#| msgid "Installation"
+msgid "Installation finished"
+msgstr "Asennus on valmis"
+
+#: app/controllers/patch_updates_controller.rb:152
+#| msgid "%s installed ok"
+msgid "%s installed."
+msgstr "%s asennettu."
+
+#: app/controllers/patch_updates_controller.rb:181
+#| msgid "Package '%s' has been installed"
+msgid "Patch has been installed."
+msgstr "Korjaukset on asennettu."
+
+#: app/views/repositories/index.html.erb:20
+#: app/views/repositories/add.html.erb:16
+#| msgid "Enabled repository"
+msgid "Enter a valid repository URL."
+msgstr "Anna kelpaava asennuslähteen URL."
+
+#: app/views/repositories/index.html.erb:28
+#: app/views/repositories/add.html.erb:24
+msgid "Symbols <b>%s</b> are not allowed in repository alias."
+msgstr "Symbolit <b>%s</b> eivät ole sallittuja asennuslähteen aliasnimessä."
+
+#: app/views/repositories/index.html.erb:32
+#: app/views/repositories/add.html.erb:31
+#| msgid "The idmapd section name may not be empty."
+msgid "This value cannot be empty."
+msgstr "Tämä arvo ei voi olla tyhjä."
+
+#: app/views/repositories/index.html.erb:140
+#: app/views/repositories/add.html.erb:105
+#| msgid "Specified repositories: "
+msgid "Software Repositories"
+msgstr "Ohjelmistoasennuslähteet"
+
+#: app/views/repositories/index.html.erb:145
+#| msgid "Got list of repositories"
+msgid "Configured software repositories"
+msgstr "Määritetyt ohjelmistojen asennuslähteet"
+
+#: app/views/repositories/index.html.erb:148
+#| msgid "Got list of repositories"
+msgid "Filter repositories"
+msgstr "Suodata asennuslähteet"
+
+#: app/views/repositories/index.html.erb:150
+#| msgid "Alt"
+msgid "All"
+msgstr "Kaikki"
+
+#: app/views/repositories/index.html.erb:152
+msgid "Disabled"
+msgstr "Poistettu käytöstä"
+
+#: app/views/repositories/index.html.erb:159
+#| msgid "Search"
+msgid "Quick Search"
+msgstr "Nopea etsintä"
+
+#: app/views/repositories/index.html.erb:165
+#| msgid "Repository"
+msgid "Add New Repository"
+msgstr "Lisää uusi asennuslähde"
+
+#: app/views/repositories/index.html.erb:208
+#| msgid "Repository Error"
+msgid "Repository is currently"
+msgstr "Asennuslähde on tällä hetkellä"
+
+#: app/views/repositories/index.html.erb:211
+#: app/views/repositories/add.html.erb:128
+#: app/views/repositories/add.html.erb:129
+#| msgid "Repository name:"
+msgid "Repository will be %s."
+msgstr "Asennuslähde %s."
+
+#: app/views/repositories/index.html.erb:215
+#| msgid "Autorefresh disabled."
+msgid "Autorefresh is currently"
+msgstr "Automaattinen päivitys on tällä hetkellä"
+
+#: app/views/repositories/index.html.erb:218
+#: app/views/repositories/add.html.erb:133
+#: app/views/repositories/add.html.erb:134
+#| msgid "Autorefresh disabled."
+msgid "Autorefresh will be %s."
+msgstr "Automaattinen päivitys on %s."
+
+#: app/views/repositories/index.html.erb:222
+#| msgid "Downloaded packages"
+msgid "Keeping downloaded packages is currently"
+msgstr "Säilytä ladatut paketit on tällä hetkellä"
+
+#: app/views/repositories/index.html.erb:225
+#: app/views/repositories/add.html.erb:140
+#: app/views/repositories/add.html.erb:141
+msgid "Keep packages option will be %s."
+msgstr "Säilytä paketit valinta on %s."
+
+#: app/views/repositories/index.html.erb:232
+#: app/views/repositories/add.html.erb:149
+msgid "Save"
+msgstr "Tallenna"
+
+#: app/views/repositories/index.html.erb:233
+msgid "Delete"
+msgstr "Poista"
+
+#: app/views/repositories/index.html.erb:235
+#| msgid "Reading repository '%s' cache"
+msgid "Really delete repository '%s'?"
+msgstr "Poistetaanko varmasti asennuslähde '%s'?"
+
+#: app/views/repositories/add.html.erb:77
+msgid ""
+"A repository with this URL already exists.\n"
+"Create a duplicate?"
+msgstr ""
+"Asennuslähde tällä URL-osoitteella on jo olemassa.\n"
+"Luodaanko kaksoiskappale?"
+
+#: app/views/repositories/add.html.erb:107
+#| msgid "Adding repository '%s'"
+msgid "Add a new repository"
+msgstr "Lisää uusi asennuslähde"
+
+#: app/views/repositories/add.html.erb:116
+#| msgid "Repository"
+msgid "New Repository"
+msgstr "Uusi asennuslähde"
+
+#: app/views/repositories/add.html.erb:137
+#| msgid "Searching for packages"
+msgid "Priority for packages:"
+msgstr "Pakettien prioriteetit:"
+
+#: app/views/patch_updates/_patch_installation.html.erb:7
+#| msgid "An error occurred during the installation."
+msgid "An error occured while installing patches."
+msgstr "Tapahtui virhe asennettaessa päivityksiä."
+
+#: app/views/patch_updates/_patch_installation.html.erb:19
+msgid "Stop"
+msgstr "Pysäytä"
+
+#: app/views/patch_updates/_patch_installation.html.erb:19
+msgid "Are you sure?"
+msgstr "Oletko varma?"
+
+#: app/views/patch_updates/index.html.erb:11
+msgid "Updates"
+msgstr "Päivitykset"
+
+#: app/views/patch_updates/index.html.erb:16
+#: app/views/patch_updates/_patch_summary.html.erb:35
+#| msgid "Your system is up-to-date."
+msgid "Your system is up to date."
+msgstr "Järjestelmäsi on ajan tasalla."
+
+#: app/views/patch_updates/index.html.erb:21
+#| msgid "No Updates Available"
+msgid "Updates available"
+msgstr "Päivityksiä saatavilla"
+
+#: app/views/patch_updates/index.html.erb:38
+msgid "Update"
+msgstr "Päivitys"
+
+#: app/views/patch_updates/_patch_progress.html.erb:5
+msgid "Refreshing package cache"
+msgstr "Virkistetään pakettivälimuistia"
+
+#: app/views/patch_updates/_patch_progress.html.erb:6
+#| msgid "Starting card manager..."
+msgid "Starting package manager"
+msgstr "Käynnistetään pakettihallintaa"
+
+#: app/views/patch_updates/_patch_progress.html.erb:7
+#| msgid "Searching for package name"
+msgid "Waiting for the package manager lock"
+msgstr "Odotetaan pakettihallinnan lukkoa"
+
+#: app/views/patch_updates/_patch_progress.html.erb:8
+#: app/views/patch_updates/_patch_progress.html.erb:18
+msgid "Evaluating available patches"
+msgstr "Arvioidaan saatavilla olevia korjauksia"
+
+#: app/views/patch_updates/_patch_progress.html.erb:9
+#| msgid "Finished generating profile for %s."
+msgid "Finished reading patches"
+msgstr "Korjausten lukeminen valmis."
+
+#: app/views/patch_updates/_patches.html.erb:11
+#| msgid "CheckBox"
+msgid "Check"
+msgstr "Tarkista"
+
+#: app/views/patch_updates/_patches.html.erb:13
+msgid "Kind"
+msgstr "Laji"
+
+#: app/views/patch_updates/_patches.html.erb:15
+msgid "Summary"
+msgstr "Yhteenveto"
+
+#: app/views/patch_updates/_patches.html.erb:17
+#: app/views/patch_updates/_patches.html.erb:20
+msgid "Source"
+msgstr "Lähde"
+
+#: app/views/patch_updates/_patches.html.erb:18
+msgid "Install"
+msgstr "Asenna"
+
+#: app/views/patch_updates/_patch_summary.html.erb:9
+msgid "Cannot read patch updates - you have been logged out."
+msgstr "Korjauspäivityksiä ei voi lukea - et ole kirjautuneena."
+
+#: app/views/patch_updates/_patch_summary.html.erb:12
+#| msgid "No information about battery and AC status available"
+msgid "No information about patches available"
+msgstr "Tietoja korjauksista ei ole saatavilla"
+
+#: app/views/patch_updates/_patch_summary.html.erb:26
+#| msgid "Security update"
+msgid "Security Updates: %d"
+msgstr "Turvallisuuspäivitykset: %d"
+
+#: app/views/patch_updates/_patch_summary.html.erb:29
+#| msgid "Important update"
+msgid "Important Updates: %d"
+msgstr "Tärkeät päivitykset: %d"
+
+#: app/views/patch_updates/_patch_summary.html.erb:32
+#| msgid "Additonal updates done."
+msgid "Optional Updates: %d"
+msgstr "Valinnaiset päivitykset: %d"
+
+#: app/views/patch_updates/_patch_summary.html.erb:40
+#| msgid "Update Applet"
+msgid "Update All"
+msgstr "Päivitä kaikki"
+
+#: app/views/patch_updates/_patch_summary.html.erb:40
+msgid "Updating all. Are you sure?"
+msgstr "Päivitetään kaikki. Oletko varma?"
+
+#: app/views/patch_updates/_patch_summary.html.erb:47
+#| msgid "Downloading update information"
+msgid "Loading patch information"
+msgstr "Ladataan päivitystietoja"
+
+

@@ -1,0 +1,439 @@
+# translation of yast_webclient_software.nl.po to Dutch
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+#
+# Freek de Kruijf <freek@opensuse.org>, 2010.
+msgid ""
+msgstr ""
+"Project-Id-Version: yast_webclient_software.nl\n"
+"POT-Creation-Date: 2010-05-03 16:31+0200\n"
+"PO-Revision-Date: 2010-05-03 17:56+0200\n"
+"Last-Translator: Freek de Kruijf <freek@opensuse.org>\n"
+"Language-Team: Dutch <yast-nl-l10n@lists.sf.kovoks.nl>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Lokalize 1.0\n"
+
+#: app/helpers/repositories_helper.rb:25
+msgid "Highest"
+msgstr "Hoogste"
+
+#: app/helpers/repositories_helper.rb:26
+msgid "Higher"
+msgstr "Hoger"
+
+#: app/helpers/repositories_helper.rb:27
+msgid "Default"
+msgstr "Standaard"
+
+#: app/helpers/repositories_helper.rb:28
+msgid "Low"
+msgstr "Laag"
+
+#: app/helpers/repositories_helper.rb:29
+msgid "Lowest"
+msgstr "Laagste"
+
+#: app/helpers/repositories_helper.rb:35
+msgid "Highest priority"
+msgstr "Hoogste prioriteit"
+
+#: app/helpers/repositories_helper.rb:36
+msgid "Higher priority"
+msgstr "Hogere prioriteit"
+
+#: app/helpers/repositories_helper.rb:38
+msgid "Low priority"
+msgstr "Lage prioriteit"
+
+#: app/helpers/repositories_helper.rb:39
+msgid "Lowest priority"
+msgstr "Laagste prioriteit"
+
+#: app/helpers/repositories_helper.rb:44
+msgid "Custom priority"
+msgstr "Aangepaste prioriteit"
+
+#: app/helpers/repositories_helper.rb:49
+msgid "Custom"
+msgstr "Aangepast"
+
+#: app/helpers/repositories_helper.rb:61
+#: app/views/repositories/index.html.erb:140
+#: app/views/repositories/add.html.erb:62
+msgid "enable"
+msgstr "inschakelen"
+
+#: app/helpers/repositories_helper.rb:61
+#: app/views/repositories/index.html.erb:145
+#: app/views/repositories/add.html.erb:69
+msgid "disable"
+msgstr "uitschakelen"
+
+#: app/helpers/repositories_helper.rb:66
+msgid "enabled"
+msgstr "ingeschakeld"
+
+#: app/helpers/repositories_helper.rb:66
+msgid "disabled"
+msgstr "Uitgeschakeld"
+
+#: app/controllers/repositories_controller.rb:35
+msgid "Alias"
+msgstr "Alias"
+
+#: app/controllers/repositories_controller.rb:36
+#: app/views/repositories/index.html.erb:172
+msgid "Enabled"
+msgstr "Ingeschakeld"
+
+#: app/controllers/repositories_controller.rb:37
+msgid "Autorefresh"
+msgstr "Autovernieuwen"
+
+#: app/controllers/repositories_controller.rb:38
+#: app/views/patch_updates/_patches.html.erb:14
+msgid "Name"
+msgstr "Naam"
+
+#: app/controllers/repositories_controller.rb:39
+msgid "URL"
+msgstr "URL"
+
+#: app/controllers/repositories_controller.rb:40
+msgid "Priority"
+msgstr "Prioriteit"
+
+#: app/controllers/repositories_controller.rb:41
+msgid "Keep downloaded packages"
+msgstr "Gedownloade pakketten behouden"
+
+#: app/controllers/repositories_controller.rb:51
+msgid "Cannot read repository list."
+msgstr "Kan geen lijst van installatiebronnen lezen."
+
+#: app/controllers/repositories_controller.rb:68
+#: app/controllers/repositories_controller.rb:95
+msgid "Missing repository parameter"
+msgstr "Parameter van installatiebron ontbreekt"
+
+#: app/controllers/repositories_controller.rb:123
+#: app/controllers/repositories_controller.rb:204
+msgid "Invalid priority"
+msgstr "Ongeldige prioriteit"
+
+#: app/controllers/repositories_controller.rb:192
+msgid "Missing repository parameters"
+msgstr "Parameters van installatiebron ontbreken"
+
+#: app/controllers/repositories_controller.rb:230
+msgid "Unknown backend error"
+msgstr "Onbekende backendfout"
+
+#: app/controllers/patch_updates_controller.rb:44
+msgid "<p>Please reboot your system.</p>"
+msgstr "<p>Gaarne uw systeem herstarten.</p>"
+
+#: app/controllers/patch_updates_controller.rb:46
+msgid "<p>Please logout and login again.</p>"
+msgstr "<p>Gaarne afmelden en opnieuw aanmelden.</p>"
+
+#: app/controllers/patch_updates_controller.rb:65
+#: app/views/patch_updates/_patch_summary.html.erb:24
+msgid ""
+"Cannot read patch updates: GPG key for repository <em>%s</em> is not trusted."
+msgstr ""
+"Kan patches voor bijwerken niet lezen - GPG-sleutel voor installatiebron <em>"
+"%s</em> wordt niet vertrouwd."
+
+#: app/controllers/patch_updates_controller.rb:92
+#: app/controllers/patch_updates_controller.rb:95
+#: app/views/patch_updates/_patch_progress.html.erb:2
+msgid "A problem occured when loading patch information."
+msgstr "Er trad een probleem op bij het laden van patch-informatie."
+
+#: app/controllers/patch_updates_controller.rb:151
+msgid "Installing all patches..."
+msgstr "Patches worden geïnstalleerd..."
+
+#: app/controllers/patch_updates_controller.rb:159
+msgid "Installation stopped"
+msgstr "Installatie is gestopt"
+
+#: app/controllers/patch_updates_controller.rb:207
+msgid "Installation finished"
+msgstr "Installatie is gereed"
+
+#: app/controllers/patch_updates_controller.rb:209
+msgid "%s installed."
+msgstr "%s is geïnstalleerd."
+
+#: app/controllers/patch_updates_controller.rb:241
+#: app/controllers/patch_updates_controller.rb:243
+#: app/controllers/patch_updates_controller.rb:257
+msgid "Patch has been installed. "
+msgstr "Patch is geïnstalleerd. "
+
+#: app/controllers/patch_updates_controller.rb:255
+msgid "All Patches have been installed. "
+msgstr "Alle patches zijn geïnstalleerd. "
+
+#: app/views/repositories/index.html.erb:40
+#: app/views/repositories/add.html.erb:36
+msgid "Enter a valid repository URL."
+msgstr "Voer een geldige URL voor een installatiebron in."
+
+#: app/views/repositories/index.html.erb:48
+#: app/views/repositories/add.html.erb:44
+msgid "Symbols <b>%s</b> are not allowed in repository alias."
+msgstr ""
+"Symbolen <b>%s</b> zijn niet toegestaan in een alias voor een "
+"installatiebron."
+
+#: app/views/repositories/index.html.erb:52
+#: app/views/repositories/add.html.erb:51
+msgid "This value cannot be empty."
+msgstr "Deze waarde kan niet leeg zijn."
+
+#: app/views/repositories/index.html.erb:161
+#: app/views/repositories/add.html.erb:125
+msgid "Software Repositories"
+msgstr "Softwarebronnen"
+
+#: app/views/repositories/index.html.erb:166
+msgid "Configured software repositories"
+msgstr "Geconfigureerde software-installatiebronnen"
+
+#: app/views/repositories/index.html.erb:169
+msgid "Filter repositories"
+msgstr "Installatiebronnen filteren"
+
+#: app/views/repositories/index.html.erb:171
+msgid "All"
+msgstr "Alles"
+
+#: app/views/repositories/index.html.erb:173
+msgid "Disabled"
+msgstr "Uitgeschakeld"
+
+#: app/views/repositories/index.html.erb:180
+msgid "Quick Search"
+msgstr "Snelzoeken"
+
+#: app/views/repositories/index.html.erb:186
+msgid "Add New Repository"
+msgstr "Een nieuwe installatiebron toevoegen"
+
+#: app/views/repositories/index.html.erb:229
+msgid "Repository is currently"
+msgstr "Installatiebron is nu"
+
+#: app/views/repositories/index.html.erb:232
+#: app/views/repositories/add.html.erb:148
+#: app/views/repositories/add.html.erb:149
+msgid "Repository will be %s."
+msgstr "Installatiebron wordt %s."
+
+#: app/views/repositories/index.html.erb:236
+msgid "Autorefresh is currently"
+msgstr "Autovernieuwen is nu"
+
+#: app/views/repositories/index.html.erb:239
+#: app/views/repositories/add.html.erb:153
+#: app/views/repositories/add.html.erb:154
+msgid "Autorefresh will be %s."
+msgstr "Autovernieuwen wordt %s."
+
+#: app/views/repositories/index.html.erb:243
+msgid "Keeping downloaded packages is currently"
+msgstr "Gedownloade pakketten behouden is nu"
+
+#: app/views/repositories/index.html.erb:246
+#: app/views/repositories/add.html.erb:158
+#: app/views/repositories/add.html.erb:159
+msgid "Keep packages option will be %s."
+msgstr "Pakketten behouden wordt %s."
+
+#: app/views/repositories/index.html.erb:253
+#: app/views/repositories/add.html.erb:167
+msgid "Save"
+msgstr "Opslaan"
+
+#: app/views/repositories/index.html.erb:254
+msgid "Delete"
+msgstr "Verwijderen"
+
+#: app/views/repositories/index.html.erb:256
+msgid "Really delete repository '%s'?"
+msgstr "Installatiebron '%s' verwijderen?"
+
+#: app/views/repositories/add.html.erb:97
+msgid ""
+"A repository with this URL already exists.\n"
+"Create a duplicate?"
+msgstr ""
+"Een installatiebron met deze URL bestaat al.\n"
+"Een duplicaat aanmaken?"
+
+#: app/views/repositories/add.html.erb:127
+msgid "Add a new repository"
+msgstr "Een nieuwe installatiebron toevoegen"
+
+#: app/views/repositories/add.html.erb:136
+msgid "New Repository"
+msgstr "Nieuwe installatiebron"
+
+#: app/views/patch_updates/_patch_installation.html.erb:8
+msgid "An error occured while installing patches."
+msgstr "Er is een fout opgetreden tijdens de installatie van patches."
+
+#: app/views/patch_updates/_patch_installation.html.erb:35
+msgid "Patch Installation"
+msgstr "Installatie van patches"
+
+#: app/views/patch_updates/_patch_installation.html.erb:45
+msgid "Stop"
+msgstr "Stoppen"
+
+#: app/views/patch_updates/_patch_installation.html.erb:45
+msgid "Are you sure?"
+msgstr "Weet u het zeker?"
+
+#: app/views/patch_updates/index.html.erb:32
+msgid "Updates"
+msgstr "Opwaarderingen"
+
+#: app/views/patch_updates/index.html.erb:36
+#: app/views/patch_updates/_patch_summary.html.erb:48
+msgid "Your system is up to date."
+msgstr "Uw systeem is bij de tijd."
+
+#: app/views/patch_updates/index.html.erb:42
+msgid "Updates available"
+msgstr "Opwaardering beschikbaar"
+
+#: app/views/patch_updates/index.html.erb:59
+msgid "Update"
+msgstr "Bijwerken"
+
+#: app/views/patch_updates/_patch_progress.html.erb:6
+msgid "Refreshing package cache"
+msgstr "Pakketcache vernieuwen"
+
+#: app/views/patch_updates/_patch_progress.html.erb:7
+msgid "Starting package manager"
+msgstr "De pakketbeheerder opstarten"
+
+#: app/views/patch_updates/_patch_progress.html.erb:8
+msgid "Waiting for the package manager lock"
+msgstr "Op de vergrendeling van de pakketbeheerder wachten"
+
+#: app/views/patch_updates/_patch_progress.html.erb:9
+#: app/views/patch_updates/_patch_progress.html.erb:19
+msgid "Evaluating available patches"
+msgstr "Evalueren van beschikbare patches"
+
+#: app/views/patch_updates/_patch_progress.html.erb:10
+msgid "Finished reading patches"
+msgstr "Lezen van patches beëindigen"
+
+#: app/views/patch_updates/_patches.html.erb:11
+msgid "Check"
+msgstr "Controleren"
+
+#: app/views/patch_updates/_patches.html.erb:13
+msgid "Kind"
+msgstr "Soort"
+
+#: app/views/patch_updates/_patches.html.erb:15
+msgid "Summary"
+msgstr "Samenvatting"
+
+#: app/views/patch_updates/_patches.html.erb:17
+#: app/views/patch_updates/_patches.html.erb:20
+msgid "Source"
+msgstr "Bron"
+
+#: app/views/patch_updates/_patches.html.erb:18
+msgid "Install"
+msgstr "Installeren"
+
+#: app/views/patch_updates/_patch_summary.html.erb:18
+msgid "Cannot read patch updates - you have been logged out."
+msgstr "Kan patches niet lezen - u bent afgemeld."
+
+#: app/views/patch_updates/_patch_summary.html.erb:22
+msgid "No information about patches available"
+msgstr "Geen informatie over patches beschikbaar"
+
+#: app/views/patch_updates/_patch_summary.html.erb:39
+msgid "Security Updates: %d"
+msgstr "Beveiligingsopwaarderingen: %d"
+
+#: app/views/patch_updates/_patch_summary.html.erb:42
+msgid "Important Updates: %d"
+msgstr "Belangrijke opwaarderingen: %d"
+
+#: app/views/patch_updates/_patch_summary.html.erb:45
+msgid "Optional Updates: %d"
+msgstr "Optionele opwaarderingen: %d"
+
+#: app/views/patch_updates/_patch_summary.html.erb:53
+msgid "Update All"
+msgstr "Alles bijwerken"
+
+#: app/views/patch_updates/_patch_summary.html.erb:53
+msgid "Updating all. Are you sure?"
+msgstr "Alles bijwerken. Bent u zeker?"
+
+#: app/views/patch_updates/_patch_summary.html.erb:60
+msgid "Loading patch information"
+msgstr "Laden van patch-informatie"
+
+#~ msgid "<p>A restart of the %s is needed.</p>"
+#~ msgstr "<p>Een herstart van %s is nodig.</p>"
+
+#~ msgid "Priority for packages:"
+#~ msgstr "Prioriteit voor pakketten:"
+
+#~ msgid "Error: Missing repository id."
+#~ msgstr "Fout: Ontbrekende installatiebron-id."
+
+#~ msgid "Error: Missing 'enabled' parameter."
+#~ msgstr "Fout: Ontbrekende 'ingeschakeld' parameter."
+
+#~ msgid "Unknown backend error."
+#~ msgstr "Onbekende backendfout."
+
+#~ msgid "Add"
+#~ msgstr "Toevoegen"
+
+#~ msgid "a new repository"
+#~ msgstr "een nieuwe installatiebron"
+
+#~ msgid ""
+#~ "Enter a number in range 0 (the highest priority) to 200 (the lowest "
+#~ "priority)."
+#~ msgstr ""
+#~ "Voer een getal in in de reeks 0 (de hoogste prioriteit) tot 200 (de "
+#~ "laagste prioriteit)."
+
+#~ msgid "Priority must be a positive number."
+#~ msgstr "Prioriteit moet een positief getal zijn."
+
+#~ msgid "Priority must be less than 200."
+#~ msgstr "Prioriteit moet kleiner zijn dan 200."
+
+#~ msgid "Properties of"
+#~ msgstr "Eigenschappen van"
+
+#~ msgid "Edit Properties of"
+#~ msgstr "Bewerk eigenschappen van"
+
+#~ msgid "Create"
+#~ msgstr "Aanmaken"
+
+#~ msgid "No software repository configured."
+#~ msgstr "Geen software-installatiebron geconfigureerd."
