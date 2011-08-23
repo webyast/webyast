@@ -1,0 +1,264 @@
+# Translation of yast_webclient_status.uk.po to Ukrainian
+# @TITLE@
+# Copyright (C) 2006, SUSE Linux GmbH, Nuremberg
+#
+# This file is distributed under the same license as @PACKAGE@ package. FIRST
+#
+# Ivan Petrouchtchak <fr.ivan@ukrainian-orthodox.org>, 2009.
+# Rev. Ivan Petrouchtchak <fr.ivan@ukrainian-orthodox.org>, 2010.
+# I. Petrouchtchak <ivanpetrouchtchak@yahoo.com>, 2010.
+msgid ""
+msgstr ""
+"Project-Id-Version: webyast-status-ui 1.0.0\n"
+"POT-Creation-Date: 2010-08-02 09:18+0200\n"
+"PO-Revision-Date: 2010-05-06 13:40-0700\n"
+"Last-Translator: I. Petrouchtchak <ivanpetrouchtchak@yahoo.com>\n"
+"Language-Team: Ukrainian <kde-i18n-doc@kde.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Lokalize 1.0\n"
+"Plural-Forms:  nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%"
+"10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
+
+#: app/controllers/status_controller.rb:149
+#: app/controllers/status_controller.rb:149
+msgid "No data found for showing system status."
+msgstr "Не знайдено даних для показу стану системи."
+
+#: app/controllers/status_controller.rb:157
+#: app/controllers/status_controller.rb:157
+#, fuzzy
+msgid "Status not available."
+msgstr "Інформація недоступна."
+
+#: app/controllers/status_controller.rb:176
+#: app/controllers/status_controller.rb:176
+msgid "Can't connect to host"
+msgstr ""
+
+#: app/controllers/status_controller.rb:178
+#: app/controllers/status_controller.rb:178
+msgid "Can't connect to host %s."
+msgstr ""
+
+#: app/controllers/status_controller.rb:217
+#: app/controllers/status_controller.rb:217
+msgid "Limits exceeded for "
+msgstr "Перевищено обмеження для "
+
+#: app/controllers/status_controller.rb:242
+#: app/controllers/status_controller.rb:242
+#, fuzzy
+msgid "Status not available"
+msgstr "Інформація недоступна."
+
+#: app/controllers/status_controller.rb:266
+#: app/controllers/status_controller.rb:266
+#, fuzzy
+msgid "Status not available (no permissions)"
+msgstr "Інформація недоступна."
+
+#: app/controllers/status_controller.rb:328
+#: app/controllers/status_controller.rb:328
+msgid "exceeded"
+msgstr "перевищено"
+
+#: app/controllers/status_controller.rb:342
+#: app/controllers/status_controller.rb:342
+msgid "undercut"
+msgstr ""
+
+#: app/controllers/status_controller.rb:444
+#: app/controllers/status_controller.rb:444
+msgid "Limits have been written."
+msgstr "Обмеження записано."
+
+#: app/views/status/edit.html.erb:48 app/views/status/edit.html.erb:48
+msgid "Only numbers are valid !"
+msgstr "Допустимі тільки числа!"
+
+#: app/views/status/edit.html.erb:75 app/views/status/index.html.erb:52
+#: app/views/status/edit.html.erb:75 app/views/status/index.html.erb:52
+#: shortcuts.yml:6
+msgid "Status"
+msgstr "Стан"
+
+#: app/views/status/edit.html.erb:75 app/views/status/edit.html.erb:75
+msgid "Settings"
+msgstr "Параметри"
+
+#: app/views/status/edit.html.erb:89 app/views/status/edit.html.erb:89
+msgid "undercuts"
+msgstr ""
+
+#: app/views/status/edit.html.erb:89 app/views/status/edit.html.erb:89
+msgid "exceeds"
+msgstr "перевищує"
+
+#: app/views/status/index.html.erb:94 app/views/status/index.html.erb:94
+msgid "details"
+msgstr "подробиці"
+
+#: app/views/status/index.html.erb:110 app/views/status/index.html.erb:110
+msgid "Details"
+msgstr "Подробиці"
+
+#: app/views/status/index.html.erb:178 app/views/status/index.html.erb:178
+msgid "Edit Limits"
+msgstr "Редагувати обмеження"
+
+#: app/views/status/_status_graph.html.erb:2
+#: app/views/status/_status_graph.html.erb:2
+msgid "A problem occured when loading status information."
+msgstr "Під час завантаження інформації про стан трапилась помилка."
+
+#: app/views/status/_status_graph.html.erb:90
+#: app/views/status/_status_graph.html.erb:90
+msgid "Show last"
+msgstr "Показати останнє"
+
+#: app/views/status/_status_graph.html.erb:91
+#: app/views/status/_status_graph.html.erb:91
+msgid "5 Minutes"
+msgstr "5 хв."
+
+#: app/views/status/_status_graph.html.erb:92
+#: app/views/status/_status_graph.html.erb:92
+msgid "15 Minutes"
+msgstr "15 хв."
+
+#: app/views/status/_status_graph.html.erb:93
+#: app/views/status/_status_graph.html.erb:93
+msgid "30 Minutes"
+msgstr "30 хв."
+
+#: app/views/status/_status_graph.html.erb:94
+#: app/views/status/_status_graph.html.erb:94
+msgid "1 Hour"
+msgstr "1 год."
+
+#: app/views/status/_status_graph.html.erb:95
+#: app/views/status/_status_graph.html.erb:95
+msgid "6 Hours"
+msgstr "6 год."
+
+#: app/views/status/_status_graph.html.erb:96
+#: app/views/status/_status_graph.html.erb:96
+msgid "12 Hours"
+msgstr "12 год."
+
+#: app/views/status/_status_summary.html.erb:6
+#: app/views/status/_status_summary.html.erb:6
+msgid "An problem occured when loading status information."
+msgstr "Під час завантаження інформації про стан трапилась помилка."
+
+#: app/views/status/_status_summary.html.erb:13
+#: app/views/status/_status_summary.html.erb:13
+msgid "Cannot read system status - you have been logged out."
+msgstr "неможливо прочитати стан системи - ви не в системі."
+
+#: app/views/status/_status_summary.html.erb:16
+#: app/views/status/_status_summary.html.erb:16
+msgid "Your system is healthy."
+msgstr "Ваша система здорова."
+
+#: app/views/status/_status_summary.html.erb:26
+#: app/views/status/_status_summary.html.erb:26
+msgid "Loading system information"
+msgstr "Звантаження інформації про систему"
+
+#: app/views/status/_status_progress.html.erb:8
+#: app/views/status/_status_progress.html.erb:8
+msgid "Checking system status"
+msgstr "Перевірка стану системи"
+
+#: shortcuts.yml:7
+#, fuzzy
+msgid "Show system status"
+msgstr "Перевірка стану системи"
+
+#~ msgid "Registration is missing"
+#~ msgstr "Відсутня реєстрація"
+
+#~ msgid "Please register your system in order to get updates."
+#~ msgstr "Будь ласка, зареєструйте вашу систему, щоб отримувати оновлення."
+
+#~ msgid "register"
+#~ msgstr "зареєструвати"
+
+# %s is either BOOTP or DHCP
+#~ msgid "Mail configuration test not confirmed"
+#~ msgstr "Не підтверджено тест налаштування пошти"
+
+#~ msgid ""
+#~ "While configuring mail, a test mail was sent to %s . Was the mail "
+#~ "delivered to this address?<br>If so, confirm it by pressing the button. "
+#~ "Otherwise check your mail configuration again."
+#~ msgstr ""
+#~ "Під час налаштування пошти пробний лист написано до %s . Чи пошту було "
+#~ "отримано на цій адресі?<br>Якщо так, то підтвердіть це, натиснувши на цю "
+#~ "кнопку. Якщо ні, то ще раз перевірте налаштування пошти."
+
+#~ msgid ""
+#~ "It was not possible to retrieve the full hostname of the machine. If the "
+#~ "mail could not be delivered, consult the network and/or mail "
+#~ "configuration with your network administrator."
+#~ msgstr ""
+#~ "Не вдалося отримати повну назву вузла машини. Якщо пошту не було "
+#~ "отримано, то поговоріть з адміністратором мережі про налаштування мережі/"
+#~ "пошти."
+
+#~ msgid "Test mail received"
+#~ msgstr "Отримано пробну пошту"
+
+#~| msgid "Start VPN connection"
+#~ msgid "Start collectd"
+#~ msgstr "Запустити collectd"
+
+#~ msgid "Invalid session, please login again."
+#~ msgstr "Нечинний сеанс, увійдіть знов."
+
+#~ msgid "Disk free limits exceeded;"
+#~ msgstr "Перевищено межу вільного місця на диску;"
+
+#, fuzzy
+#~| msgid "Saving the changes failed"
+#~ msgid "Saving limits failed!"
+#~ msgstr "Помилка збереження змін"
+
+#~ msgid "Disk usage"
+#~ msgstr "Використання диску"
+
+#~ msgid "Back"
+#~ msgstr "Назад"
+
+#~ msgid "free"
+#~ msgstr "вільно"
+
+#~ msgid "used"
+#~ msgstr "використано"
+
+#~ msgid "Configure Status Limits"
+#~ msgstr "Налаштувати межі стану"
+
+#~ msgid "Status Path"
+#~ msgstr "Шлях стану"
+
+#~ msgid "Minimum Value"
+#~ msgstr "Мінімальне значення"
+
+#~ msgid "Maximum Value"
+#~ msgstr "Максимальне значення"
+
+#~ msgid "Save"
+#~ msgstr "Зберегти"
+
+#~ msgid "Events"
+#~ msgstr "Події"
+
+#~ msgid "These values have been evaluated the last 5 minutes."
+#~ msgstr "Ці значення було визначено протягом останніх 5 хвилин."
+
+#~ msgid "Show details..."
+#~ msgstr "Показати подробиці..."

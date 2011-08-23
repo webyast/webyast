@@ -1,0 +1,266 @@
+# Thai message file for YaST2 (@memory@).
+# Copyright (C) 2008 SUSE Linux Products GmbH.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: webyast-status-ui 1.0.0\n"
+"Report-Msgid-Bugs-To: i18n@suse.de\n"
+"POT-Creation-Date: 2010-08-02 09:18+0200\n"
+"PO-Revision-Date: 2008-01-04 08:58+0100\n"
+"Last-Translator: i18n@suse.de\n"
+"Language-Team: Thai <i18n@suse.de>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+
+#: app/controllers/status_controller.rb:149
+#: app/controllers/status_controller.rb:149
+msgid "No data found for showing system status."
+msgstr ""
+
+#: app/controllers/status_controller.rb:157
+#: app/controllers/status_controller.rb:157
+#, fuzzy
+msgid "Status not available."
+msgstr "<P>ไม่มีข้อมูลรายละเอียด</P>"
+
+#: app/controllers/status_controller.rb:176
+#: app/controllers/status_controller.rb:176
+msgid "Can't connect to host"
+msgstr ""
+
+#: app/controllers/status_controller.rb:178
+#: app/controllers/status_controller.rb:178
+msgid "Can't connect to host %s."
+msgstr ""
+
+#: app/controllers/status_controller.rb:217
+#: app/controllers/status_controller.rb:217
+msgid "Limits exceeded for "
+msgstr ""
+
+#: app/controllers/status_controller.rb:242
+#: app/controllers/status_controller.rb:242
+#, fuzzy
+msgid "Status not available"
+msgstr "<P>ไม่มีข้อมูลรายละเอียด</P>"
+
+#: app/controllers/status_controller.rb:266
+#: app/controllers/status_controller.rb:266
+#, fuzzy
+msgid "Status not available (no permissions)"
+msgstr "<P>ไม่มีข้อมูลรายละเอียด</P>"
+
+#: app/controllers/status_controller.rb:328
+#: app/controllers/status_controller.rb:328
+#, fuzzy
+msgid "exceeded"
+msgstr "สำเร็จแล้ว"
+
+#: app/controllers/status_controller.rb:342
+#: app/controllers/status_controller.rb:342
+msgid "undercut"
+msgstr ""
+
+#: app/controllers/status_controller.rb:444
+#: app/controllers/status_controller.rb:444
+msgid "Limits have been written."
+msgstr ""
+
+#: app/views/status/edit.html.erb:48 app/views/status/edit.html.erb:48
+#, fuzzy
+msgid "Only numbers are valid !"
+msgstr "อนุญาตให้ใช้พารามิเตอร์ได้เพียงสองตัวเท่านั้น"
+
+#: app/views/status/edit.html.erb:75 app/views/status/index.html.erb:52
+#: app/views/status/edit.html.erb:75 app/views/status/index.html.erb:52
+#: shortcuts.yml:6
+msgid "Status"
+msgstr "สถานะ"
+
+#: app/views/status/edit.html.erb:75 app/views/status/edit.html.erb:75
+msgid "Settings"
+msgstr "การตั้งค่า"
+
+#: app/views/status/edit.html.erb:89 app/views/status/edit.html.erb:89
+msgid "undercuts"
+msgstr ""
+
+#: app/views/status/edit.html.erb:89 app/views/status/edit.html.erb:89
+msgid "exceeds"
+msgstr ""
+
+#: app/views/status/index.html.erb:94 app/views/status/index.html.erb:94
+#, fuzzy
+msgid "details"
+msgstr "รายละเอียด"
+
+#: app/views/status/index.html.erb:110 app/views/status/index.html.erb:110
+#, fuzzy
+msgid "Details"
+msgstr "รายละเอียด"
+
+#: app/views/status/index.html.erb:178 app/views/status/index.html.erb:178
+#, fuzzy
+msgid "Edit Limits"
+msgstr "ไม่จำกัด"
+
+#: app/views/status/_status_graph.html.erb:2
+#: app/views/status/_status_graph.html.erb:2
+#, fuzzy
+msgid "A problem occured when loading status information."
+msgstr "เกิดข้อผิดพลาดขึ้นระหว่างทำการสร้าง initrd"
+
+#: app/views/status/_status_graph.html.erb:90
+#: app/views/status/_status_graph.html.erb:90
+#, fuzzy
+msgid "Show last"
+msgstr "แสดงพื้นที่ทำงาน"
+
+#: app/views/status/_status_graph.html.erb:91
+#: app/views/status/_status_graph.html.erb:91
+#, fuzzy
+msgid "5 Minutes"
+msgstr "นาที"
+
+#: app/views/status/_status_graph.html.erb:92
+#: app/views/status/_status_graph.html.erb:92
+#, fuzzy
+msgid "15 Minutes"
+msgstr "นาที"
+
+#: app/views/status/_status_graph.html.erb:93
+#: app/views/status/_status_graph.html.erb:93
+#, fuzzy
+msgid "30 Minutes"
+msgstr "นาที"
+
+#: app/views/status/_status_graph.html.erb:94
+#: app/views/status/_status_graph.html.erb:94
+#, fuzzy
+msgid "1 Hour"
+msgstr "ชั่วโมง"
+
+#: app/views/status/_status_graph.html.erb:95
+#: app/views/status/_status_graph.html.erb:95
+#, fuzzy
+msgid "6 Hours"
+msgstr "ชั่วโมง"
+
+#: app/views/status/_status_graph.html.erb:96
+#: app/views/status/_status_graph.html.erb:96
+#, fuzzy
+msgid "12 Hours"
+msgstr "ชั่วโมง"
+
+#: app/views/status/_status_summary.html.erb:6
+#: app/views/status/_status_summary.html.erb:6
+#, fuzzy
+msgid "An problem occured when loading status information."
+msgstr "เกิดข้อผิดพลาดขึ้นระหว่างทำการสร้าง initrd"
+
+#: app/views/status/_status_summary.html.erb:13
+#: app/views/status/_status_summary.html.erb:13
+msgid "Cannot read system status - you have been logged out."
+msgstr ""
+
+#: app/views/status/_status_summary.html.erb:16
+#: app/views/status/_status_summary.html.erb:16
+#, fuzzy
+msgid "Your system is healthy."
+msgstr "<p>ระบบของคุณพร้อมที่จะใช้งานได้แล้ว</p>"
+
+#: app/views/status/_status_summary.html.erb:26
+#: app/views/status/_status_summary.html.erb:26
+#, fuzzy
+msgid "Loading system information"
+msgstr "ข้อมูลรายละเอียดของระบบ"
+
+#: app/views/status/_status_progress.html.erb:8
+#: app/views/status/_status_progress.html.erb:8
+#, fuzzy
+msgid "Checking system status"
+msgstr "กำลังตรวจสอบระบบแฟ้ม..."
+
+#: shortcuts.yml:7
+#, fuzzy
+msgid "Show system status"
+msgstr "กำลังตรวจสอบระบบแฟ้ม..."
+
+#, fuzzy
+#~ msgid "Registration is missing"
+#~ msgstr "การลงทะเบียน"
+
+#, fuzzy
+#~ msgid "register"
+#~ msgstr "เครื่องที่ลงทะเบียนไว้แล้ว"
+
+#, fuzzy
+#~ msgid "Mail configuration test not confirmed"
+#~ msgstr "สรุปการปรับแต่งค่าเมล"
+
+#, fuzzy
+#~| msgid "&Start Check"
+#~ msgid "Start collectd"
+#~ msgstr "เริ่มตรวจสอบ"
+
+#, fuzzy
+#~| msgid "Storing file list failed"
+#~ msgid "Saving limits failed!"
+#~ msgstr "การจัดเก็บรายการแฟ้มล้มเหลว"
+
+#~ msgid "Disk usage"
+#~ msgstr "การใช้งานดิสก์"
+
+#, fuzzy
+#~| msgid "&Back"
+#~ msgid "Back"
+#~ msgstr "ย้อนกลับ"
+
+#~ msgid "free"
+#~ msgstr "ว่าง"
+
+#, fuzzy
+#~| msgid ""
+#~| "used\n"
+#~| "%1"
+#~ msgid "used"
+#~ msgstr ""
+#~ "ใช้ไป\n"
+#~ "%1"
+
+#, fuzzy
+#~| msgid "Configured as %1"
+#~ msgid "Configure Status Limits"
+#~ msgstr "ถูกปรับแต่งเป็น %1"
+
+#, fuzzy
+#~| msgid "Status"
+#~ msgid "Status Path"
+#~ msgstr "สถานะ"
+
+#, fuzzy
+#~| msgid "&Minimum"
+#~ msgid "Minimum Value"
+#~ msgstr "ค่าน้อยที่สุด (&Minimum)"
+
+#, fuzzy
+#~| msgid "Maximum size"
+#~ msgid "Maximum Value"
+#~ msgstr "ขนาดสูงสุด"
+
+#, fuzzy
+#~| msgid "&Save"
+#~ msgid "Save"
+#~ msgstr "จัดเก็บ"
+
+#, fuzzy
+#~| msgid "Button Events"
+#~ msgid "Events"
+#~ msgstr "เหตุการณ์เมื่อกดปุ่ม"
+
+#, fuzzy
+#~| msgid "Show &details"
+#~ msgid "Show details..."
+#~ msgstr "แสดงรายละเอียด"

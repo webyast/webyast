@@ -1,0 +1,144 @@
+# Copyright (C) 2006 SuSE Linux Products GmbH, Nuernberg
+# This file is distributed under the same license as the package.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: webyast-status-ui\n"
+"POT-Creation-Date: 2010-08-18 10:18+0200\n"
+"PO-Revision-Date: 2010-08-26 09:24\n"
+"Last-Translator: Novell Language <language@novell.com>\n"
+"Language-Team: Novell Language <language@novell.com>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: app/controllers/status_controller.rb:149 ./app/controllers/status_controller.rb:149
+msgid "No data found for showing system status."
+msgstr "No se han encontrado datos para mostrar el estado del sistema."
+
+#: app/controllers/status_controller.rb:157 ./app/controllers/status_controller.rb:157
+msgid "Status not available."
+msgstr "Estado no disponible."
+
+#: app/controllers/status_controller.rb:176 ./app/controllers/status_controller.rb:176
+msgid "Can't connect to host"
+msgstr "No es posible conectar con el host"
+
+#: app/controllers/status_controller.rb:178 ./app/controllers/status_controller.rb:178
+msgid "Can't connect to host %s."
+msgstr "No es posible conectar con el host %s."
+
+#: app/controllers/status_controller.rb:217 ./app/controllers/status_controller.rb:217
+msgid "Limits exceeded for "
+msgstr "Se ha superado el límite para "
+
+#: app/controllers/status_controller.rb:242 ./app/controllers/status_controller.rb:242
+msgid "Status not available"
+msgstr "Estado no disponible"
+
+#: app/controllers/status_controller.rb:266 ./app/controllers/status_controller.rb:266
+msgid "Status not available (no permissions)"
+msgstr "Estado no disponible (sin permisos)"
+
+#: app/controllers/status_controller.rb:328 ./app/controllers/status_controller.rb:328
+msgid "exceeded"
+msgstr "ha superado"
+
+#: app/controllers/status_controller.rb:342 ./app/controllers/status_controller.rb:342
+msgid "undercut"
+msgstr "están por debajo de"
+
+#: app/controllers/status_controller.rb:444 ./app/controllers/status_controller.rb:444
+msgid "Limits have been written."
+msgstr "Se han escrito los límites."
+
+#: app/views/status/edit.html.erb:48 ./app/views/status/edit.html.erb:48
+msgid "Only numbers are valid !"
+msgstr "Sólo son válidos los números."
+
+#: app/views/status/edit.html.erb:75 app/views/status/index.html.erb:52
+#: ./app/views/status/edit.html.erb:75 ./app/views/status/index.html.erb:52 ./shortcuts.yml:6
+msgid "Status"
+msgstr "Estado"
+
+#: app/views/status/edit.html.erb:75 ./app/views/status/edit.html.erb:75
+msgid "Settings"
+msgstr "Configuración"
+
+#: app/views/status/edit.html.erb:89 ./app/views/status/edit.html.erb:89
+msgid "undercuts"
+msgstr "está por debajo de"
+
+#: app/views/status/edit.html.erb:89 ./app/views/status/edit.html.erb:89
+msgid "exceeds"
+msgstr "supera"
+
+#: app/views/status/index.html.erb:103 ./app/views/status/index.html.erb:103
+msgid "details"
+msgstr "detalles"
+
+#: app/views/status/index.html.erb:119 ./app/views/status/index.html.erb:119
+msgid "Details"
+msgstr "Detalles"
+
+#: app/views/status/index.html.erb:187 ./app/views/status/index.html.erb:187
+msgid "Edit Limits"
+msgstr "Editar límites"
+
+#: app/views/status/_status_graph.html.erb:2 ./app/views/status/_status_graph.html.erb:2
+msgid "A problem occured when loading status information."
+msgstr "Error al cargar la información de estado."
+
+#: app/views/status/_status_graph.html.erb:90 ./app/views/status/_status_graph.html.erb:90
+msgid "Show last"
+msgstr "Mostrar últimos"
+
+#: app/views/status/_status_graph.html.erb:91 ./app/views/status/_status_graph.html.erb:91
+msgid "5 Minutes"
+msgstr "5 minutos"
+
+#: app/views/status/_status_graph.html.erb:92 ./app/views/status/_status_graph.html.erb:92
+msgid "15 Minutes"
+msgstr "15 minutos"
+
+#: app/views/status/_status_graph.html.erb:93 ./app/views/status/_status_graph.html.erb:93
+msgid "30 Minutes"
+msgstr "30 minutos"
+
+#: app/views/status/_status_graph.html.erb:94 ./app/views/status/_status_graph.html.erb:94
+msgid "1 Hour"
+msgstr "1 hora"
+
+#: app/views/status/_status_graph.html.erb:95 ./app/views/status/_status_graph.html.erb:95
+msgid "6 Hours"
+msgstr "6 horas"
+
+#: app/views/status/_status_graph.html.erb:96 ./app/views/status/_status_graph.html.erb:96
+msgid "12 Hours"
+msgstr "12 horas"
+
+#: app/views/status/_status_summary.html.erb:6 ./app/views/status/_status_summary.html.erb:6
+msgid "An problem occured when loading status information."
+msgstr "Error al cargar la información de estado"
+
+#: app/views/status/_status_summary.html.erb:13 ./app/views/status/_status_summary.html.erb:13
+msgid "Cannot read system status - you have been logged out."
+msgstr "No es posible leer el estado del sistema. Ha salido de la sesión."
+
+#: app/views/status/_status_summary.html.erb:16 ./app/views/status/_status_summary.html.erb:16
+msgid "Your system is healthy."
+msgstr "El sistema está saludable."
+
+#: app/views/status/_status_summary.html.erb:26 ./app/views/status/_status_summary.html.erb:26
+msgid "Loading system information"
+msgstr "Cargando información del sistema"
+
+#: app/views/status/_status_progress.html.erb:8 ./app/views/status/_status_progress.html.erb:8
+msgid "Checking system status"
+msgstr "Comprobando estado del sistema"
+
+#: ./shortcuts.yml:7
+msgid "Show system status"
+msgstr "Mostrar estado del sistema"
+

@@ -1,0 +1,165 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: webyast-status-ui 1.0.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2010-08-02 09:18+0200\n"
+"PO-Revision-Date: 2006-01-04 08:58+0100\n"
+"Last-Translator: i18n@suse.de\n"
+"Language-Team: Lao <i18n@suse.de>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+
+#: app/controllers/status_controller.rb:149
+#: app/controllers/status_controller.rb:149
+msgid "No data found for showing system status."
+msgstr ""
+
+#: app/controllers/status_controller.rb:157
+#: app/controllers/status_controller.rb:157
+msgid "Status not available."
+msgstr ""
+
+#: app/controllers/status_controller.rb:176
+#: app/controllers/status_controller.rb:176
+msgid "Can't connect to host"
+msgstr ""
+
+#: app/controllers/status_controller.rb:178
+#: app/controllers/status_controller.rb:178
+msgid "Can't connect to host %s."
+msgstr ""
+
+#: app/controllers/status_controller.rb:217
+#: app/controllers/status_controller.rb:217
+msgid "Limits exceeded for "
+msgstr ""
+
+#: app/controllers/status_controller.rb:242
+#: app/controllers/status_controller.rb:242
+msgid "Status not available"
+msgstr ""
+
+#: app/controllers/status_controller.rb:266
+#: app/controllers/status_controller.rb:266
+msgid "Status not available (no permissions)"
+msgstr ""
+
+#: app/controllers/status_controller.rb:328
+#: app/controllers/status_controller.rb:328
+msgid "exceeded"
+msgstr ""
+
+#: app/controllers/status_controller.rb:342
+#: app/controllers/status_controller.rb:342
+msgid "undercut"
+msgstr ""
+
+#: app/controllers/status_controller.rb:444
+#: app/controllers/status_controller.rb:444
+msgid "Limits have been written."
+msgstr ""
+
+#: app/views/status/edit.html.erb:48 app/views/status/edit.html.erb:48
+msgid "Only numbers are valid !"
+msgstr ""
+
+#: app/views/status/edit.html.erb:75 app/views/status/index.html.erb:52
+#: app/views/status/edit.html.erb:75 app/views/status/index.html.erb:52
+#: shortcuts.yml:6
+msgid "Status"
+msgstr ""
+
+#: app/views/status/edit.html.erb:75 app/views/status/edit.html.erb:75
+msgid "Settings"
+msgstr ""
+
+#: app/views/status/edit.html.erb:89 app/views/status/edit.html.erb:89
+msgid "undercuts"
+msgstr ""
+
+#: app/views/status/edit.html.erb:89 app/views/status/edit.html.erb:89
+msgid "exceeds"
+msgstr ""
+
+#: app/views/status/index.html.erb:94 app/views/status/index.html.erb:94
+msgid "details"
+msgstr ""
+
+#: app/views/status/index.html.erb:110 app/views/status/index.html.erb:110
+msgid "Details"
+msgstr ""
+
+#: app/views/status/index.html.erb:178 app/views/status/index.html.erb:178
+msgid "Edit Limits"
+msgstr ""
+
+#: app/views/status/_status_graph.html.erb:2
+#: app/views/status/_status_graph.html.erb:2
+msgid "A problem occured when loading status information."
+msgstr ""
+
+#: app/views/status/_status_graph.html.erb:90
+#: app/views/status/_status_graph.html.erb:90
+msgid "Show last"
+msgstr ""
+
+#: app/views/status/_status_graph.html.erb:91
+#: app/views/status/_status_graph.html.erb:91
+msgid "5 Minutes"
+msgstr ""
+
+#: app/views/status/_status_graph.html.erb:92
+#: app/views/status/_status_graph.html.erb:92
+msgid "15 Minutes"
+msgstr ""
+
+#: app/views/status/_status_graph.html.erb:93
+#: app/views/status/_status_graph.html.erb:93
+msgid "30 Minutes"
+msgstr ""
+
+#: app/views/status/_status_graph.html.erb:94
+#: app/views/status/_status_graph.html.erb:94
+msgid "1 Hour"
+msgstr ""
+
+#: app/views/status/_status_graph.html.erb:95
+#: app/views/status/_status_graph.html.erb:95
+msgid "6 Hours"
+msgstr ""
+
+#: app/views/status/_status_graph.html.erb:96
+#: app/views/status/_status_graph.html.erb:96
+msgid "12 Hours"
+msgstr ""
+
+#: app/views/status/_status_summary.html.erb:6
+#: app/views/status/_status_summary.html.erb:6
+msgid "An problem occured when loading status information."
+msgstr ""
+
+#: app/views/status/_status_summary.html.erb:13
+#: app/views/status/_status_summary.html.erb:13
+msgid "Cannot read system status - you have been logged out."
+msgstr ""
+
+#: app/views/status/_status_summary.html.erb:16
+#: app/views/status/_status_summary.html.erb:16
+msgid "Your system is healthy."
+msgstr ""
+
+#: app/views/status/_status_summary.html.erb:26
+#: app/views/status/_status_summary.html.erb:26
+msgid "Loading system information"
+msgstr ""
+
+#: app/views/status/_status_progress.html.erb:8
+#: app/views/status/_status_progress.html.erb:8
+msgid "Checking system status"
+msgstr ""
+
+#: shortcuts.yml:7
+msgid "Show system status"
+msgstr ""
