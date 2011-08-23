@@ -1,0 +1,67 @@
+# Copyright (C) 2006 SuSE Linux Products GmbH, Nuernberg
+# This file is distributed under the same license as the package.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: webyast-ldap-ui\n"
+"POT-Creation-Date: 2010-08-18 10:19+0200\n"
+"PO-Revision-Date: 2010-08-27 09:29\n"
+"Last-Translator: Novell Language <language@novell.com>\n"
+"Language-Team: Novell Language <language@novell.com>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+
+#: app/controllers/ldap_controller.rb:39 ./app/controllers/ldap_controller.rb:39
+msgid "Cannot read LDAP client configuraton."
+msgstr "LDAPクライアントの環境設定を読み込めません。"
+
+#: app/controllers/ldap_controller.rb:62 ./app/controllers/ldap_controller.rb:62
+msgid "LDAP client configuraton successfully written."
+msgstr "LDAPクライアント環境設定が正常に書き込まれました。"
+
+#: app/controllers/ldap_controller.rb:67 ./app/controllers/ldap_controller.rb:67
+msgid "Error while saving LDAP client configuration."
+msgstr "LDAPクライアント環境設定の保存中にエラーが発生しました。"
+
+#: app/views/ldap/index.html.erb:33 ./app/views/ldap/index.html.erb:33
+msgid "This field is required."
+msgstr "このフィールドは必須です。"
+
+#: app/views/ldap/index.html.erb:34 ./app/views/ldap/index.html.erb:34
+msgid "Enter a valid domain name or an IP address."
+msgstr "正しいドメイン名かIPアドレスを入力してください。"
+
+#: app/views/ldap/index.html.erb:77 ./app/views/ldap/index.html.erb:77
+msgid "LDAP client"
+msgstr "LDAPクライアント"
+
+#: app/views/ldap/index.html.erb:89 ./app/views/ldap/index.html.erb:89
+msgid "Enable LDAP Authentication"
+msgstr "LDAP認証を有効にする"
+
+#: app/views/ldap/index.html.erb:92 ./app/views/ldap/index.html.erb:92
+msgid "LDAP Server Address"
+msgstr "LDAPサーバアドレス"
+
+#: app/views/ldap/index.html.erb:96 ./app/views/ldap/index.html.erb:96
+msgid "Base DN"
+msgstr "ベースDN"
+
+#: app/views/ldap/index.html.erb:99 ./app/views/ldap/index.html.erb:99
+msgid "Fetch DN"
+msgstr "DNの取得"
+
+#: app/views/ldap/index.html.erb:118 ./app/views/ldap/index.html.erb:118
+msgid "Secure Connection"
+msgstr "セキュアな接続"
+
+#: ./shortcuts.yml:6
+msgid "LDAP"
+msgstr "LDAP"
+
+#: ./shortcuts.yml:7
+msgid "Configure LDAP client"
+msgstr "LDAP クライアントを設定する"
+

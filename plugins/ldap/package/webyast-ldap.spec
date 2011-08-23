@@ -68,6 +68,10 @@ mkdir -p public/ldap/restdoc
 # do not package restdoc sources
 rm -rf restdoc
 
+export RAILS_PARENT=%{webyast_dir}
+export LANG=en
+rake makemo
+
 %check
 # run the testsuite
 %webyast_check
@@ -89,6 +93,13 @@ install -m 0644 %SOURCE1 $RPM_BUILD_ROOT/usr/share/PolicyKit/policy/
 mkdir -p $RPM_BUILD_ROOT/usr/share/YaST2/modules/YaPI/
 cp %{SOURCE2} $RPM_BUILD_ROOT/usr/share/YaST2/modules/YaPI/
 
+# remove .po files (no longer needed)
+rm -rf $RPM_BUILD_ROOT/%{plugin_dir}/po
+
+# search locale files
+%find_lang webyast-ldap
+
+
 %clean
 rm -rf $RPM_BUILD_ROOT
 
@@ -99,7 +110,7 @@ rm -rf $RPM_BUILD_ROOT
 
 %postun
 
-%files 
+%files -f webyast-ldap.lang
 %defattr(-,root,root)
 %dir %{webyast_dir}
 %dir %{webyast_dir}/vendor
@@ -119,6 +130,7 @@ rm -rf $RPM_BUILD_ROOT
 %{plugin_dir}/config
 %{plugin_dir}/doc
 %{plugin_dir}/public
+%{plugin_dir}/locale
 %dir /usr/share/PolicyKit
 %dir /usr/share/PolicyKit/policy
 %attr(644,root,root) %config /usr/share/PolicyKit/policy/org.opensuse.yast.modules.yapi.ldap.policy

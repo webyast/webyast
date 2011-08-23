@@ -1,0 +1,67 @@
+# Copyright (C) 2006 SuSE Linux Products GmbH, Nuernberg
+# This file is distributed under the same license as the package.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: webyast-ldap-ui\n"
+"POT-Creation-Date: 2010-08-18 10:19+0200\n"
+"PO-Revision-Date: 2010-08-26 09:34\n"
+"Last-Translator: Novell Language <language@novell.com>\n"
+"Language-Team: Novell Language <language@novell.com>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+
+#: app/controllers/ldap_controller.rb:39 ./app/controllers/ldap_controller.rb:39
+msgid "Cannot read LDAP client configuraton."
+msgstr "無法讀取 LDAP 用戶端組態。"
+
+#: app/controllers/ldap_controller.rb:62 ./app/controllers/ldap_controller.rb:62
+msgid "LDAP client configuraton successfully written."
+msgstr "已成功寫入 LDAP 用戶端組態。"
+
+#: app/controllers/ldap_controller.rb:67 ./app/controllers/ldap_controller.rb:67
+msgid "Error while saving LDAP client configuration."
+msgstr "儲存 LDAP 用戶端組態時發生錯誤。"
+
+#: app/views/ldap/index.html.erb:33 ./app/views/ldap/index.html.erb:33
+msgid "This field is required."
+msgstr "此欄位是必要的。"
+
+#: app/views/ldap/index.html.erb:34 ./app/views/ldap/index.html.erb:34
+msgid "Enter a valid domain name or an IP address."
+msgstr "輸入有效的網域名稱或 IP 位址。"
+
+#: app/views/ldap/index.html.erb:77 ./app/views/ldap/index.html.erb:77
+msgid "LDAP client"
+msgstr "LDAP 用戶端"
+
+#: app/views/ldap/index.html.erb:89 ./app/views/ldap/index.html.erb:89
+msgid "Enable LDAP Authentication"
+msgstr "啟用 LDAP 驗證"
+
+#: app/views/ldap/index.html.erb:92 ./app/views/ldap/index.html.erb:92
+msgid "LDAP Server Address"
+msgstr "LDAP 伺服器位址"
+
+#: app/views/ldap/index.html.erb:96 ./app/views/ldap/index.html.erb:96
+msgid "Base DN"
+msgstr "基礎 DN"
+
+#: app/views/ldap/index.html.erb:99 ./app/views/ldap/index.html.erb:99
+msgid "Fetch DN"
+msgstr "取得 DN"
+
+#: app/views/ldap/index.html.erb:118 ./app/views/ldap/index.html.erb:118
+msgid "Secure Connection"
+msgstr "安全連線"
+
+#: ./shortcuts.yml:6
+msgid "LDAP"
+msgstr "LDAP"
+
+#: ./shortcuts.yml:7
+msgid "Configure LDAP client"
+msgstr "設定 LDAP 用戶端"
+

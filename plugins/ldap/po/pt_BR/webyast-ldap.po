@@ -1,0 +1,67 @@
+# Copyright (C) 2006 SuSE Linux Products GmbH, Nuernberg
+# This file is distributed under the same license as the package.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: webyast-ldap-ui\n"
+"POT-Creation-Date: 2010-08-18 10:19+0200\n"
+"PO-Revision-Date: 2010-08-26 09:31\n"
+"Last-Translator: Novell Language <language@novell.com>\n"
+"Language-Team: Novell Language <language@novell.com>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n>1;\n"
+
+#: app/controllers/ldap_controller.rb:39 ./app/controllers/ldap_controller.rb:39
+msgid "Cannot read LDAP client configuraton."
+msgstr "Impossível ler configuração do cliente LDAP."
+
+#: app/controllers/ldap_controller.rb:62 ./app/controllers/ldap_controller.rb:62
+msgid "LDAP client configuraton successfully written."
+msgstr "Configuração do cliente LDAP gravada com êxito."
+
+#: app/controllers/ldap_controller.rb:67 ./app/controllers/ldap_controller.rb:67
+msgid "Error while saving LDAP client configuration."
+msgstr "Erro ao gravar configuração do cliente LDAP."
+
+#: app/views/ldap/index.html.erb:33 ./app/views/ldap/index.html.erb:33
+msgid "This field is required."
+msgstr "Este campo é obrigatório."
+
+#: app/views/ldap/index.html.erb:34 ./app/views/ldap/index.html.erb:34
+msgid "Enter a valid domain name or an IP address."
+msgstr "Digite um nome de domínio ou um endereço IP válido."
+
+#: app/views/ldap/index.html.erb:77 ./app/views/ldap/index.html.erb:77
+msgid "LDAP client"
+msgstr "Cliente LDAP"
+
+#: app/views/ldap/index.html.erb:89 ./app/views/ldap/index.html.erb:89
+msgid "Enable LDAP Authentication"
+msgstr "Habilitar Autenticação LDAP"
+
+#: app/views/ldap/index.html.erb:92 ./app/views/ldap/index.html.erb:92
+msgid "LDAP Server Address"
+msgstr "Endereço do Servidor LDAP"
+
+#: app/views/ldap/index.html.erb:96 ./app/views/ldap/index.html.erb:96
+msgid "Base DN"
+msgstr "DN de Base"
+
+#: app/views/ldap/index.html.erb:99 ./app/views/ldap/index.html.erb:99
+msgid "Fetch DN"
+msgstr "Pesquisar DN"
+
+#: app/views/ldap/index.html.erb:118 ./app/views/ldap/index.html.erb:118
+msgid "Secure Connection"
+msgstr "Conexão Segura"
+
+#: ./shortcuts.yml:6
+msgid "LDAP"
+msgstr "LDAP"
+
+#: ./shortcuts.yml:7
+msgid "Configure LDAP client"
+msgstr "Configurar cliente LDAP"
+

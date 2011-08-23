@@ -1,0 +1,56 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: webyast-ldap-ui 1.0.0\n"
+"Report-Msgid-Bugs-To: i18n@suse.de\n"
+"POT-Creation-Date: 2010-08-02 09:19+0200\n"
+"PO-Revision-Date: 2005-11-08 12:26+8\n"
+"Last-Translator: Steve Beattie <steve@immunix.com>\n"
+"Language-Team: English\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+
+#: app/controllers/ldap_controller.rb:39 app/controllers/ldap_controller.rb:39
+msgid "Cannot read LDAP client configuraton."
+msgstr ""
+
+#: app/controllers/ldap_controller.rb:62 app/controllers/ldap_controller.rb:62
+msgid "LDAP client configuraton successfully written."
+msgstr ""
+
+#: app/controllers/ldap_controller.rb:67 app/controllers/ldap_controller.rb:67
+msgid "Error while saving LDAP client configuration."
+msgstr ""
+
+#: app/views/ldap/index.html.erb:33 app/views/ldap/index.html.erb:33
+msgid "This field is required."
+msgstr ""
+
+#: app/views/ldap/index.html.erb:34 app/views/ldap/index.html.erb:34
+msgid "Enter a valid domain name or an IP address."
+msgstr ""
+
+#: app/views/ldap/index.html.erb:77 app/views/ldap/index.html.erb:77
+msgid "LDAP client"
+msgstr ""
+
+#: app/views/ldap/index.html.erb:89 app/views/ldap/index.html.erb:89
+msgid "Enable LDAP Authentication"
+msgstr ""
+
+#: app/views/ldap/index.html.erb:92 app/views/ldap/index.html.erb:92
+msgid "LDAP Server Address"
+msgstr ""
+
+#: app/views/ldap/index.html.erb:96 app/views/ldap/index.html.erb:96
+msgid "Base DN"
+msgstr ""
+
+#: app/views/ldap/index.html.erb:99 app/views/ldap/index.html.erb:99
+msgid "Fetch DN"
+msgstr ""
+
+#: app/views/ldap/index.html.erb:118 app/views/ldap/index.html.erb:118
+msgid "Secure Connection"
+msgstr ""
