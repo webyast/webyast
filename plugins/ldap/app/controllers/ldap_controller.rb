@@ -24,6 +24,10 @@ class LdapController < ApplicationController
 
   before_filter :login_required
 
+  # Initialize GetText and Content-Type.
+  init_gettext 'webyast_ldap'
+
+
   # GET action
   # Read LDAP client settings
   # If special parameter 'fetch_dn' is present, return base DN supported by given server

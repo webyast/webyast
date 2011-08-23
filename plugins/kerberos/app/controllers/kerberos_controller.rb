@@ -24,6 +24,10 @@ class KerberosController < ApplicationController
 
   before_filter :login_required
 
+  # Initialize GetText and Content-Type.
+  init_gettext 'webyast_kerberos'
+
+
   # GET action
   # Read Kerberos client settings
   # Requires read permissions for Kerberos client YaPI.

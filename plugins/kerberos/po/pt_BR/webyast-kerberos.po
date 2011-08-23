@@ -1,0 +1,63 @@
+# Copyright (C) 2006 SuSE Linux Products GmbH, Nuernberg
+# This file is distributed under the same license as the package.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: webyast-kerberos-ui\n"
+"POT-Creation-Date: 2010-08-18 10:19+0200\n"
+"PO-Revision-Date: 2010-08-26 09:31\n"
+"Last-Translator: Novell Language <language@novell.com>\n"
+"Language-Team: Novell Language <language@novell.com>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n>1;\n"
+
+#: app/controllers/kerberos_controller.rb:39 ./app/controllers/kerberos_controller.rb:39
+msgid "Cannot read Kerberos client configuraton."
+msgstr "Impossível ler configuração do cliente Kerberos."
+
+#: app/controllers/kerberos_controller.rb:55 ./app/controllers/kerberos_controller.rb:55
+msgid "Kerberos client configuraton successfully written."
+msgstr "Configuração do cliente Kerberos gravada com êxito."
+
+#: app/controllers/kerberos_controller.rb:60 ./app/controllers/kerberos_controller.rb:60
+msgid "Error while saving Kerberos client configuration."
+msgstr "Erro ao gravar configuração do cliente Kerberos."
+
+#: app/views/kerberos/index.html.erb:33 ./app/views/kerberos/index.html.erb:33
+msgid "This field is required."
+msgstr "Este campo é obrigatório."
+
+#: app/views/kerberos/index.html.erb:34 ./app/views/kerberos/index.html.erb:34
+msgid "Enter a valid domain name or an IP address."
+msgstr "Digite um nome de domínio ou um endereço IP válido."
+
+#: app/views/kerberos/index.html.erb:64 ./app/views/kerberos/index.html.erb:64
+msgid "Kerberos client"
+msgstr "Cliente Kerberos"
+
+#: app/views/kerberos/index.html.erb:76 ./app/views/kerberos/index.html.erb:76
+msgid "Enable Kerberos Authentication"
+msgstr "Habilitar Autenticação Kerberos"
+
+#: app/views/kerberos/index.html.erb:79 ./app/views/kerberos/index.html.erb:79
+msgid "Default Domain"
+msgstr "Domínio padrão"
+
+#: app/views/kerberos/index.html.erb:83 ./app/views/kerberos/index.html.erb:83
+msgid "Default Realm"
+msgstr "Realm Padrão"
+
+#: app/views/kerberos/index.html.erb:87 ./app/views/kerberos/index.html.erb:87
+msgid "KDC Server Address"
+msgstr "Endereço do Servidor KDC"
+
+#: ./shortcuts.yml:6
+msgid "Kerberos"
+msgstr "Kerberos"
+
+#: ./shortcuts.yml:7
+msgid "Configure Kerberos client"
+msgstr "Configurar cliente Kerberos"
+

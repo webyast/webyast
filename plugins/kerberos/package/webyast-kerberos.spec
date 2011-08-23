@@ -68,6 +68,10 @@ mkdir -p public/kerberos/restdoc
 # do not package restdoc sources
 rm -rf restdoc
 
+export RAILS_PARENT=%{webyast_dir}
+export LANG=en
+rake makemo
+
 %check
 # run the testsuite
 %webyast_check
@@ -89,6 +93,12 @@ install -m 0644 %SOURCE1 $RPM_BUILD_ROOT/usr/share/PolicyKit/policy/
 mkdir -p $RPM_BUILD_ROOT/usr/share/YaST2/modules/YaPI/
 cp %{SOURCE2} $RPM_BUILD_ROOT/usr/share/YaST2/modules/YaPI/
 
+# remove .po files (no longer needed)
+rm -rf $RPM_BUILD_ROOT/%{plugin_dir}/po
+
+# search locale files
+%find_lang webyast-kerberos
+
 %clean
 rm -rf $RPM_BUILD_ROOT
 
@@ -99,7 +109,7 @@ rm -rf $RPM_BUILD_ROOT
 
 %postun
 
-%files 
+%files -f webyast-kerberos.lang
 %defattr(-,root,root)
 %dir %{webyast_dir}
 %dir %{webyast_dir}/vendor
@@ -110,6 +120,7 @@ rm -rf $RPM_BUILD_ROOT
 %dir /usr/share/YaST2/modules/
 %dir /usr/share/YaST2/modules/YaPI/
 /usr/share/YaST2/modules/YaPI/KERBEROS.pm
+%{plugin_dir}/locale
 %{plugin_dir}/README
 %{plugin_dir}/Rakefile
 %{plugin_dir}/init.rb

@@ -1,0 +1,63 @@
+# Copyright (C) 2006 SuSE Linux Products GmbH, Nuernberg
+# This file is distributed under the same license as the package.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: webyast-kerberos-ui\n"
+"POT-Creation-Date: 2010-08-18 10:19+0200\n"
+"PO-Revision-Date: 2010-08-27 09:29\n"
+"Last-Translator: Novell Language <language@novell.com>\n"
+"Language-Team: Novell Language <language@novell.com>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+
+#: app/controllers/kerberos_controller.rb:39 ./app/controllers/kerberos_controller.rb:39
+msgid "Cannot read Kerberos client configuraton."
+msgstr "Kerberosクライアントの環境設定を読み込めません。"
+
+#: app/controllers/kerberos_controller.rb:55 ./app/controllers/kerberos_controller.rb:55
+msgid "Kerberos client configuraton successfully written."
+msgstr "Kerberosクライアント環境設定が正常に書き込まれました。"
+
+#: app/controllers/kerberos_controller.rb:60 ./app/controllers/kerberos_controller.rb:60
+msgid "Error while saving Kerberos client configuration."
+msgstr "Kerberosクライアント環境設定の保存中にエラーが発生しました。"
+
+#: app/views/kerberos/index.html.erb:33 ./app/views/kerberos/index.html.erb:33
+msgid "This field is required."
+msgstr "このフィールドは必須です。"
+
+#: app/views/kerberos/index.html.erb:34 ./app/views/kerberos/index.html.erb:34
+msgid "Enter a valid domain name or an IP address."
+msgstr "正しいドメイン名かIPアドレスを入力してください。"
+
+#: app/views/kerberos/index.html.erb:64 ./app/views/kerberos/index.html.erb:64
+msgid "Kerberos client"
+msgstr "Kerberosクライアント"
+
+#: app/views/kerberos/index.html.erb:76 ./app/views/kerberos/index.html.erb:76
+msgid "Enable Kerberos Authentication"
+msgstr "Kerberos認証を有効にする"
+
+#: app/views/kerberos/index.html.erb:79 ./app/views/kerberos/index.html.erb:79
+msgid "Default Domain"
+msgstr "デフォルトのドメインです"
+
+#: app/views/kerberos/index.html.erb:83 ./app/views/kerberos/index.html.erb:83
+msgid "Default Realm"
+msgstr "デフォルトのレルム(realm)です"
+
+#: app/views/kerberos/index.html.erb:87 ./app/views/kerberos/index.html.erb:87
+msgid "KDC Server Address"
+msgstr "KDCサーバのアドレス"
+
+#: ./shortcuts.yml:6
+msgid "Kerberos"
+msgstr "Kerberos"
+
+#: ./shortcuts.yml:7
+msgid "Configure Kerberos client"
+msgstr "Kerberos クライアントを設定する"
+
