@@ -1,0 +1,157 @@
+# Thai message file for YaST2 (@memory@).
+# Copyright (C) 2008 SUSE Linux Products GmbH.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: webyast-root-user-ui 1.0.0\n"
+"Report-Msgid-Bugs-To: i18n@suse.de\n"
+"POT-Creation-Date: 2010-08-02 09:18+0200\n"
+"PO-Revision-Date: 2008-01-04 08:58+0100\n"
+"Last-Translator: i18n@suse.de\n"
+"Language-Team: Thai <i18n@suse.de>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+
+#: app/controllers/administrator_controller.rb:53
+#: app/views/administrator/index.html.erb:56
+#: app/controllers/administrator_controller.rb:53
+#: app/views/administrator/index.html.erb:56
+#, fuzzy
+msgid "Enter a valid e-mail address."
+msgstr "ป้อนชื่อแฟ้มที่ใช้งานได้"
+
+#: app/controllers/administrator_controller.rb:61
+#: app/controllers/administrator_controller.rb:61
+#, fuzzy
+msgid "Passwords do not match."
+msgstr "รหัสผ่านไม่ตรงกัน กำลังออก"
+
+#: app/controllers/administrator_controller.rb:74
+#: app/controllers/administrator_controller.rb:74
+#, fuzzy
+msgid "Administrator settings have been written."
+msgstr "ตั้งค่าผู้บริหารระบบ"
+
+#: app/controllers/administrator_controller.rb:84
+#: app/controllers/administrator_controller.rb:84
+#, fuzzy
+msgid "Error while saving administrator settings: %s"
+msgstr "เกิดข้อผิดพลาดระหว่างเขียนค่าการปรับแต่ง"
+
+#: app/controllers/administrator_controller.rb:96
+#: app/controllers/administrator_controller.rb:96
+msgid ""
+"Mail alias was set but outgoing mail server is not configured (%s<i>change</"
+"i>%s)."
+msgstr ""
+
+#: app/views/administrator/index.html.erb:22
+#: app/views/administrator/index.html.erb:22 shortcuts.yml:6
+#, fuzzy
+msgid "Administrator Settings"
+msgstr "ตั้งค่าผู้บริหารระบบ"
+
+#: app/views/administrator/index.html.erb:64
+#: app/views/administrator/index.html.erb:64
+#, fuzzy
+msgid "The passwords do not match."
+msgstr "รหัสผ่านไม่ตรงกัน กำลังออก"
+
+#: app/views/administrator/index.html.erb:65
+#: app/views/administrator/index.html.erb:65
+#, fuzzy
+msgid "A password is required."
+msgstr "ต้องการพารามิเตอร์ %1"
+
+#: app/views/administrator/index.html.erb:70
+#: app/views/administrator/index.html.erb:70
+#, fuzzy
+msgid "Password Strength:"
+msgstr "ตั้งค่ารหัสผ่าน"
+
+#: app/views/administrator/index.html.erb:72
+#: app/views/administrator/index.html.erb:72
+msgid "Weak"
+msgstr ""
+
+#: app/views/administrator/index.html.erb:73
+#: app/views/administrator/index.html.erb:73
+#, fuzzy
+msgid "Normal"
+msgstr "ตั้งค่าปกติ"
+
+#: app/views/administrator/index.html.erb:74
+#: app/views/administrator/index.html.erb:74
+msgid "Medium"
+msgstr "สื่อ"
+
+#: app/views/administrator/index.html.erb:75
+#: app/views/administrator/index.html.erb:75
+msgid "Strong"
+msgstr ""
+
+#: app/views/administrator/index.html.erb:76
+#: app/views/administrator/index.html.erb:76
+msgid "Very Strong"
+msgstr ""
+
+#: app/views/administrator/index.html.erb:104
+#: app/views/administrator/index.html.erb:104
+#, fuzzy
+msgid "Password Setup for User 'root'"
+msgstr "รหัสผ่านของผู้ใช้ใหม่:"
+
+#: app/views/administrator/index.html.erb:105
+#: app/views/administrator/index.html.erb:105
+#, fuzzy
+msgid "New Password"
+msgstr "รหัสผ่าน"
+
+#: app/views/administrator/index.html.erb:110
+#: app/views/administrator/index.html.erb:110
+msgid "Confirm Password"
+msgstr "ยืนยันรหัสผ่าน"
+
+#: app/views/administrator/index.html.erb:119
+#: app/views/administrator/index.html.erb:119
+#, fuzzy
+msgid "Mail Setup for User 'root'"
+msgstr "การตั้งค่าโลเคลสำหรับผู้ดูแลระบบ (ผู้ใช้: root)"
+
+#: app/views/administrator/index.html.erb:121
+#: app/views/administrator/index.html.erb:121
+#, fuzzy
+msgid "Forward system mail to"
+msgstr "รายการของเครื่องรับช่วงบริการต่อ"
+
+#: app/views/administrator/index.html.erb:124
+#: app/views/administrator/index.html.erb:124
+#, fuzzy
+msgid "Save Mail Only"
+msgstr "บันทึกไปยังแฟ้ม"
+
+#: shortcuts.yml:7
+msgid "Manage system administrator"
+msgstr ""
+
+#, fuzzy
+#~| msgid "U&se this password for system administrator"
+#~ msgid "Here, configure the settings for system administrator ('root')."
+#~ msgstr "ใช้รหัสผ่านนี้กับผู้ดูแลระบบ (root)"
+
+#, fuzzy
+#~| msgid "Confirm Password"
+#~ msgid "Confirm password"
+#~ msgstr "ยืนยันรหัสผ่าน"
+
+#, fuzzy
+#~| msgid "Password"
+#~ msgid "Save Password"
+#~ msgstr "รหัสผ่าน"
+
+#, fuzzy
+#~| msgid "&Save"
+#~ msgid "Save"
+#~ msgstr "จัดเก็บ"

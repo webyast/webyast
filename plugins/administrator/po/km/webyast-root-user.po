@@ -1,0 +1,80 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: @PACKAGE@\n"
+"Report-Msgid-Bugs-To: translation@suse.de\n"
+"POT-Creation-Date: 2009-11-20 14:34+0100\n"
+"PO-Revision-Date: 2006-02-18 09:47+0700\n"
+"Last-Translator: Keo Sophon <keosophon@khmeros.info>\n"
+"Language-Team: Khmer <support@khmeros.info>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+
+#: app/controllers/administrator_controller.rb:35
+#: app/views/administrator/index.html.erb:28
+#, fuzzy
+#| msgid "`%s' is not a valid ip address."
+msgid "Enter a valid e-mail address."
+msgstr "`%s' មិន​មែន​ជា​អាសយដ្ឋាន ip ត្រឹមត្រូវ ។"
+
+#: app/controllers/administrator_controller.rb:43
+msgid "Passwords do not match."
+msgstr "ពាក្យ​សម្ងាត់​មិន​ដូច​គ្នា​ទេ ។"
+
+#: app/controllers/administrator_controller.rb:60
+#, fuzzy
+#| msgid "Monitor Settings"
+msgid "Administrator settings have been written."
+msgstr "ការ​កំណត់​ម៉ូនីទ័រ"
+
+#: app/controllers/administrator_controller.rb:70
+#, fuzzy
+#| msgid "Error while closing old shadow file: %m"
+msgid "Error while saving administrator settings: %s"
+msgstr "មាន​កំហុស ខណៈ​ពេល​បិទ​ឯកសារ shadown ចាស់ ៖ %m"
+
+#: app/views/administrator/index.html.erb:1
+#, fuzzy
+#| msgid "Monitor Settings"
+msgid "Administrator Settings"
+msgstr "ការ​កំណត់​ម៉ូនីទ័រ"
+
+#: app/views/administrator/index.html.erb:36
+#, fuzzy
+#| msgid "Passwords do not match."
+msgid "The passwords do not match."
+msgstr "ពាក្យ​សម្ងាត់​មិន​ដូច​គ្នា​ទេ ។"
+
+#: app/views/administrator/index.html.erb:51
+msgid "Here, configure the settings for system administrator ('root')."
+msgstr ""
+
+# password dialog title
+#: app/views/administrator/index.html.erb:58
+msgid "Password"
+msgstr "ពាក្យសម្ងាត់"
+
+#: app/views/administrator/index.html.erb:63
+#, fuzzy
+#| msgid "_Confirm Password:"
+msgid "Confirm password"
+msgstr "អះអាង​ពាក្យ​សម្ងាត់ ៖ "
+
+#: app/views/administrator/index.html.erb:65
+#, fuzzy
+#| msgid "Change Password"
+msgid "Save Password"
+msgstr "ផ្លាស់ប្ដូរ​ពាក្យ​សម្ងាត់"
+
+#: app/views/administrator/index.html.erb:70
+#, fuzzy
+#| msgid "Forwardable"
+msgid "Forward mail to"
+msgstr "អាច​បញ្ជូន​បន្ត​បាន"
+
+#: app/views/administrator/index.html.erb:72
+#, fuzzy
+#| msgid "Save"
+msgid "Save Mail"
+msgstr "រក្សា​ទុក"

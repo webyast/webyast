@@ -1,0 +1,64 @@
+# Sinhala message file for YaST2 (@memory@).
+# Copyright (C) 2007 SUSE Linux Products GmbH.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: YaST (@memory@)\n"
+"Report-Msgid-Bugs-To: i18n@suse.de\n"
+"POT-Creation-Date: 2009-11-20 14:34+0100\n"
+"PO-Revision-Date: 2005-07-29 15:37+0530\n"
+"Last-Translator: i18n@suse.de\n"
+"Language-Team: Sinhala <i18n@suse.de>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n!=1);\n"
+
+#: app/controllers/administrator_controller.rb:35
+#: app/views/administrator/index.html.erb:28
+msgid "Enter a valid e-mail address."
+msgstr ""
+
+#: app/controllers/administrator_controller.rb:43
+msgid "Passwords do not match."
+msgstr ""
+
+#: app/controllers/administrator_controller.rb:60
+msgid "Administrator settings have been written."
+msgstr ""
+
+#: app/controllers/administrator_controller.rb:70
+msgid "Error while saving administrator settings: %s"
+msgstr ""
+
+#: app/views/administrator/index.html.erb:1
+msgid "Administrator Settings"
+msgstr ""
+
+#: app/views/administrator/index.html.erb:36
+msgid "The passwords do not match."
+msgstr ""
+
+#: app/views/administrator/index.html.erb:51
+msgid "Here, configure the settings for system administrator ('root')."
+msgstr ""
+
+#: app/views/administrator/index.html.erb:58
+msgid "Password"
+msgstr ""
+
+#: app/views/administrator/index.html.erb:63
+msgid "Confirm password"
+msgstr ""
+
+#: app/views/administrator/index.html.erb:65
+msgid "Save Password"
+msgstr ""
+
+#: app/views/administrator/index.html.erb:70
+msgid "Forward mail to"
+msgstr ""
+
+#: app/views/administrator/index.html.erb:72
+msgid "Save Mail"
+msgstr ""

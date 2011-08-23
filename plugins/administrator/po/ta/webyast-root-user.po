@@ -1,0 +1,149 @@
+# @TITLE@
+# Copyright (C) 2006, SUSE Linux GmbH, Nuremberg
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+# This file is distributed under the same license as @PACKAGE@ package. FIRST
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: webyast-root-user-ui 1.0.0\n"
+"Report-Msgid-Bugs-To: translation@suse.de\n"
+"POT-Creation-Date: 2010-08-02 09:18+0200\n"
+"PO-Revision-Date: 2003-08-14 10:47+0200\n"
+"Last-Translator: xxx <yyy@example.org>\n"
+"Language-Team: Tamil <i18n@suse.de>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+
+#: app/controllers/administrator_controller.rb:53
+#: app/views/administrator/index.html.erb:56
+#: app/controllers/administrator_controller.rb:53
+#: app/views/administrator/index.html.erb:56
+#, fuzzy
+msgid "Enter a valid e-mail address."
+msgstr "`%s' ஒரு செல்லத்தக்க ip முகவரி அல்ல."
+
+#: app/controllers/administrator_controller.rb:61
+#: app/controllers/administrator_controller.rb:61
+msgid "Passwords do not match."
+msgstr "கடவுச்சொற்கள் பொருந்தவில்லை."
+
+#: app/controllers/administrator_controller.rb:74
+#: app/controllers/administrator_controller.rb:74
+#, fuzzy
+msgid "Administrator settings have been written."
+msgstr "மானிட்டர் அமைப்புகள்"
+
+#: app/controllers/administrator_controller.rb:84
+#: app/controllers/administrator_controller.rb:84
+#, fuzzy
+msgid "Error while saving administrator settings: %s"
+msgstr "பழைய நிழல்உரு கோப்பு: %mஐ மூடும்போது பிழை"
+
+#: app/controllers/administrator_controller.rb:96
+#: app/controllers/administrator_controller.rb:96
+msgid ""
+"Mail alias was set but outgoing mail server is not configured (%s<i>change</"
+"i>%s)."
+msgstr ""
+
+#: app/views/administrator/index.html.erb:22
+#: app/views/administrator/index.html.erb:22 shortcuts.yml:6
+#, fuzzy
+msgid "Administrator Settings"
+msgstr "மானிட்டர் அமைப்புகள்"
+
+#: app/views/administrator/index.html.erb:64
+#: app/views/administrator/index.html.erb:64
+#, fuzzy
+msgid "The passwords do not match."
+msgstr "கடவுச்சொற்கள் பொருந்தவில்லை."
+
+#: app/views/administrator/index.html.erb:65
+#: app/views/administrator/index.html.erb:65
+#, fuzzy
+msgid "A password is required."
+msgstr "PKCS12 கடவுச்சொல் தேவை."
+
+#: app/views/administrator/index.html.erb:70
+#: app/views/administrator/index.html.erb:70
+#, fuzzy
+msgid "Password Strength:"
+msgstr "கடவுச் சொல்:."
+
+#: app/views/administrator/index.html.erb:72
+#: app/views/administrator/index.html.erb:72
+msgid "Weak"
+msgstr ""
+
+#: app/views/administrator/index.html.erb:73
+#: app/views/administrator/index.html.erb:73
+msgid "Normal"
+msgstr "_­ÂøÀ¡É «Ç×"
+
+#: app/views/administrator/index.html.erb:74
+#: app/views/administrator/index.html.erb:74
+msgid "Medium"
+msgstr ""
+
+#: app/views/administrator/index.html.erb:75
+#: app/views/administrator/index.html.erb:75
+msgid "Strong"
+msgstr ""
+
+#: app/views/administrator/index.html.erb:76
+#: app/views/administrator/index.html.erb:76
+msgid "Very Strong"
+msgstr ""
+
+#: app/views/administrator/index.html.erb:104
+#: app/views/administrator/index.html.erb:104
+msgid "Password Setup for User 'root'"
+msgstr ""
+
+#: app/views/administrator/index.html.erb:105
+#: app/views/administrator/index.html.erb:105
+#, fuzzy
+msgid "New Password"
+msgstr "(_P)கடவுச்சொல்:"
+
+#: app/views/administrator/index.html.erb:110
+#: app/views/administrator/index.html.erb:110
+#, fuzzy
+msgid "Confirm Password"
+msgstr "(_P)கடவுச்சொல்:"
+
+#: app/views/administrator/index.html.erb:119
+#: app/views/administrator/index.html.erb:119
+msgid "Mail Setup for User 'root'"
+msgstr ""
+
+#: app/views/administrator/index.html.erb:121
+#: app/views/administrator/index.html.erb:121
+msgid "Forward system mail to"
+msgstr ""
+
+#: app/views/administrator/index.html.erb:124
+#: app/views/administrator/index.html.erb:124
+#, fuzzy
+msgid "Save Mail Only"
+msgstr "சேமிக்கவும்"
+
+#: shortcuts.yml:7
+msgid "Manage system administrator"
+msgstr ""
+
+#~ msgid "Password"
+#~ msgstr "கடவுச்சொல்"
+
+#, fuzzy
+#~| msgid "_Confirm Password:"
+#~ msgid "Confirm password"
+#~ msgstr "(_P)கடவுச்சொல்:"
+
+#, fuzzy
+#~| msgid "Change Password"
+#~ msgid "Save Password"
+#~ msgstr "கணத்தை மாற்று"

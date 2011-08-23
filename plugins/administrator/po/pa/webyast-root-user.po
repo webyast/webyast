@@ -1,0 +1,154 @@
+# @TITLE@
+# Copyright (C) 2006, SUSE Linux GmbH, Nuremberg
+#
+# This file is distributed under the same license as @PACKAGE@ package. FIRST
+#
+# A S Alam <aalam@users.sf.net>, 2009.
+msgid ""
+msgstr ""
+"Project-Id-Version: webyast-root-user-ui 1.0.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2010-08-02 09:18+0200\n"
+"PO-Revision-Date: 2009-10-10 22:29+0530\n"
+"Last-Translator: A S Alam <aalam@users.sf.net>\n"
+"Language-Team: Punjabi/Panjabi <punjabi-users@lists.sf.net>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Lokalize 1.0\n"
+"Plural-Forms: Plural-Forms: Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: app/controllers/administrator_controller.rb:53
+#: app/views/administrator/index.html.erb:56
+#: app/controllers/administrator_controller.rb:53
+#: app/views/administrator/index.html.erb:56
+msgid "Enter a valid e-mail address."
+msgstr "ਢੁੱਕਵਾਂ ਈਮੇਲ ਐਡਰੈੱਸ ਦਿਓ ਜੀ।"
+
+#: app/controllers/administrator_controller.rb:61
+#: app/controllers/administrator_controller.rb:61
+msgid "Passwords do not match."
+msgstr "ਪਾਸਵਰਡ ਮੇਲ ਨਹੀਂ ਖਾ ਰਿਹਾ ਹੈ।"
+
+#: app/controllers/administrator_controller.rb:74
+#: app/controllers/administrator_controller.rb:74
+#, fuzzy
+msgid "Administrator settings have been written."
+msgstr "ਪਰਸ਼ਾਸ਼ਨ ਸੈਟਿੰਗ"
+
+#: app/controllers/administrator_controller.rb:84
+#: app/controllers/administrator_controller.rb:84
+#, fuzzy
+msgid "Error while saving administrator settings: %s"
+msgstr "ਪੁਰਾਣੀ ਸ਼ੈਡੋ ਫਾਇਲ ਬੰਦ ਕਰਨ ਦੌਰਾਨ ਗਲਤੀ: %m"
+
+#: app/controllers/administrator_controller.rb:96
+#: app/controllers/administrator_controller.rb:96
+msgid ""
+"Mail alias was set but outgoing mail server is not configured (%s<i>change</"
+"i>%s)."
+msgstr ""
+
+#: app/views/administrator/index.html.erb:22
+#: app/views/administrator/index.html.erb:22 shortcuts.yml:6
+msgid "Administrator Settings"
+msgstr "ਪਰਸ਼ਾਸ਼ਨ ਸੈਟਿੰਗ"
+
+#: app/views/administrator/index.html.erb:64
+#: app/views/administrator/index.html.erb:64
+#, fuzzy
+msgid "The passwords do not match."
+msgstr "ਪਾਸਵਰਡ ਮੇਲ ਨਹੀਂ ਖਾ ਰਿਹਾ ਹੈ।"
+
+#: app/views/administrator/index.html.erb:65
+#: app/views/administrator/index.html.erb:65
+#, fuzzy
+msgid "A password is required."
+msgstr "PKCS12 ਪਾਸਵਰਡ ਲੋੜੀਦਾ ਹੈ।"
+
+#: app/views/administrator/index.html.erb:70
+#: app/views/administrator/index.html.erb:70
+#, fuzzy
+msgid "Password Strength:"
+msgstr "ਪਾਸਵਰਡ ਮਿਲਦਾ ਹੈ"
+
+#: app/views/administrator/index.html.erb:72
+#: app/views/administrator/index.html.erb:72
+msgid "Weak"
+msgstr ""
+
+#: app/views/administrator/index.html.erb:73
+#: app/views/administrator/index.html.erb:73
+msgid "Normal"
+msgstr "ਸਧਾਰਨ"
+
+#: app/views/administrator/index.html.erb:74
+#: app/views/administrator/index.html.erb:74
+#, fuzzy
+msgid "Medium"
+msgstr "ਮੀਡਿਆ"
+
+#: app/views/administrator/index.html.erb:75
+#: app/views/administrator/index.html.erb:75
+msgid "Strong"
+msgstr ""
+
+#: app/views/administrator/index.html.erb:76
+#: app/views/administrator/index.html.erb:76
+msgid "Very Strong"
+msgstr ""
+
+#: app/views/administrator/index.html.erb:104
+#: app/views/administrator/index.html.erb:104
+msgid "Password Setup for User 'root'"
+msgstr ""
+
+#: app/views/administrator/index.html.erb:105
+#: app/views/administrator/index.html.erb:105
+#, fuzzy
+msgid "New Password"
+msgstr "ਨਵਾਂ ਪਾਸਵਰਡ(_N):"
+
+#: app/views/administrator/index.html.erb:110
+#: app/views/administrator/index.html.erb:110
+#, fuzzy
+msgid "Confirm Password"
+msgstr "ਪਾਸਵਰਡ ਪੁਸ਼ਟੀ(_C):"
+
+#: app/views/administrator/index.html.erb:119
+#: app/views/administrator/index.html.erb:119
+msgid "Mail Setup for User 'root'"
+msgstr ""
+
+#: app/views/administrator/index.html.erb:121
+#: app/views/administrator/index.html.erb:121
+#, fuzzy
+msgid "Forward system mail to"
+msgstr "ਮੇਲ ਅੱਗੇ ਭੇਜੋ"
+
+#: app/views/administrator/index.html.erb:124
+#: app/views/administrator/index.html.erb:124
+#, fuzzy
+msgid "Save Mail Only"
+msgstr "ਸੰਭਾਲੋ"
+
+#: shortcuts.yml:7
+msgid "Manage system administrator"
+msgstr ""
+
+# password dialog title
+#~ msgid "Password"
+#~ msgstr "ਪਾਸਵਰਡ"
+
+#, fuzzy
+#~| msgid "Confirm Password"
+#~ msgid "Confirm password"
+#~ msgstr "ਪਾਸਵਰਡ ਪੁਸ਼ਟੀ"
+
+#, fuzzy
+#~| msgid "Change Password"
+#~ msgid "Save Password"
+#~ msgstr "ਪਾਸਵਰਡ ਬਦਲੋ"
+
+#~ msgid "Invalid session, please login again."
+#~ msgstr "ਗਲਤ ਸ਼ੈਸ਼ਨ, ਫੇਰ ਲਾਗਇਨ ਕਰੋ ਜੀ"

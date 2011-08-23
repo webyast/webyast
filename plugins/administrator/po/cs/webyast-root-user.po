@@ -1,0 +1,153 @@
+# translation of yast_webclient_administrator.cs.po to czech
+# Jaromír Červenka <cervajz@cervajz.com>, 2009.
+# Vojtěch Zeisek <vojta.sc@seznam.cz>, 2009.
+# Vojtěch Zeisek <Vojtech.Zeisek@opensuse.org>, 2010.
+# Jiri Srain <jsrain@suse.cz>, 2011.
+msgid ""
+msgstr ""
+"Project-Id-Version: @PACKAGE@\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2011-05-30 16:16+0200\n"
+"PO-Revision-Date: 2011-06-02 16:28+0200\n"
+"Last-Translator: Jiri Srain <jsrain@suse.cz>\n"
+"Language-Team: American English <kde-i18n-doc@kde.org>\n"
+"Language: cs\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Lokalize 1.0\n"
+"Plural-Forms: nplurals=3; plural=(n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2;\n"
+
+#: app/controllers/administrator_controller.rb:53
+#: app/views/administrator/index.html.erb:48
+#: app/controllers/administrator_controller.rb:53
+#: app/views/administrator/index.html.erb:48
+msgid "Enter a valid e-mail address."
+msgstr "Zadejte platnou e-mailovou adresu."
+
+#: app/controllers/administrator_controller.rb:61
+#: app/controllers/administrator_controller.rb:61
+msgid "Passwords do not match."
+msgstr "Hesla se neshodují."
+
+# Tady si nejsem jistý zda nebude lepší: Administrátorská nastavení. Cervajzz
+#: app/controllers/administrator_controller.rb:74
+#: app/controllers/administrator_controller.rb:74
+msgid "Administrator settings have been written."
+msgstr "Administrátorské nastavení bylo zapsáno."
+
+#: app/controllers/administrator_controller.rb:84
+#: app/controllers/administrator_controller.rb:84
+msgid "Error while saving administrator settings: %s"
+msgstr "Chyba při ukládání uživatelského nastavení: %s"
+
+#: app/controllers/administrator_controller.rb:96
+#: app/controllers/administrator_controller.rb:96
+msgid "Mail alias was set but outgoing mail server is not configured (%s<i>change</i>%s)."
+msgstr "Alias mailu byl nastaven, ale server odchozí pošty není nastaven (%s<i>změnit</i>%s)."
+
+#: app/views/administrator/index.html.erb:55
+#: app/views/administrator/index.html.erb:55
+#| msgid "Please wait..."
+msgid "Please wait"
+msgstr "Čekejte prosím"
+
+#: app/views/administrator/index.html.erb:64
+#: app/views/administrator/index.html.erb:64
+msgid "The passwords do not match."
+msgstr "Hesla se neshodují."
+
+#: app/views/administrator/index.html.erb:65
+#: app/views/administrator/index.html.erb:65
+msgid "A password is required."
+msgstr "Je vyžadováno heslo."
+
+#: app/views/administrator/index.html.erb:70
+#: app/views/administrator/index.html.erb:70
+msgid "Password Strength:"
+msgstr "Síla hesla:"
+
+#: app/views/administrator/index.html.erb:72
+#: app/views/administrator/index.html.erb:72
+msgid "Weak"
+msgstr "Slabé"
+
+#: app/views/administrator/index.html.erb:73
+#: app/views/administrator/index.html.erb:73
+msgid "Normal"
+msgstr "Normální"
+
+#: app/views/administrator/index.html.erb:74
+#: app/views/administrator/index.html.erb:74
+msgid "Medium"
+msgstr "Střední"
+
+#: app/views/administrator/index.html.erb:75
+#: app/views/administrator/index.html.erb:75
+msgid "Strong"
+msgstr "Silné"
+
+#: app/views/administrator/index.html.erb:76
+#: app/views/administrator/index.html.erb:76
+msgid "Very Strong"
+msgstr "Velmi silné"
+
+# Tady si nejsem jistý zda nebude lepší: Administrátorská nastavení. Cervajzz
+#: app/views/administrator/index.html.erb:98
+#: app/views/administrator/index.html.erb:112
+#: app/views/administrator/index.html.erb:98
+#: app/views/administrator/index.html.erb:112 shortcuts.yml:6
+msgid "Administrator Settings"
+msgstr "Administrátorské nastavení"
+
+#: app/views/administrator/index.html.erb:122
+#: app/views/administrator/index.html.erb:122
+msgid "Password Setup for User 'root'"
+msgstr "Nastavení hesla pro uživatele 'root'"
+
+#: app/views/administrator/index.html.erb:128
+#: app/views/administrator/index.html.erb:128
+msgid "New Password"
+msgstr "Nové heslo"
+
+#: app/views/administrator/index.html.erb:140
+#: app/views/administrator/index.html.erb:140
+msgid "Confirm Password"
+msgstr "Potvrďte heslo"
+
+#: app/views/administrator/index.html.erb:150
+#: app/views/administrator/index.html.erb:150
+msgid "Mail Setup for User 'root'"
+msgstr "Nastavení mailu pro uživatele 'root'"
+
+#: app/views/administrator/index.html.erb:155
+#: app/views/administrator/index.html.erb:155
+msgid "Forward system mail to"
+msgstr "Předat systémový mail na"
+
+#: app/views/administrator/index.html.erb:158
+#: app/views/administrator/index.html.erb:158
+msgid "Save Mail Only"
+msgstr "Uložit pouze mail"
+
+# 49865 AttribValues/label
+#: shortcuts.yml:7
+msgid "Manage system administrator"
+msgstr "Správa systému"
+
+# password dialog title
+#~ msgid "Password"
+#~ msgstr "Heslo"
+
+#, fuzzy
+#~| msgid "Confirm Password"
+#~ msgid "Confirm password"
+#~ msgstr "Potvrďte heslo"
+
+#, fuzzy
+#~| msgid "Change Password"
+#~ msgid "Save Password"
+#~ msgstr "Změnit heslo"
+
+#~ msgid "Invalid session, please login again."
+#~ msgstr "Chybná session, prosím přihlaste se znova."

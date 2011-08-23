@@ -1,0 +1,148 @@
+# Copyright (C) 2007 SuSE Linux Products GmbH, Nuernberg
+# This file is distributed under the same license as the package.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: webyast-root-user-ui 1.0.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2010-08-02 09:18+0200\n"
+"PO-Revision-Date: 2006-11-03 14:26\n"
+"Last-Translator: Novell Language <language@novell.com>\n"
+"Language-Team: Novell Language <language@novell.com>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: app/controllers/administrator_controller.rb:53
+#: app/views/administrator/index.html.erb:56
+#: app/controllers/administrator_controller.rb:53
+#: app/views/administrator/index.html.erb:56
+#, fuzzy
+msgid "Enter a valid e-mail address."
+msgstr "`%s' is nie ’n geldige ip-adres nie."
+
+#: app/controllers/administrator_controller.rb:61
+#: app/controllers/administrator_controller.rb:61
+msgid "Passwords do not match."
+msgstr "Wagwoorde stem nie ooreen nie."
+
+#: app/controllers/administrator_controller.rb:74
+#: app/controllers/administrator_controller.rb:74
+#, fuzzy
+msgid "Administrator settings have been written."
+msgstr "Monitorinstellings"
+
+#: app/controllers/administrator_controller.rb:84
+#: app/controllers/administrator_controller.rb:84
+#, fuzzy
+msgid "Error while saving administrator settings: %s"
+msgstr "Fout tydens sluit van ou skadulêer: %m"
+
+#: app/controllers/administrator_controller.rb:96
+#: app/controllers/administrator_controller.rb:96
+msgid ""
+"Mail alias was set but outgoing mail server is not configured (%s<i>change</"
+"i>%s)."
+msgstr ""
+
+#: app/views/administrator/index.html.erb:22
+#: app/views/administrator/index.html.erb:22 shortcuts.yml:6
+#, fuzzy
+msgid "Administrator Settings"
+msgstr "Monitorinstellings"
+
+#: app/views/administrator/index.html.erb:64
+#: app/views/administrator/index.html.erb:64
+#, fuzzy
+msgid "The passwords do not match."
+msgstr "Wagwoorde stem nie ooreen nie."
+
+#: app/views/administrator/index.html.erb:65
+#: app/views/administrator/index.html.erb:65
+#, fuzzy
+msgid "A password is required."
+msgstr "Die PKCS12-wagwoord word vereis."
+
+#: app/views/administrator/index.html.erb:70
+#: app/views/administrator/index.html.erb:70
+#, fuzzy
+msgid "Password Strength:"
+msgstr "Wagwoorde stem ooreen"
+
+#: app/views/administrator/index.html.erb:72
+#: app/views/administrator/index.html.erb:72
+msgid "Weak"
+msgstr ""
+
+#: app/views/administrator/index.html.erb:73
+#: app/views/administrator/index.html.erb:73
+msgid "Normal"
+msgstr "Normaal"
+
+#: app/views/administrator/index.html.erb:74
+#: app/views/administrator/index.html.erb:74
+#, fuzzy
+msgid "Medium"
+msgstr "Media:"
+
+#: app/views/administrator/index.html.erb:75
+#: app/views/administrator/index.html.erb:75
+msgid "Strong"
+msgstr ""
+
+#: app/views/administrator/index.html.erb:76
+#: app/views/administrator/index.html.erb:76
+msgid "Very Strong"
+msgstr ""
+
+#: app/views/administrator/index.html.erb:104
+#: app/views/administrator/index.html.erb:104
+msgid "Password Setup for User 'root'"
+msgstr ""
+
+#: app/views/administrator/index.html.erb:105
+#: app/views/administrator/index.html.erb:105
+#, fuzzy
+msgid "New Password"
+msgstr "_Nuwe wagwoord:"
+
+#: app/views/administrator/index.html.erb:110
+#: app/views/administrator/index.html.erb:110
+#, fuzzy
+msgid "Confirm Password"
+msgstr "_Bevestig wagwoord:"
+
+#: app/views/administrator/index.html.erb:119
+#: app/views/administrator/index.html.erb:119
+msgid "Mail Setup for User 'root'"
+msgstr ""
+
+#: app/views/administrator/index.html.erb:121
+#: app/views/administrator/index.html.erb:121
+msgid "Forward system mail to"
+msgstr ""
+
+#: app/views/administrator/index.html.erb:124
+#: app/views/administrator/index.html.erb:124
+#, fuzzy
+msgid "Save Mail Only"
+msgstr "Berg"
+
+#: shortcuts.yml:7
+msgid "Manage system administrator"
+msgstr ""
+
+# password dialog title
+#~ msgid "Password"
+#~ msgstr "Wagwoord"
+
+#, fuzzy
+#~| msgid "_Confirm Password:"
+#~ msgid "Confirm password"
+#~ msgstr "_Bevestig wagwoord:"
+
+#, fuzzy
+#~| msgid "Change Password"
+#~ msgid "Save Password"
+#~ msgstr "Wysig wagwoord"

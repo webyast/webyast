@@ -1,0 +1,141 @@
+# Krešimir Jozić <kjozic@gmail.com>, 2009, 2010.
+msgid ""
+msgstr ""
+"Project-Id-Version: webyast-root-user-ui 1.0.0\n"
+"Report-Msgid-Bugs-To: translation@suse.de\n"
+"POT-Creation-Date: 2010-08-02 09:18+0200\n"
+"PO-Revision-Date: 2010-04-18 18:43+0200\n"
+"Last-Translator: Krešimir Jozić <kjozic@gmail.com>\n"
+"Language-Team: American English <kde-i18n-doc@kde.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=3; plural=n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%"
+"10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
+"X-Generator: Lokalize 1.0\n"
+
+#: app/controllers/administrator_controller.rb:53
+#: app/views/administrator/index.html.erb:56
+#: app/controllers/administrator_controller.rb:53
+#: app/views/administrator/index.html.erb:56
+msgid "Enter a valid e-mail address."
+msgstr "Unesite ispravnu adresu e-maila."
+
+#: app/controllers/administrator_controller.rb:61
+#: app/controllers/administrator_controller.rb:61
+msgid "Passwords do not match."
+msgstr "Lozinke se ne podudaraju."
+
+#: app/controllers/administrator_controller.rb:74
+#: app/controllers/administrator_controller.rb:74
+msgid "Administrator settings have been written."
+msgstr "Postavke administratora su zapisane."
+
+#: app/controllers/administrator_controller.rb:84
+#: app/controllers/administrator_controller.rb:84
+msgid "Error while saving administrator settings: %s"
+msgstr "Greška prilikom spremanja postavki administratora: %s"
+
+#: app/controllers/administrator_controller.rb:96
+#: app/controllers/administrator_controller.rb:96
+msgid ""
+"Mail alias was set but outgoing mail server is not configured (%s<i>change</"
+"i>%s)."
+msgstr ""
+"Alias pošte je postavljen ali odlazni poslužitelj pošte nije podešen (%"
+"s<i>promijeni</i>%s)."
+
+#: app/views/administrator/index.html.erb:22
+#: app/views/administrator/index.html.erb:22 shortcuts.yml:6
+msgid "Administrator Settings"
+msgstr "Postavke administratora"
+
+#: app/views/administrator/index.html.erb:64
+#: app/views/administrator/index.html.erb:64
+msgid "The passwords do not match."
+msgstr "Lozinke se ne podudaraju."
+
+#: app/views/administrator/index.html.erb:65
+#: app/views/administrator/index.html.erb:65
+msgid "A password is required."
+msgstr "Lozinka je obavezna."
+
+#: app/views/administrator/index.html.erb:70
+#: app/views/administrator/index.html.erb:70
+msgid "Password Strength:"
+msgstr "Jakost lozinka:"
+
+#: app/views/administrator/index.html.erb:72
+#: app/views/administrator/index.html.erb:72
+msgid "Weak"
+msgstr "Slaba"
+
+#: app/views/administrator/index.html.erb:73
+#: app/views/administrator/index.html.erb:73
+msgid "Normal"
+msgstr "Normalno"
+
+#: app/views/administrator/index.html.erb:74
+#: app/views/administrator/index.html.erb:74
+msgid "Medium"
+msgstr "Srednja"
+
+#: app/views/administrator/index.html.erb:75
+#: app/views/administrator/index.html.erb:75
+msgid "Strong"
+msgstr "Jaka"
+
+#: app/views/administrator/index.html.erb:76
+#: app/views/administrator/index.html.erb:76
+msgid "Very Strong"
+msgstr "Vrlo jaka"
+
+#: app/views/administrator/index.html.erb:104
+#: app/views/administrator/index.html.erb:104
+msgid "Password Setup for User 'root'"
+msgstr "Postavljanje lozinke za korisnika 'root'"
+
+#: app/views/administrator/index.html.erb:105
+#: app/views/administrator/index.html.erb:105
+msgid "New Password"
+msgstr "Nova lozinka"
+
+# password dialog title
+#: app/views/administrator/index.html.erb:110
+#: app/views/administrator/index.html.erb:110
+msgid "Confirm Password"
+msgstr "Potvrdi lozinku"
+
+#: app/views/administrator/index.html.erb:119
+#: app/views/administrator/index.html.erb:119
+msgid "Mail Setup for User 'root'"
+msgstr "Postavljanje pošte za korisnika 'root'"
+
+#: app/views/administrator/index.html.erb:121
+#: app/views/administrator/index.html.erb:121
+msgid "Forward system mail to"
+msgstr "Proslijedi sistemsku poštu poštu na"
+
+#: app/views/administrator/index.html.erb:124
+#: app/views/administrator/index.html.erb:124
+msgid "Save Mail Only"
+msgstr "Samo sačuvaj poštu"
+
+#: shortcuts.yml:7
+msgid "Manage system administrator"
+msgstr ""
+
+#~ msgid "Here, configure the settings for system administrator ('root')."
+#~ msgstr "Ovdje se podešavaju postavke sistemskog administratora ('root')."
+
+# password dialog title
+#~ msgid "Password"
+#~ msgstr "Lozinka"
+
+# password dialog title
+#~| msgid "Password"
+#~ msgid "Save Password"
+#~ msgstr "Sačuvaj lozinku"
+
+#~ msgid "Invalid session, please login again."
+#~ msgstr "Neispravna sesija, molimo vas da se ponovno prijavite."

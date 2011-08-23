@@ -1,0 +1,142 @@
+# translation of yast_webclient_administrator.hu.po to
+# Kalman Kemenczy <kkemenczy@novell.com>, 2009, 2010.
+msgid ""
+msgstr ""
+"Project-Id-Version: webyast-root-user-ui 1.0.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2010-08-02 09:18+0200\n"
+"PO-Revision-Date: 2010-05-05 15:00+0200\n"
+"Last-Translator: Kalman Kemenczy <kkemenczy@novell.com>\n"
+"Language-Team: collection <kde-i18n-doc@kde.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Lokalize 1.0\n"
+"Plural-Forms:  nplurals=2; plural=(n != 1);\n"
+
+# clients/lan_ISDN.ycp:1014 clients/lan_ISDN.ycp:1032
+#: app/controllers/administrator_controller.rb:53
+#: app/views/administrator/index.html.erb:56
+#: app/controllers/administrator_controller.rb:53
+#: app/views/administrator/index.html.erb:56
+msgid "Enter a valid e-mail address."
+msgstr "Adjon meg érvényes e-mail címet."
+
+#: app/controllers/administrator_controller.rb:61
+#: app/controllers/administrator_controller.rb:61
+msgid "Passwords do not match."
+msgstr "A jelszavak nem egyeznek."
+
+# /tmp/xapi:271
+#: app/controllers/administrator_controller.rb:74
+#: app/controllers/administrator_controller.rb:74
+msgid "Administrator settings have been written."
+msgstr "Adminisztrátori beállítások mentése megtörtént."
+
+#: app/controllers/administrator_controller.rb:84
+#: app/controllers/administrator_controller.rb:84
+msgid "Error while saving administrator settings: %s"
+msgstr "Hiba történt az adminisztrátori beállítások mentése közben: %s"
+
+#: app/controllers/administrator_controller.rb:96
+#: app/controllers/administrator_controller.rb:96
+msgid ""
+"Mail alias was set but outgoing mail server is not configured (%s<i>change</"
+"i>%s)."
+msgstr ""
+"A levelező álnév be van állítva, de a kimenő levelezőkiszolgáló nem (%"
+"s<i>módosítás</i>%s)."
+
+# /tmp/xapi:271
+#: app/views/administrator/index.html.erb:22
+#: app/views/administrator/index.html.erb:22 shortcuts.yml:6
+msgid "Administrator Settings"
+msgstr "Adminisztrátori beállítások"
+
+#: app/views/administrator/index.html.erb:64
+#: app/views/administrator/index.html.erb:64
+msgid "The passwords do not match."
+msgstr "A jelszavak nem egyeznek."
+
+#: app/views/administrator/index.html.erb:65
+#: app/views/administrator/index.html.erb:65
+msgid "A password is required."
+msgstr "A jelszó megadása kötelező."
+
+#: app/views/administrator/index.html.erb:70
+#: app/views/administrator/index.html.erb:70
+msgid "Password Strength:"
+msgstr "Jelszóerősség:"
+
+#: app/views/administrator/index.html.erb:72
+#: app/views/administrator/index.html.erb:72
+msgid "Weak"
+msgstr "Gyenge"
+
+#: app/views/administrator/index.html.erb:73
+#: app/views/administrator/index.html.erb:73
+msgid "Normal"
+msgstr "Normál"
+
+#: app/views/administrator/index.html.erb:74
+#: app/views/administrator/index.html.erb:74
+msgid "Medium"
+msgstr "Közepes"
+
+#: app/views/administrator/index.html.erb:75
+#: app/views/administrator/index.html.erb:75
+msgid "Strong"
+msgstr "Erős"
+
+#: app/views/administrator/index.html.erb:76
+#: app/views/administrator/index.html.erb:76
+msgid "Very Strong"
+msgstr "Nagyon erős"
+
+#: app/views/administrator/index.html.erb:104
+#: app/views/administrator/index.html.erb:104
+msgid "Password Setup for User 'root'"
+msgstr "'root' felhasználó jelszóbeállítása"
+
+# password dialog title
+#: app/views/administrator/index.html.erb:105
+#: app/views/administrator/index.html.erb:105
+msgid "New Password"
+msgstr "Új jelszó"
+
+#: app/views/administrator/index.html.erb:110
+#: app/views/administrator/index.html.erb:110
+msgid "Confirm Password"
+msgstr "Jelszó megerősítése"
+
+#: app/views/administrator/index.html.erb:119
+#: app/views/administrator/index.html.erb:119
+msgid "Mail Setup for User 'root'"
+msgstr "'root' felhasználó levelezésbeállítása"
+
+#: app/views/administrator/index.html.erb:121
+#: app/views/administrator/index.html.erb:121
+msgid "Forward system mail to"
+msgstr "Levéltovábbítás ide:"
+
+#: app/views/administrator/index.html.erb:124
+#: app/views/administrator/index.html.erb:124
+msgid "Save Mail Only"
+msgstr "Csak a levelezés mentése"
+
+#: shortcuts.yml:7
+msgid "Manage system administrator"
+msgstr ""
+
+#~ msgid "Root User Password Setup"
+#~ msgstr "Root felhasználó jelszóbeállítása"
+
+#~ msgid "Root User Mail Setup"
+#~ msgstr "Rott felhasználó levelezési beállítása"
+
+#~ msgid "Here, configure the settings for system administrator ('root')."
+#~ msgstr "Itt adhatók meg a rendszergazdai (root) beállítások"
+
+#~| msgid "Change Password"
+#~ msgid "Save Password"
+#~ msgstr "Jelszó mentése"

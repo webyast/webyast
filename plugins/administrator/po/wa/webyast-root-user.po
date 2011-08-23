@@ -1,0 +1,147 @@
+# Translation into the walloon language.
+# Copyright (C) 2007 SUSE Linux Products GmbH.
+# Pablo Saratxaga <pablo@walon.org>, 2001, 2004.
+# Jean Cayron <jean.cayron@gmail.com>, 2007.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: webyast-root-user-ui 1.0.0\n"
+"POT-Creation-Date: 2010-08-02 09:18+0200\n"
+"PO-Revision-Date: 2004-04-05 17:37+0200\n"
+"Last-Translator: Jean Cayron <jean.cayron@gmail.com>\n"
+"Language-Team: Walloon <i18n@suse.de>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+
+#: app/controllers/administrator_controller.rb:53
+#: app/views/administrator/index.html.erb:56
+#: app/controllers/administrator_controller.rb:53
+#: app/views/administrator/index.html.erb:56
+msgid "Enter a valid e-mail address."
+msgstr ""
+
+#: app/controllers/administrator_controller.rb:61
+#: app/controllers/administrator_controller.rb:61
+#, fuzzy
+msgid "Passwords do not match."
+msgstr "Les screts n' sont nén les minmes"
+
+#: app/controllers/administrator_controller.rb:74
+#: app/controllers/administrator_controller.rb:74
+#, fuzzy
+msgid "Administrator settings have been written."
+msgstr "Manaedjmint"
+
+#: app/controllers/administrator_controller.rb:84
+#: app/controllers/administrator_controller.rb:84
+msgid "Error while saving administrator settings: %s"
+msgstr ""
+
+#: app/controllers/administrator_controller.rb:96
+#: app/controllers/administrator_controller.rb:96
+msgid ""
+"Mail alias was set but outgoing mail server is not configured (%s<i>change</"
+"i>%s)."
+msgstr ""
+
+#: app/views/administrator/index.html.erb:22
+#: app/views/administrator/index.html.erb:22 shortcuts.yml:6
+#, fuzzy
+msgid "Administrator Settings"
+msgstr "Manaedjmint"
+
+#: app/views/administrator/index.html.erb:64
+#: app/views/administrator/index.html.erb:64
+#, fuzzy
+msgid "The passwords do not match."
+msgstr "Les screts n' sont nén les minmes"
+
+#: app/views/administrator/index.html.erb:65
+#: app/views/administrator/index.html.erb:65
+msgid "A password is required."
+msgstr ""
+
+#: app/views/administrator/index.html.erb:70
+#: app/views/administrator/index.html.erb:70
+#, fuzzy
+msgid "Password Strength:"
+msgstr "Les screts sont les minmes"
+
+#: app/views/administrator/index.html.erb:72
+#: app/views/administrator/index.html.erb:72
+msgid "Weak"
+msgstr ""
+
+#: app/views/administrator/index.html.erb:73
+#: app/views/administrator/index.html.erb:73
+msgid "Normal"
+msgstr ""
+
+#: app/views/administrator/index.html.erb:74
+#: app/views/administrator/index.html.erb:74
+#, fuzzy
+msgid "Medium"
+msgstr "Media"
+
+#: app/views/administrator/index.html.erb:75
+#: app/views/administrator/index.html.erb:75
+msgid "Strong"
+msgstr ""
+
+#: app/views/administrator/index.html.erb:76
+#: app/views/administrator/index.html.erb:76
+#, fuzzy
+msgid "Very Strong"
+msgstr "Foirt rade"
+
+#: app/views/administrator/index.html.erb:104
+#: app/views/administrator/index.html.erb:104
+msgid "Password Setup for User 'root'"
+msgstr ""
+
+#: app/views/administrator/index.html.erb:105
+#: app/views/administrator/index.html.erb:105
+#, fuzzy
+msgid "New Password"
+msgstr "_Novea scret:"
+
+#: app/views/administrator/index.html.erb:110
+#: app/views/administrator/index.html.erb:110
+#, fuzzy
+msgid "Confirm Password"
+msgstr "_Racertiner l' sicret:"
+
+#: app/views/administrator/index.html.erb:119
+#: app/views/administrator/index.html.erb:119
+msgid "Mail Setup for User 'root'"
+msgstr ""
+
+#: app/views/administrator/index.html.erb:121
+#: app/views/administrator/index.html.erb:121
+msgid "Forward system mail to"
+msgstr ""
+
+#: app/views/administrator/index.html.erb:124
+#: app/views/administrator/index.html.erb:124
+#, fuzzy
+msgid "Save Mail Only"
+msgstr "&Schaper"
+
+#: shortcuts.yml:7
+msgid "Manage system administrator"
+msgstr ""
+
+#~ msgid "Password"
+#~ msgstr "Sicret"
+
+#, fuzzy
+#~| msgid "_Confirm Password:"
+#~ msgid "Confirm password"
+#~ msgstr "_Racertiner l' sicret:"
+
+#, fuzzy
+#~| msgid "Change Password"
+#~ msgid "Save Password"
+#~ msgstr "Candjî d' sicret"

@@ -1,0 +1,95 @@
+# Copyright (C) 2006 SuSE Linux Products GmbH, Nuernberg
+# This file is distributed under the same license as the package.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: yast_webclient_administrator\n"
+"POT-Creation-Date: 2010-04-13 13:36+0200\n"
+"PO-Revision-Date: 2010-04-22 12:39\n"
+"Last-Translator: Novell Language <language@novell.com>\n"
+"Language-Team: Novell Language <language@novell.com>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: app/controllers/administrator_controller.rb:32 app/views/administrator/index.html.erb:24
+msgid "Enter a valid e-mail address."
+msgstr "Geef een geldig e-mailadres op."
+
+#: app/controllers/administrator_controller.rb:40
+msgid "Passwords do not match."
+msgstr "Wachtwoorden komen niet overeen."
+
+#: app/controllers/administrator_controller.rb:53
+msgid "Administrator settings have been written."
+msgstr "Systeembeheerderinstellingen zijn opgeslagen."
+
+#: app/controllers/administrator_controller.rb:63
+msgid "Error while saving administrator settings: %s"
+msgstr "Fout bij het opslaan van beheerdersinstellingen: %s"
+
+#: app/controllers/administrator_controller.rb:75
+msgid "Mail alias was set but outgoing mail server is not configured (%s<i>change</i>%s)."
+msgstr "Mailalias is ingesteld, maar server voor uitgaande mail is niet geconfigureerd (%s<i>wijzigen</i>%s)."
+
+#: app/views/administrator/index.html.erb:1
+msgid "Administrator Settings"
+msgstr "Beheerderinstellingen"
+
+#: app/views/administrator/index.html.erb:32
+msgid "The passwords do not match."
+msgstr "De wachtwoorden komen niet overeen."
+
+#: app/views/administrator/index.html.erb:33
+msgid "A password is required."
+msgstr "Wachtwoord is vereist."
+
+#: app/views/administrator/index.html.erb:38
+msgid "Password Strength:"
+msgstr "Wachtwoordsterkte:"
+
+#: app/views/administrator/index.html.erb:40
+msgid "Weak"
+msgstr "Zwak"
+
+#: app/views/administrator/index.html.erb:41
+msgid "Normal"
+msgstr "Normaal"
+
+#: app/views/administrator/index.html.erb:42
+msgid "Medium"
+msgstr "Medium"
+
+#: app/views/administrator/index.html.erb:43
+msgid "Strong"
+msgstr "Sterk"
+
+#: app/views/administrator/index.html.erb:44
+msgid "Very Strong"
+msgstr "Zeer sterk"
+
+#: app/views/administrator/index.html.erb:63
+msgid "Password Setup for User 'root'"
+msgstr "Wachtwoord instellen voor hoofdgebruiker"
+
+#: app/views/administrator/index.html.erb:64
+msgid "New Password"
+msgstr "Nieuw wachtwoord"
+
+#: app/views/administrator/index.html.erb:69
+msgid "Confirm Password"
+msgstr "Wachtwoord bevestigen"
+
+#: app/views/administrator/index.html.erb:76
+msgid "Mail Setup for User 'root'"
+msgstr "Mail instellen voor hoofdgebruiker"
+
+#: app/views/administrator/index.html.erb:78
+msgid "Forward system mail to"
+msgstr "Systeeme-mail doorsturen naar"
+
+#: app/views/administrator/index.html.erb:81
+msgid "Save Mail Only"
+msgstr "Alleen mail opslaan"
+

@@ -73,6 +73,10 @@ mkdir -p public/administrator/restdoc
 # do not package restdoc sources
 rm -rf restdoc
 
+export RAILS_PARENT=%{webyast_dir}
+export LANG=en
+rake makemo
+
 %check
 # run the testsuite
 %webyast_check
@@ -90,6 +94,13 @@ rm -f $RPM_BUILD_ROOT%{plugin_dir}/COPYING
 mkdir -p $RPM_BUILD_ROOT/usr/share/PolicyKit/policy
 install -m 0644 %SOURCE1 $RPM_BUILD_ROOT/usr/share/PolicyKit/policy/
 
+# remove .po files (no longer needed)
+rm -rf $RPM_BUILD_ROOT/%{plugin_dir}/po
+
+# search locale files
+%find_lang webyast-root-user
+
+
 %clean
 rm -rf $RPM_BUILD_ROOT
 
@@ -100,13 +111,14 @@ rm -rf $RPM_BUILD_ROOT
 
 %postun
 
-%files 
+%files -f webyast-root-user.lang
 %defattr(-,root,root)
 %dir %{webyast_dir}
 %dir %{webyast_dir}/vendor
 %dir %{webyast_dir}/vendor/plugins
 %dir %{plugin_dir}
 
+%{plugin_dir}/locale
 %{plugin_dir}/README
 %{plugin_dir}/Rakefile
 %{plugin_dir}/init.rb

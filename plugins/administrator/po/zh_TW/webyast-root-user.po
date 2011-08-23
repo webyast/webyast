@@ -1,0 +1,104 @@
+# Copyright (C) 2006 SuSE Linux Products GmbH, Nuernberg
+# This file is distributed under the same license as the package.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: webyast-root-user-ui\n"
+"POT-Creation-Date: 2010-08-18 10:18+0200\n"
+"PO-Revision-Date: 2010-08-26 09:34\n"
+"Last-Translator: Novell Language <language@novell.com>\n"
+"Language-Team: Novell Language <language@novell.com>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+
+#: app/controllers/administrator_controller.rb:53 app/views/administrator/index.html.erb:56
+#: ./app/controllers/administrator_controller.rb:53 ./app/views/administrator/index.html.erb:56
+msgid "Enter a valid e-mail address."
+msgstr "輸入有效的電子郵件地址。"
+
+#: app/controllers/administrator_controller.rb:61 ./app/controllers/administrator_controller.rb:61
+msgid "Passwords do not match."
+msgstr "密碼不符合。"
+
+#: app/controllers/administrator_controller.rb:74 ./app/controllers/administrator_controller.rb:74
+msgid "Administrator settings have been written."
+msgstr "已經寫入管理員設定。"
+
+#: app/controllers/administrator_controller.rb:84 ./app/controllers/administrator_controller.rb:84
+msgid "Error while saving administrator settings: %s"
+msgstr "儲存管理員設定時出錯：%s"
+
+#: app/controllers/administrator_controller.rb:96 ./app/controllers/administrator_controller.rb:96
+msgid "Mail alias was set but outgoing mail server is not configured (%s<i>change</i>%s)."
+msgstr "設定了郵件別名，但未設定外送郵件伺服器 (%s<i>change</i>%s)。"
+
+#: app/views/administrator/index.html.erb:22 ./app/views/administrator/index.html.erb:22 ./shortcuts.yml:6
+msgid "Administrator Settings"
+msgstr "管理員設定"
+
+#: app/views/administrator/index.html.erb:63 ./app/views/administrator/index.html.erb:63
+msgid "Please wait"
+msgstr "請稍候"
+
+#: app/views/administrator/index.html.erb:71 ./app/views/administrator/index.html.erb:71
+msgid "The passwords do not match."
+msgstr "密碼不符。"
+
+#: app/views/administrator/index.html.erb:72 ./app/views/administrator/index.html.erb:72
+msgid "A password is required."
+msgstr "需要密碼。"
+
+#: app/views/administrator/index.html.erb:77 ./app/views/administrator/index.html.erb:77
+msgid "Password Strength:"
+msgstr "密碼強度︰"
+
+#: app/views/administrator/index.html.erb:79 ./app/views/administrator/index.html.erb:79
+msgid "Weak"
+msgstr "弱"
+
+#: app/views/administrator/index.html.erb:80 ./app/views/administrator/index.html.erb:80
+msgid "Normal"
+msgstr "一般"
+
+#: app/views/administrator/index.html.erb:81 ./app/views/administrator/index.html.erb:81
+msgid "Medium"
+msgstr "中"
+
+#: app/views/administrator/index.html.erb:82 ./app/views/administrator/index.html.erb:82
+msgid "Strong"
+msgstr "嚴密"
+
+#: app/views/administrator/index.html.erb:83 ./app/views/administrator/index.html.erb:83
+msgid "Very Strong"
+msgstr "非常嚴密"
+
+#: app/views/administrator/index.html.erb:113 ./app/views/administrator/index.html.erb:113
+msgid "Password Setup for User 'root'"
+msgstr "root 使用者的密碼設定"
+
+#: app/views/administrator/index.html.erb:114 ./app/views/administrator/index.html.erb:114
+msgid "New Password"
+msgstr "新密碼"
+
+#: app/views/administrator/index.html.erb:118 ./app/views/administrator/index.html.erb:118
+msgid "Confirm Password"
+msgstr "確認密碼"
+
+#: app/views/administrator/index.html.erb:127 ./app/views/administrator/index.html.erb:127
+msgid "Mail Setup for User 'root'"
+msgstr "root 使用者的郵件設定"
+
+#: app/views/administrator/index.html.erb:129 ./app/views/administrator/index.html.erb:129
+msgid "Forward system mail to"
+msgstr "轉寄系統郵件至"
+
+#: app/views/administrator/index.html.erb:132 ./app/views/administrator/index.html.erb:132
+msgid "Save Mail Only"
+msgstr "僅儲存郵件"
+
+#: ./shortcuts.yml:7
+msgid "Manage system administrator"
+msgstr "管理系統管理員"
+

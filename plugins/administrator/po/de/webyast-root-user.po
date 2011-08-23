@@ -1,0 +1,128 @@
+# Copyright (C) 2006 SuSE Linux Products GmbH, Nuernberg
+# This file is distributed under the same license as the package.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: webyast-root-user-ui\n"
+"POT-Creation-Date: 2011-05-30 16:16+0200\n"
+"PO-Revision-Date: 2010-08-26 08:58\n"
+"Last-Translator: Novell Lang <language@novell.com>\n"
+"Language-Team: Novell Lang <language@novell.com>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: app/controllers/administrator_controller.rb:53
+#: app/views/administrator/index.html.erb:48
+#: app/controllers/administrator_controller.rb:53
+#: app/views/administrator/index.html.erb:48
+msgid "Enter a valid e-mail address."
+msgstr "Gültige E-Mail-Adresse eingeben."
+
+#: app/controllers/administrator_controller.rb:61
+#: app/controllers/administrator_controller.rb:61
+msgid "Passwords do not match."
+msgstr "Die Passwörter sind nicht identisch."
+
+#: app/controllers/administrator_controller.rb:74
+#: app/controllers/administrator_controller.rb:74
+msgid "Administrator settings have been written."
+msgstr "Administrator-Einstellungen wurden geschrieben."
+
+#: app/controllers/administrator_controller.rb:84
+#: app/controllers/administrator_controller.rb:84
+msgid "Error while saving administrator settings: %s"
+msgstr "Fehler beim Speichern der Administratoreinstellungen: %s"
+
+#: app/controllers/administrator_controller.rb:96
+#: app/controllers/administrator_controller.rb:96
+msgid "Mail alias was set but outgoing mail server is not configured (%s<i>change</i>%s)."
+msgstr "E-Mail-Alias wurde festgelegt, aber der Server für ausgehende E-Mails ist nicht konfiguriert (%s<i>change</i>%s)."
+
+#: app/views/administrator/index.html.erb:55
+#: app/views/administrator/index.html.erb:55
+msgid "Please wait"
+msgstr "Bitte warten"
+
+#: app/views/administrator/index.html.erb:64
+#: app/views/administrator/index.html.erb:64
+msgid "The passwords do not match."
+msgstr "Die Passwörter stimmen nicht überein."
+
+#: app/views/administrator/index.html.erb:65
+#: app/views/administrator/index.html.erb:65
+msgid "A password is required."
+msgstr "Es ist ein Passwort erforderlich."
+
+#: app/views/administrator/index.html.erb:70
+#: app/views/administrator/index.html.erb:70
+msgid "Password Strength:"
+msgstr "Passwortstärke:"
+
+#: app/views/administrator/index.html.erb:72
+#: app/views/administrator/index.html.erb:72
+msgid "Weak"
+msgstr "Schwach"
+
+#: app/views/administrator/index.html.erb:73
+#: app/views/administrator/index.html.erb:73
+msgid "Normal"
+msgstr "Normal"
+
+#: app/views/administrator/index.html.erb:74
+#: app/views/administrator/index.html.erb:74
+msgid "Medium"
+msgstr "Mittel"
+
+#: app/views/administrator/index.html.erb:75
+#: app/views/administrator/index.html.erb:75
+msgid "Strong"
+msgstr "Stark"
+
+#: app/views/administrator/index.html.erb:76
+#: app/views/administrator/index.html.erb:76
+msgid "Very Strong"
+msgstr "Sehr stark"
+
+#: app/views/administrator/index.html.erb:98
+#: app/views/administrator/index.html.erb:112
+#: app/views/administrator/index.html.erb:98
+#: app/views/administrator/index.html.erb:112 shortcuts.yml:6
+msgid "Administrator Settings"
+msgstr "Systemeinstellungen"
+
+#: app/views/administrator/index.html.erb:122
+#: app/views/administrator/index.html.erb:122
+msgid "Password Setup for User 'root'"
+msgstr "Passworteinrichtung für Benutzer 'root'"
+
+#: app/views/administrator/index.html.erb:128
+#: app/views/administrator/index.html.erb:128
+msgid "New Password"
+msgstr "Neues Passwort"
+
+#: app/views/administrator/index.html.erb:140
+#: app/views/administrator/index.html.erb:140
+msgid "Confirm Password"
+msgstr "Passwort bestätigen"
+
+#: app/views/administrator/index.html.erb:150
+#: app/views/administrator/index.html.erb:150
+msgid "Mail Setup for User 'root'"
+msgstr "E-Mail-Einrichtung für Benutzer 'root'"
+
+#: app/views/administrator/index.html.erb:155
+#: app/views/administrator/index.html.erb:155
+msgid "Forward system mail to"
+msgstr "Systemnachricht weiterleiten an"
+
+#: app/views/administrator/index.html.erb:158
+#: app/views/administrator/index.html.erb:158
+msgid "Save Mail Only"
+msgstr "E-Mail nur speichern"
+
+#: shortcuts.yml:7
+msgid "Manage system administrator"
+msgstr "Systemadministrator verwalten"

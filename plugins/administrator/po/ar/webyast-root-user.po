@@ -1,0 +1,95 @@
+# Copyright (C) 2006 SuSE Linux Products GmbH, Nuernberg
+# This file is distributed under the same license as the package.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: yast_webclient_administrator\n"
+"POT-Creation-Date: 2010-04-13 13:36+0200\n"
+"PO-Revision-Date: 2010-04-22 11:47\n"
+"Last-Translator: Novell Language <language@novell.com>\n"
+"Language-Team: Novell Language <language@novell.com>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: app/controllers/administrator_controller.rb:32 app/views/administrator/index.html.erb:24
+msgid "Enter a valid e-mail address."
+msgstr "أدخل عنوان بريد إلكتروني صالحًا."
+
+#: app/controllers/administrator_controller.rb:40
+msgid "Passwords do not match."
+msgstr "كلمتا السر غير متطابقتين."
+
+#: app/controllers/administrator_controller.rb:53
+msgid "Administrator settings have been written."
+msgstr "تمت كتابة إعدادات المسؤول."
+
+#: app/controllers/administrator_controller.rb:63
+msgid "Error while saving administrator settings: %s"
+msgstr "حدث خطأ أثناء حفظ إعدادات المسؤول: %s"
+
+#: app/controllers/administrator_controller.rb:75
+msgid "Mail alias was set but outgoing mail server is not configured (%s<i>change</i>%s)."
+msgstr "تم تعيين اسم مستعار للبريد لكن لم يتم تكوين خادم البريد الصادر (%s<i>تغيير</i>%s)."
+
+#: app/views/administrator/index.html.erb:1
+msgid "Administrator Settings"
+msgstr "إعدادات المسؤول"
+
+#: app/views/administrator/index.html.erb:32
+msgid "The passwords do not match."
+msgstr "كلمتا السر غير متطابقتين."
+
+#: app/views/administrator/index.html.erb:33
+msgid "A password is required."
+msgstr "كلمة السر مطلوبة."
+
+#: app/views/administrator/index.html.erb:38
+msgid "Password Strength:"
+msgstr "قوة كلمة السر:"
+
+#: app/views/administrator/index.html.erb:40
+msgid "Weak"
+msgstr "وايك"
+
+#: app/views/administrator/index.html.erb:41
+msgid "Normal"
+msgstr "عادي"
+
+#: app/views/administrator/index.html.erb:42
+msgid "Medium"
+msgstr "متوسط"
+
+#: app/views/administrator/index.html.erb:43
+msgid "Strong"
+msgstr "الأغنية"
+
+#: app/views/administrator/index.html.erb:44
+msgid "Very Strong"
+msgstr "قوي جدًا"
+
+#: app/views/administrator/index.html.erb:63
+msgid "Password Setup for User 'root'"
+msgstr "إعداد كلمة سر للمستخدم 'المسؤول'"
+
+#: app/views/administrator/index.html.erb:64
+msgid "New Password"
+msgstr "كلمة السر الجديدة"
+
+#: app/views/administrator/index.html.erb:69
+msgid "Confirm Password"
+msgstr "تأكيد كلمة السر"
+
+#: app/views/administrator/index.html.erb:76
+msgid "Mail Setup for User 'root'"
+msgstr "إعداد بريد للمستخدم 'المسؤول'"
+
+#: app/views/administrator/index.html.erb:78
+msgid "Forward system mail to"
+msgstr "إعادة توجيه بريد النظام إلى"
+
+#: app/views/administrator/index.html.erb:81
+msgid "Save Mail Only"
+msgstr "حفظ البريد"
+
