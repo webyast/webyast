@@ -1,0 +1,285 @@
+# translation of yast_webclient_registration.hu.po to
+# Kalman Kemenczy <kkemenczy@novell.com>, 2009, 2010.
+msgid ""
+msgstr ""
+"Project-Id-Version: webyast-registration-ui 1.0.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2010-08-02 09:19+0200\n"
+"PO-Revision-Date: 2010-05-05 14:59+0200\n"
+"Last-Translator: Kalman Kemenczy <kkemenczy@novell.com>\n"
+"Language-Team: collection <kde-i18n-doc@kde.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: hu\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Lokalize 1.0\n"
+
+#: app/controllers/registration_controller.rb:32
+#: app/controllers/registration_controller.rb:32
+msgid "Email"
+msgstr "E-mail"
+
+#: app/controllers/registration_controller.rb:33
+#: app/controllers/registration_controller.rb:33
+msgid "System name"
+msgstr "Rendszernév"
+
+#: app/controllers/registration_controller.rb:34
+#: app/controllers/registration_controller.rb:34
+msgid "SLES registration code"
+msgstr "SLES regisztrációs kód"
+
+#: app/controllers/registration_controller.rb:35
+#: app/controllers/registration_controller.rb:35
+msgid "SLED registration code"
+msgstr "SLED regisztrációs kód"
+
+#: app/controllers/registration_controller.rb:36
+#: app/controllers/registration_controller.rb:36
+msgid "Appliance registration code"
+msgstr "Készülék regisztrációs kód"
+
+#: app/controllers/registration_controller.rb:37
+#: app/controllers/registration_controller.rb:37
+msgid "WebYaST registration code"
+msgstr "WebYaST regisztrációs kód"
+
+#: app/controllers/registration_controller.rb:38
+#: app/controllers/registration_controller.rb:38
+msgid "Registration code"
+msgstr "Regisztrációs kód"
+
+#: app/controllers/registration_controller.rb:39
+#: app/controllers/registration_controller.rb:39
+msgid "Hostname"
+msgstr "Gépnév"
+
+#: app/controllers/registration_controller.rb:40
+#: app/controllers/registration_controller.rb:40
+msgid "Device name"
+msgstr "Eszköznév"
+
+#: app/controllers/registration_controller.rb:41
+#: app/controllers/registration_controller.rb:41
+msgid "Appliance name"
+msgstr "Készüléknév"
+
+#: app/controllers/registration_controller.rb:42
+#: app/controllers/registration_controller.rb:42
+msgid "registration code"
+msgstr "regisztrációs kód"
+
+#: app/controllers/registration_controller.rb:52
+#: app/controllers/registration_controller.rb:52
+msgid "Invalid session, please login again."
+msgstr "Érvénytelen munkamenet, lépjen be újra."
+
+#: app/controllers/registration_controller.rb:62
+#: app/controllers/registration_controller.rb:62
+msgid "No permissions for registration"
+msgstr "Nincs hozzáférése a regisztrációhoz"
+
+#: app/controllers/registration_controller.rb:111
+#: app/controllers/registration_controller.rb:111
+msgid "Please try to register again later."
+msgstr "Próbálja meg a regisztrációt később."
+
+#: app/controllers/registration_controller.rb:115
+#: app/controllers/registration_controller.rb:115
+msgid "Registration did not succeed."
+msgstr "A regisztráció nem sikerült."
+
+#: app/controllers/registration_controller.rb:119
+#: app/controllers/registration_controller.rb:119
+msgid "Registration was skipped."
+msgstr "A regisztráció kihagyva."
+
+#: app/controllers/registration_controller.rb:123
+#: app/controllers/registration_controller.rb:123
+msgid "This may be a temporary issue."
+msgstr "Ez valószínűleg csak átmeneti probléma."
+
+#: app/controllers/registration_controller.rb:127
+#: app/controllers/registration_controller.rb:127
+msgid "The system might not receive necessary updates."
+msgstr ""
+
+#: app/controllers/registration_controller.rb:143
+#: app/controllers/registration_controller.rb:143
+msgid "The registration server returned invalid or incomplete data."
+msgstr ""
+"A regisztrációs kiszolgáló érvénytelen vagy hiányos adatot küldött vissza."
+
+#: app/controllers/registration_controller.rb:151
+#: app/controllers/registration_controller.rb:151
+msgid "Could not read the registration configuration."
+msgstr "Nem olvasható a regisztrációs beállítás."
+
+#: app/controllers/registration_controller.rb:151
+#: app/controllers/registration_controller.rb:151
+msgid "The registration backend is not installed correctly"
+msgstr "A regisztrációs háttérrendszer nincs megfelelően telepítve"
+
+#: app/controllers/registration_controller.rb:152
+#: app/controllers/registration_controller.rb:152
+msgid "Please refer to your support contact."
+msgstr "Adja meg a támogatási kapcsolattartót."
+
+#: app/controllers/registration_controller.rb:181
+#: app/controllers/registration_controller.rb:181
+msgid "Please fill out missing entries."
+msgstr "Töltse ki a hiányzó adatokat."
+
+#: app/controllers/registration_controller.rb:213
+#: app/controllers/registration_controller.rb:213
+msgid "Service added:"
+msgstr "Hozzáadott szolgáltatás:"
+
+#: app/controllers/registration_controller.rb:217
+#: app/controllers/registration_controller.rb:223
+#: app/controllers/registration_controller.rb:217
+#: app/controllers/registration_controller.rb:223
+msgid "Catalog enabled:"
+msgstr "Engedélyezett katalógus:"
+
+#: app/controllers/registration_controller.rb:250
+#: app/controllers/registration_controller.rb:250
+msgid "Repository added:"
+msgstr "Hozzáadott telepítése forrás:"
+
+#: app/controllers/registration_controller.rb:326
+#: app/controllers/registration_controller.rb:326
+msgid "This system is already registered."
+msgstr "A rendszer regisztrációja korábban megtörtént."
+
+#: app/controllers/registration_controller.rb:355
+#: app/controllers/registration_controller.rb:355
+msgid "Registration finished successfully."
+msgstr "A regisztráció sikeresen befejeződött."
+
+#: app/controllers/registration_controller.rb:365
+#: app/controllers/registration_controller.rb:365
+msgid ""
+"<p><b>Repositories were not modified during the registration process.</b></"
+"p><p>It is likely that an incorrect registration code was used. If this is "
+"the case, please attempt the registration process again to get an update "
+"repository.</p><p>Please make sure that this system has an update repository "
+"configured, otherwise it will not receive updates.</p>"
+msgstr ""
+"<p><b>A regisztrációs folyamat során a telepítési források nem kerültek "
+"módosításra.</b></p><p>Ez akkor történik, ha nem megfelelő regisztrációs kód "
+"került megadásra. Ebben az esetben indítsa újra a regisztráció folyamatát, "
+"hogy a telepítési források frissüljenek.</p><p>Bizonyosodjon meg arról, hogy "
+"a rendszerhez beállításra került egy frissítési telepítési forrás, mert "
+"ellenkező esetben nem kapja meg a frissítéseket.</p>"
+
+#: app/controllers/registration_controller.rb:399
+#: app/controllers/registration_controller.rb:399
+msgid "A connection to the registration server could not be established."
+msgstr "Nem sikerült kapcsolatot létesíteni a regisztrációs kiszolgálóval."
+
+#: app/controllers/registration_controller.rb:403
+#: app/controllers/registration_controller.rb:403
+#, fuzzy
+msgid "The supplied registration data was invalid."
+msgstr "Az átküldött regisztrációs adatok ütközést okoztak a rendszerben."
+
+#: app/controllers/registration_controller.rb:407
+#: app/controllers/registration_controller.rb:407
+#, fuzzy
+msgid "The registration code you entered was invalid."
+msgstr "A regisztrációs kiszolgáló érvénytelen adatot küldött vissza."
+
+#: app/controllers/registration_controller.rb:413
+#: app/controllers/registration_controller.rb:413
+msgid "The transmitted registration data created a conflict."
+msgstr "Az átküldött regisztrációs adatok ütközést okoztak a rendszerben."
+
+#: app/controllers/registration_controller.rb:421
+#: app/controllers/registration_controller.rb:421
+msgid ""
+"Registration can not be performed. There is no product installed that can be "
+"registered."
+msgstr ""
+"A regisztrációt nem lehet végrehajtani. Nincs olyan telepített termék, "
+"amelyhez regisztráció lenne szükséges."
+
+#: app/controllers/registration_controller.rb:436
+#: app/controllers/registration_controller.rb:436
+msgid ""
+"A connection to the registration server could not be established or it did "
+"not reply."
+msgstr ""
+"Nem sikerült kapcsolatot létesíteni a regisztrációs kiszolgálóval vagy nem "
+"válaszol."
+
+#: app/controllers/registration_controller.rb:453
+#: app/controllers/registration_controller.rb:453
+msgid "The registration server returned invalid data."
+msgstr "A regisztrációs kiszolgáló érvénytelen adatot küldött vissza."
+
+#: app/views/registration/index.rhtml:53 app/views/registration/index.rhtml:54
+#: app/views/registration/index.rhtml:53 app/views/registration/index.rhtml:54
+msgid "Please enter a valid Email address."
+msgstr "Adjon meg egy érvényes e-mail címet."
+
+#: app/views/registration/index.rhtml:61 app/views/registration/index.rhtml:61
+msgid "register plugin"
+msgstr "regisztrációs bővítmény"
+
+#: app/views/registration/index.rhtml:61 app/views/registration/index.rhtml:61
+#: shortcuts.yml:6
+msgid "Registration"
+msgstr "Regisztráció"
+
+#: app/views/registration/index.rhtml:69 app/views/registration/index.rhtml:69
+msgid "Registration Information"
+msgstr "Regisztrációs információ"
+
+#: app/views/registration/index.rhtml:70 app/views/registration/index.rhtml:70
+msgid "This system is registered"
+msgstr "Regisztrált rendszer"
+
+#: app/views/registration/index.rhtml:71 app/views/registration/index.rhtml:71
+msgid "System number (GUID)"
+msgstr "Rendszerszám (GUID)"
+
+#: app/views/registration/index.rhtml:72 app/views/registration/index.rhtml:72
+msgid "Register again"
+msgstr "Újbóli regisztráció"
+
+#: app/views/registration/index.rhtml:79 app/views/registration/index.rhtml:79
+msgid "Next"
+msgstr "Következő"
+
+#: app/views/registration/index.rhtml:89 app/views/registration/index.rhtml:89
+msgid "Mandatory Information"
+msgstr "Szükséges információ"
+
+#: app/views/registration/index.rhtml:104
+#: app/views/registration/index.rhtml:104
+msgid "Details"
+msgstr "Részletek"
+
+#: app/views/registration/index.rhtml:128
+#: app/views/registration/index.rhtml:128
+msgid "Postpone"
+msgstr "Elhalaszt"
+
+#: shortcuts.yml:7
+#, fuzzy
+msgid "System Registration"
+msgstr "Regisztráció"
+
+#~ msgid "Registration did not finish."
+#~ msgstr "A regisztráció nem fejeződött be."
+
+#~ msgid "Skip"
+#~ msgstr "Kihagyás"
+
+#~ msgid "or"
+#~ msgstr "vagy"
+
+#~ msgid "Arguments for registration cannot be evaluated."
+#~ msgstr "A regisztrációhoz megadott argumentum nem értékelhető."

@@ -1,0 +1,105 @@
+# translation of yast_webclient_registration.fi.po to suomi
+# Jyri Palokangas <jyri.palokangas@opensuse.org>, 2009.
+msgid ""
+msgstr ""
+"Project-Id-Version: yast_webclient_registration.fi\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2009-11-20 14:35+0100\n"
+"PO-Revision-Date: 2009-11-17 22:29+0200\n"
+"Last-Translator: Jyri Palokangas <jyri.palokangas@opensuse.org>\n"
+"Language-Team: suomi <fi@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: KBabel 1.11.4\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+
+#: app/controllers/registration_controller.rb:15
+msgid "Invalid session, please login again."
+msgstr "Virheellinen istunto, kirjaudu uudelleen."
+
+#: app/controllers/registration_controller.rb:39
+#: app/controllers/registration_controller.rb:89
+msgid "No permissions for registration"
+msgstr "Ei oikeuksia rekisteröitymiseen"
+
+#: app/controllers/registration_controller.rb:68
+msgid "Arguments for registration cannot be evaluated."
+msgstr "Rekisteröinnin arvoja ei voida tunnistaa."
+
+#: app/controllers/registration_controller.rb:69
+#, fuzzy
+#| msgid "An error occurred during the installation."
+msgid "An error occurred during registration. Please try again."
+msgstr "Tapahtui virhe asennuksen aikana."
+
+#: app/controllers/registration_controller.rb:111
+msgid "Registration finished successfully."
+msgstr "Rekisteröinti suoritettiin onnistuneesti."
+
+#: app/controllers/registration_controller.rb:119
+#, fuzzy
+#| msgid "Service pack"
+msgid "Service added:"
+msgstr "Palvelupaketti"
+
+# TODO Better translation?
+#: app/controllers/registration_controller.rb:123
+#: app/controllers/registration_controller.rb:128
+#, fuzzy
+#| msgid "Catalog Installer"
+msgid "Catalog enabled:"
+msgstr "Ohjelmistokatalogien asennin"
+
+#: app/controllers/registration_controller.rb:143
+#, fuzzy
+#| msgid "Repository name:"
+msgid "Repository added:"
+msgstr "Asennuslähteen nimi:"
+
+#: app/controllers/registration_controller.rb:173
+msgid "Please fill out missing entries."
+msgstr "Täytä puuttuvat kohdat."
+
+#: app/controllers/registration_controller.rb:176
+msgid "Error occured while connecting to registration server."
+msgstr "Tapahtui virhe yhdistettäessä rekisteröintipalvelimeen."
+
+#: app/views/registration/index.rhtml:1
+msgid "register plugin"
+msgstr "rekisteröinti-liitännäinen"
+
+#: app/views/registration/index.rhtml:1
+msgid "Registration"
+msgstr "Rekisteröinti"
+
+#: app/views/registration/index.rhtml:9
+#, fuzzy
+#| msgid "A system restart is required"
+msgid "This system is registered"
+msgstr "Järjestelmä on käynnistettävä uudelleen"
+
+#: app/views/registration/index.rhtml:10
+#, fuzzy
+#| msgid "System:"
+msgid "System's GUID:"
+msgstr "Järjestelmä:"
+
+#: app/views/registration/index.rhtml:11
+#, fuzzy
+#| msgid "Registration"
+msgid "Register again"
+msgstr "Rekisteröinti"
+
+#: app/views/registration/index.rhtml:39
+msgid "Detail"
+msgstr "Tiedot"
+
+#~ msgid "This table gives registration settings."
+#~ msgstr "Tämä taulu näyttää rekisteröinti asetukset."
+
+#~ msgid "Changed Repositories"
+#~ msgstr "Muutetut asennuslähteet"
+
+#~ msgid "Changed Services"
+#~ msgstr "Muuttuneet palvelut"

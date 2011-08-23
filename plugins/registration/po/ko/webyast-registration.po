@@ -1,0 +1,221 @@
+# Copyright (C) 2006 SuSE Linux Products GmbH, Nuernberg
+# This file is distributed under the same license as the package.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: webyast-registration-ui\n"
+"POT-Creation-Date: 2010-08-18 10:19+0200\n"
+"PO-Revision-Date: 2010-08-26 09:28\n"
+"Last-Translator: Novell Language <language@novell.com>\n"
+"Language-Team: Novell Language <language@novell.com>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+
+#: app/controllers/registration_controller.rb:32 ./app/controllers/registration_controller.rb:32
+msgid "Email"
+msgstr "전자 메일"
+
+#: app/controllers/registration_controller.rb:33 ./app/controllers/registration_controller.rb:33
+msgid "System name"
+msgstr "시스템 이름"
+
+#: app/controllers/registration_controller.rb:34 ./app/controllers/registration_controller.rb:34
+msgid "SLES registration code"
+msgstr "SLES 등록 코드"
+
+#: app/controllers/registration_controller.rb:35 ./app/controllers/registration_controller.rb:35
+msgid "SLED registration code"
+msgstr "SLED 등록 코드"
+
+#: app/controllers/registration_controller.rb:36 ./app/controllers/registration_controller.rb:36
+msgid "Appliance registration code"
+msgstr "어플라이언스 등록 코드"
+
+#: app/controllers/registration_controller.rb:37 ./app/controllers/registration_controller.rb:37
+msgid "WebYaST registration code"
+msgstr "WebYaST 등록 코드"
+
+#: app/controllers/registration_controller.rb:38 ./app/controllers/registration_controller.rb:38
+msgid "Registration code"
+msgstr "등록 코드"
+
+#: app/controllers/registration_controller.rb:39 ./app/controllers/registration_controller.rb:39
+msgid "Hostname"
+msgstr "호스트 이름"
+
+#: app/controllers/registration_controller.rb:40 ./app/controllers/registration_controller.rb:40
+msgid "Device name"
+msgstr "장치 이름"
+
+#: app/controllers/registration_controller.rb:41 ./app/controllers/registration_controller.rb:41
+msgid "Appliance name"
+msgstr "어플라이언스 이름"
+
+#: app/controllers/registration_controller.rb:42 ./app/controllers/registration_controller.rb:42
+msgid "registration code"
+msgstr "등록 코드"
+
+#: app/controllers/registration_controller.rb:52 ./app/controllers/registration_controller.rb:52
+msgid "Invalid session, please login again."
+msgstr "세션이 잘못되었습니다. 다시 로그인하십시오."
+
+#: app/controllers/registration_controller.rb:62 ./app/controllers/registration_controller.rb:62
+msgid "No permissions for registration"
+msgstr "등록 권한 없음"
+
+#: app/controllers/registration_controller.rb:111 ./app/controllers/registration_controller.rb:111
+msgid "Please try to register again later."
+msgstr "나중에 다시 등록해 보십시오."
+
+#: app/controllers/registration_controller.rb:115 ./app/controllers/registration_controller.rb:115
+msgid "Registration did not succeed."
+msgstr "등록에 성공하지 못했습니다."
+
+#: app/controllers/registration_controller.rb:119 ./app/controllers/registration_controller.rb:119
+msgid "Registration was skipped."
+msgstr "등록을 건너뛰었습니다."
+
+#: app/controllers/registration_controller.rb:123 ./app/controllers/registration_controller.rb:123
+msgid "This may be a temporary issue."
+msgstr "이는 일시적인 문제일 수 있습니다."
+
+#: app/controllers/registration_controller.rb:127 ./app/controllers/registration_controller.rb:127
+msgid "The system might not receive necessary updates."
+msgstr "시스템에 필요한 업데이트를 받지 못했을 수도 있습니다."
+
+#: app/controllers/registration_controller.rb:143 ./app/controllers/registration_controller.rb:143
+msgid "The registration server returned invalid or incomplete data."
+msgstr "등록 서버가 잘못되었거나 불완전한 데이터를 반환했습니다."
+
+#: app/controllers/registration_controller.rb:151 ./app/controllers/registration_controller.rb:151
+msgid "Could not read the registration configuration."
+msgstr "등록 구성을 읽을 수 없습니다."
+
+#: app/controllers/registration_controller.rb:151 ./app/controllers/registration_controller.rb:151
+msgid "The registration backend is not installed correctly"
+msgstr "등록 백 엔드가 올바르게 설치되지 않았습니다."
+
+#: app/controllers/registration_controller.rb:152 ./app/controllers/registration_controller.rb:152
+msgid "Please refer to your support contact."
+msgstr "지원 연락처를 참조하십시오."
+
+#: app/controllers/registration_controller.rb:181 ./app/controllers/registration_controller.rb:181
+msgid "Please fill out missing entries."
+msgstr "누락된 항목을 채우십시오."
+
+#: app/controllers/registration_controller.rb:213 ./app/controllers/registration_controller.rb:213
+msgid "Service added:"
+msgstr "추가된 서비스:"
+
+#: app/controllers/registration_controller.rb:217 app/controllers/registration_controller.rb:223
+#: ./app/controllers/registration_controller.rb:217 ./app/controllers/registration_controller.rb:223
+msgid "Catalog enabled:"
+msgstr "활성화된 카탈로그:"
+
+#: app/controllers/registration_controller.rb:250 ./app/controllers/registration_controller.rb:250
+msgid "Repository added:"
+msgstr "추가된 리포지토리:"
+
+#: app/controllers/registration_controller.rb:326 ./app/controllers/registration_controller.rb:326
+msgid "This system is already registered."
+msgstr "이 시스템은 이미 등록되었습니다."
+
+#: app/controllers/registration_controller.rb:355 ./app/controllers/registration_controller.rb:355
+msgid "Registration finished successfully."
+msgstr "등록이 성공적으로 완료되었습니다."
+
+#: app/controllers/registration_controller.rb:365 ./app/controllers/registration_controller.rb:365
+msgid "<p><b>Repositories were not modified during the registration process.</b></p><p>It is likely that an incorrect registration code was used. If this is the case, please attempt the registration process again to get an update repository.</p><p>Please make sure that this system has an update repository configured, otherwise it will not receive updates.</p>"
+msgstr "<p><b>등록 프로세스 중에 리포지토리가 수정되지 않았습니다.</b></p><p>잘못된 등록 코드를 사용했을 수 있습니다. 이 경우, 등록 프로세스를 다시 실행하여 업데이트 리포지토리를 가져오십시오.</p><p>이 시스템에 업데이트 리포지토리가 구성되었는지 확인하십시오. 그렇지 않으면 업데이트를 수신하지 않습니다.</p>"
+
+#: app/controllers/registration_controller.rb:399 ./app/controllers/registration_controller.rb:399
+msgid "A connection to the registration server could not be established."
+msgstr "등록 서버에 연결할 수 없습니다."
+
+#: app/controllers/registration_controller.rb:403 ./app/controllers/registration_controller.rb:403
+msgid "The supplied registration data was invalid."
+msgstr "제공된 등록 데이터가 잘못되었습니다."
+
+#: app/controllers/registration_controller.rb:407 ./app/controllers/registration_controller.rb:407
+msgid "The registration code you entered was invalid."
+msgstr "입력한 등록 코드가 잘못되었습니다."
+
+#: app/controllers/registration_controller.rb:413 ./app/controllers/registration_controller.rb:413
+msgid "The transmitted registration data created a conflict."
+msgstr "전송된 등록 데이터에 충돌이 발생했습니다."
+
+#: app/controllers/registration_controller.rb:421 ./app/controllers/registration_controller.rb:421
+msgid "Registration can not be performed. There is no product installed that can be registered."
+msgstr "등록할 수 없습니다. 등록할 수 있는 제품이 설치되지 않았습니다."
+
+#: app/controllers/registration_controller.rb:436 ./app/controllers/registration_controller.rb:436
+msgid "A connection to the registration server could not be established or it did not reply."
+msgstr "등록 서버에 연결할 수 없거나 등록 서버가 응답하지 않습니다."
+
+#: app/controllers/registration_controller.rb:453 ./app/controllers/registration_controller.rb:453
+msgid "The registration server returned invalid data."
+msgstr "등록 서버가 잘못된 데이터를 반환했습니다."
+
+#: app/views/registration/index.rhtml:53 app/views/registration/index.rhtml:54
+#: ./app/views/registration/index.rhtml:53 ./app/views/registration/index.rhtml:54
+msgid "Please enter a valid Email address."
+msgstr "올바른 전자 메일 주소를 입력하십시오."
+
+#: app/views/registration/index.rhtml:61 ./app/views/registration/index.rhtml:61
+msgid "register plugin"
+msgstr "등록 플러그인"
+
+#: app/views/registration/index.rhtml:61 ./app/views/registration/index.rhtml:61 ./shortcuts.yml:6
+msgid "Registration"
+msgstr "등록"
+
+#: app/views/registration/index.rhtml:69 ./app/views/registration/index.rhtml:69
+msgid "Registration Information"
+msgstr "등록 정보"
+
+#: app/views/registration/index.rhtml:70 ./app/views/registration/index.rhtml:70
+msgid "This system is registered"
+msgstr "이 시스템이 등록됩니다."
+
+#: app/views/registration/index.rhtml:71 ./app/views/registration/index.rhtml:71
+msgid "System number (GUID)"
+msgstr "시스템 번호(GUID)"
+
+#: app/views/registration/index.rhtml:72 ./app/views/registration/index.rhtml:72
+msgid "Register again"
+msgstr "다시 등록"
+
+#: app/views/registration/index.rhtml:79 ./app/views/registration/index.rhtml:79
+msgid "Next"
+msgstr "다음"
+
+#: app/views/registration/index.rhtml:89 ./app/views/registration/index.rhtml:89
+msgid "Mandatory Information"
+msgstr "필수 정보"
+
+#: app/views/registration/index.rhtml:104 ./app/views/registration/index.rhtml:104
+msgid "Details"
+msgstr "자세히"
+
+#: app/views/registration/index.rhtml:128 ./app/views/registration/index.rhtml:128
+msgid "Postpone"
+msgstr "연기"
+
+#: ./shortcuts.yml:7
+msgid "System Registration"
+msgstr "시스템 등록"
+
+#: app/models/registration_state.rb:30 ./app/models/registration_state.rb:30
+msgid "Registration is missing"
+msgstr "등록이 없습니다."
+
+#: app/models/registration_state.rb:31 ./app/models/registration_state.rb:31
+msgid "Please register your system in order to get updates."
+msgstr "업데이트하려면 시스템을 등록하십시오."
+
+#: app/models/registration_state.rb:34 ./app/models/registration_state.rb:34
+msgid "register"
+msgstr "등록"
+

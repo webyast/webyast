@@ -1,0 +1,313 @@
+# @TITLE@
+# Copyright (C) 2006, SUSE Linux GmbH, Nuremberg
+#
+# This file is distributed under the same license as @PACKAGE@ package. FIRST
+#
+# Mindaugas Baranauskas <embar@users.berlios.de>, 2010.
+msgid ""
+msgstr ""
+"Project-Id-Version: webyast-registration-ui 1.0.0\n"
+"Report-Msgid-Bugs-To: translation@suse.de\n"
+"POT-Creation-Date: 2010-08-02 09:19+0200\n"
+"PO-Revision-Date: 2010-01-04 12:47+0200\n"
+"Last-Translator: Mindaugas Baranauskas <embar@users.berlios.de>\n"
+"Language-Team: Lithuanian <kde-i18n-doc@kde.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=3; plural=n%10==1 && n%100!=11 ? 0 : n%10>=2 && (n%"
+"100<10 || n%100>=20) ? 1 : 2;\n"
+"X-Generator: Lokalize 1.0\n"
+
+#: app/controllers/registration_controller.rb:32
+#: app/controllers/registration_controller.rb:32
+#, fuzzy
+msgid "Email"
+msgstr "Elektroninio pašto adresai"
+
+#: app/controllers/registration_controller.rb:33
+#: app/controllers/registration_controller.rb:33
+#, fuzzy
+msgid "System name"
+msgstr "Sistema"
+
+#: app/controllers/registration_controller.rb:34
+#: app/controllers/registration_controller.rb:34
+#, fuzzy
+msgid "SLES registration code"
+msgstr "Registracija"
+
+#: app/controllers/registration_controller.rb:35
+#: app/controllers/registration_controller.rb:35
+#, fuzzy
+msgid "SLED registration code"
+msgstr "Registracija"
+
+#: app/controllers/registration_controller.rb:36
+#: app/controllers/registration_controller.rb:36
+#, fuzzy
+msgid "Appliance registration code"
+msgstr "Programų naršyklė"
+
+#: app/controllers/registration_controller.rb:37
+#: app/controllers/registration_controller.rb:37
+#, fuzzy
+msgid "WebYaST registration code"
+msgstr "YaST diegimo šaltinis"
+
+#: app/controllers/registration_controller.rb:38
+#: app/controllers/registration_controller.rb:38
+#, fuzzy
+msgid "Registration code"
+msgstr "Registracija"
+
+#: app/controllers/registration_controller.rb:39
+#: app/controllers/registration_controller.rb:39
+#, fuzzy
+msgid "Hostname"
+msgstr "Kompiuterių vardai"
+
+#: app/controllers/registration_controller.rb:40
+#: app/controllers/registration_controller.rb:40
+#, fuzzy
+msgid "Device name"
+msgstr "Modemo įrenginio pavadinimas"
+
+#: app/controllers/registration_controller.rb:41
+#: app/controllers/registration_controller.rb:41
+msgid "Appliance name"
+msgstr ""
+
+#: app/controllers/registration_controller.rb:42
+#: app/controllers/registration_controller.rb:42
+#, fuzzy
+msgid "registration code"
+msgstr "Registracija"
+
+#: app/controllers/registration_controller.rb:52
+#: app/controllers/registration_controller.rb:52
+msgid "Invalid session, please login again."
+msgstr "Negalima sesija, prisijunkite iš naujo."
+
+#: app/controllers/registration_controller.rb:62
+#: app/controllers/registration_controller.rb:62
+msgid "No permissions for registration"
+msgstr "Jokių leidimų registracijai"
+
+#: app/controllers/registration_controller.rb:111
+#: app/controllers/registration_controller.rb:111
+msgid "Please try to register again later."
+msgstr ""
+
+#: app/controllers/registration_controller.rb:115
+#: app/controllers/registration_controller.rb:115
+#, fuzzy
+msgid "Registration did not succeed."
+msgstr "Registracija sėkmingai užbaigta."
+
+#: app/controllers/registration_controller.rb:119
+#: app/controllers/registration_controller.rb:119
+#, fuzzy
+msgid "Registration was skipped."
+msgstr "Registracija"
+
+#: app/controllers/registration_controller.rb:123
+#: app/controllers/registration_controller.rb:123
+msgid "This may be a temporary issue."
+msgstr ""
+
+#: app/controllers/registration_controller.rb:127
+#: app/controllers/registration_controller.rb:127
+msgid "The system might not receive necessary updates."
+msgstr ""
+
+#: app/controllers/registration_controller.rb:143
+#: app/controllers/registration_controller.rb:143
+msgid "The registration server returned invalid or incomplete data."
+msgstr ""
+
+#: app/controllers/registration_controller.rb:151
+#: app/controllers/registration_controller.rb:151
+msgid "Could not read the registration configuration."
+msgstr ""
+
+#: app/controllers/registration_controller.rb:151
+#: app/controllers/registration_controller.rb:151
+msgid "The registration backend is not installed correctly"
+msgstr ""
+
+#: app/controllers/registration_controller.rb:152
+#: app/controllers/registration_controller.rb:152
+msgid "Please refer to your support contact."
+msgstr ""
+
+#: app/controllers/registration_controller.rb:181
+#: app/controllers/registration_controller.rb:181
+msgid "Please fill out missing entries."
+msgstr "Prašome užpildyti trūkstamus įrašus."
+
+#: app/controllers/registration_controller.rb:213
+#: app/controllers/registration_controller.rb:213
+msgid "Service added:"
+msgstr "Paslauga pridėta:"
+
+#: app/controllers/registration_controller.rb:217
+#: app/controllers/registration_controller.rb:223
+#: app/controllers/registration_controller.rb:217
+#: app/controllers/registration_controller.rb:223
+msgid "Catalog enabled:"
+msgstr "Katalogas įgalintas: "
+
+#: app/controllers/registration_controller.rb:250
+#: app/controllers/registration_controller.rb:250
+msgid "Repository added:"
+msgstr "Saugykla pridėta:"
+
+#: app/controllers/registration_controller.rb:326
+#: app/controllers/registration_controller.rb:326
+#, fuzzy
+msgid "This system is already registered."
+msgstr "Sistema užregistruota"
+
+#: app/controllers/registration_controller.rb:355
+#: app/controllers/registration_controller.rb:355
+msgid "Registration finished successfully."
+msgstr "Registracija sėkmingai užbaigta."
+
+#: app/controllers/registration_controller.rb:365
+#: app/controllers/registration_controller.rb:365
+msgid ""
+"<p><b>Repositories were not modified during the registration process.</b></"
+"p><p>It is likely that an incorrect registration code was used. If this is "
+"the case, please attempt the registration process again to get an update "
+"repository.</p><p>Please make sure that this system has an update repository "
+"configured, otherwise it will not receive updates.</p>"
+msgstr ""
+
+#: app/controllers/registration_controller.rb:399
+#: app/controllers/registration_controller.rb:399
+msgid "A connection to the registration server could not be established."
+msgstr ""
+
+#: app/controllers/registration_controller.rb:403
+#: app/controllers/registration_controller.rb:403
+msgid "The supplied registration data was invalid."
+msgstr ""
+
+#: app/controllers/registration_controller.rb:407
+#: app/controllers/registration_controller.rb:407
+msgid "The registration code you entered was invalid."
+msgstr ""
+
+#: app/controllers/registration_controller.rb:413
+#: app/controllers/registration_controller.rb:413
+msgid "The transmitted registration data created a conflict."
+msgstr ""
+
+#: app/controllers/registration_controller.rb:421
+#: app/controllers/registration_controller.rb:421
+msgid ""
+"Registration can not be performed. There is no product installed that can be "
+"registered."
+msgstr ""
+
+#: app/controllers/registration_controller.rb:436
+#: app/controllers/registration_controller.rb:436
+msgid ""
+"A connection to the registration server could not be established or it did "
+"not reply."
+msgstr ""
+
+#: app/controllers/registration_controller.rb:453
+#: app/controllers/registration_controller.rb:453
+msgid "The registration server returned invalid data."
+msgstr ""
+
+#: app/views/registration/index.rhtml:53 app/views/registration/index.rhtml:54
+#: app/views/registration/index.rhtml:53 app/views/registration/index.rhtml:54
+#, fuzzy
+msgid "Please enter a valid Email address."
+msgstr "„%s“ nėra galiojantis ip adresas."
+
+#: app/views/registration/index.rhtml:61 app/views/registration/index.rhtml:61
+msgid "register plugin"
+msgstr "registracijos papildinys"
+
+#: app/views/registration/index.rhtml:61 app/views/registration/index.rhtml:61
+#: shortcuts.yml:6
+msgid "Registration"
+msgstr "Registracija"
+
+#: app/views/registration/index.rhtml:69 app/views/registration/index.rhtml:69
+#, fuzzy
+msgid "Registration Information"
+msgstr "Perkrovimo patvirtinimas"
+
+#: app/views/registration/index.rhtml:70 app/views/registration/index.rhtml:70
+msgid "This system is registered"
+msgstr "Sistema užregistruota"
+
+#: app/views/registration/index.rhtml:71 app/views/registration/index.rhtml:71
+#, fuzzy
+msgid "System number (GUID)"
+msgstr "Sistemos GUID:"
+
+#: app/views/registration/index.rhtml:72 app/views/registration/index.rhtml:72
+msgid "Register again"
+msgstr "Registruoti iš naujo"
+
+#: app/views/registration/index.rhtml:79 app/views/registration/index.rhtml:79
+msgid "Next"
+msgstr "Kitas"
+
+#: app/views/registration/index.rhtml:89 app/views/registration/index.rhtml:89
+#, fuzzy
+msgid "Mandatory Information"
+msgstr "Atminties informacija"
+
+#: app/views/registration/index.rhtml:104
+#: app/views/registration/index.rhtml:104
+msgid "Details"
+msgstr "Detalės"
+
+#: app/views/registration/index.rhtml:128
+#: app/views/registration/index.rhtml:128
+msgid "Postpone"
+msgstr ""
+
+#: shortcuts.yml:7
+#, fuzzy
+msgid "System Registration"
+msgstr "Registracija"
+
+#, fuzzy
+#~| msgid "Registration finished successfully."
+#~ msgid "Registration did not finish."
+#~ msgstr "Registracija sėkmingai užbaigta."
+
+#~ msgid "Arguments for registration cannot be evaluated."
+#~ msgstr "Nepavyksta įvertinti registracijos argumentų."
+
+#~ msgid "An error occurred during registration. Please try again."
+#~ msgstr "Registruojant įvyko klaida. Bandykite iš naujo."
+
+#~ msgid "Error occured while connecting to registration server."
+#~ msgstr "Jungiantis prie registracijos serverio įvyko klaida."
+
+#~| msgid "Details"
+#~ msgid "Detail"
+#~ msgstr "Detalės"
+
+#, fuzzy
+#~| msgid "Change &Position"
+#~ msgid "Changed Repositories"
+#~ msgstr "&Pakeisti poziciją"
+
+#, fuzzy
+#~| msgid "Change &Position"
+#~ msgid "Changed Services"
+#~ msgstr "&Pakeisti poziciją"
+
+# cancel button label
+#~ msgid "Cancel"
+#~ msgstr "Atšaukti"

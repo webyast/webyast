@@ -1,0 +1,221 @@
+# Copyright (C) 2006 SuSE Linux Products GmbH, Nuernberg
+# This file is distributed under the same license as the package.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: webyast-registration-ui\n"
+"POT-Creation-Date: 2010-08-18 10:19+0200\n"
+"PO-Revision-Date: 2010-08-26 09:25\n"
+"Last-Translator: Novell Language <language@novell.com>\n"
+"Language-Team: Novell Language <language@novell.com>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+
+#: app/controllers/registration_controller.rb:32 ./app/controllers/registration_controller.rb:32
+msgid "Email"
+msgstr "Message électronique"
+
+#: app/controllers/registration_controller.rb:33 ./app/controllers/registration_controller.rb:33
+msgid "System name"
+msgstr "Nom du système"
+
+#: app/controllers/registration_controller.rb:34 ./app/controllers/registration_controller.rb:34
+msgid "SLES registration code"
+msgstr "Code d'enregistrement SLES"
+
+#: app/controllers/registration_controller.rb:35 ./app/controllers/registration_controller.rb:35
+msgid "SLED registration code"
+msgstr "Code d'enregistrement SLED"
+
+#: app/controllers/registration_controller.rb:36 ./app/controllers/registration_controller.rb:36
+msgid "Appliance registration code"
+msgstr "Code d'enregistrement applicatif"
+
+#: app/controllers/registration_controller.rb:37 ./app/controllers/registration_controller.rb:37
+msgid "WebYaST registration code"
+msgstr "Code d'enregistrement WebYaST"
+
+#: app/controllers/registration_controller.rb:38 ./app/controllers/registration_controller.rb:38
+msgid "Registration code"
+msgstr "Code d'enregistrement"
+
+#: app/controllers/registration_controller.rb:39 ./app/controllers/registration_controller.rb:39
+msgid "Hostname"
+msgstr "Nom d'hôte"
+
+#: app/controllers/registration_controller.rb:40 ./app/controllers/registration_controller.rb:40
+msgid "Device name"
+msgstr "Nom du périphérique"
+
+#: app/controllers/registration_controller.rb:41 ./app/controllers/registration_controller.rb:41
+msgid "Appliance name"
+msgstr "Nom de l'applicatif"
+
+#: app/controllers/registration_controller.rb:42 ./app/controllers/registration_controller.rb:42
+msgid "registration code"
+msgstr "code d'enregistrement"
+
+#: app/controllers/registration_controller.rb:52 ./app/controllers/registration_controller.rb:52
+msgid "Invalid session, please login again."
+msgstr "Session invalide, veuillez vous reconnecter."
+
+#: app/controllers/registration_controller.rb:62 ./app/controllers/registration_controller.rb:62
+msgid "No permissions for registration"
+msgstr "Pas d'autorisations pour l'enregistrement"
+
+#: app/controllers/registration_controller.rb:111 ./app/controllers/registration_controller.rb:111
+msgid "Please try to register again later."
+msgstr "Réessayez de procéder à l'enregistrement ultérieurement."
+
+#: app/controllers/registration_controller.rb:115 ./app/controllers/registration_controller.rb:115
+msgid "Registration did not succeed."
+msgstr "L'enregistrement a échoué."
+
+#: app/controllers/registration_controller.rb:119 ./app/controllers/registration_controller.rb:119
+msgid "Registration was skipped."
+msgstr "L'enregistrement a été ignoré."
+
+#: app/controllers/registration_controller.rb:123 ./app/controllers/registration_controller.rb:123
+msgid "This may be a temporary issue."
+msgstr "Il peut s'agir d'un problème temporaire."
+
+#: app/controllers/registration_controller.rb:127 ./app/controllers/registration_controller.rb:127
+msgid "The system might not receive necessary updates."
+msgstr "Il se peut que le système ne reçoive pas les mises à jour nécessaires."
+
+#: app/controllers/registration_controller.rb:143 ./app/controllers/registration_controller.rb:143
+msgid "The registration server returned invalid or incomplete data."
+msgstr "Le serveur d'enregistrement a renvoyé des données non valides ou incomplètes."
+
+#: app/controllers/registration_controller.rb:151 ./app/controllers/registration_controller.rb:151
+msgid "Could not read the registration configuration."
+msgstr "Impossible de lire la configuration de l'enregistrement."
+
+#: app/controllers/registration_controller.rb:151 ./app/controllers/registration_controller.rb:151
+msgid "The registration backend is not installed correctly"
+msgstr "L'interface dorsale d'enregistrement n'est pas correctement installée."
+
+#: app/controllers/registration_controller.rb:152 ./app/controllers/registration_controller.rb:152
+msgid "Please refer to your support contact."
+msgstr "Veuillez contacter l'assistance."
+
+#: app/controllers/registration_controller.rb:181 ./app/controllers/registration_controller.rb:181
+msgid "Please fill out missing entries."
+msgstr "Veuillez remplir les entrées manquantes."
+
+#: app/controllers/registration_controller.rb:213 ./app/controllers/registration_controller.rb:213
+msgid "Service added:"
+msgstr "Service ajouté :"
+
+#: app/controllers/registration_controller.rb:217 app/controllers/registration_controller.rb:223
+#: ./app/controllers/registration_controller.rb:217 ./app/controllers/registration_controller.rb:223
+msgid "Catalog enabled:"
+msgstr "Catalogue activé :"
+
+#: app/controllers/registration_controller.rb:250 ./app/controllers/registration_controller.rb:250
+msgid "Repository added:"
+msgstr "Dépôt ajouté :"
+
+#: app/controllers/registration_controller.rb:326 ./app/controllers/registration_controller.rb:326
+msgid "This system is already registered."
+msgstr "Ce système est déjà enregistré."
+
+#: app/controllers/registration_controller.rb:355 ./app/controllers/registration_controller.rb:355
+msgid "Registration finished successfully."
+msgstr "L'enregistrement a réussi."
+
+#: app/controllers/registration_controller.rb:365 ./app/controllers/registration_controller.rb:365
+msgid "<p><b>Repositories were not modified during the registration process.</b></p><p>It is likely that an incorrect registration code was used. If this is the case, please attempt the registration process again to get an update repository.</p><p>Please make sure that this system has an update repository configured, otherwise it will not receive updates.</p>"
+msgstr "<p><b>Les dépôts n'ont pas été modifiés lors du processus d'enregistrement.</b></p><p>Il se peut qu'un code d'enregistrement incorrect ait été utilisé. Dans ce cas, réessayez de procéder à l'enregistrement pour obtenir un dépôt de mise à jour.</p><p>Assurez-vous qu'un dépôt de mise à jour est configuré pour ce système, sans quoi ce dernier ne pourra pas recevoir de mises à jour.</p>"
+
+#: app/controllers/registration_controller.rb:399 ./app/controllers/registration_controller.rb:399
+msgid "A connection to the registration server could not be established."
+msgstr "La connexion au serveur d'enregistrement n'a pas pu être établie."
+
+#: app/controllers/registration_controller.rb:403 ./app/controllers/registration_controller.rb:403
+msgid "The supplied registration data was invalid."
+msgstr "Les données d'enregistrement fournies ne sont pas valides."
+
+#: app/controllers/registration_controller.rb:407 ./app/controllers/registration_controller.rb:407
+msgid "The registration code you entered was invalid."
+msgstr "Le code d'enregistrement saisi n'est pas valide."
+
+#: app/controllers/registration_controller.rb:413 ./app/controllers/registration_controller.rb:413
+msgid "The transmitted registration data created a conflict."
+msgstr "Les données d'enregistrement transmises ont créé un conflit."
+
+#: app/controllers/registration_controller.rb:421 ./app/controllers/registration_controller.rb:421
+msgid "Registration can not be performed. There is no product installed that can be registered."
+msgstr "L'enregistrement n'a pas pu être effectué. Aucun produit susceptible d'être enregistré n'est installé."
+
+#: app/controllers/registration_controller.rb:436 ./app/controllers/registration_controller.rb:436
+msgid "A connection to the registration server could not be established or it did not reply."
+msgstr "Aucune connexion au serveur d'enregistrement n'a pu être établie ou n'a pu répondre."
+
+#: app/controllers/registration_controller.rb:453 ./app/controllers/registration_controller.rb:453
+msgid "The registration server returned invalid data."
+msgstr "Le serveur d'enregistrement a renvoyé des données non valides."
+
+#: app/views/registration/index.rhtml:53 app/views/registration/index.rhtml:54
+#: ./app/views/registration/index.rhtml:53 ./app/views/registration/index.rhtml:54
+msgid "Please enter a valid Email address."
+msgstr "Saisissez une adresse électronique valide."
+
+#: app/views/registration/index.rhtml:61 ./app/views/registration/index.rhtml:61
+msgid "register plugin"
+msgstr "enregistrer plug-in"
+
+#: app/views/registration/index.rhtml:61 ./app/views/registration/index.rhtml:61 ./shortcuts.yml:6
+msgid "Registration"
+msgstr "Enregistrement"
+
+#: app/views/registration/index.rhtml:69 ./app/views/registration/index.rhtml:69
+msgid "Registration Information"
+msgstr "Informations d'enregistrement"
+
+#: app/views/registration/index.rhtml:70 ./app/views/registration/index.rhtml:70
+msgid "This system is registered"
+msgstr "Ce système est enregistré."
+
+#: app/views/registration/index.rhtml:71 ./app/views/registration/index.rhtml:71
+msgid "System number (GUID)"
+msgstr "Numéro système (GUID)"
+
+#: app/views/registration/index.rhtml:72 ./app/views/registration/index.rhtml:72
+msgid "Register again"
+msgstr "Se réenregistrer"
+
+#: app/views/registration/index.rhtml:79 ./app/views/registration/index.rhtml:79
+msgid "Next"
+msgstr "Suivant"
+
+#: app/views/registration/index.rhtml:89 ./app/views/registration/index.rhtml:89
+msgid "Mandatory Information"
+msgstr "Informations obligatoires"
+
+#: app/views/registration/index.rhtml:104 ./app/views/registration/index.rhtml:104
+msgid "Details"
+msgstr "Détails"
+
+#: app/views/registration/index.rhtml:128 ./app/views/registration/index.rhtml:128
+msgid "Postpone"
+msgstr "Reporter"
+
+#: ./shortcuts.yml:7
+msgid "System Registration"
+msgstr "Enregistrement système"
+
+#: app/models/registration_state.rb:30 ./app/models/registration_state.rb:30
+msgid "Registration is missing"
+msgstr "Enregistrement manquant"
+
+#: app/models/registration_state.rb:31 ./app/models/registration_state.rb:31
+msgid "Please register your system in order to get updates."
+msgstr "Enregistrez votre système afin d'obtenir les mises à jour."
+
+#: app/models/registration_state.rb:34 ./app/models/registration_state.rb:34
+msgid "register"
+msgstr "enregistrer"
+

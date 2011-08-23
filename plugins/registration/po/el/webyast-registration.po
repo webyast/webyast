@@ -1,0 +1,319 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: webyast-registration-ui 1.0.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2010-08-02 09:19+0200\n"
+"PO-Revision-Date: 2005-08-24 17:53+0300\n"
+"Last-Translator: Hellenic SuSE Translation Team <hstg@billg.gr>\n"
+"Language-Team: Hellenic-Ελληνικά-Greek <hstg@billg.gr>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: KBabel 1.10\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+
+#: app/controllers/registration_controller.rb:32
+#: app/controllers/registration_controller.rb:32
+#, fuzzy
+msgid "Email"
+msgstr "Emails"
+
+#: app/controllers/registration_controller.rb:33
+#: app/controllers/registration_controller.rb:33
+#, fuzzy
+msgid "System name"
+msgstr "Σύστημα"
+
+#: app/controllers/registration_controller.rb:34
+#: app/controllers/registration_controller.rb:34
+#, fuzzy
+msgid "SLES registration code"
+msgstr "&Διαχείριση"
+
+#: app/controllers/registration_controller.rb:35
+#: app/controllers/registration_controller.rb:35
+#, fuzzy
+msgid "SLED registration code"
+msgstr "&Διαχείριση"
+
+#: app/controllers/registration_controller.rb:36
+#: app/controllers/registration_controller.rb:36
+#, fuzzy
+msgid "Appliance registration code"
+msgstr "Εφαρμογή Πλοηγού"
+
+#: app/controllers/registration_controller.rb:37
+#: app/controllers/registration_controller.rb:37
+#, fuzzy
+msgid "WebYaST registration code"
+msgstr "Πηγή εγκατάστασης YaST"
+
+#: app/controllers/registration_controller.rb:38
+#: app/controllers/registration_controller.rb:38
+#, fuzzy
+msgid "Registration code"
+msgstr "&Διαχείριση"
+
+#: app/controllers/registration_controller.rb:39
+#: app/controllers/registration_controller.rb:39
+#, fuzzy
+msgid "Hostname"
+msgstr "Ονόματα Κόμβων"
+
+#: app/controllers/registration_controller.rb:40
+#: app/controllers/registration_controller.rb:40
+#, fuzzy
+msgid "Device name"
+msgstr "Όνομα συσκευής μόντεμ"
+
+#: app/controllers/registration_controller.rb:41
+#: app/controllers/registration_controller.rb:41
+msgid "Appliance name"
+msgstr ""
+
+#: app/controllers/registration_controller.rb:42
+#: app/controllers/registration_controller.rb:42
+#, fuzzy
+msgid "registration code"
+msgstr "&Διαχείριση"
+
+#: app/controllers/registration_controller.rb:52
+#: app/controllers/registration_controller.rb:52
+msgid "Invalid session, please login again."
+msgstr ""
+
+#: app/controllers/registration_controller.rb:62
+#: app/controllers/registration_controller.rb:62
+msgid "No permissions for registration"
+msgstr ""
+
+#: app/controllers/registration_controller.rb:111
+#: app/controllers/registration_controller.rb:111
+msgid "Please try to register again later."
+msgstr ""
+
+#: app/controllers/registration_controller.rb:115
+#: app/controllers/registration_controller.rb:115
+msgid "Registration did not succeed."
+msgstr ""
+
+#: app/controllers/registration_controller.rb:119
+#: app/controllers/registration_controller.rb:119
+#, fuzzy
+msgid "Registration was skipped."
+msgstr "&Διαχείριση"
+
+#: app/controllers/registration_controller.rb:123
+#: app/controllers/registration_controller.rb:123
+msgid "This may be a temporary issue."
+msgstr ""
+
+#: app/controllers/registration_controller.rb:127
+#: app/controllers/registration_controller.rb:127
+msgid "The system might not receive necessary updates."
+msgstr ""
+
+#: app/controllers/registration_controller.rb:143
+#: app/controllers/registration_controller.rb:143
+msgid "The registration server returned invalid or incomplete data."
+msgstr ""
+
+#: app/controllers/registration_controller.rb:151
+#: app/controllers/registration_controller.rb:151
+msgid "Could not read the registration configuration."
+msgstr ""
+
+#: app/controllers/registration_controller.rb:151
+#: app/controllers/registration_controller.rb:151
+msgid "The registration backend is not installed correctly"
+msgstr ""
+
+#: app/controllers/registration_controller.rb:152
+#: app/controllers/registration_controller.rb:152
+msgid "Please refer to your support contact."
+msgstr ""
+
+#: app/controllers/registration_controller.rb:181
+#: app/controllers/registration_controller.rb:181
+msgid "Please fill out missing entries."
+msgstr ""
+
+#: app/controllers/registration_controller.rb:213
+#: app/controllers/registration_controller.rb:213
+#, fuzzy
+msgid "Service added:"
+msgstr "Υπηρεσίες SLP και άλλα"
+
+#: app/controllers/registration_controller.rb:217
+#: app/controllers/registration_controller.rb:223
+#: app/controllers/registration_controller.rb:217
+#: app/controllers/registration_controller.rb:223
+#, fuzzy
+msgid "Catalog enabled:"
+msgstr "Κατάλογος: "
+
+#: app/controllers/registration_controller.rb:250
+#: app/controllers/registration_controller.rb:250
+msgid "Repository added:"
+msgstr ""
+
+#: app/controllers/registration_controller.rb:326
+#: app/controllers/registration_controller.rb:326
+#, fuzzy
+msgid "This system is already registered."
+msgstr "Η συσκευή είναι ήδη προσαρτημένη"
+
+#: app/controllers/registration_controller.rb:355
+#: app/controllers/registration_controller.rb:355
+msgid "Registration finished successfully."
+msgstr ""
+
+#: app/controllers/registration_controller.rb:365
+#: app/controllers/registration_controller.rb:365
+msgid ""
+"<p><b>Repositories were not modified during the registration process.</b></"
+"p><p>It is likely that an incorrect registration code was used. If this is "
+"the case, please attempt the registration process again to get an update "
+"repository.</p><p>Please make sure that this system has an update repository "
+"configured, otherwise it will not receive updates.</p>"
+msgstr ""
+
+#: app/controllers/registration_controller.rb:399
+#: app/controllers/registration_controller.rb:399
+msgid "A connection to the registration server could not be established."
+msgstr ""
+
+#: app/controllers/registration_controller.rb:403
+#: app/controllers/registration_controller.rb:403
+msgid "The supplied registration data was invalid."
+msgstr ""
+
+#: app/controllers/registration_controller.rb:407
+#: app/controllers/registration_controller.rb:407
+msgid "The registration code you entered was invalid."
+msgstr ""
+
+#: app/controllers/registration_controller.rb:413
+#: app/controllers/registration_controller.rb:413
+msgid "The transmitted registration data created a conflict."
+msgstr ""
+
+#: app/controllers/registration_controller.rb:421
+#: app/controllers/registration_controller.rb:421
+msgid ""
+"Registration can not be performed. There is no product installed that can be "
+"registered."
+msgstr ""
+
+#: app/controllers/registration_controller.rb:436
+#: app/controllers/registration_controller.rb:436
+msgid ""
+"A connection to the registration server could not be established or it did "
+"not reply."
+msgstr ""
+
+#: app/controllers/registration_controller.rb:453
+#: app/controllers/registration_controller.rb:453
+msgid "The registration server returned invalid data."
+msgstr ""
+
+#: app/views/registration/index.rhtml:53 app/views/registration/index.rhtml:54
+#: app/views/registration/index.rhtml:53 app/views/registration/index.rhtml:54
+#, fuzzy
+msgid "Please enter a valid Email address."
+msgstr "Το '%s' δεν είναι έγκυρη διεύθυνση ip."
+
+#: app/views/registration/index.rhtml:61 app/views/registration/index.rhtml:61
+msgid "register plugin"
+msgstr ""
+
+#: app/views/registration/index.rhtml:61 app/views/registration/index.rhtml:61
+#: shortcuts.yml:6
+#, fuzzy
+msgid "Registration"
+msgstr "&Διαχείριση"
+
+#: app/views/registration/index.rhtml:69 app/views/registration/index.rhtml:69
+#, fuzzy
+msgid "Registration Information"
+msgstr "Πληροφορίες Δίσκου"
+
+#: app/views/registration/index.rhtml:70 app/views/registration/index.rhtml:70
+msgid "This system is registered"
+msgstr ""
+
+#: app/views/registration/index.rhtml:71 app/views/registration/index.rhtml:71
+#, fuzzy
+msgid "System number (GUID)"
+msgstr "Σύστημα"
+
+#: app/views/registration/index.rhtml:72 app/views/registration/index.rhtml:72
+#, fuzzy
+msgid "Register again"
+msgstr "&Διαχείριση"
+
+#: app/views/registration/index.rhtml:79 app/views/registration/index.rhtml:79
+#, fuzzy
+msgid "Next"
+msgstr "Επόμε&νο"
+
+#: app/views/registration/index.rhtml:89 app/views/registration/index.rhtml:89
+#, fuzzy
+msgid "Mandatory Information"
+msgstr "Πληροφορίες Μνήμης"
+
+#: app/views/registration/index.rhtml:104
+#: app/views/registration/index.rhtml:104
+#, fuzzy
+msgid "Details"
+msgstr "&Λεπτομέρειες"
+
+#: app/views/registration/index.rhtml:128
+#: app/views/registration/index.rhtml:128
+#, fuzzy
+msgid "Postpone"
+msgstr "Μετά-διακοπή"
+
+#: shortcuts.yml:7
+#, fuzzy
+msgid "System Registration"
+msgstr "&Διαχείριση"
+
+#, fuzzy
+#~| msgid "&Administration"
+#~ msgid "Registration did not finish."
+#~ msgstr "&Διαχείριση"
+
+#, fuzzy
+#~| msgid "r"
+#~ msgid "or"
+#~ msgstr "r"
+
+#, fuzzy
+#~| msgid "An error occurred during the installation."
+#~ msgid "An error occurred during registration. Please try again."
+#~ msgstr "Προκλήθηκε σφάλμα κατά τη διάρκεια της εγκατάστασης."
+
+#, fuzzy
+#~| msgid "An error occurred while reading from the installation source."
+#~ msgid "Error occured while connecting to registration server."
+#~ msgstr "Ένα σφάλμα προκλήθηκε κατα την ανάγνωση από την πηγή εγκατάστασης."
+
+#, fuzzy
+#~| msgid "&Details"
+#~ msgid "Detail"
+#~ msgstr "&Λεπτομέρειες"
+
+#, fuzzy
+#~| msgid "Change &Position"
+#~ msgid "Changed Repositories"
+#~ msgstr "Αλλαγή &θέσης"
+
+#, fuzzy
+#~| msgid "Change &Position"
+#~ msgid "Changed Services"
+#~ msgstr "Αλλαγή &θέσης"
+
+# cancel button label
+#~ msgid "Cancel"
+#~ msgstr "Ακύρωση"

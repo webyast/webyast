@@ -1,0 +1,286 @@
+# Catalan message file for YaST2 (@memory@).
+# Copyright (C) 2005 SUSE Linux Products GmbH.
+# Copyright (C) 2002 SuSE Linux AG.
+# Copyright (C) 2000, 2001 SuSE GmbH.
+# Jaume Badiella <myotis@drac.com>, 2001.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: webyast-registration-ui 1.0.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2010-08-02 09:19+0200\n"
+"PO-Revision-Date: 2002-02-08 15:47+0100\n"
+"Last-Translator: Jordi Bruguera i Cortada <jordi@grn.es>\n"
+"Language-Team: Catalan\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"#-#-#-#-#  compendi_yast_11.1_11.2_e.po (YaST (@memory@))  #-#-#-#-#\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"#-#-#-#-#  isns.ca.po (YaST (@memory@))  #-#-#-#-#\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: app/controllers/registration_controller.rb:32
+#: app/controllers/registration_controller.rb:32
+msgid "Email"
+msgstr "Correu electrònic"
+
+#: app/controllers/registration_controller.rb:33
+#: app/controllers/registration_controller.rb:33
+msgid "System name"
+msgstr "Nom del sistema"
+
+#: app/controllers/registration_controller.rb:34
+#: app/controllers/registration_controller.rb:34
+msgid "SLES registration code"
+msgstr "Codi de registre de SLES"
+
+#: app/controllers/registration_controller.rb:35
+#: app/controllers/registration_controller.rb:35
+msgid "SLED registration code"
+msgstr "Codi de registre de SLED"
+
+#: app/controllers/registration_controller.rb:36
+#: app/controllers/registration_controller.rb:36
+msgid "Appliance registration code"
+msgstr "Codi de registre de l'aplicació incrustada"
+
+#: app/controllers/registration_controller.rb:37
+#: app/controllers/registration_controller.rb:37
+msgid "WebYaST registration code"
+msgstr "Codi de registre del WebYaST"
+
+#: app/controllers/registration_controller.rb:38
+#: app/controllers/registration_controller.rb:38
+msgid "Registration code"
+msgstr "Codi de registre"
+
+#: app/controllers/registration_controller.rb:39
+#: app/controllers/registration_controller.rb:39
+msgid "Hostname"
+msgstr "Nom de l'ordinador central"
+
+#: app/controllers/registration_controller.rb:40
+#: app/controllers/registration_controller.rb:40
+msgid "Device name"
+msgstr "Nom del sispositiu"
+
+#: app/controllers/registration_controller.rb:41
+#: app/controllers/registration_controller.rb:41
+msgid "Appliance name"
+msgstr "Nom de l'aplicació incrustada"
+
+#: app/controllers/registration_controller.rb:42
+#: app/controllers/registration_controller.rb:42
+msgid "registration code"
+msgstr "codi de registre"
+
+#: app/controllers/registration_controller.rb:52
+#: app/controllers/registration_controller.rb:52
+msgid "Invalid session, please login again."
+msgstr "La sessió no és vàlida. Torneu a iniciar la sessió."
+
+#: app/controllers/registration_controller.rb:62
+#: app/controllers/registration_controller.rb:62
+msgid "No permissions for registration"
+msgstr "No hi ha permisos per fer el registre"
+
+#: app/controllers/registration_controller.rb:111
+#: app/controllers/registration_controller.rb:111
+msgid "Please try to register again later."
+msgstr "Torneu a intentar de fer el registre més tard."
+
+#: app/controllers/registration_controller.rb:115
+#: app/controllers/registration_controller.rb:115
+msgid "Registration did not succeed."
+msgstr "El registre no ha funcionat correctament."
+
+#: app/controllers/registration_controller.rb:119
+#: app/controllers/registration_controller.rb:119
+msgid "Registration was skipped."
+msgstr "S'ha omès el registre."
+
+#: app/controllers/registration_controller.rb:123
+#: app/controllers/registration_controller.rb:123
+msgid "This may be a temporary issue."
+msgstr "Aquesta situació pot ser temoral."
+
+#: app/controllers/registration_controller.rb:127
+#: app/controllers/registration_controller.rb:127
+msgid "The system might not receive necessary updates."
+msgstr ""
+
+#: app/controllers/registration_controller.rb:143
+#: app/controllers/registration_controller.rb:143
+msgid "The registration server returned invalid or incomplete data."
+msgstr "El servidor de registre ha retornat dades no vàlides o incompletes."
+
+#: app/controllers/registration_controller.rb:151
+#: app/controllers/registration_controller.rb:151
+msgid "Could not read the registration configuration."
+msgstr "No s'ha pogut llegir la configuració del registre."
+
+#: app/controllers/registration_controller.rb:151
+#: app/controllers/registration_controller.rb:151
+msgid "The registration backend is not installed correctly"
+msgstr "El servei de registre no s'ha instal·lat correctament"
+
+#: app/controllers/registration_controller.rb:152
+#: app/controllers/registration_controller.rb:152
+msgid "Please refer to your support contact."
+msgstr "Dirigiu-vos al vostre contacte de suport."
+
+#: app/controllers/registration_controller.rb:181
+#: app/controllers/registration_controller.rb:181
+msgid "Please fill out missing entries."
+msgstr "Completeu els valors que falten."
+
+#: app/controllers/registration_controller.rb:213
+#: app/controllers/registration_controller.rb:213
+msgid "Service added:"
+msgstr "El servei ha estat afegit:"
+
+#: app/controllers/registration_controller.rb:217
+#: app/controllers/registration_controller.rb:223
+#: app/controllers/registration_controller.rb:217
+#: app/controllers/registration_controller.rb:223
+msgid "Catalog enabled:"
+msgstr "El catàleg ha estat habilitat:"
+
+#: app/controllers/registration_controller.rb:250
+#: app/controllers/registration_controller.rb:250
+msgid "Repository added:"
+msgstr "S'ha afegit el dipòsit."
+
+#: app/controllers/registration_controller.rb:326
+#: app/controllers/registration_controller.rb:326
+msgid "This system is already registered."
+msgstr "Aquest sistema ja ha estat registrat anteriorment."
+
+#: app/controllers/registration_controller.rb:355
+#: app/controllers/registration_controller.rb:355
+msgid "Registration finished successfully."
+msgstr "El registre ha finalitzat correctament"
+
+#: app/controllers/registration_controller.rb:365
+#: app/controllers/registration_controller.rb:365
+msgid ""
+"<p><b>Repositories were not modified during the registration process.</b></"
+"p><p>It is likely that an incorrect registration code was used. If this is "
+"the case, please attempt the registration process again to get an update "
+"repository.</p><p>Please make sure that this system has an update repository "
+"configured, otherwise it will not receive updates.</p>"
+msgstr ""
+"<p><b>Els dipòsits no han estat modificats durant el procés de registre.</"
+"b></p><p>És probable que el codi de registe emprat no sigui vàlid. Si és el "
+"cas, torneu-ho a provar el procés de registre per obtenir un dipòsit "
+"d'actualitzacions.</p><p>Assegureu-vos que aquest sistema té un dipòsit "
+"d'actualitzacions configurat, d'altre manera el sistema no podrà rebre "
+"actualitzacions.</p>"
+
+#: app/controllers/registration_controller.rb:399
+#: app/controllers/registration_controller.rb:399
+msgid "A connection to the registration server could not be established."
+msgstr "No s'ha pogut establir la connexió amb el servidor de registre."
+
+#: app/controllers/registration_controller.rb:403
+#: app/controllers/registration_controller.rb:403
+#, fuzzy
+msgid "The supplied registration data was invalid."
+msgstr "Les dades de registre transmeses han creat un conflicte."
+
+#: app/controllers/registration_controller.rb:407
+#: app/controllers/registration_controller.rb:407
+#, fuzzy
+msgid "The registration code you entered was invalid."
+msgstr "El servidor de registre ha retornat dades que son vàlides."
+
+#: app/controllers/registration_controller.rb:413
+#: app/controllers/registration_controller.rb:413
+msgid "The transmitted registration data created a conflict."
+msgstr "Les dades de registre transmeses han creat un conflicte."
+
+#: app/controllers/registration_controller.rb:421
+#: app/controllers/registration_controller.rb:421
+msgid ""
+"Registration can not be performed. There is no product installed that can be "
+"registered."
+msgstr ""
+"No s'ha pogut fer el registre. No hi ha cap producte instal·lat que pugui "
+"ser registrat."
+
+#: app/controllers/registration_controller.rb:436
+#: app/controllers/registration_controller.rb:436
+msgid ""
+"A connection to the registration server could not be established or it did "
+"not reply."
+msgstr ""
+"No s'ha pogut establir la connexió amb el servidor de registre o  no s'ha "
+"obtingut cap resposta."
+
+#: app/controllers/registration_controller.rb:453
+#: app/controllers/registration_controller.rb:453
+msgid "The registration server returned invalid data."
+msgstr "El servidor de registre ha retornat dades que son vàlides."
+
+#: app/views/registration/index.rhtml:53 app/views/registration/index.rhtml:54
+#: app/views/registration/index.rhtml:53 app/views/registration/index.rhtml:54
+msgid "Please enter a valid Email address."
+msgstr "Introduïu una adreça de correu electrònic vàlida."
+
+#: app/views/registration/index.rhtml:61 app/views/registration/index.rhtml:61
+msgid "register plugin"
+msgstr "connector de registre"
+
+#: app/views/registration/index.rhtml:61 app/views/registration/index.rhtml:61
+#: shortcuts.yml:6
+msgid "Registration"
+msgstr "Registre"
+
+#: app/views/registration/index.rhtml:69 app/views/registration/index.rhtml:69
+msgid "Registration Information"
+msgstr "Informació sobre el registre"
+
+#: app/views/registration/index.rhtml:70 app/views/registration/index.rhtml:70
+msgid "This system is registered"
+msgstr "Aquest sistema està registrat."
+
+#: app/views/registration/index.rhtml:71 app/views/registration/index.rhtml:71
+msgid "System number (GUID)"
+msgstr "Número de sistema (GUID)"
+
+#: app/views/registration/index.rhtml:72 app/views/registration/index.rhtml:72
+msgid "Register again"
+msgstr "Torneu a registrar"
+
+#: app/views/registration/index.rhtml:79 app/views/registration/index.rhtml:79
+msgid "Next"
+msgstr "Següent"
+
+#: app/views/registration/index.rhtml:89 app/views/registration/index.rhtml:89
+msgid "Mandatory Information"
+msgstr "Informació obligatòria"
+
+#: app/views/registration/index.rhtml:104
+#: app/views/registration/index.rhtml:104
+msgid "Details"
+msgstr "Detalls"
+
+#: app/views/registration/index.rhtml:128
+#: app/views/registration/index.rhtml:128
+msgid "Postpone"
+msgstr "Posposar"
+
+#: shortcuts.yml:7
+#, fuzzy
+msgid "System Registration"
+msgstr "Registre"
+
+#~ msgid "Registration did not finish."
+#~ msgstr "El registre no ha finalitzat."
+
+#~ msgid "Skip"
+#~ msgstr "Omet"
+
+#~ msgid "or"
+#~ msgstr "o"

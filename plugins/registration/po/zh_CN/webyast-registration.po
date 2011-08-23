@@ -1,0 +1,221 @@
+# Copyright (C) 2006 SuSE Linux Products GmbH, Nuernberg
+# This file is distributed under the same license as the package.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: webyast-registration-ui\n"
+"POT-Creation-Date: 2010-08-18 10:19+0200\n"
+"PO-Revision-Date: 2010-08-26 09:33\n"
+"Last-Translator: Novell Language <language@novell.com>\n"
+"Language-Team: Novell Language <language@novell.com>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+
+#: app/controllers/registration_controller.rb:32 ./app/controllers/registration_controller.rb:32
+msgid "Email"
+msgstr "电子邮件"
+
+#: app/controllers/registration_controller.rb:33 ./app/controllers/registration_controller.rb:33
+msgid "System name"
+msgstr "系统名称"
+
+#: app/controllers/registration_controller.rb:34 ./app/controllers/registration_controller.rb:34
+msgid "SLES registration code"
+msgstr "SLES 注册代码"
+
+#: app/controllers/registration_controller.rb:35 ./app/controllers/registration_controller.rb:35
+msgid "SLED registration code"
+msgstr "SLED 注册代码"
+
+#: app/controllers/registration_controller.rb:36 ./app/controllers/registration_controller.rb:36
+msgid "Appliance registration code"
+msgstr "设备注册代码"
+
+#: app/controllers/registration_controller.rb:37 ./app/controllers/registration_controller.rb:37
+msgid "WebYaST registration code"
+msgstr "WebYaST 注册代码"
+
+#: app/controllers/registration_controller.rb:38 ./app/controllers/registration_controller.rb:38
+msgid "Registration code"
+msgstr "注册代码"
+
+#: app/controllers/registration_controller.rb:39 ./app/controllers/registration_controller.rb:39
+msgid "Hostname"
+msgstr "主机名"
+
+#: app/controllers/registration_controller.rb:40 ./app/controllers/registration_controller.rb:40
+msgid "Device name"
+msgstr "设备名"
+
+#: app/controllers/registration_controller.rb:41 ./app/controllers/registration_controller.rb:41
+msgid "Appliance name"
+msgstr "设备名"
+
+#: app/controllers/registration_controller.rb:42 ./app/controllers/registration_controller.rb:42
+msgid "registration code"
+msgstr "注册代码"
+
+#: app/controllers/registration_controller.rb:52 ./app/controllers/registration_controller.rb:52
+msgid "Invalid session, please login again."
+msgstr "会话无效，请重新登录。"
+
+#: app/controllers/registration_controller.rb:62 ./app/controllers/registration_controller.rb:62
+msgid "No permissions for registration"
+msgstr "没有注册许可权限"
+
+#: app/controllers/registration_controller.rb:111 ./app/controllers/registration_controller.rb:111
+msgid "Please try to register again later."
+msgstr "请尝试稍后再次注册。"
+
+#: app/controllers/registration_controller.rb:115 ./app/controllers/registration_controller.rb:115
+msgid "Registration did not succeed."
+msgstr "注册未成功。"
+
+#: app/controllers/registration_controller.rb:119 ./app/controllers/registration_controller.rb:119
+msgid "Registration was skipped."
+msgstr "已跳过注册。"
+
+#: app/controllers/registration_controller.rb:123 ./app/controllers/registration_controller.rb:123
+msgid "This may be a temporary issue."
+msgstr "这可能是临时性问题。"
+
+#: app/controllers/registration_controller.rb:127 ./app/controllers/registration_controller.rb:127
+msgid "The system might not receive necessary updates."
+msgstr "系统可能未收到所需更新。"
+
+#: app/controllers/registration_controller.rb:143 ./app/controllers/registration_controller.rb:143
+msgid "The registration server returned invalid or incomplete data."
+msgstr "注册服务器返回的数据无效或不完整。"
+
+#: app/controllers/registration_controller.rb:151 ./app/controllers/registration_controller.rb:151
+msgid "Could not read the registration configuration."
+msgstr "无法读取注册配置。"
+
+#: app/controllers/registration_controller.rb:151 ./app/controllers/registration_controller.rb:151
+msgid "The registration backend is not installed correctly"
+msgstr "未正确安装注册后端"
+
+#: app/controllers/registration_controller.rb:152 ./app/controllers/registration_controller.rb:152
+msgid "Please refer to your support contact."
+msgstr "请咨询您的支持服务联系人。"
+
+#: app/controllers/registration_controller.rb:181 ./app/controllers/registration_controller.rb:181
+msgid "Please fill out missing entries."
+msgstr "请填写缺少项。"
+
+#: app/controllers/registration_controller.rb:213 ./app/controllers/registration_controller.rb:213
+msgid "Service added:"
+msgstr "已添加服务："
+
+#: app/controllers/registration_controller.rb:217 app/controllers/registration_controller.rb:223
+#: ./app/controllers/registration_controller.rb:217 ./app/controllers/registration_controller.rb:223
+msgid "Catalog enabled:"
+msgstr "编目已启用："
+
+#: app/controllers/registration_controller.rb:250 ./app/controllers/registration_controller.rb:250
+msgid "Repository added:"
+msgstr "已添加安装源："
+
+#: app/controllers/registration_controller.rb:326 ./app/controllers/registration_controller.rb:326
+msgid "This system is already registered."
+msgstr "此系统已注册。"
+
+#: app/controllers/registration_controller.rb:355 ./app/controllers/registration_controller.rb:355
+msgid "Registration finished successfully."
+msgstr "注册已成功完成。"
+
+#: app/controllers/registration_controller.rb:365 ./app/controllers/registration_controller.rb:365
+msgid "<p><b>Repositories were not modified during the registration process.</b></p><p>It is likely that an incorrect registration code was used. If this is the case, please attempt the registration process again to get an update repository.</p><p>Please make sure that this system has an update repository configured, otherwise it will not receive updates.</p>"
+msgstr "<p><b>安装源在注册过程中未修改。</b></p><p>很可能使用的注册代码错误。如果是这样，请尝试再次注册来更新安装源。</p><p>请确保该系统配置了更新安装源，否则它不会接收更新。</p>"
+
+#: app/controllers/registration_controller.rb:399 ./app/controllers/registration_controller.rb:399
+msgid "A connection to the registration server could not be established."
+msgstr "无法建立与注册服务器的连接。"
+
+#: app/controllers/registration_controller.rb:403 ./app/controllers/registration_controller.rb:403
+msgid "The supplied registration data was invalid."
+msgstr "提供的注册数据无效。"
+
+#: app/controllers/registration_controller.rb:407 ./app/controllers/registration_controller.rb:407
+msgid "The registration code you entered was invalid."
+msgstr "输入的注册代码无效。"
+
+#: app/controllers/registration_controller.rb:413 ./app/controllers/registration_controller.rb:413
+msgid "The transmitted registration data created a conflict."
+msgstr "传输的注册数据造成了冲突。"
+
+#: app/controllers/registration_controller.rb:421 ./app/controllers/registration_controller.rb:421
+msgid "Registration can not be performed. There is no product installed that can be registered."
+msgstr "无法执行注册。没有安装可注册的产品。"
+
+#: app/controllers/registration_controller.rb:436 ./app/controllers/registration_controller.rb:436
+msgid "A connection to the registration server could not be established or it did not reply."
+msgstr "无法建立与注册服务器的连接，或者它没有答复。"
+
+#: app/controllers/registration_controller.rb:453 ./app/controllers/registration_controller.rb:453
+msgid "The registration server returned invalid data."
+msgstr "注册服务器返回无效数据。"
+
+#: app/views/registration/index.rhtml:53 app/views/registration/index.rhtml:54
+#: ./app/views/registration/index.rhtml:53 ./app/views/registration/index.rhtml:54
+msgid "Please enter a valid Email address."
+msgstr "请输入有效的电子邮件地址。"
+
+#: app/views/registration/index.rhtml:61 ./app/views/registration/index.rhtml:61
+msgid "register plugin"
+msgstr "注册插件"
+
+#: app/views/registration/index.rhtml:61 ./app/views/registration/index.rhtml:61 ./shortcuts.yml:6
+msgid "Registration"
+msgstr "注册"
+
+#: app/views/registration/index.rhtml:69 ./app/views/registration/index.rhtml:69
+msgid "Registration Information"
+msgstr "注册信息"
+
+#: app/views/registration/index.rhtml:70 ./app/views/registration/index.rhtml:70
+msgid "This system is registered"
+msgstr "此系统已注册"
+
+#: app/views/registration/index.rhtml:71 ./app/views/registration/index.rhtml:71
+msgid "System number (GUID)"
+msgstr "系统编号 (GUID)"
+
+#: app/views/registration/index.rhtml:72 ./app/views/registration/index.rhtml:72
+msgid "Register again"
+msgstr "重新注册"
+
+#: app/views/registration/index.rhtml:79 ./app/views/registration/index.rhtml:79
+msgid "Next"
+msgstr "下一项"
+
+#: app/views/registration/index.rhtml:89 ./app/views/registration/index.rhtml:89
+msgid "Mandatory Information"
+msgstr "必需信息"
+
+#: app/views/registration/index.rhtml:104 ./app/views/registration/index.rhtml:104
+msgid "Details"
+msgstr "细节"
+
+#: app/views/registration/index.rhtml:128 ./app/views/registration/index.rhtml:128
+msgid "Postpone"
+msgstr "延迟"
+
+#: ./shortcuts.yml:7
+msgid "System Registration"
+msgstr "系统注册"
+
+#: app/models/registration_state.rb:30 ./app/models/registration_state.rb:30
+msgid "Registration is missing"
+msgstr "缺少注册信息"
+
+#: app/models/registration_state.rb:31 ./app/models/registration_state.rb:31
+msgid "Please register your system in order to get updates."
+msgstr "请注册您的系统以获取更新。"
+
+#: app/models/registration_state.rb:34 ./app/models/registration_state.rb:34
+msgid "register"
+msgstr "注册"
+

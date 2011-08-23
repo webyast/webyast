@@ -1,0 +1,311 @@
+# @TITLE@
+# Copyright (C) 2006, SUSE Linux GmbH, Nuremberg
+#
+# This file is distributed under the same license as @PACKAGE@ package. FIRST
+#
+# Rev. Ivan Petrouchtchak <fr.ivan@ukrainian-orthodox.org>, 2010.
+msgid ""
+msgstr ""
+"Project-Id-Version: webyast-registration-ui 1.0.0\n"
+"POT-Creation-Date: 2010-08-02 09:19+0200\n"
+"PO-Revision-Date: 2010-04-15 22:03-0700\n"
+"Last-Translator: Rev. Ivan Petrouchtchak <fr.ivan@ukrainian-orthodox.org>\n"
+"Language-Team: Ukrainian <kde-i18n-doc@kde.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Lokalize 1.0\n"
+"Plural-Forms: nplurals=3; plural=n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%"
+"10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
+
+#: app/controllers/registration_controller.rb:32
+#: app/controllers/registration_controller.rb:32
+msgid "Email"
+msgstr "Ел. пошта"
+
+#: app/controllers/registration_controller.rb:33
+#: app/controllers/registration_controller.rb:33
+msgid "System name"
+msgstr "Назва системи"
+
+#: app/controllers/registration_controller.rb:34
+#: app/controllers/registration_controller.rb:34
+msgid "SLES registration code"
+msgstr "Код реєстрації SLES"
+
+#: app/controllers/registration_controller.rb:35
+#: app/controllers/registration_controller.rb:35
+msgid "SLED registration code"
+msgstr "Код реєстрації SLED"
+
+#: app/controllers/registration_controller.rb:36
+#: app/controllers/registration_controller.rb:36
+msgid "Appliance registration code"
+msgstr "Код реєстрацій приладу"
+
+#: app/controllers/registration_controller.rb:37
+#: app/controllers/registration_controller.rb:37
+msgid "WebYaST registration code"
+msgstr "Реєстраційний код WebYaST"
+
+#: app/controllers/registration_controller.rb:38
+#: app/controllers/registration_controller.rb:38
+msgid "Registration code"
+msgstr "Реєстраційний код"
+
+#: app/controllers/registration_controller.rb:39
+#: app/controllers/registration_controller.rb:39
+msgid "Hostname"
+msgstr "Назва вузла"
+
+#: app/controllers/registration_controller.rb:40
+#: app/controllers/registration_controller.rb:40
+msgid "Device name"
+msgstr "Назва пристрою"
+
+#: app/controllers/registration_controller.rb:41
+#: app/controllers/registration_controller.rb:41
+msgid "Appliance name"
+msgstr "Назва приладу"
+
+#: app/controllers/registration_controller.rb:42
+#: app/controllers/registration_controller.rb:42
+msgid "registration code"
+msgstr "реєстраційний код"
+
+#: app/controllers/registration_controller.rb:52
+#: app/controllers/registration_controller.rb:52
+msgid "Invalid session, please login again."
+msgstr "Нечинний сеанс. Будь ласка, увійдіть знов."
+
+#: app/controllers/registration_controller.rb:62
+#: app/controllers/registration_controller.rb:62
+msgid "No permissions for registration"
+msgstr "Немає дозволу на реєстрацію"
+
+# %s is FTP or HTTP
+#: app/controllers/registration_controller.rb:111
+#: app/controllers/registration_controller.rb:111
+msgid "Please try to register again later."
+msgstr "Будь ласка, спробуйте пізніше знов зареєструватись."
+
+#: app/controllers/registration_controller.rb:115
+#: app/controllers/registration_controller.rb:115
+msgid "Registration did not succeed."
+msgstr "Реєстрація не була успішною."
+
+#: app/controllers/registration_controller.rb:119
+#: app/controllers/registration_controller.rb:119
+msgid "Registration was skipped."
+msgstr "Реєстрацію пропущено."
+
+#: app/controllers/registration_controller.rb:123
+#: app/controllers/registration_controller.rb:123
+msgid "This may be a temporary issue."
+msgstr "Можливо, це тимчасова проблема."
+
+#: app/controllers/registration_controller.rb:127
+#: app/controllers/registration_controller.rb:127
+msgid "The system might not receive necessary updates."
+msgstr ""
+
+#: app/controllers/registration_controller.rb:143
+#: app/controllers/registration_controller.rb:143
+msgid "The registration server returned invalid or incomplete data."
+msgstr "Сервер реєстрації повернув нечинні або неповні дані."
+
+#: app/controllers/registration_controller.rb:151
+#: app/controllers/registration_controller.rb:151
+msgid "Could not read the registration configuration."
+msgstr ""
+
+#: app/controllers/registration_controller.rb:151
+#: app/controllers/registration_controller.rb:151
+msgid "The registration backend is not installed correctly"
+msgstr ""
+
+#: app/controllers/registration_controller.rb:152
+#: app/controllers/registration_controller.rb:152
+msgid "Please refer to your support contact."
+msgstr ""
+
+#: app/controllers/registration_controller.rb:181
+#: app/controllers/registration_controller.rb:181
+msgid "Please fill out missing entries."
+msgstr "Будь ласка, заповніть всі поля."
+
+#: app/controllers/registration_controller.rb:213
+#: app/controllers/registration_controller.rb:213
+msgid "Service added:"
+msgstr "Додана служба:"
+
+#: app/controllers/registration_controller.rb:217
+#: app/controllers/registration_controller.rb:223
+#: app/controllers/registration_controller.rb:217
+#: app/controllers/registration_controller.rb:223
+msgid "Catalog enabled:"
+msgstr "Увімкнено каталог:"
+
+#: app/controllers/registration_controller.rb:250
+#: app/controllers/registration_controller.rb:250
+msgid "Repository added:"
+msgstr "Додане сховище:"
+
+#: app/controllers/registration_controller.rb:326
+#: app/controllers/registration_controller.rb:326
+msgid "This system is already registered."
+msgstr "Ця система вже зареєстрована."
+
+#: app/controllers/registration_controller.rb:355
+#: app/controllers/registration_controller.rb:355
+msgid "Registration finished successfully."
+msgstr "Реєстрація закінчилась успішно."
+
+#: app/controllers/registration_controller.rb:365
+#: app/controllers/registration_controller.rb:365
+msgid ""
+"<p><b>Repositories were not modified during the registration process.</b></"
+"p><p>It is likely that an incorrect registration code was used. If this is "
+"the case, please attempt the registration process again to get an update "
+"repository.</p><p>Please make sure that this system has an update repository "
+"configured, otherwise it will not receive updates.</p>"
+msgstr ""
+"<p><b>Сховища не були змінені під час процесу реєстрації.</b></p><p>Можливо, "
+"було використано неправильний реєстраційний код. У цьому випадку, знову "
+"спробуйте повторити процес реєстрації, щоб отримати сховище оновлення.</"
+"p><p>Переконайтесь, що в системі налаштовано сховище оновлення, інакше вона "
+"не зможе отримувати оновлення.</p>"
+
+#: app/controllers/registration_controller.rb:399
+#: app/controllers/registration_controller.rb:399
+msgid "A connection to the registration server could not be established."
+msgstr "Не вдалося зв'язатись з сервером реєстрації."
+
+#: app/controllers/registration_controller.rb:403
+#: app/controllers/registration_controller.rb:403
+#, fuzzy
+msgid "The supplied registration data was invalid."
+msgstr "Передані реєстраційні дані створили конфлікт."
+
+#: app/controllers/registration_controller.rb:407
+#: app/controllers/registration_controller.rb:407
+#, fuzzy
+msgid "The registration code you entered was invalid."
+msgstr "Сервер реєстрації повернув нечинні дані."
+
+#: app/controllers/registration_controller.rb:413
+#: app/controllers/registration_controller.rb:413
+msgid "The transmitted registration data created a conflict."
+msgstr "Передані реєстраційні дані створили конфлікт."
+
+#: app/controllers/registration_controller.rb:421
+#: app/controllers/registration_controller.rb:421
+msgid ""
+"Registration can not be performed. There is no product installed that can be "
+"registered."
+msgstr ""
+"Реєстрація неможлива. Не встановлено продукту, який можна було б "
+"зареєструвати."
+
+#: app/controllers/registration_controller.rb:436
+#: app/controllers/registration_controller.rb:436
+msgid ""
+"A connection to the registration server could not be established or it did "
+"not reply."
+msgstr "Не вдалося зв'язатись з сервером реєстрації або він не відповідає."
+
+#: app/controllers/registration_controller.rb:453
+#: app/controllers/registration_controller.rb:453
+msgid "The registration server returned invalid data."
+msgstr "Сервер реєстрації повернув нечинні дані."
+
+#: app/views/registration/index.rhtml:53 app/views/registration/index.rhtml:54
+#: app/views/registration/index.rhtml:53 app/views/registration/index.rhtml:54
+msgid "Please enter a valid Email address."
+msgstr "Будь ласка, введіть чинну адресу ел. пошти."
+
+#: app/views/registration/index.rhtml:61 app/views/registration/index.rhtml:61
+msgid "register plugin"
+msgstr "додаток реєстрації"
+
+#: app/views/registration/index.rhtml:61 app/views/registration/index.rhtml:61
+#: shortcuts.yml:6
+msgid "Registration"
+msgstr "Реєстрація"
+
+#: app/views/registration/index.rhtml:69 app/views/registration/index.rhtml:69
+msgid "Registration Information"
+msgstr "Реєстраційна інформація"
+
+#: app/views/registration/index.rhtml:70 app/views/registration/index.rhtml:70
+msgid "This system is registered"
+msgstr "Ця система зареєстрована"
+
+#: app/views/registration/index.rhtml:71 app/views/registration/index.rhtml:71
+msgid "System number (GUID)"
+msgstr "Номер системи (GUID)"
+
+#: app/views/registration/index.rhtml:72 app/views/registration/index.rhtml:72
+msgid "Register again"
+msgstr "Зареєструйтесь знов"
+
+#: app/views/registration/index.rhtml:79 app/views/registration/index.rhtml:79
+msgid "Next"
+msgstr "Далі"
+
+#: app/views/registration/index.rhtml:89 app/views/registration/index.rhtml:89
+msgid "Mandatory Information"
+msgstr "Обов'язкова інформація"
+
+#: app/views/registration/index.rhtml:104
+#: app/views/registration/index.rhtml:104
+msgid "Details"
+msgstr "Подробиці"
+
+#: app/views/registration/index.rhtml:128
+#: app/views/registration/index.rhtml:128
+msgid "Postpone"
+msgstr "Відкласти"
+
+#: shortcuts.yml:7
+#, fuzzy
+msgid "System Registration"
+msgstr "Реєстрація"
+
+#~ msgid "Registration did not finish."
+#~ msgstr "Реєстрація не завершилась."
+
+#~ msgid "Skip"
+#~ msgstr "Пропустити"
+
+#~ msgid "or"
+#~ msgstr "або"
+
+#, fuzzy
+#~| msgid "An error occurred during the installation."
+#~ msgid "An error occurred during registration. Please try again."
+#~ msgstr "Під час встановлення трапилась помилка."
+
+#, fuzzy
+#~| msgid "An error occurred while reading from the installation source."
+#~ msgid "Error occured while connecting to registration server."
+#~ msgstr "Під час читання з джерела встановлення трапилась помилка."
+
+#, fuzzy
+#~| msgid "Details"
+#~ msgid "Detail"
+#~ msgstr "Подробиці"
+
+#, fuzzy
+#~| msgid "Error reading repositories:"
+#~ msgid "Changed Repositories"
+#~ msgstr "Помилка читання сховищ:"
+
+#, fuzzy
+#~| msgid "Changed profiles"
+#~ msgid "Changed Services"
+#~ msgstr "Змінені профілі"
+
+# cancel button label
+#~ msgid "Cancel"
+#~ msgstr "Скасувати"

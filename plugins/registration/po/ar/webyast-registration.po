@@ -1,0 +1,191 @@
+# Copyright (C) 2006 SuSE Linux Products GmbH, Nuernberg
+# This file is distributed under the same license as the package.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: yast_webclient_registration\n"
+"POT-Creation-Date: 2010-03-30 10:01+0200\n"
+"PO-Revision-Date: 2010-04-08 11:19\n"
+"Last-Translator: Novell Language <language@novell.com>\n"
+"Language-Team: Novell Language <language@novell.com>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: app/controllers/registration_controller.rb:11
+msgid "Email"
+msgstr "البريد الإلكتروني"
+
+#: app/controllers/registration_controller.rb:12
+msgid "System name"
+msgstr "تحديث النظام"
+
+#: app/controllers/registration_controller.rb:13
+msgid "SLES registration code"
+msgstr "رمز التسجيل"
+
+#: app/controllers/registration_controller.rb:14
+msgid "SLED registration code"
+msgstr "رمز التسجيل"
+
+#: app/controllers/registration_controller.rb:15
+msgid "Appliance registration code"
+msgstr "رمز تسجيل الجهاز"
+
+#: app/controllers/registration_controller.rb:16
+msgid "WebYaST registration code"
+msgstr "رمز تسجيل WebYaST"
+
+#: app/controllers/registration_controller.rb:17
+msgid "Registration code"
+msgstr "رمز التسجيل"
+
+#: app/controllers/registration_controller.rb:18
+msgid "Hostname"
+msgstr "اسم المضيف"
+
+#: app/controllers/registration_controller.rb:19
+msgid "Device name"
+msgstr "اسم الجهاز"
+
+#: app/controllers/registration_controller.rb:20
+msgid "Appliance name"
+msgstr "اسم الجهاز"
+
+#: app/controllers/registration_controller.rb:21
+msgid "registration code"
+msgstr "رمز التسجيل"
+
+#: app/controllers/registration_controller.rb:30
+msgid "Invalid session, please login again."
+msgstr "جلسة عمل غير صالحة، الرجاء الدخول مرة أخرى."
+
+#: app/controllers/registration_controller.rb:41
+msgid "No permissions for registration"
+msgstr "لا توجد أذونات للتسجيل"
+
+#: app/controllers/registration_controller.rb:84
+msgid "Please try to register again later."
+msgstr "الرجاء محاولة التسجيل لاحقًا."
+
+#: app/controllers/registration_controller.rb:88
+msgid "Registration was skipped."
+msgstr "تم تخطي عملية الإنشاء"
+
+#: app/controllers/registration_controller.rb:94
+msgid "Registration did not finish."
+msgstr "لم يتم إنهاء التسجيل"
+
+#: app/controllers/registration_controller.rb:95
+msgid "Registration did not succeed."
+msgstr "لم ينجح التسجيل"
+
+#: app/controllers/registration_controller.rb:97
+msgid "This may be a temporary issue."
+msgstr "قد تكون هذه مشكلة مؤقتة."
+
+#: app/controllers/registration_controller.rb:102
+msgid "The registration server returned invalid or incomplete data."
+msgstr "نتج عن خادم التسجيل بيانات غير صالحة أو غير مكتملة."
+
+#: app/controllers/registration_controller.rb:134
+msgid "Please fill out missing entries."
+msgstr "الرجاء ملء الإدخالات المفقودة."
+
+#: app/controllers/registration_controller.rb:155
+msgid "Service added:"
+msgstr "الخدمة المضافة:"
+
+#: app/controllers/registration_controller.rb:159 app/controllers/registration_controller.rb:164
+msgid "Catalog enabled:"
+msgstr "تم تمكين الكتالوج:"
+
+#: app/controllers/registration_controller.rb:188
+msgid "Repository added:"
+msgstr "المخزن المضاف:"
+
+#: app/controllers/registration_controller.rb:248
+msgid "This system is already registered."
+msgstr "هذا النظام مسجل"
+
+#: app/controllers/registration_controller.rb:277
+msgid "Registration finished successfully."
+msgstr "انتهى التسجيل بنجاح."
+
+#: app/controllers/registration_controller.rb:290
+msgid "<p><b>Repositories were not modified during the registration process.</b></p><p>It is likely that an incorrect registration code was used. If this is the case, please attempt the registration process again to get an update repository.</p><p>Please make sure that this system has an update repository configured, otherwise it will not receive updates.</p>"
+msgstr "<p><b>لم يتم تعديل المخازن أثناء عملية التسجيل.</b></p><p>من المحتمل أن يكون قد تم استخدام رمز تسجيل غير صحيح. إذا كان ذلك هو الذي حدث، الرجاء محاولة إكمال عملية التسجيل مرة أخرى للحصول على مخزن محدَّث.</p><p>الرجاء التأكد من أنه قد تم تكوين مخزن محدث للنظام، وإلا فلن يتلقى تحديثًا.</p>"
+
+#: app/controllers/registration_controller.rb:324
+msgid "A connection to the registration server could not be established."
+msgstr "يتعذر تأسيس الاتصال بخادم LDAP."
+
+#: app/controllers/registration_controller.rb:328
+msgid "The transmitted registration data created a conflict."
+msgstr "نتج عن بيانات التسجيل التي تم إرسالها تعارض."
+
+#: app/controllers/registration_controller.rb:336
+msgid "Registration can not be performed. There is no product installed that can be registered."
+msgstr "لا يمكن إجراء التسجيل. لا يوجد أي منتج مثبت يمكن تسجيله."
+
+#: app/controllers/registration_controller.rb:351
+msgid "A connection to the registration server could not be established or it did not reply."
+msgstr "تعذر إنشاء اتصال بخادم التسجيل أو أنه لم يستجب."
+
+#: app/controllers/registration_controller.rb:368
+msgid "The registration server returned invalid data."
+msgstr "نتج عن خادم التسجيل بيانات غير صحيحة."
+
+#: app/views/registration/index.rhtml:28 app/views/registration/index.rhtml:29
+msgid "Please enter a valid Email address."
+msgstr "الرجاء إدخال عنوان بريد إلكتروني صالح."
+
+#: app/views/registration/index.rhtml:36
+msgid "register plugin"
+msgstr "أداة تسجيل إضافية"
+
+#: app/views/registration/index.rhtml:36
+msgid "Registration"
+msgstr "التسجيل"
+
+#: app/views/registration/index.rhtml:44
+msgid "Registration Information"
+msgstr "قراءة معلومات التثبيت"
+
+#: app/views/registration/index.rhtml:45
+msgid "This system is registered"
+msgstr "هذا النظام مسجل"
+
+#: app/views/registration/index.rhtml:46
+msgid "System number (GUID)"
+msgstr "رقم النظام (GUID)"
+
+#: app/views/registration/index.rhtml:47
+msgid "Register again"
+msgstr "التسجيل مرة أخرى"
+
+#: app/views/registration/index.rhtml:54
+msgid "Next"
+msgstr "التالي"
+
+#: app/views/registration/index.rhtml:64
+msgid "Mandatory Information"
+msgstr "معلومات الأجهزة"
+
+#: app/views/registration/index.rhtml:79
+msgid "Details"
+msgstr "التفاصيل"
+
+#: app/views/registration/index.rhtml:104
+msgid "Skip"
+msgstr "تخطي"
+
+#: app/views/registration/index.rhtml:105
+msgid "Postpone"
+msgstr "تأجيل"
+
+#: app/views/registration/index.rhtml:106
+msgid "or"
+msgstr "أو"
+

@@ -1,0 +1,109 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: @PACKAGE@\n"
+"Report-Msgid-Bugs-To: translation@suse.de\n"
+"POT-Creation-Date: 2009-11-20 14:35+0100\n"
+"PO-Revision-Date: 2001-07-17 16:27+0200\n"
+"Last-Translator: James Ogley <ogley@suse.co.uk>\n"
+"Language-Team: English <i18n@suse.de>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8-bit\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+
+#: app/controllers/registration_controller.rb:15
+msgid "Invalid session, please login again."
+msgstr ""
+
+#: app/controllers/registration_controller.rb:39
+#: app/controllers/registration_controller.rb:89
+msgid "No permissions for registration"
+msgstr ""
+
+#: app/controllers/registration_controller.rb:68
+msgid "Arguments for registration cannot be evaluated."
+msgstr ""
+
+#: app/controllers/registration_controller.rb:69
+#, fuzzy
+#| msgid "An error occurred during the installation."
+msgid "An error occurred during registration. Please try again."
+msgstr "An error occurred during the installation."
+
+#: app/controllers/registration_controller.rb:111
+msgid "Registration finished successfully."
+msgstr ""
+
+#: app/controllers/registration_controller.rb:119
+#, fuzzy
+#| msgid "Service Removed"
+msgid "Service added:"
+msgstr "Service Removed"
+
+#: app/controllers/registration_controller.rb:123
+#: app/controllers/registration_controller.rb:128
+#, fuzzy
+#| msgid "Catalog: "
+msgid "Catalog enabled:"
+msgstr "Catalogue: "
+
+#: app/controllers/registration_controller.rb:143
+#, fuzzy
+#| msgid "Repository: "
+msgid "Repository added:"
+msgstr "Repository: "
+
+#: app/controllers/registration_controller.rb:173
+msgid "Please fill out missing entries."
+msgstr ""
+
+#: app/controllers/registration_controller.rb:176
+#, fuzzy
+#| msgid "An error occurred while reading from the installation source."
+msgid "Error occured while connecting to registration server."
+msgstr "An error occurred while reading from the repository."
+
+#: app/views/registration/index.rhtml:1
+msgid "register plugin"
+msgstr ""
+
+#: app/views/registration/index.rhtml:1
+#, fuzzy
+#| msgid "&Administration"
+msgid "Registration"
+msgstr "&Administration"
+
+#: app/views/registration/index.rhtml:9
+msgid "This system is registered"
+msgstr ""
+
+#: app/views/registration/index.rhtml:10
+#, fuzzy
+#| msgid "System:"
+msgid "System's GUID:"
+msgstr "System:"
+
+#: app/views/registration/index.rhtml:11
+#, fuzzy
+#| msgid "&Administration"
+msgid "Register again"
+msgstr "&Administration"
+
+#: app/views/registration/index.rhtml:39
+#, fuzzy
+#| msgid "Details"
+msgid "Detail"
+msgstr "Details"
+
+#, fuzzy
+#~| msgid "Changed profiles"
+#~ msgid "Changed Repositories"
+#~ msgstr "Changed profiles"
+
+#, fuzzy
+#~| msgid "Changed profiles"
+#~ msgid "Changed Services"
+#~ msgstr "Changed profiles"
+
+#~ msgid "Cancel"
+#~ msgstr "Cancel"

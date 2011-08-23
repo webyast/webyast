@@ -1,0 +1,191 @@
+# Copyright (C) 2006 SuSE Linux Products GmbH, Nuernberg
+# This file is distributed under the same license as the package.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: yast_webclient_registration\n"
+"POT-Creation-Date: 2010-03-30 10:01+0200\n"
+"PO-Revision-Date: 2010-04-08 08:13\n"
+"Last-Translator: Novell Language <language@novell.com>\n"
+"Language-Team: Novell Language <language@novell.com>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: app/controllers/registration_controller.rb:11
+msgid "Email"
+msgstr "E-post"
+
+#: app/controllers/registration_controller.rb:12
+msgid "System name"
+msgstr "Systemnamn"
+
+#: app/controllers/registration_controller.rb:13
+msgid "SLES registration code"
+msgstr "SLES-registreringskod"
+
+#: app/controllers/registration_controller.rb:14
+msgid "SLED registration code"
+msgstr "SLED-registreringskod"
+
+#: app/controllers/registration_controller.rb:15
+msgid "Appliance registration code"
+msgstr "Produktregistreringskod"
+
+#: app/controllers/registration_controller.rb:16
+msgid "WebYaST registration code"
+msgstr "WebYaST-registreringskod"
+
+#: app/controllers/registration_controller.rb:17
+msgid "Registration code"
+msgstr "Registreringskod"
+
+#: app/controllers/registration_controller.rb:18
+msgid "Hostname"
+msgstr "Värddatornamn"
+
+#: app/controllers/registration_controller.rb:19
+msgid "Device name"
+msgstr "Enhetsnamn"
+
+#: app/controllers/registration_controller.rb:20
+msgid "Appliance name"
+msgstr "Produktnamn"
+
+#: app/controllers/registration_controller.rb:21
+msgid "registration code"
+msgstr "registreringskod"
+
+#: app/controllers/registration_controller.rb:30
+msgid "Invalid session, please login again."
+msgstr "Ogiltig session. Logga in igen."
+
+#: app/controllers/registration_controller.rb:41
+msgid "No permissions for registration"
+msgstr "Det finns inga behörigheter för registreringen"
+
+#: app/controllers/registration_controller.rb:84
+msgid "Please try to register again later."
+msgstr "Gör ett nytt försök med registreringen senare."
+
+#: app/controllers/registration_controller.rb:88
+msgid "Registration was skipped."
+msgstr "Registreringen hoppades över"
+
+#: app/controllers/registration_controller.rb:94
+msgid "Registration did not finish."
+msgstr "Registreringen slutfördes inte."
+
+#: app/controllers/registration_controller.rb:95
+msgid "Registration did not succeed."
+msgstr "Registreringen lyckades inte."
+
+#: app/controllers/registration_controller.rb:97
+msgid "This may be a temporary issue."
+msgstr "Detta kan vara ett tillfälligt problem."
+
+#: app/controllers/registration_controller.rb:102
+msgid "The registration server returned invalid or incomplete data."
+msgstr "Registreringsservern returnerade ogiltiga eller ofullständiga data."
+
+#: app/controllers/registration_controller.rb:134
+msgid "Please fill out missing entries."
+msgstr "Fyll i posterna som saknas."
+
+#: app/controllers/registration_controller.rb:155
+msgid "Service added:"
+msgstr "Tjänst som lagts till:"
+
+#: app/controllers/registration_controller.rb:159 app/controllers/registration_controller.rb:164
+msgid "Catalog enabled:"
+msgstr "Aktiverad katalog:"
+
+#: app/controllers/registration_controller.rb:188
+msgid "Repository added:"
+msgstr "Arkiv som lagts till:"
+
+#: app/controllers/registration_controller.rb:248
+msgid "This system is already registered."
+msgstr "Systemet är redan registrerat."
+
+#: app/controllers/registration_controller.rb:277
+msgid "Registration finished successfully."
+msgstr "Registreringen är slutförd."
+
+#: app/controllers/registration_controller.rb:290
+msgid "<p><b>Repositories were not modified during the registration process.</b></p><p>It is likely that an incorrect registration code was used. If this is the case, please attempt the registration process again to get an update repository.</p><p>Please make sure that this system has an update repository configured, otherwise it will not receive updates.</p>"
+msgstr "<p><b>Inga lagringsplatser ändrades under registreringen.</b></p><p>Förmodligen har en felaktig registreringskod använts. Prova igen om det stämmer så att du får tillgång till en lagringsplats för uppdateringar.</p><p>Kontrollera att systemet har konfigurerats med en lagringsplats för uppdateringar, annars går det inte att ta emot några uppdateringar.</p>"
+
+#: app/controllers/registration_controller.rb:324
+msgid "A connection to the registration server could not be established."
+msgstr "Det går inte att skapa en anslutning till registreringsservern."
+
+#: app/controllers/registration_controller.rb:328
+msgid "The transmitted registration data created a conflict."
+msgstr "Den överförda registreringsinformationen orsakade en konflikt."
+
+#: app/controllers/registration_controller.rb:336
+msgid "Registration can not be performed. There is no product installed that can be registered."
+msgstr "Registreringen går inte genomföra. Det finns ingen produkt som har installerats och kan registreras."
+
+#: app/controllers/registration_controller.rb:351
+msgid "A connection to the registration server could not be established or it did not reply."
+msgstr "Det gick inte att skapa en anslutningen till registreringsservern, eller också svarade den inte."
+
+#: app/controllers/registration_controller.rb:368
+msgid "The registration server returned invalid data."
+msgstr "Registreringsservern returnerade ogiltiga data."
+
+#: app/views/registration/index.rhtml:28 app/views/registration/index.rhtml:29
+msgid "Please enter a valid Email address."
+msgstr "Ange en giltig e-postadress."
+
+#: app/views/registration/index.rhtml:36
+msgid "register plugin"
+msgstr "insticksprogram för registrering"
+
+#: app/views/registration/index.rhtml:36
+msgid "Registration"
+msgstr "Registrering"
+
+#: app/views/registration/index.rhtml:44
+msgid "Registration Information"
+msgstr "Registreringsinformation"
+
+#: app/views/registration/index.rhtml:45
+msgid "This system is registered"
+msgstr "Systemet är registrerat"
+
+#: app/views/registration/index.rhtml:46
+msgid "System number (GUID)"
+msgstr "Systemnummer (GUID)"
+
+#: app/views/registration/index.rhtml:47
+msgid "Register again"
+msgstr "Registrera igen"
+
+#: app/views/registration/index.rhtml:54
+msgid "Next"
+msgstr "Nästa"
+
+#: app/views/registration/index.rhtml:64
+msgid "Mandatory Information"
+msgstr "Obligatorisk information"
+
+#: app/views/registration/index.rhtml:79
+msgid "Details"
+msgstr "Information"
+
+#: app/views/registration/index.rhtml:104
+msgid "Skip"
+msgstr "Hoppa över"
+
+#: app/views/registration/index.rhtml:105
+msgid "Postpone"
+msgstr "Skjut upp"
+
+#: app/views/registration/index.rhtml:106
+msgid "or"
+msgstr "eller"
+
