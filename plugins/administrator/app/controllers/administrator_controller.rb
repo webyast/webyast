@@ -26,7 +26,7 @@ class AdministratorController < ApplicationController
   layout 'main'
   
   private
-  init_gettext "webyast-root-user-ui"  # textdomain, options(:charset, :content_type)
+  init_gettext "webyast-root-user" 
 
   public
 

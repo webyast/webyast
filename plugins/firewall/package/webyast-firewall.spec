@@ -64,7 +64,7 @@ rm -rf restdoc
 #remove generated doc
 rm -rf doc
 
-export RAILS_PARENT=%{webyast_ui_dir}
+export RAILS_PARENT=%{webyast_dir}
 env LANG=en rake makemo
 
 %check
