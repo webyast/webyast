@@ -122,6 +122,7 @@ rm -rf $RPM_BUILD_ROOT
 %{plugin_dir}/config
 %{plugin_dir}/doc
 %{plugin_dir}/public
+%{plugin_dir}/lib
 %{plugin_dir}/locale
 
 %dir /usr/share/PolicyKit
