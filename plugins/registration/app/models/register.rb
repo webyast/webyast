@@ -56,6 +56,7 @@ class Register
   attr_accessor :context
   attr_accessor_with_default :arguments, Hash.new
   attr_reader   :guid
+  attr_reader   :config_error
 
   @reg = {}
 
