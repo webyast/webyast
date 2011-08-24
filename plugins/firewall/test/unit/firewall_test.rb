@@ -50,6 +50,7 @@ class FirewallTest < ActiveSupport::TestCase
 
   def setup
     YastService.stubs(:Call).with("YaPI::FIREWALL::Read").once.returns(FIREWALL_READ_DATA)
+    Firewall.any_instance.stubs(:find).returns(FIREWALL_READ_DATA)
     @model = Firewall.find
   end
 

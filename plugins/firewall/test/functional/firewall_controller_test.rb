@@ -23,72 +23,56 @@ require File.join(File.dirname(__FILE__),"..", "test_helper")
 
 class FirewallControllerTest < ActionController::TestCase
   fixtures :accounts
+                       
+  FIREWALL = { "use_firewall" => true, 
+    "fw_services" => [
+      {"name"=>"MySQL server", "id"=>"service:mysql", "description"=>"opens ports for MySQL", "allowed"=>true}, 
+      {"name"=>"mDNS/Bonjour support for HPLIP", "id"=>"service:hplip", "description"=>"mDNS/Bonjour", "allowed"=>true}, 
+      {"name"=>"bind DNS server", "id"=>"service:bind", "description"=>"DNS server", "allowed"=>false}, 
+      {"name"=>"PostgreSQL Server", "id"=>"service:postgresql", "description"=>"PostgreSQL server.", "allowed"=>false}
+    ]
+  }
   
-  DATA = { "firewall_service:mysql"=>"true", 
-         "firewall_service:apache2"=>"true", 
-         "firewall"=>{"use_firewall"=>"false"}
-       }
+  DATA = { 
+    "firewall_service:mysql"=>"false", 
+    "firewall_service:hplip"=>"false", 
+    "firewall"=>{"use_firewall"=>"false"}
+  }
+  
   OK_RESULT = {"saved_ok" => true, "error" => ""}
   
   def setup
     @model_class = Firewall
-    Firewall.stubs(:permission_check)
     @controller = FirewallController.new
     @request = ActionController::TestRequest.new
     @request.session[:account_id] = 1 # defined in fixtures
+    
+    Firewall.stubs(:find).returns(Firewall.new(FIREWALL))
+    Firewall.any_instance.stubs(:save).returns(OK_RESULT)
+    FirewallController.any_instance.stubs(:permission_check).with("org.opensuse.yast.modules.yapi.firewall.read").returns(true)
+    FirewallController.any_instance.stubs(:permission_check).with("org.opensuse.yast.modules.yapi.firewall.write").returns(true)
   end
   
-# magic for auto tests  is currently "Disabled"
-# include PluginBasicTests
-
-#ERRORS: 
-#1) Uncaught exception Mocha::ExpectationError: unexpected invocation: YastService.Call('YaPI::FIREWALL::Read') unsatisfied expectations:
-#2) No permission: org.opensuse.yast.module-manager.import for vlewin
+  include PluginBasicTests
 
   test "should get index" do
-    Rails.logger.debug "\n*** TEST SHOULD GET INDEX ***"
     get :index
     assert_response :success
   end
   
    test "should get show" do
-    Rails.logger.debug "\n*** TEST SHOULD GET SHOW ***"
     ret = get :show, :format => "xml"
     ret_hash = Hash.from_xml(ret.body)
     assert ret_hash
     assert ret_hash.has_key?("firewall")
     assert ret_hash["firewall"].has_key?("use_firewall")
     assert_response :success
-
   end
   
   test "should update firewall" do
-    Rails.logger.debug "\n*** TEST SHOULD UPDATE FIREWALL ***"
-    mock_save
-    put :update, DATA
+    put :create, DATA
     assert_equal 'Firewall settings have been written.', flash[:notice]
     assert_response :redirect
   end
-  
-  def mock_save
-    YastService.stubs(:Call).with( "YaPI::FIREWALL::Write", Firewall.toVariantASV(DATA)).once.returns(OK_RESULT)
-    Firewall.stubs(:permission_check)
-  end
+
 end
-
-#  include PluginBasicTests
-
-#  def test_update
-#    mock_save
-#    put :update, UPDATE_DATA
-#    assert_response :success
-#  end
-
-#  def test_create
-#    mock_save
-#    put :create, UPDATE_DATA
-#    assert_response :success
-#  end
-
-  
-#end
