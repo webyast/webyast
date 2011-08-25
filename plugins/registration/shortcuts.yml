@@ -1,6 +1,6 @@
 main:
   icon: '/icons/yast-product-registration.png'
-  url: /registration
+  url: /registration/registration
   groups: [ System ]
   tags: [ registration ]
   title: _("Registration")

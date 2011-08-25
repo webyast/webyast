@@ -57,6 +57,9 @@ class Register
   attr_accessor_with_default :arguments, Hash.new
   attr_reader   :guid
   attr_reader   :config_error
+  attr_reader   :status
+  attr_reader   :changedrepos
+  attr_reader   :changedservices
 
   @reg = {}
 
@@ -154,6 +157,79 @@ class Register
       exitcode = 199
     end
 
+    @status = if !@reg || @reg['error']                   then  'error'
+              elsif @reg['missinginfo'] && exitcode == 4  then  'missinginfo'
+              elsif @reg['success']                       then  'finished'
+                                                          else  'error'
+              end
+
+    repos = {}
+    services = {}
+
+    tasklist = HashWithoutKeyConversion.from_xml @reg['tasklist'] if @reg && @reg['tasklist']
+
+    if ( tasklist && tasklist.has_key?('tasklist') && tasklist['tasklist'] &&
+         tasklist['tasklist'].has_key?('item') && tasklist['tasklist']['item'] )
+    then
+      tasklist_hash = Hash.new
+      item = tasklist['tasklist']['item']
+
+      case item
+      when Hash, HashWithIndifferentAccess
+        tasklist_hash[item['ALIAS']] = item if item.has_key?('ALIAS')
+      when Array
+        item.each do |i|
+          tasklist_hash[i['ALIAS']] = i if i.has_key?('ALIAS')
+        end
+      end
+
+      repos    = tasklist_hash.reject { | k, v |  !v.kind_of?(Hash) || v['TYPE'] != 'zypp' }
+      services = tasklist_hash.reject { | k, v |  !v.kind_of?(Hash) || v['TYPE'] != 'nu' }
+    end
+
+    tasknic = { 'a'  => 'added',         'd' => 'deleted',
+                'le' => 'leave enabled', 'ld' => 'leave disabled'}
+    @changedrepos = []
+    repos.each do | k, v |
+      if k && v && v.kind_of?(Hash) && v.has_key?('TASK') && v['TASK'] != "le" && v['TASK'] != "ld" #only changed repos
+        @changedrepos << { :name   => v['ALIAS'] || '',
+                           :alias  => v['ALIAS'] || '',
+                           :type   => v['TYPE']  || '',
+                           :url    => v['URL'] || '',
+                           :status => tasknic[ v['TASK'] ] || ''}
+      end
+    end
+    @changedservices = []
+    services.each do | k, v |
+      if k && v.kind_of?(Hash)
+        catalogs = []
+        if v['CATALOGS']
+          if v['CATALOGS'].kind_of?(Hash) && v['CATALOGS']['catalog'] && v['CATALOGS']['catalog'].kind_of?(Array) && v['CATALOGS']['catalog'].size > 0
+            v['CATALOGS']['catalog'].each do |l|
+              if l.kind_of?(Hash)
+                catalogs << { :name   => l['NAME'] || '',
+                              :alias  => l['ALIAS'] || '',
+                              :status => tasknic[ l['TASK'] ] || '' }
+              end
+            end
+          #It is an hash only. This is produced by hash.form_xml if catalogs contains ONE entry only
+          elsif v['CATALOGS'].kind_of?(Hash) && v['CATALOGS']['catalog'] && v['CATALOGS']['catalog'].kind_of?(Hash)
+            catalogs << { :name   => v['CATALOGS']['catalog']['NAME'] || '',
+                          :alias  => v['CATALOGS']['catalog']['ALIAS'] || '',
+                          :status => tasknic[ v['CATALOGS']['catalog']['TASK'] ] || '' }
+          end
+        end # catalogs
+        @changedservices << { :name     => v['ALIAS'] || '',
+                              :alias    => v['ALIAS'] || '',
+                              :type     => v['TYPE']  || '',
+                              :url      => v['URL'] || '',
+                              :status   => tasknic[ v['TASK'] ] || '',
+                              :catalogs => catalogs }
+      else
+        Rails.logger.error "Cannot evaluate service: #{k}, #{v.inspect}"
+      end
+    end # services.each
+
     @reg['calculated_exitcode'] = exitcode
     exitcode
   end
@@ -209,42 +285,8 @@ class Register
       nil
     end
 
-    status = if !@reg || @reg['error']                   then  'error'
-             elsif @reg['missinginfo'] && exitcode == 4  then  'missinginfo'
-             elsif @reg['success']                       then  'finished'
-                                                         else  'error'
-             end
-
-    changedrepos = {}
-    changedservices = {}
-
-    tasklist = HashWithoutKeyConversion.from_xml @reg['tasklist'] if @reg && @reg['tasklist']
-
-    if ( tasklist && tasklist.has_key?('tasklist') && tasklist['tasklist'] &&
-         tasklist['tasklist'].has_key?('item') && tasklist['tasklist']['item'] )
-    then
-      tasklist_hash = Hash.new
-      item = tasklist['tasklist']['item']
-
-      case item
-      when Hash, HashWithIndifferentAccess
-        tasklist_hash[item['ALIAS']] = item if item.has_key?('ALIAS')
-      when Array
-        item.each do |i|
-          tasklist_hash[i['ALIAS']] = i if i.has_key?('ALIAS')
-        end
-      end
-
-      changedrepos    = tasklist_hash.reject { | k, v |  !v.kind_of?(Hash) || v['TYPE'] != 'zypp' }
-      changedservices = tasklist_hash.reject { | k, v |  !v.kind_of?(Hash) || v['TYPE'] != 'nu' }
-    end
-
-
-    tasknic = { 'a'  => 'added',         'd' => 'deleted',
-                'le' => 'leave enabled', 'ld' => 'leave disabled'}
-
     xml.registration do
-      xml.status status
+      xml.status @status
       xml.exitcode exitcode
       xml.invaliddataerrormessage invaliddatamessage if !invaliddatamessage.blank?
       xml.guid self.guid || ''
@@ -264,58 +306,40 @@ class Register
         end
       end
 
-      if !changedrepos.blank?
+      unless @changedrepos.blank?
         xml.changedrepos({:type => "array"}) do
-          changedrepos.each do | k, v |
-            if k && v && v.kind_of?(Hash) && v.has_key?('TASK') && v['TASK'] != "le" && v['TASK'] != "ld" #only changed repos
-              xml.repo do
-                xml.name v['ALIAS'] || ''
-                xml.alias v['ALIAS'] || ''
-                xml.type v['TYPE']  || ''
-                xml.url v['URL'] || ''
-                xml.status tasknic[ v['TASK'] ] || ''
-              end
+          @changedrepos.each do | v |
+            xml.repo do
+              xml.name v[:name] || ''
+              xml.alias v[:alias] || ''
+              xml.type v[:type]  || ''
+              xml.url v[:url] || ''
+              xml.status v[:status] || ''
             end
           end
         end
       end
-      if !changedservices.blank?
+
+      unless @changedservices.blank?
         xml.changedservices({:type => "array"}) do
-          changedservices.each do | k, v |
-            if k && v.kind_of?(Hash)
-              xml.service do
-                xml.name v['ALIAS'] || ''
-                xml.alias v['ALIAS'] || ''
-                xml.type v['TYPE']  || ''
-                xml.url v['URL'] || ''
-                xml.status tasknic[ v['TASK'] ] || ''
-                if v['CATALOGS']
-                  xml.catalogs do
-                    if v['CATALOGS'].kind_of?(Hash) && v['CATALOGS']['catalog'] && v['CATALOGS']['catalog'].kind_of?(Array) && v['CATALOGS']['catalog'].size > 0
-                      v['CATALOGS']['catalog'].each do |l|
-                        if l && l.kind_of?(Hash)
-                          xml.catalog do
-                            xml.name l['NAME'] || ''
-                            xml.alias l['ALIAS'] || ''
-                            xml.status tasknic[ l['TASK'] ] || ''
-                          end
-                        end
-                      end
-                    #It is an hash only. This is produced by hash.form_xml if catalogs contains ONE entry only
-                    elsif v['CATALOGS'].kind_of?(Hash) && v['CATALOGS']['catalog'] && v['CATALOGS']['catalog'].kind_of?(Hash)
-                      xml.catalog do
-                        xml.name v['CATALOGS']['catalog']['NAME'] || ''
-                        xml.alias v['CATALOGS']['catalog']['ALIAS'] || ''
-                        xml.status tasknic[ v['CATALOGS']['catalog']['TASK'] ] || ''
-                      end
-                    else
-                      xml.catalog ''
-                    end
+          @changedservices.each do | v |
+            xml.service do
+              xml.name v[:name] || ''
+              xml.alias v[:alias] || ''
+              xml.type v[:type]  || ''
+              xml.url v[:url] || ''
+              xml.status v[:status] || ''
+              xml.catalogs do
+                v[:catalogs].each do |l|
+                  xml.catalog do
+                    xml.name l[:name] || ''
+                    xml.alias l[:alias] || ''
+                    xml.status l[:status] || ''
                   end
-                end # catalogs
+                end
               end
             end
-          end # services.each
+          end
         end
       end # changedservices
     end # xml-root

@@ -181,26 +181,21 @@ class Registration::RegistrationController < ApplicationController
   def check_service_changes(changed_services) 
     begin
       changes = false
-      if changed_services && changed_services.kind_of?(Array) && changed_services.size > 0 then
+      if changed_services.size > 0 then
         flash_msg = "<ul>"
         changed_services.each do |c|
-          if c.respond_to?(:name) && c.name && c.respond_to?(:status) && c.status == 'added' then
-            flash_msg += "<li>" + _("Service added:") + " #{c.name}</li>"
+          if !c[:name].blank? && c[:status] == 'added' then
+            flash_msg += "<li>" + _("Service added:") + " #{c[:name]}</li>"
           end
-          if c.respond_to?(:catalogs) && c.catalogs && c.catalogs.respond_to?(:catalog) && c.catalogs.catalog then
-            if c.catalogs.catalog.respond_to?(:name) && c.catalogs.catalog.respond_to?(:status) && c.catalogs.catalog.status == 'added' then
-              flash_msg += "<ul><li>" + _("Catalog enabled:") + " #{c.catalogs.catalog.name}</li></ul>"
-              changes = true
-            elsif c.catalogs.catalog.kind_of?(Array) then
-              flash_msg += "<ul>"
-              c.catalogs.catalog.each do |s|
-                if s && s.respond_to?(:name) && s.respond_to?(:status) && s.status == 'added' then
-                  flash_msg += "<li>" + _("Catalog enabled:") + " #{s.name}</li>"
-                  changes = true
-                end
+          unless c[:catalogs].blank?
+            flash_msg += "<ul>"
+            c[:catalogs].each do |s|
+              if s[:status] == 'added' then
+                flash_msg += "<li>" + _("Catalog enabled:") + " #{s[:name]}</li>"
+                changes = true
               end
-              flash_msg += "</ul>"
             end
+            flash_msg += "</ul>"
           end
         end
         flash_msg += "</ul>"
@@ -218,11 +213,11 @@ class Registration::RegistrationController < ApplicationController
   def check_repository_changes(changed_repositories)
     begin
       changes = false
-      if changed_repositories && changed_repositories.kind_of?(Array) && changed_repositories.size > 0 then
+      if changed_repositories.size > 0 then
         flash_msg = "<ul>"
         changed_repositories.each do |r|
-          if r.respond_to?(:name) && r.name && r.respond_to?(:status) && r.status == 'added' then
-            flash_msg += "<li>" + _("Repository added:") + " #{r.name}</li>"
+          if r[:status] == 'added' then
+            flash_msg += "<li>" + _("Repository added:") + " #{r[:name]}</li>"
             changes = true
           end
         end
@@ -342,47 +337,53 @@ public
     end
   end
 
+  def reregister
+    # provide a way to force a new registration, even if system is already registered
+    @reregister = true
+    @nexttarget = 'reregisterupdate'
+    # correctly set the forcereg parameter according to registration protocol specification
+    @options['forcereg'] = 1
+
+    register
+  end
+
   def register
     permission_check("org.opensuse.yast.modules.ysr.getregistrationconfig")
 
-    client_guid
-    if @config_error
+    guid,config_error = client_guid
+    if config_error
       registration_backend_error
       redirect_success
       return
     end
 
     # redirect in case of interrupted basesetup
-    if @guid && !@reregister
+    if guid && !@reregister
       flash[:warning] = _("This system is already registered.") # RORSCAN_ITL
       redirect_success
       return
     end
 
+    # get new registration object
+    reg = Register.new
+    reg.arguments = {}
     begin
       params.each do | key, value |
         if key.starts_with? "registration_arg_"
-          argument = Hash.new
-          argument["name"] = key[17, key.size-17]
-          argument["value"] = value
-          @arguments << argument
+          reg.arguments[key[17, key.size-17]] = value
         end
       end
     rescue
       logger.debug "No arguments were passed to the registration call."
     end
 
-    @changed_repositories = []
-    @changed_services = []
     success = false
     begin
-      register = @client.create({ :arguments => { 'argument' => @arguments },
-                                  :options => @options })
+      reg.context = @options
+      register = reg.register
       logger.debug "registration finished: #{register.to_xml}"
 
       if register.respond_to?(:status) && register.status == "finished" then
-        @changed_repositories = register.changedrepos if register.respond_to? :changedrepos
-        @changed_services = register.changedservices if register.respond_to? :changedservices
         flash[:notice] = _("Registration finished successfully.")
         success = true
       else
@@ -390,13 +391,13 @@ public
         return registration_logic_error
       end
 
-      # display warning if no repos/services are added/changed during registration (bnc#558854)
-      if !check_service_changes && !check_repository_changes
+      # display warning if no repos/services are added/changed during registration(bnc#558854)
+      if !check_service_changes(register.changedservices) && !check_repository_changes(register.changedrepos)
       then
         flash[:warning] = _("<p><b>Repositories were not modified during the registration process.</b></p><p>It is likely that an incorrect registration code was used. If this is the case, please attempt the registration process again to get an update repository.</p><p>Please make sure that this system has an update repository configured, otherwise it will not receive updates.</p>") # RORSCAN_ITL
       end
 
-    rescue ActiveResource::ClientError => e
+    rescue Exception => e
       error = Hash.from_xml(e.response.body)["registration"]
       logger.debug "Error mode in registration process: #{error.inspect}"
 
@@ -462,12 +463,6 @@ public
         logger.error "Registration resulted in an error: Server returned invalid data"
         return registration_logic_error
       end
-
-    rescue Exception => e
-      flash[:error] = server_error_flash _("A connection to the registration server could not be established or it did not reply.")
-      logger.error "Registration resulted in an error, execution of SuseRegister backend expired: Maybe network problem or severe configuration error." # RORSCAN_ITL
-      redirect_success
-      return
     end
 
     if success
