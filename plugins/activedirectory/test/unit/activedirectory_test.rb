@@ -20,48 +20,49 @@
 #++
 
 require File.expand_path(File.dirname(__FILE__) + "/../test_helper")
-
 require 'activedirectory'
 
 class ActivedirectoryTest < ActiveSupport::TestCase
 
   def setup    
     YastService.stubs(:Call).with('YaPI::ActiveDirectory::Read',{}).returns({
-	"domain"	=> "AD.DOMAIN.COM",
-	"mkhomedir"	=> "0",
-	"winbind"	=> "1"
+      "domain" => "AD.DOMAIN.COM",
+      "mkhomedir" => "0",
+      "winbind" => "1"
     })
   end
 
   def test_read
-    ret		= Activedirectory.find
+    ret = Activedirectory.find
     assert ret
+    puts ret.inspect
     assert ret.enabled
+    assert ret.domain
     assert !ret.create_dirs
   end
 
-  # when only disabling, no need to check the member status
+  #when only disabling, no need to check the member status
   def test_write_disable
-    ad		= Activedirectory.find
-    ad.enabled	= false
+    ad = Activedirectory.find
+    ad.enabled = false
+    
     YastService.stubs(:Call).with('YaPI::ActiveDirectory::Write', {
-	"domain"	=> [ "s", "AD.DOMAIN.COM"],
-	"winbind"	=> [ "b", false],
-	"mkhomedir"	=> [ "b", false]
+      "domain" => [ "s", "AD.DOMAIN.COM"],
+      "winbind" => [ "b", false],
+      "mkhomedir" => [ "b", false]
     }).returns({})
     ad.save
   end
 
-  # before writing, Read call is done to check the member status
+#  # before writing, Read call is done to check the member status
   def test_write_not_joined
-    ad		= Activedirectory.find
-    ad.domain	= "DIFFERENT.DOMAIN.COM"
+    ad = Activedirectory.find
+    ad.domain = "DIFFERENT.DOMAIN.COM"
     YastService.stubs(:Call).with('YaPI::ActiveDirectory::Read',{
-	"check_membership"	=> [ "s", "DIFFERENT.DOMAIN.COM"]
-    }).returns({
-	"result"		=> false
-    })
+      "check_membership" => [ "s", "DIFFERENT.DOMAIN.COM"]
+    }).returns({"result" => false })
     exception = nil
+
     begin
       ad.save
     rescue ActivedirectoryError => e
@@ -72,38 +73,35 @@ class ActivedirectoryTest < ActiveSupport::TestCase
   end
 
   def test_write_already_joined
-    ad		= Activedirectory.find
+    ad = Activedirectory.find
     ad.domain	= "DIFFERENT.DOMAIN.COM"
     YastService.stubs(:Call).with('YaPI::ActiveDirectory::Read',{
-	"check_membership"	=> [ "s", "DIFFERENT.DOMAIN.COM"]
-    }).returns({
-	"result"		=> true
-    })
+      "check_membership"=> [ "s", "DIFFERENT.DOMAIN.COM"]
+    }).returns({"result" => true})
+
     # after check that we are joined, write is called
     YastService.stubs(:Call).with('YaPI::ActiveDirectory::Write', {
-	"domain"	=> [ "s", "DIFFERENT.DOMAIN.COM"],
-	"winbind"	=> [ "b", true],
-	"mkhomedir"	=> [ "b", false]
+      "domain" => [ "s", "DIFFERENT.DOMAIN.COM"],
+      "winbind" => [ "b", true],
+      "mkhomedir" => [ "b", false]
     }).returns({})
     ad.save
   end
 
   def test_write_error_on_write
-    ad		= Activedirectory.find
-    ad.domain	= "DIFFERENT.DOMAIN.COM"
+    ad = Activedirectory.find
+    ad.domain = "DIFFERENT.DOMAIN.COM"
     YastService.stubs(:Call).with('YaPI::ActiveDirectory::Read',{
-	"check_membership"	=> [ "s", "DIFFERENT.DOMAIN.COM"]
-    }).returns({
-	"result"		=> true
-    })
+      "check_membership" => [ "s", "DIFFERENT.DOMAIN.COM"]
+    }).returns({"result" => true})
+    
     YastService.stubs(:Call).with('YaPI::ActiveDirectory::Write', {
-	"domain"	=> [ "s", "DIFFERENT.DOMAIN.COM"],
-	"winbind"	=> [ "b", true],
-	"mkhomedir"	=> [ "b", false]
-    }).returns({
-	"write_error"	=> true
-    })
+      "domain" => [ "s", "DIFFERENT.DOMAIN.COM"],
+      "winbind" => [ "b", true],
+      "mkhomedir" => [ "b", false]
+    }).returns({ "write_error" => true })
     exception = nil
+
     begin
       ad.save
     rescue ActivedirectoryError => e
@@ -113,39 +111,39 @@ class ActivedirectoryTest < ActiveSupport::TestCase
     assert_equal "write_error",exception.id
   end
 
-  # when credentials are given, there's only one write call
+  #when credentials are given, there's only one write call
   def test_join_and_write
-    ad		= Activedirectory.find
-    ad.domain	= "DIFFERENT.DOMAIN.COM"
-    ad.administrator	= "Administrator"
-    ad.password		= "heslo"
+    ad = Activedirectory.find
+    ad.domain = "DIFFERENT.DOMAIN.COM"
+    ad.administrator = "Administrator"
+    ad.password = "heslo"
 
     YastService.stubs(:Call).with('YaPI::ActiveDirectory::Write', {
-	"domain"	=> [ "s", "DIFFERENT.DOMAIN.COM"],
-	"winbind"	=> [ "b", true],
-	"mkhomedir"	=> [ "b", false],
-	"administrator"	=> [ "s", "Administrator" ],
-	"password"	=> [ "s",  "heslo" ]
-    }).returns({})
+      "domain" => [ "s", "DIFFERENT.DOMAIN.COM"],
+      "winbind" => [ "b", true],
+      "mkhomedir" => [ "b", false],
+      "administrator" => [ "s", "Administrator" ],
+      "password" => [ "s",  "heslo" ]
+    }).once.returns({})
+    
     ad.save
   end
 
   def test_join_failure
-    ad		= Activedirectory.find
-    ad.domain	= "DIFFERENT.DOMAIN.COM"
-    ad.administrator	= "Administrator"
-    ad.password		= "heslo"
+    ad = Activedirectory.find
+    ad.domain = "DIFFERENT.DOMAIN.COM"
+    ad.administrator = "Administrator"
+    ad.password = "heslo"
 
     YastService.stubs(:Call).with('YaPI::ActiveDirectory::Write', {
-	"domain"	=> [ "s", "DIFFERENT.DOMAIN.COM"],
-	"winbind"	=> [ "b", true],
-	"mkhomedir"	=> [ "b", false],
-	"administrator"	=> [ "s", "Administrator" ],
-	"password"	=> [ "s",  "heslo" ]
-    }).returns({
-	"join_error"	=> "something got wrong"
-    })
+      "domain" => [ "s", "DIFFERENT.DOMAIN.COM"],
+      "winbind" => [ "b", true],
+      "mkhomedir" => [ "b", false],
+      "administrator" => [ "s", "Administrator" ],
+      "password" => [ "s",  "heslo" ]
+    }).returns({ "join_error" => "something got wrong" })
     exception = nil
+
     begin
       ad.save
     rescue ActivedirectoryError => e
@@ -156,41 +154,40 @@ class ActivedirectoryTest < ActiveSupport::TestCase
   end
 
   def test_leave
-    ad		= Activedirectory.find
-    ad.domain	= "DIFFERENT.DOMAIN.COM"
-    ad.administrator	= "Administrator"
-    ad.password		= "heslo"
-    ad.leave		= true
+    ad = Activedirectory.find
+    ad.domain = "DIFFERENT.DOMAIN.COM"
+    ad.administrator = "Administrator"
+    ad.password = "heslo"
+    ad.leave = true
 
     YastService.stubs(:Call).with('YaPI::ActiveDirectory::Write', {
-	"domain"	=> [ "s", "DIFFERENT.DOMAIN.COM"],
-	"winbind"	=> [ "b", true],
-	"mkhomedir"	=> [ "b", false],
-	"administrator"	=> [ "s", "Administrator" ],
-	"password"	=> [ "s",  "heslo" ],
-	"leave"		=> [ "b",  true ]
+      "domain" => [ "s", "DIFFERENT.DOMAIN.COM"],
+      "winbind" => [ "b", true],
+      "mkhomedir" => [ "b", false],
+      "administrator" => [ "s", "Administrator" ],
+      "password" => [ "s",  "heslo" ],
+      "leave" => [ "b",  true ]
     }).returns({})
     ad.save
   end
 
   def test_leave_failure
-    ad		= Activedirectory.find
-    ad.domain	= "DIFFERENT.DOMAIN.COM"
-    ad.administrator	= "Administrator"
-    ad.password		= "heslo"
-    ad.leave		= true
+    ad = Activedirectory.find
+    ad.domain = "DIFFERENT.DOMAIN.COM"
+    ad.administrator = "Administrator"
+    ad.password = "heslo"
+    ad.leave = true
 
     YastService.stubs(:Call).with('YaPI::ActiveDirectory::Write', {
-	"domain"	=> [ "s", "DIFFERENT.DOMAIN.COM"],
-	"winbind"	=> [ "b", true],
-	"mkhomedir"	=> [ "b", false],
-	"administrator"	=> [ "s", "Administrator" ],
-	"password"	=> [ "s",  "heslo" ],
-	"leave"		=> [ "b",  true ]
-    }).returns({
-	"leave_error"	=> "something got wrong"
-    })
+      "domain" => [ "s", "DIFFERENT.DOMAIN.COM"],
+      "winbind" => [ "b", true],
+      "mkhomedir" => [ "b", false],
+      "administrator" => [ "s", "Administrator" ],
+      "password" => [ "s",  "heslo" ],
+      "leave" => [ "b",  true ]
+    }).returns({"leave_error"	=> "something got wrong" })
     exception = nil
+
     begin
       ad.save
     rescue ActivedirectoryError => e

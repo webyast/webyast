@@ -79,7 +79,12 @@ class FirewallController < ApplicationController
     def update
       yapi_perm_check "firewall.write"
       firewall = Firewall.find 
+      root = params["firewall"]
       
+      if root == nil || root == {}
+        raise InvalidParameters.new :firewall => "Missing"
+      end
+        
       if request.format.html?
         Rails.logger.error "HTML"
         
@@ -94,11 +99,6 @@ class FirewallController < ApplicationController
         redirect_success
         
       else
-        root = params["firewall"]
-        if root == nil || root == {}
-          raise InvalidParameters.new :firewall => "Missing"
-        end
-
         Rails.logger.error "XML"
         
         firewall = Firewall.new(root)

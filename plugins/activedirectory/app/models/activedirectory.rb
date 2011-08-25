@@ -47,7 +47,7 @@ class Activedirectory < BaseModel::Base
 
       ad = Activedirectory.new({
         :domain => ret["domain"],
-        :create_dirs => ret["mkhomedir"],
+        :create_dirs => ret["mkhomedir"] == "1",
         :enabled => ret["winbind"] == "1"
       })
       
@@ -70,10 +70,11 @@ class Activedirectory < BaseModel::Base
     Rails.logger.debug "CREATE DIR #{@create_dirs.inspect}"
     
     domain = @domain.nil? ? " " : [ "s", @domain ]
+    create_dirs = @create_dirs.nil? ? " " : [ "b", @create_dirs ]
     params  = {
       "domain" => domain,
       "winbind" => [ "b", @enabled ],
-      "mkhomedir" => [ "b", @create_dirs ] == "0"
+      "mkhomedir" => create_dirs
     }
     
     # only pass if @leave was intentionally set to true

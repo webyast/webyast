@@ -60,31 +60,18 @@ class ActivedirectoryController < ApplicationController
     @write_permission = yapi_perm_granted?("activedirectory.write")
     yapi_perm_check "activedirectory.write"
     
-#    Rails.logger.error "REQUEST ************"
-#    Rails.logger.error request.instance_variable_names.inspect
-#    Rails.logger.error "END REQUEST ************"
-#    
-#    
-##    ["@parameters", "@request_method", "@env"]
-#    
-#    Rails.logger.error "REQUEST DETAILS ************"
-#    Rails.logger.error "\n#{request.parameters.to_xml}\n"
-#    Rails.logger.error "\n#{request.request_method.instance_variable_names}\n"
-#    Rails.logger.error "\n#{request.env.to_xml}\n"
-#    
-#    Rails.logger.error "END REQUEST DETAILS ************"
-    
+    if params["activedirectory"] == nil || params["activedirectory"] == {}
+      raise InvalidParameters.new :activedirectory => "Missing"
+    end
     
     if request.format.html? #HTML
-      Rails.logger.debug "HTML CALL"
+      Rails.logger.debug "HTML FORMAT"
       
       begin
         params[:activedirectory][:enabled] = params[:activedirectory][:enabled] == "true"
-        #@activedirectory = Activedirectory.new(params[:activedirectory])
-        
         args = params["activedirectory"]
         args = {} if args.nil?
-        @activedirectory = Activedirectory.find
+        @activedirectory = Activedirectory.new
         @activedirectory.load args
         @activedirectory.save
         
@@ -113,18 +100,19 @@ class ActivedirectoryController < ApplicationController
         end
       end
     else #REST API
-      Rails.logger.debug "XML RPX CALL"
+      Rails.logger.debug "XML FORMAT"
+      
       yapi_perm_check "activedirectory.write"
       args = params["activedirectory"]
       args = {} if args.nil?
 
-      ad = Activedirectory.find
-      ad.load args
-      ad.save
-
+      @activedirectory = Activedirectory.new
+      @activedirectory.load args
+      @activedirectory.save
+      
       respond_to do |format|
-        format.xml  { render :xml => ad.to_xml}
-        format.json { render :json => ad.to_json}
+        format.xml  { render :xml => @activedirectory.to_xml}
+        format.json { render :json => @activedirectory.to_json}
       end
     end
     
