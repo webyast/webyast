@@ -1,0 +1,125 @@
+<!--
+# Copyright (c) 2010 Novell, Inc.
+# 
+# All Rights Reserved.
+# 
+# This program is free software; you can redistribute it and/or modify it
+# under the terms of version 2 of the GNU General Public License
+# as published by the Free Software Foundation.
+# 
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+# GNU General Public License for more details.
+# 
+# You should have received a copy of the GNU General Public License
+# along with this program; if not, contact Novell, Inc.
+# 
+# To contact Novell about this file by physical or electronic mail,
+# you may find current contact information at www.novell.com
+-->
+
+<% content_for :head do %>
+  <%= javascript_include_tag "validation.js" %>
+  
+  <script type="text/javascript">
+    var AUTH_TOKEN = 'authenticity_token=' + encodeURIComponent("<%= escape_javascript form_authenticity_token %>");
+    startNotifier({'module':'kerberos', 'AUTH_TOKEN':AUTH_TOKEN}, 1000, 11000);
+      
+    $(document).ready(function() {
+      validateDomainName("kdc");
+
+      $("#kerberosForm").validate();
+      $.extend($.validator.messages, {
+        required: <%= jss _("This field is required.") -%>,
+        kdc: <%= jss _("Enter a valid domain name or an IP address.")  -%> 
+      });
+    });
+
+    $(document).ready(function() {
+      if ($("#kerberos_enabled:checked").length == 0) {
+        $("#kerberos_default_domain").attr("disabled","disabled");
+        $("#kerberos_default_realm").attr("disabled","disabled");
+        $("#kerberos_kdc").attr("disabled","disabled");
+      };
+
+      $("#kerberos_enabled").click(function () {
+        if ($("#kerberos_enabled:checked").length == 0) {
+          $("#kerberos_default_domain").attr("disabled","disabled");
+          $("#kerberos_default_realm").attr("disabled","disabled");
+          $("#kerberos_kdc").attr("disabled","disabled");
+        }
+        else {
+          $("#kerberos_default_domain", "#kerberosForm").removeAttr("disabled");
+          $("#kerberos_default_realm", "#kerberosForm").removeAttr("disabled");
+          $("#kerberos_kdc", "#kerberosForm").removeAttr("disabled");
+        }
+      });
+    
+    $('#kerberosForm input[type="submit"]').click(function() {
+        if ($('#kerberosForm').valid()) {
+        disable_forms();
+          var message = <%= jss _("Please wait") -%>;
+          $.modalDialog.wait( {message: message});
+          $('#kerberosForm').submit();
+        }
+      });
+    });
+  </script>
+<% end %>
+
+<% disabled = !@write_permission %>
+
+<div class="plugin-content plugin-border">
+  <%= render :partial => 'shared/missing_write_permissions' if disabled %>
+
+  <% form_for(:kerberos, @kerberos, :url => { :action => 'update' }, :html => { :method => :put, :id => 'kerberosForm', :class=>"webyast_form"}) do |f| %>
+    <div class="plugin-header">
+      <div class="left">
+        <label class="plugin-icon-container"><img class="plugin-icon" src="/icons/kerberos.png"></label>
+        <label class="plugin-name"><%= _("Kerberos client") %></label>
+      </div>
+      <div class="right" >
+        <span id="questionMark" style="margin:2px 5px; float:none;">?</span>
+      </div>
+      <div class="clearfix"></div>
+    </div>
+
+    <div class="clearfix">&nbsp;</div>
+
+    <fieldset class="webyast_fieldset">
+      <div class="fieldset_header">
+        <span class="fieldset_header_title" >
+          <%= _("Enable Kerberos Authentication") %>
+          <%= check_box 'kerberos', :enabled, {:disabled => disabled, :checked => @kerberos.enabled}, true,false -%>
+        </span>
+      </div>
+
+      <div class="fieldset_body">
+        <div class="row">
+          <%= label_tag :kerberos_default_domain, _("Default Domain") %>
+          <%= text_field :kerberos, :default_domain, :disabled => disabled, :class => "required" %>
+        </div>
+          
+        <div class="row">
+          <%= label_tag :kerberos_default_realm, _("Default Realm") %>
+          <%= text_field :kerberos, :default_realm, :disabled => disabled, :class => "required" %>
+        </div>
+          
+        <div class="row">
+          <%= label_tag :kerberos_kdc, _("KDC Server Address") %>
+          <%= text_field :kerberos, :kdc, :disabled => disabled, :class => "kdc required" %>
+        </div>
+      </div>
+    </fieldset>
+      
+    <div class="clearfix"></div>
+      
+    <div class="button_container">
+      <div class="hr">&nbsp;</div>
+      <div class="nav-buttons">
+        <%= form_send_buttons :disabled => disabled %>
+      </div>
+    </div>
+  <% end %>
+</div>
