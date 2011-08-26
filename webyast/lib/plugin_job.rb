@@ -66,7 +66,7 @@ class PluginJob < Struct.new(:class_name,:method,:arguments)
     # @param[Symbol,nil] method called method or all method if nil passed
     # @param[Array] args list of all parameters or empty array which match any arguments
     def running? (object, method = nil, *args)
-      PluginJob.running (object, method, *args) > 0 ? true : false
+      PluginJob.running(object, method, *args) > 0 ? true : false
     end
   end
 

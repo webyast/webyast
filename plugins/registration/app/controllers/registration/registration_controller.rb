@@ -365,12 +365,12 @@ public
     end
 
     # get new registration object
-    reg = Register.new
-    reg.arguments = {}
+    register = Register.new
+    register.arguments = {}
     begin
       params.each do | key, value |
         if key.starts_with? "registration_arg_"
-          reg.arguments[key[17, key.size-17]] = value
+          register.arguments[key[17, key.size-17]] = value
         end
       end
     rescue
@@ -379,52 +379,21 @@ public
 
     success = false
     begin
-      reg.context = @options
-      register = reg.register
+      register.context = @options
+      exitcode = register.register
       logger.debug "registration finished: #{register.to_xml}"
 
-      if register.respond_to?(:status) && register.status == "finished" then
+      if register.status == "finished" then
         flash[:notice] = _("Registration finished successfully.")
         success = true
-      else
-        logger.error "Registration is in success mode, but the backend returned no status information."
-        return registration_logic_error
-      end
-
-      # display warning if no repos/services are added/changed during registration(bnc#558854)
-      if !check_service_changes(register.changedservices) && !check_repository_changes(register.changedrepos)
-      then
-        flash[:warning] = _("<p><b>Repositories were not modified during the registration process.</b></p><p>It is likely that an incorrect registration code was used. If this is the case, please attempt the registration process again to get an update repository.</p><p>Please make sure that this system has an update repository configured, otherwise it will not receive updates.</p>") # RORSCAN_ITL
-      end
-
-    rescue Exception => e
-      error = Hash.from_xml(e.response.body)["registration"]
-      logger.debug "Error mode in registration process: #{error.inspect}"
-
-      unless error && error.kind_of?(Hash) && error["status"] then
-        logger.error "Registration is in error mode but no error status information is provided from the backend."
-        return registration_logic_error
-      end
-
-      if error["status"] == "missinginfo" && !error["missingarguments"].blank?
-        logger.debug "missing arguments #{error["missingarguments"].inspect}"
+      elsif register.status == "missinginfo" && !register.missingarguments.blank?
+        logger.debug "missing arguments #{register.missingarguments.inspect}"
         logger.info "Registration is in needinfo - more information is required"
         # collect and merge the argument data
-        collect_missing_arguments error["missingarguments"]
-
-      elsif error["status"] == "finished"
-        # status is "finished" but we are in rescure block - this does not fit
-        logger.error "Registration finished successfully (according to backend), but it returned an error (http status 4xx)."
-        logger.error "The registration status is unknown."
-        return registration_logic_error
-
-      elsif error["status"] == "error"
-        e_exitcode = error["exitcode"] || 0
-        e_exitcode = e_exitcode.to_i
-        e_exitcode = 'unknown' if e_exitcode == 0
-
-        logger.error "Registration resulted in an error, ID: #{e_exitcode}."
-        case e_exitcode
+        collect_missing_arguments register.missingarguments
+      elsif register.status == "error"
+        logger.error "Registration resulted in an error, ID: #{exitcode}."
+        case exitcode
         when 199 then
           # 199 means that even the initialization of the backend did not succeed
           logger.error "Registration backend could not be initialized. Maybe due to network problem, SSL certificate issue or blocked by firewall."
@@ -433,8 +402,8 @@ public
           logger.error "Registration failed due to invalid data passed to the registration server. Most likely due to a wrong regcode."
           logger.error "  The registration server thus rejected the registration. User can try again."
           dataerror = _("The supplied registration data was invalid.")
-          if ( !error["invaliddataerrormessage"].blank?  &&
-                ( error["invaliddataerrormessage"].to_s.match /(invalid regcode)|(improper code was supplied)/i )  ) then
+          if ( !register.invaliddataerrormessage.blank?  &&
+                ( register.invaliddataerrormessage.to_s.match /(invalid regcode)|(improper code was supplied)/i )  ) then
             logger.error "  Yep, the registration server says that the regcode was wrong."
             dataerror = _("The registration code you entered was invalid.")
           end
@@ -463,10 +432,20 @@ public
         logger.error "Registration resulted in an error: Server returned invalid data"
         return registration_logic_error
       end
+    rescue Exception => e
+      logger.error "Registration is in error mode but no error status information is provided from the backend."
+      logger.debug "Error from registration backend: #{e.inspect}"
+      return registration_logic_error
     end
 
     if success
       logger.info "Registration succeed"
+      # display warning if no repos/services are added/changed during registration(bnc#558854)
+      if !check_service_changes(register.changedservices) && !check_repository_changes(register.changedrepos)
+      then
+        flash[:warning] = _("<p><b>Repositories were not modified during the registration process.</b></p><p>It is likely that an incorrect registration code was used. If this is the case, please attempt the registration process again to get an update repository.</p><p>Please make sure that this system has an update repository configured, otherwise it will not receive updates.</p>") # RORSCAN_ITL
+      end
+
       redirect_success
     else
       logger.info "Registration is not yet finished"

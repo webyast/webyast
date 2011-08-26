@@ -60,6 +60,8 @@ class Register
   attr_reader   :status
   attr_reader   :changedrepos
   attr_reader   :changedservices
+  attr_reader   :missingarguments
+  attr_reader   :invaliddataerrormessage
 
   @reg = {}
 
@@ -139,10 +141,17 @@ class Register
     end
 
     @reg = YastService.Call("YSR::statelessregister", ctx, args )
-    Rails.logger.debug "registration server returns: #{@reg.inspect}"
-    @arguments = HashWithoutKeyConversion.from_xml(@reg['missingarguments']) if @reg && @reg.has_key?('missingarguments')
-    @arguments = @arguments["missingarguments"] if @arguments && @arguments.has_key?('missingarguments')
+# @reg = {"manualurl"=>"https://secure-www.novell.com/center/regsvc-1.0/?lang=en-US&guid=dfe61a4b5f0948c6bd00bc47c6d338ab&command=interactive", "errorcode"=>"0", "exitcode"=>"4", "readabletext"=>"To complete the registration, provide some additional parameters:\n\n\nYou can provide these parameters with the '-a' option.\nYou can use the '-a' option multiple times.\n\nExample:\n\nsuse_register -a email=\"me@example.com\"\n\nTo register your product manually, use the following URL:\n\nhttps://secure-www.novell.com/center/regsvc-1.0/?lang=en-US&guid=dfe61a4b5f0948c6bd00bc47c6d338ab&command=interactive\n\n\nInformation on Novell's Privacy Policy:\nSubmit information to help you manage your registered systems.\nhttp://www.novell.com/company/policies/privacy/textonly.html\n", "missinginfo"=>"Missing Information", "missingarguments"=>"<missingarguments>\n  <platform flag=\"i\" kind=\"mandatory\" value=\"x86_64\" />\n  <processor flag=\"i\" kind=\"mandatory\" value=\"x86_64\" />\n  <timezone flag=\"i\" kind=\"mandatory\" value=\"Europe/Prague\" />\n</missingarguments>\n"}
 
+    Rails.logger.debug "registration server returns: #{@reg.inspect}"
+
+    @missingarguments = []
+    arguments_hash = HashWithoutKeyConversion.from_xml(@reg['missingarguments']) if @reg && @reg.has_key?('missingarguments')
+    arguments_hash['missingarguments'].each do | k, v |
+      @missingarguments << { "name" => k, "value" => v['value'], "flag" => v['flag'], "kind" => v['kind'] } if v.kind_of?(Hash)
+    end
+
+    @invaliddataerrormessage = @reg['invaliddataerrormessage'] || ""
 
     if !@reg.kind_of?(Hash)
       exitcode = 99
@@ -291,9 +300,9 @@ class Register
       xml.invaliddataerrormessage invaliddatamessage if !invaliddatamessage.blank?
       xml.guid self.guid || ''
 
-      if !@arguments.blank? && exitcode == 4
+      if !@missingarguments.blank? && exitcode == 4
         xml.missingarguments({:type => "array"}) do
-          @arguments.each do | k, v |
+          @missingarguments.each do | k, v |
             if k && v.kind_of?(Hash)
               xml.argument do
                 xml.name k
