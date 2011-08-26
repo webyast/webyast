@@ -30,28 +30,28 @@ class Kerberos < BaseModel::Base
   attr_accessor :default_realm
   attr_accessor :enabled
 
-public
+  public
   def self.find
     YastCache.fetch(self) {
       ret = YastService.Call("YaPI::KERBEROS::Read", {})
       Rails.logger.info "Read KERBEROS config: #{ret.inspect}"
-      kerberos	= Kerberos.new({
-	:kdc		=> ret["kdc"],
-	:default_realm	=> ret["default_realm"],
-	:default_domain	=> ret["default_domain"],
-	:enabled	=> ret["use_kerberos"] == "1"
+      kerberos = Kerberos.new({
+        :kdc => ret["kdc"],
+        :default_realm => ret["default_realm"],
+        :default_domain => ret["default_domain"],
+        :enabled => ret["use_kerberos"] == "1"
       })
-      kerberos	= {} if kerberos.nil?
+      kerberos = {} if kerberos.nil?
       kerberos
     }
   end
 
   def save
-    params	= {}
-    params["kdc"]		= [ "s", @kdc] unless @kdc.nil?
-    params["default_realm"]	= [ "s", @default_realm] unless @default_realm.nil?
-    params["default_domain"]	= [ "s", @default_domain] unless @default_domain.nil?
-    params["use_kerberos"]	= [ "b", @enabled] unless @enabled.nil?
+    params = {}
+    params["kdc"] = [ "s", @kdc] unless @kdc.nil?
+    params["default_realm"] = [ "s", @default_realm] unless @default_realm.nil?
+    params["default_domain"] = [ "s", @default_domain] unless @default_domain.nil?
+    params["use_kerberos"] = [ "b", @enabled] unless @enabled.nil?
 
     yapi_ret = YastService.Call("YaPI::KERBEROS::Write", params)
     Rails.logger.debug "YaPI returns: '#{yapi_ret}'"
