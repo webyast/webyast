@@ -30,29 +30,31 @@ class Ldap < BaseModel::Base
   attr_accessor :tls
   attr_accessor :enabled
 
-public
-  def self.find
-    YastCache.fetch(self) {
-      ret = YastService.Call("YaPI::LDAP::Read")
-      Rails.logger.info "Read LDAP config: #{ret.inspect}"
-      ldap	= Ldap.new({
-	:server		=> ret["ldap_server"],
-	:base_dn	=> ret["ldap_domain"],
-	:tls		=> ret["ldap_tls"] == "1",
-	:enabled	=> ret["start_ldap"] == "1"
-      })
-      ldap	= {} if ldap.nil?
-      ldap
-    }
-  end
+  public
+    def self.find
+      YastCache.fetch(self) {
+        ret = YastService.Call("YaPI::LDAP::Read")
+        Rails.logger.info "Read LDAP config: #{ret.inspect}"
+        ldap = Ldap.new({
+          :server => ret["ldap_server"],
+          :base_dn => ret["ldap_domain"],
+          :tls => ret["ldap_tls"] == "1",
+          :enabled => ret["start_ldap"] == "1"
+        })
+        ldap = {} if ldap.nil?
+        ldap
+      }
+    end
 
   def save
-    params	= {
-	"ldap_server" 	=> [ "s", @server],
-	"ldap_domain"	=> [ "s", @base_dn],
-	"ldap_tls"	=> [ "b", @tls],
-	"start_ldap"	=> [ "b", @enabled]
+    params = {
+      "ldap_server" => [ "s", @server || ""],
+      "ldap_domain" => [ "s", @base_dn || ""],
+      "ldap_tls" => [ "b", @tls],
+      "start_ldap" => [ "b", @enabled]
     }
+
+    Rails.logger.debug "YaPI SEND PARAMS: '#{params.inspect}'"
     yapi_ret = YastService.Call("YaPI::LDAP::Write", params)
     Rails.logger.debug "YaPI returns: '#{yapi_ret}'"
     YastCache.reset(self)
@@ -62,11 +64,9 @@ public
 
   # ask given LDAP server for available base DN
   def self.fetch(server)
-    ret	= {
-	"dn"	=> ""
-    }
-    out	= `/usr/bin/ldapsearch -x -h #{server} -b '' -s base namingContexts | grep "namingContexts:" | cut -d" " -f 2` # RORSCAN_ITL
-    ret["dn"]	= out.split("\n")[0] if out
+    ret = { "dn" => ""}
+    out = `/usr/bin/ldapsearch -x -h #{server} -b '' -s base namingContexts | grep "namingContexts:" | cut -d" " -f 2` # RORSCAN_ITL
+    ret["dn"] = out.split("\n")[0] if out
     return ret
   end
 end

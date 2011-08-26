@@ -37,13 +37,13 @@ class KerberosController < ApplicationController
       flash[:error] = _("Cannot read Kerberos client configuraton.")
       Rails.logger.error "ERROR: error.inspect"
       @kerberos = nil
-      @permissions = {}
+      @write_permission = {}
       render :index and return
     end
 
+    return unless @kerberos
     @write_permission = yapi_perm_granted?("kerberos.write")
     logger.debug "Permissions granted?: #{@write_permission.inspect}"
-    return unless @kerberos
   end
 
   def update
@@ -55,6 +55,8 @@ class KerberosController < ApplicationController
     rescue Exception => error  
       flash[:error] = _("Error while saving Kerberos client configuration.")
       Rails.logger.error "ERROR: error.inspect"
+      render :index and return
+      
     #rescue ActiveResource::ClientError => e
     #  flash[:error] = YaST::ServiceResource.error(e)
      # logger.warn e.inspect

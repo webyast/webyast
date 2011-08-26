@@ -69,12 +69,10 @@ class Activedirectory < BaseModel::Base
     Rails.logger.debug "ENABLEd  #{@enabled.inspect}"
     Rails.logger.debug "CREATE DIR #{@create_dirs.inspect}"
     
-    domain = @domain.nil? ? " " : [ "s", @domain ]
-    create_dirs = @create_dirs.nil? ? " " : [ "b", @create_dirs ]
     params  = {
-      "domain" => domain,
+      "domain" => [ "s", @domain || ""],
       "winbind" => [ "b", @enabled ],
-      "mkhomedir" => create_dirs
+      "mkhomedir" => [ "b", @create_dirs || false]
     }
     
     # only pass if @leave was intentionally set to true

@@ -1,5 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ldap>
-  <server>ldap.mycompany.com</server>
-  <base_dn>dc=my,dc=company,dc=com</base_dn>
+  <base-dn>dc=suse,dc=de</base-dn>
+  <enabled>true</enabled>
+  <server>ldap.suse.de</server>
+  <tls>true</tls>
 </ldap>
+

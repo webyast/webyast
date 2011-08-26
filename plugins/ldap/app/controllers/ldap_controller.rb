@@ -20,14 +20,72 @@
 #++
 # = Ldap controller
 # Provides access to configuration of LDAP client 
+
+#require 'client_exception'
+
 class LdapController < ApplicationController
 
   before_filter :login_required
-
+  layout 'main'
+  
   # Initialize GetText and Content-Type.
   init_gettext 'webyast_ldap'
 
+  def index
+    begin
+      @ldap = Ldap.find
+      Rails.logger.debug "ldap: #{@ldap.inspect}"
+    rescue Exception => error
+      flash[:error] = _("Cannot read LDAP client configuraton.")
+      Rails.logger.error "ERROR: error.inspect"
+      @ldap = nil
+      @permissions = {}
+      render :index and return
+    end
 
+    return unless @ldap
+
+    @write_permission = yapi_perm_granted?("ldap.write")
+    logger.debug "permissions: #{@write_permission.inspect}"
+  end
+
+  # try to get base DN provided by given LDAP server
+  def fetch_dn
+    fetched = Ldap.fetch(params[:server])
+    render :text => "$('#ldap_base_dn').val('#{fetched["dn"]}');"
+  end
+
+  def update
+    Rails.logger.error "REQUEST #{request.inspect}"
+    if request.format.html?
+      begin
+        #translate from text to boolean
+        params[:ldap][:tls] = params[:ldap][:tls] == "true"
+        params[:ldap][:enabled] = params[:ldap][:enabled] == "true"
+        @ldap = Ldap.new(params[:ldap]).save
+        flash[:message] = _("LDAP client configuraton successfully written.")
+      rescue ActiveResource::ClientError => e
+        flash[:error] = YaST::ServiceResource.error(e)
+        logger.warn e.inspect
+      rescue ActiveResource::ServerError => e
+        flash[:error] = _("Error while saving LDAP client configuration.")
+        logger.warn e.inspect
+      end
+      redirect_success
+    else
+      yapi_perm_check "ldap.write"
+      args = params["ldap"]
+      ldap = Ldap.find
+      ldap.load args unless args.nil?
+      ldap.save
+
+      respond_to do |format|
+        format.xml  { render :xml => ldap.to_xml}
+        format.json { render :json => ldap.to_json}
+      end
+    end 
+  end
+  
   # GET action
   # Read LDAP client settings
   # If special parameter 'fetch_dn' is present, return base DN supported by given server
@@ -37,33 +95,15 @@ class LdapController < ApplicationController
     yapi_perm_check "ldap.read"
 
     if params["fetch_dn"]
-	dn	= Ldap.fetch(params["server"])
-	respond_to do |format|
-	    format.xml  { render :xml => dn.to_xml}
-	    format.json { render :json => dn.to_json}
-	end
-	return
+      dn = Ldap.fetch(params["server"])
+      respond_to do |format|
+        format.xml  { render :xml => dn.to_xml}
+        format.json { render :json => dn.to_json}
+      end
+      return
     end
 
     ldap = Ldap.find
-
-    respond_to do |format|
-      format.xml  { render :xml => ldap.to_xml}
-      format.json { render :json => ldap.to_json}
-    end
-  end
-   
-  # PUT action
-  # Write LDAP client configuration
-  # Requires write permissions for LDAP client YaPI.
-  def update
-    yapi_perm_check "ldap.write"
-
-    args	= params["ldap"]
-		  	
-    ldap = Ldap.find
-    ldap.load args unless args.nil?
-    ldap.save
 
     respond_to do |format|
       format.xml  { render :xml => ldap.to_xml}
