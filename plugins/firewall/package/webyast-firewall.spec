@@ -22,7 +22,7 @@ Source1:        org.opensuse.yast.modules.yapi.firewall.policy
 Source2:        FIREWALL.pm
 BuildRoot:      %{_tmppath}/%{name}-%{version}-build
 BuildArch:      noarch
-BuildRequires:  rubygem-yast2-webservice-tasks rubygem-restility
+BuildRequires:  rubygem-webyast-rake-tasks rubygem-restility
 PreReq:         webyast-base
 Requires:       SuSEfirewall2 yast2
 
@@ -119,6 +119,7 @@ rm -rf $RPM_BUILD_ROOT
 %{plugin_dir}/locale
 %{plugin_dir}/README
 %{plugin_dir}/Rakefile
+%{plugin_dir}/shortcuts.yml
 %{plugin_dir}/init.rb
 %{plugin_dir}/install.rb
 %{plugin_dir}/uninstall.rb
