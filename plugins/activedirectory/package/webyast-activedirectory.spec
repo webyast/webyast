@@ -130,6 +130,7 @@ rm -rf $RPM_BUILD_ROOT
 %{plugin_dir}/locale
 %{plugin_dir}/README
 %{plugin_dir}/Rakefile
+%{plugin_dir}/shortcuts.yml
 %{plugin_dir}/init.rb
 %{plugin_dir}/app
 %{plugin_dir}/config
