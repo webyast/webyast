@@ -20,14 +20,14 @@ Version:        0.2.10
 Release:        0
 Summary:        WebYaST - configuration of Active Directory client
 Source:         www.tar.bz2
-Source1:	org.opensuse.yast.modules.yapi.activedirectory.policy
-Source2:	ActiveDirectory.pm
+Source1:        org.opensuse.yast.modules.yapi.activedirectory.policy
+Source2:        ActiveDirectory.pm
 BuildRoot:      %{_tmppath}/%{name}-%{version}-build
 BuildArch:      noarch
 BuildRequires:  rubygem-webyast-rake-tasks rubygem-restility
 
-BuildRequires:  webyast-base-testsuite
-BuildRequires:	rubygem-test-unit rubygem-mocha
+BuildRequires:  webyast-base-testsuite tidy
+BuildRequires:  rubygem-test-unit rubygem-mocha
 
 # for enabling winbind and Kerberos configuration
 Requires:	samba-winbind samba-client pam_mount yast2-kerberos-client krb5 krb5-client
@@ -131,8 +131,6 @@ rm -rf $RPM_BUILD_ROOT
 %{plugin_dir}/README
 %{plugin_dir}/Rakefile
 %{plugin_dir}/init.rb
-%{plugin_dir}/install.rb
-%{plugin_dir}/uninstall.rb
 %{plugin_dir}/app
 %{plugin_dir}/config
 %{plugin_dir}/doc
