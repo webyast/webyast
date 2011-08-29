@@ -30,67 +30,92 @@ module Registration
       # http://railsforum.com/viewtopic.php?id=1719
       @request.session[:account_id] = 1 # defined in fixtures
 
-      @data = { 'options'=>{'debug'=>2,
+      @data = { :registration => { 'options'=>{'debug'=>2,
                          'forcereg'=>false,
                          'nooptional'=>true,
                          'nohwdata'=>true,
                          'optional'=>false,
                          'hwdata'=>false},
-                'arguments'=>[{'name'=>'key','value'=>'val'}] }
+          'arguments'=>[{'name'=>'key','value'=>'val'}] }}
 
 
-      Register.stubs(:register).with(@data).returns(
-      { 'status'=>'finished',
-        'exitcode'=>0,
-        'guid'=>1234,
-        'changedrepos'=>[{'name'=>'repoName', 
+      Register.any_instance.stubs(:register).returns(0)
+      Register.any_instance.stubs(:status).returns('finished')
+      Register.any_instance.stubs(:guid).returns(1234)
+      Register.any_instance.stubs(:changedrepos).returns([{'name'=>'repoName', 
                           'alias'=>'myRepoName', 
                           'urls'=>['http://some.host/repo/xy'],
                           'priority'=>80,
                           'autorefresh'=>true,
                           'enabled'=>true,
-                          'status'=>'added'}],
-        'changedservices'=>[{'name'=>'some-serv1',
+                          'status'=>'added'}])
+      Register.any_instance.stubs(:changedservices).returns([{'name'=>'some-serv1',
                              'url'=>'http://some.host/services/serv1',
-                             'status'=>'added'}]
-      })
+                             'status'=>'added'}])
+      YastService.stubs(:Call).with("YSR::getregistrationconfig").returns(
+      {"regserverurl"=>"https://secure-www.novell.com/center/regsvc/", "guid"=>"", "regserverca"=>""})
     end
 
     def test_access_denied
       #mock model to test only controller
       @controller.stubs(:permission_check).raises(NoPermissionException.new("action", "test"));
-      get :show
+      mime = Mime::XML
+      get :show, :format => 'xml'
       assert_response 403
     end
 
-# FIXME: temporarily disabled - mocking is missing, it calls the DBus service and fails!
-#    def test_access_show_xml
-#      mime = Mime::XML
-#      get :show, :format => 'xml'
-#      assert_equal mime.to_s, @response.content_type
-#    end
+    def test_access_show_xml
+      mime = Mime::XML
+      get :show, :format => 'xml'
+      assert_equal mime.to_s, @response.content_type
+    end
 
-# FIXME: temporarily disabled - mocking is missing, it calls the DBus service and fails!
-#    def test_access_show_json
-#      mime = Mime::JSON
-#      get :show, :format => 'json'
-#      assert_equal mime.to_s, @response.content_type
-#    end
+    def test_access_show_json
+       mime = Mime::JSON
+       get :show, :format => 'json'
+       assert_equal mime.to_s, @response.content_type
+    end
 
     def test_register_noparams
-#      put :create    
-#      assert_response 422
+      mime = Mime::XML
+      put :create    
+      assert_response 422
     end
 
     def test_register_noperm
       @controller.stubs(:permission_check).raises(NoPermissionException.new("action", "test"));
+      mime = Mime::XML
+      @data[:format] = 'xml'
       put :create, @data
       assert_response 403
+    end
+
+    def test_register
+      mime = Mime::XML
+      @data[:format] = 'xml'
+      put :create, @data
+      assert_response :success
+    end
+
+    def test_register_ui
+      post :update, {"registration_arg_Registration Name"=>"registrationName", "registration_arg_System Name"=>"systemName", "registration_arg_Email"=>"email" }
+      assert_response :redirect
+      assert_redirected_to '/controlpanel', :action => "index"
+    end
+
+  def test_register_in_basesystem
+    session[:wizard_current] = "test"
+    session[:wizard_steps] = "language,registration"
+    post :update, {"registration_arg_Registration Name"=>"registrationName", "registration_arg_System Name"=>"systemName", "registration_arg_Email"=>"email" }
+    assert_response :redirect
+    assert_redirected_to '/controlpanel/nextstep?done=registration'
   end
 
-  def test_register
-#     put :create, @data
-#     assert_response :success
+  def test_already_registered
+
+    get :index
+    assert_response 200
+    assert_valid_markup
   end
 
 end

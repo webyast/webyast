@@ -72,7 +72,7 @@ class Registration::RegistrationController < ApplicationController
     guid = nil
     config_error = false
     begin
-      status = Register.find
+      status = Register.new()
       guid = status.guid
       config_error status.config_error
       logger.debug "found GUID: #{guid}"
@@ -280,10 +280,9 @@ public
 
     # parse and set registration arguments
     if ( params && params.has_key?(:registration) &&
-         params[:registration] && params[:registration].has_key?(:arguments) &&
-         params[:registration][:arguments] && params[:registration][:arguments].has_key?(:argument) )
+         params[:registration] && params[:registration].has_key?(:arguments) )
     then
-      args = params[:registration][:arguments][:argument]
+      args = params[:registration][:arguments]
       case args
       when Array
         args.each do |item|
@@ -305,7 +304,6 @@ public
         @register.context[key] = value
       end
     end
-
     ret = @register.register
     if ret != 0
       render :xml=>@register.to_xml( :root => "registration", :dasherize => false ), :status => 400 and return

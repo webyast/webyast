@@ -322,9 +322,6 @@ RESPONSE_SUCCESS = {"changedservices"=>[ {"name"=>"nu_novell_com", "url"=>"https
   def test_getter
     setup_registration_success
     register = Register.new()
-    ret = register.find
-    assert_equal("773093306c1a47069b73c04037a23f56", ret["guid"])
-    assert_equal("https://secure-www.novell.com/center/regsvc/", ret["regserverurl"])
     assert_equal("773093306c1a47069b73c04037a23f56", register.guid)
     assert_equal("https://secure-www.novell.com/center/regsvc/", register.registrationserver)
   end

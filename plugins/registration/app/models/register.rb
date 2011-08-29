@@ -65,11 +65,33 @@ class Register
 
   @reg = {}
 
+private
+
+  def read_status
+    begin
+      config = YastService.Call("YSR::getregistrationconfig")
+      @registrationserver = config['regserverurl']
+      @certificate = config['regserverca']
+      @guid = config['guid'] unless config['guid'].blank?
+    rescue Exception => e
+      # catch the error of  missing YSR function(s)
+      # in case a wrong yast2-registration version is installed
+      # TODO: catch error cases of YastService.Call individually and write more detailed log
+      Rails.logger.error "YastService.Call('YSR::getregistrationconfig') failed with #{e}"
+      @config_error = true
+      return false
+    end
+    config
+  end
+
+public
+
+
   def initialize(hash={})
     # initialize context
     init_context hash
     # read the configuration
-    find
+    read_status
   end
 
   def init_context(hash)
@@ -96,23 +118,6 @@ class Register
 
     # last action: overwrite the context settings with the settings that were sent with the request
     @context.merge! hash if hash.kind_of?(Hash)
-  end
-
-  def find
-    begin
-      config = YastService.Call("YSR::getregistrationconfig")
-      @registrationserver = config['regserverurl']
-      @certificate = config['regserverca']
-      @guid = config['guid']
-    rescue Exception => e
-      # catch the error of  missing YSR function(s)
-      # in case a wrong yast2-registration version is installed
-      # TODO: catch error cases of YastService.Call individually and write more detailed log
-      Rails.logger.error "YastService.Call('YSR::getregistrationconfig') failed with #{e}"
-      @config_error = true
-      return false
-    end
-    config
   end
 
   def is_registered?
@@ -146,9 +151,11 @@ class Register
     Rails.logger.debug "registration server returns: #{@reg.inspect}"
 
     @missingarguments = []
-    arguments_hash = HashWithoutKeyConversion.from_xml(@reg['missingarguments']) if @reg && @reg.has_key?('missingarguments')
-    arguments_hash['missingarguments'].each do | k, v |
-      @missingarguments << { "name" => k, "value" => v['value'], "flag" => v['flag'], "kind" => v['kind'] } if v.kind_of?(Hash)
+    if @reg && @reg.has_key?('missingarguments')
+      arguments_hash = HashWithoutKeyConversion.from_xml(@reg['missingarguments']) 
+      arguments_hash['missingarguments'].each do | k, v |
+        @missingarguments << { "name" => k, "value" => v['value'], "flag" => v['flag'], "kind" => v['kind'] } if v.kind_of?(Hash)
+      end
     end
 
     @invaliddataerrormessage = @reg['invaliddataerrormessage'] || ""
@@ -247,12 +254,12 @@ class Register
     newconfig = { 'regserverurl' => registrationserver,
                   'regserverca'  => certificate  }
     ret = YastService.Call("YSR::setregistrationconfig", newconfig)
-    self.find
+    self.read_status
     return ret
   end
 
   def status_to_xml( options = {} )
-    find
+    read_status
     xml = options[:builder] ||= Builder::XmlMarkup.new(options)
     xml.instruct! unless options[:skip_instruct]
 
@@ -263,7 +270,7 @@ class Register
   end
 
   def config_to_xml( options = {} )
-    find
+    read_status
     xml = options[:builder] ||= Builder::XmlMarkup.new(options)
     xml.instruct! unless options[:skip_instruct]
 
@@ -281,14 +288,14 @@ class Register
   end
 
   def to_xml( options = {} )
-    find
+    read_status
     xml = options[:builder] ||= Builder::XmlMarkup.new(options)
     xml.instruct! unless options[:skip_instruct]
 
-    exitcode = @reg['calculated_exitcode'] || 199
+    exitcode = (@reg['calculated_exitcode'] if @reg) || 199
 
     # catch error 2 and pass error message on (bnc#604777)
-    invaliddatamessage = if ( exitcode == 2  &&  !@reg['invaliddataerrormessage'].blank? ) then
+    invaliddatamessage = if ( exitcode == 2  && @reg &&  !@reg['invaliddataerrormessage'].blank? ) then
       @reg['invaliddataerrormessage']
     else
       nil
@@ -299,13 +306,12 @@ class Register
       xml.exitcode exitcode
       xml.invaliddataerrormessage invaliddatamessage if !invaliddatamessage.blank?
       xml.guid self.guid || ''
-
       if !@missingarguments.blank? && exitcode == 4
         xml.missingarguments({:type => "array"}) do
-          @missingarguments.each do | k, v |
-            if k && v.kind_of?(Hash)
+          @missingarguments.each do | v |
+            if v.kind_of?(Hash)
               xml.argument do
-                xml.name k
+                xml.name v['name']
                 xml.value v['value']
                 xml.flag v['flag']
                 xml.kind v['kind']
