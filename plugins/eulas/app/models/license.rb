@@ -26,6 +26,7 @@ require "exceptions"
 # used for loading license data from disk, serializing to xml and json and saving
 class License
 
+  attr_accessor :id
   # name of the license
   attr_reader :name
   # hash of languages, which are available
@@ -33,7 +34,8 @@ class License
   # list of languages, which are available
   attr_reader :langs_list
   # text of the eula
-  attr_reader :text
+  attr_accessor :text
+  attr_accessor :available_langs
   # language, of the current eula translation
   attr_reader :text_lang
   # some licenses only need to be show and user doesn't have to change the radio button to "accept"
@@ -41,9 +43,11 @@ class License
   # true, is this license was already accepted
   attr_accessor :accepted
 
+  #Paths
+  
   VAR_DIR       = File.join(Paths::VAR,"eulas")
   RESOURCES_DIR = File.join(Paths::DATAS,"eulas")
-  EULAS_VENDOR	= File.join(Paths::CONFIG,"vendor","eulas.yml")
+  EULAS_VENDOR = File.join(Paths::CONFIG,"vendor","eulas.yml")
 
   ##
   # Create a license object using the name of the license.
@@ -77,6 +81,7 @@ class License
   # Search for a license using its index in config file
   # @param [String] id index into the list of licenses, will be transformed into int
   # @return [String] license object with default (en) text loaded
+ 
   def self.find(id)
     name = license_names[id.to_i-1] # let ids in find start from 1
     if name.nil? then
@@ -84,6 +89,9 @@ class License
     else
       license = new name
       # lets be sure, that @text and @text_lang is never nil
+
+      #lang = lang == "en"? "en" : lang
+      #license.load_text lang
       license.load_text "en"
       license
     end
@@ -94,8 +102,8 @@ class License
   # @raise [CorruptedFileException] in case of malformed config file (eulas.yml)
   # @return [[String]] list of license names
   def self.license_names
-    config_id	= :eulas
-    config_id	= EULAS_VENDOR if File.exists? EULAS_VENDOR
+    config_id = :eulas
+    config_id = EULAS_VENDOR if File.exists? EULAS_VENDOR
     Rails.logger.info "Reading config file: #{config_id}"
     config = YaST::ConfigFile.new(config_id)
     begin

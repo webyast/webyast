@@ -1,0 +1,28 @@
+<div id="eula" class="plugin-content plugin-border webyast_form">
+  <div class="plugin-header">
+    <div class="left">
+      <label class="plugin-icon-container"><img class="plugin-icon" src="/icons/registration.png"></label>
+      <label class="plugin-name"><%=_("Accept End User Licence Agreement")-%></label>
+    </div>
+    <div class="clearfix"></div>
+  </div>
+
+  <br>
+  
+  <fieldset class="webyast_fieldset"">
+    <div class="fieldset_body eula_fieldset_body">
+      <h3>
+        <%= _("There are no licenses to accept.") %>
+      </h3>
+    </div>
+  <fieldset>
+  
+  <div class="clearfix"></div>
+
+  <div class="button_container">
+    <div class="hr">&nbsp;</div>
+    <div class="nav-buttons">
+      <%= form_back_button + form_str_spacer + (link_to "Next", :controller => "controlpanel", :action => "nextstep")%>
+    </div>
+  </div>
+</div>

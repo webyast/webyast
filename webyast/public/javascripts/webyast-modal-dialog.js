@@ -23,7 +23,7 @@
 //TODO: DIALOG: autodetect submit button -> $form.find('input type=submit')? else ???
 
 
-(function($) {
+/*(function($) {
   var cache = [];
   // Arguments are image paths relative to the current page.
   $.preLoadImages = function() {
@@ -34,9 +34,9 @@
       cache.push(cacheImage);
     }
   }
-})(jQuery)
+})(jQuery)*/
 
-jQuery.preLoadImages("../images/loading.gif", "../images/dialog-warning.png", "../images/info.png", "../images/close.png");
+//jQuery.preLoadImages("../images/loading.gif", "../images/dialog-warning.png", "../images/info.png", "../images/close.png");
 
 (function($, undefined){
   $.modalDialog = {

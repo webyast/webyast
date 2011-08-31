@@ -33,7 +33,6 @@ EOF
     License.const_set 'VAR_DIR'      , File.join(File.dirname(__FILE__),"..","..","test","var")
     YaST::ConfigFile.stubs(:read_file).returns(YAML_CONTENT)
     YaST::ConfigFile.any_instance.stubs(:path).returns(__FILE__)
-
   end
 
   def test_create

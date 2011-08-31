@@ -22,62 +22,141 @@
 # = Eula controller
 # Serves licences and handles notices about acceptations.
 # User does not need any permissions
-class EulasController < ApplicationController
 
+require 'enumerator'
+
+class EulasController < ApplicationController
   before_filter :login_required
   before_filter :ensure_license, :only => [:show, :update]
+  before_filter :ensure_eula_count, :only => [:show, :index, :update]
+  before_filter :ensure_id, :only => [:show, :update]
 
+  layout 'main'
+  
   # Initialize GetText and Content-Type.
   init_gettext "webyast-licenses" 
   
-  #--------------------------------------------------------------------------------
-  #
-  # actions
-  #
-  #--------------------------------------------------------------------------------
-
-  # Renders a list of all available licences. Some (but not all) licence attributes
-  # are shown, especially whether the license was already accepted or not.
-  def index
-    @licenses = License.find_all
-    respond_to do |format|
-      format.xml { render :xml => @licenses.to_xml }
-      format.json{ render :json=> @licenses.to_json}
+  private
+    def ensure_eula_count
+      if session[:eula_count].nil?
+        licenses = License.find_all
+        Rails.logger.debug "#{licenses.length} licences found"
+        session[:eula_count] = licenses.length
+      end
+      @eula_count = session[:eula_count]
     end
-  end
 
-  # Render detailed info about a particular licence. Not all translations are 
-  # rendered, only the selected one or english by default.
-  def show
-    @license.load_text params[:lang] unless params[:lang].nil?
-    logger.debug @license.inspect
-    respond_to do |format|
-      format.xml { render :xml => @license.to_xml }
-      format.json{ render :json=> @license.to_json}
+    def ensure_id
+      redirect_to :action => :show, :id => 1 and return if params[:id].nil? # RORSCAN_ITL
+      @eula_id   = [1,params[:id].to_i].max
     end
-  end
+
+    def next_in_range(range, current)
+      [current+1, range.max].min
+    end
+
+    def prev_in_range(range, current)
+      [current-1, range.min].max
+    end
+
+  public
+    def index
+      if request.format.html?
+        if session[:eula_count] == 0
+          Rails.logger.debug "No licences found"
+          render :no_licenses
+        else
+          Rails.logger.debug "Show first licence"
+          redirect_to :action => :show, :id => 1
+        end
+      else
+        @licenses = License.find_all
+        respond_to do |format|
+          format.xml { render :xml => @licenses.to_xml }
+          format.json{ render :json=> @licenses.to_json}
+        end
+      end
+    end
+
+    def show
+      if request.format.html?
+        @prev_id = prev_in_range( (1..@eula_count), @eula_id)
+        @last_eula = @eula_id == @eula_count
+        @first_eula= @eula_id == 1
+        basesystem = Basesystem.new.load_from_session(session)
+        @first_basesystem_step = basesystem ? basesystem.first_step? : false
+        @basesystem_completed = basesystem ? basesystem.completed? : true
+        
+        @eula = License.find @eula_id
+        @eula.load_text current_locale unless current_locale.nil?
+        
+        @accept_permission = permission_check :'org.opensuse.yast.modules.eulas.accept'
+      else
+        Rails.logger.error "TO XML"
+        #OLD: @license.load_text params[:lang] unless params[:lang].nil?      
+        @license = License.find params[:id]
+        @license.load_text params[:lang] unless params[:lang].nil?
+       
+        respond_to do |format|
+          format.xml { render :xml => @license.to_xml }
+          format.json{ render :json=> @license.to_json}
+        end
+       end
+    end
+
+    def update
+      if request.format.html?
+        #@eula = License.find(@eula_id, current_locale)
+        @eula = License.find @eula_id
+        @eula.load_text current_locale unless current_locale.nil?
+        
+        @eula.text = ""
+        @eula.available_langs = []
+        @eula.id = @eula_id
+        
+        accepted = params[:eula] && params[:eula][:accepted] == "true"
+        
+        if accepted
+          @eula.accepted = accepted
+          @eula.save # do not save again if there is no change
+          if @eula_count == @eula_id
+            redirect_success
+            return
+          end
+          next_id = next_in_range( (1..@eula_count), @eula_id)
+        else
+          flash[:error] = _("You must accept all licences before using this product!")
+          next_id = @eula_id
+        end
+        redirect_to :action => :show, :id => next_id
+      
+      else
+        permission_check :'org.opensuse.yast.modules.eulas.accept'
+        raise InvalidParameters.new({:id => 'MISSING'}) if params[:id].nil? # RORSCAN_ITL
+        raise InvalidParameters.new({:eulas_accepted => 'INVALID'}) unless [true,false,"true","false"].include? params[:eulas][:accepted] # RORSCAN_ITL
+      
+        @license = License.find params[:id]
+        @license.load_text params[:lang] unless params[:lang].nil?
+        
+        render ErrorResult.error(404, 1, "License not found") and return if @license.nil?
+        @license.accepted = ([true,"true"].include? params[:eulas][:accepted]) ? true : false
+        @license.save
   
-  # Save updated license data. The only changeable attribute is "accepted"
-  def update
-    permission_check :'org.opensuse.yast.modules.eulas.accept'
-    raise InvalidParameters.new({:id => 'MISSING'}) if params[:id].nil? # RORSCAN_ITL
-    raise InvalidParameters.new({:eulas_accepted => 'INVALID'}) unless [true,false,"true","false"].include? params[:eulas][:accepted] # RORSCAN_ITL
-    @license = License.find params[:id]
-    render ErrorResult.error(404, 1, "License not found") and return if @license.nil?
-    @license.accepted = ([true,"true"].include? params[:eulas][:accepted]) ? true : false
-    @license.save
-    respond_to do |format|
-      format.xml { render :xml => @license.to_xml }
-      format.json{ render :json=> @license.to_json}
+        respond_to do |format|
+          format.xml { render :xml => @license.to_xml }
+          format.json{ render :json=> @license.to_json}
+        end
+      
+      end
     end
-  end
 
   private
 
   def ensure_license
     raise InvalidParameters.new({:id => 'MISSING'}) if params[:id].nil? # RORSCAN_ITL
-    @id      = params[:id].to_i
+    @id = params[:id].to_i
     @license = License.find @id
+    @license.load_text params[:lang] unless params[:lang].nil?
     render ErrorResult.error(404, 1, "License not found") and return if @license.nil?
   end
 

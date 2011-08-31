@@ -1,42 +1,76 @@
 <!--
 # Copyright (c) 2009-2010 Novell, Inc.
-# 
+#
 # All Rights Reserved.
-# 
+#
 # This program is free software; you can redistribute it and/or modify it
 # under the terms of version 2 of the GNU General Public License
 # as published by the Free Software Foundation.
-# 
+#
 # This program is distributed in the hope that it will be useful,
 # but WITHOUT ANY WARRANTY; without even the implied warranty of
 # MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
 # GNU General Public License for more details.
-# 
+#
 # You should have received a copy of the GNU General Public License
 # along with this program; if not, contact Novell, Inc.
-# 
+#
 # To contact Novell about this file by physical or electronic mail,
 # you may find current contact information at www.novell.com
 -->
-<h1><%= @node -%> EULAS - <%= @license.name -%></h1><br/>
-<table>
-<tr>
-  <td>Accepted?</td>
-  <td><%= @license.accepted.to_s -%></td>
-</tr>
-<tr>
-  <td>Only show?</td>
-  <td><%= @license.only_show.to_s -%></td>
-</tr>
-<tr>
-  <td>Available translations:</td>
-  <td><%= @license.langs_list.collect{ |lang| link_to lang, :only_path => :true, :controller => "eulas", :action => :show, :id => @id, :params => {:lang => lang} }.join(", ")  -%></td>
-</tr>
-<tr>
-  <td>Current translation:</td>
-  <td><%= @license.text_lang -%></td>
-</tr>
-</table>
-<pre>
-<%= @license.text -%>
-</pre>
+<% disabled = ! @accept_permission %>
+
+<div id="eula" class="plugin-content plugin-border">
+
+<% form_for(:eula, :url => { :action => :update, :id => @eula_id }, :html=> { :method => :put, :class=>"webyast_form"}) do |f|  -%>
+
+  <div class="plugin-header">
+    <div class="left">
+      <label class="plugin-icon-container"><img class="plugin-icon" src="/icons/registration.png"></label>
+      <label class="plugin-name"><%=_("Licence Agreement")-%> - <%= @eula.name -%></label>
+    </div>
+    <div class="clearfix"></div>
+  </div>
+
+  <div class="clearfix">&nbsp;</div>
+
+  <fieldset class="webyast_fieldset eula_fieldset">
+    <div class="eula-text-area">
+      <%= @eula.text.gsub(%r{^[\n\n$]}, '<p class="eula_paragraph">').gsub(%r{[\n]}, ' ')%>
+    </div>
+
+    <div class="clearfix">&nbsp;</div>
+
+    <% if @eula.only_show %>
+      <%=  hidden_field_tag :accepted, "true" %>
+    <% else %>
+      <div class="fieldset_body eula_fieldset_body">
+        <div class="row">
+          <%=  f.radio_button :accepted, :true, :checked => @eula.accepted, :readonly => disabled, :disabled => disabled %>
+          <%=  _("Yes, I agree to the license agreement.") %>
+        </div>
+        <div class="row">
+          <%=  f.radio_button :accepted, :false, :checked => (! @eula.accepted), :readonly => disabled, :disabled => disabled %>
+          <%=  _("No, I do not agree.") %>
+        </div>
+      <% end -%>
+      <% unless @eula.text_lang == 'en' then %>
+      <%= f.hidden_field :text_lang %>
+    <% end %>
+  </fieldset>
+
+  <div class="clearfix"></div>
+
+  <div class="button_container">
+    <div class="hr">&nbsp;</div>
+    <div class="nav-buttons">
+      <%= form_next_button :disabled => disabled %>
+      <%= if @first_eula
+        @first_basesystem_step ? "" : (form_str_spacer + form_back_button )
+      else
+        form_str_spacer + (link_to _("Back"), :action => :show, :id => @prev_id)
+      end %>
+    </div>
+  </div>
+<% end -%>
+</div>
