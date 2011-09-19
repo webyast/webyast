@@ -103,40 +103,58 @@ class UsersController < ApplicationController
       return
     end
     @users = User.find_all params
-    if @users.nil?
-      unless request.format.html?
-        Rails.logger.error "No users found."
-        render ErrorResult.error(404, 2, "No users found") and return
-      else
-        flash[:error] = _("No users found.")
-      end
-    else
-      @users.each do |user|
-        user.user_password2 = user.user_password
-        user.uid_number	= user.uid_number
-        user.grp_string = user.grouplist.keys.join(",")
-        my_roles=[]
-        all_roles=[]
-	@roles= Role.find :all
-        @roles.each do |role|
-         if role.users.include?(user.id)
-          my_roles.push(role.name)
-         end
-         all_roles.push(role.name)
-        end if @roles
+    Rails.logger.error "No users found." if @users.nil?
+    respond_to do |format|
+      format.xml { 
+        if @users.nil?
+          render ErrorResult.error(404, 2, "No users found") and return
+        else
+          render  :xml => @users.to_xml(:root => "users", 
+                  :dasherize => false ) 
+        end
+        return
+      }
+      format.json {
+        if @users.nil?
+          render ErrorResult.error(404, 2, "No users found") and return
+        else
+          render :json => @users.to_json 
+        end
+        return
+      }
+      format.html { 
+        if @users.nil?
+          flash[:error] = _("No users found.")
+        else
+          @users.each do |user|
+            user.user_password2 = user.user_password
+            user.uid_number     = user.uid_number
+            user.grp_string     = user.grouplist.keys.join(",")
+            my_roles=[]
+            all_roles=[]
+            @roles= Role.find :all
+            @roles.each do |role|
+              if role.users.include?(user.id)
+                my_roles.push(role.name)
+              end
+              all_roles.push(role.name)
+            end if @roles
 
-        user.roles_string = my_roles.join(",")
-        @all_roles_string = all_roles.join(",")
-	@groups = []
-        if @permissions[:groupsget]
-          @groups = Group.find :all
+            user.roles_string = my_roles.join(",")
+            @all_roles_string = all_roles.join(",")
+            @groups = []
+            if @permissions[:groupsget]
+              @groups = Group.find :all
+            end
+            grps_list=[]
+            @groups.each do |group|
+              grps_list.push(group.cn)
+            end
+            @all_grps_string = grps_list.join(",")
+          end unless @users.nil?
         end
-	grps_list=[]
-        @groups.each do |group|
-	 grps_list.push(group.cn)
-        end
-        @all_grps_string = grps_list.join(",")
-      end
+        render :index
+      }
     end
   end
 
@@ -156,6 +174,11 @@ class UsersController < ApplicationController
       end
     rescue Exception => e
       render ErrorResult.error(500, 2, e.message) and return
+    end
+
+    respond_to do |format|
+      format.xml { render  :xml => @user.to_xml( :dasherize => false ) }
+      format.json { render :json => @user.to_json }
     end
   end
 
