@@ -1,4 +1,4 @@
 <h1><%= @node -%> resources</h1>
 <% @resources.each do |rsrc| -%>
-   <%= link_to rsrc.interface, rsrc.href -%><br/>
+   <%= link_to rsrc.interface, rsrc.href+".xml" -%><br/>
 <% end -%>
