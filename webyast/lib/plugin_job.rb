@@ -103,7 +103,7 @@ class PluginJob < Struct.new(:class_name,:method,:arguments)
         end
       end
     else
-      Rails.logger.error "Method #{function_class}:#{function_method} not available"
+      Rails.logger.error "Method #{object}:#{function_method} not available"
     end
   end
 end
