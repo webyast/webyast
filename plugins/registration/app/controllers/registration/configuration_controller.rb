@@ -57,6 +57,11 @@ class Registration::ConfigurationController < ApplicationController
     permission_check("org.opensuse.yast.modules.ysr.getregistrationconfig")
     # do not run registration, only get the config
     @register = Register.new
+    respond_to do |format|
+      format.xml { render  :xml => @register.config_to_xml( :dasherize => false ) }
+      format.html { render :xml => @register.config_to_xml( :dasherize => false ) }
+      format.json { render :json => @register.config_to_json }
+    end
   end
 
   def index
