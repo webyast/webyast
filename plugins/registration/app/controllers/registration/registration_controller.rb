@@ -314,7 +314,11 @@ public
     permission_check("org.opensuse.yast.modules.ysr.getregistrationconfig")
     # get registration status
     @register = Register.new
-    render :status
+    respond_to do |format|
+      format.xml { render  :xml => @register.status_to_xml( :dasherize => false ) }
+      format.html { render :xml => @register.status_to_xml( :dasherize => false ) }
+      format.json { render :json => @register.status_to_json.to_json }
+    end
   end
 
   def index

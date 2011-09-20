@@ -262,7 +262,6 @@ public
     read_status
     xml = options[:builder] ||= Builder::XmlMarkup.new(options)
     xml.instruct! unless options[:skip_instruct]
-
     xml.registration do
       xml.guid @guid if self.is_registered?
       xml.configerror 'true' if @config_error == true
