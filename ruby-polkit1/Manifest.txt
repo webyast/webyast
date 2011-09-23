@@ -1,0 +1,10 @@
+CHANGELOG.rdoc
+Manifest.txt
+README.rdoc
+Rakefile
+lib/polkit1.rb
+ext/polkit1/polkit1.c
+ext/polkit1/extconf.rb
+test/helper.rb
+test/test_loading.rb
+test/test_permissions.rb
