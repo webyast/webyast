@@ -1,0 +1,10 @@
+main:
+  icon: '/icons/yast-terminal.png'
+  url: /terminal
+  groups: [ System ]
+  tags: [ terminal]
+  title: _("Terminal")
+  description: _("Web based AJAX terminal emulator")
+  resources: [ terminal ]
+  read_permissions: [ org.opensuse.yast.modules.yapi.terminal.read ]
+
