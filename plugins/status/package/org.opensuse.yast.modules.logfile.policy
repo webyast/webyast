@@ -10,9 +10,8 @@
     <description>Read given log file.</description>
     <message>System policy prevents the Yast DBus service from reading the file.</message>
     <defaults>
-      <allow_any>no</allow_any>
       <allow_inactive>no</allow_inactive>
-      <allow_active>auth_admin_keep_session</allow_active>
+      <allow_active>no</allow_active>
     </defaults>
   </action>
 </policyconfig> 

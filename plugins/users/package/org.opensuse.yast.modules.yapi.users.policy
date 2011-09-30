@@ -10,9 +10,8 @@
     <description>Get list of groups.</description>
     <message>System policy prevents the Yast DBus service from reading groups.</message>
     <defaults>
-      <allow_any>no</allow_any>
       <allow_inactive>no</allow_inactive>
-      <allow_active>auth_admin_keep_session</allow_active>
+      <allow_active>no</allow_active>
     </defaults>
   </action>
 
@@ -20,9 +19,8 @@
     <description>Get a single groups.</description>
     <message>System policy prevents the Yast DBus service from reading groups.</message>
     <defaults>
-      <allow_any>no</allow_any>
       <allow_inactive>no</allow_inactive>
-      <allow_active>auth_admin_keep_session</allow_active>
+      <allow_active>no</allow_active>
     </defaults>
   </action>
 
@@ -30,9 +28,8 @@
     <description>Create a new group.</description>
     <message>Authentication is required to create a new group.</message>
     <defaults>
-      <allow_any>no</allow_any>
       <allow_inactive>no</allow_inactive>
-      <allow_active>auth_admin_keep_session</allow_active>
+      <allow_active>no</allow_active>
     </defaults>
   </action>
 
@@ -40,9 +37,8 @@
     <description>Update settings of a group.</description>
     <message>Authentication is required to update group settings.</message>
     <defaults>
-      <allow_any>no</allow_any>
       <allow_inactive>no</allow_inactive>
-      <allow_active>auth_admin_keep_session</allow_active>
+      <allow_active>no</allow_active>
     </defaults>
   </action>
 
@@ -50,9 +46,8 @@
     <description>Delete a group.</description>
     <message>Authentication is required to delete a group.</message>
     <defaults>
-      <allow_any>no</allow_any>
       <allow_inactive>no</allow_inactive>
-      <allow_active>auth_admin_keep_session</allow_active>
+      <allow_active>no</allow_active>
     </defaults>
   </action>
 
@@ -60,9 +55,8 @@
     <description>Get list of users.</description>
     <message>System policy prevents the Yast DBus service from reading users.</message>
     <defaults>
-      <allow_any>no</allow_any>
       <allow_inactive>no</allow_inactive>
-      <allow_active>auth_admin_keep_session</allow_active>
+      <allow_active>no</allow_active>
     </defaults>
   </action>
 
@@ -70,9 +64,8 @@
     <description>Get the information about given user.</description>
     <message>System policy prevents the Yast DBus service from reading user info.</message>
     <defaults>
-      <allow_any>no</allow_any>
       <allow_inactive>no</allow_inactive>
-      <allow_active>auth_admin_keep_session</allow_active>
+      <allow_active>no</allow_active>
     </defaults>
   </action>
 
@@ -82,7 +75,6 @@
     <defaults>
       <allow_inactive>no</allow_inactive>
       <allow_active>no</allow_active>
-      <allow_active>auth_admin_keep_session</allow_active>
     </defaults>
   </action>
 
@@ -92,7 +84,6 @@
     <defaults>
       <allow_inactive>no</allow_inactive>
       <allow_active>no</allow_active>
-      <allow_active>auth_admin_keep_session</allow_active>
     </defaults>
   </action>
 
@@ -102,7 +93,6 @@
     <defaults>
       <allow_inactive>no</allow_inactive>
       <allow_active>no</allow_active>
-      <allow_active>auth_admin_keep_session</allow_active>
     </defaults>
   </action>
 </policyconfig> 

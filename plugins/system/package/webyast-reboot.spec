@@ -82,8 +82,8 @@ cp -a * $RPM_BUILD_ROOT%{plugin_dir}/
 rm -f $RPM_BUILD_ROOT%{plugin_dir}/COPYING
 
 # Policies
-mkdir -p $RPM_BUILD_ROOT/usr/share/PolicyKit/policy
-install -m 0644 %SOURCE1 $RPM_BUILD_ROOT/usr/share/PolicyKit/policy/
+mkdir -p $RPM_BUILD_ROOT/usr/share/polkit-1/actions
+install -m 0644 %SOURCE1 $RPM_BUILD_ROOT/usr/share/polkit-1/actions
 
 # remove .po files (no longer needed)
 rm -rf $RPM_BUILD_ROOT/%{plugin_dir}/po
@@ -101,26 +101,26 @@ rm -rf $RPM_BUILD_ROOT
 %posttrans
 # granting all permissions for the web user
 #FIXME don't silently fail
-polkit-auth --user %{webyast_user} --grant org.freedesktop.hal.power-management.shutdown >& /dev/null || true
-polkit-auth --user %{webyast_user} --grant org.freedesktop.hal.power-management.shutdown-multiple-sessions >& /dev/null || true
-polkit-auth --user %{webyast_user} --grant org.freedesktop.hal.power-management.reboot >& /dev/null || true
-polkit-auth --user %{webyast_user} --grant org.freedesktop.hal.power-management.reboot-multiple-sessions >& /dev/null || true
+/usr/sbin/grantwebyastrights --user %{webyast_user} --action grant --policy org.freedesktop.hal.power-management.shutdown >& /dev/null || true
+/usr/sbin/grantwebyastrights --user %{webyast_user} --action grant --policy org.freedesktop.hal.power-management.shutdown-multiple-sessions >& /dev/null || true
+/usr/sbin/grantwebyastrights --user %{webyast_user} --action grant --policy org.freedesktop.hal.power-management.reboot >& /dev/null || true
+/usr/sbin/grantwebyastrights --user %{webyast_user} --action grant --policy org.freedesktop.hal.power-management.reboot-multiple-sessions >& /dev/null || true
 
 # granting all permissions for root
-polkit-auth --user root --grant org.freedesktop.hal.power-management.shutdown >& /dev/null || true
-polkit-auth --user root --grant org.freedesktop.hal.power-management.shutdown-multiple-sessions >& /dev/null || true
-polkit-auth --user root --grant org.freedesktop.hal.power-management.reboot >& /dev/null || true
-polkit-auth --user root --grant org.freedesktop.hal.power-management.reboot-multiple-sessions >& /dev/null || true
+/usr/sbin/grantwebyastrights --user root --action grant --policy org.freedesktop.hal.power-management.shutdown >& /dev/null || true
+/usr/sbin/grantwebyastrights --user root --action grant --policy org.freedesktop.hal.power-management.shutdown-multiple-sessions >& /dev/null || true
+/usr/sbin/grantwebyastrights --user root --action grant --policy org.freedesktop.hal.power-management.reboot >& /dev/null || true
+/usr/sbin/grantwebyastrights --user root --action grant --policy org.freedesktop.hal.power-management.reboot-multiple-sessions >& /dev/null || true
 
 %postun
 # don't remove the rights during package update ($1 > 0)
 # see https://fedoraproject.org/wiki/Packaging/ScriptletSnippets#Syntax for details
 if [ $1 -eq 0 ] ; then
   # discard all configured permissions for the web user
-  polkit-auth --user %{webyast_user} --revoke org.freedesktop.hal.power-management.shutdown >& /dev/null || :
-  polkit-auth --user %{webyast_user} --revoke org.freedesktop.hal.power-management.shutdown-multiple-sessions >& /dev/null || :
-  polkit-auth --user %{webyast_user} --revoke org.freedesktop.hal.power-management.reboot >& /dev/null || :
-  polkit-auth --user %{webyast_user} --revoke org.freedesktop.hal.power-management.reboot-multiple-sessions >& /dev/null || :
+  /usr/sbin/grantwebyastrights --user %{webyast_user} --action revoke --policy org.freedesktop.hal.power-management.shutdown >& /dev/null || :
+  /usr/sbin/grantwebyastrights --user %{webyast_user} --action revoke --policy org.freedesktop.hal.power-management.shutdown-multiple-sessions >& /dev/null || :
+  /usr/sbin/grantwebyastrights --user %{webyast_user} --action revoke --policy org.freedesktop.hal.power-management.reboot >& /dev/null || :
+  /usr/sbin/grantwebyastrights --user %{webyast_user} --action revoke --policy org.freedesktop.hal.power-management.reboot-multiple-sessions >& /dev/null || :
 fi
 
 %files -f webyast-reboot.lang
@@ -141,9 +141,9 @@ fi
 %{plugin_dir}/public
 %{plugin_dir}/locale
 
-%dir /usr/share/PolicyKit
-%dir /usr/share/PolicyKit/policy
-%attr(644,root,root) %config /usr/share/PolicyKit/policy/org.opensuse.yast.system.power-management.policy
+%dir /usr/share/polkit-1
+%dir /usr/share/polkit-1/ations
+%attr(644,root,root) %config /usr/share/polkit-1/ations/org.opensuse.yast.system.power-management.policy
 
 %doc COPYING
 

@@ -56,7 +56,7 @@ require 'tasks/rails'
 require 'fileutils'
 
 def grant(user, right)
-  sh "/usr/bin/polkit-auth --user #{user} --grant #{right} ||:"
+  sh "/usr/sbin/grantwebyastrights --user #{user} --action grant --policy #{right} ||:"
 end
 
 desc "Deploy for development - run db:migrate, create basic dirs and install grantwebyastrights."
@@ -72,8 +72,7 @@ task :deploy_local, [:user] => :"db:migrate" do |t, args|
   chmod  0744, "/usr/sbin/webyastPermissionsService.rb"
   mkdir_p "/usr/share/dbus-1/system-services/"
   cp_r    "package/webyast.permissions.service.service", "/usr/share/dbus-1/system-services/"
-  FileUtils.mkdir_p "/usr/share/PolicyKit/policy/"
-  FileUtils.cp_r    "package/org.opensuse.yast.permissions.policy",  "/usr/share/PolicyKit/policy/"
+  `rake install_policies`
   if args.user == "webyast"
     # add user webyast
     sh "/usr/sbin/groupadd -r webyast ||:" #&>/dev/null ||:
@@ -81,7 +80,6 @@ task :deploy_local, [:user] => :"db:migrate" do |t, args|
   end
   # grant rights to him
   grant args.user, "org.opensuse.yast.module-manager.import"
-  grant args.user, "org.freedesktop.policykit.read"
   grant args.user, "org.freedesktop.packagekit.system-update"
 end
 

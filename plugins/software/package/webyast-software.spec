@@ -112,10 +112,10 @@ rm -rf $RPM_BUILD_ROOT/%{plugin_dir}/po
 %find_lang webyast-software
 
 # Policies
-mkdir -p $RPM_BUILD_ROOT/usr/share/PolicyKit/policy
-install -m 0644 %SOURCE1 $RPM_BUILD_ROOT/usr/share/PolicyKit/policy/
-install -m 0644 %SOURCE2 $RPM_BUILD_ROOT/usr/share/PolicyKit/policy/
-install -m 0644 %SOURCE3 $RPM_BUILD_ROOT/usr/share/PolicyKit/policy/
+mkdir -p $RPM_BUILD_ROOT/usr/share/polkit-1/actions
+install -m 0644 %SOURCE1 $RPM_BUILD_ROOT/usr/share/polkit-1/actions/
+install -m 0644 %SOURCE2 $RPM_BUILD_ROOT/usr/share/polkit-1/actions/
+install -m 0644 %SOURCE3 $RPM_BUILD_ROOT/usr/share/polkit-1/actions/
 
 %if 0%{?suse_version} == 0 || 0%{?suse_version} > 1130
 # openSUSE-11.4 has policykit-1 which uses .pkla files
@@ -142,9 +142,9 @@ rm -rf $RPM_BUILD_ROOT
 
 
 # grant the permission for the webyast user
-polkit-auth --user %{webyast_user} --grant org.freedesktop.packagekit.system-sources-configure >& /dev/null || true
-polkit-auth --user %{webyast_user} --grant org.freedesktop.packagekit.system-update >& /dev/null || true
-polkit-auth --user %{webyast_user} --grant org.freedesktop.packagekit.package-eula-accept >& /dev/null || true
+/usr/sbin/grantwebyastrights --user %{webyast_user} --action grant --policy org.freedesktop.packagekit.system-sources-configure >& /dev/null || true
+/usr/sbin/grantwebyastrights --user %{webyast_user} --action grant --policy org.freedesktop.packagekit.system-update >& /dev/null || true
+/usr/sbin/grantwebyastrights --user %{webyast_user} --action grant --policy org.freedesktop.packagekit.package-eula-accept >& /dev/null || true
 
 %files -f webyast-software.lang
 %defattr(-,root,root)
@@ -152,8 +152,8 @@ polkit-auth --user %{webyast_user} --grant org.freedesktop.packagekit.package-eu
 %dir %{webyast_dir}/vendor
 %dir %{webyast_dir}/vendor/plugins
 %dir %{plugin_dir}
-%dir /usr/share/PolicyKit
-%dir /usr/share/PolicyKit/policy
+%dir /usr/share/polkit-1
+%dir /usr/share/polkit-1/actions
 %{plugin_dir}/README
 %{plugin_dir}/Rakefile
 %{plugin_dir}/init.rb
@@ -164,9 +164,9 @@ polkit-auth --user %{webyast_user} --grant org.freedesktop.packagekit.package-eu
 %{plugin_dir}/config
 %{plugin_dir}/locale
 %{plugin_dir}/shortcuts.yml
-%attr(644,root,root) %config /usr/share/PolicyKit/policy/org.opensuse.yast.system.patches.policy
-%attr(644,root,root) %config /usr/share/PolicyKit/policy/org.opensuse.yast.system.packages.policy
-%attr(644,root,root) %config /usr/share/PolicyKit/policy/org.opensuse.yast.system.repositories.policy
+%attr(644,root,root) %config /usr/share/polkit-1/actions/org.opensuse.yast.system.patches.policy
+%attr(644,root,root) %config /usr/share/polkit-1/actions/org.opensuse.yast.system.packages.policy
+%attr(644,root,root) %config /usr/share/polkit-1/actions/org.opensuse.yast.system.repositories.policy
 %attr(775,%{webyast_user},root) /var/lib/webyast/software
 %doc COPYING
 %if 0%{?suse_version} == 0 || 0%{?suse_version} > 1130

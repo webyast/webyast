@@ -48,6 +48,7 @@ module PolKit1
       ini_file.delete_section(perm)
     end
     ini_file.save     
+    File.delete(file) if File.size(file) == 0
   end
 
 end

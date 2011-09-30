@@ -61,11 +61,6 @@ method_polkit1_check(VALUE self, VALUE act_v, VALUE usr_v)
    * check if init(1) is authorized (it always is).
    */
    parent_pid = getppid ();
-   if (parent_pid == 1)
-   {
-      error_string = "Parent process was reaped by init(1)";
-      goto finish;;
-   }
    subject = polkit_unix_process_new (parent_pid);
    polkit_unix_process_set_uid(subject, uid); 
    cancellable = g_cancellable_new ();

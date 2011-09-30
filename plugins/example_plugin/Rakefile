@@ -14,6 +14,5 @@ task :deploy_local do |t|
   chmod  744, "/usr/local/sbin/exampleService.rb"
   mkdir_p "/usr/share/dbus-1/system-services/"
   cp_r    "package/example.service.service", "/usr/share/dbus-1/system-services/"
-  mkdir_p "/usr/share/PolicyKit/policy/"
-  cp_r    "package/org.example.plugin.policy", "/usr/share/PolicyKit/policy/"
+  `rake install_policies`
 end

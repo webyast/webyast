@@ -21,7 +21,7 @@
 require 'rubygems'
 require 'dbus'
 require 'etc'
-require 'polkit'
+require 'polkit1'
 
 # Choose the bus (could also be DBus::session_bus, which is not suitable for a system service)
 bus = DBus::system_bus
@@ -48,42 +48,82 @@ class WebyastPermissionsService < DBus::Object
   # Create an interface.
   dbus_interface "webyast.permissions.Interface" do
     dbus_method :grant, "out result:as, in permissions:as, in user:s" do |permissions,user,sender|
-      result = execute("grant", permissions, user,sender)
+      result = execute(:grant, permissions, user,sender)
       log "Grant permissions #{permissions.inspect} for user #{user} with result #{result.inspect}"
       [result]
     end
     dbus_method :revoke, "out result:as, in permissions:as, in user:s" do |permissions,user,sender|
-      result = execute("revoke", permissions, user,sender)
+      result = execute(:revoke, permissions, user,sender)
       log "Revoke permissions #{permissions.inspect} for user #{user} with result #{result.inspect}"
+      [result]
+    end
+    dbus_method :check, "out result:as, in permissions:as, in user:s" do |permissions,user,sender|
+      result = execute(:check, permissions, user,sender)
+      log "check permissions #{permissions.inspect} for user #{user} with result #{result.inspect}"
       [result]
     end
   end
 
 USER_REGEX=/\A[ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz_][ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789_.-]*[ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789_.$-]?\Z/
 USER_WITH_DOMAIN_REGEX=/\A[a-zA-Z0-9][a-zA-Z0-9\-.]*\\[ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz_][ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789_.-]*[ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789_.$-]?\Z/
+POLKIT_SECTION = "55-webyast.d"
+
   def execute (command, permissions, user, sender)
     #TODO polkit check, user escaping, perm whitespacing
-    return ["NOPERM"] unless check_polkit sender
+    return ["NOPERM"] unless check_polkit sender, command
     return ["USER_INVALID"] if invalid_user_name? user 
     result = []
     permissions.each do |p|
       #whitespace check for valid permission string to avoid attack
-      if p.match(/^[a-zA-Z][a-zA-Z0-9.-]*$/)
-        result << `polkit-auth --user '#{user}' --#{command} '#{p}' 2>&1` # RORSCAN_ITL
-      else
+      unless p.match(/^[a-zA-Z][a-zA-Z0-9.-]*$/)
         result << "perm #{p} is INVALID" # XXX tom: better don't include invalif perms here, we do not know what the calling function is doing with it, like displaying it via the browser, passing it to the shell etc.
+      else
+        case command
+          when :grant:
+            begin
+              PolKit1::polkit1_write(POLKIT_SECTION, p, true, user)
+              result << "true"
+            rescue Exception => e
+              result << e.message
+            end   
+          when :revoke:
+            begin
+              PolKit1::polkit1_write(POLKIT_SECTION, p, false, user)
+              result << "true"
+            rescue Exception => e
+              result << e.message
+            end   
+          when :check:
+            if PolKit1::polkit1_check(p, user) == :yes
+              result << "yes"
+            else
+              result << "no"
+            end
+          else 
+        end
       end
     end
     return result
   end
 
-  PERMISSION="org.opensuse.yast.permissions.write"
-  def check_polkit(sender)
+  PERMISSION_WRITE="org.opensuse.yast.permissions.write"
+  PERMISSION_READ="org.opensuse.yast.permissions.read"
+  def check_polkit(sender, command)
     uid = DBus::SystemBus.instance.proxy.GetConnectionUnixUser(sender)[0]
     user = Etc.getpwuid(uid).name
     begin
-      return PolKit.polkit_check(PERMISSION, user) == :yes
+      case command
+        when :grant:
+          return PolKit1.polkit1_check(PERMISSION_WRITE, user) == :yes
+        when :revoke:
+          return PolKit1.polkit1_check(PERMISSION_WRITE, user) == :yes
+        when :check:
+          return PolKit1.polkit1_check(PERMISSION_READ, user) == :yes
+        else
+          return false
+      end
     rescue Exception => e
+      log "PolKit1 returns an error: #{e.inspect}"
       return false
     end
   end

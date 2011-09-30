@@ -93,9 +93,9 @@ cp -a * $RPM_BUILD_ROOT%{plugin_dir}/
 rm -f $RPM_BUILD_ROOT%{plugin_dir}/COPYING
 
 # Policies
-mkdir -p $RPM_BUILD_ROOT/usr/share/PolicyKit/policy
-install -m 0644 %SOURCE1 $RPM_BUILD_ROOT/usr/share/PolicyKit/policy/
-install -m 0644 %SOURCE2 $RPM_BUILD_ROOT/usr/share/PolicyKit/policy/
+mkdir -p $RPM_BUILD_ROOT/usr/share/polkit-1/actions
+install -m 0644 %SOURCE1 $RPM_BUILD_ROOT/usr/share/polkit-1/actions/
+install -m 0644 %SOURCE2 $RPM_BUILD_ROOT/usr/share/polkit-1/actions/
 
 # LogFile.rb
 mkdir -p $RPM_BUILD_ROOT/usr/share/YaST2/modules/
@@ -171,10 +171,10 @@ rccollectd try-restart
 %{plugin_dir}/config/*
 %dir %attr (-,%{webyast_user},root) %{plugin_dir}/config
 
-%dir /usr/share/PolicyKit
-%dir /usr/share/PolicyKit/policy
-%attr(644,root,root) %config /usr/share/PolicyKit/policy/org.opensuse.yast.system.status.policy
-%attr(644,root,root) %config /usr/share/PolicyKit/policy/org.opensuse.yast.modules.logfile.policy
+%dir /usr/share/polkit-1
+%dir /usr/share/polkit-1/actions
+%attr(644,root,root) %config /usr/share/polkit-1/actions/org.opensuse.yast.system.status.policy
+%attr(644,root,root) %config /usr/share/polkit-1/actions/org.opensuse.yast.modules.logfile.policy
 %dir /etc/webyast/vendor
 %config /etc/webyast/logs.yml
 %doc COPYING

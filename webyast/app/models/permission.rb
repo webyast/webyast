@@ -21,7 +21,6 @@
 # Permission class
 #
 require 'exceptions'
-require 'polkit'
 
 class Permission
 #list of hash { :name => id, :granted => boolean, :description => string (optional)}
@@ -31,14 +30,12 @@ private
 
   def self.get_cache_timestamp
     lst = [
-      # the global config file
-      File.mtime('/etc/PolicyKit/PolicyKit.conf'),
       # policies
-      File.mtime('/usr/share/PolicyKit/policy/'),
+      File.mtime('/usr/share/polkit-1/'),
+      # default 
+      File.mtime('/var/lib/polkit-1/'),
       # explicit user authorizations
-      File.mtime('/var/lib/PolicyKit/'),
-      # default overrides
-      File.mtime('/var/lib/PolicyKit-public/'),
+      File.mtime('/etc/polkit-1'),
     ]
     lst.compact!
     lst.max.to_i
@@ -125,7 +122,8 @@ private
   def mark_granted_permissions_for_user(user)
     @permissions.collect! do |perm| 
       begin
-        if PolKit.polkit_check( perm[:id], user) == :yes
+        service = Permission.dbus_obj
+        if service.check( [perm[:id]], user )[0][0] == "yes"
           perm[:granted] = true
           Rails.logger.debug "Action: #{perm[:id]} User: #{user} Result: ok"
         else
@@ -144,17 +142,15 @@ private
     end
   end
 
-
-
-	def get_description (action)
-		desc = `polkit-action --action #{action} | grep description: | sed 's/^description:[:space:]*\\(.\\+\\)$/\\1/'`
-		desc.strip!
-		desc
+  def get_description (action)
+    desc = `/usr/bin/pkaction --action-id #{action} | grep description: |  sed 's/description://g'`
+    desc.strip!
+    desc
   end
 
 public
   def self.all_actions
-    `/usr/bin/polkit-action` # RORSCAN_ITL
+    `/usr/bin/pkaction` # RORSCAN_ITL
   end
 
   SUSE_STRING = "org.opensuse.yast"

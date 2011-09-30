@@ -12,7 +12,6 @@
     <defaults>
       <allow_inactive>no</allow_inactive>
       <allow_active>no</allow_active>
-      <allow_active>auth_admin_keep_session</allow_active>
     </defaults>
   </action>
   
@@ -22,7 +21,6 @@
     <defaults>
       <allow_inactive>no</allow_inactive>
       <allow_active>no</allow_active>
-      <allow_active>auth_admin_keep_session</allow_active>
     </defaults>
   </action>
 

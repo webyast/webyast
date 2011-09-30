@@ -16,6 +16,9 @@
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA
 #++
 
+require 'rubygems'
+require 'polkit1'
+
 ###
 # Helpers
 #
@@ -96,7 +99,7 @@ task :system_check do
   #
   version = "0.0.1" # do not take care
   test_version "libsqlite3-0", version
-  test_version "PolicyKit", version
+  test_version "polkit", version
   test_version "PackageKit", version
   test_version "rubygem-locale"
   test_version "rubygem-locale_rails"
@@ -113,7 +116,7 @@ task :system_check do
   test_module "sqlite3", "rubygem-sqlite3"
   test_module "rake", "rubygem-rake"
   test_module "rpam", "ruby-rpam"
-  test_module "polkit", "ruby-polkit"
+  test_module "polkit1", "rubygem-polkit1"
   test_module "dbus", "ruby-dbus"
 
   # check that policies are all installed
@@ -127,7 +130,7 @@ task :system_check do
 	     else
 	       File.dirname fname
 	     end
-    dest_policy = File.join('/usr/share/PolicyKit/policy', policy)
+    dest_policy = File.join('/usr/share/polkit-1/actions', policy)
     if not File.exists?(dest_policy)
       escape "Policy '#{policy}' of plugin '#{plugin}' is not installed",
              "Run \"sudo rake install_policies\" in plugin '#{plugin}'\n or run\nsudo cp #{fname} #{dest_policy}"
@@ -135,61 +138,19 @@ task :system_check do
   end
 
   user = ENV['USER']
-  policykit_conf = <<EOF
-<match user="#{user}">
-    <match action="org.opensuse.yast.scr.*">
-      <return result="yes"/>
-    </match>
-  </match>
-  <match user="#{user}">
-    <match action="org.freedesktop.packagekit.system-update">
-      <return result="yes"/>
-    </match>
-  </match>
-  <match user="#{user}">
-    <match action="org.freedesktop.packagekit.package-install">
-      <return result="yes"/>
-    </match>
-  </match>
-  <match user="#{user}">
-    <match action="org.freedesktop.policykit.read">
-      <return result="yes"/>
-    </match>
-  </match>
-EOF
-
-  # will webyast be able to run?
-  webyast_permissions_ok = false
-
-  # get all granted policies
-  granted = `polkit-auth --user #{user}`.split
 
   # check that the user running the web service has permissions to yast
-  # scr and others. This can be achieved in 2 ways:
-  # manually polkit-auth, or as pattern matching in /etc/PolicyKit/PolicyKit.conf
+  # and others like packagekit. This can be achieved by:
+  # manually "grantwebyastrights --user <user> --action grant --policy <policy>
 
-  scr_actions = `polkit-action`.split.reject { |item| not item.include?('org.opensuse.yast.') }.reject { |item| item.include? "org.opensuse.yast.scr."}
-  webyast_actions = [ 'org.freedesktop.packagekit.system-update', 'org.freedesktop.packagekit.package-install',  'org.freedesktop.policykit.read', *scr_actions]
-
-  hint_message = "Use utility script grantwebyastrights to grant them all. See http://en.opensuse.org/YaST/Web/Development\nAlternatively, you can add the following to /etc/PolicyKit/PolicyKit.conf config tag section:\n#{policykit_conf}\n"
+  webyast_actions = [ 'org.freedesktop.packagekit.system-update', 'org.freedesktop.packagekit.package-install',  'org.opensuse.yast.module-manager.import', 
+                      'org.freedesktop.hal.power-management.shutdown', 'org.freedesktop.hal.power-management.shutdown-multiple-sessions',
+                      'org.freedesktop.hal.power-management.reboot', 'org.freedesktop.hal.power-management.reboot-multiple-sessions',
+                      'org.freedesktop.packagekit.system-sources-configure', 'org.freedesktop.packagekit.package-eula-accept']
 
   webyast_actions.each do | action|
-    if not granted.include?(action)
-      escape "policy #{action} is not granted and it is needed to run webyast as #{user}.", "Run 'polkit-auth --user #{user} --grant #{action}' to grant the permission.\n"+hint_message
-      hint_message = ""
-    end
-  end
-
-  # now check that all permission in each policy is granted
-  hint_message = "\nUse utility script grantwebyastrights.rb to grant them all.\nSee http://en.opensuse.org/YaST/Web/Development\nYou can also grant them to the root user and login as root to the YaST web client.\n\n"
-  Dir.glob(File.join(File.dirname(__FILE__), '../../..', "**/*.policy")).each do |policy|
-    doc = REXML::Document.new(File.open(policy))
-    doc.elements.each("/policyconfig/action") do |action|
-      id = action.attributes['id']
-      if not granted.include?(id)
-        warn "policy #{id} is not granted for current user.", "fix it if you plan to login to YaST as '#{user}', run\n  polkit-auth --user #{user} --grant #{id}\nto grant it." + hint_message
-        hint_message = ""
-      end
+    unless PolKit1::polkit1_check(action, user) == :yes
+      escape "policy #{action} is not granted and it is needed to run webyast as #{user}.", "Run 'grantwebyastrights --user #{user} --action grant --policy #{action}' to grant the permission.\n"
     end
   end
 

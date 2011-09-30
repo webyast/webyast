@@ -18,7 +18,6 @@
 
 module YastRoles
 
-  require 'polkit'
   require 'exceptions'
 
   public
@@ -69,7 +68,7 @@ module YastRoles
     action ||= "" #avoid nil action
 
     begin
-      if PolKit.polkit_check( action, account.login) == :yes
+      if Permission.dbus_obj.check( [action], account.login )[0][0] == "yes"
         Rails.logger.debug "Action: #{action} User: #{account.login} Result: ok"
         return true
       end

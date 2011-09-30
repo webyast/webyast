@@ -102,8 +102,8 @@ rm -f $RPM_BUILD_ROOT%{plugin_dir}/COPYING
 mkdir -p $RPM_BUILD_ROOT/etc/webyast/
 cp $SOURCE_CONFIG $RPM_BUILD_ROOT/etc/webyast/eulas.yml
 
-mkdir -p $RPM_BUILD_ROOT/usr/share/PolicyKit/policy
-cp %{SOURCE2} $RPM_BUILD_ROOT/usr/share/PolicyKit/policy/
+mkdir -p $RPM_BUILD_ROOT/usr/share/polkit-1/actions
+cp %{SOURCE2} $RPM_BUILD_ROOT/usr/share/polkit-1/actions/
 
 # remove .po files (no longer needed)
 rm -rf $RPM_BUILD_ROOT/%{plugin_dir}/po
@@ -140,7 +140,7 @@ rm -rf $RPM_BUILD_ROOT
 %config /etc/webyast/eulas.yml
 
 %attr(-,%{webyast_user},%{webyast_user}) %dir %{webyast_vardir}/%{plugin_name}/accepted-licenses
-/usr/share/PolicyKit/policy/org.opensuse.yast.modules.eulas.policy
+/usr/share/polkit-1/actions/org.opensuse.yast.modules.eulas.policy
 %doc COPYING
 
 %files testsuite

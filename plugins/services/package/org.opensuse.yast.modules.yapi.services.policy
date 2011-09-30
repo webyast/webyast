@@ -10,9 +10,8 @@
     <description>Get list of services.</description>
     <message>System policy prevents the Yast DBus service from reading service list.</message>
     <defaults>
-      <allow_any>no</allow_any>
       <allow_inactive>no</allow_inactive>
-      <allow_active>auth_admin_keep_session</allow_active>
+      <allow_active>no</allow_active>
     </defaults>
   </action>
 
@@ -20,9 +19,8 @@
     <description>Starting/stopping services.</description>
     <message>System policy prevents the Yast DBus service from executing service script.</message>
     <defaults>
-      <allow_any>no</allow_any>
       <allow_inactive>no</allow_inactive>
-      <allow_active>auth_admin_keep_session</allow_active>
+      <allow_active>no</allow_active>
     </defaults>
   </action>
 </policyconfig> 

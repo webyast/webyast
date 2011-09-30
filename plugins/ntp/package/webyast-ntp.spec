@@ -87,8 +87,8 @@ rm -f $RPM_BUILD_ROOT%{plugin_dir}/COPYING
 mkdir -p $RPM_BUILD_ROOT/usr/share/YaST2/modules/YaPI/
 cp %{SOURCE1} $RPM_BUILD_ROOT/usr/share/YaST2/modules/YaPI/
 #policies
-mkdir -p $RPM_BUILD_ROOT/usr/share/PolicyKit/policy/
-cp %{SOURCE2} $RPM_BUILD_ROOT/usr/share/PolicyKit/policy/
+mkdir -p $RPM_BUILD_ROOT/usr/share/polkit-1/actions/
+cp %{SOURCE2} $RPM_BUILD_ROOT/usr/share/polkit-1/actions/
 
 %clean
 rm -rf $RPM_BUILD_ROOT
@@ -119,7 +119,7 @@ rm -rf $RPM_BUILD_ROOT
 %{plugin_dir}/config
 %{plugin_dir}/public
 %attr(644,root,root) /usr/share/YaST2/modules/YaPI/NTP.pm
-%attr(644,root,root) /usr/share/PolicyKit/policy/org.opensuse.yast.modules.yapi.ntp.policy
+%attr(644,root,root) /usr/share/polkit-1/actions/org.opensuse.yast.modules.yapi.ntp.policy
 %doc COPYING
 
 %files testsuite

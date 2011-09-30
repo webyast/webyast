@@ -91,17 +91,16 @@ cp %{SOURCE2} $RPM_BUILD_ROOT/usr/local/sbin
 mkdir -p $RPM_BUILD_ROOT/usr/share/dbus-1/system-services/
 cp %{SOURCE3} $RPM_BUILD_ROOT/usr/share/dbus-1/system-services/
 #policies
-mkdir -p $RPM_BUILD_ROOT/usr/share/PolicyKit/policy/
-cp %{SOURCE4} $RPM_BUILD_ROOT/usr/share/PolicyKit/policy/
+mkdir -p $RPM_BUILD_ROOT/usr/share/polkit-1/actions
+cp %{SOURCE4} $RPM_BUILD_ROOT/usr/share/polkit-1/actions
 
 %clean
 rm -rf $RPM_BUILD_ROOT
 
 %post
 # granting all permissions for the webyast user and root
-#TODO don't silently fail
-polkit-auth --user root --grant org.example.plugin.read org.example.plugin.write > /dev/null || :
-polkit-auth --user %{webyast_user} --grant org.example.plugin.read org.example.plugin.write > /dev/null || :
+/usr/sbin/grantwebyastrights --user root --action grant --policy org.example.plugin.read org.example.plugin.write > /dev/null || :
+/usr/sbin/grantwebyastrights --user %{webyast_user} --action grant --policy org.example.plugin.read org.example.plugin.write > /dev/null || :
 
 %postun
 
@@ -119,7 +118,7 @@ polkit-auth --user %{webyast_user} --grant org.example.plugin.read org.example.p
 %{plugin_dir}/app
 %{plugin_dir}/config
 %attr(744,root,root) /usr/local/sbin/exampleService.rb
-%attr(644,root,root) /usr/share/PolicyKit/policy/org.example.plugin.policy
+%attr(644,root,root) /usr/share/polkit-1/actions/org.example.plugin.policy
 %attr(644,root,root) /etc/dbus-1/system.d/example.service.conf
 %attr(644,root,root) /usr/share/dbus-1/system-services/example.service.service
 %doc COPYING

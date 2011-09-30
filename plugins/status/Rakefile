@@ -31,8 +31,6 @@ desc "Deploy for development - create basic dirs and install yast modules."
 task :deploy_local do |t|
   FileUtils.mkdir_p "/usr/share/YaST2/modules/"
   FileUtils.cp_r    "package/LogFile.rb", "/usr/share/YaST2/modules/"
-  FileUtils.mkdir_p "/usr/share/PolicyKit/policy/"
-  FileUtils.cp_r    "package/org.opensuse.yast.modules.logfile.policy",  "/usr/share/PolicyKit/policy/"
-  FileUtils.cp_r    "package/org.opensuse.yast.system.status.policy",  "/usr/share/PolicyKit/policy/"
+  `rake install_policies`
 end
 

@@ -8,7 +8,7 @@ Installation:
 
 1. Add the Status-policy-file
 
-  sudo cp status/package/org.opensuse.yast.system.status.policy /usr/share/PolicyKit/policy
+  sudo rake install_policies
 
 2. Install rrdtool and collectd packages. You can get them from http://software.opensuse.org/search
 

@@ -1,5 +1,5 @@
 doc/
 pkg/
 tmp/
-lib/polkit.so
-package/polkit-*.gem
+lib/polkit1.so
+package/polkit1-*.gem

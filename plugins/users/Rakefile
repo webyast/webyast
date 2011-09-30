@@ -27,8 +27,7 @@ include FileUtils::Verbose
 # Deploy ?!
 desc "Deploy for development - install necessary files for users plugin."
 task :deploy_local do |t|
-  mkdir_p "/usr/share/PolicyKit/policy/"
-  cp_r    "package/org.opensuse.yast.modules.yapi.users.policy", "/usr/share/PolicyKit/policy/"
+  `rake install_policies`
 end
 
 #import rake task files from plugins directory 

@@ -45,9 +45,9 @@ Requires:       rubygem-static_record_cache
 Requires:	yast2-dbus-server
 # 634404
 Recommends:     logrotate
-PreReq:         PolicyKit, PackageKit, rubygem-rake, rubygem-sqlite3
+PreReq:         polkit, PackageKit, rubygem-rake, rubygem-sqlite3
 PreReq:         rubygem-rails-2_3 >= 2.3.8
-PreReq:         rubygem-rpam, rubygem-polkit, rubygem-gettext_rails
+PreReq:         rubygem-rpam, rubygem-polkit1, rubygem-gettext_rails
 PreReq:         yast2-runlevel
 License:	LGPL-2.0
 Group:          Productivity/Networking/Web/Utilities
@@ -79,9 +79,9 @@ BuildRequires:	ruby-dbus
 %else
 BuildRequires:	rubygem-ruby-dbus
 %endif
-BuildRequires:  PolicyKit, PackageKit, rubygem-sqlite3
+BuildRequires:  polkit, PackageKit, rubygem-sqlite3
 BuildRequires:  rubygem-rails-2_3 >= 2.3.8
-BuildRequires:  rubygem-rpam, rubygem-polkit
+BuildRequires:  rubygem-rpam, rubygem-polkit1
 # the testsuite is run during build
 BuildRequires:	rubygem-test-unit rubygem-mocha
 BuildRequires:  tidy, rubygem-haml, rubygem-nokogiri, rubygem-sass
@@ -177,8 +177,8 @@ ln -s /etc/nginx/uwsgi_params $RPM_BUILD_ROOT/etc/webyast
 ln -s /etc/nginx/win-utf $RPM_BUILD_ROOT/etc/webyast
 
 # Policies
-mkdir -p $RPM_BUILD_ROOT/usr/share/PolicyKit/policy
-install -m 0644 %SOURCE4 $RPM_BUILD_ROOT/usr/share/PolicyKit/policy/
+mkdir -p $RPM_BUILD_ROOT/usr/share/polkit-1/actions
+install -m 0644 %SOURCE4 $RPM_BUILD_ROOT/usr/share/polkit-1/actions
 install -m 0644 %SOURCE6 $RPM_BUILD_ROOT/etc/
 install -m 0555 %SOURCE5 $RPM_BUILD_ROOT/usr/sbin/
 
@@ -269,18 +269,8 @@ exit 0
 #
 #granting permissions for webyast
 #
-if [ `/usr/bin/polkit-auth --user %{webyast_user} | grep -c "org.freedesktop.packagekit.system-update"` -eq 0 ]; then
-  # FIXME: remove ||: (don't hide errors), has to be correctly implemented for package update...
-  /usr/bin/polkit-auth --user %{webyast_user} --grant org.freedesktop.packagekit.system-update > /dev/null ||:
-fi
-if [ `/usr/bin/polkit-auth --user %{webyast_user} | grep -c "org.freedesktop.policykit.read"` -eq 0 ]; then
-  # FIXME: remove ||: (don't hide errors), has to be correctly implemented for package update...
-  /usr/bin/polkit-auth --user %{webyast_user} --grant org.freedesktop.policykit.read > /dev/null ||:
-fi
-if [ `/usr/bin/polkit-auth --user %{webyast_user} | grep -c "org.opensuse.yast.module-manager.import"` -eq 0 ]; then
-  # FIXME: remove ||: (don't hide errors), has to be correctly implemented for package update...
-  /usr/bin/polkit-auth --user %{webyast_user} --grant org.opensuse.yast.module-manager.import > /dev/null ||:
-fi
+/usr/sbin/grantwebyastrights --user %{webyast_user} --action grant --policy org.freedesktop.packagekit.system-update > /dev/null ||:
+/usr/sbin/grantwebyastrights --user %{webyast_user} --action grant --policy org.opensuse.yast.module-manager.import > /dev/null ||:
 #
 # granting all permissions for root 
 #
@@ -325,8 +315,8 @@ dbus-send --print-reply --system --dest=org.freedesktop.DBus / org.freedesktop.D
 #this /etc/webyast is for nginx conf for webyast
 %dir /etc/webyast
 %dir %{webyast_dir}
-%dir %{_datadir}/PolicyKit
-%dir %{_datadir}/PolicyKit/policy
+%dir %{_datadir}/polkit-1
+%dir %{_datadir}/polkit-1/actions
 %attr(-,%{webyast_user},%{webyast_user}) %dir %{pkg_home}
 %attr(-,%{webyast_user},%{webyast_user}) %dir %{pkg_home}/sockets
 %attr(-,%{webyast_user},%{webyast_user}) %dir %{pkg_home}/cache
@@ -355,7 +345,7 @@ dbus-send --print-reply --system --dest=org.freedesktop.DBus / org.freedesktop.D
 %{webyast_dir}/config/environments
 %{webyast_dir}/config/initializers
 %{webyast_dir}/config/routes.rb
-#also users can run granting script, as permissions is handled by policyKit right for granting permissions
+#also users can run granting script, as permissions is handled by polkit right for granting permissions
 %attr(555,root,root) /usr/sbin/grantwebyastrights
 %attr(755,root,root) %{webyast_dir}/start.sh
 %attr(500,root,root) /usr/sbin/webyastPermissionsService.rb
@@ -376,7 +366,7 @@ dbus-send --print-reply --system --dest=org.freedesktop.DBus / org.freedesktop.D
 %config /etc/webyast/win-utf
 
 %config /etc/sysconfig/SuSEfirewall2.d/services/webyast
-%config /usr/share/PolicyKit/policy/org.opensuse.yast.permissions.policy
+%config /usr/share/polkit-1/actions/org.opensuse.yast.permissions.policy
 %config %{webyast_dir}/config/environment.rb
 %config(noreplace) /etc/yast_user_roles
 %config %{_sysconfdir}/init.d/%{webyast_service}

@@ -29,6 +29,6 @@ task :deploy_local do |t|
   FileUtils.mkdir_p "/usr/share/webyast/eulas"
   FileUtils.install "package/eulas-sles11.yml", "/etc/webyast/eulas.yml", :mode => 0644
   FileUtils.cp_r    "config/resources/licenses", "/usr/share/webyast/eulas"
-  FileUtils.mkdir_p "/usr/share/PolicyKit/policy/"
-  FileUtils.cp_r    "package/org.opensuse.yast.modules.eulas.policy",  "/usr/share/PolicyKit/policy/"
+  FileUtils.mkdir_p "/usr/share/polkit-1/actions/"
+  FileUtils.cp_r    "package/org.opensuse.yast.modules.eulas.policy",  "/usr/share/polkit-1/actions/"
 end

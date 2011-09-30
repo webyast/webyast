@@ -91,8 +91,8 @@ cp -a * $RPM_BUILD_ROOT%{plugin_dir}/
 rm -f $RPM_BUILD_ROOT%{plugin_dir}/COPYING
 
 # Policies
-mkdir -p $RPM_BUILD_ROOT/usr/share/PolicyKit/policy
-install -m 0644 %SOURCE1 $RPM_BUILD_ROOT/usr/share/PolicyKit/policy/
+mkdir -p $RPM_BUILD_ROOT/usr/share/polkit-1/actions
+install -m 0644 %SOURCE1 $RPM_BUILD_ROOT/usr/share/polkit-1/actions/
 
 # YML.rb
 mkdir -p $RPM_BUILD_ROOT/usr/share/YaST2/modules/
@@ -134,8 +134,8 @@ rm -rf $RPM_BUILD_ROOT
 %dir /usr/share/YaST2/modules/
 %dir /usr/share/YaST2/modules/YaPI/
 
-%dir /usr/share/PolicyKit
-%dir /usr/share/PolicyKit/policy
+%dir /usr/share/polkit-1
+%dir /usr/share/polkit-1/actions
 
 %dir /etc/webyast/
 %config /etc/webyast/filter_services.yml
@@ -156,7 +156,7 @@ rm -rf $RPM_BUILD_ROOT
 /usr/share/YaST2/modules/YML.rb
 /usr/share/YaST2/modules/YaPI/SERVICES.pm
 
-%attr(644,root,root) %config /usr/share/PolicyKit/policy/org.opensuse.yast.modules.yapi.services.policy
+%attr(644,root,root) %config /usr/share/polkit-1/actions/org.opensuse.yast.modules.yapi.services.policy
 
 %doc COPYING
 

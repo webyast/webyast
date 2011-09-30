@@ -81,8 +81,8 @@ cp -a * $RPM_BUILD_ROOT%{plugin_dir}/
 rm -f $RPM_BUILD_ROOT%{plugin_dir}/COPYING
 
 # Policies
-mkdir -p $RPM_BUILD_ROOT/usr/share/PolicyKit/policy
-install -m 0644 %SOURCE1 $RPM_BUILD_ROOT/usr/share/PolicyKit/policy/
+mkdir -p $RPM_BUILD_ROOT/usr/share/polkit-1/actions
+install -m 0644 %SOURCE1 $RPM_BUILD_ROOT/usr/share/polkit-1/actions/
 
 #YaPI
 mkdir -p $RPM_BUILD_ROOT/usr/share/YaST2/modules/YaPI/
@@ -114,8 +114,8 @@ rm -rf $RPM_BUILD_ROOT
 %dir /usr/share/YaST2/
 %dir /usr/share/YaST2/modules/
 %dir /usr/share/YaST2/modules/YaPI/
-%dir /usr/share/PolicyKit
-%dir /usr/share/PolicyKit/policy
+%dir /usr/share/polkit-1
+%dir /usr/share/polkit-1/actions
 %{plugin_dir}/locale
 %{plugin_dir}/README
 %{plugin_dir}/Rakefile
@@ -128,7 +128,7 @@ rm -rf $RPM_BUILD_ROOT
 %{plugin_dir}/public
 %{plugin_dir}/lib
 /usr/share/YaST2/modules/YaPI/FIREWALL.pm
-%attr(644,root,root) %config /usr/share/PolicyKit/policy/org.opensuse.yast.modules.yapi.firewall.policy
+%attr(644,root,root) %config /usr/share/polkit-1/actions/org.opensuse.yast.modules.yapi.firewall.policy
 %doc COPYING
 
 %files testsuite

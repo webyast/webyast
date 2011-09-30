@@ -93,8 +93,8 @@ cp -a * $RPM_BUILD_ROOT%{plugin_dir}/
 rm -f $RPM_BUILD_ROOT%{plugin_dir}/COPYING
 
 # Policies
-mkdir -p $RPM_BUILD_ROOT/usr/share/PolicyKit/policy
-install -m 0644 %SOURCE1 $RPM_BUILD_ROOT/usr/share/PolicyKit/policy/
+mkdir -p $RPM_BUILD_ROOT/usr/share/polkit-1/actions
+install -m 0644 %SOURCE1 $RPM_BUILD_ROOT/usr/share/polkit-1/actions/
 
 #YaPI
 mkdir -p $RPM_BUILD_ROOT/usr/share/YaST2/modules/YaPI/
@@ -136,9 +136,9 @@ rm -rf $RPM_BUILD_ROOT
 %{plugin_dir}/config
 %{plugin_dir}/doc
 %{plugin_dir}/public
-%dir /usr/share/PolicyKit
-%dir /usr/share/PolicyKit/policy
-%attr(644,root,root) %config /usr/share/PolicyKit/policy/org.opensuse.yast.modules.yapi.activedirectory.policy
+%dir /usr/share/polkit-1
+%dir /usr/share/polkit-1/actions
+%attr(644,root,root) %config /usr/share/polkit-1/actions/org.opensuse.yast.modules.yapi.activedirectory.policy
 %doc COPYING
 
 %files testsuite
