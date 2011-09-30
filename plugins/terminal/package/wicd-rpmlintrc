@@ -1,0 +1,3 @@
+setBadness('suse-dbus-unauthorized-service', 0)
+setBadness('polkit-unauthorized-privilege', 0)
+

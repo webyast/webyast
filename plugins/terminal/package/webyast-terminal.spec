@@ -20,25 +20,26 @@ Version:        0.0.1
 Release:        0
 Summary:        WebYaST - AJAX terminal plugin
 Source:         www.tar.bz2
+Source1:        org.opensuse.yast.modules.yapi.terminal.policy
+Source2:        wicd-rpmlintrc
 BuildRoot:      %{_tmppath}/%{name}-%{version}-build
 BuildArch:      noarch
 
-BuildRequires:  webyast-base-testsuite webyast-services
-BuildRequires:  rubygem-test-unit rubygem-mocha tidy vim
+BuildRequires:  webyast-base-testsuite
+BuildRequires:  rubygem-test-unit rubygem-mocha
 
-#
 %define plugin_name terminal
 %define plugin_dir %{webyast_dir}/vendor/plugins/%{plugin_name}
-#
 
 %package testsuite
 Group:    Productivity/Networking/Web/Utilities
 Requires: %{name} = %{version}
 Requires: webyast-base-testsuite
+Requires: shellinabox
 Summary:  Testsuite for webyast-terminal package
 
 %description
-WebYaST - integration of SHELLINABOX - web based AJAX terminal emulator in WebYaST UI
+WebYaST integration of shellinabox (web based AJAX terminal plugin)
 
 Authors:
 Vladislav Lewin <vlewin@suse.de>
@@ -53,10 +54,8 @@ needed at runtime.
 
 %build
 export RAILS_PARENT=%{webyast_dir}
-env LANG=en rake makemo
 
 %check
-# run the testsuite
 %webyast_check
 
 %install
@@ -66,41 +65,31 @@ mkdir -p $RPM_BUILD_ROOT%{plugin_dir}
 cp -a * $RPM_BUILD_ROOT%{plugin_dir}
 rm -f $RPM_BUILD_ROOT%{plugin_dir}/COPYING
 mkdir -p $RPM_BUILD_ROOT/usr/share/PolicyKit/policy
-
-# remove .po files (no longer needed)
-rm -rf $RPM_BUILD_ROOT/%{plugin_dir}/po
-
-# search locale files
-%find_lang webyast-terminal
-
+cp %{SOURCE1} $RPM_BUILD_ROOT/usr/share/PolicyKit/policy/
 
 %clean
 rm -rf $RPM_BUILD_ROOT
 
 %post
+# granting all permissions for the webservice user and root
+polkit-auth --user root --grant org.opensuse.yast.modules.yapi.terminal.read > /dev/null || :
+polkit-auth --user %{webyast_user} --grant org.opensuse.yast.modules.yapi.terminal.read > /dev/null || :
 
-# granting all permissions for root
-/usr/sbin/grantwebyastrights --user root --action grant > /dev/null
-/usr/sbin/grantwebyastrights --user %{webyast_user} --action grant > /dev/null
-
-%files -f webyast-terminal.lang
+%files
 %defattr(-,root,root)
 %dir %{webyast_dir}
 %dir %{webyast_dir}/vendor
 %dir %{webyast_dir}/vendor/plugins
 %dir %{plugin_dir}
-%dir %{plugin_dir}/doc
-%dir /usr/share/PolicyKit
-%dir /usr/share/PolicyKit/policy/
 %{plugin_dir}/README
 %{plugin_dir}/shortcuts.yml
 %{plugin_dir}/Rakefile
 %{plugin_dir}/init.rb
+%{plugin_dir}/doc
 %{plugin_dir}/app
 %{plugin_dir}/config
 %{plugin_dir}/lib
-%{plugin_dir}/doc/README_FOR_APP
-%{plugin_dir}/locale
+%attr(644,root,root) /usr/share/PolicyKit/policy/org.opensuse.yast.modules.yapi.terminal.policy
 %doc COPYING
 
 %files testsuite
