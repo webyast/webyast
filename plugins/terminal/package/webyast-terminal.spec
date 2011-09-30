@@ -11,34 +11,23 @@
 
 Name:           webyast-terminal
 Provides:       WebYaST(org.opensuse.yast.modules.yapi.terminal)
-Provides:       yast2-webservice-terminal = %{version}
-Obsoletes:      yast2-webservice-terminal < %{version}
 PreReq:         yast2-webservice
 License:        GPL-2.0
 Group:          Productivity/Networking/Web/Utilities
 URL:            http://en.opensuse.org/Portal:WebYaST
 Autoreqprov:    on
-Version:        0.1
+Version:        0.0.1
 Release:        0
-Summary:        WebYaST - time management
+Summary:        WebYaST - AJAX terminal plugin
 Source:         www.tar.bz2
 BuildRoot:      %{_tmppath}/%{name}-%{version}-build
 BuildArch:      noarch
 
-# YaPI/TIME.pm
-%if 0%{?suse_version} == 0 || %suse_version > 1110
-# 11.2 or newer
-#Requires:       yast2-country >= 2.18.10
-%else
-# 11.1 or SLES11
-#Requires:       yast2-country >= 2.17.34.2
-%endif
-
-BuildRequires:  webyast-base-testsuite webyast-services webyast-ntp
+BuildRequires:  webyast-base-testsuite webyast-services
 BuildRequires:  rubygem-test-unit rubygem-mocha tidy vim
 
 #
-%define plugin_name time
+%define plugin_name terminal
 %define plugin_dir %{webyast_dir}/vendor/plugins/%{plugin_name}
 #
 
@@ -46,14 +35,13 @@ BuildRequires:  rubygem-test-unit rubygem-mocha tidy vim
 Group:    Productivity/Networking/Web/Utilities
 Requires: %{name} = %{version}
 Requires: webyast-base-testsuite
-Summary:  Testsuite for webyast-time package
+Summary:  Testsuite for webyast-terminal package
 
 %description
 WebYaST - integration of SHELLINABOX - web based AJAX terminal emulator in WebYaST UI
 
 Authors:
---------
-    Vladislav Lewin <vlewin@suse.de>
+Vladislav Lewin <vlewin@suse.de>
 
 %description testsuite
 This package contains complete testsuite for webyast-terminal package.
@@ -73,9 +61,7 @@ env LANG=en rake makemo
 
 %install
 
-#
 # Install all web and frontend parts.
-#
 mkdir -p $RPM_BUILD_ROOT%{plugin_dir}
 cp -a * $RPM_BUILD_ROOT%{plugin_dir}
 rm -f $RPM_BUILD_ROOT%{plugin_dir}/COPYING
@@ -83,6 +69,7 @@ mkdir -p $RPM_BUILD_ROOT/usr/share/PolicyKit/policy
 
 # remove .po files (no longer needed)
 rm -rf $RPM_BUILD_ROOT/%{plugin_dir}/po
+
 # search locale files
 %find_lang webyast-terminal
 
@@ -91,13 +78,12 @@ rm -rf $RPM_BUILD_ROOT/%{plugin_dir}/po
 rm -rf $RPM_BUILD_ROOT
 
 %post
-#
+
 # granting all permissions for root
-#
 /usr/sbin/grantwebyastrights --user root --action grant > /dev/null
 /usr/sbin/grantwebyastrights --user %{webyast_user} --action grant > /dev/null
 
-%files -f webyast-time.lang
+%files -f webyast-terminal.lang
 %defattr(-,root,root)
 %dir %{webyast_dir}
 %dir %{webyast_dir}/vendor
@@ -110,8 +96,6 @@ rm -rf $RPM_BUILD_ROOT
 %{plugin_dir}/shortcuts.yml
 %{plugin_dir}/Rakefile
 %{plugin_dir}/init.rb
-%{plugin_dir}/install.rb
-%{plugin_dir}/uninstall.rb
 %{plugin_dir}/app
 %{plugin_dir}/config
 %{plugin_dir}/lib

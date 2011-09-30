@@ -1,7 +1,8 @@
-Systemtime
+Terminal
 ==========
 
-REST interface for setting time and date.
+Web based AJAX terminal plugin for WebYaST
 
 
 Copyright (c) 2009 Novell
+
