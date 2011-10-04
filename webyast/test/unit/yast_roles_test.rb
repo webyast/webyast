@@ -83,6 +83,8 @@ class YastRolesTest < ActiveSupport::TestCase
   end
     
   def test_permission_check_trivial
+    dbus_obj = FakeDbusRevoked.new
+    Permission.stubs(:dbus_obj).returns(dbus_obj)
     assert_raise(NoPermissionException) { permission_check(nil) }
   end
   
@@ -92,6 +94,8 @@ class YastRolesTest < ActiveSupport::TestCase
   end
   
   def test_action_nil
+    dbus_obj = FakeDbusRevoked.new
+    Permission.stubs(:dbus_obj).returns(dbus_obj)
     assert_raise(NoPermissionException) { permission_check(nil) }
   end    
   
