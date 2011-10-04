@@ -16,6 +16,47 @@
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA
 #++
 
+class FakeDbusGranted
+  attr_reader :last_perms, :last_user
+  def revoke(perms,user)
+    @last_perms = perms
+    @last_user = user
+  end
+
+  def grant(perms,user)
+    revoke perms,user
+  end
+
+  def check(perms,user)
+    raise "Polkit accept only string" unless perms.instance_of? Array
+    if perms == ["test_polkit_override"] ||
+       user == "network_admin" ||
+       perms == ["test_polkit_override"]
+      [["yes"]]
+    else
+      [["no"]]
+    end
+  end
+end
+
+class FakeDbusRevoked
+  attr_reader :last_perms, :last_user
+  def revoke(perms,user)
+    @last_perms = perms
+    @last_user = user
+  end
+
+  def grant(perms,user)
+    revoke perms,user
+  end
+
+  def check(perms,user)
+    [["no"]]
+  end
+end
+
+
+
 class CurrentLogin
   attr_reader :login
   
@@ -28,7 +69,6 @@ unless defined? USER_ROLES_CONFIG
   USER_ROLES_CONFIG = File.join(File.dirname(__FILE__), "..", "fixtures", "yast_user_roles")
 end
 
-TESTING_POLKIT = true
 
 require File.join(File.dirname(__FILE__),"..", "test_helper")
 
@@ -56,32 +96,34 @@ class YastRolesTest < ActiveSupport::TestCase
   end    
   
   def test_action_dummy
-    def PolKit.polkit_check(action,login) return :no end
+    dbus_obj = FakeDbusRevoked.new
+    Permission.stubs(:dbus_obj).returns(dbus_obj)
     assert_raise(NoPermissionException) { permission_check("dummy") }
   end    
 
   def test_polkit_override
-    def PolKit.polkit_check(action,login) return :yes if action == "test_polkit_override" end
+    dbus_obj = FakeDbusGranted.new
+    Permission.stubs(:dbus_obj).returns(dbus_obj)
     assert permission_check("test_polkit_override")
   end
 
   def test_accept_string_polkit
-    def PolKit.polkit_check(action,login) 
-      raise "Polkit accept only string" unless action.instance_of? String
-      return :yes if action == "test_polkit_override"
-    end
+    dbus_obj = FakeDbusGranted.new
+    Permission.stubs(:dbus_obj).returns(dbus_obj)
     assert permission_check(:"test_polkit_override")
   end
 
   # test/fixtures/yast_user_roles assign "network_admin" role to user "root"
   def test_role_ok
-    def PolKit.polkit_check(action,login) return :yes if login == "network_admin" end
+    dbus_obj = FakeDbusGranted.new
+    Permission.stubs(:dbus_obj).returns(dbus_obj)
 #FIXME    assert permission_check("dummy")
   end
   
   def test_role_not_ok
     @current_account = CurrentLogin.new "nobody"
-    def PolKit.polkit_check(action,login) return :yes if login == "network_admin" end
+    dbus_obj = FakeDbusGranted.new
+    Permission.stubs(:dbus_obj).returns(dbus_obj)
     assert_raise(NoPermissionException) { permission_check("dummy") }
   end
 end

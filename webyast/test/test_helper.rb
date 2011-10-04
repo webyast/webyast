@@ -20,16 +20,28 @@ ENV["RAILS_ENV"] = "test"
 require File.join(File.dirname(__FILE__), "..", "config", "environment")
 require 'test_help'
 require 'mocha'
+require 'polkit1'
 require File.join(File.dirname(__FILE__),'validation_assert') #validation of html
 require 'test/unit'
 #provide basic test for controllers
 require File.join(File.dirname(__FILE__),"plugin_basic_tests")
 
-unless defined?(TESTING_POLKIT)
-  def PolKit.polkit_check(action,login)
-    return :yes
-  end
+class FakeDbus
+	attr_reader :last_perms, :last_user
+	def revoke(perms,user)
+		@last_perms = perms
+		@last_user = user
+	end
+
+	def grant(perms,user)
+		revoke perms,user
+	end
+
+        def check(perms,user)
+                [["yes"]]
+        end
 end
+
 
 class ActiveSupport::TestCase
 

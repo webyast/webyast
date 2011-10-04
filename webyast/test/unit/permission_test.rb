@@ -17,7 +17,6 @@
 #++
 
 require File.dirname(__FILE__) + '/../test_helper'
-require 'polkit'
 
 # Test Permission class
 
@@ -39,17 +38,10 @@ org.opensuse.yast.permissions.read
 org.opensuse.yast.permissions.write
 EOF
 
-TEST_DATA_GRANT = [
-"org.opensuse.yast.modules.ysr.statelessregister",
-"org.opensuse.yast.modules.ysr.getregistrationconfig",
-"org.freedesktop.network-manager-settings.system.modify",
-"org.opensuse.yast.module-manager.import"]
-
-
   def setup
     Permission.stubs(:all_actions).returns(TEST_DATA_ACTIONS)
-    PolKit.stubs(:polkit_check).with(){ |p,u| TEST_DATA_GRANT.include? p.to_s}.returns(:yes)
-    PolKit.stubs(:polkit_check).with(){ |p,u| !TEST_DATA_GRANT.include?(p.to_s)}.returns(:no)
+    @dbus_obj = FakeDbus.new
+    Permission.stubs(:dbus_obj).returns(@dbus_obj)
   end
 
   def test_find_all
@@ -96,16 +88,4 @@ TEST_DATA_GRANT = [
     assert_not_nil perm.to_json
   end
 
-GENERIC_EXCEPTION_MESSAGE = "Polkit not run"
-  def test_exception_handling
-    PolKit.stubs(:polkit_check).raises(RuntimeError.new("PolicyKit exception: test does not exist"))
-    assert_raise (InvalidParameters.new( :user_id => "UNKNOWN")) do
-      perm = Permission.find("org.opensuse.yast.permissions.write",{:user_id => "test"})
-    end
-
-    PolKit.stubs(:polkit_check).raises(RuntimeError.new(GENERIC_EXCEPTION_MESSAGE))
-    assert_raise (PolicyKitException.new(GENERIC_EXCEPTION_MESSAGE,"test","org.opensuse.yast.permissions.write")) do
-      perm = Permission.find("org.opensuse.yast.permissions.write",{:user_id => "test"})
-    end
-  end
 end

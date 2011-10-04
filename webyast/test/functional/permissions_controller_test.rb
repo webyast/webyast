@@ -22,7 +22,6 @@
 require File.expand_path(File.dirname(__FILE__) + "/../test_helper")
 
 require 'mocha'
-require 'polkit'
 
 class PermissionsControllerTest < ActionController::TestCase
   fixtures :accounts
@@ -43,17 +42,11 @@ org.opensuse.yast.permissions.read
 org.opensuse.yast.permissions.write
 EOF
 
-TEST_DATA_GRANT = [
-"org.opensuse.yast.modules.ysr.statelessregister",
-"org.opensuse.yast.modules.ysr.getregistrationconfig",
-"org.freedesktop.network-manager-settings.system.modify",
-"org.opensuse.yast.module-manager.import"]
-
   def setup
     @request.session[:account_id] = 1 #fixtures
     Permission.any_instance.stubs(:all_actions).returns(TEST_DATA_ACTIONS)
-    PolKit.stubs(:polkit_check).with(){ |p,u| TEST_DATA_GRANT.include? p.to_s}.returns(:yes)
-    PolKit.stubs(:polkit_check).with(){ |p,u| !TEST_DATA_GRANT.include?(p.to_s)}.returns(:no)
+    @dbus_obj = FakeDbus.new
+    Permission.stubs(:dbus_obj).returns(@dbus_obj)
   end
   
 #TODO more tests (not enough permissions etc.)
