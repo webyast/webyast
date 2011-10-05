@@ -24,6 +24,7 @@ BuildRoot:      %{_tmppath}/%{name}-%{version}-build
 BuildArch:      noarch
 Source1:        roles.yml
 Source2:        roles_assign.yml
+Source3:        org.opensuse.yast.roles.policy
 
 BuildRequires:  webyast-base-testsuite
 BuildRequires:	rubygem-test-unit rubygem-mocha
@@ -74,6 +75,10 @@ rm -f $RPM_BUILD_ROOT%{plugin_dir}/COPYING
 mkdir -p $RPM_BUILD_ROOT%{webyast_vardir}/roles
 cp %{SOURCE1} %{SOURCE2} $RPM_BUILD_ROOT%{webyast_vardir}/roles
 
+# Policies
+mkdir -p $RPM_BUILD_ROOT/usr/share/polkit-1/actions
+install -m 0644 %SOURCE3 $RPM_BUILD_ROOT/usr/share/polkit-1/actions/
+
 # remove .po files (no longer needed)
 rm -rf $RPM_BUILD_ROOT/%{plugin_dir}/po
 
@@ -113,6 +118,7 @@ rm -rf $RPM_BUILD_ROOT
 %{plugin_dir}/doc/README_FOR_APP
 %attr(0700,%{webyast_user},%{webyast_user}) %dir %{webyast_vardir}/roles
 %attr(0600,%{webyast_user},%{webyast_user}) %config %{webyast_vardir}/roles/*
+%attr(644,root,root) %config /usr/share/polkit-1/actions/org.opensuse.yast.roles.policy
 
 %doc COPYING
 
