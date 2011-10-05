@@ -97,19 +97,9 @@ msgstr "メールの送信"
 msgid "Manage outgoing mail settings"
 msgstr "送信用メール設定を管理する"
 
-#: app/models/mail_state.rb:40 ./app/models/mail_state.rb:40
-msgid "It was not possible to retrieve the full hostname of the machine. If the mail could not be delivered, consult the network and/or mail configuration with your network administrator."
-msgstr "コンピュータの完全ホスト名を取得できませんでした。メールを配信できない場合は、ネットワークおよび/またはメールの設定について、ネットワーク管理者に相談してくださ
-い。"
-
 #: app/models/mail_state.rb:45 ./app/models/mail_state.rb:45
 msgid "Mail configuration test not confirmed"
 msgstr "メール設定テストの確認が行われていません。"
-
-#: app/models/mail_state.rb:46 ./app/models/mail_state.rb:46
-msgid "While configuring mail, a test mail was sent to %s . Was the mail delivered to this address?<br>If so, confirm it by pressing the button. Otherwise check your mail configuration again."
-msgstr "メール設定中に、テストメールが %s に送信されました。このアドレスにメールは配信されましたか?<br>配信された場合は、ボタンを押して確認してください。配信されていな
-い場合は、メール設定を再度確認してください。"
 
 #: app/models/mail_state.rb:50 ./app/models/mail_state.rb:50
 msgid "Test mail received"

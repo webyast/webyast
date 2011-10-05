@@ -105,11 +105,6 @@ msgstr "시스템의 전체 호스트 이름을 검색할 수 없습니다. 메�
 msgid "Mail configuration test not confirmed"
 msgstr "메일 구성 테스트가 확인되지 않았습니다."
 
-#: app/models/mail_state.rb:46 ./app/models/mail_state.rb:46
-msgid "While configuring mail, a test mail was sent to %s . Was the mail delivered to this address?<br>If so, confirm it by pressing the button. Otherwise check your mail configuration again."
-msgstr "메일을 구성하는 동안 테스트 메일이 %s(으)로 전송되었습니다. 메일이 이 주소로 배달되었습니까?<br>이 경우, 버튼을 눌러 확인하십시오. 그렇지 않으면 메일 구성을 다
-시 확인하십시오."
-
 #: app/models/mail_state.rb:50 ./app/models/mail_state.rb:50
 msgid "Test mail received"
 msgstr "테스트 메일이 수신되었습니다."

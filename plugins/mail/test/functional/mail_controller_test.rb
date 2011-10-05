@@ -50,13 +50,11 @@ class MailControllerTest < ActionController::TestCase
 
   test "put success" do
     Mail.any_instance.stubs(:save).returns(true).once
-
     ret = put :update, :mail => {:smtp_server => "newserver"}, :format => "xml"
     ret_hash = Hash.from_xml(ret.body)
 
-    assert_response :success
+    assert_response :redirect
     assert ret_hash
-    assert ret_hash.has_key?("mail")
   end
 
 # shame, YaPI currently always succeedes

@@ -69,10 +69,9 @@ class MailController < ApplicationController
     begin
       response = @mail.save
       notice = _('Mail settings have been written.')
-      unless @mail.test_mail_address.empty?
+      unless @mail.test_mail_address.blank?
         notice += " " + _('Test mail was sent to %s.') % @mail.test_mail_address
       end
-      
       flash[:notice] = notice
       
       rescue ActiveResource::ClientError => e
