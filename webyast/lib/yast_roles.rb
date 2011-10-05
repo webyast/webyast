@@ -48,7 +48,6 @@ module YastRoles
     begin
       return permission_check action
     rescue Exception => e
-      puts "permission_check2: #{e}"
       Rails.logger.info e
     end
     return false
