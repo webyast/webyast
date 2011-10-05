@@ -142,8 +142,8 @@ fi
 %{plugin_dir}/locale
 
 %dir /usr/share/polkit-1
-%dir /usr/share/polkit-1/ations
-%attr(644,root,root) %config /usr/share/polkit-1/ations/org.opensuse.yast.system.power-management.policy
+%dir /usr/share/polkit-1/actions
+%attr(644,root,root) %config /usr/share/polkit-1/actions/org.opensuse.yast.system.power-management.policy
 
 %doc COPYING
 
