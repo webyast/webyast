@@ -35,7 +35,7 @@
     <%= stylesheet_link_tag "yast","grid","style","jquery.jqplot.css", "jquery-ui-1.7.2.custom.css", "jquery-ui-1.7.2.custom-accordion.css", "jquery-ui-1.7.2.custom-tabs.css", :title=>"default", :charset=>"utf-8" %>
     <%= stylesheet_link_tag "new_inputs", "tipsy", "slidernav", "webyast-modal-dialog", "webyast-online-help", "webyast-controlpanel" %>
     <%= stylesheet_link_tag "webyast-forms" %>
-    
+
     <%= javascript_include_tag 	  "jquery-1.4.2",
           "jquery.query", #FIXME write reason
           "jquery.timers",
@@ -52,7 +52,7 @@
 
     <%= javascript_include_tag "jquerytimer", "jquerySessionTimeout", "jquery.blockUI", "jqueryDisableOnSubmit" %>
     <%= javascript_include_tag "jquery.tipsy", "jquery-effects.min", "jquery.tinysort", "slidernav", "webyast-online-help", "webyast-modal-dialog", "jquery.activity", "notifier" %>
-    <%= javascript_include_tag "webyast-localstorage", "webyast-controlpanel" %> 
+    <%= javascript_include_tag "webyast-localstorage", "webyast-controlpanel" %>
 
     <%= yield :before_script %>
       <%= javascript_include_tag "script", "application" #FIXME it can be problem if plugin also have own application specific js
@@ -64,8 +64,9 @@
 
   <script type="text/javascript">
     $(document).ready(function() {
+      console.log("START")
       //$('div.overview a.controlpanel-shortcut').tipsy({gravity: 'n', delayIn: 800, opacity: 0.8 });
-      <% if session[:expires] !=nil && session[:expires].class == Time %>
+      <% if session[:expires] !=nil && session[:expires].class == ActiveSupport::TimeWithZone %>
         // get current time from back end and check if time zone set to UTC (client) bnc#631763
         var current_utc_time = "<%=Time.now.to_time.utc.to_time.to_i%>";
         <% if session[:expires].utc? == false %>
