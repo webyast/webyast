@@ -120,7 +120,8 @@ class TimeControllerTest < ActionController::TestCase
     session[:wizard_steps] = "systemtime,language"
     post :update, DATA
     assert_response :redirect
-    assert_redirected_to :controller => "controlpanel", :action => "nextstep"
+    assert_redirected_to :controller => "controlpanel", :action => "nextstep",
+                         :done => "time"
   end
 
   def test_ntp
