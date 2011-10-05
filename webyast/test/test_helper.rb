@@ -20,7 +20,6 @@ ENV["RAILS_ENV"] = "test"
 require File.join(File.dirname(__FILE__), "..", "config", "environment")
 require 'test_help'
 require 'mocha'
-require 'polkit1'
 require File.join(File.dirname(__FILE__),'validation_assert') #validation of html
 require 'test/unit'
 #provide basic test for controllers
@@ -41,7 +40,9 @@ class FakeDbus
                 [["yes"]]
         end
 end
-
+def Permission.dbus_obj
+    return FakeDbus.new
+end
 
 class ActiveSupport::TestCase
 

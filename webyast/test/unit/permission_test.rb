@@ -40,8 +40,6 @@ EOF
 
   def setup
     Permission.stubs(:all_actions).returns(TEST_DATA_ACTIONS)
-    @dbus_obj = FakeDbus.new
-    Permission.stubs(:dbus_obj).returns(@dbus_obj)
   end
 
   def test_find_all
