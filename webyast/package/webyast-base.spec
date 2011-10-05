@@ -33,16 +33,17 @@ Requires:       sysvinit > 2.86-195.3.1
 %endif
 Requires:       rubygem-passenger-nginx, rubygem-nokogiri
 Requires:       nginx >= 1.0
-Requires:	ruby-fcgi, sqlite, syslog-ng
+Requires:       ruby-fcgi, sqlite, syslog-ng, check-create-certificate
+
 %if 0%{?suse_version} == 0 || %suse_version <= 1130
-Requires:	ruby-dbus
+Requires:       ruby-dbus
 %else
 Requires:	rubygem-ruby-dbus
 %endif
 
 Requires:       rubygem-webyast-rake-tasks
 Requires:       rubygem-static_record_cache
-Requires:	yast2-dbus-server
+Requires:       yast2-dbus-server
 # 634404
 Recommends:     logrotate
 PreReq:         polkit, PackageKit, rubygem-rake, rubygem-sqlite3
@@ -65,7 +66,7 @@ Source5:        grantwebyastrights
 Source6:        yast_user_roles
 Source9:        rcwebyast
 Source10:       webyast
-Source11:	webyast.lr.conf
+Source11:       webyast.lr.conf
 Source12:       nginx.conf
 
 BuildRoot:      %{_tmppath}/%{name}-%{version}-build
@@ -75,17 +76,17 @@ BuildRequires:  ruby, pkg-config, rubygem-mocha, rubygem-static_record_cache
 BuildRequires:  rubygem-webyast-rake-tasks, rubygem-restility
 BuildRequires:  yast2-core, yast2-dbus-server, sqlite, dbus-1
 %if 0%{?suse_version} == 0 || %suse_version <= 1130
-BuildRequires:	ruby-dbus
+BuildRequires:  ruby-dbus
 %else
-BuildRequires:	rubygem-ruby-dbus
+BuildRequires:  rubygem-ruby-dbus
 %endif
 BuildRequires:  polkit, PackageKit, rubygem-sqlite3
 BuildRequires:  rubygem-rails-2_3 >= 2.3.8
 BuildRequires:  rubygem-rpam, rubygem-polkit1
 # the testsuite is run during build
-BuildRequires:	rubygem-test-unit rubygem-mocha
+BuildRequires:  rubygem-test-unit rubygem-mocha
 BuildRequires:  tidy, rubygem-haml, rubygem-nokogiri, rubygem-sass
-BuildRequires:	nginx >= 1.0, rubygem-passenger-nginx
+BuildRequires:  nginx >= 1.0, rubygem-passenger-nginx
 
 # This is for Hudson (build service) to setup the build env correctly
 %if 0
@@ -162,6 +163,9 @@ touch $RPM_BUILD_ROOT%{webyast_dir}/db/schema.rb
     %{buildroot}%{_sysconfdir}/init.d/%{webyast_service}
 %{__ln_s} -f %{_sysconfdir}/init.d/%{webyast_service} %{buildroot}%{_sbindir}/rc%{webyast_service}
 #
+
+# configure nginx web service
+mkdir -p $RPM_BUILD_ROOT/etc/nginx/certs
 
 # configure nginx web service
 mkdir -p $RPM_BUILD_ROOT/etc/webyast/
@@ -272,11 +276,11 @@ exit 0
 /usr/sbin/grantwebyastrights --user %{webyast_user} --action grant --policy org.freedesktop.packagekit.system-update > /dev/null ||:
 /usr/sbin/grantwebyastrights --user %{webyast_user} --action grant --policy org.opensuse.yast.module-manager.import > /dev/null ||:
 #
-# granting all permissions for root 
+# granting all permissions for root
 #
 /usr/sbin/grantwebyastrights --user root --action grant > /dev/null ||:
 #
-# create database 
+# create database
 #
 cd %{webyast_dir}
 #migrate database
@@ -310,7 +314,7 @@ dbus-send --print-reply --system --dest=org.freedesktop.DBus / org.freedesktop.D
 %restart_on_update %{webyast_service}
 
 #---------------------------------------------------------------
-%files 
+%files
 %defattr(-,root,root)
 #this /etc/webyast is for nginx conf for webyast
 %dir /etc/webyast
@@ -354,6 +358,9 @@ dbus-send --print-reply --system --dest=org.freedesktop.DBus / org.freedesktop.D
 %doc %{webyast_dir}/README
 %attr(-,%{webyast_user},%{webyast_user}) %{webyast_dir}/log
 %attr(-,%{webyast_user},%{webyast_user}) %{webyast_dir}/tmp
+
+%dir /etc/nginx/certs
+
 #nginx stuff
 %config(noreplace) /etc/webyast/nginx.conf
 %config /etc/webyast/fastcgi.conf
@@ -380,3 +387,4 @@ dbus-send --print-reply --system --dest=org.freedesktop.DBus / org.freedesktop.D
 
 #---------------------------------------------------------------
 %changelog
+
