@@ -96,7 +96,7 @@ env LANG=en rake makemo
 #
 # Install all web and frontend parts.
 #
-mkdir -p $RPM_BUILD_ROOT%{webyast_vardir}%{plugin_name}
+mkdir -p $RPM_BUILD_ROOT%{webyast_vardir}/%{plugin_name}
 mkdir -p $RPM_BUILD_ROOT%{plugin_dir}
 cp -a * $RPM_BUILD_ROOT%{plugin_dir}
 rm -f $RPM_BUILD_ROOT%{plugin_dir}/COPYING
@@ -142,7 +142,8 @@ rm -rf $RPM_BUILD_ROOT
 #var dir to store mail test status
 %dir %attr (-,%{webyast_user},root) %{webyast_vardir}
 %dir %attr (-,%{webyast_user},root) %{webyast_vardir}/%{plugin_name}
-%dir %{plugin_dir}/locale
+%{plugin_dir}/locale
+%{plugin_dir}/shortcuts.yml
 %{plugin_dir}/README
 %{plugin_dir}/Rakefile
 %{plugin_dir}/init.rb
@@ -161,6 +162,6 @@ rm -rf $RPM_BUILD_ROOT
 
 %files testsuite
 %defattr(-,root,root)
-%{plugin_dir}/test
+%{webyast_dir}/vendor/plugins/%{plugin_name}/test
 
 %changelog
