@@ -74,11 +74,9 @@ module YastRoles
       Rails.logger.debug "Action: #{action} User: #{account.login} Result: NOT granted"
       raise NoPermissionException.new(action, account.login)
     rescue RuntimeError => e
-      puts "permission_check1: #{e}, #{account.inspect}:#{action}"
       Rails.logger.info e
       raise PolicyKitException.new(e.message, account.login, action)
     rescue Exception => e
-      puts "permission_check2: #{e}"
       Rails.logger.info e
       raise
     end
