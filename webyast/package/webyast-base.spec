@@ -68,6 +68,7 @@ Source9:        rcwebyast
 Source10:       webyast
 Source11:       webyast.lr.conf
 Source12:       nginx.conf
+Source13:	control_panel.yml
 
 BuildRoot:      %{_tmppath}/%{name}-%{version}-build
 BuildRequires:  ruby, pkg-config, rubygem-mocha, rubygem-static_record_cache
@@ -128,10 +129,25 @@ Authors:
 %description testsuite
 Testsuite for core WebYaST package.
 
+%package branding-default
+Group:    Productivity/Networking/Web/Utilities
+Provides: webyast-branding
+Requires: %{name} = %{version}
+#Requires: rubygem-mocha rubygem-test-unit tidy
+Summary:  Branding package for webyast-base-ui package
+
+%description branding-default
+This package contains css, icons and images for webyast-base-ui package.
+
+
 %prep
 %setup -q -n www
 
 %build
+env LANG=en rake makemo
+rake sass:update
+rake js:base
+rm -r app/sass
 
 %check
 # run the testsuite
@@ -205,6 +221,10 @@ mkdir -p $RPM_BUILD_ROOT%{webyast_dir}/tmp/cache
 mkdir -p $RPM_BUILD_ROOT%{webyast_dir}/tmp/pids
 mkdir -p $RPM_BUILD_ROOT%{webyast_dir}/tmp/sessions
 mkdir -p $RPM_BUILD_ROOT%{webyast_dir}/tmp/sockets
+
+# install YAML config file
+mkdir -p $RPM_BUILD_ROOT/etc/webyast/
+cp %SOURCE13 $RPM_BUILD_ROOT/etc/webyast/
 
 # install permissions service
 mkdir -p $RPM_BUILD_ROOT/usr/sbin/
@@ -329,11 +349,10 @@ dbus-send --print-reply --system --dest=org.freedesktop.DBus / org.freedesktop.D
 #logrotate configuration file
 %config(noreplace) /etc/logrotate.d/webyast.lr.conf
 
-#this /etc/webyast is for webyast configuration files
-%dir /etc/webyast/
 %dir %{_datadir}/webyast
 %dir %attr(-,%{webyast_user},root) /var/lib/webyast
 %dir %{webyast_dir}/db
+%{webyast_dir}/locale
 %{webyast_dir}/app
 %{webyast_dir}/db/migrate
 %ghost %{webyast_dir}/db/schema.rb
@@ -360,6 +379,9 @@ dbus-send --print-reply --system --dest=org.freedesktop.DBus / org.freedesktop.D
 %attr(-,%{webyast_user},%{webyast_user}) %{webyast_dir}/tmp
 
 %dir /etc/nginx/certs
+#this /etc/webyast is for webyast configuration files
+%dir /etc/webyast/
+%config /etc/webyast/control_panel.yml
 
 #nginx stuff
 %config(noreplace) /etc/webyast/nginx.conf
@@ -379,11 +401,24 @@ dbus-send --print-reply --system --dest=org.freedesktop.DBus / org.freedesktop.D
 %config %{_sysconfdir}/init.d/%{webyast_service}
 %{_sbindir}/rc%{webyast_service}
 %doc COPYING
+
+### exclude css, icons and images 
+%exclude %{webyast_dir}/public/stylesheets
+%exclude %{webyast_dir}/public/icons
+%exclude %{webyast_dir}/public/images
+
 %ghost %attr(755,root,root) /var/adm/update-scripts/%name-%version-%release-1
 
 %files testsuite
 %defattr(-,root,root)
 %{webyast_dir}/test
+
+%files branding-default
+%defattr(-,root,root)
+### include css, icons and images 
+%{webyast_dir}/public/stylesheets
+%{webyast_dir}/public/icons
+%{webyast_dir}/public/images
 
 #---------------------------------------------------------------
 %changelog
