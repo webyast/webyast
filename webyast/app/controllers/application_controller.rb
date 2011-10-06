@@ -120,7 +120,7 @@ public
       #(has to be the model class name and not the controller name)
       path = YastCache.find_key(controller_name, (request.parameters["id"] || :all))
       if path.blank?
-        logger.info("Cache for model #{path} not found")
+        logger.info("Cache model for controller #{controller_name} not found")
         return
       end
       data_cache = DataCache.find_by_path_and_session(path, self.current_account.remember_token)

@@ -156,7 +156,7 @@ class Basesystem < BaseModel::Base
   end
 
   def self.load_from_file
-    YastCache.fetch("basesystem:find") {
+    YastCache.fetch(self) {
       base = Basesystem.new
       basesystem_conf	= BASESYSTEM_CONF
       basesystem_conf	= BASESYSTEM_CONF_VENDOR if File.exists? BASESYSTEM_CONF_VENDOR
