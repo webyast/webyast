@@ -52,7 +52,7 @@ private
     elsif cache_timestamp < current_timestamp
       Rails.logger.debug "#### Permissions cache expired"
       Rails.cache.write(cache_id, current_timestamp.to_s)
-      YastCache.reset("permission:find::all")
+      YastCache.reset(self)
       return false
     end
     return true

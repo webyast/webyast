@@ -78,7 +78,7 @@ class Basesystem < BaseModel::Base
     File.open(FINISH_FILE,"w") do |io|
       io.write str
     end
-    YastCache.reset("basesystem:find")
+    YastCache.reset(self)
   end
   
   # return:: controller which should be next in basesystem sequence
