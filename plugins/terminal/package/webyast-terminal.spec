@@ -64,16 +64,15 @@ export RAILS_PARENT=%{webyast_dir}
 mkdir -p $RPM_BUILD_ROOT%{plugin_dir}
 cp -a * $RPM_BUILD_ROOT%{plugin_dir}
 rm -f $RPM_BUILD_ROOT%{plugin_dir}/COPYING
-mkdir -p $RPM_BUILD_ROOT/usr/share/PolicyKit/policy
-cp %{SOURCE1} $RPM_BUILD_ROOT/usr/share/PolicyKit/policy/
+mkdir -p $RPM_BUILD_ROOT/usr/share/polkit-1/actions
+cp %{SOURCE1} $RPM_BUILD_ROOT/usr/share/polkit-1/actions/
 
 %clean
 rm -rf $RPM_BUILD_ROOT
 
 %post
-# granting all permissions for the webservice user and root
-polkit-auth --user root --grant org.opensuse.yast.modules.yapi.terminal.read > /dev/null || :
-polkit-auth --user %{webyast_user} --grant org.opensuse.yast.modules.yapi.terminal.read > /dev/null || :
+# granting all permissions for root
+/usr/sbin/grantwebyastrights --user root --action grant > /dev/null
 
 %files
 %defattr(-,root,root)
@@ -89,7 +88,7 @@ polkit-auth --user %{webyast_user} --grant org.opensuse.yast.modules.yapi.termin
 %{plugin_dir}/app
 %{plugin_dir}/config
 %{plugin_dir}/lib
-%attr(644,root,root) /usr/share/PolicyKit/policy/org.opensuse.yast.modules.yapi.terminal.policy
+%attr(644,root,root) /usr/share/polkit-1/actions/org.opensuse.yast.modules.yapi.terminal.policy
 %doc COPYING
 
 %files testsuite
