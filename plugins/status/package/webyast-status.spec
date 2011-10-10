@@ -73,11 +73,14 @@ needed at runtime.
  # build restdoc documentation
 %webyast_restdoc
  
- # do not package restdoc sources
- rm -rf restdoc
+# do not package restdoc sources
+rm -rf restdoc
 
 export RAILS_PARENT=%{webyast_dir}
 env LANG=en rake makemo
+
+mkdir -p public/javascripts/min
+rake js:status
 
 %check
 # run the testsuite
