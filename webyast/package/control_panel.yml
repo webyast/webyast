@@ -1,0 +1,26 @@
+# This is a config file for WebYaST control center
+#
+# The file needs to be located under /etc/webyast/ or /etc/webyast/vendor/
+# (the 'vendor' directory has higher priority).
+
+--- 
+# timeout before automatic reloading of patches status (in seconds)
+# value 0 disables automatic reload
+# default: 28800 seconds = 8 hours
+patch_status_timeout: 28800
+
+# timeout before automatic reloading of patches status (in seconds)
+# value 0 disables automatic reload
+# default: 300 seconds = 5 minutes
+system_status_timeout: 300
+
+# display patches status in the status header
+# default: true
+display_patch_status: true
+
+# display system status in the status header
+# default: true
+display_system_status: true
+
+# label shown at the top of each page
+appliance_label: _("My Appliance")
