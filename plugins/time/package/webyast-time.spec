@@ -80,7 +80,7 @@ env LANG=en rake makemo
 mkdir -p $RPM_BUILD_ROOT%{plugin_dir}
 cp -a * $RPM_BUILD_ROOT%{plugin_dir}
 rm -f $RPM_BUILD_ROOT%{plugin_dir}/COPYING
-mkdir -p $RPM_BUILD_ROOT/usr/share/PolicyKit/policy
+mkdir -p $RPM_BUILD_ROOT/usr/share/polkit-1/actions
 
 # remove .po files (no longer needed)
 rm -rf $RPM_BUILD_ROOT/%{plugin_dir}/po
@@ -99,10 +99,6 @@ rm -rf $RPM_BUILD_ROOT
 # XXX not nice to get webyast all permissions, but now not better solution
 /usr/sbin/grantwebyastrights --user %{webyast_user} --action grant > /dev/null
 
-#remove this if YaST supports the new polkit:
-/usr/bin/polkit-auth --user %{webyast_user} --grant org.opensuse.yast.modules.yapi.time.read > /dev/null ||:
-/usr/bin/polkit-auth --user %{webyast_user} --grant org.opensuse.yast.modules.yapi.time.write > /dev/null ||:
-
 %files -f webyast-time.lang 
 %defattr(-,root,root)
 %dir %{webyast_dir}
@@ -110,8 +106,8 @@ rm -rf $RPM_BUILD_ROOT
 %dir %{webyast_dir}/vendor/plugins
 %dir %{plugin_dir}
 %dir %{plugin_dir}/doc
-%dir /usr/share/PolicyKit
-%dir /usr/share/PolicyKit/policy/
+%dir /usr/share/polkit-1
+%dir /usr/share/polkit-1/actions/
 %{plugin_dir}/README
 %{plugin_dir}/shortcuts.yml
 %{plugin_dir}/Rakefile
