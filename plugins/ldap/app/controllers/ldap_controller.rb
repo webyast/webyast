@@ -37,7 +37,7 @@ class LdapController < ApplicationController
       Rails.logger.debug "ldap: #{@ldap.inspect}"
     rescue Exception => error
       flash[:error] = _("Cannot read LDAP client configuraton.")
-      Rails.logger.error "ERROR: error.inspect"
+      Rails.logger.error "ERROR: #{error.inspect}"
       @ldap = nil
       @permissions = {}
       render :index and return
