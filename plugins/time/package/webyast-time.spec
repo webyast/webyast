@@ -99,6 +99,10 @@ rm -rf $RPM_BUILD_ROOT
 # XXX not nice to get webyast all permissions, but now not better solution
 /usr/sbin/grantwebyastrights --user %{webyast_user} --action grant > /dev/null
 
+#remove this if YaST supports the new polkit:
+/usr/bin/polkit-auth --user %{webyast_user} --grant org.opensuse.yast.modules.yapi.time.read > /dev/null ||:
+/usr/bin/polkit-auth --user %{webyast_user} --grant org.opensuse.yast.modules.yapi.time.write > /dev/null ||:
+
 %files -f webyast-time.lang 
 %defattr(-,root,root)
 %dir %{webyast_dir}
