@@ -35,7 +35,7 @@ class KerberosController < ApplicationController
       Rails.logger.debug "kerberos: #{@kerberos.inspect}"
     rescue Exception => error
       flash[:error] = _("Cannot read Kerberos client configuraton.")
-      Rails.logger.error "ERROR: error.inspect"
+      Rails.logger.error "ERROR: #{error.inspect}"
       @kerberos = nil
       @write_permission = {}
       render :index and return
@@ -54,7 +54,7 @@ class KerberosController < ApplicationController
       flash[:message] = _("Kerberos client configuraton successfully written.")
     rescue Exception => error  
       flash[:error] = _("Error while saving Kerberos client configuration.")
-      Rails.logger.error "ERROR: error.inspect"
+      Rails.logger.error "ERROR: #{error.inspect}"
       render :index and return
       
     #rescue ActiveResource::ClientError => e

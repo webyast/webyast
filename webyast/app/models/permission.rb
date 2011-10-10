@@ -120,6 +120,7 @@ public
 
 private
   def mark_granted_permissions_for_user(user)
+    YastService.lock #locking for other thread
     @permissions.collect! do |perm| 
       begin
         service = Permission.dbus_obj
@@ -132,6 +133,7 @@ private
         end
       rescue RuntimeError => e
         Rails.logger.info e
+        YastService.unlock #unlocking for other thread
         if e.message.include?("does not exist")
           raise InvalidParameters.new :user_id => "UNKNOWN" 
         else
@@ -140,6 +142,7 @@ private
       end
       perm
     end
+    YastService.unlock #unlocking for other thread
   end
 
   def get_description (action)
