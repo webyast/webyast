@@ -98,6 +98,17 @@ rm -rf $RPM_BUILD_ROOT
 /usr/sbin/grantwebyastrights --user root --action grant > /dev/null || :
 # and for webyast
 /usr/sbin/grantwebyastrights --user %{webyast_user} --action grant > /dev/null ||:
+#remove this if YaST supports the new polkit:
+/usr/bin/polkit-auth --user %{webyast_user} --grant org.opensuse.yast.modules.yapi.users.groupsget > /dev/null ||:
+/usr/bin/polkit-auth --user %{webyast_user} --grant org.opensuse.yast.modules.yapi.users.groupget > /dev/null ||:
+/usr/bin/polkit-auth --user %{webyast_user} --grant org.opensuse.yast.modules.yapi.users.groupadd > /dev/null ||:
+/usr/bin/polkit-auth --user %{webyast_user} --grant org.opensuse.yast.modules.yapi.users.groupmodify > /dev/null ||:
+/usr/bin/polkit-auth --user %{webyast_user} --grant org.opensuse.yast.modules.yapi.users.groupdelete > /dev/null ||:
+/usr/bin/polkit-auth --user %{webyast_user} --grant org.opensuse.yast.modules.yapi.users.usersget > /dev/null ||:
+/usr/bin/polkit-auth --user %{webyast_user} --grant org.opensuse.yast.modules.yapi.users.userget > /dev/null ||:
+/usr/bin/polkit-auth --user %{webyast_user} --grant org.opensuse.yast.modules.yapi.users.usermodify > /dev/null ||:
+/usr/bin/polkit-auth --user %{webyast_user} --grant org.opensuse.yast.modules.yapi.users.useradd > /dev/null ||:
+/usr/bin/polkit-auth --user %{webyast_user} --grant org.opensuse.yast.modules.yapi.users.userdelete > /dev/null ||:
 
 %files -f webyast-users.lang
 %defattr(-,root,root)
