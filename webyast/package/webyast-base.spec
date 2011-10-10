@@ -40,12 +40,13 @@ Requires:       ruby-dbus
 %else
 Requires:	rubygem-ruby-dbus
 %endif
-
 Requires:       rubygem-webyast-rake-tasks
 Requires:       rubygem-static_record_cache
 Requires:       yast2-dbus-server
 # 634404
 Recommends:     logrotate
+#remove this if YaST supports the new polkit:
+PreReq:         PolicyKit
 PreReq:         polkit, PackageKit, rubygem-rake, rubygem-sqlite3
 PreReq:         rubygem-rails-2_3 >= 2.3.8
 PreReq:         rubygem-rpam, rubygem-polkit1, rubygem-gettext_rails
@@ -295,6 +296,8 @@ exit 0
 #
 /usr/sbin/grantwebyastrights --user %{webyast_user} --action grant --policy org.freedesktop.packagekit.system-update > /dev/null ||:
 /usr/sbin/grantwebyastrights --user %{webyast_user} --action grant --policy org.opensuse.yast.module-manager.import > /dev/null ||:
+#remove this if YaST supports the new polkit:
+/usr/bin/polkit-auth --user %{webyast_user} --grant org.opensuse.yast.module-manager.import > /dev/null ||:
 #
 # granting all permissions for root
 #
