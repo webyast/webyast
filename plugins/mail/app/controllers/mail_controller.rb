@@ -100,7 +100,7 @@ class MailController < ApplicationController
       if smtp_server.blank? && (!Basesystem.new.load_from_session(session).following_steps.any? { |h| h[:controller] == "administrator" })
         @administrator      = Administrator.find
       
-        if @administrator && !@administrator.aliases.nil? && ! @administrator.empty?
+        if @administrator && !@administrator.aliases.blank?
           flash[:warning]	= _("No outgoing mail server is set, but administrator has mail forwarders defined.
           Change %s<i>administrator</i>%s or %s<i>mail</i>%s configuration.") % ['<a href="/administrator">', '</a>', '<a href="/mail">', '</a>']
         end
