@@ -97,7 +97,7 @@ class NetworkController < ApplicationController
     @conf_mode = STATIC_BOOT_ID if @conf_mode.blank?
 
     if @conf_mode == STATIC_BOOT_ID
-      ipaddr = ifc.ipaddr
+      ipaddr = ifc.ipaddr || "/"
     else
       ipaddr = "/"
     end

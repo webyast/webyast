@@ -48,8 +48,8 @@ module BaseModel
         blacklist = self.class.protected_attributes
         next if blacklist && blacklist.include?(k.to_sym)
         instance_variable_set("@#{k.to_s}",v)
-      end
-			self
+      end unless attributes.blank?
+      self
     end
 
     def self.included(base)
