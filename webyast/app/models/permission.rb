@@ -66,7 +66,7 @@ public
   end
 
   def self.set_permissions(user,permissions)
-
+    YastService.lock #locking for other thread
     service = dbus_obj
 #FIXME vendor permission with different prefix is not reset
     all_perm = filter_nonsuse_permissions all_actions.split(/\n/)
@@ -78,6 +78,7 @@ public
       Rails.logger.info "grant perms for user #{user} :\n#{permissions.inspect}\nwith result #{response.inspect}"
       #TODO convert response to exceptions in case of error
     end
+    YastService.unlock #unlocking for other thread
     YastCache.reset(self)
   end
 

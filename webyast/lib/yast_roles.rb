@@ -65,7 +65,7 @@ module YastRoles
     account = self.current_account
     raise NotLoggedException if account.nil? || account.login.size == 0
     action ||= "" #avoid nil action
-
+    YastService.lock #locking for other thread
     begin
       if Permission.dbus_obj.check( [action], account.login )[0][0] == "yes"
         Rails.logger.debug "Action: #{action} User: #{account.login} Result: ok"
@@ -79,6 +79,8 @@ module YastRoles
     rescue Exception => e
       Rails.logger.info e
       raise
+    ensure
+      YastService.unlock #unlocking for other thread
     end
     return false
   end

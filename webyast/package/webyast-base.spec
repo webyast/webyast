@@ -133,10 +133,10 @@ Group:    Productivity/Networking/Web/Utilities
 Provides: webyast-branding
 Requires: %{name} = %{version}
 #Requires: rubygem-mocha rubygem-test-unit tidy
-Summary:  Branding package for webyast-base-ui package
+Summary:  Branding package for webyast-base package
 
 %description branding-default
-This package contains css, icons and images for webyast-base-ui package.
+This package contains css, icons and images for webyast-base package.
 
 
 %prep
