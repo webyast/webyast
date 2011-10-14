@@ -34,3 +34,10 @@ config.action_controller.perform_caching             = false
 # Don't care if the mailer can't send
 config.action_mailer.raise_delivery_errors = false
 
+#begin
+#require 'yast/rack/response_validator'
+#config.middleware.use YaST::Rack::ResponseValidator
+#  STDERR.puts "Automatic html validation enabled"
+#rescue LoadError
+#  STDERR.puts "Automatic html validation disabled. Please install rubygem-tidy"
+#end
