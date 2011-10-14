@@ -151,11 +151,11 @@ class Metric
   end
   
   # initialize with the path to the rrdb database
-  def initialize(path)
+  def initialize(path=nil)
     @path = path
     # these values can be extracted from the file but we cache
     # them
-    @host, @plugin, @plugin_instance, @type, @type_instance = Metric.parse_file_path(path)
+    @host, @plugin, @plugin_instance, @type, @type_instance = Metric.parse_file_path(path) unless path.blank?
 
   end
 

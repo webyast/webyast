@@ -376,6 +376,8 @@ class Graph
       f.write(config.to_yaml)
       f.close
     end
+    YastCache.delete(self)
+    YastCache.delete(Metric.new)
   end
 
   #returns a human readable value
