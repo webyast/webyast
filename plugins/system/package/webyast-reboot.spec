@@ -14,29 +14,25 @@ Provides:       WebYaST(org.opensuse.yast.system.system)
 Provides:       yast2-webservice-system = %{version}
 Obsoletes:      yast2-webservice-system < %{version}
 PreReq:         yast2-webservice
-# requires HAL for reboot/shutdown actions
-Requires:	hal
-License:	GPL-2.0
+License:        GPL-2.0
 Group:          Productivity/Networking/Web/Utilities
 URL:            http://en.opensuse.org/Portal:WebYaST
 Autoreqprov:    on
 Version:        0.2.3
 Release:        0
-Summary:        WebYaST - reboot/shutdown 
+Summary:        WebYaST - reboot/shutdown
 Source:         www.tar.bz2
 Source1:        org.opensuse.yast.system.power-management.policy
 BuildRoot:      %{_tmppath}/%{name}-%{version}-build
 BuildArch:      noarch
 BuildRequires:  rubygem-webyast-rake-tasks >= 0.1.3
-BuildRequires:	rubygem-restility
+BuildRequires:  rubygem-restility
 BuildRequires:  webyast-base-testsuite
 # the testsuite is run during build
-BuildRequires:	rubygem-test-unit rubygem-mocha
+BuildRequires:  rubygem-test-unit rubygem-mocha
 
-#
 %define plugin_name system
 %define plugin_dir %{webyast_dir}/vendor/plugins/%{plugin_name}
-#
 
 %package testsuite
 Group:    Productivity/Networking/Web/Utilities
@@ -49,7 +45,7 @@ WebYaST - Plugin providing REST based interface for system reboot/shutdown.
 
 Authors:
 --------
-    Ladislav Slezak <lslezak@novell.com>
+Ladislav Slezak <lslezak@novell.com>
 
 %description testsuite
 Testsuite for webyast-reboot package.
@@ -152,3 +148,4 @@ fi
 %{plugin_dir}/test
 
 %changelog
+

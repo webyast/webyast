@@ -1,0 +1,6 @@
+[Allow ConsoleKit operations for the WebYaST REST service]
+Identity=unix-user:yastws
+# allow package update and repository management
+Action=org.freedesktop.consolekit.system.stop;org.freedesktop.consolekit.system.stop-multiple-users;org.freedesktop.consolekit.system.restart;org.freedesktop.consolekit.system.restart-multiple-users
+ResultAny=yes
+
