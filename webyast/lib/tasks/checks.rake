@@ -61,19 +61,25 @@ def test_module name, package
 end
 
 def test_version package, version = nil
+  puts "Testing if #{package} #{version} is installed"
   old_lang = ENV['LANG']
   ENV['LANG'] = 'C'
-  v = `rpm -q #{package}`
+  v = `rpm -q --whatprovides #{package}`
   ENV['LANG'] = old_lang
-  if v =~ /is not installed/
+  if v =~ /is not installed/ || v =~ /no package provides/
     escape v, "install #{package} >= #{version}" if version
     escape v, "install #{package}"
   end
-  return unless version # just check package, not version
+  return if version.blank? # just check package, not version
   nvr = v.split "-"
   rel = nvr.pop
   ver = nvr.pop
-  escape "#{package} not up-to-date", "upgrade to #{package}-#{version}"  if ver < version
+  ENV['LANG'] = 'C'
+  v = `zypper vcmp #{ver} #{version}`
+  ENV['LANG'] = old_lang
+  if v =~ /is older/
+    escape "#{package} not up-to-date (installed:#{ver}) upgrade to #{package}-#{version}"
+  end
 end
 
 ###
@@ -82,42 +88,43 @@ end
 
 desc "Check that your build environment is set up correctly for WebYaST"
 task :system_check do
-
-  # check if openSUSE 11.2 or SLE11
-
-  os_version = "unknown"
-  begin
-    suse_release = File.read "/etc/SuSE-release"
-    suse_release.scan( /VERSION = ([\d\.]*)/ ) do |v|
-      os_version = v[0]
-    end if suse_release
-  rescue
-  end
   
   #
-  # check needed needed packages
+  # check needed packages which have been defined in the spec files
   #
-  version = "0.0.1" # do not take care
-  test_version "libsqlite3-0", version
-  test_version "polkit", version
-  test_version "PackageKit", version
-  test_version "rubygem-locale"
-  test_version "rubygem-locale_rails"
-  test_version "rubygem-gettext"
-  test_version "rubygem-gettext_rails"
+  packages = {} #key: packagename ; value:version
+  `find . -name "*.spec"`.each_line { |spec_file|
+    `egrep "Req:|Requires:" #{spec_file}`.each_line { |require|
+      unless require.lstrip.start_with?("#")
+        require.delete!(",")
+        package_list = require.split
+	package_list.shift #rmove PreReq:,Requires:,...
+        i = 0
+	while i <= package_list.size-1
+	  unless package_list[i].strip.start_with?("webyast")
+	    if i+2<package_list.size && package_list[i+1].start_with?(">")
+	      packages[package_list[i]] = package_list[i+2] 
+	      i += 3
+	    else
+	      unless package_list[i].start_with?("%{name}") ||
+	      	     package_list[i].start_with?("%{version}") ||
+		     package_list[i].start_with?("=") ||
+                     package_list[i].start_with?("<")
+    	        packages[package_list[i]] = "" unless packages.has_key?(package_list[i])
+              end
+    	      i += 1
+	    end
+	  else
+   	    i += 1
+	  end
+	end
+      end
+    }    
+  }
 
-  # development package
-  test_version "tidy"
-
-  #
-  # check needed modules
-  # 
-  test_module "rake", "rubygem-rake"
-  test_module "sqlite3", "rubygem-sqlite3"
-  test_module "rake", "rubygem-rake"
-  test_module "rpam", "ruby-rpam"
-  test_module "polkit1", "rubygem-polkit1"
-  test_module "dbus", "ruby-dbus"
+  packages.each { |package,version|
+    test_version package, version
+  }
 
   # check that policies are all installed
   not_needed = ['org.opensuse.yast.scr.policy']
@@ -167,8 +174,8 @@ task :system_check do
     escape "System error, cannot access D-Bus SystemBus" unless bus
 
     package = "yast2-dbus-server"
-    version = (os_version == "11.2")?"2.18.1":"2.17.0"
-    test_version package, version
+#    version = (os_version == "11.2")?"2.18.1":"2.17.0"
+#    test_version package, version
   end
 
   #
@@ -183,7 +190,7 @@ task :system_check do
   end
 
   test_version "yast2-mail"
-  test_version "yast2", (os_version == "11.2")?"2.18.24":"2.17.72"
+#  test_version "yast2", (os_version == "11.2")?"2.18.24":"2.17.72"
 
   #
   # plugin test. Each plugin will be tested for a "GET show" call OR a "GET index" call. This call should return success.
