@@ -1,4 +1,11 @@
 -------------------------------------------------------------------
+Fri Oct 14 11:54:38 UTC 2011 - vlewin@suse.com
+
+- use ConsoleKit DBUS interface for reboot and shutdown instead of HAL
+- added support for new PolicyKit 
+- 0.2.4
+
+-------------------------------------------------------------------
 Mon May 16 07:27:25 UTC 2011 - schubi@novell.com
 
 - Added new right org.opensuse.yast.system.power-management.policy
