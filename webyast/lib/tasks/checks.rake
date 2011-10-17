@@ -66,8 +66,13 @@ def test_version package, version = nil
   v = `rpm -q --whatprovides #{package}`
   ENV['LANG'] = old_lang
   if v =~ /is not installed/ || v =~ /no package provides/
-    escape v, "install #{package} >= #{version}" if version
-    escape v, "install #{package}"
+    unless version.blank?
+      warn v, "install with: zypper in -C '#{package}>=#{version}'" 
+    else
+      warn v, "install with: zypper in -C '#{package}'"
+    end
+    Error.inc
+    return
   end
   return if version.blank? # just check package, not version
   nvr = v.split "-"
@@ -77,7 +82,8 @@ def test_version package, version = nil
   v = `zypper vcmp #{ver} #{version}`
   ENV['LANG'] = old_lang
   if v =~ /is older/
-    escape "#{package} not up-to-date (installed:#{ver}) upgrade to #{package}-#{version}"
+    warn "#{package} not up-to-date (installed:#{ver}) upgrade to #{package}-#{version}"
+    Error.inc
   end
 end
 
