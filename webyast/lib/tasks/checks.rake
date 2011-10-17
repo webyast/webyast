@@ -17,7 +17,6 @@
 #++
 
 require 'rubygems'
-require 'polkit1'
 
 ###
 # Helpers
@@ -101,7 +100,10 @@ task :system_check do
 	package_list.shift #rmove PreReq:,Requires:,...
         i = 0
 	while i <= package_list.size-1
-	  unless package_list[i].strip.start_with?("webyast")
+	  unless package_list[i].strip.start_with?("webyast") ||
+                 package_list[i].strip.start_with?("yast2-webservice") ||
+                 package_list[i].strip.start_with?("yast2-webclient") ||
+                 package_list[i].strip == "nginx"
 	    if i+2<package_list.size && package_list[i+1].start_with?(">")
 	      packages[package_list[i]] = package_list[i+2] 
 	      i += 3
@@ -110,12 +112,23 @@ task :system_check do
 	      	     package_list[i].start_with?("%{version}") ||
 		     package_list[i].start_with?("=") ||
                      package_list[i].start_with?("<")
-    	        packages[package_list[i]] = "" unless packages.has_key?(package_list[i])
+                if package_list[i].strip.start_with?("%") #rpm makro
+		  puts "expanding RPM makro #{package_list[i].strip}"
+                  `rpm --eval #{package_list[i].strip}`.split().each{ |pk|
+		    packages[pk] = "" unless packages.has_key?(pk) 
+                  } 
+                else
+     	          packages[package_list[i]] = "" unless packages.has_key?(package_list[i])
+		end
               end
     	      i += 1
 	    end
 	  else
-   	    i += 1
+	    if i+2<package_list.size && package_list[i+1].start_with?(">")
+	      i += 3
+	    else
+    	      i += 1
+	    end
 	  end
 	end
       end
@@ -143,100 +156,16 @@ task :system_check do
              "Run \"sudo rake install_policies\" in plugin '#{plugin}'\n or run\nsudo cp #{fname} #{dest_policy}"
     end
   end
-
-  user = ENV['USER']
-
-  # check that the user running the web service has permissions to yast
-  # and others like packagekit. This can be achieved by:
-  # manually "grantwebyastrights --user <user> --action grant --policy <policy>
-
-  webyast_actions = [ 'org.freedesktop.packagekit.system-update', 'org.freedesktop.packagekit.package-install',  'org.opensuse.yast.module-manager.import', 
-                      'org.freedesktop.hal.power-management.shutdown', 'org.freedesktop.hal.power-management.shutdown-multiple-sessions',
-                      'org.freedesktop.hal.power-management.reboot', 'org.freedesktop.hal.power-management.reboot-multiple-sessions',
-                      'org.freedesktop.packagekit.system-sources-configure', 'org.freedesktop.packagekit.package-eula-accept']
-
-  webyast_actions.each do | action|
-    unless PolKit1::polkit1_check(action, user) == :yes
-      escape "policy #{action} is not granted and it is needed to run webyast as #{user}.", "Run 'grantwebyastrights --user #{user} --action grant --policy #{action}' to grant the permission.\n"
-    end
-  end
-
-  #
-  # yast-dbus
-  #
-
-  test "YaST D-Bus service available" do
-    begin
-      require "dbus"
-      bus = DBus::SystemBus.instance
-    rescue Exception => e
-    end
-    escape "System error, cannot access D-Bus SystemBus" unless bus
-
-    package = "yast2-dbus-server"
-#    version = (os_version == "11.2")?"2.18.1":"2.17.0"
-#    test_version package, version
-  end
-
-  #
-  # plugin-specific tests
-  #
-  
-  # mailsettings
-  test "Mail YaPI existance" do
-    unless File.exists? "/usr/share/YaST2/modules/YaPI/MailSettings.pm"
-      warn "mail_settings incomplete", "Install /usr/share/YaST2/modules/YaPI/MailSettings.pm from plugins/mail_settings"
-    end
-  end
-
-  test_version "yast2-mail"
-#  test_version "yast2", (os_version == "11.2")?"2.18.24":"2.17.72"
-
-  #
-  # plugin test. Each plugin will be tested for a "GET show" call OR a "GET index" call. This call should return success.
-  # If not an warning will be reported only.
-  #
-
-  test "all available plugins are working" do
-     # Disabled, "Dir.glob" is *waaay* too slow
-
-     Dir.glob(File.join(File.dirname(__FILE__), '../../../plugins', "*","app/controllers","*_controller.rb")).each do |controller|
-       # go over all plugin controllers and call "GET show" or "GET index" (if show does not work)
-       modulename = File.basename(controller, ".rb").split("_").collect { |i| i.capitalize }.join
-       modulepath = File.dirname(controller).split("/")
-       # add Namespaces to the modulename. 
-       # They are defined as subdirectories in the controller directory
-       while modulepath
-         namespace = modulepath.pop
-         if namespace == "controllers"
-           modulepath = nil
-         else
-           modulename = namespace.capitalize + "::" + modulename
-         end
-       end
-       puts "Checking plugin #{modulename} via HTTP GET requests..."
-       ok = system %(cd #{File.dirname(__FILE__)}; export RAILS_PARENT=../../; ruby plugin_test/functional/plugin_show_test.rb --plugin #{modulename} > /dev/null)
-       if !ok
-#          puts "Trying \"GET index\" cause some plugins do not support \"GET show\"..."
-          ok = system %(cd #{File.dirname(__FILE__)}; export RAILS_PARENT=../../; ruby plugin_test/functional/plugin_index_test.rb --plugin #{modulename} > /dev/null)
-       end
-       unless ok
-         warn "plugin #{modulename} does not work correctly.", "Have a look to log/test.log for additional information" 
-       else
-         puts "plugin #{modulename} works correctly."
-       end
-     end 
-  end
   
   if Error.errors == 0
     puts ""
-    puts "**************************************"
-    puts "All fine, rest-service is ready to run"
-    puts "**************************************"
+    puts "*****************************************"
+    puts "All fine, WebYaST/plugin is ready to run"
+    puts "*****************************************"
   else
     puts ""
-    puts "*******************************************************"
+    puts "********************************************************"
     puts "Please, fix the above errors before running the service"
-    puts "*******************************************************"
+    puts "********************************************************"
   end
 end
