@@ -59,9 +59,8 @@ def grant(user, right)
   sh "/usr/sbin/grantwebyastrights --user #{user} --action grant --policy #{right} ||:"
 end
 
-desc "Deploy for development - run db:migrate, create basic dirs and install grantwebyastrights."
-task :deploy_local, [:user] => :"db:migrate" do |t, args|
-  args.with_defaults :user => "webyast"
+desc "Deploy for development - create basic dirs and install grantwebyastrights."
+task :deploy_local do
   FileUtils.mkdir_p "/etc/webyast"
   FileUtils.mkdir_p "/var/lib/webyast"
   FileUtils.mkdir_p "/usr/share/webyast"
@@ -73,14 +72,6 @@ task :deploy_local, [:user] => :"db:migrate" do |t, args|
   mkdir_p "/usr/share/dbus-1/system-services/"
   cp_r    "package/webyast.permissions.service.service", "/usr/share/dbus-1/system-services/"
   `rake install_policies`
-  if args.user == "webyast"
-    # add user webyast
-    sh "/usr/sbin/groupadd -r webyast ||:" #&>/dev/null ||:
-    sh "/usr/sbin/useradd  -g webyast -s /bin/false -r -c 'User for WebYaST' -d /var/lib/webyast webyast ||:"
-  end
-  # grant rights to him
-  grant args.user, "org.opensuse.yast.module-manager.import"
-  grant args.user, "org.freedesktop.packagekit.system-update"
 end
 
 #set constant to disable initializer for Delayed Job

@@ -27,6 +27,7 @@ desc "install policies"
 task :install_policies do |t|
   puts "Running from #{__FILE__}"
   Dir.glob("**/*.policy").each do |policy|
+    puts "copy #{policy} to /usr/share/polkit-1/actions"
     FileUtils.cp("#{policy}", "/usr/share/polkit-1/actions")
   end
 end

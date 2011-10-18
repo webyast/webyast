@@ -89,8 +89,9 @@ end
 # Tests
 #
 
-desc "Check that your build environment is set up correctly for WebYaST"
-task :system_check do
+
+desc "Check if all needed packages are installed correctly for WebYaST"
+task :system_check_packages do
   
   #
   # check needed packages which have been defined in the spec files
@@ -159,6 +160,21 @@ task :system_check do
     escape "Please install missed packages.", "Installation with: zypper in -C #{install}" 
   end
 
+  if Error.errors == 0
+    puts ""
+    puts "*****************************************"
+    puts "All fine, WebYaST/plugin is ready to run"
+    puts "*****************************************"
+  else
+    puts ""
+    puts "********************************************************"
+    puts "Please, fix the above errors before running the service"
+    puts "********************************************************"
+  end
+end
+
+desc "Check that your policies are granted correctly for WebYaST"
+task :system_check_policies do
   # check that policies are all installed
   not_needed = ['org.opensuse.yast.scr.policy']
   policy_files = File.expand_path(File.join(File.dirname(__FILE__), '../../..', "**/*.policy"))
@@ -176,16 +192,12 @@ task :system_check do
              "Run \"sudo rake install_policies\" in plugin '#{plugin}'\n or run\nsudo cp #{fname} #{dest_policy}"
     end
   end
-  
-  if Error.errors == 0
-    puts ""
-    puts "*****************************************"
-    puts "All fine, WebYaST/plugin is ready to run"
-    puts "*****************************************"
-  else
-    puts ""
-    puts "********************************************************"
-    puts "Please, fix the above errors before running the service"
-    puts "********************************************************"
-  end
+
+end
+
+
+desc "Check that your build environment is set up correctly for WebYaST"
+task :system_check do
+  Rake::Task["system_check_packages"].execute
+  Rake::Task["system_check_policies"].execute
 end
