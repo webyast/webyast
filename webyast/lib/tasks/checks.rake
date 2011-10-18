@@ -66,15 +66,11 @@ def test_version package, version = nil
   v = `rpm -q --whatprovides #{package}`
   ENV['LANG'] = old_lang
   if v =~ /is not installed/ || v =~ /no package provides/
-    unless version.blank?
-      warn v, "install with: zypper in -C '#{package}>=#{version}'" 
-    else
-      warn v, "install with: zypper in -C '#{package}'"
-    end
     Error.inc
-    return
+    warn "#{package} is not installed"
+    return false
   end
-  return if version.blank? # just check package, not version
+  return true if version.blank? # just check package, not version
   nvr = v.split "-"
   rel = nvr.pop
   ver = nvr.pop
@@ -84,7 +80,9 @@ def test_version package, version = nil
   if v =~ /is older/
     warn "#{package} not up-to-date (installed:#{ver}) upgrade to #{package}-#{version}"
     Error.inc
+    return false
   end
+  true
 end
 
 ###
@@ -141,9 +139,25 @@ task :system_check do
     }    
   }
 
+  missed_deps = []
   packages.each { |package,version|
-    test_version package, version
+    unless test_version(package, version)
+      unless version.blank?
+        missed_deps << "\"#{package}>=#{version}\""
+      else
+        missed_deps << "\"#{package}\""
+      end
+    end
   }
+
+  unless missed_deps.empty?
+    install = ""
+    missed_deps.each { |dep|
+      install << " "
+      install << dep
+    }
+    escape "Please install missed packages.", "Installation with: zypper in -C #{install}" 
+  end
 
   # check that policies are all installed
   not_needed = ['org.opensuse.yast.scr.policy']

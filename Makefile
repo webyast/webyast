@@ -1,5 +1,6 @@
 install:
-	zypper in rubygem-rake, rubygem-rails-2_3; \
+	zypper in rubygem-rake rubygem-rails-2_3 rubygem-rcov; \
+        rake install
         echo "NOTE:"; \
         echo "NOTE: Please take care that all needed packages with the correct version are installed !"; \
         echo "NOTE: Have a look to the requirements defined in webservice/package/yast2-webservice.spec."; \
