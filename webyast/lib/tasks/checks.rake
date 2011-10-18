@@ -158,7 +158,7 @@ task :system_check_packages do
       install << dep
     }
     escape "Package installation with: zypper in -C #{install}",
-           "AND call \"rake system_check_packages\" for checking again.
+           "AND call \"rake system_check_packages\" for checking again."
   end
 
   if Error.errors == 0
