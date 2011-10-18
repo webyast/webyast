@@ -26,7 +26,7 @@ include FileUtils::Verbose
 #adapt to easyli local deploy of working plugin (for developement, release use rpm-based way)
 desc "Deploy for development - run db:migrate, create basic dirs and install grantwebyastrights."
 task :deploy_local, [:user] do |t, args|
-  args.with_defaults :user => "webyast"
+  args.with_defaults :user => user = ENV['USER']
   `rake install_policies`
   mkdir_p "/var/lib/webyast/roles/"
   cp_r    "package/roles.yml", "/var/lib/webyast/roles/" unless File.exists? "/var/lib/webyast/roles/roles.yml"
