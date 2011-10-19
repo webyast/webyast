@@ -53,6 +53,7 @@ end
 desc "Check if all needed packages are installed correctly for WebYaST"
 task :system_check_packages,  [:install] do |t, args|
   args.with_defaults(:install => "")  
+  task_name = "system_check_packages"
   PROJECTS.each do |project|
     Dir.chdir project do
       if File.exist? "Rakefile" #avoid endless loop if directory doesn't contain Rakefile
