@@ -198,7 +198,4 @@ end
 
 
 desc "Check that your build environment is set up correctly for WebYaST"
-task :system_check do
-  Rake::Task["system_check_packages"].execute
-  Rake::Task["system_check_policies"].execute
-end
+task :system_check =>[:system_check_packages,:system_check_policies]

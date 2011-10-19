@@ -33,7 +33,7 @@ task :default => :test
 # list of common tasks, being run for every plugin
 #
 
-%w(notes test makemo updatepot rdoc pgem package release install_policies check_syntax package-local buildrpm buildrpm-local test:test:rcov restdoc deploy_local license:report system_check system_check_packages system_check_policies).each do |task_name|
+%w(notes test makemo updatepot rdoc pgem package release install_policies check_syntax package-local buildrpm buildrpm-local test:test:rcov restdoc deploy_local license:report system_check system_check_packages system_check_policies grant_policies).each do |task_name|
   desc "Run #{task_name} task for all projects"
 
   task task_name do
@@ -150,16 +150,6 @@ task :doc do
   end
   system "sed -i 's:%%PLUGINS%%:#{code}:' doc/index.html"
   puts "documentation successfully generated"
-end
-
-desc "Grant policies installed in /usr/share/PolicyKit/policy to root"
-task :grant_policies do |t|
-  puts "Running from #{__FILE__}"
-  puts "You must deploy webyast first!" and return unless File.exists? "/usr/sbin/grantwebyastrights"
-  system "/usr/sbin/grantwebyastrights --user root --action grant >/dev/null 2>&1"
-  raise "Error on execute '/usr/sbin/grantwebyastrights --user root --action grant '" if $?.exitstatus != 0
-  system "/usr/sbin/grantwebyastrights --user webyast --action grant >/dev/null 2>&1"
-  raise "Error on execute '/usr/sbin/grantwebyastrights --user webyast --action grant '" if $?.exitstatus != 0
 end
 
 desc "Deploy for development - create dirs, install configuration files and custom yast modules. Then install and update PolKit policies for root."
