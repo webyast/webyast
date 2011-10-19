@@ -23,9 +23,9 @@ task :grant_policies do |t|
   user = ENV['USER']
   puts "Running from #{__FILE__} with user: #{user}"
   puts "You must deploy webyast first!" and return unless File.exists? "/usr/sbin/grantwebyastrights"
-  system "/usr/sbin/grantwebyastrights --user root --action grant >/dev/null 2>&1"
+  system "/usr/sbin/grantwebyastrights --user root --action grant"
   raise "Error on execute '/usr/sbin/grantwebyastrights --user root --action grant '" if $?.exitstatus != 0
-  system "/usr/sbin/grantwebyastrights --user #{user} --action grant >/dev/null 2>&1"
+  system "/usr/sbin/grantwebyastrights --user #{user} --action grant"
   raise "Error on execute '/usr/sbin/grantwebyastrights --user #{user} --action grant '" if $?.exitstatus != 0
 
   #granting special rights defined in the spec files
