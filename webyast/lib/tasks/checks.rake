@@ -30,6 +30,11 @@ class Error
   def self.errors
     @@errors
   end
+
+  def self.errors=(count)
+    @@errors = count
+  end
+
 end
 
 def escape why, fix = nil
@@ -91,8 +96,8 @@ end
 
 
 desc "Check if all needed packages are installed correctly for WebYaST"
-task :system_check_packages do
-  
+task :system_check_packages, [:install] do |t, args|
+  args.with_defaults(:install => "")  
   #
   # check needed packages which have been defined in the spec files
   #
@@ -157,8 +162,12 @@ task :system_check_packages do
       install << " "
       install << dep
     }
-    escape "Package installation with: zypper in -C #{install}",
-           "AND call \"rake system_check_packages\" for checking again."
+    if args.install == "install"
+      Error.errors = 0 if system "zypper in -C #{install}"
+    else
+      escape "Package installation with: zypper in -C #{install}",
+             "AND call \"rake system_check_packages\" for checking again."
+    end
   end
 
   if Error.errors == 0
@@ -196,6 +205,3 @@ task :system_check_policies do
 
 end
 
-
-desc "Check that your build environment is set up correctly for WebYaST"
-task :system_check =>[:system_check_packages,:system_check_policies]

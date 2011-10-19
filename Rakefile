@@ -33,7 +33,7 @@ task :default => :test
 # list of common tasks, being run for every plugin
 #
 
-%w(notes test makemo updatepot rdoc pgem package release install_policies check_syntax package-local buildrpm buildrpm-local test:test:rcov restdoc deploy_local license:report system_check system_check_packages system_check_policies grant_policies).each do |task_name|
+%w(notes test makemo updatepot rdoc pgem package release install_policies check_syntax package-local buildrpm buildrpm-local test:test:rcov restdoc deploy_local license:report system_check_policies grant_policies).each do |task_name|
   desc "Run #{task_name} task for all projects"
 
   task task_name do
@@ -49,6 +49,19 @@ task :default => :test
 
 end
 
+
+desc "Check if all needed packages are installed correctly for WebYaST"
+task :system_check_packages,  [:install] do |t, args|
+  args.with_defaults(:install => "")  
+  PROJECTS.each do |project|
+    Dir.chdir project do
+      if File.exist? "Rakefile" #avoid endless loop if directory doesn't contain Rakefile
+        system %(#{env} #{$0} #{task_name}[#{args.install}] )
+        raise "Error on execute task #{task_name} on #{project}" if $?.exitstatus != 0
+      end
+    end
+  end
+end
 
 desc "Fetch po files from lcn. Parameter: source directory of lcn e.g. ...lcn/trunk/"
 task :fetch_po, [:lcn_dir] do |t, args|
