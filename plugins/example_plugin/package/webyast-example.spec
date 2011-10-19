@@ -99,8 +99,10 @@ rm -rf $RPM_BUILD_ROOT
 
 %post
 # granting all permissions for the webyast user and root
-/usr/sbin/grantwebyastrights --user root --action grant --policy org.example.plugin.read org.example.plugin.write > /dev/null || :
-/usr/sbin/grantwebyastrights --user %{webyast_user} --action grant --policy org.example.plugin.read org.example.plugin.write > /dev/null || :
+/usr/sbin/grantwebyastrights --user root --action grant --policy org.example.plugin.read > /dev/null || :
+/usr/sbin/grantwebyastrights --user root --action grant --policy org.example.plugin.write > /dev/null || :
+/usr/sbin/grantwebyastrights --user %{webyast_user} --action grant --policy org.example.plugin.read > /dev/null || :
+/usr/sbin/grantwebyastrights --user %{webyast_user} --action grant --policy org.example.plugin.write > /dev/null || :
 
 %postun
 
