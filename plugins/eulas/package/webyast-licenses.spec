@@ -1,5 +1,5 @@
 #
-# spec file for package yast2-webservice-eula (Version 0.0.1)
+# spec file for package webyast-licenses (Version 0.0.1)
 #
 # Copyright (c) 2008-09 SUSE LINUX Products GmbH, Nuernberg, Germany.
 # This file and all modifications and additions to the pristine
