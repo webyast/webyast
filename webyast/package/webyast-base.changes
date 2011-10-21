@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Fri Oct 21 12:18:35 UTC 2011 - schubi@suse.com
+
+- Merging client and service
+- 0.3.0 
+
+-------------------------------------------------------------------
 Wed Jun  1 09:30:52 UTC 2011 - schubi@novell.com
 
 - Allow _ in http headers (bnc#696578)
