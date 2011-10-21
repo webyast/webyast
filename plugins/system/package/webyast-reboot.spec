@@ -104,33 +104,17 @@ rm -rf $RPM_BUILD_ROOT/%{plugin_dir}/po
 %clean
 rm -rf $RPM_BUILD_ROOT
 
-# posttrans is used instead of post so it ensures the rights are
-# granted even after upgrading from old package (before renaming) (bnc#645310)
-# (see https://fedoraproject.org/wiki/Packaging/ScriptletSnippets#Syntax )
-%posttrans
-# granting all permissions for the web user
-#FIXME don't silently fail
-polkit-auth --user %{webyast_ws_user} --grant org.freedesktop.consolekit.system.stop >& /dev/null || true
-polkit-auth --user %{webyast_ws_user} --grant org.freedesktop.consolekit.system.stop-multiple-users >& /dev/null || true
-polkit-auth --user %{webyast_ws_user} --grant org.freedesktop.consolekit.system.restart >& /dev/null || true
-polkit-auth --user %{webyast_ws_user} --grant org.freedesktop.consolekit.system.restart-multiple-users >& /dev/null || true
 
-## granting all permissions for root
-polkit-auth --user root --grant org.freedesktop.consolekit.system.stop >& /dev/null || true
-polkit-auth --user root --grant org.freedesktop.consolekit.system.stop-multiple-users >& /dev/null || true
-polkit-auth --user root --grant org.freedesktop.consolekit.system.restart >& /dev/null || true
-polkit-auth --user root --grant org.freedesktop.consolekit.system.restart-multiple-users >& /dev/null || true
+%post
+# granting all permissions for root
+/usr/sbin/grantwebyastrights --user root --action grant > /dev/null ||:
+/usr/sbin/grantwebyastrights --user %{webyast_user} --action grant > /dev/null ||:
 
-%postun
-# don't remove the rights during package update ($1 > 0)
-# see https://fedoraproject.org/wiki/Packaging/ScriptletSnippets#Syntax for details
-if [ $1 -eq 0 ] ; then
-  polkit-auth --user %{webyast_ws_user} --revoke org.freedesktop.consolekit.system.stop >& /dev/null || true
-  polkit-auth --user %{webyast_ws_user} --revoke org.freedesktop.consolekit.system.stop-multiple-users >& /dev/null || true
-  polkit-auth --user %{webyast_ws_user} --revoke org.freedesktop.consolekit.system.restart >& /dev/null || true
-  polkit-auth --user %{webyast_ws_user} --revoke org.freedesktop.consolekit.system.restart-multiple-users >& /dev/null || true
-fi
-
+# grant the permission for the webyast user
+/usr/sbin/grantwebyastrights --user %{webyast_user} --action grant --policy org.freedesktop.consolekit.system.stop >& /dev/null || true
+/usr/sbin/grantwebyastrights --user %{webyast_user} --action grant --policy org.freedesktop.consolekit.system.stop-multiple-users >& /dev/null || true
+/usr/sbin/grantwebyastrights --user %{webyast_user} --action grant --policy org.freedesktop.consolekit.system.restart >& /dev/null || true
+/usr/sbin/grantwebyastrights --user %{webyast_user} --action grant --policy org.freedesktop.consolekit.system.restart-multiple-users >& /dev/null || true
 
 %files -f webyast-reboot.lang
 
@@ -139,7 +123,8 @@ fi
 %dir %{webyast_dir}/vendor
 %dir %{webyast_dir}/vendor/plugins
 %dir %{plugin_dir}
-
+%dir /usr/share/polkit-1
+%dir /usr/share/polkit-1/actions
 %{plugin_dir}/README
 %{plugin_dir}/Rakefile
 %{plugin_dir}/init.rb
@@ -150,10 +135,8 @@ fi
 %{plugin_dir}/public
 %{plugin_dir}/locale
 
-%dir /usr/share/polkit-1
-%dir /usr/share/polkit-1/actions
 %attr(644,root,root) %config /usr/share/polkit-1/actions/org.opensuse.yast.system.power-management.policy
-
+%doc COPYING
 %if 0%{?suse_version} == 0 || 0%{?suse_version} > 1130
 %dir /var/lib/polkit-1/localauthority
 %dir /var/lib/polkit-1/localauthority/10-vendor.d
@@ -162,8 +145,6 @@ fi
 %config /etc/polkit-1/localauthority/10-vendor.d/*
 %endif
 %endif
-
-%doc COPYING
 
 %files testsuite
 %defattr(-,root,root)
