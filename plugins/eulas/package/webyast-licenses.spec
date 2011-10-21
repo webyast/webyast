@@ -11,14 +11,14 @@
 
 Name:           webyast-licenses
 Provides:       WebYaST(org.opensuse.yast.modules.eulas)
-Provides:       yast2-webservice-eulas = %{version}
-Obsoletes:      yast2-webservice-eulas < %{version}
-PreReq:         yast2-webservice
+Provides:       webyast-licenses-ws = 0.2.5 webyast-licenses-ui = 0.2.6
+Obsoletes:      webyast-licenses-ws <= 0.2.5 webyast-licenses-ui <= 0.2.6
+PreReq:         webyast-base
 License:        GPL-2.0	
 Group:          Productivity/Networking/Web/Utilities
 URL:            http://en.opensuse.org/Portal:WebYaST
 Autoreqprov:    on
-Version:        0.2.5
+Version:        0.3.0
 Release:        0
 Summary:        WebYaST - license management service
 Source:         www.tar.bz2
@@ -37,10 +37,12 @@ BuildRequires:	rubygem-test-unit rubygem-mocha
 #
 
 %package testsuite
-Group:    Productivity/Networking/Web/Utilities
-Requires: %{name} = %{version}
-Requires: webyast-base-testsuite
-Summary:  Testsuite for webyast-licenses package
+Group:     Productivity/Networking/Web/Utilities
+Requires:  %{name} = %{version}
+Provides:  webyast-licenses-ws-testsuite = 0.2.5 webyast-licenses-ui-testsuite = 0.2.6
+Obsoletes: webyast-licenses-ws-testsuite <= 0.2.5 webyast-licenses-ui-testsuite <= 0.2.6
+Requires:  webyast-base-testsuite
+Summary:   Testsuite for webyast-licenses package
 
 %description
 WebYaST - Plugin providing REST based interface to handle user acceptation of EULAs.

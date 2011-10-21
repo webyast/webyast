@@ -11,12 +11,14 @@
 
 Name:           webyast-ldap
 Provides:       WebYaST(org.opensuse.yast.modules.yapi.ldap)
+Provides:       webyast-ldap-ws = 0.2.8 webyast-ldap-ui = 0.2.10
+Obsoletes:      webyast-ldap-ws <= 0.2.8 webyast-ldap-ui <= 0.2.10
 PreReq:         webyast-base
 License:        GPL-2.0	
 Group:          Productivity/Networking/Web/Utilities
 URL:            http://en.opensuse.org/Portal:WebYaST
 Autoreqprov:    on
-Version:        0.2.8
+Version:        0.3.0
 Release:        0
 Summary:        WebYaST - service for configuration of LDAP client
 Source:         www.tar.bz2
@@ -40,10 +42,12 @@ Requires:       yast2-dbus-server >= 2.17.3
 #
 
 %package testsuite
-Group:    Productivity/Networking/Web/Utilities
-Requires: %{name} = %{version}
-Requires: webyast-base-testsuite
-Summary:  Testsuite for webyast-ldap package
+Group:     Productivity/Networking/Web/Utilities
+Requires:  %{name} = %{version}
+Requires:  webyast-base-testsuite
+Provides:  webyast-ldap-ws-testsuite = 0.2.8 webyast-ldap-ui-testsuite = 0.2.10
+Obsoletes: webyast-ldap-ws-testsuite <= 0.2.8 webyast-ldap-ui-testsuite <= 0.2.10
+Summary:   Testsuite for webyast-ldap package
 
 %description
 WebYaST - Plugin providing REST service for configuration of LDAP client

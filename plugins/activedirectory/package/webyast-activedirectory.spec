@@ -11,12 +11,14 @@
 
 Name:           webyast-activedirectory
 Provides:       WebYaST(org.opensuse.yast.modules.yapi.activedirectory)
+Provides: 	webyast-activedirectory-ws = 0.2.10 webyast-activedirectory-ui = 0.2.13
+Obsoletes: 	webyast-activedirectory-ws <= 0.2.10 webyast-activedirectory-ui <= 0.2.13
 PreReq:         webyast-base
 License:        GPL-2.0	
 Group:          Productivity/Networking/Web/Utilities
 URL:            http://en.opensuse.org/Portal:WebYaST
 Autoreqprov:    on
-Version:        0.2.10
+Version:        0.3.0
 Release:        0
 Summary:        WebYaST - configuration of Active Directory client
 Source:         www.tar.bz2
@@ -50,6 +52,8 @@ Requires:	yast2-samba-client >= 2.17.18
 Group:    Productivity/Networking/Web/Utilities
 Requires: %{name} = %{version}
 Requires: webyast-base-testsuite
+Provides:  webyast-activedirectory-ws-testsuite = 0.2.10 webyast-activedirectory-ui-testsuite = 0.2.13
+Obsoletes: webyast-activedirectory-ws-testsuite <= 0.2.10 webyast-activedirectory-ui-testsuite <= 0.2.13
 Summary:  Testsuite for webyast-activedirectory package
 
 %description

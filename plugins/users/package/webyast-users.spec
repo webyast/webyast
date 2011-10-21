@@ -12,15 +12,15 @@
 Name:           webyast-users
 Provides:       WebYaST(org.opensuse.yast.modules.yapi.users)
 Provides:       WebYaST(org.opensuse.yast.modules.yapi.groups)
-Provides:       yast2-webservice-users = %{version}
-Obsoletes:      yast2-webservice-users < %{version}
-PreReq:         yast2-webservice
+Provides:       webyast-users-ws = 0.2.8 webyast-users-ui = 0.2.17
+Obsoletes:      webyast-users-ws <= 0.2.8 webyast-users-ui <= 0.2.17
+PreReq:         webyast-base
 Requires:       webyast-roles
 License:        GPL-2.0 
 Group:          Productivity/Networking/Web/Utilities
 URL:            http://en.opensuse.org/Portal:WebYaST
 Autoreqprov:    on
-Version:        0.2.9
+Version:        0.3.0
 Release:        0
 Summary:        WebYaST - users management
 Source:         www.tar.bz2
@@ -37,10 +37,12 @@ BuildRequires:	rubygem-test-unit rubygem-mocha tidy
 #
 
 %package testsuite
-Group:    Productivity/Networking/Web/Utilities
-Requires: %{name} = %{version}
-Requires: webyast-base-testsuite webyast-roles
-Summary:  Testsuite for webyast-users package
+Group:     Productivity/Networking/Web/Utilities
+Requires:  %{name} = %{version}
+Requires:  webyast-base-testsuite webyast-roles
+Provides:  webyast-users-ws-testsuite = 0.2.8 webyast-users-ui-testsuite = 0.2.17
+Obsoletes: webyast-users-ws-testsuite <= 0.2.8 webyast-users-ui-testsuite <= 0.2.17
+Summary:   Testsuite for webyast-users package
 
 %description
 WebYaST - Plugin providing REST based interface to handle users settings.
@@ -98,17 +100,6 @@ rm -rf $RPM_BUILD_ROOT
 /usr/sbin/grantwebyastrights --user root --action grant > /dev/null || :
 # and for webyast
 /usr/sbin/grantwebyastrights --user %{webyast_user} --action grant > /dev/null ||:
-#remove this if YaST supports the new polkit:
-/usr/bin/polkit-auth --user %{webyast_user} --grant org.opensuse.yast.modules.yapi.users.groupsget > /dev/null ||:
-/usr/bin/polkit-auth --user %{webyast_user} --grant org.opensuse.yast.modules.yapi.users.groupget > /dev/null ||:
-/usr/bin/polkit-auth --user %{webyast_user} --grant org.opensuse.yast.modules.yapi.users.groupadd > /dev/null ||:
-/usr/bin/polkit-auth --user %{webyast_user} --grant org.opensuse.yast.modules.yapi.users.groupmodify > /dev/null ||:
-/usr/bin/polkit-auth --user %{webyast_user} --grant org.opensuse.yast.modules.yapi.users.groupdelete > /dev/null ||:
-/usr/bin/polkit-auth --user %{webyast_user} --grant org.opensuse.yast.modules.yapi.users.usersget > /dev/null ||:
-/usr/bin/polkit-auth --user %{webyast_user} --grant org.opensuse.yast.modules.yapi.users.userget > /dev/null ||:
-/usr/bin/polkit-auth --user %{webyast_user} --grant org.opensuse.yast.modules.yapi.users.usermodify > /dev/null ||:
-/usr/bin/polkit-auth --user %{webyast_user} --grant org.opensuse.yast.modules.yapi.users.useradd > /dev/null ||:
-/usr/bin/polkit-auth --user %{webyast_user} --grant org.opensuse.yast.modules.yapi.users.userdelete > /dev/null ||:
 
 %files -f webyast-users.lang
 %defattr(-,root,root)

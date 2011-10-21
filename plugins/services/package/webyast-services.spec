@@ -11,14 +11,14 @@
 
 Name:           webyast-services
 Provides:       WebYaST(org.opensuse.yast.modules.yapi.services)
-Provides:       yast2-webservice-services = %{version}
-Obsoletes:      yast2-webservice-services < %{version}
-PreReq:         yast2-webservice
+Provides:       webyast-services-ws = 0.2.11 webyast-services-ui = 0.2.10
+Obsoletes:      webyast-services-ws <= 0.2.11 webyast-services-ui <= 0.2.10
+PreReq:         webyast-base
 License:        GPL-2.0	
 Group:          Productivity/Networking/Web/Utilities
 URL:            http://en.opensuse.org/Portal:WebYaST
 Autoreqprov:    on
-Version:        0.2.11
+Version:        0.3.0
 Release:        0
 Summary:        WebYaST - system services management service
 Source:         www.tar.bz2
@@ -44,10 +44,12 @@ Requires:	yast2-runlevel
 #
 
 %package testsuite
-Group:    Productivity/Networking/Web/Utilities
-Requires: %{name} = %{version}
-Requires: webyast-base-testsuite
-Summary:  Testsuite for webyast-services package
+Group:     Productivity/Networking/Web/Utilities
+Requires:  %{name} = %{version}
+Requires:  webyast-base-testsuite
+Provides:  webyast-services-ws-testsuite = 0.2.11 webyast-services-ui-testsuite = 0.2.10
+Obsoletes: webyast-services-ws-testsuite <= 0.2.11 webyast-services-ui-testsuite <= 0.2.10
+Summary:   Testsuite for webyast-services package
 
 %description
 WebYaST - Plugin providing REST based interface to handle system services.

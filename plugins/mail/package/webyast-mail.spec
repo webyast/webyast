@@ -11,14 +11,14 @@
 
 Name:           webyast-mail
 Provides:       WebYaST(org.opensuse.yast.modules.yapi.mailsettings)
-Provides:       yast2-webservice-mailsettings = %{version}
-Obsoletes:      yast2-webservice-mailsettings < %{version}
-PreReq:         yast2-webservice rubygem-gettext_rails
+Provides:       webyast-mail-ws = 0.2.9 webyast-mail-ui = 0.2.8
+Obsoletes:      webyast-mail-ws <= 0.2.9 webyast-mail-ui <= 0.2.8
+PreReq:         webyast-base rubygem-gettext_rails
 License:        GPL-2.0	
 Group:          Productivity/Networking/Web/Utilities
 URL:            http://en.opensuse.org/Portal:WebYaST
 Autoreqprov:    on
-Version:        0.2.8
+Version:        0.3.0
 Release:        0
 Summary:        WebYaST - system mail settings
 Source:         www.tar.bz2
@@ -55,10 +55,12 @@ Requires:       yast2-mail >= 2.17.5
 #
 
 %package testsuite
-Group:    Productivity/Networking/Web/Utilities
-Requires: %{name} = %{version}
-Requires: webyast-base-testsuite
-Summary:  Testsuite for webyast-mail package
+Group:      Productivity/Networking/Web/Utilities
+Provides:   webyast-mail-ws-testsuite = 0.2.9 webyast-mail-ui-testsuite = 0.2.8
+Obsoletes:  webyast-mail-ws-testsuite <= 0.2.9 webyast-mail-ui-testsuite <= 0.2.8
+Requires:   %{name} = %{version}
+Requires:   webyast-base-testsuite
+Summary:    Testsuite for webyast-mail package
 
 %description
 WebYaST - Plugin provides REST based interface to system mail settings.

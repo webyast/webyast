@@ -10,11 +10,13 @@
 
 Name:           webyast-firewall
 Provides:       WebYaST(org.opensuse.yast.modules.yapi.firewall)
+Provides:       webyast-firewall-ws = 0.2.14 webyast-firewall-ui = 0.2.12
+Obsoletes:      webyast-firewall-ws <= 0.2.14 webyast-firewall-ui <= 0.2.12
 License:        GPL-2.0 
 Group:          Productivity/Networking/Web/Utilities
 URL:            http://en.opensuse.org/Portal:WebYaST
 Autoreqprov:    on
-Version:        0.2.14
+Version:        0.3.0
 Release:        0
 Summary:        WebYaST - Firewall management service
 Source:         www.tar.bz2
@@ -35,10 +37,12 @@ BuildRequires:	rubygem-test-unit rubygem-mocha
 #
 
 %package testsuite
-Group:    Productivity/Networking/Web/Utilities
-Requires: %{name} = %{version}
-Requires: webyast-base-testsuite
-Summary:  Testsuite for webyast-firewall package
+Group:     Productivity/Networking/Web/Utilities
+Requires:  %{name} = %{version}
+Provides:  webyast-firewall-ws-testsuite = 0.2.14 webyast-firewall-ui-testsuite = 0.2.12
+Obsoletes: webyast-firewall-ws-testsuite <= 0.2.14 webyast-firewall-ui-testsuite <= 0.2.12
+Requires:  webyast-base-testsuite
+Summary:   Testsuite for webyast-firewall package
 
 %description
 WebYaST - Plugin provides REST based interface to handle firewall settings.

@@ -11,14 +11,15 @@
 
 Name:           webyast-root-user
 Provides:       WebYaST(org.opensuse.yast.modules.yapi.administrator)
-Provides:       yast2-webservice-administrator = %{version}
-Obsoletes:      yast2-webservice-administrator < %{version}
-PreReq:         yast2-webservice
+Provides:       webyast-root-user-ws = 0.2.4 webyast-root-user-ui = 0.2.10
+Obsoletes:      webyast-root-user-ws <= 0.2.4 webyast-root-user-ui <= 0.2.10
+
+PreReq:         webyast-base
 License:        GPL-2.0	
 Group:          Productivity/Networking/Web/Utilities
 URL:            http://en.opensuse.org/Portal:WebYaST
 Autoreqprov:    on
-Version:        0.2.4
+Version:        0.3.0
 Release:        0
 Summary:        WebYaST - configuration of root account
 Source:         www.tar.bz2
@@ -48,6 +49,8 @@ Requires:       yast2-users >= 2.17.28.1
 Group:    Productivity/Networking/Web/Utilities
 Requires: %{name} = %{version}
 Requires: webyast-base-testsuite
+Provides:  webyast-root-user-ws-testsuite = 0.2.4 webyast-root-user-ui-testsuite = 0.2.10
+Obsoletes: webyast-root-user-ws-testsuite <= 0.2.4 webyast-root-user-ui-testsuite <= 0.2.10
 Summary:  Testsuite for webyast-root-user package
 
 %description

@@ -1,10 +1,12 @@
+
+
 su   do not "su -" in order to keep user
 
 zypper in git make rubygem-rake rubygem-rails rubygem-rcov
 
 zypper ar http://download.opensuse.org/repositories/YaST:/Web/openSUSE_11.4/ WebYaST
 
-git clone git://github.com/webyast/rest-service.git
+git clone git@github.com:webyast/webyast.git
 
 rake system_check_packages[install]
 rake deploy_devel_all

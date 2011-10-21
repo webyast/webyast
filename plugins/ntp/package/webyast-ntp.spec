@@ -11,10 +11,10 @@
 
 Name:           webyast-ntp
 Provides:       WebYaST(org.opensuse.yast.modules.yapi.ntp)
-Provides:       yast2-webservice-ntp = %{version}
-Obsoletes:      yast2-webservice-ntp < %{version}
+Provides:       webyast-ntp-ws = %{version}
+Obsoletes:      webyast-ntp-ws < %{version}
 #webservice already require yast2-dbus-server which is needed for yapi
-PreReq:         yast2-webservice
+PreReq:         webyast-base
 #for YaPI needs ntp
 Requires:	ntp
 #for YaPI hwclock
@@ -23,7 +23,7 @@ License:        GPL-2.0
 Group:          Productivity/Networking/Web/Utilities
 URL:            http://en.opensuse.org/Portal:WebYaST
 Autoreqprov:    on
-Version:        0.2.5
+Version:        0.3.0
 Release:        0
 Summary:        WebYaST - NTP 
 Source:         www.tar.bz2
@@ -42,9 +42,11 @@ BuildRequires:	rubygem-test-unit rubygem-mocha
 
 %package testsuite
 Group:    Productivity/Networking/Web/Utilities
-Requires: %{name} = %{version}
-Requires: webyast-base-testsuite
-Summary:  Testsuite for webyast-ntp package
+Requires:  %{name} = %{version}
+Requires:  webyast-base-testsuite
+Provides:  webyast-ntp-ws-testsuite = %{version}
+Obsoletes: webyast-ntp-ws-testsuite < %{version}
+Summary:   Testsuite for webyast-ntp package
 
 %description
 WebYaST - Plugin providing REST based interface to basic ntp time synchronization

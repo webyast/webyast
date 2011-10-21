@@ -11,14 +11,14 @@
 
 Name:           webyast-time
 Provides:       WebYaST(org.opensuse.yast.modules.yapi.time)
-Provides:       yast2-webservice-time = %{version}
-Obsoletes:      yast2-webservice-time < %{version}
-PreReq:         yast2-webservice
+Provides:       webyast-time-ws = 0.2.3 webyast-time-ui = 0.2.11
+Obsoletes:      webyast-time-ws <= 0.2.3 webyast-time-ui <= 0.2.11
+PreReq:         webyast-base
 License:        GPL-2.0	
 Group:          Productivity/Networking/Web/Utilities
 URL:            http://en.opensuse.org/Portal:WebYaST
 Autoreqprov:    on
-Version:        0.2.3
+Version:        0.3.0
 Release:        0
 Summary:        WebYaST - time management
 Source:         www.tar.bz2
@@ -43,10 +43,12 @@ BuildRequires:	rubygem-test-unit rubygem-mocha tidy vim
 #
 
 %package testsuite
-Group:    Productivity/Networking/Web/Utilities
-Requires: %{name} = %{version}
-Requires: webyast-base-testsuite
-Summary:  Testsuite for webyast-time package
+Group:     Productivity/Networking/Web/Utilities
+Requires:  %{name} = %{version}
+Requires:  webyast-base-testsuite
+Provides:  webyast-time-ws-testsuite = 0.2.3 webyast-time-ui-testsuite = 0.2.11
+Obsoletes: webyast-time-ws-testsuite <= 0.2.3 webyast-time-ui-testsuite <= 0.2.11
+Summary:   Testsuite for webyast-time package
 
 %description
 WebYaST - Plugin providing REST based interface to handle time zone, system time and date.

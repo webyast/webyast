@@ -13,13 +13,13 @@ Name:           webyast-status
 Provides:       WebYaST(org.opensuse.yast.system.metrics)
 Provides:       WebYaST(org.opensuse.yast.system.logs)
 Provides:       WebYaST(org.opensuse.yast.system.graphs)
-Provides:       yast2-webservice-status = %{version}
-Obsoletes:      yast2-webservice-status < %{version}
+Provides:       webyast-status-ws = 0.2.13 webyast-status-ui = 0.2.14
+Obsoletes:      webyast-status-ws <= 0.2.13 webyast-status-ui <= 0.2.14
 License:        GPL-2.0	
 Group:          Productivity/Networking/Web/Utilities
 URL:            http://en.opensuse.org/Portal:WebYaST
 Autoreqprov:    on
-Version:        0.2.11
+Version:        0.3.0
 Release:        0
 Summary:        WebYaST - system status 
 Source:         www.tar.bz2
@@ -28,7 +28,7 @@ Source2:	org.opensuse.yast.modules.logfile.policy
 Source3:	LogFile.rb
 BuildRoot:      %{_tmppath}/%{name}-%{version}-build
 BuildArch:      noarch
-PreReq:         yast2-webservice, collectd, rubygem-gettext_rails, %insserv_prereq
+PreReq:         webyast-base, collectd, rubygem-gettext_rails, %insserv_prereq
 Requires:       rrdtool
 # for calling ruby module via YastService:
 Requires:	yast2-ruby-bindings >= 0.3.2.1
@@ -44,10 +44,12 @@ BuildRequires:	tidy rubygem-test-unit rubygem-mocha
 #
 
 %package testsuite
-Group:    Productivity/Networking/Web/Utilities
-Requires: %{name} = %{version}
-Requires: webyast-base-testsuite
-Summary:  Testsuite for webyast-status package
+Group:     Productivity/Networking/Web/Utilities
+Requires:  %{name} = %{version}
+Requires:  webyast-base-testsuite
+Provides:  webyast-status-ws-testsuite = 0.2.13 webyast-status-ui-testsuite = 0.2.14
+Obsoletes: webyast-status-ws-testsuite <= 0.2.13 webyast-status-ui-testsuite <= 0.2.14
+Summary:   Testsuite for webyast-status package
 
 %description
 WebYaST - Plugin providing REST based interface to provide information about system status.

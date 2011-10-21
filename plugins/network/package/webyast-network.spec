@@ -14,13 +14,13 @@ Provides:       WebYaST(org.opensuse.yast.modules.yapi.network.routes)
 Provides:       WebYaST(org.opensuse.yast.modules.yapi.network.interfaces)
 Provides:       WebYaST(org.opensuse.yast.modules.yapi.network.hostname)
 Provides:       WebYaST(org.opensuse.yast.modules.yapi.network.dns)
-Provides:       yast2-webservice-network = %{version}
-Obsoletes:      yast2-webservice-network < %{version}
+Provides:       webyast-network-ws = 0.2.6 webyast-network-ui = 0.2.14
+Obsoletes:      webyast-network-ws <= 0.2.6 webyast-network-ui <= 0.2.14
 License:        GPL-2.0	
 Group:          Productivity/Networking/Web/Utilities
 URL:            http://en.opensuse.org/Portal:WebYaST
 Autoreqprov:    on
-Version:        0.2.6
+Version:        0.3.0
 Release:        0
 Summary:        WebYaST - Network 
 Source:         www.tar.bz2
@@ -28,7 +28,7 @@ Source1:        org.opensuse.yast.modules.yapi.network.policy
 BuildRoot:      %{_tmppath}/%{name}-%{version}-build
 BuildArch:      noarch
 BuildRequires:  tidy rubygem-webyast-rake-tasks rubygem-restility
-PreReq:         yast2-webservice
+PreReq:         webyast-base
 # YaPI/NETWORK.pm
 %if 0%{?suse_version} == 0 || %suse_version > 1110
 Requires:       yast2-network >= 2.18.51
@@ -45,10 +45,12 @@ BuildRequires:	rubygem-test-unit rubygem-mocha
 #
 
 %package testsuite
-Group:    Productivity/Networking/Web/Utilities
-Requires: %{name} = %{version}
-Requires: webyast-base-testsuite
-Summary:  Testsuite for webyast-network package
+Group:     Productivity/Networking/Web/Utilities
+Requires:  %{name} = %{version}
+Requires:  webyast-base-testsuite
+Provides:  webyast-network-ws-testsuite = 0.2.6 webyast-network-ui-testsuite = 0.2.14
+Obsoletes: webyast-network-ws-testsuite <= 0.2.6 webyast-network-ui-testsuite <= 0.2.14
+Summary:   Testsuite for webyast-network package
 
 %description
 WebYaST - Plugin providing REST based interface for network configuration.

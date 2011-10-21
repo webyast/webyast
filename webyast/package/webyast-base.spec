@@ -10,10 +10,10 @@
 
 
 Name:           webyast-base
-Provides:       yast2-webservice = %{version}
-Obsoletes:      yast2-webservice < %{version}
 Provides:       webyast-language-ws = 0.1.0
 Obsoletes:      webyast-language-ws <= 0.1.0
+Provides:       webyast-base-ws = 0.2.24, webyast-base-ui = 0.2.65
+Obsoletes:      webyast-base-ws <= 0.2.24, webyast-base-ui <= 0.2.65
 
 %if 0%{?suse_version} == 0 || %suse_version > 1110
 # 11.2 or newer
@@ -53,7 +53,7 @@ License:	LGPL-2.0
 Group:          Productivity/Networking/Web/Utilities
 URL:            http://en.opensuse.org/Portal:WebYaST
 Autoreqprov:    on
-Version:        0.2.24
+Version:        0.3.0
 Release:        0
 Summary:        WebYaST - base components
 Source:         www.tar.bz2
@@ -109,6 +109,9 @@ BuildArch:      noarch
 %package testsuite
 Group:    Productivity/Networking/Web/Utilities
 Requires: webyast-base = %{version}
+Provides:       webyast-base-ws-testsuite = 0.2.24, webyast-base-ui-testsuite = 0.2.65
+Obsoletes:      webyast-base-ws-testsuite <= 0.2.24, webyast-base-ui-testsuite <= 0.2.65
+
 Summary:  Testsuite for webyast-base package
 
 #
@@ -131,6 +134,8 @@ Testsuite for core WebYaST package.
 %package branding-default
 Group:    Productivity/Networking/Web/Utilities
 Provides: webyast-branding
+Provides: webyast-base-ui-branding-default = 0.2.65
+Obsoletes: webyast-base-ui-branding-default <= 0.2.65
 Requires: %{name} = %{version}
 #Requires: rubygem-mocha rubygem-test-unit tidy
 Summary:  Branding package for webyast-base package

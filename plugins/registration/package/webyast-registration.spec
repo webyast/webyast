@@ -12,14 +12,14 @@
 Name:           webyast-registration
 Provides:       WebYaST(org.opensuse.yast.modules.registration.registration)
 Provides:       WebYaST(org.opensuse.yast.modules.registration.configuration)
-Provides:       yast2-webservice-registration = %{version}
-Obsoletes:      yast2-webservice-registration < %{version}
-PreReq:         yast2-webservice, yast2-registration, rubygem-gettext_rails
+Provides:       webyast-registration-ws = 0.2.6 webyast-registration-ui = 0.2.9
+Obsoletes:      webyast-registration-ws <= 0.2.6 webyast-registration-ui <= 0.2.9
+PreReq:         webyast-base, yast2-registration, rubygem-gettext_rails
 License:        GPL-2.0 
 Group:          Productivity/Networking/Web/Utilities
 URL:            http://en.opensuse.org/Portal:WebYaST
 Autoreqprov:    on
-Version:        0.2.5
+Version:        0.3.0
 Release:        0
 Summary:        WebYaST - Registration
 Source:         www.tar.bz2
@@ -49,10 +49,12 @@ Requires:       yast2-registration >= 2.17.35
 #
 
 %package testsuite
-Group:    Productivity/Networking/Web/Utilities
-Requires: %{name} = %{version}
-Requires: webyast-base-testsuite
-Summary:  Testsuite for webyast-registration package
+Group:     Productivity/Networking/Web/Utilities
+Requires:  %{name} = %{version}
+Requires:  webyast-base-testsuite
+Provides:  webyast-registration-ws-testsuite = 0.2.6 webyast-registration-ui-testsuite = 0.2.9
+Obsoletes: webyast-registration-ws-testsuite <= 0.2.6 webyast-registration-ui-testsuite <= 0.2.9
+Summary:   Testsuite for webyast-registration package
 
 %description
 WebYaST - Plugin providing REST based interface for the system registration at NCC, SMT or SLMS

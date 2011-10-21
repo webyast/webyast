@@ -13,13 +13,13 @@ Name:           webyast-software
 Provides:       WebYaST(org.opensuse.yast.system.repositories)
 Provides:       WebYaST(org.opensuse.yast.system.patches)
 Provides:       WebYaST(org.opensuse.yast.system.packages)
-Provides:       yast2-webservice-patches = %{version}
-Obsoletes:      yast2-webservice-patches < %{version}
+Provides:       webyast-software-ws = 0.3.12 webyast-software-ui = 0.3.13
+Obsoletes:      webyast-software-ws <= 0.3.12 webyast-software-ui <= 0.3.13
 
 # for testing
 BuildRequires:  ruby-dbus >= 0.3.1
 
-PreReq:         yast2-webservice
+PreReq:         webyast-base
 # ruby-dbus is required by webyast-base already
 # but here we use a recent feature of on_signal
 Requires:       ruby-dbus >= 0.3.1
@@ -40,7 +40,7 @@ License:	GPL-2.0
 Group:          Productivity/Networking/Web/Utilities
 URL:            http://en.opensuse.org/Portal:WebYaST
 Autoreqprov:    on
-Version:        0.3.12
+Version:        0.3.20
 Release:        0
 Summary:        WebYaST - software management 
 Source:         www.tar.bz2
@@ -59,10 +59,12 @@ BuildRequires:	rubygem-test-unit rubygem-mocha
 #
 
 %package testsuite
-Group:    Productivity/Networking/Web/Utilities
-Requires: %{name} = %{version}
-Requires: webyast-base-testsuite
-Summary:  Testsuite for webyast-software package
+Group:     Productivity/Networking/Web/Utilities
+Requires:  %{name} = %{version}
+Requires:  webyast-base-testsuite
+Provides:  webyast-software-ws-testsuite = 0.3.12 webyast-software-ui-testsuite = 0.3.13
+Obsoletes: webyast-software-ws-testsuite <= 0.3.12 webyast-software-ui-testsuite <= 0.3.13
+Summary:   Testsuite for webyast-software package
 
 %description
 WebYaST - Plugin providing REST based interface to handle repositories, patches and packages.

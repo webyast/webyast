@@ -11,12 +11,14 @@
 
 Name:           webyast-roles
 Provides:       WebYaST(org.opensuse.yast.roles)
-PreReq:         yast2-webservice
+PreReq:         wabyast-base
+Provides:       webyast-roles-ws = 0.2.5 webyast-roles-ui = 0.2.15
+Obsoletes:      webyast-roles-ws <= 0.2.5 webyast-roles-ui <= 0.2.15
 License:        GPL-2.0	
 Group:          Productivity/Networking/Web/Utilities
 URL:            http://en.opensuse.org/Portal:WebYaST
 Autoreqprov:    on
-Version:        0.2.5
+Version:        0.3.0
 Release:        0
 Summary:        WebYaST - role management
 Source:         www.tar.bz2
@@ -35,10 +37,12 @@ BuildRequires:	rubygem-test-unit rubygem-mocha
 #
 
 %package testsuite
-Group:    Productivity/Networking/Web/Utilities
-Requires: %{name} = %{version}
-Requires: webyast-base-testsuite
-Summary:  Testsuite for webyast-roles package
+Group:     Productivity/Networking/Web/Utilities
+Requires:  %{name} = %{version}
+Requires:  webyast-base-testsuite
+Provides:  webyast-roles-ws-testsuite = 0.2.5 webyast-roles-ui-testsuite = 0.2.15
+Obsoletes: webyast-roles-ws-testsuite <= 0.2.5 webyast-roles-ui-testsuite <= 0.2.15
+Summary:   Testsuite for webyast-roles package
 
 %description
 WebYaST - Plugin providing REST based interface for roles management.

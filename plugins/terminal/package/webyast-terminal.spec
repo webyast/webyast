@@ -11,12 +11,12 @@
 
 Name:           webyast-terminal
 Provides:       WebYaST(org.opensuse.yast.modules.yapi.terminal)
-PreReq:         yast2-webservice
+PreReq:         webyast-base
 License:        GPL-2.0
 Group:          Productivity/Networking/Web/Utilities
 URL:            http://en.opensuse.org/Portal:WebYaST
 Autoreqprov:    on
-Version:        0.0.1
+Version:        0.3.0
 Release:        0
 Summary:        WebYaST - AJAX terminal plugin
 Source:         www.tar.bz2

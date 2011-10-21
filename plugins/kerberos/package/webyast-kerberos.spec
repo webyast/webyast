@@ -11,12 +11,14 @@
 
 Name:           webyast-kerberos
 Provides:       WebYaST(org.opensuse.yast.modules.yapi.kerberos)
+Provides:       webyast-kerberos-ws = 0.2.9 webyast-kerberos-ui = 0.2.10
+Obsoletes:      webyast-kerberos-ws <= 0.2.9 webyast-kerberos-ui <= 0.2.10
 PreReq:         webyast-base
 License:        GPL-2.0	
 Group:          Productivity/Networking/Web/Utilities
 URL:            http://en.opensuse.org/Portal:WebYaST
 Autoreqprov:    on
-Version:        0.2.9
+Version:        0.3.0
 Release:        0
 Summary:        WebYaST - configuration of Kerberos client
 Source:         www.tar.bz2
@@ -24,8 +26,7 @@ Source1:	org.opensuse.yast.modules.yapi.kerberos.policy
 Source2:	KERBEROS.pm
 BuildRoot:      %{_tmppath}/%{name}-%{version}-build
 BuildArch:      noarch
-BuildRequires:  rubygem-yast2-webservice-tasks rubygem-restility
-
+BuildRequires:  rubygem-webyast-tasks rubygem-restility
 BuildRequires:  webyast-base-testsuite
 BuildRequires:	rubygem-test-unit rubygem-mocha
 
@@ -40,10 +41,12 @@ Requires:       yast2-dbus-server >= 2.17.3
 #
 
 %package testsuite
-Group:    Productivity/Networking/Web/Utilities
-Requires: %{name} = %{version}
-Requires: webyast-base-testsuite
-Summary:  Testsuite for webyast-kerberos package
+Group:     Productivity/Networking/Web/Utilities
+Requires:  %{name} = %{version}
+Requires:  webyast-base-testsuite
+Provides:  webyast-kerberos-ws-testsuite = 0.2.9 webyast-kerberos-ui-testsuite = 0.2.10
+Obsoletes: webyast-kerberos-ws-testsuite <= 0.2.9 webyast-kerberos-ui-testsuite <= 0.2.10
+Summary:   Testsuite for webyast-kerberos package
 
 %description
 WebYaST - Plugin for configuration of Kerberos client

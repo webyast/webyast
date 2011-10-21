@@ -11,14 +11,14 @@
 
 Name:           webyast-firstboot
 Provides:       WebYaST(org.opensuse.yast.modules.basesystem)
-Provides:       yast2-webservice-basesystem = %{version}
-Obsoletes:      yast2-webservice-basesystem < %{version}
-PreReq:         yast2-webservice
+Provides:       webyast-firstboot-ws = %{version}
+Obsoletes:      webyast-firstboot-ws < %{version}
+PreReq:         webyast-base
 License:        GPL-2.0	
 Group:          Productivity/Networking/Web/Utilities
 URL:            http://en.opensuse.org/Portal:WebYaST
 Autoreqprov:    on
-Version:        0.2.5
+Version:        0.3.0
 Release:        0
 Summary:        WebYaST - initial settingsvice
 Source:         www.tar.bz2
@@ -38,6 +38,8 @@ BuildRequires:	rubygem-test-unit rubygem-mocha
 Group:    Productivity/Networking/Web/Utilities
 Requires: %{name} = %{version}
 Requires: webyast-base-testsuite
+Provides:  webyast-firstboot-ws-testsuite = %{version}
+Obsoletes: webyast-firstboot-ws-testsuite < %{version}
 Summary:  Testsuite for webyast-firstboot package
 
 %description
