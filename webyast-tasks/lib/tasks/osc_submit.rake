@@ -19,7 +19,7 @@
 require 'rake'
 
 
-desc "Submit package to Yast:Web osc repository (override project via OBS_PROJECT=)"
+desc "Submit package to Yast:Web:WebYaST osc repository (override project via OBS_PROJECT=)"
 task :'osc_submit'  do
   require File.join(File.dirname(__FILE__), "osc_prepare")
   
