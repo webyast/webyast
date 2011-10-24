@@ -81,7 +81,7 @@ BuildRequires:  ruby-dbus
 BuildRequires:  rubygem-ruby-dbus
 %endif
 BuildRequires:  polkit, PackageKit, rubygem-sqlite3
-BuildRequires:  rubygem-rails-2_3 >= 2.3.8
+BuildRequires:  rubygem-rack-1_1 rubygem-rails-2_3 >= 2.3.8
 BuildRequires:  rubygem-rpam, rubygem-polkit1
 # the testsuite is run during build
 BuildRequires:  rubygem-test-unit rubygem-mocha
@@ -406,7 +406,7 @@ dbus-send --print-reply --system --dest=org.freedesktop.DBus / org.freedesktop.D
 %{_sbindir}/rc%{webyast_service}
 %doc COPYING
 
-### exclude css, icons and images 
+### exclude css, icons and images
 %exclude %{webyast_dir}/public/stylesheets
 %exclude %{webyast_dir}/public/icons
 %exclude %{webyast_dir}/public/images
@@ -419,7 +419,7 @@ dbus-send --print-reply --system --dest=org.freedesktop.DBus / org.freedesktop.D
 
 %files branding-default
 %defattr(-,root,root)
-### include css, icons and images 
+### include css, icons and images
 %{webyast_dir}/public/stylesheets
 %{webyast_dir}/public/icons
 %{webyast_dir}/public/images
