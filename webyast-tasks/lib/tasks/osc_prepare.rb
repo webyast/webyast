@@ -24,7 +24,7 @@
 
 def osc_prepare
   File.directory?('package') || raise("No package/ directory found")
-  obs_project = ENV["OBS_PROJECT"] || "YaST:Web"
+  obs_project = ENV["OBS_PROJECT"] || "YaST:Web:WebYaST"
   package_name = ""
   Dir.glob("package/*.spec").each do |file|
     package_name = file.gsub( /package\/(.*).spec/, '\1')
