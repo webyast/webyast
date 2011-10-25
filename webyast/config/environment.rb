@@ -119,8 +119,8 @@ init = Rails::Initializer.run do |config|
 
   # add extra plugin path - needed during RPM build
   # (webyast-base is already installed in /srv/www/... but plugins are
-  # located in /usr/src/packages/... during build)
-  config.plugin_paths << '/usr/src/packages/BUILD' unless ENV['ADD_BUILD_PATH'].nil?
+  # located in /usr/src/packages/... (RPM_BUILD_DIR) during build)
+  config.plugin_paths << ENV['RPM_BUILD_DIR'] unless ENV['ADD_BUILD_PATH'].nil?
 
   config.after_initialize do
     YastCache.active = config.action_controller.perform_caching 
