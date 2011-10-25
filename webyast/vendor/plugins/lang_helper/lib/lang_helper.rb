@@ -1,3 +1,4 @@
+# coding: utf-8
 # gettext_plugin.rb - a sample script for Ruby on Rails
 #
 # Copyright (C) 2005-2007 Masao Mutoh
@@ -9,8 +10,7 @@ require 'gettext'
 module LangHelper
   include GetText
 
-  bindtextdomain("lang_helper", 
-        :path => File.join(RAILS_ROOT, "vendor/plugins/lang_helper/locale"))
+  bindtextdomain("lang_helper", :path => File.join(Rails.root, "vendor/plugins/lang_helper/locale"))
 
   LANGUAGES = { 'af' => 'Afrikaans', 'ar' => 'العربية', 'be' => 'Беларуская', 'bg' => 'Български', 'bn' => 'বাংলা',
     'bs' => 'Bosanski', 'ca' => 'Català', 'cs' => 'Čeština', 'cy' => 'Cymraeg', 'da' => 'Dansk',
@@ -36,7 +36,7 @@ module LangHelper
     Rails.logger.info("detected locale #{ret}")
     #find locale from existing one, translate if locale came from browser to current one, fallback to american english
     default = lambda{return "en_US"} #detect require something which response to call
-    ret = supported_languages.detect(default) { |k| ret.tr('-','_').downcase == k.downcase ? k : nil} 
+    ret = supported_languages.detect(default) { |k| ret.tr('-','_').downcase == k.downcase ? k : nil}
     Rails.logger.info("returned locale #{ret}")
     return ret
   end
@@ -54,7 +54,7 @@ module LangHelper
     language = LANGUAGES.index(name)
     language.strip.split('_')[1]? language.split('_')[1] : language
   end
-    
+
   def current_locale_name
     # check full locale at first (language + country)
     if LANGUAGES.has_key?(locale.to_s)
@@ -86,7 +86,7 @@ module LangHelper
     #do not use this constant (only internal), use supported_languages method
     SUPPORTED_LANGUAGE= [
      "ar","cs","de","es","en_US","fr","hu","it","ja","ko",
-     "nl","pl","pt_BR","ru","sv","zh_CN","zh_TW" 
+     "nl","pl","pt_BR","ru","sv","zh_CN","zh_TW"
     ]
   def supported_languages
     #TODO read from file if vendor want create own translations
@@ -94,4 +94,4 @@ module LangHelper
     return SUPPORTED_LANGUAGE
   end
 end
- 
+

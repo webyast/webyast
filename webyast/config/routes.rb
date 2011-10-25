@@ -1,57 +1,58 @@
-#--
-# Webyast framework
-#
-# Copyright (C) 2009, 2010 Novell, Inc. 
-#   This library is free software; you can redistribute it and/or modify
-# it only under the terms of version 2.1 of the GNU Lesser General Public
-# License as published by the Free Software Foundation. 
-#
-#   This library is distributed in the hope that it will be useful, but WITHOUT
-# ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
-# FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public License for more 
-# details. 
-#
-#   You should have received a copy of the GNU Lesser General Public
-# License along with this library; if not, write to the Free Software 
-# Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA
-#++
+Webyast::Application.routes.draw do
+  # The priority is based upon order of creation:
+  # first created -> highest priority.
 
-# route sessions statically, it is a singleton controller
-ActionController::Routing::Routes.draw do |map|
-  map.resource :session
-  map.resources :notifier
-  map.resources :onlinehelp
-  map.resources :logs
-    map.resource :permissions
-  map.resource :vendor_settings
-  
-  #resources is not restful as it allows only read only access. It is more likely inspection
-  map.connect 'resources/:id.:format',  :controller => 'resources', :action => 'show', :requirements => { :id => /[-\w]+/ }
-  map.connect 'resources.:format',  :controller => 'resources', :action => 'index'
+  # Sample of regular route:
+  #   match 'products/:id' => 'catalog#view'
+  # Keep in mind you can assign values other than :controller and :action
 
+  # Sample of named route:
+  #   match 'products/:id/purchase' => 'catalog#purchase', :as => :purchase
+  # This route can be invoked with purchase_url(:id => product.id)
 
-  map.connect '/validate_uri', :controller => 'hosts', :action => 'validate_uri'
-  map.root :controller => "main"
- 
-  map.login '/login.html', :controller => 'sessions', :action => 'new'
+  # Sample resource route (maps HTTP verbs to controller actions automatically):
+  #   resources :products
 
-  # login uses POST for both
-  map.login "/login.:format", :controller => 'sessions', :action => 'create'
-  map.logout "/logout.:format", :controller => 'sessions', :action => 'destroy'
-  
-#  map.login '/login', :controller => 'sessions', :action => 'new'
-#  map.logout '/logout', :controller => 'sessions', :action => 'destroy'
+  # Sample resource route with options:
+  #   resources :products do
+  #     member do
+  #       get 'short'
+  #       post 'toggle'
+  #     end
+  #
+  #     collection do
+  #       get 'sold'
+  #     end
+  #   end
 
-  map.restdoc "/restdoc.:format", :controller => 'restdoc', :action => 'index'
-  
-  
-  #FIXME: this is a workaround only
-  map.notifier "/notifiers/status.:format",  :controller => "notifier", :action => "status"
+  # Sample resource route with sub-resources:
+  #   resources :products do
+  #     resources :comments, :sales
+  #     resource :seller
+  #   end
 
-  
-  # Install the default routes as the lowest priority.
+  # Sample resource route with more complex sub-resources
+  #   resources :products do
+  #     resources :comments
+  #     resources :sales do
+  #       get 'recent', :on => :collection
+  #     end
+  #   end
 
-  map.connect ':controller/:action/:id'
-  map.connect ':controller/:action/:id.:format', :requirements => {:id => /[^\/]*(?=\.html|\.js)|.+/ }
+  # Sample resource route within a namespace:
+  #   namespace :admin do
+  #     # Directs /admin/products/* to Admin::ProductsController
+  #     # (app/controllers/admin/products_controller.rb)
+  #     resources :products
+  #   end
 
+  # You can have the root of your site routed with "root"
+  # just remember to delete public/index.html.
+  # root :to => 'welcome#index'
+
+  # See how all your routes lay out with "rake routes"
+
+  # This is a legacy wild controller route that's not recommended for RESTful applications.
+  # Note: This route will make all actions in every controller accessible via GET requests.
+  # match ':controller(/:action(/:id(.:format)))'
 end
