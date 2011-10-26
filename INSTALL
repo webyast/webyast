@@ -1,14 +1,6 @@
 
+In order to install WebYaST from GIT please have a look to
+the GIT section of:
 
-su   do not "su -" in order to keep user
+http://en.opensuse.org/openSUSE:WebYaST_Installation
 
-zypper in git make rubygem-rake rubygem-rails rubygem-rcov
-
-zypper ar http://download.opensuse.org/repositories/YaST:/Web/openSUSE_11.4/ WebYaST
-
-git clone git@github.com:webyast/webyast.git
-
-rake system_check_packages[install]
-rake deploy_devel_all
-rcSuSEfirewall2 stop
-start.sh
