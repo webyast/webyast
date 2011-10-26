@@ -13,7 +13,7 @@ Name:           webyast-mail
 Provides:       WebYaST(org.opensuse.yast.modules.yapi.mailsettings)
 Provides:       webyast-mail-ws = 0.2.9 webyast-mail-ui = 0.2.8
 Obsoletes:      webyast-mail-ws <= 0.2.9 webyast-mail-ui <= 0.2.8
-PreReq:         webyast-base rubygem-gettext_rails
+PreReq:         webyast-base
 License:        GPL-2.0	
 Group:          Productivity/Networking/Web/Utilities
 URL:            http://en.opensuse.org/Portal:WebYaST
@@ -29,7 +29,7 @@ BuildRoot:      %{_tmppath}/%{name}-%{version}-build
 BuildArch:      noarch
 BuildRequires:  rubygem-webyast-rake-tasks rubygem-restility
 
-BuildRequires:  webyast-base-testsuite rubygem-gettext_rails
+BuildRequires:  webyast-base-testsuite
 BuildRequires:	rubygem-test-unit rubygem-mocha
 
 # install these packages into Hudson chroot environment
