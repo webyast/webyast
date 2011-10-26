@@ -28,14 +28,12 @@ Source2:	org.opensuse.yast.modules.logfile.policy
 Source3:	LogFile.rb
 BuildRoot:      %{_tmppath}/%{name}-%{version}-build
 BuildArch:      noarch
-PreReq:         webyast-base, collectd, rubygem-gettext_rails, %insserv_prereq
+PreReq:         webyast-base, collectd, %insserv_prereq
 Requires:       rrdtool
 # for calling ruby module via YastService:
 Requires:	yast2-ruby-bindings >= 0.3.2.1
-
 BuildRequires:  rubygem-webyast-rake-tasks rubygem-restility
-
-BuildRequires:  webyast-base-testsuite rubygem-gettext_rails
+BuildRequires:  webyast-base-testsuite
 BuildRequires:	tidy rubygem-test-unit rubygem-mocha
 
 #
