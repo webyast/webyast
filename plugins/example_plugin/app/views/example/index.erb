@@ -1,0 +1,41 @@
+<div class="plugin-content plugin-border">
+    <% form_tag '/example/update', :class => "webyast_form" do %>
+      <div class="plugin-header">
+        <div class="left">
+          <label class="plugin-icon-container"><img class="plugin-icon" src="/icons/example_plugin.png"></label>
+          <label class="plugin-name"><%=_("Example")%></label>
+        </div>
+        <div class="right" >
+          <span id="questionMark" style="margin:2px 5px; float:none;">?</span>
+        </div>
+        <div class="clearfix"></div>
+      </div>
+
+      <div class="clearfix">&nbsp;</div>
+      <fieldset class="webyast_fieldset">
+        <div class="fieldset_header">
+          <span class="fieldset_header_title" >
+            <%=_("Content of /var/log/YaST2/example_file")%>
+          </span>
+        </div>
+
+        <div class="fieldset_body">
+          <div class="row">
+            <%= text_area(:example, :content, :cols => 125, :rows => 10) %>
+          </div>
+          <br>
+        </div>
+      </fieldset>
+      
+      <div class="button_container">
+        <div class="hr">&nbsp;</div>
+        <div class="nav-buttons">
+          <%= form_send_buttons :disabled => !@write_permission %>
+        </div>
+      </div>
+
+    <% end %>
+  </div>
+  
+  
+  

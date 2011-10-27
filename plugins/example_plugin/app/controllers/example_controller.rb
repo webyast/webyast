@@ -24,14 +24,23 @@ class ExampleController < ApplicationController
   #require login before do any action
   before_filter :login_required
 
-  def show
-    permission_check "org.opensuse.yast.system.example.read"
-    example = Example.find
+  # Initialize GetText and Content-Type.
+  init_gettext "webyast-example"
 
+  def index
+    permission_check "org.opensuse.yast.system.example.read"
+    @example = Example.find
+
+    @write_permission = permission_granted? "org.opensuse.yast.system.example.write"
     respond_to do |format|
-      format.xml  { render :xml => example.to_xml}
-      format.json { render :json => example.to_json }
+      format.xml  { render :xml => @example.to_xml}
+      format.json { render :json => @example.to_json }
+      format.html { render :index }
     end
+  end
+
+  def show
+    index
   end
    
   def update
@@ -40,11 +49,24 @@ class ExampleController < ApplicationController
     if value.empty?
       raise InvalidParameters.new :example => "Missing"
     end
-	
-    example = Example.find
-    example.content = value["content"] || ""
-    example.save	
-    show
+    @example = Example.find
+    @example.content = value["content"] || ""
+    error = nil
+    begin
+      @example.save
+    rescue Exception => error
+      Rails.logger.error "Error while saving file: #{error.inspect}"
+    end
+    respond_to do |format|
+      format.xml  { render :xml => @example.to_xml}
+      format.json { render :json => @example.to_json }
+      format.html { unless error
+                      flash[:notice] = _("File saved")
+                    else
+                      flash[:error] = _("Error while saving file: %s") % error.inspect
+                    end
+                    render :index }
+    end
   end
 
   # See update

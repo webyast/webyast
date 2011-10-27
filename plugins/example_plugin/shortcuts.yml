@@ -1,0 +1,7 @@
+main:
+  icon: '/icons/example_plugin.png'
+  url: /example
+  groups: [ System ]
+  title: _("Example")
+  description: _("This is an example plugin only")
+  read_permissions: [ org.opensuse.yast.system.example.read ]
