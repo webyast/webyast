@@ -65,7 +65,7 @@ class ExampleController < ApplicationController
                     else
                       flash[:error] = _("Error while saving file: %s") % error.inspect
                     end
-                    render :index }
+                    index }
     end
   end
 
