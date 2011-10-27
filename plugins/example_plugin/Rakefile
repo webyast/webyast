@@ -1,6 +1,11 @@
 # -*- ruby -*-
 require File.join(File.dirname(__FILE__), 'config', 'rails_parent')
 require File.join(RailsParent.parent, 'lib', 'tasks', 'common')
+#import rake task files from plugins directory 
+Dir.glob(File.dirname(__FILE__) + "/lib/tasks/*.rake").each do |rake_file|
+  import rake_file
+end
+
 
 include FileUtils::Verbose
 
@@ -15,6 +20,13 @@ task :deploy_local do |t|
   mkdir_p "/usr/share/dbus-1/system-services/"
   cp_r    "package/example.service.service", "/usr/share/dbus-1/system-services/"
   mkdir_p "/usr/share/PolicyKit/policy/"
-  cp_r    "package/org.opensuse.yast.example.policy", "/usr/share/PolicyKit/policy/"
-  `polkit-auth --user root --grant org.opensuse.yast.example.read org.opensuse.yast.example.write > /dev/null || :`
+  cp_r    "package/org.opensuse.yast.system.example.policy", "/usr/share/polkit-1/actions/"
+  `/usr/sbin/grantwebyastrights --user root --action grant --policy org.opensuse.yast.system.example.read > /dev/null || :`
+  `/usr/sbin/grantwebyastrights --user root --action grant --policy org.opensuse.yast.system.example.write > /dev/null || :`
+  command =  "/usr/sbin/grantwebyastrights --user #{ENV['USER']} --action grant --policy org.opensuse.yast.system.example.read > /dev/null || :"
+  puts command
+  system command
+  command =  "/usr/sbin/grantwebyastrights --user #{ENV['USER']} --action grant --policy org.opensuse.yast.system.example.write > /dev/null || :"
+  puts command
+  system command
 end

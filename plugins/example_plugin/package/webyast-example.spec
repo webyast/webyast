@@ -12,8 +12,8 @@
 Name:           webyast-example
 #allows to search for missing interface
 Provides:       WebYaST(org.example.plugin)
-#webservice already require yast2-dbus-server which is needed for yapi
-PreReq:         yast2-webservice
+#webyast already require yast2-dbus-server which is needed for yapi
+PreReq:         webyast-base
 License:	      BSD
 Group:          Productivity/Networking/Web/Utilities
 URL:            http://en.opensuse.org/Portal:WebYaST
@@ -29,7 +29,7 @@ Source4:        org.opensuse.yast.system.example.policy
 Source5:        wicd-rpmlintrc
 BuildRoot:      %{_tmppath}/%{name}-%{version}-build
 BuildArch:      noarch
-BuildRequires:  rubygem-yast2-webservice-tasks rubygem-restility
+BuildRequires:  rubygem-webyast-rake-tasks rubygem-restility
 
 BuildRequires:  webyast-base-testsuite
 BuildRequires:	rubygem-test-unit rubygem-mocha
