@@ -1,5 +1,5 @@
 #interface can be anything
-interface: org.example.plugin
+interface: org.opensuse.yast.system.example
 #controller is path on which can be service located
 controller: example
 #singular set if it is singular REST service or not

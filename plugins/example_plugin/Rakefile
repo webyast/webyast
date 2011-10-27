@@ -14,5 +14,7 @@ task :deploy_local do |t|
   chmod  744, "/usr/local/sbin/exampleService.rb"
   mkdir_p "/usr/share/dbus-1/system-services/"
   cp_r    "package/example.service.service", "/usr/share/dbus-1/system-services/"
-  `rake install_policies`
+  mkdir_p "/usr/share/PolicyKit/policy/"
+  cp_r    "package/org.opensuse.yast.example.policy", "/usr/share/PolicyKit/policy/"
+  `polkit-auth --user root --grant org.opensuse.yast.example.read org.opensuse.yast.example.write > /dev/null || :`
 end

@@ -25,23 +25,24 @@ class ExampleController < ApplicationController
   before_filter :login_required
 
   def show
-    permission_check "org.example.plugin.read"
+    permission_check "org.opensuse.yast.system.example.read"
     example = Example.find
 
     respond_to do |format|
-	    format.xml  { render :xml => example.to_xml}
-	    format.json { render :json => example.to_json }
+      format.xml  { render :xml => example.to_xml}
+      format.json { render :json => example.to_json }
     end
   end
    
   def update
-    permission_check "org.example.plugin.write"
-    root = params["example"]
-    if root == nil || root == {} 
+    permission_check "org.opensuse.yast.system.example.write"
+    value = params["example"]
+    if value.empty?
       raise InvalidParameters.new :example => "Missing"
     end
 	
-    example = Example.new(root)
+    example = Example.find
+    example.content = value["content"] || ""
     example.save	
     show
   end
