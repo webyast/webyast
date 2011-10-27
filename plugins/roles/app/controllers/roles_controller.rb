@@ -1,20 +1,20 @@
 #--
 # Copyright (c) 2009-2010 Novell, Inc.
-# 
+#
 # All Rights Reserved.
-# 
+#
 # This program is free software; you can redistribute it and/or modify it
 # under the terms of version 2 of the GNU General Public License
 # as published by the Free Software Foundation.
-# 
+#
 # This program is distributed in the hope that it will be useful,
 # but WITHOUT ANY WARRANTY; without even the implied warranty of
 # MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
 # GNU General Public License for more details.
-# 
+#
 # You should have received a copy of the GNU General Public License
 # along with this program; if not, contact Novell, Inc.
-# 
+#
 # To contact Novell about this file by physical or electronic mail,
 # you may find current contact information at www.novell.com
 #++
@@ -28,7 +28,7 @@ class RolesController < ApplicationController
   before_filter :login_required
   before_filter :check_role_name, :only => [:delete, :show]
   before_filter :check_read_permission
-  before_filter :check_write_permission, :only => [:update,:delete] 
+  before_filter :check_write_permission, :only => [:update,:delete]
 
   layout 'main'
 
@@ -66,25 +66,27 @@ public
   #--------------------------------------------------------------------------------
 
   # Update role. Requires modify permissions
-  # 
+  #
   # There are two kind of parameters while an update call:
   #
   # REST:
-  # Parameters: {"id"=>"tester2", "roles"=>{"name"=>"tester2", "id"=>"tester2", "users"=>[], 
-  #                                         "permissions"=>["org.opensuse.yast.modules.yapi.firewall.read", 
+  # Parameters: {"id"=>"tester2", "roles"=>{"name"=>"tester2", "id"=>"tester2", "users"=>[],
+  #                                         "permissions"=>["org.opensuse.yast.modules.yapi.firewall.read",
   #                                                         "org.opensuse.yast.modules.yapi.firewall.write"]}}
   # VIA UI (JavaScript):
-  # Parameters: {"org.opensuse.yast.modules.yapi.firewall.write:permission_of:tester2"=>"1", 
-  #              "org.opensuse.yast.modules.yapi.kerberos:permission_of:tester"=>"1", 
-  #              "users_of_tester2"=>"", 
-  #              "org.opensuse.yast.modules.yapi.firewall:permission_of:tester2"=>"1", 
-  #              "org.opensuse.yast.modules.yapi.kerberos.write:permission_of:tester"=>"1", 
-  #              "users_of_tester"=>"", 
-  #              "org.opensuse.yast.modules.yapi.firewall.read:permission_of:tester2"=>"1", 
+  # Parameters: {"org.opensuse.yast.modules.yapi.firewall.write:permission_of:tester2"=>"1",
+  #              "org.opensuse.yast.modules.yapi.kerberos:permission_of:tester"=>"1",
+  #              "users_of_tester2"=>"",
+  #              "org.opensuse.yast.modules.yapi.firewall:permission_of:tester2"=>"1",
+  #              "org.opensuse.yast.modules.yapi.kerberos.write:permission_of:tester"=>"1",
+  #              "users_of_tester"=>"",
+  #              "org.opensuse.yast.modules.yapi.firewall.read:permission_of:tester2"=>"1",
   #              "org.opensuse.yast.modules.yapi.kerberos.read:permission_of:tester"=>"1"}
   #
 
   def update
+    yapi_perm_check "roles.write"
+
     unless params[:roles].nil? #REST interfce
       check_role_name
       role = Role.find(params[:id])
@@ -96,7 +98,7 @@ public
     else #JavaScript
       all_permissions = Permission.find(:all).collect {|p| p[:id] }
       changed_roles = []
-    
+
       Role.find(:all).each do |role|
         new_permissions = all_permissions.find_all do |perm|
           params[RolesController.permission_role_id perm, role.name]
@@ -118,7 +120,7 @@ public
     end
   end
 
-  # Create new role. 
+  # Create new role.
   def create
     error = nil
     begin
@@ -174,7 +176,7 @@ public
   # Shows all roles
   def index
     @roles = Role.find
-    
+
     respond_to do |format|
       format.xml  { render :xml => @roles.to_xml( :dasherize => false ) }
       format.json { render :json => @roles.to_json( :dasherize => false ) }
@@ -197,3 +199,4 @@ public
   end
 
 end
+

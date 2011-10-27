@@ -1,18 +1,18 @@
 #--
 # Webyast framework
 #
-# Copyright (C) 2009, 2010 Novell, Inc. 
+# Copyright (C) 2009, 2010 Novell, Inc.
 #   This library is free software; you can redistribute it and/or modify
 # it only under the terms of version 2.1 of the GNU Lesser General Public
-# License as published by the Free Software Foundation. 
+# License as published by the Free Software Foundation.
 #
 #   This library is distributed in the hope that it will be useful, but WITHOUT
 # ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
-# FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public License for more 
-# details. 
+# FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public License for more
+# details.
 #
 #   You should have received a copy of the GNU Lesser General Public
-# License along with this library; if not, write to the Free Software 
+# License along with this library; if not, write to the Free Software
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA
 #++
 
@@ -43,14 +43,14 @@ delay_job_mutex = Mutex::new
 
 init = Rails::Initializer.run do |config|
 
-  #Set JSMIN constant to true/false 
+  #Set JSMIN constant to true/false
   #true: load minified javascript files for speed up
   #false: load source javascript files for debugging
   JSMIN = true
 
   #just for test
   #ENV['DISABLE_INITIALIZER_FROM_RAKE'] = 'false'
-  
+
   # Settings in config/environments/* take precedence over those specified here.
   # Application configuration should go into files in config/initializers
   # -- all .rb files in that directory are automatically loaded.
@@ -60,19 +60,21 @@ init = Rails::Initializer.run do |config|
   # you must remove the Active Record framework.
   # config.frameworks -= [ :active_record, :active_resource, :action_mailer ]
 
-  # Specify gems that this application depends on. 
+  # Specify gems that this application depends on.
   # They can then be installed with "rake gems:install" on new installations.
   # config.gem "bj"
   # config.gem "hpricot", :version => '0.6', :source => "http://code.whytheluckystiff.net"
   # config.gem "aws-s3", :lib => "aws/s3"
 
-  # Only load the plugins named here, in the order given. By default, all plugins 
+  # Only load the plugins named here, in the order given. By default, all plugins
   # in vendor/plugins are loaded in alphabetical order.
   # :all can be used as a placeholder for all plugins not explicitly named
   # config.plugins = [ :exception_notification, :ssl_requirement, :all ]
 
   # Add additional load paths for your own custom dirs
   #config.load_paths += %W( #{RAILS_ROOT}/vendor/plugins/systemtime )
+
+
 
   # Force all environments to use the same logger level
   # (by default production uses :info, the others :debug)
@@ -85,7 +87,7 @@ init = Rails::Initializer.run do |config|
 
   # Your secret key for verifying cookie session data integrity.
   # If you change this key, all old sessions will become invalid!
-  # Make sure the secret is at least 30 characters and all random, 
+  # Make sure the secret is at least 30 characters and all random,
   # no regular words or you'll be exposed to dictionary attacks.
   config.action_controller.session = {
     :key => '_yast-api_session',
@@ -123,14 +125,14 @@ init = Rails::Initializer.run do |config|
   config.plugin_paths << '/usr/src/packages/BUILD' unless ENV['ADD_BUILD_PATH'].nil?
 
   config.after_initialize do
-    YastCache.active = config.action_controller.perform_caching 
+    YastCache.active = config.action_controller.perform_caching
     unless ENV['RAILS_ENV'] == 'test'
       delay_job_mutex.lock
       if ENV["RUN_WORKER"] && YastCache.active
-        Thread::new do 
+        Thread::new do
           ENV["RUN_WORKER"] = 'false'
           delay_job_mutex.lock #do not start before all jobs have been inserted
-	  Delayed::Worker.new.start 
+	  Delayed::Worker.new.start
         end
       end
     end
@@ -146,15 +148,15 @@ unless defined? RESOURCE_REGISTRATION_TESTING
   init.loaded_plugins.each do |plugin|
     ResourceRegistration.register_plugin(plugin)
   end
-  
+
   ResourceRegistration.route ResourceRegistration.resources
 
 end
 
 # load global role assignments unless we're testing them
 unless defined? PERMISSION_CHECK_TESTING
-  
-  USER_ROLES_CONFIG = "/etc/yast_user_roles"    
+
+  USER_ROLES_CONFIG = "/etc/yast_user_roles"
 
 end
 
@@ -171,7 +173,7 @@ unless ENV['RAILS_ENV'] == 'test'
      ActiveRecord::Base.connection.tables.include?('delayed_jobs') &&
      YastCache.active
 
-    #remove cache information 
+    #remove cache information
     DataCache.delete_all
     #Construct initial job queue in order to fillup the cache
     Delayed::Job.delete_all
@@ -229,3 +231,4 @@ YaST::LOADED_PLUGINS = init.loaded_plugins
 # look for all existing loaded plugin's public/ directories
 plugin_assets = init.loaded_plugins.map { |plugin| File.join(plugin.directory, 'public') }.reject { |dir| not (File.directory?(dir) and File.exist?(dir)) }
 init.configuration.middleware.use YaST::Rack::StaticOverlay, :roots => plugin_assets
+
