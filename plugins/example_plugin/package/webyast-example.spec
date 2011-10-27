@@ -1,5 +1,5 @@
 #
-# example spec file for package webyast-example
+# example spec file for package webyast-example-ws
 #
 # Copyright (c) 2010 SUSE LINUX Products GmbH, Nuernberg, Germany.
 # This file and all modifications and additions to the pristine
@@ -12,29 +12,30 @@
 Name:           webyast-example
 #allows to search for missing interface
 Provides:       WebYaST(org.example.plugin)
-#webservice already require yast2-dbus-server which is needed for yapi
-PreReq:         yast2-webservice
+#webyast already require yast2-dbus-server which is needed for yapi
+PreReq:         webyast-base
 License:	      BSD
 Group:          Productivity/Networking/Web/Utilities
 URL:            http://en.opensuse.org/Portal:WebYaST
 Autoreqprov:    on
 Version:        0.1
 Release:        0
-Summary:        WebYaST - example plugin 
+Summary:        WebYaST - example plugin
 Source:         www.tar.bz2
 Source1:        example.service.conf
 Source2:        exampleService.rb
 Source3:        example.service.service
-Source4:        org.example.plugin.policy
+Source4:        org.opensuse.yast.system.example.policy
+Source5:        wicd-rpmlintrc
 BuildRoot:      %{_tmppath}/%{name}-%{version}-build
 BuildArch:      noarch
-BuildRequires:  rubygem-yast2-webservice-tasks rubygem-restility
+BuildRequires:  rubygem-webyast-rake-tasks rubygem-restility
 
 BuildRequires:  webyast-base-testsuite
 BuildRequires:	rubygem-test-unit rubygem-mocha
 
 #
-%define plugin_dir %{webyast_dir}/vendor/plugins/exampleplugin
+%define plugin_dir %{webyast_dir}/vendor/plugins/example
 #
 
 %package testsuite
@@ -59,14 +60,6 @@ needed at runtime.
 %setup -q -n www
 
 %build
-# build restdoc documentation
-#mkdir -p public/ntp/restdoc
-#%webyast_restdoc
-
-# do not package restdoc sources
-rm -rf restdoc
-#do not package development documentation
-rm -rf doc
 
 %check
 # run the testsuite
@@ -99,10 +92,10 @@ rm -rf $RPM_BUILD_ROOT
 
 %post
 # granting all permissions for the webyast user and root
-/usr/sbin/grantwebyastrights --user root --action grant --policy org.example.plugin.read > /dev/null || :
-/usr/sbin/grantwebyastrights --user root --action grant --policy org.example.plugin.write > /dev/null || :
-/usr/sbin/grantwebyastrights --user %{webyast_user} --action grant --policy org.example.plugin.read > /dev/null || :
-/usr/sbin/grantwebyastrights --user %{webyast_user} --action grant --policy org.example.plugin.write > /dev/null || :
+/usr/sbin/grantwebyastrights --user root --action grant --policy org.opensuse.yast.system.example.read > /dev/null || :
+/usr/sbin/grantwebyastrights --user root --action grant --policy org.opensuse.yast.system.example.write > /dev/null || :
+/usr/sbin/grantwebyastrights --user %{webyast_user} --action grant --policy org.opensuse.yast.system.example.read > /dev/null || :
+/usr/sbin/grantwebyastrights --user %{webyast_user} --action grant --policy org.opensuse.yast.system.example.write > /dev/null || :
 
 %postun
 
@@ -112,15 +105,11 @@ rm -rf $RPM_BUILD_ROOT
 %dir %{webyast_dir}/vendor
 %dir %{webyast_dir}/vendor/plugins
 %dir %{plugin_dir}
-%{plugin_dir}/README
 %{plugin_dir}/Rakefile
-%{plugin_dir}/init.rb
-%{plugin_dir}/install.rb
-%{plugin_dir}/uninstall.rb
 %{plugin_dir}/app
 %{plugin_dir}/config
 %attr(744,root,root) /usr/local/sbin/exampleService.rb
-%attr(644,root,root) /usr/share/polkit-1/actions/org.example.plugin.policy
+%attr(644,root,root) /usr/share/polkit-1/actions/org.opensuse.yast.system.example.policy
 %attr(644,root,root) /etc/dbus-1/system.d/example.service.conf
 %attr(644,root,root) /usr/share/dbus-1/system-services/example.service.service
 %doc COPYING

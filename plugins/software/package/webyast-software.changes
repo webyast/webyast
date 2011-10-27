@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Mon Oct 24 15:39:55 UTC 2011 - schubi@suse.com
+
+- Mergig client and service
+- 0.3.20 
+
+-------------------------------------------------------------------
 Thu Jun 16 08:39:25 UTC 2011 - schubi@novell.com
 
 - accepting more than one EULA in a patch (bnc#698416)

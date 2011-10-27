@@ -7,7 +7,7 @@
   <vendor>YaST Webservice Project</vendor>
   <vendor_url>http://en.opensuse.org/YAST</vendor_url>
 
-  <action id="org.example.plugin.read">
+  <action id="org.opensuse.yast.system.example.read">
     <description>Description of action</description>
     <message>Authentication message which appear on desktop (not affect webyast)</message>
     <defaults>
@@ -16,7 +16,7 @@
     </defaults>
   </action>
 
-  <action id="org.example.plugin.write">
+  <action id="org.opensuse.yast.system.example.write">
     <description>Description of action</description>
     <message>Authentication message which appear on desktop (not affect webyast)</message>
     <defaults>

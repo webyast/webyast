@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Mon Oct 24 15:49:09 UTC 2011 - schubi@suse.com
+
+- Merging client and service
+- 0.3.0 
+
+-------------------------------------------------------------------
 Mon Jun 13 14:15:38 UTC 2011 - jreidinger@novell.com
 
 - fix potential security issue in mass loading 

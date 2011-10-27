@@ -11,7 +11,7 @@
 
 Name:           webyast-roles
 Provides:       WebYaST(org.opensuse.yast.roles)
-PreReq:         wabyast-base
+PreReq:         webyast-base
 Provides:       webyast-roles-ws = 0.2.5 webyast-roles-ui = 0.2.15
 Obsoletes:      webyast-roles-ws <= 0.2.5 webyast-roles-ui <= 0.2.15
 License:        GPL-2.0	

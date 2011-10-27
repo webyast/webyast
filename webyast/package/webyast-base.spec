@@ -81,12 +81,23 @@ BuildRequires:  ruby-dbus
 BuildRequires:  rubygem-ruby-dbus
 %endif
 BuildRequires:  polkit, PackageKit, rubygem-sqlite3
-BuildRequires:  rubygem-rack-1_1 rubygem-rails-2_3 >= 2.3.8
+BuildRequires:  rubygem-rails-2_3 >= 2.3.8
 BuildRequires:  rubygem-rpam, rubygem-polkit1
 # the testsuite is run during build
 BuildRequires:  rubygem-test-unit rubygem-mocha
-BuildRequires:  tidy, rubygem-haml, rubygem-nokogiri, rubygem-sass
+BuildRequires:  tidy, rubygem-haml, rubygem-nokogiri
 BuildRequires:  nginx >= 1.0, rubygem-passenger-nginx
+
+%if 0%{?suse_version} != 1140
+# since 12*, sass conflicts with haml, but SLES11 has already the new sass
+#BuildRequires:       rubygem-sass
+%endif
+
+#rubygem-rack > 1.1 is has problems with rails/rake. So we ensure that we
+#still uses 1.1. (Can be removed if there is a stable version available)
+BuildRequires:  rubygem-rack <= 1.2
+Requires:       rubygem-rack <= 1.2
+Conflicts:      rubygem-rack > 1.2
 
 # This is for Hudson (build service) to setup the build env correctly
 %if 0
