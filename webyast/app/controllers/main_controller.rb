@@ -1,18 +1,18 @@
 #--
 # Webyast Webclient framework
 #
-# Copyright (C) 2009, 2010 Novell, Inc. 
+# Copyright (C) 2009, 2010 Novell, Inc.
 #   This library is free software; you can redistribute it and/or modify
 # it only under the terms of version 2.1 of the GNU Lesser General Public
-# License as published by the Free Software Foundation. 
+# License as published by the Free Software Foundation.
 #
 #   This library is distributed in the hope that it will be useful, but WITHOUT
 # ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
-# FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public License for more 
-# details. 
+# FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public License for more
+# details.
 #
 #   You should have received a copy of the GNU Lesser General Public
-# License along with this library; if not, write to the Free Software 
+# License along with this library; if not, write to the Free Software
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA
 #++
 
@@ -26,8 +26,10 @@
 #
 
 class MainController < ApplicationController
+  before_filter :set_gettext_locale
+
   def index
-    
+
     redirect_to(logged_in? ?
 		{ :controller => "controlpanel", :action => "index" } :
 		{ :controller => "session", :action => "new" })
@@ -36,7 +38,8 @@ class MainController < ApplicationController
   # POST /select_language
   # setting language for translations
   def select_language
-    render :partial => "select_language" 
+    render :partial => "select_language"
   end
 
 end
+

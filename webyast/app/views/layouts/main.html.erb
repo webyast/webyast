@@ -51,7 +51,6 @@
     %>
 
     <%= javascript_include_tag "jquery-rails.js" %>
-
     <%= javascript_include_tag "jquerytimer", "jquerySessionTimeout", "jquery.blockUI", "jqueryDisableOnSubmit" %>
     <%= javascript_include_tag "jquery.tipsy", "jquery-effects.min", "jquery.tinysort", "slidernav", "webyast-online-help", "webyast-modal-dialog", "jquery.activity", "notifier" %>
     <%= javascript_include_tag "webyast-localstorage", "webyast-controlpanel" %>
@@ -66,7 +65,6 @@
 
   <script type="text/javascript">
     $(document).ready(function() {
-      console.log("START")
       //$('div.overview a.controlpanel-shortcut').tipsy({gravity: 'n', delayIn: 800, opacity: 0.8 });
       <% if session[:expires] !=nil && session[:expires].class == ActiveSupport::TimeWithZone %>
         // get current time from back end and check if time zone set to UTC (client) bnc#631763
@@ -107,6 +105,13 @@
 
       <%= link_to(image_tag("/images/webyast-logo.png", :width=>"130", :height=>"42", :alt =>"webyast"),"/" )%>
       <% user = session[:user] %>
+
+      <% for name, locale in [['Deutsch ?',:de],['English ?',:en]] %>
+        <%=link_to(name,current_url(:locale=>locale))%>
+      <% end %>
+
+      <p>I18n Locale: <%=I18n.locale%> ---- Gettext Locale: <%= FastGettext.locale %> <%= Rails.root %></p>
+
       <% if user.blank? %>
         <span id="userbar">
           <span class="userbar-icon" style=" text-align:center;">

@@ -1,18 +1,18 @@
 #--
 # Webyast framework
 #
-# Copyright (C) 2009, 2010 Novell, Inc. 
+# Copyright (C) 2009, 2010 Novell, Inc.
 #   This library is free software; you can redistribute it and/or modify
 # it only under the terms of version 2.1 of the GNU Lesser General Public
-# License as published by the Free Software Foundation. 
+# License as published by the Free Software Foundation.
 #
 #   This library is distributed in the hope that it will be useful, but WITHOUT
 # ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
-# FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public License for more 
-# details. 
+# FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public License for more
+# details.
 #
 #   You should have received a copy of the GNU Lesser General Public
-# License along with this library; if not, write to the Free Software 
+# License along with this library; if not, write to the Free Software
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA
 #++
 
@@ -30,6 +30,7 @@
 #
 #
 class SessionsController < ApplicationController
+  before_filter :set_gettext_locale
   layout 'main'
 
   def index
@@ -58,7 +59,7 @@ class SessionsController < ApplicationController
 
     # render login screen, asking for username/password
   end
-  
+
   def create
     #FIXME XXX tom: also reset_session here to fix possible session fixation attack etc.
     if params["hash"].is_a? Hash #FIXME report that "hash" value is not hash
@@ -100,13 +101,13 @@ class SessionsController < ApplicationController
         format.json {}
         format.xml {}
       end
-      
+
     else
       logger.warn "Login failed from ip #{request.remote_ip} with user #{params[:login] ||""}"
       @cmd_ret["login"] = "denied"
       BruteForceProtection.instance.fail_attempt params[:login]
       respond_to do |format|
-        format.html { 
+        format.html {
           flash[:warning] = _("Login incorrect. Check your username and password.")
           redirect_to :action => "new"
         }
@@ -124,7 +125,7 @@ class SessionsController < ApplicationController
     @cmd_ret = Hash.new
     @cmd_ret["logout"] = "Goodbye!"
     respond_to do |format|
-      format.html { 
+      format.html {
         # reset_session clears all flash messages, make a backup before the call
         flash_backup = flash
         # restore the values from backup
@@ -137,3 +138,4 @@ class SessionsController < ApplicationController
     end
   end
 end
+

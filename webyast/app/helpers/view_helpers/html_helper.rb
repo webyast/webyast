@@ -1,18 +1,18 @@
 #--
 # Webyast Webclient framework
 #
-# Copyright (C) 2009, 2010 Novell, Inc. 
+# Copyright (C) 2009, 2010 Novell, Inc.
 #   This library is free software; you can redistribute it and/or modify
 # it only under the terms of version 2.1 of the GNU Lesser General Public
-# License as published by the Free Software Foundation. 
+# License as published by the Free Software Foundation.
 #
 #   This library is distributed in the hope that it will be useful, but WITHOUT
 # ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
-# FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public License for more 
-# details. 
+# FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public License for more
+# details.
 #
 #   You should have received a copy of the GNU Lesser General Public
-# License along with this library; if not, write to the Free Software 
+# License along with this library; if not, write to the Free Software
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA
 #++
 
@@ -20,7 +20,7 @@
 module ViewHelpers::HtmlHelper
 
     def html_edit_link(id, action = :edit)
-	return link_to image_tag("/images/edit-icon.png", :alt => :edit), {:action => action, :id => id}, :onclick=>"$('#progress').show()"
+      return link_to image_tag("/images/edit-icon.png", :alt => :edit), {:action => action, :id => id}, :onclick=>"$('#progress').show()"
     end
 
 	# added additional argument to replace message string (see bnc#581153)
@@ -144,7 +144,7 @@ module ViewHelpers::HtmlHelper
   # a flash error message will be appended to the
   # element with id "flashes" with standard jquery
   # ui styles. A link with more information that
-  # display a popup is also automatically created    
+  # display a popup is also automatically created
   def report_error(error, message=nil)
     # get the id of the error, or use a random id
     error_id = error.nil? ? rand(10000) : error.object_id
@@ -159,7 +159,7 @@ module ViewHelpers::HtmlHelper
     # the summary message
     message ||= _("There was a problem retrieving information from the server.")
 
-    # build the html    
+    # build the html
     html =<<-EOF2
       <div id="error-#{error_id}-content">
         <div>
@@ -193,7 +193,7 @@ module ViewHelpers::HtmlHelper
             $('#flash-messages').prepend($('#error-#{error_id}-summary'));
 
             //$('#error-#{error_id}-content').show();
-    
+
            // define a dialog with the error details
            $('#error-#{error_id}-content').dialog(
            {
@@ -280,3 +280,4 @@ EOF_PROGRESS
 end
 
 # vim: ft=ruby
+

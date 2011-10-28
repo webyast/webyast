@@ -6,8 +6,8 @@ Webyast::Application.routes.draw do
   resource :permissions
   resource :vendor_settings
 
-  root :to => 'controlpanel#index'
-  root :to => 'session#new'
+  #root :to => 'controlpanel#index'
+  root :to => 'sessions#new'
 
   match 'resources/:id.:format' => 'resources#show', :constraints => { :id => /[-\w]+/ }
   match 'resources.:format' => 'resources#index'

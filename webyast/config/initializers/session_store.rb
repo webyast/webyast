@@ -1,6 +1,11 @@
-# Be sure to restart your server when you modify this file.
+#  config.action_controller.session = {
+#    :key => '_yast-api_session',
+#    # It is overwritten during install time (bnc#550635), do not change key # RORSCAN_INL
+#    :secret      => '9d11bfc98abcf9799082d9c34ec94dc1cc926f0f1bf4bea8c440b497d96b14c1f712c8784d0303ee7dd69e382c3e5e4d38d4c56d1b619eae7acaa6516cd733b1'
+#  }
 
 Webyast::Application.config.session_store :cookie_store, :key=> '_webyast_session'
+#Rails.application.config.cookie_secret = '9d11bfc98abcf9799082d9c34ec94dc1cc926f0f1bf4bea8c440b497d96b14c1f712c8784d0303ee7dd69e382c3e5e4d38d4c56d1b619eae7acaa6516cd733b1'
 
 # Use the database for sessions instead of the cookie-based default,
 # which shouldn't be used to store highly confidential information
