@@ -29,22 +29,18 @@ class ExampleControllerTest < ActionController::TestCase
   def setup    
     @controller = ExampleController.new
     @request = ActionController::TestRequest.new
-    # http://railsforum.com/viewtopic.php?id=1719
     @request.session[:account_id] = 1 # defined in fixtures
-    dbus = DBusStub.new :system, "example.service"
-    proxy,@interface = dbus.proxy "/org/example/service/Interface", "example.service.Interface"
-    @interface.stubs(:read).returns(TEST_STRING)
-    @interface.stubs(:write)
+    Example.any_instance.stubs(:load_content).returns("test")
+    Example.stubs(:find).returns(Example.new)
+    Example.any_instance.stubs(:update).returns(true)
   end
   
   def test_show
-    @interface.stubs(:write).never
     get :show, :format => 'xml'
     assert_response :success
   end
   
   def test_update
-    @interface.stubs(:write).with(TEST_STRING).once
     put :update, :format => 'xml', :example => { :content => TEST_STRING }
     assert_response :success
   end
