@@ -30,9 +30,8 @@ Source5:        wicd-rpmlintrc
 BuildRoot:      %{_tmppath}/%{name}-%{version}-build
 BuildArch:      noarch
 BuildRequires:  rubygem-webyast-rake-tasks rubygem-restility
-
 BuildRequires:  webyast-base-testsuite
-BuildRequires:	rubygem-test-unit rubygem-mocha
+BuildRequires:	rubygem-test-unit rubygem-mocha tidy
 
 #
 %define plugin_dir %{webyast_dir}/vendor/plugins/example
