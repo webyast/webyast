@@ -59,6 +59,8 @@ needed at runtime.
 %setup -q -n www
 
 %build
+export RAILS_PARENT=%{webyast_dir}
+env LANG=en rake makemo
 
 %check
 # run the testsuite
@@ -86,6 +88,9 @@ cp %{SOURCE3} $RPM_BUILD_ROOT/usr/share/dbus-1/system-services/
 mkdir -p $RPM_BUILD_ROOT/usr/share/polkit-1/actions
 cp %{SOURCE4} $RPM_BUILD_ROOT/usr/share/polkit-1/actions
 
+# remove .po files (no longer needed)
+rm -rf $RPM_BUILD_ROOT/%{plugin_dir}/po
+
 %clean
 rm -rf $RPM_BUILD_ROOT
 
@@ -104,9 +109,12 @@ rm -rf $RPM_BUILD_ROOT
 %dir %{webyast_dir}/vendor
 %dir %{webyast_dir}/vendor/plugins
 %dir %{plugin_dir}
+%{plugin_dir}/locale
 %{plugin_dir}/Rakefile
 %{plugin_dir}/app
 %{plugin_dir}/config
+%{plugin_dir}/shortcuts.yml
+%{plugin_dir}/public
 %attr(744,root,root) /usr/local/sbin/exampleService.rb
 %attr(644,root,root) /usr/share/polkit-1/actions/org.opensuse.yast.system.example.policy
 %attr(644,root,root) /etc/dbus-1/system.d/example.service.conf
