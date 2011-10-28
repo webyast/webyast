@@ -1,0 +1,180 @@
+/*#--
+ *# Webyast framework
+ *#
+ *# Copyright (C) 2009, 2010 Novell, Inc.
+ *#   This library is free software; you can redistribute it and/or modify
+ *# it only under the terms of version 2.1 of the GNU Lesser General Public
+ *# License as published by the Free Software Foundation.
+ *#
+ *#   This library is distributed in the hope that it will be useful, but WITHOUT
+ *# ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
+ *# FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public License for more
+ *# details.
+ *#
+ *#   You should have received a copy of the GNU Lesser General Public
+ *# License along with this library; if not, write to the Free Software
+ *# Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA
+ *#++ */
+
+.webyast_form { padding: 0 10px 10px; }
+.webyast_form .left { float:left; overflow:hidden; }
+.webyast_form .right { float:right; overflow:hidden; }
+
+.fieldset_header input[type="checkbox"] {
+  vertical-align:middle;
+}
+
+.fieldset_body div.clearfix { clear:both; overflow:hidden; }
+.fieldset_body div.row { display: block; vertical-align: middle; min-height:32px; }
+.fieldset_body div.row label { vertical-align: middle; width:200px; display:inline-block; float:none;}
+.fieldset_body div.row label.error {  vertical-align: middle; color: #d70000; display:inline; float:none; width:auto; margin-left:20px; font-size:11px;}
+.fieldset_body div.lastrow { padding-bottom:4px; }
+.fieldset_body input[type="text"].error, .fieldset_body input[type="password"].error { float:none; vertical-align:middle; }
+.fieldset_body input[type="text"].error, .fieldset_body input[type="password"].valid { float:none; vertical-align:middle; }
+.fieldset_body input[type="text"].error { border-color: #d70000 #f3b2b2 #f3b2b2 #d70000; }
+
+.fieldset_body input[type="text"], .fieldset_body input[type="password"] {
+  width:200px;
+  height:16px;
+  -moz-box-shadow:inset 0px 0px 0px #eee;
+  border-color: #C4C4C4 #E0E0E0 #E0E0E0 #C4C4C4;
+  border-style: solid;
+  border-width: 1px;
+  vertical-align:middle;
+  background-color:#fefefe;
+  -moz-border-radius:0px;
+  -webkit-border-radius:0px;
+  color:#555;
+  font-weight:normal;
+}
+
+.fieldset_body select {
+  background-color: #FEFEFE;
+  border-color: #C4C4C4 #E9E9E9 #E9E9E9 #C4C4C4;
+  border-style: solid;
+  border-width: 1px;
+  border-radius: 0px;
+  box-shadow: 0 0 0 #EEEEEE inset;
+  color: #555555;
+  font-weight: normal;
+  vertical-align: middle;
+  font-family: Trebuchet MS,Helvetica,Arial,Verdana,sans-serif;
+  font-size: 13px;
+  padding:2px 0px;
+  width:208px;
+}
+
+.fieldset_body input[type="text"]:focus, .fieldset_body input[type="password"]:focus { border-color: #aaaaaa #bbbbbb #bbbbbb #aaaaaa; }
+.fieldset_body input[disabled] {
+  background-color: #EEEEEE;
+  color:#BBB;
+}
+
+
+.fieldset_body .left { float:left; overflow:hidden;}
+.fieldset_body .right { float:right; overflow:hidden; }
+
+
+.webyast_fieldset { margin:15px auto; position:relative; float:none; width:96%; padding:0px; border: 1px solid #d8d8d8; -moz-border-radius:3px; background: none repeat scroll 0 0 transparent; }
+
+.fieldset_header {
+  line-height:30px;
+  color:#555555;
+  vertical-align:middle;
+  border-bottom: 1px solid #d8d8d8;
+  background: #E4E4E4;
+  background: -webkit-gradient(linear, left top, left bottom, from(#ededed), to(#e4e4e4));
+  background: -moz-linear-gradient(center bottom, #e4e4e4, #ededed) repeat scroll 0 0 transparent!important;
+  -moz-border-radius-bottomright:0px;
+  -moz-border-radius-bottomleft:0px;
+  -webkit-border-bottom-right-radius: 0px;
+  -webkit-border-bottom-left-radius: 0px;
+  border-bottom-right-radius: 0px;
+  border-bottom-left-radius: 0px;
+  padding:0px;
+}
+
+.fieldset_header_title {
+  float:none;
+  margin-left:5px;
+  font-weight:bold;
+  -moz-border-radius:0px;
+  -webkit-border-radius:0px;
+  padding:0px 5px;
+  text-shadow: 1px 1px #fdfdfd;
+  display:inline-block;
+}
+
+.fieldset_body {
+  padding:10px 10px 0px 10px;
+  border:0px solid #d0d0d0;
+  background:#fafafa;
+  background: -moz-linear-gradient(top, #fafafa 0%, #fcfcfc 100%);
+  background: -webkit-gradient(linear, left top, left bottom, from(#fafafa), to(#fcfcfc));
+
+}
+.fieldset_body label { text-align:left; margin:0; }
+
+.webyast_form .button_container { margin:5px auto; position:relative; float:none; width:96%; }
+.webyast_form .hr { height:1px; border-bottom:0px dotted #ddd; margin:5px 0px;
+  background: -moz-linear-gradient(left, #d0d0d0 0%, #fafafa 100%);  padding:0px;
+  background: -webkit-gradient(linear, left top, left bottom, from(#d0d0d0), to(#fafafa));
+}
+
+div.button_container div.nav-buttons { margin:0px 0px; padding:10px 0; }
+
+.plugin-header {
+  position:relative;
+  border:1px solid  #333;
+  background: url("/images/gradientx40.png") repeat-x scroll 0 0 #474747;
+  background: -moz-linear-gradient(center bottom, #474747 0%, #5f5f5f 100%);
+  background: -webkit-gradient(linear, left top, left bottom, from(#474747), to(#5f5f5f));
+
+  padding:4px 4px 2px 4px;
+  vertical-align:middle;
+
+  -moz-box-shadow: 0px 0px 1px #222 inset;
+  -webkit-box-shadow: 0px 0px 1px #222 inset;
+  -moz-border-radius:2px;
+  -webkit-border-radius:2px;
+  
+  margin:10px 5px;
+}
+
+.plugin-icon-container {
+  position:absolute;
+  top:-15px;
+  height:60px;
+  margin-left:2px;
+  width:60px;
+  vertical-align:middle;
+  -moz-border-radius:100%;
+  -webkit-border-radius:100%;
+  border-radius:100%;
+  -webkit-border-radius:48px;
+
+  -moz-box-shadow:inset 0px 0px 2px #000;
+  -webkit-box-shadow:inset 0px 0px 2px #000;
+  text-align:center;
+
+  background: #ffffff;
+  background: -moz-linear-gradient(top, #fafafa 0%, #e0e0e0 100%);
+  background: -webkit-gradient(linear, left top, left bottom, from(#fafafa), to(#e0e0e0));
+  border:1px solid #f5f5f5;
+  
+}
+
+.plugin-icon-container img {
+  display:inline-block;
+  text-align:center;
+  float:none;
+  height:48px;
+  width:48px;
+  margin:6px 0px;
+}
+
+.plugin-name { vertical-align:middle; font-size:20px; line-height:28px; font-weight:bold; color:#fff; text-shadow: 0px -1px 0px #000; margin-left:75px;}
+
+#content { overflow: visible; }
+div.plugin-border { -moz-border-radius:0px; border:1px solid  #D7D8DF; margin:30px 0; padding:10px 0px;  overflow:hidden; clear:both; background: -moz-linear-gradient(top, #f5f5f5 0%, #f8f8f8 10%, #fafafa 11%, #fff 100%); }
+#questionMark { margin:0px 5px; float:none; background: none repeat scroll 0 0 #757575; }

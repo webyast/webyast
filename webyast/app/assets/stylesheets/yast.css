@@ -1,0 +1,222 @@
+/*
+#--
+# Webyast framework
+#
+# Copyright (C) 2009, 2010 Novell, Inc. 
+#   This library is free software; you can redistribute it and/or modify
+# it only under the terms of version 2.1 of the GNU Lesser General Public
+# License as published by the Free Software Foundation. 
+#
+#   This library is distributed in the hope that it will be useful, but WITHOUT
+# ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
+# FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public License for more 
+# details. 
+#
+#   You should have received a copy of the GNU Lesser General Public
+# License along with this library; if not, write to the Free Software 
+# Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA
+#++
+*/
+
+/* 2009-07-15 rlihm: gone
+#appliance_logo {
+  position: absolute; 
+  left: 50px; 
+  top: 10px;
+}*/
+
+/* 2009-07-15 rlihm: gone
+#appliance_title {
+  font-weight: bold;
+  font-size: 3.5em;
+  position: fixed;
+  top: 30px;
+  left: 300px;
+}*/
+
+/* rewrote this in style.css
+#logout_session {
+  position: fixed; 
+  right: 50px; 
+  top: 10px;
+}  
+
+#login_session {
+  position: fixed;
+  right: 50px;
+  top: 10px;
+}*/  
+
+/* Unused CSS property */
+/* .content {  */
+/*margin-left: 15.5em;*/
+/*margin-top: 10em;*/
+/* } */
+
+/* Already exist in style.css */
+/*.notifications {
+ font-size: 1.5em;
+ color: red;
+}*/
+
+#no_js_warning {
+  background-color:#fcfdde;
+  width:100%;
+  text-align:center;
+  padding: 5px 0px 5px 0px
+}
+
+/* Already exist in style.css */
+/*#status_patches {
+  margin-left: 2em;
+}*/
+
+/* Already exist in style.css */
+/*#status_status {
+  margin-left: 2em;
+}*/
+
+#status_health_icon  {
+  margin-left: 2em;
+}
+
+#status_health_msg {
+  margin-left: 5em;
+  margin-top: -1.5em;
+}
+
+#configuration_recent {
+  margin-left: 2em;
+  margin-top: 5em;
+}
+
+#link_showall {
+  position:fixed; 
+  right:50px; 
+  margin-top: 1em;
+}
+
+#configuration_network { 
+  background-color: #d3d3d3; 
+}
+
+#module_heading { 
+  font-size: 2em;
+  font-weight: bold;
+}
+
+.module_heading { 
+  color: black;
+  font-size: 1.5em;
+  font-weight: bold 
+}
+
+.module_heading img {
+  vertical-align: middle;
+}
+
+#tab_heading {
+  position: relative;
+  width: 100%;
+  height: 3em;
+  width: 45em;
+}
+
+#tab_heading ul#tab_nav {
+  margin: 0;
+  padding: 0;
+  position: absolute;
+  bottom: -1px;
+  width: 45em;
+}
+
+#tab_heading ul#tab_nav li  {
+  display: inline;
+  list-style: none;
+}
+
+#tab_heading ul#tab_nav a,
+#tab_heading ul#tab_nav span,
+#tab_heading ul#tab_nav a.current {
+  width: 8em;
+  display: block;
+  float: left;
+  padding: 5px 0;
+  margin: 1px 3px 0 0;
+  text-align: center;
+  text-decoration: none;
+  color: #000000;
+}
+
+#tab_heading ul#tab_nav span,
+#tab_heading ul#tab_nav a.current,
+#tab_heading ul#tab_nav a.current:hover {
+  border: 1px solid #000000;
+  border-bottom: none;
+  padding-bottom: 6px;
+  margin-top: 0;
+}
+
+#tab_heading ul#tab_nav a {
+  background: #d3d3d3;
+  border: 1px solid #000000;
+  border-bottom: none;
+}
+
+#tab_heading ul#tab_nav a:hover {
+  margin-top: 0;
+  border-color: #000000;
+  background: #c2c2c2;
+  padding-bottom: 5px;
+  }
+
+  ul#menu, ul#menu ul {
+    list-style-type:none;
+     margin: 0;
+     padding: 0;
+     width: 33em;
+  }
+
+  ul#menu a {
+    display: block;
+    text-decoration: none;	
+  }
+
+  ul#menu li {
+    margin-top: 1px;
+  }
+
+  ul#menu li a {
+    background: #d3d3d3;
+    color: #000000;	
+    padding: 0.5em;
+  }
+
+  ul#menu li a:hover {
+    background: #c2c2c2;
+  }
+
+  ul#menu li ul li a:hover {
+    background: #d3d3d3;
+    border-left: 5px #000000 solid;
+    padding-left: 15px;
+  }
+
+th {
+  background: #dddddd;
+}
+
+table {
+  margin-top: 5px;
+}
+
+/* Already exist in style.css */
+/*a {
+  color: #000000;
+  text-decoration: none;
+}*/
+
+/*a:hover {
+  color: blue;
+  text-decoration: underline
+}*/

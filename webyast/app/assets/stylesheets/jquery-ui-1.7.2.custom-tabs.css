@@ -1,0 +1,100 @@
+/* ** Source: jQuery tab CSS Framework */
+/* *#--
+ * *# Webyast framework
+ * *#
+ * *# Copyright (C) 2009, 2010 Novell, Inc.
+ * *#   This library is free software; you can redistribute it and/or modify
+ * *# it only under the terms of version 2.1 of the GNU Lesser General Public
+ * *# License as published by the Free Software Foundation.
+ * *#
+ * *#   This library is distributed in the hope that it will be useful, but WITHOUT
+ * *# ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
+ * *# FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public License for more
+ * *# details.
+ * *#
+ * *#   You should have received a copy of the GNU Lesser General Public
+ * *# License along with this library; if not, write to the Free Software
+ * *# Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA
+ * *#++ */
+/* WebYaST colors */
+/*$c_disabled_text: mix($c_gray, $c_text, 50%) */
+/* Input elements colors */
+/* *#--
+ * *# Webyast framework
+ * *#
+ * *# Copyright (C) 2009, 2010 Novell, Inc. 
+ * *#   This library is free software; you can redistribute it and/or modify
+ * *# it only under the terms of version 2.1 of the GNU Lesser General Public
+ * *# License as published by the Free Software Foundation. 
+ * *#
+ * *#   This library is distributed in the hope that it will be useful, but WITHOUT
+ * *# ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
+ * *# FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public License for more 
+ * *# details.
+ * *#
+ * *#   You should have received a copy of the GNU Lesser General Public
+ * *# License along with this library; if not, write to the Free Software 
+ * *# Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA
+ * *#++ */
+/*changes */
+.fieldset-group.ui-corner-all {
+  -moz-border-radius: 0px;
+  -webkit-border-radius: 0px;
+  -moz-background-clip: border;
+  -khtml-border-radius: 0px;
+  -moz-box-shadow: none;
+  border-radius: 0px;
+  border: none; }
+.fieldset-group.ui-tabs {
+  margin: 1em;
+  padding: 0px;
+  color: #333333;
+  font: 1em "lsLucida Grande", "Trebuchet MS", Verdana, sans-serif; }
+.fieldset-group fieldset.ui-tabs-panel {
+  -moz-border-radius: 4px;
+  -webkit-border-radius: 4px;
+  -moz-background-clip: border;
+  -khtml-border-radius: 4px;
+  -moz-box-shadow: none;
+  border-radius: 4px;
+  border-color: #bebebe #9a9a9a #777777;
+  border-style: solid;
+  border-width: 1px;
+  margin: 0px;
+  background-color: #eeeeee; }
+.fieldset-group .ui-widget-header {
+  border: none;
+  background: transparent;
+  margin: 0px 5px 0px; }
+.fieldset-group.ui-tabs .ui-tabs-nav li a {
+  padding-top: 0;
+  padding-bottom: 0;
+  border: 0 none transparent; }
+.fieldset-group .ui-tabs-nav .ui-state-default, .fieldset-group .ui-tabs-nav .ui-state-active {
+  -moz-border-radius-topleft: 4px;
+  -moz-border-radius-topright: 4px;
+  border-radius-topleft: 4px;
+  border-radius-topright: 4px;
+  -webkit-border-radius-topleft: 4px;
+  -webkit-border-radius-topright: 4px;
+  -khtml-border-radius-topleft: 4px;
+  -khtml-border-radius-topright: 4px;
+  -moz-background-clip: border;
+  border-color: #bebebe #9a9a9a #777777;
+  border-style: solid;
+  border-width: 1px;
+  position: relative;
+  bottom: -1;
+  color: #909090; }
+.fieldset-group .ui-tabs-nav .ui-state-active {
+  color: #333333;
+  border-bottom-style: none; }
+.fieldset-group.ui-widget-content {
+  background: transparent; }
+  .fieldset-group.ui-widget-content .ui-tabs-nav .ui-state-default, .fieldset-group.ui-widget-content .ui-tabs-nav .ui-state-active {
+    background-color: #eeeeee;
+    background-image: none;
+    font-weight: bold; }
+.fieldset-group.ui-tabs .ui-tabs-panel {
+  padding-left: 8px;
+  padding-right: 8px; }

@@ -1,0 +1,51 @@
+/* *#--
+ * *# Webyast framework
+ * *#
+ * *# Copyright (C) 2009, 2010 Novell, Inc. 
+ * *#   This library is free software; you can redistribute it and/or modify
+ * *# it only under the terms of version 2.1 of the GNU Lesser General Public
+ * *# License as published by the Free Software Foundation. 
+ * *#
+ * *#   This library is distributed in the hope that it will be useful, but WITHOUT
+ * *# ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
+ * *# FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public License for more 
+ * *# details.
+ * *#
+ * *#   You should have received a copy of the GNU Lesser General Public
+ * *# License along with this library; if not, write to the Free Software 
+ * *# Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA
+ * *#++ */
+
+/* The IE Fieldset Background Color Bleed Bug http://www.communitymx.com/content/article.cfm?page=1&cid=DD9F3 */
+fieldset { position: relative;}
+legend { position: relative; top: -.9em; left: .2em; }
+
+/* IE fix for fieldset with lenend and block element for UPDATES MODULE */
+/* #updates_fieldset {padding:5px;} */
+#updates_legend  {margin-top:0; height:0;}
+#updates_legend  span {position:relative; top:-0.5em; height:0.5em;}
+
+/* Fix for opacity issue in IE for visual feedback */
+#shade {
+  background-color:#e0e0e0; /* important because IE8 ignore the background-color: rgba(100, 100, 100, 0.5); */
+  -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=65)"!important; /* opacity IE8 */ 
+}
+
+/* Fix for bug 601309 - Radio buttons and checkboxes look ugly in IE8  */
+input[type="radio"] { height:18px; width:18px;}
+input[type="checkbox"] { height:16px; width:16px;}
+
+/* Different width in IE and FF, TODO: find the other way to get the same lenght in different browsers */
+#group_members_string  { width:175px!important;}
+
+#status-eye { border:0!important;}
+#status-eye.eye_warning { border:0; }
+#status-eye.eye_healthy { border:0; }
+.status_warning { background-color:#ea5656; }
+.status_ok { background-color:#59c766; }
+
+#filter, #filter label, #filter_recent { background-color: #E8E8E8; }
+
+.plugin-icon-container { background-color:#EAEAEA; border:1px solid #474747; }
+.fieldset_header { background-color:#E9E9E9; }
+

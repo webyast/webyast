@@ -1,0 +1,356 @@
+/*
+#--
+# Webyast framework
+#
+# Copyright (C) 2009, 2010 Novell, Inc.
+#   This library is free software; you can redistribute it and/or modify
+# it only under the terms of version 2.1 of the GNU Lesser General Public
+# License as published by the Free Software Foundation.
+#
+#   This library is distributed in the hope that it will be useful, but WITHOUT
+# ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
+# FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public License for more
+# details.
+#
+#   You should have received a copy of the GNU Lesser General Public
+# License along with this library; if not, write to the Free Software
+# Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA
+#++
+*/
+
+#status-panel {
+  font-family: Helvetica,Arial,sans-serif;
+  font-size:12px;
+  border:4px solid #f5f5f5;
+  -moz-box-shadow: 0px 15px 0px #eee inset, 0px -15px 0px #eee inset;
+  -webkit-box-shadow:inset 0 15px 0 #eee,  inset 0 -15px 0 #eee;
+  margin-bottom:50px;
+}
+
+#status-eye {
+  height:112px;
+  width:112px;
+  line-height:112px;
+  margin:2px 0;
+  float:left;
+  border:4px solid #ccc;
+  overflow:hidden;
+
+  -moz-box-shadow: 0px 0px 1px #666, 0px 0px 10px #888;
+  -webkit-box-shadow: 0px 0px 1px #666, 0px 0px 10px #888;
+
+  -moz-border-radius:100%;
+  -webkit-border-radius:112px;
+
+  background-color: #eeeeee;
+  background: -moz-radial-gradient(center 45deg, circle closest-side, #eee 0%, #474747 100%) transparent;
+  background: -webkit-gradient(radial, 50% 50%, 0, 50% 50%, 56, from(#eeeeee), to(#474747));
+}
+
+#status-eye.eye_healthy {
+  background-color: #68b400;
+  background: -moz-radial-gradient(center 45deg, circle closest-side, #68b400 0%, #474747 100%) transparent;
+  background: -webkit-gradient(radial, 50% 50%, 0, 50% 50%, 50, from(#68b400), to(#474747));
+}
+
+#status-eye.eye_warning {
+  background-color: #BB5148;
+  background: -moz-radial-gradient(center 45deg, circle closest-side, red 0%, #474747 99%);
+  background: -webkit-gradient(radial, 50% 50%, 0, 50% 50%, 56, from(red), to(#474747));
+}
+
+div.statusbar_header {
+  border-bottom:0px dotted #ddd;
+  height:20px;
+  padding:0px 0px 0px 2px;
+  vertical-align:middle;
+  margin: 0 0 5px 0;
+}
+
+div.statusbar_header label {
+  vertical-align:middle;
+  font-size:14px;
+  font-weight:bold;
+  color:#444;
+  text-shadow: 0 1px 0 #f5f5f5;
+}
+
+#statusbar_status_container {
+  float:left;
+  width:27%;
+  margin:20px 0;
+  padding:0px 5px 0px 20px;
+  min-height:50px;
+}
+
+#statusbar_patches_container {
+  float:left;
+  width:27%;
+
+  padding:0px 5px;
+
+  border-left:0px solid #eee;
+  border-right:0px solid #eee;
+
+  margin:20px 5px;
+  min-height:50px;
+}
+
+#statusbar-actions {
+  float:right;
+  width:16%;
+  margin:20px 0;
+  margin-right:10px;
+  border:4px solid #eee;
+  padding:5px;
+  min-height:50px;
+  position:relative;
+  -moz-border-radius:5px;
+  -webkit-border-radius:5px;
+}
+
+div.statusbar_row { line-height:26px; vertical-align:middle; }
+div.statusbar_row input { margin:5px 0; }
+
+div.statusbar_row a.button { display:block; margin:3px auto; text-align:center; line-height:18px; }
+
+div.statusbar_row a.warning_message {
+  font-weight: normal;
+  font-size: 12px;
+  padding-left:3px;
+  border-bottom:1px dotted #666;
+}
+
+div.statusbar_row a.warning_message:hover {
+  border-bottom: 1px solid #555555;
+}
+
+div.update_all input{ width:100%; }
+
+div.statusbar_row img.small-working-icon { vertical-align: middle; }
+div.statusbar_row img { display:inline-block; height:19px; width:19px; vertical-align:middle; }
+div.statusbar_row label { margin-left: 5px; vertical-align: middle; }
+
+.status_ok, .status_warning {
+  margin:0 5px 0 -2px;
+  display:inline-block;
+  width:22px;
+  height:22px;
+  padding:0px;
+
+  text-align:center;
+  vertical-align:middle;
+
+  -moz-border-radius:100%;
+  -webkit-border-radius:20px;
+
+  line-height:18px;
+}
+
+.status_warning {
+  background-color:#ea5656;
+  background: -moz-radial-gradient(center center 45deg, circle closest-side, #ea5656 0%, #7b3232 100%) repeat scroll 0 0 transparent;
+  background: -webkit-gradient(radial, 50% 50%, 2, 50% 50%, 10, from(#ea5656), to(#7b3232));
+}
+
+.status_ok {
+  background-color:#59c766;
+  background: -moz-radial-gradient(center center 45deg, circle closest-side, #59c766 0%, #25712e 100%) repeat scroll 0 0 transparent;
+  background: -webkit-gradient(radial, 50% 50%, 2, 50% 50%, 10, from(#59c766), to(#25712e));
+}
+
+#favorites { border-color: #eee; border:none;}
+
+
+.checked_health {
+  height:19px!important;
+  width:19px!important;
+/*  padding-right:6px;*/
+/*  margin:2px 1px 1px 2px;*/
+  vertical-align:middle;
+}
+
+
+
+/* Quick sand  */
+#webyast_plugins {
+  clear:both;
+}
+
+#filter {
+/*  border-bottom: 1px solid #CCCCCC;*/
+  background: #E1E1E1;
+  background: -moz-linear-gradient(center bottom, #E1E1E1, #F0F0F0) repeat scroll 0 0 transparent;
+  background: -webkit-gradient(linear, left top, left bottom, from(#F0F0F0), to(#E1E1E1));
+
+  line-height:30px;
+  height: 30px;
+  padding: 4px 6px 5px 6px;
+  color: #666; 
+}
+
+#filter label, #filter_recent {
+  border-color: #CCCCCC #EEEEEE #EEEEEE #CCCCCC;
+  border-style: solid;
+  border-width: 1px;
+  padding:0px;
+
+  display: inline-block;
+  text-align:center;
+  vertical-align:middle;
+  font-weight: bold;
+  text-shadow: 1px 1px 0 rgba(255, 255, 255, 0.7);
+  
+  background: -moz-linear-gradient(center bottom , #CCCCCC, #FFFFFF) repeat scroll 0 0 transparent;
+  background: -webkit-gradient(linear, left top, left bottom, from(#FFFFFF), to(#CCCCCC));
+  min-width:120px;
+}
+
+#filter_recent {
+  padding:0px 18px;
+  background: none transparent;
+}
+
+#filter_all { float:right; }
+
+label.quicksand_button_active {
+  -moz-box-shadow: 0px 0px 30px #a0a0a0 inset, 0px 0px 2px #333 inset;
+  -webkit-box-shadow: 0px 0px 30px #a0a0a0 inset, 0px 0px 2px #333 inset;    
+  color:#444;
+  text-shadow: 0px 1px 0 #eee!important;
+}
+
+#filter label:hover {
+  background: -moz-linear-gradient(center bottom , #D5D5D5, #FFFFFF) repeat scroll 0 0 transparent;
+  background: -webkit-gradient(linear, left top, left bottom, from(#FFFFFF), to(#EEEEEE));
+}
+
+label.quicksand_button_left {
+  border-right:none;
+  margin-right:-4px;
+}
+
+label.quicksand_button_center {
+  border-left:none;
+  border-right:none;
+  margin-right:-4px;
+}
+
+label.quicksand_button_right {
+  border-left:none;
+}
+
+#visible_filters {
+  float:left;
+}
+
+#hidden_filters {
+  float:right;
+  display:none;
+}
+
+/* Control panel Image grid */
+.image-grid li {
+  width: 142px;
+  height: 142px;
+  margin: 10px 10px;
+  float: left;
+  text-align: center;
+/*  line-height: 20px;*/
+/*  color: #686f74;*/
+
+  list-style: none;
+  overflow: hidden;
+/*  -moz-box-shadow: 1px 1px 5px #ccc;*/
+}
+
+.image-grid a.plugin_link {
+  color: #686f74;
+  display: inline-block;
+  height: 142px;
+  max-height: 142px;
+  border-bottom: 0px dotted #1E90FF;
+}
+
+.image-grid a.plugin_link:hover {
+  color: #686f74;
+  border-bottom: 0px dotted #1E90FF;
+}
+
+.image-grid img {
+/*  width: 100px;*/
+/*  height: 100px;*/
+  width:  94px;
+  height: 94px;
+  margin: 6px 10px;
+}
+
+.image-grid li img, .image-grid li strong {
+  display: inline-block;
+}
+
+.image-grid li strong {
+  color: #686f74;
+  font-size:11px;
+  width:100%;
+  text-transform: uppercase;
+  word-wrap: break-word;
+  height: 32px;
+  text-shadow: 1px 1px 0 #f5f5f5;
+}
+
+div.overview li {
+  padding: 5px;     
+  border: 1px solid #CCCCCC; 
+  background-color: #f5f5f5;
+  text-decoration: none;
+
+  background: -moz-linear-gradient(center center 270deg, #FFFFFF, #F0F0F0) repeat scroll 0 0 transparent;
+  background: -webkit-gradient(linear, left top, left bottom, from(#FFFFFF), to(#F0F0F0));
+  
+  -moz-border-radius: 4px;
+  -webkit-border-radius: 4px;
+  -moz-background-clip: border;
+  -khtml-border-radius: 4px;
+   border-radius: 4px; 
+}
+    
+div.overview li:hover {
+  -moz-box-shadow: 0px 0px 30px #a0a0a0 inset, 0px 0px 2px #333 inset;
+  -webkit-box-shadow: 0px 0px 30px #a0a0a0 inset, 0px 0px 2px #333 inset;    
+/*  border: 1px solid #5f5f5f;*/
+}
+
+/* CONTROL PANEL USERBAR ICONS */
+#userbar a { border-bottom: 1px dotted #555; color:#444; text-shadow: 0 1px 1px #e5e5e5; }
+#userbar a:hover { border-bottom: 1px solid #555; color:#fff; text-shadow: 0 -1px 0px #444; }
+
+#userbar { line-height: 45px; position: absolute; right: 0; z-index: 100; margin: 0 5px; }
+#userbar-container { background-color:#aaa; padding:2px 0px 7px 3px; border:1px solid #a0a0a0; -moz-border-radius:2px; -webkit-border-radius:2px; }
+#userbar-container {  -moz-box-shadow: 0px 0px 0px #000 inset; background: #ccc }
+
+#userbar span.userbar-icon { display: inline-block; color:#444; font-weight:bold; font-size:11px; cursor:default; margin-right:10px;  z-index:2;}
+#userbar span.userbar-icon:before { vertical-align:-50%; line-height:10px; padding-right:1px; }
+#userbar span.home-icon:before { content:url(../images/control-panel-home.png); }
+#userbar span.user-icon:before { content:url(../images/control-panel-user.png); }
+#userbar span.language-icon {color:#e9e9e9; -moz-border-radius:2px; -webkit-border-radius:2px; padding:2px 3px 2px 6px; text-align:center; margin-right:4px; background-color:#999; text-shadow: 0 0px 0px #444; }
+#userbar span.logout-icon:before { content:url(../images/control-panel-logout.png); }
+
+span.plugin-shortcut { display:inline-block; background: url(../icons/plugin-icons.png) no-repeat top left;  width: 48px; height: 48px; }
+span.icon-monitoring{ background-position: 0 0;}
+span.icon-yast-firewall{ background-position: 0 -98px; }
+span.icon-yast-groups{ background-position: 0 -196px; }
+span.icon-yast-kerberos{ background-position: 0 -294px; }
+span.icon-yast-ldap{ background-position: 0 -392px; }
+span.icon-yast-mail-server{ background-position: 0 -490px; }
+span.icon-yast-network{ background-position: 0 -588px; }
+span.icon-yast-ntp-client{ background-position: 0 -686px; }
+span.icon-yast-online_update{ background-position: 0 -784px; }
+span.icon-yast-permissions{ background-position: 0 -882px; }
+span.icon-yast-product-registration{ background-position: 0 -980px; }
+span.icon-yast-samba-client{ background-position: 0 -1078px; }
+span.icon-yast-sw_source{ background-position: 0 -1176px; }
+span.icon-yast-system-user{ background-position: 0 -1274px; }
+span.icon-yast-system{ background-position: 0 -1372px; }
+span.icon-yast-users{ background-position: 0 -1470px; }
+

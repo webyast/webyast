@@ -1,0 +1,34 @@
+<!--
+# Webyast Webclient framework
+#
+# Copyright (C) 2009, 2010 Novell, Inc.
+#   This library is free software; you can redistribute it and/or modify
+# it only under the terms of version 2.1 of the GNU Lesser General Public
+# License as published by the Free Software Foundation.
+#
+#   This library is distributed in the hope that it will be useful, but WITHOUT
+# ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
+# FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public License for more
+# details.
+#
+#   You should have received a copy of the GNU Lesser General Public
+# License along with this library; if not, write to the Free Software
+# Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA
+-->
+
+
+<div id="login-dialogue">
+  <%= form_tag( :action => 'create' ) do  %>
+
+    <h2 id="content_title"><%= _("Login") %></h2>
+    <p id="content_title_details">&nbsp;<%= _("Enter login credentials for host %s.") % h(@host) %></p>
+
+    <div id="login_credentials_wrapper">
+      <p><label for="login"><%= _("Username:") %></label><%= text_field_tag 'login', @user, :style=>"border-radius:0px;" %></p>
+      <p><label for="password"><%= _("Password:") %></label><%= password_field_tag 'password', @password %></p>
+    </div>
+    <p><%= submit_tag(_('Login'), :class => "button", :id => "login_button") %></p>
+  <% end %>
+
+</div>
+

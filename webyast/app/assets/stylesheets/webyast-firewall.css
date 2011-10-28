@@ -1,0 +1,221 @@
+/*#--
+ *# Webyast framework
+ *#
+ *# Copyright (C) 2009, 2010 Novell, Inc.
+ *#   This library is free software; you can redistribute it and/or modify
+ *# it only under the terms of version 2.1 of the GNU Lesser General Public
+ *# License as published by the Free Software Foundation.
+ *#
+ *#   This library is distributed in the hope that it will be useful, but WITHOUT
+ *# ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
+ *# FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public License for more
+ *# details.
+ *#
+ *#   You should have received a copy of the GNU Lesser General Public
+ *# License along with this library; if not, write to the Free Software
+ *# Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA
+ *#++ */
+
+/* FIREWALL */
+
+#firewallbar div.left, span.left { float:left; overflow:hidden; }
+#firewallbar div.right, span.right { float:right; overflow:hidden; }
+
+#on, #off {
+  padding:2px 5px;
+  border:1px solid #a0a0a0;
+  vertical-align:middle;
+  background: url("/images/gradientx40.png") repeat-x scroll 0 0 #fff;
+  color: #222;
+  cursor: pointer;
+  text-shadow: 0px 1px 0px #fff;
+  min-width:80px;
+/*  font-family: Arial; */
+
+  -moz-box-shadow: 0px 0px 1px #666;
+  -webkit-box-shadow: 0px 0px 1px #666;
+}
+
+#on:hover, #off:hover { background: url("/images/gradientx40.png") repeat-x scroll 0 0 #eee;  }
+#off { border-left:0px; margin-left:-5px; }
+
+#on.active, #off.active {
+  border-right:0;
+  color:#efefef;
+  text-shadow: 0 -1px 0px #333;
+  font-weight:bold;
+
+  background:#39A33A;
+  background: -moz-linear-gradient(center bottom, #39A33A 0%, #71D048 100%);
+  background: -webkit-gradient(linear, left top, left bottom, from(#71D048), to(#39A33A));
+
+  -moz-box-shadow: inset 0px 0px 1px #000;
+  -webkit-box-shadow: inset 0px 0px 1px #000;
+}
+
+#on.active:hover, #off.active:hover {
+  font-weight:bold;
+  background: -moz-linear-gradient(center bottom, #39A33A 0%, #71D048 100%);
+  background: -webkit-gradient(linear, left top, left bottom, from(#71D048), to(#39A33A));
+}
+
+.clearfix { clear:both; overflow:hidden; }
+.round3 { -moz-border-radius:3px; -webkit-border-radius:3px; }
+.round5 { -moz-border-radius:5px; -webkit-border-radius:5px; }
+.round5t { -moz-border-radius:5px 5px 0px 0px; -webkit-border-radius:5px 5px 0px 0px; }
+.round5b { -moz-border-radius:0px 0px 5px 5px; -webkit-border-radius:0px 0px 5px 5px; }
+.round10 { -moz-border-radius:10px; -webkit-border-radius:10px; }
+.round10t { -moz-border-radius:10px 10px 0px 0px; -webkit-border-radius:10px 10px 0px 0px; }
+.round10b { -moz-border-radius:0px 0px 10px 10px; -webkit-border-radius:0px 0px 10px 10px; }
+
+.firewallForm_enabled { cursor: pointer;}
+.firewallForm_disabled { background-color:#fff; color:#ccc; cursor: default;}
+.label-image { width:16px; height:16px; vertical-align:middle; }
+
+#firewall label { float:none; display:inline;}
+#use_firewall { visibility:hidden; }
+#firewall.border { margin-bottom:20px; padding:0 10px 10px 0px; text-align:left; }
+
+#indicator {
+  margin-right:10px;
+  width:32px;
+  height:32px;
+  margin:1px 10px 0 0px;
+  vertical-align:middle;
+}
+
+#indicatorLabel {
+  font: 22px Arial, sans-serif;
+  line-height:22px;
+  margin-right:10px;
+  vertical-align:middle;
+}
+
+#firewallForm  { padding:0px 10px 10px 10px; }
+#firewall-wrapper { padding:10px; }
+
+#firewallForm .firstChar {
+  color:#777;
+  text-transform: uppercase;
+  margin-left:2px;
+  margin-right:10px;
+  font-size:16px;
+  line-height:16px;
+  font-weight:bold;
+  width:16px;
+  vertical-align:bottom;
+  display:inline-block;
+  text-align:left;
+  text-shadow: 0px 1px 0px #f5f5f5;
+}
+
+#allowedContainer, #blockedContainer { font-size:13px; width:47%; margin-bottom:10px;}
+#allowedContainer, #rolesContainer { float:left; }
+#blockedContainer, #usersContainer { float:right; }
+#allowed_services, #blocked_services { padding:0px 5px 0px 3px; }
+#allowedContainer label, #blockedContainer label { font-size:18px; font-weight:bold; color:#333; margin:10px 0px; vertical-align:middle; line-height:18px; display:inline-block;}
+
+#allowedContainer span.icon-border, #blockedContainer span.icon-border {
+  -moz-border-radius:20px;
+  -webkit-border-radius:20px;
+  padding:2px;
+  display:inline-block;
+  text-align:center;
+  height:20px;
+  width:20px;
+  margin-right:5px;
+}
+
+#allowedContainer span.icon-border { border:5px solid #8cb219; }
+#blockedContainer span.icon-border { border:5px solid #ff7640; }
+#allowed_services p, #blocked_services p { padding-left:2px; vertical-align:middle;}
+#allowed_services p:hover, #blocked_services p:hover { background-color: #fff; }
+#allowed_services span, #blocked_services span {
+  -moz-border-radius:10px;
+  -webkit-border-radius:10px;
+  padding:0px 3px 0px 5px;
+}
+
+#allowed_services span.firewall-service:before, #blocked_services span.firewall-service:before {
+ vertical-align:middle;
+ margin-right:3px;
+ content:url(../images/services.png);
+}
+
+#firewallForm div.services  {
+  -moz-box-shadow: inset 26px 0px 0px rgba(50, 50, 50, 0.15), inset 0px 0px 4px rgba(0, 0, 0, 0.5);
+  -webkit-box-shadow: inset 26px 0px 0px rgba(50, 50, 50, 0.2), inset 0px 0px 4px rgba(0, 0, 0, 0.5);
+  min-height:200px;
+  border:3px solid #e5e5e5;
+}
+
+/* FIREWALL ON/OFF SWITCH */
+#firewallForm a.selected {
+  color:#f0f0f0!important;
+  border: 1px solid #222!important;
+  border-left-width: 0px!important;
+  border-right-width: 0px!important;
+  -moz-box-shadow:  inset 0px 0px 10px #000;
+  -webkit-box-shadow:  inset 0px 0px 10px #000;
+  background:#555 !important;
+}
+
+#firewallForm a.btn {
+  display: inline-block;
+  background-color:#eee;
+  font-size:16px;
+  font-weight:bold;
+  vertical-align:middle;
+  line-height:20px;
+  padding:1px 6px 2px 6px;
+  border: 1px solid #a0a0a0;
+  color:#888;
+  text-align:center;
+  width:40px;
+  background: url(../images/firewall-switch-bg.png) repeat-x 0px 0px #e5e5e5;
+  background:-moz-linear-gradient(center top , #fff 10%, #e2e2e2 30%, #d5d5d5 50%, #ccc 100%) repeat scroll 0 0 transparent;
+}
+
+#firewallForm a.btn:hover { cursor:pointer; }
+#firewallForm a.leftBtn {
+  border-right-width: 0;
+  margin-right: -2px;
+  border-top-left-radius: 3px;
+  border-top-right-radius: 0px;
+  border-bottom-right-radius: 0px;
+  border-bottom-left-radius: 3px;
+  -moz-border-radius-topleft: 3px;
+  -moz-border-radius-topright: 0px;
+  -moz-border-radius-bottomright: 0px;
+  -moz-border-radius-bottomleft: 3px;
+  -webkit-border-top-left-radius: 3px;
+  -webkit-border-top-right-radius: 0px;
+  -webkit-border-bottom-right-radius: 0px;
+  -webkit-border-bottom-left-radius: 3px;
+}
+
+#firewallForm a.rightBtn {
+  border-left-width: 0px;
+  margin-left: -2px;
+  border-top-left-radius: 0px;
+  border-top-right-radius: 3px;
+  border-bottom-right-radius: 3px;
+  border-bottom-left-radius: 0px;
+  -moz-border-radius-topleft: 0px;
+  -moz-border-radius-topright: 3px;
+  -moz-border-radius-bottomright: 3px;
+  -moz-border-radius-bottomleft: 0px;
+  -webkit-border-top-left-radius: 0px:
+  -webkit-border-top-right-radius: 3px;
+  -webkit-border-bottom-right-radius: 3px;
+  -webkit-border-bottom-left-radius: 0px;
+}
+
+#firewallForm a.leftBtn:active { border-right-width: 0; }
+#firewallForm a.rightBtn:active { border-left-width: 0; }
+
+#unsavedChangesDialog { display:none; cursor: default; }
+#unsavedChangesDialog div { vertical-align:middle; text-align:center;  font-size:14px; font-weight:bold; }
+#unsavedChangesDialog img { width:42px; height:42px; vertical-align:middle; }
+input[type="button"].unsaved_changes { min-width:80px; margin:0px 2px 0 2px; }
+
