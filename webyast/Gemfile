@@ -1,39 +1,22 @@
 source 'http://rubygems.org'
 
 gem 'rails', '3.1.1'
-
-# Bundle edge Rails instead:
-# gem 'rails',     :git => 'git://github.com/rails/rails.git'
-
 gem 'sqlite3'
-gem 'execjs'
-gem 'therubyracer'
-gem 'gettext_rails'
-
-# Gems used only for assets and not required
-# in production environments by default.
-#group :assets do
-#  gem 'sass-rails',   '~> 3.1.4'
-#  gem 'coffee-rails', '~> 3.1.1'
-#  gem 'uglifier', '>= 1.0.3'
-#end
-
+#gem 'execjs'
+#gem 'therubyracer'
 gem 'jquery-rails'
 
-# To use ActiveModel has_secure_password
-# gem 'bcrypt-ruby', '~> 3.0.0'
+gem "fast_gettext", '>= 0.5'
+gem 'gettext_i18n_rails'
 
-# Use unicorn as the web server
-# gem 'unicorn'
+#only used for mo/po file generation in development, !do not load(:lib=>false)! since it will only eat 7mb ram
+gem "gettext", '>= 1.9.3', :require => false
 
-# Deploy with Capistrano
-# gem 'capistrano'
-
-# To use debugger
-# gem 'ruby-debug19', :require => 'ruby-debug'
+#this is needed for language/country translations
+gem "countries_and_languages", '>=0.1.2', :require => 'countries_and_languages/rails'
 
 group :test do
-  # Pretty printed test output
-  gem 'turn', :require => false
+  gem 'rspec', '>=2'
+  gem 'rspec-rails', '>=2'
 end
 
