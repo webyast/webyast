@@ -26,10 +26,8 @@ require(File.join(File.dirname(__FILE__), 'config', 'boot'))
 $:.unshift File.join(File.dirname(__FILE__), "..", "webyast-tasks", "lib")
 
 
-require File.expand_path('../config/application', __FILE__)
-require 'rake'
-
-Webyast::Application.load_tasks
+#require File.expand_path('../config/application', __FILE__)
+#Webyast::Application.load_tasks
 
 require 'rake'
 require 'rake/testtask'
@@ -58,7 +56,7 @@ WebyastTasks.loadTasks(:exclude => ["deploy_local.rake"])
 # this call also loads WebyastTasks but the second call is ignored there
 # so this 'require' must be called _after_ WebyastTasks.loadTasks
 
-require 'tasks/rails'
+#require 'tasks/rails' ?????????????
 
 require 'fileutils'
 

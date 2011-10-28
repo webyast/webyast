@@ -21,7 +21,7 @@ require "cssmin"
 
 #require File.join(File.dirname(__FILE__), "..", "cssmin.rb")
 
-CSS_PATH = File.join(RAILS_ROOT, '/public/stylesheets')
+CSS_PATH = File.join(Rails.root, '/public/stylesheets')
 OUTPUT_FILE = 'css-min.css'
 
 def min(list, output)

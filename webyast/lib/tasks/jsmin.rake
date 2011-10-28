@@ -21,9 +21,9 @@ require "tempfile"
 
 vars = ['JSMIN', 'JAVASCRIPTS_PATH', 'MIN']
 
-JSMIN = File.join(RAILS_ROOT, '/lib/jsmin.rb')
-JAVASCRIPTS_PATH = "#{RAILS_ROOT}/public/javascripts"
-MIN = "#{RAILS_ROOT}/public/javascripts/min"
+JSMIN = File.join(Rails.root, '/lib/jsmin.rb')
+JAVASCRIPTS_PATH = "#{Rails.root}/public/javascripts"
+MIN = "#{Rails.root}/public/javascripts/min"
 
 def minify(list, output)
    tmp = Tempfile.open('all')
