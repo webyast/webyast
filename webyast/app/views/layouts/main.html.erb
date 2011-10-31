@@ -21,45 +21,13 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 <head>
   <meta http-equiv="Content-type" content="text/html; charset=utf-8" />
-  <link rel="apple-touch-icon" href="images/webyast-iphone-icon.png" />
+  <link rel="apple-touch-icon" href="assets/webyast-iphone-icon.png" />
   <!--[if IE]>
     <%= stylesheet_link_tag "ie/ie_fixes" %>
   <![endif]-->
-
-  <% if Rails.env == "development" %>
-    <%= stylesheet_link_tag "css-min", :title=>"default", :charset=>"utf-8" %>
-    <%= javascript_include_tag "min/base-min" %>
-    <%= yield :before_script %>
-    <%= yield :head %>
-  <% else %>
-    <%= stylesheet_link_tag "yast","grid","style","jquery.jqplot.css", "jquery-ui-1.7.2.custom.css", "jquery-ui-1.7.2.custom-accordion.css", "jquery-ui-1.7.2.custom-tabs.css", :title=>"default", :charset=>"utf-8" %>
-    <%= stylesheet_link_tag "new_inputs", "tipsy", "slidernav", "webyast-modal-dialog", "webyast-online-help", "webyast-controlpanel" %>
-    <%= stylesheet_link_tag "webyast-forms" %>
-
-    <%= javascript_include_tag 	  "jquery-1.4.2",
-          "jquery.query", #FIXME write reason
-          "jquery.timers",
-          "jquery.ui.custom",
-          "jquery.validate",
-          "validation.js",
-          "jqbrowser-compressed", #our browser detection extension
-          "jquery.badbrowser", #original browser detection plugin
-          "yast.widgets",
-          "yast.helpers",
-          "digitalspaghetti.password",
-          "browser_fixes"
-    %>
-
-    <%= javascript_include_tag "jquery-rails.js" %>
-    <%= javascript_include_tag "jquerytimer", "jquerySessionTimeout", "jquery.blockUI", "jqueryDisableOnSubmit" %>
-    <%= javascript_include_tag "jquery.tipsy", "jquery-effects.min", "jquery.tinysort", "slidernav", "webyast-online-help", "webyast-modal-dialog", "jquery.activity", "notifier" %>
-    <%= javascript_include_tag "webyast-localstorage", "webyast-controlpanel" %>
-
-    <%= yield :before_script %>
-      <%= javascript_include_tag "script", "application" #FIXME it can be problem if plugin also have own application specific js
-    %>
-    <%= yield :head %>
-  <% end %>
+  <%= stylesheet_link_tag "application" %>
+  <%= javascript_include_tag "application" %>
+  <%= csrf_meta_tag %>
 
   <title><%= _("WebYaST") %></title>
 
@@ -103,20 +71,20 @@
         <% appliance_label = _(appliance_label[3..appliance_label.length-3]) %>
       <% end %>
 
-      <%= link_to(image_tag("/images/webyast-logo.png", :width=>"130", :height=>"42", :alt =>"webyast"),"/" )%>
+      <%= link_to(image_tag("/assets/webyast-logo.png", :width=>"130", :height=>"42", :alt =>"webyast"),"/" )%>
       <% user = session[:user] %>
 
-      <% for name, locale in [['Deutsch ?',:de],['English ?',:en]] %>
-        <%=link_to(name,current_url(:locale=>locale))%>
-      <% end %>
 
-      <p>I18n Locale: <%=I18n.locale%> ---- Gettext Locale: <%= FastGettext.locale %> <%= Rails.root %></p>
+
+<!--      <p>I18n Locale: <% I18n.locale%> ---- Gettext Locale: <%= FastGettext.locale %> <%= Rails.root %></p> -->
 
       <% if user.blank? %>
         <span id="userbar">
           <span class="userbar-icon" style=" text-align:center;">
             <span class="language-icon">
-<!--              <#%# language_code(current_locale_name).upcase  #%#> -->
+              <% FastGettext.default_available_locales.each do |locale| %>
+                <%= link_to(locale.upcase,current_url(:locale=>locale))%>
+              <% end %>
             </span>
 <!--            <#%# link_to_remote(current_locale_name, :update =>"language_selection", :url => { :controller => :main, :action => :select_language} ) #%#>-->
           </span>
@@ -163,7 +131,7 @@
     </div>
 
     <div id="timeoutMessage">
-      <%= link_to(image_tag("/images/webyast-logo.png", :width=>"130", :height=>"42", :style=>"margin-top:4px;", :alt =>"webyast"),"/" )%>
+      <%= link_to(image_tag("/assets/webyast-logo.png", :width=>"130", :height=>"42", :style=>"margin-top:4px;", :alt =>"webyast"),"/" )%>
       <%= _("You will be logged off in")-%><span id="counter"><!-- countdown place holder --></span><%= _("seconds due to session timeout. ")-%>
     </div>
 
@@ -195,7 +163,7 @@
       </div> <!-- flash messages -->
 
       <div id="progress" style="display: none;">
-        <%= image_tag("/images/working.gif", :class => "small-working-icon" ) %><%=_("...Wait...")%>
+        <%= image_tag("/assets/working.gif", :class => "small-working-icon" ) %><%=_("...Wait...")%>
       </div>
 
 

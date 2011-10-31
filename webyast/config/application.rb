@@ -4,7 +4,8 @@ require 'fast_gettext'
 
 if defined?(Bundler)
   # If you precompile assets before deploying to production, use this line
-  Bundler.require(*Rails.groups(:assets => %w(development test)))
+  #Bundler.require(*Rails.groups(:assets => %w(development test)))
+  Bundler.require *Rails.groups(:assets) if defined?(Bundler)
   # If you want your assets lazily compiled in production, use this line
   # Bundler.require(:default, :assets, Rails.env)
 end
@@ -19,7 +20,9 @@ module Webyast
   end
 end
 
+
+# TODO: GET AVAILABLE LOCALES AUTOMATICALLY !!!!
 FastGettext.add_text_domain 'webyast-base', :path => 'locale'
 FastGettext.default_text_domain = 'webyast-base'
-FastGettext.default_available_locales = ['en','de'] # JUST FOR TEST -> !!! IMPORTANT ADD ALL AVAILABLE LANGUAGES !!!
+FastGettext.default_available_locales = ["ar","cs","de","es","en_US","fr","hu","it","ja","ko","nl","pl","pt_BR","ru","sv","zh_CN","zh_TW"]
 

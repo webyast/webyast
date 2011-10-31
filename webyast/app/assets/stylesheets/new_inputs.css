@@ -55,7 +55,7 @@ input[type="submit"], input[type="button"], button[type="submit"], a.button {-mo
 input[type="submit"], input[type="button"], button[type="submit"], a.button {
   color: #444;
   cursor: pointer;
-  background: url("/images/gradientx40.png") repeat-x white;
+  background: url("/assets/gradientx40.png") repeat-x white;
 /*  text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.1), 0 1px 0 rgba(255, 255, 255, 0.9);*/
   text-shadow: 0 1px 0 rgba(255, 255, 255, 0.9);
   text-decoration:none;
@@ -67,14 +67,14 @@ a.button:-moz-any-link, a.button:default { padding:3px 8px 3px 7px; }
 
 /* HOVER, ACTIVE, DISABLED */
 input[type="submit"]:hover,  input[type="button"]:hover, button[type="submit"]:hover, a.button:hover {
-  background:url('/images/gradientx40.png') repeat-x #3494f2;
+  background:url('/assets/gradientx40.png') repeat-x #3494f2;
   color: #f2f2f2;
   text-shadow: 0px -1px 1px #222222;
 }
 
 input[type="submit"]:active, input[type="button"]:active, button[type="submit"]:active, a.button:active {
   color: #f2f2f2;
-  background: url("../images/gradientx60.png") repeat-x #2966FF;
+  background: url("../assets/gradientx60.png") repeat-x #2966FF;
 }
 
 input[disabled] { background-color:#eee; }
@@ -82,7 +82,7 @@ input[type="submit"][disabled], input[type="button"][disabled], button[type="sub
   color: #aaa;
 /*  text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.1), 0 1px 0 rgba(255, 255, 255, 0.9); */
   text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.1), 0 1px 0 rgba(255, 255, 255, 0.9);
-  background: url("../images/gradientx40.png") repeat-x #fff;
+  background: url("../assets/gradientx40.png") repeat-x #fff;
 }
 
 
@@ -123,13 +123,10 @@ input[type="text"].without_border_right {
 
 
 /* LAYOUT CORRECTION */
-#header { 
-  background: -moz-linear-gradient(center bottom, #b0b0b0 0%, #bfbfbf 100%); 
-  border:5px solid #666; 
-  border-width: 5px 0; 
+#header {
+  background: -moz-linear-gradient(center bottom, #b0b0b0 0%, #bfbfbf 100%);
+  border:5px solid #666;
+  border-width: 5px 0;
 }
 #header h1 { color:#333; text-shadow: 0px 1px 0px #e5e5e5; position:absolute; width:50%; right:25%; left:25%; }
-
-
-
 

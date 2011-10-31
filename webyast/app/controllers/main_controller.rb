@@ -29,10 +29,7 @@ class MainController < ApplicationController
   before_filter :set_gettext_locale
 
   def index
-
-    redirect_to(logged_in? ?
-		{ :controller => "controlpanel", :action => "index" } :
-		{ :controller => "session", :action => "new" })
+    redirect_to(logged_in? ? { :controller => "controlpanel", :action => "index" } : { :controller => "session", :action => "new" })
   end
 
   # POST /select_language

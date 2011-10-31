@@ -19,51 +19,51 @@
 
 module ViewHelpers::HtmlHelper
 
-    def html_edit_link(id, action = :edit)
-      return link_to image_tag("/images/edit-icon.png", :alt => :edit), {:action => action, :id => id}, :onclick=>"$('#progress').show()"
-    end
+  def html_edit_link(id, action = :edit)
+    return link_to image_tag("/images/edit-icon.png", :alt => :edit), {:action => action, :id => id}, :onclick=>"$('#progress').show()"
+  end
 
-	# added additional argument to replace message string (see bnc#581153)
+  # added additional argument to replace message string (see bnc#581153)
     def html_delete_link(id, action = :delete, text = _('Are you sure?'))
-	return link_to image_tag("/images/delete.png", :alt => :delete), {:action => action, :id => id},
-	:confirm => text, :method => :delete
+      return link_to image_tag("/images/delete.png", :alt => :delete), {:action => action, :id => id},
+        :confirm => text, :method => :delete
     end
 
     def html_create_table_content(items, properties, permissions = {}, proc_obj = nil)
-	ret = ''
-	columns = properties.size
+      ret = ''
+      columns = properties.size
 
-	items.each do |item|
-	    line = ''
-	    columns.times { |col|
-		property = properties[col]
+      items.each do |item|
+        line = ''
+        columns.times { |col|
+          property = properties[col]
 
-		if !property.nil? && item.respond_to?(property)
-		    cell = item.send(property)
-		else
-		    if proc_obj.nil?
-			cell = "ERROR: unknown method #{property}"
-		    else
-			cell = proc_obj.call(item, col)
-		    end
-		end
+          if !property.nil? && item.respond_to?(property)
+           cell = item.send(property)
+          else
+            if proc_obj.nil?
+              cell = "ERROR: unknown method #{property}"
+            else
+              cell = proc_obj.call(item, col)
+            end
+          end
 
-		line += "<td>#{h(cell)}</td>"
-	    }
+          line += "<td>#{h(cell)}</td>"
+        }
 
-	    if permissions[:edit]
-		line += "<td align=\"center\">#{html_edit_link(item.send(permissions[:id]))}</td>"
-	    end
+        if permissions[:edit]
+          line += "<td align=\"center\">#{html_edit_link(item.send(permissions[:id]))}</td>"
+        end
 
-	    if permissions[:delete]
-		line += "<td align=\"center\">#{html_delete_link(item.send(permissions[:id]))}</td>"
-	    end
+        if permissions[:delete]
+          line += "<td align=\"center\">#{html_delete_link(item.send(permissions[:id]))}</td>"
+        end
 
-	    ret += "<tr>#{line}</tr>"
-	end
-
-	return ret
+        ret += "<tr>#{line}</tr>"
     end
+
+    return ret
+  end
 
     ##
     # Create a simple HTML table
