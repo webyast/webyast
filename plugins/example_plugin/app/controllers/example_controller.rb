@@ -31,11 +31,11 @@ class ExampleController < ApplicationController
     permission_check "org.opensuse.yast.system.example.read"
     @example = Example.find
 
-    @write_permission = permission_granted? "org.opensuse.yast.system.example.write"
     respond_to do |format|
       format.xml  { render :xml => @example.to_xml}
       format.json { render :json => @example.to_json }
-      format.html { render :index }
+      format.html { @write_permission = permission_granted? "org.opensuse.yast.system.example.write"
+                    render :index }
     end
   end
 
