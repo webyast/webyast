@@ -31,9 +31,7 @@ Requires:       yast2-core >= 2.18.10
 Requires:       yast2-core >= 2.17.30.1
 Requires:       sysvinit > 2.86-195.3.1
 %endif
-Requires: 	webyast-branding
-#do not use the old brandings
-Conflicts:      webyast-base-ui-branding-default
+Requires: 	webyast-base-branding-default
 Requires:       rubygem-passenger-nginx, rubygem-nokogiri
 Requires:       nginx >= 1.0
 Requires:       ruby-fcgi, sqlite, syslog-ng, check-create-certificate
