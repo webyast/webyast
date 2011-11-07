@@ -27,6 +27,7 @@ BuildArch:      noarch
 
 BuildRequires:  webyast-base-testsuite
 BuildRequires:  rubygem-test-unit rubygem-mocha
+Requires:       shellinabox
 
 %define plugin_name terminal
 %define plugin_dir %{webyast_dir}/vendor/plugins/%{plugin_name}
@@ -35,7 +36,6 @@ BuildRequires:  rubygem-test-unit rubygem-mocha
 Group:    Productivity/Networking/Web/Utilities
 Requires: %{name} = %{version}
 Requires: webyast-base-testsuite
-Requires: shellinabox
 Summary:  Testsuite for webyast-terminal package
 
 %description
