@@ -272,7 +272,7 @@ module Session
           pe[0].close
           STDERR.reopen(pe[1])
           pe[1].close
-
+          # RORSCAN_INL session will be used by account only which checks the params
           exec(*cmd)
         }
 
@@ -715,6 +715,7 @@ module Session
         epath = tmpfifo
 
         cmd = "#{ command } < #{ ipath } 1> #{ opath } 2> #{ epath } &"
+        # RORSCAN_INL session will be used by account only which checks the params
         system cmd 
 
         i = open ipath, 'w'
@@ -732,6 +733,7 @@ module Session
           v = $VERBOSE
           begin
             $VERBOSE = nil
+            # RORSCAN_INL session will be used by account only which checks the params
             system "mkfifo #{ tpath }"
           ensure
             $VERBOSE = v 

@@ -21,6 +21,7 @@
 # Permission class
 #
 require 'exceptions'
+require 'shellwords'
 
 class Permission
 #list of hash { :name => id, :granted => boolean, :description => string (optional)}
@@ -147,7 +148,9 @@ private
   end
 
   def get_description (action)
-    desc = `/usr/bin/pkaction --action-id #{action} | grep description: |  sed 's/description://g'`
+    action = Shellwords.escape(action)
+    # RORSCAN_INL: "action" will be checked
+    desc = `/usr/bin/pkaction --action-id '#{action}' --verbose | grep description: |  sed 's/description://g'`
     desc.strip!
     desc
   end

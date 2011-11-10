@@ -21,6 +21,7 @@
 
 require 'singleton'
 require 'yast_service'
+require 'shellwords'
 
 # = Mail model
 # Proviceds access local mail settings (SMTP server to use)
@@ -74,6 +75,8 @@ class Mail < BaseModel::Base
 
     # remove potential problematic characters from email address
     to.tr!("~'\"<>","")
+    to = Shellwords.escape(to)
+    # RORSCAN_INL: "message" is a fix string and "to" will be checked
     `/bin/echo "#{message}" | /bin/mail -s "WebYaST Test Mail" '#{to}' -r root`
 
     unless File.directory? File.join(Paths::VAR,"mail")

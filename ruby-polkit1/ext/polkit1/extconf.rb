@@ -7,8 +7,10 @@ extension_name = 'polkit1'
 # The destination
 dir_config(extension_name)
 
+# RORSCAN_INL: That are compiling flags only
 $CFLAGS +=  " " + `pkg-config polkit-gobject-1 --cflags`
 
+# RORSCAN_INL: That are linking flags onl
 $LDFLAGS +=  " " + `pkg-config polkit-gobject-1 --libs`
              
 # Do the work

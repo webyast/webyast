@@ -70,7 +70,7 @@ describe Delayed::Job do
     SimpleJob.runs.should == 1
   end
                      
-                     
+  # RORSCAN_INL: It is in the spec file only. No eval will be executed
   it "should work with eval jobs" do
     $eval_job_ran = false
 

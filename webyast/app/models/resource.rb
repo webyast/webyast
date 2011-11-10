@@ -33,7 +33,8 @@ class Resource < BaseModel::Base
     @cache_enabled = impl_hash[:cache_enabled]
     @cache_priority = impl_hash[:cache_priority]
     @cache_reload_after = impl_hash[:cache_reload_after]
-    @cache_arguments = eval(impl_hash[:cache_arguments]) #this is save cause it is defined in a configuration file
+    # RORSCAN_INL:this is save cause it is defined in a configuration file
+    @cache_arguments = eval(impl_hash[:cache_arguments]) 
   end
 
   def self.find(what)

@@ -79,6 +79,7 @@
       <h3 class="module_header" id="system_uptodate">
         <% unless @error %>
           <img src='/images/checkmark.gif'/>
+        <!-- RORSCAN_INL: Thats a constant -->
         <%=_("Your system is up to date.")%>
         <% else %>
          <%= @flash_message unless @flash_message.nil? %>

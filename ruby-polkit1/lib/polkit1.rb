@@ -1,5 +1,6 @@
 require 'polkit1.so' # native
 require 'inifile'
+require 'shellwords'
 
 module PolKit1
   VERSION = '0.0.1'
@@ -7,7 +8,9 @@ module PolKit1
 
   def self.polkit1_check(perm, user_name)
     raise "invalid user name" if (user_name =~ /\\$/ or user_name.include? "'")
+    user_name = Shellwords.escape(user_name) #just to be sure....
     #get user id
+    # RORSCAN_INL: user_name will be escaped
     uid = `id -u '#{user_name}'`
     raise "unknown user" if $? != 0
     polkit1_check_uid perm, uid.to_i

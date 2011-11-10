@@ -60,7 +60,8 @@ public
   rescue_from NoPermissionException do |exception|
     logger.info "No permission: #{exception.permission} for #{exception.user}"
     if request.xhr? || request.format.html?
-      flash[:error] = _("Operation is forbidden. If you have to do it, please contact system administrator")+
+      # RORSCAN_INL: There is not any user input
+      flash[:error] = _("Operation is forbidden. If you have to do it, please contact system administrator") +
                           details(exception.message) #already localized from error constructor
       if request.xhr?
         render :text => "<div>#{flash[:error]}</div>", :status => 403

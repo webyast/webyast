@@ -36,8 +36,10 @@ class Patch < Resolvable
   def self.decide_license(accept)
     #we don't know eula id, but as it block package kit, then there is only one license file to decide
     if accept
+      # RORSCAN_INL: LICENSES_DIR and ACCEPTED_LICENSES_DIR are constants which cannot be changed
       `find #{LICENSES_DIR} -type f -exec mv {} #{ACCEPTED_LICENSES_DIR} \\;`
     else
+      # RORSCAN_INL: LICENSES_DIR is a constant which cannot be changed
       `find #{LICENSES_DIR} -type f -delete`
     end
   end

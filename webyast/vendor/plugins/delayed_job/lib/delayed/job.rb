@@ -42,6 +42,7 @@ module Delayed
     alias_method :failed, :failed?
 
     def payload_object
+      # RORSCAN_INL: Will be used by yast-cache only where the params are fix
       @payload_object ||= deserialize(self['handler'])
     end
 
@@ -266,6 +267,7 @@ module Delayed
     end
 
     def perform
+      # RORSCAN_INL: Will be used by yast-cache only where the params are fix
       eval(@job)
     end
   end

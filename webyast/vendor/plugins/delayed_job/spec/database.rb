@@ -7,8 +7,10 @@ gem 'sqlite3-ruby'
 
 require File.dirname(__FILE__) + '/../init'
 require 'spec'
-  
+
+# RORSCAN_INL: It is just while creating the database. 
 ActiveRecord::Base.logger = Logger.new('/tmp/dj.log')
+# RORSCAN_INL: It is just while creating the database. 
 ActiveRecord::Base.establish_connection(:adapter => 'sqlite3', :database => '/tmp/jobs.sqlite')
 ActiveRecord::Migration.verbose = false
 ActiveRecord::Base.default_timezone = :utc if Time.zone.nil?
