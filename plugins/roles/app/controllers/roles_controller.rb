@@ -143,7 +143,7 @@ public
                       redirect_to "/roles/" }
       end
     end
-
+    # RORSCAN_INL: Protected by attr_accessible in Role model
     role = Role.new(params[:role_name])
     role.save
     respond_to do |format|

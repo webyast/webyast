@@ -260,6 +260,20 @@ class Graph
 
   # initialize on element
   def initialize(group_id,value,limitcheck=true )
+    raise InvalidParameters.new(:headline => "UNKNOWN") unless (value["headline"] && 
+                                                                value["headline"].is_a?(String))
+    raise InvalidParameters.new(:y_scale => "UNKNOWN")  unless (value["y_scale"] && 
+                                                               (value["y_scale"].is_a?(String) || 
+                                                                value["y_scale"].is_a?(Integer)))
+    raise InvalidParameters.new(:y_label => "UNKNOWN")  unless (value["y_label"] && 
+                                                                value["y_label"].is_a?(String))
+    raise InvalidParameters.new(:y_max => "UNKNOWN")    if (value["y_max"] && 
+                                                            !value["y_max"].is_a?(String) &&
+                                                            !value["y_max"].is_a?(Integer))
+    raise InvalidParameters.new(:y_decimal_places => "UNKNOWN")    unless (value["y_decimal_places"] && 
+                                                                (value["y_decimal_places"].is_a?(String) || 
+                                                                 value["y_decimal_places"].is_a?(Integer)))
+
     @group_name = group_id
     @headline = value["headline"]
     @y_scale = value["y_scale"]

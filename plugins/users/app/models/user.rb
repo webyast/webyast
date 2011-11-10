@@ -40,6 +40,13 @@ class User
   attr_accessor_with_default :grp_string, ""
   attr_accessor_with_default :roles_string, ""
 
+  # Prevents a user from submitting a crafted form that bypasses activation
+  # anything else you want your user to change should be added here.
+  attr_accessible :cn, :uid, :uid_number, :gid_number, :grouplist, 
+                  :groupname, :home_directory, :login_shell, 
+                  :user_password, :user_password2, :type, 
+                  :grp_string,:roles_string
+
 public
 
   def initialize    

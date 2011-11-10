@@ -88,9 +88,15 @@ class RepositoriesController < ApplicationController
   def update
     permission_check "org.opensuse.yast.system.repositories.write" # RORSCAN_ITL
     param = params[:repository] || {}
-
     #id is either in params or in the struct (create method)
-    @repo = Repository.new(params[:id] || param[:id] , param[:name], param[:enabled])
+    rep_id = params[:id] || param[:id]
+    raise InvalidParameters.new :id => "UNKNOWN" unless (rep_id && rep_id.is_a?(String))
+    raise InvalidParameters.new :name => "UNKNOWN" unless (param[:name] && param[:name].is_a?(String))
+    raise InvalidParameters.new :enabled => "UNKNOWN" unless (param[:enabled] && param[:enabled].is_a?(String))
+
+    # Cannot be CWE-285 cause id does not depend on user authent.
+    # RORSCAN_INL: Cannot be a mass_assignment cause they are strings only
+    @repo = Repository.new(rep_id , param[:name], param[:enabled])
 
     raise InvalidParameters.new({:autorefresh => 'wrong'}) unless ["true","false"].include?(param[:autorefresh].to_s)
     raise InvalidParameters.new({:enabled => 'wrong'}) unless ["true","false"].include?(param[:enabled].to_s)

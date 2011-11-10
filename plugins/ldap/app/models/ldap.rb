@@ -30,6 +30,10 @@ class Ldap < BaseModel::Base
   attr_accessor :tls
   attr_accessor :enabled
 
+  # Prevents a user from submitting a crafted form that bypasses activation
+  # anything else you want your user to change should be added here.
+  attr_accessible :server, :base_dn, :tls, :enabled
+
   public
     def self.find
       YastCache.fetch(self) {

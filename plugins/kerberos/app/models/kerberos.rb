@@ -30,6 +30,10 @@ class Kerberos < BaseModel::Base
   attr_accessor :default_realm
   attr_accessor :enabled
 
+  # prevents a user from submitting a crafted form that bypasses activation
+  # anything else you want your user to change should be added here.
+  attr_accessible :kdc, :default_domain, :default_realm, :enabled
+
   public
   def self.find
     YastCache.fetch(self) {

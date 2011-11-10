@@ -36,6 +36,10 @@ attr_writer   :new_record
 #specify serialized attributes to prevent new_record serialization
 attr_serialized :users, :permissions, :name
 
+# Prevents a user from submitting a crafted form that bypasses activation
+# anything else you want your user to change should be added here.
+attr_accessible :users, :permissions, :name
+
 # Path to roles definition file which contain role and its permissions
 ROLES_DEF_PATH = File.join Paths::VAR, "roles", "roles.yml"
 # Path to role assign file which contain role and users which has the role

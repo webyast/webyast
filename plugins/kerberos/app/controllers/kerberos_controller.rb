@@ -52,6 +52,7 @@ class KerberosController < ApplicationController
     begin
       #translate from text to boolean
       params[:kerberos][:enabled] = params[:kerberos][:enabled] == "true"
+    # RORSCAN_INL: Protected by attr_accessible in Kerberos model
       @kerberos = Kerberos.new(params[:kerberos]).save
       flash[:message] = _("Kerberos client configuraton successfully written.")
     rescue Exception => error

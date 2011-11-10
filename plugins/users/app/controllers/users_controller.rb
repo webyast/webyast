@@ -250,6 +250,7 @@ class UsersController < ApplicationController
     yapi_perm_check "users.useradd"
     error = nil
     begin
+      # RORSCAN_INL: Protected by attr_accessible in User model
       @user = User.create(params[:user])
       if @user.roles_string!=nil
         save_roles(@user.id,@user.roles_string)

@@ -45,6 +45,13 @@ class GraphsController < ApplicationController
   def update
     permission_check("org.opensuse.yast.system.status.writelimits") # RORSCAN_ITL
     if params.has_key?(:graphs)
+      raise InvalidParameters.new :id => "UNKNOWN" 
+        unless (params[:id] && params[:id].is_a?(String))
+      raise InvalidParameters.new :graphs => "INVALID" 
+        unless (params[:graphs] && params[:graphs].is_a?(Hash))
+    
+      # Cannot be CWE-285 cause id does not depend on user authent.
+      # RORSCAN_INL: Cannot be a mass_assignment cause it is a string only
       @graph = Graph.new(params[:id], params[:graphs])
       @graph.save
     else
