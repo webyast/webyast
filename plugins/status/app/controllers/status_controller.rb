@@ -99,7 +99,7 @@ class StatusController < ApplicationController
     end
     base_path = params[:url][0..params[:url].rindex("/")-1]
     base_name = params[:url][params[:url].rindex("/")+1..(params[:url].size-1) ]
-    res_resource = OpenStruct.new(:href => base_path, :singular? => true)
+#    res_resource = OpenStruct.new(:href => base_path, :singular? => true)
 #    proxy = YaST::ServiceResource.class_for_resource(res_resource)
 #    proxy.post(base_name)
     redirect_to :controller => :controlpanel, :action => :index
@@ -114,6 +114,7 @@ class StatusController < ApplicationController
     end
     lines = params[:lines].to_i || DEFAULT_LINES
     pos_begin = params[:pos_begin].to_i || 0
+    # RORSCAN_INL: User has already read permission for ALL logs here
     log = Log.find(params[:id])
     data = log.evaluate_content(pos_begin, lines)
     content = data["`value"] if log

@@ -76,7 +76,7 @@ POLKIT_SECTION = "55-webyast.d"
     permissions.each do |p|
       #whitespace check for valid permission string to avoid attack
       unless p.match(/^[a-zA-Z][a-zA-Z0-9.-]*$/)
-        result << "perm #{p} is INVALID" # XXX tom: better don't include invalif perms here, we do not know what the calling function is doing with it, like displaying it via the browser, passing it to the shell etc.
+        result << "permissions have a wrong format"
       else
         case command
           when :grant:

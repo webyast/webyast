@@ -23,6 +23,7 @@
 # For configuration of which SMTP server use for sending mails
 
 require 'digest/sha2'
+require 'shellwords'
 
 class MailController < ApplicationController
 
@@ -109,7 +110,8 @@ class MailController < ApplicationController
       end
 
       if params.has_key?("send_mail")
-        redirect_to :action => "index", :email => params["mail"]["test_mail_address"]
+        # RORSCAN_INL: email will be escaped
+        redirect_to :action => "index", :email => Shellwords.escape(params["mail"]["test_mail_address"])
         return
       end
       redirect_success # redirect to next step

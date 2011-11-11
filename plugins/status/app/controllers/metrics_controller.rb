@@ -64,6 +64,7 @@ class MetricsController < ApplicationController
   # GET /metrics/1.xml
   def show
     permission_check("org.opensuse.yast.system.status.read") # RORSCAN_ITL
+    # RORSCAN_INL: User has already read permission for ALL metrics here
     @metric = Metric.find(params[:id])
     data_opts = {}
     data_opts[:stop] = params[:stop].blank? ? Time.now : Time.at(params[:stop].to_i)

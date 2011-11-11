@@ -18,6 +18,7 @@
 
 require 'rubygems'
 require 'nokogiri'
+# RORSCAN_INL: do not know whats wrong here....
 require 'open-uri'
 
 class OnlineHelp

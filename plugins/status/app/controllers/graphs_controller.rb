@@ -81,6 +81,7 @@ class GraphsController < ApplicationController
   #
   def show
     permission_check("org.opensuse.yast.system.status.read") # RORSCAN_ITL
+    # RORSCAN_INL: User has already read permission for ALL graphs here
     @graph = Graph.find(params[:id], params[:checklimits] || true)
     respond_to do |format|
       format.json { render :json => @graph.to_json }

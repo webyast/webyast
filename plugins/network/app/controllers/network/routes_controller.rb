@@ -47,6 +47,7 @@ class Network::RoutesController < ApplicationController
   # Shows route settings. Requires read permission for network YaPI.
 
   def show
+    # RORSCAN_INL: Is not a Information Exposure cause all data can be read
     @route = Route.find(params[:id])
     Rails.logger.debug "** Route #{@route.inspect}"
 

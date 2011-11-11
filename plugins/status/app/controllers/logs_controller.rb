@@ -51,6 +51,7 @@ class LogsController < ApplicationController
   #
   def show
     permission_check("org.opensuse.yast.system.status.read") # RORSCAN_ITL
+    # RORSCAN_INL: User has already read permission for ALL logs here
     @logs = Log.find(params[:id])
     @logs.evaluate_content(params[:pos_begin], params[:lines])
     respond_to do |format|

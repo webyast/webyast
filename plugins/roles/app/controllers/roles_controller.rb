@@ -89,6 +89,7 @@ public
 
     unless params[:roles].nil? #REST interfce
       check_role_name
+      # RORSCAN_INL: Is not a Information Exposure cause all data can be read (indepent from user)
       role = Role.find(params[:id])
       raise InvalidParameters.new(:id => "NONEXIST") if role.nil?
       role.load(params[:roles])
@@ -155,6 +156,7 @@ public
 
   # Deletes roles.
   def destroy
+    # RORSCAN_INL: User has already write permission for ALL roles here
     Role.delete params[:id]
     flash[:notice] = _("Role <i>%s</i> was successfully removed.") % params[:id] if request.format.html?
     index
@@ -162,6 +164,7 @@ public
 
   # shows information about role with name.
   def show
+    # RORSCAN_INL: User has already write permission for ALL roles here
     role = Role.find params[:id]
     unless role
       raise InvalidParameters.new :id => "NONEXIST"

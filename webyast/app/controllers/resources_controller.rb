@@ -33,7 +33,8 @@ class ResourcesController < ApplicationController
 
   def show
     logger.info params.inspect
-    @resource = Resource.find(params[:id].tr('-','.')) #FIXME check if :id is passed
+    # RORSCAN_INL: everyone have read access to the resources    
+    @resource = Resource.find(params[:id].tr('-','.'))
     unless @resource then
       render :file => "#{RAILS_ROOT}/public/404.html", :status => 404 and return 
     end

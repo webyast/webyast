@@ -19,6 +19,8 @@
 # you may find current contact information at www.novell.com
 #++
 
+require 'shellwords'
+
 class RepositoriesController < ApplicationController
 
   before_filter :login_required
@@ -68,6 +70,7 @@ class RepositoriesController < ApplicationController
     # read permissions were checked in a before filter
 
     begin
+      # RORSCAN_INL: User has already read permission for ALL repos
       repos = Repository.find(params[:id])
     rescue DBus::Error => exception
         render ErrorResult.error(404, 20, "DBus Error: #{exception.dbus_message.error_name}") and return
@@ -113,7 +116,8 @@ class RepositoriesController < ApplicationController
           render ErrorResult.error(404, 2, "packagekit error") and return
         else
           flash[:error] = _("Cannot update repository '%s': missing parameters.") % "#{ERB::Util.html_escape params[:id]}"
-          redirect_to :action => :index, :show => params[:id] and return          
+          # RORSCAN_INL: will be escaped
+          redirect_to :action => :index, :show => Shellwords.escape(params[:id]) and return          
         end
       end
     rescue DBus::Error => exception
@@ -121,14 +125,16 @@ class RepositoriesController < ApplicationController
         render ErrorResult.error(404, 20, "DBus Error: #{exception.dbus_message.error_name}") and return
       else
         flash[:error] = _("Cannot update repository '%s': missing parameters.") % "#{ERB::Util.html_escape params[:id]}"
-        redirect_to :action => :index, :show => params[:id] and return          
+        # RORSCAN_INL: will be escaped
+        redirect_to :action => :index, :show => Shellwords.escape(params[:id]) and return          
       end
     end
     unless request.format.html?
       render :show
     else
       flash[:message] = _("Repository '%s' has been updated.") % "#{ERB::Util.html_escape @repo.name}"      
-      redirect_to :action => :index, :show => params[:id] and return
+      # RORSCAN_INL: will be escaped
+      redirect_to :action => :index, :show => Shellwords.escape(params[:id]) and return
     end
   end
 
@@ -152,6 +158,7 @@ class RepositoriesController < ApplicationController
     permission_check "org.opensuse.yast.system.repositories.write" # RORSCAN_ITL
 
     begin
+      # RORSCAN_INL: User has already read permission for ALL repos here
       repos = Repository.find(params[:id])
     rescue DBus::Error => exception
       unless request.format.html?
@@ -175,6 +182,7 @@ class RepositoriesController < ApplicationController
       @repo.destroy
 
       # PackageKit doesn't return any status, check whether the repository is still present
+      # RORSCAN_INL: User has already read/write permission for ALL repos here
       reps = Repository.find(params[:id])
       if reps.size > 0
         unless request.format.html?

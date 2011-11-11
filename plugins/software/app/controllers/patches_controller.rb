@@ -147,6 +147,7 @@ class PatchesController < ApplicationController
   # GET /patches/1
   # GET /patches/1.xml
   def show
+    # RORSCAN_INL: User has already read permission for ALL patch info
     @patch_update = Patch.find(params[:id])
     if @patch_update.nil?
       logger.error "Patch: #{params[:id]} not found."

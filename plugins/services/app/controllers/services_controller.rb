@@ -135,6 +135,7 @@ class ServicesController < ApplicationController
   # Requires execute permission for services YaPI.
   def update
     yapi_perm_check "services.execute" # RORSCAN_ITL
+    # RORSCAN_INL: User has already write permission for ALL services here
     @service = Service.find params[:id]
     ret = @service.save(params)
     render :xml => ret

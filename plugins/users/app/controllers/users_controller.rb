@@ -168,6 +168,7 @@ class UsersController < ApplicationController
 
     begin
       # try to find the user, and 404 if it does not exist
+      # RORSCAN_INL: User has already read permission for ALL users here
       @user = User.find(params[:id])
       if @user.nil?
         render ErrorResult.error(404, 2, "user not found") and return
@@ -215,6 +216,7 @@ class UsersController < ApplicationController
   # GET /users/1/edit
   def edit
     yapi_perm_check "users.usermodify"
+    # RORSCAN_INL: User has already read/write permission for ALL users here
     @user = User.find(params[:id])
     @groups = Group.find(:all)
 
@@ -284,6 +286,7 @@ class UsersController < ApplicationController
     error = nil
     begin
       begin
+        # RORSCAN_INL: User has already write permission for ALL User here
         @user = User.find(params[:user][:id])
       rescue Exception => error
         logger.error(error.message)
@@ -328,6 +331,7 @@ class UsersController < ApplicationController
   def destroy
     yapi_perm_check "users.userdelete"
     begin
+      # RORSCAN_INL: User has already write permission for ALL User here
       @user = User.find(params[:id])
       @user.destroy
     rescue Exception => e

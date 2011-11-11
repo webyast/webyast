@@ -41,6 +41,7 @@ class Network::InterfacesController < ApplicationController
 
   # Shows interface settings. Requires read permission for network YaPI.
   def show
+    # RORSCAN_INL: Is not a Information Exposure cause all data can be read
     iface = Interface.find(params[:id])
 
     respond_to do |format|

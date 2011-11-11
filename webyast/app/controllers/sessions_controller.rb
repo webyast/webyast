@@ -29,6 +29,9 @@
 # and implements a 'session' resource
 #
 #
+
+require 'shellwords'
+
 class SessionsController < ApplicationController
   layout 'main'
 
@@ -74,7 +77,8 @@ class SessionsController < ApplicationController
         redirect_to :action => "new"
       elsif params[:password].blank?
         flash[:warning] = _("No password specified")
-        redirect_to :action => "new", :login => params[:login]
+        # RORSCAN_INL:login will be escaped
+        redirect_to :action => "new", :login => Shellwords.escape(params[:login])
       end
     end
 

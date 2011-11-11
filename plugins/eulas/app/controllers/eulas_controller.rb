@@ -94,6 +94,7 @@ class EulasController < ApplicationController
       else
         Rails.logger.error "TO XML"
         #OLD: @license.load_text params[:lang] unless params[:lang].nil?      
+        # RORSCAN_INL: No Information Exposure cause everyone can read licence text
         @license = License.find params[:id]
         @license.load_text params[:lang] unless params[:lang].nil?
        
@@ -134,7 +135,7 @@ class EulasController < ApplicationController
         permission_check :'org.opensuse.yast.modules.eulas.accept'
         raise InvalidParameters.new({:id => 'MISSING'}) if params[:id].nil? # RORSCAN_ITL
         raise InvalidParameters.new({:eulas_accepted => 'INVALID'}) unless [true,false,"true","false"].include? params[:eulas][:accepted] # RORSCAN_ITL
-      
+        # RORSCAN_INL: No Information Exposure cause everyone can read licence text      
         @license = License.find params[:id]
         @license.load_text params[:lang] unless params[:lang].nil?
         

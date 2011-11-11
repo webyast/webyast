@@ -150,6 +150,7 @@ public
   # GET /groups/users.xml
   def show
     # try to find the grouplist, and 404 if it does not exist
+    # RORSCAN_INL: User has already read permission for ALL groups here
     @group = Group.find params[:id]
     if @group.nil?
       render group_not_found(params[:id]) and return
@@ -316,7 +317,7 @@ public
   def destroy
     yapi_perm_check "users.groupdelete"
     validate_group_id or return
-
+    # RORSCAN_INL: User has already delete permission for ALL groups here
     @group = Group.find(params[:id])
 
     if @group.nil?
