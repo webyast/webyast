@@ -6,6 +6,9 @@ Webyast::Application.routes.draw do
   resource :permissions
   resource :vendor_settings
 
+  match '/auth/:provider/callback', :to => 'sessions#create'
+  match '/auth/failure', :to => 'sessions#fail'
+
   #root :to => 'controlpanel#index'
   root :to => 'sessions#new'
 
