@@ -8,6 +8,7 @@ module PolKit1
 
   def self.polkit1_check(perm, user_name)
     raise "invalid user name" if (user_name =~ /\\$/ or user_name.include? "'")
+    # RORSCAN_INL: This is not a CWE-184: Incomplete Blacklist
     user_name = Shellwords.escape(user_name) #just to be sure....
     #get user id
     # RORSCAN_INL: user_name will be escaped

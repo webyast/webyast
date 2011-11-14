@@ -47,6 +47,7 @@ class Account < ActiveRecord::Base
   # Authenticates a user by their login name and unencrypted password with unix2_chkpwd
   def self.unix2_chkpwd(login, passwd)
      return false if login.match("'") || login.match(/\\$/) #don't allow ' or \ in login to prevent security issues
+     # RORSCAN_INL: This is not a CWE-184: Incomplete Blacklist
      login = Shellwords.escape(login) #just to be sure
      cmd = "/sbin/unix2_chkpwd rpam '#{login}'"
      se = Session.new

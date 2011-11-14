@@ -75,6 +75,7 @@ class Mail < BaseModel::Base
 
     # remove potential problematic characters from email address
     to.tr!("~'\"<>","")
+    # RORSCAN_INL: This is not a CWE-184: Incomplete Blacklist
     to = Shellwords.escape(to)
     # RORSCAN_INL: "message" is a fix string and "to" will be checked
     `/bin/echo "#{message}" | /bin/mail -s "WebYaST Test Mail" '#{to}' -r root`

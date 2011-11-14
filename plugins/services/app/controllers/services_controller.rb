@@ -37,7 +37,7 @@ class ServicesController < ApplicationController
 
   def show_status
     yapi_perm_check "services.read"
-    
+    # RORSCAN_INL: Cannot be CWE-285 cause id does not depend on user authent.
     raise InvalidParameters.new :id => "UNKNOWN" unless (params[:id] && params[:id].is_a?(String))
     # Cannot be CWE-285 cause id does not depend on user authent.
     # RORSCAN_INL: Cannot be a mass_assignment cause it is a string only
@@ -118,6 +118,7 @@ class ServicesController < ApplicationController
   # REST API
   def show
     yapi_perm_check "services.read"
+    # RORSCAN_INL: Cannot be CWE-285 cause id does not depend on user authent.
     raise InvalidParameters.new :id => "UNKNOWN" unless (params[:id] && params[:id].is_a?(String))
     # Cannot be CWE-285 cause id does not depend on user authent.
     # RORSCAN_INL: Cannot be a mass_assignment cause it is a string only

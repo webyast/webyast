@@ -148,6 +148,7 @@ private
   end
 
   def get_description (action)
+    # RORSCAN_INL: This is not a CWE-184: Incomplete Blacklist
     action = Shellwords.escape(action)
     # RORSCAN_INL: "action" will be checked
     desc = `/usr/bin/pkaction --action-id '#{action}' --verbose | grep description: |  sed 's/description://g'`
