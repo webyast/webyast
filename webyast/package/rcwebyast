@@ -34,9 +34,9 @@
 ### BEGIN INIT INFO
 # Provides:          webyast
 # Required-Start:    $syslog $remote_fs
-# Should-Start: $time ypbind sendmail yastwc
+# Should-Start: $time ypbind sendmail
 # Required-Stop:     $syslog $remote_fs
-# Should-Stop: $time ypbind sendmail yastwc
+# Should-Stop: $time ypbind sendmail
 # Default-Start:     3 5
 # Default-Stop:      0 1 2 6
 # Short-Description: webyast
