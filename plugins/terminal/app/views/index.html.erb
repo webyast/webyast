@@ -19,15 +19,11 @@
 # you may find current contact information at www.novell.com
 -->
 
-<% disabled = !@permissions %>
-
 <div class="plugin-content plugin-border">
-  <%= render :partial => 'shared/missing_write_permissions' if disabled %>
-
   <div class="plugin-header webyast_form">
     <div class="left">
       <label class="plugin-icon-container"><img class="plugin-icon" src="/icons/kerberos.png"></label>
-      <label class="plugin-name"><%= _("AJAX terminal client") %></label>
+      <label class="plugin-name"><%= _("Terminal Client") %></label>
     </div>
     <div class="right" >
       <span id="questionMark" style="margin:2px 5px; float:none;">?</span>
@@ -41,7 +37,7 @@
     <div class="fieldset_header">
       <div class="fieldset_header_title" style="display:block;">
         <div style="float:left">
-          <%= _("Web based AJAX terminal emulator") %>
+          <%= _("Web based terminal emulator") %>
         </div>
         <div style="float:right; text-align:right;">
           New tab
