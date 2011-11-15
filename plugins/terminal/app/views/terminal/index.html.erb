@@ -39,10 +39,10 @@
     <div class="fieldset_header">
       <div class="fieldset_header_title" style="display:block;">
         <div style="float:left">
-          <%= _("Web based terminal emulator") %>
+          <%= _("Web based terminal client") %>
         </div>
         <div style="float:right; text-align:right;">
-          <a id="fullscreen" href="#">fullscreen</a>
+          <a id="fullscreen" href="#"><%= _("fullscreen") %></a>
         </div>
       </div>
       <div class="clear"></div>
@@ -50,7 +50,7 @@
 
     <div class="fieldset_body">
       <div id="frameBorder">
-        <a id="closeFullscreen" href="#">close</a>
+        <a id="closeFullscreen" href="#"><%= _("close") %></a>
         <iframe id="iframe" src="#" width="100%" height="100%" style="border:0; position:relative; overflow:hidden!important;"></iframe>
       </div>
     </div>
