@@ -16,7 +16,7 @@ License:        GPL-2.0
 Group:          Productivity/Networking/Web/Utilities
 URL:            http://en.opensuse.org/Portal:WebYaST
 Autoreqprov:    on
-Version:        0.3.0
+Version:        0.3.1
 Release:        0
 Summary:        WebYaST - AJAX terminal plugin
 Source:         www.tar.bz2
