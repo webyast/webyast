@@ -10,7 +10,7 @@
 
 
 Name:           webyast-terminal
-Provides:       WebYaST(org.opensuse.yast.modules.yapi.terminal)
+Provides:       WebYaST(org.opensuse.yast.system.terminal.policy)
 PreReq:         webyast-base
 License:        GPL-2.0
 Group:          Productivity/Networking/Web/Utilities
@@ -20,7 +20,7 @@ Version:        0.3.0
 Release:        0
 Summary:        WebYaST - AJAX terminal plugin
 Source:         www.tar.bz2
-Source1:        org.opensuse.yast.modules.yapi.terminal.policy
+Source1:        org.opensuse.yast.system.terminal.policy
 Source2:        wicd-rpmlintrc
 BuildRoot:      %{_tmppath}/%{name}-%{version}-build
 BuildArch:      noarch
@@ -88,7 +88,7 @@ rm -rf $RPM_BUILD_ROOT
 %{plugin_dir}/app
 %{plugin_dir}/config
 %{plugin_dir}/lib
-%attr(644,root,root) /usr/share/polkit-1/actions/org.opensuse.yast.modules.yapi.terminal.policy
+%attr(644,root,root) /usr/share/polkit-1/actions/org.opensuse.yast.system.terminal.policy
 %doc COPYING
 
 %files testsuite

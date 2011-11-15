@@ -40,9 +40,9 @@ public
   init_gettext "webyast-terminal"
 
   def index
-    permission_check "org.opensuse.yast.system.terminal.policy.read"
+    permission_check "org.opensuse.yast.system.terminal.read"
     unless shellinabox_running?
-      flash[:error] = _("Service is not running. Start with: 'rcshellinabox start'")
+      flash[:error] = _("Terminal service is not running. Please start with: 'rcshellinabox start'")
       redirect_to :controller => :controlpanel, :action => :index
     end
   end
