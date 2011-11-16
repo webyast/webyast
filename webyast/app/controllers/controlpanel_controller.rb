@@ -25,11 +25,10 @@
 require 'yaml'
 
 class ControlpanelController < ApplicationController
-  before_filter :ensure_login
   before_filter :ensure_wizard, :only => [:nextstep, :backstep, :thisstep]
 
   def index
-    return false if need_redirect
+    #return false if need_redirect
     @shortcuts = shortcuts_data
     @count = getNumberPermittedModules(@shortcuts)
   end

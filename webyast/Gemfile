@@ -2,11 +2,13 @@ source 'http://rubygems.org'
 
 gem 'rails', '3.1.1'
 
-gem 'omniauth'
-gem 'omniauth-openid'
+gem 'devise'
+# gem 'devise_pam_authenticatable', :git => 'git://github.com/jwilson511/devise_pam_authenticatable.git'
 
 gem 'jquery-rails'
 gem "sqlite3-ruby", :require => "sqlite3"
+
+gem 'haml'
 
 gem 'rpam', :git => 'git://gitorious.org/opensuse/ruby-rpam.git'
 gem "fast_gettext", '>= 0.5'
