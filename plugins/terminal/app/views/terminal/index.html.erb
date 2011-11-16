@@ -21,6 +21,28 @@
 
 <%= stylesheet_link_tag "webyast-terminal" %>
 
+<% content_for :before_script do %>
+  <% javascript_tag do %>
+
+  $(document).ready(function(){
+    $("#iframe").attr("src", "https://<%= `hostname --fqdn`.chomp %>:4200");
+
+    $("#fullscreen").click(function(){
+      $(".webyast_fieldset").css("position", "static");
+      $("#frameBorder").addClass("fullscreen");
+      $("#closeFullscreen").show();
+    });
+
+    $("#closeFullscreen").click(function(){
+      $(".webyast_fieldset").css("position", "relative");
+      $("#frameBorder").removeClass("fullscreen");
+      $("#closeFullscreen").hide();
+    });
+  });
+
+  <% end %>
+<% end %>
+
 <div class="plugin-content plugin-border">
   <div class="plugin-header webyast_form">
     <div class="left">
@@ -59,6 +81,3 @@
   <div class="clearfix"></div>
 
 </div>
-
-<%= javascript_include_tag "webyast-terminal.js" %>
-
