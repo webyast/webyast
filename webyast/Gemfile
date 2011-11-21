@@ -3,14 +3,14 @@ source 'http://rubygems.org'
 gem 'rails', '3.1.1'
 
 gem 'devise'
-# gem 'devise_pam_authenticatable', :git => 'git://github.com/jwilson511/devise_pam_authenticatable.git'
+gem 'devise_unix2_chkpwd_authenticatable', :git => 'git://github.com/dmacvicar/devise_unix2_chkpwd_authenticatable.git'
 
 gem 'jquery-rails'
 gem "sqlite3-ruby", :require => "sqlite3"
 
 gem 'haml'
 
-gem 'rpam', :git => 'git://gitorious.org/opensuse/ruby-rpam.git'
+#gem 'rpam', :git => 'git://gitorious.org/opensuse/ruby-rpam.git'
 gem "fast_gettext", '>= 0.5'
 gem 'gettext_i18n_rails'
 gem 'nokogiri'
@@ -19,6 +19,8 @@ gem "gettext", '>= 1.9.3', :require => false
 
 #this is needed for language/country translations
 gem "countries_and_languages", '>=0.1.2', :require => 'countries_and_languages/rails'
+
+gem 'ruby-debug'
 
 group :test do
   gem 'rspec', '>=2'

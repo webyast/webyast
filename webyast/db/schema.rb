@@ -12,21 +12,6 @@
 
 ActiveRecord::Schema.define(:version => 20111115091940) do
 
-  create_table "accounts", :force => true do |t|
-    t.string   "login"
-    t.string   "salt"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-    t.string   "remember_token"
-    t.datetime "remember_created_at"
-    t.string   "remote_ip"
-    t.integer  "sign_in_count",       :default => 0
-    t.datetime "current_sign_in_at"
-    t.datetime "last_sign_in_at"
-    t.string   "current_sign_in_ip"
-    t.string   "last_sign_in_ip"
-  end
-
   create_table "data_caches", :force => true do |t|
     t.string   "path"
     t.string   "session"
@@ -50,5 +35,20 @@ ActiveRecord::Schema.define(:version => 20111115091940) do
   end
 
   add_index "delayed_jobs", ["locked_by"], :name => "index_delayed_jobs_on_locked_by"
+
+  create_table "users", :force => true do |t|
+    t.string   "username"
+    t.string   "salt"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.string   "remember_token"
+    t.datetime "remember_created_at"
+    t.string   "remote_ip"
+    t.integer  "sign_in_count",       :default => 0
+    t.datetime "current_sign_in_at"
+    t.datetime "last_sign_in_at"
+    t.string   "current_sign_in_ip"
+    t.string   "last_sign_in_ip"
+  end
 
 end

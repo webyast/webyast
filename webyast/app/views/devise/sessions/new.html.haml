@@ -1,12 +1,12 @@
 %h2 Sign in
 
-- logger.error(resource_name.class)
+- logger.error(user_session_path)
 
 / FIXME session_path and resource_name did not work here
-= form_for(:user, :url => account_session_path) do |f| 
-  = f.label :login
+= form_for(resource, :as => resource_name, :url => user_session_path(resource_name)) do |f| 
+  = f.label :username
   %br
-  = f.text_field :login
+  = f.text_field :username
   %br
   = f.label :password
   %br

@@ -16,9 +16,8 @@
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA
 #++
 
-class Account < ActiveRecord::Base
+class User < ActiveRecord::Base
 
   devise :unix2_chkpwd_authenticatable
-  devise :trackable, :validatable, :rememberable
-    
+  #devise :trackable, :validatable, :rememberable
 end
