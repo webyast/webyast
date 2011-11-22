@@ -1,6 +1,6 @@
 Webyast::Application.routes.draw do
   
-  devise_for :users
+  devise_for :accounts
   resources :notifier
   resources :onlinehelp
   resources :logs

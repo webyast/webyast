@@ -10,7 +10,6 @@ class DeviseColumns < ActiveRecord::Migration
       # these fields are named differently in devise
       #t.rename :crypted_password, :encrypted_password
     end
-    rename_table(:accounts, :users)
   end
 
   #def down

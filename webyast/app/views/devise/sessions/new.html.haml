@@ -1,9 +1,9 @@
 %h2 Sign in
 
-- logger.error(user_session_path)
+- logger.error(account_session_path)
 
 / FIXME session_path and resource_name did not work here
-= form_for(resource, :as => resource_name, :url => user_session_path) do |f| 
+= form_for(resource, :as => resource_name, :url => account_session_path) do |f| 
   = f.label :username
   %br
   = f.text_field :username
