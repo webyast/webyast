@@ -23,9 +23,12 @@
 #
 
 require 'yaml'
+require 'yast'
 
 class ControlpanelController < ApplicationController
   before_filter :ensure_wizard, :only => [:nextstep, :backstep, :thisstep]
+
+  respond_to :html
 
   def index
     #return false if need_redirect

@@ -21,7 +21,7 @@
 
 <% content_for :head do %>
   <%= javascript_include_tag :defaults %>
-  <% if JSMIN != true %>
+  <% if true %>
     <%= javascript_include_tag "webyast-controlpanel", "webyast-localstorage"%> 
     <%= javascript_include_tag "jquery.easing.1.3" %>
     <%= javascript_include_tag "jquery.quicksand" %>
@@ -33,7 +33,7 @@
 <% display_patches = ControlPanelConfig.read 'display_patch_status', true %>
 <% display_status = ControlPanelConfig.read 'display_system_status', true %>
 
-<% if ActionController::Routing.possible_controllers.include?("patches") && display_patches %>
+<% if Rails.application.routes.routes.map(&:path).include?("/patches") && display_patches %>
   <% javascript_tag do -%>
     $(document).ready( function() {
       <%= remote_function(:update => "statusbar_patches", :url => { :controller => :patches, :action => :show_summary, :background => true }) %>
@@ -41,7 +41,7 @@
   <% end -%>
 <% end %>
 
-<% if ActionController::Routing.possible_controllers.include?("status") && display_status %>
+<% if Rails.application.routes.routes.map(&:path).include?("/status") && display_status %>
   <% javascript_tag do -%>
     $(document).ready( function() {
       <%= remote_function(:update => "statusbar_status", :url => { :controller => :status, :action => :show_summary, :background => true }) %>
@@ -62,7 +62,7 @@
         <label><%= _("System status") %></label>
       </div>
       <div id="statusbar_status">
-        <% if ActionController::Routing.possible_controllers.include?("status") %>
+        <% if Rails.application.routes.routes.map(&:path).include?("/status") %>
           <% if display_status %>
             <div class="statusbar_row">
               <%= image_tag("/images/working.gif", :class => "small-working-icon") %>
@@ -88,7 +88,7 @@
         <label><%= _("System updates") %></label>
       </div>
       <div id="statusbar_patches">
-        <% if ActionController::Routing.possible_controllers.include?("patches") %>
+        <% if Rails.application.routes.routes.map(&:path).include?("/patches") %>
           <% if display_patches %>
           <div class="statusbar_row">
             <%= image_tag("/images/working.gif", :class => "small-working-icon") %>
@@ -108,7 +108,7 @@
       </div>
     </div>
 
-    <% if ActionController::Routing.possible_controllers.include?("system") %>
+    <% if Rails.application.routes.routes.map(&:path).include?("/system") %>
       <div id="statusbar-actions">
           <div class="statusbar_row">
             <%= link_to _('Reboot'), {:controller => 'system', :action => 'reboot'}, :confirm => _("Really reboot the machine?"), :method => :put, :class => 'button' %>
