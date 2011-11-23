@@ -21,11 +21,12 @@
 
 require 'yast_service'
 require 'yast_cache'
+require 'base_model/base'
 
 # User model, not ActiveRecord based, but a
 # thin model over the YaPI, with some
 # ActiveRecord like convenience API
-class User
+class User < BaseModel::Base
   
   attr_accessor_with_default :cn, ""
   attr_accessor_with_default :uid, ""
