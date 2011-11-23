@@ -1,5 +1,4 @@
-doc/
-pkg/
-tmp/
-lib/polkit1.so
-package/polkit1-*.gem
+*.gem
+.bundle
+Gemfile.lock
+pkg/*

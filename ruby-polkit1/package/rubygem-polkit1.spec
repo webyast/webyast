@@ -17,7 +17,7 @@
 
 # norootforbuild
 Name:           rubygem-polkit1
-Version:        0.0.1
+Version:        0.0.2
 Release:        0
 %define mod_name polkit1
 #
@@ -29,7 +29,7 @@ BuildRoot:      %{_tmppath}/%{name}-%{version}-build
 BuildRequires:  rubygems_with_buildroot_patch
 BuildRequires:  gcc ruby-devel polkit-devel dbus-1-devel
 %rubygems_requires
-BuildRequires:  rubygem-hoe
+BuildRequires:  rubygem-inifile
 BuildRequires:  rubygem-rake-compiler
 BuildRequires:  rubygem-yard >= 0
 #
@@ -64,7 +64,7 @@ Test::Unit or RSpec files, useful for developers.
 %install
 %gem_install %{S:0}
 %gem_cleanup
-rm %{buildroot}/%{_libdir}/ruby/gems/%{rb_ver}/gems/%{mod_name}-%{version}/ext/polkit1/polkit1.c
+rm -f %{buildroot}/%{_libdir}/ruby/gems/%{rb_ver}/gems/%{mod_name}-%{version}/ext/polkit1/polkit1.c
 
 %check
 cd %{buildroot}/%{_libdir}/ruby/gems/%{rb_ver}/gems/%{mod_name}-%{version}
@@ -77,7 +77,7 @@ cd %{buildroot}/%{_libdir}/ruby/gems/%{rb_ver}/gems/%{mod_name}-%{version}
 %defattr(-,root,root,-)
 %{_libdir}/ruby/gems/%{rb_ver}/cache/%{mod_name}-%{version}.gem
 %{_libdir}/ruby/gems/%{rb_ver}/gems/%{mod_name}-%{version}/
-%exclude %{_libdir}/ruby/gems/%{rb_ver}/gems/%{mod_name}-%{version}/test
+#%exclude %{_libdir}/ruby/gems/%{rb_ver}/gems/%{mod_name}-%{version}/test
 %{_libdir}/ruby/gems/%{rb_ver}/specifications/%{mod_name}-%{version}.gemspec
 
 %files doc
@@ -86,6 +86,6 @@ cd %{buildroot}/%{_libdir}/ruby/gems/%{rb_ver}/gems/%{mod_name}-%{version}
 
 %files testsuite
 %defattr(-,root,root,-)
-%{_libdir}/ruby/gems/%{rb_ver}/gems/%{mod_name}-%{version}/test
+#%{_libdir}/ruby/gems/%{rb_ver}/gems/%{mod_name}-%{version}/test
 
 %changelog

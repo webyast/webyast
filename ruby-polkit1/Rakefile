@@ -1,31 +1,9 @@
-$: << File.join(File.dirname(__FILE__), "test")
-require 'rubygems'
-gem 'hoe', '>= 2.1.0'
-require 'hoe'
+$: << File.join(File.dirname(__FILE__), "lib")
 
-task :default => [:compile, :docs, :test]
+require "bundler/gem_tasks"
+require 'rake/testtask'
 
-Hoe.plugin :yard
-
-HOE = Hoe.spec 'polkit1' do
-  developer('Stefan Schubert', 'schubi@suse.de')
-  self.summary = "polkit bindings for ruby"
-  self.description = "This extension provides polkit integration. The library provides a stable API for applications to use the authorization policies from polkit."
-  self.readme_file = ['README', ENV['HLANG'], 'rdoc'].compact.join('.')
-  self.history_file = ['CHANGELOG', ENV['HLANG'], 'rdoc'].compact.join('.')
-  self.extra_rdoc_files = FileList['*.rdoc'] 
-  self.extra_rdoc_files << "COPYING"
-  self.clean_globs = [
-    'lib/polkit1/*.{o,so,bundle,a,log,dll}',
-  ]
- 
-  %w{ rake-compiler }.each do |dep|
-    self.extra_dev_deps << [dep, '>= 0']
-  end
-  self.extra_dev_deps << ['yard', '>= 0']
-  self.spec_extras = { :extensions => ["ext/polkit1/extconf.rb"] }
-end
-
+task :default => [:compile, :test, :package]
 
 gem 'rake-compiler', '>= 0.4.1'
 require 'rake/extensiontask'
@@ -33,4 +11,29 @@ Rake::ExtensionTask.new('polkit1')
 
 task :package do
   FileUtils.cp Dir.glob("pkg/*.gem")[0].to_s, "package/"
+end
+
+Rake::TestTask.new do |t|
+  t.libs << File.expand_path('../test', __FILE__)
+  t.libs << File.expand_path('../', __FILE__)
+  t.test_files = FileList['test/test*.rb']
+  t.verbose = true
+end
+
+extra_docs = ['README*', 'CHANGELOG*']
+
+begin
+ require 'yard'
+  YARD::Rake::YardocTask.new(:doc) do |t|
+    t.files   = ['lib/**/*.rb', *extra_docs]
+    t.options = ['--no-private']
+  end
+rescue LoadError
+  STDERR.puts "Install yard if you want prettier docs"
+  require 'rdoc/task'
+  Rake::RDocTask.new(:doc) do |rdoc|
+    rdoc.rdoc_dir = "doc"
+    rdoc.title = "polkit1 #{PolKit1::VERSION}"
+    extra_docs.each { |ex| rdoc.rdoc_files.include ex }
+  end
 end
