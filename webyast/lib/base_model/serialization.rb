@@ -77,5 +77,5 @@ require 'base_model/serializers/json_serializer'
 require 'base_model/serializers/xml_serializer'
 #FIXME Strange, in some case (use server instead of console and load from webclient) require in development enviroment doesn't work
 # it looks like it create problematic dependency load and doesn't not properly reload methods
-load 'base_model/serializers/json_serializer.rb' if RAILS_ENV == "development"
-load 'base_model/serializers/xml_serializer.rb' if RAILS_ENV == "development"
+load 'base_model/serializers/json_serializer.rb' if Rails.env.development?
+load 'base_model/serializers/xml_serializer.rb' if Rails.env.development?

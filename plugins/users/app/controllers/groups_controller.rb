@@ -23,7 +23,6 @@ include ApplicationHelper
 
 class GroupsController < ApplicationController
   
-  before_filter :login_required
   before_filter :check_read_permission, :only => [:index,:show]
   before_filter :check_write_permission, :only => [:create, :update, :new, :edit]
   layout 'main'

@@ -20,6 +20,7 @@
 #++
 
 require 'yast_service'
+require 'base_model/base'
 
 # Group model, YastModel based
 class Group < BaseModel::Base

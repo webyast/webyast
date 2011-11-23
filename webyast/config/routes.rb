@@ -7,6 +7,8 @@ Webyast::Application.routes.draw do
   resource :permissions
   resource :vendor_settings
 
+  mount WebYaST::UsersEngine => '/m'
+
   #root :to => 'controlpanel#index'
   root :to => 'controlpanel#index'
 

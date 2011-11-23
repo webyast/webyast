@@ -20,7 +20,7 @@
 -->
 
 <% content_for :head do %>
- <% if JSMIN == true %>  
+ <% if false == true %>  
     <%= javascript_include_tag "min/users-min.js"-%>
     <%= javascript_include_tag "select_dialog.js" %>
   <% else %>
@@ -32,7 +32,7 @@
   <% end %>
  
 <!-- if no groups, disable validation-->
-<% if @permissions[:groupsget] != true %>
+<% if can? :get, Group %>
 <script language="javascript">
   function groups_validation(which){ return true; }
   function def_group_validation(which){ return true; }
@@ -199,7 +199,7 @@
     </form>
 
     <span id="action_link_container">
-      <% if @permissions[:useradd] %>
+      <% if can? :add, User %>
         <%=link_to image_tag("/icons/users.png", :class=>"action_link_icon") +  _("New User"), :action => :new %>
       <% end %>
         <%=link_to image_tag("/icons/groups.png", :class=>"action_link_icon") +  _("Manage Groups"), :controller => "groups" %>
@@ -209,7 +209,7 @@
   <div style="clear:both; overflow:hidden;"></div>
 
   <div id="users" class="accordion">
-    <% disabled = ! @permissions[:usermodify] %>
+    <% disabled = cannot?(:modify, User) %>
     <% for user in @users %>
       <div class="list-fieldset">
         <div class="list-fieldset-header">

@@ -23,7 +23,6 @@ include ApplicationHelper
 
 class UsersController < ApplicationController
   
-  before_filter :login_required
   layout 'main'
 
   private
@@ -81,7 +80,7 @@ class UsersController < ApplicationController
   end
 
   # Initialize GetText and Content-Type.
-  init_gettext "webyast-users"
+  #init_gettext "webyast-users"
 
   public
 
@@ -92,8 +91,7 @@ class UsersController < ApplicationController
   # GET /users.xml
   # GET /users.json
   def index
-    permission_read
-    yapi_perm_check "users.usersget"
+    authorize! :get, User
     if params[:getent] == "1"
       respond_to do |format|
         format.html { render  :xml => GetentPasswd.find.to_xml }
@@ -143,7 +141,7 @@ class UsersController < ApplicationController
             user.roles_string = my_roles.join(",")
             @all_roles_string = all_roles.join(",")
             @groups = []
-            if @permissions[:groupsget]
+            if can? :get, Group
               @groups = Group.find :all
             end
             grps_list=[]
@@ -161,7 +159,7 @@ class UsersController < ApplicationController
   # GET /users/1
   # GET /users/1.xml
   def show
-    yapi_perm_check "users.userget"
+    authorize! :get, User
     if params[:id].blank?
       render ErrorResult.error(404, 2, "empty parameter") and return
     end
@@ -185,8 +183,7 @@ class UsersController < ApplicationController
   # GET /users/new
   # GET /users/new.xml
   def new
-    permission_read
-    yapi_perm_check "users.useradd"
+    authorize! :add, User
     @user = User.new()
     @all_roles_string = ""
     all_roles=[]
@@ -199,7 +196,7 @@ class UsersController < ApplicationController
     @all_users_string = all_users
 
     @groups = []
-    if @permissions[:groupsget] == true
+    if can? :get, Group
       @groups = Group.find :all
     end
     grp_list=[]
@@ -214,7 +211,7 @@ class UsersController < ApplicationController
 
   # GET /users/1/edit
   def edit
-    yapi_perm_check "users.usermodify"
+    authorize! :modify, User
     @user = User.find(params[:id])
     @groups = Group.find(:all)
 
@@ -246,8 +243,7 @@ class UsersController < ApplicationController
   # POST /users.xml
   # POST /users.json
   def create
-    permission_read
-    yapi_perm_check "users.useradd"
+    authorize! :add, User
     error = nil
     begin
       @user = User.create(params[:user])
@@ -279,7 +275,7 @@ class UsersController < ApplicationController
   # PUT /users/1
   # PUT /users/1.xml
   def update
-    yapi_perm_check "users.usermodify"
+    authorize! :modify, User
     error = nil
     begin
       begin
@@ -325,7 +321,7 @@ class UsersController < ApplicationController
   # DELETE /users/1.xml
   # DELETE /users/1.json
   def destroy
-    yapi_perm_check "users.userdelete"
+    authorize! :delete, User
     begin
       @user = User.find(params[:id])
       @user.destroy
