@@ -1,3 +1,4 @@
+
 class Ability
   include CanCan::Ability
 
@@ -25,8 +26,24 @@ class Ability
     #
     # See the wiki for details: https://github.com/ryanb/cancan/wiki/Defining-Abilities
     can do |action, subject_class, subject|
-      Rails.logger.info "Auth request for #{action}, #{subject_class}, #{subject}"
-      true
+      action ||= "" #avoid nil action
+      perm = "org.opensuse.yast.modules.yapi.#{subject_class.to_s.downcase}.#{action.to_s.downcase}"
+      granted = false
+      YastService.lock #locking for other thread
+      begin
+        if Permission.dbus_obj.check( [perm], user.username )[0][0] == "yes"
+          Rails.logger.debug "Action: #{perm} User: #{user.username} Result: ok"
+          granted = true
+        else
+          Rails.logger.debug "Action: #{perm} User: #{user.username} Result: NOT granted"
+        end
+      rescue RuntimeError => e
+        Rails.logger.info e
+        raise PolicyKitException.new(e.message, user.username, perm)
+      ensure
+        YastService.unlock #unlocking for other thread
+      end
+      granted
     end
   end
 end
