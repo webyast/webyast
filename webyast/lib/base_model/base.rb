@@ -99,8 +99,10 @@ module BaseModel
   #   end  
 
 
-  class Base
-
+  class Base 
+    include ActiveModel::Validations
+    include ActiveModel::Conversion
+    extend ActiveModel::Naming
 
     # requirement for class which should be used in ActiveModel
     # see http://www.engineyard.com/blog/2009/my-five-favorite-things-about-rails-3/ (paragraph 4)
@@ -111,6 +113,10 @@ module BaseModel
     # initialize attributes by hash in attr
     def initialize(attr={})
       load(attr)
+    end
+
+    def persisted?
+      false
     end
 
     # saves result
