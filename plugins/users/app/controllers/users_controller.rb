@@ -71,14 +71,6 @@ class UsersController < ApplicationController
     all_users_list.join(",")
   end
 
-  def permission_read
-    @permissions = {:groupsget => false, :useradd => false, :usermodify => false, :userdelete => false}
-    @permissions[:usermodify] = true if yapi_perm_granted? "users.usermodify"
-    @permissions[:groupsget] = true if yapi_perm_granted? "users.groupsget"
-    @permissions[:useradd] = true if yapi_perm_granted? "users.useradd"
-    @permissions[:userdelete] = true if yapi_perm_granted? "users.userdelete"
-  end
-
   # Initialize GetText and Content-Type.
   #init_gettext "webyast-users"
 
