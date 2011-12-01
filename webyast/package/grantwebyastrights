@@ -90,7 +90,9 @@ def granted_perms(user)
 end
 
 def webyast_perms
-  perms = `pkaction`
+  # this is a reimplementation of `pkaction`, because it relies on d-bus and does not work
+  # while building an appliane image
+  perms = `grep 'action id' /usr/share/polkit-1/actions/* |sed 's/^.*action id="\\(.*\\)".*$/\\1/'`
   perms = perms.split "\n"
   perms.reject! { |perm| not webyast_perm?(perm) }
   return perms
@@ -103,9 +105,10 @@ begin
       STDOUT.puts "granting: #{single_policy}"
       PolKit1::polkit1_write(POLKIT_SECTION, single_policy, true, user)
     else
-      granted = granted_perms user
-      non_granted = webyast_perms.reject{ |perm| granted.include? perm }
-      non_granted.each do |policy|
+      # go through all webyast perms, checking granted permissions does not work
+      # well during build
+      # polkit1_write makes sure not to grant a permission multiple times itself
+      webyast_perms.each do |policy|
         STDOUT.puts "granting: #{policy}"
         PolKit1::polkit1_write(POLKIT_SECTION, policy, true, user)
       end

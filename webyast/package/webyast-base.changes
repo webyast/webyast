@@ -1,4 +1,11 @@
 -------------------------------------------------------------------
+Thu Dec  1 08:46:09 UTC 2011 - jsrain@suse.cz
+
+- updated polkit permission granting to work well during appliance
+  build
+- 0.3.1
+
+-------------------------------------------------------------------
 Fri Oct 21 12:18:35 UTC 2011 - schubi@suse.com
 
 - Merging client and service
