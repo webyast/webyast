@@ -21,7 +21,6 @@ Release:        0
 Summary:        WebYaST - AJAX terminal plugin
 Source:         www.tar.bz2
 Source1:        org.opensuse.yast.system.terminal.policy
-Source2:        wicd-rpmlintrc
 BuildRoot:      %{_tmppath}/%{name}-%{version}-build
 BuildArch:      noarch
 
