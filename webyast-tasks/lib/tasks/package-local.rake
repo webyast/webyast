@@ -80,7 +80,7 @@ def create_package_task
     p.package_files.exclude('./doc/app')
     # ignore backups
     p.package_files.exclude('./**/*.orig')
-    p.package_files.exclude('./package')
+    p.package_files.exclude('./package/*')
     p.package_files.exclude('./coverage')
     p.package_files.exclude('./db/*.sqlite3')
     p.package_files.exclude('./db/schema.rb')
