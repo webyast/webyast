@@ -1,4 +1,11 @@
 -------------------------------------------------------------------
+Wed Dec  7 10:27:17 UTC 2011 - cfarrell@suse.com
+
+- license update: GPL-2.0+
+  SPDX format. Note that incorrect license strings will be REJECTED in the
+  future
+
+-------------------------------------------------------------------
 Fri Sep 23 14:16:54 UTC 2011 - schubi@suse.com
 
 - initial 
