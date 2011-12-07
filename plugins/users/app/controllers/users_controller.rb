@@ -22,9 +22,9 @@
 include ApplicationHelper
 
 class UsersController < ApplicationController
-  
-  layout 'main'
 
+  layout "main"
+  
   private
 
   def init_cache(controller_name = request.parameters["controller"])
@@ -76,8 +76,6 @@ class UsersController < ApplicationController
 
   public
 
-  def initialize
-  end
 
   # GET /users
   # GET /users.xml
