@@ -48,7 +48,7 @@
   -khtml-border-radius: 50%;
   -webkit-border-radius: 50px;
 
-  background: url('../images/gradientx40.png') repeat-x #fff;
+  background: url('gradientx40.png') repeat-x #fff;
 
 /*  float:left;*/
   border:2px solid #999;
@@ -58,7 +58,7 @@
 }
 
 #webyast-toolbar-container .home-icon:hover {
-  background: url('../images/gradientx60.png') repeat-x #ddd; 
+  background: url('gradientx60.png') repeat-x #ddd; 
   border:2px solid  #1E90FF;
 }
 
@@ -202,7 +202,7 @@
 /*}*/
 
 /*.action_links a:hover {*/
-/*/*   background:url('/images/gradientx40.png') repeat-x #3494f2; */*/
+/*/*   background:url('gradientx40.png') repeat-x #3494f2; */*/
 /*  cursor:pointer;*/
 /*  background: #888;*/
 /*  background: -moz-linear-gradient(center top , #bbb 10%, #aaa 30%, #999 51%,  #888 100%) repeat scroll 0 0 transparent;*/

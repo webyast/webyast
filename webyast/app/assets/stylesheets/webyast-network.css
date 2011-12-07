@@ -21,7 +21,7 @@
 #autoMode, #manualMode {
   padding:2px 5px;
   border:1px solid #a0a0a0;
-  background: url("/images/gradientx40.png") repeat-x scroll 0 0 #fff;
+  background: url("gradientx40.png") repeat-x scroll 0 0 #fff;
   vertical-align:middle;
 
   color: #222;
@@ -48,7 +48,7 @@
   -webkit-box-shadow: inset 0px 0px 1px #000;
 }
 
-#autoMode:hover,  #manualMode:hover { background: url("/images/gradientx40.png") repeat-x scroll 0 0 #eee;  }
+#autoMode:hover,  #manualMode:hover { background: url("gradientx40.png") repeat-x scroll 0 0 #eee;  }
 #autoMode.active:hover, #manualMode.active:hover {
   font-weight:bold;
   background: -moz-linear-gradient(center bottom, #39A33A 0%, #71D048 100%);

@@ -89,7 +89,7 @@
   cursor:pointer;
 
   color:#444;
-  background:url('/images/gradientx40.png') repeat-x #fff;
+  background:url('gradientx40.png') repeat-x #fff;
   text-shadow: 0 1px 0 rgba(255,255,255,0.7);
 }
 
@@ -128,7 +128,7 @@
 }
 
 #updates_panel button.left:hover, #updates_panel button.middle:hover, #updates_panel button.right:hover{
-  background: url("/images/gradientx40.png") #eee;
+  background: url("gradientx40.png") #eee;
 }
 
 #updates_panel button.middle {

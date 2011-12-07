@@ -5,6 +5,16 @@ GIT
     devise_unix2_chkpwd_authenticatable (0.1)
       devise (> 1.1.0)
 
+PATH
+  remote: /home/src/rails/webyast3/plugins/roles
+  specs:
+    webyast-roles (0.1)
+
+PATH
+  remote: /home/src/rails/webyast3/plugins/users
+  specs:
+    webyast-users (0.1)
+
 GEM
   remote: http://rubygems.org/
   specs:
@@ -39,6 +49,7 @@ GEM
     arel (2.2.1)
     bcrypt-ruby (3.0.1)
     builder (3.0.0)
+    cancan (1.6.7)
     columnize (0.3.4)
     countries_and_languages (0.1.2)
       i18n_data
@@ -115,6 +126,7 @@ GEM
       activesupport (~> 3.0)
       railties (~> 3.0)
       rspec (~> 2.7.0)
+    ruby-dbus (0.7.0)
     ruby-debug (0.10.4)
       columnize (>= 0.1)
       ruby-debug-base (~> 0.10.4.0)
@@ -140,6 +152,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  cancan
   countries_and_languages (>= 0.1.2)
   devise
   devise_unix2_chkpwd_authenticatable!
@@ -152,5 +165,8 @@ DEPENDENCIES
   rails (= 3.1.1)
   rspec (>= 2)
   rspec-rails (>= 2)
+  ruby-dbus
   ruby-debug
   sqlite3-ruby
+  webyast-roles!
+  webyast-users!

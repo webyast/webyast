@@ -25,7 +25,7 @@
   padding:2px 5px;
   border:1px solid #a0a0a0;
   vertical-align:middle;
-  background: url("/images/gradientx40.png") repeat-x scroll 0 0 #fff;
+  background: url("gradientx40.png") repeat-x scroll 0 0 #fff;
   color: #222;
   cursor: pointer;
   text-shadow: 0px 1px 0px #fff;
@@ -36,7 +36,7 @@
   -webkit-box-shadow: 0px 0px 1px #666;
 }
 
-#on:hover, #off:hover { background: url("/images/gradientx40.png") repeat-x scroll 0 0 #eee;  }
+#on:hover, #off:hover { background: url("gradientx40.png") repeat-x scroll 0 0 #eee;  }
 #off { border-left:0px; margin-left:-5px; }
 
 #on.active, #off.active {
