@@ -23,6 +23,11 @@ module Webyast
     # remove quiet_assets initializer when this works
     # issue #2639
     #config.assets.logger = nil
+
+    #This is needed that the Worker can load the correct notifier.workers.js
+    paths.public = "#{paths.public.paths}/../app/assets"
+    paths.public.javascripts = "#{paths.public.paths}/javascripts"
+
   end
 end
 
@@ -31,4 +36,6 @@ end
 FastGettext.add_text_domain 'webyast-base', :path => 'locale'
 FastGettext.default_text_domain = 'webyast-base'
 FastGettext.default_available_locales = ["ar","cs","de","es","en_US","fr","hu","it","ja","ko","nl","pl","pt_BR","ru","sv","zh_CN","zh_TW"]
+
+
 
