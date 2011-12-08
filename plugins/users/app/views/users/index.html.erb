@@ -215,7 +215,7 @@
         </div>
 
         <div class='user-content' style="display:none">
-          <% form_for(user, :url => { :action => "update" }, :html => { :method => :put, :id => "form_"+user.uid, :onsubmit => "form_handler('#{user.uid}')", :autocomplete => :off } ) do |f| %>
+          <%= form_for(user, :url => { :action => "update" }, :html => { :method => :put, :id => "form_"+user.uid, :onsubmit => "form_handler('#{user.uid}')", :autocomplete => :off } ) do |f| %>
             <%= render :partial => "user_form", :locals =>{ :f => f, :disabled => disabled, :user => user, :new => false } %>
             <script language="javascript">
                addTabsNavigation(".tabs_<%= user.uid %>", "span");
