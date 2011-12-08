@@ -19,13 +19,9 @@
 # you may find current contact information at www.novell.com
 -->
 <% content_for :head do %>
-  <% if JSMIN == true %>
-    <%= javascript_include_tag "min/users-min" -%>
-  <% else %>
-    <%= stylesheet_link_tag "webyast-users" %>
-    <%= javascript_include_tag "users.js" %>
-    <%= javascript_include_tag "select_dialog.js" %>
-  <% end %>
+ <%= stylesheet_link_tag "webyast-users" %>
+ <%= javascript_include_tag "users.js" %>
+ <%= javascript_include_tag "select_dialog.js" %>
 
 <!-- if no groups, disable validation-->
 <% if @permissions[:groupsget] != true %>

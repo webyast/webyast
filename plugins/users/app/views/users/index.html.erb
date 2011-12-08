@@ -20,30 +20,26 @@
 -->
 
 <% content_for :head do %>
- <% if false == true %>  
-    <%= javascript_include_tag "min/users-min.js"-%>
-    <%= javascript_include_tag "select_dialog.js" %>
-  <% else %>
-    <%= stylesheet_link_tag "webyast-users" %>
-    <%= stylesheet_link_tag "webyast-plugin-toolbar" %>
-    <%= javascript_include_tag "select_dialog.js" %>
-    <%= javascript_include_tag "jquery.quicksearch.js"-%>
-    <%= javascript_include_tag "users.js" %>
-  <% end %>
+ <%= stylesheet_link_tag "webyast-users" %>
+ <%= stylesheet_link_tag "webyast-plugin-toolbar" %>
+ <%= javascript_include_tag "select_dialog.js" %>
+ <%= javascript_include_tag "jquery.quicksearch.js"-%>
+ <%= javascript_include_tag "users.js" %>
+
  
-<!-- if no groups, disable validation-->
-<% if can? :get, Group %>
-<script language="javascript">
-  function groups_validation(which){ return true; }
-  function def_group_validation(which){ return true; }
-</script>
-<% end %>       
+ <!-- if no groups, disable validation-->
+ <% if can? :get, Group %>
+ <script language="javascript">
+   function groups_validation(which){ return true; }
+   function def_group_validation(which){ return true; }
+ </script>
+ <% end %>       
 
  <style type="text/css">
 
  </style>
 
- <% javascript_tag do %>
+ <%= javascript_tag do %>
   var AUTH_TOKEN = 'authenticity_token=' + encodeURIComponent("<%= escape_javascript form_authenticity_token %>");
   startNotifier({'module':'users', 'AUTH_TOKEN':AUTH_TOKEN}, 1000, 11000);
 
