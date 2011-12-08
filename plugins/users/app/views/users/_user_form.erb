@@ -147,7 +147,7 @@
    <div style="padding:0px 0px;">
    <div class="nav-buttons">
     <div class="hr">&nbsp;</div>
-    <div id="progress_<%= (new ? "" : user.uid) -%>" style="display: none; margin-bottom: 10px"><img src="/images/working.gif" alt="Working"/><span style="vertical-align: 50%; margin-left: 5px">...Wait...</span></div>
+    <div id="progress_<%= (new ? "" : user.uid) -%>" style="display: none; margin-bottom: 10px"><%= image_tag("working.gif", :class => "small-working-icon") %><span style="vertical-align: 50%; margin-left: 5px">...Wait...</span></div>
        <%= submit_tag _("Save"), :onclick=>"return user_validation(this, '"+ (new ? "" : user.uid) +"');", :disabled => disabled  %>
        <% if can?( :delete, User) && !new %>
          <span onclick="delete_handler(this, '#progress_<%= user.uid -%>', '<%= _('Please wait') -%>');">

@@ -20,12 +20,12 @@
 module ViewHelpers::HtmlHelper
 
   def html_edit_link(id, action = :edit)
-    return link_to image_tag("/images/edit-icon.png", :alt => :edit), {:action => action, :id => id}, :onclick=>"$('#progress').show()"
+    return link_to image_tag("edit-icon.png", :alt => :edit), {:action => action, :id => id}, :onclick=>"$('#progress').show()"
   end
 
   # added additional argument to replace message string (see bnc#581153)
     def html_delete_link(id, action = :delete, text = _('Are you sure?'))
-      return link_to image_tag("/images/delete.png", :alt => :delete), {:action => action, :id => id},
+      return link_to image_tag("delete.png", :alt => :delete), {:action => action, :id => id},
         :confirm => text, :method => :delete
     end
 
@@ -274,7 +274,7 @@ EOF_PROGRESS
   # to 'Toto jsou "uvozovky".'
   # (see also https://bugzilla.novell.com/show_bug.cgi?id=604224)
   def jss(s)
-    "\"#{escape_javascript s}\""
+    "\"#{escape_javascript s}\"".html_safe
   end
 
 end

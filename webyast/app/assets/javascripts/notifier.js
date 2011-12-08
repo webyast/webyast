@@ -73,7 +73,7 @@ var Notifier = function(params) {
     window.setInterval(function() { AJAXcall(params); },5000);
   } else {
     //console.log("Web worker is supported")
-    worker = new Worker("/javascripts/notifier.workers.js");
+    worker = new Worker("./notifier.workers.js");
     worker.postMessage(params);
     
     worker.onmessage = function(event) {
