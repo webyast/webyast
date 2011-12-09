@@ -17,7 +17,7 @@
 #++
 
 class NotifierController < ApplicationController
-  before_filter :login_required
+
   layout nil
 
   # GET /notifier
