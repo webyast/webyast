@@ -24,7 +24,7 @@
 require 'yaml'
 require 'exceptions'
 require 'base_model/base'
-require 'paths'
+require 'webyast/paths'
 
 # = Role model
 # Provides information and editing of roles for webyast.
@@ -40,14 +40,14 @@ attr_serialized :users, :permissions, :name
 
 # Path to roles definition file which contain role and its permissions
 unless Rails.env.development?
-  ROLES_DEF_PATH = File.join Paths::VAR, "roles", "roles.yml"
+  ROLES_DEF_PATH = File.join WebYaST::Paths::VAR, "roles", "roles.yml"
 else
   ROLES_DEF_PATH = File.join(File.expand_path("../../../package", __FILE__), "roles.yml")
 end
 
 # Path to role assign file which contain role and users which has the role
 unless Rails.env.development?
-  ROLES_ASSIGN_PATH = File.join Paths::VAR, "roles", "roles_assign.yml"
+  ROLES_ASSIGN_PATH = File.join WebYaST::Paths::VAR, "roles", "roles_assign.yml"
 else
   ROLES_ASSIGN_PATH = File.join(File.expand_path("../../../package", __FILE__), "roles_assign.yml")
 end

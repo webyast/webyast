@@ -44,7 +44,7 @@ module YaST
   # raised.
   #
   class ConfigFile
-    CONFIG_DEFAULT_LOCATION=Paths::CONFIG
+    CONFIG_DEFAULT_LOCATION=WebYaST::Paths::CONFIG
 
     # Error raised when a configuration file
     # or resource is not found
