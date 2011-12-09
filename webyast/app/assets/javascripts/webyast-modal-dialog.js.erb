@@ -45,9 +45,9 @@
       mwindow: 'modalWindow',
       mclose: 'modalWindowClose',
 
-      warning:  '<img src="../images/dialog-warning.png">',
-      loading:  '<img id="modal_loading" src="../images/loading.gif">',
-      info:  	'<img src="../images/info.png">',
+      warning:  '<img src="<%= asset_path('dialog-warning.png') %>">',
+      loading:  '<img id="modal_loading" src="<%= asset_path('loading.gif') %>">',
+      info:  	'<img src="<%= asset_path('info.png') %>">',
 
       message: 'Please wait',
       simple: false,
@@ -91,11 +91,11 @@
 	      });
 
 	      $(close).live('mouseenter', function(){
-	        $(this).attr('src' , 'images/close.png');
+	        $(this).attr('src' , '<%= asset_path("close.png") %>');
 	      });
 
 	      $(close).live('mouseleave', function(){
-	        $(this).attr('src' , 'images/close-g.png');
+	        $(this).attr('src' , '<%= asset_path("close-g.png") %>');
 	      });
       })
     },
@@ -122,7 +122,7 @@ popup = function(image, message) {
   self.centering(defaults.mwindow);
   
   if($(image).attr('id') == 'modal_loading') {
-    setTimeout("$('#modal_loading').attr('src', '../images/loading.gif');",100);
+    setTimeout("$('#modal_loading').attr('src', '<%= asset_path("loading.gif") %>');",100);
   }
 }
 
@@ -146,7 +146,7 @@ dialog = function(message, form) {
     $dialog += '</div>';
   $dialog += '</div>';
 
-  var $mclose = $('<img id="' + defaults.mclose +'"/>').attr('src', '../images/close-g.png');
+  var $mclose = $('<img id="' + defaults.mclose +'"/>').attr('src', '<%= asset_path("close-g.png") %>');
 
   $('body').before($dialog);
   $('#'+defaults.mwindow).append($mclose);

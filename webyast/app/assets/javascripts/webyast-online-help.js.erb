@@ -52,9 +52,9 @@ $(document).ready(function() {
 
     if(webyastModules[module] !== undefined) {
       $('body').append('<div id="onlineHelpModalShade"/>');
-      $('body').after('<span id="onlineHelpContent"><span id="onlineHelpLoading"><img id="onlineHelpSpinner" src="images/wait.gif"><span>Please wait ...</span></span></span>');
+      $('body').after('<span id="onlineHelpContent"><span id="onlineHelpLoading"><img id="onlineHelpSpinner" src="<%= asset_path('wait.gif') %>"><span>Please wait ...</span></span></span>');
 
-      var close = $('<img id="closeOnlineHelpDialog" />').attr('src', 'images/close-g.png');
+      var close = $('<img id="closeOnlineHelpDialog" />').attr('src', '<%= asset_path("close-g.png") %>');
        
       setTimeout(function(){
         $.get(url, function(data){
@@ -68,11 +68,11 @@ $(document).ready(function() {
       });
 
       $('#closeOnlineHelpDialog').live('mouseover', function(){
-        $(this).attr('src', 'images/close.png');
+        $(this).attr('src', '<%= asset_path("close.png") %>');
       });
       
       $('#closeOnlineHelpDialog').live('mouseout', function(){
-        $(this).attr('src', 'images/close-g.png');
+        $(this).attr('src', '<%= asset_path("close-g.png") %>');
       });
         
       $('a.xref').live('click', function(event){
