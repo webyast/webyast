@@ -25,8 +25,7 @@ module Webyast
     #config.assets.logger = nil
 
     #This is needed that the Worker can load the correct notifier.workers.js
-    paths.public = "#{paths.public.paths}/../app/assets"
-    paths.public.javascripts = "#{paths.public.paths}/javascripts"
+    paths.public.javascripts = "#{paths.public.paths}/../app/assets/javascripts"
 
   end
 end
