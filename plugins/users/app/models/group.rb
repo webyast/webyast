@@ -28,7 +28,7 @@ class Group < BaseModel::Base
   attr_accessor :gid             # group number
   attr_accessor :old_cn          # for group identification when changing group name
   attr_accessor :default_members # list of user names, which have this group as default
-  attr_accessor_with_default :members,[]         # list of users explicitaly added into this group
+  attr_writer   :members         # list of users explicitaly added into this group
   attr_accessor :group_type      # type of the group ... system or local # RORSCAN_ITL
   attr_accessor :members_string
 
@@ -39,6 +39,10 @@ class Group < BaseModel::Base
   validates_format_of       :cn, :with => /[a-z]+/
   validates_format_of       :old_cn, :with => /[a-z]+/
   validates_numericality_of :gid
+
+  def members
+    @members || []
+  end
 
 private
 
