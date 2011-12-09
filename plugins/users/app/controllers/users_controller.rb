@@ -255,7 +255,7 @@ class UsersController < ApplicationController
       respond_to do |format|
         format.xml  { render :show }
         format.json { render :show }
-        format.html { flash[:notice] = _("User <i>%s</i> was successfully created.") % @user.uid
+        format.html { flash[:notice] = _("User %s was successfully created.") % @user.uid
                       redirect_to :action => "index"
                     }
       end
@@ -300,7 +300,7 @@ class UsersController < ApplicationController
       respond_to do |format|
         format.xml  { render :show }
         format.json { render :show }
-        format.html { flash[:notice] = _("User <i>%s</i> was successfully updated.") % @user.uid
+        format.html { flash[:notice] = _("User %s was successfully updated.") % @user.uid
                       redirect_to :action => "index"
                     }
       end
@@ -319,7 +319,7 @@ class UsersController < ApplicationController
       respond_to do |format|
         format.xml  { render ErrorResult.error(404, 2, error.message) }
         format.json { render ErrorResult.error(404, 2, e.message) }
-        format.html { flash[:error] = _("Error: Could not remove user <i>%s</i>.") % @user.uid 
+        format.html { flash[:error] = _("Error: Could not remove user %s.") % @user.uid 
                       redirect_to :action => "index"
                     }
        end
@@ -328,7 +328,7 @@ class UsersController < ApplicationController
     respond_to do |format|
       format.xml  { render :show }
       format.json { render :show }
-      format.html { flash[:notice] = _("User <i>%s</i> was successfully removed.") % @user.uid
+      format.html { flash[:notice] = _("User %s was successfully removed.") % @user.uid
                     redirect_to :action => "index"
                   }
       end
