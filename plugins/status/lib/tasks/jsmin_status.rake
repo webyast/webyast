@@ -20,14 +20,14 @@
 #++
 
 require "tempfile"
-JSCOMPRESSOR = File.join(RAILS_ROOT, '/lib/jsmin.rb')
+JSCOMPRESSOR = File.join(Rails.root, '/lib/jsmin.rb')
 
 namespace :js do
   javascripts = ['jqplot.categoryAxisRenderer.js', "jqplot.dateAxisRenderer.js", "jqplot.canvasTextRenderer.js", "jqplot.cursor.js"]
 
-  Dir.chdir(File.join(RAILS_ROOT, 'public', 'javascripts', 'plugin')) do    
+  Dir.chdir(File.join(Rails.root, 'public', 'javascripts', 'plugin')) do    
     javascripts.map! {|f| File.join(Dir.pwd, f)}
-    javascripts.unshift(File.join(RAILS_ROOT, 'public', 'javascripts', 'jquery.jqplot.js'))
+    javascripts.unshift(File.join(Rails.root, 'public', 'javascripts', 'jquery.jqplot.js'))
     file 'status-min.js' => javascripts do | f |
       $dir = File.join(File.dirname(__FILE__), '/../../public/javascripts/min/')
       mkpath($dir);
