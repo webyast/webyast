@@ -25,6 +25,3 @@ Gem::Specification.new do |s|
 end
 
 
-File.open() do |f|
-  f.write
-end

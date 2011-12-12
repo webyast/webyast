@@ -3,7 +3,7 @@ $: << File.join(File.dirname(__FILE__), "lib")
 require "bundler/gem_tasks"
 require 'rake/testtask'
 
-task :default => [:compile, :test, :package]
+task :default => [:compile, :test, :build, :package]
 
 gem 'rake-compiler', '>= 0.4.1'
 require 'rake/extensiontask'
