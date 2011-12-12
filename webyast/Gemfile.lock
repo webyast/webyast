@@ -6,12 +6,12 @@ GIT
       devise (> 1.1.0)
 
 PATH
-  remote: /local/lslezak/GIT/webyast/webyast/plugins/roles
+  remote: /local/lslezak/GIT/webyast/plugins/roles
   specs:
     webyast-roles (0.1)
 
 PATH
-  remote: /local/lslezak/GIT/webyast/webyast/plugins/users
+  remote: /local/lslezak/GIT/webyast/plugins/users
   specs:
     webyast-users (0.1)
 
