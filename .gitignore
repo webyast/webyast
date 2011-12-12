@@ -5,4 +5,3 @@ coverage
 nbproject
 plugins/*/package/www.tar.bz2
 pot
-locale
