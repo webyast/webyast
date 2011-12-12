@@ -25,6 +25,8 @@ gem 'ruby-debug'
 gem 'cancan'
 
 #gem 'ruby-dbus', :git => 'https://github.com/mvidner/ruby-dbus.git'
+gem 'polkit1', :path => File.expand_path("../../ruby-polkit1", __FILE__)
+gem 'inifile'
 gem 'ruby-dbus'
 
 gem 'webyast-users', :path => File.expand_path("../../plugins/users", __FILE__)
