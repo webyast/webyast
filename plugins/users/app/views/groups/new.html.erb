@@ -18,14 +18,10 @@
 # To contact Novell about this file by physical or electronic mail,
 # you may find current contact information at www.novell.com
 -->
-
-  <% if JSMIN == true %>
-    <%= javascript_include_tag "min/users-min.js"-%>
-  <% else %>
-    <%= stylesheet_link_tag "webyast-users" %>
-    <%= javascript_include_tag "users.js" %>
-    <%= javascript_include_tag "select_dialog.js" %>
-  <% end %>
+<% content_for :head do %>
+  <%= stylesheet_link_tag "webyast-users" %>
+  <%= javascript_include_tag "users.js" %>
+  <%= javascript_include_tag "select_dialog.js" %>
 
   <% if ! can? :get, User %>
     <script language="javascript">
@@ -83,7 +79,7 @@
   });  
 </script>
 <%
- disabled = ! ((can? :add, Group && @adding) || (can? :modify, Group && !@adding)) %>
+ disabled = ! (((can? :add, Group) && @adding) || ((can? :modify, Group) && !@adding)) %>
 
 <!-- <div class='plugin-icon'><img alt="yast-groups" src='/icons/yast-groups.png' alt="groups module"/>
   <%=_("Groups") + header_spacer %><span id="questionMark">?</span>

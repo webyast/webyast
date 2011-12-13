@@ -23,8 +23,6 @@ include ApplicationHelper
 
 class GroupsController < ApplicationController
   
-#  before_filter :check_read_permission, :only => [:index,:show]
-#  before_filter :check_write_permission, :only => [:create, :update, :new, :edit]
   layout 'main'
 
   # Initialize GetText and Content-Type.
@@ -32,14 +30,6 @@ class GroupsController < ApplicationController
 
 private
 
-#  def permission_read
-#    @permissions = {}
-#    @permissions[:groupmodify] = yapi_perm_granted? "users.groupmodify"
-#    @permissions[:usersget] = yapi_perm_granted? "users.usersget"
-#    @permissions[:groupadd] = yapi_perm_granted? "users.groupadd"
-#    @permissions[:groupdelete] = yapi_perm_granted? "users.groupdelete"
-#  end
-#
   def validate_group_id( id = params[:id] )
     if id.blank?
       respond_to do |format|
@@ -125,17 +115,6 @@ private
     end
   end
 
-#  def check_read_permission
-#    yapi_perm_check "users.groupsget"
-#    yapi_perm_check "users.groupget"
-#    permission_read
-#  end
-
-#  def check_write_permission
-#    yapi_perm_check "users.groupmodify"
-#    yapi_perm_check "users.groupadd"
-#    permission_read
-#  end
 
   # log Group.find error and provide matching ErrorResult
   def group_not_found gid
@@ -148,6 +127,7 @@ public
   # GET /groups/users
   # GET /groups/users.xml
   def show
+    authorize! :get, Group
     # try to find the grouplist, and 404 if it does not exist
     @group = Group.find params[:id]
     if @group.nil?
@@ -163,7 +143,6 @@ public
   # GET /groups.xml
   def index
     authorize! :get, Group
-    # read permissions were checked in a before filter
     @groups = Group.find_all
     Rails.logger.error "No groups found." unless @groups
     respond_to do |format|
@@ -190,12 +169,10 @@ public
         @all_sys_users_string = ""
         @users = []
         @sys_users = []
-#        if @permissions[:usersget] == true
-          @users     = User.find_all({ :attributes => "uid"})
-          @sys_users = User.find_all({ "attributes"=>"cn,uidNumber,uid", 
-                                       "type"=>"system", 
-                                       "index"=>["s", "uid"]} )
-#        end
+        @users     = User.find_all({ :attributes => "uid"})
+        @sys_users = User.find_all({ "attributes"=>"cn,uidNumber,uid", 
+                                     "type"=>"system", 
+                                     "index"=>["s", "uid"]} )
         @users.each do |user|
           if @all_users_string.blank?
             @all_users_string = user.uid
@@ -217,6 +194,7 @@ public
   end
 
   def new
+    authorize! :add, Group
     @group = Group.new
 
     # add default properties
@@ -230,7 +208,7 @@ public
     @group.load(defaults)
     @adding = true
     @all_users_string = ""
-    users = User.find(:all) if @permissions[:usersget]
+    users = User.find(:all) if can? :get, User
     users.each do |user|
       if @all_users_string.blank?
         @all_users_string = user.uid
@@ -278,6 +256,7 @@ public
 
   # PUT /groups/
   def create
+    authorize :add, Group
     validate_group_params( :new ) or return
     validate_group_name( :new ) or return
     group_params = params[:group] || {}
@@ -314,7 +293,7 @@ public
 
   # DELETE /groups/users
   def destroy
-    yapi_perm_check "users.groupdelete"
+    authorize! :delete, Group
     validate_group_id or return
 
     @group = Group.find(params[:id])
