@@ -24,7 +24,10 @@ include ApplicationHelper
 class UsersController < ApplicationController
 
   layout "main"
-  
+
+  # Initialize GetText and Content-Type.
+  FastGettext.add_text_domain 'webyast-users', :path => 'locale'
+
   private
 
   def init_cache(controller_name = request.parameters["controller"])

@@ -28,7 +28,7 @@ class GroupsController < ApplicationController
   layout 'main'
 
   # Initialize GetText and Content-Type.
-  # FIXME init_gettext "webyast-users"
+  FastGettext.add_text_domain 'webyast-users', :path => 'locale'
 
 private
 
