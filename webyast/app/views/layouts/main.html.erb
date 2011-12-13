@@ -27,7 +27,7 @@
   <![endif]-->
   <%= stylesheet_link_tag "application" %>
   <%= javascript_include_tag "application" %>
-  <%= csrf_meta_tag %>
+  <%= csrf_meta_tags %>
 
   <title><%= _("WebYaST") %></title>
 
@@ -81,7 +81,7 @@
 
 <!--      <p>I18n Locale: <% I18n.locale%> ---- Gettext Locale: <%= FastGettext.locale %> <%= Rails.root %></p> -->
 
-      <% if user.blank? %>
+      <% if !account_signed_in? %>
         <span id="userbar">
           <span class="userbar-icon" style=" text-align:center;">
             <span class="language-icon">
