@@ -19,6 +19,8 @@
 # you may find current contact information at www.novell.com
 -->
 
+<%= content_for :head do %>
+
 <%= javascript_include_tag :defaults %>
 
     <%= stylesheet_link_tag "webyast-services" %>
@@ -26,7 +28,7 @@
     <%= javascript_include_tag "jquery.quicksearch.js"-%>
 
 
-<% javascript_tag do %>
+<%= javascript_tag do %>
   var AUTH_TOKEN = 'authenticity_token=' + encodeURIComponent("<%= escape_javascript form_authenticity_token %>");
   startNotifier({'module':'services', 'AUTH_TOKEN':AUTH_TOKEN}, 1000, 11000);
 $(document).ready(function() {
@@ -174,8 +176,8 @@ function enable_buttons (s) {
 
 <% end %>
 
-<% content_for :before_script do %>
-  <% javascript_tag do %>
+<%= content_for :before_script do %>
+  <%= javascript_tag do %>
   $(document).ready(function(){
     $(".accordion").accordion({
        autoHeight : false,
@@ -190,6 +192,7 @@ function enable_buttons (s) {
     $(".accordion").accordion('activate',false);
   });
   <% end %>
+<% end %>
 <% end %>
 
 <!-- borrowed from users, until it is public -->
@@ -261,7 +264,7 @@ function enable_buttons (s) {
             <span style="display: none"><%= h(service.name)+h(service.summary) -%></span>
           </p>
 
-          <img src="/images/working.gif" class="small-working-icon" id="service_progress_<%=h service.name%>" style="display: none" alt='working...'/>
+          <img src="/assets/working.gif" class="small-working-icon" id="service_progress_<%=h service.name%>" style="display: none" alt='working...'/>
 
 
           <span class='service_status' id='service_status_<%= h service.name%>'>
