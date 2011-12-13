@@ -31,6 +31,7 @@ gem 'ruby-dbus'
 
 gem 'webyast-users', :path => File.expand_path("../../plugins/users", __FILE__)
 gem 'webyast-roles', :path => File.expand_path("../../plugins/roles", __FILE__)
+gem 'webyast-services', :path => File.expand_path("../../plugins/services", __FILE__)
 
 group :development do
   # needed for rake gettext:find

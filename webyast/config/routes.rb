@@ -8,6 +8,7 @@ Webyast::Application.routes.draw do
   resource :vendor_settings
 
   mount WebYaST::UsersEngine => '/'
+  mount WebYaST::ServicesEngine => '/'
 
   #root :to => 'controlpanel#index'
   root :to => 'controlpanel#index'

@@ -11,7 +11,12 @@ PATH
     webyast-roles (0.1)
 
 PATH
-  remote: /home/src/rails/webyast3/plugins/users
+  remote: /data/local/git/webyast3/webyast/plugins/services
+  specs:
+    webyast-services (0.1)
+
+PATH
+  remote: /data/local/git/webyast3/webyast/plugins/users
   specs:
     webyast-users (0.1)
 
@@ -182,4 +187,5 @@ DEPENDENCIES
   ruby_parser
   sqlite3-ruby
   webyast-roles!
+  webyast-services!
   webyast-users!

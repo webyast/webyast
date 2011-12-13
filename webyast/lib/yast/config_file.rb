@@ -17,6 +17,7 @@
 #++
 
 require 'yaml'
+require 'webyast/paths'
 
 module YaST
   #
