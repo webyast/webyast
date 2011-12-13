@@ -6,7 +6,7 @@ GIT
       devise (> 1.1.0)
 
 PATH
-  remote: /home/src/rails/webyast3/plugins/roles
+  remote: /data/local/git/webyast3/webyast/plugins/roles
   specs:
     webyast-roles (0.1)
 
@@ -21,7 +21,7 @@ PATH
     webyast-users (0.1)
 
 PATH
-  remote: /home/src/rails/webyast3/ruby-polkit1
+  remote: /data/local/git/webyast3/webyast/ruby-polkit1
   specs:
     polkit1 (0.0.2)
       inifile

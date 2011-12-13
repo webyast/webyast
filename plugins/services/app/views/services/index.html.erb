@@ -201,7 +201,7 @@ function enable_buttons (s) {
 <div class="plugin-content plugin-border">
   <div class="plugin-header">
     <div class="left">
-      <label class="plugin-icon-container"><img class="plugin-icon" src="/icons/repositories.png"></label>
+      <label class="plugin-icon-container"><%= image_tag("system_services.png", :class=>"plugin-icon") %></label>
       <label class="plugin-name"><%= _("System Services") %></label>
       <span id="questionMark" style="margin:0px 5px; float:right;">?</span>
     </div>
@@ -226,7 +226,7 @@ function enable_buttons (s) {
     
     <label for="filter">
       <%=_("Filter services")%>
-      <% image_tag("/images/filter.png")%>
+      <%= image_tag("filter.png")%>
     </label>
      
     <%= select_tag "filter_services", options_for_select([
