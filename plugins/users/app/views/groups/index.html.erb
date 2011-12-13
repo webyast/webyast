@@ -111,7 +111,7 @@
 <div id="groups_index" class="plugin-content plugin-border">
   <div class="plugin-header">
     <div class="left">
-      <label class="plugin-icon-container"><img class="plugin-icon" src="/icons/groups.png"></label>
+      <label class="plugin-icon-container"><%= image_tag("groups.png", :class=>"plugin-icon") %></label>
       <label class="plugin-name"><%=_("Groups")%></label>
       <span id="questionMark" class="right" style="float:right; margin:0px 5px;">?</span>
     </div>
@@ -129,9 +129,9 @@
 
     <span id="action_link_container">
       <% if can? :add, Group %>
-        <%=link_to image_tag("/icons/groups.png", :class=>"action_link_icon") + _("New Group"), :action => :new %>
+        <%=link_to image_tag("groups.png", :class=>"action_link_icon") + _("New Group"), :action => :new %>
       <% end %>
-        <%=link_to image_tag("/icons/users.png", :class=>"action_link_icon") +  _("Manage Users"), :controller => "users" %>
+        <%=link_to image_tag("users.png", :class=>"action_link_icon") +  _("Manage Users"), :controller => "users" %>
     </span>
   </div>
 
