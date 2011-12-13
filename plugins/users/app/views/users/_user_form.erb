@@ -66,7 +66,7 @@
 	      <%= f.text_field :grp_string, :disabled => disabled, :onkeyup => "groups_validation(this);", :class => "grp-string" %>
 	  </td>
 	  <td>
-	    <% if can? :get, Group %>
+	    <% if can? :groupget, User %>
 		<%= 
 		    action = (disabled) ? "" : "select_groups_open('"+(new ? "" : user.uid)+"');return false;"
 		    link_to _("Manage Groups"), {}, :href => "#", :onClick => action, :class => "button", :disabled => disabled
@@ -85,7 +85,7 @@
             <%= f.text_field :groupname, :disabled => disabled, :class => "groupname", :onkeyup => "def_group_validation(this);" %>
 	  </td>
 	  <td>
-	  <% if can? :get, Group %>
+	  <% if can? :groupget, User %>
 	      <%= 
 		  action = (disabled) ? "" : "select_default_group_open('"+user.uid.to_s+"');return false;"
 		  link_to _("Select Default Group"), {}, :href => "#", :onClick => action, :class => "button", :disabled => disabled
@@ -149,7 +149,7 @@
     <div class="hr">&nbsp;</div>
     <div id="progress_<%= (new ? "" : user.uid) -%>" style="display: none; margin-bottom: 10px"><%= image_tag("working.gif", :class => "small-working-icon") %><span style="vertical-align: 50%; margin-left: 5px">...Wait...</span></div>
        <%= submit_tag _("Save"), :onclick=>"return user_validation(this, '"+ (new ? "" : user.uid) +"');", :disabled => disabled  %>
-       <% if can?( :delete, User) && !new %>
+       <% if can?( :userdelete, User) && !new %>
          <span onclick="delete_handler(this, '#progress_<%= user.uid -%>', '<%= _('Please wait') -%>');">
            <%= link_to _("Delete"),
                        {:action => 'destroy', :id => user.uid},

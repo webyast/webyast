@@ -134,7 +134,7 @@ class UsersController < ApplicationController
             user.roles_string = my_roles.join(",")
             @all_roles_string = all_roles.join(",")
             @groups = []
-            if can? :get, Group
+            if can? :groupsget, User
               @groups = Group.find :all
             end
             grps_list=[]
@@ -189,7 +189,7 @@ class UsersController < ApplicationController
     @all_users_string = all_users
 
     @groups = []
-    if can? :get, Group
+    if can? :groupsget, User
       @groups = Group.find :all
     end
     grp_list=[]

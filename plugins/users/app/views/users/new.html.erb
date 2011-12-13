@@ -24,7 +24,7 @@
  <%= javascript_include_tag "select_dialog.js" %>
 
 <!-- if no groups, disable validation-->
-<% if can? :get, Group %>
+<% if can? :groupget, User %>
 <script language="javascript">
 function groups_validation(which){ return true; }
 function def_group_validation(which){ return true; }
@@ -195,7 +195,7 @@ function def_group_validation(which){ return true; }
   <% end %>
 <% end %>
 
-<% disabled =  cannot?(:add, User) %>
+<% disabled =  cannot?(:useradd, User) %>
 <!-- <div class='plugin-icon'><img src='/icons/yast-users.png' alt="users module"/>
   <%_("Users") + header_spacer + _("Add new user")%>
 </div>

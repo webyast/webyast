@@ -28,7 +28,7 @@
 
  
  <!-- if no groups, disable validation-->
- <% if can? :get, Group %>
+ <% if can? :groupsget, User %>
  <script language="javascript">
    function groups_validation(which){ return true; }
    function def_group_validation(which){ return true; }
@@ -195,7 +195,7 @@
     </form>
 
     <span id="action_link_container">
-      <% if can? :add, User %>
+      <% if can? :useradd, User %>
         <%=link_to image_tag("users.png", :class=>"action_link_icon") +  _("New User"), :action => :new %>
       <% end %>
         <%=link_to image_tag("groups.png", :class=>"action_link_icon") +  _("Manage Groups"), :controller => "groups" %>
@@ -205,7 +205,7 @@
   <div style="clear:both; overflow:hidden;"></div>
 
   <div id="users" class="accordion">
-    <% disabled = cannot?(:modify, User) %>
+    <% disabled = cannot?(:usermodify, User) %>
     <% for user in @users %>
       <div class="list-fieldset">
         <div class="list-fieldset-header">
