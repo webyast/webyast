@@ -232,10 +232,10 @@ public
     Rails.logger.error "Cannot update group '#{@group.cn}' (#{@group.inspect}): #{result}" unless result.blank?
     respond_to do |format|
       format.html { unless result.blank?
-                      flash[:error] = _("Cannot update group <i>%s</i>") % @group.cn
+                      flash[:error] = (_("Cannot update group <i>%s</i>") % @group.cn).html_safe
                       render :edit
                     else
-                      flash[:message] = _("Group <i>%s</i> has been updated.") % @group.cn 
+                      flash[:message] = (_("Group <i>%s</i> has been updated.") % @group.cn ).html_safe
                       redirect_to :action => :index 
                     end
                   }
@@ -269,10 +269,10 @@ public
     Rails.logger.error "Cannot create group '#{@group.cn}': #{result}" unless result.blank?
     respond_to do |format|
       format.html { unless result.blank?
-                      flash[:error] = _("Cannot create group <i>%s</i>") % @group.cn
+                      flash[:error] = (_("Cannot create group <i>%s</i>") % @group.cn).html_safe
                       redirect_to :action => :new
                     else
-                      flash[:message] = _("Group <i>%s</i> has been added.") % @group.cn 
+                      flash[:message] = (_("Group <i>%s</i> has been added.") % @group.cn ).html_safe
                       redirect_to :action => :index 
                     end
                   }
@@ -307,9 +307,9 @@ public
     Rails.logger.error "Cannot destroy group '#{@group.cn}': #{result}" unless result.blank?
     respond_to do |format|
       format.html { unless result.blank?
-                      flash[:error] = _("Cannot remove group <i>%{name}</i>: %{result}") % {:name => @group.cn, :result => result}
+                      flash[:error] = (_("Cannot remove group <i>%{name}</i>: %{result}").to_str % {:name => @group.cn, :result => result}).html_safe
                     else
-                      flash[:message] = _("Group <i>%s</i> has been deleted.") % @group.cn 
+                      flash[:message] = (_("Group <i>%s</i> has been deleted.") % @group.cn ).html_safe
                     end
                     redirect_to :action => :index 
                   }
