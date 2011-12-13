@@ -139,6 +139,7 @@
 
   <div class='pad1_2em'>
     <div id="groups" class="accordion">
+      <% disabled = cannot?(:modify, Group) %>
       <% for group in @groups %>
         <div class="list-fieldset">
           <div class="list-fieldset-header">
@@ -151,15 +152,15 @@
             <%= f.hidden_field :old_cn %>
             <p>
               <div class="label"><%=_("Group Name")%></div>
-              <%= f.text_field :cn, :disabled => false, :class => "required" %>
+              <%= f.text_field :cn, :disabled => disabled, :class => "required" %>
             </p>
             <p>
               <div class="label"><%=_("Group ID")%></div>
-              <%= f.text_field :gid, :disabled => false %>
+              <%= f.text_field :gid, :disabled => disabled %>
             </p>
             <p>
               <div class="label"><%=_("Members")%></div>
-              <%= f.text_field :members_string, :disabled => false, :onkeyup => "members_validation(this);", :class => "members-string"%>
+              <%= f.text_field :members_string, :disabled => disabled, :onkeyup => "members_validation(this);", :class => "members-string"%>
               <% if can? :get, User %>
                 <a href="#" id="manage_members" class="button" onClick="select_users_open('<%= group.old_cn %>');return false;"><%= _("Manage Members") %></a>
               <% end %>
