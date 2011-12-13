@@ -256,7 +256,7 @@ public
 
   # PUT /groups/
   def create
-    authorize :add, Group
+    authorize! :add, Group
     validate_group_params( :new ) or return
     validate_group_name( :new ) or return
     group_params = params[:group] || {}

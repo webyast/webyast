@@ -78,15 +78,11 @@
     select_users_open = select_users_dialog();
   });  
 </script>
-<%
- disabled = ! (((can? :add, Group) && @adding) || ((can? :modify, Group) && !@adding)) %>
 
-<!-- <div class='plugin-icon'><img alt="yast-groups" src='/icons/yast-groups.png' alt="groups module"/>
-  <%=_("Groups") + header_spacer %><span id="questionMark">?</span>
-  <%= _("Add new group") %>
-</div> -->
+<% end %>
 
-<!--<div class="plugin-content"> -->
+<% disabled = ! (((can? :add, Group) && @adding) || ((can? :modify, Group) && !@adding)) %>
+
 <div id="new_group" class="plugin-content plugin-border">
   <%= render :partial => 'shared/missing_write_permissions' if disabled %>
   
@@ -96,9 +92,9 @@
       <label class="plugin-name"><%= _("Groups") + header_spacer + _("Add new group")%></label>
     </div>
   </div>
-  
+
   <div class="clearfix">&nbsp;</div>
-    <% form_for :group, :url => { :action => "create" }, :html => { :id => "form_", :class=>"webyast_form", :autocomplete => :off, :onsubmit => "form_handler('')"}  do |f| %>
+    <%= form_for :group, :url => { :action => "create" }, :html => { :id => "form_", :class=>"webyast_form", :autocomplete => :off, :onsubmit => "form_handler('')"}  do |f| %>
       <%= f.hidden_field :old_cn %>
 
       <fieldset class="webyast_fieldset">
