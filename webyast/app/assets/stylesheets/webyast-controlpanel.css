@@ -331,12 +331,12 @@ div.overview li:hover {
 
 #userbar span.userbar-icon { display: inline-block; color:#444; font-weight:bold; font-size:11px; cursor:default; margin-right:10px;  z-index:2;}
 #userbar span.userbar-icon:before { vertical-align:-50%; line-height:10px; padding-right:1px; }
-#userbar span.home-icon:before { content:url(../images/control-panel-home.png); }
-#userbar span.user-icon:before { content:url(../images/control-panel-user.png); }
+#userbar span.home-icon:before { content:url(control-panel-home.png); }
+#userbar span.user-icon:before { content:url(control-panel-user.png); }
 #userbar span.language-icon {color:#e9e9e9; -moz-border-radius:2px; -webkit-border-radius:2px; padding:2px 3px 2px 6px; text-align:center; margin-right:4px; background-color:#999; text-shadow: 0 0px 0px #444; }
-#userbar span.logout-icon:before { content:url(../images/control-panel-logout.png); }
+#userbar span.logout-icon:before { content:url(control-panel-logout.png); }
 
-span.plugin-shortcut { display:inline-block; background: url(../icons/plugin-icons.png) no-repeat top left;  width: 48px; height: 48px; }
+span.plugin-shortcut { display:inline-block; background: url(plugin-icons.png) no-repeat top left;  width: 48px; height: 48px; }
 span.icon-monitoring{ background-position: 0 0;}
 span.icon-yast-firewall{ background-position: 0 -98px; }
 span.icon-yast-groups{ background-position: 0 -196px; }
