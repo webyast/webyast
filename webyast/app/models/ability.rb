@@ -37,9 +37,19 @@ class Ability
         else
           Rails.logger.debug "Action: #{perm} User: #{user.username} Result: NOT granted"
         end
-      rescue RuntimeError => e
-        Rails.logger.info e
-        raise PolicyKitException.new(e.message, user.username, perm)
+      rescue Exception => e
+        #trying out pluralized class 
+        perm = "org.opensuse.yast.modules.yapi.#{subject_class.to_s.pluralize.downcase}.#{action.to_s.downcase}"          
+        if Permission.dbus_obj.check( [perm], user.username )[0][0] == "yes"
+          Rails.logger.debug "Action: #{perm} User: #{user.username} Result: ok"
+          granted = true
+        else
+          Rails.logger.debug "Action: #{perm} User: #{user.username} Result: NOT granted"
+        end
+        unless granted
+          Rails.logger.info e
+          raise PolicyKitException.new(e.message, user.username, perm)
+        end
       ensure
         YastService.unlock #unlocking for other thread
       end

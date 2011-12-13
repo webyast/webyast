@@ -84,7 +84,7 @@ class UsersController < ApplicationController
   # GET /users.xml
   # GET /users.json
   def index
-    authorize! :get, User
+    authorize! :usersget, User
     if params[:getent] == "1"
       respond_to do |format|
         format.html { render  :xml => GetentPasswd.find.to_xml }
@@ -152,7 +152,7 @@ class UsersController < ApplicationController
   # GET /users/1
   # GET /users/1.xml
   def show
-    authorize! :get, User
+    authorize! :userget, User
     if params[:id].blank?
       render ErrorResult.error(404, 2, "empty parameter") and return
     end
@@ -173,10 +173,10 @@ class UsersController < ApplicationController
     end
   end
 
-  # GET /users/new
-  # GET /users/new.xml
+  # Get /users/new
+  # Get /users/new.xml
   def new
-    authorize! :add, User
+    authorize! :useradd, User
     @user = User.new()
     @all_roles_string = ""
     all_roles=[]
@@ -204,7 +204,7 @@ class UsersController < ApplicationController
 
   # GET /users/1/edit
   def edit
-    authorize! :modify, User
+    authorize! :usermodify, User
     @user = User.find(params[:id])
     @groups = Group.find(:all)
 
@@ -236,7 +236,7 @@ class UsersController < ApplicationController
   # POST /users.xml
   # POST /users.json
   def create
-    authorize! :add, User
+    authorize! :useradd, User
     error = nil
     begin
       @user = User.create(params[:user])
@@ -268,7 +268,7 @@ class UsersController < ApplicationController
   # PUT /users/1
   # PUT /users/1.xml
   def update
-    authorize! :modify, User
+    authorize! :usermodify, User
     error = nil
     begin
       begin
@@ -314,7 +314,7 @@ class UsersController < ApplicationController
   # DELETE /users/1.xml
   # DELETE /users/1.json
   def destroy
-    authorize! :delete, User
+    authorize! :userdelete, User
     begin
       @user = User.find(params[:id])
       @user.destroy
