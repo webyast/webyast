@@ -20,6 +20,7 @@
 #++
 
 #require 'yast/service_resource'
+require 'services_helper'
 
 class ServicesController < ApplicationController
 #  before_filter :login_required
@@ -32,11 +33,8 @@ class ServicesController < ApplicationController
 
   public
 
-  def initialize
-  end
-
   def show_status
-    #yapi_perm_check "services.read"
+    authorize! :read, Service
     
     service = Service.new(params[:id])
     @response = service.read_status({ "custom" => params[:custom]})
@@ -53,7 +51,8 @@ class ServicesController < ApplicationController
   # GET /services
   # GET /services.xml
   def index
-#    @permissions = yapi_perm_granted?("services.execute")
+    authorize! :read, Service
+    @exec_permission = can? :execute, Service
     
     @services = []
     all_services	= []
@@ -79,7 +78,7 @@ class ServicesController < ApplicationController
 
   # PUT /services/1.xml
   def execute
-#    yapi_perm_check "services.execute"
+    authorize! :execute, Service
     
     args = { :execute => params[:id], :custom => params[:custom] }
     service = Service.new(params["service_id"]) 
@@ -111,7 +110,7 @@ class ServicesController < ApplicationController
   # GET /services/1.xml
   # REST API
   def show
-#    yapi_perm_check "services.read"
+    authorize! :read, Service
 
     @service = Service.new(params[:id])
     @service.read_status(params)
@@ -126,7 +125,7 @@ class ServicesController < ApplicationController
   # Execute service command (start or stop).
   # Requires execute permission for services YaPI.
   def update
-#    yapi_perm_check "services.execute" # RORSCAN_ITL
+    authorize :execute, Service
     @service = Service.find params[:id]
     ret = @service.save(params)
     render :xml => ret

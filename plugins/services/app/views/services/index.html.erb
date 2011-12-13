@@ -213,7 +213,7 @@ function enable_buttons (s) {
   <div class="clearfix">&nbsp;</div>
 
 
-  <% unless @permissions %>
+  <% unless can? :execute, Service %>
     <div id="heading" class="pad1_2em">
       <p class="missing-permissions"><%=_("You do not have permission to execute the services.")%></p> <!-- RORSCAN_ITL -->
     </div>
@@ -242,7 +242,7 @@ function enable_buttons (s) {
       ])
     %>
 
-    <%= # FIXME observe_field("filter_services", :function => "select_status(value)")
+    <%= observe_field("filter_services", :function => "select_status(value)")
  %>
   </div>
 
@@ -280,18 +280,18 @@ function enable_buttons (s) {
                   :id => service.name, 
                   :action	=> :show_status, :custom => service.custom 
                 }
-      
-                #FIXME link_to_remote _('(refresh)'), 
-                #  :update => "service_status_#{service.name}", 
-                #  :url => url, 
-                #  :loading  => "disable_buttons('#{service.name}');", 
-                #  :complete => "toggle_service_info ('#{service.name}'); enable_buttons ('#{service.name}');"
+                link_to _('(refresh)'), 
+                  :remote => true,
+                  :update => "service_status_#{service.name}", 
+                  :url => url, 
+                  :loading  => "disable_buttons('#{service.name}');", 
+                  :complete => "toggle_service_info ('#{service.name}'); enable_buttons ('#{service.name}');"
                 %>
           </span>
 
           <p class="service-buttons">
             <!--# do not show enable/disable part for custom services -->
-            <% commands.each do |cmd|	if @permissions && ! (service.custom && (cmd == "enable" || cmd == "disable")) %>
+            <% commands.each do |cmd|	if (@exec_permission) && ! (service.custom && (cmd == "enable" || cmd == "disable")) %>
               <%= url = {
                     :id => cmd, 
                     :action => "execute", 
@@ -353,7 +353,8 @@ function enable_buttons (s) {
                 end
               end
 
-          link_to_remote label,
+          link_to label,
+            :remote     => true,
             :url	=> url,
             :loading	=> "disable_buttons('#{service.name}');",
             :complete   => complete,
