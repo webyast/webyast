@@ -47,7 +47,7 @@
     label.error {display: none; float:left; color: #990000; font-weight:bold; margin-left:10px;}
  </style>
 
- <% javascript_tag do %>
+ <%= javascript_tag do %>
   var AUTH_TOKEN = 'authenticity_token=' + encodeURIComponent("<%= escape_javascript form_authenticity_token %>");
   startNotifier({'module':'groups', 'AUTH_TOKEN':AUTH_TOKEN}, 1000, 11000);
 
@@ -148,7 +148,7 @@
             </span>
           </div>
           <div class='group-content' style="display:none">
-          <% form_for group, :url => { :action => @adding ? "create" : "update"}, :html => { :id => "form_"+group.old_cn, :autocomplete => :off, :onsubmit => "form_handler('#{group.old_cn}')"}  do |f| %>
+          <%= form_for group, :url => { :action => @adding ? "create" : "update"}, :html => { :id => "form_"+group.old_cn, :autocomplete => :off, :onsubmit => "form_handler('#{group.old_cn}')"}  do |f| %>
             <%= f.hidden_field :old_cn %>
             <p>
               <div class="label"><%=_("Group Name")%></div>
@@ -169,7 +169,7 @@
     
             <div class="nav-buttons">
               <div class="hr">&nbsp;</div>
-              <div id="progress_<%= group.cn -%>" style="display: none; margin-bottom: 10px"><img src="/images/working.gif" alt="Working"/><span style="vertical-align: 50%; margin-left: 5px">...Wait...</span></div>
+              <div id="progress_<%= group.cn -%>" style="display: none; margin-bottom: 10px"><%= image_tag("working.gif", :class => "small-working-icon") %><span style="vertical-align: 50%; margin-left: 5px">...Wait...</span></div>
                 <% message = _('Please wait')%>
                 <%= submit_tag _("Save"), 
                     :onclick=>"return $('#form_" + group.old_cn + "').validate({
