@@ -23,23 +23,23 @@ include ApplicationHelper
 
 class GroupsController < ApplicationController
   
-  before_filter :check_read_permission, :only => [:index,:show]
-  before_filter :check_write_permission, :only => [:create, :update, :new, :edit]
+#  before_filter :check_read_permission, :only => [:index,:show]
+#  before_filter :check_write_permission, :only => [:create, :update, :new, :edit]
   layout 'main'
 
   # Initialize GetText and Content-Type.
-  init_gettext "webyast-users"
+  # FIXME init_gettext "webyast-users"
 
 private
 
-  def permission_read
-    @permissions = {}
-    @permissions[:groupmodify] = yapi_perm_granted? "users.groupmodify"
-    @permissions[:usersget] = yapi_perm_granted? "users.usersget"
-    @permissions[:groupadd] = yapi_perm_granted? "users.groupadd"
-    @permissions[:groupdelete] = yapi_perm_granted? "users.groupdelete"
-  end
-
+#  def permission_read
+#    @permissions = {}
+#    @permissions[:groupmodify] = yapi_perm_granted? "users.groupmodify"
+#    @permissions[:usersget] = yapi_perm_granted? "users.usersget"
+#    @permissions[:groupadd] = yapi_perm_granted? "users.groupadd"
+#    @permissions[:groupdelete] = yapi_perm_granted? "users.groupdelete"
+#  end
+#
   def validate_group_id( id = params[:id] )
     if id.blank?
       respond_to do |format|
@@ -125,17 +125,17 @@ private
     end
   end
 
-  def check_read_permission
-    yapi_perm_check "users.groupsget"
-    yapi_perm_check "users.groupget"
-    permission_read
-  end
+#  def check_read_permission
+#    yapi_perm_check "users.groupsget"
+#    yapi_perm_check "users.groupget"
+#    permission_read
+#  end
 
-  def check_write_permission
-    yapi_perm_check "users.groupmodify"
-    yapi_perm_check "users.groupadd"
-    permission_read
-  end
+#  def check_write_permission
+#    yapi_perm_check "users.groupmodify"
+#    yapi_perm_check "users.groupadd"
+#    permission_read
+#  end
 
   # log Group.find error and provide matching ErrorResult
   def group_not_found gid
@@ -162,6 +162,7 @@ public
 
   # GET /groups.xml
   def index
+    authorize! :get, Group
     # read permissions were checked in a before filter
     @groups = Group.find_all
     Rails.logger.error "No groups found." unless @groups
@@ -189,12 +190,12 @@ public
         @all_sys_users_string = ""
         @users = []
         @sys_users = []
-        if @permissions[:usersget] == true
+#        if @permissions[:usersget] == true
           @users     = User.find_all({ :attributes => "uid"})
           @sys_users = User.find_all({ "attributes"=>"cn,uidNumber,uid", 
                                        "type"=>"system", 
                                        "index"=>["s", "uid"]} )
-        end
+#        end
         @users.each do |user|
           if @all_users_string.blank?
             @all_users_string = user.uid
