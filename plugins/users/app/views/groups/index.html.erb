@@ -20,18 +20,14 @@
 -->
 <% content_for :head do %>
 
-  <% if JSMIN == true %>
-    <%= javascript_include_tag "min/users-min.js"-%>
-  <% else %>
-    <%= stylesheet_link_tag "webyast-users" %>
-    <%= stylesheet_link_tag "webyast-plugin-toolbar" %>
+  <%= stylesheet_link_tag "webyast-users" %>
+  <%= stylesheet_link_tag "webyast-plugin-toolbar" %>
 
-    <%= javascript_include_tag "jquery.quicksearch.js"-%>
-    <%= javascript_include_tag "select_dialog.js" %>
-    <%= javascript_include_tag "users.js" %>
-  <% end %>
+  <%= javascript_include_tag "jquery.quicksearch.js"-%>
+  <%= javascript_include_tag "select_dialog.js" %>
+  <%= javascript_include_tag "users.js" %>
 
-<% if @permissions[:usersget] != true %>
+<% if ! can? :get, User %>
 <script language="javascript">
   function members_validation(which){ return true; }
 </script>
@@ -132,7 +128,7 @@
     </form>
 
     <span id="action_link_container">
-      <% if @permissions[:groupadd] %>
+      <% if can? :add, Group %>
         <%=link_to image_tag("/icons/groups.png", :class=>"action_link_icon") + _("New Group"), :action => :new %>
       <% end %>
         <%=link_to image_tag("/icons/users.png", :class=>"action_link_icon") +  _("Manage Users"), :controller => "users" %>
@@ -164,7 +160,7 @@
             <p>
               <div class="label"><%=_("Members")%></div>
               <%= f.text_field :members_string, :disabled => false, :onkeyup => "members_validation(this);", :class => "members-string"%>
-              <% if @permissions[:usersget] == true %>
+              <% if can? :get, User %>
                 <a href="#" id="manage_members" class="button" onClick="select_users_open('<%= group.old_cn %>');return false;"><%= _("Manage Members") %></a>
               <% end %>
               <%= f.hidden_field :group_type %><label id="users-error" class="error"></label>
@@ -183,7 +179,7 @@
                       }
                 });" %>
 
-                <% if @permissions[:groupdelete] %>
+                <% if can? :delete, Group %>
                   <span onclick="delete_handler(this, '#progress_<%= group.cn -%>', '<%= _("Please wait") -%>');">
                     <%= link_to _("Delete"),
                         {:action => 'destroy', :id => group.cn},

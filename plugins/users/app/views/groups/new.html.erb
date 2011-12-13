@@ -27,7 +27,7 @@
     <%= javascript_include_tag "select_dialog.js" %>
   <% end %>
 
-  <% if @permissions[:usersget] != true %>
+  <% if ! can? :get, User %>
     <script language="javascript">
       function members_validation(which){ return true; }
     </script>
@@ -83,7 +83,7 @@
   });  
 </script>
 <%
- disabled = ! ((@permissions[:groupadd] && @adding) || (@permissions[:groupmodify] && !@adding)) %>
+ disabled = ! ((can? :add, Group && @adding) || (can? :modify, Group && !@adding)) %>
 
 <!-- <div class='plugin-icon'><img alt="yast-groups" src='/icons/yast-groups.png' alt="groups module"/>
   <%=_("Groups") + header_spacer %><span id="questionMark">?</span>
@@ -121,7 +121,7 @@
           <div class="row manual">
             <label><%=_("Members")%></label>
             <%= f.text_field :members_string, :disabled => false, :onkeyup => "members_validation(this);" %>
-            <% if @permissions[:usersget] == true %>
+            <% if can? :get, User %>
             <a href="#" id="manage_members" class="button" onClick="select_users_open('');return false;"><%= _("Manage Members") -%></a>
             <%= f.hidden_field :group_type %><label class="error"></label>
               <div class="clearfix">&nbsp;</div>
