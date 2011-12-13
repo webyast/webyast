@@ -27,7 +27,7 @@
   <%= javascript_include_tag "select_dialog.js" %>
   <%= javascript_include_tag "users.js" %>
 
-<% if ! can? :get, User %>
+<% if ! can? :usersget, User %>
 <script language="javascript">
   function members_validation(which){ return true; }
 </script>
@@ -128,7 +128,7 @@
     </form>
 
     <span id="action_link_container">
-      <% if can? :add, Group %>
+      <% if can? :groupadd, User %>
         <%=link_to image_tag("groups.png", :class=>"action_link_icon") + _("New Group"), :action => :new %>
       <% end %>
         <%=link_to image_tag("users.png", :class=>"action_link_icon") +  _("Manage Users"), :controller => "users" %>
@@ -139,7 +139,7 @@
 
   <div class='pad1_2em'>
     <div id="groups" class="accordion">
-      <% disabled = cannot?(:modify, Group) %>
+      <% disabled = cannot?(:groupmodify, User) %>
       <% for group in @groups %>
         <div class="list-fieldset">
           <div class="list-fieldset-header">
@@ -161,7 +161,7 @@
             <p>
               <div class="label"><%=_("Members")%></div>
               <%= f.text_field :members_string, :disabled => disabled, :onkeyup => "members_validation(this);", :class => "members-string"%>
-              <% if can? :get, User %>
+              <% if can? :usersget, User %>
                 <a href="#" id="manage_members" class="button" onClick="select_users_open('<%= group.old_cn %>');return false;"><%= _("Manage Members") %></a>
               <% end %>
               <%= f.hidden_field :group_type %><label id="users-error" class="error"></label>
@@ -180,7 +180,7 @@
                       }
                 });" %>
 
-                <% if can? :delete, Group %>
+                <% if can? :groupdelete, User %>
                   <span onclick="delete_handler(this, '#progress_<%= group.cn -%>', '<%= _("Please wait") -%>');">
                     <%= link_to _("Delete"),
                         {:action => 'destroy', :id => group.cn},

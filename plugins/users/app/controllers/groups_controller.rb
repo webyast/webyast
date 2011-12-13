@@ -127,7 +127,7 @@ public
   # GET /groups/users
   # GET /groups/users.xml
   def show
-    authorize! :get, Group
+    authorize! :groupget, User
     # try to find the grouplist, and 404 if it does not exist
     @group = Group.find params[:id]
     if @group.nil?
@@ -142,7 +142,7 @@ public
 
   # GET /groups.xml
   def index
-    authorize! :get, Group
+    authorize! :groupsget, User
     @groups = Group.find_all
     Rails.logger.error "No groups found." unless @groups
     respond_to do |format|
@@ -194,7 +194,7 @@ public
   end
 
   def new
-    authorize! :add, Group
+    authorize! :groupadd, User
     @group = Group.new
 
     # add default properties
@@ -208,7 +208,7 @@ public
     @group.load(defaults)
     @adding = true
     @all_users_string = ""
-    users = User.find(:all) if can? :get, User
+    users = User.find(:all) if can? :usersget, User
     users.each do |user|
       if @all_users_string.blank?
         @all_users_string = user.uid
@@ -256,7 +256,7 @@ public
 
   # PUT /groups/
   def create
-    authorize! :add, Group
+    authorize! :groupadd, User
     validate_group_params( :new ) or return
     validate_group_name( :new ) or return
     group_params = params[:group] || {}
@@ -293,7 +293,7 @@ public
 
   # DELETE /groups/users
   def destroy
-    authorize! :delete, Group
+    authorize! :groupdelete, User
     validate_group_id or return
 
     @group = Group.find(params[:id])
