@@ -2,6 +2,5 @@
 *.bak
 plugins/status/config/status_limits.yaml
 coverage
-nbproject
 plugins/*/package/www.tar.bz2
 pot
