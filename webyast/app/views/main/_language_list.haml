@@ -1,5 +1,6 @@
 %span.language-icon
-  Language
+  Language: 
+  = session["locale"].to_s.upcase
   %span#lang_menu
     - FastGettext.default_available_locales.each do |locale|
       = link_to(locale.upcase, current_url(:locale=>locale))

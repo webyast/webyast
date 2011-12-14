@@ -75,9 +75,6 @@
       <% end %>
 
       <%= link_to(image_tag("/assets/webyast-logo.png", :width=>"130", :height=>"42", :alt =>"webyast"),"/" )%>
-      <% user = session[:user] %>
-
-
 
 <!--      <p>I18n Locale: <% I18n.locale%> ---- Gettext Locale: <%= FastGettext.locale %> <%= Rails.root %></p> -->
 
@@ -94,7 +91,7 @@
               <%= link_to _("Home"), '/controlpanel'%>
             </span>
             <span class="userbar-icon user-icon">
-              <%=link_to(user, :controller => :users) %>
+              <%= link_to(current_account.username, :controller => :users) %>
             </span>
             <span class="userbar-icon" style=" text-align:center;">
               <%= render :partial => "main/language_list" %>
