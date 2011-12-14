@@ -160,7 +160,7 @@
               <% else %>
                 <li id="module<%= index %>" data-id="id-<%= index%>" data-type="<%= data['groups'] %>" class="<%= data['groups'] %>">
               <% end %>
-                <% link_to(data['url'], html_map) do %>
+                <%= link_to(data['url'], html_map) do %>
                   <%= image_tag(data['icon'] ) %>
                   <strong><%= _(data['title']) %></strong>
                <% end %>

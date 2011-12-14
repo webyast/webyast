@@ -108,13 +108,17 @@ class ControlpanelController < ApplicationController
     #logger.debug Rails::Plugin::Loader.all_plugins.inspect
     #logger.debug Rails.configuration.load_paths
     permissions = Permission.find(:all, {:user_id => session[:user]})
-    YaST::LOADED_PLUGINS.each do |plugin|
-      logger.debug "looking into #{plugin.directory}"
-      #Skip obsolete permissions module
-      #unless plugin.name == "permissions"
-      shortcuts.merge!(plugin_shortcuts(plugin, permissions))
-      #end
+
+    Rails.logger.debug "permissions: #{permissions.inspect}"
+
+    # go through all Rails engines, look for Webyast engines
+    Rails::Engine::Railties.engines.each do |engine|
+      if engine.class.to_s.match /^WebYaST::.*Engine$/
+        Rails.logger.info "Found Webyast engine #{engine.class}"
+        shortcuts.merge!(plugin_shortcuts(engine.config.root, permissions))
+      end
     end
+
     #logger.debug shortcuts.inspect
     shortcuts
   end
@@ -140,25 +144,25 @@ class ControlpanelController < ApplicationController
   end 
 
   # reads shortcuts of a specific plugin directory
-  def plugin_shortcuts(plugin, all_permissions)
+  def plugin_shortcuts(plugin_dir, all_permissions)
     permissions = {}
     all_permissions.each do |p|
       permissions[p[:id]] = p[:granted]
     end
     shortcuts = {}
-    shortcuts_fn = File.join(plugin.directory, 'shortcuts.yml')
+    shortcuts_fn = File.join(plugin_dir, 'shortcuts.yml')
     if File.exists?(shortcuts_fn)
       #logger.debug "Shortcuts at #{plugin.directory}"
       shortcutsdata = YAML::load(File.open(shortcuts_fn))
       #loading translations 
-      mo_files = Dir.glob(File.join(plugin.directory, "**", "*.mo"))
+      mo_files = Dir.glob(File.join(plugin_dir, "**", "*.mo"))
       if mo_files.size > 0
         locale_path = File.dirname(File.dirname(File.dirname(mo_files.first))) 
         #logger.info "Loading textdomain #{File.basename(mo_files.first, '.mo')} from #{locale_path} for shortcuts"
         opt = {:locale_path => locale_path}
         ActionController::Base.init_gettext(File.basename(mo_files.first, ".mo"), opt)
       else
-        logger.warn "Cannot find shortcut translation for #{plugin.name}"
+        logger.warn "Cannot find shortcut translation in #{plugin_dir}"
       end
       shortcutsdata = translate_shortcuts shortcutsdata
       return nil unless shortcutsdata.is_a? Hash
@@ -166,7 +170,7 @@ class ControlpanelController < ApplicationController
       shortcutsdata.each do |k,v|
         # use the plugin name and the shortcut key as
         # the new key
-        shortcuts["#{plugin.name}:#{k}"] = v
+        shortcuts["#{plugin_dir}:#{k}"] = v
         v["disabled"] = false #backward compatibility
         if v.include? "read_permissions"
           perms = v["read_permissions"]
@@ -176,6 +180,7 @@ class ControlpanelController < ApplicationController
         end
       end
     end
+    Rails.logger.debug "shortcuts: #{shortcuts.inspect}"
     shortcuts
   end
   
