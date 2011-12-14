@@ -1,5 +1,5 @@
 main:
-  icon: '/icons/yast-users.png'
+  icon: 'yast-users.png'
   url: /users
   groups: [ Accounts ]
   main: [true]
@@ -9,7 +9,7 @@ main:
   read_permissions: [ org.opensuse.yast.modules.yapi.users.userget, org.opensuse.yast.modules.yapi.users.usersget ]
 
 groups:
-  icon: '/icons/yast-groups.png'
+  icon: 'yast-groups.png'
   url: /groups
   groups: [ Accounts ]
   tags: [ groups, account, security, access]

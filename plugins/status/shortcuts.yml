@@ -1,5 +1,5 @@
 main:
-  icon: '/icons/monitoring.png'
+  icon: 'monitoring.png'
   url: /status
   groups: [ System ]
   main: [true]

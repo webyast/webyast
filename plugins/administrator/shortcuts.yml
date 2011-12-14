@@ -1,5 +1,5 @@
 main:
-  icon: '/icons/yast-system-user.png'
+  icon: 'yast-system-user.png'
   url: /administrator
   groups: [ Accounts ]
   tags: [ users, administrator, security]

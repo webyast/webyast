@@ -1,5 +1,5 @@
 main:
-  icon: '../icons/yast-samba-client.png'
+  icon: 'yast-samba-client.png'
   url: /activedirectory
   groups: [ Network ]
   tags: [ AD, Samba, Active Directory ]

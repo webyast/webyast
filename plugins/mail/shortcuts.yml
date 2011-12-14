@@ -1,5 +1,5 @@
 main:
-  icon: '/icons/yast-mail-server.png'
+  icon: 'yast-mail-server.png'
   url: /mail
   groups: [ Accounts ]
   tags: [ mail, network]
