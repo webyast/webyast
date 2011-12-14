@@ -21,13 +21,12 @@
 
 <% content_for :head do %>
   <!--[if IE]><%= javascript_include_tag "excanvas.js" %><![endif]-->
-  <%= javascript_include_tag "jrails.js" %>
     <%= stylesheet_link_tag "webyast-status" %>
-    <%= javascript_include_tag "jquery.jqplot.js" %>
-    <%= javascript_include_tag "plugin/jqplot.categoryAxisRenderer.js" %>
-    <%= javascript_include_tag "plugin/jqplot.dateAxisRenderer.js" %>	
-    <%= javascript_include_tag "plugin/jqplot.canvasTextRenderer.js" %>
-    <%= javascript_include_tag "plugin/jqplot.cursor.js" %>
+    <%#= javascript_include_tag "jquery.jqplot.js" %>
+    <%#= javascript_include_tag "jqplot.categoryAxisRenderer.js" %>
+    <%#= javascript_include_tag "jqplot.dateAxisRenderer.js" %>
+    <%#= javascript_include_tag "jqplot.canvasTextRenderer.js" %>
+    <%#= javascript_include_tag "jqplot.cursor.js" %>
 <% end %>
 
 
