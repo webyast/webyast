@@ -61,7 +61,7 @@
         <label><%= _("System status") %></label>
       </div>
       <div id="statusbar_status">
-        <% if Rails.application.routes.routes.map(&:path).include?("/status") %>
+        <% if Rails::Engine::Railties.engines.find {|e| e.class.to_s == "WebYaST::StatusEngine"} %>
           <% if display_status %>
             <div class="statusbar_row">
               <%= image_tag("working.gif", :class => "small-working-icon") %>
@@ -87,7 +87,7 @@
         <label><%= _("System updates") %></label>
       </div>
       <div id="statusbar_patches">
-        <% if Rails.application.routes.routes.map(&:path).include?("/patches") %>
+        <% if Rails::Engine::Railties.engines.find {|e| e.class.to_s == "WebYaST::PatchesEngine"} %>
           <% if display_patches %>
           <div class="statusbar_row">
             <%= image_tag("working.gif", :class => "small-working-icon") %>
@@ -107,7 +107,7 @@
       </div>
     </div>
 
-    <% if Rails.application.routes.routes.map(&:path).include?("/system") %>
+    <% if Rails::Engine::Railties.engines.find {|e| e.class.to_s == "WebYaST::SystemEngine"} %>
       <div id="statusbar-actions">
           <div class="statusbar_row">
             <%= link_to _('Reboot'), {:controller => 'system', :action => 'reboot'}, :confirm => _("Really reboot the machine?"), :method => :put, :class => 'button' %>
