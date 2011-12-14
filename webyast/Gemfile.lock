@@ -16,6 +16,11 @@ PATH
     webyast-services (0.1)
 
 PATH
+  remote: /data/local/git/webyast3/webyast/plugins/status
+  specs:
+    webyast-status (0.1)
+
+PATH
   remote: /data/local/git/webyast3/webyast/plugins/users
   specs:
     webyast-users (0.1)
@@ -188,4 +193,5 @@ DEPENDENCIES
   sqlite3-ruby
   webyast-roles!
   webyast-services!
+  webyast-status!
   webyast-users!

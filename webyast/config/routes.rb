@@ -9,6 +9,7 @@ Webyast::Application.routes.draw do
 
   mount WebYaST::UsersEngine => '/'
   mount WebYaST::ServicesEngine => '/'
+  mount WebYaST::StatusEngine => '/'
 
   root :to => 'controlpanel#index'
 
