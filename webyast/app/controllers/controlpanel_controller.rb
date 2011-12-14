@@ -106,7 +106,7 @@ class ControlpanelController < ApplicationController
     # read shortcuts from plugins
     #logger.debug Rails::Plugin::Loader.all_plugins.inspect
     #logger.debug Rails.configuration.load_paths
-    permissions = Permission.find(:all, {:user_id => session[:user]})
+    permissions = Permission.find(:all, {:user_id => current_account.username})
 
     Rails.logger.debug "permissions: #{permissions.inspect}"
 
