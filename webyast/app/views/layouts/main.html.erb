@@ -54,14 +54,14 @@
 </head>
   <body id="shell">
     <div id='browserWarning' style="display: none">
-      <%= ( _("You are using an unsupported browser. Please switch to %sFireFox 3.5 or better%s or %sInternet Explorer 8%s. Thanks! [%sclose%s]") %
+      <%= raw ( _("You are using an unsupported browser. Please switch to %sFireFox 3.5 or better%s or %sInternet Explorer 8%s. Thanks! [%sclose%s]") %
             ["<a href='http://getfirefox.com'>","</a>",
              "<a href='http://www.microsoft.com/windows/downloads/ie/getitnow.mspx'>", "</a>",
              "<a href='#' id='warningClose'>", "</a>"] ) %>
     </div>
     <noscript>
       <div id="no_js_warning">
-        <%= ( _("JavaScript support is missing or disabled. Please turn JavaScript on or use a supported browser (%sFireFox 3.5%s or %sInternet Explorer 8%s).") %
+        <%= raw ( _("JavaScript support is missing or disabled. Please turn JavaScript on or use a supported browser (%sFireFox 3.5%s or %sInternet Explorer 8%s).") %
             ["<a href='http://getfirefox.com'>","</a>",
              "<a href='http://www.microsoft.com/windows/downloads/ie/getitnow.mspx'>", "</a>"] ) %>
       </div>
@@ -74,7 +74,7 @@
         <% appliance_label = _(appliance_label[3..appliance_label.length-3]) %>
       <% end %>
 
-      <%= link_to(image_tag("/assets/webyast-logo.png", :width=>"130", :height=>"42", :alt =>"webyast"),"/" )%>
+      <%= link_to(image_tag("webyast-logo.png", :width=>"130", :height=>"42", :alt =>"webyast"),"/" )%>
 
 <!--      <p>I18n Locale: <% I18n.locale%> ---- Gettext Locale: <%= FastGettext.locale %> <%= Rails.root %></p> -->
 
@@ -123,7 +123,7 @@
     </div>
 
     <div id="timeoutMessage">
-      <%= link_to(image_tag("/assets/webyast-logo.png", :width=>"130", :height=>"42", :style=>"margin-top:4px;", :alt =>"webyast"),"/" )%>
+      <%= link_to(image_tag("webyast-logo.png", :width=>"130", :height=>"42", :style=>"margin-top:4px;", :alt =>"webyast"),"/" )%>
       <%= _("You will be logged off in")-%><span id="counter"><!-- countdown place holder --></span><%= _("seconds due to session timeout. ")-%>
     </div>
 
@@ -155,7 +155,7 @@
       </div> <!-- flash messages -->
 
       <div id="progress" style="display: none;">
-        <%= image_tag("/assets/working.gif", :class => "small-working-icon" ) %><%=_("...Wait...")%>
+        <%= image_tag("working.gif", :class => "small-working-icon" ) %><%=_("...Wait...")%>
       </div>
 
 
