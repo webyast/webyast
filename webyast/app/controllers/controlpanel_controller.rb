@@ -23,7 +23,6 @@
 #
 
 require 'yaml'
-require 'yast'
 
 class ControlpanelController < ApplicationController
   before_filter :ensure_wizard, :only => [:nextstep, :backstep, :thisstep]
