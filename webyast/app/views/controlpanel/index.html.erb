@@ -20,7 +20,6 @@
 
 
 <% content_for :head do %>
-  <%= javascript_include_tag :defaults %>
   <% if true %>
     <%= javascript_include_tag "webyast-controlpanel", "webyast-localstorage"%> 
     <%= javascript_include_tag "jquery.easing.1.3" %>
@@ -49,7 +48,7 @@
   <% end -%>
 <% end %>
 
-<!-- <h3 style="vertical-align: middle;"><%= image_tag("/icons/monitoring.png", :height=>"21", :width=>"21", :border=>"0", :style=>'vertical-align: middle;') %> <%= _("Status") %></h3> -->
+<!-- <h3 style="vertical-align: middle;"><%= image_tag("monitoring.png", :height=>"21", :width=>"21", :border=>"0", :style=>'vertical-align: middle;') %> <%= _("Status") %></h3> -->
 
   <div id="status-panel" class="plugin-content" style="">
     <div id="status-eye">
@@ -65,7 +64,7 @@
         <% if Rails.application.routes.routes.map(&:path).include?("/status") %>
           <% if display_status %>
             <div class="statusbar_row">
-              <%= image_tag("/images/working.gif", :class => "small-working-icon") %>
+              <%= image_tag("working.gif", :class => "small-working-icon") %>
               <label><%= _("Loading system information") %></label> <!-- RORSCAN_ITL -->
             </div>
           <% else %>
@@ -91,7 +90,7 @@
         <% if Rails.application.routes.routes.map(&:path).include?("/patches") %>
           <% if display_patches %>
           <div class="statusbar_row">
-            <%= image_tag("/images/working.gif", :class => "small-working-icon") %>
+            <%= image_tag("working.gif", :class => "small-working-icon") %>
             <label><%= _("Loading patch information") %></label>
           </div>
           <% else %>
@@ -121,7 +120,7 @@
   </div>
 
   <!--CONFIGURATION-->
-<!--  <h3 style="vertical-align: middle;"><%= image_tag("/images/yast-config.png", :height=>"23", :width=>"23", :border=>"0", :style=>'vertical-align: middle;') %> <%= _("Configuration") %></h3> -->
+<!--  <h3 style="vertical-align: middle;"><%= image_tag("yast-config.png", :height=>"23", :width=>"23", :border=>"0", :style=>'vertical-align: middle;') %> <%= _("Configuration") %></h3> -->
   <div id="favorites" class="plugin-content">
     <div class="overview" style="">
        <div id="filter">
@@ -141,12 +140,12 @@
 
       <% if @shortcuts.empty? %>
         <h4 id="warning_message_text">
-          <%= image_tag("/images/dialog-warning.png", :style=>"vertical-align:middle;", :height=>"40", :width=>"42", :border=>"0") %>
+          <%= image_tag("dialog-warning.png", :style=>"vertical-align:middle;", :height=>"40", :width=>"42", :border=>"0") %>
           <%= _("WebYaST modules are not installed on your system!") %>
         </h4>
        <% elsif  !@shortcuts.empty? && @count == @shortcuts.count %>
         <h4 id="warning_message_text">
-          <%= image_tag("/images/dialog-warning.png", :style=>"vertical-align:middle;", :height=>"40", :width=>"42", :border=>"0") %>
+          <%= image_tag("dialog-warning.png", :style=>"vertical-align:middle;", :height=>"40", :width=>"42", :border=>"0") %>
           <%= _("You have no permissions to see or change the modules, please contact the administrator to set up permissions first!") %>
         </h4>
       <% else %>

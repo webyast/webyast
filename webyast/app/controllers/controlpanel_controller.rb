@@ -30,6 +30,8 @@ class ControlpanelController < ApplicationController
 
   respond_to :html
 
+  layout "main"
+
   def index
     #return false if need_redirect
     @shortcuts = shortcuts_data
