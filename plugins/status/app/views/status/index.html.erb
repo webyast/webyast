@@ -22,22 +22,18 @@
 <% content_for :head do %>
   <!--[if IE]><%= javascript_include_tag "excanvas.js" %><![endif]-->
   <%= javascript_include_tag "jrails.js" %>
-  <% if JSMIN == true %>
-    <%= javascript_include_tag "min/status-min" %>
-  <% else %>
     <%= stylesheet_link_tag "webyast-status" %>
     <%= javascript_include_tag "jquery.jqplot.js" %>
     <%= javascript_include_tag "plugin/jqplot.categoryAxisRenderer.js" %>
     <%= javascript_include_tag "plugin/jqplot.dateAxisRenderer.js" %>	
     <%= javascript_include_tag "plugin/jqplot.canvasTextRenderer.js" %>
     <%= javascript_include_tag "plugin/jqplot.cursor.js" %>
-  <% end %>
 <% end %>
 
 
 
 <% content_for :before_script do %>
-  <% javascript_tag do %>
+  <%= javascript_tag do %>
     var AUTH_TOKEN = 'authenticity_token=' + encodeURIComponent("<%= escape_javascript form_authenticity_token %>");
     startNotifier({'module':'graphs,plugins', 'AUTH_TOKEN':AUTH_TOKEN}, 1000, 11000);
 
@@ -64,7 +60,7 @@
 <div class="accordion">
   <div class="plugin-header">
     <div class="left">
-      <label class="plugin-icon-container"><img class="plugin-icon" src="/icons/monitoring.png"></label>
+      <label class="plugin-icon-container"><%= image_tag("monitoring.png", :class=>"plugin-icon") %></label>
       <label class="plugin-name"><%=_("Status")%></label>
     </div>
 

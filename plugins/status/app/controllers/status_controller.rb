@@ -23,15 +23,18 @@ require 'open-uri' # RORSCAN_ITL
 
 class StatusController < ApplicationController
 
-  before_filter :login_required
+#  before_filter :login_required
   layout "main"
+
+  # Initialize GetText and Content-Type.
+  FastGettext.add_text_domain 'webyast-status', :path => 'locale'
 
   DEFAULT_LINES = 50
 
   private
   def client_permissions
-    permission_check "org.opensuse.yast.system.status.read"
-    @write_limit_permission = permission_granted? "org.opensuse.yast.system.status.writelimits"
+#    permission_check "org.opensuse.yast.system.status.read"
+#    @write_limit_permission = permission_granted? "org.opensuse.yast.system.status.writelimits"
   end
 
   #
@@ -85,13 +88,7 @@ class StatusController < ApplicationController
   end
 
 
- # Initialize GetText and Content-Type.
-  init_gettext "webyast-status"
-
   public
-
-  def initialize
-  end
 
   def confirm_status
     if not params.has_key?(:url)
@@ -106,7 +103,7 @@ class StatusController < ApplicationController
   end
 
   def ajax_log_custom
-    client_permissions
+    authorize! :read, Metric
     # set the site to the view so it can load the log
     # dynamically
     if not params.has_key?(:id)
@@ -123,7 +120,7 @@ class StatusController < ApplicationController
   end
 
   def index
-    client_permissions
+    authorize! :read, Metric
     @logs = Log.find(:all)
     @plugins = Plugin.find(:all)
     begin
@@ -229,7 +226,7 @@ class StatusController < ApplicationController
   # AJAX call for showing a single graph
   #
   def evaluate_values
-    client_permissions
+    authorize! :read, Metric
     group_id = params[:group_id]
     graph_id = params[:graph_id]
     till = Time.now
@@ -328,7 +325,7 @@ class StatusController < ApplicationController
   end
 
   def edit
-    client_permissions
+    authorize! :read, Metric
     begin
       ActionController::Base.benchmark("Graph information from server") do
         @graphs = Graph.find(:all)
@@ -343,8 +340,7 @@ class StatusController < ApplicationController
   end
 
   def save
-    client_permissions
-    permission_check "org.opensuse.yast.system.status.writelimits"
+    authorize! :writelimits, Metric
 
     begin
       ActionController::Base.benchmark("Graph information from server") do

@@ -24,11 +24,8 @@
 # The yaml file is located in config/status_configuration.yaml
 #
 
-require 'gettext'
-
 class Graph
   require 'yaml'
-  include GetText
 
   attr_reader :group_name
   attr_reader :headline
@@ -91,8 +88,8 @@ class Graph
   # evalualte config directory of the status plugin
   #
   def self.plugin_config_dir()
-    dir = "#{RAILS_ROOT}/config" #default
-    Rails.configuration.plugin_paths.each do |plugin_path|
+    dir = "#{Rails.root}/config" #default
+    File.join(Rails.root, '..', 'plugins').each do |plugin_path|
       if File.directory?(File.join(plugin_path, "status"))
         dir = plugin_path+"/status/config"
         break

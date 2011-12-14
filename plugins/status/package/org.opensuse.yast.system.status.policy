@@ -11,7 +11,7 @@
 Rights for status
 -->
 
-  <action id="org.opensuse.yast.system.status.read">
+  <action id="org.opensuse.yast.modules.yapi.metrics.read">
     <description>Reading status information</description>
     <message>Authentication is required to read status settings</message>
     <defaults>
@@ -20,7 +20,7 @@ Rights for status
     </defaults>
   </action>
 
-  <action id="org.opensuse.yast.system.status.writelimits">
+  <action id="org.opensuse.yast.modules.yapi.metrics.writelimits">
     <description>Writing limits for status information</description>
     <message>Authentication is required to write limits for status settings</message>
     <defaults>

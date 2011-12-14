@@ -25,6 +25,7 @@
 #
 
 require 'yast/config_file'
+require 'base_model/base'
 
 class Log
   attr_reader :id
@@ -42,8 +43,8 @@ class Log
   # reading configuration file
   #
   def self.parse_config(path = nil)
-    path = File.join(Paths::CONFIG,VENDOR_DIR,CONFIGURATION_FILE) if path == nil
-    path = File.join(Paths::CONFIG,CONFIGURATION_FILE) unless File.exists?(path)
+    path = File.join(WebYaST::Paths::CONFIG,VENDOR_DIR,CONFIGURATION_FILE) if path == nil
+    path = File.join(WebYaST::Paths::CONFIG,CONFIGURATION_FILE) unless File.exists?(path)
 
     #reading configuration file
     return YaST::ConfigFile.new(path) if File.exists?(path)

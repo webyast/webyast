@@ -81,7 +81,7 @@
 <% form_tag( {:action => :save} , { :class=>"webyast_form", :onsubmit => "return validateLimits();"} ) do %>
   <div class="plugin-header">
     <div class="left">
-      <label class="plugin-icon-container"><img class="plugin-icon" src="/icons/monitoring.png"></label>
+      <label class="plugin-icon-container"><%= image_tag("monitoring.png", :class=>"plugin-icon") %></label>
       <label class="plugin-name"><%=_("Status") + header_spacer + _("Settings")%></label>
     </div>
 
