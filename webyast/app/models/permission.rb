@@ -22,6 +22,7 @@
 #
 require 'exceptions'
 require 'yast_cache'
+require "yast_service"
 
 class Permission
 #list of hash { :name => id, :granted => boolean, :description => string (optional)}

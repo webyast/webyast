@@ -1,4 +1,6 @@
 
+require "yast_service"
+
 class Ability
   include CanCan::Ability
 
