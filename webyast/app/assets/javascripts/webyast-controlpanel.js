@@ -126,7 +126,7 @@ if(index.test(currentURL)) {
   $(document).ready(function() {
   
      if($.browser.msie() && $.browser.version.number() == 8 ) {
-       $('#status-eye').css("background", "url(/images/circle-gray.png)");  
+       $('#status-eye').css("background", "url(/assets/circle-gray.png)");
      }
   
   //  console.time('modules_tracking');
