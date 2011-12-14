@@ -32,6 +32,12 @@ class MainController < ApplicationController
     redirect_to(account_signed_in? ? { :controller => "controlpanel", :action => "index" } : { :controller => "session", :action => "new" })
   end
 
+  def logout
+    sign_out
+    flash[:notice] = "You are now signed out!"
+    redirect_to root_path
+  end
+
   # POST /select_language
   # setting language for translations
   def select_language

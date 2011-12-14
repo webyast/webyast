@@ -10,7 +10,6 @@ Webyast::Application.routes.draw do
   mount WebYaST::UsersEngine => '/'
   mount WebYaST::ServicesEngine => '/'
 
-  #root :to => 'controlpanel#index'
   root :to => 'controlpanel#index'
 
   match 'resources/:id.:format' => 'resources#show', :constraints => { :id => /[-\w]+/ }
@@ -19,7 +18,7 @@ Webyast::Application.routes.draw do
   match '/' => 'main#index'
   #match '/login.html' => 'sessions#new', :as => :login
   #match '/login.:format' => 'sessions#create', :as => :login
-  #match '/logout.:format' => 'sessions#destroy', :as => :logout
+  match '/logout' => 'main#logout', :as => :logout
   match '/restdoc.:format' => 'restdoc#index', :as => :restdoc
   match '/notifiers/status.:format' => 'notifier#status', :as => :notifier
   match '/:controller(/:action(/:id))'
