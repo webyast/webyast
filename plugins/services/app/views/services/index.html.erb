@@ -29,8 +29,6 @@
 
 
 <%= javascript_tag do %>
-  var AUTH_TOKEN = 'authenticity_token=' + encodeURIComponent("<%= escape_javascript form_authenticity_token %>");
-  startNotifier({'module':'services', 'AUTH_TOKEN':AUTH_TOKEN}, 1000, 11000);
 $(document).ready(function() {
   console.log("GET STATUS")
   $("#services div.list-fieldset").each (function(index) {
@@ -62,6 +60,9 @@ $(document).ready(function() {
     });
 
     $('.accordion div.list-fieldset:even').addClass('alt-bg');
+
+    var AUTH_TOKEN = 'authenticity_token=' + encodeURIComponent("<%= escape_javascript form_authenticity_token %>");
+    startNotifier({'module':'services', 'AUTH_TOKEN':AUTH_TOKEN}, 1000, 11000);
 })
 
 
@@ -242,7 +243,7 @@ function enable_buttons (s) {
       ])
     %>
 
-    <%= observe_field("filter_services", :function => "select_status(value)")
+    <%#= observe_field("filter_services", :function => "select_status(value)")
  %>
   </div>
 
