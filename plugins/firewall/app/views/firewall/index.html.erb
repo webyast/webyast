@@ -145,8 +145,5 @@
     return true;
   }
 
-  var AUTH_TOKEN = 'authenticity_token=' + encodeURIComponent("<%= escape_javascript form_authenticity_token %>");
-  //startNotifier({'module':'firewall', 'AUTH_TOKEN':AUTH_TOKEN}, 1000, 11000);
-
   $(document).ready(initChagesTrack(<%= jss _("You have unsaved changes. Do you want to save your changes?") -%>));
 </script>

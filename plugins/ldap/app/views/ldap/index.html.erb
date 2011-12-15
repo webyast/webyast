@@ -22,10 +22,10 @@
 <% content_for :head do %>
 
   <%= javascript_include_tag "validation.js" %>
-  <script type="text/javascript">
-    var AUTH_TOKEN = 'authenticity_token=' + encodeURIComponent("<%= escape_javascript form_authenticity_token %>");
-    startNotifier({'module':'ldap', 'AUTH_TOKEN':AUTH_TOKEN}, 1000, 11000);
 
+  <%= render :partial => "shared/notification", :locals = { :module_name => 'ldap'} %>
+
+  <script type="text/javascript">
     $(document).ready(function() {
       validateDomainNameWithPortNumber("server");
 

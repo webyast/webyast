@@ -25,10 +25,9 @@
     <%= stylesheet_link_tag "webyast-network" %>
   <% end %>
 
-  <script type="text/javascript">
-  var AUTH_TOKEN = 'authenticity_token=' + encodeURIComponent("<%= escape_javascript form_authenticity_token %>");
-  startNotifier({'module':'dns,hostname,interfaces,routes', 'AUTH_TOKEN':AUTH_TOKEN}, 1000, 11000);
+  <%= render :partial => "shared/notification", :locals = { :module_name => 'dns,hostname,interfaces,routes' } %>
 
+  <script type="text/javascript">
   $(document).ready(function() {
     validateIPv4("ip");
     validateSubnetMask("netmask"); //accept prefixlen and common subnet mask format e.g. 255.255.255.0

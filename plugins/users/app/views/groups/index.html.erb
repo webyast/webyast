@@ -47,10 +47,9 @@
     label.error {display: none; float:left; color: #990000; font-weight:bold; margin-left:10px;}
  </style>
 
- <%= javascript_tag do %>
-  var AUTH_TOKEN = 'authenticity_token=' + encodeURIComponent("<%= escape_javascript form_authenticity_token %>");
-  startNotifier({'module':'groups', 'AUTH_TOKEN':AUTH_TOKEN}, 1000, 11000);
+ <%= render :partial => "shared/notification", :locals => { :module_name => 'groups' } %>
 
+ <%= javascript_tag do %>
  jQuery.expr[':'].Contains = function(a, i, m) {
   return jQuery(a).text().toUpperCase().indexOf(m[3].toUpperCase()) >= 0;
  };

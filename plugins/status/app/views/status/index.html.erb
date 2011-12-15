@@ -29,18 +29,9 @@
     <%#= javascript_include_tag "jqplot.cursor.js" %>
 <% end %>
 
-
-
 <% content_for :before_script do %>
+  <%= render :partial => "shared/notification", :locals => { :module_name => 'graphs,plugins'} %>
   <%= javascript_tag do %>
-    var AUTH_TOKEN = 'authenticity_token=' + encodeURIComponent("<%= escape_javascript form_authenticity_token %>");
-
-    try {
-      startNotifier({'module':'graphs,plugins', 'AUTH_TOKEN':AUTH_TOKEN}, 1000, 11000);
-    } catch(e) {
-      console.log("Notification start failed: " + e );
-    };
-  
     $(document).ready(function() {
       $(".accordion").accordion({
         autoHeight : false,

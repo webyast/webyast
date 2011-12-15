@@ -275,7 +275,7 @@
       $(changes).show();
     };
   };
-
-  var AUTH_TOKEN = 'authenticity_token=' + encodeURIComponent("<%= escape_javascript form_authenticity_token %>");
-  startNotifier({'module':'repository', 'AUTH_TOKEN':AUTH_TOKEN}, 1000, 11000);
 </script>
+
+<%= render :partial => "shared/notification", :locals => { :module_name => 'repository' } %>
+

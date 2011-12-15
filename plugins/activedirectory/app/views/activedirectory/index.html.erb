@@ -23,14 +23,10 @@
   <% javascript_include_tag "jquery.activity", "notifier" %>
   <% javascript_include_tag "validation.js" %>
   
+  <%= render :partial => "shared/notification", :locals = { :module_name => 'activedirectory'} if @poll_for_updates %>
+
   <script type="text/javascript">
     $(document).ready(function() {
-    
-      <% if @poll_for_updates %>
-        var AUTH_TOKEN = 'authenticity_token=' + encodeURIComponent("<%= escape_javascript form_authenticity_token %>");
-        startNotifier({'module':'activedirectory', 'AUTH_TOKEN':AUTH_TOKEN}, 1000, 11000);
-      <% end %>
-
       $("#activedirectoryForm").validate();
       // make the error message translatable - override the default messsage
       $.extend($.validator.messages, { required: <%= jss _("This field is required.") -%> });

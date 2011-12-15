@@ -174,10 +174,9 @@
     </div>
   <% end %>
 
-  <script type="text/javascript">
-    var AUTH_TOKEN = 'authenticity_token=' + encodeURIComponent("<%= escape_javascript form_authenticity_token %>");
-    startNotifier({'module':'roles,users', 'AUTH_TOKEN':AUTH_TOKEN}, 1000, 11000);
+  <%= render :partial => "shared/notification", :locals = { :module_name => 'roles,users' } %>
 
+  <script type="text/javascript">
     $(document).ready(function(){
       function validateRoleName(name) {
 	      jQuery.validator.addMethod(name, function(value, element) {
