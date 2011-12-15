@@ -1,20 +1,20 @@
 <!--
 # Copyright (c) 2009-2010 Novell, Inc.
-# 
+#
 # All Rights Reserved.
-# 
+#
 # This program is free software; you can redistribute it and/or modify it
 # under the terms of version 2 of the GNU General Public License
 # as published by the Free Software Foundation.
-# 
+#
 # This program is distributed in the hope that it will be useful,
 # but WITHOUT ANY WARRANTY; without even the implied warranty of
 # MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
 # GNU General Public License for more details.
-# 
+#
 # You should have received a copy of the GNU General Public License
 # along with this program; if not, contact Novell, Inc.
-# 
+#
 # To contact Novell about this file by physical or electronic mail,
 # you may find current contact information at www.novell.com
 -->
@@ -33,9 +33,9 @@
 $(document).ready(function() {
   console.log("GET STATUS")
   $("#services div.list-fieldset").each (function(index) {
-  
+
 //  console.log("GET STATUS")
-  
+
   if ($(this).is(":has(span.status_running)")) {
     $(this).find(".list-fieldset-header .service-icon").attr('class','service-icon status-icon ok');
 
@@ -43,7 +43,7 @@ $(document).ready(function() {
       $(this).find(".list-fieldset-header .service-icon").attr('class','service-icon status-icon ok-unused');
     }
   }
-  
+
   else if ($(this).is(":has(span.status_dead)")) {
 	    $(this).find(".list-fieldset-header .service-icon").attr('class','service-icon status-icon error');
 	}
@@ -225,12 +225,12 @@ function enable_buttons (s) {
       <label><%= _("Quick Search") %></label>
       <input type="text" id="service_search">
     </form>
-    
+
     <label for="filter">
       <%=_("Filter services")%>
       <%= image_tag("filter.png")%>
     </label>
-     
+
     <%= select_tag "filter_services", options_for_select([
       [ _("All"), "all"],
       [ _("Running"), "running"],
@@ -246,10 +246,10 @@ function enable_buttons (s) {
   </div>
 
   <div style="clear:both; overflow:hidden;"></div>
-  
+
   <div id="services" class="accordion">
-    <% commands = [ "start", "stop", "restart", "enable", "disable"] 
-    
+    <% commands = [ "start", "stop", "restart", "enable", "disable"]
+
       @services.each do |service| %>
         <div class="list-fieldset">
           <div class="list-fieldset-header" name=<%=service.name%>><span class="service-icon"></span><%=h service.name %><em style="position:absolute; left:25%"><%= h service.summary%></em></div>
@@ -274,26 +274,26 @@ function enable_buttons (s) {
 
 
           <span id='service_refresh_<%= h service.name%>'>
-            <%= url = { 
-                  :controller => :services, 
-                  :id => service.name, 
-                  :action	=> :show_status, :custom => service.custom 
+            <%= image_tag 'spinner.gif', :style => 'display: none', :id => "spinner_#{escape_javascript service.name}" %>
+            <%= url = {
+                  :controller => :services,
+                  :id => service.name,
+                  :action => :show_status,
+                  :custom => service.custom
                 }
-                link_to _('(refresh)'), 
-                  :remote => true,
-                  :update => "service_status_#{service.name}", 
-                  :url => url, 
-                  :loading  => "disable_buttons('#{service.name}');", 
-                  :complete => "toggle_service_info ('#{service.name}'); enable_buttons ('#{service.name}');"
-                %>
+
+                link_to _('(refresh)'), url, { :remote => true, :id => "refresh_#{escape_javascript service.name}", "data-type" => "html" }
+             %>
+
+            <%= render :partial => "refresh_ajax", :locals => { :service_name => service.name } %>
           </span>
 
           <p class="service-buttons">
             <!--# do not show enable/disable part for custom services -->
             <% commands.each do |cmd|	if (@exec_permission) && ! (service.custom && (cmd == "enable" || cmd == "disable")) %>
               <%= url = {
-                    :id => cmd, 
-                    :action => "execute", 
+                    :id => cmd,
+                    :action => "execute",
                     :service_id => service.name,
                     :custom => service.custom
                   }
@@ -308,7 +308,7 @@ function enable_buttons (s) {
                     :id => cmd + "_" + service.name
                 }
                 html_options[:style] = "display: none" if (cmd == "start" && service.status == 0) || (cmd == "stop" && service.status != 0) ||
-                  (cmd == "enable" && service.enabled) || (cmd == "disable" && !service.enabled) 
+                  (cmd == "enable" && service.enabled) || (cmd == "disable" && !service.enabled)
 
                 label = case cmd
                   when "start" then _("Start")
@@ -374,7 +374,7 @@ function enable_buttons (s) {
 </div>
 
   <div class="clearfix">&nbsp;</div>
-  
+
   <div class="button_container webyast_form" style="margin:5px 15px">
     <div class="hr">&nbsp;</div>
       <div class="nav-buttons">
