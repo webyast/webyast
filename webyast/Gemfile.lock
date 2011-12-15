@@ -6,6 +6,11 @@ GIT
       devise (> 1.1.0)
 
 PATH
+  remote: /data/local/git/webyast3/webyast/plugins/administrator
+  specs:
+    webyast-administrator (0.1)
+
+PATH
   remote: /data/local/git/webyast3/webyast/plugins/roles
   specs:
     webyast-roles (0.1)
@@ -191,6 +196,7 @@ DEPENDENCIES
   ruby-debug
   ruby_parser
   sqlite3-ruby
+  webyast-administrator!
   webyast-roles!
   webyast-services!
   webyast-status!
