@@ -22,17 +22,16 @@
 # Provides access to configuration of system administrator.
 
 class AdministratorController < ApplicationController
-  before_filter :login_required
   layout 'main'
   
   private
-  init_gettext "webyast-root-user" 
+  FastGettext.add_text_domain "webyast-root-user", :path => "locale"
 
   public
 
   def index
-    yapi_perm_check "administrator.read"
-    @write_permission = yapi_perm_granted?("administrator.write")
+    authorize! :read, Administrator
+    @write_permission = can? :write, Administrator
     
     @administrator	= Administrator.find
     @administrator.confirm_password	= ""
@@ -99,7 +98,8 @@ class AdministratorController < ApplicationController
       end
     end
 
-    redirect_success
+# FIXME missing this call breaks base system set-up    redirect_success
+    redirect_to :action => "index"
   end
 
 
@@ -109,7 +109,7 @@ class AdministratorController < ApplicationController
   # Read administrator settings (currently mail aliases).
   # Requires read permissions for administrator YaPI.
   def show
-    yapi_perm_check "administrator.read"
+    authorize! :read, Administrator
 
     admin = Administrator.find
 

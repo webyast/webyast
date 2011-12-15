@@ -21,13 +21,11 @@
 
 <% content_for :head do %>
 
-  <% unless JSMIN == true %>
-    <%= stylesheet_link_tag "webyast-administrator" %>
-    <%= javascript_include_tag "digitalspaghetti.password.js" %>
-    <%= javascript_include_tag "passwordStrengthMeter" %>
-  <% end %>
+  <%= stylesheet_link_tag "webyast-administrator" %>
+  <%= javascript_include_tag "digitalspaghetti.password.js" %>
+  <%= javascript_include_tag "passwordStrengthMeter" %>
 
-  <%= render :partial => "shared/notification", :locals = { :module_name => 'administrator'} %>
+  <%= render :partial => "shared/notification", :locals => { :module_name => 'administrator'} %>
 
   <script type="text/javascript">
     // define custom validation function
@@ -87,12 +85,13 @@
   <% disabled = !@write_permission %>
   <%= render :partial => 'shared/missing_write_permissions' if disabled %>
 
-  <% form_for(:administrator, @administrator, :url => { :action => "update" }, :html => { :method => :put, :id => "adminForm", :class=>"webyast_form", :onsubmit => "disable_forms ()", :autocomplete => :off } ) do |f| %>
-    <%= f.error_messages %>
+  <%= form_for(:administrator, :url => { :action => "update" }, :html => { :method => :put, :id => "adminForm", :class=>"webyast_form", :onsubmit => "disable_forms ()", :autocomplete => :off } ) do |f| %>
+     <%= #FIXME f.error_messages
+     %>
 
     <div class="plugin-header">
     	<div class="left">
-    	  <label class="plugin-icon-container"><img class="plugin-icon" src="/icons/administrator.png"></label>
+    	  <label class="plugin-icon-container"><%= image_tag("administrator.png", :class=>"plugin-icon") %></label>
     	  <label class="plugin-name"><%=_("Administrator Settings")%></label>
     	</div>
       <div class="right" >

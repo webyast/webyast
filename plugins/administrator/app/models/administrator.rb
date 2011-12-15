@@ -20,6 +20,7 @@
 #++
 require 'singleton'
 require 'yast_service'
+require 'base_model/base'
 
 # = Administrator model
 # Proviceds access to system administrator.
