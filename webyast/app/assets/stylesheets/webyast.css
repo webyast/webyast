@@ -515,7 +515,7 @@ fieldset fieldset {
   display: block;
   width: 23px;
   height: 19px;
-  background: transparent url(status-imagemap.png) no-repeat scroll 0 0;
+  background: transparent url(/assets/images/status-imagemap.png) no-repeat scroll 0 0;
   float: left;
   margin-left: 3px;
   margin-right: 3px;
@@ -525,14 +525,14 @@ fieldset fieldset {
   display: block;
   width: 23px;
   height: 23px;
-  background: transparent url(assets/bug.png) no-repeat scroll 0 0;
+  background: transparent url(/assets/bug.png) no-repeat scroll 0 0;
   float: left; }
 
 .status-icon + span {
   /*  margin-left: 1em; */
   line-height: 2em; }
 .status-icon.ok {
-  background-position: 0 -3; }
+  background-position: 0 -3px; }
 .status-icon.warning {
   background-position: 0 -24px; }
 .status-icon.error {
