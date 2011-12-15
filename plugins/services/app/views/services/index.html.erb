@@ -92,10 +92,10 @@
 
           <p class='description quicksearch_content'>
             <i><%= service.description ? h(service.description) : _("Description for service is not available") %></i>
-            <!-- This is a workaround for quicksearch plugin - it can search in _one_ element
+            <%# This is a workaround for quicksearch plugin - it can search in _one_ element
               so we add the service name and summary here again and make it hidden so it is also
-              searched but not displayed -->
-            <span style="display: none"><%= h(service.name)+h(service.summary) -%></span>
+              searched but not displayed %>
+            <span style="display: none"><%= h(service.name) + " " + h(service.summary) -%></span>
           </p>
 
           <%= image_tag "working.gif", :class => "small-working-icon", :id => "service_progress_#{service.name}", :style => "display: none" %>
@@ -132,6 +132,7 @@
                     :service_id => service.name,
                     :custom => service.custom
                   }
+                button_id = cmd + "_" + service.name
                 status_url = {
                     :controler => :services,
                     :action => :show_status,
@@ -140,7 +141,7 @@
                 }
                 html_options = {
                     :class => "button",
-                    :id => cmd + "_" + service.name
+                    :id => button_id
                 }
                 html_options[:style] = "display: none" if (cmd == "start" && service.status == 0) || (cmd == "stop" && service.status != 0) ||
                   (cmd == "enable" && service.enabled) || (cmd == "disable" && !service.enabled)
@@ -152,49 +153,23 @@
                   when "enable"	then _("Start on Boot")
                   when "disable" then _("Do Not Start on Boot")
                   else cmd
-                  end
+                end
 
-                complete = remote_function(:update => "service_status_#{service.name}",
-                    :url => status_url,
-                    :complete => "toggle_service_info ('#{service.name}'); $('#service_result_#{service.name}').show(); enable_buttons('#{service.name}')"
-                )
-
+                refresh = []
                 # dependent services must also update status
                 if (cmd == "start" || cmd == "restart" || cmd == "enable")
-                  service.required_for_start.each do |required|
-                  complete = complete + ";" + remote_function(
-                    :update => "service_status_#{required}",
-                    :url => {
-                      :controler => :services,
-                      :action => :show_status,
-                      :id => required
-                    },
-                    :complete	=> "toggle_service_info ('#{required}')"
-                  )
-                end
-
+                  refresh = service.required_for_start
                 elsif (cmd == "stop" || cmd == "disable")
-                  service.required_for_stop.each do |required|
-                  complete = complete + ";" + remote_function(
-                    :update => "service_status_#{required}",
-                    :url => {
-                      :controler => :services,
-                      :action => :show_status,
-                      :id => required
-                    },
-                    :complete	=> "toggle_service_info ('#{required}')"
-                  )
+                  refresh = service.required_for_stop
                 end
-              end
 
-          link_to label,
-            :remote     => true,
-            :url	=> url,
-            :loading	=> "disable_buttons('#{service.name}');",
-            :complete   => complete,
-            :html	=> html_options,
-            :update	=> "service_result_#{service.name}"
+              link_to label, url, {
+                :remote     => true,
+                :complete   => :complete,
+                 "data-type" => "html"
+                }.merge(html_options)
           %>
+            <%= render :partial => "execute_ajax", :locals => { :button_id => button_id, :service_name => service.name, :refresh => refresh } %>
           <%
          end
       end %>
