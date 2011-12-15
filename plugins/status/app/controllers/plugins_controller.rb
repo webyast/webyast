@@ -64,7 +64,7 @@ public
   # GET /plugins.xml
   #
   def index
-    permission_check("org.opensuse.yast.system.status.read") # RORSCAN_ITL
+    authorize! :read, Metric
     what = :all
     load_translations unless Rails.cache.exist?("plugin:find:#{what.inspect}")
     @plugins = Plugin.find(what)
@@ -78,7 +78,7 @@ public
   # GET /plugins/users.xml
   #
   def show
-    permission_check("org.opensuse.yast.system.status.read") # RORSCAN_ITL
+    authorize! :read, Metric
     load_translations unless Rails.cache.exist?("plugin:find:#{params[:id]}")
     @plugins = Plugin.find(params[:id])
     respond_to do |format|

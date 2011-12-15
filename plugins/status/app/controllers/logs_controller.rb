@@ -38,7 +38,7 @@ class LogsController < ApplicationController
   # GET /logs.xml
   #
   def index
-    permission_check("org.opensuse.yast.system.status.read") # RORSCAN_ITL
+    authorize! :read, Metric
     @logs = Log.find(:all)
     respond_to do |format|
       format.json { render :json => @logs.to_json }
@@ -50,7 +50,7 @@ class LogsController < ApplicationController
   # GET /logs/system.xml
   #
   def show
-    permission_check("org.opensuse.yast.system.status.read") # RORSCAN_ITL
+    authorize! :read, Metric
     @logs = Log.find(params[:id])
     @logs.evaluate_content(params[:pos_begin], params[:lines])
     respond_to do |format|

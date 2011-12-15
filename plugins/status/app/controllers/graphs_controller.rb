@@ -43,7 +43,7 @@ class GraphsController < ApplicationController
 
   # PUT /graphs
   def update
-    permission_check("org.opensuse.yast.system.status.writelimits") # RORSCAN_ITL
+    authorize! :writelimits, Metric
     if params.has_key?(:graphs)
       @graph = Graph.new(params[:id], params[:graphs])
       @graph.save
@@ -61,7 +61,7 @@ class GraphsController < ApplicationController
   # GET /graphs.xml
   #
   def index
-    permission_check("org.opensuse.yast.system.status.read") # RORSCAN_ITL
+    authorize! :read, Metric
     @graph = Graph.find(:all, params[:checklimits] || true)
     respond_to do |format|
       format.json { render :json => @graph.to_json }
@@ -73,7 +73,7 @@ class GraphsController < ApplicationController
   # GET /graphs/1.xml
   #
   def show
-    permission_check("org.opensuse.yast.system.status.read") # RORSCAN_ITL
+    authorize! :read, Metric
     @graph = Graph.find(params[:id], params[:checklimits] || true)
     respond_to do |format|
       format.json { render :json => @graph.to_json }
