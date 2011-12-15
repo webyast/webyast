@@ -68,3 +68,7 @@
   border-radius: 0 0 0 0;
   line-height:16px;
 }
+
+p.service-buttons a {
+  margin: 0 5px;
+}
