@@ -153,4 +153,9 @@ $(document).ready(function(){
      animated   : false
   });
   $(".accordion").accordion('activate',false);
+
+  $("#filter_services").change(function() {
+    select_status($(this).val());
+  });
+
 });
