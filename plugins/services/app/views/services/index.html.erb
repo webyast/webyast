@@ -101,7 +101,7 @@
             <span style="display: none"><%= h(service.name)+h(service.summary) -%></span>
           </p>
 
-          <img src="/assets/working.gif" class="small-working-icon" id="service_progress_<%=h service.name%>" style="display: none" alt='working...'/>
+          <%= image_tag "working.gif", :class => "small-working-icon", :id => "service_progress_#{service.name}", :style => "display: none" %>
 
 
           <span class='service_status' id='service_status_<%= h service.name%>'>
