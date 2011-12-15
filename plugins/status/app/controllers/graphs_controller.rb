@@ -36,7 +36,8 @@ require 'uri'
 class GraphsController < ApplicationController
   layout "main"
 
-  init_gettext("webyast-status")
+  # Initialize GetText and Content-Type.
+  FastGettext.add_text_domain 'webyast-status', :path => 'locale'
 
   public
 
