@@ -34,8 +34,13 @@
 <% content_for :before_script do %>
   <%= javascript_tag do %>
     var AUTH_TOKEN = 'authenticity_token=' + encodeURIComponent("<%= escape_javascript form_authenticity_token %>");
-    startNotifier({'module':'graphs,plugins', 'AUTH_TOKEN':AUTH_TOKEN}, 1000, 11000);
 
+    try {
+      startNotifier({'module':'graphs,plugins', 'AUTH_TOKEN':AUTH_TOKEN}, 1000, 11000);
+    } catch(e) {
+      console.log("Notification start failed: " + e );
+    };
+  
     $(document).ready(function() {
       $(".accordion").accordion({
         autoHeight : false,
