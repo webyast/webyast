@@ -23,7 +23,6 @@ require 'open-uri' # RORSCAN_ITL
 
 class StatusController < ApplicationController
 
-#  before_filter :login_required
   layout "main"
 
   # Initialize GetText and Content-Type.

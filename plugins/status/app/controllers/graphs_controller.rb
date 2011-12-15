@@ -34,7 +34,6 @@ require 'uri'
 # GET /graphs/id returns one graph description
 #
 class GraphsController < ApplicationController
-  before_filter :login_required
   layout "main"
 
   init_gettext("webyast-status")
