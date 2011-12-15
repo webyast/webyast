@@ -43,8 +43,6 @@ class NetworkController < ApplicationController
   init_gettext "webyast-network" 
 
   public
-  def initialize
-  end
   
   NETMASK_RANGE = 0..32
   STATIC_BOOT_ID = "static"
