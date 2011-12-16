@@ -1,3 +1,5 @@
+Gemfile.lock
+pkg
 package/www/
 package/www.tar.bz2
 coverage
