@@ -18,9 +18,15 @@
 # To contact Novell about this file by physical or electronic mail,
 # you may find current contact information at www.novell.com
 #++
-
+require 'rails/all'
 require File.join(File.dirname(__FILE__), 'config', 'rails_parent')
 require File.join(RailsParent.parent, 'lib', 'tasks', 'common')
+
+begin
+  require 'bundler/setup'
+rescue LoadError
+  puts 'You must `gem install bundler` and `bundle install` to run rake tasks'
+end
 
 include FileUtils::Verbose
 
@@ -34,4 +40,10 @@ end
 Dir.glob(File.dirname(__FILE__) + "/lib/tasks/*.rake").each do |rake_file|
   import rake_file
 end
+APP_RAKEFILE = File.expand_path("../test/Rakefile", __FILE__)
+
+load 'rails/tasks/engine.rake'
+
+
+Bundler::GemHelper.install_tasks
 
