@@ -177,7 +177,7 @@ ul li {
   /*border-bottom: 1px solid mix($c_black, $c_header, 40%) */
   background-color: #c5c5c5;
   height: 50px;
-  vartical-align: middle;
+  vertical-align: middle;
   text-align: center;
   position: relative; }
   #header * {
@@ -352,7 +352,7 @@ ul li {
 #status_patches, #status_status {
   margin: 0;
   padding: 12px 0px 0px 10px;
-  vertical-align: image-top; }
+  vertical-align: text-top; }
   #status_patches label, #status_status label {
     margin-left: 5px;
     vertical-align: top; }

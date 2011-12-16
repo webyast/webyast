@@ -73,8 +73,8 @@
 .fieldset-group .ui-tabs-nav .ui-state-default, .fieldset-group .ui-tabs-nav .ui-state-active {
   -moz-border-radius-topleft: 4px;
   -moz-border-radius-topright: 4px;
-  border-radius-topleft: 4px;
-  border-radius-topright: 4px;
+  border-top-left-radius: 4px;
+  border-top-right-radius: 4px;
   -webkit-border-radius-topleft: 4px;
   -webkit-border-radius-topright: 4px;
   -khtml-border-radius-topleft: 4px;
@@ -84,7 +84,7 @@
   border-style: solid;
   border-width: 1px;
   position: relative;
-  bottom: -1;
+  bottom: -1px;
   color: #909090; }
 .fieldset-group .ui-tabs-nav .ui-state-active {
   color: #333333;

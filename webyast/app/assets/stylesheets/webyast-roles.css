@@ -233,7 +233,7 @@ img.deleteUser {
 img.deleteUser:hover, img.deleteRole:hover { background:#ccc; background:#d80000; }
 img.deleteUser:active, img.deleteRole:active { background:#d80000;}
 
-#rolesUpdateForm span#toolbox { float:right; vertical-align:middle; postion:relative; margin:14px 18px 0px 0px; padding:4px 0px 4px 0px; width:46%;  clear:both; }
+#rolesUpdateForm span#toolbox { float:right; vertical-align:middle; position:relative; margin:14px 18px 0px 0px; padding:4px 0px 4px 0px; width:46%;  clear:both; }
 img.resetSearch {
   position:absolute;
   background-color:#fff;

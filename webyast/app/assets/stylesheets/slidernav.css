@@ -68,7 +68,7 @@
   text-transform: uppercase; 
   cursor: pointer; 
   border:0px; 
-  text-align:middle;
+  vertical-align: middle;
   text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.5); 
 }
 

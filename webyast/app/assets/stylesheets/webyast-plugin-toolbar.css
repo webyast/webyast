@@ -168,7 +168,7 @@
 /*}*/
 
 /*#search-userbar label, #softwarebar label, #systembar label {*/
-/*  font-weight:bold; /*margin-top:-1px;*/*/
+/*  font-weight:bold; /*margin-top:-1px;*/
 /*  text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.2), 0 1px 0 rgba(255, 255, 255, 0.9);*/
 /*}*/
 
@@ -202,7 +202,7 @@
 /*}*/
 
 /*.action_links a:hover {*/
-/*/*   background:url('gradientx40.png') repeat-x #3494f2; */*/
+/*   background:url('gradientx40.png') repeat-x #3494f2; */
 /*  cursor:pointer;*/
 /*  background: #888;*/
 /*  background: -moz-linear-gradient(center top , #bbb 10%, #aaa 30%, #999 51%,  #888 100%) repeat scroll 0 0 transparent;*/
