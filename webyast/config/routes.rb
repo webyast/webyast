@@ -7,10 +7,12 @@ Webyast::Application.routes.draw do
   resource :permissions
   resource :vendor_settings
 
-  mount WebYaST::UsersEngine => '/'
-  mount WebYaST::ServicesEngine => '/'
-  mount WebYaST::StatusEngine => '/'
-  mount WebYaST::AdministratorEngine => '/'
+  #mounting each plugin  
+  webyast_module = Object.const_get("WebYaST")
+  webyast_plugins = webyast_module.constants
+  webyast_plugins.each do |plugin|
+    mount webyast_module.const_get(plugin) => '/'
+  end
 
   root :to => 'controlpanel#index'
 
