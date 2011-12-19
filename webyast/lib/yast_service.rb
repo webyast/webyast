@@ -39,9 +39,9 @@ class YastService
     # Lock YastService for single use
     #
     def YastService.lock
-      Rails.logger.info "DBUS locking"
+#      Rails.logger.info "DBUS locking"
       @@yast_mutex.lock
-      Rails.logger.info "DBUS locked"
+#      Rails.logger.info "DBUS locked"
     end
 
     #
@@ -56,7 +56,7 @@ class YastService
         rescue Exception => e
           Rails.logger.debug "DBUS is not locked"
         end
-        Rails.logger.info "DBUS unlocked"
+#        Rails.logger.info "DBUS unlocked"
       end
     end
 
