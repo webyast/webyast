@@ -21,19 +21,27 @@ gem "gettext", '>= 1.9.3', :require => false
 gem "countries_and_languages", '>=0.1.2', :require => 'countries_and_languages/rails'
 
 gem 'ruby-debug'
-
 gem 'cancan'
-
-#gem 'ruby-dbus', :git => 'https://github.com/mvidner/ruby-dbus.git'
 gem 'polkit1', :path => File.expand_path("../../ruby-polkit1", __FILE__)
 gem 'inifile'
 gem 'ruby-dbus'
 
-gem 'webyast-users', :path => File.expand_path("../../plugins/users", __FILE__)
-gem 'webyast-roles', :path => File.expand_path("../../plugins/roles", __FILE__)
-gem 'webyast-services', :path => File.expand_path("../../plugins/services", __FILE__)
-gem 'webyast-status', :path => File.expand_path("../../plugins/status", __FILE__)
-gem 'webyast-administrator', :path => File.expand_path("../../plugins/administrator", __FILE__)
+plugin_path = File.expand_path("../../plugins",  __FILE__)
+gemspecs = Dir.glob(File.join(plugin_path, "**", "*.gemspec"))
+unless gemspecs.empty?
+  #We are in devel. mode. Loading all plugins
+  gemspecs.each do |gemspec|
+    plugin_name = gemspec.split("/").pop.split(".")[0]
+    gem plugin_name, 
+        :path => File.expand_path("../../plugins/#{gemspec.split("/").pop(2)[0]}", __FILE__)
+  end
+else
+  #Loading gems from the official path
+  `gem list`.split("\n").each do |gem_name_version|
+    gem_name = gem_name_version.split[0]
+    gem gem_name if gem_name.start_with("webyast-")
+  end 
+end
 
 group :development do
   # needed for rake gettext:find
