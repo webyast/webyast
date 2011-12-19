@@ -31,29 +31,19 @@ class Ability
       action ||= "" #avoid nil action
       perm = "org.opensuse.yast.modules.yapi.#{subject_class.to_s.downcase}.#{action.to_s.downcase}"
       granted = false
-      YastService.lock #locking for other thread
-      begin
-        if Permission.dbus_obj.check( [perm], user.username )[0][0] == "yes"
-          Rails.logger.debug "Action: #{perm} User: #{user.username} Result: ok"
-          granted = true
-        else
-          Rails.logger.debug "Action: #{perm} User: #{user.username} Result: NOT granted"
-        end
-      rescue Exception => e
+      permission = Permission.find( perm, {:user_id => user.username})
+      if permission.length >= 1
+        granted = true if permission[0][:granted] 
+      else
         #trying out pluralized class 
         perm = "org.opensuse.yast.modules.yapi.#{subject_class.to_s.pluralize.downcase}.#{action.to_s.downcase}"          
-        if Permission.dbus_obj.check( [perm], user.username )[0][0] == "yes"
-          Rails.logger.debug "Action: #{perm} User: #{user.username} Result: ok"
-          granted = true
-        else
-          Rails.logger.debug "Action: #{perm} User: #{user.username} Result: NOT granted"
-        end
-        unless granted
-          Rails.logger.info e
-          raise PolicyKitException.new(e.message, user.username, perm)
-        end
-      ensure
-        YastService.unlock #unlocking for other thread
+        permission = Permission.find( perm, {:user_id => user.username})
+        granted = true if permission[0][:granted] 
+      end
+      if granted
+        Rails.logger.debug "Action: #{perm} User: #{user.username} Result: ok"
+      else
+        Rails.logger.debug "Action: #{perm} User: #{user.username} Result: NOT granted"
       end
       granted
     end

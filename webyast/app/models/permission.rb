@@ -154,7 +154,6 @@ private
     desc
   end
 
-public
   def self.all_actions
     `/usr/bin/pkaction` # RORSCAN_ITL
   end
