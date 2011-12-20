@@ -20,7 +20,8 @@
 
 
 <% content_for :head do %>
-  <% if true %>
+  <%# FIXME: all JS files are loaded by default, no need to load them once more %>
+  <% if false %>
     <%= javascript_include_tag "webyast-controlpanel", "webyast-localstorage"%> 
     <%= javascript_include_tag "jquery.easing.1.3" %>
     <%= javascript_include_tag "jquery.quicksand" %>
@@ -28,9 +29,9 @@
 <% end %>
 
 
-
 <% display_patches = ControlPanelConfig.read 'display_patch_status', true %>
 <% display_status = ControlPanelConfig.read 'display_system_status', true %>
+<% status_present = Rails::Engine::Railties.engines.find {|e| e.class.to_s == "WebYaST::StatusEngine"} %>
 
 <% if Rails.application.routes.routes.map(&:path).include?("/patches") && display_patches %>
   <% javascript_tag do -%>
@@ -40,12 +41,23 @@
   <% end -%>
 <% end %>
 
-<% if Rails.application.routes.routes.map(&:path).include?("/status") && display_status %>
-  <% javascript_tag do -%>
-    $(document).ready( function() {
-      <%= remote_function(:update => "statusbar_status", :url => { :controller => :status, :action => :show_summary, :background => true }) %>
-    });
-  <% end -%>
+<% if status_present && display_status %>
+  <% content_for :head do %>
+    <% javascript_tag do -%>
+      $(document).ready( function() {
+        $.ajax({
+          type: 'GET',
+          url: '<%= url_for({ :controller => :status, :action => :show_summary, :background => true }) -%>',
+          success: function(data, status, xhr) {
+            $('#statusbar_status').html(data);
+          },
+          error: function(xhr, status, error) {
+            $('#statusbar_status').html('<b><%= escape_javascript _("Error: Cannot check the current status.") -%></b>');
+          }
+        });
+      });
+    <% end -%>
+  <% end %>
 <% end %>
 
 <!-- <h3 style="vertical-align: middle;"><%= image_tag("monitoring.png", :height=>"21", :width=>"21", :border=>"0", :style=>'vertical-align: middle;') %> <%= _("Status") %></h3> -->
@@ -61,7 +73,7 @@
         <label><%= _("System status") %></label>
       </div>
       <div id="statusbar_status">
-        <% if Rails::Engine::Railties.engines.find {|e| e.class.to_s == "WebYaST::StatusEngine"} %>
+        <% if status_present %>
           <% if display_status %>
             <div class="statusbar_row">
               <%= image_tag("working.gif", :class => "small-working-icon") %>
@@ -130,7 +142,7 @@
 
           <label id="filter_all" value="All" class="quicksand_button quicksand_button_right" value="All" style="float:right"><%= _("All") %></label>
 
-          <span id="hidden_filters">     
+          <span id="hidden_filters">
             <% @shortcuts.values.reject {|d| d['disabled']}.index_by {|r| r['groups']}.values.each_with_index do | shortcut, i | %>
               <% array = Array['quicksand_button_left', 'quicksand_button_center', 'quicksand_button_right'] %>
               <label value="<%= shortcut['groups'] %>" class="quicksand_button <%= array[i] %>" ><%= _(shortcut['groups'].to_s) %></label>
