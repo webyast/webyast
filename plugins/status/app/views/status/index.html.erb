@@ -41,6 +41,24 @@
         animated   : false
       });
       $(".accordion").accordion('activate',false);
+
+      <% @logs.each do |log| %>
+        <% default_lines=50 %>
+        <% frequency=15 %>
+
+        setInterval(function(){
+          $.ajax({
+            url: "<%= url_for({ :controller=>:status, :action => 'ajax_log_custom', :id => log.id, :lines => default_lines }) -%>",
+            type: "GET",
+            success: function(data, status, xhr) {
+              $('#<%= log_id(log.id) %>').html(data);
+            },
+            error: function(xhr, status, error) {
+              $('#<%= log_id(log.id) %>').html('<b><%= escape_javascript _("Error: Cannot get information.") -%></b>');
+            }
+          });
+          }, <%= frequency*1000 %>);
+      <% end -%>
     });
   <% end %>
 <% end %>
@@ -190,9 +208,6 @@
           <%= log.path %>
         </div>
     </div>
-    <%  periodically_call_remote(:url => { :action => "ajax_log_custom", 
-                                 :id => log.id, :lines => default_lines }, :frequency => frequency, 
-                                 :update => log_id(log.id)) #currently due missing '=' disabled %>
 <% end %>
 </div>
 
