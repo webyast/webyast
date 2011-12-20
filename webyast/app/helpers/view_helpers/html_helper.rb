@@ -164,7 +164,7 @@ module ViewHelpers::HtmlHelper
       <div id="error-#{error_id}-content">
         <div>
           <p><strong>Error message:</strong>#{err_message}</p>
-          <p><span class="bug-icon"></span><a target="_blank" href="#{::ApplicationController.bug_url}">Report bug</a></p>
+          <p><span class="bug-icon"></span><a target="_blank" href="#{"FIXME ::ApplicationController.bug_url"}">Report bug</a></p>
           <p>
             <a href="#" id="error-#{error_id}-show-backtrace-link">Show details</a>
  <!--         {clippy("message: #{err_message}\n backtrace: #{backtrace_text}") } -->
@@ -217,6 +217,7 @@ module ViewHelpers::HtmlHelper
          });
      </script>
 EOF2
+  html.html_safe
   end
 
   def progress_bar(percent, width = '150px', height = '1.4em')
