@@ -19,9 +19,8 @@
 */
 
 var currentURL = window.location.toString().split("/");
-var index = new RegExp("controlpanel"); 
 //Match the control panel (index page) and enable tracking
-if(index.test(currentURL)) {
+if(currentURL.pop.length == 0) {
   $(function() {
     var $plugins = $('#webyast_plugins');
     var $data = $plugins.clone();
