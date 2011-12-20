@@ -28,7 +28,7 @@
 <% unless status.blank? %>
   <% status.split(';').each do | message | %>
     <div class="statusbar_row">
-     	<img src="/images/status-warning.png">
+        <%= image_tag "status-warning.png" %>
  	    <a href="status" class="warning_message">
         <span><%= message %></span>
       </a>
@@ -55,7 +55,7 @@
     <% end -%>
 
     <div class="statusbar_row">
-      <img src="/images/checkmark.gif" class="checked_health">
+      <%= image_tag "checkmark.gif", :class => "checked_health" %>
       <span><%= _("Your system is healthy.") %></span> <!-- RORSCAN_ITL -->
       <!-- #<#% link_to "status", :class=>"warning_message" do #%#> -->
       <!-- #<#% end #%#> -->
