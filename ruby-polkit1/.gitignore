@@ -2,3 +2,5 @@
 .bundle
 Gemfile.lock
 pkg/*
+lib/polkit1.so
+tmp/*
