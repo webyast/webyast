@@ -70,7 +70,7 @@
   <% @graphs.each do |group| %>
     <div class="list-fieldset"> <!-- RORSCAN_INL_12 th whole block -->
       <div class="list-fieldset-header" 
-           onclick="<%= 
+           onclick="<%# FIXME: replace by jQuery AJAX call
              remote_function(:update   => graph_id(group.id, group.single_graphs.first["headline"]),
                              :url      => { :action => 'evaluate_values',
                                             :group_id => group.id,

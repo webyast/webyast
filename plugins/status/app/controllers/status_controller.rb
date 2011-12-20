@@ -142,11 +142,12 @@ class StatusController < ApplicationController
   # AJAX call for showing status overview
   #
   def show_summary
+    authorize! :read, Metric
     level = "ok"
     status = ""
     ret_error = nil
     refresh = true
-    unless permission_granted? "org.opensuse.yast.system.status.read"
+    unless true # FIXME: permission_granted? "org.opensuse.yast.system.status.read"
       status = _("Status not available (no permissions)")
       level = "warning"  #it is a warning only
     else
@@ -184,24 +185,25 @@ class StatusController < ApplicationController
             status += "; " + error.message
           end
         rescue Exception => e
-	  logger.warn error.inspect
+          logger.warn error.inspect
           level = "error"
           ret_error = error
           refresh = false
         end
         #Checking WebYaST service plugins
         begin
-          plugins = Plugin.find(:all)
-          plugins.each {|plugin|
-            level = plugin.level if plugin.level == "error" || (plugin.level == "warning" && level == "ok")
-            if status.blank?
-              status = plugin.short_description
-            else
-              status += "; " + plugin.short_description
-            end
-          }
+# FIXME:
+#          plugins = Plugin.find(:all)
+#          plugins.each {|plugin|
+#            level = plugin.level if plugin.level == "error" || (plugin.level == "warning" && level == "ok")
+#            if status.blank?
+#              status = plugin.short_description
+#            else
+#              status += "; " + plugin.short_description
+#            end
+#          }
         rescue Exception => error
-	  logger.warn error.inspect
+          logger.warn error.inspect
           level = "error"
           refresh = false
 	  error_hash = Hash.from_xml error.response.body
