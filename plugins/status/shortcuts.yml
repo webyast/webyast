@@ -7,5 +7,5 @@ main:
   title: _("Status")
   description: _("Show system status")
   resources: [ status ]
-  read_permissions: [ org.opensuse.yast.system.status.read ]
+  read_permissions: [ org.opensuse.yast.modules.yapi.metrics.read ]
 
