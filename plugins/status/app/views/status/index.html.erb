@@ -75,6 +75,27 @@
           });
         });
 
+      <% if @graphs %>
+        <% @graphs.each do |group| %>
+          <% unless group.single_graphs.blank? %>
+            $('#<%= graph_id(group.id, group.single_graphs.first["headline"]) %>-header').click(function(){
+              $.ajax({
+                url: "<%= url_for({ :action => 'evaluate_values',
+                                              :group_id => group.id,
+                                              :graph_id => group.single_graphs.first["headline"] }) -%>",
+                type: "POST",
+                success: function(data, status, xhr) {
+                  $('#<%= graph_id(group.id, group.single_graphs.first["headline"]) %>').html(data);
+                },
+                error: function(xhr, status, error) {
+                  $('#<%= graph_id(group.id, group.single_graphs.first["headline"]) %>').html('<b><%= escape_javascript _("Error: Cannot get information.") -%></b>');
+                }
+              });
+            });          
+          <% end -%>
+        <% end -%>
+      <% end -%>
+
       <% end -%>
  
     });
@@ -105,14 +126,7 @@
 <% if @graphs %>
   <% @graphs.each do |group| %>
     <div class="list-fieldset"> <!-- RORSCAN_INL_12 th whole block -->
-      <div class="list-fieldset-header" 
-           onclick="<%= remote_function(:update   => graph_id(group.id, group.single_graphs.first["headline"]),
-                             :url      => { :action => 'evaluate_values',
-                                            :group_id => group.id,
-                                            :graph_id => group.single_graphs.first["headline"] },
-                             :complete => evaluate_next_graph(group.id, group.single_graphs, 1 ) 
-                            ) unless group.single_graphs.blank?
-           %>">
+      <div class="list-fieldset-header"  id ="<%= graph_id(group.id, group.single_graphs.first["headline"]) %>-header">
          <span class="status-icon <%= limits_reached(group) ? 'error' : 'ok' %>"></span>
          <%= group.headline %>
       </div>
