@@ -33,6 +33,7 @@
   <%= render :partial => "shared/notification", :locals => { :module_name => 'graphs,plugins'} %>
   <%= javascript_tag do %>
     $(document).ready(function() {
+
       $(".accordion").accordion({
         autoHeight : false,
         navigation : true,
@@ -44,7 +45,7 @@
 
       <% @logs.each do |log| %>
         <% default_lines=50 %>
-        <% frequency=15 %>
+        <% frequency=60 %>
 
         setInterval(function(){
           $.ajax({
@@ -57,8 +58,25 @@
               $('#<%= log_id(log.id) %>').html('<b><%= escape_javascript _("Error: Cannot get information.") -%></b>');
             }
           });
-          }, <%= frequency*1000 %>);
+          }, <%= frequency*1000 %>
+        );
+
+
+        $('#<%="log-#{log.id}-header"%>').click(function(){
+          $.ajax({
+            url: "<%= url_for({ :action => "ajax_log_custom", :id => log.id, :lines => default_lines }) -%>",
+            type: "GET",
+            success: function(data, status, xhr) {
+              $('#<%= log_id(log.id) %>').html(data);
+            },
+            error: function(xhr, status, error) {
+              $('#<%= log_id(log.id) %>').html('<b><%= escape_javascript _("Error: Cannot get information.") -%></b>');
+            }
+          });
+        });
+
       <% end -%>
+ 
     });
   <% end %>
 <% end %>
@@ -196,10 +214,7 @@
     <div class="list-fieldset">
       <% default_lines=50 %>
       <% frequency=15 %>
-      <div class="list-fieldset-header"
-           onclick="<%= remote_function(:update   => log_id(log.id),
-                                        :url => { :action => "ajax_log_custom", 
-                                        :id => log.id, :lines => default_lines }) %>">
+      <div class="list-fieldset-header" id="<%="log-#{log.id}-header"%>">
          <span class='status-icon none'></span>
          <%= log.description %>
       </div>
