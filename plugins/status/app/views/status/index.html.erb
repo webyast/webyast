@@ -85,7 +85,9 @@
                                               :graph_id => group.single_graphs.first["headline"] }) -%>",
                 type: "POST",
                 success: function(data, status, xhr) {
+                  <%= evaluate_next_graph(group.id, group.single_graphs, 1 ) %>
                   $('#<%= graph_id(group.id, group.single_graphs.first["headline"]) %>').html(data);
+
                 },
                 error: function(xhr, status, error) {
                   $('#<%= graph_id(group.id, group.single_graphs.first["headline"]) %>').html('<b><%= escape_javascript _("Error: Cannot get information.") -%></b>');
