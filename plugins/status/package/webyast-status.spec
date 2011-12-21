@@ -23,7 +23,7 @@ Version:        0.2.11
 Release:        0
 Summary:        WebYaST - system status 
 Source:         www.tar.bz2
-Source1:        org.opensuse.yast.system.status.policy
+Source1:        org.opensuse.yast.modules.yapi.metrics
 Source2:	org.opensuse.yast.modules.logfile.policy
 Source3:	LogFile.rb
 BuildRoot:      %{_tmppath}/%{name}-%{version}-build
