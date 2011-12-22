@@ -6,6 +6,11 @@ GIT
       devise (> 1.1.0)
 
 PATH
+  remote: /home/src/rails/webyast3/plugins/activedirectory
+  specs:
+    webyast-activedirectory (0.1)
+
+PATH
   remote: /home/src/rails/webyast3/plugins/administrator
   specs:
     webyast-administrator (0.1)
@@ -196,6 +201,7 @@ DEPENDENCIES
   ruby-debug
   ruby_parser
   sqlite3-ruby
+  webyast-activedirectory!
   webyast-administrator!
   webyast-roles!
   webyast-services!

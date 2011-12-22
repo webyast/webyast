@@ -74,11 +74,7 @@ class UsersController < ApplicationController
     all_users_list.join(",")
   end
 
-  # Initialize GetText and Content-Type.
-  #init_gettext "webyast-users"
-
   public
-
 
   # GET /users
   # GET /users.xml

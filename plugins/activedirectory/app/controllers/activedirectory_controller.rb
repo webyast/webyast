@@ -25,18 +25,14 @@
 
 class ActivedirectoryController < ApplicationController
   
-  before_filter :login_required
-  #before_filter :set_perm
   layout 'main'
 
   # Initialize GetText and Content-Type.
-  init_gettext 'yast_webclient_activedirectory'
+  FastGettext.add_text_domain "webyast-activedirectory", :path => "locale"
   
   def index
-    yapi_perm_check "activedirectory.read"
-    
+    authorize! :read, Activedirectory
     @poll_for_updates = true
-    @write_permission = yapi_perm_granted?("activedirectory.write")
     
     begin
       @activedirectory = Activedirectory.find
@@ -45,20 +41,16 @@ class ActivedirectoryController < ApplicationController
     rescue ActiveResource::ResourceNotFound => e
       flash[:error] = _("Cannot read Active Directory client configuraton.")
       @activedirectory  = nil
-      @write_permission  = {}
       render :index and return
     end
-
-    logger.debug "permissions: #{@write_permission.inspect}"
     return unless @activedirectory
   end
 
   # PUT action
   # Write AD client configuration
   def update
+    authorize! :write, Activedirectory
     @poll_for_updates = false
-    @write_permission = yapi_perm_granted?("activedirectory.write")
-    yapi_perm_check "activedirectory.write"
     
     if params["activedirectory"] == nil || params["activedirectory"] == {}
       raise InvalidParameters.new :activedirectory => "Missing"
@@ -101,8 +93,6 @@ class ActivedirectoryController < ApplicationController
       end
     else #REST API
       Rails.logger.debug "XML FORMAT"
-      
-      yapi_perm_check "activedirectory.write"
       args = params["activedirectory"]
       args = {} if args.nil?
 
@@ -121,7 +111,7 @@ class ActivedirectoryController < ApplicationController
   # GET action
   # Read AD client settings
   def show
-    yapi_perm_check "activedirectory.read"
+    authorize! :read, Activedirectory
     ad = Activedirectory.find
 
     respond_to do |format|
