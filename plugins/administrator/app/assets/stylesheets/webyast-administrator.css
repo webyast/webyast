@@ -25,7 +25,7 @@
 div.password_container { position:relative; margin-bottom:6px; }
 
 .graybar { width:208px; background:#dddddd; height:4px; display:inline-block;  position:absolute; top:30px; left:204px; }
-.colorbar { width:0px; background-image:url(../assets/passwordstrength.png); height:4px; display:inline-block; position:absolute; top:30px; left:204px; }
+.colorbar { width:0px; background-image:url(passwordstrength.png); height:4px; display:inline-block; position:absolute; top:30px; left:204px; }
 .percent { font-weight:bold; font-size:11px; color:#888; position:absolute; top:23px; left:434px; right:0px; }
 
 #validation_result { margin-left: 15px; color:#D70000; font-size:11px; color:green; font-family: Tahoma,Trebuchet MS,Helvetica,sans-serif; }
