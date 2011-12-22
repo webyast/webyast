@@ -16,6 +16,11 @@ PATH
     webyast-administrator (0.1)
 
 PATH
+  remote: /home/src/rails/webyast3/plugins/firewall
+  specs:
+    webyast-firewall (0.1)
+
+PATH
   remote: /home/src/rails/webyast3/plugins/roles
   specs:
     webyast-roles (0.1)
@@ -203,6 +208,7 @@ DEPENDENCIES
   sqlite3-ruby
   webyast-activedirectory!
   webyast-administrator!
+  webyast-firewall!
   webyast-roles!
   webyast-services!
   webyast-status!

@@ -19,21 +19,19 @@
 # you may find current contact information at www.novell.com
 -->
 <% content_for :head do %>
-  <% unless JSMIN == true %>  
-    <%= javascript_include_tag "webyast-firewall" %>
-    <%= stylesheet_link_tag "webyast-firewall" %>
-  <% end %>
+  <%= javascript_include_tag "webyast-firewall" %>
+  <%= stylesheet_link_tag "webyast-firewall" %>
 <% end %>
 
-<% disabled = !@write_permission %>
+<% disabled = cannot? :write, Firewall %>
 
 <div class="plugin-content plugin-border">
   <%= render :partial => 'shared/missing_write_permissions' if disabled %>
-  <% form_tag '/firewall/update', {:id=>'firewallForm', :class => 'container, webyast_form', :onsubmit => "return validateNeededServices()" } do %>
+  <%= form_tag '/firewall/update', {:id=>'firewallForm', :class => 'container, webyast_form', :onsubmit => "return validateNeededServices()" } do %>
 
   <div id="firewallbar" class="plugin-header">
     <div class="left" style="float:left">
-      <label class="plugin-icon-container"><img class="plugin-icon" src="/icons/firewall.png"></label>
+      <label class="plugin-icon-container">><%= image_tag("firewall.png", :class=>"plugin-icon") %></label>
       <label class="plugin-name">Firewall</label><span id="questionMark" style="margin:0px 15px; float:none;">?</span>
     </div>
 
@@ -69,7 +67,7 @@
 
   <div id="firewall-wrapper">
     <div id="allowedContainer">
-      <label><span class="icon-border"><img class="label-image" src="images/locko.png"></span><%= _("Allowed services") %></label>
+      <label><span class="icon-border"><%= image_tag("locko.png", :class=>"label-image") %></span><%= _("Allowed services") %></label>
       <% if @firewall.use_firewall %>
         <script type="text/javascript">jQuery(function($){ enableFirewallForm() })</script>
         <div id="allowed_services" class="services round5">
@@ -83,7 +81,7 @@
     </div> 
 
     <div id="blockedContainer">
-      <label><span class="icon-border"><img class="label-image" src="images/lock.png"></span><%= _("Blocked services") %></label>
+      <label><span class="icon-border"><%= image_tag("locko.png", :class=>"label-image") %></span><%= _("Blocked services") %></label>
       <% if @firewall.use_firewall %>
         <div id="blocked_services" class="services round5">
       <% else %>

@@ -98,8 +98,7 @@ class AdministratorController < ApplicationController
       end
     end
 
-# FIXME missing this call breaks base system set-up    redirect_success
-    redirect_to :action => "index"
+    redirect_success
   end
 
 
