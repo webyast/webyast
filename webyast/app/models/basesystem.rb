@@ -152,7 +152,7 @@ class Basesystem < BaseModel::Base
   end
 
   def current
-    @session[:wizard_current]
+    @session[:wizard_current] || FINISH_STEP
   end
 
   def self.load_from_file
