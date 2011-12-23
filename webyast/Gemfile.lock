@@ -26,6 +26,11 @@ PATH
     webyast-kerberos (0.1)
 
 PATH
+  remote: /home/src/rails/webyast3/plugins/ldap
+  specs:
+    webyast-ldap (0.1)
+
+PATH
   remote: /home/src/rails/webyast3/plugins/roles
   specs:
     webyast-roles (0.1)
@@ -215,6 +220,7 @@ DEPENDENCIES
   webyast-administrator!
   webyast-firewall!
   webyast-kerberos!
+  webyast-ldap!
   webyast-roles!
   webyast-services!
   webyast-status!

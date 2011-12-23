@@ -25,13 +25,14 @@
 
 class LdapController < ApplicationController
 
-  before_filter :login_required
   layout 'main'
   
   # Initialize GetText and Content-Type.
-  init_gettext 'webyast_ldap'
-
+  FastGettext.add_text_domain "webyast_ldap", :path => "locale"
+ 
   def index
+    authorize! :read, Ldap
+
     begin
       @ldap = Ldap.find
       Rails.logger.debug "ldap: #{@ldap.inspect}"
@@ -39,23 +40,21 @@ class LdapController < ApplicationController
       flash[:error] = _("Cannot read LDAP client configuraton.")
       Rails.logger.error "ERROR: #{error.inspect}"
       @ldap = nil
-      @permissions = {}
       render :index and return
     end
 
     return unless @ldap
-
-    @write_permission = yapi_perm_granted?("ldap.write")
-    logger.debug "permissions: #{@write_permission.inspect}"
   end
 
   # try to get base DN provided by given LDAP server
   def fetch_dn
+    authorize! :read, Ldap
     fetched = Ldap.fetch(params[:server])
     render :text => "$('#ldap_base_dn').val('#{fetched["dn"]}');"
   end
 
   def update
+    authorize! :write, Ldap
     Rails.logger.error "REQUEST #{request.inspect}"
     if request.format.html?
       begin
@@ -92,7 +91,7 @@ class LdapController < ApplicationController
   #
   # Requires read permissions for LDAP client YaPI.
   def show
-    yapi_perm_check "ldap.read"
+    authorize! :read, Ldap
 
     if params["fetch_dn"]
       dn = Ldap.fetch(params["server"])

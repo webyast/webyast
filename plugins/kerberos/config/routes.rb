@@ -1,3 +1,3 @@
-WebYaST::UsersEngine.routes.draw do
+WebYaST::KerberosEngine.routes.draw do
   resources :kerberos
 end
