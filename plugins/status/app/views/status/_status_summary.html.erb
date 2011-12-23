@@ -37,7 +37,7 @@
 
   <%= javascript_tag do -%>
     if($.browser.msie() && $.browser.version.number() == 8 ) {
-      $('#status-eye').css("background", "url(/images/circle-red.png)").addClass('eye_warning');
+      $('#status-eye').css("background", "url(circle-red.png)").addClass('eye_warning');
     } else {
       $('#status-eye').addClass('eye_warning');
     }
@@ -49,7 +49,7 @@
       if($('#status-eye').hasClass("eye_warning") == false) { 
         $('#status-eye').addClass('eye_healthy'); 
         if($.browser.msie() && $.browser.version.number() == 8 ) {
-          $('#status-eye').css("background", "url(/images/circle-green.png)");  
+          $('#status-eye').css("background", "url(circle-green.png)");  
         }
       }
     <% end -%>
