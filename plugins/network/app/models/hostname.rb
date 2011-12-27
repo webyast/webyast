@@ -23,6 +23,8 @@
 # Main goal is handle YaPI specific calls and data formats. Provides cleaned
 # and well defined data.
 
+require 'base_model/base'
+
 class Hostname < BaseModel::Base
   attr_accessor :name
   attr_accessor :domain

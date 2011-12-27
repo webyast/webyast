@@ -24,9 +24,8 @@
 
 class Network::HostnameController < ApplicationController
 
-  before_filter :login_required
-  before_filter(:only => [:show]) { |c| c.yapi_perm_check "network.read" }
-  before_filter(:only => [:create, :update]) { |c| c.yapi_perm_check "network.write"}
+  before_filter(:only => [:show]) { |c| c.authorize! :read, Network }
+  before_filter(:only => [:create, :update]) { |c| c.authorize! :write, Network }
 
   # Sets hostname settings. Requires write permissions for network YaPI.
   def update

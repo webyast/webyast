@@ -20,12 +20,10 @@
 -->
 
 <% content_for :head do %>
-  <% unless JSMIN == true %>
-    <%= javascript_include_tag "webyast-network" %>
-    <%= stylesheet_link_tag "webyast-network" %>
-  <% end %>
+  <%= javascript_include_tag "webyast-network" %>
+  <%= stylesheet_link_tag "webyast-network" %>
 
-  <%= render :partial => "shared/notification", :locals = { :module_name => 'dns,hostname,interfaces,routes' } %>
+  <%= render :partial => "shared/notification", :locals => { :module_name => 'dns,hostname,interfaces,routes' } %>
 
   <script type="text/javascript">
   $(document).ready(function() {
@@ -118,15 +116,15 @@
 
 
   <div class="plugin-content plugin-border">
-    <% write_disabled = ! @write_permission %>
+    <% write_disabled = cannot? :write, Network %>
     <%= render :partial => 'shared/missing_write_permissions' if write_disabled %>
 
-    <% form_for :network, @network, :url => { :action => "update" }, :html => {:id=>"dnsForm", :class=>"webyast_form", :method => :put, :onsubmit => "return submitValidForm();"} do |n| %>
+    <%= form_for :network, :url => { :action => "update" }, :html => {:id=>"dnsForm", :class=>"webyast_form", :method => :put, :onsubmit => "return submitValidForm();"} do |n| %>
       <input type="hidden" id="interface" name="interface" value="<%= @iface %>"/>
       
       <div class="plugin-header">
         <div class="left">
-          <label class="plugin-icon-container"><img class="plugin-icon" src="/icons/network.png"></label>
+          <label class="plugin-icon-container"><%= image_tag("network.png", :class=>"plugin-icon") %></label>
           <label class="plugin-name"><%=_("Network")%></label><span id="questionMark" style="margin:2px 15px; float:none;">?</span>
           <%=text_field_tag :conf_mode, @conf_mode, :type=>"hidden", :disabled => write_disabled %>
         </div>

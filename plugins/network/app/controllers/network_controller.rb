@@ -34,13 +34,12 @@ end
 
 class NetworkController < ApplicationController
 
-  before_filter :login_required
   layout 'main'
 
   private
 
   # Initialize GetText and Content-Type.
-  init_gettext "webyast-network" 
+  FastGettext.add_text_domain "webyast-network", :path => "locale"
 
   public
   
@@ -50,7 +49,7 @@ class NetworkController < ApplicationController
 
   # GET /network
   def index
-    yapi_perm_check "network.read"
+    authorize! :read, Network
     @ifcs = Interface.find :all
    
     # FIXED: MODULE CRASHED IF BOTH INTERFACES HAS ATTRIBUTE BOOTPROTO !!!
@@ -89,8 +88,6 @@ class NetworkController < ApplicationController
     rt = Route.find "default"
     return false unless rt
     
-    @write_permission = yapi_perm_granted?("network.write")
-
     @conf_mode = ifc.bootproto
     @conf_mode = STATIC_BOOT_ID if @conf_mode.blank?
 
@@ -128,6 +125,8 @@ class NetworkController < ApplicationController
   # PUT /users/1
   # PUT /users/1.xml
   def update
+    authorize! :write, Network
+
     dirty = false
     dirty_ifc = false
     

@@ -25,9 +25,8 @@
 
 class Network::RoutesController < ApplicationController
 
-  before_filter :login_required
-  before_filter(:only => [:index, :show]) { |c|    c.yapi_perm_check "network.read" }
-  before_filter(:only => [:create, :update]) { |c| c.yapi_perm_check "network.write"}
+  before_filter(:only => [:show, :index]) { |c| c.authorize! :read, Network }
+  before_filter(:only => [:create, :update]) { |c| c.authorize! :write, Network }
 
   # Sets route settings. Requires write permissions for network YaPI.
   # :route is specified, :routes is sent by the ui :-/
