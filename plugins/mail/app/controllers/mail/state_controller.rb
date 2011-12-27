@@ -23,13 +23,11 @@
 # Confirm that an test email has been sent
 
 class Mail::StateController < ApplicationController
-
-  before_filter :login_required
-   
+  
   # PUT action
   # Confirm that an test email has been sent
   def update
-    yapi_perm_check "mailsettings.write"
+    authorize! :write, Mail
 
     logger.warn "Confirmation of testmail"
     File.delete Mail::TEST_MAIL_FILE if File.exist? Mail::TEST_MAIL_FILE

@@ -6,7 +6,7 @@
   <vendor>Novell, Inc.</vendor>
   <vendor_url>http://www.novell.com</vendor_url>
 
-  <action id="org.opensuse.yast.modules.yapi.mailsettings.read">
+  <action id="org.opensuse.yast.modules.yapi.mail.read">
     <description>Read system mail settings</description>
     <message>Authentication is required to read mail settings</message>
     <defaults>
@@ -15,7 +15,7 @@
     </defaults>
   </action>
   
-  <action id="org.opensuse.yast.modules.yapi.mailsettings.write">
+  <action id="org.opensuse.yast.modules.yapi.mail.write">
     <description>Update system mail settings</description>
     <message>Authentication is required to update mail settings</message>
     <defaults>

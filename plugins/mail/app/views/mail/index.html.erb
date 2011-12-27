@@ -20,9 +20,8 @@
 -->
 
 <% content_for :head do %>
-	<%= javascript_include_tag "validation.js" %>
 
-        <%= render :partial => "shared/notification", :locals = { :module_name => 'mail'} %>
+        <%= render :partial => "shared/notification", :locals => { :module_name => 'mail'} %>
 
 	<script type="text/javascript">
 			$(document).ready(function() {
@@ -56,19 +55,16 @@
 	</script>
 <% end %>
 
-<!--<div class='plugin-icon'><img alt="yast-mail-server" src='/icons/yast-mail-server.png'/><%=_("Mail Settings")%><span id="questionMark">?</span></div> -->
-
 <div class="plugin-content plugin-border">
 
-<% disabled = !@write_permission %>
+<% disabled = cannot? :write, Mail %>
 <%= render :partial => 'shared/missing_write_permissions' if disabled %>
 
-  <% form_for(:mail, @mail, :url => { :action => "update" }, :html => { :method => :put, :id => "mailForm", :class=>"webyast_form", :autocomplete => :off, :onsubmit => "if ($('#mailForm').valid()); disable_forms ()" } ) do |f| %>
-  <%= f.error_messages %>
+  <%= form_for(@mail, :url => { :action => "update" }, :html => { :method => :put, :id => "mailForm", :class=>"webyast_form", :autocomplete => :off, :onsubmit => "if ($('#mailForm').valid()); disable_forms ()" } ) do |f| %>
 
   <div class="plugin-header">
     <div class="left">
-      <label class="plugin-icon-container"><img class="plugin-icon" src="/icons/mail.png"></label>
+      <label class="plugin-icon-container"><%= image_tag("mail.png", :class=>"plugin-icon") %></label>
       <label class="plugin-name"><%=_("Mail Settings")%></label>
    	</div>
 

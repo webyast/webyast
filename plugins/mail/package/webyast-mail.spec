@@ -23,7 +23,7 @@ Release:        0
 Summary:        WebYaST - system mail settings
 Source:         www.tar.bz2
 Source1:        MailSettings.pm
-Source2:	org.opensuse.yast.modules.yapi.mailsettings.policy
+Source2:	org.opensuse.yast.modules.yapi.mail.policy
 Source3:        postfix-update-hostname
 BuildRoot:      %{_tmppath}/%{name}-%{version}-build
 BuildArch:      noarch

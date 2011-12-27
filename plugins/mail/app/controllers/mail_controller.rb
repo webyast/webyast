@@ -26,27 +26,25 @@ require 'digest/sha2'
 
 class MailController < ApplicationController
 
-  before_filter :login_required
   layout 'main'
 
   # Initialize GetText and Content-Type.
-  init_gettext "webyast-mail"
+  FastGettext.add_text_domain "webyast-mail", :path => "locale"
   
   public
 
   def index
-    yapi_perm_check "mailsettings.read"
-    
+    authorize! :read, Mail
+   
     @mail = Mail.find
     @mail.confirm_password	= @mail.password
     @mail.test_mail_address	= ""
     @mail.test_mail_address	= params["email"] if params.has_key? "email"
     @mail.smtp_server = @mail.smtp_server.gsub(/^(\[)|(\])/, '') unless @mail.smtp_server.nil? #remove square brackets from smtp_server string
-    @write_permission = yapi_perm_check "mailsettings.write"
   end
   
   def show
-    yapi_perm_check "mailsettings.read"
+    authorize! :read, Mail
     mail = Mail.find
 
     respond_to do |format|
@@ -56,6 +54,7 @@ class MailController < ApplicationController
   end
     
   def update
+    authorize! :write, Mail
     @mail = Mail.find
     @mail.load params["mail"]
 

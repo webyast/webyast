@@ -21,6 +21,8 @@
 
 require 'singleton'
 require 'yast_service'
+require 'webyast/paths'
+require 'base_model/base'
 
 # = Mail model
 # Proviceds access local mail settings (SMTP server to use)
@@ -35,7 +37,7 @@ class Mail < BaseModel::Base
   attr_accessor :test_mail_address
   attr_accessor :transport_layer_security
 
-  TEST_MAIL_FILE = File.join(Paths::VAR,"mail","test_sent")
+  TEST_MAIL_FILE = File.join(WebYaST::Paths::VAR,"mail","test_sent")
 
   # read the settings from system
   def self.find
