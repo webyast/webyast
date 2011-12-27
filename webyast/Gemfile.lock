@@ -41,6 +41,11 @@ PATH
     webyast-network (0.1)
 
 PATH
+  remote: /home/src/rails/webyast3/plugins/ntp
+  specs:
+    webyast-ntp (0.1)
+
+PATH
   remote: /home/src/rails/webyast3/plugins/roles
   specs:
     webyast-roles (0.1)
@@ -233,6 +238,7 @@ DEPENDENCIES
   webyast-ldap!
   webyast-mail!
   webyast-network!
+  webyast-ntp!
   webyast-roles!
   webyast-services!
   webyast-status!

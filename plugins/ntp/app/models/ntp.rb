@@ -19,6 +19,9 @@
 # you may find current contact information at www.novell.com
 #++
 
+require 'yast_cache'
+require 'base_model/base'
+
 class Ntp < BaseModel::Base
 
   attr_accessor :actions
