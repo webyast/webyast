@@ -173,7 +173,7 @@ jQuery(function($){
 //  });
   
   $('span.assigned').live('mouseenter', function(event){
-    $(this).append('<span id="tmpSpanWarapper" class="delete-image-wrapper"><img id="removeUserFromRole" class="deleteUser" src="../images/delete-user.png"></span>');
+    $(this).append('<span id="tmpSpanWarapper" class="delete-image-wrapper"><%= image_tag("delete-user.png", {:id=>"removeUserFromRole", :class=>"deleteUser"}) %></span>');
     return false;
   });
   

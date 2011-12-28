@@ -153,7 +153,7 @@ public
   # Deletes roles.
   def destroy
     Role.delete params[:id]
-    flash[:notice] = _("Role <i>%s</i> was successfully removed.") % params[:id] if request.format.html?
+    flash[:notice] = _("Role \'%s\' was successfully removed.") % params[:id] if request.format.html?
     index
   end
 
