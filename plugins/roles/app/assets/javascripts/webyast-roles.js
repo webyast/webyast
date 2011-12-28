@@ -254,22 +254,20 @@ jQuery(function($){
       }
     });
 
-  $('.drop')
-    .live("drop",function( ev, dd ){
-//      console.log('DROP')
+  $('span.drop').bind("drop",function( ev, dd ){
       if(checkUsername($(ev.target), $(this))) {
         showWarning($(this));
-        $(this).effect("highlight", {color:'#fbb'}, 400);
+	//highlight effects causes an "this.style.removeAttribute is not a function" error
+        //$(this).effect("highlight", {color:'#fbb'}, 400);
         if($(ev.target).hasClass('drag')) { $(ev.target).remove(); }
       } else {
-//        console.log(ev.target)
-//        console.log(ev.target.parentNode.tagName);
         $(ev.target).removeClass('drag').addClass('assigned'); //user
         //Fix for Node cannot be inserted at the specified point in the hierarchy
         if(ev.target.parentNode.tagName == "BODY") {
-          $(this).append(ev.target).effect("highlight", {color:'#AEE6A8'}, 400);
+          $(this).append(ev.target);
+          //highlight effects causes an "this.style.removeAttribute is not a function" error
+	  //$(this).parent().effect("highlight", {color:'#AEE6A8'}, 400);
         }
-        //console.log(ev.target.parentNode.tagName);
         assignUserToRole($(ev.target), $(this));
       }
   })
