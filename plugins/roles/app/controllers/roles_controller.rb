@@ -25,7 +25,6 @@ require 'exceptions'
 # Main goal is checking permissions, validate id and pass request to model.
 class RolesController < ApplicationController
 
-  before_filter :login_required
   before_filter :check_role_name, :only => [:delete, :show]
   before_filter :check_read_permission
   before_filter :check_write_permission, :only => [:update,:delete] 
@@ -33,7 +32,7 @@ class RolesController < ApplicationController
   layout 'main'
 
   # Initialize GetText and Content-Type.
-  init_gettext "webyast-roles"
+  FastGettext.add_text_domain "webyast-roles", :path => "locale"
 
 private
 
@@ -42,11 +41,11 @@ private
   end
 
   def check_write_permission
-    permission_check("org.opensuse.yast.permissions.write") #goes back to controllcenter if not
+    authorize! :write, Role #goes back to controllcenter if not
   end
 
   def check_read_permission
-    permission_check("org.opensuse.yast.permissions.read") #goes back to controllcenter if not
+    authorize! :read, Role #goes back to controllcenter if not
   end
 
 public

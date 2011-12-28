@@ -8,20 +8,20 @@
   <vendor_url>http://en.opensuse.org/YAST</vendor_url>
 
 <!--
-Rights for setting/getting user permissions
+Rights for setting/getting user permissions/roles
 -->
 
-  <action id="org.opensuse.yast.roles.assign">
-    <description>Assigning user to certain webyast roles</description>
-    <message>Authentication is required to assign webyast role to user</message>
+  <action id="org.opensuse.yast.modules.yapi.roles.read">
+    <description>Read webyast roles</description>
+    <message>Authentication is required to read webyast roles</message>
     <defaults>
       <allow_inactive>no</allow_inactive>
       <allow_active>no</allow_active>
     </defaults>
   </action>
-  <action id="org.opensuse.yast.roles.modify">
+  <action id="org.opensuse.yast.modules.yapi.roles.write">
     <description>Modify webyast roles</description>
-    <message>Authentication is required to modify webyast role</message>
+    <message>Authentication is required to assign webyast role to user</message>
     <defaults>
       <allow_inactive>no</allow_inactive>
       <allow_active>no</allow_active>

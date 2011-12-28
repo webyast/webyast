@@ -24,7 +24,7 @@ BuildRoot:      %{_tmppath}/%{name}-%{version}-build
 BuildArch:      noarch
 Source1:        roles.yml
 Source2:        roles_assign.yml
-Source3:        org.opensuse.yast.roles.policy
+Source3:        org.opensuse.yast.modules.yapi.roles.policy
 
 BuildRequires:  webyast-base-testsuite
 BuildRequires:	rubygem-test-unit rubygem-mocha

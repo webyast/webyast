@@ -21,12 +21,10 @@
 #++
 %>
 
-<!-- <div class='plugin-icon'><img src'/icons/yast-permissions.png' alt="Roles module"/><%=_("Roles")%><span id="questionMark">?</span></div>
-<div class="plugin-content"> -->
 <div class="plugin-content plugin-border" style="padding:10px;">
   <div class="plugin-header">
     <div class="left">
-      <label class="plugin-icon-container"><img class="plugin-icon" src="/icons/yast-permissions.png"></label>
+      <label class="plugin-icon-container"><%= image_tag("yast-permissions.png", :class=>"plugin-icon") %></label>
       <label class="plugin-name"><%=_("Roles")%></label>
       <span id="questionMark" class="right" style="margin:0px 5px; float:right;">?</span>
     </div>
@@ -35,7 +33,7 @@
   <div class="clearfix">&nbsp;</div>
   
   <div id="create_role_dialog" style="display: none">
-    <% form_tag '/roles/create', {:id=>'rolesForm', :class => 'container'} do %>
+    <%= form_tag '/roles/create', {:id=>'rolesForm', :class => 'container'} do %>
       <label for="role_name">Name</label><%= text_field_tag "role_name", "", :class=>"required"%>
     <% end %>
   </div>
@@ -52,12 +50,12 @@
       <span class="clearfix"></span>
     </div>
     
-  <% form_tag '/roles/update', { :id=>'rolesUpdateForm', :class => 'container webyast_form', :style=>"position:relative;"} do %>
+  <%= form_tag '/roles/update', { :id=>'rolesUpdateForm', :class => 'container webyast_form', :style=>"position:relative;"} do %>
     <span id="toolbox">
-      <img id="loupe" src="../images/loupe.png">
+      <%= image_tag("loupe.png", :id=>"loupe") %>
       <input type="text" id="find_user" autocomplete="off">
-      <img id="resetSearchField" class="resetSearch" src="../images/reset-search.png">
-      <span id="loader"><img src='/images/spinner.gif'></span>
+      <%= image_tag("reset-search.png", {:class=>"resetSearch", :id=>"resetSearchField"}) %>
+      <span id="loader"><%= image_tag("spinner.gif") %></span>
       <%= link_to  (_("Create Role") ), {}, {:id => 'create_role_link' } %>
     </span>
 
@@ -75,7 +73,7 @@
 		    <span id="<%= role.name %>-warning" class="user-warning-message">
 		      <%= _("User already assigned") %>
 		    </span>
-		    <%= link_to image_tag("../images/delete-user.png", :border=>0, :class=>"deleteRole"), {:action => 'destroy', :id => ERB::Util.html_escape( role.name ) }, { :style=>"border:0px;"} %>
+		    <%= link_to image_tag("delete-user.png", :border=>0, :class=>"deleteRole"), {:action => 'destroy', :id => ERB::Util.html_escape( role.name ) }, { :style=>"border:0px;"} %>
 		  </span>
 		  <span class="roleBody drop">
 		    <%=hidden_field_tag(RolesController.users_role_id(role.name), role.users.join(",") ) %>
@@ -174,7 +172,7 @@
     </div>
   <% end %>
 
-  <%= render :partial => "shared/notification", :locals = { :module_name => 'roles,users' } %>
+  <%= render :partial => "shared/notification", :locals => { :module_name => 'roles,users' } %>
 
   <script type="text/javascript">
     $(document).ready(function(){
@@ -311,10 +309,8 @@
   </script>
 
   <% content_for :head do %>
-    <% if JSMIN != true %>
       <%= javascript_include_tag "select_dialog", "jquery.event.drag-2.0.min", "jquery.event.drop-2.0.min", "jquery.qsearch", "slidernav", "webyast-roles" %>
       <%= stylesheet_link_tag "webyast-roles" %>
-     <% end %>
   <% end%>
 </div>
 

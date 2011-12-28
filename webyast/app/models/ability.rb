@@ -38,7 +38,7 @@ class Ability
         #trying out pluralized class 
         perm = "org.opensuse.yast.modules.yapi.#{subject_class.to_s.pluralize.downcase}.#{action.to_s.downcase}"          
         permission = Permission.find( perm, {:user_id => user.username})
-        granted = true if permission[0][:granted] 
+        granted = true if permission[0][:granted] unless permission.blank?
       end
       if granted
         Rails.logger.debug "Action: #{perm} User: #{user.username} Result: ok"
