@@ -7,7 +7,7 @@
   <vendor>YaST Webservice Project</vendor>
   <vendor_url>http://en.opensuse.org/YAST</vendor_url>
 
-  <action id="org.opensuse.yast.system.repositories.read">
+  <action id="org.opensuse.yast.modules.yapi.repositories.read">
     <description>Reading repository configuration</description>
     <message>Authentication is required to read repository information</message>
     <defaults>
@@ -16,7 +16,7 @@
     </defaults>
   </action>
 
-  <action id="org.opensuse.yast.system.repositories.write">
+  <action id="org.opensuse.yast.modules.yapi.repositories.write">
     <description>Adding/modifying repository configuration</description>
     <message>Authentication is required to modify repository configuration</message>
     <defaults>

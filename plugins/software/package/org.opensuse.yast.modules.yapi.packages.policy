@@ -11,7 +11,7 @@
 Rights for patches
 -->
 
-  <action id="org.opensuse.yast.system.packages.read">
+  <action id="org.opensuse.yast.modules.yapi.packages.read">
     <description>Reading package information</description>
     <message>Authentication is required to read package information</message>
     <defaults>

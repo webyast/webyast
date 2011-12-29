@@ -23,15 +23,13 @@ require 'singleton'
 
 class PackagesController < ApplicationController
 
-   before_filter :login_required
-
    # always check permissions
    before_filter :check_read_permissions, :only => {:index, :show}
 
   private
 
   def check_read_permissions
-    permission_check "org.opensuse.yast.system.patches.read"
+    authorize! :read, Patch
   end
 
   def compare_lists(packages)

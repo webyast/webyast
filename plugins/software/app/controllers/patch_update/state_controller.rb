@@ -24,12 +24,11 @@
 
 class PatchUpdate::StateController < ApplicationController
 
-  before_filter :login_required
-   
   # PUT action
   # Confirm that patch messages have been read
   def update
-    permission_check "org.opensuse.yast.system.patches.install"
+
+    authorize! :install, Patch
 
     logger.warn "Confirmation of reading patch messages"
     File.delete Patch::MESSAGES_FILE

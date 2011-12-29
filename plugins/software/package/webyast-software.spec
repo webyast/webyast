@@ -44,10 +44,9 @@ Version:        0.3.12
 Release:        0
 Summary:        WebYaST - software management 
 Source:         www.tar.bz2
-Source1:        org.opensuse.yast.system.patches.policy
-Source2:        org.opensuse.yast.system.packages.policy
-Source3:        org.opensuse.yast.system.repositories.policy
-Source4:	01-org.opensuse.yast.software.pkla
+Source1:        org.opensuse.yast.modules.yapi.patches.policy
+Source2:        org.opensuse.yast.modules.yapi.packages.policy
+Source3:        org.opensuse.yast.modules.yapi.repositories.policy
 BuildRoot:      %{_tmppath}/%{name}-%{version}-build
 BuildArch:      noarch
 
@@ -116,17 +115,6 @@ mkdir -p $RPM_BUILD_ROOT/usr/share/polkit-1/actions
 install -m 0644 %SOURCE1 $RPM_BUILD_ROOT/usr/share/polkit-1/actions/
 install -m 0644 %SOURCE2 $RPM_BUILD_ROOT/usr/share/polkit-1/actions/
 install -m 0644 %SOURCE3 $RPM_BUILD_ROOT/usr/share/polkit-1/actions/
-
-%if 0%{?suse_version} == 0 || 0%{?suse_version} > 1130
-# openSUSE-11.4 has policykit-1 which uses .pkla files
-mkdir -p $RPM_BUILD_ROOT/var/lib/polkit-1/localauthority/10-vendor.d
-install -m 0644 %SOURCE4 $RPM_BUILD_ROOT/var/lib/polkit-1/localauthority/10-vendor.d/
-%if 0%{?suse_version} == 1130
-# openSUSE-11.3+ has policykit-1 which uses .pkla files
-mkdir -p $RPM_BUILD_ROOT/etc/polkit-1/localauthority/10-vendor.d
-install -m 0644 %SOURCE4 $RPM_BUILD_ROOT/etc/polkit-1/localauthority/10-vendor.d/
-%endif
-%endif
 
 mkdir -p $RPM_BUILD_ROOT/var/lib/webyast/software/licenses/accepted
 

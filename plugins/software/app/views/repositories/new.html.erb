@@ -19,10 +19,7 @@
 # you may find current contact information at www.novell.com
 -->
 <% content_for :head do %>
-<!--   <%= javascript_include_tag :defaults %> -->
-  <% if JSMIN == false %>
-    <%= stylesheet_link_tag "webyast-repositories" %>
-  <% end %>
+  <%= stylesheet_link_tag "webyast-repositories" %>
 
   <script type="text/javascript">
      $(document).ready(function(){
@@ -128,13 +125,13 @@
 <% end %>
 
 
-<% disabled = ! @write_permission %>
+<% disabled = cannot? :write, Repository %>
 
 
 <div class="plugin-content plugin-border">
   <div class="plugin-header">
     <div class="left">
-      <label class="plugin-icon-container"><img class="plugin-icon" src="/icons/repositories.png"></label>
+      <label class="plugin-icon-container"><%= image_tag("repositories.png", :class=>"plugin-icon") %></label>
       <label class="plugin-name">
          <%= _("Software Repositories") %>
          <%= header_spacer %>
@@ -147,7 +144,7 @@
 
 <!-- <div class='plugin-content'> -->
 
-  <% form_for(:repository, @repo, :url => { :action => 'create', :id => @repo.id }, :html => { :method => :post, :id => 'repositoryForm', :class=>"webyast_form", :onsubmit => "return submit_handler();" } ) do |f| %>
+  <%= form_for(@repo, :url => { :action => 'create', :id => @repo.id }, :html => { :method => :post, :id => 'repositoryForm', :class=>"webyast_form", :onsubmit => "return submit_handler();" } ) do |f| %>
     <fieldset class="webyast_fieldset">
       <div class="fieldset_header">
         <span class="fieldset_header_title" >

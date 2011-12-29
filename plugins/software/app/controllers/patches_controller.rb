@@ -23,18 +23,17 @@ require 'singleton'
 
 class PatchesController < ApplicationController
 
-  before_filter :login_required
   # always check permissions
   before_filter :check_read_permissions, :only => [:index, :show, :show_summary, :load_filter, :license]
 
   layout 'main'
   # Initialize GetText and Content-Type.
-  init_gettext "webyast-software"
+  FastGettext.add_text_domain "webyast-software", :path => "locale"
 
   private
 
   def check_read_permissions
-    permission_check "org.opensuse.yast.system.patches.read"  # RORSCAN_ITL
+    authorize! :read, Patch
   end
 
   def collect_done_patches
@@ -217,7 +216,6 @@ class PatchesController < ApplicationController
   end
 
   def load_filtered
-    @permission_install = permission_granted? "org.opensuse.yast.system.patches.install"  # RORSCAN_ITL
     @patch_updates = Patch.find :all
     kind = params[:value]
     search_map = { "green" => ["normal","low"], "security" => ["security"],
@@ -233,7 +231,7 @@ class PatchesController < ApplicationController
   # POST /patches/start_install_all
   # Starting installation of all proposed patches
   def start_install_all
-    permission_check "org.opensuse.yast.system.patches.install" # RORSCAN_ITL
+    authorize! :install, Patch
     logger.info "Start installation of all patches"
     Patch.install_patches Patch.find(:all)
     show_summary
@@ -243,7 +241,7 @@ class PatchesController < ApplicationController
   # Installing one or more patches which has given via param
 
   def install
-    permission_check "org.opensuse.yast.system.patches.install" # RORSCAN_ITL
+    authorize! :install, Patch
     update_array = []
 
     #search for patches and collect the ids
@@ -271,7 +269,7 @@ class PatchesController < ApplicationController
   end
 
   def license
-    permission_check "org.opensuse.yast.system.patches.install" # RORSCAN_ITL
+    authorize! :install, Patch
     if params[:accept].present? || params[:reject].present?
       params[:accept].present? ? Patch.accept_license : Patch.reject_license
       YastCache.delete(Plugin.new(),"patch")

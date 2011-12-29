@@ -227,7 +227,6 @@ class PackageKit
       end
       proxy.on_signal(signal.to_s) if !signal.blank? && block_given?
       proxy.on_signal("Error")
-
       raise PackageKitError.new(error) unless error.blank?
 
     rescue DBus::Error => dbus_error
