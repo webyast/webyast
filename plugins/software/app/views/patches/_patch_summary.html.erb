@@ -46,7 +46,6 @@
             <% end %>
 	  <% end %>
   </div>
-
 <% else %>
   <% label = [] %>
   <% update = false %>
@@ -73,8 +72,8 @@
     <% if patch[:security] > 0 %>
       <% update = true %>
       <div class="statusbar_row">
-        <%= image_tag("kupdateapplet_red.png", :style="display:inline;") %>
-        <% link_to "patches", :class=>"warning_message" do %>
+        <%= image_tag("kupdateapplet_red.png", :style=>"display:inline;") %>
+        <%= link_to "patches", :class=>"warning_message" do %>
           <%= _("Security Updates: %d") % patch[:security] %>
         <% end %>
       </div>
@@ -84,7 +83,7 @@
       <% update = true %>
       <div class="statusbar_row">
         <%= image_tag("kupdateapplet_yellow.png") %>
-        <% link_to "patches", :class=>"warning_message" do %>
+        <%= link_to "patches", :class=>"warning_message" do %>
           <%= _("Important Updates: %d") % patch[:important] %>
         <% end %>
       </div>
@@ -94,7 +93,7 @@
       <% update = true %>
       <div class="statusbar_row">
         <%= image_tag("kupdateapplet_optional.png") %>
-        <% link_to "patches", :class=>"warning_message" do %>
+        <%= link_to "patches", :class=>"warning_message" do %>
           <%= _("Optional Updates: %d") % patch[:optional] %>
         <% end %>
       </div>
@@ -102,14 +101,14 @@
 
     <% if update == false %>
       <div class="statusbar_row">
-        <%= image_tag("checkmark.gif", :class="checked_health") %>
+        <%= image_tag("checkmark.gif", :class=>"checked_health") %>
         <%= _("Your system is up to date.") %> <!-- RORSCAN_ITL -->
       </div>
     <% end %>
 
     <% if patch[:security] > 0 or patch[:important] > 0 or patch[:optional] > 0 %>
       <div class="update_all">
-        <% link_to _("Install all"), :update =>"statusbar_patches", :remote => true, :url => { :controller => :patches, :action => :start_install_all}, :confirm => _("Updating all. Are you sure?") %>
+        <%= link_to _("Install all"), :update =>"statusbar_patches", :remote => true, :url => { :controller => :patches, :action => :start_install_all}, :confirm => _("Updating all. Are you sure?") %>
       </div>
     <% end %>
 

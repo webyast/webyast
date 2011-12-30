@@ -32,14 +32,8 @@
 <% display_patches = ControlPanelConfig.read 'display_patch_status', true %>
 <% display_status = ControlPanelConfig.read 'display_system_status', true %>
 <% status_present = Rails::Engine::Railties.engines.find {|e| e.class.to_s == "WebYaST::StatusEngine"} %>
+<% patches_present = Rails::Engine::Railties.engines.find {|e| e.class.to_s == "WebYaST::SoftwareEngine"} %>
 
-<% if Rails.application.routes.routes.map(&:path).include?("/patches") && display_patches %>
-  <% javascript_tag do -%>
-    $(document).ready( function() {
-      <%= remote_function(:update => "statusbar_patches", :url => { :controller => :patches, :action => :show_summary, :background => true }) %>
-    });
-  <% end -%>
-<% end %>
 
 <% if status_present && display_status %>
   <% content_for :head do %>
@@ -53,6 +47,25 @@
           },
           error: function(xhr, status, error) {
             $('#statusbar_status').html('<b><%= escape_javascript _("Error: Cannot check the current status.") -%></b>');
+          }
+        });
+      });
+    <% end -%>
+  <% end %>
+<% end %>
+
+<% if patches_present && display_patches %>
+  <% content_for :head do %>
+    <% javascript_tag do -%>
+      $(document).ready( function() {
+        $.ajax({
+          type: 'GET',
+          url: '<%= url_for({ :controller => :patches, :action => :show_summary, :background => true }) -%>',
+          success: function(data, status, xhr) {
+            $('#statusbar_patches').html(data);
+          },
+          error: function(xhr, status, error) {
+            $('#statusbar_patches').html('<b><%= escape_javascript _("Error: Cannot check the current status.") -%></b>');
           }
         });
       });
@@ -99,7 +112,7 @@
         <label><%= _("System updates") %></label>
       </div>
       <div id="statusbar_patches">
-        <% if Rails::Engine::Railties.engines.find {|e| e.class.to_s == "WebYaST::PatchesEngine"} %>
+        <% if patches_present %>
           <% if display_patches %>
           <div class="statusbar_row">
             <%= image_tag("working.gif", :class => "small-working-icon") %>
