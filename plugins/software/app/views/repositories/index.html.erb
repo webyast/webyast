@@ -55,7 +55,6 @@
       <% image_tag("filter.png", :style=>"")%>
     </label>
     <%= select_tag "filter_repos", options_for_select([[ _("All"), "all"], [ _("Enabled"), "enabled"], [ _("Disabled"), "disabled"]]) %>
-    <%= observe_field("filter_repos", :function => "select_repositories(value)") %>
 
     <span id="action_link_container">
       <% if !disabled %>
@@ -154,6 +153,11 @@
 
 <script type="text/javascript">
   $(document).ready(function(){
+
+    $("#filter_repos").change(function() {
+       select_repositories($(this).val());
+    });
+
     // define a custom validation function for repository URL
     jQuery.validator.addMethod("repo_url", function(value, element) {
       return this.optional(element)

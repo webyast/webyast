@@ -16,8 +16,6 @@
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA
 #++
 
-require 'gettext_rails'
-
 class PluginJob < Struct.new(:class_name,:method,:arguments)
 
   class << self

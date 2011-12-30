@@ -20,6 +20,8 @@
 #++
 
 require 'singleton'
+require 'plugin_job'
+require 'base_model/base'
 
 class PatchesController < ApplicationController
 
