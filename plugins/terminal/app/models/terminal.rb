@@ -28,6 +28,8 @@
 # evaluate everytime which will be also made by YaST:YAPI
 # (It is not so easy as it sounds :-))
 
+require 'base_model/base'
+
 class Terminal < BaseModel::Base
 
 end

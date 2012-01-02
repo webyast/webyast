@@ -71,6 +71,11 @@ PATH
     webyast-system (0.1)
 
 PATH
+  remote: /home/src/rails/webyast3/plugins/terminal
+  specs:
+    webyast-terminal (0.1)
+
+PATH
   remote: /home/src/rails/webyast3/plugins/users
   specs:
     webyast-users (0.1)
@@ -254,4 +259,5 @@ DEPENDENCIES
   webyast-software!
   webyast-status!
   webyast-system!
+  webyast-terminal!
   webyast-users!

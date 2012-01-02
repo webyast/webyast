@@ -1,4 +1,16 @@
 -------------------------------------------------------------------
+Tue Nov 15 12:47:53 UTC 2011 - schubi@suse.com
+
+- code cleanup (permissions, checking services,...)
+- 0.3.1  
+
+-------------------------------------------------------------------
+Mon Oct 24 15:44:25 UTC 2011 - schubi@suse.com
+
+- Merging client and service
+- 0.3.0 
+
+-------------------------------------------------------------------
 Fri Sep 30 08:42:52 UTC 2011 - vlewin@suse.com
 
 - Initial version webyast-terminal-0.0.1 

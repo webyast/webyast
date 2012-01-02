@@ -19,16 +19,35 @@
 # you may find current contact information at www.novell.com
 -->
 
-<% disabled = !@permissions %>
 <%= stylesheet_link_tag "webyast-terminal" %>
 
-<div class="plugin-content plugin-border">
-  <%= render :partial => 'shared/missing_write_permissions' if disabled %>
+<%= content_for :before_script do %>
+  <%= javascript_tag do %>
 
+  $(document).ready(function(){
+    $("#iframe").attr("src", "https://<%= `hostname --fqdn`.chomp %>:4200");
+
+    $("#fullscreen").click(function(){
+      $(".webyast_fieldset").css("position", "static");
+      $("#frameBorder").addClass("fullscreen");
+      $("#closeFullscreen").show();
+    });
+
+    $("#closeFullscreen").click(function(){
+      $(".webyast_fieldset").css("position", "relative");
+      $("#frameBorder").removeClass("fullscreen");
+      $("#closeFullscreen").hide();
+    });
+  });
+
+  <% end %>
+<% end %>
+
+<div class="plugin-content plugin-border">
   <div class="plugin-header webyast_form">
     <div class="left">
-      <label class="plugin-icon-container"><img class="plugin-icon" src="/icons/terminal.png"></label>
-      <label class="plugin-name"><%= _("AJAX terminal client") %></label>
+      <label class="plugin-icon-container"><%= image_tag("terminal.png", :class=>"plugin-icon") %></label>
+      <label class="plugin-name"><%= _("Terminal Client") %></label>
     </div>
     <div class="right" >
       <span id="questionMark" style="margin:2px 5px; float:none;">?</span>
@@ -42,10 +61,10 @@
     <div class="fieldset_header">
       <div class="fieldset_header_title" style="display:block;">
         <div style="float:left">
-          <%= _("Web based AJAX terminal emulator") %>
+          <%= _("Web based terminal client") %>
         </div>
         <div style="float:right; text-align:right;">
-          <a id="fullscreen" href="#">fullscreen</a>
+          <a id="fullscreen" href="#"><%= _("fullscreen") %></a>
         </div>
       </div>
       <div class="clear"></div>
@@ -53,7 +72,7 @@
 
     <div class="fieldset_body">
       <div id="frameBorder">
-        <a id="closeFullscreen" href="#">close</a>
+        <a id="closeFullscreen" href="#"><%= _("close") %></a>
         <iframe id="iframe" src="#" width="100%" height="100%" style="border:0; position:relative; overflow:hidden!important;"></iframe>
       </div>
     </div>
@@ -62,6 +81,3 @@
   <div class="clearfix"></div>
 
 </div>
-
-<%= javascript_include_tag "webyast-terminal.js" %>
-

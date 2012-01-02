@@ -10,23 +10,23 @@
 
 
 Name:           webyast-terminal
-Provides:       WebYaST(org.opensuse.yast.modules.yapi.terminal)
-PreReq:         yast2-webservice
+Provides:       WebYaST(org.opensuse.yast.system.terminal.policy)
+PreReq:         webyast-base
 License:        GPL-2.0
 Group:          Productivity/Networking/Web/Utilities
 URL:            http://en.opensuse.org/Portal:WebYaST
 Autoreqprov:    on
-Version:        0.0.1
+Version:        0.3.1
 Release:        0
 Summary:        WebYaST - AJAX terminal plugin
 Source:         www.tar.bz2
-Source1:        org.opensuse.yast.modules.yapi.terminal.policy
-Source2:        wicd-rpmlintrc
+Source1:        org.opensuse.yast.system.terminal.policy
 BuildRoot:      %{_tmppath}/%{name}-%{version}-build
 BuildArch:      noarch
 
 BuildRequires:  webyast-base-testsuite
 BuildRequires:  rubygem-test-unit rubygem-mocha
+Requires:       shellinabox
 
 %define plugin_name terminal
 %define plugin_dir %{webyast_dir}/vendor/plugins/%{plugin_name}
@@ -35,7 +35,6 @@ BuildRequires:  rubygem-test-unit rubygem-mocha
 Group:    Productivity/Networking/Web/Utilities
 Requires: %{name} = %{version}
 Requires: webyast-base-testsuite
-Requires: shellinabox
 Summary:  Testsuite for webyast-terminal package
 
 %description
@@ -88,7 +87,7 @@ rm -rf $RPM_BUILD_ROOT
 %{plugin_dir}/app
 %{plugin_dir}/config
 %{plugin_dir}/lib
-%attr(644,root,root) /usr/share/polkit-1/actions/org.opensuse.yast.modules.yapi.terminal.policy
+%attr(644,root,root) /usr/share/polkit-1/actions/org.opensuse.yast.system.terminal.policy
 %doc COPYING
 
 %files testsuite

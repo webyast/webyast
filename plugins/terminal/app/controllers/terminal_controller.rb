@@ -20,23 +20,31 @@
 #++
 
 class TerminalController < ApplicationController
-  before_filter :login_required
   layout 'main'
 
-  public
-    #init_gettext "webyast-terminal"
+private
 
-  #TODO: USE HTTPS IMPORTANT!!!
-
-  def index
-    #TODO: CHECK PERMISSIONS
-    @permissions = true
+  # returns true if shellinabox daemon is running
+  def shellinabox_running?
+    #cannot run directly rcshellinabox status as it cannot run under non-root,
+    # but because it is not fatal information and if someone hackly run process
+    # which itself identify as shellinabox, then he runs into problems, but no
+    # security problem occur
+    ret = `ps xaf | grep '/usr/bin/shellinaboxd' | grep -vc 'grep'` # RORSCAN_ITL
+    ret.to_i > 0
   end
 
-  #TODO: START SHELLINABOX DEAMON ON THE FLY !!!
-  #TODO: STOP SHELLINABOX DEAMON ON PAGE LEAVE ???
+public
+  # Initialize GetText and Content-Type.
+  FastGettext.add_text_domain "webyast-terminal", :path => "locale"
 
-  #TODO: ALLOW USER TO CHANGE THEME, FONT SIZE and LOAD USER SETTINGS ON START UP
-  #TODO: PROVIDE FUNCTIONALITY FOR MULTIOPLE TABS
+  def index
+    authorize! :read, Terminal
+    unless shellinabox_running?
+      flash[:error] = _("Terminal service is not running. Please start with: 'rcshellinabox start'")
+      redirect_to :controller => :controlpanel, :action => :index
+    end
+  end
+
 end
 
