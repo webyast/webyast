@@ -11,7 +11,7 @@
 Rights for status
 -->
 
-  <action id="org.opensuse.yast.system.power-management.reboot">
+  <action id="org.opensuse.yast.modules.yapi.system.reboot">
     <description>Rebooting system</description>
     <message>Authentication is required to reboot the system</message>
     <defaults>
@@ -20,7 +20,7 @@ Rights for status
     </defaults>
   </action>
 
-  <action id="org.opensuse.yast.system.power-management.shutdown">
+  <action id="org.opensuse.yast.modules.yapi.system.shutdown">
     <description>Shutdown the system</description>
     <message>Authentication is required to shutdown the system</message>
     <defaults>

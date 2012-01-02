@@ -19,16 +19,6 @@
 %>
 
 
-<% content_for :head do %>
-  <%# FIXME: all JS files are loaded by default, no need to load them once more %>
-  <% if false %>
-    <%= javascript_include_tag "webyast-controlpanel", "webyast-localstorage"%> 
-    <%= javascript_include_tag "jquery.easing.1.3" %>
-    <%= javascript_include_tag "jquery.quicksand" %>
-  <% end %>
-<% end %>
-
-
 <% display_patches = ControlPanelConfig.read 'display_patch_status', true %>
 <% display_status = ControlPanelConfig.read 'display_system_status', true %>
 <% status_present = Rails::Engine::Railties.engines.find {|e| e.class.to_s == "WebYaST::StatusEngine"} %>

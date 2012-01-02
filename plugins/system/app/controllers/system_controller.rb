@@ -19,13 +19,12 @@
 # you may find current contact information at www.novell.com
 #++
 
+require 'error_result'
 
 class SystemController < ApplicationController
 
-    before_filter :login_required
-
     # Initialize GetText and Content-Type.
-    init_gettext "webyast-reboot"
+    FastGettext.add_text_domain "webyast-reboot", :path => "locale"
 
     def show
    	@actions = System.instance.actions
@@ -37,53 +36,33 @@ class SystemController < ApplicationController
     end
    
     def update
-	root = params[:system]
-	if root == nil || root == {} 
-	  render ErrorResult.error(404, 2, "format error - missing actions") and return
-	end
 	
-	@system = System.instance
+      @system = System.instance
 
-	do_reboot = false
-	do_shutdown = false
+      do_reboot = false
+      do_shutdown = false
 
-	# do the action
-	root.each do |k, v|
-	    if v.nil? or !v.respond_to?('has_key?') or !v.has_key? 'active'
-		render ErrorResult.error(404, 2, "format error - missing requested status") and return
-	    end
+      case params[:id].to_sym
+	when :reboot
+          authorize! :reboot, System
 
-	    if v['active'] != true and v['active'] != false
-		render ErrorResult.error(404, 2, "format error - non-boolean active parameter") and return
-	    end
+          if @system.actions[:reboot][:active] == false
+            do_reboot = true
+          end
+        when :shutdown
+          authorize! :shutdown, System
 
-	    # unknown action requested
-	    if !@system.actions.has_key? k.to_sym
-		render ErrorResult.error(404, 2, "format error - unknown action requested") and return
-	    end
+	  if @system.actions[:shutdown][:active] == false
+	    do_shutdown = true
+	  end
+	else
+	  render ErrorResult.error(404, 2, "internal error - unknown action requested") and return
+      end
 
-	    case k
-		when 'reboot'
-		    permission_check( 'org.opensuse.yast.system.power-management.reboot')
+      if do_reboot then @system.reboot end
+      if do_shutdown then @system.shutdown end
 
-		    if v['active'] == true and @system.actions[k.to_sym][:active] == false
-			do_reboot = true
-		    end
-		when 'shutdown'
-		    permission_check( 'org.opensuse.yast.system.power-management.shutdown')
-
-		    if v['active'] == true and @system.actions[k.to_sym][:active] == false
-			do_shutdown = true
-		    end
-		else
-		    render ErrorResult.error(404, 2, "internal error - unknown action requested") and return
-	    end
-	end
-
-	if do_reboot then @system.reboot end
-	if do_shutdown then @system.shutdown end
-
-	show
+      show
     end
 
     # See update
@@ -92,7 +71,7 @@ class SystemController < ApplicationController
     end
 
     def reboot
-        permission_check( 'org.opensuse.yast.system.power-management.reboot')
+        authorize! :reboot, System
 	@sys = System.instance
 	if request.put?
           if !@sys.nil? and @sys.reboot
@@ -110,7 +89,7 @@ class SystemController < ApplicationController
     end
 
     def shutdown
-      permission_check( 'org.opensuse.yast.system.power-management.shutdown')
+      authorize! :shutdown, System
       @sys = System.instance
       if request.put?
         if !@sys.nil? and @sys.shutdown

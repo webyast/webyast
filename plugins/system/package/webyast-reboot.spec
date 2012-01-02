@@ -22,7 +22,7 @@ Version:        0.2.4
 Release:        0
 Summary:        WebYaST - reboot/shutdown
 Source:         www.tar.bz2
-Source1:        org.opensuse.yast.system.power-management.policy
+Source1:        org.opensuse.yast.modules.yapi.system.policy
 Source2:        01-org.opensuse.yast.system.power-management.pkla
 
 BuildRoot:      %{_tmppath}/%{name}-%{version}-build
