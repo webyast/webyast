@@ -38,14 +38,15 @@
 	 }
   </style>
 
-  <% javascript_tag do -%>
+  <%= javascript_tag do -%>
     $(document).ready( function() {
       $("#date_date").datepicker( { dateFormat: 'dd/mm/yy'} );
 
       $("#region").change(function() {
          $.ajax({
-           url: "<%= url_for({ :action => :timezones_for_region, :disabled=>cannot?(:write, Time) }) -%>",
-           type: "PUT",
+           url: "<%= url_for({ :action => :timezones_for_region}) -%>",
+           data: 'value='+$(this).val(),
+           type: "GET",
            success: function(data, status, xhr) {
              $('#timezones').html(data);
            },
@@ -118,7 +119,7 @@
 </script>
 
   <!-- FIXME move javascript function outside of index -->
-  <% javascript_tag do -%>
+  <%= javascript_tag do -%>
     function submitTime() {
 		if($("#timeForm").valid() ) {
 		  //$('#progress').show();
@@ -127,7 +128,7 @@
 		}
     };
   <% end -%>
-  <% javascript_tag do -%>
+  <%= javascript_tag do -%>
     function enable() {
       if ( !<%= disabled %> ){
         $("#date_date")[0].disabled = false;
