@@ -28,6 +28,8 @@
 # evaluate everytime which will be also made by YaST:YAPI 
 # (It is not so easy as it sounds :-))
 
+require 'base_model/base'
+
 class Systemtime < BaseModel::Base
 
   # Date settings format is dd/mm/yyyy
@@ -104,7 +106,7 @@ class Systemtime < BaseModel::Base
   # so it support partial safe (e.g. save only new timezone if rest of fields is not set).
   def update
     settings = {}
-    RAILS_DEFAULT_LOGGER.info "called write with #{settings.inspect}"
+    Rails.logger.info "called write with #{settings.inspect}"
     settings["timezone"] = @timezone unless @timezone.blank?
     unless @utcstatus.nil?
       settings["utcstatus"] = @utcstatus ? "UTC" : "localtime"
@@ -115,7 +117,7 @@ class Systemtime < BaseModel::Base
       settings["currenttime"] = datetime
     end
 
-    RAILS_DEFAULT_LOGGER.info "called write with #{settings.inspect}"
+    Rails.logger.info "called write with #{settings.inspect}"
 
     begin
       YastService.Call("YaPI::TIME::Write",settings)

@@ -26,7 +26,8 @@ require 'systemtime' # RORSCAN_ITL
 # Main goal is checking permissions.
 class TimeController < ApplicationController
 
-  before_filter :login_required
+  before_filter :init
+
   layout 'main'
 
 private
@@ -40,20 +41,7 @@ private
     end
   end
 
-  def permission_read
-    @permissions = {}
-    @permissions[:ntp_synchronize] = yapi_perm_granted? "ntp.synchronize"
-    @permissions[:services_execute] = yapi_perm_granted? "services.execute"
-    @permissions[:ntp_setserver] = true if yapi_perm_granted? "ntp.setserver"
-    @permissions[:write] = true if yapi_perm_granted? "time.write"
-  end
-
-public
-
-  # Initialize GetText and Content-Type.
-  init_gettext "webyast-time"
-
-  def initialize
+  def init
     unless defined? @@timezones
       @@timezones = {}
     end
@@ -62,6 +50,12 @@ public
     @service_available = class_exists?("Service")
   end
 
+
+public
+
+  # Initialize GetText and Content-Type.
+  FastGettext.add_text_domain "webyast-time", :path => "locale"
+
   #--------------------------------------------------------------------------------
   #
   # actions
@@ -69,8 +63,8 @@ public
   #--------------------------------------------------------------------------------
 
   def index
-    yapi_perm_check "time.read"
-    permission_read
+    authorize! :read, Time
+
     @ntp = @ntp_available ? Ntp.find : nil
     @stime = Systemtime.find 
     @stime.load_timezone params if params[:timezone] #do not reset timezone if ntp fail (bnc#600370)
@@ -79,16 +73,16 @@ public
 
   # Sets time settings. Requires write permissions for time YaPI.
   def update
-    yapi_perm_check "time.write"
+    authorize! :write, Time
     if @ntp_available
-      yapi_perm_check "services.execute"
-      yapi_perm_check "ntp.synchronize"
-      yapi_perm_check "ntp.setserver"
+      authorize! :execute, Service
+      authorize! :synchronize, Ntp
+      authorize! :setserver, Ntp
     end
     raise InvalidParameters.new :time => "missing region" unless params.has_key?(:region) 
     raise InvalidParameters.new :time => "missing timezone" unless params.has_key?(:timezone)
     
-    permission_read
+
     t = Systemtime.find
     t.load_timezone params
     t.clear_time #do not set time by default
@@ -156,7 +150,7 @@ public
 
   # Shows time settings. Requires read permission for time YaPI.
   def show
-    yapi_perm_check "time.read"
+    authorize! :read, Time
     systemtime = Systemtime.find # RORSCAN_ITL
 
     respond_to do |format|
@@ -173,7 +167,7 @@ public
     # since while calling this function there is different instance of the class
     # than when calling index, @@timezones were empty; reinitialize them
     # possible FIXME: how does it increase the amount of data transferred?
-    yapi_perm_check "time.read"
+    authorize! :read, Time
     systemtime = Systemtime.find  # RORSCAN_ITL
 
     timezones = systemtime.timezones # RORSCAN_ITL

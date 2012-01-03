@@ -19,10 +19,8 @@
 # you may find current contact information at www.novell.com
 -->
 
-<% disabled = !@permissions[:write] %>
-<% content_for :head do %>
-  <%= javascript_include_tag "jrails.js" %>
-<!--   <%= javascript_include_tag :defaults %> -->
+<% disabled = cannot? :write, Time %>
+<%= content_for :head do %>
   <style type="text/css">
 	 label.error {
 		float:none;
@@ -33,7 +31,7 @@
 		vertical-align:middle;
 	 }
 	 label.valid {
-		background: url('../images/checked.gif') no-repeat;
+		background: url('<%= asset_path('checked.gif') %>') no-repeat;
 		padding:0px 0px 0px 18px;
 		vertical-align:middle;
 		margin-left:5px;
@@ -43,12 +41,21 @@
   <% javascript_tag do -%>
     $(document).ready( function() {
       $("#date_date").datepicker( { dateFormat: 'dd/mm/yy'} );
+
+      $("#region").change(function() {
+         $.ajax({
+           url: "<%= url_for({ :action => :timezones_for_region, :disabled=>cannot?(:write, Time) }) -%>",
+           type: "PUT",
+           success: function(data, status, xhr) {
+             $('#timezones').html(data);
+           },
+           error: function(xhr, status, error) {
+             $('#timezones').html('<b><%= escape_javascript _("Error: Cannot get information.") -%></b>');
+           }
+         });
+      });
     });
   <% end -%>
-
-  <% if JSMIN == false %>
-    <%= javascript_include_tag "validation.js" %>
-  <% end %>
 
   <script type="text/javascript">
 	 $(document).ready(function() {
@@ -136,14 +143,13 @@
   <% end -%>
 <% end %>
 
-<!--<div class='plugin-icon'><img src='/icons/yast-ntp-client.png' alt="time module"/><%=_("Time")%><span id="questionMark">?</span></div> -->
 <div class="plugin-content plugin-border">
   <%= render :partial => 'shared/missing_write_permissions' if disabled %>
 
-	 <% form_tag '/time/update', {:id => "timeForm", :class=>"webyast_form", :onsubmit => "return submitTime();"} do %>
+	 <%= form_tag '/time/update', {:id => "timeForm", :class=>"webyast_form", :onsubmit => "return submitTime();"} do %>
     <div class="plugin-header">
       <div class="left">
-        <label class="plugin-icon-container"><img class="plugin-icon" src="/icons/time.png"></label>
+        <label class="plugin-icon-container"><%= image_tag("time.png", :class=>"plugin-icon") %></label>
         <label class="plugin-name"><%=_("Time")%></label>
      	</div>
 
@@ -225,7 +231,7 @@
              <div class="row">
               <label for="ntp_server"><%= _("NTP server") %></label>
                 <%= options = {}
-                    options[:disabled] = "disabled" unless @permissions[:ntp_setserver]
+                    options[:disabled] = "disabled" unless can?(:setserver, Ntp)
                     text_field_tag("ntp_server", @ntp.actions[:ntp_server] || "", options={:class=>"ntp_server"})  %>
              </div>
             <% end %>
@@ -245,11 +251,4 @@
     </div>
   <% end %>
 </div>
-
-
-<%= observe_field(:region,
-  :frequency => 0.25,
-  :update => :timezones,
-  :url => { :action => :timezones_for_region },
-  :with => "'disabled=' + "+ (disabled ? "true":"false")+" + '&value=' +value") %>
 

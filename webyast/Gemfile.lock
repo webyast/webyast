@@ -76,6 +76,11 @@ PATH
     webyast-terminal (0.1)
 
 PATH
+  remote: /home/src/rails/webyast3/plugins/time
+  specs:
+    webyast-time (0.1)
+
+PATH
   remote: /home/src/rails/webyast3/plugins/users
   specs:
     webyast-users (0.1)
@@ -260,4 +265,5 @@ DEPENDENCIES
   webyast-status!
   webyast-system!
   webyast-terminal!
+  webyast-time!
   webyast-users!
