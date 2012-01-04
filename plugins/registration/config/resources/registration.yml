@@ -1,6 +1,5 @@
-interface: org.opensuse.yast.modules.registration.registration
-policy: org.opensuse.yast.modules.ysr
-controller: registration/registration
+interface: org.opensuse.yast.modules.registration
+controller: registration
 singular: true
 #cache:
 #  enabled: true/false

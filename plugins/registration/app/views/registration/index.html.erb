@@ -19,11 +19,8 @@
 # you may find current contact information at www.novell.com
 -->
 
-<% content_for :head do %>
-  <%= javascript_include_tag :defaults %>
-<% end %>
-<% content_for :before_script do %>
-  <% javascript_tag do -%>
+<%= content_for :before_script do %>
+  <%= javascript_tag do -%>
   $(document).ready(function(){
     $(".accordion").accordion({
        autoHeight : false,
@@ -39,7 +36,7 @@
   });
   <% end %>
 
-  <% javascript_tag do -%>
+  <%= javascript_tag do -%>
   function show_progress()
   {
     var message = <%= jss _("Please wait") -%>;
@@ -72,9 +69,6 @@
   <% end %>
 <% end %>
 
-<!--<div class='plugin-icon'><img src='/icons/yast-product-registration.png' alt="<%= _("register plugin") %>"/><%=_("Registration")%><span id="questionMark">?</span></div>-->
-
-
 
 <div class="plugin-content plugin-border">
 
@@ -82,7 +76,7 @@
     <div class="webyast_form">
       <div class="plugin-header">
         <div class="left">
-          <label class="plugin-icon-container"><img class="plugin-icon" src="/icons/registration.png"></label>
+          <label class="plugin-icon-container"><%= image_tag("registration.png", :class=>"plugin-icon") %></label>
           <label class="plugin-name"><%=_("Registration")%></label>
        </div>
        <div class="right" >
@@ -101,7 +95,7 @@
 
         <div class="fieldset_body">
           <div class="row">
-            <img src="/images/checkmark.gif" style="vertical-align:middle; width:24px; height:24px;">
+            <%= image_tag("checkmark.gif", :style=>"vertical-align:middle; width:24px; height:24px;") %>
             <strong><%= _("This system is registered") %></strong> <!-- RORSCAN_ITL -->
            </div>
            <div class="row">
@@ -129,7 +123,7 @@
     </div>
 
   <% else %>
-    <% form_tag form_target_save, { :id => "registrationform", :class=>"webyast_form" } do -%>
+    <%= form_tag form_target_save, { :id => "registrationform", :class=>"webyast_form" } do -%>
 
       <% if !@arguments_mandatory.blank? then %>
        <fieldset class="webyast_fieldset">

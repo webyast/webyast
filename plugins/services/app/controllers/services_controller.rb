@@ -23,7 +23,7 @@
 require 'services_helper'
 
 class ServicesController < ApplicationController
-#  before_filter :login_required
+
   layout 'main'
 
   private

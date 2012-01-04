@@ -46,6 +46,11 @@ PATH
     webyast-ntp (0.1)
 
 PATH
+  remote: /home/src/rails/webyast3/plugins/registration
+  specs:
+    webyast-registration (0.1)
+
+PATH
   remote: /home/src/rails/webyast3/plugins/roles
   specs:
     webyast-roles (0.1)
@@ -259,6 +264,7 @@ DEPENDENCIES
   webyast-mail!
   webyast-network!
   webyast-ntp!
+  webyast-registration!
   webyast-roles!
   webyast-services!
   webyast-software!

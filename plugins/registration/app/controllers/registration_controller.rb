@@ -22,12 +22,13 @@
 # = Registration controller
 # Provides access to the registration of the system at NCC/SMT.
 
-class Registration::RegistrationController < ApplicationController
+class RegistrationController < ApplicationController
 
-  before_filter :login_required
   layout 'main'
 
-  def initialize
+  before_filter :init
+
+  def init
     @trans = {  'email' => _("Email"),
                 'moniker' => _("System name"),
                 'regcode-sles' => _("SLES registration code"),
@@ -65,7 +66,7 @@ class Registration::RegistrationController < ApplicationController
   end
 
   # Initialize GetText and Content-Type.
-  init_gettext "webyast-registration" 
+  FastGettext.add_text_domain "webyast-registration", :path => "locale"
 
   def client_guid
     # handle config error in backend (bnc#592620)
@@ -103,15 +104,15 @@ class Registration::RegistrationController < ApplicationController
   end
 
   def registration_skip_flash
-    "<b>#{ skipped_msg }</b><p>#{ no_updates_msg }<br />#{ try_again_msg }</p>"
+    "<b>#{ skipped_msg }</b><p>#{ no_updates_msg }<br />#{ try_again_msg }</p>".html_safe
   end
 
   def server_error_flash(msg)
-    "<b>#{ not_succeeded_msg }</b><p>#{ msg || '' } #{ temporary_issue_msg }<br />#{ try_again_msg }</p>"
+    "<b>#{ not_succeeded_msg }</b><p>#{ msg || '' } #{ temporary_issue_msg }<br />#{ try_again_msg }</p>".html_safe
   end
 
   def data_error_flash(msg)
-    "<b>#{ not_succeeded_msg }</b><p>#{ msg || try_again_msg }</p>"
+    "<b>#{ not_succeeded_msg }</b><p>#{ msg || try_again_msg }</p>".html_safe
   end
 
   def registration_logic_error
@@ -123,8 +124,8 @@ class Registration::RegistrationController < ApplicationController
 
   def registration_backend_error
     logger.error "Registration could not read the configuration. Most likely the backend is not installed correctly. Please check the package dependencies."
-    flash[:error] = _("Could not read the registration configuration.") + "<br>" + _("The registration backend is not installed correctly") +
-                    " " + _("Please refer to your support contact.")
+    flash[:error] = (_("Could not read the registration configuration.") + "<br>" + _("The registration backend is not installed correctly") +
+                    " " + _("Please refer to your support contact.")).html_safe
   end
 
   def collect_missing_arguments(missed_args)
@@ -199,7 +200,7 @@ class Registration::RegistrationController < ApplicationController
           end
         end
         flash_msg += "</ul>"
-        sources_changes_flash flash_msg if changes
+        sources_changes_flash flash_msg.html_safe if changes
       else
         return false
       end
@@ -222,7 +223,7 @@ class Registration::RegistrationController < ApplicationController
           end
         end
         flash_msg += "</ul>"
-        sources_changes_flash flash_msg if changes
+        sources_changes_flash flash_msg.html_safe if changes
       else
         return false
       end
@@ -236,7 +237,7 @@ class Registration::RegistrationController < ApplicationController
 public
 
   def skip
-    permission_check("org.opensuse.yast.modules.ysr.statelessregister")
+    authorize! :statelessregister, Register
     # redirect to the appropriate next target and show skip message
     guid, error = client_guid
     flash[:warning] = registration_skip_flash unless guid
@@ -271,7 +272,7 @@ public
 
   def create
     # POST to registration => run registration
-    permission_check("org.opensuse.yast.modules.ysr.statelessregister")
+    authorize! :statelessregister, Register
     raise InvalidParameters.new :registration => "Passed none or invalid data to registration" unless params.has_key?(:registration)
 
     # get new registration object
@@ -311,7 +312,7 @@ public
   end
 
   def show
-    permission_check("org.opensuse.yast.modules.ysr.getregistrationconfig")
+    authorize! :getregistrationconfig, Register
     # get registration status
     @register = Register.new
     respond_to do |format|
@@ -322,8 +323,7 @@ public
   end
 
   def index
-    permission_check("org.opensuse.yast.modules.ysr.statelessregister")
-
+    authorize! :statelessregister, Register
     guid, config_error = client_guid
     if config_error
       registration_backend_error
@@ -350,8 +350,7 @@ public
   end
 
   def register
-    permission_check("org.opensuse.yast.modules.ysr.getregistrationconfig")
-
+    authorize! :getregistrationconfig, Register
     guid,config_error = client_guid
     if config_error
       registration_backend_error
@@ -392,6 +391,7 @@ public
         logger.debug "missing arguments #{register.missingarguments.inspect}"
         logger.info "Registration is in needinfo - more information is required"
         # collect and merge the argument data
+        @arguments = []
         collect_missing_arguments register.missingarguments
       elsif register.status == "error"
         logger.error "Registration resulted in an error, ID: #{exitcode}."
@@ -421,7 +421,7 @@ public
         when 100..101 then
           # 100 and 101 means that no product is installed that can be registered (100: no product, 101: FACTORY)
           logger.error "Registration process did not find any products that can be registered."
-          flash[:error] = "<b>" + _("Registration can not be performed. There is no product installed that can be registered.") + "</b>"
+          flash[:error] = ("<b>" + _("Registration can not be performed. There is no product installed that can be registered.") + "</b>").html_safe
         else
           # unknown error
           logger.error "Registration backend returned an unknown error. Please run in debug mode and report a bug."
@@ -445,7 +445,7 @@ public
       # display warning if no repos/services are added/changed during registration(bnc#558854)
       if !check_service_changes(register.changedservices) && !check_repository_changes(register.changedrepos)
       then
-        flash[:warning] = _("<p><b>Repositories were not modified during the registration process.</b></p><p>It is likely that an incorrect registration code was used. If this is the case, please attempt the registration process again to get an update repository.</p><p>Please make sure that this system has an update repository configured, otherwise it will not receive updates.</p>") # RORSCAN_ITL
+        flash[:warning] = (_("<p><b>Repositories were not modified during the registration process.</b></p><p>It is likely that an incorrect registration code was used. If this is the case, please attempt the registration process again to get an update repository.</p><p>Please make sure that this system has an update repository configured, otherwise it will not receive updates.</p>")).html_safe # RORSCAN_ITL
       end
 
       redirect_success

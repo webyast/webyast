@@ -176,7 +176,7 @@ rccollectd try-restart
 
 %dir /usr/share/polkit-1
 %dir /usr/share/polkit-1/actions
-%attr(644,root,root) %config /usr/share/polkit-1/actions/org.opensuse.yast.system.status.policy
+%attr(644,root,root) %config /usr/share/polkit-1/actions/org.opensuse.yast.modules.yapi.metrics.policy
 %attr(644,root,root) %config /usr/share/polkit-1/actions/org.opensuse.yast.modules.logfile.policy
 %dir /etc/webyast/vendor
 %config /etc/webyast/logs.yml

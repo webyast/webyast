@@ -20,6 +20,7 @@
 # = Base system model
 # Provides access to basic system settings module queue. Provides and updates
 # if base system settings is already done.
+require 'base_model/base'
 require "yast/config_file"
 require "exceptions"
 class Basesystem < BaseModel::Base

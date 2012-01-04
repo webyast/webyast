@@ -23,6 +23,7 @@ Version:        0.2.5
 Release:        0
 Summary:        WebYaST - Registration
 Source:         www.tar.bz2
+Source1:        org.opensuse.yast.modules.yapi.register.policy
 BuildRoot:      %{_tmppath}/%{name}-%{version}-build
 BuildArch:      noarch
 Recommends:     openssl-certs
@@ -88,6 +89,10 @@ mkdir -p $RPM_BUILD_ROOT%{plugin_dir}
 cp -a * $RPM_BUILD_ROOT%{plugin_dir}/
 rm -f $RPM_BUILD_ROOT%{plugin_dir}/COPYING
 
+# Policies
+mkdir -p $RPM_BUILD_ROOT/usr/share/polkit-1/actions
+install -m 0644 %SOURCE1 $RPM_BUILD_ROOT/usr/share/polkit-1/actions/
+
 # remove .po files (no longer needed)
 rm -rf $RPM_BUILD_ROOT/%{plugin_dir}/po
 
@@ -123,6 +128,9 @@ rm -rf $RPM_BUILD_ROOT
 %{plugin_dir}/config
 %{plugin_dir}/lib
 %{plugin_dir}/doc/README_FOR_APP
+%dir /usr/share/polkit-1
+%dir /usr/share/polkit-1/actions
+%attr(644,root,root) %config /usr/share/polkit-1/actions/org.opensuse.yast.modules.yapi.register.policy
 
 %doc COPYING
 
