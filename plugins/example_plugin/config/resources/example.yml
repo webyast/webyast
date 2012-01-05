@@ -1,0 +1,13 @@
+#interface can be anything
+interface: org.opensuse.yast.system.example
+#controller is path on which can be service located
+controller: example
+#singular set if it is singular REST service or not
+singular: true
+
+#cache:
+#  enabled: true/false
+#  priority: -100..100
+#  reload_after: seconds (0 == do not reload)
+cache:
+  enabled: false

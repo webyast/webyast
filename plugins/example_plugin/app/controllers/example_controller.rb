@@ -21,29 +21,50 @@
 
 class ExampleController < ApplicationController
 
-  #require login before do any action
-  before_filter :login_required
+  layout "main"
 
-  def show
-    permission_check "org.example.plugin.read"
-    example = Example.find
+  # Initialize GetText and Content-Type.
+  FastGettext.add_text_domain "webyast-example", :path => "locale"
+
+  def index
+    authorize! :read, Example
+    @example = Example.find
 
     respond_to do |format|
-	    format.xml  { render :xml => example.to_xml}
-	    format.json { render :json => example.to_json }
+      format.xml  { render :xml => @example.to_xml}
+      format.json { render :json => @example.to_json }
+      format.html { render :index }
     end
+  end
+
+  def show
+    index
   end
    
   def update
-    permission_check "org.example.plugin.write"
-    root = params["example"]
-    if root == nil || root == {} 
+    authorize! :write, Example
+    value = params["example"]
+    if value.empty?
       raise InvalidParameters.new :example => "Missing"
     end
-	
-    example = Example.new(root)
-    example.save	
-    show
+    @example = Example.find
+    @example.content = value["content"] || ""
+    error = nil
+    begin
+      @example.save
+    rescue Exception => error
+      Rails.logger.error "Error while saving file: #{error.inspect}"
+    end
+    respond_to do |format|
+      format.xml  { render :xml => @example.to_xml}
+      format.json { render :json => @example.to_json }
+      format.html { unless error
+                      flash[:notice] = _("File saved")
+                    else
+                      flash[:error] = _("Error while saving file: %s") % error.inspect
+                    end
+                    index }
+    end
   end
 
   # See update

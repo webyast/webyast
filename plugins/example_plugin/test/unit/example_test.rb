@@ -20,30 +20,3 @@
 #++
 
 require File.expand_path(File.dirname(__FILE__) + "/../test_helper")
-#dbus stubbing
-require File.expand_path( File.join("test","dbus_stub"), RailsParent.parent )
-
-
-class NtpTest < ActiveSupport::TestCase
-
-  def setup
-    dbus = DBusStub.new :system, "example.service"
-    proxy,@interface = dbus.proxy "/org/example/service/Interface", "example.service.Interface"
-  end
-  
-  TEST_STRING = "Test string"
-  def test_find
-    @interface.stubs(:read).returns(TEST_STRING).once
-    @interface.stubs(:write).never
-    e = Example.find
-    assert e
-    assert_equal TEST_STRING, e.content
-  end
-  
-  def test_update
-    @interface.stubs(:write).once
-    @interface.stubs(:read).never
-    e = Example.new :content => TEST_STRING
-    e.save
-  end
-end

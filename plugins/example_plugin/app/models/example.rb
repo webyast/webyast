@@ -19,12 +19,18 @@
 # you may find current contact information at www.novell.com
 #++
 
+require 'base_model/base'
+
 class Example < BaseModel::Base
 
   attr_accessor :content
 
   public
     
+    def initialize
+      load_content
+    end
+
     #common find as known from ActiveResource and ActiveRecord models
     def self.find(what=:one,options={})
       ret = Example.new
@@ -36,7 +42,7 @@ class Example < BaseModel::Base
     def update
       dbus_obj.write @content
     end
-    
+
     def load_content
       @content = dbus_obj.read
     end

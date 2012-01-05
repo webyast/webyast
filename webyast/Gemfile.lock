@@ -21,6 +21,11 @@ PATH
     webyast-eulas (0.1)
 
 PATH
+  remote: /home/src/rails/webyast3/plugins/example_plugin
+  specs:
+    webyast-example (0.1)
+
+PATH
   remote: /home/src/rails/webyast3/plugins/firewall
   specs:
     webyast-firewall (0.1)
@@ -264,6 +269,7 @@ DEPENDENCIES
   webyast-activedirectory!
   webyast-administrator!
   webyast-eulas!
+  webyast-example!
   webyast-firewall!
   webyast-kerberos!
   webyast-ldap!

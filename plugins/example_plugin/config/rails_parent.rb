@@ -24,7 +24,7 @@ class RailsParent
   def RailsParent.parent
     parent = ENV["RAILS_PARENT"]
     unless parent
-      #sets path to directory where is webyast-base checkouted or installed.
+      #sets path to directory where is webyast-base-ws checkouted or installed.
       parent = File.expand_path(File.join('..','..','..', 'webyast'), File.dirname(__FILE__))
       unless File.directory?( parent || "" )
 	$stderr.puts "Nope: #{parent}\nPlease set RAILS_PARENT environment"
