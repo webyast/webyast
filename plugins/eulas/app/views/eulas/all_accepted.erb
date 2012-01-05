@@ -5,7 +5,7 @@
 <div id="eula" class="plugin-content plugin-border webyast_form">
   <div class="plugin-header">
     <div class="left">
-      <label class="plugin-icon-container"><img class="plugin-icon" src="/icons/registration.png"></label>
+      <label class="plugin-icon-container"><%= image_tag("registration.png", :class=>"plugin-icon") %></label>
       <label class="plugin-name"><%=_("Accept End User Licence Agreement")-%></label>
     </div>
     <div class="clearfix"></div>
@@ -16,7 +16,7 @@
   <fieldset class="webyast_fieldset"">
     <div class="fieldset_body eula_fieldset_body">
       <h3>
-        <img src="/images/checkmark.gif" style="margin-left:5px; vertical-align:middle;"/>
+        <%= image_tag("checkmark.gif", :style=>"margin-left:5px; vertical-align:middle;")%>
         <%= _("All licenses have already been accepted") %>!
       </h3>
     </div>

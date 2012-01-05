@@ -24,6 +24,8 @@
 # The yaml file is located in config/status_configuration.yaml
 #
 
+require 'builder'
+
 class Graph
   require 'yaml'
 

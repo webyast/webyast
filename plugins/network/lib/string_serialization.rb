@@ -34,6 +34,8 @@
 #   <string>bar</string>
 # </hash>
 
+require 'builder'
+
 class String
   def to_xml(options = {})
     require 'builder' unless defined?(Builder)

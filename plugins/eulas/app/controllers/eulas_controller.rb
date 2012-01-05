@@ -26,7 +26,6 @@
 require 'enumerator'
 
 class EulasController < ApplicationController
-  before_filter :login_required
   before_filter :ensure_license, :only => [:show, :update]
   before_filter :ensure_eula_count, :only => [:show, :index, :update]
   before_filter :ensure_id, :only => [:show, :update]
@@ -34,7 +33,7 @@ class EulasController < ApplicationController
   layout 'main'
   
   # Initialize GetText and Content-Type.
-  init_gettext "webyast-licenses" 
+  FastGettext.add_text_domain "webyast-licenses", :path => "locale"
   
   private
     def ensure_eula_count
@@ -88,9 +87,7 @@ class EulasController < ApplicationController
         @basesystem_completed = basesystem ? basesystem.completed? : true
         
         @eula = License.find @eula_id
-        @eula.load_text current_locale unless current_locale.nil?
-        
-        @accept_permission = permission_check :'org.opensuse.yast.modules.eulas.accept'
+        @eula.load_text FastGettext.locale unless FastGettext.locale.blank?
       else
         Rails.logger.error "TO XML"
         #OLD: @license.load_text params[:lang] unless params[:lang].nil?      
@@ -105,10 +102,11 @@ class EulasController < ApplicationController
     end
 
     def update
+      authorize! :accept, License
       if request.format.html?
-        #@eula = License.find(@eula_id, current_locale)
+        #@eula = License.find(@eula_id, FastGettext.locale)
         @eula = License.find @eula_id
-        @eula.load_text current_locale unless current_locale.nil?
+        @eula.load_text FastGettext.locale unless FastGettext.locale.blank?
         
         @eula.text = ""
         @eula.available_langs = []
@@ -131,8 +129,7 @@ class EulasController < ApplicationController
         redirect_to :action => :show, :id => next_id
       
       else
-        permission_check :'org.opensuse.yast.modules.eulas.accept'
-        raise InvalidParameters.new({:id => 'MISSING'}) if params[:id].nil? # RORSCAN_ITL
+         raise InvalidParameters.new({:id => 'MISSING'}) if params[:id].nil? # RORSCAN_ITL
         raise InvalidParameters.new({:eulas_accepted => 'INVALID'}) unless [true,false,"true","false"].include? params[:eulas][:accepted] # RORSCAN_ITL
       
         @license = License.find params[:id]

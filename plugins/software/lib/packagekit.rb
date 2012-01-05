@@ -28,6 +28,7 @@ require 'socket'
 require 'thread'
 
 require 'exceptions'
+require 'builder'
 
 class PackageKitError < BackendException
   attr_reader :description

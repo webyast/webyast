@@ -20,6 +20,7 @@
 #++
 require 'yast_service'
 require 'base_model/base'
+require 'builder'
 
 # = Active Directory model
 # Proviceds access to Active Directory client configuration

@@ -23,6 +23,7 @@ require 'singleton'
 require 'yast_service'
 require 'webyast/paths'
 require 'base_model/base'
+require 'builder'
 
 # = Mail model
 # Proviceds access local mail settings (SMTP server to use)

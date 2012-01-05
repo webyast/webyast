@@ -19,6 +19,8 @@
 # you may find current contact information at www.novell.com
 #++
 
+require 'builder'
+
 class LicenseRequiredException < BackendException
 	def initialize
     super "License confirm required to continue with installation. Please go to patch module, where you can decide about license confirmation."

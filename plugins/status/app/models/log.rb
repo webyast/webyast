@@ -26,6 +26,7 @@
 
 require 'yast/config_file'
 require 'base_model/base'
+require 'builder'
 
 class Log
   attr_reader :id

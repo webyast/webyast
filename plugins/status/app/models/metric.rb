@@ -28,7 +28,7 @@
 #
 require 'exceptions'
 require 'graph'
-
+require 'builder'
 
 #
 # This class acts as a model for metrics provided by collectd

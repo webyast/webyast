@@ -16,6 +16,11 @@ PATH
     webyast-administrator (0.1)
 
 PATH
+  remote: /home/src/rails/webyast3/plugins/eulas
+  specs:
+    webyast-eulas (0.1)
+
+PATH
   remote: /home/src/rails/webyast3/plugins/firewall
   specs:
     webyast-firewall (0.1)
@@ -258,6 +263,7 @@ DEPENDENCIES
   sqlite3-ruby
   webyast-activedirectory!
   webyast-administrator!
+  webyast-eulas!
   webyast-firewall!
   webyast-kerberos!
   webyast-ldap!

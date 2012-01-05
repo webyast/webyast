@@ -22,6 +22,7 @@
 require 'yast_service'
 require 'yast_cache'
 require 'base_model/base'
+require 'builder'
 
 # User model, not ActiveRecord based, but a
 # thin model over the YaPI, with some

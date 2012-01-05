@@ -26,6 +26,7 @@
 #
 
 require 'yast_service'
+require 'builder'
 
 class Plugin
   attr_reader :level

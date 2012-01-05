@@ -21,6 +21,7 @@
 
 require 'yast_cache'
 require 'base_model/base'
+require 'builder'
 
 class Ntp < BaseModel::Base
 

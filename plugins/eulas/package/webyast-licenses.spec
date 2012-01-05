@@ -23,7 +23,7 @@ Release:        0
 Summary:        WebYaST - license management service
 Source:         www.tar.bz2
 Source1:        eulas-sles11.yml
-Source2:        org.opensuse.yast.modules.eulas.policy
+Source2:        org.opensuse.yast.modules.yapi.license.policy
 Source3:        eulas-opensuse11_1.yml
 BuildRoot:      %{_tmppath}/%{name}-%{version}-build
 BuildArch:      noarch

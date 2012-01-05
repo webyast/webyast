@@ -24,6 +24,7 @@
 # and well defined data.
 
 require 'base_model/base'
+require 'builder'
 
 class Route < BaseModel::Base
 
