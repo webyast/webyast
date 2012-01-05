@@ -68,7 +68,16 @@
   <%= javascript_tag do -%>
     setTimeout(function() {
       $('#statusbar-status').html('<%= image_tag("working.gif", :class => "small-working-icon") %> <%= _("Loading system information") %>') <!-- RORSCAN_ITL -->
-      <%= remote_function(:update => "statusbar_status", :url => { :controller => :status, :action => :show_summary }) %>
+      $.ajax({
+        type: 'GET',
+        url: '<%= url_for({ :controller => :status, :action => :show_summary }) -%>',
+        success: function(data, status, xhr) {
+          $('#statusbar_status').html(data);
+        },
+        error: function(xhr, status, error) {
+          $('#statusbar_status').html('<b><%= escape_javascript _("Error: Cannot check the current status.") -%></b>');
+        }
+      });
       }, <%= refresh_timeout.to_i * 1000 -%>);
   <% end -%>
 <% end %>
