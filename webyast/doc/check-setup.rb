@@ -119,8 +119,7 @@ test_version :generic, 'sqlite3'
 test_module :generic, 'sqlite3', 'rubygem-sqlite3'
 test_version :generic, 'yast2-dbus-server'
 
-test_module :generic, 'rpam', 'rubygem-rpam'
-test_module :generic, 'polkit', 'rubygem-polkit'
+test_module :generic, 'polkit1', 'rubygem-polkit1'
 
 test_group :production, 'webyast'
 test_user :production, 'webyast'

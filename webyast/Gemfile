@@ -10,7 +10,6 @@ gem "sqlite3-ruby", :require => "sqlite3"
 
 gem 'haml'
 
-#gem 'rpam', :git => 'git://gitorious.org/opensuse/ruby-rpam.git'
 gem "fast_gettext", '>= 0.5'
 gem 'gettext_i18n_rails'
 gem 'nokogiri'
