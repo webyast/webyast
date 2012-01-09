@@ -1,6 +1,5 @@
-GIT
-  remote: git://github.com/dmacvicar/devise_unix2_chkpwd_authenticatable.git
-  revision: 72fbe96495f855cce2d78358d0014e70a9aebe82
+PATH
+  remote: /home/src/rails/webyast3/devise_unix2_chkpwd_authenticatable
   specs:
     devise_unix2_chkpwd_authenticatable (0.1)
       devise (> 1.1.0)
