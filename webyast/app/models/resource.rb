@@ -51,7 +51,7 @@ class Resource < BaseModel::Base
           end
           resources
         else
-          implementations = ResourceRegistration.resources[what]
+          implementations = ResourceRegistration.instance.resources[what]
           implementations ? new(what, implementations.first) : nil
       end
     }
