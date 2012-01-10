@@ -4,7 +4,6 @@ Webyast::Application.routes.draw do
   resources :notifier
   resources :onlinehelp
   resources :logs
-  resource :permissions
   resource :vendor_settings
 
   #mounting each plugin  
