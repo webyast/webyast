@@ -15,7 +15,6 @@
 # License along with this library; if not, write to the Free Software 
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA
 #++
-require 'base_model/serialization'
 
 module BaseModel
   # == Base
@@ -100,6 +99,8 @@ module BaseModel
 
   class Base 
     include ActiveModel::MassAssignmentSecurity
+    include ActiveModel::Serializers::JSON
+    include ActiveModel::Serializers::Xml
     include ActiveModel::Validations
     include ActiveModel::Conversion
     extend ActiveModel::Naming
@@ -115,10 +116,23 @@ module BaseModel
       assign_attributes(attr)
     end
 
+    # for mass assignment
     def assign_attributes(values, options = {})
       sanitize_for_mass_assignment(values, options[:as]).each do |k, v|
         send("#{k}=", v)
       end
+    end
+
+    #for serialization
+    def attributes
+      ret = {}
+      attr_list = self.instance_variables.collect { |v| v.to_sym }
+      attr_list.each do |attr|
+        value = self.instance_variable_get(attr)
+        name = attr.to_s[1..-1]
+        ret[name] = value unless value == nil
+      end
+      ret
     end
 
     def persisted?
@@ -208,9 +222,6 @@ module BaseModel
     #Callbacks in model
     include ActiveRecord::Callbacks
 
-
-    #serialization of models
-    include BaseModel::Serialization
 
     # This is redefined save! from ActiveRecord, as we want to throw own exceptions
     # throws InvalidParameters exception when validation failed. Return same value as return save.
