@@ -15,7 +15,6 @@
 # License along with this library; if not, write to the Free Software 
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA
 #++
-require 'base_model/mass_assignment'
 require 'base_model/serialization'
 
 module BaseModel
@@ -100,6 +99,7 @@ module BaseModel
 
 
   class Base 
+    include ActiveModel::MassAssignmentSecurity
     include ActiveModel::Validations
     include ActiveModel::Conversion
     extend ActiveModel::Naming
@@ -112,7 +112,13 @@ module BaseModel
 
     # initialize attributes by hash in attr
     def initialize(attr={})
-      load(attr)
+      assign_attributes(attr)
+    end
+
+    def assign_attributes(values, options = {})
+      sanitize_for_mass_assignment(values, options[:as]).each do |k, v|
+        send("#{k}=", v)
+      end
     end
 
     def persisted?
@@ -203,8 +209,6 @@ module BaseModel
     include ActiveRecord::Callbacks
 
 
-    #Mass assignment support
-    include BaseModel::MassAssignment
     #serialization of models
     include BaseModel::Serialization
 
@@ -221,6 +225,7 @@ module BaseModel
     end
   end
 end
+
 #Hack to properly generate error message without ActiveRecord special methods
 module ActiveRecord
   class Error
