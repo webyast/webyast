@@ -27,40 +27,6 @@ module BaseModel
   # * Mass assignment
   # * Serialization
   #
-  # === Validation
-  # It is used validation from ActiveRecord. For details see ActiveRecord::Validations
-  # 
-  # Not all validation is usable in all models. Basic supported ones is:
-  # * validates_presence_of
-  # * validates_format_of
-  # * validates_inclusion_of
-  # * validates_exclusion_of
-  # * validates_range_of
-  # * validates_lenght_of
-  # * validates_numberically_of
-  # * validates_each (general validation)
-  # * validates_numberically_of
-  # see ActiveRecord::Validations::ClassMethods documentation for arguments
-  #
-  # === Callbacks
-  # It is used to add hook to actions from ActiveRecord. For details see ActiveRecord::Callbacks
-  # Supported callbacks (all have before and after variant also):
-  # * around_create
-  # * around_destroy
-  # * around_save
-  # * around_update
-  # * around_validation
-  # * around_validation_on_create
-  # * around_validation_on_update
-  # * general around_filter
-  # see ActiveRecord::Callbacks documentation for arguments
-  # 
-  # === Mass assignment
-  # see BaseModel::MassAssignment
-  #
-  # === Serialization
-  # Framework to support serialization. By default is support xml and json serialization (method to_xml and to_json)
-  # and deserialization (from_xml and from_json).
   # 
   # === Example
   #   class Systemtime < BaseModel::Base
@@ -103,13 +69,8 @@ module BaseModel
     include ActiveModel::Serializers::Xml
     include ActiveModel::Validations
     include ActiveModel::Conversion
-    extend ActiveModel::Naming
-
-    # requirement for class which should be used in ActiveModel
-    # see http://www.engineyard.com/blog/2009/my-five-favorite-things-about-rails-3/ (paragraph 4)
-    def to_model
-      self
-    end
+    extend  ActiveModel::Naming
+    extend  ActiveModel::Callbacks
 
     # initialize attributes by hash in attr
     def initialize(attr={})
@@ -133,6 +94,12 @@ module BaseModel
         ret[name] = value unless value == nil
       end
       ret
+    end
+
+    # requirement for class which should be used in ActiveModel
+    # see http://www.engineyard.com/blog/2009/my-five-favorite-things-about-rails-3/ (paragraph 4)
+    def to_model
+      self
     end
 
     def persisted?
@@ -191,38 +158,6 @@ module BaseModel
       true
     end
 
-    #remove overwritten method_missing from activeRecord (as Base model doesn't know attributes)
-    alias_method :method_missing_orig, :method_missing
-    #required by validations
-    include ActiveRecord::AttributeMethods
-    alias_method :method_missing, :method_missing_orig
-    #remove overwritten respond_to (as Base model doesn't have attributes
-    alias_method :respond_to?, :respond_to_without_attributes?
-
-    #Validations in model
-    include ActiveRecord::Validations
-    
-    #extend validation with site validation
-
-    # validates that in attributes is set valid URI
-    def self.validates_uri(*attr_names)
-      configuration = {}
-      configuration.update attr_names.extract_options!
-
-      validates_each(attr_names,configuration) do |record,attr_name,value|
-        begin
-          URI.parse value
-        rescue URI::InvalidURIError => e
-          Rails.logger.warn "Invalid URI: #{e.inspect}"
-          record.errors.add(attr_name, :invalid, :default => configuration[:message], :value => value)
-        end
-      end
-    end
-
-    #Callbacks in model
-    include ActiveRecord::Callbacks
-
-
     # This is redefined save! from ActiveRecord, as we want to throw own exceptions
     # throws InvalidParameters exception when validation failed. Return same value as return save.
     # if exception is not raised it is correctly reported to webclient as failed validation see ActiveResource#validations
@@ -233,26 +168,6 @@ module BaseModel
         raise InvalidParameters.new report
       end
       save
-    end
-  end
-end
-
-#Hack to properly generate error message without ActiveRecord special methods
-module ActiveRecord
-  class Error
-    # do not call any record specific methods
-    def generate_message(*args)
-      @message
-    end
-
-    # do not call any record specific methods
-    def generate_full_message(*args)
-      @message
-    end
-
-    # do not call any record specific methods
-    def default_options
-      {}
     end
   end
 end
