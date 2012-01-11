@@ -20,7 +20,7 @@
 #++
 require 'singleton'
 require 'yast_service'
-require 'base_model/base'
+require 'base'
 require 'builder'
 
 # = Administrator model

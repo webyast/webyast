@@ -21,7 +21,7 @@
 
 require 'yast_service'
 require 'yast_cache'
-require 'base_model/base'
+require 'base'
 require 'builder'
 
 # User model, not ActiveRecord based, but a

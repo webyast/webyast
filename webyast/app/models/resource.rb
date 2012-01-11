@@ -21,7 +21,7 @@
 # Resource class
 #
 
-require 'base_model/base'
+require 'base'
 
 class Resource < BaseModel::Base
   require 'resource_registration'

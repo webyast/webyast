@@ -22,7 +22,7 @@
 require 'singleton'
 require 'yast_service'
 require 'webyast/paths'
-require 'base_model/base'
+require 'base'
 require 'builder'
 
 # = Mail model

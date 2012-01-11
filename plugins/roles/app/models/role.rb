@@ -23,7 +23,7 @@
 
 require 'yaml'
 require 'exceptions'
-require 'base_model/base'
+require 'base'
 require 'webyast/paths'
 
 # = Role model

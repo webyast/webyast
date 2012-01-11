@@ -23,7 +23,7 @@ require 'yast/config_file'
 require 'webyast/paths'
 require 'yast_service'
 require 'yast_cache'
-require 'base_model/base'
+require 'base'
 
 # = Service model
 # Proviceds access to configured services.

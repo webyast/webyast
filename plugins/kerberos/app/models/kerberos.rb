@@ -19,7 +19,7 @@
 # you may find current contact information at www.novell.com
 #++
 require 'yast_service'
-require 'base_model/base'
+require 'base'
 
 # = Kerberos model
 # Proviceds access to Kerberos client configuration

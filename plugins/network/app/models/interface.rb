@@ -23,7 +23,7 @@
 # Main goal is handle YaPI specific calls and data formats. Provides cleaned
 # and well defined data.
 
-require 'base_model/base'
+require 'base'
 
 class Interface < BaseModel::Base
 

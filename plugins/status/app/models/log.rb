@@ -25,7 +25,7 @@
 #
 
 require 'yast/config_file'
-require 'base_model/base'
+require 'base'
 require 'builder'
 
 class Log
