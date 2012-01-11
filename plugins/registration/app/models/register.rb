@@ -25,7 +25,7 @@
 # the caller must interpret the result and maybe call it again with 
 # changed values.
 
-require 'webyast/paths'
+require 'yast/paths'
 require 'builder'
 
 # Hash.from_xml converts dashes in keys to underscores
@@ -105,7 +105,7 @@ public
                  'nohwdata'     => '0',
                  'nooptional'   => '0',
                  'debug'        => '2',
-                 'logfile'      => WebYaST::Paths::REGISTRATION_LOG }
+                 'logfile'      => YaST::Paths::REGISTRATION_LOG }
 
     # read system proxy settings and set proxy in the suseRegister context (bnc#626965)
     sc_proxy = "/etc/sysconfig/proxy"

@@ -19,7 +19,7 @@
 # = Paths
 # the module provides constant for webyast package. Paths identifies places
 # where is all data, that are not in webyast server place, go.
-module WebYaST
+module YaST
 
   module Paths
     ROOT="/" #it is not true on windows, change during packaging

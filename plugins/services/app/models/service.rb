@@ -20,7 +20,7 @@
 #++
 
 require 'yast/config_file'
-require 'webyast/paths'
+require 'yast/paths'
 require 'yast_service'
 require 'yast_cache'
 require 'base'
@@ -76,8 +76,8 @@ class Service < BaseModel::Base
   # reading configuration file
   #
   def self.parse_filter(path = nil)
-    path = File.join(WebYaST::Paths::CONFIG,VENDOR,FILTER_FILE) if path == nil
-    path = File.join(WebYaST::Paths::CONFIG,FILTER_FILE) unless File.exists? path
+    path = File.join(YaST::Paths::CONFIG,VENDOR,FILTER_FILE) if path == nil
+    path = File.join(YaST::Paths::CONFIG,FILTER_FILE) unless File.exists? path
 
     #reading configuration file
     if File.exists?(path)

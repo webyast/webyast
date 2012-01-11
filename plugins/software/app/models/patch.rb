@@ -20,16 +20,16 @@
 #++
 
 require 'resolvable'
-require 'webyast/paths'
+require 'yast/paths'
 
 # Model for patches available via package kit
 class Patch < Resolvable
 
   attr_accessor :messages
 
-  MESSAGES_FILE = File.join(WebYaST::Paths::VAR,"software","patch_installion_messages")
-  LICENSES_DIR = File.join(WebYaST::Paths::VAR,"software","licenses")
-  ACCEPTED_LICENSES_DIR = File.join(WebYaST::Paths::VAR,"software","licenses","accepted")
+  MESSAGES_FILE = File.join(YaST::Paths::VAR,"software","patch_installion_messages")
+  LICENSES_DIR = File.join(YaST::Paths::VAR,"software","licenses")
+  ACCEPTED_LICENSES_DIR = File.join(YaST::Paths::VAR,"software","licenses","accepted")
   JOB_PRIO = -30
 
   private

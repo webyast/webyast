@@ -22,7 +22,7 @@
 require "yast/config_file"
 require "exceptions"
 require 'builder'
-require 'webyast/paths'
+require 'yast/paths'
 
 # = Representation of EULA
 # used for loading license data from disk, serializing to xml and json and saving
@@ -47,9 +47,9 @@ class License
 
   #Paths
   
-  VAR_DIR       = File.join(WebYaST::Paths::VAR,"eulas")
-  RESOURCES_DIR = File.join(WebYaST::Paths::DATAS,"eulas")
-  EULAS_VENDOR = File.join(WebYaST::Paths::CONFIG,"vendor","eulas.yml")
+  VAR_DIR       = File.join(YaST::Paths::VAR,"eulas")
+  RESOURCES_DIR = File.join(YaST::Paths::DATAS,"eulas")
+  EULAS_VENDOR = File.join(YaST::Paths::CONFIG,"vendor","eulas.yml")
 
   ##
   # Create a license object using the name of the license.

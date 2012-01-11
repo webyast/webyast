@@ -33,9 +33,9 @@ class Basesystem < BaseModel::Base
 
   # path to file which defines module queue
   BASESYSTEM_CONF = :basesystem
-  BASESYSTEM_CONF_VENDOR	= File.join(WebYaST::Paths::CONFIG,"vendor","basesystem.yml")
+  BASESYSTEM_CONF_VENDOR	= File.join(YaST::Paths::CONFIG,"vendor","basesystem.yml")
   # path to file which store module then is next in queue or END_STRING if all steps is done
-  FINISH_FILE = File.join(WebYaST::Paths::VAR,"basesystem","finish")
+  FINISH_FILE = File.join(YaST::Paths::VAR,"basesystem","finish")
   FINISH_STR = "FINISH"
 
   def initialize(options={})

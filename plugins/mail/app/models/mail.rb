@@ -21,7 +21,7 @@
 
 require 'singleton'
 require 'yast_service'
-require 'webyast/paths'
+require 'yast/paths'
 require 'base'
 require 'builder'
 
@@ -38,7 +38,7 @@ class Mail < BaseModel::Base
   attr_accessor :test_mail_address
   attr_accessor :transport_layer_security
 
-  TEST_MAIL_FILE = File.join(WebYaST::Paths::VAR,"mail","test_sent")
+  TEST_MAIL_FILE = File.join(YaST::Paths::VAR,"mail","test_sent")
 
   # read the settings from system
   def self.find
