@@ -79,7 +79,11 @@ module BaseModel
 
     # for mass assignment
     def assign_attributes(values, options = {})
-      sanitize_for_mass_assignment(values, options[:as]).each do |k, v|
+      values.each do |k, v|
+        whitelist = self.class.accessible_attributes
+        next if !whitelist.blank? && !(whitelist.include?(k.to_sym))
+        blacklist = self.class.protected_attributes
+        next if !blacklist.blank? && blacklist.include?(k.to_sym)
         send("#{k}=", v) if self.respond_to?(k)
       end
     end
