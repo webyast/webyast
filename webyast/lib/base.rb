@@ -80,14 +80,14 @@ module BaseModel
     # for mass assignment
     def assign_attributes(values, options = {})
       sanitize_for_mass_assignment(values, options[:as]).each do |k, v|
-        send("#{k}=", v)
+        send("#{k}=", v) if self.respond_to?(k)
       end
     end
 
     #for serialization
     def attributes
       ret = {}
-      attr_list = self.instance_variables.collect { |v| v.to_sym }
+      attr_list = @attr_serialized || self.instance_variables.collect { |v| v.to_sym }
       attr_list.each do |attr|
         value = self.instance_variable_get(attr)
         name = attr.to_s[1..-1]
@@ -168,6 +168,18 @@ module BaseModel
         raise InvalidParameters.new report
       end
       save
+    end
+
+    # defines attributes which should be serialized
+    # usage (class with two attributes to serialize):
+    #   class Test
+    #     include Serialization
+    #     attr_serialized :arg1
+    #     attr_serialized :arg2
+    #   end
+    def self.attr_serialized(*args)
+      @attr_serialized ||= []
+      @attr_serialized.concat args.collect { |v| "@#{v.to_s}".to_sym }
     end
 
     #extend validation with site validation

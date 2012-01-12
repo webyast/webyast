@@ -21,8 +21,8 @@
 
 # Group model, YastModel based
 class GetentPasswd < BaseModel::Base
-  attr_reader :login
-  attr_reader :full_name
+  attr_accessor :login
+  attr_accessor :full_name
 
   def self.find
     YastCache.fetch(self) {
