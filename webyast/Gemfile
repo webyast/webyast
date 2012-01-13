@@ -23,6 +23,9 @@ gem 'cancan'
 gem 'polkit1', :path => File.expand_path("../../ruby-polkit1", __FILE__)
 gem 'inifile'
 gem 'ruby-dbus'
+gem 'uglifier'
+gem 'execjs'
+gem 'therubyracer'
 
 plugin_path = File.expand_path("../../plugins",  __FILE__)
 gemspecs = Dir.glob(File.join(plugin_path, "**", "*.gemspec"))
