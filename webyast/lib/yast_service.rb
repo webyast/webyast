@@ -115,7 +115,7 @@ class YastService
 	    # Etc helps to retrieve the login of the REST service
 	    require 'etc'
             # throw a PolicyKit exception instead of the DBus exception
-            raise NoPermissionException.new(parms[0], Etc.getlogin)
+            raise CanCan::AccessDenied.new(_("Not authorized! (%s)") % parms[0])
 	end
 
 	# rethrow other DBus Errors

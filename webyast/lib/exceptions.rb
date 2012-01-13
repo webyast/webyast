@@ -78,28 +78,6 @@ class InvalidParameters < ArgumentError
   end
 end
 
-class NoPermissionException < BackendException
-  attr_reader :permission, :user
-  
-  def initialize(permission,user)
-    @permission = permission
-    @user = user
-  end
-
-  def to_xml(options={})
-    xml = Builder::XmlMarkup.new(options)
-    xml.instruct! unless options[:skip_instruct]
-
-    xml.error do
-      xml.type "NO_PERM"
-      xml.description "Permission to allow #{@permission} is not available for user #{@user}"
-      xml.permission @permission
-      xml.user @user
-      xml.bug false
-    end
-  end
-end
-
 class NotLoggedException < BackendException
   def initialize()
     super("No one is logged.")

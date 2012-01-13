@@ -34,7 +34,7 @@ protected
   def details(message, options={})
     ret = "<br><a href=\"#\" onClick=\"$('.details',this.parentNode.parentNode.parentNode).toggle();\"><small>#{_('details')}</small></a>
             <pre class=\"details\" style=\"display:none\"> #{CGI.escapeHTML message } </pre>"
-    ret
+    ret.html_safe
   end
 
 public
@@ -42,12 +42,12 @@ public
   #render only pure text to simple show it on frontend
   rescue_from Exception, :with => :report_exception
   rescue_from BackendException, :with => :report_backend_exception
-
-  rescue_from NoPermissionException do |exception|
-    logger.info "No permission: #{exception.permission} for #{exception.user}"
+  rescue_from CanCan::AccessDenied do |exception|
+    permission = "org.opensuse.yast.modules.yapi.#{exception.subject.to_s.downcase}.#{exception.action.to_s.downcase}"
+    logger.info "No permission: #{permission}"
     if request.xhr? || request.format.html?
       flash[:error] = _("Operation is forbidden. If you have to do it, please contact system administrator")+
-                          details(exception.message) #already localized from error constructor
+        details(exception.message + " (#{permission})" ) #already localized from error constructor
       if request.xhr?
         render :text => "<div>#{flash[:error]}</div>", :status => 403
       else
