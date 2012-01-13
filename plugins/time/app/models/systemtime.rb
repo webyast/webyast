@@ -48,8 +48,6 @@ class Systemtime < BaseModel::Base
   # do not massload timezones, as it is read-only
   attr_protected :timezones
 
-  after_save :restart_collectd
-
   private
 
   # Creates argument for dbus call which specify what data is requested.
@@ -126,6 +124,7 @@ class Systemtime < BaseModel::Base
       #XXX hack to avoid dbus timeout durign moving time to future
       #FIXME use correct exception
     end
+    restart_collectd
   end
 
   def restart_collectd

@@ -25,11 +25,11 @@ require 'yast/paths'
 require 'base'
 require 'builder'
 
-# = Mail model
+# = MailSetting model
 # Proviceds access local mail settings (SMTP server to use)
 # Uses YaPI::MailSettings for read and write operations,
 # YaPI::SERVICES, for reloading postfix service.
-class Mail < BaseModel::Base
+class MailSetting < BaseModel::Base
 
   attr_accessor :smtp_server
   attr_accessor :user
@@ -46,7 +46,7 @@ class Mail < BaseModel::Base
       yapi_ret = YastService.Call("YaPI::MailSettings::Read")
       raise MailError.new("Cannot read from YaPI backend") if yapi_ret.nil?
       yapi_ret["transport_layer_security"] = yapi_ret.delete("TLS") || "no"
-      Mail.new yapi_ret
+      MailSetting.new yapi_ret
     }
   end
 
