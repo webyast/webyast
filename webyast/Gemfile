@@ -8,6 +8,7 @@ gem 'jquery-rails'
 gem "sqlite3-ruby", :require => "sqlite3"
 
 gem 'haml'
+gem 'delayed_job', '2.1.4'
 
 gem "fast_gettext", '>= 0.5'
 gem 'gettext_i18n_rails'
