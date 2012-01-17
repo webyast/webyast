@@ -57,7 +57,7 @@
 
 <div class="plugin-content plugin-border">
 
-<% disabled = cannot? :write, MailSetting %>
+<% disabled = cannot? :write, Mailsetting %>
 <%= render :partial => 'shared/missing_write_permissions' if disabled %>
 
   <%= form_for(@mail, :url => { :action => "update" }, :html => { :method => :put, :id => "mailForm", :class=>"webyast_form", :autocomplete => :off, :onsubmit => "if ($('#mailForm').valid()); disable_forms ()" } ) do |f| %>

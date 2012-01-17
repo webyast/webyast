@@ -22,17 +22,17 @@
 # = Mail::State controller
 # Confirm that an test email has been sent
 
-class Mail::StateController < ApplicationController
+class Mailsetting::StateController < ApplicationController
   
   # PUT action
   # Confirm that an test email has been sent
   def update
-    authorize! :write, MailSetting
+    authorize! :write, Mailsetting
 
     logger.warn "Confirmation of testmail"
     File.delete Mail::TEST_MAIL_FILE if File.exist? Mail::TEST_MAIL_FILE
     YastCache.delete(Plugin.new(),"mail")
-    mail = MailSetting.find
+    mail = Mailsetting.find
     respond_to do |format|
       format.xml  { render :xml => mail.to_xml(:root => "mail", :dasherize => false, :indent=>2), :location => "none" }
       format.json { render :json => mail.to_json, :location => "none" }

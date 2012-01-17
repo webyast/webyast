@@ -24,8 +24,8 @@ require 'gettext'
 class MailState
   include GetText
   def self.read()
-    if File.exist? Mail::TEST_MAIL_FILE
-      f = File.new(Mail::TEST_MAIL_FILE, 'r')
+    if File.exist? Mailsetting::TEST_MAIL_FILE
+      f = File.new(Mailsetting::TEST_MAIL_FILE, 'r')
       mail = f.gets
       mail = "" if mail.nil?
       f.close

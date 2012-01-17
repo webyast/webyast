@@ -1,5 +1,5 @@
 module WebYaST
-  class MailEngine < Rails::Engine
+  class MailsettingEngine < Rails::Engine
     initializer "static assets" do |app|
       app.middleware.use ::ActionDispatch::Static, "#{root}/public"
     end

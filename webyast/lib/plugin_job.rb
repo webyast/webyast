@@ -71,9 +71,6 @@ class PluginJob < Struct.new(:class_name,:method,:arguments)
 #internal method. Use run_async and running? for asynchronous jobs
   def perform
 
-    #FIXME: this is a workaround only
-    I18n.supported_locales = ["en"]
-
     object = nil
     object = self[:class_name]
     if object.class == Symbol || object.class == String

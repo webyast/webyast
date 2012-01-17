@@ -1,7 +1,7 @@
 # -*- encoding: utf-8 -*-
 
 Gem::Specification.new do |s|
-  s.name = "webyast-mail"
+  s.name = "webyast-mailsetting"
   s.version = "0.1"
   s.authors = ["WebYaST team"]
   s.email = %q{webyast-devel@opensuse.org}

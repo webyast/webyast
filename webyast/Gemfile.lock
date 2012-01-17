@@ -40,9 +40,9 @@ PATH
     webyast-ldap (0.1)
 
 PATH
-  remote: /home/src/rails/webyast3/plugins/mail
+  remote: /home/src/rails/webyast3/plugins/mailsetting
   specs:
-    webyast-mail (0.1)
+    webyast-mailsetting (0.1)
 
 PATH
   remote: /home/src/rails/webyast3/plugins/network
@@ -288,7 +288,7 @@ DEPENDENCIES
   webyast-firewall!
   webyast-kerberos!
   webyast-ldap!
-  webyast-mail!
+  webyast-mailsetting!
   webyast-network!
   webyast-ntp!
   webyast-registration!

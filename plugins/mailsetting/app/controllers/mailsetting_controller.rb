@@ -24,7 +24,7 @@
 
 require 'digest/sha2'
 
-class MailController < ApplicationController
+class MailsettingController < ApplicationController
 
   layout 'main'
 
@@ -34,9 +34,9 @@ class MailController < ApplicationController
   public
 
   def index
-    authorize! :read, MailSetting
+    authorize! :read, Mailsetting
    
-    @mail = MailSetting.find
+    @mail = Mailsetting.find
     @mail.confirm_password	= @mail.password
     @mail.test_mail_address	= ""
     @mail.test_mail_address	= params["email"] if params.has_key? "email"
@@ -44,8 +44,8 @@ class MailController < ApplicationController
   end
   
   def show
-    authorize! :read, MailSetting
-    mail = MailSetting.find
+    authorize! :read, Mailsetting
+    mail = Mailsetting.find
 
     respond_to do |format|
       format.xml  { render :xml => mail.to_xml(:root => "mail", :dasherize => false, :indent=>2), :location => "none" }
@@ -54,8 +54,8 @@ class MailController < ApplicationController
   end
     
   def update
-    authorize! :write, MailSetting
-    @mail = MailSetting.find
+    authorize! :write, Mailsetting
+    @mail = Mailsetting.find
     @mail.load params["mail"]
 
     # validate data also here, if javascript in view is off

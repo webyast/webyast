@@ -1,6 +1,6 @@
 main:
   icon: 'yast-mail-server.png'
-  url: /mail
+  url: /mailsetting
   groups: [ Accounts ]
   tags: [ mail, network]
   title:  _("Mail Settings")
