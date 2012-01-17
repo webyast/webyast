@@ -19,10 +19,11 @@
 */
 
 var currentURL = window.location.toString().split("/");
+var $plugins = $('#webyast_plugins');
+
 //Match the control panel (index page) and enable tracking
 if(currentURL.pop.length == 0) {
   $(function() {
-    var $plugins = $('#webyast_plugins');
     var $data = $plugins.clone();
     var $sortedData = $data.find('li');
     var $filters = $('#filter').find('label.quicksand_button');
@@ -45,8 +46,6 @@ if(currentURL.pop.length == 0) {
     $('#hidden_filters').fadeOut();
   }
 
-  //TODO Save timeout ID and reset if all button is clicked
-  //TODO Stop timeout if user mouseovered buttons
   $(function() {
     var $all = $('#filter_all');
     var $recent = $('#filter_recent');
@@ -99,10 +98,7 @@ if(currentURL.pop.length == 0) {
     var lastUsage = parseInt(localStorage.getItem('last_reset'));
     var expired = today - lastUsage;
 
-  //  expiresIn = 10;
-
     if(expired > expiresIn ) {
-  //    console.info("EXPIRED " + expired + " IN " + expiresIn);
       return true;
     } else {
       return false;
@@ -112,7 +108,6 @@ if(currentURL.pop.length == 0) {
   function resetModuleUsage(array) {
     for(i=0; i< array.length; i++) {
       var new_value = parseInt((array[i].value/2)+1);
-  //    console.log("# "+ array[i].name + " " + " Old value: "+ array[i].value + " New value " + new_value);
       localStorage.setItem(array[i].name, new_value);
     }
     
@@ -121,18 +116,15 @@ if(currentURL.pop.length == 0) {
   }
 
   //Track frequenly used modules
-  //$(function() {
   $(document).ready(function() {
   
      if($.browser.msie() && $.browser.version.number() == 8 ) {
        $('#status-eye').css("background", "url(/assets/circle-gray.png)");
      }
   
-  //  console.time('modules_tracking');
     //localStorage.clear()
     if(localstorage_supported() && 'last_reset' in localStorage) {    
-  //    console.log("Sorted by usage")
-      var $plugins = $('#webyast_plugins');
+      // console.log("Sorted by usage")
       var $list =  $plugins.find('li');
       var array = [];
       var $collection = [];
@@ -177,16 +169,18 @@ if(currentURL.pop.length == 0) {
       //INFO: Control panel index page - insert elements without quick sand animation
       //console.info("Localstorage is not empty")
       $plugins.html($sorted);
+      
       trackRecent();
 
     } else {
-  //    console.log("Sorted by name");
-      var $plugins = $('#webyast_plugins');
+      // console.log("Sorted by name");
       var $data = $plugins.clone();
       $data = $data.find('li.main');
 
       if($data.length > 5) { 
         $data = $data.sort(sortAlphabetically).splice(0, 5); 
+      } else {
+        $data = $data.sort(sortAlphabetically)
       }
 
       //INFO: Control panel index page - insert elements without quick sand animation
@@ -194,14 +188,12 @@ if(currentURL.pop.length == 0) {
       $plugins.html($data);
       trackRecent();
     }
-  //  console.timeEnd('modules_tracking');
   })
 
   function trackRecent() {
     if(localstorage_supported()) {
      $('#webyast_plugins li').live('click', function(e) {
         if('last_reset' in localStorage != true) { lastReset(getUnixTimestamp()); }
-        //console.log($(this).attr('id'))
         if($(this).attr('id') in localStorage) {
           var value = parseInt(localStorage.getItem($(this).attr('id'))) + 1;
           localStorage.setItem($(this).attr('id'), value);
