@@ -9,7 +9,7 @@
 #
 
 
-Name:           webyast-mail
+Name:           webyast-mailsetting
 Provides:       WebYaST(org.opensuse.yast.modules.yapi.mailsettings)
 Provides:       yast2-webservice-mailsettings = %{version}
 Obsoletes:      yast2-webservice-mailsettings < %{version}
