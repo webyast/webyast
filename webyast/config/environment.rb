@@ -61,11 +61,11 @@ unless Rails.env.test?
     PluginJob.run_async(-3,:GetentPasswd, :find)
   end
 
-#  if ENV["RUN_WORKER"] && YastCache.active
-#    Thread::new do 
-#      ENV["RUN_WORKER"] = 'false'
-#      Delayed::Worker.new.start 
-#    end
-#  end
+  if ENV["RUN_WORKER"] && YastCache.active
+    Thread::new do 
+      ENV["RUN_WORKER"] = 'false'
+      Delayed::Worker.new.start 
+    end
+  end
 end
 
