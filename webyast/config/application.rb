@@ -26,10 +26,6 @@ module Webyast
     # remove quiet_assets initializer when this works
     # issue #2639
     #config.assets.logger = nil
-
-    config.after_initialize do
-      YastCache.active = config.action_controller.perform_caching 
-    end
   end
 end
 

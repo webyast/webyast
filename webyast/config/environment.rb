@@ -10,12 +10,14 @@ STDERR.puts "********* Running in production mode" if Rails.env.production?
 STDERR.puts "********* Running in development mode" if Rails.env.development?
 STDERR.puts "********* Running in test mode" if Rails.env.test?
 
+YastCache.active = Rails.env.production? ? true : false
 
-unless Rails.env.test?
+YastCache.active = true
+
+if YastCache.active
   #check if table for caches exist and cache is active
   if ActiveRecord::Base.connection.tables.include?('data_caches') &&
-     ActiveRecord::Base.connection.tables.include?('delayed_jobs') &&
-     YastCache.active
+     ActiveRecord::Base.connection.tables.include?('delayed_jobs')
 
     #remove cache information 
     DataCache.delete_all
@@ -61,7 +63,7 @@ unless Rails.env.test?
     PluginJob.run_async(-3,:GetentPasswd, :find)
   end
 
-  if ENV["RUN_WORKER"] && YastCache.active
+  if ENV["RUN_WORKER"]
     Thread::new do 
       ENV["RUN_WORKER"] = 'false'
       Delayed::Worker.new.start 

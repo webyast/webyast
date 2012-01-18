@@ -18,129 +18,33 @@
 #++
 */
 
-var log = function(message) { 
-  if (typeof(console) != 'undefined' && typeof(console.log) == 'function'){ console.log(message); } else { return false }
-}
-
-function pageRefresh() { self.location = window.location.href; }
-
-//TODO: call twice???
-function stopNotifierPlugin(worker) {
-  var stop = { stop: function() { return this.timer }};
-  var activityTimer = jQuery.extend($.activity, stop);
-
-  if(activityTimer && worker) { 
-    worker.terminate();
-    clearInterval($.activity.stop()); 
-    //log("Stop JQuery activity check & terminate running worker!")
-  } 
-}
-
-function startNotifier(params, interval, inactive) {
-  killWorkerOnReload(Notifier(params));
-
-  $(document).ready(function() {
-    jQuery(function($){
-      $.activity.init({
-        interval: interval, 
-        inactive: inactive, 
-        intervalFn: function(){
-          //log("User is idle: " + Math.round((this.now() - this.defaults.lastActive)/1000) + ' sec');
-        },
-        inactiveFn: function(){
-          //log("User is inactive: " + Math.round((this.now() - this.defaults.lastActive)/1000)  + ' sec');
-          if(typeof(Worker) != 'defined') { killWorker(worker); }
-          $.activity.update();
-        }
-      });
-      
-    $(document).bind('click mousemove', function(){
-      if($.activity.isActive()) {
-        $.activity.update();
-      } else {
-        //log("User active start worker and reactivate activity check!");
-        Notifier(params);
-        $.activity.reActivate();
-      }
-      });
-    });
-  })
-}
-
-var Notifier = function(params) {
-  if(typeof(Worker) == 'undefined') {
-    //console.log("Web worker is not supported")
-    window.setInterval(function() { AJAXcall(params); },5000);
-  } else {
-    //console.log("Web worker is supported")
-    worker = new Worker("<%= asset_path('notifier.workers.js') %>");
-    worker.postMessage(params);
+//
     
-    worker.onmessage = function(event) {
-      switch(event.data){
-        case '200':
-          //log("RELOAD is NEEDED: " + event.data);
-          stopNotifierPlugin(this);
+var timer = 0;
+function notification(params, interval, inactive) {
+  timer = window.setInterval(function() { Notify(params); },5000);
+}
+
+function Notify(params) {
+  $.getJSON("/notifier?plugin=" + params.module, function(result, status, xhr) {
+    switch(xhr.status){
+        case 200:
+          console.log("RELOAD is NEEDED: " + xhr.status);
           $.modalDialog.info( {message: 'Data has been changed!'});
           setTimeout('pageRefresh()', 1000)
         break
-        case '304':
-          //log("CACHE is UP-TO-DATE: " + event.data); 
+        case 304:
+          console.log("CACHE is UP-TO-DATE: " + xhr.status); 
         break
-        case '306':
-          //log("CACHE is not available: " + event.data); 
-          stopNotifierPlugin(worker);
+        case 306:
+          console.log("CACHE is not available: " + xhr.status); 
+	  window.clearInterval(timer);
+
         break
-        default : 
-          //log("ERROR: unknown HTTP status: " + event.data);
-          stopNotifierPlugin(worker);
+        default: 
+          console.log("ERROR: unknown HTTP status: " + xhr.status);
+	  window.clearInterval(timer);
         break
       }
-    };
-
-    worker.onerror = function(error) {
-      //log(error);
-    };
-
-    return worker;
-  }
-}
-
-var AJAXcall = function(params) {
-  $.getJSON("/notifier?plugin="+params.module, function(data, status, jqXHR) {
-    data.NaN? data = data : data = data.toString();
-    switch(data){
-      case '200':
-        //log("RELOAD is NEEDED: " + data);
-        stopNotifierPlugin(worker);
-        $.modalDialog.info( {message: 'Data has been changed!'});
-        setTimeout('pageRefresh()', 1000)
-      break
-      case '304':
-        //log("CACHE is UP-TO-DATE: " + data); 
-        break
-      case '306':
-        //log("CACHE is not available: " + event.data); 
-        break
-      default : 
-        //log("ERROR: unknown HTTP status: " + data + typeof(data));
-      break
-    }
-  })
-}
-
-var killWorker = function(worker) {
-  if(worker && typeof(Worker) != 'undefined') {
-     stopNotifierPlugin(worker);
-  }
-}
-
-var killWorkerOnReload = function(worker, intervalID) {
-  $(function(){
-    window.onbeforeunload = function(){
-      if(worker && typeof(Worker) != 'undefined') {
-        stopNotifierPlugin(worker);
-      }
-    }
   });
 }
