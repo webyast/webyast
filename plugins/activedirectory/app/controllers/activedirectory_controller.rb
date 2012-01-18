@@ -37,10 +37,11 @@ class ActivedirectoryController < ApplicationController
     begin
       @activedirectory = Activedirectory.find
       Rails.logger.debug "ad: #{@activedirectory.inspect}"
-      
-    rescue ActiveResource::ResourceNotFound => e
+
+    rescue Exception => error  
       flash[:error] = _("Cannot read Active Directory client configuraton.")
-      @activedirectory  = nil
+      Rails.logger.error "ERROR: #{error.inspect}"
+      @activedirectory = nil
       render :index and return
     end
     return unless @activedirectory

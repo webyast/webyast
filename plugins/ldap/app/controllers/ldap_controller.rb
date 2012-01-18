@@ -63,12 +63,10 @@ class LdapController < ApplicationController
         params[:ldap][:enabled] = params[:ldap][:enabled] == "true"
         @ldap = Ldap.new(params[:ldap]).save
         flash[:message] = _("LDAP client configuraton successfully written.")
-      rescue ActiveResource::ClientError => e
-        flash[:error] = YaST::ServiceResource.error(e)
-        logger.warn e.inspect
-      rescue ActiveResource::ServerError => e
-        flash[:error] = _("Error while saving LDAP client configuration.")
-        logger.warn e.inspect
+      rescue Exception => error  
+        flash[:error] = _("Error while saving LDAP client configuration.") 
+        Rails.logger.error "ERROR: #{error.inspect}"
+        render :index and return
       end
       redirect_success
     else

@@ -73,20 +73,10 @@ class AdministratorController < ApplicationController
     begin
       response = @administrator.save
       flash[:notice] = _('Administrator settings have been written.')
-      rescue ActiveResource::ClientError => e
-        flash[:error] = YaST::ServiceResource.error(e)
-        logger.warn e.inspect
-        
-        #handle ADMINISTRATOR_ERROR in backend exception here, not by generic handler
-      rescue ActiveResource::ServerError => e
-        error = Hash.from_xml e.response.body
-        logger.warn error.inspect
-        if error["error"] && error["error"]["type"] == "ADMINISTRATOR_ERROR"
-          # %s is detailed error message
-          flash[:error] = _("Error while saving administrator settings: %s") % error["error"]["output"]
-        else
-          raise e
-      end
+    rescue Exception => error  
+      flash[:error] = _("Error while saving administrator settings.") 
+      Rails.logger.error "ERROR: #{error.inspect}"
+      render :index and return
     end
 
     # check if mail is configured; during initial workflow, only warn if mail configuration does not follow

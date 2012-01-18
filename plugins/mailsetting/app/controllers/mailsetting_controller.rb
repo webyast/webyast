@@ -72,44 +72,31 @@ class MailsettingController < ApplicationController
         notice += " " + _('Test mail was sent to %s.') % @mail.test_mail_address
       end
       flash[:notice] = notice
-      
-      rescue ActiveResource::ClientError => e
-        flash[:error] = YaST::ServiceResource.error(e)
-        logger.warn e.inspect
-        redirect_to :action => "index"
-        return
-          
-      rescue ActiveResource::ServerError => e
-        error = Hash.from_xml e.response.body
-        logger.warn error.inspect
-        if error["error"] && error["error"]["type"] == "MAIL_SETTINGS_ERROR"
-          flash[:error] = _("Error while saving mail settings: %s") % error["error"]["output"]
-        else
-          raise e
-        end
-      
-        redirect_to :action => "index"
-        return
-      end
 
-      smtp_server	= params["mail"]["smtp_server"]
+      rescue Exception => error  
+        flash[:error] = _("Error while saving mail settings.") 
+        Rails.logger.error "ERROR: #{error.inspect}"
+        render :index and return
+    end
 
-      # check if mail forwarning for root is configured
-      # during initial workflow, only warn if administrator configuration does not follow
-      if smtp_server.blank? && (!Basesystem.new.load_from_session(session).following_steps.any? { |h| h[:controller] == "administrator" })
-        @administrator      = Administrator.find
+    smtp_server	= params["mail"]["smtp_server"]
+
+    # check if mail forwarning for root is configured
+    # during initial workflow, only warn if administrator configuration does not follow
+    if smtp_server.blank? && (!Basesystem.new.load_from_session(session).following_steps.any? { |h| h[:controller] == "administrator" })
+      @administrator      = Administrator.find
       
-        if @administrator && !@administrator.aliases.blank?
-          flash[:warning]	= _("No outgoing mail server is set, but administrator has mail forwarders defined.
-          Change %s<i>administrator</i>%s or %s<i>mail</i>%s configuration.") % ['<a href="/administrator">', '</a>', '<a href="/mail">', '</a>']
-        end
+      if @administrator && !@administrator.aliases.blank?
+        flash[:warning]	= _("No outgoing mail server is set, but administrator has mail forwarders defined.
+        Change %s<i>administrator</i>%s or %s<i>mail</i>%s configuration.") % ['<a href="/administrator">', '</a>', '<a href="/mail">', '</a>']
       end
+    end
       
-      if params.has_key?("send_mail")
-        redirect_to :action => "index", :email => params["mail"]["test_mail_address"]
-        return
-      end
-      redirect_success # redirect to next step
+    if params.has_key?("send_mail")
+      redirect_to :action => "index", :email => params["mail"]["test_mail_address"]
+      return
+    end
+    redirect_success # redirect to next step
   end
   
   def create
