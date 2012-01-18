@@ -12,8 +12,6 @@ STDERR.puts "********* Running in test mode" if Rails.env.test?
 
 YastCache.active = Rails.env.production? ? true : false
 
-YastCache.active = true
-
 if YastCache.active
   #check if table for caches exist and cache is active
   if ActiveRecord::Base.connection.tables.include?('data_caches') &&
