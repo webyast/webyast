@@ -2,7 +2,7 @@ source 'http://rubygems.org'
 
 gem 'rails', '3.1.1'
 
-gem 'devise'
+gem 'devise', '1.5.2'
 gem 'devise_unix2_chkpwd_authenticatable', :path => File.expand_path("../../devise_unix2_chkpwd_authenticatable", __FILE__)
 gem 'jquery-rails'
 gem "sqlite3-ruby", :require => "sqlite3"

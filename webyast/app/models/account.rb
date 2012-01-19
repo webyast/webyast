@@ -18,6 +18,6 @@
 
 class Account < ActiveRecord::Base
 
-  devise :unix2_chkpwd_authenticatable
-  #devise :trackable, :validatable, :rememberable
+  devise :unix2_chkpwd_authenticatable, 
+         :timeoutable
 end

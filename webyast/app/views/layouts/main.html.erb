@@ -34,18 +34,6 @@
   <script type="text/javascript">
     $(document).ready(function() {
       //$('div.overview a.controlpanel-shortcut').tipsy({gravity: 'n', delayIn: 800, opacity: 0.8 });
-      <% if session[:expires] !=nil && session[:expires].class == ActiveSupport::TimeWithZone %>
-        // get current time from back end and check if time zone set to UTC (client) bnc#631763
-        var current_utc_time = "<%=Time.now.to_time.utc.to_time.to_i%>";
-        <% if session[:expires].utc? == false %>
-          //if time zone is not UTC convert it
-          var expiration_date = "<%= session[:expires].utc.to_time.to_i %>";
-          sessionTimeout(current_utc_time, expiration_date);
-        <% else %>
-          var expiration_date = "<%=session[:expires].to_time.to_i %>";
-          sessionTimeout(current_utc_time, expiration_date);
-        <% end %>
-      <%end%>
     });
   </script>
 
