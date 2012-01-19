@@ -5,6 +5,6 @@ class OnlinehelpController < ApplicationController
    
   def show
     @help = OnlineHelp.find(params[:id])
-    render :nothing=>true, :text=>@help and return
+    render :text=>@help and return
   end
 end

@@ -31,7 +31,7 @@ var webyastModules = {
   repositories: "Repositories",
   users: "Users",
   groups: "Groups",
-  mail: "Mail",
+  mailsetting: "Mail",
   roles: "Roles",
   administrator: "Administrator",
   status: "Status",
@@ -58,6 +58,7 @@ $(document).ready(function() {
        
       setTimeout(function(){
         $.get(url, function(data){
+          $('#onlineHelpContent').remove();
           $('#onlineHelpContent').html(data).append(close);
         });
       }, 800);
