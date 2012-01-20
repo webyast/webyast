@@ -10,11 +10,12 @@ gem "sqlite3-ruby", :require => "sqlite3"
 gem 'haml'
 gem 'delayed_job', '2.1.4'
 
-gem "fast_gettext", '>= 0.5'
-gem 'gettext_i18n_rails'
+gem "fast_gettext", '>= 0.6.4'
+gem 'gettext_i18n_rails', '>= 0.4.3'
 gem 'nokogiri'
 #only used for mo/po file generation in development, !do not load(:lib=>false)! since it will only eat 7mb ram
-gem "gettext", '>= 1.9.3', :require => false
+#Taking a special version due: http://stackoverflow.com/questions/7773408/very-strange-thing-with-rails-3-and-gettext-fast-gettext-undefined-method-ad
+gem 'gettext',      :git=> 'https://github.com/cameel/gettext.git', :ref=> 'c3a8373',  :require => false
 
 #this is needed for language/country translations
 gem "countries_and_languages", '>=0.1.2', :require => 'countries_and_languages/rails'
