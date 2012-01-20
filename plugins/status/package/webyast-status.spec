@@ -77,7 +77,7 @@ needed at runtime.
 rm -rf restdoc
 
 export RAILS_PARENT=%{webyast_dir}
-env LANG=en rake makemo
+env LANG=en rake gettext:pack
 
 mkdir -p public/javascripts/min
 rake js:status
@@ -108,7 +108,7 @@ mkdir -p $RPM_BUILD_ROOT/etc/webyast/vendor
 cp $RPM_BUILD_ROOT/%{plugin_dir}/doc/logs.yml $RPM_BUILD_ROOT/etc/webyast
 
 # remove .po files (no longer needed)
-rm -rf $RPM_BUILD_ROOT/%{plugin_dir}/po
+rm -rf $RPM_BUILD_ROOT/%{plugin_dir}/locale/*/*.po
 
 # search locale files
 %find_lang webyast-status

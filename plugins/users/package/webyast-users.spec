@@ -61,8 +61,7 @@ needed at runtime.
 #do not package generated doc
 rm -rf doc
 export RAILS_PARENT=%{webyast_dir}
-env LANG=en rake makemo
-rake js:users
+env LANG=en rake gettext:pack
 
 %check
 # run the testsuite
@@ -82,7 +81,7 @@ mkdir -p $RPM_BUILD_ROOT/usr/share/polkit-1/actions
 install -m 0644 %SOURCE1 $RPM_BUILD_ROOT/usr/share/polkit-1/actions/
 
 # remove .po files (no longer needed)
-rm -rf $RPM_BUILD_ROOT/%{plugin_dir}/po
+rm -rf $RPM_BUILD_ROOT/%{plugin_dir}/locale/*/*.po
 
 # search locale files
 %find_lang webyast-users

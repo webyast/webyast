@@ -84,7 +84,7 @@ needed at runtime.
 rm -rf doc
 
 export RAILS_PARENT=%{webyast_dir}
-env LANG=en rake makemo
+env LANG=en rake gettext:pack
 
 %check
 # run the testsuite
@@ -105,7 +105,7 @@ cp -a * $RPM_BUILD_ROOT%{plugin_dir}
 rm -f $RPM_BUILD_ROOT%{plugin_dir}/COPYING
 
 # remove .po files (no longer needed)
-rm -rf $RPM_BUILD_ROOT/%{plugin_dir}/po
+rm -rf $RPM_BUILD_ROOT/%{plugin_dir}/locale/*/*.po
 
 # search locale files
 %find_lang webyast-software

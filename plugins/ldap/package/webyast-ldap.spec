@@ -70,7 +70,7 @@ rm -rf restdoc
 
 export RAILS_PARENT=%{webyast_dir}
 export LANG=en
-rake makemo
+rake gettext:pack
 
 %check
 # run the testsuite
@@ -94,7 +94,7 @@ mkdir -p $RPM_BUILD_ROOT/usr/share/YaST2/modules/YaPI/
 cp %{SOURCE2} $RPM_BUILD_ROOT/usr/share/YaST2/modules/YaPI/
 
 # remove .po files (no longer needed)
-rm -rf $RPM_BUILD_ROOT/%{plugin_dir}/po
+rm -rf $RPM_BUILD_ROOT/%{plugin_dir}/locale/*/*.po
 
 # search locale files
 %find_lang webyast-ldap

@@ -143,7 +143,7 @@ This package contains css, icons and images for webyast-base package.
 %setup -q -n www
 
 %build
-env LANG=en rake makemo
+env LANG=en rake gettext:pack
 rake sass:update
 rake js:base
 rm -r app/sass

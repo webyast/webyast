@@ -61,7 +61,7 @@ mkdir -p public/%{plugin_name}/restdoc
 %webyast_restdoc
 
 export RAILS_PARENT=%{webyast_dir}
-env LANG=en rake makemo
+env LANG=en rake gettext:pack
 
 # do not package restdoc sources
 rm -rf restdoc
@@ -95,7 +95,7 @@ install -m 0644 %SOURCE2 $RPM_BUILD_ROOT/etc/polkit-1/localauthority/10-vendor.d
 %endif
 
 # remove .po files (no longer needed)
-rm -rf $RPM_BUILD_ROOT/%{plugin_dir}/po
+rm -rf $RPM_BUILD_ROOT/%{plugin_dir}/locale/*/*.po
 
 # search locale files
 %find_lang webyast-reboot

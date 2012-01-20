@@ -85,7 +85,7 @@ mkdir -p public/mail/restdoc
 rm -rf restdoc
 
 export RAILS_PARENT=%{webyast_dir}
-env LANG=en rake makemo
+env LANG=en rake gettext:pack
 
 %check
 # run the testsuite
@@ -114,7 +114,7 @@ mkdir -p $RPM_BUILD_ROOT/etc/sysconfig/network/scripts/
 install -m 0755 %SOURCE3 $RPM_BUILD_ROOT/etc/sysconfig/network/scripts/
 
 # remove .po files (no longer needed)
-rm -rf $RPM_BUILD_ROOT/%{plugin_dir}/po
+rm -rf $RPM_BUILD_ROOT/%{plugin_dir}/locale/*/*.po
 
 # search locale files
 %find_lang webyast-mail
