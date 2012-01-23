@@ -19,7 +19,7 @@
 # load common webyast rake task
 require 'rake'
 require 'rake/testtask'
-require 'rake/rdoctask'
+require 'rdoc/task'
 require 'rake/packagetask'
 require File.join(File.dirname(__FILE__), '..', '..', 'config', 'boot')
 
