@@ -1,0 +1,51 @@
+# Copyright (C) 2006 SuSE Linux Products GmbH, Nuernberg
+# This file is distributed under the same license as the package.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: webyast-firewall-ui\n"
+"POT-Creation-Date: 2010-08-18 10:18+0200\n"
+"PO-Revision-Date: 2010-08-26 09:31\n"
+"Last-Translator: Novell Language <language@novell.com>\n"
+"Language-Team: Novell Language <language@novell.com>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n>1;\n"
+
+#: app/controllers/firewall_controller.rb:72 ./app/controllers/firewall_controller.rb:72
+msgid "Firewall settings have been written."
+msgstr "As configurações de firewall já foram gravadas."
+
+#: app/views/firewall/index.rhtml:50 ./app/views/firewall/index.rhtml:50
+msgid "Please wait"
+msgstr "Aguarde"
+
+#: app/views/firewall/index.rhtml:58 ./app/views/firewall/index.rhtml:58
+msgid "Some of needed services (%s) are going to be blocked. WebYaST may not be usable anymore. Do you really want to block them?"
+msgstr "Alguns dos serviços necessários (%s) serão bloqueados. Talvez o WebYaST fique inutilizável. Deseja realmente bloqueá-los?"
+
+#: app/views/firewall/index.rhtml:85 ./app/views/firewall/index.rhtml:85 ./shortcuts.yml:6
+msgid "Firewall"
+msgstr "Firewall"
+
+#: app/views/firewall/index.rhtml:103 ./app/views/firewall/index.rhtml:103
+msgid "General settings"
+msgstr "Configurações gerais"
+
+#: app/views/firewall/index.rhtml:106 ./app/views/firewall/index.rhtml:106
+msgid "Use Firewall"
+msgstr "Usar Firewall"
+
+#: app/views/firewall/index.rhtml:116 ./app/views/firewall/index.rhtml:116
+msgid "Allowed services"
+msgstr "Serviços permitidos"
+
+#: app/views/firewall/index.rhtml:126 ./app/views/firewall/index.rhtml:126
+msgid "Blocked services"
+msgstr "Serviços bloqueados"
+
+#: ./shortcuts.yml:7
+msgid "Firewall settings"
+msgstr "Configurações de firewall"
+

@@ -1,0 +1,51 @@
+# translation of yast_webclient_firewall.km.po to Khmer
+# Khoem Sokhem <khoemsokhem@khmeros.info>, 2010.
+msgid ""
+msgstr ""
+"Project-Id-Version: yast_webclient_firewall.km\n"
+"Report-Msgid-Bugs-To: translation@suse.de\n"
+"POT-Creation-Date: 2010-04-13 13:36+0200\n"
+"PO-Revision-Date: 2010-04-20 07:58+0700\n"
+"Last-Translator: Khoem Sokhem <khoemsokhem@khmeros.info>\n"
+"Language-Team: Khmer <support@khmeros.info>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"X-Generator: KBabel 1.11.4\n"
+
+#: app/controllers/firewall_controller.rb:51
+msgid "Firewall settings have been written."
+msgstr "ការ​កំណត់​ជញ្ជាំង​ភ្លើង​ត្រូវ​បាន​សរសេរ ។"
+
+#: app/views/firewall/index.rhtml:42
+msgid "Some of needed services are going to be blocked. WebYaST may not be usable anymore."
+msgstr "សេវា​ដែល​បាន​ទាមទារ​មួយ​ចំនួន​កំពុង​ត្រូវ​បាន​ទប់ស្កាត់ ។ WebYaST មិនអាច​ប្រើ​បាន​ទៀត​ទេ ។"
+
+#: app/views/firewall/index.rhtml:68
+msgid "Firewall"
+msgstr "ជញ្ជាំង​ភ្លើង"
+
+#: app/views/firewall/index.rhtml:86
+msgid "General settings"
+msgstr "ការ​កំណត់​ទូទៅ"
+
+#: app/views/firewall/index.rhtml:93
+msgid "Use Firewall"
+msgstr "ប្រើ​ជញ្ជាំង​ភ្លើង"
+
+#: app/views/firewall/index.rhtml:99
+msgid "Allowed services"
+msgstr "សេវា​ដែលបាន​អនុញ្ញាត"
+
+#: app/views/firewall/index.rhtml:103
+msgid "Block"
+msgstr "ទប់ស្កាត់"
+
+#: app/views/firewall/index.rhtml:109
+msgid "Blocked services"
+msgstr "សេវា​ដែលបាន​ទប់ស្កាត់"
+
+#: app/views/firewall/index.rhtml:113
+msgid "Allow"
+msgstr "អនុញ្ញាត"

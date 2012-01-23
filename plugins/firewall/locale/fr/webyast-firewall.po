@@ -1,0 +1,51 @@
+# Copyright (C) 2006 SuSE Linux Products GmbH, Nuernberg
+# This file is distributed under the same license as the package.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: webyast-firewall-ui\n"
+"POT-Creation-Date: 2010-08-18 10:18+0200\n"
+"PO-Revision-Date: 2010-08-26 09:25\n"
+"Last-Translator: Novell Language <language@novell.com>\n"
+"Language-Team: Novell Language <language@novell.com>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+
+#: app/controllers/firewall_controller.rb:72 ./app/controllers/firewall_controller.rb:72
+msgid "Firewall settings have been written."
+msgstr "Les paramètres de pare-feu ont été écrits."
+
+#: app/views/firewall/index.rhtml:50 ./app/views/firewall/index.rhtml:50
+msgid "Please wait"
+msgstr "Veuillez patienter"
+
+#: app/views/firewall/index.rhtml:58 ./app/views/firewall/index.rhtml:58
+msgid "Some of needed services (%s) are going to be blocked. WebYaST may not be usable anymore. Do you really want to block them?"
+msgstr "Certains services requis (%s) sont sur le point d'être bloqués. WebYaST risque de ne plus être utilisable. Voulez-vous vraiment les bloquer ?"
+
+#: app/views/firewall/index.rhtml:85 ./app/views/firewall/index.rhtml:85 ./shortcuts.yml:6
+msgid "Firewall"
+msgstr "Pare-feu"
+
+#: app/views/firewall/index.rhtml:103 ./app/views/firewall/index.rhtml:103
+msgid "General settings"
+msgstr "Paramètres généraux"
+
+#: app/views/firewall/index.rhtml:106 ./app/views/firewall/index.rhtml:106
+msgid "Use Firewall"
+msgstr "Utiliser le pare-feu"
+
+#: app/views/firewall/index.rhtml:116 ./app/views/firewall/index.rhtml:116
+msgid "Allowed services"
+msgstr "Services autorisés"
+
+#: app/views/firewall/index.rhtml:126 ./app/views/firewall/index.rhtml:126
+msgid "Blocked services"
+msgstr "Services bloqués"
+
+#: ./shortcuts.yml:7
+msgid "Firewall settings"
+msgstr "Paramètres du pare-feu"
+

@@ -1,0 +1,54 @@
+# @TITLE@
+# Copyright (C) 2006, SUSE Linux GmbH, Nuremberg
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+# This file is distributed under the same license as @PACKAGE@ package. FIRST
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: webyast-firewall-ui 1.0.0\n"
+"Report-Msgid-Bugs-To: Vietnamese <i18n@suse.de>\n"
+"POT-Creation-Date: 2010-08-02 09:18+0200\n"
+"PO-Revision-Date: 2006-07-12 07:32+0200\n"
+"Last-Translator: Phan Vĩnh Thịnh <teppi82@gmail.com>\n"
+"Language-Team: Vietnamese <i18n@suse.de>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0\n"
+
+#: app/controllers/firewall_controller.rb:72
+#: app/controllers/firewall_controller.rb:72
+msgid "Firewall settings have been written."
+msgstr ""
+
+#: app/views/firewall/index.rhtml:53 app/views/firewall/index.rhtml:53
+msgid ""
+"Some of needed services (%s) are going to be blocked. WebYaST may not be "
+"usable anymore. Do you really want to block them?"
+msgstr ""
+
+#: app/views/firewall/index.rhtml:80 app/views/firewall/index.rhtml:80
+#: shortcuts.yml:6
+msgid "Firewall"
+msgstr ""
+
+#: app/views/firewall/index.rhtml:98 app/views/firewall/index.rhtml:98
+msgid "General settings"
+msgstr ""
+
+#: app/views/firewall/index.rhtml:105 app/views/firewall/index.rhtml:105
+msgid "Use Firewall"
+msgstr ""
+
+#: app/views/firewall/index.rhtml:110 app/views/firewall/index.rhtml:110
+msgid "Allowed services"
+msgstr ""
+
+#: app/views/firewall/index.rhtml:120 app/views/firewall/index.rhtml:120
+msgid "Blocked services"
+msgstr ""
+
+#: shortcuts.yml:7
+msgid "Firewall settings"
+msgstr ""
