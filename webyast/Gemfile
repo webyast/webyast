@@ -52,6 +52,7 @@ group :development do
 end
 
 group :test do
+  gem 'mocha'
   gem 'rspec', '>=2'
   gem 'rspec-rails', '>=2'
 end
