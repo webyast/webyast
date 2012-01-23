@@ -107,6 +107,12 @@ PATH
   specs:
     webyast-users (0.1)
 
+PATH
+  remote: /workspace/webyast/ruby-polkit1
+  specs:
+    polkit1 (0.0.2)
+      inifile
+
 GEM
   remote: http://rubygems.org/
   specs:
@@ -275,6 +281,7 @@ DEPENDENCIES
   jquery-rails
   mocha
   nokogiri
+  polkit1!
   rails (= 3.1.3)
   rspec (>= 2)
   rspec-rails (>= 2)

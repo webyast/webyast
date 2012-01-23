@@ -1,23 +1,24 @@
 <!--
 # Copyright (c) 2009-2010 Novell, Inc.
-# 
+#
 # All Rights Reserved.
-# 
+#
 # This program is free software; you can redistribute it and/or modify it
 # under the terms of version 2 of the GNU General Public License
 # as published by the Free Software Foundation.
-# 
+#
 # This program is distributed in the hope that it will be useful,
 # but WITHOUT ANY WARRANTY; without even the implied warranty of
 # MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
 # GNU General Public License for more details.
-# 
+#
 # You should have received a copy of the GNU General Public License
 # along with this program; if not, contact Novell, Inc.
-# 
+#
 # To contact Novell about this file by physical or electronic mail,
 # you may find current contact information at www.novell.com
 -->
+
 <% content_for :head do %>
   <%= javascript_include_tag "webyast-firewall" %>
   <%= stylesheet_link_tag "webyast-firewall" %>
@@ -31,7 +32,7 @@
 
   <div id="firewallbar" class="plugin-header">
     <div class="left" style="float:left">
-      <label class="plugin-icon-container">><%= image_tag("firewall.png", :class=>"plugin-icon") %></label>
+      <label class="plugin-icon-container"><%= image_tag("firewall.png", :class=>"plugin-icon") %></label>
       <label class="plugin-name">Firewall</label><span id="questionMark" style="margin:0px 15px; float:none;">?</span>
     </div>
 
@@ -40,28 +41,28 @@
       <% if @firewall.use_firewall %>
         <button id="on" class="active" value="on"><%=_("Enabled")%></button>
         <button id="off" value="off"><%=_("Disabled")%></button>
-        <%= hidden_field "firewall", "use_firewall" %> 
+        <%= hidden_field "firewall", "use_firewall" %>
       <% else %>
         <button id="on" value="on"><%=_("Enabled")%></button>
         <button id="off" class="active" value="off"><%=_("Disabled")%></button>
-        <%= hidden_field "firewall", "use_firewall" %> 
+        <%= hidden_field "firewall", "use_firewall" %>
       <% end %>
      </span>
     </div>
-    <div class="clearfix"></div>    
+    <div class="clearfix"></div>
   </div>
-  
+
   <div id="fw_services_values">
     <% @firewall.fw_services.each do |service| %>
-      <input type="hidden" 
-             name="<%= service["input_name"] %>" 
-             class="<%= service["css_class"] %>" 
+      <input type="hidden"
+             name="<%= service["input_name"] %>"
+             class="<%= service["css_class"] %>"
              value="<%= service["allowed"] ? 'true' : 'false' %>"
              />
     <% end %>
   </div>
 
-  <input type="checkbox" name="use_firewall" id="use_firewall" value="true" <%=  "checked=\"checked\"" if @firewall.use_firewall %> <%=  "disabled=\"disabled\"" if disabled %> /> 
+  <input type="checkbox" name="use_firewall" id="use_firewall" value="true" <%=  "checked=\"checked\"" if @firewall.use_firewall %> <%=  "disabled=\"disabled\"" if disabled %> />
 
   <div class="clearfix"></div>
 
@@ -78,7 +79,7 @@
         <span value="<%= service["css_class"] %>" class="firewall-service" original-title="<%= service["description"] if service["description"] %>"><%= service["name"] %></span>
       <% end %>
       </div>
-    </div> 
+    </div>
 
     <div id="blockedContainer">
       <label><span class="icon-border"><%= image_tag("locko.png", :class=>"label-image") %></span><%= _("Blocked services") %></label>
@@ -135,9 +136,9 @@
         if (!confirm( confirm_text.replace("%s", blockedNames(needed_services).join(", ")) ) ){
           return false;
         }
-      } 
+      }
     }
-    
+
     var message = <%= jss _("Please wait") -%>;
     $.modalDialog.wait( {message: message});
     return true;
