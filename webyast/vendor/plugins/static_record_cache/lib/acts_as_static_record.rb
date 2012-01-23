@@ -106,7 +106,7 @@
 # * Install:  <tt>script/plugin install git://github.com/blythedunham/static_record_cache.git</tt>
 module ActsAsStaticRecord
   def self.extended(base)
-    base.send :class_inheritable_hash, :acts_as_static_record_options
+    base.send :class_attribute, :acts_as_static_record_options
     base.acts_as_static_record_options = {}
     base.extend ClassMethods
   end
