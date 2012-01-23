@@ -157,9 +157,8 @@ class ControlpanelController < ApplicationController
       mo_files = Dir.glob(File.join(plugin_dir, "**", "*.mo"))
       if mo_files.size > 0
         locale_path = File.dirname(File.dirname(File.dirname(mo_files.first))) 
-        #logger.info "Loading textdomain #{File.basename(mo_files.first, '.mo')} from #{locale_path} for shortcuts"
-        opt = {:locale_path => locale_path}
-        ActionController::Base.init_gettext(File.basename(mo_files.first, ".mo"), opt)
+        logger.info "Loading textdomain #{File.basename(mo_files.first, '.mo')} from #{locale_path} for shortcuts"
+        FastGettext.add_text_domain(File.basename(mo_files.first, ".mo"), :path => locale_path)
       else
         logger.warn "Cannot find shortcut translation in #{plugin_dir}"
       end
