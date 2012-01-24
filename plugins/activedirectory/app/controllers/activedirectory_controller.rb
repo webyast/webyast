@@ -27,9 +27,6 @@ class ActivedirectoryController < ApplicationController
   
   layout 'main'
 
-  # Initialize GetText and Content-Type.
-  FastGettext.add_text_domain "webyast-activedirectory", :path => "locale"
-  
   def index
     authorize! :read, Activedirectory
     @poll_for_updates = true
