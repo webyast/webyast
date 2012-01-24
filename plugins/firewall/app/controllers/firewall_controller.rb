@@ -24,8 +24,6 @@ require 'firewall'
 
 class FirewallController < ApplicationController
 
-  FastGettext.add_text_domain "webyast-firewall", :path => "locale"
-
   CGI_PREFIX="firewall"
   layout 'main'
   
