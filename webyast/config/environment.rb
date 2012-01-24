@@ -17,7 +17,7 @@ if YastCache.active
   if ActiveRecord::Base.connection.tables.include?('data_caches') &&
      ActiveRecord::Base.connection.tables.include?('delayed_jobs')
 
-    #remove cache information 
+    #remove cache information
     DataCache.delete_all
     #Construct initial job queue in order to fillup the cache
     Delayed::Job.delete_all
@@ -62,10 +62,9 @@ if YastCache.active
   end
 
   if ENV["RUN_WORKER"]
-    Thread::new do 
+    Thread::new do
       ENV["RUN_WORKER"] = 'false'
-      Delayed::Worker.new.start 
+      Delayed::Worker.new.start
     end
   end
 end
-
