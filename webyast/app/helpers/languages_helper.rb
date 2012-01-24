@@ -24,5 +24,11 @@ SUPPORTED_LANGUAGES = {
   def supported_languages
     return SUPPORTED_LANGUAGES
   end
+
+  # convert language locale code to language name
+  # (translated to that langugage)
+  def language_name lang
+    SUPPORTED_LANGUAGES[lang] || SUPPORTED_LANGUAGES[lang.gsub(/_.*$/, '')] || lang
+  end
 end
 

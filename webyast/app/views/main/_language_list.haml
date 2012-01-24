@@ -1,9 +1,12 @@
-%span.language-icon
-  Language: 
-  = session["locale"].to_s.upcase
-  %span#lang_menu
-    - FastGettext.default_available_locales.each do |locale|
-      = link_to(locale.upcase, current_url(:locale=>locale))
+-# popup menu for language selection
+-# render the language switcher only when at least one translation is available (besides the "en_US" default)
+- if FastGettext.default_available_locales.size > 1
+  %span#lang_current.language-icon
+    Language:
+    = language_name(FastGettext.locale)
+    %span#lang_menu
+      - FastGettext.default_available_locales.sort.each do |locale|
+        = link_to language_name(locale), '?locale=' + locale
 
 -# content_for :head do [ doesn't work here :-( ]
 :javascript
