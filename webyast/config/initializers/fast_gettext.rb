@@ -22,6 +22,13 @@ Rails::Engine::Railties.engines.each do |engine|
   end
 end
 
+# add also locales from the main application
+Dir[File.join(File.dirname(__FILE__), '..', '..', 'locale', "/*/LC_MESSAGES/*.mo")].each do |l|
+  if l.match(/\/([^\/]+)\/LC_MESSAGES\/.*\.mo$/) && !FastGettext.default_available_locales.include?($1)
+    FastGettext.default_available_locales << $1
+  end
+end
+
 FastGettext.add_text_domain 'combined', :type=>:chain, :chain=>repos
 FastGettext.default_text_domain = 'combined'
 
