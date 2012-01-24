@@ -7,14 +7,4 @@
     %span#lang_menu
       - FastGettext.default_available_locales.sort.each do |locale|
         = link_to language_name(locale), '?locale=' + locale
-
--# content_for :head do [ doesn't work here :-( ]
-:javascript
-  $(document).ready(function() {
-    $(".language-icon").hover(function() {
-      $("#lang_menu").slideDown("fast");
-    },
-    function() {
-      $("#lang_menu").slideUp("fast");
-    });
-  });
+        %br

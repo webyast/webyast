@@ -728,6 +728,6 @@ div#browserWarning {
   border: 1px solid #909090;
   border-radius: 2px 2px 2px 2px;
   padding: 5px 5px 5px 5px;
-  width: 40px;
+  min-width: 80px;
   line-height: normal;
   display:none; }
