@@ -30,6 +30,32 @@ require 'rake'
 require 'rake/testtask'
 require 'rdoc/task'
 
+
+rule "" do |t|
+  # test:file:method
+  if /test:(.*)(:([^.]+))?$/.match(t.name)
+    arguments = t.name.split(":")[1..-1]
+    file_name = arguments.first
+    test_name = arguments[1..-1].map{|x| x.gsub(/^test_/, '')}
+
+    if File.exist?("test/unit/#{file_name}_test.rb")
+      run_file_name = "unit/#{file_name}_test.rb"
+    elsif File.exist?("test/unit/#{file_name}.rb")
+      run_file_name = "unit/#{file_name}.rb"
+    elsif File.exist?("test/unit/#{file_name}")
+      run_file_name = "unit/#{file_name}"
+    elsif File.exist?("test/functional/#{file_name}_controller_test.rb")
+      run_file_name = "functional/#{file_name}_controller_test.rb"
+    elsif File.exist?("test/functional/#{file_name}_test.rb")
+      run_file_name = "functional/#{file_name}_test.rb"
+    end
+
+    sh "ruby -Ilib:test test/#{run_file_name} -n /#{test_name}/"
+  end
+end
+
+
+
 #include in doc:app also shared test enhancements for plugins
 #FIXME find way how to change original rails task app:doc we only need include some files to it
 namespace :doc do
@@ -93,4 +119,3 @@ namespace :sass do
     Rake::Task['css:min'].invoke
   end
 end
-
