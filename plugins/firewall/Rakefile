@@ -9,7 +9,5 @@ task :deploy_local do |t|
   FileUtils.cp_r    "package/org.opensuse.yast.modules.yapi.firewall.policy",  "/usr/share/polkit-1/actions/"
 end
 
-# this call also loads WebyastTasks but the second call is ignored there
-# so this 'require' must be called _after_ WebyastTasks.loadTasks
 require File.expand_path('../config/application', __FILE__)
 Firewall::Application.load_tasks #   <<<< = require 'tasks/rails'

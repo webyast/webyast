@@ -24,9 +24,6 @@
 class AdministratorController < ApplicationController
   layout 'main'
   
-  private
-  FastGettext.add_text_domain "webyast-root-user", :path => "locale"
-
   public
 
   def index
