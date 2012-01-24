@@ -6,3 +6,8 @@ desc "Deploy for development - create basic dirs and install yast modules."
 task :deploy_local do |t|
   `rake install_policies`
 end
+
+# this call also loads WebyastTasks but the second call is ignored there
+# so this 'require' must be called _after_ WebyastTasks.loadTasks
+require File.expand_path('../config/application', __FILE__)
+Activedirectory::Application.load_tasks #   <<<< = require 'tasks/rails'
