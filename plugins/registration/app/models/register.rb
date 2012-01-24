@@ -1,20 +1,20 @@
 #--
 # Copyright (c) 2009-2010 Novell, Inc.
-# 
+#
 # All Rights Reserved.
-# 
+#
 # This program is free software; you can redistribute it and/or modify it
 # under the terms of version 2 of the GNU General Public License
 # as published by the Free Software Foundation.
-# 
+#
 # This program is distributed in the hope that it will be useful,
 # but WITHOUT ANY WARRANTY; without even the implied warranty of
 # MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
 # GNU General Public License for more details.
-# 
+#
 # You should have received a copy of the GNU General Public License
 # along with this program; if not, contact Novell, Inc.
-# 
+#
 # To contact Novell about this file by physical or electronic mail,
 # you may find current contact information at www.novell.com
 #++
@@ -22,7 +22,7 @@
 # = Register model
 # Provides methods to call the registration in a RESTful environment.
 # The main goal is to provide easy access to the registration workflow,
-# the caller must interpret the result and maybe call it again with 
+# the caller must interpret the result and maybe call it again with
 # changed values.
 
 require 'yast/paths'
@@ -57,7 +57,8 @@ class Register
   attr_accessor :registrationserver
   attr_accessor :certificate
   attr_accessor :context
-  attr_accessor_with_default :arguments, Hash.new
+  attr_accessor :arguments
+
   attr_reader   :guid
   attr_reader   :config_error
   attr_reader   :status
@@ -91,6 +92,8 @@ public
 
 
   def initialize(hash={})
+    @paarguments = Hash.new #attr_accessor_with_default :arguments, Hash.new
+
     # initialize context
     init_context hash
     # read the configuration
@@ -155,7 +158,7 @@ public
 
     @missingarguments = []
     if @reg && @reg.has_key?('missingarguments')
-      arguments_hash = HashWithoutKeyConversion.from_xml(@reg['missingarguments']) 
+      arguments_hash = HashWithoutKeyConversion.from_xml(@reg['missingarguments'])
       arguments_hash['missingarguments'].each do | k, v |
         @missingarguments << { "name" => k, "value" => v['value'], "flag" => v['flag'], "kind" => v['kind'] } if v.kind_of?(Hash)
       end
