@@ -152,17 +152,7 @@ class ControlpanelController < ApplicationController
     shortcuts_fn = File.join(plugin_dir, 'shortcuts.yml')
     if File.exists?(shortcuts_fn)
       #logger.debug "Shortcuts at #{plugin.directory}"
-      shortcutsdata = YAML::load(File.open(shortcuts_fn))
-      #loading translations 
-      mo_files = Dir.glob(File.join(plugin_dir, "**", "*.mo"))
-      if mo_files.size > 0
-        locale_path = File.dirname(File.dirname(File.dirname(mo_files.first))) 
-        logger.info "Loading textdomain #{File.basename(mo_files.first, '.mo')} from #{locale_path} for shortcuts"
-        FastGettext.add_text_domain(File.basename(mo_files.first, ".mo"), :path => locale_path)
-      else
-        logger.warn "Cannot find shortcut translation in #{plugin_dir}"
-      end
-      shortcutsdata = translate_shortcuts shortcutsdata
+      shortcutsdata = translate_shortcuts YAML::load(File.open(shortcuts_fn))
       return nil unless shortcutsdata.is_a? Hash
       # now go over each shortcut and add it to the modules
       shortcutsdata.each do |k,v|
