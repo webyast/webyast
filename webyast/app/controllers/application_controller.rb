@@ -1,8 +1,11 @@
 require 'exceptions'
 require 'dbus'
 require 'yast_cache'
+require 'haml_gettext' # translate haml file on the fly
 
 class ApplicationController < ActionController::Base
+
+  include FastGettext::Translation
 
   before_filter :authenticate_account!
   before_filter :set_gettext_locale
@@ -162,6 +165,16 @@ private
     end
     #fallback if bugurl is not defined
     return "https://bugzilla.novell.com/enter_bug.cgi?product=WebYaST&format=guided"
+  end
+
+  # set the current locale
+  # use URL ?locale=<locale> parameter, 'webyast_locale' cookie or HTTP_ACCEPT_LANGUAGE header value
+  # fallback to en_US
+  def set_gettext_locale
+    # see https://github.com/grosser/fast_gettext
+    I18n.locale = FastGettext.set_locale(params[:locale] || cookies[:webyast_locale] || request.env['HTTP_ACCEPT_LANGUAGE'] || 'en_US')
+    Rails.logger.debug "Using locale: #{I18n.locale}"
+    cookies[:webyast_locale] = I18n.locale if cookies[:webyast_locale] != I18n.locale.to_s
   end
 
 
