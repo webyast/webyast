@@ -35,8 +35,6 @@ private
   end
 
 public
-  # Initialize GetText and Content-Type.
-  FastGettext.add_text_domain "webyast-terminal", :path => "locale"
 
   def index
     authorize! :read, Terminal
