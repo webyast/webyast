@@ -24,10 +24,7 @@ class RepositoriesController < ApplicationController
   before_filter :check_read_permissions, :only => [:index, :show]
   layout 'main'
 
-  # Initialize GetText and Content-Type.
-  FastGettext.add_text_domain "webyast-software", :path => "locale"
-
-  private
+private
   
   def check_read_permissions
     authorize! :read, Repository

@@ -3,3 +3,4 @@ package/www.tar.bz2
 coverage
 config/status_configuration.yaml
 public
+log

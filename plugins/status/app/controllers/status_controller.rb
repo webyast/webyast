@@ -25,9 +25,6 @@ class StatusController < ApplicationController
 
   layout "main"
 
-  # Initialize GetText and Content-Type.
-  FastGettext.add_text_domain 'webyast-status', :path => 'locale'
-
   DEFAULT_LINES = 50
 
   private
