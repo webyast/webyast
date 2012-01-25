@@ -4,4 +4,4 @@ require File.join(RailsParent.parent, 'lib', 'tasks', 'common')
 # Deploy ?!
 
 require File.expand_path('../config/application', __FILE__)
-Activedirectory::Application.load_tasks #   <<<< = require 'tasks/rails'
+Terminal::Application.load_tasks #   <<<< = require 'tasks/rails'
