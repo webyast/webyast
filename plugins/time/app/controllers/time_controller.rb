@@ -53,9 +53,6 @@ private
 
 public
 
-  # Initialize GetText and Content-Type.
-  FastGettext.add_text_domain "webyast-time", :path => "locale"
-
   #--------------------------------------------------------------------------------
   #
   # actions
