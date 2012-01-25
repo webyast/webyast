@@ -32,3 +32,6 @@ task :deploy_local do |t|
   FileUtils.mkdir_p "/usr/share/polkit-1/actions/"
   FileUtils.cp_r    "package/org.opensuse.yast.modules.yapi.license.policy",  "/usr/share/polkit-1/actions/"
 end
+
+require File.expand_path('../config/application', __FILE__)
+Eulas::Application.load_tasks #   <<<< = require 'tasks/rails'

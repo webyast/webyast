@@ -31,11 +31,8 @@ class EulasController < ApplicationController
   before_filter :ensure_id, :only => [:show, :update]
 
   layout 'main'
-  
-  # Initialize GetText and Content-Type.
-  FastGettext.add_text_domain "webyast-licenses", :path => "locale"
-  
-  private
+ 
+private
     def ensure_eula_count
       if session[:eula_count].nil?
         licenses = License.find_all
