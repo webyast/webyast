@@ -6,3 +6,6 @@ desc "Deploy for development - create basic dirs and install yast modules."
 task :deploy_local do |t|
   `rake install_policies`
 end
+
+require File.expand_path('../config/application', __FILE__)
+Ldap::Application.load_tasks #   <<<< = require 'tasks/rails'
