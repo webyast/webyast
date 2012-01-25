@@ -23,9 +23,6 @@ class ExampleController < ApplicationController
 
   layout "main"
 
-  # Initialize GetText and Content-Type.
-  FastGettext.add_text_domain "webyast-example", :path => "locale"
-
   def index
     authorize! :read, Example
     @example = Example.find
