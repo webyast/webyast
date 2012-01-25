@@ -38,3 +38,6 @@ task :deploy_local, [:user] do |t, args|
   chown args.user, nil, "/var/lib/webyast/roles/roles.yml"
   chown args.user, nil, "/var/lib/webyast/roles/roles_assign.yml"
 end
+
+require File.expand_path('../config/application', __FILE__)
+Roles::Application.load_tasks #   <<<< = require 'tasks/rails'

@@ -31,9 +31,6 @@ class RolesController < ApplicationController
 
   layout 'main'
 
-  # Initialize GetText and Content-Type.
-  FastGettext.add_text_domain "webyast-roles", :path => "locale"
-
 private
 
   def check_role_name(id=params[:id])
