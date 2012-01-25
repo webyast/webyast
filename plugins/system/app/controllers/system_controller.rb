@@ -23,9 +23,6 @@ require 'error_result'
 
 class SystemController < ApplicationController
 
-    # Initialize GetText and Content-Type.
-    FastGettext.add_text_domain "webyast-reboot", :path => "locale"
-
     def show
    	@actions = System.instance.actions
 
