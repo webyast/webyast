@@ -36,12 +36,7 @@ class NetworkController < ApplicationController
 
   layout 'main'
 
-  private
-
-  # Initialize GetText and Content-Type.
-  FastGettext.add_text_domain "webyast-network", :path => "locale"
-
-  public
+public
   
   NETMASK_RANGE = 0..32
   STATIC_BOOT_ID = "static"
