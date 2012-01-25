@@ -7,3 +7,6 @@ task :deploy_local do |t|
   FileUtils.cp "package/MailSettings.pm", "/usr/share/YaST2/modules/YaPI"
   `rake install_policies`
 end
+
+require File.expand_path('../config/application', __FILE__)
+Mailsetting::Application.load_tasks #   <<<< = require 'tasks/rails'
