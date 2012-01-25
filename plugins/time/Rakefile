@@ -2,3 +2,6 @@ require File.join(File.dirname(__FILE__), 'config', 'rails_parent')
 require File.join(RailsParent.parent, 'lib', 'tasks', 'common')
 
 # Deploy ?!
+
+require File.expand_path('../config/application', __FILE__)
+Timesetting::Application.load_tasks #   <<<< = require 'tasks/rails'
