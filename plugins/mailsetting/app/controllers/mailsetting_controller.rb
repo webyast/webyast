@@ -28,10 +28,7 @@ class MailsettingController < ApplicationController
 
   layout 'main'
 
-  # Initialize GetText and Content-Type.
-  FastGettext.add_text_domain "webyast-mail", :path => "locale"
-  
-  public
+public
 
   def index
     authorize! :read, Mailsetting
