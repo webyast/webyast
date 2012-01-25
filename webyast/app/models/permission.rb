@@ -1,18 +1,18 @@
 #--
 # Webyast framework
 #
-# Copyright (C) 2009, 2010 Novell, Inc. 
+# Copyright (C) 2009, 2010 Novell, Inc.
 #   This library is free software; you can redistribute it and/or modify
 # it only under the terms of version 2.1 of the GNU Lesser General Public
-# License as published by the Free Software Foundation. 
+# License as published by the Free Software Foundation.
 #
 #   This library is distributed in the hope that it will be useful, but WITHOUT
 # ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
-# FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public License for more 
-# details. 
+# FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public License for more
+# details.
 #
 #   You should have received a copy of the GNU Lesser General Public
-# License along with this library; if not, write to the Free Software 
+# License along with this library; if not, write to the Free Software
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA
 #++
 
@@ -25,7 +25,7 @@ require 'yast_cache'
 require "yast_service"
 
 class Permission
-#list of hash { :name => id, :granted => boolean, :description => string (optional)}
+  #list of hash { :name => id, :granted => boolean, :description => string (optional)}
   attr_reader :permissions
 
 private
@@ -34,7 +34,7 @@ private
     lst = [
       # policies
       File.mtime('/usr/share/polkit-1/'),
-      # default 
+      # default
       File.mtime('/var/lib/polkit-1/'),
       # explicit user authorizations
       File.mtime('/etc/polkit-1'),
@@ -70,16 +70,19 @@ public
   def self.set_permissions(user,permissions)
     YastService.lock #locking for other thread
     service = dbus_obj
-#FIXME vendor permission with different prefix is not reset
+
+    #FIXME vendor permission with different prefix is not reset
     all_perm = filter_nonsuse_permissions all_actions.split(/\n/)
+
     #reset all permissions
     response = service.revoke all_perm, user
-    Rails.logger.info "revoke perms for user #{user} perms: #{all_perm.inspect} \n with result:\n#{response.inspect}"
+    #Rails.logger.info "*** Revoke permissions for user #{user} perms: #{all_perm.inspect} \n with result:\n#{response.inspect}"
+
     unless permissions.empty?
       response = service.grant permissions, user
-      Rails.logger.info "grant perms for user #{user} :\n#{permissions.inspect}\nwith result #{response.inspect}"
-      #TODO convert response to exceptions in case of error
+      #Rails.logger.info "*** Grant permissions for user #{user} :\n#{permissions.inspect}\nwith result #{response.inspect}"
     end
+
     YastService.unlock #unlocking for other thread
     YastCache.reset(self)
   end
@@ -88,9 +91,9 @@ public
     self.cache_valid
     filters = {}
     #filter out only needed parameters
-    restrictions.each {|key, value|  
-                        filters[key.to_sym] = value if %w( filter with_description user_id ).index(key.to_s)
-    }  
+    restrictions.each {|key, value|
+      filters[key.to_sym] = value if %w( filter with_description user_id ).index(key.to_s)
+    }
     YastCache.fetch(self, type, filters) {
       permission = Permission.new
       permission.load_permissions(type,filters)
@@ -124,7 +127,8 @@ public
 private
   def mark_granted_permissions_for_user(user)
     YastService.lock #locking for other thread
-    @permissions.collect! do |perm| 
+
+    @permissions.collect! do |perm|
       begin
         service = Permission.dbus_obj
         if service.check( [perm[:id]], user )[0][0] == "yes"
@@ -138,13 +142,14 @@ private
         Rails.logger.info e
         YastService.unlock #unlocking for other thread
         if e.message.include?("does not exist")
-          raise InvalidParameters.new :user_id => "UNKNOWN" 
+          raise InvalidParameters.new :user_id => "UNKNOWN"
         else
           raise PolicyKitException.new(e.message, user, perm[:id])
         end
       end
       perm
     end
+
     YastService.unlock #unlocking for other thread
   end
 
@@ -158,12 +163,14 @@ private
     `/usr/bin/pkaction` # RORSCAN_ITL
   end
 
-  SUSE_STRING = "org.opensuse.yast"
+
   def self.filter_nonsuse_permissions (str)
+    @suse_string = "org.opensuse.yast"
     str.select{ |s|
-      s.include?(SUSE_STRING) &&
-        !s.include?(SUSE_STRING+".scr") &&
-        !s.include?(SUSE_STRING+".module-manager")}
+      s.include?(@suse_string) &&
+      !s.include?(@suse_string + ".scr") &&
+      !s.include?(@suse_string +".module-manager")
+    }
   end
 
   def self.dbus_obj
