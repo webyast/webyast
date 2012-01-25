@@ -23,11 +23,7 @@
 class KerberosController < ApplicationController
 
   layout 'main'
-  
-  # Initialize GetText and Content-Type.
-  FastGettext.add_text_domain "webyast_kerberos", :path => "locale"
 
-  ################### CLIENT SIDE #######################
   def index
     authorize! :read, Kerberos
     begin
@@ -58,8 +54,6 @@ class KerberosController < ApplicationController
     
     redirect_success
   end
-
-  ################### SERVICE SIDE #######################
 
   # GET action
   # Read Kerberos client settings
