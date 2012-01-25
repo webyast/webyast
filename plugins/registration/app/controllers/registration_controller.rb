@@ -65,9 +65,6 @@ class RegistrationController < ApplicationController
     end
   end
 
-  # Initialize GetText and Content-Type.
-  FastGettext.add_text_domain "webyast-registration", :path => "locale"
-
   def client_guid
     # handle config error in backend (bnc#592620)
     guid = nil
