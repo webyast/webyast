@@ -29,3 +29,6 @@ task :deploy_local do |t|
   FileUtils.cp_r    "package/SERVICES.pm", "/usr/share/YaST2/modules/YaPI"
   `rake install_policies`
 end
+
+require File.expand_path('../config/application', __FILE__)
+Services::Application.load_tasks #   <<<< = require 'tasks/rails'

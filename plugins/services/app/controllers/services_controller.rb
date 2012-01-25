@@ -26,12 +26,7 @@ class ServicesController < ApplicationController
 
   layout 'main'
 
-  private
-
-  # Initialize GetText and Content-Type.
-  FastGettext.add_text_domain 'webyast-services', :path => 'locale'
-
-  public
+public
 
   def show_status
     authorize! :read, Service
