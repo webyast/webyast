@@ -108,12 +108,12 @@ class ControlpanelController < ApplicationController
     #logger.debug Rails.configuration.load_paths
     permissions = Permission.find(:all, {:user_id => current_account.username})
 
-    Rails.logger.debug "permissions: #{permissions.inspect}"
+    #Rails.logger.debug "permissions: #{permissions.inspect}"
 
     # go through all Rails engines, look for Webyast engines
     Rails::Engine::Railties.engines.each do |engine|
       if engine.class.to_s.match /^WebYaST::.*Engine$/
-        Rails.logger.info "Found Webyast engine #{engine.class}"
+        #Rails.logger.info "Found Webyast engine #{engine.class}"
         shortcuts.merge!(plugin_shortcuts(engine.config.root, permissions))
       end
     end
@@ -168,7 +168,7 @@ class ControlpanelController < ApplicationController
         end
       end
     end
-    Rails.logger.debug "shortcuts: #{shortcuts.inspect}"
+    #Rails.logger.debug "shortcuts: #{shortcuts.inspect}"
     shortcuts
   end
   
