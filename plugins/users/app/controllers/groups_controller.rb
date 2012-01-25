@@ -25,9 +25,6 @@ class GroupsController < ApplicationController
   
   layout 'main'
 
-  # Initialize GetText and Content-Type.
-  FastGettext.add_text_domain 'webyast-users', :path => 'locale'
-
 private
 
   def validate_group_id( id = params[:id] )
