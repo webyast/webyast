@@ -1,6 +1,6 @@
 Webyast::Application.routes.draw do
   
-  devise_for :accounts
+  devise_for :accounts,  :controllers => { :sessions => "accounts/sessions" }
   resources :notifier
   resources :onlinehelp
   resources :logs
