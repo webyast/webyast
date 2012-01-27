@@ -1,18 +1,18 @@
 #--
 # Webyast Webclient framework
 #
-# Copyright (C) 2009, 2010 Novell, Inc. 
+# Copyright (C) 2009, 2010 Novell, Inc.
 #   This library is free software; you can redistribute it and/or modify
 # it only under the terms of version 2.1 of the GNU Lesser General Public
-# License as published by the Free Software Foundation. 
+# License as published by the Free Software Foundation.
 #
 #   This library is distributed in the hope that it will be useful, but WITHOUT
 # ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
-# FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public License for more 
-# details. 
+# FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public License for more
+# details.
 #
 #   You should have received a copy of the GNU Lesser General Public
-# License along with this library; if not, write to the Free Software 
+# License along with this library; if not, write to the Free Software
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA
 #++
 
@@ -62,7 +62,9 @@ class Basesystem < BaseModel::Base
       session[:wizard_current] = FINISH_STEP
     else
       Rails.logger.debug "Basesystem steps: #{bs.steps.inspect}"
+
       decoded_steps = bs.steps.collect { |step| step.respond_to?(:action) ? "#{step.controller}:#{step.action}" : "#{step.controller}"}
+      #decoded_steps = bs.steps.collect { |step| step.respond_to?(:action) ? "#{step["controller"]}:#{step["action"]}" : "#{step["controller"]}"}
       session[:wizard_steps] = decoded_steps.join(",")
       session[:wizard_current] =
         decoded_steps.find(lambda{decoded_steps.first}) do |s|
@@ -81,10 +83,10 @@ class Basesystem < BaseModel::Base
     end
     YastCache.reset(self)
   end
-  
+
   # return:: controller which should be next in basesystem sequence
   # or controlpanel if basesystem is finished
-  # 
+  #
   # require to be basesystem initialized otherwise throw exception
   def next_step
     if current == @steps.last
@@ -97,8 +99,8 @@ class Basesystem < BaseModel::Base
       load(:finish => false,  :steps => [], :done => self.current_step[:controller]) #store advantage in setup
       save #TODO check return value
       ret = redirect_hash
-      raise "Invalid configuration. Missing controller required in First boot sequence. 
-        Possible typo or plugin is not installed." unless 
+      raise "Invalid configuration. Missing controller required in First boot sequence.
+        Possible typo or plugin is not installed." unless
           ActionController::Routing.possible_controllers.include? ret[:controller]
       return ret
     end
