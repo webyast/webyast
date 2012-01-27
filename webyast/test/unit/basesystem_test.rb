@@ -44,6 +44,8 @@ EOF
     #set const to run test in this directory
     tmpfile = Tempfile.new('finish').path
     File.delete tmpfile #remove it by default
+
+    Basesystem.undef_constant # fix: "warning: already initialized constant FINISH_FILE"
     Basesystem.const_set "FINISH_FILE", tmpfile
     YaST::ConfigFile.stubs(:read_file).returns(STEPS)
     YaST::ConfigFile.any_instance.stubs(:path).returns(__FILE__)
