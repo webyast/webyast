@@ -27,6 +27,7 @@ class Basesystem < BaseModel::Base
 
   # steps needed by base system
   attr_accessor   :steps
+  attr_accessor   :session
   # Flag if base system configuration is  finished
   attr_accessor   :finish
   attr_accessor   :done
@@ -62,9 +63,7 @@ class Basesystem < BaseModel::Base
       session[:wizard_current] = FINISH_STEP
     else
       Rails.logger.debug "Basesystem steps: #{bs.steps.inspect}"
-
-      decoded_steps = bs.steps.collect { |step| step.respond_to?(:action) ? "#{step.controller}:#{step.action}" : "#{step.controller}"}
-      #decoded_steps = bs.steps.collect { |step| step.respond_to?(:action) ? "#{step["controller"]}:#{step["action"]}" : "#{step["controller"]}"}
+      decoded_steps = bs.steps.collect { |step| step.respond_to?(:action) ? "#{step["controller"]}:#{step["action"]}" : "#{step["controller"]}"}
       session[:wizard_steps] = decoded_steps.join(",")
       session[:wizard_current] =
         decoded_steps.find(lambda{decoded_steps.first}) do |s|

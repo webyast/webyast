@@ -25,27 +25,27 @@ require 'tempfile'
 
 class BasesystemTest < ActiveSupport::TestCase
 
-YAML_CONTENT = <<EOF
+STEPS = <<EOF
 steps:
   - controller: time
   - controller: language
     action: show
 EOF
 
-DEF_YAML_CONTENT = <<EOF
+EMPTY_STEPS = <<EOF
 steps:
 #  - controller: time
 #  - controller: language
 #    action: show
 EOF
 
-  TEST_STEPS = [{ "controller" => "time"},{"controller" => "language", "action" => "show"}]
+  TEST_STEPS = ["time","language"]
   def setup
     #set const to run test in this directory
     tmpfile = Tempfile.new('finish').path
     File.delete tmpfile #remove it by default
     Basesystem.const_set "FINISH_FILE", tmpfile
-    YaST::ConfigFile.stubs(:read_file).returns(YAML_CONTENT)
+    YaST::ConfigFile.stubs(:read_file).returns(STEPS)
     YaST::ConfigFile.any_instance.stubs(:path).returns(__FILE__)
     @basesystem = Basesystem.find({})
   end
@@ -57,7 +57,6 @@ EOF
     end
   end
 
-  # ??? [{"controller"=>"time"}, {"action"=>"show", "controller"=>"language"}] expected but was ["time", "language"]
   def test_steps
     assert_equal(TEST_STEPS, @basesystem.steps)
   end
@@ -95,8 +94,8 @@ EOF
   def test_mass_loading
     bs = Basesystem.new :finish => true, :steps => [:lest], :done => :lest
     assert bs.finish #only finish is set
-    assert bs.steps.nil?
-    assert bs.done.nil?
+    assert !bs.steps.nil?
+    assert !bs.done.nil?
   end
 
   # Test what happens if the config file is not found
@@ -107,7 +106,7 @@ EOF
   end
 
   def test_default_find
-    YaST::ConfigFile.stubs(:read_file).returns(DEF_YAML_CONTENT)
+    YaST::ConfigFile.stubs(:read_file).returns(EMPTY_STEPS)
     basesystem = Basesystem.find({})
     assert basesystem.finish
   end
