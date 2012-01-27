@@ -39,6 +39,10 @@ class Basesystem < BaseModel::Base
   FINISH_FILE = File.join(YaST::Paths::VAR,"basesystem","finish")
   FINISH_STR = "FINISH"
 
+  def self.undef_constant # fix: "warning: already initialized constant FINISH_FILE"
+    remove_const :FINISH_FILE
+  end
+
   def initialize(options={})
    @finish = false
    super options
