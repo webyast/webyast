@@ -27,7 +27,6 @@ require 'yaml'
 class ControlpanelController < ApplicationController
   before_filter :ensure_wizard, :only => [:nextstep, :backstep, :thisstep]
   before_filter :set_gettext_locale
-  I18n.locale = FastGettext.locale
 
   respond_to :html
 
