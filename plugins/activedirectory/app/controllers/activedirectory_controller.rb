@@ -24,9 +24,6 @@
 #require 'client_exception'
 
 class ActivedirectoryController < ApplicationController
-  
-  layout 'main'
-
   def index
     authorize! :read, Activedirectory
     @poll_for_updates = true

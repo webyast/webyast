@@ -21,9 +21,6 @@
 # = Kerberos controller
 # Provides access to configuration of Kerberos client 
 class KerberosController < ApplicationController
-
-  layout 'main'
-
   def index
     authorize! :read, Kerberos
     begin

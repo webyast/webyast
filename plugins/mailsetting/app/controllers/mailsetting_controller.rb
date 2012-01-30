@@ -26,8 +26,6 @@ require 'digest/sha2'
 
 class MailsettingController < ApplicationController
 
-  layout 'main'
-
 public
 
   def index

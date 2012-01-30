@@ -35,8 +35,6 @@ class PluginsController < ApplicationController
 
 protected
 
-layout "main"
-
 public
     
   # GET /plugins

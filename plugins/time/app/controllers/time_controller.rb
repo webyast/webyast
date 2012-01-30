@@ -28,8 +28,6 @@ class TimeController < ApplicationController
 
   before_filter :init
 
-  layout 'main'
-
 private
 
   def class_exists?(class_name)

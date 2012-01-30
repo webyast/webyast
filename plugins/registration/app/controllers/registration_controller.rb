@@ -23,9 +23,6 @@
 # Provides access to the registration of the system at NCC/SMT.
 
 class RegistrationController < ApplicationController
-
-  layout 'main'
-
   before_filter :init
 
   def init

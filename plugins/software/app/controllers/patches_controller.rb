@@ -28,8 +28,6 @@ class PatchesController < ApplicationController
   # always check permissions
   before_filter :check_read_permissions, :only => [:index, :show, :show_summary, :load_filter, :license]
 
-  layout 'main'
-
 private
 
   def check_read_permissions

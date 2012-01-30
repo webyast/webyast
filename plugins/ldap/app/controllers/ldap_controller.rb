@@ -25,8 +25,6 @@
 
 class LdapController < ApplicationController
 
-  layout 'main'
-  
   # Initialize GetText and Content-Type.
   FastGettext.add_text_domain "webyast_ldap", :path => "locale"
  

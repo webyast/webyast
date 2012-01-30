@@ -22,9 +22,6 @@
 require 'open-uri' # RORSCAN_ITL
 
 class StatusController < ApplicationController
-
-  layout "main"
-
   DEFAULT_LINES = 50
 
   private

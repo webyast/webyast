@@ -4,7 +4,6 @@ require 'yast_cache'
 require 'haml_gettext' # translate haml file on the fly
 
 class ApplicationController < ActionController::Base
-
   include FastGettext::Translation
 
   before_filter :authenticate_account!

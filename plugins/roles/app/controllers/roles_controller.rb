@@ -29,8 +29,6 @@ class RolesController < ApplicationController
   before_filter :check_read_permission
   before_filter :check_write_permission, :only => [:update,:delete] 
 
-  layout 'main'
-
 private
 
   def check_role_name(id=params[:id])

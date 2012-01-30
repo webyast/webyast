@@ -22,7 +22,6 @@
 class RepositoriesController < ApplicationController
 
   before_filter :check_read_permissions, :only => [:index, :show]
-  layout 'main'
 
 private
   

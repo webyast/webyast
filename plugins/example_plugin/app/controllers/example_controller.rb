@@ -20,9 +20,6 @@
 #++
 
 class ExampleController < ApplicationController
-
-  layout "main"
-
   def index
     authorize! :read, Example
     @example = Example.find

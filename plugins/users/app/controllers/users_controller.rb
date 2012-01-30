@@ -23,8 +23,6 @@ include ApplicationHelper
 
 class UsersController < ApplicationController
 
-  layout "main"
-
   private
 
   def init_cache(controller_name = request.parameters["controller"])

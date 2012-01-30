@@ -23,8 +23,6 @@ include ApplicationHelper
 
 class GroupsController < ApplicationController
   
-  layout 'main'
-
 private
 
   def validate_group_id( id = params[:id] )

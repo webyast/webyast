@@ -30,8 +30,6 @@ class EulasController < ApplicationController
   before_filter :ensure_eula_count, :only => [:show, :index, :update]
   before_filter :ensure_id, :only => [:show, :update]
 
-  layout 'main'
- 
 private
     def ensure_eula_count
       if session[:eula_count].nil?

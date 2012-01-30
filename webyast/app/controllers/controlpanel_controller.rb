@@ -1,18 +1,18 @@
 #--
 # Webyast Webclient framework
 #
-# Copyright (C) 2009, 2010 Novell, Inc. 
+# Copyright (C) 2009, 2010 Novell, Inc.
 #   This library is free software; you can redistribute it and/or modify
 # it only under the terms of version 2.1 of the GNU Lesser General Public
-# License as published by the Free Software Foundation. 
+# License as published by the Free Software Foundation.
 #
 #   This library is distributed in the hope that it will be useful, but WITHOUT
 # ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
-# FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public License for more 
-# details. 
+# FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public License for more
+# details.
 #
 #   You should have received a copy of the GNU Lesser General Public
-# License along with this library; if not, write to the Free Software 
+# License along with this library; if not, write to the Free Software
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA
 #++
 
@@ -28,8 +28,6 @@ class ControlpanelController < ApplicationController
   before_filter :ensure_wizard, :only => [:nextstep, :backstep, :thisstep]
 
   respond_to :html
-
-  layout "main"
 
   def index
     #return false if need_redirect
@@ -52,23 +50,23 @@ class ControlpanelController < ApplicationController
 
   def getNumberPermittedModules(shortcuts)
     count = 0
-    unless shortcuts.empty? 
+    unless shortcuts.empty?
       shortcuts.values.each do |data|
         if data['disabled'] != false
           count += 1
         end
       end
-    end 
+    end
     return count
-  end 
-  
+  end
+
   def nextstep
     bs = Basesystem.new.load_from_session(session)
     unless params[:done].blank?
       #in case that user click multiple time on next button
       #redirect correct bnc#579470
       unless params[:done] == bs.current_step[:controller]
-        redirect_to bs.current_step 
+        redirect_to bs.current_step
         return
       end
     end
@@ -121,7 +119,7 @@ class ControlpanelController < ApplicationController
     #logger.debug shortcuts.inspect
     shortcuts
   end
-  
+
   def translate_shortcuts(node)
     if node.is_a? Hash
       node.each do |key,data|
@@ -140,7 +138,7 @@ class ControlpanelController < ApplicationController
       end
     end
     return node
-  end 
+  end
 
   # reads shortcuts of a specific plugin directory
   def plugin_shortcuts(plugin_dir, all_permissions)
@@ -171,7 +169,7 @@ class ControlpanelController < ApplicationController
     #Rails.logger.debug "shortcuts: #{shortcuts.inspect}"
     shortcuts
   end
-  
+
 
   # Checks if basic system module should be shown instead of control panel
   # and if it should, then also redirects to that module.
@@ -182,10 +180,10 @@ class ControlpanelController < ApplicationController
     bs = Basesystem.find(session)
     # session variable is used to find out, if basic system module is needed
     return false if bs.completed?
-    # error happen during basesystem, so show this page (prevent endless loop bnc#554989) 
+    # error happen during basesystem, so show this page (prevent endless loop bnc#554989)
     if first_run
       redirect_to bs.current_step
-    else 
+    else
       logger.info "error occur during basesystem. render basesystem screen"
       render :action => "basesystem"
     end

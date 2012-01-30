@@ -24,8 +24,6 @@ require 'services_helper'
 
 class ServicesController < ApplicationController
 
-  layout 'main'
-
 public
 
   def show_status

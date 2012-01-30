@@ -25,8 +25,6 @@ require 'firewall'
 class FirewallController < ApplicationController
 
   CGI_PREFIX="firewall"
-  layout 'main'
-  
   NEEDED_SERVICES=["service:webyast","service:webyast-ui"]
   
   private

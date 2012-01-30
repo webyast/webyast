@@ -20,7 +20,6 @@
 #++
 
 class TerminalController < ApplicationController
-  layout 'main'
 
 private
 

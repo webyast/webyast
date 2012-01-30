@@ -34,7 +34,6 @@ require 'uri'
 # GET /graphs/id returns one graph description
 #
 class GraphsController < ApplicationController
-  layout "main"
 
 public
 

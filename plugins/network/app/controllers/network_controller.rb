@@ -34,8 +34,6 @@ end
 
 class NetworkController < ApplicationController
 
-  layout 'main'
-
 public
   
   NETMASK_RANGE = 0..32
