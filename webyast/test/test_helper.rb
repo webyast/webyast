@@ -23,6 +23,8 @@ require 'rails/test_help'
 
 ENV["RAILS_ENV"] = "test"
 
+FactoryGirl.find_definitions
+
 class ActionController::TestCase
   include Devise::TestHelpers
 end
