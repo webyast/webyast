@@ -1,12 +1,12 @@
 Webyast::Application.routes.draw do
-  
-  devise_for :accounts,  :controllers => { :sessions => "accounts/sessions" }
+
+  devise_for :accounts,  :controllers => { :sessions => "sessions" }
   resources :notifier
   resources :onlinehelp
   resources :logs
   resource :vendor_settings
 
-  #mounting each plugin  
+  #mounting each plugin
   webyast_module = Object.const_get("WebYaST")
   webyast_plugins = webyast_module.constants
   webyast_plugins.each do |plugin|
@@ -23,4 +23,3 @@ Webyast::Application.routes.draw do
   match '/notifiers/status.:format' => 'notifier#status', :as => :notifier
   match '/:controller(/:action(/:id))'
 end
-
