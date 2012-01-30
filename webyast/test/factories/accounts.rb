@@ -1,6 +1,6 @@
 FactoryGirl.define do
   factory :account do |account|
-    account.username "tux"
-    account.password "linux"
+    account.username "test"
+    account.password "test"
   end
 end

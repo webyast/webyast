@@ -16,15 +16,21 @@
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA
 #++
 
+ENV["RAILS_ENV"] = "test"
 
 require File.expand_path('../../config/environment', __FILE__)
 require 'rails/test_help'
 
+
 Rails.env = ActiveSupport::StringInquirer.new('test')
-FactoryGirl.find_definitions
+#FactoryGirl.find_definitions
+
+STDERR.puts "********* Running in test mode" if Rails.env.test?
 
 class ActionController::TestCase
   include Devise::TestHelpers
+  self.use_transactional_fixtures = true
+  self.use_instantiated_fixtures  = false
 end
 
 class ActiveSupport::TestCase
@@ -39,12 +45,10 @@ class ActiveSupport::TestCase
 end
 
 # use a different DB for tests -  needed during RPM build
-if !ENV['TEST_DB_PATH'].nil? && ENV['RAILS_ENV'] == 'test'
+if !ENV['TEST_DB_PATH'].nil? && Rails.env.test?
   Rails.logger.debug "Using DB file for tests: #{ENV['TEST_DB_PATH']}"
-
   # read the current config
   dbconf = Rails::Configuration.new.database_configuration['test']
-
   # update the config and make a new DB connection
   require 'active_record'
   dbconf['database'] = ENV['TEST_DB_PATH']

@@ -1,4 +1,3 @@
-
 class SessionsController < Devise::SessionsController
   include FastGettext::Translation
 

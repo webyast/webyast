@@ -1,6 +1,12 @@
 Webyast::Application.routes.draw do
 
-  devise_for :accounts,  :controllers => { :sessions => "sessions" }
+  #devise_for :accounts,  :controllers => { :sessions => "sessions" }
+  devise_scope :account do
+    get "sign_in", :to => "sessions#new"
+    get "sign_out", :to => "devise/sessions#destroy"
+  end
+
+
   resources :notifier
   resources :onlinehelp
   resources :logs

@@ -26,6 +26,8 @@ require 'yaml'
 
 class ControlpanelController < ApplicationController
   before_filter :ensure_wizard, :only => [:nextstep, :backstep, :thisstep]
+  before_filter :set_gettext_locale
+  I18n.locale = FastGettext.locale
 
   respond_to :html
 
@@ -35,18 +37,24 @@ class ControlpanelController < ApplicationController
     @count = getNumberPermittedModules(@shortcuts)
   end
 
-  def show_all
-    @shortcut_groups = {}
-    shortcuts_data.each do |name, data|
-      data["groups"].each do |group|
-        @shortcut_groups[group] ||= Array.new
-        @shortcut_groups[group] << data
-      end
-    end
-    @shortcut_groups.each do |group,val|
-      val.sort! { |g1,g2| g1['title'] <=> g2['title'] }
-    end
+  # POST /select_language
+  # setting language for translations
+  def select_language
+    render :partial => "select_language"
   end
+
+#  def show_all
+#    @shortcut_groups = {}
+#    shortcuts_data.each do |name, data|
+#      data["groups"].each do |group|
+#        @shortcut_groups[group] ||= Array.new
+#        @shortcut_groups[group] << data
+#      end
+#    end
+#    @shortcut_groups.each do |group,val|
+#      val.sort! { |g1,g2| g1['title'] <=> g2['title'] }
+#    end
+#  end
 
   def getNumberPermittedModules(shortcuts)
     count = 0

@@ -87,9 +87,9 @@ private
   def init_cache(controller_name = request.parameters["controller"])
     return unless YastCache.active #Does not make sense if cache is not active
     if request && request.request_method == :get
-      return unless (request.parameters["action"] == "show" || 
+      return unless (request.parameters["action"] == "show" ||
                      request.parameters["action"] == "index")
-      #finding the correct cache name 
+      #finding the correct cache name
       #(has to be the model class name and not the controller name)
       path = YastCache.find_key(controller_name, (request.parameters["id"] || :all))
       if path.blank?
@@ -110,7 +110,7 @@ private
     end
   end
 
-  def report_backend_exception(exception) 
+  def report_backend_exception(exception)
       logger.info "Backend exception: #{exception}"
       report_exception(exception, 503)
   end
@@ -133,7 +133,7 @@ private
     end
     logger.warn "Uncaught exception #{exception.class}: #{exception.message}"
     logger.warn "Backtrace: #{exception.backtrace.join('\n')}" unless exception.backtrace.blank?
-    
+
     # for ajax request render a different template, much less verbose
     if request.xhr?
       logger.error "Error during ajax request"
@@ -178,4 +178,3 @@ private
 
 
 end
-
