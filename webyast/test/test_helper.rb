@@ -18,11 +18,9 @@
 
 
 require File.expand_path('../../config/environment', __FILE__)
-require File.join(File.dirname(__FILE__),"plugin_basic_tests")
 require 'rails/test_help'
 
-ENV["RAILS_ENV"] = "test"
-
+Rails.env = ActiveSupport::StringInquirer.new('test')
 FactoryGirl.find_definitions
 
 class ActionController::TestCase
