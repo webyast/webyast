@@ -77,6 +77,10 @@ module BaseModel
       assign_attributes(attr)
     end
 
+    def load(attr={})
+      assign_attributes(attr)
+    end
+
     # for mass assignment
     def assign_attributes(values, options = {})
       values.each do |k, v|
