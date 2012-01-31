@@ -1,5 +1,5 @@
 #--
-# Webyast Webservice framework
+# Webyast framework
 #
 # Copyright (C) 2009, 2010 Novell, Inc.
 #   This library is free software; you can redistribute it and/or modify
@@ -16,17 +16,9 @@
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA
 #++
 
-require File.dirname(__FILE__) + '/../test_helper'
-require File.dirname(__FILE__) + '/../devise_helper'
-
-class ControlpanelControllerTest < ActionController::TestCase
-
-  setup do
-    devise_sign_in # authenticate user/account
-  end
-
-  test "should get index" do
-    get :index
-    assert_response :success
-  end
+# Test helper for devise authentication
+def devise_sign_in
+  @account = Factory(:account)
+  request.env['warden'].stubs(:authenticate!).with(:scope => :account).returns @account
+  self._controller_class.any_instance.stubs(:current_account).returns @account
 end
