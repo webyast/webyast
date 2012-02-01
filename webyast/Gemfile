@@ -20,9 +20,6 @@ gem 'nokogiri'
 gem "fast_gettext", '>= 0.6.4'
 gem 'gettext_i18n_rails', '>= 0.4.3'
 
-#this is needed for language/country translations
-gem "countries_and_languages", '>=0.1.2', :require => 'countries_and_languages/rails'
-
 gem 'inifile'
 gem 'execjs'
 
