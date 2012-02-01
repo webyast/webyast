@@ -13,10 +13,12 @@ Webyast::Application.routes.draw do
   resource :vendor_settings
 
   #mounting each plugin
-  webyast_module = Object.const_get("WebYaST")
-  webyast_plugins = webyast_module.constants
-  webyast_plugins.each do |plugin|
-    mount webyast_module.const_get(plugin) => '/'
+  if defined? WebYaST
+    webyast_module = Object.const_get("WebYaST")
+    webyast_plugins = webyast_module.constants
+    webyast_plugins.each do |plugin|
+      mount webyast_module.const_get(plugin) => '/'
+    end
   end
 
   root :to => 'controlpanel#index'
