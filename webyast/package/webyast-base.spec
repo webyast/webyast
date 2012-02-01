@@ -33,7 +33,7 @@ Requires:       sysvinit > 2.86-195.3.1
 %endif
 Requires:       rubygem-passenger-nginx, rubygem-nokogiri
 Requires:       nginx >= 1.0
-Requires:       ruby-fcgi, sqlite, syslog-ng, check-create-certificate
+Requires:       ruby-fcgi, sqlite3, syslog-ng, check-create-certificate
 
 %if 0%{?suse_version} == 0 || %suse_version <= 1130
 Requires:       ruby-dbus
@@ -41,13 +41,13 @@ Requires:       ruby-dbus
 Requires:	rubygem-ruby-dbus
 %endif
 Requires:       rubygem-webyast-rake-tasks
-Requires:       rubygem-static_record_cache
 Requires:       yast2-dbus-server
+PreReq:		rubygem-bundler
 # 634404
 Recommends:     logrotate
 PreReq:         polkit, PackageKit, rubygem-rake, rubygem-sqlite3
-PreReq:         rubygem-rails-2_3 >= 2.3.8
-PreReq:         rubygem-polkit1, rubygem-gettext_rails
+PreReq:         rubygem-rails-3_1
+PreReq:         rubygem-polkit1, rubygem-fast_gettext, rubygem-gettext_i18n_rails
 PreReq:         yast2-runlevel
 License:	LGPL-2.0
 Group:          Productivity/Networking/Web/Utilities
@@ -70,23 +70,26 @@ Source12:       nginx.conf
 Source13:	control_panel.yml
 
 BuildRoot:      %{_tmppath}/%{name}-%{version}-build
-BuildRequires:  ruby, pkg-config, rubygem-mocha, rubygem-static_record_cache
+BuildRequires:  ruby, pkg-config, rubygem-mocha
 # if we run the tests during build, we need most of Requires here too,
 # except for deployment specific stuff
 BuildRequires:  rubygem-webyast-rake-tasks, rubygem-restility
-BuildRequires:  yast2-core, yast2-dbus-server, sqlite, dbus-1
+BuildRequires:  yast2-core, yast2-dbus-server, sqlite3, dbus-1
 %if 0%{?suse_version} == 0 || %suse_version <= 1130
 BuildRequires:  ruby-dbus
 %else
 BuildRequires:  rubygem-ruby-dbus
 %endif
 BuildRequires:  polkit, PackageKit, rubygem-sqlite3
-BuildRequires:  rubygem-rails-2_3 >= 2.3.8
+BuildRequires:  rubygem-rails-3_1
 BuildRequires:  rubygem-polkit1
 # the testsuite is run during build
 BuildRequires:  rubygem-test-unit rubygem-mocha
 BuildRequires:  tidy, rubygem-haml, rubygem-nokogiri, rubygem-sass
 BuildRequires:  nginx >= 1.0, rubygem-passenger-nginx
+BuildRequires:	rubygem-bundler
+
+Requires:       rubygem-fast_gettext, rubygem-gettext_i18n_rails, rubygem-rails_i18n
 
 # This is for Hudson (build service) to setup the build env correctly
 %if 0
