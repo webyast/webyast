@@ -90,6 +90,7 @@ BuildRequires:  nginx >= 1.0, rubygem-passenger-nginx
 BuildRequires:	rubygem-bundler, rubygem-assert_valid_markup
 BuildRequires:	rubygem-devise, rubygem-devise_unix2_chkpwd_authenticatable, rubygem-devise-i18n
 BuildRequires:	rubygem-cancan, rubygem-delayed_job, rubygem-static_record_cache
+#BuildRequires:  rubygem-execjs, rubygem-uglifier, rubygem-therubyracer
 
 # FIXME: this pulls in Rails 3.0 packages
 BuildRequires:	rubygem-jquery-rails
@@ -97,6 +98,7 @@ BuildRequires:	rubygem-jquery-rails
 Requires:       rubygem-fast_gettext, rubygem-gettext_i18n_rails, rubygem-rails_i18n
 Requires:	rubygem-devise, rubygem-devise_unix2_chkpwd_authenticatable, rubygem-devise-i18n
 Requires:	rubygem-cancan, rubygem-delayed_job, rubygem-static_record_cache
+#Requires:	rubygem-execjs, rubygem-uglifier, rubygem-therubyracer
 
 # FIXME: this pulls in Rails 3.0 packages
 Requires:	rubygem-jquery-rails

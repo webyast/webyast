@@ -22,11 +22,12 @@ gem "fast_gettext", '>= 0.6.4'
 gem 'gettext_i18n_rails', '>= 0.4.3'
 
 gem 'inifile'
-gem 'execjs'
 
 group :assets do
-  gem 'uglifier'
-  gem 'therubyracer'
+# FIXME: temporarily disabled
+#  gem 'uglifier'
+#  gem 'execjs'
+#  gem 'therubyracer'
 end
 
 plugin_path = File.expand_path("../../plugins",  __FILE__)
