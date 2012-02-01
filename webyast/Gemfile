@@ -15,6 +15,7 @@ gem 'haml'
 gem 'jquery-rails'
 gem "ruby-dbus"
 gem 'delayed_job', '2.1.4'
+gem 'static_record_cache'
 
 gem 'nokogiri'
 gem "fast_gettext", '>= 0.6.4'
