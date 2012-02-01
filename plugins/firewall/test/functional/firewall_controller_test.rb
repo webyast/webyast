@@ -20,9 +20,9 @@
 ##++
 
 require File.join(File.dirname(__FILE__),"..", "test_helper")
+require File.join(RailsParent.parent, "test","devise_helper")
 
 class FirewallControllerTest < ActionController::TestCase
-  fixtures :accounts
                        
   FIREWALL = { "use_firewall" => true, 
     "fw_services" => [
@@ -42,11 +42,7 @@ class FirewallControllerTest < ActionController::TestCase
   OK_RESULT = {"saved_ok" => true, "error" => ""}
   
   def setup
-    @model_class = Firewall
-    @controller = FirewallController.new
-    @request = ActionController::TestRequest.new
-    @request.session[:account_id] = 1 # defined in fixtures
-    
+    devise_sign_in 
     Firewall.stubs(:find).returns(Firewall.new(FIREWALL))
     Firewall.any_instance.stubs(:save).returns(OK_RESULT)
     FirewallController.any_instance.stubs(:permission_check).with("org.opensuse.yast.modules.yapi.firewall.read").returns(true)
