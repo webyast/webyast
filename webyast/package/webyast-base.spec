@@ -45,7 +45,7 @@ Requires:       yast2-dbus-server
 PreReq:		rubygem-bundler
 # 634404
 Recommends:     logrotate
-PreReq:         polkit, PackageKit, rubygem-rake, rubygem-sqlite3
+PreReq:         polkit, PackageKit, rubygem-rake, rubygem-sqlite3-ruby
 PreReq:         rubygem-rails-3_1
 PreReq:         rubygem-polkit1, rubygem-fast_gettext, rubygem-gettext_i18n_rails
 PreReq:         yast2-runlevel
@@ -80,16 +80,27 @@ BuildRequires:  ruby-dbus
 %else
 BuildRequires:  rubygem-ruby-dbus
 %endif
-BuildRequires:  polkit, PackageKit, rubygem-sqlite3
+BuildRequires:  polkit, PackageKit, rubygem-sqlite3-ruby
 BuildRequires:  rubygem-rails-3_1
 BuildRequires:  rubygem-polkit1
 # the testsuite is run during build
 BuildRequires:  rubygem-test-unit rubygem-mocha
 BuildRequires:  tidy, rubygem-haml, rubygem-nokogiri, rubygem-sass
 BuildRequires:  nginx >= 1.0, rubygem-passenger-nginx
-BuildRequires:	rubygem-bundler
+BuildRequires:	rubygem-bundler, rubygem-assert_valid_markup
+BuildRequires:	rubygem-devise, rubygem-devise_unix2_chkpwd_authenticatable, rubygem-devise-i18n
+BuildRequires:	rubygem-cancan, rubygem-delayed_job
+
+# FIXME: this pulls in Rails 3.0 packages
+BuildRequires:	rubygem-jquery-rails
 
 Requires:       rubygem-fast_gettext, rubygem-gettext_i18n_rails, rubygem-rails_i18n
+Requires:	rubygem-devise, rubygem-devise_unix2_chkpwd_authenticatable, rubygem-devise-i18n
+Requires:	rubygem-cancan, rubygem-delayed_job
+
+# FIXME: this pulls in Rails 3.0 packages
+Requires:	rubygem-jquery-rails
+
 
 # This is for Hudson (build service) to setup the build env correctly
 %if 0
