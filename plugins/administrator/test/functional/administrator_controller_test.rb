@@ -20,18 +20,15 @@
 #++
 
 require File.expand_path(File.dirname(__FILE__) + "/../test_helper")
+require File.join(RailsParent.parent, "test","devise_helper")
 require 'test/unit'
 
 
 class AdministratorControllerTest < ActionController::TestCase
-  fixtures :accounts
+#  fixtures :accounts
 
   def setup
-    @controller = AdministratorController.new
-    @request = ActionController::TestRequest.new
-    # http://railsforum.com/viewtopic.php?id=1719
-    @request.session[:account_id] = 1 # defined in fixtures
-
+    devise_sign_in
     Administrator.stubs(:find).returns Administrator.new({:aliases => ""})
   end
   
