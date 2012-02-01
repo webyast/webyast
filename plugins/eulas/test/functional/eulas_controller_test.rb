@@ -20,6 +20,7 @@
 #++
 
 require File.expand_path(File.dirname(__FILE__) + "/../test_helper")
+require File.join(RailsParent.parent, "test","devise_helper")
 require 'test/unit'
 require 'license'
 require 'mocha'
@@ -40,15 +41,13 @@ EOF
                 }
 
   def setup
+    devise_sign_in
     License.const_set 'RESOURCES_DIR', File.join(File.dirname(__FILE__),"..","..","test","share")
     License.const_set 'VAR_DIR'      , File.join(File.dirname(__FILE__),"..","..","test","var")
     YaST::ConfigFile.stubs(:read_file).returns(YAML_CONTENT)
     YaST::ConfigFile.any_instance.stubs(:path).returns(__FILE__)
     License.any_instance.stubs(:save).returns(nil)
-
-    @request = ActionController::TestRequest.new
-    # http://railsforum.com/viewtopic.php?id=1719
-    @request.session[:account_id] = 1 # defined in fixtures
+    
   end
 
   def test_index
