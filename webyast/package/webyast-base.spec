@@ -91,11 +91,21 @@ BuildRequires:	rubygem-bundler, rubygem-assert_valid_markup
 BuildRequires:	rubygem-devise, rubygem-devise_unix2_chkpwd_authenticatable, rubygem-devise-i18n
 BuildRequires:	rubygem-cancan, rubygem-delayed_job, rubygem-static_record_cache
 #BuildRequires:  rubygem-execjs, rubygem-uglifier, rubygem-therubyracer
+BuildRequires:	rubygem-gettext, rubygem-ruby_parser
+
+BuildRequires:  rubygem-ruby-debug, rubygem-factory_girl, rubygem-factory_girl_rails, rubygem-mocha
+#BuildRequires:  rubygem-rspec, rubygem-rspec-rails, rubygem-database_cleaner
 
 # FIXME: this pulls in Rails 3.0 packages
 BuildRequires:	rubygem-jquery-rails
 
 Requires:       rubygem-fast_gettext, rubygem-gettext_i18n_rails, rubygem-rails_i18n
+
+#FIXME should be only BuildRequires
+Requires:	rubygem-gettext
+Requires:	rubygem-ruby-debug, rubygem-factory_girl, rubygem-factory_girl_rails, rubygem-mocha
+#Requires:	rubygem-rspec, rubygem-rspec-rails, rubygem-database_cleaner
+
 Requires:	rubygem-devise, rubygem-devise_unix2_chkpwd_authenticatable, rubygem-devise-i18n
 Requires:	rubygem-cancan, rubygem-delayed_job, rubygem-static_record_cache
 #Requires:	rubygem-execjs, rubygem-uglifier, rubygem-therubyracer
@@ -159,7 +169,8 @@ This package contains css, icons and images for webyast-base package.
 %setup -q -n www
 
 %build
-env LANG=en rake gettext:pack
+# FIXME: temporarily disabled:
+#env LANG=en rake gettext:pack -t
 rake sass:update
 rake js:base
 rm -r app/sass

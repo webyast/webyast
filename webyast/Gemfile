@@ -58,10 +58,10 @@ group :test do
   gem "ruby-debug"
   #gem "factory_girl"
   gem "factory_girl_rails"
-  gem 'rspec', '>=2'
-  gem 'rspec-rails', '>=2'
+#  gem 'rspec', '>=2'
+#  gem 'rspec-rails', '>=2'
   #gem "shoulda", ">= 3.0.0.beta"
-  gem "database_cleaner"
+#  gem "database_cleaner"
   gem "mocha"
   gem "assert_valid_markup"
 end
