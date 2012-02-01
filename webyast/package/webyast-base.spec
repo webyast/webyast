@@ -171,9 +171,7 @@ This package contains css, icons and images for webyast-base package.
 %build
 # FIXME: temporarily disabled:
 #env LANG=en rake gettext:pack -t
-rake sass:update
 rake js:base
-rm -r app/sass
 
 %check
 # run the testsuite
