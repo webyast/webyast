@@ -20,6 +20,8 @@
 #++
 
 require File.expand_path(File.dirname(__FILE__) + "/../test_helper")
+require File.expand_path(File.dirname(__FILE__) + "/stubs")
+require File.join(RailsParent.parent, "test","devise_helper")
 require 'interface'
 
 class InterfacesControllerTest < ActionController::TestCase
@@ -29,11 +31,10 @@ class InterfacesControllerTest < ActionController::TestCase
   DATA_BAD = { "interface" => {"id" => "eth0", "bootproto" => "static", "ipaddr" => "10.1.1.1/666"}, "id"=>"eth0" }
 
   def setup
+    devise_sign_in(Network::InterfacesController)
+    @controller = Network::InterfacesController.new
     YastService.expects(:Call).never
     @model_class = Interface
-    @controller = Network::InterfacesController.new
-    @request = ActionController::TestRequest.new
-    @request.session[:account_id] = 1 # defined in fixtures
     stubs_functions # stubs actions defined in stubs.rb
   end  
 
@@ -54,13 +55,15 @@ class InterfacesControllerTest < ActionController::TestCase
 
   def test_valid_update_as_sent_by_ui
     @model_class.any_instance.stubs(:save).returns true
-    put :update, DATA_GOOD_UI
+    @request.accept = Mime::XML
+    put :update, DATA_GOOD_UI, :format => 'xml'
     assert_response 200
   end
 
   def test_valid_update_as_documented
     @model_class.any_instance.stubs(:save).returns true
-    put :update, DATA_GOOD_DOC
+    @request.accept = Mime::XML
+    put :update, DATA_GOOD_DOC, :format => 'xml'
     assert_response 200
   end
 

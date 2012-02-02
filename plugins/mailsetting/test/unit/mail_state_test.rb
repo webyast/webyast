@@ -26,7 +26,7 @@ require 'mail'
 class MailStateTest < ActiveSupport::TestCase
 
   def setup    
-    Mail.const_set("TEST_MAIL_FILE", File.join(File.dirname(__FILE__), '..', 'fixtures', 'empty_mail_settings')) 
+    Mailsetting.const_set("TEST_MAIL_FILE", File.join(File.dirname(__FILE__), '..', 'fixtures', 'empty_mail_settings')) 
   end
 
 

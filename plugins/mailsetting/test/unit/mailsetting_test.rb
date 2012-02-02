@@ -21,20 +21,20 @@
 
 require File.expand_path(File.dirname(__FILE__) + "/../test_helper")
 
-require 'mail'
+require 'mailsetting'
 
-class MailTest < ActiveSupport::TestCase
+class MailsettingTest < ActiveSupport::TestCase
 
   def setup    
     YastService.stubs(:Call).with('YaPI::MailSettings::Read').returns({ })
-    @model = Mail.find
+    @model = Mailsetting.find
   end
 
   def test_read_notls
     YastService.stubs(:Call).with('YaPI::MailSettings::Read').returns({
 	"smtp_server" => "smtp.domain.com"
     })
-    ret = Mail.find
+    ret = Mailsetting.find
     assert ret.transport_layer_security == "no"
   end
 
@@ -43,7 +43,7 @@ class MailTest < ActiveSupport::TestCase
 	"smtp_server"	=> "smtp.domain.com",
 	"TLS"		=> "must"
     })
-    ret = Mail.find
+    ret = Mailsetting.find
     assert ret.smtp_server == "smtp.domain.com"
     assert ret.transport_layer_security == "must"
   end
@@ -56,7 +56,7 @@ class MailTest < ActiveSupport::TestCase
 	"user"		=> [ "s", ""],
 	"password"	=> [ "s", ""]
     }).returns("")
-    ret = Mail.new({
+    ret = Mailsetting.new({
 	"smtp_server"	=> "smtp.newdomain.com",
 	"user"		=> "",
 	"password"	=> "",

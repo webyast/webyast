@@ -20,24 +20,22 @@
 #++
 
 require File.expand_path(File.dirname(__FILE__) + "/../test_helper")
-require 'test/unit'
+require File.join(RailsParent.parent, "test","devise_helper")
+#require 'test/unit'
 
 
-class MailControllerTest < ActionController::TestCase
-  fixtures :accounts
+class MailsettingControllerTest < ActionController::TestCase
 
   def setup
-    @controller = MailController.new
-    @request = ActionController::TestRequest.new
-    # http://railsforum.com/viewtopic.php?id=1719
-    @request.session[:account_id] = 1 # defined in fixtures
-
-    Mail.stubs(:find).returns Mail.new({:smtp_server => ""})
+    devise_sign_in
+    Mailsetting.stubs(:find).returns Mailsetting.new({:smtp_server => ""})
   end
   
   test "check 'show' result" do
+    mime = Mime::XML
+    @request.accept = mime.to_s
 
-    ret = get :show
+    ret = get :show, :format => "xml"
     # success (200 OK)
     assert_response :success
 
@@ -49,7 +47,7 @@ class MailControllerTest < ActionController::TestCase
   end
 
   test "put success" do
-    Mail.any_instance.stubs(:save).returns(true).once
+    Mailsetting.any_instance.stubs(:save).returns(true).once
     ret = put :update, :mail => {:smtp_server => "newserver"}, :format => "xml"
     ret_hash = Hash.from_xml(ret.body)
 
