@@ -40,10 +40,10 @@ unless gemspecs.empty?
     gem plugin_name, :path => File.expand_path("../../plugins/#{gemspec.split("/").pop(2).first}", __FILE__)
   end
 else
-  #Loading gems from the official path
-  `gem list`.split("\n").each do |gem_name_version|
-    gem_name = gem_name_version.split.first
-    gem gem_name if gem_name.start_with?("webyast-")
+  #Loading webyast gems from the gem path
+  Dir.glob(Gem.default_path.map{|p| File.join(p, "gems/webyast-*")}).each do |pth|
+    # get gem name from path: /usr/lib64/ruby/gems/1.8/gems/webyast-users-0.1 => webyast-users
+    gem File.basename(pth).split("-")[0..-2].join("-")
   end
 end
 
