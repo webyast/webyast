@@ -176,6 +176,7 @@ rake js:base
 %check
 # run the testsuite
 RAILS_ENV=test rake db:migrate
+mkdir -p tmp/cache
 RAILS_ENV=test $RPM_BUILD_ROOT%{webyast_dir}/test/dbus-launch-simple rake test
 
 #---------------------------------------------------------------
