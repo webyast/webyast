@@ -21,6 +21,7 @@
 
 require File.expand_path(File.dirname(__FILE__) + "/../test_helper")
 require File.expand_path(File.dirname(__FILE__) + "/stubs.rb")
+require File.join(RailsParent.parent, "test","devise_helper")
 require 'route'
 
 class RoutesControllerTest < ActionController::TestCase
@@ -32,11 +33,10 @@ class RoutesControllerTest < ActionController::TestCase
 
 
   def setup
+    devise_sign_in(Network::RoutesController)
+    @controller = Network::RoutesController.new
     YastService.expects(:Call).never
     @model_class = Route
-    @controller = Network::RoutesController.new
-    @request = ActionController::TestRequest.new
-    @request.session[:account_id] = 1 # defined in fixtures
     
     stubs_functions # stubs actions defined in stubs.rb
   end  
@@ -57,12 +57,14 @@ class RoutesControllerTest < ActionController::TestCase
   end
 
   def test_valid_update_as_sent_by_ui
-    put :update, DATA_GOOD_UI
+    @request.accept = Mime::XML
+    put :update, DATA_GOOD_UI, :format => "xml"
     assert_response 200
   end
 
   def test_valid_update_as_documented
-    put :update, DATA_GOOD_DOC
+    @request.accept = Mime::XML
+    put :update, DATA_GOOD_DOC, :format => "xml"
     assert_response 200
   end
 

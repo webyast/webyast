@@ -20,6 +20,8 @@
 #++
 
 require File.expand_path(File.dirname(__FILE__) + "/../test_helper")
+require File.expand_path(File.dirname(__FILE__) + "/stubs")
+require File.join(RailsParent.parent, "test","devise_helper")
 require 'hostname'
 
 class HostnameControllerTest < ActionController::TestCase
@@ -29,10 +31,8 @@ class HostnameControllerTest < ActionController::TestCase
   
   def setup
     @model_class = Hostname
+    devise_sign_in(Network::HostnameController)
     @controller = Network::HostnameController.new
-    @request = ActionController::TestRequest.new
-    @request.session[:account_id] = 1 # defined in fixtures
-    
     stubs_functions # stubs actions defined in stubs.rb
   end  
   
@@ -47,14 +47,19 @@ class HostnameControllerTest < ActionController::TestCase
 
   def test_valid_update
     @model_class.any_instance.stubs(:save).returns true
-    put :update, DATA_GOOD
+    mime = Mime::XML
+    @request.accept = mime.to_s
+
+    put :update, DATA_GOOD, :format => "xml"
     assert_response 200
   end
 
   def test_validation
     #ensure that nothing is saved
     @model_class.expects(:save).never
-    put :update, DATA_BAD
+    mime = Mime::XML
+    @request.accept = mime.to_s
+    put :update, DATA_BAD, :format => "xml"
     assert_response 422
   end
 end

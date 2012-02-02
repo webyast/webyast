@@ -64,7 +64,7 @@ class InterfaceTest < ActiveSupport::TestCase
  end
 
  def test_netmask
-   YastService.stubs(:Call).with("YaPI::NETWORK::Write", anything).returns true
+   YastService.stubs(:Call).with("YaPI::NETWORK::Write",  {'interface' => ['a{sa{ss}}', {'eth7' => {'bootproto' => 'static', 'ipaddr' => '1.1.1.1/255.255.255.255'}}]}).returns true
    iface = Interface.new "id" => "eth7", "bootproto" => "static", "ipaddr" => "1.1.1.1/255.255.255.255"
    iface.save!
  end
