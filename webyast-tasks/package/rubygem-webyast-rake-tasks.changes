@@ -1,4 +1,11 @@
 -------------------------------------------------------------------
+Thu Feb  2 15:48:24 UTC 2012 - lslezak@suse.cz
+
+- webservice_tasks.rb renamed to webyast_tasks.rb
+- improved ignoring files in package-local task
+- 0.1.12
+
+-------------------------------------------------------------------
 Tue Apr 12 07:10:21 UTC 2011 - schubi@novell.com
 
 - 0.1.11 
