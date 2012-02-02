@@ -99,7 +99,7 @@ BuildRequires:  rubygem-ruby-debug, rubygem-factory_girl, rubygem-factory_girl_r
 # FIXME: this pulls in Rails 3.0 packages
 BuildRequires:	rubygem-jquery-rails
 
-Requires:	rubygem-haml, rubygem-sqlite3-ruby, rubygem-assert_valid_markup, ruby_parser
+Requires:	rubygem-haml, rubygem-sqlite3-ruby, rubygem-assert_valid_markup, rubygem-ruby_parser
 Requires:       rubygem-fast_gettext, rubygem-gettext_i18n_rails, rubygem-rails-i18n
 
 #FIXME should be only BuildRequires
