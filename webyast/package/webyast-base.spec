@@ -174,9 +174,7 @@ This package contains css, icons and images for webyast-base package.
 #env LANG=en rake gettext:pack -t
 
 # precompile assests (merge JS files, pack CSS and JS to *.gz)
-# increase the default memory for the JS engine (from 32M to 64M)
-# to avoid "spidermonkey ran out of memory" error
-JOHNSON_HEAP_SIZE=64000000 rake assets:precompile
+rake assets:precompile
 
 # cleanup the tmp cache after building assets
 rm -rf tmp
