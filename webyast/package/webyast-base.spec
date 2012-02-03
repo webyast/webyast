@@ -44,7 +44,7 @@ Requires:       rubygem-webyast-rake-tasks
 Requires:       yast2-dbus-server
 PreReq:		rubygem-bundler
 # 634404
-Recommends:     logrotate
+Recommends:     logrotate, webyast-branding
 PreReq:         polkit, PackageKit, rubygem-rake, rubygem-sqlite3-ruby
 PreReq:         rubygem-rails-3_1
 PreReq:         rubygem-polkit1, rubygem-fast_gettext, rubygem-gettext_i18n_rails
@@ -274,7 +274,7 @@ install -m 0444 %SOURCE3 $RPM_BUILD_ROOT/usr/share/dbus-1/system-services/
 
 # install bundler config
 mkdir -p $RPM_BUILD_ROOT%{webyast_dir}/.bundle
-install -m 0644 %SOURCE14 $RPM_BUILD_ROOT%{webyast_dir}/.bundle
+install -m 0644 %SOURCE14 $RPM_BUILD_ROOT%{webyast_dir}/.bundle/config
 
 
 #create dummy update-script
