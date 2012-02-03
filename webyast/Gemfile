@@ -58,7 +58,7 @@ group :test do
   gem "factory_girl_rails"
 #  gem 'rspec', '>=2'
 #  gem 'rspec-rails', '>=2'
-  #gem "shoulda", ">= 3.0.0.beta"
+#  gem "shoulda", ">= 3.0.0.beta"
 #  gem "database_cleaner"
   gem "mocha",  :require => false
   gem "assert_valid_markup"

@@ -90,7 +90,7 @@ BuildRequires:  nginx >= 1.0, rubygem-passenger-nginx
 BuildRequires:	rubygem-bundler, rubygem-assert_valid_markup
 BuildRequires:	rubygem-devise, rubygem-devise_unix2_chkpwd_authenticatable, rubygem-devise-i18n
 BuildRequires:	rubygem-cancan, rubygem-delayed_job, rubygem-static_record_cache
-#BuildRequires:  rubygem-execjs, rubygem-uglifier, rubygem-therubyracer
+BuildRequires:  rubygem-uglifier, rubygem-johnson
 BuildRequires:	rubygem-gettext, rubygem-ruby_parser
 
 BuildRequires:  rubygem-ruby-debug, rubygem-factory_girl, rubygem-factory_girl_rails, rubygem-mocha
@@ -109,7 +109,7 @@ Requires:	rubygem-ruby-debug, rubygem-factory_girl, rubygem-factory_girl_rails, 
 
 Requires:	rubygem-devise, rubygem-devise_unix2_chkpwd_authenticatable, rubygem-devise-i18n
 Requires:	rubygem-cancan, rubygem-delayed_job, rubygem-static_record_cache
-#Requires:	rubygem-execjs, rubygem-uglifier, rubygem-therubyracer
+Requires:	rubygem-uglifier, rubygem-johnson
 
 # FIXME: this pulls in Rails 3.0 packages
 Requires:	rubygem-jquery-rails
@@ -172,9 +172,16 @@ This package contains css, icons and images for webyast-base package.
 %build
 # FIXME: temporarily disabled:
 #env LANG=en rake gettext:pack -t
-rake js:base
 
-# remove Gemfile.lock created by rake calls
+# precompile assests (merge JS files, pack CSS and JS to *.gz)
+# increase the default memory for the JS engine (from 32M to 64M)
+# to avoid "spidermonkey ran out of memory" error
+JOHNSON_HEAP_SIZE=64000000 rake assets:precompile
+
+# cleanup the tmp cache after building assets
+rm -rf tmp
+
+# remove Gemfile.lock created by the above rake calls
 rm Gemfile.lock
 
 %check
@@ -196,6 +203,9 @@ cp -a * $RPM_BUILD_ROOT%{webyast_dir}/
 rm -f $RPM_BUILD_ROOT%{webyast_dir}/log/*
 rm -rf $RPM_BUILD_ROOT/%{webyast_dir}/po
 rm -f $RPM_BUILD_ROOT%{webyast_dir}/COPYING
+
+# remove asset sources
+rm -rf $RPM_BUILD_ROOT/%{webyast_dir}/app/assets
 
 %{__install} -d -m 0755                            \
     %{buildroot}%{pkg_home}/sockets/               \
@@ -388,7 +398,11 @@ dbus-send --print-reply --system --dest=org.freedesktop.DBus / org.freedesktop.D
 %ghost %{webyast_dir}/db/schema.rb
 %{webyast_dir}/doc
 %{webyast_dir}/lib
-%{webyast_dir}/public
+%dir %{webyast_dir}/public
+%{webyast_dir}/public/*.html
+%{webyast_dir}/public/dispatch.*
+%{webyast_dir}/public/apache.htaccess
+%{webyast_dir}/public/favicon.ico
 %{webyast_dir}/Gemfile
 %{webyast_dir}/Rakefile
 %{webyast_dir}/config.ru
@@ -435,10 +449,8 @@ dbus-send --print-reply --system --dest=org.freedesktop.DBus / org.freedesktop.D
 %{_sbindir}/rc%{webyast_service}
 %doc COPYING
 
-### exclude css, icons and images 
-%exclude %{webyast_dir}/app/assets/stylesheets
-%exclude %{webyast_dir}/app/assets/icons
-%exclude %{webyast_dir}/app/assets/images
+### include JS assets
+%{webyast_dir}/public/assets/application.js*
 
 %exclude %{webyast_dir}/test
 
@@ -451,9 +463,9 @@ dbus-send --print-reply --system --dest=org.freedesktop.DBus / org.freedesktop.D
 %files branding-default
 %defattr(-,root,root)
 ### include css, icons and images 
-%{webyast_dir}/app/assets/stylesheets
-%{webyast_dir}/app/assets/icons
-%{webyast_dir}/app/assets/images
+%{webyast_dir}/public/assets
+# JS files belong to the base
+%exclude %{webyast_dir}/public/assets/application.js*
 
 #---------------------------------------------------------------
 %changelog
