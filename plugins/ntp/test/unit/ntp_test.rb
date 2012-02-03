@@ -46,7 +46,7 @@ class NtpTest < ActiveSupport::TestCase
     @model.actions[:synchronize] = true
     @model.actions[:synchronize_utc] = true
     YastService.stubs(:Call).with("YaPI::NTP::Synchronize",true,"").once.returns("No server defined")
-    assert_raise(NtpError.new "No server defined") do
+    assert_raise(NtpError) do
       @model.save
     end
   end
@@ -54,6 +54,7 @@ class NtpTest < ActiveSupport::TestCase
   def test_synchronize_timeout
     @model.actions[:synchronize] = true
     @model.actions[:synchronize_utc] = true
+
     msg_mock = mock()
     msg_mock.stubs(:error_name).returns("org.freedesktop.DBus.Error.NoReply")
     msg_mock.stubs(:params).returns(["test","test"])

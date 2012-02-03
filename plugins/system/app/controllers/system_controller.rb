@@ -33,7 +33,6 @@ class SystemController < ApplicationController
     end
    
     def update
-	
       @system = System.instance
 
       do_reboot = false
