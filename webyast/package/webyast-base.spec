@@ -68,6 +68,7 @@ Source10:       webyast
 Source11:       webyast.lr.conf
 Source12:       nginx.conf
 Source13:	control_panel.yml
+Source14:	bundle.config
 
 BuildRoot:      %{_tmppath}/%{name}-%{version}-build
 BuildRequires:  ruby, pkg-config, rubygem-mocha
@@ -109,7 +110,6 @@ Requires:	rubygem-ruby-debug, rubygem-factory_girl, rubygem-factory_girl_rails, 
 
 Requires:	rubygem-devise, rubygem-devise_unix2_chkpwd_authenticatable, rubygem-devise-i18n
 Requires:	rubygem-cancan, rubygem-delayed_job, rubygem-static_record_cache
-Requires:	rubygem-uglifier, rubygem-johnson
 
 # FIXME: this pulls in Rails 3.0 packages
 Requires:	rubygem-jquery-rails
@@ -272,6 +272,11 @@ install -m 0644 %SOURCE2 $RPM_BUILD_ROOT/etc/dbus-1/system.d/
 mkdir -p $RPM_BUILD_ROOT/usr/share/dbus-1/system-services/
 install -m 0444 %SOURCE3 $RPM_BUILD_ROOT/usr/share/dbus-1/system-services/
 
+# install bundler config
+mkdir -p $RPM_BUILD_ROOT%{webyast_dir}/.bundle
+install -m 0644 %SOURCE14 $RPM_BUILD_ROOT%{webyast_dir}/.bundle
+
+
 #create dummy update-script
 mkdir -p %buildroot/var/adm/update-scripts
 touch %buildroot/var/adm/update-scripts/%name-%version-%release-1
@@ -406,6 +411,7 @@ dbus-send --print-reply --system --dest=org.freedesktop.DBus / org.freedesktop.D
 %{webyast_dir}/config.ru
 %{webyast_dir}/script
 %{webyast_dir}/vendor
+%{webyast_dir}/.bundle
 %dir %{webyast_dir}/config
 %{webyast_dir}/config/boot.rb
 %{webyast_dir}/config/database.yml
