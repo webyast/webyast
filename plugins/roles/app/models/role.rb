@@ -34,7 +34,7 @@ class Role < BaseModel::Base
 attr_accessor :users
 attr_accessor :permissions
 attr_accessor :name
-attr_writer   :new_record
+attr_accessor :new_record
 #specify serialized attributes to prevent new_record serialization
 attr_serialized :users, :permissions, :name
 

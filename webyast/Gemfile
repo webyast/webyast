@@ -60,6 +60,6 @@ group :test do
 #  gem 'rspec-rails', '>=2'
   #gem "shoulda", ">= 3.0.0.beta"
 #  gem "database_cleaner"
-  gem "mocha"
+  gem "mocha",  :require => false
   gem "assert_valid_markup"
 end
