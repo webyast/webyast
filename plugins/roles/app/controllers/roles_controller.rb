@@ -125,6 +125,7 @@ public
         format.html { flash[:warning] = _("Role name is invalid. Allowed is combination of a-z, A-Z, numbers, space, dash and underscore only.")
                       redirect_to "/roles/" }
       end
+      return
     end
     role = Role.find(params[:role_name])
     unless role.nil? #role already exists
@@ -134,6 +135,7 @@ public
         format.html { flash[:warning] = _("Role name is already used.")
                       redirect_to "/roles/" }
       end
+      return
     end
 
     role = Role.new(params[:role_name])
@@ -168,7 +170,7 @@ public
   # Shows all roles
   def index
     @roles = Role.find
-    
+
     respond_to do |format|
       format.xml  { render :xml => @roles.to_xml( :dasherize => false ) }
       format.json { render :json => @roles.to_json( :dasherize => false ) }

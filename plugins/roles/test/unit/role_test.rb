@@ -54,8 +54,8 @@ class RoleTest < ActiveSupport::TestCase
 
 TEST_DATA = { :name => "create_test", :permissions => ["org.opensuse.test.lest"],
 							:users => ["tux"] }
-	def test_create_role
-		r = Role.new.load(TEST_DATA)
+  def test_create_role
+    r = Role.new.load(TEST_DATA)
     assert r.new_record?
     r.save
     roles = Role.find
@@ -64,10 +64,10 @@ TEST_DATA = { :name => "create_test", :permissions => ["org.opensuse.test.lest"]
     assert test_role
     assert_equal TEST_DATA[:users],test_role.users
     assert_equal TEST_DATA[:permissions],test_role.permissions
-	end
+  end
 
-	def test_update_role
-		r = Role.find(:test)
+  def test_update_role
+    r = Role.find(:test)
     assert !r.new_record?
 		r.users = TEST_DATA[:users]
 		r.permissions = TEST_DATA[:permissions]
@@ -78,16 +78,16 @@ TEST_DATA = { :name => "create_test", :permissions => ["org.opensuse.test.lest"]
     assert test_role
     assert_equal TEST_DATA[:users],test_role.users
     assert_equal TEST_DATA[:permissions],test_role.permissions
-	end
+  end
 
-	def test_delete_role
-		Role.delete(:test)
+  def test_delete_role
+    Role.delete(:test)
     roles = Role.find
     assert_equal 2,roles.size
-	end
+  end
 
   def test_changed
-		r = Role.find(:test)
+    r = Role.find(:test)
     assert !r.changed_users?
     assert !r.changed_permissions?
     r.users << "nonexist"

@@ -79,6 +79,7 @@ module BaseModel
 
     def load(attr={})
       assign_attributes(attr)
+      self
     end
 
     # for mass assignment

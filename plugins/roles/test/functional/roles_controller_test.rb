@@ -20,26 +20,25 @@
 #++
 
 require File.expand_path(File.dirname(__FILE__) + "/../test_helper")
+require File.join(RailsParent.parent, "test","devise_helper")
 
 class RolesControllerTest < ActionController::TestCase
-  fixtures :accounts
+
 
   def setup
+    devise_sign_in
     #set fixtures, renew test files
-		@test_path = File.join( Dir.tmpdir(), "webyast-roles-testsuite-tmpdir")
+    @test_path = File.join( Dir.tmpdir(), "webyast-roles-testsuite-tmpdir")
     `mkdir -p #{@test_path}`
-		`cp #{File.join(File.dirname(__FILE__),'..','fixtures')}/* #{@test_path}`
+    `cp #{File.join(File.dirname(__FILE__),'..','fixtures')}/* #{@test_path}`
     Role.const_set(:ROLES_DEF_PATH, File.join( @test_path, "roles.yml"))
     Role.const_set(:ROLES_ASSIGN_PATH, File.join( @test_path, "roles_assign.yml"))
     @model_class = Role
-    @request = ActionController::TestRequest.new
-    # http://railsforum.com/viewtopic.php?id=1719
-    @request.session[:account_id] = 1 # defined in fixtures
-#data for test update
+    #data for test update
     @data = {"roles" => { "name" => "test", "roles"=> [], "permissions" => []}}
-#stub DBus
-		@dbus_obj = FakeDbus.new
-		Permission.stubs(:dbus_obj).returns(@dbus_obj)
+    #stub DBus
+    @dbus_obj = FakeDbus.new
+    Permission.stubs(:dbus_obj).returns(@dbus_obj)
   end
 
   def teardown
@@ -62,7 +61,7 @@ class RolesControllerTest < ActionController::TestCase
     #ensure that nothing is saved
     @model_class.expects(:save).never
 
-    @controller.stubs(:permission_check).raises(NoPermissionException.new("action", "test"));
+    @controller.stubs(:authorize!).raises(CanCan::AccessDenied.new());
     @data[:format] = 'xml'
     put :update, @data
 
@@ -70,7 +69,8 @@ class RolesControllerTest < ActionController::TestCase
   end
 
   def test_index
-    get :index
+    @request.accept = Mime::XML
+    get :index, :format => 'xml'
     assert_response :success
     h=Hash.from_xml @response.body
     assert_equal 3, h['roles'].size
@@ -89,24 +89,28 @@ class RolesControllerTest < ActionController::TestCase
   end
 
   def test_destroy
-    post :destroy, :id => "test"
+    @request.accept = Mime::XML
+    post :destroy, :id => "test", :format => 'xml'
     assert_response :success
     h=Hash.from_xml @response.body
     assert_equal 2, h['roles'].size
   end
 
   def test_create
-    post :create, :role_name => "role02._-  test"
+    @request.accept = Mime::XML
+    post :create, :role_name => "role02._-  test", :format => 'xml'
     assert_response :success
   end
 
   def test_create_bad_name
-    post :create, :role_name => "role02._-<dangerscript/>  test"
+    @request.accept = Mime::XML
+    post :create, :role_name => "role02._-<dangerscript/>  test", :format => 'xml'
     assert_response 422
   end
 
   def test_update
-    post :update, @data.merge(:id => "test")
+    @request.accept = Mime::XML
+    post :update, @data.merge(:id => "test"), :format => 'xml'
     assert_response :success
   end
 end
