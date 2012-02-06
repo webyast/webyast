@@ -24,6 +24,11 @@ class RepositoriesController < ApplicationController
   before_filter :check_read_permissions, :only => [:index, :show]
 
 private
+
+  def isint(str)
+    return !!(str =~ /^[-+]?[1-9]([0-9]*)?$/)
+  end
+
   
   def check_read_permissions
     authorize! :read, Repository
@@ -81,7 +86,6 @@ private
   def update
     authorize! :write, Repository
     param = params[:repository] || {}
-
     #id is either in params or in the struct (create method)
     @repo = Repository.new(params[:id] || param[:id] , param[:name], param[:enabled])
 
@@ -92,6 +96,7 @@ private
     param[:autorefresh] = param[:autorefresh].to_s == 'true'
     param[:enabled] = param[:enabled].to_s == 'true'
     param[:keep_packages] = param[:keep_packages].to_s == 'true'
+    param[:priority] = param[:priority].to_i if isint(param[:priority])
 
     @repo.load param
     begin
