@@ -86,7 +86,7 @@ BuildRequires:  rubygem-rails-3_1
 BuildRequires:  rubygem-polkit1
 # the testsuite is run during build
 BuildRequires:  rubygem-test-unit rubygem-mocha
-BuildRequires:  tidy, rubygem-haml, rubygem-nokogiri
+BuildRequires:  tidy, rubygem-haml, rubygem-nokogiri, rubygem-builder-3_0
 BuildRequires:  nginx >= 1.0, rubygem-passenger-nginx
 BuildRequires:	rubygem-bundler, rubygem-assert_valid_markup
 BuildRequires:	rubygem-devise, rubygem-devise_unix2_chkpwd_authenticatable, rubygem-devise-i18n
@@ -99,7 +99,7 @@ BuildRequires:  rubygem-ruby-debug, rubygem-factory_girl, rubygem-factory_girl_r
 # FIXME: this pulls in Rails 3.0 packages
 BuildRequires:	rubygem-jquery-rails
 
-Requires:	rubygem-haml, rubygem-sqlite3-ruby
+Requires:	rubygem-haml, rubygem-sqlite3-ruby, rubygem-builder-3_0
 Requires:       rubygem-fast_gettext, rubygem-gettext_i18n_rails, rubygem-rails-i18n
 
 #FIXME should be only BuildRequires
@@ -184,10 +184,9 @@ rm Gemfile.lock
 
 %check
 # run the testsuite
-# FIXME: temporarily disabled:
-#RAILS_ENV=test rake db:migrate
-#mkdir -p tmp/cache
-#RAILS_ENV=test $RPM_BUILD_ROOT%{webyast_dir}/test/dbus-launch-simple rake test
+RAILS_ENV=test rake db:migrate
+rake tmp:create
+RAILS_ENV=test $RPM_BUILD_ROOT%{webyast_dir}/test/dbus-launch-simple rake test
 
 
 #---------------------------------------------------------------

@@ -31,6 +31,8 @@ group :assets do
   gem 'johnson'
 end
 
+gem "builder"
+
 plugin_path = File.expand_path("../../plugins",  __FILE__)
 gemspecs = Dir.glob(File.join(plugin_path, "**", "*.gemspec"))
 
