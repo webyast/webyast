@@ -1,28 +1,28 @@
 #--
 # Copyright (c) 2009-2010 Novell, Inc.
-# 
+#
 # All Rights Reserved.
-# 
+#
 # This program is free software; you can redistribute it and/or modify it
 # under the terms of version 2 of the GNU General Public License
 # as published by the Free Software Foundation.
-# 
+#
 # This program is distributed in the hope that it will be useful,
 # but WITHOUT ANY WARRANTY; without even the implied warranty of
 # MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
 # GNU General Public License for more details.
-# 
+#
 # You should have received a copy of the GNU General Public License
 # along with this program; if not, contact Novell, Inc.
-# 
+#
 # To contact Novell about this file by physical or electronic mail,
 # you may find current contact information at www.novell.com
 #++
 
 require File.expand_path(File.dirname(__FILE__) + "/../test_helper")
+require File.join(RailsParent.parent, "test","devise_helper")
 
 class GroupsControllerTest < ActionController::TestCase
-  fixtures :accounts
 
   GROUP_READ_DATA = { 'more_users' => { 'games' => 1,
                                         'tux' => 1
@@ -74,6 +74,8 @@ class GroupsControllerTest < ActionController::TestCase
   OK_RESULT = ""
 
   def setup
+    devise_sign_in
+
     @model_class = Group
     group_mock = Group.new(GROUP_READ_DATA)
     Group.stubs(:find).returns(group_mock)
@@ -148,4 +150,3 @@ class GroupsControllerTest < ActionController::TestCase
     Group.stubs(:permission_check)
   end
 end
-
