@@ -204,6 +204,10 @@ rm -f $RPM_BUILD_ROOT%{webyast_dir}/COPYING
 # remove asset sources
 rm -rf $RPM_BUILD_ROOT/%{webyast_dir}/app/assets
 
+# remove .gitkeep files
+find $RPM_BUILD_ROOT%{webyast_dir} -name .gitkeep -delete
+
+
 %{__install} -d -m 0755                            \
     %{buildroot}%{pkg_home}/sockets/               \
     %{buildroot}%{pkg_home}/cache/                 \
