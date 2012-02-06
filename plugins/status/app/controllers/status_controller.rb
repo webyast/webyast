@@ -25,10 +25,6 @@ class StatusController < ApplicationController
   DEFAULT_LINES = 50
 
   private
-  def client_permissions
-#    permission_check "org.opensuse.yast.system.status.read"
-#    @write_limit_permission = permission_granted? "org.opensuse.yast.system.status.writelimits"
-  end
 
   #
   # evaluate error string if a limit for a group (CPU,Memory,Disk,...) has been reached
@@ -141,7 +137,7 @@ class StatusController < ApplicationController
     status = ""
     ret_error = nil
     refresh = true
-    unless true # FIXME: permission_granted? "org.opensuse.yast.system.status.read"
+    unless can? :read, Metric 
       status = _("Status not available (no permissions)")
       level = "warning"  #it is a warning only
     else

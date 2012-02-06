@@ -20,6 +20,7 @@
 #++
 
 require File.expand_path(File.dirname(__FILE__) + "/../test_helper")
+require File.join(RailsParent.parent, "test","devise_helper")
 require "log"
 require "graph"
 require "metric"
@@ -36,16 +37,16 @@ class StatusControllerTest < ActionController::TestCase
 
   def rights_enable(enable = true)
     if enable
-      StatusController.any_instance.stubs(:permission_check).with("org.opensuse.yast.system.status.read").returns(true)
-      StatusController.any_instance.stubs(:permission_check).with("org.opensuse.yast.system.status.writelimits").returns(true)
-      StatusController.any_instance.stubs(:permission_granted?).with("org.opensuse.yast.system.status.writelimits").returns(true)
-      StatusController.any_instance.stubs(:permission_granted?).with("org.opensuse.yast.system.status.read").returns(true)
+      StatusController.any_instance.stubs(:authorize!).with(:read, Metric).returns(true)
+      StatusController.any_instance.stubs(:authorize!).with(:writelimits, Metric).returns(true)
+      StatusController.any_instance.stubs(:can?).with(:read, Metric).returns(true)
+      StatusController.any_instance.stubs(:can?).with(:writelimits, Metric).returns(true)
     else
-      @excpt =  NoPermissionException.new("org.opensuse.yast.system.status.read", "testuser")
-      StatusController.any_instance.stubs(:permission_check).with("org.opensuse.yast.system.status.read").raises(@excpt)
-      StatusController.any_instance.stubs(:permission_check).with("org.opensuse.yast.system.status.writelimits").raises(@excpt)
-      StatusController.any_instance.stubs(:permission_granted?).with("org.opensuse.yast.system.status.writelimits").returns(false)
-      StatusController.any_instance.stubs(:permission_granted?).with("org.opensuse.yast.system.status.read").returns(false)
+      @excpt = CanCan::AccessDenied.new()
+      StatusController.any_instance.stubs(:authorize!).with(:read, Metric).raises(@excpt)
+      StatusController.any_instance.stubs(:authorize!).with(:writelimits, Metric).raises(@excpt)
+      StatusController.any_instance.stubs(:can?).with(:read, Metric).returns(false)
+      StatusController.any_instance.stubs(:can?).with(:writelimits, Metric).returns(false)
     end
   end
    
@@ -68,12 +69,8 @@ class StatusControllerTest < ActionController::TestCase
   end
 
   def setup
-    StatusController.any_instance.stubs(:login_required)
+    devise_sign_in
 
-    @controller = StatusController.new
-    @request = ActionController::TestRequest.new
-    # http://railsforum.com/viewtopic.php?id=1719
-    @request.session[:account_id] = 1 # defined in fixtures
     @response_logs = fixture "logs.yaml"
     @response_logs_system = fixture "logs_system.yaml"
     @response_graphs = fixture "graphs.yaml"

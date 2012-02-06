@@ -19,7 +19,7 @@
 # you may find current contact information at www.novell.com
 -->
 
-<% write_disabled = !@write_limit_permission %>
+<% write_disabled = !can?( :writelimits, Metric) %>
 
 <% content_for :head do %>
 
