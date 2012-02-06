@@ -95,7 +95,6 @@ BuildRequires:  rubygem-uglifier, rubygem-johnson
 BuildRequires:	rubygem-gettext, rubygem-ruby_parser
 
 BuildRequires:  rubygem-ruby-debug, rubygem-factory_girl, rubygem-factory_girl_rails, rubygem-mocha
-#BuildRequires:  rubygem-rspec, rubygem-rspec-rails, rubygem-database_cleaner
 
 # FIXME: this pulls in Rails 3.0 packages
 BuildRequires:	rubygem-jquery-rails
@@ -105,7 +104,6 @@ Requires:       rubygem-fast_gettext, rubygem-gettext_i18n_rails, rubygem-rails-
 
 #FIXME should be only BuildRequires
 Requires:	rubygem-gettext
-Requires:	rubygem-ruby-debug, rubygem-factory_girl, rubygem-factory_girl_rails, rubygem-mocha
 #Requires:	rubygem-rspec, rubygem-rspec-rails, rubygem-database_cleaner
 
 Requires:	rubygem-devise, rubygem-devise_unix2_chkpwd_authenticatable, rubygem-devise-i18n
@@ -142,6 +140,7 @@ Summary:  Testsuite for webyast-base package
 %define pkg_home /var/lib/%{webyast_user}
 #
 
+Requires:	rubygem-ruby-debug, rubygem-factory_girl, rubygem-factory_girl_rails, rubygem-mocha
 
 %description
 WebYaST - Core components for UI and REST based interface to system manipulation.
