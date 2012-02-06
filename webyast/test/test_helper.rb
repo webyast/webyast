@@ -29,8 +29,6 @@ STDERR.puts "********* Running in test mode" if Rails.env.test?
 
 class ActionController::TestCase
   include Devise::TestHelpers
-  self.use_transactional_fixtures = true
-  self.use_instantiated_fixtures  = false
 end
 
 class ActiveSupport::TestCase

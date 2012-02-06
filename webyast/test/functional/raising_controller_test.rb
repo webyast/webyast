@@ -1,18 +1,18 @@
 #--
 # Webyast framework
 #
-# Copyright (C) 2009, 2010 Novell, Inc. 
+# Copyright (C) 2009, 2010 Novell, Inc.
 #   This library is free software; you can redistribute it and/or modify
 # it only under the terms of version 2.1 of the GNU Lesser General Public
-# License as published by the Free Software Foundation. 
+# License as published by the Free Software Foundation.
 #
 #   This library is distributed in the hope that it will be useful, but WITHOUT
 # ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
-# FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public License for more 
-# details. 
+# FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public License for more
+# details.
 #
 #   You should have received a copy of the GNU Lesser General Public
-# License along with this library; if not, write to the Free Software 
+# License along with this library; if not, write to the Free Software
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA
 #++
 
@@ -21,6 +21,7 @@
 #
 
 require File.expand_path(File.dirname(__FILE__) + "/../test_helper")
+require File.dirname(__FILE__) + '/../devise_helper'
 
 require 'exceptions'
 
@@ -28,9 +29,9 @@ class RaisingControllerTest < ActionController::TestCase
 
   class RaisingController < ApplicationController
     def noPermission
-      raise NoPermissionException.new("test.permission", "test_user")
+      raise CanCan::AccessDenied.new()
     end
-    
+
     def raiseNotFound
       raise YaST::ConfigFile::NotFoundError.new("/dev/null") #frozen hell
     end
@@ -54,17 +55,14 @@ class RaisingControllerTest < ActionController::TestCase
   end
 
   def setup
+    devise_sign_in(ControlpanelController) # authenticate user/account
     @controller = RaisingController.new
-    @routes = ActionController::Routing::Routes.routes.dup
-    # add a catch-all route for the tests only.
-    ActionController::Routing::Routes.draw { 
-      |map| map.connect ':controller/:action'
-    }
-  end
+    @routes = Rails.application.routes.dup
 
-  def teardown
-    #restore original routes to not affect other tests
-    ActionController::Routing::Routes.routes = @routes
+    Rails.application.routes.draw do
+      match ':controller/:action'
+      match '/sessions/new(.:format)' => 'sessions#new'
+    end
   end
 
   def test_catch_not_found
@@ -94,8 +92,8 @@ class RaisingControllerTest < ActionController::TestCase
 
   # NoPermissionException should return 403 - Forbidden
   def test_no_permission
-    get :noPermission, :format => 'xml'
-    assert_response 403
+    get :noPermission
+    assert_response 302 # Forbidden
   end
 
 end
