@@ -176,5 +176,4 @@ private
     cookies[:webyast_locale] = I18n.locale if cookies[:webyast_locale] != I18n.locale.to_s
   end
 
-
 end
