@@ -170,8 +170,8 @@ This package contains css, icons and images for webyast-base package.
 %setup -q -n www
 
 %build
-# FIXME: temporarily disabled:
-#env LANG=en rake gettext:pack -t
+# build *.mo files (redirect sterr to /dev/null as it contains tons of warnings about obsoleted (commented) msgids)
+LANG=en rake gettext:pack 2> /dev/null
 
 # precompile assests (merge JS files, pack CSS and JS to *.gz)
 rake assets:precompile
@@ -206,6 +206,9 @@ rm -rf $RPM_BUILD_ROOT/%{webyast_dir}/app/assets
 
 # remove .gitkeep files
 find $RPM_BUILD_ROOT%{webyast_dir} -name .gitkeep -delete
+
+# remove *.po files (compiled *.mo files are sufficient)
+find $RPM_BUILD_ROOT%{webyast_dir}/locale -name '*.po' -delete
 
 
 %{__install} -d -m 0755                            \

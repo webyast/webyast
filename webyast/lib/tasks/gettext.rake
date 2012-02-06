@@ -36,6 +36,16 @@ namespace :gettext do
 
     FileUtils.cp(template, potfile) unless File.exists?(potfile)
   end
+
+  # monkeypatch for broken Gem.all_load_paths
+  # see https://github.com/rubygems/rubygems/issues/171
+  task :rubygems_fix do
+    module Gem
+      def self.all_load_paths
+        []
+      end
+    end
+  end
 end
 
 # extend the HAML parser before collecting the translatable texts
@@ -43,4 +53,7 @@ task :'gettext:find' => :'gettext:haml_parser'
 
 # force message sorting even at the firt run (see the comments above)
 task :'gettext:find' => :'gettext:create_pot_template'
+
+# fix Gem.all_load_paths bug
+task :'gettext:pack' => :'gettext:rubygems_fix'
 
