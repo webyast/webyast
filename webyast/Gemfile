@@ -12,7 +12,10 @@ gem 'polkit1'
 gem "sqlite3-ruby", :require => "sqlite3"
 
 gem 'haml'
-gem 'jquery-rails'
+
+# use 1.0.x version, the latest 2.0 needs rails 3.2
+# FIXME: remove when Rails 3.2 packages correctly build
+gem "jquery-rails", "~> 1.0.13"
 gem "ruby-dbus"
 gem 'delayed_job', '2.1.4'
 gem 'static_record_cache'
