@@ -57,7 +57,7 @@ class PermissionTest < ActiveSupport::TestCase
   def test_get_cache_timestamp
     timestamp = Permission.get_cache_timestamp
     assert_not_nil timestamp
-    assert_kind_of(Fixnum, timestamp)
+    assert_kind_of(Integer, timestamp)
   end
 
   def test_cache_valid
