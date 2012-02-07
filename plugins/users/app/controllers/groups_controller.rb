@@ -1,20 +1,20 @@
 #--
 # Copyright (c) 2009-2010 Novell, Inc.
-# 
+#
 # All Rights Reserved.
-# 
+#
 # This program is free software; you can redistribute it and/or modify it
 # under the terms of version 2 of the GNU General Public License
 # as published by the Free Software Foundation.
-# 
+#
 # This program is distributed in the hope that it will be useful,
 # but WITHOUT ANY WARRANTY; without even the implied warranty of
 # MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
 # GNU General Public License for more details.
-# 
+#
 # You should have received a copy of the GNU General Public License
 # along with this program; if not, contact Novell, Inc.
-# 
+#
 # To contact Novell about this file by physical or electronic mail,
 # you may find current contact information at www.novell.com
 #++
@@ -22,7 +22,7 @@
 include ApplicationHelper
 
 class GroupsController < ApplicationController
-  
+
 private
 
   def validate_group_id( id = params[:id] )
@@ -116,7 +116,7 @@ private
     Rails.logger.error "Group #{gid} was not found."
     ErrorResult.error(404, 2, "group #{gid} not found")
   end
-  
+
 public
 
   # GET /groups/users
@@ -141,12 +141,12 @@ public
     @groups = Group.find_all
     Rails.logger.error "No groups found." unless @groups
     respond_to do |format|
-      format.xml { 
+      format.xml {
         if @groups.nil?
           render ErrorResult.error(404, 2, "No groups found")
         else
-          render  :xml => @groups.to_xml(:root => "groups", 
-                  :dasherize => false ) 
+          render  :xml => @groups.to_xml(:root => "groups",
+                  :dasherize => false )
         end
         return
       }
@@ -154,19 +154,19 @@ public
         if @groups.nil?
           render ErrorResult.error(404, 2, "No groups found")
         else
-          render :json => @groups.to_json 
+          render :json => @groups.to_json
         end
         return
       }
-      format.html { 
+      format.html {
         @groups.sort! { |a,b| a.cn <=> b.cn } if @groups
         @all_users_string = ""
         @all_sys_users_string = ""
         @users = []
         @sys_users = []
         @users     = User.find_all({ :attributes => "uid"})
-        @sys_users = User.find_all({ "attributes"=>"cn,uidNumber,uid", 
-                                     "type"=>"system", 
+        @sys_users = User.find_all({ "attributes"=>"cn,uidNumber,uid",
+                                     "type"=>"system",
                                      "index"=>["s", "uid"]} )
         @users.each do |user|
           if @all_users_string.blank?
@@ -231,7 +231,7 @@ public
                       render :edit
                     else
                       flash[:message] = (_("Group <i>%s</i> has been updated.") % @group.cn ).html_safe
-                      redirect_to :action => :index 
+                      redirect_to :action => :index
                     end
                   }
       format.xml  { unless result.blank?
@@ -268,7 +268,7 @@ public
                       redirect_to :action => :new
                     else
                       flash[:message] = (_("Group <i>%s</i> has been added.") % @group.cn ).html_safe
-                      redirect_to :action => :index 
+                      redirect_to :action => :index
                     end
                   }
       format.xml  { unless result.blank?
@@ -294,7 +294,7 @@ public
     @group = Group.find(params[:id])
 
     if @group.nil?
-      result = "group #{params[:id]} not found" 
+      result = "group #{params[:id]} not found"
     else
       result = @group.destroy
     end
@@ -306,7 +306,7 @@ public
                     else
                       flash[:message] = (_("Group <i>%s</i> has been deleted.") % @group.cn ).html_safe
                     end
-                    redirect_to :action => :index 
+                    redirect_to :action => :index
                   }
       format.xml  { unless result.blank?
                       render ErrorResult.error(404, 2, "Group destroy error:'"+result+"'")

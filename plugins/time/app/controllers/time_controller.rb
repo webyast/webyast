@@ -1,20 +1,20 @@
 #--
 # Copyright (c) 2009-2010 Novell, Inc.
-# 
+#
 # All Rights Reserved.
-# 
+#
 # This program is free software; you can redistribute it and/or modify it
 # under the terms of version 2 of the GNU General Public License
 # as published by the Free Software Foundation.
-# 
+#
 # This program is distributed in the hope that it will be useful,
 # but WITHOUT ANY WARRANTY; without even the implied warranty of
 # MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
 # GNU General Public License for more details.
-# 
+#
 # You should have received a copy of the GNU General Public License
 # along with this program; if not, contact Novell, Inc.
-# 
+#
 # To contact Novell about this file by physical or electronic mail,
 # you may find current contact information at www.novell.com
 #++
@@ -43,7 +43,7 @@ private
     unless defined? @@timezones
       @@timezones = {}
     end
-    @valid = []    
+    @valid = []
     @ntp_available = class_exists?("Ntp")
     @service_available = class_exists?("Service")
   end
@@ -51,17 +51,11 @@ private
 
 public
 
-  #--------------------------------------------------------------------------------
-  #
-  # actions
-  #
-  #--------------------------------------------------------------------------------
-
   def index
     authorize! :read, Time
 
     @ntp = @ntp_available ? Ntp.find : nil
-    @stime = Systemtime.find 
+    @stime = Systemtime.find
     @stime.load_timezone params if params[:timezone] #do not reset timezone if ntp fail (bnc#600370)
   end
 
@@ -74,14 +68,15 @@ public
       authorize! :synchronize, Ntp
       authorize! :setserver, Ntp
     end
-    raise InvalidParameters.new :time => "missing region" unless params.has_key?(:region) 
+
+    raise InvalidParameters.new :time => "missing region" unless params.has_key?(:region)
     raise InvalidParameters.new :time => "missing timezone" unless params.has_key?(:timezone)
-    
 
     t = Systemtime.find
     t.load_timezone params
     t.clear_time #do not set time by default
     error = nil
+
     case params[:timeconfig]
     when "manual"
       if @service_available
@@ -97,10 +92,10 @@ public
       ntp.actions[:synchronize] = true
       ntp.actions[:synchronize_utc] = t.utcstatus
       ntp.actions[:ntp_server] = params[:ntp_server] unless params[:ntp_server].blank?
-      begin 
+      begin
         ntp.update
       rescue Exception => error
-        logger.error "ntp.update returns ERROR: #{error.inspect}" 
+        logger.error "ntp.update returns ERROR: #{error.inspect}"
       end
       if @service_available
         service = Service.new("ntp")
@@ -108,7 +103,7 @@ public
       else
         logger.error "Service module is not installed -> cannot start ntp"
       end
-    when "none" 
+    when "none"
     else
       logger.error "Unknown value for timeconfig #{params[:timeconfig]}"
     end
@@ -167,12 +162,9 @@ public
 
     timezones = systemtime.timezones # RORSCAN_ITL
 
-    region = timezones.find { |r| r["name"] == params[:value] } 
-    return false unless region 
-    render(:partial => 'timezones',
-      :locals => {:region => region, :default => region["central"],
-        :disabled => ! params[:disabled]=="true"})
+    region = timezones.find { |r| r["name"] == params[:value] }
+    return false unless region
+    render(:partial => 'timezones', :locals => {:region => region, :default => region["central"], :disabled => ! params[:disabled]=="true"})
   end
 
 end
-

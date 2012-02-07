@@ -1,20 +1,20 @@
 <!-- RORSCAN_ICF
 # Copyright (c) 2009-2010 Novell, Inc.
-# 
+#
 # All Rights Reserved.
-# 
+#
 # This program is free software; you can redistribute it and/or modify it
 # under the terms of version 2 of the GNU General Public License
 # as published by the Free Software Foundation.
-# 
+#
 # This program is distributed in the hope that it will be useful,
 # but WITHOUT ANY WARRANTY; without even the implied warranty of
 # MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
 # GNU General Public License for more details.
-# 
+#
 # You should have received a copy of the GNU General Public License
 # along with this program; if not, contact Novell, Inc.
-# 
+#
 # To contact Novell about this file by physical or electronic mail,
 # you may find current contact information at www.novell.com
 -->
@@ -28,15 +28,12 @@
   <%= javascript_include_tag "users.js" %>
 
 <% if ! can? :usersget, User %>
-<script language="javascript">
+<script>
   function members_validation(which){ return true; }
 </script>
 <% end %>
 
  <style>
-    .pad1_2em {
-/* 	padding: 1em 2em; */
-    }
     tr {
 	border: solid 1px #ddd;
     }
@@ -61,26 +58,26 @@
       selected_title : <%= jss _('Selected Members') %>,
       unselected_title : <%= jss _('Available Members') %>,
       tooltip : <%= jss _('Click user names to select/unselect members') %>,
-      loadItems : function (dialogId) { 
+      loadItems : function (dialogId) {
         var members = $('#form_'+dialogId+' .members-string')[0].value.split(",");
       	this.system_users = arrays_complement($('#form_'+dialogId+' .members-string')[0].value.split(","), $("#all_users_string")[0].value.split(","));
         return members;
       },
-      storeItems : function (dialogId, items) { 
+      storeItems : function (dialogId, items) {
         //$('#form_'+dialogId+' .members-string')[0].value = $group_members.value.join(",");
         //bnc#700904
         $group_members = $('#form_'+dialogId+' .members-string')[0]
         $group_members.value.length > 0 ? $group_members.value = this.system_users.concat(items).join(",") : $group_members.value = items
       },
-      allItems : function (dialogId) { 
-        return $('#all_users_string')[0].value.split(",") 
+      allItems : function (dialogId) {
+        return $('#all_users_string')[0].value.split(",")
       }
     });
     return open_dialog;
   };
 
   $(document).ready(function(){
-  
+
     select_users_open = select_users_dialog();
 
   $('input#groups_search').quicksearch('div.list-fieldset', {
@@ -162,16 +159,16 @@
               <% end %>
               <%= f.hidden_field :group_type %><label id="users-error" class="error"></label>
             </p>
-    
+
             <div class="nav-buttons">
               <div class="hr">&nbsp;</div>
               <div id="progress_<%= group.cn -%>" style="display: none; margin-bottom: 10px"><%= image_tag("working.gif", :class => "small-working-icon") %><span style="vertical-align: 50%; margin-left: 5px">...Wait...</span></div>
                 <% message = _('Please wait')%>
-                <%= submit_tag _("Save"), 
+                <%= submit_tag _("Save"),
                     :onclick=>"return $('#form_" + group.old_cn + "').validate({
                       submitHandler: function(form) {
-                        var message = '#{message}'; 
-                        disableFormOnSubmit(message); 
+                        var message = '#{message}';
+                        disableFormOnSubmit(message);
                         form.submit();
                       }
                 });" %>
@@ -201,4 +198,3 @@
     </div>
   </div>
 </div>
-

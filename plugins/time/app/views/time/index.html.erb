@@ -187,7 +187,7 @@
         <div class="row">
           <label><%=_("Hardware clock is set to UTC")%></label>
           <%# don't use check_box helper as it generate also hidden opposite value %>
-          <input type="checkbox" name="utc" id="utc" value="true" <%=  "checked=\"checked\"" if @stime.utcstatus %> <%=  "disabled=\"disabled\"" if disabled %> />
+          <input type="checkbox" name="utc" id="utc" value="true" <%=  "checked='checked'" if @stime.utcstatus %> <%=  "disabled='disabled'" if disabled %> />
         </div>
         <% end %>
       </div>
@@ -204,8 +204,8 @@
           <fieldset class="time_filedset" >
             <legend>
               <input type="radio" name="timeconfig" value="manual" onclick="enable();" id="timeconfig_manual"
-              <%= "disabled=\"disabled\"" if disabled%>
-              <%= "checked=\"checked\"" unless @ntp_available %>/>
+              <%= "disabled='disabled'" if disabled%>
+              <%= "checked='checked'" unless @ntp_available %>/>
               <%=_("Manually configure time")%>
             </legend>
 
@@ -224,7 +224,7 @@
             <legend>
               <input id="ntp_sync" type="radio" name="timeconfig" value="ntp_sync" onclick="disable();"
               <%=  "disabled=\"disabled\"" if disabled || !@ntp_available %>
-              <%=  "checked=\"checked\"" if @ntp_available %> />
+              <%=  "checked='checked'" if @ntp_available %> />
               <%=_("Synchronize via Network Time Protocol (NTP)")%>
             </legend>
 
@@ -252,4 +252,3 @@
     </div>
   <% end %>
 </div>
-

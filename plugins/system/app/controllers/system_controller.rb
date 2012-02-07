@@ -37,6 +37,9 @@ class SystemController < ApplicationController
 
       do_reboot = false
       do_shutdown = false
+      if params[:id].blank? 
+        render ErrorResult.error(404, 2, "internal error - unknown action requested") and return
+      end
 
       case params[:id].to_sym
 	when :reboot
@@ -73,14 +76,13 @@ class SystemController < ApplicationController
           if !@sys.nil? and @sys.reboot
             flash[:message] = _("Rebooting the machine...")
             # logout from the service, reboot is in progress
-            redirect_to(logout_path) and return
+            	redirect_to :controller => :accounts, :action => :sign_out and return
           else
             flash[:error] = _("Cannot reboot the machine!")
           end
 	else
 	    flash[:error] = 'Reboot request is accepted only via PUT method!'
 	end
-
 	redirect_to :controller => :controlpanel, :action => :index
     end
 
@@ -91,7 +93,7 @@ class SystemController < ApplicationController
         if !@sys.nil? and @sys.shutdown
           flash[:message] = _("Shuting down the machine...")
           # logout from the service, shut down is in progress
-          redirect_to(logout_path) and return
+          redirect_to :controller => :accounts, :action => :sign_out and return
         else
           flash[:error] = _("Cannot shutdown the machine!")
         end
