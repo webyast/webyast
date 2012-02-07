@@ -60,7 +60,6 @@ public
       s.required_for_stop.reject! { |rs| killer_services.include? rs }
       @services.push s unless killer_services.include? s.name
     end
-    
     respond_to do |format|
       format.html
       format.xml  { render :xml => @services.to_xml }

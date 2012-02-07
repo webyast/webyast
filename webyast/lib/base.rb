@@ -207,10 +207,5 @@ module BaseModel
         end
       end
     end
-
-    def as_json(options=nil)
-      self.to_a
-    end
-
   end
 end

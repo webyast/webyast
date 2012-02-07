@@ -176,17 +176,15 @@ class SystemtimeTest < ActiveSupport::TestCase
     response["timezones"].sort { |a,b| a["name"] <=> b["name"] })
   end
 
-# ActiveSupport bug https://rails.lighthouseapp.com/projects/8994/tickets/6077-activesupportjsonencode-fails-for-struct-types#ticket-6077-1
-# NoMethodError: undefined method `encode_json' for #<Systemtime:0x7fedc44206a8>
 
-#  def test_json
-#    data = READ_RESPONSE
-#    @model.timezone = data["timezone"]
-#    @model.utcstatus = data["utcstatus"]
-#    @model.date = "02/07/2009"
-#    @model.time = "12:18:00"
-#    @model.timezones = TEST_TIMEZONES
-#    assert_not_nil(@model.to_json)
-#  end
+  def test_json
+    data = READ_RESPONSE
+    @model.timezone = data["timezone"]
+    @model.utcstatus = data["utcstatus"]
+    @model.date = "02/07/2009"
+    @model.time = "12:18:00"
+    @model.timezones = TEST_TIMEZONES
+    assert_not_nil(@model.to_json)
+  end
 
 end

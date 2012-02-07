@@ -43,6 +43,6 @@ class ResourceTest < ActiveSupport::TestCase
     assert res
     assert_equal "/resource1", res.href
     assert res.to_xml
-#    assert res.to_json
+    assert res.to_json
   end
 end
