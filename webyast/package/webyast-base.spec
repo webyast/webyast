@@ -68,7 +68,6 @@ Source10:       webyast
 Source11:       webyast.lr.conf
 Source12:       nginx.conf
 Source13:	control_panel.yml
-Source14:	bundle.config
 
 BuildRoot:      %{_tmppath}/%{name}-%{version}-build
 BuildRequires:  ruby, pkg-config, rubygem-mocha
@@ -101,10 +100,6 @@ BuildRequires:	rubygem-jquery-rails
 
 Requires:	rubygem-haml, rubygem-sqlite3-ruby, rubygem-builder-3_0
 Requires:       rubygem-fast_gettext, rubygem-gettext_i18n_rails, rubygem-rails-i18n
-
-#FIXME should be only BuildRequires
-Requires:	rubygem-gettext
-#Requires:	rubygem-rspec, rubygem-rspec-rails, rubygem-database_cleaner
 
 Requires:	rubygem-devise, rubygem-devise_unix2_chkpwd_authenticatable, rubygem-devise-i18n
 Requires:	rubygem-cancan, rubygem-delayed_job, rubygem-static_record_cache
@@ -140,7 +135,7 @@ Summary:  Testsuite for webyast-base package
 %define pkg_home /var/lib/%{webyast_user}
 #
 
-Requires:	rubygem-ruby-debug, rubygem-factory_girl, rubygem-factory_girl_rails, rubygem-mocha
+Requires:	rubygem-factory_girl, rubygem-factory_girl_rails, rubygem-mocha
 Requires:	rubygem-assert_valid_markup
 
 %description
@@ -200,6 +195,9 @@ cp -a * $RPM_BUILD_ROOT%{webyast_dir}/
 rm -f $RPM_BUILD_ROOT%{webyast_dir}/log/*
 rm -rf $RPM_BUILD_ROOT/%{webyast_dir}/po
 rm -f $RPM_BUILD_ROOT%{webyast_dir}/COPYING
+
+# install production mode Gemfile
+rake gemfile:production > $RPM_BUILD_ROOT%{webyast_dir}/Gemfile
 
 # remove asset sources
 rm -rf $RPM_BUILD_ROOT/%{webyast_dir}/app/assets
@@ -277,11 +275,6 @@ mkdir -p $RPM_BUILD_ROOT/etc/dbus-1/system.d/
 install -m 0644 %SOURCE2 $RPM_BUILD_ROOT/etc/dbus-1/system.d/
 mkdir -p $RPM_BUILD_ROOT/usr/share/dbus-1/system-services/
 install -m 0444 %SOURCE3 $RPM_BUILD_ROOT/usr/share/dbus-1/system-services/
-
-# install bundler config
-mkdir -p $RPM_BUILD_ROOT%{webyast_dir}/.bundle
-install -m 0644 %SOURCE14 $RPM_BUILD_ROOT%{webyast_dir}/.bundle/config
-
 
 #create dummy update-script
 mkdir -p %buildroot/var/adm/update-scripts
@@ -417,7 +410,6 @@ dbus-send --print-reply --system --dest=org.freedesktop.DBus / org.freedesktop.D
 %{webyast_dir}/config.ru
 %{webyast_dir}/script
 %{webyast_dir}/vendor
-%{webyast_dir}/.bundle
 %dir %{webyast_dir}/config
 %{webyast_dir}/config/boot.rb
 %{webyast_dir}/config/database.yml
