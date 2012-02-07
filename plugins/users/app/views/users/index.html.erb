@@ -1,20 +1,20 @@
 <!--
 # Copyright (c) 2009-2010 Novell, Inc.
-# 
+#
 # All Rights Reserved.
-# 
+#
 # This program is free software; you can redistribute it and/or modify it
 # under the terms of version 2 of the GNU General Public License
 # as published by the Free Software Foundation.
-# 
+#
 # This program is distributed in the hope that it will be useful,
 # but WITHOUT ANY WARRANTY; without even the implied warranty of
 # MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
 # GNU General Public License for more details.
-# 
+#
 # You should have received a copy of the GNU General Public License
 # along with this program; if not, contact Novell, Inc.
-# 
+#
 # To contact Novell about this file by physical or electronic mail,
 # you may find current contact information at www.novell.com
 -->
@@ -26,14 +26,14 @@
  <%= javascript_include_tag "jquery.quicksearch.js"-%>
  <%= javascript_include_tag "users.js" %>
 
- 
+
  <!-- if no groups, disable validation-->
  <% if can? :groupsget, User %>
- <script language="javascript">
+ <script>
    function groups_validation(which){ return true; }
    function def_group_validation(which){ return true; }
  </script>
- <% end %>       
+ <% end %>
 
  <style type="text/css">
 
@@ -53,19 +53,19 @@
       selected_title : <%= jss _('Selected Groups') %>,
       unselected_title : <%= jss _('Available Groups') %>,
       tooltip : <%= jss _('Click group names to select/unselect groups') %>,
-      loadItems : function (dialogId) { 
+      loadItems : function (dialogId) {
         return $('#form_'+dialogId+' .grp-string')[0].value.split(",")
       },
-      storeItems : function (dialogId, items) { 
+      storeItems : function (dialogId, items) {
         $('#form_'+dialogId+' .grp-string')[0].value = items.join(",");
       },
-      allItems : function (dialogId) { 
-        return $('#all_grps_string')[0].value.split(",") 
+      allItems : function (dialogId) {
+        return $('#all_grps_string')[0].value.split(",")
       }
     });
     return open_dialog;
   };
-  
+
   function select_default_group_dialog() {
     var open_dialog = select_one_dialog({
       kind : 'group',
@@ -88,14 +88,14 @@
       selected_title : <%= jss _('Selected Roles') %>,
       unselected_title : <%= jss _('Available Roles') %>,
       tooltip : <%= jss _('Click group names to select/unselect roles') %>,
-      loadItems : function (dialogId) { 
+      loadItems : function (dialogId) {
         return $('#form_'+dialogId+' .roles-string')[0].value.split(",")
       },
-      storeItems : function (dialogId, items) { 
+      storeItems : function (dialogId, items) {
         $('#form_'+dialogId+' .roles-string')[0].value = items.join(",");
       },
-      allItems : function (dialogId) { 
-        return $('#all_roles_string')[0].value.split(",") 
+      allItems : function (dialogId) {
+        return $('#all_roles_string')[0].value.split(",")
       }
     });
     return open_dialog;
@@ -103,7 +103,7 @@
 
   $(document).ready(function(){
     var message = <%= jss _("Please wait") -%>;
-    
+
     select_groups_open = select_groups_dialog();
     select_default_group_open = select_default_group_dialog();
     select_roles_open = select_roles_dialog();
@@ -135,7 +135,7 @@
 
    $("#"+id+" .user-password").pstrength({
       'displayMinChar'      : true,
-      'minCharText'      : <%= jss _("Password Strength:") %>, 
+      'minCharText'      : <%= jss _("Password Strength:") %>,
       'verdicts'      : [
             <%= jss _("Weak") %>,
             <%= jss _("Normal") %>,
@@ -161,7 +161,7 @@
           delay: 100
   });
 
-  
+
 
 });//document.ready
 
@@ -224,7 +224,7 @@
 
   <div><input type="hidden" id="all_grps_string" value="<%= @all_grps_string %>" /></div>
   <div><input type="hidden" id="all_roles_string" value="<%= @all_roles_string %>" /></div>
-  
+
   <div class="button_container">
     <div class="nav-buttons">
         <div class="hr">&nbsp;</div>
@@ -234,4 +234,3 @@
   </div>
 
 </div>
-

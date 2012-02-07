@@ -1,20 +1,20 @@
 #--
 # Copyright (c) 2009-2010 Novell, Inc.
-# 
+#
 # All Rights Reserved.
-# 
+#
 # This program is free software; you can redistribute it and/or modify it
 # under the terms of version 2 of the GNU General Public License
 # as published by the Free Software Foundation.
-# 
+#
 # This program is distributed in the hope that it will be useful,
 # but WITHOUT ANY WARRANTY; without even the implied warranty of
 # MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
 # GNU General Public License for more details.
-# 
+#
 # You should have received a copy of the GNU General Public License
 # along with this program; if not, contact Novell, Inc.
-# 
+#
 # To contact Novell about this file by physical or electronic mail,
 # you may find current contact information at www.novell.com
 #++
@@ -84,15 +84,16 @@ class UsersController < ApplicationController
       end
       return
     end
+
     @users = User.find_all params
     Rails.logger.error "No users found." if @users.nil?
     respond_to do |format|
-      format.xml { 
+      format.xml {
         if @users.nil?
           render ErrorResult.error(404, 2, "No users found") and return
         else
-          render  :xml => @users.to_xml(:root => "users", 
-                  :dasherize => false ) 
+          render  :xml => @users.to_xml(:root => "users",
+                  :dasherize => false )
         end
         return
       }
@@ -100,11 +101,11 @@ class UsersController < ApplicationController
         if @users.nil?
           render ErrorResult.error(404, 2, "No users found") and return
         else
-          render :json => @users.to_json 
+          render :json => @users.to_json
         end
         return
       }
-      format.html { 
+      format.html {
         if @users.nil?
           flash[:error] = _("No users found.")
         else
@@ -159,6 +160,7 @@ class UsersController < ApplicationController
     end
 
     respond_to do |format|
+      format.html
       format.xml { render  :xml => @user.to_xml( :dasherize => false ) }
       format.json { render :json => @user.to_json }
     end
@@ -188,7 +190,7 @@ class UsersController < ApplicationController
      grp_list.push(group.cn)
     end
     @all_grps_string = grp_list.join(",")
-    
+
     @user.grp_string = ""
   end
 
@@ -275,13 +277,13 @@ class UsersController < ApplicationController
         @user.type = "local"
         @user.grouplist = {}
         params[:user][:grp_string].split(",").each do |groupname|
-         @user.grouplist[groupname.strip] = "1" 
-        end unless params[:user][:grp_string].blank? 
+         @user.grouplist[groupname.strip] = "1"
+        end unless params[:user][:grp_string].blank?
         @user.save(params[:user][:id])
       end
     rescue Exception => error
       logger.error(error.message)
-    end    
+    end
     if error
       respond_to do |format|
         format.xml  { render ErrorResult.error(404, 2, error.message) }
@@ -313,7 +315,7 @@ class UsersController < ApplicationController
       respond_to do |format|
         format.xml  { render ErrorResult.error(404, 2, error.message) }
         format.json { render ErrorResult.error(404, 2, e.message) }
-        format.html { flash[:error] = _("Error: Could not remove user %s.") % @user.uid 
+        format.html { flash[:error] = _("Error: Could not remove user %s.") % @user.uid
                       redirect_to :action => "index"
                     }
        end
@@ -329,4 +331,3 @@ class UsersController < ApplicationController
   end
 
 end
-

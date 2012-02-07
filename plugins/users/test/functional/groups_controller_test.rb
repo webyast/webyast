@@ -75,19 +75,15 @@ class GroupsControllerTest < ActionController::TestCase
 
   def setup
     devise_sign_in
-
+    @controller = GroupsController.new
     @model_class = Group
     group_mock = Group.new(GROUP_READ_DATA)
     Group.stubs(:find).returns(group_mock)
-
-    @controller = GroupsController.new
-    @request = ActionController::TestRequest.new
-    # http://railsforum.com/viewtopic.php?id=1719
-    @request.session[:account_id] = 1 # defined in fixtures
     @data = UPDATE_DATA
-  end
 
-#  include PluginBasicTests
+    @dbus_obj = FakeDbus.new
+    Permission.stubs(:dbus_obj).returns(@dbus_obj)
+  end
 
   def test_update
     mock_update
@@ -106,28 +102,22 @@ class GroupsControllerTest < ActionController::TestCase
     mock_delete
     post :destroy, {:id => "users"}
     assert_response :redirect
-    assert_valid_markup
     assert_redirected_to :action => :index
-    assert_valid_markup
-    assert_false flash.empty?
+    assert !flash.empty?
   end
 
   def test_rename_group
     post :update, {"group" => {"cn"=>"new_name", "old_cn" => "users"} }
     assert_response :redirect
-    assert_valid_markup
     assert_redirected_to :action => :index
-    assert_valid_markup
-    assert_false flash.empty?
+    assert !flash.empty?
   end
 
   def test_groups_index_no_permissions
-    GroupsController.any_instance.stubs(:yapi_perm_check).with("users.groupsget").raises(NoPermissionException.new("users.groupsget", "test"));
-    GroupsController.any_instance.stubs(:yapi_perm_check).with("users.groupget").raises(NoPermissionException.new("users.groupget", "test"));
+    GroupsController.any_instance.stubs(:authorize!).raises(CanCan::AccessDenied.new());
     get :index
-    assert_response :redirect
-    assert_false flash.empty?
-    assert_valid_markup
+    assert !flash.empty?
+    assert_response  302 # Redirect
   end
 
   def mock_get
@@ -141,12 +131,10 @@ class GroupsControllerTest < ActionController::TestCase
   def mock_update
     YastService.stubs(:Call).with("YaPI::USERS::GroupGet",GROUP_LOCAL_CONFIG).once.returns(GROUP_READ_DATA)
     YastService.stubs(:Call).with( "YaPI::USERS::GroupModify", GROUP_LOCAL_CONFIG, UPDATE_WRITE_DATA).once.returns(OK_RESULT)
-    Group.stubs(:permission_check)
   end
 
   def mock_create
     YastService.stubs(:Call).with("YaPI::USERS::GroupGet",GROUP_LOCAL_CONFIG).once.returns({})
     YastService.stubs(:Call).with( "YaPI::USERS::GroupAdd", CREATE_LOCAL_CONFIG, CREATE_WRITE_DATA).once.returns(OK_RESULT)
-    Group.stubs(:permission_check)
   end
 end
