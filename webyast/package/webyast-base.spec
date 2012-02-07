@@ -87,7 +87,7 @@ BuildRequires:  rubygem-polkit1
 BuildRequires:  rubygem-test-unit rubygem-mocha
 BuildRequires:  tidy, rubygem-haml, rubygem-nokogiri, rubygem-builder-3_0
 BuildRequires:  nginx >= 1.0, rubygem-passenger-nginx
-BuildRequires:	rubygem-bundler, rubygem-assert_valid_markup
+BuildRequires:	rubygem-bundler
 BuildRequires:	rubygem-devise, rubygem-devise_unix2_chkpwd_authenticatable, rubygem-devise-i18n
 BuildRequires:	rubygem-cancan, rubygem-delayed_job, rubygem-static_record_cache
 BuildRequires:  rubygem-uglifier, rubygem-johnson
@@ -136,7 +136,6 @@ Summary:  Testsuite for webyast-base package
 #
 
 Requires:	rubygem-factory_girl, rubygem-factory_girl_rails, rubygem-mocha
-Requires:	rubygem-assert_valid_markup
 
 %description
 WebYaST - Core components for UI and REST based interface to system manipulation.

@@ -61,5 +61,4 @@ group :test do
   gem "ruby-debug"
   gem "factory_girl_rails"
   gem "mocha",  :require => false
-  gem "assert_valid_markup"
 end
