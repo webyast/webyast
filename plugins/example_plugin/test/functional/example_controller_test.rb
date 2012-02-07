@@ -46,13 +46,13 @@ class ExampleControllerTest < ActionController::TestCase
   def test_index
     get :index, :format => "html"
     assert_response :success
-#    assert_valid_markup
+    assert_valid_markup
   end
 
   def test_commit
     post :update, :format => "html", "example"=>{"content"=>"test"}
     assert_response :success
-#    assert_valid_markup
+    assert_valid_markup
   end
 
 end
