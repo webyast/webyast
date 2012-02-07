@@ -40,7 +40,7 @@ class ActivedirectoryControllerTest < ActionController::TestCase
 
     get :index, :format => "html"
     assert_response :success
-#    assert_valid_markup
+    assert_valid_markup
     assert_equal mime.to_s, @response.content_type
   end
   
