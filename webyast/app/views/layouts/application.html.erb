@@ -86,23 +86,6 @@
             <span class="userbar-icon logout-icon">
               <%= link_to _("Logout"), :controller => "sessions", :action => "destroy" %>
             </span>
-
-            <form id="test" style="display:none;">
-              <div style="display:inline-block; width:100%; background-color:#c5c5c5; color:#222; text-align:center; font-weight:bold; font-size:16px;">Add new user</div>
-              <p>
-                <label style="display:inline-block; min-width:25%;">User:</label>
-                <input id="name" type="text" value="User" style="display:inline-block; width:70%; float:right"/>
-              </p>
-              <p>
-                <label style="display:inline-block; min-width:25%;">Password:</label>
-                <input id="name" type="text" value="********" style="display:inline-block; width:70%; float:right"/>
-              </p>
-              <p>
-                <input type="button" value="Submit" style="width:48%; display:inline-block; float:left;" />
-                <span style="width:2%; display:inline-block; float:left; text-align:center; color:#a0a0a0">&nbsp;</span>
-                <input type="button" value="Cancel" style="width:48%; display:inline-block; float:right;" />
-              </p>
-            </form>
           </span>
         </span>
       <% end -%>
@@ -111,7 +94,7 @@
 
     <div id="timeoutMessage">
       <%= link_to(image_tag("webyast-logo.png", :width=>"130", :height=>"42", :style=>"margin-top:4px;", :alt =>"webyast"),"/" )%>
-      <%= _("You will be logged off in")-%><span id="counter"><!-- countdown place holder --></span><%= _("seconds due to session timeout. ")-%>
+      <%= _("You will be logged off in")-%><span id="counter"><!-- countdown --></span><%= _("seconds due to session timeout. ")-%>
     </div>
 
     <div id="content">
