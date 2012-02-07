@@ -7,108 +7,108 @@ GIT
       locale
 
 PATH
-  remote: /workspace/tmp/webyast/devise_unix2_chkpwd_authenticatable
+  remote: /home/src/rails/webyast3/devise_unix2_chkpwd_authenticatable
   specs:
     devise_unix2_chkpwd_authenticatable (0.1)
       devise (> 1.1.0)
 
 PATH
-  remote: /workspace/tmp/webyast/plugins/activedirectory
+  remote: /home/src/rails/webyast3/plugins/activedirectory
   specs:
     webyast-activedirectory (0.1)
 
 PATH
-  remote: /workspace/tmp/webyast/plugins/administrator
+  remote: /home/src/rails/webyast3/plugins/administrator
   specs:
     webyast-administrator (0.1)
 
 PATH
-  remote: /workspace/tmp/webyast/plugins/eulas
+  remote: /home/src/rails/webyast3/plugins/eulas
   specs:
     webyast-eulas (0.1)
 
 PATH
-  remote: /workspace/tmp/webyast/plugins/example_plugin
+  remote: /home/src/rails/webyast3/plugins/example_plugin
   specs:
     webyast-example (0.1)
 
 PATH
-  remote: /workspace/tmp/webyast/plugins/firewall
+  remote: /home/src/rails/webyast3/plugins/firewall
   specs:
     webyast-firewall (0.1)
 
 PATH
-  remote: /workspace/tmp/webyast/plugins/kerberos
+  remote: /home/src/rails/webyast3/plugins/kerberos
   specs:
     webyast-kerberos (0.1)
 
 PATH
-  remote: /workspace/tmp/webyast/plugins/ldap
+  remote: /home/src/rails/webyast3/plugins/ldap
   specs:
     webyast-ldap (0.1)
 
 PATH
-  remote: /workspace/tmp/webyast/plugins/mailsetting
+  remote: /home/src/rails/webyast3/plugins/mailsetting
   specs:
     webyast-mailsetting (0.1)
 
 PATH
-  remote: /workspace/tmp/webyast/plugins/network
+  remote: /home/src/rails/webyast3/plugins/network
   specs:
     webyast-network (0.1)
 
 PATH
-  remote: /workspace/tmp/webyast/plugins/ntp
+  remote: /home/src/rails/webyast3/plugins/ntp
   specs:
     webyast-ntp (0.1)
 
 PATH
-  remote: /workspace/tmp/webyast/plugins/registration
+  remote: /home/src/rails/webyast3/plugins/registration
   specs:
     webyast-registration (0.1)
 
 PATH
-  remote: /workspace/tmp/webyast/plugins/roles
+  remote: /home/src/rails/webyast3/plugins/roles
   specs:
     webyast-roles (0.1)
 
 PATH
-  remote: /workspace/tmp/webyast/plugins/services
+  remote: /home/src/rails/webyast3/plugins/services
   specs:
     webyast-services (0.1)
 
 PATH
-  remote: /workspace/tmp/webyast/plugins/software
+  remote: /home/src/rails/webyast3/plugins/software
   specs:
     webyast-software (0.1)
 
 PATH
-  remote: /workspace/tmp/webyast/plugins/status
+  remote: /home/src/rails/webyast3/plugins/status
   specs:
     webyast-status (0.1)
 
 PATH
-  remote: /workspace/tmp/webyast/plugins/system
+  remote: /home/src/rails/webyast3/plugins/system
   specs:
     webyast-system (0.1)
 
 PATH
-  remote: /workspace/tmp/webyast/plugins/terminal
+  remote: /home/src/rails/webyast3/plugins/terminal
   specs:
     webyast-terminal (0.1)
 
 PATH
-  remote: /workspace/tmp/webyast/plugins/time
+  remote: /home/src/rails/webyast3/plugins/time
   specs:
     webyast-time (0.1)
 
 PATH
-  remote: /workspace/tmp/webyast/plugins/users
+  remote: /home/src/rails/webyast3/plugins/users
   specs:
     webyast-users (0.1)
 
 PATH
-  remote: /workspace/tmp/webyast/ruby-polkit1
+  remote: /home/src/rails/webyast3/ruby-polkit1
   specs:
     polkit1 (0.0.2)
       inifile
