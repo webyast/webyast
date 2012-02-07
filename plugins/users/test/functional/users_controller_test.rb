@@ -35,7 +35,7 @@ class UsersControllerTest < ActionController::TestCase
     mime = Mime::HTML
     @request.accept = mime.to_s
     get :index
-#    assert_valid_markup
+    assert_valid_markup
     assert_response :success
   end
 
