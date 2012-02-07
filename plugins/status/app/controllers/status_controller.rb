@@ -132,7 +132,6 @@ class StatusController < ApplicationController
   # AJAX call for showing status overview
   #
   def show_summary
-    authorize! :read, Metric
     level = "ok"
     status = ""
     ret_error = nil
@@ -182,16 +181,15 @@ class StatusController < ApplicationController
         end
         #Checking WebYaST service plugins
         begin
-# FIXME:
-#          plugins = Plugin.find(:all)
-#          plugins.each {|plugin|
-#            level = plugin.level if plugin.level == "error" || (plugin.level == "warning" && level == "ok")
-#            if status.blank?
-#              status = plugin.short_description
-#            else
-#              status += "; " + plugin.short_description
-#            end
-#          }
+          plugins = Plugin.find(:all)
+          plugins.each {|plugin|
+            level = plugin.level if plugin.level == "error" || (plugin.level == "warning" && level == "ok")
+            if status.blank?
+              status = plugin.short_description
+            else
+              status += "; " + plugin.short_description
+            end
+          }
         rescue Exception => error
           logger.warn error.inspect
           level = "error"

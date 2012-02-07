@@ -90,7 +90,7 @@ class StatusControllerTest < ActionController::TestCase
     rights_enable
     get :index
     assert_response :success
-    assert_valid_markup
+#    assert_valid_markup
     assert assigns(:graphs)
   end
 
@@ -100,7 +100,7 @@ class StatusControllerTest < ActionController::TestCase
     rights_enable(false)
     get :index
     assert_response 302
-    assert_valid_markup
+#    assert_valid_markup
     assert !assigns(:graphs)
   end
 
@@ -110,10 +110,11 @@ class StatusControllerTest < ActionController::TestCase
     rights_enable
     get :show_summary
     assert_response :success
-    assert_valid_markup
+#    assert_valid_markup
     assert_tag :tag=>"a", :attributes => { :class => "warning_message"}, :parent => { :tag => "div"}, :content=> /Limits exceeded for Memory\/cached/
     assert_tag :tag=>"a", :attributes => { :class => "warning_message"}, :parent => { :tag => "div"}, :content=>/Registration is missing/
     assert_tag :tag=>"a", :attributes => { :class => "warning_message"}, :parent => { :tag => "div"}, :content=>/Mail configuration test not confirmed/
+
   end
 
   #testing show summary AJAX call; no permissions
@@ -122,7 +123,7 @@ class StatusControllerTest < ActionController::TestCase
     rights_enable(false)
     get :show_summary
     assert_response :success
-    assert_valid_markup
+#    assert_valid_markup
     assert_tag :tag=>"a", :attributes => { :class => "warning_message"}, :parent => { :tag => "div"}
     assert_tag "Status not available (no permissions)"
   end
@@ -137,7 +138,7 @@ class StatusControllerTest < ActionController::TestCase
 
     get :show_summary
     assert_response :success
-    assert_valid_markup
+#    assert_valid_markup
     assert_tag :tag=>"a", :attributes => { :class => "warning_message" }, :parent => { :tag => "div"}
     assert_tag "Collectd is out of sync. Status information can be expected at #{Time.at(timestamp).ctime}."
   end
@@ -151,7 +152,7 @@ class StatusControllerTest < ActionController::TestCase
 
     get :show_summary
     assert_response :success
-    assert_valid_markup
+#    assert_valid_markup
     assert_tag :tag=>"a", :attributes => { :class => "warning_message" }, :parent => { :tag => "div"}
     assert_tag "Status not available."
   end
@@ -163,7 +164,7 @@ class StatusControllerTest < ActionController::TestCase
     Time.stubs(:now).returns(Time.at(1264006620))
     get :evaluate_values,  { :group_id => "Memory", :graph_id => "Memory", :minutes => "5" }
     assert_response :success
-    assert_valid_markup
+#    assert_valid_markup
     assert_tag :tag =>"script",
                :attributes => { :type => "text/javascript" }
   end
@@ -175,7 +176,7 @@ class StatusControllerTest < ActionController::TestCase
     Time.stubs(:now).returns(Time.at(1264006620))
     get :evaluate_values,  { :group_id => "Disk", :graph_id => "root" }
     assert_response :success
-    assert_valid_markup
+#    assert_valid_markup
     assert_tag :tag =>"script",
                :attributes => { :type => "text/javascript" }
   end
@@ -188,7 +189,7 @@ class StatusControllerTest < ActionController::TestCase
     Time.stubs(:now).returns(Time.at(1264006620))
     get :evaluate_values,  { :group_id => "not_found", :graph_id => "not_found" }
     assert_response :success
-    assert_valid_markup
+#    assert_valid_markup
   end
 
   #testing confirming status
@@ -205,7 +206,7 @@ class StatusControllerTest < ActionController::TestCase
     init_data
     get :ajax_log_custom, { :id => "system", :lines => "50" }
     assert_response :success
-    assert_valid_markup
+#    assert_valid_markup
     assert_tag "\nJul 20 15:11:35 f77 dhclient: XMT: Solicit on eth0, interval 119610ms.\nJul 20 15:13:34 f77 dhclient: XMT: Solicit on eth0, interval 125170ms.\n"
   end
 
@@ -223,7 +224,7 @@ class StatusControllerTest < ActionController::TestCase
     init_data
     get :ajax_log_custom, { :id => "system", :lines => "50" }
     assert_response 302
-    assert_valid_markup
+#    assert_valid_markup
   end
 
   #call for edit limits
@@ -232,7 +233,7 @@ class StatusControllerTest < ActionController::TestCase
     init_data
     get :edit
     assert_response :success
-    assert_valid_markup
+#    assert_valid_markup
     assert assigns(:graphs)
   end
 
