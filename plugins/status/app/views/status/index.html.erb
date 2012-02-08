@@ -135,14 +135,14 @@
 	      <div style="float:left; width:50%">
 		<h3><%= single_graph["headline"] %></h3>
 		<div id='<%= graph_id(group.id, single_graph["headline"]) %>'>
-                  <%= image_tag("working.gif", :alt=>"monitoring", :height=>"32px", :width=>"32px") %>
+                  <%= image_tag("working.gif", :alt=>"monitoring", :height=>"32", :width=>"32") %>
 		</div>
 	      </div>
 	    <%else%>
 	      <div style="float:right; width:50%">
 		<h3><%= single_graph["headline"] %></h3>
 		<div id='<%= graph_id(group.id, single_graph["headline"]) %>'>
-                  <%= image_tag("working.gif", :alt=>"monitoring", :height=>"32px", :width=>"32px") %>
+                  <%= image_tag("working.gif", :alt=>"monitoring", :height=>"32", :width=>"32") %>
 		</div>
 	      </div>
 	    <%end%>
