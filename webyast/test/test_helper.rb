@@ -21,11 +21,7 @@ ENV["RAILS_ENV"] = "test"
 require File.expand_path('../../config/environment', __FILE__)
 require 'rails/test_help'
 
-
 Rails.env = ActiveSupport::StringInquirer.new('test')
-#FactoryGirl.find_definitions
-
-STDERR.puts "********* Running in test mode" if Rails.env.test?
 
 class ActionController::TestCase
   include Devise::TestHelpers
