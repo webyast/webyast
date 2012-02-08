@@ -50,7 +50,7 @@
       <input type="text" id="repo_search"/>
     </form>
     
-    <label for="filter">
+    <label for="filter_repos">
       <%=  _("Filter repositories") %>
       <% image_tag("filter.png", :style=>"")%>
     </label>
@@ -71,13 +71,13 @@
       <div class="list-fieldset  <%= r.enabled ? 'repository-enabled' : 'repository-disabled' %>">
 	<div class="list-fieldset-header" id="repo_header_<%= sid -%>">
 	  <%# do quick search only in name and URL => use quicksearch_content class %>
-	  <span class="quicksearch_content">
+	  <div class="quicksearch_content">
 	    <div>
 	      <div class="status-icon <%= r.enabled ? 'ok' : 'unused' %>"></div>
 	      <%= h r.name %>
 	    </div>
 	    <small><%= h r.url %></small>
-	  </span>
+	  </div>
 	  <span style="float: right; margin-right: 5em"><%= prio_summary r.priority -%></span>
 	</div>
 <!-- 	'<%= _('Please wait') -%>' -->
@@ -95,30 +95,35 @@
 		</script>
 	      <% end %>
 
-	      <p><div class="option_name">Alias: </div><%= h r.id %></p>
-<!--	      <p><div class="option_name">Alias: </div><i><% h r.id %></i></p> -->
-	      
-	      <p><div class="option_name">Name: </div>
-		<%= f.text_field :name, :disabled => disabled, :class => 'required' -%></p>
+              <p></p>
+              <div class="option_name">Alias: </div> <%= h r.id %>
 
-	      <p><div class="option_name">URL: </div>
-		<%= f.text_field :url, :disabled => disabled, :class => 'repo_url required' -%></p>
+              <p></p>
+              <div class="option_name">Name: </div>
+	      <%= f.text_field :name, :id => 'repository_name_' + sid, :disabled => disabled, :class => 'required' -%>
 
-	      <p><%= repo_status_msg(r.enabled) %>
+              <p></p>
+              <div class="option_name">URL: </div>
+	      <%= f.text_field :url, :id => 'repository_url_' + sid, :disabled => disabled, :class => 'repo_url required' -%>
+
+	      <p>
+                <%= repo_status_msg(r.enabled) %>
 		<% if !disabled  %>
 		  <%= hidden_field_with_link f, sid, :enabled, r.enabled,
 		    repo_change_msg(!r.enabled) -%>
 		<% end %>
 	      </p>
 
-	      <p><%= refresh_status_msg r.autorefresh %>
+	      <p>
+                <%= refresh_status_msg r.autorefresh %>
 		<% if !disabled  %>
 		  <%= hidden_field_with_link f, sid, :autorefresh, r.autorefresh,
 		    refresh_change_msg(!r.autorefresh) -%>
 		<% end %>
 	      </p>
 
-	      <p><%= keep_status_msg r.keep_packages %>
+	      <p>
+                <%= keep_status_msg r.keep_packages %>
 		<% if !disabled  %>
 		  <%= hidden_field_with_link f, sid, :keep_packages, r.keep_packages,
 		    keep_change_msg(!r.keep_packages) -%>
