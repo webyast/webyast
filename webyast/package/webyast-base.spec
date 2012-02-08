@@ -344,6 +344,10 @@ exit 0
 # create database
 #
 cd %{webyast_dir}
+
+# force refreshing the Gemfile.lock
+rm Gemfile.lock
+
 #migrate database
 RAILS_ENV=production rake db:migrate
 chown -R %{webyast_user}: db
