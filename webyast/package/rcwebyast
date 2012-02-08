@@ -187,6 +187,9 @@ case "$1" in
     fi
 
        echo -n "Starting webyast "
+        # refresh the Gemfile.lock content before starting the server
+        # (outdated file can cause problems after upgrading needed rubygems)
+	rm -f $GEMFILE_LOCK
   #generate deployment specific secret key (bnc#591345)
   SECRET=`cd /srv/www/webyast/ && rake -s secret`
   if [ -z $SECRET ]; then
@@ -200,11 +203,6 @@ case "$1" in
 	# patch passenger config root if the current config is different (after updating passenger or on a different arch than the default)
 	grep -q "^[ \\t]*passenger_root[ \\t][ \\t]*`passenger-config --root`;" $NGINX_CONFIG ||
 	    sed -i.bak "s#^\\([ \\t]*\\)passenger_root[ \\t].*\$#\\1passenger_root `passenger-config --root`;#" $NGINX_CONFIG
-
-        # refresh the Gemfile.lock content before starting the server
-        # (outdated file can cause problems after upgrading needed rubygems)
-        rm -f $GEMFILE_LOCK
-        (cd /srv/www/webyast/ && rake -T)
 
 	## Start daemon with startproc(8). If this fails
 	## the return value is set appropriately by startproc.
