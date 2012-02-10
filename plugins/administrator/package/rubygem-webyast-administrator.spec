@@ -23,7 +23,7 @@ Release:        0
 %define mod_full_name %{mod_name}-%{version}
 #
 Group:          Development/Languages/Ruby
-License:	LGPL-2.1
+License:        GPL-2.0	
 #
 BuildRoot:      %{_tmppath}/%{name}-%{version}-build
 BuildRequires:  rubygems_with_buildroot_patch
@@ -65,19 +65,10 @@ Test::Unit or RSpec files, useful for developers.
 /usr/sbin/grantwebyastrights --user root --action grant > /dev/null
 /usr/sbin/grantwebyastrights --user %{webyast_user} --action grant > /dev/null
 
-cd %{webyast_dir}
-# force refreshing the Gemfile.lock
-rm -f Gemfile.lock
-
-rake assets:precompile
+%{webyast_assets_precompile}
 
 %postun
-
-cd %{webyast_dir}
-# force refreshing the Gemfile.lock
-rm -f Gemfile.lock
-
-rake assets:precompile
+%{webyast_assets_precompile}
 
 %install
 %gem_install %{S:0}
