@@ -33,7 +33,7 @@ namespace :gemfile do
           in_group = false
         end
       else
-        if line.match /^\s*group\s*\S+\sdo/
+        if line.match(/^\s*group\s*(\S+)\sdo/) && $1 != ":assets"
           in_group = true
           puts "# #{line}"
         else

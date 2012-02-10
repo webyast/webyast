@@ -100,6 +100,7 @@ BuildRequires:	rubygem-jquery-rails
 
 Requires:	rubygem-haml, rubygem-sqlite3-ruby, rubygem-builder-3_0
 Requires:       rubygem-fast_gettext, rubygem-gettext_i18n_rails, rubygem-rails-i18n
+Requires:	rubygem-uglifier, rubygem-johnson
 
 Requires:	rubygem-devise, rubygem-devise_unix2_chkpwd_authenticatable, rubygem-devise-i18n
 Requires:	rubygem-cancan, rubygem-delayed_job, rubygem-static_record_cache
@@ -152,7 +153,7 @@ Testsuite for core WebYaST package.
 %package branding-default
 Group:    Productivity/Networking/Web/Utilities
 Provides: webyast-branding
-Requires: %{name} = %{version}
+PreReq:	%{name} = %{version}
 #Requires: rubygem-mocha rubygem-test-unit tidy
 Summary:  Branding package for webyast-base package
 
@@ -166,12 +167,6 @@ This package contains css, icons and images for webyast-base package.
 %build
 # build *.mo files (redirect sterr to /dev/null as it contains tons of warnings about obsoleted (commented) msgids)
 LANG=en rake gettext:pack 2> /dev/null
-
-# precompile assests (merge JS files, pack CSS and JS to *.gz)
-rake assets:precompile
-
-# cleanup the tmp cache after building assets
-rm -rf tmp
 
 # remove Gemfile.lock created by the above rake calls
 rm Gemfile.lock
@@ -197,9 +192,6 @@ rm -f $RPM_BUILD_ROOT%{webyast_dir}/COPYING
 
 # install production mode Gemfile
 rake gemfile:production > $RPM_BUILD_ROOT%{webyast_dir}/Gemfile
-
-# remove asset sources
-rm -rf $RPM_BUILD_ROOT/%{webyast_dir}/app/assets
 
 # remove .gitkeep files
 find $RPM_BUILD_ROOT%{webyast_dir} -name .gitkeep -delete
@@ -346,7 +338,7 @@ exit 0
 cd %{webyast_dir}
 
 # force refreshing the Gemfile.lock
-rm Gemfile.lock
+rm -f Gemfile.lock
 
 #migrate database
 RAILS_ENV=production rake db:migrate
@@ -377,6 +369,13 @@ dbus-send --print-reply --system --dest=org.freedesktop.DBus / org.freedesktop.D
 # restart webyast on nginx update (bnc#559534)
 %triggerin -- nginx
 %restart_on_update %{webyast_service}
+
+
+%post branding-default
+
+cd %{webyast_dir}
+# precompile assests (merge JS files, pack CSS and JS to *.gz)
+rake assets:precompile
 
 #---------------------------------------------------------------
 %files
@@ -455,7 +454,10 @@ dbus-send --print-reply --system --dest=org.freedesktop.DBus / org.freedesktop.D
 %doc COPYING
 
 ### include JS assets
-%{webyast_dir}/public/assets/application.js*
+%exclude %{webyast_dir}/app/assets/icons
+%exclude %{webyast_dir}/app/assets/images
+%exclude %{webyast_dir}/app/assets/stylesheets
+%{webyast_dir}/app/assets/javascripts
 
 %exclude %{webyast_dir}/test
 
@@ -468,9 +470,9 @@ dbus-send --print-reply --system --dest=org.freedesktop.DBus / org.freedesktop.D
 %files branding-default
 %defattr(-,root,root)
 ### include css, icons and images 
-%{webyast_dir}/public/assets
+%{webyast_dir}/app/assets
 # JS files belong to the base
-%exclude %{webyast_dir}/public/assets/application.js*
+%exclude %{webyast_dir}/app/assets/javascripts/*
 
 #---------------------------------------------------------------
 %changelog

@@ -28,7 +28,7 @@ License:	LGPL-2.1
 BuildRoot:      %{_tmppath}/%{name}-%{version}-build
 BuildRequires:  rubygems_with_buildroot_patch
 %rubygems_requires
-BuildRequires:	webyast-base, rubygem-sqlite3-ruby
+BuildRequires:	webyast-base, rubygem-sqlite3-ruby, rubygem-ruby-fcgi
 Requires:	webyast-base
 #
 Url:            http://rubygems.org/gems/webyast-administrator
@@ -64,6 +64,20 @@ Test::Unit or RSpec files, useful for developers.
 # granting all permissions for the web user
 /usr/sbin/grantwebyastrights --user root --action grant > /dev/null
 /usr/sbin/grantwebyastrights --user %{webyast_user} --action grant > /dev/null
+
+cd %{webyast_dir}
+# force refreshing the Gemfile.lock
+rm -f Gemfile.lock
+
+rake assets:precompile
+
+%postun
+
+cd %{webyast_dir}
+# force refreshing the Gemfile.lock
+rm -f Gemfile.lock
+
+rake assets:precompile
 
 %install
 %gem_install %{S:0}

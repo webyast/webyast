@@ -22,7 +22,6 @@
 # Provides access to configuration of system administrator.
 
 class AdministratorController < ApplicationController
-  layout 'main'
   
   public
 
