@@ -23,6 +23,11 @@
 
  <%= stylesheet_link_tag "webyast-services" %>
  <%= stylesheet_link_tag "webyast-plugin-toolbar" %>
+ <!-- borrowed from users, until it is public -->
+ <style type="text/css">
+    .pad1_2em { padding: 1em 2em; }
+    .ui-accordion .ui-accordion-content-active { display: inline; }
+ </style>
  <%= javascript_include_tag "jquery.quicksearch.js"-%>
  <%= javascript_include_tag "select_dialog.js" %>
  <%= javascript_include_tag "webyast-services.js" %>
@@ -32,11 +37,6 @@
 <% end %>
 
 
-<!-- borrowed from users, until it is public -->
-<style type="text/css">
-    .pad1_2em { padding: 1em 2em; }
-    .ui-accordion .ui-accordion-content-active { display: inline; }
-</style>
 
 <div class="plugin-content plugin-border">
   <div class="plugin-header">
@@ -64,7 +64,7 @@
       <input type="text" id="service_search">
     </form>
 
-    <label for="filter">
+    <label for="filter_services">
       <%=_("Filter services")%>
       <%= image_tag("filter.png")%>
     </label>
@@ -87,7 +87,7 @@
 
       @services.each do |service| %>
         <div class="list-fieldset">
-          <div class="list-fieldset-header" name=<%=service.name%>><span class="service-icon"></span><%=h service.name %><em style="position:absolute; left:25%"><%= h service.summary%></em></div>
+          <div class="list-fieldset-header" ><span class="service-icon"></span><%=h service.name %><em style="position:absolute; left:25%"><%= h service.summary%></em></div>
           <div class='service-content' style="display:none; padding-left: 1em;">
 
           <p class='description quicksearch_content'>
@@ -101,11 +101,11 @@
           <%= image_tag "working.gif", :class => "small-working-icon", :id => "service_progress_#{service.name}", :style => "display: none" %>
 
 
-          <span class='service_status' id='service_status_<%= h service.name%>'>
+          <div class='service_status' id='service_status_<%= h service.name%>'>
             <% unless service.status.nil? %>
               <%= render :partial => 'status', :locals => { :status => service.status, :enabled => service.enabled, :custom => service.custom } %>
             <% end %>
-          </span>
+          </div>
 
 
           <span id='service_refresh_<%= h service.name%>'>
@@ -165,7 +165,6 @@
 
               link_to label, url, {
                 :remote     => true,
-                :complete   => :complete,
                  "data-type" => "html"
                 }.merge(html_options)
           %>
