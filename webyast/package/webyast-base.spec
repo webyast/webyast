@@ -370,12 +370,8 @@ dbus-send --print-reply --system --dest=org.freedesktop.DBus / org.freedesktop.D
 %triggerin -- nginx
 %restart_on_update %{webyast_service}
 
-
 %post branding-default
-
-cd %{webyast_dir}
-# precompile assests (merge JS files, pack CSS and JS to *.gz)
-rake assets:precompile
+%{webyast_assets_precompile}
 
 #---------------------------------------------------------------
 %files
