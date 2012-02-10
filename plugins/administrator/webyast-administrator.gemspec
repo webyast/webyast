@@ -5,7 +5,8 @@ Gem::Specification.new do |s|
   s.version = "0.1"
   s.authors = ["WebYaST team"]
   s.summary = "Webyast module for configuring administrator settings"
-  s.email = %q{webyast-devel@opensuse.org}
+  s.email = "yast-devel@opensuse.org"
+  s.licenses = ['GPL-2.0']
 
   s.files         = `git ls-files`.split("\n")
   s.test_files    = `git ls-files -- {test,spec,features}/*`.split("\n")
