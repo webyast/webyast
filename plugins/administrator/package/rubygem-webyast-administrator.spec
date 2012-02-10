@@ -29,7 +29,10 @@ BuildRoot:      %{_tmppath}/%{name}-%{version}-build
 BuildRequires:  rubygems_with_buildroot_patch
 %rubygems_requires
 BuildRequires:	webyast-base, rubygem-sqlite3-ruby, rubygem-ruby-fcgi
+BuildRequires:	rubygem-webyast-rake-tasks >= 0.1.13
 Requires:	webyast-base
+Requires:	rubygem-webyast-rake-tasks >= 0.1.13
+
 #
 Url:            http://rubygems.org/gems/webyast-administrator
 Source:         %{mod_full_name}.gem
