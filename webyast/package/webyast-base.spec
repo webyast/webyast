@@ -40,7 +40,7 @@ Requires:       ruby-dbus
 %else
 Requires:	rubygem-ruby-dbus
 %endif
-Requires:       rubygem-webyast-rake-tasks
+Requires:       rubygem-webyast-rake-tasks >= 0.1.13
 Requires:       yast2-dbus-server
 PreReq:		rubygem-bundler
 # 634404
@@ -73,7 +73,7 @@ BuildRoot:      %{_tmppath}/%{name}-%{version}-build
 BuildRequires:  ruby, pkg-config, rubygem-mocha
 # if we run the tests during build, we need most of Requires here too,
 # except for deployment specific stuff
-BuildRequires:  rubygem-webyast-rake-tasks, rubygem-restility
+BuildRequires:  rubygem-webyast-rake-tasks >= 0.1.13, rubygem-restility
 BuildRequires:  yast2-core, yast2-dbus-server, sqlite3, dbus-1
 %if 0%{?suse_version} == 0 || %suse_version <= 1130
 BuildRequires:  ruby-dbus
