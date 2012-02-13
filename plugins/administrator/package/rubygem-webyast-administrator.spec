@@ -61,17 +61,21 @@ Test::Unit or RSpec files, useful for developers.
 %prep
 %build
 
-# TODO: build .mo files
-
 %post
 # granting all permissions for the web user
 /usr/sbin/grantwebyastrights --user root --action grant > /dev/null
 /usr/sbin/grantwebyastrights --user %{webyast_user} --action grant > /dev/null
 
-%{webyast_assets_precompile}
+cd %{webyast_dir}
+# update manifest.yml file
+# use assets.rake file directly (faster loading)
+rake -f lib/tasks/assets.rake assets:join_manifests
 
 %postun
-%{webyast_assets_precompile}
+cd %{webyast_dir}
+# update manifest.yml file
+# use assets.rake file directly (faster loading)
+rake -f lib/tasks/assets.rake assets:join_manifests
 
 %install
 %gem_install %{S:0}
@@ -80,8 +84,20 @@ Test::Unit or RSpec files, useful for developers.
 mkdir -p $RPM_BUILD_ROOT/usr/share/polkit-1/actions
 install -m 0644 %SOURCE1 $RPM_BUILD_ROOT/usr/share/polkit-1/actions/
 
-# remove .po files (no longer needed)
-rm -rf $RPM_BUILD_ROOT/%{_libdir}/ruby/gems/%{rb_ver}/gems/%{mod_full_name}/locale/*/*.po
+# precompile assets
+export RAILS_PARENT=%{webyast_dir}
+cd $RPM_BUILD_ROOT/%{_libdir}/ruby/gems/%{rb_ver}/gems/%{mod_full_name}
+
+rake assets:precompile
+rm -rf tmp
+
+# move them to webyast-base
+mkdir -p $RPM_BUILD_ROOT/srv/www/webyast/public/assets
+mv public/assets/* $RPM_BUILD_ROOT/srv/www/webyast/public/assets
+rm -rf public/assets
+mv $RPM_BUILD_ROOT/srv/www/webyast/public/assets/manifest.yml $RPM_BUILD_ROOT/srv/www/webyast/public/assets/manifest.yml.administrator
+
+rm -rf log
 
 # search locale files
 #find_lang webyast-root-user
@@ -96,6 +112,10 @@ rm -rf $RPM_BUILD_ROOT/%{_libdir}/ruby/gems/%{rb_ver}/gems/%{mod_full_name}/loca
 %{_libdir}/ruby/gems/%{rb_ver}/gems/%{mod_full_name}/
 %exclude %{_libdir}/ruby/gems/%{rb_ver}/gems/%{mod_full_name}/test
 %{_libdir}/ruby/gems/%{rb_ver}/specifications/%{mod_full_name}.gemspec
+
+# precompiled assets
+%dir /srv/www/webyast/public/assets
+/srv/www/webyast/public/assets/*
 
 %dir /usr/share/polkit-1
 %dir /usr/share/polkit-1/actions
