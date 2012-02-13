@@ -100,7 +100,6 @@ BuildRequires:	rubygem-jquery-rails
 
 Requires:	rubygem-haml, rubygem-sqlite3-ruby, rubygem-builder-3_0
 Requires:       rubygem-fast_gettext, rubygem-gettext_i18n_rails, rubygem-rails-i18n
-Requires:	rubygem-uglifier, rubygem-johnson
 
 Requires:	rubygem-devise, rubygem-devise_unix2_chkpwd_authenticatable, rubygem-devise-i18n
 Requires:	rubygem-cancan, rubygem-delayed_job, rubygem-static_record_cache
@@ -167,6 +166,17 @@ This package contains css, icons and images for webyast-base package.
 %build
 # build *.mo files (redirect sterr to /dev/null as it contains tons of warnings about obsoleted (commented) msgids)
 LANG=en rake gettext:pack 2> /dev/null
+
+# precompile assets
+rake assets:precompile
+
+# split manifest file
+rake assets:split_manifest
+rm -rf public/assets/manifest.yml
+
+# cleanup
+rm -rf tmp
+rm -rf log
 
 # remove Gemfile.lock created by the above rake calls
 rm Gemfile.lock
@@ -371,7 +381,16 @@ dbus-send --print-reply --system --dest=org.freedesktop.DBus / org.freedesktop.D
 %restart_on_update %{webyast_service}
 
 %post branding-default
-%{webyast_assets_precompile}
+cd %{webyast_dir}
+# update manifest.yml file
+# use assets.rake file directly (faster loading)
+rake -f lib/tasks/assets.rake assets:join_manifests
+
+%postun branding-default
+cd %{webyast_dir}
+# update manifest.yml file
+# use assets.rake file directly (faster loading)
+rake -f lib/tasks/assets.rake assets:join_manifests
 
 #---------------------------------------------------------------
 %files
@@ -454,6 +473,9 @@ dbus-send --print-reply --system --dest=org.freedesktop.DBus / org.freedesktop.D
 %exclude %{webyast_dir}/app/assets/images
 %exclude %{webyast_dir}/app/assets/stylesheets
 %{webyast_dir}/app/assets/javascripts
+%{webyast_dir}/public/assets/*.js
+%{webyast_dir}/public/assets/*.js.gz
+%{webyast_dir}/public/assets/manifest.yml.base
 
 %exclude %{webyast_dir}/test
 
@@ -467,8 +489,12 @@ dbus-send --print-reply --system --dest=org.freedesktop.DBus / org.freedesktop.D
 %defattr(-,root,root)
 ### include css, icons and images 
 %{webyast_dir}/app/assets
-# JS files belong to the base
+%{webyast_dir}/public/assets
+# exclude files belonging to the base
 %exclude %{webyast_dir}/app/assets/javascripts/*
+%exclude %{webyast_dir}/public/assets/*.js
+%exclude %{webyast_dir}/public/assets/*.js.gz
+%exclude %{webyast_dir}/public/assets/manifest.yml.base
 
 #---------------------------------------------------------------
 %changelog
