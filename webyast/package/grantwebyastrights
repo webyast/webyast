@@ -28,7 +28,21 @@
 require 'fileutils'
 require 'getoptlong'
 require 'rubygems'
-require 'polkit1'
+require 'yaml'
+
+#checking which policykit is used
+WEBYAST_CONFIG_FILE = "/etc/webyast/config.yml"
+@polkit1 = true
+if File.exist?(WEBYAST_CONFIG_FILE)
+  values = YAML::load(File.open(WEBYAST_CONFIG_FILE, 'r').read)
+  @polkit1 = false if values["polkit1"] == false
+end
+
+STDOUT.puts "Using old PolicyKit" unless @polkit1
+
+if @polkit1
+  require 'polkit1'
+end
 
 $debug = 0
 
@@ -41,8 +55,17 @@ def usage why
   STDERR.puts "NOTE: This program should be run by user root"
   STDERR.puts ""
   STDERR.puts ""
-  STDERR.puts "In order to show all possible permissions use:"
-  STDERR.puts "pkaction"
+  unless @polkit1
+    STDERR.puts "This call grant/revoke ALL permissions for the YaST Webservice."
+    STDERR.puts "In order to grant/revoke single rights use:"
+    STDERR.puts "polkit-auth --user <user> (--grant|-revoke) <policyname>"
+    STDERR.puts ""
+    STDERR.puts "In order to show all possible permissions use:"
+    STDERR.puts "polkit-action"
+  else
+    STDERR.puts "In order to show all possible permissions use:"
+    STDERR.puts "pkaction"
+  end
   exit 1
 end
 
@@ -83,14 +106,28 @@ def webyast_perm?(perm)
 end
 
 def granted_perms(user)
-  perms = webyast_perms
-  perms.reject! { |perm| 
-    PolKit1::polkit1_check(perm, user) == :no }
+   if @polkit1
+    perms = webyast_perms
+    perms.reject! { |perm| 
+      PolKit1::polkit1_check(perm, user) == :no 
+    }
+  else
+    perms = `polkit-auth --user '#{user}' --explicit`
+    #do NOT raise if an error happens here cause while the package installation this call returns always an error
+    #  raise "polkit-auth failed with ret code #{$?.exitstatus}. Output: #{perms}" unless $?.exitstatus.zero?
+    perms = perms.split "\n"
+    perms.reject! { |perm| not webyast_perm?(perm) }
+  end
   return perms
 end
 
 def webyast_perms
-  perms = `pkaction`
+  if @polkit1
+    perms = `pkaction`
+  else
+    perms = `polkit-action`
+    raise "polkit-action failed with ret code #{$?.exitstatus}. Output: #{perms}" unless $?.exitstatus.zero?
+  end
   perms = perms.split "\n"
   perms.reject! { |perm| not webyast_perm?(perm) }
   return perms
@@ -101,30 +138,54 @@ begin
   when "grant" then
     unless single_policy == nil
       STDOUT.puts "granting: #{single_policy}"
-      PolKit1::polkit1_write(POLKIT_SECTION, single_policy, true, user)
+      if @polkit1
+        PolKit1::polkit1_write(POLKIT_SECTION, single_policy, true, user)
+      else
+        out = `polkit-auth --user '#{user}' --grant '#{single_policy}'`
+        #do NOT raise if an error happens here cause while the package installation this call can return an error for already existing 
+        #permissions ( It is not possible to check this before)
+        #raise "Granting permissions failed with ret code #{$?.exitstatus}. Output: #{out}" unless $?.exitstatus.zero?
+      end
     else
       granted = granted_perms user
       non_granted = webyast_perms.reject{ |perm| granted.include? perm }
       non_granted.each do |policy|
         STDOUT.puts "granting: #{policy}"
-        PolKit1::polkit1_write(POLKIT_SECTION, policy, true, user)
+        if @polkit1
+          PolKit1::polkit1_write(POLKIT_SECTION, policy, true, user)
+        else
+          out = `polkit-auth --user '#{user}' --grant '#{policy}'`
+          #do NOT raise if an error happens here cause while the package installation this call can return an error for already existing 
+          #permissions ( It is not possible to check this before)
+          #raise "Granting permissions failed with ret code #{$?.exitstatus}. Output: #{out}" unless $?.exitstatus.zero?
+        end
       end
     end
   when "show"
     unless single_policy == nil
-      STDOUT.puts single_policy if PolKit1::polkit1_check(single_policy, user) == :yes 
+      STDOUT.puts single_policy if granted_perms(user).include?(single_policy)
     else
       STDOUT.puts granted_perms(user).join("\n")
     end
   when "revoke"
     unless single_policy == nil
       STDOUT.puts "revoking: #{single_policy}"
-      PolKit1::polkit1_write(POLKIT_SECTION, single_policy, false, user)
+      if @polkit1
+        PolKit1::polkit1_write(POLKIT_SECTION, single_policy, false, user)
+      else
+        out = `polkit-auth --user '#{user}' --revoke '#{single_policy}'`
+        raise "Revoking permissions failed with ret code #{$?.exitstatus}. Output: #{out}" unless $?.exitstatus.zero?
+      end
     else
       granted = granted_perms user
       granted.each do |policy|
         STDOUT.puts "revoking: #{policy}"
-        PolKit1::polkit1_write(POLKIT_SECTION, policy, false, user)
+        if @polkit1
+          PolKit1::polkit1_write(POLKIT_SECTION, policy, false, user)
+        else
+          out = `polkit-auth --user '#{user}' --revoke '#{policy}'`
+          raise "Revoking permissions failed with ret code #{$?.exitstatus}. Output: #{out}" unless $?.exitstatus.zero?
+        end
       end
     end
   end

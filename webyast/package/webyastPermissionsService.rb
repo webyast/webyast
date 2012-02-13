@@ -21,7 +21,22 @@
 require 'rubygems'
 require 'dbus'
 require 'etc'
-require 'polkit1'
+
+require 'yaml'
+
+#checking which policykit is used
+WEBYAST_CONFIG_FILE = "/etc/webyast/config.yml"
+polkit1_enabled = true
+if File.exist?(WEBYAST_CONFIG_FILE)
+  values = YAML::load(File.open(WEBYAST_CONFIG_FILE, 'r').read)
+  polkit1_enabled = false if values["polkit1"] == false
+end
+
+if polkit1_enabled
+  require 'polkit1'
+else
+  require 'polkit'
+end
 
 # Choose the bus (could also be DBus::session_bus, which is not suitable for a system service)
 bus = DBus::system_bus
@@ -29,6 +44,13 @@ bus = DBus::system_bus
 service = bus.request_service("webyast.permissions.service")
 
 class WebyastPermissionsService < DBus::Object
+
+  attr_accessor   :polkit1
+
+  def initialize(polkit1_enabled, options={})
+    @polkit1 = polkit1_enabled
+    super options
+  end
 
   # overriding DBus::Object#dispatch
   # It is needed because dispatch sent just parameters and without sender it is
@@ -49,17 +71,20 @@ class WebyastPermissionsService < DBus::Object
   dbus_interface "webyast.permissions.Interface" do
     dbus_method :grant, "out result:as, in permissions:as, in user:s" do |permissions,user,sender|
       result = execute(:grant, permissions, user,sender)
-      log "Grant permissions #{permissions.inspect} for user #{user} with result #{result.inspect}"
+      log "Grant permissions #{permissions.inspect} for user #{user} with result #{result.inspect} " +
+          (@polkit1 ? "(Polkit1)" : "(PolicyKit)")
       [result]
     end
     dbus_method :revoke, "out result:as, in permissions:as, in user:s" do |permissions,user,sender|
       result = execute(:revoke, permissions, user,sender)
-      log "Revoke permissions #{permissions.inspect} for user #{user} with result #{result.inspect}"
+      log "Revoke permissions #{permissions.inspect} for user #{user} with result #{result.inspect} " +
+          (@polkit1 ? "(Polkit1)" : "(PolicyKit)")
       [result]
     end
     dbus_method :check, "out result:as, in permissions:as, in user:s" do |permissions,user,sender|
       result = execute(:check, permissions, user,sender)
-      log "check permissions #{permissions.inspect} for user #{user} with result #{result.inspect}"
+      log "check permissions #{permissions.inspect} for user #{user} with result #{result.inspect} " +
+          (@polkit1 ? "(Polkit1)" : "(PolicyKit)")
       [result]
     end
   end
@@ -81,23 +106,51 @@ POLKIT_SECTION = "55-webyast.d"
         case command
           when :grant:
             begin
-              PolKit1::polkit1_write(POLKIT_SECTION, p, true, user)
-              result << "true"
+              if @polkit1
+                PolKit1::polkit1_write(POLKIT_SECTION, p, true, user)
+                result << "true"
+              else
+                #whitespace check for valid permission string to avoid attack
+                if p.match(/^[a-zA-Z][a-zA-Z0-9.-]*$/)
+                  result << `polkit-auth --user '#{user}' --grant '#{p}' 2>&1` # RORSCAN_ITL
+                else
+                   result << "perm #{p} is INVALID" # XXX tom: better don't include invalif perms here, we do not know what the calling function is doing with it, like displaying it via the browser, passing it to the shell etc.
+                end
+              end
             rescue Exception => e
               result << e.message
             end   
           when :revoke:
             begin
-              PolKit1::polkit1_write(POLKIT_SECTION, p, false, user)
-              result << "true"
+              if @polkit1
+                PolKit1::polkit1_write(POLKIT_SECTION, p, false, user)
+                result << "true"
+              else
+                #whitespace check for valid permission string to avoid attack
+                if p.match(/^[a-zA-Z][a-zA-Z0-9.-]*$/)
+                  result << `polkit-auth --user '#{user}' --revoke '#{p}' 2>&1` # RORSCAN_ITL
+                else
+                   result << "perm #{p} is INVALID" # XXX tom: better don't include invalif perms here, we do not know what the calling function is doing with it, like displaying it via the browser, passing it to the shell etc.
+                end
+              end
             rescue Exception => e
               result << e.message
             end   
           when :check:
-            if PolKit1::polkit1_check(p, user) == :yes
-              result << "yes"
+            if @polkit1
+              if PolKit1::polkit1_check(p, user) == :yes
+                result << "yes"
+              else
+                result << "no"
+              end
             else
-              result << "no"
+              uid = DBus::SystemBus.instance.proxy.GetConnectionUnixUser(sender)[0]
+              user = Etc.getpwuid(uid).name
+              if PolKit.polkit_check(p, user) == :yes
+                result << "yes"
+              else
+                result << "no"
+              end
             end
           else 
         end
@@ -114,16 +167,28 @@ POLKIT_SECTION = "55-webyast.d"
     begin
       case command
         when :grant:
-          return PolKit1.polkit1_check(PERMISSION_WRITE, user) == :yes
+          if @polkit1
+            return PolKit1.polkit1_check(PERMISSION_WRITE, user) == :yes
+          else
+            return PolKit.polkit_check(PERMISSION_WRITE, user) == :yes
+          end
         when :revoke:
-          return PolKit1.polkit1_check(PERMISSION_WRITE, user) == :yes
+          if @polkit1
+            return PolKit1.polkit1_check(PERMISSION_WRITE, user) == :yes
+          else
+            return PolKit.polkit_check(PERMISSION_WRITE, user) == :yes
+          end
         when :check:
-          return PolKit1.polkit1_check(PERMISSION_READ, user) == :yes
+          if @polkit1
+            return PolKit1.polkit1_check(PERMISSION_READ, user) == :yes
+          else
+            return PolKit.polkit_check(PERMISSION_READ, user) == :yes
+          end
         else
           return false
       end
     rescue Exception => e
-      log "PolKit1 returns an error: #{e.inspect}"
+      log "PolKit returns an error: #{e.inspect}"
       return false
     end
   end
@@ -137,7 +202,7 @@ POLKIT_SECTION = "55-webyast.d"
 end
 
 # Set the object path
-obj = WebyastPermissionsService.new("/webyast/permissions/Interface")
+obj = WebyastPermissionsService.new(polkit1_enabled, "/webyast/permissions/Interface")
 # Export it!
 service.export(obj)
 
