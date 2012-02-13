@@ -2,18 +2,18 @@
 #--
 # Webyast framework
 #
-# Copyright (C) 2009, 2010 Novell, Inc. 
+# Copyright (C) 2009, 2010 Novell, Inc.
 #   This library is free software; you can redistribute it and/or modify
 # it only under the terms of version 2.1 of the GNU Lesser General Public
-# License as published by the Free Software Foundation. 
+# License as published by the Free Software Foundation.
 #
 #   This library is distributed in the hope that it will be useful, but WITHOUT
 # ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
-# FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public License for more 
-# details. 
+# FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public License for more
+# details.
 #
 #   You should have received a copy of the GNU Lesser General Public
-# License along with this library; if not, write to the Free Software 
+# License along with this library; if not, write to the Free Software
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA
 #++
 */
@@ -27,29 +27,29 @@ $(function(){
       $dhcp_hostname.removeAttr('checked')
     }
   })
-  
+
   var $auto = $('#autoMode');
   var $manual = $('#manualMode');
 
   //bootproto attribute values (static | dhcp4 | dhcp6)
 //  $("#conf_mode").val().match("dhcp")? enableAuto(): enableStatic();
-  
-  $("#conf_mode").val() == "dhcp"? enableAuto(): enableStatic();
-  
+
+  $("#conf_mode").val().match("dhcp")? enableAuto(): enableStatic();
+
   function enableAuto() {
     $('#dnsForm').find('div.auto').hide();
     $('#ip-container').hide();
     $('#ip_sticker').show();
     $('div.auto input').attr('disabled', 'disabled');
   }
-  
+
   function enableStatic() {
     $('div.auto input').removeAttr('disabled');
     $('#ip-container').show();
     $('#ip_sticker').hide();
     $('#dnsForm').find('div.auto').show();
   }
-  
+
   function toggleMode($id) {
     if($id.val() == "dhcp") {
       $auto.addClass('active');
@@ -69,7 +69,7 @@ $(function(){
     toggleMode($(this));
     return false;
   });
-  
+
   $manual.click(function(event) {
     event.preventDefault();
     toggleMode($(this));
@@ -82,7 +82,7 @@ function submitValidForm() {
   if($('#dnsForm').find('input.error').length >0) $('#dnsForm').find('input.error').first().focus();
   return true;
 }
-  
+
 function validateForm($form) {
   var valid = false;
   var count = $form.find('input.error').length;
@@ -104,17 +104,17 @@ function enableForm($form) {
 // $(document).ready(function(){
 //   $dns = $('#dns-container');
 //   $ip = $('#ip-container');
-//   
-//   $dns.bind('click', function(){ 
+//
+//   $dns.bind('click', function(){
 //     console.log("DNS clicked")
 //     if(validateForm($ip) == true) {
 //       $(this).css('width', '58%').css('font-size', '12px').find('div.row label').css('width','160px');
 //       $ip.css('width', '38%').css('font-size', '10px');
 //       $ip.find('div.row label').css('width','100px');
-//     } 
+//     }
 //     return false;
 //   });
-//   
+//
 //   $ip.bind('click', function(){
 //     console.log("IP clicked")
 //     if(validateForm($dns) == true) {
@@ -125,4 +125,3 @@ function enableForm($form) {
 //     return false;
 //   });
 // });
-
