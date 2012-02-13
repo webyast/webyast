@@ -10,5 +10,7 @@ end
 require File.expand_path('../config/application', __FILE__)
 Administrator::Application.load_tasks #   <<<< = require 'tasks/rails'
 
+require "webyast-administrator"
+
 require "bundler/gem_tasks"
 task :build => :"gettext:pack"
