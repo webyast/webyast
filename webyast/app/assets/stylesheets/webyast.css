@@ -317,7 +317,6 @@ ul li {
   width: 100%;
   box-sizing: border-box;
   -moz-box-sizing: border-box;
-  float: left;
   border-radius: 0px;
   background-color: white;
   border: 1px solid #cccccc;
