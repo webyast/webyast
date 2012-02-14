@@ -58,7 +58,6 @@ group :development do
 end
 
 group :test do
-  gem "ruby-debug"
   gem "factory_girl_rails"
   gem "mocha",  :require => false
 end
