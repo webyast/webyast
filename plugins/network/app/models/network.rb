@@ -27,5 +27,10 @@ require 'base'
 require "yast/config_file"
 
 class Network < BaseModel::Base
+  def self.find
+    YastCache.fetch(self) {
+      response = YastService.Call("YaPI::NETWORK::Read") # hostname: true
+    }
+  end
 # This is a dummy class for the permission check only.
 end
