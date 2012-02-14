@@ -42,7 +42,7 @@ namespace :assets do
     end
 
     File.open("public/assets/manifest.yml", "w") do |file|
-      file.puts merged
+      file.puts merged.to_yaml
     end
   end
 end
