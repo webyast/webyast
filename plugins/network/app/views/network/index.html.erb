@@ -120,9 +120,9 @@
     <%= render :partial => 'shared/missing_write_permissions' if write_disabled %>
 
     <%= form_for :network, :url => { :action => "update" }, :html => {:id=>"dnsForm", :class=>"webyast_form", :method => :put, :onsubmit => "return submitValidForm();"} do |n| %>
-    <input type="hidden" id="interface" name="interface" value="<%= @iface %>"/>
-      
-    <div class="plugin-header">
+      <input type="hidden" id="interface" name="interface" value="<%= @iface %>"/>
+
+      <div class="plugin-header">
         <div class="left">
           <label class="plugin-icon-container"><%= image_tag("network.png", :class=>"plugin-icon") %></label>
           <label class="plugin-name"><%=_("Network")%></label><span id="questionMark" style="margin:2px 15px; float:none;">?</span>
@@ -177,7 +177,7 @@
         <div id="ip_sticker" class="right">
           <span>
             <span style="display:block; background:#eee; padding:2px 3px; font-size:11px;"><%=_("Current IP address (DHCP)")%></span>
-            <span style="font-size:20px; padding:5px 0px;"><%= @dhcp_ip %></span>
+            <span style="font-size:20px; padding:5px 0px;"> <%= @actual_ipaddr %></span>
           </span>
         </div>
 
@@ -223,5 +223,4 @@
       </div>
     </div>
   <% end %>
-  </div>
-
+</div>

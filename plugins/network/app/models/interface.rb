@@ -1,20 +1,20 @@
 #--
 # Copyright (c) 2009 Novell, Inc.
-# 
+#
 # All Rights Reserved.
-# 
+#
 # This program is free software; you can redistribute it and/or modify it
 # under the terms of version 2 of the GNU General Public License
 # as published by the Free Software Foundation.
-# 
+#
 # This program is distributed in the hope that it will be useful,
 # but WITHOUT ANY WARRANTY; without even the implied warranty of
 # MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
 # GNU General Public License for more details.
-# 
+#
 # You should have received a copy of the GNU General Public License
 # along with this program; if not, contact Novell, Inc.
-# 
+#
 # To contact Novell about this file by physical or electronic mail,
 # you may find current contact information at www.novell.com
 #++
@@ -24,11 +24,15 @@
 # and well defined data.
 
 require 'base'
+require "open3"
 
 class Interface < BaseModel::Base
 
   IPADDR_REGEX = /([0-9]{1,3}.){3}[0-9]{1,3}/
+  IP_IPADDR_REGEX = /inet (#{IPADDR_REGEX})/
+
   attr_accessor :bootproto
+
   validates_inclusion_of :bootproto, :in => ["static","dhcp"]
   attr_accessor :ipaddr
   # blank instead of nil as specified in restdoc, bnc#600097
@@ -41,8 +45,19 @@ class Interface < BaseModel::Base
   def initialize(args, id=nil)
     super args
     @id ||= id
-    #@ipaddr ||= "" causes exception if bootproto=dhcp: "Raised resource Invalid exception - #<InvalidParameters: Invalid arguments: {:ipaddr=>:invalid}>"
-    @ipaddr = bootproto == "dhcp" ?  "" : ipaddr
+
+    # Use /sbin/ip to detect the ip address if bootproto == 'dhcp' (Justus Winter)
+    if bootproto == "dhcp"
+      stdout, stderr, status = Open3.popen3("/sbin/ip", "-o", "-family", "inet", "addr", "show", "dev", id) do |stdin, stdout, stderr|
+        if match = IP_IPADDR_REGEX.match(stdout.read())
+          @ipaddr = match[1]
+        else
+          @ipaddr = ""
+        end
+      end
+     else
+       @ipaddr = ipaddr
+     end
 
   end
 
@@ -59,7 +74,6 @@ class Interface < BaseModel::Base
       else
         ret = Interface.new(ifaces_h[which], which)
       end
-
       ret
     }
   end

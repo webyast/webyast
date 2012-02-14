@@ -23,6 +23,7 @@
 require 'exceptions'
 require 'yast_cache'
 require "yast_service"
+require 'yast/config'
 
 class Permission
   #list of hash { :name => id, :granted => boolean, :description => string (optional)}
@@ -154,13 +155,21 @@ private
   end
 
   def get_description (action)
-    desc = `/usr/bin/pkaction --action-id #{action} | grep description: |  sed 's/description://g'`
+    if YaST::POLKIT1
+      desc = `/usr/bin/pkaction --action-id #{action} | grep description: |  sed 's/description://g'`
+    else
+      desc = `polkit-action --action #{action} | grep description: | sed 's/^description:[:space:]*\\(.\\+\\)$/\\1/'`
+    end
     desc.strip!
     desc
   end
 
   def self.all_actions
-    `/usr/bin/pkaction` # RORSCAN_ITL
+    if YaST::POLKIT1
+      `/usr/bin/pkaction` # RORSCAN_ITL
+    else
+      `/usr/bin/polkit-action` # RORSCAN_ITL
+    end
   end
 
 
