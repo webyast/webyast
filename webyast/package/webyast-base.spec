@@ -202,6 +202,10 @@ rm -f $RPM_BUILD_ROOT%{webyast_dir}/COPYING
 
 # install production mode Gemfile
 rake gemfile:production > $RPM_BUILD_ROOT%{webyast_dir}/Gemfile
+# install test mode Gemfile
+rake gemfile:test > $RPM_BUILD_ROOT%{webyast_dir}/Gemfile.test
+# install assets mode Gemfile
+rake gemfile:assets > $RPM_BUILD_ROOT%{webyast_dir}/Gemfile.assets
 
 # remove .gitkeep files
 find $RPM_BUILD_ROOT%{webyast_dir} -name .gitkeep -delete
@@ -423,6 +427,7 @@ rake -f lib/tasks/assets.rake assets:join_manifests
 %{webyast_dir}/public/apache.htaccess
 %{webyast_dir}/public/favicon.ico
 %{webyast_dir}/Gemfile
+%{webyast_dir}/Gemfile.assets
 %{webyast_dir}/Rakefile
 %{webyast_dir}/config.ru
 %{webyast_dir}/script
@@ -484,6 +489,7 @@ rake -f lib/tasks/assets.rake assets:join_manifests
 %files testsuite
 %defattr(-,root,root)
 %{webyast_dir}/test
+%{webyast_dir}/Gemfile.test
 
 %files branding-default
 %defattr(-,root,root)
