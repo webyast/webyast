@@ -33,7 +33,7 @@ Requires:       sysvinit > 2.86-195.3.1
 %endif
 Requires:       rubygem-passenger-nginx, rubygem-nokogiri
 Requires:       nginx >= 1.0
-Requires:       ruby-fcgi, sqlite3, syslog-ng, check-create-certificate
+Requires:       sqlite3, syslog-ng, check-create-certificate
 
 %if 0%{?suse_version} == 0 || %suse_version <= 1130
 Requires:       ruby-dbus
