@@ -56,15 +56,7 @@ class ControlpanelController < ApplicationController
 #  end
 
   def getNumberPermittedModules(shortcuts)
-    count = 0
-    unless shortcuts.empty?
-      shortcuts.values.each do |data|
-        if data['disabled'] != false
-          count += 1
-        end
-      end
-    end
-    return count
+    shortcuts.values.select{|s| !data['disabled']}.size
   end
 
   def nextstep
@@ -133,15 +125,12 @@ class ControlpanelController < ApplicationController
         node[key] = translate_shortcuts data
       end
     elsif node.is_a? Array
-      counter = 0
-      node.each do |data|
-        node[counter] = translate_shortcuts data
-        counter +=1
-      end
+      node.map!{|data| translate_shortcuts data}
     elsif node.is_a? String
       node = node.strip
       if node =~ /^_\(\"/ && node =~ /\"\)$/
-        node = _(node[3..node.length-3]) #try to translate it
+        # try to translate it
+        node = _(node[3..-3])
       end
     end
     return node
@@ -166,10 +155,7 @@ class ControlpanelController < ApplicationController
         shortcuts["#{plugin_dir}:#{k}"] = v
         v["disabled"] = false #backward compatibility
         if v.include? "read_permissions"
-          perms = v["read_permissions"]
-          perms.each do |perm|
-            v["disabled"] = v["disabled"] || !permissions[perm]
-          end
+          v["disabled"] = !v["read_permissions"].all?{|p| permissions[p]}
         end
       end
     end
