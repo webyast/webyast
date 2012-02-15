@@ -16,25 +16,21 @@
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA
 #++
 
-require 'fileutils'
-require File.join(File.dirname(__FILE__), "polkit_version")
+# Prepare to handle a package with 'osc'"
 
-def sudo(cmd)
-  puts "#{cmd}"
-  %x[sudo -p "Password: " #{cmd}]
-end
+#
+# obs_project, package_name = osc_prepare
+#
 
-desc "install policies"
-task :install_policies do |t|
-  puts "Running from #{__FILE__}"
-  Dir.glob("**/*.policy").each do |policy|
-    if polkit1
-      puts "copy #{policy} to /usr/share/polkit-1/actions"
-      FileUtils.cp("#{policy}", "/usr/share/polkit-1/actions")
-    else
-      puts "copy #{policy} to /usr/share/PolicyKit/policy"
-      FileUtils.cp("#{policy}", "/usr/share/PolicyKit/policy")
-    end
+require 'yaml'
+
+WEBYAST_CONFIG_FILE = "/etc/webyast/config.yml"
+def polkit1
+  #checking which policykit is used
+  polkit1_enabled = true
+  if File.exist?(WEBYAST_CONFIG_FILE)
+    values = YAML::load(File.open(WEBYAST_CONFIG_FILE, 'r').read)
+    polkit1_enabled = false if values["polkit1"] == false
   end
+  polkit1_enabled
 end
-

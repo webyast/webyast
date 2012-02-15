@@ -1,0 +1,8 @@
+# This is a general config file for WebYaST 
+#
+# The file needs to be located under /etc/webyast/ 
+
+--- 
+# Using the new
+# default: false
+polkit1: false
