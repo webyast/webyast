@@ -30,6 +30,7 @@ BuildRequires:  rubygems_with_buildroot_patch
 %rubygems_requires
 BuildRequires:	webyast-base, rubygem-sqlite3-ruby, rubygem-ruby-fcgi
 BuildRequires:	rubygem-webyast-rake-tasks >= 0.1.13
+BuildRequires:	webyast-base-testsuite
 Requires:	webyast-base
 Requires:	rubygem-webyast-rake-tasks >= 0.1.13
 
@@ -76,6 +77,18 @@ cd %{webyast_dir}
 # update manifest.yml file
 # use assets.rake file directly (faster loading)
 rake -f lib/tasks/assets.rake assets:join_manifests
+
+%check
+export TEST_DB_PATH=/tmp/webyast_test.sqlite3
+export RAILS_PARENT=%{webyast_dir}
+rm -rf $TEST_DB_PATH
+cd $RPM_BUILD_ROOT/%{_libdir}/ruby/gems/%{rb_ver}/gems/%{mod_full_name}
+RAILS_ENV=test rake db:create
+RAILS_ENV=test rake db:schema:load
+cp %{webyast_dir}/Gemfile.test Gemfile.test
+echo 'gem "%{mod_name}", :path => "."' >> Gemfile.test
+BUNDLE_GEMFILE=Gemfile.test RAILS_ENV=test ADD_BUILD_PATH=1 rake test
+rm -rf $TEST_DB_PATH
 
 %install
 %gem_install %{S:0}
