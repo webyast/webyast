@@ -5,3 +5,4 @@ tmp/
 .sass-cache/
 public/assets/
 Gemfile.lock
+package/www.tar.bz2

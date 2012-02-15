@@ -30,6 +30,7 @@ class AdministratorControllerTest < ActionController::TestCase
   def setup
     devise_sign_in
     Administrator.stubs(:find).returns Administrator.new({:aliases => ""})
+    AdministratorController.any_instance.stubs(:authorize!).with(:read, Administrator).returns(true)
   end
   
   test "check 'show' result" do
@@ -43,7 +44,6 @@ class AdministratorControllerTest < ActionController::TestCase
     assert ret_hash
     assert ret_hash.has_key?("administrator")
     assert ret_hash["administrator"].has_key?("aliases")
-    Rails.logger.debug ret_hash.inspect
   end
 
 end

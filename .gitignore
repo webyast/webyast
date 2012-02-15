@@ -6,3 +6,4 @@ plugins/*/package/www.tar.bz2
 pot
 /plugins/status/nbproject/private/
 /plugins/services/nbproject/private/
+/webyast-tasks/nbproject/private/

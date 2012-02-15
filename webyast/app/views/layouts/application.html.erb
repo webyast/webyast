@@ -78,7 +78,11 @@
               <%= link_to _("Home"), '/controlpanel'%>
             </span>
             <span class="userbar-icon user-icon">
-              <%= link_to(current_account.username, :controller => :users) %>
+              <% if Rails::Engine::Railties.engines.find {|e| e.class.to_s == "WebYaST::UsersEngine"} %>
+                <%= link_to(current_account.username, :controller => :users) %>
+              <% else %>
+                <%= current_account.username %>
+              <% end %>
             </span>
             <span class="userbar-icon" style=" text-align:center;">
               <%= render :partial => "main/language_list" %>

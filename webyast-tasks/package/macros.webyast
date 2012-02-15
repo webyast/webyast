@@ -48,3 +48,9 @@
     export RAILS_PARENT=%{webyast_dir} \
     env LANG=en rake restdoc
 
+# precompile assest for production mode
+%webyast_assets_precompile \
+    rm -f %{webyast_dir}/Gemfile.lock \
+    rm -rf %{webyast_dir}/public/assets \
+    (cd %{webyast_dir} && rake assets:precompile)
+
