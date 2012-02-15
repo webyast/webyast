@@ -339,7 +339,6 @@ exit 0
 #
 #granting permissions for webyast
 #
-/usr/sbin/grantwebyastrights --user %{webyast_user} --action grant --policy org.freedesktop.packagekit.system-update > /dev/null ||:
 /usr/sbin/grantwebyastrights --user %{webyast_user} --action grant --policy org.opensuse.yast.module-manager.import > /dev/null ||:
 #
 # granting all permissions for root
