@@ -37,14 +37,18 @@ class Interface < BaseModel::Base
   attr_accessor :ipaddr
   # blank instead of nil as specified in restdoc, bnc#600097
   validates_format_of :ipaddr, :allow_blank => true, :with => /^#{IPADDR_REGEX}\/(#{IPADDR_REGEX}|[0-9]{1,2})$/
-  attr_accessor	:id
+  attr_accessor :id
   validates_format_of :id, :allow_nil => false, :with => /^[a-zA-Z0-9_-]+$/
+
+  attr_accessor :vlan_etherdevice, :vlan_id
 
   public
 
   def initialize(args, id=nil)
     super args
     @id ||= id
+
+    Rails.logger.error
 
     # Use /sbin/ip to detect the ip address if bootproto == 'dhcp' (Justus Winter)
     if bootproto == "dhcp"
@@ -64,6 +68,7 @@ class Interface < BaseModel::Base
   def self.find( which )
     YastCache.fetch(self, which) {
       response = YastService.Call("YaPI::NETWORK::Read")
+      Rails.logger.error "INTERFACE NETWORK RESPONSE #{response.inspect}"
       ifaces_h = response["interfaces"]
 
       if which == :all

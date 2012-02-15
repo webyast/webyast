@@ -22,42 +22,24 @@
 class NetworkController < ApplicationController
 
 public
-
   NETMASK_RANGE = 0..32
   STATIC_BOOT_ID = "static"
 
-
   # GET /network
   def index
+    # TODO: NO INTERFACE FOUND!!!
     authorize! :read, Network
-    @ifcs = Interface.find :all
+    @ifcs = Interface.find(:all)
 
-    # FIXED: MODULE CRASHED IF BOTH INTERFACES HAS ATTRIBUTE BOOTPROTO !!!
+    @physical = @ifcs.select{|k, i| i if k.match("eth")}
+    @virtual = @ifcs.select{|k, i| i unless k.match("eth")}
 
-    unless @ifcs.nil? || @ifcs.empty? #No network interfaces found
+  end
 
-      unless @ifcs.length == 1
-        logger.debug "***** More than one interface is attached -> #{ @ifcs.length } *****"
-        Rails.logger.error @ifcs.to_hash.inspect
+  def show
 
-        @ifcs.each do |id, interface|
-          unless interface.bootproto.nil?
-            logger.error "** Interface #{interface.id} is active\n"
-            ifc = Interface.find(id)
-            @iface = id
-          end
-        end
-      end
-
-    else
-      logger.error "***ERROR: No network interface found!"
-    end
-
-    ifc = Interface.find @iface
-    return false unless ifc
-
-    # TODO use rescue_from "AR::Base not found..."
-    # http://api.rubyonrails.org/classes/ActiveSupport/Rescuable/ClassMethods.html
+    @ifc = Interface.find(params[:id])
+    Rails.logger.error "idshfihsdofiods #{@iface.inspect}"
 
     hn = Hostname.find
     return false unless hn
@@ -68,27 +50,24 @@ public
     rt = Route.find "default"
     return false unless rt
 
-    @conf_mode = ifc.bootproto
+    @conf_mode = @ifc.bootproto
     @conf_mode = STATIC_BOOT_ID if @conf_mode.blank?
 
     if @conf_mode == STATIC_BOOT_ID
-      ipaddr = ifc.ipaddr || "/"
+      ipaddr = @ifc.ipaddr || "/"
     else
       ipaddr = "/"
     end
 
     @ip, @netmask = ipaddr.split "/"
     # when detect PREFIXLEN with leading "/"
-    if ifc.bootproto == STATIC_BOOT_ID && NETMASK_RANGE.include?(@netmask.to_i)
+    if @ifc.bootproto == STATIC_BOOT_ID && NETMASK_RANGE.include?(@netmask.to_i)
       @netmask = "/"+@netmask
       Rails.logger.error "\n*** set netmask if static and netmask in range #{@netmask} \n"
     end
 
     @name = hn.name
     @domain = hn.domain
-
-    @dhcp_ip = getCurrentIP;
-    @actual_ipaddr = ifc.ipaddr
 
     @dhcp_hostname_enabled = hn.respond_to?("dhcp_hostname")
     @dhcp_hostname = @dhcp_hostname_enabled && hn.dhcp_hostname == "1"
@@ -99,9 +78,12 @@ public
 
     @conf_modes = {_("Manual")=>STATIC_BOOT_ID, _("Automatic")=>"dhcp"}
     @conf_modes[@conf_mode] =@conf_mode unless @conf_modes.has_value? @conf_mode
+
+    respond_to do |format|
+      format.html # show.html.erb
+      format.json { render :json => @interface }
+    end
   end
-
-
 
   # PUT /users/1
   # PUT /users/1.xml
