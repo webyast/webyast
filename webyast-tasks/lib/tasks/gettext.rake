@@ -46,3 +46,17 @@ task :fetch_po, [:lcn_dir] do |t, args|
   end
 end
 
+namespace :gettext do
+  # monkeypatch for broken Gem.all_load_paths
+  # see https://github.com/rubygems/rubygems/issues/171
+  task :rubygems_fix do
+    module Gem
+      def self.all_load_paths
+        []
+      end
+    end
+  end
+end
+
+# fix Gem.all_load_paths bug
+task :'gettext:pack' => :'gettext:rubygems_fix'

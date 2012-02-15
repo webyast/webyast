@@ -88,7 +88,7 @@ EOF
 
   #  ??? undefined method `session' for #<Basesystem:0x7f2bc5ccd268>
   def test_to_json
-    assert_not_nil @basesystem.to_json
+    assert_not_nil @basesystem.as_json
   end
 
 

@@ -128,6 +128,7 @@ PID_FILE=/var/run/webyast.pid
 CERTIFICATEFILE=/etc/nginx/certs/webyast.pem
 CERTKEYFILE=/etc/nginx/certs/webyast.key
 COMBINEDCERTFILE=/etc/nginx/certs/webyast-combined.pem
+GEMFILE_LOCK=/srv/www/webyast/Gemfile.lock
 
 # Source LSB init functions
 # providing start_daemon, killproc, pidofproc,
@@ -186,6 +187,9 @@ case "$1" in
     fi
 
        echo -n "Starting webyast "
+        # refresh the Gemfile.lock content before starting the server
+        # (outdated file can cause problems after upgrading needed rubygems)
+	rm -f $GEMFILE_LOCK
   #generate deployment specific secret key (bnc#591345)
   SECRET=`cd /srv/www/webyast/ && rake -s secret`
   if [ -z $SECRET ]; then

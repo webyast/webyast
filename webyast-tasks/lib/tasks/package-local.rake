@@ -48,19 +48,24 @@ def add_git_files(package_task)
   filelist = `git ls-files . | grep -v \\.gitignore`.split("\n")
 
   if $?.exitstatus.zero?
-      # add ./ prefix so the exclude patterns match
-      filelist.map! { |f| "./#{f}"}
+    exclude_list = [ /^package\//, /^nbproject\//, /^coverage\//,
+      /^vendor\/plugins\/rails_rcov\// ]
 
-      package_task.package_files.include filelist
-
-      ignored = `git ls-files -o .`.split("\n")
-
-      if $?.exitstatus.zero? and ignored.size > 0
-	  ignored.each {|f| $stderr.puts "WARNING: Ignoring file: #{f}"}
+    exclude_list.each do |exclude|
+      filelist.delete_if do |f|
+        f.match exclude
       end
+    end
+
+    package_task.package_files.include filelist
+
+    ignored = `git ls-files -o .`.split("\n")
+
+    if $?.exitstatus.zero? and ignored.size > 0
+      ignored.each {|f| $stderr.puts "WARNING: Ignoring file: #{f}"}
+    end
   else
-      $stderr.puts 'WARNING: Cannot get GIT listing, packaging all files'
-      package_task.package_files.include('./**/*')
+    raise 'ERROR: Cannot get GIT listing ("git ls-files" failed)'
   end
 end
 
@@ -73,23 +78,6 @@ def create_package_task
     p.package_dir = PACKAGE_DIR
 
     add_git_files p
-
-    #don't add IDE files
-    p.package_files.exclude('./nbproject')
-    #don't add generated documentation. If you want have it in package, generate it fresh
-    p.package_files.exclude('./doc/app')
-    # ignore backups
-    p.package_files.exclude('./**/*.orig')
-    p.package_files.exclude('./package')
-    p.package_files.exclude('./coverage')
-    p.package_files.exclude('./db/*.sqlite3')
-    p.package_files.exclude('./db/schema.rb')
-    p.package_files.exclude('./log/*.log')
-    p.package_files.exclude('./vendor/plugins/rails_rcov')
-    p.package_files.exclude('./public/vendor/text/locale')
-    p.package_files.exclude('./public/vendor/text/po')
-    p.package_files.exclude('./public/vendor/images')
-    p.package_files.exclude('./public/vendor/stylesheets')
   end
 end
 
