@@ -40,7 +40,7 @@ Requires:       ruby-dbus
 %else
 Requires:	rubygem-ruby-dbus
 %endif
-Requires:       rubygem-webyast-rake-tasks >= 0.1.13
+Requires:       rubygem-webyast-rake-tasks >= 0.2
 Requires:       yast2-dbus-server
 PreReq:		rubygem-bundler
 # 634404
@@ -72,7 +72,7 @@ BuildRoot:      %{_tmppath}/%{name}-%{version}-build
 BuildRequires:  ruby, pkg-config, rubygem-mocha
 # if we run the tests during build, we need most of Requires here too,
 # except for deployment specific stuff
-BuildRequires:  rubygem-webyast-rake-tasks >= 0.1.13
+BuildRequires:  rubygem-webyast-rake-tasks >= 0.2
 BuildRequires:  sqlite3, dbus-1
 %if 0%{?suse_version} == 0 || %suse_version <= 1130
 BuildRequires:  ruby-dbus
@@ -384,16 +384,10 @@ dbus-send --print-reply --system --dest=org.freedesktop.DBus / org.freedesktop.D
 %restart_on_update %{webyast_service}
 
 %post branding-default
-cd %{webyast_dir}
-# update manifest.yml file
-# use assets.rake file directly (faster loading)
-rake -f lib/tasks/assets.rake assets:join_manifests
+%webyast_update_assets
 
 %postun branding-default
-cd %{webyast_dir}
-# update manifest.yml file
-# use assets.rake file directly (faster loading)
-rake -f lib/tasks/assets.rake assets:join_manifests
+%webyast_update_assets
 
 #---------------------------------------------------------------
 %files

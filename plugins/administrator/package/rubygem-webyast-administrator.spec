@@ -28,11 +28,11 @@ License:        GPL-2.0
 BuildRoot:      %{_tmppath}/%{name}-%{version}-build
 BuildRequires:  rubygems_with_buildroot_patch
 %rubygems_requires
-BuildRequires:	webyast-base, rubygem-sqlite3-ruby, rubygem-ruby-fcgi
-BuildRequires:	rubygem-webyast-rake-tasks >= 0.1.13
+BuildRequires:	webyast-base, rubygem-sqlite3-ruby
+BuildRequires:	rubygem-webyast-rake-tasks >= 0.2
 BuildRequires:	webyast-base-testsuite
 Requires:	webyast-base
-Requires:	rubygem-webyast-rake-tasks >= 0.1.13
+Requires:	rubygem-webyast-rake-tasks >= 0.2
 
 #
 Url:            http://rubygems.org/gems/webyast-administrator
@@ -67,28 +67,13 @@ Test::Unit or RSpec files, useful for developers.
 /usr/sbin/grantwebyastrights --user root --action grant > /dev/null
 /usr/sbin/grantwebyastrights --user %{webyast_user} --action grant > /dev/null
 
-cd %{webyast_dir}
-# update manifest.yml file
-# use assets.rake file directly (faster loading)
-rake -f lib/tasks/assets.rake assets:join_manifests
+%webyast_update_assets
 
 %postun
-cd %{webyast_dir}
-# update manifest.yml file
-# use assets.rake file directly (faster loading)
-rake -f lib/tasks/assets.rake assets:join_manifests
+%webyast_update_assets
 
 %check
-export TEST_DB_PATH=/tmp/webyast_test.sqlite3
-export RAILS_PARENT=%{webyast_dir}
-rm -rf $TEST_DB_PATH
-cd $RPM_BUILD_ROOT/%{_libdir}/ruby/gems/%{rb_ver}/gems/%{mod_full_name}
-RAILS_ENV=test rake db:create
-RAILS_ENV=test rake db:schema:load
-cp %{webyast_dir}/Gemfile.test Gemfile.test
-echo 'gem "%{mod_name}", :path => "."' >> Gemfile.test
-BUNDLE_GEMFILE=Gemfile.test RAILS_ENV=test ADD_BUILD_PATH=1 rake test
-rm -rf $TEST_DB_PATH
+%webyast_run_plugin_tests
 
 %install
 %gem_install %{S:0}
@@ -97,20 +82,7 @@ rm -rf $TEST_DB_PATH
 mkdir -p $RPM_BUILD_ROOT/usr/share/polkit-1/actions
 install -m 0644 %SOURCE1 $RPM_BUILD_ROOT/usr/share/polkit-1/actions/
 
-# precompile assets
-export RAILS_PARENT=%{webyast_dir}
-cd $RPM_BUILD_ROOT/%{_libdir}/ruby/gems/%{rb_ver}/gems/%{mod_full_name}
-
-rake assets:precompile
-rm -rf tmp
-
-# move them to webyast-base
-mkdir -p $RPM_BUILD_ROOT/srv/www/webyast/public/assets
-mv public/assets/* $RPM_BUILD_ROOT/srv/www/webyast/public/assets
-rm -rf public/assets
-mv $RPM_BUILD_ROOT/srv/www/webyast/public/assets/manifest.yml $RPM_BUILD_ROOT/srv/www/webyast/public/assets/manifest.yml.administrator
-
-rm -rf log
+%webyast_build_plugin_assets
 
 # search locale files
 #find_lang webyast-root-user
@@ -127,8 +99,8 @@ rm -rf log
 %{_libdir}/ruby/gems/%{rb_ver}/specifications/%{mod_full_name}.gemspec
 
 # precompiled assets
-%dir /srv/www/webyast/public/assets
-/srv/www/webyast/public/assets/*
+%dir %{webyast_dir}/public/assets
+%{webyast_dir}/public/assets/*
 
 %dir /usr/share/polkit-1
 %dir /usr/share/polkit-1/actions

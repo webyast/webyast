@@ -34,23 +34,40 @@
 # service names (init script names in /etc/init.d)
 %webyast_service webyast
 
-# run the testsuite
-%webyast_check \
-    export RAILS_PARENT=%{webyast_dir} \
-    export TEST_DB_PATH=/tmp/webyast_test.sqlite3 \
-    rm -rf $TEST_DB_PATH \
-    RAILS_ENV=test rake db:create \
-    RAILS_ENV=test rake db:schema:load \
-    RAILS_ENV=test ADD_BUILD_PATH=1 rake test
-
 # build REST documentation
 %webyast_restdoc \
     export RAILS_PARENT=%{webyast_dir} \
     env LANG=en rake restdoc
 
-# precompile assest for production mode
-%webyast_assets_precompile \
-    rm -f %{webyast_dir}/Gemfile.lock \
-    rm -rf %{webyast_dir}/public/assets \
-    (cd %{webyast_dir} && rake assets:precompile)
+# update manifest.yml file
+# use assets.rake file directly (faster loading)
+%webyast_update_assets \
+    (cd %{webyast_dir} && rake -f lib/tasks/assets.rake assets:join_manifests)
+
+# run plugin testsuite (from %check section)
+%webyast_run_plugin_tests \
+    export TEST_DB_PATH=/tmp/webyast_test.sqlite3 \
+    export RAILS_PARENT=%{webyast_dir} \
+    rm -rf $TEST_DB_PATH \
+    cd $RPM_BUILD_ROOT/%{_libdir}/ruby/gems/%{rb_ver}/gems/%{mod_full_name} \
+    RAILS_ENV=test rake db:create \
+    RAILS_ENV=test rake db:schema:load \
+    cp %{webyast_dir}/Gemfile.test Gemfile.test \
+    echo 'gem "%{mod_name}", :path => "."' >> Gemfile.test \
+    BUNDLE_GEMFILE=Gemfile.test RAILS_ENV=test ADD_BUILD_PATH=1 rake test \
+    rm -rf $TEST_DB_PATH
+
+# build (precompile) plugin assets (in %install section)
+%webyast_build_plugin_assets \
+    export RAILS_PARENT=%{webyast_dir} \
+    cd $RPM_BUILD_ROOT/%{_libdir}/ruby/gems/%{rb_ver}/gems/%{mod_full_name} \
+    rake assets:precompile \
+    rm -rf tmp \
+    mkdir -p $RPM_BUILD_ROOT/srv/www/webyast/public/assets \
+    mv public/assets/* $RPM_BUILD_ROOT/srv/www/webyast/public/assets \
+    rm -rf public/assets \
+    mv $RPM_BUILD_ROOT/srv/www/webyast/public/assets/manifest.yml $RPM_BUILD_ROOT/srv/www/webyast/public/assets/manifest.yml.%{mod_name} \
+    rm -rf log \
+    cd -
+
 
