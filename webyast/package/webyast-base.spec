@@ -72,7 +72,7 @@ BuildRoot:      %{_tmppath}/%{name}-%{version}-build
 BuildRequires:  ruby, pkg-config, rubygem-mocha
 # if we run the tests during build, we need most of Requires here too,
 # except for deployment specific stuff
-BuildRequires:  rubygem-webyast-rake-tasks >= 0.1.13, rubygem-restility
+BuildRequires:  rubygem-webyast-rake-tasks >= 0.1.13
 BuildRequires:  sqlite3, dbus-1
 %if 0%{?suse_version} == 0 || %suse_version <= 1130
 BuildRequires:  ruby-dbus
@@ -84,7 +84,7 @@ BuildRequires:  rubygem-rails-3_1
 BuildRequires:  rubygem-polkit1
 # the testsuite is run during build
 BuildRequires:  rubygem-test-unit rubygem-mocha
-BuildRequires:  tidy, rubygem-haml, rubygem-nokogiri, rubygem-builder-3_0
+BuildRequires:  rubygem-haml, rubygem-nokogiri, rubygem-builder-3_0
 BuildRequires:  nginx >= 1.0
 BuildRequires:	rubygem-bundler
 BuildRequires:	rubygem-devise, rubygem-devise_unix2_chkpwd_authenticatable, rubygem-devise-i18n
