@@ -56,7 +56,7 @@ class ControlpanelController < ApplicationController
 #  end
 
   def getNumberPermittedModules(shortcuts)
-    shortcuts.values.select{|s| !data['disabled']}.size
+    shortcuts.values.select{|s| !s['disabled']}.size
   end
 
   def nextstep
