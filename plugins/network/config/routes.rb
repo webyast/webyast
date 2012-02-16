@@ -1,3 +1,4 @@
 WebYaST::NetworkEngine.routes.draw do
-  resources :network
+  match "/network/iface" => "network#iface", :as => :ajax
+  match "/network/partial" => "network#partial", :as => :partial
 end

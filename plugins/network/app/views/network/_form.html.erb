@@ -1,0 +1,149 @@
+<%= form_for :network, :url => { :action => "#{action}" }, :html => {:id=>"networkForm", :class=>"webyast_form", :onsubmit => "return is_valid();"} do |f| %>
+
+<% if action == "create" %>
+  <fieldset class="webyast_fieldset">
+    <div class="fieldset_header">
+      <span class="fieldset_header_title" >
+        <%= _("Interface configurtion")%>
+      </span>
+    </div>
+
+    <div class="fieldset_body">
+      <div class="row">
+        <label><%=_("Device type")%></label>
+        <%= select("interface", "type", { "Ethernet" => "eth", "VLAN" => "vlan", "Bridge" => "br", "Bond" => "bond"}, :selected => "eth") %>
+        <%= select("interface", "name", ((@physical.count)..10).to_a.map{|i| "eth#{i}"}) %>
+        <%= image_tag("wait.gif", :id=>"ajax_call", :style=>"vertical-align: middle; height: 22px; display:none;") %>
+      </div>
+
+    </div>
+  </fieldset>
+<% else %>
+
+  <fieldset id="interface-info" class="webyast_fieldset">
+    <div id="dns-container-header" class="fieldset_header">
+      <span class="fieldset_header_title" >
+        <%= _("Network info")%>
+      </span>
+    </div>
+    <div class="fieldset_body">
+      <div class="row">
+        <label><%=_("Device type/Interface")%></label>
+        Ethernet / <%= @ifc.id %>
+      </div>
+      <div class="row">
+        <label><%=_("IP/Subnet mask")%></label>
+        <%= @ifc.ipaddr.nil? ? "-/-" : @ifc.ipaddr %>
+      </div>
+    </div>
+  </fieldset>
+<% end %>
+
+  <div id="interface_fields"></div>
+
+  <%= hidden_field_tag :interface, @ifc.id || "" %>
+
+    <fieldset class="webyast_fieldset">
+      <div class="fieldset_header">
+        <span class="fieldset_header_title" >
+          <%= _("Configuration mode")%>
+        </span>
+
+        <span id="modeSwitcher" class="right button-group" style="padding:0px 5px;">
+          <%= hidden_field_tag :bootproto, @ifc.bootproto, :disabled => @write_disabled %>
+
+          <% if(@ifc.bootproto == 'none') %>
+            <a class="btn lbtn" href="#" value="dhcp">DHCP</a>
+            <a class="btn mbtn" href="#" value="static">STATIC</a>
+            <a class="btn rbtn on" href="#" value="none">NONE</a>
+          <% elsif (@ifc.bootproto == 'dhcp') %>
+            <a class="btn lbtn on" href="#" value="dhcp">DHCP</a>
+            <a class="btn mbtn" href="#" value="static">STATIC</a>
+            <a class="btn rbtn" href="#" value="none">NONE</a>
+          <% else %>
+            <a class="btn lbtn" href="#">DHCP</a>
+            <a class="btn mbtn on" href="#">STATIC</a>
+            <a class="btn rbtn" href="#">NONE</a>
+          <% end %>
+        </span>
+      </div>
+    </fieldset>
+
+    <% if @ifc.bootproto == "none" %>
+      <fieldset id="dns-conf" class="webyast_fieldset" style="display:none;">
+    <% else%>
+      <fieldset id="dns-conf" class="webyast_fieldset">
+    <% end %>
+        <div class="fieldset_header">
+           <span class="fieldset_header_title" >
+            <%= _("DNS configuration")%>
+          </span>
+        </div>
+
+        <div class="fieldset_body">
+          <div class="row">
+            <label><%=_("Hostname")%></label>
+            <%= text_field_tag :hostname, @name, :class=>"hostname", :disabled => @write_disabled %>
+          </div>
+          <div class="row">
+            <label><%=_("Domain")%></label>
+            <%= text_field_tag :domain, @domain, :class=>"domain", :disabled => @write_disabled %>
+          </div>
+
+          <div class="row static dhcp <%= 'hidden' if @disabled %>">
+            <label><%=_("Name servers")%></label>
+            <%= text_field_tag :nameservers, @dns.nameservers.join(" "), :class=>"nameservers", :disabled => (@write_disabled || @disabled) %>
+          </div>
+
+          <div class="row static dhcp <%= 'hidden' if @disabled %>">
+             <label><%=_("Search domains")%></label>
+             <%= text_field_tag :searchdomains, @dns.searches.join(" "), :class=>"searchdomains", :disabled => (@write_disabled || @disabled) %>
+          </div>
+
+          <div class="row">
+            <label><%=_("Change hostname by DHCP")%></label>
+            <%= check_box_tag :dhcp_hostname, "1", @dhcp_hostname , :disabled=>!@dhcp_hostname_enabled %>
+            <input type="hidden" id="dhcp_hostname_enabled" name="dhcp_hostname_enabled" value="<%= @dhcp_hostname_enabled %>"/>
+          </div>
+
+        </div>
+      </fieldset>
+
+      <% if @ifc.bootproto == "static" %>
+        <fieldset id="ip-conf" class="webyast_fieldset">
+      <% else %>
+        <fieldset id="ip-conf" class="webyast_fieldset" style="display:none;">
+      <% end %>
+          <div id="ip-container-header" class="fieldset_header">
+            <span class="fieldset_header_title" >
+              <%= _("IP configuration")%>
+              <span style="float:none; color:#777777; font-size:10px; margin-left:2px;">(via DHCP server)</span>
+            </span>
+          </div>
+
+          <div class="fieldset_body">
+            <div class="row static">
+              <label for="<%= :ip %>"><%=_("IP address")%></label>
+              <%=text_field_tag :ip, @ip, :class=>"ip static", :disabled => (@write_disabled || @disabled) %>
+            </div>
+            <div class="row static">
+              <label for="<%= :netmask %>"><%=_("Subnet mask/Prefixlen")%></label>
+              <%=text_field_tag :netmask, @netmask, :class=>"netmask", :disabled => (@write_disabled || @disabled) %>
+            </div>
+            <div class="row static">
+              <label for="<%= :default_route %>"><%=_("Default route")%></label>
+              <%=text_field_tag :default_route, @default_route, :class=>"default_route", :disabled => (@write_disabled || @disabled) %>
+            </div>
+          </div>
+        </fieldset>
+
+    <div class="clearfix"></div>
+    <div class="button_container">
+      <div class="hr">&nbsp;</div>
+      <div class="nav-buttons">
+        <%= submit_tag _("Save"), :disabled => @write_disabled -%>
+        <%= form_str_spacer %>
+        <%= form_back_button %>
+      </div>
+    </div>
+  <% end %>

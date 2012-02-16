@@ -31,16 +31,12 @@ class Interface < BaseModel::Base
   IPADDR_REGEX = /([0-9]{1,3}.){3}[0-9]{1,3}/
   IP_IPADDR_REGEX = /inet (#{IPADDR_REGEX})/
 
-  attr_accessor :bootproto
-
-  validates_inclusion_of :bootproto, :in => ["static","dhcp"]
-  attr_accessor :ipaddr
-  # blank instead of nil as specified in restdoc, bnc#600097
-  validates_format_of :ipaddr, :allow_blank => true, :with => /^#{IPADDR_REGEX}\/(#{IPADDR_REGEX}|[0-9]{1,2})$/
-  attr_accessor :id
-  validates_format_of :id, :allow_nil => false, :with => /^[a-zA-Z0-9_-]+$/
-
+  attr_accessor :id, :bootproto, :ipaddr
   attr_accessor :vlan_etherdevice, :vlan_id
+
+  validates_format_of :id, :allow_nil => false, :with => /^[a-zA-Z0-9_-]+$/
+  validates_inclusion_of :bootproto, :in => ["static","dhcp"]
+  validates_format_of :ipaddr, :allow_blank => true, :with => /^#{IPADDR_REGEX}\/(#{IPADDR_REGEX}|[0-9]{1,2})$/  #(bnc#600097)
 
   public
 
@@ -48,27 +44,21 @@ class Interface < BaseModel::Base
     super args
     @id ||= id
 
-    Rails.logger.error
-
     # Use /sbin/ip to detect the ip address if bootproto == 'dhcp' (Justus Winter)
     if bootproto == "dhcp"
       stdout, stderr, status = Open3.popen3("/sbin/ip", "-o", "-family", "inet", "addr", "show", "dev", id) do |stdin, stdout, stderr|
-        if match = IP_IPADDR_REGEX.match(stdout.read())
-          @ipaddr = match[1]
-        else
-          @ipaddr = ""
-        end
+        match = IP_IPADDR_REGEX.match(stdout.read())
+        @ipaddr = (match)? match[1] : ""
       end
-     else
-       @ipaddr = ipaddr
-     end
+    else
+      @ipaddr = ipaddr
+    end
 
   end
 
   def self.find( which )
     YastCache.fetch(self, which) {
       response = YastService.Call("YaPI::NETWORK::Read")
-      Rails.logger.error "INTERFACE NETWORK RESPONSE #{response.inspect}"
       ifaces_h = response["interfaces"]
 
       if which == :all
@@ -84,20 +74,40 @@ class Interface < BaseModel::Base
   end
 
   # Saves data from model to system via YaPI. Saves only setted data,
-  # so it support partial safe (e.g. save only new timezone if rest of fields is not set).
+  # so it support partial safe (e.g. save only new timezone if rest of fields is not set). ????????
   def update
-    if @bootproto==""
-      settings = {@id=>{}}
+#    @id = Hash.new
+#    interface = {}
+#    interface["bootproto"] = @bootproto if @bootproto
+#    interface["ipaddr"] = @ipaddr if @ipaddr
+#    interface["vlan_etherdevice"] = @vlan_etherdevice if @vlan_etherdevice
+#    interface["vlan_id"] = @vlan_id if @vlan_id
+
+#    settings = { @id => interface }
+
+
+    if @bootproto.empty?
+      settings = { @id=>{} }
     else
+      @vlan_id = @vlan_id || ""
+      @vlan_etherdevice = @vlan_etherdevice || ""
+
       settings = {
         @id => {
-	      "bootproto" => @bootproto,
-	      "ipaddr" => @ipaddr
+        "bootproto" => @bootproto,
+        "ipaddr" => @ipaddr,
+        "vlan_id" => @vlan_id,
+        "vlan_etherdevice" => @vlan_etherdevice,
         }
       }
     end
+
+    Rails.logger.error "********** SETTINGS BEFORE SAVE #{settings.inspect}"
     vsettings = [ "a{sa{ss}}", settings ] # bnc#538050
-    YastService.Call("YaPI::NETWORK::Write",{"interface" => vsettings})
+    response = YastService.Call("YaPI::NETWORK::Write",{"interface" => vsettings})
+
+    Rails.logger.error "********** RESPONSE FROM YAPI?? #{response.inspect}"
+
     # TODO success or not?
     YastCache.reset(self,@id)
   end

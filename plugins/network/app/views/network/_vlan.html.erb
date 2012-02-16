@@ -1,0 +1,19 @@
+<% write_disabled = cannot? :write, Network %>
+
+<fieldset id="vlan-container" class="webyast_fieldset">
+  <div class="fieldset_header">
+    <span class="fieldset_header_title" >VLAN configuration</span>
+  </div>
+
+  <div class="fieldset_body">
+    <div class="row">
+      <label><%=_("Physical interface")%></label>
+      <%= select("vlan", "etherdevice", @physical.map{|id, iface| id}) %>
+    </div>
+
+    <div class="row">
+      <label><%=_("VLAN ID")%></label>
+      <%=text_field_tag("vlan_id", "", :disabled => write_disabled) %>
+    </div>
+  </div>
+</fieldset>

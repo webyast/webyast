@@ -44,7 +44,7 @@
               <p>Mode: <%= interface.bootproto %></p>
             </div>
             <div class="link_container">
-              <%= link_to _("configure"), :controller => "network", :action => "show", :id => id %>
+              <%= link_to _("configure"), :controller => "network", :action => "edit", :id => id %>
             </div>
           </div>
 
@@ -71,7 +71,7 @@
               <p>IP address: <%= interface.ipaddr %></p>
             </div>
             <div class="link_container">
-              <%= link_to _("configure"), :controller => "network", :action => "show", :id => id %>
+              <%= link_to _("configure"), :controller => "network", :action => "edit", :id => id %>
             </div>
           </div>
         <% end %>

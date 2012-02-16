@@ -17,6 +17,7 @@
  *#++ */
 
 #dhcp_hostname { vertical-align: middle; padding:0; margin:0;}
+#networkForm .hidden { display: none!important; }
 
 #autoMode, #manualMode {
   padding:2px 5px;

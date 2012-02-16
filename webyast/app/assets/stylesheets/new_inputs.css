@@ -105,22 +105,63 @@ input[type="text"].without_border_right {
   }
 
 
+
+/* New button style*/
+
+a.btn.on {
+  background: none repeat scroll 0 0 #39A33A;
+  color: #fff;
+  text-shadow: 0 -1px 1px #555 !important;
+  border-color: #777777;
+}
+a.btn:hover {
+  border-bottom: 1px solid #aaa;
+  border-color: #777777;
+/*  background: -moz-linear-gradient(center bottom , #DDD, #FFFFFF) repeat scroll 0 0 transparent;*/
+/*  color:#666;*/
+}
+
+a.btn {
+/*    box-shadow: 0 0 1px #666666;*/
+    cursor: pointer;
+    -moz-transition: border-color 0.2s ease 0s;
+
+    background: none repeat scroll 0 0 #F3F3F3;
+    background: -moz-linear-gradient(center bottom , #CCCCCC, #FFFFFF) repeat scroll 0 0 transparent;
+
+    border: 1px solid #aaa;
+/*    box-shadow: 0 1px 1px #FFFFFF;*/
+
+    border-radius: 2px 2px 2px 2px;
+    color: #454545;
+    display: inline-block;
+
+    float: left;
+    font: bold 12px/17px Helvetica,Arial,sans-serif;
+
+    text-shadow: 0 1px 1px #fff;
+    vertical-align: middle;
+    white-space: nowrap;
+
+    text-decoration:none;
+    outline:none;
+
+    min-width:64px;
+    text-align:center;
+    margin:2px 0px;
+    margin-left:-1px;
+}
+
+a.btn { height: 18px; padding: 4px 6px 2px; }
+a.btn.lbtn { margin-left:0; border-bottom-right-radius: 0; border-top-right-radius: 0; }
+a.btn.mbtn { border-radius: 0 0 0 0; }
+a.btn.rbtn { border-bottom-left-radius: 0; border-top-left-radius: 0; }
+
+
 /* MODULE SPECIFIC ADAPTATIONS */
 /*  SOFTWARE REPOSITORIES */
-
-
-
-
-
-
-
-
-
 .icons {float:left; width:17px; height:17px; margin-top:-1px; margin-right:5px; vertical-align:baseline;}
 .ui-accordion .ui-accordion-header .ui-icon { position:inherit; margin-top:0px; float:left;}
-
-
-
 
 /* LAYOUT CORRECTION */
 #header {
@@ -129,4 +170,3 @@ input[type="text"].without_border_right {
   border-width: 5px 0;
 }
 #header h1 { color:#333; text-shadow: 0px 1px 0px #e5e5e5; position:absolute; width:50%; right:25%; left:25%; }
-
