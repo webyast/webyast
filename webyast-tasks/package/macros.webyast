@@ -70,10 +70,10 @@
     rm -rf log \
     cd -
 
-
-%if 0%{?suse_version} == 0 || %suse_version > 1110
-%webyast_polkit_dir polkit-1/actions
-%else
-# SLES11 or < 11.1 
-%webyast_polkit_dir PolicyKit/policy  
-%endif
+%webyast_polkit \
+%if 0%{?suse_version} == 0 || %suse_version > 1110 \
+  %define webyast_polkit_dir polkit-1/actions \
+%else \
+# SLES11 or < 11.1 \
+  %define webyast_polkit_dir PolicyKit/policy  \
+%endif 
