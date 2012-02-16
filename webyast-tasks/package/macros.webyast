@@ -71,3 +71,9 @@
     cd -
 
 
+%if 0%{?suse_version} == 0 || %suse_version > 1110
+%webyast_polkit_dir polkit-1/actions
+%else
+# SLES11 or < 11.1 
+%webyast_polkit_dir PolicyKit/policy  
+%endif

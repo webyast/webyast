@@ -45,9 +45,15 @@ Requires:       yast2-dbus-server
 PreReq:		rubygem-bundler
 # 634404
 Recommends:     logrotate, webyast-branding
-PreReq:         polkit, rubygem-rake, rubygem-sqlite3-ruby
+%if 0%{?suse_version} == 0 || %suse_version > 1110
+PreReq:         polkit, rubygem-polkit1
+%else
+# <11.1 or SLES11
+PreReq:         PolicyKit, rubygem-polkit
+%endif
+PreReq:         rubygem-rake, rubygem-sqlite3-ruby
 PreReq:         rubygem-rails-3_1
-PreReq:         rubygem-polkit1, rubygem-fast_gettext, rubygem-gettext_i18n_rails
+PreReq:         rubygem-fast_gettext, rubygem-gettext_i18n_rails
 License:	LGPL-2.0
 Group:          Productivity/Networking/Web/Utilities
 URL:            http://en.opensuse.org/Portal:WebYaST
@@ -79,9 +85,14 @@ BuildRequires:  ruby-dbus
 %else
 BuildRequires:  rubygem-ruby-dbus
 %endif
-BuildRequires:  polkit, rubygem-sqlite3-ruby
+BuildRequires:  rubygem-sqlite3-ruby
 BuildRequires:  rubygem-rails-3_1
-BuildRequires:  rubygem-polkit1
+%if 0%{?suse_version} == 0 || %suse_version > 1110
+BuildRequires:  polkit, rubygem-polkit1
+%else
+# <11.1 or SLES11
+BuildRequires:  PolicyKit, rubygem-polkit
+%endif
 # the testsuite is run during build
 BuildRequires:  rubygem-test-unit rubygem-mocha
 BuildRequires:  rubygem-haml, rubygem-nokogiri, rubygem-builder-3_0
@@ -243,8 +254,8 @@ ln -s /etc/nginx/uwsgi_params $RPM_BUILD_ROOT/etc/webyast
 ln -s /etc/nginx/win-utf $RPM_BUILD_ROOT/etc/webyast
 
 # Policies
-mkdir -p $RPM_BUILD_ROOT/usr/share/polkit-1/actions
-install -m 0644 %SOURCE4 $RPM_BUILD_ROOT/usr/share/polkit-1/actions
+mkdir -p $RPM_BUILD_ROOT/usr/share/%{webyast_polkit_dir}
+install -m 0644 %SOURCE4 $RPM_BUILD_ROOT/usr/share/%{webyast_polkit_dir}
 install -m 0644 %SOURCE6 $RPM_BUILD_ROOT/etc/
 install -m 0555 %SOURCE5 $RPM_BUILD_ROOT/usr/sbin/
 
@@ -394,8 +405,8 @@ dbus-send --print-reply --system --dest=org.freedesktop.DBus / org.freedesktop.D
 #this /etc/webyast is for nginx conf for webyast
 %dir /etc/webyast
 %dir %{webyast_dir}
-%dir %{_datadir}/polkit-1
-%dir %{_datadir}/polkit-1/actions
+#%dir %{_datadir}/polkit-1
+%attr(644,root,root) %{_datadir}/%{webyast_polkit_dir}
 %attr(-,%{webyast_user},%{webyast_user}) %dir %{pkg_home}
 %attr(-,%{webyast_user},%{webyast_user}) %dir %{pkg_home}/sockets
 %attr(-,%{webyast_user},%{webyast_user}) %dir %{pkg_home}/cache
@@ -458,7 +469,7 @@ dbus-send --print-reply --system --dest=org.freedesktop.DBus / org.freedesktop.D
 %config /etc/webyast/win-utf
 
 %config /etc/sysconfig/SuSEfirewall2.d/services/webyast
-%config /usr/share/polkit-1/actions/org.opensuse.yast.permissions.policy
+%config /usr/share/%{webyast_polikit_dir}/org.opensuse.yast.permissions.policy
 %config %{webyast_dir}/config/environment.rb
 %config(noreplace) /etc/yast_user_roles
 %config %{_sysconfdir}/init.d/%{webyast_service}
