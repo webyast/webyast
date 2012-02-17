@@ -143,7 +143,6 @@ Summary:  Testsuite for webyast-base package
 
 #
 %define pkg_home /var/lib/%{webyast_user}
-%webyast_polkit
 #
 
 Requires:	rubygem-factory_girl, rubygem-factory_girl_rails, rubygem-mocha
@@ -470,7 +469,7 @@ dbus-send --print-reply --system --dest=org.freedesktop.DBus / org.freedesktop.D
 %config /etc/webyast/win-utf
 
 %config /etc/sysconfig/SuSEfirewall2.d/services/webyast
-%config /usr/share/%{webyast_polikit_dir}/org.opensuse.yast.permissions.policy
+%config /usr/share/%{webyast_polkit_dir}/org.opensuse.yast.permissions.policy
 %config %{webyast_dir}/config/environment.rb
 %config(noreplace) /etc/yast_user_roles
 %config %{_sysconfdir}/init.d/%{webyast_service}

@@ -19,8 +19,7 @@
 #
 # common RPM macro definitions used by WebYaST
 #
-# macros %webyast_ are generic for both webservice and client
-#
+
 
 # target directories
 %webyast_dir /srv/www/webyast
