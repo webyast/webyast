@@ -116,7 +116,7 @@
 .fieldset_body label { text-align:left; margin:0; }
 
 .webyast_form .button_container { margin:5px auto; position:relative; float:none; width:96%; }
-.webyast_form .hr { height:1px; border-bottom:0px dotted #ddd; margin:5px 0px;
+.webyast_form .hr, .hr { height:1px; border-bottom:0px dotted #ddd; margin:5px 0px;
   background: -moz-linear-gradient(left, #d0d0d0 0%, #fafafa 100%);  padding:0px;
   background: -webkit-gradient(linear, left top, left bottom, from(#d0d0d0), to(#fafafa));
 }

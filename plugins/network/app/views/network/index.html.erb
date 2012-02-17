@@ -3,78 +3,173 @@
   <%= stylesheet_link_tag "webyast-network" %>
 <% end %>
 
-  <div class="plugin-content plugin-border">
-    <% write_disabled = cannot? :write, Network %>
-    <%= render :partial => 'shared/missing_write_permissions' if write_disabled %>
+<div class="plugin-content plugin-border">
 
-      <div class="plugin-header">
-        <div class="left">
-          <label class="plugin-icon-container"><%= image_tag("network.png", :class=>"plugin-icon") %></label>
-          <label class="plugin-name"><%=_("Network")%></label><span id="questionMark" style="margin:2px 15px; float:none;">?</span>
-          <%=text_field_tag :conf_mode, @conf_mode, :type=>"hidden", :disabled => write_disabled %>
-        </div>
+  <% write_disabled = cannot? :write, Network %>
+  <%= render :partial => 'shared/missing_write_permissions' if write_disabled %>
 
-        <div class="right" >
-          Nothing
-        </div>
-        <div class="clearfix"></div>
+  <div class="plugin-header">
+    <div class="fleft">
+      <label class="plugin-icon-container"><%= image_tag("network.png", :class=>"plugin-icon") %></label>
+      <label class="plugin-name"><%=_("Network")%></label>
     </div>
 
-    <div class="clearfix">&nbsp;</div>
+    <div class="fright" >
+      <span id="questionMark" style="margin:2px 15px; float:none;">?</span>
+    </div>
+    <div class="clearfix"></div>
+  </div>
 
-    <fieldset id="dns-container" class="webyast_fieldset">
-      <div id="dns-container-header" class="fieldset_header">
-         <span class="fieldset_header_title" >
-          <%= _("Physical Interfaces")%>
-        </span>
-        <!-- MOVE INLINE CSS TO NETWORK.CSS-->
-        <span style="float:none; color:#777777; font-size:11px; margin-left:2px;">(help)</span>
+  <div class="clearfix">&nbsp;</div>
+
+  <div id="pages">
+    <div id="page-container">
+      <div class="page">
+
+        <fieldset id="dns-container" class="webyast_fieldset">
+          <div id="dns-container-header" class="fieldset_header">
+             <span class="fieldset_header_title" >
+              <%= _("Physical Interfaces")%>
+            </span>
+            <!-- MOVE INLINE CSS TO NETWORK.CSS-->
+            <span style="float:none; color:#777777; font-size:11px; margin-left:2px;">(help)</span>
+          </div>
+
+          <div class="fieldset_body">
+            <% @physical.each do |id, interface| %>
+              <div class="interface">
+                <div class="img_container">
+                  <% img = (interface.ipaddr.blank?)? "eth.png" : "eth-active.png" %>
+                  <%= image_tag("#{img}") %>
+                </div>
+                <div class="iface_details">
+                  <p>Interface: <b><%= interface.id %></b></p>
+                  <p>IP address: <%= interface.ipaddr %></p>
+                  <p>Mode: <%= interface.bootproto %></p>
+                </div>
+                <div class="link_container">
+                  <%= link_to _("configure"), :controller => "network", :action => "edit", :id => id %>
+                </div>
+              </div>
+
+            <% end %>
+          </div>
+        </fieldset>
+
+        <fieldset class="webyast_fieldset">
+          <div class="fieldset_header">
+            <span class="fieldset_header_title" ><%= _("Virtual Interfaces")%></span>
+            <span style="float:none; color:#777777; font-size:11px; margin-left:2px;">(help)</span>
+          </div>
+
+          <div class="fieldset_body">
+            <% @virtual.each do |id, interface| %>
+              <div class="interface">
+                <div class="img_container">
+                  <%= image_tag("eth.png") %>
+                </div>
+                <div class="iface_details">
+                  <p>Interface: <b><%= interface.id %></b></p>
+                  <p>IP address: <%= interface.ipaddr %></p>
+                </div>
+                <div class="link_container">
+                  <%= link_to _("configure"), :controller => "network", :action => "edit", :id => id %>
+                </div>
+              </div>
+            <% end %>
+          </div>
+        </fieldset>
+
+        <div class="navigation_link_container">
+          <div class="hr">&nbsp;</div>
+          <p><%= link_to _("New virtual interface >>"), {}, :id=>"iface_selection_link", :class=>"page_link", :remote => true %></p>
+        </div>
+
       </div>
 
-      <div class="fieldset_body">
-        <% @physical.each do |id, interface| %>
-          <div class="interface">
-            <div class="img_container">
-              <% img = (interface.ipaddr.blank?)? "eth.png" : "eth-active.png" %>
-              <%= image_tag("#{img}") %>
+      <div class="page">
+        <h4 style="font-size:16px; padding:0 20px; margin:0;"><%= _("Please select one of the virtual interfaces")%></h4>
+
+        <%= form_for :network, :url => { :action => "new" }, :html => {:class=>"webyast_form"} do %>
+          <%= hidden_field_tag "type", "vlan" %>
+          <fieldset class="webyast_fieldset iselector" data-type="vlan">
+            <div class="fieldset_header">
+              <span class="fieldset_header_title" >VLAN</span>
             </div>
-            <div class="iface_details">
-              <p>Interface: <b><%= interface.id %></b></p>
-              <p>IP address: <%= interface.ipaddr %></p>
-              <p>Mode: <%= interface.bootproto %></p>
-            </div>
-            <div class="link_container">
-              <%= link_to _("configure"), :controller => "network", :action => "edit", :id => id %>
-            </div>
+
+            <div class="fieldset_body">
+              <div class="img_container", style="width:10%; float:left;">
+                <%= image_tag("eth64.png") %>
+              </div>
+              <div class="iface_details", style="width:90%; float:left;">
+                <section>
+                  A <b>virtual local area network</b>, virtual LAN or VLAN, is a group of hosts with a common set of requirements that communicate as if they were attached to the same broadcast domain,
+                  regardless of their physical location. A VLAN has the same attributes as a physical local area network (LAN), but it allows for end stations to be grouped together even
+                  if they are not located on the same network switch. VLAN membership can be configured through software instead of physically relocating devices or connections.
+                </section>
+              </div>
+              <div class="clearfix">&nbsp;</div>
+            </fieldset>
+
+        <fieldset class="webyast_fieldset iselector" data-type="bridge">
+          <div class="fieldset_header">
+            <span class="fieldset_header_title" ><%= _("BRIDGE")%></span>
           </div>
+
+          <div class="fieldset_body">
+            <div class="interface">
+                <div class="img_container", style="width:10%">
+                  <%= image_tag("eth64.png") %>
+                </div>
+                <div class="iface_details", style="width:90%">
+                  <section>
+                    <b>Bridging</b> is a forwarding technique used in packet-switched computer networks. Unlike routing, bridging makes no assumptions about where in a network a particular address is located.
+                    Instead, it depends on flooding and examination of source addresses in received packet headers to locate unknown devices. Once a device has been located, its location
+                    is recorded in a table where the source address is stored so as to avoid the need for further flooding. The utility of bridging is limited by its dependence on flooding,
+                    and is thus only used in local area networks.
+                  </section>
+                </div>
+              </div>
+
+          </div>
+        </fieldset>
+
+        <fieldset class="webyast_fieldset iselector" data-type="bond">
+          <div class="fieldset_header">
+            <span class="fieldset_header_title" ><%= _("BOND")%></span>
+          </div>
+
+          <div class="fieldset_body">
+            <div class="interface">
+                <div class="img_container", style="width:10%">
+                  <%= image_tag("eth64.png") %>
+                </div>
+                <div class="iface_details", style="width:90%">
+                  <section>
+                    A <b>trunk</b> is a single transmission channel between two points, each point being either the switching center or the node.
+                    In modern communications, trunking is a concept by which a communications system can provide network access to many clients by sharing a set of lines or frequencies instead of providing them individually.
+                    This is analogous to the structure of a tree with one trunk and many branches.
+                  </section>
+                </div>
+              </div>
+
+          </div>
+        </fieldset>
+
+
+        <div class="navigation_link_container">
+          <div class="hr">&nbsp;</div>
+          <%= link_to _("<< back"), {}, :id=>"iface_back_link", :class=>"page_link lright", :remote => true %>
+          <% link_to _("Submit"), {:controller => "network", :action => "new", :type => "vlan"}, :class=> "page_link fright" %>
+          <%= submit_tag _("Next"), :class=> "page_link fright" %>
+          <div class="clearfix">&nbsp;</div>
+        </div>
 
         <% end %>
       </div>
-    </fieldset>
 
 
-    <fieldset class="webyast_fieldset">
-      <div class="fieldset_header">
-        <span class="fieldset_header_title" >
-          <%= _("Virtual Interfaces")%>
-        </span>
-      </div>
+    </div>
+  </div>
 
-      <div class="fieldset_body">
-        <% @virtual.each do |id, interface| %>
-          <div class="interface">
-            <div class="img_container">
-              <%= image_tag("eth.png") %>
-            </div>
-            <div class="iface_details">
-              <p>Interface: <b><%= interface.id %></b></p>
-              <p>IP address: <%= interface.ipaddr %></p>
-            </div>
-            <div class="link_container">
-              <%= link_to _("configure"), :controller => "network", :action => "edit", :id => id %>
-            </div>
-          </div>
-        <% end %>
-        <p><%= link_to _("Add new virtual interface ..."), :controller => "network", :action => "new" %></p>
-      </div>
-    </fieldset>
+</div>

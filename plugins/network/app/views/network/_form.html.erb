@@ -1,45 +1,51 @@
-<%= form_for :network, :url => { :action => "#{action}" }, :html => {:id=>"networkForm", :class=>"webyast_form", :onsubmit => "return is_valid();"} do |f| %>
+<%= form_for :network, :url => { :action => "#{action}" }, :html => {:id=>"networkForm", :class=>"webyast_form", :onsubmit => "return is_valid();"} do %>
 
-<% if action == "create" %>
-  <fieldset class="webyast_fieldset">
-    <div class="fieldset_header">
-      <span class="fieldset_header_title" >
-        <%= _("Interface configurtion")%>
-      </span>
-    </div>
+    <% if @type.match("vlan") %>
+      <fieldset id="vlan-fieldset" class="webyast_fieldset">
+        <div class="fieldset_header">
+          <span class="fieldset_header_title" >VLAN configuration</span>
+        </div>
 
-    <div class="fieldset_body">
-      <div class="row">
-        <label><%=_("Device type")%></label>
-        <%= select("interface", "type", { "Ethernet" => "eth", "VLAN" => "vlan", "Bridge" => "br", "Bond" => "bond"}, :selected => "eth") %>
-        <%= select("interface", "name", ((@physical.count)..10).to_a.map{|i| "eth#{i}"}) %>
-        <%= image_tag("wait.gif", :id=>"ajax_call", :style=>"vertical-align: middle; height: 22px; display:none;") %>
-      </div>
+        <div class="fieldset_body">
+          <div class="row">
+            <label><%=_("Interface name")%></label>
+            <%= text_field_tag :id, @ifc.id, :disabled => true if action != "create" %>
+            <%= text_field_tag(:interface_type, @type, :disabled => true) if action == "create" %>
+            <%= select("interface", "number", ((@number)..9).to_a.map{|i| "#{i}"}) if action == "create" %>
+          </div>
 
-    </div>
-  </fieldset>
-<% else %>
+          <div class="row">
+            <label><%=_("Physical interface")%></label>
+            <%= select_tag(:vlan_etherdevice, options_for_select(@physical.map{|id, iface| [id, id]}, @ifc? @ifc.vlan_etherdevice : "")) %>
+          </div>
 
-  <fieldset id="interface-info" class="webyast_fieldset">
-    <div id="dns-container-header" class="fieldset_header">
-      <span class="fieldset_header_title" >
-        <%= _("Network info")%>
-      </span>
-    </div>
-    <div class="fieldset_body">
-      <div class="row">
-        <label><%=_("Device type/Interface")%></label>
-        Ethernet / <%= @ifc.id %>
-      </div>
-      <div class="row">
-        <label><%=_("IP/Subnet mask")%></label>
-        <%= @ifc.ipaddr.nil? ? "-/-" : @ifc.ipaddr %>
-      </div>
-    </div>
-  </fieldset>
-<% end %>
+          <div class="row">
+            <label><%=_("VLAN ID")%></label>
+            <%=text_field_tag("vlan_id", "1", :disabled => @write_disabled) %>
+          </div>
+        </div>
+      </fieldset>
 
-  <div id="interface_fields"></div>
+
+    <% elsif @type.match("br") %>
+      <fieldset id="bridge-fieldset" class="webyast_fieldset">
+        <div class="fieldset_header">
+          <span class="fieldset_header_title" >Bridge configuration</span>
+        </div>
+
+        <div class="fieldset_body">
+          <div class="row">
+            <label><%=_("Some fields")%></label>
+          </div>
+        </div>
+      </fieldset>
+
+    <% elseif @type.match("bond") %>
+      <fieldset id="bond-fieldset" class="webyast_fieldset">
+
+      </fieldset>
+    <% end %>
+
 
   <%= hidden_field_tag :interface, @ifc.id || "" %>
 
@@ -83,11 +89,11 @@
         <div class="fieldset_body">
           <div class="row">
             <label><%=_("Hostname")%></label>
-            <%= text_field_tag :hostname, @name, :class=>"hostname", :disabled => @write_disabled %>
+            <%= text_field_tag :hostname, @hostname.name, :class=>"hostname", :disabled => @write_disabled %>
           </div>
           <div class="row">
             <label><%=_("Domain")%></label>
-            <%= text_field_tag :domain, @domain, :class=>"domain", :disabled => @write_disabled %>
+            <%= text_field_tag :domain, @hostname.domain, :class=>"domain", :disabled => @write_disabled %>
           </div>
 
           <div class="row static dhcp <%= 'hidden' if @disabled %>">
@@ -132,7 +138,7 @@
             </div>
             <div class="row static">
               <label for="<%= :default_route %>"><%=_("Default route")%></label>
-              <%=text_field_tag :default_route, @default_route, :class=>"default_route", :disabled => (@write_disabled || @disabled) %>
+              <%=text_field_tag :default_route, @rt.via, :class=>"default_route", :disabled => (@write_disabled || @disabled) %>
             </div>
           </div>
         </fieldset>
@@ -143,7 +149,7 @@
       <div class="nav-buttons">
         <%= submit_tag _("Save"), :disabled => @write_disabled -%>
         <%= form_str_spacer %>
-        <%= form_back_button %>
+        <%= link_to _("back"), {:controller => "network", :action => "index"} %>
       </div>
     </div>
   <% end %>

@@ -35,90 +35,52 @@ class NetworkController < ApplicationController
   def edit
     authorize! :read, Network
 
-    @ifc = Interface.find(params[:id])
-
-    hostname = Hostname.find
-    return false unless hostname
+    @hostname = Hostname.find
+    @dhcp_hostname_enabled = @hostname.respond_to?("dhcp_hostname")
+    @dhcp_hostname = @dhcp_hostname_enabled && @hostname.dhcp_hostname == "1"
 
     @dns = Dns.find
-    return false unless @dns
+    @rt = Route.find "default"
 
-    rt = Route.find "default"
-    return false unless rt
+    @ifcs = Interface.find(:all)
+    @ifc = @ifcs[params[:id]]
 
-    #@bootproto = (@ifc.bootproto.blank?)? STATIC_BOOT_ID : @bootproto.blank?
+    @type = params[:id][0..(params[:id].size-2)]
+    @number = @ifcs.select{|id, iface| id if id.match(@type)}.count
+    @physical = @ifcs.select{|k, i| i if k.match("eth")}
 
-    @bootproto = @ifc.bootproto
-
-    if @bootproto == STATIC_BOOT_ID
-      ipaddr = @ifc.ipaddr || "/"
-    else
-      ipaddr = "/"
-    end
-
+    ipaddr = (@bootproto == STATIC_BOOT_ID)? @ifc.ipaddr || "/" : "/"
     @ip, @netmask = ipaddr.split "/"
 
-    # when detect PREFIXLEN with leading "/"
+     # when detect PREFIXLEN with leading "/"
     if @ifc.bootproto == STATIC_BOOT_ID && NETMASK_RANGE.include?(@netmask.to_i)
       @netmask = "/"+@netmask
       Rails.logger.error "\n*** set netmask if static and netmask in range #{@netmask} \n"
     end
 
-    @name = hostname.name
-    @domain = hostname.domain
-
-    @dhcp_hostname_enabled = hostname.respond_to?("dhcp_hostname")
-    @dhcp_hostname = @dhcp_hostname_enabled && hostname.dhcp_hostname == "1"
-
-    #@nameservers = dns.nameservers
-    #@searchdomains = dns.searches
-
-    @default_route = rt.via
-
-#    @bootprotos = {_("Manual")=>STATIC_BOOT_ID, _("Automatic")=>"dhcp"}
-#    @bootprotos[@bootproto] =@bootproto unless @bootprotos.has_value? @bootproto
-
     respond_to do |format|
-      format.html # show.html.erb
+      format.html
       format.json { render :json => @interface }
-    end
-  end
-
-  def iface
-    @ifcs = Interface.find(:all)
-    number = @ifcs.select{|id, iface| id if id.match(params[:type])}.count
-    array = (number..10).to_a.map { |num| "#{params[:type]}#{num}" }
-    hash = Hash[(number..10).map { |num| [num, num] }]
-    respond_to do |format|
-      format.json { render :json => array }
-    end
-  end
-
-  def partial
-    if params[:partial] != "eth"
-      @ifcs = Interface.find(:all)
-      @physical = @ifcs.select{|k, i| i if k.match("eth")}
-      render :partial => "#{params[:partial]}"
-    else
-      render :nothing => true
     end
   end
 
   def new
     authorize! :write, Network
 
+
     @ifcs = Interface.find(:all)
+
+    @type = params[:type]
+    @number = @ifcs.select{|id, iface| id if id.match(@type)}.count
     @physical = @ifcs.select{|k, i| i if k.match("eth")}
 
-    @ifc = Interface.new({"bootproto"=>"none", "startmode"=>"auto"})
-
+    @ifc = Interface.new({"bootproto"=>"dhcp", "startmode"=>"auto"}, "#{@type}#{@number}")
     @dns = Dns.find
-    return false unless @dns
 
-    hostname = Hostname.find
-    @name = hostname.name
-    @domain = hostname.domain
-    @dhcp_hostname_enabled = hostname.respond_to?("dhcp_hostname")
+    @hostname = Hostname.find
+    @dhcp_hostname_enabled = @hostname.respond_to?("dhcp_hostname")
+
+    @rt = Route.find "default"
 
     respond_to do |format|
       format.html # show.html.erb
@@ -129,7 +91,6 @@ class NetworkController < ApplicationController
 
   def create
     authorize! :write, Network
-    #hostname = Hostname.find
 
     Rails.logger.error "Params #{params.inspect}"
 
@@ -141,11 +102,16 @@ class NetworkController < ApplicationController
     if params[:interface].match("vlan")
       hash["vlan_id"] = params[:vlan_id] || ""
       hash["vlan_etherdevice"] = params[:vlan][:etherdevice] || ""
+      hash["vlan_etherdevice"] = params[:vlan_etherdevice] || ""
     end
 
-    ifc = Interface.new(hash, id)
+    ifc = Interface.new(hash, params["interface"])
+    Rails.logger.error "Params #{ifc.inspect}"
+
+    ifc = Interface.new(hash, params["interface"])
     ifc.save
 
+    #redirect_to :controller => "network", :action => "new", :type => "vlan"
     redirect_to :controller => "network", :action => "index"
   end
 
