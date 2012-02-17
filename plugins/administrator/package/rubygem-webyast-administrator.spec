@@ -79,8 +79,8 @@ Test::Unit or RSpec files, useful for developers.
 %gem_install %{S:0}
 
 # Policies
-mkdir -p $RPM_BUILD_ROOT/usr/share/polkit-1/actions
-install -m 0644 %SOURCE1 $RPM_BUILD_ROOT/usr/share/polkit-1/actions/
+mkdir -p $RPM_BUILD_ROOT/usr/share/%{webyast_polkit_dir}
+install -m 0644 %SOURCE1 $RPM_BUILD_ROOT/usr/share/%{webyast_polkit_dir}
 
 %webyast_build_plugin_assets
 
@@ -102,9 +102,8 @@ install -m 0644 %SOURCE1 $RPM_BUILD_ROOT/usr/share/polkit-1/actions/
 %dir %{webyast_dir}/public/assets
 %{webyast_dir}/public/assets/*
 
-%dir /usr/share/polkit-1
-%dir /usr/share/polkit-1/actions
-%attr(644,root,root) %config /usr/share/polkit-1/actions/org.opensuse.yast.modules.yapi.administrator.policy
+%dir /usr/share/%{webyast_polkit_dir}
+%attr(644,root,root) %config /usr/share/%{webyast_polkit_dir}/org.opensuse.yast.modules.yapi.administrator.policy
 
 %files doc
 %defattr(-,root,root,-)
