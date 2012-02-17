@@ -71,9 +71,9 @@
     cd -
 
 %webyast_polkit \
-%if 0%{?suse_version} == 0 || %suse_version > 1110 \
-  %define webyast_polkit_dir polkit-1/actions \
-%else \
-# SLES11 or < 11.1 \
-  %define webyast_polkit_dir PolicyKit/policy  \
-%endif 
+    %if 0%{?suse_version} == 0 || %suse_version > 1110 \
+      WEBYAST_POLKIT_DIR='polkit-1/actions' \
+    %else \
+      # SLES11 or < 11.1 \
+      WEBYAST_POLKIT_DIR='PolicyKit/policy'  \
+    %endif 

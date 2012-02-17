@@ -143,6 +143,7 @@ Summary:  Testsuite for webyast-base package
 
 #
 %define pkg_home /var/lib/%{webyast_user}
+%webyast_polkit
 #
 
 Requires:	rubygem-factory_girl, rubygem-factory_girl_rails, rubygem-mocha
