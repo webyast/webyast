@@ -53,7 +53,7 @@ PreReq:         PolicyKit, rubygem-polkit
 %endif
 PreReq:         rubygem-rake, rubygem-sqlite3-ruby
 PreReq:         rubygem-rails-3_1
-PreReq:         rubygem-fast_gettext, rubygem-gettext_i18n_rails
+PreReq:         rubygem-fast_gettext, rubygem-gettext_i18n_rails, rubygem-inifile
 License:	LGPL-2.0
 Group:          Productivity/Networking/Web/Utilities
 URL:            http://en.opensuse.org/Portal:WebYaST
@@ -102,7 +102,7 @@ BuildRequires:	rubygem-bundler
 BuildRequires:	rubygem-devise, rubygem-devise_unix2_chkpwd_authenticatable, rubygem-devise-i18n
 BuildRequires:	rubygem-cancan, rubygem-delayed_job, rubygem-static_record_cache
 BuildRequires:  rubygem-uglifier, rubygem-johnson
-BuildRequires:	rubygem-gettext, rubygem-ruby_parser
+BuildRequires:	rubygem-gettext, rubygem-ruby_parser, rubygem-inifile
 
 BuildRequires:  rubygem-ruby-debug, rubygem-factory_girl, rubygem-factory_girl_rails, rubygem-mocha
 
@@ -175,6 +175,9 @@ This package contains css, icons and images for webyast-base package.
 %setup -q -n www
 
 %build
+%if %suse_version <= 1110
+export WEBYAST_POLICYKIT='true'
+%endif
 # build *.mo files (redirect sterr to /dev/null as it contains tons of warnings about obsoleted (commented) msgids)
 LANG=en rake gettext:pack 2> /dev/null
 
@@ -193,6 +196,10 @@ rm -rf log
 rm Gemfile.lock
 
 %check
+
+%if %suse_version <= 1110
+export WEBYAST_POLICYKIT='true'
+%endif
 # run the testsuite
 RAILS_ENV=test rake db:migrate
 rake tmp:create
@@ -201,6 +208,10 @@ RAILS_ENV=test $RPM_BUILD_ROOT%{webyast_dir}/test/dbus-launch-simple rake test
 
 #---------------------------------------------------------------
 %install
+
+%if %suse_version <= 1110
+export WEBYAST_POLICYKIT='true'
+%endif
 
 #
 # Install all web and frontend parts.
