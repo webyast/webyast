@@ -73,6 +73,7 @@ Source10:       webyast
 Source11:       webyast.lr.conf
 Source12:       nginx.conf
 Source13:	control_panel.yml
+Source14:	config.yml
 
 BuildRoot:      %{_tmppath}/%{name}-%{version}-build
 BuildRequires:  ruby, pkg-config, rubygem-mocha
@@ -283,6 +284,10 @@ mkdir -p $RPM_BUILD_ROOT%{webyast_dir}/tmp/sockets
 mkdir -p $RPM_BUILD_ROOT/etc/webyast/
 cp %SOURCE13 $RPM_BUILD_ROOT/etc/webyast/
 
+%if %suse_version <= 1110
+cp %SOURCE14 $RPM_BUILD_ROOT/etc/webyast/
+%endif
+
 # install permissions service
 mkdir -p $RPM_BUILD_ROOT/usr/sbin/
 install -m 0500 %SOURCE1 $RPM_BUILD_ROOT/usr/sbin/
@@ -405,7 +410,6 @@ dbus-send --print-reply --system --dest=org.freedesktop.DBus / org.freedesktop.D
 #this /etc/webyast is for nginx conf for webyast
 %dir /etc/webyast
 %dir %{webyast_dir}
-#%dir %{_datadir}/polkit-1
 %attr(644,root,root) %{_datadir}/%{webyast_polkit_dir}
 %attr(-,%{webyast_user},%{webyast_user}) %dir %{pkg_home}
 %attr(-,%{webyast_user},%{webyast_user}) %dir %{pkg_home}/sockets
@@ -456,7 +460,9 @@ dbus-send --print-reply --system --dest=org.freedesktop.DBus / org.freedesktop.D
 #this /etc/webyast is for webyast configuration files
 %dir /etc/webyast/
 %config /etc/webyast/control_panel.yml
-
+%if %suse_version <= 1110
+%config /etc/webyast/config.yml
+%endif
 #nginx stuff
 %config(noreplace) /etc/webyast/nginx.conf
 %config /etc/webyast/fastcgi.conf
