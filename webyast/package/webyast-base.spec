@@ -380,6 +380,9 @@ cd %{webyast_dir}
 rm -f Gemfile.lock
 
 #migrate database
+%if %suse_version <= 1110
+export WEBYAST_POLICYKIT='true'
+%endif
 RAILS_ENV=production rake db:migrate
 chown -R %{webyast_user}: db
 chown -R %{webyast_user}: log
@@ -421,7 +424,7 @@ dbus-send --print-reply --system --dest=org.freedesktop.DBus / org.freedesktop.D
 #this /etc/webyast is for nginx conf for webyast
 %dir /etc/webyast
 %dir %{webyast_dir}
-%attr(644,root,root) %{_datadir}/%{webyast_polkit_dir}
+%attr(-,root,root) %{_datadir}/%{webyast_polkit_dir}
 %attr(-,%{webyast_user},%{webyast_user}) %dir %{pkg_home}
 %attr(-,%{webyast_user},%{webyast_user}) %dir %{pkg_home}/sockets
 %attr(-,%{webyast_user},%{webyast_user}) %dir %{pkg_home}/cache

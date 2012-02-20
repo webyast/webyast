@@ -40,6 +40,10 @@ end
 
 module YaST
   CONFIG=read_config()
-  POLKIT1 = read_config("polkit1") || true
+  if ENV['WEBYAST_POLICYKIT']== 'true'
+    POLKIT1 = false
+  else
+    POLKIT1 = read_config("polkit1") || true
+  end
 end
 

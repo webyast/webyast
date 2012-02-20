@@ -18,7 +18,7 @@
 
 # Test helper for devise authentication
 def devise_sign_in(controller_class = self._controller_class)
-  @account = Factory(:account)
+  @account = Account.new(:username=>"test", :created_at=>Time.now, :updated_at=>Time.now)
   request.env['warden'].stubs(:authenticate!).with(:scope => :account).returns @account
   controller_class.any_instance.stubs(:current_account).returns @account
 end
