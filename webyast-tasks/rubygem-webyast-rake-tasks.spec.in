@@ -40,6 +40,9 @@ Requires:	rubygem-rake
 Url:            http://en.opensuse.org/YaST
 Source:         %{mod_name}-%{version}.gem
 Source1:	macros.webyast
+Source2:	macros.webyast-PolicyKit
+Source3:	macros.webyast-polkit1
+
 
 Summary:        Rake tasks shared by all WebYaST packages
 %description
@@ -53,6 +56,12 @@ The new task package includes the tasks git_check and syntax_check.
 mkdir -p $RPM_BUILD_ROOT/etc/rpm
 install -m 0644 %SOURCE1 $RPM_BUILD_ROOT/etc/rpm
 
+%if 0%{?suse_version} == 0 || %suse_version > 1110
+install -m 0644 %SOURCE3 $RPM_BUILD_ROOT/etc/rpm
+%else
+install -m 0644 %SOURCE2 $RPM_BUILD_ROOT/etc/rpm
+%endif
+
 %clean
 %{__rm} -rf %{buildroot}
 
@@ -62,6 +71,6 @@ install -m 0644 %SOURCE1 $RPM_BUILD_ROOT/etc/rpm
 %{_libdir}/ruby/gems/%{rb_ver}/gems/%{mod_name}-%{version}/
 %{_libdir}/ruby/gems/%{rb_ver}/specifications/%{mod_name}-%{version}.gemspec
 %doc %{_libdir}/ruby/gems/%{rb_ver}/doc/%{mod_name}-%{version}/
-/etc/rpm/macros.webyast
+/etc/rpm/macros.webyast*
 
 %changelog
