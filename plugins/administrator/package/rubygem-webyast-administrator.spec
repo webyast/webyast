@@ -34,6 +34,13 @@ BuildRequires:	webyast-base-testsuite
 BuildRequires:	rubygem-restility
 PreReq:	        webyast-base
 PreReq:         rubygem-webyast-rake-tasks >= 0.2
+Requires:       yast2-dbus-server
+
+%if 0%{?suse_version} == 0 || %suse_version > 1110
+Requires:       yast2-core >= 2.18.10
+%else
+Requires:       yast2-core >= 2.17.30.1
+%endif
 
 #
 Url:            http://rubygems.org/gems/webyast-administrator

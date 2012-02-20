@@ -25,10 +25,8 @@ Requires:       sysvinit-tools
 # Require startproc respecting -p, bnc#559534#c44
 Requires:       sysvinit > 2.86-215.2
 %endif
-Requires:       yast2-core >= 2.18.10
 %else
 # 11.1 or SLES11
-Requires:       yast2-core >= 2.17.30.1
 Requires:       sysvinit > 2.86-195.3.1
 %endif
 Requires:       rubygem-passenger-nginx, rubygem-nokogiri
@@ -41,7 +39,6 @@ Requires:       ruby-dbus
 Requires:	rubygem-ruby-dbus
 %endif
 Requires:       rubygem-webyast-rake-tasks >= 0.2
-Requires:       yast2-dbus-server
 PreReq:		rubygem-bundler
 # 634404
 Recommends:     logrotate, webyast-branding
