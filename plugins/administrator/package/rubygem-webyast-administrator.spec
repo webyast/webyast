@@ -31,6 +31,7 @@ BuildRequires:  rubygems_with_buildroot_patch
 BuildRequires:	webyast-base, rubygem-sqlite3-ruby
 BuildRequires:	rubygem-webyast-rake-tasks >= 0.2
 BuildRequires:	webyast-base-testsuite
+BuildRequires:	rubygem-restility
 Requires:	webyast-base
 Requires:	rubygem-webyast-rake-tasks >= 0.2
 
@@ -82,6 +83,11 @@ Test::Unit or RSpec files, useful for developers.
 mkdir -p $RPM_BUILD_ROOT/usr/share/%{webyast_polkit_dir}
 install -m 0644 %SOURCE1 $RPM_BUILD_ROOT/usr/share/%{webyast_polkit_dir}
 
+%webyast_build_restdoc public/administrator/restdoc
+
+# remove empty public
+rm -rf $RPM_BUILD_ROOT/%{_libdir}/ruby/gems/%{rb_ver}/gems/%{mod_full_name}/public
+
 %webyast_build_plugin_assets
 
 # search locale files
@@ -101,6 +107,10 @@ install -m 0644 %SOURCE1 $RPM_BUILD_ROOT/usr/share/%{webyast_polkit_dir}
 # precompiled assets
 %dir %{webyast_dir}/public/assets
 %{webyast_dir}/public/assets/*
+
+# restdoc documentation
+%dir %{webyast_dir}/public/administrator
+%{webyast_dir}/public/administrator/restdoc
 
 %dir /usr/share/%{webyast_polkit_dir}
 %attr(644,root,root) %config /usr/share/%{webyast_polkit_dir}/org.opensuse.yast.modules.yapi.administrator.policy
