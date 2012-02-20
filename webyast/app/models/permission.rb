@@ -32,14 +32,29 @@ class Permission
 private
 
   def self.get_cache_timestamp
-    lst = [
-      # policies
-      File.mtime('/usr/share/polkit-1/'),
-      # default
-      File.mtime('/var/lib/polkit-1/'),
-      # explicit user authorizations
-      File.mtime('/etc/polkit-1'),
-    ]
+    lst = []
+    if YaST::POLKIT1
+      lst = [
+        # policies
+        File.mtime('/usr/share/polkit-1/'),
+        # default
+        File.mtime('/var/lib/polkit-1/'),
+        # explicit user authorizations
+        File.mtime('/etc/polkit-1'),
+      ]
+    else
+      lst = [
+        # the global config file
+        File.mtime('/etc/PolicyKit/PolicyKit.conf'),
+        # policies
+        File.mtime('/usr/share/PolicyKit/policy/'),
+        # explicit user authorizations
+        File.mtime('/var/lib/PolicyKit/'),
+        # default overrides
+        File.mtime('/var/lib/PolicyKit-public/'),
+      ]
+    end
+
     lst.compact!
     lst.max.to_i
   end
