@@ -26,11 +26,31 @@
 require 'base'
 require "yast/config_file"
 
+# This is (was) a dummy class for the permission check only.
+
+ # Network.find return the same values as Hostname.find, Routes.find, Dns.find and Interfaces.find with only one YaPI call
 class Network < BaseModel::Base
-#  def self.find(args)
-#    YastCache.fetch(self) {
-#      response = YastService.Call("YaPI::NETWORK::Read") # hostname: true
-#    }
-#  end
-# This is a dummy class for the permission check only.
+  def self.find
+
+    YastCache.fetch(self) {
+      @response = YastService.Call("YaPI::NETWORK::Read") # hostname: true
+    }
+
+    Rails.logger.error "*** YAPI RESPONSE #{@response.inspect}"
+
+    ifaces = Hash.new
+    #routes = Hash.new
+
+    @response["interfaces"].each{|id, iface| ifaces[id] = Interface.new(iface, id)}
+
+    #@response["routes"].each{|id, route| routes[id] = Route.new(route, id)} All routes???
+
+    route = Route.new(@response["routes"]["default"], "default")
+    dns = Dns.new(@response["dns"])
+    hostname = Hostname.new(@response["hostname"])
+
+
+
+    return {"interfaces" => ifaces, "routes" => route, "dns" => dns, "hostname" => hostname}
+  end
 end

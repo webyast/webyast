@@ -43,6 +43,8 @@
                   <%= image_tag("#{img}") %>
                 </div>
                 <div class="iface_details">
+                  <!-- #TODO: Contact mvidner for adding hwname to yast-network package -->
+                  <p><b><%= interface.hwname if interface.hwname  %></b></p>
                   <p>Interface: <b><%= interface.id %></b></p>
                   <p>IP address: <%= interface.ipaddr %></p>
                   <p>Mode: <%= interface.bootproto %></p>
@@ -69,8 +71,17 @@
                   <%= image_tag("eth.png") %>
                 </div>
                 <div class="iface_details">
-                  <p>Interface: <b><%= interface.id %></b></p>
-                  <p>IP address: <%= interface.ipaddr %></p>
+                  <p>interface: <b><%= interface.id %></b></p>
+
+                  <% if interface.id.match("vlan") %>
+                    <p>vlan id: <%= interface.vlan_id %></p>
+                    <p>physical interface: <%= interface.vlan_etherdevice %></p>
+                  <% end %>
+
+                  <% if interface.id.match("br") %>
+                    <p>bridge ports: <%= interface.bridge_ports %></p>
+                  <% end %>
+
                 </div>
                 <div class="link_container">
                   <%= link_to _("configure"), :controller => "network", :action => "edit", :id => id %>
@@ -82,7 +93,7 @@
 
         <div class="navigation_link_container">
           <div class="hr">&nbsp;</div>
-          <p><%= link_to _("New virtual interface >>"), {}, :id=>"iface_selection_link", :class=>"page_link", :remote => true %></p>
+          <p><%= link_to _("New virtual interface >>"), {}, :id=>"iface_selection_link", :class=>"page_link" %></p>
         </div>
 
       </div>
@@ -159,7 +170,7 @@
 
         <div class="navigation_link_container">
           <div class="hr">&nbsp;</div>
-          <%= link_to _("<< back"), {}, :id=>"iface_back_link", :class=>"page_link lright", :remote => true %>
+          <%= link_to _("<< back"), {}, :id=>"iface_back_link", :class=>"page_link lright" %>
           <% link_to _("Submit"), {:controller => "network", :action => "new", :type => "vlan"}, :class=> "page_link fright" %>
           <%= submit_tag _("Next"), :class=> "page_link fright" %>
           <div class="clearfix">&nbsp;</div>

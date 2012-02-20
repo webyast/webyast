@@ -29,13 +29,19 @@ class Hostname < BaseModel::Base
   attr_accessor :name
   attr_accessor :domain
   attr_accessor :dhcp_hostname
+  attr_accessor :dhcp_hostname_enabled
 
   validates_uri :name, :domain, :allow_nil => true
 
   public
 
+  def initialize(args)
+    super
+    @dhcp_hostname_enabled = self.respond_to?(:dhcp_hostname)
+  end
+
+
   # fills time instance with data from YaPI.
-  #
   # +warn+: Doesn't take any parameters.
   def self.find
     YastCache.fetch(self) {

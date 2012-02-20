@@ -20,12 +20,16 @@
 
 // slide between index page and interface selection page
 $(function(){
-  $("a#iface_selection_link").live("click", function() {
+  $("a#iface_selection_link").live("click", function(event) {
+    event.preventDefault();
     $("#pages").stop().delay(400).animate({"margin-left":-960},200)
+    return false;
   })
 
-  $("a#iface_back_link").live("click", function() {
+  $("a#iface_back_link").live("click", function(event) {
+    event.preventDefault();
     $("#pages").stop().delay(400).animate({"margin-left":0},200)
+    return false;
   })
 });
 
@@ -62,11 +66,13 @@ $(function() {
   $('#dhcp_hostname').click(function(){
     var $dhcp_hostname_enabled = $('#dhcp_hostname_enabled');
     if($(this).is(':checked')) {
-      $dhcp_hostname_enabled.val(true)
-      $(this).attr('checked','checked')
+      $(this).val(1);
+//      $dhcp_hostname_enabled.val(true)
+//      $(this).attr('checked','checked')
     } else {
-      $dhcp_hostname_enabled.val(false)
-      $(this).removeAttr('checked')
+      $(this).val(0);
+//      $dhcp_hostname_enabled.val(false)
+//      $(this).removeAttr('checked')
     }
   })
 })

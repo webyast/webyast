@@ -30,33 +30,47 @@ class NetworkController < ApplicationController
     @ifcs = Interface.find(:all)
     @physical = @ifcs.select{|k, i| i if k.match("eth")}
     @virtual = @ifcs.select{|k, i| i unless k.match("eth")}
+
+    Rails.logger.error "*** NETWORK #{@ifcs.inspect}"
+
+    respond_to do |format|
+      format.html # show.html.erb
+      format.json { render :json => @ifcs }
+    end
   end
 
   def edit
     authorize! :read, Network
 
-    @hostname = Hostname.find
-    @dhcp_hostname_enabled = @hostname.respond_to?("dhcp_hostname")
-    @dhcp_hostname = @dhcp_hostname_enabled && @hostname.dhcp_hostname == "1"
+    # moved to model ????????????
+    #@dhcp_hostname_enabled = @hostname.respond_to?("dhcp_hostname")
+    #@dhcp_hostname = @dhcp_hostname_enabled && @hostname.dhcp_hostname == "1"
 
-    @dns = Dns.find
-    @rt = Route.find "default"
+    network = Network.find
+    @hostname = network["hostname"]
+    @dns = network["dns"]
+    @routes = network["routes"]
 
-    @ifcs = Interface.find(:all)
+    @ifcs = network["interfaces"]
     @ifc = @ifcs[params[:id]]
 
     @type = params[:id][0..(params[:id].size-2)]
     @number = @ifcs.select{|id, iface| id if id.match(@type)}.count
     @physical = @ifcs.select{|k, i| i if k.match("eth")}
 
-    ipaddr = (@bootproto == STATIC_BOOT_ID)? @ifc.ipaddr || "/" : "/"
-    @ip, @netmask = ipaddr.split "/"
 
+    # <<<< TODO: FINDE A BETTER WAY FOR IP HANDLIND
+    #ipaddr = (@bootproto == STATIC_BOOT_ID)? @ifc.ipaddr || "/" : "/"
+    #@ip, @netmask = @ifc.ipaddr.split "/"
+
+#    debugger
      # when detect PREFIXLEN with leading "/"
-    if @ifc.bootproto == STATIC_BOOT_ID && NETMASK_RANGE.include?(@netmask.to_i)
-      @netmask = "/"+@netmask
-      Rails.logger.error "\n*** set netmask if static and netmask in range #{@netmask} \n"
-    end
+#    if @ifc.bootproto == STATIC_BOOT_ID && NETMASK_RANGE.include?(@netmask.to_i)
+#      @netmask = "/" + @netmask
+#      Rails.logger.error "\n*** set netmask if static and netmask in range #{@netmask} \n"
+#    end
+
+    # >>>>>
 
     respond_to do |format|
       format.html
@@ -67,20 +81,19 @@ class NetworkController < ApplicationController
   def new
     authorize! :write, Network
 
-
-    @ifcs = Interface.find(:all)
+    network = Network.find
+    @hostname = network["hostname"]
+    @ifcs = network["interfaces"]
+    @dns = network["dns"]
+    @routes = network["routes"]
 
     @type = params[:type]
     @number = @ifcs.select{|id, iface| id if id.match(@type)}.count
     @physical = @ifcs.select{|k, i| i if k.match("eth")}
 
     @ifc = Interface.new({"bootproto"=>"dhcp", "startmode"=>"auto"}, "#{@type}#{@number}")
-    @dns = Dns.find
 
-    @hostname = Hostname.find
-    @dhcp_hostname_enabled = @hostname.respond_to?("dhcp_hostname")
-
-    @rt = Route.find "default"
+    #@dhcp_hostname_enabled = @hostname.respond_to?("dhcp_hostname")
 
     respond_to do |format|
       format.html # show.html.erb
@@ -98,20 +111,13 @@ class NetworkController < ApplicationController
     hash = {}
     hash["bootproto"] = params[:bootproto]
     hash["ipaddr"] = params[:ipaddr] || ""
-
-    if params[:interface].match("vlan")
-      hash["vlan_id"] = params[:vlan_id] || ""
-      hash["vlan_etherdevice"] = params[:vlan][:etherdevice] || ""
-      hash["vlan_etherdevice"] = params[:vlan_etherdevice] || ""
-    end
+    hash["vlan_id"] = params[:vlan_id] if  params[:vlan_id]
+    hash["vlan_etherdevice"] = params[:vlan_etherdevice] if  params[:vlan_etherdevice]
 
     ifc = Interface.new(hash, params["interface"])
-    Rails.logger.error "Params #{ifc.inspect}"
-
-    ifc = Interface.new(hash, params["interface"])
+    Rails.logger.error "**** New interface: #{ifc.inspect}"
     ifc.save
 
-    #redirect_to :controller => "network", :action => "new", :type => "vlan"
     redirect_to :controller => "network", :action => "index"
   end
 
@@ -196,15 +202,12 @@ class NetworkController < ApplicationController
     dirty_ifc = true
     #dirty_ifc = true unless (ifc.bootproto == params["bootproto"]) ONLY FOR DEBUG
 
-
-
     logger.info "\n*** INFO: dirty after interface config: #{dirty}\n"
-
 
     ifc.bootproto = params["bootproto"]
     ifc.ipaddr = params["ipaddr"] || ""
-    ifc.vlan_id = params["vlan_id"] || ""
-    ifc.vlan_etherdevice = params["vlan_etherdevice"] || ""
+    ifc.vlan_id = params[:vlan_id] if params[:vlan_id]
+    ifc.vlan_etherdevice = params[:vlan_etherdevice] if params[:vlan_etherdevice]
 
 
     if ifc.bootproto == STATIC_BOOT_ID

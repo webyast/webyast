@@ -80,7 +80,8 @@ div.interface p { line-height: 16px; margin:0; }
 #pages { background: none repeat scroll 0 0 #FFFFFF; width: 1940px; }
 .page { float: left; margin: 0 auto; overflow: hidden; width: 960px; }
 .page .navigation_link_container { padding: 10px 20px 0; }
-.page .page_link { margin: 5px 0px 10px 0px; font-size:14px; }
+.page .page_link { margin: 5px 0px 10px 0px; font-size:14px; color:#2081C5; border:none; }
+.page .page_link:hover { border:none; }
 
 
 .iselector { border:4px solid transparent; padding:1px; border-radius:0;}
