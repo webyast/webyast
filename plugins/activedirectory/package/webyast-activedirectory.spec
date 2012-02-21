@@ -40,7 +40,7 @@ Requires:       yast2-dbus-server >= 2.17.3
 Requires:	yast2-samba-client >= 2.17.18
 
 
-Source:         www.tar.bz2
+Source:         %{mod_full_name}.gem
 Source1:        org.opensuse.yast.modules.yapi.activedirectory.policy
 Source2:        ActiveDirectory.pm
 
@@ -65,7 +65,7 @@ Test::Unit or RSpec files, useful for developers.
 
 %check
 # run the testsuite
-%webyast_check
+%webyast_run_plugin_tests
 
 %install
 %gem_install %{S:0}
