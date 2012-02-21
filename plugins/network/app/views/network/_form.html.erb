@@ -25,7 +25,7 @@
       </div>
     </fieldset>
 
-  <% elsif @type == "bridge" %>
+  <% elsif @type == "br" %>
     <fieldset id="bridge-fieldset" class="webyast_fieldset">
       <div class="fieldset_header">
         <span class="fieldset_header_title" >Bridge configuration</span>
@@ -33,7 +33,17 @@
 
       <div class="fieldset_body">
         <div class="row">
-          <label><%=_("Some fields")%></label>
+          <label class="tvalign"><%=_("Bridge devices:")%></label>
+          <div class="iblock">
+            <% @ifcs.each do |id, iface| %>
+              <% unless id.match("br") %>
+                <div>
+                 <%= check_box :bridge_ports, id %>
+                 <%= id %> - <%= iface.vendor %>
+                </div>
+              <% end %>
+            <% end %>
+          <div>
         </div>
       </div>
     </fieldset>

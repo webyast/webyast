@@ -57,6 +57,12 @@
 /* == Basic setup  ======================================================== */
 /* html, */
 /* unnecessary property, causes inheritance */
+
+.tvalign { vertical-align: top!important; }
+.mvalign { vertical-align: middle; }
+.bvalign { vertical-align: bottom; }
+.iblock { display:inline-block; }
+
 body {
   background-color: #f5f5f5;
   /* BG Grey: #fcfcfc is taken see example above */

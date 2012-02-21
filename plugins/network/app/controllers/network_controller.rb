@@ -91,7 +91,7 @@ class NetworkController < ApplicationController
     @number = @ifcs.select{|id, iface| id if id.match(@type)}.count
     @physical = @ifcs.select{|k, i| i if k.match("eth")}
 
-    @ifc = Interface.new({"bootproto"=>"dhcp", "startmode"=>"auto"}, "#{@type}#{@number}")
+    @ifc = Interface.new({"bootproto"=>"dhcp", "startmode"=>"auto", "bridge_ports"=>[]}, "#{@type}#{@number}")
 
     #@dhcp_hostname_enabled = @hostname.respond_to?("dhcp_hostname")
 
@@ -113,6 +113,9 @@ class NetworkController < ApplicationController
     hash["ipaddr"] = params[:ipaddr] || ""
     hash["vlan_id"] = params[:vlan_id] if  params[:vlan_id]
     hash["vlan_etherdevice"] = params[:vlan_etherdevice] if  params[:vlan_etherdevice]
+
+    #hash[":bridge_ports"] = params[":bridge_ports"].map{|k,v| k if v=="1"}.compact if params[":bridge_ports"]
+    hash[":bridge_ports"] = "eth0" # DEBU
 
     ifc = Interface.new(hash, params["interface"])
     Rails.logger.error "**** New interface: #{ifc.inspect}"

@@ -61,9 +61,33 @@ class Hostname < BaseModel::Base
     return if settings.empty?
 
     vsettings = [ "a{ss}", settings ] # bnc#538050
+
+    Rails.logger.error "\n *** WRITE HOSTNAME SETTINGS #{vsettings.inspect}"
     YastService.Call("YaPI::NETWORK::Write",{"hostname" => vsettings})
+
     # TODO success or not?
     YastCache.reset(self)
+
+    raise HostnameError.new(ret["error"]) if ret["exit"] != "0"
   end
 
+end
+
+require 'exceptions'
+class HostnameError < BackendException
+  def initialize(message)
+    @message = message
+    super("Failed to write dns setting with this error: #{@message}.")
+  end
+
+  def to_xml
+    xml = Builder::XmlMarkup.new({})
+    xml.instruct!
+
+    xml.error do
+      xml.type "NETWORK_HOSTNAME_ERROR"
+      xml.description @message
+      xml.output @message
+    end
+  end
 end

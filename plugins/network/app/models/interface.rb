@@ -32,7 +32,7 @@ class Interface < BaseModel::Base
   IPADDR_REGEX = /([0-9]{1,3}.){3}[0-9]{1,3}/
   IP_IPADDR_REGEX = /inet (#{IPADDR_REGEX})/
 
-  attr_accessor :id, :bootproto, :ipaddr, :hwname
+  attr_accessor :id, :bootproto, :ipaddr, :vendor
   attr_accessor :bridge_ports
   attr_accessor :vlan_etherdevice, :vlan_id
 
@@ -94,15 +94,6 @@ class Interface < BaseModel::Base
   # Saves data from model to system via YaPI. Saves only setted data,
   # so it support partial safe (e.g. save only new timezone if rest of fields is not set). ????????
   def update
-#    @id = Hash.new
-#    interface = {}
-#    interface["bootproto"] = @bootproto if @bootproto
-#    interface["ipaddr"] = @ipaddr if @ipaddr
-#    interface["vlan_etherdevice"] = @vlan_etherdevice if @vlan_etherdevice
-#    interface["vlan_id"] = @vlan_id if @vlan_id
-
-#    settings = { @id => interface }
-
     settings = { @id=>{} }
 
     Rails.logger.error "*** @id => #{@id} self.id #{self.id} and match #{@id.match("vlan")}"
@@ -124,7 +115,7 @@ class Interface < BaseModel::Base
       }
 
     elsif @id.match("br")
-      Rails.logger.error "*** Bridge Settings ..."
+      Rails.logger.error "*** Bridge Settings ... #{@bridge_ports.inspect}"
 
       @bridge_ports = @bridge_ports || ""
 
@@ -132,8 +123,7 @@ class Interface < BaseModel::Base
         @id => {
         "bootproto" => @bootproto,
         "ipaddr" => @ipaddr,
-        "vlan_id" => @vlan_id,
-        "bridge_ports" => @bridge_ports,
+        "bridge_ports" => "eth0",
         }
       }
 
@@ -165,11 +155,10 @@ class Interface < BaseModel::Base
 #      }
 #    end
 
-    Rails.logger.error "********** SETTINGS BEFORE SAVE #{settings.inspect}"
+    Rails.logger.error "\n *** WRITE INTERFACE SETTING  #{settings.inspect}"
+
     vsettings = [ "a{sa{ss}}", settings ] # bnc#538050
     response = YastService.Call("YaPI::NETWORK::Write",{"interface" => vsettings})
-
-    Rails.logger.error "********** RESPONSE FROM YAPI?? #{response.inspect}"
 
     # TODO success or not?
     YastCache.reset(self,@id)

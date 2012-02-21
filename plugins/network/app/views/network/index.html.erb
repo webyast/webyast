@@ -43,8 +43,8 @@
                   <%= image_tag("#{img}") %>
                 </div>
                 <div class="iface_details">
-                  <!-- #TODO: Contact mvidner for adding hwname to yast-network package -->
-                  <p><b><%= interface.hwname if interface.hwname  %></b></p>
+                  <!-- #TODO: Contact mvidner for adding vendor to yast-network package -->
+                  <p><b><%= interface.vendor if interface.vendor  %></b></p>
                   <p>Interface: <b><%= interface.id %></b></p>
                   <p>IP address: <%= interface.ipaddr %></p>
                   <p>Mode: <%= interface.bootproto %></p>
@@ -122,7 +122,7 @@
               <div class="clearfix">&nbsp;</div>
             </fieldset>
 
-        <fieldset class="webyast_fieldset iselector" data-type="bridge">
+        <fieldset class="webyast_fieldset iselector" data-type="br">
           <div class="fieldset_header">
             <span class="fieldset_header_title" ><%= _("BRIDGE")%></span>
           </div>
@@ -136,8 +136,7 @@
                   <section>
                     <b>Bridging</b> is a forwarding technique used in packet-switched computer networks. Unlike routing, bridging makes no assumptions about where in a network a particular address is located.
                     Instead, it depends on flooding and examination of source addresses in received packet headers to locate unknown devices. Once a device has been located, its location
-                    is recorded in a table where the source address is stored so as to avoid the need for further flooding. The utility of bridging is limited by its dependence on flooding,
-                    and is thus only used in local area networks.
+                    is recorded in a table where the source address is stored so as to avoid the need for further flooding.
                   </section>
                 </div>
               </div>
@@ -157,9 +156,8 @@
                 </div>
                 <div class="iface_details", style="width:90%">
                   <section>
-                    A <b>trunk</b> is a single transmission channel between two points, each point being either the switching center or the node.
+                    A <b>bond/trunk</b> is a single transmission channel between two points, each point being either the switching center or the node.
                     In modern communications, trunking is a concept by which a communications system can provide network access to many clients by sharing a set of lines or frequencies instead of providing them individually.
-                    This is analogous to the structure of a tree with one trunk and many branches.
                   </section>
                 </div>
               </div>
