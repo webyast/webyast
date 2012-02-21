@@ -60,6 +60,7 @@ private
   end
 
   def self.cache_valid
+    return false unless YastCache.active
     cache_id = 'permissions:timestamp'
     #cache contain string as it is only object supported by all caching backends
     cache_timestamp = Rails.cache.read(cache_id).to_i
