@@ -8,7 +8,7 @@ Gem::Specification.new do |s|
   s.email = "yast-devel@opensuse.org"
   s.licenses = ['GPL-2.0']
 
-  ignore_files = ["package/rubygem-webyast-administrator.changes", "package/rubygem-webyast-administrator.spec"]
+  ignore_files = ["package/rubygem-webyast-activedirectory.changes", "package/rubygem-webyast-activedirectory.spec"]
 
   s.files         = `git ls-files`.split("\n").delete_if{|f| f.match(/^locale\/.*\.po$/) || f.match(/.gitignore$/) || ignore_files.include?(f)}.concat(Dir.glob("locale/**/*.mo"))
 
