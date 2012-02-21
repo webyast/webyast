@@ -107,9 +107,4 @@ end
 
 task :clobber => :clobber_package
 
-desc "Force a rebuild of the package files"
-# Note: 'repackage' can be simply redirected to 'package', the old package
-# is always removed before creating a new package
-task :repackage => :package
-
 # vim: ft=ruby
