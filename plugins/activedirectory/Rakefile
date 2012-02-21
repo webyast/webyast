@@ -9,3 +9,8 @@ end
 
 require File.expand_path('../config/application', __FILE__)
 Activedirectory::Application.load_tasks #   <<<< = require 'tasks/rails'
+
+require "webyast-activedirectory"
+
+require "bundler/gem_tasks"
+task :build => :"gettext:pack"

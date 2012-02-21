@@ -32,8 +32,8 @@ BuildRequires:	webyast-base, rubygem-sqlite3-ruby
 BuildRequires:	rubygem-webyast-rake-tasks >= 0.2
 BuildRequires:	webyast-base-testsuite
 BuildRequires:	rubygem-restility
-Requires:	webyast-base
-Requires:	rubygem-webyast-rake-tasks >= 0.2
+PreReq:	        webyast-base
+PreReq:         rubygem-webyast-rake-tasks >= 0.2
 
 #
 Url:            http://rubygems.org/gems/webyast-administrator
