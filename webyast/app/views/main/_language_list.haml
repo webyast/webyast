@@ -6,5 +6,6 @@
     = language_name(FastGettext.locale)
     %span#lang_menu
       - FastGettext.default_available_locales.sort.each do |locale|
-        = link_to language_name(locale), '?locale=' + locale
-        %br
+        - if language_name(locale) != locale
+          = link_to language_name(locale), '?locale=' + locale
+          %br
