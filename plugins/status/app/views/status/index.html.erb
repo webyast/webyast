@@ -22,11 +22,7 @@
 <% content_for :head do %>
   <!--[if IE]><%= javascript_include_tag "excanvas.js" %><![endif]-->
     <%= stylesheet_link_tag "webyast-status" %>
-    <%#= javascript_include_tag "jquery.jqplot.js" %>
-    <%#= javascript_include_tag "jqplot.categoryAxisRenderer.js" %>
-    <%#= javascript_include_tag "jqplot.dateAxisRenderer.js" %>
-    <%#= javascript_include_tag "jqplot.canvasTextRenderer.js" %>
-    <%#= javascript_include_tag "jqplot.cursor.js" %>
+    <%= javascript_include_tag "webyast-base-jqplot.js" %>
 <% end %>
 
 <% content_for :before_script do %>
