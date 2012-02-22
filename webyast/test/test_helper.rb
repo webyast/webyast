@@ -38,27 +38,11 @@ class ActiveSupport::TestCase
 
 end
 
-
 # Stub all permission checks
 # Equal to => Permission.stubs(:find).with(:all, {:user_id => @account.username}).returns [PERMISSIONS]
-class FakeDbus
-  attr_reader :last_perms, :last_user
-  def revoke(perms,user)
-    @last_perms = perms
-    @last_user = user
-  end
 
-  def grant(perms,user)
-    revoke perms,user
-  end
-
-   def check(perms,user)
-     [["yes"]]
-   end
-end
-
-def Permission.dbus_obj
-  return FakeDbus.new
+def Permission.find( perm, user_id)
+  return [{:name=>perm,:granted=>true}]
 end
 
 # use a different DB for tests -  needed during RPM build
