@@ -80,12 +80,9 @@ Test::Unit or RSpec files, useful for developers.
 %webyast_update_assets
 
 %check
-<<<<<<< HEAD:plugins/activedirectory/package/webyast-activedirectory.spec
+
 # run the testsuite
 %webyast_run_plugin_tests
-=======
-#%{}webyast_run_plugin_tests
->>>>>>> rubygem-webyast-activedirectory - fixed packaging:plugins/activedirectory/package/rubygem-webyast-activedirectory.spec
 
 %install
 %gem_install %{S:0}
