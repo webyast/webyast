@@ -80,11 +80,10 @@ class Dns < BaseModel::Base
     vsettings = [ "a{sas}", settings ] # bnc#538050
     Rails.logger.error "\n *** WRITE DNS SETTINGS  #{vsettings.inspect}"
 
-    YastService.Call("YaPI::NETWORK::Write",{"dns" => vsettings})
-    # TODO success or not?
+    exit_code = YastService.Call("YaPI::NETWORK::Write",{"dns" => vsettings})
     YastCache.reset(self)
 
-    raise DNSError.new(ret["error"]) if ret["exit"] != "0"
+    raise DNSError.new(exit_code["error"]) if exit_code["exit"] != "0"
   end
 end
 

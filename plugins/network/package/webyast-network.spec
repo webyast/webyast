@@ -48,6 +48,7 @@ BuildRequires:	rubygem-test-unit rubygem-mocha
 Group:    Productivity/Networking/Web/Utilities
 Requires: %{name} = %{version}
 Requires: webyast-base-testsuite
+Requires: bridge-utils
 Summary:  Testsuite for webyast-network package
 
 %description

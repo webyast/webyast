@@ -75,10 +75,10 @@ class Route < BaseModel::Base
     vsettings = [ "a{sa{ss}}", settings ] # bnc#538050
 
     Rails.logger.error "\n *** WRITE ROUTE SETTINGS  #{vsettings.inspect}"
-    ret = YastService.Call("YaPI::NETWORK::Write",{"route" => vsettings})
+    exit_code = YastService.Call("YaPI::NETWORK::Write",{"route" => vsettings})
 
     YastCache.reset(self,@id)
-    raise RouteError.new(ret["error"]) if ret["exit"] != "0"
+    raise RouteError.new(exit_code["error"]) if exit_code["exit"] != "0"
   end
 
 end

@@ -63,12 +63,10 @@ class Hostname < BaseModel::Base
     vsettings = [ "a{ss}", settings ] # bnc#538050
 
     Rails.logger.error "\n *** WRITE HOSTNAME SETTINGS #{vsettings.inspect}"
-    YastService.Call("YaPI::NETWORK::Write",{"hostname" => vsettings})
-
-    # TODO success or not?
+    exit_code = YastService.Call("YaPI::NETWORK::Write",{"hostname" => vsettings})
     YastCache.reset(self)
 
-    raise HostnameError.new(ret["error"]) if ret["exit"] != "0"
+    raise HostnameError.new(exit_code["error"]) if exit_code["exit"] != "0"
   end
 
 end

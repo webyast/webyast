@@ -91,7 +91,7 @@ class NetworkController < ApplicationController
     @number = @ifcs.select{|id, iface| id if id.match(@type)}.count
     @physical = @ifcs.select{|k, i| i if k.match("eth")}
 
-    @ifc = Interface.new({"bootproto"=>"dhcp", "startmode"=>"auto", "bridge_ports"=>[]}, "#{@type}#{@number}")
+    @ifc = Interface.new({"type"=>params[:type], "bootproto"=>"dhcp", "startmode"=>"auto", "bridge_ports"=>[]}, "#{@type}#{@number}")
 
     #@dhcp_hostname_enabled = @hostname.respond_to?("dhcp_hostname")
 
@@ -107,17 +107,14 @@ class NetworkController < ApplicationController
 
     Rails.logger.error "Params #{params.inspect}"
 
-    id = params["interface"]
     hash = {}
     hash["bootproto"] = params[:bootproto]
     hash["ipaddr"] = params[:ipaddr] || ""
     hash["vlan_id"] = params[:vlan_id] if  params[:vlan_id]
     hash["vlan_etherdevice"] = params[:vlan_etherdevice] if  params[:vlan_etherdevice]
+    hash["bridge_ports"] = params[":bridge_ports"].map{|k,v| k if v=="1"}.compact if params[":bridge_ports"]
 
-    #hash[":bridge_ports"] = params[":bridge_ports"].map{|k,v| k if v=="1"}.compact if params[":bridge_ports"]
-    hash[":bridge_ports"] = "eth0" # DEBU
-
-    ifc = Interface.new(hash, params["interface"])
+    ifc = Interface.new(hash, "#{params["type"]}#{params[:number]}")
     Rails.logger.error "**** New interface: #{ifc.inspect}"
     ifc.save
 
@@ -196,17 +193,20 @@ class NetworkController < ApplicationController
     ### END DNS ###
 
 
+
+    
     ### INTERFACE ###
+    #FOR DEBUG ONLY, FOR DEBUG ONLY
+    #FOR DEBUG ONLY, FOR DEBUG ONLY
 
-    ifc = Interface.find params["interface"]
-    return false unless ifc
-
-
+    #dirty_ifc = true unless (ifc.bootproto == params["bootproto"]) 
     dirty_ifc = true
-    #dirty_ifc = true unless (ifc.bootproto == params["bootproto"]) ONLY FOR DEBUG
-
     logger.info "\n*** INFO: dirty after interface config: #{dirty}\n"
-
+    
+    ifc = Interface.find params["interface"]
+    ifc.type = params["type"]
+    ifc.bridge_ports = params["bridge_ports"].map{|k,v| k if v=="1"}.compact.join(' ').to_s if params["bridge_ports"]
+    
     ifc.bootproto = params["bootproto"]
     ifc.ipaddr = params["ipaddr"] || ""
     ifc.vlan_id = params[:vlan_id] if params[:vlan_id]

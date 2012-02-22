@@ -33,7 +33,7 @@ class Interface < BaseModel::Base
   IP_IPADDR_REGEX = /inet (#{IPADDR_REGEX})/
 
   attr_accessor :id, :bootproto, :ipaddr, :vendor
-  attr_accessor :bridge_ports
+  attr_accessor :type, :bridge_ports
   attr_accessor :vlan_etherdevice, :vlan_id
 
   validates_format_of :id, :allow_nil => false, :with => /^[a-zA-Z0-9_-]+$/
@@ -51,11 +51,11 @@ class Interface < BaseModel::Base
   def cidr
     # return netmask with slash or without slash ???
     #netmask = (self.ipaddr.blank?)? " " : "/#{self.ipaddr.split("/")[1]}"
-    cidr =  (self.ipaddr.blank?)? "" : (self.ipaddr.blank?)? " " : self.ipaddr.split("/")[1]
+    cidr =  (self.ipaddr.blank?)? "" : self.ipaddr.split("/")[1]
   end
 
   def netmask
-    netmask = (self.ipaddr.blank?)? "" : IPAddr.new('255.255.255.255').mask(self.cidr).to_s
+    netmask = (self.cidr.blank?)? "" : IPAddr.new('255.255.255.255').mask(self.cidr).to_s
   end
 
   def initialize(args, id=nil)
@@ -99,6 +99,8 @@ class Interface < BaseModel::Base
     Rails.logger.error "*** @id => #{@id} self.id #{self.id} and match #{@id.match("vlan")}"
 
 
+    @type = @type || ""
+
     if @id.match("vlan")
       Rails.logger.error "*** VLAN Settings ..."
 
@@ -109,6 +111,7 @@ class Interface < BaseModel::Base
         @id => {
         "bootproto" => @bootproto,
         "ipaddr" => @ipaddr,
+        "type" => @type,
         "vlan_id" => @vlan_id,
         "vlan_etherdevice" => @vlan_etherdevice,
         }
@@ -116,14 +119,14 @@ class Interface < BaseModel::Base
 
     elsif @id.match("br")
       Rails.logger.error "*** Bridge Settings ... #{@bridge_ports.inspect}"
-
       @bridge_ports = @bridge_ports || ""
 
       settings = {
         @id => {
         "bootproto" => @bootproto,
         "ipaddr" => @ipaddr,
-        "bridge_ports" => "eth0",
+        "type" => @type,
+        "bridge_ports" => @bridge_ports,
         }
       }
 
@@ -133,7 +136,8 @@ class Interface < BaseModel::Base
       settings = {
         @id => {
           "bootproto" => @bootproto,
-          "ipaddr" => @ipaddr
+          "ipaddr" => @ipaddr,
+          "type" => @type,
         }
       }
 

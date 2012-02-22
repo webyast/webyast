@@ -9,8 +9,10 @@
         <div class="row">
           <label><%=_("Interface name")%></label>
           <%= text_field_tag :id, @ifc.id, :disabled => true if action != "create" %>
-          <%= text_field_tag(:interface_type, @type, :disabled => true) if action == "create" %>
-          <%= select("interface", "number", ((@number)..9).to_a.map{|i| "#{i}"}) if action == "create" %>
+          <% if action == "create" %>
+              <%= text_field_tag(:type, @type) %>
+              <%= select_tag(:number, options_for_select((@number..9).to_a.map{|i| "#{i}"}, @number)) %>
+          <% end %>
         </div>
 
         <div class="row">
@@ -32,6 +34,11 @@
       </div>
 
       <div class="fieldset_body">
+        <div class="row">
+          <label><%=_("Interface name")%></label>
+          <%= text_field_tag :id, @ifc.id, :disabled => true if action != "create" %>
+          <%= hidden_field_tag(:type, @type) %>
+        </div>
         <div class="row">
           <label class="tvalign"><%=_("Bridge devices:")%></label>
           <div class="iblock">
