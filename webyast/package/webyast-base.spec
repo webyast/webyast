@@ -143,7 +143,7 @@ Summary:  Testsuite for webyast-base package
 %define pkg_home /var/lib/%{webyast_user}
 #
 
-Requires:	rubygem-factory_girl, rubygem-factory_girl_rails, rubygem-mocha
+Requires:	rubygem-factory_girl, rubygem-factory_girl_rails, rubygem-mocha, tidy
 
 %description
 WebYaST - Core components for UI and REST based interface to system manipulation.
@@ -161,7 +161,6 @@ Testsuite for core WebYaST package.
 Group:    Productivity/Networking/Web/Utilities
 Provides: webyast-branding
 PreReq:	%{name} = %{version}
-#Requires: rubygem-mocha rubygem-test-unit tidy
 Summary:  Branding package for webyast-base package
 
 %description branding-default
