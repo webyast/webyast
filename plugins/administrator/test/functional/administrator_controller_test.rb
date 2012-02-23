@@ -30,7 +30,6 @@ class AdministratorControllerTest < ActionController::TestCase
   def setup
     devise_sign_in
     Administrator.stubs(:find).returns Administrator.new({:aliases => ""})
-    AdministratorController.any_instance.stubs(:authorize!).with(:read, Administrator).returns(true)
   end
   
   test "check 'show' result" do
