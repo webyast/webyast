@@ -34,7 +34,7 @@ BuildRequires:	webyast-base-testsuite
 BuildRequires:	rubygem-restility
 PreReq:	        webyast-base
 PreReq:         rubygem-webyast-rake-tasks >= 0.2
-Requires:       yast2-dbus-server
+Requires:       yast2-dbus-server, yast2-users
 
 %if 0%{?suse_version} == 0 || %suse_version > 1110
 Requires:       yast2-core >= 2.18.10
