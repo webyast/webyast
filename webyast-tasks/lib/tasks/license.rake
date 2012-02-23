@@ -63,6 +63,9 @@ def license_report
     elsif fn =~ /COPYING/
       report[:skipped] << "#{fn}: skipped by name match (already contain license)"
       next
+    elsif fn =~ /Rakefile/
+      report[:skipped] << "#{fn}: skipped by name match (Rakefile)"
+      next
     elsif fn =~ /\/rrdtool.*\.txt/
       report[:skipped] << "#{fn}: skipped by name match (rrdtool output is not licensed)"
       next
@@ -80,6 +83,9 @@ def license_report
       next
     elsif fn =~ /\.po\z/ || fn =~ /\.mo\z/
       report[:skipped] << "#{fn}: skipped by name match (translation file)"
+      next
+    elsif fn =~ /\.gemspec\z/ || fn =~ /\.mo\z/
+      report[:skipped] << "#{fn}: skipped by name match (gemspec file)"
       next
     elsif fn =~ /\.curl\z/
       report[:skipped] << "#{fn}: skipped by name match (test fixture)"
