@@ -48,7 +48,7 @@ PreReq:         polkit, rubygem-polkit1
 # <11.1 or SLES11
 PreReq:         PolicyKit, rubygem-polkit
 %endif
-PreReq:         rubygem-rake, rubygem-sqlite3-ruby
+PreReq:         rubygem-rake, rubygem-sqlite3
 PreReq:         rubygem-rails-3_1
 PreReq:         rubygem-fast_gettext, rubygem-gettext_i18n_rails, rubygem-inifile
 License:	LGPL-2.0
@@ -83,7 +83,7 @@ BuildRequires:  ruby-dbus
 %else
 BuildRequires:  rubygem-ruby-dbus
 %endif
-BuildRequires:  rubygem-sqlite3-ruby
+BuildRequires:  rubygem-sqlite3
 BuildRequires:  rubygem-rails-3_1
 %if 0%{?suse_version} == 0 || %suse_version > 1110
 BuildRequires:  polkit, rubygem-polkit1
@@ -106,7 +106,7 @@ BuildRequires:  rubygem-ruby-debug, rubygem-factory_girl, rubygem-factory_girl_r
 # FIXME: this pulls in Rails 3.0 packages
 BuildRequires:	rubygem-jquery-rails
 
-Requires:	rubygem-haml, rubygem-sqlite3-ruby, rubygem-builder-3_0
+Requires:	rubygem-haml, rubygem-sqlite3, rubygem-builder-3_0
 Requires:       rubygem-fast_gettext, rubygem-gettext_i18n_rails, rubygem-rails-i18n
 
 Requires:	rubygem-devise, rubygem-devise_unix2_chkpwd_authenticatable, rubygem-devise-i18n
