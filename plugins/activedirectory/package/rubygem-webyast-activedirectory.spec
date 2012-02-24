@@ -22,13 +22,13 @@ Release:        0
 %define mod_name webyast-activedirectory
 %define mod_full_name %{mod_name}-%{version}
 #
-Group:          Development/Languages/Ruby
+Group:          Productivity/Networking/Web/Utilities
 License:        GPL-2.0	
 #
 BuildRoot:      %{_tmppath}/%{name}-%{version}-build
 BuildRequires:  rubygems_with_buildroot_patch
 %rubygems_requires
-BuildRequires:	webyast-base, rubygem-sqlite3-ruby
+BuildRequires:	webyast-base
 BuildRequires:	rubygem-webyast-rake-tasks >= 0.2
 BuildRequires:	webyast-base-testsuite
 BuildRequires:	rubygem-restility
