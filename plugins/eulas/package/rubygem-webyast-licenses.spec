@@ -8,32 +8,34 @@
 # Please submit bugfixes or comments via http://bugs.opensuse.org/
 #
 
-
-Name:           webyast-licenses
-Provides:       WebYaST(org.opensuse.yast.modules.eulas)
-Provides:       yast2-webservice-eulas = %{version}
-Obsoletes:      yast2-webservice-eulas < %{version}
-PreReq:         yast2-webservice
-License:        GPL-2.0	
-Group:          Productivity/Networking/Web/Utilities
-URL:            http://en.opensuse.org/Portal:WebYaST
-Autoreqprov:    on
-Version:        0.2.5
+# norootforbuild
+Name:           rubygem-webyast-eulas
+Version:        0.1
 Release:        0
+%define mod_name webyast-eulas
+%define mod_full_name %{mod_name}-%{version}
+
+#
+Group:          Productivity/Networking/Web/Utilities
+License:        GPL-2.0	
+#
+BuildRoot:      %{_tmppath}/%{name}-%{version}-build
+BuildArch:      noarch
+BuildRequires:  rubygems_with_buildroot_patch
+%rubygems_requires
+BuildRequires:	webyast-base >= 0.3
+BuildRequires:	webyast-base-testsuite
+BuildRequires:	rubygem-restility
+PreReq:	        webyast-base >= 0.3
+
 Summary:        WebYaST - license management service
 Source:         www.tar.bz2
 Source1:        eulas-sles11.yml
 Source2:        org.opensuse.yast.modules.yapi.license.policy
 Source3:        eulas-opensuse11_1.yml
-BuildRoot:      %{_tmppath}/%{name}-%{version}-build
-BuildArch:      noarch
-
-BuildRequires:  webyast-base-testsuite
-BuildRequires:	rubygem-test-unit rubygem-mocha
 
 #
 %define plugin_name eulas
-%define plugin_dir %{webyast_dir}/vendor/plugins/%{plugin_name}
 #
 
 %package testsuite
@@ -56,22 +58,24 @@ It's only needed for verifying the functionality of the module and it's not
 needed at runtime.
 
 %prep
-%setup -q -n www
 
 %build
-export RAILS_PARENT=%{webyast_dir}
-env LANG=en rake gettext:pack
 
 %check
 # run the testsuite
-%webyast_check
+%webyast_run_plugin_tests
 
 %post
 /usr/sbin/grantwebyastrights --user root --action grant > /dev/null
 /usr/sbin/grantwebyastrights --user %{webyast_user} --action grant > /dev/null
 
-%install
+%webyast_update_assets
 
+%postun
+%webyast_update_assets
+
+%install
+%gem_install %{S:0}
 #
 # Install all web and frontend parts.
 #
@@ -92,59 +96,46 @@ case "%{_project}" in
   ;;
 esac
 mv config/resources/licenses $RPM_BUILD_ROOT/usr/share/%{webyast_user}/%{plugin_name}/
-
 mkdir -p $RPM_BUILD_ROOT%{webyast_vardir}/%{plugin_name}/accepted-licenses
-
-mkdir -p $RPM_BUILD_ROOT%{plugin_dir}
-cp -a * $RPM_BUILD_ROOT%{plugin_dir}/
-rm -f $RPM_BUILD_ROOT%{plugin_dir}/COPYING
 
 mkdir -p $RPM_BUILD_ROOT/etc/webyast/
 cp $SOURCE_CONFIG $RPM_BUILD_ROOT/etc/webyast/eulas.yml
 
-mkdir -p $RPM_BUILD_ROOT/usr/share/polkit-1/actions
-cp %{SOURCE2} $RPM_BUILD_ROOT/usr/share/polkit-1/actions/
+# Policies
+mkdir -p $RPM_BUILD_ROOT/usr/share/%{webyast_polkit_dir}
+cp %{SOURCE2} $RPM_BUILD_ROOT/usr/share/%{webyast_polkit_dir}
 
-# remove .po files (no longer needed)
-rm -rf $RPM_BUILD_ROOT/%{plugin_dir}/locale/*/*.po
-# search locale files
-%find_lang webyast-licenses
+# remove empty public
+rm -rf $RPM_BUILD_ROOT/%{_libdir}/ruby/gems/%{rb_ver}/gems/%{mod_full_name}/public
+
+%webyast_build_plugin_assets
 
 %clean
-rm -rf $RPM_BUILD_ROOT
+%{__rm} -rf $RPM_BUILD_ROOT
 
-
-%files -f webyast-licenses.lang
+%files 
 %defattr(-,root,root)
-%dir %{webyast_dir}
-%dir %{webyast_dir}/vendor
-%dir %{webyast_dir}/vendor/plugins
-%dir %{plugin_dir}
-%dir %{plugin_dir}/doc
+%{_libdir}/ruby/gems/%{rb_ver}/cache/%{mod_full_name}.gem
+%{_libdir}/ruby/gems/%{rb_ver}/gems/%{mod_full_name}/
+%exclude %{_libdir}/ruby/gems/%{rb_ver}/gems/%{mod_full_name}/test
+%{_libdir}/ruby/gems/%{rb_ver}/specifications/%{mod_full_name}.gemspec
+# precompiled assets
+%dir %{webyast_dir}/public/assets
+%{webyast_dir}/public/assets/*
 %dir /usr/share/%{webyast_user}
 %dir /usr/share/%{webyast_user}/%{plugin_name}
 %dir %{webyast_vardir}
 %dir %{webyast_vardir}/%{plugin_name}
-%{plugin_dir}/locale
-%{plugin_dir}/README
-%{plugin_dir}/Rakefile
-%{plugin_dir}/init.rb
-%{plugin_dir}/install.rb
-%{plugin_dir}/uninstall.rb
-%{plugin_dir}/app
-%{plugin_dir}/config
-%{plugin_dir}/doc/README_FOR_APP
-%{plugin_dir}/doc/eulas_example.yml
 /usr/share/%{webyast_user}/%{plugin_name}/licenses
 %dir /etc/webyast/
 %config /etc/webyast/eulas.yml
-
 %attr(-,%{webyast_user},%{webyast_user}) %dir %{webyast_vardir}/%{plugin_name}/accepted-licenses
-/usr/share/polkit-1/actions/org.opensuse.yast.modules.eulas.policy
-%doc COPYING
+%dir /usr/share/%{webyast_polkit_dir}
+%attr(644,root,root) %config /usr/share/%{webyast_polkit_dir}/org.opensuse.yast.modules.eulas.policy
+
 
 %files testsuite
-%defattr(-,root,root)
-%{plugin_dir}/test
+%defattr(-,root,root,-)
+%{_libdir}/ruby/gems/%{rb_ver}/gems/%{mod_full_name}/test
 
 %changelog
