@@ -111,8 +111,8 @@ class NetworkController < ApplicationController
     hash["bootproto"] = params[:bootproto]
     hash["ipaddr"] = params[:ipaddr] || ""
     hash["vlan_id"] = params[:vlan_id] if  params[:vlan_id]
-    hash["vlan_etherdevice"] = params[:vlan_etherdevice] if  params[:vlan_etherdevice]
-    hash["bridge_ports"] = params[":bridge_ports"].map{|k,v| k if v=="1"}.compact if params[":bridge_ports"]
+    hash["vln_etherdevice"] = params[:vlan_etherdevice] if  params[:vlan_etherdevice]
+    hash["bridge_ports"] = params["bridge_ports"].map{|k,v| k if v=="1"}.compact.join(" ").to_s if params["bridge_ports"]
 
     ifc = Interface.new(hash, "#{params["type"]}#{params["number"]}")
     ifc.save
