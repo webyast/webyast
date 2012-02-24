@@ -20,7 +20,6 @@ Group:          Productivity/Networking/Web/Utilities
 License:        GPL-2.0	
 #
 BuildRoot:      %{_tmppath}/%{name}-%{version}-build
-BuildArch:      noarch
 BuildRequires:  rubygems_with_buildroot_patch
 %rubygems_requires
 BuildRequires:	webyast-base >= 0.3
@@ -29,7 +28,7 @@ BuildRequires:	rubygem-restility
 PreReq:	        webyast-base >= 0.3
 
 Summary:        WebYaST - license management service
-Source:         www.tar.bz2
+Source:         %{mod_full_name}.gem
 Source1:        eulas-sles11.yml
 Source2:        org.opensuse.yast.modules.yapi.license.policy
 Source3:        eulas-opensuse11_1.yml
@@ -37,6 +36,14 @@ Source3:        eulas-opensuse11_1.yml
 #
 %define plugin_name eulas
 #
+
+%package doc
+Summary:        RDoc documentation for %{mod_name}
+Group:          Productivity/Networking/Web/Utilities
+Requires:       %{name} = %{version}
+%description doc
+Documentation generated at gem installation time.
+Usually in RDoc and RI formats.
 
 %package testsuite
 Group:    Productivity/Networking/Web/Utilities
@@ -75,10 +82,11 @@ needed at runtime.
 %webyast_update_assets
 
 %install
-%gem_install %{S:0}
+
 #
 # Install all web and frontend parts.
 #
+%gem_install %{S:0}
 mkdir -p $RPM_BUILD_ROOT/usr/share/%{webyast_user}/%{plugin_name}
 
 #sles_version does not exist any more (bnc#689901)
@@ -87,15 +95,15 @@ case "%{_project}" in
  *openSUSE:*)
   # use an openSUSE license by default
   SOURCE_CONFIG=%SOURCE3
-  rm -r "config/resources/licenses/SLES-11"
+  rm -r $RPM_BUILD_ROOT/%{_libdir}/ruby/gems/%{rb_ver}/gems/%{mod_full_name}/config/resources/licenses/SLES-11
   ;;
  *)
   # use a sles11 license by default
   SOURCE_CONFIG=%SOURCE1
-  rm -r "config/resources/licenses/openSUSE-11.1"
+  rm -r $RPM_BUILD_ROOT/%{_libdir}/ruby/gems/%{rb_ver}/gems/%{mod_full_name}/config/resources/licenses/openSUSE-11.1
   ;;
 esac
-mv config/resources/licenses $RPM_BUILD_ROOT/usr/share/%{webyast_user}/%{plugin_name}/
+mv $RPM_BUILD_ROOT/%{_libdir}/ruby/gems/%{rb_ver}/gems/%{mod_full_name}/config/resources/licenses $RPM_BUILD_ROOT/usr/share/%{webyast_user}/%{plugin_name}/
 mkdir -p $RPM_BUILD_ROOT%{webyast_vardir}/%{plugin_name}/accepted-licenses
 
 mkdir -p $RPM_BUILD_ROOT/etc/webyast/
@@ -131,8 +139,11 @@ rm -rf $RPM_BUILD_ROOT/%{_libdir}/ruby/gems/%{rb_ver}/gems/%{mod_full_name}/publ
 %config /etc/webyast/eulas.yml
 %attr(-,%{webyast_user},%{webyast_user}) %dir %{webyast_vardir}/%{plugin_name}/accepted-licenses
 %dir /usr/share/%{webyast_polkit_dir}
-%attr(644,root,root) %config /usr/share/%{webyast_polkit_dir}/org.opensuse.yast.modules.eulas.policy
+%attr(644,root,root) %config /usr/share/%{webyast_polkit_dir}/org.opensuse.yast.modules.yapi.license.policy
 
+%files doc
+%defattr(-,root,root,-)
+%doc %{_libdir}/ruby/gems/%{rb_ver}/doc/%{mod_full_name}/
 
 %files testsuite
 %defattr(-,root,root,-)
