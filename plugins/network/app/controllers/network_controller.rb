@@ -27,11 +27,10 @@ class NetworkController < ApplicationController
   def index
     # TODO: NO INTERFACE FOUND!!!
     authorize! :read, Network
+
     @ifcs = Interface.find(:all)
     @physical = @ifcs.select{|k, i| i if k.match("eth")}
     @virtual = @ifcs.select{|k, i| i unless k.match("eth")}
-
-    Rails.logger.error "*** NETWORK #{@ifcs.inspect}"
 
     respond_to do |format|
       format.html # show.html.erb
@@ -54,7 +53,7 @@ class NetworkController < ApplicationController
     @ifcs = network["interfaces"]
     @ifc = @ifcs[params[:id]]
 
-    @type = params[:id][0..(params[:id].size-2)]
+    @type = params[:id][0..(params[:id].size-2)] || "eth"
     @number = @ifcs.select{|id, iface| id if id.match(@type)}.count
     @physical = @ifcs.select{|k, i| i if k.match("eth")}
 
@@ -74,7 +73,7 @@ class NetworkController < ApplicationController
 
     respond_to do |format|
       format.html
-      format.json { render :json => @interface }
+      format.json { render :json => @ifc }
     end
   end
 
@@ -97,7 +96,7 @@ class NetworkController < ApplicationController
 
     respond_to do |format|
       format.html # show.html.erb
-      format.json { render :json => @interface }
+      format.json { render :json => @ifc }
     end
 
   end
@@ -108,14 +107,14 @@ class NetworkController < ApplicationController
     Rails.logger.error "Params #{params.inspect}"
 
     hash = {}
+    hash["type"] = params[:type] if  params[:type]
     hash["bootproto"] = params[:bootproto]
     hash["ipaddr"] = params[:ipaddr] || ""
     hash["vlan_id"] = params[:vlan_id] if  params[:vlan_id]
     hash["vlan_etherdevice"] = params[:vlan_etherdevice] if  params[:vlan_etherdevice]
     hash["bridge_ports"] = params[":bridge_ports"].map{|k,v| k if v=="1"}.compact if params[":bridge_ports"]
 
-    ifc = Interface.new(hash, "#{params["type"]}#{params[:number]}")
-    Rails.logger.error "**** New interface: #{ifc.inspect}"
+    ifc = Interface.new(hash, "#{params["type"]}#{params["number"]}")
     ifc.save
 
     redirect_to :controller => "network", :action => "index"
@@ -126,151 +125,131 @@ class NetworkController < ApplicationController
   def update
     authorize! :write, Network
 
-    dirty = false
+    dirty_hostname = false
+    dirty_dns = false
+    dirty_route = false
     dirty_ifc = false
 
+    network = Network.find
 
-    # *** SET HOSTNAME VALUES *** #
 
-    hostname = Hostname.find
-    return false unless hostname
+    ### HOSTANEM ###
+    hostname = network["hostname"]
 
-    # Check for hostname changes
     if hostname.name != params["hostname"] && hostname.domain != params["domain"]
-      dirty = true
       hostname.name   = params["hostname"]
       hostname.domain = params["domain"]
 
-      Rails.logger.info "\n*** INFO: Network configuration is dirty after hostname #{params["hostname"].inspect}\n"
+      dirty_hostname = true
     end
 
     if params["dhcp_hostname_enabled"] == "true"
-      #params["dhcp_hostname"]==nil ? params["dhcp_hostname"]="0" : pass
-      #Set dirty to true (bnc#692594)
-      dirty = true
       hostname.dhcp_hostname = params["dhcp_hostname"] || "0"
-      Rails.logger.info "\n*** INFO: Network configuration is dirty after dhcp_hostname: #{hostname.inspect}\n"
-    end
+      #params["dhcp_hostname"]==nil ? params["dhcp_hostname"]="0" : pass
 
-    ### END HOSTANE ###
+      dirty_hostname = true #Set dirty to true (bnc#692594)
+    end
+    ### END HOSTNAME ###
 
 
     ### DNS ###
-
-    dns = Dns.find
-    return false unless dns
+    dns = network["dns"]
 
     # Simply comparing empty array and nil would wrongly mark it dirty,
     # so at first test emptiness
     #FIXME repair it when spliting of param is ready
 
-
     unless (dns.nameservers.empty? && params["nameservers"].blank?)
-      dirty = true unless dns.nameservers == (params["nameservers"]||"").split
+      dirty_dns = true unless dns.nameservers == (params["nameservers"]||"").split
     end
 
     unless (dns.searches.empty? && params["searchdomains"].blank?)
-      dirty = true unless dns.searches == (params["searchdomains"]||"").split
+      dirty_dns = true unless dns.searches == (params["searchdomains"]||"").split
     end
-
-    logger.info "\n*** INFO: dirty after  dns: #{dirty}\n"
 
     # now the model contains arrays but for saving
     # they need to be concatenated because we can't serialize them
     # FIXME: params bellow should be arrays
 
-
-    Rails.logger.error "### ERROR: set dns_nameservers #{params["nameservers"]} \n"
-    Rails.logger.error "### ERROR: set dns_searches #{params["searchdomains"]} \n"
-
     dns.nameservers = params["nameservers"].nil? ? [] : params["nameservers"].split
     dns.searches    = params["searchdomains"].nil? ? [] : params["searchdomains"].split
-
-
-    Rails.logger.error "### DEBUG: set dns_nameservers #{dns.nameservers.inspect} \n"
-    Rails.logger.error "### DEBUG: set dns_searches #{dns.searches.inspect} \n"
-
     ### END DNS ###
 
 
-
-    
     ### INTERFACE ###
-    #FOR DEBUG ONLY, FOR DEBUG ONLY
-    #FOR DEBUG ONLY, FOR DEBUG ONLY
-
-    #dirty_ifc = true unless (ifc.bootproto == params["bootproto"]) 
-    dirty_ifc = true
-    logger.info "\n*** INFO: dirty after interface config: #{dirty}\n"
-    
     ifc = Interface.find params["interface"]
     ifc.type = params["type"]
-    ifc.bridge_ports = params["bridge_ports"].map{|k,v| k if v=="1"}.compact.join(' ').to_s if params["bridge_ports"]
-    
+
+    dirty_ifc = true unless (ifc.bootproto == params["bootproto"])
+
     ifc.bootproto = params["bootproto"]
     ifc.ipaddr = params["ipaddr"] || ""
-    ifc.vlan_id = params[:vlan_id] if params[:vlan_id]
-    ifc.vlan_etherdevice = params[:vlan_etherdevice] if params[:vlan_etherdevice]
-
 
     if ifc.bootproto == STATIC_BOOT_ID
       #ip addr is returned in another state then given, but restart of static address is not problem
       if ((ifc.ipaddr).delete("/")!= params["ip"] + (params["netmask"]||"").delete("/"))
-        dirty_ifc = true
         ifc.ipaddr = params["ip"] + "/" + params["netmask"].delete("/")
-        Rails.logger.error "### DEBUG: set interface IPADDR #{ifc.ipaddr} \n"
+        dirty_ifc = true
       end
     end
 
+    if params[:vlan_id] && ifc.vlan_id != params[:vlan_id]
+      ifc.vlan_id = params[:vlan_id]
+      dirty_ifc = true
+    end
 
+    if params[:vlan_etherdevice] && ifc.vlan_etherdevice !=  params[:vlan_etherdevice]
+      ifc.vlan_etherdevice = params[:vlan_etherdevice]
+      dirty_ifc = true
+    end
+
+    if params["bridge_ports"] && ifc.bridge_ports != params["bridge_ports"]
+      ifc.bridge_ports = params["bridge_ports"].map{|k,v| k if v=="1"}.compact.join(' ').to_s
+      dirty_ifc = true
+    end
    ### END INTERFACE ###
 
 
    ### ROUTE ###
+   route = network["routes"]
 
-   rt = Route.find "default"
-   return false unless rt
-
-   dirty = true unless rt.via == (params["default_route"] || "")
-
-   rt.via = params["default_route"]
-   Rails.logger.error "### DEBUG: set default_route #{rt.via} \n"
-
-   logger.info "*** INFO: dirty after default routing: #{dirty}"
-
+   if params["default_route"] && route.via != params["default_route"]
+     route.via = params["default_route"]
+     dirty_route = true
+   end
    ### END ROUTE ###
 
 
-
-    # this is not transaction!
-    # if any *.save failed, the previous will be applied
-    # FIXME JR: I think that if user choose dhcp not all settings should be written
-
-
-    Rails.logger.error "\n\nPARAMS #{params.inspect}\n\n"
-
-
-    if dirty||dirty_ifc
-      Rails.logger.error "\n==== BEFORE SAVE ===="
-      Rails.logger.error "### HOSTNAME #{hostname.inspect}"
-      Rails.logger.error "### DNS #{dns.inspect}"
-      Rails.logger.error "### ROUTE #{rt.inspect}"
-      Rails.logger.error "==== END ===="
-
-      rt.save
-      dns.save
-      hostname.save
-
-      # write interfaces (and therefore restart network) only when interface settings changed (bnc#579044)
-      if dirty_ifc
-        Rails.logger.error "\n==== BEFORE SAVE ===="
-        Rails.logger.error "### INTERFACE #{ifc.inspect}\n"
-        ifc.save
-      end
+    if dirty_route
+      Rails.logger.error "*** ROUTE is dirty #{route.inspect}\n"
+      route.save
     end
 
+    if dirty_dns
+      Rails.logger.error "*** DNS is dirty #{dns.inspect}\n"
+      dns.save
+    end
 
-     #write to avoid confusion, with another string
+    if dirty_hostname
+      Rails.logger.error "*** HOSTNAME is dirty #{hostname.inspect}\n"
+      hostname.save
+    end
+
+    # write interfaces (and therefore restart network) only when interface settings changed (bnc#579044)
+    if dirty_ifc
+      Rails.logger.error "\n================================"
+      Rails.logger.error "### HOSTNAME #{hostname.inspect}\n"
+      Rails.logger.error "### DNS #{dns.inspect}\n"
+      Rails.logger.error "### ROUTE #{route.inspect}\n"
+      Rails.logger.error "### INTERFACE #{ifc.inspect}\n"
+      Rails.logger.error "=================================\n"
+
+      route.save
+      dns.save
+      hostname.save
+      ifc.save
+    end
+
      flash[:notice] = _('Network settings have been written.')
      redirect_to :controller => "network", :action => "index"
   end

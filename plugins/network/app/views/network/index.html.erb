@@ -31,8 +31,6 @@
              <span class="fieldset_header_title" >
               <%= _("Physical Interfaces")%>
             </span>
-            <!-- MOVE INLINE CSS TO NETWORK.CSS-->
-            <span style="float:none; color:#777777; font-size:11px; margin-left:2px;">(help)</span>
           </div>
 
           <div class="fieldset_body">
@@ -50,7 +48,7 @@
                   <p>Mode: <%= interface.bootproto %></p>
                 </div>
                 <div class="link_container">
-                  <%= link_to _("configure"), :controller => "network", :action => "edit", :id => id %>
+                  <%= link_to _("configure"), :controller => "network", :action => "edit", :id => interface.id %>
                 </div>
               </div>
 
@@ -61,7 +59,6 @@
         <fieldset class="webyast_fieldset">
           <div class="fieldset_header">
             <span class="fieldset_header_title" ><%= _("Virtual Interfaces")%></span>
-            <span style="float:none; color:#777777; font-size:11px; margin-left:2px;">(help)</span>
           </div>
 
           <div class="fieldset_body">
@@ -72,6 +69,7 @@
                 </div>
                 <div class="iface_details">
                   <p>interface: <b><%= interface.id %></b></p>
+                  <p>Mode: <%= interface.bootproto %></p>
 
                   <% if interface.id.match("vlan") %>
                     <p>vlan id: <%= interface.vlan_id %></p>

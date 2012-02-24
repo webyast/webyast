@@ -32,8 +32,8 @@ class Interface < BaseModel::Base
   IPADDR_REGEX = /([0-9]{1,3}.){3}[0-9]{1,3}/
   IP_IPADDR_REGEX = /inet (#{IPADDR_REGEX})/
 
-  attr_accessor :id, :bootproto, :ipaddr, :vendor
-  attr_accessor :type, :bridge_ports
+  attr_accessor :id, :bootproto, :ipaddr, :vendor, :type
+  attr_accessor :bridge_ports
   attr_accessor :vlan_etherdevice, :vlan_id
 
   validates_format_of :id, :allow_nil => false, :with => /^[a-zA-Z0-9_-]+$/
@@ -96,48 +96,41 @@ class Interface < BaseModel::Base
   def update
     settings = { @id=>{} }
 
-    Rails.logger.error "*** @id => #{@id} self.id #{self.id} and match #{@id.match("vlan")}"
-
-
-    @type = @type || ""
-
-    if @id.match("vlan")
+    if self.type == "vlan"
       Rails.logger.error "*** VLAN Settings ..."
 
-      @vlan_id = @vlan_id || ""
-      @vlan_etherdevice = @vlan_etherdevice || ""
+      @vlan_id = self.vlan_id || ""
+      @vlan_etherdevice = self.vlan_etherdevice || ""
 
       settings = {
         @id => {
         "bootproto" => @bootproto,
         "ipaddr" => @ipaddr,
-        "type" => @type,
         "vlan_id" => @vlan_id,
         "vlan_etherdevice" => @vlan_etherdevice,
         }
       }
 
-    elsif @id.match("br")
+    elsif self.type="bridge"
+      @bridge_ports = self.bridge_ports || ""
       Rails.logger.error "*** Bridge Settings ... #{@bridge_ports.inspect}"
-      @bridge_ports = @bridge_ports || ""
 
       settings = {
         @id => {
         "bootproto" => @bootproto,
         "ipaddr" => @ipaddr,
-        "type" => @type,
+        "bridge" => "yes",
         "bridge_ports" => @bridge_ports,
         }
       }
 
-    else
+    elsif self.type="eth"
       Rails.logger.error "*** Ethernet Settings ..."
 
       settings = {
         @id => {
           "bootproto" => @bootproto,
-          "ipaddr" => @ipaddr,
-          "type" => @type,
+          "ipaddr" => @ipaddr
         }
       }
 

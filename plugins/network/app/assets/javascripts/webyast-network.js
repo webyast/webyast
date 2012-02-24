@@ -94,7 +94,7 @@ $(function(){
     $(this).addClass("on");
 
     if(mode == "none") {
-
+      $disabled.attr('disabled', 'disabled');
       $dns_conf.hide();
       $ip_conf.hide();
 

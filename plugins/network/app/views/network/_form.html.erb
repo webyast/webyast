@@ -1,4 +1,6 @@
 <%= form_for :network, :url => { :action => "#{action}" }, :html => {:id=>"networkForm", :class=>"webyast_form", :onsubmit => "return is_valid();"} do %>
+  <%= hidden_field_tag :interface, @ifc.id || "" %>
+
   <% if @type == "vlan" %>
     <fieldset id="vlan-fieldset" class="webyast_fieldset">
       <div class="fieldset_header">
@@ -8,10 +10,12 @@
       <div class="fieldset_body">
         <div class="row">
           <label><%=_("Interface name")%></label>
-          <%= text_field_tag :id, @ifc.id, :disabled => true if action != "create" %>
           <% if action == "create" %>
-              <%= text_field_tag(:type, @type) %>
-              <%= select_tag(:number, options_for_select((@number..9).to_a.map{|i| "#{i}"}, @number)) %>
+            <%= text_field_tag(:type, @type) %>
+            <%= select_tag(:number, options_for_select((@number..9).to_a.map{|i| "#{i}"}, @number)) %>
+          <% else %>
+            <%= text_field_tag :id, @ifc.id, :disabled => true %>
+            <%= hidden_field_tag(:type, @type) %>
           <% end %>
         </div>
 
@@ -22,7 +26,7 @@
 
         <div class="row">
           <label><%=_("VLAN ID")%></label>
-          <%=text_field_tag("vlan_id", "1", :disabled => @write_disabled) %>
+          <%=text_field_tag("vlan_id", @ifc.vlan_id || "1", :disabled => @write_disabled) %>
         </div>
       </div>
     </fieldset>
@@ -36,8 +40,14 @@
       <div class="fieldset_body">
         <div class="row">
           <label><%=_("Interface name")%></label>
-          <%= text_field_tag :id, @ifc.id, :disabled => true if action != "create" %>
-          <%= hidden_field_tag(:type, @type) %>
+
+          <% if action == "create" %>
+              <%= text_field_tag(:type, @type) %>
+              <%= select_tag(:number, options_for_select((@number..9).to_a.map{|i| "#{i}"}, @number)) %>
+          <% else %>
+              <%= text_field_tag :id, @ifc.id, :disabled => true %>
+              <%= hidden_field_tag(:type, @type) %>
+          <% end %>
         </div>
         <div class="row">
           <label class="tvalign"><%=_("Bridge devices:")%></label>
@@ -58,9 +68,22 @@
   <% elsif @type == "bond" %>
     <fieldset id="bond-fieldset" class="webyast_fieldset">
     </fieldset>
-  <% end %>
 
-  <%= hidden_field_tag :interface, @ifc.id || "" %>
+  <% else %>
+    <fieldset id="ethernet-fieldset" class="webyast_fieldset">
+      <div class="fieldset_header">
+        <span class="fieldset_header_title" >Ethernet configuration</span>
+      </div>
+
+      <div class="fieldset_body">
+        <div class="row">
+          <label><%=_("Interface name")%></label>
+            <%= text_field_tag :id, @ifc.id, :disabled => true %>
+            <%= hidden_field_tag(:type, @type) %>
+        </div>
+      </div>
+    </fieldset>
+  <% end %>
 
   <fieldset class="webyast_fieldset">
     <div class="fieldset_header">
