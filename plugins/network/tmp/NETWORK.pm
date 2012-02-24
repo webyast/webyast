@@ -189,14 +189,16 @@ sub writeInterfaces {
             $config{"ETHERDEVICE"} = $ifc->{'vlan_etherdevice'};
         }
 
-		if ($ifc->{'type'} eq "br") {
-			$config{"BRIDGE"} = "yes";
-    		if (defined $ifc->{'bridge_ports'}) {
-	    		
-	    	    y2milestone("**** Bridge ports:", Dumper($ifc->{'bridge_ports'}));
-    	        $config{"BRIDGE_PORTS"} = $ifc->{'bridge_ports'};
-			}
+	if (defined $ifc->{'bridge'}) {
+            y2milestone("**** Bridge:", Dumper($ifc->{'bridge'}));
+	    $config{"BRIDGE"} = "yes";
         }
+  
+        if (defined $ifc->{'bridge_ports'}) {
+	    y2milestone("**** Bridge ports:", Dumper($ifc->{'bridge_ports'}));
+	    $config{"BRIDGE_PORTS"} = $ifc->{'bridge_ports'};
+        }
+
 
         NetworkInterfaces->Current(\%config);
         NetworkInterfaces->Commit();
