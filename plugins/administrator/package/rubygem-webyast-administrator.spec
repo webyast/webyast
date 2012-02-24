@@ -22,25 +22,17 @@ Release:        0
 %define mod_name webyast-administrator
 %define mod_full_name %{mod_name}-%{version}
 #
-Group:          Development/Languages/Ruby
+Group:          Productivity/Networking/Web/Utilities
 License:        GPL-2.0	
 #
 BuildRoot:      %{_tmppath}/%{name}-%{version}-build
 BuildRequires:  rubygems_with_buildroot_patch
 %rubygems_requires
-BuildRequires:	webyast-base, rubygem-sqlite3-ruby
-BuildRequires:	rubygem-webyast-rake-tasks >= 0.2
+BuildRequires:	webyast-base >= 0.3
 BuildRequires:	webyast-base-testsuite
 BuildRequires:	rubygem-restility
-PreReq:	        webyast-base
-PreReq:         rubygem-webyast-rake-tasks >= 0.2
-Requires:       yast2-dbus-server, yast2-users
-
-%if 0%{?suse_version} == 0 || %suse_version > 1110
-Requires:       yast2-core >= 2.18.10
-%else
-Requires:       yast2-core >= 2.17.30.1
-%endif
+PreReq:	        webyast-base >= 0.3
+Requires:       yast2-users
 
 #
 Url:            http://rubygems.org/gems/webyast-administrator
@@ -54,7 +46,7 @@ Webyast module for configuring administrator settings
 
 %package doc
 Summary:        RDoc documentation for %{mod_name}
-Group:          Development/Languages/Ruby
+Group:          Productivity/Networking/Web/Utilities
 Requires:       %{name} = %{version}
 %description doc
 Documentation generated at gem installation time.
@@ -62,7 +54,7 @@ Usually in RDoc and RI formats.
 
 %package testsuite
 Summary:        Test suite for %{mod_name}
-Group:          Development/Languages/Ruby
+Group:          Productivity/Networking/Web/Utilities
 Requires:       %{name} = %{version}
 %description testsuite
 Test::Unit or RSpec files, useful for developers.
@@ -96,10 +88,6 @@ install -m 0644 %SOURCE1 $RPM_BUILD_ROOT/usr/share/%{webyast_polkit_dir}
 rm -rf $RPM_BUILD_ROOT/%{_libdir}/ruby/gems/%{rb_ver}/gems/%{mod_full_name}/public
 
 %webyast_build_plugin_assets
-
-# search locale files
-#find_lang webyast-root-user
-
 
 %clean
 %{__rm} -rf %{buildroot}
