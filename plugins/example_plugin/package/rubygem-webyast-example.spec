@@ -13,7 +13,7 @@
 Name:           rubygem-webyast-example
 Version:        0.1
 Release:        0
-%define mod_name webyast-administrator
+%define mod_name webyast-example
 %define mod_full_name %{mod_name}-%{version}
 #
 Group:          Productivity/Networking/Web/Utilities
@@ -30,13 +30,21 @@ PreReq:	        webyast-base >= 0.3
 Summary:        WebYaST - example plugin
 
 #
-Url:            http://rubygems.org/gems/webyast-administrator
+Url:            http://rubygems.org/gems/webyast-example
 Source:         %{mod_full_name}.gem
 Source1:        example.service.conf
 Source2:        exampleService.rb
 Source3:        example.service.service
-Source4:        org.opensuse.yast.system.example.policy
+Source4:        org.opensuse.yast.modules.yapi.example.policy
 Source5:        wicd-rpmlintrc
+
+%package doc
+Summary:        RDoc documentation for %{mod_name}
+Group:          Development/Languages/Ruby
+Requires:       %{name} = %{version}
+%description doc
+Documentation generated at gem installation time.
+Usually in RDoc and RI formats.
 
 %package testsuite
 Group:    Productivity/Networking/Web/Utilities
@@ -81,8 +89,8 @@ cp %{SOURCE2} $RPM_BUILD_ROOT/usr/local/sbin
 mkdir -p $RPM_BUILD_ROOT/usr/share/dbus-1/system-services/
 cp %{SOURCE3} $RPM_BUILD_ROOT/usr/share/dbus-1/system-services/
 #policies
-mkdir -p $RPM_BUILD_ROOT/usr/share/polkit-1/actions
-cp %{SOURCE4} $RPM_BUILD_ROOT/usr/share/polkit-1/actions
+mkdir -p $RPM_BUILD_ROOT/usr/share/%{webyast_polkit_dir}
+cp %{SOURCE4} $RPM_BUILD_ROOT/usr/share/%{webyast_polkit_dir}
 
 # remove empty public
 rm -rf $RPM_BUILD_ROOT/%{_libdir}/ruby/gems/%{rb_ver}/gems/%{mod_full_name}/public
@@ -115,15 +123,17 @@ rm -rf $RPM_BUILD_ROOT/%{_libdir}/ruby/gems/%{rb_ver}/gems/%{mod_full_name}/publ
 %dir %{webyast_dir}/public/assets
 %{webyast_dir}/public/assets/*
 
-
 %attr(744,root,root) /usr/local/sbin/exampleService.rb
-%attr(644,root,root) /usr/share/polkit-1/actions/org.opensuse.yast.system.example.policy
+%attr(644,root,root) /usr/share/%{webyast_polkit_dir}/org.opensuse.yast.modules.yapi.example.policy
 %attr(644,root,root) /etc/dbus-1/system.d/example.service.conf
 %attr(644,root,root) /usr/share/dbus-1/system-services/example.service.service
-%doc COPYING
+
+%files doc
+%defattr(-,root,root,-)
+%doc %{_libdir}/ruby/gems/%{rb_ver}/doc/%{mod_full_name}/
 
 %files testsuite
-%defattr(-,root,root)
-%{plugin_dir}/test
+%defattr(-,root,root,-)
+%{_libdir}/ruby/gems/%{rb_ver}/gems/%{mod_full_name}/test
 
 %changelog
