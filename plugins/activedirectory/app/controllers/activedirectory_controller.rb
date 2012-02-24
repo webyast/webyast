@@ -21,7 +21,6 @@
 # = Active Directory controller
 # Provides access to configuration of Active Directory
 
-#require 'client_exception'
 
 class ActivedirectoryController < ApplicationController
   def index
