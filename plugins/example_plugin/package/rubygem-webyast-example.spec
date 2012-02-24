@@ -9,33 +9,34 @@
 #
 
 
-Name:           webyast-example
-#allows to search for missing interface
-Provides:       WebYaST(org.example.plugin)
-#webyast already require yast2-dbus-server which is needed for yapi
-PreReq:         webyast-base
-License:	      BSD
-Group:          Productivity/Networking/Web/Utilities
-URL:            http://en.opensuse.org/Portal:WebYaST
-Autoreqprov:    on
+# norootforbuild
+Name:           rubygem-webyast-example
 Version:        0.1
 Release:        0
+%define mod_name webyast-administrator
+%define mod_full_name %{mod_name}-%{version}
+#
+Group:          Productivity/Networking/Web/Utilities
+License:        GPL-2.0	
+#
+BuildRoot:      %{_tmppath}/%{name}-%{version}-build
+BuildRequires:  rubygems_with_buildroot_patch
+%rubygems_requires
+BuildRequires:	webyast-base >= 0.3
+BuildRequires:	webyast-base-testsuite
+BuildRequires:	rubygem-restility
+PreReq:	        webyast-base >= 0.3
+
 Summary:        WebYaST - example plugin
-Source:         www.tar.bz2
+
+#
+Url:            http://rubygems.org/gems/webyast-administrator
+Source:         %{mod_full_name}.gem
 Source1:        example.service.conf
 Source2:        exampleService.rb
 Source3:        example.service.service
 Source4:        org.opensuse.yast.system.example.policy
 Source5:        wicd-rpmlintrc
-BuildRoot:      %{_tmppath}/%{name}-%{version}-build
-BuildArch:      noarch
-BuildRequires:  rubygem-webyast-rake-tasks rubygem-restility
-BuildRequires:  webyast-base-testsuite
-BuildRequires:	rubygem-test-unit rubygem-mocha tidy
-
-#
-%define plugin_dir %{webyast_dir}/vendor/plugins/example
-#
 
 %package testsuite
 Group:    Productivity/Networking/Web/Utilities
@@ -56,24 +57,19 @@ It's only needed for verifying the functionality of the module and it's not
 needed at runtime.
 
 %prep
-%setup -q -n www
 
 %build
-export RAILS_PARENT=%{webyast_dir}
-env LANG=en rake gettext:pack
 
 %check
 # run the testsuite
-%webyast_check
+%webyast_run_plugin_tests
 
 %install
 
 #
 # Install all web and frontend parts.
 #
-mkdir -p $RPM_BUILD_ROOT%{plugin_dir}
-cp -a * $RPM_BUILD_ROOT%{plugin_dir}
-rm -f $RPM_BUILD_ROOT%{plugin_dir}/COPYING
+%gem_install %{S:0}
 
 #Dbus service permissions configuration
 mkdir -p $RPM_BUILD_ROOT/etc/dbus-1/system.d/
@@ -88,11 +84,13 @@ cp %{SOURCE3} $RPM_BUILD_ROOT/usr/share/dbus-1/system-services/
 mkdir -p $RPM_BUILD_ROOT/usr/share/polkit-1/actions
 cp %{SOURCE4} $RPM_BUILD_ROOT/usr/share/polkit-1/actions
 
-# remove .po files (no longer needed)
-rm -rf $RPM_BUILD_ROOT/%{plugin_dir}/locale/*/*.po
+# remove empty public
+rm -rf $RPM_BUILD_ROOT/%{_libdir}/ruby/gems/%{rb_ver}/gems/%{mod_full_name}/public
+
+%webyast_build_plugin_assets
 
 %clean
-rm -rf $RPM_BUILD_ROOT
+%{__rm} -rf $RPM_BUILD_ROOT
 
 %post
 # granting all permissions for the webyast user and root
@@ -101,20 +99,23 @@ rm -rf $RPM_BUILD_ROOT
 /usr/sbin/grantwebyastrights --user %{webyast_user} --action grant --policy org.opensuse.yast.system.example.read > /dev/null || :
 /usr/sbin/grantwebyastrights --user %{webyast_user} --action grant --policy org.opensuse.yast.system.example.write > /dev/null || :
 
+%webyast_update_assets
+
 %postun
+%webyast_update_assets
 
 %files 
 %defattr(-,root,root)
-%dir %{webyast_dir}
-%dir %{webyast_dir}/vendor
-%dir %{webyast_dir}/vendor/plugins
-%dir %{plugin_dir}
-%{plugin_dir}/locale
-%{plugin_dir}/Rakefile
-%{plugin_dir}/app
-%{plugin_dir}/config
-%{plugin_dir}/shortcuts.yml
-%{plugin_dir}/public
+%{_libdir}/ruby/gems/%{rb_ver}/cache/%{mod_full_name}.gem
+%{_libdir}/ruby/gems/%{rb_ver}/gems/%{mod_full_name}/
+%exclude %{_libdir}/ruby/gems/%{rb_ver}/gems/%{mod_full_name}/test
+%{_libdir}/ruby/gems/%{rb_ver}/specifications/%{mod_full_name}.gemspec
+
+# precompiled assets
+%dir %{webyast_dir}/public/assets
+%{webyast_dir}/public/assets/*
+
+
 %attr(744,root,root) /usr/local/sbin/exampleService.rb
 %attr(644,root,root) /usr/share/polkit-1/actions/org.opensuse.yast.system.example.policy
 %attr(644,root,root) /etc/dbus-1/system.d/example.service.conf

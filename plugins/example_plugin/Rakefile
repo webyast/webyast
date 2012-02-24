@@ -18,7 +18,8 @@
 # To contact Novell about this file by physical or electronic mail,
 # you may find current contact information at www.novell.com
 #++
-
+require 'rake'
+require 'fileutils'
 
 # -*- ruby -*-
 require File.join(File.dirname(__FILE__), 'config', 'rails_parent')
@@ -27,6 +28,8 @@ require File.join(RailsParent.parent, 'lib', 'tasks', 'common')
 Dir.glob(File.dirname(__FILE__) + "/lib/tasks/*.rake").each do |rake_file|
   import rake_file
 end
+
+
 
 
 include FileUtils::Verbose
@@ -41,8 +44,7 @@ task :deploy_local do |t|
   chmod  744, "/usr/local/sbin/exampleService.rb"
   mkdir_p "/usr/share/dbus-1/system-services/"
   cp_r    "package/example.service.service", "/usr/share/dbus-1/system-services/"
-  mkdir_p "/usr/share/PolicyKit/policy/"
-  cp_r    "package/org.opensuse.yast.modules.yapi.example.policy", "/usr/share/polkit-1/actions/"
+  `rake install_policies`
   `/usr/sbin/grantwebyastrights --user root --action grant --policy org.opensuse.yast.modules.yapi.example.read > /dev/null || :`
   `/usr/sbin/grantwebyastrights --user root --action grant --policy org.opensuse.yast.modules.yapi.example.write > /dev/null || :`
   command =  "/usr/sbin/grantwebyastrights --user #{ENV['USER']} --action grant --policy org.opensuse.yast.modules.yapi.example.read > /dev/null || :"
@@ -53,5 +55,17 @@ task :deploy_local do |t|
   system command
 end
 
+desc "Build distribution package (no check, for testing only)"
+task :"package-local" do |t|
+  `rake build`
+  FileUtils.mv(Dir.glob("pkg/*.gem"), "package")
+  FileUtils.rmdir("pkg")
+end
+
 require File.expand_path('../config/application', __FILE__)
 Example::Application.load_tasks #   <<<< = require 'tasks/rails'
+
+require "webyast-example"
+
+require "bundler/gem_tasks"
+task :build => :"gettext:pack"
