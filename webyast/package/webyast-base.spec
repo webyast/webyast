@@ -34,6 +34,7 @@ Requires:       sysvinit > 2.86-195.3.1
 Requires:       rubygem-passenger-nginx, rubygem-nokogiri
 Requires:       nginx >= 1.0
 Requires:       sqlite3, syslog-ng, check-create-certificate, yast2-dbus-server
+Requires:       webyast-branding
 
 %if 0%{?suse_version} == 0 || %suse_version <= 1130
 Requires:       ruby-dbus
@@ -43,7 +44,7 @@ Requires:	rubygem-ruby-dbus
 Requires:       rubygem-webyast-rake-tasks >= 0.2
 PreReq:		rubygem-bundler
 # 634404
-Recommends:     logrotate, webyast-branding
+Recommends:     logrotate
 %if 0%{?suse_version} == 0 || %suse_version > 1110
 PreReq:         polkit, rubygem-polkit1
 %else
