@@ -82,7 +82,7 @@ install -m 0644 %SOURCE1 $RPM_BUILD_ROOT/usr/share/%{webyast_polkit_dir}
 mkdir -p $RPM_BUILD_ROOT/usr/share/YaST2/modules/YaPI/
 cp %{SOURCE2} $RPM_BUILD_ROOT/usr/share/YaST2/modules/YaPI/
 
-%webyast_build_restdoc public/activedirectory/restdoc
+%webyast_build_restdoc public/firewall/restdoc
 
 # remove empty public
 rm -rf $RPM_BUILD_ROOT/%{_libdir}/ruby/gems/%{rb_ver}/gems/%{mod_full_name}/public
@@ -104,7 +104,7 @@ rm -rf $RPM_BUILD_ROOT/%{_libdir}/ruby/gems/%{rb_ver}/gems/%{mod_full_name}/publ
 %postun
 %webyast_update_assets
 
-%files -f webyast-firewall.lang
+%files 
 %defattr(-,root,root)
 %{_libdir}/ruby/gems/%{rb_ver}/cache/%{mod_full_name}.gem
 %{_libdir}/ruby/gems/%{rb_ver}/gems/%{mod_full_name}/
