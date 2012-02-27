@@ -71,11 +71,15 @@
   -webkit-border-radius:3px;
 }
 
-div.interface { clear:both; overflow:hidden; margin:5px 0px; }
-div.interface .img_container { float:left; line-height: 44px; vertical-align:middle; width:5%; }
-div.interface .iface_details { float:left; width:85%; }
+div.interface { clear:both; overflow:hidden; margin:5px 0px; padding:5px; }
+div.interface .img_container { float:left; line-height: 44px; vertical-align:middle; width:10%; }
+div.interface .iface_details { float:left; width:75%; }
 div.interface .link_container { float:left; width:10%; text-align:right;}
 div.interface p { line-height: 16px; margin:0; }
+
+div.interface:hover {
+    background:#eee;
+}
 
 #pages-container { margin: 0 auto; overflow: hidden; width: 960px; }
 #pages { background: none repeat scroll 0 0 #FFFFFF; width: 1940px; }

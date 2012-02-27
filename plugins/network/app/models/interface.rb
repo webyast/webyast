@@ -91,6 +91,21 @@ class Interface < BaseModel::Base
     }
   end
 
+
+  # Saves data from model to system via YaPI. Saves only setted data,
+  # so it support partial safe (e.g. save only new timezone if rest of fields is not set). ????????
+  def destroy
+    settings = { @id=>{} }
+    settings = { @id => { "delete" => "true" }}
+    vsettings = [ "a{sa{ss}}", settings ]
+    
+    response = YastService.Call("YaPI::NETWORK::Write",{"interface" => vsettings})
+    Rails.logger.error "\n *** DELETE INTERFACE  #{response.inspect}"
+
+    YastCache.reset(self,@id)
+    return true
+   end
+
   # Saves data from model to system via YaPI. Saves only setted data,
   # so it support partial safe (e.g. save only new timezone if rest of fields is not set). ????????
   def update

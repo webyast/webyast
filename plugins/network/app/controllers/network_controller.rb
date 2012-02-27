@@ -253,4 +253,13 @@ class NetworkController < ApplicationController
      flash[:notice] = _('Network settings have been written.')
      redirect_to :controller => "network", :action => "index"
   end
+
+  def destroy
+    authorize! :write, Network
+    ifc = Interface.find params[:id]
+    ret = ifc.destroy
+    
+    Rails.logger.error "### Destroy selected interface #{ifc.inspect} the return value is #{ret.inspect}\n"
+    redirect_to :controller => "network", :action => "index"
+  end
 end

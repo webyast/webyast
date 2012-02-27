@@ -37,7 +37,7 @@
             <% @physical.each do |id, interface| %>
               <div class="interface">
                 <div class="img_container">
-                  <% img = (interface.ipaddr.blank?)? "eth.png" : "eth-active.png" %>
+                  <% img = (interface.ipaddr.blank?)? "eth64.png" : "eth64-active.png" %>
                   <%= image_tag("#{img}") %>
                 </div>
                 <div class="iface_details">
@@ -48,7 +48,7 @@
                   <p>Mode: <%= interface.bootproto %></p>
                 </div>
                 <div class="link_container">
-                  <%= link_to _("configure"), :controller => "network", :action => "edit", :id => interface.id %>
+                  <%= link_to _("configure"), :controller => "network", :action => "edit", :id => id %>
                 </div>
               </div>
 
@@ -65,7 +65,8 @@
             <% @virtual.each do |id, interface| %>
               <div class="interface">
                 <div class="img_container">
-                  <%= image_tag("eth.png") %>
+                  <% img = (interface.ipaddr.blank?)? "eth64.png" : "eth64-active.png" %>
+                  <%= image_tag("#{img}") %>
                 </div>
                 <div class="iface_details">
                   <p>interface: <b><%= interface.id %></b></p>
@@ -82,7 +83,12 @@
 
                 </div>
                 <div class="link_container">
-                  <%= link_to _("configure"), :controller => "network", :action => "edit", :id => id %>
+                  <p>
+                    <%= link_to _("configure"), :controller => "network", :action => "edit", :id => id %>
+                  </p>
+                  <p>
+                    <%= link_to _("delete"), :action => "destroy", :id => id%>                
+                  </p>
                 </div>
               </div>
             <% end %>
