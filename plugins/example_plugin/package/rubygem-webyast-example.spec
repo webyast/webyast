@@ -83,8 +83,8 @@ needed at runtime.
 mkdir -p $RPM_BUILD_ROOT/etc/dbus-1/system.d/
 cp %{SOURCE1} $RPM_BUILD_ROOT/etc/dbus-1/system.d/
 # binary providing DBus service - place is specified in service config
-mkdir -p $RPM_BUILD_ROOT/usr/local/sbin/
-cp %{SOURCE2} $RPM_BUILD_ROOT/usr/local/sbin
+mkdir -p $RPM_BUILD_ROOT/usr/sbin/
+cp %{SOURCE2} $RPM_BUILD_ROOT/usr/sbin
 #Dbus service describotion
 mkdir -p $RPM_BUILD_ROOT/usr/share/dbus-1/system-services/
 cp %{SOURCE3} $RPM_BUILD_ROOT/usr/share/dbus-1/system-services/
@@ -123,7 +123,7 @@ rm -rf $RPM_BUILD_ROOT/%{_libdir}/ruby/gems/%{rb_ver}/gems/%{mod_full_name}/publ
 %dir %{webyast_dir}/public/assets
 %{webyast_dir}/public/assets/*
 
-%attr(744,root,root) /usr/local/sbin/exampleService.rb
+%attr(744,root,root) /usr/sbin/exampleService.rb
 %attr(644,root,root) /usr/share/%{webyast_polkit_dir}/org.opensuse.yast.modules.yapi.example.policy
 %attr(644,root,root) /etc/dbus-1/system.d/example.service.conf
 %attr(644,root,root) /usr/share/dbus-1/system-services/example.service.service

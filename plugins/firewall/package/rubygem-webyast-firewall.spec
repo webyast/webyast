@@ -47,12 +47,6 @@ Summary:        Test suite for %{mod_name}
 Group:          Development/Languages/Ruby
 Requires:       %{name} = %{version}
 
-%package testsuite
-Group:    Productivity/Networking/Web/Utilities
-Requires: %{name} = %{version}
-Requires: webyast-base-testsuite
-Summary:  Testsuite for webyast-firewall package
-
 %description
 WebYaST - Plugin provides REST based interface to handle firewall settings.
 Authors:
@@ -63,6 +57,10 @@ Authors:
 This package contains complete testsuite for webyast-firewall package.
 It's only needed for verifying the functionality of the module and it's not
 needed at runtime.
+
+%description doc
+Documentation generated at gem installation time.
+Usually in RDoc and RI formats.
 
 %prep
 
