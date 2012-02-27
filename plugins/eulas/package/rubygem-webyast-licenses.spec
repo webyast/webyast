@@ -39,14 +39,14 @@ Source3:        eulas-opensuse11_1.yml
 
 %package doc
 Summary:        RDoc documentation for %{mod_name}
-Group:          Productivity/Networking/Web/Utilities
+Group:          Development/Languages/Ruby
 Requires:       %{name} = %{version}
 %description doc
 Documentation generated at gem installation time.
 Usually in RDoc and RI formats.
 
 %package testsuite
-Group:    Productivity/Networking/Web/Utilities
+Group:    Development/Languages/Ruby
 Requires: %{name} = %{version}
 Requires: webyast-base-testsuite
 Summary:  Testsuite for webyast-licenses package

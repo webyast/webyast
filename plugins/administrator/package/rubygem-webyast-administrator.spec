@@ -46,7 +46,7 @@ Webyast module for configuring administrator settings
 
 %package doc
 Summary:        RDoc documentation for %{mod_name}
-Group:          Productivity/Networking/Web/Utilities
+Group:          Development/Languages/Ruby
 Requires:       %{name} = %{version}
 %description doc
 Documentation generated at gem installation time.
@@ -54,7 +54,7 @@ Usually in RDoc and RI formats.
 
 %package testsuite
 Summary:        Test suite for %{mod_name}
-Group:          Productivity/Networking/Web/Utilities
+Group:          Development/Languages/Ruby
 Requires:       %{name} = %{version}
 %description testsuite
 Test::Unit or RSpec files, useful for developers.

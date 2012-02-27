@@ -47,10 +47,10 @@ Documentation generated at gem installation time.
 Usually in RDoc and RI formats.
 
 %package testsuite
-Group:    Productivity/Networking/Web/Utilities
-Requires: %{name} = %{version}
-Requires: webyast-base-testsuite
-Summary:  Testsuite for webyast-example package
+Group:          Development/Languages/Ruby
+Requires:       %{name} = %{version}
+Requires:       webyast-base-testsuite
+Summary:        Testsuite for webyast-example package
 
 %description
 WebYaST - Plugin providing EXAMPLE REST based interface
