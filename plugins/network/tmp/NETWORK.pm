@@ -43,7 +43,9 @@ sub Read {
                      $configuration{'ipaddr'} .= "/" . LanItems->prefix
                 }
             }
+
             $configuration{'mtu'} = LanItems->mtu;
+
             if (LanItems->vlan_id){
                 $configuration{'vlan_id'} = LanItems->vlan_id;
             }
@@ -51,9 +53,7 @@ sub Read {
                 $configuration{'vlan_etherdevice'} = LanItems->vlan_etherdevice;
             }
 
-		
 	    if(LanItems->bridge_ports) {
-	        y2milestone("**** Name:", LanItems->interfacename);
 		$configuration{'bridge_ports'} = LanItems->bridge_ports; 
             }
 
@@ -165,46 +165,56 @@ sub writeInterfaces {
         NetworkInterfaces->Read();
         NetworkInterfaces->Add() unless NetworkInterfaces->Edit($dev);
         NetworkInterfaces->Name($dev);
-        my %config=("STARTMODE" => defined $ifc->{'startmode'}? $ifc->{'startmode'}: 'auto',
-                    "BOOTPROTO" => defined $ifc->{'bootproto'}? $ifc->{'bootproto'}: 'static',
-            );
-        if (defined $ifc->{'ipaddr'}) {
-            my $prefix = "32";
-            YaST::YCP::Import ("Netmask");
-            my @ip_row = split(/\//, $ifc->{'ipaddr'});
-            $prefix = $ip_row[$#ip_row];
-            if (Netmask->Check4($prefix) && $prefix =~ /\./){
-                y2milestone("Valid netmask: ", $prefix, " will change to prefixlen");
-                $prefix = Netmask->ToBits($prefix);
-            }
-            $config{"IPADDR"} = $ip_row[0]."/".$prefix;
-        }
-        if (defined $ifc->{'mtu'}) {
-            $config{"MTU"} = $ifc->{'mtu'};
-        }
-        if (defined $ifc->{'vlan_id'}) {
-            $config{"VLAN_ID"} = $ifc->{'vlan_id'};
-        }
-        if (defined $ifc->{'vlan_etherdevice'}) {
-            $config{"ETHERDEVICE"} = $ifc->{'vlan_etherdevice'};
-        }
 
-	if (defined $ifc->{'bridge'}) {
-            y2milestone("**** Bridge:", Dumper($ifc->{'bridge'}));
-	    $config{"BRIDGE"} = "yes";
-        }
-  
-        if (defined $ifc->{'bridge_ports'}) {
-	    y2milestone("**** Bridge ports:", Dumper($ifc->{'bridge_ports'}));
-	    $config{"BRIDGE_PORTS"} = $ifc->{'bridge_ports'};
-        }
+	if (defined $ifc->{'delete'} && $ifc->{'delete'} eq "true") {
+	   y2milestone("Delete virtual interface", Dumper(\$dev));
+
+	   NetworkInterfaces->Delete($dev);
+	   NetworkInterfaces->Commit();
+	   NetworkInterfaces->Write("");
+	   YaST::YCP::Import ("Service");
+	   Service->Restart("network");
+
+        } else {
+		my %config=("STARTMODE" => defined $ifc->{'startmode'}? $ifc->{'startmode'}: 'auto',
+		            "BOOTPROTO" => defined $ifc->{'bootproto'}? $ifc->{'bootproto'}: 'static',
+		    );
+		if (defined $ifc->{'ipaddr'}) {
+		    my $prefix = "32";
+		    YaST::YCP::Import ("Netmask");
+		    my @ip_row = split(/\//, $ifc->{'ipaddr'});
+		    $prefix = $ip_row[$#ip_row];
+		    if (Netmask->Check4($prefix) && $prefix =~ /\./){
+		        y2milestone("Valid netmask: ", $prefix, " will change to prefixlen");
+		        $prefix = Netmask->ToBits($prefix);
+		    }
+		    $config{"IPADDR"} = $ip_row[0]."/".$prefix;
+		}
+		if (defined $ifc->{'mtu'}) {
+		    $config{"MTU"} = $ifc->{'mtu'};
+		}
+		if (defined $ifc->{'vlan_id'}) {
+		    $config{"VLAN_ID"} = $ifc->{'vlan_id'};
+		}
+		if (defined $ifc->{'vlan_etherdevice'}) {
+		    $config{"ETHERDEVICE"} = $ifc->{'vlan_etherdevice'};
+		}
+
+		if (defined $ifc->{'bridge'}) {
+		    $config{"BRIDGE"} = "yes";
+		}
+	  
+		if (defined $ifc->{'bridge_ports'}) {
+		    $config{"BRIDGE_PORTS"} = $ifc->{'bridge_ports'};
+		}
 
 
-        NetworkInterfaces->Current(\%config);
-        NetworkInterfaces->Commit();
-        NetworkInterfaces->Write("");
-        YaST::YCP::Import ("Service");
-        Service->Restart("network");
+		NetworkInterfaces->Current(\%config);
+		NetworkInterfaces->Commit();
+		NetworkInterfaces->Write("");
+		YaST::YCP::Import ("Service");
+		Service->Restart("network");
+	}
     }
     return $ret;
 }
@@ -214,6 +224,7 @@ sub writeInterfaces {
 BEGIN{$TYPEINFO{Write} = ["function",
                           ["map","string","any"],["map","string","any"]];
 }
+
 sub Write {
     my $self  = shift;
     my $args  = shift;
@@ -244,5 +255,6 @@ sub Write {
     # that means in rest-api it'll be {'exit'=>'0', 'error'=>''}
     return {'exit'=>0, 'error'=>''};
 }
+
 
 1;
