@@ -55,7 +55,7 @@
             <% @ifcs.each do |id, iface| %>
               <% unless id.match("br") %>
                 <div>
-                 <%= check_box :bridge_ports, id %>
+                 <%= check_box :bridge_ports, id, :checked => @ifc.bridge_ports.include?(id) %>
                  <%= id %> - <%= iface.vendor %>
                 </div>
               <% end %>

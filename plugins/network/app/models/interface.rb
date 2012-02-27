@@ -33,8 +33,9 @@ class Interface < BaseModel::Base
   IP_IPADDR_REGEX = /inet (#{IPADDR_REGEX})/
 
   attr_accessor :id, :bootproto, :ipaddr, :vendor, :type
-  attr_accessor :bridge_ports
+  attr_accessor :bridge_ports # default: set BRIDGE to "yes" in NETWORK.pm
   attr_accessor :vlan_etherdevice, :vlan_id
+  attr_accessor :bond_slaves, :bond_slaves # default: set BOND_MASTER to "yes" in NETWORK.pm
 
   validates_format_of :id, :allow_nil => false, :with => /^[a-zA-Z0-9_-]+$/
   validates_inclusion_of :bootproto, :in => ["static","dhcp"]
@@ -72,10 +73,12 @@ class Interface < BaseModel::Base
       @ipaddr = ipaddr
     end
 
+    @bridge_ports = bridge_ports.split(" ") unless bridge_ports.blank?
+
   end
 
   def self.find( which )
-    YastCache.fetch(self, which) {
+    YastCache.fetch(self, which) do
       response = YastService.Call("YaPI::NETWORK::Read")
       ifaces_h = response["interfaces"]
 
@@ -87,8 +90,10 @@ class Interface < BaseModel::Base
       else
         ret = Interface.new(ifaces_h[which], which)
       end
+
+      Rails.logger.error ret.inspect 
       ret
-    }
+    end
   end
 
 
