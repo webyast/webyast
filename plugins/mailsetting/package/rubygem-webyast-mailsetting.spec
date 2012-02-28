@@ -92,6 +92,8 @@ needed at runtime.
 %install
 %gem_install %{S:0}
 
+mkdir -p $RPM_BUILD_ROOT%{webyast_vardir}/mailsetting
+
 # Policies
 mkdir -p $RPM_BUILD_ROOT/usr/share/%{webyast_polkit_dir}
 install -m 0644 %SOURCE2 $RPM_BUILD_ROOT/usr/share/%{webyast_polkit_dir}
@@ -136,8 +138,8 @@ rm -rf $RPM_BUILD_ROOT/%{_libdir}/ruby/gems/%{rb_ver}/gems/%{mod_full_name}/publ
 %{webyast_dir}/public/assets/*
 
 # restdoc documentation
-%dir %{webyast_dir}/public/administrator
-%{webyast_dir}/public/administrator/restdoc
+%dir %{webyast_dir}/public/mailsetting
+%{webyast_dir}/public/mailsetting/restdoc
 
 # YaPI dir
 %dir /usr/share/YaST2/
@@ -151,7 +153,7 @@ rm -rf $RPM_BUILD_ROOT/%{_libdir}/ruby/gems/%{rb_ver}/gems/%{mod_full_name}/publ
 /etc/sysconfig/network/scripts/postfix-update-hostname
 
 %dir /usr/share/%{webyast_polkit_dir}
-%attr(644,root,root) %config /usr/share/%{webyast_polkit_dir}/org.opensuse.yast.modules.yapi.mailsettings.policy
+%attr(644,root,root) %config /usr/share/%{webyast_polkit_dir}/org.opensuse.yast.modules.yapi.mailsetting.policy
 
 %files doc
 %defattr(-,root,root,-)
