@@ -32,7 +32,7 @@ module Administrator
     config.assets.version = '1.0'
 
     # precompile all webyast-* assets from plugins
-    config.assets.precompile += ['webyast-plugin-*']
+    config.assets.precompile += ['webyast-*']
 
     # Generate digests for assets URLs.
     config.assets.digest = true
