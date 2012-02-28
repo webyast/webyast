@@ -34,7 +34,7 @@ Requires:       sysvinit > 2.86-195.3.1
 Requires:       rubygem-passenger-nginx, rubygem-nokogiri
 Requires:       nginx >= 1.0
 Requires:       sqlite3, syslog-ng, check-create-certificate, yast2-dbus-server
-Requires:       webyast-branding
+Requires:       webyast-branding >= 0.3
 
 %if 0%{?suse_version} == 0 || %suse_version <= 1130
 Requires:       ruby-dbus
