@@ -10,6 +10,8 @@
 
 
 Name:           webyast-base
+Version:        0.3
+Release:        0
 Provides:       yast2-webservice = %{version}
 Obsoletes:      yast2-webservice < %{version}
 Provides:       webyast-language-ws = 0.1.0
@@ -34,9 +36,7 @@ Requires:       sysvinit > 2.86-195.3.1
 Requires:       rubygem-passenger-nginx, rubygem-nokogiri
 Requires:       nginx >= 1.0
 Requires:       sqlite3, syslog-ng, check-create-certificate, yast2-dbus-server
-Requires:       webyast-branding
-#Do not use the old brandings:
-Conflicts:      webyast-base-ui-branding-default
+Requires:       webyast-base-branding >= %{version}
 
 %if 0%{?suse_version} == 0 || %suse_version <= 1130
 Requires:       ruby-dbus
@@ -60,8 +60,6 @@ License:	LGPL-2.0
 Group:          Productivity/Networking/Web/Utilities
 URL:            http://en.opensuse.org/Portal:WebYaST
 Autoreqprov:    on
-Version:        0.3
-Release:        0
 Summary:        WebYaST - base components
 Source:         www.tar.bz2
 Source1:        webyastPermissionsService.rb
@@ -164,8 +162,7 @@ Testsuite for core WebYaST package.
 
 %package branding-default
 Group:    Productivity/Networking/Web/Utilities
-Provides: webyast-branding
-Obsoletes: webyast-base-ui-branding-default
+Provides: webyast-base-branding = %{version}
 PreReq:	%{name} = %{version}
 Summary:  Branding package for webyast-base package
 
