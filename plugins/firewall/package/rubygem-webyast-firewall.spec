@@ -65,8 +65,6 @@ Usually in RDoc and RI formats.
 %prep
 
 %build
-# precompile assets
-rake assets:precompile
 
 %check
 
