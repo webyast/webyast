@@ -19,10 +19,7 @@
 # you may find current contact information at www.novell.com
 #++
 
-require 'gettext'
-
 class MailState
-  include GetText
   def self.read()
     if File.exist? Mailsetting::TEST_MAIL_FILE
       f = File.new(Mailsetting::TEST_MAIL_FILE, 'r')
