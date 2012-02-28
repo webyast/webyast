@@ -9,35 +9,38 @@
 #
 
 
-Name:           webyast-mailsetting
-Provides:       WebYaST(org.opensuse.yast.modules.yapi.mailsettings)
-Provides:       yast2-webservice-mailsettings = %{version}
-Obsoletes:      yast2-webservice-mailsettings < %{version}
-PreReq:         yast2-webservice rubygem-gettext_rails
-License:        GPL-2.0	
-Group:          Productivity/Networking/Web/Utilities
-URL:            http://en.opensuse.org/Portal:WebYaST
-Autoreqprov:    on
-Version:        0.2.8
+# norootforbuild
+Name:           rubygem-webyast-mailsetting
+Version:        0.1
 Release:        0
+%define mod_name webyast-mailsetting
+%define mod_full_name %{mod_name}-%{version}
+#
+Group:          Productivity/Networking/Web/Utilities
+License:        GPL-2.0	
+#
+BuildRoot:      %{_tmppath}/%{name}-%{version}-build
+BuildRequires:  rubygems_with_buildroot_patch
+%rubygems_requires
+BuildRequires:	webyast-base >= 0.3
+BuildRequires:	webyast-base-testsuite
+BuildRequires:	rubygem-restility
+PreReq:	        webyast-base >= 0.3
+
+
+URL:            http://en.opensuse.org/Portal:WebYaST
 Summary:        WebYaST - system mail settings
-Source:         www.tar.bz2
+Source:         %{mod_full_name}.gem
 Source1:        MailSettings.pm
 Source2:	org.opensuse.yast.modules.yapi.mailsetting.policy
 Source3:        postfix-update-hostname
 BuildRoot:      %{_tmppath}/%{name}-%{version}-build
-BuildArch:      noarch
-BuildRequires:  rubygem-webyast-rake-tasks rubygem-restility
-
-BuildRequires:  webyast-base-testsuite rubygem-gettext_rails
-BuildRequires:	rubygem-test-unit rubygem-mocha
 
 # install these packages into Hudson chroot environment
 # the exact versions are checked in checks.rake task
 %if 0
 BuildRequires:  yast2 yast2-mail
 %endif
-
 Requires:	postfix mailx
 
 # Mail.ycp
@@ -49,16 +52,20 @@ Requires:       yast2-mail >= 2.18.3
 Requires:       yast2-mail >= 2.17.5
 %endif
 
-#
-%define plugin_name mail
-%define plugin_dir %{webyast_dir}/vendor/plugins/%{plugin_name}
-#
+%package doc
+Summary:        RDoc documentation for %{mod_name}
+Group:          Development/Languages/Ruby
+Requires:       %{name} = %{version}
+%description doc
+Documentation generated at gem installation time.
+Usually in RDoc and RI formats.
 
 %package testsuite
-Group:    Productivity/Networking/Web/Utilities
-Requires: %{name} = %{version}
-Requires: webyast-base-testsuite
-Summary:  Testsuite for webyast-mail package
+Summary:        Test suite for %{mod_name}
+Group:          Development/Languages/Ruby
+Requires:       %{name} = %{version}
+%description testsuite
+Test::Unit or RSpec files, useful for developers.
 
 %description
 WebYaST - Plugin provides REST based interface to system mail settings.
@@ -74,36 +81,20 @@ It's only needed for verifying the functionality of the module and it's not
 needed at runtime.
 
 %prep
-%setup -q -n www
+
 
 %build
-# build restdoc documentation
-mkdir -p public/mail/restdoc
-%webyast_restdoc
-
-# do not package restdoc sources
-rm -rf restdoc
-
-export RAILS_PARENT=%{webyast_dir}
-env LANG=en rake gettext:pack
 
 %check
 # run the testsuite
-%webyast_check
+%webyast_run_plugin_tests
 
 %install
-
-#
-# Install all web and frontend parts.
-#
-mkdir -p $RPM_BUILD_ROOT%{webyast_vardir}/%{plugin_name}
-mkdir -p $RPM_BUILD_ROOT%{plugin_dir}
-cp -a * $RPM_BUILD_ROOT%{plugin_dir}
-rm -f $RPM_BUILD_ROOT%{plugin_dir}/COPYING
+%gem_install %{S:0}
 
 # Policies
-mkdir -p $RPM_BUILD_ROOT/usr/share/polkit-1/actions
-install -m 0644 %SOURCE2 $RPM_BUILD_ROOT/usr/share/polkit-1/actions/
+mkdir -p $RPM_BUILD_ROOT/usr/share/%{webyast_polkit_dir}
+install -m 0644 %SOURCE2 $RPM_BUILD_ROOT/usr/share/%{webyast_polkit_dir}
 
 #YaPI
 mkdir -p $RPM_BUILD_ROOT/usr/share/YaST2/modules/YaPI/
@@ -113,55 +104,61 @@ cp %{SOURCE1} $RPM_BUILD_ROOT/usr/share/YaST2/modules/YaPI/
 mkdir -p $RPM_BUILD_ROOT/etc/sysconfig/network/scripts/
 install -m 0755 %SOURCE3 $RPM_BUILD_ROOT/etc/sysconfig/network/scripts/
 
-# remove .po files (no longer needed)
-rm -rf $RPM_BUILD_ROOT/%{plugin_dir}/locale/*/*.po
+%webyast_build_restdoc public/mailsetting/restdoc
 
-# search locale files
-%find_lang webyast-mail
+# remove empty public
+rm -rf $RPM_BUILD_ROOT/%{_libdir}/ruby/gems/%{rb_ver}/gems/%{mod_full_name}/public
+
+%webyast_build_plugin_assets
 
 %clean
-rm -rf $RPM_BUILD_ROOT
+%{__rm} -rf $RPM_BUILD_ROOT
 
 %post
 # granting all permissions for the web user
 /usr/sbin/grantwebyastrights --user root --action grant > /dev/null ||:
 /usr/sbin/grantwebyastrights --user %{webyast_user} --action grant > /dev/null ||:
 
-%postun
+%webyast_update_assets
 
-%files -f webyast-mail.lang
-%defattr(-,root,root)
-%dir %{webyast_dir}
-%dir %{webyast_dir}/vendor
-%dir %{webyast_dir}/vendor/plugins
-%dir %{plugin_dir}
+%postun
+%webyast_update_assets
+
+%files
+%defattr(-,root,root,-)
+%{_libdir}/ruby/gems/%{rb_ver}/cache/%{mod_full_name}.gem
+%{_libdir}/ruby/gems/%{rb_ver}/gems/%{mod_full_name}/
+%exclude %{_libdir}/ruby/gems/%{rb_ver}/gems/%{mod_full_name}/test
+%{_libdir}/ruby/gems/%{rb_ver}/specifications/%{mod_full_name}.gemspec
+
+# precompiled assets
+%dir %{webyast_dir}/public/assets
+%{webyast_dir}/public/assets/*
+
+# restdoc documentation
+%dir %{webyast_dir}/public/administrator
+%{webyast_dir}/public/administrator/restdoc
+
 # YaPI dir
 %dir /usr/share/YaST2/
 %dir /usr/share/YaST2/modules/
 %dir /usr/share/YaST2/modules/YaPI/
 #var dir to store mail test status
 %dir %attr (-,%{webyast_user},root) %{webyast_vardir}
-%dir %attr (-,%{webyast_user},root) %{webyast_vardir}/%{plugin_name}
-%{plugin_dir}/locale
-%{plugin_dir}/shortcuts.yml
-%{plugin_dir}/README
-%{plugin_dir}/Rakefile
-%{plugin_dir}/init.rb
-%{plugin_dir}/install.rb
-%{plugin_dir}/uninstall.rb
-%{plugin_dir}/app
-%{plugin_dir}/config
-%{plugin_dir}/doc
-%{plugin_dir}/public
+%dir %attr (-,%{webyast_user},root) %{webyast_vardir}/mailsetting
+
 /usr/share/YaST2/modules/YaPI/MailSettings.pm
 /etc/sysconfig/network/scripts/postfix-update-hostname
-%dir /usr/share/polkit-1
-%dir /usr/share/polkit-1/actions
-%attr(644,root,root) %config /usr/share/polkit-1/actions/org.opensuse.yast.modules.yapi.mailsettings.policy
-%doc COPYING
+
+%dir /usr/share/%{webyast_polkit_dir}
+%attr(644,root,root) %config /usr/share/%{webyast_polkit_dir}/org.opensuse.yast.modules.yapi.mailsettings.policy
+
+%files doc
+%defattr(-,root,root,-)
+%doc %{_libdir}/ruby/gems/%{rb_ver}/doc/%{mod_full_name}/
 
 %files testsuite
-%defattr(-,root,root)
-%{webyast_dir}/vendor/plugins/%{plugin_name}/test
+%defattr(-,root,root,-)
+%{_libdir}/ruby/gems/%{rb_ver}/gems/%{mod_full_name}/test
 
 %changelog

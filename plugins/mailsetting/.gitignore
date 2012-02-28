@@ -1,5 +1,3 @@
-package-local
-package/www/
-package/www.tar.bz2
 coverage
 log
+webyast-mailsetting-*.gem

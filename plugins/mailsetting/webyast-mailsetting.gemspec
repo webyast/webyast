@@ -4,11 +4,13 @@ Gem::Specification.new do |s|
   s.name = "webyast-mailsetting"
   s.version = "0.1"
   s.authors = ["WebYaST team"]
-  s.email = %q{webyast-devel@opensuse.org}
-  s.summary     =  s.name
-  s.description = "Gem #{s.name}"
+  s.authors = ["WebYaST team"]
+  s.summary = "Webyast module for configuring mailsettings"
+  s.email = "yast-devel@opensuse.org"
+  s.licenses = ['GPL-2.0']
 
-  s.files         = `git ls-files`.split("\n")
+  ignore_files = ["package/rubygem-webyast-mailsetting.changes", "package/rubygem-webyast-mailsetting.spec"]
+  s.files         = `git ls-files`.split("\n").delete_if{|f| f.match(/^locale\/.*\.po$/) || f.match(/.gitignore$/) || ignore_files.include?(f)}.concat(Dir.glob("locale/**/*.mo"))  
   s.test_files    = `git ls-files -- {test,spec,features}/*`.split("\n")
   s.executables   = `git ls-files -- bin/*`.split("\n").map{ |f| File.basename(f) }
   s.require_paths = ["lib"]
