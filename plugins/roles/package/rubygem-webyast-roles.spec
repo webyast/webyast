@@ -78,8 +78,6 @@ cp %{SOURCE1} %{SOURCE2} $RPM_BUILD_ROOT%{webyast_vardir}/roles
 mkdir -p $RPM_BUILD_ROOT/usr/share/%{webyast_polkit_dir}
 install -m 0644 %SOURCE3 $RPM_BUILD_ROOT/usr/share/%{webyast_polkit_dir}
 
-%webyast_build_restdoc public/roles/restdoc
-
 # remove empty public
 rm -rf $RPM_BUILD_ROOT/%{_libdir}/ruby/gems/%{rb_ver}/gems/%{mod_full_name}/public
 
@@ -113,13 +111,10 @@ rm -rf $RPM_BUILD_ROOT/%{_libdir}/ruby/gems/%{rb_ver}/gems/%{mod_full_name}/publ
 %dir %{webyast_dir}/public/assets
 %{webyast_dir}/public/assets/*
 
-# restdoc documentation
-%dir %{webyast_dir}/public/roles
-%{webyast_dir}/public/roles/restdoc
 
 %attr(0700,%{webyast_user},%{webyast_user}) %dir %{webyast_vardir}/roles
 %attr(0600,%{webyast_user},%{webyast_user}) %config %{webyast_vardir}/roles/*
-%attr(644,root,root) %config /usr/share/%{webyast_polkit_dir}/org.opensuse.yast.roles.policy
+%attr(644,root,root) %config /usr/share/%{webyast_polkit_dir}/org.opensuse.yast.modules.yapi.roles.policy
 
 %files doc
 %defattr(-,root,root,-)
