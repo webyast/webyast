@@ -1,6 +1,4 @@
-package/www
-package/www.tar.bz2
 coverage
-config/status_configuration.yaml
-public
 log
+webyast-status-*.gem
+config/status_configuration.yaml
