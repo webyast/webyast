@@ -72,7 +72,7 @@
         </div>
         <div class="row">
           <label class="tvalign"><%=_("Bridge devices:")%></label>
-          <div class="iblock">
+          <div class="checkbox_container">
             <% @ifcs.each do |id, iface| %>
               <% unless id.match("br") %>
                 <div>
@@ -88,6 +88,44 @@
 
   <% elsif @type == "bond" %>
     <fieldset id="bond-fieldset" class="webyast_fieldset">
+      <div class="fieldset_header">
+        <span class="fieldset_header_title" >Bond configuration</span>
+      </div>
+
+      <div class="fieldset_body">
+        <div class="row">
+          <label><%=_("Interface name")%></label>
+
+          <% if action == "create" %>
+              <%= text_field_tag(:type, @type) %>
+              <%= select_tag(:number, options_for_select((@number..9).to_a.map{|i| "#{i}"}, @number)) %>
+          <% else %>
+              <%= text_field_tag :id, @ifc.id, :disabled => true %>
+              <%= hidden_field_tag(:type, @type) %>
+          <% end %>
+        </div>
+        
+        <div class="row">
+            <label class="tvalign"><%=_("Bond driver options")%></label>
+            <%= select_tag(:bond_mode, options_for_select($bond_options.map{|o| "#{o}"}, @ifc.bond_mode)) %>
+            <%= text_field_tag(:bond_miimon, "miimon=100") %>
+        </div>
+
+        <div class="row">
+          <label class="tvalign"><%=_("Bond slaves")%></label>
+          <div class="checkbox_container">
+            <% @ifcs.each do |id, iface| %>
+              <% unless id.match("bond") %>
+                <div>
+                 <%= check_box :bond_slaves, id, :checked => @ifc.bond_slaves.include?(id) %>
+                 <%= id %> <%= "- #{iface.vendor}" if iface.vendor %>
+                </div>
+              <% end %>
+            <% end %>
+          </div>
+        </div>
+
+      </div>
     </fieldset>
 
   <% else %>

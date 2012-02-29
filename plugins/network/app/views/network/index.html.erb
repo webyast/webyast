@@ -23,7 +23,7 @@
   <%= stylesheet_link_tag "webyast-network" %>
 <% end %>
 
-<div class="plugin-content plugin-border">
+<div id="network_module" class="plugin-content plugin-border">
 
   <% write_disabled = cannot? :write, Network %>
   <%= render :partial => 'shared/missing_write_permissions' if write_disabled %>
@@ -46,8 +46,8 @@
     <div id="page-container">
       <div class="page">
 
-        <fieldset id="dns-container" class="webyast_fieldset">
-          <div id="dns-container-header" class="fieldset_header">
+        <fieldset class="webyast_fieldset">
+          <div class="fieldset_header">
              <span class="fieldset_header_title" >
               <%= _("Physical Interfaces")%>
             </span>

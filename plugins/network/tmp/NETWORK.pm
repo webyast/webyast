@@ -67,16 +67,35 @@ sub Read {
             }
 
             $configuration{'mtu'} = LanItems->mtu;
-
-            if (LanItems->vlan_id){
-                $configuration{'vlan_id'} = LanItems->vlan_id;
+            y2milestone("************* Interface type ", Dumper(LanItems->type));
+            if(LanItems->type eq "vlan") {
+                if (LanItems->vlan_id){
+                    $configuration{'vlan_id'} = LanItems->vlan_id;
+                }
+                
+                if (LanItems->vlan_etherdevice){
+                    $configuration{'vlan_etherdevice'} = LanItems->vlan_etherdevice;
+                }
             }
-            if (LanItems->vlan_etherdevice){
-                $configuration{'vlan_etherdevice'} = LanItems->vlan_etherdevice;
+
+
+	        if(LanItems->type eq "bridge" && LanItems->bridge_ports) {
+		        $configuration{'bridge_ports'} = LanItems->bridge_ports; 
             }
 
-	    if(LanItems->bridge_ports) {
-		$configuration{'bridge_ports'} = LanItems->bridge_ports; 
+
+            if(LanItems->type eq "bond") {
+                if(@{LanItems->bond_slaves}) {
+                    $configuration{'bond_slaves'} = LanItems->bond_slaves;
+                }
+                
+                if(@{LanItems->bond_slaves}) {
+                    $configuration{'bond_slaves'} = LanItems->bond_slaves;
+                }
+        
+        	    if(LanItems->bond_option) {
+            		$configuration{'bond_option'} = LanItems->bond_option; 
+                }
             }
 
 	    if(LanItems->getCurrentItem()->{'hwinfo'}->{'type'} eq "eth") {
@@ -181,7 +200,9 @@ sub writeDNS {
 sub writeInterfaces {
     my $args  = shift;
     my $ret = {'exit'=>0, 'error'=>''};
+
     y2milestone("interface", Dumper(\$args->{'interface'}));
+
     while (my ($dev, $ifc) = each %{$args->{'interface'}}) {
         YaST::YCP::Import ("NetworkInterfaces");
         NetworkInterfaces->Read();
@@ -228,6 +249,23 @@ sub writeInterfaces {
 	  
 		if (defined $ifc->{'bridge_ports'}) {
 		    $config{"BRIDGE_PORTS"} = $ifc->{'bridge_ports'};
+		}
+		
+
+		
+		if (defined $ifc->{'bond'}) {
+		    y2milestone("*** bonding settings *******************************");
+		    $config{"BONDING_MASTER_MASTER"} = "yes";
+		    $config{"BONDING_MODULE_OPTS"} = $ifc->{'bond_option'};
+		    #$config{"BONDING_SLAVE"} = $ifc->{'bond_option'};
+		    
+
+		    my @slaves = split(/ /,$ifc->{'bond_slaves'});	    
+		    
+		    for my $i (0 .. length(@slaves)) {
+                y2milestone("BONDING_SLAVE$i", @slaves[$i]); 
+                $config{"BONDING_SLAVE$i"} = @slaves[$i];
+            }
 		}
 
 

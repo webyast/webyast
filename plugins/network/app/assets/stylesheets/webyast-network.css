@@ -19,6 +19,8 @@
 
 #dhcp_hostname { vertical-align: middle; padding:0; margin:0;}
 #networkForm .hidden { display: none!important; }
+#networkForm .checkbox_container { display:inline-block; margin:1px 0 5px 0;}
+#networkForm .checkbox_container input[type="checkbox"] { margin:0; }
 
 #autoMode, #manualMode {
   padding:2px 5px;
@@ -31,7 +33,6 @@
   text-shadow: 0px 1px 0px #fff;
   min-width:80px;
 
-/*  font-family: Arial; */
   -moz-box-shadow: 0px 0px 1px #666;
   -webkit-box-shadow: 0px 0px 1px #666;
 }
@@ -59,38 +60,37 @@
 
 #manualMode { border-left:0px; margin-left:-5px; }
 
-#ip_sticker {
-  border:1px solid #ebebeb;
-  color:#666;
-  position:absolute;
-  top:43%;
-  right:2%;
-  text-align:center;
-  padding:0px;
-  -moz-border-radius:3px;
-  -webkit-border-radius:3px;
-}
+/*#ip_sticker {*/
+/*  border:1px solid #ebebeb;*/
+/*  color:#666;*/
+/*  position:absolute;*/
+/*  top:43%;*/
+/*  right:2%;*/
+/*  text-align:center;*/
+/*  padding:0px;*/
+/*  -moz-border-radius:3px;*/
+/*  -webkit-border-radius:3px;*/
+/*}*/
 
-div.interface { clear:both; overflow:hidden; margin:5px 0px; padding:5px; }
-div.interface .img_container { float:left; line-height: 44px; vertical-align:middle; width:10%; }
-div.interface .iface_details { float:left; width:75%; }
-div.interface .link_container { float:left; width:10%; text-align:right;}
-div.interface p { line-height: 16px; margin:0; }
+#network_module div.interface { clear:both; overflow:hidden; margin:5px 0px; padding:5px; }
+#network_module div.interface .img_container { float:left; line-height: 44px; vertical-align:middle; width:10%; }
+#network_module div.interface .iface_details { float:left; width:75%; }
+#network_module div.interface .link_container { float:left; width:10%; text-align:right;}
+#network_module div.interface p { line-height: 16px; margin:0; }
+#network_module div.interface:hover { background:#eee; }
 
-div.interface:hover {
-    background:#eee;
-}
 
 #pages-container { margin: 0 auto; overflow: hidden; width: 960px; }
 #pages { background: none repeat scroll 0 0 #FFFFFF; width: 1940px; }
-.page { float: left; margin: 0 auto; overflow: hidden; width: 960px; }
-.page .navigation_link_container { padding: 10px 20px 0; }
-.page .page_link { margin: 5px 0px 10px 0px; font-size:14px; color:#2081C5; border:none; }
-.page .page_link:hover { border:none; }
+
+#page-container .page { float: left; margin: 0 auto; overflow: hidden; width: 960px; }
+#page-container .page .navigation_link_container { padding: 10px 20px 0; }
+#page-container .page .page_link { margin: 5px 0px 10px 0px; font-size:14px; color:#2081C5; border:none; }
+#page-container .page .page_link:hover { border:none; }
 
 
-.iselector { border:4px solid transparent; padding:1px; border-radius:0;}
-.iselector .fieldset_header { border:1px solid #d8d8d8; border-bottom:0px; }
-.iselector .fieldset_body { border:1px solid #d8d8d8; }
-.iselector:hover { border:4px solid #d8d8d8;  }
-.iselector.active { border:4px solid #39A33A;  }
+#network_module .iselector { border:4px solid transparent; padding:1px; border-radius:0;}
+#network_module .iselector .fieldset_header { border:1px solid #d8d8d8; border-bottom:0px; }
+#network_module .iselector .fieldset_body { border:1px solid #d8d8d8; }
+#network_module .iselector:hover { border:4px solid #d8d8d8;  }
+#network_module .iselector.active { border:4px solid #39A33A;  }

@@ -90,7 +90,7 @@ class NetworkController < ApplicationController
     @number = @ifcs.select{|id, iface| id if id.match(@type)}.count
     @physical = @ifcs.select{|k, i| i if k.match("eth")}
 
-    @ifc = Interface.new({"type"=>params[:type], "bootproto"=>"dhcp", "startmode"=>"auto", "bridge_ports"=>[]}, "#{@type}#{@number}")
+    @ifc = Interface.new({"type"=>params[:type], "bootproto"=>"dhcp", "startmode"=>"auto"}, "#{@type}#{@number}")
 
     #@dhcp_hostname_enabled = @hostname.respond_to?("dhcp_hostname")
 
@@ -112,8 +112,18 @@ class NetworkController < ApplicationController
     hash["ipaddr"] = params[:ipaddr] || ""
     hash["vlan_id"] = params[:vlan_id] if  params[:vlan_id]
     hash["vln_etherdevice"] = params[:vlan_etherdevice] if  params[:vlan_etherdevice]
-    hash["bridge_ports"] = params["bridge_ports"].map{|k,v| k if v=="1"}.compact.join(" ").to_s if params["bridge_ports"]
+#    hash["bridge_ports"] = params["bridge_ports"].map{|k,v| k if v=="1"}.compact.join(" ").to_s if params["bridge_ports"]
 
+    hash["bridge_ports"] = params["bridge_ports"] if params["bridge_ports"]
+    hash["bond_slaves"] = params["bond_slaves"] if params["bond_slaves"]
+
+    #hash["bond_option"] = params["bond_option"] if params["bond_option"]
+    
+    if params["bond_mode"] && params["bond_miimon"]
+      bond_option = "#{params["bond_mode"]} #{params["bond_miimon"].gsub(/ /,'')}"
+      hash["bond_option"] = bond_option
+    end
+    
     ifc = Interface.new(hash, "#{params["type"]}#{params["number"]}")
     ifc.save
 
@@ -204,8 +214,25 @@ class NetworkController < ApplicationController
     end
 
     if params["bridge_ports"] && ifc.bridge_ports != params["bridge_ports"]
-      ifc.bridge_ports = params["bridge_ports"].map{|k,v| k if v=="1"}.compact.join(' ').to_s
+      ifc.bridge_ports = params["bridge_ports"]
       dirty_ifc = true
+    end
+    
+    if params["bond_slaves"] && ifc.bond_slaves != params["bond_slaves"]
+      ifc.bond_slaves = params["bond_slaves"]
+      dirty_ifc = true
+    end
+    
+    if params["bond_mode"] && params["bond_miimon"]
+      bond_option = "#{params["bond_mode"]} #{params["bond_miimon"].gsub(/ /,'')}"
+      if ifc.bond_option != bond_option
+        ifc.bond_option = bond_option
+        dirty_ifc = true
+       end
+    end
+    
+    if params["bond_mode"] && ifc.bond_option != params["bond_mode"]
+       ifc.bond_option
     end
    ### END INTERFACE ###
 
@@ -237,12 +264,12 @@ class NetworkController < ApplicationController
 
     # write interfaces (and therefore restart network) only when interface settings changed (bnc#579044)
     if dirty_ifc
-      Rails.logger.error "\n================================"
-      Rails.logger.error "### HOSTNAME #{hostname.inspect}\n"
-      Rails.logger.error "### DNS #{dns.inspect}\n"
-      Rails.logger.error "### ROUTE #{route.inspect}\n"
-      Rails.logger.error "### INTERFACE #{ifc.inspect}\n"
-      Rails.logger.error "=================================\n"
+#      Rails.logger.error "\n================================"
+#      Rails.logger.error "### HOSTNAME #{hostname.inspect}\n"
+#      Rails.logger.error "### DNS #{dns.inspect}\n"
+#      Rails.logger.error "### ROUTE #{route.inspect}\n"
+#      Rails.logger.error "### INTERFACE #{ifc.inspect}\n"
+#      Rails.logger.error "=================================\n"
 
       route.save
       dns.save
@@ -263,3 +290,4 @@ class NetworkController < ApplicationController
     redirect_to :controller => "network", :action => "index"
   end
 end
+
