@@ -19,10 +19,7 @@
 # you may find current contact information at www.novell.com
 #++
 
-require 'gettext'
-
 class RegistrationState
-  include GetText
   def self.read()
     unless Register.new.is_registered?
       return { :level => "warning",
