@@ -84,6 +84,12 @@ def license_report
     elsif fn =~ /\.haml\z/
       report[:skipped] << "#{fn}: skipped by name match (haml file)"
       next
+    elsif fn =~ /\.ycp\z/
+      report[:skipped] << "#{fn}: skipped by name match (ycp file)"
+      next
+    elsif fn =~ /\.xcf\z/
+      report[:skipped] << "#{fn}: skipped by name match (xcf file)"
+      next
     elsif fn =~ /vendor\/plugins/
       report[:skipped] << "#{fn}: skipped by name match (polkit policy file)"
       next
