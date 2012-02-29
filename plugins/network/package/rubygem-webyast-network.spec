@@ -79,7 +79,7 @@ needed at runtime.
 
 # Policies
 mkdir -p $RPM_BUILD_ROOT/usr/share/%{webyast_polkit_dir}
-install -m 0644 %SOURCE1 $RPM_BUILD_ROOT/usr/%{webyast_polkit_dir}/actions
+install -m 0644 %SOURCE1 $RPM_BUILD_ROOT/usr/share/%{webyast_polkit_dir}
 
 %webyast_build_restdoc public/administrator/restdoc
 
