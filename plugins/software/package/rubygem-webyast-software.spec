@@ -139,19 +139,10 @@ rm -rf $RPM_BUILD_ROOT/%{_libdir}/ruby/gems/%{rb_ver}/gems/%{mod_full_name}/publ
 %{webyast_dir}/public/assets/*
 
 %dir /usr/share/%{webyast_polkit_dir}
-%attr(644,root,root) %config /usr/share/%{webyast_polkit_dir}/org.opensuse.yast.system.patches.policy
-%attr(644,root,root) %config /usr/share/%{webyast_polkit_dir}/org.opensuse.yast.system.packages.policy
-%attr(644,root,root) %config /usr/share/%{webyast_polkit_dir}/org.opensuse.yast.system.repositories.policy
+%attr(644,root,root) %config /usr/share/%{webyast_polkit_dir}/org.opensuse.yast.modules.yapi.patches.policy
+%attr(644,root,root) %config /usr/share/%{webyast_polkit_dir}/org.opensuse.yast.modules.yapi.packages.policy
+%attr(644,root,root) %config /usr/share/%{webyast_polkit_dir}/org.opensuse.yast.modules.yapi.repositories.policy
 %attr(775,%{webyast_user},root) /var/lib/webyast/software
-
-%if 0%{?suse_version} == 0 || 0%{?suse_version} > 1130
-%dir /var/lib/polkit-1/localauthority
-%dir /var/lib/polkit-1/localauthority/10-vendor.d
-%config /var/lib/polkit-1/localauthority/10-vendor.d/*
-%if 0%{?suse_version} == 1130
-%config /etc/polkit-1/localauthority/10-vendor.d/*
-%endif
-%endif
 
 %files doc
 %defattr(-,root,root,-)
