@@ -131,8 +131,8 @@ rm -rf $RPM_BUILD_ROOT/%{_libdir}/ruby/gems/%{rb_ver}/gems/%{mod_full_name}/publ
 %{webyast_dir}/public/assets/*
 
 # restdoc documentation
-%dir %{webyast_dir}/public/administrator
-%{webyast_dir}/public/administrator/restdoc
+%dir %{webyast_dir}/public/services
+%{webyast_dir}/public/services/restdoc
 
 
 %dir /usr/share/YaST2/
