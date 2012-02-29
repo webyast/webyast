@@ -12,7 +12,7 @@
 Name:           rubygem-webyast-ntp
 Version:        0.1
 Release:        0
-%define mod_name webyast-administrator
+%define mod_name webyast-ntp
 %define mod_full_name %{mod_name}-%{version}
 #
 Group:          Productivity/Networking/Web/Utilities
@@ -80,11 +80,13 @@ cp %{SOURCE1} $RPM_BUILD_ROOT/usr/share/YaST2/modules/YaPI/
 mkdir -p $RPM_BUILD_ROOT/usr/share/%{webyast_polkit_dir}
 cp %{SOURCE2} $RPM_BUILD_ROOT/usr/share/%{webyast_polkit_dir}
 
-%webyast_build_restdoc public/administrator/restdoc
+%webyast_build_restdoc public/ntp/restdoc
 
 # remove empty public
 rm -rf $RPM_BUILD_ROOT/%{_libdir}/ruby/gems/%{rb_ver}/gems/%{mod_full_name}/public
 
+#just a dummy locale cause not translation are available
+mkdir -p $RPM_BUILD_ROOT/%{_libdir}/ruby/gems/%{rb_ver}/gems/%{mod_full_name}/locale
 %webyast_build_plugin_assets
 
 %clean
@@ -111,8 +113,8 @@ rm -rf $RPM_BUILD_ROOT/%{_libdir}/ruby/gems/%{rb_ver}/gems/%{mod_full_name}/publ
 %{webyast_dir}/public/assets/*
 
 # restdoc documentation
-%dir %{webyast_dir}/public/administrator
-%{webyast_dir}/public/administrator/restdoc
+%dir %{webyast_dir}/public/ntp
+%{webyast_dir}/public/ntp/restdoc
 
 # ntp require only yast2-dbus server, so it must ensure that directory exist
 %dir /usr/share/YaST2/
