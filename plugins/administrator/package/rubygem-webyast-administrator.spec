@@ -35,14 +35,13 @@ PreReq:	        webyast-base >= 0.3
 Requires:       yast2-users
 
 #
-Url:            http://rubygems.org/gems/webyast-administrator
+Url:            http://en.opensuse.org/Portal:WebYaST
 Source:         %{mod_full_name}.gem
 Source1:	org.opensuse.yast.modules.yapi.administrator.policy
 #
 Summary:        Webyast module for configuring administrator settings
 %description
 Webyast module for configuring administrator settings
-
 
 %package doc
 Summary:        RDoc documentation for %{mod_name}
