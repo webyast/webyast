@@ -57,7 +57,7 @@
 # use assets.rake file directly (faster loading)
 %webyast_update_assets \
     cd %{webyast_dir} \
-    rake -f lib/tasks/assets.rake assets:join_manifests) \
+    rake -f lib/tasks/assets.rake assets:join_manifests \
     bundle update \
     cd -
 
