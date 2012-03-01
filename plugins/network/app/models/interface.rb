@@ -48,12 +48,22 @@ class Interface < BaseModel::Base
   ]
 
   validates_format_of :id, :allow_nil => false, :with => /^[a-zA-Z0-9_-]+$/
-  validates_inclusion_of :bootproto, :in => ["static","dhcp"]
+  validates_inclusion_of :bootproto, :in => ["static","dhcp", "none"]
   validates_format_of :ipaddr, 
                       :allow_blank => true, 
                       :with => /^#{IPADDR_REGEX}\/(#{IPADDR_REGEX}|[0-9]{1,2})$/  #(bnc#600097)
 
   public
+
+  def netmask_to_cidr(netmask)
+    return IPAddr.new(netmask).to_i.to_s(2).count("1")
+  end
+  
+  def self.cidr_to_netmask(cidr)
+    return IPAddr.new('255.255.255.255').mask(cidr).to_s
+  end
+
+
 
   def ip
     ip = (self.ipaddr.blank?)? "" : self.ipaddr.split("/")[0]
@@ -76,7 +86,7 @@ class Interface < BaseModel::Base
     @id ||= id
 
     # use /sbin/ip to detect the ip address if bootproto == 'dhcp' (Justus Winter)
-    if bootproto == "dhcp"
+    if bootproto && bootproto.match("dhcp")
       stdout, stderr, status = Open3.popen3("/sbin/ip", "-o", "-family", "inet", "addr", "show", "dev", id) do |stdin, stdout, stderr|
         match = IP_IPADDR_REGEX.match(stdout.read())
         @ipaddr = (match)? match[1] : ""
@@ -84,9 +94,11 @@ class Interface < BaseModel::Base
     else
       @ipaddr = ipaddr
     end
+    
+    Rails.logger.error "\n Interface #{id} \n IP address: #{ipaddr.inspect} \n booto #{bootproto}\n"
 
     @bridge_ports = bridge_ports.split(" ") unless bridge_ports.blank?
-    @bond_slaves = bond_slaves || [] if id.match("bond")
+    @bond_slaves = bond_slaves || [] if id && id.match("bond")
     @bond_mode,@bond_miimon  = @bond_option.split(" ") unless bond_option.blank?
   end
 
@@ -105,6 +117,8 @@ class Interface < BaseModel::Base
       else
         hash = Interface.new(ifaces_h[which], which)
       end
+      
+      Rails.logger.error "\n\n *** Interfaces: \n  #{hash.inspect} *** \n\n"
       hash
     end
   end

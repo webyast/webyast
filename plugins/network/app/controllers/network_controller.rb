@@ -193,15 +193,21 @@ class NetworkController < ApplicationController
     dirty_ifc = true unless (ifc.bootproto == params["bootproto"])
 
     ifc.bootproto = params["bootproto"]
-    ifc.ipaddr = params["ipaddr"] || ""
+    
 
+#    if ifc.bootproto == STATIC_BOOT_ID
+#      #ip addr is returned in another state then given, but restart of static address is not problem
+#      if ((ifc.ipaddr).delete("/")!= params["ip"] + (params["netmask"]||"").delete("/"))
+#        ifc.ipaddr = params["ip"] + "/" + params["netmask"].delete("/")
+#        dirty_ifc = true
+#      end
+#    end
+    
     if ifc.bootproto == STATIC_BOOT_ID
-      #ip addr is returned in another state then given, but restart of static address is not problem
-      if ((ifc.ipaddr).delete("/")!= params["ip"] + (params["netmask"]||"").delete("/"))
-        ifc.ipaddr = params["ip"] + "/" + params["netmask"].delete("/")
+        ifc.ipaddr = "#{params["ip"]}/#{ifc.netmask_to_cidr(params["netmask"])}"
         dirty_ifc = true
-      end
     end
+    
 
     if params[:vlan_id] && ifc.vlan_id != params[:vlan_id]
       ifc.vlan_id = params[:vlan_id]
@@ -264,13 +270,6 @@ class NetworkController < ApplicationController
 
     # write interfaces (and therefore restart network) only when interface settings changed (bnc#579044)
     if dirty_ifc
-#      Rails.logger.error "\n================================"
-#      Rails.logger.error "### HOSTNAME #{hostname.inspect}\n"
-#      Rails.logger.error "### DNS #{dns.inspect}\n"
-#      Rails.logger.error "### ROUTE #{route.inspect}\n"
-#      Rails.logger.error "### INTERFACE #{ifc.inspect}\n"
-#      Rails.logger.error "=================================\n"
-
       route.save
       dns.save
       hostname.save
