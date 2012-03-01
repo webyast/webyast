@@ -88,7 +88,7 @@ mkdir -p $RPM_BUILD_ROOT/usr/share/YaST2/modules/
 cp %{SOURCE3} $RPM_BUILD_ROOT/usr/share/YaST2/modules/
 
 mkdir -p $RPM_BUILD_ROOT/etc/webyast/vendor
-cp $RPM_BUILD_ROOT/%{plugin_dir}/doc/logs.yml $RPM_BUILD_ROOT/etc/webyast
+cp $RPM_BUILD_ROOT/%{_libdir}/ruby/gems/%{rb_ver}/gems/%{mod_full_name}/doc/logs.yml $RPM_BUILD_ROOT/etc/webyast
 
 %webyast_build_restdoc public/status/restdoc
 
@@ -121,7 +121,7 @@ sed -i "s/^#LoadPlugin df.*/LoadPlugin df/" "/etc/collectd.conf"
 #
 # check status_configuration.yaml bnc#636616
 #
-ruby %{plugin_dir}/lib/configcheck.rb
+ruby %{_libdir}/ruby/gems/%{rb_ver}/gems/%{mod_full_name}/lib/configcheck.rb
 
 #
 # set "Hostname" to WebYaST and remove already generated old log files
