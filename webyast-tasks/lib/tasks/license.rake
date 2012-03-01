@@ -142,7 +142,7 @@ def license_report
     end
   end
 
-  puts "\nMissing license:"
+  puts "\nMissing license:" unless report[:missing].empty?
   report[:missing].each { |m| puts m }
   exit 1 unless report[:missing].empty?
   verbose "\nSkipped files:"
