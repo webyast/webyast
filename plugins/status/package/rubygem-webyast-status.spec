@@ -154,8 +154,8 @@ rccollectd try-restart
 %{webyast_dir}/public/assets/*
 
 # restdoc documentation
-%dir %{webyast_dir}/public/administrator
-%{webyast_dir}/public/administrator/restdoc
+%dir %{webyast_dir}/public/status
+%{webyast_dir}/public/status/restdoc
 
 %dir /usr/share/YaST2/
 %dir /usr/share/YaST2/modules/
