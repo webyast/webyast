@@ -1,25 +1,3 @@
-#--
-# Copyright (c) 2009-2010 Novell, Inc.
-# 
-# All Rights Reserved.
-# 
-# This program is free software; you can redistribute it and/or modify it
-# under the terms of version 2 of the GNU General Public License
-# as published by the Free Software Foundation.
-# 
-# This program is distributed in the hope that it will be useful,
-# but WITHOUT ANY WARRANTY; without even the implied warranty of
-# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
-# GNU General Public License for more details.
-# 
-# You should have received a copy of the GNU General Public License
-# along with this program; if not, contact Novell, Inc.
-# 
-# To contact Novell about this file by physical or electronic mail,
-# you may find current contact information at www.novell.com
-#++
-
-
 package YaPI::NETWORK;
 
 use strict;
@@ -78,8 +56,8 @@ sub Read {
                 }
             }
 
-
-	        if(LanItems->type eq "bridge" && LanItems->bridge_ports) {
+	        if(LanItems->type eq "br" && LanItems->bridge_ports) {
+	            y2milestone("*** BRIDGE DETECTED GET BRIDGE_PORTS ********************");
 		        $configuration{'bridge_ports'} = LanItems->bridge_ports; 
             }
 
@@ -244,21 +222,17 @@ sub writeInterfaces {
 		}
 
 		if (defined $ifc->{'bridge'}) {
+		    y2milestone("*** BRIDGE DETECTED ***");
+		    y2milestone(Dumper($ifc->{'bridge_ports'}));
 		    $config{"BRIDGE"} = "yes";
-		}
-	  
-		if (defined $ifc->{'bridge_ports'}) {
 		    $config{"BRIDGE_PORTS"} = $ifc->{'bridge_ports'};
 		}
-		
-
-		
+	  
 		if (defined $ifc->{'bond'}) {
 		    y2milestone("*** bonding settings *******************************");
 		    $config{"BONDING_MASTER_MASTER"} = "yes";
 		    $config{"BONDING_MODULE_OPTS"} = $ifc->{'bond_option'};
 		    #$config{"BONDING_SLAVE"} = $ifc->{'bond_option'};
-		    
 
 		    my @slaves = split(/ /,$ifc->{'bond_slaves'});	    
 		    
