@@ -63,16 +63,12 @@ class Interface < BaseModel::Base
     return IPAddr.new('255.255.255.255').mask(cidr).to_s
   end
 
-
-
   def ip
     ip = (self.ipaddr.blank?)? "" : self.ipaddr.split("/")[0]
   end
 
   # convert etmask to CIDR
   def cidr
-    # return netmask with slash or without slash ???
-    #netmask = (self.ipaddr.blank?)? " " : "/#{self.ipaddr.split("/")[1]}"
     cidr =  (self.ipaddr.blank?)? "" : self.ipaddr.split("/")[1]
   end
 
@@ -95,25 +91,16 @@ class Interface < BaseModel::Base
       @ipaddr = ipaddr || ""
     end
     
-    Rails.logger.error "\n Interface #{type} \n IP address: #{ipaddr.inspect} \n br #{bridge_ports.inspect}\n"
-
-#    @bridge_ports = (bridge_ports.blank?)? [] : bridge_ports.split(" ")
-
-#    if bridge_ports == "String"
-#        @bridge_ports = bridge_ports.split(" ")
-#    else 
-#        @bridge_ports = bridge_ports || [ ]
-#    end
-    if id.match("br")
+    if(id && id.match("br"))
         @bridge_ports = (bridge_ports.class == "Array")? bridge_ports.split(" ") : bridge_ports || [ ]
     end
     
-    if id.match("bond")
+    if(id && id.match("bond"))
         @bond_slaves = (bond_slaves.class == "Array")? bond_slaves.split(" ") : bond_slaves || [ ]
     end
-    
-#    @bond_slaves = bond_slaves.split(" ") || [] if id && id.match("bond")
+
     @bond_mode,@bond_miimon  = @bond_option.split(" ") unless bond_option.blank?
+
   end
 
   def self.find( which )
