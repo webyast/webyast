@@ -31,7 +31,7 @@ Requires:       shellinabox
 URL:            http://en.opensuse.org/Portal:WebYaST
 Summary:        WebYaST - terminal plugin
 Source:         %{mod_full_name}.gem
-Source1:        org.opensuse.yast.system.terminal.policy
+Source1:        org.opensuse.yast.modules.yapi.terminal.policy
 
 %package doc
 Summary:        RDoc documentation for %{mod_name}
@@ -99,7 +99,7 @@ rm -rf $RPM_BUILD_ROOT/%{_libdir}/ruby/gems/%{rb_ver}/gems/%{mod_full_name}/publ
 %{webyast_dir}/public/assets/*
 
 %dir /usr/share/%{webyast_polkit_dir}
-%attr(644,root,root) /usr/share/%{webyast_polkit_dir}/org.opensuse.yast.system.terminal.policy
+%attr(644,root,root) /usr/share/%{webyast_polkit_dir}/org.opensuse.yast.modules.yapi.terminal.policy
 
 %files doc
 %defattr(-,root,root,-)
