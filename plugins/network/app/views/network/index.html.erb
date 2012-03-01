@@ -63,9 +63,9 @@
                 <div class="iface_details">
                   <!-- #TODO: Contact mvidner for adding vendor to yast-network package -->
                   <p><b><%= interface.vendor if interface.vendor  %></b></p>
-                  <p>Interface: <b><%= interface.id %></b></p>
-                  <p>IP address: <%= interface.ip %></p>
-                  <p>Mode: <%= interface.bootproto %></p>
+                  <p><%= _("Interface") %>: <b><%= interface.id %></b></p>
+                  <p><%= _("IP address") %>: <%= interface.ip %></p>
+                  <p><%= _("Mode") %>: <%= interface.bootproto %></p>
                 </div>
                 <div class="link_container">
                   <%= link_to _("configure"), :controller => "network", :action => "edit", :id => id %>
@@ -89,16 +89,21 @@
                   <%= image_tag("#{img}") %>
                 </div>
                 <div class="iface_details">
-                  <p>interface: <b><%= interface.id %></b></p>
+                  <p><%= _("Interface") %>: <b><%= interface.id %></b></p>
                   <p>Mode: <%= interface.bootproto %></p>
 
                   <% if interface.id.match("vlan") %>
-                    <p>vlan id: <%= interface.vlan_id %></p>
-                    <p>physical interface: <%= interface.vlan_etherdevice %></p>
+                    <p><%= _("Vlan ID") %>: <%= interface.vlan_id %></p>
+                    <p><%= _("Physical interface") %>: <%= interface.vlan_etherdevice %></p>
                   <% end %>
 
                   <% if interface.id.match("br") %>
-                    <p>bridge ports: <%= interface.bridge_ports %></p>
+                    <p><%= _("Bridge ports") %>: <%= interface.bridge_ports %></p>
+                  <% end %>
+                  
+                  <% if interface.id.match("bond") %>
+                    <p><%= _("Bond option") %>: <%= interface.bond_option %></p>
+                    <p><%= _("Bond slaves") %>: <%= interface.bond_slaves %></p>
                   <% end %>
 
                 </div>
@@ -137,11 +142,11 @@
                 <%= image_tag("eth64.png") %>
               </div>
               <div class="iface_details", style="width:90%; float:left;">
-                <section>
+                <div>
                   A <b>virtual local area network</b>, virtual LAN or VLAN, is a group of hosts with a common set of requirements that communicate as if they were attached to the same broadcast domain,
                   regardless of their physical location. A VLAN has the same attributes as a physical local area network (LAN), but it allows for end stations to be grouped together even
                   if they are not located on the same network switch. VLAN membership can be configured through software instead of physically relocating devices or connections.
-                </section>
+                </div>
               </div>
               <div class="clearfix">&nbsp;</div>
             </fieldset>
@@ -157,11 +162,11 @@
                   <%= image_tag("eth64.png") %>
                 </div>
                 <div class="iface_details", style="width:90%">
-                  <section>
+                  <div>
                     <b>Bridging</b> is a forwarding technique used in packet-switched computer networks. Unlike routing, bridging makes no assumptions about where in a network a particular address is located.
                     Instead, it depends on flooding and examination of source addresses in received packet headers to locate unknown devices. Once a device has been located, its location
                     is recorded in a table where the source address is stored so as to avoid the need for further flooding.
-                  </section>
+                  </div>
                 </div>
               </div>
 
@@ -179,10 +184,10 @@
                   <%= image_tag("eth64.png") %>
                 </div>
                 <div class="iface_details", style="width:90%">
-                  <section>
+                  <div>
                     A <b>bond/trunk</b> is a single transmission channel between two points, each point being either the switching center or the node.
                     In modern communications, trunking is a concept by which a communications system can provide network access to many clients by sharing a set of lines or frequencies instead of providing them individually.
-                  </section>
+                  </div>
                 </div>
               </div>
 
