@@ -22,10 +22,10 @@ License:        GPL-2.0
 BuildRoot:      %{_tmppath}/%{name}-%{version}-build
 BuildRequires:  rubygems_with_buildroot_patch
 %rubygems_requires
-BuildRequires:	webyast-base >= 0.3
+BuildRequires:	webyast-base >= 0.3, rubygem-webyast-service
 BuildRequires:	webyast-base-testsuite
-BuildRequires:	rubygem-restility
-PreReq:	        webyast-base >= 0.3, rubygem-webyast-ntp
+BuildRequires:	rubygem-restility, rubygem-webyast-ntp
+PreReq:	        webyast-base >= 0.3, rubygem-webyast-ntp, rubygem-webyast-service
 
 URL:            http://en.opensuse.org/Portal:WebYaST
 Summary:        WebYaST - time management
