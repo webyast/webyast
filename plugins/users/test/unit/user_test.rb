@@ -58,7 +58,7 @@ class UserTest < Test::Unit::TestCase
   end
 
   def test_user_uid
-    users = User.find_all ({ "attributes" => "uid,cn"})
+    users = User.find_all({ "attributes" => "uid,cn"})
     assert_equal(2, users.size)
     assert users[0].uid_number == ""
     assert users[0].uid == "testuser1"
