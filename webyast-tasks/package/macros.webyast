@@ -58,7 +58,7 @@
 %webyast_update_assets \
     (cd %{webyast_dir} && rake -f lib/tasks/assets.rake assets:join_manifests) \
     if test -f "%{webyast_dir}/Gemfile.lock" ; then \
-      rm %{webyast_dir}/Gemfile.lock \
+      chown abuild %{webyast_dir}/Gemfile.lock \
     fi
 
 # run plugin testsuite (from %check section)
