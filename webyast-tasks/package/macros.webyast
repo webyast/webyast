@@ -56,10 +56,7 @@
 # update manifest.yml file
 # use assets.rake file directly (faster loading)
 %webyast_update_assets \
-    (cd %{webyast_dir} && rake -f lib/tasks/assets.rake assets:join_manifests) \
-    if test -f "%{webyast_dir}/Gemfile.lock" ; then \
-      chown abuild %{webyast_dir}/Gemfile.lock \
-    fi
+    (cd %{webyast_dir} && rake -f lib/tasks/assets.rake assets:join_manifests)
 
 # run plugin testsuite (from %check section)
 %webyast_run_plugin_tests \

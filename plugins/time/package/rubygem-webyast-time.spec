@@ -25,8 +25,7 @@ BuildRequires:  rubygems_with_buildroot_patch
 BuildRequires:	webyast-base >= 0.3
 BuildRequires:	webyast-base-testsuite
 BuildRequires:	rubygem-restility
-BuildRequires:  rubygem-webyast-ntp
-PreReq:	        webyast-base >= 0.3
+PreReq:	        webyast-base >= 0.3, rubygem-webyast-ntp
 
 URL:            http://en.opensuse.org/Portal:WebYaST
 Summary:        WebYaST - time management
