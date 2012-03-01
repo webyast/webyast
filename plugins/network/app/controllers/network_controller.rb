@@ -23,9 +23,7 @@ class NetworkController < ApplicationController
   NETMASK_RANGE = 0..32
   STATIC_BOOT_ID = "static"
 
-  # GET /network
   def index
-    # TODO: NO INTERFACE FOUND!!!
     authorize! :read, Network
 
     @ifcs = Interface.find(:all)
@@ -41,10 +39,6 @@ class NetworkController < ApplicationController
   def edit
     authorize! :read, Network
 
-    # moved to model ????????????
-    #@dhcp_hostname_enabled = @hostname.respond_to?("dhcp_hostname")
-    #@dhcp_hostname = @dhcp_hostname_enabled && @hostname.dhcp_hostname == "1"
-
     network = Network.find
     @hostname = network["hostname"]
     @dns = network["dns"]
@@ -57,19 +51,6 @@ class NetworkController < ApplicationController
     @number = @ifcs.select{|id, iface| id if id.match(@type)}.count
     @physical = @ifcs.select{|k, i| i if k.match("eth")}
 
-
-    # <<<< TODO: FINDE A BETTER WAY FOR IP HANDLIND
-    #ipaddr = (@bootproto == STATIC_BOOT_ID)? @ifc.ipaddr || "/" : "/"
-    #@ip, @netmask = @ifc.ipaddr.split "/"
-
-#    debugger
-     # when detect PREFIXLEN with leading "/"
-#    if @ifc.bootproto == STATIC_BOOT_ID && NETMASK_RANGE.include?(@netmask.to_i)
-#      @netmask = "/" + @netmask
-#      Rails.logger.error "\n*** set netmask if static and netmask in range #{@netmask} \n"
-#    end
-
-    # >>>>>
 
     respond_to do |format|
       format.html
@@ -104,21 +85,15 @@ class NetworkController < ApplicationController
   def create
     authorize! :write, Network
 
-    Rails.logger.error "Params #{params.inspect}"
-
     hash = {}
     hash["type"] = params[:type] if  params[:type]
     hash["bootproto"] = params[:bootproto]
     hash["ipaddr"] = params[:ipaddr] || ""
     hash["vlan_id"] = params[:vlan_id] if  params[:vlan_id]
-    hash["vln_etherdevice"] = params[:vlan_etherdevice] if  params[:vlan_etherdevice]
-#    hash["bridge_ports"] = params["bridge_ports"].map{|k,v| k if v=="1"}.compact.join(" ").to_s if params["bridge_ports"]
+    hash["vlan_etherdevice"] = params[:vlan_etherdevice] if  params[:vlan_etherdevice]
+    hash["bridge_ports"] = params["bridge_ports"].map{|k,v| k if v=="1"}.compact.join(' ').to_s || "" if params["bridge_ports"]
+    hash["bond_slaves"] = params["bond_slaves"].map{|k,v| k if v=="1"}.compact.join(' ').to_s if params["bond_slaves"]
 
-    hash["bridge_ports"] = params["bridge_ports"] if params["bridge_ports"]
-    hash["bond_slaves"] = params["bond_slaves"] if params["bond_slaves"]
-
-    #hash["bond_option"] = params["bond_option"] if params["bond_option"]
-    
     if params["bond_mode"] && params["bond_miimon"]
       bond_option = "#{params["bond_mode"]} #{params["bond_miimon"].gsub(/ /,'')}"
       hash["bond_option"] = bond_option
@@ -142,7 +117,6 @@ class NetworkController < ApplicationController
 
     network = Network.find
 
-
     ### HOSTANEM ###
     hostname = network["hostname"]
 
@@ -156,7 +130,6 @@ class NetworkController < ApplicationController
     if params["dhcp_hostname_enabled"] == "true"
       hostname.dhcp_hostname = params["dhcp_hostname"] || "0"
       #params["dhcp_hostname"]==nil ? params["dhcp_hostname"]="0" : pass
-
       dirty_hostname = true #Set dirty to true (bnc#692594)
     end
     ### END HOSTNAME ###
@@ -165,10 +138,6 @@ class NetworkController < ApplicationController
     ### DNS ###
     dns = network["dns"]
 
-    # Simply comparing empty array and nil would wrongly mark it dirty,
-    # so at first test emptiness
-    #FIXME repair it when spliting of param is ready
-
     unless (dns.nameservers.empty? && params["nameservers"].blank?)
       dirty_dns = true unless dns.nameservers == (params["nameservers"]||"").split
     end
@@ -176,10 +145,6 @@ class NetworkController < ApplicationController
     unless (dns.searches.empty? && params["searchdomains"].blank?)
       dirty_dns = true unless dns.searches == (params["searchdomains"]||"").split
     end
-
-    # now the model contains arrays but for saving
-    # they need to be concatenated because we can't serialize them
-    # FIXME: params bellow should be arrays
 
     dns.nameservers = params["nameservers"].nil? ? [] : params["nameservers"].split
     dns.searches    = params["searchdomains"].nil? ? [] : params["searchdomains"].split
@@ -194,20 +159,10 @@ class NetworkController < ApplicationController
 
     ifc.bootproto = params["bootproto"]
     
-
-#    if ifc.bootproto == STATIC_BOOT_ID
-#      #ip addr is returned in another state then given, but restart of static address is not problem
-#      if ((ifc.ipaddr).delete("/")!= params["ip"] + (params["netmask"]||"").delete("/"))
-#        ifc.ipaddr = params["ip"] + "/" + params["netmask"].delete("/")
-#        dirty_ifc = true
-#      end
-#    end
-    
     if ifc.bootproto == STATIC_BOOT_ID
         ifc.ipaddr = "#{params["ip"]}/#{ifc.netmask_to_cidr(params["netmask"])}"
         dirty_ifc = true
     end
-    
 
     if params[:vlan_id] && ifc.vlan_id != params[:vlan_id]
       ifc.vlan_id = params[:vlan_id]
@@ -220,12 +175,12 @@ class NetworkController < ApplicationController
     end
 
     if params["bridge_ports"] && ifc.bridge_ports != params["bridge_ports"]
-      ifc.bridge_ports = params["bridge_ports"]
+      ifc.bridge_ports = params["bridge_ports"].map{|k,v| k if v=="1"}.compact.join(' ').to_s || ""
       dirty_ifc = true
     end
     
     if params["bond_slaves"] && ifc.bond_slaves != params["bond_slaves"]
-      ifc.bond_slaves = params["bond_slaves"]
+      ifc.bond_slaves = params["bond_slaves"].map{|k,v| k if v=="1"}.compact.join(' ').to_s
       dirty_ifc = true
     end
     
@@ -282,10 +237,9 @@ class NetworkController < ApplicationController
 
   def destroy
     authorize! :write, Network
+
     ifc = Interface.find params[:id]
     ret = ifc.destroy
-    
-    Rails.logger.error "### Destroy selected interface #{ifc.inspect} the return value is #{ret.inspect}\n"
     redirect_to :controller => "network", :action => "index"
   end
 end

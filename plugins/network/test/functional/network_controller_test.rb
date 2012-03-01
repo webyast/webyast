@@ -35,6 +35,7 @@ class NetworkControllerTest < ActionController::TestCase
     devise_sign_in
     NetworkController.any_instance.stubs(:login_required)
     stubs_functions # stubs actions defined in stubs.rb
+    Network.any_instance.stubs(:save).returns(true)
   end
   
   test "access index html" do
@@ -47,28 +48,16 @@ class NetworkControllerTest < ActionController::TestCase
     assert_equal mime.to_s, @response.content_type
   end
 
-  def test_should_show_it
-    get :index
+  test "access edit html" do
+    get :edit, :id => "eth0"
     assert_response :success
     assert_valid_markup
-
-    assert_not_nil assigns(:default_route)
-    assert_not_nil assigns(:name)
-  end
-
-  def test_with_dhcp
-    get :index, :interface => "eth1"
-    assert_response :success
-    assert_valid_markup
-
-    assert_not_nil assigns(:default_route)
-    assert_not_nil assigns(:name)
   end
 
   def test_dhcp_without_change
-    put :update, { :interface => "eth1", :conf_mode => "dhcp", :default_route => "192.168.1.1", :nameservers => "192.168.1.2 192.168.1.42", :searchdomains => "labs.example.com example.com", :hostname => "arthur", :domain => "britons" }
+    put :update, { :interface => "eth0", :conf_mode => "dhcp", :type => "eth", :default_route => "192.168.1.1", :nameservers => "192.168.1.2 192.168.1.42", :searchdomains => "labs.example.com example.com", :hostname => "arthur", :domain => "britons" }
     assert_response :redirect
-    assert_redirected_to :controller => "controlpanel", :action => "index"
+    assert_redirected_to :controller => "network", :action => "index"
   end
 
 end

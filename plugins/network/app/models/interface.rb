@@ -92,21 +92,37 @@ class Interface < BaseModel::Base
         @ipaddr = (match)? match[1] : ""
       end
     else
-      @ipaddr = ipaddr
+      @ipaddr = ipaddr || ""
     end
     
-    Rails.logger.error "\n Interface #{id} \n IP address: #{ipaddr.inspect} \n booto #{bootproto}\n"
+    Rails.logger.error "\n Interface #{type} \n IP address: #{ipaddr.inspect} \n br #{bridge_ports.inspect}\n"
 
-    @bridge_ports = bridge_ports.split(" ") unless bridge_ports.blank?
-    @bond_slaves = bond_slaves || [] if id && id.match("bond")
+#    @bridge_ports = (bridge_ports.blank?)? [] : bridge_ports.split(" ")
+
+#    if bridge_ports == "String"
+#        @bridge_ports = bridge_ports.split(" ")
+#    else 
+#        @bridge_ports = bridge_ports || [ ]
+#    end
+    if id.match("br")
+        @bridge_ports = (bridge_ports.class == "Array")? bridge_ports.split(" ") : bridge_ports || [ ]
+    end
+    
+    if id.match("bond")
+        @bond_slaves = (bond_slaves.class == "Array")? bond_slaves.split(" ") : bond_slaves || [ ]
+    end
+    
+#    @bond_slaves = bond_slaves.split(" ") || [] if id && id.match("bond")
     @bond_mode,@bond_miimon  = @bond_option.split(" ") unless bond_option.blank?
   end
 
   def self.find( which )
     YastCache.fetch(self, which) do
       response = YastService.Call("YaPI::NETWORK::Read")
+      
       ifaces_h = response["interfaces"]
-
+      Rails.logger.error "\n\n *** Response: \n  #{ifaces_h.inspect} *** \n\n"
+        
       if which == :all
         hash = Hash.new
 
@@ -129,21 +145,20 @@ class Interface < BaseModel::Base
     settings[@id]["bootproto"] = @bootproto
     settings[@id]["ipaddr"] = @ipaddr unless @ipaddr.empty? 
 
-    Rails.logger.error "*** TYPE #{@type} || #{self.type}"
-    
     case self.type
       when "vlan"
         settings[@id]["vlan_id"] =  self.vlan_id || ""
         settings[@id]["vlan_etherdevice"] = self.vlan_etherdevice || ""
-      when "bridge"
+      when "br"
         settings[@id]["bridge"] = "yes"
-        settings[@id]["bridge_ports"] = @bridge_ports.map{|k,v| k if v=="1"}.compact.join(' ').to_s || ""
+        settings[@id]["bridge_ports"] = @bridge_ports
       when "bond"
         settings[@id]["bond"] = "yes"
         settings[@id]["bond_option"] = @bond_option || ""
-        settings[@id]["bond_slaves"] = @bond_slaves.map{|k,v| k if v=="1"}.compact.join(' ').to_s
+        settings[@id]["bond_slaves"] = @bond_slaves
       when "eth"
-        Rails.logger.error "ETHERNET"
+        # save only bootproto and ip/netmask
+        Rails.logger.info "ETHERNET"
       else
         Rails.logger.error "ERROR: Wrong interface type"
         return false
