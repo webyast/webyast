@@ -19,10 +19,7 @@
 # you may find current contact information at www.novell.com
 #++
 
-require 'gettext'
-
 class PatchesState
-  include GetText
   def self.read()
     licenses_to_confirm = Dir.glob(File.join(Patch::LICENSES_DIR,"*")).select {|f| File.file? f}
     if !licenses_to_confirm.empty?
