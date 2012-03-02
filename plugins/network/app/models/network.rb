@@ -38,9 +38,11 @@ class Network < BaseModel::Base
 
     ifaces = Hash.new
     @response["interfaces"].each{|id, iface| ifaces[id] = Interface.new(iface, id)}
+
     route = Route.new(@response["routes"]["default"], "default")
     dns = Dns.new(@response["dns"])
     hostname = Hostname.new(@response["hostname"])
+
     return {"interfaces" => ifaces, "routes" => route, "dns" => dns, "hostname" => hostname}
   end
 end

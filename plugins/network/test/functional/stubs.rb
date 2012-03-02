@@ -18,18 +18,35 @@
 
 
   def stubs_functions
+  
+    
     
     #@ifcs = Interface.find :all
     interfaces = { }
-    interfaces["eth0"] = Interface.new({"id" => "eth0", "bootproto" => "static", "ipaddr" => "10.10.4.187/16"})
-    interfaces["eth1"] = Interface.new({"id" => "eth1", "ipaddr" => nil})
+    interfaces["eth0"] = Interface.new({"id" => "eth0", "bootproto" => "static", "ipaddr" => "192.168.178.1"})
+    interfaces["eth1"] = Interface.new({"id" => "eth1", "ipaddr" => nil })
 
 #    interfaces["eth1"] = Interface.new({"id" => "eth1", "bootproto" => "dhcp", "ipaddr" => nil})
     Interface.stubs(:find).with(:all).returns(interfaces)
 
     #ifc = Interface.find(id)
-    eth0 = Interface.new({"id" => "eth1", "bootproto" => "static", "ipaddr" => "10.10.4.187/16"})
-    eth1 = Interface.new({"id" => "eth0", "ipaddr" => nil})
+    eth0 = Interface.new({"id" => "eth0", "bootproto" => "static", "vendor" => "vendor", "ipaddr" => "10.10.4.187/16"})
+    eth1 = Interface.new({"id" => "eth1", "ipaddr" => nil, "vendor" => "vendor"})
+    
+    # network = Network.find
+    route = Route.new({"via"=>"192.168.178.1"}, "default")
+    dns = Dns.new("nameservers"=>["192.168.178.1"], "searches"=>["example.com"])
+    hostname = Hostname.new("dhcp_hostname"=>"1", "name"=>"test", "domain"=>"example.com")
+
+    network = {
+         "routes"=> route, 
+         "dns"=> dns,
+         "hostname"=> hostname,      
+         "interfaces"=> { "eth0" => eth0, "eth1" => eth1}
+    }
+
+    Network.stubs(:find).returns(network)
+    
     
     Interface.stubs(:find).with("eth0").returns(eth0)
     Interface.stubs(:find).with("eth1").returns(eth1)

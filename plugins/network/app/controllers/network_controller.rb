@@ -40,6 +40,7 @@ class NetworkController < ApplicationController
     authorize! :read, Network
 
     network = Network.find
+    
     @hostname = network["hostname"]
     @dns = network["dns"]
     @routes = network["routes"]

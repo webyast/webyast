@@ -49,12 +49,18 @@ class NetworkControllerTest < ActionController::TestCase
   end
 
   test "access edit html" do
-    get :edit, :id => "eth0"
+    mime = Mime::HTML
+    @request.accept = mime.to_s
+    
+    get :edit, :id => "eth1"
     assert_response :success
     assert_valid_markup
   end
 
   def test_dhcp_without_change
+    mime = Mime::HTML
+    @request.accept = mime.to_s
+    
     put :update, { :interface => "eth0", :conf_mode => "dhcp", :type => "eth", :default_route => "192.168.1.1", :nameservers => "192.168.1.2 192.168.1.42", :searchdomains => "labs.example.com example.com", :hostname => "arthur", :domain => "britons" }
     assert_response :redirect
     assert_redirected_to :controller => "network", :action => "index"
