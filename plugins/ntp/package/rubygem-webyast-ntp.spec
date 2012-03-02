@@ -99,7 +99,7 @@ mkdir -p $RPM_BUILD_ROOT/%{_libdir}/ruby/gems/%{rb_ver}/gems/%{mod_full_name}/lo
 %webyast_update_assets
 
 %postun
-%webyast_update_assets
+%webyast_remove_assets
 
 %files 
 %defattr(-,root,root,-)

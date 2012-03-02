@@ -138,8 +138,7 @@ rccollectd try-restart
 %webyast_update_assets
 
 %postun
-%webyast_update_assets
-
+%webyast_remove_assets
 
 %files
 

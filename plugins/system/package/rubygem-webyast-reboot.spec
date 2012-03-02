@@ -107,8 +107,7 @@ if [ $1 -eq 0 ] ; then
   polkit-auth --user %{webyast_ws_user} --revoke org.freedesktop.consolekit.system.restart >& /dev/null || true
   polkit-auth --user %{webyast_ws_user} --revoke org.freedesktop.consolekit.system.restart-multiple-users >& /dev/null || true
 fi
-
-%webyast_update_assets
+%webyast_remove_assets
 
 %files 
 %defattr(-,root,root,-)

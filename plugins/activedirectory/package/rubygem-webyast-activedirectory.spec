@@ -77,7 +77,7 @@ Test::Unit or RSpec files, useful for developers.
 %webyast_update_assets
 
 %postun
-%webyast_update_assets
+%webyast_remove_assets
 
 %check
 
