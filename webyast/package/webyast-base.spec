@@ -36,7 +36,7 @@ Requires:       sysvinit > 2.86-195.3.1
 Requires:       rubygem-passenger-nginx, rubygem-nokogiri
 Requires:       nginx >= 1.0
 Requires:       sqlite3, syslog-ng, check-create-certificate, yast2-dbus-server
-Requires:       webyast-base-branding >= %{version}
+PreReq:         webyast-base-branding >= %{version}
 
 %if 0%{?suse_version} == 0 || %suse_version <= 1130
 Requires:       ruby-dbus
@@ -164,7 +164,7 @@ Testsuite for core WebYaST package.
 %package branding-default
 Group:    Productivity/Networking/Web/Utilities
 Provides: webyast-base-branding = %{version}
-PreReq:	%{name} = %{version}
+Requires: %{name} = %{version}
 Summary:  Branding package for webyast-base package
 
 %description branding-default
