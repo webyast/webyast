@@ -46,7 +46,7 @@ function is_valid() {
 
 // Set #type value
 $(function(){
-  $('fieldset.iselector').on("click", function(){
+  $('fieldset.iselector').live("click", function(){
     $('fieldset.iselector').removeClass("active");
     $(this).addClass("active");
     $("#type").val($(this).data("type"));
@@ -85,7 +85,7 @@ $(function(){
   $disabled = $('#networkForm div.static input');
   $dhcp = $('#dns-conf div.dhcp');
 
-  $('#modeSwitcher a').on('click', function() {
+  $('#modeSwitcher a').live('click', function() {
     var $modes = $('#modeSwitcher a');
     var mode = $(this).html().toLowerCase();
 
