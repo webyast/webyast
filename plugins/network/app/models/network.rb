@@ -43,6 +43,28 @@ class Network < BaseModel::Base
     dns = Dns.new(@response["dns"])
     hostname = Hostname.new(@response["hostname"])
 
+    raise NetworkError.new(@response) if @response.blank?
     return {"interfaces" => ifaces, "routes" => route, "dns" => dns, "hostname" => hostname}
+  end
+end
+
+
+require 'exceptions'
+class NetworkError < BackendException
+  def initialize(response)
+    @message = "ERROR: YaPI::NETWORK::Read returns -> #{response.inspect}"
+    Rails.logger.error @message
+    super("Failed to load network configuration setting")
+  end
+
+  def to_xml
+    xml = Builder::XmlMarkup.new({})
+    xml.instruct!
+
+    xml.error do
+      xml.type "NETWORK_ERROR"
+      xml.description @message
+      xml.output @message
+    end
   end
 end
