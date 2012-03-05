@@ -157,7 +157,7 @@
           <a class="btn lbtn" href="#" value="dhcp">DHCP</a>
           <a class="btn mbtn" href="#" value="static">STATIC</a>
           <a class="btn rbtn on" href="#" value="none">NONE</a>
-        <% elsif (@ifc.bootproto == 'dhcp') %>
+        <% elsif (@ifc.bootproto.match('dhcp')) %>
           <a class="btn lbtn on" href="#" value="dhcp">DHCP</a>
           <a class="btn mbtn" href="#" value="static">STATIC</a>
           <a class="btn rbtn" href="#" value="none">NONE</a>

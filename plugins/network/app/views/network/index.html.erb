@@ -56,7 +56,7 @@
           <div class="fieldset_body">
             <% @physical.each do |id, interface| %>
               <div class="interface">
-                <div class="img_container">
+                <div class="iface_image">
                   <% img = (interface.ipaddr.blank?)? "eth64.png" : "eth64-active.png" %>
                   <%= image_tag("#{img}") %>
                 </div>
@@ -84,7 +84,7 @@
           <div class="fieldset_body">
             <% @virtual.each do |id, interface| %>
               <div class="interface">
-                <div class="img_container">
+                <div class="iface_image">
                   <% img = (interface.ipaddr.blank?)? "eth64.png" : "eth64-active.png" %>
                   <%= image_tag("#{img}") %>
                 </div>
@@ -103,11 +103,11 @@
                   
                   <% if interface.id.match("bond") %>
                     <p><%= _("Bond option") %>: <%= interface.bond_option %></p>
-                    <p><%= _("Bond slaves") %>: <%= interface.bond_slaves %></p>
+                    <p><%= _("Bond slaves") %>: <%= interface.bond_slaves.join(" ") %></p>
                   <% end %>
 
                 </div>
-                <div class="link_container">
+                <div class="iface_links">
                   <p>
                     <%= link_to _("configure"), :controller => "network", :action => "edit", :id => id %>
                   </p>
@@ -122,7 +122,7 @@
 
         <div class="navigation_link_container">
           <div class="hr">&nbsp;</div>
-          <p><%= link_to _("New virtual interface >>"), {}, :id=>"iface_selection_link", :class=>"page_link" %></p>
+          <p><%= link_to _("New virtual interface"), {}, :id=>"iface_selection_link", :class=>"page_link" %></p>
         </div>
 
       </div>
@@ -130,7 +130,7 @@
       <div class="page">
         <h4 style="font-size:16px; padding:0 20px; margin:0;"><%= _("Please select one of the virtual interfaces")%></h4>
 
-        <%= form_for :network, :url => { :action => "new" }, :html => {:class=>"webyast_form"} do %>
+        <%= form_for :network, :url => { :action => "new" }, :html => {:id=>"interface_type_form", :class=>"webyast_form"} do %>
           <%= hidden_field_tag "type", "vlan" %>
           <fieldset class="webyast_fieldset iselector" data-type="vlan">
             <div class="fieldset_header">
@@ -138,10 +138,10 @@
             </div>
 
             <div class="fieldset_body">
-              <div class="img_container", style="width:10%; float:left;">
+              <div class="iface_image">
                 <%= image_tag("eth64.png") %>
               </div>
-              <div class="iface_details", style="width:90%; float:left;">
+              <div class="iface_details">
                 <div>
                   A <b>virtual local area network</b>, virtual LAN or VLAN, is a group of hosts with a common set of requirements that communicate as if they were attached to the same broadcast domain,
                   regardless of their physical location. A VLAN has the same attributes as a physical local area network (LAN), but it allows for end stations to be grouped together even
@@ -157,19 +157,17 @@
           </div>
 
           <div class="fieldset_body">
-            <div class="interface">
-                <div class="img_container", style="width:10%">
+              <div class="iface_image">
                   <%= image_tag("eth64.png") %>
-                </div>
-                <div class="iface_details", style="width:90%">
-                  <div>
-                    <b>Bridging</b> is a forwarding technique used in packet-switched computer networks. Unlike routing, bridging makes no assumptions about where in a network a particular address is located.
-                    Instead, it depends on flooding and examination of source addresses in received packet headers to locate unknown devices. Once a device has been located, its location
-                    is recorded in a table where the source address is stored so as to avoid the need for further flooding.
-                  </div>
-                </div>
               </div>
-
+              <div class="iface_details">
+                  <div>
+                      <b>Bridging</b> is a forwarding technique used in packet-switched computer networks. Unlike routing, bridging makes no assumptions about where in a network a particular address is located.
+                      Instead, it depends on flooding and examination of source addresses in received packet headers to locate unknown devices. Once a device has been located, its location
+                      is recorded in a table where the source address is stored so as to avoid the need for further flooding.
+                  </div>
+              </div>
+              <div class="clearfix">&nbsp;</div>
           </div>
         </fieldset>
 
@@ -179,27 +177,24 @@
           </div>
 
           <div class="fieldset_body">
-            <div class="interface">
-                <div class="img_container", style="width:10%">
+              <div class="iface_image">
                   <%= image_tag("eth64.png") %>
-                </div>
-                <div class="iface_details", style="width:90%">
-                  <div>
-                    A <b>bond/trunk</b> is a single transmission channel between two points, each point being either the switching center or the node.
-                    In modern communications, trunking is a concept by which a communications system can provide network access to many clients by sharing a set of lines or frequencies instead of providing them individually.
-                  </div>
-                </div>
               </div>
-
+              <div class="iface_details">
+                  <div>
+                      A <b>bond/trunk</b> is a single transmission channel between two points, each point being either the switching center or the node.
+                      In modern communications, trunking is a concept by which a communications system can provide network access to many clients by sharing a set of lines or frequencies instead of providing them individually.
+                  </div>
+              </div>
+              <div class="clearfix">&nbsp;</div>
           </div>
         </fieldset>
 
 
         <div class="navigation_link_container">
           <div class="hr">&nbsp;</div>
-          <%= link_to _("<< back"), {}, :id=>"iface_back_link", :class=>"page_link lright" %>
-          <% link_to _("Submit"), {:controller => "network", :action => "new", :type => "vlan"}, :class=> "page_link fright" %>
-          <%= submit_tag _("Next"), :class=> "page_link fright" %>
+          <%= link_to _("back"), {}, :id=>"iface_back_link", :class=>"page_link lright" %>
+          <%= submit_tag _("next"), :class=> "submit_link fright" %>
           <div class="clearfix">&nbsp;</div>
         </div>
 

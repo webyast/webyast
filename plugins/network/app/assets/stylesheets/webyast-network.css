@@ -73,9 +73,12 @@
 /*}*/
 
 #network_module div.interface { clear:both; overflow:hidden; margin:5px 0px; padding:5px; }
-#network_module div.interface .img_container { float:left; line-height: 44px; vertical-align:middle; width:10%; }
+/*#network_module div.interface .img_container { float:left; line-height: 44px; vertical-align:middle; width:10%; }*/
+
+#network_module div.interface .iface_image { float:left; line-height: 44px; vertical-align:middle; width:10%; }
 #network_module div.interface .iface_details { float:left; width:75%; }
-#network_module div.interface .link_container { float:left; width:10%; text-align:right;}
+#network_module div.interface .iface_links { float:left; width:10%; text-align:right;}
+
 #network_module div.interface p { line-height: 16px; margin:0; }
 #network_module div.interface:hover { background:#eee; }
 
@@ -92,5 +95,10 @@
 #network_module .iselector { border:4px solid transparent; padding:1px; border-radius:0;}
 #network_module .iselector .fieldset_header { border:1px solid #d8d8d8; border-bottom:0px; }
 #network_module .iselector .fieldset_body { border:1px solid #d8d8d8; }
+#network_module .iselector .iface_image { float:left; line-height: 44px; vertical-align:middle; width:10%; }
+#network_module .iselector .iface_details { float:left; width:90%; }
+#page-container .webyast_form .submit_link { background:none; border: medium none; color: #2081C5; font-size: 15px; padding: 0 5px; clear:both; overflow:hidden;}
+#page-container .webyast_form .submit_link:hover { color: orange; text-shadow: none;}
+
 #network_module .iselector:hover { border:4px solid #d8d8d8;  }
 #network_module .iselector.active { border:4px solid #39A33A;  }
