@@ -19,11 +19,11 @@
 */
 
 var currentURL = window.location.toString().split("/");
-var $plugins = $('#webyast_plugins');
 
 //Match the control panel (index page) and enable tracking
 if(currentURL.pop.length == 0) {
   $(function() {
+    var $plugins = $('#webyast_plugins');
     var $data = $plugins.clone();
     var $sortedData = $data.find('li');
     var $filters = $('#filter').find('label.quicksand_button');
@@ -58,11 +58,14 @@ if(currentURL.pop.length == 0) {
 
   initTipsyTooltip = function() {
     var $webyast_plugins = $('#webyast_plugins');
+    console.log("tipsy")
     $webyast_plugins.find('li').unbind('mouseenter mouseleave');
     $webyast_plugins.find('a.plugin_link').tipsy({gravity: 'n', offset: 8, delayIn: 500, live:false, opacity: 0.7 });
+    console.log( $webyast_plugins.find('a.plugin_link'))
   }
 
   var quicksort = function ($plugins, $data) {
+   
    $plugins.find('a').unbind();
    
    $plugins.quicksand($data, {
@@ -125,6 +128,7 @@ if(currentURL.pop.length == 0) {
     //localStorage.clear()
     if(localstorage_supported() && 'last_reset' in localStorage) {    
       // console.log("Sorted by usage")
+      var $plugins = $('#webyast_plugins');
       var $list =  $plugins.find('li');
       var array = [];
       var $collection = [];
@@ -174,6 +178,7 @@ if(currentURL.pop.length == 0) {
 
     } else {
       // console.log("Sorted by name");
+      var $plugins = $('#webyast_plugins');
       var $data = $plugins.clone();
       $data = $data.find('li.main');
 
