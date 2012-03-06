@@ -22,15 +22,18 @@
 <%= content_for :head do %>
 
  <%= stylesheet_link_tag "webyast-services" %>
- <%= stylesheet_link_tag "webyast-plugin-toolbar" %>
+ <%= javascript_include_tag "webyast-services" %>
+ 
+
+ 
+ 
  <!-- borrowed from users, until it is public -->
  <style type="text/css">
     .pad1_2em { padding: 1em 2em; }
     .ui-accordion .ui-accordion-content-active { display: inline; }
  </style>
- <%= javascript_include_tag "jquery.quicksearch.js"-%>
- <%= javascript_include_tag "select_dialog.js" %>
- <%= javascript_include_tag "webyast-services.js" %>
+ 
+ 
 
  <%= render :partial => "shared/notification", :locals => { :module_name => 'services'} %>
 
