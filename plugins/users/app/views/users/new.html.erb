@@ -20,8 +20,7 @@
 -->
 <% content_for :head do %>
  <%= stylesheet_link_tag "webyast-users" %>
- <%= javascript_include_tag "users.js" %>
- <%= javascript_include_tag "select_dialog.js" %>
+ <%= javascript_include_tag "webyast-users" %>
 
 <!-- if no groups, disable validation-->
 <% if can? :groupget, User %>
