@@ -258,7 +258,7 @@ jQuery(function($){
       if(checkUsername($(ev.target), $(this))) {
         showWarning($(this));
 	//highlight effects causes an "this.style.removeAttribute is not a function" error
-        //$(this).effect("highlight", {color:'#fbb'}, 400);
+        $(this).effect("highlight", {color:'#fbb'}, 400);
         if($(ev.target).hasClass('drag')) { $(ev.target).remove(); }
       } else {
         $(ev.target).removeClass('drag').addClass('assigned'); //user
@@ -266,7 +266,7 @@ jQuery(function($){
         if(ev.target.parentNode.tagName == "BODY") {
           $(this).append(ev.target);
           //highlight effects causes an "this.style.removeAttribute is not a function" error
-	  //$(this).parent().effect("highlight", {color:'#AEE6A8'}, 400);
+	      $(this).parent().effect("highlight", {color:'#AEE6A8'}, 400);
         }
         assignUserToRole($(ev.target), $(this));
       }
