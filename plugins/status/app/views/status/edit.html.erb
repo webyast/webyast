@@ -74,8 +74,7 @@
 <% end %>
 
 <div class="plugin-content plugin-border">
-
-<% form_tag( {:action => :save} , { :class=>"webyast_form", :onsubmit => "return validateLimits();"} ) do %>
+<%= form_tag( {:action => :save} , { :class=>"webyast_form", :onsubmit => "return validateLimits();"}) do %>
   <div class="plugin-header">
     <div class="left">
       <label class="plugin-icon-container"><%= image_tag("monitoring.png", :class=>"plugin-icon") %></label>

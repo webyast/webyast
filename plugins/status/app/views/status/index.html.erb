@@ -20,7 +20,6 @@
 -->
 
 <% content_for :head do %>
-  <!--[if IE]><%= javascript_include_tag "excanvas.js" %><![endif]-->
     <%= stylesheet_link_tag "webyast-status" %>
     <%= javascript_include_tag "webyast-base-jqplot.js" %>
 <% end %>
@@ -99,8 +98,6 @@
     });
   <% end %>
 <% end %>
-
-<!--<%= javascript_include_tag :defaults %>-->
 
 <div class="plugin-content plugin-border">
 <div class="webyast_form">

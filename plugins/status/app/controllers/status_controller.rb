@@ -316,6 +316,7 @@ class StatusController < ApplicationController
   def edit
     authorize! :read, Metric
     begin
+      Rails.logger.error "Edit limits *************************************"
       ActionController::Base.benchmark("Graph information from server") do
         @graphs = Graph.find(:all)
       end
