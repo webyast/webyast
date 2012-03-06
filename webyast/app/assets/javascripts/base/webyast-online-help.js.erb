@@ -21,7 +21,7 @@
 var webyastModules = {
   firewall: "Firewall",
   time: "Time",
-  patch: "Updates",
+  patches: "Updates",
   services: "Services",
   registration: "Registration",
   network: "Network",
@@ -58,7 +58,7 @@ $(document).ready(function() {
        
       setTimeout(function(){
         $.get(url, function(data){
-          $('#onlineHelpContent').remove();
+          //$('#onlineHelpContent').remove();
           $('#onlineHelpContent').html(data).append(close);
         });
       }, 800);
@@ -79,7 +79,6 @@ $(document).ready(function() {
       $('a.xref').live('click', function(event){
         event.preventDefault();
         var text = $(this).text().toString();
-//        console.log("text " + text)
         for(var m in webyastModules) {
           var module = webyastModules[m].toString();
           var pattern = new RegExp(module);
