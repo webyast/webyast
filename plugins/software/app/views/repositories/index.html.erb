@@ -21,12 +21,7 @@
 <%# Sort by priority then by name %>
 <% @repos.sort! {|x,y| x.priority == y.priority ? x.name.upcase <=> y.name.upcase : x.priority <=> y.priority} -%>
 
-<% javascript_include_tag "jquery.activity", "notifier" %>
-
 <%= stylesheet_link_tag "webyast-repositories" %>
-<%= stylesheet_link_tag "webyast-plugin-toolbar" %>
-<%= javascript_include_tag "jquery.quicksearch.js"-%>
-
 
 <div class="plugin-content plugin-border">
   <div class="plugin-header">
