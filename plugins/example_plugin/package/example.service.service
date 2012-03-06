@@ -1,5 +1,5 @@
 # DBus service activation config
 [D-BUS Service]
 Name=example.service
-Exec=/usr/local/sbin/exampleService.rb
+Exec=/usr/sbin/exampleService.rb
 User=root
