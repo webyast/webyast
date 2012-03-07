@@ -295,7 +295,7 @@ class Metric
 
   #get last entry of rrd database
   def self.last_db_entry(file)
-    `/bin/sh -c "LC_ALL=C rrdtool last #{file}"` # RORSCAN_ITL ok, as long as no user input
+    `/bin/sh -c "LC_ALL=C /usr/bin/rrdtool last #{file}"` # RORSCAN_ITL ok, as long as no user input
   end
 
   
