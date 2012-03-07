@@ -25,7 +25,7 @@
   <%= javascript_tag do %>
 
   $(document).ready(function(){
-    $("#iframe").attr("src", "https://<%= `hostname --fqdn`.chomp %>:4200");
+    $("#iframe").attr("src", "https://<%= `/bin/hostname --fqdn`.chomp %>:4200");
 
     $("#fullscreen").click(function(){
       $(".webyast_fieldset").css("position", "static");
