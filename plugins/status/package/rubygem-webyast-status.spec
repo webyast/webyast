@@ -83,6 +83,9 @@ mkdir -p $RPM_BUILD_ROOT/usr/share/%{webyast_polkit_dir}
 install -m 0644 %SOURCE1 $RPM_BUILD_ROOT/usr/share/%{webyast_polkit_dir}
 install -m 0644 %SOURCE2 $RPM_BUILD_ROOT/usr/share/%{webyast_polkit_dir}
 
+#metrics configuration
+mkdir -p $RPM_BUILD_ROOT%{webyast_vardir}/status
+
 # LogFile.rb
 mkdir -p $RPM_BUILD_ROOT/usr/share/YaST2/modules/
 cp %{SOURCE3} $RPM_BUILD_ROOT/usr/share/YaST2/modules/
@@ -161,6 +164,7 @@ rccollectd try-restart
 /usr/share/YaST2/modules/LogFile.rb
 
 %dir /usr/share/%{webyast_polkit_dir}
+%attr(0700,%{webyast_user},%{webyast_user}) %dir %{webyast_vardir}/status
 %attr(644,root,root) %config /usr/share/%{webyast_polkit_dir}/org.opensuse.yast.modules.yapi.metrics.policy
 %attr(644,root,root) %config /usr/share/%{webyast_polkit_dir}/org.opensuse.yast.modules.logfile.policy
 %dir /etc/webyast/vendor
