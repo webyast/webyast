@@ -29,10 +29,14 @@ Dir.glob(File.dirname(__FILE__) + "/lib/tasks/*.rake").each do |rake_file|
 end
 
 desc "Deploy for development - create basic dirs and install yast modules."
-task :deploy_local do |t|
+task :deploy_local , [:user] do |t, args|
+  args.with_defaults :user => user = ENV['USER']
   FileUtils.mkdir_p "/usr/share/YaST2/modules/"
   FileUtils.cp_r    "package/LogFile.rb", "/usr/share/YaST2/modules/"
   `rake install_policies`
+  mkdir_p "/var/lib/webyast/status/"
+  chmod 0700, "/var/lib/webyast/status/"
+  chown args.user, nil, "/var/lib/webyast/status/"
 end
 
 desc "Build distribution package (no check, for testing only)"

@@ -25,6 +25,7 @@
 #
 
 require 'builder'
+require 'yast/paths'
 
 class Graph
   require 'yaml'
@@ -90,14 +91,7 @@ class Graph
   # evalualte config directory of the status plugin
   #
   def self.plugin_config_dir()
-    dir = "#{Rails.root}/config" #default
-    File.join(Rails.root, '..', 'plugins').each do |plugin_path|
-      if File.directory?(File.join(plugin_path, "status"))
-        dir = plugin_path+"/status/config"
-        break
-      end
-    end
-    dir
+     File.join YaST::Paths::VAR, "status"
   end
 
   #
