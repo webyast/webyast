@@ -136,7 +136,7 @@ class Metric
     # but because it is not fatal information and if someone hackly run process
     # which itself identify as collectd, then he runs into problems, but no
     # security problem occur
-    ret = `ps xaf | grep '/usr/sbin/collectd' | grep -vc 'grep'` # RORSCAN_ITL
+    ret = `/bin/ps xaf | /usr/bin/grep '/usr/sbin/collectd' | /usr/bin/grep -vc 'grep'` # RORSCAN_ITL
     ret.to_i > 0
   end
 
