@@ -6,5 +6,5 @@ main:
   title: _("Terminal")
   description: _("Web based Terminal Emulator")
   resources: [ terminal ]
-  read_permissions: [ org.opensuse.yast.system.terminal.read ]
+  read_permissions: [ org.opensuse.yast.modules.yapi.terminal.read ]
 
