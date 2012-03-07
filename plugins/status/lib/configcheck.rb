@@ -29,11 +29,10 @@
 
 
 require "yaml"
-require 'yast/paths'
 
 CONFIGURATION_FILE = "status_configuration.yaml"
 KNOWN_KEYS = ['Network', 'CPU', 'Memory', 'Disk']
-PATH = File.join(YaST::Paths::VAR, "status", CONFIGURATION_FILE)
+PATH = File.join("/var/lib/webyast", "status", CONFIGURATION_FILE)
     
 def check_config()
   if File.exist?(PATH)
