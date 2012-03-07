@@ -32,7 +32,7 @@ URL:            http://en.opensuse.org/Portal:WebYaST
 Summary:        WebYaST - system mail settings
 Source:         %{mod_full_name}.gem
 Source1:        MailSettings.pm
-Source2:	org.opensuse.yast.modules.yapi.mailsetting.policy
+Source2:	org.opensuse.yast.modules.yapi.mailsettings.policy
 Source3:        postfix-update-hostname
 BuildRoot:      %{_tmppath}/%{name}-%{version}-build
 
