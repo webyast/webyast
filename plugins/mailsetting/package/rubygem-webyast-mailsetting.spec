@@ -153,7 +153,7 @@ rm -rf $RPM_BUILD_ROOT/%{_libdir}/ruby/gems/%{rb_ver}/gems/%{mod_full_name}/publ
 /etc/sysconfig/network/scripts/postfix-update-hostname
 
 %dir /usr/share/%{webyast_polkit_dir}
-%attr(644,root,root) %config /usr/share/%{webyast_polkit_dir}/org.opensuse.yast.modules.yapi.mailsetting.policy
+%attr(644,root,root) %config /usr/share/%{webyast_polkit_dir}/org.opensuse.yast.modules.yapi.mailsettings.policy
 
 %files doc
 %defattr(-,root,root,-)
