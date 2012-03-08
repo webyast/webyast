@@ -61,7 +61,7 @@ private
 
   def self.cache_valid
     return false unless YastCache.active
-    cache_id = 'permissions:timestamp'
+    cache_id = 'permissions::timestamp'
     #cache contain string as it is only object supported by all caching backends
     cache_timestamp = Rails.cache.read(cache_id).to_i
     current_timestamp = self.get_cache_timestamp
@@ -71,10 +71,13 @@ private
     elsif cache_timestamp < current_timestamp
       Rails.logger.debug "#### Permissions cache expired"
       Rails.cache.write(cache_id, current_timestamp.to_s)
-      YastCache.reset(self)
       return false
     end
     return true
+  end
+
+  def self.reset(user)
+    Rails.cache.delete("permission:#{user}")
   end
 
 
@@ -101,34 +104,44 @@ public
     end
 
     YastService.unlock #unlocking for other thread
-    YastCache.reset(self)
+    self.reset(user)
   end
 
   def self.find(type,restrictions={})
-    self.cache_valid
     filters = {}
+    ret = {}
     #filter out only needed parameters
     restrictions.each {|key, value|
       filters[key.to_sym] = value if %w( filter with_description user_id ).index(key.to_s)
     }
-    YastCache.fetch(self, type, filters) {
-      permission = Permission.new
-      permission.load_permissions(type,filters)
-      permission.permissions
-    }
+    perm_id = "permission:#{filters[:user_id]}"
+    self.reset(filters[:user_id] || "") unless self.cache_valid
+    if filters.size == 1 && filters.has_key?(:user_id)
+      #cache the "common" way of asking permission "has user xyz the permission.."
+      ret = Rails.cache.fetch(perm_id) {
+        permission = Permission.new
+        permission.load_permissions(filters)
+        permission.permissions
+      }      
+    else
+        permission = Permission.new
+        permission.load_permissions(filters)
+        ret = permission.permissions
+    end
+    if (type != :all)
+      ret.delete_if { |perm| !perm[:id].include? type }
+    else
+      ret
+    end
   end
 
   def save
     raise "Unimplemented"
   end
 
-  def load_permissions(type, options)
+  def load_permissions(options)
     semiresult = Permission.all_actions.split(/\n/)
-    if (type != :all)
-      semiresult.delete_if { |perm| !perm.include? type }
-    else
-      semiresult = Permission.filter_nonsuse_permissions semiresult
-    end
+    semiresult = Permission.filter_nonsuse_permissions semiresult
     @permissions = semiresult.map do |value|
       ret = {
         :id => value,
@@ -190,11 +203,11 @@ private
 
 
   def self.filter_nonsuse_permissions (str)
-    @suse_string = "org.opensuse.yast"
+    suse_string = "org.opensuse.yast"
     str.select{ |s|
-      s.include?(@suse_string) &&
-      !s.include?(@suse_string + ".scr") &&
-      !s.include?(@suse_string +".module-manager")
+      s.include?(suse_string) &&
+      !s.include?(suse_string + ".scr") &&
+      !s.include?(suse_string +".module-manager")
     }
   end
 
