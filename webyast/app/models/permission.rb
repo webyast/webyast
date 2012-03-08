@@ -21,7 +21,6 @@
 # Permission class
 #
 require 'exceptions'
-require 'yast_cache'
 require "yast_service"
 require 'yast/config'
 
@@ -60,7 +59,6 @@ private
   end
 
   def self.cache_valid
-    return false unless YastCache.active
     cache_id = 'permissions::timestamp'
     #cache contain string as it is only object supported by all caching backends
     cache_timestamp = Rails.cache.read(cache_id).to_i
@@ -128,6 +126,7 @@ public
         permission.load_permissions(filters)
         ret = permission.permissions
     end
+    ret = ret.dup #has to be dup cause the cache value is frozen
     if (type != :all)
       ret.delete_if { |perm| !perm[:id].include? type }
     else
