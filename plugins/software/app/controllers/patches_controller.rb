@@ -95,8 +95,9 @@ private
     end
 
     if !@msgs.blank? && request.format.html?
-      @msgs.gsub!('<br/>', ' ')
-      flash[:warning] = _("There are patch installation messages available") + details(@msgs)
+      #@msgs.gsub!('<br/>', ' ')
+      @message = @msgs.map{|s| s[:message]}.to_s.gsub(/\n/, '')
+      flash[:warning] = _("There are patch installation messages available") + details(@message)
     end
 
     #checking if a license is requiredrequired

@@ -33,7 +33,7 @@
   <% end %>
 
   <div class="statusbar_row">
-        <%= image_tag("status-warning.png") %>
+        <%= image_tag("warning.png") %>
 	  <% case error_type when :unknown %>
             <%= _("No information about patches available") %>
 	  <% when :unsigned %>
@@ -107,9 +107,14 @@
     <% end %>
 
     <% if patch[:security] > 0 or patch[:important] > 0 or patch[:optional] > 0 %>
-      <div class="update_all">
-        <%= link_to _("Install all"), :update =>"statusbar_patches", :remote => true, :url => { :controller => :patches, :action => :start_install_all}, :confirm => _("Updating all. Are you sure?") %>
-      </div>
+      <!-- <div class="update_all"> -->
+        <% link_to _("Install all"), 
+            :update =>"statusbar_patches", 
+            :url => { :controller => :patches, 
+            :action => :start_install_all}, 
+            :html => {:id=>"install_all"}, :confirm => _("Updating all. Are you sure?") %>
+      <!-- </div> -->
+      <%= link_to "Vote Yes", {:controller=>"patches", :action => 'start_install_all'}, :id => "install_all", :remote=> true %>
     <% end %>
 
   <% if refresh_timeout.to_i > 0 -%>

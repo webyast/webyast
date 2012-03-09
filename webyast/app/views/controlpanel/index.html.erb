@@ -63,16 +63,24 @@
   <% end %>
 <% end %>
 
-<!-- <h3 style="vertical-align: middle;"><%= image_tag("monitoring.png", :height=>"21", :width=>"21", :border=>"0", :style=>'vertical-align: middle;') %> <%= _("Status") %></h3> -->
+
+<% javascript_tag do -%>
+$(function() {
+  $('#install_all').bind('click', function() {
+  
+    console.log("clicked");
+  })
+
+
+});
+
+<% end %>
 
   <div id="status-panel" class="plugin-content" style="">
-    <div id="status-eye">
-  <!--  <img src="/images/loading.gif" style="display:inline-block; background:#eeeeee; -moz-border-radius:100%; margin:0px 32px; height:48px; width:48px;vertical-align:middle;" > -->
-    </div>
+    <div id="status-eye"></div>
 
     <div id="statusbar_status_container">
       <div class="statusbar_header">
-        <!-- <span id="status_indicator"></span> -->
         <label><%= _("System status") %></label>
       </div>
       <div id="statusbar_status">
