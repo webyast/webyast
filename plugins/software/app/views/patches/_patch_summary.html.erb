@@ -107,14 +107,11 @@
     <% end %>
 
     <% if patch[:security] > 0 or patch[:important] > 0 or patch[:optional] > 0 %>
-      <!-- <div class="update_all"> -->
-        <% link_to _("Install all"), 
-            :update =>"statusbar_patches", 
-            :url => { :controller => :patches, 
-            :action => :start_install_all}, 
-            :html => {:id=>"install_all"}, :confirm => _("Updating all. Are you sure?") %>
-      <!-- </div> -->
-      <%= link_to "Vote Yes", {:controller=>"patches", :action => 'start_install_all'}, :id => "install_all", :remote=> true %>
+      
+      <div class="update_all">
+        <%= link_to _("Install all"), {:controller=>"patches", :action => 'start_install_all'}, :remote=> true %>
+      </div>
+
     <% end %>
 
   <% if refresh_timeout.to_i > 0 -%>

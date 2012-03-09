@@ -38,9 +38,9 @@ Webyast::Application.configure do
   config.action_dispatch.best_standards_support = :builtin
 
 # DEVELOPMENT
-#  config.assets.compress = false
-#  config.assets.debug = false
-  
+  config.serve_static_assets = true
+  config.assets.compress = false
+  config.assets.debug = true
   
 #  PRODUCTION 
 #  execute before switch: rake assets:precompile:all RAILS_ENV=development RAILS_GROUPS=assets --trac

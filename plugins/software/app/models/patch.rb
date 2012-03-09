@@ -43,8 +43,8 @@ class Patch < Resolvable
     end
   end
 
-  def self.install_patches to_install
-    to_install.each do |patch|
+  def self.install_patches(patches)
+    patches.each do |patch|
       patch.install
     end
   end

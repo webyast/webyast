@@ -232,7 +232,10 @@ private
   def start_install_all
     authorize! :install, Patch
     logger.info "Start installation of all patches"
-    Patch.install_patches Patch.find(:all)
+    all = Patch.find(:all)
+    #Patch.install_patches(all)
+    logger.info "All #{all.inspect}"
+    logger.info "Show summary"
     show_summary
   end
 
