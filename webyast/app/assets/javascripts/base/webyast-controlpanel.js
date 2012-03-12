@@ -172,7 +172,7 @@ if(currentURL.pop.length == 0) {
 
       //INFO: Control panel index page - insert elements without quick sand animation
       //console.info("Localstorage is not empty")
-      $plugins.html($sorted);
+      //$plugins.html($sorted);
       
       trackRecent();
 
@@ -190,7 +190,7 @@ if(currentURL.pop.length == 0) {
 
       //INFO: Control panel index page - insert elements without quick sand animation
       //console.info("Localstorage empty")
-      $plugins.html($data);
+      //$plugins.html($data);
       trackRecent();
     }
   })
