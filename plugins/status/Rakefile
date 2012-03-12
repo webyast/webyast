@@ -37,6 +37,9 @@ task :deploy_local , [:user] do |t, args|
   mkdir_p "/var/lib/webyast/status/"
   chmod 0700, "/var/lib/webyast/status/"
   chown args.user, nil, "/var/lib/webyast/status/"
+  
+  FileUtils.mkdir_p "/etc/webyast"
+  FileUtils.cp_r    "doc/logs.yml", "/etc/webyast"
 end
 
 desc "Build distribution package (no check, for testing only)"
