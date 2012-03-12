@@ -108,22 +108,41 @@
 
 <p>
   <% measurement_id = "measurement_" + data[:group_id] + "_" + data[:graph_id]%>
-  <%= _("Show last") %> <select name="<%=measurement_id%>" id="<%=measurement_id%>">
-    <option value="5" <%= " selected" if data[:minutes]==5 %>><%= _("5 Minutes") %></option>
-    <option value="15" <%= " selected" if data[:minutes]==15 %>><%= _("15 Minutes") %></option>
-    <option value="30" <%= " selected" if data[:minutes]==30 %>><%= _("30 Minutes") %></option>
-    <option value="60" <%= " selected" if data[:minutes]==60 %>><%= _("1 Hour") %></option>
-    <option value="360" <%= " selected" if data[:minutes]==360 %>><%= _("6 Hours") %></option>
-    <option value="720" <%= " selected" if data[:minutes]==720 %>><%= _("12 Hours") %></option>
+  <%= _("Show last") %> 
+    <select name="<%=measurement_id%>" id="<%=measurement_id%>">
+        <option value="5" <%= " selected" if data[:minutes]==5 %>><%= _("5 Minutes") %></option>
+        <option value="15" <%= " selected" if data[:minutes]==15 %>><%= _("15 Minutes") %></option>
+        <option value="30" <%= " selected" if data[:minutes]==30 %>><%= _("30 Minutes") %></option>
+        <option value="60" <%= " selected" if data[:minutes]==60 %>><%= _("1 Hour") %></option>
+        <option value="360" <%= " selected" if data[:minutes]==360 %>><%= _("6 Hours") %></option>
+        <option value="720" <%= " selected" if data[:minutes]==720 %>><%= _("12 Hours") %></option>
     </select>
+    
+    <% wait_gif_id = measurement_id + '_wait_gif' %>
+    <%= image_tag("wait.gif", :alt=>"wait", :id=> wait_gif_id, :style=>"overflow:hidden;  display:none; vertical-align:middle;") %>
 
-    <%= observe_field(measurement_id,
-      :update => graph_id(data[:group_id], data[:graph_id]),
-      :frequency => 0.25,
-      :loading => "$('#progress').show()",
-      :url => { :action => "evaluate_values", :group_id => data[:group_id], :graph_id => data[:graph_id] },
-      :complete => "$('#progress').hide()",
-      :with => "'minutes=' + value" ) %>
+    <script type="text/javascript">
+      $(document).ready(function() {
+          $('#'+'<%= measurement_id %>').bind("change", function() {
+            var url = '/status/evaluate_values?escape=false&graph_id=' + '<%= data[:graph_id] %>' + '&group_id=' + '<%= data[:group_id] %>';
+            var data = 'minutes=' + $(this).val(); 
+            $('#' + '<%= measurement_id %>' + '_wait_gif').show();
+            
+            var xhr = $.post(url, data, function(data) {
+              $('#' + '<%= graph_id(data[:group_id], data[:graph_id]) %>').html(data)
+            })
+
+            .error(function() { 
+               $('#' + '<%= graph_id(data[:group_id], data[:graph_id]) %>').html('<b><%= escape_javascript _("Error: Cannot get information.") -%></b>');
+            })
+            
+            .complete(function() { 
+                $('#' + '<%= wait_gif_id %>').hide();
+            });
+        });
+    });
+    </script>
+
 </p>
 <p>         
    <div id='<%= graph_id(data[:group_id], data[:graph_id])+"_graph" %>' style='width:400px;height:300px;float:left;'></div>
