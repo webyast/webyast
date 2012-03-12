@@ -40,7 +40,8 @@ private
     installed.each { |patch_id|
       # e.g.: 'suse-build-key;1.0-907.30;noarch;@System'
       attrs = patch_id.split(';')
-      done << Patch.new(:resolvable_id => attrs[1],
+      done << Patch.new(:resolvable_id => patch_id,
+                        :version => attrs[1],
                         :name => attrs[0],
                         :arch => attrs[2],
                         :repo => attrs[3],
@@ -248,7 +249,7 @@ private
 
     #search for patches and collect the ids
     params.each { |key, value|
-      if key =~ /\D*_\d/ || key == "id"
+      if key.start_with?("patch_") || key == "id"
         update_array << value
       end
     }

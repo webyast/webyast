@@ -82,11 +82,11 @@ class PatchTest < ActiveSupport::TestCase
     patches = Patch.find(:available)
     assert_equal 2, patches.size
     patch = patches.first
-    assert_equal "847", patch.resolvable_id
+    assert_equal "847", patch.version
 
     # search one patch
-    patch = Patch.find('847')
-    assert_equal "847", patch.resolvable_id
+    patch = Patch.find("update-test-affects-package-manager;847;noarch;updates-test")
+    assert_equal "847", patch.version
 
     # search non-existing patch
     patch = Patch.find('888')
@@ -118,7 +118,7 @@ class PatchTest < ActiveSupport::TestCase
     end
 
     # install a patch
-    patch = Patch.find('847')
+    patch = Patch.find("update-test-affects-package-manager;847;noarch;updates-test")
     assert patch.install
 
   end

@@ -81,7 +81,7 @@ class Patch < Resolvable
       Rails.logger.info "Job queue is not active. Disable background mode"
       background = false
     end
-    update_id = "#{self.name};#{self.resolvable_id};#{self.arch};#{self.repo}"
+    update_id = self.resolvable_id
     Rails.logger.error "Install Update: #{update_id}"
     unless background
       Patch.install(update_id) #install at once
@@ -100,8 +100,9 @@ class Patch < Resolvable
     begin
       PackageKit.transact("GetUpdates", "none", "Package", bg_status) { |line1,line2,line3|
         columns = line2.split ";"
-        if what == :available || columns[1] == what
-          update = Patch.new(:resolvable_id => columns[1],
+        if what == :available || line2 == what
+          update = Patch.new(:resolvable_id => line2,
+                             :version => columns[1],
                              :kind => line1,
                              :name => columns[0],
                              :arch => columns[2],
