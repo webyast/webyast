@@ -197,8 +197,6 @@ private
       # add 'low' patches to optional
       patches_summary[:optional] += patch_updates.find_all { |p| p.kind == 'low' }.size
     else
-      erase_redirect_results #reset all redirects
-      erase_render_results
       flash.clear #no flash from load_proxy
     end
 
