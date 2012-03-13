@@ -1,5 +1,6 @@
 --- 
 `position: "34700"
 `value: |
-  Jul 20 15:11:35 f77 dhclient: XMT: Solicit on eth0, interval 119610ms.
-  Jul 20 15:13:34 f77 dhclient: XMT: Solicit on eth0, interval 125170ms.
+  1979-01-01 12:00:00 LINE1
+  1979-01-01 12:00:01 LINE2
+
