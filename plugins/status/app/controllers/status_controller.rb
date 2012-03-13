@@ -104,8 +104,7 @@ class StatusController < ApplicationController
     data = log.evaluate_content(pos_begin, lines)
     content = data["`value"] if log
     position = data["`position"].to_i if log
-    render(:partial => 'status_log',
-           :locals => { :content => content, :position => position, :lines => lines, :id => params[:id] }) and return
+    render(:partial => 'status_log', :locals => { :content => content, :position => position, :lines => lines, :id => params[:id] }) and return
   end
 
   def index

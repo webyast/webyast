@@ -69,7 +69,7 @@
             }
           });
         });
-
+        
       <% if @graphs %>
         <% @graphs.each do |group| %>
           <% unless group.single_graphs.blank? %>
@@ -216,22 +216,18 @@
     </div>
   <% end %>
 <% end %>
+
 <% @logs.each do |log| %>
     <div class="list-fieldset">
       <% default_lines=50 %>
       <% frequency=15 %>
       <div class="list-fieldset-header" id="<%="log-#{log.id}-header"%>">
-         <span class='status-icon none'></span>
-         <%= log.description %>
+         <%= log.description %><small> (<%= log.path %>)</small>
       </div>
-        <div id="<%="log-#{log.id}-console"%>" >
-          <%= log.path %>
-        </div>
+      <div id="<%="log-#{log.id}-console"%>" ><!-- log --></div>
     </div>
 <% end %>
 </div>
-
-  
 
   <div class="button_container">
     <div class="nav-buttons">
@@ -242,4 +238,24 @@
   </div>
 </div>
 </div>
+
+
+<%= javascript_tag do %>
+    $(document).ready(function() {
+        $("a.loglink").live("click", function() {
+            var url = $(this).attr("href");
+            var target = $(this).data("target");
+            
+            var xhr = $.get(url, function(data) {
+              $('#'+ target).html(data)
+            })
+
+            xhr.error(function() { 
+                 $('#'+ target).html('<b><%= escape_javascript _("Error: Cannot get information.") -%></b>');
+            })
+            
+            return false;
+        });
+    });
+<% end %>
 
