@@ -37,9 +37,9 @@ class Patch < Resolvable
   def self.decide_license(accept)
     #we don't know eula id, but as it block package kit, then there is only one license file to decide
     if accept
-      `find #{LICENSES_DIR} -type f -exec mv {} #{ACCEPTED_LICENSES_DIR} \\;`
+      `/usr/bin/find #{LICENSES_DIR} -type f -exec /bin/mv {} #{ACCEPTED_LICENSES_DIR} \\;`
     else
-      `find #{LICENSES_DIR} -type f -delete`
+      `/usr/bin/find #{LICENSES_DIR} -type f -delete`
     end
   end
 

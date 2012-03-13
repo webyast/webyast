@@ -28,10 +28,10 @@ class PatchesState
       return { :level => "warning",
                :message_id => "PATCH_EULA",
                :short_description => _("EULA accept required"),
-               :long_description => _("Package require accept specific EULA before its installation. Please follow bellowed link."),
+               :long_description => _("Package require accept specific EULA before its installation. Please follow the link."),
                :details => "",
                :confirmation_host => "client",
-               :confirmation_link => "/patch_updates/license",
+               :confirmation_link => "/patches/license",
                :confirmation_label => _("decide"),
                :confirmation_kind => "link" }
 
@@ -45,7 +45,7 @@ class PatchesState
                :long_description => messages,
                :details => "",
                :confirmation_host => "service",
-               :confirmation_link => "/patch_update/state",
+               :confirmation_link => "/patches/state",
                :confirmation_label => _("OK"),
                :confirmation_kind => "button" }
     else
