@@ -30,7 +30,6 @@ class PatchesState
                :short_description => _("EULA accept required"),
                :long_description => _("Package require accept specific EULA before its installation. Please follow the link."),
                :details => "",
-               :confirmation_host => "client",
                :confirmation_link => "/patches/license",
                :confirmation_label => _("decide"),
                :confirmation_kind => "link" }
@@ -44,8 +43,7 @@ class PatchesState
                :short_description => _("Patch installation messages not confirmed"),
                :long_description => messages,
                :details => "",
-               :confirmation_host => "service",
-               :confirmation_link => "/patches/state",
+               :confirmation_link => "/patches/message",
                :confirmation_label => _("OK"),
                :confirmation_kind => "button" }
     else

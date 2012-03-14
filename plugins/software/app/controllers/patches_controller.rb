@@ -26,7 +26,7 @@ require 'base'
 class PatchesController < ApplicationController
 
   # always check permissions
-  before_filter :check_read_permissions, :only => [:index, :show, :show_summary, :load_filter, :license]
+  before_filter :check_read_permissions, :only => [:index, :show, :show_summary, :load_filter, :license, :message]
 
 private
 
@@ -267,6 +267,21 @@ private
       end
     end
     render :show
+  end
+
+  def message
+    authorize! :install, Patch
+
+    logger.warn "Confirmation of reading patch messages"
+    File.delete Patch::MESSAGES_FILE
+    YastCache.delete(Plugin.new(),"patch")
+    respond_to do |format|
+      format.html {
+        redirect_to "/"
+      }
+      format.xml  { head :ok }
+      format.json { head :ok }
+    end
   end
 
   def license

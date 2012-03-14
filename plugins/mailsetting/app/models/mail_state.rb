@@ -42,7 +42,6 @@ class MailState
                :short_description => _("Mail configuration test not confirmed"),
                :long_description => _("While configuring mail, a test mail was sent to %s . Was the mail delivered to this address?<br>If so, confirm it by pressing the button. Otherwise check your mail configuration again.") % mail.chomp,
 	       :details	=> details,
-               :confirmation_host => "service",
                :confirmation_link => "/mail/state",
                :confirmation_label => _("Test mail received"),
                :confirmation_kind => "button" } 

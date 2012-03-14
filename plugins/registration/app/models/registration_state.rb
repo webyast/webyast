@@ -26,7 +26,6 @@ class RegistrationState
                :message_id => "MISSING_REGISTRATION",
                :short_description => _("Registration is missing"),
                :long_description => _("Please register your system in order to get updates."), # RORSCAN_ITL
-               :confirmation_host => "client",
                :confirmation_link => "/registration",
                :confirmation_label => _("register"),
                :confirmation_kind => "link" } 
