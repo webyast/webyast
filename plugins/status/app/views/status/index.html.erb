@@ -180,36 +180,19 @@
                 });
             </script>
           <% end %>
-          <% unless plugin.confirmation_host.blank? || plugin.confirmation_link.blank? %>
-            <% if plugin.confirmation_host == "client" %>
-              <% unless plugin.confirmation_label.blank? %>
-                <% if plugin.confirmation_kind == "button" %>
-                  <%= button_to plugin.confirmation_label, url_for(plugin.confirmation_link) %>
-                <% else %> 
-                  (               
-                  <%= link_to plugin.confirmation_label, url_for(plugin.confirmation_link) %>
-                  )
-                <% end %>
-              <% else %>
-                (
-                <%= link_to plugin.confirmation_link, url_for(plugin.confirmation_link) %>
+          <% unless plugin.confirmation_link.blank? %>
+            <% unless plugin.confirmation_label.blank? %>
+              <% if plugin.confirmation_kind == "button" %>
+                <%= button_to plugin.confirmation_label, url_for(plugin.confirmation_link) %>
+              <% else %> 
+                (               
+                <%= link_to plugin.confirmation_label, url_for(plugin.confirmation_link) %>
                 )
               <% end %>
-            <% end %>
-            <% if plugin.confirmation_host == "service" %>
-              <% unless plugin.confirmation_label.blank? %>
-                <% if plugin.confirmation_kind == "button" %>
-                  <%= button_to plugin.confirmation_label, {:action => :confirm_status, :url => plugin.confirmation_link, :param => plugin.confirmation_label} %>
-                <% else %>
-                  (
-                  <%= link_to plugin.confirmation_label, {:action => :confirm_status, :url => plugin.confirmation_link, :param => plugin.confirmation_label} %>
-                  )
-                <% end %>
-              <% else %>
-                (
-                <%= link_to "<service>"+plugin.confirmation_link, {:action => :confirm_status, :url => plugin.confirmation_link} %>
-                )
-              <% end %>
+            <% else %>
+              (
+              <%= link_to plugin.confirmation_link, url_for(plugin.confirmation_link) %>
+              )
             <% end %>
           <% end %>
         </div>
