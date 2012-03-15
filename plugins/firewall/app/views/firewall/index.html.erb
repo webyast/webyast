@@ -24,6 +24,9 @@
   <%= stylesheet_link_tag "webyast-firewall" %>
 <% end %>
 
+
+<%= render :partial => "shared/notification", :locals => { :module_name => 'firewall' } %>
+
 <% disabled = cannot? :write, Firewall %>
 
 <div class="plugin-content plugin-border">
