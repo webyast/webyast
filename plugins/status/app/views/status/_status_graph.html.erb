@@ -22,8 +22,16 @@
 %>
 <%= report_error(error, _("A problem occured when loading status information.")) if error %>
 
-<% if data %>
+<% unless data.blank? %>
 <script type="text/javascript">
+  var empty = '<%= data[:lines].first[:values].blank? %>' == "true";
+  console.log(empty)
+
+  if(empty) {
+     console.log("No data available");
+     $('#' + "<%= graph_id(data[:group_id], data[:graph_id])+"_graph" %>").html('<b><%= _("No data available")%></b>');
+  } else {
+     console.log("Draw graph")
 
   $.jqplot('<%=graph_id(data[:group_id], data[:graph_id])+"_graph"%>',  [
   <% counter = 0 %>
@@ -104,6 +112,8 @@
       zoom:true
     } 
   });
+
+  }
 </script>
 
 <p>
