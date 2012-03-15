@@ -104,7 +104,7 @@ private
 
   def init_cache(controller_name = request.parameters["controller"])
     return unless YastCache.active #Does not make sense if cache is not active
-    if request && request.request_method == :get
+    if request && request.request_method == "GET"
       return unless (request.parameters["action"] == "show" ||
                      request.parameters["action"] == "index")
       #finding the correct cache name
