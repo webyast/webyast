@@ -30,7 +30,7 @@ function Notify(params) {
     url: "/notifier?plugin=" + params.module,
     statusCode: {
       200:function() { 
-        var message = '<%= _("Data has been changed") %>';
+        var message = "Data has been changed";
         $.modalDialog.info({ message: message});
         setTimeout('pageRefresh()', 1000);
       },
