@@ -114,7 +114,8 @@ private
         logger.info("Cache model for controller #{controller_name} not found")
         return
       end
-      data_cache = DataCache.find_by_path_and_session(path, self.current_account.remember_token)
+
+      data_cache = DataCache.find_by_path_and_session(path, session["session_id"])
       found = false
       data_cache.each { |cache|
         found = true
@@ -123,7 +124,8 @@ private
           cache.save
         end
       } unless data_cache.blank?
-      DataCache.create(:path => path, :session => self.current_account.remember_token,
+
+      DataCache.create(:path => path, :session => session["session_id"],
                        :picked_md5 => nil, :refreshed_md5 => nil) unless found
     end
   end
