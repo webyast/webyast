@@ -18,33 +18,35 @@
 #++
 */
 
-//
-    
 var timer = 0;
 function notification(params, interval, inactive) {
   timer = window.setInterval(function() { Notify(params); },5000);
 }
 
-function Notify(params) {
-  $.getJSON("/notifier?plugin=" + params.module, function(result, status, xhr) {
-    switch(xhr.status){
-        case 200:
-          console.log("RELOAD is NEEDED: " + xhr.status);
-          $.modalDialog.info( {message: 'Data has been changed!'});
-          setTimeout('pageRefresh()', 1000)
-        break
-        case 304:
-          console.log("CACHE is UP-TO-DATE: " + xhr.status); 
-        break
-        case 306:
-          console.log("CACHE is not available: " + xhr.status); 
-	  window.clearInterval(timer);
+function pageRefresh() { location.reload(); }
 
-        break
-        default: 
-          console.log("ERROR: unknown HTTP status: " + xhr.status);
-	  window.clearInterval(timer);
-        break
+function Notify(params) {
+  $.ajax({
+    url: "/notifier?plugin=" + params.module,
+    statusCode: {
+      200:function() { 
+        var message = '<%= _("Data has been changed") %>';
+        $.modalDialog.info({ message: message});
+        setTimeout('pageRefresh()', 1000);
+      },
+      
+      306:function() { 
+        console.info("cache is disabled"); 
+        window.clearInterval(timer);
+      },
+      
+      404:function() { 
+        window.clearInterval(timer);
+      },
+      
+      500:function() { 
+        window.clearInterval(timer); 
       }
+    }
   });
 }
