@@ -1,6 +1,6 @@
 # This plugin is excluded from the menu, to re-enable it, rename this file to shortcuts.yml
 main:
-  icon: '/icons/yast-system.png'
+  icon: 'yast-system.png'
   url: /services
   groups: [ System ]
   main: [true]

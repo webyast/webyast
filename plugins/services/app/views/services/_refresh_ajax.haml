@@ -1,0 +1,21 @@
+- content_for :head do
+  - srvname = escape_javascript service_name
+  :javascript
+    $(document).ready(function() {
+        $("#refresh_#{srvname}").bind("ajax:beforeSend",
+        function() {
+          disable_buttons('#{srvname}');
+          $('#spinner_#{srvname}').show();
+          $('#refresh_#{srvname}').hide();
+        }).bind("ajax:success", function(xhr, data, status) {
+          $('#service_status_#{srvname }').html(data);
+        }).bind("ajax:error", function(xhr, data, status) {
+          $('#service_status_#{srvname }').html("#{escape_javascript _("Error: Refresh failed")}");
+        }).bind("ajax:complete", function () {
+          $('#spinner_#{srvname}').hide();
+          $('#refresh_#{srvname}').show();
+          toggle_service_info('#{srvname }');
+          enable_buttons('#{srvname }');
+        }
+      );
+    });

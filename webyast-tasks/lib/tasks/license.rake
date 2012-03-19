@@ -63,11 +63,32 @@ def license_report
     elsif fn =~ /COPYING/
       report[:skipped] << "#{fn}: skipped by name match (already contain license)"
       next
+    elsif fn =~ /Rakefile/
+      report[:skipped] << "#{fn}: skipped by name match (Rakefile)"
+      next
+    elsif fn =~ /browsing_test.rb/
+      report[:skipped] << "#{fn}: skipped by name match (browsing_test.rb)"
+      next
+    elsif fn =~ /model_attributes.rb/
+      report[:skipped] << "#{fn}: skipped by name match (model_attributes.rb)"
+      next
+    elsif fn =~ /Gemfile/
+      report[:skipped] << "#{fn}: skipped by name match (Gemfile)"
+      next
     elsif fn =~ /\/rrdtool.*\.txt/
       report[:skipped] << "#{fn}: skipped by name match (rrdtool output is not licensed)"
       next
     elsif fn =~ /\.changes\z/
       report[:skipped] << "#{fn}: skipped by name match (changes file)"
+      next
+    elsif fn =~ /\.haml\z/
+      report[:skipped] << "#{fn}: skipped by name match (haml file)"
+      next
+    elsif fn =~ /\.ycp\z/
+      report[:skipped] << "#{fn}: skipped by name match (ycp file)"
+      next
+    elsif fn =~ /\.xcf\z/
+      report[:skipped] << "#{fn}: skipped by name match (xcf file)"
       next
     elsif fn =~ /vendor\/plugins/
       report[:skipped] << "#{fn}: skipped by name match (polkit policy file)"
@@ -80,6 +101,9 @@ def license_report
       next
     elsif fn =~ /\.po\z/ || fn =~ /\.mo\z/
       report[:skipped] << "#{fn}: skipped by name match (translation file)"
+      next
+    elsif fn =~ /\.gemspec\z/ || fn =~ /\.mo\z/
+      report[:skipped] << "#{fn}: skipped by name match (gemspec file)"
       next
     elsif fn =~ /\.curl\z/
       report[:skipped] << "#{fn}: skipped by name match (test fixture)"
@@ -118,7 +142,7 @@ def license_report
     end
   end
 
-  puts "\nMissing license:"
+  puts "\nMissing license:" unless report[:missing].empty?
   report[:missing].each { |m| puts m }
   exit 1 unless report[:missing].empty?
   verbose "\nSkipped files:"

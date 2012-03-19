@@ -20,25 +20,58 @@
 #++
 
 require 'yast_service'
+require 'yast_cache'
+require 'base'
+require 'builder'
 
 # User model, not ActiveRecord based, but a
 # thin model over the YaPI, with some
 # ActiveRecord like convenience API
-class User
+class User < BaseModel::Base
   
-  attr_accessor_with_default :cn, ""
-  attr_accessor_with_default :uid, ""
-  attr_accessor_with_default :uid_number, ""
-  attr_accessor_with_default :gid_number, ""
-  attr_accessor_with_default :grouplist, {}
-  attr_accessor_with_default :groupname, ""
-  attr_accessor_with_default :home_directory, ""
-  attr_accessor_with_default :login_shell, "/bin/bash"
-  attr_accessor_with_default :user_password, ""
-  attr_accessor_with_default :user_password2, ""
-  attr_accessor_with_default :type, "local"
-  attr_accessor_with_default :grp_string, ""
-  attr_accessor_with_default :roles_string, ""
+  attr_writer :cn, :uid, :uid_number, :gid_number, :grouplist, :groupname, :home_directory, :login_shell, 
+              :user_password, :user_password2, :type, :grp_string, :roles_string
+
+
+  def cn
+    @cn ||  ""
+  end
+  def uid
+    @uid || ""
+  end
+  def uid_number
+    @uid_number || ""
+  end
+  def gid_number
+    @gid_number || ""
+  end
+  def grouplist
+    @grouplist || {}
+  end
+  def groupname
+    @groupname || ""
+  end
+  def home_directory
+    @home_directory || ""
+  end
+  def login_shell
+    @login_shell || "/bin/bash"
+  end
+  def user_password
+    @user_password || ""
+  end
+  def user_password2
+    @user_password2 || ""
+  end
+  def type
+    @type || "local"
+  end
+  def grp_string
+    @grp_string || ""
+  end
+  def roles_string
+    @roles_string || ""
+  end
 
   # Prevents a user from submitting a crafted form that bypasses activation
   # anything else you want your user to change should be added here.

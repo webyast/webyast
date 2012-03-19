@@ -1,9 +1,0 @@
-main:
-  icon: '/icons/yast-mail-server.png'
-  url: /mail
-  groups: [ Accounts ]
-  tags: [ mail, network]
-  title:  _("Mail Settings")
-  description: _("Manage outgoing mail settings")
-  read_permissions: [ org.opensuse.yast.modules.yapi.mailsettings.read ]
-

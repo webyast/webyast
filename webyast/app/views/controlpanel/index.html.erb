@@ -1,0 +1,199 @@
+<%#
+#-- RORSCAN_ICF
+# Webyast Webclient framework
+#
+# Copyright (C) 2009, 2010 Novell, Inc.
+#   This library is free software; you can redistribute it and/or modify
+# it only under the terms of version 2.1 of the GNU Lesser General Public
+# License as published by the Free Software Foundation.
+#
+#   This library is distributed in the hope that it will be useful, but WITHOUT
+# ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
+# FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public License for more
+# details.
+#
+#   You should have received a copy of the GNU Lesser General Public
+# License along with this library; if not, write to the Free Software
+# Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA
+#++
+%>
+
+
+<% display_patches = ControlPanelConfig.read 'display_patch_status', true %>
+<% display_status = ControlPanelConfig.read 'display_system_status', true %>
+<% status_present = Rails::Engine::Railties.engines.find {|e| e.class.to_s == "WebYaST::StatusEngine"} %>
+<% patches_present = Rails::Engine::Railties.engines.find {|e| e.class.to_s == "WebYaST::SoftwareEngine"} %>
+
+
+<% if status_present && display_status %>
+  <% content_for :head do %>
+    <% javascript_tag do -%>
+      $(document).ready( function() {
+        $.ajax({
+          type: 'GET',
+          url: '<%= url_for({ :controller => :status, :action => :show_summary, :background => true }) -%>',
+          success: function(data, status, xhr) {
+            $('#statusbar_status').html(data);
+          },
+          error: function(xhr, status, error) {
+            $('#statusbar_status').html('<b><%= escape_javascript _("Error: Cannot check the current status.") -%></b>');
+          }
+        });
+      });
+    <% end -%>
+  <% end %>
+<% end %>
+
+<% if patches_present && display_patches %>
+  <% content_for :head do %>
+    <% javascript_tag do -%>
+      $(document).ready( function() {
+        $.ajax({
+          type: 'GET',
+          url: '<%= url_for({ :controller => :patches, :action => :show_summary, :background => true }) -%>',
+          success: function(data, status, xhr) {
+            $('#statusbar_patches').html(data);
+          },
+          error: function(xhr, status, error) {
+            $('#statusbar_patches').html('<b><%= escape_javascript _("Error: Cannot check the current status.") -%></b>');
+          }
+        });
+      });
+    <% end -%>
+  <% end %>
+<% end %>
+
+
+<% javascript_tag do -%>
+$(function() {
+  $('#install_all').bind('click', function() {
+  
+    console.log("clicked");
+  })
+
+
+});
+
+<% end %>
+
+  <div id="status-panel" class="plugin-content" style="">
+    <div id="status-eye"></div>
+
+    <div id="statusbar_status_container">
+      <div class="statusbar_header">
+        <label><%= _("System status") %></label>
+      </div>
+      <div id="statusbar_status">
+        <% if status_present %>
+          <% if display_status %>
+            <div class="statusbar_row">
+              <%= image_tag("working.gif", :class => "small-working-icon") %>
+              <label><%= _("Loading system information") %></label> <!-- RORSCAN_ITL -->
+            </div>
+          <% else %>
+            <div class="statusbar_row">
+              <div class="status-icon optional"></div>
+              <span><%= _("System status summary is disabled in the config file.") %></span> <!-- RORSCAN_ITL -->
+            </div>
+          <% end %>
+        <% else %>
+          <div class="statusbar_row">
+            <%= _("Status plugin is not installed.") %>
+          </div>
+        <% end %>
+      </div>
+    </div>
+
+    <div id="statusbar_patches_container">
+      <div class="statusbar_header">
+        <!-- <span id="patches_indicator"></span> -->
+        <label><%= _("System updates") %></label>
+      </div>
+      <div id="statusbar_patches">
+        <% if patches_present %>
+          <% if display_patches %>
+          <div class="statusbar_row">
+            <%= image_tag("working.gif", :class => "small-working-icon") %>
+            <label><%= _("Loading patch information") %></label>
+          </div>
+          <% else %>
+          <div class="statusbar_row">
+            <div class="status-icon optional"></div>
+            <span><%= _("Patch status summary is disabled in the config file.") %></span>
+          </div>
+        <% end %>
+      <% else %>
+        <div class="statusbar_row">
+          <%= _("Patch plugin is not installed.") %>
+        </div>
+      <% end %>
+      </div>
+    </div>
+
+    <% if Rails::Engine::Railties.engines.find {|e| e.class.to_s == "WebYaST::SystemEngine"} %>
+      <div id="statusbar-actions">
+          <div class="statusbar_row">
+            <%= link_to _('Reboot'), {:controller => 'system', :action => 'reboot'}, :confirm => _("Really reboot the machine?"), :method => :put, :class => 'button' %>
+          </div>
+          <div class="statusbar_row">
+            <%= link_to _('Shutdown'), {:controller => 'system', :action => 'shutdown'}, :confirm => _("Really shutdown the machine?"), :method => :put, :class => 'button' %>
+          </div>
+      </div>
+    <% end %>
+  </div>
+
+  <!--CONFIGURATION-->
+<!--  <h3 style="vertical-align: middle;"><%= image_tag("yast-config.png", :height=>"23", :width=>"23", :border=>"0", :style=>'vertical-align: middle;') %> <%= _("Configuration") %></h3> -->
+  <div id="favorites" class="plugin-content">
+    <div class="overview" style="">
+       <div id="filter">
+          <span id="filter_recent" id="visible_filters">
+            <span value="Recently used" style="font-size:14px;"><%= _("Frequently used modules:") %></span>
+          </span>
+
+          <label id="filter_all" value="All" class="quicksand_button quicksand_button_right" value="All" style="float:right"><%= _("All") %></label>
+
+          <span id="hidden_filters">
+            <% @shortcuts.values.reject {|d| d['disabled']}.index_by {|r| r['groups']}.values.each_with_index do | shortcut, i | %>
+              <% array = Array['quicksand_button_left', 'quicksand_button_center', 'quicksand_button_right'] %>
+              <label value="<%= shortcut['groups'] %>" class="quicksand_button <%= array[i] %>" ><%= _(shortcut['groups'].to_s) %></label>
+            <% end %>
+          </span>
+      </div>
+
+      <% if @shortcuts.empty? %>
+        <h4 id="warning_message_text">
+          <%= image_tag("dialog-warning.png", :style=>"vertical-align:middle;", :height=>"40", :width=>"42", :border=>"0") %>
+          <%= _("WebYaST modules are not installed on your system!") %>
+        </h4>
+       <% elsif  !@shortcuts.empty? && @count == 0 %>
+        <h4 id="warning_message_text">
+          <%= image_tag("dialog-warning.png", :style=>"vertical-align:middle;", :height=>"40", :width=>"42", :border=>"0") %>
+          <%= _("You have no permissions to see or change the modules, please contact the administrator to set up permissions first!") %>
+        </h4>
+      <% else %>
+
+        <div style="margin:0 auto; position:relative;">
+          <ul id="webyast_plugins" class="image-grid">
+            <% @shortcuts.values.reject{|v| v['disabled']}.sort_by {|v| v['title']}.each_with_index do |data, index| %>
+              <% html_map = {:class => "plugin_link"} %>
+              <% html_map['original-title'] = data['description'] unless data["description"].blank? %>
+              <% if data['main'] %>
+                <li id="module<%= index %>" data-id="id-<%= index%>" data-type="<%= data['groups'] %>" class="main">
+              <% else %>
+                <li id="module<%= index %>" data-id="id-<%= index%>" data-type="<%= data['groups'] %>" class="<%= data['groups'] %>">
+              <% end %>
+                <%= link_to(data['url'], html_map) do %>
+                  <%= image_tag(data['icon'] ) %>
+                  <strong><%= _(data['title']) %></strong>
+               <% end %>
+              </li>
+            <% end %>
+          </ul>
+        </div>
+      <% end %>
+
+      <div style="clear:both;"></div>
+    </div><!--overview-->
+  </div><!--favorites-->
+

@@ -1,10 +1,10 @@
 main:
-  icon: '/icons/yast-product-registration.png'
-  url: /registration/registration
+  icon: 'yast-product-registration.png'
+  url: registration
   groups: [ System ]
   tags: [ registration ]
   title: _("Registration")
   description: _("System Registration")
   resources: [ registration ]
-  read_permissions: [ org.opensuse.yast.modules.ysr.getregistrationconfig ]
+  read_permissions: [ org.opensuse.yast.modules.yapi.register.getregistrationconfig ]
 

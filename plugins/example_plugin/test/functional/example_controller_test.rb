@@ -20,16 +20,14 @@
 #++
 
 require File.expand_path(File.dirname(__FILE__) + "/../test_helper")
+require File.join(RailsParent.parent, "test","devise_helper")
 #dbus stubbing
 require File.expand_path( File.join("test","dbus_stub"), RailsParent.parent )
 
 class ExampleControllerTest < ActionController::TestCase
-  fixtures :accounts
   TEST_STRING="test"
   def setup    
-    @controller = ExampleController.new
-    @request = ActionController::TestRequest.new
-    @request.session[:account_id] = 1 # defined in fixtures
+    devise_sign_in
     Example.any_instance.stubs(:load_content).returns("test")
     Example.stubs(:find).returns(Example.new)
     Example.any_instance.stubs(:update).returns(true)

@@ -21,10 +21,8 @@
 
 class NtpController < ApplicationController
 
-  before_filter :login_required
-
   def show
-   	ntp = Ntp.find
+    ntp = Ntp.find
 
     respond_to do |format|
 	    format.xml  { render :xml => ntp.to_xml}
@@ -39,9 +37,9 @@ class NtpController < ApplicationController
     end
 	
     ntp = Ntp.new(root)
-  	yapi_perm_check "ntp.synchronize" if ntp.actions[:synchronize]
-  	yapi_perm_check "ntp.setserver" if (ntp.actions[:ntp_server]!=Ntp.get_servers)
-	  ntp.save	
+    authorize!(:synchronize, Ntp) if ntp.actions[:synchronize]
+    authorize!(:setserver, Ntp)   if (ntp.actions[:ntp_server]!=Ntp.get_servers)
+    ntp.save	
 
     show
   end

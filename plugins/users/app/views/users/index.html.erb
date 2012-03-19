@@ -1,52 +1,43 @@
 <!--
 # Copyright (c) 2009-2010 Novell, Inc.
-# 
+#
 # All Rights Reserved.
-# 
+#
 # This program is free software; you can redistribute it and/or modify it
 # under the terms of version 2 of the GNU General Public License
 # as published by the Free Software Foundation.
-# 
+#
 # This program is distributed in the hope that it will be useful,
 # but WITHOUT ANY WARRANTY; without even the implied warranty of
 # MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
 # GNU General Public License for more details.
-# 
+#
 # You should have received a copy of the GNU General Public License
 # along with this program; if not, contact Novell, Inc.
-# 
+#
 # To contact Novell about this file by physical or electronic mail,
 # you may find current contact information at www.novell.com
 -->
 
 <% content_for :head do %>
- <% if JSMIN == true %>  
-    <%= javascript_include_tag "min/users-min.js"-%>
-    <%= javascript_include_tag "select_dialog.js" %>
-  <% else %>
-    <%= stylesheet_link_tag "webyast-users" %>
-    <%= stylesheet_link_tag "webyast-plugin-toolbar" %>
-    <%= javascript_include_tag "select_dialog.js" %>
-    <%= javascript_include_tag "jquery.quicksearch.js"-%>
-    <%= javascript_include_tag "users.js" %>
-  <% end %>
- 
-<!-- if no groups, disable validation-->
-<% if @permissions[:groupsget] != true %>
-<script language="javascript">
-  function groups_validation(which){ return true; }
-  function def_group_validation(which){ return true; }
-</script>
-<% end %>       
+ <%= stylesheet_link_tag "webyast-users" %>
+ <%= javascript_include_tag "webyast-users" %>
+
+ <!-- if no groups, disable validation-->
+ <% if can? :groupsget, User %>
+ <script>
+   function groups_validation(which){ return true; }
+   function def_group_validation(which){ return true; }
+ </script>
+ <% end %>
 
  <style type="text/css">
 
  </style>
 
- <% javascript_tag do %>
-  var AUTH_TOKEN = 'authenticity_token=' + encodeURIComponent("<%= escape_javascript form_authenticity_token %>");
-  startNotifier({'module':'users', 'AUTH_TOKEN':AUTH_TOKEN}, 1000, 11000);
+ <%= render :partial => "shared/notification", :locals => { :module_name => 'users' } %>
 
+ <%= javascript_tag do %>
  jQuery.expr[':'].Contains = function(a, i, m) {
   return jQuery(a).text().toUpperCase().indexOf(m[3].toUpperCase()) >= 0;
  };
@@ -58,19 +49,19 @@
       selected_title : <%= jss _('Selected Groups') %>,
       unselected_title : <%= jss _('Available Groups') %>,
       tooltip : <%= jss _('Click group names to select/unselect groups') %>,
-      loadItems : function (dialogId) { 
+      loadItems : function (dialogId) {
         return $('#form_'+dialogId+' .grp-string')[0].value.split(",")
       },
-      storeItems : function (dialogId, items) { 
+      storeItems : function (dialogId, items) {
         $('#form_'+dialogId+' .grp-string')[0].value = items.join(",");
       },
-      allItems : function (dialogId) { 
-        return $('#all_grps_string')[0].value.split(",") 
+      allItems : function (dialogId) {
+        return $('#all_grps_string')[0].value.split(",")
       }
     });
     return open_dialog;
   };
-  
+
   function select_default_group_dialog() {
     var open_dialog = select_one_dialog({
       kind : 'group',
@@ -93,14 +84,14 @@
       selected_title : <%= jss _('Selected Roles') %>,
       unselected_title : <%= jss _('Available Roles') %>,
       tooltip : <%= jss _('Click group names to select/unselect roles') %>,
-      loadItems : function (dialogId) { 
+      loadItems : function (dialogId) {
         return $('#form_'+dialogId+' .roles-string')[0].value.split(",")
       },
-      storeItems : function (dialogId, items) { 
+      storeItems : function (dialogId, items) {
         $('#form_'+dialogId+' .roles-string')[0].value = items.join(",");
       },
-      allItems : function (dialogId) { 
-        return $('#all_roles_string')[0].value.split(",") 
+      allItems : function (dialogId) {
+        return $('#all_roles_string')[0].value.split(",")
       }
     });
     return open_dialog;
@@ -108,7 +99,7 @@
 
   $(document).ready(function(){
     var message = <%= jss _("Please wait") -%>;
-    
+
     select_groups_open = select_groups_dialog();
     select_default_group_open = select_default_group_dialog();
     select_roles_open = select_roles_dialog();
@@ -140,7 +131,7 @@
 
    $("#"+id+" .user-password").pstrength({
       'displayMinChar'      : true,
-      'minCharText'      : <%= jss _("Password Strength:") %>, 
+      'minCharText'      : <%= jss _("Password Strength:") %>,
       'verdicts'      : [
             <%= jss _("Weak") %>,
             <%= jss _("Normal") %>,
@@ -166,23 +157,19 @@
           delay: 100
   });
 
-  
+
 
 });//document.ready
 
 <% end %>
 
 <% end %>
-<!-- <div class='plugin-icon'><img alt="yast-users" src='/icons/yast-users.png'/>
-  <%_("Users")%><span id="questionMark">?</span>
-  </div>
-<div class="plugin-content"> -->
 
 <div id="users_index" class="plugin-content plugin-border">
 
   <div class="plugin-header">
     <div class="left">
-      <label class="plugin-icon-container"><img class="plugin-icon" src="/icons/users.png"></label>
+      <label class="plugin-icon-container"><%= image_tag("users.png", :class=>"plugin-icon") %></label>
       <label class="plugin-name"><%= _("Users")%></label>
       <span id="questionMark" class="right" style="margin:0px 5px;">?</span>
     </div>
@@ -199,17 +186,17 @@
     </form>
 
     <span id="action_link_container">
-      <% if @permissions[:useradd] %>
-        <%=link_to image_tag("/icons/users.png", :class=>"action_link_icon") +  _("New User"), :action => :new %>
+      <% if can? :useradd, User %>
+        <%=link_to image_tag("users.png", :class=>"action_link_icon") +  _("New User"), :action => :new %>
       <% end %>
-        <%=link_to image_tag("/icons/groups.png", :class=>"action_link_icon") +  _("Manage Groups"), :controller => "groups" %>
+        <%=link_to image_tag("groups.png", :class=>"action_link_icon") +  _("Manage Groups"), :controller => "groups" %>
     </span>
   </div>
 
   <div style="clear:both; overflow:hidden;"></div>
 
   <div id="users" class="accordion">
-    <% disabled = ! @permissions[:usermodify] %>
+    <% disabled = cannot?(:usermodify, User) %>
     <% for user in @users %>
       <div class="list-fieldset">
         <div class="list-fieldset-header">
@@ -219,7 +206,7 @@
         </div>
 
         <div class='user-content' style="display:none">
-          <% form_for(user, :url => { :action => "update" }, :html => { :method => :put, :id => "form_"+user.uid, :onsubmit => "form_handler('#{user.uid}')", :autocomplete => :off } ) do |f| %>
+          <%= form_for(user, :url => { :action => "update" }, :html => { :method => :put, :id => "form_"+user.uid, :onsubmit => "form_handler('#{user.uid}')", :autocomplete => :off } ) do |f| %>
             <%= render :partial => "user_form", :locals =>{ :f => f, :disabled => disabled, :user => user, :new => false } %>
             <script language="javascript">
                addTabsNavigation(".tabs_<%= user.uid %>", "span");
@@ -233,9 +220,7 @@
 
   <div><input type="hidden" id="all_grps_string" value="<%= @all_grps_string %>" /></div>
   <div><input type="hidden" id="all_roles_string" value="<%= @all_roles_string %>" /></div>
-  
- 
-  
+
   <div class="button_container">
     <div class="nav-buttons">
         <div class="hr">&nbsp;</div>
@@ -245,4 +230,3 @@
   </div>
 
 </div>
-

@@ -2,7 +2,8 @@
 *.bak
 plugins/status/config/status_limits.yaml
 coverage
-nbproject
 plugins/*/package/www.tar.bz2
 pot
-locale
+/plugins/status/nbproject/private/
+/plugins/services/nbproject/private/
+/webyast-tasks/nbproject/private/

@@ -20,21 +20,18 @@
 #++
 
 require 'singleton'
+require 'plugin_job'
+require 'base'
 
 class PatchesController < ApplicationController
 
-  before_filter :login_required
   # always check permissions
-  before_filter :check_read_permissions, :only => [:index, :show, :show_summary, :load_filter, :license]
+  before_filter :check_read_permissions, :only => [:index, :show, :show_summary, :load_filter, :license, :message]
 
-  layout 'main'
-  # Initialize GetText and Content-Type.
-  init_gettext "webyast-software"
-
-  private
+private
 
   def check_read_permissions
-    permission_check "org.opensuse.yast.system.patches.read"  # RORSCAN_ITL
+    authorize! :read, Patch
   end
 
   def collect_done_patches
@@ -43,7 +40,8 @@ class PatchesController < ApplicationController
     installed.each { |patch_id|
       # e.g.: 'suse-build-key;1.0-907.30;noarch;@System'
       attrs = patch_id.split(';')
-      done << Patch.new(:resolvable_id => attrs[1],
+      done << Patch.new(:resolvable_id => patch_id,
+                        :version => attrs[1],
                         :name => attrs[0],
                         :arch => attrs[2],
                         :repo => attrs[3],
@@ -98,8 +96,9 @@ class PatchesController < ApplicationController
     end
 
     if !@msgs.blank? && request.format.html?
-      @msgs.gsub!('<br/>', ' ')
-      flash[:warning] = _("There are patch installation messages available") + details(@msgs)
+      #@msgs.gsub!('<br/>', ' ')
+      @message = @msgs.map{|s| s[:message]}.to_s.gsub(/\n/, '')
+      flash[:warning] = _("There are patch installation messages available") + details(@message)
     end
 
     #checking if a license is requiredrequired
@@ -199,8 +198,6 @@ class PatchesController < ApplicationController
       # add 'low' patches to optional
       patches_summary[:optional] += patch_updates.find_all { |p| p.kind == 'low' }.size
     else
-      erase_redirect_results #reset all redirects
-      erase_render_results
       flash.clear #no flash from load_proxy
     end
 
@@ -218,7 +215,6 @@ class PatchesController < ApplicationController
   end
 
   def load_filtered
-    @permission_install = permission_granted? "org.opensuse.yast.system.patches.install"  # RORSCAN_ITL
     @patch_updates = Patch.find :all
     kind = params[:value]
     search_map = { "green" => ["normal","low"], "security" => ["security"],
@@ -234,9 +230,12 @@ class PatchesController < ApplicationController
   # POST /patches/start_install_all
   # Starting installation of all proposed patches
   def start_install_all
-    permission_check "org.opensuse.yast.system.patches.install" # RORSCAN_ITL
+    authorize! :install, Patch
     logger.info "Start installation of all patches"
-    Patch.install_patches Patch.find(:all)
+    all = Patch.find(:all)
+    Patch.install_patches(all)
+    logger.info "All #{all.inspect}"
+    logger.info "Show summary"
     show_summary
   end
 
@@ -244,12 +243,12 @@ class PatchesController < ApplicationController
   # Installing one or more patches which has given via param
 
   def install
-    permission_check "org.opensuse.yast.system.patches.install" # RORSCAN_ITL
+    authorize! :install, Patch
     update_array = []
 
     #search for patches and collect the ids
     params.each { |key, value|
-      if key =~ /\D*_\d/ || key == "id"
+      if key.start_with?("patch_") || key == "id"
         update_array << value
       end
     }
@@ -271,8 +270,23 @@ class PatchesController < ApplicationController
     render :show
   end
 
+  def message
+    authorize! :install, Patch
+
+    logger.warn "Confirmation of reading patch messages"
+    File.delete Patch::MESSAGES_FILE
+    YastCache.delete(Plugin.new(),"patch")
+    respond_to do |format|
+      format.html {
+        redirect_to "/"
+      }
+      format.xml  { head :ok }
+      format.json { head :ok }
+    end
+  end
+
   def license
-    permission_check "org.opensuse.yast.system.patches.install" # RORSCAN_ITL
+    authorize! :install, Patch
     if params[:accept].present? || params[:reject].present?
       params[:accept].present? ? Patch.accept_license : Patch.reject_license
       YastCache.delete(Plugin.new(),"patch")

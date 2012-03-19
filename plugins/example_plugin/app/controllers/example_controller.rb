@@ -20,22 +20,14 @@
 #++
 
 class ExampleController < ApplicationController
-
-  #require login before do any action
-  before_filter :login_required
-
-  # Initialize GetText and Content-Type.
-  init_gettext "webyast-example"
-
   def index
-    permission_check "org.opensuse.yast.system.example.read"
+    authorize! :read, Example
     @example = Example.find
 
     respond_to do |format|
       format.xml  { render :xml => @example.to_xml}
       format.json { render :json => @example.to_json }
-      format.html { @write_permission = permission_granted? "org.opensuse.yast.system.example.write"
-                    render :index }
+      format.html { render :index }
     end
   end
 
@@ -44,7 +36,7 @@ class ExampleController < ApplicationController
   end
    
   def update
-    permission_check "org.opensuse.yast.system.example.write"
+    authorize! :write, Example
     value = params["example"]
     if value.empty?
       raise InvalidParameters.new :example => "Missing"

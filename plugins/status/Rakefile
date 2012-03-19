@@ -18,7 +18,8 @@
 # To contact Novell about this file by physical or electronic mail,
 # you may find current contact information at www.novell.com
 #++
-
+require 'rake'
+require 'fileutils'
 require File.join(File.dirname(__FILE__), 'config', 'rails_parent')
 require File.join(RailsParent.parent, 'lib', 'tasks', 'common')
 
@@ -28,9 +29,30 @@ Dir.glob(File.dirname(__FILE__) + "/lib/tasks/*.rake").each do |rake_file|
 end
 
 desc "Deploy for development - create basic dirs and install yast modules."
-task :deploy_local do |t|
+task :deploy_local , [:user] do |t, args|
+  args.with_defaults :user => user = ENV['USER']
   FileUtils.mkdir_p "/usr/share/YaST2/modules/"
   FileUtils.cp_r    "package/LogFile.rb", "/usr/share/YaST2/modules/"
   `rake install_policies`
+  mkdir_p "/var/lib/webyast/status/"
+  chmod 0700, "/var/lib/webyast/status/"
+  chown args.user, nil, "/var/lib/webyast/status/"
+  
+  FileUtils.mkdir_p "/etc/webyast"
+  FileUtils.cp_r    "doc/logs.yml", "/etc/webyast"
 end
 
+desc "Build distribution package (no check, for testing only)"
+task :"package-local" do |t|
+  `rake build`
+  FileUtils.mv(Dir.glob("pkg/*.gem"), "package")
+  FileUtils.rmdir("pkg")
+end
+
+require File.expand_path('../config/application', __FILE__)
+Status::Application.load_tasks #   <<<< = require 'tasks/rails'
+
+require "webyast-status"
+
+require "bundler/gem_tasks"
+task :build => :"gettext:pack"

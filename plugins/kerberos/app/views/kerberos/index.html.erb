@@ -20,12 +20,10 @@
 -->
 
 <% content_for :head do %>
-  <%= javascript_include_tag "validation.js" %>
   
+  <%= render :partial => "shared/notification", :locals => { :module_name => 'kerberos' } %>
+
   <script type="text/javascript">
-    var AUTH_TOKEN = 'authenticity_token=' + encodeURIComponent("<%= escape_javascript form_authenticity_token %>");
-    startNotifier({'module':'kerberos', 'AUTH_TOKEN':AUTH_TOKEN}, 1000, 11000);
-      
     $(document).ready(function() {
       validateDomainName("kdc");
 
@@ -68,15 +66,15 @@
   </script>
 <% end %>
 
-<% disabled = !@write_permission %>
+<% disabled = cannot?(:write, Kerberos) %>
 
 <div class="plugin-content plugin-border">
   <%= render :partial => 'shared/missing_write_permissions' if disabled %>
 
-  <% form_for(:kerberos, @kerberos, :url => { :action => 'update' }, :html => { :method => :put, :id => 'kerberosForm', :class=>"webyast_form"}) do |f| %>
+  <%= form_for(@kerberos, :url => { :action => 'update' }, :html => { :method => :put, :id => 'kerberosForm', :class=>"webyast_form"}) do |f| %>
     <div class="plugin-header">
       <div class="left">
-        <label class="plugin-icon-container"><img class="plugin-icon" src="/icons/kerberos.png"></label>
+        <label class="plugin-icon-container"><%= image_tag("kerberos.png", :class=>"plugin-icon") %></label>
         <label class="plugin-name"><%= _("Kerberos client") %></label>
       </div>
       <div class="right" >

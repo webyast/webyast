@@ -1,0 +1,250 @@
+<%#
+#-- RORSCAN_ICF
+# Webyast Webclient framework
+#
+# Copyright (C) 2009, 2010 Novell, Inc.
+#   This library is free software; you can redistribute it and/or modify
+# it only under the terms of version 2.1 of the GNU Lesser General Public
+# License as published by the Free Software Foundation.
+#
+#   This library is distributed in the hope that it will be useful, but WITHOUT
+# ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
+# FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public License for more
+# details.
+#
+#   You should have received a copy of the GNU Lesser General Public
+# License along with this library; if not, write to the Free Software
+# Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA
+#++
+%>
+
+
+<%= form_for :network, :url => { :action => "#{action}" }, :html => {:id=>"networkForm", :class=>"webyast_form", :onsubmit => "return is_valid();"} do %>
+  <%= hidden_field_tag :interface, @ifc.id || "" %>
+
+  <% if @type == "vlan" %>
+    <fieldset id="vlan-fieldset" class="webyast_fieldset">
+      <div class="fieldset_header">
+        <span class="fieldset_header_title" >VLAN configuration</span>
+      </div>
+
+      <div class="fieldset_body">
+        <div class="row">
+          <label><%=_("Interface name")%></label>
+          <% if action == "create" %>
+            <%= text_field_tag(:type, @type) %>
+            <%= select_tag(:number, options_for_select((@number..9).to_a.map{|i| "#{i}"}, @number)) %>
+          <% else %>
+            <%= text_field_tag :id, @ifc.id, :disabled => true %>
+            <%= hidden_field_tag(:type, @type) %>
+          <% end %>
+        </div>
+
+        <div class="row">
+          <label><%=_("Physical interface")%></label>
+          <%= select_tag(:vlan_etherdevice, options_for_select(@physical.map{|id, iface| [id, id]}, @ifc? @ifc.vlan_etherdevice : "")) %>
+        </div>
+
+        <div class="row">
+          <label><%=_("VLAN ID")%></label>
+          <%=text_field_tag("vlan_id", @ifc.vlan_id || "1", :disabled => @write_disabled) %>
+        </div>
+      </div>
+    </fieldset>
+
+  <% elsif @type == "br" %>
+    <fieldset id="bridge-fieldset" class="webyast_fieldset">
+      <div class="fieldset_header">
+        <span class="fieldset_header_title" >Bridge configuration</span>
+      </div>
+
+      <div class="fieldset_body">
+        <div class="row">
+          <label><%=_("Interface name")%></label>
+
+          <% if action == "create" %>
+              <%= text_field_tag(:type, @type) %>
+              <%= select_tag(:number, options_for_select((@number..9).to_a.map{|i| "#{i}"}, @number)) %>
+          <% else %>
+              <%= text_field_tag :id, @ifc.id, :disabled => true %>
+              <%= hidden_field_tag(:type, @type) %>
+          <% end %>
+        </div>
+        <div class="row">
+          <label class="tvalign"><%=_("Bridge devices:")%></label>
+          <div class="checkbox_container">
+            <% @ifcs.each do |id, iface| %>
+              <% unless id.match("br") %>
+                <div>
+                 <%= check_box :bridge_ports, id, :checked => @ifc.bridge_ports.split(" ").include?(id) %>
+                 <%= id %> - <%= iface.vendor %>
+                </div>
+              <% end %>
+            <% end %>
+          <div>
+        </div>
+      </div>
+    </fieldset>
+
+  <% elsif @type == "bond" %>
+    <fieldset id="bond-fieldset" class="webyast_fieldset">
+      <div class="fieldset_header">
+        <span class="fieldset_header_title" >Bond configuration</span>
+      </div>
+
+      <div class="fieldset_body">
+        <div class="row">
+          <label><%=_("Interface name")%></label>
+
+          <% if action == "create" %>
+              <%= text_field_tag(:type, @type) %>
+              <%= select_tag(:number, options_for_select((@number..9).to_a.map{|i| "#{i}"}, @number)) %>
+          <% else %>
+              <%= text_field_tag :id, @ifc.id, :disabled => true %>
+              <%= hidden_field_tag(:type, @type) %>
+          <% end %>
+        </div>
+        
+        <div class="row">
+            <label class="tvalign"><%=_("Bond driver options")%></label>
+            <%= select_tag(:bond_mode, options_for_select($bond_options.map{|o| "#{o}"}, @ifc.bond_mode)) %>
+            <%= text_field_tag(:bond_miimon, "miimon=100") %>
+        </div>
+
+        <div class="row">
+          <label class="tvalign"><%=_("Bond slaves")%></label>
+          <div class="checkbox_container">
+            <% @ifcs.each do |id, iface| %>
+              <% unless id.match("bond") %>
+                <div>
+                 <%= check_box :bond_slaves, id, :checked => @ifc.bond_slaves.include?(id) %>
+                 <%= id %> <%= "- #{iface.vendor}" if iface.vendor %>
+                </div>
+              <% end %>
+            <% end %>
+          </div>
+        </div>
+
+      </div>
+    </fieldset>
+
+  <% else %>
+    <fieldset id="ethernet-fieldset" class="webyast_fieldset">
+      <div class="fieldset_header">
+        <span class="fieldset_header_title" >Ethernet configuration</span>
+      </div>
+
+      <div class="fieldset_body">
+        <div class="row">
+          <label><%=_("Interface name")%></label>
+            <%= text_field_tag :id, @ifc.id, :disabled => true %>
+            <%= hidden_field_tag(:type, @type) %>
+        </div>
+      </div>
+    </fieldset>
+  <% end %>
+
+  <fieldset class="webyast_fieldset">
+    <div class="fieldset_header">
+      <span class="fieldset_header_title" >
+        <%= _("Configuration mode")%>
+      </span>
+
+      <span id="modeSwitcher" class="right button-group" style="padding:0px 5px;">
+        <%= hidden_field_tag :bootproto, @ifc.bootproto, :disabled => @write_disabled %>
+
+        <% if(@ifc.bootproto == 'none') %>
+          <a class="btn lbtn" href="#" value="dhcp">DHCP</a>
+          <a class="btn mbtn" href="#" value="static">STATIC</a>
+          <a class="btn rbtn on" href="#" value="none">NONE</a>
+        <% elsif (@ifc.bootproto.match('dhcp')) %>
+          <a class="btn lbtn on" href="#" value="dhcp">DHCP</a>
+          <a class="btn mbtn" href="#" value="static">STATIC</a>
+          <a class="btn rbtn" href="#" value="none">NONE</a>
+        <% else %>
+          <a class="btn lbtn" href="#">DHCP</a>
+          <a class="btn mbtn on" href="#">STATIC</a>
+          <a class="btn rbtn" href="#">NONE</a>
+        <% end %>
+      </span>
+    </div>
+  </fieldset>
+
+  <% if @ifc.bootproto == "none" %>
+    <fieldset id="dns-conf" class="webyast_fieldset" style="display:none;">
+  <% else%>
+    <fieldset id="dns-conf" class="webyast_fieldset">
+  <% end %>
+    <div class="fieldset_header">
+      <span class="fieldset_header_title" >
+        <%= _("DNS configuration")%>
+      </span>
+     </div>
+
+    <div class="fieldset_body">
+      <div class="row">
+        <label><%=_("Hostname")%></label>
+        <%= text_field_tag :hostname, @hostname.name, :class=>"hostname", :disabled => @write_disabled %>
+      </div>
+      <div class="row">
+        <label><%=_("Domain")%></label>
+        <%= text_field_tag :domain, @hostname.domain, :class=>"domain", :disabled => @write_disabled %>
+      </div>
+
+      <div class="row static dhcp <%= 'hidden' if @disabled %>">
+        <label><%=_("Name servers")%></label>
+        <%= text_field_tag :nameservers, @dns.nameservers.join(" "), :class=>"nameservers", :disabled => (@write_disabled || @disabled) %>
+      </div>
+
+      <div class="row static dhcp <%= 'hidden' if @disabled %>">
+        <label><%=_("Search domains")%></label>
+        <%= text_field_tag :searchdomains, @dns.searches.join(" "), :class=>"searchdomains", :disabled => (@write_disabled || @disabled) %>
+      </div>
+
+      <div class="row">
+        <label><%=_("Change hostname by DHCP")%></label>
+        <%= check_box_tag :dhcp_hostname, @hostname.dhcp_hostname, @hostname.dhcp_hostname == "1" , :disabled=>!@hostname.dhcp_hostname_enabled %>
+        <input type="hidden" id="dhcp_hostname_enabled" name="dhcp_hostname_enabled" value="<%= @dhcp_hostname_enabled %>"/>
+      </div>
+
+  </div>
+  </fieldset>
+
+      <% if @ifc.bootproto == "static" %>
+        <fieldset id="ip-conf" class="webyast_fieldset">
+      <% else %>
+        <fieldset id="ip-conf" class="webyast_fieldset" style="display:none;">
+      <% end %>
+          <div id="ip-container-header" class="fieldset_header">
+            <span class="fieldset_header_title" >
+              <%= _("IP configuration")%>
+              <span style="float:none; color:#777777; font-size:10px; margin-left:2px;">(via DHCP server)</span>
+            </span>
+          </div>
+
+          <div class="fieldset_body">
+            <div class="row static">
+              <label for="<%= :ip %>"><%=_("IP address")%></label>
+              <%=text_field_tag :ip, @ifc.ip, :class=>"ip static", :disabled => (@write_disabled || @disabled) %>
+            </div>
+            <div class="row static">
+              <label for="<%= :netmask %>"><%=_("Subnet mask/Prefixlen")%></label>
+              <%=text_field_tag :netmask, @ifc.netmask, :class=>"netmask", :disabled => (@write_disabled || @disabled) %>
+            </div>
+            <div class="row static">
+              <label for="<%= :default_route %>"><%=_("Default route")%></label>
+              <%=text_field_tag :default_route, @routes.via, :class=>"default_route", :disabled => (@write_disabled || @disabled) %>
+            </div>
+          </div>
+        </fieldset>
+
+    <div class="clearfix"></div>
+    <div class="button_container">
+      <div class="hr">&nbsp;</div>
+      <div class="nav-buttons">
+        <%= submit_tag _("Save"), :disabled => @write_disabled -%>
+        <%= form_str_spacer %>
+        <%= link_to _("back"), {:controller => "network", :action => "index"} %>
+      </div>
+    </div>
+  <% end %>

@@ -1,5 +1,5 @@
 main:
-  icon: '/icons/yast-permissions.png'
+  icon: 'yast-permissions.png'
   url: /roles
   groups: [ Accounts ]
   tags: [ roles ]

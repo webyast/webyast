@@ -20,27 +20,15 @@
 #++
 
 #require 'yast/service_resource'
+require 'services_helper'
 
 class ServicesController < ApplicationController
-  before_filter :login_required
-  layout 'main'
 
-  private
-
-  # Initialize GetText and Content-Type.
-  init_gettext "webyast-services-ui"  # textdomain, options(:charset, :content_type)
-
-  public
-
-  def initialize
-  end
+public
 
   def show_status
-    yapi_perm_check "services.read"
-    # RORSCAN_INL: Cannot be CWE-285 cause id does not depend on user authent.
-    raise InvalidParameters.new :id => "UNKNOWN" unless (params[:id] && params[:id].is_a?(String))
-    # Cannot be CWE-285 cause id does not depend on user authent.
-    # RORSCAN_INL: Cannot be a mass_assignment cause it is a string only
+    authorize! :read, Service
+    
     service = Service.new(params[:id])
     @response = service.read_status({ "custom" => params[:custom]})
 
@@ -56,7 +44,8 @@ class ServicesController < ApplicationController
   # GET /services
   # GET /services.xml
   def index
-    @permissions = yapi_perm_granted?("services.execute")
+    authorize! :read, Service
+    @exec_permission = can? :execute, Service
     
     @services = []
     all_services	= []
@@ -71,7 +60,6 @@ class ServicesController < ApplicationController
       s.required_for_stop.reject! { |rs| killer_services.include? rs }
       @services.push s unless killer_services.include? s.name
     end
-    
     respond_to do |format|
       format.html
       format.xml  { render :xml => @services.to_xml }
@@ -82,12 +70,9 @@ class ServicesController < ApplicationController
 
   # PUT /services/1.xml
   def execute
-    yapi_perm_check "services.execute"
+    authorize! :execute, Service
     
     args = { :execute => params[:id], :custom => params[:custom] }
-    raise InvalidParameters.new :id => "UNKNOWN" unless (params["service_id"] && params["service_id"].is_a?(String))
-    # Cannot be CWE-285 cause id does not depend on user authent.
-    # RORSCAN_INL: Cannot be a mass_assignment cause it is a string only
     service = Service.new(params["service_id"]) 
     ret = service.save(args)
     
@@ -117,11 +102,8 @@ class ServicesController < ApplicationController
   # GET /services/1.xml
   # REST API
   def show
-    yapi_perm_check "services.read"
-    # RORSCAN_INL: Cannot be CWE-285 cause id does not depend on user authent.
-    raise InvalidParameters.new :id => "UNKNOWN" unless (params[:id] && params[:id].is_a?(String))
-    # Cannot be CWE-285 cause id does not depend on user authent.
-    # RORSCAN_INL: Cannot be a mass_assignment cause it is a string only
+    authorize! :read, Service
+
     @service = Service.new(params[:id])
     @service.read_status(params)
     
@@ -135,8 +117,7 @@ class ServicesController < ApplicationController
   # Execute service command (start or stop).
   # Requires execute permission for services YaPI.
   def update
-    yapi_perm_check "services.execute" # RORSCAN_ITL
-    # RORSCAN_INL: User has already write permission for ALL services here
+    authorize :execute, Service
     @service = Service.find params[:id]
     ret = @service.save(params)
     render :xml => ret

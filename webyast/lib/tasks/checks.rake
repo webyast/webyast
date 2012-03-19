@@ -183,25 +183,3 @@ task :system_check_packages, [:install] do |t, args|
   end
 end
 
-desc "Check that your policies are granted correctly for WebYaST"
-task :system_check_policies do
-  # check that policies are all installed
-  not_needed = ['org.opensuse.yast.scr.policy']
-  policy_files = File.expand_path(File.join(File.dirname(__FILE__), '../../..', "**/*.policy"))
-  Dir.glob(policy_files) do |fname|
-    policy = File.basename(fname)
-    next if not_needed.include?(policy)
-    plugin = if fname =~ %r{plugins/([^/]*)}
-               $1
-	     else
-	       File.dirname fname
-	     end
-    dest_policy = File.join('/usr/share/polkit-1/actions', policy)
-    if not File.exists?(dest_policy)
-      escape "Policy '#{policy}' of plugin '#{plugin}' is not installed",
-             "Run \"sudo rake install_policies\" in plugin '#{plugin}'\n or run\nsudo cp #{fname} #{dest_policy}"
-    end
-  end
-
-end
-

@@ -42,11 +42,21 @@ module StatusHelper
   end
 
   def evaluate_next_graph group, single_graphs, index
-    return "$('#progress').hide()" if index+1 > single_graphs.size
+    return "$('#progress').hide();\n" if index+1 > single_graphs.size
     graph_div_id = graph_id(group, single_graphs[index]["headline"])
-    remote_function(:update => graph_div_id,
-                    :url => { :action => "evaluate_values", :group_id => group, :graph_id => single_graphs[index]["headline"]},
-                    :complete => evaluate_next_graph(group, single_graphs, index+1)) # RORSCAN_ITL
+    return "$.ajax({ url: '" +
+           url_for( { :action => "evaluate_values", :group_id => group, :graph_id => single_graphs[index]["headline"]} ) + 
+           "',\n" +
+           "         type: 'POST',\n" +
+           "         success: function(data, status, xhr) {\n" +
+           "           $('#" + graph_id(group, single_graphs[index]["headline"]) + "').html(data);\n" +
+           evaluate_next_graph(group, single_graphs, index+1) +
+           "         },\n" +
+           "         error: function(xhr, status, error) {\n" +
+           "           $('#" + graph_id(group, single_graphs.first["headline"]) + "').html('<b>" +
+                       escape_javascript( _("Error: Cannot get information.")) + "</b>');\n" +
+           "         }\n" +
+           "      });\n"
   end
 
 end

@@ -5,6 +5,20 @@ desc "Deploy for development - run db:migrate, create basic dirs and install gra
 task :deploy_local do |t|
   FileUtils.mkdir_p "/usr/share/YaST2/modules/"
   FileUtils.cp_r    "package/FIREWALL.pm", "/usr/share/YaST2/modules/YaPI"
-  FileUtils.mkdir_p "/usr/share/polkit-1/actions/"
-  FileUtils.cp_r    "package/org.opensuse.yast.modules.yapi.firewall.policy",  "/usr/share/polkit-1/actions/"
+  `rake install_policies`
 end
+
+desc "Build distribution package (no check, for testing only)"
+task :"package-local" do |t|
+  `rake build`
+  FileUtils.mv(Dir.glob("pkg/*.gem"), "package")
+  FileUtils.rmdir("pkg")
+end
+
+require File.expand_path('../config/application', __FILE__)
+Firewall::Application.load_tasks #   <<<< = require 'tasks/rails'
+
+require "webyast-firewall"
+
+require "bundler/gem_tasks"
+task :build => :"gettext:pack"

@@ -1,0 +1,108 @@
+<%#
+#-- RORSCAN_ICF
+# Webyast Webclient framework
+#
+# Copyright (C) 2009, 2010 Novell, Inc.
+#   This library is free software; you can redistribute it and/or modify
+# it only under the terms of version 2.1 of the GNU Lesser General Public
+# License as published by the Free Software Foundation.
+#
+#   This library is distributed in the hope that it will be useful, but WITHOUT
+# ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
+# FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public License for more
+# details.
+#
+#   You should have received a copy of the GNU Lesser General Public
+# License along with this library; if not, write to the Free Software
+# Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA
+#++
+%>
+
+
+<script type="text/javascript">
+  $(document).ready(function() {
+    validateIPv4("ip");
+    validateSubnetMask("netmask"); //accept prefixlen and common subnet mask format e.g. 255.255.255.0
+    validateHostName("hostname");
+    validateDefaultRoute("default_route");
+
+    //Devel build 9.32 has messed networking configuration in webyast (bnc#694283)
+    //validateDomainNameWithAndWithoutTLD("domain");
+    //accept only one domain name!!!
+    validateDomainName("domain");
+    validateNameservers("nameservers");
+    validateDomainNameWithAndWithoutTLD("searchdomains");
+
+    $("#networkForm").validate({
+      onkeyup: function(element) { this.element(element); },
+      onblur: true,
+      rules:{
+        ip: {
+          ip: true,
+          required:true
+        },
+        netmask:{
+          netmask: true,
+          required:true
+        },
+        default_route: {
+          default_route: true,
+          required:true
+        },
+        hostname: {
+          required: true,
+          hostname:true
+        },
+        domain: {
+              domain: true,
+              required:true
+        },
+        nameservers: {
+              nameservers: true,
+              required:true
+        },
+        searchdomains: {
+              searchdomains: true,
+              required:true
+        }
+      },
+
+      messages: {
+        ip: {
+          required: <%= jss _("This field is required") -%>,
+          ip: <%= jss _("Enter a valid IP address") -%>
+        },
+        netmask: {
+          required: <%= jss _("This field is required") -%>,
+          netmask: <%= jss _("Enter a valid subnet mask or prefix") -%>
+        },
+        default_route: {
+          required: <%= jss _("This field is required") -%>,
+          default_route:<%= jss _("Enter a valid IP address") -%>
+        },
+        hostname:{
+          required: <%= jss _("This field is required") -%>,
+          hostname: <%= jss _("Enter a valid hostname") -%>
+        },
+        domain:{
+          required: <%= jss _("This field is required") -%>,
+          domain: <%= jss _("Enter a valid domain name") -%>
+        },
+         nameservers: {
+          required: <%= jss _("This field is required") -%>,
+          nameservers: <%= jss _("Enter a valid IP address") -%>
+          },
+        searchdomains: {
+          required: <%= jss _("This field is required")  -%>,
+          searchdomains: <%= jss _("Enter a valid domain name") -%>
+        }
+      },
+      submitHandler: function(form) {
+        var message = <%= jss _("Please wait") -%>;
+        $.modalDialog.wait( {message: message});
+        form.submit();
+      },
+      success: "valid"
+    });
+  });
+</script>

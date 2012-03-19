@@ -1,229 +1,207 @@
-<!--
-# Copyright (c) 2009-2010 Novell, Inc.
+<%#
+#-- RORSCAN_ICF
+# Webyast Webclient framework
 #
-# All Rights Reserved.
+# Copyright (C) 2009, 2010 Novell, Inc.
+#   This library is free software; you can redistribute it and/or modify
+# it only under the terms of version 2.1 of the GNU Lesser General Public
+# License as published by the Free Software Foundation.
 #
-# This program is free software; you can redistribute it and/or modify it
-# under the terms of version 2 of the GNU General Public License
-# as published by the Free Software Foundation.
+#   This library is distributed in the hope that it will be useful, but WITHOUT
+# ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
+# FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public License for more
+# details.
 #
-# This program is distributed in the hope that it will be useful,
-# but WITHOUT ANY WARRANTY; without even the implied warranty of
-# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
-# GNU General Public License for more details.
-#
-# You should have received a copy of the GNU General Public License
-# along with this program; if not, contact Novell, Inc.
-#
-# To contact Novell about this file by physical or electronic mail,
-# you may find current contact information at www.novell.com
--->
+#   You should have received a copy of the GNU Lesser General Public
+# License along with this library; if not, write to the Free Software
+# Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA
+#++
+%>
 
 <% content_for :head do %>
-  <% unless JSMIN == true %>
-    <%= javascript_include_tag "webyast-network" %>
-    <%= stylesheet_link_tag "webyast-network" %>
-  <% end %>
-
-  <script type="text/javascript">
-  var AUTH_TOKEN = 'authenticity_token=' + encodeURIComponent("<%= escape_javascript form_authenticity_token %>");
-  startNotifier({'module':'dns,hostname,interfaces,routes', 'AUTH_TOKEN':AUTH_TOKEN}, 1000, 11000);
-
-  $(document).ready(function() {
-    validateIPv4("ip");
-    validateSubnetMask("netmask"); //accept prefixlen and common subnet mask format e.g. 255.255.255.0
-    validateHostName("hostname");
-    validateDefaultRoute("default_route");
-
-    //Devel build 9.32 has messed networking configuration in webyast (bnc#694283)
-    //validateDomainNameWithAndWithoutTLD("domain");
-    //accept only one domain name!!!
-    validateDomainName("domain");
-    validateNameservers("nameservers");
-    validateDomainNameWithAndWithoutTLD("searchdomains");
-
-    $("#dnsForm").validate({
-      onkeyup: function(element) { this.element(element); },
-      onblur: true,
-      rules:{
-        ip: {
-          ip: true,
-          required:true
-        },
-        netmask:{
-          netmask: true,
-          required:true
-        },
-        default_route: {
-          default_route: true,
-          required:true
-        },
-        hostname: {
-          required: true,
-          hostname:true
-        },
-        domain: {
-              domain: true,
-              required:true
-        },
-        nameservers: {
-              nameservers: true,
-              required:true
-        },
-        searchdomains: {
-              searchdomains: true,
-              required:true
-        }
-      },
-
-      messages: {
-        ip: {
-          required: <%= jss _("This field is required") -%>,
-          ip: <%= jss _("Enter a valid IP address") -%>
-        },
-        netmask: {
-          required: <%= jss _("This field is required") -%>,
-          netmask: <%= jss _("Enter a valid subnet mask or prefix") -%>
-        },
-        default_route: {
-          required: <%= jss _("This field is required") -%>,
-          default_route:<%= jss _("Enter a valid IP address") -%>
-        },
-        hostname:{
-          required: <%= jss _("This field is required") -%>,
-          hostname: <%= jss _("Enter a valid hostname") -%>
-        },
-        domain:{
-          required: <%= jss _("This field is required") -%>,
-          domain: <%= jss _("Enter a valid domain name") -%>
-        },
-         nameservers: {
-          required: <%= jss _("This field is required") -%>,
-          nameservers: <%= jss _("Enter a valid IP address") -%>
-          },
-        searchdomains: {
-          required: <%= jss _("This field is required")  -%>,
-          searchdomains: <%= jss _("Enter a valid domain name") -%>
-        }
-      },
-      submitHandler: function(form) {
-        var message = <%= jss _("Please wait") -%>;
-        $.modalDialog.wait( {message: message});
-        form.submit();
-      },
-      success: "valid"
-    });
-  });
-  </script>
+  <%= javascript_include_tag "webyast-network" %>
+  <%= stylesheet_link_tag "webyast-network" %>
 <% end %>
 
+<div id="network_module" class="plugin-content plugin-border">
 
-  <div class="plugin-content plugin-border">
-    <% write_disabled = ! @write_permission %>
-    <%= render :partial => 'shared/missing_write_permissions' if write_disabled %>
+  <% write_disabled = cannot? :write, Network %>
+  <%= render :partial => 'shared/missing_write_permissions' if write_disabled %>
 
-    <% form_for :network, @network, :url => { :action => "update" }, :html => {:id=>"dnsForm", :class=>"webyast_form", :method => :put, :onsubmit => "return submitValidForm();"} do |n| %>
-      <input type="hidden" id="interface" name="interface" value="<%= @iface %>"/>
-      
-      <div class="plugin-header">
-        <div class="left">
-          <label class="plugin-icon-container"><img class="plugin-icon" src="/icons/network.png"></label>
-          <label class="plugin-name"><%=_("Network")%></label><span id="questionMark" style="margin:2px 15px; float:none;">?</span>
-          <%=text_field_tag :conf_mode, @conf_mode, :type=>"hidden", :disabled => write_disabled %>
-        </div>
-
-        <div class="right" >
-          <span class="right" style="padding:2px; background:#fff; -moz-border-radius:2px; -webkit-border-radius:2px;">
-          <% if(@conf_mode != 'static') %>
-            <button id="autoMode" class="active" value="dhcp"><%=_("Automatic")%></button>
-            <button id="manualMode" value="static"><%=_("Manual")%></button>
-          <% else %>
-            <button id="autoMode" value="dhcp"><%=_("Automatic")%></button>
-            <button id="manualMode" class="active" value="static"><%=_("Manual")%></button>
-          <% end %>
-          </span>
-        </div>
-        <div class="clearfix"></div>
+  <div class="plugin-header">
+    <div class="fleft">
+      <label class="plugin-icon-container"><%= image_tag("network.png", :class=>"plugin-icon") %></label>
+      <label class="plugin-name"><%=_("Network")%></label>
     </div>
 
-    <div class="clearfix">&nbsp;</div>
-
-    <fieldset id="dns-container" class="webyast_fieldset">
-      <div id="dns-container-header" class="fieldset_header">
-         <span class="fieldset_header_title" >
-          <%= _("DNS configuration")%>
-        </span>
-      </div>
-
-      <div class="fieldset_body">
-        <div class="row manual">
-          <label for="<%= :hostname %>"><%=_("Hostname")%></label>
-          <%=text_field_tag(:hostname, @name, :class=>"hostname", :disabled => write_disabled) %>
-        </div>
-        <div class="row manual">
-          <label for="<%= :domain %>"><%=_("Domain")%></label>
-          <%=text_field_tag :domain, @domain, :class=>"domain", :disabled => write_disabled %>
-        </div>
-
-        <div class="row auto">
-          <label for="<%= :nameservers %>"><%=_("Name servers")%></label>
-          <%=text_field_tag :nameservers, @nameservers.join(" "), :class=>"nameservers", :disabled => write_disabled %>
-        </div>
-
-        <div class="row auto">
-          <label for="<%= :searchdomains %>">
-            <%=_("Search domains")%>
-          </label>
-          <%=text_field_tag :searchdomains, @searchdomains.join(" "), :class=>"searchdomains", :disabled => write_disabled %>
-        </div>
-
-        <div id="ip_sticker" class="right">
-          <span>
-            <span style="display:block; background:#eee; padding:2px 3px; font-size:11px;"><%=_("Current IP address (DHCP)")%></span>
-            <span style="font-size:20px; padding:5px 0px;"><%= @dhcp_ip %></span>
-          </span>
-        </div>
-
-        <div class="row manual">
-          <label><%=_("Change hostname by DHCP")%></label>
-          <!-- From WebYaST SP1 -->
-          <%= check_box_tag :dhcp_hostname, "1", @dhcp_hostname , :disabled=>!@dhcp_hostname_enabled %>
-          <input type="hidden" name="dhcp_hostname_enabled" value="<%= @dhcp_hostname_enabled %>"/>
-        </div>
-      </div>
-    </fieldset>
-
-
-    <fieldset id="ip-container" class="webyast_fieldset">
-      <div id="ip-container-header" class="fieldset_header">
-        <span class="fieldset_header_title" >
-          <%= _("IP configuration")%>
-          <!--<span style="float:none; color:#777777; font-size:10px; margin-left:2px;">(via DHCP server)</span>-->
-        </span>
-      </div>
-
-      <div class="fieldset_body">
-        <div class="row auto">
-          <label for="<%= :ip %>"><%=_("IP address")%></label>
-          <%=text_field_tag :ip, @ip, :class=>"ip static", :disabled => write_disabled %>
-        </div>
-        <div class="row auto">
-          <label for="<%= :netmask %>"><%=_("Subnet mask/Prefixlen")%></label>
-          <%=text_field_tag :netmask, @netmask, :class=>"netmask", :disabled => write_disabled %>
-        </div>
-        <div class="row auto">
-          <label for="<%= :default_route %>"><%=_("Default route")%></label>
-          <%=text_field_tag :default_route, @default_route, :class=>"default_route", :disabled => write_disabled %>
-        </div>
-      </div>
-    </fieldset>
-
+    <div class="fright" >
+      <span id="questionMark" style="margin:2px 15px; float:none;">?</span>
+    </div>
     <div class="clearfix"></div>
-    <div class="button_container">
-      <div class="hr">&nbsp;</div>
-      <div class="nav-buttons">
-        <%= form_send_buttons :disabled => write_disabled %>
-      </div>
-    </div>
-  <% end %>
+  </div>
 
+  <div class="clearfix">&nbsp;</div>
+
+  <div id="pages">
+    <div id="page-container">
+      <div class="page">
+
+        <fieldset class="webyast_fieldset">
+          <div class="fieldset_header">
+             <span class="fieldset_header_title" >
+              <%= _("Physical Interfaces")%>
+            </span>
+          </div>
+
+          <div class="fieldset_body">
+            <% @physical.each do |id, interface| %>
+              <div class="interface">
+                <div class="iface_image">
+                  <% img = (interface.ipaddr.blank?)? "eth64.png" : "eth64-active.png" %>
+                  <%= image_tag("#{img}") %>
+                </div>
+                <div class="iface_details">
+                  <p><b><%= interface.vendor if interface.vendor  %></b></p>
+                  <p><%= _("Interface") %>: <b><%= interface.id %></b></p>
+                  <p><%= _("IP address") %>: <%= interface.ip %></p>
+                  <p><%= _("Mode") %>: <%= interface.bootproto %></p>
+                </div>
+                <div class="link_container">
+                  <%= link_to _("configure"), :controller => "network", :action => "edit", :id => id %>
+                </div>
+              </div>
+
+            <% end %>
+          </div>
+        </fieldset>
+
+        <fieldset class="webyast_fieldset">
+          <div class="fieldset_header">
+            <span class="fieldset_header_title" ><%= _("Virtual Interfaces")%></span>
+          </div>
+
+          <div class="fieldset_body">
+            <% @virtual.each do |id, interface| %>
+              <div class="interface">
+                <div class="iface_image">
+                  <% img = (interface.ipaddr.blank?)? "eth64.png" : "eth64-active.png" %>
+                  <%= image_tag("#{img}") %>
+                </div>
+                <div class="iface_details">
+                  <p><%= _("Interface") %>: <b><%= interface.id %></b></p>
+                  <p>Mode: <%= interface.bootproto %></p>
+
+                  <% if interface.id.match("vlan") %>
+                    <p><%= _("Vlan ID") %>: <%= interface.vlan_id %></p>
+                    <p><%= _("Physical interface") %>: <%= interface.vlan_etherdevice %></p>
+                  <% end %>
+
+                  <% if interface.id.match("br") %>
+                    <p><%= _("Bridge ports") %>: <%= interface.bridge_ports %></p>
+                  <% end %>
+                  
+                  <% if interface.id.match("bond") %>
+                    <p><%= _("Bond option") %>: <%= interface.bond_option %></p>
+                    <p><%= _("Bond slaves") %>: <%= interface.bond_slaves.join(" ") %></p>
+                  <% end %>
+
+                </div>
+                <div class="iface_links">
+                  <p>
+                    <%= link_to _("configure"), :controller => "network", :action => "edit", :id => id %>
+                  </p>
+                  <p>
+                    <%= link_to _("delete"), :action => "destroy", :id => id%>                
+                  </p>
+                </div>
+              </div>
+            <% end %>
+          </div>
+        </fieldset>
+
+        <div class="navigation_link_container">
+          <div class="hr">&nbsp;</div>
+          <p><%= link_to _("New virtual interface"), {}, :id=>"iface_selection_link", :class=>"page_link" %></p>
+        </div>
+
+      </div>
+
+      <div class="page">
+        <h4 style="font-size:16px; padding:0 20px; margin:0;"><%= _("Please select one of the virtual interfaces")%></h4>
+
+        <%= form_for :network, :url => { :action => "new" }, :html => {:id=>"interface_type_form", :class=>"webyast_form"} do %>
+          <%= hidden_field_tag "type", "vlan" %>
+          <fieldset class="webyast_fieldset iselector" data-type="vlan">
+            <div class="fieldset_header">
+              <span class="fieldset_header_title" >VLAN</span>
+            </div>
+
+            <div class="fieldset_body">
+              <div class="iface_image">
+                <%= image_tag("eth64.png") %>
+              </div>
+              <div class="iface_details">
+                <div>
+                  A <b>virtual local area network</b>, virtual LAN or VLAN, is a group of hosts with a common set of requirements that communicate as if they were attached to the same broadcast domain,
+                  regardless of their physical location. A VLAN has the same attributes as a physical local area network (LAN), but it allows for end stations to be grouped together even
+                  if they are not located on the same network switch. VLAN membership can be configured through software instead of physically relocating devices or connections.
+                </div>
+              </div>
+              <div class="clearfix">&nbsp;</div>
+            </fieldset>
+
+        <fieldset class="webyast_fieldset iselector" data-type="br">
+          <div class="fieldset_header">
+            <span class="fieldset_header_title" ><%= _("BRIDGE")%></span>
+          </div>
+
+          <div class="fieldset_body">
+              <div class="iface_image">
+                  <%= image_tag("eth64.png") %>
+              </div>
+              <div class="iface_details">
+                  <div>
+                      <b>Bridging</b> is a forwarding technique used in packet-switched computer networks. Unlike routing, bridging makes no assumptions about where in a network a particular address is located.
+                      Instead, it depends on flooding and examination of source addresses in received packet headers to locate unknown devices. Once a device has been located, its location
+                      is recorded in a table where the source address is stored so as to avoid the need for further flooding.
+                  </div>
+              </div>
+              <div class="clearfix">&nbsp;</div>
+          </div>
+        </fieldset>
+
+        <fieldset class="webyast_fieldset iselector" data-type="bond">
+          <div class="fieldset_header">
+            <span class="fieldset_header_title" ><%= _("BOND")%></span>
+          </div>
+
+          <div class="fieldset_body">
+              <div class="iface_image">
+                  <%= image_tag("eth64.png") %>
+              </div>
+              <div class="iface_details">
+                  <div>
+                      A <b>bond/trunk</b> is a single transmission channel between two points, each point being either the switching center or the node.
+                      In modern communications, trunking is a concept by which a communications system can provide network access to many clients by sharing a set of lines or frequencies instead of providing them individually.
+                  </div>
+              </div>
+              <div class="clearfix">&nbsp;</div>
+          </div>
+        </fieldset>
+
+
+        <div class="navigation_link_container">
+          <div class="hr">&nbsp;</div>
+          <%= link_to _("back"), {}, :id=>"iface_back_link", :class=>"page_link lright" %>
+          <%= submit_tag _("next"), :class=> "submit_link fright" %>
+          <div class="clearfix">&nbsp;</div>
+        </div>
+
+        <% end %>
+      </div>
+
+
+    </div>
+  </div>
+
+</div>

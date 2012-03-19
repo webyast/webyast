@@ -19,6 +19,8 @@
 # you may find current contact information at www.novell.com
 #++
 
+require 'base'
+
 class Example < BaseModel::Base
 
   attr_accessor :content

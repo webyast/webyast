@@ -1,46 +1,35 @@
 <!-- RORSCAN_ICF
 # Copyright (c) 2009-2010 Novell, Inc.
-# 
+#
 # All Rights Reserved.
-# 
+#
 # This program is free software; you can redistribute it and/or modify it
 # under the terms of version 2 of the GNU General Public License
 # as published by the Free Software Foundation.
-# 
+#
 # This program is distributed in the hope that it will be useful,
 # but WITHOUT ANY WARRANTY; without even the implied warranty of
 # MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
 # GNU General Public License for more details.
-# 
+#
 # You should have received a copy of the GNU General Public License
 # along with this program; if not, contact Novell, Inc.
-# 
+#
 # To contact Novell about this file by physical or electronic mail,
 # you may find current contact information at www.novell.com
 -->
 <% content_for :head do %>
 
-  <% if JSMIN == true %>
-    <%= javascript_include_tag "min/users-min.js"-%>
-  <% else %>
-    <%= stylesheet_link_tag "webyast-users" %>
-    <%= stylesheet_link_tag "webyast-plugin-toolbar" %>
+  <%= stylesheet_link_tag "webyast-users" %>
+  <%= javascript_include_tag "webyast-users" %>
 
-    <%= javascript_include_tag "jquery.quicksearch.js"-%>
-    <%= javascript_include_tag "select_dialog.js" %>
-    <%= javascript_include_tag "users.js" %>
-  <% end %>
-
-<% if @permissions[:usersget] != true %>
-<script language="javascript">
+<% if ! can? :usersget, User %>
+<script>
   function members_validation(which){ return true; }
 </script>
 <% end %>
 
  <style>
-    .pad1_2em {
-/* 	padding: 1em 2em; */
-    }
     tr {
 	border: solid 1px #ddd;
     }
@@ -51,10 +40,9 @@
     label.error {display: none; float:left; color: #990000; font-weight:bold; margin-left:10px;}
  </style>
 
- <% javascript_tag do %>
-  var AUTH_TOKEN = 'authenticity_token=' + encodeURIComponent("<%= escape_javascript form_authenticity_token %>");
-  startNotifier({'module':'groups', 'AUTH_TOKEN':AUTH_TOKEN}, 1000, 11000);
+ <%= render :partial => "shared/notification", :locals => { :module_name => 'groups' } %>
 
+ <%= javascript_tag do %>
  jQuery.expr[':'].Contains = function(a, i, m) {
   return jQuery(a).text().toUpperCase().indexOf(m[3].toUpperCase()) >= 0;
  };
@@ -66,26 +54,26 @@
       selected_title : <%= jss _('Selected Members') %>,
       unselected_title : <%= jss _('Available Members') %>,
       tooltip : <%= jss _('Click user names to select/unselect members') %>,
-      loadItems : function (dialogId) { 
+      loadItems : function (dialogId) {
         var members = $('#form_'+dialogId+' .members-string')[0].value.split(",");
       	this.system_users = arrays_complement($('#form_'+dialogId+' .members-string')[0].value.split(","), $("#all_users_string")[0].value.split(","));
         return members;
       },
-      storeItems : function (dialogId, items) { 
+      storeItems : function (dialogId, items) {
         //$('#form_'+dialogId+' .members-string')[0].value = $group_members.value.join(",");
         //bnc#700904
         $group_members = $('#form_'+dialogId+' .members-string')[0]
         $group_members.value.length > 0 ? $group_members.value = this.system_users.concat(items).join(",") : $group_members.value = items
       },
-      allItems : function (dialogId) { 
-        return $('#all_users_string')[0].value.split(",") 
+      allItems : function (dialogId) {
+        return $('#all_users_string')[0].value.split(",")
       }
     });
     return open_dialog;
   };
 
   $(document).ready(function(){
-  
+
     select_users_open = select_users_dialog();
 
   $('input#groups_search').quicksearch('div.list-fieldset', {
@@ -109,13 +97,10 @@
 <% end %>
 <% end %>
 
-<!--<div class='plugin-icon'><img alt="yast-groups" src='/icons/yast-groups.png' width="48px" height="48px"><%=_("Groups")%><span id="questionMark">?</span></div>
-<div class="plugin-content">-->
-
 <div id="groups_index" class="plugin-content plugin-border">
   <div class="plugin-header">
     <div class="left">
-      <label class="plugin-icon-container"><img class="plugin-icon" src="/icons/groups.png"></label>
+      <label class="plugin-icon-container"><%= image_tag("groups.png", :class=>"plugin-icon") %></label>
       <label class="plugin-name"><%=_("Groups")%></label>
       <span id="questionMark" class="right" style="float:right; margin:0px 5px;">?</span>
     </div>
@@ -132,10 +117,10 @@
     </form>
 
     <span id="action_link_container">
-      <% if @permissions[:groupadd] %>
-        <%=link_to image_tag("/icons/groups.png", :class=>"action_link_icon") + _("New Group"), :action => :new %>
+      <% if can? :groupadd, User %>
+        <%=link_to image_tag("groups.png", :class=>"action_link_icon") + _("New Group"), :action => :new %>
       <% end %>
-        <%=link_to image_tag("/icons/users.png", :class=>"action_link_icon") +  _("Manage Users"), :controller => "users" %>
+        <%=link_to image_tag("users.png", :class=>"action_link_icon") +  _("Manage Users"), :controller => "users" %>
     </span>
   </div>
 
@@ -143,6 +128,7 @@
 
   <div class='pad1_2em'>
     <div id="groups" class="accordion">
+      <% disabled = cannot?(:groupmodify, User) %>
       <% for group in @groups %>
         <div class="list-fieldset">
           <div class="list-fieldset-header">
@@ -151,39 +137,39 @@
             </span>
           </div>
           <div class='group-content' style="display:none">
-          <% form_for group, :url => { :action => @adding ? "create" : "update"}, :html => { :id => "form_"+group.old_cn, :autocomplete => :off, :onsubmit => "form_handler('#{group.old_cn}')"}  do |f| %>
+          <%= form_for group, :url => { :action => @adding ? "create" : "update"}, :html => { :id => "form_"+group.old_cn, :autocomplete => :off, :onsubmit => "form_handler('#{group.old_cn}')"}  do |f| %>
             <%= f.hidden_field :old_cn %>
             <p>
               <div class="label"><%=_("Group Name")%></div>
-              <%= f.text_field :cn, :disabled => false, :class => "required" %>
+              <%= f.text_field :cn, :disabled => disabled, :class => "required" %>
             </p>
             <p>
               <div class="label"><%=_("Group ID")%></div>
-              <%= f.text_field :gid, :disabled => false %>
+              <%= f.text_field :gid, :disabled => disabled %>
             </p>
             <p>
               <div class="label"><%=_("Members")%></div>
-              <%= f.text_field :members_string, :disabled => false, :onkeyup => "members_validation(this);", :class => "members-string"%>
-              <% if @permissions[:usersget] == true %>
+              <%= f.text_field :members_string, :disabled => disabled, :onkeyup => "members_validation(this);", :class => "members-string"%>
+              <% if can? :usersget, User %>
                 <a href="#" id="manage_members" class="button" onClick="select_users_open('<%= group.old_cn %>');return false;"><%= _("Manage Members") %></a>
               <% end %>
               <%= f.hidden_field :group_type %><label id="users-error" class="error"></label>
             </p>
-    
+
             <div class="nav-buttons">
               <div class="hr">&nbsp;</div>
-              <div id="progress_<%= group.cn -%>" style="display: none; margin-bottom: 10px"><img src="/images/working.gif" alt="Working"/><span style="vertical-align: 50%; margin-left: 5px">...Wait...</span></div>
+              <div id="progress_<%= group.cn -%>" style="display: none; margin-bottom: 10px"><%= image_tag("working.gif", :class => "small-working-icon") %><span style="vertical-align: 50%; margin-left: 5px">...Wait...</span></div>
                 <% message = _('Please wait')%>
-                <%= submit_tag _("Save"), 
+                <%= submit_tag _("Save"),
                     :onclick=>"return $('#form_" + group.old_cn + "').validate({
                       submitHandler: function(form) {
-                        var message = '#{message}'; 
-                        disableFormOnSubmit(message); 
+                        var message = '#{message}';
+                        disableFormOnSubmit(message);
                         form.submit();
                       }
                 });" %>
 
-                <% if @permissions[:groupdelete] %>
+                <% if can? :groupdelete, User %>
                   <span onclick="delete_handler(this, '#progress_<%= group.cn -%>', '<%= _("Please wait") -%>');">
                     <%= link_to _("Delete"),
                         {:action => 'destroy', :id => group.cn},
@@ -208,4 +194,3 @@
     </div>
   </div>
 </div>
-

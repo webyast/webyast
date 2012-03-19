@@ -1,5 +1,5 @@
 main:
-  icon: '/icons/yast-network.png'
+  icon: 'yast-network.png'
   url: /network
   groups: [ Network ]
   tags: [ LAN, NIC, TCP/IP, Internet, DNS, hostname, nameserver, route ]

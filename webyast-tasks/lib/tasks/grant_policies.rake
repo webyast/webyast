@@ -18,22 +18,23 @@
 
 require 'fileutils'
 
-desc "Granting policies for root and for the user #{ENV['USER']}"
-task :grant_policies do |t|
-  user = ENV['USER']
-  puts "Running from #{__FILE__} with user: #{user}"
+desc "Granting policies for root and for the user [user] (optional)"
+task :grant_policies, [:user] do |t, args|
+  args.with_defaults(:user => ENV['USER'])  
+
+  puts "Running from #{__FILE__} with user: #{args.user}"
   puts "You must deploy webyast first!" and return unless File.exists? "/usr/sbin/grantwebyastrights"
   system "/usr/sbin/grantwebyastrights --user root --action grant"
   raise "Error on execute '/usr/sbin/grantwebyastrights --user root --action grant '" if $?.exitstatus != 0
-  system "/usr/sbin/grantwebyastrights --user #{user} --action grant"
-  raise "Error on execute '/usr/sbin/grantwebyastrights --user #{user} --action grant '" if $?.exitstatus != 0
+  system "/usr/sbin/grantwebyastrights --user #{args.user} --action grant"
+  raise "Error on execute '/usr/sbin/grantwebyastrights --user #{args.user} --action grant '" if $?.exitstatus != 0
 
   #granting special rights defined in the spec files
   `find . -name "*.spec"`.each_line { |spec_file|
     `egrep "grantwebyastrights" #{spec_file}`.each_line { |command|
       unless command.lstrip.start_with?("#")
         if command.include?("--action grant") && command.include?("--policy") && command.include?("%{webyast_user}")
-          command["%{webyast_user}"] = user
+          command["%{webyast_user}"] = args.user
           puts "Calling: #{command}"
 	  system command
         end

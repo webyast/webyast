@@ -1,20 +1,20 @@
 #--
 # Copyright (c) 2009-2010 Novell, Inc.
-#
+# 
 # All Rights Reserved.
-#
+# 
 # This program is free software; you can redistribute it and/or modify it
 # under the terms of version 2 of the GNU General Public License
 # as published by the Free Software Foundation.
-#
+# 
 # This program is distributed in the hope that it will be useful,
 # but WITHOUT ANY WARRANTY; without even the implied warranty of
 # MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
 # GNU General Public License for more details.
-#
+# 
 # You should have received a copy of the GNU General Public License
 # along with this program; if not, contact Novell, Inc.
-#
+# 
 # To contact Novell about this file by physical or electronic mail,
 # you may find current contact information at www.novell.com
 #++
@@ -22,34 +22,27 @@
 # Provides access to configuration of system administrator.
 
 class AdministratorController < ApplicationController
-  before_filter :login_required
-  layout 'main'
-
-  private
-  init_gettext "webyast-root-user"
-
+  
   public
 
   def index
-    yapi_perm_check "administrator.read"
-    @write_permission = yapi_perm_granted?("administrator.write")
-
+    authorize! :read, Administrator
+    @write_permission = can? :write, Administrator
+    
     @administrator	= Administrator.find
     @administrator.confirm_password	= ""
     params[:firstboot]	= 1 if Basesystem.new.load_from_session(session).in_process?
   end
 
   def update
-    yapi_perm_check "administrator.write"
-
-    @administrator = Administrator.find
+    @administrator	= Administrator.find
 
     admin	= params["administrator"]
     @administrator.password	= admin["password"]
     @administrator.aliases	= admin["aliases"]
-
+    
     #validate data also here, if javascript in view is off
-
+    
     unless admin["aliases"].empty?
       admin["aliases"].split(",").each do |mail|
         #only check emails, not local users
@@ -76,20 +69,10 @@ class AdministratorController < ApplicationController
     begin
       response = @administrator.save
       flash[:notice] = _('Administrator settings have been written.')
-      rescue ActiveResource::ClientError => e
-        flash[:error] = YaST::ServiceResource.error(e)
-        logger.warn e.inspect
-
-        #handle ADMINISTRATOR_ERROR in backend exception here, not by generic handler
-      rescue ActiveResource::ServerError => e
-        error = Hash.from_xml e.response.body
-        logger.warn error.inspect
-        if error["error"] && error["error"]["type"] == "ADMINISTRATOR_ERROR"
-          # %s is detailed error message
-          flash[:error] = _("Error while saving administrator settings: %s") % error["error"]["output"]
-        else
-          raise e
-      end
+    rescue Exception => error  
+      flash[:error] = _("Error while saving administrator settings.") 
+      Rails.logger.error "ERROR: #{error.inspect}"
+      render :index and return
     end
 
     # check if mail is configured; during initial workflow, only warn if mail configuration does not follow
@@ -111,7 +94,7 @@ class AdministratorController < ApplicationController
   # Read administrator settings (currently mail aliases).
   # Requires read permissions for administrator YaPI.
   def show
-    yapi_perm_check "administrator.read"
+    authorize! :read, Administrator
 
     admin = Administrator.find
 
@@ -120,13 +103,13 @@ class AdministratorController < ApplicationController
       format.json { render :json => admin.to_json, :location => "none" }
     end
   end
-
+   
   # PUT action
   # Write administrator settings: mail aliases and/or password.
   # Requires write permissions for administrator YaPI.
 #  def update
 #    yapi_perm_check "administrator.write"
-#
+#	
 #    data = params["administrator"]
 #    if data
 #      Administrator.new(data).save
@@ -140,4 +123,3 @@ class AdministratorController < ApplicationController
   end
 
 end
-

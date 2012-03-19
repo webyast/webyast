@@ -28,7 +28,7 @@
 #
 require 'exceptions'
 require 'graph'
-
+require 'builder'
 
 #
 # This class acts as a model for metrics provided by collectd
@@ -136,7 +136,7 @@ class Metric
     # but because it is not fatal information and if someone hackly run process
     # which itself identify as collectd, then he runs into problems, but no
     # security problem occur
-    ret = `ps xaf | grep '/usr/sbin/collectd' | grep -vc 'grep'` # RORSCAN_ITL
+    ret = `/bin/ps xaf | /usr/bin/grep '/usr/sbin/collectd' | /usr/bin/grep -vc 'grep'` # RORSCAN_ITL
     ret.to_i > 0
   end
 
@@ -285,7 +285,7 @@ class Metric
         opts[:data].each do |col, values|
           next if col == "starttime"
           next if col == "interval"
-          xml.value(:column => col, :start => starttime.to_i, :interval => interval ,:type => :hash) { values.sort.each { |x| xml.comment!(x[0].to_i.to_s) if RAILS_ENV == "development"; xml.value '"'+x[1].to_s+'"' } }
+          xml.value(:column => col, :start => starttime.to_i, :interval => interval ,:type => :hash) { values.sort.each { |x| xml.comment!(x[0].to_i.to_s) if Rails.env.development?; xml.value '"'+x[1].to_s+'"' } }
         end
       end
       
@@ -295,7 +295,7 @@ class Metric
 
   #get last entry of rrd database
   def self.last_db_entry(file)
-    `/bin/sh -c "LC_ALL=C rrdtool last #{file}"` # RORSCAN_ITL ok, as long as no user input
+    `/bin/sh -c "LC_ALL=C /usr/bin/rrdtool last #{file}"` # RORSCAN_ITL ok, as long as no user input
   end
 
   
@@ -317,7 +317,7 @@ class Metric
 
     stop = opts.has_key?(:stop) ? opts[:stop] : Time.now
     start = opts.has_key?(:start) ? opts[:start] : stop - 300
-    output = `/bin/sh -c "LC_ALL=C rrdtool fetch #{file} AVERAGE --start #{start.to_i} --end #{stop.to_i}"` # RORSCAN_ITL as long as no user input
+    output = `/bin/sh -c "LC_ALL=C /usr/bin/rrdtool fetch #{file} AVERAGE --start #{start.to_i} --end #{stop.to_i}"` # RORSCAN_ITL as long as no user input
     raise output unless $?.exitstatus.zero?
 
     output

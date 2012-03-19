@@ -20,18 +20,14 @@
 #++
 
 require File.expand_path(File.dirname(__FILE__) + "/../test_helper")
+require File.join(RailsParent.parent, "test","devise_helper")
 
 class ActivedirectoryControllerTest < ActionController::TestCase
   ACTIVEDIRECTORY = { "create_dirs" => "0", "enabled" => "false", "domain" => "AD.SUSE.DE" }
   PARAMS = { "activedirectory"=> {"domain"=>"AD.SUSE.DE", "enabled"=>"false"}}
-
   
   def setup
-    @controller = ActivedirectoryController.new
-    @request = ActionController::TestRequest.new
-    @request.session[:account_id] = 1 # defined in fixtures
-    ActivedirectoryController.any_instance.stubs(:login_required)
-    
+    devise_sign_in
     Activedirectory.stubs(:find).returns(Activedirectory.new(ACTIVEDIRECTORY))
     Activedirectory.any_instance.stubs(:save).returns(true)
   end

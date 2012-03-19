@@ -20,8 +20,6 @@
 #++
 
 class TerminalController < ApplicationController
-  before_filter :login_required
-  layout 'main'
 
 private
 
@@ -31,16 +29,14 @@ private
     # but because it is not fatal information and if someone hackly run process
     # which itself identify as shellinabox, then he runs into problems, but no
     # security problem occur
-    ret = `ps xaf | grep '/usr/bin/shellinaboxd' | grep -vc 'grep'` # RORSCAN_ITL
+    ret = `/bin/ps xaf | /usr/bin/grep '/usr/bin/shellinaboxd' | /usr/bin/grep -vc 'grep'` # RORSCAN_ITL
     ret.to_i > 0
   end
 
 public
-  # Initialize GetText and Content-Type.
-  init_gettext "webyast-terminal"
 
   def index
-    permission_check "org.opensuse.yast.system.terminal.read"
+    authorize! :read, Terminal
     unless shellinabox_running?
       flash[:error] = _("Terminal service is not running. Please start with: 'rcshellinabox start'")
       redirect_to :controller => :controlpanel, :action => :index

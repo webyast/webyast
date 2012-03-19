@@ -20,17 +20,11 @@
 -->
 
 <% content_for :head do %>
-  <% javascript_include_tag "jquery.activity", "notifier" %>
-  <% javascript_include_tag "validation.js" %>
   
+  <%= render :partial => "shared/notification", :locals => { :module_name => 'activedirectory'} if @poll_for_updates %>
+
   <script type="text/javascript">
     $(document).ready(function() {
-    
-      <% if @poll_for_updates %>
-        var AUTH_TOKEN = 'authenticity_token=' + encodeURIComponent("<%= escape_javascript form_authenticity_token %>");
-        startNotifier({'module':'activedirectory', 'AUTH_TOKEN':AUTH_TOKEN}, 1000, 11000);
-      <% end %>
-
       $("#activedirectoryForm").validate();
       // make the error message translatable - override the default messsage
       $.extend($.validator.messages, { required: <%= jss _("This field is required.") -%> });
@@ -58,15 +52,15 @@
   </script>
 <% end %>
 
-<% disabled = !@write_permission %>
+<% disabled = cannot? :write, Activedirectory%>
 
 <div class="plugin-content plugin-border">
   <%= render :partial => 'shared/missing_write_permissions' if disabled %>
-  
-  <% form_for(:activedirectory, @activedirectory, :url => { :action => 'update' }, :html => { :method => :put, :id => 'activedirectoryForm', :class=>"webyast_form", :autocomplete => :off }) do |f| %>
+
+  <%= form_for(@activedirectory, :url => { :action => 'update' }, :html => { :method => :put, :id => 'activedirectoryForm', :class=>"webyast_form", :autocomplete => :off }) do |f| %>
     <div class="plugin-header">
       <div class="left">
-        <label class="plugin-icon-container"><img class="plugin-icon" src="/icons/active_directory.png"></label>
+        <label class="plugin-icon-container"><%= image_tag("active_directory.png", :class=>"plugin-icon") %></label>
         <label class="plugin-name"><%= _("Active Directory") %></label>
       </div>
       <div class="right" >
@@ -124,16 +118,16 @@
         </div>
       </fieldset>
   
-  <% end %>
+    <% end %>
     
-  <div class="clearfix"></div>
+    <div class="clearfix"></div>
   
-  <div class="button_container">
-    <div class="hr">&nbsp;</div>
-    <div class="nav-buttons">
-      <%= form_send_buttons :disabled => disabled %>
+    <div class="button_container">
+      <div class="hr">&nbsp;</div>
+      <div class="nav-buttons">
+        <%= form_send_buttons :disabled => disabled %>
+      </div>
     </div>
-  </div>
     
   <% end %>
 </div>

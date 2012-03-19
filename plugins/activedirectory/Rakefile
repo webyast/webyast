@@ -6,3 +6,18 @@ desc "Deploy for development - create basic dirs and install yast modules."
 task :deploy_local do |t|
   `rake install_policies`
 end
+
+desc "Build distribution package (no check, for testing only)"
+task :"package-local" do |t|
+  `rake build`
+  FileUtils.mv(Dir.glob("pkg/*.gem"), "package")
+  FileUtils.rmdir("pkg")
+end
+
+require File.expand_path('../config/application', __FILE__)
+Activedirectory::Application.load_tasks #   <<<< = require 'tasks/rails'
+
+require "webyast-activedirectory"
+
+require "bundler/gem_tasks"
+task :build => :"gettext:pack"

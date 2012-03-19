@@ -20,7 +20,10 @@
 #++
 
 require 'yast/config_file'
+require 'yast/paths'
 require 'yast_service'
+require 'yast_cache'
+require 'base'
 
 # = Service model
 # Proviceds access to configured services.
@@ -73,8 +76,8 @@ class Service < BaseModel::Base
   # reading configuration file
   #
   def self.parse_filter(path = nil)
-    path = File.join(Paths::CONFIG,VENDOR,FILTER_FILE) if path == nil
-    path = File.join(Paths::CONFIG,FILTER_FILE) unless File.exists? path
+    path = File.join(YaST::Paths::CONFIG,VENDOR,FILTER_FILE) if path == nil
+    path = File.join(YaST::Paths::CONFIG,FILTER_FILE) unless File.exists? path
 
     #reading configuration file
     if File.exists?(path)

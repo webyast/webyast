@@ -1,18 +1,18 @@
 main:
-  icon: '/icons/yast-online_update.png'
+  icon: 'yast-online_update.png'
   url: /patches
   groups: [ System ]
   main: [true]
   tags: [ security, software, updates, patches]
   title: Updates
   description: See and install updates
-  read_permissions: [ org.opensuse.yast.system.patches.read ]
+  read_permissions: [ org.opensuse.yast.modules.yapi.patches.read ]
 
 repositories:
-  icon: '/icons/yast-sw_source.png'
+  icon: 'yast-sw_source.png'
   url: /repositories
   groups: [ System ]
   tags: [ software, repositories ]
   title: _("Software Repositories")
   description: _("See and manage configured software repositories")
-  read_permissions: [ org.opensuse.yast.system.repositories.read ]
+  read_permissions: [ org.opensuse.yast.modules.yapi.repositories.read ]

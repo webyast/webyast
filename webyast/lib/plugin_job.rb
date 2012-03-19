@@ -16,8 +16,6 @@
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA
 #++
 
-require 'gettext_rails'
-
 class PluginJob < Struct.new(:class_name,:method,:arguments)
 
   class << self
@@ -35,7 +33,7 @@ class PluginJob < Struct.new(:class_name,:method,:arguments)
     #   patch = Patch.new id
     #   PluginJob.run_async(0,patch,:install)
     def run_async(prio,object,method,*args)
-      Delayed::Job.enqueue(PluginJob.new(object,method,args),prio)
+      Delayed::Job.enqueue(PluginJob.new(object,method,args),{:priority =>prio})
     end
 
     # Counts the jobs which are running
@@ -73,9 +71,6 @@ class PluginJob < Struct.new(:class_name,:method,:arguments)
 #internal method. Use run_async and running? for asynchronous jobs
   def perform
 
-    #FIXME: this is a workaround only
-    I18n.supported_locales = ["en"]
-
     object = nil
     object = self[:class_name]
     if object.class == Symbol || object.class == String
@@ -97,8 +92,9 @@ class PluginJob < Struct.new(:class_name,:method,:arguments)
           name = resource.href.split("/").last
           if YastCache.find_key(name) == call_identifier
             Rails.logger.info "Enqueuing job again (sleep #{resource.cache_reload_after} seconds)"
-            Delayed::Job.enqueue(PluginJob.new(self[:class_name],function_method,function_args), resource.cache_priority, 
-                                 (resource.cache_reload_after).seconds.from_now)
+            Delayed::Job.enqueue(PluginJob.new(self[:class_name],function_method,function_args), 
+                                 {:priority => resource.cache_priority, 
+                                   :run_at => (resource.cache_reload_after).seconds.from_now})
           end
         end
       end

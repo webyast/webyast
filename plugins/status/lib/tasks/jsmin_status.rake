@@ -19,31 +19,32 @@
 # you may find current contact information at www.novell.com
 #++
 
-require "tempfile"
-JSCOMPRESSOR = File.join(RAILS_ROOT, '/lib/jsmin.rb')
-
-namespace :js do
-  javascripts = ['jqplot.categoryAxisRenderer.js', "jqplot.dateAxisRenderer.js", "jqplot.canvasTextRenderer.js", "jqplot.cursor.js"]
-
-  Dir.chdir(File.join(RAILS_ROOT, 'public', 'javascripts', 'plugin')) do    
-    javascripts.map! {|f| File.join(Dir.pwd, f)}
-    javascripts.unshift(File.join(RAILS_ROOT, 'public', 'javascripts', 'jquery.jqplot.js'))
-    file 'status-min.js' => javascripts do | f |
-      $dir = File.join(File.dirname(__FILE__), '/../../public/javascripts/min/')
-      mkpath($dir);
-      minify(f.prerequisites, $dir + f.name)
-    end
-  end
-
-  desc "Status module: minimize javascript source files for production environment"
-  task :"status" => ['status-min.js']  do
-     puts "Done"
-  end
-end
-
-def minify(list, output)
-   tmp = Tempfile.open('all')
-   list.each {|file| open(file) {|f| tmp.write(f.read) } }
-   tmp.rewind 
-   sh "ruby #{JSCOMPRESSOR} < #{tmp.path} > #{output}"
-end
+#FIXME
+#require "tempfile"
+#JSCOMPRESSOR = File.join(Rails.root, '/lib/jsmin.rb')
+#
+#namespace :js do
+#  javascripts = ['jqplot.categoryAxisRenderer.js', "jqplot.dateAxisRenderer.js", "jqplot.canvasTextRenderer.js", "jqplot.cursor.js"]
+#
+#  Dir.chdir(File.join(Rails.root, 'public', 'javascripts', 'plugin')) do    
+#    javascripts.map! {|f| File.join(Dir.pwd, f)}
+#    javascripts.unshift(File.join(Rails.root, 'public', 'javascripts', 'jquery.jqplot.js'))
+#    file 'status-min.js' => javascripts do | f |
+#      $dir = File.join(File.dirname(__FILE__), '/../../public/javascripts/min/')
+#      mkpath($dir);
+#      minify(f.prerequisites, $dir + f.name)
+#    end
+#  end
+#
+#  desc "Status module: minimize javascript source files for production environment"
+#  task :"status" => ['status-min.js']  do
+#     puts "Done"
+#  end
+#end
+#
+#def minify(list, output)
+#   tmp = Tempfile.open('all')
+#   list.each {|file| open(file) {|f| tmp.write(f.read) } }
+#   tmp.rewind 
+#   sh "ruby #{JSCOMPRESSOR} < #{tmp.path} > #{output}"
+#end

@@ -25,15 +25,9 @@ require 'exceptions'
 # Main goal is checking permissions, validate id and pass request to model.
 class RolesController < ApplicationController
 
-  before_filter :login_required
   before_filter :check_role_name, :only => [:delete, :show]
   before_filter :check_read_permission
   before_filter :check_write_permission, :only => [:update,:delete]
-
-  layout 'main'
-
-  # Initialize GetText and Content-Type.
-  init_gettext "webyast-roles"
 
 private
 
@@ -42,11 +36,11 @@ private
   end
 
   def check_write_permission
-    permission_check("org.opensuse.yast.permissions.write") #goes back to controllcenter if not
+    authorize! :write, Role #goes back to controllcenter if not
   end
 
   def check_read_permission
-    permission_check("org.opensuse.yast.permissions.read") #goes back to controllcenter if not
+    authorize! :read, Role #goes back to controllcenter if not
   end
 
 public
@@ -134,6 +128,7 @@ public
         format.html { flash[:warning] = _("Role name is invalid. Allowed is combination of a-z, A-Z, numbers, space, dash and underscore only.")
                       redirect_to "/roles/" }
       end
+      return
     end
     role = Role.find(params[:role_name])
     unless role.nil? #role already exists
@@ -143,6 +138,7 @@ public
         format.html { flash[:warning] = _("Role name is already used.")
                       redirect_to "/roles/" }
       end
+      return
     end
     # RORSCAN_INL: Protected by attr_accessible in Role model
     role = Role.new(params[:role_name])
@@ -158,7 +154,7 @@ public
   def destroy
     # RORSCAN_INL: User has already write permission for ALL roles here
     Role.delete params[:id]
-    flash[:notice] = _("Role <i>%s</i> was successfully removed.") % params[:id] if request.format.html?
+    flash[:notice] = _("Role \'%s\' was successfully removed.") % params[:id] if request.format.html?
     index
   end
 

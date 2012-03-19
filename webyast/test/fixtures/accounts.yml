@@ -1,4 +1,0 @@
-test:
- id: 1
- login: test_user
- salt: xyzzy

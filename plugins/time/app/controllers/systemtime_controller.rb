@@ -26,8 +26,6 @@ require 'systemtime' # RORSCAN_ITL
 # Main goal is checking permissions.
 class SystemtimeController < ApplicationController
 
-  before_filter :login_required
-
   #--------------------------------------------------------------------------------
   #
   # actions
@@ -36,7 +34,7 @@ class SystemtimeController < ApplicationController
 
   # Sets time settings. Requires write permissions for time YaPI.
   def update
-    yapi_perm_check "time.write"
+    authorize! :write, Time
     root = params[:systemtime]
     if root == nil
       logger.error "Response doesn't contain systemtime key" # RORSCAN_ITL
@@ -55,7 +53,7 @@ class SystemtimeController < ApplicationController
 
   # Shows time settings. Requires read permission for time YaPI.
   def show
-    yapi_perm_check "time.read"
+    authorize! :read, Time
     systemtime = Systemtime.find # RORSCAN_ITL
 
     respond_to do |format|

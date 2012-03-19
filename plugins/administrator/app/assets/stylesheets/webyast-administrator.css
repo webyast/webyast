@@ -1,0 +1,32 @@
+/*#--
+ *# Webyast framework
+ *#
+ *# Copyright (C) 2009, 2010 Novell, Inc.
+ *#   This library is free software; you can redistribute it and/or modify
+ *# it only under the terms of version 2.1 of the GNU Lesser General Public
+ *# License as published by the Free Software Foundation.
+ *#
+ *#   This library is distributed in the hope that it will be useful, but WITHOUT
+ *# ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
+ *# FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public License for more
+ *# details.
+ *#
+ *#   You should have received a copy of the GNU Lesser General Public
+ *# License along with this library; if not, write to the Free Software
+ *# Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA
+ *#++ */
+
+#administrator_password { position:inherit; }
+#administrator_aliases, #administrator_submit { float: left; vertical-align:middle; }
+#administrator_aliases { padding: 2px 3px 3px 3px; }
+#administrator_submit { border-radius:0px; margin-left:-1px; 	padding:2px; 	line-height:16px; 	border-color:#c4c4c4; }
+
+
+div.password_container { position:relative; margin-bottom:6px; }
+
+.graybar { width:208px; background:#dddddd; height:4px; display:inline-block;  position:absolute; top:30px; left:204px; }
+.colorbar { width:0px; background-image:url(passwordstrength.png); height:4px; display:inline-block; position:absolute; top:30px; left:204px; }
+.percent { font-weight:bold; font-size:11px; color:#888; position:absolute; top:23px; left:434px; right:0px; }
+
+#validation_result { margin-left: 15px; color:#D70000; font-size:11px; color:green; font-family: Tahoma,Trebuchet MS,Helvetica,sans-serif; }
+

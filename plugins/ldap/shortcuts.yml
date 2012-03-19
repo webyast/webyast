@@ -1,5 +1,5 @@
 main:
-  icon: '/icons/yast-ldap.png'
+  icon: 'yast-ldap.png'
   url: /ldap
   groups: [ Network ]
   tags: [ ldap ]

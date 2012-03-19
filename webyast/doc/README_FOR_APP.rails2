@@ -1,0 +1,13 @@
+== Webyast Rest Service
+Framework for writing plugins to manage target computers.
+
+=== provides
+* To check if your plugin match basic behavior use PluginBasicTests module.
+* To check if user has enough permissions to provide action use YastRoles
+* To report bad arguments use InvalidParameters
+* To report error on target machine use own exception based on BackendException (at first look if there is not already exist exception which fits your requirements)
+* To work with files use Paths module which define constants
+* Class which helps with configuration file handling is YaST::ConfigFile
+* Model which is based on configuration file should use YaST::SettingsModel
+* To call D-Bus call use YastService
+

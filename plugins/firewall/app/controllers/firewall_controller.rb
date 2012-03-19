@@ -23,13 +23,8 @@ include ApplicationHelper
 require 'firewall'
 
 class FirewallController < ApplicationController
-  before_filter :login_required
-  
-  init_gettext "webyast-firewall"
 
   CGI_PREFIX="firewall"
-  layout 'main'
-  
   NEEDED_SERVICES=["service:webyast","service:webyast-ui"]
   
   private
@@ -46,9 +41,8 @@ class FirewallController < ApplicationController
  
   public 
     def index
-      yapi_perm_check "firewall.read"
-      @write_permission = yapi_perm_granted?("firewall.write")
-      
+      authorize! :read, Firewall
+    
       @firewall = Firewall.find
       
       Rails.logger.error @firewall.inspect
@@ -66,18 +60,17 @@ class FirewallController < ApplicationController
     
 
     def show
-      yapi_perm_check "firewall.read"
-      firewall = Firewall.find
+      authorize! :read, Firewall
 
       respond_to do |format|
-        format.xml { render  :xml => firewall.to_xml( :dasherize => false ) }
-        format.html { render  :xml => firewall.to_xml( :dasherize => false ) }
-        format.json { render :json => firewall.to_json( :dasherize => false ) }
+        format.xml  { render  :xml => Firewall.find.to_xml( :dasherize => false ) }
+        format.html { index }
+        format.json { render :json => Firewall.find.to_json( :dasherize => false ) }
       end
     end
     
     def update
-      yapi_perm_check "firewall.write"
+      authorize! :write, Firewall
       firewall = Firewall.find 
       root = params["firewall"]
       

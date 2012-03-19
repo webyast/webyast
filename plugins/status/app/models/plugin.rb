@@ -26,6 +26,7 @@
 #
 
 require 'yast_service'
+require 'builder'
 
 class Plugin
   attr_reader :level
@@ -33,7 +34,6 @@ class Plugin
   attr_reader :short_description
   attr_reader :long_description
   attr_reader :details
-  attr_reader :confirmation_host
   attr_reader :confirmation_link
   attr_reader :confirmation_label
   attr_reader :confirmation_kind
@@ -46,7 +46,6 @@ class Plugin
                  short_description = "", 
                  long_description = "", 
                  details = "", 
-                 confirmation_host = "", 
                  confirmation_link = "", 
                  confirmation_label = "",
                  confirmation_kind = "")
@@ -55,7 +54,6 @@ class Plugin
     @short_description = short_description
     @long_description = long_description
     @details = details
-    @confirmation_host = confirmation_host
     @confirmation_link = confirmation_link
     @confirmation_label = confirmation_label
     @confirmation_kind = confirmation_kind
@@ -82,8 +80,8 @@ class Plugin
         if status.class != NameError && status.respond_to?(:read)
           stat = status.read
           ret << Plugin.new(stat[:level], stat[:message_id], 
-                            stat[:short_description], stat[:long_description], stat[:details],
-                            stat[:confirmation_host], stat[:confirmation_link], 
+                            stat[:short_description], stat[:long_description], 
+                            stat[:details], stat[:confirmation_link], 
                             stat[:confirmation_label], stat[:confirmation_kind] ) unless stat.blank?
         end
       }
@@ -101,7 +99,6 @@ class Plugin
       xml.short_description short_description
       xml.long_description long_description
       xml.details details
-      xml.confirmation_host confirmation_host
       xml.confirmation_link confirmation_link
       xml.confirmation_label confirmation_label
       xml.confirmation_kind confirmation_kind

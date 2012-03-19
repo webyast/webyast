@@ -20,7 +20,6 @@
 #++
 
 include ApplicationHelper
-require 'http_accept_language'
 require 'plugin'
 
 #
@@ -36,37 +35,14 @@ class PluginsController < ApplicationController
 
 protected
 
-layout "main"
-
-def load_translations
-  resources = Resource.find :all
-  resources.each {|resource|
-    name = resource.href.split("/").last
-    #searching directory for translation
-    model_files = Dir.glob(File.join(RAILS_ROOT, "**", "#{name}_state.rb"))
-    #trying plugin directory in the git 
-    model_files = Dir.glob(File.join(RAILS_ROOT, "..","**", "#{name}_state.rb")) if model_files.empty? 
-    unless model_files.empty?
-      locale_path = File.join(File.dirname(File.dirname(File.dirname(model_files.first))),"locale")
-      mo_files = Dir.glob(File.join(locale_path, "**", "*.mo"))
-      unless mo_files.empty?
-        domainname = File.basename(mo_files.first,".mo")
-        opt = {:locale_path => locale_path}
-        init_gettext(domainname, opt)
-      end
-    end
-  }
-end
-
 public
     
   # GET /plugins
   # GET /plugins.xml
   #
   def index
-    permission_check("org.opensuse.yast.system.status.read") # RORSCAN_ITL
+    authorize! :read, Metric
     what = :all
-    load_translations unless Rails.cache.exist?("plugin:find:#{what.inspect}")
     @plugins = Plugin.find(what)
     respond_to do |format|
       format.json { render :json => @plugins.to_json }
@@ -78,9 +54,7 @@ public
   # GET /plugins/users.xml
   #
   def show
-    permission_check("org.opensuse.yast.system.status.read") # RORSCAN_ITL
-    load_translations unless Rails.cache.exist?("plugin:find:#{params[:id]}")
-    # RORSCAN_INL: User has already read permission for ALL plugins here
+    authorize! :read, Metric
     @plugins = Plugin.find(params[:id])
     respond_to do |format|
       format.json { render :json => @plugins.to_json }

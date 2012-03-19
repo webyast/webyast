@@ -1,0 +1,10 @@
+<% if YastCache.active %>
+  <script type="text/javascript">
+    var AUTH_TOKEN = 'authenticity_token=' + encodeURIComponent("<%= escape_javascript form_authenticity_token %>");
+    try {
+      notification({'module':'<%= escape_javascript module_name -%>', 'AUTH_TOKEN': AUTH_TOKEN}, 1000, 11000);
+    } catch(e) {
+      console.log("Notification start failed: " + e );
+    };
+  </script>
+<% end %>

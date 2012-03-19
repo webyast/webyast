@@ -18,7 +18,6 @@
 
 --- 
 - !ruby/object:Plugin 
-  confirmation_host: client
   confirmation_kind: link
   confirmation_label: register
   confirmation_link: /registration
@@ -28,7 +27,6 @@
   message_id: MISSING_REGISTRATION
   short_description: Registration is missing
 - !ruby/object:Plugin 
-  confirmation_host: service
   confirmation_kind: link
   confirmation_label: Test mail received
   confirmation_link: /mail/state

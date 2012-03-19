@@ -20,14 +20,15 @@
 #++
 
 require File.expand_path(File.dirname(__FILE__) + "/../test_helper")
+require File.expand_path(File.dirname(__FILE__) + "/stubs")
+require File.join(RailsParent.parent, "test","devise_helper")
 
 class DnsControllerTest < ActionController::TestCase
 
   def setup
-    @model_class = Dns
+    devise_sign_in(Network::DnsController)
     @controller = Network::DnsController.new
-    @request = ActionController::TestRequest.new
-    @request.session[:account_id] = 1 # defined in fixtures
+    @model_class = Dns
     stubs_functions # stubs actions defined in stubs.rb
   end  
   
@@ -42,8 +43,9 @@ class DnsControllerTest < ActionController::TestCase
 
   def test_update_without_info
     @model_class.any_instance.stubs(:save).returns true
+    @request.accept = Mime::XML
     # had a bug with nil.split
-    put :update, { "dns" => {} }
+    put :update, { "dns" => {} }, :format => "xml"
     assert_response :success
   end
 end

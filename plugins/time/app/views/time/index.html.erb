@@ -1,0 +1,254 @@
+<!--
+# Copyright (c) 2009-2010 Novell, Inc.
+#
+# All Rights Reserved.
+#
+# This program is free software; you can redistribute it and/or modify it
+# under the terms of version 2 of the GNU General Public License
+# as published by the Free Software Foundation.
+#
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+# GNU General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with this program; if not, contact Novell, Inc.
+#
+# To contact Novell about this file by physical or electronic mail,
+# you may find current contact information at www.novell.com
+-->
+
+<% disabled = cannot? :write, Time %>
+<%= content_for :head do %>
+  <style type="text/css">
+	 label.error {
+		float:none;
+		display:inline;
+		font-weight:bold;
+		color:#990000;
+		padding-left:.5em;
+		vertical-align:middle;
+	 }
+	 label.valid {
+		background: url('<%= asset_path('checked.gif') %>') no-repeat;
+		padding:0px 0px 0px 18px;
+		vertical-align:middle;
+		margin-left:5px;
+	 }
+  </style>
+
+  <%= javascript_tag do -%>
+    $(document).ready( function() {
+      $("#date_date").datepicker( { dateFormat: 'dd/mm/yy'} );
+
+      $("#region").change(function() {
+         $.ajax({
+           url: "<%= url_for({ :action => :timezones_for_region}) -%>",
+           data: 'value='+$(this).val(),
+           type: "GET",
+           success: function(data, status, xhr) {
+             $('#timezones').html(data);
+           },
+           error: function(xhr, status, error) {
+             $('#timezones').html('<b><%= escape_javascript _("Error: Cannot get information.") -%></b>');
+           }
+         });
+      });
+    });
+  <% end -%>
+
+  <script type="text/javascript">
+	 $(document).ready(function() {
+		validateDomainName("ntp_server");
+		validateTime("currenttime");
+
+		$("#timeForm").validate({
+		  onkeyup: function(element) { this.element(element); },
+		  rules:{
+			 ntp_server: {
+				required: "#ntp_sync:checked",
+				ntp_server: true
+			 },
+			 currenttime: {
+				required:true,
+				currenttime: true
+			 }
+		  },
+		  submitHandler: function(form) {
+  			var message = <%= jss _("Please wait") -%>;
+		    $.modalDialog.wait( {message: message});
+        form.submit();
+      },
+		  success: "valid",
+		  messages: {
+			 ntp_server: {
+				 required: <%= jss _("This field is required") -%>,
+				 ntp_server: <%= jss _("Enter a valid domain name or an IP address") -%>
+			 },
+			 currenttime: {
+				required: <%= jss _("This field is required") -%>,
+				currenttime: <%= jss _("Invalid time format. Correct one is hh:mm:ss") -%>
+			 }
+		  }
+		});
+
+    <% if @stime.hwclock %>
+      // allows to switch between radio buttons and disable validation if #timeconfig_manual is checked
+      $('#timeconfig_manual').click(function() {
+        var settings = $('#timeForm').validate().settings;
+        delete settings.rules.ntp_server;
+        delete settings.messages.ntp_server;
+        $('#ntp_server').val("");
+        $('#ntp_server').attr("disabled","disabled");
+        $('#currenttime').focus();
+      });
+
+      // enable form validation for #ntp_server if #ntp_sync is checked
+      $('#ntp_sync').click(function() {
+        var settings = $('#timeForm').validate().settings;
+        settings.rules.ntp_server = {required: true};
+        settings.messages.ntp_server = "<%= _("This field is required") -%>";
+        settings.messages.ntp_server = {ntp_server: "<%= _("Enter a valid domain name or an IP address") -%>"};
+        $('#ntp_server').removeAttr("disabled");
+      });
+    <% else %>
+      $('#ntp_sync').hide();
+    <% end %>
+  });
+</script>
+
+  <!-- FIXME move javascript function outside of index -->
+  <%= javascript_tag do -%>
+    function submitTime() {
+		if($("#timeForm").valid() ) {
+		  //$('#progress').show();
+      disable_forms();
+		  return true;
+		}
+    };
+  <% end -%>
+  <%= javascript_tag do -%>
+    function enable() {
+      if ( !<%= disabled %> ){
+        $("#date_date")[0].disabled = false;
+        $("#currenttime")[0].disabled = false;
+        //$("#timeForm").valid();
+      }
+    };
+    function disable() {
+        $("#date_date")[0].disabled = true;
+        $("#currenttime")[0].disabled = true;
+        //$("#timeForm").valid();
+    }
+  <% end -%>
+<% end %>
+
+<div class="plugin-content plugin-border">
+  <%= render :partial => 'shared/missing_write_permissions' if disabled %>
+
+	 <%= form_tag '/time/update', {:id => "timeForm", :class=>"webyast_form", :onsubmit => "return submitTime();"} do %>
+    <div class="plugin-header">
+      <div class="left">
+        <label class="plugin-icon-container"><%= image_tag("time.png", :class=>"plugin-icon") %></label>
+        <label class="plugin-name"><%=_("Time")%></label>
+     	</div>
+
+      <div class="right" >
+        <span id="questionMark" style="margin:2px 5px; float:none;">?</span>
+      </div>
+     	<div class="clearfix"></div>
+    </div>
+
+    <div class="clearfix">&nbsp;</div>
+
+    <fieldset class="webyast_fieldset">
+      <div class="fieldset_header">
+	      <span class="fieldset_header_title" ><%= _("Timezone")%></span>
+	    </div>
+
+	    <div class="fieldset_body">
+	      <div class="row">
+          <label for="region"><%=_("Region")%></label>
+          <%= select_tag "region", options_for_select(@stime.regions, @stime.region["name"]), :disabled => disabled %>
+  	    </div>
+
+ 	      <div class="row">
+          <label for="timezone"><%=_("Timezone")%></label>
+          <span id="timezones">
+            <%= render(:partial => 'timezones', :locals => {:region => @stime.region, :default => @stime.timezone, :disabled => disabled})  %>
+          </span>
+        </div>
+
+        <% if @stime.respond_to?(:utcstatus) && !@stime.utcstatus.nil? %>
+          <%# I can't get this cobe-ing checkbox line up with the rest of the fields otherwise, grr
+              4em, because labels are 5em wide | -bubli
+          %>
+        <div class="row">
+          <label><%=_("Hardware clock is set to UTC")%></label>
+          <%# don't use check_box helper as it generate also hidden opposite value %>
+          <input type="checkbox" name="utc" id="utc" value="true" <%=  "checked='checked'" if @stime.utcstatus %> <%=  "disabled='disabled'" if disabled %> />
+        </div>
+        <% end %>
+      </div>
+      <div class="clearfix">&nbsp;</div>
+    </fieldset>
+
+    <% if @stime.hwclock %>
+      <fieldset class="webyast_fieldset">
+        <div class="fieldset_header">
+          <span class="fieldset_header_title" ><%= _("Time")%></span>
+        </div>
+
+        <div class="fieldset_body">
+          <fieldset class="time_filedset" >
+            <legend>
+              <input type="radio" name="timeconfig" value="manual" onclick="enable();" id="timeconfig_manual"
+              <%= "disabled='disabled'" if disabled%>
+              <%= "checked='checked'" unless @ntp_available %>/>
+              <%=_("Manually configure time")%>
+            </legend>
+
+            <div class="row">
+              <label for="date_date"><%= _("Date") %></label>
+              <%= text_field "date","date", :disabled=> @ntp_available ? true :false , :value => @stime.date %>
+            </div>
+
+            <div class="row">
+              <label for="currenttime"><%= _("Time") %></label>
+              <%= text_field_tag "currenttime", @stime.time, :disabled=> @ntp_available ? true :false %>
+            </div>
+          </fieldset>
+
+          <fieldset class="time_filedset" >
+            <legend>
+              <input id="ntp_sync" type="radio" name="timeconfig" value="ntp_sync" onclick="disable();"
+              <%=  "disabled=\"disabled\"" if disabled || !@ntp_available %>
+              <%=  "checked='checked'" if @ntp_available %> />
+              <%=_("Synchronize via Network Time Protocol (NTP)")%>
+            </legend>
+
+            <% if @ntp_available %>
+             <div class="row">
+              <label for="ntp_server"><%= _("NTP server") %></label>
+                <%= options = {}
+                    options[:disabled] = "disabled" unless can?(:setserver, Ntp)
+                    text_field_tag("ntp_server", @ntp.actions[:ntp_server] || "", options={:class=>"ntp_server"})  %>
+             </div>
+            <% end %>
+          </fieldset>
+          <div class="clearfix"></div>
+        </div>
+      </fieldset>
+    <% end %>
+
+    <div class="clearfix"></div>
+
+    <div class="button_container">
+      <div class="hr">&nbsp;</div>
+      <div class="nav-buttons" style="">
+        <%= form_send_buttons :id=>"timeSubmit", :disabled => disabled, :class => "button" %>
+      </div>
+    </div>
+  <% end %>
+</div>

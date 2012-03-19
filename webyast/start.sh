@@ -21,33 +21,5 @@
 rm -f log/development.log
 rake db:migrate
 rake sass:update
-if [ -f public/javascripts/min/base-min.js ] ; then
-  echo "base-min.js already available"
-else
-  rake js:base
-fi
 
-if [ -f ../plugins/users/public/javascripts/min/users-min.js ] ; then
-  echo "users-min.js already available"
-else
-  if [ -f ../plugins/users/lib/tasks/jsmin.rake ] ; then
-    cd ../plugins/users/
-    rake js:users
-    cd -
-  else
-    echo "users-min.js not needed"
-  fi
-fi
-
-if [ -f ../plugins/status/public/javascripts/min/status-min.js ] ; then
-  echo "status-min.js already available"
-else
-  if [ -f ../plugins/status/lib/tasks/jsmin_status.rake ] ; then
-    cd ../plugins/status/
-    rake js:status
-    cd -
-  else
-    echo "status-min.js not needed"
-  fi
-fi
-ruby script/server -p 54984
+rails server -p 54984

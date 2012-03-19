@@ -20,26 +20,25 @@
 #++
 
 require File.expand_path(File.dirname(__FILE__) + "/../test_helper")
+require File.join(RailsParent.parent, "test","devise_helper")
 require 'test/unit'
 
 
 class SystemControllerTest < ActionController::TestCase
-  fixtures :accounts
 
   def setup
+    devise_sign_in
     @controller = SystemController.new
-    @request = ActionController::TestRequest.new
-    # http://railsforum.com/viewtopic.php?id=1719
-    @request.session[:account_id] = 1 # defined in fixtures
-
     @model = System.instance
     @model.stubs(:consolekit_power_management).with(:reboot).returns(true)
     @model.stubs(:consolekit_power_management).with(:shutdown).returns(true)
 
   end
 
-  test "check 'show' result" do
-    ret = get :show
+  test "check show result" do
+    mime = Mime::XML
+    @request.accept = mime.to_s
+    ret = get :show, :format => "xml"
     # success (200 OK)
     assert_response :success
 
@@ -53,26 +52,22 @@ class SystemControllerTest < ActionController::TestCase
 	(ret_hash['actions']['shutdown']['active'] == true or ret_hash['actions']['shutdown']['active'] == false)
   end
 
-  test "don't change status on error" do
-    ret = get :show
-    # success (200 OK)
-    assert_response :success
+  test "wrong or missing id" do
+    mime = Mime::XML
+    @request.accept = mime.to_s
 
-    orig = Hash.from_xml(ret.body)
-
-    put :update, :system => {:shutdown => {:active => true}, :zzzzzz => {}}
+    put :update, :format => "xml"
     assert_response :missing
 
-    ret = get :show
-    # success (200 OK)
-    assert_response :success
-
-    assert orig == Hash.from_xml(ret.body)
+    put :update, :id =>"not_valid", :format => "xml"
+    assert_response :missing
   end
 
 
   test "request reboot" do
-    ret = put :update, :system => {:reboot => {:active => true}}
+    mime = Mime::XML
+    @request.accept = mime.to_s
+    ret = put :update, :id =>"reboot", :format => "xml"
     assert_response :success
 
     # :reboot action must be active
@@ -80,7 +75,9 @@ class SystemControllerTest < ActionController::TestCase
   end
 
   test "request shutdown" do
-    ret = put :update, :system => {:shutdown => {:active => true}}
+    mime = Mime::XML
+    @request.accept = mime.to_s
+    ret = put :update, :id =>"shutdown", :format => "xml"
     assert_response :success
 
     # :shutdown action must be active
@@ -90,80 +87,31 @@ class SystemControllerTest < ActionController::TestCase
 
   # test access rights
 
-  test "return error when not logged in" do
-    # remember the current setting
-    session_backup = @request.session
-    @request.session = {} # the session is not defined
-    mime = Mime::XML
-    ret = get :show, :format=>'xml'
-    # expect 401 Unauthorized error code
-    assert_response :unauthorized
-
-    # revert back the original session setting (for the following tests)
-    @request.session = session_backup
-  end
-
   test "return error when not permitted" do
-    @controller.stubs(:permission_check).raises(NoPermissionException.new("action", "test"))
+    @controller.stubs(:authorize!).raises(CanCan::AccessDenied.new())
     mime = Mime::XML
-    ret = put :update, :system => {:reboot => {:active => true}}, :format=>'xml'
+    ret = put :update, :id =>"shutdown", :format=>'xml'
     # expect 403 Forbidden error code
     assert_response 403
 
     # set permissions back for the other tests
-    @controller.stubs(:permission_check).returns(true);
+    @controller.stubs(:authorize!).returns(true);
   end
 
 
   # test invalid / malformed requests
 
-  test "invalid (empty) request" do
-    ret = put :update
-    assert_response :missing
-  end
-
-  test "invalid (malformed) request" do
-    ret = put :update, :zzzzzzz => :aaaaaaa
-    assert_response :missing
-  end
-
-  test "invalid (empty actions) request" do
-    ret = put :update, :system => {}
-    assert_response :missing
-  end
-
-  test "invalid (unknown) request" do
-    ret = put :update, :system => {:_invalid_action_ => {:active => true}}
-    assert_response :missing
-  end
-
-  test "invalid (unexpected type) request" do
-    ret = put :update, :system => {:reboot => :string}
-    assert_response :missing
-  end
-
-  test "invalid (missing active parameter) request" do
-    ret = put :update, :system => {:reboot => {}}
-    assert_response :missing
-  end
-
-  test "invalid (non-boolean active parameter) request" do
-    ret = put :update, :system => {:reboot => {:active => 'string'}}
-    assert_response :missing
-  end
-
-  test "'reboot' not accpeted via GET" do
+  test "reboot not accpeted via GET" do
     ret = get :reboot
 
     # redirected to the control panel?
     assert_response :found
     assert_redirected_to :controller => :controlpanel, :action => :index
-
     # error reported?
-    assert !ret.flash[:error].blank?
+    assert !(ret.respond_to?('flash') && ret.flash[:error].blank?)
   end
 
-  test "'shutdown' not accpeted via GET" do
+  test "shutdown not accpeted via GET" do
     ret = get :shutdown
 
     # redirected to the control panel?
@@ -171,33 +119,31 @@ class SystemControllerTest < ActionController::TestCase
     assert_redirected_to :controller => :controlpanel, :action => :index
 
     # error reported?
-    assert !ret.flash[:error].blank?
+    assert !(ret.respond_to?('flash') && ret.flash[:error].blank?)
   end
 
-  test "check 'shutdown' result" do
+  test "check shutdown result" do
     ret = put :shutdown
     # redirected to the control panel?
     assert_response :found
-    assert_redirected_to :controller => :logout
+    assert_redirected_to :controller => :accounts, :action => :sign_out
 
-    # no error and a message present?
-    assert ret.flash[:error].blank?
-    assert !ret.flash[:message].blank?
+    # error reported?
+    assert !(ret.respond_to?('flash') && ret.flash[:error].blank?)
   end
 
-  test "check 'reboot' result" do
+  test "check reboot result" do
     ret = put :reboot
 
     # redirected to the control panel?
     assert_response :found
-    assert_redirected_to :controller => :logout
+    assert_redirected_to :controller => :accounts, :action => :sign_out
 
-    # no error and a message present?
-    assert ret.flash[:error].blank?
-    assert !ret.flash[:message].blank?
+    # error reported?
+    assert !(ret.respond_to?('flash') && ret.flash[:error].blank?)
   end
 
-  test "check 'shutdown' failed" do
+  test "check shutdown failed" do
     @model.stubs(:shutdown).returns(false)
     ret = put :shutdown
 
@@ -206,10 +152,10 @@ class SystemControllerTest < ActionController::TestCase
     assert_redirected_to :controller => :controlpanel, :action => :index
 
     # error reported?
-    assert !ret.flash[:error].blank?
+    assert !(ret.respond_to?('flash') && ret.flash[:error].blank?)
   end
 
-  test "check 'reboot' failed" do
+  test "check reboot failed" do
     @model.stubs(:reboot).returns(false)
     ret = put :reboot
 
@@ -218,7 +164,7 @@ class SystemControllerTest < ActionController::TestCase
     assert_redirected_to :controller => :controlpanel, :action => :index
 
     # error reported?
-    assert !ret.flash[:error].blank?
+    assert !(ret.respond_to?('flash') && ret.flash[:error].blank?)
   end
 
 

@@ -24,7 +24,7 @@
 <%= report_error(error, error_string) if error_type == :unknown %>
 
 <% unless patch %>
-  <% javascript_tag do %>
+  <%= javascript_tag do %>
     if($.browser.msie() && $.browser.version.number() == 8 ) {
       $('#status-eye').css("background", "url(/images/circle-red.png)").addClass('eye_warning');
     } else {
@@ -33,7 +33,7 @@
   <% end %>
 
   <div class="statusbar_row">
-   	<img src="/images/status-warning.png">
+        <%= image_tag("warning.png") %>
 	  <% case error_type when :unknown %>
             <%= _("No information about patches available") %>
 	  <% when :unsigned %>
@@ -46,7 +46,6 @@
             <% end %>
 	  <% end %>
   </div>
-
 <% else %>
   <% label = [] %>
   <% update = false %>
@@ -73,8 +72,8 @@
     <% if patch[:security] > 0 %>
       <% update = true %>
       <div class="statusbar_row">
-        <img src="/icons/kupdateapplet_red.png" style="display:inline;">
-        <% link_to "patches", :class=>"warning_message" do %>
+        <%= image_tag("kupdateapplet_red.png", :style=>"display:inline;") %>
+        <%= link_to "patches", :class=>"warning_message" do %>
           <%= _("Security Updates: %d") % patch[:security] %>
         <% end %>
       </div>
@@ -83,8 +82,8 @@
     <% if patch[:important] > 0 %>
       <% update = true %>
       <div class="statusbar_row">
-        <img src="/icons/kupdateapplet_yellow.png">
-        <% link_to "patches", :class=>"warning_message" do %>
+        <%= image_tag("kupdateapplet_yellow.png") %>
+        <%= link_to "patches", :class=>"warning_message" do %>
           <%= _("Important Updates: %d") % patch[:important] %>
         <% end %>
       </div>
@@ -93,8 +92,8 @@
     <% if patch[:optional] > 0 %>
       <% update = true %>
       <div class="statusbar_row">
-        <img src="/icons/kupdateapplet_optional.png">
-        <% link_to "patches", :class=>"warning_message" do %>
+        <%= image_tag("kupdateapplet_optional.png") %>
+        <%= link_to "patches", :class=>"warning_message" do %>
           <%= _("Optional Updates: %d") % patch[:optional] %>
         <% end %>
       </div>
@@ -102,23 +101,34 @@
 
     <% if update == false %>
       <div class="statusbar_row">
-        <img src="/images/checkmark.gif" class="checked_health">
+        <%= image_tag("checkmark.gif", :class=>"checked_health") %>
         <%= _("Your system is up to date.") %> <!-- RORSCAN_ITL -->
       </div>
     <% end %>
 
     <% if patch[:security] > 0 or patch[:important] > 0 or patch[:optional] > 0 %>
+      
       <div class="update_all">
-        <% link_to_remote _("Install all"), :update =>"statusbar_patches", :url => { :controller => :patches, :action => :start_install_all}, :confirm => _("Updating all. Are you sure?") %>
+        <%= link_to _("Install all"), {:controller=>"patches", :action => 'start_install_all'}, :remote=> true %>
       </div>
+
     <% end %>
 
   <% if refresh_timeout.to_i > 0 -%>
     <!-- refresh the status again after a timeout -->
-    <% javascript_tag do -%>
+    <%= javascript_tag do -%>
       setTimeout(function() {
-        $('#statusbar_patches').html('<div class="statusbar_row"><%= image_tag("/images/working.gif", :class => "small-working-icon") %><%= _("Loading patch information") %></div>')
-        <%= remote_function(:update => "statusbar_patches", :url => { :controller => :patches, :action => :show_summary, :background => true }) %>
+        $('#statusbar_patches').html('<div class="statusbar_row"><%= image_tag("working.gif", :class => "small-working-icon") %><%= _("Loading patch information") %></div>')
+        $.ajax({
+            url: "<%= url_for({ :controller => :patches, :action => :show_summary, :background => true }) -%>",
+            type: "GET",
+            success: function(data, status, xhr) {
+              $('#statusbar_patches').html(data);
+            },
+            error: function(xhr, status, error) {
+              $('#statusbar_patches').html('<b><%= escape_javascript _("Error: Cannot get information.") -%></b>');
+            }
+        });
       }, <%= refresh_timeout.to_i * 1000 -%>);
     <% end -%>
   <% end -%>

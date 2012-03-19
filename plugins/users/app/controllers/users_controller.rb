@@ -1,20 +1,20 @@
 #--
 # Copyright (c) 2009-2010 Novell, Inc.
-# 
+#
 # All Rights Reserved.
-# 
+#
 # This program is free software; you can redistribute it and/or modify it
 # under the terms of version 2 of the GNU General Public License
 # as published by the Free Software Foundation.
-# 
+#
 # This program is distributed in the hope that it will be useful,
 # but WITHOUT ANY WARRANTY; without even the implied warranty of
 # MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
 # GNU General Public License for more details.
-# 
+#
 # You should have received a copy of the GNU General Public License
 # along with this program; if not, contact Novell, Inc.
-# 
+#
 # To contact Novell about this file by physical or electronic mail,
 # you may find current contact information at www.novell.com
 #++
@@ -22,9 +22,6 @@
 include ApplicationHelper
 
 class UsersController < ApplicationController
-  
-  before_filter :login_required
-  layout 'main'
 
   private
 
@@ -72,28 +69,13 @@ class UsersController < ApplicationController
     all_users_list.join(",")
   end
 
-  def permission_read
-    @permissions = {:groupsget => false, :useradd => false, :usermodify => false, :userdelete => false}
-    @permissions[:usermodify] = true if yapi_perm_granted? "users.usermodify"
-    @permissions[:groupsget] = true if yapi_perm_granted? "users.groupsget"
-    @permissions[:useradd] = true if yapi_perm_granted? "users.useradd"
-    @permissions[:userdelete] = true if yapi_perm_granted? "users.userdelete"
-  end
-
-  # Initialize GetText and Content-Type.
-  init_gettext "webyast-users"
-
   public
-
-  def initialize
-  end
 
   # GET /users
   # GET /users.xml
   # GET /users.json
   def index
-    permission_read
-    yapi_perm_check "users.usersget"
+    authorize! :usersget, User
     if params[:getent] == "1"
       respond_to do |format|
         format.html { render  :xml => GetentPasswd.find.to_xml }
@@ -102,15 +84,16 @@ class UsersController < ApplicationController
       end
       return
     end
+
     @users = User.find_all params
     Rails.logger.error "No users found." if @users.nil?
     respond_to do |format|
-      format.xml { 
+      format.xml {
         if @users.nil?
           render ErrorResult.error(404, 2, "No users found") and return
         else
-          render  :xml => @users.to_xml(:root => "users", 
-                  :dasherize => false ) 
+          render  :xml => @users.to_xml(:root => "users",
+                  :dasherize => false )
         end
         return
       }
@@ -118,11 +101,11 @@ class UsersController < ApplicationController
         if @users.nil?
           render ErrorResult.error(404, 2, "No users found") and return
         else
-          render :json => @users.to_json 
+          render :json => @users.to_json
         end
         return
       }
-      format.html { 
+      format.html {
         if @users.nil?
           flash[:error] = _("No users found.")
         else
@@ -143,7 +126,7 @@ class UsersController < ApplicationController
             user.roles_string = my_roles.join(",")
             @all_roles_string = all_roles.join(",")
             @groups = []
-            if @permissions[:groupsget]
+            if can? :groupsget, User
               @groups = Group.find :all
             end
             grps_list=[]
@@ -161,14 +144,13 @@ class UsersController < ApplicationController
   # GET /users/1
   # GET /users/1.xml
   def show
-    yapi_perm_check "users.userget"
+    authorize! :userget, User
     if params[:id].blank?
       render ErrorResult.error(404, 2, "empty parameter") and return
     end
 
     begin
       # try to find the user, and 404 if it does not exist
-      # RORSCAN_INL: User has already read permission for ALL users here
       @user = User.find(params[:id])
       if @user.nil?
         render ErrorResult.error(404, 2, "user not found") and return
@@ -178,16 +160,16 @@ class UsersController < ApplicationController
     end
 
     respond_to do |format|
+      format.html
       format.xml { render  :xml => @user.to_xml( :dasherize => false ) }
       format.json { render :json => @user.to_json }
     end
   end
 
-  # GET /users/new
-  # GET /users/new.xml
+  # Get /users/new
+  # Get /users/new.xml
   def new
-    permission_read
-    yapi_perm_check "users.useradd"
+    authorize! :useradd, User
     @user = User.new()
     @all_roles_string = ""
     all_roles=[]
@@ -200,7 +182,7 @@ class UsersController < ApplicationController
     @all_users_string = all_users
 
     @groups = []
-    if @permissions[:groupsget] == true
+    if can? :groupsget, User
       @groups = Group.find :all
     end
     grp_list=[]
@@ -208,15 +190,14 @@ class UsersController < ApplicationController
      grp_list.push(group.cn)
     end
     @all_grps_string = grp_list.join(",")
-    
+
     @user.grp_string = ""
   end
 
 
   # GET /users/1/edit
   def edit
-    yapi_perm_check "users.usermodify"
-    # RORSCAN_INL: User has already read/write permission for ALL users here
+    authorize! :usermodify, User
     @user = User.find(params[:id])
     @groups = Group.find(:all)
 
@@ -248,11 +229,9 @@ class UsersController < ApplicationController
   # POST /users.xml
   # POST /users.json
   def create
-    permission_read
-    yapi_perm_check "users.useradd"
+    authorize! :useradd, User
     error = nil
     begin
-      # RORSCAN_INL: Protected by attr_accessible in User model
       @user = User.create(params[:user])
       if @user.roles_string!=nil
         save_roles(@user.id,@user.roles_string)
@@ -272,7 +251,7 @@ class UsersController < ApplicationController
       respond_to do |format|
         format.xml  { render :show }
         format.json { render :show }
-        format.html { flash[:notice] = _("User <i>%s</i> was successfully created.") % @user.uid
+        format.html { flash[:notice] = _("User %s was successfully created.") % @user.uid
                       redirect_to :action => "index"
                     }
       end
@@ -282,11 +261,10 @@ class UsersController < ApplicationController
   # PUT /users/1
   # PUT /users/1.xml
   def update
-    yapi_perm_check "users.usermodify"
+    authorize! :usermodify, User
     error = nil
     begin
       begin
-        # RORSCAN_INL: User has already write permission for ALL User here
         @user = User.find(params[:user][:id])
       rescue Exception => error
         logger.error(error.message)
@@ -299,13 +277,13 @@ class UsersController < ApplicationController
         @user.type = "local"
         @user.grouplist = {}
         params[:user][:grp_string].split(",").each do |groupname|
-         @user.grouplist[groupname.strip] = "1" 
-        end unless params[:user][:grp_string].blank? 
+         @user.grouplist[groupname.strip] = "1"
+        end unless params[:user][:grp_string].blank?
         @user.save(params[:user][:id])
       end
     rescue Exception => error
       logger.error(error.message)
-    end    
+    end
     if error
       respond_to do |format|
         format.xml  { render ErrorResult.error(404, 2, error.message) }
@@ -318,7 +296,7 @@ class UsersController < ApplicationController
       respond_to do |format|
         format.xml  { render :show }
         format.json { render :show }
-        format.html { flash[:notice] = _("User <i>%s</i> was successfully updated.") % @user.uid
+        format.html { flash[:notice] = _("User %s was successfully updated.") % @user.uid
                       redirect_to :action => "index"
                     }
       end
@@ -329,16 +307,15 @@ class UsersController < ApplicationController
   # DELETE /users/1.xml
   # DELETE /users/1.json
   def destroy
-    yapi_perm_check "users.userdelete"
+    authorize! :userdelete, User
     begin
-      # RORSCAN_INL: User has already write permission for ALL User here
       @user = User.find(params[:id])
       @user.destroy
     rescue Exception => e
       respond_to do |format|
         format.xml  { render ErrorResult.error(404, 2, error.message) }
         format.json { render ErrorResult.error(404, 2, e.message) }
-        format.html { flash[:error] = _("Error: Could not remove user <i>%s</i>.") % @user.uid 
+        format.html { flash[:error] = _("Error: Could not remove user %s.") % @user.uid
                       redirect_to :action => "index"
                     }
        end
@@ -347,11 +324,10 @@ class UsersController < ApplicationController
     respond_to do |format|
       format.xml  { render :show }
       format.json { render :show }
-      format.html { flash[:notice] = _("User <i>%s</i> was successfully removed.") % @user.uid
+      format.html { flash[:notice] = _("User %s was successfully removed.") % @user.uid
                     redirect_to :action => "index"
                   }
       end
   end
 
 end
-

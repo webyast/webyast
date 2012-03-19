@@ -1,0 +1,199 @@
+<!--
+# Copyright (c) 2009-2010 Novell, Inc.
+# 
+# All Rights Reserved.
+# 
+# This program is free software; you can redistribute it and/or modify it
+# under the terms of version 2 of the GNU General Public License
+# as published by the Free Software Foundation.
+# 
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+# GNU General Public License for more details.
+# 
+# You should have received a copy of the GNU General Public License
+# along with this program; if not, contact Novell, Inc.
+# 
+# To contact Novell about this file by physical or electronic mail,
+# you may find current contact information at www.novell.com
+-->
+<% content_for :head do %>
+  <%= stylesheet_link_tag "webyast-repositories" %>
+
+  <script type="text/javascript">
+     $(document).ready(function(){
+	// define a custom validation function for repository URL
+	jQuery.validator.addMethod("repo_url", function(value, element) {
+	  return this.optional(element)
+	  // modified regexp from jQuery validation: accept any protocol, not only http(s) and ftp
+	  || /^([a-zA-Z]+):\/\/(((([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(%[\da-f]{2})|[!\$&'\(\)\*\+,;=]|:)*@)?(((\d|[1-9]\d|1\d\d|2[0-4]\d|25[0-5])\.(\d|[1-9]\d|1\d\d|2[0-4]\d|25[0-5])\.(\d|[1-9]\d|1\d\d|2[0-4]\d|25[0-5])\.(\d|[1-9]\d|1\d\d|2[0-4]\d|25[0-5]))|((([a-z]|\d|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(([a-z]|\d|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])*([a-z]|\d|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])))\.)+(([a-z]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(([a-z]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])*([a-z]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])))\.?)(:\d*)?)(\/((([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(%[\da-f]{2})|[!\$&'\(\)\*\+,;=]|:|@)+(\/(([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(%[\da-f]{2})|[!\$&'\(\)\*\+,;=]|:|@)*)*)?)?(\?((([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(%[\da-f]{2})|[!\$&'\(\)\*\+,;=]|:|@)|[\uE000-\uF8FF]|\/|\?)*)?(\#((([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(%[\da-f]{2})|[!\$&'\(\)\*\+,;=]|:|@)|\/|\?)*)?$/i.test(value);
+
+	}, "<%= _("Enter a valid repository URL.") -%>");
+
+	// define a custom validation function for repository alias
+	jQuery.validator.addMethod("repo_alias", function(value, element) {
+	  return this.optional(element)
+	  // PackageKit does not accept some special characters in alias
+	  || /^[^`'"\\\[\]^$\{\}<>]*$/i.test(value);
+
+	}, "<%= _("Symbols <b>%s</b> are not allowed in repository alias.") % "^${}[]&gt;&lt;`\\'\\\"\\\\" -%>");
+
+   // validate the form
+	$("#repositoryForm").validate({
+	  onkeyup: function(element) { this.element(element); },
+	  success: "valid",
+	  submitHandler: function(form) {
+	    var message = <%= jss _("Please wait") -%>;
+      $.modalDialog.wait( {message: message});
+      //disableFormOnSubmit(message);
+	    form.submit();
+	  }
+	});
+
+	// set custom translatable messages
+	$.extend($.validator.messages, {
+	  required: "<%= _("This value cannot be empty.") -%>"
+	});
+     });
+
+    // toggle the enable/disable link text after clicking it
+    // and update the hidden field
+    function toggle_flag(link, field, enabled_text, disabled_text) {
+      // change the hidden field, link text and hide/show the status
+      if ($(field).val() == "true")
+      {
+	$(field).val("false");
+	$(link).text(<%= jss _("enable") -%>);
+	$(enabled_text).hide();
+	$(disabled_text).show();
+      }
+      else
+      {
+	$(field).val("true");
+	$(link).text(<%= jss _("disable") -%>);
+	$(enabled_text).show();
+	$(disabled_text).hide();
+      };
+    };
+
+    // update the icon if enabled status is changed
+    function update_icon() {
+      if ($('#repo_enabled').val() == 'true')
+      {
+	$('#status_icon').removeClass('unused').addClass('ok');
+      }
+      else
+      {
+	$('#status_icon').removeClass('ok').addClass('unused');
+      }
+    };
+
+    // check whether the repository already exists
+    function check_duplicate()
+    {
+      var repos = <%= @repo_urls.map{|u| escape_javascript u}.to_json -%>;
+      var url = $('#repository_url').val();
+
+      for (var i = 0; i < repos.length; i++)
+      {
+	 if (url == repos[i])
+	 {
+	   return confirm(<%= jss _("A repository with this URL already exists.\nCreate a duplicate?") -%>);
+	 };
+      };
+
+      return true;
+    };
+
+    // submit handler for the form
+    function submit_handler()
+    {
+      if ($('#repositoryForm').valid())
+      {
+	if (check_duplicate() == false) return false;
+	$('#progress').show();
+	return true;
+      }
+      else
+      {
+	return false;
+      }
+    };
+
+  </script>
+<% end %>
+
+
+<% disabled = cannot? :write, Repository %>
+
+
+<div class="plugin-content plugin-border">
+  <div class="plugin-header">
+    <div class="left">
+      <label class="plugin-icon-container"><%= image_tag("repositories.png", :class=>"plugin-icon") %></label>
+      <label class="plugin-name">
+         <%= _("Software Repositories") %>
+         <%= header_spacer %>
+         <%= _("Add a new repository") %>
+      </label>
+    </div>
+  </div>
+
+  <div class="clearfix">&nbsp;</div>
+
+<!-- <div class='plugin-content'> -->
+
+  <%= form_for(@repo, :url => { :action => 'create', :id => @repo.id }, :html => { :method => :post, :id => 'repositoryForm', :class=>"webyast_form", :onsubmit => "return submit_handler();" } ) do |f| %>
+    <fieldset class="webyast_fieldset">
+      <div class="fieldset_header">
+        <span class="fieldset_header_title" >
+          <span id="status_icon" class="status-icon <%= @repo.enabled ? 'ok' : 'unused' %>"></span>
+          <%= _("Add a new repository") %>
+        </span>
+      </div>
+
+      <div class="fieldset_body">
+        <div class="row">
+          <label><%= _("Alias")%>: </label>
+          <%= f.text_field :id, :disabled => disabled, :class => 'repo_alias required' -%>
+        </div>
+        <div class="row">
+          <label><%= _("Name")%>: </label>
+          <%= f.text_field :name, :disabled => disabled, :class => 'required' -%>
+        </div>
+        <div class="row">
+          <label><%= _("URL")%>: </label>
+          <%= f.text_field :url, :disabled => disabled, :class => 'repo_url required' -%>
+        </div>
+        <div class="hr-row">
+          <div id="repo_hr">&nbsp;</div>
+        </div>
+        <div class="row">
+          <p onclick="update_icon();">
+            <%= hidden_field_with_toggle_link f, :enabled, @repo.enabled, _("Repository will be %s.") % "<i>#{bool_status(true)}</i>", _("Repository will be %s.") % "<i>#{bool_status(false)}</i>" -%>
+          </p>
+        </div>
+        <div class="row">
+          <p>
+            <%= hidden_field_with_toggle_link f, :autorefresh, @repo.autorefresh, _("Autorefresh will be %s.")% "<i>#{bool_status(true)}</i>", _("Autorefresh will be %s.")% "<i>#{bool_status(false)}</i>" -%>
+          </p>
+        </div>
+        <div class="row">
+          <p>
+            <%= hidden_field_with_toggle_link f, :keep_packages, @repo.keep_packages, _("Keep packages option will be %s.")% "<i>#{bool_status(true)}</i>", _("Keep packages option will be %s.")% "<i>#{bool_status(false)}</i>" -%>
+          </p>
+        </div>
+      </div>
+    </fieldset>
+    
+    <div class="button_container webyast_form">
+      <div class="hr">&nbsp;</div>
+        <div class="nav-buttons">
+          <% if !disabled -%>
+            <%= form_send_buttons :disabled => disabled, :class => "button", :id=>"firewallSubmitButton" %>
+          <% end -%>
+        </div>
+    </div>
+  <% end %>
+</div>

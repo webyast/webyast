@@ -23,9 +23,8 @@
 # Main goal is checking permissions.
 class Network::InterfacesController < ApplicationController
 
-  before_filter :login_required
-  before_filter(:only => [:index, :show]) { |c|    c.yapi_perm_check "network.read" }
-  before_filter(:only => [:create, :update]) { |c| c.yapi_perm_check "network.write"}
+  before_filter(:only => [:show, :index]) { |c| c.authorize! :read, Network }
+  before_filter(:only => [:create, :update]) { |c| c.authorize! :write, Network }
 
   # Sets interface settings. Requires write permissions for network YaPI.
   def update

@@ -39,9 +39,9 @@ class YastService
     # Lock YastService for single use
     #
     def YastService.lock
-      Rails.logger.info "DBUS locking"
+#      Rails.logger.info "DBUS locking"
       @@yast_mutex.lock
-      Rails.logger.info "DBUS locked"
+#      Rails.logger.info "DBUS locked"
     end
 
     #
@@ -56,7 +56,7 @@ class YastService
         rescue Exception => e
           Rails.logger.debug "DBUS is not locked"
         end
-        Rails.logger.info "DBUS unlocked"
+#        Rails.logger.info "DBUS unlocked"
       end
     end
 
@@ -115,7 +115,7 @@ class YastService
 	    # Etc helps to retrieve the login of the REST service
 	    require 'etc'
             # throw a PolicyKit exception instead of the DBus exception
-            raise NoPermissionException.new(parms[0], Etc.getlogin)
+            raise CanCan::AccessDenied.new(_("Not authorized! (%s)") % parms[0])
 	end
 
 	# rethrow other DBus Errors

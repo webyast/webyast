@@ -21,11 +21,9 @@
 
 <% content_for :head do %>
 
-  <%= javascript_include_tag "validation.js" %>
-  <script type="text/javascript">
-    var AUTH_TOKEN = 'authenticity_token=' + encodeURIComponent("<%= escape_javascript form_authenticity_token %>");
-    startNotifier({'module':'ldap', 'AUTH_TOKEN':AUTH_TOKEN}, 1000, 11000);
+  <%= render :partial => "shared/notification", :locals => { :module_name => 'ldap'} %>
 
+  <script type="text/javascript">
     $(document).ready(function() {
       validateDomainNameWithPortNumber("server");
 
@@ -78,15 +76,15 @@
   </script>
 <% end %>
 
-<% disabled = !@write_permission %>
+<% disabled = cannot? :write, Ldap %>
 
 <div class="plugin-content plugin-border">
   <%= render :partial => 'shared/missing_write_permissions' if disabled %>
   
-  <% form_for(:ldap, @ldap, :url => { :action => 'update' }, :html => { :method => :put, :id => 'ldapForm', :class=>"webyast_form" }) do |f| %>
+  <%= form_for(@ldap, :url => { :action => 'update' }, :html => { :method => :put, :id => 'ldapForm', :class=>"webyast_form" }) do |f| %>
     <div class="plugin-header">
       <div class="left">
-        <label class="plugin-icon-container"><img class="plugin-icon" src="/icons/ldap.png"></label>
+        <label class="plugin-icon-container"><%= image_tag("ldap.png", :class=>"plugin-icon") %></label>
         <label class="plugin-name"> <%= _("LDAP client") %></label>
       </div>
       <div class="right" >
@@ -114,14 +112,15 @@
         <div class="row">
           <%= label_tag :ldap_base_dn, _("Base DN") %>
           <%= text_field :ldap, :base_dn, :disabled => disabled, :class => "required" %>
-          <%= link_to_remote _("Fetch DN"),
+          <%= link_to _("Fetch DN"),
                 :url => { :controller=> :ldap, :action=> :fetch_dn },
+                :remote => true,
                 :loading => "$('#ldap_base_dn').attr('disabled', 'disabled'); $('#fetch_progress').show();",
                 :complete => "$('#fetch_progress').hide(); $('#ldap_base_dn').removeAttr('disabled')",
                 :with => "'server=' + $('#ldap_server').val()",
                 :html => { :class=> "button", :id=> "fetch_dn", :style=>"vertical-align:middle;", :disabled=>disabled }
           %>
-          <img src="/images/working.gif" class="small-working-icon" id="fetch_progress" style="display:none; vertical-align:middle;" alt='working...'/>
+          <%= image_tag("working.gif", :class=>"small-working-icon", :id=>"fetch_progress", :style=>"display:none; vertical-align:middle;", :alt=>'working...') %>
         </div>
    
         <div class="row">

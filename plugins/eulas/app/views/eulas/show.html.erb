@@ -18,15 +18,15 @@
 # To contact Novell about this file by physical or electronic mail,
 # you may find current contact information at www.novell.com
 -->
-<% disabled = ! @accept_permission %>
+<% disabled = cannot? :accept, License %>
 
 <div id="eula" class="plugin-content plugin-border">
 
-<% form_for(:eula, :url => { :action => :update, :id => @eula_id }, :html=> { :method => :put, :class=>"webyast_form"}) do |f|  -%>
+<%= form_for(:eula, :url => { :action => :update, :id => @eula_id }, :html=> { :method => :put, :class=>"webyast_form"}) do |f|  -%>
 
   <div class="plugin-header">
     <div class="left">
-      <label class="plugin-icon-container"><img class="plugin-icon" src="/icons/registration.png"></label>
+      <label class="plugin-icon-container"><%= image_tag("registration.png", :class=>"plugin-icon") %></label>
       <label class="plugin-name"><%=_("Licence Agreement")-%> - <%= @eula.name -%></label>
     </div>
     <div class="clearfix"></div>
@@ -36,7 +36,7 @@
 
   <fieldset class="webyast_fieldset eula_fieldset">
     <div class="eula-text-area">
-      <%= @eula.text.gsub(%r{^[\n\n$]}, '<p class="eula_paragraph">').gsub(%r{[\n]}, ' ')%>
+      <%= (@eula.text.gsub(%r{^[\n\n$]}, '<p class="eula_paragraph">').gsub(%r{[\n]}, ' ')).html_safe%>
     </div>
 
     <div class="clearfix">&nbsp;</div>

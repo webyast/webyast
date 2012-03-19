@@ -27,10 +27,12 @@
 # @author Stefan Schubert <schubi@suse.de>
 #
 
+
 require "yaml"
+
 CONFIGURATION_FILE = "status_configuration.yaml"
 KNOWN_KEYS = ['Network', 'CPU', 'Memory', 'Disk']
-PATH = File.join(File.dirname(__FILE__), '/../config/', CONFIGURATION_FILE)
+PATH = File.join("/var/lib/webyast", "status", CONFIGURATION_FILE)
     
 def check_config()
   if File.exist?(PATH)

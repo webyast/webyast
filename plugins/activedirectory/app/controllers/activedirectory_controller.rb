@@ -21,44 +21,30 @@
 # = Active Directory controller
 # Provides access to configuration of Active Directory
 
-#require 'client_exception'
 
 class ActivedirectoryController < ApplicationController
-  
-  before_filter :login_required
-  #before_filter :set_perm
-  layout 'main'
-
-  # Initialize GetText and Content-Type.
-  init_gettext 'yast_webclient_activedirectory'
-  
   def index
-    yapi_perm_check "activedirectory.read"
-    
+    authorize! :read, Activedirectory
     @poll_for_updates = true
-    @write_permission = yapi_perm_granted?("activedirectory.write")
     
     begin
       @activedirectory = Activedirectory.find
       Rails.logger.debug "ad: #{@activedirectory.inspect}"
-      
-    rescue ActiveResource::ResourceNotFound => e
+
+    rescue Exception => error  
       flash[:error] = _("Cannot read Active Directory client configuraton.")
-      @activedirectory  = nil
-      @write_permission  = {}
+      Rails.logger.error "ERROR: #{error.inspect}"
+      @activedirectory = nil
       render :index and return
     end
-
-    logger.debug "permissions: #{@write_permission.inspect}"
     return unless @activedirectory
   end
 
   # PUT action
   # Write AD client configuration
   def update
+    authorize! :write, Activedirectory
     @poll_for_updates = false
-    @write_permission = yapi_perm_granted?("activedirectory.write")
-    yapi_perm_check "activedirectory.write"
     
     if params["activedirectory"] == nil || params["activedirectory"] == {}
       raise InvalidParameters.new :activedirectory => "Missing"
@@ -101,8 +87,6 @@ class ActivedirectoryController < ApplicationController
       end
     else #REST API
       Rails.logger.debug "XML FORMAT"
-      
-      yapi_perm_check "activedirectory.write"
       args = params["activedirectory"]
       args = {} if args.nil?
 
@@ -121,7 +105,7 @@ class ActivedirectoryController < ApplicationController
   # GET action
   # Read AD client settings
   def show
-    yapi_perm_check "activedirectory.read"
+    authorize! :read, Activedirectory
     ad = Activedirectory.find
 
     respond_to do |format|

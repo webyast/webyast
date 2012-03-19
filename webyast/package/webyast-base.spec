@@ -10,10 +10,12 @@
 
 
 Name:           webyast-base
+Version:        0.3
+Release:        0
+Provides:       yast2-webservice = %{version}
+Obsoletes:      yast2-webservice < %{version}
 Provides:       webyast-language-ws = 0.1.0
 Obsoletes:      webyast-language-ws <= 0.1.0
-Provides:       webyast-base-ws = 0.2.24, webyast-base-ui = 0.2.65
-Obsoletes:      webyast-base-ws <= 0.2.24, webyast-base-ui <= 0.2.65
 
 %if 0%{?suse_version} == 0 || %suse_version > 1110
 # 11.2 or newer
@@ -31,31 +33,34 @@ Requires:       yast2-core >= 2.18.10
 Requires:       yast2-core >= 2.17.30.1
 Requires:       sysvinit > 2.86-195.3.1
 %endif
-Requires: 	webyast-base-branding-default
 Requires:       rubygem-passenger-nginx, rubygem-nokogiri
 Requires:       nginx >= 1.0
-Requires:       ruby-fcgi, sqlite, syslog-ng, check-create-certificate
+Requires:       sqlite3, syslog-ng, check-create-certificate, yast2-dbus-server
+PreReq:         webyast-base-branding >= %{version}
 
 %if 0%{?suse_version} == 0 || %suse_version <= 1130
 Requires:       ruby-dbus
 %else
 Requires:	rubygem-ruby-dbus
 %endif
-Requires:       rubygem-webyast-rake-tasks
-Requires:       rubygem-static_record_cache
-Requires:       yast2-dbus-server
+Requires:       rubygem-webyast-rake-tasks >= 0.2
+PreReq:		rubygem-bundler
 # 634404
 Recommends:     logrotate
-PreReq:         polkit, PackageKit, rubygem-rake, rubygem-sqlite3
-PreReq:         rubygem-rails-2_3 >= 2.3.8
-PreReq:         rubygem-rpam, rubygem-polkit1, rubygem-gettext_rails
-PreReq:         yast2-runlevel
+%if 0%{?suse_version} == 0 || %suse_version > 1110
+PreReq:         polkit, rubygem-polkit1
+%else
+# <11.1 or SLES11
+PreReq:         PolicyKit, rubygem-polkit
+%endif
+PreReq:         rubygem-rake, rubygem-sqlite3
+PreReq:         rubygem-rails-3_1
+PreReq:         rubygem-fast_gettext, rubygem-gettext_i18n_rails, rubygem-inifile
+PreReq:         rubygem-uglifier, rubygem-johnson
 License:	LGPL-2.0
 Group:          Productivity/Networking/Web/Utilities
 URL:            http://en.opensuse.org/Portal:WebYaST
 Autoreqprov:    on
-Version:        0.3.1
-Release:        0
 Summary:        WebYaST - base components
 Source:         www.tar.bz2
 Source1:        webyastPermissionsService.rb
@@ -69,36 +74,51 @@ Source10:       webyast
 Source11:       webyast.lr.conf
 Source12:       nginx.conf
 Source13:	control_panel.yml
+Source14:	config.yml
 
 BuildRoot:      %{_tmppath}/%{name}-%{version}-build
-BuildRequires:  ruby, pkg-config, rubygem-mocha, rubygem-static_record_cache
+BuildRequires:  ruby, pkg-config, rubygem-mocha
 # if we run the tests during build, we need most of Requires here too,
 # except for deployment specific stuff
-BuildRequires:  rubygem-webyast-rake-tasks, rubygem-restility
-BuildRequires:  yast2-core, yast2-dbus-server, sqlite, dbus-1
+BuildRequires:  rubygem-webyast-rake-tasks >= 0.2
+BuildRequires:  sqlite3, dbus-1
 %if 0%{?suse_version} == 0 || %suse_version <= 1130
 BuildRequires:  ruby-dbus
 %else
 BuildRequires:  rubygem-ruby-dbus
 %endif
-BuildRequires:  polkit, PackageKit, rubygem-sqlite3
-BuildRequires:  rubygem-rails-2_3 >= 2.3.8
-BuildRequires:  rubygem-rpam, rubygem-polkit1
+BuildRequires:  rubygem-sqlite3
+BuildRequires:  rubygem-rails-3_1
+%if 0%{?suse_version} == 0 || %suse_version > 1110
+BuildRequires:  polkit, rubygem-polkit1
+%else
+# <11.1 or SLES11
+BuildRequires:  PolicyKit, rubygem-polkit
+%endif
 # the testsuite is run during build
 BuildRequires:  rubygem-test-unit rubygem-mocha
-BuildRequires:  tidy, rubygem-haml, rubygem-nokogiri
-BuildRequires:  nginx >= 1.0, rubygem-passenger-nginx
+BuildRequires:  rubygem-haml, rubygem-nokogiri, rubygem-builder-3_0
+BuildRequires:  nginx >= 1.0
+BuildRequires:	rubygem-bundler
+BuildRequires:	rubygem-devise, rubygem-devise_unix2_chkpwd_authenticatable, rubygem-devise-i18n
+BuildRequires:	rubygem-cancan, rubygem-delayed_job, rubygem-static_record_cache
+BuildRequires:  rubygem-uglifier, rubygem-johnson
+BuildRequires:	rubygem-gettext, rubygem-ruby_parser, rubygem-inifile
 
-%if 0%{?suse_version} != 1140
-# since 12*, sass conflicts with haml, but SLES11 has already the new sass
-#BuildRequires:       rubygem-sass
-%endif
+BuildRequires:  rubygem-ruby-debug, rubygem-factory_girl, rubygem-factory_girl_rails, rubygem-mocha
 
-#rubygem-rack > 1.1 is has problems with rails/rake. So we ensure that we
-#still uses 1.1. (Can be removed if there is a stable version available)
-BuildRequires:  rubygem-rack <= 1.2
-Requires:       rubygem-rack <= 1.2
-Conflicts:      rubygem-rack > 1.2
+# FIXME: this pulls in Rails 3.0 packages
+BuildRequires:	rubygem-jquery-rails
+
+Requires:	rubygem-haml, rubygem-sqlite3, rubygem-builder-3_0
+Requires:       rubygem-fast_gettext, rubygem-gettext_i18n_rails, rubygem-rails-i18n
+
+Requires:	rubygem-devise, rubygem-devise_unix2_chkpwd_authenticatable, rubygem-devise-i18n
+Requires:	rubygem-cancan, rubygem-delayed_job, rubygem-static_record_cache
+
+# FIXME: this pulls in Rails 3.0 packages
+Requires:	rubygem-jquery-rails
+
 
 # This is for Hudson (build service) to setup the build env correctly
 %if 0
@@ -121,15 +141,13 @@ BuildArch:      noarch
 %package testsuite
 Group:    Productivity/Networking/Web/Utilities
 Requires: webyast-base = %{version}
-Provides:       webyast-base-ws-testsuite = 0.2.24, webyast-base-ui-testsuite = 0.2.65
-Obsoletes:      webyast-base-ws-testsuite <= 0.2.24, webyast-base-ui-testsuite <= 0.2.65
-
 Summary:  Testsuite for webyast-base package
 
 #
 %define pkg_home /var/lib/%{webyast_user}
 #
 
+Requires:	rubygem-factory_girl, rubygem-factory_girl_rails, rubygem-mocha, tidy
 
 %description
 WebYaST - Core components for UI and REST based interface to system manipulation.
@@ -145,11 +163,8 @@ Testsuite for core WebYaST package.
 
 %package branding-default
 Group:    Productivity/Networking/Web/Utilities
-Provides: webyast-branding
-Provides: webyast-base-ui-branding-default = 0.2.65
-Obsoletes: webyast-base-ui-branding-default <= 0.2.65
+Provides: webyast-base-branding = %{version}
 Requires: %{name} = %{version}
-#Requires: rubygem-mocha rubygem-test-unit tidy
 Summary:  Branding package for webyast-base package
 
 %description branding-default
@@ -160,18 +175,43 @@ This package contains css, icons and images for webyast-base package.
 %setup -q -n www
 
 %build
-env LANG=en rake makemo
-rake sass:update
-rake js:base
-rm -r app/sass
+%if %suse_version <= 1110
+export WEBYAST_POLICYKIT='true'
+%endif
+# build *.mo files (redirect sterr to /dev/null as it contains tons of warnings about obsoleted (commented) msgids)
+LANG=en rake gettext:pack 2> /dev/null
+
+# precompile assets
+rake assets:precompile
+
+# split manifest file
+rake assets:split_manifest
+rm -rf public/assets/manifest.yml
+
+# cleanup
+rm -rf tmp
+rm -rf log
+
+# remove Gemfile.lock created by the above rake calls
+rm Gemfile.lock
 
 %check
+
+%if %suse_version <= 1110
+export WEBYAST_POLICYKIT='true'
+%endif
 # run the testsuite
 RAILS_ENV=test rake db:migrate
+rake tmp:create
 RAILS_ENV=test $RPM_BUILD_ROOT%{webyast_dir}/test/dbus-launch-simple rake test
+
 
 #---------------------------------------------------------------
 %install
+
+%if %suse_version <= 1110
+export WEBYAST_POLICYKIT='true'
+%endif
 
 #
 # Install all web and frontend parts.
@@ -181,7 +221,20 @@ cp -a * $RPM_BUILD_ROOT%{webyast_dir}/
 rm -f $RPM_BUILD_ROOT%{webyast_dir}/log/*
 rm -rf $RPM_BUILD_ROOT/%{webyast_dir}/po
 rm -f $RPM_BUILD_ROOT%{webyast_dir}/COPYING
-touch $RPM_BUILD_ROOT%{webyast_dir}/db/schema.rb
+
+# install production mode Gemfile
+rake gemfile:production > $RPM_BUILD_ROOT%{webyast_dir}/Gemfile
+# install test mode Gemfile
+rake gemfile:test > $RPM_BUILD_ROOT%{webyast_dir}/Gemfile.test
+# install assets mode Gemfile
+rake gemfile:assets > $RPM_BUILD_ROOT%{webyast_dir}/Gemfile.assets
+
+# remove .gitkeep files
+find $RPM_BUILD_ROOT%{webyast_dir} -name .gitkeep -delete
+
+# remove *.po files (compiled *.mo files are sufficient)
+find $RPM_BUILD_ROOT%{webyast_dir}/locale -name '*.po' -delete
+
 
 %{__install} -d -m 0755                            \
     %{buildroot}%{pkg_home}/sockets/               \
@@ -213,8 +266,8 @@ ln -s /etc/nginx/uwsgi_params $RPM_BUILD_ROOT/etc/webyast
 ln -s /etc/nginx/win-utf $RPM_BUILD_ROOT/etc/webyast
 
 # Policies
-mkdir -p $RPM_BUILD_ROOT/usr/share/polkit-1/actions
-install -m 0644 %SOURCE4 $RPM_BUILD_ROOT/usr/share/polkit-1/actions
+mkdir -p $RPM_BUILD_ROOT/usr/share/%{webyast_polkit_dir}
+install -m 0644 %SOURCE4 $RPM_BUILD_ROOT/usr/share/%{webyast_polkit_dir}
 install -m 0644 %SOURCE6 $RPM_BUILD_ROOT/etc/
 install -m 0555 %SOURCE5 $RPM_BUILD_ROOT/usr/sbin/
 
@@ -241,6 +294,10 @@ mkdir -p $RPM_BUILD_ROOT%{webyast_dir}/tmp/sockets
 # install YAML config file
 mkdir -p $RPM_BUILD_ROOT/etc/webyast/
 cp %SOURCE13 $RPM_BUILD_ROOT/etc/webyast/
+
+%if %suse_version <= 1110
+cp %SOURCE14 $RPM_BUILD_ROOT/etc/webyast/
+%endif
 
 # install permissions service
 mkdir -p $RPM_BUILD_ROOT/usr/sbin/
@@ -273,10 +330,10 @@ rm -rf $RPM_BUILD_ROOT
 # which will be called AFTER the installation
 if /bin/rpm -q webyast-base-ui > /dev/null ; then
   echo "renaming webyast-base-ui to webyast-base"
-  if /sbin/yast runlevel summary service=webyast 2>&1|grep " 3 "|grep webyast >/dev/null ; then
+  if /sbin/chkconfig -l webyast 2> /dev/null | grep " 3:on " >/dev/null ; then
     echo "webyast is inserted into the runlevel"
     echo "#!/bin/sh" > %name-%version-%release-1
-    echo "/sbin/yast runlevel add service=webyast" >> %name-%version-%release-1
+    echo "/sbin/chkconfig -a webyast" >> %name-%version-%release-1
     echo "/usr/sbin/rcwebyast restart" >> %name-%version-%release-1
   else
     if /usr/sbin/rcwebyast status > /dev/null ; then
@@ -309,7 +366,6 @@ exit 0
 #
 #granting permissions for webyast
 #
-/usr/sbin/grantwebyastrights --user %{webyast_user} --action grant --policy org.freedesktop.packagekit.system-update > /dev/null ||:
 /usr/sbin/grantwebyastrights --user %{webyast_user} --action grant --policy org.opensuse.yast.module-manager.import > /dev/null ||:
 #
 # granting all permissions for root
@@ -319,7 +375,14 @@ exit 0
 # create database
 #
 cd %{webyast_dir}
+
+# force refreshing the Gemfile.lock
+rm -f Gemfile.lock
+
 #migrate database
+%if %suse_version <= 1110
+export WEBYAST_POLICYKIT='true'
+%endif
 RAILS_ENV=production rake db:migrate
 chown -R %{webyast_user}: db
 chown -R %{webyast_user}: log
@@ -349,14 +412,19 @@ dbus-send --print-reply --system --dest=org.freedesktop.DBus / org.freedesktop.D
 %triggerin -- nginx
 %restart_on_update %{webyast_service}
 
+%post branding-default
+%webyast_update_assets
+
+%postun branding-default
+%webyast_update_assets
+
 #---------------------------------------------------------------
 %files
 %defattr(-,root,root)
 #this /etc/webyast is for nginx conf for webyast
 %dir /etc/webyast
 %dir %{webyast_dir}
-%dir %{_datadir}/polkit-1
-%dir %{_datadir}/polkit-1/actions
+%attr(-,root,root) %{_datadir}/%{webyast_polkit_dir}
 %attr(-,%{webyast_user},%{webyast_user}) %dir %{pkg_home}
 %attr(-,%{webyast_user},%{webyast_user}) %dir %{pkg_home}/sockets
 %attr(-,%{webyast_user},%{webyast_user}) %dir %{pkg_home}/cache
@@ -374,8 +442,15 @@ dbus-send --print-reply --system --dest=org.freedesktop.DBus / org.freedesktop.D
 %ghost %{webyast_dir}/db/schema.rb
 %{webyast_dir}/doc
 %{webyast_dir}/lib
-%{webyast_dir}/public
+%dir %{webyast_dir}/public
+%{webyast_dir}/public/*.html
+%{webyast_dir}/public/dispatch.*
+%{webyast_dir}/public/apache.htaccess
+%{webyast_dir}/public/favicon.ico
+%{webyast_dir}/Gemfile
+%{webyast_dir}/Gemfile.assets
 %{webyast_dir}/Rakefile
+%{webyast_dir}/config.ru
 %{webyast_dir}/script
 %{webyast_dir}/vendor
 %dir %{webyast_dir}/config
@@ -384,6 +459,7 @@ dbus-send --print-reply --system --dest=org.freedesktop.DBus / org.freedesktop.D
 %{webyast_dir}/config/environments
 %{webyast_dir}/config/initializers
 %{webyast_dir}/config/routes.rb
+%{webyast_dir}/config/application.rb
 #also users can run granting script, as permissions is handled by polkit right for granting permissions
 %attr(555,root,root) /usr/sbin/grantwebyastrights
 %attr(755,root,root) %{webyast_dir}/start.sh
@@ -398,7 +474,9 @@ dbus-send --print-reply --system --dest=org.freedesktop.DBus / org.freedesktop.D
 #this /etc/webyast is for webyast configuration files
 %dir /etc/webyast/
 %config /etc/webyast/control_panel.yml
-
+%if %suse_version <= 1110
+%config /etc/webyast/config.yml
+%endif
 #nginx stuff
 %config(noreplace) /etc/webyast/nginx.conf
 %config /etc/webyast/fastcgi.conf
@@ -411,30 +489,41 @@ dbus-send --print-reply --system --dest=org.freedesktop.DBus / org.freedesktop.D
 %config /etc/webyast/win-utf
 
 %config /etc/sysconfig/SuSEfirewall2.d/services/webyast
-%config /usr/share/polkit-1/actions/org.opensuse.yast.permissions.policy
+%config /usr/share/%{webyast_polkit_dir}/org.opensuse.yast.permissions.policy
 %config %{webyast_dir}/config/environment.rb
 %config(noreplace) /etc/yast_user_roles
 %config %{_sysconfdir}/init.d/%{webyast_service}
 %{_sbindir}/rc%{webyast_service}
 %doc COPYING
 
-### exclude css, icons and images
-%exclude %{webyast_dir}/public/stylesheets
-%exclude %{webyast_dir}/public/icons
-%exclude %{webyast_dir}/public/images
+### include JS assets
+%exclude %{webyast_dir}/app/assets/icons
+%exclude %{webyast_dir}/app/assets/images
+%exclude %{webyast_dir}/app/assets/stylesheets
+%{webyast_dir}/app/assets/javascripts
+%{webyast_dir}/public/assets/*.js
+%{webyast_dir}/public/assets/*.js.gz
+%{webyast_dir}/public/assets/manifest.yml.base
+
+%exclude %{webyast_dir}/test
 
 %ghost %attr(755,root,root) /var/adm/update-scripts/%name-%version-%release-1
 
 %files testsuite
 %defattr(-,root,root)
 %{webyast_dir}/test
+%{webyast_dir}/Gemfile.test
 
 %files branding-default
 %defattr(-,root,root)
-### include css, icons and images
-%{webyast_dir}/public/stylesheets
-%{webyast_dir}/public/icons
-%{webyast_dir}/public/images
+### include css, icons and images 
+%{webyast_dir}/app/assets
+%{webyast_dir}/public/assets
+# exclude files belonging to the base
+%exclude %{webyast_dir}/app/assets/javascripts/*
+%exclude %{webyast_dir}/public/assets/*.js
+%exclude %{webyast_dir}/public/assets/*.js.gz
+%exclude %{webyast_dir}/public/assets/manifest.yml.base
 
 #---------------------------------------------------------------
 %changelog

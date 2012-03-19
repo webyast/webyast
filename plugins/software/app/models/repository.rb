@@ -22,6 +22,7 @@
 # class Repository represents a software repository
 
 require 'packagekit'
+require 'base'
 
 class Repository < BaseModel::Base
 

@@ -20,15 +20,16 @@
 #++
 
 require 'resolvable'
+require 'yast/paths'
 
 # Model for patches available via package kit
 class Patch < Resolvable
 
   attr_accessor :messages
 
-  MESSAGES_FILE = File.join(Paths::VAR,"software","patch_installion_messages")
-  LICENSES_DIR = File.join(Paths::VAR,"software","licenses")
-  ACCEPTED_LICENSES_DIR = File.join(Paths::VAR,"software","licenses","accepted")
+  MESSAGES_FILE = File.join(YaST::Paths::VAR,"software","patch_installion_messages")
+  LICENSES_DIR = File.join(YaST::Paths::VAR,"software","licenses")
+  ACCEPTED_LICENSES_DIR = File.join(YaST::Paths::VAR,"software","licenses","accepted")
   JOB_PRIO = -30
 
   private
@@ -36,16 +37,14 @@ class Patch < Resolvable
   def self.decide_license(accept)
     #we don't know eula id, but as it block package kit, then there is only one license file to decide
     if accept
-      # RORSCAN_INL: LICENSES_DIR and ACCEPTED_LICENSES_DIR are constants which cannot be changed
-      `find #{LICENSES_DIR} -type f -exec mv {} #{ACCEPTED_LICENSES_DIR} \\;`
+      `/usr/bin/find #{LICENSES_DIR} -type f -exec /bin/mv {} #{ACCEPTED_LICENSES_DIR} \\;`
     else
-      # RORSCAN_INL: LICENSES_DIR is a constant which cannot be changed
-      `find #{LICENSES_DIR} -type f -delete`
+      `/usr/bin/find #{LICENSES_DIR} -type f -delete`
     end
   end
 
-  def self.install_patches to_install
-    to_install.each do |patch|
+  def self.install_patches(patches)
+    patches.each do |patch|
       patch.install
     end
   end
@@ -82,7 +81,7 @@ class Patch < Resolvable
       Rails.logger.info "Job queue is not active. Disable background mode"
       background = false
     end
-    update_id = "#{self.name};#{self.resolvable_id};#{self.arch};#{self.repo}"
+    update_id = self.resolvable_id
     Rails.logger.error "Install Update: #{update_id}"
     unless background
       Patch.install(update_id) #install at once
@@ -101,8 +100,9 @@ class Patch < Resolvable
     begin
       PackageKit.transact("GetUpdates", "none", "Package", bg_status) { |line1,line2,line3|
         columns = line2.split ";"
-        if what == :available || columns[1] == what
-          update = Patch.new(:resolvable_id => columns[1],
+        if what == :available || line2 == what
+          update = Patch.new(:resolvable_id => line2,
+                             :version => columns[1],
                              :kind => line1,
                              :name => columns[0],
                              :arch => columns[2],

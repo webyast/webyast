@@ -1,8 +1,11 @@
 -------------------------------------------------------------------
-Mon Oct 24 14:22:06 UTC 2011 - schubi@suse.com
+Tue Feb 14 16:11:37 UTC 2012 - lslezak@suse.cz
 
-- Merging client and service
-- 0.3.0 
+- removed override_test_db_path.rake (use ERB preprocessing
+  in database.yml instead)
+- webservice_tasks.rb renamed to webyast_tasks.rb
+- improved ignoring files in package-local task
+- 0.2
 
 -------------------------------------------------------------------
 Tue Apr 12 07:10:21 UTC 2011 - schubi@novell.com

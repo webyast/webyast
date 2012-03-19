@@ -23,6 +23,7 @@
 # Model for resolvables available via package kit
 #
 require "packagekit"
+require 'builder'
 
 class Resolvable
 

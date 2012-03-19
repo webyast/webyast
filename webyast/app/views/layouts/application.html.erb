@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<!--
+# Webyast Webclient framework
+#
+# Copyright (C) 2009, 2010 Novell, Inc.
+#   This library is free software; you can redistribute it and/or modify
+# it only under the terms of version 2.1 of the GNU Lesser General Public
+# License as published by the Free Software Foundation.
+#
+#   This library is distributed in the hope that it will be useful, but WITHOUT
+# ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
+# FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public License for more
+# details.
+#
+#   You should have received a copy of the GNU Lesser General Public
+# License along with this library; if not, write to the Free Software
+# Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA
+#-->
+
+<html>
+<head>
+  <meta http-equiv="Content-type" content="text/html; charset=utf-8" />
+  <link rel="apple-touch-icon" href="assets/webyast-iphone-icon.png" />
+  
+  <% if Rails.env.development? %>
+    <!--[if IE]>
+      <%= stylesheet_link_tag "ie/ie_fixes" %>
+    <![endif]-->
+  <% end %>
+  
+  <%= stylesheet_link_tag "application" %>
+  <%= javascript_include_tag "application" %>
+  <%= csrf_meta_tags %>
+
+  <title><%= _("WebYaST") %></title>
+
+  <%= yield :head %>
+  <%= yield :before_script %>
+
+</head>
+  <body id="shell">
+    <div id='browserWarning' style="display: none">
+      <%= raw ( _("You are using an unsupported browser. Please switch to %sFireFox 3.5 or better%s or %sInternet Explorer 8%s. Thanks! [%sclose%s]") %
+            ["<a href='http://getfirefox.com'>","</a>",
+             "<a href='http://www.microsoft.com/windows/downloads/ie/getitnow.mspx'>", "</a>",
+             "<a href='#' id='warningClose'>", "</a>"] ) %>
+    </div>
+    <noscript>
+      <div id="no_js_warning">
+        <%= raw ( _("JavaScript support is missing or disabled. Please turn JavaScript on or use a supported browser (%sFireFox 3.5%s or %sInternet Explorer 8%s).") %
+            ["<a href='http://getfirefox.com'>","</a>",
+             "<a href='http://www.microsoft.com/windows/downloads/ie/getitnow.mspx'>", "</a>"] ) %>
+      </div>
+    </noscript>
+
+    <div id="header">
+      <% appliance_label = ControlPanelConfig.read 'appliance_label', _("My Appliance") %>
+      <% appliance_label = appliance_label.strip %>
+      <% if appliance_label =~ /^_\(\"/ && appliance_label =~ /\"\)$/ %>
+        <% appliance_label = _(appliance_label[3..appliance_label.length-3]) %>
+      <% end %>
+
+      <%= link_to(image_tag("webyast-logo.png", :width=>"130", :height=>"42", :alt =>"webyast"),"/" )%>
+
+      <% if !account_signed_in? %>
+        <span id="userbar">
+          <span class="userbar-icon" style=" text-align:center;">
+            <%= render :partial => "main/language_list" %>
+          </span>
+        </span>
+      <% else -%>
+        <span id="userbar">
+          <span id="userbar-container">
+            <span class="userbar-icon home-icon">
+              <%= link_to _("Home"), '/controlpanel'%>
+            </span>
+            <span class="userbar-icon user-icon">
+              <% if Rails::Engine::Railties.engines.find {|e| e.class.to_s == "WebYaST::UsersEngine"} %>
+                <%= link_to(current_account.username, :controller => :users) %>
+              <% else %>
+                <%= current_account.username %>
+              <% end %>
+            </span>
+            <span class="userbar-icon" style=" text-align:center;">
+              <%= render :partial => "main/language_list" %>
+            </span>
+            <span class="userbar-icon logout-icon">
+              <%= link_to _("Logout"), :controller => "sessions", :action => "destroy" %>
+            </span>
+          </span>
+        </span>
+      <% end -%>
+      <h1><%= appliance_label %></h1>
+    </div>
+
+    <div id="timeoutMessage">
+      <%= link_to(image_tag("webyast-logo.png", :width=>"130", :height=>"42", :style=>"margin-top:4px;", :alt =>"webyast"),"/" )%>
+      <%= _("You will be logged off in")-%><span id="counter"><!-- countdown --></span><%= _("seconds due to session timeout. ")-%>
+    </div>
+
+    <div id="content">
+      <!-- here both flash and dynamic notifications should be added -->
+      <div id="flash-messages" class="alpha">
+        <div id="language_selection"></div>
+        <!-- show the flash messages -->
+
+        <% flash.each do |flash_type, message| %>
+          <%
+            flash_icon = case flash_type
+              when :error then "ui-icon-alert"
+              when :warning then "ui-icon-notice"
+              else "ui-icon-info"
+            end
+            flash_style = case flash_type
+              when :error then "ui-state-error"
+              when :warning then "ui-state-warning"
+              else "ui-state-highlight"
+            end
+          %>
+
+          <div class="flash-message <%= flash_style %> ui-corner-all">
+            <p><span class="ui-icon <%= flash_icon %>"></span><strong><%= message %></strong></p>
+          </div>
+          <% flash.delete flash_type -%>
+        <% end %>
+      </div> <!-- flash messages -->
+
+      <div id="progress" style="display: none;">
+        <%= image_tag("working.gif", :class => "small-working-icon" ) %><%=_("...Wait...")%>
+      </div>
+
+
+
+      <!-- debug info session tieout -->
+      <!-- <fieldset class="example"><div class="timer_logpanel">dd</div><div class="time_left"></div></fieldset> -->
+      <%= yield %>
+    </div>
+
+    <div id="footer" style="clear:both; overflow:hidden;">
+      <div class="copy">&copy; 2009-2012 Novell, Inc.</div>
+    </div>
+
+  </body>
+</html>

@@ -20,18 +20,15 @@
 #++
 
 require File.expand_path(File.dirname(__FILE__) + "/../test_helper")
+require File.join(RailsParent.parent, "test","devise_helper")
 require 'test/unit'
 
 
 class AdministratorControllerTest < ActionController::TestCase
-  fixtures :accounts
+#  fixtures :accounts
 
   def setup
-    @controller = AdministratorController.new
-    @request = ActionController::TestRequest.new
-    # http://railsforum.com/viewtopic.php?id=1719
-    @request.session[:account_id] = 1 # defined in fixtures
-
+    devise_sign_in
     Administrator.stubs(:find).returns Administrator.new({:aliases => ""})
   end
   
@@ -46,7 +43,6 @@ class AdministratorControllerTest < ActionController::TestCase
     assert ret_hash
     assert ret_hash.has_key?("administrator")
     assert ret_hash["administrator"].has_key?("aliases")
-    Rails.logger.debug ret_hash.inspect
   end
 
 end

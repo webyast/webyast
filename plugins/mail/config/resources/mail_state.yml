@@ -1,4 +1,0 @@
-interface: org.opensuse.yast.modules.yapi.mailsettings.state
-policy: org.opensuse.yast.modules.yapi.mailsettings
-controller: mail/state
-singular: true

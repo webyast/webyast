@@ -17,6 +17,7 @@
 #++
 
 require 'fileutils'
+require File.join(File.dirname(__FILE__), "polkit_version")
 
 def sudo(cmd)
   puts "#{cmd}"
@@ -27,8 +28,13 @@ desc "install policies"
 task :install_policies do |t|
   puts "Running from #{__FILE__}"
   Dir.glob("**/*.policy").each do |policy|
-    puts "copy #{policy} to /usr/share/polkit-1/actions"
-    FileUtils.cp("#{policy}", "/usr/share/polkit-1/actions")
+    if polkit1
+      puts "copy #{policy} to /usr/share/polkit-1/actions"
+      FileUtils.cp("#{policy}", "/usr/share/polkit-1/actions")
+    else
+      puts "copy #{policy} to /usr/share/PolicyKit/policy"
+      FileUtils.cp("#{policy}", "/usr/share/PolicyKit/policy")
+    end
   end
 end
 

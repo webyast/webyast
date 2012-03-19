@@ -1,0 +1,11 @@
+-# popup menu for language selection
+-# render the language switcher only when at least one translation is available (besides the "en_US" default)
+- if FastGettext.default_available_locales.size > 1
+  %span#lang_current.language-icon
+    Language:
+    = language_name(FastGettext.locale)
+    %span#lang_menu
+      - FastGettext.default_available_locales.sort.each do |locale|
+        - if language_name(locale) != locale
+          = link_to language_name(locale), '?locale=' + locale
+          %br

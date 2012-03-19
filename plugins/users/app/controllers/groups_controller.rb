@@ -1,20 +1,20 @@
 #--
 # Copyright (c) 2009-2010 Novell, Inc.
-# 
+#
 # All Rights Reserved.
-# 
+#
 # This program is free software; you can redistribute it and/or modify it
 # under the terms of version 2 of the GNU General Public License
 # as published by the Free Software Foundation.
-# 
+#
 # This program is distributed in the hope that it will be useful,
 # but WITHOUT ANY WARRANTY; without even the implied warranty of
 # MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
 # GNU General Public License for more details.
-# 
+#
 # You should have received a copy of the GNU General Public License
 # along with this program; if not, contact Novell, Inc.
-# 
+#
 # To contact Novell about this file by physical or electronic mail,
 # you may find current contact information at www.novell.com
 #++
@@ -22,24 +22,8 @@
 include ApplicationHelper
 
 class GroupsController < ApplicationController
-  
-  before_filter :login_required
-  before_filter :check_read_permission, :only => [:index,:show]
-  before_filter :check_write_permission, :only => [:create, :update, :new, :edit]
-  layout 'main'
-
-  # Initialize GetText and Content-Type.
-  init_gettext "webyast-users"
 
 private
-
-  def permission_read
-    @permissions = {}
-    @permissions[:groupmodify] = yapi_perm_granted? "users.groupmodify"
-    @permissions[:usersget] = yapi_perm_granted? "users.usersget"
-    @permissions[:groupadd] = yapi_perm_granted? "users.groupadd"
-    @permissions[:groupdelete] = yapi_perm_granted? "users.groupdelete"
-  end
 
   def validate_group_id( id = params[:id] )
     if id.blank?
@@ -126,29 +110,19 @@ private
     end
   end
 
-  def check_read_permission
-    yapi_perm_check "users.groupsget"
-    yapi_perm_check "users.groupget"
-    permission_read
-  end
-
-  def check_write_permission
-    yapi_perm_check "users.groupmodify"
-    yapi_perm_check "users.groupadd"
-    permission_read
-  end
 
   # log Group.find error and provide matching ErrorResult
   def group_not_found gid
     Rails.logger.error "Group #{gid} was not found."
     ErrorResult.error(404, 2, "group #{gid} not found")
   end
-  
+
 public
 
   # GET /groups/users
   # GET /groups/users.xml
   def show
+    authorize! :groupget, User
     # try to find the grouplist, and 404 if it does not exist
     # RORSCAN_INL: User has already read permission for ALL groups here
     @group = Group.find params[:id]
@@ -164,16 +138,16 @@ public
 
   # GET /groups.xml
   def index
-    # read permissions were checked in a before filter
+    authorize! :groupsget, User
     @groups = Group.find_all
     Rails.logger.error "No groups found." unless @groups
     respond_to do |format|
-      format.xml { 
+      format.xml {
         if @groups.nil?
           render ErrorResult.error(404, 2, "No groups found")
         else
-          render  :xml => @groups.to_xml(:root => "groups", 
-                  :dasherize => false ) 
+          render  :xml => @groups.to_xml(:root => "groups",
+                  :dasherize => false )
         end
         return
       }
@@ -181,22 +155,20 @@ public
         if @groups.nil?
           render ErrorResult.error(404, 2, "No groups found")
         else
-          render :json => @groups.to_json 
+          render :json => @groups.to_json
         end
         return
       }
-      format.html { 
+      format.html {
         @groups.sort! { |a,b| a.cn <=> b.cn } if @groups
         @all_users_string = ""
         @all_sys_users_string = ""
         @users = []
         @sys_users = []
-        if @permissions[:usersget] == true
-          @users     = User.find_all({ :attributes => "uid"})
-          @sys_users = User.find_all({ "attributes"=>"cn,uidNumber,uid", 
-                                       "type"=>"system", 
-                                       "index"=>["s", "uid"]} )
-        end
+        @users     = User.find_all({ :attributes => "uid"})
+        @sys_users = User.find_all({ "attributes"=>"cn,uidNumber,uid",
+                                     "type"=>"system",
+                                     "index"=>["s", "uid"]} )
         @users.each do |user|
           if @all_users_string.blank?
             @all_users_string = user.uid
@@ -218,6 +190,7 @@ public
   end
 
   def new
+    authorize! :groupadd, User
     @group = Group.new
 
     # add default properties
@@ -231,7 +204,7 @@ public
     @group.load(defaults)
     @adding = true
     @all_users_string = ""
-    users = User.find(:all) if @permissions[:usersget]
+    users = User.find(:all) if can? :usersget, User
     users.each do |user|
       if @all_users_string.blank?
         @all_users_string = user.uid
@@ -255,11 +228,11 @@ public
     Rails.logger.error "Cannot update group '#{@group.cn}' (#{@group.inspect}): #{result}" unless result.blank?
     respond_to do |format|
       format.html { unless result.blank?
-                      flash[:error] = _("Cannot update group <i>%s</i>") % @group.cn
+                      flash[:error] = (_("Cannot update group <i>%s</i>") % @group.cn).html_safe
                       render :edit
                     else
-                      flash[:message] = _("Group <i>%s</i> has been updated.") % @group.cn 
-                      redirect_to :action => :index 
+                      flash[:message] = (_("Group <i>%s</i> has been updated.") % @group.cn ).html_safe
+                      redirect_to :action => :index
                     end
                   }
       format.xml  { unless result.blank?
@@ -279,6 +252,7 @@ public
 
   # PUT /groups/
   def create
+    authorize! :groupadd, User
     validate_group_params( :new ) or return
     validate_group_name( :new ) or return
     group_params = params[:group] || {}
@@ -291,11 +265,11 @@ public
     Rails.logger.error "Cannot create group '#{@group.cn}': #{result}" unless result.blank?
     respond_to do |format|
       format.html { unless result.blank?
-                      flash[:error] = _("Cannot create group <i>%s</i>") % @group.cn
+                      flash[:error] = (_("Cannot create group <i>%s</i>") % @group.cn).html_safe
                       redirect_to :action => :new
                     else
-                      flash[:message] = _("Group <i>%s</i> has been added.") % @group.cn 
-                      redirect_to :action => :index 
+                      flash[:message] = (_("Group <i>%s</i> has been added.") % @group.cn ).html_safe
+                      redirect_to :action => :index
                     end
                   }
       format.xml  { unless result.blank?
@@ -315,13 +289,13 @@ public
 
   # DELETE /groups/users
   def destroy
-    yapi_perm_check "users.groupdelete"
+    authorize! :groupdelete, User
     validate_group_id or return
     # RORSCAN_INL: User has already delete permission for ALL groups here
     @group = Group.find(params[:id])
 
     if @group.nil?
-      result = "group #{params[:id]} not found" 
+      result = "group #{params[:id]} not found"
     else
       result = @group.destroy
     end
@@ -329,11 +303,11 @@ public
     Rails.logger.error "Cannot destroy group '#{@group.cn}': #{result}" unless result.blank?
     respond_to do |format|
       format.html { unless result.blank?
-                      flash[:error] = _("Cannot remove group <i>%{name}</i>: %{result}") % {:name => @group.cn, :result => result}
+                      flash[:error] = (_("Cannot remove group <i>%{name}</i>: %{result}").to_str % {:name => @group.cn, :result => result}).html_safe
                     else
-                      flash[:message] = _("Group <i>%s</i> has been deleted.") % @group.cn 
+                      flash[:message] = (_("Group <i>%s</i> has been deleted.") % @group.cn ).html_safe
                     end
-                    redirect_to :action => :index 
+                    redirect_to :action => :index
                   }
       format.xml  { unless result.blank?
                       render ErrorResult.error(404, 2, "Group destroy error:'"+result+"'")

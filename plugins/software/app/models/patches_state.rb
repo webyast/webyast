@@ -19,10 +19,7 @@
 # you may find current contact information at www.novell.com
 #++
 
-require 'gettext'
-
 class PatchesState
-  include GetText
   def self.read()
     licenses_to_confirm = Dir.glob(File.join(Patch::LICENSES_DIR,"*")).select {|f| File.file? f}
     if !licenses_to_confirm.empty?
@@ -31,10 +28,9 @@ class PatchesState
       return { :level => "warning",
                :message_id => "PATCH_EULA",
                :short_description => _("EULA accept required"),
-               :long_description => _("Package require accept specific EULA before its installation. Please follow bellowed link."),
+               :long_description => _("Package require accept specific EULA before its installation. Please follow the link."),
                :details => "",
-               :confirmation_host => "client",
-               :confirmation_link => "/patch_updates/license",
+               :confirmation_link => "/patches/license",
                :confirmation_label => _("decide"),
                :confirmation_kind => "link" }
 
@@ -47,8 +43,7 @@ class PatchesState
                :short_description => _("Patch installation messages not confirmed"),
                :long_description => messages,
                :details => "",
-               :confirmation_host => "service",
-               :confirmation_link => "/patch_update/state",
+               :confirmation_link => "/patches/message",
                :confirmation_label => _("OK"),
                :confirmation_kind => "button" }
     else

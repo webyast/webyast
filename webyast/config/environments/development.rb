@@ -16,28 +16,38 @@
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA
 #++
 
-# Settings specified here will take precedence over those in config/environment.rb
+Webyast::Application.configure do
+  # Settings specified here will take precedence over those in config/application.rb
 
-# In the development environment your application's code is reloaded on
-# every request.  This slows down response time but is perfect for development
-# since you don't have to restart the webserver when you make code changes.
-config.cache_classes = false
+  # In the development environment your application's code is reloaded on
+  # every request.  This slows down response time but is perfect for development
+  # since you don't have to restart the web server when you make code changes.
+  config.cache_classes = false
 
-# Log error messages when you accidentally call methods on nil.
-config.whiny_nils = true
+  # Log error messages when you accidentally call methods on nil.
+  config.whiny_nils = true
 
-# Show full error reports and disable caching
-config.action_controller.consider_all_requests_local = true
-config.action_view.debug_rjs                         = true
-config.action_controller.perform_caching             = false
+  config.active_support.deprecation = :log
 
-# Don't care if the mailer can't send
-config.action_mailer.raise_delivery_errors = false
+  # Show full error reports and disable caching
+  config.consider_all_requests_local       = true
+  config.action_controller.perform_caching = false
 
-#begin
-#require 'yast/rack/response_validator'
-#config.middleware.use YaST::Rack::ResponseValidator
-#  STDERR.puts "Automatic html validation enabled"
-#rescue LoadError
-#  STDERR.puts "Automatic html validation disabled. Please install rubygem-tidy"
-#end
+  # Print deprecation notices to the Rails logger
+  config.active_support.deprecation = :log
+  config.action_dispatch.best_standards_support = :builtin
+
+# DEVELOPMENT
+  config.serve_static_assets = true
+  config.assets.compress = false
+  config.assets.debug = true
+  
+#  PRODUCTION 
+#  execute before switch: rake assets:precompile:all RAILS_ENV=development RAILS_GROUPS=assets --trac
+#
+#  config.assets.debug = false
+#  config.serve_static_assets = true
+#  config.assets.compress = true
+#  config.assets.compile = false
+#  config.assets.digest = true
+end

@@ -117,10 +117,9 @@ class RepositoryTest < ActiveSupport::TestCase
       repo.autorefresh = false
       repo.name = 'new name'
       repo.url = 'http://test.com/repo'
-
+      assert repo.valid?
       repo.priority = -20
-
-      assert_false repo.save
+      assert !repo.valid?
     end
   end
 
@@ -132,10 +131,9 @@ class RepositoryTest < ActiveSupport::TestCase
       repo.name = 'new name'
       repo.url = 'http://test.com/repo'
       repo.priority = 20
-
+      assert repo.valid?
       repo.enabled = 'bflmpsvz'
-
-      assert_false repo.save
+      assert !repo.valid?
     end
   end
 
@@ -147,38 +145,32 @@ class RepositoryTest < ActiveSupport::TestCase
       repo.name = 'new name'
       repo.url = 'http://test.com/repo'
       repo.priority = 20
-
+      assert repo.valid?
       repo.keep_packages = 'bflmpsvz'
-
-      assert_false repo.save
+      assert !repo.valid?
     end
   end
 
   def test_validation_of_autorefresh
     assert_nothing_raised do
       repo = Repository.new("factory-oss-new", "FACTORY-OSS-NEW", true)
-
       repo.name = 'new name'
       repo.url = 'http://test.com/repo'
       repo.priority = 20
-
+      assert repo.valid?
       repo.autorefresh = 'asdf'
-
-      assert_false repo.save
+      assert !repo.valid?
     end
   end
 
   def test_validation_of_url
     assert_nothing_raised do
       repo = Repository.new("factory-oss-new", "FACTORY-OSS-NEW", true)
-
       repo.autorefresh = true
       repo.name = 'new name'
       repo.priority = 20
-
       repo.url = ''
-
-      assert_false repo.save
+      assert !repo.valid?
     end
   end
 
@@ -233,7 +225,7 @@ class RepositoryTest < ActiveSupport::TestCase
 
     repo_from_json = ActiveSupport::JSON.decode(jsn)
 
-    assert_equal repo_from_json, {"name"=>"FACTORY-OSS", "autorefresh"=>true, "url"=>'',
+    assert_equal repo_from_json["repository"], {"name"=>"FACTORY-OSS", "autorefresh"=>true, "url"=>'',
         "priority"=>99, "id"=>"factory-oss", "enabled"=>true, "keep_packages"=>false}
   end
 

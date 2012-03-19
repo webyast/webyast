@@ -19,8 +19,7 @@
 #
 # common RPM macro definitions used by WebYaST
 #
-# macros %webyast_ are generic for both webservice and client
-#
+
 
 # target directories
 %webyast_dir /srv/www/webyast
@@ -34,17 +33,83 @@
 # service names (init script names in /etc/init.d)
 %webyast_service webyast
 
-# run the testsuite
-%webyast_check \
+# build REST documentation, move it to public/ in webyast-base, pre-gzip it (for nginx)
+# and remove the sources
+# usage: use in %install section, add target directory parameter
+# example: %webyast_build_restdoc public/my_module/restdoc
+%webyast_build_restdoc() \
+    cd $RPM_BUILD_ROOT/%{_libdir}/ruby/gems/%{rb_ver}/gems/%{mod_full_name} \
+    mkdir -p %1 \
     export RAILS_PARENT=%{webyast_dir} \
+    cp %{webyast_dir}/Gemfile Gemfile.restility \
+    echo 'gem "restility"' >> Gemfile.restility \
+    BUNDLE_GEMFILE=Gemfile.restility rake restdoc \
+    mv restdoc/*.xml %1 \
+    mkdir -p $RPM_BUILD_ROOT/srv/www/webyast/%1 \
+    cp %1/* $RPM_BUILD_ROOT/srv/www/webyast/%1 \
+    gzip %1/* \
+    mv %1/* $RPM_BUILD_ROOT/srv/www/webyast/%1 \
+    rm -f Gemfile.restility Gemfile.restility.lock \
+    rm -rf restdoc \
+    cd -
+
+# update manifest.yml file
+# use assets.rake file directly (faster loading)
+%webyast_update_assets \
+    cd %{webyast_dir} \
+    rake -f lib/tasks/assets.rake assets:join_manifests \
+    if test -f "Gemfile" ; then \
+      bundle update \
+    fi
+    cd -
+
+# update manifest.yml file
+# use assets.rake file directly (faster loading)
+%webyast_update_assets \
+    cd %{webyast_dir} \
+    rake -f lib/tasks/assets.rake assets:join_manifests \
+    if test -f "Gemfile" ; then \
+      bundle update \
+    fi
+    cd -
+
+# update manifest.yml file
+# use assets.rake file directly (faster loading)
+%webyast_remove_assets \
+    cd %{webyast_dir} \
+    rake -f lib/tasks/assets.rake assets:join_manifests \
+    cd -
+
+# run plugin testsuite (from %check section)
+%webyast_run_plugin_tests \
     export TEST_DB_PATH=/tmp/webyast_test.sqlite3 \
+    export RAILS_PARENT=%{webyast_dir} \
     rm -rf $TEST_DB_PATH \
+    cd $RPM_BUILD_ROOT/%{_libdir}/ruby/gems/%{rb_ver}/gems/%{mod_full_name} \
     RAILS_ENV=test rake db:create \
     RAILS_ENV=test rake db:schema:load \
-    RAILS_ENV=test ADD_BUILD_PATH=1 rake test
+    cp %{webyast_dir}/Gemfile.test Gemfile.test \
+    echo 'gem "%{mod_name}", :path => "."' >> Gemfile.test \
+    BUNDLE_GEMFILE=Gemfile.test RAILS_ENV=test ADD_BUILD_PATH=1 rake test \
+    rm -rf $TEST_DB_PATH Gemfile.test Gemfile.test.lock log
 
-# build REST documentation
-%webyast_restdoc \
+# build (precompile) plugin assets (in %install section)
+%webyast_build_plugin_assets \
     export RAILS_PARENT=%{webyast_dir} \
-    env LANG=en rake restdoc
+    cd $RPM_BUILD_ROOT/%{_libdir}/ruby/gems/%{rb_ver}/gems/%{mod_full_name} \
+    rake assets:precompile \
+    rm -rf tmp \
+    mkdir -p $RPM_BUILD_ROOT/srv/www/webyast/public/assets \
+    mv public/assets/* $RPM_BUILD_ROOT/srv/www/webyast/public/assets \
+    rm -rf public/assets \
+    mv $RPM_BUILD_ROOT/srv/www/webyast/public/assets/manifest.yml $RPM_BUILD_ROOT/srv/www/webyast/public/assets/manifest.yml.%{mod_name} \
+    rm -rf log \
+    cd -
 
+%webyast_polkit \
+    %if 0%{?suse_version} == 0 || %suse_version > 1110 \
+      WEBYAST_POLKIT_DIR='polkit-1/actions' \
+    %else \
+      # SLES11 or < 11.1 \
+      WEBYAST_POLKIT_DIR='PolicyKit/policy'  \
+    %endif 

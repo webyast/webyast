@@ -1,9 +1,0 @@
-require File.join(File.dirname(__FILE__), 'config', 'rails_parent')
-require File.join(RailsParent.parent, 'lib', 'tasks', 'common')
-
-desc 'Deploy for development - install yast modules.'
-task :deploy_local do |t|
-  FileUtils.mkdir_p "/usr/share/YaST2/modules/YaPI/"
-  FileUtils.cp "package/MailSettings.pm", "/usr/share/YaST2/modules/YaPI"
-  `rake install_policies`
-end

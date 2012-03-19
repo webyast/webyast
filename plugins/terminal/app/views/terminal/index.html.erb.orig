@@ -1,0 +1,95 @@
+<!--
+# Copyright (c) 2009-2010 Novell, Inc.
+#
+# All Rights Reserved.
+#
+# This program is free software; you can redistribute it and/or modify it
+# under the terms of version 2 of the GNU General Public License
+# as published by the Free Software Foundation.
+#
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+# GNU General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with this program; if not, contact Novell, Inc.
+#
+# To contact Novell about this file by physical or electronic mail,
+# you may find current contact information at www.novell.com
+-->
+
+<%= stylesheet_link_tag "webyast-terminal" %>
+
+<<<<<<< HEAD
+<% content_for :before_script do %>
+  <% javascript_tag do %>
+
+  $(document).ready(function(){
+    $("#iframe").attr("src", "https://<%= `hostname --fqdn`.chomp %>:4200");
+=======
+<%= content_for :before_script do %>
+  <%= javascript_tag do %>
+
+  $(document).ready(function(){
+    $("#iframe").attr("src", "https://<%= `/bin/hostname --fqdn`.chomp %>:4200");
+>>>>>>> rails3_port
+
+    $("#fullscreen").click(function(){
+      $(".webyast_fieldset").css("position", "static");
+      $("#frameBorder").addClass("fullscreen");
+      $("#closeFullscreen").show();
+    });
+
+    $("#closeFullscreen").click(function(){
+      $(".webyast_fieldset").css("position", "relative");
+      $("#frameBorder").removeClass("fullscreen");
+      $("#closeFullscreen").hide();
+    });
+  });
+
+  <% end %>
+<% end %>
+
+<div class="plugin-content plugin-border">
+  <div class="plugin-header webyast_form">
+    <div class="left">
+<<<<<<< HEAD
+      <label class="plugin-icon-container"><img class="plugin-icon" src="/icons/terminal.png"></label>
+=======
+      <label class="plugin-icon-container"><%= image_tag("terminal.png", :class=>"plugin-icon") %></label>
+>>>>>>> rails3_port
+      <label class="plugin-name"><%= _("Terminal Client") %></label>
+    </div>
+    <div class="right" >
+      <span id="questionMark" style="margin:2px 5px; float:none;">?</span>
+    </div>
+    <div class="clearfix"></div>
+  </div>
+
+  <div class="clearfix">&nbsp;</div>
+
+  <fieldset class="webyast_fieldset">
+    <div class="fieldset_header">
+      <div class="fieldset_header_title" style="display:block;">
+        <div style="float:left">
+          <%= _("Web based terminal client") %>
+        </div>
+        <div style="float:right; text-align:right;">
+          <a id="fullscreen" href="#"><%= _("fullscreen") %></a>
+        </div>
+      </div>
+      <div class="clear"></div>
+    </div>
+
+    <div class="fieldset_body">
+      <div id="frameBorder">
+        <a id="closeFullscreen" href="#"><%= _("close") %></a>
+        <iframe id="iframe" src="#" width="100%" height="100%" style="border:0; position:relative; overflow:hidden!important;"></iframe>
+      </div>
+    </div>
+  </fieldset>
+
+  <div class="clearfix"></div>
+
+</div>

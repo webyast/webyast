@@ -1,5 +1,5 @@
 main:
-  icon: '/icons/yast-terminal.png'
+  icon: 'yast-terminal.png'
   url: /terminal
   groups: [ System ]
   tags: [ terminal]

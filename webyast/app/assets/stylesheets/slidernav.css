@@ -1,0 +1,78 @@
+/*
+ *  SliderNav - A Simple Content Slider with a Navigation Bar
+ *  Copyright 2010 Monjurul Dolon, http://mdolon.com/
+ *  Released under the MIT, BSD, and GPL Licenses.
+ *  More information: http://devgrow.com/slidernav
+ */
+.slider { display: block; position:relative; background: #fff; overflow: auto; }
+.slider ol, .slider ul { list-style: none; }
+.slider ol { margin: 0; padding: 0; list-style-position: inside; }
+.slider-content ol.wrapper { padding: 5px 0 5px 15px; }
+
+.slider-content { 
+  float: left; 
+  width: 100%; 
+  display: block; 
+  overflow: auto; 
+  min-height:600px; 
+  max-height:600px; 
+}
+
+.slider-content ol ol li a { 
+  padding: 5px 10px; 
+  display: block; 
+  list-style-type: none;
+  border-bottom: 1px solid #f3f3f3; 
+  text-transform: capitalize; 
+}
+
+.slider-content ol.wrapper {
+  list-style-type: none;
+}
+
+.slider-content ol ol li a:hover { 
+  background: #f3faff; 
+  border-color: #d5ebf9;
+}
+
+.slider-content .title, .slider-content .selected{ font-size:14px; }
+
+.slider-content .title { 
+  background: #f0f0f0; 
+  padding:2px; 
+  text-transform: uppercase; 
+  font-weight: bold; 
+  text-indent:5px; 
+  list-style-type:none; 
+  text-shadow: 0 1px 0 rgba(255, 255, 255, 1); 
+}
+
+.slider-content .selected { 
+  background-color: #555; 
+  color:#f5f5f5; 
+  text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.8); 
+}
+
+.slider .slider-nav { position: absolute; right: 0; top: 0; background-color: #555; min-height: 600px; }
+.slider .slider-nav ul { padding:0;}
+
+.slider .slider-nav li a { 
+  line-height: 11px;
+  padding:2px 1px;
+  margin:0px;
+  font-size:13px;
+  text-align: center; 
+  color: #fff; 
+  font-weight: bold; 
+  display: block; 
+  text-transform: uppercase; 
+  cursor: pointer; 
+  border:0px; 
+  vertical-align: middle;
+  text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.5); 
+}
+
+.slider .slider-nav li a:hover { background-color:#3494f2; }
+
+
+

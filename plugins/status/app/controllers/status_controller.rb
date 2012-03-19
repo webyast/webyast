@@ -22,17 +22,9 @@
 require 'open-uri' # RORSCAN_ITL
 
 class StatusController < ApplicationController
-
-  before_filter :login_required
-  layout "main"
-
   DEFAULT_LINES = 50
 
   private
-  def client_permissions
-    permission_check "org.opensuse.yast.system.status.read"
-    @write_limit_permission = permission_granted? "org.opensuse.yast.system.status.writelimits"
-  end
 
   #
   # evaluate error string if a limit for a group (CPU,Memory,Disk,...) has been reached
@@ -85,13 +77,7 @@ class StatusController < ApplicationController
   end
 
 
- # Initialize GetText and Content-Type.
-  init_gettext "webyast-status"
-
   public
-
-  def initialize
-  end
 
   def confirm_status
     if not params.has_key?(:url)
@@ -106,7 +92,7 @@ class StatusController < ApplicationController
   end
 
   def ajax_log_custom
-    client_permissions
+    authorize! :read, Metric
     # set the site to the view so it can load the log
     # dynamically
     if not params.has_key?(:id)
@@ -119,12 +105,11 @@ class StatusController < ApplicationController
     data = log.evaluate_content(pos_begin, lines)
     content = data["`value"] if log
     position = data["`position"].to_i if log
-    render(:partial => 'status_log',
-           :locals => { :content => content, :position => position, :lines => lines, :id => params[:id] }) and return
+    render(:partial => 'status_log', :locals => { :content => content, :position => position, :lines => lines, :id => params[:id] }) and return
   end
 
   def index
-    client_permissions
+    authorize! :read, Metric
     @logs = Log.find(:all)
     @plugins = Plugin.find(:all)
     begin
@@ -151,7 +136,7 @@ class StatusController < ApplicationController
     status = ""
     ret_error = nil
     refresh = true
-    unless permission_granted? "org.opensuse.yast.system.status.read"
+    unless can? :read, Metric 
       status = _("Status not available (no permissions)")
       level = "warning"  #it is a warning only
     else
@@ -189,7 +174,7 @@ class StatusController < ApplicationController
             status += "; " + error.message
           end
         rescue Exception => e
-	  logger.warn error.inspect
+          logger.warn error.inspect
           level = "error"
           ret_error = error
           refresh = false
@@ -206,7 +191,7 @@ class StatusController < ApplicationController
             end
           }
         rescue Exception => error
-	  logger.warn error.inspect
+          logger.warn error.inspect
           level = "error"
           refresh = false
 	  error_hash = Hash.from_xml error.response.body
@@ -230,7 +215,7 @@ class StatusController < ApplicationController
   # AJAX call for showing a single graph
   #
   def evaluate_values
-    client_permissions
+    authorize! :read, Metric
     group_id = params[:group_id]
     graph_id = params[:graph_id]
     till = Time.now
@@ -329,8 +314,9 @@ class StatusController < ApplicationController
   end
 
   def edit
-    client_permissions
+    authorize! :read, Metric
     begin
+      Rails.logger.error "Edit limits *************************************"
       ActionController::Base.benchmark("Graph information from server") do
         @graphs = Graph.find(:all)
       end
@@ -344,8 +330,7 @@ class StatusController < ApplicationController
   end
 
   def save
-    client_permissions
-    permission_check "org.opensuse.yast.system.status.writelimits"
+    authorize! :writelimits, Metric
 
     begin
       ActionController::Base.benchmark("Graph information from server") do

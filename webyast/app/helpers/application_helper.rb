@@ -16,8 +16,12 @@
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA
 #++
 
-# Methods added to this helper will be available to all templates in the application.
+
 module ApplicationHelper
+  def current_url(extra_params={})
+    url_for params.merge(extra_params)
+  end
+
   # Generate the Save button and a Cancel link, with the common UI style.
   # If the form is used in a wizard, they are named Next and Back.
   # send_options applies to the submission button.
@@ -69,10 +73,11 @@ module ApplicationHelper
 
   def form_next_button(send_options={})
     label = send_options[:label] || _("Save")
-      bs = Basesystem.new.load_from_session(session)
-      label = _("Next") unless bs.completed?
-      label = _("Finish") if bs.last_step?
+    bs = Basesystem.new.load_from_session(session)
+    label = _("Next") unless bs.completed?
+    label = _("Finish") if bs.last_step?
     submit_tag label,send_options
   end
+
 end
 

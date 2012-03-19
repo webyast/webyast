@@ -21,22 +21,12 @@
 <%# Sort by priority then by name %>
 <% @repos.sort! {|x,y| x.priority == y.priority ? x.name.upcase <=> y.name.upcase : x.priority <=> y.priority} -%>
 
-<%= javascript_include_tag :defaults %>
-<% javascript_include_tag "jquery.activity", "notifier" %>
+<%= stylesheet_link_tag "webyast-repositories" %>
 
-<% if JSMIN == false %>
-  <%= stylesheet_link_tag "webyast-repositories" %>
-  <%= stylesheet_link_tag "webyast-plugin-toolbar" %>
-  <%= javascript_include_tag "jquery.quicksearch.js"-%>
-<% end %>
-
-<!-- <div class='plugin-icon' style="display:block; width:101%; padding:0;"><img src='/icons/yast-online_update.png'/><%=_("Software Repositories") %>
-<span id="questionMark" style="vertical-align:middle; float:right; margin:15px 0px 0px 0px;">?</span></div>
-<div class='plugin-content'> -->
 <div class="plugin-content plugin-border">
   <div class="plugin-header">
     <div class="left">
-      <label class="plugin-icon-container"><img class="plugin-icon" src="/icons/repositories.png"></label>
+      <label class="plugin-icon-container"><%= image_tag("repositories.png", :class=>"plugin-icon") %></label>
       <label class="plugin-name"><%=_("Software Repositories") %></label>
       <span id="questionMark" style="margin:0px 5px; float:right;">?</span>
     </div>
@@ -45,7 +35,7 @@
   <div class="clearfix">&nbsp;</div>
   
 <!--  <div class="loading"></div> -->
-  <% disabled = !@write_permission %>
+  <% disabled = cannot? :write, Repository  %>
   
   <div id="webyast-toolbar-container">
     <%=link_to image_tag("home.png", :class=>"home-icon"), :controller=>"controlpanel", :action => :index %>
@@ -55,16 +45,15 @@
       <input type="text" id="repo_search"/>
     </form>
     
-    <label for="filter">
+    <label for="filter_repos">
       <%=  _("Filter repositories") %>
-      <% image_tag("/images/filter.png", :style=>"")%>
+      <% image_tag("filter.png", :style=>"")%>
     </label>
     <%= select_tag "filter_repos", options_for_select([[ _("All"), "all"], [ _("Enabled"), "enabled"], [ _("Disabled"), "disabled"]]) %>
-    <%= observe_field("filter_repos", :function => "select_repositories(value)") %>
 
     <span id="action_link_container">
       <% if !disabled %>
-        <%= link_to image_tag("/icons/repositories.png", :class=>"action_link_icon") +  (_("New Repository") ), {:action => 'add'} %>
+        <%= link_to image_tag("repositories.png", :class=>"action_link_icon") +  (_("New Repository") ), {:action => 'new'} %>
       <% end %>
     </span>
   </div>
@@ -77,18 +66,18 @@
       <div class="list-fieldset  <%= r.enabled ? 'repository-enabled' : 'repository-disabled' %>">
 	<div class="list-fieldset-header" id="repo_header_<%= sid -%>">
 	  <%# do quick search only in name and URL => use quicksearch_content class %>
-	  <span class="quicksearch_content">
+	  <div class="quicksearch_content">
 	    <div>
 	      <div class="status-icon <%= r.enabled ? 'ok' : 'unused' %>"></div>
 	      <%= h r.name %>
 	    </div>
 	    <small><%= h r.url %></small>
-	  </span>
+	  </div>
 	  <span style="float: right; margin-right: 5em"><%= prio_summary r.priority -%></span>
 	</div>
 <!-- 	'<%= _('Please wait') -%>' -->
 	<div class='repository-content' style="display:none">
-	    <% form_for(:repository, r, :url => { :action => 'update', :id => r.id },
+	    <%= form_for( r, :url => { :action => 'update', :id => r.id },
 	      :html => { :method => :put, :id => 'repositoryForm_' + sid, :onsubmit => "form_handler('#{sid}')" }
 	    ) do |f| %>
 
@@ -101,30 +90,35 @@
 		</script>
 	      <% end %>
 
-	      <p><div class="option_name">Alias: </div><%= h r.id %></p>
-<!--	      <p><div class="option_name">Alias: </div><i><% h r.id %></i></p> -->
-	      
-	      <p><div class="option_name">Name: </div>
-		<%= f.text_field :name, :disabled => disabled, :class => 'required' -%></p>
+              <p></p>
+              <div class="option_name">Alias: </div> <%= h r.id %>
 
-	      <p><div class="option_name">URL: </div>
-		<%= f.text_field :url, :disabled => disabled, :class => 'repo_url required' -%></p>
+              <p></p>
+              <div class="option_name">Name: </div>
+	      <%= f.text_field :name, :id => 'repository_name_' + sid, :disabled => disabled, :class => 'required' -%>
 
-	      <p><%= repo_status_msg r.enabled %>
+              <p></p>
+              <div class="option_name">URL: </div>
+	      <%= f.text_field :url, :id => 'repository_url_' + sid, :disabled => disabled, :class => 'repo_url required' -%>
+
+	      <p>
+                <%= repo_status_msg(r.enabled) %>
 		<% if !disabled  %>
 		  <%= hidden_field_with_link f, sid, :enabled, r.enabled,
 		    repo_change_msg(!r.enabled) -%>
 		<% end %>
 	      </p>
 
-	      <p><%= refresh_status_msg r.autorefresh %>
+	      <p>
+                <%= refresh_status_msg r.autorefresh %>
 		<% if !disabled  %>
 		  <%= hidden_field_with_link f, sid, :autorefresh, r.autorefresh,
 		    refresh_change_msg(!r.autorefresh) -%>
 		<% end %>
 	      </p>
 
-	      <p><%= keep_status_msg r.keep_packages %>
+	      <p>
+                <%= keep_status_msg r.keep_packages %>
 		<% if !disabled  %>
 		  <%= hidden_field_with_link f, sid, :keep_packages, r.keep_packages,
 		    keep_change_msg(!r.keep_packages) -%>
@@ -133,7 +127,7 @@
 
 	      <div class="nav-buttons">
 		<% if !disabled -%>
-		<div id="progress_<%= sid -%>" style="display: none; margin-bottom: 10px"><img src="/images/working.gif" alt="Working"/><span style="vertical-align: 50%; margin-left: 5px">...Wait...</span></div>
+		<div id="progress_<%= sid -%>" style="display: none; margin-bottom: 10px"><%= image_tag("working.gif", :alt=>"Working") %><span style="vertical-align: 50%; margin-left: 5px">...Wait...</span></div>
 		  <%= submit_tag _("Save") %>
 		  <span onclick="delete_handler(this, '#progress_<%= sid -%>', '<%= sid -%>')"><%= link_to _("Delete"),
 			  {:action => 'destroy', :id => r.id},
@@ -159,6 +153,11 @@
 
 <script type="text/javascript">
   $(document).ready(function(){
+
+    $("#filter_repos").change(function() {
+       select_repositories($(this).val());
+    });
+
     // define a custom validation function for repository URL
     jQuery.validator.addMethod("repo_url", function(value, element) {
       return this.optional(element)
@@ -275,7 +274,7 @@
       $(changes).show();
     };
   };
-
-  var AUTH_TOKEN = 'authenticity_token=' + encodeURIComponent("<%= escape_javascript form_authenticity_token %>");
-  startNotifier({'module':'repository', 'AUTH_TOKEN':AUTH_TOKEN}, 1000, 11000);
 </script>
+
+<%= render :partial => "shared/notification", :locals => { :module_name => 'repository' } %>
+

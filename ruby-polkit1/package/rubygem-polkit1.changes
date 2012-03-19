@@ -1,9 +1,9 @@
 -------------------------------------------------------------------
-Wed Dec  7 10:27:17 UTC 2011 - cfarrell@suse.com
+Wed Nov 23 11:22:19 UTC 2011 - dmacvicar@suse.de
 
-- license update: GPL-2.0+
-  SPDX format. Note that incorrect license strings will be REJECTED in the
-  future
+- remove hoe and add Gemfile in order to push
+  it to rubygems
+- version 0.0.2
 
 -------------------------------------------------------------------
 Fri Sep 23 14:16:54 UTC 2011 - schubi@suse.com

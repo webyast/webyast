@@ -19,16 +19,11 @@
 # you may find current contact information at www.novell.com
 -->
 <% content_for :head do %>
-  <% if JSMIN == true %>
-    <%= javascript_include_tag "min/users-min" -%>
-  <% else %>
-    <%= stylesheet_link_tag "webyast-users" %>
-    <%= javascript_include_tag "users.js" %>
-    <%= javascript_include_tag "select_dialog.js" %>
-  <% end %>
+ <%= stylesheet_link_tag "webyast-users" %>
+ <%= javascript_include_tag "webyast-users" %>
 
 <!-- if no groups, disable validation-->
-<% if @permissions[:groupsget] != true %>
+<% if can? :groupget, User %>
 <script language="javascript">
 function groups_validation(which){ return true; }
 function def_group_validation(which){ return true; }
@@ -169,7 +164,7 @@ function def_group_validation(which){ return true; }
             <%= jss _("Medium") %>,
             <%= jss _("Strong") %>,
             <%= jss _("Very Strong") %>
-          ],
+          ]
       });
 
 
@@ -181,7 +176,7 @@ function def_group_validation(which){ return true; }
 <% end %>
 
 <% content_for :before_script do %>
-  <% javascript_tag do %>
+  <%= javascript_tag do %>
     $(document).ready(function(){
       // to switch from tabs to accordion, just uncomment this and comment the lower tabs section
       /*
@@ -199,24 +194,20 @@ function def_group_validation(which){ return true; }
   <% end %>
 <% end %>
 
-<% disabled = ! @permissions[:useradd] %>
-<!-- <div class='plugin-icon'><img src='/icons/yast-users.png' alt="users module"/>
-  <%_("Users") + header_spacer + _("Add new user")%>
-</div>
+<% disabled =  cannot?(:useradd, User) %>
 
-<div class="plugin-content"> -->
 <div id="new_user" class="plugin-content plugin-border">
 
   <div class="plugin-header">
     <div class="left">
-      <label class="plugin-icon-container"><img class="plugin-icon" src="/icons/users.png"></label>
+      <label class="plugin-icon-container"><%= image_tag("users.png", :class=>"plugin-icon") %></label>
       <label class="plugin-name"><%= _("Users") + header_spacer + _("Add new user")%></label>
     </div>
   </div>
 
   <div class="clearfix">&nbsp;</div>
 
- <% form_for :user, :url => { :action => "create"}, :html => { :id => "form_", :class=>"webyast_form", :autocomplete => :off, :onsubmit => "form_handler('')",}  do |f| %>
+ <%= form_for :user, :url => { :action => "create"}, :html => { :id => "form_", :class=>"webyast_form", :autocomplete => :off, :onsubmit => "form_handler('')",}  do |f| %>
   <%= render :partial => "user_form", :locals =>{ :f => f, :disabled => disabled, :user => @user, :new => true } %>
 
  <% end %>

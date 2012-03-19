@@ -1,9 +1,9 @@
+require "polkit1/version"
 require 'polkit1.so' # native
 require 'inifile'
 require 'shellwords'
 
 module PolKit1
-  VERSION = '0.0.1'
   POLKIT_PATH = "/etc/polkit-1/localauthority/"
 
   def self.polkit1_check(perm, user_name)
@@ -56,3 +56,4 @@ module PolKit1
   end
 
 end
+

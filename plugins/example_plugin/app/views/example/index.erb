@@ -19,11 +19,13 @@
 # you may find current contact information at www.novell.com
 -->
 
+
+
 <div class="plugin-content plugin-border">
-    <% form_tag '/example/update', :class => "webyast_form" do %>
+    <%= form_tag '/example/update', :class => "webyast_form" do %>
       <div class="plugin-header">
         <div class="left">
-          <label class="plugin-icon-container"><img class="plugin-icon" src="/icons/example_plugin.png"></label>
+          <label class="plugin-icon-container"><%= image_tag("example_plugin.png", :class=>"plugin-icon") %></label>
           <label class="plugin-name"><%=_("Example")%></label>
         </div>
         <div class="right" >
@@ -51,7 +53,7 @@
       <div class="button_container">
         <div class="hr">&nbsp;</div>
         <div class="nav-buttons">
-          <%= form_send_buttons :disabled => !@write_permission %>
+          <%= form_send_buttons :disabled => cannot?(:write, Example) %>
         </div>
       </div>
 

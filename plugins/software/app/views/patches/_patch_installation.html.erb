@@ -20,16 +20,30 @@
 # you may find current contact information at www.novell.com
 #++
 %>
-<% javascript_tag do -%>
-  <% if defined? go_on %>
-    continue_loop = <%= go_on %>;
+<%= javascript_tag do -%>
+  <% if go_on %>
+    $(document).ready(function() {
+       setInterval(function(){
+         $.ajax({
+           url: "<%= url_for({ :controller => :patches, :action => :install_all } ) -%>",
+           type: "GET",
+           success: function(data, status, xhr) {
+             $('#status_patches').html(data);
+           },
+           error: function(xhr, status, error) {
+             $('#status_patches').html('<b><%= escape_javascript _("Error: Cannot get information.") -%></b>');
+           }
+         });
+         }, 20000
+       );
+    });
   <% end -%>
 <% end -%>
 
 <%= report_error(error, _("An error occured while installing patches.")) if error %>
 
 <div class="status_patches">
-    <% link_to "patch_updates" do %>
+    <% link_to "patches" do %>
       <% if error %>
         <div class="status-icon error"></div>
       <% else %>
@@ -63,7 +77,6 @@
     <% end %>
 
     <% if !defined?(go_on) or go_on %>
-      <%= button_to_remote _("Stop"), :update =>"status_patches", :url=>{ :controller => :patches, :action => :stop_install_all}, :confirm => _("Are you sure?") %>
+      <%= button_to _("Stop"), :update =>"status_patches", :remote => true, :url=>{ :controller => :patches, :action => :stop_install_all}, :confirm => _("Are you sure?") %>
     <% end %>
-    <%= periodically_call_remote(:condition => "continue_loop == true", :update =>"status_patches", :url=>{ :controller => :patches, :action => :install_all}, :frequency => 20) %>
 </div>

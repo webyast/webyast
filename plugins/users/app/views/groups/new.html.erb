@@ -18,16 +18,11 @@
 # To contact Novell about this file by physical or electronic mail,
 # you may find current contact information at www.novell.com
 -->
+<% content_for :head do %>
+  <%= stylesheet_link_tag "webyast-users" %>
+  <%= javascript_include_tag "webyast-users" %>
 
-  <% if JSMIN == true %>
-    <%= javascript_include_tag "min/users-min.js"-%>
-  <% else %>
-    <%= stylesheet_link_tag "webyast-users" %>
-    <%= javascript_include_tag "users.js" %>
-    <%= javascript_include_tag "select_dialog.js" %>
-  <% end %>
-
-  <% if @permissions[:usersget] != true %>
+  <% if ! can? :usersget, User %>
     <script language="javascript">
       function members_validation(which){ return true; }
     </script>
@@ -82,27 +77,23 @@
     select_users_open = select_users_dialog();
   });  
 </script>
-<%
- disabled = ! ((@permissions[:groupadd] && @adding) || (@permissions[:groupmodify] && !@adding)) %>
 
-<!-- <div class='plugin-icon'><img alt="yast-groups" src='/icons/yast-groups.png' alt="groups module"/>
-  <%=_("Groups") + header_spacer %><span id="questionMark">?</span>
-  <%= _("Add new group") %>
-</div> -->
+<% end %>
 
-<!--<div class="plugin-content"> -->
+<% disabled = ! (((can? :groupadd, User) && @adding) || ((can? :groupmodify, User) && !@adding)) %>
+
 <div id="new_group" class="plugin-content plugin-border">
   <%= render :partial => 'shared/missing_write_permissions' if disabled %>
   
   <div class="plugin-header">
     <div class="left">
-      <label class="plugin-icon-container"><img class="plugin-icon" src="/icons/groups.png"></label>
+      <label class="plugin-icon-container"><%= image_tag("groups.png", :class=>"plugin-icon") %></label>
       <label class="plugin-name"><%= _("Groups") + header_spacer + _("Add new group")%></label>
     </div>
   </div>
-  
+
   <div class="clearfix">&nbsp;</div>
-    <% form_for :group, :url => { :action => "create" }, :html => { :id => "form_", :class=>"webyast_form", :autocomplete => :off, :onsubmit => "form_handler('')"}  do |f| %>
+    <%= form_for :group, :url => { :action => "create" }, :html => { :id => "form_", :class=>"webyast_form", :autocomplete => :off, :onsubmit => "form_handler('')"}  do |f| %>
       <%= f.hidden_field :old_cn %>
 
       <fieldset class="webyast_fieldset">
@@ -121,7 +112,7 @@
           <div class="row manual">
             <label><%=_("Members")%></label>
             <%= f.text_field :members_string, :disabled => false, :onkeyup => "members_validation(this);" %>
-            <% if @permissions[:usersget] == true %>
+            <% if can? :usersget, User %>
             <a href="#" id="manage_members" class="button" onClick="select_users_open('');return false;"><%= _("Manage Members") -%></a>
             <%= f.hidden_field :group_type %><label class="error"></label>
               <div class="clearfix">&nbsp;</div>

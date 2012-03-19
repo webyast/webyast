@@ -21,6 +21,8 @@
 # Resource class
 #
 
+require 'base'
+
 class Resource < BaseModel::Base
   require 'resource_registration'
   attr_accessor :policy, :interface, :href, :singular, :cache_enabled, :cache_priority, :cache_reload_after, :cache_arguments
@@ -43,14 +45,14 @@ class Resource < BaseModel::Base
       case what
         when :all then
           resources = []
-          ResourceRegistration.resources.sort.each do |interface,implementations|
+          ResourceRegistration.instance.resources.sort.each do |interface,implementations|
             implementations.each do |impl|
               resources << new(interface,impl)
             end
           end
           resources
         else
-          implementations = ResourceRegistration.resources[what]
+          implementations = ResourceRegistration.instance.resources[what]
           implementations ? new(what, implementations.first) : nil
       end
     }

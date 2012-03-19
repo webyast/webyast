@@ -20,33 +20,30 @@
 #++
 
 require File.expand_path(File.dirname(__FILE__) + "/../test_helper")
+require File.join(RailsParent.parent, "test","devise_helper")
 require 'test/unit'
 
 #don't have plugin basic tests because doesn't have read permission
 
-
-class SystemControllerTest < ActionController::TestCase
-  fixtures :accounts
+class NtpControllerTest < ActionController::TestCase
 
   def setup    
-    @controller = NtpController.new
-    @request = ActionController::TestRequest.new
-    # http://railsforum.com/viewtopic.php?id=1719
-    @request.session[:account_id] = 1 # defined in fixtures    
+    devise_sign_in
     YastService.stubs(:Call).with("YaPI::NTP::Available").returns(true)
   end
 
-
   def test_index
-    ret = get :show
+    @request.accept = Mime::XML
+    ret = get :show, :format => "xml" 
     assert_response :success
     response = Hash.from_xml(ret.body)
     assert response["ntp"]["actions"]["synchronize"] == false
   end
 
   def test_update
+    @request.accept = Mime::XML
     YastService.stubs(:Call).with("YaPI::NTP::Synchronize",true,"").once.returns("OK")
-    post :update, {"ntp"=>{"actions" => {"synchronize"=>true,"synchronize_utc"=>true}}}
+    post :update, {"ntp"=>{"actions" => {"synchronize"=>true,"synchronize_utc"=>true}}}, :format => "xml" 
     assert_response :success
   end
 

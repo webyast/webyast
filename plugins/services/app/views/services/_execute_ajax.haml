@@ -1,0 +1,26 @@
+- content_for :head do
+  - widget = escape_javascript button_id
+  - srvname = escape_javascript service_name
+  -# refresh also the dependent services
+  - refresh_code = (refresh.map {|service| "$('#refresh_#{escape_javascript service}').click();"}).join("\n");
+
+  :javascript
+    $(document).ready(function() {
+        $("##{widget}").bind("ajax:beforeSend",
+        function() {
+          disable_buttons('#{srvname}');
+          $('#spinner_#{srvname}').show();
+          $('#refresh_#{srvname}').hide();
+          $('#service_result_#{srvname}').hide();
+        }).bind("ajax:success", function(xhr, data, status) {
+          $('#service_result_#{srvname}').html(data);
+          // refresh the status via "clicking" the refresh link
+          $('#refresh_#{srvname}').click();
+          $('#service_result_#{srvname}').fadeIn('slow');
+          #{refresh_code}
+        }).bind("ajax:error", function(xhr, data, status) {
+          $('#service_result_#{srvname}').html("#{escape_javascript _("Error: Refresh failed")}").fadeIn('slow');
+        }).bind("ajax:complete", function () {
+        }
+      );
+    });

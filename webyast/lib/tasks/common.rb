@@ -19,9 +19,8 @@
 # load common webyast rake task
 require 'rake'
 require 'rake/testtask'
-require 'rake/rdoctask'
+require 'rdoc/task'
 require 'rake/packagetask'
-
 require File.join(File.dirname(__FILE__), '..', '..', 'config', 'boot')
 
 begin
@@ -36,10 +35,6 @@ end
 # load the shared rake files from the package itself
 # skip 'deploy_local' task, it's redefined here
 WebyastTasks.loadTasks(:exclude => ["deploy_local.rake"])
-
-# this call also loads WebyastTasks but the second call is ignored there
-# so this 'require' must be called _after_ WebyastTasks.loadTasks
-require 'tasks/rails'
 
 require 'fileutils'
 

@@ -21,11 +21,11 @@
 
 <%= stylesheet_link_tag "webyast-terminal" %>
 
-<% content_for :before_script do %>
-  <% javascript_tag do %>
+<%= content_for :before_script do %>
+  <%= javascript_tag do %>
 
   $(document).ready(function(){
-    $("#iframe").attr("src", "https://<%= `hostname --fqdn`.chomp %>:4200");
+    $("#iframe").attr("src", "https://<%= `/bin/hostname --fqdn`.chomp %>:4200");
 
     $("#fullscreen").click(function(){
       $(".webyast_fieldset").css("position", "static");
@@ -46,7 +46,7 @@
 <div class="plugin-content plugin-border">
   <div class="plugin-header webyast_form">
     <div class="left">
-      <label class="plugin-icon-container"><img class="plugin-icon" src="/icons/terminal.png"></label>
+      <label class="plugin-icon-container"><%= image_tag("terminal.png", :class=>"plugin-icon") %></label>
       <label class="plugin-name"><%= _("Terminal Client") %></label>
     </div>
     <div class="right" >

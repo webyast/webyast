@@ -34,8 +34,7 @@ class PatchStateTest < ActiveSupport::TestCase
     assert ret[:confirmation_label]=="OK"
     assert ret[:message_id]=="PATCH_MESSAGES"
     assert ret[:level]=="warning"
-    assert ret[:confirmation_host]=="service"
-    assert ret[:confirmation_link]=="/patch_update/state"
+    assert ret[:confirmation_link]=="/patches/message"
     assert ret[:confirmation_kind]=="button"
   end
 

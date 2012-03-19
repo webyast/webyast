@@ -1,5 +1,5 @@
 main:
-  icon: '/icons/yast-firewall.png'
+  icon: 'yast-firewall.png'
   url: /firewall
   groups: [ Network ]
   main: [true]

@@ -16,42 +16,43 @@
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA
 #++
 
-# route sessions statically, it is a singleton controller
-ActionController::Routing::Routes.draw do |map|
-  map.resource :session
-  map.resources :notifier
-  map.resources :onlinehelp
-  map.resources :logs
-    map.resource :permissions
-  map.resource :vendor_settings
-  
-  #resources is not restful as it allows only read only access. It is more likely inspection
-  map.connect 'resources/:id.:format',  :controller => 'resources', :action => 'show', :requirements => { :id => /[-\w]+/ }
-  map.connect 'resources.:format',  :controller => 'resources', :action => 'index'
+Webyast::Application.routes.draw do
 
+  devise_for :accounts,  :controllers => { :sessions => "sessions" }
+  devise_scope :account do
+    get "sign_in", :to => "devise/sessions#new"
+    get "sign_out", :to => "devise/sessions#destroy"
+  end
 
-  map.connect '/validate_uri', :controller => 'hosts', :action => 'validate_uri'
-  map.root :controller => "main"
- 
-  map.login '/login.html', :controller => 'sessions', :action => 'new'
+  devise_for :accounts, :controllers => { :sessions => "sessions" }
 
-  # login uses POST for both
-  map.login "/login.:format", :controller => 'sessions', :action => 'create'
-  map.logout "/logout.:format", :controller => 'sessions', :action => 'destroy'
-  
-#  map.login '/login', :controller => 'sessions', :action => 'new'
-#  map.logout '/logout', :controller => 'sessions', :action => 'destroy'
+  devise_scope :account do
+    get "sign_in", :to => "sessions#new"
+    get "sign_out", :to => "sessions#destroy"
+    match "sign_in" => "sessions#new"
+    match "sign_out" => "sessions#destroy"
+  end
 
-  map.restdoc "/restdoc.:format", :controller => 'restdoc', :action => 'index'
-  
-  
-  #FIXME: this is a workaround only
-  map.notifier "/notifiers/status.:format",  :controller => "notifier", :action => "status"
+  resources :notifier
+  resources :onlinehelp
+  resources :logs
+  resource :vendor_settings
 
-  
-  # Install the default routes as the lowest priority.
+  #mounting each plugin
+  if defined? WebYaST
+    webyast_module = Object.const_get("WebYaST")
+    webyast_plugins = webyast_module.constants
+    webyast_plugins.each do |plugin|
+      mount webyast_module.const_get(plugin) => '/'
+    end
+  end
 
-  map.connect ':controller/:action/:id'
-  map.connect ':controller/:action/:id.:format', :requirements => {:id => /[^\/]*(?=\.html|\.js)|.+/ }
+  root :to => 'controlpanel#index'
 
+  match 'resources/:id.:format' => 'resources#show', :constraints => { :id => /[-\w]+/ }
+  match 'resources.:format' => 'resources#index'
+  match '/validate_uri' => 'hosts#validate_uri'
+  match '/restdoc.:format' => 'restdoc#index', :as => :restdoc
+  match '/notifiers/status.:format' => 'notifier#status', :as => :notifier
+  match '/:controller(/:action(/:id))'
 end

@@ -1,0 +1,316 @@
+<%#
+#--
+# Copyright (c) 2009-2010 Novell, Inc.
+#
+# All Rights Reserved.
+#
+# This program is free software; you can redistribute it and/or modify it
+# under the terms of version 2 of the GNU General Public License
+# as published by the Free Software Foundation.
+#
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+# GNU General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with this program; if not, contact Novell, Inc.
+#
+# To contact Novell about this file by physical or electronic mail,
+# you may find current contact information at www.novell.com
+#++
+%>
+
+<div class="plugin-content plugin-border" style="padding:10px;">
+  <div class="plugin-header">
+    <div class="left">
+      <label class="plugin-icon-container"><%= image_tag("yast-permissions.png", :class=>"plugin-icon") %></label>
+      <label class="plugin-name"><%=_("Roles")%></label>
+      <span id="questionMark" class="right" style="margin:0px 5px; float:right;">?</span>
+    </div>
+  </div>
+
+  <div class="clearfix">&nbsp;</div>
+  
+  <div id="create_role_dialog" style="display: none">
+    <%= form_tag '/roles/create', {:id=>'rolesForm', :class => 'container'} do %>
+      <label for="role_name">Name</label><%= text_field_tag "role_name", "", :class=>"required"%>
+    <% end %>
+  </div>
+
+ <div id="roles_tipsy_tooltip" style="display:none;">
+      <div style="float:left; width:70px;">
+        <span id="infoMark" class="info">!</span>
+      </div>
+      <div id="tooltip_message_container">
+        <label class="info_text"> <%= _("In order to assign the user to roles,")%></label>
+        <label class="info_text"> <%= _("Drag and Drop the user labels into Role containers") %></label>
+        <label class="info_text"><a id="dont_show" href=""><%= _("Don't show this again") %></a></label>
+      </div>
+      <span class="clearfix"></span>
+    </div>
+    
+  <%= form_tag '/roles/update', { :id=>'rolesUpdateForm', :class => 'container webyast_form', :style=>"position:relative;"} do %>
+    <span id="toolbox">
+      <%= image_tag("loupe.png", :id=>"loupe") %>
+      <input type="text" id="find_user" autocomplete="off">
+      <%= image_tag("reset-search.png", {:class=>"resetSearch", :id=>"resetSearchField"}) %>
+      <span id="loader"><%= image_tag("spinner.gif") %></span>
+      <%= link_to  (_("Create Role") ), {}, {:id => 'create_role_link' } %>
+    </span>
+
+    <div id="jqueryTab" class="fieldset-group">
+      <fieldset id="assignUsers">
+        <legend><span><%= _("Assign Users")%></span></legend>
+    <div id="rolesContainer">
+	    <div id="rolesContent">
+
+	      <% @roles.each do |role| %>
+
+		<div id="<%= role.name %>" class="role">
+		  <span class="roleHeader">
+		    <label><!--<img class="role" src="../images/key-grey.png">--><%= role.name%></label>
+		    <span id="<%= role.name %>-warning" class="user-warning-message">
+		      <%= _("User already assigned") %>
+		    </span>
+		    <%= link_to image_tag("delete-user.png", :border=>0, :class=>"deleteRole"), {:action => 'destroy', :id => ERB::Util.html_escape( role.name ) }, { :style=>"border:0px;"} %>
+		  </span>
+		  <span class="roleBody drop">
+		    <%=hidden_field_tag(RolesController.users_role_id(role.name), role.users.join(",") ) %>
+		    <% role.users.each do |user| %>
+		      <span class="user assigned" alt="<%=RolesController.users_role_id(role.name)%>"><%=user%></span>
+		    <% end %>
+		  </span>
+		</div>
+  	      <% end %>
+	    </div>
+	  </div>
+
+  <div id="usersContainer">
+    <div id="usersContent" class="users">
+      <div class="slider-content">
+        <ol>
+        <% @tmp = Array.new %>
+        <% @users.each_with_index do |user, i|%>
+          <% unless @tmp.index(user[0][0,1]) != nil  %>
+            <% if i == 0 %>
+              <% @alpha = "'" + user[0][0,1] + "'" %>
+               <li id="<%= user[0][0,1] %>" class="title"><%=  user[0][0,1] %></li><ol class="wrapper"><li>
+            <% else %>
+              <% @alpha += ",'" + user[0][0,1] + "'" %>
+                </li></ol><li id="<%= user[0][0,1] %>" class="title"><%= user[0][0,1] %></li><ol class="wrapper"><li>
+            <% end %>
+            <% @tmp.push(user[0][0,1]) %>
+            <span class="drag user"><%= user[0] %></span>
+          <% else %>
+            <span class="drag user"><%= user[0] %></span>
+          <% end %>
+        <% end %>
+<!-- Add ful name -->
+<!--            <span class="drag user">
+              <#%# user[0] #%#>
+               <span style="position:relative;">
+                <label style="width:60%; float:none;  background:white; display:inline-block;"><#%# user[0] #%#></label>
+                <label style="  font-size:8px; float:none; background:white; position:absolute; text-transform:none; left:0; margin-top:20px; display:inline-block;"><#%# user[1] #%#></label>
+              </span>
+            </span> -->
+
+      </ol>
+      </div>
+    </div>
+  </div>
+  </fieldset>
+
+      <fieldset id="assign-permissions" class="webyast_form" >
+        <legend><span><%= _("Assign Permissions")%></span></legend>
+        <div>
+          <div class="permissions-header fieldset_header" style="overflow:hidden;">
+            <span class="permission-label"><a id="collapse_all"><%= _("collapse all") %></a></span>
+            <% @roles.each do |role| %>
+                 <span class="role-label"><%= role.name %></span>
+            <% end %>
+          </div>
+          <div style="clear:both"></div>
+          <div class="permissions-content">
+            <% @prefixed_permissions.each do |prefix,permissions| %>
+              <div class="list-fieldset" style="border:1px solid #d8d8d8; border-radius:2px; background-color:#fafafa" >
+
+                <div class="permissions-group-header list-fieldset-header">
+                  <span class="permission-label"><%= prefix %></span>
+                  <% @roles.each do |role| %>
+                    <span class="permission-field" group-role-id="<%= RolesController.permission_role_id prefix, role.name %>">
+                      <%= check_box_tag( RolesController.permission_role_id( prefix, role.name), "1" ) %>
+                    </span>
+                  <% end %>
+                  <div style="clear:both"></div>
+                </div>
+
+                <div class="permissions-group-content">
+                  <% permissions.each do |permission| %>
+                    <div class="permissions-group-row">
+                      <span class="permission-label"><%= permission.short_name %></span>
+                      <% @roles.each do |role| %>
+                        <span class="permission-field" group-role-id="<%= RolesController.permission_role_id prefix, role.name %>">
+                          <%= check_box_tag( RolesController.permission_role_id( permission.full_name, role.name ), "1", role.permissions.include?( permission.full_name) ) %>
+                        </span>
+                      <% end %>
+                    </div>
+                  <% end %>
+                  <div style="clear:both"></div>
+                </div>
+              </div>
+            <% end %>
+          </div>
+        </div>
+      </fieldset>
+    </div>
+
+    <div class="nav-buttons">
+      <%= form_next_button (:id=>'roles_submit_button') %>
+      <%= form_str_spacer %>
+      <%= form_back_button %>
+    </div>
+  <% end %>
+
+  <%= render :partial => "shared/notification", :locals => { :module_name => 'roles,users' } %>
+
+  <script type="text/javascript">
+    $(document).ready(function(){
+      function validateRoleName(name) {
+	      jQuery.validator.addMethod(name, function(value, element) {
+	        var regExp = new RegExp("^[a-zA-Z0-9\\_\\-\\. ]+$");
+	        return this.optional(element) || regExp.test(value);
+	      });
+      }
+      validateRoleName("role_name");
+      $("#rolesForm").validate({
+      	onkeyup: function(element) { this.element(element); },
+      	rules:{ role_name: { required:true, role_name: true } },
+      	messages: {
+      	  role_name: { required: <%= jss _("This field is required") -%>, role_name: <%= jss _("Allowed is combination of a-z, A-Z, numbers, space, dash and underscore only.") -%> }
+      	}
+      });
+
+      $(".permissions-group-header .permission-field input").click( function() {
+      	groupHeaderClicked($(this));
+      });
+      $(".permissions-group-content .permission-field input").click( function() {
+      	groupFieldClicked( $(this) );
+      });
+      $(".permissions-group-header .permission-field").map( function() { refreshComputed( this.getAttribute('group-role-id') ) });
+      $('.list-fieldset-header .permission-label').click(function() {
+      	$(this).parent().next().toggle();
+      	return false;
+      });
+      $('.permissions-header .permission-label').click( collapseAll );
+      addTabsNavigation("div#jqueryTab", "span");
+      $("div#jqueryTab").tabs();
+
+      create_role_dialog();
+
+      $("#create_role_link").click( function (e) {
+      	e.preventDefault();
+	      $("#create_role_dialog").dialog('open');
+      });
+
+      $("#roles_submit_button").click( function () { blockForm(); });
+      $("img.deleteRole").click( function () { blockForm(); });
+
+
+      if($.browser.msie() && $.browser.version.number() == 8 ) {
+        $('#usersContent ol').css('padding', '0').css('margin', '0');
+        $('#usersContent ol li').css('padding', '5px')
+      } else {
+        $('#usersContent').sliderNav({items:[<%= @alpha %>], arrows:false });
+      }
+
+    });
+
+    function clearForm() {
+      $("#role_name").val('');
+      $("#rolesForm label.error").val('').css("display", "none");
+    }
+
+    function create_role_dialog() {
+      $("#create_role_dialog").dialog({
+        autoOpen: false,
+        width: 400,
+        modal: true,
+	      close: clearForm,
+        buttons: {
+	       'Create Role': function() {
+	       if ($("#rolesForm").validate().form() == true) {
+	         $(this).children("form").first().submit();
+	         $(this).dialog('close');
+	         blockForm();
+	       }
+  	     },
+	      Cancel: function() {
+	        $(this).dialog('close');
+  	      }
+	      }
+      });
+    };
+
+    function blockForm() {
+      var message = "<%= _("Please wait") -%>";
+      //disableFormOnSubmit(message);
+      $.modalDialog.wait( {message: message});
+    }
+
+    function groupedFields(group_role_id) {
+      var header_check = $(".permissions-group-header .permission-field[group-role-id='"+group_role_id+"'] input")[0];
+      var field_checks = $(".permissions-group-content .permission-field[group-role-id='"+group_role_id+"'] input").get();
+      return { header : header_check, fields : field_checks };
+    };
+
+    function all(items, cond) {
+      items_length = items.length;
+      for (var i=0;i<items_length;i++) {
+        if (!cond(items[i])) { return false }
+      };
+      return true;
+    };
+    function allChecked(checks, status) {
+      return all(checks, function(ch) { return ch.checked == status });
+    };
+    function allCheckedSame(checks) {
+      return (allChecked(checks,true) || allChecked(checks,false));
+    };
+    function groupHeaderClicked( group_header ) {
+      var group = groupedFields(group_header.parent().attr('group-role-id'));
+      if (group_header.hasClass('computed')) {
+        group.fields.map( function(f){f.checked = group_header[0].checked} )
+        group_header.removeClass('computed');
+        $(group.fields).addClass('computed');
+      } else {
+        group.fields.map( function(f){ f.checked = group_header[0].checked } );
+      }
+    };
+    function refreshComputed(group_role_id) {
+      group = groupedFields( group_role_id );
+      if (allCheckedSame(group.fields)) {
+        $(group.header).removeClass('computed');
+        $(group.fields).addClass('computed');
+        group.header.checked = group.fields[0].checked;
+      } else {
+        $(group.header).addClass('computed');
+        $(group.fields).removeClass('computed');
+        group.header.checked = true;
+      }
+    };
+    function groupFieldClicked( group_field ) {
+      refreshComputed(group_field.parent().attr('group-role-id'));
+    };
+    function collapseAll() {
+      $('.list-fieldset-header').next().hide();
+    };
+
+  </script>
+
+  <% content_for :head do %>
+      <%= javascript_include_tag "webyast-roles" %>
+      <%= stylesheet_link_tag "webyast-roles" %>
+  <% end%>
+</div>
+

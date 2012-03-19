@@ -17,7 +17,7 @@
 #++
 
 class NotifierController < ApplicationController
-  before_filter :login_required
+
   layout nil
 
   # GET /notifier
@@ -27,7 +27,7 @@ class NotifierController < ApplicationController
     unless YastCache.active
       render :nothing=>true, :status=>306 and return
     else
-      if(DataCache.updated?(params[:plugin], id, current_account.remember_token))
+      if(DataCache.updated?(params[:plugin], id, session["session_id"]))
         render :nothing=>true, :status=>200 and return
       else
         render :nothing=>true, :status=>304 and return

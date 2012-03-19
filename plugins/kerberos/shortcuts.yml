@@ -1,5 +1,5 @@
 main:
-  icon: '/icons/yast-kerberos.png'
+  icon: 'yast-kerberos.png'
   url: /kerberos
   groups: [ Network ]
   tags: [ kerberos ]

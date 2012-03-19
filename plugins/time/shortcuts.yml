@@ -1,5 +1,5 @@
 main:
-  icon: '/icons/yast-ntp-client.png'
+  icon: 'yast-ntp-client.png'
   url: /time
   groups: [ System ]
   tags: [ time, clock, timezone, ntp]

@@ -1,209 +1,50 @@
 <!--
 # Copyright (c) 2009-2010 Novell, Inc.
-# 
+#
 # All Rights Reserved.
-# 
+#
 # This program is free software; you can redistribute it and/or modify it
 # under the terms of version 2 of the GNU General Public License
 # as published by the Free Software Foundation.
-# 
+#
 # This program is distributed in the hope that it will be useful,
 # but WITHOUT ANY WARRANTY; without even the implied warranty of
 # MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
 # GNU General Public License for more details.
-# 
+#
 # You should have received a copy of the GNU General Public License
 # along with this program; if not, contact Novell, Inc.
-# 
+#
 # To contact Novell about this file by physical or electronic mail,
 # you may find current contact information at www.novell.com
 -->
 
-<%= javascript_include_tag :defaults %>
+<%= content_for :head do %>
 
-  <% if JSMIN == false %>
-    <%= stylesheet_link_tag "webyast-services" %>
-    <%= stylesheet_link_tag "webyast-plugin-toolbar" %>
-    <%= javascript_include_tag "jquery.quicksearch.js"-%>
-  <% end %>
+ <%= stylesheet_link_tag "webyast-services" %>
+ <%= javascript_include_tag "webyast-services" %>
+ 
 
-
-<% javascript_tag do %>
-  var AUTH_TOKEN = 'authenticity_token=' + encodeURIComponent("<%= escape_javascript form_authenticity_token %>");
-  startNotifier({'module':'services', 'AUTH_TOKEN':AUTH_TOKEN}, 1000, 11000);
-$(document).ready(function() {
-  console.log("GET STATUS")
-  $("#services div.list-fieldset").each (function(index) {
-  
-//  console.log("GET STATUS")
-  
-  if ($(this).is(":has(span.status_running)")) {
-    $(this).find(".list-fieldset-header .service-icon").attr('class','service-icon status-icon ok');
-
-    if ($(this).is(":has(div.service_disabled)")) {
-      $(this).find(".list-fieldset-header .service-icon").attr('class','service-icon status-icon ok-unused');
-    }
-  }
-  
-  else if ($(this).is(":has(span.status_dead)")) {
-	    $(this).find(".list-fieldset-header .service-icon").attr('class','service-icon status-icon error');
-	}
-	else {
-	    $(this).find(".list-fieldset-header .service-icon").attr('class','service-icon status-icon unused');
-	    if ($(this).is(":has(div.service_enabled)")) {
-		$(this).find(".list-fieldset-header .service-icon").attr('class','service-icon status-icon unused-ok');
-	    }
-	}
-    });
-
-    $('input#service_search').quicksearch('#services div.list-fieldset', {
-      selector: '.quicksearch_content',
-      delay: 100
-    });
-
-    $('.accordion div.list-fieldset:even').addClass('alt-bg');
-})
-
-
-// adapt the status icon of given service
-function toggle_service_info (name) {
-
-    var id	= '#service_status_' + name;
-    var heading	= $(id).closest('.service-content').siblings('div.list-fieldset-header');
-
-    if ($(id).is(':has(span.status_running)')) {
-	$(heading).find(".service-icon").attr('class','service-icon status-icon ok');
-	$('a#start_' + name).hide();
-	$('a#stop_' + name).show();
-	// running, but disabled: not ok
-	if ($(id).is(':has(div.service_disabled)')) {
-	    $(heading).find(".service-icon").attr('class','service-icon status-icon ok-unused');
-	}
-    }
-    else if ($(id).is(':has(span.status_dead)')) {
-	$(heading).find(".service-icon").attr('class','service-icon status-icon error');
-	$('a#stop_' + name).hide();
-	$('a#start_' + name).show();
-    }
-    else {
-	$(heading).find(".service-icon").attr('class','service-icon status-icon unused');
-	$('a#stop_' + name).hide();
-	$('a#start_' + name).show();
-	// not running, but enabled: not unused
-	if ($(id).is(':has(div.service_enabled)')) {
-	    $(heading).find(".service-icon").attr('class','service-icon status-icon unused-ok');
-	}
-    }
-    // hide enable/disable buttons if they should not be seen
-    // explicitely check if some status is present, custom services do not have it
-    if ($(id).is(':has(div.service_disabled)')) {
-	$('a#disable_' + name).hide();
-	$('a#enable_' + name).show();
-    } else if ($(id).is(':has(div.service_enabled)')) {
-	$('a#enable_' + name).hide();
-	$('a#disable_' + name).show();
-    }
-}
-
-function select_status (val) {
-    if (val == "all") {
-	$("#services > div.list-fieldset").show();
-    }
-    else if (val == "not-running") {
-	$('#services > div.list-fieldset').each(function(index) {
-	    if ($(this).is(":has(span.status_not_running)")) {
-		$(this).show();
-	    } else {
-		$(this).hide();
-	    }
-	});
-    }
-    else if (val == "running") {
-	$('#services > div.list-fieldset').each(function(index) {
-	    if ($(this).is(":has(span.status_running)")) {
-		$(this).show();
-	    } else {
-		$(this).hide();
-	    }
-	});
-    }
-    else if (val == "dead") {
-	$('#services > div.list-fieldset').each(function(index) {
-	    if ($(this).is(":has(span.status_dead)")) {
-		$(this).show();
-	    } else {
-		$(this).hide();
-	    }
-	});
-    }
-    else if (val == "enabled") {
-	$('#services > div.list-fieldset').each(function(index) {
-	    if ($(this).is(":has(div.service_enabled)")) {
-		$(this).show();
-	    } else {
-		$(this).hide();
-	    }
-	});
-    }
-    else if (val == "disabled") {
-	$('#services > div.list-fieldset').each(function(index) {
-	    if ($(this).is(":has(div.service_disabled)")) {
-		$(this).show();
-	    } else {
-		$(this).hide();
-	    }
-	});
-    }
-}
-
-// hide the buttons and current state while the action is performed
-function disable_buttons (s) {
-
-    $('#service_progress_' + s).show();
-    $('#service_status_' + s).hide();
-    $('#service_result_' + s).hide();
-    $('#service_refresh_' + s).hide();
-    $('a.button').attr('disabled', 'disabled');
-}
-
-// show the results and enable buttons back
-function enable_buttons (s) {
-    $('#service_progress_' + s).hide();
-    $('#service_status_' + s).show();
-    $('#service_refresh_' + s).show();
-    $('a.button').removeAttr('disabled');
-}
-
-<% end %>
-
-<% content_for :before_script do %>
-  <% javascript_tag do %>
-  $(document).ready(function(){
-    $(".accordion").accordion({
-       autoHeight : false,
-       navigation : true,
-       collapsible: true,
-       header     : 'div.list-fieldset div.list-fieldset-header',
-       change: function(event, ui) {
-	    $('#service_result_' + $(ui.oldHeader).attr("name")).hide();
-	},
-       animated   : false
-    });
-    $(".accordion").accordion('activate',false);
-  });
-  <% end %>
-<% end %>
-
-<!-- borrowed from users, until it is public -->
-<style type="text/css">
+ 
+ 
+ <!-- borrowed from users, until it is public -->
+ <style type="text/css">
     .pad1_2em { padding: 1em 2em; }
     .ui-accordion .ui-accordion-content-active { display: inline; }
-</style>
+ </style>
+ 
+ 
+
+ <%= render :partial => "shared/notification", :locals => { :module_name => 'services'} %>
+
+<% end %>
+
+
 
 <div class="plugin-content plugin-border">
   <div class="plugin-header">
     <div class="left">
-      <label class="plugin-icon-container"><img class="plugin-icon" src="/icons/repositories.png"></label>
+      <label class="plugin-icon-container"><%= image_tag("system_services.png", :class=>"plugin-icon") %></label>
       <label class="plugin-name"><%= _("System Services") %></label>
       <span id="questionMark" style="margin:0px 5px; float:right;">?</span>
     </div>
@@ -212,7 +53,7 @@ function enable_buttons (s) {
   <div class="clearfix">&nbsp;</div>
 
 
-  <% unless @permissions %>
+  <% unless can? :execute, Service %>
     <div id="heading" class="pad1_2em">
       <p class="missing-permissions"><%=_("You do not have permission to execute the services.")%></p> <!-- RORSCAN_ITL -->
     </div>
@@ -225,12 +66,12 @@ function enable_buttons (s) {
       <label><%= _("Quick Search") %></label>
       <input type="text" id="service_search">
     </form>
-    
-    <label for="filter">
+
+    <label for="filter_services">
       <%=_("Filter services")%>
-      <% image_tag("/images/filter.png")%>
+      <%= image_tag("filter.png")%>
     </label>
-     
+
     <%= select_tag "filter_services", options_for_select([
       [ _("All"), "all"],
       [ _("Running"), "running"],
@@ -240,62 +81,61 @@ function enable_buttons (s) {
       [ _("Not Started on Boot"), "disabled"],
       ])
     %>
-
-    <%= observe_field("filter_services", :function => "select_status(value)") %>
   </div>
 
   <div style="clear:both; overflow:hidden;"></div>
-  
+
   <div id="services" class="accordion">
-    <% commands = [ "start", "stop", "restart", "enable", "disable"] 
-    
+    <% commands = [ "start", "stop", "restart", "enable", "disable"]
+
       @services.each do |service| %>
         <div class="list-fieldset">
-          <div class="list-fieldset-header" name=<%=service.name%>><span class="service-icon"></span><%=h service.name %><em style="position:absolute; left:25%"><%= h service.summary%></em></div>
+          <div class="list-fieldset-header" ><span class="service-icon"></span><%=h service.name %><em style="position:absolute; left:25%"><%= h service.summary%></em></div>
           <div class='service-content' style="display:none; padding-left: 1em;">
 
           <p class='description quicksearch_content'>
             <i><%= service.description ? h(service.description) : _("Description for service is not available") %></i>
-            <!-- This is a workaround for quicksearch plugin - it can search in _one_ element
+            <%# This is a workaround for quicksearch plugin - it can search in _one_ element
               so we add the service name and summary here again and make it hidden so it is also
-              searched but not displayed -->
-            <span style="display: none"><%= h(service.name)+h(service.summary) -%></span>
+              searched but not displayed %>
+            <span style="display: none"><%= h(service.name) + " " + h(service.summary) -%></span>
           </p>
 
-          <img src="/images/working.gif" class="small-working-icon" id="service_progress_<%=h service.name%>" style="display: none" alt='working...'/>
+          <%= image_tag "working.gif", :class => "small-working-icon", :id => "service_progress_#{service.name}", :style => "display: none" %>
 
 
-          <span class='service_status' id='service_status_<%= h service.name%>'>
+          <div class='service_status' id='service_status_<%= h service.name%>'>
             <% unless service.status.nil? %>
               <%= render :partial => 'status', :locals => { :status => service.status, :enabled => service.enabled, :custom => service.custom } %>
             <% end %>
-          </span>
+          </div>
 
 
           <span id='service_refresh_<%= h service.name%>'>
-            <%= url = { 
-                  :controller => :services, 
-                  :id => service.name, 
-                  :action	=> :show_status, :custom => service.custom 
+            <%= image_tag 'spinner.gif', :style => 'display: none', :id => "spinner_#{escape_javascript service.name}" %>
+            <%= url = {
+                  :controller => :services,
+                  :id => service.name,
+                  :action => :show_status,
+                  :custom => service.custom
                 }
-      
-                link_to_remote _('(refresh)'), 
-                  :update => "service_status_#{service.name}", 
-                  :url => url, 
-                  :loading  => "disable_buttons('#{service.name}');", 
-                  :complete => "toggle_service_info ('#{service.name}'); enable_buttons ('#{service.name}');"
-                %>
+
+                link_to _('(refresh)'), url, { :remote => true, :id => "refresh_#{escape_javascript service.name}", "data-type" => "html" }
+             %>
+
+            <%= render :partial => "refresh_ajax", :locals => { :service_name => service.name } %>
           </span>
 
           <p class="service-buttons">
             <!--# do not show enable/disable part for custom services -->
-            <% commands.each do |cmd|	if @permissions && ! (service.custom && (cmd == "enable" || cmd == "disable")) %>
+            <% commands.each do |cmd|	if (@exec_permission) && ! (service.custom && (cmd == "enable" || cmd == "disable")) %>
               <%= url = {
-                    :id => cmd, 
-                    :action => "execute", 
+                    :id => cmd,
+                    :action => "execute",
                     :service_id => service.name,
                     :custom => service.custom
                   }
+                button_id = cmd + "_" + service.name
                 status_url = {
                     :controler => :services,
                     :action => :show_status,
@@ -304,10 +144,10 @@ function enable_buttons (s) {
                 }
                 html_options = {
                     :class => "button",
-                    :id => cmd + "_" + service.name
+                    :id => button_id
                 }
                 html_options[:style] = "display: none" if (cmd == "start" && service.status == 0) || (cmd == "stop" && service.status != 0) ||
-                  (cmd == "enable" && service.enabled) || (cmd == "disable" && !service.enabled) 
+                  (cmd == "enable" && service.enabled) || (cmd == "disable" && !service.enabled)
 
                 label = case cmd
                   when "start" then _("Start")
@@ -316,48 +156,22 @@ function enable_buttons (s) {
                   when "enable"	then _("Start on Boot")
                   when "disable" then _("Do Not Start on Boot")
                   else cmd
-                  end
+                end
 
-                complete = remote_function(:update => "service_status_#{service.name}",
-                    :url => status_url,
-                    :complete => "toggle_service_info ('#{service.name}'); $('#service_result_#{service.name}').show(); enable_buttons('#{service.name}')"
-                )
-
+                refresh = []
                 # dependent services must also update status
                 if (cmd == "start" || cmd == "restart" || cmd == "enable")
-                  service.required_for_start.each do |required|
-                  complete = complete + ";" + remote_function(
-                    :update => "service_status_#{required}",
-                    :url => {
-                      :controler => :services,
-                      :action => :show_status,
-                      :id => required
-                    },
-                    :complete	=> "toggle_service_info ('#{required}')"
-                  )
-                end
-
+                  refresh = service.required_for_start
                 elsif (cmd == "stop" || cmd == "disable")
-                  service.required_for_stop.each do |required|
-                  complete = complete + ";" + remote_function(
-                    :update => "service_status_#{required}",
-                    :url => {
-                      :controler => :services,
-                      :action => :show_status,
-                      :id => required
-                    },
-                    :complete	=> "toggle_service_info ('#{required}')"
-                  )
+                  refresh = service.required_for_stop
                 end
-              end
 
-          link_to_remote label,
-            :url	=> url,
-            :loading	=> "disable_buttons('#{service.name}');",
-            :complete   => complete,
-            :html	=> html_options,
-            :update	=> "service_result_#{service.name}"
+              link_to label, url, {
+                :remote     => true,
+                 "data-type" => "html"
+                }.merge(html_options)
           %>
+            <%= render :partial => "execute_ajax", :locals => { :button_id => button_id, :service_name => service.name, :refresh => refresh } %>
           <%
          end
       end %>
@@ -372,7 +186,7 @@ function enable_buttons (s) {
 </div>
 
   <div class="clearfix">&nbsp;</div>
-  
+
   <div class="button_container webyast_form" style="margin:5px 15px">
     <div class="hr">&nbsp;</div>
       <div class="nav-buttons">
