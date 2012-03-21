@@ -44,6 +44,10 @@ function Notify(params) {
         window.clearInterval(timer);
       },
       
+      422:function() { 
+        window.clearInterval(timer);
+      },
+      
       500:function() { 
         window.clearInterval(timer); 
       }
