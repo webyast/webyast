@@ -27,8 +27,8 @@ module PolKit1
       ini_file = IniFile.new(file,:comment => '#')
       ini_file[perm]["Action"] = perm
       ini_file[perm]["ResultAny"] = "yes"
-      ini_file[perm]["ResultInactive"] = "no"
-      ini_file[perm]["ResultActive"] = "no"
+      ini_file[perm]["ResultInactive"] = "yes"
+      ini_file[perm]["ResultActive"] = "yes"
     end
     permissions = []
     permission_string = "unix-user:"+user_name
