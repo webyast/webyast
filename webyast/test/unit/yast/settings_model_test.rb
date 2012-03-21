@@ -19,6 +19,7 @@
 require File.dirname(__FILE__) + '/../../test_helper'
 require 'yast/settings_model'
 
+
 def test_data(name)
   File.join(File.dirname(__FILE__), "data", name)
 end
@@ -71,42 +72,6 @@ DONE
 
     assert_equal("100", setting.to_json)
 
-xml = <<END
-<?xml version="1.0" encoding="UTF-8"?>
-<monitor-settings type="array">
-  <monitor-setting>
-    <value>vga</value>
-    <name>mode</name>
-  </monitor-setting>
-  <monitor-setting>
-    <value type="integer">100</value>
-    <name>height</name>
-  </monitor-setting>
-  <monitor-setting>
-    <value type="integer">40</value>
-    <name>frequency</name>
-  </monitor-setting>
-  <monitor-setting>
-    <value type="array">
-      <value>
-        <output>dvi</output>
-      </value>
-      <value>
-        <output>analog</output>
-      </value>
-    </value>
-    <name>outputs</name>
-  </monitor-setting>
-  <monitor-setting>
-    <value type="integer">300</value>
-    <name>width</name>
-  </monitor-setting>
-</monitor-settings>
-END
-    
-    assert_equal(xml, settings.to_xml)
-
-    #assert_equal("d", settings.to_json)
     
   end
   

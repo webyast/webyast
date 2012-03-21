@@ -42,7 +42,7 @@ Requires:       ruby-dbus
 %else
 Requires:	rubygem-ruby-dbus
 %endif
-Requires:       rubygem-webyast-rake-tasks >= 0.2
+Requires:       rubygem-webyast-rake-tasks >= 0.2, webyast-base-branding-default
 PreReq:		rubygem-bundler
 # 634404
 Recommends:     logrotate
