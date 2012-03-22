@@ -63,6 +63,7 @@ class GraphTest < ActiveSupport::TestCase
 
   end
 
+=begin
   def test_finders
     Metric.stubs(:collectd_running?).returns(true)
     Graph.stubs(:parse_config).returns(PARSE_CONFIG_1)
@@ -81,6 +82,7 @@ class GraphTest < ActiveSupport::TestCase
     ret = Graph.find('notfound')
     assert_equal 0, ret.size
   end
+=end
 
   def test_find_limits
     Metric.stubs(:collectd_running?).returns(true)
@@ -99,7 +101,7 @@ class GraphTest < ActiveSupport::TestCase
     ret = Graph.find('notfound')
     assert_equal 0, ret.size
   end
-
+=begin
   def test_check_limits_and_xml
     Metric.stubs(:collectd_running?).returns(true)
     Graph.stubs(:parse_config).returns(PARSE_CONFIG_3)
@@ -178,6 +180,6 @@ class GraphTest < ActiveSupport::TestCase
     assert xml_cmp graph_xml, should_xml
 
   end
-  
+=end  
   
 end

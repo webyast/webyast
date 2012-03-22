@@ -24,22 +24,6 @@ require 'mocha'
 
 require 'rexml/document'
 
-def xml_cmp a, b
-  a = REXML::Document.new(a.to_s)
-  b = REXML::Document.new(b.to_s)
-
-  normalized = Class.new(REXML::Formatters::Pretty) do
-    def write_text(node, output)
-      super(node.to_s.strip, output)
-    end
-  end
-
-  normalized.new(indentation=0,ie_hack=false).write(node=a, a_normalized='')
-  normalized.new(indentation=0,ie_hack=false).write(node=b, b_normalized='')
-
-  a_normalized == b_normalized
-end
-
 
 def test_data(name)
   File.join(File.dirname(__FILE__), '..', 'data', name)
@@ -149,10 +133,11 @@ class MetricTest < ActiveSupport::TestCase
       end
     end
     ptx = packets.to_xml(:data => packets.data(:start => start, :stop => stop))
+#    puts "       "
 #    puts "packets.to_xml #{ptx.inspect}"
     xtg = xml.target!
 #    puts "    xml.target #{xtg.inspect}"    
-    assert xml_cmp ptx, xtg
+    assert = Hash.from_xml(xtg).diff(Hash.from_xml(ptx)).size == 0
   end
 
   def test_finders
