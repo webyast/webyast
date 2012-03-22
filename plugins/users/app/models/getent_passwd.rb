@@ -18,7 +18,7 @@
 # To contact Novell about this file by physical or electronic mail,
 # you may find current contact information at www.novell.com
 #++
-
+require 'base'
 # Group model, YastModel based
 class GetentPasswd < BaseModel::Base
   attr_accessor :login
