@@ -27,7 +27,11 @@ class NotifierController < ApplicationController
     unless YastCache.active
       render :nothing=>true, :status=>306 and return
     else
-      if(DataCache.updated?(params[:plugin], id, session["session_id"]))
+      updated = false
+      params[:plugin].split(",").each { |model|
+         updated = true if DataCache.updated?(model, id, session["session_id"])
+      }
+      if updated
         render :nothing=>true, :status=>200 and return
       else
         render :nothing=>true, :status=>304 and return
