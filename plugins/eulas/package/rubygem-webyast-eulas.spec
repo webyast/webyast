@@ -9,10 +9,10 @@
 #
 
 # norootforbuild
-Name:           rubygem-webyast-licenses
+Name:           rubygem-webyast-eulas
 Version:        0.1
 Release:        0
-%define mod_name webyast-licenses
+%define mod_name webyast-eulas
 %define mod_full_name %{mod_name}-%{version}
 
 #
@@ -49,7 +49,7 @@ Usually in RDoc and RI formats.
 Group:    Development/Languages/Ruby
 Requires: %{name} = %{version}
 Requires: webyast-base-testsuite
-Summary:  Testsuite for webyast-licenses package
+Summary:  Testsuite for webyast-eulas package
 
 %description
 WebYaST - Plugin providing REST based interface to handle user acceptation of EULAs.
@@ -60,7 +60,7 @@ Authors:
     Josef Reidinger <jreidinger@suse.cz>
 
 %description testsuite
-This package contains complete testsuite for webyast-licenses package.
+This package contains complete testsuite for webyast-eulas package.
 It's only needed for verifying the functionality of the module and it's not
 needed at runtime.
 

@@ -20,6 +20,7 @@
 #++
 
 require File.expand_path(File.dirname(__FILE__) + "/../test_helper")
+require 'license'
 
 class LicenseTest < ActiveSupport::TestCase
 YAML_CONTENT = <<EOF
