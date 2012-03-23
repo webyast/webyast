@@ -9,10 +9,10 @@
 #
 
 # norootforbuild
-Name:           rubygem-webyast-eulas
+Name:           rubygem-webyast-licenses
 Version:        0.1
 Release:        0
-%define mod_name webyast-eulas
+%define mod_name webyast-licenses
 %define mod_full_name %{mod_name}-%{version}
 
 #
@@ -34,7 +34,7 @@ Source2:        org.opensuse.yast.modules.yapi.license.policy
 Source3:        eulas-opensuse11_1.yml
 
 #
-%define plugin_name eulas
+%define plugin_name licenses
 #
 
 %package doc
