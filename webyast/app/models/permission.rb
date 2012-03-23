@@ -116,11 +116,15 @@ public
     self.reset(filters[:user_id] || "") unless self.cache_valid
     if filters.size == 1 && filters.has_key?(:user_id)
       #cache the "common" way of asking permission "has user xyz the permission.."
-      ret = Rails.cache.fetch(perm_id) {
+      ret = Rails.cache.fetch(perm_id)
+
+      if ret.nil?
         permission = Permission.new
         permission.load_permissions(filters)
-        permission.permissions
-      }      
+        ret = permission.permissions
+
+        Rails.cache.write(perm_id, ret)
+      end
     else
         permission = Permission.new
         permission.load_permissions(filters)
