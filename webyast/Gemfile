@@ -65,7 +65,7 @@ end
 
 group :development do
   gem 'gettext', :require => false
-  gem "ruby-debug"
+  # gem "ruby-debug"
   gem "factory_girl"
   gem 'ruby_parser' # needed for rake gettext:find
 end

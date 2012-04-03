@@ -104,7 +104,7 @@ BuildRequires:	rubygem-cancan, rubygem-delayed_job, rubygem-static_record_cache
 BuildRequires:  rubygem-uglifier, rubygem-johnson
 BuildRequires:	rubygem-gettext, rubygem-ruby_parser, rubygem-inifile
 
-BuildRequires:  rubygem-ruby-debug, rubygem-factory_girl, rubygem-factory_girl_rails, rubygem-mocha
+BuildRequires:  rubygem-factory_girl, rubygem-factory_girl_rails, rubygem-mocha
 
 # FIXME: this pulls in Rails 3.0 packages
 BuildRequires:	rubygem-jquery-rails
