@@ -106,17 +106,11 @@ BuildRequires:	rubygem-gettext, rubygem-ruby_parser, rubygem-inifile
 
 BuildRequires:  rubygem-factory_girl, rubygem-factory_girl_rails, rubygem-mocha
 
-# FIXME: this pulls in Rails 3.0 packages
-BuildRequires:	rubygem-jquery-rails
-
 Requires:	rubygem-haml, rubygem-sqlite3, rubygem-builder-3_0
 Requires:       rubygem-fast_gettext, rubygem-gettext_i18n_rails, rubygem-rails-i18n
 
 Requires:	rubygem-devise, rubygem-devise_unix2_chkpwd_authenticatable, rubygem-devise-i18n
 Requires:	rubygem-cancan, rubygem-delayed_job, rubygem-static_record_cache
-
-# FIXME: this pulls in Rails 3.0 packages
-Requires:	rubygem-jquery-rails
 
 
 # This is for Hudson (build service) to setup the build env correctly
