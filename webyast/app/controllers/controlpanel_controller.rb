@@ -31,32 +31,9 @@ class ControlpanelController < ApplicationController
   respond_to :html
 
   def index
-    #return false if need_redirect
+    return false if need_redirect
     @shortcuts = shortcuts_data
     @count = getNumberPermittedModules(@shortcuts)
-  end
-
-  # POST /select_language
-  # setting language for translations
-  def select_language
-    render :partial => "select_language"
-  end
-
-#  def show_all
-#    @shortcut_groups = {}
-#    shortcuts_data.each do |name, data|
-#      data["groups"].each do |group|
-#        @shortcut_groups[group] ||= Array.new
-#        @shortcut_groups[group] << data
-#      end
-#    end
-#    @shortcut_groups.each do |group,val|
-#      val.sort! { |g1,g2| g1['title'] <=> g2['title'] }
-#    end
-#  end
-
-  def getNumberPermittedModules(shortcuts)
-    shortcuts.values.select{|s| !s['disabled']}.size
   end
 
   def nextstep
@@ -85,6 +62,10 @@ class ControlpanelController < ApplicationController
 
   protected
 
+  def getNumberPermittedModules(shortcuts)
+    shortcuts.values.select{|s| !s['disabled']}.size
+  end
+
   # nextstep and backstep expect, that wizard session variables are set
   def ensure_wizard
     unless Basesystem.new.load_from_session(session).in_process?
@@ -101,21 +82,15 @@ class ControlpanelController < ApplicationController
     # name like pluginname:shortcutkey
     shortcuts = {}
     # read shortcuts from plugins
-    #logger.debug Rails::Plugin::Loader.all_plugins.inspect
-    #logger.debug Rails.configuration.load_paths
     permissions = Permission.find(:all, {:user_id => current_account.username})
-
-    #Rails.logger.debug "permissions: #{permissions.inspect}"
 
     # go through all Rails engines, look for Webyast engines
     Rails::Engine::Railties.engines.each do |engine|
       if engine.class.to_s.match /^WebYaST::.*Engine$/
-        #Rails.logger.info "Found Webyast engine #{engine.class}"
         shortcuts.merge!(plugin_shortcuts(engine.config.root, permissions))
       end
     end
 
-    #logger.debug shortcuts.inspect
     shortcuts
   end
 
@@ -145,13 +120,11 @@ class ControlpanelController < ApplicationController
     shortcuts = {}
     shortcuts_fn = File.join(plugin_dir, 'shortcuts.yml')
     if File.exists?(shortcuts_fn)
-      #logger.debug "Shortcuts at #{plugin.directory}"
       shortcutsdata = translate_shortcuts YAML::load(File.open(shortcuts_fn))
       return nil unless shortcutsdata.is_a? Hash
       # now go over each shortcut and add it to the modules
       shortcutsdata.each do |k,v|
-        # use the plugin name and the shortcut key as
-        # the new key
+        # use the plugin name and the shortcut key as the new key
         shortcuts["#{plugin_dir}:#{k}"] = v
         v["disabled"] = false #backward compatibility
         if v.include? "read_permissions"
@@ -159,7 +132,7 @@ class ControlpanelController < ApplicationController
         end
       end
     end
-    #Rails.logger.debug "shortcuts: #{shortcuts.inspect}"
+
     shortcuts
   end
 
