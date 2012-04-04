@@ -11,7 +11,7 @@
 Rights for eulas
 -->
 
-  <action id="org.opensuse.yast.modules.yapi.license.accept">
+  <action id="org.opensuse.yast.modules.yapi.licenses.accept">
     <description>Accepting licenses</description>
     <message>Authentication is required to accept licenses</message>
     <defaults>
