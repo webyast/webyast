@@ -304,6 +304,9 @@ install -m 0444 %SOURCE3 $RPM_BUILD_ROOT/usr/share/dbus-1/system-services/
 mkdir -p %buildroot/var/adm/update-scripts
 touch %buildroot/var/adm/update-scripts/%name-%version-%release-1
 
+# for basesystem setup (firstboot)
+mkdir -p $RPM_BUILD_ROOT%{webyast_vardir}/basesystem
+
 #---------------------------------------------------------------
 %clean
 rm -rf $RPM_BUILD_ROOT
@@ -462,6 +465,8 @@ dbus-send --print-reply --system --dest=org.freedesktop.DBus / org.freedesktop.D
 %doc %{webyast_dir}/README
 %attr(-,%{webyast_user},%{webyast_user}) %{webyast_dir}/log
 %attr(-,%{webyast_user},%{webyast_user}) %{webyast_dir}/tmp
+%dir %{webyast_vardir}
+%attr(-,%{webyast_user},%{webyast_user}) %dir %{webyast_vardir}/basesystem
 
 %dir /etc/nginx/certs
 #this /etc/webyast is for webyast configuration files
