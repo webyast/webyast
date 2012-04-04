@@ -30,7 +30,7 @@ PreReq:	        webyast-base >= 0.3
 Summary:        WebYaST - license management service
 Source:         %{mod_full_name}.gem
 Source1:        eulas-sles11.yml
-Source2:        org.opensuse.yast.modules.yapi.license.policy
+Source2:        org.opensuse.yast.modules.yapi.licenses.policy
 Source3:        eulas-opensuse11_1.yml
 
 #
@@ -139,7 +139,7 @@ rm -rf $RPM_BUILD_ROOT/%{_libdir}/ruby/gems/%{rb_ver}/gems/%{mod_full_name}/publ
 %config /etc/webyast/eulas.yml
 %attr(-,%{webyast_user},%{webyast_user}) %dir %{webyast_vardir}/%{plugin_name}/accepted-licenses
 %dir /usr/share/%{webyast_polkit_dir}
-%attr(644,root,root) %config /usr/share/%{webyast_polkit_dir}/org.opensuse.yast.modules.yapi.license.policy
+%attr(644,root,root) %config /usr/share/%{webyast_polkit_dir}/org.opensuse.yast.modules.yapi.licenses.policy
 
 %files doc
 %defattr(-,root,root,-)
