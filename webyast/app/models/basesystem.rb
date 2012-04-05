@@ -103,8 +103,7 @@ class Basesystem < BaseModel::Base
       save #TODO check return value
       ret = redirect_hash
       raise "Invalid configuration. Missing controller required in First boot sequence.
-        Possible typo or plugin is not installed." unless
-          ActionController::Routing.possible_controllers.include? ret[:controller]
+        Possible typo or plugin is not installed." unless available_controllers.include? ret[:controller]
       return ret
     end
   end
@@ -199,4 +198,26 @@ class Basesystem < BaseModel::Base
     }
   end
 
+  # returns list of available controllers (even in registered Rails Engines)
+  def available_controllers
+    ret = []
+    # application routes
+    routes = Rails.application.routes.routes
+
+    routes.each do |route|
+      if route.defaults[:controller].present?
+        ret << route.defaults[:controller]
+      else
+        # for engines the controller info is nested, for non-engines return empty list
+        engine_routes = route.app.routes.routes rescue []
+
+        engine_routes.each do |engine_route|
+          ret << engine_route.defaults[:controller] if engine_route.defaults[:controller].present?
+        end
+      end
+    end
+
+    # remove duplicates
+    ret.uniq
+  end
 end
