@@ -34,7 +34,7 @@ Source2:        org.opensuse.yast.modules.yapi.licenses.policy
 Source3:        eulas-opensuse11_1.yml
 
 #
-%define plugin_name licenses
+%define plugin_name eulas
 #
 
 %package doc
