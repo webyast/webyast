@@ -70,13 +70,16 @@
     rake -f lib/tasks/assets.rake assets:join_manifests \
     if test -f "Gemfile" ; then \
       bundle update \
-    fi
+    fi \
     cd -
 
 # update manifest.yml file
 # use assets.rake file directly (faster loading)
 %webyast_remove_assets \
     cd %{webyast_dir} \
+    if test -f "Gemfile" ; then \
+      bundle update \
+    fi \
     rake -f lib/tasks/assets.rake assets:join_manifests \
     cd -
 
