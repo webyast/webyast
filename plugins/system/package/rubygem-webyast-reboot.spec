@@ -85,16 +85,16 @@ rm -rf $RPM_BUILD_ROOT/%{_libdir}/ruby/gems/%{rb_ver}/gems/%{mod_full_name}/publ
 %posttrans
 # granting all permissions for the web user
 #FIXME don't silently fail
-polkit-auth --user %{webyast_ws_user} --grant org.freedesktop.consolekit.system.stop >& /dev/null || true
-polkit-auth --user %{webyast_ws_user} --grant org.freedesktop.consolekit.system.stop-multiple-users >& /dev/null || true
-polkit-auth --user %{webyast_ws_user} --grant org.freedesktop.consolekit.system.restart >& /dev/null || true
-polkit-auth --user %{webyast_ws_user} --grant org.freedesktop.consolekit.system.restart-multiple-users >& /dev/null || true
+/usr/sbin/grantwebyastrights --user %{webyast_user} --action grant --policy org.freedesktop.consolekit.system.stop >& /dev/null || true
+/usr/sbin/grantwebyastrights --user %{webyast_user} --action grant --policy org.freedesktop.consolekit.system.stop-multiple-users >& /dev/null || true
+/usr/sbin/grantwebyastrights --user %{webyast_user} --action grant --policy org.freedesktop.consolekit.system.restart >& /dev/null || true
+/usr/sbin/grantwebyastrights --user %{webyast_user} --action grant --policy org.freedesktop.consolekit.system.restart-multiple-users >& /dev/null || true
 
 ## granting all permissions for root
-polkit-auth --user root --grant org.freedesktop.consolekit.system.stop >& /dev/null || true
-polkit-auth --user root --grant org.freedesktop.consolekit.system.stop-multiple-users >& /dev/null || true
-polkit-auth --user root --grant org.freedesktop.consolekit.system.restart >& /dev/null || true
-polkit-auth --user root --grant org.freedesktop.consolekit.system.restart-multiple-users >& /dev/null || true
+/usr/sbin/grantwebyastrights --user root --action grant --policy org.freedesktop.consolekit.system.stop >& /dev/null || true
+/usr/sbin/grantwebyastrights --user root --action grant --policy org.freedesktop.consolekit.system.stop-multiple-users >& /dev/null || true
+/usr/sbin/grantwebyastrights --user root --action grant --policy org.freedesktop.consolekit.system.restart >& /dev/null || true
+/usr/sbin/grantwebyastrights --user root --action grant --policy org.freedesktop.consolekit.system.restart-multiple-users >& /dev/null || true
 
 %webyast_update_assets
 
@@ -102,11 +102,12 @@ polkit-auth --user root --grant org.freedesktop.consolekit.system.restart-multip
 # don't remove the rights during package update ($1 > 0)
 # see https://fedoraproject.org/wiki/Packaging/ScriptletSnippets#Syntax for details
 if [ $1 -eq 0 ] ; then
-  polkit-auth --user %{webyast_ws_user} --revoke org.freedesktop.consolekit.system.stop >& /dev/null || true
-  polkit-auth --user %{webyast_ws_user} --revoke org.freedesktop.consolekit.system.stop-multiple-users >& /dev/null || true
-  polkit-auth --user %{webyast_ws_user} --revoke org.freedesktop.consolekit.system.restart >& /dev/null || true
-  polkit-auth --user %{webyast_ws_user} --revoke org.freedesktop.consolekit.system.restart-multiple-users >& /dev/null || true
+  /usr/sbin/grantwebyastrights --user %{webyast_user} --action revoke --policy org.freedesktop.consolekit.system.stop >& /dev/null || true
+  /usr/sbin/grantwebyastrights --user %{webyast_user} --action revoke --policy org.freedesktop.consolekit.system.stop-multiple-users >& /dev/null || true
+  /usr/sbin/grantwebyastrights --user %{webyast_user} --action revoke --policy org.freedesktop.consolekit.system.restart >& /dev/null || true
+  /usr/sbin/grantwebyastrights --user %{webyast_user} --action revoke --policy org.freedesktop.consolekit.system.restart-multiple-users >& /dev/null || true
 fi
+
 %webyast_remove_assets
 
 %files 
