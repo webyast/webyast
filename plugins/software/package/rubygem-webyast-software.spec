@@ -26,23 +26,24 @@ BuildRequires:	webyast-base >= 0.3
 BuildRequires:	webyast-base-testsuite
 BuildRequires:	rubygem-restility
 PreReq:	        webyast-base >= 0.3
-# for testing
-BuildRequires:  ruby-dbus >= 0.3.1
 
+%if 0%{?suse_version} == 0 || %suse_version <= 1130
 # ruby-dbus is required by webyast-base already
 # but here we use a recent feature of on_signal
 Requires:       ruby-dbus >= 0.3.1
+BuildRequires:  ruby-dbus >= 0.3.1
+%else
+Requires:	rubygem-ruby-dbus
+BuildRequires:  rubygem-ruby-dbus
+%endif
 
-%if 0%{?suse_version} == 0 || 0%{?suse_version} > 1120
-# openSUSE-11.3 (Factory) or newer
+
+%if 0%{?suse_version} == 0 || %{?suse_version} > 1120
+# openSUSE-11.3 or newer
 Requires:       PackageKit >= 0.5.1-6
-%if 0%{?suse_version} == 1120
-# openSUSE-11.2
-Requires:       PackageKit >= 0.5.1-4
 %else
 # openSUSE-11.1 or SLES11
-Requires:       PackageKit >= 0.3.14-3
-%endif
+Requires:       PackageKit >= 0.3.14
 %endif
 
 URL:            http://en.opensuse.org/Portal:WebYaST
