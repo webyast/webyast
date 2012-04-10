@@ -126,6 +126,11 @@
           <p><%= link_to _("New virtual interface"), {}, :id=>"iface_selection_link", :class=>"page_link" %></p>
         </div>
 
+        <div class="navigation_link_container">
+          <p>
+            <%= link_to _("Next"), {:action => "next_step"}, :class => "button" if basesystem_in_process? %>
+          </p>
+        </div>
       </div>
 
       <div class="page">

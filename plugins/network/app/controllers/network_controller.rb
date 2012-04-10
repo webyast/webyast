@@ -31,7 +31,7 @@ class NetworkController < ApplicationController
     @virtual = @ifcs.select{|k, i| i unless k.match("eth")}
 
     respond_to do |format|
-      format.html # show.html.erb
+      format.html # index.html.erb
       format.json { render :json => @ifcs }
     end
   end
@@ -242,6 +242,10 @@ class NetworkController < ApplicationController
     ifc = Interface.find params[:id]
     ret = ifc.destroy
     redirect_to :controller => "network", :action => "index"
+  end
+
+  def next_step
+    redirect_success
   end
 end
 
