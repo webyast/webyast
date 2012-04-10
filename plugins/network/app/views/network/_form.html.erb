@@ -153,7 +153,7 @@
       <span id="modeSwitcher" class="right button-group" style="padding:0px 5px;">
         <%= hidden_field_tag :bootproto, @ifc.bootproto, :disabled => @write_disabled %>
 
-        <% if(@ifc.bootproto == 'none') %>
+        <% if @ifc.bootproto.blank? || @ifc.bootproto == 'none' %>
           <a class="btn lbtn" href="#" value="dhcp">DHCP</a>
           <a class="btn mbtn" href="#" value="static">STATIC</a>
           <a class="btn rbtn on" href="#" value="none">NONE</a>
@@ -170,7 +170,7 @@
     </div>
   </fieldset>
 
-  <% if @ifc.bootproto == "none" %>
+  <% if @ifc.bootproto.blank? || @ifc.bootproto == "none" %>
     <fieldset id="dns-conf" class="webyast_fieldset" style="display:none;">
   <% else%>
     <fieldset id="dns-conf" class="webyast_fieldset">
