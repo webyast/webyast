@@ -27,6 +27,7 @@ class ApplicationController < ActionController::Base
   before_filter :authenticate_account!
   before_filter :set_gettext_locale
   before_filter :init_cache
+  before_filter :base_system
 
   # This defines how the default Ability (for cancan, the
   # role based mechanism) is constructed
@@ -200,6 +201,30 @@ private
     Rails.logger.info "Reading all permissions for #{current_account.username} again"
     Permission.reset(current_account.username)
     super
+  end
+
+  # Checks if basic system module should be shown
+  # and if it should, then also redirects to that module.
+  # TODO check if controller from config exists
+  def base_system
+    first_run = !(Basesystem.new.load_from_session(session).initialized)
+    bs = Basesystem.find(session)
+
+    if !bs.completed?
+      Rails.logger.debug "The base setup was not completed, first run: #{first_run}"
+
+      # the current step is different than the requested controller
+      # (but controlpanel controller is OK as it redirects itself and notifier might be
+      # required by some modules in base setup workflow)
+      if bs.current_step[:controller] != self.controller_name && self.controller_name != "controlpanel" && self.controller_name != "notifier"
+        Rails.logger.info "Redirect needed: requested controller: #{self.controller_name.inspect}, current basesystem step: #{bs.current_step.inspect}"
+        if first_run
+          redirect_to bs.current_step
+        else
+          render "controlpanel/basesystem"
+        end
+      end
+    end
   end
 
 end
