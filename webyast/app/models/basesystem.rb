@@ -55,7 +55,7 @@ class Basesystem < BaseModel::Base
   end
 
   def initialized
-    !(current.blank?)
+    @session[:wizard_current].present?
   end
 
   # find basesystem status of backend and properly set session for that
