@@ -29,6 +29,9 @@ class ApplicationController < ActionController::Base
   before_filter :init_cache
   before_filter :base_system
 
+  # controllers allowed to be called when the base setup has not been finished yet
+  SYSTEM_CONTROLLERS = ["controlpanel", "notifier", "sessions"]
+
   # This defines how the default Ability (for cancan, the
   # role based mechanism) is constructed
   def current_ability
@@ -214,9 +217,8 @@ private
       Rails.logger.debug "The base setup was not completed, first run: #{first_run}"
 
       # the current step is different than the requested controller
-      # (but controlpanel controller is OK as it redirects itself and notifier might be
-      # required by some modules in base setup workflow)
-      if bs.current_step[:controller] != self.controller_name && self.controller_name != "controlpanel" && self.controller_name != "notifier"
+      # (but some specific controllers are allowed)
+      if bs.current_step[:controller] != self.controller_name && !SYSTEM_CONTROLLERS.include?(self.controller_name)
         Rails.logger.info "Redirect needed: requested controller: #{self.controller_name.inspect}, current basesystem step: #{bs.current_step.inspect}"
         if first_run
           redirect_to bs.current_step
