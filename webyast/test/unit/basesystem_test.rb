@@ -49,6 +49,7 @@ EOF
     Basesystem.const_set "FINISH_FILE", tmpfile
     YaST::ConfigFile.stubs(:read_file).returns(STEPS)
     YaST::ConfigFile.any_instance.stubs(:path).returns(__FILE__)
+    ENV["BASESYSTEM_TEST"] = "true"
     @basesystem = Basesystem.find({})
   end
 
@@ -57,6 +58,7 @@ EOF
     if File.exist?(finish)
       File.delete(finish)
     end
+    ENV.delete "BASESYSTEM_TEST"
   end
 
   def test_steps

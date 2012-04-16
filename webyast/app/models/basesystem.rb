@@ -62,6 +62,8 @@ class Basesystem < BaseModel::Base
   #
   # Note:: See first argument, which is additional to ordinary find method
   def self.find(session,*args)
+    return Basesystem.new if Rails.env.test? && !ENV["BASESYSTEM_TEST"]
+
     bs = self.load_from_file
     if bs.steps.empty? or bs.finish
       session[:wizard_current] = FINISH_STEP
@@ -137,6 +139,7 @@ class Basesystem < BaseModel::Base
   end
 
   def completed?
+    return true if Rails.env.test? && !ENV["BASESYSTEM_TEST"]
     current == FINISH_STEP
   end
 
