@@ -98,8 +98,13 @@ class RegistrationControllerTest < ActionController::TestCase
   end
 
   def test_register_in_basesystem
-    session[:wizard_current] = "test"
-    session[:wizard_steps] = "language,registration"
+    session[:wizard_current] = "registration"
+    session[:wizard_steps] = "language,registration,test"
+
+    bs = Basesystem.new.load_from_session(session)
+    Basesystem.stubs(:find).returns(bs)
+    Basesystem.any_instance.stubs(:completed?).returns(false)
+
     post :update, {"registration_arg_Registration Name"=>"registrationName", "registration_arg_System Name"=>"systemName", "registration_arg_Email"=>"email" }
     assert_response :redirect
     assert_redirected_to '/controlpanel/nextstep?done=registration'
