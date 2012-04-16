@@ -72,3 +72,15 @@ end
 if !ENV['TEST_DB_PATH'].blank? && Rails.env.test?
   Rails.logger.debug "Using DB file for tests: #{ENV['TEST_DB_PATH']}"
 end
+
+# stub the basesystem check (used in ApplicationController.base_system) to avoid
+# loading the real firstboot config from the current machine in all tests
+class Basesystem
+  def self.find session
+    Basesystem.new
+  end
+
+  def completed?
+    true
+  end
+end
