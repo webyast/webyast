@@ -15,7 +15,6 @@
 # Please submit bugfixes or comments via http://bugs.opensuse.org/
 #
 
-# norootforbuild
 Name:           rubygem-webyast-rake-tasks
 Provides:       rubygem-yast2-webservice-tasks = @VERSION@
 Obsoletes:      rubygem-yast2-webservice-tasks < @VERSION@
@@ -28,7 +27,7 @@ Release:        0
 %define mod_name webyast-rake-tasks
 #
 Group:          Development/Languages/Ruby
-License:        LGPL v2.1
+License:        LGPL-2.1
 
 BuildRoot:      %{_tmppath}/%{name}-%{version}-build
 BuildRequires:  rubygems_with_buildroot_patch
