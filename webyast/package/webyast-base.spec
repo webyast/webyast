@@ -56,7 +56,7 @@ PreReq:         rubygem-rake, rubygem-sqlite3
 PreReq:         rubygem-rails-3_1
 PreReq:         rubygem-fast_gettext, rubygem-gettext_i18n_rails, rubygem-inifile
 PreReq:         rubygem-uglifier, rubygem-johnson
-License:	LGPL-2.0
+License:	LGPL-2.1
 Group:          Productivity/Networking/Web/Utilities
 URL:            http://en.opensuse.org/Portal:WebYaST
 Autoreqprov:    on
