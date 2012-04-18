@@ -42,7 +42,8 @@ Requires:       ruby-dbus
 %else
 Requires:	rubygem-ruby-dbus
 %endif
-Requires:       rubygem-webyast-rake-tasks >= 0.2, webyast-base-branding-default
+
+Requires:       rubygem-webyast-rake-tasks >= 0.2, webyast-base-branding
 PreReq:		rubygem-bundler
 # 634404
 Recommends:     logrotate
@@ -158,6 +159,9 @@ Testsuite for core WebYaST package.
 Group:    Productivity/Networking/Web/Utilities
 Provides: webyast-base-branding = %{version}
 Requires: %{name} = %{version}
+Conflicts:      otherproviders(webyast-base-branding)
+Supplements:    packageand(webyast-base:branding-default)
+
 Summary:  Branding package for webyast-base package
 
 %description branding-default
