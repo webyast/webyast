@@ -106,9 +106,13 @@ class TimeControllerTest < ActionController::TestCase
   def test_commit_wizard
     mock_save
     Ntp.expects(:save).never #ntp is not called if time settings is manual
-    Basesystem.stubs(:installed?).returns(true)
-    session[:wizard_current] = "test"
-    session[:wizard_steps] = "systemtime,language"
+
+    session[:wizard_current] = "time"
+    session[:wizard_steps] = "language,time,test"
+    bs = Basesystem.new.load_from_session(session)
+    Basesystem.stubs(:find).returns(bs)
+    Basesystem.any_instance.stubs(:completed?).returns(false)
+
     post :update, DATA
     assert_response :redirect
     assert_redirected_to :controller => "controlpanel", :action => "nextstep",
