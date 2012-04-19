@@ -223,7 +223,7 @@ private
         if first_run
           redirect_to bs.current_step
         else
-          render "controlpanel/basesystem"
+          render "controlpanel/basesystem", :layout => !request.xhr?
         end
       end
     end
