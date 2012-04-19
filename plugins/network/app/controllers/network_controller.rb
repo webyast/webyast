@@ -244,8 +244,4 @@ class NetworkController < ApplicationController
     redirect_to :controller => "network", :action => "index"
   end
 
-  def next_step
-    redirect_success
-  end
 end
-

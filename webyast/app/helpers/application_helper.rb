@@ -79,5 +79,22 @@ module ApplicationHelper
     submit_tag label,send_options
   end
 
+  ##
+  # This helper method displays Next/Back links
+  # It is similar to form_send_buttons but it uses plain links,
+  # the save step is not performed
+  def base_setup_links
+    return "" unless basesystem_in_process?
+
+    bs = Basesystem.new.load_from_session(session)
+    ret = link_to bs.last_step? ? _("Finish") : _("Next"), {:controller => "controlpanel", :action => "nextstep"}, :class => "button"
+
+    unless bs.first_step?
+      ret << form_str_spacer
+      ret << (link_to _("Back"), {:controller => "controlpanel", :action => "backstep"}, :class => "action-link")
+    end
+
+    ret
+  end
 end
 
