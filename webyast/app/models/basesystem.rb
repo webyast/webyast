@@ -116,6 +116,11 @@ class Basesystem < BaseModel::Base
 
   def back_step
     self.current_step = @steps[@steps.index(current)-1] unless first_step?
+
+    # store back step in setup
+    load(:finish => false,  :steps => [], :done => self.current_step[:controller])
+    save
+
     redirect_hash
   end
 
