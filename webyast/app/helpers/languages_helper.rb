@@ -1,4 +1,6 @@
 #! /usr/bin/env ruby
+# encoding: utf-8
+
 #--
 # Webyast framework
 #
@@ -17,7 +19,6 @@
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA
 #++
 
-# encoding: utf-8
 module LanguagesHelper
 
 SUPPORTED_LANGUAGES = {
