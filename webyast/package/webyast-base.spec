@@ -101,7 +101,8 @@ BuildRequires:  nginx >= 1.0
 BuildRequires:	rubygem-bundler
 BuildRequires:	rubygem-devise, rubygem-devise_unix2_chkpwd_authenticatable, rubygem-devise-i18n
 BuildRequires:	rubygem-cancan, rubygem-delayed_job, rubygem-static_record_cache
-BuildRequires:  rubygem-uglifier, rubygem-johnson
+BuildRequires:	rubygem-yui-compressor java
+
 BuildRequires:	rubygem-gettext, rubygem-ruby_parser, rubygem-inifile
 
 BuildRequires:  rubygem-factory_girl, rubygem-factory_girl_rails, rubygem-mocha

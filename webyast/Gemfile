@@ -26,8 +26,7 @@ gem 'gettext_i18n_rails', '>= 0.4.3'
 gem 'inifile'
 
 group :assets do
-  gem 'uglifier'
-  gem 'johnson'
+  gem 'yui-compressor'
 end
 
 gem "builder"
