@@ -96,5 +96,18 @@ module ApplicationHelper
 
     ret
   end
+
+  # Renders an inline help (a question mark icon which displays the provided text on clicking the icon)
+  #
+  # @param [String] text the help text, it can include HTML tags (use html_safe to avoid escaping, not needed for translated text)
+  # @param [Hash] box_options optional HTML options for the rendered help text box (e.g. {:font-color => "red"})
+  # @param [Hash] icon_options optional HTML options for the rendered question mark icon (e.g. {:style => "margin-top: 20px"})
+  # @return [String] rendered HTML fragment
+  def help_text text, box_options = {}, icon_options = {}
+    ret = image_tag 'question-mark.png', {:class => 'help_icon'}.merge(icon_options)
+    ret << content_tag(:div, text, {:class => 'help_box'}.merge(box_options))
+    ret
+  end
+
 end
 

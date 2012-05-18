@@ -61,4 +61,7 @@ $(document).ready(function() {
       $(".accordion").accordion('activate',$(this).children(".ui-accordion-header.ui-state-default"));
     };
   });
+
+  // functionality for inline help icons - show/hide the next element (a help text)
+  $(".help_icon").click(function() {$(this).next(".help_box").fadeToggle();})
 });

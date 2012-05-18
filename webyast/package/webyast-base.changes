@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Fri May 18 09:58:45 UTC 2012 - lslezak@suse.cz
+
+- added "help_text" view helper for displaying inline help texts
+- 0.3.2
+
+-------------------------------------------------------------------
 Tue Apr 17 11:03:51 UTC 2012 - schubi@suse.com
 
 - updated copyrights 
