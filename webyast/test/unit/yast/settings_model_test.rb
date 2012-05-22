@@ -68,7 +68,7 @@ EOF
   <name>height</name>
 </monitor-setting>
 DONE
-    assert_equal(xml, setting.to_xml)
+    assert_equal Hash.from_xml(xml), Hash.from_xml(setting.to_xml)
 
     assert_equal("100", setting.to_json)
 
