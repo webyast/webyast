@@ -58,11 +58,11 @@ class DBusStub
     @proxies = {}
     
     @bus = case bus
-                   when :system: DBus::SystemBus.instance
-                   when :session: DBus::SessionBus.instance
+       when :system then DBus::SystemBus.instance
+       when :session then DBus::SessionBus.instance
 		   else
 		     raise "'bus' parameter must be :system or :session"
-		   end
+    end
 		   
     @service_name = service		   
     @service = DBus::Service.new(service, @bus)
