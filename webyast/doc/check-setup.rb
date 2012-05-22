@@ -34,9 +34,9 @@ def escape severity, why, fix = nil
   $stderr.puts "*** %s error: %s" % [ severity.to_s.capitalize, why ]
   $stderr.puts "\tPlease #{fix}" if fix
   case severity
-    when :production: $production_errors += 1
-    when :development: $development_errors += 1
-    when :generic: exit
+    when :production; $production_errors += 1
+    when :development; $development_errors += 1
+    when :generic; exit
   end
 end
 

@@ -40,7 +40,7 @@ $pluginname = nil
 begin
 options.each do |opt, arg|
   case opt
-    when "--plugin": $pluginname = arg
+    when "--plugin"; $pluginname = arg
     else
 	STDERR.puts "Ignoring unrecognized option #{opt}"
   end

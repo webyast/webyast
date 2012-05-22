@@ -83,10 +83,10 @@ single_policy = nil
 begin
   options.each do |opt, arg|
     case opt
-    when "--user": user = arg
-    when "--action": action = arg
-    when "--policy": single_policy = arg
-    when "--debug": $debug += 1
+    when "--user"; user = arg
+    when "--action"; action = arg
+    when "--policy"; single_policy = arg
+    when "--debug"; $debug += 1
     end
   end
 rescue GetoptLong::InvalidOption => o
