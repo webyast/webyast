@@ -10,7 +10,7 @@
 
 # norootforbuild
 Name:           rubygem-webyast-ntp
-Version:        0.3.1
+Version:        0.3.2
 Release:        0
 %define mod_name webyast-ntp
 %define mod_full_name %{mod_name}-%{version}

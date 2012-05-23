@@ -30,6 +30,7 @@ class NtpControllerTest < ActionController::TestCase
   def setup    
     devise_sign_in
     YastService.stubs(:Call).with("YaPI::NTP::Available").returns(true)
+    Ntp.stubs(:get_servers_string).returns("")
   end
 
   def test_index

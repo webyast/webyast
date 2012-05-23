@@ -24,7 +24,7 @@ require File.expand_path(File.dirname(__FILE__) + "/../test_helper")
 class NtpTest < ActiveSupport::TestCase
 
   def setup    
-    Ntp.stubs(:get_server_list).returns("pool.ntp.org")
+    Ntp.stubs(:get_servers_string).returns("pool.ntp.org")
     @model = Ntp.find
   end
 
@@ -55,10 +55,10 @@ class NtpTest < ActiveSupport::TestCase
     @model.actions[:synchronize] = true
     @model.actions[:synchronize_utc] = true
 
-    msg_mock = mock()
-    msg_mock.stubs(:error_name).returns("org.freedesktop.DBus.Error.NoReply")
-    msg_mock.stubs(:params).returns(["test","test"])
-    YastService.stubs(:Call).with("YaPI::NTP::Synchronize",true,"").once.raises(DBus::Error,msg_mock)
+    excpt = DBus::Error.new("Message")
+    excpt.stubs(:error_name).returns("org.freedesktop.DBus.Error.NoReply")
+    excpt.stubs(:params).returns(["test","test"])
+    YastService.stubs(:Call).with("YaPI::NTP::Synchronize",true,"").once.raises(excpt)
 
     assert_nothing_raised do
       @model.save
