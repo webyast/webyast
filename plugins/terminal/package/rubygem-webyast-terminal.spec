@@ -11,7 +11,7 @@
 
 # norootforbuild
 Name:           rubygem-webyast-terminal
-Version:        0.1
+Version:        0.3.2
 Release:        0
 %define mod_name webyast-terminal
 %define mod_full_name %{mod_name}-%{version}
@@ -31,7 +31,7 @@ Requires:       shellinabox
 URL:            http://en.opensuse.org/Portal:WebYaST
 Summary:        WebYaST - terminal plugin
 Source:         %{mod_full_name}.gem
-Source1:        org.opensuse.yast.modules.yapi.terminal.policy
+Source1:        org.opensuse.yast.system.terminal.policy
 
 %package doc
 Summary:        RDoc documentation for %{mod_name}
