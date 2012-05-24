@@ -68,5 +68,8 @@
     Route.stubs(:find).with("default").returns(route)
     Route.stubs(:find).with(:all).returns({"default" => route})
     Route.any_instance.stubs(:save).returns(true)
-    
+
+   # do not execute any commands via Open3 during tests
+   Open3.stubs(:popen3).returns(["", "", 0])
+
   end

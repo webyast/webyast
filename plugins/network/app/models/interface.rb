@@ -83,6 +83,7 @@ class Interface < BaseModel::Base
 
     # use /sbin/ip to detect the ip address if bootproto == 'dhcp' (Justus Winter)
     if bootproto && bootproto.match("dhcp")
+      # TODO FIXME: test whether /sbin/ip is present or catch Errno::ENOENT exception (Ruby 1.9)
       stdout, stderr, status = Open3.popen3("/sbin/ip", "-o", "-family", "inet", "addr", "show", "dev", id) do |stdin, stdout, stderr|
         match = IP_IPADDR_REGEX.match(stdout.read())
         @ipaddr = (match)? match[1] : ""

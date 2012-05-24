@@ -40,6 +40,8 @@ class InterfaceTest < ActiveSupport::TestCase
 
  def setup
    YastService.stubs(:Call).with("YaPI::NETWORK::Read").returns(RESPONSE_FULL)
+   # do not execute /sbin/ip during tests
+   Open3.stubs(:popen3).returns(["", "", 0])
  end
 
  def test_getter1
