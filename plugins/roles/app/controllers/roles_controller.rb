@@ -79,8 +79,6 @@ public
   #
 
   def update
-    authorize! :write, Role
-
     unless params[:roles].nil? #REST interfce
       check_role_name
       # RORSCAN_INL: Is not a Information Exposure cause all data can be read (indepent from user)
@@ -117,8 +115,6 @@ public
 
   # Create new role.
   def create
-    authorize! :write, Role
-
     error = nil
     begin
       check_role_name params[:role_name]
@@ -154,8 +150,6 @@ public
 
   # Deletes roles.
   def destroy
-    authorize! :write, Role
-
     # RORSCAN_INL: User has already write permission for ALL roles here
     Role.delete params[:id]
     flash[:notice] = _("Role \'%s\' was successfully removed.") % params[:id] if request.format.html?
@@ -164,8 +158,6 @@ public
 
   # shows information about role with name.
   def show
-    authorize! :read, Role
-
     # RORSCAN_INL: User has already write permission for ALL roles here
     role = Role.find params[:id]
     unless role
@@ -180,8 +172,6 @@ public
 
   # Shows all roles
   def index
-    authorize! :read, Role
-
     @roles = Role.find
 
     respond_to do |format|
