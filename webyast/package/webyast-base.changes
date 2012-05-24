@@ -1,4 +1,11 @@
 -------------------------------------------------------------------
+Thu May 24 09:56:56 UTC 2012 - lslezak@suse.cz
+
+- ApplicationController - fixed rendering uncaught exceptions
+  in XML format
+- 0.3.3
+
+-------------------------------------------------------------------
 Fri May 18 09:58:45 UTC 2012 - lslezak@suse.cz
 
 - added "help_text" view helper for displaying inline help texts

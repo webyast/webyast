@@ -140,21 +140,6 @@ private
   end
 
   def report_exception(exception, status = 500)
-    def exception.to_xml
-      xml = Builder::XmlMarkup.new({})
-      xml.instruct!
-
-      xml.error do
-        xml.type "GENERIC"
-        xml.description exception.message
-        xml.tag!(:bug,true,:type=> "boolean")
-        xml.backtrace(:type => "array") do
-          exception.backtrace.each do |b|
-            xml.line b
-          end
-        end
-      end
-    end
     logger.warn "Uncaught exception #{exception.class}: #{exception.message}"
     logger.warn "Backtrace: #{exception.backtrace.join('\n')}" unless exception.backtrace.blank?
 
@@ -172,7 +157,21 @@ private
         render :status => status, :template => "shared/exception_trap", :locals => {:error => exception}
       end
     else
-      render :xml => exception, :status => status
+      xml = Builder::XmlMarkup.new({})
+      xml.instruct!
+
+      xml.error do
+        xml.type "GENERIC"
+        xml.description exception.message
+        xml.tag!(:bug,true,:type=> "boolean")
+        xml.backtrace(:type => "array") do
+          exception.backtrace.each do |b|
+            xml.line b
+          end
+        end
+      end
+
+      render :xml => xml, :status => status
     end
   end
 
