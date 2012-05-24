@@ -64,17 +64,17 @@ class Interface < BaseModel::Base
   end
 
   def ip
-    ip = (self.ipaddr.blank?)? "" : self.ipaddr.split("/")[0]
+    (self.ipaddr.blank?)? "" : self.ipaddr.split("/")[0]
   end
 
   # convert etmask to CIDR
   def cidr
-    cidr =  (self.ipaddr.blank?)? "" : self.ipaddr.split("/")[1]
+    (self.ipaddr.blank?)? "" : self.ipaddr.split("/")[1]
   end
 
   # convert CIDR to netmask
   def netmask
-    netmask = (self.cidr.blank?)? "" : IPAddr.new('255.255.255.255').mask(self.cidr).to_s
+    (self.cidr.blank?)? "" : IPAddr.new('255.255.255.255').mask(self.cidr).to_s
   end
 
   def initialize(args, id=nil)
@@ -109,7 +109,7 @@ class Interface < BaseModel::Base
       response = YastService.Call("YaPI::NETWORK::Read")
       
       ifaces_h = response["interfaces"]
-      Rails.logger.error "\n\n *** Response: \n  #{ifaces_h.inspect} *** \n\n"
+      Rails.logger.info "\n\n *** Response: \n  #{ifaces_h.inspect} *** \n\n"
         
       if which == :all
         hash = Hash.new
@@ -122,7 +122,7 @@ class Interface < BaseModel::Base
         hash = Interface.new(ifaces_h[which], which)
       end
       
-      Rails.logger.error "\n\n *** Interfaces: \n  #{hash.inspect} *** \n\n"
+      Rails.logger.info "\n\n *** Interfaces: \n  #{hash.inspect} *** \n\n"
       hash
     end
   end
@@ -148,11 +148,11 @@ class Interface < BaseModel::Base
         # save only bootproto and ip/netmask
         Rails.logger.info "ETHERNET"
       else
-        Rails.logger.error "ERROR: Wrong interface type"
+        Rails.logger.error "ERROR: Wrong interface type: #{self.type}"
         return false
     end
 
-    Rails.logger.error "\n *** WRITE INTERFACE SETTING  #{settings.inspect}"
+    Rails.logger.info "\n *** WRITE INTERFACE SETTING  #{settings.inspect}"
 
     vsettings = [ "a{sa{ss}}", settings ] # bnc#538050
     response = YastService.Call("YaPI::NETWORK::Write",{"interface" => vsettings})
