@@ -1,4 +1,12 @@
 -------------------------------------------------------------------
+Fri May 25 13:28:08 UTC 2012 - lslezak@suse.cz
+
+- switched to Rails 3.2
+- removed usage of static_record_cache gem (incompatible with
+  Rails 3.2), the missing caching should not have big impact
+- 0.3.5
+
+-------------------------------------------------------------------
 Fri May 25 11:10:23 UTC 2012 - lslezak@suse.cz
 
 - do not compress JS files - less build dependencies,

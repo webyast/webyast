@@ -54,7 +54,7 @@ PreReq:         polkit, rubygem-polkit1
 PreReq:         PolicyKit, rubygem-polkit
 %endif
 PreReq:         rubygem-rake, rubygem-sqlite3
-PreReq:         rubygem-rails-3_1
+PreReq:         rubygem-rails-3_2 >= 3.2.3
 PreReq:         rubygem-fast_gettext, rubygem-gettext_i18n_rails, rubygem-inifile
 License:	LGPL-2.1
 Group:          Productivity/Networking/Web/Utilities
@@ -100,7 +100,7 @@ BuildRequires:  rubygem-haml, rubygem-nokogiri, rubygem-builder-3_0
 BuildRequires:  nginx >= 1.0
 BuildRequires:	rubygem-bundler
 BuildRequires:	rubygem-devise, rubygem-devise_unix2_chkpwd_authenticatable, rubygem-devise-i18n
-BuildRequires:	rubygem-cancan, rubygem-delayed_job, rubygem-static_record_cache
+BuildRequires:	rubygem-cancan, rubygem-delayed_job
 
 BuildRequires:	rubygem-gettext, rubygem-ruby_parser, rubygem-inifile
 
@@ -110,7 +110,7 @@ Requires:	rubygem-haml, rubygem-sqlite3, rubygem-builder-3_0
 Requires:       rubygem-fast_gettext, rubygem-gettext_i18n_rails, rubygem-rails-i18n
 
 Requires:	rubygem-devise, rubygem-devise_unix2_chkpwd_authenticatable, rubygem-devise-i18n
-Requires:	rubygem-cancan, rubygem-delayed_job, rubygem-static_record_cache
+Requires:	rubygem-cancan, rubygem-delayed_job
 
 
 # This is for Hudson (build service) to setup the build env correctly

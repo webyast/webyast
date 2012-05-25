@@ -20,10 +20,7 @@
 # DataCache class
 #
 
-require 'static_record_cache'
-
 class DataCache < ActiveRecord::Base
-  acts_as_static_record
 
   def DataCache.extract_path_args(path)
     path_array = path.split(":")
