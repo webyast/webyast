@@ -10,7 +10,7 @@
 
 
 Name:           webyast-base
-Version:        0.3.3
+Version:        0.3.4
 Release:        0
 Provides:       yast2-webservice = %{version}
 Obsoletes:      yast2-webservice < %{version}
@@ -101,7 +101,6 @@ BuildRequires:  nginx >= 1.0
 BuildRequires:	rubygem-bundler
 BuildRequires:	rubygem-devise, rubygem-devise_unix2_chkpwd_authenticatable, rubygem-devise-i18n
 BuildRequires:	rubygem-cancan, rubygem-delayed_job, rubygem-static_record_cache
-BuildRequires:	rubygem-yui-compressor java
 
 BuildRequires:	rubygem-gettext, rubygem-ruby_parser, rubygem-inifile
 

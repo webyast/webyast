@@ -29,8 +29,10 @@ Webyast::Application.configure do
   # Disable Rails's static asset server (Apache or nginx will already do this)
   config.serve_static_assets = true
 
-  # Compress JavaScripts and CSS
-  config.assets.compress = true
+  # Disable JavaScripts and CSS compression
+  # (less dependencies, the saving in case WebYaST is really small - ~30kB
+  # after gzipping)
+  config.assets.compress = false
 
   # Don't fallback to assets pipeline if a precompiled asset is missed
   config.assets.compile = false

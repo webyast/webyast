@@ -47,9 +47,6 @@ module Webyast
     # (see http://guides.rubyonrails.org/asset_pipeline.html)
     config.assets.initialize_on_precompile = false
 
-    # use yui-compressor
-    config.assets.js_compressor = :yui
-
     config.to_prepare do
       Devise::SessionsController.layout "application"
     end
