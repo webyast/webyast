@@ -176,6 +176,8 @@ export WEBYAST_POLICYKIT='true'
 %endif
 # build *.mo files (redirect sterr to /dev/null as it contains tons of warnings about obsoleted (commented) msgids)
 LANG=en rake gettext:pack 2> /dev/null
+# gettext:pack for some reason creates empty db/development.sqlite3 file
+rm -rf db/development.sqlite3
 
 # precompile assets
 rake assets:precompile
