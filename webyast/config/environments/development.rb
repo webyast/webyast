@@ -40,7 +40,7 @@ Webyast::Application.configure do
 # DEVELOPMENT
   config.serve_static_assets = true
   config.assets.compress = false
-  config.assets.debug = true
+  config.assets.debug = false
   
 #  PRODUCTION 
 #  execute before switch: rake assets:precompile:all RAILS_ENV=development RAILS_GROUPS=assets --trac
