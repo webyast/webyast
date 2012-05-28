@@ -50,8 +50,5 @@ module Webyast
     config.to_prepare do
       Devise::SessionsController.layout "application"
     end
-    # remove quiet_assets initializer when this works
-    # issue #2639
-    #config.assets.logger = nil
   end
 end
