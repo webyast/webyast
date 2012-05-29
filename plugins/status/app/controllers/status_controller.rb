@@ -226,7 +226,6 @@ class StatusController < ApplicationController
     from = till -  data[:minutes]*60
 
     begin
-      ActionController::Base.benchmark("Graphs data read from the server") do
         graph = Graph.find(group_id)
         available_metrics = Metric.find(:all)
         data[:graph_id] = graph_id
@@ -290,7 +289,6 @@ class StatusController < ApplicationController
         else
           logger.error "No description for #{group_id}/#{graph_id} found."
         end
-      end
       #flatten the data of all lines to the same amount of entries
       min_hash = data[:lines].min {|a,b| a[:values].size <=> b[:values].size }
       count = 0
@@ -315,9 +313,7 @@ class StatusController < ApplicationController
     authorize! :read, Metric
     begin
       Rails.logger.error "Edit limits *************************************"
-      ActionController::Base.benchmark("Graph information from server") do
-        @graphs = Graph.find(:all)
-      end
+      @graphs = Graph.find(:all)
       #sorting graphs via id
       @graphs.sort! {|x,y| y.id <=> x.id }
     rescue Exception => error
@@ -331,9 +327,7 @@ class StatusController < ApplicationController
     authorize! :writelimits, Metric
 
     begin
-      ActionController::Base.benchmark("Graph information from server") do
-        @graphs = Graph.find(:all)
-      end
+      @graphs = Graph.find(:all)
     rescue Exception => error
       logger.warn error.inspect
       flash[:error] = error.message
