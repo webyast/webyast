@@ -1,33 +1,40 @@
 #
-# spec file for package yast2-webservice-eula (Version 0.0.1)
+# spec file for package rubygem-webyast-eulas
 #
-# Copyright (c) 2008-09 SUSE LINUX Products GmbH, Nuernberg, Germany.
-# This file and all modifications and additions to the pristine
-# package are under the same license as the package itself.
+# Copyright (c) 2012 SUSE LINUX Products GmbH, Nuernberg, Germany.
 #
+# All modifications and additions to the file contributed by third parties
+# remain the property of their copyright owners, unless otherwise agreed
+# upon. The license for this file, and modifications and additions to the
+# file, is the same license as for the pristine package itself (unless the
+# license for the pristine package is not an Open Source License, in which
+# case the license is the MIT License). An "Open Source License" is a
+# license that conforms to the Open Source Definition (Version 1.9)
+# published by the Open Source Initiative.
+
 # Please submit bugfixes or comments via http://bugs.opensuse.org/
 #
 
-# norootforbuild
+
 Name:           rubygem-webyast-eulas
-Version:        0.3.1
+Version:        0.3.2
 Release:        0
 %define mod_name webyast-eulas
 %define mod_full_name %{mod_name}-%{version}
 
 #
-Group:          Productivity/Networking/Web/Utilities
-License:        GPL-2.0	
 #
 BuildRoot:      %{_tmppath}/%{name}-%{version}-build
 BuildRequires:  rubygems_with_buildroot_patch
 %rubygems_requires
-BuildRequires:	webyast-base >= 0.3
-BuildRequires:	webyast-base-testsuite
-BuildRequires:	rubygem-restility
-PreReq:	        webyast-base >= 0.3
+BuildRequires:  rubygem-restility
+BuildRequires:  webyast-base >= 0.3
+BuildRequires:  webyast-base-testsuite
+PreReq:         webyast-base >= 0.3
 
 Summary:        WebYaST - license management service
+License:        GPL-2.0
+Group:          Productivity/Networking/Web/Utilities
 Source:         %{mod_full_name}.gem
 Source1:        eulas-sles11.yml
 Source2:        org.opensuse.yast.modules.yapi.licenses.policy
@@ -41,15 +48,16 @@ Source3:        eulas-opensuse11_1.yml
 Summary:        RDoc documentation for %{mod_name}
 Group:          Development/Languages/Ruby
 Requires:       %{name} = %{version}
+
 %description doc
 Documentation generated at gem installation time.
 Usually in RDoc and RI formats.
 
 %package testsuite
-Group:    Development/Languages/Ruby
-Requires: %{name} = %{version}
-Requires: webyast-base-testsuite
-Summary:  Testsuite for webyast-eulas package
+Requires:       %{name} = %{version}
+Requires:       webyast-base-testsuite
+Summary:        Testsuite for webyast-eulas package
+Group:          Development/Languages/Ruby
 
 %description
 WebYaST - Plugin providing REST based interface to handle user acceptation of EULAs.
