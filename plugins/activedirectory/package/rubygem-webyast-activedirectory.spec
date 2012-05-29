@@ -15,26 +15,25 @@
 # Please submit bugfixes or comments via http://bugs.opensuse.org/
 #
 
-# norootforbuild
+
 Name:           rubygem-webyast-activedirectory
-Version:        0.3.0
+Version:        0.3.1
 Release:        0
 %define mod_name webyast-activedirectory
 %define mod_full_name %{mod_name}-%{version}
 #
-Group:          Productivity/Networking/Web/Utilities
-License:        GPL-2.0	
 #
 BuildRoot:      %{_tmppath}/%{name}-%{version}-build
 BuildRequires:  rubygems_with_buildroot_patch
 %rubygems_requires
-BuildRequires:	webyast-base
-BuildRequires:	rubygem-webyast-rake-tasks >= 0.2
-BuildRequires:	webyast-base-testsuite
-BuildRequires:	rubygem-restility
-PreReq:	        webyast-base
+BuildRequires:  rubygem-restility
+BuildRequires:  rubygem-webyast-rake-tasks >= 0.2
+BuildRequires:  webyast-base
+BuildRequires:  webyast-base-testsuite
+PreReq:         webyast-base
 PreReq:         rubygem-webyast-rake-tasks >= 0.2
-Requires:       yast2-dbus-server, yast2-samba-client
+Requires:       yast2-dbus-server
+Requires:       yast2-samba-client
 
 %if 0%{?suse_version} == 0 || %suse_version > 1110
 Requires:       yast2-core >= 2.18.10
@@ -47,6 +46,9 @@ Source1:        org.opensuse.yast.modules.yapi.activedirectory.policy
 Source2:        ActiveDirectory.pm
 #
 Summary:        Webyast module for configuring activedirectory settings
+License:        GPL-2.0
+Group:          Productivity/Networking/Web/Utilities
+
 %description
 Webyast module for configuring activedirectory settings
 
@@ -55,6 +57,7 @@ Webyast module for configuring activedirectory settings
 Summary:        RDoc documentation for %{mod_name}
 Group:          Development/Languages/Ruby
 Requires:       %{name} = %{version}
+
 %description doc
 Documentation generated at gem installation time.
 Usually in RDoc and RI formats.
@@ -63,6 +66,7 @@ Usually in RDoc and RI formats.
 Summary:        Test suite for %{mod_name}
 Group:          Development/Languages/Ruby
 Requires:       %{name} = %{version}
+
 %description testsuite
 Test::Unit or RSpec files, useful for developers.
 
@@ -101,7 +105,6 @@ install -m 0644 %{SOURCE2} $RPM_BUILD_ROOT/usr/share/YaST2/modules/YaPI/
 rm -rf $RPM_BUILD_ROOT/%{_libdir}/ruby/gems/%{rb_ver}/gems/%{mod_full_name}/public
 
 %webyast_build_plugin_assets
-
 
 %clean
 %{__rm} -rf %{buildroot}

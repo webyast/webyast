@@ -30,6 +30,7 @@ class ActivedirectoryControllerTest < ActionController::TestCase
     devise_sign_in
     Activedirectory.stubs(:find).returns(Activedirectory.new(ACTIVEDIRECTORY))
     Activedirectory.any_instance.stubs(:save).returns(true)
+    @model_class = Activedirectory
   end
   
   include PluginBasicTests
