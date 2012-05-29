@@ -15,31 +15,32 @@
 # Please submit bugfixes or comments via http://bugs.opensuse.org/
 #
 
-# norootforbuild
+
 Name:           rubygem-webyast-administrator
-Version:        0.3.0
+Version:        0.3.1
 Release:        0
 %define mod_name webyast-administrator
 %define mod_full_name %{mod_name}-%{version}
 #
-Group:          Productivity/Networking/Web/Utilities
-License:        GPL-2.0	
 #
 BuildRoot:      %{_tmppath}/%{name}-%{version}-build
 BuildRequires:  rubygems_with_buildroot_patch
 %rubygems_requires
-BuildRequires:	webyast-base >= 0.3
-BuildRequires:	webyast-base-testsuite
-BuildRequires:	rubygem-restility
-PreReq:	        webyast-base >= 0.3
+BuildRequires:  rubygem-restility
+BuildRequires:  webyast-base >= 0.3
+BuildRequires:  webyast-base-testsuite
+PreReq:         webyast-base >= 0.3
 Requires:       yast2-users
 
 #
 Url:            http://en.opensuse.org/Portal:WebYaST
 Source:         %{mod_full_name}.gem
-Source1:	org.opensuse.yast.modules.yapi.administrator.policy
+Source1:        org.opensuse.yast.modules.yapi.administrator.policy
 #
 Summary:        Webyast module for configuring administrator settings
+License:        GPL-2.0
+Group:          Productivity/Networking/Web/Utilities
+
 %description
 Webyast module for configuring administrator settings
 
@@ -47,6 +48,7 @@ Webyast module for configuring administrator settings
 Summary:        RDoc documentation for %{mod_name}
 Group:          Development/Languages/Ruby
 Requires:       %{name} = %{version}
+
 %description doc
 Documentation generated at gem installation time.
 Usually in RDoc and RI formats.
@@ -55,6 +57,7 @@ Usually in RDoc and RI formats.
 Summary:        Test suite for %{mod_name}
 Group:          Development/Languages/Ruby
 Requires:       %{name} = %{version}
+
 %description testsuite
 Test::Unit or RSpec files, useful for developers.
 
