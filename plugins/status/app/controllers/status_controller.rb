@@ -65,9 +65,9 @@ class StatusController < ApplicationController
     counter = 0
     status_data = status.data( {:start => from.to_i.to_s, :stop => till.to_i.to_s} )
     status_data[column_id].sort.each{ |t,value| 
-          ret << [(status_data["starttime"].to_i + counter*status_data["interval"].to_i)*1000, 
-                  value.to_f/scale] # *1000 --> jlpot evalutas MSec for date format # RORSCAN_ITL
-          counter = counter +1
+      ret << [(status_data["starttime"].to_i + counter*status_data["interval"].to_i)*1000,
+        value.to_f/scale] # *1000 --> jlpot evalutas MSec for date format # RORSCAN_ITL
+      counter = counter +1
     }
     #strip zero values at the end of the array
     while ret.last && ret.last[1] == 0
@@ -85,9 +85,9 @@ class StatusController < ApplicationController
     end
     base_path = params[:url][0..params[:url].rindex("/")-1]
     base_name = params[:url][params[:url].rindex("/")+1..(params[:url].size-1) ]
-#    res_resource = OpenStruct.new(:href => base_path, :singular? => true)
-#    proxy = YaST::ServiceResource.class_for_resource(res_resource)
-#    proxy.post(base_name)
+    #    res_resource = OpenStruct.new(:href => base_path, :singular? => true)
+    #    proxy = YaST::ServiceResource.class_for_resource(res_resource)
+    #    proxy.post(base_name)
     redirect_to :controller => :controlpanel, :action => :index
   end
 
@@ -117,14 +117,14 @@ class StatusController < ApplicationController
       #sorting graphs via id
       @graphs.sort! {|x,y| y.id <=> x.id }
       flash[:notice] = _("No data found for showing system status.") if @graphs.blank? # RORSCAN_ITL
-      rescue ServiceNotRunning => error
-	logger.warn error.inspect
-        flash[:error] = _("Status not available.")
-      rescue CollectdOutOfSyncError => error
-	logger.warn error.inspect
-        flash[:error] = _("Collectd is out of sync.")
-      ensure
-        @graphs ||= []
+    rescue ServiceNotRunning => error
+      logger.warn error.inspect
+      flash[:error] = _("Status not available.")
+    rescue CollectdOutOfSyncError => error
+      logger.warn error.inspect
+      flash[:error] = _("Collectd is out of sync.")
+    ensure
+      @graphs ||= []
     end
   end
 
@@ -140,73 +140,73 @@ class StatusController < ApplicationController
       status = _("Status not available (no permissions)")
       level = "warning"  #it is a warning only
     else
-        begin
-          graphs = Graph.find(:all, true ) || []
-          # render
-          graphs.each do |graph|
-            label = limits_reached(graph)
-            unless label.blank?
-              if status.blank?
-                status = _("Limits exceeded for ") + label
-              else
-                status += "; " + label
-              end
-            end
-          end
-          level = "error" unless status.blank?
-        rescue ServiceNotRunning => error
-          logger.warn error.inspect
-          level = "warning"  #it is a warning only
-          flash[:error] = _("Status not available.")
-          if status.blank?
-            status = _("Status not available.")
-          else
-            status += "; " + _("Status not available.")
-          end
-        rescue CollectdOutOfSyncError => error
-          logger.warn error.inspect
-          level = "warning"  #it is a warning only
-          flash[:error] = _("Collectd is out of sync.")
-          if status.blank?
-            status = error.message
-          else
-            status += "; " + error.message
-          end
-        rescue Exception => e
-          logger.warn error.inspect
-          level = "error"
-          ret_error = error
-          refresh = false
-        end
-        #Checking WebYaST service plugins
-        begin
-          plugins = Plugin.find(:all)
-          plugins.each {|plugin|
-            level = plugin.level if plugin.level == "error" || (plugin.level == "warning" && level == "ok")
+      begin
+        graphs = Graph.find(:all, true ) || []
+        # render
+        graphs.each do |graph|
+          label = limits_reached(graph)
+          unless label.blank?
             if status.blank?
-              status = plugin.short_description
+              status = _("Limits exceeded for ") + label
             else
-              status += "; " + plugin.short_description
+              status += "; " + label
             end
-          }
-        rescue Exception => error
-          logger.warn error.inspect
-          level = "error"
-          refresh = false
-	  error_hash = Hash.from_xml error.response.body
-	  if error_hash["error"] && error_hash["error"]["type"] == "NO_PERM"
-            status = _("Status not available (no permissions)")
-            level = "warning"  #it is a warning only
-          else
-            status = error_hash["error"]["description"]
           end
-          ret_error = error
         end
+        level = "error" unless status.blank?
+      rescue ServiceNotRunning => error
+        logger.warn error.inspect
+        level = "warning"  #it is a warning only
+        flash[:error] = _("Status not available.")
+        if status.blank?
+          status = _("Status not available.")
+        else
+          status += "; " + _("Status not available.")
+        end
+      rescue CollectdOutOfSyncError => error
+        logger.warn error.inspect
+        level = "warning"  #it is a warning only
+        flash[:error] = _("Collectd is out of sync.")
+        if status.blank?
+          status = error.message
+        else
+          status += "; " + error.message
+        end
+      rescue Exception => e
+        logger.warn error.inspect
+        level = "error"
+        ret_error = error
+        refresh = false
+      end
+      #Checking WebYaST service plugins
+      begin
+        plugins = Plugin.find(:all)
+        plugins.each {|plugin|
+          level = plugin.level if plugin.level == "error" || (plugin.level == "warning" && level == "ok")
+          if status.blank?
+            status = plugin.short_description
+          else
+            status += "; " + plugin.short_description
+          end
+        }
+      rescue Exception => error
+        logger.warn error.inspect
+        level = "error"
+        refresh = false
+        error_hash = Hash.from_xml error.response.body
+        if error_hash["error"] && error_hash["error"]["type"] == "NO_PERM"
+          status = _("Status not available (no permissions)")
+          level = "warning"  #it is a warning only
+        else
+          status = error_hash["error"]["description"]
+        end
+        ret_error = error
+      end
     end
 
     render(:partial => "status_summary",
-           :locals => { :status => status, :level => level, :error => ret_error,
-                        :refresh_timeout => (refresh ? refresh_timeout : nil) })
+      :locals => { :status => status, :level => level, :error => ret_error,
+        :refresh_timeout => (refresh ? refresh_timeout : nil) })
   end
 
   #
@@ -305,9 +305,9 @@ class StatusController < ApplicationController
       logger.debug "Rendering #{data.inspect}"
 
       render :partial => "status_graph", :locals => { :data => data, :error => nil }
-      rescue Exception => error
-	logger.warn error.inspect
-        render :partial => "status_graph", :locals => { :data => nil, :error => error }
+    rescue Exception => error
+      logger.warn error.inspect
+      render :partial => "status_graph", :locals => { :data => nil, :error => error }
     end
   end
 
