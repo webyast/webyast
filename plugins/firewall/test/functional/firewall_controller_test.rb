@@ -47,7 +47,7 @@ class FirewallControllerTest < ActionController::TestCase
     Firewall.any_instance.stubs(:save).returns(OK_RESULT)
     FirewallController.any_instance.stubs(:permission_check).with("org.opensuse.yast.modules.yapi.firewall.read").returns(true)
     FirewallController.any_instance.stubs(:permission_check).with("org.opensuse.yast.modules.yapi.firewall.write").returns(true)
-    @model = Firewall
+    @model_class = Firewall
   end
   
   include PluginBasicTests
