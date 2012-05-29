@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Tue May 29 11:50:45 UTC 2012 - lslezak@suse.cz
+
+- updated database.yml for Rails 3.2
+- 0.3.3
+
+-------------------------------------------------------------------
 Thu May 24 10:00:23 UTC 2012 - lslezak@suse.cz
 
 - fixed permission checks
