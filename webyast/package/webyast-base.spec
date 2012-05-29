@@ -87,7 +87,7 @@ BuildRequires:  ruby-dbus
 BuildRequires:  rubygem-ruby-dbus
 %endif
 BuildRequires:  rubygem-sqlite3
-BuildRequires:  rubygem-rails-3_1
+BuildRequires:  rubygem-rails-3_2
 %if 0%{?suse_version} == 0 || %suse_version > 1110
 BuildRequires:  polkit, rubygem-polkit1
 %else
