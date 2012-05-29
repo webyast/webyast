@@ -1,30 +1,36 @@
-# spec file for package webyast-firewall (Version 0.1)
 #
-# Copyright (c) 2008 SUSE LINUX Products GmbH, Nuernberg, Germany.
-# This file and all modifications and additions to the pristine
-# package are under the same license as the package itself.
+# spec file for package rubygem-webyast-firewall
 #
+# Copyright (c) 2012 SUSE LINUX Products GmbH, Nuernberg, Germany.
+#
+# All modifications and additions to the file contributed by third parties
+# remain the property of their copyright owners, unless otherwise agreed
+# upon. The license for this file, and modifications and additions to the
+# file, is the same license as for the pristine package itself (unless the
+# license for the pristine package is not an Open Source License, in which
+# case the license is the MIT License). An "Open Source License" is a
+# license that conforms to the Open Source Definition (Version 1.9)
+# published by the Open Source Initiative.
+
 # Please submit bugfixes or comments via http://bugs.opensuse.org/
 #
 
-# norootforbuild
+
 Name:           rubygem-webyast-firewall
-Version:        0.3.1
+Version:        0.3.2
 Release:        0
 %define mod_name webyast-firewall
 %define mod_full_name %{mod_name}-%{version}
 #
-Group:          Productivity/Networking/Web/Utilities
-License:        GPL-2.0	
 #
 BuildRoot:      %{_tmppath}/%{name}-%{version}-build
 BuildRequires:  rubygems_with_buildroot_patch
 %rubygems_requires
-BuildRequires:	webyast-base
-BuildRequires:	rubygem-webyast-rake-tasks >= 0.2
-BuildRequires:	webyast-base-testsuite
-BuildRequires:	rubygem-restility
-PreReq:	        webyast-base
+BuildRequires:  rubygem-restility
+BuildRequires:  rubygem-webyast-rake-tasks >= 0.2
+BuildRequires:  webyast-base
+BuildRequires:  webyast-base-testsuite
+PreReq:         webyast-base
 PreReq:         rubygem-webyast-rake-tasks >= 0.2
 %if 0%{?suse_version} == 0 || %suse_version > 1110
 Requires:       yast2-core >= 2.18.10
@@ -33,6 +39,8 @@ Requires:       yast2-core >= 2.17.30.1
 %endif
 Requires:       SuSEfirewall2
 Summary:        WebYaST - Firewall management service
+License:        GPL-2.0
+Group:          Productivity/Networking/Web/Utilities
 Source:         %{mod_full_name}.gem
 Source1:        org.opensuse.yast.modules.yapi.firewall.policy
 Source2:        FIREWALL.pm

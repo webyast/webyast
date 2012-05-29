@@ -2,7 +2,7 @@
 
 Gem::Specification.new do |s|
   s.name = "webyast-firewall"
-  s.version = "0.3.1"
+  s.version = "0.3.2"
   s.authors = ["WebYaST team"]
   s.summary     =  "Webyast module for configuring samba settings"
   s.email = "yast-devel@opensuse.org"
