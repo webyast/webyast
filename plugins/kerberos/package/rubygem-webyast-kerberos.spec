@@ -1,47 +1,57 @@
 #
-# spec file for package webyast-kerberos
+# spec file for package rubygem-webyast-kerberos
 #
-# Copyright (c) 2008 SUSE LINUX Products GmbH, Nuernberg, Germany.
-# This file and all modifications and additions to the pristine
-# package are under the same license as the package itself.
+# Copyright (c) 2012 SUSE LINUX Products GmbH, Nuernberg, Germany.
 #
+# All modifications and additions to the file contributed by third parties
+# remain the property of their copyright owners, unless otherwise agreed
+# upon. The license for this file, and modifications and additions to the
+# file, is the same license as for the pristine package itself (unless the
+# license for the pristine package is not an Open Source License, in which
+# case the license is the MIT License). An "Open Source License" is a
+# license that conforms to the Open Source Definition (Version 1.9)
+# published by the Open Source Initiative.
+
 # Please submit bugfixes or comments via http://bugs.opensuse.org/
 #
-# norootforbuild
+
 
 Name:           rubygem-webyast-kerberos
-Version:        0.3.1
+Version:        0.3.2
 Release:        0
 %define mod_name webyast-kerberos
 %define mod_full_name %{mod_name}-%{version}
 #
-Group:          Productivity/Networking/Web/Utilities
-License:        GPL-2.0	
 #
 BuildRoot:      %{_tmppath}/%{name}-%{version}-build
 BuildRequires:  rubygems_with_buildroot_patch
 %rubygems_requires
-BuildRequires:	webyast-base >= 0.3
-BuildRequires:	webyast-base-testsuite
-BuildRequires:	rubygem-restility
-PreReq:	        webyast-base >= 0.3
+BuildRequires:  rubygem-restility
+BuildRequires:  webyast-base >= 0.3
+BuildRequires:  webyast-base-testsuite
+PreReq:         webyast-base >= 0.3
 
 Url:            http://rubygems.org/gems/webyast-kerberos
 Summary:        WebYaST - configuration of Kerberos client
+License:        GPL-2.0
+Group:          Productivity/Networking/Web/Utilities
 Source:         %{mod_full_name}.gem
-Source1:	org.opensuse.yast.modules.yapi.kerberos.policy
-Source2:	KERBEROS.pm
+Source1:        org.opensuse.yast.modules.yapi.kerberos.policy
+Source2:        KERBEROS.pm
 
 # KERBEROS.pm is using yast2-kerberos-client API
-Requires:	yast2-kerberos-client krb5 pam_krb5 krb5-client
+Requires:       krb5
+Requires:       krb5-client
+Requires:       pam_krb5
+Requires:       yast2-kerberos-client
 # reasonable PATH set (bnc#617442) 
 Requires:       yast2-dbus-server >= 2.17.3
-
 
 %package doc
 Summary:        RDoc documentation for %{mod_name}
 Group:          Development/Languages/Ruby
 Requires:       %{name} = %{version}
+
 %description doc
 Documentation generated at gem installation time.
 Usually in RDoc and RI formats.
@@ -50,7 +60,9 @@ Usually in RDoc and RI formats.
 Summary:        Test suite for %{mod_name}
 Group:          Development/Languages/Ruby
 Requires:       %{name} = %{version}
-Summary:  Testsuite for webyast-kerberos package
+Summary:        Testsuite for webyast-kerberos package
+Group:          Development/Languages/Ruby
+
 %description testsuite
 Test::Unit or RSpec files, useful for developers.
 
