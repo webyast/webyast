@@ -11,7 +11,7 @@
 
 # norootforbuild
 Name:           rubygem-webyast-example
-Version:        0.3.0
+Version:        0.3.1
 Release:        0
 %define mod_name webyast-example
 %define mod_full_name %{mod_name}-%{version}
