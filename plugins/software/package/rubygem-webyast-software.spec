@@ -1,31 +1,35 @@
 #
-# spec file for package webyast-software (Version 0.1.x)
+# spec file for package rubygem-webyast-software
 #
-# Copyright (c) 2008 SUSE LINUX Products GmbH, Nuernberg, Germany.
-# This file and all modifications and additions to the pristine
-# package are under the same license as the package itself.
+# Copyright (c) 2012 SUSE LINUX Products GmbH, Nuernberg, Germany.
 #
+# All modifications and additions to the file contributed by third parties
+# remain the property of their copyright owners, unless otherwise agreed
+# upon. The license for this file, and modifications and additions to the
+# file, is the same license as for the pristine package itself (unless the
+# license for the pristine package is not an Open Source License, in which
+# case the license is the MIT License). An "Open Source License" is a
+# license that conforms to the Open Source Definition (Version 1.9)
+# published by the Open Source Initiative.
+
 # Please submit bugfixes or comments via http://bugs.opensuse.org/
 #
 
 
-# norootforbuild
 Name:           rubygem-webyast-software
-Version:        0.3.21
+Version:        0.3.22
 Release:        0
 %define mod_name webyast-software
 %define mod_full_name %{mod_name}-%{version}
 #
-Group:          Productivity/Networking/Web/Utilities
-License:        GPL-2.0	
 #
 BuildRoot:      %{_tmppath}/%{name}-%{version}-build
 BuildRequires:  rubygems_with_buildroot_patch
 %rubygems_requires
-BuildRequires:	webyast-base >= 0.3
-BuildRequires:	webyast-base-testsuite
-BuildRequires:	rubygem-restility
-PreReq:	        webyast-base >= 0.3
+BuildRequires:  rubygem-restility
+BuildRequires:  webyast-base >= 0.3
+BuildRequires:  webyast-base-testsuite
+PreReq:         webyast-base >= 0.3
 
 %if 0%{?suse_version} == 0 || %suse_version <= 1130
 # ruby-dbus is required by webyast-base already
@@ -33,10 +37,9 @@ PreReq:	        webyast-base >= 0.3
 Requires:       ruby-dbus >= 0.3.1
 BuildRequires:  ruby-dbus >= 0.3.1
 %else
-Requires:	rubygem-ruby-dbus
+Requires:       rubygem-ruby-dbus
 BuildRequires:  rubygem-ruby-dbus
 %endif
-
 
 %if 0%{?suse_version} == 0 || %{?suse_version} > 1120
 # openSUSE-11.3 or newer
@@ -46,8 +49,10 @@ Requires:       PackageKit >= 0.5.1-6
 Requires:       PackageKit >= 0.3.14
 %endif
 
-URL:            http://en.opensuse.org/Portal:WebYaST
+Url:            http://en.opensuse.org/Portal:WebYaST
 Summary:        WebYaST - software management 
+License:        GPL-2.0
+Group:          Productivity/Networking/Web/Utilities
 Source:         %{mod_full_name}.gem
 Source1:        org.opensuse.yast.modules.yapi.patches.policy
 Source2:        org.opensuse.yast.modules.yapi.packages.policy
@@ -57,6 +62,7 @@ Source3:        org.opensuse.yast.modules.yapi.repositories.policy
 Summary:        RDoc documentation for %{mod_name}
 Group:          Development/Languages/Ruby
 Requires:       %{name} = %{version}
+
 %description doc
 Documentation generated at gem installation time.
 Usually in RDoc and RI formats.
