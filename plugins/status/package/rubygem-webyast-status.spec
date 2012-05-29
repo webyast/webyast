@@ -1,48 +1,54 @@
 #
-# spec file for package webyast-status (Version 0.1)
+# spec file for package rubygem-webyast-status
 #
-# Copyright (c) 2008 SUSE LINUX Products GmbH, Nuernberg, Germany.
-# This file and all modifications and additions to the pristine
-# package are under the same license as the package itself.
+# Copyright (c) 2012 SUSE LINUX Products GmbH, Nuernberg, Germany.
 #
+# All modifications and additions to the file contributed by third parties
+# remain the property of their copyright owners, unless otherwise agreed
+# upon. The license for this file, and modifications and additions to the
+# file, is the same license as for the pristine package itself (unless the
+# license for the pristine package is not an Open Source License, in which
+# case the license is the MIT License). An "Open Source License" is a
+# license that conforms to the Open Source Definition (Version 1.9)
+# published by the Open Source Initiative.
+
 # Please submit bugfixes or comments via http://bugs.opensuse.org/
 #
 
 
-# norootforbuild
 Name:           rubygem-webyast-status
-Version:        0.3.1
+Version:        0.3.2
 Release:        0
 %define mod_name webyast-status
 %define mod_full_name %{mod_name}-%{version}
 #
-Group:          Productivity/Networking/Web/Utilities
-License:        GPL-2.0	
 #
 BuildRoot:      %{_tmppath}/%{name}-%{version}-build
 BuildRequires:  rubygems_with_buildroot_patch
 %rubygems_requires
-BuildRequires:	webyast-base >= 0.3
-BuildRequires:	webyast-base-testsuite
-BuildRequires:	rubygem-restility
-PreReq:	        webyast-base >= 0.3
+BuildRequires:  rubygem-restility
+BuildRequires:  webyast-base >= 0.3
+BuildRequires:  webyast-base-testsuite
+PreReq:         webyast-base >= 0.3
 
-URL:            http://en.opensuse.org/Portal:WebYaST
+Url:            http://en.opensuse.org/Portal:WebYaST
 Summary:        WebYaST - system status 
+License:        GPL-2.0
+Group:          Productivity/Networking/Web/Utilities
 Source:         %{mod_full_name}.gem
 Source1:        org.opensuse.yast.modules.yapi.metrics.policy
-Source2:	org.opensuse.yast.modules.logfile.policy
-Source3:	LogFile.rb
+Source2:        org.opensuse.yast.modules.logfile.policy
+Source3:        LogFile.rb
 PreReq:         collectd, %insserv_prereq
 Requires:       rrdtool
 # for calling ruby module via YastService:
-Requires:	yast2-ruby-bindings >= 0.3.2.1
-
+Requires:       yast2-ruby-bindings >= 0.3.2.1
 
 %package doc
 Summary:        RDoc documentation for %{mod_name}
 Group:          Development/Languages/Ruby
 Requires:       %{name} = %{version}
+
 %description doc
 Documentation generated at gem installation time.
 Usually in RDoc and RI formats.
@@ -67,7 +73,6 @@ It's only needed for verifying the functionality of the module and it's not
 needed at runtime.
 
 %prep
-
 
 %build
 
