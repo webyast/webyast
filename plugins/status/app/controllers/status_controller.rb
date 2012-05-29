@@ -140,7 +140,6 @@ class StatusController < ApplicationController
       status = _("Status not available (no permissions)")
       level = "warning"  #it is a warning only
     else
-      ActionController::Base.benchmark("Graphs data read from the server") do
         begin
           graphs = Graph.find(:all, true ) || []
           # render
@@ -203,7 +202,6 @@ class StatusController < ApplicationController
           end
           ret_error = error
         end
-      end #benchmark
     end
 
     render(:partial => "status_summary",
