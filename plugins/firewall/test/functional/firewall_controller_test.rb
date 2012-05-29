@@ -51,6 +51,8 @@ class FirewallControllerTest < ActionController::TestCase
   
   include PluginBasicTests
 
+  @model = Firewall
+
   test "should get index" do
     get :index
     assert_response :success
