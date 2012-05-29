@@ -1,39 +1,48 @@
 #
-# spec file for package webyast-ldap
+# spec file for package rubygem-webyast-ldap
 #
-# Copyright (c) 2008 SUSE LINUX Products GmbH, Nuernberg, Germany.
-# This file and all modifications and additions to the pristine
-# package are under the same license as the package itself.
+# Copyright (c) 2012 SUSE LINUX Products GmbH, Nuernberg, Germany.
 #
+# All modifications and additions to the file contributed by third parties
+# remain the property of their copyright owners, unless otherwise agreed
+# upon. The license for this file, and modifications and additions to the
+# file, is the same license as for the pristine package itself (unless the
+# license for the pristine package is not an Open Source License, in which
+# case the license is the MIT License). An "Open Source License" is a
+# license that conforms to the Open Source Definition (Version 1.9)
+# published by the Open Source Initiative.
+
 # Please submit bugfixes or comments via http://bugs.opensuse.org/
 #
 
-# norootforbuild
+
 Name:           rubygem-webyast-ldap
-Version:        0.3.1
+Version:        0.3.2
 Release:        0
 %define mod_name webyast-ldap
 %define mod_full_name %{mod_name}-%{version}
 #
-Group:          Productivity/Networking/Web/Utilities
-License:        GPL-2.0	
 #
 BuildRoot:      %{_tmppath}/%{name}-%{version}-build
 BuildRequires:  rubygems_with_buildroot_patch
 %rubygems_requires
-BuildRequires:	webyast-base >= 0.3
-BuildRequires:	webyast-base-testsuite
-BuildRequires:	rubygem-restility
-PreReq:	        webyast-base >= 0.3
+BuildRequires:  rubygem-restility
+BuildRequires:  webyast-base >= 0.3
+BuildRequires:  webyast-base-testsuite
+PreReq:         webyast-base >= 0.3
 
-URL:            http://en.opensuse.org/Portal:WebYaST
+Url:            http://en.opensuse.org/Portal:WebYaST
 Summary:        WebYaST - service for configuration of LDAP client
+License:        GPL-2.0
+Group:          Productivity/Networking/Web/Utilities
 Source:         %{mod_full_name}.gem
-Source1:	org.opensuse.yast.modules.yapi.ldap.policy
-Source2:	LDAP.pm
+Source1:        org.opensuse.yast.modules.yapi.ldap.policy
+Source2:        LDAP.pm
 
 # LDAP.pm is using yast2-ldap-client API
-Requires:	yast2-ldap-client pam_ldap nss_ldap
+Requires:       nss_ldap
+Requires:       pam_ldap
+Requires:       yast2-ldap-client
 # reasonable PATH set (bnc#617442) 
 Requires:       yast2-dbus-server >= 2.17.3
 
@@ -41,6 +50,7 @@ Requires:       yast2-dbus-server >= 2.17.3
 Summary:        RDoc documentation for %{mod_name}
 Group:          Development/Languages/Ruby
 Requires:       %{name} = %{version}
+
 %description doc
 Documentation generated at gem installation time.
 Usually in RDoc and RI formats.
@@ -49,6 +59,7 @@ Usually in RDoc and RI formats.
 Summary:        Test suite for %{mod_name}
 Group:          Development/Languages/Ruby
 Requires:       %{name} = %{version}
+
 %description testsuite
 Test::Unit or RSpec files, useful for developers.
 
@@ -66,7 +77,6 @@ It's only needed for verifying the functionality of the module and it's not
 needed at runtime.
 
 %prep
-
 
 %build
 
@@ -92,7 +102,6 @@ cp %{SOURCE2} $RPM_BUILD_ROOT/usr/share/YaST2/modules/YaPI/
 rm -rf $RPM_BUILD_ROOT/%{_libdir}/ruby/gems/%{rb_ver}/gems/%{mod_full_name}/public
 
 %webyast_build_plugin_assets
-
 
 %clean
 %{__rm} -rf $RPM_BUILD_ROOT
