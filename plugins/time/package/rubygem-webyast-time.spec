@@ -33,6 +33,11 @@ BuildRequires:  webyast-base >= 0.3
 BuildRequires:  webyast-base-testsuite
 PreReq:         webyast-base >= 0.3, rubygem-webyast-ntp, rubygem-webyast-services
 
+Obsoletes:	webyast-time-ws
+Obsoletes:	webyast-time-ui
+Provides:	webyast-time-ws
+Provides:	webyast-time-ui
+
 Url:            http://en.opensuse.org/Portal:WebYaST
 Summary:        WebYaST - time management
 License:        GPL-2.0

@@ -32,6 +32,11 @@ BuildRequires:  webyast-base-testsuite
 PreReq:         webyast-base >= 0.3
 Requires:       yast2-users
 
+Obsoletes:	webyast-root-user-ws
+Obsoletes:	webyast-root-user-ui
+Provides:	webyast-root-user-ws
+Provides:	webyast-root-user-ui
+
 #
 Url:            http://en.opensuse.org/Portal:WebYaST
 Source:         %{mod_full_name}.gem

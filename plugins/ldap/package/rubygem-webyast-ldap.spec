@@ -31,6 +31,11 @@ BuildRequires:  webyast-base >= 0.3
 BuildRequires:  webyast-base-testsuite
 PreReq:         webyast-base >= 0.3
 
+Obsoletes:	webyast-ldap-ws
+Obsoletes:	webyast-ldap-ui
+Provides:	webyast-ldap-ws
+Provides:	webyast-ldap-ui
+
 Url:            http://en.opensuse.org/Portal:WebYaST
 Summary:        WebYaST - service for configuration of LDAP client
 License:        GPL-2.0

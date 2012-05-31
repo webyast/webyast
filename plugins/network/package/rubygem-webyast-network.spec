@@ -31,6 +31,11 @@ BuildRequires:  webyast-base >= 0.3
 BuildRequires:  webyast-base-testsuite
 PreReq:         webyast-base >= 0.3
 
+Obsoletes:	webyast-network-ws
+Obsoletes:	webyast-network-ui
+Provides:	webyast-network-ws
+Provides:	webyast-network-ui
+
 Url:            http://en.opensuse.org/Portal:WebYaST
 Summary:        WebYaST - Network 
 License:        GPL-2.0

@@ -38,6 +38,12 @@ Requires:       yast2-core >= 2.18.10
 Requires:       yast2-core >= 2.17.30.1
 %endif
 Requires:       SuSEfirewall2
+
+Obsoletes:	webyast-firewall-ws
+Obsoletes:	webyast-firewall-ui
+Provides:	webyast-firewall-ws
+Provides:	webyast-firewall-ui
+
 Summary:        WebYaST - Firewall management service
 License:        GPL-2.0
 Group:          Productivity/Networking/Web/Utilities

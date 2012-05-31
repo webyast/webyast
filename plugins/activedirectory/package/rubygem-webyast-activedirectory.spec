@@ -35,6 +35,11 @@ PreReq:         rubygem-webyast-rake-tasks >= 0.2
 Requires:       yast2-dbus-server
 Requires:       yast2-samba-client
 
+Obsoletes:	webyast-activedirectory-ws
+Obsoletes:	webyast-activedirectory-ui
+Provides:	webyast-activedirectory-ws
+Provides:	webyast-activedirectory-ui
+
 %if 0%{?suse_version} == 0 || %suse_version > 1110
 Requires:       yast2-core >= 2.18.10
 %else

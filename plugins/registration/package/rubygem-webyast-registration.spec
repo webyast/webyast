@@ -28,6 +28,11 @@ BuildRequires:	rubygem-restility
 PreReq:	        webyast-base >= 0.3
 Recommends:     openssl-certs
 
+Obsoletes:	webyast-registration-ws
+Obsoletes:	webyast-registration-ui
+Provides:	webyast-registration-ws
+Provides:	webyast-registration-ui
+
 URL:            http://en.opensuse.org/Portal:WebYaST
 Summary:        WebYaST - Registration
 Source:         %{mod_full_name}.gem

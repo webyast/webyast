@@ -17,7 +17,10 @@ Obsoletes:      yast2-webservice < %{version}
 Provides:       webyast-language-ws = 0.1.0
 Obsoletes:      webyast-language-ws <= 0.1.0
 
-Obsoletes:	webyast-base-ui webyast-base-ws
+Obsoletes:	webyast-base-ui
+Obsoletes:	webyast-base-ws
+Provides:	webyast-base-ui
+Provides:	webyast-base-ws
 
 %if 0%{?suse_version} == 0 || %suse_version > 1110
 # 11.2 or newer

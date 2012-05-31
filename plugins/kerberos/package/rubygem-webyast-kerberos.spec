@@ -31,6 +31,11 @@ BuildRequires:  webyast-base >= 0.3
 BuildRequires:  webyast-base-testsuite
 PreReq:         webyast-base >= 0.3
 
+Obsoletes:	webyast-kerberos-ws
+Obsoletes:	webyast-kerberos-ui
+Provides:	webyast-kerberos-ws
+Provides:	webyast-kerberos-ui
+
 Url:            http://rubygems.org/gems/webyast-kerberos
 Summary:        WebYaST - configuration of Kerberos client
 License:        GPL-2.0

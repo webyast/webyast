@@ -31,6 +31,11 @@ BuildRequires:  webyast-base >= 0.3
 BuildRequires:  webyast-base-testsuite
 PreReq:         webyast-base >= 0.3
 
+Obsoletes:	webyast-status-ws
+Obsoletes:	webyast-status-ui
+Provides:	webyast-status-ws
+Provides:	webyast-status-ui
+
 Url:            http://en.opensuse.org/Portal:WebYaST
 Summary:        WebYaST - system status 
 License:        GPL-2.0

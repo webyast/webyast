@@ -31,6 +31,11 @@ BuildRequires:  webyast-base >= 0.3
 BuildRequires:  webyast-base-testsuite
 PreReq:         webyast-base >= 0.3
 
+Obsoletes:	webyast-services-ws
+Obsoletes:	webyast-services-ui
+Provides:	webyast-services-ws
+Provides:	webyast-services-ui
+
 Url:            http://en.opensuse.org/Portal:WebYaST
 Summary:        WebYaST - system services management service
 License:        GPL-2.0
