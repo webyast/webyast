@@ -361,7 +361,7 @@ if rpm -q --requires %{name}|grep lighttpd > /dev/null ; then
     /usr/sbin/rcyastws stop > /dev/null
 
     # check if the restart file already exists
-    if [ ! -f %name-%version-%release-1 ]
+    if [ ! -f %name-%version-%release-1 ] ; then
       echo "#!/bin/sh" > %name-%version-%release-1
       echo "/usr/sbin/rcwebyast restart" >> %name-%version-%release-1
     fi
