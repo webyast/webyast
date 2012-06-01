@@ -1,4 +1,11 @@
 -------------------------------------------------------------------
+Fri Jun  1 14:10:34 UTC 2012 - lslezak@suse.cz
+
+- fixed update problems (fixed %pre and %post scripts in .spec
+  file)
+- 0.3.7
+
+-------------------------------------------------------------------
 Wed May 30 08:14:40 UTC 2012 - lslezak@suse.cz
 
 - fixed control panel tests

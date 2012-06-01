@@ -10,7 +10,7 @@
 
 
 Name:           webyast-base
-Version:        0.3.6
+Version:        0.3.7
 Release:        0
 Provides:       yast2-webservice = %{version}
 Obsoletes:      yast2-webservice < %{version}
@@ -340,13 +340,13 @@ rm -rf $RPM_BUILD_ROOT
 # which will be called AFTER the installation
 if /bin/rpm -q webyast-base-ui > /dev/null ; then
   echo "renaming webyast-base-ui to webyast-base"
-  if /sbin/chkconfig -l webyast 2> /dev/null | grep " 3:on " >/dev/null ; then
+  if /sbin/chkconfig -l yastwc 2> /dev/null | grep " 3:on " >/dev/null ; then
     echo "webyast is inserted into the runlevel"
     echo "#!/bin/sh" > %name-%version-%release-1
     echo "/sbin/chkconfig -a webyast" >> %name-%version-%release-1
     echo "/usr/sbin/rcwebyast restart" >> %name-%version-%release-1
   else
-    if /usr/sbin/rcwebyast status > /dev/null ; then
+    if /usr/sbin/rcyastwc status > /dev/null ; then
       echo "webyast is running"
       echo "#!/bin/sh" > %name-%version-%release-1
       echo "/usr/sbin/rcwebyast restart" >> %name-%version-%release-1
@@ -359,8 +359,12 @@ if rpm -q --requires %{name}|grep lighttpd > /dev/null ; then
   if /usr/sbin/rcyastws status > /dev/null ; then
     echo "yastws is running under lighttpd -> switching to nginx"
     /usr/sbin/rcyastws stop > /dev/null
-    echo "#!/bin/sh" > %name-%version-%release-1
-    echo "/usr/sbin/rcywebyast restart" >> %name-%version-%release-1
+
+    # check if the restart file already exists
+    if [ ! -f %name-%version-%release-1 ]
+      echo "#!/bin/sh" > %name-%version-%release-1
+      echo "/usr/sbin/rcwebyast restart" >> %name-%version-%release-1
+    fi
   fi
 fi
 if [ -f %name-%version-%release-1 ] ; then
@@ -407,6 +411,11 @@ fi
 # try-reload D-Bus config (bnc#635826)
 #
 dbus-send --print-reply --system --dest=org.freedesktop.DBus / org.freedesktop.DBus.ReloadConfig >/dev/null ||:
+
+# update firewall config
+if grep -q webyast-ui /etc/sysconfig/SuSEfirewall2; then
+  sed -i "s/\(^[ \t]*FW_CONFIGURATIONS_.*[ \t]*=[ \t]*\".*[ \t]*\)webyast-ui\(.*$\)/\1webyast\2/" /etc/sysconfig/SuSEfirewall2
+fi
 
 #---------------------------------------------------------------
 %preun
