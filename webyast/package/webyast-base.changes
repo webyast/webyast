@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Mon Jun  4 15:18:57 UTC 2012 - lslezak@suse.cz
+
+- reload firewall after modifying /etc/sysconfig/SuSEfirewall2
+- 0.3.8
+
+-------------------------------------------------------------------
 Fri Jun  1 14:10:34 UTC 2012 - lslezak@suse.cz
 
 - fixed update problems (fixed %pre and %post scripts in .spec

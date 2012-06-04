@@ -10,7 +10,7 @@
 
 
 Name:           webyast-base
-Version:        0.3.7
+Version:        0.3.8
 Release:        0
 Provides:       yast2-webservice = %{version}
 Obsoletes:      yast2-webservice < %{version}
@@ -415,6 +415,8 @@ dbus-send --print-reply --system --dest=org.freedesktop.DBus / org.freedesktop.D
 # update firewall config
 if grep -q webyast-ui /etc/sysconfig/SuSEfirewall2; then
   sed -i "s/\(^[ \t]*FW_CONFIGURATIONS_.*[ \t]*=[ \t]*\".*[ \t]*\)webyast-ui\(.*$\)/\1webyast\2/" /etc/sysconfig/SuSEfirewall2
+  # reload the changes
+  /sbin/rcSuSEfirewall2 reload
 fi
 
 #---------------------------------------------------------------
