@@ -10,7 +10,7 @@
 
 
 Name:           webyast-base
-Version:        0.3.9
+Version:        0.3.10
 Release:        0
 Provides:       yast2-webservice = %{version}
 Obsoletes:      yast2-webservice < %{version}
@@ -21,10 +21,12 @@ Obsoletes:	webyast-base-ui
 Obsoletes:	webyast-base-ws
 Obsoletes:	yast2-webclient
 Obsoletes:	yast2-webservice
+Obsoletes:	webyast-firstboot-ws
 Provides:	webyast-base-ui
 Provides:	webyast-base-ws
 Provides:	yast2-webclient
 Provides:	yast2-webservice
+Provides:	webyast-firstboot-ws
 
 %if 0%{?suse_version} == 0 || %suse_version > 1110
 # 11.2 or newer
@@ -169,6 +171,9 @@ Provides: webyast-base-branding = %{version}
 Requires: %{name} = %{version}
 Conflicts:      otherproviders(webyast-base-branding)
 Supplements:    packageand(webyast-base:branding-default)
+
+Provides:	webyast-base-ui-branding-default
+Obsoletes:	webyast-base-ui-branding-default
 
 Summary:  Branding package for webyast-base package
 
