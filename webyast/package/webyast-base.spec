@@ -10,7 +10,7 @@
 
 
 Name:           webyast-base
-Version:        0.3.8
+Version:        0.3.9
 Release:        0
 Provides:       yast2-webservice = %{version}
 Obsoletes:      yast2-webservice < %{version}
@@ -109,7 +109,7 @@ BuildRequires:  rubygem-haml, rubygem-nokogiri, rubygem-builder-3_0
 BuildRequires:  nginx >= 1.0
 BuildRequires:	rubygem-bundler
 BuildRequires:	rubygem-devise, rubygem-devise_unix2_chkpwd_authenticatable, rubygem-devise-i18n
-BuildRequires:	rubygem-cancan, rubygem-delayed_job
+BuildRequires:	rubygem-cancan, rubygem-delayed_job-3_0, rubygem-delayed_job_active_record
 
 BuildRequires:	rubygem-gettext, rubygem-ruby_parser, rubygem-inifile
 
@@ -119,7 +119,7 @@ Requires:	rubygem-haml, rubygem-sqlite3, rubygem-builder-3_0
 Requires:       rubygem-fast_gettext, rubygem-gettext_i18n_rails, rubygem-rails-i18n
 
 Requires:	rubygem-devise, rubygem-devise_unix2_chkpwd_authenticatable, rubygem-devise-i18n
-Requires:	rubygem-cancan, rubygem-delayed_job
+Requires:	rubygem-cancan, rubygem-delayed_job-3_0, rubygem-delayed_job_active_record
 
 
 # This is for Hudson (build service) to setup the build env correctly

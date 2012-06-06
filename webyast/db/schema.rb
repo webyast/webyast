@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20111115091940) do
+ActiveRecord::Schema.define(:version => 20120606095802) do
 
   create_table "accounts", :force => true do |t|
     t.string   "username"
@@ -47,6 +47,7 @@ ActiveRecord::Schema.define(:version => 20111115091940) do
     t.string   "locked_by"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "queue"
   end
 
   add_index "delayed_jobs", ["locked_by"], :name => "index_delayed_jobs_on_locked_by"

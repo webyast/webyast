@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Wed Jun  6 12:07:35 UTC 2012 - lslezak@suse.cz
+
+- update to delayed_job 3.0
+- 0.3.9
+
+-------------------------------------------------------------------
 Mon Jun  4 15:18:57 UTC 2012 - lslezak@suse.cz
 
 - reload firewall after modifying /etc/sysconfig/SuSEfirewall2
