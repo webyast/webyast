@@ -419,9 +419,12 @@ dbus-send --print-reply --system --dest=org.freedesktop.DBus / org.freedesktop.D
 
 # update firewall config
 if grep -q webyast-ui /etc/sysconfig/SuSEfirewall2; then
+  echo "Updating firewall config..."
   sed -i "s/\(^[ \t]*FW_CONFIGURATIONS_.*[ \t]*=[ \t]*\".*[ \t]*\)webyast-ui\(.*$\)/\1webyast\2/" /etc/sysconfig/SuSEfirewall2
+
   # reload the changes
-  /sbin/rcSuSEfirewall2 reload
+  echo "Restarting firewall..."
+  /sbin/rcSuSEfirewall2 restart
 fi
 
 #---------------------------------------------------------------
