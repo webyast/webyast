@@ -43,20 +43,11 @@ This extension provides polkit integration. The library provides a stable API fo
 %package doc
 Summary:        RDoc documentation for %{mod_name}
 Group:          Development/Languages/Ruby
-License:        GPL-2.0+
+License:        GPL-2.0+ or Ruby
 Requires:       %{name} = %{version}
 %description doc
 Documentation generated at gem installation time.
 Usually in RDoc and RI formats.
-
-
-%package testsuite
-Summary:        Test suite for %{mod_name}
-Group:          Development/Languages/Ruby
-License:        GPL-2.0+
-Requires:       %{name} = %{version}
-%description testsuite
-Test::Unit or RSpec files, useful for developers.
 
 
 %prep
@@ -83,9 +74,5 @@ cd %{buildroot}/%{_libdir}/ruby/gems/%{rb_ver}/gems/%{mod_name}-%{version}
 %files doc
 %defattr(-,root,root,-)
 %doc %{_libdir}/ruby/gems/%{rb_ver}/doc/%{mod_name}-%{version}/
-
-%files testsuite
-%defattr(-,root,root,-)
-#%{_libdir}/ruby/gems/%{rb_ver}/gems/%{mod_name}-%{version}/test
 
 %changelog
