@@ -11,7 +11,7 @@ Gem::Specification.new do |s|
   s.summary     = %q{polkit bindings for ruby}
   s.description = %q{This extension provides polkit integration. The library provides a stable API for applications to use the authorization policies from polkit.}
 
-  s.files         = `git ls-files`.split("\n") + ['lib/polkit1.so']
+  s.files         = `git ls-files`.split("\n").delete_if{|f| f.match(/\.gitignore$/)} + ['lib/polkit1.so']
   s.test_files    = `git ls-files -- {test,spec,features}/*`.split("\n")
   s.executables   = `git ls-files -- bin/*`.split("\n").map{ |f| File.basename(f) }
   s.require_paths = ["lib"]
