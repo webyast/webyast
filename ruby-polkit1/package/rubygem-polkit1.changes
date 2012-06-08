@@ -3,6 +3,9 @@ Fri Jun  8 12:35:41 UTC 2012 - lslezak@suse.cz
 
 - use Etc.getpwnam (ruby stdlib) for user_name -> UID conversion
   (instead of invoking "id" in a shell)
+- add also ResultActive = "yes" and ResultInactive = "yes" to
+  the .pkla file when granting a permission (ResultAny = "yes"
+  is sometimes not sufficient (huh?))
 - version 0.0.3
 
 -------------------------------------------------------------------
