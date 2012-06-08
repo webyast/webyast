@@ -1,4 +1,11 @@
 -------------------------------------------------------------------
+Fri Jun  8 12:35:41 UTC 2012 - lslezak@suse.cz
+
+- use Etc.getpwnam (ruby stdlib) for user_name -> UID conversion
+  (instead of invoking "id" in a shell)
+- version 0.0.3
+
+-------------------------------------------------------------------
 Thu Mar 22 08:06:47 UTC 2012 - cfarrell@suse.com
 
 - license update: GPL-2.0+

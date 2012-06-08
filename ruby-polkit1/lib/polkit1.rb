@@ -1,20 +1,14 @@
 require "polkit1/version"
 require 'polkit1.so' # native
 require 'inifile'
-require 'shellwords'
+require 'etc'
 
 module PolKit1
   POLKIT_PATH = "/etc/polkit-1/localauthority/"
 
   def self.polkit1_check(perm, user_name)
     raise "invalid user name" if (user_name =~ /\\$/ or user_name.include? "'")
-    # RORSCAN_INL: This is not a CWE-184: Incomplete Blacklist
-    user_name = Shellwords.escape(user_name) #just to be sure....
-    #get user id
-    # RORSCAN_INL: user_name will be escaped
-    uid = `id -u '#{user_name}'`
-    raise "unknown user" if $? != 0
-    polkit1_check_uid perm, uid.to_i
+    polkit1_check_uid perm, Etc.getpwnam(user_name).uid
   end
 
   def self.polkit1_write(section, perm, granted, user_name)
