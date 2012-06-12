@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Tue Jun 12 14:53:04 UTC 2012 - lslezak@suse.cz
+
+- updated permission name to match the checked name
+- 0.3.4
+
+-------------------------------------------------------------------
 Tue May 29 12:08:52 UTC 2012 - lslezak@suse.cz
 
 - updated database.yml for Rails 3.2
