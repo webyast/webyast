@@ -37,7 +37,7 @@ Summary:        WebYaST - terminal plugin
 License:        GPL-2.0
 Group:          Productivity/Networking/Web/Utilities
 Source:         %{mod_full_name}.gem
-Source1:        org.opensuse.yast.system.terminal.policy
+Source1:        org.opensuse.yast.modules.yapi.terminal.policy
 
 %package doc
 Summary:        RDoc documentation for %{mod_name}
