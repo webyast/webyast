@@ -31,8 +31,7 @@ class StatusControllerTest < ActionController::TestCase
 
   # return contents of a fixture file +file+
   def fixture(file)
-    ret = open(File.join(File.dirname(__FILE__), "..", "fixtures", file)) { |f| YAML.load(f) }
-    ret
+    YAML.load_file File.join(File.dirname(__FILE__), "..", "fixtures", file)
   end
 
   def rights_enable(enable = true)
