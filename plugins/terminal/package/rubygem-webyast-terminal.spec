@@ -106,7 +106,7 @@ rm -rf $RPM_BUILD_ROOT/%{_libdir}/ruby/gems/%{rb_ver}/gems/%{mod_full_name}/publ
 %{webyast_dir}/public/assets/*
 
 %dir /usr/share/%{webyast_polkit_dir}
-%attr(644,root,root) /usr/share/%{webyast_polkit_dir}/org.opensuse.yast.system.terminal.policy
+%attr(644,root,root) /usr/share/%{webyast_polkit_dir}/org.opensuse.yast.modules.yapi.terminal.policy
 
 %files doc
 %defattr(-,root,root,-)
