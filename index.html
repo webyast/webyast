@@ -1,22 +1,124 @@
-<!doctype html>
+<!DOCTYPE html>
 <html>
-<head>
-  <meta charset="utf-8">
-  <title>Webyast</title>
-  <link rel="shortcut icon" href="favicon.ico"/>
-  <link rel="stylesheet" href="css/lightbox.css" type="text/css"/>
-  <script src="js/jquery-1.7.2.min.js"></script>
-  <script src="js/lightbox.js"></script>
-</head>
+  <head>
+    <meta charset="utf-8">
+    <title>WebYaST</title>
+    <meta name="author" content="David Majda (david@majda.cz)">
+    <meta name="copyright" content="TODO">
+    <meta name="keywords" content="TODO">
+    <meta name="description" content="TODO">
+    <link rel="shortcut icon" href="favicon.ico"/>
+    <link rel="stylesheet" href="css/global.css">
+    <link rel="stylesheet" href="css/lightbox.css" type="text/css"/>
+    <script src="js/jquery-1.7.2.min.js"></script>
+    <script src="js/lightbox.js"></script>
+  </head>
+  <body>
+    <div id="main">
+      <hgroup>
+        <h1>WebYaST</h1>
+        <h2>Manage your Linux workstation or server easily over the web</h2>
+      </hgroup>
+      <nav>
+        <ul>
+          <li><a href="#features">Features</a></li>
+          <li><a href="#features">Installation</a></li>
+          <li><a href="#features">Documentation</a></li>
+          <li><a href="#features">Development</a></li>
+        </ul>
+      </nav>
+      <aside>
+        <h2><a href="TODO">Try WebYaST online!</a></h2>
+        <p>Just click the Testdrive link in the right column and see WebYaST
+        loading in your browser.</p>
+      </aside>
 
-<body>
-  <a href="images/webyast-control_panel.png" rel="lightbox[webyast]" title="WebYast control panel - the main screen"><img src="images/webyast-control_panel_thb.png"/></a>
-  <a href="images/webyast-status.png" rel="lightbox[webyast]" title="System status details"><img src="images/webyast-status_thb.png"/></a>
-  <a href="images/webyast-firewall.png" rel="lightbox[webyast]" title="WebYast"><img src="images/webyast-firewall_thb.png"/></a>
-  <a href="images/webyast-patches.png" rel="lightbox[webyast]" title="WebYast"><img src="images/webyast-patches_thb.png"/></a>
-  <a href="images/webyast-network.png" rel="lightbox[webyast]" title="WebYast"><img src="images/webyast-network_thb.png"/></a>
-  <a href="images/webyast-services.png" rel="lightbox[webyast]" title="WebYast"><img src="images/webyast-services_thb.png"/></a>
-  <a href="images/webyast-repos.png" rel="lightbox[webyast]" title="WebYast"><img src="images/webyast-repos_thb.png"/></a>
-</body>
+      <p>WebYaST allows you to manage your Linux workstation or server easily
+      using a web interface. It strives for simplicity and focuses on tasks
+      admins commonly perform (like user management or software updates).
+      WebYaST is especially useful when you can't access your machine via SSH or
+      don't want to remember all the commands.</p>
 
+      <h2 id="features">What can WebYaST do?</h2>
+
+      <ul>
+        <li>Check system health and status</li>
+        <li>Add, remove and edit users</li>
+        <li>Update software</li>
+        <li>Manage system services</li>
+        <li>Configure network settings</li>
+        <li>Configure firewall</li>
+        <li><a href="http://doc.opensuse.org//products/other/WebYaST/webyast-user_sd/cha.webyast.user.modules.html">And much more...</a></li>
+      </ul>
+
+      <h2 id="screenshots">Screenshots</h2>
+
+      <div>
+        <a href="images/webyast-control_panel.png" rel="lightbox[webyast]" title="WebYast control panel - the main screen"><img src="images/webyast-control_panel_thb.png"/></a>
+        <a href="images/webyast-status.png" rel="lightbox[webyast]" title="System status details"><img src="images/webyast-status_thb.png"/></a>
+        <a href="images/webyast-firewall.png" rel="lightbox[webyast]" title="WebYast"><img src="images/webyast-firewall_thb.png"/></a>
+        <a href="images/webyast-patches.png" rel="lightbox[webyast]" title="WebYast"><img src="images/webyast-patches_thb.png"/></a>
+        <a href="images/webyast-network.png" rel="lightbox[webyast]" title="WebYast"><img src="images/webyast-network_thb.png"/></a>
+        <a href="images/webyast-services.png" rel="lightbox[webyast]" title="WebYast"><img src="images/webyast-services_thb.png"/></a>
+        <a href="images/webyast-repos.png" rel="lightbox[webyast]" title="WebYast"><img src="images/webyast-repos_thb.png"/></a>
+      </div>
+
+      <h2 id="installation">Installation</h2>
+
+      <h3>openSUSE 12.1</h3>
+
+      <p>Run the following commands:</p>
+
+      <pre># zypper install webyast # Install WebYaST
+# rcwebyast start        # Start it</pre>
+
+      <p>Point your browser to <a href="http://localhost:TODO">localhost:TODO</a>.
+      The WebYaST user interface should load.</a>
+
+      <h3>SLE 11 SP2</h3>
+
+      <p>Run the following commands:</p>
+
+      <pre># TODO: Enable repo.
+# zypper install webyast # Install WebYaST
+# rcwebyast start        # Start it</pre>
+
+      <p>Point your browser to <a href="http://localhost:TODO">localhost:TODO</a>.
+      The WebYaST user interface should load.</a>
+
+      <h3>Not on SUSE system?</h3>
+
+      <p>We are <a
+      href="http://kobliha-suse.blogspot.de/2012/04/puppet-ruby-dsl-using-gloves-library-on.html">rewriting
+      WebYaST backend</a> to be more portable. Help us!</p>
+
+      <p>For more information about installation, see the
+      <a>documentation</a>.</p>
+
+      <h2>Documentation</h2>
+
+      <ul>
+        <li><a href="http://doc.opensuse.org/products/other/WebYaST/webyast-user">User guide</a></li>
+        <li>
+          <a href="http://doc.opensuse.org/products/other/WebYaST/webyast-vendor">Vendor guide</a>
+          (look here you want to TODO)
+        </li>
+      </ul>
+
+      <h2>Development</h2>
+
+      <p>We do all <a href="https://github.com/webyast/webyast">development on
+      GitHub</a>. If you have problems with WebYaST, <a
+      href="https://bugzilla.novell.com/enter_bug.cgi?format=guided">file a bug
+      in Bugzilla</a>. If you want to contribute, send a pull reqest. You can
+      also discuss WebYaST on <a href="mail:yast-devel@opensuse.org">YaST
+      development mailing list</a> (<a
+      href="http://lists.opensuse.org/yast-devel/">archive</a>) and <a
+      href="irc://irc.opensuse.org/#yast">#yast IRC channel</a> on Freenode.
+
+      <footer>
+        Uses <a href="http://en.opensuse.org/Portal:YaST">YaST</a> technology.
+      </footer>
+    </div>
+  </body>
 </html>
