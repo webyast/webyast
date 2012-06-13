@@ -112,6 +112,15 @@ zypper mr -e SLE11-WebYaST-SP2-Updates</pre>
       <p>For more information about installation, see the
         <a>documentation</a>.</p>
 
+      <h3>Remote access</h3>
+
+      <p>If you need remote access to Webyast (from another machine via Internet) you need to update firewall
+        configuration as it by default blocks remote access.</p>
+
+      <p>Start Yast Firewall module and add <em>WebYaST UI</em> service to the list of enabled services.
+
+      <p>Now you can point your browser to the URL printed by <em>rcyastwc</em> script or to https://<em>your_machine.your_domain</em>:54984.</p>
+
       <h2>Documentation</h2>
 
       <ul>
