@@ -72,7 +72,20 @@
 
       <h2 id="installation">Installation</h2>
 
-      <h3><a name="opensuse_installation">openSUSE 12.1</a></h3>
+      <h3><a name="opensuse122_installation">openSUSE 12.2</a></h3>
+
+      <p>Run the following commands (as <em>root</em> user):</p>
+
+      <pre class="terminal"># install complete WebYaST using a pattern
+zypper in -t pattern webyast
+
+# start WebYaST
+/usr/sbin/rcwebyast start</pre>
+
+      <p>Point your browser to <a href="http://localhost:4984">https://localhost:4984</a>.
+        The WebYaST user interface should load.
+
+      <h3><a name="opensuse121_installation">openSUSE 12.1</a></h3>
 
       <p>Run the following commands (as <em>root</em> user):</p>
 
@@ -102,7 +115,7 @@ zypper in -t pattern webyast-ui webyast-ws
 zypper mr -e SLE11-WebYaST-SP2-Pool
 zypper mr -e SLE11-WebYaST-SP2-Updates</pre>
 
-      <p>Then continue with steps described in <a href="#opensuse_installation">the openSUSE-12.1 installation</a> section.</p>
+      <p>Then continue with steps described in <a href="#opensuse121_installation">the openSUSE-12.1 installation</a> section.</p>
 
       <h3>Remote access</h3>
 
