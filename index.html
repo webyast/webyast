@@ -72,7 +72,7 @@
 
       <h2 id="installation">Installation</h2>
 
-      <h3>openSUSE 12.1</h3>
+      <h3><a name="opensuse_installation">openSUSE 12.1</a></h3>
 
       <p>Run the following commands (as <em>root</em> user):</p>
 
@@ -94,16 +94,15 @@ zypper in -t pattern webyast-ui webyast-ws
         a real certificate</a> signed by a trusted certification authority, which avoids this warning.)
       </p>
 
-      <h3>SLE 11 SP2</h3>
+      <h3>SLES 11 SP2</h3>
 
-      <p>Run the following commands:</p>
+      <p>Make sure your SLES system is registered and run the following commands (as <em>root</em> user):</p>
 
-      <pre># TODO: Enable repo.
-# zypper install webyast # Install WebYaST
-# rcwebyast start        # Start it</pre>
+      <pre class="terminal"># enable Webyast repositories (disabled by default)
+zypper mr -e SLE11-WebYaST-SP2-Pool
+zypper mr -e SLE11-WebYaST-SP2-Updates</pre>
 
-      <p>Point your browser to <a href="https://localhost:54894">https://localhost:54984</a>.
-        The WebYaST user interface should load.</p>
+      <p>Then continue with steps described in <a href="#opensuse_installation">the openSUSE-12.1 installation</a> section.</p>
 
       <h3>Not on SUSE system?</h3>
 
