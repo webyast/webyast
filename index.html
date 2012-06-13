@@ -12,26 +12,127 @@
     <link rel="stylesheet" href="css/lightbox.css" type="text/css"/>
     <script src="js/jquery-1.7.2.min.js"></script>
     <script src="js/lightbox.js"></script>
+    <style type="text/css" media="screen">
+      body {margin:0;background:none repeat scroll 0 0 #FFFFFF;/*F6F6F6*/}
+      ul a{text-decoration: none;color: #666666;}
+      ul a:hover{color:#4682B4;}
+      #content{width:100%;margin:0;}
+      #template_theme{width:100%;height:1px;background:#000;}
+      #phrase{width:100%;height:55px;background:#4682B4;}
+      #header{margin:0 auto;width:100%;height:30px;
+              background: url("https://static.opensuse.org/themes/bento/css/images/gradient-dark-nav.png") repeat-x scroll left bottom #666666;
+              border-bottom: 1px solid #333333;
+              font-size: 0.8em;
+              font-weight: bold;
+              margin:0;
+      }
+      #header-content{width:996px;margin:0 auto;}
+      #header-logo {
+        float: left;
+        margin-right: 25px;
+        margin-top: 1px;
+      }
+      #showcase{background: url("images/square_bg.png") repeat scroll left top transparent;width:100%;height:280px;}
+      #showcase_claim{width:996px;margin:0 auto;}
+      #claim_texts{width:500px;float:left;}
+      #screenshot{width:996px;border-top: 1px solid #F0F0F0;border-bottom: 1px solid #F0F0F0;margin:0 auto;}
+      #title_topic{text-transform:uppercase;padding-top:5px;padding-bottom:5px;color:#666666;}
+      #thumbs_cont{width:996px;height: 190px;margin:0 auto;}
+      #features{width:996px;height: 190px;margin:0 auto;}
+      #sub_menu_feat{width:250px;float:left;}
+      #topic{width:996px;margin:0 auto;border-top: 1px solid #F0F0F0;border-bottom: 1px solid #F0F0F0;}
+      #phrase_text{width:996px;margin:0 auto;padding-top:7px;font-size: 15px;font-weight:normal;line-height: 20px;color:#FFFFFF;}
+      #content_feat{padding:15px;}
+      #preview_feat{width:730px;float: right;height:210px;
+                    background-color:#F6F6F6;
+                    -webkit-box-shadow: 0 8px 6px -6px black;
+                    -moz-box-shadow: 0 8px 6px -6px black;
+                    box-shadow: 0 8px 6px -6px black;}
+      .Title{font-family: "omnes-pro-1","omnes-pro-2",Helvetica,Arial,sans-serif;padding-top:50px;color:#4682B4;font-size: 40px;font-weight: 200;line-height: 37px;}
+      .Sub_Title{padding-top:20px;font-size: 15px;font-weight:normal;line-height: 20px;color:#333333;}
+      .hightlight{background:#4682B4;padding:5px;color:#FFFFFF;width:425px;}
+      .v_mrg{margin-top:35px;}
+      .thumb{width:180px;height:150px;margin-left:16px;margin-top:20px;margin-bottom:30px;float:left;}
+
+      ul{list-style-type:none;padding:0;}
+      .items_first{/*border-top: 1px solid #F0F0F0;border-bottom: 1px solid #F0F0F0;*/color: #666666;width: 160px;margin-bottom: 10px;}
+      .items{border-bottom: 1px solid #F0F0F0;color: #666666;width: 160px;margin-bottom: 5px;}
+      .pdv{padding-top:5px;}
+      .pdb{padding-bottom:5px;}
+      .upp{text-transform:uppercase;}
+    </style>
+
   </head>
   <body>
-    <div id="main">
-      <hgroup>
-        <h1>WebYaST</h1>
-        <h2>Manage your Linux workstation or server easily over the web</h2>
-      </hgroup>
-      <nav>
-        <ul>
-          <li><a href="#features">Features</a></li>
-          <li><a href="#features">Installation</a></li>
-          <li><a href="#features">Documentation</a></li>
-          <li><a href="#features">Development</a></li>
-        </ul>
-      </nav>
-      <aside>
-        <h2><a href="TODO">Try WebYaST online!</a></h2>
-        <p>Just click the Testdrive link in the right column and see WebYaST
-          loading in your browser.</p>
-      </aside>
+    <div id="content">
+
+      <div id="header">
+        <div id="header-content">
+          <a href="http://www.opensuse.org" id="header-logo">
+            <img width="46" height="26" alt="Header Logo" src="http://de.opensuse.org/skins/bento/header-logo.png"></a>
+        </div>
+      </div>
+
+      <div id="template_theme"></div>
+
+      <div id="showcase">
+        <div id="showcase_claim">
+          <div id="claim_texts">
+            <div class="Title">Try WebYaST online!</div>
+            <div class="Sub_Title">WebYaST allows you to manage your Linux workstation<br>or server easily using a web interface.</div>
+            <div class="hightlight v_mrg">» Click here and see WebYaST loading in your browser.</div>
+          </div>
+        </div>
+      </div>
+
+      <div id="phrase">
+        <div id="phrase_text">
+          <b>What can WebYaST do?</b> Check system health and status, add, remove and edit users, update software, manage system services, configure network settings, configure firewall, <a href="http://doc.opensuse.org//products/other/WebYaST/webyast-user_sd/cha.webyast.user.modules.html">and much more...!</a>
+        </div>
+      </div>
+      <div id="screenshot" style="margin-top:40px;">
+        <div id="title_topic">screenshots</div>
+      </div>
+
+      <div id="thumbs_cont">
+        <div class="thumb"><a href="images/webyast-control_panel.png" rel="lightbox[webyast]" title="WebYaST control panel - the main screen"><img src="images/thumbs/webyast-control_panel.png"/></a></div>
+        <div class="thumb"><a href="images/webyast-status.png" rel="lightbox[webyast]" title="System status details"><img
+              src="images/thumbs/webyast-status.png"/></a></div>
+        <div class="thumb"><a href="images/webyast-firewall.png" rel="lightbox[webyast]" title="WebYast"><img
+              src="images/thumbs/webyast-firewall.png"/></a></div>
+        <div class="thumb"><a href="images/webyast-patches.png" rel="lightbox[webyast]" title="WebYast"><img
+              src="images/thumbs/webyast-patches.png"/></a></div>
+        <div class="thumb"><a href="images/webyast-services.png" rel="lightbox[webyast]" title="WebYast"><img
+              src="images/thumbs/webyast-services.png"/></a></div>
+      </div>
+
+      <div id="topic" style="margin-top:40px;">
+        <div id="title_topic">
+          Manage your Linux workstation or server easily over the web
+        </div>
+      </div>
+
+      <div id="features" style="margin-top:20px;">
+        <div id="sub_menu_feat">
+          <ul>
+            <li class="items_first pdv pdb upp"><a href="#">» Features</a></li>
+            <li class="items_first pdv pdb upp"><a href="#">» Installation</a></li>
+            <li class="items_first pdv pdb upp"><a href="#">» Documentation</a></li>
+            <li class="items_first pdv pdb upp"><a href="#">» Development</a></li>
+          </ul>
+        </div>
+
+        <div id="preview_feat">
+          <div id="content_feat">
+            gdfghhfgdf
+          </div>
+        </div>
+      </div>
+
+
+
+      <p>Just click the Testdrive link in the right column and see WebYaST
+        loading in your browser.</p>
 
       <p>WebYaST allows you to manage your Linux workstation or server easily
         using a web interface. It strives for simplicity and focuses on tasks
@@ -39,17 +140,6 @@
         WebYaST is especially useful when you can't access your machine via SSH or
         don't want to remember all the commands.</p>
 
-      <h2 id="features">What can WebYaST do?</h2>
-
-      <ul>
-        <li>Check system health and status</li>
-        <li>Add, remove and edit users</li>
-        <li>Update software</li>
-        <li>Manage system services</li>
-        <li>Configure network settings</li>
-        <li>Configure firewall</li>
-        <li><a href="http://doc.opensuse.org//products/other/WebYaST/webyast-user_sd/cha.webyast.user.modules.html">And much more...</a></li>
-      </ul>
 
       <h2 id="screenshots">Screenshots</h2>
 
@@ -116,7 +206,7 @@ zypper mr -e SLE11-WebYaST-SP2-Updates</pre>
       <p>WebYaST creates a self-signed certificate for secure (encrypted) connection via HTTPS protocol.
         This triggers a warning in your browser when you accces the WebYaST instance the first time.
         (You can <a href="http://doc.opensuse.org//products/other/WebYaST/webyast-vendor_sd/cha.webyast.arch.html#id306048">provide
-        a real certificate</a> signed by a trusted certification authority, which avoids this warning.)
+          a real certificate</a> signed by a trusted certification authority, which avoids this warning.)
       </p>
 
       <h3>Remote access</h3>
