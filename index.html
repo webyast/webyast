@@ -20,7 +20,7 @@
       #template_theme{width:100%;height:1px;background:#000;}
       #phrase{width:100%;height:55px;background:#4682B4;}
       #header{margin:0 auto;width:100%;height:30px;
-              background: url("https://static.opensuse.org/themes/bento/css/images/gradient-dark-nav.png") repeat-x scroll left bottom #666666;
+              background: url("images/gradient-dark-nav.png") repeat-x scroll left bottom #666666;
               border-bottom: 1px solid #333333;
               font-size: 0.8em;
               font-weight: bold;
@@ -32,9 +32,10 @@
         margin-right: 25px;
         margin-top: 1px;
       }
-      #showcase{background: url("images/square_bg.png") repeat scroll left top transparent;width:100%;height:280px;}
+      #showcase{background: url("images/square_bg.png") repeat scroll left top transparent;width:100%;height:315px;}
       #showcase_claim{width:996px;margin:0 auto;}
-      #claim_texts{width:500px;float:left;}
+      #claim_texts{width:500px;float:right;}
+      #title_image{width:350px;margin:15px;float: left;}
       #screenshot{width:996px;border-top: 1px solid #F0F0F0;border-bottom: 1px solid #F0F0F0;margin:0 auto;}
       #title_topic{text-transform:uppercase;padding-top:5px;padding-bottom:5px;color:#666666;}
       #thumbs_cont{width:996px;height: 190px;margin:0 auto;}
@@ -69,14 +70,19 @@
       <div id="header">
         <div id="header-content">
           <a href="http://www.opensuse.org" id="header-logo">
-            <img width="46" height="26" alt="Header Logo" src="http://de.opensuse.org/skins/bento/header-logo.png"></a>
+            <img width="46" height="26" alt="Header Logo" src="images/header-logo.png"></a>
         </div>
       </div>
 
       <div id="template_theme"></div>
 
+
+
       <div id="showcase">
         <div id="showcase_claim">
+          <div id="title_image">
+            <a href="images/webyast-control_panel.png" rel="lightbox" title="WebYaST control panel - the main screen"><img src="images/thumbs/webyast-control_panel-big.png"/></a>
+          </div>
           <div id="claim_texts">
             <div class="Title">Try WebYaST online!</div>
             <div class="Sub_Title">WebYaST allows you to manage your Linux workstation<br>or server easily using a web interface.</div>
@@ -84,6 +90,8 @@
           </div>
         </div>
       </div>
+
+      <div style="clear:both"/>
 
       <div id="phrase">
         <div id="phrase_text">
@@ -95,14 +103,14 @@
       </div>
 
       <div id="thumbs_cont">
-        <div class="thumb"><a href="images/webyast-control_panel.png" rel="lightbox[webyast]" title="WebYaST control panel - the main screen"><img src="images/thumbs/webyast-control_panel.png"/></a></div>
+        <div class="thumb"><a href="images/webyast-root.png" rel="lightbox[webyast]" title="Administrator settings"><img src="images/thumbs/webyast-root.png"/></a></div>
         <div class="thumb"><a href="images/webyast-status.png" rel="lightbox[webyast]" title="System status details"><img
               src="images/thumbs/webyast-status.png"/></a></div>
-        <div class="thumb"><a href="images/webyast-firewall.png" rel="lightbox[webyast]" title="WebYast"><img
+        <div class="thumb"><a href="images/webyast-firewall.png" rel="lightbox[webyast]" title="Firewall configuration"><img
               src="images/thumbs/webyast-firewall.png"/></a></div>
-        <div class="thumb"><a href="images/webyast-patches.png" rel="lightbox[webyast]" title="WebYast"><img
+        <div class="thumb"><a href="images/webyast-patches.png" rel="lightbox[webyast]" title="Software updates"><img
               src="images/thumbs/webyast-patches.png"/></a></div>
-        <div class="thumb"><a href="images/webyast-services.png" rel="lightbox[webyast]" title="WebYast"><img
+        <div class="thumb"><a href="images/webyast-services.png" rel="lightbox[webyast]" title="System services"><img
               src="images/thumbs/webyast-services.png"/></a></div>
       </div>
 
