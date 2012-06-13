@@ -101,12 +101,6 @@ zypper in -t pattern webyast-ui webyast-ws
       <p>Point your browser to <a href="http://localhost:54984">https://localhost:54984</a>.
         The WebYaST user interface should load.
 
-      <p>WebYaST creates a self-signed certificate for secure (encrypted) connection via HTTPS protocol.
-        This triggers a warning in your browser when you accces the WebYaST instance the first time.
-        (You can <a href="http://doc.opensuse.org//products/other/WebYaST/webyast-vendor_sd/cha.webyast.arch.html#id306048">provide
-        a real certificate</a> signed by a trusted certification authority, which avoids this warning.)
-      </p>
-
       <h3>SLES 11 SP2</h3>
 
       <p>Make sure your SLES system is registered and run the following commands (as <em>root</em> user):</p>
@@ -116,6 +110,14 @@ zypper mr -e SLE11-WebYaST-SP2-Pool
 zypper mr -e SLE11-WebYaST-SP2-Updates</pre>
 
       <p>Then continue with steps described in <a href="#opensuse121_installation">the openSUSE-12.1 installation</a> section.</p>
+
+      <h3>SSL certificate</h3>
+
+      <p>WebYaST creates a self-signed certificate for secure (encrypted) connection via HTTPS protocol.
+        This triggers a warning in your browser when you accces the WebYaST instance the first time.
+        (You can <a href="http://doc.opensuse.org//products/other/WebYaST/webyast-vendor_sd/cha.webyast.arch.html#id306048">provide
+        a real certificate</a> signed by a trusted certification authority, which avoids this warning.)
+      </p>
 
       <h3>Remote access</h3>
 
