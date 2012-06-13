@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Wed Jun 13 12:14:54 UTC 2012 - lslezak@suse.cz
+
+- added versioned Provides/Obsoletes, use "try-restart" for
+  restarting SUSE Firewall
+
+-------------------------------------------------------------------
 Wed Jun  6 14:36:56 UTC 2012 - lslezak@suse.cz
 
 - Provide/Obsolete webyast-base-ui-branding-default and

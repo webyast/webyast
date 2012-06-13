@@ -17,16 +17,16 @@ Obsoletes:      yast2-webservice < %{version}
 Provides:       webyast-language-ws = 0.1.0
 Obsoletes:      webyast-language-ws <= 0.1.0
 
-Obsoletes:	webyast-base-ui
-Obsoletes:	webyast-base-ws
-Obsoletes:	yast2-webclient
-Obsoletes:	yast2-webservice
-Obsoletes:	webyast-firstboot-ws
-Provides:	webyast-base-ui
-Provides:	webyast-base-ws
-Provides:	yast2-webclient
-Provides:	yast2-webservice
-Provides:	webyast-firstboot-ws
+Obsoletes:	webyast-base-ui < %{version}
+Obsoletes:	webyast-base-ws < %{version}
+Obsoletes:	yast2-webclient < %{version}
+Obsoletes:	yast2-webservice < %{version}
+Obsoletes:	webyast-firstboot-ws < %{version}
+Provides:	webyast-base-ui = %{version}
+Provides:	webyast-base-ws = %{version}
+Provides:	yast2-webclient = %{version}
+Provides:	yast2-webservice = %{version}
+Provides:	webyast-firstboot-ws = %{version}
 
 %if 0%{?suse_version} == 0 || %suse_version > 1110
 # 11.2 or newer
@@ -424,7 +424,7 @@ if grep -q webyast-ui /etc/sysconfig/SuSEfirewall2; then
 
   # reload the changes
   echo "Restarting firewall..."
-  /sbin/rcSuSEfirewall2 restart
+  /sbin/rcSuSEfirewall2 try-restart
 fi
 
 #---------------------------------------------------------------
