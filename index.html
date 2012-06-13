@@ -32,7 +32,7 @@
         margin-right: 25px;
         margin-top: 1px;
       }
-      #showcase{background: url("images/square_bg.png") repeat scroll left top transparent;width:100%;height:405px;}
+      #showcase{background: url("images/square_bg.png") repeat scroll left top transparent;width:100%;height:480px;}
       #showcase_claim{width:996px;margin:0 auto;}
       #claim_texts{width:500px;float:right;}
       #title_image{width:350px;margin:15px;float: left;}
@@ -50,6 +50,7 @@
                     -moz-box-shadow: 0 8px 6px -6px black;
                     box-shadow: 0 8px 6px -6px black;}
       #webyast_header{font-size: 3em;font-weight: bold; color: #4682B4; text-align: center;padding: 15px}
+      #webyast_description{width: 900px; font-style: italic;padding: 0 40px 10px;}
       .Title{font-family: "omnes-pro-1","omnes-pro-2",Helvetica,Arial,sans-serif;padding-top:50px;color:#4682B4;font-size: 40px;font-weight: 200;line-height: 37px;}
       .Sub_Title{padding-top:20px;font-size: 15px;font-weight:normal;line-height: 20px;color:#333333;}
       .hightlight{background:#4682B4;padding:5px;color:#FFFFFF;width:425px;}
@@ -62,7 +63,19 @@
       .pdv{padding-top:5px;}
       .pdb{padding-bottom:5px;}
       .upp{text-transform:uppercase;}
+      .subitem{font-size: 0.8em; padding-left: 20px;}
+      .inst_item{display: none;}
     </style>
+
+    <script type="text/javascript">
+      $(document).ready(
+        function(){
+          $("#installation_menu").click(function() {
+            $(".inst_item").toggle();
+            return false;
+          });
+      });
+    </script>
 
   </head>
   <body>
@@ -85,12 +98,19 @@
             WebYaST
           </div>
 
+          <div id="webyast_description">
+            WebYaST allows you to manage your Linux workstation or server easily using a web interface.
+            It strives for simplicity and focuses on tasks admins commonly perform (like user management or software updates).
+            WebYaST is especially useful when you can't access your machine via SSH or don't want to remember all the commands.
+          </div>
+          .
+
           <div id="title_image">
             <a href="images/webyast-control_panel.png" rel="lightbox" title="WebYaST control panel - the main screen"><img src="images/thumbs/webyast-control_panel-big.png"/></a>
           </div>
           <div id="claim_texts">
             <div class="Title">Try WebYaST online!</div>
-            <div class="Sub_Title">WebYaST allows you to manage your Linux workstation<br>or server easily using a web interface.</div>
+            <div class="Sub_Title">Just click the Testdrive link in the right column and see WebYaST loading in your browser.</div>
             <div class="hightlight v_mrg">» Click here and see WebYaST loading in your browser.</div>
           </div>
         </div>
@@ -129,7 +149,10 @@
         <div id="sub_menu_feat">
           <ul>
             <li class="items_first pdv pdb upp"><a href="#">» Features</a></li>
-            <li class="items_first pdv pdb upp"><a href="#">» Installation</a></li>
+            <li class="items_first pdv upp"><a href="#" id="installation_menu">» Installation</a></li>
+            <li class="items_first subitem inst_item"><a href="#">» openSUSE-12.2</a></li>
+            <li class="items_first subitem inst_item"><a href="#">» openSUSE-12.1</a></li>
+            <li class="items_first pdb subitem inst_item"><a href="#">» SLES 11 SP2</a></li>
             <li class="items_first pdv pdb upp"><a href="#">» Documentation</a></li>
             <li class="items_first pdv pdb upp"><a href="#">» Development</a></li>
           </ul>
@@ -144,34 +167,7 @@
 
 
 
-      <p>Just click the Testdrive link in the right column and see WebYaST
-        loading in your browser.</p>
-
-      <p>WebYaST allows you to manage your Linux workstation or server easily
-        using a web interface. It strives for simplicity and focuses on tasks
-        admins commonly perform (like user management or software updates).
-        WebYaST is especially useful when you can't access your machine via SSH or
-        don't want to remember all the commands.</p>
-
-
-      <h2 id="screenshots">Screenshots</h2>
-
-      <div>
-        <a href="images/webyast-control_panel.png" rel="lightbox[webyast]" title="WebYast control panel - the main screen"><img
-            src="images/webyast-control_panel_thb.png"/></a>
-        <a href="images/webyast-status.png" rel="lightbox[webyast]" title="System status details"><img
-            src="images/webyast-status_thb.png"/></a>
-        <a href="images/webyast-firewall.png" rel="lightbox[webyast]" title="WebYast"><img
-            src="images/webyast-firewall_thb.png"/></a>
-        <a href="images/webyast-patches.png" rel="lightbox[webyast]" title="WebYast"><img
-            src="images/webyast-patches_thb.png"/></a>
-        <a href="images/webyast-network.png" rel="lightbox[webyast]" title="WebYast"><img
-            src="images/webyast-network_thb.png"/></a>
-        <a href="images/webyast-services.png" rel="lightbox[webyast]" title="WebYast"><img
-            src="images/webyast-services_thb.png"/></a>
-        <a href="images/webyast-repos.png" rel="lightbox[webyast]" title="WebYast"><img
-            src="images/webyast-repos_thb.png"/></a>
-      </div>
+      <div style="height: 300px; width: 100%"></div>
 
       <h2 id="installation">Installation</h2>
 
