@@ -76,20 +76,20 @@
 
       <p>Run the following commands (as <em>root</em> user):</p>
 
-      <pre class="terminal"># install complete Webyast using patterns
+      <pre class="terminal"># install complete WebYaST using patterns
 zypper in -t pattern webyast-ui webyast-ws
 
-# start Webyast REST service
+# start WebYaST REST service
 /usr/sbin/rcyastws start
 
-# start Webyast web UI server
+# start WebYaST web UI server
 /usr/sbin/rcyastwc start</pre>
 
       <p>Point your browser to <a href="http://localhost:54984">https://localhost:54984</a>.
         The WebYaST user interface should load.
 
-      <p>Webyast creates a self-signed certificate for secure (encrypted) connection via HTTPS protocol.
-        This triggers a warning in your browser when you accces the Webyast instance the first time.
+      <p>WebYaST creates a self-signed certificate for secure (encrypted) connection via HTTPS protocol.
+        This triggers a warning in your browser when you accces the WebYaST instance the first time.
         (You can <a href="http://doc.opensuse.org//products/other/WebYaST/webyast-vendor_sd/cha.webyast.arch.html#id306048">provide
         a real certificate</a> signed by a trusted certification authority, which avoids this warning.)
       </p>
@@ -98,7 +98,7 @@ zypper in -t pattern webyast-ui webyast-ws
 
       <p>Make sure your SLES system is registered and run the following commands (as <em>root</em> user):</p>
 
-      <pre class="terminal"># enable Webyast repositories (disabled by default)
+      <pre class="terminal"># enable WebYaST repositories (disabled by default)
 zypper mr -e SLE11-WebYaST-SP2-Pool
 zypper mr -e SLE11-WebYaST-SP2-Updates</pre>
 
@@ -106,7 +106,7 @@ zypper mr -e SLE11-WebYaST-SP2-Updates</pre>
 
       <h3>Remote access</h3>
 
-      <p>If you need remote access to Webyast (from another machine via Internet) you need to update firewall
+      <p>If you need remote access to WebYaST (from another machine via Internet) you need to update firewall
         configuration as it by default blocks remote access.</p>
 
       <p>Start Yast Firewall module and add <em>WebYaST UI</em> service to the list of enabled services.
