@@ -81,13 +81,26 @@
 
       <h3>openSUSE 12.1</h3>
 
-      <p>Run the following commands:</p>
+      <p>Run the following commands (as <em>root</em> user):</p>
 
-      <pre># zypper install webyast # Install WebYaST
-# rcwebyast start        # Start it</pre>
+      <pre># install complete Webyast using patterns
+zypper in -t pattern webyast-ui webyast-ws
+
+# start Webyast REST service
+/usr/sbin/rcyastws start
+
+# start Webyast web UI server
+/usr/sbin/rcyastwc start
+      </pre>
 
       <p>Point your browser to <a href="http://localhost:54984">https://localhost:54984</a>.
         The WebYaST user interface should load.
+
+      <p>Webyast creates a self-signed certificate for secure (encrypted) connection via HTTPS protocol.
+        This triggers a warning in your browser when you accces the Webyast instance the first time.
+        (You can <a href="http://doc.opensuse.org//products/other/WebYaST/webyast-vendor_sd/cha.webyast.arch.html#id306048">provide
+        a real certificate</a> signed by a trusted certification authority, which avoids this warning.)
+        </p>
 
       <h3>SLE 11 SP2</h3>
 
