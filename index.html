@@ -94,6 +94,12 @@
         });
 
         $("#sub_menu_feat").tabs();
+
+        // link from SLES11 SP2 installation to openSUSE-12.1
+        $("#show_inst_suse121").click(function(){
+          $("#sub_menu_feat").tabs("select", "#inst_suse121");
+          return false;
+        });
       });
     </script>
 
@@ -221,7 +227,7 @@ zypper in -t pattern webyast-ui webyast-ws
 zypper mr -e SLE11-WebYaST-SP2-Pool
 zypper mr -e SLE11-WebYaST-SP2-Updates</pre>
 
-            <p>Then continue with steps described in <a href="#opensuse121_installation">the openSUSE-12.1 installation</a> section.</p>
+            <p>Then continue with steps described in <a href="#" id="show_inst_suse121">the openSUSE-12.1 installation</a> section.</p>
           </div>
           <div id="development" class="preview_feat">
             <h3>Development</h3>
