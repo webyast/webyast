@@ -1,4 +1,11 @@
 -------------------------------------------------------------------
+Thu Jun 14 08:36:05 UTC 2012 - cfarrell@suse.com
+
+- license update: LGPL-2.1 and GPL-2.0 and Apache-2.0
+  Contains components under GPL-2.0 and javascript components under
+  Apache-2.0 license
+
+-------------------------------------------------------------------
 Wed Jun 13 12:14:54 UTC 2012 - lslezak@suse.cz
 
 - added versioned Provides/Obsoletes, use "try-restart" for

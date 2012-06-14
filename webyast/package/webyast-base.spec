@@ -67,7 +67,7 @@ PreReq:         PolicyKit, rubygem-polkit
 PreReq:         rubygem-rake, rubygem-sqlite3
 PreReq:         rubygem-rails-3_2 >= 3.2.3
 PreReq:         rubygem-fast_gettext, rubygem-gettext_i18n_rails, rubygem-inifile
-License:	LGPL-2.1
+License:	LGPL-2.1 and GPL-2.0 and Apache-2.0
 Group:          Productivity/Networking/Web/Utilities
 URL:            http://en.opensuse.org/Portal:WebYaST
 Autoreqprov:    on
