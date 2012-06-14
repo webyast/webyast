@@ -70,8 +70,11 @@
     <script type="text/javascript">
       $(document).ready(
         function(){
-          $("#installation_menu").click(function() {
-            $(".inst_item").toggle();
+          $("#installation_menu").toggle(function() {
+            $(".inst_item").slideDown();
+            return false;
+          }, function() {
+            $(".inst_item").slideUp();
             return false;
           });
       });
