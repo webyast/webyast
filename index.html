@@ -90,6 +90,8 @@
           return false;
         });
 
+        // TODO FIXME: refactor these repeating blocks...
+
         $("#inst_suse122_link").click(function(){
           $(".content_text").hide();
           $("#inst_suse122").show();
@@ -105,6 +107,24 @@
         $("#inst_sles11sp2_link").click(function(){
           $(".content_text").hide();
           $("#inst_sles11sp2").show();
+          return false;
+        });
+
+        $("#features_link").click(function(){
+          $(".content_text").hide();
+          $("#features").show();
+          return false;
+        });
+
+        $("#development_link").click(function(){
+          $(".content_text").hide();
+          $("#development").show();
+          return false;
+        });
+
+        $("#documentation_link").click(function(){
+          $(".content_text").hide();
+          $("#documentation").show();
           return false;
         });
 
@@ -183,13 +203,13 @@
       <div id="features" style="margin-top:20px;">
         <div id="sub_menu_feat">
           <ul>
-            <li class="items_first pdv pdb upp"><a href="#">» Features</a></li>
+            <li class="items_first pdv pdb upp"><a href="#" id="features_link">» Features</a></li>
             <li class="items_first pdv upp"><a href="#" id="installation_menu">» Installation</a></li>
             <li class="items_first subitem inst_item"><a href="#" id="inst_suse122_link">» openSUSE-12.2</a></li>
             <li class="items_first subitem inst_item"><a href="#" id="inst_suse121_link">» openSUSE-12.1</a></li>
             <li class="items_first pdb subitem inst_item"><a href="#" id="inst_sles11sp2_link">» SLES 11 SP2</a></li>
-            <li class="items_first pdv pdb upp"><a href="#">» Documentation</a></li>
-            <li class="items_first pdv pdb upp"><a href="#">» Development</a></li>
+            <li class="items_first pdv pdb upp"><a href="#" id="documentation_link">» Documentation</a></li>
+            <li class="items_first pdv pdb upp"><a href="#" id="development_link">» Development</a></li>
           </ul>
         </div>
 
@@ -241,6 +261,30 @@ zypper mr -e SLE11-WebYaST-SP2-Updates</pre>
               <p>Then continue with steps described in <a href="#opensuse121_installation">the openSUSE-12.1 installation</a> section.</p>
             </div>
 
+            <div id="development" class="content_text">
+              <h3>Development</h3>
+
+              <p>We do all <a href="https://github.com/webyast/webyast">development on GitHub</a>.
+                If you have problems with WebYaST,
+                <a href="https://bugzilla.novell.com/enter_bug.cgi?format=guided">file a bug in Bugzilla</a>.
+                If you want to contribute, send a pull reqest. You can
+                also discuss WebYaST on <a href="mail:yast-devel@opensuse.org">YaST development mailing list</a>
+                (<a href="http://lists.opensuse.org/yast-devel/">archive</a>) and
+                <a href="irc://irc.opensuse.org/#yast">#yast IRC channel</a> on Freenode.
+              </p>
+            </div>
+
+            <div id="documentation" class="content_text">
+              <h3>WebYaST documentation</h3>
+
+              <ul>
+                <li><a href="http://doc.opensuse.org/products/other/WebYaST/webyast-user">User guide</a></li>
+                <li>
+                  <a href="http://doc.opensuse.org/products/other/WebYaST/webyast-vendor">Vendor guide</a>
+                  (look here if you want to customize it or want see technical details)
+                </li>
+              </ul>
+            </div>
 
           </div>
         </div>
@@ -276,27 +320,6 @@ zypper mr -e SLE11-WebYaST-SP2-Updates</pre>
 
         <p>For more information about installation, see the
           <a>documentation</a>.</p>
-
-        <h2>Documentation</h2>
-
-        <ul>
-          <li><a href="http://doc.opensuse.org/products/other/WebYaST/webyast-user">User guide</a></li>
-          <li>
-            <a href="http://doc.opensuse.org/products/other/WebYaST/webyast-vendor">Vendor guide</a>
-            (look here if you want to customize it or want see technical details)
-          </li>
-        </ul>
-
-        <h2>Development</h2>
-
-        <p>We do all <a href="https://github.com/webyast/webyast">development on GitHub</a>.
-          If you have problems with WebYaST,
-          <a href="https://bugzilla.novell.com/enter_bug.cgi?format=guided">file a bug in Bugzilla</a>.
-          If you want to contribute, send a pull reqest. You can
-          also discuss WebYaST on <a href="mail:yast-devel@opensuse.org">YaST development mailing list</a>
-          (<a href="http://lists.opensuse.org/yast-devel/">archive</a>) and
-          <a href="irc://irc.opensuse.org/#yast">#yast IRC channel</a> on Freenode.
-        </p>
 
         <footer>
           Uses <a href="http://en.opensuse.org/Portal:YaST">YaST</a> technology.
