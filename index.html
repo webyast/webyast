@@ -8,7 +8,7 @@
     <meta name="keywords" content="TODO">
     <meta name="description" content="TODO">
     <link rel="shortcut icon" href="favicon.ico"/>
-    <link rel="stylesheet" href="css/global.css">
+
     <link rel="stylesheet" href="css/lightbox.css" type="text/css"/>
 
     <!-- use jQuery from google CDN, load the local copy as a fallback -->
@@ -70,18 +70,44 @@
       .upp{text-transform:uppercase;}
       .subitem{font-size: 0.8em; padding-left: 20px;}
       .inst_item{display: none;}
+      pre.terminal {
+        background-color: black;
+        color:  white;
+        border-radius: 5px 5px 5px 5px;
+        padding: 10px;
+      }
     </style>
 
     <script type="text/javascript">
       $(document).ready(
-        function(){
-          $("#installation_menu").toggle(function() {
-            $(".inst_item").slideDown();
-            return false;
-          }, function() {
-            $(".inst_item").slideUp();
-            return false;
-          });
+      function(){
+        $("#installation_menu").toggle(function() {
+          $(".inst_item").slideDown();
+          return false;
+        }, function() {
+          $(".inst_item").slideUp();
+          return false;
+        });
+
+        $("#inst_suse122_link").click(function(){
+          $(".content_text").hide();
+          $("#inst_suse122").show();
+          return false;
+        });
+
+        $("#inst_suse121_link").click(function(){
+          $(".content_text").hide();
+          $("#inst_suse121").show();
+          return false;
+        });
+
+        $("#inst_sles11sp2_link").click(function(){
+          $(".content_text").hide();
+          $("#inst_sles11sp2").show();
+          return false;
+        });
+
+        $(".content_text").hide();
       });
     </script>
 
@@ -111,7 +137,7 @@
             It strives for simplicity and focuses on tasks admins commonly perform (like user management or software updates).
             WebYaST is especially useful when you can't access your machine via SSH or don't want to remember all the commands.
           </div>
-          
+
 
           <div id="title_image">
             <a href="images/webyast-control_panel.png" rel="lightbox" title="WebYaST control panel - the main screen"><img src="images/thumbs/webyast-control_panel-big.png"/></a>
@@ -124,7 +150,7 @@
         </div>
       </div>
 
-      <div style="clear:both"/>
+      <div style="clear:both"></div>
 
       <div id="phrase">
         <div id="phrase_text">
@@ -158,9 +184,9 @@
           <ul>
             <li class="items_first pdv pdb upp"><a href="#">» Features</a></li>
             <li class="items_first pdv upp"><a href="#" id="installation_menu">» Installation</a></li>
-            <li class="items_first subitem inst_item"><a href="#">» openSUSE-12.2</a></li>
-            <li class="items_first subitem inst_item"><a href="#">» openSUSE-12.1</a></li>
-            <li class="items_first pdb subitem inst_item"><a href="#">» SLES 11 SP2</a></li>
+            <li class="items_first subitem inst_item"><a href="#" id="inst_suse122_link">» openSUSE-12.2</a></li>
+            <li class="items_first subitem inst_item"><a href="#" id="inst_suse121_link">» openSUSE-12.1</a></li>
+            <li class="items_first pdb subitem inst_item"><a href="#" id="inst_sles11sp2_link">» SLES 11 SP2</a></li>
             <li class="items_first pdv pdb upp"><a href="#">» Documentation</a></li>
             <li class="items_first pdv pdb upp"><a href="#">» Development</a></li>
           </ul>
@@ -168,36 +194,27 @@
 
         <div id="preview_feat">
           <div id="content_feat">
-            gdfghhfgdf
-          </div>
-        </div>
-      </div>
+            <div id="inst_suse122" class="content_text">
+              <h3><a name="opensuse122_installation">openSUSE 12.2</a></h3>
 
+              <p>Run the following commands (as <em>root</em> user):</p>
 
-
-<!--      TODO: this still needs to be integrated to the page-->
-      <div style="display: none">
-
-      <h2 id="installation">Installation</h2>
-
-      <h3><a name="opensuse122_installation">openSUSE 12.2</a></h3>
-
-      <p>Run the following commands (as <em>root</em> user):</p>
-
-      <pre class="terminal"># install complete WebYaST using a pattern
+              <pre class="terminal"># install complete WebYaST using a pattern
 zypper in -t pattern webyast
 
 # start WebYaST
 /usr/sbin/rcwebyast start</pre>
 
-      <p>Point your browser to <a href="http://localhost:4984">https://localhost:4984</a>.
-        The WebYaST user interface should load.
+              <p>Point your browser to <a href="http://localhost:4984">https://localhost:4984</a>.
+                The WebYaST user interface should load.
+            </div>
 
-      <h3><a name="opensuse121_installation">openSUSE 12.1</a></h3>
+            <div id="inst_suse121" class="content_text">
+              <h3><a name="opensuse121_installation">openSUSE 12.1</a></h3>
 
-      <p>Run the following commands (as <em>root</em> user):</p>
+              <p>Run the following commands (as <em>root</em> user):</p>
 
-      <pre class="terminal"># install complete WebYaST using patterns
+              <pre class="terminal"># install complete WebYaST using patterns
 zypper in -t pattern webyast-ui webyast-ws
 
 # start WebYaST REST service
@@ -206,68 +223,83 @@ zypper in -t pattern webyast-ui webyast-ws
 # start WebYaST web UI server
 /usr/sbin/rcyastwc start</pre>
 
-      <p>Point your browser to <a href="http://localhost:54984">https://localhost:54984</a>.
-        The WebYaST user interface should load.
+              <p>Point your browser to <a href="http://localhost:54984">https://localhost:54984</a>.
+                The WebYaST user interface should load.
 
-      <h3>SLES 11 SP2</h3>
+            </div>
 
-      <p>Make sure your SLES system is registered and run the following commands (as <em>root</em> user):</p>
+            <div id="inst_sles11sp2" class="content_text">
+              <h3>SLES 11 SP2</h3>
 
-      <pre class="terminal"># enable WebYaST repositories (disabled by default)
+              <p>Make sure your SLES system is registered and run the following commands (as <em>root</em> user):</p>
+
+              <pre class="terminal"># enable WebYaST repositories (disabled by default)
 zypper mr -e SLE11-WebYaST-SP2-Pool
 zypper mr -e SLE11-WebYaST-SP2-Updates</pre>
 
-      <p>Then continue with steps described in <a href="#opensuse121_installation">the openSUSE-12.1 installation</a> section.</p>
+              <p>Then continue with steps described in <a href="#opensuse121_installation">the openSUSE-12.1 installation</a> section.</p>
+            </div>
 
-      <h3>SSL certificate</h3>
 
-      <p>WebYaST creates a self-signed certificate for secure (encrypted) connection via HTTPS protocol.
-        This triggers a warning in your browser when you accces the WebYaST instance the first time.
-        (You can <a href="http://doc.opensuse.org//products/other/WebYaST/webyast-vendor_sd/cha.webyast.arch.html#id306048">provide
-          a real certificate</a> signed by a trusted certification authority, which avoids this warning.)
-      </p>
+          </div>
+        </div>
+      </div>
 
-      <h3>Remote access</h3>
 
-      <p>If you need remote access to WebYaST (from another machine via Internet) you need to update firewall
-        configuration as it by default blocks remote access.</p>
 
-      <p>Start Yast Firewall module and add <em>WebYaST UI</em> service to the list of enabled services.
+      <!--      TODO: this still needs to be integrated to the page-->
+      <div style="display: none">
 
-      <p>Now you can point your browser to the URL printed by <em>rcyastwc</em> script or to https://<em>your_machine.your_domain</em>:54984.</p>
 
-      <h3>Not on SUSE system?</h3>
+        <h3>SSL certificate</h3>
 
-      <p>We are <a href="http://kobliha-suse.blogspot.de/2012/04/puppet-ruby-dsl-using-gloves-library-on.html">rewriting
-          WebYaST backend</a> to be more portable. Help us!</p>
+        <p>WebYaST creates a self-signed certificate for secure (encrypted) connection via HTTPS protocol.
+          This triggers a warning in your browser when you accces the WebYaST instance the first time.
+          (You can <a href="http://doc.opensuse.org//products/other/WebYaST/webyast-vendor_sd/cha.webyast.arch.html#id306048">provide
+            a real certificate</a> signed by a trusted certification authority, which avoids this warning.)
+        </p>
 
-      <p>For more information about installation, see the
-        <a>documentation</a>.</p>
+        <h3>Remote access</h3>
 
-      <h2>Documentation</h2>
+        <p>If you need remote access to WebYaST (from another machine via Internet) you need to update firewall
+          configuration as it by default blocks remote access.</p>
 
-      <ul>
-        <li><a href="http://doc.opensuse.org/products/other/WebYaST/webyast-user">User guide</a></li>
-        <li>
-          <a href="http://doc.opensuse.org/products/other/WebYaST/webyast-vendor">Vendor guide</a>
-          (look here if you want to customize it or want see technical details)
-        </li>
-      </ul>
+        <p>Start Yast Firewall module and add <em>WebYaST UI</em> service to the list of enabled services.
 
-      <h2>Development</h2>
+        <p>Now you can point your browser to the URL printed by <em>rcyastwc</em> script or to https://<em>your_machine.your_domain</em>:54984.</p>
 
-      <p>We do all <a href="https://github.com/webyast/webyast">development on GitHub</a>.
-        If you have problems with WebYaST,
-        <a href="https://bugzilla.novell.com/enter_bug.cgi?format=guided">file a bug in Bugzilla</a>.
-        If you want to contribute, send a pull reqest. You can
-        also discuss WebYaST on <a href="mail:yast-devel@opensuse.org">YaST development mailing list</a>
-        (<a href="http://lists.opensuse.org/yast-devel/">archive</a>) and
-        <a href="irc://irc.opensuse.org/#yast">#yast IRC channel</a> on Freenode.
-      </p>
+        <h3>Not on SUSE system?</h3>
 
-      <footer>
-        Uses <a href="http://en.opensuse.org/Portal:YaST">YaST</a> technology.
-      </footer>
+        <p>We are <a href="http://kobliha-suse.blogspot.de/2012/04/puppet-ruby-dsl-using-gloves-library-on.html">rewriting
+            WebYaST backend</a> to be more portable. Help us!</p>
+
+        <p>For more information about installation, see the
+          <a>documentation</a>.</p>
+
+        <h2>Documentation</h2>
+
+        <ul>
+          <li><a href="http://doc.opensuse.org/products/other/WebYaST/webyast-user">User guide</a></li>
+          <li>
+            <a href="http://doc.opensuse.org/products/other/WebYaST/webyast-vendor">Vendor guide</a>
+            (look here if you want to customize it or want see technical details)
+          </li>
+        </ul>
+
+        <h2>Development</h2>
+
+        <p>We do all <a href="https://github.com/webyast/webyast">development on GitHub</a>.
+          If you have problems with WebYaST,
+          <a href="https://bugzilla.novell.com/enter_bug.cgi?format=guided">file a bug in Bugzilla</a>.
+          If you want to contribute, send a pull reqest. You can
+          also discuss WebYaST on <a href="mail:yast-devel@opensuse.org">YaST development mailing list</a>
+          (<a href="http://lists.opensuse.org/yast-devel/">archive</a>) and
+          <a href="irc://irc.opensuse.org/#yast">#yast IRC channel</a> on Freenode.
+        </p>
+
+        <footer>
+          Uses <a href="http://en.opensuse.org/Portal:YaST">YaST</a> technology.
+        </footer>
 
       </div>
     </div>
