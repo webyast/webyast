@@ -14,6 +14,7 @@
     <!-- use jQuery from google CDN, load the local copy as a fallback -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
     <script>window.jQuery || document.write("<script src='js/jquery-1.7.2.min.js'><\/script>")</script>
+    <!-- customized jQuery UI (only Core, Widgets and Tab components)-->
     <script src='js/jquery-ui-1.8.21.custom.min.js'></script>
     <script src="js/lightbox.js"></script>
 
@@ -50,9 +51,8 @@
       #sub_menu_feat ul{float:left;}
       #topic{width:996px;margin:0 auto;border-top: 1px solid #F0F0F0;border-bottom: 1px solid #F0F0F0;}
       #phrase_text{width:996px;margin:0 auto;padding-top:7px;font-size: 15px;font-weight:normal;line-height: 20px;color:#FFFFFF;}
-      .content_feat{padding:15px;}
       .preview_feat{width:730px;float: right;min-height:350px;margin-top:20px;
-                    margin-bottom: 40px;
+                    margin-bottom: 40px; padding:15px;
                     background-color:#F6F6F6;
                     -webkit-box-shadow: 0 8px 6px -6px black;
                     -moz-box-shadow: 0 8px 6px -6px black;
@@ -165,7 +165,7 @@
       <div id="features" style="margin-top:20px;">
         <div id="sub_menu_feat">
           <ul>
-            <li class="items_first pdv pdb upp"><a href="#" id="features_link">» Features</a></li>
+            <li class="items_first pdv pdb upp"><a href="#features" id="features_link">» Features</a></li>
             <li class="items_first pdv upp"><a href="#" id="installation_menu">» Installation</a></li>
             <li class="items_first subitem inst_item"><a href="#inst_suse122" id="inst_suse122_link">» openSUSE-12.2</a></li>
             <li class="items_first subitem inst_item"><a href="#inst_suse121" id="inst_suse121_link">» openSUSE-12.1</a></li>
@@ -189,7 +189,7 @@ zypper in -t pattern webyast
               The WebYaST user interface should load.
           </div>
 
-          <div id="inst_suse121" class="content_feat preview_feat">
+          <div id="inst_suse121" class="preview_feat">
             <h3><a name="opensuse121_installation">Installing WebYaST in openSUSE 12.1</a></h3>
 
             <p>Run the following commands (as <em>root</em> user):</p>
@@ -208,7 +208,7 @@ zypper in -t pattern webyast-ui webyast-ws
 
           </div>
 
-          <div id="inst_sles11sp2" class="content_feat preview_feat">
+          <div id="inst_sles11sp2" class="preview_feat">
             <h3>Installing WebYaST in SLES 11 SP2</h3>
 
             <p>Make sure your SLES system is registered and run the following commands (as <em>root</em> user):</p>
@@ -219,7 +219,7 @@ zypper mr -e SLE11-WebYaST-SP2-Updates</pre>
 
             <p>Then continue with steps described in <a href="#opensuse121_installation">the openSUSE-12.1 installation</a> section.</p>
           </div>
-          <div id="development" class="content_feat preview_feat">
+          <div id="development" class="preview_feat">
             <h3>Development</h3>
 
             <p>We do all <a href="https://github.com/webyast/webyast">development on GitHub</a>.
@@ -232,7 +232,7 @@ zypper mr -e SLE11-WebYaST-SP2-Updates</pre>
             </p>
           </div>
 
-          <div id="documentation" class="content_feat preview_feat">
+          <div id="documentation" class="preview_feat">
             <h3>WebYaST documentation</h3>
 
             <ul>
