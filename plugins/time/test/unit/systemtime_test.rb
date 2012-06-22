@@ -137,13 +137,12 @@ class SystemtimeTest < ActiveSupport::TestCase
     msg_mock = mock()
     msg_mock.stubs(:error_name).returns("org.freedesktop.DBus.Error.NoReply")
     msg_mock.stubs(:params).returns(["test","test"])
-    x= YastService.stubs(:Call)
-    x.with("YaPI::TIME::Write",WRITE_ARGUMENTS_TIME).raises(DBus::Error,msg_mock).once
+    YastService.stubs(:Call).with("YaPI::TIME::Write",WRITE_ARGUMENTS_TIME).raises(DBus::Error,msg_mock)
 #also if error is raised due to time moving collectd must be restarted
-    x.with("YaPI::SERVICES::Execute",{
+    YastService.stubs(:Call).with("YaPI::SERVICES::Execute",{
             "name" => ["s","collectd"],
             "action" => ["s","restart"]
-          }).once
+          })
 
     @model.timezone = "America/Kentucky/Monticello"
     @model.utcstatus = false
