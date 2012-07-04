@@ -216,8 +216,14 @@ case "$1" in
             IFC=`LC_ALL=C route | grep "^default" | tr -s " " | cut -d " " -f 8`
             IP=`LC_ALL=C ifconfig $IFC | grep "inet addr" | cut -d ":" -f 2 | cut -d " " -f 1`
             PORT=`LC_ALL=C grep "listen" $NGINX_CONFIG|cut -d ";" -f 1|tr -s " "|cut -d " " -f 3`
+	    HNAME=`hostname -f`
+
+	    if [ -n "$HNAME" ]; then
+		HNAME=" (https://$HNAME:$PORT/)"
+	    fi
+
             if [ -n "$IP" ]; then
-                echo -e "\t${done}The WebYaST client service is running at https://$IP:$PORT/${norm}\n"
+                echo -e "\t${done}WebYaST is running at https://$IP:$PORT/${HNAME}${norm}\n"
             else
                 echo -e "\t${warn}WebYaST could not determine the IP address for $IFC${norm}\n"
             fi
