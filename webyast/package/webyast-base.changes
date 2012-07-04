@@ -1,4 +1,11 @@
 -------------------------------------------------------------------
+Wed Jul  4 09:27:30 UTC 2012 - lslezak@suse.cz
+
+- %post - reload DBus config only when the system bus socket is
+  present to avoid build hangs (bnc#767066)
+- 0.3.12
+
+-------------------------------------------------------------------
 Wed Jul  4 06:34:29 UTC 2012 - lslezak@suse.cz
 
 - rcwebyast - prerequire $network service (bnc#764871)
