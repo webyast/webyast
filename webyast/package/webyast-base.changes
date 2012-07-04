@@ -1,4 +1,11 @@
 -------------------------------------------------------------------
+Wed Jul  4 06:34:29 UTC 2012 - lslezak@suse.cz
+
+- rcwebyast - prerequire $network service (bnc#764871)
+- rcwebyast - print also FQDN URL (if available)
+- 0.3.11
+
+-------------------------------------------------------------------
 Thu Jun 14 08:36:05 UTC 2012 - cfarrell@suse.com
 
 - license update: LGPL-2.1 and GPL-2.0 and Apache-2.0
