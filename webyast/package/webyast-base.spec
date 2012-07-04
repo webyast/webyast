@@ -412,10 +412,13 @@ echo "Database is ready"
 if [ -d /usr/lib64 ]; then
   sed -i "s/passenger_root \/usr\/lib/passenger_root \/usr\/lib64/" /etc/webyast/nginx.conf
 fi
-#
+
 # try-reload D-Bus config (bnc#635826)
-#
-dbus-send --print-reply --system --dest=org.freedesktop.DBus / org.freedesktop.DBus.ReloadConfig >/dev/null ||:
+# check if the system bus socket is present to avoid errors/hangs during RPM build (bnc#767066)
+if [ -S /var/run/dbus/system_bus_socket ]; then
+  echo "Reloading DBus configuration..."
+  dbus-send --print-reply --system --dest=org.freedesktop.DBus / org.freedesktop.DBus.ReloadConfig >/dev/null ||:
+fi
 
 # update firewall config
 if grep -q webyast-ui /etc/sysconfig/SuSEfirewall2; then
