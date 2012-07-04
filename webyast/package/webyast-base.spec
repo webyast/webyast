@@ -421,13 +421,15 @@ if [ -S /var/run/dbus/system_bus_socket ]; then
 fi
 
 # update firewall config
-if grep -q webyast-ui /etc/sysconfig/SuSEfirewall2; then
-  echo "Updating firewall config..."
-  sed -i "s/\(^[ \t]*FW_CONFIGURATIONS_.*[ \t]*=[ \t]*\".*[ \t]*\)webyast-ui\(.*$\)/\1webyast\2/" /etc/sysconfig/SuSEfirewall2
+if [ -f /etc/sysconfig/SuSEfirewall2 ]; then
+  if grep -q webyast-ui /etc/sysconfig/SuSEfirewall2; then
+    echo "Updating firewall config..."
+    sed -i "s/\(^[ \t]*FW_CONFIGURATIONS_.*[ \t]*=[ \t]*\".*[ \t]*\)webyast-ui\(.*$\)/\1webyast\2/" /etc/sysconfig/SuSEfirewall2
 
-  # reload the changes
-  echo "Restarting firewall..."
-  /sbin/rcSuSEfirewall2 try-restart
+    # reload the changes
+    echo "Restarting firewall..."
+    /sbin/rcSuSEfirewall2 try-restart
+  fi
 fi
 
 #---------------------------------------------------------------
