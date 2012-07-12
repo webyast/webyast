@@ -4,6 +4,7 @@ plugins/status/config/status_limits.yaml
 coverage
 plugins/*/package/www.tar.bz2
 pot
+*.sqlite3
 /plugins/activedirectory/nbproject/private/
 /plugins/administrator/nbproject/private/
 /plugins/eulas/nbproject/private/
@@ -24,6 +25,5 @@ pot
 /plugins/terminal/nbproject/private/
 /plugins/time/nbproject/private/
 /plugins/users/nbproject/private/
-
 /webyast-tasks/nbproject/private/
 /ruby-polkit1/nbproject/private/
