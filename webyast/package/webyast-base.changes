@@ -1,4 +1,9 @@
 -------------------------------------------------------------------
+Tue Jul 17 08:24:22 UTC 2012 - lslezak@suse.cz
+
+- enabled HTTP Basic authentication (needed for REST API)
+
+-------------------------------------------------------------------
 Wed Jul  4 09:27:30 UTC 2012 - lslezak@suse.cz
 
 - %post - reload DBus config only when the system bus socket is
