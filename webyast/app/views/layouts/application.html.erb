@@ -32,6 +32,30 @@
   <%= javascript_include_tag "application" %>
   <%= csrf_meta_tags %>
 
+  <%# HTTP basic authorization logout hack %>
+  <% if request.authorization %>
+    <script type="text/javascript">
+      $(document).ready(function() {
+        $("#logout_link").click(function() {
+          if ($.browser.msie())
+          {
+            <%# MSIE has API for cleaning authentication cache -%>
+            document.execCommand("ClearAuthenticationCache");
+          }
+          else
+          {
+            <%# otherwise use AJAX hack -%>
+            var xmlhttp = new XMLHttpRequest();
+            <%# browser should replace the cached credentials with these dummy ones -%>
+            xmlhttp.open("GET", "<% url_for destroy_account_session_path -%>", true, "logout", "logout");
+            xmlhttp.send("");
+            xmlhttp.abort();
+          }
+        });
+      });
+    </script>
+  <% end %>
+
   <title><%= _("WebYaST") %></title>
 
   <%= yield :head %>
@@ -85,7 +109,7 @@
               <%= render :partial => "main/language_list" %>
             </span>
             <span class="userbar-icon logout-icon">
-              <%= link_to _("Logout"), :controller => "sessions", :action => "destroy" %>
+              <%= link_to _("Logout"), destroy_account_session_path, :id => "logout_link" %>
             </span>
           </span>
         </span>
