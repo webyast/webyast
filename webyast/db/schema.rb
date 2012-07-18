@@ -32,8 +32,8 @@ ActiveRecord::Schema.define(:version => 20120606095802) do
     t.string   "session"
     t.string   "picked_md5"
     t.string   "refreshed_md5"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",    :null => false
+    t.datetime "updated_at",    :null => false
   end
 
   create_table "delayed_jobs", :force => true do |t|
@@ -45,8 +45,8 @@ ActiveRecord::Schema.define(:version => 20120606095802) do
     t.datetime "locked_at"
     t.datetime "failed_at"
     t.string   "locked_by"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",                :null => false
+    t.datetime "updated_at",                :null => false
     t.string   "queue"
   end
 
