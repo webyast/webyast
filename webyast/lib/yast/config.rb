@@ -38,12 +38,24 @@ def read_config(key = "")
   end
 end
 
+# TODO FIXME: use Yast module name here (compatible with Rails autoloading)
 module YaST
   CONFIG=read_config()
   if ENV['WEBYAST_POLICYKIT']== 'true'
     POLKIT1 = false
   else
     POLKIT1 = read_config("polkit1") || true
+  end
+end
+
+module Yast
+  module Config
+    config = read_config || {}
+
+    # enabled when missing or invalid value
+    WEB_UI_ENABLED = config["web_ui_enabled"] != false
+    # disabled when missing or invalid value
+    REST_API_ENABLED = !(config["rest_api_enabled"] != true)
   end
 end
 

@@ -24,6 +24,7 @@ require 'haml_gettext' # translate haml file on the fly
 class ApplicationController < ActionController::Base
   include FastGettext::Translation
 
+  before_filter :format_check
   before_filter :authenticate_account!
   before_filter :set_gettext_locale
   before_filter :init_cache
@@ -39,6 +40,22 @@ class ApplicationController < ActionController::Base
   end
 
 protected
+
+  def format_check
+    if request.format == :xml && !Yast::Config::REST_API_ENABLED
+      render :xml => {:description => "REST API (XML interface) is not enabled in configuration file (/etc/webyast/config.yml)."}.to_xml(:root => :error), :status => 404
+    else
+      if !Yast::Config::WEB_UI_ENABLED
+        if request.format == :html
+          render 'main/disabled', :status => 404
+        else
+          # for all other formats just return 404 with empty data
+          head :status => 404
+        end
+      end
+    end
+  end
+
   def redirect_success
     logger.debug session.inspect
     if Basesystem.new.load_from_session(session).in_process?
