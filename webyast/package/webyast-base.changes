@@ -3,6 +3,7 @@ Wed Jul 18 09:32:04 UTC 2012 - lslezak@suse.cz
 
 - allow disabling Web UI or REST API in WebYast config file
   (/etc/webyast/config.yml)
+- added custom 404 error page
 
 -------------------------------------------------------------------
 Tue Jul 17 08:24:22 UTC 2012 - lslezak@suse.cz

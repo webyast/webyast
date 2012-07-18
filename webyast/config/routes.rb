@@ -55,4 +55,8 @@ Webyast::Application.routes.draw do
   match '/restdoc.:format' => 'restdoc#index', :as => :restdoc
   match '/notifiers/status.:format' => 'notifier#status', :as => :notifier
   match '/:controller(/:action(/:id))'
+
+  # for custom 404 error handling, workaround for a Rails bug
+  # see https://rails.lighthouseapp.com/projects/8994/tickets/4444-can-no-longer-rescue_from-actioncontrollerroutingerror
+  match '*a', :to => 'errors#routing'
 end
