@@ -42,11 +42,11 @@ class ApplicationController < ActionController::Base
 protected
 
   def format_check
-    if request.format == :xml && !Yast::Config::REST_API_ENABLED
+    if request.format.xml? && !Yast::Config::REST_API_ENABLED
       render :xml => {:description => "REST API (XML interface) is not enabled in configuration file (/etc/webyast/config.yml)."}.to_xml(:root => :error), :status => 404
     else
       if !Yast::Config::WEB_UI_ENABLED
-        if request.format == :html
+        if request.format.html?
           render 'main/disabled', :status => 404
         else
           # for all other formats just return 404 with empty data
