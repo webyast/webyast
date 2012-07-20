@@ -530,7 +530,7 @@ fieldset fieldset {
   display: block;
   width: 23px;
   height: 23px;
-  background: transparent url(/assets/bug.png) no-repeat scroll 0 0;
+  background: transparent url(/assets/images/bug.png) no-repeat scroll 0 0;
   float: left; }
 
 .status-icon + span {
