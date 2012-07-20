@@ -17,7 +17,7 @@
 
 
 Name:           rubygem-webyast-time
-Version:        0.3.3
+Version:        0.3.4
 Release:        0
 %define mod_name webyast-time
 %define mod_full_name %{mod_name}-%{version}
@@ -33,10 +33,10 @@ BuildRequires:  webyast-base >= 0.3
 BuildRequires:  webyast-base-testsuite
 PreReq:         webyast-base >= 0.3, rubygem-webyast-ntp, rubygem-webyast-services
 
-Obsoletes:	webyast-time-ws
-Obsoletes:	webyast-time-ui
-Provides:	webyast-time-ws
-Provides:	webyast-time-ui
+Obsoletes:      webyast-time-ui
+Obsoletes:      webyast-time-ws
+Provides:       webyast-time-ui
+Provides:       webyast-time-ws
 
 Url:            http://en.opensuse.org/Portal:WebYaST
 Summary:        WebYaST - time management
@@ -44,13 +44,13 @@ License:        GPL-2.0
 Group:          Productivity/Networking/Web/Utilities
 Source:         %{mod_full_name}.gem
 
-# YaPI/TIME.pm
+# YaPI/TIME.pm, *.policy
 %if 0%{?suse_version} == 0 || %suse_version > 1110
 # 11.2 or newer
-Requires:       yast2-country >= 2.18.10
+PreReq:       yast2-country >= 2.18.10
 %else
 # 11.1 or SLES11
-Requires:       yast2-country >= 2.17.34.2
+PreReq:       yast2-country >= 2.17.34.2
 %endif
 
 %package doc

@@ -1,4 +1,11 @@
 -------------------------------------------------------------------
+Fri Jul 20 14:44:35 UTC 2012 - lslezak@suse.cz
+
+- PreRequire yast2-country so the *.policy files are available
+  when granting permissions in %post (bnc#762518)
+- 0.3.4
+
+-------------------------------------------------------------------
 Fri Jun 22 11:47:14 UTC 2012 - lslezak@suse.cz
 
 - fixed testsuite
