@@ -104,7 +104,7 @@ POLKIT_SECTION = "55-webyast.d"
         result << "permissions have a wrong format"
       else
         case command
-          when :grant:
+          when :grant then
             begin
               if @polkit1
                 PolKit1::polkit1_write(POLKIT_SECTION, p, true, user)
@@ -120,7 +120,7 @@ POLKIT_SECTION = "55-webyast.d"
             rescue Exception => e
               result << e.message
             end   
-          when :revoke:
+          when :revoke then
             begin
               if @polkit1
                 PolKit1::polkit1_write(POLKIT_SECTION, p, false, user)
@@ -136,7 +136,7 @@ POLKIT_SECTION = "55-webyast.d"
             rescue Exception => e
               result << e.message
             end   
-          when :check:
+          when :check then
             if @polkit1
               if PolKit1::polkit1_check(p, user) == :yes
                 result << "yes"
@@ -166,19 +166,19 @@ POLKIT_SECTION = "55-webyast.d"
     user = Etc.getpwuid(uid).name
     begin
       case command
-        when :grant:
+        when :grant then
           if @polkit1
             return PolKit1.polkit1_check(PERMISSION_WRITE, user) == :yes
           else
             return PolKit.polkit_check(PERMISSION_WRITE, user) == :yes
           end
-        when :revoke:
+        when :revoke then
           if @polkit1
             return PolKit1.polkit1_check(PERMISSION_WRITE, user) == :yes
           else
             return PolKit.polkit_check(PERMISSION_WRITE, user) == :yes
           end
-        when :check:
+        when :check then
           if @polkit1
             return PolKit1.polkit1_check(PERMISSION_READ, user) == :yes
           else
