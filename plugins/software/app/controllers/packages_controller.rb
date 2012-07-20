@@ -24,7 +24,7 @@ require 'singleton'
 class PackagesController < ApplicationController
 
    # always check permissions
-   before_filter :check_read_permissions, :only => {:index, :show}
+   before_filter :check_read_permissions, :only => [:index, :show]
 
   private
 

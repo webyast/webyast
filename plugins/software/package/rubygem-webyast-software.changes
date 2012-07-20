@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Fri Jul 20 13:52:12 UTC 2012 - lslezak@suse.cz
+
+- fixed crash in Ruby 1.9 (syntax error)
+- 0.3.23
+
+-------------------------------------------------------------------
 Tue May 29 11:58:12 UTC 2012 - lslezak@suse.cz
 
 - updated database.yml for Rails 3.2
