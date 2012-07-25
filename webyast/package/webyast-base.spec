@@ -486,7 +486,6 @@ fi
 %{webyast_dir}/Rakefile
 %{webyast_dir}/config.ru
 %{webyast_dir}/script
-%{webyast_dir}/vendor
 %dir %{webyast_dir}/config
 %{webyast_dir}/config/boot.rb
 %{webyast_dir}/config/database.yml

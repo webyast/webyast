@@ -56,6 +56,14 @@ module Yast
     WEB_UI_ENABLED = config["web_ui_enabled"] != false
     # disabled when missing or invalid value
     REST_API_ENABLED = !(config["rest_api_enabled"] != true)
+
+    def self.web_ui_enabled
+      WEB_UI_ENABLED
+    end
+
+    def self.rest_api_enabled
+      REST_API_ENABLED
+    end
   end
 end
 

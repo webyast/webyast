@@ -156,7 +156,7 @@ module YaST
     def self.config_default_location
       # pattern that rails is following too
       # see
-      # http://www.danielcadenas.com/2008/09/stubbingmocking-constants-with-mocha.html
+      # http://danielcadenas.com/blog/2008/09/10/stubbingmocking-constants-with-mocha/
       CONFIG_DEFAULT_LOCATION
     end
     

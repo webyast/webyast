@@ -67,6 +67,18 @@ def Permission.dbus_obj
     return FakeDbus.new
 end
 
+# mock global config - enable both WEB UI and REST API
+module Yast
+  module Config
+    def self.web_ui_enabled
+      true
+    end
+
+    def self.rest_api_enabled
+      true
+    end
+  end
+end
 
 # use a different DB for tests -  needed during RPM build
 if !ENV['TEST_DB_PATH'].blank? && Rails.env.test?
