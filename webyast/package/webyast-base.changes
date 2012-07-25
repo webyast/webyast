@@ -4,7 +4,7 @@ Wed Jul 25 06:58:47 UTC 2012 - lslezak@suse.cz
 - %post - do not start backround prefetch when running
   'rake db:migrate' (concurrent DB access can cause deadlock)
   (this is a proper fix for bnc#767066)
-- Ruby 1.9 fixe
+- Ruby 1.9 fixes
 - 0.3.13
 
 -------------------------------------------------------------------
