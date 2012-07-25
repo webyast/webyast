@@ -26,7 +26,7 @@ GettextI18nRails.translations_are_html_safe = true
 
 YastCache.active = Rails.env.production? ? true : false
 
-if YastCache.active
+if YastCache.active && !ENV["DISABLE_DATA_PREFETCH"]
   #check if table for caches exist and cache is active
   if ActiveRecord::Base.connection.tables.include?('data_caches') &&
      ActiveRecord::Base.connection.tables.include?('delayed_jobs')

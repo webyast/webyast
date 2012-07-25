@@ -402,7 +402,7 @@ rm -f Gemfile.lock
 %if %suse_version <= 1110
 export WEBYAST_POLICYKIT='true'
 %endif
-RAILS_ENV=production rake db:migrate
+DISABLE_DATA_PREFETCH=true RAILS_ENV=production rake db:migrate
 chown -R %{webyast_user}: db
 chown -R %{webyast_user}: log
 echo "Database is ready"
