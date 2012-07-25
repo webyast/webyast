@@ -5,6 +5,7 @@ Wed Jul 25 06:58:47 UTC 2012 - lslezak@suse.cz
   'rake db:migrate' (concurrent DB access can cause deadlock)
   (this is a proper fix for bnc#767066)
 - Ruby 1.9 fixe
+- 0.3.13
 
 -------------------------------------------------------------------
 Wed Jul 18 09:32:04 UTC 2012 - lslezak@suse.cz
