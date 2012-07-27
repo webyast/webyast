@@ -27,29 +27,22 @@
       ul a:hover{color:#4682B4;}
 
       /* hover border for screenshot images*/
-      a img.link{border: 3px solid transparent;}
-      a:hover img.link {border: 3px solid #D6E3EE;}
+      img.link{border: 3px solid transparent;}
+      img.link:hover {border: 3px solid #D6E3EE;}
 
       #content{width:100%;margin:0;}
       #phrase{width:100%;background:#4682B4;}
       #header{
-        background: #666666;
+        background: url("images/gradient-dark-header.png") repeat-x scroll left bottom #666666;
         border-bottom: 1px solid #333333;
         font-size: 0.8em;
         font-weight: bold;
-        /* created at http://www.colorzilla.com/gradient-editor/#4c4c4c+0,595959+5,666666+50,474747+95,2c2c2c+100;DarkHeader*/
-        background: -moz-linear-gradient(top,  rgba(76,76,76,1) 0%, rgba(89,89,89,1) 5%, rgba(102,102,102,1) 50%, rgba(71,71,71,1) 95%, rgba(44,44,44,1) 100%);
-        background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(76,76,76,1)), color-stop(5%,rgba(89,89,89,1)), color-stop(50%,rgba(102,102,102,1)), color-stop(95%,rgba(71,71,71,1)), color-stop(100%,rgba(44,44,44,1)));
-        background: -webkit-linear-gradient(top,  rgba(76,76,76,1) 0%,rgba(89,89,89,1) 5%,rgba(102,102,102,1) 50%,rgba(71,71,71,1) 95%,rgba(44,44,44,1) 100%);
-        background: -o-linear-gradient(top,  rgba(76,76,76,1) 0%,rgba(89,89,89,1) 5%,rgba(102,102,102,1) 50%,rgba(71,71,71,1) 95%,rgba(44,44,44,1) 100%);
-        background: -ms-linear-gradient(top,  rgba(76,76,76,1) 0%,rgba(89,89,89,1) 5%,rgba(102,102,102,1) 50%,rgba(71,71,71,1) 95%,rgba(44,44,44,1) 100%);
-        background: linear-gradient(to bottom,  rgba(76,76,76,1) 0%,rgba(89,89,89,1) 5%,rgba(102,102,102,1) 50%,rgba(71,71,71,1) 95%,rgba(44,44,44,1) 100%);
-        filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#4c4c4c', endColorstr='#2c2c2c',GradientType=0 );
       }
       #header-content{width:996px;margin:0 auto;}
       #header-content a{margin:5px 100px 0 0;color:#DDD;text-decoration:none;line-height:30px;}
       #header-content a:hover{color:#7EA8CA;}
       #header-content #header-logo {float: left;margin-top: 3px;}
+      #header-logo-img{border:none}
       #motto{color:#4682B4;font-style: italic;font-size: 1.8em;margin-bottom:30px;}
       #logo-img{vertical-align: middle;}
       #showcase{background: url("images/square_bg.png") repeat scroll left top transparent;}
@@ -127,7 +120,7 @@
       <div id="header">
         <div id="header-content">
           <a href="http://www.opensuse.org" id="header-logo">
-            <img width="46" height="26" alt="Header Logo" src="images/header-logo.png"></a>
+            <img id="header-logo-img" width="46" height="26" alt="Header Logo" src="images/header-logo.png"/></a>
           <a href="http://news.opensuse.org/">News</a>
           <a href="http://lizards.opensuse.org/">Blogs</a>
           <a href="http://software.opensuse.org">Download</a>
