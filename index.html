@@ -25,9 +25,6 @@
       body {margin:0;background:none repeat scroll 0 0 #FFFFFF;font-family: sans-serif;}
       #content{width:100%;margin:0;}
 
-      ul a{text-decoration: none;color: #666666;}
-      ul a:hover{color:#4682B4;}
-
       /* hover border for screenshot images*/
       img.link{border: 3px solid transparent;}
       img.link:hover {border: 3px solid #D6E3EE;}
@@ -75,21 +72,24 @@
       /* screenshots */
       .thumb{margin-right: 5px; float:left;}
 
-      #sub_menu_feat ul{float:left;}
-      .preview_feat{width:730px;float: right;min-height:350px;margin-top:20px;
+      /* features menu */
+      #feature_nav{float:left;list-style-type:none;padding:0;}
+      #feature_nav li a{text-decoration: none;color: #666666;}
+      #feature_nav li a:hover{color:#4682B4;}
+
+      .tab-cont{width:730px;float: right;min-height:350px;margin-top:20px;
                     margin-bottom: 40px; padding:15px;
                     background-color:#F6F6F6;color:#666666;
                     -webkit-box-shadow: 0 8px 6px -6px black;
                     -moz-box-shadow: 0 8px 6px -6px black;
                     box-shadow: 0 8px 6px -6px black;}
-      .preview_feat h3{border-bottom: 1px solid #DDDDDD;}
-      .preview_feat ul{list-style-type:disc;margin-left:20px;}
-      .preview_feat li{margin-bottom:5px;}
-      .preview_feat a{color:#4682B4;text-decoration: underline;}
-      .preview_feat h3 a{text-decoration: none;color:#666666}
-      .preview_feat h4{margin: 40px 0 10px}
 
-      ul{list-style-type:none;padding:0;}
+      .tab-cont h3{border-bottom: 1px solid #DDDDDD;}
+      .tab-cont h3 a{text-decoration: none;color:#666666}
+
+      .tab-cont li{margin-bottom:5px;}
+      .tab-cont h4{margin: 40px 0 10px}
+
       .items_first{color: #666666;width: 160px;margin-bottom: 10px;}
       .items{border-bottom: 1px solid #F0F0F0;color: #666666;width: 160px;margin-bottom: 5px;}
       .pdv{padding-top:5px;}
@@ -220,7 +220,7 @@
 
       <div class="container">
         <div id="sub_menu_feat">
-          <ul>
+          <ul id="feature_nav">
             <li class="items_first pdv pdb upp"><a href="#webyast_features">» Features</a></li>
             <li class="items_first pdv upp"><a href="#" id="installation_menu">» Installation</a></li>
             <li class="items_first subitem inst_item"><a href="#inst_suse122">» openSUSE-12.2</a></li>
@@ -231,7 +231,7 @@
             <li class="items_first pdv pdb upp"><a href="#development">» Development &amp; Contact</a></li>
           </ul>
 
-          <div id="webyast_features" class="preview_feat">
+          <div id="webyast_features" class="tab-cont">
             <h3>WebYaST Features</h3>
               <p>
                 WebYaST strives for simplicity and focuses on tasks admins commonly perform (like user management or software updates).
@@ -251,7 +251,7 @@
               </ul>
           </div>
 
-          <div id="inst_suse122" class="preview_feat">
+          <div id="inst_suse122" class="tab-cont">
             <h3><a name="opensuse122_installation">Installing WebYaST in openSUSE 12.2</a></h3>
 
             <p>Run the following commands (as <em>root</em> user):</p>
@@ -266,7 +266,7 @@ zypper in -t pattern webyast
               The WebYaST user interface should load.
           </div>
 
-          <div id="inst_suse121" class="preview_feat">
+          <div id="inst_suse121" class="tab-cont">
             <h3><a name="opensuse121_installation">Installing WebYaST in openSUSE 12.1</a></h3>
 
             <p>Run the following commands (as <em>root</em> user):</p>
@@ -285,7 +285,7 @@ zypper in -t pattern webyast-ui webyast-ws
 
           </div>
 
-          <div id="inst_sles11sp2" class="preview_feat">
+          <div id="inst_sles11sp2" class="tab-cont">
             <h3>Installing WebYaST in SLES 11 SP2</h3>
 
             <p>Make sure your SLES system is registered and run the following commands (as <em>root</em> user):</p>
@@ -297,7 +297,7 @@ zypper mr -e SLE11-WebYaST-SP2-Updates</pre>
             <p>Then continue with steps described in <a href="#" id="show_inst_suse121">the openSUSE-12.1 installation</a> section.</p>
           </div>
 
-          <div id="inst_nonsuse" class="preview_feat">
+          <div id="inst_nonsuse" class="tab-cont">
             <h3>Not on a SUSE system?</h3>
 
             <p>We are <a href="http://kobliha-suse.blogspot.de/2012/03/gloves-systems-management-library-aka.html">rewriting
@@ -309,7 +309,7 @@ zypper mr -e SLE11-WebYaST-SP2-Updates</pre>
             </p>
           </div>
 
-          <div id="development" class="preview_feat">
+          <div id="development" class="tab-cont">
             <h3>Development and Contact</h3>
 
             <p>We do all <a href="https://github.com/webyast/webyast">development at GitHub</a>.
@@ -328,7 +328,7 @@ zypper mr -e SLE11-WebYaST-SP2-Updates</pre>
             </p>
           </div>
 
-          <div id="documentation" class="preview_feat">
+          <div id="documentation" class="tab-cont">
             <h3>WebYaST documentation</h3>
 
             <ul>
