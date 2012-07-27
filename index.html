@@ -22,7 +22,7 @@
       /* for jQueryUI to make tabs working properly */
       .ui-tabs .ui-tabs-hide { display: none !important; }
 
-      body {margin:0;background:none repeat scroll 0 0 #FFFFFF;font-family: sans-serif;}
+      body {margin:0;background:none repeat scroll 0 0 #FFFFFF;font-family: sans-serif;color:#666666;}
       #content{width:100%;margin:0;}
 
       /* hover border for screenshot images*/
@@ -66,36 +66,30 @@
 
       /* details sections */
       h2{width:996px;border-top: 1px solid #EEE;border-bottom: 1px solid #EEE;margin:40px auto 25px;
-        text-transform:uppercase;padding:5px 0;color:#666666;font-weight:bold;font-size:1.4em;}
+        text-transform:uppercase;padding:5px 0;font-weight:bold;font-size:1.4em;}
       .container{width:996px;margin:0 auto;}
 
       /* screenshots */
       .thumb{margin-right: 5px; float:left;}
 
       /* features menu */
-      #feature_nav{float:left;list-style-type:none;padding:0;}
+      #feature_nav{float:left;list-style-type:none;padding:0;width: 160px;}
+      #feature_nav li{margin-bottom: 10px;text-transform:uppercase;}
       #feature_nav li a{text-decoration: none;color: #666666;}
       #feature_nav li a:hover{color:#4682B4;}
+      #feature_nav .subitem{font-size: 0.8em; margin-left:20px;text-transform: none}
+      #feature_nav .inst_item{display: none;}
 
+      /* tab container */
       .tab-cont{width:700px;float:right;min-height:350px;margin-top:20px;padding:35px;
-                    background-color:#F6F6F6;color:#666666;
+                    background-color:#F6F6F6;
                     -webkit-box-shadow: 0 8px 6px -6px black;
                     -moz-box-shadow: 0 8px 6px -6px black;
                     box-shadow: 0 8px 6px -6px black;}
-
       .tab-cont h3{border-bottom: 1px solid #DDDDDD;}
-      .tab-cont h3 a{text-decoration: none;color:#666666}
-
+      .tab-cont h3 a{text-decoration: none;}
       .tab-cont li{margin-bottom:10px;}
       .tab-cont h4{margin: 40px 0 10px}
-
-      .items_first{color: #666666;width: 160px;margin-bottom: 10px;}
-      .items{border-bottom: 1px solid #F0F0F0;color: #666666;width: 160px;margin-bottom: 5px;}
-      .pdv{padding-top:5px;}
-      .pdb{padding-bottom:5px;}
-      .upp{text-transform:uppercase;}
-      .subitem{font-size: 0.8em; padding-left: 20px;}
-      .inst_item{display: none;}
 
       /* terminal output */
       pre.terminal {
@@ -220,14 +214,14 @@
       <div class="container">
         <div id="sub_menu_feat">
           <ul id="feature_nav">
-            <li class="items_first pdv pdb upp"><a href="#webyast_features">» Features</a></li>
-            <li class="items_first pdv upp"><a href="#" id="installation_menu">» Installation</a></li>
-            <li class="items_first subitem inst_item"><a href="#inst_suse122">» openSUSE-12.2</a></li>
-            <li class="items_first subitem inst_item"><a href="#inst_suse121">» openSUSE-12.1</a></li>
-            <li class="items_first subitem inst_item"><a href="#inst_sles11sp2">» SLES 11 SP2</a></li>
-            <li class="items_first pdb subitem inst_item"><a href="#inst_nonsuse">» Other distributions</a></li>
-            <li class="items_first pdv pdb upp"><a href="#documentation">» Documentation</a></li>
-            <li class="items_first pdv pdb upp"><a href="#development">» Development &amp; Contact</a></li>
+            <li><a href="#webyast_features">» Features</a></li>
+            <li><a href="#" id="installation_menu">» Installation</a></li>
+            <li class="subitem inst_item"><a href="#inst_suse122">» openSUSE-12.2</a></li>
+            <li class="subitem inst_item"><a href="#inst_suse121">» openSUSE-12.1</a></li>
+            <li class="subitem inst_item"><a href="#inst_sles11sp2">» SLES 11 SP2</a></li>
+            <li class="subitem inst_item"><a href="#inst_nonsuse">» Other distributions</a></li>
+            <li><a href="#documentation">» Documentation</a></li>
+            <li><a href="#development">» Development &amp; Contact</a></li>
           </ul>
 
           <div id="webyast_features" class="tab-cont">
