@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <title>WebYaST</title>
-    <meta name="author" content="David Majda (david@majda.cz), Ladislav SLezak">
+    <meta name="author" content="David Majda (david@majda.cz), Ladislav Slezak">
     <meta name="copyright" content="TODO">
     <meta name="keywords" content="webyast, yast, linux, system management, opensuse, suse">
     <meta name="description" content="WebYaST project home page">
@@ -23,6 +23,8 @@
       .ui-tabs .ui-tabs-hide { display: none !important; }
 
       body {margin:0;background:none repeat scroll 0 0 #FFFFFF;font-family: sans-serif;}
+      #content{width:100%;margin:0;}
+
       ul a{text-decoration: none;color: #666666;}
       ul a:hover{color:#4682B4;}
 
@@ -30,8 +32,9 @@
       img.link{border: 3px solid transparent;}
       img.link:hover {border: 3px solid #D6E3EE;}
 
-      #content{width:100%;margin:0;}
-      #phrase{width:100%;background:#4682B4;}
+      .clear {clear:both;}
+
+      /* header navigation */
       #header{
         background: url("images/gradient-dark-header.png") repeat-x scroll left bottom #666666;
         border-bottom: 1px solid #333333;
@@ -43,18 +46,36 @@
       #header-content a:hover{color:#7EA8CA;}
       #header-content #header-logo {float: left;margin-top: 3px;}
       #header-logo-img{border:none}
-      #motto{color:#4682B4;font-style: italic;font-size: 1.8em;margin-bottom:30px;}
-      #logo-img{vertical-align: middle;}
+
+      /* overview */
+      h1{font-size:50px;font-weight:bold; color: #4682B4;text-align: left;padding:30px 0 15px;margin-top:0}
       #showcase{background: url("images/square_bg.png") repeat scroll left top transparent;}
-      #showcase_claim{width:996px;margin:0 auto;padding-bottom: 10px;}
-      #claim_texts{width:460px;float:right;padding:20px;border:10px solid #D6E3EE;border-radius:20px;margin:20px;}
+      #showcase-content{width:996px;margin:0 auto;padding-bottom: 10px;}
+      #logo-img{vertical-align: middle;}
+      #motto{color:#4682B4;font-style: italic;font-size: 1.8em;margin-bottom:30px;}
       #title_image{margin:15px;float: left;}
-      #screenshot{width:996px;border-top: 1px solid #F0F0F0;border-bottom: 1px solid #F0F0F0;margin:0 auto;}
-      #thumbs_cont{width:996px;margin:0 auto;}
-      #features{width:996px;height: 190px;margin:0 auto;}
+      /* hight light box in the overview */
+      #hightlight_box{width:460px;float:right;padding:20px;border:10px solid #D6E3EE;border-radius:20px;margin:20px;}
+      #hightlight_box .title{color:#4682B4;font-size: 35px;line-height: 37px;}
+      #hightlight_box .sub_title{padding-top:20px;font-size: 15px;color:#777777;}
+      #hightlight_box .button{background:#4682B4;padding:5px;color:#FFFFFF;width:280px;border-radius:5px;text-align:center;margin: 12px auto 0;}
+      #hightlight_box .button a{color:white;text-decoration: none;}
+
+      /* overall description */
+      .highlight{width:100%;background:#4682B4;}
+      .highlight-content{width:996px;margin:0 auto;padding:5px;font-size: 15px;color:#FFFFFF;}
+      .highlight-content .section {margin: 10px 0;}
+      .highlight-content .question{font-weight: bold;font-size: 1.4em;}
+
+      /* details sections */
+      h2{width:996px;border-top: 1px solid #EEE;border-bottom: 1px solid #EEE;margin:40px auto 25px;
+        text-transform:uppercase;padding:5px 0;color:#666666;font-weight:bold;font-size:1.4em;}
+      .container{width:996px;margin:0 auto;}
+
+      /* screenshots */
+      .thumb{margin-right: 5px; float:left;}
+
       #sub_menu_feat ul{float:left;}
-      #topic{width:996px;margin:0 auto;border-top: 1px solid #F0F0F0;border-bottom: 1px solid #F0F0F0;}
-      #phrase_text{width:996px;margin:0 auto;padding:5px;font-size: 15px;color:#FFFFFF;}
       .preview_feat{width:730px;float: right;min-height:350px;margin-top:20px;
                     margin-bottom: 40px; padding:15px;
                     background-color:#F6F6F6;color:#666666;
@@ -66,14 +87,7 @@
       .preview_feat li{margin-bottom:5px;}
       .preview_feat a{color:#4682B4;text-decoration: underline;}
       .preview_feat h3 a{text-decoration: none;color:#666666}
-      #webyast_header{font-size:50px;font-weight:bold; color: #4682B4;text-align: left;padding:30px 0 15px;}
-      .title_topic{text-transform:uppercase;padding-top:5px;padding-bottom:5px;color:#666666;font-weight:bold;font-size:1.4em;}
-      .title{color:#4682B4;font-size: 35px;line-height: 37px;}
-      .sub_title{padding-top:20px;font-size: 15px;color:#777777;}
-      .hightlight{background:#4682B4;padding:5px;color:#FFFFFF;width:280px;border-radius:5px;text-align:center;margin:auto;}
-      .v_mrg{margin-top:35px;}
-      #studio_link{color:white;text-decoration: none;}
-      .thumb{width:180px;margin-left:16px;margin-top:20px;margin-bottom:30px;float:left;}
+      .preview_feat h4{margin: 40px 0 10px}
 
       ul{list-style-type:none;padding:0;}
       .items_first{color: #666666;width: 160px;margin-bottom: 10px;}
@@ -83,12 +97,16 @@
       .upp{text-transform:uppercase;}
       .subitem{font-size: 0.8em; padding-left: 20px;}
       .inst_item{display: none;}
+
+      /* terminal output */
       pre.terminal {
         background-color: #2A4E6C;
         color:  white;
         border-radius: 5px 5px 5px 5px;
         padding: 10px;
       }
+
+      /* copyright footer */
       footer{clear:both;text-align:center;font-size:0.6em;color:#AAAAAA;margin-bottom:5px}
     </style>
 
@@ -130,61 +148,77 @@
       </div>
 
       <div id="showcase">
-        <div id="showcase_claim">
-          <div id="webyast_header">
+        <div id="showcase-content">
+          <h1>
             <img id="logo-img" src="images/webyast-logo-large.png"/>
             WebYaST
-          </div>
+          </h1>
           <div id="motto">Manage your Linux workstation or server easily over the web!</div>
 
           <div id="title_image">
             <a href="images/webyast-control_panel.png" rel="lightbox" title="WebYaST control panel - the main screen"><img class="link" src="images/thumbs/webyast-control_panel-big.png"/></a>
           </div>
-          <div id="claim_texts">
+          <div id="hightlight_box">
             <div class="title">Try WebYaST online!</div>
             <div class="sub_title">Just click the Testdrive link in the right column and see WebYaST loading in your browser.</div>
-            <div class="hightlight v_mrg"><a id="studio_link" href="http://susestudio.com/a/N3CQ8b/webyast-demo-kde" target="_blank">» Try WebYaST in your browser «</a></div>
+            <div class="button"><a href="http://susestudio.com/a/N3CQ8b/webyast-demo-kde" target="_blank">» Try WebYaST in your browser «</a></div>
           </div>
-          <div style="clear:both"></div>
+          <div class="clear"></div>
         </div>
       </div>
 
-      <div id="phrase">
-        <div id="phrase_text">
-          <p>
-          <b>What is WebYaST?</b> WebYaST allows you to manage your Linux workstation or server easily using a web interface.
-          It strives for simplicity and focuses on tasks admins commonly perform (like user management or software updates).
-          WebYaST is especially useful when you can't access your machine via SSH or don't want to remember all the commands.
-          </p>
-          <p>
-          <b>What can WebYaST do?</b> Check system health and status, add, remove and edit users, update software, manage system services, configure network settings, configure firewall, <a style="text-decoration:underline;color:#FFFFFF;font-weight:bold;" href="http://doc.opensuse.org//products/other/WebYaST/webyast-user_sd/cha.webyast.user.modules.html">and much more...!</a>
-          </p>
-        </div>
-      </div>
-      <div id="screenshot" style="margin-top:40px;">
-        <div class="title_topic">Screenshots</div>
-      </div>
-
-      <div id="thumbs_cont">
-        <div class="thumb"><a href="images/webyast-root.png" rel="lightbox[webyast]" title="Administrator settings"><img src="images/thumbs/webyast-root.png" class="link"/></a></div>
-        <div class="thumb"><a href="images/webyast-status.png" rel="lightbox[webyast]" title="System status details"><img
-              src="images/thumbs/webyast-status.png" class="link"/></a></div>
-        <div class="thumb"><a href="images/webyast-firewall.png" rel="lightbox[webyast]" title="Firewall configuration"><img
-              src="images/thumbs/webyast-firewall.png" class="link"/></a></div>
-        <div class="thumb"><a href="images/webyast-patches.png" rel="lightbox[webyast]" title="Software updates"><img
-              src="images/thumbs/webyast-patches.png" class="link"/></a></div>
-        <div class="thumb"><a href="images/webyast-services.png" rel="lightbox[webyast]" title="System services"><img
-              src="images/thumbs/webyast-services.png" class="link"/></a></div>
-        <div style="clear:both"></div>
-      </div>
-
-      <div id="topic">
-        <div class="title_topic">
-          Interested in WebYaST?
+      <div class="highlight">
+        <div class="highlight-content">
+          <div class="section">
+            <div class="question">What is WebYaST?</div>
+            WebYaST allows you to manage your Linux workstation or server easily using a web interface.
+          </div>
+          <div class="section">
+            <div class="question">What can WebYaST do?</div>
+            Check system health and status, add, remove and edit users, update software, manage system services, configure network settings, configure firewall, <a style="text-decoration:underline;color:#FFFFFF;font-weight:bold;" href="http://doc.opensuse.org//products/other/WebYaST/webyast-user_sd/cha.webyast.user.modules.html">and much more...!</a>
+          </div>
         </div>
       </div>
 
-      <div id="features" style="margin-top:20px;">
+      <h2>Screenshots</h2>
+
+      <div class="container">
+        <div class="thumb">
+          <a href="images/webyast-root.png" rel="lightbox[webyast]" title="Administrator settings">
+            <img src="images/thumbs/webyast-root.png" class="link"/>
+          </a>
+        </div>
+
+        <div class="thumb">
+          <a href="images/webyast-status.png" rel="lightbox[webyast]" title="System status details">
+            <img src="images/thumbs/webyast-status.png" class="link"/>
+          </a>
+        </div>
+
+        <div class="thumb">
+          <a href="images/webyast-firewall.png" rel="lightbox[webyast]" title="Firewall configuration">
+            <img src="images/thumbs/webyast-firewall.png" class="link"/>
+          </a>
+        </div>
+
+        <div class="thumb">
+          <a href="images/webyast-patches.png" rel="lightbox[webyast]" title="Software updates">
+            <img src="images/thumbs/webyast-patches.png" class="link"/>
+          </a>
+        </div>
+
+        <div class="thumb">
+          <a href="images/webyast-services.png" rel="lightbox[webyast]" title="System services">
+            <img src="images/thumbs/webyast-services.png" class="link"/>
+          </a>
+        </div>
+
+        <div class="clear"></div>
+      </div>
+
+      <h2>Interested in WebYaST?</h2>
+
+      <div class="container">
         <div id="sub_menu_feat">
           <ul>
             <li class="items_first pdv pdb upp"><a href="#webyast_features">» Features</a></li>
@@ -199,13 +233,22 @@
 
           <div id="webyast_features" class="preview_feat">
             <h3>WebYaST Features</h3>
-            <ul>
-              <li>Remote access using web browser</li>
-              <li>Easy to use user interface</li>
-              <li>Based on well known <a href="http://en.opensuse.org/Portal:YaST">YaST</a> system management tool</li>
-              <li>Modular architecture with plugins</li>
-              <li>Optional non-root access</li>
-            </ul>
+              <p>
+                WebYaST strives for simplicity and focuses on tasks admins commonly perform (like user management or software updates).
+              </p>
+
+              <p>
+                WebYaST is especially useful when you can't access your machine via SSH or don't want to remember all the commands.
+              </p>
+
+              <h4>Main WebYaST Features</h4>
+              <ul>
+                <li>Remote access using web browser</li>
+                <li>Easy to use user interface</li>
+                <li>Based on well known <a href="http://en.opensuse.org/Portal:YaST">YaST</a> system management tool</li>
+                <li>Modular architecture with plugins</li>
+                <li>Optional non-root access</li>
+              </ul>
           </div>
 
           <div id="inst_suse122" class="preview_feat">
