@@ -77,8 +77,7 @@
       #feature_nav li{margin-bottom: 10px;text-transform:uppercase;}
       #feature_nav li a{text-decoration: none;color: #666666;}
       #feature_nav li a:hover{color:#4682B4;}
-      #feature_nav .subitem{font-size: 0.8em; margin-left:20px;text-transform: none}
-      #feature_nav .inst_item{display: none;}
+      #feature_nav .subitem{font-size: 0.8em; margin-left:20px;text-transform: none;display: none;}
 
       /* tab container */
       .tab-cont{width:700px;float:right;min-height:350px;margin-top:20px;padding:35px;
@@ -107,10 +106,10 @@
       $(document).ready(
       function(){
         $("#installation_menu").toggle(function() {
-          $(".inst_item").slideDown();
+          $(".subitem").slideDown();
           return false;
         }, function() {
-          $(".inst_item").slideUp();
+          $(".subitem").slideUp();
           return false;
         });
 
@@ -216,10 +215,10 @@
           <ul id="feature_nav">
             <li><a href="#webyast_features">» Features</a></li>
             <li><a href="#" id="installation_menu">» Installation</a></li>
-            <li class="subitem inst_item"><a href="#inst_suse122">» openSUSE-12.2</a></li>
-            <li class="subitem inst_item"><a href="#inst_suse121">» openSUSE-12.1</a></li>
-            <li class="subitem inst_item"><a href="#inst_sles11sp2">» SLES 11 SP2</a></li>
-            <li class="subitem inst_item"><a href="#inst_nonsuse">» Other distributions</a></li>
+            <li class="subitem"><a href="#inst_suse122">» openSUSE-12.2</a></li>
+            <li class="subitem"><a href="#inst_suse121">» openSUSE-12.1</a></li>
+            <li class="subitem"><a href="#inst_sles11sp2">» SLES 11 SP2</a></li>
+            <li class="subitem"><a href="#inst_nonsuse">» Other distributions</a></li>
             <li><a href="#documentation">» Documentation</a></li>
             <li><a href="#development">» Development &amp; Contact</a></li>
           </ul>
