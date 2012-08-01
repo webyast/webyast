@@ -1,4 +1,11 @@
 -------------------------------------------------------------------
+Tue Jul 31 20:09:51 UTC 2012 - lslezak@suse.cz
+
+- Gemfile - removed versioned devise dependency
+- Support rubygem-devise 2.x
+- 0.3.14
+
+-------------------------------------------------------------------
 Wed Jul 25 06:58:47 UTC 2012 - lslezak@suse.cz
 
 - %post - do not start backround prefetch when running
