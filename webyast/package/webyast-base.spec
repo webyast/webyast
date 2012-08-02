@@ -405,6 +405,7 @@ export WEBYAST_POLICYKIT='true'
 DISABLE_DATA_PREFETCH=true RAILS_ENV=production rake db:migrate
 chown -R %{webyast_user}: db
 chown -R %{webyast_user}: log
+chmod -R o-r log
 echo "Database is ready"
 #
 # patching nginx configuration
