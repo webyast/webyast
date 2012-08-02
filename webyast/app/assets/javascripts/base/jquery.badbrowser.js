@@ -19,8 +19,8 @@
 */
 
 function badBrowser(){
-    if(   ($.browser.msie() && $.browser.version.number() == 8 )
-       || ($.browser.firefox() && $.browser.version.number() >= 3.5 )
+    if(   ($.browser.msie() && $.browser.version.number() >= 9 )
+       || ($.browser.firefox() && $.browser.version.number() >= 10 )
       ) { return false;}
 //chrome detection, not supported by our version of jqbrowser
     if ( /Chrome/.test(navigator.userAgent))
