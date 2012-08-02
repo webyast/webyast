@@ -171,6 +171,10 @@ rc_reset
 # with force-reload (in case signaling is not supported) are
 # considered a success.
 
+# set default file permissions to -rw------
+# (log files should not be readable by all)
+umask 0066
+
 case "$1" in
     start)
     if [ ! -e  $COMBINEDCERTFILE ]
