@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Thu Aug  2 16:04:14 UTC 2012 - lslezak@suse.cz
+
+- rcwebyast - added umask 0066 to avoid world readable log files
+- supported browsers: IE9+ and FF10+
+
+-------------------------------------------------------------------
 Tue Jul 31 20:09:51 UTC 2012 - lslezak@suse.cz
 
 - Gemfile - removed versioned devise dependency
