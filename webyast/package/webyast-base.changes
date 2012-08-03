@@ -1,4 +1,9 @@
 -------------------------------------------------------------------
+Fri Aug  3 09:55:40 UTC 2012 - lslezak@suse.cz
+
+- correctly include IE CSS fixes
+
+-------------------------------------------------------------------
 Thu Aug  2 16:04:14 UTC 2012 - lslezak@suse.cz
 
 - rcwebyast - added umask 0066 to avoid world readable log files
