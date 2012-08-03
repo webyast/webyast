@@ -407,12 +407,6 @@ chown -R %{webyast_user}: db
 chown -R %{webyast_user}: log
 chmod -R o-r log
 echo "Database is ready"
-#
-# patching nginx configuration
-#
-if [ -d /usr/lib64 ]; then
-  sed -i "s/passenger_root \/usr\/lib/passenger_root \/usr\/lib64/" /etc/webyast/nginx.conf
-fi
 
 # try-reload D-Bus config (bnc#635826)
 # check if the system bus socket is present to avoid errors/hangs during RPM build (bnc#767066)
@@ -514,7 +508,7 @@ fi
 %config /etc/webyast/config.yml
 %endif
 #nginx stuff
-%config(noreplace) /etc/webyast/nginx.conf
+%config /etc/webyast/nginx.conf
 %config /etc/webyast/fastcgi.conf
 %config /etc/webyast/fastcgi_params
 %config /etc/webyast/koi-utf
