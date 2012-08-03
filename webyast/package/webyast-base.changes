@@ -4,6 +4,7 @@ Fri Aug  3 09:55:40 UTC 2012 - lslezak@suse.cz
 - correctly include IE CSS fixes
 - better nginx/passenger config (include passenger_root.include
   file instead of patching nginx config at every start)
+- 0.3.15
 
 -------------------------------------------------------------------
 Thu Aug  2 16:04:14 UTC 2012 - lslezak@suse.cz

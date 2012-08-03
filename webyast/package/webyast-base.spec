@@ -1,5 +1,5 @@
 #
-# spec file for package webyast-base (Version 0.1.19)
+# spec file for package webyast-base
 #
 # Copyright (c) 2012 SUSE LINUX Products GmbH, Nuernberg, Germany.
 # This file and all modifications and additions to the pristine
@@ -10,7 +10,7 @@
 
 
 Name:           webyast-base
-Version:        0.3.14
+Version:        0.3.15
 Release:        0
 Provides:       yast2-webservice = %{version}
 Obsoletes:      yast2-webservice < %{version}
