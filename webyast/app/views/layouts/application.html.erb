@@ -64,14 +64,14 @@
 </head>
   <body id="shell">
     <div id='browserWarning' style="display: none">
-      <%= raw ( _("You are using an unsupported browser. Please switch to %sFireFox 3.5 or better%s or %sInternet Explorer 8%s. Thanks! [%sclose%s]") %
+      <%= raw ( _("You are using an unsupported browser. Please switch to at least %sFireFox 10%s or %sInternet Explorer 9%s. Thanks! [%sclose%s]") %
             ["<a href='http://getfirefox.com'>","</a>",
              "<a href='http://www.microsoft.com/windows/downloads/ie/getitnow.mspx'>", "</a>",
              "<a href='#' id='warningClose'>", "</a>"] ) %>
     </div>
     <noscript>
       <div id="no_js_warning">
-        <%= raw ( _("JavaScript support is missing or disabled. Please turn JavaScript on or use a supported browser (%sFireFox 3.5%s or %sInternet Explorer 8%s).") %
+        <%= raw ( _("JavaScript support is missing or disabled. Please turn JavaScript on or use a supported browser (at least %sFireFox 10%s or %sInternet Explorer 9%s).") %
             ["<a href='http://getfirefox.com'>","</a>",
              "<a href='http://www.microsoft.com/windows/downloads/ie/getitnow.mspx'>", "</a>"] ) %>
       </div>
