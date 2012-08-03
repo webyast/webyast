@@ -31,17 +31,11 @@
   height:112px;
   width:112px;
   line-height:112px;
-  margin:2px 0;
+  margin:2px;
   float:left;
   border:4px solid #ccc;
   overflow:hidden;
-
-  -moz-box-shadow: 0px 0px 1px #666, 0px 0px 10px #888;
-  -webkit-box-shadow: 0px 0px 1px #666, 0px 0px 10px #888;
-
-  -moz-border-radius:100%;
-  -webkit-border-radius:112px;
-
+  border-radius: 15px;
   background-color: #eeeeee;
   background: -moz-radial-gradient(center 45deg, circle closest-side, #eee 0%, #474747 100%) transparent;
   background: -webkit-gradient(radial, 50% 50%, 0, 50% 50%, 56, from(#eeeeee), to(#474747));
