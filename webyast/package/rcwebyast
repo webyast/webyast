@@ -196,6 +196,9 @@ case "$1" in
 	rm -f $GEMFILE_LOCK
   #generate deployment specific secret key (bnc#591345)
   SECRET=`cd /srv/www/webyast/ && rake -s secret`
+
+    # make the lock file readable for all
+    chmod a+r $GEMFILE_LOCK
   if [ -z $SECRET ]; then
     echo -n "Cannot generate secret for session. Run 'cd /srv/www/webyast/ && rake -s secret' for details."
     rc_failed
