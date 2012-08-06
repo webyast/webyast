@@ -47,11 +47,11 @@
       #header-logo-img{border:none}
 
       /* overview */
-      h1{font-size:50px;font-weight:bold; color: #4682B4;text-align: left;padding:30px 0 15px;margin-top:0}
+      h1{font-size:50px;font-weight:bold; color: #4682B4;text-align: left;padding:30px 0 15px;margin:0}
       #showcase{background: url("images/square_bg.png") repeat scroll left top transparent;}
       #showcase-content{width:996px;margin:0 auto;padding-bottom: 10px;}
       #logo-img{vertical-align: middle;}
-      #motto{color:#4682B4;font-style: italic;font-size: 1.8em;margin-bottom:30px;}
+      #motto{color:#4682B4;font-style: italic;font-size: 1.8em;margin-bottom:40px;}
       #title_image{margin:15px;float: left;}
       /* hight light box in the overview */
       #hightlight_box{width:460px;float:right;padding:20px;border:10px solid #D6E3EE;border-radius:20px;margin:20px;}
@@ -96,7 +96,7 @@
       .tab-cont h4{margin: 40px 0 10px}
 
       /* terminal output */
-      pre.terminal {
+      .terminal {
         background-color: #2A4E6C;
         color:  white;
         border-radius: 5px 5px 5px 5px;
@@ -104,7 +104,7 @@
       }
 
       /* copyright footer */
-      footer{text-align:center;font-size:0.6em;color:#AAAAAA;margin:40px 0 5px}
+      .copyright{text-align:center;font-size:0.6em;color:#AAAAAA;margin:40px 0 5px}
     </style>
 
     <script type="text/javascript">
@@ -377,7 +377,9 @@ zypper mr -e SLE11-WebYaST-SP2-Updates</pre>
       </div>
 
       <footer>
-        &copy; Copyright 2012 SUSE
+        <div class="copyright">
+          &copy; Copyright 2012 SUSE
+        </div>
       </footer>
     </div>
 
