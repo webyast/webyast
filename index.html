@@ -43,7 +43,7 @@
       #header-content{width:996px;margin:0 auto;}
       #header-content a{margin:5px 100px 0 0;color:#DDD;text-decoration:none;line-height:30px;}
       #header-content a:hover{color:#7EA8CA;}
-      #header-content #header-logo {float: left;margin-top: 3px;}
+      #header-logo {float: left;margin-top: 3px;}
       #header-logo-img{border:none}
 
       /* overview */
@@ -51,7 +51,8 @@
       #showcase{background: url("images/square_bg.png") repeat scroll left top transparent;}
       #showcase-content{width:996px;margin:0 auto;padding-bottom: 10px;}
       #logo-img{vertical-align: middle;}
-      #motto{color:#4682B4;font-style: italic;font-size: 1.8em;margin-bottom:40px;}
+      .motto{color:#4682B4;font-style: italic;font-size: 1.8em;}
+      .header-motto{margin-bottom:40px;}
       #title_image{margin:15px;float: left;}
       /* hight light box in the overview */
       #hightlight_box{width:460px;float:right;padding:20px;border:10px solid #D6E3EE;border-radius:20px;margin:20px;}
@@ -74,8 +75,8 @@
       /* screenshots */
       .thumb{margin-right: 5px; float:left;}
       /* hover border for screenshot images*/
-      img.link{border: 3px solid transparent;}
-      img.link:hover {border: 3px solid #D6E3EE;}
+      .imglink{border: 3px solid transparent;}
+      .imglink:hover {border: 3px solid #D6E3EE;}
 
       /* features menu */
       #feature_nav{float:left;list-style-type:none;padding:0;width: 160px;}
@@ -149,10 +150,10 @@
             <img id="logo-img" src="images/webyast-logo-large.png"/>
             WebYaST
           </h1>
-          <div id="motto">Manage your Linux workstation or server easily over the web!</div>
+          <div class="motto header-motto">Manage your Linux workstation or server easily over the web!</div>
 
           <div id="title_image">
-            <a href="images/webyast-control_panel.png" rel="lightbox" title="WebYaST control panel - the main screen"><img class="link" src="images/thumbs/webyast-control_panel-big.png"/></a>
+            <a href="images/webyast-control_panel.png" rel="lightbox" title="WebYaST control panel - the main screen"><img class="imglink" src="images/thumbs/webyast-control_panel-big.png"/></a>
           </div>
           <div id="hightlight_box">
             <div class="title">Try WebYaST online!</div>
@@ -181,31 +182,31 @@
       <div class="container">
         <div class="thumb">
           <a href="images/webyast-root.png" rel="lightbox[webyast]" title="Administrator settings">
-            <img src="images/thumbs/webyast-root.png" class="link"/>
+            <img src="images/thumbs/webyast-root.png" class="imglink"/>
           </a>
         </div>
 
         <div class="thumb">
           <a href="images/webyast-status.png" rel="lightbox[webyast]" title="System status details">
-            <img src="images/thumbs/webyast-status.png" class="link"/>
+            <img src="images/thumbs/webyast-status.png" class="imglink"/>
           </a>
         </div>
 
         <div class="thumb">
           <a href="images/webyast-firewall.png" rel="lightbox[webyast]" title="Firewall configuration">
-            <img src="images/thumbs/webyast-firewall.png" class="link"/>
+            <img src="images/thumbs/webyast-firewall.png" class="imglink"/>
           </a>
         </div>
 
         <div class="thumb">
           <a href="images/webyast-patches.png" rel="lightbox[webyast]" title="Software updates">
-            <img src="images/thumbs/webyast-patches.png" class="link"/>
+            <img src="images/thumbs/webyast-patches.png" class="imglink"/>
           </a>
         </div>
 
         <div class="thumb">
           <a href="images/webyast-services.png" rel="lightbox[webyast]" title="System services">
-            <img src="images/thumbs/webyast-services.png" class="link"/>
+            <img src="images/thumbs/webyast-services.png" class="imglink"/>
           </a>
         </div>
 
