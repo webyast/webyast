@@ -188,6 +188,8 @@ case "$1" in
             rc_exit
         fi
         chown nginx:nginx $CERTIFICATEFILE $CERTKEYFILE $COMBINEDCERTFILE
+	echo -n "Created certificate: "
+	openssl x509 -in $CERTIFICATEFILE -fingerprint -noout
     fi
 
        echo -n "Starting webyast "

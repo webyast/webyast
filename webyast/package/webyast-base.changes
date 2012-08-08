@@ -1,4 +1,9 @@
 -------------------------------------------------------------------
+Wed Aug  8 13:27:02 UTC 2012 - lslezak@suse.cz
+
+- rcwebyast - print fingerprint of the generated certificate
+
+-------------------------------------------------------------------
 Fri Aug  3 09:55:40 UTC 2012 - lslezak@suse.cz
 
 - correctly include IE CSS fixes
