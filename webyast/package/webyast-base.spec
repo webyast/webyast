@@ -235,11 +235,11 @@ rm -rf $RPM_BUILD_ROOT/%{webyast_dir}/po
 rm -f $RPM_BUILD_ROOT%{webyast_dir}/COPYING
 
 # install production mode Gemfile
-rake gemfile:production > $RPM_BUILD_ROOT%{webyast_dir}/Gemfile
+rake -s gemfile:production > $RPM_BUILD_ROOT%{webyast_dir}/Gemfile
 # install test mode Gemfile
-rake gemfile:test > $RPM_BUILD_ROOT%{webyast_dir}/Gemfile.test
+rake -s gemfile:test > $RPM_BUILD_ROOT%{webyast_dir}/Gemfile.test
 # install assets mode Gemfile
-rake gemfile:assets > $RPM_BUILD_ROOT%{webyast_dir}/Gemfile.assets
+rake -s gemfile:assets > $RPM_BUILD_ROOT%{webyast_dir}/Gemfile.assets
 
 # remove .gitkeep files
 find $RPM_BUILD_ROOT%{webyast_dir} -name .gitkeep -delete
