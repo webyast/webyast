@@ -15,45 +15,7 @@
  * *# License along with this library; if not, write to the Free Software
  * *# Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA
  * *#++ */
-/* == Used Colours =========================================================== */
-/* *#--
- * *# Webyast framework
- * *#
- * *# Copyright (C) 2009, 2010 Novell, Inc.
- * *#   This library is free software; you can redistribute it and/or modify
- * *# it only under the terms of version 2.1 of the GNU Lesser General Public
- * *# License as published by the Free Software Foundation.
- * *#
- * *#   This library is distributed in the hope that it will be useful, but WITHOUT
- * *# ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
- * *# FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public License for more
- * *# details.
- * *#
- * *#   You should have received a copy of the GNU Lesser General Public
- * *# License along with this library; if not, write to the Free Software
- * *# Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA
- * *#++ */
-/* WebYaST colors */
-/*$c_disabled_text: mix($c_gray, $c_text, 50%) */
-/* Input elements colors */
-/* *#--
- * *# Webyast framework
- * *#
- * *# Copyright (C) 2009, 2010 Novell, Inc.
- * *#   This library is free software; you can redistribute it and/or modify
- * *# it only under the terms of version 2.1 of the GNU Lesser General Public
- * *# License as published by the Free Software Foundation.
- * *#
- * *#   This library is distributed in the hope that it will be useful, but WITHOUT
- * *# ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
- * *# FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public License for more
- * *# details.
- * *#
- * *#   You should have received a copy of the GNU Lesser General Public
- * *# License along with this library; if not, write to the Free Software
- * *# Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA
- * *#++ */
-/*changes */
+
 /* == Basic setup  ======================================================== */
 /* html, */
 /* unnecessary property, causes inheritance */
@@ -95,59 +57,28 @@ a {
   font-weight: bold;
   text-decoration: none;
   font-size: 11px;
-  /*border-bottom:1px dotted #8e908b; */
   border-bottom: 1px dotted #1e90ff; }
   a:hover {
     color: #111111;
-    /*font-size: 11px */
-    /*   text-decoration: underline; */
     border-bottom: 2px solid #1e90ff; }
   a.action-link {
     color: #111111;
-    /*  color:#8e908b; */
     font-size: 13px;
     font-weight: bold;
     text-decoration: none;
-    /*  border-bottom:2px solid #666; */ }
+    }
     a.action-link:hover {
-      /*  color:#1e90ff; */
-      /* color: $c_anchor */
       font-size: 13px;
-      /*  color:#a0a0a0; */
       font-weight: bold;
-      /*  border-bottom:3px solid #1C94C4; */
-      /*  border-bottom:2px dotted #D84630; */
-      /* border-bottom: 2px solid $c_anchor_underline */
-      /*  Studio: #8e908b */
-      /*  text-shadow:0px 0px 8px rgba(160,160,160,1), 0px 0px 15px rgba(28,148,169,0.5), 0px 0px 20px rgba(120,120,120,0.2); */ }
-  a.button {
-    /*+button */
-    /* CSS Hack for IE8 */
-    /*padding: 2px 10px\9 */
-    /*color: $c_text \9 $important */
-    /* end of hack */ }
-
-/* CSS properties for all input elements */
-input.button, input[type="submit"], input[type="button"] {
-  /*+button */ }
+    }
 
 /* CSS Hack for FF */
 html a.button:only-of-type {
   padding: 3px 10px; }
 
-input {
-  /*border: 1px solid $c_button_border */
-  /*padding: 3px */
-  /*color: $c_text */
-  /*font-size: 1em */
-  /*background: $c_inverse_text */ }
-
 select {
-  /*border: 1px solid $c_button_border */
-  /*padding: 2px */
-  /*color: $c_text */
   font-size: 1em;
-  /*background: $c_inverse_text */ }
+}
   select:focus {
     border: 1px solid #1e90ff; }
 
@@ -156,20 +87,6 @@ select {
 #selector {
   padding: 0px; }
 
-/* breaks button background in IE8 (Groups and users module) */
-/*input { vertical-align: top; } */
-/*input */
-/*  &[type="text"],&[type="password"] */
-/*    width: 300px */
-/*    border-color: $c_input_border */
-/*    &:focus */
-/*      width: 300px */
-/*      border: 1px solid $c_focused_input */
-/*      color: $c_text */
-/*  &[disabled] */
-/*    /*background-color: $c_button */
-/*    background-color: #ddd */
-/*    color: #999 */
 img {
   border: none; }
 
@@ -179,15 +96,12 @@ ul li {
 /* == Basic Structure ===================================================== */
 #header {
   width: 100%;
-  /*background: $c_header url('images/bg-head-gradient.png') repeat-x scroll 0 0 */
-  /*border-bottom: 1px solid mix($c_black, $c_header, 40%) */
   background-color: #c5c5c5;
   height: 50px;
   vertical-align: middle;
   text-align: center;
   position: relative; }
   #header * {
-    /*color: $c_text */
     color: #444444;
     text-shadow: 0 1px 0 white; }
   #header h1 {
@@ -224,16 +138,6 @@ ul li {
     top: 0px;
     float: left; }
 
-/*#progress-bar
- * width: 100%
- * overflow-x: hidden
- * top: 0
- * left: 0
- * padding: 0px
- * display: none */
-/*#progress-level
- * background-color: #abdf3f
- * height: 3px */
 #content {
   min-width: 640px;
   width: 100%;
@@ -280,8 +184,6 @@ ul li {
     margin: 0 0.5em; }
   #login-wrapper ul em {
     font-weight: bold; }
-  #login-wrapper li a:hover {
-    /*color: #06c */ }
 
 /* == Basic Styles ======================================================== */
 #login-dialogue {
@@ -294,7 +196,6 @@ ul li {
   border-radius: 3px;
   -moz-border-radius: 3px;
   -webkit-border-radius: 3px;
-  /*box-shadow: 0px 0px 2px #ccc inset */
   -webkit-box-shadow: 0px 0px 2px #cccccc inset;
   background-color: #fafafa; }
 
@@ -350,10 +251,6 @@ ul li {
   font-size: 11px;
   text-shadow: 0px 1px 0px #fefefe; }
 
-/*#status */
-/*  width: 70% */
-/*  display: inline-block */
-/*  vertical-align: middle */
 #status_patches, #status_status {
   margin: 0;
   padding: 12px 0px 0px 10px;
@@ -374,8 +271,6 @@ ul li {
 
 .plugin-content {
   background-color: white;
-  /*background-color: */
-  /*+border-inset */
   border-color: #dddddd;
   border-style: solid;
   border-width: 5px;
@@ -427,7 +322,6 @@ fieldset {
   background-color: #eeeeee;
   border: none;
   margin: 1em;
-  /*+border-outset */
   border-color: #dfdfdf;
   border-style: solid;
   border-width: 3px;
@@ -464,25 +358,6 @@ legend {
 input.error {
   float: left; }
 
-/* Repositories validation is not consistent with other modules (bnc#604160) */
-/* TODO move all label.error and label.valid properties from modules index files to style.css */
-/* is not possible now (for WebYaST-SP1-GMC) because of higher effort as assumed */
-/*label.error { */
-/*  float:none; */
-/*  display:inline; */
-/*  font-weight:bold; */
-/*  color:#990000; */
-/*  padding-top:2px; */
-/*  padding-left:.5em; */
-/*  vertical-align:middle; */
-/*} */
-/* */
-/*label.valid { */
-/*  background: url('/images/checked.gif') no-repeat; */
-/*  padding:0px 0px 0px 18px; */
-/*  vertical-align:middle; */
-/*  margin-left:5px; */
-/*} */
 label.error {
   float: left;
   text-align: left;
@@ -645,7 +520,6 @@ tr.even {
 
 /* List accordion styles */
 .list-fieldset {
-  /*+border-outset */
   border: 2px solid #dfdfdf;
   background-color: #eeeeee;
   -moz-border-radius: 4px;
@@ -654,7 +528,6 @@ tr.even {
   -khtml-border-radius: 4px;
   -moz-box-shadow: none;
   border-radius: 4px;
-  /*padding: 0 0.5em */
   padding: 3px;
   margin: 0.5em 1em 0.5em; }
 
@@ -724,7 +597,7 @@ p.missing-permissions {
   background: -webkit-gradient(linear, left top, left bottom, from(#fcfcfc), to(white)); }
 
 .eula_fieldset_body {
-  padding: 10px 10px 10px 10px;
+  padding: 10px;
   background-color: white; }
 
 
