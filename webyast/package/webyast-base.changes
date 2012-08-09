@@ -1,4 +1,9 @@
 -------------------------------------------------------------------
+Thu Aug  9 12:35:47 UTC 2012 - lslezak@suse.cz
+
+- removed MSIE8 hacks (use gradients instead of PNGs in status eye)
+
+-------------------------------------------------------------------
 Wed Aug  8 13:27:02 UTC 2012 - lslezak@suse.cz
 
 - rcwebyast - print fingerprint of the generated certificate

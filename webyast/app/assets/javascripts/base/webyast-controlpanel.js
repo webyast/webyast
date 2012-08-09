@@ -119,10 +119,6 @@ if(currentURL.pop.length == 0) {
   //Track frequenly used modules
   $(document).ready(function() {
   
-     if($.browser.msie && parseInt($.browser.version) == 8 ) {
-       $('#status-eye').css("background", "url(/assets/circle-gray.png)");
-     }
-  
     //localStorage.clear()
     if(localstorage_supported() && 'last_reset' in localStorage) {    
       // console.log("Sorted by usage")
