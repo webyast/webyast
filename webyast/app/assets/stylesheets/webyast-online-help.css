@@ -114,7 +114,7 @@
   display:block;
 }
 
-#onlineHelpLoading span { text-decoration: blink; color:#474747; font-weight:bold; font-size:20px; vertical-align:middle; text-align:center; }
+#onlineHelpLoading span { color:#474747; font-weight:bold; font-size:20px; vertical-align:middle; text-align:center; }
 #onlineHelpSpinner { height:32px; width:32px; vertical-align:middle; margin-right:5px; }
 #onlineHelpContent div.sect1, #onlineHelpContent div.sect2 { margin: 5px; padding: 20px; }
 #onlineHelpContent h2.title { font-size:16px; line-height:16px; }
