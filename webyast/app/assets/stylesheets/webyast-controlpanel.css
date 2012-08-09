@@ -18,6 +18,8 @@
 #++
 */
 
+/* gradients were generated using http://www.colorzilla.com/gradient-editor/ */
+
 #status-panel {
   font-family: Helvetica,Arial,sans-serif;
   font-size:12px;
@@ -36,21 +38,37 @@
   border:4px solid #ccc;
   overflow:hidden;
   border-radius: 15px;
-  background-color: #eeeeee;
-  background: -moz-radial-gradient(center 45deg, circle closest-side, #eee 0%, #474747 100%) transparent;
-  background: -webkit-gradient(radial, 50% 50%, 0, 50% 50%, 56, from(#eeeeee), to(#474747));
+
+  background: #eeeeee;
+  background: url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiA/Pgo8c3ZnIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgdmlld0JveD0iMCAwIDEgMSIgcHJlc2VydmVBc3BlY3RSYXRpbz0ibm9uZSI+CiAgPHJhZGlhbEdyYWRpZW50IGlkPSJncmFkLXVjZ2ctZ2VuZXJhdGVkIiBncmFkaWVudFVuaXRzPSJ1c2VyU3BhY2VPblVzZSIgY3g9IjUwJSIgY3k9IjUwJSIgcj0iNzUlIj4KICAgIDxzdG9wIG9mZnNldD0iMCUiIHN0b3AtY29sb3I9IiNlZWVlZWUiIHN0b3Atb3BhY2l0eT0iMSIvPgogICAgPHN0b3Agb2Zmc2V0PSIxMDAlIiBzdG9wLWNvbG9yPSIjNDc0NzQ3IiBzdG9wLW9wYWNpdHk9IjEiLz4KICA8L3JhZGlhbEdyYWRpZW50PgogIDxyZWN0IHg9Ii01MCIgeT0iLTUwIiB3aWR0aD0iMTAxIiBoZWlnaHQ9IjEwMSIgZmlsbD0idXJsKCNncmFkLXVjZ2ctZ2VuZXJhdGVkKSIgLz4KPC9zdmc+);
+  background: -moz-radial-gradient(center, ellipse cover, #eeeeee 0%, #474747 100%);
+  background: -webkit-gradient(radial, center center, 0px, center center, 100%, color-stop(0%,#eeeeee), color-stop(100%,#474747));
+  background: -webkit-radial-gradient(center, ellipse cover, #eeeeee 0%,#474747 100%);
+  background: -o-radial-gradient(center, ellipse cover, #eeeeee 0%,#474747 100%);
+  background: -ms-radial-gradient(center, ellipse cover, #eeeeee 0%,#474747 100%);
+  background: radial-gradient(ellipse at center, #eeeeee 0%,#474747 100%);
 }
 
 #status-eye.eye_healthy {
-  background-color: #68b400;
-  background: -moz-radial-gradient(center 45deg, circle closest-side, #68b400 0%, #474747 100%) transparent;
-  background: -webkit-gradient(radial, 50% 50%, 0, 50% 50%, 50, from(#68b400), to(#474747));
+  background: #68b400;
+  background: url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiA/Pgo8c3ZnIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgdmlld0JveD0iMCAwIDEgMSIgcHJlc2VydmVBc3BlY3RSYXRpbz0ibm9uZSI+CiAgPHJhZGlhbEdyYWRpZW50IGlkPSJncmFkLXVjZ2ctZ2VuZXJhdGVkIiBncmFkaWVudFVuaXRzPSJ1c2VyU3BhY2VPblVzZSIgY3g9IjUwJSIgY3k9IjUwJSIgcj0iNzUlIj4KICAgIDxzdG9wIG9mZnNldD0iMCUiIHN0b3AtY29sb3I9IiM2OGI0MDAiIHN0b3Atb3BhY2l0eT0iMSIvPgogICAgPHN0b3Agb2Zmc2V0PSIxMDAlIiBzdG9wLWNvbG9yPSIjNDc0NzQ3IiBzdG9wLW9wYWNpdHk9IjEiLz4KICA8L3JhZGlhbEdyYWRpZW50PgogIDxyZWN0IHg9Ii01MCIgeT0iLTUwIiB3aWR0aD0iMTAxIiBoZWlnaHQ9IjEwMSIgZmlsbD0idXJsKCNncmFkLXVjZ2ctZ2VuZXJhdGVkKSIgLz4KPC9zdmc+);
+  background: -moz-radial-gradient(center, ellipse cover, #68b400 0%, #474747 100%);
+  background: -webkit-gradient(radial, center center, 0px, center center, 100%, color-stop(0%,#68b400), color-stop(100%,#474747));
+  background: -webkit-radial-gradient(center, ellipse cover, #68b400 0%,#474747 100%);
+  background: -o-radial-gradient(center, ellipse cover, #68b400 0%,#474747 100%);
+  background: -ms-radial-gradient(center, ellipse cover, #68b400 0%,#474747 100%);
+  background: radial-gradient(ellipse at center, #68b400 0%,#474747 100%);
 }
 
 #status-eye.eye_warning {
-  background-color: #BB5148;
-  background: -moz-radial-gradient(center 45deg, circle closest-side, red 0%, #474747 99%);
-  background: -webkit-gradient(radial, 50% 50%, 0, 50% 50%, 56, from(red), to(#474747));
+  background: #ff0000;
+  background: url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiA/Pgo8c3ZnIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgdmlld0JveD0iMCAwIDEgMSIgcHJlc2VydmVBc3BlY3RSYXRpbz0ibm9uZSI+CiAgPHJhZGlhbEdyYWRpZW50IGlkPSJncmFkLXVjZ2ctZ2VuZXJhdGVkIiBncmFkaWVudFVuaXRzPSJ1c2VyU3BhY2VPblVzZSIgY3g9IjUwJSIgY3k9IjUwJSIgcj0iNzUlIj4KICAgIDxzdG9wIG9mZnNldD0iMCUiIHN0b3AtY29sb3I9IiNmZjAwMDAiIHN0b3Atb3BhY2l0eT0iMSIvPgogICAgPHN0b3Agb2Zmc2V0PSI5OSUiIHN0b3AtY29sb3I9IiM0NzQ3NDciIHN0b3Atb3BhY2l0eT0iMSIvPgogIDwvcmFkaWFsR3JhZGllbnQ+CiAgPHJlY3QgeD0iLTUwIiB5PSItNTAiIHdpZHRoPSIxMDEiIGhlaWdodD0iMTAxIiBmaWxsPSJ1cmwoI2dyYWQtdWNnZy1nZW5lcmF0ZWQpIiAvPgo8L3N2Zz4=);
+  background: -moz-radial-gradient(center, ellipse cover, #ff0000 0%, #474747 99%);
+  background: -webkit-gradient(radial, center center, 0px, center center, 100%, color-stop(0%,#ff0000), color-stop(99%,#474747));
+  background: -webkit-radial-gradient(center, ellipse cover, #ff0000 0%,#474747 99%);
+  background: -o-radial-gradient(center, ellipse cover, #ff0000 0%,#474747 99%);
+  background: -ms-radial-gradient(center, ellipse cover, #ff0000 0%,#474747 99%);
+  background: radial-gradient(ellipse at center, #ff0000 0%,#474747 99%);
 }
 
 div.statusbar_header {
