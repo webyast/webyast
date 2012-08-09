@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Thu Aug  9 12:32:59 UTC 2012 - lslezak@suse.cz
+
+- removed MSIE8 hacks
+- 0.3.24
+
+-------------------------------------------------------------------
 Fri Jul 20 13:52:12 UTC 2012 - lslezak@suse.cz
 
 - fixed crash in Ruby 1.9 (syntax error)
