@@ -30,9 +30,9 @@ class OnlineHelp
     Rails.logger.error "***** ONLINE HELP for #{model} *****"
     
     unless model == "Area" #TODO: Find better way to navigate through WebYaST documentation
-      html = open("http://doc.opensuse.org/products/other/WebYaST/webyast-user/cha.webyast.user.modules.html")
+      html = open("https://doc.opensuse.org/products/other/WebYaST/webyast-user_sd/cha.webyast.user.modules.html")
     else
-      html = open("http://doc.opensuse.org/products/other/WebYaST/webyast-user/cha.webyast.user.control.html#cha.webyast.user.control.status")
+      html = open("https://doc.opensuse.org/products/other/WebYaST/webyast-user_sd/cha.webyast.user.control.html#cha.webyast.user.control.status")
     end
     
     doc = Nokogiri::HTML(html.read)
