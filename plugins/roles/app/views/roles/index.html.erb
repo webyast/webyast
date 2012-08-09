@@ -217,12 +217,7 @@
       $("img.deleteRole").click( function () { blockForm(); });
 
 
-      if($.browser.msie() && $.browser.version.number() == 8 ) {
-        $('#usersContent ol').css('padding', '0').css('margin', '0');
-        $('#usersContent ol li').css('padding', '5px')
-      } else {
-        $('#usersContent').sliderNav({items:[<%= @alpha %>], arrows:false });
-      }
+      $('#usersContent').sliderNav({items:[<%= @alpha %>], arrows:false });
 
     });
 
