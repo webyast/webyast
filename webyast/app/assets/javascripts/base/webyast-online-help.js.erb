@@ -48,7 +48,7 @@ $(document).ready(function() {
     var pattern = /[a-z]+/ig;
     var path = window.location.pathname;
     var module = (pattern.exec(path)).toString()
-    var url = 'onlinehelp' + '/' + webyastModules[module];
+    var url = '/onlinehelp' + '/' + webyastModules[module];
 
     if(webyastModules[module] !== undefined) {
       $('body').append('<div id="onlineHelpModalShade"/>');
