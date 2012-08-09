@@ -178,7 +178,6 @@ div.button_container div.nav-buttons { margin:0px 0px; padding:10px 0; }
 
 #content { overflow: visible; }
 div.plugin-border { -moz-border-radius:0px; border:1px solid  #D7D8DF; margin:30px 0; padding:10px 0px;  overflow:hidden; clear:both; background: -moz-linear-gradient(top, #f5f5f5 0%, #f8f8f8 10%, #fafafa 11%, #fff 100%); }
-#questionMark { margin:0px 5px; float:none; background: none repeat scroll 0 0 #757575; }
 
 .help_box {
   border: 1px solid #d0d0d0;
