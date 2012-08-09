@@ -35,7 +35,7 @@
     <script type="text/javascript">
       $(document).ready(function() {
         $("#logout_link").click(function() {
-          if ($.browser.msie())
+          if ($.browser.msie)
           {
             <%# MSIE has API for cleaning authentication cache -%>
             document.execCommand("ClearAuthenticationCache");
