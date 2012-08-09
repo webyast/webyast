@@ -670,13 +670,19 @@ p.missing-permissions {
   margin-left: 1em;
   color: red; }
 
-div#browserWarning {
-  background-color: white;
-  width: 100%;
-  border-top: solid 1px red;
-  border-bottom: solid 1px red;
-  text-align: center;
-  padding: 5px 0px 5px 0px; }
+.big-warning {
+  background-color:#fcfdde;
+  border-top: solid 2px red;
+  border-bottom: solid 2px red;
+  width:100%;
+  text-align:center;
+  padding: 15px 0;
+  font-size: 1.2em;
+  font-weight: bold;
+}
+.big-warning a {font-size: inherit}
+
+.unsupported-browser-warning {display: none;}
 
 /* styles for select dialogs */
 .select-dialog-item {
