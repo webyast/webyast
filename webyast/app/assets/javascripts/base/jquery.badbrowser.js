@@ -19,10 +19,11 @@
 */
 
 function badBrowser(){
-    if(   ($.browser.msie() && $.browser.version.number() >= 9 )
-       || ($.browser.firefox() && $.browser.version.number() >= 10 )
+    if(   ($.browser.msie && parseInt($.browser.version) >= 9 )
+       || ($.browser.mozilla && parseInt($.browser.version) >= 10 )
       ) { return false;}
-//chrome detection, not supported by our version of jqbrowser
+
+    //chrome detection, not supported by jQuery
     if ( /Chrome/.test(navigator.userAgent))
     {
       //chrome detected, check major version

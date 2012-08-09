@@ -121,7 +121,7 @@ if(currentURL.pop.length == 0) {
   //Track frequenly used modules
   $(document).ready(function() {
   
-     if($.browser.msie() && $.browser.version.number() == 8 ) {
+     if($.browser.msie && parseInt($.browser.version) == 8 ) {
        $('#status-eye').css("background", "url(/assets/circle-gray.png)");
      }
   
