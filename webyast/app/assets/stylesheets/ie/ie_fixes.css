@@ -38,9 +38,6 @@ input[type="checkbox"] { height:16px; width:16px;}
 /* Different width in IE and FF, TODO: find the other way to get the same lenght in different browsers */
 #group_members_string  { width:175px!important;}
 
-#status-eye { border:0!important;}
-#status-eye.eye_warning { border:0; }
-#status-eye.eye_healthy { border:0; }
 .status_warning { background-color:#ea5656; }
 .status_ok { background-color:#59c766; }
 
