@@ -47,9 +47,7 @@ if(currentURL.pop.length == 0) {
   }
 
   $(function() {
-    var $all = $('#filter_all');
-    var $recent = $('#filter_recent');
-    $all.click(function() {
+    $('#filter_all').click(function() {
       $('#hidden_filters').fadeIn();
       $('#filter_recent').hide();
       $(this).addClass('quicksand_button_active');
