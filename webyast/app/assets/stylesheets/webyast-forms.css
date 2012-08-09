@@ -132,6 +132,7 @@ div.button_container div.nav-buttons { margin:0px 0px; padding:10px 0; }
 
   padding:4px 4px 2px 4px;
   vertical-align:middle;
+  min-height: 28px;
 
   -moz-box-shadow: 0px 0px 1px #222 inset;
   -webkit-box-shadow: 0px 0px 1px #222 inset;
