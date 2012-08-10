@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Fri Aug 10 14:53:30 UTC 2012 - lslezak@suse.cz
+
+- display locked icon for blocked services
+- 0.3.3
+
+-------------------------------------------------------------------
 Tue May 29 11:02:10 UTC 2012 - lslezak@suse.cz
 
 - updated database.yml for Rails 3.2
