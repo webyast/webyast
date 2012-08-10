@@ -31,10 +31,10 @@ BuildRequires:  webyast-base >= 0.3
 BuildRequires:  webyast-base-testsuite
 PreReq:         webyast-base >= 0.3
 
-Obsoletes:	webyast-software-ws
-Obsoletes:	webyast-software-ui
-Provides:	webyast-software-ws
-Provides:	webyast-software-ui
+Obsoletes:      webyast-software-ui
+Obsoletes:      webyast-software-ws
+Provides:       webyast-software-ui
+Provides:       webyast-software-ws
 
 %if 0%{?suse_version} == 0 || %suse_version <= 1130
 # ruby-dbus is required by webyast-base already

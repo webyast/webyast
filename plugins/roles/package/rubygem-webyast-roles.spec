@@ -31,10 +31,10 @@ BuildRequires:  webyast-base >= 0.3
 BuildRequires:  webyast-base-testsuite
 PreReq:         webyast-base >= 0.3
 
-Obsoletes:	webyast-roles-ws
-Obsoletes:	webyast-roles-ui
-Provides:	webyast-roles-ws
-Provides:	webyast-roles-ui
+Obsoletes:      webyast-roles-ui
+Obsoletes:      webyast-roles-ws
+Provides:       webyast-roles-ui
+Provides:       webyast-roles-ws
 
 Url:            http://en.opensuse.org/Portal:WebYaST
 Summary:        WebYaST - role management
