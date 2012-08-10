@@ -1,4 +1,9 @@
 -------------------------------------------------------------------
+Fri Aug 10 07:29:29 UTC 2012 - lslezak@suse.cz
+
+- 0.3.16
+
+-------------------------------------------------------------------
 Thu Aug  9 12:35:47 UTC 2012 - lslezak@suse.cz
 
 - removed MSIE8 hacks (use gradients instead of PNGs in status eye)
