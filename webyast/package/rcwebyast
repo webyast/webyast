@@ -221,7 +221,7 @@ case "$1" in
             IFC=`LC_ALL=C route | grep "^default" | tr -s " " | cut -d " " -f 8`
             IP=`LC_ALL=C ifconfig $IFC | grep "inet addr" | cut -d ":" -f 2 | cut -d " " -f 1`
             PORT=`LC_ALL=C grep "listen" $NGINX_CONFIG|cut -d ";" -f 1|tr -s " "|cut -d " " -f 3`
-	    HNAME=`hostname -f`
+	    HNAME=`hostname -f 2> /dev/null`
 
 	    if [ -n "$HNAME" ]; then
 		HNAME=" (https://$HNAME:$PORT/)"
