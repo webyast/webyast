@@ -13,9 +13,7 @@ gem "sqlite3"
 
 gem 'haml'
 
-# SLES-11 contains ruby-dbus.rpm, while newer openSUSE distros have rubygem-ruby-dbus.rpm
-# don't try loading the gem if there is plain ruby DBus library
-gem "ruby-dbus" unless File.exists?("/usr/lib64/ruby/vendor_ruby/1.8/dbus.rb") || File.exists?("/usr/lib/ruby/vendor_ruby/1.8/dbus.rb")
+gem "ruby-dbus"
 gem 'delayed_job', '~> 3.0.2'
 gem 'delayed_job_active_record'
 

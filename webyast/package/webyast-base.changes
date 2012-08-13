@@ -4,6 +4,7 @@ Mon Aug 13 19:09:49 UTC 2012 - lslezak@suse.cz
 - removed rubygem-inifile dependency (inifile is needed for polkit1
   which is not present in SLES11, moreover inifile is not directly
   needed)
+- use rubygem-ruby-dbus also in SLES (will be part of ATK-1.3)
 
 -------------------------------------------------------------------
 Fri Aug 10 07:29:29 UTC 2012 - lslezak@suse.cz
