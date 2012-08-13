@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Mon Aug 13 14:49:04 UTC 2012 - lslezak@suse.cz
+
+- fixed "Fetch DN" button functionality (fixed AJAX and routing)
+- 0.3.3
+
+-------------------------------------------------------------------
 Tue May 29 11:16:07 UTC 2012 - lslezak@suse.cz
 
 - updated database.yml for Rails 3.2

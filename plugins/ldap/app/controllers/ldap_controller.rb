@@ -24,6 +24,8 @@
 #require 'client_exception'
 
 class LdapController < ApplicationController
+  # escape_javascript()
+  include ActionView::Helpers::JavaScriptHelper
 
   # Initialize GetText and Content-Type.
   FastGettext.add_text_domain "webyast_ldap", :path => "locale"
@@ -48,7 +50,10 @@ class LdapController < ApplicationController
   def fetch_dn
     authorize! :read, Ldap
     fetched = Ldap.fetch(params[:server])
-    render :text => "$('#ldap_base_dn').val('#{fetched["dn"]}');"
+
+    respond_to do |format|
+      format.js { render :text => "$('#ldap_base_dn').val('#{escape_javascript(fetched["dn"])}');" }
+    end
   end
 
   def update

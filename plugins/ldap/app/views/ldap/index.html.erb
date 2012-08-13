@@ -72,6 +72,25 @@
           $('#ldapForm').submit();
         }
       });
+
+      $("#fetch_dn").click(function() {
+        $.ajax({
+          url: 'ldap/fetch_dn.js',
+          beforeSend: function() {
+            $('#ldap_base_dn').attr('disabled', 'disabled');
+            $(self).attr('disabled', 'disabled');
+            $('#fetch_progress').show();
+          },
+          complete: function(){
+            $('#fetch_progress').hide();
+            $('#ldap_base_dn').removeAttr('disabled');
+            $(self).removeAttr('disabled');
+          },
+          data: $.param({server : $('#ldap_server').val()})
+        });
+
+        return false;
+      });
     });
   </script>
 <% end %>
@@ -113,12 +132,8 @@
           <%= label_tag :ldap_base_dn, _("Base DN") %>
           <%= text_field :ldap, :base_dn, :disabled => disabled, :class => "required" %>
           <%= link_to _("Fetch DN"),
-                :url => { :controller=> :ldap, :action=> :fetch_dn },
-                :remote => true,
-                :loading => "$('#ldap_base_dn').attr('disabled', 'disabled'); $('#fetch_progress').show();",
-                :complete => "$('#fetch_progress').hide(); $('#ldap_base_dn').removeAttr('disabled')",
-                :with => "'server=' + $('#ldap_server').val()",
-                :html => { :class=> "button", :id=> "fetch_dn", :style=>"vertical-align:middle;", :disabled=>disabled }
+                {:controller=> :ldap, :action=> :fetch_dn },
+                {:class=> "button", :id=> "fetch_dn", :style=>"vertical-align:middle;"}
           %>
           <%= image_tag("working.gif", :class=>"small-working-icon", :id=>"fetch_progress", :style=>"display:none; vertical-align:middle;", :alt=>'working...') %>
         </div>
