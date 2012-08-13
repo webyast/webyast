@@ -66,7 +66,7 @@ PreReq:         PolicyKit, rubygem-polkit
 %endif
 PreReq:         rubygem-rake, rubygem-sqlite3
 PreReq:         rubygem-rails-3_2 >= 3.2.3
-PreReq:         rubygem-fast_gettext, rubygem-gettext_i18n_rails, rubygem-inifile
+PreReq:         rubygem-fast_gettext, rubygem-gettext_i18n_rails
 License:	LGPL-2.1 and GPL-2.0 and Apache-2.0
 Group:          Productivity/Networking/Web/Utilities
 URL:            http://en.opensuse.org/Portal:WebYaST
@@ -113,7 +113,7 @@ BuildRequires:	rubygem-bundler
 BuildRequires:	rubygem-devise, rubygem-devise_unix2_chkpwd_authenticatable, rubygem-devise-i18n
 BuildRequires:	rubygem-cancan, rubygem-delayed_job-3_0, rubygem-delayed_job_active_record
 
-BuildRequires:	rubygem-gettext, rubygem-ruby_parser, rubygem-inifile
+BuildRequires:	rubygem-gettext, rubygem-ruby_parser
 
 BuildRequires:  rubygem-factory_girl, rubygem-factory_girl_rails, rubygem-mocha
 
