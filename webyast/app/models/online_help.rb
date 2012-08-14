@@ -27,48 +27,52 @@ class OnlineHelp
   end
   
   def OnlineHelp.parse(model)
-    Rails.logger.error "***** ONLINE HELP for #{model} *****"
+    Rails.logger.info "***** ONLINE HELP for #{model} *****"
     
     unless model == "Area" #TODO: Find better way to navigate through WebYaST documentation
-      html = open("https://doc.opensuse.org/products/other/WebYaST/webyast-user_sd/cha.webyast.user.modules.html")
+      @@modules_html = open("https://doc.opensuse.org/products/other/WebYaST/webyast-user_sd/cha.webyast.user.modules.html").read unless @@modules_html
+      html = @@modules_html
     else
-      html = open("https://doc.opensuse.org/products/other/WebYaST/webyast-user_sd/cha.webyast.user.control.html#cha.webyast.user.control.status")
+      @@control_html = open("https://doc.opensuse.org/products/other/WebYaST/webyast-user_sd/cha.webyast.user.control.html#cha.webyast.user.control.status").read unless @@control_html
+      html = @@control_html
     end
     
-    doc = Nokogiri::HTML(html.read)
+    doc = Nokogiri::HTML(html)
     doc.encoding = 'utf-8'
 
     unless doc.nil?
       if model == "Limits" #TODO: Find better way to navigate through WebYaST documentation
         doc.css('div.sect2').each do |link|
           title = link.attributes['title'].text
-          Rails.logger.error title.inspect
-          link.css('h2.title span.permalink').remove()
-          link.css('a[alt="Permalink"]').remove()
-          link.css('tr.head td:first').remove()
-          link.css('script').remove()
+          Rails.logger.info title.inspect
 
           if title.include? model
+            link.css('h2.title span.permalink').remove()
+            link.css('a[alt="Permalink"]').remove()
+            link.css('tr.head td:first').remove()
+            link.css('script').remove()
+
             return link
           end
         end
       else
         doc.css('div.sect1').each do |link|
           title = link.attributes['title'].text
-          Rails.logger.error title.inspect
-          link.css('h2.title span.permalink').remove()
-          link.css('a[alt="Permalink"]').remove()
-          link.css('tr.head td:first').remove()
-          link.css('div.sect2').remove()
-          link.css('script').remove()
+          Rails.logger.info title.inspect
 
           if title.include? model
+            link.css('h2.title span.permalink').remove()
+            link.css('a[alt="Permalink"]').remove()
+            link.css('tr.head td:first').remove()
+            link.css('div.sect2').remove()
+            link.css('script').remove()
+
             return link
           end
         end
       end
     end
-    Rails.logger.error "***** Document END *****"
+    Rails.logger.info "***** Document END *****"
   end
   
 end

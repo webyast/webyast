@@ -3,6 +3,8 @@ Tue Aug 14 11:13:06 UTC 2012 - lslezak@suse.cz
 
 - force SSL communication in production mode (use secure cookies
   and use Strict-Transport-Security)
+- added caching in online help (cache the downloaded page from
+  doc.opensuse.org, cache the result)
 - 0.3.17
 
 -------------------------------------------------------------------
