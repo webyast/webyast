@@ -1,4 +1,11 @@
 -------------------------------------------------------------------
+Tue Aug 14 11:13:06 UTC 2012 - lslezak@suse.cz
+
+- force SSL communication in production mode (use secure cookies
+  and use Strict-Transport-Security)
+- 0.3.17
+
+-------------------------------------------------------------------
 Mon Aug 13 19:09:49 UTC 2012 - lslezak@suse.cz
 
 - removed rubygem-inifile dependency (inifile is needed for polkit1
