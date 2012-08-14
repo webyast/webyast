@@ -56,3 +56,8 @@ require "webyast-status"
 
 require "bundler/gem_tasks"
 task :build => :"gettext:pack"
+
+create_online_help_task "Status"
+create_online_help_task "Limits"
+create_online_help_task "Area"
+

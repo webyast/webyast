@@ -21,3 +21,6 @@ require "webyast-activedirectory"
 
 require "bundler/gem_tasks"
 task :build => :"gettext:pack"
+
+create_online_help_task "Active Directory", "active_directory"
+

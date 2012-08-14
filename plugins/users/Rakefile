@@ -43,3 +43,7 @@ require "webyast-users"
 require "bundler/gem_tasks"
 task :build => :"gettext:pack"
 
+
+create_online_help_task "Users"
+create_online_help_task "Groups"
+

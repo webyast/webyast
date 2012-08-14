@@ -24,3 +24,5 @@ require "webyast-network"
 require "bundler/gem_tasks"
 task :build => :"gettext:pack"
 
+create_online_help_task "Network"
+

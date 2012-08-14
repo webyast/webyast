@@ -17,7 +17,6 @@ gem "ruby-dbus"
 gem 'delayed_job', '~> 3.0.2'
 gem 'delayed_job_active_record'
 
-gem 'nokogiri'
 gem "fast_gettext", '>= 0.6.4'
 gem 'gettext_i18n_rails', '>= 0.4.3'
 
@@ -58,6 +57,9 @@ group :development do
   # gem "ruby-debug"
   gem "factory_girl"
   gem 'ruby_parser' # needed for rake gettext:find
+
+  # for downloading online help via "rake download:online_help"
+  gem 'nokogiri'
 end
 
 group :test do

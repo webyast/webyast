@@ -44,7 +44,7 @@ Requires:       yast2-core >= 2.18.10
 Requires:       yast2-core >= 2.17.30.1
 Requires:       sysvinit > 2.86-195.3.1
 %endif
-Requires:       rubygem-passenger-nginx, rubygem-nokogiri
+Requires:       rubygem-passenger-nginx
 Requires:       nginx >= 1.0
 Requires:       sqlite3, syslog-ng, check-create-certificate, yast2-dbus-server
 Requires:	rubygem-ruby-dbus
@@ -98,7 +98,7 @@ BuildRequires:  PolicyKit, rubygem-polkit
 %endif
 # the testsuite is run during build
 BuildRequires:  rubygem-test-unit rubygem-mocha
-BuildRequires:  rubygem-haml, rubygem-nokogiri, rubygem-builder-3_0
+BuildRequires:  rubygem-haml, rubygem-builder-3_0
 BuildRequires:  nginx >= 1.0
 BuildRequires:	rubygem-bundler
 BuildRequires:	rubygem-devise, rubygem-devise_unix2_chkpwd_authenticatable, rubygem-devise-i18n

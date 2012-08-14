@@ -44,3 +44,7 @@ require "webyast-software"
 
 require "bundler/gem_tasks"
 task :build => :"gettext:pack"
+
+create_online_help_task "Repositories"
+create_online_help_task "Updates"
+
