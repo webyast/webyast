@@ -46,6 +46,7 @@ class OnlineHelp
           link.css('h2.title span.permalink').remove()
           link.css('a[alt="Permalink"]').remove()
           link.css('tr.head td:first').remove()
+          link.css('script').remove()
 
           if title.include? model
             return link
@@ -59,6 +60,7 @@ class OnlineHelp
           link.css('a[alt="Permalink"]').remove()
           link.css('tr.head td:first').remove()
           link.css('div.sect2').remove()
+          link.css('script').remove()
 
           if title.include? model
             return link
