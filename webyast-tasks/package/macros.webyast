@@ -43,7 +43,7 @@
     export RAILS_PARENT=%{webyast_dir} \
     cp %{webyast_dir}/Gemfile Gemfile.restility \
     echo 'gem "restility"' >> Gemfile.restility \
-    BUNDLE_GEMFILE=Gemfile.restility rake restdoc \
+    LC_ALL=en_US.UTF-8 BUNDLE_GEMFILE=Gemfile.restility rake restdoc \
     mv restdoc/*.xml %1 \
     mkdir -p $RPM_BUILD_ROOT/srv/www/webyast/%1 \
     cp %1/* $RPM_BUILD_ROOT/srv/www/webyast/%1 \

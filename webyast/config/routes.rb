@@ -1,18 +1,18 @@
 #--
 # Webyast framework
 #
-# Copyright (C) 2009, 2010 Novell, Inc. 
+# Copyright (C) 2009, 2010 Novell, Inc.
 #   This library is free software; you can redistribute it and/or modify
 # it only under the terms of version 2.1 of the GNU Lesser General Public
-# License as published by the Free Software Foundation. 
+# License as published by the Free Software Foundation.
 #
 #   This library is distributed in the hope that it will be useful, but WITHOUT
 # ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
-# FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public License for more 
-# details. 
+# FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public License for more
+# details.
 #
 #   You should have received a copy of the GNU Lesser General Public
-# License along with this library; if not, write to the Free Software 
+# License along with this library; if not, write to the Free Software
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA
 #++
 
@@ -38,6 +38,8 @@ Webyast::Application.routes.draw do
   resources :logs
   resource :vendor_settings
 
+  resources :restdoc, :only => [:index, :show]
+
   #mounting each plugin
   if defined? WebYaST
     webyast_module = Object.const_get("WebYaST")
@@ -52,7 +54,6 @@ Webyast::Application.routes.draw do
   match 'resources/:id.:format' => 'resources#show', :constraints => { :id => /[-\w]+/ }
   match 'resources.:format' => 'resources#index'
   match '/validate_uri' => 'hosts#validate_uri'
-  match '/restdoc.:format' => 'restdoc#index', :as => :restdoc
   match '/notifiers/status.:format' => 'notifier#status', :as => :notifier
   match '/:controller(/:action(/:id))'
 
