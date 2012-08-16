@@ -17,7 +17,7 @@
 
 
 Name:           rubygem-webyast-services
-Version:        0.3.2
+Version:        0.3.3
 Release:        0
 %define mod_name webyast-services
 %define mod_full_name %{mod_name}-%{version}
@@ -105,8 +105,6 @@ cp %{SOURCE4} $RPM_BUILD_ROOT/usr/share/YaST2/modules/YaPI/
 mkdir -p $RPM_BUILD_ROOT/etc/webyast/
 cp %SOURCE3 $RPM_BUILD_ROOT/etc/webyast/
 
-%webyast_build_restdoc public/services/restdoc
-
 # remove empty public
 rm -rf $RPM_BUILD_ROOT/%{_libdir}/ruby/gems/%{rb_ver}/gems/%{mod_full_name}/public
 
@@ -137,10 +135,6 @@ rm -rf $RPM_BUILD_ROOT/%{_libdir}/ruby/gems/%{rb_ver}/gems/%{mod_full_name}/publ
 # precompiled assets
 %dir %{webyast_dir}/public/assets
 %{webyast_dir}/public/assets/*
-
-# restdoc documentation
-%dir %{webyast_dir}/public/services
-%{webyast_dir}/public/services/restdoc
 
 %dir /usr/share/YaST2/
 %dir /usr/share/YaST2/modules/
