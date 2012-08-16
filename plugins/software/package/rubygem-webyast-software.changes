@@ -1,4 +1,11 @@
 -------------------------------------------------------------------
+Thu Aug 16 13:32:37 UTC 2012 - lslezak@suse.cz
+
+- removed unused ActionDispatch::Static middleware
+- rubygem-restility is not needed for build
+- 0.3.25
+
+-------------------------------------------------------------------
 Thu Aug  9 12:32:59 UTC 2012 - lslezak@suse.cz
 
 - removed MSIE8 hacks
