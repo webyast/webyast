@@ -85,10 +85,8 @@ class ControlpanelController < ApplicationController
     permissions = Permission.find(:all, {:user_id => current_account.username})
 
     # go through all Rails engines, look for Webyast engines
-    Rails::Engine::Railties.engines.each do |engine|
-      if engine.class.to_s.match /^WebYaST::.*Engine$/
-        shortcuts.merge!(plugin_shortcuts(engine.config.root, permissions))
-      end
+    WebyastEngine.find.each  do |engine|
+      shortcuts.merge!(plugin_shortcuts(engine.config.root, permissions))
     end
 
     shortcuts

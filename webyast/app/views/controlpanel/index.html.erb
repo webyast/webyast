@@ -21,8 +21,8 @@
 
 <% display_patches = ControlPanelConfig.read 'display_patch_status', true %>
 <% display_status = ControlPanelConfig.read 'display_system_status', true %>
-<% status_present = Rails::Engine::Railties.engines.find {|e| e.class.to_s == "WebYaST::StatusEngine"} %>
-<% patches_present = Rails::Engine::Railties.engines.find {|e| e.class.to_s == "WebYaST::SoftwareEngine"} %>
+<% status_present = WebyastEngine.find "Status" %>
+<% patches_present = WebyastEngine.find "Software" %>
 
 
 <% if status_present && display_status %>
@@ -130,7 +130,7 @@ $(function() {
       </div>
     </div>
 
-    <% if Rails::Engine::Railties.engines.find {|e| e.class.to_s == "WebYaST::SystemEngine"} %>
+    <% if WebyastEngine.find "System" %>
       <div id="statusbar-actions">
           <div class="statusbar_row">
             <%= link_to _('Reboot'), {:controller => 'system', :action => 'reboot'}, :confirm => _("Really reboot the machine?"), :method => :put, :class => 'button' %>

@@ -35,23 +35,23 @@ if ENV["RAILS_ENV"].blank? # we are in a rake task.
 else
   # Load ALL translations
   repos = [FastGettext::TranslationRepository.build('webyast-base', :path => 'locale')]
-  Rails::Engine::Railties.engines.each do |engine|
-    if engine.class.to_s.match /^WebYaST::.*Engine$/
-      mo_files = Dir.glob(File.join(engine.config.root, "**", "*.mo"))
 
-      mo_files.each do |l|
-        if l.match(/\/([^\/]+)\/LC_MESSAGES\/.*\.mo$/) && !FastGettext.default_available_locales.include?($1)
-          FastGettext.default_available_locales << $1
-        end
-      end
+  WebyastEngine.find.each do |engine|
+    mo_files = Dir.glob(File.join(engine.config.root, "**", "*.mo"))
 
-      if mo_files.size > 0
-        locale_path = File.dirname(File.dirname(File.dirname(mo_files.first)))
-        repos << FastGettext::TranslationRepository.build(File.basename(mo_files.first, ".mo"),
-                                                          :path=>locale_path)
+    mo_files.each do |l|
+      if l.match(/\/([^\/]+)\/LC_MESSAGES\/.*\.mo$/) && !FastGettext.default_available_locales.include?($1)
+        FastGettext.default_available_locales << $1
       end
     end
+
+    if mo_files.size > 0
+      locale_path = File.dirname(File.dirname(File.dirname(mo_files.first)))
+      repos << FastGettext::TranslationRepository.build(File.basename(mo_files.first, ".mo"),
+        :path=>locale_path)
+    end
   end
+
   FastGettext.add_text_domain 'combined', :type=>:chain, :chain=>repos
   FastGettext.default_text_domain = 'combined'
 end
