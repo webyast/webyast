@@ -24,13 +24,12 @@ class RestdocController < ApplicationController
   end
 
   def show
-    @restdoc = Restdoc.find param[:id]
+    @restdoc = Restdoc.find params[:id]
 
-    #TODO FIXME
-    # find the webyast engine and render the file
-    # render :file => "#{@restdoc}crm_api/index.html", :layout => true
-
-    # TODO FIXME serve *.xml files via static middleware:
-    # http://jonswope.com/2010/07/25/rails-3-engines-plugins-and-static-assets/
+    if @restdoc.blank?
+      render "shared/404", :status => 404, :layout => true
+    else
+      render :file => @restdoc, :layout => true
+    end
   end
 end

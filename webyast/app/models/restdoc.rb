@@ -24,13 +24,20 @@ class Restdoc
 
     # iterate over all webyast engines
     WebyastEngine.find.each do |e|
-      Dir["#{e.config.root}/public/**/restdoc/index.html"].each do |restdoc_path|
+      Dir["#{e.config.root}/public/restdoc/**/restdoc.html"].each do |restdoc_path|
 
-        restdoc_path.match /\/public\/((.*)\/restdoc\/index.html)/
-        @ret << $1 if $1 && (what == :all || what.to_s == $2)
+        if restdoc_path.match /\/public\/restdoc\/(.*)\/restdoc.html$/
+          Rails.logger.debug "Found: #{what != :all && what.to_s == $1}"
+
+          if what == :all
+            @ret << restdoc_path
+          else
+            return restdoc_path if what == $1
+          end
+        end
       end
     end
 
-    return @ret
+    return (what == :all) ? @ret : nil
   end
 end

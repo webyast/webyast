@@ -1,0 +1,18 @@
+- if @restdocs.empty?
+  %h2 No REST documentation available
+  -if Rails.env.development?
+    %p
+      Run
+      %b rake restdoc
+      in some plugin directory.
+- else
+  %h2 Available REST Documentation
+
+  %h4 List of WebYaST Modules:
+
+  %ul
+    - @restdocs.each do |r|
+      - if r.match /\/public\/restdoc\/(.*)\/restdoc\.html$/
+        %li
+          -# The trailing slash is important to load the referenced XML files correctly
+          = link_to $1.humanize, restdoc_path($1) + '/'

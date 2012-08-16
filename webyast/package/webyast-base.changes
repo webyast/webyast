@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Thu Aug 16 10:51:53 UTC 2012 - lslezak@suse.cz
+
+- fixed displaying restdoc documentation (at /restdoc path)
+- 0.3.18
+
+-------------------------------------------------------------------
 Tue Aug 14 11:13:06 UTC 2012 - lslezak@suse.cz
 
 - force SSL communication in production mode (use secure cookies

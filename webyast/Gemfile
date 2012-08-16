@@ -58,6 +58,7 @@ group :development do
   # gem "ruby-debug"
   gem "factory_girl"
   gem 'ruby_parser' # needed for rake gettext:find
+  gem 'restility'
 end
 
 group :test do
