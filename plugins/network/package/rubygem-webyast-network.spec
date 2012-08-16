@@ -17,7 +17,7 @@
 
 
 Name:           rubygem-webyast-network
-Version:        0.3.3
+Version:        0.3.4
 Release:        0
 %define mod_name webyast-network
 %define mod_full_name %{mod_name}-%{version}
@@ -90,7 +90,7 @@ needed at runtime.
 mkdir -p $RPM_BUILD_ROOT/usr/share/%{webyast_polkit_dir}
 install -m 0644 %SOURCE1 $RPM_BUILD_ROOT/usr/share/%{webyast_polkit_dir}
 
-%webyast_build_restdoc public/administrator/restdoc
+%webyast_build_restdoc
 
 # remove empty public
 rm -rf $RPM_BUILD_ROOT/%{_libdir}/ruby/gems/%{rb_ver}/gems/%{mod_full_name}/public
@@ -123,10 +123,6 @@ rm -rf $RPM_BUILD_ROOT/%{_libdir}/ruby/gems/%{rb_ver}/gems/%{mod_full_name}/publ
 # precompiled assets
 %dir %{webyast_dir}/public/assets
 %{webyast_dir}/public/assets/*
-
-# restdoc documentation
-%dir %{webyast_dir}/public/administrator
-%{webyast_dir}/public/administrator/restdoc
 
 %dir /usr/share/%{webyast_polkit_dir}
 %attr(644,root,root) %config /usr/share/%{webyast_polkit_dir}/org.opensuse.yast.modules.yapi.network.policy
