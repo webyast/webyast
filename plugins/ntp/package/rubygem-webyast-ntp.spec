@@ -91,7 +91,7 @@ cp %{SOURCE1} $RPM_BUILD_ROOT/usr/share/YaST2/modules/YaPI/
 mkdir -p $RPM_BUILD_ROOT/usr/share/%{webyast_polkit_dir}
 cp %{SOURCE2} $RPM_BUILD_ROOT/usr/share/%{webyast_polkit_dir}
 
-%webyast_build_restdoc public/ntp/restdoc
+%webyast_build_restdoc
 
 # remove empty public
 rm -rf $RPM_BUILD_ROOT/%{_libdir}/ruby/gems/%{rb_ver}/gems/%{mod_full_name}/public
@@ -122,10 +122,6 @@ mkdir -p $RPM_BUILD_ROOT/%{_libdir}/ruby/gems/%{rb_ver}/gems/%{mod_full_name}/lo
 # precompiled assets
 %dir %{webyast_dir}/public/assets
 %{webyast_dir}/public/assets/*
-
-# restdoc documentation
-%dir %{webyast_dir}/public/ntp
-%{webyast_dir}/public/ntp/restdoc
 
 # ntp require only yast2-dbus server, so it must ensure that directory exist
 %dir /usr/share/YaST2/
