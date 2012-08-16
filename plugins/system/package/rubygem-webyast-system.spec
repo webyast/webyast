@@ -17,7 +17,7 @@
 
 
 Name:           rubygem-webyast-system
-Version:        0.3.2
+Version:        0.3.3
 Release:        0
 %define mod_name webyast-system
 %define mod_full_name %{mod_name}-%{version}
@@ -80,7 +80,7 @@ Testsuite for webyast-reboot package.
 mkdir -p $RPM_BUILD_ROOT/usr/share/%{webyast_polkit_dir}
 install -m 0644 %SOURCE1 $RPM_BUILD_ROOT/usr/share/%{webyast_polkit_dir}
 
-%webyast_build_restdoc public/system/restdoc
+%webyast_build_restdoc
 
 # remove empty public
 rm -rf $RPM_BUILD_ROOT/%{_libdir}/ruby/gems/%{rb_ver}/gems/%{mod_full_name}/public
@@ -131,10 +131,6 @@ fi
 # precompiled assets
 %dir %{webyast_dir}/public/assets
 %{webyast_dir}/public/assets/*
-
-# restdoc documentation
-%dir %{webyast_dir}/public/system
-%{webyast_dir}/public/system/restdoc
 
 %dir /usr/share/%{webyast_polkit_dir}
 %attr(644,root,root) %config /usr/share/%{webyast_polkit_dir}/org.opensuse.yast.modules.yapi.system.policy
