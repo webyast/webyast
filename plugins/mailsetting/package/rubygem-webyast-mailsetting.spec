@@ -17,7 +17,7 @@
 
 
 Name:           rubygem-webyast-mailsetting
-Version:        0.3.2
+Version:        0.3.3
 Release:        0
 %define mod_name webyast-mailsetting
 %define mod_full_name %{mod_name}-%{version}
@@ -119,7 +119,7 @@ cp %{SOURCE1} $RPM_BUILD_ROOT/usr/share/YaST2/modules/YaPI/
 mkdir -p $RPM_BUILD_ROOT/etc/sysconfig/network/scripts/
 install -m 0755 %SOURCE3 $RPM_BUILD_ROOT/etc/sysconfig/network/scripts/
 
-%webyast_build_restdoc public/mailsetting/restdoc
+%webyast_build_restdoc
 
 # remove empty public
 rm -rf $RPM_BUILD_ROOT/%{_libdir}/ruby/gems/%{rb_ver}/gems/%{mod_full_name}/public
@@ -149,10 +149,6 @@ rm -rf $RPM_BUILD_ROOT/%{_libdir}/ruby/gems/%{rb_ver}/gems/%{mod_full_name}/publ
 # precompiled assets
 %dir %{webyast_dir}/public/assets
 %{webyast_dir}/public/assets/*
-
-# restdoc documentation
-%dir %{webyast_dir}/public/mailsetting
-%{webyast_dir}/public/mailsetting/restdoc
 
 # YaPI dir
 %dir /usr/share/YaST2/
