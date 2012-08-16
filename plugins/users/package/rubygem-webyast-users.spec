@@ -17,7 +17,7 @@
 
 
 Name:           rubygem-webyast-users
-Version:        0.3.2
+Version:        0.3.3
 Release:        0
 %define mod_name webyast-users
 %define mod_full_name %{mod_name}-%{version}
