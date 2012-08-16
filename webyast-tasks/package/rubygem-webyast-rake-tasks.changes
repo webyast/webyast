@@ -1,4 +1,11 @@
 -------------------------------------------------------------------
+Thu Aug 16 10:44:29 UTC 2012 - lslezak@suse.cz
+
+- restdoc fixes - changed path, serve XML examples from public/
+  by ::ActionDispatch::Static
+- 0.3.2
+
+-------------------------------------------------------------------
 Tue Feb 14 16:11:37 UTC 2012 - lslezak@suse.cz
 
 - removed override_test_db_path.rake (use ERB preprocessing

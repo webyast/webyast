@@ -39,16 +39,10 @@
 # example: %webyast_build_restdoc public/my_module/restdoc
 %webyast_build_restdoc() \
     cd $RPM_BUILD_ROOT/%{_libdir}/ruby/gems/%{rb_ver}/gems/%{mod_full_name} \
-    mkdir -p %1 \
     export RAILS_PARENT=%{webyast_dir} \
     cp %{webyast_dir}/Gemfile Gemfile.restility \
     echo 'gem "restility"' >> Gemfile.restility \
     LC_ALL=en_US.UTF-8 BUNDLE_GEMFILE=Gemfile.restility rake restdoc \
-    mv restdoc/*.xml %1 \
-    mkdir -p $RPM_BUILD_ROOT/srv/www/webyast/%1 \
-    cp %1/* $RPM_BUILD_ROOT/srv/www/webyast/%1 \
-    gzip %1/* \
-    mv %1/* $RPM_BUILD_ROOT/srv/www/webyast/%1 \
     rm -f Gemfile.restility Gemfile.restility.lock \
     rm -rf restdoc \
     cd -
