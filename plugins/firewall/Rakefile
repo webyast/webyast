@@ -22,3 +22,14 @@ require "webyast-firewall"
 
 require "bundler/gem_tasks"
 task :build => :"gettext:pack"
+
+task :restdoc_dir do
+  restdoc_target = "public/firewall/restdoc"
+  if !File.exist? restdoc_target
+    puts "Creating directory #{restdoc_target}"
+    FileUtils.mkdir_p restdoc_target
+  end
+end
+
+task :restdoc => :restdoc_dir
+
