@@ -17,7 +17,7 @@
 
 
 Name:           rubygem-webyast-kerberos
-Version:        0.3.2
+Version:        0.3.3
 Release:        0
 %define mod_name webyast-kerberos
 %define mod_full_name %{mod_name}-%{version}
@@ -110,7 +110,7 @@ cp %{SOURCE2} $RPM_BUILD_ROOT/usr/share/YaST2/modules/YaPI/
 # remove empty public
 rm -rf $RPM_BUILD_ROOT/%{_libdir}/ruby/gems/%{rb_ver}/gems/%{mod_full_name}/public
 
-%webyast_build_restdoc public/kerberos/restdoc
+%webyast_build_restdoc
 
 %webyast_build_plugin_assets
 
@@ -137,10 +137,6 @@ rm -rf $RPM_BUILD_ROOT/%{_libdir}/ruby/gems/%{rb_ver}/gems/%{mod_full_name}/publ
 # precompiled assets
 %dir %{webyast_dir}/public/assets
 %{webyast_dir}/public/assets/*
-
-# restdoc documentation
-%dir %{webyast_dir}/public/kerberos
-%{webyast_dir}/public/kerberos/restdoc
 
 # YaPI dir
 %dir /usr/share/YaST2/
