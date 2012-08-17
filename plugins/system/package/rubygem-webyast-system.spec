@@ -82,8 +82,6 @@ install -m 0644 %SOURCE1 $RPM_BUILD_ROOT/usr/share/%{webyast_polkit_dir}
 
 %webyast_build_restdoc
 
-%webyast_build_plugin_assets
-
 %clean
 %{__rm} -rf $RPM_BUILD_ROOT
 
@@ -104,8 +102,6 @@ install -m 0644 %SOURCE1 $RPM_BUILD_ROOT/usr/share/%{webyast_polkit_dir}
 /usr/sbin/grantwebyastrights --user root --action grant --policy org.freedesktop.consolekit.system.restart >& /dev/null || true
 /usr/sbin/grantwebyastrights --user root --action grant --policy org.freedesktop.consolekit.system.restart-multiple-users >& /dev/null || true
 
-%webyast_update_assets
-
 %postun
 # don't remove the rights during package update ($1 > 0)
 # see https://fedoraproject.org/wiki/Packaging/ScriptletSnippets#Syntax for details
@@ -116,18 +112,12 @@ if [ $1 -eq 0 ] ; then
   /usr/sbin/grantwebyastrights --user %{webyast_user} --action revoke --policy org.freedesktop.consolekit.system.restart-multiple-users >& /dev/null || true
 fi
 
-%webyast_remove_assets
-
 %files 
 %defattr(-,root,root,-)
 %{_libdir}/ruby/gems/%{rb_ver}/cache/%{mod_full_name}.gem
 %{_libdir}/ruby/gems/%{rb_ver}/gems/%{mod_full_name}/
 %exclude %{_libdir}/ruby/gems/%{rb_ver}/gems/%{mod_full_name}/test
 %{_libdir}/ruby/gems/%{rb_ver}/specifications/%{mod_full_name}.gemspec
-
-# precompiled assets
-%dir %{webyast_dir}/public/assets
-%{webyast_dir}/public/assets/*
 
 %dir /usr/share/%{webyast_polkit_dir}
 %attr(644,root,root) %config /usr/share/%{webyast_polkit_dir}/org.opensuse.yast.modules.yapi.system.policy
