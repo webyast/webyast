@@ -93,9 +93,6 @@ cp %{SOURCE2} $RPM_BUILD_ROOT/usr/share/%{webyast_polkit_dir}
 
 %webyast_build_restdoc
 
-# remove empty public
-rm -rf $RPM_BUILD_ROOT/%{_libdir}/ruby/gems/%{rb_ver}/gems/%{mod_full_name}/public
-
 #just a dummy locale cause not translation are available
 mkdir -p $RPM_BUILD_ROOT/%{_libdir}/ruby/gems/%{rb_ver}/gems/%{mod_full_name}/locale
 %webyast_build_plugin_assets

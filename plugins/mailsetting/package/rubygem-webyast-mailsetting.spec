@@ -121,9 +121,6 @@ install -m 0755 %SOURCE3 $RPM_BUILD_ROOT/etc/sysconfig/network/scripts/
 
 %webyast_build_restdoc
 
-# remove empty public
-rm -rf $RPM_BUILD_ROOT/%{_libdir}/ruby/gems/%{rb_ver}/gems/%{mod_full_name}/public
-
 %webyast_build_plugin_assets
 
 %clean

@@ -106,9 +106,6 @@ install -m 0644 %{SOURCE2} $RPM_BUILD_ROOT/usr/share/YaST2/modules/YaPI/
 
 %webyast_build_restdoc
 
-# remove empty public
-rm -rf $RPM_BUILD_ROOT/%{_libdir}/ruby/gems/%{rb_ver}/gems/%{mod_full_name}/public
-
 %webyast_build_plugin_assets
 
 %clean
