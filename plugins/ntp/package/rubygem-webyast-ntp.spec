@@ -95,7 +95,6 @@ cp %{SOURCE2} $RPM_BUILD_ROOT/usr/share/%{webyast_polkit_dir}
 
 #just a dummy locale cause not translation are available
 mkdir -p $RPM_BUILD_ROOT/%{_libdir}/ruby/gems/%{rb_ver}/gems/%{mod_full_name}/locale
-%webyast_build_plugin_assets
 
 %clean
 %{__rm} -rf $RPM_BUILD_ROOT
@@ -104,10 +103,6 @@ mkdir -p $RPM_BUILD_ROOT/%{_libdir}/ruby/gems/%{rb_ver}/gems/%{mod_full_name}/lo
 # granting all permissions for the webservice user and root
 /usr/sbin/grantwebyastrights --user root --action grant > /dev/null
 /usr/sbin/grantwebyastrights --user %{webyast_user} --action grant > /dev/null
-%webyast_update_assets
-
-%postun
-%webyast_remove_assets
 
 %files 
 %defattr(-,root,root,-)
@@ -115,10 +110,6 @@ mkdir -p $RPM_BUILD_ROOT/%{_libdir}/ruby/gems/%{rb_ver}/gems/%{mod_full_name}/lo
 %{_libdir}/ruby/gems/%{rb_ver}/gems/%{mod_full_name}/
 %exclude %{_libdir}/ruby/gems/%{rb_ver}/gems/%{mod_full_name}/test
 %{_libdir}/ruby/gems/%{rb_ver}/specifications/%{mod_full_name}.gemspec
-
-# precompiled assets
-%dir %{webyast_dir}/public/assets
-%{webyast_dir}/public/assets/*
 
 # ntp require only yast2-dbus server, so it must ensure that directory exist
 %dir /usr/share/YaST2/
