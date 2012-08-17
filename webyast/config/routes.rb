@@ -25,7 +25,6 @@ Webyast::Application.routes.draw do
   end
 
   resources :onlinehelp, :only => :show
-  resources :logs
   resource :vendor_settings
 
   resources :restdoc, :only => [:index, :show]
