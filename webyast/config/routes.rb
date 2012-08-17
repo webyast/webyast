@@ -19,19 +19,6 @@
 Webyast::Application.routes.draw do
 
   devise_for :accounts,  :controllers => { :sessions => "sessions" }
-  devise_scope :account do
-    get "sign_in", :to => "devise/sessions#new"
-    get "sign_out", :to => "devise/sessions#destroy"
-  end
-
-  devise_for :accounts, :controllers => { :sessions => "sessions" }
-
-  devise_scope :account do
-    get "sign_in", :to => "sessions#new"
-    get "sign_out", :to => "sessions#destroy"
-    match "sign_in" => "sessions#new"
-    match "sign_out" => "sessions#destroy"
-  end
 
   resources :notifier
   resources :onlinehelp
