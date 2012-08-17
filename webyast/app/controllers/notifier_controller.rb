@@ -18,24 +18,20 @@
 
 class NotifierController < ApplicationController
 
-  layout nil
-
   # GET /notifier
   # GET /notifier.xml
   def status
     id = params[:id] || :all
+
     unless YastCache.active
-      render :nothing=>true, :status=>306 and return
+      head :not_found and return
     else
-      updated = false
-      params[:plugin].split(",").each { |model|
-         updated = true if DataCache.updated?(model, id, session["session_id"])
+      # TODO handle missing parameter
+      updated = params[:plugin].split(",").any? { |model|
+         DataCache.updated?(model, id, session["session_id"])
       }
-      if updated
-        render :nothing=>true, :status=>200 and return
-      else
-        render :nothing=>true, :status=>304 and return
-      end
+
+      head updated ? :ok : :not_modified
     end
   end
 
