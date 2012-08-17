@@ -18,6 +18,8 @@
 
 
 class RestdocController < ApplicationController
+  caches_action :index, :show
+
   def index
     @restdocs = Restdoc.find :all
     Rails.logger.debug "Found restdoc files: #{@restdocs.inspect}"
