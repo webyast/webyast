@@ -32,8 +32,7 @@ Webyast::Application.routes.draw do
   #mounting each plugin
   if defined? WebYaST
     webyast_module = Object.const_get("WebYaST")
-    webyast_plugins = webyast_module.constants
-    webyast_plugins.each do |plugin|
+    webyast_module.constants.each do |plugin|
       mount webyast_module.const_get(plugin) => '/'
     end
   end
