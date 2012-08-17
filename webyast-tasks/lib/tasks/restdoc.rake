@@ -29,7 +29,7 @@ task :restdoc do
   if File.exist? '/usr/bin/rest_doc'
     # input file in root plugin directory
     api_file = 'restdoc/api.txt'
-    doc_target = Dir.glob('public/restdoc/**/').max
+    doc_target = Dir.glob('public/restdoc/**/').max {|a,b| a.length <=> b.length }
 
     if File.exists?(api_file) && !doc_target.nil? && File.directory?(doc_target)
 	    puts "Generating REST API documentation in #{doc_target}..."
