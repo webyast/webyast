@@ -20,7 +20,10 @@ Webyast::Application.routes.draw do
 
   devise_for :accounts,  :controllers => { :sessions => "sessions" }
 
-  resources :notifier
+  resources :notifier, :only => :index do
+    get 'status', :on => :collection
+  end
+
   resources :onlinehelp
   resources :logs
   resource :vendor_settings
@@ -41,7 +44,6 @@ Webyast::Application.routes.draw do
   match 'resources/:id.:format' => 'resources#show', :constraints => { :id => /[-\w]+/ }
   match 'resources.:format' => 'resources#index'
   match '/validate_uri' => 'hosts#validate_uri'
-  match '/notifiers/status.:format' => 'notifier#status', :as => :notifier
   match '/:controller(/:action(/:id))'
 
   # for custom 404 error handling, workaround for a Rails bug
