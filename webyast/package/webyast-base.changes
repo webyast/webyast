@@ -1,4 +1,12 @@
 -------------------------------------------------------------------
+Fri Aug 17 12:51:11 UTC 2012 - lslezak@suse.cz
+
+- online help initialization fix
+- routing fixes/cleanup
+- enabled caching for restdoc
+- 0.3.19
+
+-------------------------------------------------------------------
 Thu Aug 16 10:51:53 UTC 2012 - lslezak@suse.cz
 
 - fixed displaying restdoc documentation (at /restdoc path)
