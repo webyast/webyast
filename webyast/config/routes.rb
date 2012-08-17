@@ -24,7 +24,7 @@ Webyast::Application.routes.draw do
     get 'status', :on => :collection
   end
 
-  resources :onlinehelp
+  resources :onlinehelp, :only => :show
   resources :logs
   resource :vendor_settings
 
