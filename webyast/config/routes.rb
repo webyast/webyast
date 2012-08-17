@@ -25,9 +25,9 @@ Webyast::Application.routes.draw do
   end
 
   resources :onlinehelp, :only => :show
-  resource :vendor_settings
-
+  resource :vendor_settings, :only => :show
   resources :restdoc, :only => [:index, :show]
+  resources :resources, :only => [:index, :show], :constraints => { :id => /[-\w]+/ }
 
   #mounting each plugin
   if defined? WebYaST
@@ -40,8 +40,6 @@ Webyast::Application.routes.draw do
 
   root :to => 'controlpanel#index'
 
-  match 'resources/:id.:format' => 'resources#show', :constraints => { :id => /[-\w]+/ }
-  match 'resources.:format' => 'resources#index'
   match '/validate_uri' => 'hosts#validate_uri'
   match '/:controller(/:action(/:id))'
 
