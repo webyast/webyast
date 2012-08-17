@@ -188,9 +188,9 @@ private
 
   def get_description (action)
     if YaST::POLKIT1
-      desc = `/usr/bin/pkaction --action-id #{action} | grep description: |  sed 's/description://g'`
+      desc = `/usr/bin/pkaction --action-id #{Shellwords.escape(action)} | grep description: |  sed 's/description://g'`
     else
-      desc = `polkit-action --action #{action} | grep description: | sed 's/^description:[:space:]*\\(.\\+\\)$/\\1/'`
+      desc = `polkit-action --action #{Shellwords.escape(action)} | grep description: | sed 's/^description:[:space:]*\\(.\\+\\)$/\\1/'`
     end
     desc.strip!
     desc
