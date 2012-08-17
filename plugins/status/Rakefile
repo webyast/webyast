@@ -58,7 +58,7 @@ require "bundler/gem_tasks"
 task :build => :"gettext:pack"
 
 task :restdoc_dir do
-  restdoc_target = "public/status/restdoc"
+  restdoc_target = "public/restdoc/status"
   if !File.exist? restdoc_target
     puts "Creating directory #{restdoc_target}"
     FileUtils.mkdir_p restdoc_target

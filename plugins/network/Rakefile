@@ -26,7 +26,7 @@ task :build => :"gettext:pack"
 
 
 task :restdoc_dir do
-  restdoc_target = "public/network/restdoc"
+  restdoc_target = "public/restdoc/network"
   if !File.exist? restdoc_target
     puts "Creating directory #{restdoc_target}"
     FileUtils.mkdir_p restdoc_target
