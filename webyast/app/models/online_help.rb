@@ -16,12 +16,13 @@
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA
 #++
 
-require 'rubygems'
-require 'nokogiri'
 # RORSCAN_INL: do not know whats wrong here....
 require 'open-uri'
 
 class OnlineHelp
+  @@modules_html = nil
+  @@control_html = nil
+
   def self.find(model)
     return OnlineHelp.parse(model)
   end
