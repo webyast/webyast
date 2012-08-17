@@ -40,6 +40,9 @@ Webyast::Application.routes.draw do
 
   root :to => 'controlpanel#index'
 
+  # TODO FIXME: remove this generic route
+  # it makes accesible _all_ methods from controllers (unless declared as private)
+  # should be removed for security reasons
   match '/:controller(/:action(/:id))'
 
   # for custom 404 error handling, workaround for a Rails bug
