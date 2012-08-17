@@ -40,7 +40,6 @@ Webyast::Application.routes.draw do
 
   root :to => 'controlpanel#index'
 
-  match '/validate_uri' => 'hosts#validate_uri'
   match '/:controller(/:action(/:id))'
 
   # for custom 404 error handling, workaround for a Rails bug
