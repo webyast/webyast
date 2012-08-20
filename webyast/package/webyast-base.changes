@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Mon Aug 20 14:07:51 UTC 2012 - lslezak@suse.cz
+
+- webyast.css - added .clearfix rule (fixes broken layout in
+  patches)
+
+-------------------------------------------------------------------
 Fri Aug 17 12:51:11 UTC 2012 - lslezak@suse.cz
 
 - online help initialization fix

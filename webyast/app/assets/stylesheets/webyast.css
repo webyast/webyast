@@ -615,3 +615,5 @@ p.missing-permissions {
   min-width: 80px;
   line-height: normal;
   display:none; }
+
+.clearfix { clear:both; }
