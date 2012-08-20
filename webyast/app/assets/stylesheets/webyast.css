@@ -617,3 +617,47 @@ p.missing-permissions {
   display:none; }
 
 .clearfix { clear:both; }
+
+.overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height:  100%;
+  background: black;
+  opacity: 0.4;
+  display: none;
+  z-index: 100;
+}
+
+.online_help_dialog {
+  display: none;
+  background: white;
+  width: 50%;
+  height: 50%;
+  position: absolute;
+  z-index: 1000;
+  left:25%;
+  top: 20%;
+  border: solid 3px black;
+  border-radius: 10px;
+  box-shadow: 0 0 10px #474747;
+}
+
+.online_help_content {
+  margin: 20px;
+}
+
+.online_help_close {
+  background: transparent url(/assets/close-g.png) no-repeat scroll 0 0;
+  position: absolute;
+  top: -12px;
+  right: -12px;
+  width: 23px;
+  height: 23px;
+}
+
+.online_help_close:hover {
+  background: transparent url(/assets/close.png) no-repeat scroll 0 0;
+}
+
