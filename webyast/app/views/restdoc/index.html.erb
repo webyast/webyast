@@ -1,9 +1,0 @@
-<h2>Available REST Documentation</h2>
-
-<% if @restdocs.empty? %>
-  <i>No REST documentation available.</i>
-<% else %>
-  <% @restdocs.each do |r| -%>
-    <a href="<%= h r -%>"><%= h(/(.*)\/restdoc\/index\.html$/.match(r) && $1) -%></a><br>
-  <% end -%>
-<% end %>

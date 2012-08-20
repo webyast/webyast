@@ -17,7 +17,7 @@
 
 
 Name:           rubygem-webyast-administrator
-Version:        0.3.1
+Version:        0.3.2
 Release:        0
 %define mod_name webyast-administrator
 %define mod_full_name %{mod_name}-%{version}
@@ -89,10 +89,7 @@ Test::Unit or RSpec files, useful for developers.
 mkdir -p $RPM_BUILD_ROOT/usr/share/%{webyast_polkit_dir}
 install -m 0644 %SOURCE1 $RPM_BUILD_ROOT/usr/share/%{webyast_polkit_dir}
 
-%webyast_build_restdoc public/administrator/restdoc
-
-# remove empty public
-rm -rf $RPM_BUILD_ROOT/%{_libdir}/ruby/gems/%{rb_ver}/gems/%{mod_full_name}/public
+%webyast_build_restdoc
 
 %webyast_build_plugin_assets
 
@@ -109,10 +106,6 @@ rm -rf $RPM_BUILD_ROOT/%{_libdir}/ruby/gems/%{rb_ver}/gems/%{mod_full_name}/publ
 # precompiled assets
 %dir %{webyast_dir}/public/assets
 %{webyast_dir}/public/assets/*
-
-# restdoc documentation
-%dir %{webyast_dir}/public/administrator
-%{webyast_dir}/public/administrator/restdoc
 
 %dir /usr/share/%{webyast_polkit_dir}
 %attr(644,root,root) %config /usr/share/%{webyast_polkit_dir}/org.opensuse.yast.modules.yapi.administrator.policy

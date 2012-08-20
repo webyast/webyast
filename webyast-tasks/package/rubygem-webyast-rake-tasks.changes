@@ -1,4 +1,17 @@
 -------------------------------------------------------------------
+Fri Aug 17 13:00:06 UTC 2012 - lslezak@suse.cz
+
+- fixed restdoc task to correctly select the longest path
+- 0.3.3
+
+-------------------------------------------------------------------
+Thu Aug 16 10:44:29 UTC 2012 - lslezak@suse.cz
+
+- restdoc fixes - changed path, serve XML examples from public/
+  by ::ActionDispatch::Static
+- 0.3.2
+
+-------------------------------------------------------------------
 Tue Feb 14 16:11:37 UTC 2012 - lslezak@suse.cz
 
 - removed override_test_db_path.rake (use ERB preprocessing

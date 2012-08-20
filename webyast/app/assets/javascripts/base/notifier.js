@@ -35,11 +35,6 @@ function Notify(params) {
         setTimeout('pageRefresh()', 1000);
       },
       
-      306:function() { 
-        console.info("cache is disabled"); 
-        window.clearInterval(timer);
-      },
-      
       404:function() { 
         window.clearInterval(timer);
       },

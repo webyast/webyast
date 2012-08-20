@@ -1,4 +1,15 @@
 -------------------------------------------------------------------
+Mon Aug 20 14:47:13 UTC 2012 - lslezak@suse.cz
+
+- fixed vertical alignment of the filter icon
+
+-------------------------------------------------------------------
+Thu Aug 16 13:27:58 UTC 2012 - lslezak@suse.cz
+
+- restdoc fixes
+- 0.3.3
+
+-------------------------------------------------------------------
 Tue May 29 11:56:19 UTC 2012 - lslezak@suse.cz
 
 - updated database.yml for Rails 3.2

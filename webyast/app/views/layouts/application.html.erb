@@ -97,7 +97,7 @@
               <%= link_to _("Home"), '/controlpanel'%>
             </span>
             <span class="userbar-icon user-icon">
-              <% if Rails::Engine::Railties.engines.find {|e| e.class.to_s == "WebYaST::UsersEngine"} %>
+              <% if WebyastEngine.find "Users" %>
                 <%= link_to(current_account.username, :controller => :users) %>
               <% else %>
                 <%= current_account.username %>

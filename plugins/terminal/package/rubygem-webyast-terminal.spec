@@ -17,7 +17,7 @@
 
 
 Name:           rubygem-webyast-terminal
-Version:        0.3.4
+Version:        0.3.5
 Release:        0
 %define mod_name webyast-terminal
 %define mod_full_name %{mod_name}-%{version}
@@ -26,7 +26,6 @@ Release:        0
 BuildRoot:      %{_tmppath}/%{name}-%{version}-build
 BuildRequires:  rubygems_with_buildroot_patch
 %rubygems_requires
-BuildRequires:  rubygem-restility
 BuildRequires:  webyast-base >= 0.3
 BuildRequires:  webyast-base-testsuite
 PreReq:         webyast-base >= 0.3

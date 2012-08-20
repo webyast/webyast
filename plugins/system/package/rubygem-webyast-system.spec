@@ -17,7 +17,7 @@
 
 
 Name:           rubygem-webyast-system
-Version:        0.3.2
+Version:        0.3.3
 Release:        0
 %define mod_name webyast-system
 %define mod_full_name %{mod_name}-%{version}
@@ -80,12 +80,7 @@ Testsuite for webyast-reboot package.
 mkdir -p $RPM_BUILD_ROOT/usr/share/%{webyast_polkit_dir}
 install -m 0644 %SOURCE1 $RPM_BUILD_ROOT/usr/share/%{webyast_polkit_dir}
 
-%webyast_build_restdoc public/system/restdoc
-
-# remove empty public
-rm -rf $RPM_BUILD_ROOT/%{_libdir}/ruby/gems/%{rb_ver}/gems/%{mod_full_name}/public
-
-%webyast_build_plugin_assets
+%webyast_build_restdoc
 
 %clean
 %{__rm} -rf $RPM_BUILD_ROOT
@@ -107,8 +102,6 @@ rm -rf $RPM_BUILD_ROOT/%{_libdir}/ruby/gems/%{rb_ver}/gems/%{mod_full_name}/publ
 /usr/sbin/grantwebyastrights --user root --action grant --policy org.freedesktop.consolekit.system.restart >& /dev/null || true
 /usr/sbin/grantwebyastrights --user root --action grant --policy org.freedesktop.consolekit.system.restart-multiple-users >& /dev/null || true
 
-%webyast_update_assets
-
 %postun
 # don't remove the rights during package update ($1 > 0)
 # see https://fedoraproject.org/wiki/Packaging/ScriptletSnippets#Syntax for details
@@ -119,22 +112,12 @@ if [ $1 -eq 0 ] ; then
   /usr/sbin/grantwebyastrights --user %{webyast_user} --action revoke --policy org.freedesktop.consolekit.system.restart-multiple-users >& /dev/null || true
 fi
 
-%webyast_remove_assets
-
 %files 
 %defattr(-,root,root,-)
 %{_libdir}/ruby/gems/%{rb_ver}/cache/%{mod_full_name}.gem
 %{_libdir}/ruby/gems/%{rb_ver}/gems/%{mod_full_name}/
 %exclude %{_libdir}/ruby/gems/%{rb_ver}/gems/%{mod_full_name}/test
 %{_libdir}/ruby/gems/%{rb_ver}/specifications/%{mod_full_name}.gemspec
-
-# precompiled assets
-%dir %{webyast_dir}/public/assets
-%{webyast_dir}/public/assets/*
-
-# restdoc documentation
-%dir %{webyast_dir}/public/system
-%{webyast_dir}/public/system/restdoc
 
 %dir /usr/share/%{webyast_polkit_dir}
 %attr(644,root,root) %config /usr/share/%{webyast_polkit_dir}/org.opensuse.yast.modules.yapi.system.policy

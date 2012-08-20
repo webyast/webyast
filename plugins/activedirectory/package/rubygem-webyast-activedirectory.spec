@@ -17,7 +17,7 @@
 
 
 Name:           rubygem-webyast-activedirectory
-Version:        0.3.1
+Version:        0.3.2
 Release:        0
 %define mod_name webyast-activedirectory
 %define mod_full_name %{mod_name}-%{version}
@@ -104,10 +104,7 @@ install -m 0644 %SOURCE1 $RPM_BUILD_ROOT/usr/share/%{webyast_polkit_dir}
 mkdir -p $RPM_BUILD_ROOT/usr/share/YaST2/modules/YaPI/
 install -m 0644 %{SOURCE2} $RPM_BUILD_ROOT/usr/share/YaST2/modules/YaPI/
 
-%webyast_build_restdoc public/activedirectory/restdoc
-
-# remove empty public
-rm -rf $RPM_BUILD_ROOT/%{_libdir}/ruby/gems/%{rb_ver}/gems/%{mod_full_name}/public
+%webyast_build_restdoc
 
 %webyast_build_plugin_assets
 
@@ -124,10 +121,6 @@ rm -rf $RPM_BUILD_ROOT/%{_libdir}/ruby/gems/%{rb_ver}/gems/%{mod_full_name}/publ
 # precompiled assets
 %dir %{webyast_dir}/public/assets
 %{webyast_dir}/public/assets/*
-
-# restdoc documentation
-%dir %{webyast_dir}/public/activedirectory
-%{webyast_dir}/public/activedirectory/restdoc
 
 %dir /usr/share/%{webyast_polkit_dir}
 %attr(644,root,root) %config /usr/share/%{webyast_polkit_dir}/org.opensuse.yast.modules.yapi.activedirectory.policy

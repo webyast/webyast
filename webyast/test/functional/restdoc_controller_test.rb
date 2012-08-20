@@ -35,11 +35,11 @@ class RestdocControllerTest < ActionController::TestCase
   end
 
   def test_index
-    Restdoc.expects(:find).with(:all).returns(["controller/restdoc/index.html"])
+    Restdoc.expects(:find).with(:all).returns(["/public/restdoc/controller/restdoc.html"])
     get :index
 
     assert_response :success
-    assert_match /href="controller\/restdoc\/index.html"/, @response.body
+    assert_match /href="\/restdoc\/controller\/"/, @response.body
   end
 
   def test_empty_index
@@ -48,6 +48,21 @@ class RestdocControllerTest < ActionController::TestCase
 
     assert_response :success
     assert_match /No REST documentation available./, @response.body
+  end
+
+  def test_show
+    # show needs a file, use this file as a dummy input
+    Restdoc.expects(:find).with("ntp").returns(__FILE__)
+    get :show, :id => "ntp"
+
+    assert_response :success
+  end
+
+  def test_show_missing
+    Restdoc.expects(:find).with("ntp").returns(nil)
+    get :show, :id => "ntp"
+
+    assert_response 404
   end
 
 end

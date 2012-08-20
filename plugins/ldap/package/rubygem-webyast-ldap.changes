@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Thu Aug 16 12:51:41 UTC 2012 - lslezak@suse.cz
+
+- restdoc fixes
+- 0.3.4
+
+-------------------------------------------------------------------
 Mon Aug 13 14:49:04 UTC 2012 - lslezak@suse.cz
 
 - fixed "Fetch DN" button functionality (fixed AJAX and routing)

@@ -1,4 +1,11 @@
 -------------------------------------------------------------------
+Thu Aug 16 19:54:42 UTC 2012 - lslezak@suse.cz
+
+- removed unused ActionDispatch::Static middleware
+- rubygem-restility is not needed for build
+- 0.3.3
+
+-------------------------------------------------------------------
 Tue May 29 12:12:35 UTC 2012 - lslezak@suse.cz
 
 - updated database.yml for Rails 3.2

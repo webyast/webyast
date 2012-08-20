@@ -17,20 +17,17 @@
 #++
 
 
-require 'vendor_setting'
-
 class VendorSettingsController < ApplicationController
 
   def show
-    setting = nil
     begin
       setting = VendorSetting.find(:all)
       if setting.nil?
-        render :nothing => true, :status => 404 and return
+        head :not_found and return
       end
     rescue YaST::ConfigFile::NotFoundError
       logger.info "vendor settings not found"
-      render :nothing => true, :status => 404 and return
+      head :not_found and return
     end
 
     respond_to do |format|

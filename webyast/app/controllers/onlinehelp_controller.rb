@@ -16,10 +16,9 @@
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA
 #++
 
-require "online_help.rb"
-
 class OnlinehelpController < ApplicationController
   layout nil
+  caches_action :show
    
   def show
     # RORSCAN_INL: Help does not need any permission

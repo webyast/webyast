@@ -11,7 +11,7 @@
 
 # norootforbuild
 Name:           rubygem-webyast-registration
-Version:        0.3.1
+Version:        0.3.2
 Release:        0
 %define mod_name webyast-registration
 %define mod_full_name %{mod_name}-%{version}
@@ -24,7 +24,6 @@ BuildRequires:  rubygems_with_buildroot_patch
 %rubygems_requires
 BuildRequires:	webyast-base >= 0.3
 BuildRequires:	webyast-base-testsuite
-BuildRequires:	rubygem-restility
 PreReq:	        webyast-base >= 0.3
 Recommends:     openssl-certs
 

@@ -17,7 +17,7 @@
 
 
 Name:           rubygem-webyast-status
-Version:        0.3.3
+Version:        0.3.4
 Release:        0
 %define mod_name webyast-status
 %define mod_full_name %{mod_name}-%{version}
@@ -103,10 +103,7 @@ cp %{SOURCE3} $RPM_BUILD_ROOT/usr/share/YaST2/modules/
 mkdir -p $RPM_BUILD_ROOT/etc/webyast/vendor
 cp $RPM_BUILD_ROOT/%{_libdir}/ruby/gems/%{rb_ver}/gems/%{mod_full_name}/doc/logs.yml $RPM_BUILD_ROOT/etc/webyast
 
-%webyast_build_restdoc public/status/restdoc
-
-# remove empty public
-rm -rf $RPM_BUILD_ROOT/%{_libdir}/ruby/gems/%{rb_ver}/gems/%{mod_full_name}/public
+%webyast_build_restdoc
 
 %webyast_build_plugin_assets
 
@@ -164,10 +161,6 @@ rccollectd try-restart
 # precompiled assets
 %dir %{webyast_dir}/public/assets
 %{webyast_dir}/public/assets/*
-
-# restdoc documentation
-%dir %{webyast_dir}/public/status
-%{webyast_dir}/public/status/restdoc
 
 %dir /usr/share/YaST2/
 %dir /usr/share/YaST2/modules/
