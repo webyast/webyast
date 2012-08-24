@@ -181,7 +181,8 @@ This package contains css, icons and images for webyast-base package.
 export WEBYAST_POLICYKIT='true'
 %endif
 # build *.mo files (redirect sterr to /dev/null as it contains tons of warnings about obsoleted (commented) msgids)
-LANG=en rake gettext:pack 2> /dev/null
+# if the task fails run it again and show the details of the failure for debugging
+LANG=en rake gettext:pack 2> /dev/null || LANG=en rake -t gettext:pack
 # gettext:pack for some reason creates empty db/development.sqlite3 file
 rm -rf db/development.sqlite3
 
