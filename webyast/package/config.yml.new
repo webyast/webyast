@@ -1,0 +1,12 @@
+# This is a general config file for WebYaST 
+#
+# The file needs to be located under /etc/webyast/ 
+
+--- 
+# Enable/disable XML REST API
+# default: false
+rest_api_enabled: false
+
+# Enable/disable Web UI
+# default: true
+web_ui_enabled: true
