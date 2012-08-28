@@ -31,18 +31,14 @@ class AdministratorControllerTest < ActionController::TestCase
     devise_sign_in
     Administrator.stubs(:find).returns Administrator.new({:aliases => ""})
   end
-  
-  test "check 'show' result" do
 
-    ret = get :show, :format => "xml"
-    # success (200 OK)
-    assert_response :success
-
-    # is returned a valid XML?
+ test "should get XML index" do
+    ret = get :index, :format => "xml"
     ret_hash = Hash.from_xml(ret.body)
     assert ret_hash
     assert ret_hash.has_key?("administrator")
     assert ret_hash["administrator"].has_key?("aliases")
+    assert_response :success
   end
 
 end
