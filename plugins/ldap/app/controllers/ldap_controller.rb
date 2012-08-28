@@ -43,7 +43,12 @@ class LdapController < ApplicationController
       render :index and return
     end
 
-    return unless @ldap
+    head :not_found and return unless @ldap
+
+    respond_to do |format|
+      format.html
+      format.xml  { render :xml => @ldap.to_xml }
+    end
   end
 
   # try to get base DN provided by given LDAP server
