@@ -31,7 +31,18 @@ class AdministratorController < ApplicationController
     
     @administrator	= Administrator.find
     @administrator.confirm_password	= ""
-    params[:firstboot]	= 1 if Basesystem.new.load_from_session(session).in_process?
+    params[:firstboot] = 1 if Basesystem.new.load_from_session(session).in_process?
+
+    respond_to do |format|
+      format.html
+      format.xml  {
+        if @administrator
+          render :xml => @administrator.to_xml(:dasherize => false)
+        else
+          head :not_found
+        end
+      }
+    end
   end
 
   def update

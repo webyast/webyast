@@ -46,17 +46,13 @@ class ActivedirectoryControllerTest < ActionController::TestCase
   end
   
   test "access index xml" do
-    mime = Mime::XML
-    @request.accept = mime.to_s
-
-    xml = get :show, :format => "xml"
+    xml = get :index, :format => "xml"
     xml_to_hash = Hash.from_xml(xml.body)
     
     assert xml_to_hash
     assert xml_to_hash.has_key?("activedirectory")
-    
+    assert_equal "AD.SUSE.DE", xml_to_hash["activedirectory"]["domain"]
     assert_response :success
-    assert_equal mime.to_s, @response.content_type
   end
   
   test "should update ActiveDirectory" do

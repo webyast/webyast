@@ -30,10 +30,18 @@ class KerberosController < ApplicationController
       flash[:error] = _("Cannot read Kerberos client configuraton.")
       Rails.logger.error "ERROR: #{error.inspect}"
       @kerberos = nil
-      render :index and return
     end
 
-    return unless @kerberos
+    respond_to do |format|
+      format.html
+      format.xml  {
+        if @kerberos
+          render :xml => @kerberos.to_xml(:dasherize => false)
+        else
+          head :not_found
+        end
+      }
+    end
   end
 
   def update

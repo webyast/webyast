@@ -17,7 +17,7 @@
 
 
 Name:           rubygem-webyast-kerberos
-Version:        0.3.3
+Version:        0.3.4
 Release:        0
 %define mod_name webyast-kerberos
 %define mod_full_name %{mod_name}-%{version}

@@ -78,8 +78,9 @@ Source9:        rcwebyast
 Source10:       webyast
 Source11:       webyast.lr.conf
 Source12:       nginx.conf
-Source13:	control_panel.yml
-Source14:	config.yml
+Source13:       control_panel.yml
+Source14:       config.yml
+Source15:       config.yml.new
 
 BuildRoot:      %{_tmppath}/%{name}-%{version}-build
 BuildRequires:  ruby, pkg-config, rubygem-mocha
@@ -180,7 +181,8 @@ This package contains css, icons and images for webyast-base package.
 export WEBYAST_POLICYKIT='true'
 %endif
 # build *.mo files (redirect sterr to /dev/null as it contains tons of warnings about obsoleted (commented) msgids)
-LANG=en rake gettext:pack 2> /dev/null
+# if the task fails run it again and show the details of the failure for debugging
+LANG=en rake gettext:pack 2> /dev/null || LANG=en rake -t gettext:pack
 # gettext:pack for some reason creates empty db/development.sqlite3 file
 rm -rf db/development.sqlite3
 
@@ -300,6 +302,8 @@ cp %SOURCE13 $RPM_BUILD_ROOT/etc/webyast/
 
 %if %suse_version <= 1110
 cp %SOURCE14 $RPM_BUILD_ROOT/etc/webyast/
+%else
+cp %SOURCE15 $RPM_BUILD_ROOT/etc/webyast/config.yml
 %endif
 
 # install permissions service
@@ -495,9 +499,7 @@ fi
 #this /etc/webyast is for webyast configuration files
 %dir /etc/webyast/
 %config /etc/webyast/control_panel.yml
-%if %suse_version <= 1110
 %config /etc/webyast/config.yml
-%endif
 #nginx stuff
 %config /etc/webyast/nginx.conf
 %config /etc/webyast/fastcgi.conf

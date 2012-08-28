@@ -2,7 +2,7 @@
 
 Gem::Specification.new do |s|
   s.name = "webyast-mailsetting"
-  s.version = "0.3.3"
+  s.version = "0.3.4"
   s.authors = ["WebYaST team"]
   s.authors = ["WebYaST team"]
   s.summary = "Webyast module for configuring mailsettings"

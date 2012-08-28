@@ -36,6 +36,8 @@ def read_config(key = "")
       ret = nil
     end
   end
+
+  return ret
 end
 
 # TODO FIXME: use Yast module name here (compatible with Rails autoloading)
@@ -53,9 +55,9 @@ module Yast
     config = read_config || {}
 
     # enabled when missing or invalid value
-    WEB_UI_ENABLED = config["web_ui_enabled"] != false
+    WEB_UI_ENABLED = config["web_ui_enabled"] != false rescue true
     # disabled when missing or invalid value
-    REST_API_ENABLED = !(config["rest_api_enabled"] != true)
+    REST_API_ENABLED = !(config["rest_api_enabled"] != true) rescue false
 
     def self.web_ui_enabled
       WEB_UI_ENABLED

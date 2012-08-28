@@ -44,8 +44,13 @@ class FirewallController < ApplicationController
       authorize! :read, Firewall
     
       @firewall = Firewall.find
+      @firewall.fw_services.sort! {|x,y| x["name"].downcase <=> y["name"].downcase}
       
-      Rails.logger.error @firewall.inspect
+      Rails.logger.info @firewall.inspect
+
+      if request.format.xml?
+          render :xml => @firewall.to_xml(:dasherize => false) and return
+      end
 
       @firewall.fw_services.each do |service|
         service["css_class"] = CGI_PREFIX+"-"+service["id"].gsub(/^service:/,"service-")
@@ -53,7 +58,6 @@ class FirewallController < ApplicationController
         service["input_name"] = CGI_PREFIX+"_"+service["id"]
       end
   
-      @firewall.fw_services.sort! {|x,y| x["name"] <=> y["name"]}
       needed_services = @firewall.fw_services.find_all{|s| NEEDED_SERVICES.include? s.object_id}
       @needed_services_js = "["+needed_services.collect{|s| service_to_js s}.join(",")+"]"
     end

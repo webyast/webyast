@@ -35,9 +35,19 @@ class ActivedirectoryController < ApplicationController
       flash[:error] = _("Cannot read Active Directory client configuraton.")
       Rails.logger.error "ERROR: #{error.inspect}"
       @activedirectory = nil
-      render :index and return
     end
-    return unless @activedirectory
+
+    respond_to do |format|
+      format.html
+      format.xml  {
+        if @activedirectory
+          render :xml => @activedirectory.to_xml(:dasherize => false)
+        else
+          head :not_found
+        end
+      }
+    end
+
   end
 
   # PUT action
