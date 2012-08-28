@@ -32,10 +32,7 @@ class MailsettingControllerTest < ActionController::TestCase
   end
   
   test "check 'show' result" do
-    mime = Mime::XML
-    @request.accept = mime.to_s
-
-    ret = get :show, :format => "xml"
+    ret = get :index, :format => "xml"
     # success (200 OK)
     assert_response :success
 

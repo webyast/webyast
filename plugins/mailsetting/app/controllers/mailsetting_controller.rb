@@ -36,6 +36,17 @@ public
     @mail.test_mail_address	= ""
     @mail.test_mail_address	= params["email"] if params.has_key? "email"
     @mail.smtp_server = @mail.smtp_server.gsub(/^(\[)|(\])/, '') unless @mail.smtp_server.nil? #remove square brackets from smtp_server string
+
+    respond_to do |format|
+      format.html
+      format.xml  {
+        if @mail
+          render :xml => @mail.to_xml(:dasherize => false, :root => "mail")
+        else
+          head :not_found
+        end
+      }
+    end
   end
   
   def show

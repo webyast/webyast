@@ -17,7 +17,7 @@
 
 
 Name:           rubygem-webyast-mailsetting
-Version:        0.3.3
+Version:        0.3.4
 Release:        0
 %define mod_name webyast-mailsetting
 %define mod_full_name %{mod_name}-%{version}
