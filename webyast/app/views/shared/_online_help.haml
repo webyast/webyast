@@ -1,30 +1,31 @@
 
 - content_for :head do
-  $(document).ready(function() {
-    $("#online_help_button_#{j name}").click(function() {
-      $("#page_overlay").show();
-      var dlg = $(this).next()
-      dlg.show();
+  :javascript
+    $(document).ready(function() {
+      $("#online_help_dialog_#{j help_name}").appendTo("body");
 
-      // TODO: error handling
-      $.get("/onlinehelp/#{j name}.html", function(data){
-        dlg.child().html(data);
+      $("#online_help_button_#{j help_name}").click(function() {
+        $("#page_overlay").show();
+        var dlg = $("#online_help_dialog_#{j help_name}");
+        dlg.show();
+
+        // TODO: error handling
+        $.get("/online_help/#{j help_name}.html", function(data){
+          dlg.children().first().html(data);
+        });
+
+        // TODO: reregister click() to just display the loaded data without reloading
       });
 
-      // TODO: reregister click() to just display the loaded data without reloading
+      $("#online_help_dialog_#{j help_name} .online_help_close").click(function() {
+        $("#online_help_dialog_#{j help_name}").hide();
+        $("#page_overlay").hide();
+      });
     });
 
-    $("#online_help_dialog_#{j name} .online_help_close").click(function{
-      $(this).parent().hide();
-      $("#page_overlay").hide();
-    });
-  });
+.online_help_button{:id => "online_help_button_#{help_name}"} ?
 
-
-.online_help_button{:style=>"margin:2px 5px;", :id => "#online_help_button_#{name}"}?
-
-.online_help_dialog{:id => "#online_help_dialog_#{name}"}
+.online_help_dialog{:id => "online_help_dialog_#{help_name}"}
   .online_help_content
-    = image_tag "loading.gif"
-    = _("Please wait ...")
+    .waiting_label Please wait ...
   .online_help_close

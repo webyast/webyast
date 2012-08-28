@@ -148,3 +148,81 @@
   line-height:12px;
 }
 
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height:  100%;
+  background: black;
+  opacity: 0.4;
+  display: none;
+}
+
+.online_help_dialog {
+  display: none;
+  background: white;
+  width: 50%;
+  position: absolute;
+  top: 10%;
+  left:25%;
+  border: solid 3px black;
+  border-radius: 10px;
+  box-shadow: 0 0 10px #474747;
+}
+
+.online_help_content {
+  margin: 20px;
+}
+
+.online_help_close {
+  background: transparent url(/assets/close-g.png) no-repeat scroll 0 0;
+  position: absolute;
+  top: -12px;
+  right: -12px;
+  width: 23px;
+  height: 23px;
+}
+
+.online_help_close:hover {
+  background: transparent url(/assets/close.png) no-repeat scroll 0 0;
+}
+
+.online_help_button {
+  margin:2px 5px;
+  float:right;
+  color:white;
+  font-size: 1.5em;
+  font-weight: bold;
+  cursor: pointer;
+  background: url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiA/Pgo8c3ZnIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgdmlld0JveD0iMCAwIDEgMSIgcHJlc2VydmVBc3BlY3RSYXRpbz0ibm9uZSI+CiAgPGxpbmVhckdyYWRpZW50IGlkPSJncmFkLXVjZ2ctZ2VuZXJhdGVkIiBncmFkaWVudFVuaXRzPSJ1c2VyU3BhY2VPblVzZSIgeDE9IjAlIiB5MT0iMCUiIHgyPSIwJSIgeTI9IjEwMCUiPgogICAgPHN0b3Agb2Zmc2V0PSIxMCUiIHN0b3AtY29sb3I9IiNhYWFhYWEiIHN0b3Atb3BhY2l0eT0iMSIvPgogICAgPHN0b3Agb2Zmc2V0PSIzMCUiIHN0b3AtY29sb3I9IiM4ODg4ODgiIHN0b3Atb3BhY2l0eT0iMSIvPgogICAgPHN0b3Agb2Zmc2V0PSI1MSUiIHN0b3AtY29sb3I9IiM3Nzc3NzciIHN0b3Atb3BhY2l0eT0iMSIvPgogICAgPHN0b3Agb2Zmc2V0PSIxMDAlIiBzdG9wLWNvbG9yPSIjNjY2NjY2IiBzdG9wLW9wYWNpdHk9IjEiLz4KICA8L2xpbmVhckdyYWRpZW50PgogIDxyZWN0IHg9IjAiIHk9IjAiIHdpZHRoPSIxIiBoZWlnaHQ9IjEiIGZpbGw9InVybCgjZ3JhZC11Y2dnLWdlbmVyYXRlZCkiIC8+Cjwvc3ZnPg==);
+  background: -moz-linear-gradient(top, #aaaaaa 10%, #888888 30%, #777777 51%, #666666 100%);
+  background: -webkit-gradient(linear, left top, left bottom, color-stop(10%,#aaaaaa), color-stop(30%,#888888), color-stop(51%,#777777), color-stop(100%,#666666));
+  background: -webkit-linear-gradient(top, #aaaaaa 10%,#888888 30%,#777777 51%,#666666 100%);
+  background: -o-linear-gradient(top, #aaaaaa 10%,#888888 30%,#777777 51%,#666666 100%);
+  background: -ms-linear-gradient(top, #aaaaaa 10%,#888888 30%,#777777 51%,#666666 100%);
+  background: linear-gradient(to bottom, #aaaaaa 10%,#888888 30%,#777777 51%,#666666 100%);
+  width: 25px;
+  height: 25px;
+  text-align: center;
+  text-shadow: 0 -1px 0 #222;
+}
+
+.online_help_button:hover {
+  background: #bbbbbb;
+  background: url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiA/Pgo8c3ZnIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgdmlld0JveD0iMCAwIDEgMSIgcHJlc2VydmVBc3BlY3RSYXRpbz0ibm9uZSI+CiAgPGxpbmVhckdyYWRpZW50IGlkPSJncmFkLXVjZ2ctZ2VuZXJhdGVkIiBncmFkaWVudFVuaXRzPSJ1c2VyU3BhY2VPblVzZSIgeDE9IjAlIiB5MT0iMCUiIHgyPSIwJSIgeTI9IjEwMCUiPgogICAgPHN0b3Agb2Zmc2V0PSIxMCUiIHN0b3AtY29sb3I9IiNiYmJiYmIiIHN0b3Atb3BhY2l0eT0iMSIvPgogICAgPHN0b3Agb2Zmc2V0PSIzMCUiIHN0b3AtY29sb3I9IiNhYWFhYWEiIHN0b3Atb3BhY2l0eT0iMSIvPgogICAgPHN0b3Agb2Zmc2V0PSI1MSUiIHN0b3AtY29sb3I9IiM5OTk5OTkiIHN0b3Atb3BhY2l0eT0iMSIvPgogICAgPHN0b3Agb2Zmc2V0PSIxMDAlIiBzdG9wLWNvbG9yPSIjODg4ODg4IiBzdG9wLW9wYWNpdHk9IjEiLz4KICA8L2xpbmVhckdyYWRpZW50PgogIDxyZWN0IHg9IjAiIHk9IjAiIHdpZHRoPSIxIiBoZWlnaHQ9IjEiIGZpbGw9InVybCgjZ3JhZC11Y2dnLWdlbmVyYXRlZCkiIC8+Cjwvc3ZnPg==);
+  background: -moz-linear-gradient(top, #bbbbbb 10%, #aaaaaa 30%, #999999 51%, #888888 100%);
+  background: -webkit-gradient(linear, left top, left bottom, color-stop(10%,#bbbbbb), color-stop(30%,#aaaaaa), color-stop(51%,#999999), color-stop(100%,#888888));
+  background: -webkit-linear-gradient(top, #bbbbbb 10%,#aaaaaa 30%,#999999 51%,#888888 100%);
+  background: -o-linear-gradient(top, #bbbbbb 10%,#aaaaaa 30%,#999999 51%,#888888 100%);
+  background: -ms-linear-gradient(top, #bbbbbb 10%,#aaaaaa 30%,#999999 51%,#888888 100%);
+  background: linear-gradient(to bottom, #bbbbbb 10%,#aaaaaa 30%,#999999 51%,#888888 100%);
+}
+
+.waiting_label {
+  font-size: 2em;
+  font-weight: bold;
+  vertical-align: middle;
+  background: transparent url(/assets/loading.gif) no-repeat scroll 0 center;
+  padding: 25px 0 25px 80px;
+}

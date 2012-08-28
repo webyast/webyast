@@ -90,9 +90,7 @@
     	  <label class="plugin-icon-container"><%= image_tag("administrator.png", :class=>"plugin-icon") %></label>
     	  <label class="plugin-name"><%=_("Administrator Settings")%></label>
     	</div>
-      <div class="right" >
-  	    <span id="questionMark" class="right" style="margin:2px 5px;">?</span>
-      </div>
+      <%= render :partial => 'shared/online_help', :locals => { :help_name => "administrator"} %>
       <div class="clearfix"></div>
     </div>
     <div class="clearfix">&nbsp;</div>
