@@ -24,7 +24,6 @@ Webyast::Application.routes.draw do
     get 'status', :on => :collection
   end
 
-  resources :onlinehelp, :only => :show
   resource :vendor_settings, :only => :show
   resources :restdoc, :only => [:index, :show]
   resources :resources, :only => [:index, :show], :constraints => { :id => /[-\w]+/ }
