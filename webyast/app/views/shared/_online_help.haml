@@ -2,6 +2,10 @@
 - content_for :head do
   :javascript
     $(document).ready(function() {
+      // preload "close" images for online help
+      $('<img src="#{asset_path("close-g.png")}"/>');
+      $('<img src="#{asset_path("close.png")}"/>');
+
       $("#online_help_dialog_#{j help_name}").appendTo("body");
 
       $("#online_help_button_#{j help_name}").click(function() {
@@ -9,12 +13,23 @@
         var dlg = $("#online_help_dialog_#{j help_name}");
         dlg.show();
 
-        // TODO: error handling
-        $.get("/online_help/#{j help_name}.html", function(data){
-          dlg.children().first().html(data);
+        $.ajax({
+            url: "/online_help/#{j help_name}.html",
+            success: function(data, textStatus, jqXHR) {
+              // hide error after previous failure
+              dlg.find(".online_help_error").hide();
+              dlg.find(".online_help_content").show().first().html(data);
+              // reregister click() to just display the loaded data without reloading again at next click
+              $("#online_help_button_#{j help_name}").unbind("click").click(function() {
+                $("#page_overlay").show();
+                $("#online_help_dialog_#{j help_name}").show();
+              });
+            },
+            error: function(jqXHR, textStatus, errorThrown) {
+              dlg.find(".online_help_content").hide();
+              dlg.find(".online_help_error").show();
+            }
         });
-
-        // TODO: reregister click() to just display the loaded data without reloading
       });
 
       $("#online_help_dialog_#{j help_name} .online_help_close").click(function() {
@@ -28,4 +43,5 @@
 .online_help_dialog{:id => "online_help_dialog_#{help_name}"}
   .online_help_content
     .waiting_label Please wait ...
+  .online_help_error Error: Cannot load the help text
   .online_help_close

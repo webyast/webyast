@@ -162,17 +162,18 @@
 .online_help_dialog {
   display: none;
   background: white;
-  width: 50%;
+  width: 40%;
   position: absolute;
   top: 10%;
-  left:25%;
+  left:30%;
   border: solid 3px black;
   border-radius: 10px;
   box-shadow: 0 0 10px #474747;
 }
 
 .online_help_content {
-  margin: 20px;
+  margin: 35px;
+  font-size:14px;
 }
 
 .online_help_close {
@@ -225,4 +226,16 @@
   vertical-align: middle;
   background: transparent url(/assets/loading.gif) no-repeat scroll 0 center;
   padding: 25px 0 25px 80px;
+}
+
+.online_help_error {
+  display: none;
+  color: red;
+  font-size: 1.3em;
+  margin: 35px;
+}
+
+/* styles for online help content */
+.online_help_content .guimenu {
+  font-style: italic;
 }
