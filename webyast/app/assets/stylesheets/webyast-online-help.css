@@ -239,3 +239,15 @@
 .online_help_content .guimenu {
   font-style: italic;
 }
+
+.online_help_content .note {
+  border: 1px dotted black;
+  background: #CCE5F0;
+  padding: 10px;
+}
+
+.online_help_content .warning {
+  border: 1px dotted black;
+  background: #FFC0C0;
+  padding: 10px;
+}
