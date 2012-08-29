@@ -1,0 +1,58 @@
+<div class="sect1" title="4.15. Configuring Roles">
+<div class="titlepage"><div><div><h2 class="title" style="clear: both">Configuring Roles</h2></div></div></div>
+<p>
+   The <span class="guimenu">Roles</span> WebYaST module allows you to view and configure
+   user roles. To create and configure roles and to assign users to roles,
+   follow these steps:
+  </p>
+<div class="procedure"><ol class="procedure" type="1">
+<li><p>
+     Log into the WebYaST interface of the target system and start the
+     <span class="guimenu">Roles</span> module.
+    </p></li>
+<li><p>
+     On the <span class="guimenu">Assign Permissions</span> tab, a table showing all
+     available permissions and roles is shown. Permissions are in rows,
+     roles in columns. You can click permissions to collapse or expand
+     detailed permissions. You can collapse all permissions with
+     <span class="guimenu">Collapse all</span>.
+    </p></li>
+<li><p>
+     To create a new role, click <span class="guimenu">Create Role</span>,
+     enter its desired <span class="guimenu">Name</span> and click the
+     <span class="guimenu">Create Role</span> button.
+    </p></li>
+<li><p>
+     Assign individual permissions to roles by checking them in the
+     <span class="guimenu">Assign Permissions</span> table.
+    </p></li>
+<li>
+<p>
+     On the <span class="guimenu">Assign Users</span> tab, you can assign users to
+     specific roles. The role containers are in the left. The alphabetically
+     sorted list of users is on the right. To assign a user to a specific
+     role, drag the user name to be assigned from the right to a role
+     container on the left. Users can have more than one role, in such
+     a case, a user is granted union of all permissions granted by his roles.
+    </p>
+<p>
+     To remove user from a role, move the cursor over the user name in a role
+     container and click the little cross.
+    </p>
+<p>
+     You can search for specific users in the list using the search bar in the
+     header.
+    </p>
+</li>
+<li><p>
+     Click <span class="guimenu">Save</span> to save the changes.
+    </p></li>
+</ol></div>
+<div class="note"><table border="0" cellpadding="3" cellspacing="0" width="100%" summary="Note: Changing User Rights">
+<tr class="head"><th align="left">Changing User Rights</th></tr>
+<tr><td colspan="2" align="left" valign="top"><p>
+     After user rights are changed in the role management you should
+     logout and login again to ensure that all changes take effect.
+    </p></td></tr>
+</table></div>
+</div>

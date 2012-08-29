@@ -1,0 +1,60 @@
+<div class="sect1" title="4.5. Managing System Services">
+<div class="titlepage"><div><div><h2 class="title" style="clear: both">Managing System Services</h2></div></div></div>
+<p>
+   The <span class="guimenu">System Services</span> WebYaST module allows you to manage
+   system services available on the target system. To manage the system
+   services, follow these steps:
+  </p>
+<div class="note"><table border="0" cellpadding="3" cellspacing="0" width="100%" summary="Note: Configuring the List of System Services">
+<tr class="head"><th align="left">Configuring the List of System Services</th></tr>
+<tr><td colspan="2" align="left" valign="top"><p>
+    The list of services available in the <span class="guimenu">System Services</span>
+    module is configurable. For more information, see the vendor documentation.
+   </p></td></tr>
+</table></div>
+<div class="procedure"><ol class="procedure" type="1">
+<li><p>
+     Log into the WebYaST interface of the target system and start the
+     <span class="guimenu">System Services</span> module.
+    </p></li>
+<li><p>
+     A list of available system services is shown. Using the <span class="guimenu">Filter
+      Services</span> drop-down menu, you can limit the list to show only
+     the running, not running, dead, started on boot, or not started on boot
+     services. Using the <span class="guimenu">Quick Search</span>, you can search
+     services according to their names and descriptions.
+    </p></li>
+<li>
+<p>
+     For each service, a status icon, name and a short description are shown.
+     You can expand the information shown by clicking the little triangle on
+     the left. A longer description, detailed status information and
+     <span class="guimenu">Start/Stop</span>, <span class="guimenu">Restart</span>, and
+     <span class="guimenu">Start on Boot/Do Not Start on Boot</span> buttons are shown
+     in the expanded view.
+    </p>
+<p>
+     To change both the current status and the on-boot status
+     (enable or disable for the current runlevel) press
+     <span class="guimenu">Start</span> or <span class="guimenu">Stop</span>
+     button.
+    </p>
+<p>
+     To restart a service without changing its on-boot status,
+     press <span class="guimenu">Restart</span>.
+    </p>
+<p>
+     To change only the on-boot status (enable or disable for
+     the current runlevel) press <span class="guimenu">Start on Boot</span>
+     or <span class="guimenu">Do Not Start on Boot</span> button.
+    </p>
+<p>
+     The result of the requested status change
+     is shown under the status buttons.
+    </p>
+</li>
+<li><p>
+     If you are finished, click <span class="guimenu">Back</span>.
+    </p></li>
+</ol></div>
+</div>

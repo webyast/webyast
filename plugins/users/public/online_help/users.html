@@ -1,0 +1,103 @@
+<div class="sect1" title="4.12. Managing Users">
+<div class="titlepage"><div><div><h2 class="title" style="clear: both">Managing Users</h2></div></div></div>
+<p>
+   The <span class="guimenu">Users</span> WebYaST module allows you to manage
+   local non-system users. You can view the list of users, edit them,
+   or add new users.
+  </p>
+<p>
+   To view the list of users, edit or delete users, follow these steps:
+  </p>
+<div class="procedure"><ol class="procedure" type="1">
+<li><p>
+     Log into the WebYaST interface of the target system and start the
+     <span class="guimenu">Users</span> module.
+    </p></li>
+<li><p>
+     The list of local non-system users is shown. For each user, its user name
+     and full name is shown. You can limit the users shown in the list by
+     entering a string in <span class="guimenu">Filter</span>.
+    </p></li>
+<li>
+<p>
+     Click any user in the list to view detailed information.
+    </p>
+<p>
+     In the <span class="guimenu">Login Settings</span> tab, you can view and edit
+     user's <span class="guimenu">Full Name</span> and <span class="guimenu">Login Name</span>.
+     You can also edit the user's <span class="guimenu">Password</span>. The new
+     password must be confirmed in <span class="guimenu">Confirm Password</span>.
+    </p>
+<p>
+     In the <span class="guimenu">Groups</span> tab, you can view and edit
+     <span class="guimenu">Groups</span> and the <span class="guimenu">Default Group</span>
+     the selected user belongs to. You can edit groups manually or
+     select them using the <span class="guimenu">Manage Groups</span> and
+     <span class="guimenu">Select Default Group</span> buttons.
+    </p>
+<p>
+     In the <span class="guimenu">Advanced</span> tab, you can view and edit
+     user's <span class="guimenu">Home Directory</span>, <span class="guimenu">Login Shell</span>,
+     and <span class="guimenu">UID Number</span>.
+    </p>
+<p>
+     In the <span class="guimenu">Roles</span> tab, you can manage user's roles.
+     Click the <span class="guimenu">Manage Roles</span> button and click individual
+     roles to move them between <span class="guimenu">Selected Roles</span> (active)
+     and <span class="guimenu">Available Roles</span> (inactive).
+    </p>
+</li>
+<li><p>
+     To save the changes, click <span class="guimenu">Save</span>.
+     To delete the selected user, click <span class="guimenu">Delete</span>.
+    </p></li>
+</ol></div>
+<p>
+   To create a new user, follow these steps:
+  </p>
+<div class="procedure"><ol class="procedure" type="1">
+<li><p>
+     Log into the WebYaST interface of the target system and start the
+     <span class="guimenu">Users</span> module.
+    </p></li>
+<li><p>
+     Click <span class="guimenu">New User</span>.
+    </p></li>
+<li>
+<p>
+     In the <span class="guimenu">Login Settings</span> enter user's
+     <span class="guimenu">Full Name</span>, <span class="guimenu">Login Name</span>
+     and <span class="guimenu">Password</span>. The password strength
+     is indicated by the color bar. The password must be
+     confirmed in <span class="guimenu">Confirm Password</span>.
+    </p>
+<p>
+     In the <span class="guimenu">Groups</span> tab, you can add
+     <span class="guimenu">Groups</span> and the <span class="guimenu">Default Group</span> the
+     new user belongs to. You can add groups manually or select them using the
+     <span class="guimenu">Manage Groups</span> and <span class="guimenu">Select Default
+      Group</span> buttons. If not edited, the default group
+     <code class="systemitem">users</code> is used.
+    </p>
+<p>
+     In the <span class="guimenu">Advanced</span> tab, you can edit user's
+     <span class="guimenu">Home Directory</span>, <span class="guimenu">Login Shell</span>,
+     and <span class="guimenu">UID Number</span>. If not edited, default
+     values are used.
+    </p>
+<p>
+     In the <span class="guimenu">Roles</span> tab, you can manage user's roles.
+     Click the <span class="guimenu">Manage Roles</span> button and click individual
+     roles to move them between <span class="guimenu">Selected Roles</span> (active)
+     and <span class="guimenu">Available Roles</span> (inactive).
+    </p>
+</li>
+<li><p>
+     To save the changes, click <span class="guimenu">Save</span>.
+    </p></li>
+</ol></div>
+<p>
+   Using the <span class="guimenu">Manage Groups</span> link, you can access the
+     <span class="guimenu">Groups</span> WebYaST module directly.
+  </p>
+</div>

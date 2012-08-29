@@ -1,0 +1,44 @@
+<div class="sect1" title="4.1. Configuring Firewall">
+<div class="titlepage"><div><div><h2 class="title" style="clear: both">Configuring Firewall</h2></div></div></div>
+<p>
+   The <span class="guimenu">Firewall</span> WebYaST module allows you to configure
+   firewall. The firewall can be turned on and off. Individual
+   services can be blocked or allowed. To configure the firewall,
+   follow these steps:
+  </p>
+<div class="procedure"><ol class="procedure" type="1">
+<li><p>
+     Log into the WebYaST interface of the target system and start
+     the <span class="guimenu">Firewall</span> module.
+    </p></li>
+<li><p>
+     Enable or disable the firewall using the <span class="guimenu">Enabled</span>
+     or <span class="guimenu">Disabled</span> buttons in the header. The green
+     highlighted button indicates the currrent status of the firewall.
+    </p></li>
+<li>
+<p>
+    The <span class="guimenu">Allowed services</span> and <span class="guimenu">Blocked
+    services</span> groups show allowed and blocked services.
+    Click any service to move it from one group to another.
+   </p>
+<p>
+    If you want to read description of any service, stop the mouse
+    pointer over it and wait for two seconds.
+   </p>
+</li>
+<li>
+<p>
+    Click <span class="guimenu">Save</span> to apply changes.
+   </p>
+<div class="note"><table border="0" cellpadding="3" cellspacing="0" width="100%" summary="Note: Blocking Required WebYaST Services">
+<tr class="head"><th align="left">Blocking Required WebYaST Services</th></tr>
+<tr><td colspan="2" align="left" valign="top"><p>
+     If a required service (webyast and webyast-ui) is about to be blocked,
+     a warning message is shown when saving the configuration. This is done
+     to prevent the user from blocking the access to WebYaST itself.
+    </p></td></tr>
+</table></div>
+</li>
+</ol></div>
+</div>
