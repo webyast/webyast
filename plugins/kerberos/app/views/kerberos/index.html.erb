@@ -77,9 +77,7 @@
         <label class="plugin-icon-container"><%= image_tag("kerberos.png", :class=>"plugin-icon") %></label>
         <label class="plugin-name"><%= _("Kerberos client") %></label>
       </div>
-      <div class="right" >
-        <span id="questionMark" style="margin:2px 5px; float:none;">?</span>
-      </div>
+      <%= render :partial => 'shared/online_help', :locals => { :help_name => "kerberos"} %>
       <div class="clearfix"></div>
     </div>
 

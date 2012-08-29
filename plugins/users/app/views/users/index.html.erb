@@ -171,7 +171,7 @@
     <div class="left">
       <label class="plugin-icon-container"><%= image_tag("users.png", :class=>"plugin-icon") %></label>
       <label class="plugin-name"><%= _("Users")%></label>
-      <span id="questionMark" class="right" style="margin:0px 5px;">?</span>
+      <%= render :partial => 'shared/online_help', :locals => { :help_name => "users"} %>
     </div>
   </div>
 

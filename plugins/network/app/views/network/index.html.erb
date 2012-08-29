@@ -36,9 +36,7 @@
       <label class="plugin-name"><%=_("Network")%></label>
     </div>
 
-    <div class="fright" >
-      <span id="questionMark" style="margin:2px 15px; float:none;">?</span>
-    </div>
+    <%= render :partial => 'shared/online_help', :locals => { :help_name => "network"} %>
     <div class="clearfix"></div>
   </div>
 

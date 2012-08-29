@@ -154,9 +154,7 @@
         <label class="plugin-name"><%=_("Time")%></label>
      	</div>
 
-      <div class="right" >
-        <span id="questionMark" style="margin:2px 5px; float:none;">?</span>
-      </div>
+        <%= render :partial => 'shared/online_help', :locals => { :help_name => "time"} %>
      	<div class="clearfix"></div>
     </div>
 

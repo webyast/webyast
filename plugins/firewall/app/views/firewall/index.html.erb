@@ -36,10 +36,11 @@
   <div id="firewallbar" class="plugin-header">
     <div class="left" style="float:left">
       <label class="plugin-icon-container"><%= image_tag("firewall.png", :class=>"plugin-icon") %></label>
-      <label class="plugin-name">Firewall</label><span id="questionMark" style="margin:0px 15px; float:none;">?</span>
+      <label class="plugin-name">Firewall</label>
     </div>
 
     <div class="right" >
+      <%= render :partial => 'shared/online_help', :locals => { :help_name => "firewall"} %>
       <span class="right" style="padding:2px; background:#f5f5f5; -moz-border-radius:2px; -webkit-border-radius:2px;">
       <% if @firewall.use_firewall %>
         <button id="on" class="active" value="on"><%=_("Enabled")%></button>

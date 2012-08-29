@@ -78,11 +78,9 @@
         <div class="left">
           <label class="plugin-icon-container"><%= image_tag("registration.png", :class=>"plugin-icon") %></label>
           <label class="plugin-name"><%=_("Registration")%></label>
-       </div>
-       <div class="right" >
-         <span id="questionMark" class="right" style="margin:2px 5px;">?</span>
-       </div>
-       <div class="clearfix"></div>
+        </div>
+        <%= render :partial => 'shared/online_help', :locals => { :help_name => "registration"} %>
+        <div class="clearfix"></div>
      </div>
     </div>
 
