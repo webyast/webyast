@@ -1,48 +1,48 @@
-<div class="sect1" title="4.2. Configuring Time Settings">
-<div class="titlepage"><div><div><h2 class="title" style="clear: both">Configuring Time Settings</h2></div></div></div>
+<h2>Configuring Time Settings</h2>
 <p>
-   The <span class="guimenu">Time</span> WebYaST module allows you to configure time and
-   date on the target system. To configure time and date, follow these
-   steps:
-  </p>
+  The <span class="guimenu">Time</span> WebYaST module allows you to configure time and
+  date on the target system. To configure time and date, follow these
+  steps:
+</p>
 <div class="procedure"><ol class="procedure" type="1">
-<li><p>
-     Log into the WebYaST interface of the target system and start the
-     <span class="guimenu">Time</span> module.
-    </p></li>
-<li><p>
-     Choose the general <span class="guimenu">Region</span> and the specific
-     <span class="guimenu">Timezone</span> from the drop-down lists.
-    </p></li>
-<li><p>
-     If the system's hardware clock is set to UTC (Universal Time
-     Coordinates), activate the <span class="guimenu">Hardware clock is set to
-     UTC</span> option. If the hardware clock is set to the local time,
-     the option should be inactive.
-    </p></li>
-<li>
-<p>
-     To set the current time manually, select
-     <span class="guimenu">Manually configure time</span> and edit
-     the <span class="guimenu">Date</span> and <span class="guimenu">Time</span>
-     entries.
-    </p>
-<p>
-     To synchronize system time with a network time server, select
-     <span class="guimenu">Synchronize via Network Time Protocol (NTP)</span>
-     and enter hostname or IP address of an <span class="guimenu">NTP server</span>.
-    </p>
-</li>
-<li><p>
-     Click <span class="guimenu">Save</span>.
-    </p></li>
-</ol></div>
-<div class="note"><table border="0" cellpadding="3" cellspacing="0" width="100%" summary="Note: Logout After Changing System Time">
-<tr class="head"><th align="left">Logout After Changing System Time</th></tr>
-<tr><td colspan="2" align="left" valign="top"><p>
+    <li><p>
+        Log into the WebYaST interface of the target system and start the
+        <span class="guimenu">Time</span> module.
+      </p></li>
+    <li><p>
+        Choose the general <span class="guimenu">Region</span> and the specific
+        <span class="guimenu">Timezone</span> from the drop-down lists.
+      </p></li>
+    <li><p>
+        If the system's hardware clock is set to UTC (Universal Time
+        Coordinates), activate the <span class="guimenu">Hardware clock is set to
+          UTC</span> option. If the hardware clock is set to the local time,
+        the option should be inactive.
+      </p></li>
+    <li>
+      <p>
+        To set the current time manually, select
+        <span class="guimenu">Manually configure time</span> and edit
+        the <span class="guimenu">Date</span> and <span class="guimenu">Time</span>
+        entries.
+      </p>
+      <p>
+        To synchronize system time with a network time server, select
+        <span class="guimenu">Synchronize via Network Time Protocol (NTP)</span>
+        and enter hostname or IP address of an <span class="guimenu">NTP server</span>.
+      </p>
+    </li>
+    <li><p>
+        Click <span class="guimenu">Save</span>.
+      </p></li>
+  </ol></div>
+
+<div class="note">
+  <h3>Logout After Changing System Time</h3>
+  <p>
     The login time is limited to 2 hours. Therefore, if you change
     the system time by a large value, your session will automatically
     expire.
-   </p></td></tr>
-</table></div>
+  </p>
 </div>
+

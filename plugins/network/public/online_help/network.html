@@ -1,59 +1,67 @@
-<div class="sect1" title="4.7. Configuring Network Settings">
-<div class="titlepage"><div><div><h2 class="title" style="clear: both">Configuring Network Settings</h2></div></div></div>
+<!-- TODO FIXME: the module has been rewritten, update this help text according to the current state!! -->
+<h2>Configuring Network</h2>
 <p>
-   The <span class="guimenu">Network</span> WebYaST module allows you to configure the
-   network on the target system. To configure the network, follow these
-   steps:
+  The <span class="guimenu">Network</span> WebYaST module allows you to configure the
+  network on the target system. To configure the network, follow these
+  steps:
+</p>
+<div class="procedure">
+  <ol class="procedure" type="1">
+    <li>
+      <p>
+        Log into the WebYaST interface of the target system and start the
+        <span class="guimenu">Network</span> module.
+      </p>
+    </li>
+    <li>
+      <p>
+        In the header, select the configuration mode. You can
+        choose between <span class="guimenu">Automatic</span> (if you want
+        to configure the network automatically via DHCP) or
+        <span class="guimenu">Manual</span> configuration.
+        The selected mode is highlighted in green.
+      </p>
+    </li>
+    <li>
+      <p>
+        To configure the network automatically via DHCP, select the
+        <span class="guimenu">Automatic</span> configuration mode. Enter
+        <span class="guimenu">Hostname</span>, <span class="guimenu">Domain</span>,
+        and deactivate the <span class="guimenu">Change Hostname by DHCP</span>
+        option to ensure a static host name with DHCP.
+      </p>
+    </li>
+    <li>
+      <p>
+        To configure the network manually, select <span class="guimenu">Manual</span> configuration mode.
+        Under <span class="guimenu">DNS configuration</span>, enter the
+        <span class="guimenu">Hostname</span>, <span class="guimenu">Domain</span>, and specify
+        <span class="guimenu">Name servers</span> and <span class="guimenu">Search domains</span> to
+        use.
+      </p>
+      <p>
+        Under <span class="guimenu">IP configuration</span>, enter
+        <span class="guimenu">IP address</span> and <span class="guimenu">Subnet mask/Prefixlen</span>.
+        The prefix should be specified in the CIDR <code class="literal">/<em class="replaceable"><code>nn</code></em></code>
+        format, where <em class="replaceable"><code>nn</code></em> is a number between
+        <code class="literal">0</code> and <code class="literal">32</code>. Specify the
+        <span class="guimenu">Default route</span>.
+      </p>
+    </li>
+    <li>
+      <p>
+        Click <span class="guimenu">Save</span>.  
+      </p>
+    </li>
+  </ol>
+</div>
+
+<div class="warning">
+  <h3>Changing IP Address or Hostname</h3>
+  <p>
+    The change in network configuration is done immediately after clicking
+    the <span class="guimenu">Next</span> button. If the hostname or IP address is
+    changed, it may be necessary to change the URL in the browser after activating the changes before
+    you can continue.
   </p>
-<div class="procedure"><ol class="procedure" type="1">
-<li><p>
-     Log into the WebYaST interface of the target system and start the
-     <span class="guimenu">Network</span> module.
-    </p></li>
-<li><p>
-     In the header, select the configuration mode. You can
-     choose between <span class="guimenu">Automatic</span> (if you want
-     to configure the network automatically via DHCP) or
-     <span class="guimenu">Manual</span> configuration.
-     The selected mode is highlighted in green.
-    </p></li>
-<li><p>
-     To configure the network automatically via DHCP, select the
-     <span class="guimenu">Automatic</span> configuration mode. Enter
-     <span class="guimenu">Hostname</span>, <span class="guimenu">Domain</span>,
-     and deactivate the <span class="guimenu">Change Hostname by DHCP</span>
-     option to ensure a static host name with DHCP.
-    </p></li>
-<li>
-<p>
-     To configure the network manually, select <span class="guimenu">Manual</span> configuration mode.
-     Under <span class="guimenu">DNS configuration</span>, enter the
-     <span class="guimenu">Hostname</span>, <span class="guimenu">Domain</span>, and specify
-     <span class="guimenu">Name servers</span> and <span class="guimenu">Search domains</span> to
-     use.
-    </p>
-<p>
-     Under <span class="guimenu">IP configuration</span>, enter
-     <span class="guimenu">IP address</span> and <span class="guimenu">Subnet mask/Prefixlen</span>.
-     The prefix should be specified in the CIDR <code class="literal">/<em class="replaceable"><code>nn</code></em></code>
-     format, where <em class="replaceable"><code>nn</code></em> is a number between
-     <code class="literal">0</code> and <code class="literal">32</code>. Specify the
-     <span class="guimenu">Default route</span>.
-    </p>
-</li>
-<li>
-<p>
-     Click <span class="guimenu">Save</span>.  
-    </p>
-<div class="warning"><table border="0" cellpadding="3" cellspacing="0" width="100%" summary="Warning: Changing IP Address or Hostname">
-<tr class="head"><th align="left">Changing IP Address or Hostname</th></tr>
-<tr><td colspan="2" align="left" valign="top"><p>
-      The change in network configuration is done immediately after clicking
-      the <span class="guimenu">Next</span> button. If the hostname or IP address is
-      changed, it may be necessary to change the URL in the browser before
-      you can continue.
-     </p></td></tr>
-</table></div>
-</li>
-</ol></div>
 </div>
