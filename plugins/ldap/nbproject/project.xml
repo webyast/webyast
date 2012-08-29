@@ -3,7 +3,7 @@
     <type>org.netbeans.modules.ruby.railsprojects</type>
     <configuration>
         <data xmlns="http://www.netbeans.org/ns/rails-project/1">
-            <name>webyast-users</name>
+            <name>webyast-ldap</name>
         </data>
     </configuration>
 </project>
