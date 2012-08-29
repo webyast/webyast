@@ -119,3 +119,17 @@
   background: #FFC0C0;
   padding: 10px;
 }
+
+a.external {
+  background: transparent url(/assets/external_link.png) no-repeat scroll right center;
+  padding-right: 15px;
+  border-bottom: none;
+  font-size: inherit;
+  font-weight: normal;
+  text-decoration: underline;
+  color: blue;
+}
+
+a.external:hover {
+  border-bottom: none;
+}
