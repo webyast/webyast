@@ -105,7 +105,7 @@ BuildRequires:	rubygem-bundler
 BuildRequires:	rubygem-devise, rubygem-devise_unix2_chkpwd_authenticatable, rubygem-devise-i18n
 BuildRequires:	rubygem-cancan, rubygem-delayed_job-3_0, rubygem-delayed_job_active_record
 
-BuildRequires:	rubygem-gettext, rubygem-ruby_parser
+BuildRequires:	rubygem-gettext
 
 BuildRequires:  rubygem-factory_girl, rubygem-factory_girl_rails, rubygem-mocha
 
