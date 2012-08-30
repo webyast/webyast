@@ -152,7 +152,6 @@ span.user:first-child { margin-left: 0px; }
 span.user:before {
   vertical-align:-120%;
   vertical-align:-70%;
-/*  line-height:20px;*/
 
   padding:0;
   margin:0;
@@ -196,9 +195,6 @@ span.user-warning-message {
   display:none;
 }
 
-
-
-
 img.role { vertical-align:middle; height:16px; width:16px; margin-right:5px; }
 img.deleteRole { 
   vertical-align:middle; 
@@ -211,12 +207,6 @@ img.deleteRole {
 .delete-image-wrapper {
   position:relative;
   float: right;
-/*  height:24px; */
-/*  width:24px;*/
-/*  min-width: 130px;*/
-/*  vertical-align:middle; */
-/*  display:inline-block;*/
-/*  float:right;*/
 }
 
 img.deleteUser { 
@@ -244,26 +234,13 @@ img.resetSearch {
   z-index: 2;
 }
 
-img#loupe {
-  background-color:#fff;
-  vertical-align: middle;
-  margin-top:5px;
-  margin-left:2px;
-  position:absolute;
-  z-index: 2;
-}
-
 input#find_user {
   width:150px;
-
+  background: #FEFEFE url(/assets/loupe.png) no-repeat scroll 4px center;
   position:absolute;
-  padding-left:20px;
-  z-index: 1;
+  padding-left:24px;
   border-radius:2px;
-
-  background-color: #FEFEFE;
   border-color: #C4C4C4 #E0E0E0 #E0E0E0 #C4C4C4;
-
   border-style: solid;
   border-width: 1px;
   box-shadow: 0 0 0 #EEEEEE inset;
@@ -271,7 +248,6 @@ input#find_user {
   font-weight: normal;
   height: 16px;
   vertical-align: middle;
-/*  line-height: 26px;*/
 }
 
 #loader {
@@ -316,9 +292,6 @@ input#find_user {
   text-shadow: 0px 1px 0 #eee!important;
 }
 
-/*label.error { font-size:11px; margin:0px; float:none; display:inline; font-weight:bold; color:#990000; padding-left:.5em; vertical-align:middle; }
-
-input.error { float: none;} */
 .ui-dialog-content { overflow-y: auto; }
 .permission-label { width: 22em; float: left; cursor: pointer; }
 .permission-field, .role-label { width: 8em; float: left; text-align: center; }
@@ -401,7 +374,6 @@ input.computed { opacity: 0.5; }
   vertical-align:middle;
 }
 
-/*#roles_tipsy_tooltip div { min-height:55px; }*/
 #roles_tipsy_tooltip label.info_text {
   text-align:left;
   font-size:12px;

@@ -52,7 +52,6 @@
     
   <%= form_tag '/roles/update', { :id=>'rolesUpdateForm', :class => 'container webyast_form', :style=>"position:relative;"} do %>
     <span id="toolbox">
-      <%= image_tag("loupe.png", :id=>"loupe") %>
       <input type="text" id="find_user" autocomplete="off">
       <%= image_tag("reset-search.png", {:class=>"resetSearch", :id=>"resetSearchField"}) %>
       <span id="loader"><%= image_tag("spinner.gif") %></span>
