@@ -50,15 +50,15 @@ class ResourceRegistration
         raise ResourceRegistrationPathError.new("Could not access plugin directory: #{res_path}") unless File.exists?( res_path )
       end
 
-      registration_count = 0
+      found = false
       Dir.glob(File.join(res_path, '**/*.y*ml')).each do |descriptor|
         next unless descriptor =~ %r{#{res_path}/((\w+)/)?(\w+)\.y(a)?ml$}
         register(descriptor)
-        registration_count += 1
+        found = true
       end
 
       if defined? RESOURCE_REGISTRATION_TESTING
-        raise ResourceRegistrationPathError.new("Could not find any YAML file with resource description below #{res_path}") unless registration_count > 0
+        raise ResourceRegistrationPathError.new("Could not find any YAML file with resource description below #{res_path}") unless found
       end
     end
   end
