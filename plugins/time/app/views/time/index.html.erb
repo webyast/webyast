@@ -41,6 +41,7 @@
   <%= javascript_tag do -%>
     $(document).ready( function() {
       $("#date_date").datepicker( { dateFormat: 'dd/mm/yy'} );
+      $("#ui-datepicker-div").hide(); // hide a strange box created by datepicker
 
       $("#region").change(function() {
          $.ajax({
@@ -204,7 +205,7 @@
               <input type="radio" name="timeconfig" value="manual" onclick="enable();" id="timeconfig_manual"
               <%= "disabled='disabled'" if disabled%>
               <%= "checked='checked'" unless @ntp_available %>/>
-              <%=_("Manually configure time")%>
+              <%= label_tag "timeconfig_manual", _("Manually configure time"), :class => "description" %>
             </legend>
 
             <div class="row">
@@ -223,7 +224,7 @@
               <input id="ntp_sync" type="radio" name="timeconfig" value="ntp_sync" onclick="disable();"
               <%=  "disabled=\"disabled\"" if disabled || !@ntp_available %>
               <%=  "checked='checked'" if @ntp_available %> />
-              <%=_("Synchronize via Network Time Protocol (NTP)")%>
+              <%= label_tag "ntp_sync", _("Synchronize via Network Time Protocol (NTP)"), :class => "description" %>
             </legend>
 
             <% if @ntp_available %>
