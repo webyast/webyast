@@ -30,10 +30,10 @@ BuildRequires:  webyast-base >= 0.3
 BuildRequires:  webyast-base-testsuite
 PreReq:         webyast-base >= 0.3
 
-Obsoletes:      webyast-software-ui
-Obsoletes:      webyast-software-ws
-Provides:       webyast-software-ui
-Provides:       webyast-software-ws
+Obsoletes:      webyast-software-ui < %{version}
+Obsoletes:      webyast-software-ws < %{version}
+Provides:       webyast-software-ui = %{version}
+Provides:       webyast-software-ws = %{version}
 
 Requires:       rubygem-ruby-dbus
 BuildRequires:  rubygem-ruby-dbus

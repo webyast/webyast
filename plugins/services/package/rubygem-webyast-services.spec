@@ -31,10 +31,10 @@ BuildRequires:  webyast-base >= 0.3
 BuildRequires:  webyast-base-testsuite
 PreReq:         webyast-base >= 0.3
 
-Obsoletes:	webyast-services-ws
-Obsoletes:	webyast-services-ui
-Provides:	webyast-services-ws
-Provides:	webyast-services-ui
+Obsoletes:	webyast-services-ws < %{version}
+Obsoletes:	webyast-services-ui < %{version}
+Provides:	webyast-services-ws = %{version}
+Provides:	webyast-services-ui = %{version}
 
 Url:            http://en.opensuse.org/Portal:WebYaST
 Summary:        WebYaST - system services management service

@@ -31,10 +31,10 @@ BuildRequires:  webyast-base >= 0.3
 BuildRequires:  webyast-base-testsuite
 PreReq:         webyast-base >= 0.3
 
-Obsoletes:	webyast-network-ws
-Obsoletes:	webyast-network-ui
-Provides:	webyast-network-ws
-Provides:	webyast-network-ui
+Obsoletes:	webyast-network-ws < %{version}
+Obsoletes:	webyast-network-ui < %{version}
+Provides:	webyast-network-ws = %{version}
+Provides:	webyast-network-ui = %{version}
 
 Url:            http://en.opensuse.org/Portal:WebYaST
 Summary:        WebYaST - Network 

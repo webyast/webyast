@@ -31,10 +31,10 @@ BuildRequires:  webyast-base >= 0.3
 BuildRequires:  webyast-base-testsuite
 PreReq:         webyast-base >= 0.3
 
-Obsoletes:	webyast-reboot-ws
-Obsoletes:	webyast-reboot-ui
-Provides:	webyast-reboot-ws
-Provides:	webyast-reboot-ui
+Obsoletes:	webyast-reboot-ws < %{version}
+Obsoletes:	webyast-reboot-ui < %{version}
+Provides:	webyast-reboot-ws = %{version}
+Provides:	webyast-reboot-ui = %{version}
 
 Summary:        WebYaST - reboot/shutdown
 License:        GPL-2.0

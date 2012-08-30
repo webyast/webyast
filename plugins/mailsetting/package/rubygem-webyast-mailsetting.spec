@@ -31,10 +31,10 @@ BuildRequires:  webyast-base >= 0.3
 BuildRequires:  webyast-base-testsuite
 PreReq:         webyast-base >= 0.3
 
-Obsoletes:	webyast-mail-ws
-Obsoletes:	webyast-mail-ui
-Provides:	webyast-mail-ws
-Provides:	webyast-mail-ui
+Obsoletes:	webyast-mail-ws < %{version}
+Obsoletes:	webyast-mail-ui < %{version}
+Provides:	webyast-mail-ws = %{version}
+Provides:	webyast-mail-ui = %{version}
 
 Url:            http://en.opensuse.org/Portal:WebYaST
 Summary:        WebYaST - system mail settings

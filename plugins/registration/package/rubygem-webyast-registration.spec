@@ -27,10 +27,10 @@ BuildRequires:	webyast-base-testsuite
 PreReq:	        webyast-base >= 0.3
 Recommends:     openssl-certs
 
-Obsoletes:	webyast-registration-ws
-Obsoletes:	webyast-registration-ui
-Provides:	webyast-registration-ws
-Provides:	webyast-registration-ui
+Obsoletes:	webyast-registration-ws < %{version}
+Obsoletes:	webyast-registration-ui < %{version}
+Provides:	webyast-registration-ws = %{version}
+Provides:	webyast-registration-ui = %{version}
 
 URL:            http://en.opensuse.org/Portal:WebYaST
 Summary:        WebYaST - Registration

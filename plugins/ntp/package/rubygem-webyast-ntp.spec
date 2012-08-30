@@ -31,8 +31,8 @@ BuildRequires:  webyast-base >= 0.3
 BuildRequires:  webyast-base-testsuite
 PreReq:         webyast-base >= 0.3
 
-Obsoletes:	webyast-ntp-ws
-Provides:	webyast-ntp-ws
+Obsoletes:	webyast-ntp-ws < %{version}
+Provides:	webyast-ntp-ws = %{version}
 
 #for YaPI needs ntp
 Requires:       ntp

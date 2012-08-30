@@ -31,8 +31,10 @@ BuildRequires:  webyast-base >= 0.3
 BuildRequires:  webyast-base-testsuite
 PreReq:         webyast-base >= 0.3
 
-Obsoletes:	webyast-licenses-ws webyast-licenses-ui
-Provides:	webyast-licenses-ws webyast-licenses-ui
+Obsoletes:	webyast-licenses-ws < %{version}
+Obsoletes:	webyast-licenses-ui < %{version}
+Provides:	webyast-licenses-ws = %{version}
+Provides:	webyast-licenses-ui = %{version}
 
 Summary:        WebYaST - license management service
 License:        GPL-2.0

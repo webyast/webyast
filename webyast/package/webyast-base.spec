@@ -164,8 +164,8 @@ Requires: %{name} = %{version}
 Conflicts:      otherproviders(webyast-base-branding)
 Supplements:    packageand(webyast-base:branding-default)
 
-Provides:	webyast-base-ui-branding-default
-Obsoletes:	webyast-base-ui-branding-default
+Provides:	webyast-base-ui-branding-default = %{version}
+Obsoletes:	webyast-base-ui-branding-default < %{version}
 
 Summary:  Branding package for webyast-base package
 

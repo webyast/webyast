@@ -31,10 +31,10 @@ BuildRequires:  webyast-base >= 0.3
 BuildRequires:  webyast-base-testsuite
 PreReq:         webyast-base >= 0.3
 
-Obsoletes:	webyast-status-ws
-Obsoletes:	webyast-status-ui
-Provides:	webyast-status-ws
-Provides:	webyast-status-ui
+Obsoletes:	webyast-status-ws < %{version}
+Obsoletes:	webyast-status-ui < %{version}
+Provides:	webyast-status-ws = %{version}
+Provides:	webyast-status-ui = %{version}
 
 Url:            http://en.opensuse.org/Portal:WebYaST
 Summary:        WebYaST - system status 

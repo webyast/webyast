@@ -32,10 +32,10 @@ BuildRequires:  webyast-base-testsuite
 PreReq:         webyast-base >= 0.3
 Requires:       yast2-users
 
-Obsoletes:	webyast-root-user-ws
-Obsoletes:	webyast-root-user-ui
-Provides:	webyast-root-user-ws
-Provides:	webyast-root-user-ui
+Obsoletes:	webyast-root-user-ws < %{version}
+Obsoletes:	webyast-root-user-ui < %{version}
+Provides:	webyast-root-user-ws = %{version}
+Provides:	webyast-root-user-ui = %{version}
 
 #
 Url:            http://en.opensuse.org/Portal:WebYaST

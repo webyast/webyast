@@ -30,10 +30,10 @@ BuildRequires:  webyast-base >= 0.3
 BuildRequires:  webyast-base-testsuite
 PreReq:         webyast-base >= 0.3
 
-Obsoletes:	webyast-users-ws
-Obsoletes:	webyast-users-ui
-Provides:	webyast-users-ws
-Provides:	webyast-users-ui
+Obsoletes:	webyast-users-ws < %{version}
+Obsoletes:	webyast-users-ui < %{version}
+Provides:	webyast-users-ws = %{version}
+Provides:	webyast-users-ui = %{version}
 
 Url:            http://en.opensuse.org/Portal:WebYaST
 Summary:        WebYaST - users management

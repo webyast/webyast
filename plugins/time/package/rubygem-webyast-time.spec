@@ -32,10 +32,10 @@ BuildRequires:  webyast-base >= 0.3
 BuildRequires:  webyast-base-testsuite
 PreReq:         webyast-base >= 0.3, rubygem-webyast-ntp, rubygem-webyast-services
 
-Obsoletes:      webyast-time-ui
-Obsoletes:      webyast-time-ws
-Provides:       webyast-time-ui
-Provides:       webyast-time-ws
+Obsoletes:      webyast-time-ui < %{version}
+Obsoletes:      webyast-time-ws < %{version}
+Provides:       webyast-time-ui = %{version}
+Provides:       webyast-time-ws = %{version}
 
 Url:            http://en.opensuse.org/Portal:WebYaST
 Summary:        WebYaST - time management

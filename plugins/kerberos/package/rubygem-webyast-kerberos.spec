@@ -31,10 +31,10 @@ BuildRequires:  webyast-base >= 0.3
 BuildRequires:  webyast-base-testsuite
 PreReq:         webyast-base >= 0.3
 
-Obsoletes:	webyast-kerberos-ws
-Obsoletes:	webyast-kerberos-ui
-Provides:	webyast-kerberos-ws
-Provides:	webyast-kerberos-ui
+Obsoletes:	webyast-kerberos-ws < %{version}
+Obsoletes:	webyast-kerberos-ui < %{version}
+Provides:	webyast-kerberos-ws = %{version}
+Provides:	webyast-kerberos-ui = %{version}
 
 Url:            http://rubygems.org/gems/webyast-kerberos
 Summary:        WebYaST - configuration of Kerberos client
