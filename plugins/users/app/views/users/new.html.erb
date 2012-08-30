@@ -202,6 +202,7 @@ function def_group_validation(which){ return true; }
     <div class="left">
       <label class="plugin-icon-container"><%= image_tag("users.png", :class=>"plugin-icon") %></label>
       <label class="plugin-name"><%= _("Users") + header_spacer + _("Add new user")%></label>
+      <%= render :partial => 'shared/online_help', :locals => { :help_name => "user_new"} %>
     </div>
   </div>
 
