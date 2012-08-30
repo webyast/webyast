@@ -1,4 +1,9 @@
 -------------------------------------------------------------------
+Thu Aug 30 16:47:21 UTC 2012 - lslezak@suse.cz
+
+- fixed crash at XML format request
+
+-------------------------------------------------------------------
 Thu Aug 16 19:14:07 UTC 2012 - lslezak@suse.cz
 
 - removed unused ActionDispatch::Static middleware

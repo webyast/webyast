@@ -57,6 +57,12 @@ public
     @ntp = @ntp_available ? Ntp.find : nil
     @stime = Systemtime.find
     @stime.load_timezone params if params[:timezone] #do not reset timezone if ntp fail (bnc#600370)
+
+    respond_to do |format|
+      format.html
+      format.xml { render  :xml => @stime.to_xml( :dasherize => false ) } # RORSCAN_ITL
+      format.json { render :json => @stime.to_json( :dasherize => false ) } # RORSCAN_ITL
+    end
   end
 
 
