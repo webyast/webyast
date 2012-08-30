@@ -54,15 +54,27 @@ end
 
 group :development do
   gem 'gettext', :require => false
-  # gem "ruby-debug"
-  gem "factory_girl"
-  gem 'ruby_parser' # needed for rake gettext:find
-
-  # for downloading online help via "rake download:online_help"
-  gem 'nokogiri'
 end
 
 group :test do
   gem "factory_girl_rails"
   gem "mocha",  :require => false
 end
+
+# add extra Gems for development in Git checkout
+if File.exists? File.expand_path("../../.git",  __FILE__)
+    group :development do
+      # for downloading online help via "rake download:online_help", but usually not needed
+      # gem 'nokogiri'
+
+      # for "rake restdoc"
+      gem 'restility'
+
+      # needed for rake gettext:find
+      gem 'ruby_parser'
+
+      gem "ruby-debug"
+    end
+end
+
+
