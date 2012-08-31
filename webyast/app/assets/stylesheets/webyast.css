@@ -145,7 +145,7 @@ ul li {
   overflow: hidden;
   margin: 0 auto;
   font-size: 0.8em;
-  padding: 0 10px 0;
+  padding: 0 10px 30px;
   width: 97%; }
   #content h3 {
     font-size: 1.7em;
@@ -159,17 +159,28 @@ ul li {
 .module_header {
   margin: 10px; }
 
+html, body {
+    height: 100%;
+}
+
+.wrapper {
+  min-height: 100%;
+  height: auto !important;
+  height: 100%;
+  margin: 0 auto -30px;  /* has to be the negative value of .footer:height !*/
+}
+
 #footer {
+  height: 30px; /* has to be the same as .wrapper:margin !*/
   min-width: 640px;
-  width: 100%;
   max-width: 960px;
   overflow: hidden;
   margin: 0 auto;
   font-size: 0.8em;
-  padding: 0 10px 0;
   width: 97%;
-  padding: 2em 0;
-  color: #949494; }
+  color: #949494;
+  clear:both;
+}
 
 #login-wrapper {
   position: absolute;

@@ -61,6 +61,7 @@
 
 </head>
   <body id="shell">
+    <div class="wrapper">
     <div id='browserWarning' class="big-warning unsupported-browser-warning">
       <%= raw ( _("You are using an unsupported browser. Please switch to at least %sFireFox 10%s or %sInternet Explorer 9%s. Thanks! [%sclose%s]") %
             ["<a href='http://getfirefox.com'>","</a>",
@@ -158,7 +159,8 @@
       <%= yield %>
     </div>
 
-    <div id="footer" style="clear:both; overflow:hidden;">
+    </div>
+    <div id="footer">
       <div class="copy">&copy; 2009-2012 Novell, Inc.</div>
     </div>
 
