@@ -41,3 +41,35 @@ div.webyast_form .ui-accordion-content {
 #MISSING_REGISTRATION {
   padding:10px!important;
 }
+
+.log_button {
+  border: 1px solid #d0d0d0;
+  border-radius: 5px;
+  width: 40px;
+  height: 40px;
+}
+
+.log_button:hover {
+  border-color: #888;
+  background-color: #EEE;
+}
+
+.log_button_top {
+  background: transparent url(/assets/arrow_top.png) no-repeat scroll center center;
+}
+
+.log_button_bottom {
+  background: transparent url(/assets/arrow_bottom.png) no-repeat scroll center center;
+}
+
+.log_button_up {
+  background: transparent url(/assets/arrow_up.png) no-repeat scroll center center;
+}
+
+.log_button_down {
+  background: transparent url(/assets/arrow_down.png) no-repeat scroll center center;
+}
+
+a.loglink {
+  border-bottom: none;
+}
