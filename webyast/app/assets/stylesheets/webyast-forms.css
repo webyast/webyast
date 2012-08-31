@@ -23,7 +23,6 @@
   vertical-align:middle;
 }
 
-.fieldset_body div.clearfix { clear:both; overflow:hidden; }
 .fieldset_body div.row { display: block; vertical-align: middle; min-height:32px; }
 .fieldset_body div.row label { vertical-align: middle; width:200px; display:inline-block; float:none;}
 .fieldset_body div.row label.error {  vertical-align: middle; color: #d70000; display:inline; float:none; width:auto; margin-left:20px; font-size:11px;}

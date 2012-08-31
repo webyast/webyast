@@ -59,7 +59,6 @@
   background: -webkit-gradient(linear, left top, left bottom, from(#71D048), to(#39A33A));
 }
 
-.clearfix { clear:both; overflow:hidden; }
 .round3 { -moz-border-radius:3px; -webkit-border-radius:3px; }
 .round5 { -moz-border-radius:5px; -webkit-border-radius:5px; }
 .round5t { -moz-border-radius:5px 5px 0px 0px; -webkit-border-radius:5px 5px 0px 0px; }
