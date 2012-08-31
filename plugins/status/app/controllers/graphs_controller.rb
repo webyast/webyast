@@ -21,10 +21,6 @@
 
 include ApplicationHelper
 
-require 'metric'
-require 'graph'
-require 'uri'
-
 #
 # Controller that exposes graph description in a RESTful
 # way.

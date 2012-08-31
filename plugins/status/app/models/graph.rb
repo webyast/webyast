@@ -324,13 +324,8 @@ class Graph
 
     ret = []
 
-    # for reporing the progress
-    idx = 0
-    len = config.size
-
     config.each {|key,value|
       ret << Graph.new(key,value,limitcheck)
-      idx += 1
     }
 
     if what == :all || ret.blank?
