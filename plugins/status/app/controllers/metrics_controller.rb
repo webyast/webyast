@@ -53,7 +53,9 @@ class MetricsController < ApplicationController
     end
     @metric = Metric.find(:all, conditions)
     @data = nil
+
     respond_to do |format|
+      format.html { redirect_to :controller => "status" }
       format.json { render :json => @metric.to_json }
       format.xml { render :xml => @metric.to_xml(:root => "metrics", :data => @data, :dasherize => false) }
     end
@@ -71,6 +73,7 @@ class MetricsController < ApplicationController
 
     @data = @metric.data(data_opts)
     respond_to do |format|
+      format.html { redirect_to :controller => "status" }
       format.json { render :json => @metric.to_json }
       format.xml { render :xml => @metric.to_xml(:root => "metrics", :data => @data, :dasherize => false) }
     end

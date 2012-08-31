@@ -56,6 +56,7 @@ public
     authorize! :read, Metric
     @graph = Graph.find(:all, params[:checklimits] || true)
     respond_to do |format|
+      format.html { redirect_to :controller => "status" }
       format.json { render :json => @graph.to_json }
       format.xml { render :xml => @graph.to_xml( :root => "graphs", :checklimits => params[:checklimits] || true, :dasherize => false ) }
     end
@@ -68,6 +69,7 @@ public
     authorize! :read, Metric
     @graph = Graph.find(params[:id], params[:checklimits] || true)
     respond_to do |format|
+      format.html { redirect_to :controller => "status" }
       format.json { render :json => @graph.to_json }
       format.xml { render :xml => @graph.to_xml( :root => "graphs", :checklimits => params[:checklimits] || true, :dasherize => false ) }
     end
