@@ -42,11 +42,17 @@ div.webyast_form .ui-accordion-content {
   padding:10px!important;
 }
 
+.log_buttons{
+  margin: 10px;
+}
+
 .log_button {
   border: 1px solid #d0d0d0;
   border-radius: 5px;
   width: 40px;
   height: 40px;
+  float:left;
+  margin: 10px;
 }
 
 .log_button:hover {
