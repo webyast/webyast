@@ -75,10 +75,16 @@ if YastCache.active && !ENV["DISABLE_DATA_PREFETCH"]
     PluginJob.run_async(-3,:GetentPasswd, :find)
   end
 
+  # periodically remove expired auth tokens
+  Delayed::Job.enqueue ExpireAuthTokenJob.new
+
   if ENV["RUN_WORKER"]
     Thread::new do
       ENV["RUN_WORKER"] = 'false'
       Delayed::Worker.new.start
     end
   end
+else
+  # remove obsoleted auth tokens at least at start when delayed job is not running
+  ExpireAuthTokenJob.new.perform
 end
