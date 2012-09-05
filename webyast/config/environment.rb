@@ -86,5 +86,5 @@ if YastCache.active && !ENV["DISABLE_DATA_PREFETCH"]
   end
 else
   # remove obsoleted auth tokens at least at start when delayed job is not running
-  ExpireAuthTokenJob.new.perform
+  ExpireAuthTokenJob.new.perform if ActiveRecord::Base.connection.tables.include?('accounts')
 end
