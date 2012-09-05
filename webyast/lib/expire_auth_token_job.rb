@@ -3,7 +3,7 @@
 class ExpireAuthTokenJob
 
   def perform
-    Rails.logger.info "Removing expired authentication tokens..."
+    Rails.logger.debug "Removing expired authentication tokens..."
     # reset authentication_token in all Accounts updated long time ago
     # Devise.timeout_in is set in initializers/devise.rb
     Account.where(["authentication_token is NOT NULL AND updated_at < ?", Devise.timeout_in.ago]).update_all(:authentication_token => nil)
