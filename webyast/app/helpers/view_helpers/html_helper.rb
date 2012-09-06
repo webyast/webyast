@@ -138,7 +138,6 @@ module ViewHelpers::HtmlHelper
           <p>
             <a href="#" id="error-#{error_id}-show-backtrace-link">Show details</a>
           </p>
-          </p>
           <pre id="error-#{error_id}-backtrace" style="display: none">
           #{backtrace_text}
           </pre>
