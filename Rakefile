@@ -50,6 +50,19 @@ task :default => :test
 end
 
 
+
+desc "Sumbit plugins to YaST:Web OBS repository"
+task :osc_submit do
+  plugins.each do |project|
+      Dir.chdir(project) do
+        if File.exist? "Rakefile"
+          system %(#{env} #{$0} #{tracing} #{verbose} osc_submit)
+          raise "Error on execute '#{$0} #{tracing} #{verbose} #{task_name}' inside #{project}/" if $?.exitstatus != 0
+        end
+      end
+    end
+end
+
 desc "Check if all needed packages are installed correctly for WebYaST"
 task :system_check_packages,  [:install] do |t, args|
   args.with_defaults(:install => "")  
