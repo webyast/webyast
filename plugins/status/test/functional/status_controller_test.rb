@@ -197,7 +197,7 @@ class StatusControllerTest < ActionController::TestCase
     init_data
     get :ajax_log_custom, { :id => "system", :lines => "50" }
     assert_response :success
-    assert_tag :tag => "pre", :content => "1979-01-01 12:00:00 LINE1\n1979-01-01 12:00:01 LINE2\n"
+    assert_tag :tag => "pre", :content => "1979-01-01 12:00:00 LINE1\n1979-01-01 12:00:01 LINE2"
   end
 
   #testing  call ajax_log_custom

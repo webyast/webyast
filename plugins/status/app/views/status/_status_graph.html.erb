@@ -24,7 +24,7 @@
 
 <% unless data.blank? %>
 <script type="text/javascript">
-  var empty = '<%= data[:lines].first[:values].blank? %>' == "true";
+  var empty = '<%= data[:lines].first.try(:[], :values).blank? %>' == "true";
   console.log(empty)
 
   if(empty) {

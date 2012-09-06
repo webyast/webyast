@@ -33,7 +33,7 @@ task :default => :test
 # list of common tasks, being run for every plugin
 #
 
-%w(notes test gettext:pack rdoc pgem package release install_policies check_syntax package-local buildrpm buildrpm-local test:test:rcov restdoc deploy_local license:report).each do |task_name|
+%w(notes test rdoc pgem release install_policies buildrpm buildrpm-local test:test:rcov deploy_local license:report).each do |task_name|
   desc "Run #{task_name} task for all projects"
 
   task task_name do
@@ -49,6 +49,47 @@ task :default => :test
 
 end
 
+# tasks which can be run in parallel
+%w(package package-local restdoc gettext:pack check_syntax).each do |task_name|
+  # tasks started in parallel
+  ptasks = []
+
+  PROJECTS.each do |project|
+    ptask = "#{task_name}_#{project}".to_sym
+
+    if File.exist? File.join(project, "Rakefile")
+      # define single task
+      task ptask do
+        system "(cd '#{project}' && #{env} #{$0} #{tracing} #{task_name})"
+        raise "Error on execute '#{$0} #{tracing} #{verbose} #{task_name}' inside #{project}/" if $?.exitstatus != 0
+      end
+
+      # add it to parallel tasks
+      ptasks << ptask
+    end
+  end
+
+  unless ptasks.empty?
+    # define parallel task
+    desc "Run #{task_name} task in all projects (in parallel)"
+    multitask task_name => ptasks do
+      puts "Finished #{ptasks.size} parallel tasks"
+    end
+  end
+end
+
+
+desc "Sumbit plugins to YaST:Web OBS repository"
+task :osc_submit do
+  plugins.each do |project|
+      Dir.chdir(project) do
+        if File.exist? "Rakefile"
+          system %(#{env} #{$0} #{tracing} #{verbose} osc_submit)
+          raise "Error on execute '#{$0} #{tracing} #{verbose} #{task_name}' inside #{project}/" if $?.exitstatus != 0
+        end
+      end
+    end
+end
 
 desc "Check if all needed packages are installed correctly for WebYaST"
 task :system_check_packages,  [:install] do |t, args|
