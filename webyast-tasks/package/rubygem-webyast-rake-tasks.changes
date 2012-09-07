@@ -1,4 +1,12 @@
 -------------------------------------------------------------------
+Fri Sep  7 12:41:40 UTC 2012 - lslezak@suse.cz
+
+- macros.webyast - use Gemfile.test earlier (when creating test DB),
+  the created Gemfile.test.lock fixes segfault during build on IA64
+  (yes, a strange solution for the crash...)
+- 0.3.4
+
+-------------------------------------------------------------------
 Fri Aug 17 13:00:06 UTC 2012 - lslezak@suse.cz
 
 - fixed restdoc task to correctly select the longest path

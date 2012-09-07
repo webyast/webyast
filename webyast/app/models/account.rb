@@ -19,5 +19,5 @@
 class Account < ActiveRecord::Base
 
   devise :unix2_chkpwd_authenticatable, 
-         :timeoutable
+         :timeoutable, :token_authenticatable
 end

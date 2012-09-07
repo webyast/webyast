@@ -1,4 +1,11 @@
 -------------------------------------------------------------------
+Fri Sep  7 12:54:55 UTC 2012 - lslezak@suse.cz
+
+- added token authentication support
+- fixed PluginJob restart (bnc#779239)
+- 0.3.20
+
+-------------------------------------------------------------------
 Thu Aug 30 14:32:07 UTC 2012 - lslezak@suse.cz
 
 - removed rubygem-ruby_parser dependency (needed only for "rake
