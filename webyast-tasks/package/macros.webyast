@@ -83,12 +83,13 @@
     export RAILS_PARENT=%{webyast_dir} \
     rm -rf $TEST_DB_PATH \
     cd $RPM_BUILD_ROOT/%{_libdir}/ruby/gems/%{rb_ver}/gems/%{mod_full_name} \
-    RAILS_ENV=test rake db:create \
-    RAILS_ENV=test rake db:schema:load \
     cp %{webyast_dir}/Gemfile.test Gemfile.test \
     echo 'gem "%{mod_name}", :path => "."' >> Gemfile.test \
+    BUNDLE_GEMFILE=Gemfile.test RAILS_ENV=test rake db:create \
+    BUNDLE_GEMFILE=Gemfile.test RAILS_ENV=test rake db:schema:load \
     BUNDLE_GEMFILE=Gemfile.test RAILS_ENV=test ADD_BUILD_PATH=1 rake test \
-    rm -rf $TEST_DB_PATH Gemfile.test Gemfile.test.lock log
+    rm -rf $TEST_DB_PATH Gemfile.test Gemfile.test.lock log \
+    cd -
 
 # build (precompile) plugin assets (in %install section)
 %webyast_build_plugin_assets \
