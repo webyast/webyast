@@ -95,6 +95,9 @@ class YastCache
     start_job = true
     jobs.each { |job|
       data = YAML.load job.handler
+      # skip the restart if the object does not support [] operator
+      # (needed to skip non PluginJob objects)
+      next unless data.respond_to?(:[])
       if !arguments.empty? #all args
         found = model == data[:class_name] &&
                 :find == data[:method] &&
