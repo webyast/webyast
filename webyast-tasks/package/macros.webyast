@@ -84,9 +84,9 @@
     rm -rf $TEST_DB_PATH \
     cd $RPM_BUILD_ROOT/%{_libdir}/ruby/gems/%{rb_ver}/gems/%{mod_full_name} \
     cp %{webyast_dir}/Gemfile.test Gemfile.test \
-    echo 'gem "%{mod_name}", :path => "."' >> Gemfile.test \
     BUNDLE_GEMFILE=Gemfile.test RAILS_ENV=test rake db:create \
     BUNDLE_GEMFILE=Gemfile.test RAILS_ENV=test rake db:schema:load \
+    echo 'gem "%{mod_name}", :path => "."' >> Gemfile.test \
     BUNDLE_GEMFILE=Gemfile.test RAILS_ENV=test ADD_BUILD_PATH=1 rake test \
     rm -rf $TEST_DB_PATH Gemfile.test Gemfile.test.lock log \
     cd -
