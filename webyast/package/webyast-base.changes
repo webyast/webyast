@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Mon Sep 10 09:41:04 UTC 2012 - lslezak@suse.cz
+
+- fixed PluginJob detection (bnc#779239)
+- 0.3.21
+
+-------------------------------------------------------------------
 Fri Sep  7 12:54:55 UTC 2012 - lslezak@suse.cz
 
 - added token authentication support

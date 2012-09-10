@@ -91,31 +91,16 @@ class YastCache
     end
     key = YastCache.key(model, :find, *arguments)
     Rails.cache.delete(key) if delete_cache
-    jobs = Delayed::Job.find(:all)
     start_job = true
-    jobs.each { |job|
-      data = YAML.load job.handler
-      # skip the restart if the object does not support [] operator
-      # (needed to skip non PluginJob objects)
-      next unless data.respond_to?(:[])
-      if !arguments.empty? #all args
-        found = model == data[:class_name] &&
-                :find == data[:method] &&
-                arguments == data[:arguments]
-      else
-        found = model == data[:class_name] &&
-                :find == data[:method] &&
-                data[:arguments].empty?
+    job = PluginJob.find(model, :find, arguments)
+    if job
+      if delete_cache
+        job.run_at = Time.now #set starttime to now in order to fill cache as fast as possible
+        job.save
       end
-      if found 
-        if delete_cache
-          job.run_at = Time.now #set starttime to now in order to fill cache as fast as possible
-          job.save
-        end
-        Rails.logger.info("Job #{key} already inserted")
-        start_job = false
-      end
-    }
+      Rails.logger.info("Job #{key} already inserted")
+      start_job = false
+    end
     if start_job
       Rails.logger.info("Inserting job #{key}")
       unless arguments.empty?
