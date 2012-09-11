@@ -1,4 +1,11 @@
 -------------------------------------------------------------------
+Tue Sep 11 09:57:33 UTC 2012 - lslezak@suse.cz
+
+- CSS: fixed tabs (better visible active/inactive tab, display
+  horizontal delimiter)
+- 0.3.22
+
+-------------------------------------------------------------------
 Mon Sep 10 09:41:04 UTC 2012 - lslezak@suse.cz
 
 - fixed PluginJob detection (bnc#779239)

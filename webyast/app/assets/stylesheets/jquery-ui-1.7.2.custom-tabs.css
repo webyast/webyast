@@ -67,8 +67,8 @@
   background: transparent;
   margin: 0px 5px 0px; }
 .fieldset-group.ui-tabs .ui-tabs-nav li a {
-  padding-top: 0;
-  padding-bottom: 0;
+  padding-top: 3px;
+  padding-bottom: 3px;
   border: 0 none transparent; }
 .fieldset-group .ui-tabs-nav .ui-state-default, .fieldset-group .ui-tabs-nav .ui-state-active {
   -moz-border-radius-topleft: 4px;
@@ -84,14 +84,17 @@
   border-style: solid;
   border-width: 1px;
   position: relative;
-  bottom: -1px;
   color: #909090; }
 .fieldset-group .ui-tabs-nav .ui-state-active {
   color: #333333;
   border-bottom-style: none; }
 .fieldset-group.ui-widget-content {
   background: transparent; }
-  .fieldset-group.ui-widget-content .ui-tabs-nav .ui-state-default, .fieldset-group.ui-widget-content .ui-tabs-nav .ui-state-active {
+  .fieldset-group.ui-widget-content .ui-tabs-nav .ui-state-default {
+    background-color: #fafafa;
+    background-image: none;
+     }
+   .fieldset-group.ui-widget-content .ui-tabs-nav .ui-state-active {
     background-color: #eeeeee;
     background-image: none;
     font-weight: bold; }
