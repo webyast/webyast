@@ -1,4 +1,11 @@
 -------------------------------------------------------------------
+Fri Sep 14 14:56:58 UTC 2012 - lslezak@suse.cz
+
+- catch SQLite3::SQLException and retry DB access again
+  (SQLite does not support concurent write, this is just
+   a workaroud for possible race condition with delayed job)
+
+-------------------------------------------------------------------
 Tue Sep 11 09:57:33 UTC 2012 - lslezak@suse.cz
 
 - CSS: fixed tabs (better visible active/inactive tab, display
