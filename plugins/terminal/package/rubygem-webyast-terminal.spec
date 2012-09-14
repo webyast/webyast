@@ -30,6 +30,8 @@ BuildRequires:  webyast-base >= 0.3
 BuildRequires:  webyast-base-testsuite
 PreReq:         webyast-base >= 0.3
 Requires:       shellinabox
+# /usr/bin/pgrep
+Requires:	procps
 
 Url:            http://en.opensuse.org/Portal:WebYaST
 Summary:        WebYaST - terminal plugin
