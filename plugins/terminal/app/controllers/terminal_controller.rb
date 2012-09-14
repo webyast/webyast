@@ -36,7 +36,10 @@ private
 public
 
   def index
-    authorize! :read, Terminal
+    # No permission check is needed here, the terminal runs at a different port (4200)
+    # and the service is provided by shellinabox package, Webyast is just an UI wrapper.
+    # User can connect to https://<host>:4200 manually anyway.
+
     unless shellinabox_running?
       flash[:error] = _("Terminal service is not running. Please start with: 'rcshellinabox start'")
       redirect_to :controller => :controlpanel, :action => :index

@@ -36,7 +36,6 @@ Summary:        WebYaST - terminal plugin
 License:        GPL-2.0
 Group:          Productivity/Networking/Web/Utilities
 Source:         %{mod_full_name}.gem
-Source1:        org.opensuse.yast.modules.yapi.terminal.policy
 
 %package doc
 Summary:        RDoc documentation for %{mod_name}
@@ -74,10 +73,6 @@ needed at runtime.
 %gem_install %{S:0}
 
 mkdir -p $RPM_BUILD_ROOT/usr/share/%{webyast_polkit_dir}
-cp %{SOURCE1} $RPM_BUILD_ROOT/usr/share/%{webyast_polkit_dir}
-
-# remove empty public
-rm -rf $RPM_BUILD_ROOT/%{_libdir}/ruby/gems/%{rb_ver}/gems/%{mod_full_name}/public
 
 %webyast_build_plugin_assets
 
@@ -85,9 +80,6 @@ rm -rf $RPM_BUILD_ROOT/%{_libdir}/ruby/gems/%{rb_ver}/gems/%{mod_full_name}/publ
 %{__rm} -rf $RPM_BUILD_ROOT
 
 %post
-# granting all permissions for root
-/usr/sbin/grantwebyastrights --user root --action grant > /dev/null
-
 %webyast_update_assets
 
 %postun
