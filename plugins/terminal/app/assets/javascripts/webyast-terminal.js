@@ -19,12 +19,13 @@
 */
 
 $(document).ready(function(){
-  $("#iframe").attr("src", "http://localhost:4200");
+  // display shellinabox service running at port 4200 on the same machine
+  $("#term_iframe").attr("src", "https://" + window.location.hostname + ":4200");
 
   $("#fullscreen").click(function(){
     $(".webyast_fieldset").css("position", "static");
     $("#frameBorder").addClass("fullscreen");
-    $("#closeFullscreen").show();
+    $("#closeFullscreen").fadeIn('slow');
   });
 
   $("#closeFullscreen").click(function(){

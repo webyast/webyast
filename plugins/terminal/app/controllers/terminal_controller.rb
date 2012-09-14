@@ -41,7 +41,7 @@ public
     # User can connect to https://<host>:4200 manually anyway.
 
     unless shellinabox_running?
-      flash[:error] = _("Terminal service is not running. Please start with: 'rcshellinabox start'")
+      flash[:error] = _("Terminal service is not running. Please start it with 'rcshellinabox start'")
       redirect_to :controller => :controlpanel, :action => :index
     end
   end
