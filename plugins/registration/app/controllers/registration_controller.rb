@@ -23,6 +23,8 @@
 # Provides access to the registration of the system at NCC/SMT.
 
 class RegistrationController < ApplicationController
+  include ERB::Util
+
   before_filter :init
 
   def init
@@ -100,15 +102,15 @@ class RegistrationController < ApplicationController
   end
 
   def registration_skip_flash
-    "<b>#{ skipped_msg }</b><p>#{ no_updates_msg }<br />#{ try_again_msg }</p>".html_safe
+    "<b>#{ h skipped_msg }</b><p>#{ h no_updates_msg }<br />#{ h try_again_msg }</p>".html_safe
   end
 
   def server_error_flash(msg)
-    "<b>#{ not_succeeded_msg }</b><p>#{ msg || '' } #{ temporary_issue_msg }<br />#{ try_again_msg }</p>".html_safe
+    "<b>#{ h not_succeeded_msg }</b><p>#{ msg || '' } #{ h temporary_issue_msg }<br />#{ h try_again_msg }</p>".html_safe
   end
 
   def data_error_flash(msg)
-    "<b>#{ not_succeeded_msg }</b><p>#{ msg || try_again_msg }</p>".html_safe
+    "<b>#{ h not_succeeded_msg }</b><p>#{ msg || h(try_again_msg) }</p>".html_safe
   end
 
   def registration_logic_error
@@ -182,13 +184,13 @@ class RegistrationController < ApplicationController
         flash_msg = "<ul>"
         changed_services.each do |c|
           if !c[:name].blank? && c[:status] == 'added' then
-            flash_msg += "<li>" + _("Service added:") + " #{c[:name]}</li>"
+            flash_msg += "<li>" + h(_("Service added: %s") % c[:name]) + "</li>"
           end
           unless c[:catalogs].blank?
             flash_msg += "<ul>"
             c[:catalogs].each do |s|
               if s[:status] == 'added' then
-                flash_msg += "<li>" + _("Catalog enabled:") + " #{s[:name]}</li>"
+                flash_msg += "<li>" + h(_("Catalog enabled: %s") % s[:name]) + "</li>"
                 changes = true
               end
             end
@@ -214,7 +216,7 @@ class RegistrationController < ApplicationController
         flash_msg = "<ul>"
         changed_repositories.each do |r|
           if r[:status] == 'added' then
-            flash_msg += "<li>" + _("Repository added:") + " #{r[:name]}</li>"
+            flash_msg += "<li>" + h(_("Repository added: %s") % r[:name]) + "</li>"
             changes = true
           end
         end
