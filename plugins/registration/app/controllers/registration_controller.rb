@@ -25,9 +25,8 @@
 class RegistrationController < ApplicationController
   include ERB::Util
 
-  before_filter :init
-
-  def init
+  def initialize
+    # FIXME: use a constant here (see https://github.com/webyast/webyast/wiki/Localization)
     @trans = {  'email' => _("Email"),
                 'moniker' => _("System name"),
                 'regcode-sles' => _("SLES registration code"),
@@ -48,8 +47,8 @@ class RegistrationController < ApplicationController
   end
 
   def translate_argument_key(key)
-    return '-unknown-' unless key
-    return @trans[key] if ( @trans.kind_of?(Hash) && @trans[key] )
+    return _('[empty]') unless key
+    return @trans[key] if @trans[key]
     key
   end
 
