@@ -165,11 +165,11 @@ class RegistrationController < ApplicationController
     end
   end
 
-  def sources_changes_flash(msg='')
+  def sources_changes_flash(msg=''.html_safe)
     # use an own type for this message
     # because it needs to be displayed and bypass the UI-expert-filter (bnc600842)
     ftype = :repoinfo
-    flash[ftype] ||= ''
+    flash[ftype] ||= ''.html_safe
     flash[ftype] += msg
   end
 
