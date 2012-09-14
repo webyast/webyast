@@ -31,6 +31,8 @@ class RegistrationController < ApplicationController
                 'regcode-sles' => _("SLES registration code"),
                 'regcode-sled' => _("SLED registration code"),
                 'regcode-slms' => _("SLMS registration code"),
+                'regcode-sms' => _("SUSE Manager Server registration code"),
+                'regcode-smp' => _("SUSE Manager Proxy registration code"),
                 'appliance-regcode' => _("Appliance registration code"),
                 'regcode-webyast'   => _("WebYaST registration code"),
                 '___getittranslated1' => _("Registration code"),
