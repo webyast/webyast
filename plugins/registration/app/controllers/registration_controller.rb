@@ -46,6 +46,8 @@ class RegistrationController < ApplicationController
     @options = { 'debug'=>2 , 'forcereg' => 0 }
   end
 
+  private
+
   def translate_argument_key(key)
     return _('[empty]') unless key
     return @trans[key] if @trans[key]
