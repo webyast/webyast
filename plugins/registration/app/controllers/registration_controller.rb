@@ -244,15 +244,6 @@ public
     return
   end
 
-  def reregister
-    # provide a way to force a new registration, even if system is already registered
-    @nexttarget = 'reregisterupdate'
-    # correctly set the forcereg parameter according to registration protocol specification
-    @options['forcereg'] = 1
-
-    register(reregister = true)
-  end
-
   def reregisterupdate
     # update function for reregistration mode - adaption for (bnc#631173)
     #   in reregistration mode only the first request should contain the "forcereg" option
