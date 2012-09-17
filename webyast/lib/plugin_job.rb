@@ -125,24 +125,37 @@ class PluginJob < Struct.new(:class_name,:method,:arguments)
 
   end
 
-#internal method. Use run_async and running? for asynchronous jobs
+  #internal method. Use run_async and running? for asynchronous jobs
   def perform
-
-    object = nil
     object = self[:class_name]
+
     if object.class == Symbol || object.class == String
       object = Object.const_get(object) rescue $!
     end
+
     function_method = self[:method]
     function_args = self[:arguments]
+
     if object.class != NameError && object.respond_to?(function_method)
       Rails.logger.info "Calling job: #{object}:#{function_method}"
-      Rails.logger.info "             args: #{function_args.inspect}" unless function_args.blank?
+      Rails.logger.info "       args: #{function_args.inspect}" unless function_args.blank?
+
       call_identifier = YastCache.key(object,function_method,*function_args)
-      Rails.cache.delete(call_identifier) #cache reset. This dedicates that
-                                          #the values has been re-read
-      ret = object.send(function_method, *function_args)
-      Rails.logger.info "Job returned"  #{ret.inspect}
+
+      #cache reset. This dedicates that the values has been re-read
+      Rails.cache.delete(call_identifier)
+
+      begin
+        ret = object.send(function_method, *function_args)
+      rescue Exception => e
+        Rails.logger.error "Error while executing background job (#{function_method}, args: #{function_args.inspect}): #{e.message}"
+        Rails.logger.error "Backtrace: #{e.backtrace.join("\n")}"
+        raise
+      end
+
+      Rails.logger.info "Job finished"
+      Rails.logger.debug "Job result: #{ret.inspect}"
+
       resources = Resource.find :all
       resources.each  do |resource|
         if resource.cache_reload_after > 0
@@ -150,7 +163,7 @@ class PluginJob < Struct.new(:class_name,:method,:arguments)
           if YastCache.find_key(name) == call_identifier
             Rails.logger.info "Enqueuing job again (sleep #{resource.cache_reload_after} seconds)"
 
-            try_updating_db do
+            PluginJob.try_updating_db do
               Delayed::Job.enqueue(PluginJob.new(self[:class_name],function_method,function_args),
                                  {:priority => resource.cache_priority, 
                                    :run_at => (resource.cache_reload_after).seconds.from_now})
