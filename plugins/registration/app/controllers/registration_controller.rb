@@ -44,6 +44,8 @@ class RegistrationController < ApplicationController
              }
     @trans.freeze
     @options = { 'debug'=>2 , 'forcereg' => 0 }
+
+    super
   end
 
   private
