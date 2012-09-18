@@ -107,7 +107,7 @@ class PluginJob < Struct.new(:class_name,:method,:arguments)
         begin
           attempt += 1
           yield
-        rescue SQLite3::SQLException => e
+        rescue ActiveRecord::StatementInvalid => e
           if attempt <= 20
             # wait a little bit so the other process can finish writing,
             # but do not sleep in test mode (faster test run)
@@ -119,6 +119,9 @@ class PluginJob < Struct.new(:class_name,:method,:arguments)
             Rails.logger.error "DB update failed: #{e.message}"
             raise
           end
+        rescue Exception => e
+          Rails.logger.error "Unknown exception while updating DB: #{e.class}: #{e.message}"
+          raise
         end
       end
     end
