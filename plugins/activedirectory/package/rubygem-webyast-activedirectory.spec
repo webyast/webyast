@@ -17,7 +17,7 @@
 
 
 Name:           rubygem-webyast-activedirectory
-Version:        0.3.3
+Version:        0.3.4
 Release:        0
 %define mod_name webyast-activedirectory
 %define mod_full_name %{mod_name}-%{version}
@@ -34,6 +34,7 @@ PreReq:         webyast-base
 PreReq:         rubygem-webyast-rake-tasks >= 0.2
 Requires:       yast2-dbus-server
 Requires:       yast2-samba-client
+Requires:	samba-client
 
 Obsoletes:	webyast-activedirectory-ws < %{version}
 Obsoletes:	webyast-activedirectory-ui < %{version}
