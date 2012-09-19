@@ -1,7 +1,7 @@
 -------------------------------------------------------------------
 Wed Sep 19 11:16:26 UTC 2012 - lslezak@suse.cz
 
-- added samba-client dependency (bnc#781121)
+- added samba-client and samba-windbind dependency (bnc#781121)
 - 0.3.4
 
 -------------------------------------------------------------------

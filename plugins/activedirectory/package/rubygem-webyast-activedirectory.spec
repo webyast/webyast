@@ -34,7 +34,7 @@ PreReq:         webyast-base
 PreReq:         rubygem-webyast-rake-tasks >= 0.2
 Requires:       yast2-dbus-server
 Requires:       yast2-samba-client
-Requires:	samba-client
+Requires:	samba-client samba-winbind
 
 Obsoletes:	webyast-activedirectory-ws < %{version}
 Obsoletes:	webyast-activedirectory-ui < %{version}
