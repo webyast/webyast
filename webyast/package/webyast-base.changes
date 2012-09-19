@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Wed Sep 19 14:46:42 UTC 2012 - lslezak@suse.cz
+
+- nginx.conf - keep $PATH environment variable so e.g. `grep`
+  does not fail with "sh: grep: command not found" error
+
+-------------------------------------------------------------------
 Fri Sep 14 14:56:58 UTC 2012 - lslezak@suse.cz
 
 - catch SQLite3::SQLException and retry DB access again
