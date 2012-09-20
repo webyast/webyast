@@ -2,6 +2,8 @@
 Thu Sep 20 07:04:33 UTC 2012 - lslezak@suse.cz
 
 - require rubygem-rake < 0.9 in SLES11 (bnc#777877)
+- disabled background caching to avoid DelayedJob race conditions
+  (e.g. in bnc#780389, maybe in bnc#779511 or bnc#779537)
 
 -------------------------------------------------------------------
 Wed Sep 19 14:46:42 UTC 2012 - lslezak@suse.cz
