@@ -1,4 +1,9 @@
 -------------------------------------------------------------------
+Thu Sep 20 07:41:57 UTC 2012 - lslezak@suse.cz
+
+- 0.3.7
+
+-------------------------------------------------------------------
 Fri Sep 14 16:05:32 UTC 2012 - lslezak@suse.cz
 
 - removed org.opensuse.yast.modules.yapi.terminal.policy permission
