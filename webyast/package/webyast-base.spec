@@ -10,7 +10,7 @@
 
 
 Name:           webyast-base
-Version:        0.3.23
+Version:        0.3.24
 Release:        0
 Provides:       yast2-webservice = %{version}
 Obsoletes:      yast2-webservice < %{version}
@@ -162,7 +162,7 @@ Testsuite for core WebYaST package.
 %package branding-default
 Group:    Productivity/Networking/Web/Utilities
 Provides: webyast-base-branding = %{version}
-Requires: %{name} = %{version}
+PreReq: %{name} = %{version}
 Conflicts:      otherproviders(webyast-base-branding)
 Supplements:    packageand(webyast-base:branding-default)
 
