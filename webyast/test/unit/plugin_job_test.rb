@@ -28,9 +28,9 @@ class PluginJobTest < ActiveSupport::TestCase
   ##
 
   test "DB access: sqlite still fails" do
-    exception = SQLite3::SQLException.new("cannot start a transaction within a transaction: begin transaction")
+    exception = ActiveRecord::StatementInvalid.new("cannot start a transaction within a transaction: begin transaction")
 
-    assert_raise SQLite3::SQLException do
+    assert_raise ActiveRecord::StatementInvalid do
       PluginJob.try_updating_db do
         raise exception
       end
@@ -49,7 +49,7 @@ class PluginJobTest < ActiveSupport::TestCase
   end
 
   test "DB access: sqlite fails but then passes" do
-    exception = SQLite3::SQLException.new("cannot start a transaction within a transaction: begin transaction")
+    exception = ActiveRecord::StatementInvalid.new("cannot start a transaction within a transaction: begin transaction")
     counter = 0
     ret = nil
 
