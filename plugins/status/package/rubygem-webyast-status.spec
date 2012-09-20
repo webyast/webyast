@@ -17,7 +17,7 @@
 
 
 Name:           rubygem-webyast-status
-Version:        0.3.4
+Version:        0.3.5
 Release:        0
 %define mod_name webyast-status
 %define mod_full_name %{mod_name}-%{version}
@@ -30,6 +30,9 @@ BuildRequires:  rubygem-restility
 BuildRequires:  webyast-base >= 0.3
 BuildRequires:  webyast-base-testsuite
 PreReq:         webyast-base >= 0.3
+
+# /usr/bin/pgrep
+Requires:	procps
 
 Obsoletes:	webyast-status-ws < %{version}
 Obsoletes:	webyast-status-ui < %{version}
