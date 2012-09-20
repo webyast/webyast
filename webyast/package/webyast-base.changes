@@ -1,4 +1,9 @@
 -------------------------------------------------------------------
+Thu Sep 20 07:04:33 UTC 2012 - lslezak@suse.cz
+
+- require rubygem-rake < 0.9 in SLES11 (bnc#777877)
+
+-------------------------------------------------------------------
 Wed Sep 19 14:46:42 UTC 2012 - lslezak@suse.cz
 
 - nginx.conf - keep $PATH environment variable so e.g. `grep`
