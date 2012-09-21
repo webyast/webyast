@@ -1,4 +1,11 @@
 -------------------------------------------------------------------
+Fri Sep 21 13:24:07 UTC 2012 - lslezak@suse.cz
+
+- properly display GUID number when the system is already
+  registered
+- 0.3.4
+
+-------------------------------------------------------------------
 Thu Sep 20 07:43:38 UTC 2012 - lslezak@suse.cz
 
 - 0.3.3

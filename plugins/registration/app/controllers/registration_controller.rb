@@ -70,17 +70,13 @@ class RegistrationController < ApplicationController
   end
 
   def client_guid
-    # handle config error in backend (bnc#592620)
-    guid = nil
-    config_error = false
-    begin
-      status = Register.new()
-      guid = status.guid
-      config_error status.config_error
-      logger.debug "found GUID: #{guid}"
-    rescue
-      logger.debug "Registration could not find registration information: system is unregistered." # RORSCAN_ITL
-    end
+    status = Register.new()
+
+    guid = status.guid
+    config_error = status.config_error
+
+    Rails.logger.debug "Found GUID: #{guid}"
+
     return guid, config_error
   end
 
@@ -328,6 +324,7 @@ public
       register
     else
       @showstatus = true
+      @guid = guid
     end
   end
 

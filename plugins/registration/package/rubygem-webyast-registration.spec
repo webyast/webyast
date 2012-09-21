@@ -11,7 +11,7 @@
 
 # norootforbuild
 Name:           rubygem-webyast-registration
-Version:        0.3.3
+Version:        0.3.4
 Release:        0
 %define mod_name webyast-registration
 %define mod_full_name %{mod_name}-%{version}
