@@ -37,14 +37,12 @@ task :deploy_local , [:user] do |t, args|
   mkdir_p "/var/lib/webyast/status/"
   chmod 0700, "/var/lib/webyast/status/"
   chown args.user, nil, "/var/lib/webyast/status/"
-  
   FileUtils.mkdir_p "/etc/webyast"
   FileUtils.cp_r    "doc/logs.yml", "/etc/webyast"
 end
 
 desc "Build distribution package (no check, for testing only)"
-task :"package-local" do |t|
-  `rake build`
+task :"package-local" => :build do |t|
   FileUtils.mv(Dir.glob("pkg/*.gem"), "package")
   FileUtils.rmdir("pkg")
 end
@@ -55,7 +53,12 @@ Status::Application.load_tasks #   <<<< = require 'tasks/rails'
 require "webyast-status"
 
 require "bundler/gem_tasks"
-task :build => :"gettext:pack"
+
+task :clean_gems do
+  FileUtils.rm Dir.glob("package/*.gem")
+end
+
+task :build => [:"gettext:pack", :clean_gems]
 
 create_online_help_task "Status"
 create_online_help_task "Limits"

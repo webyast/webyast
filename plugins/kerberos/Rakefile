@@ -11,8 +11,7 @@ task :deploy_local do |t|
 end
 
 desc "Build distribution package (no check, for testing only)"
-task :"package-local" do |t|
-  `rake build`
+task :"package-local" => :build do |t|
   FileUtils.mv(Dir.glob("pkg/*.gem"), "package")
   FileUtils.rmdir("pkg")
 end
@@ -23,7 +22,12 @@ Kerberos::Application.load_tasks #   <<<< = require 'tasks/rails'
 require "webyast-kerberos"
 
 require "bundler/gem_tasks"
-task :build => :"gettext:pack"
+
+task :clean_gems do
+  FileUtils.rm Dir.glob("package/*.gem")
+end
+
+task :build => [:"gettext:pack", :clean_gems]
 
 create_online_help_task "Kerberos"
 
