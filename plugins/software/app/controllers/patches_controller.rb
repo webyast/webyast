@@ -25,14 +25,7 @@ require 'base'
 
 class PatchesController < ApplicationController
 
-  # always check permissions
-  before_filter :check_read_permissions, :only => [:index, :show, :show_summary, :load_filter, :license, :message]
-
 private
-
-  def check_read_permissions
-    authorize! :read, Patch
-  end
 
   def collect_done_patches
     done = []
@@ -85,6 +78,7 @@ private
   # GET /patches
   # GET /patches.xml
   def index
+    authorize! :read, Patch
     @msgs = read_messages
     if params['messages']
       Rails.logger.debug "Reading patch messages"
@@ -146,6 +140,7 @@ private
   # GET /patches/1
   # GET /patches/1.xml
   def show
+    authorize! :read, Patch
     # RORSCAN_INL: User has already read permission for ALL patch info
     @patch_update = Patch.find(params[:id])
     if @patch_update.nil?
@@ -160,6 +155,7 @@ private
 
   # this action is rendered as a partial, so it can't throw
   def show_summary
+    authorize! :read, Patch
     error = nil
     patch_updates = nil
     refresh = false
@@ -215,6 +211,7 @@ private
   end
 
   def load_filtered
+    authorize! :read, Patch
     @patch_updates = Patch.find :all
     kind = params[:value]
     search_map = { "green" => ["normal","low"], "security" => ["security"],
@@ -271,6 +268,7 @@ private
   end
 
   def message
+    authorize! :read, Patch
     authorize! :install, Patch
 
     logger.warn "Confirmation of reading patch messages"
@@ -286,7 +284,9 @@ private
   end
 
   def license
+    authorize! :read, Patch
     authorize! :install, Patch
+
     if params[:accept].present? || params[:reject].present?
       params[:accept].present? ? Patch.accept_license : Patch.reject_license
       YastCache.delete(Plugin.new(),"patch")
