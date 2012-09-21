@@ -100,29 +100,27 @@ class PluginJob < Struct.new(:class_name,:method,:arguments)
     # If the retry procedure fails 20 times it gives up.
     # (See https://bugzilla.novell.com/show_bug.cgi?id=780389)
     def try_updating_db
-      if block_given?
-        # the current attempt number
-        attempt = 0
+      # the current attempt number
+      attempt = 0
 
-        begin
-          attempt += 1
-          yield
-        rescue ActiveRecord::StatementInvalid => e
-          if attempt <= 20
-            # wait a little bit so the other process can finish writing,
-            # but do not sleep in test mode (faster test run)
-            sleep 1 unless Rails.env.test?
+      begin
+        attempt += 1
+        yield
+      rescue ActiveRecord::StatementInvalid => e
+        if attempt <= 20
+          # wait a little bit so the other process can finish writing,
+          # but do not sleep in test mode (faster test run)
+          sleep 1 unless Rails.env.test?
 
-            Rails.logger.warn "DB update failed, retrying again (#{attempt})"
-            retry
-          else
-            Rails.logger.error "DB update failed: #{e.message}"
-            raise
-          end
-        rescue Exception => e
-          Rails.logger.error "Unknown exception while updating DB: #{e.class}: #{e.message}"
-          raise
+          Rails.logger.warn "DB update failed, retrying again (#{attempt})"
+          retry
+        else
+          Rails.logger.error "DB update failed: #{e.message}"
+          raise e
         end
+      rescue Exception => e
+        Rails.logger.error "Unknown exception while updating DB: #{e.class}: #{e.message}"
+        raise e
       end
     end
 
@@ -153,7 +151,7 @@ class PluginJob < Struct.new(:class_name,:method,:arguments)
       rescue Exception => e
         Rails.logger.error "Error while executing background job (#{function_method}, args: #{function_args.inspect}): #{e.message}"
         Rails.logger.error "Backtrace: #{e.backtrace.join("\n")}"
-        raise
+        raise e
       end
 
       Rails.logger.info "Job finished"
