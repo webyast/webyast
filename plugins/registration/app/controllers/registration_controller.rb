@@ -23,14 +23,17 @@
 # Provides access to the registration of the system at NCC/SMT.
 
 class RegistrationController < ApplicationController
-  before_filter :init
+  include ERB::Util
 
-  def init
+  def initialize
+    # FIXME: use a constant here (see https://github.com/webyast/webyast/wiki/Localization)
     @trans = {  'email' => _("Email"),
                 'moniker' => _("System name"),
                 'regcode-sles' => _("SLES registration code"),
                 'regcode-sled' => _("SLED registration code"),
                 'regcode-slms' => _("SLMS registration code"),
+                'regcode-sms' => _("SUSE Manager Server registration code"),
+                'regcode-smp' => _("SUSE Manager Proxy registration code"),
                 'appliance-regcode' => _("Appliance registration code"),
                 'regcode-webyast'   => _("WebYaST registration code"),
                 '___getittranslated1' => _("Registration code"),
@@ -41,11 +44,15 @@ class RegistrationController < ApplicationController
              }
     @trans.freeze
     @options = { 'debug'=>2 , 'forcereg' => 0 }
+
+    super
   end
 
+  private
+
   def translate_argument_key(key)
-    return '-unknown-' unless key
-    return @trans[key] if ( @trans.kind_of?(Hash) && @trans[key] )
+    return _('[empty]') unless key
+    return @trans[key] if @trans[key]
     key
   end
 
@@ -98,15 +105,15 @@ class RegistrationController < ApplicationController
   end
 
   def registration_skip_flash
-    "<b>#{ skipped_msg }</b><p>#{ no_updates_msg }<br />#{ try_again_msg }</p>".html_safe
+    "<b>#{ h skipped_msg }</b><p>#{ h no_updates_msg }<br />#{ h try_again_msg }</p>".html_safe
   end
 
   def server_error_flash(msg)
-    "<b>#{ not_succeeded_msg }</b><p>#{ msg || '' } #{ temporary_issue_msg }<br />#{ try_again_msg }</p>".html_safe
+    "<b>#{ h not_succeeded_msg }</b><p>#{ msg || '' } #{ h temporary_issue_msg }<br />#{ h try_again_msg }</p>".html_safe
   end
 
   def data_error_flash(msg)
-    "<b>#{ not_succeeded_msg }</b><p>#{ msg || try_again_msg }</p>".html_safe
+    "<b>#{ h not_succeeded_msg }</b><p>#{ msg || h(try_again_msg) }</p>".html_safe
   end
 
   def registration_logic_error
@@ -165,11 +172,11 @@ class RegistrationController < ApplicationController
     end
   end
 
-  def sources_changes_flash(msg='')
+  def sources_changes_flash(msg=''.html_safe)
     # use an own type for this message
     # because it needs to be displayed and bypass the UI-expert-filter (bnc600842)
     ftype = :repoinfo
-    flash[ftype] ||= ''
+    flash[ftype] ||= ''.html_safe
     flash[ftype] += msg
   end
 
@@ -180,13 +187,13 @@ class RegistrationController < ApplicationController
         flash_msg = "<ul>"
         changed_services.each do |c|
           if !c[:name].blank? && c[:status] == 'added' then
-            flash_msg += "<li>" + _("Service added:") + " #{c[:name]}</li>"
+            flash_msg += "<li>" + h(_("Service added: %s") % c[:name]) + "</li>"
           end
           unless c[:catalogs].blank?
             flash_msg += "<ul>"
             c[:catalogs].each do |s|
               if s[:status] == 'added' then
-                flash_msg += "<li>" + _("Catalog enabled:") + " #{s[:name]}</li>"
+                flash_msg += "<li>" + h(_("Catalog enabled: %s") % s[:name]) + "</li>"
                 changes = true
               end
             end
@@ -212,7 +219,7 @@ class RegistrationController < ApplicationController
         flash_msg = "<ul>"
         changed_repositories.each do |r|
           if r[:status] == 'added' then
-            flash_msg += "<li>" + _("Repository added:") + " #{r[:name]}</li>"
+            flash_msg += "<li>" + h(_("Repository added: %s") % r[:name]) + "</li>"
             changes = true
           end
         end
@@ -237,15 +244,6 @@ public
     flash[:warning] = registration_skip_flash unless guid
     redirect_success
     return
-  end
-
-  def reregister
-    # provide a way to force a new registration, even if system is already registered
-    @nexttarget = 'reregisterupdate'
-    # correctly set the forcereg parameter according to registration protocol specification
-    @options['forcereg'] = 1
-
-    register(reregister = true)
   end
 
   def reregisterupdate

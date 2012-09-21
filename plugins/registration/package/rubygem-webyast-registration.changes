@@ -1,4 +1,19 @@
 -------------------------------------------------------------------
+Thu Sep 20 07:43:38 UTC 2012 - lslezak@suse.cz
+
+- 0.3.3
+
+-------------------------------------------------------------------
+Mon Sep 17 11:34:41 UTC 2012 - lslezak@suse.cz
+
+- fixed routing (fixed skipping registration) (bnc#779580)
+
+-------------------------------------------------------------------
+Fri Sep 14 15:27:37 UTC 2012 - lslezak@suse.cz
+
+- do not display escaped registration result (bnc#779690)
+
+-------------------------------------------------------------------
 Thu Aug 16 13:20:49 UTC 2012 - lslezak@suse.cz
 
 - removed unused ActionDispatch::Static middleware
