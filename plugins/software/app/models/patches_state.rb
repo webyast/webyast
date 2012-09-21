@@ -23,8 +23,6 @@ class PatchesState
   def self.read()
     licenses_to_confirm = Dir.glob(File.join(Patch::LICENSES_DIR,"*")).select {|f| File.file? f}
     if !licenses_to_confirm.empty?
-      file = licenses_to_confirm[0] #take first one
-      text = File.read file
       return { :level => "warning",
                :message_id => "PATCH_EULA",
                :short_description => _("EULA accept required"),
