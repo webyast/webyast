@@ -11,8 +11,10 @@ class ExpireAuthTokenJob
 
   # success hook - started when the job successfuly finishes
   def success(job)
-    # enqueue itself to run after 5 minutes again
-    Delayed::Job.enqueue ExpireAuthTokenJob.new, :run_at => 5.minutes.from_now
+    PluginJob.try_updating_db do
+      # enqueue itself to run after 5 minutes again
+      Delayed::Job.enqueue ExpireAuthTokenJob.new, :run_at => 5.minutes.from_now
+    end
   end
 
 end

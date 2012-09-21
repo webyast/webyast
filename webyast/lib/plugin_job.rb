@@ -33,7 +33,9 @@ class PluginJob < Struct.new(:class_name,:method,:arguments)
     #   patch = Patch.new id
     #   PluginJob.run_async(0,patch,:install)
     def run_async(prio,object,method,*args)
-      Delayed::Job.enqueue(PluginJob.new(object,method,args),{:priority =>prio})
+      try_updating_db do
+        Delayed::Job.enqueue(PluginJob.new(object,method,args),{:priority =>prio})
+      end
     end
 
     # All running/queued PluginJob jobs
@@ -92,35 +94,82 @@ class PluginJob < Struct.new(:class_name,:method,:arguments)
     def running? (object, method = nil, *args)
       !PluginJob.find(object, method, *args).nil?
     end
+
+    # SQLite does not support concurrent write access to DB from different threads
+    # This code retries to update DB if it fails (with 1 second delay),
+    # If the retry procedure fails 20 times it gives up.
+    # (See https://bugzilla.novell.com/show_bug.cgi?id=780389)
+    def try_updating_db
+      # the current attempt number
+      attempt = 0
+
+      begin
+        attempt += 1
+        yield
+      rescue ActiveRecord::StatementInvalid => e
+        if attempt <= 20
+          # wait a little bit so the other process can finish writing,
+          # but do not sleep in test mode (faster test run)
+          sleep 1 unless Rails.env.test?
+
+          Rails.logger.warn "DB update failed, retrying again (#{attempt})"
+          retry
+        else
+          Rails.logger.error "DB update failed: #{e.message}"
+          raise e
+        end
+      rescue Exception => e
+        Rails.logger.error "Unknown exception while updating DB: #{e.class}: #{e.message}"
+        raise e
+      end
+    end
+
   end
 
-#internal method. Use run_async and running? for asynchronous jobs
+  #internal method. Use run_async and running? for asynchronous jobs
   def perform
-
-    object = nil
     object = self[:class_name]
+
     if object.class == Symbol || object.class == String
       object = Object.const_get(object) rescue $!
     end
+
     function_method = self[:method]
     function_args = self[:arguments]
+
     if object.class != NameError && object.respond_to?(function_method)
       Rails.logger.info "Calling job: #{object}:#{function_method}"
-      Rails.logger.info "             args: #{function_args.inspect}" unless function_args.blank?
+      Rails.logger.info "       args: #{function_args.inspect}" unless function_args.blank?
+
       call_identifier = YastCache.key(object,function_method,*function_args)
-      Rails.cache.delete(call_identifier) #cache reset. This dedicates that
-                                          #the values has been re-read
-      ret = object.send(function_method, *function_args)
-      Rails.logger.info "Job returned"  #{ret.inspect}
+
+      #cache reset. This dedicates that the values has been re-read
+      Rails.cache.delete(call_identifier)
+
+      begin
+        ret = object.send(function_method, *function_args)
+      rescue Exception => e
+        Rails.logger.error "Error while executing background job (#{function_method}, args: #{function_args.inspect}): #{e.message}"
+        Rails.logger.error "Backtrace: #{e.backtrace.join("\n")}"
+        raise e
+      end
+
+      Rails.logger.info "Job finished"
+      Rails.logger.debug "Job result: #{ret.inspect}"
+
       resources = Resource.find :all
       resources.each  do |resource|
         if resource.cache_reload_after > 0
           name = resource.href.split("/").last
           if YastCache.find_key(name) == call_identifier
             Rails.logger.info "Enqueuing job again (sleep #{resource.cache_reload_after} seconds)"
-            Delayed::Job.enqueue(PluginJob.new(self[:class_name],function_method,function_args), 
+
+            PluginJob.try_updating_db do
+              Delayed::Job.enqueue(PluginJob.new(self[:class_name],function_method,function_args),
                                  {:priority => resource.cache_priority, 
                                    :run_at => (resource.cache_reload_after).seconds.from_now})
+            end
+
           end
         end
       end

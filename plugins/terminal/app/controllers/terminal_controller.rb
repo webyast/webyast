@@ -29,16 +29,19 @@ private
     # but because it is not fatal information and if someone hackly run process
     # which itself identify as shellinabox, then he runs into problems, but no
     # security problem occur
-    ret = `/bin/ps xaf | /usr/bin/grep '/usr/bin/shellinaboxd' | /usr/bin/grep -vc 'grep'` # RORSCAN_ITL
+    ret = `pgrep -c -f /usr/bin/shellinaboxd` # RORSCAN_ITL
     ret.to_i > 0
   end
 
 public
 
   def index
-    authorize! :read, Terminal
+    # No permission check is needed here, the terminal runs at a different port (4200)
+    # and the service is provided by shellinabox package, Webyast is just an UI wrapper.
+    # User can connect to https://<host>:4200 manually anyway.
+
     unless shellinabox_running?
-      flash[:error] = _("Terminal service is not running. Please start with: 'rcshellinabox start'")
+      flash[:error] = _("Terminal service is not running. Please start it with 'rcshellinabox start'")
       redirect_to :controller => :controlpanel, :action => :index
     end
   end

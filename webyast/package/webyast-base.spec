@@ -10,7 +10,7 @@
 
 
 Name:           webyast-base
-Version:        0.3.22
+Version:        0.3.24
 Release:        0
 Provides:       yast2-webservice = %{version}
 Obsoletes:      yast2-webservice < %{version}
@@ -55,11 +55,13 @@ PreReq:		rubygem-bundler
 Recommends:     logrotate
 %if 0%{?suse_version} == 0 || %suse_version > 1110
 PreReq:         polkit, rubygem-polkit1
+PreReq:         rubygem-rake
 %else
 # <11.1 or SLES11
 PreReq:         PolicyKit, rubygem-polkit
+PreReq:         rubygem-rake < 0.9
 %endif
-PreReq:         rubygem-rake, rubygem-sqlite3
+PreReq:         rubygem-sqlite3
 PreReq:         rubygem-rails-3_2 >= 3.2.3
 PreReq:         rubygem-fast_gettext, rubygem-gettext_i18n_rails
 License:	LGPL-2.1 and GPL-2.0 and Apache-2.0
@@ -160,7 +162,7 @@ Testsuite for core WebYaST package.
 %package branding-default
 Group:    Productivity/Networking/Web/Utilities
 Provides: webyast-base-branding = %{version}
-Requires: %{name} = %{version}
+PreReq: %{name} = %{version}
 Conflicts:      otherproviders(webyast-base-branding)
 Supplements:    packageand(webyast-base:branding-default)
 

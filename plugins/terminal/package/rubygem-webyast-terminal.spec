@@ -17,7 +17,7 @@
 
 
 Name:           rubygem-webyast-terminal
-Version:        0.3.6
+Version:        0.3.7
 Release:        0
 %define mod_name webyast-terminal
 %define mod_full_name %{mod_name}-%{version}
@@ -30,13 +30,14 @@ BuildRequires:  webyast-base >= 0.3
 BuildRequires:  webyast-base-testsuite
 PreReq:         webyast-base >= 0.3
 Requires:       shellinabox
+# /usr/bin/pgrep
+Requires:	procps
 
 Url:            http://en.opensuse.org/Portal:WebYaST
 Summary:        WebYaST - terminal plugin
 License:        GPL-2.0
 Group:          Productivity/Networking/Web/Utilities
 Source:         %{mod_full_name}.gem
-Source1:        org.opensuse.yast.modules.yapi.terminal.policy
 
 %package doc
 Summary:        RDoc documentation for %{mod_name}
@@ -74,10 +75,6 @@ needed at runtime.
 %gem_install %{S:0}
 
 mkdir -p $RPM_BUILD_ROOT/usr/share/%{webyast_polkit_dir}
-cp %{SOURCE1} $RPM_BUILD_ROOT/usr/share/%{webyast_polkit_dir}
-
-# remove empty public
-rm -rf $RPM_BUILD_ROOT/%{_libdir}/ruby/gems/%{rb_ver}/gems/%{mod_full_name}/public
 
 %webyast_build_plugin_assets
 
@@ -85,9 +82,6 @@ rm -rf $RPM_BUILD_ROOT/%{_libdir}/ruby/gems/%{rb_ver}/gems/%{mod_full_name}/publ
 %{__rm} -rf $RPM_BUILD_ROOT
 
 %post
-# granting all permissions for root
-/usr/sbin/grantwebyastrights --user root --action grant > /dev/null
-
 %webyast_update_assets
 
 %postun
@@ -103,9 +97,6 @@ rm -rf $RPM_BUILD_ROOT/%{_libdir}/ruby/gems/%{rb_ver}/gems/%{mod_full_name}/publ
 # precompiled assets
 %dir %{webyast_dir}/public/assets
 %{webyast_dir}/public/assets/*
-
-%dir /usr/share/%{webyast_polkit_dir}
-%attr(644,root,root) /usr/share/%{webyast_polkit_dir}/org.opensuse.yast.modules.yapi.terminal.policy
 
 %files doc
 %defattr(-,root,root,-)

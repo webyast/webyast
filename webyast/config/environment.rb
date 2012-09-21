@@ -24,7 +24,8 @@ Webyast::Application.initialize!
 
 GettextI18nRails.translations_are_html_safe = true
 
-YastCache.active = Rails.env.production? ? true : false
+# FIXME: temporarily disabled to see how it works without delayed job
+YastCache.active = false # Rails.env.production? ? true : false
 
 if YastCache.active && !ENV["DISABLE_DATA_PREFETCH"]
   #check if table for caches exist and cache is active
@@ -86,5 +87,5 @@ if YastCache.active && !ENV["DISABLE_DATA_PREFETCH"]
   end
 else
   # remove obsoleted auth tokens at least at start when delayed job is not running
-  ExpireAuthTokenJob.new.perform if ActiveRecord::Base.connection.tables.include?('accounts')
+  ExpireAuthTokenJob.new.perform if ActiveRecord::Base.connection.tables.include?('accounts') if !ENV["DISABLE_DATA_PREFETCH"]
 end
