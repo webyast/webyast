@@ -25,7 +25,26 @@ require 'base'
 
 class PatchesController < ApplicationController
 
+  before_filter :show_summary_check, :only => :show_summary
+
+  # include locale in the cache path to cache different translations
+  caches_action :show_summary, :expires_in => 10.minutes, :cache_path => Proc.new {"webyast_patch_summary_#{FastGettext.locale}"}
+
 private
+
+  # check permission and validate cache content
+  def show_summary_check
+    authorize! :read, Patch
+
+    cached_mtime = Rails.cache.fetch("webyast_patch_mtime") do
+      [PackageKit.mtime, Repository.mtime].max
+    end
+
+    current_mtime = [PackageKit.mtime, Repository.mtime].max
+
+    # expire all translations
+    expire_fragment(/webyast_patch_summary_/) if current_mtime != cached_mtime
+  end
 
   def collect_done_patches
     done = []
@@ -155,7 +174,8 @@ private
 
   # this action is rendered as a partial, so it can't throw
   def show_summary
-    authorize! :read, Patch
+    # permission check is done in before_filter
+
     error = nil
     patch_updates = nil
     refresh = false
