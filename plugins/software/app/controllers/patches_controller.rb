@@ -19,9 +19,7 @@
 # you may find current contact information at www.novell.com
 #++
 
-require 'singleton'
 require 'plugin_job'
-require 'base'
 
 class PatchesController < ApplicationController
 

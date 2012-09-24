@@ -19,7 +19,6 @@
 # you may find current contact information at www.novell.com
 #++
 
-require 'resolvable'
 require 'yast/paths'
 
 # Model for patches available via package kit
