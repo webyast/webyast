@@ -1,4 +1,9 @@
 -------------------------------------------------------------------
+Mon Sep 24 12:55:12 UTC 2012 - lslezak@suse.cz
+
+- clear Rails cache at (re)start
+
+-------------------------------------------------------------------
 Thu Sep 20 12:15:28 UTC 2012 - lslezak@suse.cz
 
 - webyast-base-branding-default - PreReq webyast-base (the

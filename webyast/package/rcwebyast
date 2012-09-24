@@ -209,6 +209,9 @@ case "$1" in
   fi
   sed -i 's/9d11bfc98abcf9799082d9c34ec94dc1cc926f0f1bf4bea8c440b497d96b14c1f712c8784d0303ee7dd69e382c3e5e4d38d4c56d1b619eae7acaa6516cd733b1/'"$SECRET"/ /srv/www/webyast/config/environment.rb
 
+	# clear cache (drop possibly obsoleted values)
+	(cd /srv/www/webyast/ && rake -s tmp:cache:clear)
+
 	## Start daemon with startproc(8). If this fails
 	## the return value is set appropriately by startproc.
 	/sbin/startproc -p $PID_FILE $NGINX_BIN -c $NGINX_CONFIG
