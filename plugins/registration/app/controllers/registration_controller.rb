@@ -242,6 +242,47 @@ public
     return
   end
 
+  def configuration
+    authorize! :getregistrationconfig, Register
+
+    @register = Register.new
+
+    respond_to do |format|
+      format.xml { render  :xml => @register.config_to_xml(:dasherize => false) }
+      format.json { render :json => @register.config_to_json }
+      format.any { head :bad_request }
+    end
+  end
+
+  def configuration_update
+    authorize! :setregistrationconfig, Register
+
+    @register = Register.new
+    # read registration server url
+    if params['registrationconfig'] &&
+       params['registrationconfig']['server'] &&
+       params['registrationconfig']['server']['url']
+       newurl = params['registrationconfig']['server']['url'].strip
+       @register.registrationserver = newurl if newurl
+    end
+
+    # read ca certificate file
+    if params['registrationconfig'] &&
+       params['registrationconfig']['certificate'] &&
+       params['registrationconfig']['certificate']['data']
+       newca = params['registrationconfig']['certificate']['data'].strip + "\n"
+       @register.certificate = newca if newca
+    end
+
+    @register.save || raise(_("Error: Could not save the new registration configuration."))
+
+    respond_to do |format|
+      format.xml { render  :xml => @register.config_to_xml(:dasherize => false) }
+      format.json { render :json => @register.config_to_json }
+      format.any { head :ok }
+    end
+  end
+
   def reregisterupdate
     # update function for reregistration mode - adaption for (bnc#631173)
     #   in reregistration mode only the first request should contain the "forcereg" option

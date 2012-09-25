@@ -1,4 +1,11 @@
 -------------------------------------------------------------------
+Tue Sep 25 12:45:04 UTC 2012 - lslezak@suse.cz
+
+- implemented missing registration/configuration URL path
+  (bnc#781541)
+- 0.3.5
+
+-------------------------------------------------------------------
 Fri Sep 21 13:24:07 UTC 2012 - lslezak@suse.cz
 
 - properly display GUID number when the system is already

@@ -7,6 +7,9 @@ WebYaST::RegistrationEngine.routes.draw do
       get 'register'
       get 'reregister'
       get 'reregisterupdate'
+
+      get 'configuration'
+      put 'configuration' => "registration#configuration_update"
     end
   end
 end
