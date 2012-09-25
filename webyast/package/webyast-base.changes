@@ -1,4 +1,11 @@
 -------------------------------------------------------------------
+Tue Sep 25 07:20:24 UTC 2012 - lslezak@suse.cz
+
+- improved expiration of authentication tokens (implemented
+  directly in model to avoid problems with background job)
+  (bnc#779482)
+
+-------------------------------------------------------------------
 Mon Sep 24 12:55:12 UTC 2012 - lslezak@suse.cz
 
 - clear Rails cache at (re)start

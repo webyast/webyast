@@ -1,5 +1,5 @@
 <% if current_account.blank? %>
   <%= { :login => 'denied' }.to_json.html_safe -%>
 <% else %>
-  <%= { :login => 'granted', :auth_token => {:value => current_account.authentication_token} }.to_json.html_safe -%>
+  <%= { :login => 'granted', :auth_token => {:value => current_account.authentication_token, :expires => current_account.token_expires_at} }.to_json.html_safe -%>
 <% end %>
