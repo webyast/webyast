@@ -43,10 +43,13 @@ private
 
     if current_mtime != cached_mtime
       Rails.logger.info "Expiring patch summary: cached: #{cached_mtime}, modified: #{current_mtime}"
-
-      # expire all translations
-      expire_fragment(/webyast_patch_summary_/)
+      expire_summary_cache
     end
+  end
+
+  def expire_summary_cache
+    # expire all translations
+    expire_fragment(/webyast_patch_summary_/)
   end
 
   def collect_done_patches
@@ -205,7 +208,7 @@ private
         ref_timeout = refresh_timeout
       rescue Exception => error
         if error.description.match /Repository (.*) needs to be signed/
-          error_string = _("Cannot read patch updates: GPG key for repository <em>%s</em> is not trusted.") % $1
+          error_string = (_("Cannot read patch updates: GPG key for repository <em>%s</em> is not trusted.") % $1).html_safe
           error_type = :unsigned
         else
           error_string = error.message
@@ -271,13 +274,11 @@ private
 
     if running
       if request.format.html?
-        refresh = true
-        error_type = :install
         error_string = _("Patch installation is in progress.")
 
         if remaining.present?
           error_string << " "
-          error_string << n_("One patch to install.", "%d patches to install.") % remaining
+          error_string << n_("There is one patch to install.", "There are %d patches to install.", remaining) % remaining
         end
 
         flash[:error] = error_string
@@ -298,6 +299,9 @@ private
     begin
       if !update_array.empty?
         Patch::BM.background_enabled? ? Patch.install_patches_by_id_background(update_array) : Patch.install_patches_by_id(update_array)
+
+        # force refreshing of the summary
+        expire_summary_cache
       end
     # FIXME: this might hide some errors
     rescue Exception => e
