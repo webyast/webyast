@@ -23,6 +23,7 @@ require 'yast/paths'
 
 # Model for patches available via package kit
 class Patch < Resolvable
+  BM = BackgroundManager.instance
 
   attr_accessor :messages
 
@@ -30,6 +31,8 @@ class Patch < Resolvable
   LICENSES_DIR = File.join(YaST::Paths::VAR,"software","licenses")
   ACCEPTED_LICENSES_DIR = File.join(YaST::Paths::VAR,"software","licenses","accepted")
   JOB_PRIO = -30
+
+  INSTALL_ALL_ID = "patch_install_all"
 
   private
 
@@ -76,18 +79,21 @@ class Patch < Resolvable
     # background process doesn't work correctly if class reloading is active
     # (static class members are lost between requests)
     # So the job queue is also not active
-    if background && !YastCache.job_queue_enabled?
+    if background && !BM.background_enabled?
       Rails.logger.info "Job queue is not active. Disable background mode"
       background = false
     end
+
     update_id = self.resolvable_id
-    Rails.logger.error "Install Update: #{update_id}"
-    unless background
-      Patch.install(update_id) #install at once
+
+    if background
+      Thread.new() do
+        Rails.logger.info("Intalling update #{update_id} in a backround thread")
+        Patch.install(update_id)
+      end
     else
-      #inserting job in background
-      Rails.logger.info("Inserting job: :Patch, :install, #{update_id}  ")
-      PluginJob.run_async(JOB_PRIO, :Patch, :install, update_id )
+      Rails.logger.info("Intalling update #{update_id}")
+      Patch.install(update_id) #install at once
     end
   end
 
@@ -122,6 +128,49 @@ class Patch < Resolvable
       PackageKit.unlock
     end
     return patch_updates
+  end
+
+
+  def self.install_all
+    if Patch::BM.add_process(Patch::INSTALL_ALL_ID)
+      Rails.logger.info "Installing all patches in background"
+
+      Thread.new do
+        begin
+          patches = Patch.do_find(:available)
+
+          # set number of patches to install
+          Patch::BM.update_progress(Patch::INSTALL_ALL_ID) do |bs|
+            bs.status = "0/#{patches.size}"
+          end
+
+          patches.each_with_index do |patch, idx|
+            patch.install
+
+            Patch::BM.update_progress(Patch::INSTALL_ALL_ID) do |bs|
+              bs.status = "#{idx + 1}/#{patches.size}"
+            end
+          end
+
+          Patch::BM.finish_process(Patch::INSTALL_ALL_ID, patches)
+        rescue Exception => e
+          Patch::BM.finish_process(Patch::INSTALL_ALL_ID, e)
+        end
+      end
+    end
+  end
+
+  def self.installing
+    progress = Patch::BM.get_progress(Patch::INSTALL_ALL_ID)
+
+    return [false, 0] unless progress
+
+    remaining = nil
+    if progress.status.match /^([0-9]+)\/([0-9]+)/
+      remaining = $2 - $1
+    end
+
+    return [true, remaining]
   end
 
 

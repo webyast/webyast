@@ -83,11 +83,6 @@ private
   end
 
   def running_install_jobs
-    running = PluginJob.running(:Patch, :install)
-    Rails.logger.info("#{running} installation jobs in the queue")
-    Rails.cache.delete("patch:installed") if running == 0 #remove installed patches from cache if the installation
-                                                          #has been finished
-    running
   end
 
   public
@@ -122,12 +117,18 @@ private
     end
 
     #checking if an installation is running
-    running = running_install_jobs
-    if running > 0 #there is process which runs installation
+    running, remaining = Patch.installing
+    if running #there is process which runs installation
       raise InstallInProgressException.new( running )unless request.format.html?
       # patch update installation in progress
       # display the message and reload after a while
-      @flash_message = _("Cannot obtain patches, installation in progress. Remain %d packages.") % running
+      @flash_message = _("Cannot read available pataches, patch installation is in progress.")
+
+      if remaining.present?
+        @flash_message << " "
+        @flash_message << n_("One patch to install.", "%d patches to install.") % remaining
+      end
+
       @patch_updates = []
       @error = true
       @reload = true      
@@ -178,11 +179,17 @@ private
     patch_updates = nil
     refresh = false
     error_type = :none
-    running = running_install_jobs
-    if running > 0 #there is process which runs installation
-      refresh = true if running > 0 #refresh state of installation
-      error_string = _("Cannot obtain patches, installation in progress. Remain %d patches.") % running
+    running, remaining = Patch.installing
+
+    if running
+      refresh = true
       error_type = :install
+      error_string = _("Patch installation is in progress.")
+
+      if remaining.present?
+        error_string << " "
+        error_string << n_("One patch to install.", "%d patches to install.") % remaining
+      end
     elsif PatchesState.read[:message_id] == "PATCH_EULA" #checking if there is a missing licence
       error_type = :license
     else
@@ -246,11 +253,8 @@ private
   # Starting installation of all proposed patches
   def start_install_all
     authorize! :install, Patch
-    logger.info "Start installation of all patches"
-    all = Patch.find(:all)
-    Patch.install_patches(all)
-    logger.info "All #{all.inspect}"
-    logger.info "Show summary"
+
+    Patch.install_all
     show_summary
   end
 
