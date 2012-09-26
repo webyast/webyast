@@ -182,12 +182,12 @@ private
 
     error = nil
     patch_updates = nil
-    refresh = false
+    ref_timeout = nil
     error_type = :none
     running, remaining = Patch.installing
 
     if running
-      refresh = true
+      ref_timeout = 1.minute
       error_type = :install
       error_string = h _("Patch installation is in progress.")
 
@@ -202,7 +202,7 @@ private
       begin
         patch_updates = Patch.find :all
         patch_updates = patch_updates + collect_done_patches #report also which patches is installed
-        refresh = true
+        ref_timeout = refresh_timeout
       rescue Exception => error
         if error.description.match /Repository (.*) needs to be signed/
           error_string = _("Cannot read patch updates: GPG key for repository <em>%s</em> is not trusted.") % $1
@@ -227,8 +227,6 @@ private
       flash.clear #no flash from load_proxy
     end
 
-    # don't refresh if there was an error
-    ref_timeout = refresh ? refresh_timeout : nil
     respond_to do |format|
       format.html { render :partial => "patch_summary", 
                            :locals => { :patch => patches_summary, 
