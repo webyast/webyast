@@ -65,13 +65,48 @@ class Patch < Resolvable
     super :patch_update, options, @messages
   end
 
-  def self.install_patches_by_id ids
-    to_install = []
-    ids.each do |id|
-      patch = Patch.find(id)
-      to_install << patch if patch
+  def self.install_patches_by_id_background ids
+    if Patch::BM.add_process(Patch::INSTALL_ALL_ID)
+      Rails.logger.info "Installing #{ids.size} patches in background"
+
+      Thread.new do
+        install_patches_by_id ids
+      end
     end
-    install_patches to_install
+  end
+
+  def self.install_patches_by_id ids
+    begin
+      patches = []
+
+      ids.each do |id|
+        patch = Patch.find(id)
+        patches << patch if patch
+      end
+
+      Rails.logger.info "** Found #{patches.size} patches to install"
+
+      # set number of patches to install
+      Patch::BM.update_progress(Patch::INSTALL_ALL_ID) do |bs|
+        bs.status = "0/#{patches.size}"
+      end
+
+      patches.each_with_index do |patch, idx|
+        Rails.logger.info "** Installing patch #{patch.inspect}"
+
+        patch.install
+
+        Patch::BM.update_progress(Patch::INSTALL_ALL_ID) do |bs|
+          bs.status = "#{idx + 1}/#{patches.size}"
+        end
+      end
+
+      Rails.logger.info "** Patch installation finished"
+
+      Patch::BM.finish_process(Patch::INSTALL_ALL_ID, patches)
+    rescue Exception => e
+      Patch::BM.finish_process(Patch::INSTALL_ALL_ID, e)
+    end
   end
 
   # install
@@ -167,7 +202,7 @@ class Patch < Resolvable
 
     remaining = nil
     if progress.status.match /^([0-9]+)\/([0-9]+)/
-      remaining = $2 - $1
+      remaining = $2.to_i - $1.to_i
     end
 
     return [true, remaining]

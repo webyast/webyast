@@ -22,6 +22,7 @@
 require 'plugin_job'
 
 class PatchesController < ApplicationController
+  include ERB::Util
 
   before_filter :show_summary_check, :only => :show_summary
 
@@ -40,8 +41,12 @@ private
 
     current_mtime = [PackageKit.mtime, Repository.mtime].max
 
-    # expire all translations
-    expire_fragment(/webyast_patch_summary_/) if current_mtime != cached_mtime
+    if current_mtime != cached_mtime
+      Rails.logger.info "Expiring patch summary: cached: #{cached_mtime}, modified: #{current_mtime}"
+
+      # expire all translations
+      expire_fragment(/webyast_patch_summary_/)
+    end
   end
 
   def collect_done_patches
@@ -122,11 +127,11 @@ private
       raise InstallInProgressException.new( running )unless request.format.html?
       # patch update installation in progress
       # display the message and reload after a while
-      @flash_message = _("Cannot read available pataches, patch installation is in progress.")
+      @flash_message = h _("Cannot read available pataches, patch installation is in progress.")
 
       if remaining.present?
-        @flash_message << " "
-        @flash_message << n_("One patch to install.", "%d patches to install.") % remaining
+        @flash_message << "<br/>".html_safe
+        @flash_message << h(n_("There is one patch to install.", "There are %d patches to install.", remaining) % remaining)
       end
 
       @patch_updates = []
@@ -184,11 +189,11 @@ private
     if running
       refresh = true
       error_type = :install
-      error_string = _("Patch installation is in progress.")
+      error_string = h _("Patch installation is in progress.")
 
       if remaining.present?
-        error_string << " "
-        error_string << n_("One patch to install.", "%d patches to install.") % remaining
+        error_string << "<br/>".html_safe
+        error_string << h(n_("There is one patch to install.", "There are %d patches to install.", remaining) % remaining)
       end
     elsif PatchesState.read[:message_id] == "PATCH_EULA" #checking if there is a missing licence
       error_type = :license
@@ -263,6 +268,26 @@ private
 
   def install
     authorize! :install, Patch
+
+    running, remaining = Patch.installing
+
+    if running
+      if request.format.html?
+        refresh = true
+        error_type = :install
+        error_string = _("Patch installation is in progress.")
+
+        if remaining.present?
+          error_string << " "
+          error_string << n_("One patch to install.", "%d patches to install.") % remaining
+        end
+
+        flash[:error] = error_string
+      end
+
+      render :show and return
+    end
+
     update_array = []
 
     #search for patches and collect the ids
@@ -273,7 +298,10 @@ private
     }
     @patch_update = Patch.new({})
     begin
-      Patch.install_patches_by_id update_array
+      if !update_array.empty?
+        Patch::BM.background_enabled? ? Patch.install_patches_by_id_background(update_array) : Patch.install_patches_by_id(update_array)
+      end
+    # FIXME: this might hide some errors
     rescue Exception => e
       Rails.logger.info "Some patches are not needed in #{update_array.inspect} anymore: #{e.message}"
     end
