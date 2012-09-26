@@ -32,7 +32,7 @@ class Patch < Resolvable
   ACCEPTED_LICENSES_DIR = File.join(YaST::Paths::VAR,"software","licenses","accepted")
   JOB_PRIO = -30
 
-  INSTALL_ALL_ID = "patch_install_all"
+  PATCH_INSTALL_ID = "patch_install"
 
   private
 
@@ -66,7 +66,7 @@ class Patch < Resolvable
   end
 
   def self.install_patches_by_id_background ids
-    if Patch::BM.add_process(Patch::INSTALL_ALL_ID)
+    if Patch::BM.add_process(Patch::PATCH_INSTALL_ID)
       Rails.logger.info "Installing #{ids.size} patches in background"
 
       Thread.new do
@@ -87,7 +87,7 @@ class Patch < Resolvable
       Rails.logger.info "** Found #{patches.size} patches to install"
 
       # set number of patches to install
-      Patch::BM.update_progress(Patch::INSTALL_ALL_ID) do |bs|
+      Patch::BM.update_progress(Patch::PATCH_INSTALL_ID) do |bs|
         bs.status = "0/#{patches.size}"
       end
 
@@ -96,16 +96,16 @@ class Patch < Resolvable
 
         patch.install
 
-        Patch::BM.update_progress(Patch::INSTALL_ALL_ID) do |bs|
+        Patch::BM.update_progress(Patch::PATCH_INSTALL_ID) do |bs|
           bs.status = "#{idx + 1}/#{patches.size}"
         end
       end
 
       Rails.logger.info "** Patch installation finished"
 
-      Patch::BM.finish_process(Patch::INSTALL_ALL_ID, patches)
+      Patch::BM.finish_process(Patch::PATCH_INSTALL_ID, patches)
     rescue Exception => e
-      Patch::BM.finish_process(Patch::INSTALL_ALL_ID, e)
+      Patch::BM.finish_process(Patch::PATCH_INSTALL_ID, e)
     end
   end
 
@@ -167,7 +167,7 @@ class Patch < Resolvable
 
 
   def self.install_all
-    if Patch::BM.add_process(Patch::INSTALL_ALL_ID)
+    if Patch::BM.add_process(Patch::PATCH_INSTALL_ID)
       Rails.logger.info "Installing all patches in background"
 
       Thread.new do
@@ -175,28 +175,28 @@ class Patch < Resolvable
           patches = Patch.do_find(:available)
 
           # set number of patches to install
-          Patch::BM.update_progress(Patch::INSTALL_ALL_ID) do |bs|
+          Patch::BM.update_progress(Patch::PATCH_INSTALL_ID) do |bs|
             bs.status = "0/#{patches.size}"
           end
 
           patches.each_with_index do |patch, idx|
             patch.install
 
-            Patch::BM.update_progress(Patch::INSTALL_ALL_ID) do |bs|
+            Patch::BM.update_progress(Patch::PATCH_INSTALL_ID) do |bs|
               bs.status = "#{idx + 1}/#{patches.size}"
             end
           end
 
-          Patch::BM.finish_process(Patch::INSTALL_ALL_ID, patches)
+          Patch::BM.finish_process(Patch::PATCH_INSTALL_ID, patches)
         rescue Exception => e
-          Patch::BM.finish_process(Patch::INSTALL_ALL_ID, e)
+          Patch::BM.finish_process(Patch::PATCH_INSTALL_ID, e)
         end
       end
     end
   end
 
   def self.installing
-    progress = Patch::BM.get_progress(Patch::INSTALL_ALL_ID)
+    progress = Patch::BM.get_progress(Patch::PATCH_INSTALL_ID)
 
     return [false, 0] unless progress
 
