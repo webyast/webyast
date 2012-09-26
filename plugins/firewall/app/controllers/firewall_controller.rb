@@ -33,6 +33,7 @@ class FirewallController < ApplicationController
     params[name] == "true"
   end
 
+  # FIXME: use JSON (Hash#to_json) here
   def service_to_js(service)
     return ("{ input_name: '"+service.input_name+
             "', name: '"+service.name+
