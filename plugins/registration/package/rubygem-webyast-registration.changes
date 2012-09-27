@@ -1,4 +1,11 @@
 -------------------------------------------------------------------
+Thu Sep 27 12:23:09 UTC 2012 - lslezak@suse.cz
+
+- fixed HTML escaping in JSON/XML responses (bnc#782507)
+  (by jmassaguerpla@suse.com)
+- 0.3.6
+
+-------------------------------------------------------------------
 Tue Sep 25 12:45:04 UTC 2012 - lslezak@suse.cz
 
 - implemented missing registration/configuration URL path
