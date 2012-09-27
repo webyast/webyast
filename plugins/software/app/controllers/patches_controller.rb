@@ -90,9 +90,6 @@ private
     return timeout
   end
 
-  def running_install_jobs
-  end
-
   public
 
   # GET /patches
@@ -260,7 +257,11 @@ private
   def start_install_all
     authorize! :install, Patch
 
-    Patch.install_all
+    Patch::BM.background_enabled? ? Patch.install_all_background : Patch.install_all
+
+    # force refreshing of the summary
+    expire_summary_cache
+
     show_summary
   end
 

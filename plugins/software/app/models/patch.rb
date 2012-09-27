@@ -165,33 +165,36 @@ class Patch < Resolvable
     return patch_updates
   end
 
-
-  def self.install_all
+  def self.install_all_background
     if Patch::BM.add_process(Patch::PATCH_INSTALL_ID)
-      Rails.logger.info "Installing all patches in background"
+      Rails.logger.info "Installing all available patches in background"
 
       Thread.new do
-        begin
-          patches = Patch.do_find(:available)
+        install_all
+      end
+    end
+  end
 
-          # set number of patches to install
-          Patch::BM.update_progress(Patch::PATCH_INSTALL_ID) do |bs|
-            bs.status = "0/#{patches.size}"
-          end
+  def self.install_all
+    begin
+      patches = Patch.do_find(:available)
 
-          patches.each_with_index do |patch, idx|
-            patch.install
+      # set number of patches to install
+      Patch::BM.update_progress(Patch::PATCH_INSTALL_ID) do |bs|
+        bs.status = "0/#{patches.size}"
+      end
 
-            Patch::BM.update_progress(Patch::PATCH_INSTALL_ID) do |bs|
-              bs.status = "#{idx + 1}/#{patches.size}"
-            end
-          end
+      patches.each_with_index do |patch, idx|
+        patch.install
 
-          Patch::BM.finish_process(Patch::PATCH_INSTALL_ID, patches)
-        rescue Exception => e
-          Patch::BM.finish_process(Patch::PATCH_INSTALL_ID, e)
+        Patch::BM.update_progress(Patch::PATCH_INSTALL_ID) do |bs|
+          bs.status = "#{idx + 1}/#{patches.size}"
         end
       end
+
+      Patch::BM.finish_process(Patch::PATCH_INSTALL_ID, patches)
+    rescue Exception => e
+      Patch::BM.finish_process(Patch::PATCH_INSTALL_ID, e)
     end
   end
 
