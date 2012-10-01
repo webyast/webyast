@@ -35,14 +35,13 @@ private
   def show_summary_check
     authorize! :read, Patch
 
-    cached_mtime = Rails.cache.fetch("webyast_patch_mtime") do
-      Patch.mtime
-    end
-
+    cached_mtime = Rails.cache.fetch("webyast_patch_mtime")
     current_mtime = Patch.mtime
 
     if current_mtime != cached_mtime
       Rails.logger.info "Expiring patch summary: cached: #{cached_mtime}, modified: #{current_mtime}"
+      # update the time stamp
+      Rails.cache.write("webyast_patch_mtime", current_mtime)
       expire_summary_cache
     end
   end
@@ -109,6 +108,7 @@ private
     if !@msgs.blank? && request.format.html?
       #@msgs.gsub!('<br/>', ' ')
       @message = @msgs.map{|s| s[:message]}.to_s.gsub(/\n/, '')
+      # FIXME: do NOT put messages to flash, the storage is VERY limited (< 4kB), just put a link to show them
       flash[:warning] = _("There are patch installation messages available") + details(@message)
     end
 
