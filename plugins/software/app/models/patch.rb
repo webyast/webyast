@@ -275,9 +275,6 @@ class Patch < Resolvable
     installed << pk_id
     Rails.cache.write("patch:installed", installed)
     
-    YastCache.delete(self,pk_id.split(';')[1])
-    #resetting status in order to get install messagas, EULAs,....
-    YastCache.reset(Plugin.new(),"patch")
     return ret
   end
 
