@@ -275,6 +275,7 @@ public
   end
 
   def config_to_xml( options = {} )
+    # FIXME: the status is read in constructor, why reading again?
     read_status
     xml = options[:builder] ||= Builder::XmlMarkup.new(options)
     xml.instruct! unless options[:skip_instruct]
@@ -293,6 +294,7 @@ public
   end
 
   def to_xml( options = {} )
+    # FIXME: the status is read in constructor, why reading again?
     read_status
     xml = options[:builder] ||= Builder::XmlMarkup.new(options)
     xml.instruct! unless options[:skip_instruct]
