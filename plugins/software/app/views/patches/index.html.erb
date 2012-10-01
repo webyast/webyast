@@ -41,27 +41,27 @@
     });
 
     $('#all').click(function(){
-      $('table.patches tr').show();
+      $('table.patches tr td').show();
     });
      
     $('#security').click(function(){
-      $('table.patches tr').hide();
-      $('table.patches tr.patch_kind_security').show();
+      $('table.patches tr td').hide();
+      $('table.patches tr.patch_kind_security td').show();
     });
      
     $('#important').click(function(){
-      $('table.patches tr').hide();
-      $('table.patches tr.patch_kind_important').show();
+      $('table.patches tr td').hide();
+      $('table.patches tr.patch_kind_important td').show();
     });
      
     $('#recommended').click(function(){
-      $('table.patches tr').hide();
-      $('table.patches tr.patch_kind_recommended').show();
+      $('table.patches tr td').hide();
+      $('table.patches tr.patch_kind_recommended td').show();
     });
      
     $('#optional').click(function(){
-      $('table.patches tr').hide();
-      $('table.patches tr.patch_kind_enhancement').show();
+      $('table.patches tr td').hide();
+      $('table.patches tr.patch_kind_enhancement td').show();
     });
 
     $('table.patches td').click(function(){

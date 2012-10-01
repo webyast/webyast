@@ -24,7 +24,7 @@
 <% content_for :head do %>
   <%= javascript_tag do -%>
     function check_all() {
-        $("INPUT[type='checkbox']").attr('checked', $('#All').is(':checked'));
+        $("input[type='checkbox']:visible").attr('checked', $('#All').is(':checked'));
     };
   <% end %>
 <% end %>
