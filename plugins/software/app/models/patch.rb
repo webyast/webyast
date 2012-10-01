@@ -31,8 +31,11 @@ class Patch < Resolvable
   LICENSES_DIR = File.join(YaST::Paths::VAR,"software","licenses")
   ACCEPTED_LICENSES_DIR = File.join(YaST::Paths::VAR,"software","licenses","accepted")
   JOB_PRIO = -30
+  EXPIRATION_TIME = 10.minutes
 
   PATCH_INSTALL_ID = "patch_install"
+  PATCH_FIND_ID = "patch_find_"
+  PATCH_FIND_MTIME = "patch_find_mtime_"
 
   private
 
@@ -221,9 +224,22 @@ class Patch < Resolvable
   # Patch.find(212)
   def self.find(what, opts = {})
     search_id = what == :all ? :available : what
-    YastCache.fetch(self, what) {
+
+    find_id = "#{PATCH_FIND_ID}_#{search_id}"
+    mtime_id = "#{PATCH_FIND_MTIME}_#{search_id}"
+    patch_mtime = Patch.mtime
+
+    # check the cache
+    if patch_mtime != Rails.cache.fetch(mtime_id)
+      Rails.logger.debug "Invalidating patch cache '#{mtime_id}'" unless Rails.cache.fetch(mtime_id).nil?
+      Rails.cache.delete(find_id)
+    end
+
+    Rails.cache.fetch(find_id, :expires_in => Patch::EXPIRATION_TIME) do
+      # update time stamp
+      Rails.cache.write(mtime_id, patch_mtime)
       do_find(search_id)
-    }
+    end
   end
 
   # install an update, based on the PackageKit

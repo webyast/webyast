@@ -27,7 +27,7 @@ class PatchesController < ApplicationController
   before_filter :show_summary_check, :only => :show_summary
 
   # include locale in the cache path to cache different translations
-  caches_action :show_summary, :expires_in => 10.minutes, :cache_path => Proc.new {"webyast_patch_summary_#{FastGettext.locale}"}
+  caches_action :show_summary, :expires_in => Patch::EXPIRATION_TIME, :cache_path => Proc.new {"webyast_patch_summary_#{FastGettext.locale}"}
 
 private
 
