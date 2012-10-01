@@ -36,10 +36,10 @@ private
     authorize! :read, Patch
 
     cached_mtime = Rails.cache.fetch("webyast_patch_mtime") do
-      [PackageKit.mtime, Repository.mtime].max
+      Patch.mtime
     end
 
-    current_mtime = [PackageKit.mtime, Repository.mtime].max
+    current_mtime = Patch.mtime
 
     if current_mtime != cached_mtime
       Rails.logger.info "Expiring patch summary: cached: #{cached_mtime}, modified: #{current_mtime}"

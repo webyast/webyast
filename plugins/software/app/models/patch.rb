@@ -65,6 +65,10 @@ class Patch < Resolvable
     super :patch_update, options, @messages
   end
 
+  def self.mtime
+    [PackageKit.mtime, Repository.mtime].max
+  end
+
   def self.install_patches_by_id_background ids
     if Patch::BM.add_process(Patch::PATCH_INSTALL_ID)
       Rails.logger.info "Installing #{ids.size} patches in background"
