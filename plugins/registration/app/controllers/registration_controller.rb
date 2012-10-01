@@ -336,6 +336,7 @@ public
     end
     ret = @register.register
     if ret != 0
+      # FIXME handle more response types
       render :xml=>@register.to_xml( :root => "registration", :dasherize => false ), :status => 400 and return
     end
   end
@@ -347,19 +348,21 @@ public
     respond_to do |format|
       format.xml { render  :xml => @register.status_to_xml( :dasherize => false ) }
       format.html { render :xml => @register.status_to_xml( :dasherize => false ) }
-      format.json { render :json => @register.status_to_json.to_json }
+      format.json { render :json => @register.status_to_json }
     end
   end
 
   def index
     authorize! :statelessregister, Register
-    guid, config_error = client_guid
-    if config_error
+
+    @register = Register.new
+
+    if @register.config_error
       registration_backend_error
       redirect_success
       return
     end
-    unless guid
+    unless @register.guid
       @arguments = []
       @nexttarget = 'update'
       register
@@ -367,6 +370,12 @@ public
       @showstatus = true
       @guid = guid
     end
+
+    respond_to do |format|
+      format.xml { render  :xml => @register.status_to_xml( :dasherize => false ) }
+      format.json { render :json => @register.status_to_json }
+    end
+
   end
 
   def reregister
