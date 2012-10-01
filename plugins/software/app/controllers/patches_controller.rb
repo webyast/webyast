@@ -127,7 +127,7 @@ private
       raise InstallInProgressException.new( running )unless request.format.html?
       # patch update installation in progress
       # display the message and reload after a while
-      @flash_message = h _("Cannot read available pataches, patch installation is in progress.")
+      @flash_message = h _("Cannot read available patches, patch installation is in progress.")
 
       if remaining.present?
         @flash_message << "<br/>".html_safe
