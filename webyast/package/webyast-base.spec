@@ -105,7 +105,7 @@ BuildRequires:  rubygem-haml, rubygem-builder-3_0
 BuildRequires:  nginx >= 1.0
 BuildRequires:	rubygem-bundler
 BuildRequires:	rubygem-devise, rubygem-devise_unix2_chkpwd_authenticatable, rubygem-devise-i18n
-BuildRequires:	rubygem-cancan, rubygem-delayed_job-3_0, rubygem-delayed_job_active_record
+BuildRequires:	rubygem-cancan
 
 BuildRequires:	rubygem-gettext
 
@@ -115,7 +115,7 @@ Requires:	rubygem-haml, rubygem-sqlite3, rubygem-builder-3_0
 Requires:       rubygem-fast_gettext, rubygem-gettext_i18n_rails, rubygem-rails-i18n
 
 Requires:	rubygem-devise, rubygem-devise_unix2_chkpwd_authenticatable, rubygem-devise-i18n
-Requires:	rubygem-cancan, rubygem-delayed_job-3_0, rubygem-delayed_job_active_record
+Requires:	rubygem-cancan
 
 
 # This is for Hudson (build service) to setup the build env correctly
