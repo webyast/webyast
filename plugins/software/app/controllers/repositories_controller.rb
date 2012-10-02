@@ -114,7 +114,7 @@ private
         unless request.format.html?
           render ErrorResult.error(404, 2, "packagekit error") and return
         else
-          flash[:error] = _("Cannot update repository '%s': missing parameters.") % "#{ERB::Util.html_escape params[:id]}"
+          flash[:error] = _("Cannot update repository '%s': missing parameters.") % params[:id]
           # RORSCAN_INL: will be escaped
           redirect_to :action => :index, :show => Shellwords.escape(params[:id]) and return          
         end
@@ -123,7 +123,7 @@ private
       unless request.format.html?
         render ErrorResult.error(404, 20, "DBus Error: #{exception.dbus_message.error_name}") and return
       else
-        flash[:error] = _("Cannot update repository '%s': missing parameters.") % "#{ERB::Util.html_escape params[:id]}"
+        flash[:error] = _("Cannot update repository '%s': missing parameters.") % params[:id]
         # RORSCAN_INL: will be escaped
         redirect_to :action => :index, :show => Shellwords.escape(params[:id]) and return          
       end
@@ -131,7 +131,7 @@ private
     unless request.format.html?
       render :show
     else
-      flash[:message] = _("Repository '%s' has been updated.") % "#{ERB::Util.html_escape @repo.name}"      
+      flash[:message] = _("Repository '%s' has been updated.") % @repo.name
       # RORSCAN_INL: will be escaped
       redirect_to :action => :index, :show => Shellwords.escape(params[:id]) and return
     end
@@ -169,7 +169,7 @@ private
       unless request.format.html?
         render ErrorResult.error(404, 1, "Repository '#{params[:id]}' not found.") and return
       else
-        flash[:error] = _("Repository '%s' was not found.") % "#{ERB::Util.html_escape params[:id]}"
+        flash[:error] = _("Repository '%s' was not found.") % params[:id]
         redirect_to :action => :index and return
       end
     end
@@ -186,21 +186,21 @@ private
         unless request.format.html?
           render ErrorResult.error(404, 2, "Cannot remove repository #{@repo.id}") and return
         else
-          flash[:error] = _("Cannot remove repository '%s'") % "#{ERB::Util.html_escape params[:id]}"
+          flash[:error] = _("Cannot remove repository '%s'") % params[:id]
         end
       end
     rescue DBus::Error => exception
       unless request.format.html?
         render ErrorResult.error(404, 20, "DBus Error: #{exception.dbus_message.error_name}") and return
       else
-        flash[:error] = _("Cannot remove repository '%s'") % "#{ERB::Util.html_escape params[:id]}"
+        flash[:error] = _("Cannot remove repository '%s'") % params[:id]
       end
     end
 
     unless request.format.html?
       render :show
     else
-      flash[:message] = _("Repository '%s' has been deleted.") % "#{ERB::Util.html_escape @repo.name}"
+      flash[:message] = _("Repository '%s' has been deleted.") % @repo.name
       redirect_to :action => :index and return
     end
   end
