@@ -77,6 +77,6 @@
     <% end %>
 
     <% if !defined?(go_on) or go_on %>
-      <%= button_to _("Stop"), :update =>"status_patches", :remote => true, :url=>{ :controller => :patches, :action => :stop_install_all}, :confirm => _("Are you sure?") %>
+      <%= button_to _("Stop"), :update =>"status_patches", :remote => true, :url=>{ :controller => :patches, :action => :stop_install_all}, :data => {:confirm => _("Are you sure?")} %>
     <% end %>
 </div>

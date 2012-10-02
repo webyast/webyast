@@ -121,10 +121,10 @@
     <% if WebyastEngine.find "System" %>
       <div id="statusbar-actions">
           <div class="statusbar_row">
-            <%= link_to _('Reboot'), {:controller => 'system', :action => 'reboot'}, :confirm => _("Really reboot the machine?"), :method => :put, :class => 'button' %>
+            <%= link_to _('Reboot'), {:controller => 'system', :action => 'reboot'}, :data => {:confirm => _("Really reboot the machine?")}, :method => :put, :class => 'button' %>
           </div>
           <div class="statusbar_row">
-            <%= link_to _('Shutdown'), {:controller => 'system', :action => 'shutdown'}, :confirm => _("Really shutdown the machine?"), :method => :put, :class => 'button' %>
+            <%= link_to _('Shutdown'), {:controller => 'system', :action => 'shutdown'}, :data => {:confirm => _("Really shutdown the machine?")}, :method => :put, :class => 'button' %>
           </div>
       </div>
     <% end %>
