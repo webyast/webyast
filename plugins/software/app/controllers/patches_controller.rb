@@ -24,31 +24,33 @@ require 'plugin_job'
 class PatchesController < ApplicationController
   include ERB::Util
 
-  before_filter :show_summary_check, :only => :show_summary
+  before_filter :cache_check, :only => [:index, :show_summary]
 
   # include locale in the cache path to cache different translations
   caches_action :show_summary, :expires_in => Patch::EXPIRATION_TIME, :cache_path => Proc.new {"webyast_patch_summary_#{FastGettext.locale}"}
+  caches_action :index, :expires_in => Patch::EXPIRATION_TIME, :cache_path => Proc.new {"webyast_patch_index_#{FastGettext.locale}"}
 
 private
 
   # check permission and validate cache content
-  def show_summary_check
+  def cache_check
     authorize! :read, Patch
 
     cached_mtime = Rails.cache.fetch("webyast_patch_mtime")
     current_mtime = Patch.mtime
 
     if current_mtime != cached_mtime
-      Rails.logger.info "Expiring patch summary: cached: #{cached_mtime}, modified: #{current_mtime}"
+      Rails.logger.info "Expiring patch cache: cached: #{cached_mtime}, modified: #{current_mtime}"
       # update the time stamp
       Rails.cache.write("webyast_patch_mtime", current_mtime)
-      expire_summary_cache
+      expire_patch_cache
     end
   end
 
-  def expire_summary_cache
+  def expire_patch_cache
     # expire all translations
     expire_fragment(/webyast_patch_summary_/)
+    expire_fragment(/webyast_patch_index_/)
   end
 
   def collect_done_patches
@@ -259,8 +261,8 @@ private
 
     Patch::BM.background_enabled? ? Patch.install_all_background : Patch.install_all
 
-    # force refreshing of the summary
-    expire_summary_cache
+    # force refreshing of the cache
+    expire_patch_cache
 
     show_summary
   end
@@ -301,8 +303,8 @@ private
       if !update_array.empty?
         Patch::BM.background_enabled? ? Patch.install_patches_by_id_background(update_array) : Patch.install_patches_by_id(update_array)
 
-        # force refreshing of the summary
-        expire_summary_cache
+        # force refreshing of the cache
+        expire_patch_cache
       end
     # FIXME: this might hide some errors
     rescue Exception => e
