@@ -24,6 +24,9 @@ require 'shellwords'
 class RepositoriesController < ApplicationController
 
   before_filter :check_read_permissions, :only => [:index, :show]
+  before_filter :cache_check, :only => :index
+
+  caches_action :index, :cache_path => Proc.new {"webyast_repo_index_#{FastGettext.locale}"}
 
 private
 
@@ -35,6 +38,24 @@ private
   def check_read_permissions
     authorize! :read, Repository
   end
+
+  def cache_check
+    cached_mtime = Rails.cache.fetch("webyast_repo_mtime")
+    current_mtime = Repository.mtime
+
+    if current_mtime != cached_mtime
+      Rails.logger.info "Expiring repo cache: cached: #{cached_mtime}, modified: #{current_mtime}"
+      # update the time stamp
+      Rails.cache.write("webyast_repo_mtime", current_mtime)
+      expire_repo_cache
+    end
+  end
+
+  def expire_repo_cache
+    # expire all translations
+    expire_fragment(/webyast_repo_index_/)
+  end
+
 
   public
 
@@ -91,6 +112,8 @@ private
     param = params[:repository] || {}
     #id is either in params or in the struct (create method)
     rep_id = params[:id] || param[:id]
+
+    # FIXME: is this needed??, Repository model already has some validation checks...
     raise InvalidParameters.new :id => "UNKNOWN" unless (rep_id && rep_id.is_a?(String))
     raise InvalidParameters.new :name => "UNKNOWN" unless (param[:name] && param[:name].is_a?(String))
     raise InvalidParameters.new :enabled => "UNKNOWN" unless (param[:enabled] && param[:enabled].is_a?(String))
