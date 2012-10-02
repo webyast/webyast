@@ -46,6 +46,9 @@ class Repository < BaseModel::Base
    # priority must be in range 0..200
    validates_inclusion_of :priority, :in => 0..200
 
+  REPO_FIND_ID = "repo_find_"
+  REPO_FIND_MTIME = "repo_find_mtime_"
+
 
   def initialize(id = "", name = "", enabled = true)
     @id = id
@@ -64,27 +67,43 @@ class Repository < BaseModel::Base
   end
 
   def self.find(what)
-    PackageKit.lock #locking
-    begin
-      repositories = []
+    find_id = "#{REPO_FIND_ID}_#{what}"
+    mtime_id = "#{REPO_FIND_MTIME}_#{what}"
+    repo_mtime = Repository.mtime
 
-      PackageKit.transact('GetRepoList', 'none', 'RepoDetail') { |id, name, enabled|
-        Rails.logger.debug "RepoDetail signal received: #{id}, #{name}, #{enabled}"
-
-        if what == :all || id == what
-          repo = Repository.new(id, name, enabled)
-          # read other attributes directly from *.repo file,
-          # because PackageKit doesn't have API for that
-          repo.read_file
-
-          repositories << repo
-        end
-      }
-    ensure
-      PackageKit.unlock #locking
+    # check the cache
+    if repo_mtime != Rails.cache.fetch(mtime_id)
+      Rails.logger.debug "Invalidating repo cache '#{mtime_id}'" unless Rails.cache.fetch(mtime_id).nil?
+      Rails.cache.delete(find_id)
     end
 
-    repositories
+    Rails.cache.fetch(find_id) do
+      # update time stamp
+      Rails.cache.write(mtime_id, repo_mtime)
+
+      Rails.logger.info "Reading software repositories..."
+      PackageKit.lock
+      begin
+        repositories = []
+
+        PackageKit.transact('GetRepoList', 'none', 'RepoDetail') { |id, name, enabled|
+          Rails.logger.debug "RepoDetail signal received: #{id}, #{name}, #{enabled}"
+
+          if what == :all || id == what
+            repo = Repository.new(id, name, enabled)
+            # read other attributes directly from *.repo file,
+            # because PackageKit doesn't have API for that
+            repo.read_file
+
+            repositories << repo
+          end
+        }
+      ensure
+        PackageKit.unlock
+      end
+
+      repositories
+    end
   end
 
   def self.mtime
