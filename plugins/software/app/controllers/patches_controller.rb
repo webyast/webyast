@@ -79,8 +79,8 @@ private
   end
 
   def refresh_timeout
-    # the default is 24 hours
-    timeout = ControlPanelConfig.read 'patch_status_timeout', 24*60*60
+    # the default is 1 hours
+    timeout = ControlPanelConfig.read 'patch_status_timeout', 1.hour
 
     if timeout.zero?
       Rails.logger.info "Patch status autorefresh is disabled"

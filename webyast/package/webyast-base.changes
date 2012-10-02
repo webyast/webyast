@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Tue Oct  2 08:11:22 UTC 2012 - lslezak@suse.cz
+
+- decrease default patch status reload timeout to 1 hour (login
+  session times out after 2 hours, longer time does not make sense)
+
+-------------------------------------------------------------------
 Tue Sep 25 07:20:24 UTC 2012 - lslezak@suse.cz
 
 - improved expiration of authentication tokens (implemented
