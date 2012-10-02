@@ -41,99 +41,40 @@
     });
 
     $('#all').click(function(){
-       $.ajax({
-         url: "<%= url_for({ :action => :load_filtered, :value =>"all" }) -%>",
-         type: "GET",
- 
-         beforeSend : function (xhr) {
-           $.modalDialog.wait( {message: message});
-         },
-         success: function(data, status, xhr) {
-           $.modalDialog.destroy();
-           $('#patchesd').html(data);
-         },
-         error: function(xhr, status, error) {
-           $.modalDialog.destroy();
-           $('#patchesd').html('<b><%= escape_javascript _("Error: Cannot get information.") -%></b>');
-         }
-       });
-     });
+      $('table.patches tr td').show();
+    });
      
     $('#security').click(function(){
-       $.ajax({
-         url: "<%= url_for({ :action => :load_filtered, :value =>"security" }) -%>",
-         type: "GET",
-
-         beforeSend : function (xhr) {
-           $.modalDialog.wait( {message: message});
-         },
-         success: function(data, status, xhr) {
-           $.modalDialog.destroy();
-           $('#patchesd').html(data);
-         },
-         error: function(xhr, status, error) {
-           $.modalDialog.destroy();
-           $('#patchesd').html('<b><%= escape_javascript _("Error: Cannot get information.") -%></b>');
-         }
-       });
-     });
+      $('table.patches tr td').hide();
+      $('table.patches tr.patch_kind_security td').show();
+    });
      
     $('#important').click(function(){
-       $.ajax({
-         url: "<%= url_for({ :action => :load_filtered, :value =>"important" }) -%>",
-         type: "GET",
-         beforeSend : function (xhr) {
-           $.modalDialog.wait( {message: message});
-         },
-    
-         success: function(data, status, xhr) {
-           $.modalDialog.destroy();
-           $('#patchesd').html(data);
-         },
-         error: function(xhr, status, error) {
-           $.modalDialog.destroy();
-           $('#patchesd').html('<b><%= escape_javascript _("Error: Cannot get information.") -%></b>');
-         }
-       });
-     });
+      $('table.patches tr td').hide();
+      $('table.patches tr.patch_kind_important td').show();
+    });
      
     $('#recommended').click(function(){
-       $.ajax({
-         url: "<%= url_for({ :action => :load_filtered, :value =>"recommended" }) -%>",
-         type: "GET",
-
-         beforeSend : function (xhr) {
-           $.modalDialog.wait( {message: message});
-         },
-         success: function(data, status, xhr) {
-           $.modalDialog.destroy();
-           $('#patchesd').html(data);
-         },
-         error: function(xhr, status, error) {
-           $.modalDialog.destroy();
-           $('#patchesd').html('<b><%= escape_javascript _("Error: Cannot get information.") -%></b>');
-         }
-       });
-     });
+      $('table.patches tr td').hide();
+      $('table.patches tr.patch_kind_recommended td').show();
+    });
      
     $('#optional').click(function(){
-       $.ajax({
-         url: "<%= url_for({ :action => :load_filtered, :value =>"optional" }) -%>",
-         type: "GET",
-         
-         beforeSend : function (xhr) {
-           $.modalDialog.wait( {message: message});
-         },
-         success: function(data, status, xhr) {
-           $.modalDialog.destroy();
-           $('#patchesd').html(data);
-         },
-         error: function(xhr, status, error) {
-           $.modalDialog.destroy();
-           $('#patchesd').html('<b><%= escape_javascript _("Error: Cannot get information.") -%></b>');
-         }
-       });
-     });
+      $('table.patches tr td').hide();
+      $('table.patches tr.patch_kind_enhancement td').show();
+    });
+
+    $('table.patches td').click(function(){
+      var checkbox = $(this).parent().find("input[type='checkbox']");
+      checkbox.attr('checked', !checkbox.is(":checked"));
+    });
+
+    // do not propage the click event when clicked directly on a checkbox
+    // (avoid calling the click handler for <td> few lines above which
+    // would reset the user change)
+    $('table.patches td input[type="checkbox"]').click(function(event){
+      event.stopPropagation();
+    });
 
   });
   

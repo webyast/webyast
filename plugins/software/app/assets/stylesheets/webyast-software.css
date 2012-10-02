@@ -198,6 +198,10 @@ table.patches {
   background-color: white;
 }
 
+table.patches tr:hover td {
+  background-color: #CCF9FF;
+}
+
 table.patches td {
   margin: 0;
   padding: 0px 2px;

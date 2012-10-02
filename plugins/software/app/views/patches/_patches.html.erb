@@ -20,16 +20,20 @@
 # you may find current contact information at www.novell.com
 #++
 %>
+
+<% content_for :head do %>
   <%= javascript_tag do -%>
     function check_all() {
-        $("INPUT[type='checkbox']").attr('checked', $('#All').is(':checked'));
+        $("input[type='checkbox']:visible").attr('checked', $('#All').is(':checked'));
     };
   <% end %>
+<% end %>
 
 <% if @patch_updates.any? {|pu| pu.name =~ /webyast-|nginx/} %>
 <p class="flash-message ui-state-highlight"><%=
 _("One of the patches seems to update WebYaST itself.
 You may need to reload the page after applying the patch.") -%></p>
+<%# FIXME: which patch is it? Add [Details] button... %>
 <% end %>
 
 <%# no patch or all patches are installed %>
@@ -61,7 +65,7 @@ You may need to reload the page after applying the patch.") -%></p>
 
   <% @patch_updates.each do |patch_update| %>
     <% unless patch_update.installed %>
-    <tr>
+    <tr class="patch_kind_<%= patch_update.kind -%>">
       <td class="checkbox"><input type="checkbox" id=<%= "patch_#{patch_update.resolvable_id}" %> name=<%="patch_#{patch_update.resolvable_id}" %> value=<%=patch_update.resolvable_id%> /></td>
 
       <% if kinds.has_key?(patch_update.kind) %>
