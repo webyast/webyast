@@ -19,8 +19,6 @@
 # you may find current contact information at www.novell.com
 #++
 
-require 'plugin_job'
-
 class PatchesController < ApplicationController
   include ERB::Util
 
@@ -328,7 +326,7 @@ private
 
     logger.warn "Confirmation of reading patch messages"
     File.delete Patch::MESSAGES_FILE
-    YastCache.delete(Plugin.new(),"patch")
+
     respond_to do |format|
       format.html {
         redirect_to "/"
@@ -344,7 +342,7 @@ private
 
     if params[:accept].present? || params[:reject].present?
       params[:accept].present? ? Patch.accept_license : Patch.reject_license
-      YastCache.delete(Plugin.new(),"patch")
+
       if request.format.html?
         redirect_to "/"
       else
