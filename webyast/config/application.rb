@@ -32,7 +32,6 @@ end
 
 module Webyast
   class Application < Rails::Application
-    require 'plugin_job'
     config.autoload_paths += %W(#{config.root}/lib #{config.root}/lib/validators #{config.root}/lib/common)
     config.encoding = "utf-8"
     config.filter_parameters += [:password, :auth_token]

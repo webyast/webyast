@@ -18,7 +18,6 @@
 
 require 'exceptions'
 require 'dbus'
-require 'yast_cache'
 require 'haml_gettext' # translate haml file on the fly
 
 class ApplicationController < ActionController::Base

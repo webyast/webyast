@@ -29,7 +29,8 @@ class NotifierController < ApplicationController
     else
       # TODO handle missing parameter
       updated = params[:plugin].split(",").any? { |model|
-         DataCache.updated?(model, id, session["session_id"])
+        # FIXME: temporarily disabled
+        false
       }
 
       head updated ? :ok : :not_modified
