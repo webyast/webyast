@@ -23,7 +23,8 @@ class NotifierController < ApplicationController
   def status
     id = params[:id] || :all
 
-    unless YastCache.active
+    # FIXME: temporarily disabled
+    if true
       head :not_found and return
     else
       # TODO handle missing parameter

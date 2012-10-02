@@ -23,7 +23,3 @@ require File.expand_path('../application', __FILE__)
 Webyast::Application.initialize!
 
 GettextI18nRails.translations_are_html_safe = true
-
-# FIXME: temporarily disabled to see how it works without delayed job
-YastCache.active = false # Rails.env.production? ? true : false
-

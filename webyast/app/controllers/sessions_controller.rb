@@ -26,10 +26,7 @@ class SessionsController < Devise::SessionsController
   def create
     if params[:remember_me] == "true" && current_account.present? && current_account.authentication_token.blank?
       Rails.logger.info "Creating authentication token for user #{current_account.username}"
-
-      PluginJob.try_updating_db do
-        current_account.reset_authentication_token!
-      end
+      current_account.reset_authentication_token!
     end
 
     super
@@ -39,10 +36,7 @@ class SessionsController < Devise::SessionsController
     if params[:forget_me] == "true" && current_account.present? && current_account.authentication_token.present?
       Rails.logger.info "Resetting authentication token for user #{current_account.username}"
       current_account.authentication_token = nil
-
-      PluginJob.try_updating_db do
-        current_account.save!
-      end
+      current_account.save!
     end
 
     super
