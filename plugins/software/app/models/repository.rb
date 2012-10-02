@@ -64,28 +64,27 @@ class Repository < BaseModel::Base
   end
 
   def self.find(what)
-     YastCache.fetch(self,what) {
-      PackageKit.lock #locking
-      begin
-        repositories = Array.new
+    PackageKit.lock #locking
+    begin
+      repositories = []
 
-        PackageKit.transact('GetRepoList', 'none', 'RepoDetail') { |id, name, enabled|
-          Rails.logger.debug "RepoDetail signal received: #{id}, #{name}, #{enabled}"
+      PackageKit.transact('GetRepoList', 'none', 'RepoDetail') { |id, name, enabled|
+        Rails.logger.debug "RepoDetail signal received: #{id}, #{name}, #{enabled}"
 
-          if what == :all || id == what
-            repo = Repository.new(id, name, enabled)
-            # read other attributes directly from *.repo file,
-            # because PackageKit doesn't have API for that
-            repo.read_file
+        if what == :all || id == what
+          repo = Repository.new(id, name, enabled)
+          # read other attributes directly from *.repo file,
+          # because PackageKit doesn't have API for that
+          repo.read_file
 
-            repositories << repo
-          end
-        }
-      ensure
-        PackageKit.unlock #locking
-      end
-      repositories
-    }
+          repositories << repo
+        end
+      }
+    ensure
+      PackageKit.unlock #locking
+    end
+
+    repositories
   end
 
   def self.mtime
@@ -188,7 +187,6 @@ class Repository < BaseModel::Base
     ensure
       PackageKit.unlock #locking
     end
-    YastCache.reset(self,@id)
   end
 
   #
@@ -202,7 +200,6 @@ class Repository < BaseModel::Base
       ret = PackageKit.transact('RepoSetData', [@id, 'remove', 'NONE'])
     ensure
       PackageKit.unlock #locking
-      YastCache.delete(self,@id)
       return ret
     end
     return ret
