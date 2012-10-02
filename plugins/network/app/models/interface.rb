@@ -105,26 +105,24 @@ class Interface < BaseModel::Base
   end
 
   def self.find( which )
-    YastCache.fetch(self, which) do
-      response = YastService.Call("YaPI::NETWORK::Read")
-      
-      ifaces_h = response["interfaces"]
-      Rails.logger.info "\n\n *** Response: \n  #{ifaces_h.inspect} *** \n\n"
-        
-      if which == :all
-        hash = Hash.new
+    response = YastService.Call("YaPI::NETWORK::Read")
 
-        ifaces_h.each do |id, ifaces_h|
-          hash[id] = Interface.new(ifaces_h, id)
-        end
-        
-      else
-        hash = Interface.new(ifaces_h[which], which)
+    ifaces_h = response["interfaces"]
+    Rails.logger.info "\n\n *** Response: \n  #{ifaces_h.inspect} *** \n\n"
+
+    if which == :all
+      hash = Hash.new
+
+      ifaces_h.each do |id, ifaces_h|
+        hash[id] = Interface.new(ifaces_h, id)
       end
-      
-      Rails.logger.info "\n\n *** Interfaces: \n  #{hash.inspect} *** \n\n"
-      hash
+
+    else
+      hash = Interface.new(ifaces_h[which], which)
     end
+
+    Rails.logger.info "\n\n *** Interfaces: \n  #{hash.inspect} *** \n\n"
+    hash
   end
 
 
@@ -156,7 +154,6 @@ class Interface < BaseModel::Base
 
     vsettings = [ "a{sa{ss}}", settings ] # bnc#538050
     response = YastService.Call("YaPI::NETWORK::Write",{"interface" => vsettings})
-    YastCache.reset(self,@id)
   end
 
 
@@ -166,7 +163,6 @@ class Interface < BaseModel::Base
     vsettings = [ "a{sa{ss}}", settings ]
     
     response = YastService.Call("YaPI::NETWORK::Write",{"interface" => vsettings})
-    YastCache.reset(self,@id)
    end
 
 end

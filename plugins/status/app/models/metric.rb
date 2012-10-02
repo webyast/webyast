@@ -188,8 +188,7 @@ class Metric
   # Where id is host:group:name (whithout rrd extension)
   def self.find(what, opts={})
     return find_all if what == :all && opts.empty?
-    YastCache.fetch(self,what,opts) {
-      case what
+    case what
       when :all then opts.empty? ? find_all : find_multiple(opts)
       # in this case, the options are the first
       # parameter
@@ -197,19 +196,16 @@ class Metric
       when String
         find_multiple({:id => what}).first rescue nil
       else nil     
-      end
-    }
+    end
   end
   
   # find all values
   def self.find_all
-    YastCache.fetch(self, :all) {
-      ret = []
-      rrd_files.each do |path|
-        ret << Metric.new(path)
-      end
-      ret
-    }
+    ret = []
+    rrd_files.each do |path|
+      ret << Metric.new(path)
+    end
+    ret
   end
     
   def self.find_multiple(opts)

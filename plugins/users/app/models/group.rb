@@ -19,7 +19,6 @@
 # you may find current contact information at www.novell.com
 #++
 
-require 'yast_service'
 require 'base'
 
 # Group model, YastModel based
@@ -70,22 +69,18 @@ public
 
   def self.find (cn)
     return find_all if cn == :all
-    YastCache.fetch(self, cn) {
-      result = group_get( "system", cn )
-      result = group_get( "local", cn )  if result.empty?
-      return nil if result.empty?
-      make_group result
-    }
+    result = group_get( "system", cn )
+    result = group_get( "local", cn )  if result.empty?
+    return nil if result.empty?
+    make_group result
   end
 
   def self.find_all
-    YastCache.fetch(self, :all) {
-      result = groups_get "local"
-      result.update( groups_get "system")
-      result_array = []
-      result.each { |k,v| result_array << make_group(v) }
-      result_array.sort! {|x,y| x.cn <=> y.cn}
-    }
+    result = groups_get "local"
+    result.update( groups_get "system")
+    result_array = []
+    result.each { |k,v| result_array << make_group(v) }
+    result_array.sort! {|x,y| x.cn <=> y.cn}
   end
 
   def save
@@ -103,7 +98,6 @@ public
                                    "userlist"  => ["as", members] } 
                                )
     end
-    YastCache.reset(self, old_cn)
     result # result is empty string on success, error message otherwise
   end
 
@@ -114,7 +108,6 @@ public
     else
       ret = YastService.Call( "YaPI::USERS::GroupDelete", {"type" => ["s",group_type], "cn" => ["s",old_cn]})
     end
-    YastCache.delete(self,old_cn.inspect)
     ret
   end
 

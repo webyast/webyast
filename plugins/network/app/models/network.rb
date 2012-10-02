@@ -31,10 +31,7 @@ require "yast/config_file"
 
 class Network < BaseModel::Base
   def self.find
-
-    YastCache.fetch(self) {
-      @response = YastService.Call("YaPI::NETWORK::Read") # hostname: true
-    }
+    @response = YastService.Call("YaPI::NETWORK::Read") # hostname: true
 
     ifaces = Hash.new
     @response["interfaces"].each{|id, iface| ifaces[id] = Interface.new(iface, id)}

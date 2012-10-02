@@ -19,8 +19,6 @@
 # you may find current contact information at www.novell.com
 #++
 
-require 'singleton'
-require 'yast_service'
 require 'yast/paths'
 require 'base'
 require 'builder'
@@ -39,15 +37,16 @@ class Mailsetting < BaseModel::Base
   attr_accessor :transport_layer_security
 
   TEST_MAIL_FILE = File.join(YaST::Paths::VAR,"mail","test_sent")
+  CACHE_ID = "webyast_mailsetting"
 
   # read the settings from system
   def self.find
-    YastCache.fetch(self) {
+    Rails.cache.fetch(CACHE_ID) do
       yapi_ret = YastService.Call("YaPI::MailSettings::Read")
       raise MailError.new("Cannot read from YaPI backend") if yapi_ret.nil?
       yapi_ret["transport_layer_security"] = yapi_ret.delete("TLS") || "no"
       Mailsetting.new yapi_ret
-    }
+    end
   end
 
 
@@ -61,9 +60,11 @@ class Mailsetting < BaseModel::Base
 	"TLS"		=> [ "s", transport_layer_security ||""]
     }
 
+    Rails.cache.delete(CACHE_ID)
+
     yapi_ret = YastService.Call("YaPI::MailSettings::Write", parameters)
     Rails.logger.debug "YaPI returns: '#{yapi_ret}'"
-    YastCache.reset(self)
+
     raise MailError.new(yapi_ret) unless yapi_ret.empty?
     true
   end

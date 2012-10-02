@@ -18,7 +18,6 @@
 # To contact Novell about this file by physical or electronic mail,
 # you may find current contact information at www.novell.com
 #++
-require 'yast_service'
 require 'base'
 
 # = Ldap model
@@ -34,22 +33,25 @@ class Ldap < BaseModel::Base
   # Prevents a user from submitting a crafted form that bypasses activation
   # anything else you want your user to change should be added here.
   attr_accessible :server, :base_dn, :tls, :enabled
+  
+  CACHE_ID = "webyast_ldap"
 
   public
-    def self.find
-      YastCache.fetch(self) {
-        ret = YastService.Call("YaPI::LDAP::Read")
-        Rails.logger.info "Read LDAP config: #{ret.inspect}"
-        ldap = Ldap.new({
-          :server => ret["ldap_server"],
-          :base_dn => ret["ldap_domain"],
-          :tls => ret["ldap_tls"] == "1",
-          :enabled => ret["start_ldap"] == "1"
-        })
-        ldap = {} if ldap.nil?
-        ldap
-      }
+
+  def self.find
+    Rails.cache.fetch(CACHE_ID) do
+      ret = YastService.Call("YaPI::LDAP::Read")
+      Rails.logger.info "Read LDAP config: #{ret.inspect}"
+      ldap = Ldap.new({
+        :server => ret["ldap_server"],
+        :base_dn => ret["ldap_domain"],
+        :tls => ret["ldap_tls"] == "1",
+        :enabled => ret["start_ldap"] == "1"
+      })
+      ldap = {} if ldap.nil?
+      ldap
     end
+  end
 
   def save
     params = {
@@ -60,9 +62,10 @@ class Ldap < BaseModel::Base
     }
 
     Rails.logger.debug "YaPI SEND PARAMS: '#{params.inspect}'"
+    Rails.cache.delete(CACHE_ID)
     yapi_ret = YastService.Call("YaPI::LDAP::Write", params)
     Rails.logger.debug "YaPI returns: '#{yapi_ret}'"
-    YastCache.reset(self)
+
     return true
   end
 

@@ -87,31 +87,29 @@ public
   
   # users = User.find_all
   def self.find_all(params={})
-    YastCache.fetch(self, :all) {
-      attributes = [ "cn", "uidNumber", "homeDirectory", "grouplist", "uid", "loginShell", "groupname" ]
-      if params.has_key? "attributes"
-        attributes = params["attributes"].split(",")
-      end
-      users = []
-      parameters = {
-        # how to index hash with users
-        "index"	=> ["s", "uid"],
-        # attributes to return for each user
-        "user_attributes"	=> [ "as", attributes ],
-        "type" => params["type"]||="local"
-      }
-      users_map = YastService.Call("YaPI::USERS::UsersGet", parameters)
-      if users_map.nil?
-        raise "Can't get user list"
-      else
-        users_map.each do |key, val|
-          user = User.new
-          user.load_data(val)
-          users << user
-        end
-      end
-      users
+    attributes = [ "cn", "uidNumber", "homeDirectory", "grouplist", "uid", "loginShell", "groupname" ]
+    if params.has_key? "attributes"
+      attributes = params["attributes"].split(",")
+    end
+    users = []
+    parameters = {
+      # how to index hash with users
+      "index"	=> ["s", "uid"],
+      # attributes to return for each user
+      "user_attributes"	=> [ "as", attributes ],
+      "type" => params["type"]||="local"
     }
+    users_map = YastService.Call("YaPI::USERS::UsersGet", parameters)
+    if users_map.nil?
+      raise "Can't get user list"
+    else
+      users_map.each do |key, val|
+        user = User.new
+        user.load_data(val)
+        users << user
+      end
+    end
+    users
   end
 
   # load the attributes of the user
@@ -147,7 +145,6 @@ public
 
     ret = YastService.Call("YaPI::USERS::UserDelete", config)
     Rails.logger.debug "Command returns: #{ret}"
-    YastCache.delete(self, uid)
     raise ret unless ret.blank?
     return true
   end
@@ -166,7 +163,6 @@ public
     ret = YastService.Call("YaPI::USERS::UserModify", config, data)
 
     Rails.logger.debug "Command returns: #{ret.inspect}"
-    YastCache.reset(self, id)
     raise ret if not ret.blank?
     true
   end
