@@ -121,10 +121,10 @@ class Activedirectory < BaseModel::Base
       raise ActivedirectoryError.new("write_error","")
     end
 
-    Rails.cache.write('activedirectory:domain', "")
-    Rails.cache.write('activedirectory:ads', "")
-    Rails.cache.write('activedirectory:realm', "")
-    Rails.cache.write('activedirectory:workgroup', "")
+    Rails.cache.delete 'activedirectory:domain'
+    Rails.cache.delete 'activedirectory:ads'
+    Rails.cache.delete 'activedirectory:realm'
+    Rails.cache.delete 'activedirectory:workgroup'
 
     return true
   end
