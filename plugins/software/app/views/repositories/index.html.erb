@@ -131,7 +131,7 @@
 		  <%= submit_tag _("Save") %>
 		  <span onclick="delete_handler(this, '#progress_<%= sid -%>', '<%= sid -%>')"><%= link_to _("Delete"),
 			  {:action => 'destroy', :id => r.id},
-			  {:confirm => _("Really delete repository '%s'?") % h(r.name), :method => :destroy, :class => :button} %></span>
+			  {:data => {:confirm => _("Really delete repository '%s'?") % h(r.name)}, :method => :destroy, :class => :button} %></span>
 		<% end -%>
 	      </div>
 

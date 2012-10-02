@@ -173,7 +173,7 @@
                   <span onclick="delete_handler(this, '#progress_<%= group.cn -%>', '<%= _("Please wait") -%>');">
                     <%= link_to _("Delete"),
                         {:action => 'destroy', :id => group.cn},
-                        {:confirm => _("Are you sure to delete group '%s'?") % group.cn, :method => :destroy, :class => :button} %>
+                        {:data => {:confirm => _("Are you sure to delete group '%s'?") % group.cn}, :method => :destroy, :class => :button} %>
                   </span>
                 <% end %>
               </div>
