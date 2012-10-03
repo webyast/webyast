@@ -22,7 +22,6 @@
 require 'yast/config_file'
 require 'yast/paths'
 require 'yast_service'
-require 'yast_cache'
 require 'base'
 
 # = Service model

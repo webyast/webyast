@@ -19,7 +19,6 @@
 # you may find current contact information at www.novell.com
 #++
 
-require 'yast_cache'
 require 'base'
 require 'builder'
 

@@ -20,7 +20,6 @@
 #++
 
 require 'yast_service'
-require 'yast_cache'
 require 'base'
 require 'builder'
 
