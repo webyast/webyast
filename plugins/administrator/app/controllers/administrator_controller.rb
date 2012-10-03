@@ -35,17 +35,13 @@ class AdministratorController < ApplicationController
 
     respond_to do |format|
       format.html
-      format.xml  {
-        if @administrator
-          render :xml => @administrator.to_xml(:dasherize => false)
-        else
-          head :not_found
-        end
-      }
+      format.xml  { render :xml => @administrator.to_xml(:dasherize => false) }
+      format.json { render :json => @administrator.to_json }
     end
   end
 
   def update
+    authorize! :write, Administrator
     @administrator	= Administrator.find
 
     admin	= params["administrator"]
@@ -78,12 +74,18 @@ class AdministratorController < ApplicationController
     @administrator.aliases = "NONE" if @administrator.aliases == ""
 
     begin
-      response = @administrator.save
+      @administrator.save
       flash[:notice] = _('Administrator settings have been written.')
     rescue Exception => error  
-      flash[:error] = _("Error while saving administrator settings.") 
+      flash[:error] = _("Error while saving administrator settings.")
       Rails.logger.error "ERROR: #{error.inspect}"
-      render :index and return
+      Rails.logger.error "backtrace: #{error.backtrace.join("\n")}"
+
+      respond_to do |format|
+        format.html { redirect_to :action => :index }
+        format.xml  { head :internal_server_error }
+        format.json { head :internal_server_error }
+      end
     end
 
     # check if mail is configured; during initial workflow, only warn if mail configuration does not follow
@@ -91,42 +93,16 @@ class AdministratorController < ApplicationController
         (!Basesystem.new.load_from_session(session).following_steps.any? { |h| h[:controller] == "mail" })
       @mail = Mail.find :one
       if @mail && (@mail.smtp_server.nil? || @mail.smtp_server.empty?)
-        flash[:warning] = _("Mail alias was set but outgoing mail server is not configured (%s<i>change</i>%s).") % ['<a href="/mail">', '</a>']
+        flash[:warning] = _("Mail alias was set but outgoing mail server is not configured.")
       end
     end
 
-    redirect_success
-  end
-
-
-
-
-  # GET action
-  # Read administrator settings (currently mail aliases).
-  # Requires read permissions for administrator YaPI.
-  def show
-    authorize! :read, Administrator
-
-    admin = Administrator.find
-
     respond_to do |format|
-      format.xml  { render :xml => admin.to_xml(:root => "administrator", :indent=>2), :location => "none" }
-      format.json { render :json => admin.to_json, :location => "none" }
+      format.html { redirect_success }
+      format.xml  { render :xml => @administrator.to_xml(:dasherize => false) }
+      format.json { render :json => @administrator.to_json }
     end
   end
-   
-  # PUT action
-  # Write administrator settings: mail aliases and/or password.
-  # Requires write permissions for administrator YaPI.
-#  def update
-#    yapi_perm_check "administrator.write"
-#	
-#    data = params["administrator"]
-#    if data
-#      Administrator.new(data).save
-#    end
-#    show
-#  end
 
   # See update
   def create
