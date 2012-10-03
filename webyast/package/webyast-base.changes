@@ -1,4 +1,11 @@
 -------------------------------------------------------------------
+Wed Oct  3 14:43:03 UTC 2012 - lslezak@suse.cz
+
+- added support for ActiveResource login needed by Studio
+  (bnc#783355)
+- 0.3.25
+
+-------------------------------------------------------------------
 Tue Sep 25 07:20:24 UTC 2012 - lslezak@suse.cz
 
 - improved expiration of authentication tokens (implemented
