@@ -116,7 +116,6 @@ private
     # FIXME: is this needed??, Repository model already has some validation checks...
     raise InvalidParameters.new :id => "UNKNOWN" unless (rep_id && rep_id.is_a?(String))
     raise InvalidParameters.new :name => "UNKNOWN" unless (param[:name] && param[:name].is_a?(String))
-    raise InvalidParameters.new :enabled => "UNKNOWN" unless (param[:enabled] && param[:enabled].is_a?(String))
 
     # Cannot be CWE-285 cause id does not depend on user authent.
     # RORSCAN_INL: Cannot be a mass_assignment cause they are strings only
