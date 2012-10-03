@@ -67,7 +67,7 @@ class BackgroundStatus
     xml.tag! :background_status do
       xml.tag!(:status, status)
       xml.tag!(:progress, progress.to_i, {:type => "integer"} )
-      xml.tag!(:subprogress, subprogress.to_i, {:type => "integer"}) if 0..100.include?(subprogress)
+      xml.tag!(:subprogress, subprogress.to_i, {:type => "integer"}) if (0..100).include?(subprogress)
     end
   end
 
