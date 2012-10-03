@@ -368,12 +368,13 @@ public
       register
     else
       @showstatus = true
-      @guid = guid
+      @guid = @register.guid
     end
 
     respond_to do |format|
       format.xml { render  :xml => @register.status_to_xml( :dasherize => false ) }
       format.json { render :json => @register.status_to_json }
+      format.html {}
     end
 
   end
