@@ -1,4 +1,12 @@
 -------------------------------------------------------------------
+Wed Oct  3 12:10:52 UTC 2012 - lslezak@suse.cz
+
+- fixed routing
+- REST API fixes (XML and JSON rendering)
+- fixed missing write permission check
+- 0.3.4
+
+-------------------------------------------------------------------
 Tue Aug 28 08:53:40 UTC 2012 - lslezak@suse.cz
 
 - fixed crash at XML format request
