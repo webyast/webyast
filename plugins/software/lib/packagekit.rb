@@ -172,9 +172,8 @@ class PackageKit
   def self.mtime
     # we look for the most recent (max) modification time
     # of either the package database or libzypp cache files
-    [ File.stat("/var/lib/rpm/Packages").mtime,
-      File.stat("/var/cache/zypp/solv").mtime,
-      * Dir["/var/cache/zypp/solv/*/solv"].map{ |x| File.stat(x).mtime } ].max
+    [ "/var/lib/rpm/Packages", "/var/cache/zypp/solv",
+      * Dir["/var/cache/zypp/solv/*/solv"] ].map{ |f| File.exist?(f) ? File.stat(f).mtime : 0}.max
   end
 
   #
