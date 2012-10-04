@@ -260,7 +260,7 @@ public
     newconfig = { 'regserverurl' => registrationserver,
                   'regserverca'  => certificate  }
     ret = YastService.Call("YSR::setregistrationconfig", newconfig)
-    self.read_status
+    read_status
     return ret
   end
 
