@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Thu Oct  4 07:45:44 UTC 2012 - lslezak@suse.cz
+
+- removed DelayedJob dependency
+- 0.3.26
+
+-------------------------------------------------------------------
 Thu Aug 16 13:32:37 UTC 2012 - lslezak@suse.cz
 
 - removed unused ActionDispatch::Static middleware

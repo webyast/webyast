@@ -17,7 +17,7 @@
 
 
 Name:           rubygem-webyast-ntp
-Version:        0.3.4
+Version:        0.3.5
 Release:        0
 %define mod_name webyast-ntp
 %define mod_full_name %{mod_name}-%{version}

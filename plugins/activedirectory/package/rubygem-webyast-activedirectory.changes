@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Thu Oct  4 07:45:44 UTC 2012 - lslezak@suse.cz
+
+- removed DelayedJob dependency
+- 0.3.5
+
+-------------------------------------------------------------------
 Wed Sep 19 11:16:26 UTC 2012 - lslezak@suse.cz
 
 - added samba-client and samba-windbind dependency (bnc#781121)

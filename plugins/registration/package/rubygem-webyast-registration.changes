@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Thu Oct  4 07:45:44 UTC 2012 - lslezak@suse.cz
+
+- removed DelayedJob dependency
+- 0.3.7
+
+-------------------------------------------------------------------
 Thu Sep 27 12:23:09 UTC 2012 - lslezak@suse.cz
 
 - fixed HTML escaping in JSON/XML responses (bnc#782507)

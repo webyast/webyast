@@ -1,5 +1,10 @@
+-------------------------------------------------------------------
+Thu Oct  4 07:45:44 UTC 2012 - lslezak@suse.cz
+
+- removed DelayedJob dependency
 - decrease default patch status reload timeout to 1 hour (login
   session times out after 2 hours, longer time does not make sense)
+- 0.3.26
 
 -------------------------------------------------------------------
 Wed Oct  3 14:43:03 UTC 2012 - lslezak@suse.cz
