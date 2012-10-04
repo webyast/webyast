@@ -334,10 +334,13 @@ public
         @register.context[key] = value
       end
     end
-    ret = @register.register
-    if ret != 0
-      # FIXME handle more response types
-      render :xml=>@register.to_xml( :root => "registration", :dasherize => false ), :status => 400 and return
+
+    status = @register.register.zero? ? :ok : :bad_request
+
+    respond_to do |format|
+      format.xml { render  :xml => @register.to_xml(:dasherize => false), :status => status }
+      format.json { render :json => @register.to_json, :status => status }
+      format.html { head status}
     end
   end
 

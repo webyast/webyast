@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Thu Oct  4 14:47:32 UTC 2012 - lslezak@suse.cz
+
+- fixed REST API response rendering
+- 0.3.8
+
+-------------------------------------------------------------------
 Thu Oct  4 07:45:44 UTC 2012 - lslezak@suse.cz
 
 - removed DelayedJob dependency
