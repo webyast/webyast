@@ -2,7 +2,7 @@
 
 Gem::Specification.new do |s|
   s.name = "webyast-software"
-  s.version = "0.3.27"
+  s.version = "0.3.28"
   s.authors = ["WebYaST team"]
   s.summary = "Webyast module for handling patches and repos"
   s.email = "yast-devel@opensuse.org"

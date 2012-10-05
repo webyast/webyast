@@ -173,7 +173,7 @@ class PackageKit
     # we look for the most recent (max) modification time
     # of either the package database or libzypp cache files
     [ "/var/lib/rpm/Packages", "/var/cache/zypp/solv",
-      * Dir["/var/cache/zypp/solv/*/solv"] ].map{ |f| File.exist?(f) ? File.stat(f).mtime : 0}.max
+      * Dir["/var/cache/zypp/solv/*/solv"] ].delete_if{ |f| !File.exist?(f) }.map{ |f| File.stat(f).mtime }.max
   end
 
   #
