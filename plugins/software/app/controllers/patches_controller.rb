@@ -187,7 +187,7 @@ private
     running, remaining = Patch.installing
 
     if running
-      ref_timeout = 1.minute
+      ref_timeout = 10.seconds
       error_type = :install
       error_string = h _("Patch installation is in progress.")
 
