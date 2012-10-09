@@ -143,18 +143,18 @@ class Patch < Resolvable
   def self.do_find(what)
     bg_status = nil #not needed due caching
     patch_updates = Array.new
-    PackageKit.lock #locking
-    begin
-      PackageKit.transact("GetUpdates", "none", "Package", bg_status) { |line1,line2,line3|
+
+    DbusLock.synchronize do
+      PackageKit.transact("GetUpdates", "none", "Package", bg_status) do |line1,line2,line3|
         columns = line2.split ";"
         if what == :available || line2 == what
           update = Patch.new(:resolvable_id => line2,
-                             :version => columns[1],
-                             :kind => line1,
-                             :name => columns[0],
-                             :arch => columns[2],
-                             :repo => columns[3],
-                             :summary => line3 )
+            :version => columns[1],
+            :kind => line1,
+            :name => columns[0],
+            :arch => columns[2],
+            :repo => columns[3],
+            :summary => line3 )
 
           if what == :available
             # add the update to the list
@@ -164,12 +164,10 @@ class Patch < Resolvable
             patch_updates = update
           end
         end
-      }
-    ensure
-      #unlocking PackageKit
-      PackageKit.unlock
+      end
     end
-    return patch_updates
+
+    patch_updates
   end
 
   def self.install_all_background
@@ -284,7 +282,7 @@ class Patch < Resolvable
         res << ({
             :name => File.basename(f),
             :text => File.read(f)
-            })
+          })
       end
       res
     end
@@ -293,69 +291,69 @@ class Patch < Resolvable
 
   def self.do_install(pk_id, signal_list = [], &block)
     #locking PackageKit for single use
-    PackageKit.lock
     ok = true
-    begin
-      transaction_iface, packagekit_iface = PackageKit.connect
 
-      proxy = transaction_iface.object
+    DbusLock.synchronize do
+      begin
+        transaction_iface, packagekit_iface = PackageKit.connect
+
+        proxy = transaction_iface.object
     
-      if block_given?
-        signal_list.each { |signal|
-          # set the custom signal handle
-          proxy.on_signal(signal.to_s, &block) 
-        }
+        if block_given?
+          signal_list.each { |signal|
+            # set the custom signal handle
+            proxy.on_signal(signal.to_s, &block)
+          }
+        end
+
+        proxy.on_signal("Package") do |line1,line2,line3|
+          Rails.logger.debug "  update package: #{line2}"
+        end
+
+        error = ''
+        dbusloop = PackageKit.dbusloop proxy, error
+        dbusloop << proxy.bus
+        accept_eulas()
+
+        proxy.on_signal("Error") do |u1,u2|
+          ok = false
+          dbusloop.quit
+        end
+
+        proxy.on_signal("EulaRequired") do |eula_id,package_id,vendor_name,license_text|
+          #FIXME check if user already agree with license
+          create_eula(eula_id,license_text)
+          ok = false
+          dbusloop.quit
+        end
+
+        if transaction_iface.methods["UpdatePackages"] && # catch mocking
+          transaction_iface.methods["UpdatePackages"].params.size == 2 &&
+            transaction_iface.methods["UpdatePackages"].params[0][0] == "only_trusted"
+          #PackageKit of 11.2
+          transaction_iface.UpdatePackages(true,  #only_trusted
+            [pk_id])
+        else
+          #PackageKit older versions like SLES11
+          transaction_iface.UpdatePackages([pk_id])
+        end
+
+        dbusloop.run
+
+        ok &= error.blank?
+
+        # bnc#617350, remove signals
+        proxy.on_signal "Error"
+        proxy.on_signal "Package"
+        proxy.on_signal "EulaRequired"
+        if block_given?
+          signal_list.each { |signal|
+            proxy.on_signal signal.to_s
+          }
+        end
       end
-
-      proxy.on_signal("Package") do |line1,line2,line3|
-        Rails.logger.debug "  update package: #{line2}"
-      end
-
-      error = ''
-      dbusloop = PackageKit.dbusloop proxy, error
-      dbusloop << proxy.bus
-      accept_eulas()
-
-      proxy.on_signal("Error") do |u1,u2|
-        ok = false
-        dbusloop.quit
-      end
-
-      proxy.on_signal("EulaRequired") do |eula_id,package_id,vendor_name,license_text|
-        #FIXME check if user already agree with license
-        create_eula(eula_id,license_text)
-        ok = false
-        dbusloop.quit
-      end
-
-      if transaction_iface.methods["UpdatePackages"] && # catch mocking
-         transaction_iface.methods["UpdatePackages"].params.size == 2 &&
-         transaction_iface.methods["UpdatePackages"].params[0][0] == "only_trusted"
-        #PackageKit of 11.2
-        transaction_iface.UpdatePackages(true,  #only_trusted
-                                         [pk_id])
-      else
-        #PackageKit older versions like SLES11
-        transaction_iface.UpdatePackages([pk_id])
-      end
-
-      dbusloop.run
-
-      ok &= error.blank?
-
-      # bnc#617350, remove signals
-      proxy.on_signal "Error"
-      proxy.on_signal "Package"
-      proxy.on_signal "EulaRequired"
-      if block_given?
-        signal_list.each { |signal|
-          proxy.on_signal signal.to_s
-        }
-      end
-    ensure
-      #unlocking PackageKit
-      PackageKit.unlock
     end
+
     remove_eulas() if ok 
     return ok
   end
@@ -373,15 +371,15 @@ class Patch < Resolvable
   def self.accept_eulas()
     dir = Dir.new(ACCEPTED_LICENSES_DIR)
     dir.each  {|filename|
-       unless File.directory? filename
-         eula_id = File.basename filename
-         Rails.logger.info "accepting #{eula_id.inspect} ."
-         begin
-           PackageKit.transact :AcceptEula, [eula_id],nil,nil      
-         rescue Exception => e
-           Rails.logger.info "accepting eula #{eula_id} failed: #{e.inspect}"
-         end
-       end
+      unless File.directory? filename
+        eula_id = File.basename filename
+        Rails.logger.info "accepting #{eula_id.inspect} ."
+        begin
+          PackageKit.transact :AcceptEula, [eula_id],nil,nil
+        rescue Exception => e
+          Rails.logger.info "accepting eula #{eula_id} failed: #{e.inspect}"
+        end
+      end
     }
   end
 

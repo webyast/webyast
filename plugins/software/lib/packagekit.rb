@@ -105,29 +105,6 @@ class PackageKit
   public
 
   #
-  # PackageKit.lock
-  #
-  # Lock PackagKit for single use
-  #
-  def self.lock
-    Rails.logger.info "PackageKit locking via DBUS lock"
-    YastService.lock # Only one thread have access to DBUS. 
-                     # So we have to synchronize with YastService calls
-                     # Otherwise DBUS hangs
-    Rails.logger.info "PackageKit locked"
-  end
-
-  #
-  # PackageKit.unlock
-  #
-  # Unlock PackagKit
-  #
-  def self.unlock
-    YastService.unlock
-    Rails.logger.info "PackageKit unlocked via DBUS unlock"
-  end
-
-  #
   # PackageKit.connect
   #
   # connect to PackageKit and create Transaction proxy

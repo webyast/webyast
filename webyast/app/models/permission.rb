@@ -23,12 +23,13 @@
 require 'exceptions'
 require "yast_service"
 require 'yast/config'
+require 'dbus_lock'
 
 class Permission
   #list of hash { :name => id, :granted => boolean, :description => string (optional)}
   attr_reader :permissions
 
-private
+  private
 
   def self.get_cache_timestamp
     lst = []
@@ -79,30 +80,30 @@ private
   end
 
 
-public
+  public
 
   def initialize
     @permissions = []
   end
 
   def self.set_permissions(user,permissions)
-    YastService.lock #locking for other thread
-    service = dbus_obj
+    DbusLock.synchronize do
+      service = dbus_obj
 
-    #FIXME vendor permission with different prefix is not reset
-    all_perm = filter_nonsuse_permissions all_actions.split(/\n/)
+      #FIXME vendor permission with different prefix is not reset
+      all_perm = filter_nonsuse_permissions all_actions.split(/\n/)
 
-    #reset all permissions
-    response = service.revoke all_perm, user
-    #Rails.logger.info "*** Revoke permissions for user #{user} perms: #{all_perm.inspect} \n with result:\n#{response.inspect}"
+      #reset all permissions
+      response = service.revoke all_perm, user
+      #Rails.logger.info "*** Revoke permissions for user #{user} perms: #{all_perm.inspect} \n with result:\n#{response.inspect}"
 
-    unless permissions.empty?
-      response = service.grant permissions, user
-      #Rails.logger.info "*** Grant permissions for user #{user} :\n#{permissions.inspect}\nwith result #{response.inspect}"
+      unless permissions.empty?
+        response = service.grant permissions, user
+        #Rails.logger.info "*** Grant permissions for user #{user} :\n#{permissions.inspect}\nwith result #{response.inspect}"
+      end
+
+      self.reset(user)
     end
-
-    YastService.unlock #unlocking for other thread
-    self.reset(user)
   end
 
   def self.find(type,restrictions={})
@@ -126,9 +127,9 @@ public
         Rails.cache.write(perm_id, ret)
       end
     else
-        permission = Permission.new
-        permission.load_permissions(filters)
-        ret = permission.permissions
+      permission = Permission.new
+      permission.load_permissions(filters)
+      ret = permission.permissions
     end
     ret = ret.dup #has to be dup cause the cache value is frozen
     if (type != :all)
@@ -157,33 +158,30 @@ public
     mark_granted_permissions_for_user user if user
   end
 
-private
+  private
   def mark_granted_permissions_for_user(user)
-    YastService.lock #locking for other thread
-
-    @permissions.collect! do |perm|
-      begin
-        service = Permission.dbus_obj
-        if service.check( [perm[:id]], user )[0][0] == "yes"
-          perm[:granted] = true
-          Rails.logger.debug "Action: #{perm[:id]} User: #{user} Result: ok"
-        else
-          perm[:granted] = false
-          Rails.logger.debug "Action: #{perm[:id]} User: #{user} Result: NOT granted"
+    DbusLock.synchronize do
+      @permissions.collect! do |perm|
+        begin
+          service = Permission.dbus_obj
+          if service.check( [perm[:id]], user )[0][0] == "yes"
+            perm[:granted] = true
+            Rails.logger.debug "Action: #{perm[:id]} User: #{user} Result: ok"
+          else
+            perm[:granted] = false
+            Rails.logger.debug "Action: #{perm[:id]} User: #{user} Result: NOT granted"
+          end
+        rescue RuntimeError => e
+          Rails.logger.info e
+          if e.message.include?("does not exist")
+            raise InvalidParameters.new :user_id => "UNKNOWN"
+          else
+            raise PolicyKitException.new(e.message, user, perm[:id])
+          end
         end
-      rescue RuntimeError => e
-        Rails.logger.info e
-        YastService.unlock #unlocking for other thread
-        if e.message.include?("does not exist")
-          raise InvalidParameters.new :user_id => "UNKNOWN"
-        else
-          raise PolicyKitException.new(e.message, user, perm[:id])
-        end
+        perm
       end
-      perm
     end
-
-    YastService.unlock #unlocking for other thread
   end
 
   def get_description (action)
@@ -209,8 +207,8 @@ private
     suse_string = "org.opensuse.yast"
     str.select{ |s|
       s.include?(suse_string) &&
-      !s.include?(suse_string + ".scr") &&
-      !s.include?(suse_string +".module-manager")
+        !s.include?(suse_string + ".scr") &&
+        !s.include?(suse_string +".module-manager")
     }
   end
 
