@@ -19,6 +19,8 @@
 # this is a singleton class for managing background processes with progress
 # for long running tasks
 
+require 'background_status'
+
 class BackgroundManager
 
   include Singleton
