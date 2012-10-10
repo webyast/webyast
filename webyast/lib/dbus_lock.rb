@@ -47,8 +47,8 @@ class DbusLock
     DbusLock.instance.locked?
   end
 
-  # any DBus call has to wrapped in DbusLock.synchronize call
-  # which ensures that only one process in using DBus at a time
+  # any DBus call has to be wrapped in DbusLock.synchronize call
+  # which ensures that only one process is using DBus at a time
   def self.synchronize
     Rails.logger.info "Waiting for DBus lock... (#{caller(2).first})"
 
