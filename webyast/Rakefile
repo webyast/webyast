@@ -56,8 +56,6 @@ require File.expand_path('../config/application', __FILE__)
 Webyast::Application.load_tasks #   <<<< = require 'tasks/rails'
 
 
-
-
 require 'fileutils'
 
 desc "Deploy for development - create basic dirs and install grantwebyastrights."
@@ -73,23 +71,6 @@ task :deploy_local do
   chmod  0744, "/usr/sbin/webyastPermissionsService.rb"
   mkdir_p "/usr/share/dbus-1/system-services/"
   cp_r    "package/webyast.permissions.service.service", "/usr/share/dbus-1/system-services/"
-  `rake install_policies`
+  Rake::Task['install_policies'].invoke
 end
 
-#set constant to disable initializer for Delayed Job
-task :environment => :disable_initializer
-
-task :disable_initializer do
-  ENV["DISABLE_INITIALIZER"] = 'true'
-end
-
-namespace :sass do
-  desc 'Updates stylesheets if necessary from their Sass templates.'
-  task :update do
-    require 'sass/plugin'
-    Sass::Plugin.options = { :template_location => "app/sass" }
-    Sass::Plugin.update_stylesheets
-    #run css minifier task after sass to css converter
-    Rake::Task['css:min'].invoke
-  end
-end
