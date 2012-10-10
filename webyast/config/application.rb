@@ -47,6 +47,10 @@ module Webyast
     # (see http://guides.rubyonrails.org/asset_pipeline.html)
     config.assets.initialize_on_precompile = false
 
+    # write Rails log to /var/log/webyast directory if it is writable (otherwise use #{Rails.root}/log default)
+    log_dir = "/var/log/webyast"
+    config.paths['log'] = "#{log_dir}/#{Rails.env}.log" if File.directory?(log_dir) && File.writable?(log_dir)
+
     config.to_prepare do
       Devise::SessionsController.layout "application"
     end
