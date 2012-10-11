@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Thu Oct 11 10:01:03 UTC 2012 - lslezak@suse.cz
+
+- fixed tab header style (use the global style from the base)
+  (bnc#782080)
+
+-------------------------------------------------------------------
 Thu Aug 16 19:54:42 UTC 2012 - lslezak@suse.cz
 
 - removed unused ActionDispatch::Static middleware
