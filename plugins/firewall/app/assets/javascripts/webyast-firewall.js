@@ -107,31 +107,11 @@ function enableFirewallForm() {
     .addClass('firewallForm_enabled')
     .tipsy({gravity: 's', delayIn: 500});
 
-  //Change color on hover
-  $('#allowed_services span.firewall-service').hover(
-    function () {
-      $(this).css('color', '#8cb219');
-    },
-    function () {
-      $(this).css('color', '');
-    }
-  );
-
   $('#allowed_services span.firewall-service').click(function() {
       $(this).fadeOut(200);
       $("#fw_services_values input."+$(this).attr("value")).attr("value", "false");
       $("#blocked_services span[value='"+$(this).attr("value")+"']").fadeIn(50).effect("highlight", {color:'#ff6440'}, 300);
   });
-
-  //Change color on hover
-  $('#blocked_services span.firewall-service').hover(
-    function () {
-      $(this).css('color', '#ff7640');
-    },
-    function () {
-      $(this).css('color', '');
-    }
-  );
 
   $('#blocked_services span.firewall-service').click(function() {
       $(this).fadeOut(200);
