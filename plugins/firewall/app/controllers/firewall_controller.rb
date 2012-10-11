@@ -52,7 +52,7 @@ class FirewallController < ApplicationController
         service["input_name"] = CGI_PREFIX+"_"+service["id"]
       end
 
-      @needed_services = @firewall.fw_services.find_all{|s| NEEDED_SERVICES.include?(s["id"])}.map{|s| s["id"]}
+      @needed_services = @firewall.fw_services.find_all{|s| NEEDED_SERVICES.include?(s["id"])}
     end
     
 
