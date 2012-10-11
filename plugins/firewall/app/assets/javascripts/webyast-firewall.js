@@ -25,7 +25,7 @@ function initChagesTrack(message) {
   $("#on").click(formWasChanged);
   $("#off").click(formWasChanged);
 
-  $('#firewallForm .firewall-service').bind('click', formWasChanged);
+  $('#firewallForm .firewall-service').click(formWasChanged);
 
    $("#firewall-wrapper .action-link").click(function(event) {
      event.stopPropagation();
@@ -102,11 +102,10 @@ jQuery(function($){
 });
 
 function enableFirewallForm() {
-  //Description Tooltip
-  /*gravity: $.fn.tipsy.autoNS,*/
-  $('span.firewall-service').tipsy({gravity: 's', delayIn: 500 })
-//   $('span.firewall-service').removeClass('firewall_disabled');
-  $('span.firewall-service').removeClass('firewall_disabled').addClass('firewallForm_enabled');
+  $('span.firewall-service')
+    .removeClass('firewall_disabled')
+    .addClass('firewallForm_enabled')
+    .tipsy({gravity: 's', delayIn: 500});
 
   //Change color on hover
   $('#allowed_services span.firewall-service').hover(
@@ -118,12 +117,10 @@ function enableFirewallForm() {
     }
   );
 
-  $('#allowed_services span.firewall-service').bind({
-    click: function(event){
+  $('#allowed_services span.firewall-service').click(function() {
       $(this).fadeOut(200);
       $("#fw_services_values input."+$(this).attr("value")).attr("value", "false");
       $("#blocked_services span[value='"+$(this).attr("value")+"']").fadeIn(50).effect("highlight", {color:'#ff6440'}, 300);
-    }
   });
 
   //Change color on hover
@@ -136,62 +133,55 @@ function enableFirewallForm() {
     }
   );
 
-  $('#blocked_services span.firewall-service').bind({
-    click: function(event){
+  $('#blocked_services span.firewall-service').click(function() {
       $(this).fadeOut(200);
       $("#fw_services_values input."+$(this).attr("value")).attr("value", "true");
       $("#allowed_services span[value='"+$(this).attr("value")+"']").fadeIn(50).effect("highlight", {color:'#8cb219'}, 300);
-    }
   });
 }
 
 function disableFirewallForm() {
-  $elements = $('span.firewall-service');
-//   $elements.addClass('firewall_disabled');
-  $elements.removeClass('firewallForm_enabled').addClass('firewall_disabled');
-  $elements.unbind('click').unbind('mouseenter mouseleave');
+  $('span.firewall-service')
+    .removeClass('firewallForm_enabled')
+    .addClass('firewall_disabled')
+    .unbind('click mouseenter mouseleave');
 }
 
 // RADIO BUTTONS SWITCHER
 $(document).ready(function(){
   var $on = $('#on');
   var $off = $('#off');
-  var $firewall = $('#firewall_use_firewall');
 
-  function toggleMode($id) {
-    if($id.val() == "on") {
+  function toggleMode(event) {
+    event.preventDefault();
+
+    if($(this).val() == "on") {
       $on.addClass('active');
-      $firewall.val("true");
+      $('#firewall_use_firewall').val("true");
       $off.removeClass('active');
 
       $('#allowed_services').removeClass('firewallForm_disabled');
       $('#blocked_services').removeClass('firewallForm_disabled');
 
       enableFirewallForm();
-      $('#use_firewall').click();
     } else {
       $off.addClass('active');
-      $firewall.val("false");
+      $('#firewall_use_firewall').val("false");
       $on.removeClass('active');
 
       $('#allowed_services').addClass('firewallForm_disabled');
       $('#blocked_services').addClass('firewallForm_disabled');
 
       disableFirewallForm();
-      $('#use_firewall').click();
     }
+
+    $('#use_firewall').click();
+
+    return false;
   }
 
-  $on.click(function(event) {
-    event.preventDefault();
-    toggleMode($(this));
-    return false;
-  });
+  $on.click(toggleMode);
 
-  $off.click(function(event) {
-    event.preventDefault();
-    toggleMode($(this));
-    return false;
-  });
+  $off.click(toggleMode);
 });
 
