@@ -119,7 +119,8 @@ private
           end
           next_id = next_in_range( (1..@eula_count), @eula_id)
         else
-          flash[:error] = _("You must accept all licences before using this product!")
+          flash[:error] = n_("You need to accept the licence before using this product.",
+            "You need to accept all licences before using this product.", @eula_count)
           next_id = @eula_id
         end
         redirect_to :action => :show, :id => next_id
