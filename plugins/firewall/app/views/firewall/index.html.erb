@@ -123,7 +123,7 @@
 
   function validateNeededServices() {
     var use_firewall_old = <%= @firewall.use_firewall ? "true" : "false" %>;
-    var needed_services = <%= @needed_services_js %>;
+    var needed_services = <%= @needed_services.to_json.html_safe %>;
     var confirm_text = <%= jss _("Some of needed services (%s) are going to be blocked. WebYaST may not be usable anymore. Do you really want to block them?") %>;
 
     function isBlockedAndWasAllowed(service) {
