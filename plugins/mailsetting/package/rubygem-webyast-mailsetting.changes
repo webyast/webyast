@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Fri Oct 12 12:59:20 UTC 2012 - lslezak@suse.cz
+
+- help: added expected format for outgoing mail server value
+  (bnc#784483)
+
+-------------------------------------------------------------------
 Thu Oct  4 07:45:44 UTC 2012 - lslezak@suse.cz
 
 - removed DelayedJob dependency
