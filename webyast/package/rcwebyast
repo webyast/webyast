@@ -180,9 +180,10 @@ case "$1" in
     if [ ! -e  $COMBINEDCERTFILE ]
     then
         echo "No certificate found. Creating one now."
-        if ! /usr/sbin/check-create-certificate -c -C $CERTIFICATEFILE -K $CERTKEYFILE -B $COMBINEDCERTFILE -D webyast -O WebYaST -U WebYaST >/srv/www/webyast/log/check-create-certificate.log 2>&1
+        LOG_FILE="/var/log/webyast/check-create-certificate.log"
+        if ! /usr/sbin/check-create-certificate -c -C $CERTIFICATEFILE -K $CERTKEYFILE -B $COMBINEDCERTFILE -D webyast -O WebYaST -U WebYaST > $LOG_FILE 2>&1
         then
-            echo -n "Can not create certificate. Please see /srv/www/webyast/log/check-create-certificate.log for details."
+            echo -n "Can not create certificate. Please see $LOG_FILE for details."
             rc_failed
             rc_status -v
             rc_exit

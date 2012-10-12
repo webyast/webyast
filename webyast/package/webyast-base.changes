@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Wed Oct 10 08:54:38 UTC 2012 - lslezak@suse.cz
+
+- write all webyast logs to /var/log/webyast directory instead of
+  /srv/www/webyast/log (bnc#784012)
+
+-------------------------------------------------------------------
 Wed Oct  3 14:43:03 UTC 2012 - lslezak@suse.cz
 
 - added support for ActiveResource login needed by Studio
