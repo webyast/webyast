@@ -23,6 +23,7 @@ class PatchesController < ApplicationController
   include ERB::Util
 
   before_filter :cache_check, :only => [:index, :show_summary]
+  after_filter :drop_cache
 
   # include locale in the cache path to cache different translations
   caches_action :show_summary, :expires_in => Patch::EXPIRATION_TIME, :cache_path => Proc.new {"webyast_patch_summary_#{FastGettext.locale}"}
@@ -41,6 +42,15 @@ private
       Rails.logger.info "Expiring patch cache: cached: #{cached_mtime}, modified: #{current_mtime}"
       # update the time stamp
       Rails.cache.write("webyast_patch_mtime", current_mtime)
+      expire_patch_cache
+    end
+  end
+
+  # drop the cached results (needed in some cases, e.g. an error occured, SW management locked)
+  # to force retry again instead of returning the cached error
+  def drop_cache
+    if @drop_cache
+      Rails.logger.info "Dropping the cache, do full reload next time"
       expire_patch_cache
     end
   end
@@ -146,8 +156,10 @@ private
           flash[:error] = _("Cannot read patch updates: GPG key for repository <em>%s</em> is not trusted.") % $1
         elsif e.description.match /System management is locked by the application with pid ([0-9]+) \((.*)\)\./
           flash[:warning] = _("Software management is locked by another application ('%s', PID %s).") % [$2, $1]
+          @drop_cache = true
         else
           flash[:error] = e.message
+          @drop_cache = true
         end
         @patch_updates = []
         @error = true
@@ -212,9 +224,11 @@ private
         elsif error.description.match /System management is locked by the application with pid ([0-9]+) \((.*)\)\./
           error_string = _("Software management is locked by another application ('%s', PID %s).") % [$2, $1]
           error_type = :locked
+          @drop_cache = true
         else
           error_string = error.message
           error_type = :unknown
+          @drop_cache = true
         end
       end
     end
