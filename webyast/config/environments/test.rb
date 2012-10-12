@@ -55,6 +55,7 @@ Webyast::Application.configure do
   # Print deprecation notices to the stderr
   config.active_support.deprecation = :stderr
  
-  #using memory cache
-  config.cache_store = :memory_store
+  # do not use cache store in tests (to avoid using old cached value
+  # and skipping execution of some code)
+  config.cache_store = :null_store
 end

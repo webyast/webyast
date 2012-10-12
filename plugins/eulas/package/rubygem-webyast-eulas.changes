@@ -5,6 +5,12 @@ Thu Oct 11 09:21:44 UTC 2012 - lslezak@suse.cz
   better wording) (bnc#783736)
 
 -------------------------------------------------------------------
+Thu Oct  4 07:45:44 UTC 2012 - lslezak@suse.cz
+
+- removed DelayedJob dependency
+- 0.3.4
+
+-------------------------------------------------------------------
 Thu Aug 16 12:00:56 UTC 2012 - lslezak@suse.cz
 
 - restility is not needed for build

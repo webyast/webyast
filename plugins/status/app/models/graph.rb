@@ -286,9 +286,7 @@ class Graph
   def self.find(what, limitcheck = true)
     #checking if collectd is running
     raise ServiceNotRunning.new('collectd') unless Metric.collectd_running?
-    YastCache.fetch(self,what) {
-      do_find(what, limitcheck)
-    }
+    do_find(what, limitcheck)
   end
 
   #
@@ -378,8 +376,6 @@ class Graph
       f.write(config.to_yaml)
       f.close
     end
-    YastCache.delete(self)
-    YastCache.delete(Metric.new)
   end
 
   #returns a human readable value

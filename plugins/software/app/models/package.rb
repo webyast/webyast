@@ -19,8 +19,6 @@
 # you may find current contact information at www.novell.com
 #++
 
-require 'resolvable'
-
 class Package < Resolvable
 
   def to_xml( options = {} )
@@ -30,21 +28,21 @@ class Package < Resolvable
   def self.find(what)
     what = :installed if what == :all #default search for cache
     if what == :installed
-      YastCache.fetch(self,what) {
-        package_list = Array.new
-        PackageKit.transact("GetPackages", what.to_s, "Package") { |line1,line2,line3| # RORSCAN_ITL
-          columns = line2.split ";"
-          package = Package.new(:resolvable_id => line2,
-                                :name => columns[0],
-                                :version => columns[1]
-                               )
-                              # :arch => columns[2],
-                              # :repo => columns[3],
-                              # :summary => line3 )
-         package_list << package
-       }
+      package_list = []
+
+      PackageKit.transact("GetPackages", what.to_s, "Package") do |line1, line2, line3| # RORSCAN_ITL
+        columns = line2.split ";"
+        package = Package.new(:resolvable_id => line2,
+                              :name => columns[0],
+                              :version => columns[1]
+                             )
+                            # :arch => columns[2],
+                            # :repo => columns[3],
+                            # :summary => line3 )
+        package_list << package
+      end
+
       package_list
-      }
     end
   end
 end

@@ -36,7 +36,8 @@
             $('#statusbar_status').html(data);
           },
           error: function(xhr, status, error) {
-            $('#statusbar_status').html('<b><%= escape_javascript _("Error: Cannot check the current status.") -%></b>');
+            if (error != "")
+              $('#statusbar_status').html('<b><%= escape_javascript _("Error: Cannot check the current status.") -%></b>');
           }
         });
       });
@@ -55,7 +56,8 @@
             $('#statusbar_patches').html(data);
           },
           error: function(xhr, status, error) {
-            $('#statusbar_patches').html('<b><%= escape_javascript _("Error: Cannot check the current status.") -%></b>');
+            if (error != "")
+              $('#statusbar_patches').html('<b><%= escape_javascript _("Error: Cannot check the current status.") -%></b>');
           }
         });
       });

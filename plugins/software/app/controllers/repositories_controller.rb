@@ -24,6 +24,9 @@ require 'shellwords'
 class RepositoriesController < ApplicationController
 
   before_filter :check_read_permissions, :only => [:index, :show]
+  before_filter :cache_check, :only => :index
+
+  caches_action :index, :cache_path => Proc.new {"webyast_repo_index_#{FastGettext.locale}"}
 
 private
 
@@ -35,6 +38,24 @@ private
   def check_read_permissions
     authorize! :read, Repository
   end
+
+  def cache_check
+    cached_mtime = Rails.cache.fetch("webyast_repo_mtime")
+    current_mtime = Repository.mtime
+
+    if current_mtime != cached_mtime
+      Rails.logger.info "Expiring repo cache: cached: #{cached_mtime}, modified: #{current_mtime}"
+      # update the time stamp
+      Rails.cache.write("webyast_repo_mtime", current_mtime)
+      expire_repo_cache
+    end
+  end
+
+  def expire_repo_cache
+    # expire all translations
+    expire_fragment(/webyast_repo_index_/)
+  end
+
 
   public
 
@@ -91,9 +112,10 @@ private
     param = params[:repository] || {}
     #id is either in params or in the struct (create method)
     rep_id = params[:id] || param[:id]
+
+    # FIXME: is this needed??, Repository model already has some validation checks...
     raise InvalidParameters.new :id => "UNKNOWN" unless (rep_id && rep_id.is_a?(String))
     raise InvalidParameters.new :name => "UNKNOWN" unless (param[:name] && param[:name].is_a?(String))
-    raise InvalidParameters.new :enabled => "UNKNOWN" unless (param[:enabled] && param[:enabled].is_a?(String))
 
     # Cannot be CWE-285 cause id does not depend on user authent.
     # RORSCAN_INL: Cannot be a mass_assignment cause they are strings only
@@ -114,7 +136,7 @@ private
         unless request.format.html?
           render ErrorResult.error(404, 2, "packagekit error") and return
         else
-          flash[:error] = _("Cannot update repository '%s': missing parameters.") % "#{ERB::Util.html_escape params[:id]}"
+          flash[:error] = _("Cannot update repository '%s': missing parameters.") % params[:id]
           # RORSCAN_INL: will be escaped
           redirect_to :action => :index, :show => Shellwords.escape(params[:id]) and return          
         end
@@ -123,7 +145,7 @@ private
       unless request.format.html?
         render ErrorResult.error(404, 20, "DBus Error: #{exception.dbus_message.error_name}") and return
       else
-        flash[:error] = _("Cannot update repository '%s': missing parameters.") % "#{ERB::Util.html_escape params[:id]}"
+        flash[:error] = _("Cannot update repository '%s': missing parameters.") % params[:id]
         # RORSCAN_INL: will be escaped
         redirect_to :action => :index, :show => Shellwords.escape(params[:id]) and return          
       end
@@ -131,7 +153,7 @@ private
     unless request.format.html?
       render :show
     else
-      flash[:message] = _("Repository '%s' has been updated.") % "#{ERB::Util.html_escape @repo.name}"      
+      flash[:message] = _("Repository '%s' has been updated.") % @repo.name
       # RORSCAN_INL: will be escaped
       redirect_to :action => :index, :show => Shellwords.escape(params[:id]) and return
     end
@@ -169,7 +191,7 @@ private
       unless request.format.html?
         render ErrorResult.error(404, 1, "Repository '#{params[:id]}' not found.") and return
       else
-        flash[:error] = _("Repository '%s' was not found.") % "#{ERB::Util.html_escape params[:id]}"
+        flash[:error] = _("Repository '%s' was not found.") % params[:id]
         redirect_to :action => :index and return
       end
     end
@@ -186,21 +208,21 @@ private
         unless request.format.html?
           render ErrorResult.error(404, 2, "Cannot remove repository #{@repo.id}") and return
         else
-          flash[:error] = _("Cannot remove repository '%s'") % "#{ERB::Util.html_escape params[:id]}"
+          flash[:error] = _("Cannot remove repository '%s'") % params[:id]
         end
       end
     rescue DBus::Error => exception
       unless request.format.html?
         render ErrorResult.error(404, 20, "DBus Error: #{exception.dbus_message.error_name}") and return
       else
-        flash[:error] = _("Cannot remove repository '%s'") % "#{ERB::Util.html_escape params[:id]}"
+        flash[:error] = _("Cannot remove repository '%s'") % params[:id]
       end
     end
 
     unless request.format.html?
       render :show
     else
-      flash[:message] = _("Repository '%s' has been deleted.") % "#{ERB::Util.html_escape @repo.name}"
+      flash[:message] = _("Repository '%s' has been deleted.") % @repo.name
       redirect_to :action => :index and return
     end
   end

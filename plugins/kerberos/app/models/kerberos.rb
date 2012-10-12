@@ -18,7 +18,6 @@
 # To contact Novell about this file by physical or electronic mail,
 # you may find current contact information at www.novell.com
 #++
-require 'yast_service'
 require 'base'
 
 # = Kerberos model
@@ -34,10 +33,13 @@ class Kerberos < BaseModel::Base
   # prevents a user from submitting a crafted form that bypasses activation
   # anything else you want your user to change should be added here.
   attr_accessible :kdc, :default_domain, :default_realm, :enabled
+  
+  CACHE_ID = "webyast_kerberos"
 
   public
+
   def self.find
-    YastCache.fetch(self) {
+    Rails.cache.fetch(CACHE_ID) do
       ret = YastService.Call("YaPI::KERBEROS::Read", {})
       Rails.logger.info "Read KERBEROS config: #{ret.inspect}"
       kerberos = Kerberos.new({
@@ -48,7 +50,7 @@ class Kerberos < BaseModel::Base
       })
       kerberos = {} if kerberos.nil?
       kerberos
-    }
+    end
   end
 
   def save
@@ -58,9 +60,10 @@ class Kerberos < BaseModel::Base
     params["default_domain"] = [ "s", @default_domain] unless @default_domain.nil?
     params["use_kerberos"] = [ "b", @enabled] unless @enabled.nil?
 
+    Rails.cache.delete(CACHE_ID)
     yapi_ret = YastService.Call("YaPI::KERBEROS::Write", params)
     Rails.logger.debug "YaPI returns: '#{yapi_ret}'"
-    YastCache.reset(self)
+
     return true
   end
 

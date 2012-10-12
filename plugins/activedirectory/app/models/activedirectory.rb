@@ -43,20 +43,14 @@ class Activedirectory < BaseModel::Base
   public
   
   def self.find
-    YastCache.fetch(self) {
-      ret = YastService.Call("YaPI::ActiveDirectory::Read", {})
-      Rails.logger.info "Read Samba config: #{ret.inspect}"
+    ret = YastService.Call("YaPI::ActiveDirectory::Read", {})
+    Rails.logger.info "Read Samba config: #{ret.inspect}"
 
-      ad = Activedirectory.new({
-        :domain => ret["domain"],
-        :create_dirs => ret["mkhomedir"] == "1",
-        :enabled => ret["winbind"] == "1"
-      })
-      
-      leave = false
-      ad = {} if ad.nil?
-      ad
-    }
+    Activedirectory.new({
+      :domain => ret["domain"],
+      :create_dirs => ret["mkhomedir"] == "1",
+      :enabled => ret["winbind"] == "1"
+    })
   end
 
   def check_membership(check_domain)
@@ -127,12 +121,11 @@ class Activedirectory < BaseModel::Base
       raise ActivedirectoryError.new("write_error","")
     end
 
-    Rails.cache.write('activedirectory:domain', "")
-    Rails.cache.write('activedirectory:ads', "")
-    Rails.cache.write('activedirectory:realm', "")
-    Rails.cache.write('activedirectory:workgroup', "")
+    Rails.cache.delete 'activedirectory:domain'
+    Rails.cache.delete 'activedirectory:ads'
+    Rails.cache.delete 'activedirectory:realm'
+    Rails.cache.delete 'activedirectory:workgroup'
 
-    YastCache.reset(self)
     return true
   end
 

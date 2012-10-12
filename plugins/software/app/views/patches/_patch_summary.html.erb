@@ -24,8 +24,10 @@
 <%= report_error(error, error_string) if error_type == :unknown %>
 
 <% unless patch %>
-  <%= javascript_tag do %>
-    $('#status-eye').addClass('eye_warning');
+  <% if error_type != :install %>
+    <%= javascript_tag do %>
+      $('#status-eye').addClass('eye_warning');
+    <% end %>
   <% end %>
 
   <div class="statusbar_row">
@@ -117,24 +119,23 @@
 
     <% end %>
 
-  <% if refresh_timeout.to_i > 0 -%>
-    <!-- refresh the status again after a timeout -->
-    <%= javascript_tag do -%>
-      setTimeout(function() {
-        $('#statusbar_patches').html('<div class="statusbar_row"><%= image_tag("working.gif", :class => "small-working-icon") %><%= _("Loading patch information") %></div>')
-        $.ajax({
-            url: "<%= url_for({ :controller => :patches, :action => :show_summary, :background => true }) -%>",
-            type: "GET",
-            success: function(data, status, xhr) {
-              $('#statusbar_patches').html(data);
-            },
-            error: function(xhr, status, error) {
-              $('#statusbar_patches').html('<b><%= escape_javascript _("Error: Cannot get information.") -%></b>');
-            }
-        });
-      }, <%= refresh_timeout.to_i * 1000 -%>);
-    <% end -%>
-  <% end -%>
-
 <% end %> <!-- else -->
 
+<% if refresh_timeout.to_i > 0 -%>
+  <!-- refresh the status again after a timeout -->
+  <%= javascript_tag do -%>
+    setTimeout(function() {
+      $('#statusbar_patches').html('<div class="statusbar_row"><%= image_tag("working.gif", :class => "small-working-icon") %><%= _("Loading patch information") %></div>')
+      $.ajax({
+          url: "<%= url_for({ :controller => :patches, :action => :show_summary, :background => true }) -%>",
+          type: "GET",
+          success: function(data, status, xhr) {
+            $('#statusbar_patches').html(data);
+          },
+          error: function(xhr, status, error) {
+            $('#statusbar_patches').html('<b><%= escape_javascript _("Error: Cannot get information.") -%></b>');
+          }
+      });
+    }, <%= refresh_timeout.to_i * 1000 -%>);
+  <% end -%>
+<% end -%>

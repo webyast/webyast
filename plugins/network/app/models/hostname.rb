@@ -44,11 +44,9 @@ class Hostname < BaseModel::Base
   # fills time instance with data from YaPI.
   # +warn+: Doesn't take any parameters.
   def self.find
-    YastCache.fetch(self) {
-      response = YastService.Call("YaPI::NETWORK::Read") # hostname: true
-      Rails.logger.error "HOSTNAME NETWORK RESPONSE #{response.inspect}"
-      Hostname.new response["hostname"]
-    }
+    response = YastService.Call("YaPI::NETWORK::Read") # hostname: true
+    Rails.logger.error "HOSTNAME NETWORK RESPONSE #{response.inspect}"
+    Hostname.new response["hostname"]
   end
 
   # Saves data from model to system via YaPI. Saves only setted data,
@@ -64,7 +62,6 @@ class Hostname < BaseModel::Base
 
     Rails.logger.error "\n *** WRITE HOSTNAME SETTINGS #{vsettings.inspect}"
     exit_code = YastService.Call("YaPI::NETWORK::Write",{"hostname" => vsettings})
-    YastCache.reset(self)
 
     raise HostnameError.new(exit_code["error"]) if exit_code["exit"] != "0"
   end

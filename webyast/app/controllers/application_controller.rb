@@ -18,7 +18,6 @@
 
 require 'exceptions'
 require 'dbus'
-require 'yast_cache'
 require 'haml_gettext' # translate haml file on the fly
 
 class ApplicationController < ActionController::Base
@@ -27,7 +26,6 @@ class ApplicationController < ActionController::Base
   before_filter :format_check
   before_filter :authenticate_account!
   before_filter :set_gettext_locale
-  before_filter :init_cache
   before_filter :base_system
 
   # controllers allowed to be called when the base setup has not been finished yet
@@ -126,34 +124,6 @@ public
   helper :all # include all helpers, all the time
 
 private
-
-  def init_cache(controller_name = request.parameters["controller"])
-    return unless YastCache.active #Does not make sense if cache is not active
-    if request && request.request_method == "GET"
-      return unless (request.parameters["action"] == "show" ||
-                     request.parameters["action"] == "index")
-      #finding the correct cache name
-      #(has to be the model class name and not the controller name)
-      path = YastCache.find_key(controller_name, (request.parameters["id"] || :all))
-      if path.blank?
-        logger.info("Cache model for controller #{controller_name} not found")
-        return
-      end
-
-      data_cache = DataCache.find_by_path_and_session(path, session["session_id"])
-      found = false
-      data_cache.each { |cache|
-        found = true
-        if cache.picked_md5 != cache.refreshed_md5
-          cache.picked_md5 = cache.refreshed_md5
-          cache.save
-        end
-      } unless data_cache.blank?
-
-      DataCache.create(:path => path, :session => session["session_id"],
-                       :picked_md5 => nil, :refreshed_md5 => nil) unless found
-    end
-  end
 
   def report_backend_exception(exception)
       logger.info "Backend exception: #{exception}"

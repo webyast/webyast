@@ -25,33 +25,31 @@ class GetentPasswd < BaseModel::Base
   attr_accessor :full_name
 
   def self.find
-    YastCache.fetch(self) {
-      result = []
-      res = pure_getent
-      raise "cannot obtain passwd" unless res
-      minimum = system_minimum # RORSCAN_ITL
-      minimum = 1000 if minimum == 0 #fallback
-      lines = res.split "\n"
+    result = []
+    res = pure_getent
+    raise "cannot obtain passwd" unless res
+    minimum = system_minimum # RORSCAN_ITL
+    minimum = 1000 if minimum == 0 #fallback
+    lines = res.split "\n"
+    lines.each do |l|
+      elements = l.split ":"
+      #TODO: Find a better solution for user which UID < 1000
+      #possible solution could be config.yml where vendor can set UID range
+      #elements[1] != 'x' workaround, since some user has UID < 1000
+      if elements[2].to_i >= minimum && elements[0] != "nobody" || (elements[1] != 'x' && elements[2].to_i <= minimum ) #bnc#632326
+        name = elements[4].split(/\s*,\s*/)
+        result << GetentPasswd.new(:login => elements[0], :full_name => name[0])
+      end
+    end
+    active_directory_users = pure_wbinfo
+    if $?
+      lines = active_directory_users.split "\n"
       lines.each do |l|
-        elements = l.split ":"
-        #TODO: Find a better solution for user which UID < 1000
-        #possible solution could be config.yml where vendor can set UID range
-        #elements[1] != 'x' workaround, since some user has UID < 1000
-        if elements[2].to_i >= minimum && elements[0] != "nobody" || (elements[1] != 'x' && elements[2].to_i <= minimum ) #bnc#632326
-          name = elements[4].split(/\s*,\s*/)
-          result << GetentPasswd.new(:login => elements[0], :full_name => name[0])
-        end
+        l.chomp!
+        result << GetentPasswd.new(:login => l, :full_name => l)
       end
-      active_directory_users = pure_wbinfo
-      if $?
-        lines = active_directory_users.split "\n"
-        lines.each do |l|
-          l.chomp!
-          result << GetentPasswd.new(:login => l, :full_name => l)
-        end
-      end
-      result
-    }
+    end
+    result
   end
 
 private

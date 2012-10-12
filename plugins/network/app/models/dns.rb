@@ -63,10 +63,8 @@ class Dns < BaseModel::Base
   #
   # +warn+: Doesn't take any parameters.
   def Dns.find
-    YastCache.fetch(self) {
-      response = YastService.Call("YaPI::NETWORK::Read") # hostname: true
-      ret = Dns.new response["dns"]
-    }
+    response = YastService.Call("YaPI::NETWORK::Read") # hostname: true
+    Dns.new response["dns"]
   end
 
   # Saves data from model to system via YaPI. Saves only setted data,
@@ -81,7 +79,6 @@ class Dns < BaseModel::Base
     Rails.logger.error "\n *** WRITE DNS SETTINGS  #{vsettings.inspect}"
 
     exit_code = YastService.Call("YaPI::NETWORK::Write",{"dns" => vsettings})
-    YastCache.reset(self)
 
     raise DNSError.new(exit_code["error"]) if exit_code["exit"] != "0"
   end
