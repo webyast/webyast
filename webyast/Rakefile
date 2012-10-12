@@ -63,7 +63,7 @@ task :deploy_local do
   FileUtils.mkdir_p "/etc/webyast"
   FileUtils.mkdir_p "/var/lib/webyast"
   FileUtils.mkdir_p "/usr/share/webyast"
-  FileUtils.mkdir_p "/srv/www/webyast/log"
+  FileUtils.mkdir_p "/var/log/webyast"
   FileUtils.install "package/grantwebyastrights", "/usr/sbin", :mode => 0555
   mkdir_p "/etc/dbus-1/system.d/"
   cp_r    "package/webyast.permissions.conf", "/etc/dbus-1/system.d/"
