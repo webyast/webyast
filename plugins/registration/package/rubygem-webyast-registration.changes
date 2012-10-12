@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Fri Oct 12 11:19:47 UTC 2012 - lslezak@suse.cz
+
+- added missing statis dispatch for public/ (help text could not
+  be loaded) (bnc#784490)
+
+-------------------------------------------------------------------
 Thu Oct  4 14:47:32 UTC 2012 - lslezak@suse.cz
 
 - fixed REST API response rendering
