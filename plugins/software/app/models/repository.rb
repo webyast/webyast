@@ -82,10 +82,9 @@ class Repository < BaseModel::Base
       Rails.cache.write(mtime_id, repo_mtime)
 
       Rails.logger.info "Reading software repositories..."
-      PackageKit.lock
-      begin
-        repositories = []
+      repositories = []
 
+      DbusLock.synchronize do
         PackageKit.transact('GetRepoList', 'none', 'RepoDetail') { |id, name, enabled|
           Rails.logger.debug "RepoDetail signal received: #{id}, #{name}, #{enabled}"
 
@@ -98,8 +97,6 @@ class Repository < BaseModel::Base
             repositories << repo
           end
         }
-      ensure
-        PackageKit.unlock
       end
 
       repositories
@@ -178,8 +175,8 @@ class Repository < BaseModel::Base
   def update
     # create a new repository if it does not exist yet
     repo_exist = Repository.exists?(@id)
-    PackageKit.lock #locking
-    begin
+
+    DbusLock.synchronize do
       unless repo_exist
         Rails.logger.info "Adding a new repository '#{@id}': #{self.inspect}"
         PackageKit.transact('RepoSetData', [@id, 'add', @url])
@@ -203,8 +200,6 @@ class Repository < BaseModel::Base
 
       # set keep_package
       PackageKit.transact('RepoSetData', [@id, 'keep', @keep_packages.to_s])
-    ensure
-      PackageKit.unlock #locking
     end
   end
 
@@ -214,15 +209,12 @@ class Repository < BaseModel::Base
   def destroy
     return false if @id.blank?
     ret = false
-    PackageKit.lock #locking
-    begin
-      ret = PackageKit.transact('RepoSetData', [@id, 'remove', 'NONE'])
-    ensure
-      PackageKit.unlock #locking
-      return ret
-    end
-    return ret
-  end
 
+    DbusLock.synchronize do
+      ret = PackageKit.transact('RepoSetData', [@id, 'remove', 'NONE'])
+    end
+
+    ret
+  end
 
 end
