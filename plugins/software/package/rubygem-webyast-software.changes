@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Fri Oct 12 14:09:34 UTC 2012 - lslezak@suse.cz
+
+- display a warning message when SW management is locked by another
+  application (bnc#783550)
+
+-------------------------------------------------------------------
 Fri Oct  5 12:49:09 UTC 2012 - lslezak@suse.cz
 
 - fixed Packagekit.mtime check

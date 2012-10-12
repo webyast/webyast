@@ -24,7 +24,7 @@
 <%= report_error(error, error_string) if error_type == :unknown %>
 
 <% unless patch %>
-  <% if error_type != :install %>
+  <% if error_type != :install && error_type != :locked %>
     <%= javascript_tag do %>
       $('#status-eye').addClass('eye_warning');
     <% end %>
@@ -34,14 +34,12 @@
         <%= image_tag("warning.png") %>
 	  <% case error_type when :unknown %>
             <%= _("No information about patches available") %>
-	  <% when :unsigned %>
-            <%= error_string %>
-	  <% when :install %>
-            <%= error_string %>
           <% when :license %>
             <% link_to :controller => "patches", :action => "license" do %>
-              <%= _("Update needs EULA license confirmation. Please follow to patch module to decide about license.") %>
+              <%= _("An update needs EULA license confirmation.") %>
             <% end %>
+          <% else  %>
+            <%= error_string %>
 	  <% end %>
   </div>
 <% else %>

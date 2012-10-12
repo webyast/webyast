@@ -144,6 +144,8 @@ private
       rescue Exception => e
         if e.description.match /Repository (.*) needs to be signed/
           flash[:error] = _("Cannot read patch updates: GPG key for repository <em>%s</em> is not trusted.") % $1
+        elsif e.description.match /System management is locked by the application with pid ([0-9]+) \((.*)\)\./
+          flash[:warning] = _("Software management is locked by another application ('%s', PID %s).") % [$2, $1]
         else
           flash[:error] = e.message
         end
@@ -207,6 +209,9 @@ private
         if error.description.match /Repository (.*) needs to be signed/
           error_string = (_("Cannot read patch updates: GPG key for repository <em>%s</em> is not trusted.") % $1).html_safe
           error_type = :unsigned
+        elsif error.description.match /System management is locked by the application with pid ([0-9]+) \((.*)\)\./
+          error_string = _("Software management is locked by another application ('%s', PID %s).") % [$2, $1]
+          error_type = :locked
         else
           error_string = error.message
           error_type = :unknown
