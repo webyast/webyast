@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Fri Oct 12 15:57:05 UTC 2012 - lslezak@suse.cz
+
+- edit page - do not inslude non existing JS file
+- 0.3.7
+
+-------------------------------------------------------------------
 Thu Oct  4 07:45:44 UTC 2012 - lslezak@suse.cz
 
 - removed DelayedJob dependency

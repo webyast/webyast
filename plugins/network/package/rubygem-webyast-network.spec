@@ -17,7 +17,7 @@
 
 
 Name:           rubygem-webyast-network
-Version:        0.3.5
+Version:        0.3.6
 Release:        0
 %define mod_name webyast-network
 %define mod_full_name %{mod_name}-%{version}
@@ -47,7 +47,8 @@ Source1:        org.opensuse.yast.modules.yapi.network.policy
 %if 0%{?suse_version} == 0 || %suse_version > 1110
 Requires:       yast2-network >= 2.18.51
 %else
-Requires:       yast2-network >= 2.17.78.1
+# bonding and bridging support in YaPI
+Requires:       yast2-network >= 2.17.177
 %endif
 
 %package doc

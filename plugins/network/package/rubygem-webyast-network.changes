@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Fri Oct 12 15:47:14 UTC 2012 - lslezak@suse.cz
+
+- updated yast2-network dependency (more recent version needed)
+- 0.3.6
+
+-------------------------------------------------------------------
 Thu Oct  4 07:45:44 UTC 2012 - lslezak@suse.cz
 
 - removed DelayedJob dependency

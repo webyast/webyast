@@ -3,6 +3,9 @@ Thu Oct 11 10:01:03 UTC 2012 - lslezak@suse.cz
 
 - fixed tab header style (use the global style from the base)
   (bnc#782080)
+- removed duplicated links at the bottom
+- add user - fixed online help button position
+- 0.3.5
 
 -------------------------------------------------------------------
 Thu Oct  4 07:45:44 UTC 2012 - lslezak@suse.cz

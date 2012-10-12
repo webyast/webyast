@@ -3,6 +3,9 @@ Fri Oct 12 14:09:34 UTC 2012 - lslezak@suse.cz
 
 - display a warning message when SW management is locked by another
   application (bnc#783550)
+- block garbage collector when running DBus introspection
+  (caused SEGFAULT) (bnc#779511)
+- 0.3.29
 
 -------------------------------------------------------------------
 Fri Oct  5 12:49:09 UTC 2012 - lslezak@suse.cz

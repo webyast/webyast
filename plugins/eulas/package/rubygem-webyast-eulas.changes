@@ -1,4 +1,9 @@
 -------------------------------------------------------------------
+Fri Oct 12 15:40:37 UTC 2012 - lslezak@suse.cz
+
+- 0.3.5
+
+-------------------------------------------------------------------
 Thu Oct 11 09:21:44 UTC 2012 - lslezak@suse.cz
 
 - improved not accepted license message (use gettext plural form,
