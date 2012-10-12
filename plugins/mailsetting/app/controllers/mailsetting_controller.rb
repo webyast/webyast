@@ -62,6 +62,7 @@ public
     @mail = Mailsetting.find
     @mail.load params["mail"]
 
+    # FIXME: move the validation to the model
     # validate data also here, if javascript in view is off
     if @mail.password != @mail.confirm_password
       flash[:error] = _("Passwords do not match.")
