@@ -24,110 +24,68 @@ class YastService
   # cache the importer object, avoid recreation in every Import call
   @@importer = nil
 
-  # avoid race conditions while accessing YaST
-  #
-  @@yast_mutex = Mutex.new
-
   # cache for imported namespaces, avoid importing an Yast name space
   # and introspecting the DBus object in every call
   # key: name space name, value: DBus object
   @@imported = {}
 
-  #
-  # YastService.lock
-  #
-  # Lock YastService for single use
-  #
-  def YastService.lock
-    #      Rails.logger.info "DBUS locking"
-    @@yast_mutex.lock
-    #      Rails.logger.info "DBUS locked"
-  end
-
-  #
-  # YastService.unlock
-  #
-  # Unlock YastService
-  #
-  def YastService.unlock
-    if @@yast_mutex.locked?
-      begin
-        @@yast_mutex.unlock
-      rescue Exception => e
-        Rails.logger.debug "DBUS is not locked"
-      end
-      #        Rails.logger.info "DBUS unlocked"
-    end
-  end
-
   # call a Yast function using DBus service
   def YastService.Call(function, *arguments)
+    DbusLock.synchronize do
+      begin
+        # connect to the system bus
+        system_bus = DBus::SystemBus.instance # RORSCAN_ITL
 
-    YastService.lock #locking for other thread
+        # get the Yast namespace service
+        yast = system_bus.service('org.opensuse.YaST.modules') # RORSCAN_ITL
 
-    # connect to the system bus
-    system_bus = DBus::SystemBus.instance # RORSCAN_ITL
+        # parse the function name
+        parts = function.split('::')
 
-    # get the Yast namespace service
-    yast = system_bus.service('org.opensuse.YaST.modules') # RORSCAN_ITL
+        # get the last item (the function name)
+        fce = parts.pop
+        # format the namespace object name
+        object = parts.join('/')
+        namespace = parts.join('::')
 
-    # parse the function name
-    parts = function.split('::')
+        # has been the namespace already imported?
+        if @@imported.has_key?(namespace)
+          dbusobj = @@imported[namespace]
+        else
+          # lazy initialization of the importer object
+          if @@importer.nil?
+            @@importer = yast.object('/org/opensuse/YaST/modules')
+            @@importer.introspect
+            @@importer.default_iface = 'org.opensuse.YaST.modules.ModuleManager'
+          end
 
-    # get the last item (the function name)
-    fce = parts.pop
-    # format the namespace object name
-    object = parts.join('/')
-    namespace = parts.join('::')
+          # import the module
+          imported = @@importer.Import(namespace)
 
-    # has been the namespace already imported?
-    if @@imported.has_key?(namespace)
-	    dbusobj = @@imported[namespace]
-    else
-	    # lazy initialization of the importer object
-	    if @@importer.nil?
-        @@importer = yast.object('/org/opensuse/YaST/modules')
-        @@importer.introspect
-        @@importer.default_iface = 'org.opensuse.YaST.modules.ModuleManager'
-	    end
+          if imported
+            dbusobj = yast.object('/org/opensuse/YaST/modules/' + object)
+            dbusobj.introspect
+            dbusobj.default_iface = 'org.opensuse.YaST.Values'
 
-	    # import the module
-	    imported = @@importer.Import(namespace)
+            @@imported[namespace] = dbusobj
+          end
+        end
+        return dbusobj.send(fce, *arguments)[0]
 
-	    if imported
-        dbusobj = yast.object('/org/opensuse/YaST/modules/' + object)
-        dbusobj.introspect
-        dbusobj.default_iface = 'org.opensuse.YaST.Values'
+        # handle DBus and PolicyKit errors
+      rescue DBus::Error => dbe
+        # handle org.freedesktop.PolicyKit.Error.NotAuthorized DBus Error
+        if dbe.dbus_message.error_name == 'org.freedesktop.PolicyKit.Error.NotAuthorized' && dbe.dbus_message.params.size == 1
+          parms = dbe.dbus_message.params[0].split(' ')
 
-        @@imported[namespace] = dbusobj
+          # throw a PolicyKit exception instead of the DBus exception
+          raise CanCan::AccessDenied.new(_("Not authorized! (%s)") % parms[0])
+        end
+
+        # rethrow other DBus Errors
+        raise dbe
       end
     end
-    return dbusobj.send(fce, *arguments)[0]
-
-
-    # handle DBus and PolicyKit errors
-  rescue DBus::Error => dbe
-
-    # handle org.freedesktop.PolicyKit.Error.NotAuthorized DBus Error
-    if dbe.dbus_message.error_name == 'org.freedesktop.PolicyKit.Error.NotAuthorized' && dbe.dbus_message.params.size == 1
-	    parms = dbe.dbus_message.params[0].split(' ')
-	    
-	    # Etc helps to retrieve the login of the REST service
-	    require 'etc'
-      # throw a PolicyKit exception instead of the DBus exception
-      raise CanCan::AccessDenied.new(_("Not authorized! (%s)") % parms[0])
-    end
-
-    # rethrow other DBus Errors
-    raise dbe
-
-    # handle generic errors (e.g. non existing yast function)
-  rescue Exception => e
-
-    # rethow generic exceptions
-    raise e
-  ensure
-    YastService.unlock #unlocking for other thread
   end
-end
 
+end
