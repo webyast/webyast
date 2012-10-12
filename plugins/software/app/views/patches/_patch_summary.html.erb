@@ -100,7 +100,21 @@
     <% if patch[:security] > 0 or patch[:important] > 0 or patch[:optional] > 0 %>
       
       <div class="update_all">
-        <%= link_to _("Install all"), {:controller=>"patches", :action => 'start_install_all'}, :remote=> true %>
+        <%= link_to _("Install all"), {:controller=>"patches", :action => 'start_install_all',}, :remote=> true, :id => "install_all_link" %>
+          <%= javascript_tag do -%>
+            $('#install_all_link').bind('ajax:beforeSend', function (xhr, settings) {
+              $(this)
+                .unbind('click')
+                .attr('href', '')
+                .parent()
+                .prepend(<%= jss image_tag("working.gif", :class => "small-working-icon") -%>)
+                .parent()
+                .find(".statusbar_row").fadeOut('slow');
+            });
+            $('#install_all_link').bind('ajax:success', function (xhr, data, status) {
+              $('#statusbar_patches').html(data);
+            });
+          <% end %>
       </div>
 
     <% end %>

@@ -25,7 +25,7 @@ require 'firewall'
 class FirewallController < ApplicationController
 
   CGI_PREFIX="firewall"
-  NEEDED_SERVICES=["service:webyast","service:webyast-ui"]
+  NEEDED_SERVICES = ["service:webyast"]
   
   private
 
@@ -33,13 +33,6 @@ class FirewallController < ApplicationController
     params[name] == "true"
   end
 
-  # FIXME: use JSON (Hash#to_json) here
-  def service_to_js(service)
-    return ("{ input_name: '"+service.input_name+
-            "', name: '"+service.name+
-            "', allowed: " + (service.allowed ? "true" : "false") + "}")
-  end
- 
   public 
     def index
       authorize! :read, Firewall
@@ -58,9 +51,8 @@ class FirewallController < ApplicationController
         service["name"] = service["id"].gsub(/^service:/,"")
         service["input_name"] = CGI_PREFIX+"_"+service["id"]
       end
-  
-      needed_services = @firewall.fw_services.find_all{|s| NEEDED_SERVICES.include? s.object_id}
-      @needed_services_js = "["+needed_services.collect{|s| service_to_js s}.join(",")+"]"
+
+      @needed_services = @firewall.fw_services.find_all{|s| NEEDED_SERVICES.include?(s["id"])}
     end
     
 

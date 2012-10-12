@@ -182,6 +182,10 @@ html, body {
   clear:both;
 }
 
+.copy {
+  text-align: center;
+}
+
 #login-wrapper {
   position: absolute;
   top: 0;

@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Wed Oct 10 08:54:38 UTC 2012 - lslezak@suse.cz
+
+- write all webyast logs to /var/log/webyast directory instead of
+  /srv/www/webyast/log (bnc#784012)
+
+-------------------------------------------------------------------
 Thu Oct  4 07:45:44 UTC 2012 - lslezak@suse.cz
 
 - removed DelayedJob dependency

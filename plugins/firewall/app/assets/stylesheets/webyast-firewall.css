@@ -30,7 +30,6 @@
   cursor: pointer;
   text-shadow: 0px 1px 0px #fff;
   min-width:80px;
-/*  font-family: Arial; */
 
   -moz-box-shadow: 0px 0px 1px #666;
   -webkit-box-shadow: 0px 0px 1px #666;
@@ -59,36 +58,14 @@
   background: -webkit-gradient(linear, left top, left bottom, from(#71D048), to(#39A33A));
 }
 
-.round3 { -moz-border-radius:3px; -webkit-border-radius:3px; }
-.round5 { -moz-border-radius:5px; -webkit-border-radius:5px; }
-.round5t { -moz-border-radius:5px 5px 0px 0px; -webkit-border-radius:5px 5px 0px 0px; }
-.round5b { -moz-border-radius:0px 0px 5px 5px; -webkit-border-radius:0px 0px 5px 5px; }
-.round10 { -moz-border-radius:10px; -webkit-border-radius:10px; }
-.round10t { -moz-border-radius:10px 10px 0px 0px; -webkit-border-radius:10px 10px 0px 0px; }
-.round10b { -moz-border-radius:0px 0px 10px 10px; -webkit-border-radius:0px 0px 10px 10px; }
+#allowed_services .firewallForm_enabled.firewall-service:hover { color: #8cb219; }
+#blocked_services .firewallForm_enabled.firewall-service:hover { color: #ff7640; }
 
 .firewallForm_enabled { cursor: pointer;}
 .firewallForm_disabled { background-color:#fff; color:#ccc; cursor: default;}
 .label-image { width:16px; height:16px; vertical-align:middle; }
 
-#firewall label { float:none; display:inline;}
 #use_firewall { visibility:hidden; }
-#firewall.border { margin-bottom:20px; padding:0 10px 10px 0px; text-align:left; }
-
-#indicator {
-  margin-right:10px;
-  width:32px;
-  height:32px;
-  margin:1px 10px 0 0px;
-  vertical-align:middle;
-}
-
-#indicatorLabel {
-  font: 22px Arial, sans-serif;
-  line-height:22px;
-  margin-right:10px;
-  vertical-align:middle;
-}
 
 #firewallForm  { padding:0px 10px 10px 10px; }
 #firewall-wrapper { padding:10px; }
@@ -109,14 +86,13 @@
 }
 
 #allowedContainer, #blockedContainer { font-size:13px; width:47%; margin-bottom:10px;}
-#allowedContainer, #rolesContainer { float:left; }
-#blockedContainer, #usersContainer { float:right; }
+#allowedContainer { float:left; }
+#blockedContainer { float:right; }
 #allowed_services, #blocked_services { padding:0px 5px 0px 3px; }
 #allowedContainer label, #blockedContainer label { font-size:18px; font-weight:bold; color:#333; margin:10px 0px; vertical-align:middle; line-height:18px; display:inline-block;}
 
-#allowedContainer span.icon-border, #blockedContainer span.icon-border {
-  -moz-border-radius:20px;
-  -webkit-border-radius:20px;
+.icon-border {
+  border-radius: 10px;
   padding:2px;
   display:inline-block;
   text-align:center;
@@ -130,88 +106,23 @@
 #allowed_services p, #blocked_services p { padding-left:2px; vertical-align:middle;}
 #allowed_services p:hover, #blocked_services p:hover { background-color: #fff; }
 #allowed_services span, #blocked_services span {
-  -moz-border-radius:10px;
-  -webkit-border-radius:10px;
+  border-radius: 10px;
   padding:0px 3px 0px 5px;
 }
 
-#allowed_services span.firewall-service:before, #blocked_services span.firewall-service:before {
+.firewall-service:before {
  vertical-align:middle;
  margin-right:3px;
  content:url(services.png);
 }
 
-#firewallForm div.services  {
+#firewallForm .services  {
   -moz-box-shadow: inset 26px 0px 0px rgba(50, 50, 50, 0.15), inset 0px 0px 4px rgba(0, 0, 0, 0.5);
   -webkit-box-shadow: inset 26px 0px 0px rgba(50, 50, 50, 0.2), inset 0px 0px 4px rgba(0, 0, 0, 0.5);
   min-height:200px;
   border:3px solid #e5e5e5;
+  border-radius: 5px;
 }
-
-/* FIREWALL ON/OFF SWITCH */
-#firewallForm a.selected {
-  color:#f0f0f0!important;
-  border: 1px solid #222!important;
-  border-left-width: 0px!important;
-  border-right-width: 0px!important;
-  -moz-box-shadow:  inset 0px 0px 10px #000;
-  -webkit-box-shadow:  inset 0px 0px 10px #000;
-  background:#555 !important;
-}
-
-#firewallForm a.btn {
-  display: inline-block;
-  background-color:#eee;
-  font-size:16px;
-  font-weight:bold;
-  vertical-align:middle;
-  line-height:20px;
-  padding:1px 6px 2px 6px;
-  border: 1px solid #a0a0a0;
-  color:#888;
-  text-align:center;
-  width:40px;
-  background: url(firewall-switch-bg.png) repeat-x 0px 0px #e5e5e5;
-  background:-moz-linear-gradient(center top , #fff 10%, #e2e2e2 30%, #d5d5d5 50%, #ccc 100%) repeat scroll 0 0 transparent;
-}
-
-#firewallForm a.btn:hover { cursor:pointer; }
-#firewallForm a.leftBtn {
-  border-right-width: 0;
-  margin-right: -2px;
-  border-top-left-radius: 3px;
-  border-top-right-radius: 0px;
-  border-bottom-right-radius: 0px;
-  border-bottom-left-radius: 3px;
-  -moz-border-radius-topleft: 3px;
-  -moz-border-radius-topright: 0px;
-  -moz-border-radius-bottomright: 0px;
-  -moz-border-radius-bottomleft: 3px;
-  -webkit-border-top-left-radius: 3px;
-  -webkit-border-top-right-radius: 0px;
-  -webkit-border-bottom-right-radius: 0px;
-  -webkit-border-bottom-left-radius: 3px;
-}
-
-#firewallForm a.rightBtn {
-  border-left-width: 0px;
-  margin-left: -2px;
-  border-top-left-radius: 0px;
-  border-top-right-radius: 3px;
-  border-bottom-right-radius: 3px;
-  border-bottom-left-radius: 0px;
-  -moz-border-radius-topleft: 0px;
-  -moz-border-radius-topright: 3px;
-  -moz-border-radius-bottomright: 3px;
-  -moz-border-radius-bottomleft: 0px;
-  -webkit-border-top-left-radius: 0px:
-  -webkit-border-top-right-radius: 3px;
-  -webkit-border-bottom-right-radius: 3px;
-  -webkit-border-bottom-left-radius: 0px;
-}
-
-#firewallForm a.leftBtn:active { border-right-width: 0; }
-#firewallForm a.rightBtn:active { border-left-width: 0; }
 
 #unsavedChangesDialog { display:none; cursor: default; }
 #unsavedChangesDialog div { vertical-align:middle; text-align:center;  font-size:14px; font-weight:bold; }

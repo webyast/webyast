@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Thu Oct 11 09:21:44 UTC 2012 - lslezak@suse.cz
+
+- improved not accepted license message (use gettext plural form,
+  better wording) (bnc#783736)
+
+-------------------------------------------------------------------
 Thu Oct  4 07:45:44 UTC 2012 - lslezak@suse.cz
 
 - removed DelayedJob dependency

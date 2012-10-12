@@ -31,7 +31,7 @@
 
 <div class="plugin-content plugin-border">
   <%= render :partial => 'shared/missing_write_permissions' if disabled %>
-  <%= form_tag '/firewall/update', {:id=>'firewallForm', :class => 'container, webyast_form', :onsubmit => "return validateNeededServices()" } do %>
+  <%= form_tag '/firewall/update', {:id=>'firewallForm', :class => 'container webyast_form', :onsubmit => "return validateNeededServices();" } do %>
 
   <div id="firewallbar" class="plugin-header">
     <div class="left" style="float:left">
@@ -45,12 +45,11 @@
       <% if @firewall.use_firewall %>
         <button id="on" class="active" value="on"><%=_("Enabled")%></button>
         <button id="off" value="off"><%=_("Disabled")%></button>
-        <%= hidden_field "firewall", "use_firewall" %>
       <% else %>
         <button id="on" value="on"><%=_("Enabled")%></button>
         <button id="off" class="active" value="off"><%=_("Disabled")%></button>
-        <%= hidden_field "firewall", "use_firewall" %>
       <% end %>
+      <%= hidden_field "firewall", "use_firewall" %>
      </span>
     </div>
     <div class="clearfix"></div>
@@ -123,28 +122,24 @@
 
   function validateNeededServices() {
     var use_firewall_old = <%= @firewall.use_firewall ? "true" : "false" %>;
-    var needed_services = <%= @needed_services_js %>;
-    var confirm_text = <%= jss _("Some of needed services (%s) are going to be blocked. WebYaST may not be usable anymore. Do you really want to block them?") %>;
+    var needed_services = <%= @needed_services.to_json.html_safe %>;
+    var confirm_text = <%= jss _("WebYaST service is going to be blocked, it will not be reachable for new connections.\nFor the current connections it might be accessible for short time.\nTo enable WebYaST back you might need to use other tools and services.\n\nDo you really want to block WebYaST?") %>;
 
     function isBlockedAndWasAllowed(service) {
-      var is_blocked  = ( $("#fw_services_values input[name='"+service["input_name"]+"']")[0].value == 'false' );
+      var is_blocked  = ( $("#fw_services_values input[name='"+ service.input_name +"']")[0].value == 'false' );
       return is_blocked && (service.allowed || ! use_firewall_old);
     }
 
-    function blockedNames(services) {
-      return services.filter( isBlockedAndWasAllowed ).map( function(s) { return s.name });
-    }
-
-    if ( $("#use_firewall")[0].checked ) {
-      if ( needed_services.some( isBlockedAndWasAllowed ) ) {
-        if (!confirm( confirm_text.replace("%s", blockedNames(needed_services).join(", ")) ) ){
+    if ($("#use_firewall").is(":checked")) {
+      if (needed_services.some(isBlockedAndWasAllowed)) {
+        if (!confirm(confirm_text)) {
           return false;
         }
       }
     }
 
     var message = <%= jss _("Please wait") -%>;
-    $.modalDialog.wait( {message: message});
+    $.modalDialog.wait({message: message});
     return true;
   }
 

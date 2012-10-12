@@ -1,4 +1,16 @@
 -------------------------------------------------------------------
+Fri Oct 12 10:20:15 UTC 2012 - lslezak@suse.cz
+
+- added yast2.rpm dependency (Mode.ycp, SuSEFirewall.ycp and
+  SuSEFirewallServices.ycp are needed)
+
+-------------------------------------------------------------------
+Thu Oct 11 16:49:47 UTC 2012 - lslezak@suse.cz
+
+- display a warning when the WebYaST port is going to be blocked
+  (to prevent from making WebYaST unreachable) (bnc#782065)
+
+-------------------------------------------------------------------
 Thu Oct  4 07:45:44 UTC 2012 - lslezak@suse.cz
 
 - removed DelayedJob dependency

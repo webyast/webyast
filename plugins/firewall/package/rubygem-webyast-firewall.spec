@@ -37,6 +37,7 @@ Requires:       yast2-core >= 2.18.10
 %else
 Requires:       yast2-core >= 2.17.30.1
 %endif
+Requires:	yast2
 Requires:       SuSEfirewall2
 
 Obsoletes:	webyast-firewall-ws < %{version}

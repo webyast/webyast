@@ -223,9 +223,9 @@ export WEBYAST_POLICYKIT='true'
 #
 # Install all web and frontend parts.
 #
-mkdir -p $RPM_BUILD_ROOT%{webyast_dir}/log/
+mkdir -p $RPM_BUILD_ROOT%{webyast_dir}
 cp -a * $RPM_BUILD_ROOT%{webyast_dir}/
-rm -f $RPM_BUILD_ROOT%{webyast_dir}/log/*
+rm -f $RPM_BUILD_ROOT%{webyast_dir}/log
 rm -rf $RPM_BUILD_ROOT/%{webyast_dir}/po
 rm -f $RPM_BUILD_ROOT%{webyast_dir}/COPYING
 
@@ -401,8 +401,8 @@ export WEBYAST_POLICYKIT='true'
 %endif
 RAILS_ENV=production rake db:migrate
 chown -R %{webyast_user}: db
-chown -R %{webyast_user}: log
-chmod -R o-r log
+chown -R %{webyast_user}: /var/log/webyast
+chmod -R o-r /var/log/webyast
 echo "Database is ready"
 
 # try-reload D-Bus config (bnc#635826)
@@ -492,7 +492,6 @@ fi
 %attr(444,root,root) /usr/share/dbus-1/system-services/webyast.permissions.service.service
 %attr(644,root,root) %config /etc/dbus-1/system.d/webyast.permissions.conf
 %doc %{webyast_dir}/README
-%attr(-,%{webyast_user},%{webyast_user}) %{webyast_dir}/log
 %attr(-,%{webyast_user},%{webyast_user}) %{webyast_dir}/tmp
 %dir %{webyast_vardir}
 %attr(-,%{webyast_user},%{webyast_user}) %dir %{webyast_vardir}/basesystem
