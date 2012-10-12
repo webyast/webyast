@@ -1,4 +1,23 @@
 -------------------------------------------------------------------
+Fri Oct  5 12:49:09 UTC 2012 - lslezak@suse.cz
+
+- fixed Packagekit.mtime check
+- 0.3.28
+
+-------------------------------------------------------------------
+Thu Oct  4 14:32:37 UTC 2012 - lslezak@suse.cz
+
+- do not read mtime of missing files (e.g. /var/cache/zypp/solv
+  might not exist yet at the first boot)
+- 0.3.27
+
+-------------------------------------------------------------------
+Thu Oct  4 07:45:44 UTC 2012 - lslezak@suse.cz
+
+- removed DelayedJob dependency
+- 0.3.26
+
+-------------------------------------------------------------------
 Thu Aug 16 13:32:37 UTC 2012 - lslezak@suse.cz
 
 - removed unused ActionDispatch::Static middleware

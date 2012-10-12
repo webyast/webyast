@@ -14,8 +14,6 @@ gem "sqlite3"
 gem 'haml'
 
 gem "ruby-dbus"
-gem 'delayed_job', '~> 3.0.2'
-gem 'delayed_job_active_record'
 
 gem "fast_gettext", '>= 0.6.4'
 gem 'gettext_i18n_rails', '>= 0.4.3'

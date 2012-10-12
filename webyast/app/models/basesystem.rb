@@ -38,6 +38,8 @@ class Basesystem < BaseModel::Base
   # path to file which store module then is next in queue or END_STRING if all steps is done
   FINISH_FILE = File.join(YaST::Paths::VAR,"basesystem","finish")
   FINISH_STR = "FINISH"
+  
+  CACHE_ID = "webyast_basesystem"
 
   def self.undef_constant # fix: "warning: already initialized constant FINISH_FILE"
     remove_const :FINISH_FILE
@@ -86,7 +88,7 @@ class Basesystem < BaseModel::Base
     File.open(FINISH_FILE,"w") do |io|
       io.write str
     end
-    YastCache.reset(self)
+    Rails.cache.delete(CACHE_ID)
   end
 
   # return:: controller which should be next in basesystem sequence
@@ -169,7 +171,7 @@ class Basesystem < BaseModel::Base
   end
 
   def self.load_from_file
-    YastCache.fetch(self) {
+    Rails.cache.fetch(CACHE_ID) do
       base = Basesystem.new
       basesystem_conf	= BASESYSTEM_CONF
       basesystem_conf	= BASESYSTEM_CONF_VENDOR if File.exists? BASESYSTEM_CONF_VENDOR
@@ -203,7 +205,7 @@ class Basesystem < BaseModel::Base
         base.finish = true
       end
       base
-    }
+    end
   end
 
   # returns list of available controllers (even in registered Rails Engines)

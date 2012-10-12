@@ -11,6 +11,12 @@ Thu Oct 11 16:49:47 UTC 2012 - lslezak@suse.cz
   (to prevent from making WebYaST unreachable) (bnc#782065)
 
 -------------------------------------------------------------------
+Thu Oct  4 07:45:44 UTC 2012 - lslezak@suse.cz
+
+- removed DelayedJob dependency
+- 0.3.6
+
+-------------------------------------------------------------------
 Tue Aug 28 07:52:23 UTC 2012 - lslezak@suse.cz
 
 - fixed rendering escaped XML output

@@ -50,19 +50,17 @@ class Route < BaseModel::Base
   def self.find( which )
     which = "default" if which == :all
 
-    YastCache.fetch(self,which) {
-      response = YastService.Call("YaPI::NETWORK::Read")
-      routes_h = response["routes"]
-      if which == :all
-        ret = Hash.new
-        routes_h.each do |id, route_h|
-          ret[id] = Route.new(route_h, id)
-        end
-      else
-        ret = Route.new(routes_h[which], which)
+    response = YastService.Call("YaPI::NETWORK::Read")
+    routes_h = response["routes"]
+    if which == :all
+      ret = Hash.new
+      routes_h.each do |id, route_h|
+        ret[id] = Route.new(route_h, id)
       end
-      ret
-    }
+    else
+      ret = Route.new(routes_h[which], which)
+    end
+    ret
   end
 
   # Saves data from model to system via YaPI. Saves only setted data,
@@ -77,7 +75,6 @@ class Route < BaseModel::Base
     Rails.logger.error "\n *** WRITE ROUTE SETTINGS  #{vsettings.inspect}"
     exit_code = YastService.Call("YaPI::NETWORK::Write",{"route" => vsettings})
 
-    YastCache.reset(self,@id)
     raise RouteError.new(exit_code["error"]) if exit_code["exit"] != "0"
   end
 

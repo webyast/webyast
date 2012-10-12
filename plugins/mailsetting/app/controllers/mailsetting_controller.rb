@@ -22,8 +22,6 @@
 # = Mail controller
 # For configuration of which SMTP server use for sending mails
 
-require 'digest/sha2'
-
 class MailsettingController < ApplicationController
 
 public

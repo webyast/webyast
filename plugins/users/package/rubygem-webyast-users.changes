@@ -5,6 +5,12 @@ Thu Oct 11 10:01:03 UTC 2012 - lslezak@suse.cz
   (bnc#782080)
 
 -------------------------------------------------------------------
+Thu Oct  4 07:45:44 UTC 2012 - lslezak@suse.cz
+
+- removed DelayedJob dependency
+- 0.3.4
+
+-------------------------------------------------------------------
 Thu Aug 16 19:54:42 UTC 2012 - lslezak@suse.cz
 
 - removed unused ActionDispatch::Static middleware

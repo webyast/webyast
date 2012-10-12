@@ -23,6 +23,7 @@ require 'yast/paths'
 
 # Model for patches available via package kit
 class Patch < Resolvable
+  BM = BackgroundManager.instance
 
   attr_accessor :messages
 
@@ -30,6 +31,11 @@ class Patch < Resolvable
   LICENSES_DIR = File.join(YaST::Paths::VAR,"software","licenses")
   ACCEPTED_LICENSES_DIR = File.join(YaST::Paths::VAR,"software","licenses","accepted")
   JOB_PRIO = -30
+  EXPIRATION_TIME = 10.minutes
+
+  PATCH_INSTALL_ID = "patch_install"
+  PATCH_FIND_ID = "patch_find_"
+  PATCH_FIND_MTIME = "patch_find_mtime_"
 
   private
 
@@ -62,13 +68,52 @@ class Patch < Resolvable
     super :patch_update, options, @messages
   end
 
-  def self.install_patches_by_id ids
-    to_install = []
-    ids.each do |id|
-      patch = Patch.find(id)
-      to_install << patch if patch
+  def self.mtime
+    [PackageKit.mtime, Repository.mtime].max
+  end
+
+  def self.install_patches_by_id_background ids
+    if Patch::BM.add_process(Patch::PATCH_INSTALL_ID)
+      Rails.logger.info "Installing #{ids.size} patches in background"
+
+      Thread.new do
+        install_patches_by_id ids
+      end
     end
-    install_patches to_install
+  end
+
+  def self.install_patches_by_id ids
+    begin
+      patches = []
+
+      ids.each do |id|
+        patch = Patch.find(id)
+        patches << patch if patch
+      end
+
+      Rails.logger.info "** Found #{patches.size} patches to install"
+
+      # set number of patches to install
+      Patch::BM.update_progress(Patch::PATCH_INSTALL_ID) do |bs|
+        bs.status = "0/#{patches.size}"
+      end
+
+      patches.each_with_index do |patch, idx|
+        Rails.logger.info "** Installing patch #{patch.inspect}"
+
+        patch.install
+
+        Patch::BM.update_progress(Patch::PATCH_INSTALL_ID) do |bs|
+          bs.status = "#{idx + 1}/#{patches.size}"
+        end
+      end
+
+      Rails.logger.info "** Patch installation finished"
+
+      Patch::BM.finish_process(Patch::PATCH_INSTALL_ID, patches)
+    rescue Exception => e
+      Patch::BM.finish_process(Patch::PATCH_INSTALL_ID, e)
+    end
   end
 
   # install
@@ -76,18 +121,21 @@ class Patch < Resolvable
     # background process doesn't work correctly if class reloading is active
     # (static class members are lost between requests)
     # So the job queue is also not active
-    if background && !YastCache.job_queue_enabled?
+    if background && !BM.background_enabled?
       Rails.logger.info "Job queue is not active. Disable background mode"
       background = false
     end
+
     update_id = self.resolvable_id
-    Rails.logger.error "Install Update: #{update_id}"
-    unless background
-      Patch.install(update_id) #install at once
+
+    if background
+      Thread.new() do
+        Rails.logger.info("Intalling update #{update_id} in a backround thread")
+        Patch.install(update_id)
+      end
     else
-      #inserting job in background
-      Rails.logger.info("Inserting job: :Patch, :install, #{update_id}  ")
-      PluginJob.run_async(JOB_PRIO, :Patch, :install, update_id )
+      Rails.logger.info("Intalling update #{update_id}")
+      Patch.install(update_id) #install at once
     end
   end
 
@@ -124,15 +172,74 @@ class Patch < Resolvable
     return patch_updates
   end
 
+  def self.install_all_background
+    if Patch::BM.add_process(Patch::PATCH_INSTALL_ID)
+      Rails.logger.info "Installing all available patches in background"
+
+      Thread.new do
+        install_all
+      end
+    end
+  end
+
+  def self.install_all
+    begin
+      patches = Patch.do_find(:available)
+
+      # set number of patches to install
+      Patch::BM.update_progress(Patch::PATCH_INSTALL_ID) do |bs|
+        bs.status = "0/#{patches.size}"
+      end
+
+      patches.each_with_index do |patch, idx|
+        patch.install
+
+        Patch::BM.update_progress(Patch::PATCH_INSTALL_ID) do |bs|
+          bs.status = "#{idx + 1}/#{patches.size}"
+        end
+      end
+
+      Patch::BM.finish_process(Patch::PATCH_INSTALL_ID, patches)
+    rescue Exception => e
+      Patch::BM.finish_process(Patch::PATCH_INSTALL_ID, e)
+    end
+  end
+
+  def self.installing
+    progress = Patch::BM.get_progress(Patch::PATCH_INSTALL_ID)
+
+    return [false, 0] unless progress
+
+    remaining = nil
+    if progress.status.match /^([0-9]+)\/([0-9]+)/
+      remaining = $2.to_i - $1.to_i
+    end
+
+    return [true, remaining]
+  end
+
 
   # find patches
   # Patch.find(:available)
   # Patch.find(212)
   def self.find(what, opts = {})
     search_id = what == :all ? :available : what
-    YastCache.fetch(self, what) {
+
+    find_id = "#{PATCH_FIND_ID}_#{search_id}"
+    mtime_id = "#{PATCH_FIND_MTIME}_#{search_id}"
+    patch_mtime = Patch.mtime
+
+    # check the cache
+    if patch_mtime != Rails.cache.fetch(mtime_id)
+      Rails.logger.debug "Invalidating patch cache '#{mtime_id}'" unless Rails.cache.fetch(mtime_id).nil?
+      Rails.cache.delete(find_id)
+    end
+
+    Rails.cache.fetch(find_id, :expires_in => Patch::EXPIRATION_TIME) do
+      # update time stamp
+      Rails.cache.write(mtime_id, patch_mtime)
       do_find(search_id)
-    }
+    end
   end
 
   # install an update, based on the PackageKit
@@ -168,9 +275,6 @@ class Patch < Resolvable
     installed << pk_id
     Rails.cache.write("patch:installed", installed)
     
-    YastCache.delete(self,pk_id.split(';')[1])
-    #resetting status in order to get install messagas, EULAs,....
-    YastCache.reset(Plugin.new(),"patch")
     return ret
   end
 

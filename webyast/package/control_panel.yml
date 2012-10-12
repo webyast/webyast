@@ -6,8 +6,8 @@
 --- 
 # timeout before automatic reloading of patches status (in seconds)
 # value 0 disables automatic reload
-# default: 28800 seconds = 8 hours
-patch_status_timeout: 28800
+# default: 3600 seconds = 1 hour
+patch_status_timeout: 3600
 
 # timeout before automatic reloading of patches status (in seconds)
 # value 0 disables automatic reload

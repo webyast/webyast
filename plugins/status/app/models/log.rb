@@ -67,22 +67,20 @@ class Log
   # "id" could be the log group (system,...)
   #
   def self.find(what)
-    YastCache.fetch(self,what) {
-      config = parse_config || {}
-      ret = []
-      config.each {|key,value|
-        ret << Log.new(key,value) if key==what || what==:all
-      }
-      unless what==:all
-        if ret.size >= 1
-          Rails.logger.error "There are more results for #{what} -> #{ret.inspect} Taking the first one..." 
-          ret = ret.first
-        else
-          ret = nil
-        end
-      end
-      ret
+    config = parse_config || {}
+    ret = []
+    config.each {|key,value|
+      ret << Log.new(key,value) if key==what || what==:all
     }
+    unless what==:all
+      if ret.size >= 1
+        Rails.logger.error "There are more results for #{what} -> #{ret.inspect} Taking the first one..." 
+        ret = ret.first
+      else
+        ret = nil
+      end
+    end
+    ret
   end
 
   #

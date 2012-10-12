@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Thu Oct  4 07:45:44 UTC 2012 - lslezak@suse.cz
+
+- removed DelayedJob dependency
+- 0.3.5
+
+-------------------------------------------------------------------
 Mon Aug 20 14:47:13 UTC 2012 - lslezak@suse.cz
 
 - fixed vertical alignment of the filter icon

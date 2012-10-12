@@ -19,29 +19,36 @@
 # you may find current contact information at www.novell.com
 #++
 
-require 'plugin_job'
-
 class PatchesController < ApplicationController
+  include ERB::Util
 
-  before_filter :show_summary_check, :only => :show_summary
+  before_filter :cache_check, :only => [:index, :show_summary]
 
   # include locale in the cache path to cache different translations
-  caches_action :show_summary, :expires_in => 10.minutes, :cache_path => Proc.new {"webyast_patch_summary_#{FastGettext.locale}"}
+  caches_action :show_summary, :expires_in => Patch::EXPIRATION_TIME, :cache_path => Proc.new {"webyast_patch_summary_#{FastGettext.locale}"}
+  caches_action :index, :expires_in => Patch::EXPIRATION_TIME, :cache_path => Proc.new {"webyast_patch_index_#{FastGettext.locale}"}
 
 private
 
   # check permission and validate cache content
-  def show_summary_check
+  def cache_check
     authorize! :read, Patch
 
-    cached_mtime = Rails.cache.fetch("webyast_patch_mtime") do
-      [PackageKit.mtime, Repository.mtime].max
+    cached_mtime = Rails.cache.fetch("webyast_patch_mtime")
+    current_mtime = Patch.mtime
+
+    if current_mtime != cached_mtime
+      Rails.logger.info "Expiring patch cache: cached: #{cached_mtime}, modified: #{current_mtime}"
+      # update the time stamp
+      Rails.cache.write("webyast_patch_mtime", current_mtime)
+      expire_patch_cache
     end
+  end
 
-    current_mtime = [PackageKit.mtime, Repository.mtime].max
-
+  def expire_patch_cache
     # expire all translations
-    expire_fragment(/webyast_patch_summary_/) if current_mtime != cached_mtime
+    expire_fragment(/webyast_patch_summary_/)
+    expire_fragment(/webyast_patch_index_/)
   end
 
   def collect_done_patches
@@ -70,8 +77,8 @@ private
   end
 
   def refresh_timeout
-    # the default is 24 hours
-    timeout = ControlPanelConfig.read 'patch_status_timeout', 24*60*60
+    # the default is 1 hours
+    timeout = ControlPanelConfig.read 'patch_status_timeout', 1.hour
 
     if timeout.zero?
       Rails.logger.info "Patch status autorefresh is disabled"
@@ -80,14 +87,6 @@ private
     end
 
     return timeout
-  end
-
-  def running_install_jobs
-    running = PluginJob.running(:Patch, :install)
-    Rails.logger.info("#{running} installation jobs in the queue")
-    Rails.cache.delete("patch:installed") if running == 0 #remove installed patches from cache if the installation
-                                                          #has been finished
-    running
   end
 
   public
@@ -109,6 +108,7 @@ private
     if !@msgs.blank? && request.format.html?
       #@msgs.gsub!('<br/>', ' ')
       @message = @msgs.map{|s| s[:message]}.to_s.gsub(/\n/, '')
+      # FIXME: do NOT put messages to flash, the storage is VERY limited (< 4kB), just put a link to show them
       flash[:warning] = _("There are patch installation messages available") + details(@message)
     end
 
@@ -122,12 +122,18 @@ private
     end
 
     #checking if an installation is running
-    running = running_install_jobs
-    if running > 0 #there is process which runs installation
+    running, remaining = Patch.installing
+    if running #there is process which runs installation
       raise InstallInProgressException.new( running )unless request.format.html?
       # patch update installation in progress
       # display the message and reload after a while
-      @flash_message = _("Cannot obtain patches, installation in progress. Remain %d packages.") % running
+      @flash_message = h _("Cannot read available patches, patch installation is in progress.")
+
+      if remaining.present?
+        @flash_message << "<br/>".html_safe
+        @flash_message << h(n_("There is one patch to install.", "There are %d patches to install.", remaining) % remaining)
+      end
+
       @patch_updates = []
       @error = true
       @reload = true      
@@ -176,13 +182,19 @@ private
 
     error = nil
     patch_updates = nil
-    refresh = false
+    ref_timeout = nil
     error_type = :none
-    running = running_install_jobs
-    if running > 0 #there is process which runs installation
-      refresh = true if running > 0 #refresh state of installation
-      error_string = _("Cannot obtain patches, installation in progress. Remain %d patches.") % running
+    running, remaining = Patch.installing
+
+    if running
+      ref_timeout = 1.minute
       error_type = :install
+      error_string = h _("Patch installation is in progress.")
+
+      if remaining.present?
+        error_string << "<br/>".html_safe
+        error_string << h(n_("There is one patch to install.", "There are %d patches to install.", remaining) % remaining)
+      end
     elsif PatchesState.read[:message_id] == "PATCH_EULA" #checking if there is a missing licence
       error_type = :license
     else
@@ -190,10 +202,10 @@ private
       begin
         patch_updates = Patch.find :all
         patch_updates = patch_updates + collect_done_patches #report also which patches is installed
-        refresh = true
+        ref_timeout = refresh_timeout
       rescue Exception => error
         if error.description.match /Repository (.*) needs to be signed/
-          error_string = _("Cannot read patch updates: GPG key for repository <em>%s</em> is not trusted.") % $1
+          error_string = (_("Cannot read patch updates: GPG key for repository <em>%s</em> is not trusted.") % $1).html_safe
           error_type = :unsigned
         else
           error_string = error.message
@@ -215,8 +227,6 @@ private
       flash.clear #no flash from load_proxy
     end
 
-    # don't refresh if there was an error
-    ref_timeout = refresh ? refresh_timeout : nil
     respond_to do |format|
       format.html { render :partial => "patch_summary", 
                            :locals => { :patch => patches_summary, 
@@ -246,11 +256,12 @@ private
   # Starting installation of all proposed patches
   def start_install_all
     authorize! :install, Patch
-    logger.info "Start installation of all patches"
-    all = Patch.find(:all)
-    Patch.install_patches(all)
-    logger.info "All #{all.inspect}"
-    logger.info "Show summary"
+
+    Patch::BM.background_enabled? ? Patch.install_all_background : Patch.install_all
+
+    # force refreshing of the cache
+    expire_patch_cache
+
     show_summary
   end
 
@@ -259,6 +270,24 @@ private
 
   def install
     authorize! :install, Patch
+
+    running, remaining = Patch.installing
+
+    if running
+      if request.format.html?
+        error_string = _("Patch installation is in progress.")
+
+        if remaining.present?
+          error_string << " "
+          error_string << n_("There is one patch to install.", "There are %d patches to install.", remaining) % remaining
+        end
+
+        flash[:error] = error_string
+      end
+
+      render :show and return
+    end
+
     update_array = []
 
     #search for patches and collect the ids
@@ -269,7 +298,13 @@ private
     }
     @patch_update = Patch.new({})
     begin
-      Patch.install_patches_by_id update_array
+      if !update_array.empty?
+        Patch::BM.background_enabled? ? Patch.install_patches_by_id_background(update_array) : Patch.install_patches_by_id(update_array)
+
+        # force refreshing of the cache
+        expire_patch_cache
+      end
+    # FIXME: this might hide some errors
     rescue Exception => e
       Rails.logger.info "Some patches are not needed in #{update_array.inspect} anymore: #{e.message}"
     end
@@ -291,7 +326,7 @@ private
 
     logger.warn "Confirmation of reading patch messages"
     File.delete Patch::MESSAGES_FILE
-    YastCache.delete(Plugin.new(),"patch")
+
     respond_to do |format|
       format.html {
         redirect_to "/"
@@ -307,7 +342,7 @@ private
 
     if params[:accept].present? || params[:reject].present?
       params[:accept].present? ? Patch.accept_license : Patch.reject_license
-      YastCache.delete(Plugin.new(),"patch")
+
       if request.format.html?
         redirect_to "/"
       else

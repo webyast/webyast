@@ -46,6 +46,9 @@ class Repository < BaseModel::Base
    # priority must be in range 0..200
    validates_inclusion_of :priority, :in => 0..200
 
+  REPO_FIND_ID = "repo_find_"
+  REPO_FIND_MTIME = "repo_find_mtime_"
+
 
   def initialize(id = "", name = "", enabled = true)
     @id = id
@@ -64,10 +67,24 @@ class Repository < BaseModel::Base
   end
 
   def self.find(what)
-     YastCache.fetch(self,what) {
-      PackageKit.lock #locking
+    find_id = "#{REPO_FIND_ID}_#{what}"
+    mtime_id = "#{REPO_FIND_MTIME}_#{what}"
+    repo_mtime = Repository.mtime
+
+    # check the cache
+    if repo_mtime != Rails.cache.fetch(mtime_id)
+      Rails.logger.debug "Invalidating repo cache '#{mtime_id}'" unless Rails.cache.fetch(mtime_id).nil?
+      Rails.cache.delete(find_id)
+    end
+
+    Rails.cache.fetch(find_id) do
+      # update time stamp
+      Rails.cache.write(mtime_id, repo_mtime)
+
+      Rails.logger.info "Reading software repositories..."
+      PackageKit.lock
       begin
-        repositories = Array.new
+        repositories = []
 
         PackageKit.transact('GetRepoList', 'none', 'RepoDetail') { |id, name, enabled|
           Rails.logger.debug "RepoDetail signal received: #{id}, #{name}, #{enabled}"
@@ -82,10 +99,11 @@ class Repository < BaseModel::Base
           end
         }
       ensure
-        PackageKit.unlock #locking
+        PackageKit.unlock
       end
+
       repositories
-    }
+    end
   end
 
   def self.mtime
@@ -188,7 +206,6 @@ class Repository < BaseModel::Base
     ensure
       PackageKit.unlock #locking
     end
-    YastCache.reset(self,@id)
   end
 
   #
@@ -202,7 +219,6 @@ class Repository < BaseModel::Base
       ret = PackageKit.transact('RepoSetData', [@id, 'remove', 'NONE'])
     ensure
       PackageKit.unlock #locking
-      YastCache.delete(self,@id)
       return ret
     end
     return ret

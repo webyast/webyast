@@ -23,12 +23,14 @@ class NotifierController < ApplicationController
   def status
     id = params[:id] || :all
 
-    unless YastCache.active
+    # FIXME: temporarily disabled
+    if true
       head :not_found and return
     else
       # TODO handle missing parameter
       updated = params[:plugin].split(",").any? { |model|
-         DataCache.updated?(model, id, session["session_id"])
+        # FIXME: temporarily disabled
+        false
       }
 
       head updated ? :ok : :not_modified

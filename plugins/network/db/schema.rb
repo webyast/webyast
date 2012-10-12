@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120904082434) do
+ActiveRecord::Schema.define(:version => 20121002162028) do
 
   create_table "accounts", :force => true do |t|
     t.string   "username"
@@ -29,30 +29,5 @@ ActiveRecord::Schema.define(:version => 20120904082434) do
   end
 
   add_index "accounts", ["authentication_token"], :name => "index_accounts_on_authentication_token"
-
-  create_table "data_caches", :force => true do |t|
-    t.string   "path"
-    t.string   "session"
-    t.string   "picked_md5"
-    t.string   "refreshed_md5"
-    t.datetime "created_at",    :null => false
-    t.datetime "updated_at",    :null => false
-  end
-
-  create_table "delayed_jobs", :force => true do |t|
-    t.integer  "priority",   :default => 0
-    t.integer  "attempts",   :default => 0
-    t.text     "handler"
-    t.string   "last_error"
-    t.datetime "run_at"
-    t.datetime "locked_at"
-    t.datetime "failed_at"
-    t.string   "locked_by"
-    t.datetime "created_at",                :null => false
-    t.datetime "updated_at",                :null => false
-    t.string   "queue"
-  end
-
-  add_index "delayed_jobs", ["locked_by"], :name => "index_delayed_jobs_on_locked_by"
 
 end

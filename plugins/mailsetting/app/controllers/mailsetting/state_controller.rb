@@ -31,7 +31,6 @@ class Mailsetting::StateController < ApplicationController
 
     logger.warn "Confirmation of testmail"
     File.delete Mail::TEST_MAIL_FILE if File.exist? Mail::TEST_MAIL_FILE
-    YastCache.delete(Plugin.new(),"mail")
     mail = Mailsetting.find
     respond_to do |format|
       format.xml  { render :xml => mail.to_xml(:root => "mail", :dasherize => false, :indent=>2), :location => "none" }
