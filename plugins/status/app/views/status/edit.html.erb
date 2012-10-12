@@ -23,8 +23,6 @@
 
 <% content_for :head do %>
 
-   <!--<%= javascript_include_tag :defaults %>-->
-
    <% javascript_tag do -%>
       // Sets a focus to a fieldID, switching to its tab first.
       // fieldID is like "value/CPU/CPU"
@@ -57,10 +55,7 @@
         $('#progress').show();
         return true;
       };
-   <% end %>
-<% end %>
-<% content_for :before_script do %>
-  <% javascript_tag do %>
+
     $(document).ready(function(){
       $(".accordion").accordion({
          navigation : true,
