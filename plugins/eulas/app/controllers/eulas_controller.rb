@@ -20,7 +20,7 @@
 #++
 
 # = Eula controller
-# Serves licences and handles notices about acceptations.
+# Serves licenses and handles notices about acceptations.
 # User does not need any permissions
 
 require 'enumerator'
@@ -34,7 +34,7 @@ private
     def ensure_eula_count
       if session[:eula_count].nil?
         licenses = License.find_all
-        Rails.logger.debug "#{licenses.length} licences found"
+        Rails.logger.debug "#{licenses.length} licenses found"
         session[:eula_count] = licenses.length
       end
       @eula_count = session[:eula_count]
@@ -57,10 +57,10 @@ private
     def index
       if request.format.html?
         if session[:eula_count] == 0
-          Rails.logger.debug "No licences found"
+          Rails.logger.debug "No licenses found"
           render :no_licenses
         else
-          Rails.logger.debug "Show first licence"
+          Rails.logger.debug "Show first license"
           redirect_to :action => :show, :id => 1
         end
       else
@@ -86,7 +86,7 @@ private
       else
         Rails.logger.error "TO XML"
         #OLD: @license.load_text params[:lang] unless params[:lang].nil?      
-        # RORSCAN_INL: No Information Exposure cause everyone can read licence text
+        # RORSCAN_INL: No Information Exposure cause everyone can read license text
         @license = License.find params[:id]
         @license.load_text params[:lang] unless params[:lang].nil?
        
@@ -119,8 +119,8 @@ private
           end
           next_id = next_in_range( (1..@eula_count), @eula_id)
         else
-          flash[:error] = n_("You need to accept the licence before using this product.",
-            "You need to accept all licences before using this product.", @eula_count)
+          flash[:error] = n_("You need to accept the license before using this product.",
+            "You need to accept all licenses before using this product.", @eula_count)
           next_id = @eula_id
         end
         redirect_to :action => :show, :id => next_id
@@ -128,7 +128,7 @@ private
       else
          raise InvalidParameters.new({:id => 'MISSING'}) if params[:id].nil? # RORSCAN_ITL
         raise InvalidParameters.new({:eulas_accepted => 'INVALID'}) unless [true,false,"true","false"].include? params[:eulas][:accepted] # RORSCAN_ITL
-        # RORSCAN_INL: No Information Exposure cause everyone can read licence text      
+        # RORSCAN_INL: No Information Exposure cause everyone can read license text
         @license = License.find params[:id]
         @license.load_text params[:lang] unless params[:lang].nil?
         

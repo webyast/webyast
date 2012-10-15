@@ -21,7 +21,7 @@ msgstr "Перед использованием данного продукта 
 
 #: app/views/eulas/no_licenses.erb:1 app/views/eulas/all_accepted.erb:1
 #: app/views/eulas/no_licenses.erb:1 app/views/eulas/all_accepted.erb:1
-msgid "Accept End User Licence Agreement"
+msgid "Accept End User License Agreement"
 msgstr "Принять Лицензионное соглашение конечного пользователя"
 
 #: app/views/eulas/no_licenses.erb:2 app/views/eulas/no_licenses.erb:2
@@ -29,7 +29,7 @@ msgid "There are no licenses to accept."
 msgstr "Нет непринятых лицензий."
 
 #: app/views/eulas/show.html.erb:37 app/views/eulas/show.html.erb:37
-msgid "Licence Agreement"
+msgid "License Agreement"
 msgstr "Лицензионное соглашение"
 
 #: app/views/eulas/show.html.erb:54 app/views/eulas/show.html.erb:54

@@ -22,7 +22,7 @@ msgid "You must accept all licences before using this product!"
 msgstr "Du måste acceptera alla licenser innan du kan använda produkten."
 
 #: app/views/eulas/no_licenses.erb:1 app/views/eulas/all_accepted.erb:1
-msgid "Accept End User Licence Agreement"
+msgid "Accept End User License Agreement"
 msgstr "Acceptera licensavtal för slutanvändare"
 
 #: app/views/eulas/no_licenses.erb:2
@@ -30,7 +30,7 @@ msgid "There are no licenses to accept."
 msgstr "Det finns inga licenser att acceptera."
 
 #: app/views/eulas/show.html.erb:2
-msgid "Licence Agreement"
+msgid "License Agreement"
 msgstr "Licensavtal"
 
 #: app/views/eulas/show.html.erb:8

@@ -21,7 +21,7 @@ msgstr "Před používáním tohoto produktu musíte přijmout licenci!"
 
 #: app/views/eulas/all_accepted.erb:1 app/views/eulas/no_licenses.erb:1
 #: app/views/eulas/all_accepted.erb:1 app/views/eulas/no_licenses.erb:1
-msgid "Accept End User Licence Agreement"
+msgid "Accept End User License Agreement"
 msgstr "Přijmout licenční ujednání pro koncového uživatele"
 
 #: app/views/eulas/all_accepted.erb:2 app/views/eulas/all_accepted.erb:2
@@ -30,7 +30,7 @@ msgstr "Všechny licence byly přijaty"
 
 #: app/views/eulas/show.html.erb:24 app/views/eulas/show.html.erb:34
 #: app/views/eulas/show.html.erb:24 app/views/eulas/show.html.erb:34
-msgid "Licence Agreement"
+msgid "License Agreement"
 msgstr "Licenční ujednání"
 
 #: app/views/eulas/show.html.erb:55 app/views/eulas/show.html.erb:55

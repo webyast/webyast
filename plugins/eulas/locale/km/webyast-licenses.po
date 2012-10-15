@@ -23,7 +23,7 @@ msgstr ""
 #: app/views/eulas/no_licenses.erb:1
 #, fuzzy
 #| msgid "_Accept Agreement"
-msgid "Accept End User Licence Agreement"
+msgid "Accept End User License Agreement"
 msgstr "យល់ព្រម​នឹង​កិច្ច​ព្រមព្រៀង"
 
 #: app/views/eulas/show.html.erb:4

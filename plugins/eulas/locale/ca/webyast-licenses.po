@@ -27,7 +27,7 @@ msgstr "Heu d'acceptar totes les llicències abans d'usar aquest producte!"
 
 #: app/views/eulas/no_licenses.erb:1 app/views/eulas/all_accepted.erb:1
 #: app/views/eulas/no_licenses.erb:1 app/views/eulas/all_accepted.erb:1
-msgid "Accept End User Licence Agreement"
+msgid "Accept End User License Agreement"
 msgstr "Accepteu o rebutgeu l'acord de llicència d'usuari final."
 
 #: app/views/eulas/no_licenses.erb:2 app/views/eulas/no_licenses.erb:2
@@ -35,7 +35,7 @@ msgid "There are no licenses to accept."
 msgstr "No hi ha cap llicència per acceptar."
 
 #: app/views/eulas/show.html.erb:37 app/views/eulas/show.html.erb:37
-msgid "Licence Agreement"
+msgid "License Agreement"
 msgstr "Acord de llicència"
 
 #: app/views/eulas/show.html.erb:54 app/views/eulas/show.html.erb:54

@@ -21,7 +21,7 @@ msgstr "Vor Verwendung dieses Produktes müssen Sie alle Lizenzen akzeptieren!"
 
 #: app/views/eulas/all_accepted.erb:1 app/views/eulas/no_licenses.erb:1
 #: app/views/eulas/all_accepted.erb:1 app/views/eulas/no_licenses.erb:1
-msgid "Accept End User Licence Agreement"
+msgid "Accept End User License Agreement"
 msgstr "Endbenutzer-Lizenzvereinbarung akzeptieren"
 
 #: app/views/eulas/all_accepted.erb:2 app/views/eulas/all_accepted.erb:2
@@ -30,7 +30,7 @@ msgstr "Alle Lizenzen wurden bereits akzeptiert"
 
 #: app/views/eulas/show.html.erb:24 app/views/eulas/show.html.erb:34
 #: app/views/eulas/show.html.erb:24 app/views/eulas/show.html.erb:34
-msgid "Licence Agreement"
+msgid "License Agreement"
 msgstr "Lizenzvereinbarung"
 
 #: app/views/eulas/show.html.erb:55 app/views/eulas/show.html.erb:55

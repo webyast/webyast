@@ -27,7 +27,7 @@ msgstr "Musíte prijať všetky licencie, ak chcete používať tento produkt!"
 
 #: app/views/eulas/no_licenses.erb:1 app/views/eulas/all_accepted.erb:1
 #: app/views/eulas/no_licenses.erb:1 app/views/eulas/all_accepted.erb:1
-msgid "Accept End User Licence Agreement"
+msgid "Accept End User License Agreement"
 msgstr "Súhlasiť s licenčnou zmluvou"
 
 #: app/views/eulas/no_licenses.erb:2 app/views/eulas/no_licenses.erb:2
@@ -35,7 +35,7 @@ msgid "There are no licenses to accept."
 msgstr "Nie sú žiadne licencie pre prijatie."
 
 #: app/views/eulas/show.html.erb:37 app/views/eulas/show.html.erb:37
-msgid "Licence Agreement"
+msgid "License Agreement"
 msgstr "Licenčná zmluva"
 
 #: app/views/eulas/show.html.erb:54 app/views/eulas/show.html.erb:54

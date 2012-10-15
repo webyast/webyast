@@ -19,7 +19,7 @@ msgstr "使用此产品前必须接受所有许可证！"
 
 #: app/views/eulas/no_licenses.erb:1 app/views/eulas/all_accepted.erb:1
 #: ./app/views/eulas/no_licenses.erb:1 ./app/views/eulas/all_accepted.erb:1
-msgid "Accept End User Licence Agreement"
+msgid "Accept End User License Agreement"
 msgstr "接受最终用户许可协议"
 
 #: app/views/eulas/no_licenses.erb:2 ./app/views/eulas/no_licenses.erb:2
@@ -27,7 +27,7 @@ msgid "There are no licenses to accept."
 msgstr "没有要接受的许可证。"
 
 #: app/views/eulas/show.html.erb:24 ./app/views/eulas/show.html.erb:24
-msgid "Licence Agreement"
+msgid "License Agreement"
 msgstr "许可协议"
 
 #: app/views/eulas/show.html.erb:42 ./app/views/eulas/show.html.erb:42

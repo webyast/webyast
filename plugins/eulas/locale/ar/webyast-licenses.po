@@ -22,7 +22,7 @@ msgid "You must accept all licences before using this product!"
 msgstr "يجب عليك قبول كافة التراخيص قبل استخدام هذا المنتج!"
 
 #: app/views/eulas/no_licenses.erb:1 app/views/eulas/all_accepted.erb:1
-msgid "Accept End User Licence Agreement"
+msgid "Accept End User License Agreement"
 msgstr "قبول اتفاقية ترخيص المستخدم النهائي"
 
 #: app/views/eulas/no_licenses.erb:2
@@ -30,7 +30,7 @@ msgid "There are no licenses to accept."
 msgstr "لا توجد أية تراخيص يمكن قبولها."
 
 #: app/views/eulas/show.html.erb:2
-msgid "Licence Agreement"
+msgid "License Agreement"
 msgstr "اتفاقية الترخيص"
 
 #: app/views/eulas/show.html.erb:8

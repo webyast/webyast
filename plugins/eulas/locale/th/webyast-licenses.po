@@ -22,7 +22,7 @@ msgstr ""
 #: app/views/eulas/no_licenses.erb:1 app/views/eulas/all_accepted.erb:1
 #: app/views/eulas/no_licenses.erb:1 app/views/eulas/all_accepted.erb:1
 #, fuzzy
-msgid "Accept End User Licence Agreement"
+msgid "Accept End User License Agreement"
 msgstr "ยอมรับหรือปฏิเสธข้อตกลงเกี่ยวกับสิทธิ์การใช้งาน"
 
 #: app/views/eulas/no_licenses.erb:2 app/views/eulas/no_licenses.erb:2
@@ -32,7 +32,7 @@ msgstr "ไม่มีการเปลี่ยนแปลงที่จะ
 
 #: app/views/eulas/show.html.erb:37 app/views/eulas/show.html.erb:37
 #, fuzzy
-msgid "Licence Agreement"
+msgid "License Agreement"
 msgstr "สัญญาอนุญาตสิทธิ์"
 
 #: app/views/eulas/show.html.erb:54 app/views/eulas/show.html.erb:54

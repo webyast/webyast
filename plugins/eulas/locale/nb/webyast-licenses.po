@@ -23,7 +23,7 @@ msgstr "Du må godkjenne alle lisensbetingelser før du bruker dette produktet!"
 
 #: app/views/eulas/no_licenses.erb:1 app/views/eulas/all_accepted.erb:1
 #: app/views/eulas/no_licenses.erb:1 app/views/eulas/all_accepted.erb:1
-msgid "Accept End User Licence Agreement"
+msgid "Accept End User License Agreement"
 msgstr "Godkjenn lisensavtalen for sluttbrukere"
 
 #: app/views/eulas/no_licenses.erb:2 app/views/eulas/no_licenses.erb:2
@@ -31,7 +31,7 @@ msgid "There are no licenses to accept."
 msgstr "Det er ingen flere lisensavtaler som må godkjennes."
 
 #: app/views/eulas/show.html.erb:37 app/views/eulas/show.html.erb:37
-msgid "Licence Agreement"
+msgid "License Agreement"
 msgstr "Lisensavtale"
 
 #: app/views/eulas/show.html.erb:54 app/views/eulas/show.html.erb:54

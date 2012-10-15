@@ -22,7 +22,7 @@ msgstr "A termék használatához el kell fogadnia az összes licencmegállapod�
 
 #: app/views/eulas/no_licenses.erb:1 app/views/eulas/all_accepted.erb:1
 #: app/views/eulas/no_licenses.erb:1 app/views/eulas/all_accepted.erb:1
-msgid "Accept End User Licence Agreement"
+msgid "Accept End User License Agreement"
 msgstr "Licencmegállapodás elfogadása"
 
 #: app/views/eulas/no_licenses.erb:2 app/views/eulas/no_licenses.erb:2
@@ -30,7 +30,7 @@ msgid "There are no licenses to accept."
 msgstr "Nincs elfogadásra váró licenc."
 
 #: app/views/eulas/show.html.erb:37 app/views/eulas/show.html.erb:37
-msgid "Licence Agreement"
+msgid "License Agreement"
 msgstr "Licencmegállapodás"
 
 #: app/views/eulas/show.html.erb:54 app/views/eulas/show.html.erb:54

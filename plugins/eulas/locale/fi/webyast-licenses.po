@@ -24,7 +24,7 @@ msgstr "Sinun täytyy hyväksyä kaikki käyttöoikeussopimukset ennen tämän t
 
 #: app/views/eulas/show.html.erb:1 app/views/eulas/all_accepted.erb:1
 #: app/views/eulas/no_licenses.erb:1
-msgid "Accept End User Licence Agreement"
+msgid "Accept End User License Agreement"
 msgstr "Hyväksy loppukäyttäjän käyttöoikeussopimus"
 
 #: app/views/eulas/show.html.erb:4

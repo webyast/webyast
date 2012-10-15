@@ -28,7 +28,7 @@ msgstr ""
 
 #: app/views/eulas/no_licenses.erb:1 app/views/eulas/all_accepted.erb:1
 #: app/views/eulas/no_licenses.erb:1 app/views/eulas/all_accepted.erb:1
-msgid "Accept End User Licence Agreement"
+msgid "Accept End User License Agreement"
 msgstr "Sutikti su galutinio vartotojo licencijos sutarties sąlygomis"
 
 #: app/views/eulas/no_licenses.erb:2 app/views/eulas/no_licenses.erb:2
@@ -37,7 +37,7 @@ msgstr "Nėra jokių licencijų sąlygų, su kuriomis reiktų sutikti."
 
 #: app/views/eulas/show.html.erb:37 app/views/eulas/show.html.erb:37
 #, fuzzy
-msgid "Licence Agreement"
+msgid "License Agreement"
 msgstr "Sutikti su galutinio vartotojo licencijos sutarties sąlygomis"
 
 #: app/views/eulas/show.html.erb:54 app/views/eulas/show.html.erb:54

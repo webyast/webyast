@@ -2,6 +2,8 @@
 Mon Oct 15 15:40:45 UTC 2012 - lslezak@suse.cz
 
 - fixed license text formatting (bnc#783720)
+- unified term "license" (replace licence -> license)
+- 0.3.6
 
 -------------------------------------------------------------------
 Fri Oct 12 15:40:37 UTC 2012 - lslezak@suse.cz
