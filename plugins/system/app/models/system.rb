@@ -56,32 +56,34 @@ class System
       # connect to the system bus
       # Make a fresh connection, to be able to reboot
       # after DBus is restarted, bnc#582759
-      system_bus = DBus::SystemBus.send :new # RORSCAN_ITL
-      consolekit = system_bus.service('org.freedesktop.ConsoleKit') # RORSCAN_ITL
-      system = consolekit.object('/org/freedesktop/ConsoleKit/Manager')
-      system.introspect
-      system.default_iface = 'org.freedesktop.ConsoleKit.Manager'
-	    case action
+      DbusLock.synchronize do
+        system_bus = DBus::SystemBus.send :new # RORSCAN_ITL
+        consolekit = system_bus.service('org.freedesktop.ConsoleKit') # RORSCAN_ITL
+        system = consolekit.object('/org/freedesktop/ConsoleKit/Manager')
+        system.introspect
+        system.default_iface = 'org.freedesktop.ConsoleKit.Manager'
+        case action
 
-      when :reboot
-		    if Rails.env.production?
-          Rails.logger.info 'Rebooting the computer...'
-          return system.Restart
-		    else
-          Rails.logger.warn "Skipping reboot in #{Rails.env} mode"
-          return true
-		    end
-      when :shutdown
-		    if Rails.env.production?
-          Rails.logger.info 'Shutting down the computer...'
-          return system.Stop
-		    else
-          Rails.logger.warn "Skipping shutdown in #{Rails.env} mode"
-          return true
-		    end
-      else
-		    Rails.logger.error "Unsupported ConsoleKit command: #{action}"
-	    end
+        when :reboot
+          if Rails.env.production?
+            Rails.logger.info 'Rebooting the computer...'
+            return system.Restart
+          else
+            Rails.logger.warn "Skipping reboot in #{Rails.env} mode"
+            return true
+          end
+        when :shutdown
+          if Rails.env.production?
+            Rails.logger.info 'Shutting down the computer...'
+            return system.Stop
+          else
+            Rails.logger.warn "Skipping shutdown in #{Rails.env} mode"
+            return true
+          end
+        else
+          Rails.logger.error "Unsupported ConsoleKit command: #{action}"
+        end
+      end
 
       # handle DBus errors
     rescue DBus::Error => dbe
