@@ -195,8 +195,8 @@
       $('#repo_header_<%= safe_id(@show) -%>').click();
     <% end %>
 
-    $('input#repo_search').quicksearch('#repositories div.list-fieldset', {
-	selector: 'span.quicksearch_content',
+    $('#repo_search').quicksearch('#repositories .list-fieldset', {
+	selector: '.quicksearch_content',
 	delay: 100
     });
   });
