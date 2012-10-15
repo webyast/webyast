@@ -132,31 +132,26 @@ private
 
     @repo.load param
     begin
-      unless @repo.save!
-        unless request.format.html?
-          render ErrorResult.error(404, 2, "packagekit error") and return
+      if @repo.save!
+        flash[:message] = @create ? _("Repository '%s' has been created.") % @repo.name : _("Repository '%s' has been updated.") % @repo.name
+      else
+        if request.format.html?
+          flash[:error] = @create ? _("Cannot create repository '%s': missing parameters.") % params[:id] :
+              _("Cannot update repository '%s': missing parameters.") % params[:id]
         else
-          flash[:error] = _("Cannot update repository '%s': missing parameters.") % params[:id]
-          # RORSCAN_INL: will be escaped
-          redirect_to :action => :index, :show => Shellwords.escape(params[:id]) and return          
+          render ErrorResult.error(404, 2, "packagekit error") and return
         end
       end
     rescue DBus::Error => exception
-      unless request.format.html?
-        render ErrorResult.error(404, 20, "DBus Error: #{exception.dbus_message.error_name}") and return
+      if request.format.html?
+        flash[:error] = @create ? _("Cannot create repository '%s': DBus error: %s") % [params[:id], exception.dbus_message.error_name] :
+            _("Cannot update repository '%s': DBus error: %s") % [params[:id], exception.dbus_message.error_name]
       else
-        flash[:error] = _("Cannot update repository '%s': missing parameters.") % params[:id]
-        # RORSCAN_INL: will be escaped
-        redirect_to :action => :index, :show => Shellwords.escape(params[:id]) and return          
+        render ErrorResult.error(404, 20, "DBus Error: #{exception.dbus_message.error_name}") and return
       end
     end
-    unless request.format.html?
-      render :show
-    else
-      flash[:message] = _("Repository '%s' has been updated.") % @repo.name
-      # RORSCAN_INL: will be escaped
-      redirect_to :action => :index, :show => Shellwords.escape(params[:id]) and return
-    end
+
+    redirect_to :action => :index
   end
 
   def new
@@ -171,6 +166,7 @@ private
 
   # POST /repositories/
   def create
+    @create = true
     update
   end
 
