@@ -64,19 +64,19 @@ class System
 	    case action
 
       when :reboot
-		    if ENV['RAILS_ENV'] == 'production'
+		    if Rails.env.production?
           Rails.logger.info 'Rebooting the computer...'
           return system.Restart
 		    else
-          Rails.logger.warn "Skipping reboot in #{ENV['RAILS_ENV']} mode"
+          Rails.logger.warn "Skipping reboot in #{Rails.env} mode"
           return true
 		    end
       when :shutdown
-		    if ENV['RAILS_ENV'] == 'production'
+		    if Rails.env.production?
           Rails.logger.info 'Shutting down the computer...'
           return system.Stop
 		    else
-          Rails.logger.warn "Skipping shutdown in #{ENV['RAILS_ENV']} mode"
+          Rails.logger.warn "Skipping shutdown in #{Rails.env} mode"
           return true
 		    end
       else
