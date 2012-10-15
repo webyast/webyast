@@ -1,4 +1,9 @@
 -------------------------------------------------------------------
+Mon Oct 15 10:18:14 UTC 2012 - lslezak@suse.cz
+
+- do shutdown instead of reboot (bnc#782252)
+
+-------------------------------------------------------------------
 Thu Oct  4 07:45:44 UTC 2012 - lslezak@suse.cz
 
 - removed DelayedJob dependency

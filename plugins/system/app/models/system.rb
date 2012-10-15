@@ -40,7 +40,7 @@ class System
   end
 
   def shutdown
-    if consolekit_power_management(:reboot)
+    if consolekit_power_management(:shutdown)
       @actions[:shutdown][:active] = true
     end
   end
