@@ -25,29 +25,29 @@ require 'singleton'
 
 
 class System
-    attr_reader :actions
+  attr_reader :actions
 
-    include Singleton
+  include Singleton
 
-    def initialize
-      @actions = {:reboot => {:active => false}, :shutdown => {:active => false} }
+  def initialize
+    @actions = {:reboot => {:active => false}, :shutdown => {:active => false} }
+  end
+
+  def reboot
+    if consolekit_power_management(:reboot)
+      @actions[:reboot][:active] = true
     end
+  end
 
-    def reboot
-      if consolekit_power_management(:reboot)
-        @actions[:reboot][:active] = true
-      end
+  def shutdown
+    if consolekit_power_management(:reboot)
+      @actions[:shutdown][:active] = true
     end
-
-    def shutdown
-      if consolekit_power_management(:reboot)
-        @actions[:shutdown][:active] = true
-      end
-    end
+  end
 
 
-# private methods
-    private
+  # private methods
+  private
 
   def consolekit_power_management(action, params = {})
     return false unless action == :reboot or action == :shutdown
@@ -63,36 +63,36 @@ class System
       system.default_iface = 'org.freedesktop.ConsoleKit.Manager'
 	    case action
 
-		when :reboot
+      when :reboot
 		    if ENV['RAILS_ENV'] == 'production'
-			Rails.logger.info 'Rebooting the computer...'
+          Rails.logger.info 'Rebooting the computer...'
           return system.Restart
 		    else
-			Rails.logger.warn "Skipping reboot in #{ENV['RAILS_ENV']} mode"
-			return true
+          Rails.logger.warn "Skipping reboot in #{ENV['RAILS_ENV']} mode"
+          return true
 		    end
-		when :shutdown
+      when :shutdown
 		    if ENV['RAILS_ENV'] == 'production'
-			Rails.logger.info 'Shutting down the computer...'
+          Rails.logger.info 'Shutting down the computer...'
           return system.Stop
 		    else
-			Rails.logger.warn "Skipping shutdown in #{ENV['RAILS_ENV']} mode"
-			return true
+          Rails.logger.warn "Skipping shutdown in #{ENV['RAILS_ENV']} mode"
+          return true
 		    end
-		else
+      else
 		    Rails.logger.error "Unsupported ConsoleKit command: #{action}"
 	    end
 
-	# handle DBus errors
-	rescue DBus::Error => dbe
+      # handle DBus errors
+    rescue DBus::Error => dbe
 	    Rails.logger.error "DBus error: #{dbe.dbus_message.error_name}"
 	    return false
-	# handle generic errors
-	rescue Exception => e
+      # handle generic errors
+    rescue Exception => e
 	    Rails.logger.error "Caught exception: #{e.message}"
 	    return false
-	end
     end
+  end
 
 
 end
