@@ -148,6 +148,10 @@ class PackageKit
     raise self.improve_error dbus_error
   end
 
+  # temporarily disable Garbage Collector, debugging revealed that crash
+  # (https://bugzilla.novell.com/show_bug.cgi?id=779511) was caused by
+  # allocating memory during GC phase
+  # this workaround avoids the problem
   def self.no_gc
     begin
       disabled = GC.disable
