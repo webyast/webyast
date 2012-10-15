@@ -36,7 +36,7 @@
 
   <fieldset class="webyast_fieldset eula_fieldset">
     <div class="eula-text-area">
-      <%= (@eula.text.gsub(%r{^[\n\n$]}, '<p class="eula_paragraph">').gsub(%r{[\n]}, ' ')).html_safe%>
+      <%= h(@eula.text).gsub("\n", "<br/>").html_safe %>
     </div>
 
     <div class="clearfix">&nbsp;</div>
