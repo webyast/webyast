@@ -1,4 +1,11 @@
 -------------------------------------------------------------------
+Tue Oct 16 08:38:55 UTC 2012 - lslezak@suse.cz
+
+- fixed control panel metadata (no read permission is needed,
+  properly display the terminal module in the control panel)
+- 0.3.9
+
+-------------------------------------------------------------------
 Thu Oct  4 07:45:44 UTC 2012 - lslezak@suse.cz
 
 - removed DelayedJob dependency
