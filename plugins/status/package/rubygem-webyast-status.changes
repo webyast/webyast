@@ -1,4 +1,11 @@
 -------------------------------------------------------------------
+Tue Oct 16 12:23:02 UTC 2012 - lslezak@suse.cz
+
+- edit limits - better input validation (use jQuery validator
+  plugin), properly display the invalid input
+- 0.3.8
+
+-------------------------------------------------------------------
 Fri Oct 12 15:57:05 UTC 2012 - lslezak@suse.cz
 
 - edit page - do not inslude non existing JS file

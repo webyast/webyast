@@ -79,3 +79,14 @@ div.webyast_form .ui-accordion-content {
 a.loglink {
   border-bottom: none;
 }
+
+label.error {
+  float: none;
+  vertical-align: inherit;
+  font-size: 95%;
+  margin-left: 1em;
+}
+
+input.error {
+  float: none;
+}

@@ -22,54 +22,49 @@
 <% write_disabled = !can?( :writelimits, Metric) %>
 
 <% content_for :head do %>
-
-   <% javascript_tag do -%>
-      // Sets a focus to a fieldID, switching to its tab first.
-      // fieldID is like "value/CPU/CPU"
-      function focus_field(fieldID) {
-        $(".accordion").accordion('activate',$("#"+fieldID).parent().parent().prev());
-        $("#"+fieldID).focus();
-      }
-
-      function validNumber(number) {
-        if (number.length > 0 && !number.match(/^[0-9]{1,20}$/))
-          return false;
-
-        return true;
-      }
-
-      function validateLimits() {
-        <% @graphs.each do |group| %>
-          <% group.single_graphs.each do |single_graph| %>
-            <% single_graph["lines"].each do |line| %>
-              <% limit_key = "value_#{group.id}_#{single_graph["headline"]}_#{line["label"]}" %>
-              if (! validNumber($("#<%=limit_key%>")[0].value)) {
-                say_bad = "<%= _("Only numbers are valid !") %>"
-                focus_field("<%=limit_key%>");
-                alert (say_bad);
-                return false;
-              }
-            <% end %>
-          <% end %>
-        <% end %>
-        $('#progress').show();
-        return true;
-      };
-
+  <%# FIXME: move this to a separate JS file %>
+  <%= javascript_tag do -%>
     $(document).ready(function(){
       $(".accordion").accordion({
          navigation : true,
+         active     : false,
          header     : 'fieldset legend',
          animated   : false,
          collapsible: true,
          autoHeight : false
       });
+
+      $(".webyast_form").validate({
+        // put the error message at the end (after the unit label)
+        errorPlacement: function(error, element) {
+          error.appendTo(element.parent());
+        },
+
+        // activate the tab containing error
+        invalidHandler: function(form, validator) {
+          // force displaying errors, they are displayed after this handler by default which is too late
+          validator.showErrors();
+
+          if (!$("input.error").is(":visible")) {
+            $(".accordion > fieldset").each(function(idx, elem) {
+              $(".accordion").accordion("option", "active", idx)
+              if ($(elem).find("input.error").size() > 0) return false;
+            });
+          }
+        }
+      });
+
+      // make the error message translatable
+      $.extend($.validator.messages, {
+        digits: <%= jss _("A valid number is required.") -%>
+      });
     });
   <% end %>
+  <%= stylesheet_link_tag "webyast-status" %>
 <% end %>
 
 <div class="plugin-content plugin-border">
-<%= form_tag( {:action => :save} , { :class=>"webyast_form", :onsubmit => "return validateLimits();"}) do %>
+<%= form_tag( {:action => :save} , { :class=>"webyast_form" }) do %>
   <div class="plugin-header">
     <div class="left">
       <label class="plugin-icon-container"><%= image_tag("monitoring.png", :class=>"plugin-icon") %></label>
@@ -107,7 +102,7 @@
             <p>
               <label for="#{limit_key}"><%="#{line["label"]}"%></label>
               <%= select_tag("measurement/"+limit_key, options_for_select(measurements, measurement), :disabled => write_disabled)%>
-              <%=text_field_tag "value/"+limit_key, val, :disabled => write_disabled %>
+              <%= text_field_tag "value/"+limit_key, val, :disabled => write_disabled, :class => "digits" %>
               <%= "#{group.y_label}" %>
             </p>
           <% end %>
