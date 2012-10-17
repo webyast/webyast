@@ -1,4 +1,9 @@
 -------------------------------------------------------------------
+Wed Oct 17 12:28:09 UTC 2012 - lslezak@suse.cz
+
+- added [Back] link (bnc#783556)
+
+-------------------------------------------------------------------
 Tue Oct 16 08:38:55 UTC 2012 - lslezak@suse.cz
 
 - fixed control panel metadata (no read permission is needed,
