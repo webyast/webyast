@@ -3,6 +3,8 @@ Wed Oct 17 12:39:16 UTC 2012 - lslezak@suse.cz
 
 - display [Back] link in the network module (fixed base_setup_links
   helper) (bnc#783556)
+- use syslog for logging security critical actions (user login and
+  logout) (bnc#782808)
 
 -------------------------------------------------------------------
 Wed Oct 17 08:55:41 UTC 2012 - lslezak@suse.cz
