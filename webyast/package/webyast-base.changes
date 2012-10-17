@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Wed Oct 17 12:39:16 UTC 2012 - lslezak@suse.cz
+
+- display [Back] link in the network module (fixed base_setup_links
+  helper) (bnc#783556)
+
+-------------------------------------------------------------------
 Wed Oct 17 08:55:41 UTC 2012 - lslezak@suse.cz
 
 - do not log registration code to the webyast log (bnc#784486)
