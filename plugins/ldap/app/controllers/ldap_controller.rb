@@ -63,13 +63,20 @@ class LdapController < ApplicationController
 
   def update
     authorize! :write, Ldap
-    Rails.logger.error "REQUEST #{request.inspect}"
+
     if request.format.html?
       begin
         #translate from text to boolean
-        params[:ldap][:tls] = params[:ldap][:tls] == "true"
-        params[:ldap][:enabled] = params[:ldap][:enabled] == "true"
-        @ldap = Ldap.new(params[:ldap]).save
+        @ldap = Ldap.find
+
+        if params[:ldap].present?
+          @ldap.tls = params[:ldap][:tls] == "true"
+          @ldap.enabled = params[:ldap][:enabled] == "true"
+        else
+          @ldap.enabled = false
+        end
+
+        @ldap.save
         flash[:message] = _("LDAP client configuraton successfully written.")
       rescue Exception => error  
         flash[:error] = _("Error while saving LDAP client configuration.") 
