@@ -85,6 +85,7 @@ class LdapController < ApplicationController
       end
       redirect_success
     else
+      # FIXME: yapi_perm_check is obsoleted and does not work!!
       yapi_perm_check "ldap.write"
       args = params["ldap"]
       ldap = Ldap.find
