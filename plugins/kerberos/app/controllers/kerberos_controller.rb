@@ -46,18 +46,39 @@ class KerberosController < ApplicationController
 
   def update
     authorize! :write, Kerberos
+
     begin
-      #translate from text to boolean
-      params[:kerberos][:enabled] = params[:kerberos][:enabled] == "true"
-      @kerberos = Kerberos.new(params[:kerberos]).save
+      @kerberos = Kerberos.find
+
+      if params[:kerberos].present?
+        @kerberos.load params[:kerberos]
+        #translate from text to boolean
+        @kerberos.enabled = params[:kerberos][:enabled] == "true"
+      else
+        @kerberos.enabled = false
+      end
+
+      @kerberos.save
       flash[:message] = _("Kerberos client configuraton successfully written.")
-    rescue Exception => error  
+    rescue Exception => error
       flash[:error] = _("Error while saving Kerberos client configuration.")
       Rails.logger.error "ERROR: #{error.inspect}"
-      render :index and return
+      Rails.logger.error "ERROR: #{error.backtrace.join("\n")}"
+
+      respond_to do |format|
+        format.html {redirect_to :action => :index}
+        format.xml  {render :xml => @ldap.to_xml, :status => 500}
+        format.json {render :json => @ldap.to_json, :status => 500}
+      end
+
+      return
     end
-    
-    redirect_success
+
+    respond_to do |format|
+      format.html {redirect_to root_path}
+      format.xml  {render :xml => @ldap.to_xml}
+      format.json {render :json => @ldap.to_json}
+    end
   end
 
   # GET action
