@@ -68,6 +68,7 @@ class LdapController < ApplicationController
       @ldap = Ldap.find
 
       if params[:ldap].present?
+        @ldap.load params[:ldap]
         #translate from text to boolean
         @ldap.tls = params[:ldap][:tls] == "true"
         @ldap.enabled = params[:ldap][:enabled] == "true"
