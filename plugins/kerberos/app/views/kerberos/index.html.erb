@@ -35,30 +35,36 @@
       });
     });
 
-    $(document).ready(function() {
-      if (!$("#kerberos_enabled").is(":not(:checked)")) {
+    function update_fields() {
+      if ($("#kerberos_enabled").is(":checked")) {
+        $("#kerberos_use_dns").removeAttr("disabled");
+
+        if ($("#kerberos_use_dns").is(":checked")) {
+          $("#kerberos_default_domain").attr("disabled","disabled");
+          $("#kerberos_default_realm").attr("disabled","disabled");
+          $("#kerberos_kdc").attr("disabled","disabled");
+        }
+        else {
+          $("#kerberos_default_domain").removeAttr("disabled");
+          $("#kerberos_default_realm").removeAttr("disabled");
+          $("#kerberos_kdc").removeAttr("disabled");
+        }
+      }
+      else {
         $("#kerberos_default_domain").attr("disabled","disabled");
         $("#kerberos_default_realm").attr("disabled","disabled");
         $("#kerberos_kdc").attr("disabled","disabled");
         $("#kerberos_use_dns").attr("disabled","disabled");
-      };
+      }
+    }
 
-      $("#kerberos_enabled").click(function () {
-        if ($("#kerberos_enabled").is(":not(:checked)")) {
-          $("#kerberos_default_domain").attr("disabled","disabled");
-          $("#kerberos_default_realm").attr("disabled","disabled");
-          $("#kerberos_kdc").attr("disabled","disabled");
-          $("#kerberos_use_dns").attr("disabled","disabled");
-        }
-        else {
-          $("#kerberos_default_domain", "#kerberosForm").removeAttr("disabled");
-          $("#kerberos_default_realm", "#kerberosForm").removeAttr("disabled");
-          $("#kerberos_kdc", "#kerberosForm").removeAttr("disabled");
-          $("#kerberos_use_dns").removeAttr("disabled");
-        }
-      });
-    
-    $('#kerberosForm input[type="submit"]').click(function() {
+    $(document).ready(function() {
+      update_fields();
+
+      $("#kerberos_enabled").click(update_fields);
+      $("#kerberos_use_dns").click(update_fields);
+
+      $('#kerberosForm input[type="submit"]').click(function() {
         if ($('#kerberosForm').valid()) {
         disable_forms();
           var message = <%= jss _("Please wait") -%>;
