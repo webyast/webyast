@@ -35,22 +35,25 @@
     });
 
     $(document).ready(function() {
-      if ($("#kerberos_enabled:checked").length == 0) {
+      if (!$("#kerberos_enabled").is(":not(:checked)")) {
         $("#kerberos_default_domain").attr("disabled","disabled");
         $("#kerberos_default_realm").attr("disabled","disabled");
         $("#kerberos_kdc").attr("disabled","disabled");
+        $("#kerberos_use_dns").attr("disabled","disabled");
       };
 
       $("#kerberos_enabled").click(function () {
-        if ($("#kerberos_enabled:checked").length == 0) {
+        if ($("#kerberos_enabled").is(":not(:checked)")) {
           $("#kerberos_default_domain").attr("disabled","disabled");
           $("#kerberos_default_realm").attr("disabled","disabled");
           $("#kerberos_kdc").attr("disabled","disabled");
+          $("#kerberos_use_dns").attr("disabled","disabled");
         }
         else {
           $("#kerberos_default_domain", "#kerberosForm").removeAttr("disabled");
           $("#kerberos_default_realm", "#kerberosForm").removeAttr("disabled");
           $("#kerberos_kdc", "#kerberosForm").removeAttr("disabled");
+          $("#kerberos_use_dns").removeAttr("disabled");
         }
       });
     
@@ -92,6 +95,11 @@
       </div>
 
       <div class="fieldset_body">
+        <div class="row">
+          <%= check_box 'kerberos', :use_dns, {:disabled => disabled, :checked => @kerberos.dns_used, :style => "width: auto; vertical-align: middle;"}, true, false %>
+          <%= label_tag :kerberos_use_dns, _("Use Kerberos configuration from DNS server"), :style => "width: auto; vertical-align: middle;" %>
+        </div>
+
         <div class="row">
           <%= label_tag :kerberos_default_domain, _("Default Domain") %>
           <%= text_field :kerberos, :default_domain, :disabled => disabled, :class => "required" %>

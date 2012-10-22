@@ -29,10 +29,11 @@ class Kerberos < BaseModel::Base
   attr_accessor :default_domain
   attr_accessor :default_realm
   attr_accessor :enabled
+  attr_accessor :dns_used
 
   # prevents a user from submitting a crafted form that bypasses activation
   # anything else you want your user to change should be added here.
-  attr_accessible :kdc, :default_domain, :default_realm, :enabled
+  attr_accessible :kdc, :default_domain, :default_realm, :enabled, :dns_used
   
   CACHE_ID = "webyast_kerberos"
 
@@ -46,7 +47,8 @@ class Kerberos < BaseModel::Base
         :kdc => ret["kdc"],
         :default_realm => ret["default_realm"],
         :default_domain => ret["default_domain"],
-        :enabled => ret["use_kerberos"] == "1"
+        :enabled => ret["use_kerberos"] == "1",
+        :dns_used => ret["dns_used"] == "1"
       })
       kerberos = {} if kerberos.nil?
       kerberos
@@ -59,6 +61,7 @@ class Kerberos < BaseModel::Base
     params["default_realm"] = [ "s", @default_realm] unless @default_realm.nil?
     params["default_domain"] = [ "s", @default_domain] unless @default_domain.nil?
     params["use_kerberos"] = [ "b", @enabled] unless @enabled.nil?
+    params["dns_used"] = [ "b", @dns_used] unless @dns_used.nil?
 
     Rails.cache.delete(CACHE_ID)
     yapi_ret = YastService.Call("YaPI::KERBEROS::Write", params)
