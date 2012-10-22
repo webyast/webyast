@@ -23,6 +23,7 @@
   
   <%= render :partial => "shared/notification", :locals => { :module_name => 'kerberos' } %>
 
+  <%# FIME: move the scripts to a separate JS file %>
   <script type="text/javascript">
     $(document).ready(function() {
       validateDomainName("kdc");
@@ -96,6 +97,7 @@
 
       <div class="fieldset_body">
         <div class="row">
+          <%# FIME: move the style to a separate CSS file %>
           <%= check_box 'kerberos', :use_dns, {:disabled => disabled, :checked => @kerberos.dns_used, :style => "width: auto; vertical-align: middle;"}, true, false %>
           <%= label_tag :kerberos_use_dns, _("Use Kerberos configuration from DNS server"), :style => "width: auto; vertical-align: middle;" %>
         </div>
