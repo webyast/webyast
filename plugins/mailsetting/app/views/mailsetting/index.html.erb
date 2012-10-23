@@ -49,8 +49,6 @@
         else $("#mail_submit", "#mailForm").removeAttr("disabled");
       });
 
-      $("#mailsetting_smtp_server").tipsy({gravity: 's', delayIn: 500, delayOut: 1000, fade: true});
-
       $("#mailsetting_password").keyup(function(){
         $('#mailForm').valid();
       });
@@ -87,7 +85,7 @@
       <div class="fieldset_body">
         <div class="row">
           <label for="<%= :smtp_server %>"><%=_("Outgoing mail server")%></label>
-          <%=f.text_field :smtp_server, :disabled => disabled, :class => "smtp_server", :title => _("URL of the outgoing mail server. You may also specify an alternate port number, e.g.
+          <%=f.text_field :smtp_server, :disabled => disabled, :class => "smtp_server tipsy_help", :title => _("URL of the outgoing mail server. You may also specify an alternate port number, e.g.
 relay.example.com:26. Use square brackets around the host name to prevent from DNS MX lookups.") %>
         </div>
 
