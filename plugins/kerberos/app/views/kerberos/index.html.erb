@@ -105,7 +105,7 @@
         <div class="row">
           <%# FIME: move the style to a separate CSS file %>
           <%= check_box 'kerberos', :use_dns, {:disabled => disabled, :checked => @kerberos.dns_used, :style => "width: auto; vertical-align: middle;"}, true, false %>
-          <%= label_tag :kerberos_use_dns, _("Use Kerberos configuration from DNS server"), :style => "width: auto; vertical-align: middle;" %>
+          <%= label_tag :kerberos_use_dns, _("Use Kerberos configuration from DNS server"), :style => "width: auto; vertical-align: middle;", :title => _("If checked the Kerberos configuration will be read from DNS server at runtime instead of using the preconfigured values below."), :class => "tipsy_help" %>
         </div>
 
         <div class="row">
