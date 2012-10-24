@@ -21,18 +21,17 @@
 %p We are sorry, but there are some problems.
 
 %h3 Problem:
+%pre= error.message
 
-%pre
-  = error.message
 %p
   %span.bug-icon
   = _("Please Report a bug so we can fix the problem!.")
   %a{:href => controller.class.bug_url, :target => "_blank"} Report a bug in bugzilla.
-%p
-  = _("Don't forget to include the bug details.")
-  %br/
-  - log_file = Webyast::Application.config.paths['log'].first
-  = _("The main WebYaST log is located at %s file, there are also other log files in %s directory.") % [log_file, File.dirname(log_file)]
+
+%p Don't forget to include the bug details.
+- log_file = Webyast::Application.config.paths['log'].first
+%p= _("The main WebYaST log is located at %s file, there are also other log files in %s directory.") % [log_file, File.dirname(log_file)]
+
 %p
   %a#details-link{:href => "#"} Show details...
 
