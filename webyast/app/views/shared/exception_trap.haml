@@ -34,7 +34,7 @@
 %p
   %a#details-link{:href => "#"} Show details...
 
-%pre#backtrace{:style => "display: none"}
+%pre#backtrace.hidden
   = error.nil? || error.backtrace.blank? ? _("No information available") : error.backtrace.join("\n")
 
 :javascript
