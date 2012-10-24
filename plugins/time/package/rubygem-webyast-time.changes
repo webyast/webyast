@@ -1,4 +1,9 @@
 -------------------------------------------------------------------
+Wed Oct 24 08:44:52 UTC 2012 - lslezak@suse.cz
+
+- allow using local time (no NTP) without changing it (bnc#599978)
+
+-------------------------------------------------------------------
 Thu Oct  4 07:45:44 UTC 2012 - lslezak@suse.cz
 
 - removed DelayedJob dependency
