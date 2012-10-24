@@ -17,3 +17,28 @@
  *#++ */
 
 .time_subsection { margin: 10px 0 15px 25px; }
+
+label.error {
+  float: none;
+  display: inline;
+  font-weight: bold;
+  color: #990000;
+  padding-left: .5em;
+  vertical-align: middle;
+}
+
+label.valid {
+  background: url(<%= asset_path 'checked.gif'%>) no-repeat;
+  padding-left: 18px;
+  vertical-align: middle;
+}
+
+.check_row input[type=checkbox] {
+  vertical-align: middle;
+}
+
+/* needs to be too much specific to override the default from base :-( */
+.fieldset_body div.check_row label {
+  width: auto;
+}
+
