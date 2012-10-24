@@ -114,7 +114,7 @@
 <div class="plugin-content plugin-border">
   <%= render :partial => 'shared/missing_write_permissions' if disabled %>
 
-	 <%= form_tag '/time/update', {:id => "timeForm", :class=>"webyast_form", :onsubmit => "return submitTime();"} do %>
+	 <%= form_tag '/time/update', {:id => "timeForm", :class=>"webyast_form"} do %>
     <div class="plugin-header">
       <div class="left">
         <label class="plugin-icon-container"><%= image_tag("time.png", :class=>"plugin-icon") %></label>
@@ -165,7 +165,7 @@
         <div class="fieldset_body">
           <fieldset class="time_filedset" >
             <legend>
-              <input type="radio" name="timeconfig" value="manual" onclick="enable();" id="timeconfig_manual"
+              <input type="radio" name="timeconfig" value="manual" id="timeconfig_manual"
               <%= "disabled='disabled'" if disabled%>
               <%= "checked='checked'" unless @ntp_available %>/>
               <%= label_tag "timeconfig_manual", _("Manually configure time"), :class => "description" %>
@@ -191,7 +191,7 @@
 
           <fieldset class="time_filedset" >
             <legend>
-              <input id="ntp_sync" type="radio" name="timeconfig" value="ntp_sync" onclick="disable();"
+              <input id="ntp_sync" type="radio" name="timeconfig" value="ntp_sync"
               <%=  "disabled=\"disabled\"" if disabled || !@ntp_available %>
               <%=  "checked='checked'" if @ntp_available %> />
               <%= label_tag "ntp_sync", _("Synchronize via Network Time Protocol (NTP)"), :class => "description" %>

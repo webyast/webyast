@@ -30,11 +30,6 @@ function update_time_fields()
   }
 }
 
-function disable() {
-  $("#date_date")[0].disabled = true;
-  $("#currenttime")[0].disabled = true;
-}
-
 function submitTime() {
   if($("#timeForm").valid() ) {
     disable_forms();
@@ -60,5 +55,13 @@ $(document).ready(function() {
 
   update_time_fields();
   $("#time_set_time").click(update_time_fields);
+
+  $("#timeconfig_manual").click(enable);
+  $("#ntp_sync").click(function(){
+    $("#date_date")[0].disabled = true;
+    $("#currenttime")[0].disabled = true;
+  });
+
+  $("#timeForm").submit(submitTime);
 });
 
