@@ -25,25 +25,25 @@
 <h3><%= _("Problem:") %></h3>
 
 <p><pre>
-  <%= h error.message %>
+  <%= error.message %>
 </pre></p>
 
-<p><span class="bug-icon"></span><%= _("Please Report a bug so we can fix the problem!.") %><a target="_blank" href="<%= controller.class.bug_url %>"><%= _("(report link)") %></a></p>
-<p><%= _("Don't forget to include the bug details.") %></p>
-
-  <%
-  backtrace = _("No information available")
-  backtrace = error.backtrace.join("\n") unless (error.nil? || error.backtrace.nil? || error.backtrace.blank?)
-  %>
+<p><span class="bug-icon"></span><%= _("Please Report a bug so we can fix the problem!.") %>
+  <a target="_blank" href="<%= controller.class.bug_url %>"><%= _("Report a bug in bugzilla.") %></a>
+</p>
+<p><%= _("Don't forget to include the bug details.") %>
+  <br/>
+  <% log_file = Webyast::Application.config.paths['log'].first %>
+  <%= _("The main WebYaST log is located at #{log_file} file, there are also other log files in #{File.dirname log_file} directory.") %></p>
 
 <p>
   <a href="#" id="details-link"><%= _("Show details...") %></a>
-  <!-- <#%# clippy("message: #{error.message}\n backtrace :\n #{backtrace}") #%#> -->
 <p>
 
 <pre id="backtrace" style="display: none">
-<%= h backtrace  %>
+<%= error.nil? || error.backtrace.blank? ? _("No information available") : error.backtrace.join("\n") %>
 </pre>
+
 <script type="text/javascript">
-  $('#details-link').click(function() { $('#backtrace').hide();$('#backtrace').show();return false; });
+  $('#details-link').toggle(function() {$('#backtrace').show();return false;}, function() {$('#backtrace').hide();return false;});
 </script>

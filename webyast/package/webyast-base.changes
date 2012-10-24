@@ -1,4 +1,9 @@
 -------------------------------------------------------------------
+Wed Oct 24 10:56:00 UTC 2012 - lslezak@suse.cz
+
+- display log file path when an error occurs (bnc#784017)
+
+-------------------------------------------------------------------
 Wed Oct 17 12:39:16 UTC 2012 - lslezak@suse.cz
 
 - display [Back] link in the network module (fixed base_setup_links
