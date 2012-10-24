@@ -454,23 +454,6 @@ tr.even {
     float: left;
     margin-right: 0.3em; }
 
-/* style for progress bars */
-.progress_bar {
-  float: left;
-  padding-left: 1em;
-  padding-top: 8px; }
-
-.progress_bar_percent {
-  float: left;
-  text-align: center; }
-
-.progress_bar_frame {
-  border-style: solid;
-  border-width: 1px; }
-
-.progress_bar_progress {
-  background: #7ad3ff; }
-
 /* List accordion styles */
 .list-fieldset {
   border: 2px solid #dfdfdf;
