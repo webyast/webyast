@@ -22,37 +22,11 @@
 <% disabled = cannot? :write, Time %>
 <%= content_for :head do %>
   <%= stylesheet_link_tag "webyast-time" %>
+  <%= javascript_include_tag "webyast-time" %>
 
   <%= javascript_tag do -%>
 
-    function update_time_fields()
-    {
-      if ($("#time_set_time").is(":checked") && $("#time_set_time").attr("disabled") != "disbaled")
-      {
-        $("#date_date").removeAttr("disabled");
-        $("#currenttime").removeAttr("disabled");
-      }
-      else
-      {
-        $("#date_date").attr("disabled","disabled");
-        $("#currenttime").attr("disabled","disabled");
-      }
-    }
-
     $(document).ready( function() {
-      $("#date_date").datepicker( { dateFormat: 'dd/mm/yy'} );
-      $("#ui-datepicker-div").hide(); // hide a strange box created by datepicker
-
-      if ($('#timeconfig_manual').is(":checked")) {
-        $("#time_set_time").removeAttr("disabled");
-      }
-      else {
-        $("#time_set_time").attr("disabled","disabled");
-      }
-
-      update_time_fields();
-      $("#time_set_time").click(update_time_fields);
-
       $("#region").change(function() {
          $.ajax({
            url: "<%= url_for({ :action => :timezones_for_region}) -%>",
@@ -67,9 +41,7 @@
          });
       });
     });
-  <% end -%>
 
-  <script type="text/javascript">
 	 $(document).ready(function() {
 		validateDomainName("ntp_server");
 		validateTime("currenttime");
@@ -128,19 +100,7 @@
       $('#ntp_sync').hide();
     <% end %>
   });
-</script>
 
-  <!-- FIXME move javascript function outside of index -->
-  <%= javascript_tag do -%>
-    function submitTime() {
-		if($("#timeForm").valid() ) {
-		  //$('#progress').show();
-      disable_forms();
-		  return true;
-		}
-    };
-  <% end -%>
-  <%= javascript_tag do -%>
     function enable() {
       if ( <%= !disabled %> && $("#time_set_time").is(":checked")) {
         $("#date_date")[0].disabled = false;
@@ -148,11 +108,6 @@
         //$("#timeForm").valid();
       }
     };
-    function disable() {
-        $("#date_date")[0].disabled = true;
-        $("#currenttime")[0].disabled = true;
-        //$("#timeForm").valid();
-    }
   <% end -%>
 <% end %>
 
