@@ -418,11 +418,10 @@ fieldset fieldset {
   vertical-align: text-top; }
 
 .bug-icon {
-  display: block;
-  width: 23px;
-  height: 23px;
+  padding-left: 26px;
+  padding-top: 2px;
   background: transparent url(/assets/images/bug.png) no-repeat scroll 0 0;
-  float: left; }
+}
 
 .status-icon + span {
   /*  margin-left: 1em; */
