@@ -20,6 +20,10 @@ you may find current contact information at www.novell.com
 */
 
 $(document).ready(function() {
-  $(".tipsy_help").tipsy({gravity: 's', delayIn: 500, delayOut: 500, fade: true});
+  var tipsy_config = {gravity: 's', delayIn: 500, delayOut: 500, fade: true};
+  $(".tipsy_help").tipsy(tipsy_config);
+
+  tipsy_config.html = true;
+  $(".tipsy_help_html").tipsy(tipsy_config);
 });
 
