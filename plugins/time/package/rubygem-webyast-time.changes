@@ -1,4 +1,9 @@
 -------------------------------------------------------------------
+Thu Oct 25 07:33:02 UTC 2012 - lslezak@suse.cz
+
+- properly display the current config (manual vs NTP) (bnc#782509)
+
+-------------------------------------------------------------------
 Wed Oct 24 08:44:52 UTC 2012 - lslezak@suse.cz
 
 - allow using local time (no NTP) without changing it (bnc#599978)

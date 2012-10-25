@@ -167,7 +167,7 @@
             <legend>
               <input type="radio" name="timeconfig" value="manual" id="timeconfig_manual"
               <%= "disabled='disabled'" if disabled%>
-              <%= "checked='checked'" unless @ntp_available %>/>
+              <%= "checked='checked'" unless @ntp_available && @ntpd_running %>/>
               <%= label_tag "timeconfig_manual", _("Manually configure time"), :class => "description" %>
             </legend>
 
@@ -193,7 +193,7 @@
             <legend>
               <input id="ntp_sync" type="radio" name="timeconfig" value="ntp_sync"
               <%=  "disabled=\"disabled\"" if disabled || !@ntp_available %>
-              <%=  "checked='checked'" if @ntp_available %> />
+              <%=  "checked='checked'" if @ntp_available && @ntpd_running %> />
               <%= label_tag "ntp_sync", _("Synchronize via Network Time Protocol (NTP)"), :class => "description" %>
             </legend>
 

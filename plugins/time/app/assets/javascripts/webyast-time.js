@@ -48,9 +48,11 @@ $(document).ready(function() {
 
   if ($('#timeconfig_manual').is(":checked")) {
     $("#time_set_time").removeAttr("disabled");
+    $("#ntp_server").attr("disabled","disabled");
   }
   else {
     $("#time_set_time").attr("disabled","disabled");
+    $("#ntp_server").removeAttr("disabled");
   }
 
   update_time_fields();
