@@ -559,3 +559,10 @@ p.missing-permissions {
   clear: both;
   visibility: hidden;
 }
+
+.help_icon:after {
+  content: "";
+  background: url(/assets/question-mark.png) no-repeat scroll 0 center;
+  padding-left: 12px;
+  margin-left: 5px;
+}
