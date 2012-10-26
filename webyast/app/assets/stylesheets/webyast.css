@@ -488,9 +488,8 @@ p.missing-permissions {
   background-color:#fcfdde;
   border-top: solid 2px red;
   border-bottom: solid 2px red;
-  width:100%;
   text-align:center;
-  padding: 15px 0;
+  padding: 15px;
   font-size: 1.2em;
   font-weight: bold;
 }
