@@ -63,16 +63,16 @@
   <body id="shell">
     <div class="wrapper">
     <div id='browserWarning' class="big-warning unsupported-browser-warning">
-      <%= raw ( _("You are using an unsupported browser. Please switch to at least %sFireFox 10%s or %sInternet Explorer 9%s. Thanks! [%sclose%s]") %
-            ["<a href='http://getfirefox.com' class='external'>","</a>",
-             "<a href='http://www.microsoft.com/windows/downloads/ie/getitnow.mspx' class='external'>", "</a>",
-             "<a href='#' id='warningClose'>", "</a>"] ) %>
+      <%= raw ( _("You are using an unsupported browser. Please switch to at least %s or %s. Thank you!") %
+            ["<a href='http://getfirefox.com' class='external'>FireFox 10</a>",
+             "<a href='http://www.microsoft.com/windows/downloads/ie/getitnow.mspx' class='external'>Internet Explorer 9</a>" ] ) %>
+      <a href='#' id='warningClose'><%=  _("(Hide this warning)") %></a>
     </div>
     <noscript>
       <div id="no_js_warning" class="big-warning">
-        <%= raw ( _("JavaScript support is missing or disabled. Please turn JavaScript on or use a supported browser (at least %sFireFox 10%s or %sInternet Explorer 9%s).") %
-            ["<a href='http://getfirefox.com' class='external'>","</a>",
-             "<a href='http://www.microsoft.com/windows/downloads/ie/getitnow.mspx' class='external'>", "</a>"] ) %>
+        <%= raw ( _("JavaScript support is missing or disabled. Please turn JavaScript on or use a supported browser (at least %s or %s).") %
+            ["<a href='http://getfirefox.com' class='external'>FireFox 10</a>",
+             "<a href='http://www.microsoft.com/windows/downloads/ie/getitnow.mspx' class='external'>Internet Explorer 9</a>"] ) %>
       </div>
     </noscript>
 
