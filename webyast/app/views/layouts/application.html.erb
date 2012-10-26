@@ -62,11 +62,13 @@
 </head>
   <body id="shell">
     <div class="wrapper">
-    <div id='browserWarning' class="big-warning unsupported-browser-warning">
+    <div id='browserWarning' class="big-warning unsupported-browser-warning clearfix">
       <%= raw ( _("You are using an unsupported browser. Please switch to at least %s or %s. Thank you!") %
             ["<a href='http://getfirefox.com' class='external'>FireFox 10</a>",
              "<a href='http://www.microsoft.com/windows/downloads/ie/getitnow.mspx' class='external'>Internet Explorer 9</a>" ] ) %>
-      <a href='#' id='warningClose'><%=  _("(Hide this warning)") %></a>
+      <div style="float:right">
+        <a href='#' id='warningClose' class="no-underscore"><%= image_tag 'close.png', :title => _("Hide this warning") %></a>
+      </div>
     </div>
     <noscript>
       <div id="no_js_warning" class="big-warning">

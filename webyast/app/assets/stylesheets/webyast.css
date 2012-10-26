@@ -72,6 +72,10 @@ a {
       font-weight: bold;
     }
 
+    a.no-underscore {
+      border-bottom: none;
+    }
+
 /* CSS Hack for FF */
 html a.button:only-of-type {
   padding: 3px 10px; }
