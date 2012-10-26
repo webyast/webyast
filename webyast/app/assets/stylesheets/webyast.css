@@ -94,9 +94,8 @@ ul li {
 
 /* == Basic Structure ===================================================== */
 #header {
-  width: 100%;
   background-color: #c5c5c5;
-  height: 50px;
+  min-height: 50px;
   vertical-align: middle;
   text-align: center;
   position: relative; }
@@ -107,13 +106,14 @@ ul li {
     margin: 0;
     padding-top: 13px; }
   #header img {
-    margin: 2px 1em 0;
-    position: absolute;
-    top: 2px;
-    left: 0; }
+    margin: 4px 0.5em 0;}
   #header ul.header-links {
     float: right;
     vertical-align: bottom; }
+
+#webyast_logo {
+  float: left
+}
 
 #timeoutMessage {
   display: none;

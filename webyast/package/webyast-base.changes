@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Fri Oct 26 13:45:30 UTC 2012 - lslezak@suse.cz
+
+- page header - fixed layout problem when there is small space
+  (bnc#783892)
+
+-------------------------------------------------------------------
 Wed Oct 24 10:56:00 UTC 2012 - lslezak@suse.cz
 
 - display log file path when an error occurs (bnc#784017)

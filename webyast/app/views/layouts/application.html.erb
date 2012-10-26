@@ -78,14 +78,14 @@
       </div>
     </noscript>
 
-    <div id="header">
+    <div id="header" class="clearfix">
       <% appliance_label = ControlPanelConfig.read 'appliance_label', _("My Appliance") %>
       <% appliance_label = appliance_label.strip %>
       <% if appliance_label =~ /^_\(\"/ && appliance_label =~ /\"\)$/ %>
         <% appliance_label = _(appliance_label[3..appliance_label.length-3]) %>
       <% end %>
 
-      <%= link_to(image_tag("webyast-logo.png", :width=>"130", :height=>"42", :alt =>"webyast"),"/" )%>
+      <%= link_to(image_tag("webyast-logo.png", :width=>"130", :height=>"42", :alt =>"webyast", :id => 'webyast_logo'),"/" )%>
 
       <% if !account_signed_in? %>
         <span id="userbar">
