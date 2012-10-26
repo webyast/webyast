@@ -67,8 +67,8 @@ class KerberosController < ApplicationController
 
       respond_to do |format|
         format.html {redirect_to :action => :index}
-        format.xml  {render :xml => @ldap.to_xml, :status => 500}
-        format.json {render :json => @ldap.to_json, :status => 500}
+        format.xml  {render :xml => @kerberos.to_xml, :status => 500}
+        format.json {render :json => @kerberos.to_json, :status => 500}
       end
 
       return
@@ -76,8 +76,8 @@ class KerberosController < ApplicationController
 
     respond_to do |format|
       format.html {redirect_to root_path}
-      format.xml  {render :xml => @ldap.to_xml}
-      format.json {render :json => @ldap.to_json}
+      format.xml  {render :xml => @kerberos.to_xml}
+      format.json {render :json => @kerberos.to_json}
     end
   end
 
