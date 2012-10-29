@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Mon Oct 29 09:13:12 UTC 2012 - lslezak@suse.cz
+
+- added support for "main_hidden" option in shortcuts.yml files
+  to allow hiding control panel items by default (bnc#604628)
+
+-------------------------------------------------------------------
 Fri Oct 26 13:45:30 UTC 2012 - lslezak@suse.cz
 
 - page header - fixed layout problem when there is small space
