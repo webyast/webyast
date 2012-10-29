@@ -55,7 +55,7 @@ SUPPORTED_LANGUAGES = {
   # load datepicker translations when available
   def date_picker_localization
     if File.file? File.join(Rails.root, "app", "assets", "javascripts", "jquery.ui.datepicker-#{I18n.locale}.js")
-      Rails.logger.debug "Datepicker translations found: #{"jquery.ui.datepicker-#{I18n.locale}.js"}"
+      Rails.logger.debug "Datepicker translations found: jquery.ui.datepicker-#{I18n.locale}.js"
       javascript_include_tag "jquery.ui.datepicker-#{I18n.locale}.js"
     end
   end
