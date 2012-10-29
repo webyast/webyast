@@ -1,4 +1,9 @@
 -------------------------------------------------------------------
+Mon Oct 29 13:47:08 UTC 2012 - lslezak@suse.cz
+
+- added datepicker translations (bnc#603641)
+
+-------------------------------------------------------------------
 Mon Oct 29 09:13:12 UTC 2012 - lslezak@suse.cz
 
 - added support for "main_hidden" option in shortcuts.yml files

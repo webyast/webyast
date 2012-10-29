@@ -40,7 +40,7 @@ module Webyast
     config.secret_token = '9d11bfc98abcf9799082d9c34ec94dc1cc926f0f1bf4bea8c440b497d96b14c1f712c8784d0303ee7dd69e382c3e5e4d38d4c56d1b619eae7acaa6516cd733b1'
 
     # precompile all webyast-* assets from plugins
-    config.assets.precompile += ['webyast-*', 'webyast-base-*']
+    config.assets.precompile += ['webyast-*', 'webyast-base-*', 'jquery.ui.datepicker-*.js' ]
 
     # for a slighly faster asset compilation
     # (see http://guides.rubyonrails.org/asset_pipeline.html)
