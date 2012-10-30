@@ -21,50 +21,50 @@
 
 <%= content_for :before_script do %>
   <%= javascript_tag do -%>
-  $(document).ready(function(){
-    $(".accordion").accordion({
-       autoHeight : false,
-       navigation : true,
-       collapsible: true,
-       header     : 'fieldset legend',
-       animated   : false
+    $(document).ready(function(){
+      $(".accordion").accordion({
+        autoHeight : false,
+        navigation : true,
+        collapsible: true,
+        header     : 'fieldset legend',
+        animated   : false
     });
     $(".accordion").accordion('activate',false);
     <% if @arguments_mandatory.blank? %>
       $(".accordion").accordion('activate', "#argumentdetail legend");
     <% end %>
-  });
+    });
   <% end %>
 
   <%= javascript_tag do -%>
-  function show_progress()
-  {
-    var message = <%= jss _("Please wait") -%>;
-    $.modalDialog.wait( {message: message});
-    //disableFormOnSubmit(message);
-  };
+    function show_progress()
+    {
+      var message = <%= jss _("Please wait") -%>;
+      $.modalDialog.wait( {message: message});
+      //disableFormOnSubmit(message);
+    };
 
-  $(document).ready(function(){
-    $("#registrationform").validate({
-      rules: {
-        registration_arg_email: {
-          required: true,
-          email: true
+    $(document).ready(function(){
+      $("#registrationform").validate({
+        rules: {
+          registration_arg_email: {
+            required: true,
+            email: true
         }
       },
       submitHandler:
-	    function(form) {
-	      var message = <%= jss _("Please wait") -%>;
-        $.modalDialog.wait( {message: message});
-        //disableFormOnSubmit(message);
-        form.submit();
-	    },
-      messages: {
-       registration_arg_email: {
-         required: "<%= _("Please enter a valid Email address.") %>",
-         email: "<%= _("Please enter a valid Email address.") %>"
-       }
-      }
+        function(form) {
+          var message = <%= jss _("Please wait") -%>;
+          $.modalDialog.wait( {message: message});
+            //disableFormOnSubmit(message);
+            form.submit();
+          },
+          messages: {
+            registration_arg_email: {
+            required: "<%= _("Please enter a valid Email address.") %>",
+            email: "<%= _("Please enter a valid Email address.") %>"
+          }
+        }
     })});
   <% end %>
 <% end %>
@@ -73,49 +73,49 @@
 <div class="plugin-content plugin-border">
 
   <% form_target_save = '/registration/' + (@nexttarget.kind_of?(String) ? @nexttarget : 'skip') %>
-    <div class="webyast_form">
-      <div class="plugin-header">
-        <div class="left">
-          <label class="plugin-icon-container"><%= image_tag("registration.png", :class=>"plugin-icon") %></label>
-          <label class="plugin-name"><%=_("Registration")%></label>
-        </div>
-        <%= render :partial => 'shared/online_help', :locals => { :help_name => "registration"} %>
-        <div class="clearfix"></div>
-     </div>
+  <div class="webyast_form">
+    <div class="plugin-header">
+      <div class="left">
+        <label class="plugin-icon-container"><%= image_tag("registration.png", :class=>"plugin-icon") %></label>
+        <label class="plugin-name"><%=_("Registration")%></label>
+      </div>
+      <%= render :partial => 'shared/online_help', :locals => { :help_name => "registration"} %>
+      <div class="clearfix"></div>
     </div>
+  </div>
 
   <% if @showstatus then %>
     <div class="webyast_form">
       <fieldset class="webyast_fieldset">
         <div class="fieldset_header">
           <span class="fieldset_header_title" ><%= _("Registration Information") %></span>
-   	    </div>
+        </div>
 
         <div class="fieldset_body">
           <div class="row">
             <%= image_tag("checkmark.gif", :style=>"vertical-align:middle; width:24px; height:24px;") %>
             <strong><%= _("This system is registered") %></strong> <!-- RORSCAN_ITL -->
-           </div>
-           <div class="row">
+          </div>
+          <div class="row">
             <small><%= _("System number (GUID)") + ":" %> <%= @guid %></small> <!-- RORSCAN_ITL -->
-           </div>
+          </div>
           <div class="row">
             <%= link_to _('Register again'), {:controller => :registration, :action => :reregister}, :onclick=>"show_progress();", :class => "button" %>
           </div>
         </div>
-       </fieldset>
+      </fieldset>
 
       <div class="clearfix"></div>
 
       <div class="button_container">
-   	    <div class="hr">&nbsp;</div>
+        <div class="hr">&nbsp;</div>
         <div class="nav-buttons">
           <%= form_back_button %>
           <%= if basesystem_in_process? then
-               ret = form_str_spacer
-               ret += link_to _("Next"), {:controller => :controlpanel, :action => :nextstep}, :class => "button"
-             end
-          %>
+            ret = form_str_spacer
+            ret += link_to _("Next"), {:controller => :controlpanel, :action => :nextstep}, :class => "button"
+          end
+        %>
         </div>
       </div>
     </div>
@@ -124,61 +124,61 @@
     <%= form_tag form_target_save, { :id => "registrationform", :class=>"webyast_form" } do -%>
 
       <% if !@arguments_mandatory.blank? then %>
-       <fieldset class="webyast_fieldset">
-        <div class="fieldset_header">
-  	      <span class="fieldset_header_title" ><%= _("Mandatory Information") %></span>
-  	    </div>
-
-  	    <div class="fieldset_body">
-        <% for argument in @arguments_mandatory %>
-  	      <div class="row">
-            <label for="<%= 'registration_arg_'+argument['name'] %>"  <%= argument["error"] ? 'style="color: red"' : ''  %>  >
-              <%= argument['description'] %>
-            </label>
-            <%= text_field_tag "registration_arg_"+argument["name"], argument["value"]  %>
-          </div>
-        <% end %>
-        </div>
-      </fieldset>
-      <% end %>
-
-      <% if !@arguments_detail.blank? then %>
-      <div class="accordion">
-        <fieldset id="argumentdetail" class="webyast_fieldset">
+        <fieldset class="webyast_fieldset">
           <div class="fieldset_header">
-    	      <span class="fieldset_header_title" ><%= _("Details") %></span>
-    	    </div>
+            <span class="fieldset_header_title" ><%= _("Mandatory Information") %></span>
+          </div>
 
-    	    <div class="fieldset_body">
-            <% for argument in @arguments_detail %>
-         	    <div class="row">
-                <label for="<%= 'registration_arg_'+argument['name'] %>" ><%= argument['description'] %></label>
+          <div class="fieldset_body">
+            <% for argument in @arguments_mandatory %>
+              <div class="row">
+                <label for="<%= 'registration_arg_'+argument['name'] %>"  <%= argument["error"] ? 'style="color: red"' : ''  %>  >
+                  <%= argument['description'] %>
+                </label>
                 <%= text_field_tag "registration_arg_"+argument["name"], argument["value"]  %>
               </div>
             <% end %>
           </div>
-       </fieldset>
-      </div> <!-- accordion -->
+        </fieldset>
       <% end %>
 
-     <div class="clearfix"></div>
+      <% if !@arguments_detail.blank? then %>
+        <div class="accordion">
+          <fieldset id="argumentdetail" class="webyast_fieldset">
+            <div class="fieldset_header">
+              <span class="fieldset_header_title" ><%= _("Details") %></span>
+            </div>
 
-     <div class="button_container">
- 	    <div class="hr">&nbsp;</div>
-      <div class="nav-buttons">
-        <% if @arguments_mandatory.kind_of?(Array) && !@arguments_mandatory.select{ |p|  p["name"]=="email" }.empty?
-             onclick_action = "return $('#registrationform').validate().element('#registration_arg_email');"
-           else
-             onclick_action = "return true;"
-           end
+            <div class="fieldset_body">
+              <% for argument in @arguments_detail %>
+                <div class="row">
+                  <label for="<%= 'registration_arg_'+argument['name'] %>" ><%= argument['description'] %></label>
+                  <%= text_field_tag "registration_arg_"+argument["name"], argument["value"]  %>
+                </div>
+              <% end %>
+            </div>
+          </fieldset>
+        </div> <!-- accordion -->
+      <% end %>
+
+      <div class="clearfix"></div>
+
+      <div class="button_container">
+        <div class="hr">&nbsp;</div>
+        <div class="nav-buttons">
+          <% if @arguments_mandatory.kind_of?(Array) && !@arguments_mandatory.select{ |p|  p["name"]=="email" }.empty?
+            onclick_action = "return $('#registrationform').validate().element('#registration_arg_email');"
+          else
+            onclick_action = "return true;"
+          end
         %>
-        <%= form_send_buttons :onclick => onclick_action %>
-        <%= if basesystem_in_process? then
-                postpone_msg = _('Postpone')
-                form_str_spacer + link_to(postpone_msg, {:controller => :registration, :action =>:skip})
-        end %>
+          <%= form_send_buttons :onclick => onclick_action %>
+          <%= if basesystem_in_process? then
+            postpone_msg = _('Postpone')
+            form_str_spacer + link_to(postpone_msg, {:controller => :registration, :action =>:skip})
+          end %>
+        </div>
       </div>
-     </div>
     <% end  %>
   <% end -%>
 </div>
