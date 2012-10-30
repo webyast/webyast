@@ -420,7 +420,8 @@ public
 
     success = false
     begin
-      register.context = params[:context].is_a?(Hash) ? @options.merge(params[:context]) : @options
+      context = params[:registration][:context] rescue {}
+      register.context = @options.merge context
       exitcode = register.register
       logger.debug "registration finished: #{register.to_xml}"
 
