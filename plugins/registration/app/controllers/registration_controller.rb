@@ -413,16 +413,10 @@ public
 
     # get new registration object
     register = Register.new
-    register.arguments = {}
-    begin
-      params.each do | key, value |
-        if key.starts_with? "registration_arg_"
-          register.arguments[key[17, key.size-17]] = value
-        end
-      end
-    rescue
-      logger.debug "No arguments were passed to the registration call."
-    end
+
+    arguments = params[:registration][:arguments] rescue {}
+    Rails.logger.debug "Registration arguments: #{arguments.inspect}"
+    register.arguments = arguments
 
     success = false
     begin

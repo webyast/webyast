@@ -66,6 +66,9 @@
   <% end %>
 <% end %>
 
+<%= content_for :head do %>
+  <%= stylesheet_link_tag "webyast-registration" %>
+<% end %>
 
 <div class="plugin-content plugin-border">
 
@@ -90,7 +93,7 @@
 
         <div class="fieldset_body">
           <div class="row">
-            <%= image_tag("checkmark.gif", :style=>"vertical-align:middle; width:24px; height:24px;") %>
+            <%= image_tag("checkmark.gif", :style=>"vertical-align:middle", :size => "24x24") %>
             <strong><%= _("This system is registered") %></strong> <!-- RORSCAN_ITL -->
           </div>
           <div class="row">
@@ -129,10 +132,9 @@
           <div class="fieldset_body">
             <% for argument in @arguments_mandatory %>
               <div class="row">
-                <label for="<%= 'registration_arg_'+argument['name'] %>"  <%= argument["error"] ? 'style="color: red"' : ''  %>  >
-                  <%= argument['description'] %>
-                </label>
-                <%= text_field_tag "registration_arg_"+argument["name"], argument["value"]  %>
+                <% label_options = argument["error"] ? {:class => :argument_error} : {} %>
+                <%= label_tag "registration[arguments][#{argument["name"]}]", argument['description'], label_options %>
+                <%= text_field_tag "registration[arguments][#{argument["name"]}]", argument["value"] %>
               </div>
             <% end %>
           </div>
@@ -149,8 +151,8 @@
             <div class="fieldset_body">
               <% for argument in @arguments_detail %>
                 <div class="row">
-                  <label for="<%= 'registration_arg_'+argument['name'] %>" ><%= argument['description'] %></label>
-                  <%= text_field_tag "registration_arg_"+argument["name"], argument["value"]  %>
+                  <%= label_tag "registration[arguments][#{argument["name"]}]", argument['description'] %>
+                  <%= text_field_tag "registration[arguments][#{argument["name"]}]", argument["value"] %>
                 </div>
               <% end %>
             </div>
@@ -164,7 +166,7 @@
         <div class="hr">&nbsp;</div>
         <div class="nav-buttons">
           <% if @arguments_mandatory.kind_of?(Array) && !@arguments_mandatory.select{ |p|  p["name"]=="email" }.empty?
-            onclick_action = "return $('#registrationform').validate().element('#registration_arg_email');"
+            onclick_action = "return $('#registrationform').validate().element('#registration_arguments_email');"
           else
             onclick_action = "return true;"
           end
