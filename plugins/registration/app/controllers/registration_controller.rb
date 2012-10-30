@@ -116,7 +116,11 @@ class RegistrationController < ApplicationController
     flash[:error] = server_error_flash _("The registration server returned invalid or incomplete data.")
     logger.error "Registration resulted in an error, registration server or SuseRegister backend returned invalid or incomplete data."
     # success: allow users to skip registration in case of an error (bnc#578684) (bnc#579463)
-    redirect_success
+    respond_to do |format|
+      format.xml {render  :xml => register.status_to_xml( :dasherize => false )}
+      format.html {redirect_success}
+      format.json {render :json => rregister.status_to_json}
+    end
   end
 
   def registration_backend_error
@@ -372,14 +376,13 @@ public
     else
       @showstatus = true
       @guid = @register.guid
-    end
 
-    respond_to do |format|
-      format.xml { render  :xml => @register.status_to_xml( :dasherize => false ) }
-      format.json { render :json => @register.status_to_json }
-      format.html {}
+      respond_to do |format|
+        format.xml { render  :xml => @register.status_to_xml( :dasherize => false ) }
+        format.json { render :json => @register.status_to_json }
+        format.html {}
+      end
     end
-
   end
 
   def reregister
@@ -423,7 +426,7 @@ public
 
     success = false
     begin
-      register.context = @options
+      register.context = params[:context].is_a?(Hash) ? @options.merge(params[:context]) : @options
       exitcode = register.register
       logger.debug "registration finished: #{register.to_xml}"
 
@@ -470,7 +473,12 @@ public
           logger.error "Registration backend returned an unknown error. Please run in debug mode and report a bug."
           return registration_logic_error
         end
-        redirect_success
+
+        respond_to do |format|
+          format.xml {render  :xml => register.to_xml( :dasherize => false )}
+          format.html {redirect_success}
+          format.json {render :json => register.to_json}
+        end
         return
       else
         logger.debug "error while registration: #{error.inspect}"
@@ -491,7 +499,13 @@ public
         flash[:warning] = (_("<p><b>Repositories were not modified during the registration process.</b></p><p>It is likely that an incorrect registration code was used. If this is the case, please attempt the registration process again to get an update repository.</p><p>Please make sure that this system has an update repository configured, otherwise it will not receive updates.</p>")).html_safe # RORSCAN_ITL
       end
 
-      redirect_success
+      respond_to do |format|
+        format.xml {render  :xml => register.to_xml( :dasherize => false )}
+        format.html {redirect_success}
+        format.json {render :json => register.to_json}
+      end
+
+      return
     else
       logger.info "Registration is not yet finished"
 
@@ -500,13 +514,25 @@ public
 
       if @arguments_mandatory.blank? && @arguments_detail.blank? then
         # redirect if the registration server is in needinfo but arguments list is empty
-        flash[:error] = server_error_flash _("The registration server returned invalid data.")
         logger.error "Registration resulted in an error: Logic issue, unspecified data requested by registration server"
-        redirect_success
+
+        respond_to do |format|
+          format.xml {render  :xml => register.to_xml( :dasherize => false )}
+          format.html {
+            flash[:error] = server_error_flash _("The registration server returned invalid data.")
+            redirect_success
+          }
+          format.json {render :json => register.to_json}
+        end
+
         return
       end
 
-      render :action => "index"
+      respond_to do |format|
+        format.xml {render  :xml => register.to_xml( :dasherize => false )}
+        format.html {}
+        format.json {render :json => register.to_json}
+      end
     end
   end
 
