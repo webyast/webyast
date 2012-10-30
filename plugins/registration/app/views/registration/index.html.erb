@@ -22,47 +22,24 @@
 <%# FIXME: move this to a separate JS file -%>
 <%= content_for :before_script do %>
   <%= javascript_tag do -%>
-    $(document).ready(function(){
-      $(".accordion").accordion({
-        autoHeight : false,
-        navigation : true,
-        collapsible: true,
-        header     : 'fieldset legend',
-        animated   : false
-    });
-    $(".accordion").accordion('activate',false);
-    <% if @arguments_mandatory.blank? %>
-      $(".accordion").accordion('activate', "#argumentdetail legend");
-    <% end %>
-    });
-
     function show_progress()
     {
-      var message = <%= jss _("Please wait") -%>;
-      $.modalDialog.wait( {message: message});
-    };
+      $.modalDialog.wait( {message: <%= jss _("Please wait") -%>});
+    }
 
     $(document).ready(function(){
       $("#registrationform").validate({
-        rules: {
-          registration_arg_email: {
-            required: true,
-            email: true
+        submitHandler: function(form) {
+          show_progress();
+          form.submit();
         }
-      },
-      submitHandler:
-        function(form) {
-          var message = <%= jss _("Please wait") -%>;
-          $.modalDialog.wait( {message: message});
-            form.submit();
-          },
-          messages: {
-            registration_arg_email: {
-            required: <%= jss _("Please enter a valid Email address.") %>,
-            email: <%= jss _("Please enter a valid Email address.") %>
-          }
-        }
-    })});
+      });
+
+      $.extend($.validator.messages, {
+        email: <%= jss _("Please enter a valid email address.") %>,
+        required: <%= jss _("This field is required.") -%>
+      });
+    });
   <% end %>
 <% end %>
 
@@ -134,7 +111,8 @@
               <div class="row">
                 <% label_options = argument["error"] ? {:class => :argument_error} : {} %>
                 <%= label_tag "registration[arguments][#{argument["name"]}]", argument['description'], label_options %>
-                <%= text_field_tag "registration[arguments][#{argument["name"]}]", argument["value"] %>
+                <% text_field_options = argument["name"] == "email" ? {:class => "email required"} : {}%>
+                <%= text_field_tag "registration[arguments][#{argument["name"]}]", argument["value"], text_field_options %>
               </div>
             <% end %>
           </div>
@@ -151,7 +129,7 @@
             <div class="fieldset_body">
               <% for argument in @arguments_detail %>
                 <div class="row">
-                  <%= label_tag "registration[arguments][#{argument["name"]}]", argument['description'] %>
+                  <%= label_tag "registration[arguments][#{argument["name"]}]", argument['description'].humanize %>
                   <%= text_field_tag "registration[arguments][#{argument["name"]}]", argument["value"] %>
                 </div>
               <% end %>
@@ -165,13 +143,7 @@
       <div class="button_container">
         <div class="hr">&nbsp;</div>
         <div class="nav-buttons">
-          <% if @arguments_mandatory.kind_of?(Array) && !@arguments_mandatory.select{ |p|  p["name"]=="email" }.empty?
-            onclick_action = "return $('#registrationform').validate().element('#registration_arguments_email');"
-          else
-            onclick_action = "return true;"
-          end
-        %>
-          <%= form_send_buttons :onclick => onclick_action %>
+          <%= form_send_buttons %>
           <%= if basesystem_in_process? then
             postpone_msg = _('Postpone')
             form_str_spacer + link_to(postpone_msg, {:controller => :registration, :action =>:skip})
