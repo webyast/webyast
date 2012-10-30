@@ -151,6 +151,8 @@ public
       raise InvalidParameters.new :registrationdata => "Invalid"
     end
 
+    Rails.logger.debug "Registration Context Data: #{ self.context.inspect }"
+    Rails.logger.debug "Registration Argument Data: #{ self.arguments.inspect }"
     @reg = YastService.Call("YSR::statelessregister", ctx, args )
 # @reg = {"manualurl"=>"https://secure-www.novell.com/center/regsvc-1.0/?lang=en-US&guid=dfe61a4b5f0948c6bd00bc47c6d338ab&command=interactive", "errorcode"=>"0", "exitcode"=>"4", "readabletext"=>"To complete the registration, provide some additional parameters:\n\n\nYou can provide these parameters with the '-a' option.\nYou can use the '-a' option multiple times.\n\nExample:\n\nsuse_register -a email=\"me@example.com\"\n\nTo register your product manually, use the following URL:\n\nhttps://secure-www.novell.com/center/regsvc-1.0/?lang=en-US&guid=dfe61a4b5f0948c6bd00bc47c6d338ab&command=interactive\n\n\nInformation on Novell's Privacy Policy:\nSubmit information to help you manage your registered systems.\nhttp://www.novell.com/company/policies/privacy/textonly.html\n", "missinginfo"=>"Missing Information", "missingarguments"=>"<missingarguments>\n  <platform flag=\"i\" kind=\"mandatory\" value=\"x86_64\" />\n  <processor flag=\"i\" kind=\"mandatory\" value=\"x86_64\" />\n  <timezone flag=\"i\" kind=\"mandatory\" value=\"Europe/Prague\" />\n</missingarguments>\n"}
 
@@ -265,7 +267,6 @@ public
   end
 
   def status_to_xml( options = {} )
-    read_status
     xml = options[:builder] ||= Builder::XmlMarkup.new(options)
     xml.instruct! unless options[:skip_instruct]
     xml.registration do
@@ -275,8 +276,6 @@ public
   end
 
   def config_to_xml( options = {} )
-    # FIXME: the status is read in constructor, why reading again?
-    read_status
     xml = options[:builder] ||= Builder::XmlMarkup.new(options)
     xml.instruct! unless options[:skip_instruct]
 
@@ -294,8 +293,6 @@ public
   end
 
   def to_xml( options = {} )
-    # FIXME: the status is read in constructor, why reading again?
-    read_status
     xml = options[:builder] ||= Builder::XmlMarkup.new(options)
     xml.instruct! unless options[:skip_instruct]
 
