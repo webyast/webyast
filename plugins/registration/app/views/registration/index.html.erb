@@ -19,6 +19,7 @@
 # you may find current contact information at www.novell.com
 -->
 
+<%# FIXME: move this to a separate JS file -%>
 <%= content_for :before_script do %>
   <%= javascript_tag do -%>
     $(document).ready(function(){
@@ -34,14 +35,11 @@
       $(".accordion").accordion('activate', "#argumentdetail legend");
     <% end %>
     });
-  <% end %>
 
-  <%= javascript_tag do -%>
     function show_progress()
     {
       var message = <%= jss _("Please wait") -%>;
       $.modalDialog.wait( {message: message});
-      //disableFormOnSubmit(message);
     };
 
     $(document).ready(function(){
@@ -56,13 +54,12 @@
         function(form) {
           var message = <%= jss _("Please wait") -%>;
           $.modalDialog.wait( {message: message});
-            //disableFormOnSubmit(message);
             form.submit();
           },
           messages: {
             registration_arg_email: {
-            required: "<%= _("Please enter a valid Email address.") %>",
-            email: "<%= _("Please enter a valid Email address.") %>"
+            required: <%= jss _("Please enter a valid Email address.") %>,
+            email: <%= jss _("Please enter a valid Email address.") %>
           }
         }
     })});
