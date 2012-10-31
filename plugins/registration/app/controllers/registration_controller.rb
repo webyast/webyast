@@ -313,33 +313,25 @@ public
     @register.arguments = {}
 
     # parse and set registration arguments
-    if ( params && params.has_key?(:registration) &&
-         params[:registration] && params[:registration].has_key?(:arguments) )
-    then
-      args = params[:registration][:arguments]
-      case args
-      when Array
-        args.each do |item|
-          @register.arguments[item['name'].to_s] = item['value'].to_s if item.has_key?(:name) && item.has_key?(:value)
-        end
-      when Hash, HashWithIndifferentAccess
-        @register.arguments[args['name'].to_s] = args['value'].to_s if args.has_key?(:name) && args.has_key?(:value)
-      else
-        Rails.logger.info "Registration attempt without any valid registration data."
-      end
+    if params[:registration] && params[:registration].has_key?(:arguments) && params[:registration][:arguments].is_a?(Hash)
+      @register.arguments = params[:registration][:arguments]
+      Rails.logger.debug "Registration arguments: #{@register.arguments.inspect}"
     else
-      Rails.logger.info "Registration attempt without any registration data."
+      Rails.logger.warn "Registration attempt without any registration data."
     end
 
-
     #overwriting default options
-    if params[:registration].has_key?(:options) && params[:registration][:options].is_a?(Hash)
-      params[:registration][:options].each do |key, value|
-        @register.context[key] = value
-      end
+    if params[:registration] && params[:registration].has_key?(:options) && params[:registration][:options].is_a?(Hash)
+      @register.context.merge! params[:registration][:options]
+      Rails.logger.debug "Registration context: #{@register.context.inspect}"
     end
 
     status = @register.register.zero? ? :ok : :bad_request
+
+    # update the GUID
+    if @register.register.zero?
+      @register.guid = Register.new.guid
+    end
 
     respond_to do |format|
       format.xml { render  :xml => @register.to_xml(:dasherize => false), :status => status }
@@ -420,8 +412,9 @@ public
 
     success = false
     begin
-      context = params[:registration][:context] rescue {}
+      context = params[:registration][:options] rescue {}
       register.context = @options.merge context
+      Rails.logger.debug "Registration context: #{register.context.inspect}"
       exitcode = register.register
       logger.debug "registration finished: #{register.to_xml}"
 
