@@ -127,12 +127,7 @@ public
   end
 
   def is_registered?
-    begin
-      return ( @guid  &&  @guid.size > 0  &&  @guid != 0 ) == true
-    rescue
-      Rails.logger.error "Error when reading the registration status information. The GUID could not be determined."
-      return false
-    end
+    @guid && @guid != 0
   end
 
   def register
