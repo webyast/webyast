@@ -302,7 +302,7 @@ public
     register
   end
 
-
+  # FIXME: merge create (HTML) and register (XML) methods to a single method
   def create
     # POST to registration => run registration
     authorize! :statelessregister, Register
@@ -340,6 +340,7 @@ public
     end
   end
 
+  # FIXME: remove show, index should be sufficient
   def show
     authorize! :getregistrationconfig, Register
     # get registration status
@@ -377,6 +378,7 @@ public
     end
   end
 
+  # FIXME: use a parameter (register?reregister=true) instead of extra path
   def reregister
     # provide a way to force a new registration, even if system is already registered
     @reregister = true
