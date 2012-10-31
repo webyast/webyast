@@ -190,7 +190,7 @@ class StatusController < ApplicationController
           end
         }
       rescue Exception => error
-        Rails.logger.warn "Error raised while checking plugin status: #{error.inspect}"
+        Rails.logger.error "Error raised while checking plugin status: #{error.inspect}"
         level = "error"
         refresh = false
         status = _("Cannot read the plugins status.")
