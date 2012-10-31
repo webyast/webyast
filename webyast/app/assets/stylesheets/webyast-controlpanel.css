@@ -337,7 +337,7 @@ div.overview li:hover {
 #userbar a { border-bottom: 1px dotted #555; color:#444; text-shadow: 0 1px 1px #e5e5e5; }
 #userbar a:hover { border-bottom: 1px solid #555; color:#fff; text-shadow: 0 -1px 0px #444; }
 
-#userbar { line-height: 45px; position: absolute; right: 0; z-index: 100; margin: 0 5px; }
+#userbar { line-height: 45px; float:right; margin: 0 5px; }
 #userbar-container { background-color:#aaa; padding:2px 0px 7px 3px; border:1px solid #a0a0a0; -moz-border-radius:2px; -webkit-border-radius:2px; }
 #userbar-container {  -moz-box-shadow: 0px 0px 0px #000 inset; background: #ccc }
 

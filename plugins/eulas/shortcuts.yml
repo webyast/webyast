@@ -1,0 +1,8 @@
+eulas:
+  icon: 'yast-eulas.png'
+  url: /eulas
+  groups: [ System ]
+  tags: [ eulas ]
+  title: License
+  description: Display and confirm End User License Agreement (EULA)
+  main_hidden: true

@@ -111,8 +111,7 @@ class Systemtime < BaseModel::Base
     end
     unless @date.blank? || @time.blank?
       date = @date.split("/")
-      datetime = "#{date[2]}-#{date[0]}-#{date[1]} - "+@time
-      settings["currenttime"] = datetime
+      settings["currenttime"] = "#{date[2]}-#{date[0]}-#{date[1]} - #{@time}"
     end
 
     Rails.logger.info "called write with #{settings.inspect}"
@@ -163,7 +162,7 @@ class Systemtime < BaseModel::Base
   end
 
   def load_time(params)
-    @date = params[:date][:date]
+    @date = params[:date].try(:[], :date)
     @time = params[:currenttime]
   end
 

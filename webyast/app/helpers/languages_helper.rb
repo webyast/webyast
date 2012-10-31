@@ -21,6 +21,7 @@
 
 module LanguagesHelper
 
+# NOTE: add the respective jquery.ui.datepicker-*.js file when adding a new language here
 SUPPORTED_LANGUAGES = {
   "ar" => "العربية",
   "cs" => "Čeština",
@@ -49,6 +50,14 @@ SUPPORTED_LANGUAGES = {
   # (translated to that langugage)
   def language_name lang
     SUPPORTED_LANGUAGES[lang] || SUPPORTED_LANGUAGES[lang.gsub(/_.*$/, '')] || lang
+  end
+
+  # load datepicker translations when available
+  def date_picker_localization
+    if File.file? File.join(Rails.root, "app", "assets", "javascripts", "jquery.ui.datepicker-#{I18n.locale}.js")
+      Rails.logger.debug "Datepicker translations found: jquery.ui.datepicker-#{I18n.locale}.js"
+      javascript_include_tag "jquery.ui.datepicker-#{I18n.locale}.js"
+    end
   end
 end
 

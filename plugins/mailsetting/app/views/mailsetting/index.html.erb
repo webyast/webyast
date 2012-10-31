@@ -27,7 +27,6 @@
     $(document).ready(function() {
       validateDomainNameWithPortNumber("smtp_server");
       $("#mailForm").validate({
-        onkeyup: function(element) { this.element(element); },
         submitHandler: function(form) {
           var message = <%= jss _("Please wait") -%>;
           //disableFormOnSubmit(message);
@@ -41,9 +40,7 @@
         email: <%= jss _("Enter a valid e-mail address.") -%>,
         smtp_server: <%= jss _("Enter a valid domain name or an IP address.") -%>
       });
-    });
 
-    $(document).ready(function() {
       if ($("#mail_test_mail_address", "#mailForm").val() == "") {
         $("#mail_submit").attr("disabled","disabled");
       }
@@ -52,7 +49,11 @@
         else $("#mail_submit", "#mailForm").removeAttr("disabled");
       });
 
-      $("#mailsetting_smtp_server").tipsy({gravity: 's', delayIn: 500, delayOut: 1000, fade: true});
+      $("#mailsetting_password").keyup(function(){
+        $('#mailForm').valid();
+      });
+
+      $("#mailsetting_confirm_password").validate({keyup : true});
     });
   </script>
 <% end %>
@@ -84,7 +85,7 @@
       <div class="fieldset_body">
         <div class="row">
           <label for="<%= :smtp_server %>"><%=_("Outgoing mail server")%></label>
-          <%=f.text_field :smtp_server, :disabled => disabled, :class => "smtp_server", :title => _("URL of the outgoing mail server. You may also specify an alternate port number, e.g.
+          <%=f.text_field :smtp_server, :disabled => disabled, :class => "smtp_server tipsy_help", :title => _("URL of the outgoing mail server. You may also specify an alternate port number, e.g.
 relay.example.com:26. Use square brackets around the host name to prevent from DNS MX lookups.") %>
         </div>
 
@@ -105,7 +106,7 @@ relay.example.com:26. Use square brackets around the host name to prevent from D
 
         <div class="row lastrow">
           <label><%=_("Confirm password")%></label>
-          <%= f.password_field :confirm_password, :disabled => disabled, :equalTo => "#mail_password", :onkeyup => "$('#mailForm').validate().element('#mail_confirm_password');" %>
+          <%= f.password_field :confirm_password, :disabled => disabled, :equalTo => "#mailsetting_password" %>
         </div>
       </div>
     </fieldset>

@@ -84,7 +84,7 @@ module ApplicationHelper
   # It is similar to form_send_buttons but it uses plain links,
   # the save step is not performed
   def base_setup_links
-    return "" unless basesystem_in_process?
+    return form_back_button unless basesystem_in_process?
 
     bs = Basesystem.new.load_from_session(session)
     ret = link_to bs.last_step? ? _("Finish") : _("Next"), {:controller => "controlpanel", :action => "nextstep"}, :class => "button"

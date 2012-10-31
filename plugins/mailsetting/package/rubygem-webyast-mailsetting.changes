@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Wed Oct 17 11:42:33 UTC 2012 - lslezak@suse.cz
+
+- fixed mail password validation (the passwords never matched)
+  (bnc#784359)
+
+-------------------------------------------------------------------
 Fri Oct 12 12:59:20 UTC 2012 - lslezak@suse.cz
 
 - help: added expected format for outgoing mail server value

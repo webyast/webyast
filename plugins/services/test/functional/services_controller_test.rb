@@ -30,28 +30,6 @@ class ServicesControllerTest < ActionController::TestCase
     ret
   end
 
-
-  def rights_enable(enable = true)
-    if enable
-#      puts "*** FAKE PERMISSIONS FOR EXECUTE ***"
-      ServicesController.any_instance.stubs(:yapi_perm_check).with("services.execute")
-      ServicesController.any_instance.stubs(:yapi_perm_granted?).with("services.execute")
-      
-#      puts "*** FAKE PERMISSIONS FOR READ ***"
-      ServicesController.any_instance.stubs(:yapi_perm_check).with("services.read")
-      ServicesController.any_instance.stubs(:yapi_perm_granted?).with("services.read")
-    else
-#      puts "*** NO PERMISSIONS ***"
-      @excpt =  NoPermissionException.new("org.opensuse.yast.modules.services.execute", "testuser")
-      ServicesController.any_instance.stubs(:yapi_perm_check).with("services.execute").raises(@excpt)
-      ServicesController.any_instance.stubs(:yapi_perm_granted?).with("services.execute").returns(false)
-      
-      ServicesController.any_instance.stubs(:yapi_perm_check).with("services.read").raises(@excpt)
-      ServicesController.any_instance.stubs(:yapi_perm_granted?).with("services.read").returns(false)
-    end
-  end
-  
-  
   def init_data
     Service.stubs(:find).with(:all, {:read_status => 1}).returns(@services)
     Service.any_instance.stubs(:save).with({ :execute => 'stop', :custom => false}).returns({"stdout"=>"", "stderr"=>"", "exit"=>"0"})
@@ -78,7 +56,6 @@ class ServicesControllerTest < ActionController::TestCase
   
   test "access index html" do
     init_data
-    rights_enable
     
     mime = Mime::HTML
     @request.accept = mime.to_s
@@ -92,7 +69,6 @@ class ServicesControllerTest < ActionController::TestCase
   
   test "access index xml" do
     init_data
-    rights_enable
     
     mime = Mime::XML
     @request.accept = mime.to_s
@@ -104,7 +80,6 @@ class ServicesControllerTest < ActionController::TestCase
   
   test "access index json" do
     init_data
-    rights_enable
     
     mime = Mime::JSON
     @request.accept = mime.to_s
@@ -115,7 +90,6 @@ class ServicesControllerTest < ActionController::TestCase
   end  
 
   test "get ntp status" do
-    rights_enable
     service_exist(true)
     
     get :show_status, {:id => 'ntp', :custom => false}
@@ -124,7 +98,6 @@ class ServicesControllerTest < ActionController::TestCase
   end
   
   test "get nonexistent service" do
-    rights_enable
     service_exist(false)
 
     get :show_status, {:id => 'aaa', :custom => false}
@@ -134,7 +107,6 @@ class ServicesControllerTest < ActionController::TestCase
 
   test "test_execute" do
     init_data
-    rights_enable
     
     get :execute, {:id => 'stop', :service_id => "ntp", :custom => false}
     assert_response :success 
