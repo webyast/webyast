@@ -26,7 +26,7 @@
 
   <div class="plugin-header">
     <div class="left">
-      <label class="plugin-icon-container"><%= image_tag("registration.png", :class=>"plugin-icon") %></label>
+      <label class="plugin-icon-container"><%= image_tag("eulas.png", :class=>"plugin-icon") %></label>
       <label class="plugin-name"><%=_("License Agreement")-%> - <%= @eula.name -%></label>
     </div>
     <div class="clearfix"></div>
@@ -45,14 +45,20 @@
       <%=  hidden_field_tag :accepted, "true" %>
     <% else %>
       <div class="fieldset_body eula_fieldset_body">
-        <div class="row">
-          <%=  f.radio_button :accepted, :true, :checked => @eula.accepted, :readonly => disabled, :disabled => disabled %>
-          <%=  _("Yes, I agree to the license agreement.") %>
-        </div>
-        <div class="row">
-          <%=  f.radio_button :accepted, :false, :checked => (! @eula.accepted), :readonly => disabled, :disabled => disabled %>
-          <%=  _("No, I do not agree.") %>
-        </div>
+        <% if @eula.accepted %>
+          <div>
+            <strong><%= _("This license agreement has been already accepted.") %></strong>
+          </div>
+        <% else %>
+          <div class="row">
+            <%=  f.radio_button :accepted, :true, :checked => @eula.accepted, :readonly => disabled, :disabled => disabled %>
+            <%=  _("Yes, I agree to the license agreement.") %>
+          </div>
+          <div class="row">
+            <%=  f.radio_button :accepted, :false, :checked => (! @eula.accepted), :readonly => disabled, :disabled => disabled %>
+            <%=  _("No, I do not agree.") %>
+          </div>
+        <% end %>
       <% end -%>
       <% unless @eula.text_lang == 'en' then %>
       <%= f.hidden_field :text_lang %>
@@ -64,11 +70,20 @@
   <div class="button_container">
     <div class="hr">&nbsp;</div>
     <div class="nav-buttons">
-      <%= form_next_button :disabled => disabled %>
+      <% if @eula.accepted  %>
+        <% unless @last_eula %>
+          <%= link_to _("Next"), :action => :show, :id => @eula_id + 1 %>
+          <%= form_str_spacer %>
+        <% end %>
+      <% else %>
+        <%= form_next_button :disabled => disabled%>
+          <%= form_str_spacer %>
+      <% end %>
+
       <%= if @first_eula
-        @first_basesystem_step ? "" : (form_str_spacer + form_back_button )
+        @first_basesystem_step ? "" : form_back_button
       else
-        form_str_spacer + (link_to _("Back"), :action => :show, :id => @prev_id)
+        link_to _("Back"), :action => :show, :id => @prev_id
       end %>
     </div>
   </div>

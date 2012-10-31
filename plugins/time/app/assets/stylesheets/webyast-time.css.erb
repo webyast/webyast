@@ -1,0 +1,44 @@
+/*#--
+ # Webyast framework
+ #
+ # Copyright (C) 2009, 2010 Novell, Inc.
+ #   This library is free software; you can redistribute it and/or modify
+ # it only under the terms of version 2.1 of the GNU Lesser General Public
+ # License as published by the Free Software Foundation.
+ #
+ #   This library is distributed in the hope that it will be useful, but WITHOUT
+ # ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
+ # FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public License for more
+ # details.
+ #
+ #   You should have received a copy of the GNU Lesser General Public
+ # License along with this library; if not, write to the Free Software
+ # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA
+ #++ */
+
+.time_subsection { margin: 10px 0 15px 25px; }
+
+label.error {
+  float: none;
+  display: inline;
+  font-weight: bold;
+  color: #990000;
+  padding-left: .5em;
+  vertical-align: middle;
+}
+
+label.valid {
+  background: url(<%= asset_path 'checked.gif'%>) no-repeat;
+  padding-left: 18px;
+  vertical-align: middle;
+}
+
+.check_row input[type=checkbox] {
+  vertical-align: middle;
+}
+
+/* needs to be too much specific to override the default from base :-( */
+.fieldset_body div.check_row label {
+  width: auto;
+}
+

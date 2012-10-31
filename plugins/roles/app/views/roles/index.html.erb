@@ -186,7 +186,7 @@
       	onkeyup: function(element) { this.element(element); },
       	rules:{ role_name: { required:true, role_name: true } },
       	messages: {
-      	  role_name: { required: <%= jss _("This field is required") -%>, role_name: <%= jss _("Allowed is combination of a-z, A-Z, numbers, space, dash and underscore only.") -%> }
+          role_name: { required: <%= jss _("This field is required") -%>, role_name: <%= jss _("Allowed is combination of a-z, A-Z, numbers, dots, space, dash and underscore only.") -%> }
       	}
       });
 

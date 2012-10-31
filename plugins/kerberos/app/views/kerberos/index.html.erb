@@ -23,6 +23,7 @@
   
   <%= render :partial => "shared/notification", :locals => { :module_name => 'kerberos' } %>
 
+  <%# FIME: move the scripts to a separate JS file %>
   <script type="text/javascript">
     $(document).ready(function() {
       validateDomainName("kdc");
@@ -34,27 +35,36 @@
       });
     });
 
-    $(document).ready(function() {
-      if ($("#kerberos_enabled:checked").length == 0) {
-        $("#kerberos_default_domain").attr("disabled","disabled");
-        $("#kerberos_default_realm").attr("disabled","disabled");
-        $("#kerberos_kdc").attr("disabled","disabled");
-      };
+    function update_fields() {
+      if ($("#kerberos_enabled").is(":checked")) {
+        $("#kerberos_use_dns").removeAttr("disabled");
 
-      $("#kerberos_enabled").click(function () {
-        if ($("#kerberos_enabled:checked").length == 0) {
+        if ($("#kerberos_use_dns").is(":checked")) {
           $("#kerberos_default_domain").attr("disabled","disabled");
           $("#kerberos_default_realm").attr("disabled","disabled");
           $("#kerberos_kdc").attr("disabled","disabled");
         }
         else {
-          $("#kerberos_default_domain", "#kerberosForm").removeAttr("disabled");
-          $("#kerberos_default_realm", "#kerberosForm").removeAttr("disabled");
-          $("#kerberos_kdc", "#kerberosForm").removeAttr("disabled");
+          $("#kerberos_default_domain").removeAttr("disabled");
+          $("#kerberos_default_realm").removeAttr("disabled");
+          $("#kerberos_kdc").removeAttr("disabled");
         }
-      });
-    
-    $('#kerberosForm input[type="submit"]').click(function() {
+      }
+      else {
+        $("#kerberos_default_domain").attr("disabled","disabled");
+        $("#kerberos_default_realm").attr("disabled","disabled");
+        $("#kerberos_kdc").attr("disabled","disabled");
+        $("#kerberos_use_dns").attr("disabled","disabled");
+      }
+    }
+
+    $(document).ready(function() {
+      update_fields();
+
+      $("#kerberos_enabled").click(update_fields);
+      $("#kerberos_use_dns").click(update_fields);
+
+      $('#kerberosForm input[type="submit"]').click(function() {
         if ($('#kerberosForm').valid()) {
         disable_forms();
           var message = <%= jss _("Please wait") -%>;
@@ -92,6 +102,12 @@
       </div>
 
       <div class="fieldset_body">
+        <div class="row">
+          <%# FIME: move the style to a separate CSS file %>
+          <%= check_box 'kerberos', :use_dns, {:disabled => disabled, :checked => @kerberos.dns_used, :style => "width: auto; vertical-align: middle;"}, true, false %>
+          <%= label_tag :kerberos_use_dns, _("Use Kerberos configuration from DNS server"), :style => "width: auto; vertical-align: middle;", :title => _("If checked the Kerberos configuration will be read from DNS server at runtime instead of using the preconfigured values below."), :class => "tipsy_help" %>
+        </div>
+
         <div class="row">
           <%= label_tag :kerberos_default_domain, _("Default Domain") %>
           <%= text_field :kerberos, :default_domain, :disabled => disabled, :class => "required" %>

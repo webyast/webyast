@@ -72,6 +72,10 @@ a {
       font-weight: bold;
     }
 
+    a.no-underscore {
+      border-bottom: none;
+    }
+
 /* CSS Hack for FF */
 html a.button:only-of-type {
   padding: 3px 10px; }
@@ -82,11 +86,6 @@ select {
   select:focus {
     border: 1px solid #1e90ff; }
 
-/* select for available Updates in software module with image before text */
-/* TODO find the solution for IE and Chrome, the images are not rendered before text */
-#selector {
-  padding: 0px; }
-
 img {
   border: none; }
 
@@ -95,9 +94,8 @@ ul li {
 
 /* == Basic Structure ===================================================== */
 #header {
-  width: 100%;
   background-color: #c5c5c5;
-  height: 50px;
+  min-height: 50px;
   vertical-align: middle;
   text-align: center;
   position: relative; }
@@ -108,13 +106,14 @@ ul li {
     margin: 0;
     padding-top: 13px; }
   #header img {
-    margin: 2px 1em 0;
-    position: absolute;
-    top: 2px;
-    left: 0; }
+    margin: 4px 0.5em 0;}
   #header ul.header-links {
     float: right;
     vertical-align: bottom; }
+
+#webyast_logo {
+  float: left
+}
 
 #timeoutMessage {
   display: none;
@@ -186,20 +185,6 @@ html, body {
   text-align: center;
 }
 
-#login-wrapper {
-  position: absolute;
-  top: 0;
-  right: 0; }
-  #login-wrapper ul {
-    list-style: none outside;
-    margin: 0;
-    font-size: 0.7em; }
-  #login-wrapper li {
-    float: left;
-    margin: 0 0.5em; }
-  #login-wrapper ul em {
-    font-weight: bold; }
-
 /* == Basic Styles ======================================================== */
 #login-dialogue {
   width: 24em;
@@ -213,23 +198,6 @@ html, body {
   -webkit-border-radius: 3px;
   -webkit-box-shadow: 0px 0px 2px #cccccc inset;
   background-color: #fafafa; }
-
-#login_image_wrapper {
-  float: left;
-  width: 32%;
-  height: 140px;
-  line-height: 120px;
-  overflow: hidden; }
-
-#login_credentials_wrapper {
-  float: right;
-  width: 100%;
-  height: 140px;
-  overflow: hidden; }
-
-#login_button {
-  float: right;
-  width: 100%; }
 
 #login-dialogue form {
   display: block;
@@ -261,11 +229,6 @@ html, body {
   margin: 0 0 0.2em;
   text-align: left; }
 
-#content_title_details {
-  color: #777777;
-  font-size: 11px;
-  text-shadow: 0px 1px 0px #fefefe; }
-
 #status_patches, #status_status {
   margin: 0;
   padding: 12px 0px 0px 10px;
@@ -273,16 +236,6 @@ html, body {
   #status_patches label, #status_status label {
     margin-left: 5px;
     vertical-align: top; }
-
-#machine-controle {
-  width: 25%;
-  float: right;
-  height: 100%;
-  display: inline-block; }
-  #machine-controle a {
-    text-align: center;
-    margin: 10px 10px 0;
-    display: block; }
 
 .plugin-content {
   background-color: white;
@@ -418,11 +371,10 @@ fieldset fieldset {
   vertical-align: text-top; }
 
 .bug-icon {
-  display: block;
-  width: 23px;
-  height: 23px;
+  padding-left: 26px;
+  padding-top: 2px;
   background: transparent url(/assets/images/bug.png) no-repeat scroll 0 0;
-  float: left; }
+}
 
 .status-icon + span {
   /*  margin-left: 1em; */
@@ -480,17 +432,6 @@ tr.odd {
 tr.even {
   background-color: #bee9ff; }
 
-.clipboard {
-  display: block;
-  width: 14px;
-  height: 14px;
-  background: transparent url(assets/clipboard/button_up.png) no-repeat scroll 0 0;
-  float: left; }
-  .clipboard:hover {
-    background: transparent url(assets/clipboard/button_over.png) no-repeat scroll 0 0; }
-  .clipboard:active {
-    background: transparent url(assets/clipboard/button_down.png) no-repeat scroll 0 0; }
-
 .busy {
   background: transparent url(assets/working.gif) no-repeat scroll 0 0; }
 
@@ -512,27 +453,11 @@ tr.even {
 
 .flash-message {
   margin-top: 20px;
+  border-radius: 4px;
   padding: 12px; }
   .flash-message span {
     float: left;
     margin-right: 0.3em; }
-
-/* style for progress bars */
-.progress_bar {
-  float: left;
-  padding-left: 1em;
-  padding-top: 8px; }
-
-.progress_bar_percent {
-  float: left;
-  text-align: center; }
-
-.progress_bar_frame {
-  border-style: solid;
-  border-width: 1px; }
-
-.progress_bar_progress {
-  background: #7ad3ff; }
 
 /* List accordion styles */
 .list-fieldset {
@@ -563,9 +488,8 @@ p.missing-permissions {
   background-color:#fcfdde;
   border-top: solid 2px red;
   border-bottom: solid 2px red;
-  width:100%;
   text-align:center;
-  padding: 15px 0;
+  padding: 15px;
   font-size: 1.2em;
   font-weight: bold;
 }
@@ -638,4 +562,11 @@ p.missing-permissions {
   height: 0;
   clear: both;
   visibility: hidden;
+}
+
+.help_icon:after {
+  content: "";
+  background: url(/assets/question-mark.png) no-repeat scroll 0 center;
+  padding-left: 12px;
+  margin-left: 5px;
 }

@@ -63,32 +63,39 @@ class LdapController < ApplicationController
 
   def update
     authorize! :write, Ldap
-    Rails.logger.error "REQUEST #{request.inspect}"
-    if request.format.html?
-      begin
+
+    begin
+      @ldap = Ldap.find
+
+      if params[:ldap].present?
+        @ldap.load params[:ldap]
         #translate from text to boolean
-        params[:ldap][:tls] = params[:ldap][:tls] == "true"
-        params[:ldap][:enabled] = params[:ldap][:enabled] == "true"
-        @ldap = Ldap.new(params[:ldap]).save
-        flash[:message] = _("LDAP client configuraton successfully written.")
-      rescue Exception => error  
-        flash[:error] = _("Error while saving LDAP client configuration.") 
-        Rails.logger.error "ERROR: #{error.inspect}"
-        render :index and return
+        @ldap.tls = params[:ldap][:tls] == "true"
+        @ldap.enabled = params[:ldap][:enabled] == "true"
+      else
+        @ldap.enabled = false
       end
-      redirect_success
-    else
-      yapi_perm_check "ldap.write"
-      args = params["ldap"]
-      ldap = Ldap.find
-      ldap.load args unless args.nil?
-      ldap.save
+
+      @ldap.save
+      flash[:message] = _("LDAP client configuraton successfully written.") if request.format.html?
+    rescue Exception => error
+      flash[:error] = _("Error while saving LDAP client configuration.") if request.format.html?
+      Rails.logger.error "ERROR: #{error.inspect}"
 
       respond_to do |format|
-        format.xml  { render :xml => ldap.to_xml}
-        format.json { render :json => ldap.to_json}
+        format.html {redirect_to :action => :index}
+        format.xml  {render :xml => @ldap.to_xml, :status => 500}
+        format.json {render :json => @ldap.to_json, :status => 500}
       end
-    end 
+
+      return
+    end
+
+    respond_to do |format|
+      format.html {redirect_to root_path}
+      format.xml  {render :xml => @ldap.to_xml}
+      format.json {render :json => @ldap.to_json}
+    end
   end
   
   # GET action

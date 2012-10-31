@@ -55,6 +55,14 @@ public
     authorize! :read, Time
 
     @ntp = @ntp_available ? Ntp.find : nil
+    Rails.logger.debug "NTP: #{@ntp.inspect}"
+
+    if @ntp_available
+      `pgrep -f /usr/sbin/ntpd`
+      @ntpd_running = $?.exitstatus == 0
+      Rails.logger.info "ntpd is running: #{@ntpd_running}"
+    end
+
     @stime = Systemtime.find
     @stime.load_timezone params if params[:timezone] #do not reset timezone if ntp fail (bnc#600370)
 

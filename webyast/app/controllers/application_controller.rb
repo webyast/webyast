@@ -19,6 +19,7 @@
 require 'exceptions'
 require 'dbus'
 require 'haml_gettext' # translate haml file on the fly
+require 'syslog'
 
 class ApplicationController < ActionController::Base
   include FastGettext::Translation
@@ -191,8 +192,22 @@ private
   end
 
   def after_sign_in_path_for(resource_or_scope)
+    msg = "User \"#{current_account.username}\" logged in, remote IP: #{request.remote_ip}"
+    Rails.logger.info msg
+    # flags: log PID, log to console if syslog fails, it's a security message
+    Syslog.open("WebYaST", Syslog::LOG_PID | Syslog::LOG_CONS | Syslog::LOG_AUTH) { |s| s.info msg }
+
     Rails.logger.info "Reading all permissions for #{current_account.username} again"
     Permission.reset(current_account.username)
+    super
+  end
+
+  def after_sign_out_path_for(resource_or_scope)
+    unless current_account.nil?
+      msg = "User \"#{current_account.username}\" logged out, remote IP: #{request.remote_ip}"
+      Rails.logger.info msg
+      Syslog.open("WebYaST", Syslog::LOG_PID | Syslog::LOG_CONS | Syslog::LOG_AUTH) { |s| s.info msg }
+    end
     super
   end
 

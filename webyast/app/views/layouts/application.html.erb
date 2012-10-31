@@ -62,28 +62,30 @@
 </head>
   <body id="shell">
     <div class="wrapper">
-    <div id='browserWarning' class="big-warning unsupported-browser-warning">
-      <%= raw ( _("You are using an unsupported browser. Please switch to at least %sFireFox 10%s or %sInternet Explorer 9%s. Thanks! [%sclose%s]") %
-            ["<a href='http://getfirefox.com'>","</a>",
-             "<a href='http://www.microsoft.com/windows/downloads/ie/getitnow.mspx'>", "</a>",
-             "<a href='#' id='warningClose'>", "</a>"] ) %>
+    <div id='browserWarning' class="big-warning unsupported-browser-warning clearfix">
+      <%= raw ( _("You are using an unsupported browser. Please switch to at least %s or %s. Thank you!") %
+            ["<a href='http://getfirefox.com' class='external'>FireFox 10</a>",
+             "<a href='http://www.microsoft.com/windows/downloads/ie/getitnow.mspx' class='external'>Internet Explorer 9</a>" ] ) %>
+      <div style="float:right">
+        <a href='#' id='warningClose' class="no-underscore"><%= image_tag 'close.png', :title => _("Hide this warning") %></a>
+      </div>
     </div>
     <noscript>
       <div id="no_js_warning" class="big-warning">
-        <%= raw ( _("JavaScript support is missing or disabled. Please turn JavaScript on or use a supported browser (at least %sFireFox 10%s or %sInternet Explorer 9%s).") %
-            ["<a href='http://getfirefox.com'>","</a>",
-             "<a href='http://www.microsoft.com/windows/downloads/ie/getitnow.mspx'>", "</a>"] ) %>
+        <%= raw ( _("JavaScript support is missing or disabled. Please turn JavaScript on or use a supported browser (at least %s or %s).") %
+            ["<a href='http://getfirefox.com' class='external'>FireFox 10</a>",
+             "<a href='http://www.microsoft.com/windows/downloads/ie/getitnow.mspx' class='external'>Internet Explorer 9</a>"] ) %>
       </div>
     </noscript>
 
-    <div id="header">
+    <div id="header" class="clearfix">
       <% appliance_label = ControlPanelConfig.read 'appliance_label', _("My Appliance") %>
       <% appliance_label = appliance_label.strip %>
       <% if appliance_label =~ /^_\(\"/ && appliance_label =~ /\"\)$/ %>
         <% appliance_label = _(appliance_label[3..appliance_label.length-3]) %>
       <% end %>
 
-      <%= link_to(image_tag("webyast-logo.png", :width=>"130", :height=>"42", :alt =>"webyast"),"/" )%>
+      <%= link_to(image_tag("webyast-logo.png", :width=>"130", :height=>"42", :alt =>"webyast", :id => 'webyast_logo'),"/" )%>
 
       <% if !account_signed_in? %>
         <span id="userbar">

@@ -169,7 +169,7 @@ a.btn.rbtn { border-bottom-left-radius: 0; border-top-left-radius: 0; }
   border:5px solid #666;
   border-width: 5px 0;
 }
-#header h1 { color:#333; text-shadow: 0px 1px 0px #e5e5e5; position:absolute; width:50%; right:25%; left:25%; }
+#header h1 { color:#333; text-shadow: 0px 1px 0px #e5e5e5; }
 
 label.description {
   display: inline;
