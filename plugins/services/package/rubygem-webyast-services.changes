@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Thu Nov  1 09:18:43 UTC 2012 - lslezak@suse.cz
+
+- testsuite cleanup
+- 0.3.6
+
+-------------------------------------------------------------------
 Thu Oct  4 07:45:44 UTC 2012 - lslezak@suse.cz
 
 - removed DelayedJob dependency
