@@ -1,4 +1,17 @@
 -------------------------------------------------------------------
+Thu Nov  1 09:00:02 UTC 2012 - lslezak@suse.cz
+
+- 0.3.7
+
+-------------------------------------------------------------------
+Mon Oct 29 09:16:28 UTC 2012 - lslezak@suse.cz
+
+- display the module in the control panel (after clicking "All"
+  link) (bnc#604628)
+- do not ask to confirm already accepted licenses
+- renamed icon (to not conflict with registration module)
+
+-------------------------------------------------------------------
 Mon Oct 15 15:40:45 UTC 2012 - lslezak@suse.cz
 
 - fixed license text formatting (bnc#783720)

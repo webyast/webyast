@@ -18,98 +18,6 @@
 
 
 module ViewHelpers::HtmlHelper
-
-  def html_edit_link(id, action = :edit)
-    return link_to image_tag("edit-icon.png", :alt => :edit), {:action => action, :id => id}, :onclick=>"$('#progress').show()"
-  end
-
-  # added additional argument to replace message string (see bnc#581153)
-    def html_delete_link(id, action = :delete, text = _('Are you sure?'))
-      return link_to image_tag("delete.png", :alt => :delete), {:action => action, :id => id},
-        :confirm => text, :method => :delete
-    end
-
-    def html_create_table_content(items, properties, permissions = {}, proc_obj = nil)
-      ret = ''
-      columns = properties.size
-
-      items.each do |item|
-        line = ''
-        columns.times { |col|
-          property = properties[col]
-
-          if !property.nil? && item.respond_to?(property)
-           cell = item.send(property)
-          else
-            if proc_obj.nil?
-              cell = "ERROR: unknown method #{property}"
-            else
-              cell = proc_obj.call(item, col)
-            end
-          end
-
-          line += "<td>#{h(cell)}</td>"
-        }
-
-        if permissions[:edit]
-          line += "<td align=\"center\">#{html_edit_link(item.send(permissions[:id]))}</td>"
-        end
-
-        if permissions[:delete]
-          line += "<td align=\"center\">#{html_delete_link(item.send(permissions[:id]))}</td>"
-        end
-
-        ret += "<tr>#{line}</tr>"
-    end
-
-    return ret
-  end
-
-    ##
-    # Create a simple HTML table
-    #
-    # Parameters:
-    # * labels - an array of strings - table headings
-    # * items - an array of objects - table content
-    # * properties - an array of strings - name of the method which will be called for the respective column.
-    #   The result will be displayed in the table.
-    # * permissions - a hash with permissions - used to display/hide Add, Edit, and Delete buttons.
-    #   The argument is optional, if missing no button will be displayed. Expected keys are :add, :edit, :delete.
-    #   If a key is missing or the value is false the relevant button is hidden.
-    # * optional block with two arguments: object and column number - this block is used
-    #   for computing table values for columns with property method set to nil. See the example.
-    #   Use the column block parameter to distinguish the columns if there are several columns with nil property.
-    #
-    # Examples:
-    #
-    # <tt>simple_table([_("First Name"), _("Surname")], @users, [:first_name, :surname], {:add => true, :edit => true, :delete => true, :id => :name})</tt>
-    #
-    # <tt>simple_table([_("Avg. Download Speed")], files, [nil]){|file, column| "#{file.size/file.download_time/1024} kB/s"}</tt>
-    #
-    def html_simple_table(labels, items, properties, permissions = {}, &block)
-	header = ''
-
-	labels.each { |l|
-	    header += "<th class=\"first\">#{h(l)}</th>"
-	}
-
-	if permissions[:edit]
-	    header += "<th class=\"first\" width=10%>#{h(label_edit)}</th>"
-	end
-
-	if permissions[:delete]
-	    header += "<th class=\"first\" width=10%>#{h(label_delete)}</th>"
-	end
-
-	content = html_create_table_content(items, properties, permissions, block)
-
-	ret = "<table class=\"list\"><tr>#{header}</tr>#{content}</table>"
-
-	ret += "<br/>" + button_to(label_add, {:action => "new"}) if permissions[:add]
-
-	return ret
-    end
-
   # report an exception to the flash messages zone
   # a flash error message will be appended to the
   # element with id "flashes" with standard jquery
@@ -130,11 +38,12 @@ module ViewHelpers::HtmlHelper
     message ||= _("There was a problem retrieving information from the server.")
 
     # build the html
+    # FIXME: put this into a partial (easier editing than a heredoc)
     html =<<-EOF2
       <div id="error-#{error_id}-content">
         <div>
           <p><strong>Error message:</strong>#{err_message}</p>
-          <p><span class="bug-icon"></span><a target="_blank" href="#{"FIXME ::ApplicationController.bug_url"}">Report bug</a></p>
+          <p class="bug-icon"><a target="_blank" href="#{"FIXME ::ApplicationController.bug_url"}">Report bug</a></p>
           <p>
             <a href="#" id="error-#{error_id}-show-backtrace-link">Show details</a>
           </p>
@@ -186,21 +95,6 @@ module ViewHelpers::HtmlHelper
      </script>
 EOF2
   html.html_safe
-  end
-
-  def progress_bar(percent, width = '150px', height = '1.4em')
-    # display only 0-100% range
-    percent = 100 if percent > 100
-    percent = 0 if percent < 0
-
-    html = <<-EOF_PROGRESS
-    <div class="progress_bar">
-      <div class="progress_bar_percent" style="width: #{width}; line-height: #{height}">#{percent.to_i}%</div>
-      <div class="progress_bar_frame" style="width: #{width}; height: #{height};">
-        <div class="progress_bar_progress" style="width: #{percent.to_i}%; height: #{height};"/>
-      </div>
-    </div>
-EOF_PROGRESS
   end
 
   # Encode an input string to a string which can be safely used as

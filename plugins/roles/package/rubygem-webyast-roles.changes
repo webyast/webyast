@@ -1,4 +1,15 @@
 -------------------------------------------------------------------
+Thu Nov  1 09:16:53 UTC 2012 - lslezak@suse.cz
+
+- 0.3.7
+
+-------------------------------------------------------------------
+Fri Oct 26 11:58:50 UTC 2012 - lslezak@suse.cz
+
+- fixed validation message - dot (.) is allowed in a role name
+  (bnc#782513)
+
+-------------------------------------------------------------------
 Thu Oct  4 07:45:44 UTC 2012 - lslezak@suse.cz
 
 - removed DelayedJob dependency

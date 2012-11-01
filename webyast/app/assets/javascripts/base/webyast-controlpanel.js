@@ -118,7 +118,10 @@ if(currentURL.pop.length == 0) {
 
   //Track frequenly used modules
   $(document).ready(function() {
-  
+
+    // hide control panel items which should be visible only after clicking "All"
+    $('.main_hidden').hide();
+
     //localStorage.clear()
     if(localstorage_supported() && 'last_reset' in localStorage) {    
       // console.log("Sorted by usage")

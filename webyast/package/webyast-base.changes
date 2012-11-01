@@ -1,4 +1,44 @@
 -------------------------------------------------------------------
+Thu Nov  1 06:35:07 UTC 2012 - lslezak@suse.cz
+
+- 0.3.28
+
+-------------------------------------------------------------------
+Mon Oct 29 13:47:08 UTC 2012 - lslezak@suse.cz
+
+- added datepicker translations (bnc#603641)
+
+-------------------------------------------------------------------
+Mon Oct 29 09:13:12 UTC 2012 - lslezak@suse.cz
+
+- added support for "main_hidden" option in shortcuts.yml files
+  to allow hiding control panel items by default (bnc#604628)
+
+-------------------------------------------------------------------
+Fri Oct 26 13:45:30 UTC 2012 - lslezak@suse.cz
+
+- page header - fixed layout problem when there is small space
+  (bnc#783892)
+
+-------------------------------------------------------------------
+Wed Oct 24 10:56:00 UTC 2012 - lslezak@suse.cz
+
+- display log file path when an error occurs (bnc#784017)
+
+-------------------------------------------------------------------
+Wed Oct 17 12:39:16 UTC 2012 - lslezak@suse.cz
+
+- display [Back] link in the network module (fixed base_setup_links
+  helper) (bnc#783556)
+- use syslog for logging security critical actions (user login and
+  logout) (bnc#782808)
+
+-------------------------------------------------------------------
+Wed Oct 17 08:55:41 UTC 2012 - lslezak@suse.cz
+
+- do not log registration code to the webyast log (bnc#784486)
+
+-------------------------------------------------------------------
 Fri Oct 12 15:36:01 UTC 2012 - lslezak@suse.cz
 
 - 0.3.27

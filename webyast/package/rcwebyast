@@ -177,9 +177,10 @@ umask 0066
 
 case "$1" in
     start)
+    echo -n "Starting WebYaST "
     if [ ! -e  $COMBINEDCERTFILE ]
     then
-        echo "No certificate found, creating one now..."
+        echo "\nNo WebYaST certificate found, creating one now..."
         LOG_FILE="/var/log/webyast/check-create-certificate.log"
         if ! /usr/sbin/check-create-certificate -c -C $CERTIFICATEFILE -K $CERTKEYFILE -B $COMBINEDCERTFILE -D webyast -O WebYaST -U WebYaST > $LOG_FILE 2>&1
         then
@@ -189,11 +190,9 @@ case "$1" in
             rc_exit
         fi
         chown nginx:nginx $CERTIFICATEFILE $CERTKEYFILE $COMBINEDCERTFILE
-	echo -n "Created certificate: "
+	echo -n "WebYaST certificate: "
 	openssl x509 -in $CERTIFICATEFILE -fingerprint -noout
     fi
-
-       echo -n "Starting webyast "
         # refresh the Gemfile.lock content before starting the server
         # (outdated file can cause problems after upgrading needed rubygems)
 	rm -f $GEMFILE_LOCK

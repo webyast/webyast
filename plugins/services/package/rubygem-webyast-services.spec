@@ -17,7 +17,7 @@
 
 
 Name:           rubygem-webyast-services
-Version:        0.3.4
+Version:        0.3.6
 Release:        0
 %define mod_name webyast-services
 %define mod_full_name %{mod_name}-%{version}

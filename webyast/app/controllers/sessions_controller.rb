@@ -24,6 +24,14 @@ class SessionsController < Devise::SessionsController
   end
 
   def create
+    if current_account.nil?
+      msg = "Authentication failed"
+      msg << ", user: \"#{params[:account][:username]}\"" if params[:account].try(:[], :username)
+      msg << ", remote IP: #{request.remote_ip}"
+      Rails.logger.info msg
+      Syslog.open("WebYaST", Syslog::LOG_PID | Syslog::LOG_CONS | Syslog::LOG_AUTH) { |s| s.info msg }
+    end
+
     if (params[:remember_me] == "true" || params[:login].try(:[], :remember_me)) && current_account.present? && current_account.authentication_token.blank?
       Rails.logger.info "Creating authentication token for user #{current_account.username}"
       current_account.reset_authentication_token!

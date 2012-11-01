@@ -190,16 +190,10 @@ class StatusController < ApplicationController
           end
         }
       rescue Exception => error
-        logger.warn error.inspect
+        Rails.logger.error "Error raised while checking plugin status: #{error.inspect}"
         level = "error"
         refresh = false
-        error_hash = Hash.from_xml error.response.body
-        if error_hash["error"] && error_hash["error"]["type"] == "NO_PERM"
-          status = _("Status not available (no permissions)")
-          level = "warning"  #it is a warning only
-        else
-          status = error_hash["error"]["description"]
-        end
+        status = _("Cannot read the plugins status.")
         ret_error = error
       end
     end

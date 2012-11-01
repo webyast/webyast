@@ -171,7 +171,7 @@
               <% if data['main'] %>
                 <li id="module<%= index %>" data-id="id-<%= index%>" data-type="<%= data['groups'] %>" class="main">
               <% else %>
-                <li id="module<%= index %>" data-id="id-<%= index%>" data-type="<%= data['groups'] %>" class="<%= data['groups'] %>">
+                <li id="module<%= index %>" data-id="id-<%= index%>" data-type="<%= data['groups'] %>" class="<%= data['groups'] -%> <%= (data['main_hidden'] == true) ? "main_hidden" : "" -%> ">
               <% end %>
                 <%= link_to(data['url'], html_map) do %>
                   <%= image_tag(data['icon'] ) %>

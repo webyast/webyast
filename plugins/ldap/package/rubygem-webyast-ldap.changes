@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Thu Nov  1 09:12:15 UTC 2012 - lslezak@suse.cz
+
+- fixed writing LDAP configuration (bnc#784356)
+- 0.3.7
+
+-------------------------------------------------------------------
 Thu Oct  4 07:45:44 UTC 2012 - lslezak@suse.cz
 
 - removed DelayedJob dependency
