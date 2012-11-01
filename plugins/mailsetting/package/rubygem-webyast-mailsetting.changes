@@ -1,4 +1,9 @@
 -------------------------------------------------------------------
+Thu Nov  1 09:14:44 UTC 2012 - lslezak@suse.cz
+
+- 0.3.7
+
+-------------------------------------------------------------------
 Wed Oct 17 11:42:33 UTC 2012 - lslezak@suse.cz
 
 - fixed mail password validation (the passwords never matched)
