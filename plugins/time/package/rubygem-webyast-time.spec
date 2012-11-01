@@ -17,7 +17,7 @@
 
 
 Name:           rubygem-webyast-time
-Version:        0.3.6
+Version:        0.3.7
 Release:        0
 %define mod_name webyast-time
 %define mod_full_name %{mod_name}-%{version}

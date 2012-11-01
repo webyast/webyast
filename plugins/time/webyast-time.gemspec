@@ -2,7 +2,7 @@
 
 Gem::Specification.new do |s|
   s.name = "webyast-time"
-  s.version = "0.3.6"
+  s.version = "0.3.7"
   s.authors = ["WebYaST team"]
   s.summary = "Webyast module for configuring time settings"
   s.email = "yast-devel@opensuse.org"

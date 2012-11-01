@@ -1,4 +1,9 @@
 -------------------------------------------------------------------
+Thu Nov  1 09:25:09 UTC 2012 - lslezak@suse.cz
+
+- 0.3.7
+
+-------------------------------------------------------------------
 Thu Oct 25 07:33:02 UTC 2012 - lslezak@suse.cz
 
 - properly display the current config (manual vs NTP) (bnc#782509)
