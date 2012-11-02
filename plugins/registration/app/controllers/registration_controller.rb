@@ -313,17 +313,26 @@ public
     @register.arguments = {}
 
     # parse and set registration arguments
-    if params[:registration] && params[:registration].has_key?(:arguments) && params[:registration][:arguments].is_a?(Hash)
-      @register.arguments = params[:registration][:arguments]
-      Rails.logger.debug "Registration arguments: #{@register.arguments.inspect}"
-    else
-      Rails.logger.warn "Registration attempt without any registration data."
+    if ( params && params.has_key?(:registration) &&
+         params[:registration] && params[:registration].has_key?(:arguments) )
+    then
+      args = params[:registration][:arguments]
+      case args
+      when Array
+        args.each do |item|
+          @register.arguments[item['name'].to_s] = item['value'].to_s if item.has_key?(:name) && item.has_key?(:value)
+        end
+      when Hash, HashWithIndifferentAccess
+        @register.arguments[args['name'].to_s] = args['value'].to_s if args.has_key?(:name) && args.has_key?(:value)
+      else
+        Rails.logger.info "Registration attempt without any valid registration data."
+      end
     end
 
     #overwriting default options
     if params[:registration] && params[:registration].has_key?(:options) && params[:registration][:options].is_a?(Hash)
       @register.context.merge! params[:registration][:options]
-      Rails.logger.debug "Registration context: #{@register.context.inspect}"
+      Rails.logger.info "Registration context: #{@register.context.inspect}"
     end
 
     status = @register.register.zero? ? :ok : :bad_request
