@@ -538,7 +538,7 @@ public
 
       respond_to do |format|
         format.xml {render  :xml => register.to_xml( :dasherize => false )}
-        format.html {}
+        format.html {render :action => :index}
         format.json {render :json => register.to_json}
       end
     end
