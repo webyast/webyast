@@ -329,6 +329,8 @@ public
       end
     end
 
+    Rails.logger.debug "Registration arguments: #{@register.arguments.inspect}"
+
     #overwriting default options
     if params[:registration] && params[:registration].has_key?(:options) && params[:registration][:options].is_a?(Hash)
       @register.context.merge! params[:registration][:options]
