@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Fri Nov  2 16:58:52 UTC 2012 - lslezak@suse.cz
+
+- support also controlpanel/index XML and JSON requests
+  (bnc#787283)
+
+-------------------------------------------------------------------
 Thu Nov  1 06:35:07 UTC 2012 - lslezak@suse.cz
 
 - 0.3.28
