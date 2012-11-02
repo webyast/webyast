@@ -3,7 +3,7 @@ Fri Nov  2 10:18:06 UTC 2012 - lslezak@suse.cz
 
 - CSS and JS cleanup
 - support for passing extra options (mirror credentials, no proxy)
-  via REWST API (fate#311970)
+  via REST API (fate#311970)
 - 0.3.10
 
 -------------------------------------------------------------------
