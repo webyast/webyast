@@ -263,6 +263,7 @@ public
   end
 
   def status_to_xml( options = {} )
+    read_status
     xml = options[:builder] ||= Builder::XmlMarkup.new(options)
     xml.instruct! unless options[:skip_instruct]
     xml.registration do
@@ -272,6 +273,7 @@ public
   end
 
   def config_to_xml( options = {} )
+    read_status
     xml = options[:builder] ||= Builder::XmlMarkup.new(options)
     xml.instruct! unless options[:skip_instruct]
 
@@ -289,6 +291,7 @@ public
   end
 
   def to_xml( options = {} )
+    read_status
     xml = options[:builder] ||= Builder::XmlMarkup.new(options)
     xml.instruct! unless options[:skip_instruct]
 

@@ -328,11 +328,6 @@ public
 
     status = @register.register.zero? ? :ok : :bad_request
 
-    # update the GUID
-    if @register.register.zero?
-      @register.guid = Register.new.guid
-    end
-
     respond_to do |format|
       format.xml { render  :xml => @register.to_xml(:dasherize => false), :status => status }
       format.json { render :json => @register.to_json, :status => status }
@@ -407,10 +402,22 @@ public
 
     # get new registration object
     register = Register.new
+    register.arguments = {}
 
     arguments = params[:registration][:arguments] rescue {}
     Rails.logger.debug "Registration arguments: #{arguments.inspect}"
     register.arguments = arguments
+
+    begin
+      params.each do | key, value |
+        if key.starts_with? "registration_arg_"
+          register.arguments[key[17, key.size-17]] = value
+        end
+      end
+    rescue
+      logger.debug "No arguments were passed to the registration call."
+    end
+
 
     success = false
     begin
