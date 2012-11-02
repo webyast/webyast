@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Fri Nov  2 21:12:28 UTC 2012 - lslezak@suse.cz
+
+- fixed nil check in register controller
+- 0.3.11
+
+-------------------------------------------------------------------
 Fri Nov  2 10:18:06 UTC 2012 - lslezak@suse.cz
 
 - CSS and JS cleanup
