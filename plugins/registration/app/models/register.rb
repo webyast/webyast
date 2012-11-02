@@ -128,7 +128,7 @@ public
   end
 
   def is_registered?
-    @guid && @guid != 0
+    @guid.present? && @guid != 0
   end
 
   def register
