@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Mon Nov  5 12:48:00 UTC 2012 - lslezak@suse.cz
+
+- reset proxy config when "noproxy" option is set (bnc#787872)
+- 0.3.12
+
+-------------------------------------------------------------------
 Fri Nov  2 21:12:28 UTC 2012 - lslezak@suse.cz
 
 - fixed nil check in register controller
