@@ -334,14 +334,6 @@ public
     #overwriting default options
     if params[:registration] && params[:registration].has_key?(:options) && params[:registration][:options].is_a?(Hash)
       @register.context.merge! params[:registration][:options]
-
-      noproxy = params[:registration][:options][:noproxy]
-      if noproxy == '1' || noproxy == 'true' || noproxy == true
-        Rails.logger.info "No proxy requested - resetting proxy config"
-        @register.context.delete 'proxy-http_proxy'
-        @register.context.delete 'proxy-https_proxy'
-      end
-
       Rails.logger.info "Registration context: #{@register.context.inspect}"
     end
 
