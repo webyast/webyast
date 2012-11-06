@@ -119,7 +119,7 @@ class RegistrationController < ApplicationController
     respond_to do |format|
       format.xml {render  :xml => register.status_to_xml( :dasherize => false )}
       format.html {redirect_success}
-      format.json {render :json => rregister.status_to_json}
+      format.json {render :json => register.status_to_json}
     end
   end
 
@@ -415,7 +415,7 @@ public
     register = Register.new
     register.arguments = {}
 
-    arguments = params[:registration][:arguments] rescue {}
+    arguments = params[:registration] ? params[:registration][:arguments] : {}
     Rails.logger.debug "Registration arguments: #{arguments.inspect}"
     register.arguments = arguments
 
@@ -432,7 +432,7 @@ public
 
     success = false
     begin
-      context = params[:registration][:options] rescue {}
+      context = params[:registration] ? params[:registration][:options] : {}
       register.context = @options.merge context if context.is_a?(Hash)
       Rails.logger.debug "Registration context: #{register.context.inspect}"
       exitcode = register.register

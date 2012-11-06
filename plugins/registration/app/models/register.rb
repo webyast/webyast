@@ -117,10 +117,12 @@ public
     proxy_config_file = "/etc/sysconfig/proxy"
 
     if File.exist? proxy_config_file
-      File.read(proxy_config_file).split("\n").each do |line|
-        next if line.match /^\s*#/ || line.empty?
-        if line.match /^\s*(\S+)\s*=\s*"(.*)"\s*$/
-          proxy_config[$1] = $2
+      File.open proxy_config_file, 'r' do |file|
+        file.each_line do |line|
+          next if line.match /^\s*#/ || line.empty?
+          if line.match /^\s*(\S+)\s*=\s*"(.*)"\s*$/
+            proxy_config[$1] = $2
+          end
         end
       end
     end
