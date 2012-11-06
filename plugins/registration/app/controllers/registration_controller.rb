@@ -116,7 +116,11 @@ class RegistrationController < ApplicationController
     flash[:error] = server_error_flash _("The registration server returned invalid or incomplete data.")
     logger.error "Registration resulted in an error, registration server or SuseRegister backend returned invalid or incomplete data."
     # success: allow users to skip registration in case of an error (bnc#578684) (bnc#579463)
-    redirect_success
+    respond_to do |format|
+      format.xml {render  :xml => register.status_to_xml( :dasherize => false )}
+      format.html {redirect_success}
+      format.json {render :json => register.status_to_json}
+    end
   end
 
   def registration_backend_error
@@ -298,7 +302,7 @@ public
     register
   end
 
-
+  # FIXME: merge create (HTML) and register (XML) methods to a single method
   def create
     # POST to registration => run registration
     authorize! :statelessregister, Register
@@ -323,16 +327,14 @@ public
       else
         Rails.logger.info "Registration attempt without any valid registration data."
       end
-    else
-      Rails.logger.info "Registration attempt without any registration data."
     end
 
+    Rails.logger.debug "Registration arguments: #{@register.arguments.inspect}"
 
     #overwriting default options
-    if params[:registration].has_key?(:options) && params[:registration][:options].is_a?(Hash)
-      params[:registration][:options].each do |key, value|
-        @register.context[key] = value
-      end
+    if params[:registration] && params[:registration].has_key?(:options) && params[:registration][:options].is_a?(Hash)
+      @register.context.merge! params[:registration][:options]
+      Rails.logger.info "Registration context: #{@register.context.inspect}"
     end
 
     status = @register.register.zero? ? :ok : :bad_request
@@ -344,6 +346,7 @@ public
     end
   end
 
+  # FIXME: remove show, index should be sufficient
   def show
     authorize! :getregistrationconfig, Register
     # get registration status
@@ -372,16 +375,16 @@ public
     else
       @showstatus = true
       @guid = @register.guid
-    end
 
-    respond_to do |format|
-      format.xml { render  :xml => @register.status_to_xml( :dasherize => false ) }
-      format.json { render :json => @register.status_to_json }
-      format.html {}
+      respond_to do |format|
+        format.xml { render  :xml => @register.status_to_xml( :dasherize => false ) }
+        format.json { render :json => @register.status_to_json }
+        format.html {}
+      end
     end
-
   end
 
+  # FIXME: use a parameter (register?reregister=true) instead of extra path
   def reregister
     # provide a way to force a new registration, even if system is already registered
     @reregister = true
@@ -411,6 +414,11 @@ public
     # get new registration object
     register = Register.new
     register.arguments = {}
+
+    arguments = params[:registration] ? params[:registration][:arguments] : {}
+    Rails.logger.debug "Registration arguments: #{arguments.inspect}"
+    register.arguments = arguments
+
     begin
       params.each do | key, value |
         if key.starts_with? "registration_arg_"
@@ -421,9 +429,12 @@ public
       logger.debug "No arguments were passed to the registration call."
     end
 
+
     success = false
     begin
-      register.context = @options
+      context = params[:registration] ? params[:registration][:options] : {}
+      register.context = @options.merge context if context.is_a?(Hash)
+      Rails.logger.debug "Registration context: #{register.context.inspect}"
       exitcode = register.register
       logger.debug "registration finished: #{register.to_xml}"
 
@@ -470,7 +481,12 @@ public
           logger.error "Registration backend returned an unknown error. Please run in debug mode and report a bug."
           return registration_logic_error
         end
-        redirect_success
+
+        respond_to do |format|
+          format.xml {render  :xml => register.to_xml( :dasherize => false )}
+          format.html {redirect_success}
+          format.json {render :json => register.to_json}
+        end
         return
       else
         logger.debug "error while registration: #{error.inspect}"
@@ -491,7 +507,13 @@ public
         flash[:warning] = (_("<p><b>Repositories were not modified during the registration process.</b></p><p>It is likely that an incorrect registration code was used. If this is the case, please attempt the registration process again to get an update repository.</p><p>Please make sure that this system has an update repository configured, otherwise it will not receive updates.</p>")).html_safe # RORSCAN_ITL
       end
 
-      redirect_success
+      respond_to do |format|
+        format.xml {render  :xml => register.to_xml( :dasherize => false )}
+        format.html {redirect_success}
+        format.json {render :json => register.to_json}
+      end
+
+      return
     else
       logger.info "Registration is not yet finished"
 
@@ -500,13 +522,25 @@ public
 
       if @arguments_mandatory.blank? && @arguments_detail.blank? then
         # redirect if the registration server is in needinfo but arguments list is empty
-        flash[:error] = server_error_flash _("The registration server returned invalid data.")
         logger.error "Registration resulted in an error: Logic issue, unspecified data requested by registration server"
-        redirect_success
+
+        respond_to do |format|
+          format.xml {render  :xml => register.to_xml( :dasherize => false )}
+          format.html {
+            flash[:error] = server_error_flash _("The registration server returned invalid data.")
+            redirect_success
+          }
+          format.json {render :json => register.to_json}
+        end
+
         return
       end
 
-      render :action => "index"
+      respond_to do |format|
+        format.xml {render  :xml => register.to_xml( :dasherize => false )}
+        format.html {render :action => :index}
+        format.json {render :json => register.to_json}
+      end
     end
   end
 

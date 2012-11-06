@@ -1,4 +1,30 @@
 -------------------------------------------------------------------
+Mon Nov  5 15:09:14 UTC 2012 - lslezak@suse.cz
+
+- properly handle NO_PROXY config (bnc#787872)
+- 0.3.13
+
+-------------------------------------------------------------------
+Mon Nov  5 12:48:00 UTC 2012 - lslezak@suse.cz
+
+- reset proxy config when "noproxy" option is set (bnc#787872)
+- 0.3.12
+
+-------------------------------------------------------------------
+Fri Nov  2 21:12:28 UTC 2012 - lslezak@suse.cz
+
+- fixed nil check in register controller
+- 0.3.11
+
+-------------------------------------------------------------------
+Fri Nov  2 10:18:06 UTC 2012 - lslezak@suse.cz
+
+- CSS and JS cleanup
+- support for passing extra options (mirror credentials, no proxy)
+  via REST API (fate#311970)
+- 0.3.10
+
+-------------------------------------------------------------------
 Fri Oct 12 11:19:47 UTC 2012 - lslezak@suse.cz
 
 - added missing static dispatch for public/ (help text could not

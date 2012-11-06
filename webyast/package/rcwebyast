@@ -180,7 +180,7 @@ case "$1" in
     echo -n "Starting WebYaST "
     if [ ! -e  $COMBINEDCERTFILE ]
     then
-        echo "\nNo WebYaST certificate found, creating one now..."
+        echo -e "\nNo WebYaST certificate found, creating one now..."
         LOG_FILE="/var/log/webyast/check-create-certificate.log"
         if ! /usr/sbin/check-create-certificate -c -C $CERTIFICATEFILE -K $CERTKEYFILE -B $COMBINEDCERTFILE -D webyast -O WebYaST -U WebYaST > $LOG_FILE 2>&1
         then
