@@ -136,6 +136,7 @@ public
         # servers are comma separated
         no_proxy_servers = proxy_config["NO_PROXY"].split(",").map(&:strip)
 
+        # URI raises an exception when the URL is invalid, use nil in that case
         reg_host = URI(@registrationserver).host rescue nil
         if no_proxy_servers.include? reg_host
           Rails.logger.info "The registration server is included in NO_PROXY, skipping proxy config"
