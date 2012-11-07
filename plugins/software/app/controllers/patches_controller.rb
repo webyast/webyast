@@ -99,6 +99,13 @@ private
     return timeout
   end
 
+  # remove the last cached result
+  def reset_results
+    Rails.logger.info "Clearing patch result cache"
+    Rails.cache.delete("patch:installed")
+    Rails.cache.delete("patch:failed")
+  end
+
   public
 
   # GET /patches
@@ -316,6 +323,10 @@ private
       end
     }
     @patch_update = Patch.new({})
+
+    # remove the last cached results
+    reset_results
+
     begin
       if !update_array.empty?
         Patch::BM.background_enabled? ? Patch.install_patches_by_id_background(update_array) : Patch.install_patches_by_id(update_array)

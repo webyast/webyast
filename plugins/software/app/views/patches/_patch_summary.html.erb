@@ -95,6 +95,24 @@
       </div>
     <% end %>
 
+    <% unless Rails.cache.fetch("patch:installed"){[]}.empty? %>
+      <div class="statusbar_row">
+        <%= image_tag("checked.gif", :class=>"checked_health") %>
+        <%= link_to "patches", :class=>"warning_message" do %>
+          <%= _("Recently Installed Updates: %d") % Rails.cache.fetch("patch:installed").size %> <!-- RORSCAN_ITL -->
+        <% end %>
+      </div>
+    <% end %>
+
+    <% unless Rails.cache.fetch("patch:failed"){[]}.empty? %>
+      <div class="statusbar_row">
+        <%= image_tag("status-warning.png", :class=>"checked_health") %>
+        <%= link_to "patches", :class=>"warning_message" do %>
+          <%= _("Failed Updates: %d") % Rails.cache.fetch("patch:failed").size %> <!-- RORSCAN_ITL -->
+        <% end %>
+      </div>
+    <% end %>
+
     <% if patch[:security] > 0 or patch[:important] > 0 or patch[:optional] > 0 %>
       
       <div class="update_all">

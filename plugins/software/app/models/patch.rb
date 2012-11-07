@@ -110,6 +110,13 @@ class Patch < Resolvable
 
       Rails.logger.info "** Patch installation finished"
 
+      Rails.cache.delete_matched /#{PATCH_FIND_ID}_/
+      Rails.cache.delete_matched /#{PATCH_FIND_MTIME}_/
+      Rails.cache.delete_matched /webyast_patch_summary_/
+      Rails.cache.delete_matched /webyast_patch_index_/
+
+      Rails.logger.info "** Cleared patch cache"
+
       Patch::BM.finish_process(Patch::PATCH_INSTALL_ID, patches)
     rescue Exception => e
       Patch::BM.finish_process(Patch::PATCH_INSTALL_ID, e)
@@ -246,7 +253,7 @@ class Patch < Resolvable
   def self.install(pk_id)
     Rails.logger.debug "Installing #{pk_id}"
     @messages=[]
-    ret = do_install(pk_id,['RequireRestart','Message']) { |type, details|
+    ret, error = do_install(pk_id,['RequireRestart','Message']) { |type, details|
       Rails.logger.info "Message signal received: #{type}, #{details}"
       if ["system", "application", "session"].include? type
         # RequireRestart received
@@ -267,11 +274,23 @@ class Patch < Resolvable
         f.try(:close)
       end
     }
-    #save installed patches in cache
-    i = Rails.cache.fetch("patch:installed") || []
-    installed = i.dup #cache is frozen
-    installed << pk_id
-    Rails.cache.write("patch:installed", installed)
+
+    if error.blank?
+      #save installed patches in cache
+      Rails.logger.info "Updating installed cache"
+      i = Rails.cache.fetch("patch:installed") || []
+      installed = i.dup #cache is frozen
+      installed << pk_id
+      Rails.logger.debug "Cached installed patches: #{installed.inspect}"
+      Rails.cache.write("patch:installed", installed)
+    else
+      Rails.logger.info "Updating failed cache..."
+      f = Rails.cache.fetch("patch:failed") || []
+      failed = f.dup
+      failed << "#{pk_id} - #{error}"
+      Rails.logger.debug "Cached failed patches: #{failed.inspect}"
+      Rails.cache.write("patch:failed", failed)
+    end
     
     return ret
   end
@@ -292,6 +311,7 @@ class Patch < Resolvable
   def self.do_install(pk_id, signal_list = [], &block)
     #locking PackageKit for single use
     ok = true
+    error = ''
 
     DbusLock.synchronize do
       begin
@@ -310,7 +330,6 @@ class Patch < Resolvable
           Rails.logger.debug "  update package: #{line2}"
         end
 
-        error = ''
         dbusloop = PackageKit.dbusloop proxy, error
         dbusloop << proxy.bus
         accept_eulas()
@@ -354,8 +373,10 @@ class Patch < Resolvable
       end
     end
 
+    Rails.logger.error "Received PackageKit error: #{error}" unless error.blank?
+
     remove_eulas() if ok 
-    return ok
+    return [ ok, error ]
   end
 
   def self.create_eula(eula_id,license_text)

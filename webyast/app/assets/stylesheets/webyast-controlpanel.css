@@ -366,3 +366,8 @@ span.icon-yast-system-user{ background-position: 0 -1274px; }
 span.icon-yast-system{ background-position: 0 -1372px; }
 span.icon-yast-users{ background-position: 0 -1470px; }
 
+/* Align the "Update All" link */
+.update_all {
+    margin-left: 21px;
+    margin-top: 4px;
+}
