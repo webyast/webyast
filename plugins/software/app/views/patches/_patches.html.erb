@@ -45,12 +45,7 @@ You may need to reload the page after applying the patch.") -%></p>
     <th class="first checkbox" width=3% ><span><input type="checkbox" name="All" onclick="check_all()" id="All"/></span></th>
     <th class="kind" width=5%><%=_("Kind")%></th>
     <th width=50%><%=_("Name")%></th>
-    <% if can? :install, :Patch %>
-      <th width=38%><%=_("Source")%></th>
-      <th class="last" width=4%><%=_("Install")%></th>
-    <% else %>
-      <th class="last" width=42%><%=_("Source")%></th>
-    <% end %>
+    <th class="last" width=42%><%=_("Source")%></th>
   </tr>
 
   <% @patch_updates.each do |patch_update| %>
@@ -66,12 +61,6 @@ You may need to reload the page after applying the patch.") -%></p>
 
       <td class="label"><div style="font-size:13px;"><strong><%=h patch_update.name %></strong></div><div style="color:#777777; font-size:11px;"><%=h patch_update.summary %></div></td>
       <td class="icon"><%=h patch_update.repo %></td>
-      <% if can? :install, :Patch %>
-        <td class="install"><%= link_to image_tag("/images/update.png"\
-              , :alt =>  "install", :onclick=>"disableForm();", :class=>"icon", :style=>"width:24px; height:24px;", :border => "0"),\
-            :controller => 'patches', :id => patch_update.resolvable_id,\
-            :onclick=>"$('#progress').show()", :method => :post, :action => "install" %></td>
-        <% end %>
     </tr>
     <% end %>
   <% end %>
