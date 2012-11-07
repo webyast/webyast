@@ -1,0 +1,21 @@
+- failed_patches = Rails.cache.fetch("patch:failed"){[]}
+- unless failed_patches.empty?
+  %h3 Installed Updates
+  %fieldset.webyast_fieldset
+    %table.patches.installed_patches
+      %tr.fieldset_header
+        %th.kind{:width => "5%"} Kind
+        %th{:width => "50%"} Name
+        %th.last{:width => "42%"} Source
+      - failed_patches.each do |p|
+        %tr
+          - if patch_kinds.has_key?(p.kind)
+            %td.icon.kind
+              = image_tag(patch_kinds[p.kind])
+          - else
+            %td= p.kind
+          %td.label
+            %div{:style => "font-size:13px;"}
+              %strong= p.name
+            %div{:style => "color:#777777; font-size:11px;"}= p.summary
+          %td.icon= p.repo
