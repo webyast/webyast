@@ -52,11 +52,11 @@
         <% else %>
           <div class="row">
             <%=  f.radio_button :accepted, :true, :checked => @eula.accepted, :readonly => disabled, :disabled => disabled %>
-            <%=  _("Yes, I agree to the license agreement.") %>
+            <%= label_tag :eula_accepted_true, _("Yes, I agree to the license agreement."), :style => "width: auto" %>
           </div>
           <div class="row">
             <%=  f.radio_button :accepted, :false, :checked => (! @eula.accepted), :readonly => disabled, :disabled => disabled %>
-            <%=  _("No, I do not agree.") %>
+            <%= label_tag :eula_accepted_false, _("No, I do not agree."), :style => "width: auto" %>
           </div>
         <% end %>
       <% end -%>
