@@ -41,30 +41,30 @@
     });
 
     $('#all').click(function(){
-      $('table.patches tr td').show();
+      $('table.available_patches tr td').show();
     });
      
     $('#security').click(function(){
-      $('table.patches tr td').hide();
-      $('table.patches tr.patch_kind_security td').show();
+      $('table.available_patches tr td').hide();
+      $('table.available_patches tr.patch_kind_security td').show();
     });
      
     $('#important').click(function(){
-      $('table.patches tr td').hide();
-      $('table.patches tr.patch_kind_important td').show();
+      $('table.available_patches tr td').hide();
+      $('table.available_patches tr.patch_kind_important td').show();
     });
      
     $('#recommended').click(function(){
-      $('table.patches tr td').hide();
-      $('table.patches tr.patch_kind_recommended td').show();
+      $('table.available_patches tr td').hide();
+      $('table.available_patches tr.patch_kind_recommended td').show();
     });
      
     $('#optional').click(function(){
-      $('table.patches tr td').hide();
-      $('table.patches tr.patch_kind_enhancement td').show();
+      $('table.available_patches tr td').hide();
+      $('table.available_patches tr.patch_kind_enhancement td').show();
     });
 
-    $('table.patches td').click(function(){
+    $('table.available_patches td').click(function(){
       var checkbox = $(this).parent().find("input[type='checkbox']");
       checkbox.attr('checked', !checkbox.is(":checked"));
     });
@@ -72,7 +72,7 @@
     // do not propage the click event when clicked directly on a checkbox
     // (avoid calling the click handler for <td> few lines above which
     // would reset the user change)
-    $('table.patches td input[type="checkbox"]').click(function(event){
+    $('table.available_patches td input[type="checkbox"]').click(function(event){
       event.stopPropagation();
     });
 
@@ -160,8 +160,7 @@
 	        end
       end %>
 
-    <form id="form1" class="webyast_form" style="z-index:0" method="post">
-      <div class="plugin-header">
+      <div class="plugin-header webyast_form">
         <div class="left">
           <label class="plugin-icon-container"><%= image_tag("updates.png", :class=>"plugin-icon") %></label>
           <label class="plugin-name"><%=_("Updates") %></label>
@@ -173,6 +172,9 @@
 
       <div class="clearfix">&nbsp;</div>
 
+        <%= render :partial => "failed_patches" %>
+
+      <h3><%= _("Available Updates") %></h3>
       <div id="updates_panel">
         <button type="submit" id="all" class="left active">
             <span style="display:inline-block; vertical-align: inherit; height:18px; width:1px;"></span>
@@ -191,7 +193,6 @@
         </button>
       </div>
       <div class="clearfix"></div>
-    </form>
 
     <div class="clearfix"></div>
 

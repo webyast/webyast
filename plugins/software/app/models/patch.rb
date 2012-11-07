@@ -26,6 +26,7 @@ class Patch < Resolvable
   BM = BackgroundManager.instance
 
   attr_accessor :messages
+  attr_accessor :error_message
 
   MESSAGES_FILE = File.join(YaST::Paths::VAR,"software","patch_installion_messages")
   LICENSES_DIR = File.join(YaST::Paths::VAR,"software","licenses")
@@ -101,7 +102,7 @@ class Patch < Resolvable
       patches.each_with_index do |patch, idx|
         Rails.logger.info "** Installing patch #{patch.inspect}"
 
-        patch.install
+        patch.do_install
 
         Patch::BM.update_progress(Patch::PATCH_INSTALL_ID) do |bs|
           bs.status = "#{idx + 1}/#{patches.size}"
@@ -123,13 +124,38 @@ class Patch < Resolvable
     end
   end
 
+  def do_install
+    update_id = self.resolvable_id
+
+    Rails.logger.info("Installing update #{update_id}")
+    ret, error = Patch.install(update_id)
+
+    if error.blank?
+      #save installed patches in cache
+      Rails.logger.info "Updating installed cache"
+      i = Rails.cache.fetch("patch:installed") || []
+      installed = i.dup #cache is frozen
+      installed << self
+      Rails.logger.debug "Cached installed patches: #{installed.inspect}"
+      Rails.cache.write("patch:installed", installed)
+    else
+      Rails.logger.info "Updating failed cache..."
+      f = Rails.cache.fetch("patch:failed") || []
+      failed = f.dup
+      self.error_message = error
+      failed << self
+      Rails.logger.debug "Cached failed patches: #{failed.inspect}"
+      Rails.cache.write("patch:failed", failed)
+    end
+  end
+
   # install
   def install(background = false)
     # background process doesn't work correctly if class reloading is active
     # (static class members are lost between requests)
     # So the job queue is also not active
     if background && !BM.background_enabled?
-      Rails.logger.info "Job queue is not active. Disable background mode"
+      Rails.logger.info "Job queue is not active. Disabling background mode"
       background = false
     end
 
@@ -275,24 +301,7 @@ class Patch < Resolvable
       end
     }
 
-    if error.blank?
-      #save installed patches in cache
-      Rails.logger.info "Updating installed cache"
-      i = Rails.cache.fetch("patch:installed") || []
-      installed = i.dup #cache is frozen
-      installed << pk_id
-      Rails.logger.debug "Cached installed patches: #{installed.inspect}"
-      Rails.cache.write("patch:installed", installed)
-    else
-      Rails.logger.info "Updating failed cache..."
-      f = Rails.cache.fetch("patch:failed") || []
-      failed = f.dup
-      failed << "#{pk_id} - #{error}"
-      Rails.logger.debug "Cached failed patches: #{failed.inspect}"
-      Rails.cache.write("patch:failed", failed)
-    end
-    
-    return ret
+    return ret, error
   end
 
   def self.license

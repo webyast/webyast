@@ -209,6 +209,11 @@ table.patches td {
   border-width:0px 0px 1px 0px;
 }
 
+.error_label {
+  color: red;
+  font-weight: bold;
+}
+
 td.icon { width:18px; }
 
 #patches-form th {

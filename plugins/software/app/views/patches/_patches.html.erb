@@ -40,7 +40,7 @@ You may need to reload the page after applying the patch.") -%></p>
 <% if @patch_updates.empty? || @patch_updates.all?{|p| p.installed} %>
   <h3><%= _("No patches available") -%></h3>
 <% else %>
-<table summary="" class="patches" <%= @patch_updates.empty? ? "style=\"visibility: hidden;\"" : "" %> >
+<table summary="" class="patches available_patches" <%= @patch_updates.empty? ? "style=\"visibility: hidden;\"" : "" %> >
   <tr class="fieldset_header">
     <th class="first checkbox" width=3% ><span><input type="checkbox" name="All" onclick="check_all()" id="All"/></span></th>
     <th class="kind" width=5%><%=_("Kind")%></th>
@@ -52,26 +52,16 @@ You may need to reload the page after applying the patch.") -%></p>
       <th class="last" width=42%><%=_("Source")%></th>
     <% end %>
   </tr>
-  <%
-  # this should go to a helper?
-  kinds = { "security" => 'kupdateapplet_red.png',
-    "important" => 'kupdateapplet_yellow.png',
-    "normal" => 'kupdateapplet_green.png',
-    "optional" => 'kupdateapplet_optional.png',
-    "low" => 'kupdateapplet_green.png',
-    "enhancement" => 'kupdateapplet_optional.png'
-    }
-  %>
 
   <% @patch_updates.each do |patch_update| %>
     <% unless patch_update.installed %>
     <tr class="patch_kind_<%= patch_update.kind -%>">
       <td class="checkbox"><input type="checkbox" id=<%= "patch_#{patch_update.resolvable_id}" %> name=<%="patch_#{patch_update.resolvable_id}" %> value=<%=patch_update.resolvable_id%> /></td>
 
-      <% if kinds.has_key?(patch_update.kind) %>
-        <td class="icon kind" ><%= image_tag(kinds[patch_update.kind]) %> </td>
+      <% if patch_kinds.has_key?(patch_update.kind) %>
+        <td class="icon kind" ><%= image_tag(patch_kinds[patch_update.kind]) %> </td>
       <% else %>
-        <td><%=h patch_update.kind %></td>
+        <td><%=h patch_update.kind.humanize %></td>
       <% end %>
 
       <td class="label"><div style="font-size:13px;"><strong><%=h patch_update.name %></strong></div><div style="color:#777777; font-size:11px;"><%=h patch_update.summary %></div></td>
