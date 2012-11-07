@@ -94,12 +94,14 @@ public
   def initialize(hash={})
     @paarguments = Hash.new #attr_accessor_with_default :arguments, Hash.new
 
-    # initialize context
-    init_context hash
     # read the configuration
     read_status
+    # initialize context
+    init_context hash
   end
 
+  # this method must be called *after* read_status method,
+  # the proxy config needs to know the registration server
   def init_context(hash)
     # set context defaults
     @context = { 'yastcall'     => '1',
@@ -111,16 +113,40 @@ public
                  'logfile'      => YaST::Paths::REGISTRATION_LOG }
 
     # read system proxy settings and set proxy in the suseRegister context (bnc#626965)
-    sc_proxy = "/etc/sysconfig/proxy"
-    # FIXME use File.read here, do not start external processes (quite expensive)
-    proxy_enabled = `grep "^[[:space:]]*PROXY_ENABLED[[:space:]]*=" #{sc_proxy} | head -1 `.to_s.chomp.sub(/^[^=]*=\s*"(.*)".*$/, '\1') # RORSCAN_ITL
-    http_proxy    = `grep "^[[:space:]]*HTTP_PROXY[[:space:]]*="    #{sc_proxy} | head -1 `.to_s.chomp.sub(/^[^=]*=\s*"(.*)".*$/, '\1') # RORSCAN_ITL
-    https_proxy   = `grep "^[[:space:]]*HTTPS_PROXY[[:space:]]*="   #{sc_proxy} | head -1 `.to_s.chomp.sub(/^[^=]*=\s*"(.*)".*$/, '\1') # RORSCAN_ITL
+    proxy_config = {}
+    proxy_config_file = "/etc/sysconfig/proxy"
+
+    if File.exist? proxy_config_file
+      File.open proxy_config_file, 'r' do |file|
+        file.each_line do |line|
+          next if line.match /^\s*#/ || line.empty?
+          if line.match /^\s*(\S+)\s*=\s*"(.*)"\s*$/
+            proxy_config[$1] = $2
+          end
+        end
+      end
+    end
+
+    Rails.logger.debug "Proxy configuration: #{proxy_config.inspect}"
 
     # set proxy settings in context for suseRegister backend
-    if proxy_enabled.match %r/^yes$/i then
-      @context['proxy-http_proxy']  = http_proxy
-      @context['proxy-https_proxy'] = https_proxy
+    if proxy_config["PROXY_ENABLED"] && proxy_config["PROXY_ENABLED"].downcase == "yes"
+      # check for NO_PROXY option
+      if proxy_config["NO_PROXY"]
+        # servers are comma separated
+        no_proxy_servers = proxy_config["NO_PROXY"].split(",").map(&:strip)
+
+        # URI raises an exception when the URL is invalid, use nil in that case
+        reg_host = URI(@registrationserver).host rescue nil
+        if no_proxy_servers.include? reg_host
+          Rails.logger.info "The registration server is included in NO_PROXY, skipping proxy config"
+          proxy_config.delete "HTTP_PROXY"
+          proxy_config.delete "HTTPS_PROXY"
+        end
+      end
+
+      @context['proxy-http_proxy'] = proxy_config["HTTP_PROXY"] if proxy_config["HTTP_PROXY"]
+      @context['proxy-https_proxy'] = proxy_config["HTTPS_PROXY"] if proxy_config["HTTPS_PROXY"]
     end
 
     # last action: overwrite the context settings with the settings that were sent with the request
@@ -128,12 +154,7 @@ public
   end
 
   def is_registered?
-    begin
-      return ( @guid  &&  @guid.size > 0  &&  @guid != 0 ) == true
-    rescue
-      Rails.logger.error "Error when reading the registration status information. The GUID could not be determined."
-      return false
-    end
+    @guid.present? && @guid != 0
   end
 
   def register
@@ -152,6 +173,8 @@ public
       raise InvalidParameters.new :registrationdata => "Invalid"
     end
 
+    Rails.logger.debug "Registration Context Data: #{ self.context.inspect }"
+    Rails.logger.debug "Registration Argument Data: #{ self.arguments.inspect }"
     @reg = YastService.Call("YSR::statelessregister", ctx, args )
 # @reg = {"manualurl"=>"https://secure-www.novell.com/center/regsvc-1.0/?lang=en-US&guid=dfe61a4b5f0948c6bd00bc47c6d338ab&command=interactive", "errorcode"=>"0", "exitcode"=>"4", "readabletext"=>"To complete the registration, provide some additional parameters:\n\n\nYou can provide these parameters with the '-a' option.\nYou can use the '-a' option multiple times.\n\nExample:\n\nsuse_register -a email=\"me@example.com\"\n\nTo register your product manually, use the following URL:\n\nhttps://secure-www.novell.com/center/regsvc-1.0/?lang=en-US&guid=dfe61a4b5f0948c6bd00bc47c6d338ab&command=interactive\n\n\nInformation on Novell's Privacy Policy:\nSubmit information to help you manage your registered systems.\nhttp://www.novell.com/company/policies/privacy/textonly.html\n", "missinginfo"=>"Missing Information", "missingarguments"=>"<missingarguments>\n  <platform flag=\"i\" kind=\"mandatory\" value=\"x86_64\" />\n  <processor flag=\"i\" kind=\"mandatory\" value=\"x86_64\" />\n  <timezone flag=\"i\" kind=\"mandatory\" value=\"Europe/Prague\" />\n</missingarguments>\n"}
 
@@ -276,7 +299,6 @@ public
   end
 
   def config_to_xml( options = {} )
-    # FIXME: the status is read in constructor, why reading again?
     read_status
     xml = options[:builder] ||= Builder::XmlMarkup.new(options)
     xml.instruct! unless options[:skip_instruct]
@@ -295,7 +317,6 @@ public
   end
 
   def to_xml( options = {} )
-    # FIXME: the status is read in constructor, why reading again?
     read_status
     xml = options[:builder] ||= Builder::XmlMarkup.new(options)
     xml.instruct! unless options[:skip_instruct]

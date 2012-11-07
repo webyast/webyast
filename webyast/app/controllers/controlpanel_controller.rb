@@ -34,6 +34,12 @@ class ControlpanelController < ApplicationController
     return false if need_redirect
     @shortcuts = shortcuts_data
     @count = getNumberPermittedModules(@shortcuts)
+
+    respond_to do |format|
+      format.html
+      format.xml { render :xml => @shortcuts.map{|name, data| { :name => name, :data => data}}.to_xml(:root => "plugins", :dasherize => false) }
+      format.json { render :xml => @shortcuts.map{|name, data| { :name => name, :data => data}}.to_json }
+    end
   end
 
   def nextstep
