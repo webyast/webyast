@@ -1,5 +1,5 @@
-- failed_patches = Rails.cache.fetch("patch:failed"){[]}
-- unless failed_patches.empty?
+- installed_patches = Rails.cache.fetch("patch:installed"){[]}
+- unless installed_patches.empty?
   %h3 Installed Updates
   %fieldset.webyast_fieldset
     %table.patches.installed_patches
@@ -7,7 +7,7 @@
         %th.kind{:width => "5%"} Kind
         %th{:width => "50%"} Name
         %th.last{:width => "42%"} Source
-      - failed_patches.each do |p|
+      - installed_patches.each do |p|
         %tr
           - if patch_kinds.has_key?(p.kind)
             %td.icon.kind
