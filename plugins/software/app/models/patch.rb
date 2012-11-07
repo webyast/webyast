@@ -21,6 +21,8 @@
 
 require 'yast/paths'
 
+# FIXME: clear the mess (Patch.install vs. Patch#install)
+
 # Model for patches available via package kit
 class Patch < Resolvable
   BM = BackgroundManager.instance
@@ -223,7 +225,7 @@ class Patch < Resolvable
       end
 
       patches.each_with_index do |patch, idx|
-        patch.install
+        patch.do_install
 
         Patch::BM.update_progress(Patch::PATCH_INSTALL_ID) do |bs|
           bs.status = "#{idx + 1}/#{patches.size}"
