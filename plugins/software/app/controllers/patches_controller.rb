@@ -249,6 +249,8 @@ private
       end
       # add 'low' patches to optional
       patches_summary[:optional] += patch_updates.find_all { |p| p.kind == 'low' }.size
+      # add 'normal' patches to important
+      patches_summary[:important] += patch_updates.find_all { |p| p.kind == 'normal' }.size
     else
       flash.clear #no flash from load_proxy
     end
