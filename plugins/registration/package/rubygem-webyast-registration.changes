@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Mon Nov 12 10:45:57 UTC 2012 - lslezak@suse.cz
+
+- added support for reading mirroring credentials (fate#311970)
+- 0.3.14
+
+-------------------------------------------------------------------
 Mon Nov  5 15:09:14 UTC 2012 - lslezak@suse.cz
 
 - properly handle NO_PROXY config (bnc#787872)

@@ -36,6 +36,8 @@ URL:            http://en.opensuse.org/Portal:WebYaST
 Summary:        WebYaST - Registration
 Source:         %{mod_full_name}.gem
 Source1:        org.opensuse.yast.modules.yapi.register.policy
+Source2:        org.opensuse.yast.modules.yapi.mirrorcredentials.policy
+Source3:	MirrorCredentials.pm
 
 # YaST2/modules/YSR.pm  
 %if 0%{?suse_version} == 0 || 0%{?suse_version} > 1120
@@ -92,6 +94,10 @@ needed at runtime.
 # Policies
 mkdir -p $RPM_BUILD_ROOT/usr/share/%{webyast_polkit_dir}
 install -m 0644 %SOURCE1 $RPM_BUILD_ROOT/usr/share/%{webyast_polkit_dir}
+install -m 0644 %SOURCE2 $RPM_BUILD_ROOT/usr/share/%{webyast_polkit_dir}
+
+mkdir -p $RPM_BUILD_ROOT/usr/share/YaST2/modules/YaPI/
+cp %{SOURCE3} $RPM_BUILD_ROOT/usr/share/YaST2/modules/YaPI/
 
 %webyast_build_plugin_assets
 
@@ -116,12 +122,19 @@ install -m 0644 %SOURCE1 $RPM_BUILD_ROOT/usr/share/%{webyast_polkit_dir}
 %exclude %{_libdir}/ruby/gems/%{rb_ver}/gems/%{mod_full_name}/test
 %{_libdir}/ruby/gems/%{rb_ver}/specifications/%{mod_full_name}.gemspec
 
+# YaPI dir
+%dir /usr/share/YaST2/
+%dir /usr/share/YaST2/modules/
+%dir /usr/share/YaST2/modules/YaPI/
+/usr/share/YaST2/modules/YaPI/MirrorCredentials.pm
+
 # precompiled assets
 %dir %{webyast_dir}/public/assets
 %{webyast_dir}/public/assets/*
 
 %dir /usr/share/%{webyast_polkit_dir}
 %attr(644,root,root) %config /usr/share/%{webyast_polkit_dir}/org.opensuse.yast.modules.yapi.register.policy
+%attr(644,root,root) %config /usr/share/%{webyast_polkit_dir}/org.opensuse.yast.modules.yapi.mirrorcredentials.policy
 
 %files doc
 %defattr(-,root,root,-)

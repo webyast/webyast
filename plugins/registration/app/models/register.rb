@@ -277,6 +277,16 @@ public
     end # services.each
 
     @reg['calculated_exitcode'] = exitcode
+
+    # read the mirroring credentials
+    if ctx["reqmirrcreds"] == "1" && File.exist?("/var/lib/suseRegister/mirror-credentials.xml")
+      if can? :read, "MirrorCredentials"
+        @reg["credentials"] = YastService.Call("YaPI::MirrorCredentials::Read")
+      else
+        Rails.logger.warn "Reading mirroring credentials is not permitted, skipping"
+      end
+    end
+
     exitcode
   end
 
@@ -335,6 +345,8 @@ public
       xml.exitcode exitcode
       xml.invaliddataerrormessage invaliddatamessage if !invaliddatamessage.blank?
       xml.guid self.guid || ''
+      xml << @reg["credentials"].to_xml(:skip_instruct => true, :root => "credentials") if @reg && @reg["credentials"].present?
+
       if !@missingarguments.blank? && exitcode == 4
         xml.missingarguments({:type => "array"}) do
           @missingarguments.each do | v |

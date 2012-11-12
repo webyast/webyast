@@ -24,6 +24,8 @@ require File.join(RailsParent.parent, "test","devise_helper")
 require 'test/unit'
 class RegistrationControllerTest < ActionController::TestCase
 
+  # TODO: add mirroring credentials test (use fixtures/mirror-credentials.xml for testing)
+
   def setup
     devise_sign_in
     @data = { :registration => { 'options'=>{'debug'=>2,
