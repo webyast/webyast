@@ -339,6 +339,13 @@ public
 
     status = @register.register.zero? ? :ok : :bad_request
 
+    # read the mirroring credentials
+    if can? :read, MirrorCredentials
+      @register.read_credentials
+    else
+      Rails.logger.warn "Reading mirroring credentials is not permitted, skipping"
+    end
+
     respond_to do |format|
       format.xml { render  :xml => @register.to_xml(:dasherize => false), :status => status }
       format.json { render :json => @register.to_json, :status => status }

@@ -278,16 +278,15 @@ public
 
     @reg['calculated_exitcode'] = exitcode
 
-    # read the mirroring credentials
-    if ctx["reqmirrcreds"] == "1" && File.exist?("/var/lib/suseRegister/mirror-credentials.xml")
-      if can? :read, "MirrorCredentials"
-        @reg["credentials"] = YastService.Call("YaPI::MirrorCredentials::Read")
-      else
-        Rails.logger.warn "Reading mirroring credentials is not permitted, skipping"
-      end
-    end
-
     exitcode
+  end
+
+  # read the mirroring credentials
+  def read_credentials
+    if @context["reqmirrcreds"].to_i == 1 && File.exist?("/var/lib/suseRegister/mirror-credentials.xml")
+      Rails.logger.info "Reading mirroring credentials..."
+      @reg["credentials"] = YastService.Call("YaPI::MirrorCredentials::Read")
+    end
   end
 
   def save
