@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Thu Nov 15 14:53:42 UTC 2012 - lslezak@suse.cz
+
+- fixed permission check in the permission service (bnc#787654)
+- 0.3.29
+
+-------------------------------------------------------------------
 Fri Nov  2 16:58:52 UTC 2012 - lslezak@suse.cz
 
 - support also controlpanel/index XML and JSON requests

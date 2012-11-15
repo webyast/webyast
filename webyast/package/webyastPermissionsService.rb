@@ -145,8 +145,6 @@ POLKIT_SECTION = "55-webyast.d"
                 result << "no"
               end
             else
-              uid = DBus::SystemBus.instance.proxy.GetConnectionUnixUser(sender)[0]
-              user = Etc.getpwuid(uid).name
               if PolKit.polkit_check(p, user) == :yes
                 result << "yes"
               else
