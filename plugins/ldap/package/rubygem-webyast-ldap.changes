@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Mon Nov 19 10:24:18 UTC 2012 - lslezak@suse.cz
+
+- added missing *-32bit package dependencies (bnc#789768)
+- 0.3.8
+
+-------------------------------------------------------------------
 Thu Nov  1 09:12:15 UTC 2012 - lslezak@suse.cz
 
 - fixed writing LDAP configuration (bnc#784356)

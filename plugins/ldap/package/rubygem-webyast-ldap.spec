@@ -17,7 +17,7 @@
 
 
 Name:           rubygem-webyast-ldap
-Version:        0.3.7
+Version:        0.3.8
 Release:        0
 %define mod_name webyast-ldap
 %define mod_full_name %{mod_name}-%{version}
@@ -48,6 +48,17 @@ Source2:        LDAP.pm
 Requires:       nss_ldap
 Requires:       pam_ldap
 Requires:       yast2-ldap-client
+
+# require 32bit packages (bnc#789768)
+%ifarch ppc64 s390x x86_64
+Requires: pam_ldap-32bit
+Requires: nss_ldap-32bit
+%endif
+%ifarch ia64
+Requires: pam_ldap-x86
+Requires: nss_ldap-x86
+%endif
+
 # reasonable PATH set (bnc#617442) 
 Requires:       yast2-dbus-server >= 2.17.3
 
