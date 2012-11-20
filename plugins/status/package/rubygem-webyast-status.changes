@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Tue Nov 20 09:47:04 UTC 2012 - lslezak@suse.cz
+
+- fixed HTML escaping in JS code (added html_safe)
+- 0.3.10
+
+-------------------------------------------------------------------
 Thu Nov  1 09:21:10 UTC 2012 - lslezak@suse.cz
 
 - fixed error handling

@@ -42,9 +42,9 @@ module StatusHelper
   end
 
   def evaluate_next_graph group, single_graphs, index
-    return "$('#progress').hide();\n" if index+1 > single_graphs.size
+    return "$('#progress').hide();\n".html_safe if index+1 > single_graphs.size
     graph_div_id = graph_id(group, single_graphs[index]["headline"])
-    return "$.ajax({ url: '" +
+    return ("$.ajax({ url: '" +
            url_for( { :action => "evaluate_values", :group_id => group, :graph_id => single_graphs[index]["headline"]} ) + 
            "',\n" +
            "         type: 'POST',\n" +
@@ -56,7 +56,7 @@ module StatusHelper
            "           $('#" + graph_id(group, single_graphs.first["headline"]) + "').html('<b>" +
                        escape_javascript( _("Error: Cannot get information.")) + "</b>');\n" +
            "         }\n" +
-           "      });\n"
+           "      });\n").html_safe
   end
 
 end
