@@ -45,6 +45,9 @@ class FirewallController < ApplicationController
       if request.format.xml?
           render :xml => @firewall.to_xml(:dasherize => false) and return
       end
+      if request.format.json?
+          render :json => @firewall.to_json and return
+      end
 
       @firewall.fw_services.each do |service|
         service["css_class"] = CGI_PREFIX+"-"+service["id"].gsub(/^service:/,"service-")
