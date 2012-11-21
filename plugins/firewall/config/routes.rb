@@ -1,3 +1,3 @@
 WebYaST::FirewallEngine.routes.draw do
-  resources :firewall
+  resource :firewall, :controller => :firewall
 end
