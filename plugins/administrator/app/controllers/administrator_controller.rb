@@ -54,16 +54,14 @@ class AdministratorController < ApplicationController
       admin["aliases"].split(",").each do |mail|
         #only check emails, not local users
         if mail.include?("@") && mail !~ /^.+@.+$/ #only trivial check
-          flash[:error] = _("Enter a valid e-mail address.")
-          redirect_to :action => "index"
+          problem _("Enter a valid e-mail address.")
           return
         end
       end
     end
 
     if admin["password"] != admin["confirm_password"] && ! params.has_key?("save_aliases")
-      flash[:error] = _("Passwords do not match.")
-      redirect_to :action => "index"
+      problem _("Passwords do not match.")
       return
     end
 
@@ -77,15 +75,11 @@ class AdministratorController < ApplicationController
       @administrator.save
       flash[:notice] = _('Administrator settings have been written.')
     rescue Exception => error  
-      flash[:error] = _("Error while saving administrator settings.")
+      problem _("Error while saving administrator settings.")
       Rails.logger.error "ERROR: #{error.inspect}"
       Rails.logger.error "backtrace: #{error.backtrace.join("\n")}"
 
-      respond_to do |format|
-        format.html { redirect_to :action => :index }
-        format.xml  { head :internal_server_error }
-        format.json { head :internal_server_error }
-      end
+      return
     end
 
     # check if mail is configured; during initial workflow, only warn if mail configuration does not follow
@@ -100,7 +94,7 @@ class AdministratorController < ApplicationController
     respond_to do |format|
       format.html { redirect_success }
       format.xml  { render :xml => @administrator.to_xml(:dasherize => false) }
-      format.json { render :json => @administrator.to_json }
+      format.json { render :json => @administrator }
     end
   end
 
@@ -109,4 +103,17 @@ class AdministratorController < ApplicationController
     update
   end
 
+private
+  def problem message
+    if request.format.html?
+      flash[:error] = message
+      redirect_to :action => "index"
+    else #REST request
+      error = { "error" => { "type" => "ADMINISTRATOR_ERROR", "messsage" => message, "id" => "ADMINISTRATOR" }}
+      respond_to do |format|
+        format.xml  { render :xml => error, :status => 400 }
+        format.json { render :json => error, :status => 400 }
+      end
+    end
+  end
 end
