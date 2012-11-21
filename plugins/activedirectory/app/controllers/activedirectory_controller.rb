@@ -46,6 +46,13 @@ class ActivedirectoryController < ApplicationController
           head :not_found
         end
       }
+      format.json  {
+        if @activedirectory
+          render :json => @activedirectory
+        else
+          head :not_found
+        end
+      }
     end
 
   end
