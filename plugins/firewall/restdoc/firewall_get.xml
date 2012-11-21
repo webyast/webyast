@@ -1,131 +1,66 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="UTF-8"?>
 <firewall>
-  <use_firewall type="boolean">false</use_firewall>
+  <use_firewall type="boolean">true</use_firewall>
   <fw_services type="array">
-    <fw_services>
-      <name>mDNS/Bonjour support for HPLIP</name>
-      <id>service:hplip</id>
+    <fw_service>
+      <description>Opens ports for tftp service.</description>
       <allowed type="boolean">false</allowed>
-    </fw_services>
-    <fw_services>
-      <name>dnsmasq</name>
-      <id>service:dnsmasq-dns</id>
-      <allowed type="boolean">true</allowed>
-    </fw_services>
-    <fw_services>
-      <name>dnsmasq</name>
-      <id>service:dnsmasq-dhcp</id>
+      <name>aTFTP Server</name>
+      <id>service:atftp</id>
+    </fw_service>
+    <fw_service>
+      <description>Opens ports for Apache Web Server.</description>
       <allowed type="boolean">false</allowed>
-    </fw_services>
-    <fw_services>
-      <name>WebYaST UI</name>
-      <id>service:webyast-ui</id>
-      <allowed type="boolean">true</allowed>
-    </fw_services>
-    <fw_services>
-      <name>svnserve</name>
-      <id>service:svnserve</id>
+      <name>HTTP Server</name>
+      <id>service:apache2</id>
+    </fw_service>
+    <fw_service>
+      <description>Opens ports for Apache Web Server.</description>
       <allowed type="boolean">false</allowed>
-    </fw_services>
-    <fw_services>
-      <name>lighttpd</name>
-      <id>service:lighttpd-ssl</id>
+      <name>HTTPS Server</name>
+      <id>service:apache2-ssl</id>
+    </fw_service>
+    <fw_service>
+      <description>Opens ports for NFS client to allow connection to an NFS server.</description>
       <allowed type="boolean">false</allowed>
-    </fw_services>
-    <fw_services>
-      <name>xdmcp</name>
-      <id>service:xdmcp</id>
-      <allowed type="boolean">false</allowed>
-    </fw_services>
-    <fw_services>
-      <name>Netbios Server</name>
-      <id>service:netbios-server</id>
-      <allowed type="boolean">false</allowed>
-    </fw_services>
-    <fw_services>
-      <name>NIS Client</name>
-      <id>service:ypbind</id>
-      <allowed type="boolean">false</allowed>
-    </fw_services>
-    <fw_services>
-      <name>Samba Client</name>
-      <id>service:samba-client</id>
-      <allowed type="boolean">false</allowed>
-    </fw_services>
-    <fw_services>
-      <name>VNC mini-HTTP server</name>
-      <id>service:vnc-httpd</id>
-      <allowed type="boolean">false</allowed>
-    </fw_services>
-    <fw_services>
-      <name>sblim-sfcb CIMOM</name>
-      <id>service:sblim-sfcb</id>
-      <allowed type="boolean">false</allowed>
-    </fw_services>
-    <fw_services>
-      <name>lighttpd</name>
-      <id>service:lighttpd</id>
-      <allowed type="boolean">false</allowed>
-    </fw_services>
-    <fw_services>
-      <name>VNC</name>
-      <id>service:vnc-server</id>
-      <allowed type="boolean">false</allowed>
-    </fw_services>
-    <fw_services>
-      <name>Openslp server (SLP)</name>
-      <id>service:openslp</id>
-      <allowed type="boolean">false</allowed>
-    </fw_services>
-    <fw_services>
-      <name>SMTP with Postfix</name>
-      <id>service:postfix</id>
-      <allowed type="boolean">false</allowed>
-    </fw_services>
-    <fw_services>
-      <name>xntp Server</name>
-      <id>service:ntp</id>
-      <allowed type="boolean">false</allowed>
-    </fw_services>
-    <fw_services>
-      <name>Squid Service</name>
-      <id>service:squid</id>
-      <allowed type="boolean">false</allowed>
-    </fw_services>
-    <fw_services>
       <name>NFS Client</name>
       <id>service:nfs-client</id>
+    </fw_service>
+    <fw_service>
+      <description>Opens TCP port 5432 to allow remote connections to the PostgreSQL server.</description>
       <allowed type="boolean">false</allowed>
-    </fw_services>
-    <fw_services>
-      <name>Samba Server</name>
-      <id>service:samba-server</id>
-      <allowed type="boolean">false</allowed>
-    </fw_services>
-    <fw_services>
-      <name>VNC Server</name>
-      <id>service:xorg-x11-server</id>
-      <allowed type="boolean">false</allowed>
-    </fw_services>
-    <fw_services>
-      <name>WebYaST</name>
-      <id>service:webyast</id>
-      <allowed type="boolean">false</allowed>
-    </fw_services>
-    <fw_services>
+      <name>PostgreSQL Server</name>
+      <id>service:postgresql</id>
+    </fw_service>
+    <fw_service>
+      <description>Open ports for Secure Shell Server</description>
+      <allowed type="boolean">true</allowed>
       <name>Secure Shell Server</name>
       <id>service:sshd</id>
+    </fw_service>
+    <fw_service>
+      <description>SLMS admin web UI. Used only in one server (all-in-one) scenario and represents administration part.</description>
       <allowed type="boolean">true</allowed>
-    </fw_services>
-    <fw_services>
-      <name>cups</name>
-      <id>service:cups</id>
+      <name>SLMS admin web UI (only in 1 server scenario)</name>
+      <id>service:slms-allinone-admin</id>
+    </fw_service>
+    <fw_service>
+      <description>SLMS web UI. For two server scenario it represents certain service. For one-server scenario it represents external services.</description>
+      <allowed type="boolean">true</allowed>
+      <name>SLMS web service</name>
+      <id>service:slms-ui</id>
+    </fw_service>
+    <fw_service>
+      <description>Firewall Configuration file for postfix</description>
       <allowed type="boolean">false</allowed>
-    </fw_services>
-    <fw_services>
-      <name>Openwsman server (WS-Management)</name>
-      <id>service:openwsman</id>
-      <allowed type="boolean">false</allowed>
-    </fw_services>
+      <name>SMTP with Postfix</name>
+      <id>service:smtp</id>
+    </fw_service>
+    <fw_service>
+      <description>The backend and frontend of WebYaST, http://en.opensuse.org/WebYaST</description>
+      <allowed type="boolean">true</allowed>
+      <name>WebYaST </name>
+      <id>service:webyast</id>
+    </fw_service>
   </fw_services>
 </firewall>
