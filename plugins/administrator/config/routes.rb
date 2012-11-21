@@ -1,3 +1,3 @@
 WebYaST::AdministratorEngine.routes.draw do
-  resources :administrator, :only => [ :index, :update, :create ]
+  resource :administrator, :only => [ :index, :update, :create ], :controller => :administrator
 end
