@@ -240,6 +240,10 @@ class UsersController < ApplicationController
       logger.error(error.message)
     end
     if error
+      # explicit create a new @user instance because when the
+      # creating fails, the rest of the code has a nil reference to @user
+      # but the view expects an instance to be available
+      @user = User.new.load_attributes params[:user]
       respond_to do |format|
         format.xml  { render ErrorResult.error(404, 2, error.message) }
         format.json { render ErrorResult.error(404, 2, error.message) }
