@@ -62,19 +62,7 @@ private
   end
 
   def collect_done_patches
-    done = []
-    installed = Rails.cache.fetch("patch:installed") || []
-    installed.each { |patch_id|
-      # e.g.: 'suse-build-key;1.0-907.30;noarch;@System'
-      attrs = patch_id.split(';')
-      done << Patch.new(:resolvable_id => patch_id,
-                        :version => attrs[1],
-                        :name => attrs[0],
-                        :arch => attrs[2],
-                        :repo => attrs[3],
-                        :installed => true)
-    }
-    return done
+    return Rails.cache.fetch("patch:installed") || []
   end
 
   def read_messages
@@ -245,12 +233,12 @@ private
     if patch_updates
       patches_summary = { :security => 0, :important => 0, :optional => 0}
       [:security, :important, :optional].each do |patch_type|
-        patches_summary[patch_type] = patch_updates.find_all { |p| p.kind == patch_type.to_s }.size
+        patches_summary[patch_type] = patch_updates.find_all { |p| p.kind == patch_type.to_s && !p.installed }.size
       end
       # add 'low' patches to optional
-      patches_summary[:optional] += patch_updates.find_all { |p| p.kind == 'low' }.size
+      patches_summary[:optional] += patch_updates.find_all { |p| p.kind == 'low' && !p.installed }.size
       # add 'normal' patches to important
-      patches_summary[:important] += patch_updates.find_all { |p| p.kind == 'normal' }.size
+      patches_summary[:important] += patch_updates.find_all { |p| p.kind == 'normal' && !p.installed }.size
     else
       flash.clear #no flash from load_proxy
     end

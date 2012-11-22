@@ -137,6 +137,7 @@ class Patch < Resolvable
       Rails.logger.info "Updating installed cache"
       i = Rails.cache.fetch("patch:installed") || []
       installed = i.dup #cache is frozen
+      self.installed = true
       installed << self
       Rails.logger.debug "Cached installed patches: #{installed.inspect}"
       Rails.cache.write("patch:installed", installed)
