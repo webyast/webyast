@@ -180,7 +180,7 @@ function user_exists_validation(){
  var this_user = $("#user_uid")[0].value;
    users_list = $("#all_users_string")[0].value.split(",");
    for (var i=0; i< users_list.length; i++){
-    if (users_list[i] == $("#user_uid").value){
+    if (users_list[i] == this_user){
     valid=false;
     break;
     }
