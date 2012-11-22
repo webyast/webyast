@@ -1,3 +1,3 @@
 WebYaST::MailsettingEngine.routes.draw do
-  resources :mailsetting
+  resource :mailsetting, :controller => :mailsetting
 end
