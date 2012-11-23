@@ -291,31 +291,32 @@ public
   def destroy
     authorize! :groupdelete, User
     validate_group_id or return
+    cn = params[:id]
     # RORSCAN_INL: User has already delete permission for ALL groups here
-    @group = Group.find(params[:id])
+    @group = Group.find(cn)
 
     if @group.nil?
-      result = "group #{params[:id]} not found"
+      result = "group #{cn} not found"
     else
       result = @group.destroy
     end
 
-    Rails.logger.error "Cannot destroy group '#{@group.cn}': #{result}" unless result.blank?
+    Rails.logger.error "Cannot destroy group '#{cn}': #{result}" if result.present?
     respond_to do |format|
-      format.html { unless result.blank?
-                      flash[:error] = (_("Cannot remove group <i>%{name}</i>: %{result}").to_str % {:name => @group.cn, :result => result}).html_safe
+      format.html { if result.present?
+                      flash[:error] = (_("Cannot remove group <i>%{name}</i>: %{result}").to_str % {:name => cn, :result => result}).html_safe
                     else
-                      flash[:message] = (_("Group <i>%s</i> has been deleted.") % @group.cn ).html_safe
+                      flash[:message] = (_("Group <i>%s</i> has been deleted.") % cn ).html_safe
                     end
                     redirect_to :action => :index
                   }
-      format.xml  { unless result.blank?
+      format.xml  { if result.present?
                       render ErrorResult.error(404, 2, "Group destroy error:'"+result+"'")
                     else
                       render :show
                     end
                   }
-      format.json { unless result.blank?
+      format.json { if result.present?
                       render ErrorResult.error(404, 2, "Group destroy error:'"+result+"'")
                     else
                       render :show
