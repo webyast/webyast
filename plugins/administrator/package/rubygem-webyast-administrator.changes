@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Fri Nov 23 08:08:23 UTC 2012 - lslezak@suse.cz
+
+- REST API fixes - routing, better error handling
+- 0.3.6
+
+-------------------------------------------------------------------
 Thu Oct  4 07:45:44 UTC 2012 - lslezak@suse.cz
 
 - removed DelayedJob dependency
