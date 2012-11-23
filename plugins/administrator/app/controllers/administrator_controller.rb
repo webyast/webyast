@@ -50,7 +50,7 @@ class AdministratorController < ApplicationController
     
     #validate data also here, if javascript in view is off
     
-    unless admin["aliases"].empty?
+    if admin["aliases"].present?
       admin["aliases"].split(",").each do |mail|
         #only check emails, not local users
         if mail.include?("@") && mail !~ /^.+@.+$/ #only trivial check
