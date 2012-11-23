@@ -97,7 +97,7 @@ private
 
   def validate_members( redirect_action )
     member = "[a-z]+"
-    if params[:group] && params[:group][:members_string] =~ /(#{member}( *, *#{member})+)?/
+    if params[:group] && (params[:group][:members_string].blank? || (params[:group][:members_string] =~ /(#{member}( *, *#{member})+)?/))
       true
     else
       respond_to do |format|
