@@ -2,7 +2,7 @@
 
 Gem::Specification.new do |s|
   s.name = "webyast-eulas"
-  s.version = "0.3.8"
+  s.version = "0.3.9"
   s.authors = ["WebYaST team"]
   s.summary = "Webyast module for configuring administrator settings"
   s.email = "yast-devel@opensuse.org"

@@ -73,18 +73,20 @@
       <% if @eula.accepted  %>
         <% unless @last_eula %>
           <%= link_to _("Next"), :action => :show, :id => @eula_id + 1 %>
-          <%= form_str_spacer %>
         <% end %>
       <% else %>
         <%= form_next_button :disabled => disabled%>
-          <%= form_str_spacer %>
       <% end %>
 
-      <%= if @first_eula
-        @first_basesystem_step ? "" : form_back_button
-      else
-        link_to _("Back"), :action => :show, :id => @prev_id
-      end %>
+      <% if @first_eula %>
+        <% unless @first_basesystem_step %>
+          <%= form_str_spacer %>
+          <%= form_back_button %>
+        <% end %>
+      <% else %>
+        <%= form_str_spacer %>
+        <%= link_to _("Back"), :action => :show, :id => @prev_id %>
+      <% end %>
     </div>
   </div>
 <% end -%>

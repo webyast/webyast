@@ -1,4 +1,11 @@
 -------------------------------------------------------------------
+Fri Nov 23 13:33:56 UTC 2012 - lslezak@suse.cz
+
+- do not display "or" delimiter when there is no "Back" link
+  (bnc#790672)
+- 0.3.9
+
+-------------------------------------------------------------------
 Wed Nov  7 09:27:23 UTC 2012 - lslezak@suse.cz
 
 - make the radio button labels clickable
