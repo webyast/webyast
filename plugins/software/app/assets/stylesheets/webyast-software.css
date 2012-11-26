@@ -222,6 +222,10 @@ td.icon { width:18px; }
 
 #patches-form .webyast_fieldset { padding:0px; background-color:#fff; }
 
+.content_header {
+  width: 96%;
+  margin: 15px auto;
+}
 
 td.install { text-align:center; }
 td.install img.icon { margin:0px auto; }
