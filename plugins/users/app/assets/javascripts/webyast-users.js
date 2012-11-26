@@ -173,11 +173,11 @@ function roles_validation(which){
   return (errmsg.length==0);
 }
 
-function user_exists_validation(){
+function user_exists_validation(el){
   var valid = true;
-  var this_user = $("#user_uid").val();
+  var this_user = el.value;
   users_list = $("#all_users_string").val().split(",");
-  $.each(user_list, function() {
+  $.each(users_list, function() {
     if(this == this_user) {
       valid = false
       return valid
@@ -216,23 +216,34 @@ function user_validation(which, username){
 }
 
 
-function propose_home(which){
- var login    = findById(which.parentNode.getElementsByTagName('input'), "user_uid").value;
- var home     = findById(which.parentNode.getElementsByTagName('input'), "user_home_directory").value;
-
-  home = "/home/"+login;
-
- if (login.length>0) findById(which.parentNode.getElementsByTagName('input'), "user_home_directory").value = home;
+function propose_home(login){
+  if(arguments.length == 0) {
+    var login = $("#user_uid").val();
+  }
+  $("#user_home_directory").val("/home/" + login);
 }
 
-function propose_login(which){
- var fullname = findById(which.parentNode.getElementsByTagName('input'), "user_cn").value;
- var login    = findById(which.parentNode.getElementsByTagName('input'), "user_uid").value;
+function propose_login(){
+  var fullname = $("#user_cn").val();
+  var login    = $("#user_uid").val();
+  if (login.length==0){
+    login = fullname.replace(/\s/g, '').toLowerCase();
+    propose_home(login);
+  }
+}
 
- if (login.length==0){
-  login = fullname.replace(/\s/g, '').toLowerCase();
-  findById(which.parentNode.getElementsByTagName('input'), "user_uid").value = login;
-  propose_home(which.parentNode.parentNode.parentNode);
- }
+function check_uniq_uid_number() {
+  var existing_uid_nums = $("#all_uid_numbers_string").val().split(',');
+  var new_uid_num       = $("#user_uid_number").val();
+  var uid_num_exists    = false
+  $.each(existing_uid_nums, function() {
+    if(new_uid_num == this) {
+      uid_num_exists = true
+      return false
+    }
+  });
+  if(uid_num_exists) {
+    $('#uid-error').text('The UID number already exists');
+  }
 }
 
