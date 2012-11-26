@@ -362,7 +362,7 @@ private
     end
   end
 
-  def license
+  def update_license
     authorize! :read, Patch
     authorize! :install, Patch
 
@@ -378,7 +378,15 @@ private
         render :show
       end
       return
+    else
+      flash[:error] = _("The license has not been accepted nor rejected.")
+      redirect_to root_path
     end
+  end
+
+  def license
+    authorize! :read, Patch
+    authorize! :install, Patch
 
     respond_to do |format|
       format.html {
