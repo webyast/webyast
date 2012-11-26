@@ -1,20 +1,20 @@
 <!--
 # Copyright (c) 2009-2010 Novell, Inc.
-# 
+#
 # All Rights Reserved.
-# 
+#
 # This program is free software; you can redistribute it and/or modify it
 # under the terms of version 2 of the GNU General Public License
 # as published by the Free Software Foundation.
-# 
+#
 # This program is distributed in the hope that it will be useful,
 # but WITHOUT ANY WARRANTY; without even the implied warranty of
 # MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
 # GNU General Public License for more details.
-# 
+#
 # You should have received a copy of the GNU General Public License
 # along with this program; if not, contact Novell, Inc.
-# 
+#
 # To contact Novell about this file by physical or electronic mail,
 # you may find current contact information at www.novell.com
 -->
@@ -31,15 +31,15 @@
     //block whole form onsubmit
     var message = "<%= _("Please wait") -%>";
     $("#update_submit_button").click(function() {
-      disableFormOnSubmit(message);      
+      disableFormOnSubmit(message);
     });
 
-    
+
   });
   function disableForm(){
     $(document).ready(function() {
       var message = <%= jss _("Please wait") -%>;
-      disableFormOnSubmit(message);    
+      disableFormOnSubmit(message);
     });
   }
 
@@ -54,15 +54,36 @@
 </script>
 
 <% if @license %>
+  <div class="plugin-content plugin-border">
 
-  <%= form_tag "/license" do %>
-    <h3><%= _("License for Package %s") % @license[:name] %> </h3>
-    <div class="eula-text-area">
-      <%= @text %>
-    </div>
-    <%= link_to _("Accept"), {:controller => "patches", :action => "license", :accept => 1}, :class => "button" %>
-    <%= link_to _("Reject"), {:controller => "patches", :action => "license", :reject => 1}, :class => "button" %>
-  <% end %>
+    <%= form_tag "/license", :class => "webyast_form" do %>
+      <div class="plugin-header">
+        <div class="left">
+          <label class="plugin-icon-container"><%= image_tag("eulas.png", :class=>"plugin-icon") %></label>
+          <label class="plugin-name"><%=  _("Package License Agreement - %s") % @license[:name] -%></label>
+        </div>
+        <div class="clearfix"></div>
+      </div>
+
+      <div class="clearfix">&nbsp;</div>
+
+      <div class="eula-text-area">
+        <%= @text %>
+      </div>
+
+      <div class="clearfix">&nbsp;</div>
+
+      <div class="button_container">
+        <div class="hr">&nbsp;</div>
+        <div class="nav-buttons">
+          <%= link_to _("Accept"), {:controller => "patches", :action => "license", :accept => 1}, :class => "button" %>
+          <%= link_to _("Reject"), {:controller => "patches", :action => "license", :reject => 1}, :class => "button" %>
+          <%= form_str_spacer %>
+          <%= link_to _("Back"), root_path %>
+        </div>
+      </div>
+    <% end %>
+
+  </div>
 <% end %>
-
 
