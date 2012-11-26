@@ -380,10 +380,9 @@ private
         @license = Patch.license.first
         @text = @license[:text] if @license
         if @text =~ /DT:Rich/ #text is richtext for packager
-          #rid of html tags
-          @text.gsub!(/&lt;.*&gt;/,'')
-          # unescape all ampersands
-          @text.gsub!(/&amp;([a-zA-Z0-9]+;)/,"&\\1")
+          @text = @text.html_safe
+        else
+          (h @text).gsub!(/^\n\n$/, '<p class="eula_paragraph">').html_safe
         end
         render
       }

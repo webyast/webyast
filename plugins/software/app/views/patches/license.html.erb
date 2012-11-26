@@ -56,9 +56,9 @@
 <% if @license %>
 
   <%= form_tag "/license" do %>
-    <h3><%= @license[:name] %> </h3>
+    <h3><%= _("License for Package %s") % @license[:name] %> </h3>
     <div class="eula-text-area">
-      <%= @text.gsub(%r{^[\n\n$]}, '<p class="eula_paragraph">').gsub(%r{[\n]}, ' ')%>
+      <%= @text %>
     </div>
     <%= link_to _("Accept"), {:controller => "patches", :action => "license", :accept => 1}, :class => "button" %>
     <%= link_to _("Reject"), {:controller => "patches", :action => "license", :reject => 1}, :class => "button" %>
