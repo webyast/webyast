@@ -1,20 +1,20 @@
 #--
 # Copyright (c) 2009-2010 Novell, Inc.
-# 
+#
 # All Rights Reserved.
-# 
+#
 # This program is free software; you can redistribute it and/or modify it
 # under the terms of version 2 of the GNU General Public License
 # as published by the Free Software Foundation.
-# 
+#
 # This program is distributed in the hope that it will be useful,
 # but WITHOUT ANY WARRANTY; without even the implied warranty of
 # MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
 # GNU General Public License for more details.
-# 
+#
 # You should have received a copy of the GNU General Public License
 # along with this program; if not, contact Novell, Inc.
-# 
+#
 # To contact Novell about this file by physical or electronic mail,
 # you may find current contact information at www.novell.com
 #++
@@ -85,6 +85,15 @@ class Patch < Resolvable
     end
   end
 
+  def self.clear_cache
+    Rails.logger.info "** Clearing patch cache"
+
+    Rails.cache.delete_matched /#{PATCH_FIND_ID}_/
+    Rails.cache.delete_matched /#{PATCH_FIND_MTIME}_/
+    Rails.cache.delete_matched /webyast_patch_summary_/
+    Rails.cache.delete_matched /webyast_patch_index_/
+  end
+
   def self.install_patches_by_id ids
     begin
       patches = []
@@ -113,16 +122,11 @@ class Patch < Resolvable
 
       Rails.logger.info "** Patch installation finished"
 
-      Rails.cache.delete_matched /#{PATCH_FIND_ID}_/
-      Rails.cache.delete_matched /#{PATCH_FIND_MTIME}_/
-      Rails.cache.delete_matched /webyast_patch_summary_/
-      Rails.cache.delete_matched /webyast_patch_index_/
-
-      Rails.logger.info "** Cleared patch cache"
-
       Patch::BM.finish_process(Patch::PATCH_INSTALL_ID, patches)
     rescue Exception => e
       Patch::BM.finish_process(Patch::PATCH_INSTALL_ID, e)
+    ensure
+      self.clear_cache
     end
   end
 
@@ -330,7 +334,7 @@ class Patch < Resolvable
         transaction_iface, packagekit_iface = PackageKit.connect
 
         proxy = transaction_iface.object
-    
+
         if block_given?
           signal_list.each { |signal|
             # set the custom signal handle
@@ -352,6 +356,7 @@ class Patch < Resolvable
         end
 
         proxy.on_signal("EulaRequired") do |eula_id,package_id,vendor_name,license_text|
+          Rails.logger.info "EULA #{eula_id.inspect} is required for #{package_id.inspect}"
           #FIXME check if user already agree with license
           create_eula(eula_id,license_text)
           ok = false
@@ -387,7 +392,7 @@ class Patch < Resolvable
 
     Rails.logger.error "Received PackageKit error: #{error}" unless error.blank?
 
-    remove_eulas() if ok 
+    remove_eulas() if ok
     return [ ok, error ]
   end
 
@@ -421,6 +426,6 @@ class Patch < Resolvable
     dir.each  {|filename|
       File.delete(File.join(ACCEPTED_LICENSES_DIR,filename)) unless File.directory? filename
     }
-  end    
+  end
 
 end

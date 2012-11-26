@@ -1,20 +1,20 @@
 #--
 # Copyright (c) 2009-2010 Novell, Inc.
-# 
+#
 # All Rights Reserved.
-# 
+#
 # This program is free software; you can redistribute it and/or modify it
 # under the terms of version 2 of the GNU General Public License
 # as published by the Free Software Foundation.
-# 
+#
 # This program is distributed in the hope that it will be useful,
 # but WITHOUT ANY WARRANTY; without even the implied warranty of
 # MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
 # GNU General Public License for more details.
-# 
+#
 # You should have received a copy of the GNU General Public License
 # along with this program; if not, contact Novell, Inc.
-# 
+#
 # To contact Novell about this file by physical or electronic mail,
 # you may find current contact information at www.novell.com
 #++
@@ -141,7 +141,7 @@ private
 
       @patch_updates = []
       @error = true
-      @reload = true      
+      @reload = true
     else
       #no installation process
       begin
@@ -229,6 +229,9 @@ private
     end
 
     patches_summary = nil
+    Rails.logger.debug "patch_updates: #{patch_updates.inspect}"
+    Rails.logger.debug "installed patches: #{Rails.cache.fetch("patch:installed"){[]}.inspect}"
+    Rails.logger.debug "failed patches: #{Rails.cache.fetch("patch:failed"){[]}.inspect}"
 
     if patch_updates
       patches_summary = { :security => 0, :important => 0, :optional => 0}
@@ -247,10 +250,10 @@ private
      :error_string => error_string, :error_type => error_type, :refresh_timeout => ref_timeout}.inspect}"
 
     respond_to do |format|
-      format.html { render :partial => "patch_summary", 
-                           :locals => { :patch => patches_summary, 
-                           :error => error, 
-                           :error_string => error_string, 
+      format.html { render :partial => "patch_summary",
+                           :locals => { :patch => patches_summary,
+                           :error => error,
+                           :error_string => error_string,
                            :error_type => error_type,
                            :refresh_timeout => ref_timeout } }
       format.json  { render :json => patches_summary }
@@ -365,6 +368,8 @@ private
 
     if params[:accept].present? || params[:reject].present?
       params[:accept].present? ? Patch.accept_license : Patch.reject_license
+
+      Patch.clear_cache
 
       if request.format.html?
         redirect_to "/"
