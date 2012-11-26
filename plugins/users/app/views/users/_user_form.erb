@@ -27,13 +27,16 @@
 	<tr><td>
           <div class="label"><%=_("Full Name")%></div>
 	</td><td colspan=2>
-          <%= f.text_field :cn , :disabled => disabled, :onblur => "propose_login(this.parentNode.parentNode);" %>
+          <%= f.text_field :cn , :disabled => disabled, :onblur => "propose_login();" %>
 	</td></tr>
 
 	<tr><td>
           <div class="label"><%=_("Login Name")%></div>
 	</td><td>
-          <%= f.text_field :uid, :disabled => disabled, :onblur => "$('#form_"+ (new ? "" : user.uid)  +"').validate().element('#user_uid');", :onkeyup => "user_exists_validation(this);", :class => "required" %>
+          <%= f.text_field :uid, :disabled => disabled,
+            :onblur => "$('#form_"+ (new ? "" : user.uid)  +"').validate().element('#user_uid');",
+            :onkeyup => "user_exists_validation(this);", :onchange => "propose_home();",
+            :class => "required" %>
 	</td><td>
           <label id="user_name-error" class="error" style="display:none"><%= _('User already exists.') %></label>
           <%= f.hidden_field :id %>
@@ -117,7 +120,9 @@
 	<tr><td>
             <div class="label"><%=_("UID Number")%></div>
 	</td><td colspan=2>
-            <%= f.text_field :uid_number, :disabled => disabled, :min => 1000, :class => "number", :onkeyup => "$('#form_"+ (new ? "" : user.uid) +"').validate().element('#user_uid_number');"  %>
+    <%= f.text_field :uid_number, :disabled => disabled, :min => 1000, :class => "number",
+      :onkeyup => "$('#form_"+ (new ? "" : user.uid) +"').validate().element('#user_uid_number');",
+      :onchange => "check_uniq_uid_number();" %>
             <label id="uid-error" class="error"></label>
 	</td></tr>
        </table>
