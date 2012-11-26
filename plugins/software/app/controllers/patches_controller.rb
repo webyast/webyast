@@ -243,6 +243,9 @@ private
       flash.clear #no flash from load_proxy
     end
 
+    Rails.logger.debug "Patch summary: #{{:patch => patches_summary, :error => error,
+     :error_string => error_string, :error_type => error_type, :refresh_timeout => ref_timeout}.inspect}"
+
     respond_to do |format|
       format.html { render :partial => "patch_summary", 
                            :locals => { :patch => patches_summary, 

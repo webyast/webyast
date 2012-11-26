@@ -35,7 +35,7 @@
 	  <% case error_type when :unknown %>
             <%= _("No information about patches available") %>
           <% when :license %>
-            <% link_to :controller => "patches", :action => "license" do %>
+            <%= link_to :controller => "patches", :action => "license" do %>
               <%= _("An update needs EULA license confirmation.") %>
             <% end %>
           <% else  %>
