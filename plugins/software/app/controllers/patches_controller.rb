@@ -230,8 +230,8 @@ private
 
     patches_summary = nil
     Rails.logger.debug "patch_updates: #{patch_updates.inspect}"
-    Rails.logger.debug "installed patches: #{Rails.cache.fetch("patch:installed"){[]}.inspect}"
-    Rails.logger.debug "failed patches: #{Rails.cache.fetch("patch:failed"){[]}.inspect}"
+    Rails.logger.debug "installed patches: #{Rails.cache.fetch("patch:installed").inspect}"
+    Rails.logger.debug "failed patches: #{Rails.cache.fetch("patch:failed").inspect}"
 
     if patch_updates
       patches_summary = { :security => 0, :important => 0, :optional => 0}

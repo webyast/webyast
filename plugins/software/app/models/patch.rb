@@ -170,11 +170,11 @@ class Patch < Resolvable
 
     if background
       Thread.new() do
-        Rails.logger.info("Intalling update #{update_id} in a backround thread")
+        Rails.logger.info("Installing update #{update_id} in a backround thread")
         Patch.install(update_id)
       end
     else
-      Rails.logger.info("Intalling update #{update_id}")
+      Rails.logger.info("Installing update #{update_id}")
       Patch.install(update_id) #install at once
     end
   end
