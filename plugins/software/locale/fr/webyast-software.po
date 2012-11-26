@@ -184,8 +184,8 @@ msgstr "<p>Déconnectez-vous, puis reconnectez-vous une fois tous les correctifs
 
 #: app/controllers/patch_updates_controller.rb:64 app/views/patch_updates/_patch_summary.html.erb:30
 #: ./app/controllers/patch_updates_controller.rb:64 ./app/views/patch_updates/_patch_summary.html.erb:30
-msgid "Cannot read patch updates: GPG key for repository <em>%s</em> is not trusted."
-msgstr "Impossible de lire les mises à jour de correctifs : la clé GPG du dépôt <em>%s</em> n'est pas approuvée."
+msgid "Cannot read patch updates: GPG key for repository %s is not trusted."
+msgstr "Impossible de lire les mises à jour de correctifs : la clé GPG du dépôt %s n'est pas approuvée."
 
 #: app/controllers/patch_updates_controller.rb:97 app/controllers/patch_updates_controller.rb:100
 #: app/views/patch_updates/_patch_progress.html.erb:2 ./app/controllers/patch_updates_controller.rb:97

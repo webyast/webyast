@@ -184,8 +184,8 @@ msgstr "<p>Salga y vuelva a entrar cuando se hayan instalado todos los parches.<
 
 #: app/controllers/patch_updates_controller.rb:64 app/views/patch_updates/_patch_summary.html.erb:30
 #: ./app/controllers/patch_updates_controller.rb:64 ./app/views/patch_updates/_patch_summary.html.erb:30
-msgid "Cannot read patch updates: GPG key for repository <em>%s</em> is not trusted."
-msgstr "No es posible leer actualizaciones de parches: la clave GPG para el repositorio <em>%s</em> no es de confianza."
+msgid "Cannot read patch updates: GPG key for repository %s is not trusted."
+msgstr "No es posible leer actualizaciones de parches: la clave GPG para el repositorio %s no es de confianza."
 
 #: app/controllers/patch_updates_controller.rb:97 app/controllers/patch_updates_controller.rb:100
 #: app/views/patch_updates/_patch_progress.html.erb:2 ./app/controllers/patch_updates_controller.rb:97

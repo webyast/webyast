@@ -184,8 +184,8 @@ msgstr "<p>请在安装完所有增补程序后先注销再重新登录。</p>"
 
 #: app/controllers/patch_updates_controller.rb:64 app/views/patch_updates/_patch_summary.html.erb:30
 #: ./app/controllers/patch_updates_controller.rb:64 ./app/views/patch_updates/_patch_summary.html.erb:30
-msgid "Cannot read patch updates: GPG key for repository <em>%s</em> is not trusted."
-msgstr "无法读取增补程序更新：储存库 <em>%s</em> 的 GPG 密钥不受信任。"
+msgid "Cannot read patch updates: GPG key for repository %s is not trusted."
+msgstr "无法读取增补程序更新：储存库 %s 的 GPG 密钥不受信任。"
 
 #: app/controllers/patch_updates_controller.rb:97 app/controllers/patch_updates_controller.rb:100
 #: app/views/patch_updates/_patch_progress.html.erb:2 ./app/controllers/patch_updates_controller.rb:97

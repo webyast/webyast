@@ -148,7 +148,7 @@ private
         @patch_updates = Patch.find(:all)
       rescue Exception => e
         if e.description.match /Repository (.*) needs to be signed/
-          flash[:error] = _("Cannot read patch updates: GPG key for repository <em>%s</em> is not trusted.") % $1
+          flash[:error] = ((h _("Cannot read patch updates: GPG key for repository %s is not trusted.")) % "<em>#{h $1}</em>").html_safe
         elsif e.description.match /System management is locked by the application with pid ([0-9]+) \((.*)\)\./
           flash[:warning] = _("Software management is locked by another application ('%s', PID %s).") % [$2, $1]
           @drop_cache = true

@@ -1,4 +1,9 @@
 -------------------------------------------------------------------
+Mon Nov 26 12:56:11 UTC 2012 - lslezak@suse.cz
+
+- untrusted GPG key error - fixed rendered HTML tags
+
+-------------------------------------------------------------------
 Mon Nov 12 13:09:45 UTC 2012 - lslezak@suse.cz
 
 - display failed and installed patches

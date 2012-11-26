@@ -184,8 +184,8 @@ msgstr "<p>請在安裝所有修補程式之後登出並重新登入。</p>"
 
 #: app/controllers/patch_updates_controller.rb:64 app/views/patch_updates/_patch_summary.html.erb:30
 #: ./app/controllers/patch_updates_controller.rb:64 ./app/views/patch_updates/_patch_summary.html.erb:30
-msgid "Cannot read patch updates: GPG key for repository <em>%s</em> is not trusted."
-msgstr "無法讀取修補程式更新︰儲存庫 <em>%s</em> 的 GPG 金鑰不受信任。"
+msgid "Cannot read patch updates: GPG key for repository %s is not trusted."
+msgstr "無法讀取修補程式更新︰儲存庫 %s 的 GPG 金鑰不受信任。"
 
 #: app/controllers/patch_updates_controller.rb:97 app/controllers/patch_updates_controller.rb:100
 #: app/views/patch_updates/_patch_progress.html.erb:2 ./app/controllers/patch_updates_controller.rb:97

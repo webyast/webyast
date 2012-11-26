@@ -172,9 +172,9 @@ msgstr "<p>Lépjen ki, majd lépjen be újra.</p>"
 #: app/controllers/patch_updates_controller.rb:64
 #: app/views/patch_updates/_patch_summary.html.erb:30
 msgid ""
-"Cannot read patch updates: GPG key for repository <em>%s</em> is not trusted."
+"Cannot read patch updates: GPG key for repository %s is not trusted."
 msgstr ""
-"Nem olvashatók a frissítések: a(z) <em>%s</em> telepítési forrás GPG kulcsa "
+"Nem olvashatók a frissítések: a(z) %s telepítési forrás GPG kulcsa "
 "nem megbízható."
 
 #: app/controllers/patch_updates_controller.rb:97

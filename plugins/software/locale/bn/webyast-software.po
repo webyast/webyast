@@ -174,7 +174,7 @@ msgstr ""
 #: app/controllers/patch_updates_controller.rb:64
 #: app/views/patch_updates/_patch_summary.html.erb:30
 msgid ""
-"Cannot read patch updates: GPG key for repository <em>%s</em> is not trusted."
+"Cannot read patch updates: GPG key for repository %s is not trusted."
 msgstr ""
 
 #: app/controllers/patch_updates_controller.rb:97

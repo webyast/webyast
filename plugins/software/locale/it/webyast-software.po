@@ -184,8 +184,8 @@ msgstr "<p>Dopo aver installato tutte le patch, eseguire il logout, quindi il lo
 
 #: app/controllers/patch_updates_controller.rb:64 app/views/patch_updates/_patch_summary.html.erb:30
 #: ./app/controllers/patch_updates_controller.rb:64 ./app/views/patch_updates/_patch_summary.html.erb:30
-msgid "Cannot read patch updates: GPG key for repository <em>%s</em> is not trusted."
-msgstr "Impossibile leggere gli aggiornamenti delle patch: la chiave GPG key per l'archivio <em>%s</em> non è attendibile."
+msgid "Cannot read patch updates: GPG key for repository %s is not trusted."
+msgstr "Impossibile leggere gli aggiornamenti delle patch: la chiave GPG key per l'archivio %s non è attendibile."
 
 #: app/controllers/patch_updates_controller.rb:97 app/controllers/patch_updates_controller.rb:100
 #: app/views/patch_updates/_patch_progress.html.erb:2 ./app/controllers/patch_updates_controller.rb:97

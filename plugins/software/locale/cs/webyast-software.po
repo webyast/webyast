@@ -307,8 +307,8 @@ msgstr "Jsou dostupné zprávy k instalaci patchů"
 #: app/views/patch_updates/_patch_summary.html.erb:46
 #: app/controllers/patch_updates_controller.rb:51
 #: app/views/patch_updates/_patch_summary.html.erb:46
-msgid "Cannot read patch updates: GPG key for repository <em>%s</em> is not trusted."
-msgstr "Nelze číst aktualizace: GPG klíč repozitáře <em>%s</em> je nedůvěryhodný."
+msgid "Cannot read patch updates: GPG key for repository %s is not trusted."
+msgstr "Nelze číst aktualizace: GPG klíč repozitáře %s je nedůvěryhodný."
 
 #: app/controllers/patch_updates_controller.rb:90
 #: app/controllers/patch_updates_controller.rb:93

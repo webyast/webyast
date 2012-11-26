@@ -184,8 +184,8 @@ msgstr "<p>모든 패치가 설치된 후 로그아웃한 후 다시 로그인�
 
 #: app/controllers/patch_updates_controller.rb:64 app/views/patch_updates/_patch_summary.html.erb:30
 #: ./app/controllers/patch_updates_controller.rb:64 ./app/views/patch_updates/_patch_summary.html.erb:30
-msgid "Cannot read patch updates: GPG key for repository <em>%s</em> is not trusted."
-msgstr "패치 업데이트를 읽을 수 없음: 리포지토리 <em>%s</em>의 GPG 키가 트러스트되지 않았습니다."
+msgid "Cannot read patch updates: GPG key for repository %s is not trusted."
+msgstr "패치 업데이트를 읽을 수 없음: 리포지토리 %s의 GPG 키가 트러스트되지 않았습니다."
 
 #: app/controllers/patch_updates_controller.rb:97 app/controllers/patch_updates_controller.rb:100
 #: app/views/patch_updates/_patch_progress.html.erb:2 ./app/controllers/patch_updates_controller.rb:97

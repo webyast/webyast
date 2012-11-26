@@ -143,7 +143,7 @@ msgstr "<p>Gaarne afmelden en opnieuw aanmelden.</p>"
 #: app/controllers/patch_updates_controller.rb:65
 #: app/views/patch_updates/_patch_summary.html.erb:24
 msgid ""
-"Cannot read patch updates: GPG key for repository <em>%s</em> is not trusted."
+"Cannot read patch updates: GPG key for repository %s is not trusted."
 msgstr ""
 "Kan patches voor bijwerken niet lezen - GPG-sleutel voor installatiebron <em>"
 "%s</em> wordt niet vertrouwd."

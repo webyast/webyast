@@ -278,8 +278,8 @@ msgstr "Es sind Nachrichten zum Installieren von Patches verfügbar"
 #: app/views/patch_updates/_patch_summary.html.erb:46
 #: app/controllers/patch_updates_controller.rb:51
 #: app/views/patch_updates/_patch_summary.html.erb:46
-msgid "Cannot read patch updates: GPG key for repository <em>%s</em> is not trusted."
-msgstr "Lesen der Patch-Aktualisierungen nicht möglich: GPG-Schlüssel für Repository <em>%s</em> ist nicht verbürgt."
+msgid "Cannot read patch updates: GPG key for repository %s is not trusted."
+msgstr "Lesen der Patch-Aktualisierungen nicht möglich: GPG-Schlüssel für Repository %s ist nicht verbürgt."
 
 #: app/controllers/patch_updates_controller.rb:90
 #: app/controllers/patch_updates_controller.rb:93
