@@ -294,7 +294,7 @@ public
     @nexttarget = 'reregisterupdate'
     # no forcereg parameter here
 
-    register(reregister = true)
+    reregister
   end
 
   def update

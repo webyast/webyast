@@ -1,4 +1,9 @@
 -------------------------------------------------------------------
+Mon Nov 26 12:57:19 UTC 2012 - lslezak@suse.cz
+
+- fixed crash when registering again (bnc#789736)
+
+-------------------------------------------------------------------
 Tue Nov 13 16:10:55 UTC 2012 - lslezak@suse.cz
 
 - fixed reading mirroring credentials
