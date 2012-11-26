@@ -178,8 +178,10 @@ class UsersController < ApplicationController
     @roles.each do |role|
       all_roles.push(role.name)
     end if @roles
+    users = User.find :all
     @all_roles_string = all_roles.join(",")
-    @all_users_string = all_users
+    @all_users_string = users.map(&:uid).join(',')
+    @all_uid_numbers_string = users.map(&:uid_number).join(',')
 
     @groups = []
     if can? :groupsget, User
@@ -238,12 +240,9 @@ class UsersController < ApplicationController
       end
     rescue Exception => error
       logger.error(error.message)
+      @user = User.new params[:user]
     end
     if error
-      # explicit create a new @user instance because when the
-      # creating fails, the rest of the code has a nil reference to @user
-      # but the view expects an instance to be available
-      @user = User.new.load_attributes params[:user]
       respond_to do |format|
         format.xml  { render ErrorResult.error(404, 2, error.message) }
         format.json { render ErrorResult.error(404, 2, error.message) }
