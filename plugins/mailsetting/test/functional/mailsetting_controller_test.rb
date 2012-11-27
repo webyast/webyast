@@ -48,7 +48,7 @@ class MailsettingControllerTest < ActionController::TestCase
     ret = put :update, :mail => {:smtp_server => "newserver"}, :format => "xml"
     ret_hash = Hash.from_xml(ret.body)
 
-    assert_response :redirect
+    assert_response :success
     assert ret_hash
   end
 
