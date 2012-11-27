@@ -230,26 +230,29 @@ public
     result = @group.save
     Rails.logger.error "Cannot update group '#{@group.cn}' (#{@group.inspect}): #{result}" unless result.blank?
     respond_to do |format|
-      format.html { unless result.blank?
-                      flash[:error] = (_("Cannot update group <i>%s</i>") % h(@group.cn)).html_safe
-                      render :edit
-                    else
-                      flash[:message] = (_("Group <i>%s</i> has been updated.") % h(@group.cn)).html_safe
-                      redirect_to :action => :index
-                    end
-                  }
-      format.xml  { unless result.blank?
-                      render ErrorResult.error(404, 2, "Group update error:'"+result+"'")
-                    else
-                      render :show
-                    end
-                  }
-      format.json { unless result.blank?
-                      render ErrorResult.error(404, 2, "Group update error:'"+result+"'")
-                    else
-                      render :show
-                    end
-                  }
+      format.html do
+        if result.present?
+          flash[:message] = (_("Group <i>%s</i> has been updated.") % h(@group.cn)).html_safe
+          redirect_to :action => :index
+        else
+          flash[:error] = (_("Cannot update group <i>%s</i>") % h(@group.cn)).html_safe
+          redirect_to :action => :Index
+        end
+      end
+      format.xml do
+        if result.present?
+          render :show
+        else
+          render ErrorResult.error(404, 2, "Group update error:'#{result}'")
+        end
+      end
+      format.json do
+        if result.present?
+          render :show
+        else
+          render ErrorResult.error(404, 2, "Group update error:'#{result}'")
+        end
+      end
     end
   end
 
