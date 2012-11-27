@@ -65,7 +65,7 @@ class MetricsController < ApplicationController
   # GET /metrics/1.xml
   def show
     authorize! :read, Metric
-    @metric = Metric.find(params[:id]) || raise ActionController::RoutingError.new('Not Found')
+    @metric = Metric.find(params[:id]) || raise(ActionController::RoutingError.new('Not Found'))
     data_opts = {}
     data_opts[:stop] = params[:stop].blank? ? Time.now : Time.at(params[:stop].to_i)
     data_opts[:start] = params[:start].blank? ? data_opts[:stop] - DEFAULT_TIMEFRAME : Time.at(params[:start].to_i)
