@@ -242,12 +242,11 @@ function check_uniq_uid_number() {
       return false
     }
   });
-  var $error_label = $('#uid-error');
   if(uid_num_exists) {
-    $error_label.css('display', 'inline-block');
+    $('#uid-error').show();
   }
   else {
-    $error_label.css('display', 'none');
+    $('#uid-error').hide();
   }
 }
 
