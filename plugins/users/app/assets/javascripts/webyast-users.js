@@ -242,8 +242,12 @@ function check_uniq_uid_number() {
       return false
     }
   });
+  var $error_label = $('#uid-error');
   if(uid_num_exists) {
-    $('#uid-error').text('The UID number already exists');
+    $error_label.css('display', 'inline-block');
+  }
+  else {
+    $error_label.css('display', 'none');
   }
 }
 

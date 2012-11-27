@@ -123,7 +123,7 @@
     <%= f.text_field :uid_number, :disabled => disabled, :min => 1000, :class => "number",
       :onkeyup => "$('#form_"+ (new ? "" : user.uid) +"').validate().element('#user_uid_number');",
       :onchange => "check_uniq_uid_number();" %>
-            <label id="uid-error" class="error"></label>
+          <label id="uid-error" class="error" style="display:none"><%= _('The UID number already exists.') %></label>
 	</td></tr>
        </table>
       </fieldset>
