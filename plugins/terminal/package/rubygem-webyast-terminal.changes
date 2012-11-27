@@ -1,4 +1,11 @@
 -------------------------------------------------------------------
+Fri Nov 23 08:52:18 UTC 2012 - lslezak@suse.cz
+
+- REST API fixes - return error when receiving a non-HTML request
+  (REST API does not make sense in this module) (bnc#789520)
+- 0.3.11
+
+-------------------------------------------------------------------
 Thu Nov  1 09:23:54 UTC 2012 - lslezak@suse.cz
 
 - 0.3.10

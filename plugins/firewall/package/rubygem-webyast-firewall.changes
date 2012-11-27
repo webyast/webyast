@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Fri Nov 23 08:18:00 UTC 2012 - lslezak@suse.cz
+
+- REST API fixes - routing, updated exmaples, JSON support
+- 0.3.8
+
+-------------------------------------------------------------------
 Fri Oct 12 15:42:18 UTC 2012 - lslezak@suse.cz
 
 - 0.3.7

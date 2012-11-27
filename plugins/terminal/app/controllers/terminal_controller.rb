@@ -40,6 +40,15 @@ public
     # and the service is provided by shellinabox package, Webyast is just an UI wrapper.
     # User can connect to https://<host>:4200 manually anyway.
 
+    unless request.format.html?
+      error = {"error" => {"type" => "TERMINAL_ERROR", "messsage" => "Terminal module supports only HTML output"}}
+      respond_to do |format|
+        format.xml  { render :xml => error, :status => 400 }
+        format.json { render :json => error, :status => 400 }
+      end
+      return
+    end
+
     unless shellinabox_running?
       flash[:error] = _("Terminal service is not running. Please start it with 'rcshellinabox start'")
       redirect_to :controller => :controlpanel, :action => :index

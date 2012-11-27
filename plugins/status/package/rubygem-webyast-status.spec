@@ -17,7 +17,7 @@
 
 
 Name:           rubygem-webyast-status
-Version:        0.3.10
+Version:        0.3.11
 Release:        0
 %define mod_name webyast-status
 %define mod_full_name %{mod_name}-%{version}

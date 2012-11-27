@@ -65,8 +65,7 @@ public
     # FIXME: move the validation to the model
     # validate data also here, if javascript in view is off
     if @mail.password != @mail.confirm_password
-      flash[:error] = _("Passwords do not match.")
-      redirect_to :action => "index"
+      problem _("Passwords do not match.")
       return
     end
 
@@ -78,10 +77,10 @@ public
       end
       flash[:notice] = notice
 
-      rescue Exception => error  
-        flash[:error] = _("Error while saving mail settings.") 
-        Rails.logger.error "ERROR: #{error.inspect}"
-        render :index and return
+    rescue Exception => error  
+      problem _("Error while saving mail settings.") 
+      Rails.logger.error "ERROR: #{error.inspect}"
+      return
     end
 
     smtp_server	= params["mail"]["smtp_server"]
@@ -90,22 +89,45 @@ public
     # during initial workflow, only warn if administrator configuration does not follow
     if smtp_server.blank? && (!Basesystem.new.load_from_session(session).following_steps.any? { |h| h[:controller] == "administrator" })
       @administrator      = Administrator.find
-      
+
       if @administrator && !@administrator.aliases.blank?
         flash[:warning]	= _("No outgoing mail server is set, but administrator has mail forwarders defined.
         Change %s<i>administrator</i>%s or %s<i>mail</i>%s configuration.") % ['<a href="/administrator">', '</a>', '<a href="/mail">', '</a>']
       end
     end
-      
+
     if params.has_key?("send_mail")
-      redirect_to :action => "index", :email => params["mail"]["test_mail_address"]
-      return
+      if request.format.html?
+        redirect_to :action => "index", :email => params["mail"]["test_mail_address"]
+        return
+      else
+        params[:email] =  params["mail"]["test_mail_address"]
+      end
     end
-    redirect_success # redirect to next step
+    if request.format.html? 
+      redirect_success # redirect to next step
+    else
+      index
+    end
   end
   
   def create
     update
+  end
+
+private
+
+  def problem message
+    if request.format.html?
+      flash[:error] = message
+      redirect_to :action => "index"
+    else #REST request
+      error = { "error" => { "type" => "ADMINISTRATOR_ERROR", "messsage" => message, "id" => "ADMINISTRATOR" }}
+      respond_to do |format|
+        format.xml  { render :xml => error, :status => 400 }
+        format.json { render :json => error, :status => 400 }
+      end
+    end
   end
 end
 
