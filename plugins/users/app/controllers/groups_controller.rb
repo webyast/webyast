@@ -22,6 +22,7 @@
 include ApplicationHelper
 
 class GroupsController < ApplicationController
+  include ERB::Util
 
 private
 
@@ -97,7 +98,7 @@ private
 
   def validate_members( redirect_action )
     member = "[a-z]+"
-    if params[:group] && params[:group][:members_string] =~ /(#{member}( *, *#{member})+)?/
+    if params[:group] && (params[:group][:members_string].blank? || (params[:group][:members_string] =~ /(#{member}( *, *#{member})+)?/))
       true
     else
       respond_to do |format|
@@ -228,10 +229,10 @@ public
     Rails.logger.error "Cannot update group '#{@group.cn}' (#{@group.inspect}): #{result}" unless result.blank?
     respond_to do |format|
       format.html { unless result.blank?
-                      flash[:error] = (_("Cannot update group <i>%s</i>") % @group.cn).html_safe
+                      flash[:error] = (_("Cannot update group <i>%s</i>") % h(@group.cn)).html_safe
                       render :edit
                     else
-                      flash[:message] = (_("Group <i>%s</i> has been updated.") % @group.cn ).html_safe
+                      flash[:message] = (_("Group <i>%s</i> has been updated.") % h(@group.cn)).html_safe
                       redirect_to :action => :index
                     end
                   }
@@ -265,10 +266,10 @@ public
     Rails.logger.error "Cannot create group '#{@group.cn}': #{result}" unless result.blank?
     respond_to do |format|
       format.html { unless result.blank?
-                      flash[:error] = (_("Cannot create group <i>%s</i>") % @group.cn).html_safe
+                      flash[:error] = (_("Cannot create group <i>%s</i>") % h(@group.cn)).html_safe
                       redirect_to :action => :new
                     else
-                      flash[:message] = (_("Group <i>%s</i> has been added.") % @group.cn ).html_safe
+                      flash[:message] = (_("Group <i>%s</i> has been added.") % h(@group.cn)).html_safe
                       redirect_to :action => :index
                     end
                   }
@@ -291,31 +292,32 @@ public
   def destroy
     authorize! :groupdelete, User
     validate_group_id or return
+    cn = params[:id]
     # RORSCAN_INL: User has already delete permission for ALL groups here
-    @group = Group.find(params[:id])
+    @group = Group.find(cn)
 
     if @group.nil?
-      result = "group #{params[:id]} not found"
+      result = "group #{cn} not found"
     else
       result = @group.destroy
     end
 
-    Rails.logger.error "Cannot destroy group '#{@group.cn}': #{result}" unless result.blank?
+    Rails.logger.error "Cannot destroy group '#{cn}': #{result}" if result.present?
     respond_to do |format|
-      format.html { unless result.blank?
-                      flash[:error] = (_("Cannot remove group <i>%{name}</i>: %{result}").to_str % {:name => @group.cn, :result => result}).html_safe
+      format.html { if result.present?
+                      flash[:error] = (_("Cannot remove group <i>%{name}</i>: %{result}").to_str % {:name => h(cn), :result => h(result)}).html_safe
                     else
-                      flash[:message] = (_("Group <i>%s</i> has been deleted.") % @group.cn ).html_safe
+                      flash[:message] = (_("Group <i>%s</i> has been deleted.") % h(cn) ).html_safe
                     end
                     redirect_to :action => :index
                   }
-      format.xml  { unless result.blank?
+      format.xml  { if result.present?
                       render ErrorResult.error(404, 2, "Group destroy error:'"+result+"'")
                     else
                       render :show
                     end
                   }
-      format.json { unless result.blank?
+      format.json { if result.present?
                       render ErrorResult.error(404, 2, "Group destroy error:'"+result+"'")
                     else
                       render :show

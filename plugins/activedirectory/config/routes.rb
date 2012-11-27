@@ -1,3 +1,3 @@
 WebYaST::ActivedirectoryEngine.routes.draw do
-  resources :activedirectory
+  resource :activedirectory, :controller => :activedirectory
 end

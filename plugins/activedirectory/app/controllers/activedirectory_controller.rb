@@ -46,6 +46,13 @@ class ActivedirectoryController < ApplicationController
           head :not_found
         end
       }
+      format.json  {
+        if @activedirectory
+          render :json => @activedirectory
+        else
+          head :not_found
+        end
+      }
     end
 
   end
@@ -102,11 +109,28 @@ class ActivedirectoryController < ApplicationController
 
       @activedirectory = Activedirectory.new
       @activedirectory.load args
-      @activedirectory.save
-      
-      respond_to do |format|
-        format.xml  { render :xml => @activedirectory.to_xml}
-        format.json { render :json => @activedirectory.to_json}
+      begin
+        @activedirectory.save
+      rescue ActivedirectoryError => e
+        # credentials required for joining the domain
+        if e.id == "not_member"
+          @activedirectory.administrator = ""
+          @activedirectory.password = ""
+          @activedirectory.machine = ""
+        else
+          @error = e
+        end
+      end
+      if @error
+        respond_to do |format|
+          format.xml  { render :xml => @activedirectory.to_xml(:dasherize => false), :status => 500 }
+          format.json { render :json => @activedirectory, :status => 500 }
+        end
+      else
+        respond_to do |format|
+          format.xml  { render :xml => @activedirectory.to_xml(:dasherize => false)}
+          format.json { render :json => @activedirectory }
+        end
       end
     end
     

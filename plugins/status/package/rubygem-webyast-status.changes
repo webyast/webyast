@@ -1,4 +1,11 @@
 -------------------------------------------------------------------
+Fri Nov 23 08:26:19 UTC 2012 - lslezak@suse.cz
+
+- REST API fix - return error when requested metrics was not
+  found
+- 0.3.11
+
+-------------------------------------------------------------------
 Tue Nov 20 09:47:04 UTC 2012 - lslezak@suse.cz
 
 - fixed HTML escaping in JS code (added html_safe)
