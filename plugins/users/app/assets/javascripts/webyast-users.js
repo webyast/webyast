@@ -1,20 +1,20 @@
 /*
 # Copyright (c) 2009-2010 Novell, Inc.
-# 
+#
 # All Rights Reserved.
-# 
+#
 # This program is free software; you can redistribute it and/or modify it
 # under the terms of version 2 of the GNU General Public License
 # as published by the Free Software Foundation.
-# 
+#
 # This program is distributed in the hope that it will be useful,
 # but WITHOUT ANY WARRANTY; without even the implied warranty of
 # MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
 # GNU General Public License for more details.
-# 
+#
 # You should have received a copy of the GNU General Public License
 # along with this program; if not, contact Novell, Inc.
-# 
+#
 # To contact Novell about this file by physical or electronic mail,
 # you may find current contact information at www.novell.com
 */
@@ -43,7 +43,7 @@ function _getElementsByClassName(node, classname)  {
 //      disable_forms();
 //      $('#progress_' + sid).show();
 //      blockForm('form_'+sid, message);
-     
+
      return true;
    }
    else
@@ -57,7 +57,7 @@ function delete_handler(which, progress, message){
  if (which.childElementCount == 2 && which.children[0].firstChild.textContent == "Delete"){
   which.childNodes[0].onclick="return false;";
   which.childNodes[0].href="";
-  
+
   disableFormOnSubmit(message);
  }
 }
@@ -173,20 +173,18 @@ function roles_validation(which){
   return (errmsg.length==0);
 }
 
-function user_exists_validation(){
- var valid = true;
-// var this_user = $("#form_ #user_uid")[0].value;
-
- var this_user = $("#user_uid")[0].value;
-   users_list = $("#all_users_string")[0].value.split(",");
-   for (var i=0; i< users_list.length; i++){
-    if (users_list[i] == $("#user_uid").value){
-    valid=false;
-    break;
+function user_exists_validation(el){
+  var valid = true;
+  var this_user = el.value;
+  users_list = $("#all_users_string").val().split(",");
+  $.each(users_list, function() {
+    if(this == this_user) {
+      valid = false
+      return valid
     }
-   }
+  });
   $("#user_name-error")[0].style.display= (valid) ? "none" : "block";
-	 
+
  return valid;
 }
 
@@ -218,23 +216,37 @@ function user_validation(which, username){
 }
 
 
-function propose_home(which){
- var login    = findById(which.parentNode.getElementsByTagName('input'), "user_uid").value;
- var home     = findById(which.parentNode.getElementsByTagName('input'), "user_home_directory").value;
-
-  home = "/home/"+login;
-
- if (login.length>0) findById(which.parentNode.getElementsByTagName('input'), "user_home_directory").value = home;
+function propose_home(login){
+  if(arguments.length == 0) {
+    var login = $("#user_uid").val();
+  }
+  $("#user_home_directory").val("/home/" + login);
 }
 
-function propose_login(which){
- var fullname = findById(which.parentNode.getElementsByTagName('input'), "user_cn").value;
- var login    = findById(which.parentNode.getElementsByTagName('input'), "user_uid").value;
+function propose_login(){
+  var fullname = $("#user_cn").val();
+  var login    = $("#user_uid").val();
+  if (login.length==0){
+    login = fullname.replace(/\s/g, '').toLowerCase();
+    propose_home(login);
+  }
+}
 
- if (login.length==0){
-  login = fullname.replace(/\s/g, '').toLowerCase();
-  findById(which.parentNode.getElementsByTagName('input'), "user_uid").value = login;
-  propose_home(which.parentNode.parentNode.parentNode);
- }
-} 
- 
+function check_uniq_uid_number() {
+  var existing_uid_nums = $("#all_uid_numbers_string").val().split(',');
+  var new_uid_num       = $("#user_uid_number").val();
+  var uid_num_exists    = false
+  $.each(existing_uid_nums, function() {
+    if(new_uid_num == this) {
+      uid_num_exists = true
+      return false
+    }
+  });
+  if(uid_num_exists) {
+    $('#uid-error').show();
+  }
+  else {
+    $('#uid-error').hide();
+  }
+}
+

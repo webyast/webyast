@@ -1,20 +1,20 @@
 #--
 # Copyright (c) 2009-2010 Novell, Inc.
-# 
+#
 # All Rights Reserved.
-# 
+#
 # This program is free software; you can redistribute it and/or modify it
 # under the terms of version 2 of the GNU General Public License
 # as published by the Free Software Foundation.
-# 
+#
 # This program is distributed in the hope that it will be useful,
 # but WITHOUT ANY WARRANTY; without even the implied warranty of
 # MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
 # GNU General Public License for more details.
-# 
+#
 # You should have received a copy of the GNU General Public License
 # along with this program; if not, contact Novell, Inc.
-# 
+#
 # To contact Novell about this file by physical or electronic mail,
 # you may find current contact information at www.novell.com
 #++
@@ -27,8 +27,8 @@ require 'builder'
 # thin model over the YaPI, with some
 # ActiveRecord like convenience API
 class User < BaseModel::Base
-  
-  attr_writer :cn, :uid, :uid_number, :gid_number, :grouplist, :groupname, :home_directory, :login_shell, 
+
+  attr_writer :cn, :uid, :uid_number, :gid_number, :grouplist, :groupname, :home_directory, :login_shell,
               :user_password, :user_password2, :type, :grp_string, :roles_string
 
 
@@ -74,16 +74,17 @@ class User < BaseModel::Base
 
   # Prevents a user from submitting a crafted form that bypasses activation
   # anything else you want your user to change should be added here.
-  attr_accessible :cn, :uid, :uid_number, :gid_number, :grouplist, 
-                  :groupname, :home_directory, :login_shell, 
-                  :user_password, :user_password2, :type, 
+  attr_accessible :cn, :uid, :uid_number, :gid_number, :grouplist,
+                  :groupname, :home_directory, :login_shell,
+                  :user_password, :user_password2, :type,
                   :grp_string,:roles_string
 
 public
 
-  def initialize    
+  def initialize params={}
+    load_attributes(params) unless params.empty?
   end
-  
+
   # users = User.find_all
   def self.find_all(params={})
     attributes = [ "cn", "uidNumber", "homeDirectory", "grouplist", "uid", "loginShell", "groupname" ]
@@ -165,7 +166,7 @@ public
     raise ret if not ret.blank?
     true
   end
-  
+
   # load a internally used data hash
   # with camel-cased values
   def load_data(data)
@@ -210,7 +211,7 @@ ATTR_ACCESSIBLE = [:cn, :uid, :uid_number, :gid_number, :grouplist, :groupname,
     end
     data
   end
-    
+
   # create a user in the local system
   def self.create(attrs)
     config = {}
@@ -225,7 +226,7 @@ ATTR_ACCESSIBLE = [:cn, :uid, :uid_number, :gid_number, :grouplist, :groupname,
     end
 
     data = user.retrieve_data
-    
+
     config.store("type", [ "s", "local" ])
     data.store("uid", [ "s", user.uid])
 
@@ -235,7 +236,7 @@ ATTR_ACCESSIBLE = [:cn, :uid, :uid_number, :gid_number, :grouplist, :groupname,
     raise ret if not ret.blank?
     user
   end
-  
+
   def id
     @uid
   end
@@ -243,12 +244,12 @@ ATTR_ACCESSIBLE = [:cn, :uid, :uid_number, :gid_number, :grouplist, :groupname,
   def id=(id_val)
     @uid = id_val
   end
-  
+
 
   def to_xml( options = {} )
     xml = options[:builder] ||= Builder::XmlMarkup.new(options)
     xml.instruct! unless options[:skip_instruct]
-    
+
     xml.user do
       xml.tag!(:id, id )
       xml.tag!(:cn, cn )
@@ -261,13 +262,13 @@ ATTR_ACCESSIBLE = [:cn, :uid, :uid_number, :gid_number, :grouplist, :groupname,
       xml.tag!(:user_password, user_password )
       xml.tag!(:type, type )
       xml.grouplist({:type => "array"}) do
-         grouplist.each do |group| 
+         grouplist.each do |group|
 	    xml.group do
 	      xml.tag!(:cn, group[0])
 	    end
          end
       end
-    end  
+    end
   end
 
   def to_json( options = {} )
