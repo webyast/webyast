@@ -69,7 +69,7 @@ private
   end
 
   def validate_group_gid( redirect_action )
-    if params[:group] && params[:group][:gid] =~ /\d+/
+    if params[:group] && params[:group][:gid] =~ /\A[1-4][0-9][0-9]$/
       true
     else
       respond_to do |format|
