@@ -218,6 +218,7 @@ public
 
   # POST /groups/users/
   def update
+    validate_group_gid :index or return
     validate_group_id(params[:group][:old_cn]) or return
     validate_group_params( :index ) or return
     validate_group_name( :index ) or return
