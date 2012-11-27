@@ -22,6 +22,7 @@
 include ApplicationHelper
 
 class GroupsController < ApplicationController
+  include ERB::Util
 
 private
 
@@ -228,10 +229,10 @@ public
     Rails.logger.error "Cannot update group '#{@group.cn}' (#{@group.inspect}): #{result}" unless result.blank?
     respond_to do |format|
       format.html { unless result.blank?
-                      flash[:error] = (_("Cannot update group <i>%s</i>") % @group.cn).html_safe
+                      flash[:error] = (_("Cannot update group <i>%s</i>") % h(@group.cn)).html_safe
                       render :edit
                     else
-                      flash[:message] = (_("Group <i>%s</i> has been updated.") % @group.cn ).html_safe
+                      flash[:message] = (_("Group <i>%s</i> has been updated.") % h(@group.cn)).html_safe
                       redirect_to :action => :index
                     end
                   }
@@ -265,10 +266,10 @@ public
     Rails.logger.error "Cannot create group '#{@group.cn}': #{result}" unless result.blank?
     respond_to do |format|
       format.html { unless result.blank?
-                      flash[:error] = (_("Cannot create group <i>%s</i>") % @group.cn).html_safe
+                      flash[:error] = (_("Cannot create group <i>%s</i>") % h(@group.cn)).html_safe
                       redirect_to :action => :new
                     else
-                      flash[:message] = (_("Group <i>%s</i> has been added.") % @group.cn ).html_safe
+                      flash[:message] = (_("Group <i>%s</i> has been added.") % h(@group.cn)).html_safe
                       redirect_to :action => :index
                     end
                   }
@@ -304,9 +305,9 @@ public
     Rails.logger.error "Cannot destroy group '#{cn}': #{result}" if result.present?
     respond_to do |format|
       format.html { if result.present?
-                      flash[:error] = (_("Cannot remove group <i>%{name}</i>: %{result}").to_str % {:name => cn, :result => result}).html_safe
+                      flash[:error] = (_("Cannot remove group <i>%{name}</i>: %{result}").to_str % {:name => h(cn), :result => h(result)}).html_safe
                     else
-                      flash[:message] = (_("Group <i>%s</i> has been deleted.") % cn ).html_safe
+                      flash[:message] = (_("Group <i>%s</i> has been deleted.") % h(cn) ).html_safe
                     end
                     redirect_to :action => :index
                   }
