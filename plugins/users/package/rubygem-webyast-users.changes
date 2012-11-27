@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Tue Nov 27 12:55:52 UTC 2012 - lslezak@suse.cz
+
+- REST API fixes
+- 0.3.6
+
+-------------------------------------------------------------------
 Thu Oct 11 10:01:03 UTC 2012 - lslezak@suse.cz
 
 - fixed tab header style (use the global style from the base)
