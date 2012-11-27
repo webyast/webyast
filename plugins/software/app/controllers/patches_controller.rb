@@ -379,8 +379,13 @@ private
       end
       return
     else
-      flash[:error] = _("The license has not been accepted nor rejected.")
-      redirect_to root_path
+      if request.format.html?
+        flash[:error] = _("The license has not been accepted nor rejected.")
+        redirect_to root_path
+      else
+        # Error 422
+        head :unprocessable_entity
+      end
     end
   end
 
