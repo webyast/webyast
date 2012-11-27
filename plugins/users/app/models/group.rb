@@ -45,9 +45,10 @@ class Group < BaseModel::Base
 
 private
 
-  def self.group_get(group_type,cn)
-    Rails.logger.debug( 'YastService.Call("YaPI::USERS::GroupGet", {"type"=>["s","'+group_type+'"}], "cn"=>["s","'+cn.to_s+'"]})')
-    YastService.Call("YaPI::USERS::GroupGet", {"type"=>["s",group_type], "cn"=>["s",cn]})
+  def self.group_get(group_type, cn)
+    args = {"type" => ["s", group_type], "cn" => ["s", cn]}
+    Rails.logger.debug "YastService.Call(\"YaPI::USERS::GroupGet\", #{args.inspect})"
+    YastService.Call("YaPI::USERS::GroupGet", args)
   end
 
   def self.groups_get(group_type)

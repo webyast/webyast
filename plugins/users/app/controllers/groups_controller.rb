@@ -221,6 +221,7 @@ public
     validate_group_id(params[:group][:old_cn]) or return
     validate_group_params( :index ) or return
     validate_group_name( :index ) or return
+    validate_group_type(:index) or return
     validate_members( :index ) or return
     group_params = params[:group] || {}
     @group = Group.new group_params
