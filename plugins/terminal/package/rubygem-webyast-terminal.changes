@@ -1,4 +1,11 @@
 -------------------------------------------------------------------
+Wed Nov 28 15:38:21 UTC 2012 - lslezak@suse.cz
+
+- added "New Window" link to open a new terminal in a new window
+  (can be used to accept the certificate in FF)
+- 0.3.12
+
+-------------------------------------------------------------------
 Fri Nov 23 08:52:18 UTC 2012 - lslezak@suse.cz
 
 - REST API fixes - return error when receiving a non-HTML request

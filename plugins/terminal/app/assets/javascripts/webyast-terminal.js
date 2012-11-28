@@ -21,6 +21,7 @@
 $(document).ready(function(){
   // display shellinabox service running at port 4200 on the same machine
   $("#term_iframe").attr("src", "https://" + window.location.hostname + ":4200");
+  $("#new_window").attr("href", "https://" + window.location.hostname + ":4200");
 
   $("#fullscreen").click(function(){
     $(".webyast_fieldset").css("position", "static");

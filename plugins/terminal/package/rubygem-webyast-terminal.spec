@@ -17,7 +17,7 @@
 
 
 Name:           rubygem-webyast-terminal
-Version:        0.3.11
+Version:        0.3.12
 Release:        0
 %define mod_name webyast-terminal
 %define mod_full_name %{mod_name}-%{version}
