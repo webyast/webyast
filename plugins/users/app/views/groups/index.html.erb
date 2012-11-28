@@ -137,7 +137,10 @@
             </span>
           </div>
           <div class='group-content' style="display:none">
-          <%= form_for group, :url => { :action => @adding ? "create" : "update"}, :html => { :id => "form_"+group.old_cn, :autocomplete => :off, :onsubmit => "form_handler('#{group.old_cn}')"}  do |f| %>
+            <%= form_for group,
+              :url       => { :action => @adding ? "create" : "update"},
+              :html      => { :id => "form_"+group.old_cn, :autocomplete => :off, :onsubmit => "form_handler('#{group.old_cn}')"},
+              :namespace => group.cn do |f| %>
             <%= f.hidden_field :old_cn %>
             <p>
               <div class="label"><%=_("Group Name")%></div>
