@@ -88,10 +88,34 @@
     $("#groups").data("groups_names", names);
   }
 
+  function warn_for_duplicate_gid() {
+    $(".group_gid").keyup(function(e){
+      if($.inArray($(e.currentTarget).val(), $("#groups").data('groups_ids')) > -1){
+        $(e.currentTarget).siblings('label.error').show();
+      }
+      else {
+        $(e.currentTarget).siblings('label.error).hide();
+      }
+    });
+  }
+
+  function check_unique_group_name() {
+    $(".group_cn").keyup(function(e){
+      if($.inArray($(e.currentTarget).val(), $("#groups").data('groups_names')) > -1){
+        $(e.currentTarget).siblings('label.error').show();
+      }
+      else {
+        $(e.currentTarget).siblings('label.error').hide();
+      }
+    });
+  }
+
   $(document).ready(function(){
 
     collect_groups_ids();
     collect_groups_names();
+    warn_for_duplicate_gid();
+    check_unique_group_name();
 
     select_users_open = select_users_dialog();
 
@@ -164,14 +188,14 @@
             <p>
               <div class="label"><%=_("Group Name")%></div>
               <%= f.text_field :cn, :disabled => disabled, :class => "group_cn required" %>
-              <label id="<%= [group.cn, :cn, "error"].join '_' %>" class="error" style="display:none">
+              <label class="error" style="display:none">
                 <%= _("Must be unique") %>
               </label>
             </p>
             <p>
               <div class="label"><%=_("Group ID")%></div>
               <%= f.text_field :gid, :class=>'group_gid', :disabled => disabled %>
-              <label id="<%= [group.gid, :gid, "error"].join '_' %>" class="error" style="display:none">
+              <label class="error" style="display:none">
                 <%= _("Already used by other group") %>
               </label>
             </p>
