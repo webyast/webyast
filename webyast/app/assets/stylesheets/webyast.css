@@ -120,22 +120,11 @@ ul li {
   font-size: 16px;
   font-weight: bold;
   padding: 14px;
-  position: absolute;
-  right: 0;
-  left: 0;
-  top: 0;
   text-align: center;
-  z-index: 100000;
   color: #333333;
   background-color: #feefb3;
   border-top: 2px solid #999999;
   border-bottom: 2px solid #999999; }
-  #timeoutMessage img {
-    left: 0;
-    margin: 2px 1em 0;
-    position: absolute;
-    top: 0px;
-    float: left; }
 
 #content {
   min-width: 640px;

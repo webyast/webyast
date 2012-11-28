@@ -54,6 +54,22 @@
     </script>
   <% end %>
 
+  <%= javascript_tag do -%>
+    // display session expiration warning
+    setTimeout(function() {
+      $('#timeoutMessage').slideDown('slow');
+      var int_id = setInterval(function() {
+        var rem = parseInt($('#timeout_counter').text()) - 1;
+        if (rem == 0) {
+          clearInterval(int_id);
+          $('#timeoutMessage').text(<%= jss _("Your session has expired, please reload the page and relogin.") -%>);
+        } else {
+          $('#timeout_counter').text(rem);
+        }
+      }, 1000);
+    }, (2*60*60*1000 - 120));
+  <% end %>
+
   <title><%= _("WebYaST") %></title>
 
   <%= yield :head %>
@@ -77,6 +93,12 @@
              "<a href='http://www.microsoft.com/windows/downloads/ie/getitnow.mspx' class='external'>Internet Explorer 9</a>"] ) %>
       </div>
     </noscript>
+
+    <div id="timeoutMessage">
+      <%= image_tag "warning.png", :class => 'mvalign' %>
+      <%= _("You will be logged off in") %> <span id="timeout_counter">120</span> <%= _("seconds due to session timeout. ")-%>
+      <%= image_tag "warning.png", :class => 'mvalign' %>
+    </div>
 
     <div id="header" class="clearfix">
       <% appliance_label = ControlPanelConfig.read 'appliance_label', _("My Appliance") %>
@@ -116,11 +138,6 @@
         </span>
       <% end -%>
       <h1><%= appliance_label %></h1>
-    </div>
-
-    <div id="timeoutMessage">
-      <%= link_to(image_tag("webyast-logo.png", :width=>"130", :height=>"42", :style=>"margin-top:4px;", :alt =>"webyast"),"/" )%>
-      <%= _("You will be logged off in")-%><span id="counter"><!-- countdown --></span><%= _("seconds due to session timeout. ")-%>
     </div>
 
     <div id="content">
