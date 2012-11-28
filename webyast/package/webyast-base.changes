@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Wed Nov 28 17:46:21 UTC 2012 - lslezak@suse.cz
+
+- control panel - logout after 2 hours timeout (bnc#789742)
+- 0.3.30
+
+-------------------------------------------------------------------
 Thu Nov 15 14:53:42 UTC 2012 - lslezak@suse.cz
 
 - fixed permission check in the permission service (bnc#787654)

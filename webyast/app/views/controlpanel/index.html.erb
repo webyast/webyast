@@ -24,6 +24,12 @@
 <% status_present = WebyastEngine.find "Status" %>
 <% patches_present = WebyastEngine.find "Software" %>
 
+<% content_for :head do %>
+  <% javascript_tag do -%>
+    <%# logout after 2 hours timeout, the usuall session timeout doesn't work here because of the periodic AJAX status calls -%>
+    setTimeout(function(){window.location.assign('/accounts/sign_out');}, 2*60*60*1000);
+  <% end %>
+<% end %>
 
 <% if status_present && display_status %>
   <% content_for :head do %>
