@@ -68,15 +68,18 @@ private
     end
   end
 
-  def validate_group_gid( redirect_action )
+  def validate_group_gid
     if params[:group] && params[:group][:gid] =~ /\A[1-4][0-9][0-9]$/
       true
     else
+      err_message = _("Invalid GID, expecting an integer between 100 and 499")
       respond_to do |format|
-        format.html { flash[:error] = _('Please enter a valid GID')
-                      redirect_to :action => :index }
-        format.xml  { render ErrorResult.error(404, 2, 'Please enter a valid GID') }
-        format.json { render ErrorResult.error(404, 2, 'Please enter a valid GID') }
+        format.html do
+          flash[:error] = err_message
+          redirect_to(:action => :index) and return
+        end
+        format.xml  { render ErrorResult.error(404, 2, err_message) }
+        format.json { render ErrorResult.error(404, 2, err_message) }
       end
       false
     end
@@ -218,7 +221,7 @@ public
 
   # POST /groups/users/
   def update
-    validate_group_gid :index or return
+    validate_group_gid
     validate_group_id(params[:group][:old_cn]) or return
     validate_group_params( :index ) or return
     validate_group_name( :index ) or return
@@ -235,8 +238,8 @@ public
           flash[:message] = (_("Group <i>%s</i> has been updated.") % h(@group.cn)).html_safe
           redirect_to :action => :index
         else
-          flash[:error] = (_("Cannot update group <i>%s</i>") % h(@group.cn)).html_safe
-          redirect_to :action => :Index
+          flash[:error] = (_("Cannot update group <i>%s</i>, %s") % [h(@group.cn)).html_safe, result]
+          redirect_to :action => :index
         end
       end
       format.xml do
