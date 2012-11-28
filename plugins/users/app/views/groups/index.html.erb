@@ -72,7 +72,26 @@
     return open_dialog;
   };
 
+  function collect_groups_ids() {
+    var ids = [];
+    $(".group_gid").each(function() {
+      ids.push(parseInt($(this).val()));
+    });
+    $("#groups").data("groups_ids", ids);
+  }
+
+  function collect_groups_names() {
+    var names = [];
+    $(".group_cn").each(function() {
+      names.push($(this).val());
+    });
+    $("#groups").data("groups_names", names);
+  }
+
   $(document).ready(function(){
+
+    collect_groups_ids();
+    collect_groups_names();
 
     select_users_open = select_users_dialog();
 
@@ -81,15 +100,15 @@
           delay: 100
   });
 
-      $(".accordion").accordion({
-         autoHeight : false,
-         navigation : true,
-         collapsible: true,
-         header     : 'div.list-fieldset div.list-fieldset-header',
-         animated   : false
-      });
+  $(".accordion").accordion({
+     autoHeight : false,
+     navigation : true,
+     collapsible: true,
+     header     : 'div.list-fieldset div.list-fieldset-header',
+     animated   : false
+  });
 
-      $(".accordion").accordion('activate', false);
+  $(".accordion").accordion('activate', false);
 
 
 });//document.ready
@@ -144,11 +163,17 @@
             <%= f.hidden_field :old_cn %>
             <p>
               <div class="label"><%=_("Group Name")%></div>
-              <%= f.text_field :cn, :disabled => disabled, :class => "required" %>
+              <%= f.text_field :cn, :disabled => disabled, :class => "group_cn required" %>
+              <label id="<%= [group.cn, :cn, "error"].join '_' %>" class="error" style="display:none">
+                <%= _("Must be unique") %>
+              </label>
             </p>
             <p>
               <div class="label"><%=_("Group ID")%></div>
-              <%= f.text_field :gid, :disabled => disabled %>
+              <%= f.text_field :gid, :class=>'group_gid', :disabled => disabled %>
+              <label id="<%= [group.gid, :gid, "error"].join '_' %>" class="error" style="display:none">
+                <%= _("Already used by other group") %>
+              </label>
             </p>
             <p>
               <div class="label"><%=_("Members")%></div>
@@ -156,7 +181,8 @@
               <% if can? :usersget, User %>
                 <a href="#" id="manage_members" class="button" onClick="select_users_open('<%= group.old_cn %>');return false;"><%= _("Manage Members") %></a>
               <% end %>
-              <%= f.hidden_field :group_type %><label id="users-error" class="error"></label>
+              <%= f.hidden_field :group_type %>
+              <label class="error"></label>
             </p>
 
             <div class="nav-buttons">
