@@ -238,7 +238,7 @@ public
           flash[:message] = (_("Group <i>%s</i> has been updated.") % h(@group.cn)).html_safe
           redirect_to :action => :index
         else
-          flash[:error] = (_("Cannot update group <i>%s</i>, %s") % [h(@group.cn)).html_safe, result]
+          flash[:error] = (_("Cannot update group <i>%s</i>, %s") % [h(@group.cn), result]).html_safe
           redirect_to :action => :index
         end
       end
