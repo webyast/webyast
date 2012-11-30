@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Fri Nov 30 11:02:39 UTC 2012 - vmoravec@suse.cz
+
+- show a warning if user uid number exists (bnc#782083)
+- 0.3.7
+
+-------------------------------------------------------------------
 Tue Nov 27 12:55:52 UTC 2012 - lslezak@suse.cz
 
 - REST API fixes
