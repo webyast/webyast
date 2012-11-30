@@ -32,7 +32,8 @@ class NetworkController < ApplicationController
 
     respond_to do |format|
       format.html # index.html.erb
-      format.json { render :json => @ifcs }
+      format.xml { render @ifcs }
+      format.json { render @ifcs }
     end
   end
 
