@@ -298,7 +298,6 @@ class Patch < Resolvable
         dirname = File.dirname(MESSAGES_FILE)
         FileUtils.mkdir_p(dirname) unless File.directory?(dirname)
         f = File.new(MESSAGES_FILE, 'a+')
-        f.puts '<br/>' unless File.size(MESSAGES_FILE).zero?
         # TODO: make the message traslatable
         f.puts "#{details}"
       rescue Exception => e
