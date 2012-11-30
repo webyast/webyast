@@ -19,6 +19,7 @@
 
 class RestdocController < ApplicationController
   caches_action :index, :show
+  skip_before_filter :authenticate_account!
 
   def index
     @restdocs = Restdoc.find :all
