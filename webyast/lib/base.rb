@@ -89,7 +89,7 @@ module BaseModel
         next if !whitelist.blank? && !(whitelist.include?(k.to_sym))
         blacklist = self.class.protected_attributes
         next if !blacklist.blank? && blacklist.include?(k.to_sym)
-        send("#{k}=", v) if self.respond_to?(k)
+        send("#{k}=", v) if self.respond_to?(:"#{k}=")
       end
     end
 
