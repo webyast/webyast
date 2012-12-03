@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Mon Dec  3 08:25:00 UTC 2012 - lslezak@suse.cz
+
+- fixed accepting patch license, UI fixes
+- 0.3.32
+
+-------------------------------------------------------------------
 Mon Nov 26 12:56:11 UTC 2012 - lslezak@suse.cz
 
 - untrusted GPG key error - fixed rendered HTML tags
