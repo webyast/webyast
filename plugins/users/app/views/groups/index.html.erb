@@ -83,7 +83,7 @@
   function collect_groups_names() {
     var names = [];
     $(".group_cn").each(function() {
-      names.push($(this).val());
+    names.push($(this).val());
     });
     $("#groups").data("groups_names", names);
   }
@@ -94,30 +94,36 @@
         $(e.currentTarget).siblings('label.error').show();
       }
       else {
-        $(e.currentTarget).siblings('label.error).hide();
-      }
-    });
-  }
-
-  function check_unique_group_name() {
-    $(".group_cn").keyup(function(e){
-      if($.inArray($(e.currentTarget).val(), $("#groups").data('groups_names')) > -1){
-        $(e.currentTarget).siblings('label.error').show();
-      }
-      else {
         $(e.currentTarget).siblings('label.error').hide();
       }
     });
   }
 
+  $.validator.addMethod("unique_cn", function(value, element) {
+  original_cn_value = $(element);
+    if($.inArray(value, $("#groups").data('groups_names')) > -1){
+      return false
+    } else {
+      return true
+      }
+    },
+    "<%= _("Must be unique") %>"
+  )
+
   $(document).ready(function(){
 
     collect_groups_ids();
     collect_groups_names();
-    warn_for_duplicate_gid();
-    check_unique_group_name();
+    //warn_for_duplicate_gid();
+    //$(".group_cn").validate();
 
     select_users_open = select_users_dialog();
+
+    $(".submit_group_form").submit(function(){
+      alert("submit");
+      return false;
+    });
+
 
   $('input#groups_search').quicksearch('div.list-fieldset', {
           selector: 'span.quicksearch_content',
@@ -187,17 +193,13 @@
             <%= f.hidden_field :old_cn %>
             <p>
               <div class="label"><%=_("Group Name")%></div>
-              <%= f.text_field :cn, :disabled => disabled, :class => "group_cn required" %>
-              <label class="error" style="display:none">
-                <%= _("Must be unique") %>
-              </label>
+              <%= f.text_field   :cn, :disabled => disabled, :class => "group_cn required unique_cn" %>
+              <%= f.hidden_field :cn, :namespace=>"origin_#{group.cn}" %>
             </p>
             <p>
               <div class="label"><%=_("Group ID")%></div>
-              <%= f.text_field :gid, :class=>'group_gid', :disabled => disabled %>
-              <label class="error" style="display:none">
-                <%= _("Already used by other group") %>
-              </label>
+              <%= f.text_field   :gid, :class=>'group_gid unique_gid', :disabled => disabled %>
+              <%= f.hidden_field :gid, :namespace=>"origin_#{group.cn}" %>
             </p>
             <p>
               <div class="label"><%=_("Members")%></div>
@@ -213,7 +215,7 @@
               <div class="hr">&nbsp;</div>
               <div id="progress_<%= group.cn -%>" style="display: none; margin-bottom: 10px"><%= image_tag("working.gif", :class => "small-working-icon") %><span style="vertical-align: 50%; margin-left: 5px">...Wait...</span></div>
                 <% message = _('Please wait')%>
-                <%= submit_tag _("Save"),
+                <%= submit_tag _("Save"), :class=>"submit_group_form",
                     :onclick=>"return $('#form_" + group.old_cn + "').validate({
                       submitHandler: function(form) {
                         var message = '#{message}';
