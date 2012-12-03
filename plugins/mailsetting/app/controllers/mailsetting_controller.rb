@@ -60,7 +60,7 @@ public
   def update
     authorize! :write, Mailsetting
     @mail = Mailsetting.find
-    @mail.load params["mail"]
+    @mail.load params["mailsetting"] || params["mail"] #keep mail for backwards compatibility with old REST API
 
     # FIXME: move the validation to the model
     # validate data also here, if javascript in view is off
