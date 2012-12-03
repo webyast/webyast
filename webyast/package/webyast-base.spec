@@ -330,6 +330,9 @@ install -m 0755 %SOURCE16 $RPM_BUILD_ROOT/usr/sbin/
 # restart Webyast at the end of the transaction
 %create_restart_script
 
+# create restart script for *-branding subpackage
+ln -s /usr/sbin/update_webyast_service $RPM_BUILD_ROOT/var/adm/update-scripts/webyast-base-branding-default-%version-%release-update
+
 #---------------------------------------------------------------
 %clean
 rm -rf $RPM_BUILD_ROOT
@@ -448,7 +451,7 @@ fi
 %restart_on_update %{webyast_service}
 
 %post branding-default
-%webyast_update_assets
+%restart_webyast
 
 %postun branding-default
 %webyast_update_assets
@@ -561,6 +564,8 @@ fi
 %exclude %{webyast_dir}/public/assets/*.js
 %exclude %{webyast_dir}/public/assets/*.js.gz
 %exclude %{webyast_dir}/public/assets/manifest.yml.base
+# restart script
+/var/adm/update-scripts/webyast-base-branding-default-%version-%release-update
 
 #---------------------------------------------------------------
 %changelog
