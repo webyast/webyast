@@ -1,20 +1,20 @@
 #--
 # Copyright (c) 2009-2010 Novell, Inc.
-# 
+#
 # All Rights Reserved.
-# 
+#
 # This program is free software; you can redistribute it and/or modify it
 # under the terms of version 2 of the GNU General Public License
 # as published by the Free Software Foundation.
-# 
+#
 # This program is distributed in the hope that it will be useful,
 # but WITHOUT ANY WARRANTY; without even the implied warranty of
 # MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
 # GNU General Public License for more details.
-# 
+#
 # You should have received a copy of the GNU General Public License
 # along with this program; if not, contact Novell, Inc.
-# 
+#
 # To contact Novell about this file by physical or electronic mail,
 # you may find current contact information at www.novell.com
 #++
@@ -33,11 +33,10 @@ class Group < BaseModel::Base
 
   attr_accessible :cn, :old_cn, :gid, :default_members, :members, :group_type, :members_string
 
-  validates_presence_of     :members
-  validates_inclusion_of    :group_type, :in => ["system","local"]
-  validates_format_of       :cn, :with => /[a-z]+/
-  validates_format_of       :old_cn, :with => /[a-z]+/
-  validates_numericality_of :gid
+  validates_inclusion_of :group_type, :in => ["system","local"], :message=>"valid values are 'local' and 'system'"
+  validates_format_of    :cn, :with => /[a-z]+/
+  validates_format_of    :old_cn, :with => /[a-z]+/
+  validates_format_of    :gid, :with => /\A[1-4][0-9][0-9]$/, :message=>"must be between 100 and 499"
 
   def members
     @members || []
@@ -96,7 +95,7 @@ public
                                    "cn"        => ["s",  old_cn]  },
                                  { "gidNumber" => ["i",  gid.to_i],
                                    "cn"        => ["s",  cn],
-                                   "userlist"  => ["as", members] } 
+                                   "userlist"  => ["as", members] }
                                )
     end
     result # result is empty string on success, error message otherwise
