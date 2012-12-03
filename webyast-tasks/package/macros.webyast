@@ -104,6 +104,18 @@
     rm -rf log \
     cd -
 
+# set the flag to restart webyast at the end of libzypp transaction via update script
+%restart_webyast \
+    touch /var/lib/webyast/restart
+
+# restart file name for files section
+%restart_file \
+    /var/adm/update-scripts/%name-%version-%release-restart
+
+# create a restart script (symlink the base script) (for build section)
+%create_restart_script \
+    ln -s /var/adm/update-scripts/%name-%version-%release-restart /usr/sbin/restart_webyast_service
+
 %webyast_polkit \
     %if 0%{?suse_version} == 0 || %suse_version > 1110 \
       WEBYAST_POLKIT_DIR='polkit-1/actions' \

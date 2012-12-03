@@ -1,4 +1,11 @@
 -------------------------------------------------------------------
+Mon Dec  3 10:19:30 UTC 2012 - lslezak@suse.cz
+
+- added %restart_webyast, %restart_file and %create_restart_script
+  RPM macros for restarting Webyast using an update script
+- 0.3.5
+
+-------------------------------------------------------------------
 Fri Sep  7 12:41:40 UTC 2012 - lslezak@suse.cz
 
 - macros.webyast - use Gemfile.test earlier (when creating test DB),
