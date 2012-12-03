@@ -24,172 +24,54 @@ include ApplicationHelper
 class GroupsController < ApplicationController
   include ERB::Util
 
-private
-
-  def validate_group_id( id = params[:id] )
-    if id.blank?
-      respond_to do |format|
-        format.html { flash[:error] = _('Missing group name parameter')
-                      redirect_to :action => :index }
-        format.xml  { render ErrorResult.error(404, 2, 'Missing group name parameter') }
-        format.json { render ErrorResult.error(404, 2, 'Missing group name parameter') }
-      end
-      false
-    else
-      true
-    end
-  end
-
-  def validate_group_params( redirect_action )
-    if params[:group] && (! params[:group].empty?)
-      true
-    else
-      respond_to do |format|
-        format.html { flash[:error] = _('Missing group parameters')
-                      redirect_to :action => :index }
-        format.xml  { render ErrorResult.error(404, 2, 'Missing group parameters') }
-        format.json { render ErrorResult.error(404, 2, 'Missing group parameters') }
-      end
-      false
-    end
-  end
-
-  def validate_group_name( redirect_action )
-    if params[:group] && params[:group][:cn] =~ /[a-z]+/
-      true
-    else
-      respond_to do |format|
-        format.html { flash[:error] = _('Please enter a valid group name')
-                      redirect_to :action => :index }
-        format.xml  { render ErrorResult.error(404, 2, 'Please enter a valid group name') }
-        format.json { render ErrorResult.error(404, 2, 'Please enter a valid group name') }
-      end
-      false
-    end
-  end
-
-  def validate_group_gid
-    if params[:group] && params[:group][:gid] =~ /\A[1-4][0-9][0-9]$/
-      true
-    else
-      err_message = _("Invalid GID, expecting an integer between 100 and 499")
-      respond_to do |format|
-        format.html do
-          flash[:error] = err_message
-          redirect_to(:action => :index) and return
-        end
-        format.xml  { render ErrorResult.error(404, 2, err_message) }
-        format.json { render ErrorResult.error(404, 2, err_message) }
-      end
-      false
-    end
-  end
-
-  def validate_group_type( redirect_action )
-    if params[:group] && ["system","local"].include?( params[:group][:group_type] )
-      true
-    else
-      respond_to do |format|
-        format.html { flash[:error] = _('Please enter a valid group type. Only "system" or "local" are allowed.')
-                      redirect_to :action => :index }
-        format.xml  { render ErrorResult.error(404, 2, 'Please enter a valid group type. Only "system" or "local" are allowed.') }
-        format.json { render ErrorResult.error(404, 2, 'Please enter a valid group type. Only "system" or "local" are allowed.') }
-      end
-      false
-    end
-  end
-
-  def validate_members( redirect_action )
-    member = "[a-z]+"
-    if params[:group] && (params[:group][:members_string].blank? || (params[:group][:members_string] =~ /(#{member}( *, *#{member})+)?/))
-      true
-    else
-      respond_to do |format|
-        format.html { flash[:error] = _('Please enter a valid list of members')
-                      redirect_to :action => :index }
-        format.xml  { render ErrorResult.error(404, 2, 'Please enter a valid list of members') }
-        format.json { render ErrorResult.error(404, 2, 'Please enter a valid list of members') }
-      end
-      false
-    end
-  end
-
-
-  # log Group.find error and provide matching ErrorResult
-  def group_not_found gid
-    Rails.logger.error "Group #{gid} was not found."
-    ErrorResult.error(404, 2, "group #{gid} not found")
-  end
-
-public
-
-  # GET /groups/users
-  # GET /groups/users.xml
   def show
     authorize! :groupget, User
     # try to find the grouplist, and 404 if it does not exist
     # RORSCAN_INL: User has already read permission for ALL groups here
-    @group = Group.find params[:id]
-    if @group.nil?
-      render group_not_found(params[:id]) and return
-    end
-
-    respond_to do |format|
-      format.xml { render  :xml => @group.to_xml( :dasherize => false ) }
-      format.json { render :json => @group.to_json }
+    group_name = params[:id]
+    @group = Group.find group_name
+    if @group
+      respond_to do |format|
+        format.xml  { render  :xml => @group.to_xml(:dasherize => false) }
+        format.json { render :json => @group.to_json }
+      end
+    else
+      Rails.logger.error "Group '#{group_name}' not found" unless @groups
+      render ErrorResult.error(404, 2, "Group with name '#{group_name}' not found")
     end
   end
 
-  # GET /groups.xml
   def index
     authorize! :groupsget, User
     @groups = Group.find_all
-    Rails.logger.error "No groups found." unless @groups
-    respond_to do |format|
-      format.xml {
-        if @groups.nil?
-          render ErrorResult.error(404, 2, "No groups found")
-        else
-          render  :xml => @groups.to_xml(:root => "groups",
-                  :dasherize => false )
+    if @groups
+      respond_to do |format|
+        format.html do
+          @groups.sort! { |a,b| a.cn <=> b.cn }
+          @users = []
+          @sys_users = []
+          @users     = User.find_all({ :attributes => "uid"})
+          @sys_users = User.find_all({ "attributes"=>"cn,uidNumber,uid",
+           "type"=>"system", "index"=>["s", "uid"]} )
+          @all_users_string = @users.map(&:uid).join(',')
+          @all_sys_users_string = @sys_users.map(&:uid).join(',')
+          render :index
         end
-        return
-      }
-      format.json {
-        if @groups.nil?
-          render ErrorResult.error(404, 2, "No groups found")
-        else
-          render :json => @groups.to_json
+        format.xml do
+          render :xml=>@groups.to_xml(:root=>"groups", :dasherize=>false )
         end
-        return
-      }
-      format.html {
-        @groups.sort! { |a,b| a.cn <=> b.cn } if @groups
-        @all_users_string = ""
-        @all_sys_users_string = ""
-        @users = []
-        @sys_users = []
-        @users     = User.find_all({ :attributes => "uid"})
-        @sys_users = User.find_all({ "attributes"=>"cn,uidNumber,uid",
-                                     "type"=>"system",
-                                     "index"=>["s", "uid"]} )
-        @users.each do |user|
-          if @all_users_string.blank?
-            @all_users_string = user.uid
-          else
-            @all_users_string += ",#{user.uid}"
-          end
+        format.json do
+          render :json=>@groups.to_json(:root=>"groups")
         end
-
-        @sys_users.each do |user|
-          if @all_sys_users_string.blank?
-            @all_sys_users_string = user.uid
-          else
-            @all_sys_users_string += ",#{user.uid}"
-          end
-        end
-        render :index
-      }
+      end
+    else
+      Rails.logger.error "No groups found."
+      error = ErrorResult.error 404, 2, "No groups found"
+      respond_to do |format|
+        format.html { render error }
+        format.xml  { render :xml=>error  }
+        format.json { render :json=>error }
+      end
     end
   end
 
@@ -219,55 +101,45 @@ public
     render :new
   end
 
-  # POST /groups/users/
   def update
-    validate_group_gid
-    validate_group_id(params[:group][:old_cn]) or return
-    validate_group_params( :index ) or return
-    validate_group_name( :index ) or return
-    validate_group_type(:index) or return
-    validate_members( :index ) or return
     group_params = params[:group] || {}
     @group = Group.new group_params
     @group.members = group_params[:members_string].split(",").collect {|cn| cn.strip} unless group_params[:members_string].blank?
-    result = @group.save
-    Rails.logger.error "Cannot update group '#{@group.cn}' (#{@group.inspect}): #{result}" unless result.blank?
-    respond_to do |format|
-      format.html do
-        if result.present?
-          flash[:message] = (_("Group <i>%s</i> has been updated.") % h(@group.cn)).html_safe
-          redirect_to :action => :index
-        else
-          flash[:error] = (_("Cannot update group <i>%s</i>, %s") % [h(@group.cn), result]).html_safe
-          redirect_to :action => :index
+    if @group.valid?
+      result = @group.save
+      if result.present?
+        flash[:message] = (_("Group <i>%s</i> has been updated.") % h(@group.cn)).html_safe
+        respond_to do |format|
+          format.html { redirect_to :action => :index }
+          format.xml  { render :show }
+          format.json { render :show }
+        end
+      else
+        Rails.logger.error "Cannot update group '#{@group.cn}' (#{@group.inspect}): #{result}"
+        respond_to do |format|
+          format.html do
+            flash[:error] = (_("Cannot update group <i>%s</i>, %s") % [h(@group.cn), result]).html_safe
+            redirect_to :action => :index
+          end
+          format.xml  { render ErrorResult.error(404, 2, "Group update error:'#{result}'") }
+          format.json { render ErrorResult.error(404, 2, "Group update error:'#{result}'") }
         end
       end
-      format.xml do
-        if result.present?
-          render :show
-        else
-          render ErrorResult.error(404, 2, "Group update error:'#{result}'")
-        end
-      end
-      format.json do
-        if result.present?
-          render :show
-        else
-          render ErrorResult.error(404, 2, "Group update error:'#{result}'")
-        end
-      end
+    else
+      flash[:error] = @group.errors.full_messages
+      redirect_to :action=>:index
     end
   end
 
   # PUT /groups/
   def create
     authorize! :groupadd, User
-    validate_group_params( :new ) or return
-    validate_group_name( :new ) or return
+   #validate_group_params( :new ) or return
+   #validate_group_name( :new ) or return
     group_params = params[:group] || {}
     group_params[:old_cn] = group_params[:cn]
-    validate_members( :new ) or return
-    validate_group_type( :new ) or return
+   #validate_members( :new ) or return
+   #validate_group_type( :new ) or return
     @group = Group.new group_params
     @group.members = group_params[:members_string].split(",").collect {|cn| cn.strip} unless group_params[:members_string].blank?
     result = @group.save
