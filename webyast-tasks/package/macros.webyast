@@ -114,6 +114,7 @@
 
 # create a restart script (symlink the base script) (for build section)
 %create_restart_script \
+    mkdir -p $RPM_BUILD_ROOT/var/adm/update-scripts \
     ln -s /usr/sbin/restart_webyast_service $RPM_BUILD_ROOT/var/adm/update-scripts/%name-%version-%release-restart
 
 %webyast_polkit \
