@@ -114,7 +114,7 @@
 
 # create a restart script (symlink the base script) (for build section)
 %create_restart_script \
-    ln -s /var/adm/update-scripts/%name-%version-%release-restart /usr/sbin/restart_webyast_service
+    ln -s /usr/sbin/restart_webyast_service $RPM_BUILD_ROOT/var/adm/update-scripts/%name-%version-%release-restart
 
 %webyast_polkit \
     %if 0%{?suse_version} == 0 || %suse_version > 1110 \
