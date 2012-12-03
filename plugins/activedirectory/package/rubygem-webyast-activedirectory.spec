@@ -27,11 +27,11 @@ BuildRoot:      %{_tmppath}/%{name}-%{version}-build
 BuildRequires:  rubygems_with_buildroot_patch
 %rubygems_requires
 BuildRequires:  rubygem-restility
-BuildRequires:  rubygem-webyast-rake-tasks >= 0.2
+BuildRequires:  rubygem-webyast-rake-tasks >= 0.3.5
 BuildRequires:  webyast-base
 BuildRequires:  webyast-base-testsuite
 PreReq:         webyast-base
-PreReq:         rubygem-webyast-rake-tasks >= 0.2
+PreReq:         rubygem-webyast-rake-tasks >= 0.3.5
 Requires:       yast2-dbus-server
 Requires:       yast2-samba-client
 Requires:	samba-client samba-winbind

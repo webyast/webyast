@@ -109,7 +109,7 @@
     touch /var/lib/webyast/restart
 
 # restart file name for files section
-%restart_file \
+%restart_script_name \
     /var/adm/update-scripts/%name-%version-%release-restart
 
 # create a restart script (symlink the base script) (for build section)

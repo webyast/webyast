@@ -1,0 +1,19 @@
+#!/bin/sh
+
+# This is a shared script for restarting webyast after package update.
+# The restart is done via an update script which symlinks to this file.
+
+RESTART_FILE="/var/lib/webyast/restart"
+WEBYAST_SERVICE="/etc/init.d/webyast"
+
+# restart file and Webyast initscript present
+if [ -f $RESTART_FILE -a -f $WEBYAST_SERVICE ]; then
+
+  # restart Webyast if is running
+  $WEBYAST_SERVICE status > /dev/null
+  if [ $? -eq 0 ]; then
+    $WEBYAST_SERVICE restart
+  fi
+
+  rm $RESTART_FILE
+fi
