@@ -80,6 +80,7 @@ Usually in RDoc and RI formats.
 %prep
 
 %build
+%create_restart_script
 
 %check
 
@@ -143,5 +144,7 @@ cp %{SOURCE2} $RPM_BUILD_ROOT/usr/share/YaST2/modules/YaPI/
 %files testsuite
 %defattr(-,root,root,-)
 %{_libdir}/ruby/gems/%{rb_ver}/gems/%{mod_full_name}/test
+
+%restart_script_name
 
 %changelog

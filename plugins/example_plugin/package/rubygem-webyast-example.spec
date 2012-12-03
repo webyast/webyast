@@ -22,10 +22,10 @@ License:        GPL-2.0
 BuildRoot:      %{_tmppath}/%{name}-%{version}-build
 BuildRequires:  rubygems_with_buildroot_patch
 %rubygems_requires
-BuildRequires:	webyast-base >= 0.3
+BuildRequires:	webyast-base >= 0.3.31
 BuildRequires:	webyast-base-testsuite
 BuildRequires:	rubygem-restility
-PreReq:	        webyast-base >= 0.3
+PreReq:	        webyast-base >= 0.3.31
 
 Summary:        WebYaST - example plugin
 
@@ -67,6 +67,7 @@ needed at runtime.
 %prep
 
 %build
+%create_restart_script
 
 %check
 # run the testsuite
@@ -135,5 +136,7 @@ rm -rf $RPM_BUILD_ROOT/%{_libdir}/ruby/gems/%{rb_ver}/gems/%{mod_full_name}/publ
 %files testsuite
 %defattr(-,root,root,-)
 %{_libdir}/ruby/gems/%{rb_ver}/gems/%{mod_full_name}/test
+
+%restart_script_name
 
 %changelog

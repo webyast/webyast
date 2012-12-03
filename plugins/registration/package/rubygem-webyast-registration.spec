@@ -22,9 +22,9 @@ License:        GPL-2.0
 BuildRoot:      %{_tmppath}/%{name}-%{version}-build
 BuildRequires:  rubygems_with_buildroot_patch
 %rubygems_requires
-BuildRequires:	webyast-base >= 0.3
+BuildRequires:	webyast-base >= 0.3.31
 BuildRequires:	webyast-base-testsuite
-PreReq:	        webyast-base >= 0.3
+PreReq:	        webyast-base >= 0.3.31
 Recommends:     openssl-certs
 
 Obsoletes:	webyast-registration-ws < %{version}
@@ -83,6 +83,7 @@ needed at runtime.
 %prep
 
 %build
+%create_restart_script
 
 %check
 # run the testsuite
@@ -143,5 +144,7 @@ cp %{SOURCE3} $RPM_BUILD_ROOT/usr/share/YaST2/modules/YaPI/
 %files testsuite
 %defattr(-,root,root,-)
 %{_libdir}/ruby/gems/%{rb_ver}/gems/%{mod_full_name}/test
+
+%restart_script_name
 
 %changelog

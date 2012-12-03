@@ -28,9 +28,9 @@ BuildRequires:  rubygems_with_buildroot_patch
 %rubygems_requires
 BuildRequires:  rubygem-webyast-ntp
 BuildRequires:  rubygem-webyast-services
-BuildRequires:  webyast-base >= 0.3
+BuildRequires:  webyast-base >= 0.3.31
 BuildRequires:  webyast-base-testsuite
-PreReq:         webyast-base >= 0.3, rubygem-webyast-ntp, rubygem-webyast-services
+PreReq:         webyast-base >= 0.3.31, rubygem-webyast-ntp, rubygem-webyast-services
 
 Obsoletes:      webyast-time-ui < %{version}
 Obsoletes:      webyast-time-ws < %{version}
@@ -82,6 +82,7 @@ needed at runtime.
 %prep
 
 %build
+%create_restart_script
 
 %check
 # run the testsuite
@@ -125,5 +126,7 @@ needed at runtime.
 %files testsuite
 %defattr(-,root,root,-)
 %{_libdir}/ruby/gems/%{rb_ver}/gems/%{mod_full_name}/test
+
+%restart_script_name
 
 %changelog

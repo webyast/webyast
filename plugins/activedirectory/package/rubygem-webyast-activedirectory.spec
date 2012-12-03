@@ -78,6 +78,7 @@ Test::Unit or RSpec files, useful for developers.
 
 %prep
 %build
+%create_restart_script
 
 %post
 # granting all permissions for the web user
@@ -139,5 +140,7 @@ install -m 0644 %{SOURCE2} $RPM_BUILD_ROOT/usr/share/YaST2/modules/YaPI/
 %files testsuite
 %defattr(-,root,root,-)
 %{_libdir}/ruby/gems/%{rb_ver}/gems/%{mod_full_name}/test
+
+%restart_script_name
 
 %changelog
