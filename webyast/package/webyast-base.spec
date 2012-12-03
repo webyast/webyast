@@ -467,6 +467,7 @@ fi
 
 # include the restart script
 %restart_script_name
+%attr(755,root,root) /usr/sbin/restart_webyast_service
 
 #logrotate configuration file
 %config(noreplace) /etc/logrotate.d/webyast.lr.conf
