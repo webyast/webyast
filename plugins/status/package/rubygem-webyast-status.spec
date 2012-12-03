@@ -149,7 +149,6 @@ rm -rf /var/lib/collectd/*
 %{fillup_and_insserv -Y collectd}
 rccollectd try-restart
 
-%webyast_update_assets
 
 %restart_webyast
 

@@ -75,7 +75,6 @@ Test::Unit or RSpec files, useful for developers.
 /usr/sbin/grantwebyastrights --user root --action grant > /dev/null
 /usr/sbin/grantwebyastrights --user %{webyast_user} --action grant > /dev/null
 
-%webyast_update_assets
 
 %restart_webyast
 

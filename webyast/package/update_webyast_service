@@ -1,0 +1,29 @@
+#!/bin/sh
+
+# This is a shared script for updating and restarting webyast after package update.
+# The restart is done via an update script which symlinks to this file.
+
+RESTART_FILE="/var/lib/webyast/restart"
+WEBYAST_DIR="/srv/www/webyast"
+
+# restart file and Webyast initscript present
+if [ -f $RESTART_FILE ]; then
+
+    cd $WEBYAST_DIR
+    # update assets - use assets.rake file directly for faster loading
+    rake -f lib/tasks/assets.rake assets:join_manifests
+
+    # update Gemfile
+    if test -f "Gemfile" ; then
+	bundle update
+    fi
+    cd -
+
+    # restart Webyast if it is running
+    $WEBYAST_SERVICE status > /dev/null
+    if [ $? -eq 0 ]; then
+	WEBYAST_SERVICE restart
+    fi
+
+    rm $RESTART_FILE
+fi

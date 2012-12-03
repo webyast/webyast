@@ -123,7 +123,6 @@ mkdir -p $RPM_BUILD_ROOT/var/lib/webyast/software/licenses/accepted
 /usr/sbin/grantwebyastrights --user %{webyast_user} --action grant --policy org.freedesktop.packagekit.system-update >& /dev/null || true
 /usr/sbin/grantwebyastrights --user %{webyast_user} --action grant --policy org.freedesktop.packagekit.package-eula-accept >& /dev/null || true
 
-%webyast_update_assets
 
 %restart_webyast
 

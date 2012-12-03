@@ -83,7 +83,6 @@ mkdir -p $RPM_BUILD_ROOT/usr/share/%{webyast_polkit_dir}
 %{__rm} -rf $RPM_BUILD_ROOT
 
 %post
-%webyast_update_assets
 
 %restart_webyast
 

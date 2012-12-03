@@ -83,7 +83,7 @@ Source12:       nginx.conf
 Source13:       control_panel.yml
 Source14:       config.yml
 Source15:       config.yml.new
-Source16:	restart_webyast_service
+Source16:	update_webyast_service
 
 BuildRoot:      %{_tmppath}/%{name}-%{version}-build
 BuildRequires:  ruby, pkg-config, rubygem-mocha
@@ -467,7 +467,7 @@ fi
 
 # include the restart script
 %restart_script_name
-%attr(755,root,root) /usr/sbin/restart_webyast_service
+%attr(755,root,root) /usr/sbin/update_webyast_service
 
 #logrotate configuration file
 %config(noreplace) /etc/logrotate.d/webyast.lr.conf
