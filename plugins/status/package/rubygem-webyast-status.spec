@@ -151,6 +151,8 @@ rccollectd try-restart
 
 %webyast_update_assets
 
+%restart_webyast
+
 %postun
 %webyast_remove_assets
 
@@ -177,6 +179,8 @@ rccollectd try-restart
 %dir /etc/webyast/vendor
 %config /etc/webyast/logs.yml
 
+%restart_script_name
+
 %files doc
 %defattr(-,root,root,-)
 %doc %{_libdir}/ruby/gems/%{rb_ver}/doc/%{mod_full_name}/
@@ -185,6 +189,6 @@ rccollectd try-restart
 %defattr(-,root,root,-)
 %{_libdir}/ruby/gems/%{rb_ver}/gems/%{mod_full_name}/test
 
-%restart_script_name
+
 
 %changelog

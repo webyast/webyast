@@ -104,6 +104,7 @@ mkdir -p $RPM_BUILD_ROOT/%{_libdir}/ruby/gems/%{rb_ver}/gems/%{mod_full_name}/lo
 # granting all permissions for the webservice user and root
 /usr/sbin/grantwebyastrights --user root --action grant > /dev/null
 /usr/sbin/grantwebyastrights --user %{webyast_user} --action grant > /dev/null
+%restart_webyast
 
 %files 
 %defattr(-,root,root,-)
@@ -119,6 +120,8 @@ mkdir -p $RPM_BUILD_ROOT/%{_libdir}/ruby/gems/%{rb_ver}/gems/%{mod_full_name}/lo
 %attr(644,root,root) /usr/share/YaST2/modules/YaPI/NTP.pm
 %attr(644,root,root) /usr/share/%{webyast_polkit_dir}/org.opensuse.yast.modules.yapi.ntp.policy
 
+%restart_script_name
+
 %files doc
 %defattr(-,root,root,-)
 %doc %{_libdir}/ruby/gems/%{rb_ver}/doc/%{mod_full_name}/
@@ -127,6 +130,6 @@ mkdir -p $RPM_BUILD_ROOT/%{_libdir}/ruby/gems/%{rb_ver}/gems/%{mod_full_name}/lo
 %defattr(-,root,root,-)
 %{_libdir}/ruby/gems/%{rb_ver}/gems/%{mod_full_name}/test
 
-%restart_script_name
+
 
 %changelog

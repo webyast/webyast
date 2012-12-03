@@ -120,6 +120,8 @@ cp %SOURCE3 $RPM_BUILD_ROOT/etc/webyast/
 
 %webyast_update_assets
 
+%restart_webyast
+
 %postun
 %webyast_remove_assets
 
@@ -146,6 +148,8 @@ cp %SOURCE3 $RPM_BUILD_ROOT/etc/webyast/
 /usr/share/YaST2/modules/YML.rb
 /usr/share/YaST2/modules/YaPI/SERVICES.pm
 
+%restart_script_name
+
 %files doc
 %defattr(-,root,root,-)
 %doc %{_libdir}/ruby/gems/%{rb_ver}/doc/%{mod_full_name}/
@@ -154,6 +158,6 @@ cp %SOURCE3 $RPM_BUILD_ROOT/etc/webyast/
 %defattr(-,root,root,-)
 %{_libdir}/ruby/gems/%{rb_ver}/gems/%{mod_full_name}/test
 
-%restart_script_name
+
 
 %changelog

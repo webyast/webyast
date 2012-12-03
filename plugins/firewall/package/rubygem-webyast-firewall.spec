@@ -114,6 +114,8 @@ cp %{SOURCE2} $RPM_BUILD_ROOT/usr/share/YaST2/modules/YaPI/
 
 %webyast_update_assets
 
+%restart_webyast
+
 %postun
 %webyast_remove_assets
 
@@ -137,6 +139,8 @@ cp %{SOURCE2} $RPM_BUILD_ROOT/usr/share/YaST2/modules/YaPI/
 %dir /usr/share/YaST2/modules/YaPI/
 /usr/share/YaST2/modules/YaPI/FIREWALL.pm
 
+%restart_script_name
+
 %files doc
 %defattr(-,root,root,-)
 %doc %{_libdir}/ruby/gems/%{rb_ver}/doc/%{mod_full_name}/
@@ -145,6 +149,6 @@ cp %{SOURCE2} $RPM_BUILD_ROOT/usr/share/YaST2/modules/YaPI/
 %defattr(-,root,root,-)
 %{_libdir}/ruby/gems/%{rb_ver}/gems/%{mod_full_name}/test
 
-%restart_script_name
+
 
 %changelog
