@@ -232,6 +232,7 @@
         modal: true,
 	      close: clearForm,
         buttons: {
+               <%# TODO FIXME: make the button labels translatable -%>
 	       'Create Role': function() {
 	       if ($("#rolesForm").validate().form() == true) {
 	         $(this).children("form").first().submit();
