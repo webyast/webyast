@@ -32,7 +32,7 @@ class MailsettingControllerTest < ActionController::TestCase
   end
   
   test "check 'show' result" do
-    ret = get :index, :format => "xml"
+    ret = get :show, :format => "xml"
     # success (200 OK)
     assert_response :success
 

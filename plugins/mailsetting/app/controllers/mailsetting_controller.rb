@@ -26,7 +26,7 @@ class MailsettingController < ApplicationController
 
 public
 
-  def index
+  def show
     authorize! :read, Mailsetting
    
     @mail = Mailsetting.find
@@ -39,7 +39,14 @@ public
       format.html
       format.xml  {
         if @mail
-          render :xml => @mail.to_xml(:dasherize => false, :root => "mail")
+          render :xml => @mail.to_xml(:dasherize => false, :root => "mail", :location => "none")
+        else
+          head :not_found
+        end
+      }
+      format.json {
+        if @mail
+          render :json => @mail.to_json, :location => "none"
         else
           head :not_found
         end
@@ -47,16 +54,6 @@ public
     end
   end
   
-  def show
-    authorize! :read, Mailsetting
-    mail = Mailsetting.find
-
-    respond_to do |format|
-      format.xml  { render :xml => mail.to_xml(:root => "mail", :dasherize => false, :indent=>2), :location => "none" }
-      format.json { render :json => mail.to_json, :location => "none" }
-    end
-  end
-    
   def update
     authorize! :write, Mailsetting
     @mail = Mailsetting.find
@@ -98,7 +95,7 @@ public
 
     if params.has_key?("send_mail")
       if request.format.html?
-        redirect_to :action => "index", :email => params["mail"]["test_mail_address"]
+        redirect_to :action => "show", :email => params["mail"]["test_mail_address"]
         return
       else
         params[:email] =  params["mail"]["test_mail_address"]
@@ -107,7 +104,7 @@ public
     if request.format.html? 
       redirect_success # redirect to next step
     else
-      index
+      show
     end
   end
   
@@ -120,7 +117,7 @@ private
   def problem message
     if request.format.html?
       flash[:error] = message
-      redirect_to :action => "index"
+      redirect_to :action => "show"
     else #REST request
       error = { "error" => { "type" => "ADMINISTRATOR_ERROR", "messsage" => message, "id" => "ADMINISTRATOR" }}
       respond_to do |format|
