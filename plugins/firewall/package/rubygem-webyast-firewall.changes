@@ -1,4 +1,11 @@
 -------------------------------------------------------------------
+Tue Dec  4 07:47:37 UTC 2012 - lslezak@suse.cz
+
+- fixed rendering the main page (match the view template with
+  routing), removed duplicate index action (bnc#792556)
+- 0.3.9
+
+-------------------------------------------------------------------
 Fri Nov 23 08:18:00 UTC 2012 - lslezak@suse.cz
 
 - REST API fixes - routing, updated exmaples, JSON support

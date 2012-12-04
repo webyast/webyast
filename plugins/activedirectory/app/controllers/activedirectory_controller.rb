@@ -23,7 +23,7 @@
 
 
 class ActivedirectoryController < ApplicationController
-  def index
+  def show
     authorize! :read, Activedirectory
     @poll_for_updates = true
     
@@ -88,15 +88,15 @@ class ActivedirectoryController < ApplicationController
           @activedirectory.administrator = ""
           @activedirectory.password = ""
           @activedirectory.machine = ""
-          render :index and return
+          render :show and return
           
         elsif e.id == "join_error"
           flash[:error] = _("Error while joining Active Directory domain: %s") % e.message
-          render :index and return
+          render :show and return
           
         elsif e.id == "leave_error"
           flash[:error] = _("Error while leaving Active Directory domain: %s") % e.message
-          render :index and return
+          render :show and return
         else
           Rails.logger.debug "ERROR INSPECT #{e.inspect}"
           flash[:error] = _("Error while saving Active Directory client configuration.")
@@ -134,18 +134,6 @@ class ActivedirectoryController < ApplicationController
       end
     end
     
-  end
-
-  # GET action
-  # Read AD client settings
-  def show
-    authorize! :read, Activedirectory
-    ad = Activedirectory.find
-
-    respond_to do |format|
-      format.xml  { render :xml => ad.to_xml}
-      format.json { render :json => ad.to_json}
-    end
   end
 
   # See update

@@ -39,14 +39,14 @@ class ActivedirectoryControllerTest < ActionController::TestCase
     mime = Mime::HTML
     @request.accept = mime.to_s
 
-    get :index, :format => "html"
+    get :show, :format => "html"
     assert_response :success
     assert_valid_markup
     assert_equal mime.to_s, @response.content_type
   end
   
   test "access index xml" do
-    xml = get :index, :format => "xml"
+    xml = get :show, :format => "xml"
     xml_to_hash = Hash.from_xml(xml.body)
     
     assert xml_to_hash
