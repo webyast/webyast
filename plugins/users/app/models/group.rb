@@ -36,7 +36,7 @@ class Group < BaseModel::Base
   validates_inclusion_of :group_type, :in => ["system","local"], :message=>"valid values are 'local' and 'system'"
   validates_format_of    :cn, :with => /[a-z]+/
   validates_format_of    :old_cn, :with => /[a-z]+/
-  validates_format_of    :gid, :with => /\A[1-4][0-9][0-9]$/, :message=>"must be between 100 and 499"
+  validates_numericality_of :gid
 
   def members
     @members || []
