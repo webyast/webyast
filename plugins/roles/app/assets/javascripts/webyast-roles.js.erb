@@ -45,9 +45,7 @@
 
 //Info tooltip
 hideTooltip = function() { 
-  var $tooltip = $('#roles_tipsy_tooltip');
-  $tooltip.fadeOut(); 
-  $($tooltip).attr({"style": 'display:none'});
+  $('#roles_tipsy_tooltip').fadeOut('slow');
 }
 
 showTooltip = function(message) {
