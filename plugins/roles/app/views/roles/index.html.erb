@@ -216,7 +216,7 @@
       $("img.deleteRole").click( function () { blockForm(); });
 
 
-      $('#usersContent').sliderNav({items:[<%= @alpha %>], arrows:false });
+      $('#usersContent').sliderNav({items:[<%= @alpha.html_safe %>], arrows:false });
 
     });
 
