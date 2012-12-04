@@ -75,7 +75,7 @@
   function collect_groups_ids() {
     var ids = [];
     $(".group_gid").each(function() {
-      ids.push(parseInt($(this).val()));
+      ids.push($(this).val());
     });
     $("#groups").data("groups_ids", ids);
   }
@@ -88,34 +88,34 @@
     $("#groups").data("groups_names", names);
   }
 
-  function warn_for_duplicate_gid() {
-    $(".group_gid").keyup(function(e){
-      if($.inArray($(e.currentTarget).val(), $("#groups").data('groups_ids')) > -1){
-        $(e.currentTarget).siblings('label.error').show();
-      }
-      else {
-        $(e.currentTarget).siblings('label.error').hide();
-      }
+  $.validator.addMethod("unique_cn", function(current_cn, element) {
+    var original_cn_value = $('#origin_' + $(element).attr('id')).val();
+    var original_cn_names = $.grep($("#groups").data('groups_names'), function(value){
+      return (value != original_cn_value);
     });
-  }
-
-  $.validator.addMethod("unique_cn", function(value, element) {
-  original_cn_value = $(element);
-    if($.inArray(value, $("#groups").data('groups_names')) > -1){
+    if($.inArray(current_cn, original_cn_names) > -1){
       return false
-    } else {
-      return true
-      }
-    },
-    "<%= _("Must be unique") %>"
+    } else { return true } }, "<%= _("Must be unique") %>"
   )
 
+  $.validator.addMethod("unique_gid", function(current_gid, element) {
+    var original_gid  = $('#origin_' + $(element).attr('id')).val();
+    var original_gids = $.grep($("#groups").data('groups_ids'), function(value){
+      return (value != original_gid);
+    });
+    console.log("current gid: " + current_gid);
+    console.log("original gid: " + original_gid);
+    console.log("all original gids without the current one: ");
+    console.log(original_gids);
+    console.log($.inArray(current_gid, original_gids));
+    if($.inArray(current_gid, original_gids) > -1){
+      return false;
+    } else { return true } }, "<%= _("Already exists") %>"
+  )
   $(document).ready(function(){
 
     collect_groups_ids();
     collect_groups_names();
-    //warn_for_duplicate_gid();
-    //$(".group_cn").validate();
 
     select_users_open = select_users_dialog();
 
