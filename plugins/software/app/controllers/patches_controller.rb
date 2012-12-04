@@ -22,7 +22,6 @@
 class PatchesController < ApplicationController
   include ERB::Util
 
-  before_filter :cache_check, :only => [:index, :show_summary]
   after_filter :drop_cache
 
   # include locale in the cache path to cache different translations
@@ -33,8 +32,6 @@ private
 
   # check permission and validate cache content
   def cache_check
-    authorize! :read, Patch
-
     cached_mtime = Rails.cache.fetch("webyast_patch_mtime")
     current_mtime = Patch.mtime
 
@@ -100,6 +97,8 @@ private
   # GET /patches.xml
   def index
     authorize! :read, Patch
+    cache_check
+
     @msgs = read_messages
     if params['messages']
       Rails.logger.debug "Reading patch messages"
@@ -193,39 +192,47 @@ private
     patch_updates = nil
     ref_timeout = nil
     error_type = :none
-    running, remaining = Patch.installing
 
-    if running
-      ref_timeout = 10.seconds
-      error_type = :install
-      error_string = h _("Patch installation is in progress.")
+    if can? :read, Patch
+      # validate the cache
+      cache_check
+      running, remaining = Patch.installing
 
-      if remaining.present?
-        error_string << "<br/>".html_safe
-        error_string << h(n_("There is one patch to install.", "There are %d patches to install.", remaining) % remaining)
-      end
-    elsif PatchesState.read[:message_id] == "PATCH_EULA" #checking if there is a missing licence
-      error_type = :license
-    else
-      #evaluate available patches
-      begin
-        patch_updates = Patch.find :all
-        patch_updates = patch_updates + collect_done_patches #report also which patches is installed
-        ref_timeout = refresh_timeout
-      rescue Exception => error
-        if error.description.match /Repository (.*) needs to be signed/
-          error_string = (_("Cannot read patch updates: GPG key for repository <em>%s</em> is not trusted.") % $1).html_safe
-          error_type = :unsigned
-        elsif error.description.match /System management is locked by the application with pid ([0-9]+) \((.*)\)\./
+      if running
+        ref_timeout = 10.seconds
+        error_type = :install
+        error_string = h _("Patch installation is in progress.")
+
+        if remaining.present?
+          error_string << "<br/>".html_safe
+          error_string << h(n_("There is one patch to install.", "There are %d patches to install.", remaining) % remaining)
+        end
+      elsif PatchesState.read[:message_id] == "PATCH_EULA" #checking if there is a missing licence
+        error_type = :license
+      else
+        #evaluate available patches
+        begin
+          patch_updates = Patch.find :all
+          patch_updates = patch_updates + collect_done_patches #report also which patches is installed
+          ref_timeout = refresh_timeout
+        rescue Exception => error
+          if error.description.match /Repository (.*) needs to be signed/
+            error_string = (_("Cannot read patch updates: GPG key for repository <em>%s</em> is not trusted.") % h($1)).html_safe
+            error_type = :unsigned
+          elsif error.description.match /System management is locked by the application with pid ([0-9]+) \((.*)\)\./
           error_string = _("Software management is locked by another application ('%s', PID %s).") % [$2, $1]
-          error_type = :locked
-          @drop_cache = true
-        else
-          error_string = error.message
-          error_type = :unknown
-          @drop_cache = true
+            error_type = :locked
+            @drop_cache = true
+          else
+            error_string = error.message
+            error_type = :unknown
+            @drop_cache = true
+          end
         end
       end
+    else
+      error_type = :no_permission
+      error_string = _("Status not available (no permissions)")
     end
 
     patches_summary = nil
@@ -256,7 +263,9 @@ private
                            :error_string => error_string,
                            :error_type => error_type,
                            :refresh_timeout => ref_timeout } }
+      # TODO error handling in JSON and XML
       format.json  { render :json => patches_summary }
+      format.xml  { render :xml => patches_summary }
     end
   end
 

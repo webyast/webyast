@@ -1,4 +1,9 @@
 -------------------------------------------------------------------
+Tue Dec  4 11:42:38 UTC 2012 - lslezak@suse.cz
+
+- fixed rendering permission error in patch summary
+
+-------------------------------------------------------------------
 Mon Dec  3 08:25:00 UTC 2012 - lslezak@suse.cz
 
 - fixed accepting patch license, UI fixes
