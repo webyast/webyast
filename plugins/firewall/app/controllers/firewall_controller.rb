@@ -34,7 +34,7 @@ class FirewallController < ApplicationController
   end
 
   public 
-    def index
+    def show
       authorize! :read, Firewall
     
       @firewall = Firewall.find
@@ -46,7 +46,7 @@ class FirewallController < ApplicationController
           render :xml => @firewall.to_xml(:dasherize => false) and return
       end
       if request.format.json?
-          render :json => @firewall.to_json and return
+          render :json => @firewall.to_json(:dasherize => false) and return
       end
 
       @firewall.fw_services.each do |service|
@@ -56,17 +56,6 @@ class FirewallController < ApplicationController
       end
 
       @needed_services = @firewall.fw_services.find_all{|s| NEEDED_SERVICES.include?(s["id"])}
-    end
-    
-
-    def show
-      authorize! :read, Firewall
-
-      respond_to do |format|
-        format.xml  { render  :xml => Firewall.find.to_xml( :dasherize => false ) }
-        format.html { index }
-        format.json { render :json => Firewall.find.to_json( :dasherize => false ) }
-      end
     end
     
     def update
