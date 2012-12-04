@@ -88,15 +88,15 @@ class ActivedirectoryController < ApplicationController
           @activedirectory.administrator = ""
           @activedirectory.password = ""
           @activedirectory.machine = ""
-          render :index and return
+          render :show and return
           
         elsif e.id == "join_error"
           flash[:error] = _("Error while joining Active Directory domain: %s") % e.message
-          render :index and return
+          render :show and return
           
         elsif e.id == "leave_error"
           flash[:error] = _("Error while leaving Active Directory domain: %s") % e.message
-          render :index and return
+          render :show and return
         else
           Rails.logger.debug "ERROR INSPECT #{e.inspect}"
           flash[:error] = _("Error while saving Active Directory client configuration.")
