@@ -23,7 +23,7 @@
 
 
 class ActivedirectoryController < ApplicationController
-  def index
+  def show
     authorize! :read, Activedirectory
     @poll_for_updates = true
     
@@ -134,18 +134,6 @@ class ActivedirectoryController < ApplicationController
       end
     end
     
-  end
-
-  # GET action
-  # Read AD client settings
-  def show
-    authorize! :read, Activedirectory
-    ad = Activedirectory.find
-
-    respond_to do |format|
-      format.xml  { render :xml => ad.to_xml}
-      format.json { render :json => ad.to_json}
-    end
   end
 
   # See update

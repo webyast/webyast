@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Tue Dec  4 08:15:03 UTC 2012 - lslezak@suse.cz
+
+- fixed rendering the main page (bnc#792571)
+- 0.3.7
+
+-------------------------------------------------------------------
 Fri Nov 23 08:05:01 UTC 2012 - lslezak@suse.cz
 
 - fixed REST API - routing, saving, JSON format support
