@@ -103,11 +103,6 @@
     var original_gids = $.grep($("#groups").data('groups_ids'), function(value){
       return (value != original_gid);
     });
-    console.log("current gid: " + current_gid);
-    console.log("original gid: " + original_gid);
-    console.log("all original gids without the current one: ");
-    console.log(original_gids);
-    console.log($.inArray(current_gid, original_gids));
     if($.inArray(current_gid, original_gids) > -1){
       return false;
     } else { return true } }, "<%= _("Already exists") %>"
@@ -193,12 +188,12 @@
             <p>
               <div class="label"><%=_("Group Name")%></div>
               <%= f.text_field   :cn, :disabled => disabled, :class => "group_cn required unique_cn" %>
-              <%= f.hidden_field :cn, :namespace=>"origin_#{group.cn}" %>
+              <%= f.hidden_field :cn, :namespace=>"origin_#{group.cn}", :name=>:cn_original %>
             </p>
             <p>
               <div class="label"><%=_("Group ID")%></div>
               <%= f.text_field   :gid, :class=>'group_gid unique_gid', :disabled => disabled %>
-              <%= f.hidden_field :gid, :namespace=>"origin_#{group.cn}" %>
+              <%= f.hidden_field :gid, :namespace=>"origin_#{group.cn}", :name=>:gid_original %>
             </p>
             <p>
               <div class="label"><%=_("Members")%></div>
