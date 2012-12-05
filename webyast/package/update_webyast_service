@@ -15,14 +15,14 @@ if [ -f $RESTART_FILE ]; then
 
     # update Gemfile
     if test -f "Gemfile" ; then
-	bundle update
+        bundle update
     fi
     cd -
 
     # restart Webyast if it is running
     $WEBYAST_SERVICE status > /dev/null
     if [ $? -eq 0 ]; then
-	WEBYAST_SERVICE restart
+        WEBYAST_SERVICE restart
     fi
 
     rm $RESTART_FILE
