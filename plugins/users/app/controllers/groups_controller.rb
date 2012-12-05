@@ -105,29 +105,24 @@ class GroupsController < ApplicationController
     group_params = params[:group] || {}
     @group = Group.new group_params
     @group.members = group_params[:members_string].split(",").collect {|cn| cn.strip} unless group_params[:members_string].blank?
-    if @group.valid?
-      result = @group.save
-      if result.present?
-        flash[:message] = (_("Group <i>%s</i> has been updated.") % h(@group.cn)).html_safe
-        respond_to do |format|
-          format.html { redirect_to :action => :index }
-          format.xml  { render :show }
-          format.json { render :show }
-        end
-      else
-        Rails.logger.error "Cannot update group '#{@group.cn}' (#{@group.inspect}): #{result}"
-        respond_to do |format|
-          format.html do
-            flash[:error] = (_("Cannot update group <i>%s</i>, %s") % [h(@group.cn), result]).html_safe
-            redirect_to :action => :index
-          end
-          format.xml  { render ErrorResult.error(404, 2, "Group update error:'#{result}'") }
-          format.json { render ErrorResult.error(404, 2, "Group update error:'#{result}'") }
-        end
+    result = @group.save
+    if result.blank?
+      flash[:message] = (_("Group <i>%s</i> has been updated.") % h(@group.cn)).html_safe
+      respond_to do |format|
+        format.html { redirect_to :action => :index }
+        format.xml  { render :show }
+        format.json { render :show }
       end
     else
-      flash[:error] = @group.errors.full_messages
-      redirect_to :action=>:index
+      Rails.logger.error "Cannot update group '#{@group.cn}' (#{@group.inspect}): #{result}"
+      respond_to do |format|
+        format.html do
+          flash[:error] = (_("Cannot update group <i>%s</i>. %s") % [h(@group.cn), result]).html_safe
+          redirect_to :action => :index
+        end
+        format.xml  { render ErrorResult.error(404, 2, "Group update error:'#{result}'") }
+        format.json { render ErrorResult.error(404, 2, "Group update error:'#{result}'") }
+      end
     end
   end
 
