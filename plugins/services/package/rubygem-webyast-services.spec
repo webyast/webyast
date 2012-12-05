@@ -157,6 +157,4 @@ cp %SOURCE3 $RPM_BUILD_ROOT/etc/webyast/
 %defattr(-,root,root,-)
 %{_libdir}/ruby/gems/%{rb_ver}/gems/%{mod_full_name}/test
 
-
-
 %changelog

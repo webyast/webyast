@@ -130,6 +130,4 @@ mkdir -p $RPM_BUILD_ROOT/%{_libdir}/ruby/gems/%{rb_ver}/gems/%{mod_full_name}/lo
 %defattr(-,root,root,-)
 %{_libdir}/ruby/gems/%{rb_ver}/gems/%{mod_full_name}/test
 
-
-
 %changelog

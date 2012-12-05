@@ -157,6 +157,4 @@ mkdir -p $RPM_BUILD_ROOT/var/lib/webyast/software/licenses/accepted
 %defattr(-,root,root,-)
 %{_libdir}/ruby/gems/%{rb_ver}/gems/%{mod_full_name}/test
 
-
-
 %changelog

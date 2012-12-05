@@ -173,6 +173,4 @@ install -m 0755 %SOURCE3 $RPM_BUILD_ROOT/etc/sysconfig/network/scripts/
 %defattr(-,root,root,-)
 %{_libdir}/ruby/gems/%{rb_ver}/gems/%{mod_full_name}/test
 
-
-
 %changelog

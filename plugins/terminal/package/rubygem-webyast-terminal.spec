@@ -110,6 +110,4 @@ mkdir -p $RPM_BUILD_ROOT/usr/share/%{webyast_polkit_dir}
 %defattr(-,root,root,-)
 %{_libdir}/ruby/gems/%{rb_ver}/gems/%{mod_full_name}/test
 
-
-
 %changelog
