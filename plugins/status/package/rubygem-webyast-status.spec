@@ -149,7 +149,6 @@ rm -rf /var/lib/collectd/*
 %{fillup_and_insserv -Y collectd}
 rccollectd try-restart
 
-
 %restart_webyast
 
 %postun

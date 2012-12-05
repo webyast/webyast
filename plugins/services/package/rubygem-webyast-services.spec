@@ -118,7 +118,6 @@ cp %SOURCE3 $RPM_BUILD_ROOT/etc/webyast/
 /usr/sbin/grantwebyastrights --user root --action grant > /dev/null ||:
 /usr/sbin/grantwebyastrights --user %{webyast_user} --action grant > /dev/null ||:
 
-
 %restart_webyast
 
 %postun
