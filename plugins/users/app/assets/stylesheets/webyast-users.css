@@ -132,7 +132,7 @@
   font-family: Tahoma,Trebuchet MS,Helvetica,sans-serif; 
 }
 
-#new_group label.error,  #groups label.error {   display:inline-block!important; }
+#new_group label.error,  #groups label.error {   display:inline-block; }
 
 
 #users_index .button_container, #groups_index .button_container {

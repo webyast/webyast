@@ -231,22 +231,3 @@ function propose_login(){
     propose_home(login);
   }
 }
-
-function check_uniq_uid_number() {
-  var existing_uid_nums = $("#all_uid_numbers_string").val().split(',');
-  var new_uid_num       = $("#user_uid_number").val();
-  var uid_num_exists    = false
-  $.each(existing_uid_nums, function() {
-    if(new_uid_num == this) {
-      uid_num_exists = true
-      return false
-    }
-  });
-  if(uid_num_exists) {
-    $('#uid-error').show();
-  }
-  else {
-    $('#uid-error').hide();
-  }
-}
-
