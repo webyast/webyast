@@ -101,7 +101,7 @@
 
 # restart file name for files section
 %restart_script_name \
-    /var/adm/update-scripts/%name-%version-%release-restart
+    /var/adm/update-scripts/%name-%version-%release-update
 
 # create a restart script (symlink the base script) (for build section)
 %create_restart_script \
