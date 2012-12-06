@@ -176,11 +176,12 @@ function roles_validation(which){
 function user_exists_validation(el){
   var valid = true;
   var this_user = el.value;
-  users_list = $("#all_users_string").val().split(",");
+  var users_list = $("#all_users_string").val() == "" ? [] : $("#all_users_string").val().split(",");
+
   $.each(users_list, function() {
     if(this == this_user) {
-      valid = false
-      return valid
+      valid = false;
+      return valid;
     }
   });
   $("#user_name-error")[0].style.display= (valid) ? "none" : "block";
