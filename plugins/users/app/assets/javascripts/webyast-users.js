@@ -71,7 +71,7 @@ function members_validation(which){
   if (_trim(which.value).length>0) mygroups = which.value.split(",");
   var allgroups = $("#all_users_string").val().split(",");
   allgroups=allgroups.concat($("#system_users_string").val().split(","));
-  errmsg="";
+  var errmsg="";
   for (i=0;i<mygroups.length;i++){
     var found=false;
     for(a=0;a<allgroups.length;a++){
@@ -105,7 +105,7 @@ function groups_validation(which){
   var mygroups = _trim(findById(which.parentNode.getElementsByTagName('input'), "user_grp_string").value);
   if (mygroups.length>0) mygroups = mygroups.split(",");
   var allgroups = $("#all_grps_string").val().split(",");
-  errmsg="";
+  var errmsg="";
   for (i=0;i<mygroups.length;i++){
     var found=false;
     for(a=0;a<allgroups.length;a++){
@@ -115,7 +115,7 @@ function groups_validation(which){
      errmsg = mygroups[i]+" "+"is not valid group!" ;
     }
   }
-  set_tab_focus("groups")
+  set_tab_focus("groups");
   // WTF? FIXME: use jQuery here!
   var error = findById(which.parentNode.parentNode.parentNode.getElementsByTagName('label'), "groups-error");
   error.innerHTML = errmsg;
@@ -126,7 +126,7 @@ function groups_validation(which){
 function def_group_validation(which){
   var mygroup = _trim(findById(which.parentNode.getElementsByTagName('input'), "user_groupname").value);
   var allgroups = $("#all_grps_string").val().split(",");
-  errmsg="";
+  var errmsg="";
 
    if (mygroup.length>0){
     var found=false;
@@ -139,7 +139,7 @@ function def_group_validation(which){
     }
    }
 
-  set_tab_focus("groups")
+  set_tab_focus("groups");
   // WTF? FIXME: use jQuery here!
   var error = findById(which.parentNode.parentNode.parentNode.getElementsByTagName('label'), "def-group-error");
   error.innerHTML = errmsg;
@@ -152,7 +152,7 @@ function roles_validation(which){
   var myroles = _trim(findById(which.parentNode.getElementsByTagName('input'), "user_roles_string").value);
   if (myroles.length>0) myroles = myroles.split(",");
   var allroles = $("#all_roles_string")[0].value.split(",");
-  errmsg="";
+  var errmsg="";
   for (i=0;i<myroles.length;i++){
     var found=false;
     for(a=0;a<allroles.length;a++){
@@ -163,7 +163,7 @@ function roles_validation(which){
      errmsg = myroles[i]+" "+"is not valid role!" ;
     }
   }
-  set_tab_focus("roles")
+  set_tab_focus("roles");
   // WTF? FIXME: use jQuery here!
   var error = findById(which.parentNode.parentNode.parentNode.getElementsByTagName('label'), "roles-error");
   error.innerHTML = errmsg;
@@ -237,11 +237,11 @@ function propose_login(){
 function check_uniq_uid_number() {
   var existing_uid_nums = $("#all_uid_numbers_string").val().split(',');
   var new_uid_num       = $("#user_uid_number").val();
-  var uid_num_exists    = false
+  var uid_num_exists    = false;
   $.each(existing_uid_nums, function() {
     if(new_uid_num == this) {
-      uid_num_exists = true
-      return false
+      uid_num_exists = true;
+      return false;
     }
   });
 
