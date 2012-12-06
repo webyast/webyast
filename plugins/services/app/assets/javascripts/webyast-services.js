@@ -20,10 +20,7 @@
 
 
 $(document).ready(function() {
-  console.log("GET STATUS")
   $("#services div.list-fieldset").each (function(index) {
-
-//  console.log("GET STATUS")
 
   if ($(this).is(":has(span.status_running)")) {
     $(this).find(".list-fieldset-header .service-icon").attr('class','service-icon status-icon ok');
