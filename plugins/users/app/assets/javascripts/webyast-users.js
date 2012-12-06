@@ -26,7 +26,7 @@ function _trim(word){
   return word.replace(/^\s*|\s*$/g,'');
 }
 
-// WTF? FIXME: use standard jQuery selectors for this
+// WTF? FIXME: use standard jQuery selectors for this!
 function _getElementsByClassName(node, classname)  {
     if(!node) node = document.getElementsByTagName("body")[0];
     var a = [];
@@ -116,7 +116,7 @@ function groups_validation(which){
     }
   }
   set_tab_focus("groups")
-  // WTF? use jQuery here!
+  // WTF? FIXME: use jQuery here!
   var error = findById(which.parentNode.parentNode.parentNode.getElementsByTagName('label'), "groups-error");
   error.innerHTML = errmsg;
   error.style.display= (errmsg.length==0) ? "none" : "block";
@@ -140,7 +140,7 @@ function def_group_validation(which){
    }
 
   set_tab_focus("groups")
-  // WTF? use jQuery here!
+  // WTF? FIXME: use jQuery here!
   var error = findById(which.parentNode.parentNode.parentNode.getElementsByTagName('label'), "def-group-error");
   error.innerHTML = errmsg;
   error.style.display= (errmsg.length==0) ? "none" : "block";
@@ -148,7 +148,7 @@ function def_group_validation(which){
 }
 
 function roles_validation(which){
-  // WTF? use jQuery here!
+  // WTF? FIXME: use jQuery here!
   var myroles = _trim(findById(which.parentNode.getElementsByTagName('input'), "user_roles_string").value);
   if (myroles.length>0) myroles = myroles.split(",");
   var allroles = $("#all_roles_string")[0].value.split(",");
@@ -164,7 +164,7 @@ function roles_validation(which){
     }
   }
   set_tab_focus("roles")
-  // WTF? use jQuery here!
+  // WTF? FIXME: use jQuery here!
   var error = findById(which.parentNode.parentNode.parentNode.getElementsByTagName('label'), "roles-error");
   error.innerHTML = errmsg;
   error.style.display= (errmsg.length==0) ? "none" : "block";
