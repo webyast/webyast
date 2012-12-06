@@ -43,8 +43,9 @@ class AdministratorController < ApplicationController
   def update
     authorize! :write, Administrator
     admin = params["administrator"]
+    save_aliases = params['submit_type'] == 'save_aliases'
     #validate data also here, if javascript in view is off
-    if admin["aliases"].present? || params['save_aliases']
+    if admin["aliases"].present? || save_aliases
       admin["aliases"].split(",").each do |mail|
         #only check emails, not local users
         if mail.include?("@") && mail !~ /^.+@.+$/ #only trivial check
@@ -57,7 +58,7 @@ class AdministratorController < ApplicationController
     aliases  = admin['aliases'].empty? ? 'NONE' : admin['aliases']
     password = admin['password']
     password_confirmation = admin['confirm_password']
-    if params['save_aliases']
+    if save_aliases
       # only save selected subset of administrator data:
       password = nil
     elsif password != password_confirmation
