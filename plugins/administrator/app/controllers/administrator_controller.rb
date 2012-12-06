@@ -48,7 +48,7 @@ class AdministratorController < ApplicationController
     if admin["aliases"].present? || save_aliases
       admin["aliases"].split(",").each do |mail|
         #only check emails, not local users
-        if mail.include?("@") && mail !~ /^.+@.+$/ #only trivial check
+        unless mail.match /\A.+@.+$/ #only trivial check
           problem _("Enter a valid e-mail address.")
           return
         end
