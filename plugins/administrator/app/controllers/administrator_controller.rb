@@ -1,20 +1,20 @@
 #--
 # Copyright (c) 2009-2010 Novell, Inc.
-# 
+#
 # All Rights Reserved.
-# 
+#
 # This program is free software; you can redistribute it and/or modify it
 # under the terms of version 2 of the GNU General Public License
 # as published by the Free Software Foundation.
-# 
+#
 # This program is distributed in the hope that it will be useful,
 # but WITHOUT ANY WARRANTY; without even the implied warranty of
 # MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
 # GNU General Public License for more details.
-# 
+#
 # You should have received a copy of the GNU General Public License
 # along with this program; if not, contact Novell, Inc.
-# 
+#
 # To contact Novell about this file by physical or electronic mail,
 # you may find current contact information at www.novell.com
 #++
@@ -22,13 +22,13 @@
 # Provides access to configuration of system administrator.
 
 class AdministratorController < ApplicationController
-  
+
   public
 
   def index
     authorize! :read, Administrator
     @write_permission = can? :write, Administrator
-    
+
     @administrator	= Administrator.find
     @administrator.confirm_password	= ""
     params[:firstboot] = 1 if Basesystem.new.load_from_session(session).in_process?
@@ -42,39 +42,36 @@ class AdministratorController < ApplicationController
 
   def update
     authorize! :write, Administrator
-    @administrator	= Administrator.find
-
-    admin	= params["administrator"]
-    @administrator.password	= admin["password"]
-    @administrator.aliases	= admin["aliases"]
-    
+    admin = params["administrator"]
+    save_aliases = params['submit_type'] == 'save_aliases'
     #validate data also here, if javascript in view is off
-    
-    if admin["aliases"].present?
+    if admin["aliases"].present? || save_aliases
       admin["aliases"].split(",").each do |mail|
         #only check emails, not local users
-        if mail.include?("@") && mail !~ /^.+@.+$/ #only trivial check
+        unless mail.match /\A.+@.+$/ #only trivial check
           problem _("Enter a valid e-mail address.")
           return
         end
       end
     end
-
-    if admin["password"] != admin["confirm_password"] && ! params.has_key?("save_aliases")
+    # we cannot pass empty string to rest-service
+    aliases  = admin['aliases'].empty? ? 'NONE' : admin['aliases']
+    password = admin['password']
+    password_confirmation = admin['confirm_password']
+    if save_aliases
+      # only save selected subset of administrator data:
+      password = nil
+    elsif password != password_confirmation
       problem _("Passwords do not match.")
       return
     end
-
-    # only save selected subset of administrator data:
-    @administrator.password	= nil if params.has_key? "save_aliases"
-
-    # we cannot pass empty string to rest-service
-    @administrator.aliases = "NONE" if @administrator.aliases == ""
-
+    @administrator = Administrator.find
+    @administrator.password = password
+    @administrator.aliases  = aliases
     begin
       @administrator.save
       flash[:notice] = _('Administrator settings have been written.')
-    rescue Exception => error  
+    rescue Exception => error
       problem _("Error while saving administrator settings.")
       Rails.logger.error "ERROR: #{error.inspect}"
       Rails.logger.error "backtrace: #{error.backtrace.join("\n")}"
