@@ -36,7 +36,8 @@ class Group < BaseModel::Base
   validates_inclusion_of :group_type, :in => ["system","local"], :message=>"valid values are 'local' and 'system'"
   validates_format_of    :cn, :with => /[a-z]+/
   validates_format_of    :old_cn, :with => /[a-z]+/
-  validates_numericality_of :gid
+  validates_numericality_of :gid, :only_integer=>true,
+    :greater_than_or_equal_to => 0, :less_than_or_equal_to => 65536 # cat /proc/sys/kernel/ngroups_max
 
   def members
     @members || []
@@ -84,21 +85,25 @@ public
   end
 
   def save
-    existing_group = Group.group_get( group_type, old_cn )
-    if existing_group.empty?
-      result = YastService.Call( "YaPI::USERS::GroupAdd",
-                                 { "type"      => ["s", group_type] },
-                                 { "cn"        => ["s",cn], "userlist"  => ["as", members] } )
+    if valid?
+      existing_group = Group.group_get( group_type, old_cn )
+      if existing_group.empty?
+        result = YastService.Call( "YaPI::USERS::GroupAdd",
+                                   { "type"      => ["s", group_type] },
+                                   { "cn"        => ["s",cn], "userlist"  => ["as", members] } )
+      else
+        result = YastService.Call( "YaPI::USERS::GroupModify",
+                                   { "type"      => ["s",  group_type],
+                                     "cn"        => ["s",  old_cn]  },
+                                   { "gidNumber" => ["i",  gid.to_i],
+                                     "cn"        => ["s",  cn],
+                                     "userlist"  => ["as", members] }
+                                 )
+      end
+      result # result is empty string on success, error message otherwise
     else
-      result = YastService.Call( "YaPI::USERS::GroupModify",
-                                 { "type"      => ["s",  group_type],
-                                   "cn"        => ["s",  old_cn]  },
-                                 { "gidNumber" => ["i",  gid.to_i],
-                                   "cn"        => ["s",  cn],
-                                   "userlist"  => ["as", members] }
-                               )
+      self.errors.full_messages.join ', '
     end
-    result # result is empty string on success, error message otherwise
   end
 
   def destroy
