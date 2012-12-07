@@ -50,10 +50,19 @@
       	submitHandler: function(form) {
 			    var message = <%= jss _("Please wait") -%>;
           $.modalDialog.wait( {message: message});
-			    //disableFormOnSubmit(message);
           form.submit();
         }
       })
+
+      $("[name='save_aliases']").click(function(){
+        if ($('#adminForm').validate().element('#administrator_aliases')) {
+          $('#submit_type').val('save_aliases')
+          return true;
+        } else {
+          $('#submit_type').val('')
+          return false;
+        }
+      });
 
       // make the error message translatable - override the default messsage
       $.extend($.validator.messages, {
@@ -84,6 +93,7 @@
   <%= render :partial => 'shared/missing_write_permissions' if disabled %>
 
   <%= form_for(:administrator, :url => { :action => "update" }, :html => { :method => :put, :id => "adminForm", :class=>"webyast_form", :onsubmit => "disable_forms ()", :autocomplete => :off } ) do |f| %>
+    <%= hidden_field_tag "submit_type" %>
 
     <div class="plugin-header">
     	<div class="left">
@@ -132,7 +142,7 @@
       	  <label style="float:left; display:inline-block; width:204px; line-height:24px;"><%=_("Forward system mail to")%></label> <!-- RORSCAN_ITL -->
   	      <%= f.text_field :aliases, :disabled => disabled, :class => "emails" %>
 	        <% unless params.has_key? "firstboot" # during initial configuration, allow only main Save button %>
-        	  <%= f.submit _("Save Mail Only"), :name => "save_aliases", :disabled => disabled, :onclick=>"return $('#adminForm').validate().element('#administrator_aliases');", :class=>'cancel' %>
+        	  <%= f.submit _("Save Mail Only"), :name => "save_aliases", :disabled => disabled, :class=>'cancel' %>
         	  <label style="line-height:26px;" for="administrator_aliases" generated="true" class="error"></label>
      	  	<% end %>
 
