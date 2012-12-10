@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Tue Dec  4 12:34:41 UTC 2012 - lslezak@suse.cz
+
+- fixed nil check in users index
+- 0.3.9
+
+-------------------------------------------------------------------
 Tue Dec  4 10:39:41 UTC 2012 - lslezak@suse.cz
 
 - fixed unneeded escaping which breaks JS code (bnc#791345)

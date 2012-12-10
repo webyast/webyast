@@ -21,6 +21,7 @@
 #++
 %>
 
+<% alpha_list = [] %>
 <div class="plugin-content plugin-border" style="padding:10px;">
   <div class="plugin-header">
     <div class="left">
@@ -92,11 +93,10 @@
         <% @tmp = Array.new %>
         <% @users.each_with_index do |user, i|%>
           <% unless @tmp.index(user[0][0,1]) != nil  %>
+            <% alpha_list << user[0][0,1] %>
             <% if i == 0 %>
-              <% @alpha = "'" + user[0][0,1] + "'" %>
                <li id="<%= user[0][0,1] %>" class="title"><%=  user[0][0,1] %></li><ol class="wrapper"><li>
             <% else %>
-              <% @alpha += ",'" + user[0][0,1] + "'" %>
                 </li></ol><li id="<%= user[0][0,1] %>" class="title"><%= user[0][0,1] %></li><ol class="wrapper"><li>
             <% end %>
             <% @tmp.push(user[0][0,1]) %>
@@ -173,6 +173,7 @@
 
   <%= render :partial => "shared/notification", :locals => { :module_name => 'roles,users' } %>
 
+  <%# TODO FIXME: move this to a separate JS file -%>
   <script type="text/javascript">
     $(document).ready(function(){
       function validateRoleName(name) {
@@ -216,7 +217,7 @@
       $("img.deleteRole").click( function () { blockForm(); });
 
 
-      $('#usersContent').sliderNav({items:[<%= @alpha.html_safe %>], arrows:false });
+      $('#usersContent').sliderNav({items: <%= alpha_list.to_json -%>, arrows:false });
 
     });
 
