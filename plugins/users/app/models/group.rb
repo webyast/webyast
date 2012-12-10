@@ -1,20 +1,20 @@
 #--
 # Copyright (c) 2009-2010 Novell, Inc.
-# 
+#
 # All Rights Reserved.
-# 
+#
 # This program is free software; you can redistribute it and/or modify it
 # under the terms of version 2 of the GNU General Public License
 # as published by the Free Software Foundation.
-# 
+#
 # This program is distributed in the hope that it will be useful,
 # but WITHOUT ANY WARRANTY; without even the implied warranty of
 # MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
 # GNU General Public License for more details.
-# 
+#
 # You should have received a copy of the GNU General Public License
 # along with this program; if not, contact Novell, Inc.
-# 
+#
 # To contact Novell about this file by physical or electronic mail,
 # you may find current contact information at www.novell.com
 #++
@@ -33,11 +33,11 @@ class Group < BaseModel::Base
 
   attr_accessible :cn, :old_cn, :gid, :default_members, :members, :group_type, :members_string
 
-  validates_presence_of     :members
-  validates_inclusion_of    :group_type, :in => ["system","local"]
-  validates_format_of       :cn, :with => /[a-z]+/
-  validates_format_of       :old_cn, :with => /[a-z]+/
-  validates_numericality_of :gid
+  validates_inclusion_of :group_type, :in => ["system","local"], :message=>"valid values are 'local' and 'system'"
+  validates_format_of    :cn, :with => /[a-z]+/
+  validates_format_of    :old_cn, :with => /[a-z]+/
+  validates_numericality_of :gid, :only_integer=>true,
+    :greater_than_or_equal_to => 0, :less_than_or_equal_to => 65536 # cat /proc/sys/kernel/ngroups_max
 
   def members
     @members || []
@@ -85,21 +85,25 @@ public
   end
 
   def save
-    existing_group = Group.group_get( group_type, old_cn )
-    if existing_group.empty?
-      result = YastService.Call( "YaPI::USERS::GroupAdd",
-                                 { "type"      => ["s", group_type] },
-                                 { "cn"        => ["s",cn], "userlist"  => ["as", members] } )
+    if valid?
+      existing_group = Group.group_get( group_type, old_cn )
+      if existing_group.empty?
+        result = YastService.Call( "YaPI::USERS::GroupAdd",
+                                   { "type"      => ["s", group_type] },
+                                   { "cn"        => ["s",cn], "userlist"  => ["as", members] } )
+      else
+        result = YastService.Call( "YaPI::USERS::GroupModify",
+                                   { "type"      => ["s",  group_type],
+                                     "cn"        => ["s",  old_cn]  },
+                                   { "gidNumber" => ["i",  gid.to_i],
+                                     "cn"        => ["s",  cn],
+                                     "userlist"  => ["as", members] }
+                                 )
+      end
+      result # result is empty string on success, error message otherwise
     else
-      result = YastService.Call( "YaPI::USERS::GroupModify",
-                                 { "type"      => ["s",  group_type],
-                                   "cn"        => ["s",  old_cn]  },
-                                 { "gidNumber" => ["i",  gid.to_i],
-                                   "cn"        => ["s",  cn],
-                                   "userlist"  => ["as", members] } 
-                               )
+      self.errors.full_messages.join ', '
     end
-    result # result is empty string on success, error message otherwise
   end
 
   def destroy

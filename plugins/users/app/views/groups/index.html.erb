@@ -36,7 +36,7 @@
     .qs_input {
 	width: auto !important;
     }
-
+    input.error { float: none !important }
     label.error {display: none; float:left; color: #990000; font-weight:bold; margin-left:10px;}
  </style>
 
@@ -72,24 +72,67 @@
     return open_dialog;
   };
 
+  function collect_groups_ids() {
+    var ids = [];
+    $(".group_gid").each(function() {
+      ids.push($(this).val());
+    });
+    $("#groups").data("groups_ids", ids);
+  }
+
+  function collect_groups_names() {
+    var names = [];
+    $(".group_cn").each(function() {
+    names.push($(this).val());
+    });
+    $("#groups").data("groups_names", names);
+  }
+
+  $.validator.addMethod("unique_cn", function(current_cn, element) {
+    var original_cn_value = $('#origin_' + $(element).attr('id')).val();
+    var original_cn_names = $.grep($("#groups").data('groups_names'), function(value){
+      return (value != original_cn_value);
+    });
+    if($.inArray(current_cn, original_cn_names) > -1){
+      return false
+    } else { return true } }, "<%= _("Must be unique") %>"
+  )
+
+  $.validator.addMethod("unique_gid", function(current_gid, element) {
+    var original_gid  = $('#origin_' + $(element).attr('id')).val();
+    var original_gids = $.grep($("#groups").data('groups_ids'), function(value){
+      return (value != original_gid);
+    });
+    if($.inArray(current_gid, original_gids) > -1){
+      return false;
+    } else { return true } }, "<%= _("Already exists") %>"
+  )
   $(document).ready(function(){
 
+    collect_groups_ids();
+    collect_groups_names();
+
     select_users_open = select_users_dialog();
+
+    $(".submit_group_form").submit(function(){
+      return false;
+    });
+
 
   $('input#groups_search').quicksearch('div.list-fieldset', {
           selector: 'span.quicksearch_content',
           delay: 100
   });
 
-      $(".accordion").accordion({
-         autoHeight : false,
-         navigation : true,
-         collapsible: true,
-         header     : 'div.list-fieldset div.list-fieldset-header',
-         animated   : false
-      });
+  $(".accordion").accordion({
+     autoHeight : false,
+     navigation : true,
+     collapsible: true,
+     header     : 'div.list-fieldset div.list-fieldset-header',
+     animated   : false
+  });
 
-      $(".accordion").accordion('activate', false);
+  $(".accordion").accordion('activate', false);
 
 
 });//document.ready
@@ -137,15 +180,20 @@
             </span>
           </div>
           <div class='group-content' style="display:none">
-          <%= form_for group, :url => { :action => @adding ? "create" : "update"}, :html => { :id => "form_"+group.old_cn, :autocomplete => :off, :onsubmit => "form_handler('#{group.old_cn}')"}  do |f| %>
+            <%= form_for group,
+              :url       => { :action => @adding ? "create" : "update"},
+              :html      => { :id => "form_"+group.old_cn, :autocomplete => :off, :onsubmit => "form_handler('#{group.old_cn}')"},
+              :namespace => group.cn do |f| %>
             <%= f.hidden_field :old_cn %>
             <p>
               <div class="label"><%=_("Group Name")%></div>
-              <%= f.text_field :cn, :disabled => disabled, :class => "required" %>
+              <%= f.text_field   :cn, :disabled => disabled, :class => "group_cn required unique_cn" %>
+              <%= f.hidden_field :cn, :namespace=>"origin_#{group.cn}", :name=>:cn_original %>
             </p>
             <p>
               <div class="label"><%=_("Group ID")%></div>
-              <%= f.text_field :gid, :disabled => disabled %>
+              <%= f.text_field   :gid, :class=>'group_gid unique_gid', :disabled => disabled %>
+              <%= f.hidden_field :gid, :namespace=>"origin_#{group.cn}", :name=>:gid_original %>
             </p>
             <p>
               <div class="label"><%=_("Members")%></div>
@@ -153,14 +201,15 @@
               <% if can? :usersget, User %>
                 <a href="#" id="manage_members" class="button" onClick="select_users_open('<%= group.old_cn %>');return false;"><%= _("Manage Members") %></a>
               <% end %>
-              <%= f.hidden_field :group_type %><label id="users-error" class="error"></label>
+              <%= f.hidden_field :group_type %>
+              <label class="error"></label>
             </p>
 
             <div class="nav-buttons">
               <div class="hr">&nbsp;</div>
               <div id="progress_<%= group.cn -%>" style="display: none; margin-bottom: 10px"><%= image_tag("working.gif", :class => "small-working-icon") %><span style="vertical-align: 50%; margin-left: 5px">...Wait...</span></div>
                 <% message = _('Please wait')%>
-                <%= submit_tag _("Save"),
+                <%= submit_tag _("Save"), :class=>"submit_group_form",
                     :onclick=>"return $('#form_" + group.old_cn + "').validate({
                       submitHandler: function(form) {
                         var message = '#{message}';
