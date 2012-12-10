@@ -146,10 +146,15 @@ private
       begin
         @patch_updates = Patch.find(:all)
       rescue Exception => e
+        Rails.logger.warn "Error while reading patches: #{e.inspect}"
+
         if e.description.match /Repository (.*) needs to be signed/
           flash[:error] = ((h _("Cannot read patch updates: GPG key for repository %s is not trusted.")) % "<em>#{h $1}</em>").html_safe
         elsif e.description.match /System management is locked by the application with pid ([0-9]+) \((.*)\)\./
           flash[:warning] = _("Software management is locked by another application ('%s', PID %s).") % [$2, $1]
+          @drop_cache = true
+        elsif e.description.match /The ZYpp package manager is locked by process ([0-9]+)\. Retry later\./
+          flash[:warning] = _("Software management is locked by another application (PID %s). Available patches cannot be read.") % $1
           @drop_cache = true
         else
           flash[:error] = e.message
@@ -216,11 +221,17 @@ private
           patch_updates = patch_updates + collect_done_patches #report also which patches is installed
           ref_timeout = refresh_timeout
         rescue Exception => error
+          Rails.logger.warn "Caught exception: #{error.inspect}"
+
           if error.description.match /Repository (.*) needs to be signed/
             error_string = (_("Cannot read patch updates: GPG key for repository <em>%s</em> is not trusted.") % h($1)).html_safe
             error_type = :unsigned
           elsif error.description.match /System management is locked by the application with pid ([0-9]+) \((.*)\)\./
-          error_string = _("Software management is locked by another application ('%s', PID %s).") % [$2, $1]
+            error_string = _("Software management is locked by another application ('%s', PID %s).") % [$2, $1]
+            error_type = :locked
+            @drop_cache = true
+          elsif error.description.match /The ZYpp package manager is locked by process ([0-9]+)\. Retry later\./
+            error_string = _("Software management is locked by another application (PID %s).") % $1
             error_type = :locked
             @drop_cache = true
           else
