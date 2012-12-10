@@ -22,6 +22,10 @@
 class PatchesController < ApplicationController
   include ERB::Util
 
+  before_filter :cache_check, :only => [:index, :show_summary]
+  before_filter :perm_check, :only => [:index]
+  before_filter :perm_check_summary, :only => [:show_summary]
+
   after_filter :drop_cache
 
   # include locale in the cache path to cache different translations
@@ -35,11 +39,23 @@ private
     cached_mtime = Rails.cache.fetch("webyast_patch_mtime")
     current_mtime = Patch.mtime
 
+    Rails.logger.info "cached_mtime: #{cached_mtime.inspect}, current_mtime: #{current_mtime.inspect}"
+
     if current_mtime != cached_mtime
       Rails.logger.info "Expiring patch cache: cached: #{cached_mtime}, modified: #{current_mtime}"
       # update the time stamp
       Rails.cache.write("webyast_patch_mtime", current_mtime)
       expire_patch_cache
+    end
+  end
+
+  def perm_check
+    authorize! :read, Patch
+  end
+
+  def perm_check_summary
+    if cannot? :read, Patch
+      render :text => _("Status not available (no permissions)")
     end
   end
 
@@ -96,8 +112,7 @@ private
   # GET /patches
   # GET /patches.xml
   def index
-    authorize! :read, Patch
-    cache_check
+    # permission checks are don in the before_filter
 
     @msgs = read_messages
     if params['messages']
@@ -198,52 +213,45 @@ private
     ref_timeout = nil
     error_type = :none
 
-    if can? :read, Patch
-      # validate the cache
-      cache_check
-      running, remaining = Patch.installing
+    running, remaining = Patch.installing
 
-      if running
-        ref_timeout = 10.seconds
-        error_type = :install
-        error_string = h _("Patch installation is in progress.")
+    if running
+      ref_timeout = 10.seconds
+      error_type = :install
+      error_string = h _("Patch installation is in progress.")
 
-        if remaining.present?
-          error_string << "<br/>".html_safe
-          error_string << h(n_("There is one patch to install.", "There are %d patches to install.", remaining) % remaining)
-        end
-      elsif PatchesState.read[:message_id] == "PATCH_EULA" #checking if there is a missing licence
-        error_type = :license
-      else
-        #evaluate available patches
-        begin
-          patch_updates = Patch.find :all
-          patch_updates = patch_updates + collect_done_patches #report also which patches is installed
-          ref_timeout = refresh_timeout
-        rescue Exception => error
-          Rails.logger.warn "Caught exception: #{error.inspect}"
+      if remaining.present?
+        error_string << "<br/>".html_safe
+        error_string << h(n_("There is one patch to install.", "There are %d patches to install.", remaining) % remaining)
+      end
+    elsif PatchesState.read[:message_id] == "PATCH_EULA" #checking if there is a missing licence
+      error_type = :license
+    else
+      #evaluate available patches
+      begin
+        patch_updates = Patch.find :all
+        patch_updates = patch_updates + collect_done_patches #report also which patches is installed
+        ref_timeout = refresh_timeout
+      rescue Exception => error
+        Rails.logger.warn "Caught exception: #{error.inspect}"
 
-          if error.description.match /Repository (.*) needs to be signed/
-            error_string = (_("Cannot read patch updates: GPG key for repository <em>%s</em> is not trusted.") % h($1)).html_safe
-            error_type = :unsigned
-          elsif error.description.match /System management is locked by the application with pid ([0-9]+) \((.*)\)\./
-            error_string = _("Software management is locked by another application ('%s', PID %s).") % [$2, $1]
-            error_type = :locked
-            @drop_cache = true
-          elsif error.description.match /The ZYpp package manager is locked by process ([0-9]+)\. Retry later\./
-            error_string = _("Software management is locked by another application (PID %s).") % $1
-            error_type = :locked
-            @drop_cache = true
-          else
-            error_string = error.message
-            error_type = :unknown
-            @drop_cache = true
-          end
+        if error.description.match /Repository (.*) needs to be signed/
+          error_string = (_("Cannot read patch updates: GPG key for repository <em>%s</em> is not trusted.") % h($1)).html_safe
+          error_type = :unsigned
+        elsif error.description.match /System management is locked by the application with pid ([0-9]+) \((.*)\)\./
+          error_string = _("Software management is locked by another application ('%s', PID %s).") % [$2, $1]
+          error_type = :locked
+          @drop_cache = true
+        elsif error.description.match /The ZYpp package manager is locked by process ([0-9]+)\. Retry later\./
+          error_string = _("Software management is locked by another application (PID %s).") % $1
+          error_type = :locked
+          @drop_cache = true
+        else
+          error_string = error.message
+          error_type = :unknown
+          @drop_cache = true
         end
       end
-    else
-      error_type = :no_permission
-      error_string = _("Status not available (no permissions)")
     end
 
     patches_summary = nil
