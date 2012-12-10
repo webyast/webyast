@@ -112,7 +112,7 @@ private
   # GET /patches
   # GET /patches.xml
   def index
-    # permission checks are don in the before_filter
+    # permission checks are done in the before_filter
 
     @msgs = read_messages
     if params['messages']

@@ -288,18 +288,14 @@ class Patch < Resolvable
     @messages=[]
     ret, error = do_install(pk_id,['RequireRestart','Message']) { |type, details|
       Rails.logger.info "Message signal received: #{type}, #{details}"
-      if ["system", "application", "session"].include? type
-        # RequireRestart received
-        type = "notice"
-        details = _("Please reboot your system.")
-      end
       @messages << {:kind => type, :details => details}
       begin
         dirname = File.dirname(MESSAGES_FILE)
         FileUtils.mkdir_p(dirname) unless File.directory?(dirname)
         f = File.new(MESSAGES_FILE, 'a+')
-        # TODO: make the message traslatable
-        f.puts "#{details}"
+        # TODO: make the messages traslatable
+        name, id, arch, repo = pk_id.split(';')
+        f.puts "Patch #{name} from #{repo}: #{details}\n"
       rescue Exception => e
         Rails.logger.error "writing #{MESSAGES_FILE} file failed: #{e.try(:message)}"
       ensure

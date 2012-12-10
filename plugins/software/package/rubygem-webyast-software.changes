@@ -3,6 +3,7 @@ Mon Dec 10 15:08:08 UTC 2012 - lslezak@suse.cz
 
 - display a warning when software management is locked by another
   application, do not crash (bnc#793602)
+- display patch messages better (bnc#790748)
 
 -------------------------------------------------------------------
 Tue Dec  4 11:42:38 UTC 2012 - lslezak@suse.cz
