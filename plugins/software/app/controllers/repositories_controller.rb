@@ -31,7 +31,7 @@ class RepositoriesController < ApplicationController
 private
 
   def isint(str)
-    return !!(str =~ /^[-+]?[1-9]([0-9]*)?$/)
+    str.match /\A[0-9]+\z/
   end
 
   
@@ -128,7 +128,7 @@ private
     param[:autorefresh] = param[:autorefresh].to_s == 'true'
     param[:enabled] = param[:enabled].to_s == 'true'
     param[:keep_packages] = param[:keep_packages].to_s == 'true'
-    param[:priority] = param[:priority].to_i if isint(param[:priority])
+    param[:priority] = param[:priority].to_i if isint(param[:priority].to_s)
 
     @repo.load param
     begin
@@ -151,7 +151,11 @@ private
       end
     end
 
-    redirect_to :action => :index
+    respond_to do |format|
+      format.html { redirect_to :action => :index }
+      format.xml { render  :xml => @repo.to_xml( :dasherize => false ) }
+      format.json { render :json => @repo.to_json( :dasherize => false ) }
+    end
   end
 
   def new
