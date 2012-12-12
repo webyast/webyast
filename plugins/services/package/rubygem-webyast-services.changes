@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Tue Dec 11 20:34:45 UTC 2012 - lslezak@suse.cz
+
+- fixed filtering services, WebYaST now uses nginx instead of
+  lighttpd
+
+-------------------------------------------------------------------
 Thu Dec  6 09:53:42 UTC 2012 - lslezak@suse.cz
 
 - fixed JS loading in IE9 (console is not available by default)
