@@ -245,15 +245,16 @@
   // handler for the filter element
   function select_repositories (val) {
     if (val == "all") {
-	$("#repositories > div.list-fieldset").show();
+      $(".repository-enabled").show();
+      $(".repository-disabled").show();
     }
     else if (val == "enabled") {
-      $("#repositories > div.list-fieldset.repository-enabled").show();
-      $("#repositories > div.list-fieldset.repository-disabled").hide();
+      $(".repository-enabled").show();
+      $(".repository-disabled").hide();
     }
     else if (val == "disabled") {
-      $("#repositories > div.list-fieldset.repository-enabled").hide();
-      $("#repositories > div.list-fieldset.repository-disabled").show();
+      $(".repository-enabled").hide();
+      $(".repository-disabled").show();
     };
     };
 
@@ -268,11 +269,7 @@
     };
 
     // display/hide the changes text
-    if (deflt == $(field).val()) {
-      $(changes).hide();
-    } else {
-      $(changes).show();
-    };
+    $(changes).toggle(deflt != $(field).val());
   };
 </script>
 
