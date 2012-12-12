@@ -531,6 +531,7 @@ fi
 %config /etc/sysconfig/SuSEfirewall2.d/services/webyast
 %config /usr/share/%{webyast_polkit_dir}/org.opensuse.yast.permissions.policy
 %config %{webyast_dir}/config/initializers/secret_token.rb
+%config %{webyast_dir}/config/environment.rb
 %config(noreplace) /etc/yast_user_roles
 %config %{_sysconfdir}/init.d/%{webyast_service}
 %{_sbindir}/rc%{webyast_service}
