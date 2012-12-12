@@ -28,9 +28,9 @@ BuildRequires:  rubygems_with_buildroot_patch
 %rubygems_requires
 BuildRequires:  rubygem-webyast-ntp
 BuildRequires:  rubygem-webyast-services
-BuildRequires:  webyast-base >= 0.3
+BuildRequires:  webyast-base >= 0.3.31
 BuildRequires:  webyast-base-testsuite
-PreReq:         webyast-base >= 0.3, rubygem-webyast-ntp, rubygem-webyast-services
+PreReq:         webyast-base >= 0.3.31, rubygem-webyast-ntp, rubygem-webyast-services
 
 Obsoletes:      webyast-time-ui < %{version}
 Obsoletes:      webyast-time-ws < %{version}
@@ -82,6 +82,7 @@ needed at runtime.
 %prep
 
 %build
+%create_restart_script
 
 %check
 # run the testsuite
@@ -102,7 +103,7 @@ needed at runtime.
 /usr/sbin/grantwebyastrights --user root --action grant > /dev/null
 /usr/sbin/grantwebyastrights --user %{webyast_user} --action grant > /dev/null
 
-%webyast_update_assets
+%restart_webyast
 
 %postun
 %webyast_remove_assets
@@ -117,6 +118,8 @@ needed at runtime.
 # precompiled assets
 %dir %{webyast_dir}/public/assets
 %{webyast_dir}/public/assets/*
+
+%restart_script_name
 
 %files doc
 %defattr(-,root,root,-)

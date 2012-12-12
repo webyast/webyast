@@ -27,9 +27,9 @@ BuildRoot:      %{_tmppath}/%{name}-%{version}-build
 BuildRequires:  rubygems_with_buildroot_patch
 %rubygems_requires
 BuildRequires:  rubygem-restility
-BuildRequires:  webyast-base >= 0.3
+BuildRequires:  webyast-base >= 0.3.31
 BuildRequires:  webyast-base-testsuite
-PreReq:         webyast-base >= 0.3
+PreReq:         webyast-base >= 0.3.31
 
 # /usr/bin/pgrep
 Requires:	procps
@@ -83,6 +83,7 @@ needed at runtime.
 %prep
 
 %build
+%create_restart_script
 
 %check
 # run the testsuite
@@ -148,7 +149,7 @@ rm -rf /var/lib/collectd/*
 %{fillup_and_insserv -Y collectd}
 rccollectd try-restart
 
-%webyast_update_assets
+%restart_webyast
 
 %postun
 %webyast_remove_assets
@@ -175,6 +176,8 @@ rccollectd try-restart
 %attr(644,root,root) %config /usr/share/%{webyast_polkit_dir}/org.opensuse.yast.modules.logfile.policy
 %dir /etc/webyast/vendor
 %config /etc/webyast/logs.yml
+
+%restart_script_name
 
 %files doc
 %defattr(-,root,root,-)
