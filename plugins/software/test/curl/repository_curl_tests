@@ -1,0 +1,178 @@
+#!/usr/bin/env ruby
+
+require 'uri'
+require 'optparse'
+require 'shellwords'
+
+# Parse options
+opt = OptionParser.new
+
+opt.banner = "Usage: #{File.basename($0)} [options]"
+opt.separator("Example: #{File.basename($0)} -p password -u https://foo.example.com:4984")
+opt.separator("\nRun WebYaST repository REST API tests.")
+opt.separator("\nWARNING: The tests are intrusive and may change the current system configuration!")
+opt.separator("         ** Use at your own risk! **")
+opt.separator("\nOptions:")
+opt.on( "-h", "--help", "Print this help" ) do
+  puts opt
+  exit
+end
+
+base_url = "https://localhost:4984"
+opt.on( "-u", "--url [URL]", "Specify the base URL, the default is https://localhost:4984" ) do |url|
+  base_url = url
+end
+
+password = ""
+opt.on( "-p", "--password [password]", "Use this root password, if this option is missing it will be read from STDIN" ) do |pwd|
+  password = pwd
+end
+
+verbose = false
+opt.on( "-v", "--verbose", "Verbose mode, print full server responses, useful for debugging" ) do
+  verbose = true
+end
+
+begin
+  opt.parse! ARGV
+rescue OptionParser::InvalidOption
+  $stderr.puts "Error: #{$!}\n\n"
+  $stderr.puts opt
+  exit 1
+end
+
+url = URI.parse base_url
+
+if password.empty?
+  puts "Enter root password for #{url}:"
+  `stty -echo`
+  password = gets.chomp
+  `stty echo`
+end
+
+
+#
+# get repository list
+#
+url.path = "/repositories.xml"
+ret = `curl -i -k -s -S -u root:#{Shellwords.escape password} #{url}`
+puts "RESULT: #{ret}" if verbose
+
+if $?.exitstatus.zero? && ret.match(/Status: 200/)
+  puts "Repository index: OK"
+else
+  $stderr.puts "RESULT: #{ret}"
+  $stderr.puts "Repository index: FAILED"
+  exit 1
+end
+
+#
+# create a new repository
+#
+new_repo =
+'<?xml version="1.0" encoding="UTF-8"?>
+  <repository>
+    <enabled type="boolean">false</enabled>
+    <id>webyast_testing_repo</id>
+    <autorefresh type="boolean">true</autorefresh>
+    <url>http://download.opensuse.org/distribution/openSUSE-current/repo/oss</url>
+    <name>Testing Repository</name>
+    <keep_packages type="boolean">false</keep_packages>
+    <priority type="integer">99</priority>
+  </repository>'
+
+ret = `curl -i -k -s -S -u root:#{password} -H "Content-Type: application/xml" -X POST -d #{Shellwords.escape new_repo} #{url}`
+puts "RESULT: #{ret}" if verbose
+
+if $?.exitstatus.zero? && ret.match(/Status: 200/)
+  puts "Creating new repository: OK"
+else
+  $stderr.puts "RESULT: #{ret}"
+  $stderr.puts "Creating a new repository : FAILED"
+  exit 1
+end
+
+#
+# get the created repository
+#
+url.path = "/repositories/webyast_testing_repo.xml"
+ret = `curl -i -k -s -S -u root:#{Shellwords.escape password} #{url}`
+puts "RESULT: #{ret}" if verbose
+
+if $?.exitstatus.zero? && ret.match(/Status: 200/)
+  puts "Read the created repository: OK"
+else
+  $stderr.puts "RESULT: #{ret}"
+  $stderr.puts "Read the created repository: FAILED"
+  exit 1
+end
+
+#
+# update the created repository
+#
+update_repo =
+'<?xml version="1.0" encoding="UTF-8"?>
+  <repository>
+    <enabled type="boolean">false</enabled>
+    <id>webyast_testing_repo</id>
+    <autorefresh type="boolean">true</autorefresh>
+    <url>http://download.opensuse.org/distribution/openSUSE-current/repo/oss</url>
+    <name>Testing Repository RENAMED</name>
+    <keep_packages type="boolean">true</keep_packages>
+    <priority type="integer">99</priority>
+  </repository>'
+
+url.path = "/repositories/webyast_testing_repo.xml"
+ret = `curl -i -k -s -S -u root:#{Shellwords.escape password} -H "Content-Type: application/xml" -X PUT -d #{Shellwords.escape update_repo} #{url}`
+puts "RESULT: #{ret}" if verbose
+
+if $?.exitstatus.zero? && ret.match(/Status: 200/)
+  puts "Repository update: OK"
+else
+  $stderr.puts "RESULT: #{ret}"
+  $stderr.puts "Repository update: FAILED"
+  exit 1
+end
+
+#
+# verify the update
+#
+ret = `curl -i -k -s -S -u root:#{Shellwords.escape password} #{url}`
+puts "RESULT: #{ret}" if verbose
+
+if $?.exitstatus.zero? && ret.match(/<name>Testing Repository RENAMED<\/name>/) && ret.match(/Status: 200/)
+  puts "Verify updated repository: OK"
+else
+  $stderr.puts "RESULT: #{ret}"
+  $stderr.puts "Verify updated repository: FAILED"
+  exit 1
+end
+
+#
+# delete the created repository
+#
+ret = `curl -i -k -s -S -u root:#{Shellwords.escape password} -X DELETE #{url}`
+puts "RESULT: #{ret}" if verbose
+
+if $?.exitstatus.zero? && ret.match(/Status: 200/)
+  puts "Delete the created repository: OK"
+else
+  $stderr.puts "RESULT: #{ret}"
+  $stderr.puts "Delete the created repository: FAILED"
+  exit 1
+end
+
+#
+# verify the update
+#
+ret = `curl -i -k -s -S -u root:#{Shellwords.escape password} #{url}`
+puts "RESULT: #{ret}" if verbose
+
+if $?.exitstatus.zero? && ret.match(/Repository webyast_testing_repo was not found/) && ret.match(/Status: 404/)
+  puts "Verify removed repository: OK"
+else
+  $stderr.puts "RESULT: #{ret}"
+  $stderr.puts "Verify removed repository: FAILED"
+  exit 1
+end
+

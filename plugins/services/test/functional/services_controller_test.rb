@@ -101,6 +101,7 @@ class ServicesControllerTest < ActionController::TestCase
     service_exist(false)
 
     get :show_status, {:id => 'aaa', :custom => false}
+    # FIXME: it should return 404 :not_found
     assert_response :success 
     assert_select 'span.status_unknown', :text => 'status unknown: 127'
   end

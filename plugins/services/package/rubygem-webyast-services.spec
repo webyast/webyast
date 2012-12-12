@@ -106,6 +106,8 @@ cp %{SOURCE4} $RPM_BUILD_ROOT/usr/share/YaST2/modules/YaPI/
 mkdir -p $RPM_BUILD_ROOT/etc/webyast/
 cp %SOURCE3 $RPM_BUILD_ROOT/etc/webyast/
 
+%webyast_build_restdoc
+
 %webyast_build_plugin_assets
 
 %clean
