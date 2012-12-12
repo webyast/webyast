@@ -18,8 +18,8 @@
 
 
 class RestdocController < ApplicationController
-  caches_action :index, :cache_path => Proc.new {"webyast_restdoc_index_#{FastGettext.locale}"}
-  caches_action :show, :cache_path => Proc.new {"webyast_restdoc_show_#{params[:id]}_#{FastGettext.locale}"}
+  caches_action :index, :cache_path => Proc.new {"webyast_restdoc_index_#{FastGettext.locale}"}, :layout => false
+  caches_action :show, :layout => false
 
   def index
     @restdocs = Restdoc.find :all

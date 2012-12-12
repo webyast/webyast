@@ -26,7 +26,7 @@ class RepositoriesController < ApplicationController
   before_filter :check_read_permissions, :only => [:index, :show]
   before_filter :cache_check, :only => :index
 
-  caches_action :index, :cache_path => Proc.new {"webyast_repo_index_#{FastGettext.locale}"}
+  caches_action :index, :cache_path => Proc.new {"webyast_repo_index_#{FastGettext.locale}"}, :layout => false
 
 private
 
