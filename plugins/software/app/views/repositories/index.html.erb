@@ -166,14 +166,6 @@
 
     }, <%= jss _("Enter a valid repository URL.") -%>);
 
-    // define a custom validation function for repository alias
-    jQuery.validator.addMethod("repo_alias", function(value, element) {
-      return this.optional(element)
-      // PackageKit does not accept some special characters in alias
-      || /^[^`'"\\\[\]^$\{\}<>]*$/i.test(value);
-
-    }, <%= jss _("Symbols <b>%s</b> are not allowed in repository alias.") % "^${}[]&gt;&lt;`\\'\\\"\\\\" -%>);
-
     // set custom translatable messages
     $.extend($.validator.messages, {
       required: "<%= _("This value cannot be empty.") -%>"
