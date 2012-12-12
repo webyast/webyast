@@ -52,7 +52,7 @@ public
     all_services	= Service.find(:all, { :read_status => 1 })
     
     # there's no sense in showing these in UI (bnc#587885)
-    killer_services	= [ "webyast", "dbus", "network", "lighttpd" ]
+    killer_services	= [ "webyast", "dbus", "network", "nginx" ]
 
     all_services.each do |s|
       # only leave dependent services that are shown in the UI
