@@ -166,7 +166,7 @@ class GroupsController < ApplicationController
   # DELETE /groups/users
   def destroy
     authorize! :groupdelete, User
-    validate_group_id or return
+
     cn = params[:id]
     # RORSCAN_INL: User has already delete permission for ALL groups here
     @group = Group.find(cn)
