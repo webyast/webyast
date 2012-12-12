@@ -3,6 +3,8 @@ Wed Dec 12 09:34:18 UTC 2012 - lslezak@suse.cz
 
 - fixed JS rendering at new repository page, allow changing
   properties of the new repository (bnc#794049)
+- restart webyast after package update
+- 0.3.33
 
 -------------------------------------------------------------------
 Mon Dec 10 15:08:08 UTC 2012 - lslezak@suse.cz

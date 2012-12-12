@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Wed Dec 12 15:50:22 UTC 2012 - lslezak@suse.cz
+
+- restart webyast after package update
+- 0.3.8
+
+-------------------------------------------------------------------
 Thu Dec  6 11:47:54 UTC 2012 - lslezak@suse.cz
 
 - fixed check for existing user when there is no user defined yet

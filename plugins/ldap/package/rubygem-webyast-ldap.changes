@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Wed Dec 12 15:29:19 UTC 2012 - lslezak@suse.cz
+
+- restart webyast after package update
+- 0.3.9
+
+-------------------------------------------------------------------
 Mon Nov 19 10:24:18 UTC 2012 - lslezak@suse.cz
 
 - added missing *-32bit package dependencies (bnc#789768)

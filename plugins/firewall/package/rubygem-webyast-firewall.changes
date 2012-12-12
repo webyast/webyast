@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Wed Dec 12 15:27:58 UTC 2012 - lslezak@suse.cz
+
+- restart webyast after package update
+- 0.3.10
+
+-------------------------------------------------------------------
 Tue Dec  4 07:47:37 UTC 2012 - lslezak@suse.cz
 
 - fixed rendering the main page (match the view template with

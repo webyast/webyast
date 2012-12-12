@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Wed Dec 12 15:32:35 UTC 2012 - lslezak@suse.cz
+
+- restart webyast after package update
+- 0.3.7
+
+-------------------------------------------------------------------
 Fri Oct 12 15:47:14 UTC 2012 - lslezak@suse.cz
 
 - updated yast2-network dependency (more recent version needed)

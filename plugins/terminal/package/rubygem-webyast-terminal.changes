@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Wed Dec 12 15:48:24 UTC 2012 - lslezak@suse.cz
+
+- restart webyast after package update
+- 0.3.13
+
+-------------------------------------------------------------------
 Wed Nov 28 15:38:21 UTC 2012 - lslezak@suse.cz
 
 - added "New Window" link to open a new terminal in a new window

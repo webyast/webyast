@@ -17,7 +17,7 @@
 
 
 Name:           rubygem-webyast-administrator
-Version:        0.3.6
+Version:        0.3.7
 Release:        0
 %define mod_name webyast-administrator
 %define mod_full_name %{mod_name}-%{version}

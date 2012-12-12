@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Wed Dec 12 15:47:26 UTC 2012 - lslezak@suse.cz
+
+- restart webyast after package update
+- 0.3.6
+
+-------------------------------------------------------------------
 Mon Oct 15 10:18:14 UTC 2012 - lslezak@suse.cz
 
 - do shutdown instead of reboot (bnc#782252)

@@ -3,6 +3,8 @@ Wed Dec 12 14:34:12 UTC 2012 - lslezak@suse.cz
 
 - REST API - fixed PUT method handler (bnc#789911)
 - build REST API documentation (restdoc)
+- restart webyast after package update
+- 0.3.7
 
 -------------------------------------------------------------------
 Tue Dec 11 20:34:45 UTC 2012 - lslezak@suse.cz

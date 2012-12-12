@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Wed Dec 12 15:26:46 UTC 2012 - lslezak@suse.cz
+
+- restart webyast after package update
+- 0.3.10
+
+-------------------------------------------------------------------
 Fri Nov 23 13:33:56 UTC 2012 - lslezak@suse.cz
 
 - do not display "or" delimiter when there is no "Back" link

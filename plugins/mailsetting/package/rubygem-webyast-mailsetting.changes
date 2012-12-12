@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Wed Dec 12 15:32:05 UTC 2012 - lslezak@suse.cz
+
+- restart webyast after package update
+- 0.3.10
+
+-------------------------------------------------------------------
 Tue Dec  4 09:16:02 UTC 2012 - lslezak@suse.cz
 
 - fixed displaying main page (bnc#792574)
