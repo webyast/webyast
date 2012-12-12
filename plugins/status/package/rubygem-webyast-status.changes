@@ -7,7 +7,7 @@ Wed Dec 12 15:42:56 UTC 2012 - lslezak@suse.cz
 -------------------------------------------------------------------
 Thu Dec  6 15:33:07 UTC 2012 - lslezak@suse.cz
 
-- fixed displaying graphs in IE9 (bnc#792632)
+- fixed displaying graphs in IE9 (bnc#782418)
 
 -------------------------------------------------------------------
 Fri Nov 23 08:26:19 UTC 2012 - lslezak@suse.cz
