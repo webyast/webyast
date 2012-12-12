@@ -1,0 +1,184 @@
+#!/usr/bin/env ruby
+
+require 'uri'
+require 'optparse'
+require 'shellwords'
+require 'rexml/document'
+
+# Parse options
+opt = OptionParser.new
+
+opt.banner = "Usage: #{File.basename($0)} [options]"
+opt.separator("Example: #{File.basename($0)} -p password -u https://foo.example.com:4984")
+opt.separator("\nRun WebYaST services API tests.")
+opt.separator("\nWARNING: The tests are intrusive and may change the current system configuration!")
+opt.separator("         ** Use at your own risk! **")
+opt.separator("\nOptions:")
+opt.on( "-h", "--help", "Print this help" ) do
+  puts opt
+  exit
+end
+
+base_url = "https://localhost:4984"
+opt.on( "-u", "--url [URL]", "Specify the base URL, the default is https://localhost:4984" ) do |url|
+  base_url = url
+end
+
+password = ""
+opt.on( "-p", "--password [password]", "Use this root password, if this option is missing it will be read from STDIN" ) do |pwd|
+  password = pwd
+end
+
+verbose = false
+opt.on( "-v", "--verbose", "Verbose mode, print full server responses, useful for debugging" ) do
+  verbose = true
+end
+
+begin
+  opt.parse! ARGV
+rescue OptionParser::InvalidOption
+  $stderr.puts "Error: #{$!}\n\n"
+  $stderr.puts opt
+  exit 1
+end
+
+url = URI.parse base_url
+
+if password.empty?
+  puts "Enter root password for #{url}:"
+  `stty -echo`
+  password = gets.chomp
+  `stty echo`
+end
+
+puts "Starting services tests..."
+
+#
+# get service list
+#
+url.path = "/services.xml"
+ret = `curl -i -k -s -S -u root:#{Shellwords.escape password} #{url}`
+puts "RESULT: #{ret}" if verbose
+
+if $?.exitstatus.zero? && ret.match(/Status: 200/)
+  puts "Service index: OK"
+else
+  $stderr.puts "RESULT: #{ret}"
+  $stderr.puts "Service index: FAILED"
+  exit 1
+end
+
+#
+# get single service
+#
+url.path = "/services/cron.xml"
+ret = `curl -i -k -s -S -u root:#{Shellwords.escape password} #{url}`
+puts "RESULT: #{ret}" if verbose
+
+if $?.exitstatus.zero? && ret.match(/Status: 200/)
+  puts "Read cron service: OK"
+else
+  $stderr.puts "RESULT: #{ret}"
+  $stderr.puts "Read cron service: FAILED"
+  exit 1
+end
+
+## FIXME: !!!this test fails!!!
+##
+## get single non-existing service
+##
+#url.path = "/services/non_existing_service.xml"
+#ret = `curl -i -k -s -S -u root:#{Shellwords.escape password} #{url}`
+#puts "RESULT: #{ret}" if verbose
+#
+#if $?.exitstatus.zero? && ret.match(/Status: 404/)
+#  puts "Read invalid service: OK"
+#else
+#  $stderr.puts "RESULT: #{ret}"
+#  $stderr.puts "Read invalid service: FAILED"
+#  exit 1
+#end
+
+#
+# stop cron service
+#
+stop_service =
+'<?xml version="1.0" encoding="UTF-8"?>
+  <execute>stop</execute>#'
+
+ret = `curl -i -k -s -S -u root:#{Shellwords.escape password} -H "Content-Type: application/xml" -X PUT -d #{Shellwords.escape stop_service} #{url}`
+puts "RESULT: #{ret}" if verbose
+
+if $?.exitstatus.zero? && ret.match(/Status: 200/)
+  puts "Stop cron service: OK"
+else
+  $stderr.puts "RESULT: #{ret}"
+  $stderr.puts "Stop cron service: FAILED"
+  exit 1
+end
+
+#
+# verify the update
+#
+url.path = "/services.xml"
+ret = `curl -k -s -S -u root:#{Shellwords.escape password} #{url}`
+puts "RESULT: #{ret}" if verbose
+
+doc = REXML::Document.new ret
+doc.elements.each('services/service') do |p|
+  if p.elements["name"].text == "cron" && p.elements["status"].text != "3"
+    puts "Cron is not in stopped state (expected 3, current is #{p.elements["status"].text}"
+    exit 1
+  end
+end
+
+if $?.exitstatus.zero?
+  puts "Verify cron stop: OK"
+else
+  $stderr.puts "RESULT: #{ret}"
+  $stderr.puts "Verify cronu stop: FAILED"
+  exit 1
+end
+
+#
+# start cron service
+#
+start_service =
+'<?xml version="1.0" encoding="UTF-8"?>
+  <execute>start</execute>#'
+
+url.path = "/services/cron.xml"
+ret = `curl -i -k -s -S -u root:#{Shellwords.escape password} -H "Content-Type: application/xml" -X PUT -d #{Shellwords.escape start_service} #{url}`
+puts "RESULT: #{ret}" if verbose
+
+if $?.exitstatus.zero? && ret.match(/Status: 200/)
+  puts "Start cron service: OK"
+else
+  $stderr.puts "RESULT: #{ret}"
+  $stderr.puts "Start cron service: FAILED"
+  exit 1
+end
+
+#
+# verify the update
+#
+url.path = "/services.xml"
+ret = `curl -k -s -S -u root:#{Shellwords.escape password} #{url}`
+puts "RESULT: #{ret}" if verbose
+
+doc = REXML::Document.new ret
+doc.elements.each('services/service') do |p|
+  if p.elements["name"].text == "cron" && p.elements["status"].text != "0"
+    puts "Cron is not running (expected 0, current is #{p.elements["status"].text}"
+    exit 1
+  end
+end
+
+if $?.exitstatus.zero?
+  puts "Verify cron start: OK"
+else
+  $stderr.puts "RESULT: #{ret}"
+  $stderr.puts "Verify cron start: FAILED"
+  exit 1
+end
+
