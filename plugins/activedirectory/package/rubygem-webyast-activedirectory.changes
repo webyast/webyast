@@ -1,4 +1,11 @@
 -------------------------------------------------------------------
+Mon Dec 10 13:47:43 UTC 2012 - lslezak@suse.cz
+
+- fixed generic save error handler
+- the global on/off checkbox also enables/disables account settings
+  input fields
+
+-------------------------------------------------------------------
 Tue Dec  4 08:15:03 UTC 2012 - lslezak@suse.cz
 
 - fixed rendering the main page (bnc#792571)

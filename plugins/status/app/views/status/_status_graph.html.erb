@@ -28,10 +28,10 @@
   console.log(empty)
 
   if(empty) {
-     console.log("No data available");
+    if (window.console) console.log("No data available");
      $('#' + "<%= graph_id(data[:group_id], data[:graph_id])+"_graph" %>").html('<b><%= _("No data available")%></b>');
   } else {
-     console.log("Draw graph")
+    if (window.console) console.log("Drawing graph");
 
   $.jqplot('<%=graph_id(data[:group_id], data[:graph_id])+"_graph"%>',  [
   <% counter = 0 %>

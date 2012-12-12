@@ -5,6 +5,12 @@ Tue Dec 11 20:34:45 UTC 2012 - lslezak@suse.cz
   lighttpd
 
 -------------------------------------------------------------------
+Thu Dec  6 09:53:42 UTC 2012 - lslezak@suse.cz
+
+- fixed JS loading in IE9 (console is not available by default)
+  (bnc#783873)
+
+-------------------------------------------------------------------
 Thu Nov  1 09:18:43 UTC 2012 - lslezak@suse.cz
 
 - testsuite cleanup
