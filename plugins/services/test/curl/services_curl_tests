@@ -3,6 +3,7 @@
 require 'uri'
 require 'optparse'
 require 'shellwords'
+require 'rexml/document'
 
 # Parse options
 opt = OptionParser.new
@@ -98,76 +99,86 @@ end
 #  exit 1
 #end
 
-# FIXME: add more tests
-exit 1
-
-
 #
-# update the created repository
+# stop cron service
 #
-update_repo =
+stop_service =
 '<?xml version="1.0" encoding="UTF-8"?>
-  <repository>
-    <enabled type="boolean">false</enabled>
-    <id>webyast_testing_repo</id>
-    <autorefresh type="boolean">true</autorefresh>
-    <url>http://download.opensuse.org/distribution/openSUSE-current/repo/oss</url>
-    <name>Testing Repository RENAMED</name>
-    <keep_packages type="boolean">true</keep_packages>
-    <priority type="integer">99</priority>
-  </repository>'
+  <execute>stop</execute>#'
 
-url.path = "/repositories/webyast_testing_repo.xml"
-ret = `curl -i -k -s -S -u root:#{Shellwords.escape password} -H "Content-Type: application/xml" -X PUT -d #{Shellwords.escape update_repo} #{url}`
+ret = `curl -i -k -s -S -u root:#{Shellwords.escape password} -H "Content-Type: application/xml" -X PUT -d #{Shellwords.escape stop_service} #{url}`
 puts "RESULT: #{ret}" if verbose
 
 if $?.exitstatus.zero? && ret.match(/Status: 200/)
-  puts "Repository update: OK"
+  puts "Stop cron service: OK"
 else
   $stderr.puts "RESULT: #{ret}"
-  $stderr.puts "Repository update: FAILED"
+  $stderr.puts "Stop cron service: FAILED"
   exit 1
 end
 
 #
 # verify the update
 #
-ret = `curl -i -k -s -S -u root:#{Shellwords.escape password} #{url}`
+url.path = "/services.xml"
+ret = `curl -k -s -S -u root:#{Shellwords.escape password} #{url}`
 puts "RESULT: #{ret}" if verbose
 
-if $?.exitstatus.zero? && ret.match(/<name>Testing Repository RENAMED<\/name>/) && ret.match(/Status: 200/)
-  puts "Verify updated repository: OK"
+doc = REXML::Document.new ret
+doc.elements.each('services/service') do |p|
+  if p.elements["name"].text == "cron" && p.elements["status"].text != "3"
+    puts "Cron is not in stopped state (expected 3, current is #{p.elements["status"].text}"
+    exit 1
+  end
+end
+
+if $?.exitstatus.zero?
+  puts "Verify cron stop: OK"
 else
   $stderr.puts "RESULT: #{ret}"
-  $stderr.puts "Verify updated repository: FAILED"
+  $stderr.puts "Verify cronu stop: FAILED"
   exit 1
 end
 
 #
-# delete the created repository
+# start cron service
 #
-ret = `curl -i -k -s -S -u root:#{Shellwords.escape password} -X DELETE #{url}`
+start_service =
+'<?xml version="1.0" encoding="UTF-8"?>
+  <execute>start</execute>#'
+
+url.path = "/services/cron.xml"
+ret = `curl -i -k -s -S -u root:#{Shellwords.escape password} -H "Content-Type: application/xml" -X PUT -d #{Shellwords.escape start_service} #{url}`
 puts "RESULT: #{ret}" if verbose
 
 if $?.exitstatus.zero? && ret.match(/Status: 200/)
-  puts "Delete the created repository: OK"
+  puts "Start cron service: OK"
 else
   $stderr.puts "RESULT: #{ret}"
-  $stderr.puts "Delete the created repository: FAILED"
+  $stderr.puts "Start cron service: FAILED"
   exit 1
 end
 
 #
 # verify the update
 #
-ret = `curl -i -k -s -S -u root:#{Shellwords.escape password} #{url}`
+url.path = "/services.xml"
+ret = `curl -k -s -S -u root:#{Shellwords.escape password} #{url}`
 puts "RESULT: #{ret}" if verbose
 
-if $?.exitstatus.zero? && ret.match(/Repository webyast_testing_repo was not found/) && ret.match(/Status: 404/)
-  puts "Verify removed repository: OK"
+doc = REXML::Document.new ret
+doc.elements.each('services/service') do |p|
+  if p.elements["name"].text == "cron" && p.elements["status"].text != "0"
+    puts "Cron is not running (expected 0, current is #{p.elements["status"].text}"
+    exit 1
+  end
+end
+
+if $?.exitstatus.zero?
+  puts "Verify cron start: OK"
 else
   $stderr.puts "RESULT: #{ret}"
-  $stderr.puts "Verify removed repository: FAILED"
+  $stderr.puts "Verify cron start: FAILED"
   exit 1
 end
 
