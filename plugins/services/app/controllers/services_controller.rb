@@ -68,7 +68,7 @@ public
     
   end
 
-  # PUT /services/1.xml
+  # PUT /services/cron.xml
   def execute
     authorize! :execute, Service
     
@@ -99,7 +99,7 @@ public
     render(:partial =>'result')
   end
 
-  # GET /services/1.xml
+  # GET /services/cron.xml
   # REST API
   def show
     authorize! :read, Service
@@ -113,14 +113,20 @@ public
     end
   end
   
-  # PUT /services/1.xml
+  # PUT /services/cron.xml
   # Execute service command (start or stop).
   # Requires execute permission for services YaPI.
+  #
+  # TODO FIXME: merge this with 'execute' action
   def update
-    authorize :execute, Service
+    authorize! :execute, Service
     @service = Service.find params[:id]
-    ret = @service.save(params)
-    render :xml => ret
+    @service.save(params)
+
+    respond_to do |format|
+      format.xml  { render :xml => @service.to_xml(:root => 'service', :dasherize => false) }
+      format.json { render :json => @service.to_json }
+    end
   end
 
 end

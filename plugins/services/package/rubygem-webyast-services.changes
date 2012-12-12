@@ -1,4 +1,9 @@
 -------------------------------------------------------------------
+Wed Dec 12 14:34:12 UTC 2012 - lslezak@suse.cz
+
+- REST API - fixed PUT method handler (bnc#789911)
+
+-------------------------------------------------------------------
 Tue Dec 11 20:34:45 UTC 2012 - lslezak@suse.cz
 
 - fixed filtering services, WebYaST now uses nginx instead of
