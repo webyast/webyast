@@ -18,8 +18,8 @@
 
 
 class RestdocController < ApplicationController
-  caches_action :index, :show
-  skip_filter :authenticate_account!
+  caches_action :index, :cache_path => Proc.new {"webyast_restdoc_index_#{FastGettext.locale}"}
+  caches_action :show, :cache_path => Proc.new {"webyast_restdoc_show_#{params[:id]}_#{FastGettext.locale}"}
 
   def index
     @restdocs = Restdoc.find :all
