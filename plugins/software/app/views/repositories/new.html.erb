@@ -37,7 +37,7 @@
 	  // PackageKit does not accept some special characters in alias
 	  || /^[^`'"\\\[\]^$\{\}<>]*$/i.test(value);
 
-	}, "<%= _("Symbols <b>%s</b> are not allowed in repository alias.") % "^${}[]&gt;&lt;`\\'\\\"\\\\" -%>");
+	}, "<%= (_("Symbols <b>%s</b> are not allowed in repository alias.") % "^${}[]&gt;&lt;`\\'\\\"\\\\").html_safe -%>");
 
    // validate the form
 	$("#repositoryForm").validate({
@@ -92,7 +92,7 @@
     // check whether the repository already exists
     function check_duplicate()
     {
-      var repos = <%= @repo_urls.map{|u| escape_javascript u}.to_json -%>;
+      var repos = <%= @repo_urls.to_json.html_safe -%>;
       var url = $('#repository_url').val();
 
       for (var i = 0; i < repos.length; i++)

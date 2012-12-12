@@ -55,6 +55,7 @@ class PackageKit
   def self.improve_error(dbus_error)
     # check if it is a known error
     if dbus_error.respond_to?('name') && dbus_error.name =~ /org.freedesktop.DBus.Error.([A-Za-z.]*)/
+      Rails.logger.warn "DBUS error: #{$1}"
       case $1
       when "ServiceUnknown"
         return ServiceNotAvailable.new('PackageKit')
@@ -145,6 +146,7 @@ class PackageKit
 
     [transaction_iface, packagekit_iface]
   rescue DBus::Error => dbus_error
+    Rails.logger.warn "Caught DBus error: #{dbus_error.inspect}"
     raise self.improve_error dbus_error
   end
 

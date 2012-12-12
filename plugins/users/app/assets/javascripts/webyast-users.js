@@ -19,11 +19,14 @@
 # you may find current contact information at www.novell.com
 */
 
+// GLOBAL FIXME: use jQuery properly in this file, avoid plain JS (e.g. [0])
+
 // using replace instead of trim() see bnc#580561
 function _trim(word){
   return word.replace(/^\s*|\s*$/g,'');
 }
 
+// WTF? FIXME: use standard jQuery selectors for this!
 function _getElementsByClassName(node, classname)  {
     if(!node) node = document.getElementsByTagName("body")[0];
     var a = [];
@@ -34,25 +37,14 @@ function _getElementsByClassName(node, classname)  {
     return a;
 }
 
-
-
- // onsubmit handler
+// onsubmit handler
+// FIXME: "message" parameter is not used
  function form_handler(sid, message) {
-   if ($('#form_' + sid).valid())
-   {
-//      disable_forms();
-//      $('#progress_' + sid).show();
-//      blockForm('form_'+sid, message);
-
-     return true;
-   }
-   else
-   {
-     return false;
-   }
+   return $('#form_' + sid).valid();
  }
 
 // delete button handler
+// FIXME: "progress" parameter is not used
 function delete_handler(which, progress, message){
  if (which.childElementCount == 2 && which.children[0].firstChild.textContent == "Delete"){
   which.childNodes[0].onclick="return false;";
@@ -77,9 +69,9 @@ function arrays_complement(a1,a2){
 function members_validation(which){
   var mygroups = [];
   if (_trim(which.value).length>0) mygroups = which.value.split(",");
-  var allgroups = $("#all_users_string")[0].value.split(",");
-  allgroups=allgroups.concat($("#system_users_string")[0].value.split(","));
-  errmsg="";
+  var allgroups = $("#all_users_string").val().split(",");
+  allgroups=allgroups.concat($("#system_users_string").val().split(","));
+  var errmsg="";
   for (i=0;i<mygroups.length;i++){
     var found=false;
     for(a=0;a<allgroups.length;a++){
@@ -112,8 +104,8 @@ function findById(where, id){
 function groups_validation(which){
   var mygroups = _trim(findById(which.parentNode.getElementsByTagName('input'), "user_grp_string").value);
   if (mygroups.length>0) mygroups = mygroups.split(",");
-  var allgroups = $("#all_grps_string")[0].value.split(",");
-  errmsg="";
+  var allgroups = $("#all_grps_string").val().split(",");
+  var errmsg="";
   for (i=0;i<mygroups.length;i++){
     var found=false;
     for(a=0;a<allgroups.length;a++){
@@ -123,7 +115,8 @@ function groups_validation(which){
      errmsg = mygroups[i]+" "+"is not valid group!" ;
     }
   }
-  set_tab_focus("groups")
+  set_tab_focus("groups");
+  // WTF? FIXME: use jQuery here!
   var error = findById(which.parentNode.parentNode.parentNode.getElementsByTagName('label'), "groups-error");
   error.innerHTML = errmsg;
   error.style.display= (errmsg.length==0) ? "none" : "block";
@@ -132,8 +125,8 @@ function groups_validation(which){
 
 function def_group_validation(which){
   var mygroup = _trim(findById(which.parentNode.getElementsByTagName('input'), "user_groupname").value);
-  var allgroups = $("#all_grps_string")[0].value.split(",");
-  errmsg="";
+  var allgroups = $("#all_grps_string").val().split(",");
+  var errmsg="";
 
    if (mygroup.length>0){
     var found=false;
@@ -141,11 +134,13 @@ function def_group_validation(which){
      if (allgroups[a]==_trim(mygroup)) found=true;
     }
     if (!found){
+     // FIXME: make this translatable
      errmsg = mygroup+" "+"is not valid group!" ;
     }
    }
 
-  set_tab_focus("groups")
+  set_tab_focus("groups");
+  // WTF? FIXME: use jQuery here!
   var error = findById(which.parentNode.parentNode.parentNode.getElementsByTagName('label'), "def-group-error");
   error.innerHTML = errmsg;
   error.style.display= (errmsg.length==0) ? "none" : "block";
@@ -153,20 +148,23 @@ function def_group_validation(which){
 }
 
 function roles_validation(which){
+  // WTF? FIXME: use jQuery here!
   var myroles = _trim(findById(which.parentNode.getElementsByTagName('input'), "user_roles_string").value);
   if (myroles.length>0) myroles = myroles.split(",");
   var allroles = $("#all_roles_string")[0].value.split(",");
-  errmsg="";
+  var errmsg="";
   for (i=0;i<myroles.length;i++){
     var found=false;
     for(a=0;a<allroles.length;a++){
      if (allroles[a]==_trim(myroles[i])) found=true;
     }
     if (!found){
+     // FIXME: make this translatable
      errmsg = myroles[i]+" "+"is not valid role!" ;
     }
   }
-  set_tab_focus("roles")
+  set_tab_focus("roles");
+  // WTF? FIXME: use jQuery here!
   var error = findById(which.parentNode.parentNode.parentNode.getElementsByTagName('label'), "roles-error");
   error.innerHTML = errmsg;
   error.style.display= (errmsg.length==0) ? "none" : "block";
@@ -176,24 +174,27 @@ function roles_validation(which){
 function user_exists_validation(el){
   var valid = true;
   var this_user = el.value;
-  users_list = $("#all_users_string").val().split(",");
+  // TODO FIXME: use native JS list (via Array.to_json from Ruby), avoid $("#all_users_string").val().split(",")
+  var users_list = $("#all_users_string").val() == "" ? [] : $("#all_users_string").val().split(",");
+
   $.each(users_list, function() {
     if(this == this_user) {
-      valid = false
-      return valid
+      valid = false;
+      return valid;
     }
   });
-  $("#user_name-error")[0].style.display= (valid) ? "none" : "block";
 
- return valid;
+  $("#user_name-error").toggle(!valid);
+
+  return valid;
 }
 
-
+// FIXME: "which" parameter is not used at all
 function user_validation(which, username){
   var valid = true;
   var form = '#form_'+username;
   // for new users test if already not exists
-  if (valid && username == ""){
+  if (username == ""){
    valid = user_exists_validation();
    if (!valid) $(".tabs_").tabs('select',"#tab_login_");
   }
@@ -217,6 +218,7 @@ function user_validation(which, username){
 
 
 function propose_home(login){
+  // FIXME: fix this strange argument checking and overriding
   if(arguments.length == 0) {
     var login = $("#user_uid").val();
   }
@@ -231,3 +233,18 @@ function propose_login(){
     propose_home(login);
   }
 }
+
+function check_uniq_uid_number() {
+  var existing_uid_nums = $("#all_uid_numbers_string").val().split(',');
+  var new_uid_num       = $("#user_uid_number").val();
+  var uid_num_exists    = false;
+  $.each(existing_uid_nums, function() {
+    if(new_uid_num == this) {
+      uid_num_exists = true;
+      return false;
+    }
+  });
+
+  $('#uid-error').toggle(uid_num_exists);
+}
+

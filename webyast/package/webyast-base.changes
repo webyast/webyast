@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Wed Dec  5 12:59:11 UTC 2012 - lslezak@suse.cz
+
+- fixed initializing session secret (for signing cookies) at the
+  first start (bnc#792632)
+
+-------------------------------------------------------------------
 Wed Nov 28 17:46:21 UTC 2012 - lslezak@suse.cz
 
 - control panel - logout after 2 hours timeout (bnc#789742)

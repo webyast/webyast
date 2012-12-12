@@ -36,10 +36,13 @@ class PatchesState
       f = File.new(Patch::MESSAGES_FILE, 'r')
       messages = f.gets(nil) || ""
 
+      messages = ERB::Util.html_escape(messages)
+      messages.gsub! "\n", "<br/>"
+
       return { :level => "warning",
                :message_id => "PATCH_MESSAGES",
                :short_description => _("Patch installation messages not confirmed"),
-               :long_description => messages,
+               :long_description => messages.html_safe,
                :details => "",
                :confirmation_link => "/patches/message",
                :confirmation_label => _("OK"),

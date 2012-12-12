@@ -100,6 +100,7 @@ class ActivedirectoryController < ApplicationController
         else
           Rails.logger.debug "ERROR INSPECT #{e.inspect}"
           flash[:error] = _("Error while saving Active Directory client configuration.")
+          render :show and return
         end
       end
     else #REST API

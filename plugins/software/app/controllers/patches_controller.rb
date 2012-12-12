@@ -23,6 +23,9 @@ class PatchesController < ApplicationController
   include ERB::Util
 
   before_filter :cache_check, :only => [:index, :show_summary]
+  before_filter :perm_check, :only => [:index]
+  before_filter :perm_check_summary, :only => [:show_summary]
+
   after_filter :drop_cache
 
   # include locale in the cache path to cache different translations
@@ -33,16 +36,26 @@ private
 
   # check permission and validate cache content
   def cache_check
-    authorize! :read, Patch
-
     cached_mtime = Rails.cache.fetch("webyast_patch_mtime")
     current_mtime = Patch.mtime
+
+    Rails.logger.info "cached_mtime: #{cached_mtime.inspect}, current_mtime: #{current_mtime.inspect}"
 
     if current_mtime != cached_mtime
       Rails.logger.info "Expiring patch cache: cached: #{cached_mtime}, modified: #{current_mtime}"
       # update the time stamp
       Rails.cache.write("webyast_patch_mtime", current_mtime)
       expire_patch_cache
+    end
+  end
+
+  def perm_check
+    authorize! :read, Patch
+  end
+
+  def perm_check_summary
+    if cannot? :read, Patch
+      render :text => _("Status not available (no permissions)")
     end
   end
 
@@ -99,7 +112,8 @@ private
   # GET /patches
   # GET /patches.xml
   def index
-    authorize! :read, Patch
+    # permission checks are done in the before_filter
+
     @msgs = read_messages
     if params['messages']
       Rails.logger.debug "Reading patch messages"
@@ -147,10 +161,15 @@ private
       begin
         @patch_updates = Patch.find(:all)
       rescue Exception => e
+        Rails.logger.warn "Error while reading patches: #{e.inspect}"
+
         if e.description.match /Repository (.*) needs to be signed/
           flash[:error] = ((h _("Cannot read patch updates: GPG key for repository %s is not trusted.")) % "<em>#{h $1}</em>").html_safe
         elsif e.description.match /System management is locked by the application with pid ([0-9]+) \((.*)\)\./
           flash[:warning] = _("Software management is locked by another application ('%s', PID %s).") % [$2, $1]
+          @drop_cache = true
+        elsif e.description.match /The ZYpp package manager is locked by process ([0-9]+)\. Retry later\./
+          flash[:warning] = _("Software management is locked by another application (PID %s). Available patches cannot be read.") % $1
           @drop_cache = true
         else
           flash[:error] = e.message
@@ -193,6 +212,7 @@ private
     patch_updates = nil
     ref_timeout = nil
     error_type = :none
+
     running, remaining = Patch.installing
 
     if running
@@ -213,11 +233,17 @@ private
         patch_updates = patch_updates + collect_done_patches #report also which patches is installed
         ref_timeout = refresh_timeout
       rescue Exception => error
+        Rails.logger.warn "Caught exception: #{error.inspect}"
+
         if error.description.match /Repository (.*) needs to be signed/
-          error_string = (_("Cannot read patch updates: GPG key for repository <em>%s</em> is not trusted.") % $1).html_safe
+          error_string = (_("Cannot read patch updates: GPG key for repository <em>%s</em> is not trusted.") % h($1)).html_safe
           error_type = :unsigned
         elsif error.description.match /System management is locked by the application with pid ([0-9]+) \((.*)\)\./
           error_string = _("Software management is locked by another application ('%s', PID %s).") % [$2, $1]
+          error_type = :locked
+          @drop_cache = true
+        elsif error.description.match /The ZYpp package manager is locked by process ([0-9]+)\. Retry later\./
+          error_string = _("Software management is locked by another application (PID %s).") % $1
           error_type = :locked
           @drop_cache = true
         else
@@ -256,7 +282,9 @@ private
                            :error_string => error_string,
                            :error_type => error_type,
                            :refresh_timeout => ref_timeout } }
+      # TODO error handling in JSON and XML
       format.json  { render :json => patches_summary }
+      format.xml  { render :xml => patches_summary }
     end
   end
 
