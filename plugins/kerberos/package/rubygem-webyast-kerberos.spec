@@ -27,9 +27,9 @@ BuildRoot:      %{_tmppath}/%{name}-%{version}-build
 BuildRequires:  rubygems_with_buildroot_patch
 %rubygems_requires
 BuildRequires:  rubygem-restility
-BuildRequires:  webyast-base >= 0.3
+BuildRequires:  webyast-base >= 0.3.31
 BuildRequires:  webyast-base-testsuite
-PreReq:         webyast-base >= 0.3
+PreReq:         webyast-base >= 0.3.31
 
 Obsoletes:	webyast-kerberos-ws < %{version}
 Obsoletes:	webyast-kerberos-ui < %{version}
@@ -87,6 +87,7 @@ needed at runtime.
 %prep
 
 %build
+%create_restart_script
 
 %check
 # run the testsuite
@@ -119,7 +120,7 @@ cp %{SOURCE2} $RPM_BUILD_ROOT/usr/share/YaST2/modules/YaPI/
 /usr/sbin/grantwebyastrights --user root --action grant > /dev/null
 /usr/sbin/grantwebyastrights --user %{webyast_user} --action grant > /dev/null
 
-%webyast_update_assets
+%restart_webyast
 
 %postun
 %webyast_remove_assets
@@ -143,6 +144,8 @@ cp %{SOURCE2} $RPM_BUILD_ROOT/usr/share/YaST2/modules/YaPI/
 
 %dir /usr/share/%{webyast_polkit_dir}
 %attr(644,root,root) %config /usr/share/%{webyast_polkit_dir}/org.opensuse.yast.modules.yapi.kerberos.policy
+
+%restart_script_name
 
 %files doc
 %defattr(-,root,root,-)

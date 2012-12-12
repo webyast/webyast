@@ -27,11 +27,11 @@ BuildRoot:      %{_tmppath}/%{name}-%{version}-build
 BuildRequires:  rubygems_with_buildroot_patch
 %rubygems_requires
 BuildRequires:  rubygem-restility
-BuildRequires:  rubygem-webyast-rake-tasks >= 0.2
+BuildRequires:  rubygem-webyast-rake-tasks >= 0.3.5
 BuildRequires:  webyast-base
 BuildRequires:  webyast-base-testsuite
 PreReq:         webyast-base
-PreReq:         rubygem-webyast-rake-tasks >= 0.2
+PreReq:         rubygem-webyast-rake-tasks >= 0.3.5
 Requires:       yast2-dbus-server
 Requires:       yast2-samba-client
 Requires:	samba-client samba-winbind
@@ -78,13 +78,14 @@ Test::Unit or RSpec files, useful for developers.
 
 %prep
 %build
+%create_restart_script
 
 %post
 # granting all permissions for the web user
 /usr/sbin/grantwebyastrights --user root --action grant > /dev/null
 /usr/sbin/grantwebyastrights --user %{webyast_user} --action grant > /dev/null
 
-%webyast_update_assets
+%restart_webyast
 
 %postun
 %webyast_remove_assets
@@ -131,6 +132,8 @@ install -m 0644 %{SOURCE2} $RPM_BUILD_ROOT/usr/share/YaST2/modules/YaPI/
 %dir /usr/share/YaST2/modules/
 %dir /usr/share/YaST2/modules/YaPI/
 /usr/share/YaST2/modules/YaPI/ActiveDirectory.pm
+
+%restart_script_name
 
 %files doc
 %defattr(-,root,root,-)

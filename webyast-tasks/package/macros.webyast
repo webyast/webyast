@@ -49,16 +49,7 @@
 
 # update manifest.yml file
 # use assets.rake file directly (faster loading)
-%webyast_update_assets \
-    cd %{webyast_dir} \
-    rake -f lib/tasks/assets.rake assets:join_manifests \
-    if test -f "Gemfile" ; then \
-      bundle update \
-    fi
-    cd -
-
-# update manifest.yml file
-# use assets.rake file directly (faster loading)
+# (Usually not needed, replaced by update script functionality)
 %webyast_update_assets \
     cd %{webyast_dir} \
     rake -f lib/tasks/assets.rake assets:join_manifests \
@@ -103,6 +94,19 @@
     mv $RPM_BUILD_ROOT/srv/www/webyast/public/assets/manifest.yml $RPM_BUILD_ROOT/srv/www/webyast/public/assets/manifest.yml.%{mod_name} \
     rm -rf log \
     cd -
+
+# set the flag to restart webyast at the end of libzypp transaction via update script
+%restart_webyast \
+    touch /var/lib/webyast/restart
+
+# restart file name for files section
+%restart_script_name \
+    /var/adm/update-scripts/%name-%version-%release-update
+
+# create a restart script (symlink the base script) (for build section)
+%create_restart_script \
+    mkdir -p $RPM_BUILD_ROOT/var/adm/update-scripts \
+    ln -s /usr/sbin/update_webyast_service $RPM_BUILD_ROOT/var/adm/update-scripts/%name-%version-%release-update
 
 %webyast_polkit \
     %if 0%{?suse_version} == 0 || %suse_version > 1110 \
