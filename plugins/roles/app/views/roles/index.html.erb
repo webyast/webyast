@@ -165,7 +165,7 @@
     </div>
 
     <div class="nav-buttons">
-      <%= form_next_button (:id=>'roles_submit_button') %>
+      <%= form_next_button :id=>'roles_submit_button' %>
       <%= form_str_spacer %>
       <%= form_back_button %>
     </div>
@@ -233,6 +233,7 @@
         modal: true,
 	      close: clearForm,
         buttons: {
+               <%# TODO FIXME: make the button labels translatable -%>
 	       'Create Role': function() {
 	       if ($("#rolesForm").validate().form() == true) {
 	         $(this).children("form").first().submit();

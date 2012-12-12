@@ -18,6 +18,7 @@
 # To contact Novell about this file by physical or electronic mail,
 # you may find current contact information at www.novell.com
 -->
+      <%# TODO FIXME: use native JS list (via Array.to_json from Ruby), avoid $("#all_users_string").val().split(",") %>
       <input type="hidden" id="all_users_string" value="<%= @all_users_string %>" />
       <div class="fieldset-group tabs_<%= user.uid %>">
 
@@ -154,6 +155,7 @@
     <div id="progress_<%= (new ? "" : user.uid) -%>" style="display: none; margin-bottom: 10px"><%= image_tag("working.gif", :class => "small-working-icon") %><span style="vertical-align: 50%; margin-left: 5px">...Wait...</span></div>
        <%= submit_tag _("Save"), :onclick=>"return user_validation(this, '"+ (new ? "" : user.uid) +"');", :disabled => disabled  %>
        <% if can?( :userdelete, User) && !new %>
+         <%# TODO FIXME: set the onclick handler to the link tag, move it to JS file %>
          <span onclick="delete_handler(this, '#progress_<%= user.uid -%>', '<%= _('Please wait') -%>');">
            <%= link_to _("Delete"),
                        {:action => 'destroy', :id => user.uid},

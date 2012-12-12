@@ -30,14 +30,14 @@
       $.extend($.validator.messages, { required: <%= jss _("This field is required.") -%> });
     
       if ($("#activedirectory_enabled:checked").length == 0) {
-        $("#activedirectory_domain").attr("disabled","disabled");
+        $("#activedirectory_domain, #activedirectory_administrator, #activedirectory_password, #activedirectory_machine", "#activedirectoryForm").attr("disabled","disabled");
       }
 
       $("#activedirectory_enabled").click(function () {
         if ($("#activedirectory_enabled:checked").length == 0) {
           $("#activedirectory_domain").attr("disabled","disabled");
         } else {
-          $("#activedirectory_domain", "#activedirectoryForm").removeAttr("disabled");
+          $("#activedirectory_domain, #activedirectory_administrator, #activedirectory_password, #activedirectory_machine", "#activedirectoryForm").removeAttr("disabled");
         }
       });
 

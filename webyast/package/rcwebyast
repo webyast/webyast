@@ -207,7 +207,7 @@ case "$1" in
     rc_status -v
     rc_exit
   fi
-  sed -i 's/9d11bfc98abcf9799082d9c34ec94dc1cc926f0f1bf4bea8c440b497d96b14c1f712c8784d0303ee7dd69e382c3e5e4d38d4c56d1b619eae7acaa6516cd733b1/'"$SECRET"/ /srv/www/webyast/config/environment.rb
+  sed -i 's/a25bdf1cfcaea649ced4549e9d2b2b6ad4cf077badc774ca034a7ba57ae17f6e1185ed07bcc4ac20fb2d062d2afa975024fca03ede7b4c5002ca68386caa27a0/'"$SECRET"/ /srv/www/webyast/config/initializers/secret_token.rb
 
 	# clear cache (drop possibly obsoleted values)
 	(cd /srv/www/webyast/ && rake -s tmp:cache:clear)
