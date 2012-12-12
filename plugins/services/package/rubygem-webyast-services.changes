@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Tue Dec 11 20:34:45 UTC 2012 - lslezak@suse.cz
+
+- fixed filtering services, WebYaST now uses nginx instead of
+  lighttpd
+
+-------------------------------------------------------------------
 Thu Nov  1 09:18:43 UTC 2012 - lslezak@suse.cz
 
 - testsuite cleanup
