@@ -26,9 +26,9 @@ Release:        0
 BuildRoot:      %{_tmppath}/%{name}-%{version}-build
 BuildRequires:  rubygems_with_buildroot_patch
 %rubygems_requires
-BuildRequires:  webyast-base >= 0.3
+BuildRequires:  webyast-base >= 0.3.31
 BuildRequires:  webyast-base-testsuite
-PreReq:         webyast-base >= 0.3
+PreReq:         webyast-base >= 0.3.31
 
 Obsoletes:      webyast-software-ui < %{version}
 Obsoletes:      webyast-software-ws < %{version}
@@ -84,6 +84,7 @@ needed at runtime.
 %prep
 
 %build
+%create_restart_script
 
 %check
 # run the testsuite
@@ -122,7 +123,7 @@ mkdir -p $RPM_BUILD_ROOT/var/lib/webyast/software/licenses/accepted
 /usr/sbin/grantwebyastrights --user %{webyast_user} --action grant --policy org.freedesktop.packagekit.system-update >& /dev/null || true
 /usr/sbin/grantwebyastrights --user %{webyast_user} --action grant --policy org.freedesktop.packagekit.package-eula-accept >& /dev/null || true
 
-%webyast_update_assets
+%restart_webyast
 
 %postun
 %webyast_remove_assets
@@ -144,6 +145,8 @@ mkdir -p $RPM_BUILD_ROOT/var/lib/webyast/software/licenses/accepted
 %attr(644,root,root) %config /usr/share/%{webyast_polkit_dir}/org.opensuse.yast.modules.yapi.packages.policy
 %attr(644,root,root) %config /usr/share/%{webyast_polkit_dir}/org.opensuse.yast.modules.yapi.repositories.policy
 %attr(775,%{webyast_user},root) /var/lib/webyast/software
+
+%restart_script_name
 
 %files doc
 %defattr(-,root,root,-)

@@ -27,11 +27,11 @@ BuildRoot:      %{_tmppath}/%{name}-%{version}-build
 BuildRequires:  rubygems_with_buildroot_patch
 %rubygems_requires
 BuildRequires:  rubygem-restility
-BuildRequires:  rubygem-webyast-rake-tasks >= 0.2
+BuildRequires:  rubygem-webyast-rake-tasks >= 0.3.5
 BuildRequires:  webyast-base
 BuildRequires:  webyast-base-testsuite
 PreReq:         webyast-base
-PreReq:         rubygem-webyast-rake-tasks >= 0.2
+PreReq:         rubygem-webyast-rake-tasks >= 0.3.5
 %if 0%{?suse_version} == 0 || %suse_version > 1110
 Requires:       yast2-core >= 2.18.10
 %else
@@ -80,6 +80,7 @@ Usually in RDoc and RI formats.
 %prep
 
 %build
+%create_restart_script
 
 %check
 
@@ -111,7 +112,7 @@ cp %{SOURCE2} $RPM_BUILD_ROOT/usr/share/YaST2/modules/YaPI/
 /usr/sbin/grantwebyastrights --user root --action grant > /dev/null ||:
 /usr/sbin/grantwebyastrights --user %{webyast_user} --action grant > /dev/null ||:
 
-%webyast_update_assets
+%restart_webyast
 
 %postun
 %webyast_remove_assets
@@ -135,6 +136,8 @@ cp %{SOURCE2} $RPM_BUILD_ROOT/usr/share/YaST2/modules/YaPI/
 %dir /usr/share/YaST2/modules/
 %dir /usr/share/YaST2/modules/YaPI/
 /usr/share/YaST2/modules/YaPI/FIREWALL.pm
+
+%restart_script_name
 
 %files doc
 %defattr(-,root,root,-)

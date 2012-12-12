@@ -10,7 +10,7 @@
 
 
 Name:           webyast-base
-Version:        0.3.30
+Version:        0.3.31
 Release:        0
 Provides:       yast2-webservice = %{version}
 Obsoletes:      yast2-webservice < %{version}
@@ -49,7 +49,7 @@ Requires:       nginx >= 1.0
 Requires:       sqlite3, syslog-ng, check-create-certificate, yast2-dbus-server
 Requires:	rubygem-ruby-dbus
 
-Requires:       rubygem-webyast-rake-tasks >= 0.2, webyast-base-branding
+Requires:       rubygem-webyast-rake-tasks >= 0.3.5, webyast-base-branding
 PreReq:		rubygem-bundler
 # 634404
 Recommends:     logrotate
@@ -83,12 +83,13 @@ Source12:       nginx.conf
 Source13:       control_panel.yml
 Source14:       config.yml
 Source15:       config.yml.new
+Source16:	update_webyast_service
 
 BuildRoot:      %{_tmppath}/%{name}-%{version}-build
 BuildRequires:  ruby, pkg-config, rubygem-mocha
 # if we run the tests during build, we need most of Requires here too,
 # except for deployment specific stuff
-BuildRequires:  rubygem-webyast-rake-tasks >= 0.2
+BuildRequires:  rubygem-webyast-rake-tasks >= 0.3.5
 BuildRequires:  sqlite3, dbus-1
 BuildRequires:  rubygem-ruby-dbus
 BuildRequires:  rubygem-sqlite3
@@ -323,6 +324,15 @@ touch %buildroot/var/adm/update-scripts/%name-%version-%release-1
 # for basesystem setup (firstboot)
 mkdir -p $RPM_BUILD_ROOT%{webyast_vardir}/basesystem
 
+# install restart script
+install -m 0755 %SOURCE16 $RPM_BUILD_ROOT/usr/sbin/
+
+# restart Webyast at the end of the transaction
+%create_restart_script
+
+# create restart script for *-branding subpackage
+ln -s /usr/sbin/update_webyast_service $RPM_BUILD_ROOT/var/adm/update-scripts/webyast-base-branding-default-%version-%release-update
+
 #---------------------------------------------------------------
 %clean
 rm -rf $RPM_BUILD_ROOT
@@ -424,6 +434,8 @@ if [ -f /etc/sysconfig/SuSEfirewall2 ]; then
   fi
 fi
 
+%restart_webyast
+
 #---------------------------------------------------------------
 %preun
 %stop_on_removal %{webyast_service}
@@ -439,7 +451,7 @@ fi
 %restart_on_update %{webyast_service}
 
 %post branding-default
-%webyast_update_assets
+%restart_webyast
 
 %postun branding-default
 %webyast_update_assets
@@ -455,6 +467,10 @@ fi
 %attr(-,%{webyast_user},%{webyast_user}) %dir %{pkg_home}/sockets
 %attr(-,%{webyast_user},%{webyast_user}) %dir %{pkg_home}/cache
 %attr(-,%{webyast_user},%{webyast_user}) %dir %{_var}/log/%{webyast_user}
+
+# include the restart script
+%restart_script_name
+%attr(755,root,root) /usr/sbin/update_webyast_service
 
 #logrotate configuration file
 %config(noreplace) /etc/logrotate.d/webyast.lr.conf
@@ -548,6 +564,8 @@ fi
 %exclude %{webyast_dir}/public/assets/*.js
 %exclude %{webyast_dir}/public/assets/*.js.gz
 %exclude %{webyast_dir}/public/assets/manifest.yml.base
+# restart script
+/var/adm/update-scripts/webyast-base-branding-default-%version-%release-update
 
 #---------------------------------------------------------------
 %changelog

@@ -27,9 +27,9 @@ BuildRoot:      %{_tmppath}/%{name}-%{version}-build
 BuildRequires:  rubygems_with_buildroot_patch
 %rubygems_requires
 BuildRequires:  rubygem-restility
-BuildRequires:  webyast-base >= 0.3
+BuildRequires:  webyast-base >= 0.3.31
 BuildRequires:  webyast-base-testsuite
-PreReq:         webyast-base >= 0.3
+PreReq:         webyast-base >= 0.3.31
 
 Obsoletes:	webyast-reboot-ws < %{version}
 Obsoletes:	webyast-reboot-ui < %{version}
@@ -69,6 +69,7 @@ Testsuite for webyast-reboot package.
 %prep
 
 %build
+%create_restart_script
 
 %check
 %webyast_run_plugin_tests
@@ -102,6 +103,8 @@ install -m 0644 %SOURCE1 $RPM_BUILD_ROOT/usr/share/%{webyast_polkit_dir}
 /usr/sbin/grantwebyastrights --user root --action grant --policy org.freedesktop.consolekit.system.restart >& /dev/null || true
 /usr/sbin/grantwebyastrights --user root --action grant --policy org.freedesktop.consolekit.system.restart-multiple-users >& /dev/null || true
 
+%restart_webyast
+
 %postun
 # don't remove the rights during package update ($1 > 0)
 # see https://fedoraproject.org/wiki/Packaging/ScriptletSnippets#Syntax for details
@@ -121,6 +124,8 @@ fi
 
 %dir /usr/share/%{webyast_polkit_dir}
 %attr(644,root,root) %config /usr/share/%{webyast_polkit_dir}/org.opensuse.yast.modules.yapi.system.policy
+
+%restart_script_name
 
 %files doc
 %defattr(-,root,root,-)

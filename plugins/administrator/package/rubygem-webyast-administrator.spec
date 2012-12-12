@@ -27,9 +27,9 @@ BuildRoot:      %{_tmppath}/%{name}-%{version}-build
 BuildRequires:  rubygems_with_buildroot_patch
 %rubygems_requires
 BuildRequires:  rubygem-restility
-BuildRequires:  webyast-base >= 0.3
+BuildRequires:  webyast-base >= 0.3.31
 BuildRequires:  webyast-base-testsuite
-PreReq:         webyast-base >= 0.3
+PreReq:         webyast-base >= 0.3.31
 Requires:       yast2-users
 
 Obsoletes:	webyast-root-user-ws < %{version}
@@ -68,13 +68,14 @@ Test::Unit or RSpec files, useful for developers.
 
 %prep
 %build
+%create_restart_script
 
 %post
 # granting all permissions for the web user
 /usr/sbin/grantwebyastrights --user root --action grant > /dev/null
 /usr/sbin/grantwebyastrights --user %{webyast_user} --action grant > /dev/null
 
-%webyast_update_assets
+%restart_webyast
 
 %postun
 %webyast_remove_assets
@@ -109,6 +110,8 @@ install -m 0644 %SOURCE1 $RPM_BUILD_ROOT/usr/share/%{webyast_polkit_dir}
 
 %dir /usr/share/%{webyast_polkit_dir}
 %attr(644,root,root) %config /usr/share/%{webyast_polkit_dir}/org.opensuse.yast.modules.yapi.administrator.policy
+
+%restart_script_name
 
 %files doc
 %defattr(-,root,root,-)

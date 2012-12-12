@@ -27,9 +27,9 @@ BuildRoot:      %{_tmppath}/%{name}-%{version}-build
 BuildRequires:  rubygems_with_buildroot_patch
 %rubygems_requires
 BuildRequires:  rubygem-restility
-BuildRequires:  webyast-base >= 0.3
+BuildRequires:  webyast-base >= 0.3.31
 BuildRequires:  webyast-base-testsuite
-PreReq:         webyast-base >= 0.3
+PreReq:         webyast-base >= 0.3.31
 
 Obsoletes:	webyast-ntp-ws < %{version}
 Provides:	webyast-ntp-ws = %{version}
@@ -76,6 +76,7 @@ needed at runtime.
 %prep
 
 %build
+%create_restart_script
 
 %check
 # run the testsuite
@@ -103,6 +104,7 @@ mkdir -p $RPM_BUILD_ROOT/%{_libdir}/ruby/gems/%{rb_ver}/gems/%{mod_full_name}/lo
 # granting all permissions for the webservice user and root
 /usr/sbin/grantwebyastrights --user root --action grant > /dev/null
 /usr/sbin/grantwebyastrights --user %{webyast_user} --action grant > /dev/null
+%restart_webyast
 
 %files 
 %defattr(-,root,root,-)
@@ -117,6 +119,8 @@ mkdir -p $RPM_BUILD_ROOT/%{_libdir}/ruby/gems/%{rb_ver}/gems/%{mod_full_name}/lo
 %dir /usr/share/YaST2/modules/YaPI/
 %attr(644,root,root) /usr/share/YaST2/modules/YaPI/NTP.pm
 %attr(644,root,root) /usr/share/%{webyast_polkit_dir}/org.opensuse.yast.modules.yapi.ntp.policy
+
+%restart_script_name
 
 %files doc
 %defattr(-,root,root,-)

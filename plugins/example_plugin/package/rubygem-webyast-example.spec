@@ -22,10 +22,10 @@ License:        GPL-2.0
 BuildRoot:      %{_tmppath}/%{name}-%{version}-build
 BuildRequires:  rubygems_with_buildroot_patch
 %rubygems_requires
-BuildRequires:	webyast-base >= 0.3
+BuildRequires:	webyast-base >= 0.3.31
 BuildRequires:	webyast-base-testsuite
 BuildRequires:	rubygem-restility
-PreReq:	        webyast-base >= 0.3
+PreReq:	        webyast-base >= 0.3.31
 
 Summary:        WebYaST - example plugin
 
@@ -67,6 +67,7 @@ needed at runtime.
 %prep
 
 %build
+%create_restart_script
 
 %check
 # run the testsuite
@@ -107,7 +108,7 @@ rm -rf $RPM_BUILD_ROOT/%{_libdir}/ruby/gems/%{rb_ver}/gems/%{mod_full_name}/publ
 /usr/sbin/grantwebyastrights --user %{webyast_user} --action grant --policy org.opensuse.yast.system.example.read > /dev/null || :
 /usr/sbin/grantwebyastrights --user %{webyast_user} --action grant --policy org.opensuse.yast.system.example.write > /dev/null || :
 
-%webyast_update_assets
+%restart_webyast
 
 %postun
 %webyast_remove_assets
@@ -127,6 +128,8 @@ rm -rf $RPM_BUILD_ROOT/%{_libdir}/ruby/gems/%{rb_ver}/gems/%{mod_full_name}/publ
 %attr(644,root,root) /usr/share/%{webyast_polkit_dir}/org.opensuse.yast.modules.yapi.example.policy
 %attr(644,root,root) /etc/dbus-1/system.d/example.service.conf
 %attr(644,root,root) /usr/share/dbus-1/system-services/example.service.service
+
+%restart_script_name
 
 %files doc
 %defattr(-,root,root,-)
