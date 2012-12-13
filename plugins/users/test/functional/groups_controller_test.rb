@@ -108,8 +108,8 @@ class GroupsControllerTest < ActionController::TestCase
 
   def test_rename_group
     YastService.stubs(:Call).with("YaPI::USERS::GroupGet",GROUP_LOCAL_CONFIG).once.returns(GROUP_READ_DATA)
-    YastService.stubs(:Call).with( "YaPI::USERS::GroupModify", GROUP_LOCAL_CONFIG,  {'cn' => ['s', 'new_name'], 'gidNumber' => ['i', 0], 'userlist' => ['as', []]}).once.returns(OK_RESULT)
-    post :update, {"group" => {"cn"=>"new_name", "old_cn" => "users", "group_type" => "local"} }
+    YastService.stubs(:Call).with( "YaPI::USERS::GroupModify", GROUP_LOCAL_CONFIG,  {'cn' => ['s', 'new_name'], 'gidNumber' => ['i', 100], 'userlist' => ['as', []]}).once.returns(OK_RESULT)
+    post :update, {"group" => {"cn"=>"new_name", "old_cn" => "users", "group_type" => "local", "gid" => "100" } }
 
     assert_redirected_to :action => :index
     assert !flash.empty?
