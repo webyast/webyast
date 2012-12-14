@@ -18,13 +18,10 @@
 # To contact Novell about this file by physical or electronic mail,
 # you may find current contact information at www.novell.com
 -->
-<% content_for :head do %>
-  <%= stylesheet_link_tag "webyast-software" %>
-<% end %>
+<%= stylesheet_link_tag "webyast-software" %>
 
 <%= render :partial => "shared/notification", :locals => { :module_name => 'patches' } %>
 
-<% content_for :head do %>
 <script type="text/javascript">
   $(document).ready(function() {
     $(":button").click(function() {
@@ -98,7 +95,6 @@
   <% end %> 
 
 </script>
-<% end %>
 
 <% if @patch_updates %>
 
