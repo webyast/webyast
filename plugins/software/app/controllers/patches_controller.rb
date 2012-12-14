@@ -394,8 +394,11 @@ private
     authorize! :read, Patch
     authorize! :install, Patch
 
-    if (params[:accept].present? || params[:reject].present?) && params[:name].present?
+    if (params[:accept].present? || params[:reject].present?) && params[:name].present? && params[:package_id].present?
       params[:accept].present? ? Patch.accept_license(params[:name]) : Patch.reject_license(params[:name])
+
+      Patch.accept_eulas
+      Patch::BM.background_enabled? ? Patch.install_patches_by_id_background([params[:package_id]]) : Patch.install_patches_by_id([params[:package_id]])
 
       if request.format.html?
         redirect_to "/"

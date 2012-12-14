@@ -76,7 +76,7 @@
       <div class="button_container">
         <div class="hr">&nbsp;</div>
         <div class="nav-buttons">
-          <%= link_to _("Accept"), {:controller => "patches", :action => "update_license", :accept => 1, :name => @license[:name], :package_id => @package_id}, {:method => :post, :class => "button"} %>
+          <%= link_to _("Accept and Install"), {:controller => "patches", :action => "update_license", :accept => 1, :name => @license[:name], :package_id => @package_id}, {:method => :post, :class => "button"} %>
           <%= link_to _("Reject"), {:controller => "patches", :action => "update_license", :reject => 1, :name => @license[:name], :package_id => @package_id}, {:method => :post, :class => "button"} %>
           <%= form_str_spacer %>
           <%= link_to _("Back"), root_path %>
