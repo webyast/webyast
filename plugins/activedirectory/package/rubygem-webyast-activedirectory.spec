@@ -28,9 +28,9 @@ BuildRequires:  rubygems_with_buildroot_patch
 %rubygems_requires
 BuildRequires:  rubygem-restility
 BuildRequires:  rubygem-webyast-rake-tasks >= 0.3.5
-BuildRequires:  webyast-base
+BuildRequires:  webyast-base >= 0.3.31
 BuildRequires:  webyast-base-testsuite
-PreReq:         webyast-base
+PreReq:         webyast-base >= 0.3.31
 PreReq:         rubygem-webyast-rake-tasks >= 0.3.5
 Requires:       yast2-dbus-server
 Requires:       yast2-samba-client
