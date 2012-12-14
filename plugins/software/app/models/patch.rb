@@ -42,12 +42,15 @@ class Patch < Resolvable
 
   private
 
-  def self.decide_license(accept)
-    #we don't know eula id, but as it block package kit, then there is only one license file to decide
+  def self.decide_license(accept, name)
+    license_file = File.join LICENSES_DIR, name
+
     if accept
-      `/usr/bin/find #{LICENSES_DIR} -type f -exec /bin/mv {} #{ACCEPTED_LICENSES_DIR} \\;`
+      Rails.logger.debug "Moving #{license_file} to #{ACCEPTED_LICENSES_DIR}"
+      File.move license_file, ACCEPTED_LICENSES_DIR
     else
-      `/usr/bin/find #{LICENSES_DIR} -type f -delete`
+      Rails.logger.debug "Removing #{license_file}"
+      File.unlink license_file
     end
   end
 
@@ -59,12 +62,12 @@ class Patch < Resolvable
 
   public
 
-  def self.accept_license
-    decide_license true
+  def self.accept_license name
+    decide_license true, name
   end
 
-  def self.reject_license
-    decide_license false
+  def self.reject_license name
+    decide_license false, name
   end
 
   def to_xml( options = {} )
@@ -72,7 +75,7 @@ class Patch < Resolvable
   end
 
   def self.mtime
-    [PackageKit.mtime, Repository.mtime].max
+    [PackageKit.mtime, Repository.mtime, File.stat(LICENSES_DIR).mtime].max
   end
 
   def self.install_patches_by_id_background ids
@@ -338,7 +341,7 @@ class Patch < Resolvable
         end
 
         proxy.on_signal("Package") do |line1,line2,line3|
-          Rails.logger.debug "  update package: #{line2}"
+          Rails.logger.info " Installing package: #{line2}"
         end
 
         dbusloop = PackageKit.dbusloop proxy, error

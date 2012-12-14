@@ -394,10 +394,8 @@ private
     authorize! :read, Patch
     authorize! :install, Patch
 
-    if params[:accept].present? || params[:reject].present?
-      params[:accept].present? ? Patch.accept_license : Patch.reject_license
-
-      Patch.clear_cache
+    if (params[:accept].present? || params[:reject].present?) && params[:name].present?
+      params[:accept].present? ? Patch.accept_license(params[:name]) : Patch.reject_license(params[:name])
 
       if request.format.html?
         redirect_to "/"
