@@ -423,6 +423,7 @@ private
       format.html {
         @license = Patch.license.first
         @text = @license[:text] if @license
+        @package_id = @license[:package_id] if @license
         if @text =~ /DT:Rich/ #text is richtext for packager
           @text = @text.html_safe
         else

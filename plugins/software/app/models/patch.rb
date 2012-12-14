@@ -312,9 +312,12 @@ class Patch < Resolvable
   def self.license
     Dir.glob(File.join(LICENSES_DIR,"*")).reduce([]) do |res,f|
       if File.file? f
+        # there is package_id on the first line
+        package_id, text = File.read(f).split("\n", 2)
         res << ({
             :name => File.basename(f),
-            :text => File.read(f)
+            :text => text,
+            :package_id => package_id
           })
       end
       res
@@ -353,10 +356,10 @@ class Patch < Resolvable
           dbusloop.quit
         end
 
-        proxy.on_signal("EulaRequired") do |eula_id,package_id,vendor_name,license_text|
+        proxy.on_signal("EulaRequired") do |eula_id, package_id, vendor_name, license_text|
           Rails.logger.info "EULA #{eula_id.inspect} is required for #{package_id.inspect}"
           #FIXME check if user already agree with license
-          create_eula(eula_id,license_text)
+          create_eula(eula_id, package_id, license_text)
           ok = false
           dbusloop.quit
         end
@@ -394,12 +397,15 @@ class Patch < Resolvable
     return [ ok, error ]
   end
 
-  def self.create_eula(eula_id,license_text)
+  def self.create_eula(eula_id, package_id, license_text)
     accepted_path = File.join(ACCEPTED_LICENSES_DIR,eula_id)
     ret = File.exists?(accepted_path) #eula is in accepted dir
     unless ret
       license_file = File.join(LICENSES_DIR,eula_id)
-      File.open(license_file,"w") { |f| f.write license_text }
+      File.open(license_file,"w") do |f|
+        f.puts package_id
+        f.write license_text
+      end
     end
     ret
   end
