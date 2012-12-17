@@ -362,10 +362,8 @@ class Patch < Resolvable
 
         proxy.on_signal("EulaRequired") do |eula_id, package_id, vendor_name, license_text|
           Rails.logger.info "EULA #{eula_id.inspect} is required for #{package_id.inspect}"
-          #FIXME check if user already agree with license
           create_eula(eula_id, package_id, pk_id, license_text)
           ok = false
-          dbusloop.quit
         end
 
         if transaction_iface.methods["UpdatePackages"] && # catch mocking
@@ -397,7 +395,7 @@ class Patch < Resolvable
 
     Rails.logger.error "Received PackageKit error: #{error}" unless error.blank?
 
-    remove_eulas() if ok
+    remove_eulas(pk_id) if ok
     return [ ok, error ]
   end
 
@@ -430,10 +428,20 @@ class Patch < Resolvable
     }
   end
 
-  def self.remove_eulas()
+  def self.remove_eulas(pk_id)
+    Rails.logger.info "Removing EULA for patch #{pk_id}..."
     dir = Dir.new(ACCEPTED_LICENSES_DIR)
     dir.each  {|filename|
-      File.delete(File.join(ACCEPTED_LICENSES_DIR,filename)) unless File.directory? filename
+      next if filename == ".." || filename == "."
+
+      license_file = File.join(ACCEPTED_LICENSES_DIR, filename)
+      package_id, patch_id, text = File.read(license_file).split("\n", 3)
+      Rails.logger.debug "File: #{filename}, license for: #{package_id} - #{patch_id}"
+
+      if patch_id == pk_id
+        Rails.logger.info "Removing confirmed license for patch #{pk_id}: #{license_file}"
+        File.delete license_file
+      end
     }
   end
 
