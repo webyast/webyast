@@ -394,12 +394,13 @@ private
     authorize! :read, Patch
     authorize! :install, Patch
 
-    if (params[:accept].present? || params[:reject].present?) && params[:name].present? && params[:package_id].present?
+    if (params[:accept].present? || params[:reject].present?) && params[:name].present? && params[:patch_id].present?
       params[:accept].present? ? Patch.accept_license(params[:name]) : Patch.reject_license(params[:name])
 
       if params[:accept].present?
+        Rails.logger.info "Accepted license for patch: #{params[:patch_id]}"
         Patch.accept_eulas
-        Patch::BM.background_enabled? ? Patch.install_patches_by_id_background([params[:package_id]]) : Patch.install_patches_by_id([params[:package_id]])
+        Patch::BM.background_enabled? ? Patch.install_patches_by_id_background([params[:patch_id]]) : Patch.install_patches_by_id([params[:patch_id]])
       end
 
       if request.format.html?
@@ -429,6 +430,7 @@ private
         @license = Patch.license.first
         @text = @license[:text] if @license
         @package_id = @license[:package_id] if @license
+        @patch_id = @license[:patch_id] if @license
         if @text =~ /DT:Rich/ #text is richtext for packager
           @text = @text.html_safe
         else

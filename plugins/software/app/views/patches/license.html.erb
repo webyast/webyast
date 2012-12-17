@@ -59,8 +59,9 @@
     <%= form_tag "/license", :class => "webyast_form" do %>
       <div class="plugin-header">
         <div class="left">
+          <% name, version, arch, repo = @package_id.split(';') %>
           <label class="plugin-icon-container"><%= image_tag("eulas.png", :class=>"plugin-icon") %></label>
-          <label class="plugin-name"><%=  _("Package License Agreement - %s") % @license[:name] -%></label>
+          <label class="plugin-name"><%=  _("Package License Agreement - %s") % "#{name}-#{version}-#{arch}" -%></label>
         </div>
         <div class="clearfix"></div>
       </div>
@@ -76,8 +77,8 @@
       <div class="button_container">
         <div class="hr">&nbsp;</div>
         <div class="nav-buttons">
-          <%= link_to _("Accept and Install"), {:controller => "patches", :action => "update_license", :accept => 1, :name => @license[:name], :package_id => @package_id}, {:method => :post, :class => "button"} %>
-          <%= link_to _("Reject"), {:controller => "patches", :action => "update_license", :reject => 1, :name => @license[:name], :package_id => @package_id}, {:method => :post, :class => "button"} %>
+          <%= link_to _("Accept and Install"), {:controller => "patches", :action => "update_license", :accept => 1, :name => @license[:name], :patch_id => @patch_id}, {:method => :post, :class => "button"} %>
+          <%= link_to _("Reject"), {:controller => "patches", :action => "update_license", :reject => 1, :name => @license[:name], :patch_id => @patch_id}, {:method => :post, :class => "button"} %>
           <%= form_str_spacer %>
           <%= link_to _("Back"), root_path %>
         </div>

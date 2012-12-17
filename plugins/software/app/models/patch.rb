@@ -100,13 +100,15 @@ class Patch < Resolvable
   def self.install_patches_by_id ids
     begin
       patches = []
+      Rails.logger.info "** Patch ids to install: #{ids.inspect}"
 
       ids.each do |id|
         patch = Patch.find(id)
+        Rails.logger.info "** Patch for id #{id} to install: #{patch.inspect}"
         patches << patch if patch
       end
 
-      Rails.logger.info "** Found #{patches.size} patches to install"
+      Rails.logger.info "** Found #{patches.size} patches to install: #{patches.inspect}"
 
       # set number of patches to install
       Patch::BM.update_progress(Patch::PATCH_INSTALL_ID) do |bs|
@@ -189,6 +191,7 @@ class Patch < Resolvable
 
     DbusLock.synchronize do
       PackageKit.transact("GetUpdates", "none", "Package", bg_status) do |line1,line2,line3|
+        Rails.logger.debug "**** Found patch : #{line2.inspect}"
         columns = line2.split ";"
         if what == :available || line2 == what
           update = Patch.new(:resolvable_id => line2,
@@ -313,11 +316,12 @@ class Patch < Resolvable
     Dir.glob(File.join(LICENSES_DIR,"*")).reduce([]) do |res,f|
       if File.file? f
         # there is package_id on the first line
-        package_id, text = File.read(f).split("\n", 2)
+        package_id, patch_id, text = File.read(f).split("\n", 3)
         res << ({
             :name => File.basename(f),
             :text => text,
-            :package_id => package_id
+            :package_id => package_id,
+            :patch_id => patch_id
           })
       end
       res
@@ -359,7 +363,7 @@ class Patch < Resolvable
         proxy.on_signal("EulaRequired") do |eula_id, package_id, vendor_name, license_text|
           Rails.logger.info "EULA #{eula_id.inspect} is required for #{package_id.inspect}"
           #FIXME check if user already agree with license
-          create_eula(eula_id, package_id, license_text)
+          create_eula(eula_id, package_id, pk_id, license_text)
           ok = false
           dbusloop.quit
         end
@@ -397,13 +401,14 @@ class Patch < Resolvable
     return [ ok, error ]
   end
 
-  def self.create_eula(eula_id, package_id, license_text)
+  def self.create_eula(eula_id, package_id, patch_id, license_text)
     accepted_path = File.join(ACCEPTED_LICENSES_DIR,eula_id)
     ret = File.exists?(accepted_path) #eula is in accepted dir
     unless ret
       license_file = File.join(LICENSES_DIR,eula_id)
       File.open(license_file,"w") do |f|
         f.puts package_id
+        f.puts patch_id
         f.write license_text
       end
     end
