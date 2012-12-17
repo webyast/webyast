@@ -400,6 +400,15 @@ private
       if params[:accept].present?
         Rails.logger.info "Accepted license for patch: #{params[:patch_id]}"
         Patch.accept_eulas
+
+        # remove the previous patch installation failure caused by not accepted license
+        failed_patches = Rails.cache.fetch("patch:failed")
+        unless failed_patches.blank?
+          failed_patches.delete_if {|patch| patch.resolvable_id == params[:patch_id]}
+          Rails.cache.write("patch:failed", failed_patches)
+        end
+
+        # install the patch again
         Patch::BM.background_enabled? ? Patch.install_patches_by_id_background([params[:patch_id]]) : Patch.install_patches_by_id([params[:patch_id]])
       end
 
