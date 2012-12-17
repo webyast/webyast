@@ -364,6 +364,7 @@ class Patch < Resolvable
           Rails.logger.info "EULA #{eula_id.inspect} is required for #{package_id.inspect}"
           create_eula(eula_id, package_id, pk_id, license_text)
           ok = false
+          dbusloop.quit
         end
 
         if transaction_iface.methods["UpdatePackages"] && # catch mocking
@@ -431,18 +432,18 @@ class Patch < Resolvable
   def self.remove_eulas(pk_id)
     Rails.logger.info "Removing EULA for patch #{pk_id}..."
     dir = Dir.new(ACCEPTED_LICENSES_DIR)
-    dir.each  {|filename|
-      next if filename == ".." || filename == "."
+    dir.each do |filename|
+      unless File.directory? filename
+        license_file = File.join(ACCEPTED_LICENSES_DIR, filename)
+        package_id, patch_id, text = File.read(license_file).split("\n", 3)
+        Rails.logger.debug "File: #{filename}, license for: #{package_id} - #{patch_id}"
 
-      license_file = File.join(ACCEPTED_LICENSES_DIR, filename)
-      package_id, patch_id, text = File.read(license_file).split("\n", 3)
-      Rails.logger.debug "File: #{filename}, license for: #{package_id} - #{patch_id}"
-
-      if patch_id == pk_id
-        Rails.logger.info "Removing confirmed license for patch #{pk_id}: #{license_file}"
-        File.delete license_file
+        if patch_id == pk_id
+          Rails.logger.info "Removing confirmed license for patch #{pk_id}: #{license_file}"
+          File.delete license_file
+        end
       end
-    }
+    end
   end
 
 end
