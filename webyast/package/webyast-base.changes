@@ -1,4 +1,12 @@
 -------------------------------------------------------------------
+Tue Dec 18 09:54:56 UTC 2012 - lslezak@suse.cz
+
+- permission fix: make db/production.sqlite3 readable only for
+  webyast user (to prevent from accessing the authentication tokens
+  stored there)
+- 0.3.32
+
+-------------------------------------------------------------------
 Wed Dec 12 15:21:32 UTC 2012 - lslezak@suse.cz
 
 - 0.3.31

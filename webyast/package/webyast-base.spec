@@ -10,7 +10,7 @@
 
 
 Name:           webyast-base
-Version:        0.3.31
+Version:        0.3.32
 Release:        0
 Provides:       yast2-webservice = %{version}
 Obsoletes:      yast2-webservice < %{version}
@@ -409,8 +409,9 @@ rm -f Gemfile.lock
 %if %suse_version <= 1110
 export WEBYAST_POLICYKIT='true'
 %endif
-RAILS_ENV=production rake db:migrate
+(umask 0077; RAILS_ENV=production rake db:migrate)
 chown -R %{webyast_user}: db
+chmod o-r db/production.sqlite3
 chown -R %{webyast_user}: /var/log/webyast
 chmod -R o-r /var/log/webyast
 echo "Database is ready"
