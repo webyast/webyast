@@ -105,9 +105,10 @@
     /var/adm/update-scripts/%name-%version-%release-update
 
 # create a restart script (symlink the base script) (for build section)
+# make the symlink relative so it is valid even in chroot (/mnt) during initial installation
 %create_restart_script \
     mkdir -p $RPM_BUILD_ROOT/var/adm/update-scripts \
-    ln -s /usr/sbin/update_webyast_service $RPM_BUILD_ROOT/var/adm/update-scripts/%name-%version-%release-update
+    ln -s ../../../usr/sbin/update_webyast_service $RPM_BUILD_ROOT/var/adm/update-scripts/%name-%version-%release-update
 
 %webyast_polkit \
     %if 0%{?suse_version} == 0 || %suse_version > 1110 \
