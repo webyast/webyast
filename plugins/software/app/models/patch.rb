@@ -100,15 +100,15 @@ class Patch < Resolvable
   def self.install_patches_by_id ids
     begin
       patches = []
-      Rails.logger.info "** Patch ids to install: #{ids.inspect}"
+      Rails.logger.debug "** Patch ids to install: #{ids.inspect}"
 
       ids.each do |id|
         patch = Patch.find(id)
-        Rails.logger.info "** Patch for id #{id} to install: #{patch.inspect}"
         patches << patch if patch
       end
 
-      Rails.logger.info "** Found #{patches.size} patches to install: #{patches.inspect}"
+      Rails.logger.info "** Found #{patches.size} patches to install"
+      Rails.logger.debug "** Patches: #{patches.inspect}"
 
       # set number of patches to install
       Patch::BM.update_progress(Patch::PATCH_INSTALL_ID) do |bs|
