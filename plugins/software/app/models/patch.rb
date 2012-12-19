@@ -50,7 +50,7 @@ class Patch < Resolvable
       File.move license_file, ACCEPTED_LICENSES_DIR
     else
       Rails.logger.debug "Removing #{license_file}"
-      File.unlink license_file
+      File.delete license_file
     end
   end
 
