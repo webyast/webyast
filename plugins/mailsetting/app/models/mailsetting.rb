@@ -1,20 +1,20 @@
 #--
 # Copyright (c) 2009-2010 Novell, Inc.
-# 
+#
 # All Rights Reserved.
-# 
+#
 # This program is free software; you can redistribute it and/or modify it
 # under the terms of version 2 of the GNU General Public License
 # as published by the Free Software Foundation.
-# 
+#
 # This program is distributed in the hope that it will be useful,
 # but WITHOUT ANY WARRANTY; without even the implied warranty of
 # MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
 # GNU General Public License for more details.
-# 
+#
 # You should have received a copy of the GNU General Public License
 # along with this program; if not, contact Novell, Inc.
-# 
+#
 # To contact Novell about this file by physical or electronic mail,
 # you may find current contact information at www.novell.com
 #++
@@ -32,9 +32,16 @@ class Mailsetting < BaseModel::Base
   attr_accessor :smtp_server
   attr_accessor :user
   attr_accessor :password
-  attr_accessor :confirm_password
+  attr_accessor :password_confirmation
   attr_accessor :test_mail_address
   attr_accessor :transport_layer_security
+
+
+  validates :smtp_server, :presence=>true
+  validates :user, :presence=>true, :length=>{:minimum=>2}
+  validates :password, :presence=>true, :confirmation=>true
+  validates :password_confirmation, :presence=>true
+  validates :transport_layer_security, :presence=>true
 
   TEST_MAIL_FILE = File.join(YaST::Paths::VAR,"mail","test_sent")
   CACHE_ID = "webyast_mailsetting"
