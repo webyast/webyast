@@ -1,0 +1,117 @@
+#!/usr/bin/env ruby
+
+require 'uri'
+require 'optparse'
+require 'shellwords'
+require 'rexml/document'
+require 'erb'
+
+# Parse options
+opt = OptionParser.new
+
+opt.banner = "Usage: #{File.basename($0)} [options]"
+opt.separator("Example: #{File.basename($0)} -p password -u https://foo.example.com:4984")
+opt.separator("\nRun WebYaST administrator API tests.")
+opt.separator("\nWARNING: The tests are intrusive and will change the current system configuration!")
+opt.separator("         ** Use at your own risk! **")
+opt.separator("\nOptions:")
+opt.on( "-h", "--help", "Print this help" ) do
+  puts opt
+  exit
+end
+
+base_url = "https://localhost:4984"
+opt.on( "-u", "--url [URL]", "Specify the base URL, the default is https://localhost:4984" ) do |url|
+  base_url = url
+end
+
+password = ""
+opt.on( "-p", "--password [password]", "Use this root password, if this option is missing it will be read from STDIN" ) do |pwd|
+  password = pwd
+end
+
+verbose = false
+opt.on( "-v", "--verbose", "Verbose mode, print full server responses, useful for debugging" ) do
+  verbose = true
+end
+
+begin
+  opt.parse! ARGV
+rescue OptionParser::InvalidOption
+  $stderr.puts "Error: #{$!}\n\n"
+  $stderr.puts opt
+  exit 1
+end
+
+url = URI.parse base_url
+
+if password.empty?
+  puts "Enter root password for #{url}:"
+  `stty -echo`
+  password = gets.chomp
+  `stty echo`
+end
+
+puts "Starting admistrator tests..."
+
+#
+# admin properties
+#
+url.path = "/administrator.xml"
+ret = `curl -i -k -s -S -u root:#{Shellwords.escape password} #{url}`
+puts "RESULT: #{ret}" if verbose
+
+if $?.exitstatus.zero? && ret.match(/Status: 200/)
+  puts "Administrator properties: OK"
+else
+  $stderr.puts "RESULT: #{ret}"
+  $stderr.puts "Administrator properties: FAILED"
+  exit 1
+end
+
+puts "Enter NEW root password for #{url}:"
+`stty -echo`
+new_password = gets.chomp
+puts "Repeat the NEW root password:"
+new_password_conf = gets.chomp
+`stty echo`
+
+if new_password_conf != new_password
+  puts "Error: the passwords do not match"
+  exit 2
+end
+
+puts "Setting new root password..."
+
+password_update = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>
+<administrator>
+  <password>#{ERB::Util.html_escape new_password}</password>
+  <confirm_password>#{ERB::Util.html_escape new_password}</confirm_password>
+  <aliases>NONE</aliases>
+</administrator>"
+
+ret = `curl -i -k -s -S -u root:#{Shellwords.escape password} -H "Content-Type: application/xml" -X POST -d #{Shellwords.escape password_update} #{url}`
+puts "RESULT: #{ret}" if verbose
+
+if $?.exitstatus.zero? && ret.match(/Status: 200/)
+  puts "Set new password: OK"
+else
+  $stderr.puts "RESULT: #{ret}"
+  $stderr.puts "Set new password: FAILED"
+  exit 1
+end
+
+#
+# verify the update
+#
+ret = `curl -i -k -s -S -u root:#{Shellwords.escape new_password} #{url}`
+puts "RESULT: #{ret}" if verbose
+
+if $?.exitstatus.zero? && ret.match(/Status: 200/)
+  puts "New password verification: OK"
+else
+  $stderr.puts "RESULT: #{ret}"
+  $stderr.puts "New password verification: FAILED"
+  exit 1
+end
+

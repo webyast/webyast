@@ -1,4 +1,11 @@
 -------------------------------------------------------------------
+Wed Dec 19 08:35:16 UTC 2012 - lslezak@suse.cz
+
+- make the update script symlinks relative so they are valid also
+  in installation chroot (/mnt) (bnc#795045)
+- 0.3.6
+
+-------------------------------------------------------------------
 Mon Dec  3 10:19:30 UTC 2012 - lslezak@suse.cz
 
 - added %restart_webyast, %restart_script_name and %create_restart_script

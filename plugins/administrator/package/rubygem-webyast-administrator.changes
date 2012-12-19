@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Mon Dec 17 10:14:26 UTC 2012 - lslezak@suse.cz
+
+- fixed email aliases validation (bnc#794587)
+- 0.3.8
+
+-------------------------------------------------------------------
 Wed Dec 12 15:25:47 UTC 2012 - lslezak@suse.cz
 
 - restart webyast after package update

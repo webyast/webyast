@@ -45,7 +45,7 @@ class AdministratorController < ApplicationController
     admin = params["administrator"]
     save_aliases = params['submit_type'] == 'save_aliases'
     #validate data also here, if javascript in view is off
-    if admin["aliases"].present? || save_aliases
+    if (admin["aliases"].present? && admin["aliases"] != "NONE") || save_aliases
       admin["aliases"].split(",").each do |mail|
         #only check emails, not local users
         unless mail.match /\A.+@.+$/ #only trivial check
@@ -55,6 +55,7 @@ class AdministratorController < ApplicationController
       end
     end
     # we cannot pass empty string to rest-service
+    # TODO FIXME: is this 'NONE' workaround still needed?
     aliases  = admin['aliases'].empty? ? 'NONE' : admin['aliases']
     password = admin['password']
     password_confirmation = admin['confirm_password']

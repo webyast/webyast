@@ -17,7 +17,7 @@
 
 
 Name:           rubygem-webyast-ntp
-Version:        0.3.6
+Version:        0.3.7
 Release:        0
 %define mod_name webyast-ntp
 %define mod_full_name %{mod_name}-%{version}
@@ -29,7 +29,9 @@ BuildRequires:  rubygems_with_buildroot_patch
 BuildRequires:  rubygem-restility
 BuildRequires:  webyast-base >= 0.3.31
 BuildRequires:  webyast-base-testsuite
+BuildRequires:  rubygem-webyast-rake-tasks >= 0.3.5
 PreReq:         webyast-base >= 0.3.31
+PreReq:         rubygem-webyast-rake-tasks >= 0.3.5
 
 Obsoletes:	webyast-ntp-ws < %{version}
 Provides:	webyast-ntp-ws = %{version}
