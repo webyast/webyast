@@ -17,7 +17,7 @@
 
 
 Name:           rubygem-webyast-firewall
-Version:        0.3.10
+Version:        0.3.11
 Release:        0
 %define mod_name webyast-firewall
 %define mod_full_name %{mod_name}-%{version}
@@ -28,9 +28,9 @@ BuildRequires:  rubygems_with_buildroot_patch
 %rubygems_requires
 BuildRequires:  rubygem-restility
 BuildRequires:  rubygem-webyast-rake-tasks >= 0.3.5
-BuildRequires:  webyast-base
+BuildRequires:  webyast-base >= 0.3.31
 BuildRequires:  webyast-base-testsuite
-PreReq:         webyast-base
+PreReq:         webyast-base >= 0.3.31
 PreReq:         rubygem-webyast-rake-tasks >= 0.3.5
 %if 0%{?suse_version} == 0 || %suse_version > 1110
 Requires:       yast2-core >= 2.18.10
