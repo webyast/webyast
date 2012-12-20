@@ -102,8 +102,21 @@ class Patch < Resolvable
       patches = []
       Rails.logger.debug "** Patch ids to install: #{ids.inspect}"
 
+      # create a cache copy, the original value is deleted
+      cached_patches = Rails.cache.fetch("patch:available_backup") do
+        Rails.cache.fetch("#{PATCH_FIND_ID}_available") {[]}
+      end
+
+      Rails.logger.debug "CACHED patches: #{cached_patches.inspect}"
+
+      # packagekit sometimes does not report the patch which failed because of EULA
+      # look up the patch in the cache or just use the resolvable ID as a fallback
       ids.each do |id|
-        patch = Patch.new :resolvable_id => id
+        patch = cached_patches.find {|p| p.resolvable_id == id}
+        unless patch
+          patch = Patch.new :resolvable_id => id
+        end
+
         patches << patch
       end
 
@@ -119,6 +132,7 @@ class Patch < Resolvable
       eula_needed = false
 
       patches.each_with_index do |patch, idx|
+        # finish patch installation on EULA (packagekit is blocked by the EULA)
         if eula_needed
           Rails.logger.info "** Skipping patch #{patch.resolvable_id} because of missing EULA"
           skipped_patches << patch.resolvable_id
@@ -133,14 +147,13 @@ class Patch < Resolvable
         Patch::BM.update_progress(Patch::PATCH_INSTALL_ID) do |bs|
           bs.status = "#{idx + 1}/#{patches.size}"
         end
-
-        # finish patch installation on EULA (packagekit is blocked by the EULA)
       end
 
       Rails.cache.write "patch:skipped", skipped_patches
 
       Rails.logger.info "** Patch installation finished"
       Rails.logger.debug "** Skipped #{skipped_patches.size} patches: #{skipped_patches.inspect}" unless skipped_patches.empty?
+      Rails.cache.delete("patch:available_backup") unless eula_needed
 
       Patch::BM.finish_process(Patch::PATCH_INSTALL_ID, patches)
     rescue Exception => e
