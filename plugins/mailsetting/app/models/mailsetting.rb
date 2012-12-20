@@ -43,7 +43,7 @@ class Mailsetting < BaseModel::Base
   validates :password_confirmation,    :presence=>true
   validates :transport_layer_security, :presence=>true
 
-  TEST_MAIL_FILE = File.join(YaST::Paths::VAR,"mail","test_sent")
+  TEST_MAIL_FILE = File.join(YaST::Paths::VAR,"mailsetting","test_sent")
   CACHE_ID = "webyast_mailsetting"
 
   # read the settings from system
@@ -87,15 +87,17 @@ class Mailsetting < BaseModel::Base
     to.tr!("~'\"<>","")
     `/bin/echo "#{message}" | /bin/mail -s "WebYaST Test Mail" '#{to}' -r root`
 
-    unless File.directory? File.join(YaST::Paths::VAR,"mail")
-      Rails.logger.debug "directory does not exists...."
+    mail_directory = File.join(YaST::Paths::VAR,"mailsetting")
+    unless File.directory? mail_directory
+      Rails.logger.debug "Directory #{mail_directory} does not exists"
       return
     end
     begin
-      f = File.new(TEST_MAIL_FILE, 'w')
-      f.puts "#{to}"
-    rescue
-      Rails.logger.error "writing #{TEST_MAIL_FILE} file failed - wrong permissions?"
+      File.open TEST_MAIL_FILE, 'w' do |file|
+        file.puts to.to_s
+      end
+    rescue => error
+      Rails.logger.error e
     end
   end
 end
