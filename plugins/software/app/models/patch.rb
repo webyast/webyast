@@ -115,17 +115,32 @@ class Patch < Resolvable
         bs.status = "0/#{patches.size}"
       end
 
+      skipped_patches = []
+      eula_needed = false
+
       patches.each_with_index do |patch, idx|
+        if eula_needed
+          Rails.logger.info "** Skipping patch #{patch.resolvable_id} because of missing EULA"
+          skipped_patches << patch.resolvable_id
+          next
+        end
+
         Rails.logger.info "** Installing patch #{patch.inspect}"
 
-        patch.do_install
+        ret, error = patch.do_install
+        eula_needed = true if error == :eula
 
         Patch::BM.update_progress(Patch::PATCH_INSTALL_ID) do |bs|
           bs.status = "#{idx + 1}/#{patches.size}"
         end
+
+        # finish patch installation on EULA (packagekit is blocked by the EULA)
       end
 
+      Rails.cache.write "patch:skipped", skipped_patches
+
       Rails.logger.info "** Patch installation finished"
+      Rails.logger.debug "** Skipped #{skipped_patches.size} patches: #{skipped_patches.inspect}" unless skipped_patches.empty?
 
       Patch::BM.finish_process(Patch::PATCH_INSTALL_ID, patches)
     rescue Exception => e
@@ -159,6 +174,8 @@ class Patch < Resolvable
       Rails.logger.debug "Cached failed patches: #{failed.inspect}"
       Rails.cache.write("patch:failed", failed)
     end
+
+    return [ret, error]
   end
 
   # install
@@ -364,6 +381,7 @@ class Patch < Resolvable
           Rails.logger.info "EULA #{eula_id.inspect} is required for #{package_id.inspect}"
           create_eula(eula_id, package_id, pk_id, license_text)
           ok = false
+          error = :eula
           dbusloop.quit
         end
 

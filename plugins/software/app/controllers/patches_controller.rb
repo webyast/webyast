@@ -408,8 +408,15 @@ private
           Rails.cache.write("patch:failed", failed_patches)
         end
 
-        # install the patch again
-        Patch::BM.background_enabled? ? Patch.install_patches_by_id_background([params[:patch_id]]) : Patch.install_patches_by_id([params[:patch_id]])
+        patches = [params[:patch_id]]
+        skipped_patches = Rails.cache.fetch("patch:skipped") {[]}
+        unless skipped_patches.empty?
+          Rails.logger.info "Found #{skipped_patches.size} skipped patches"
+          patches += skipped_patches
+        end
+
+        # install the patches again
+        Patch::BM.background_enabled? ? Patch.install_patches_by_id_background(patches) : Patch.install_patches_by_id(patches)
       end
 
       if request.format.html?
