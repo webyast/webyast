@@ -84,28 +84,28 @@
 
       <div class="fieldset_body">
         <div class="row">
-          <label for="<%= :smtp_server %>"><%=_("Outgoing mail server")%></label>
+          <label style="float:left" for="<%= :smtp_server %>"><%=_("Outgoing mail server")%></label>
           <%=f.text_field :smtp_server, :disabled => disabled, :class => "smtp_server tipsy_help", :title => _("URL of the outgoing mail server. You may also specify an alternate port number, e.g.
 relay.example.com:26. Use square brackets around the host name to prevent from DNS MX lookups.") %>
         </div>
 
         <div class="row">
-          <label><%=_("Use secure connection (TLS)")%></label>
+          <label style="float:left"><%=_("Use secure connection (TLS)")%></label>
           <%= f.select :transport_layer_security, [ [_("Never"), "no" ], [_("If available"), "yes"], [_("Always"), "must"]], :disabled => disabled %>
         </div>
 
         <div class="row">
-          <label><%=_("User name")%></label>
+          <label style="float:left"><%=_("User name")%></label>
           <%= f.text_field :user, :disabled => disabled %>
         </div>
 
         <div class="row">
-          <label><%=_("Password")%></label>
+          <label style="float:left"><%=_("Password")%></label>
           <%= f.password_field :password, :disabled => disabled %>
         </div>
 
         <div class="row lastrow">
-          <label><%=_("Confirm password")%></label>
+          <label style="float:left"><%=_("Confirm password")%></label>
           <%= f.password_field :password_confirmation, :disabled => disabled, :equalTo => "#mailsetting_password" %>
         </div>
       </div>
