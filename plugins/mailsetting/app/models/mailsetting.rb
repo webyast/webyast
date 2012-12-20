@@ -38,9 +38,9 @@ class Mailsetting < BaseModel::Base
 
 
   validates :smtp_server, :presence=>true
-  validates :user, :presence=>true, :length=>{:minimum=>2}
-  validates :password, :presence=>true, :confirmation=>true
-  validates :password_confirmation, :presence=>true
+  validates :user,        :presence=>true
+  validates :password,    :presence=>true, :confirmation=>true
+  validates :password_confirmation,    :presence=>true
   validates :transport_layer_security, :presence=>true
 
   TEST_MAIL_FILE = File.join(YaST::Paths::VAR,"mail","test_sent")
