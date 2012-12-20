@@ -57,9 +57,9 @@ public
   def update
     authorize! :write, Mailsetting
     mail_params = params['mailsetting'] || params['mail'] #keep mail for backwards compatibility with old REST API
-    new_settings = Mailsetting.new mail_params
-    unless new_settings.valid?
-      problem _(new_settings.errors.full_messages.join(', '))
+    @mail = Mailsetting.new mail_params
+    unless @mail.valid?
+      problem _(@mail.errors.full_messages.join(', '))
       return
     end
 
@@ -117,7 +117,7 @@ private
   def problem message
     if request.format.html?
       flash[:error] = message
-      redirect_to :action => "show"
+      render :action => "show"
     else #REST request
       error = { "error" => { "type" => "ADMINISTRATOR_ERROR", "messsage" => message, "id" => "ADMINISTRATOR" }}
       respond_to do |format|
