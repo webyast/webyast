@@ -56,8 +56,24 @@ public
 
   def update
     authorize! :write, Mailsetting
-    mail_params = params['mailsetting'] || params['mail'] #keep mail for backwards compatibility with old REST API
+    mail_params = params[:mailsetting] || params[:mail] #keep mail for backwards compatibility with old REST API
     @mail = Mailsetting.new mail_params
+
+    if params.has_key? :send_mail
+      if request.format.html?
+        if mail_params[:test_mail_address].to_s.match(/\A[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]+\z/)
+          Mailsetting.send_test_mail mail_params[:test_mail_address]
+          flash[:notice] = "A test message has been sent to email address #{mail_params[:test_mail_address]}"
+          redirect_to :action => "show", :email => mail_params[:test_mail_address].to_s
+          return
+        else
+          flash[:error] = _("Wrong format for email address")
+          render :show
+          return
+        end
+      end
+    end
+
     unless @mail.valid?
       problem _(@mail.errors.full_messages.join(', '))
       return
@@ -80,12 +96,12 @@ public
       return
     end
 
-    smtp_server	= mail_params["smtp_server"]
+    smtp_server = mail_params["smtp_server"]
 
     # check if mail forwarning for root is configured
     # during initial workflow, only warn if administrator configuration does not follow
     if smtp_server.blank? && (!Basesystem.new.load_from_session(session).following_steps.any? { |h| h[:controller] == "administrator" })
-      @administrator      = Administrator.find
+      @administrator = Administrator.find
 
       if @administrator && !@administrator.aliases.blank?
         flash[:warning]	= _("No outgoing mail server is set, but administrator has mail forwarders defined.
@@ -93,14 +109,6 @@ public
       end
     end
 
-    if params.has_key?("send_mail")
-      if request.format.html?
-        redirect_to :action => "show", :email => params["mail"]["test_mail_address"]
-        return
-      else
-        params[:email] =  params["mail"]["test_mail_address"]
-      end
-    end
     if request.format.html?
       redirect_success # redirect to next step
     else
