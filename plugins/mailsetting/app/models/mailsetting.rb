@@ -87,7 +87,7 @@ class Mailsetting < BaseModel::Base
     to.tr!("~'\"<>","")
     `/bin/echo "#{message}" | /bin/mail -s "WebYaST Test Mail" '#{to}' -r root`
 
-    unless File.directory? File.join(Paths::VAR,"mail")
+    unless File.directory? File.join(YaST::Paths::VAR,"mail")
       Rails.logger.debug "directory does not exists...."
       return
     end
