@@ -103,8 +103,8 @@ class Patch < Resolvable
       Rails.logger.debug "** Patch ids to install: #{ids.inspect}"
 
       ids.each do |id|
-        patch = Patch.find(id)
-        patches << patch if patch
+        patch = Patch.new :resolvable_id => id
+        patches << patch
       end
 
       Rails.logger.info "** Found #{patches.size} patches to install"
@@ -144,6 +144,8 @@ class Patch < Resolvable
 
       Patch::BM.finish_process(Patch::PATCH_INSTALL_ID, patches)
     rescue Exception => e
+      Rails.logger.warn "ERROR: #{e.message}"
+      Rails.logger.warn "Backtrace: #{e.backtrace.join("\n")}"
       Patch::BM.finish_process(Patch::PATCH_INSTALL_ID, e)
     ensure
       self.clear_cache
