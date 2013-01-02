@@ -60,6 +60,11 @@ class Patch < Resolvable
     end
   end
 
+  # read the license file, returns [package_id, patch_id, license_text]
+  def self.read_license file
+    File.read(file).split("\n", 3)
+  end
+
   public
 
   def self.accept_license name
@@ -348,7 +353,7 @@ class Patch < Resolvable
     Dir.glob(File.join(LICENSES_DIR,"*")).reduce([]) do |res,f|
       if File.file? f
         # there is package_id on the first line
-        package_id, patch_id, text = File.read(f).split("\n", 3)
+        package_id, patch_id, text = read_license f
         res << ({
             :name => File.basename(f),
             :text => text,
@@ -468,7 +473,7 @@ class Patch < Resolvable
     dir.each do |filename|
       unless File.directory? filename
         license_file = File.join(ACCEPTED_LICENSES_DIR, filename)
-        package_id, patch_id, text = File.read(license_file).split("\n", 3)
+        package_id, patch_id, text = read_license license_file
         Rails.logger.debug "File: #{filename}, license for: #{package_id} - #{patch_id}"
 
         if patch_id == pk_id
