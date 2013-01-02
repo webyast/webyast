@@ -62,6 +62,9 @@ class Patch < Resolvable
 
   # read the license file, returns [package_id, patch_id, license_text]
   def self.read_license file
+    # the file contains package id on the first line,
+    # the second line contains patch id,
+    # and the rest is the license text
     File.read(file).split("\n", 3)
   end
 
