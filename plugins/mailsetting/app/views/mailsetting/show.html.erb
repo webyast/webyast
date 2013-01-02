@@ -29,7 +29,6 @@
       $("#mailForm").validate({
         submitHandler: function(form) {
           var message = <%= jss _("Please wait") -%>;
-          //disableFormOnSubmit(message);
           $.modalDialog.wait( {message: message});
           form.submit();
         }
@@ -63,7 +62,7 @@
   <% disabled = cannot? :write, Mailsetting %>
   <%= render :partial => 'shared/missing_write_permissions' if disabled %>
 
-  <%= form_for(@mail, :url => { :action => "update" }, :html => { :method => :put, :id => "mailForm", :class=>"webyast_form", :autocomplete => :off, :onsubmit => "if ($('#mailForm').valid()); disable_forms ()" } ) do |f| %>
+  <%= form_for(@mail, :url => { :action => "update" }, :html => { :method => :put, :id => "mailForm", :class=>"webyast_form", :autocomplete => :off  } ) do |f| %>
 
     <div class="plugin-header">
       <div class="left">
@@ -118,7 +117,7 @@ relay.example.com:26. Use square brackets around the host name to prevent from D
       <div class="fieldset_body">
         <div class="row lastrow">
           <label id="mail_test_mail_label"><%=_("Send test mail to")%></label>
-          <%= f.text_field :test_mail_address, :disabled => disabled, :class => "email required" %>
+          <%= f.text_field :test_mail_address, :disabled => disabled, :class => "email" %>
           <%= f.submit _("Send Mail"), :name => "send_mail" %>
           <label for="mail_test_mail_address" generated="true" class="error"></label>
         </div>
