@@ -1,4 +1,11 @@
 -------------------------------------------------------------------
+Wed Jan  2 14:34:56 UTC 2013 - lslezak@suse.cz
+
+- rcwebyast - update assets at Webyast start (needed when
+  installing/updating via plain rpm)
+- 0.3.33
+
+-------------------------------------------------------------------
 Tue Dec 18 09:54:56 UTC 2012 - lslezak@suse.cz
 
 - permission fix: make db/production.sqlite3 readable only for

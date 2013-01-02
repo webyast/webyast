@@ -124,6 +124,7 @@ test -r $NGINX_CONFIG || { echo "$NGINX_CONFIG not existing";
 	else exit 6; fi; }
 
 PID_FILE=/var/run/webyast.pid
+RESTART_FILE="/var/lib/webyast/restart"
 
 CERTIFICATEFILE=/etc/nginx/certs/webyast.pem
 CERTKEYFILE=/etc/nginx/certs/webyast.key
@@ -211,6 +212,15 @@ case "$1" in
 
 	# clear cache (drop possibly obsoleted values)
 	(cd /srv/www/webyast/ && rake -s tmp:cache:clear)
+
+        # restart file present - do some additional update actions
+        # (Webyast was probably installed/updated by plain RPM)
+        if [ -f $RESTART_FILE ]; then
+            # TODO: use /usr/sbin/update_webyast_service (but fix possible endless loop)
+            (cd /srv/www/webyast/ && rake -f lib/tasks/assets.rake assets:join_manifests)
+
+            rm $RESTART_FILE
+        fi
 
 	## Start daemon with startproc(8). If this fails
 	## the return value is set appropriately by startproc.

@@ -20,10 +20,8 @@ if [ -f $RESTART_FILE ]; then
     cd -
 
     # restart Webyast if it is running
-    $WEBYAST_SERVICE status > /dev/null
-    if [ $? -eq 0 ]; then
-        WEBYAST_SERVICE restart
-    fi
+    WEBYAST_SERVICE try-restart
 
+    # remove the restart file so this script is called just once
     rm $RESTART_FILE
 fi
