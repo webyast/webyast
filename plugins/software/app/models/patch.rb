@@ -366,7 +366,7 @@ class Patch < Resolvable
   end
 
 
-  def self.do_install(pk_id, signal_list = [], &block)
+  def self.do_install(patch_id, signal_list = [], &block)
     #locking PackageKit for single use
     ok = true
     error = ''
@@ -399,7 +399,7 @@ class Patch < Resolvable
 
         proxy.on_signal("EulaRequired") do |eula_id, package_id, vendor_name, license_text|
           Rails.logger.info "EULA #{eula_id.inspect} is required for #{package_id.inspect}"
-          create_eula(eula_id, package_id, pk_id, license_text)
+          create_eula(eula_id, package_id, patch_id, license_text)
           ok = false
           error = :eula
           dbusloop.quit
@@ -410,10 +410,10 @@ class Patch < Resolvable
             transaction_iface.methods["UpdatePackages"].params[0][0] == "only_trusted"
           #PackageKit of 11.2
           transaction_iface.UpdatePackages(true,  #only_trusted
-            [pk_id])
+            [patch_id])
         else
           #PackageKit older versions like SLES11
-          transaction_iface.UpdatePackages([pk_id])
+          transaction_iface.UpdatePackages([patch_id])
         end
 
         dbusloop.run
@@ -434,7 +434,7 @@ class Patch < Resolvable
 
     Rails.logger.error "Received PackageKit error: #{error}" unless error.blank?
 
-    remove_eulas(pk_id) if ok
+    remove_eulas(patch_id) if ok
     return [ ok, error ]
   end
 
