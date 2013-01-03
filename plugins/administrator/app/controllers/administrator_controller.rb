@@ -43,6 +43,9 @@ class AdministratorController < ApplicationController
   def update
     authorize! :write, Administrator
     admin = params["administrator"]
+
+    head :unprocessable_entity and return if admin.blank?
+
     save_aliases = params['submit_type'] == 'save_aliases'
     #validate data also here, if javascript in view is off
     if (admin["aliases"].present? && admin["aliases"] != "NONE") || save_aliases

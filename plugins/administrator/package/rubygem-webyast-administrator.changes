@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Thu Jan  3 09:38:14 UTC 2013 - lslezak@suse.cz
+
+- return 422 Error if empty POST is sent (bnc#790373)
+- 0.3.9
+
+-------------------------------------------------------------------
 Mon Dec 17 10:14:26 UTC 2012 - lslezak@suse.cz
 
 - fixed email aliases validation (bnc#794587)
