@@ -20,7 +20,7 @@ if [ -f $RESTART_FILE ]; then
     cd -
 
     # restart Webyast if it is running
-    WEBYAST_SERVICE try-restart
+    /etc/init.d/webyast try-restart
 
     # remove the restart file so this script is called just once
     rm $RESTART_FILE
