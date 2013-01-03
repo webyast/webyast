@@ -23,5 +23,5 @@ if [ -f $RESTART_FILE ]; then
     /etc/init.d/webyast try-restart
 
     # remove the restart file so this script is called just once
-    rm $RESTART_FILE
+    rm -f $RESTART_FILE
 fi
