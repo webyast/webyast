@@ -23,44 +23,18 @@ require 'shellwords'
 
 class RepositoriesController < ApplicationController
 
-  before_filter :check_read_permissions, :only => [:index, :show]
-  before_filter :cache_check, :only => :index
-
-  caches_action :index, :cache_path => Proc.new {"webyast_repo_index_#{FastGettext.locale}"}, :layout => false
-
-private
+  private
 
   def isint(str)
     str.match /\A[0-9]+\z/
   end
-
   
-  def check_read_permissions
-    authorize! :read, Repository
-  end
-
-  def cache_check
-    cached_mtime = Rails.cache.fetch("webyast_repo_mtime")
-    current_mtime = Repository.mtime
-
-    if current_mtime != cached_mtime
-      Rails.logger.info "Expiring repo cache: cached: #{cached_mtime}, modified: #{current_mtime}"
-      # update the time stamp
-      Rails.cache.write("webyast_repo_mtime", current_mtime)
-      expire_repo_cache
-    end
-  end
-
-  def expire_repo_cache
-    # expire all translations
-    expire_fragment(/webyast_repo_index_/)
-  end
-
-
   public
 
   # GET /repositories.xml
   def index
+    authorize! :read, Repository
+
     # read permissions were checked in a before filter
     begin
       @repos = Repository.find(:all)
@@ -86,7 +60,7 @@ private
 
   # GET /repositories/my_repo.xml
   def show
-    # read permissions were checked in a before filter
+    authorize! :read, Repository
 
     begin
       # RORSCAN_INL: User has already read permission for ALL repos
