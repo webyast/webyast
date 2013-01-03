@@ -42,12 +42,15 @@ class Patch < Resolvable
 
   private
 
-  def self.decide_license(accept)
-    #we don't know eula id, but as it block package kit, then there is only one license file to decide
+  def self.decide_license(accept, name)
+    license_file = File.join LICENSES_DIR, name
+
     if accept
-      `/usr/bin/find #{LICENSES_DIR} -type f -exec /bin/mv {} #{ACCEPTED_LICENSES_DIR} \\;`
+      Rails.logger.debug "Moving #{license_file} to #{ACCEPTED_LICENSES_DIR}"
+      File.move license_file, ACCEPTED_LICENSES_DIR
     else
-      `/usr/bin/find #{LICENSES_DIR} -type f -delete`
+      Rails.logger.debug "Removing #{license_file}"
+      File.delete license_file
     end
   end
 
@@ -57,14 +60,22 @@ class Patch < Resolvable
     end
   end
 
-  public
-
-  def self.accept_license
-    decide_license true
+  # read the license file, returns [package_id, patch_id, license_text]
+  def self.read_license file
+    # the file contains package id on the first line,
+    # the second line contains patch id,
+    # and the rest is the license text
+    File.read(file).split("\n", 3)
   end
 
-  def self.reject_license
-    decide_license false
+  public
+
+  def self.accept_license name
+    decide_license true, name
+  end
+
+  def self.reject_license name
+    decide_license false, name
   end
 
   def to_xml( options = {} )
@@ -72,7 +83,7 @@ class Patch < Resolvable
   end
 
   def self.mtime
-    [PackageKit.mtime, Repository.mtime].max
+    [PackageKit.mtime, Repository.mtime, File.stat(LICENSES_DIR).mtime].max
   end
 
   def self.install_patches_by_id_background ids
@@ -97,33 +108,65 @@ class Patch < Resolvable
   def self.install_patches_by_id ids
     begin
       patches = []
+      Rails.logger.debug "** Patch ids to install: #{ids.inspect}"
 
+      # create a cache copy, the original value is deleted
+      cached_patches = Rails.cache.fetch("patch:available_backup") do
+        Rails.cache.fetch("#{PATCH_FIND_ID}_available") {[]}
+      end
+
+      Rails.logger.debug "CACHED patches: #{cached_patches.inspect}"
+
+      # packagekit sometimes does not report the patch which failed because of EULA
+      # look up the patch in the cache or just use the resolvable ID as a fallback
       ids.each do |id|
-        patch = Patch.find(id)
-        patches << patch if patch
+        patch = cached_patches.find {|p| p.resolvable_id == id}
+        unless patch
+          patch = Patch.new :resolvable_id => id
+        end
+
+        patches << patch
       end
 
       Rails.logger.info "** Found #{patches.size} patches to install"
+      Rails.logger.debug "** Patches: #{patches.inspect}"
 
       # set number of patches to install
       Patch::BM.update_progress(Patch::PATCH_INSTALL_ID) do |bs|
         bs.status = "0/#{patches.size}"
       end
 
+      skipped_patches = []
+      eula_needed = false
+
       patches.each_with_index do |patch, idx|
+        # finish patch installation on EULA (packagekit is blocked by the EULA)
+        if eula_needed
+          Rails.logger.info "** Skipping patch #{patch.resolvable_id} because of missing EULA"
+          skipped_patches << patch.resolvable_id
+          next
+        end
+
         Rails.logger.info "** Installing patch #{patch.inspect}"
 
-        patch.do_install
+        ret, error = patch.do_install
+        eula_needed = true if error == :eula
 
         Patch::BM.update_progress(Patch::PATCH_INSTALL_ID) do |bs|
           bs.status = "#{idx + 1}/#{patches.size}"
         end
       end
 
+      Rails.cache.write "patch:skipped", skipped_patches
+
       Rails.logger.info "** Patch installation finished"
+      Rails.logger.debug "** Skipped #{skipped_patches.size} patches: #{skipped_patches.inspect}" unless skipped_patches.empty?
+      Rails.cache.delete("patch:available_backup") unless eula_needed
 
       Patch::BM.finish_process(Patch::PATCH_INSTALL_ID, patches)
     rescue Exception => e
+      Rails.logger.warn "ERROR: #{e.message}"
+      Rails.logger.warn "Backtrace: #{e.backtrace.join("\n")}"
       Patch::BM.finish_process(Patch::PATCH_INSTALL_ID, e)
     ensure
       self.clear_cache
@@ -154,6 +197,8 @@ class Patch < Resolvable
       Rails.logger.debug "Cached failed patches: #{failed.inspect}"
       Rails.cache.write("patch:failed", failed)
     end
+
+    return [ret, error]
   end
 
   # install
@@ -186,6 +231,7 @@ class Patch < Resolvable
 
     DbusLock.synchronize do
       PackageKit.transact("GetUpdates", "none", "Package", bg_status) do |line1,line2,line3|
+        Rails.logger.debug "** Found patch : #{line2.inspect}"
         columns = line2.split ";"
         if what == :available || line2 == what
           update = Patch.new(:resolvable_id => line2,
@@ -309,9 +355,13 @@ class Patch < Resolvable
   def self.license
     Dir.glob(File.join(LICENSES_DIR,"*")).reduce([]) do |res,f|
       if File.file? f
+        # there is package_id on the first line
+        package_id, patch_id, text = read_license f
         res << ({
             :name => File.basename(f),
-            :text => File.read(f)
+            :text => text,
+            :package_id => package_id,
+            :patch_id => patch_id
           })
       end
       res
@@ -319,7 +369,7 @@ class Patch < Resolvable
   end
 
 
-  def self.do_install(pk_id, signal_list = [], &block)
+  def self.do_install(patch_id, signal_list = [], &block)
     #locking PackageKit for single use
     ok = true
     error = ''
@@ -338,7 +388,7 @@ class Patch < Resolvable
         end
 
         proxy.on_signal("Package") do |line1,line2,line3|
-          Rails.logger.debug "  update package: #{line2}"
+          Rails.logger.info " Installing package: #{line2}"
         end
 
         dbusloop = PackageKit.dbusloop proxy, error
@@ -350,11 +400,11 @@ class Patch < Resolvable
           dbusloop.quit
         end
 
-        proxy.on_signal("EulaRequired") do |eula_id,package_id,vendor_name,license_text|
+        proxy.on_signal("EulaRequired") do |eula_id, package_id, vendor_name, license_text|
           Rails.logger.info "EULA #{eula_id.inspect} is required for #{package_id.inspect}"
-          #FIXME check if user already agree with license
-          create_eula(eula_id,license_text)
+          create_eula(eula_id, package_id, patch_id, license_text)
           ok = false
+          error = :eula
           dbusloop.quit
         end
 
@@ -363,10 +413,10 @@ class Patch < Resolvable
             transaction_iface.methods["UpdatePackages"].params[0][0] == "only_trusted"
           #PackageKit of 11.2
           transaction_iface.UpdatePackages(true,  #only_trusted
-            [pk_id])
+            [patch_id])
         else
           #PackageKit older versions like SLES11
-          transaction_iface.UpdatePackages([pk_id])
+          transaction_iface.UpdatePackages([patch_id])
         end
 
         dbusloop.run
@@ -387,16 +437,20 @@ class Patch < Resolvable
 
     Rails.logger.error "Received PackageKit error: #{error}" unless error.blank?
 
-    remove_eulas() if ok
+    remove_eulas(patch_id) if ok
     return [ ok, error ]
   end
 
-  def self.create_eula(eula_id,license_text)
+  def self.create_eula(eula_id, package_id, patch_id, license_text)
     accepted_path = File.join(ACCEPTED_LICENSES_DIR,eula_id)
     ret = File.exists?(accepted_path) #eula is in accepted dir
     unless ret
       license_file = File.join(LICENSES_DIR,eula_id)
-      File.open(license_file,"w") { |f| f.write license_text }
+      File.open(license_file,"w") do |f|
+        f.puts package_id
+        f.puts patch_id
+        f.write license_text
+      end
     end
     ret
   end
@@ -416,11 +470,21 @@ class Patch < Resolvable
     }
   end
 
-  def self.remove_eulas()
+  def self.remove_eulas(pk_id)
+    Rails.logger.info "Removing EULA for patch #{pk_id}..."
     dir = Dir.new(ACCEPTED_LICENSES_DIR)
-    dir.each  {|filename|
-      File.delete(File.join(ACCEPTED_LICENSES_DIR,filename)) unless File.directory? filename
-    }
+    dir.each do |filename|
+      unless File.directory? filename
+        license_file = File.join(ACCEPTED_LICENSES_DIR, filename)
+        package_id, patch_id, text = read_license license_file
+        Rails.logger.debug "File: #{filename}, license for: #{package_id} - #{patch_id}"
+
+        if patch_id == pk_id
+          Rails.logger.info "Removing confirmed license for patch #{pk_id}: #{license_file}"
+          File.delete license_file
+        end
+      end
+    end
   end
 
 end

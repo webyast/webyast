@@ -394,10 +394,30 @@ private
     authorize! :read, Patch
     authorize! :install, Patch
 
-    if params[:accept].present? || params[:reject].present?
-      params[:accept].present? ? Patch.accept_license : Patch.reject_license
+    if (params[:accept].present? || params[:reject].present?) && params[:name].present? && params[:patch_id].present?
+      params[:accept].present? ? Patch.accept_license(params[:name]) : Patch.reject_license(params[:name])
 
-      Patch.clear_cache
+      if params[:accept].present?
+        Rails.logger.info "Accepted license for patch: #{params[:patch_id]}"
+        Patch.accept_eulas
+
+        # remove the previous patch installation failure caused by not accepted license
+        failed_patches = Rails.cache.fetch("patch:failed")
+        unless failed_patches.blank?
+          failed_patches.delete_if {|patch| patch.resolvable_id == params[:patch_id]}
+          Rails.cache.write("patch:failed", failed_patches)
+        end
+
+        patches = [params[:patch_id]]
+        skipped_patches = Rails.cache.fetch("patch:skipped") {[]}
+        unless skipped_patches.empty?
+          Rails.logger.info "Found #{skipped_patches.size} skipped patches"
+          patches += skipped_patches
+        end
+
+        # install the patches again
+        Patch::BM.background_enabled? ? Patch.install_patches_by_id_background(patches) : Patch.install_patches_by_id(patches)
+      end
 
       if request.format.html?
         redirect_to "/"
@@ -425,6 +445,8 @@ private
       format.html {
         @license = Patch.license.first
         @text = @license[:text] if @license
+        @package_id = @license[:package_id] if @license
+        @patch_id = @license[:patch_id] if @license
         if @text =~ /DT:Rich/ #text is richtext for packager
           @text = @text.html_safe
         else
