@@ -1,9 +1,11 @@
 -------------------------------------------------------------------
-Thu Jan  3 10:23:06 UTC 2013 - lslezak@suse.cz
+Thu Jan  3 14:57:46 UTC 2013 - lslezak@suse.cz
 
 - fixed "Select All" check box functionality at patch index page
   (bnc#795942)
 - fixed repository XML response (bnc#795901)
+- fixed installing patches with EULA (bnc#795803)
+- 0.3.35
 
 -------------------------------------------------------------------
 Fri Dec 14 11:32:26 UTC 2012 - lslezak@suse.cz
