@@ -22,6 +22,7 @@
 
 <%= render :partial => "shared/notification", :locals => { :module_name => 'patches' } %>
 
+<%# TODO FIXME: move this to a separate *.js file %>
 <script type="text/javascript">
   $(document).ready(function() {
     $(":button").click(function() {
@@ -73,6 +74,10 @@
     // would reset the user change)
     $('table.available_patches td input[type="checkbox"]').click(function(event){
       event.stopPropagation();
+    });
+
+    $('#All').click(function(){
+      $("input[type='checkbox']:visible").attr('checked', $('#All').is(':checked'));
     });
 
   });

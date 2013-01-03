@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Thu Jan  3 10:23:06 UTC 2013 - lslezak@suse.cz
+
+- fixed "Select All" check box functionality at patch index page
+  (bnc#795942)
+
+-------------------------------------------------------------------
 Fri Dec 14 11:32:26 UTC 2012 - lslezak@suse.cz
 
 - fixed caching issue in patches index page

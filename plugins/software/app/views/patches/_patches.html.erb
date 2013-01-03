@@ -21,14 +21,6 @@
 #++
 %>
 
-<% content_for :head do %>
-  <%= javascript_tag do -%>
-    function check_all() {
-        $("input[type='checkbox']:visible").attr('checked', $('#All').is(':checked'));
-    };
-  <% end %>
-<% end %>
-
 <% if @patch_updates.any? {|pu| pu.name =~ /webyast-|nginx/} %>
 <p class="flash-message ui-state-highlight"><%=
 _("One of the patches seems to update WebYaST itself.
@@ -42,7 +34,7 @@ You may need to reload the page after applying the patch.") -%></p>
 <% else %>
 <table summary="" class="patches available_patches" <%= @patch_updates.empty? ? "style=\"visibility: hidden;\"" : "" %> >
   <tr class="fieldset_header">
-    <th class="first checkbox" width=3% ><span><input type="checkbox" name="All" onclick="check_all()" id="All"/></span></th>
+    <th class="first checkbox" width=3% ><span><input type="checkbox" name="All" id="All"/></span></th>
     <th class="kind" width=5%><%=_("Kind")%></th>
     <th width=50%><%=_("Name")%></th>
     <th class="last" width=42%><%=_("Source")%></th>
