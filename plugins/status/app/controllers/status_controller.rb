@@ -271,7 +271,7 @@ class StatusController < ApplicationController
                 limit_reached = _("undercut") if entry[1] < line["limits"]["min"].to_i
                 limit_line << [entry[0],line["limits"]["min"].to_i]
               end
-              if graph_description.cummulated == "false"
+              if graph_description["cummulated"] == "false"
                 data[:limits] << {:reached => limit_reached, :values => limit_line, :label => line["label"]} #show it in an own line
               else
                 single_line[:limit_reached] = limit_reached unless limit_reached.blank? #just make it "red"
