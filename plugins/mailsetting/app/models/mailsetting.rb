@@ -1,20 +1,20 @@
 #--
 # Copyright (c) 2009-2010 Novell, Inc.
-# 
+#
 # All Rights Reserved.
-# 
+#
 # This program is free software; you can redistribute it and/or modify it
 # under the terms of version 2 of the GNU General Public License
 # as published by the Free Software Foundation.
-# 
+#
 # This program is distributed in the hope that it will be useful,
 # but WITHOUT ANY WARRANTY; without even the implied warranty of
 # MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
 # GNU General Public License for more details.
-# 
+#
 # You should have received a copy of the GNU General Public License
 # along with this program; if not, contact Novell, Inc.
-# 
+#
 # To contact Novell about this file by physical or electronic mail,
 # you may find current contact information at www.novell.com
 #++
@@ -32,11 +32,18 @@ class Mailsetting < BaseModel::Base
   attr_accessor :smtp_server
   attr_accessor :user
   attr_accessor :password
-  attr_accessor :confirm_password
+  attr_accessor :password_confirmation
   attr_accessor :test_mail_address
   attr_accessor :transport_layer_security
 
-  TEST_MAIL_FILE = File.join(YaST::Paths::VAR,"mail","test_sent")
+
+  validates :smtp_server, :presence=>true
+  validates :user,        :presence=>true
+  validates :password,    :presence=>true, :confirmation=>true
+  validates :password_confirmation,    :presence=>true
+  validates :transport_layer_security, :presence=>true
+
+  TEST_MAIL_FILE = File.join(YaST::Paths::VAR,"mailsetting","test_sent")
   CACHE_ID = "webyast_mailsetting"
 
   # read the settings from system
@@ -74,21 +81,23 @@ class Mailsetting < BaseModel::Base
 
     Rails.logger.debug "sending test mail to #{to}..."
 
-    message	= "This is the test mail sent to you by webYaST. Go to the status page and confirm you've got it."
+    message	= "This is the test mail sent to you by webYaST."
 
     # remove potential problematic characters from email address
     to.tr!("~'\"<>","")
     `/bin/echo "#{message}" | /bin/mail -s "WebYaST Test Mail" '#{to}' -r root`
 
-    unless File.directory? File.join(Paths::VAR,"mail")
-      Rails.logger.debug "directory does not exists...."
+    mail_directory = File.join(YaST::Paths::VAR,"mailsetting")
+    unless File.directory? mail_directory
+      Rails.logger.debug "Directory #{mail_directory} does not exists"
       return
     end
     begin
-      f = File.new(TEST_MAIL_FILE, 'w')
-      f.puts "#{to}"
-    rescue
-      Rails.logger.error "writing #{TEST_MAIL_FILE} file failed - wrong permissions?"
+      File.open TEST_MAIL_FILE, 'w' do |file|
+        file.puts to.to_s
+      end
+    rescue => error
+      Rails.logger.error e
     end
   end
 end
