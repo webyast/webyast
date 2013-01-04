@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Fri Jan  4 10:17:31 UTC 2013 - lslezak@suse.cz
+
+- fixed displaying graphs in IE9 (bnc#782418)
+- 0.3.13
+
+-------------------------------------------------------------------
 Wed Dec 12 15:42:56 UTC 2012 - lslezak@suse.cz
 
 - restart webyast after package update

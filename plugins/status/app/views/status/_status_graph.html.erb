@@ -25,7 +25,6 @@
 <% unless data.blank? %>
 <script type="text/javascript">
   var empty = '<%= data[:lines].first.try(:[], :values).blank? %>' == "true";
-  console.log(empty)
 
   if(empty) {
     if (window.console) console.log("No data available");
