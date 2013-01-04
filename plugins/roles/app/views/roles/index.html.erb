@@ -217,7 +217,7 @@
       $("img.deleteRole").click( function () { blockForm(); });
 
 
-      $('#usersContent').sliderNav({items: <%= alpha_list.to_json -%>, arrows:false });
+      $('#usersContent').sliderNav({items: <%= alpha_list.to_json.html_safe -%>, arrows:false });
 
     });
 
