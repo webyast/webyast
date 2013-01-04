@@ -1,4 +1,11 @@
 -------------------------------------------------------------------
+Fri Jan  4 12:24:15 UTC 2013 - vmoravec@suse.cz
+
+- fixed configuration saving (bnc#791787)
+- fixed sending the test mail (bnc#784360)
+- 0.3.11
+
+-------------------------------------------------------------------
 Wed Dec 12 15:32:05 UTC 2012 - lslezak@suse.cz
 
 - restart webyast after package update
