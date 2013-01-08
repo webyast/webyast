@@ -217,7 +217,7 @@ case "$1" in
         # (Webyast was probably installed/updated by plain RPM)
         if [ -f $RESTART_FILE ]; then
             # TODO: use /usr/sbin/update_webyast_service (but fix possible endless loop)
-            (cd /srv/www/webyast/ && rake -f lib/tasks/assets.rake assets:join_manifests)
+            (umask 0033 && cd /srv/www/webyast/ && rake -s -f lib/tasks/assets.rake assets:join_manifests)
 
             rm $RESTART_FILE
         fi
