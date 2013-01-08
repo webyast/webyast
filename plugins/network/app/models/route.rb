@@ -47,15 +47,13 @@ class Route < BaseModel::Base
   # fills route instance with data from YaPI.
   #
   # +warn+: YaPI implements default only.
-  def self.find( which )
-    which = "default" if which == :all
-
+  def self.find which
     response = YastService.Call("YaPI::NETWORK::Read")
     routes_h = response["routes"]
     if which == :all
-      ret = Hash.new
+      ret = []
       routes_h.each do |id, route_h|
-        ret[id] = Route.new(route_h, id)
+        ret << Route.new(route_h, id)
       end
     else
       ret = Route.new(routes_h[which], which)
