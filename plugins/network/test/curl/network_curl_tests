@@ -1,0 +1,204 @@
+#!/usr/bin/env ruby
+
+require 'uri'
+require 'optparse'
+require 'shellwords'
+require 'rexml/document'
+require 'erb'
+
+# Parse options
+opt = OptionParser.new
+
+opt.banner = "Usage: #{File.basename($0)} [options]"
+opt.separator("Example: #{File.basename($0)} -p password -u https://foo.example.com:4984")
+opt.separator("\nRun WebYaST network API tests.")
+opt.separator("\nWARNING: The tests are intrusive and will change the current system configuration!")
+opt.separator("         ** Use at your own risk! **")
+opt.separator("\nOptions:")
+opt.on( "-h", "--help", "Print this help" ) do
+  puts opt
+  exit
+end
+
+base_url = "https://localhost:4984"
+opt.on( "-u", "--url [URL]", "Specify the base URL, the default is https://localhost:4984" ) do |url|
+  base_url = url
+end
+
+password = ""
+opt.on( "-p", "--password [password]", "Use this root password, if this option is missing it will be read from STDIN" ) do |pwd|
+  password = pwd
+end
+
+verbose = false
+opt.on( "-v", "--verbose", "Verbose mode, print full server responses, useful for debugging" ) do
+  verbose = true
+end
+
+begin
+  opt.parse! ARGV
+rescue OptionParser::InvalidOption
+  $stderr.puts "Error: #{$!}\n\n"
+  $stderr.puts opt
+  exit 1
+end
+
+url = URI.parse base_url
+
+if password.empty?
+  puts "Enter root password for #{url}:"
+  `stty -echo`
+  password = gets.chomp
+  `stty echo`
+end
+
+puts "Starting network tests..."
+
+#
+# all network interfaces
+#
+url.path = "/network/interfaces.xml"
+ret = `curl -k -s -S -u root:#{Shellwords.escape password} #{url}`
+puts "RESULT: #{ret}" if verbose
+
+interfaces = []
+
+if $?.exitstatus.zero?
+  puts "Interfaces list: OK"
+
+  doc = REXML::Document.new ret
+  doc.elements.each('interfaces/interface') do |p|
+    iface = p.elements["id"].text
+    interfaces << iface if iface
+  end
+  
+  puts "Found network interfaces: #{interfaces.join(", ")}"
+else
+  $stderr.puts "RESULT: #{ret}"
+  $stderr.puts "Interfaces list: FAILED"
+  exit 1
+end
+
+#
+# query only one interface properties
+#
+url.path = "/network/interfaces/#{interfaces.first}.xml"
+ret = `curl -i -k -s -S -u root:#{Shellwords.escape password} #{url}`
+puts "RESULT: #{ret}" if verbose
+
+if $?.exitstatus.zero? && ret.match(/Status: 200/)
+  puts "Reading interface #{interfaces.first}: OK"
+else
+  $stderr.puts "RESULT: #{ret}"
+  $stderr.puts "Reading interface #{interfaces.first}: FAILED"
+  exit 1
+end
+
+
+#
+# read hostname information
+#
+url.path = "/network/hostname.xml"
+ret = `curl -i -k -s -S -u root:#{Shellwords.escape password} #{url}`
+puts "RESULT: #{ret}" if verbose
+
+if $?.exitstatus.zero? && ret.match(/Status: 200/)
+  puts "Reading hostname properties: OK"
+else
+  $stderr.puts "RESULT: #{ret}"
+  $stderr.puts "Reading hostname properties: FAILED"
+  exit 1
+end
+
+#
+# read DNS information
+#
+url.path = "/network/dns.xml"
+ret = `curl -i -k -s -S -u root:#{Shellwords.escape password} #{url}`
+puts "RESULT: #{ret}" if verbose
+
+if $?.exitstatus.zero? && ret.match(/Status: 200/)
+  puts "Reading DNS properties: OK"
+else
+  $stderr.puts "RESULT: #{ret}"
+  $stderr.puts "Reading DNS properties: FAILED"
+  exit 1
+end
+
+#
+# read routing information
+#
+url.path = "/network/routes.xml"
+ret = `curl -i -k -s -S -u root:#{Shellwords.escape password} #{url}`
+puts "RESULT: #{ret}" if verbose
+
+if $?.exitstatus.zero? && ret.match(/Status: 200/)
+  puts "Reading routing properties: OK"
+else
+  $stderr.puts "RESULT: #{ret}"
+  $stderr.puts "Reading routing properties: FAILED"
+  exit 1
+end
+
+
+#
+# create a new bridge
+#
+
+# get id for the new bridge (max + 1)
+br_id = interfaces.map{|i| i.match /^br([0-9]+)/; $1}.delete_if{|i| i.nil?}.max
+br_id = br_id.nil? ? 0 : br_id.to_i + 1
+
+puts "Creating new bridge br#{br_id}..."
+
+new_bridge = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>
+<interface>
+  <id>br#{br_id}</id>
+  <type>br</type>
+  <bootproto>dhcp</bootproto>
+  <ipaddr/>
+  <bridge_ports type=\"array\"/>
+</interface>
+"
+
+url.path = "/network/interfaces.xml"
+ret = `curl -i -k -s -S -u root:#{Shellwords.escape password} -H "Content-Type: application/xml" -X POST -d #{Shellwords.escape new_bridge} #{url}`
+puts "RESULT: #{ret}" if verbose
+
+if $?.exitstatus.zero? && ret.match(/Status: 200/)
+  puts "Create bridge br#{br_id}: OK"
+else
+  $stderr.puts "RESULT: #{ret}"
+  $stderr.puts "Create bridge br#{br_id}: FAILED"
+  exit 1
+end
+
+#
+# verify the created bridge
+#
+ret = `curl -k -s -S -u root:#{Shellwords.escape password} #{url}`
+puts "RESULT: #{ret}" if verbose
+
+if $?.exitstatus.zero?
+  puts "Interfaces list: OK"
+  
+  bridge_found = false
+
+  doc = REXML::Document.new ret
+  doc.elements.each('interfaces/interface') do |p|
+    bridge_found = true if p.elements["id"].text == "br#{br_id}"
+  end
+  
+  puts "Found created bridge: #{bridge_found}"
+  
+  exit 1 unless bridge_found
+else
+  $stderr.puts "RESULT: #{ret}"
+  $stderr.puts "Interfaces list: FAILED"
+  exit 1
+end
+
+# TODO: remove the created bridge
+
+# TODO: VLAN tests
+# TODO: bond tests
