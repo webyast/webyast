@@ -49,6 +49,8 @@ class Network::RoutesController < ApplicationController
     @route = Route.find(params[:id])
     Rails.logger.debug "** Route #{@route.inspect}"
 
+    head :not_found and return if @route.nil?
+
     respond_to do |format|
       format.xml { render :xml => @route.to_xml(:dasherize => false) }
       format.json { render :json => @route.to_json }

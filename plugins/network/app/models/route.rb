@@ -50,12 +50,15 @@ class Route < BaseModel::Base
   def self.find which
     response = YastService.Call("YaPI::NETWORK::Read")
     routes_h = response["routes"]
+    Rails.logger.debug "Routes config: #{routes_h.inspect}"
+
     if which == :all
       ret = []
       routes_h.each do |id, route_h|
         ret << Route.new(route_h, id)
       end
     else
+      return nil if routes_h[which].nil?
       ret = Route.new(routes_h[which], which)
     end
     ret
