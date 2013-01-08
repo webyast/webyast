@@ -57,5 +57,30 @@ class Network::InterfacesController < ApplicationController
    end
   end
 
+  def create
+    options = params[:interface] || {}
+
+    options["bridge_ports"] = options["bridge_ports"].join(' ') || "" if options["bridge_ports"]
+    options["bond_slaves"] = options["bond_slaves"].join(' ') if options["bond_slaves"]
+
+    if options["bond_mode"] && options["bond_miimon"]
+      bond_option = "#{options["bond_mode"]} #{options["bond_miimon"].gsub(/ /,'')}"
+      options["bond_option"] = bond_option
+    end
+
+    Rails.logger.info "options: #{options.inspect}"
+
+    ifc = Interface.new(options, "#{options["type"]}#{options["number"]}")
+    head 422 and return unless ifc.valid?
+
+    updated = ifc.save
+    head :not_found and return unless updated
+
+    respond_to do |format|
+      format.xml { render :xml => ifc.to_xml(:dasherize => false) }
+      format.json { render :json => ifc.to_json }
+    end
+  end
+
 end
 
