@@ -27,8 +27,8 @@ class NetworkController < ApplicationController
     authorize! :read, Network
 
     @ifcs = Interface.find(:all)
-    @physical = @ifcs.select{|k, i| i if k.match("eth")}
-    @virtual = @ifcs.select{|k, i| i unless k.match("eth")}
+    @physical = @ifcs.select{|k, i| i if k.match(/eth|wlan/)}
+    @virtual = @ifcs.select{|k, i| i unless k.match(/eth|wlan/)}
 
     respond_to do |format|
       format.html # index.html.erb
@@ -51,7 +51,7 @@ class NetworkController < ApplicationController
 
     @type = params[:id][0..(params[:id].size-2)] || "eth"
     @number = @ifcs.select{|id, iface| id if id.match(@type)}.count
-    @physical = @ifcs.select{|k, i| i if k.match("eth")}
+    @physical = @ifcs.select{|k, i| i if k.match(/eth|wlan/)}
 
 
     respond_to do |format|
@@ -71,7 +71,7 @@ class NetworkController < ApplicationController
 
     @type = params[:type]
     @number = @ifcs.select{|id, iface| id if id.match(@type)}.count
-    @physical = @ifcs.select{|k, i| i if k.match("eth")}
+    @physical = @ifcs.select{|k, i| i if k.match(/eth|wlan/)}
 
     @ifc = Interface.new({"type"=>params[:type], "bootproto"=>"dhcp", "startmode"=>"auto"}, "#{@type}#{@number}")
 
