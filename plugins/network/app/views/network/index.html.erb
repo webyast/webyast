@@ -111,7 +111,7 @@
                     <%= link_to _("configure"), :controller => "network", :action => "edit", :id => id %>
                   </p>
                   <p>
-                    <%= link_to _("delete"), :action => "destroy", :id => id%>                
+                    <%= link_to _("delete"), {:action => "destroy", :id => id}, :method => :delete, :data => {:confirm => (_("Really delete interface '%s'?") % interface.id) } %>
                   </p>
                 </div>
               </div>
