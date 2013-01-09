@@ -140,6 +140,85 @@ else
   exit 1
 end
 
+puts "** NOTE: this script hangs if DHCP assigns a different IP during the tests" if url.host != "localhost"
+
+#
+# create a new VLAN
+#
+
+# get id for the new VLAN (max + 1)
+vlan_id = interfaces.map{|i| i.match /^vlan([0-9]+)/; $1}.delete_if{|i| i.nil?}.max
+vlan_id = vlan_id.nil? ? 0 : vlan_id.to_i + 1
+
+puts "Creating vlan device vlan#{vlan_id} for eth0 device..."
+
+new_bridge = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>
+<interface>
+  <id>vlan#{vlan_id}</id>
+  <type>vlan</type>
+  <bootproto>none</bootproto>
+  <ipaddr/>
+  <vlan_id>#{vlan_id + 1}</vlan_id>
+  <vlan_etherdevice>eth0</vlan_etherdevice>
+</interface>
+"
+
+url.path = "/network/interfaces.xml"
+ret = `curl -i -k -s -S -u root:#{Shellwords.escape password} -H "Content-Type: application/xml" -X POST -d #{Shellwords.escape new_bridge} #{url}`
+puts "RESULT: #{ret}" if verbose
+
+if $?.exitstatus.zero? && ret.match(/Status: 200/)
+  puts "Create VLAN vlan#{vlan_id}: OK"
+else
+  $stderr.puts "RESULT: #{ret}"
+  $stderr.puts "Create VLAN vlan#{vlan_id}: FAILED"
+  exit 1
+end
+
+#
+# verify the created VLAN
+#
+url.path = "/network/interfaces/vlan#{vlan_id}.xml"
+ret = `curl -i -k -s -S -u root:#{Shellwords.escape password} #{url}`
+puts "RESULT: #{ret}" if verbose
+
+if $?.exitstatus.zero? && ret.match(/Status: 200/)
+  puts "VLAN vlan#{vlan_id} found: OK"
+else
+  $stderr.puts "RESULT: #{ret}"
+  $stderr.puts "VLAN vlan#{vlan_id} found: FAILED"
+  exit 1
+end
+
+#
+# remove the created VLAN
+#
+ret = `curl -i -k -s -S -u root:#{Shellwords.escape password} -X DELETE #{url}`
+puts "RESULT: #{ret}" if verbose
+
+if $?.exitstatus.zero? && ret.match(/Status: 200/)
+  puts "VLAN vlan#{vlan_id} removed: OK"
+else
+  $stderr.puts "RESULT: #{ret}"
+  $stderr.puts "VLAN vlan#{vlan_id} removed: FAILED"
+  exit 1
+end
+
+#
+# verify the removed VLAN
+#
+url.path = "/network/interfaces/vlan#{vlan_id}.xml"
+ret = `curl -i -k -s -S -u root:#{Shellwords.escape password} #{url}`
+puts "RESULT: #{ret}" if verbose
+
+if $?.exitstatus.zero? && ret.match(/Status: 404/)
+  puts "VLAN vlan#{vlan_id} missing: OK"
+else
+  $stderr.puts "RESULT: #{ret}"
+  $stderr.puts "VLAN vlan#{vlan_id} missing: FAILED"
+  exit 1
+end
+
 
 #
 # create a new bridge
@@ -150,13 +229,12 @@ br_id = interfaces.map{|i| i.match /^br([0-9]+)/; $1}.delete_if{|i| i.nil?}.max
 br_id = br_id.nil? ? 0 : br_id.to_i + 1
 
 puts "Creating new bridge br#{br_id}..."
-puts "NOTE: this can hang if DHCP assigns a different IP during network restart"
 
 new_bridge = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>
 <interface>
   <id>br#{br_id}</id>
   <type>br</type>
-  <bootproto>dhcp</bootproto>
+  <bootproto>none</bootproto>
   <ipaddr/>
   <bridge_ports type=\"array\"/>
 </interface>
@@ -177,32 +255,22 @@ end
 #
 # verify the created bridge
 #
-ret = `curl -k -s -S -u root:#{Shellwords.escape password} #{url}`
+url.path = "/network/interfaces/br#{br_id}.xml"
+ret = `curl -i -k -s -S -u root:#{Shellwords.escape password} #{url}`
 puts "RESULT: #{ret}" if verbose
 
-if $?.exitstatus.zero?
-  puts "Interfaces list: OK"
-  
-  bridge_found = false
-
-  doc = REXML::Document.new ret
-  doc.elements.each('interfaces/interface') do |p|
-    bridge_found = true if p.elements["id"].text == "br#{br_id}"
-  end
-  
-  puts "Found created bridge: #{bridge_found}"
-  
-  exit 1 unless bridge_found
+if $?.exitstatus.zero? && ret.match(/Status: 200/)
+  puts "Found created bridge: OK"
 else
   $stderr.puts "RESULT: #{ret}"
-  $stderr.puts "Interfaces list: FAILED"
+  $stderr.puts "Found created bridge: FAILED"
   exit 1
 end
 
 #
 # remove the created bridge
 #
-url.path = "/network/interface/br#{br_id}.xml"
+url.path = "/network/interfaces/br#{br_id}.xml"
 ret = `curl -i -k -s -S -u root:#{Shellwords.escape password} -X DELETE #{url}`
 puts "RESULT: #{ret}" if verbose
 
@@ -214,5 +282,4 @@ else
   exit 1
 end
 
-# TODO: VLAN tests
 # TODO: bond tests
