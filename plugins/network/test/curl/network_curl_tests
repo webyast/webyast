@@ -282,4 +282,81 @@ else
   exit 1
 end
 
-# TODO: bond tests
+
+#
+# create a new bond device
+#
+
+# get id for the new bond (max + 1)
+bond_id = interfaces.map{|i| i.match /^bond([0-9]+)/; $1}.delete_if{|i| i.nil?}.max
+bond_id = bond_id.nil? ? 0 : bond_id.to_i + 1
+
+puts "Creating new bond device bond#{bond_id}..."
+
+new_bond = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>
+<interface>
+  <id>bond#{bond_id}</id>
+  <type>bond</type>
+  <bootproto>none</bootproto>
+  <ipaddr/>
+  <bond_slaves type=\"array\"/>
+</interface>
+"
+
+url.path = "/network/interfaces.xml"
+ret = `curl -i -k -s -S -u root:#{Shellwords.escape password} -H "Content-Type: application/xml" -X POST -d #{Shellwords.escape new_bond} #{url}`
+puts "RESULT: #{ret}" if verbose
+
+if $?.exitstatus.zero? && ret.match(/Status: 200/)
+  puts "Create bond device bond#{bond_id}: OK"
+else
+  $stderr.puts "RESULT: #{ret}"
+  $stderr.puts "Create bond device bond#{bond_id}: FAILED"
+  exit 1
+end
+
+#
+# verify the created bond
+#
+url.path = "/network/interfaces/bond#{bond_id}.xml"
+ret = `curl -i -k -s -S -u root:#{Shellwords.escape password} #{url}`
+puts "RESULT: #{ret}" if verbose
+
+if $?.exitstatus.zero? && ret.match(/Status: 200/)
+  puts "Found created bond device: OK"
+else
+  $stderr.puts "RESULT: #{ret}"
+  $stderr.puts "Found created bond device: FAILED"
+  exit 1
+end
+
+#
+# remove the created bond
+#
+url.path = "/network/interfaces/bond#{bond_id}.xml"
+ret = `curl -i -k -s -S -u root:#{Shellwords.escape password} -X DELETE #{url}`
+puts "RESULT: #{ret}" if verbose
+
+if $?.exitstatus.zero? && ret.match(/Status: 200/)
+  puts "Bond device bond#{bond_id} removed: OK"
+else
+  $stderr.puts "RESULT: #{ret}"
+  $stderr.puts "Bond device bond#{bond_id} removed: FAILED"
+  exit 1
+end
+
+#
+# verify the removed bond
+#
+url.path = "/network/interfaces/bond#{bond_id}.xml"
+ret = `curl -i -k -s -S -u root:#{Shellwords.escape password} #{url}`
+puts "RESULT: #{ret}" if verbose
+
+if $?.exitstatus.zero? && ret.match(/Status: 404/)
+  puts "Bond device bond#{bond_id} missing: OK"
+else
+  $stderr.puts "RESULT: #{ret}"
+  $stderr.puts "Bond device bond#{bond_id} missing: FAILED"
+  exit 1
+end
+
