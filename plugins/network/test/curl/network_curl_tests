@@ -4,7 +4,6 @@ require 'uri'
 require 'optparse'
 require 'shellwords'
 require 'rexml/document'
-require 'erb'
 
 # Parse options
 opt = OptionParser.new
