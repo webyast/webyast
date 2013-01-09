@@ -24,7 +24,7 @@
 class Network::InterfacesController < ApplicationController
 
   before_filter(:only => [:show, :index]) { |c| c.authorize! :read, Network }
-  before_filter(:only => [:create, :update]) { |c| c.authorize! :write, Network }
+  before_filter(:only => [:create, :update, :destroy]) { |c| c.authorize! :write, Network }
 
   # Sets interface settings. Requires write permissions for network YaPI.
   def update
@@ -80,6 +80,15 @@ class Network::InterfacesController < ApplicationController
       format.xml { render :xml => ifc.to_xml(:dasherize => false) }
       format.json { render :json => ifc.to_json }
     end
+  end
+
+  def destroy
+    ifc = Interface.find params[:id]
+    Rails.logger.info "Found interface: #{ifc.inspect}"
+    head :not_found and return if ifc.nil?
+
+    ret = ifc.destroy
+    head ret ? :ok : :internal_server_error
   end
 
 end

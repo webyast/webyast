@@ -150,6 +150,7 @@ br_id = interfaces.map{|i| i.match /^br([0-9]+)/; $1}.delete_if{|i| i.nil?}.max
 br_id = br_id.nil? ? 0 : br_id.to_i + 1
 
 puts "Creating new bridge br#{br_id}..."
+puts "NOTE: this can hang if DHCP assigns a different IP during network restart"
 
 new_bridge = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>
 <interface>
@@ -198,7 +199,20 @@ else
   exit 1
 end
 
-# TODO: remove the created bridge
+#
+# remove the created bridge
+#
+url.path = "/network/interface/br#{br_id}.xml"
+ret = `curl -i -k -s -S -u root:#{Shellwords.escape password} -X DELETE #{url}`
+puts "RESULT: #{ret}" if verbose
+
+if $?.exitstatus.zero? && ret.match(/Status: 200/)
+  puts "Bridge br#{br_id} removed: OK"
+else
+  $stderr.puts "RESULT: #{ret}"
+  $stderr.puts "Bridge br#{br_id} removed: FAILED"
+  exit 1
+end
 
 # TODO: VLAN tests
 # TODO: bond tests
