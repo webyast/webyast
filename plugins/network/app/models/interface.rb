@@ -139,11 +139,11 @@ class Interface < BaseModel::Base
         settings[@id]["vlan_etherdevice"] = self.vlan_etherdevice || ""
       when "br"
         settings[@id]["bridge"] = "yes"
-        settings[@id]["bridge_ports"] = @bridge_ports
+        settings[@id]["bridge_ports"] = @bridge_ports.join(' ')
       when "bond"
         settings[@id]["bond"] = "yes"
         settings[@id]["bond_option"] = @bond_option || ""
-        settings[@id]["bond_slaves"] = @bond_slaves
+        settings[@id]["bond_slaves"] = @bond_slaves.join(' ')
       when "eth"
         # save only bootproto and ip/netmask
         Rails.logger.info "ETHERNET"
