@@ -29,6 +29,8 @@ class ApplicationController < ActionController::Base
   before_filter :set_gettext_locale
   before_filter :base_system
 
+  protect_from_forgery
+
   # controllers allowed to be called when the base setup has not been finished yet
   SYSTEM_CONTROLLERS = ["controlpanel", "notifier", "sessions"]
 
