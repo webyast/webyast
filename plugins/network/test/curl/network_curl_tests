@@ -282,6 +282,21 @@ else
   exit 1
 end
 
+#
+# verify the removed bridge
+#
+url.path = "/network/interfaces/br#{br_id}.xml"
+ret = `curl -i -k -s -S -u root:#{Shellwords.escape password} #{url}`
+puts "RESULT: #{ret}" if verbose
+
+if $?.exitstatus.zero? && ret.match(/Status: 404/)
+  puts "Bridge br#{br_id} missing: OK"
+else
+  $stderr.puts "RESULT: #{ret}"
+  $stderr.puts "Bridge br#{br_id} missing: FAILED"
+  exit 1
+end
+
 
 #
 # create a new bond device
