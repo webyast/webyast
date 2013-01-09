@@ -119,7 +119,8 @@ class Interface < BaseModel::Base
       end
 
     else
-      hash = Interface.new(ifaces_h[which], which)
+      Rails.logger.debug "Requested interface: #{ifaces_h[which].inspect}"
+      hash = ifaces_h[which].blank? ? nil : Interface.new(ifaces_h[which], which)
     end
 
     Rails.logger.info "\n\n *** Interfaces: \n  #{hash.inspect} *** \n\n"
@@ -157,7 +158,7 @@ class Interface < BaseModel::Base
     response = YastService.Call("YaPI::NETWORK::Write",{"interface" => vsettings})
     Rails.logger.info "Saved: #{response.inspect}"
 
-    response
+    response.is_a?(Hash) && response["exit"] == "0"
   end
 
 
@@ -167,6 +168,8 @@ class Interface < BaseModel::Base
     vsettings = [ "a{sa{ss}}", settings ]
 
     response = YastService.Call("YaPI::NETWORK::Write",{"interface" => vsettings})
+
+    response.is_a?(Hash) && response["exit"] == "0"
    end
 
 end

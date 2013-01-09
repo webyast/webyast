@@ -43,6 +43,10 @@ class Network::InterfacesController < ApplicationController
     # RORSCAN_INL: Is not a Information Exposure cause all data can be read
     iface = Interface.find(params[:id])
 
+    Rails.logger.info "Found interface: #{iface.inspect}"
+
+    head :not_found and return if iface.nil?
+
     respond_to do |format|
       format.xml { render :xml => iface.to_xml( :root => "interface", :dasherize => false ) }
       format.json { render :json => iface.to_json }
