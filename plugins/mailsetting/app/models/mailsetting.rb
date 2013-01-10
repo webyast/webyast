@@ -76,15 +76,19 @@ class Mailsetting < BaseModel::Base
     true
   end
 
+  def self.valid_mail_address? (address)
+    return !!address.match(/\A[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]+\z/)
+  end
+
   def self.send_test_mail(to)
-    return if to.nil? || to.empty?
+    return if to.blank?
 
     Rails.logger.debug "sending test mail to #{to}..."
 
     message	= "This is the test mail sent to you by webYaST."
 
     # remove potential problematic characters from email address
-    to.tr!("~'\"<>","")
+    raise "Invalid email address" unless valid_mail_address?(to)
     `/bin/echo "#{message}" | /bin/mail -s "WebYaST Test Mail" '#{to}' -r root`
 
     mail_directory = File.join(YaST::Paths::VAR,"mailsetting")

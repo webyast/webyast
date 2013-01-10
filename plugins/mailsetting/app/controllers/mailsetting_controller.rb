@@ -60,7 +60,7 @@ public
 
     if params.has_key? :send_mail
       if request.format.html?
-        if mail_params[:test_mail_address].to_s.match(/\A[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]+\z/)
+        if Mailsetting.valid_mail_address?(mail_params[:test_mail_address])
           Mailsetting.send_test_mail mail_params[:test_mail_address]
           flash[:notice] = _("A test message has been sent to email address %s") % mail_params[:test_mail_address]
           redirect_to :action => "show", :email => mail_params[:test_mail_address].to_s
