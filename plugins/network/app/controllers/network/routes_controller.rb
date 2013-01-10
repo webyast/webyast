@@ -20,8 +20,7 @@
 #++
 
 # = Routing controller
-# Provides access to routes settings for authenticated users.
-# Main goal is checking permissions.
+# Provides access to network routes settings for authenticated users.
 
 class Network::RoutesController < ApplicationController
 
@@ -50,18 +49,20 @@ class Network::RoutesController < ApplicationController
     @route = Route.find(params[:id])
     Rails.logger.debug "** Route #{@route.inspect}"
 
+    head :not_found and return if @route.nil?
+
     respond_to do |format|
-      format.xml { render :xml => @route.to_xml( :root => "routes", :dasherize => false ) }
+      format.xml { render :xml => @route.to_xml(:dasherize => false) }
       format.json { render :json => @route.to_json }
     end
   end
 
   def index
     @routes = Route.find(:all)
-    Rails.logger.debug "** Routes #{@routes.to_json}"
+    Rails.logger.debug "** Routes #{@routes.inspect}"
     
     respond_to do |format|
-      format.xml { render :xml => @routes.to_xml( :root => "routes", :dasherize => false ) }
+      format.xml { render :xml => @routes.to_xml(:dasherize => false) }
       format.json { render :json => @routes.to_json }
     end
   end

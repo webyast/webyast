@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <hostname>
   <name>trikolka</name>
+  <dhcp_hostname>1</dhcp_hostname>
   <domain>example.com</domain>
+  <dhcp_hostname_enabled type="boolean">true</dhcp_hostname_enabled>
 </hostname>

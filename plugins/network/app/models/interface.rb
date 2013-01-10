@@ -28,7 +28,7 @@ require 'ipaddr'
 require "open3"
 
 class Interface < BaseModel::Base
-  
+
   IPADDR_REGEX = /([0-9]{1,3}.){3}[0-9]{1,3}/
   IP_IPADDR_REGEX = /inet (#{IPADDR_REGEX})/
 
@@ -49,8 +49,8 @@ class Interface < BaseModel::Base
 
   validates_format_of :id, :allow_nil => false, :with => /^[a-zA-Z0-9_-]+$/
   validates_inclusion_of :bootproto, :in => ["static","dhcp", "none"]
-  validates_format_of :ipaddr, 
-                      :allow_blank => true, 
+  validates_format_of :ipaddr,
+                      :allow_blank => true,
                       :with => /^#{IPADDR_REGEX}\/(#{IPADDR_REGEX}|[0-9]{1,2})$/  #(bnc#600097)
 
   public
@@ -58,7 +58,7 @@ class Interface < BaseModel::Base
   def netmask_to_cidr(netmask)
     return IPAddr.new(netmask).to_i.to_s(2).count("1")
   end
-  
+
   def self.cidr_to_netmask(cidr)
     return IPAddr.new('255.255.255.255').mask(cidr).to_s
   end
@@ -91,11 +91,11 @@ class Interface < BaseModel::Base
     else
       @ipaddr = ipaddr || ""
     end
-    
+
     if(id && id.match("br"))
         @bridge_ports = (bridge_ports.class == "Array")? bridge_ports.split(" ") : bridge_ports || [ ]
     end
-    
+
     if(id && id.match("bond"))
         @bond_slaves = (bond_slaves.class == "Array")? bond_slaves.split(" ") : bond_slaves || [ ]
     end
@@ -111,6 +111,7 @@ class Interface < BaseModel::Base
     Rails.logger.info "\n\n *** Response: \n  #{ifaces_h.inspect} *** \n\n"
 
     if which == :all
+      # TODO FIXME: return Array instead of Hash for :all
       hash = Hash.new
 
       ifaces_h.each do |id, ifaces_h|
@@ -118,7 +119,8 @@ class Interface < BaseModel::Base
       end
 
     else
-      hash = Interface.new(ifaces_h[which], which)
+      Rails.logger.debug "Requested interface: #{ifaces_h[which].inspect}"
+      hash = ifaces_h[which].blank? ? nil : Interface.new(ifaces_h[which], which)
     end
 
     Rails.logger.info "\n\n *** Interfaces: \n  #{hash.inspect} *** \n\n"
@@ -129,7 +131,7 @@ class Interface < BaseModel::Base
   def update
     settings = { @id=>{} }
     settings[@id]["bootproto"] = @bootproto
-    settings[@id]["ipaddr"] = @ipaddr unless @ipaddr.empty? 
+    settings[@id]["ipaddr"] = @ipaddr unless @ipaddr.empty?
 
     case self.type
       when "vlan"
@@ -137,11 +139,11 @@ class Interface < BaseModel::Base
         settings[@id]["vlan_etherdevice"] = self.vlan_etherdevice || ""
       when "br"
         settings[@id]["bridge"] = "yes"
-        settings[@id]["bridge_ports"] = @bridge_ports
+        settings[@id]["bridge_ports"] = @bridge_ports.join(' ')
       when "bond"
         settings[@id]["bond"] = "yes"
         settings[@id]["bond_option"] = @bond_option || ""
-        settings[@id]["bond_slaves"] = @bond_slaves
+        settings[@id]["bond_slaves"] = @bond_slaves.join(' ')
       when "eth"
         # save only bootproto and ip/netmask
         Rails.logger.info "ETHERNET"
@@ -154,6 +156,9 @@ class Interface < BaseModel::Base
 
     vsettings = [ "a{sa{ss}}", settings ] # bnc#538050
     response = YastService.Call("YaPI::NETWORK::Write",{"interface" => vsettings})
+    Rails.logger.info "Saved: #{response.inspect}"
+
+    response.is_a?(Hash) && response["exit"] == "0"
   end
 
 
@@ -161,8 +166,10 @@ class Interface < BaseModel::Base
     settings = { @id=>{} }
     settings = { @id => { "delete" => "true" }}
     vsettings = [ "a{sa{ss}}", settings ]
-    
+
     response = YastService.Call("YaPI::NETWORK::Write",{"interface" => vsettings})
+
+    response.is_a?(Hash) && response["exit"] == "0"
    end
 
 end
