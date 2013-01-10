@@ -1,0 +1,376 @@
+#!/usr/bin/env ruby
+
+require 'uri'
+require 'optparse'
+require 'shellwords'
+require 'rexml/document'
+
+# Parse options
+opt = OptionParser.new
+
+opt.banner = "Usage: #{File.basename($0)} [options]"
+opt.separator("Example: #{File.basename($0)} -p password -u https://foo.example.com:4984")
+opt.separator("\nRun WebYaST network API tests.")
+opt.separator("\nWARNING: The tests are intrusive and will change the current system configuration!")
+opt.separator("         ** Use at your own risk! **")
+opt.separator("\nOptions:")
+opt.on( "-h", "--help", "Print this help" ) do
+  puts opt
+  exit
+end
+
+base_url = "https://localhost:4984"
+opt.on( "-u", "--url [URL]", "Specify the base URL, the default is https://localhost:4984" ) do |url|
+  base_url = url
+end
+
+password = ""
+opt.on( "-p", "--password [password]", "Use this root password, if this option is missing it will be read from STDIN" ) do |pwd|
+  password = pwd
+end
+
+verbose = false
+opt.on( "-v", "--verbose", "Verbose mode, print full server responses, useful for debugging" ) do
+  verbose = true
+end
+
+begin
+  opt.parse! ARGV
+rescue OptionParser::InvalidOption
+  $stderr.puts "Error: #{$!}\n\n"
+  $stderr.puts opt
+  exit 1
+end
+
+url = URI.parse base_url
+
+if password.empty?
+  puts "Enter root password for #{url}:"
+  `stty -echo`
+  password = gets.chomp
+  `stty echo`
+end
+
+puts "Starting network tests..."
+
+#
+# all network interfaces
+#
+url.path = "/network/interfaces.xml"
+ret = `curl -k -s -S -u root:#{Shellwords.escape password} #{url}`
+puts "RESULT: #{ret}" if verbose
+
+interfaces = []
+
+if $?.exitstatus.zero?
+  puts "Interfaces list: OK"
+
+  doc = REXML::Document.new ret
+  doc.elements.each('interfaces/interface') do |p|
+    iface = p.elements["id"].text
+    interfaces << iface if iface
+  end
+  
+  puts "Found network interfaces: #{interfaces.join(", ")}"
+else
+  $stderr.puts "RESULT: #{ret}"
+  $stderr.puts "Interfaces list: FAILED"
+  exit 1
+end
+
+#
+# query only one interface properties
+#
+url.path = "/network/interfaces/#{interfaces.first}.xml"
+ret = `curl -i -k -s -S -u root:#{Shellwords.escape password} #{url}`
+puts "RESULT: #{ret}" if verbose
+
+if $?.exitstatus.zero? && ret.match(/Status: 200/)
+  puts "Reading interface #{interfaces.first}: OK"
+else
+  $stderr.puts "RESULT: #{ret}"
+  $stderr.puts "Reading interface #{interfaces.first}: FAILED"
+  exit 1
+end
+
+
+#
+# read hostname information
+#
+url.path = "/network/hostname.xml"
+ret = `curl -i -k -s -S -u root:#{Shellwords.escape password} #{url}`
+puts "RESULT: #{ret}" if verbose
+
+if $?.exitstatus.zero? && ret.match(/Status: 200/)
+  puts "Reading hostname properties: OK"
+else
+  $stderr.puts "RESULT: #{ret}"
+  $stderr.puts "Reading hostname properties: FAILED"
+  exit 1
+end
+
+#
+# read DNS information
+#
+url.path = "/network/dns.xml"
+ret = `curl -i -k -s -S -u root:#{Shellwords.escape password} #{url}`
+puts "RESULT: #{ret}" if verbose
+
+if $?.exitstatus.zero? && ret.match(/Status: 200/)
+  puts "Reading DNS properties: OK"
+else
+  $stderr.puts "RESULT: #{ret}"
+  $stderr.puts "Reading DNS properties: FAILED"
+  exit 1
+end
+
+#
+# read routing information
+#
+url.path = "/network/routes.xml"
+ret = `curl -i -k -s -S -u root:#{Shellwords.escape password} #{url}`
+puts "RESULT: #{ret}" if verbose
+
+if $?.exitstatus.zero? && ret.match(/Status: 200/)
+  puts "Reading routing properties: OK"
+else
+  $stderr.puts "RESULT: #{ret}"
+  $stderr.puts "Reading routing properties: FAILED"
+  exit 1
+end
+
+puts "** NOTE: this script hangs if DHCP assigns a different IP during the tests" if url.host != "localhost"
+
+#
+# create a new VLAN
+#
+
+# get id for the new VLAN (max + 1)
+vlan_id = interfaces.map{|i| i.match /^vlan([0-9]+)/; $1}.delete_if{|i| i.nil?}.max
+vlan_id = vlan_id.nil? ? 0 : vlan_id.to_i + 1
+
+puts "Creating vlan device vlan#{vlan_id} for eth0 device..."
+
+new_bridge = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>
+<interface>
+  <id>vlan#{vlan_id}</id>
+  <type>vlan</type>
+  <bootproto>none</bootproto>
+  <ipaddr/>
+  <vlan_id>#{vlan_id + 1}</vlan_id>
+  <vlan_etherdevice>eth0</vlan_etherdevice>
+</interface>
+"
+
+url.path = "/network/interfaces.xml"
+ret = `curl -i -k -s -S -u root:#{Shellwords.escape password} -H "Content-Type: application/xml" -X POST -d #{Shellwords.escape new_bridge} #{url}`
+puts "RESULT: #{ret}" if verbose
+
+if $?.exitstatus.zero? && ret.match(/Status: 200/)
+  puts "Create VLAN vlan#{vlan_id}: OK"
+else
+  $stderr.puts "RESULT: #{ret}"
+  $stderr.puts "Create VLAN vlan#{vlan_id}: FAILED"
+  exit 1
+end
+
+#
+# verify the created VLAN
+#
+url.path = "/network/interfaces/vlan#{vlan_id}.xml"
+ret = `curl -i -k -s -S -u root:#{Shellwords.escape password} #{url}`
+puts "RESULT: #{ret}" if verbose
+
+if $?.exitstatus.zero? && ret.match(/Status: 200/)
+  puts "VLAN vlan#{vlan_id} found: OK"
+else
+  $stderr.puts "RESULT: #{ret}"
+  $stderr.puts "VLAN vlan#{vlan_id} found: FAILED"
+  exit 1
+end
+
+#
+# remove the created VLAN
+#
+ret = `curl -i -k -s -S -u root:#{Shellwords.escape password} -X DELETE #{url}`
+puts "RESULT: #{ret}" if verbose
+
+if $?.exitstatus.zero? && ret.match(/Status: 200/)
+  puts "VLAN vlan#{vlan_id} removed: OK"
+else
+  $stderr.puts "RESULT: #{ret}"
+  $stderr.puts "VLAN vlan#{vlan_id} removed: FAILED"
+  exit 1
+end
+
+#
+# verify the removed VLAN
+#
+url.path = "/network/interfaces/vlan#{vlan_id}.xml"
+ret = `curl -i -k -s -S -u root:#{Shellwords.escape password} #{url}`
+puts "RESULT: #{ret}" if verbose
+
+if $?.exitstatus.zero? && ret.match(/Status: 404/)
+  puts "VLAN vlan#{vlan_id} missing: OK"
+else
+  $stderr.puts "RESULT: #{ret}"
+  $stderr.puts "VLAN vlan#{vlan_id} missing: FAILED"
+  exit 1
+end
+
+
+#
+# create a new bridge
+#
+
+# get id for the new bridge (max + 1)
+br_id = interfaces.map{|i| i.match /^br([0-9]+)/; $1}.delete_if{|i| i.nil?}.max
+br_id = br_id.nil? ? 0 : br_id.to_i + 1
+
+puts "Creating new bridge br#{br_id}..."
+
+new_bridge = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>
+<interface>
+  <id>br#{br_id}</id>
+  <type>br</type>
+  <bootproto>none</bootproto>
+  <ipaddr/>
+  <bridge_ports type=\"array\"/>
+</interface>
+"
+
+url.path = "/network/interfaces.xml"
+ret = `curl -i -k -s -S -u root:#{Shellwords.escape password} -H "Content-Type: application/xml" -X POST -d #{Shellwords.escape new_bridge} #{url}`
+puts "RESULT: #{ret}" if verbose
+
+if $?.exitstatus.zero? && ret.match(/Status: 200/)
+  puts "Create bridge br#{br_id}: OK"
+else
+  $stderr.puts "RESULT: #{ret}"
+  $stderr.puts "Create bridge br#{br_id}: FAILED"
+  exit 1
+end
+
+#
+# verify the created bridge
+#
+url.path = "/network/interfaces/br#{br_id}.xml"
+ret = `curl -i -k -s -S -u root:#{Shellwords.escape password} #{url}`
+puts "RESULT: #{ret}" if verbose
+
+if $?.exitstatus.zero? && ret.match(/Status: 200/)
+  puts "Found created bridge: OK"
+else
+  $stderr.puts "RESULT: #{ret}"
+  $stderr.puts "Found created bridge: FAILED"
+  exit 1
+end
+
+#
+# remove the created bridge
+#
+url.path = "/network/interfaces/br#{br_id}.xml"
+ret = `curl -i -k -s -S -u root:#{Shellwords.escape password} -X DELETE #{url}`
+puts "RESULT: #{ret}" if verbose
+
+if $?.exitstatus.zero? && ret.match(/Status: 200/)
+  puts "Bridge br#{br_id} removed: OK"
+else
+  $stderr.puts "RESULT: #{ret}"
+  $stderr.puts "Bridge br#{br_id} removed: FAILED"
+  exit 1
+end
+
+#
+# verify the removed bridge
+#
+url.path = "/network/interfaces/br#{br_id}.xml"
+ret = `curl -i -k -s -S -u root:#{Shellwords.escape password} #{url}`
+puts "RESULT: #{ret}" if verbose
+
+if $?.exitstatus.zero? && ret.match(/Status: 404/)
+  puts "Bridge br#{br_id} missing: OK"
+else
+  $stderr.puts "RESULT: #{ret}"
+  $stderr.puts "Bridge br#{br_id} missing: FAILED"
+  exit 1
+end
+
+
+#
+# create a new bond device
+#
+
+# get id for the new bond (max + 1)
+bond_id = interfaces.map{|i| i.match /^bond([0-9]+)/; $1}.delete_if{|i| i.nil?}.max
+bond_id = bond_id.nil? ? 0 : bond_id.to_i + 1
+
+puts "Creating new bond device bond#{bond_id}..."
+
+new_bond = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>
+<interface>
+  <id>bond#{bond_id}</id>
+  <type>bond</type>
+  <bootproto>none</bootproto>
+  <ipaddr/>
+  <bond_slaves type=\"array\"/>
+</interface>
+"
+
+url.path = "/network/interfaces.xml"
+ret = `curl -i -k -s -S -u root:#{Shellwords.escape password} -H "Content-Type: application/xml" -X POST -d #{Shellwords.escape new_bond} #{url}`
+puts "RESULT: #{ret}" if verbose
+
+if $?.exitstatus.zero? && ret.match(/Status: 200/)
+  puts "Create bond device bond#{bond_id}: OK"
+else
+  $stderr.puts "RESULT: #{ret}"
+  $stderr.puts "Create bond device bond#{bond_id}: FAILED"
+  exit 1
+end
+
+#
+# verify the created bond
+#
+url.path = "/network/interfaces/bond#{bond_id}.xml"
+ret = `curl -i -k -s -S -u root:#{Shellwords.escape password} #{url}`
+puts "RESULT: #{ret}" if verbose
+
+if $?.exitstatus.zero? && ret.match(/Status: 200/)
+  puts "Found created bond device: OK"
+else
+  $stderr.puts "RESULT: #{ret}"
+  $stderr.puts "Found created bond device: FAILED"
+  exit 1
+end
+
+#
+# remove the created bond
+#
+url.path = "/network/interfaces/bond#{bond_id}.xml"
+ret = `curl -i -k -s -S -u root:#{Shellwords.escape password} -X DELETE #{url}`
+puts "RESULT: #{ret}" if verbose
+
+if $?.exitstatus.zero? && ret.match(/Status: 200/)
+  puts "Bond device bond#{bond_id} removed: OK"
+else
+  $stderr.puts "RESULT: #{ret}"
+  $stderr.puts "Bond device bond#{bond_id} removed: FAILED"
+  exit 1
+end
+
+#
+# verify the removed bond
+#
+url.path = "/network/interfaces/bond#{bond_id}.xml"
+ret = `curl -i -k -s -S -u root:#{Shellwords.escape password} #{url}`
+puts "RESULT: #{ret}" if verbose
+
+if $?.exitstatus.zero? && ret.match(/Status: 404/)
+  puts "Bond device bond#{bond_id} missing: OK"
+else
+  $stderr.puts "RESULT: #{ret}"
+  $stderr.puts "Bond device bond#{bond_id} missing: FAILED"
+  exit 1
+end
+
