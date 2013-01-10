@@ -19,6 +19,7 @@
 # you may find current contact information at www.novell.com
 #++
 require 'base'
+require 'shellwords'
 
 # = Ldap model
 # Proviceds access to LDAP client configuration
@@ -73,7 +74,7 @@ class Ldap < BaseModel::Base
   # ask given LDAP server for available base DN
   def self.fetch(server)
     ret = { "dn" => ""}
-    out = `/usr/bin/ldapsearch -x -h #{server} -b '' -s base namingContexts | grep "namingContexts:" | cut -d" " -f 2` # RORSCAN_ITL
+    out = `/usr/bin/ldapsearch -x -h #{server.shellescape} -b '' -s base namingContexts | grep "namingContexts:" | cut -d" " -f 2` # RORSCAN_ITL
     ret["dn"] = out.split("\n")[0] if out
     return ret
   end
