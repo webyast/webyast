@@ -1,4 +1,11 @@
 -------------------------------------------------------------------
+Thu Jan 10 13:30:49 UTC 2013 - lslezak@suse.cz
+
+- fixed loading settings at update
+- validate email address to avoid shell escaping
+- 0.3.12
+
+-------------------------------------------------------------------
 Fri Jan  4 12:24:15 UTC 2013 - vmoravec@suse.cz
 
 - fixed configuration saving (bnc#791787)
