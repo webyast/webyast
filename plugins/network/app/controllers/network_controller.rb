@@ -32,8 +32,8 @@ class NetworkController < ApplicationController
 
     respond_to do |format|
       format.html # index.html.erb
-      format.xml { render @ifcs }
-      format.json { render @ifcs }
+      format.xml { render :xml => @ifcs.values.to_xml( :root => "interfaces", :dasherize => false) }
+      format.json { render :jso => @ifcs }
     end
   end
 
@@ -56,6 +56,7 @@ class NetworkController < ApplicationController
 
     respond_to do |format|
       format.html
+      format.xml { render :xml => @ifc.to_xml(:dasherize => false) }
       format.json { render :json => @ifc }
     end
   end
@@ -79,6 +80,7 @@ class NetworkController < ApplicationController
 
     respond_to do |format|
       format.html # show.html.erb
+      format.xml { render :xml => @ifc.to_xml(:dasherize => false) }
       format.json { render :json => @ifc }
     end
 
