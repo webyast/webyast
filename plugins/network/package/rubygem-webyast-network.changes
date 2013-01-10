@@ -3,6 +3,7 @@ Thu Jan 10 09:49:10 UTC 2013 - lslezak@suse.cz
 
 - fixed REST API functionality (bnc#789341)
 - fixed crash when accessing /network.xml (bnc#788032)
+- 0.3.8
 
 -------------------------------------------------------------------
 Wed Dec 12 15:32:35 UTC 2012 - lslezak@suse.cz
