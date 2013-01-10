@@ -33,7 +33,7 @@ class NetworkController < ApplicationController
     respond_to do |format|
       format.html # index.html.erb
       format.xml { render :xml => @ifcs.values.to_xml( :root => "interfaces", :dasherize => false) }
-      format.json { render :jso => @ifcs }
+      format.json { render :json => @ifcs }
     end
   end
 
