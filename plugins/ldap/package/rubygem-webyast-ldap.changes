@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Thu Jan 10 13:35:23 UTC 2013 - lslezak@suse.cz
+
+- fixed possible shell injection vulnerability
+- 0.3.10
+
+-------------------------------------------------------------------
 Wed Dec 12 15:29:19 UTC 2012 - lslezak@suse.cz
 
 - restart webyast after package update
