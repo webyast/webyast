@@ -20,6 +20,8 @@ class Account < ActiveRecord::Base
   # timeout for valid auth token
   # use the same time as for session time out
   TOKEN_AUTH_TIMEOUT = Devise.timeout_in
+  # nothing can be changed by massloading
+  attr_accessible []
 
   devise :unix2_chkpwd_authenticatable, 
          :timeoutable, :token_authenticatable
