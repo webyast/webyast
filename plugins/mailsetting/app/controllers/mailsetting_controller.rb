@@ -57,7 +57,6 @@ public
   def update
     authorize! :write, Mailsetting
     mail_params = params[:mailsetting] || params[:mail] #keep mail for backwards compatibility with old REST API
-    @mail = Mailsetting.new mail_params
 
     if params.has_key? :send_mail
       if request.format.html?
@@ -74,13 +73,13 @@ public
       end
     end
 
+    @mail = Mailsetting.find
+    @mail.load mail_params
+
     unless @mail.valid?
       problem _(@mail.errors.full_messages.join(', '))
       return
     end
-
-    @mail = Mailsetting.find
-    @mail.load mail_params
 
     begin
       response = @mail.save
