@@ -127,7 +127,7 @@ public
                   "grouplist", "uid", "loginShell", "groupname" ] ]
     }
     user_map = YastService.Call("YaPI::USERS::UserGet", parameters)
-    raise "Got no data while loading user attributes" if user_map.empty?
+    raise "User '#{id}' not found" if user_map.empty?
 
     user.load_data(user_map)
     user.uid = id
