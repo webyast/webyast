@@ -28,7 +28,7 @@ class MailsettingControllerTest < ActionController::TestCase
 
   def setup
     devise_sign_in
-    Mailsetting.stubs(:find).returns Mailsetting.new({:smtp_server => ""})
+    Mailsetting.stubs(:find).returns Mailsetting.new({:smtp_server => "oldserver", :user => "foo", :password => "bar", :password_confirmation => "bar", :transport_layer_security => "no"})
   end
   
   test "check 'show' result" do
@@ -49,7 +49,7 @@ class MailsettingControllerTest < ActionController::TestCase
     ret_hash = Hash.from_xml(ret.body)
 
     assert_response :success
-    assert ret_hash
+    assert_equal ret_hash["mail"]["smtp_server"], "newserver"
   end
 
 # shame, YaPI currently always succeedes
