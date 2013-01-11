@@ -17,7 +17,7 @@
 
 
 Name:           rubygem-webyast-network
-Version:        0.3.8
+Version:        0.3.9
 Release:        0
 %define mod_name webyast-network
 %define mod_full_name %{mod_name}-%{version}

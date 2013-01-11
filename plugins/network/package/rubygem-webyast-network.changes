@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Fri Jan 11 14:38:47 UTC 2013 - lslezak@suse.cz
+
+- updated testsuite
+- 0.3.9
+
+-------------------------------------------------------------------
 Thu Jan 10 09:49:10 UTC 2013 - lslezak@suse.cz
 
 - fixed REST API functionality (bnc#789341)

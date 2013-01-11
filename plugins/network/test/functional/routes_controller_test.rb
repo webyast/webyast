@@ -46,14 +46,14 @@ class RoutesControllerTest < ActionController::TestCase
   def test_show_xml
     get :show, :format => 'xml', :id => 'default'
     h = Hash.from_xml @response.body
-    assert_instance_of String, h["routes"]["via"]
+    assert_instance_of String, h["route"]["via"]
   end
 
   def test_index_xml
     get :index, :format => 'xml'
     h = Hash.from_xml @response.body
-    assert_instance_of Hash, h["routes"]
-    assert_equal "default", h["routes"]["default"]["id"]
+    assert_instance_of Array, h["routes"]
+    assert_equal "default", h["routes"].first["id"]
   end
 
   def test_valid_update_as_sent_by_ui

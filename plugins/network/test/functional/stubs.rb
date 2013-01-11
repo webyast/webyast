@@ -66,7 +66,7 @@
     route = Route.new({"via" => "10.10.0.8","id" => "default"})
 
     Route.stubs(:find).with("default").returns(route)
-    Route.stubs(:find).with(:all).returns({"default" => route})
+    Route.stubs(:find).with(:all).returns([route])
     Route.any_instance.stubs(:save).returns(true)
 
    # do not execute any commands via Open3 during tests

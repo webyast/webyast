@@ -44,8 +44,8 @@ class RouteTest < ActiveSupport::TestCase
  
  def test_index
    routes = Route.find(:all)
-   assert_instance_of Route, routes
-   assert_equal 'default', routes.id
+   assert_instance_of Array, routes
+   assert_equal routes.size, 1
  end
 
  def test_validations
