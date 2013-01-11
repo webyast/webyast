@@ -410,7 +410,7 @@ rm -f Gemfile.lock
 export WEBYAST_POLICYKIT='true'
 %endif
 (umask 0077; RAILS_ENV=production rake db:migrate)
-chown -R %{webyast_user}: db
+chown %{webyast_user}: db/*.sqlite3
 chmod o-r db/production.sqlite3
 chown -R %{webyast_user}: /var/log/webyast
 chmod -R o-r /var/log/webyast
