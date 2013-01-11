@@ -44,8 +44,8 @@ Requires:       yast2-core >= 2.18.10
 Requires:       yast2-core >= 2.17.30.1
 Requires:       sysvinit > 2.86-195.3.1
 %endif
-Requires:       rubygem-passenger-nginx
-Requires:       nginx >= 1.0
+Requires:       rubygem-passenger-nginx >= 3.0.14
+Requires:       nginx >= 1.0.15
 Requires:       sqlite3, syslog-ng, check-create-certificate, yast2-dbus-server
 Requires:	rubygem-ruby-dbus
 
@@ -61,7 +61,7 @@ PreReq:         rubygem-rake
 PreReq:         PolicyKit, rubygem-polkit
 PreReq:         rubygem-rake < 0.9
 %endif
-PreReq:         rubygem-sqlite3
+PreReq:         rubygem-sqlite3 >= 1.3.6
 PreReq:         rubygem-rails-3_2 >= 3.2.3
 PreReq:         rubygem-fast_gettext, rubygem-gettext_i18n_rails
 License:	LGPL-2.1 and GPL-2.0 and Apache-2.0
@@ -92,7 +92,7 @@ BuildRequires:  ruby, pkg-config, rubygem-mocha
 BuildRequires:  rubygem-webyast-rake-tasks >= 0.3.5
 BuildRequires:  sqlite3, dbus-1
 BuildRequires:  rubygem-ruby-dbus
-BuildRequires:  rubygem-sqlite3
+BuildRequires:  rubygem-sqlite3 >= 1.3.6
 BuildRequires:  rubygem-rails-3_2
 %if 0%{?suse_version} == 0 || %suse_version > 1110
 BuildRequires:  polkit, rubygem-polkit1
