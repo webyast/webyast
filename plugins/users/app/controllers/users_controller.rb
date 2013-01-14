@@ -160,7 +160,7 @@ class UsersController < ApplicationController
     respond_to do |format|
       format.html
       format.xml  { render  :xml => @user.to_xml( :dasherize => false ) }
-      format.json { render :json => @user }
+      format.json { render :json => @user.to_json }
     end
   end
 
@@ -251,7 +251,7 @@ class UsersController < ApplicationController
     else
       respond_to do |format|
         format.xml  { render :xml  => @user.to_xml(:dasherize=>false) }
-        format.json { render :json => @user }
+        format.json { render :json => @user.to_json }
         format.html { flash[:notice] = _("User %s was successfully created.") % @user.uid
                       redirect_to :action => "index"
                     }
@@ -296,7 +296,7 @@ class UsersController < ApplicationController
     else
       respond_to do |format|
         format.xml  { render :xml  => @user.to_xml(:dasherize=>false) }
-        format.json { render :json => @user }
+        format.json { render :json => @user.to_json }
         format.html { flash[:notice] = _("User %s was successfully updated.") % @user.uid
                       redirect_to :action => "index"
                     }
@@ -324,7 +324,7 @@ class UsersController < ApplicationController
     end
     respond_to do |format|
       format.xml  { render :xml => @user.to_xml(:dasherize=>false) }
-      format.json { render :json => @user }
+      format.json { render :json => @user.to_json }
       format.html { flash[:notice] = _("User %s was successfully removed.") % @user.uid
                     redirect_to :action => "index"
                   }
