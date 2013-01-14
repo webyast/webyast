@@ -233,14 +233,15 @@ class UsersController < ApplicationController
   def create
     authorize! :useradd, User
     error = nil
+    user_params = params[:user] || {}
     begin
-      @user = User.create(params[:user])
+      @user = User.create user_params
       if @user.roles_string!=nil
         save_roles(@user.id,@user.roles_string)
       end
     rescue Exception => error
       logger.error(error.message)
-      @user = User.new params[:user]
+      @user = User.new user_params
     end
     if error
       respond_to do |format|
