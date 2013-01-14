@@ -139,8 +139,8 @@ class UsersController < ApplicationController
     end
   end
 
-  # GET /users/1
-  # GET /users/1.xml
+  # GET /users/:user_id
+  # GET /users/:user_id.xml
   def show
     authorize! :userget, User
     if params[:id].blank?
@@ -164,8 +164,7 @@ class UsersController < ApplicationController
     end
   end
 
-  # Get /users/new
-  # Get /users/new.xml
+  # GET /users/new
   def new
     authorize! :useradd, User
     @user = User.new()
@@ -195,7 +194,7 @@ class UsersController < ApplicationController
   end
 
 
-  # GET /users/1/edit
+  # GET /users/:user_id/edit
   def edit
     authorize! :usermodify, User
     @user = User.find(params[:id])
@@ -260,8 +259,8 @@ class UsersController < ApplicationController
     end
   end
 
-  # PUT /users/1
-  # PUT /users/1.xml
+  # PUT /users/:user_id
+  # PUT /users/:user_id.xml
   def update
     authorize! :usermodify, User
     error = nil
@@ -305,9 +304,9 @@ class UsersController < ApplicationController
     end
   end
 
-  # DELETE /users/1
-  # DELETE /users/1.xml
-  # DELETE /users/1.json
+  # DELETE /users/:user_id
+  # DELETE /users/:user_id.xml
+  # DELETE /users/:user_id.json
   def destroy
     authorize! :userdelete, User
     begin
