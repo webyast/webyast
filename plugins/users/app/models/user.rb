@@ -127,7 +127,7 @@ public
                   "grouplist", "uid", "loginShell", "groupname" ] ]
     }
     user_map = YastService.Call("YaPI::USERS::UserGet", parameters)
-    raise "User '#{id}' not found" if user_map.empty?
+    return nil if user_map.empty?
 
     user.load_data(user_map)
     user.uid = id
@@ -258,7 +258,7 @@ ATTR_ACCESSIBLE = [:cn, :uid, :uid_number, :gid_number, :grouplist, :groupname,
       xml.tag!(:home_directory, home_directory )
       xml.tag!(:login_shell, login_shell )
       xml.tag!(:uid, uid )
-      xml.tag!(:uid_number, uid_number, {:type => "integer"})
+      xml.tag!(:uid_number, uid_number)
       xml.tag!(:user_password, user_password )
       xml.tag!(:type, type )
       xml.grouplist({:type => "array"}) do

@@ -139,29 +139,26 @@ class UsersController < ApplicationController
     end
   end
 
-  # GET /users/:user_id
   # GET /users/:user_id.xml
   def show
     authorize! :userget, User
     if params[:id].blank?
-      render ErrorResult.error(404, 2, "empty parameter") and return
+      problem :error => "No user id given"
+      return
     end
-
-    begin
-      # try to find the user, and 404 if it does not exist
-      @user = User.find(params[:id])
-      if @user.nil?
-        render ErrorResult.error(404, 2, "user not found") and return
-      end
-    rescue Exception => e
-      render ErrorResult.error(500, 2, e.message) and return
+    @user = User.find(params[:id])
+    if @user.nil?
+      problem :not_found => "User '#{params[:id]}' not found"
+      return
     end
 
     respond_to do |format|
-      format.html
+      format.html { redirect_to :index    }
       format.xml  { render  :xml => @user }
       format.json { render :json => @user }
     end
+  rescue Exception => e
+    problem :error => e.message
   end
 
   # GET /users/new
@@ -229,32 +226,19 @@ class UsersController < ApplicationController
   # POST /users.json
   def create
     authorize! :useradd, User
-    error = nil
     user_params = params[:user] || {}
-    begin
-      @user = User.create user_params
-      if @user.roles_string!=nil
-        save_roles(@user.id,@user.roles_string)
-      end
-    rescue Exception => error
-      logger.error(error.message)
-      @user = User.new user_params
+    @user = User.create user_params
+    if @user.roles_string.present?
+      save_roles @user.id, @user.roles_string
     end
-    if error
-      respond_to do |format|
-        format.xml  { render ErrorResult.error(404, 2, error.message) }
-        format.json { render ErrorResult.error(404, 2, error.message) }
-        format.html { flash[:error] = error.message
-                      render :action => "new"
-                    }
-      end
-    else
-      respond_to do |format|
-        format.xml  { render :xml  => @user }
-        format.json { render :json => @user }
-        format.html { flash[:notice] = _("User %s was successfully created.") % @user.uid
-                      redirect_to :action => "index"
-                    }
+    @user = User.new user_params
+
+    respond_to do |format|
+      format.xml  { render :xml  => @user }
+      format.json { render :json => @user }
+      format.html do
+        flash[:notice] = _("User %s was successfully created.") % @user.uid
+        redirect_to :action => "index", :controller=>'users'
       end
     end
   end
@@ -263,45 +247,34 @@ class UsersController < ApplicationController
   # PUT /users/:user_id.xml
   def update
     authorize! :usermodify, User
-    error = nil
-    begin
-      begin
-        @user = User.find(params[:user][:id])
-      rescue Exception => error
-        logger.error(error.message)
+    @user = User.find(params[:user][:id])
+    if @user
+      roles = params[:user][:roles_string]
+      if roles && roles.present?
+        save_roles @user.id, roles
       end
-      unless error
-        if params["user"]["roles_string"]!=nil
-          save_roles(@user.id,params["user"]["roles_string"])
-        end
-        @user.load_attributes(params[:user])
-        @user.type = "local"
-        @user.grouplist = {}
-        params[:user][:grp_string].split(",").each do |groupname|
-         @user.grouplist[groupname.strip] = "1"
-        end unless params[:user][:grp_string].blank?
-        @user.save(params[:user][:id])
-      end
-    rescue Exception => error
-      logger.error(error.message)
-    end
-    if error
-      respond_to do |format|
-        format.xml  { render ErrorResult.error(404, 2, error.message) }
-        format.json { render ErrorResult.error(404, 2, error.message) }
-        format.html { flash[:error] = error.message
-                      redirect_to :action => "index"
-                    }
-      end
+      @user.load_attributes(params[:user])
+      @user.type = "local"
+      @user.grouplist = {}
+      params[:user][:grp_string].split(",").each do |groupname|
+        @user.grouplist[groupname.strip] = "1"
+      end unless params[:user][:grp_string].blank?
+      @user.save(params[:user][:id])
     else
-      respond_to do |format|
-        format.xml  { render :xml  => @user }
-        format.json { render :json => @user }
-        format.html { flash[:notice] = _("User %s was successfully updated.") % @user.uid
-                      redirect_to :action => "index"
-                    }
+      problem :not_found, "User '#{params[:user][:id]}' not found"
+    end
+
+    respond_to do |format|
+      format.xml  { render :xml  => @user }
+      format.json { render :json => @user }
+      format.html do
+        flash[:notice] = _("User %s was successfully updated.") % @user.uid
+        redirect_to :action => "index"
       end
     end
+  rescue => error
+    logger.error error.message
+    problem :error=>error.message
   end
 
   # DELETE /users/:user_id
@@ -309,25 +282,41 @@ class UsersController < ApplicationController
   # DELETE /users/:user_id.json
   def destroy
     authorize! :userdelete, User
-    begin
-      @user = User.find(params[:id])
-      @user.destroy
-    rescue Exception => e
-      respond_to do |format|
-        format.xml  { render ErrorResult.error(404, 2, error.message) }
-        format.json { render ErrorResult.error(404, 2, e.message) }
-        format.html { flash[:error] = _("Error: Could not remove user %s.") % @user.uid
-                      redirect_to :action => "index"
-                    }
-       end
-       return
-    end
+    @user = User.find(params[:id])
+    @user.destroy
     respond_to do |format|
       format.xml  { render :xml  => @user }
       format.json { render :json => @user }
-      format.html { flash[:notice] = _("User %s was successfully removed.") % @user.uid
-                    redirect_to :action => "index"
-                  }
+      format.html do
+        flash[:notice] = _("User %s was successfully removed.") % @user.uid
+        redirect_to :action=>:index, :controller=>:users
       end
+    end
+  rescue => e
+    Rails.logger.error e.message
+    problem :error => _("Error: Could not remove user %s.") % @user.uid
+  end
+
+  private
+
+  def problem options={}
+    if options[:error]
+      code    = 500
+      status  = options[:desc] || "Error"
+      message = options[:message] || "An unexptected error occured"
+    elsif options[:not_found]
+      code    = 404
+      status  = "Not found"
+      message = options[:message] || "User not found"
+    end
+
+    respond_to do |format|
+      format.xml  { render ErrorResult.error(code, status, message) }
+      format.json { render ErrorResult.error(code, status, message) }
+      format.html do
+        flash[:error] = message
+        redirect_to :action => "index"
+      end
+    end
   end
 end
