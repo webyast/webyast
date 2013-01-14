@@ -477,7 +477,7 @@ fi
 %config(noreplace) /etc/logrotate.d/webyast.lr.conf
 
 %dir %{_datadir}/webyast
-%dir %attr(-,%{webyast_user},root) /var/lib/webyast
+%dir %attr(-,root,root) /var/lib/webyast
 %dir %{webyast_dir}/db
 %{webyast_dir}/locale
 %{webyast_dir}/app
