@@ -34,11 +34,9 @@ class UsersController < ApplicationController
   end
 
   def save_roles (userid,roles_string)
-    all_roles = Role.find :all
     roles = roles_string.split(",")
     my_roles=[]
-    all_roles.each do |role|
-      role.name=role.name
+    Role.find(:all).each do |role|
       if role.users.include?(userid)
        if roles.include?(role.name)
         # already written - do nothing
@@ -54,7 +52,6 @@ class UsersController < ApplicationController
     roles.each do |role|
       # this should be added
       r = Role.find(role)
-      r.name=r.name
       r.users << userid
       r.save
     end
