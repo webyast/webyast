@@ -34,26 +34,15 @@ class UsersController < ApplicationController
   end
 
   def save_roles (userid,roles_string)
-    roles = roles_string.split(",")
-    my_roles=[]
+    user_roles = roles_string.split(",")
     Role.find(:all).each do |role|
-      if role.users.include?(userid)
-       if roles.include?(role.name)
-        # already written - do nothing
-        roles.delete(role.name)
-       else
-        # remove item
+      if role.users.include?(userid) && !user_roles.include?(role.name)
         role.users.delete(userid)
         role.save
-        roles.delete(role.name)
-       end
+      elsif !role.users.include?(userid) && user_roles.include?(role.name)
+        role.users << userid
+        role.save
       end
-    end
-    roles.each do |role|
-      # this should be added
-      r = Role.find(role)
-      r.users << userid
-      r.save
     end
   end
 
@@ -148,7 +137,6 @@ class UsersController < ApplicationController
       problem :not_found, "User '#{params[:id]}' not found"
       return
     end
-
     respond_to do |format|
       format.html { redirect_to :index    }
       format.xml  { render  :xml => @user }
@@ -234,8 +222,6 @@ class UsersController < ApplicationController
     if roles.present?
       save_roles @user.id, roles
     end
-    @user = User.new user_params
-
     respond_to do |format|
       format.xml  { render :xml  => @user }
       format.json { render :json => @user }
@@ -253,24 +239,23 @@ class UsersController < ApplicationController
   # PUT /users/:user_id.xml
   def update
     authorize! :usermodify, User
-    @user = User.find(params[:user][:id])
+    user_params = params[:user] || {}
+    @user = User.find(user_params[:id])
     if @user
-      roles = params[:user][:roles_string] || ''
-      if roles.present?
-        save_roles @user.id, roles
-      end
-      @user.load_attributes(params[:user])
+      roles = user_params[:roles_string] || ''
+      save_roles @user.id, roles
+      @user.load_attributes(user_params)
       @user.type = "local"
       @user.grouplist = {}
-      params[:user][:grp_string].split(",").each do |groupname|
+      user_params[:grp_string].split(",").each do |groupname|
         @user.grouplist[groupname.strip] = "1"
-      end unless params[:user][:grp_string].blank?
-      @user.save(params[:user][:id])
+      end unless user_params[:grp_string].blank?
+      @user.groupname = user_params[:groupname]
+      @user.save(user_params[:id])
     else
-      problem :not_found, "User '#{params[:user][:id]}' not found"
+      problem :not_found, "User '#{user_params[:id]}' not found"
       return
     end
-
     respond_to do |format|
       format.xml  { render :xml  => @user }
       format.json { render :json => @user }
