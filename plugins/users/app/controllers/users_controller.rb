@@ -240,6 +240,7 @@ class UsersController < ApplicationController
   def update
     authorize! :usermodify, User
     user_params = params[:user] || {}
+    user_params.update :id => params[:id]
     @user = User.find(user_params[:id])
     if @user
       roles = user_params[:roles_string] || ''
