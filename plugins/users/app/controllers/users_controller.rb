@@ -154,7 +154,8 @@ class UsersController < ApplicationController
       format.xml  { render  :xml => @user }
       format.json { render :json => @user }
     end
-  rescue Exception => e
+  rescue => e
+    Rails.logger.error e.message
     problem :error, e.message
   end
 
@@ -224,9 +225,14 @@ class UsersController < ApplicationController
   def create
     authorize! :useradd, User
     user_params = params[:user] || {}
+    roles = params[:user][:roles_string] || ''
+    if User.find(user_params[:id] || '')
+      problem :conflict, "User '#{user_params[:id]}' already exists"
+      return
+    end
     @user = User.create user_params
-    if @user.roles_string.present?
-      save_roles @user.id, @user.roles_string
+    if roles.present?
+      save_roles @user.id, roles
     end
     @user = User.new user_params
 
@@ -238,6 +244,9 @@ class UsersController < ApplicationController
         redirect_to :action => "index", :controller=>'users'
       end
     end
+  rescue => e
+    Rails.logger.error e.message
+    problem :error, e.message
   end
 
   # PUT /users/:user_id
@@ -246,8 +255,8 @@ class UsersController < ApplicationController
     authorize! :usermodify, User
     @user = User.find(params[:user][:id])
     if @user
-      roles = params[:user][:roles_string]
-      if roles && roles.present?
+      roles = params[:user][:roles_string] || ''
+      if roles.present?
         save_roles @user.id, roles
       end
       @user.load_attributes(params[:user])
@@ -304,16 +313,20 @@ class UsersController < ApplicationController
   def problem type, message
     case type
     when :error
-      code   = 500
-      status = "Application error"
+      status = 500
+      type   = "Application error"
     when :not_found
-      code   = 404
-      status = "Not found"
+      status = 404
+      type   = "Not found"
+    when :conflict
+      status = 409
+      type   = "Conflict"
     end
 
+    response = {:type=>type, :messsage=>message, :id=>'User'}
     respond_to do |format|
-      format.xml  { render ErrorResult.error(code, status, message) }
-      format.json { render ErrorResult.error(code, status, message) }
+      format.xml  { render :xml  => response.to_xml(:root=>:error), :status => status }
+      format.json { render :json => {:error=>response}, :status => status }
       format.html do
         flash[:error] = message
         redirect_to :action => "index"
