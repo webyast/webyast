@@ -10,7 +10,7 @@
 
 
 Name:           webyast-base
-Version:        0.3.35
+Version:        0.3.36
 Release:        0
 Provides:       yast2-webservice = %{version}
 Obsoletes:      yast2-webservice < %{version}

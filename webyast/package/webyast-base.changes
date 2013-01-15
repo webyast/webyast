@@ -1,4 +1,11 @@
 -------------------------------------------------------------------
+Tue Jan 15 14:36:30 UTC 2013 - lslezak@suse.cz
+
+- updated dependencies to force package update
+- fixed file permissions differences reported by "rpm -V"
+- 0.3.36
+
+-------------------------------------------------------------------
 Thu Jan 10 13:27:28 UTC 2013 - lslezak@suse.cz
 
 - scurity fixes: disable mass loading in Account, activate
