@@ -143,12 +143,12 @@ class UsersController < ApplicationController
   def show
     authorize! :userget, User
     if params[:id].blank?
-      problem :error => "No user id given"
+      problem :error, "No user id given"
       return
     end
     @user = User.find(params[:id])
     if @user.nil?
-      problem :not_found => "User '#{params[:id]}' not found"
+      problem :not_found, "User '#{params[:id]}' not found"
       return
     end
 
@@ -158,7 +158,7 @@ class UsersController < ApplicationController
       format.json { render :json => @user }
     end
   rescue Exception => e
-    problem :error => e.message
+    problem :error, e.message
   end
 
   # GET /users/new
@@ -262,6 +262,7 @@ class UsersController < ApplicationController
       @user.save(params[:user][:id])
     else
       problem :not_found, "User '#{params[:user][:id]}' not found"
+      return
     end
 
     respond_to do |format|
@@ -273,8 +274,8 @@ class UsersController < ApplicationController
       end
     end
   rescue => error
-    logger.error error.message
-    problem :error=>error.message
+    Rails.logger.error error.message
+    problem :error, error.message
   end
 
   # DELETE /users/:user_id
@@ -283,31 +284,34 @@ class UsersController < ApplicationController
   def destroy
     authorize! :userdelete, User
     @user = User.find(params[:id])
-    @user.destroy
-    respond_to do |format|
-      format.xml  { render :xml  => @user }
-      format.json { render :json => @user }
-      format.html do
-        flash[:notice] = _("User %s was successfully removed.") % @user.uid
-        redirect_to :action=>:index, :controller=>:users
+    if @user
+      @user.destroy
+      respond_to do |format|
+        format.xml  { render :xml  => @user }
+        format.json { render :json => @user }
+        format.html do
+          flash[:notice] = _("User %s was successfully removed.") % @user.uid
+          redirect_to :action=>:index, :controller=>:users
+        end
       end
+    else
+      problem :not_found, _("User '#{params[:id]}' not found")
     end
   rescue => e
     Rails.logger.error e.message
-    problem :error => _("Error: Could not remove user %s.") % @user.uid
+    problem :error, _("Error: Could not remove user '#{params[:id]}")
   end
 
   private
 
-  def problem options={}
-    if options[:error]
-      code    = 500
-      status  = options[:desc] || "Error"
-      message = options[:message] || "An unexptected error occured"
-    elsif options[:not_found]
-      code    = 404
-      status  = "Not found"
-      message = options[:message] || "User not found"
+  def problem type, message
+    case type
+    when :error
+      code   = 500
+      status = "Application error"
+    when :not_found
+      code   = 404
+      status = "Not found"
     end
 
     respond_to do |format|
