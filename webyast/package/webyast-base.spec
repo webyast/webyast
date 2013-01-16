@@ -46,7 +46,7 @@ Requires:       sysvinit > 2.86-195.3.1
 %endif
 Requires:       rubygem-passenger-nginx >= 3.0.14
 Requires:       nginx >= 1.0.15
-Requires:       sqlite3, syslog-ng, check-create-certificate, yast2-dbus-server
+Requires:       syslog-ng, check-create-certificate, yast2-dbus-server
 Requires:	rubygem-ruby-dbus
 
 Requires:       rubygem-webyast-rake-tasks >= 0.3.5, webyast-base-branding
@@ -90,7 +90,7 @@ BuildRequires:  ruby, pkg-config, rubygem-mocha
 # if we run the tests during build, we need most of Requires here too,
 # except for deployment specific stuff
 BuildRequires:  rubygem-webyast-rake-tasks >= 0.3.5
-BuildRequires:  sqlite3, dbus-1
+BuildRequires:  dbus-1
 BuildRequires:  rubygem-ruby-dbus
 BuildRequires:  rubygem-sqlite3 >= 1.3.6
 BuildRequires:  rubygem-rails-3_2
