@@ -1,4 +1,13 @@
 -------------------------------------------------------------------
+Wed Jan 16 13:11:04 UTC 2013 - lslezak@suse.cz
+
+- move Webyast SSL certificates to the new location when updating
+  from Webyast 1.2
+- removed sqlite3 dependency (included in rubygem-sqlite3)
+- added needed sqlite3 gem version to Gemfile
+- 0.3.37
+
+-------------------------------------------------------------------
 Tue Jan 15 14:36:30 UTC 2013 - lslezak@suse.cz
 
 - updated dependencies to force package update
