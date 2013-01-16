@@ -213,7 +213,7 @@ class UsersController < ApplicationController
   def create
     authorize! :useradd, User
     user_params = params[:user] || {}
-    roles = params[:user][:roles_string] || ''
+    roles = user_params[:roles_string] || ''
     if User.find(user_params[:id] || '')
       problem :conflict, "User '#{user_params[:id]}' already exists"
       return
