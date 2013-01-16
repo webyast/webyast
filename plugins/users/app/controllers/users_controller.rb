@@ -38,7 +38,6 @@ class UsersController < ApplicationController
     roles = roles_string.split(",")
     my_roles=[]
     all_roles.each do |role|
-      role.id=role.name
       if role.users.include?(userid)
        if roles.include?(role.name)
         # already written - do nothing
