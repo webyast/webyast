@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Wed Jan 16 14:28:48 UTC 2013 - lslezak@suse.cz
+
+- fix updating user roles (bnc#789731)
+- 0.3.9
+
+-------------------------------------------------------------------
 Wed Dec 12 15:50:22 UTC 2012 - lslezak@suse.cz
 
 - restart webyast after package update
