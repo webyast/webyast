@@ -364,6 +364,12 @@ if /bin/rpm -q webyast-base-ui > /dev/null ; then
       echo "/usr/sbin/rcwebyast restart" >> %name-%version-%release-1
     fi
   fi
+
+  # move the current SSL certificates to the new location
+  if [ -f /etc/lighttpd/certs/webyast.pem ]; then
+    mkdir -p /etc/nginx/certs
+    mv /etc/lighttpd/certs/webyast* /etc/nginx/certs
+  fi
 fi
 #We are switching from lighttpd to nginx. So lighttpd has to be killed
 #at first
