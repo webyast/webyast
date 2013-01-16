@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Wed Jan 16 19:30:24 UTC 2013 - lslezak@suse.cz
+
+- webyast user needs write permissions to db/
+- 0.3.38
+
+-------------------------------------------------------------------
 Wed Jan 16 13:11:04 UTC 2013 - lslezak@suse.cz
 
 - move Webyast SSL certificates to the new location when updating

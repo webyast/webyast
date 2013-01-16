@@ -10,7 +10,7 @@
 
 
 Name:           webyast-base
-Version:        0.3.37
+Version:        0.3.38
 Release:        0
 Provides:       yast2-webservice = %{version}
 Obsoletes:      yast2-webservice < %{version}
@@ -484,7 +484,7 @@ fi
 
 %dir %{_datadir}/webyast
 %dir %attr(-,root,root) /var/lib/webyast
-%dir %{webyast_dir}/db
+%attr(-,%{webyast_user},%{webyast_user}) %dir %{webyast_dir}/db
 %{webyast_dir}/locale
 %{webyast_dir}/app
 %{webyast_dir}/db/migrate
