@@ -33,26 +33,35 @@ Contents
   Actually currently it operates on the interface
   <b>configurations</b> (/etc/sysconfig/network/ifcfg-*)
 
-GET /network/interfaces.xml
+GET /network/interfaces
 
   Get the list of interfaces.
+
+  CURL Example: curl -u <user>:<password> -H "Accept: application/xml" http://localhost:4984/network/interfaces
 
 XmlResult: interfaces_get
 
 GET /network/interfaces/<id>
+
 <id>: interface ID, as in /etc/sysconfig/network/ifcfg-ID
 
   Get the details of an interface.
 
+  CURL Example: curl -u <user>:<password> -H "Accept: application/xml" http://localhost:4984/network/interfaces/eth0
+
 XmlResult: interfaces_eth0_get
 
 PUT /network/interfaces/<id>
+
 <id>: interface ID, as in /etc/sysconfig/network/ifcfg-ID
 
-  Update an interface config.
+  Update an interface configuration.
 
-XmlBody: interfaces_eth0_get
-XmlResult: interfaces_eth0_get
+  CURL Example: curl -u <user>:<password> -X PUT -H "Accept: application/xml" \
+                --data @interfaces_eth0_request http://localhost:4984/network/interfaces/eth0
+
+XmlBody:   interfaces_eth0_put_request
+XmlResult: interfaces_eth0_put_response
 
 == Hostname
 
