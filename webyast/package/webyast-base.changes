@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Thu Jan 17 10:46:37 UTC 2013 - lslezak@suse.cz
+
+- conflict with all old Webyast 1.2 plugins (to force upgrade)
+- 0.3.39
+
+-------------------------------------------------------------------
 Wed Jan 16 19:30:24 UTC 2013 - lslezak@suse.cz
 
 - webyast user needs write permissions to db/

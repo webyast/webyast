@@ -10,7 +10,7 @@
 
 
 Name:           webyast-base
-Version:        0.3.38
+Version:        0.3.39
 Release:        0
 Provides:       yast2-webservice = %{version}
 Obsoletes:      yast2-webservice < %{version}
@@ -64,6 +64,46 @@ PreReq:         rubygem-rake < 0.9
 PreReq:         rubygem-sqlite3 >= 1.3.6
 PreReq:         rubygem-rails-3_2 >= 3.2.3
 PreReq:         rubygem-fast_gettext, rubygem-gettext_i18n_rails
+
+# conflict with all old Webyast-1.2 plugins (to force upgrade)
+Conflicts:	webyast-activedirectory-ui < 0.3.0
+Conflicts:	webyast-firewall-ui < 0.3.0
+Conflicts:	webyast-ldap-ui < 0.3.0
+Conflicts:	webyast-licenses-ui < 0.3.0
+Conflicts:	webyast-mail-ui < 0.3.0
+Conflicts:	webyast-network-ui < 0.3.0
+Conflicts:	webyast-reboot-ui < 0.3.0
+Conflicts:	webyast-registration-ui < 0.3.0
+Conflicts:	webyast-roles-ui < 0.3.0
+Conflicts:	webyast-root-user-ui < 0.3.0
+Conflicts:	webyast-services-ui < 0.3.0
+Conflicts:	webyast-slms-ui < 0.3.0
+Conflicts:	webyast-software-ui <= 0.3.13
+Conflicts:	webyast-status-ui < 0.3.0
+Conflicts:	webyast-time-ui < 0.3.0
+Conflicts:	webyast-users-ui < 0.3.0
+
+Conflicts:	webyast-activedirectory-ws < 0.3.0
+Conflicts:	webyast-firewall-ws < 0.3.0
+Conflicts:	webyast-firstboot-ws < 0.3.0
+Conflicts:	webyast-kerberos-ws < 0.3.0
+Conflicts:	webyast-ldap-ws < 0.3.0
+Conflicts:	webyast-licenses-ws < 0.3.0
+Conflicts:	webyast-mail-ws < 0.3.0
+Conflicts:	webyast-network-ws < 0.3.0
+Conflicts:	webyast-ntp-ws < 0.3.0
+Conflicts:	webyast-reboot-ws < 0.3.0
+Conflicts:	webyast-registration-ws < 0.3.0
+Conflicts:	webyast-roles-ws < 0.3.0
+Conflicts:	webyast-root-user-ws < 0.3.0
+Conflicts:	webyast-services-ws < 0.3.0
+Conflicts:	webyast-slms-ws < 0.3.0
+Conflicts:	webyast-software-ws <= 0.3.13
+Conflicts:	webyast-status-ws < 0.3.0
+Conflicts:	webyast-time-ws < 0.3.0
+Conflicts:	webyast-users-ws < 0.3.0
+
+
 License:	LGPL-2.1 and GPL-2.0 and Apache-2.0
 Group:          Productivity/Networking/Web/Utilities
 URL:            http://en.opensuse.org/Portal:WebYaST
