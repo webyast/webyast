@@ -78,7 +78,7 @@ Conflicts:	webyast-roles-ui < 0.3.0
 Conflicts:	webyast-root-user-ui < 0.3.0
 Conflicts:	webyast-services-ui < 0.3.0
 Conflicts:	webyast-slms-ui < 0.3.0
-Conflicts:	webyast-software-ui <= 0.3.13
+Conflicts:	webyast-software-ui <= 0.3.20
 Conflicts:	webyast-status-ui < 0.3.0
 Conflicts:	webyast-time-ui < 0.3.0
 Conflicts:	webyast-users-ui < 0.3.0
@@ -98,7 +98,7 @@ Conflicts:	webyast-roles-ws < 0.3.0
 Conflicts:	webyast-root-user-ws < 0.3.0
 Conflicts:	webyast-services-ws < 0.3.0
 Conflicts:	webyast-slms-ws < 0.3.0
-Conflicts:	webyast-software-ws <= 0.3.13
+Conflicts:	webyast-software-ws <= 0.3.20
 Conflicts:	webyast-status-ws < 0.3.0
 Conflicts:	webyast-time-ws < 0.3.0
 Conflicts:	webyast-users-ws < 0.3.0
