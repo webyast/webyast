@@ -29,7 +29,7 @@ Tue Jan 15 14:36:30 UTC 2013 - lslezak@suse.cz
 -------------------------------------------------------------------
 Thu Jan 10 13:27:28 UTC 2013 - lslezak@suse.cz
 
-- scurity fixes: disable mass loading in Account, activate
+- security fixes: disable mass loading in Account, activate
   forgery protection in ApplicationController
 - 0.3.35
 
