@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Thu Jan 17 12:33:37 UTC 2013 - lslezak@suse.cz
+
+- fixed conflict dependency for webyast-software-* packages
+- 0.3.40
+
+-------------------------------------------------------------------
 Thu Jan 17 10:46:37 UTC 2013 - lslezak@suse.cz
 
 - conflict with all old Webyast 1.2 plugins (to force upgrade)
