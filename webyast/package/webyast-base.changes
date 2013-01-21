@@ -1,4 +1,11 @@
 -------------------------------------------------------------------
+Mon Jan 21 12:15:35 UTC 2013 - lslezak@suse.cz
+
+- branding-default - make sure /var/lib/webyast is present before
+  touching restart file there (needed in update from 1.2)
+- 0.3.41
+
+-------------------------------------------------------------------
 Thu Jan 17 12:33:37 UTC 2013 - lslezak@suse.cz
 
 - fixed conflict dependency for webyast-software-* packages

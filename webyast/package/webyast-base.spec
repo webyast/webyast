@@ -10,7 +10,7 @@
 
 
 Name:           webyast-base
-Version:        0.3.40
+Version:        0.3.41
 Release:        0
 Provides:       yast2-webservice = %{version}
 Obsoletes:      yast2-webservice < %{version}
@@ -498,6 +498,8 @@ fi
 %restart_on_update %{webyast_service}
 
 %post branding-default
+# make sure the directory exists
+mkdir -p /var/lib/webyast
 %restart_webyast
 
 %postun branding-default
