@@ -10,7 +10,7 @@
 
 
 Name:           webyast-base
-Version:        0.3.41
+Version:        0.3.42
 Release:        0
 Provides:       yast2-webservice = %{version}
 Obsoletes:      yast2-webservice < %{version}
@@ -479,6 +479,11 @@ if [ -f /etc/sysconfig/SuSEfirewall2 ]; then
     echo "Restarting firewall..."
     /sbin/rcSuSEfirewall2 try-restart
   fi
+fi
+
+# move the base system status to avoid running it after update
+if [ -f /var/lib/yastws/basesystem/finish ]; then
+    mv /var/lib/yastws/basesystem/finish /var/lib/webyast/basesystem/
 fi
 
 %restart_webyast
