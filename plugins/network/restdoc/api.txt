@@ -96,8 +96,8 @@ PUT /network/hostname
 
   Set the host name and domain.
 
-XmlBody: hostname_get
-XmlResult: hostname_get
+XmlBody: hostname_put_request
+XmlResult: hostname_put_response
 
 == DNS
 
@@ -111,8 +111,8 @@ PUT /network/dns
 
   Set the nameservers and DNS search list.
 
-XmlBody: dns_get
-XmlResult: dns_get
+XmlBody: dns_put_request
+XmlResult: dns_put_response
 
 == Routes
 

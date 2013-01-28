@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<hostname>
+  <name>new_name</name>
+  <dhcp_hostname>1</dhcp_hostname>
+  <domain>echo.cz</domain>
+</hostname>
