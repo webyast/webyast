@@ -135,6 +135,5 @@ PUT /network/routes/<id>
 
   Update a route.
 
-
 XmlBody: routes_put_request_default
 XmlResult: routes_put_response_default
