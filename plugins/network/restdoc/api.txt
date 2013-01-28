@@ -37,7 +37,8 @@ GET /network/interfaces
 
   Get the list of interfaces.
 
-  CURL Example: curl -u <user>:<password> -H "Accept: application/xml" http://localhost:4984/network/interfaces
+  CURL example:
+  curl -u <user>:<password> -H "Accept: application/xml" http://localhost:4984/network/interfaces
 
 XmlResult: interfaces_get
 
@@ -47,7 +48,8 @@ GET /network/interfaces/<id>
 
   Get the details of an interface.
 
-  CURL Example: curl -u <user>:<password> -H "Accept: application/xml" http://localhost:4984/network/interfaces/eth0
+  CURL example:
+  curl -u <user>:<password> -H "Accept: application/xml" http://localhost:4984/network/interfaces/eth0
 
 XmlResult: interfaces_eth0_get
 
@@ -57,11 +59,30 @@ PUT /network/interfaces/<id>
 
   Update an interface configuration.
 
-  CURL Example: curl -u <user>:<password> -X PUT -H "Accept: application/xml" \
-                --data @interfaces_eth0_request http://localhost:4984/network/interfaces/eth0
+  CURL example:
+  curl -u <user>:<password> -X PUT -H "Accept: application/xml" -H "Content-Type: application/xml" --data @interfaces_eth0_put_request http://localhost:4984/network/interfaces/eth0
 
 XmlBody:   interfaces_eth0_put_request
 XmlResult: interfaces_eth0_put_response
+
+POST /network/interfaces
+
+  Create a new custom network interface, e.g vlan
+
+  CURL example:
+  curl -u <user>:<password> -X POST -H "Accept: application/xml" -H "Content-Type: application/xml" --data @interfaces_vlan0_post.xml
+
+XmlBody:   interfaces_vlan0_post_request
+XmlResult: interfaces_vlan0_post_response
+
+DELETE /network/interfaces/vlan0
+
+  Remove existing network interface
+
+  CURL example:
+  curl -u <user>:<password> -X DELETE -H "Accept: application/xml"
+
+XmlResult: interfaces_vlan0_delete_response
 
 == Hostname
 

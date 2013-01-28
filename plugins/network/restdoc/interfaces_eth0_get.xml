@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <interface>
   <id>eth0</id>
+  <vendor>Ethernet Card 0</vendor>
   <bootproto>dhcp</bootproto>
   <ipaddr>10.100.50.10</ipaddr>
 </interface>
