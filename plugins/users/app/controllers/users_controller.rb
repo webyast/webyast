@@ -129,12 +129,12 @@ class UsersController < ApplicationController
   def show
     authorize! :userget, User
     if params[:id].blank?
-      problem :error, "No user id given"
+      problem :client_error, 400, "No user id given"
       return
     end
     @user = User.find(params[:id])
     if @user.nil?
-      problem :not_found, "User '#{params[:id]}' not found"
+      problem :client_error, 404, "User '#{params[:id]}' not found"
       return
     end
     respond_to do |format|
@@ -144,7 +144,7 @@ class UsersController < ApplicationController
     end
   rescue => e
     Rails.logger.error e.message
-    problem :error, e.message
+    problem :server_error, 500, e.message
   end
 
   # GET /users/new
@@ -215,7 +215,7 @@ class UsersController < ApplicationController
     user_params = params[:user] || {}
     roles = user_params[:roles_string] || ''
     if User.find(user_params[:id] || '')
-      problem :conflict, "User '#{user_params[:id]}' already exists"
+      problem :client_error, 409, "User '#{user_params[:id]}' already exists"
       return
     end
     @user = User.create user_params
@@ -232,7 +232,7 @@ class UsersController < ApplicationController
     end
   rescue => e
     Rails.logger.error e.message
-    problem :error, e.message
+    problem :server_error, 500, e.message
   end
 
   # PUT /users/:user_id
@@ -254,7 +254,7 @@ class UsersController < ApplicationController
       @user.groupname = user_params[:groupname]
       @user.save(user_params[:id])
     else
-      problem :not_found, "User '#{user_params[:id]}' not found"
+      problem :client_error, 404, "User '#{user_params[:id]}' not found"
       return
     end
     respond_to do |format|
@@ -267,7 +267,7 @@ class UsersController < ApplicationController
     end
   rescue => error
     Rails.logger.error error.message
-    problem :error, error.message
+    problem :server_error, 500, error.message
   end
 
   # DELETE /users/:user_id
@@ -287,32 +287,20 @@ class UsersController < ApplicationController
         end
       end
     else
-      problem :not_found, _("User '#{params[:id]}' not found")
+      problem :client_error, 404, _("User '#{params[:id]}' not found")
     end
   rescue => e
     Rails.logger.error e.message
-    problem :error, _("Error: Could not remove user '#{params[:id]}")
+    problem :server_error, 500, _("Error: Could not remove user '#{params[:id]}")
   end
 
   private
 
-  def problem type, message
-    case type
-    when :error
-      status = 500
-      type   = "Application error"
-    when :not_found
-      status = 404
-      type   = "Not found"
-    when :conflict
-      status = 409
-      type   = "Conflict"
-    end
-
-    response = {:type=>type, :messsage=>message, :id=>'User'}
+  def problem type, code, message
+    response = {:type=>type.to_s.capitalize, :messsage=>message, :id=>'User'}
     respond_to do |format|
-      format.xml  { render :xml  => response.to_xml(:root=>:error), :status => status }
-      format.json { render :json => {:error=>response}, :status => status }
+      format.xml  { render :xml  => response.to_xml(:root=>:error), :status => code }
+      format.json { render :json => {:error=>response}, :status => code }
       format.html do
         flash[:error] = message
         redirect_to :action => "index"
