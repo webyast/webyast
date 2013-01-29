@@ -51,9 +51,6 @@ if password.empty?
   `stty echo`
 end
 
-ACCEPT_XML  = "Accept: application/xml"
-CONTENT_XML = "Content-Type: application/xml"
-
 puts "Starting network tests..."
 #
 # all network interfaces
@@ -165,7 +162,7 @@ new_vlan = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>
 "
 
 url.path = "/network/interfaces.xml"
-ret = `curl -i -k -s -S -u root:#{Shellwords.escape password} -H "#{CONTENT_XML} -X POST -d #{Shellwords.escape new_vlan} #{url}`
+ret = `curl -i -k -s -S -u root:#{Shellwords.escape password} -H "Content-Type: application/xml" -X POST -d #{Shellwords.escape new_vlan} #{url}`
 puts "RESULT: #{ret}" if verbose
 
 if $?.exitstatus.zero? && ret.match(/Status: 200/)
@@ -242,7 +239,7 @@ new_bridge = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>
 "
 
 url.path = "/network/interfaces.xml"
-ret = `curl -i -k -s -S -u root:#{Shellwords.escape password} -H "#{CONTENT_XML} -X POST -d #{Shellwords.escape new_bridge} #{url}`
+ret = `curl -i -k -s -S -u root:#{Shellwords.escape password} -H "Content-Type: application/xml" -X POST -d #{Shellwords.escape new_bridge} #{url}`
 puts "RESULT: #{ret}" if verbose
 
 if $?.exitstatus.zero? && ret.match(/Status: 200/)
@@ -320,7 +317,7 @@ new_bond = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>
 "
 
 url.path = "/network/interfaces.xml"
-ret = `curl -i -k -s -S -u root:#{Shellwords.escape password} -H "#{CONTENT_XML} -X POST -d #{Shellwords.escape new_bond} #{url}`
+ret = `curl -i -k -s -S -u root:#{Shellwords.escape password} -H "Content-Type: application/xml" -X POST -d #{Shellwords.escape new_bond} #{url}`
 puts "RESULT: #{ret}" if verbose
 
 if $?.exitstatus.zero? && ret.match(/Status: 200/)
