@@ -129,12 +129,12 @@ class UsersController < ApplicationController
   def show
     authorize! :userget, User
     if params[:id].blank?
-      problem :client_error, 400, "No user id given"
+      problem :client_error, 400, _("No user id given")
       return
     end
     @user = User.find(params[:id])
     if @user.nil?
-      problem :client_error, 404, "User '#{params[:id]}' not found"
+      problem :client_error, 404, _("User '#{params[:id]}' not found")
       return
     end
     respond_to do |format|
@@ -212,10 +212,14 @@ class UsersController < ApplicationController
   # POST /users.json
   def create
     authorize! :useradd, User
-    user_params = params[:user] || {}
+    user_params = params[:user]
+    unless user_params
+      problem :client_error, 400, _("New user details not specified")
+      return
+    end
     roles = user_params[:roles_string] || ''
-    if User.find(user_params[:id] || '')
-      problem :client_error, 409, "User '#{user_params[:id]}' already exists"
+    if User.find(user_params[:id])
+      problem :client_error, 409, _("User '#{user_params[:id]}' already exists")
       return
     end
     @user = User.create user_params
@@ -240,23 +244,22 @@ class UsersController < ApplicationController
   def update
     authorize! :usermodify, User
     user_params = params[:user] || {}
-    user_params.update(:id => params[:id]) unless user_params[:id]
+    user_params[:id] ||= params[:id]
     @user = User.find(user_params[:id])
-    if @user
-      roles = user_params[:roles_string] || ''
-      save_roles @user.id, roles
-      @user.load_attributes(user_params)
-      @user.type = "local"
-      @user.grouplist = {}
-      user_params[:grp_string].split(",").each do |groupname|
-        @user.grouplist[groupname.strip] = "1"
-      end unless user_params[:grp_string].blank?
-      @user.groupname = user_params[:groupname]
-      @user.save(user_params[:id])
-    else
-      problem :client_error, 404, "User '#{user_params[:id]}' not found"
+    if !@user
+      problem :client_error, 404, _("User '#{user_params[:id]}' not found")
       return
     end
+    roles = user_params[:roles_string] || ''
+    save_roles @user.id, roles
+    @user.load_attributes(user_params)
+    @user.type = "local"
+    @user.grouplist = {}
+    user_params[:grp_string].split(",").each do |groupname|
+      @user.grouplist[groupname.strip] = "1"
+    end unless user_params[:grp_string].blank?
+    @user.groupname = user_params[:groupname]
+    @user.save(user_params[:id])
     respond_to do |format|
       format.xml  { render :xml  => @user }
       format.json { render :json => @user }
