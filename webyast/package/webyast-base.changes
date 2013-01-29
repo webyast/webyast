@@ -1,4 +1,9 @@
 -------------------------------------------------------------------
+Fri Jan 25 10:42:45 CET 2013 - ro@suse.de
+
+- add polkit-default-privs to buildrequires for 12.3 and newer 
+
+-------------------------------------------------------------------
 Mon Jan 21 17:14:30 UTC 2013 - lslezak@suse.cz
 
 - move the base system status file after update from Webyast 1.2 to

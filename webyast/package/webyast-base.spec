@@ -140,6 +140,9 @@ BuildRequires:  polkit, rubygem-polkit1
 # <11.1 or SLES11
 BuildRequires:  PolicyKit, rubygem-polkit
 %endif
+%if 0%{?suse_version} > 1220
+BuildRequires:  polkit-default-privs
+%endif
 # the testsuite is run during build
 BuildRequires:  rubygem-test-unit rubygem-mocha
 BuildRequires:  rubygem-haml, rubygem-builder-3_0
