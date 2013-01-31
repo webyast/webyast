@@ -28,6 +28,16 @@ class TimeController < ApplicationController
 
   before_filter :init
 
+  rescue_from InvalidParameters do |error|
+    respond_to do |format|
+      format.html do
+        flash[:error] = error.message
+        redirect_to :back
+      end
+      format.xml { render :xml => error.to_xml }
+    end
+  end
+
 private
 
   def class_exists?(class_name)
@@ -40,7 +50,7 @@ private
   end
 
   def init
-    @ntp_available = class_exists?("Ntp")
+    @ntp_available     = class_exists?("Ntp")
     @service_available = class_exists?("Service")
   end
 
@@ -79,15 +89,20 @@ public
       authorize! :setserver, Ntp
     end
 
-    raise InvalidParameters.new :time => "missing region" unless params.has_key?(:region)
-    raise InvalidParameters.new :time => "missing timezone" unless params.has_key?(:timezone)
+    time_params = params[:time]
+    raise InvalidParameters.new :time => "missing time parameter" unless time_params
+
+    timezone_params = time_params[:timezone]
+    raise InvalidParameters.new :time => "missing time parameter" unless timezone_params
+    raise InvalidParameters.new :time => "missing region"   unless timezone_params[:region]
+    raise InvalidParameters.new :time => "missing timezone" unless timezone_params[:timezone]
 
     t = Systemtime.find
-    t.load_timezone params
+    t.load_timezone timezone_params
     t.clear_time #do not set time by default
     error = nil
 
-    case params[:timeconfig]
+    case time_params[:timeconfig]
     when "manual"
       if @service_available
         service = Service.new("ntp")
@@ -95,13 +110,13 @@ public
       else
         logger.error "Service module is not installed -> cannot stop ntp"
       end
-      t.load_time params
+      t.load_time time_params
     when "ntp_sync"
       #start ntp service
       ntp = Ntp.find
       ntp.actions[:synchronize] = true
       ntp.actions[:synchronize_utc] = t.utcstatus
-      ntp.actions[:ntp_server] = params[:ntp_server] unless params[:ntp_server].blank?
+      ntp.actions[:ntp_server] = time_params[:ntp_server] unless time_params[:ntp_server].blank?
       begin
         ntp.update
       rescue Exception => error
@@ -115,7 +130,7 @@ public
       end
     when "none"
     else
-      logger.error "Unknown value for timeconfig #{params[:timeconfig]}"
+      logger.error "Unknown value for timeconfig #{time_params[:timeconfig]}"
     end
 
     t.save unless error
@@ -125,7 +140,7 @@ public
                       redirect_to :action => "index" and return
                     else
                       flash[:notice] = _('Time settings have been written.')
-                      redirect_success and return
+                      redirect_to :action => 'index'
                     end
                   }
       format.xml  { if error
