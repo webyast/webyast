@@ -40,10 +40,6 @@ private
   end
 
   def init
-    unless defined? @@timezones
-      @@timezones = {}
-    end
-    @valid = []
     @ntp_available = class_exists?("Ntp")
     @service_available = class_exists?("Service")
   end
