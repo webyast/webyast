@@ -1,0 +1,46 @@
+= YaST REST Service Documentation
+
+== Network
+
+  Only authenticated users are allowed to access the API. Authentication is done
+  by sending a Basic HTTP Authorisation header.
+
+  All names aren't allowed to contain spaces, slashes or colons.
+
+== Overview
+
+  Time configuration
+
+== PolicyKit Access Rights
+
+  The following PolicyKit permissions are defined:
+
+  org.opensuse.yast.modules.yapi.time.read
+
+  org.opensuse.yast.modules.yapi.time.write
+
+== Time
+
+  Select the timezone and region settings. Available options for
+  time configuration are: manual and network time protocol synchronization.
+
+GET /time
+
+  Get the list of the current time configuration and also 
+  a list of all available timezones.
+
+  CURL example:
+  curl http://localhost:4984/time -u <user>:<password> -H "Accept: application/xml"
+
+XmlResult: time_get
+
+PUT /time
+
+  Update the system time configuration.
+
+  CURL example:
+  curl http://localhost:4984/time -u <user>:<password> -H "Accept: application/xml"
+       -H "Content-Type: application/xml" --data @time_put_request
+
+XmlBody: time_put_request
+XmlResult: time_put_response
