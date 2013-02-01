@@ -151,7 +151,7 @@
         <div class="row">
           <label><%=_("Hardware clock is set to UTC")%></label>
           <%# don't use check_box helper as it generate also hidden opposite value %>
-          <input type="checkbox" name="systemtime[utc]" id="utc" value="true" <%=  "checked='checked'" if @stime.utcstatus %> <%=  "disabled='disabled'" if disabled %> />
+          <input type="checkbox" name="systemtime[utcstatus]" id="utc" value="true" <%=  "checked='checked'" if @stime.utcstatus %> <%=  "disabled='disabled'" if disabled %> />
         </div>
         <% end %>
       </div>
