@@ -162,7 +162,7 @@ class Systemtime < BaseModel::Base
   end
 
   def load_time(params)
-    @date = params[:date].try(:[], :date)
+    @date = params[:date]
     @time = params[:currenttime]
   end
 

@@ -96,8 +96,7 @@ public
     raise InvalidParameters.new :time => "missing timezone" unless time_params[:timezone]
 
     t = Systemtime.find
-    t.load_timezone(time_params).inspect
-    t.clear_time #do not set time by default
+    t.load_timezone time_params.reject {|param, _| [:currenttime, :date].member? param }
     error = nil
     case time_params[:config]
     when "manual"
@@ -107,7 +106,7 @@ public
       else
         logger.error "Service module is not installed -> cannot stop ntp"
       end
-      t.load_time time_params[:config]
+      t.load_time time_params
     when "ntp_sync"
       #start ntp service
       if @ntp_available
@@ -129,7 +128,7 @@ public
       end
     when "none"
     else
-      logger.error "Unknown value for timeconfig #{time_params[:config]}"
+      logger.error "Unknown value for time config: #{time_params[:config]}"
     end
 
     t.save unless error
