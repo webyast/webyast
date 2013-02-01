@@ -44,7 +44,7 @@ Requires:       yast2-core >= 2.18.10
 Requires:       yast2-core >= 2.17.30.1
 Requires:       sysvinit > 2.86-195.3.1
 %endif
-Requires:       rubygem-passenger-nginx >= 3.0.14
+Requires:       rubygem-passenger-nginx >= 3.0.12
 Requires:       nginx >= 1.0.15
 Requires:       syslog-ng, check-create-certificate, yast2-dbus-server
 Requires:	rubygem-ruby-dbus
