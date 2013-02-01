@@ -89,8 +89,8 @@ public
       authorize! :setserver, Ntp
     end
 
-    time_params = params[:time]
-    raise InvalidParameters.new :time => "missing time parameter" unless time_params
+    time_params = params[:systemtime]
+    raise InvalidParameters.new :time => "missing parameter 'systemtime'" unless time_params
 
     raise InvalidParameters.new :time => "missing region"   unless time_params[:region]
     raise InvalidParameters.new :time => "missing timezone" unless time_params[:timezone]

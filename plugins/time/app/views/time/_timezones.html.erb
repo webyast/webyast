@@ -30,6 +30,6 @@ region["entries"].each() do |timezone|
 end
 list.sort!
 %>
-<%= select_tag "time[timezone]",
+<%= select_tag "systemtime[timezone]",
   options_for_select(list, central), :disabled=> disabled %>
 
