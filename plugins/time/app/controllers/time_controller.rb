@@ -92,17 +92,14 @@ public
     time_params = params[:time]
     raise InvalidParameters.new :time => "missing time parameter" unless time_params
 
-    timezone_params = time_params[:timezone]
-    raise InvalidParameters.new :time => "missing time parameter" unless timezone_params
-    raise InvalidParameters.new :time => "missing region"   unless timezone_params[:region]
-    raise InvalidParameters.new :time => "missing timezone" unless timezone_params[:timezone]
+    raise InvalidParameters.new :time => "missing region"   unless time_params[:region]
+    raise InvalidParameters.new :time => "missing timezone" unless time_params[:timezone]
 
     t = Systemtime.find
-    t.load_timezone timezone_params
+    t.load_timezone(time_params).inspect
     t.clear_time #do not set time by default
     error = nil
-
-    case time_params[:timeconfig]
+    case time_params[:config]
     when "manual"
       if @service_available
         service = Service.new("ntp")
@@ -110,27 +107,29 @@ public
       else
         logger.error "Service module is not installed -> cannot stop ntp"
       end
-      t.load_time time_params
+      t.load_time time_params[:config]
     when "ntp_sync"
       #start ntp service
-      ntp = Ntp.find
-      ntp.actions[:synchronize] = true
-      ntp.actions[:synchronize_utc] = t.utcstatus
-      ntp.actions[:ntp_server] = time_params[:ntp_server] unless time_params[:ntp_server].blank?
-      begin
-        ntp.update
-      rescue Exception => error
-        logger.error "ntp.update returns ERROR: #{error.inspect}"
-      end
-      if @service_available
-        service = Service.new("ntp")
-        service.save({:execute => "start" })
-      else
-        logger.error "Service module is not installed -> cannot start ntp"
+      if @ntp_available
+        ntp = Ntp.find
+        ntp.actions[:synchronize] = true
+        ntp.actions[:synchronize_utc] = t.utcstatus
+        ntp.actions[:ntp_server] = time_params[:ntp_server]
+        begin
+          ntp.update
+        rescue Exception => error
+          logger.error "ntp.update returns ERROR: #{error.inspect}"
+        end
+        if @service_available
+          service = Service.new("ntp")
+          service.save({:execute => "start" })
+        else
+          logger.error "Service module is not installed -> cannot start ntp"
+        end
       end
     when "none"
     else
-      logger.error "Unknown value for timeconfig #{time_params[:timeconfig]}"
+      logger.error "Unknown value for timeconfig #{time_params[:config]}"
     end
 
     t.save unless error

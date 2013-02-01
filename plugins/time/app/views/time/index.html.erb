@@ -137,7 +137,7 @@
 	    <div class="fieldset_body">
 	      <div class="row">
           <label for="region"><%=_("Region")%></label>
-          <%= select_tag "time[timezone][region]", options_for_select(@stime.regions, @stime.region["name"]), :disabled => disabled %>
+          <%= select_tag "time[region]", options_for_select(@stime.regions, @stime.region["name"]), :disabled => disabled %>
   	    </div>
 
  	      <div class="row">
@@ -151,7 +151,7 @@
         <div class="row">
           <label><%=_("Hardware clock is set to UTC")%></label>
           <%# don't use check_box helper as it generate also hidden opposite value %>
-          <input type="checkbox" name="time[timezone][utc]" id="utc" value="true" <%=  "checked='checked'" if @stime.utcstatus %> <%=  "disabled='disabled'" if disabled %> />
+          <input type="checkbox" name="time[utc]" id="utc" value="true" <%=  "checked='checked'" if @stime.utcstatus %> <%=  "disabled='disabled'" if disabled %> />
         </div>
         <% end %>
       </div>
@@ -167,7 +167,7 @@
         <div class="fieldset_body">
           <fieldset class="time_filedset" >
             <legend>
-              <input type="radio" name="time[timeconfig][config]" value="manual" id="timeconfig_manual"
+              <input type="radio" name="time[config]" value="manual" id="timeconfig_manual"
               <%= "disabled='disabled'" if disabled%>
               <%= "checked='checked'" unless @ntp_available && @ntpd_running %>/>
               <%= label_tag "timeconfig_manual", _("Manually configure time"), :class => "description" %>
@@ -175,18 +175,18 @@
 
             <div class="time_subsection">
             <div class="row check_row">
-              <%= check_box 'time[timeconfig]', "set_time", { :id=>:time_set_time, :disabled => disabled, :checked => false }, true, false %>
+              <%= check_box 'time', "set_time", { :id=>:time_set_time, :disabled => disabled, :checked => false }, true, false %>
               <%= label_tag :time_set_time, _("Set the current date and time") %>
             </div>
 
             <div class="row">
               <label for="date_date"><%= _("Date") %></label>
-              <%= text_field "time[timeconfig]", "date", :id=>:date_date, :disabled=> @ntp_available ? true :false , :value => @stime.date %>
+              <%= text_field "time", "date", :id=>:date_date, :disabled=> @ntp_available ? true :false , :value => @stime.date %>
             </div>
 
             <div class="row">
               <label for="currenttime"><%= _("Time") %></label>
-              <%= text_field "time[timeconfig]", "currenttime", :id=>:currenttime, :value => @stime.time,
+              <%= text_field "time", "currenttime", :id=>:currenttime, :value => @stime.time,
                   :disabled=> @ntp_available ? true :false %>
             </div>
             </div>
@@ -195,7 +195,7 @@
           <%- if can?(:setserver, Ntp) %>
             <fieldset class="time_filedset" >
               <legend>
-                <input id="ntp_sync" type="radio" name="time[timeconfig][config]" value="ntp_sync"
+                <input id="ntp_sync" type="radio" name="time[config]" value="ntp_sync"
                 <%=  "disabled=\"disabled\"" if disabled || !@ntp_available %>
                 <%=  "checked='checked'" if @ntp_available && @ntpd_running %> />
                 <%= label_tag "ntp_sync", _("Synchronize via Network Time Protocol (NTP)"), :class => "description" %>
@@ -205,7 +205,7 @@
               <div class="time_subsection">
                 <div class="row">
                 <label for="ntp_server"><%= _("NTP server") %></label>
-                <%= text_field "time[timeconfig]", "ntp_server", :id => :ntp_server, :value => @ntp.actions[:ntp_server] %>
+                <%= text_field "time", "ntp_server", :id => :ntp_server, :value => @ntp.actions[:ntp_server] %>
                  </div>
                </div>
               <% end %>
