@@ -104,7 +104,6 @@ class Systemtime < BaseModel::Base
   # so it support partial safe (e.g. save only new timezone if rest of fields is not set).
   def update
     settings = {}
-    Rails.logger.info "called write with #{settings.inspect}"
     settings["timezone"] = @timezone unless @timezone.blank?
     unless @utcstatus.nil?
       settings["utcstatus"] = @utcstatus ? "UTC" : "localtime"
@@ -163,7 +162,7 @@ class Systemtime < BaseModel::Base
 
   def load_time(params)
     @date = params[:date]
-    @time = params[:currenttime]
+    @time = params[:time]
   end
 
   def clear_time
