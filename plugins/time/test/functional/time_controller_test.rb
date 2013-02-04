@@ -39,9 +39,9 @@ class TimeControllerTest < ActionController::TestCase
     ]
 
     DATA = {
-       "timeconfig"=>"manual",
-       "date"=>{"date"=>"16/08/2011"},
-       "currenttime"=>"14:07:26",
+       "config"=>"manual",
+       "date"=>"16/08/2011",
+       "time"=>"14:07:26",
        "timezone"=>"Europe/Prague", "region"=>"Europe" }
 
   def setup
@@ -122,8 +122,8 @@ class TimeControllerTest < ActionController::TestCase
   def test_ntp
     mock_save(use_ntp=true)
     post :update, {"region"=>"Europe",
-                   "utc"=>"true",
-                   "timeconfig"=>"ntp_sync",
+                   "utcstatus"=>"true",
+                   "config"=>"ntp_sync",
                    "ntp_server"=>"de.pool.ntp.org",
                    "timezone" => "Europe/Prague"}
     assert_response :redirect
