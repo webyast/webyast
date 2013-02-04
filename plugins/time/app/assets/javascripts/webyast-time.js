@@ -16,20 +16,6 @@
  # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA
  #++ */
 
-function update_time_fields()
-{
-  if ($("#time_set_time").is(":checked") && $("#time_set_time").attr("disabled") != "disbaled")
-  {
-    $("#date_date").removeAttr("disabled");
-    $("#currenttime").removeAttr("disabled");
-  }
-  else
-  {
-    $("#date_date").attr("disabled","disabled");
-    $("#currenttime").attr("disabled","disabled");
-  }
-}
-
 function submitTime() {
   if($("#timeForm").valid() ) {
     disable_forms();
@@ -45,24 +31,6 @@ $(document).ready(function() {
   });
 
   $("#ui-datepicker-div").hide(); // hide a strange box created by datepicker
-
-  if ($('#timeconfig_manual').is(":checked")) {
-    $("#time_set_time").removeAttr("disabled");
-    $("#ntp_server").attr("disabled","disabled");
-  }
-  else {
-    $("#time_set_time").attr("disabled","disabled");
-    $("#ntp_server").removeAttr("disabled");
-  }
-
-  update_time_fields();
-  $("#time_set_time").click(update_time_fields);
-
-  $("#timeconfig_manual").click(enable);
-  $("#ntp_sync").click(function(){
-    $("#date_date")[0].disabled = true;
-    $("#currenttime")[0].disabled = true;
-  });
 
   $("#timeForm").submit(submitTime);
 });

@@ -46,7 +46,7 @@
 
 	 $(document).ready(function() {
 		validateDomainName("ntp_server");
-		validateTime("currenttime");
+		validateTime("time");
 
 		$("#timeForm").validate({
 		  onkeyup: function(element) { this.element(element); },
@@ -55,9 +55,9 @@
 				required: "#ntp_sync:checked",
 				ntp_server: true
 			 },
-			 currenttime: {
+			 time: {
 				required:true,
-				currenttime: true
+				time: true
 			 }
 		  },
 		  submitHandler: function(form) {
@@ -71,9 +71,9 @@
 				 required: <%= jss _("This field is required") -%>,
 				 ntp_server: <%= jss _("Enter a valid domain name or an IP address") -%>
 			 },
-			 currenttime: {
+			 time: {
 				required: <%= jss _("This field is required") -%>,
-				currenttime: <%= jss _("Invalid time format. Correct one is hh:mm:ss") -%>
+				time: <%= jss _("Invalid time format. Correct one is hh:mm:ss") -%>
 			 }
 		  }
 		});
@@ -84,9 +84,12 @@
         var settings = $('#timeForm').validate().settings;
         delete settings.rules.ntp_server;
         delete settings.messages.ntp_server;
-        $('#ntp_server').attr("disabled","disabled");
-        $("#time_set_time").removeAttr("disabled");
-        $('#currenttime').focus();
+        if ( <%= !disabled %> ) {
+          $('#ntp_server').attr("disabled","disabled");
+          $("#date_date")[0].disabled = false;
+          $("#time")[0].disabled = false;
+        }
+        $('#time').focus();
       });
 
       // enable form validation for #ntp_server if #ntp_sync is checked
@@ -95,21 +98,18 @@
         settings.rules.ntp_server = {required: true};
         settings.messages.ntp_server = "<%= _("This field is required") -%>";
         settings.messages.ntp_server = {ntp_server: "<%= _("Enter a valid domain name or an IP address") -%>"};
-        $('#ntp_server').removeAttr("disabled");
-        $("#time_set_time").attr("disabled","disabled");
+        if ( <%= !disabled %> ) {
+          $('#ntp_server').removeAttr("disabled");
+          $("#date_date")[0].disabled = true;
+          $("#time")[0].disabled = true;
+        }
+        $('#ntp_server').focus();
       });
     <% else %>
       $('#ntp_sync').hide();
     <% end %>
   });
 
-    function enable() {
-      if ( <%= !disabled %> && $("#time_set_time").is(":checked")) {
-        $("#date_date")[0].disabled = false;
-        $("#currenttime")[0].disabled = false;
-        //$("#timeForm").valid();
-      }
-    };
   <% end -%>
 <% end %>
 
@@ -169,30 +169,23 @@
             <legend>
               <input type="radio" name="systemtime[config]" value="manual" id="timeconfig_manual"
               <%= "disabled='disabled'" if disabled%>
-              <%= "checked='checked'" unless @ntp_available && @ntpd_running %>/>
               <%= label_tag "timeconfig_manual", _("Manually configure time"), :class => "description" %>
             </legend>
 
             <div class="time_subsection">
-            <div class="row check_row">
-              <%= check_box 'systemtime', "set_time", { :id=>:time_set_time, :disabled => disabled, :checked => false }, true, false %>
-              <%= label_tag :time_set_time, _("Set the current date and time") %>
-            </div>
+              <div class="row">
+                <label for="date_date"><%= _("Date") %></label>
+                <%= text_field "systemtime", "date", :id=>:date_date, :disabled=>true, :value => @stime.date %>
+              </div>
 
-            <div class="row">
-              <label for="date_date"><%= _("Date") %></label>
-              <%= text_field "systemtime", "date", :id=>:date_date, :disabled=> @ntp_available ? true :false , :value => @stime.date %>
-            </div>
-
-            <div class="row">
-              <label for="currenttime"><%= _("Time") %></label>
-              <%= text_field "systemtime", "currenttime", :id=>:currenttime, :value => @stime.time,
-                  :disabled=> @ntp_available ? true :false %>
-            </div>
+              <div class="row">
+                <label for="time"><%= _("Time") %></label>
+                <%= text_field "systemtime", "time", :id=>:time, :value=>@stime.time, :disabled=>true %>
+              </div>
             </div>
           </fieldset>
 
-          <%- if can?(:setserver, Ntp) %>
+          <%- if can?(:setserver, Ntp) && @ntp_available %>
             <fieldset class="time_filedset" >
               <legend>
                 <input id="ntp_sync" type="radio" name="systemtime[config]" value="ntp_sync"
@@ -201,14 +194,12 @@
                 <%= label_tag "ntp_sync", _("Synchronize via Network Time Protocol (NTP)"), :class => "description" %>
               </legend>
 
-              <% if @ntp_available %>
               <div class="time_subsection">
                 <div class="row">
                 <label for="ntp_server"><%= _("NTP server") %></label>
-                <%= text_field "systemtime", "ntp_server", :id => :ntp_server, :value => @ntp.actions[:ntp_server] %>
+                <%= text_field "systemtime", "ntp_server", :id => :ntp_server, :disabled=>true, :value => @ntp.actions[:ntp_server] %>
                  </div>
                </div>
-              <% end %>
             </fieldset>
           <% end %>
           <div class="clearfix"></div>
