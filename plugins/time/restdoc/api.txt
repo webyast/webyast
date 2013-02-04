@@ -39,8 +39,8 @@ PUT /time
   Update the system time configuration.
 
   CURL example:
-  curl http://localhost:4984/time -u <user>:<password> -H "Accept: application/xml"
-       -H "Content-Type: application/xml" --data @time_put_request
+  curl http://localhost/time -H "Accept: text/xml" -u <user>:<password> -X PUT --@data time_put_request -H "Content-Type: text/xml"
+
 
 XmlBody: time_put_request
 XmlResult: time_put_response
