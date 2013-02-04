@@ -92,11 +92,8 @@ public
     time_params = params[:systemtime]
     raise InvalidParameters.new :time => "missing parameter 'systemtime'" unless time_params
 
-    raise InvalidParameters.new :time => "missing region"   unless time_params[:region]
-    raise InvalidParameters.new :time => "missing timezone" unless time_params[:timezone]
-
     t = Systemtime.find
-    t.load_timezone time_params.reject {|param, _| [:currenttime, :date].member? param }
+    t.load_timezone time_params.reject {|param, _| [:time, :date].member? param }
     error = nil
     case time_params[:config]
     when "manual"
