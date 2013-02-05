@@ -1,0 +1,122 @@
+CONTRATTO DI LICENZA
+openSUSE® 12.2
+
+Questa è una traduzione non ufficiale in italiano della licenza
+openSUSE 12.2. Il presente documento non rappresenta una
+dichiarazione legale dei termini di distribuzione di openSUSE
+12.2; solo il testo originale inglese della licenza openSUSE
+12.2 è da ritenersi legalmente vincolante. Tuttavia, auspichiamo
+che questa traduzione agevoli la comprensione degli utenti di lingua
+italiana.
+
+Questo contratto regola il download, l'installazione o l'uso di
+openSUSE 12.2 e dei suoi aggiornamenti, indipendentemente dalla
+modalità di consegna. openSUSE 12.2 è un lavoro collettivo in
+base alle leggi degli Stati Uniti sul copyright. In conformità ai
+termini seguenti, The openSUSE Project concede all'utente una licenza
+per l'uso di questo lavoro collettivo secondo quanto definito nella
+versione della 2 della licenza pubblica generica (GNU). Il download,
+l'installazione o l'uso di openSUSE 12.2 implica l'accettazione
+dei termini di questo contratto.
+
+openSUSE 12.2 è un sistema operativo modulare Linux costituito da
+centinaia di componenti software. Il contratto di licenza di ciascun
+componente è in genere incluso nel codice sorgente del componente. A
+eccezione di alcuni file contenenti il marchio "openSUSE" cui si fa
+riferimento di seguito, i termini della licenza per i componenti
+consentono la copia e la ridistribuzione del componente. Con la
+possibile eccezione di alcuni file del firmware, i termini della
+licenza per i componenti consentono la copia, la modifica e la
+ridistribuzione del componente sia nella forma di codice sorgente che
+di codice binario. Con riferimento ai termini della licenza di
+qualsiasi componente, il presente contratto non limita i diritti
+dell'utente, né concede diritti sostitutivi.
+
+openSUSE 12.2 e ciascuno dei suoi componenti, compresi il codice
+sorgente, la documentazione, l'aspetto, la struttura e
+l'organizzazione, sono oggetto di copyright da parte di The openSUSE
+Project ed altri e sono tutelati dalle leggi sul copyright e di altro
+tipo. In conformità alla licenza applicabile, le parti sopra citate
+rimarranno proprietarie di openSUSE 12.2 e di qualsiasi suo
+componente, così come di qualsiasi copia. Il marchio "openSUSE" è di
+proprietà di Novell, Inc. negli Stati Uniti e in altri paesi e viene
+utilizzato in concessione. Il presente contratto consente la
+distribuzione di copie non modificate o modificate di openSUSE
+12.2 con il marchio "openSUSE" a condizione che vengano seguite
+le indicazioni sul marchio di The openSUSE Project consultabili
+all'indirizzo http://www.opensuse.org/Legal. Indipendentemente da
+eventuali modifiche apportate a openSUSE 12.2, l'utente è tenuto
+a rispettare le indicazioni sul marchio qualora intenda distribuire
+openSUSE 12.2.
+
+A eccezione di quanto espressamente definito in questo contratto o
+nella licenza di un componente specifico, NELLA MISURA MASSIMA
+CONSENTITA DALLE LEGGI IN VIGORE, OPENSUSE 12.2 E I COMPONENTI
+SONO FORNITI E CONCESSI IN LICENZA "COSÌ·COME SONO", SENZA GARANZIE DI
+ALCUN TIPO, ESPRESSE O IMPLICITE, INCLUSE LE GARANZIE IMPLICITE DI
+COMMERCIABILITÀ, PROPRIETÀ, NON VIOLAZIONE DEI DIRITTI ALTRUI O
+IDONEITÀ PER UNO SCOPO PARTICOLARE. The openSUSE Project non
+garantisce che le funzioni contenute in openSUSE 12.2 soddisfino
+i requisiti dell'utente, né che il funzionamento di openSUSE 12.2
+sia completamente privo di errori o rispetti esattamente quanto
+descritto nella documentazione di accompagnamento. L'USO DI OPENSUSE
+12.2 AVVIENE UNICAMENTE A RISCHIO DELL'UTENTE.
+
+NELLA MISURA MASSIMA CONSENTITA DALLE LEGGI IN VIGORE, THE OPENSUSE
+PROJECT, I SUOI CONCESSORI DI LICENZA, LE SUE FILIALI E I SUOI
+DIPENDENTI NON SARANNO RITENUTI RESPONSABILI PER ALCUN DANNO, COMPRESI
+I DANNI DIRETTI, INCIDENTALI O CONSEQUENZIALI, I MANCATI PROFITTI O I
+MANCATI GUADAGNI, IN RELAZIONE ALL'USO O ALL'IMPOSSIBILITÀ DI
+UTILIZZARE OPENSUSE 12.2, ANCHE QUALORA THE OPENSUSE PROJECT SIA
+STATA AVVISATA DELLA POSSIBILE INCIDENZA DI TALI DANNI.  NELLE
+GIURISDIZIONI CHE DEFINISCONO LIMITI SULL'ESCLUSIONE O SULLA
+LIMITAZIONE DEI DANNI, LA RESPONSABILITÀ GLOBALE DI THE OPENSUSE
+PROJECT, DEI SUOI CONCESSORI DI LICENZA, DELLE SUE FILIALI E DEI SUOI
+DIPENDENTI È LIMITATA A CINQUANTA DOLLARI (US $ 50) O, QUALORA TALE
+LIMITE NON SIA CONSENTITO, ALLA CIFRA MASSIMA CONSENTITA.
+
+Come richiesto dalle leggi degli Stati Uniti, l'utente dichiara e
+garantisce di: (a) essere a conoscenza del fatto che openSUSE
+12.2 è soggetto ai controlli sull'esportazione definiti dalle
+normative EAR (Export Administration Regulations) del Dipartimento del
+commercio degli Stati Uniti; (b) non essere residente in un paese di
+destinazione proibito, come definito nelle normative sulle sanzioni
+EAR o del Governo degli Stati Uniti; (c) non esportare, riesportare o
+trasferire openSUSE 12.2 in qualsiasi destinazione o a qualsiasi
+entità fisica o giuridica senza le necessarie licenze o autorizzazioni
+all'esportazione concesse dal Governo degli Stati Uniti; (d) non
+utilizzare openSUSE 12.2 o trasferirlo per l'uso in armi
+nucleari, chimiche o biologiche o con tecnologie missilistiche, a meno
+di non disporre di autorizzazione del Governo degli Stati Uniti
+tramite normativa o licenza specifica; (e) essere a conoscenza del
+fatto che in altri paesi possono esistere restrizioni in materia di
+importazione, uso o esportazione di prodotti di cifratura e che
+l'adempienza a tali restrizioni è responsabilità esclusiva dell'utente
+stesso.
+
+Qualora una delle clausole di questo contratto venga dichiarata non
+applicabile, le restanti clausole rimarranno pienamente vincolanti. Il
+presente contratto è regolato dalle leggi dello Stato dell'Utah e
+degli Stati Uniti, senza riferimento ad alcuna norma sui conflitti
+legislativi. L'applicazione della Convenzione delle Nazioni Unite sui
+contratti di vendita internazionale di beni mobili è espressamente
+esclusa. Il presente contratto definisce tutti i termini dell'accordo
+tra l'utente e The openSUSE Project in relazione all'oggetto del
+contratto stesso e può essere rettificato solo per iscritto mediante
+un accordo firmato da entrambe le parti. Nessuna rinuncia a un
+qualsiasi diritto concesso da questo contratto sarà effettiva a meno
+che non venga riportata per iscritto e firmata da un rappresentante
+autorizzato della parte vincolata. Nessuna rinuncia a un qualsiasi
+diritto passato o presente derivante da violazione o inadempienza
+potrà essere considerata una rinuncia a un qualsiasi diritto futuro
+risultante da questo contratto. L'uso, la duplicazione o la
+divulgazione da parte del Governo degli Stati Uniti è soggetto alle
+limitazioni menzionate nelle FAR 52.227-14 (giugno 1987) Alternate III
+(giugno 1987), FAR 52.227-19 (giugno 1987) o DFARS 252.227-7013 (b)(3)
+(novembre 1995) o nelle clausole sostitutive applicabili.
+
+Copyright © 2008-2011 The openSUSE Project. Tutti i diritti
+riservati. "Novell" e "openSUSE" sono marchi di Novell, Inc., che ha
+fondato e sponsorizza The openSUSE Project e agisce come società
+designata. "Linux" è un marchio registrato di Linus Torvalds. Tutti
+gli altri marchi di fabbrica appartengono ai rispettivi proprietari.

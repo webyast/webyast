@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Tue Feb  5 08:51:36 UTC 2013 - lslezak@suse.cz
+
+- added openSUSE 12.2 license (bnc#780926)
+- 0.3.10.1
+
+-------------------------------------------------------------------
 Wed Dec 12 15:26:46 UTC 2012 - lslezak@suse.cz
 
 - restart webyast after package update
