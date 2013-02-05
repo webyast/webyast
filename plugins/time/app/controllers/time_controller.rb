@@ -34,7 +34,8 @@ class TimeController < ApplicationController
         flash[:error] = error.message
         redirect_to :back
       end
-      format.xml { render :xml => error.to_xml }
+      format.xml  { render :xml => error.to_xml  }
+      format.json { render :xml => error.to_json }
     end
   end
 
@@ -127,7 +128,6 @@ public
     else
       logger.error "Unknown value for time config: #{time_params[:config]}"
     end
-
     t.save unless error
     respond_to do |format|
       format.html { if error
@@ -170,25 +170,17 @@ public
 
   end
 
-  #AJAX function that renders new timezones for selected region. Expected
-  # initialized values from index call.
-  def timezones_for_region
-    #FIXME do not use AJAX use java script instead as reload of data is not needed
-    # since while calling this function there is different instance of the class
-    # than when calling index, @@timezones were empty; reinitialize them
-    # possible FIXME: how does it increase the amount of data transferred?
+  def timezones
     authorize! :read, Time
     systemtime = Systemtime.find  # RORSCAN_ITL
-
     timezones = systemtime.timezones # RORSCAN_ITL
-
-    region = timezones.find { |r| r["name"] == params[:value] }
-    return false unless region
-    render(:partial => 'timezones', :locals => {:region => region, :default => region["central"], :disabled => ! params[:disabled]=="true"})
-  end
-
-  def timezones
-
+    # region = timezones.find { |r| r["name"] == params[:value] }
+    # return false unless region
+    # render(:partial => 'timezones', :locals => {:region => region, :default => region["central"], :disabled => ! params[:disabled]=="true"})
+    respond_to do |format|
+      format.xml  { render :xml  => timezones.to_xml(:dasherize => false) }
+      format.json { render :json => timezones.to_json(:dasherize => false) }
+    end
   end
 
 end
