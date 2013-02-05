@@ -42,7 +42,7 @@ Group:          Productivity/Networking/Web/Utilities
 Source:         %{mod_full_name}.gem
 Source1:        eulas-sles11.yml
 Source2:        org.opensuse.yast.modules.yapi.licenses.policy
-Source3:        eulas-opensuse11_1.yml
+Source3:        eulas-opensuse12_2.yml
 
 #
 %define plugin_name eulas
