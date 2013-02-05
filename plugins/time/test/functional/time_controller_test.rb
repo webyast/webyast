@@ -130,9 +130,4 @@ class TimeControllerTest < ActionController::TestCase
     assert_redirected_to :controller => "controlpanel", :action => "index"
   end
 
-  def test_timezones_ajax
-    post :timezones_for_region, { :value => "Europe" }
-    assert_response :success
-  end
-
 end
