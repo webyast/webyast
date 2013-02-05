@@ -45,6 +45,7 @@ class Systemtime < BaseModel::Base
   validates_inclusion_of :utcstatus, :in => [true,false], :allow_nil => true
   attr_accessor :timezones
   attr_accessor :hwclock
+  attr_reader   :data
   # do not massload timezones, as it is read-only
   attr_protected :timezones
 
@@ -87,6 +88,7 @@ class Systemtime < BaseModel::Base
     @timezones.each do |zone|
       zone["entries"] = zone["entries"].collect {|k,v| { "id" => k, "name" => v } } #hack to avoid colission in xml tag
     end
+    @data = @timezones.inject([]) {|data, tzs| data.push( {:region=>tzs['name'], :timezones=>tzs['entries']}); data }
   end
 
   # fills time instance with data from YaPI.
@@ -104,7 +106,7 @@ class Systemtime < BaseModel::Base
   # so it support partial safe (e.g. save only new timezone if rest of fields is not set).
   def update
     settings = {}
-    settings["timezone"] = @timezone unless @timezone.blank?
+    settings['timezone'] = @timezone unless @timezone.blank?
     unless @utcstatus.nil?
       settings["utcstatus"] = @utcstatus ? "UTC" : "localtime"
     end
@@ -142,21 +144,20 @@ class Systemtime < BaseModel::Base
 
   def region
     reg = @timezones.find { |region|
-      region["entries"].find { |entry| entry["id"]==@timezone } }
+      region["entries"].find { |entry| entry['id']==@timezone } }
     raise "Unknown timezone %s on host" % timezone unless reg
     return reg
   end
 
   def regions
     return @regions if @regions
-    @regions = @timezones.collect { |region| region["name"] }
+    @regions = @timezones.collect { |region| region['name'] }
   end
 
   def load_timezone(params)
-    treg = @timezones.find { |reg| reg["name"] == params[:region] } || Hash.new
-
-    tmz = treg["entries"].find { |e| e["name"] == params[:timezone]}
-    @timezone = tmz["id"] if tmz
+    treg = @timezones.find { |reg| reg['name'] == params[:region] } || Hash.new
+    tmz = treg["entries"].find { |e| e['name'] == params[:timezone]}
+    @timezone = tmz['id'] if tmz
     @utcstatus = params[:utcstatus] == "true"
   end
 
@@ -165,8 +166,4 @@ class Systemtime < BaseModel::Base
     @time = params[:time]
   end
 
-  def clear_time
-    @date = nil
-    @time = nil
-  end
 end
