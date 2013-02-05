@@ -187,4 +187,8 @@ public
     render(:partial => 'timezones', :locals => {:region => region, :default => region["central"], :disabled => ! params[:disabled]=="true"})
   end
 
+  def timezones
+
+  end
+
 end
