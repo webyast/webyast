@@ -25,8 +25,8 @@
 list = []
 central = ""
 region["entries"].each() do |timezone|
-  list.push timezone["name"]
-  central = timezone["name"] if timezone["id"] == default
+  list.push timezone['name']
+  central = timezone['name'] if timezone['id'] == default
 end
 list.sort!
 %>

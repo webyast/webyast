@@ -28,23 +28,24 @@
 
   <%= javascript_tag do -%>
 
-    $(document).ready( function() {
-      $("#region").change(function() {
-         $.ajax({
-           url: "<%= url_for({ :action => :timezones_for_region}) -%>",
-           data: 'value='+$(this).val(),
-           type: "GET",
-           success: function(data, status, xhr) {
-             $('#timezones').html(data);
-           },
-           error: function(xhr, status, error) {
-             $('#timezones').html('<b><%= escape_javascript _("Error: Cannot get information.") -%></b>');
-           }
-         });
-      });
-    });
+     $(document).ready(function() {
+   });
 
-	 $(document).ready(function() {
+    $(document).ready(function() {
+      $('body').data('zones', <%= raw(@stime.data.to_json) %>);
+      var $timezone_options = $('select#systemtime_timezone');
+      $("#systemtime_region").change(function(){
+        var region_name = $(this).val();
+        $.each($('body').data('zones'), function(index,timezone) {
+          if(timezone.region == region_name) {
+            $timezone_options.empty();
+            $.each(timezone.timezones, function(index,zone) {
+              $timezone_options.append($("<option />").val(zone.name).text(zone.name));
+            });
+          }
+        });
+      });
+
 		validateDomainName("ntp_server");
 		validateTime("time");
 
