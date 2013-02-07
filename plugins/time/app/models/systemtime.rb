@@ -38,93 +38,164 @@ class Systemtime < BaseModel::Base
   # time settings format is hh:mm:ss
   attr_accessor :time
   validates_format_of :time, :with => /^\d{2}:\d{2}:\d{2}$/, :allow_nil => true
-  # Current timezone as id
   attr_accessor :timezone
   # Utc status possible values is UTCOnly, UTC and localtime see yast2-country doc
-  attr_accessor :utcstatus
-  validates_inclusion_of :utcstatus, :in => [true,false], :allow_nil => true
+  attr_accessor   :utcstatus
+  validates_inclusion_of :utcstatus, :in => ['true','false', true, false], :allow_nil => true
   attr_accessor :timezones
   attr_accessor :hwclock
-  attr_reader   :data
-  # do not massload timezones, as it is read-only
-  attr_protected :timezones
+  attr_writer   :region
+  attr_accessor :yapi_response
+  attr_accessor :timezone_details
+  private       :timezone_details=, :timezones=, :hwclock=, :yapi_response
+
+  validate :matching_with_yapi_entries
+
+  attr_protected :timezones, :hwclock, :yapi_response
+
+  # Creates argument for dbus call which specify what data is requested.
+  TIMEZONE_KEYS = {
+    "timezone"    => "true",
+    "utcstatus"   => "true",
+    "currenttime" => "true",
+    "zones"       => "true"
+  }
+
+  def self.find
+    new
+  end
+
+  def initialize params={}
+    load_yapi_response
+    self.hwclock = File.exist? "/sbin/hwclock"
+    super
+  end
+
+  def region
+    @region ||= timezones.find {|tz| tz[:timezones].find {|zone| zone == timezone }}[:region]
+  end
+
+  def regions
+    @regions ||= timezones.collect { |zone| zone[:region] }
+  end
+
+  def inspect
+    "<##{self.class}:0x#{"%x" % (object_id.abs*2)} @region=#{region} @timezone=#{timezone} @time=#{time} " +
+    "@date=#{date} @utcstatus=#{utcstatus} @hwclock=#{hwclock} @timezone_details=#{timezone_details} >"
+  end
+
+  def matching_with_yapi_entries
+    region_entries = yapi_response['zones'].find { |zone| zone['name'] == region }
+    region_valid = !!region_entries
+    if region_valid
+      timezone_match = region_entries['entries'].select { |detail, zone| zone == timezone }
+      case timezone_match # Hash#select returns an array in 1.8 and hash in 1.9
+      when Array
+        timezone_match = timezone_match.flatten
+      end
+      timezone_valid = timezone_match.present?
+      unless region_valid && timezone_valid
+        errors.add :base, _("Mismatch in region and timezone specification: '#{region}' => '#{timezone}'")
+      end
+    else
+      errors.add :base, _("Unknown region '#{region}'")
+    end
+    Rails.logger.error errors.full_messages if errors.present?
+  end
 
   private
 
-  # Creates argument for dbus call which specify what data is requested.
-  # Available timezones is cached so request it only if it is necessary.
-  # return:: hash with requested keys
-  def self.create_read_question #:doc:
-    ret = {
-      "timezone" => "true",
-      "utcstatus" => "true",
-      "currenttime" => "true",
-      "zones"  => "true"
-    }
-    return ret
-  end
-
-  public
-
-  # Parses response from dbus YaPI call
-  # response:: response from dbus
-  def parse_response(response) #:doc:
-    timedate = response["time"]
-    @time = timedate[timedate.index(" - ")+3,8]
-    @date = timedate[0..timedate.index(" - ")-1]
+  def load_yapi_response
+    self.yapi_response = YastService.Call "YaPI::TIME::Read", TIMEZONE_KEYS
+    timedate           = yapi_response["time"]
+    self.time          = timedate[timedate.index(" - ")+3,8]
+    self.date          = timedate[0..timedate.index(" - ")-1]
+    self.timezones     = parse_yapi_zones
+    self.timezone      = parse_yapi_timezone
+    self.timezone_details = yapi_response['timezone']
     #convert date to format for datepicker
-    @date.sub!(/^(\d+)-(\d+)-(\d+)/,'\3/\2/\1')
-    @utcstatus =
-    case response["utcstatus"]
-      when "UTC" then true
-      when "local" then false
-      when "UTCOnly" then nil
+    self.date.sub!(/^(\d+)-(\d+)-(\d+)/,'\3/\2/\1')
+    self.utcstatus =
+      case yapi_response["utcstatus"]
+      when "UTC"
+        true
+      when "localtime", 'local'
+        false
+      when "UTCOnly"
+        true
       else
-        Rails.logger.warn "Unknown key in utcstatus #{response["utcstatus"]}"
-        nil #set nill, maybe exception???
-    end
-    @timezone = response["timezone"]
-    @timezones = response["zones"]
-    @timezones.each do |zone|
-      zone["entries"] = zone["entries"].collect {|k,v| { "id" => k, "name" => v } } #hack to avoid colission in xml tag
-    end
-    @data = @timezones.inject([]) {|data, tzs| data.push( {:region=>tzs['name'], :timezones=>tzs['entries']}); data }
+        Rails.logger.warn "Unknown key in utcstatus #{yapi_response["utcstatus"]}"
+        nil
+      end
+    self
   end
 
-  # fills time instance with data from YaPI.
-  #
-  # +warn+: Doesn't take any parameters.
-  def self.find
-    ret = Systemtime.new()
-    ret.parse_response YastService.Call("YaPI::TIME::Read",create_read_question)
-    ret.timezone = "Europe/Prague" if ret.timezone.blank? #last fallback if everything fail #bnc582166
-    ret.hwclock = File.exist? "/sbin/hwclock"
-    return ret
+  def parse_yapi_timezone
+    yapi_timezone  = yapi_response['timezone']
+    if yapi_timezone.blank? #last fallback if everything fail #bnc582166
+      return "Czech Republic"
+    end
+    regional_zones = yapi_response['zones'].find do |zone|
+      zone['entries'].find {|detail, timezone| detail == yapi_timezone }
+    end
+    regional_zones['entries'][yapi_timezone]
   end
 
-  # Saves data from model to system via YaPI. Saves only setted data,
-  # so it support partial safe (e.g. save only new timezone if rest of fields is not set).
+  def parse_yapi_zones
+    yapi_response['zones'].inject([]) do |new_zones, yapi_zones|
+      new_zones.push({ :region => yapi_zones['name'], :timezones => yapi_zones['entries'].values })
+      new_zones
+    end
+  end
+
+  def update_utc_status
+    case utcstatus
+    when true, 'true'
+      'UTC'
+    else
+      'local'
+    end
+  end
+
+  def update_date_time
+    unless date.blank? || time.blank?
+      date = self.date.split "/"
+      "#{date[2]}-#{date[0]}-#{date[1]} - #{time}"
+    end
+  end
+
+  def update_timezone
+    region_entries = yapi_response['zones'].find { |zone| zone['name'] == region }
+    timezone_pair = region_entries['entries'].select { |detail, zone| zone == timezone }
+    case timezone_pair
+    when Array
+      timezone_pair.flatten.first
+    when Hash
+      timezone_pair.keys.first
+    end
+  end
+
   def update
-    settings = {}
-    settings['timezone'] = @timezone unless @timezone.blank?
-    unless @utcstatus.nil?
-      settings["utcstatus"] = @utcstatus ? "UTC" : "localtime"
+    if valid?
+      updated_params = {}
+      updated_params.merge! 'timezone'    => update_timezone
+      updated_params.merge! 'utcstatus'   => update_utc_status
+      updated_params.merge! 'currenttime' => update_date_time
+      updated_params.delete 'currenttime' if updated_params['currenttime'].nil?
+      Rails.logger.info "Going to write new time settings with: #{updated_params.inspect}"
+      begin
+        saved = YastService.Call("YaPI::TIME::Write", updated_params)
+      rescue Exception => e
+        Rails.logger.info "Exception thrown by DBus probably timeout #{e.inspect}"
+        #XXX hack to avoid dbus timeout durign moving time to future
+        #FIXME use correct exception
+      end
+      restart_collectd
+      load_yapi_response
+      saved
+    else
+      false
     end
-    unless @date.blank? || @time.blank?
-      date = @date.split("/")
-      settings["currenttime"] = "#{date[2]}-#{date[0]}-#{date[1]} - #{@time}"
-    end
-
-    Rails.logger.info "called write with #{settings.inspect}"
-
-    begin
-      YastService.Call("YaPI::TIME::Write",settings)
-    rescue Exception => e
-      Rails.logger.info "Exception thrown by DBus probably timeout #{e.inspect}"
-      #XXX hack to avoid dbus timeout durign moving time to future
-      #FIXME use correct exception
-    end
-    restart_collectd
   end
 
   def restart_collectd
@@ -140,30 +211,6 @@ class Systemtime < BaseModel::Base
       #restarting collectd is optional, so it should not do anything
     end
     true
-  end
-
-  def region
-    reg = @timezones.find { |region|
-      region["entries"].find { |entry| entry['id']==@timezone } }
-    raise "Unknown timezone %s on host" % timezone unless reg
-    return reg
-  end
-
-  def regions
-    return @regions if @regions
-    @regions = @timezones.collect { |region| region['name'] }
-  end
-
-  def load_timezone(params)
-    treg = @timezones.find { |reg| reg['name'] == params[:region] } || Hash.new
-    tmz = treg["entries"].find { |e| e['name'] == params[:timezone]}
-    @timezone = tmz['id'] if tmz
-    @utcstatus = params[:utcstatus] == "true"
-  end
-
-  def load_time(params)
-    @date = params[:date]
-    @time = params[:time]
   end
 
 end

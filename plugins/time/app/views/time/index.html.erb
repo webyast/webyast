@@ -32,7 +32,7 @@
    });
 
     $(document).ready(function() {
-      $('body').data('zones', <%= raw(@stime.data.to_json) %>);
+      $('body').data('zones', <%= raw(@system_time.timezones.to_json) %>);
       var $timezone_options = $('select#systemtime_timezone');
       $("#systemtime_region").change(function(){
         var region_name = $(this).val();
@@ -40,7 +40,7 @@
           if(timezone.region == region_name) {
             $timezone_options.empty();
             $.each(timezone.timezones, function(index,zone) {
-              $timezone_options.append($("<option />").val(zone.name).text(zone.name));
+              $timezone_options.append($("<option />").val(zone).text(zone));
             });
           }
         });
@@ -79,7 +79,7 @@
 		  }
 		});
 
-    <% if @stime.hwclock %>
+    <% if @system_time.hwclock %>
       // allows to switch between radio buttons and disable validation if #timeconfig_manual is checked
       $('#timeconfig_manual').click(function() {
         var settings = $('#timeForm').validate().settings;
@@ -138,28 +138,26 @@
 	    <div class="fieldset_body">
 	      <div class="row">
           <label for="region"><%=_("Region")%></label>
-          <%= select_tag "systemtime[region]", options_for_select(@stime.regions, @stime.region["name"]), :disabled => disabled %>
+          <%= select_tag "systemtime[region]", options_for_select(@system_time.regions, @system_time.region), :disabled => disabled %>
   	    </div>
 
  	      <div class="row">
           <label for="timezone"><%=_("Timezone")%></label>
           <span id="timezones">
-            <%= render(:partial => 'timezones', :locals => {:region => @stime.region, :default => @stime.timezone, :disabled => disabled})  %>
+            <%= render(:partial => 'timezones', :locals => {:system_time => @system_time, :disabled => disabled})  %>
           </span>
         </div>
 
-        <% if @stime.respond_to?(:utcstatus) && !@stime.utcstatus.nil? %>
         <div class="row">
           <label><%=_("Hardware clock is set to UTC")%></label>
           <%# don't use check_box helper as it generate also hidden opposite value %>
-          <input type="checkbox" name="systemtime[utcstatus]" id="utc" value="true" <%=  "checked='checked'" if @stime.utcstatus %> <%=  "disabled='disabled'" if disabled %> />
+          <input type="checkbox" name="systemtime[utcstatus]" id="utc" value="true" <%=  "checked='checked'" if @system_time.utcstatus %> <%=  "disabled='disabled'" if disabled %> />
         </div>
-        <% end %>
       </div>
       <div class="clearfix">&nbsp;</div>
     </fieldset>
 
-    <% if @stime.hwclock %>
+    <% if @system_time.hwclock %>
       <fieldset class="webyast_fieldset">
         <div class="fieldset_header">
           <span class="fieldset_header_title" ><%= _("Time")%></span>
@@ -176,12 +174,12 @@
             <div class="time_subsection">
               <div class="row">
                 <label for="date_date"><%= _("Date") %></label>
-                <%= text_field "systemtime", "date", :id=>:date_date, :disabled=>true, :value => @stime.date %>
+                <%= text_field "systemtime", "date", :id=>:date_date, :disabled=>true, :value => @system_time.date %>
               </div>
 
               <div class="row">
                 <label for="time"><%= _("Time") %></label>
-                <%= text_field "systemtime", "time", :id=>:time, :value=>@stime.time, :disabled=>true %>
+                <%= text_field "systemtime", "time", :id=>:time, :value=>@system_time.time, :disabled=>true %>
               </div>
             </div>
           </fieldset>
@@ -191,7 +189,6 @@
               <legend>
                 <input id="ntp_sync" type="radio" name="systemtime[config]" value="ntp_sync"
                 <%=  "disabled=\"disabled\"" if disabled || !@ntp_available %>
-                <%=  "checked='checked'" if @ntp_available && @ntpd_running %> />
                 <%= label_tag "ntp_sync", _("Synchronize via Network Time Protocol (NTP)"), :class => "description" %>
               </legend>
 
