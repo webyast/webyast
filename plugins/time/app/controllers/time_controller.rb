@@ -28,14 +28,14 @@ class TimeController < ApplicationController
 
   before_filter :init
 
-  rescue_from InvalidParameters do |error|
+  rescue_from InvalidParameters, "::NtpError" do |error|
     respond_to do |format|
       format.html do
         flash[:error] = error.message
-        redirect_to :back
+        redirect_to :root
       end
-      format.xml  { render :xml => error.to_xml  }
-      format.json { render :xml => error.to_json }
+      format.xml  { render :xml  => error.to_xml  }
+      format.json { render :json => error.to_json }
     end
   end
 
@@ -60,126 +60,71 @@ public
 
   def index
     authorize! :read, Time
-
-    @ntp = @ntp_available ? Ntp.find : nil
-    Rails.logger.debug "NTP: #{@ntp.inspect}"
-
     if @ntp_available
+      @ntp = Ntp.find
       `pgrep -f /usr/sbin/ntpd`
-      @ntpd_running = $?.exitstatus == 0
-      Rails.logger.info "ntpd is running: #{@ntpd_running}"
+      Rails.logger.info "ntpd is running: #{$?.exitstatus == 0}"
     end
-
-    @stime = Systemtime.find
-    @stime.load_timezone params if params[:timezone] #do not reset timezone if ntp fail (bnc#600370)
-
+    @system_time = Systemtime.find
     respond_to do |format|
       format.html
-      format.xml { render  :xml => @stime.to_xml( :dasherize => false ) } # RORSCAN_ITL
-      format.json { render :json => @stime.to_json( :dasherize => false ) } # RORSCAN_ITL
+      format.xml  { render :xml  => @system_time.to_xml(  :dasherize => false ) } # RORSCAN_ITL
+      format.json { render :json => @system_time.to_json( :dasherize => false ) } # RORSCAN_ITL
     end
   end
 
-
-  # Sets time settings. Requires write permissions for time YaPI.
   def update
     authorize! :write, Time
-    if @ntp_available
-      authorize! :execute, Service
-      authorize! :synchronize, Ntp
-      authorize! :setserver, Ntp
-    end
-
-    time_params = params[:systemtime]
-    raise InvalidParameters.new :time => "missing parameter 'systemtime'" unless time_params
-
-    t = Systemtime.find
-    t.load_timezone time_params.reject {|param, _| [:time, :date].member? param }
-    error = nil
-    case time_params[:config]
-    when "manual"
-      if @service_available
-        service = Service.new("ntp")
-        service.save({:execute => "stop" })
-      else
-        logger.error "Service module is not installed -> cannot stop ntp"
-      end
-      t.load_time time_params
-    when "ntp_sync"
-      #start ntp service
-      if @ntp_available
-        ntp = Ntp.find
-        ntp.actions[:synchronize] = true
-        ntp.actions[:synchronize_utc] = t.utcstatus
-        ntp.actions[:ntp_server] = time_params[:ntp_server]
-        begin
-          ntp.update
-        rescue Exception => error
-          logger.error "ntp.update returns ERROR: #{error.inspect}"
-        end
-        if @service_available
+    raise InvalidParameters.new :time => "Missing parameter 'systemtime'" unless params[:systemtime]
+    new_time = Systemtime.new params[:systemtime]
+    if new_time.valid?
+      system_time = Systemtime.find
+      case params[:systemtime][:config]
+      when "manual"
+        if @service_available && @ntp_available
+          authorize! :execute, Service
           service = Service.new("ntp")
-          service.save({:execute => "start" })
-        else
-          logger.error "Service module is not installed -> cannot start ntp"
+          service.save({:execute => "stop" })
+        end
+        system_time.time = params[:systemtime][:time]
+        system_time.date = params[:systemtime][:date]
+      when "ntp_sync"
+        if @ntp_available
+          authorize! :synchronize, Ntp
+          authorize! :setserver,   Ntp
+          ntp = Ntp.find
+          ntp.actions[:synchronize] = true
+          ntp.actions[:synchronize_utc] = system_time.utcstatus
+          ntp.actions[:ntp_server] = params[:ntp_server]
+          ntp.update
+          Service.new('ntp').save(:execute=>'start') if @service_available
         end
       end
-    when "none"
     else
-      logger.error "Unknown value for time config: #{time_params[:config]}"
+      raise InvalidParameters.new :time => new_time.errors.full_messages.join(', ')
     end
-    t.save unless error
+    system_time.region    = params[:systemtime][:region]
+    system_time.timezone  = params[:systemtime][:timezone]
+    system_time.utcstatus = params[:systemtime][:utcstatus]
+    system_time.save
     respond_to do |format|
-      format.html { if error
-                      flash[:error] = error.message
-                      redirect_to :action => "index" and return
-                    else
-                      flash[:notice] = _('Time settings have been written.')
-                      redirect_to :action => 'index'
-                    end
-                  }
-      format.xml  { if error
-                      render ErrorResult.error(404, 2, "Time setting error:'"+error.message+"'") and return
-                    else
-                      show and return
-                    end
-                  }
-      format.json { unless result.blank?
-                      render ErrorResult.error(404, 2, "Time setting error:'"+error.message+"'") and return
-                    else
-                      show and return
-                    end
-                  }
+      format.html do
+        flash[:notice] = _('Time settings have been written.')
+        redirect_to :action => 'index'
+      end
+      format.xml  { render :xml  => system_time.to_xml( :dasherize => false) }
+      format.json { render :json => system_time.to_json(:dasherize => false) }
     end
   end
 
-  # See update
-  def create
-    update
-  end
-
-  # Shows time settings. Requires read permission for time YaPI.
-  def show
-    authorize! :read, Time
-    systemtime = Systemtime.find # RORSCAN_ITL
-
-    respond_to do |format|
-      format.xml { render  :xml => systemtime.to_xml( :dasherize => false ) } # RORSCAN_ITL
-      format.json { render :json => systemtime.to_json( :dasherize => false ) } # RORSCAN_ITL
-    end
-
-  end
+  alias_method :create, :update
 
   def timezones
     authorize! :read, Time
-    systemtime = Systemtime.find  # RORSCAN_ITL
-    timezones = systemtime.timezones # RORSCAN_ITL
-    # region = timezones.find { |r| r["name"] == params[:value] }
-    # return false unless region
-    # render(:partial => 'timezones', :locals => {:region => region, :default => region["central"], :disabled => ! params[:disabled]=="true"})
+    system_time = Systemtime.find  # RORSCAN_ITL
     respond_to do |format|
-      format.xml  { render :xml  => timezones.to_xml(:dasherize => false) }
-      format.json { render :json => timezones.to_json(:dasherize => false) }
+      format.xml  { render :xml  => system_time.timezones.to_xml( :dasherize => false) }
+      format.json { render :json => system_time.timezones.to_json(:dasherize => false) }
     end
   end
 
