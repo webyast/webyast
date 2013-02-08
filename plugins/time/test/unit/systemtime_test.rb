@@ -42,13 +42,6 @@ class SystemtimeTest < ActiveSupport::TestCase
     }
   ]
 
-  READ_ARGUMENTS = {
-      "zones"=> "true",
-      "timezone"=> "true",
-      "utcstatus"=> "true",
-      "currenttime" => "true"
-    }
-
   READ_RESPONSE = {
       "zones"=> TEST_TIMEZONES,
       "timezone"=> "Europe/Prague",
@@ -63,11 +56,6 @@ class SystemtimeTest < ActiveSupport::TestCase
       "time" => "2009-07-02 - 12:18:00"
     }
 
-  WRITE_ARGUMENTS_NONE = {
-      "timezone"=> "America/Kentucky/Monticello",
-      "utcstatus"=> "local"
-    }
-
   WRITE_ARGUMENTS_TIME = {
       "timezone"=> "America/Kentucky/Monticello",
       "utcstatus"=> "local",
@@ -80,110 +68,72 @@ class SystemtimeTest < ActiveSupport::TestCase
     }
 
   def setup
-    @model = Systemtime.new
     Systemtime.stubs(:permission_check)
   end
 
-
-  def test_getter
-    YastService.stubs(:Call).with("YaPI::TIME::Read",READ_ARGUMENTS).returns(READ_RESPONSE)
-
-    @model = Systemtime.find
-    assert_equal "02/07/2009", @model.date
-    assert_equal "12:18:00", @model.time
-    assert_equal "Europe/Prague", @model.timezone
-    assert_equal true, @model.utcstatus
-    assert_equal TEST_TIMEZONES, @model.timezones
+  def stub_yapi_read params
+    YastService.stubs(:Call).with("YaPI::TIME::Read", Systemtime::TIMEZONE_KEYS).returns params[:returns]
   end
 
-  def test_getter_with_not_set_timezone #bnc#582166
-    YastService.stubs(:Call).with("YaPI::TIME::Read",READ_ARGUMENTS).returns(READ_RESPONSE_BROKEN_TIMEZONE)
-
-    @model = Systemtime.find
-    assert_equal "Europe/Prague", @model.timezone
+  def stub_yapi_write params
+    YastService.stubs(:Call).with("YaPI::TIME::Write", params[:with]).returns(true).once
+    YastService.stubs(:Call).with("YaPI::SERVICES::Execute",
+      { "name" => ["s","collectd"], "action" => ["s","restart"] }).once
   end
 
-  def test_setter_without_time
-    x= YastService.stubs(:Call)
-    x.with("YaPI::TIME::Write",WRITE_ARGUMENTS_NONE).once
-    x.with("YaPI::SERVICES::Execute",{
-            "name" => ["s","collectd"],
-            "action" => ["s","restart"]
-          }).once
-
-    @model.timezone = "America/Kentucky/Monticello"
-    @model.utcstatus = false
-    @model.timezones = TEST_TIMEZONES
-    assert @model.save, "Errors during saving: "+@model.errors.collect{ |e| e.inspect}.join("\n")
+  def test_reading_system_time
+    stub_yapi_read :returns => READ_RESPONSE
+    model = Systemtime.find
+    assert_equal "02/07/2009", model.date
+    assert_equal "12:18:00", model.time
+    assert_equal "Czech Republic", model.timezone
+    assert_equal true, model.utcstatus
   end
 
-  def test_setter_with_time
-    x= YastService.stubs(:Call)
-    x.with("YaPI::TIME::Write",WRITE_ARGUMENTS_TIME).returns(true).once
-    x.with("YaPI::SERVICES::Execute",{
-            "name" => ["s","collectd"],
-            "action" => ["s","restart"]
-          }).once
-
-    @model.timezone = "America/Kentucky/Monticello"
-    @model.utcstatus = false
-    @model.date = "02/07/2009"
-    @model.time = "12:18:00"
-    @model.timezones = TEST_TIMEZONES
-    assert @model.save, "Errors during saving: "+@model.errors.collect{ |e| e.inspect}.join("\n")
+  #TODO
+  def test_writing_system_time
+    stub_yapi_read :returns => READ_RESPONSE
+    model = Systemtime.find
   end
 
-  def test_setter_with_move_to_future
-    msg_mock = mock()
-    msg_mock.stubs(:error_name).returns("org.freedesktop.DBus.Error.NoReply")
-    msg_mock.stubs(:params).returns(["test","test"])
-    YastService.stubs(:Call).with("YaPI::TIME::Write",WRITE_ARGUMENTS_TIME).raises(DBus::Error,msg_mock)
-#also if error is raised due to time moving collectd must be restarted
-    YastService.stubs(:Call).with("YaPI::SERVICES::Execute",{
-            "name" => ["s","collectd"],
-            "action" => ["s","restart"]
-          })
+  def test_loading_without_set_timezone #bnc#582166
+    stub_yapi_read :returns => READ_RESPONSE_BROKEN_TIMEZONE
+    model = Systemtime.find
+    assert_equal "Czech Republic", model.timezone
+  end
 
-    @model.timezone = "America/Kentucky/Monticello"
-    @model.utcstatus = false
-    @model.date = "02/07/2009"
-    @model.time = "12:18:00"
-    @model.timezones = TEST_TIMEZONES
-    assert_nothing_raised do
-      assert @model.save, "Errors during saving: "+@model.errors.collect{ |e| e.inspect}.join("\n")
-    end
+  def test_saving_without_time
+    stub_yapi_read :returns => READ_RESPONSE
+    model = Systemtime.find
+    model.time = ''
+    assert !model.save
+    assert model.errors[:time].present?
+  end
+
+  def test_setter_without_timezone
+    stub_yapi_read :returns => READ_RESPONSE
+    model = Systemtime.find
+    model.timezone = ''
+    assert !model.save
+    assert model.errors[:timezone].present?
+  end
+
+  def test_setter_with_unknown_region
+    stub_yapi_read :returns => READ_RESPONSE
+    model = Systemtime.find
+    model.region = 'Vysocany'
+    assert !model.save
+    assert model.errors[:region].present?
   end
 
   def test_xml
-    data = READ_RESPONSE
-    @model.timezone = data["timezone"]
-    @model.utcstatus = data["utcstatus"]
-    @model.date = "02/07/2009"
-    @model.time = "12:18:00"
-    @model.timezones = TEST_TIMEZONES
-
-    response = Hash.from_xml(@model.to_xml)
-    response = response["systemtime"]
-
-    assert_equal(data["timezone"], response["timezone"])
-    assert_equal(data["utcstatus"], response["utcstatus"])
-    assert_equal("12:18:00", response["time"])
-    assert_equal("02/07/2009", response["date"])
-
-    zone_response = TEST_TIMEZONES
-    assert_equal(zone_response.sort { |a,b| a["name"] <=> b["name"] },
-    response["timezones"].sort { |a,b| a["name"] <=> b["name"] })
-  end
-
-
-  def test_json
-    data = READ_RESPONSE
-    @model.timezone = data["timezone"]
-    @model.utcstatus = data["utcstatus"]
-    @model.date = "02/07/2009"
-    @model.time = "12:18:00"
-    @model.timezones = TEST_TIMEZONES
-    assert_not_nil(@model.to_json)
+    stub_yapi_read :returns => READ_RESPONSE
+    model = Systemtime.find
+    xml_attributes = Hash.from_xml model.to_xml
+    xml_attributes[:systemtime].each_pair do |attr, value|
+      assert model.respond_to? :attr
+      assert_equal value, model.__send__ value
+    end
   end
 
 end
