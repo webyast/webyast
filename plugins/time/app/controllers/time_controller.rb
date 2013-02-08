@@ -68,8 +68,8 @@ public
     @system_time = Systemtime.find
     respond_to do |format|
       format.html
-      format.xml  { render :xml  => @system_time.to_xml(  :dasherize => false ) } # RORSCAN_ITL
-      format.json { render :json => @system_time.to_json( :dasherize => false ) } # RORSCAN_ITL
+      format.xml  { render :xml  => @system_time } # RORSCAN_ITL
+      format.json { render :json => @system_time } # RORSCAN_ITL
     end
   end
 
@@ -112,8 +112,8 @@ public
         flash[:notice] = _('Time settings have been written.')
         redirect_to :action => 'index'
       end
-      format.xml  { render :xml  => system_time.to_xml( :dasherize => false) }
-      format.json { render :json => system_time.to_json(:dasherize => false) }
+      format.xml  { render :xml  => system_time }
+      format.json { render :json => system_time }
     end
   end
 
