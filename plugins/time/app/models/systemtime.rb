@@ -71,6 +71,25 @@ class Systemtime < BaseModel::Base
     super
   end
 
+  def render_attributes
+    {
+      :region    => region,
+      :timezone  => timezone,
+      :utcstatus => utcstatus,
+      :hwclock   => hwclock,
+      :date      => date,
+      :time      => time
+    }
+  end
+
+  def to_xml params={}
+    render_attributes.to_xml params.merge :root=>:systemtime, :dasherize => false
+  end
+
+  def to_json params={}
+    render_attributes.to_json params.merge :root=>:systemtime, :dasherize => false
+  end
+
   def region
     @region ||= timezones.find {|tz| tz[:timezones].find {|zone| zone == timezone }}[:region]
   end
@@ -83,6 +102,8 @@ class Systemtime < BaseModel::Base
     "<##{self.class}:0x#{"%x" % (object_id.abs*2)} @region=#{region} @timezone=#{timezone} @time=#{time} " +
     "@date=#{date} @utcstatus=#{utcstatus} @hwclock=#{hwclock} @timezone_details=#{timezone_details} >"
   end
+
+  private
 
   def matching_with_yapi_entries
     region_entries = yapi_response['zones'].find { |zone| zone['name'] == region }
@@ -102,8 +123,6 @@ class Systemtime < BaseModel::Base
     end
     Rails.logger.error errors.full_messages if errors.present?
   end
-
-  private
 
   def load_yapi_response
     self.yapi_response = YastService.Call "YaPI::TIME::Read", TIMEZONE_KEYS
