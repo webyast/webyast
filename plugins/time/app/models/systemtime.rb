@@ -95,17 +95,16 @@ class Systemtime < BaseModel::Base
   private
 
   def matching_with_yapi_entries
-    region_entries = yapi_response['zones'].find { |zone| zone['name'] == region }
-    region_valid = !!region_entries
+    region_valid = !!region_entries.present?
     if region_valid
-      timezone_match = region_entries['entries'].select { |detail, zone| zone == timezone }
+      timezone_match = region_entries.select { |detail, zone| zone == timezone }
       case timezone_match # Hash#select returns an array in 1.8 and hash in 1.9
       when Array
         timezone_match = timezone_match.flatten
       end
       timezone_valid = timezone_match.present?
       unless region_valid && timezone_valid
-        errors.add :base, _("Mismatch in region and timezone specification: '#{region}' => '#{timezone}'")
+        errors.add :base, _("Mismatch in region and timezone specification: '#{region}', '#{timezone}'")
       end
     else
       errors.add :base, _("Unknown region '#{region}'")
@@ -184,14 +183,18 @@ class Systemtime < BaseModel::Base
   end
 
   def update_timezone
-    region_entries = yapi_response['zones'].find { |zone| zone['name'] == region }
-    timezone_pair = region_entries['entries'].select { |detail, zone| zone == timezone }
+    timezone_pair = region_entries.select { |detail, zone| zone == timezone }
     case timezone_pair
     when Array
       timezone_pair.flatten.first
     when Hash
       timezone_pair.keys.first
     end
+  end
+
+  def region_entries
+    region_data = yapi_response['zones'].find { |zone| zone['name'] == region }
+    region_data ? region_data['entries'] : {}
   end
 
   def update
