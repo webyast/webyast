@@ -44,7 +44,7 @@ class Systemtime < BaseModel::Base
   validates_inclusion_of :utcstatus, :in => ['true','false', true, false], :allow_nil => true
   attr_accessor :timezones
   attr_accessor :hwclock
-  attr_writer   :region
+  attr_accessor :region
   attr_accessor :yapi_response
   attr_accessor :timezone_details
   private       :timezone_details=, :timezones=, :hwclock=, :yapi_response
@@ -84,10 +84,6 @@ class Systemtime < BaseModel::Base
     render_attributes.to_json params.merge :root=>:systemtime, :dasherize => false
   end
 
-  def region
-    @region ||= timezones.find {|tz| tz[:timezones].find {|zone| zone == timezone }}[:region]
-  end
-
   def regions
     @regions ||= timezones.collect { |zone| zone[:region] }
   end
@@ -115,12 +111,11 @@ class Systemtime < BaseModel::Base
       when Array
         timezone_match = timezone_match.flatten
       end
-      timezone_valid = timezone_match.present?
-      unless region_valid && timezone_valid
-        errors.add :base, _("Mismatch in region and timezone specification: '#{region}', '#{timezone}'")
+      unless timezone_match.present?
+        errors.add :timezone, _("Mismatch in region and timezone specification: '#{region}', '#{timezone}'")
       end
     else
-      errors.add :base, _("Unknown region '#{region}'")
+      errors.add :region, _("Unknown region '#{region}'")
     end
     Rails.logger.error "Validation failed: #{errors.full_messages.join ','}" if errors.present?
   end
@@ -138,6 +133,7 @@ class Systemtime < BaseModel::Base
     self.timezone_details = yapi_response['timezone']
     #convert date to format for datepicker
     self.date.sub!(/^(\d+)-(\d+)-(\d+)/,'\3/\2/\1')
+    self.region = timezones.find {|tz| tz[:timezones].find {|zone| zone == timezone }}[:region]
     self.utcstatus =
       case yapi_response["utcstatus"]
       when "UTC"
