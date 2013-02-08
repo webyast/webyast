@@ -26,21 +26,27 @@
 
 GET /time
 
-  Get the list of the current time configuration and also 
-  a list of all available timezones.
+  Get the list of the current time configuration.
 
   CURL example:
   curl http://localhost:4984/time -u <user>:<password> -H "Accept: application/xml"
 
 XmlResult: time_get
 
-PUT /time
+POST /time
 
-  Update the system time configuration.
+  Change the system time configuration.
 
   CURL example:
   curl http://localhost/time -H "Accept: text/xml" -u <user>:<password> -X POST --@data time_put_request -H "Content-Type: text/xml"
 
 
-XmlBody: time_put_request
-XmlResult: time_put_response
+XmlBody: time_post_request
+XmlResult: time_post_response
+
+GET /time/timezones
+
+  Get the list of all available timezones and regions.
+
+  CURL example:
+  curl http://localhost:4984/time/timezones -u <user>:<password> -H "Accept: application/xml"
