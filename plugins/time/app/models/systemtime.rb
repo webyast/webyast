@@ -71,17 +71,6 @@ class Systemtime < BaseModel::Base
     super
   end
 
-  def render_attributes
-    {
-      :region    => region,
-      :timezone  => timezone,
-      :utcstatus => utcstatus,
-      :hwclock   => hwclock,
-      :date      => date,
-      :time      => time
-    }
-  end
-
   def to_xml params={}
     render_attributes.to_xml params.merge :root=>:systemtime, :dasherize => false
   end
@@ -165,6 +154,17 @@ class Systemtime < BaseModel::Base
       new_zones.push({ :region => yapi_zones['name'], :timezones => yapi_zones['entries'].values })
       new_zones
     end
+  end
+
+  def render_attributes
+    {
+      :region    => region,
+      :timezone  => timezone,
+      :utcstatus => utcstatus,
+      :hwclock   => hwclock,
+      :date      => date,
+      :time      => time
+    }
   end
 
   def update_utc_status
