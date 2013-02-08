@@ -62,11 +62,16 @@ class Systemtime < BaseModel::Base
   }
 
   def self.find
-    new
+    new :load_yapi_response => true
   end
 
   def initialize params={}
-    load_yapi_response
+    if params.delete :load_yapi_response
+      load_yapi_response
+      map_yapi_to_attributes
+    else
+      load_default_data
+    end
     self.hwclock = File.exist? "/sbin/hwclock"
     super
   end
@@ -89,12 +94,20 @@ class Systemtime < BaseModel::Base
 
   def inspect
     "<##{self.class}:0x#{"%x" % (object_id.abs*2)} @region=#{region} @timezone=#{timezone} @time=#{time} " +
-    "@date=#{date} @utcstatus=#{utcstatus} @hwclock=#{hwclock} @timezone_details=#{timezone_details} >"
+    "@date=#{date} @utcstatus=#{utcstatus} @hwclock=#{hwclock} >"
   end
 
   private
 
+  def load_default_data
+    self.region   = ''
+    self.timezone = ''
+    self.time     = ''
+    self.yapi_response = {'zones'=>[]}
+  end
+
   def matching_with_yapi_entries
+    load_yapi_response if yapi_response['zones'].empty?
     region_valid = !!region_entries.present?
     if region_valid
       timezone_match = region_entries.select { |detail, zone| zone == timezone }
@@ -109,11 +122,14 @@ class Systemtime < BaseModel::Base
     else
       errors.add :base, _("Unknown region '#{region}'")
     end
-    Rails.logger.error errors.full_messages if errors.present?
+    Rails.logger.error "Validation failed: #{errors.full_messages.join ','}" if errors.present?
   end
 
   def load_yapi_response
     self.yapi_response = YastService.Call "YaPI::TIME::Read", TIMEZONE_KEYS
+  end
+
+  def map_yapi_to_attributes
     timedate           = yapi_response["time"]
     self.time          = timedate[timedate.index(" - ")+3,8]
     self.date          = timedate[0..timedate.index(" - ")-1]
