@@ -5,6 +5,11 @@ Sun Feb 10 17:21:11 UTC 2013 - lslezak@suse.cz
 - 0.3.43
 
 -------------------------------------------------------------------
+Tue Jan 29 17:25:34 UTC 2013 - lslezak@suse.cz
+
+- updated passenger dependencies for 12.2
+
+-------------------------------------------------------------------
 Fri Jan 25 10:42:45 CET 2013 - ro@suse.de
 
 - add polkit-default-privs to buildrequires for 12.3 and newer 
