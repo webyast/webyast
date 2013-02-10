@@ -1,7 +1,7 @@
 -------------------------------------------------------------------
 Sun Feb 10 17:21:11 UTC 2013 - lslezak@suse.cz
 
-- use generic syslog dependency instead of syslog-ng
+- use generic syslog dependency instead of syslog-ng (bnc#802748)
 - 0.3.43
 
 -------------------------------------------------------------------
