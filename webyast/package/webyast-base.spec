@@ -10,7 +10,7 @@
 
 
 Name:           webyast-base
-Version:        0.3.42
+Version:        0.3.43
 Release:        0
 Provides:       yast2-webservice = %{version}
 Obsoletes:      yast2-webservice < %{version}
@@ -52,7 +52,7 @@ Requires:       rubygem-passenger-nginx >= 3.0.14
 %endif
 
 Requires:       nginx >= 1.0.15
-Requires:       syslog-ng, check-create-certificate, yast2-dbus-server
+Requires:       syslog, check-create-certificate, yast2-dbus-server
 Requires:	rubygem-ruby-dbus
 
 Requires:       rubygem-webyast-rake-tasks >= 0.3.5, webyast-base-branding
