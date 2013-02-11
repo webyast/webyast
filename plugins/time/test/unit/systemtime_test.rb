@@ -56,20 +56,21 @@ class SystemtimeTest < ActiveSupport::TestCase
       "time" => "2009-07-02 - 12:18:00"
     }
 
-  WRITE_ARGUMENTS_TIME = {
-      "timezone"=> "America/Kentucky/Monticello",
-      "utcstatus"=> "local",
-      "time" => "2009-07-02 - 12:18:00"
+  WRITE_TIME_ARGS = {
+    :model => {
+      :timezone => 'Ukraine (Kiev)',
+      :region   => 'Europe',
+      :time     => '13:00:00',
+      :date     => '02/02/2022',
+      :config   => 'manual',
+      :utc      => true
+    },
+    :yapi  => {
+      'timezone' => 'Europe/Kiev',
+      'currenttime' => '2022-02-02 - 13:00:00',
+      'utcstatus'=> 'UTC'
     }
-
-  WRITE_ARGUMENTS_NTP = {
-      :timezone=> "America/Kentucky/Monticello",
-      :utcstatus=> "local",
-    }
-
-  def setup
-    Systemtime.stubs(:permission_check)
-  end
+  }
 
   def stub_yapi_read params
     YastService.stubs(:Call).with("YaPI::TIME::Read", Systemtime::TIMEZONE_KEYS).returns params[:returns]
@@ -90,10 +91,18 @@ class SystemtimeTest < ActiveSupport::TestCase
     assert_equal true, model.utcstatus
   end
 
-  #TODO
   def test_writing_system_time
     stub_yapi_read :returns => READ_RESPONSE
+    model = Systemtime.new WRITE_TIME_ARGS[:model]
+    stub_yapi_write :with => WRITE_TIME_ARGS[:yapi]
+    assert model.save, "Model is not valid, errors: #{model.errors.full_messages}"
+  end
+
+  def test_change_date
+    stub_yapi_read :returns => READ_RESPONSE
     model = Systemtime.find
+    model.date = '01/01/2022'
+    assert model.save, "Saving failed, errors: #{model.errors.full_messages}"
   end
 
   def test_loading_without_set_timezone #bnc#582166
@@ -130,9 +139,9 @@ class SystemtimeTest < ActiveSupport::TestCase
     stub_yapi_read :returns => READ_RESPONSE
     model = Systemtime.find
     xml_attributes = Hash.from_xml model.to_xml
-    xml_attributes[:systemtime].each_pair do |attr, value|
-      assert model.respond_to? :attr
-      assert_equal value, model.__send__ value
+    xml_attributes['systemtime'].each do |attr, value|
+      assert model.respond_to?(attr), "Attribute '#{attr}' does not exist"
+      assert_equal value, model.__send__(attr)
     end
   end
 
