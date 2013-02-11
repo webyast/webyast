@@ -62,12 +62,11 @@ class Systemtime < BaseModel::Base
   }
 
   def self.find
-    new :load_yapi_response => true
+    new
   end
 
   def initialize params={}
-    if params.delete :load_yapi_response
-      load_yapi_response
+    if load_yapi_response
       map_yapi_to_attributes
     else
       load_default_data
@@ -103,8 +102,7 @@ class Systemtime < BaseModel::Base
   end
 
   def matching_with_yapi_entries
-    load_yapi_response if yapi_response['zones'].empty?
-    region_valid = !!region_entries.present?
+    region_valid = region_entries.present?
     if region_valid
       timezone_match = region_entries.select { |detail, zone| zone == timezone }
       case timezone_match # Hash#select returns an array in 1.8 and hash in 1.9
