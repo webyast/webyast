@@ -20,41 +20,11 @@
 #++
 
 require File.expand_path(File.dirname(__FILE__) + "/../test_helper")
-require 'systemtime'
 
 class SystemtimeTest < ActiveSupport::TestCase
+  include SystemtimeHelpers
 
-  TEST_TIMEZONES = [{
-      "name" => "Europe",
-      "central" => "Europe/Prague",
-      "entries" => {
-        "Europe/Prague" => "Czech Republic",
-        "Europe/Kiev" => "Ukraine (Kiev)"
-      }
-    },
-    {
-      "name" => "USA",
-      "central" => "America/Chicago",
-      "entries" => {
-        "America/Chicago" => "Central (Chicago)",
-        "America/Kentucky/Monticello" => "Kentucky (Monticello)"
-      }
-    }
-  ]
-
-  READ_RESPONSE = {
-      "zones"=> TEST_TIMEZONES,
-      "timezone"=> "Europe/Prague",
-      "utcstatus"=> "UTC",
-      "time" => "2009-07-02 - 12:18:00"
-    }
-
-  READ_RESPONSE_BROKEN_TIMEZONE = {
-      "zones"=> TEST_TIMEZONES,
-      "timezone"=> "",
-      "utcstatus"=> "UTC",
-      "time" => "2009-07-02 - 12:18:00"
-    }
+  BROKEN_TIMEZONE = { "timezone" => "" }
 
   WRITE_TIME_ARGS = {
     :model => {
@@ -72,76 +42,66 @@ class SystemtimeTest < ActiveSupport::TestCase
     }
   }
 
-  def stub_yapi_read params
-    YastService.stubs(:Call).with("YaPI::TIME::Read", Systemtime::TIMEZONE_KEYS).returns params[:returns]
-  end
-
-  def stub_yapi_write params
-    YastService.stubs(:Call).with("YaPI::TIME::Write", params[:with]).returns(true).once
-    YastService.stubs(:Call).with("YaPI::SERVICES::Execute",
-      { "name" => ["s","collectd"], "action" => ["s","restart"] }).once
-  end
-
   def test_reading_system_time
-    stub_yapi_read :returns => READ_RESPONSE
-    model = Systemtime.find
-    assert_equal "02/07/2009", model.date
-    assert_equal "12:18:00", model.time
-    assert_equal "Czech Republic", model.timezone
-    assert_equal true, model.utcstatus
+    stub_yapi_read
+    system_time = Systemtime.find
+    assert_equal "02/07/2009", system_time.date
+    assert_equal "12:18:00", system_time.time
+    assert_equal "Czech Republic", system_time.timezone
+    assert system_time.utcstatus, "Utc should be enabled"
   end
 
   def test_writing_system_time
-    stub_yapi_read :returns => READ_RESPONSE
-    model = Systemtime.new WRITE_TIME_ARGS[:model]
+    stub_yapi_read
+    system_time = Systemtime.new WRITE_TIME_ARGS[:model]
     stub_yapi_write :with => WRITE_TIME_ARGS[:yapi]
-    assert model.save, "Model is not valid, errors: #{model.errors.full_messages}"
+    assert system_time.save, "Model is not valid, errors: #{system_time.errors.full_messages}"
   end
 
   def test_change_date
-    stub_yapi_read :returns => READ_RESPONSE
-    model = Systemtime.find
-    model.date = '01/01/2022'
-    assert model.save, "Saving failed, errors: #{model.errors.full_messages}"
+    stub_yapi_read
+    system_time = Systemtime.find
+    system_time.date = '01/01/2022'
+    assert system_time.save, "Saving failed, errors: #{system_time.errors.full_messages}"
   end
 
   def test_loading_without_set_timezone #bnc#582166
-    stub_yapi_read :returns => READ_RESPONSE_BROKEN_TIMEZONE
-    model = Systemtime.find
-    assert_equal "Czech Republic", model.timezone
+    stub_yapi_read :update => BROKEN_TIMEZONE
+    system_time = Systemtime.find
+    assert_equal "Czech Republic", system_time.timezone
   end
 
   def test_saving_without_time
-    stub_yapi_read :returns => READ_RESPONSE
-    model = Systemtime.find
-    model.time = ''
-    assert !model.save
-    assert model.errors[:time].present?
+    stub_yapi_read
+    system_time = Systemtime.find
+    system_time.time = ''
+    assert !system_time.save
+    assert system_time.errors[:time].present?, "Expected error message for time attribute"
   end
 
   def test_setter_without_timezone
-    stub_yapi_read :returns => READ_RESPONSE
-    model = Systemtime.find
-    model.timezone = ''
-    assert !model.save
-    assert model.errors[:timezone].present?
+    stub_yapi_read
+    system_time = Systemtime.find
+    system_time.timezone = ''
+    assert !system_time.save, "Expected invalid state due to missing timezone"
+    assert system_time.errors[:timezone].present?
   end
 
   def test_setter_with_unknown_region
-    stub_yapi_read :returns => READ_RESPONSE
-    model = Systemtime.find
-    model.region = 'Vysocany'
-    assert !model.save
-    assert model.errors[:region].present?
+    stub_yapi_read
+    system_time = Systemtime.find
+    system_time.region = 'Vysocany'
+    assert !system_time.save
+    assert system_time.errors[:region].present?
   end
 
   def test_xml
-    stub_yapi_read :returns => READ_RESPONSE
-    model = Systemtime.find
-    xml_attributes = Hash.from_xml model.to_xml
+    stub_yapi_read
+    system_time = Systemtime.find
+    xml_attributes = Hash.from_xml system_time.to_xml
     xml_attributes['systemtime'].each do |attr, value|
-      assert model.respond_to?(attr), "Attribute '#{attr}' does not exist"
-      assert_equal value, model.__send__(attr)
+      assert system_time.respond_to?(attr), "Attribute '#{attr}' does not exist"
+      assert_equal value, system_time.__send__(attr)
     end
   end
 
