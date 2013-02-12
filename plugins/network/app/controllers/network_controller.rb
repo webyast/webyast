@@ -53,6 +53,7 @@ class NetworkController < ApplicationController
     @number = @ifcs.select{|id, iface| id if id.match(@type)}.count
     @physical = @ifcs.select{|k, i| i if k.match(/eth|wlan/)}
 
+    @dhcp_hostname_enabled = @hostname.dhcp_hostname_enabled
 
     respond_to do |format|
       format.html
@@ -76,7 +77,7 @@ class NetworkController < ApplicationController
 
     @ifc = Interface.new({"type"=>params[:type], "bootproto"=>"dhcp", "startmode"=>"auto"}, "#{@type}#{@number}")
 
-    #@dhcp_hostname_enabled = @hostname.respond_to?("dhcp_hostname")
+    @dhcp_hostname_enabled = @hostname.dhcp_hostname_enabled
 
     respond_to do |format|
       format.html # show.html.erb
@@ -124,7 +125,7 @@ class NetworkController < ApplicationController
     ### HOSTANEM ###
     hostname = network["hostname"]
 
-    if hostname.name != params["hostname"] && hostname.domain != params["domain"]
+    if hostname.name != params["hostname"] || hostname.domain != params["domain"]
       hostname.name   = params["hostname"]
       hostname.domain = params["domain"]
 
