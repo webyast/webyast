@@ -37,7 +37,7 @@ class Hostname < BaseModel::Base
 
   def initialize(args)
     super
-    @dhcp_hostname_enabled = self.respond_to?(:dhcp_hostname)
+    @dhcp_hostname_enabled = !!dhcp_hostname
   end
 
 
