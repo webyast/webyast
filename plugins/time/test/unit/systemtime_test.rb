@@ -45,10 +45,11 @@ class SystemtimeTest < ActiveSupport::TestCase
   def test_reading_system_time
     stub_yapi_read
     system_time = Systemtime.find
-    assert_equal "02/07/2009", system_time.date
-    assert_equal "12:18:00", system_time.time
-    assert_equal "Czech Republic", system_time.timezone
-    assert system_time.utcstatus, "Utc should be enabled"
+    assert_equal READ_RESPONSE[:model][:date], system_time.date
+    assert_equal READ_RESPONSE[:model][:time], system_time.time
+    assert_equal READ_RESPONSE[:model][:timezone], system_time.timezone
+    assert_equal READ_RESPONSE[:model][:region], system_time.region
+    assert_equal READ_RESPONSE[:model][:utcstatus], system_time.utcstatus
   end
 
   def test_writing_system_time
