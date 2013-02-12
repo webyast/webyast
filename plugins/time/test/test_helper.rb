@@ -27,16 +27,23 @@ module SystemtimeHelpers
   ]
 
   READ_RESPONSE = {
+    :yapi => {
       "zones"=> TEST_TIMEZONES,
       "timezone"=> "Europe/Prague",
       "utcstatus"=> "UTC",
       "time" => "2012-02-02 - 12:18:00"
+    },
+    :model => {
+      :time      => '12:18:00',
+      :date      => '02/02/2012',
+      :utcstatus => true,
+      :region    => 'Europe',
+      :timezone  => 'Czech Republic'
+    }
   }
 
-  WRITE_RESPONSE = READ_RESPONSE.except('zones', 'time').update 'currenttime' => '2012-02-02 - 12:18:00'
-
   def stub_yapi_read params={}
-    return_value = params[:update] ? READ_RESPONSE.update(params[:update]) : READ_RESPONSE
+    return_value = params[:update] ? READ_RESPONSE[:yapi].merge(params[:update]) : READ_RESPONSE[:yapi]
     YastService.stubs(:Call).with("YaPI::TIME::Read", ::Systemtime::TIMEZONE_KEYS).returns return_value
   end
 
