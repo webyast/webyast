@@ -60,41 +60,45 @@ class TimeController < ApplicationController
   def update
     authorize! :write, Time
     raise InvalidParameters.new :time => "Missing parameter 'systemtime'" unless params[:systemtime]
-    new_time = Systemtime.new params[:systemtime]
-    if new_time.valid?
-      system_time = Systemtime.find
-      case params[:systemtime][:config]
-      when "manual"
-        if service_available && ntp_available
-          authorize! :execute, Service
-          service = Service.new("ntp")
-          service.save({:execute => "stop" })
+    system_time = Systemtime.new params[:systemtime]
+    if system_time.valid?
+      if params[:systemtime][:config]
+        case params[:systemtime][:config]
+        when "manual"
+          if service_available && ntp_available
+            authorize! :execute, Service
+            service = Service.new("ntp")
+            service.save({:execute => "stop" })
+          end
+          system_time.time = params[:systemtime][:time]
+          system_time.date = params[:systemtime][:date]
+        when "ntp_sync"
+          if ntp_available
+            authorize! :synchronize, Ntp
+            authorize! :setserver,   Ntp
+            ntp = Ntp.find
+            ntp.actions[:synchronize] = true
+            ntp.actions[:synchronize_utc] = system_time.utcstatus
+            ntp.actions[:ntp_server] = params[:ntp_server]
+            ntp.update
+            Service.new('ntp').save(:execute=>'start') if service_available
+          end
         end
-        system_time.time = params[:systemtime][:time]
-        system_time.date = params[:systemtime][:date]
-      when "ntp_sync"
-        if ntp_available
-          authorize! :synchronize, Ntp
-          authorize! :setserver,   Ntp
-          ntp = Ntp.find
-          ntp.actions[:synchronize] = true
-          ntp.actions[:synchronize_utc] = system_time.utcstatus
-          ntp.actions[:ntp_server] = params[:ntp_server]
-          ntp.update
-          Service.new('ntp').save(:execute=>'start') if service_available
-        end
+      else
+        system_time.time = nil
+        system_time.date = nil
       end
+      system_time.region    = params[:systemtime][:region]
+      system_time.timezone  = params[:systemtime][:timezone]
+      system_time.utcstatus = params[:systemtime][:utcstatus]
+      system_time.save
     else
-      raise InvalidParameters.new :time => new_time.errors.full_messages.join(', ')
+      raise InvalidParameters.new :time => system_time.errors.full_messages.join(', ')
     end
-    system_time.region    = params[:systemtime][:region]
-    system_time.timezone  = params[:systemtime][:timezone]
-    system_time.utcstatus = params[:systemtime][:utcstatus]
-    system_time.save
     respond_to do |format|
       format.html do
         flash[:notice] = _('Time settings have been written.')
-        redirect_to :action => 'index'
+        redirect_to :action => 'index', :controller => :time
       end
       format.xml  { render :xml  => system_time }
       format.json { render :json => system_time }
