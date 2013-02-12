@@ -93,11 +93,11 @@ class Interface < BaseModel::Base
     end
 
     if(id && id.match("br"))
-        @bridge_ports = (bridge_ports.class == "Array")? bridge_ports.split(" ") : bridge_ports || [ ]
+        @bridge_ports = (bridge_ports.is_a? String)? bridge_ports.split(" ") : bridge_ports || [ ]
     end
 
     if(id && id.match("bond"))
-        @bond_slaves = (bond_slaves.class == "Array")? bond_slaves.split(" ") : bond_slaves || [ ]
+        @bond_slaves = (bond_slaves.is_a? String)? bond_slaves.split(" ") : bond_slaves || [ ]
     end
 
     @bond_mode,@bond_miimon  = @bond_option.split(" ") unless bond_option.blank?
