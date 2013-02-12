@@ -54,6 +54,7 @@ class KerberosController < ApplicationController
         @kerberos.load params[:kerberos]
         #translate from text to boolean
         @kerberos.enabled = params[:kerberos][:enabled] == "true"
+        @kerberos.dns_used = params[:kerberos][:use_dns] == "true"
       else
         @kerberos.enabled = false
       end
