@@ -210,10 +210,12 @@ class Systemtime < BaseModel::Base
   def update
     if valid?
       updated_params = {}
-      updated_params.merge! 'timezone'    => update_timezone
-      updated_params.merge! 'utcstatus'   => update_utc_status
-      updated_params.merge! 'currenttime' => update_date_time
-      updated_params.delete 'currenttime' if updated_params['currenttime'].nil?
+      updated_params.merge! \
+        'timezone'    => update_timezone,
+        'utcstatus'   => update_utc_status,
+        'currenttime' => update_date_time
+      # do not specify the currenttime key if we want no change
+      updated_params.delete 'currenttime' unless updated_params['currenttime']
       Rails.logger.info "Going to write new time settings with: #{updated_params.inspect}"
       begin
         saved = YastService.Call("YaPI::TIME::Write", updated_params)
