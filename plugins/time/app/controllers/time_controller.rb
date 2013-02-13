@@ -83,15 +83,16 @@ public
       authorize! :setserver, Ntp
     end
 
-    raise InvalidParameters.new :time => "missing region" unless params.has_key?(:region)
-    raise InvalidParameters.new :time => "missing timezone" unless params.has_key?(:timezone)
+    #pass enclosed parameters from REST API, TODO unify forms so html and xml input is same
+    parameters = params[:systemtime] ? params[:systemtime] : params
+    raise InvalidParameters.new :time => "missing timezone" unless parameters.has_key?(:timezone)
 
     t = Systemtime.find
-    t.load_timezone params
+    t.load_timezone parameters
     t.clear_time #do not set time by default
     error = nil
 
-    case params[:timeconfig]
+    case parameters[:timeconfig]
     when "manual"
       if @service_available
         service = Service.new("ntp")
@@ -99,13 +100,13 @@ public
       else
         logger.error "Service module is not installed -> cannot stop ntp"
       end
-      t.load_time params
+      t.load_time parameters
     when "ntp_sync"
       #start ntp service
       ntp = Ntp.find
       ntp.actions[:synchronize] = true
       ntp.actions[:synchronize_utc] = t.utcstatus
-      ntp.actions[:ntp_server] = params[:ntp_server] unless params[:ntp_server].blank?
+      ntp.actions[:ntp_server] = parameters[:ntp_server] unless parameters[:ntp_server].blank?
       begin
         ntp.update
       rescue Exception => error
@@ -119,7 +120,7 @@ public
       end
     when "none"
     else
-      logger.error "Unknown value for timeconfig #{params[:timeconfig]}"
+      logger.error "Unknown value for timeconfig #{parameters[:timeconfig]}"
     end
 
     t.save unless error
