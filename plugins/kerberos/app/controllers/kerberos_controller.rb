@@ -32,6 +32,12 @@ class KerberosController < ApplicationController
       @kerberos = nil
     end
 
+    @kerberos_missing = kerberos_missing?
+
+    if @kerberos_missing
+      flash[:warning] = _("Kerberos cannot be enabled, because pam plugin missing. Please install corresponding pam_krb5 plugin and on 64bit architecture also its 32bit version")
+    end
+
     respond_to do |format|
       format.html
       format.xml  {
@@ -74,6 +80,10 @@ class KerberosController < ApplicationController
       return
     end
 
+    if kerberos_missing?
+      #hack to simple report user that part of kerberos missing, FIXME in future to better report problems
+      @kerberos = { "error" => "Kerberos cannot be enabled, because pam plugin missing. Please install corresponding pam_krb5 plugin and on 64bit architecture also its 32bit version" }
+    end
     respond_to do |format|
       format.html {redirect_to root_path}
       format.xml  {render :xml => @kerberos.to_xml}
@@ -98,6 +108,17 @@ class KerberosController < ApplicationController
   # See update
   def create
     update
+  end
+
+private 
+  def kerberos_missing?
+    `rpm -q pam_krb5`
+    kerberos_missing = $?.exitstatus != 0
+    if `uname --hardware-platform`.chomp == 'x86_64'
+      `rpm -q pam_krb5-32bit`
+      kerberos_missing ||= $?.exitstatus != 0
+    end
+    return kerberos_missing
   end
 
 end
