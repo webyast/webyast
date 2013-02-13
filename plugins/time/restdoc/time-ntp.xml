@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<systemtime>
+ <timeconfig>ntp_sync</timeconfig>
+ <ntp_server>ntp.example.com</ntp_server>
+ <utcstatus type="boolean">true</utcstatus>
+ <timezone>European/Berlin</timezone>
+</systemtime>
