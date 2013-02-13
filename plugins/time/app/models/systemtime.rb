@@ -89,7 +89,7 @@ class Systemtime < BaseModel::Base
 
   def inspect
     "<##{self.class}:0x#{"%x" % (object_id.abs*2)} @region=#{region} @timezone=#{timezone} @time=#{time} " +
-    "@date=#{date} @utcstatus=#{utcstatus} @hwclock=#{hwclock} >"
+    "@date=#{date} @utcstatus=#{utcstatus} >"
   end
 
   private
