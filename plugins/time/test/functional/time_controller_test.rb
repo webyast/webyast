@@ -21,118 +21,85 @@
 
 require File.expand_path(File.dirname(__FILE__) + "/../test_helper")
 require File.join(RailsParent.parent, "test","devise_helper")
-require "systemtime"
 
 class TimeControllerTest < ActionController::TestCase
-
-    INITIAL_DATA = {
-      :timezone => "Europe/Prague",
-      :time => "12:18:00",
-      :date => "02/07/2009",
-      :utcstatus => "true" }
-
-
-    TEST_TIMEZONES = [
-{"name"=>"Europe", "entries"=>[{"name"=>"Uzhgorod", "id"=>"Europe/Uzhgorod"}, {"name"=>"Russia (Moscow)", "id"=>"Europe/Moscow"}, {"name"=>"Jersey", "id"=>"Europe/Jersey"}, {"name"=>"Belgium", "id"=>"Europe/Brussels"}, {"name"=>"Netherlands", "id"=>"Europe/Amsterdam"}, {"name"=>"Miquelon", "id"=>"America/Miquelon"}, {"name"=>"Ukraine (Zaporozhye)", "id"=>"Europe/Zaporozhye"}, {"name"=>"France", "id"=>"Europe/Paris"}, {"name"=>"Norway", "id"=>"Europe/Oslo"}, {"name"=>"Malta", "id"=>"Europe/Malta"}, {"name"=>"Finland", "id"=>"Europe/Helsinki"}, {"name"=>"Greece", "id"=>"Europe/Athens"}, {"name"=>"Canary Islands", "id"=>"Atlantic/Canary"}, {"name"=>"Macedonia", "id"=>"Europe/Skopje"}, {"name"=>"Monaco", "id"=>"Europe/Monaco"}, {"name"=>"Iceland", "id"=>"Atlantic/Reykjavik"}, {"name"=>"San Marino", "id"=>"Europe/San_Marino"}, {"name"=>"Italy", "id"=>"Europe/Rome"}, {"name"=>"Portugal", "id"=>"Europe/Lisbon"}, {"name"=>"Turkey", "id"=>"Europe/Istanbul"}, {"name"=>"Ireland", "id"=>"Europe/Dublin"}, {"name"=>"Slovakia", "id"=>"Europe/Bratislava"}, {"name"=>"Germany", "id"=>"Europe/Berlin"}, {"name"=>"Spain", "id"=>"Europe/Madrid"}, {"name"=>"Isle of Man", "id"=>"Europe/Isle_of_Man"}, {"name"=>"Guernsey", "id"=>"Europe/Guernsey"}, {"name"=>"Denmark", "id"=>"Europe/Copenhagen"}, {"name"=>"Switzerland", "id"=>"Europe/Zurich"}, {"name"=>"Croatia", "id"=>"Europe/Zagreb"}, {"name"=>"Estonia", "id"=>"Europe/Tallinn"}, {"name"=>"Ukraine (Kiev)", "id"=>"Europe/Kiev"}, {"name"=>"Poland", "id"=>"Europe/Warsaw"}, {"name"=>"Lithuania", "id"=>"Europe/Vilnius"}, {"name"=>"Vatican", "id"=>"Europe/Vatican"}, {"name"=>"Czech Republic", "id"=>"Europe/Prague"}, {"name"=>"Aaland Islands", "id"=>"Europe/Mariehamn"}, {"name"=>"Russia (Kaliningrad)", "id"=>"Europe/Kaliningrad"}, {"name"=>"Gibraltar", "id"=>"Europe/Gibraltar"}, {"name"=>"Serbia", "id"=>"Europe/Belgrade"}, {"name"=>"Austria", "id"=>"Europe/Vienna"}, {"name"=>"Liechtenstein", "id"=>"Europe/Vaduz"}, {"name"=>"Luxembourg", "id"=>"Europe/Luxembourg"}, {"name"=>"Slovenia", "id"=>"Europe/Ljubljana"}, {"name"=>"Andorra", "id"=>"Europe/Andorra"}, {"name"=>"Azores", "id"=>"Atlantic/Azores"}, {"name"=>"Ukraine (Simferopol)", "id"=>"Europe/Simferopol"}, {"name"=>"Belarus", "id"=>"Europe/Minsk"}, {"name"=>"United Kingdom", "id"=>"Europe/London"}, {"name"=>"Romania", "id"=>"Europe/Bucharest"}, {"name"=>"Russia (Volgograd)", "id"=>"Europe/Volgograd"}, {"name"=>"Albania", "id"=>"Europe/Tirane"}, {"name"=>"Sweden", "id"=>"Europe/Stockholm"}, {"name"=>"Bulgaria", "id"=>"Europe/Sofia"}, {"name"=>"Bosnia & Herzegovina", "id"=>"Europe/Sarajevo"}, {"name"=>"Russia (Samara)", "id"=>"Europe/Samara"}, {"name"=>"Latvia", "id"=>"Europe/Riga"}, {"name"=>"Montenegro", "id"=>"Europe/Podgorica"}, {"name"=>"Moldova", "id"=>"Europe/Chisinau"}, {"name"=>"Hungary", "id"=>"Europe/Budapest"}], "central"=>"Europe/Prague"
-    },
-{"name"=>"USA", "entries"=>[{"name"=>"Hawaii (Honolulu)", "id"=>"Pacific/Honolulu"}, {"name"=>"Central (Chicago)", "id"=>"America/Chicago"}, {"name"=>"Alaska (Anchorage)", "id"=>"America/Anchorage"}, {"name"=>"Kentucky (Monticello)", "id"=>"America/Kentucky/Monticello"}, {"name"=>"Juneau", "id"=>"America/Juneau"}, {"name"=>"Indiana (Petersburg)", "id"=>"America/Indiana/Petersburg"}, {"name"=>"East Indiana (Indianapolis)", "id"=>"America/Indiana/Indianapolis"}, {"name"=>"Shiprock", "id"=>"America/Shiprock"}, {"name"=>"Pacific (Los Angeles)", "id"=>"America/Los_Angeles"}, {"name"=>"Indiana (Marengo)", "id"=>"America/Indiana/Marengo"}, {"name"=>"Samoa (Pago Pago)", "id"=>"Pacific/Pago_Pago"}, {"name"=>"Virgin Islands (St Thomas)", "id"=>"America/St_Thomas"}, {"name"=>"North Dakota (New Salem)", "id"=>"America/North_Dakota/New_Salem"}, {"name"=>"Indiana (Vevay)", "id"=>"America/Indiana/Vevay"}, {"name"=>"Mountain (Denver)", "id"=>"America/Denver"}, {"name"=>"Menominee", "id"=>"America/Menominee"}, {"name"=>"Indiana (Winamac)", "id"=>"America/Indiana/Winamac"}, {"name"=>"Boise", "id"=>"America/Boise"}, {"name"=>"Arizona (Phoenix)", "id"=>"America/Phoenix"}, {"name"=>"Indiana (Vincennes)", "id"=>"America/Indiana/Vincennes"}, {"name"=>"Aleutian (Adak)", "id"=>"America/Adak"}, {"name"=>"Eastern (New York)", "id"=>"America/New_York"}, {"name"=>"Michigan (Detroit)", "id"=>"America/Detroit"}, {"name"=>"Puerto Rico", "id"=>"America/Puerto_Rico"}, {"name"=>"Nome", "id"=>"America/Nome"}, {"name"=>"Kentucky (Louisville)", "id"=>"America/Kentucky/Louisville"}, {"name"=>"Yakutat", "id"=>"America/Yakutat"}, {"name"=>"North Dakota (Center)", "id"=>"America/North_Dakota/Center"}, {"name"=>"Indiana Starke (Knox)", "id"=>"America/Indiana/Knox"}, {"name"=>"Indiana (Tell City)", "id"=>"America/Indiana/Tell_City"}], "central"=>"America/Chicago"}
-    ]
-
-    DATA = {
-       "timeconfig"=>"manual",
-       "date"=>{"date"=>"16/08/2011"},
-       "currenttime"=>"14:07:26",
-       "timezone"=>"Europe/Prague", "region"=>"Europe" }
+  include SystemtimeHelpers
 
   def setup
     devise_sign_in
-    @model_class = Systemtime
-    time_mock = Systemtime.new(INITIAL_DATA)
-    time_mock.timezones = TEST_TIMEZONES
-    Systemtime.stubs(:find).returns(time_mock)
     TimeController.any_instance.stubs(:authorize!).returns(true)
-
-    @controller = TimeController.new
-    @data = DATA
   end
 
-  def test_update
-    mock_save
-    mime = Mime::XML
-    DATA[:format]='xml'
-    put :update, DATA
-    assert_response :success
+  def teardown
+    Mocha::Mockery.instance.stubba.unstub_all
   end
 
-  def test_create
-    mock_save
-    mime = Mime::XML
-    DATA[:format]='xml'
-    put :create, DATA
-    assert_response :success
-  end
-
-  def mock_save(use_ntp = false)
-
-    YastService.stubs(:Call).with("YaPI::TIME::Write",{}).returns(true)
-    YastService.stubs(:Call).with("YaPI::TIME::Write", {"utcstatus"=>"localtime", "timezone"=>"Europe/Prague", "currenttime"=>"2011-16-08 - 14:07:26"}).returns(true)
-
-    unless use_ntp
-      YastService.stubs(:Call).with("YaPI::SERVICES::Execute", {"name"=>["s", "ntp"], "action"=>["s", "stop"], "custom"=>["b", false]}).once.returns(true)
-    else
-      YastService.stubs(:Call).with('YaPI::NTP::Synchronize', true, 'de.pool.ntp.org').once.returns("OK")
-      YastService.stubs(:Call).with("YaPI::SERVICES::Execute", {"name"=>["s", "ntp"], "action"=>["s", "start"], "custom"=>["b", false]}).once.returns(true)
-    end
-
-    YastService.stubs(:Call).with("YaPI::SERVICES::Execute", {'name' => ['s', 'collectd'], 'action' => ['s', 'restart']}).once.returns(true)
-    Time.stubs(:permission_check)
-  end
-
-  def test_index_html
+  def test_index
+    stub_yapi_read
     get :index
     assert_response :success
-    assert_valid_markup
-    assert assigns(:stime)
+    assert_not_nil assigns(:system_time)
   end
 
-  def test_commit
-    mock_save
-    Ntp.expects(:save).never #ntp is not called if time settings is manual
-    post :update, DATA
+  TIMEZONE = {
+    :model => {
+      :region   => 'USA',
+      :timezone => 'Kentucky (Monticello)',
+      :utcstatus => true
+    },
+    :yapi => {
+      'timezone' => 'America/Kentucky/Monticello',
+      'utcstatus' => 'UTC'
+    }
+  }
+
+  def test_update_timezone
+    stub_yapi_read
+    stub_yapi_write :with => TIMEZONE[:yapi]
+    post :create, :systemtime => TIMEZONE[:model]
     assert_response :redirect
-    assert_redirected_to :controller => "controlpanel", :action => "index"
+    assert_redirected_to :controller => :time, :action => :index
   end
 
-  def test_commit_wizard
-    mock_save
-    Ntp.expects(:save).never #ntp is not called if time settings is manual
-
-    session[:wizard_current] = "time"
-    session[:wizard_steps] = "language,time,test"
-    bs = Basesystem.new.load_from_session(session)
-    Basesystem.stubs(:find).returns(bs)
-    Basesystem.any_instance.stubs(:completed?).returns(false)
-
-    post :update, DATA
+  TIME_MANUAL = {
+    :model => {
+      :config  => 'manual',
+      :time    => '22:22:22',
+      :date    => '02/02/2000'
+    },
+    :yapi => {
+      'currenttime' => '2000-02-02 - 22:22:22'
+    }
+  }
+  def test_update_manual_time
+    stub_yapi_read
+    stub_yapi_write :with  => TIMEZONE[:yapi].merge(TIME_MANUAL[:yapi])
+    YastService.stubs(:Call).with("YaPI::SERVICES::Execute",
+    {"name"=>["s", "ntp"], "action"=>["s", "stop"], "custom"=>["b", false]}).once.returns(true)
+    Ntp.expects(:save).never
+    post :create, :systemtime => TIMEZONE[:model].merge(TIME_MANUAL[:model])
     assert_response :redirect
-    assert_redirected_to :controller => "controlpanel", :action => "nextstep",
-                         :done => "time"
+    assert_redirected_to :controller => :time, :action => :index
   end
 
-  def test_ntp
-    mock_save(use_ntp=true)
-    post :update, {"region"=>"Europe",
-                   "utc"=>"true",
-                   "timeconfig"=>"ntp_sync",
-                   "ntp_server"=>"de.pool.ntp.org",
-                   "timezone" => "Europe/Prague"}
+  TIME_NTP = {
+    :model => {
+      :config     => 'ntp_sync',
+      :ntp_server => 'time.ntpserver.com'
+    },
+    :yapi  => {
+      'ntp_server' => 'time.ntpserver.com'
+    }
+  }
+
+  def test_update_ntp_time
+    stub_yapi_read
+    YastService.stubs(:Call).with("YaPI::SERVICES::Execute",
+      {"name"=>["s", "ntp"], "action"=>["s", "start"], "custom"=>["b", false]}).once.returns(true)
+    Ntp.any_instance.stubs(:update).once
+    post :create, :systemtime => TIMEZONE[:model].merge(TIME_NTP[:model])
     assert_response :redirect
-    assert_redirected_to :controller => "controlpanel", :action => "index"
-  end
-
-  def test_timezones_ajax
-    post :timezones_for_region, { :value => "Europe" }
-    assert_response :success
+    assert_redirected_to :controller => :time, :action => :index
   end
 
 end
