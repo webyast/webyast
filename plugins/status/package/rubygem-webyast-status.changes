@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Thu Feb 14 12:56:46 CET 2013 - locilka@suse.com
+
+- Using more precise scale for Y axis for Network and Disk graphs
+  (bnc#798322)
+
+-------------------------------------------------------------------
 Fri Jan  4 15:48:15 UTC 2013 - lslezak@suse.cz
 
 - fixed displaying graph when the current value is out of the
