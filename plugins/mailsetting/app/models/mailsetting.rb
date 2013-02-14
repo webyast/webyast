@@ -47,7 +47,7 @@ class Mailsetting < BaseModel::Base
 
   TEST_MAIL_FILE = File.join(YaST::Paths::VAR,"mailsetting","test_sent")
   CACHE_ID = "webyast_mailsetting"
-  EMAIL_FORMAT_PATTERNS = /\A[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]+\z/
+  EMAIL_FORMAT_PATTERN = /\A[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]+\z/
 
   # read the settings from system
   def self.find
@@ -80,7 +80,7 @@ class Mailsetting < BaseModel::Base
   end
 
   def self.valid_mail_address? (address)
-    return !!address.match(EMAIL_FORMAT_PATTERNS)
+    return !!address.match(EMAIL_FORMAT_PATTERN)
   end
 
   def self.send_test_mail(to)
@@ -116,7 +116,7 @@ class Mailsetting < BaseModel::Base
 
   def email_address_format
     if test_mail_address.present?
-      errors.add :test_mail_address, _("is not valid") unless test_mail_address.match(EMAIL_FORMAT_PATTERNS)
+      errors.add :test_mail_address, _("is not valid") unless test_mail_address.match(EMAIL_FORMAT_PATTERN)
     end
   end
 end
