@@ -31,6 +31,22 @@
 class GraphsController < ApplicationController
   include ApplicationHelper
 
+  rescue_from ServiceNotRunning, CollectdOutOfSyncError do |error|
+    case error
+    when ServiceNotRunning
+      logger.error error.message
+      flash[:error] = _("Status not available.")
+    when CollectdOutOfSyncError
+      logger.error error.message
+      flash[:error] = _("Collectd is out of sync.")
+    end
+    respond_to do |format|
+      format.html { redirect_to :action => :index, :controller => :status }
+      format.xml  { render :xml  => error.to_xml,  :status => 500 }
+      format.json { render :json => error.to_json, :status => 500 }
+    end
+  end
+
   # PUT /graphs
   def update
     authorize! :writelimits, Metric
