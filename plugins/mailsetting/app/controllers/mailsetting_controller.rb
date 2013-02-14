@@ -57,22 +57,6 @@ public
   def update
     authorize! :write, Mailsetting
     mail_params = params[:mailsetting] || params[:mail] #keep mail for backwards compatibility with old REST API
-
-    if params.has_key? :send_mail
-      if request.format.html?
-        if Mailsetting.valid_mail_address?(mail_params[:test_mail_address])
-          Mailsetting.send_test_mail mail_params[:test_mail_address]
-          flash[:notice] = _("A test message has been sent to email address %s") % mail_params[:test_mail_address]
-          redirect_to :action => "show", :email => mail_params[:test_mail_address].to_s
-          return
-        else
-          flash[:error] = _("Wrong format for email address")
-          render :show
-          return
-        end
-      end
-    end
-
     @mail = Mailsetting.find
     @mail.load mail_params
 
@@ -80,6 +64,8 @@ public
       problem _(@mail.errors.full_messages.join(', '))
       return
     end
+
+    @mail.send_test_mail if params[:send_mail]
 
     begin
       response = @mail.save

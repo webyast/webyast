@@ -43,8 +43,11 @@ class Mailsetting < BaseModel::Base
   validates :password_confirmation,    :presence=>true
   validates :transport_layer_security, :presence=>true
 
+  validate :email_address_format
+
   TEST_MAIL_FILE = File.join(YaST::Paths::VAR,"mailsetting","test_sent")
   CACHE_ID = "webyast_mailsetting"
+  EMAIL_FORMAT_PATTERNS = /\A[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]+\z/
 
   # read the settings from system
   def self.find
@@ -77,7 +80,7 @@ class Mailsetting < BaseModel::Base
   end
 
   def self.valid_mail_address? (address)
-    return !!address.match(/\A[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]+\z/)
+    return !!address.match(EMAIL_FORMAT_PATTERNS)
   end
 
   def self.send_test_mail(to)
@@ -102,6 +105,18 @@ class Mailsetting < BaseModel::Base
       end
     rescue => error
       Rails.logger.error e
+    end
+  end
+
+  def send_test_mail
+    self.class.send_test_mail test_mail_address
+  end
+
+  private
+
+  def email_address_format
+    if test_mail_address.present?
+      errors.add :test_mail_address, "is not valid" unless test_mail_address.match(EMAIL_FORMAT_PATTERNS)
     end
   end
 end
