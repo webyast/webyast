@@ -116,7 +116,7 @@ class Mailsetting < BaseModel::Base
 
   def email_address_format
     if test_mail_address.present?
-      errors.add :test_mail_address, "is not valid" unless test_mail_address.match(EMAIL_FORMAT_PATTERNS)
+      errors.add :test_mail_address, _("is not valid") unless test_mail_address.match(EMAIL_FORMAT_PATTERNS)
     end
   end
 end

@@ -65,7 +65,7 @@ public
       return
     end
 
-    @mail.send_test_mail if params[:send_mail]
+    @mail.send_test_mail if params[:send_mail] && params[:send_mail].present?
 
     begin
       response = @mail.save
@@ -76,8 +76,8 @@ public
       flash[:notice] = notice
 
     rescue Exception => error
-      problem _("Error while saving mail settings.")
-      Rails.logger.error "ERROR: #{error.inspect}"
+      problem _("Error while saving mail settings. #{error.message}")
+      Rails.logger.error "ERROR: #{error.message}"
       return
     end
 
