@@ -22,6 +22,23 @@
 require 'open-uri' # RORSCAN_ITL
 
 class StatusController < ApplicationController
+
+  rescue_from ServiceNotRunning, CollectdOutOfSyncError do |error|
+    case error
+    when ServiceNotRunning
+      logger.error error.message
+      flash[:error] = _("Status not available.")
+    when CollectdOutOfSyncError
+      logger.error error.message
+      flash[:error] = _("Collectd is out of sync.")
+    end
+    respond_to do |format|
+      format.html { redirect_to :action => :index, :controller => :status }
+      format.xml  { render :xml  => error.to_xml,  :status => 500 }
+      format.json { render :json => error.to_json, :status => 500 }
+    end
+  end
+
   DEFAULT_LINES = 50
 
   private
@@ -112,20 +129,9 @@ class StatusController < ApplicationController
     authorize! :read, Metric
     @logs = Log.find(:all)
     @plugins = Plugin.find(:all)
-    begin
-      @graphs = Graph.find(:all, params[:checklimits] || true)
-      #sorting graphs via id
-      @graphs.sort! {|x,y| y.id <=> x.id }
-      flash[:notice] = _("No data found for showing system status.") if @graphs.blank? # RORSCAN_ITL
-    rescue ServiceNotRunning => error
-      logger.warn error.inspect
-      flash[:error] = _("Status not available.")
-    rescue CollectdOutOfSyncError => error
-      logger.warn error.inspect
-      flash[:error] = _("Collectd is out of sync.")
-    ensure
-      @graphs ||= []
-    end
+    @graphs = Graph.find(:all, params[:checklimits] || true) || []
+    @graphs.sort! {|x,y| y.id <=> x.id }
+    flash[:notice] = _("No data found for showing system status.") if @graphs.blank? # RORSCAN_ITL
     respond_to do |format|
       format.html { render :index }
     end
