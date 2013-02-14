@@ -50,8 +50,8 @@ class GraphsController < ApplicationController
   # PUT /graphs
   def update
     authorize! :writelimits, Metric
-    if params.has_key?(:graphs)
-      @graph = Graph.new(params[:id], params[:graphs])
+    if params[:graphs]
+      @graph = Graph.new(params[:graphs][:id], params[:graphs])
       @graph.save
     else
       logger.warn("No argument to update")
