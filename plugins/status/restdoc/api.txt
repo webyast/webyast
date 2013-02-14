@@ -87,11 +87,11 @@ XmlResult: waerden+memory+memory-used
 
 PUT /graphs/<group-id>
 
-  Set limits of of system states which should not be exceeded or undercut.
+  Set limits of system states which should not be exceeded or undercut.
 
   <b>group-id</b>: Graph group id like Memory, CPU, Disk,...
 
-  CURL Example: curl -u user -X PUT -H 'Content-type: text/xml' -d @memory.xml http://localhost:4984/graphs/Memory.xml
+  CURL Example: curl -u user -X PUT -H 'Content-type: application/xml' -d @memory.xml http://localhost:4984/graphs/Memory.xml
 
 XmlBody: memory
   
