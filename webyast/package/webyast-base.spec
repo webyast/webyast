@@ -1,32 +1,39 @@
 #
 # spec file for package webyast-base
 #
-# Copyright (c) 2012 SUSE LINUX Products GmbH, Nuernberg, Germany.
-# This file and all modifications and additions to the pristine
-# package are under the same license as the package itself.
+# Copyright (c) 2013 SUSE LINUX Products GmbH, Nuernberg, Germany.
 #
+# All modifications and additions to the file contributed by third parties
+# remain the property of their copyright owners, unless otherwise agreed
+# upon. The license for this file, and modifications and additions to the
+# file, is the same license as for the pristine package itself (unless the
+# license for the pristine package is not an Open Source License, in which
+# case the license is the MIT License). An "Open Source License" is a
+# license that conforms to the Open Source Definition (Version 1.9)
+# published by the Open Source Initiative.
+
 # Please submit bugfixes or comments via http://bugs.opensuse.org/
 #
 
 
 Name:           webyast-base
-Version:        0.3.42
+Version:        0.3.43
 Release:        0
 Provides:       yast2-webservice = %{version}
 Obsoletes:      yast2-webservice < %{version}
 Provides:       webyast-language-ws = 0.1.0
 Obsoletes:      webyast-language-ws <= 0.1.0
 
-Obsoletes:	webyast-base-ui < %{version}
-Obsoletes:	webyast-base-ws < %{version}
-Obsoletes:	yast2-webclient < %{version}
-Obsoletes:	yast2-webservice < %{version}
-Obsoletes:	webyast-firstboot-ws < %{version}
-Provides:	webyast-base-ui = %{version}
-Provides:	webyast-base-ws = %{version}
-Provides:	yast2-webclient = %{version}
-Provides:	yast2-webservice = %{version}
-Provides:	webyast-firstboot-ws = %{version}
+Obsoletes:      webyast-base-ui < %{version}
+Obsoletes:      webyast-base-ws < %{version}
+Obsoletes:      webyast-firstboot-ws < %{version}
+Obsoletes:      yast2-webclient < %{version}
+Obsoletes:      yast2-webservice < %{version}
+Provides:       webyast-base-ui = %{version}
+Provides:       webyast-base-ws = %{version}
+Provides:       webyast-firstboot-ws = %{version}
+Provides:       yast2-webclient = %{version}
+Provides:       yast2-webservice = %{version}
 
 %if 0%{?suse_version} == 0 || %suse_version > 1110
 # 11.2 or newer
@@ -41,16 +48,23 @@ Requires:       sysvinit > 2.86-215.2
 Requires:       yast2-core >= 2.18.10
 %else
 # 11.1 or SLES11
-Requires:       yast2-core >= 2.17.30.1
 Requires:       sysvinit > 2.86-195.3.1
+Requires:       yast2-core >= 2.17.30.1
 %endif
+%if 0%{?suse_version} == 1220
+Requires:       rubygem-passenger-nginx >= 3.0.12
+%else
 Requires:       rubygem-passenger-nginx >= 3.0.14
+%endif
+Requires:       check-create-certificate
 Requires:       nginx >= 1.0.15
-Requires:       syslog-ng, check-create-certificate, yast2-dbus-server
-Requires:	rubygem-ruby-dbus
+Requires:       rubygem-ruby-dbus
+Requires:       syslog
+Requires:       yast2-dbus-server
 
-Requires:       rubygem-webyast-rake-tasks >= 0.3.5, webyast-base-branding
-PreReq:		rubygem-bundler
+Requires:       rubygem-webyast-rake-tasks >= 0.3.5
+Requires:       webyast-base-branding
+PreReq:         rubygem-bundler
 # 634404
 Recommends:     logrotate
 %if 0%{?suse_version} == 0 || %suse_version > 1110
@@ -66,49 +80,47 @@ PreReq:         rubygem-rails-3_2 >= 3.2.3
 PreReq:         rubygem-fast_gettext, rubygem-gettext_i18n_rails
 
 # conflict with all old Webyast-1.2 plugins (to force upgrade)
-Conflicts:	webyast-activedirectory-ui < 0.3.0
-Conflicts:	webyast-firewall-ui < 0.3.0
-Conflicts:	webyast-ldap-ui < 0.3.0
-Conflicts:	webyast-licenses-ui < 0.3.0
-Conflicts:	webyast-mail-ui < 0.3.0
-Conflicts:	webyast-network-ui < 0.3.0
-Conflicts:	webyast-reboot-ui < 0.3.0
-Conflicts:	webyast-registration-ui < 0.3.0
-Conflicts:	webyast-roles-ui < 0.3.0
-Conflicts:	webyast-root-user-ui < 0.3.0
-Conflicts:	webyast-services-ui < 0.3.0
-Conflicts:	webyast-slms-ui < 0.3.0
-Conflicts:	webyast-software-ui <= 0.3.20
-Conflicts:	webyast-status-ui < 0.3.0
-Conflicts:	webyast-time-ui < 0.3.0
-Conflicts:	webyast-users-ui < 0.3.0
+Conflicts:      webyast-activedirectory-ui < 0.3.0
+Conflicts:      webyast-firewall-ui < 0.3.0
+Conflicts:      webyast-ldap-ui < 0.3.0
+Conflicts:      webyast-licenses-ui < 0.3.0
+Conflicts:      webyast-mail-ui < 0.3.0
+Conflicts:      webyast-network-ui < 0.3.0
+Conflicts:      webyast-reboot-ui < 0.3.0
+Conflicts:      webyast-registration-ui < 0.3.0
+Conflicts:      webyast-roles-ui < 0.3.0
+Conflicts:      webyast-root-user-ui < 0.3.0
+Conflicts:      webyast-services-ui < 0.3.0
+Conflicts:      webyast-slms-ui < 0.3.0
+Conflicts:      webyast-software-ui <= 0.3.20
+Conflicts:      webyast-status-ui < 0.3.0
+Conflicts:      webyast-time-ui < 0.3.0
+Conflicts:      webyast-users-ui < 0.3.0
 
-Conflicts:	webyast-activedirectory-ws < 0.3.0
-Conflicts:	webyast-firewall-ws < 0.3.0
-Conflicts:	webyast-firstboot-ws < 0.3.0
-Conflicts:	webyast-kerberos-ws < 0.3.0
-Conflicts:	webyast-ldap-ws < 0.3.0
-Conflicts:	webyast-licenses-ws < 0.3.0
-Conflicts:	webyast-mail-ws < 0.3.0
-Conflicts:	webyast-network-ws < 0.3.0
-Conflicts:	webyast-ntp-ws < 0.3.0
-Conflicts:	webyast-reboot-ws < 0.3.0
-Conflicts:	webyast-registration-ws < 0.3.0
-Conflicts:	webyast-roles-ws < 0.3.0
-Conflicts:	webyast-root-user-ws < 0.3.0
-Conflicts:	webyast-services-ws < 0.3.0
-Conflicts:	webyast-slms-ws < 0.3.0
-Conflicts:	webyast-software-ws <= 0.3.20
-Conflicts:	webyast-status-ws < 0.3.0
-Conflicts:	webyast-time-ws < 0.3.0
-Conflicts:	webyast-users-ws < 0.3.0
+Conflicts:      webyast-activedirectory-ws < 0.3.0
+Conflicts:      webyast-firewall-ws < 0.3.0
+Conflicts:      webyast-firstboot-ws < 0.3.0
+Conflicts:      webyast-kerberos-ws < 0.3.0
+Conflicts:      webyast-ldap-ws < 0.3.0
+Conflicts:      webyast-licenses-ws < 0.3.0
+Conflicts:      webyast-mail-ws < 0.3.0
+Conflicts:      webyast-network-ws < 0.3.0
+Conflicts:      webyast-ntp-ws < 0.3.0
+Conflicts:      webyast-reboot-ws < 0.3.0
+Conflicts:      webyast-registration-ws < 0.3.0
+Conflicts:      webyast-roles-ws < 0.3.0
+Conflicts:      webyast-root-user-ws < 0.3.0
+Conflicts:      webyast-services-ws < 0.3.0
+Conflicts:      webyast-slms-ws < 0.3.0
+Conflicts:      webyast-software-ws <= 0.3.20
+Conflicts:      webyast-status-ws < 0.3.0
+Conflicts:      webyast-time-ws < 0.3.0
+Conflicts:      webyast-users-ws < 0.3.0
 
-
-License:	LGPL-2.1 and GPL-2.0 and Apache-2.0
-Group:          Productivity/Networking/Web/Utilities
-URL:            http://en.opensuse.org/Portal:WebYaST
-Autoreqprov:    on
+Url:            http://en.opensuse.org/Portal:WebYaST
 Summary:        WebYaST - base components
+License:        LGPL-2.1 and GPL-2.0 and Apache-2.0
+Group:          Productivity/Networking/Web/Utilities
 Source:         www.tar.bz2
 Source1:        webyastPermissionsService.rb
 Source2:        webyast.permissions.conf
@@ -123,46 +135,64 @@ Source12:       nginx.conf
 Source13:       control_panel.yml
 Source14:       config.yml
 Source15:       config.yml.new
-Source16:	update_webyast_service
+Source16:       update_webyast_service
 
 BuildRoot:      %{_tmppath}/%{name}-%{version}-build
-BuildRequires:  ruby, pkg-config, rubygem-mocha
+BuildRequires:  pkg-config
+BuildRequires:  ruby
+BuildRequires:  rubygem-mocha
 # if we run the tests during build, we need most of Requires here too,
 # except for deployment specific stuff
-BuildRequires:  rubygem-webyast-rake-tasks >= 0.3.5
 BuildRequires:  dbus-1
+BuildRequires:  rubygem-rails-3_2
 BuildRequires:  rubygem-ruby-dbus
 BuildRequires:  rubygem-sqlite3 >= 1.3.6
-BuildRequires:  rubygem-rails-3_2
+BuildRequires:  rubygem-webyast-rake-tasks >= 0.3.5
 %if 0%{?suse_version} == 0 || %suse_version > 1110
-BuildRequires:  polkit, rubygem-polkit1
+BuildRequires:  polkit
+BuildRequires:  rubygem-polkit1
 %else
 # <11.1 or SLES11
-BuildRequires:  PolicyKit, rubygem-polkit
+BuildRequires:  PolicyKit
+BuildRequires:  rubygem-polkit
+%endif
+%if 0%{?suse_version} > 1220
+BuildRequires:  polkit-default-privs
 %endif
 # the testsuite is run during build
-BuildRequires:  rubygem-test-unit rubygem-mocha
-BuildRequires:  rubygem-haml, rubygem-builder-3_0
 BuildRequires:  nginx >= 1.0
-BuildRequires:	rubygem-bundler
-BuildRequires:	rubygem-devise, rubygem-devise_unix2_chkpwd_authenticatable, rubygem-devise-i18n
-BuildRequires:	rubygem-cancan
+BuildRequires:  rubygem-builder-3_0
+BuildRequires:  rubygem-bundler
+BuildRequires:  rubygem-cancan
+BuildRequires:  rubygem-devise
+BuildRequires:  rubygem-devise-i18n
+BuildRequires:  rubygem-devise_unix2_chkpwd_authenticatable
+BuildRequires:  rubygem-haml
+BuildRequires:  rubygem-mocha
+BuildRequires:  rubygem-test-unit
 
-BuildRequires:	rubygem-gettext
+BuildRequires:  rubygem-gettext
 
-BuildRequires:  rubygem-factory_girl, rubygem-factory_girl_rails, rubygem-mocha
+BuildRequires:  rubygem-factory_girl
+BuildRequires:  rubygem-factory_girl_rails
+BuildRequires:  rubygem-mocha
 
-Requires:	rubygem-haml, rubygem-sqlite3, rubygem-builder-3_0
-Requires:       rubygem-fast_gettext, rubygem-gettext_i18n_rails, rubygem-rails-i18n
+Requires:       rubygem-builder-3_0
+Requires:       rubygem-fast_gettext
+Requires:       rubygem-gettext_i18n_rails
+Requires:       rubygem-haml
+Requires:       rubygem-rails-i18n
+Requires:       rubygem-sqlite3
 
-Requires:	rubygem-devise, rubygem-devise_unix2_chkpwd_authenticatable, rubygem-devise-i18n
-Requires:	rubygem-cancan
-
+Requires:       rubygem-cancan
+Requires:       rubygem-devise
+Requires:       rubygem-devise-i18n
+Requires:       rubygem-devise_unix2_chkpwd_authenticatable
 
 # This is for Hudson (build service) to setup the build env correctly
 %if 0
-BuildRequires:  rubygem-test-unit
 BuildRequires:  rubygem-rcov >= 0.9.3.2
+BuildRequires:  rubygem-test-unit
 %endif
 
 # we do not necessarily need any UI in case of WebYaST
@@ -178,15 +208,18 @@ Provides:       yast2_ui_pkg
 BuildArch:      noarch
 
 %package testsuite
-Group:    Productivity/Networking/Web/Utilities
-Requires: webyast-base = %{version}
-Summary:  Testsuite for webyast-base package
+Requires:       webyast-base = %{version}
+Summary:        Testsuite for webyast-base package
+Group:          Productivity/Networking/Web/Utilities
 
 #
 %define pkg_home /var/lib/%{webyast_user}
 #
 
-Requires:	rubygem-factory_girl, rubygem-factory_girl_rails, rubygem-mocha, tidy
+Requires:       rubygem-factory_girl
+Requires:       rubygem-factory_girl_rails
+Requires:       rubygem-mocha
+Requires:       tidy
 
 %description
 WebYaST - Core components for UI and REST based interface to system manipulation.
@@ -201,16 +234,16 @@ Authors:
 Testsuite for core WebYaST package.
 
 %package branding-default
-Group:    Productivity/Networking/Web/Utilities
-Provides: webyast-base-branding = %{version}
-PreReq: %{name} = %{version}
+Provides:       webyast-base-branding = %{version}
+PreReq:         %{name} = %{version}
 Conflicts:      otherproviders(webyast-base-branding)
 Supplements:    packageand(webyast-base:branding-default)
 
-Provides:	webyast-base-ui-branding-default = %{version}
-Obsoletes:	webyast-base-ui-branding-default < %{version}
+Provides:       webyast-base-ui-branding-default = %{version}
+Obsoletes:      webyast-base-ui-branding-default < %{version}
 
-Summary:  Branding package for webyast-base package
+Summary:        Branding package for webyast-base package
+Group:          Productivity/Networking/Web/Utilities
 
 %description branding-default
 This package contains css, icons and images for webyast-base package.
@@ -253,7 +286,6 @@ RAILS_ENV=test rake db:migrate
 rake tmp:create
 RAILS_ENV=test $RPM_BUILD_ROOT%{webyast_dir}/test/dbus-launch-simple rake test
 
-
 #---------------------------------------------------------------
 %install
 
@@ -282,7 +314,6 @@ find $RPM_BUILD_ROOT%{webyast_dir} -name .gitkeep -delete
 
 # remove *.po files (compiled *.mo files are sufficient)
 find $RPM_BUILD_ROOT%{webyast_dir}/locale -name '*.po' -delete
-
 
 %{__install} -d -m 0755                            \
     %{buildroot}%{pkg_home}/sockets/               \
@@ -623,5 +654,5 @@ mkdir -p /var/lib/webyast
 /var/adm/update-scripts/webyast-base-branding-default-%version-%release-update
 
 #---------------------------------------------------------------
-%changelog
 
+%changelog

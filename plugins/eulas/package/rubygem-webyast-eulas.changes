@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Tue Feb  5 09:07:41 UTC 2013 - lslezak@suse.cz
+
+- added openSUSE 12.3 license (removed 11.1)
+- 0.3.11
+
+-------------------------------------------------------------------
 Wed Dec 12 15:26:46 UTC 2012 - lslezak@suse.cz
 
 - restart webyast after package update
