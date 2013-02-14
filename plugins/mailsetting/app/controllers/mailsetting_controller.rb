@@ -65,7 +65,7 @@ public
       return
     end
 
-    @mail.send_test_mail if params[:send_mail] && params[:send_mail].present?
+    @mail.send_test_mail
 
     begin
       response = @mail.save
