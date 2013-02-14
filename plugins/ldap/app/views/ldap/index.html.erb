@@ -116,7 +116,7 @@
       <div class="fieldset_header">
         <span class="fieldset_header_title" >
           <%= _("Enable LDAP Authentication") %>
-          <%= check_box 'ldap', :enabled, {:disabled => disabled, :checked => @ldap.enabled}, true,false -%>
+          <%= check_box 'ldap', :enabled, {:disabled => disabled, :checked => @ldap.enabled}, "true", "false" -%>
         </span>
       </div>
 
@@ -138,7 +138,7 @@
    
         <div class="row">
           <label><%= _("Secure Connection") %></label>
-          <%= check_box 'ldap', :tls, {:disabled => disabled, :checked => @ldap.tls, :style=>"margin-left:-1px;" }, true,false -%>
+          <%= check_box 'ldap', :tls, {:disabled => disabled, :checked => @ldap.tls, :style=>"margin-left:-1px;" }, "true", "false" -%>
         </div>
       </div>
     </fieldset>
