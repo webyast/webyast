@@ -19,7 +19,6 @@
 # you may find current contact information at www.novell.com
 #++
 
-include ApplicationHelper
 
 #
 # Controller that exposes graph description in a RESTful
@@ -30,8 +29,7 @@ include ApplicationHelper
 # GET /graphs/id returns one graph description
 #
 class GraphsController < ApplicationController
-
-public
+  include ApplicationHelper
 
   # PUT /graphs
   def update
