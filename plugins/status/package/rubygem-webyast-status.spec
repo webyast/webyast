@@ -136,6 +136,7 @@ sed -i "s/^#LoadPlugin df.*/LoadPlugin df/" "/etc/collectd.conf"
 # check status_configuration.yaml bnc#636616
 #
 ruby %{_libdir}/ruby/gems/%{rb_ver}/gems/%{mod_full_name}/lib/configcheck.rb
+ruby %{_libdir}/ruby/gems/%{rb_ver}/gems/%{mod_full_name}/lib/update_config.rb
 
 #
 # set "Hostname" to WebYaST and remove already generated old log files
@@ -176,6 +177,8 @@ rccollectd try-restart
 %attr(644,root,root) %config /usr/share/%{webyast_polkit_dir}/org.opensuse.yast.modules.logfile.policy
 %dir /etc/webyast/vendor
 %config /etc/webyast/logs.yml
+# File is created in %post script
+%ghost %config %{webyast_vardir}/status/status_configuration.yaml
 
 %restart_script_name
 
