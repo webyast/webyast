@@ -1,23 +1,15 @@
 = YaST REST Service Documentation
-  <!-- it uses restility, TODO URL -->
+
   Copyright © 2009-10 Novell, Inc.
 
   Permission is granted to copy, distribute and/or modify this document under the terms of the GNU Free Documentation License, Version 1.2 or (at your option) version 1.3; with the Invariant Section being this copyright notice and license. A copy of the license version 1.2 is included in the section entitled "GNU Free Documentation License". 
 
 == Network
 
-  TODO link to a master API document that contains the common
-  conventions like the authentication below.
-
   Only authenticated users are allowed to access the API. Authentication is done
   by sending a Basic HTTP Authorisation header.
 
   All names aren't allowed to contain spaces, slashes or colons.
-
-  TODO how to document errors?
-
-  <b>FIXME</b> for PUT requests the XmlBody and XmlResult documents are
-  faked, they need to match the implementation.
 
 == Table of Contents
 
@@ -25,7 +17,8 @@ Contents
 
 == Overview
 
-  network...
+  This module provides access to network configuration which includes network interfaces, hostname and dns settings, and routes.
+
 
 == PolicyKit Access Rights
 
@@ -44,22 +37,52 @@ GET /network/interfaces
 
   Get the list of interfaces.
 
+  CURL example:
+  curl -u <user>:<password> -H "Accept: application/xml" http://localhost:4984/network/interfaces
+
 XmlResult: interfaces_get
 
 GET /network/interfaces/<id>
+
 <id>: interface ID, as in /etc/sysconfig/network/ifcfg-ID
 
   Get the details of an interface.
 
+  CURL example:
+  curl -u <user>:<password> -H "Accept: application/xml" http://localhost:4984/network/interfaces/eth0
+
 XmlResult: interfaces_eth0_get
 
 PUT /network/interfaces/<id>
+
 <id>: interface ID, as in /etc/sysconfig/network/ifcfg-ID
 
-  Update an interface config.
+  Update an interface configuration.
 
-XmlBody: interfaces_eth0_get
-XmlResult: interfaces_eth0_get
+  CURL example:
+  curl -u <user>:<password> -X PUT -H "Accept: application/xml" -H "Content-Type: application/xml" --data @interfaces_eth0_put_request http://localhost:4984/network/interfaces/eth0
+
+XmlBody:   interfaces_eth0_put_request
+XmlResult: interfaces_eth0_put_response
+
+POST /network/interfaces
+
+  Create a new custom network interface, e.g vlan
+
+  CURL example:
+  curl -u <user>:<password> -X POST -H "Accept: application/xml" -H "Content-Type: application/xml" --data @interfaces_vlan0_post.xml
+
+XmlBody:   interfaces_vlan0_post_request
+XmlResult: interfaces_vlan0_post_response
+
+DELETE /network/interfaces/vlan0
+
+  Remove existing network interface
+
+  CURL example:
+  curl -u <user>:<password> -X DELETE -H "Accept: application/xml"
+
+XmlResult: interfaces_vlan0_delete_response
 
 == Hostname
 
@@ -73,8 +96,8 @@ PUT /network/hostname
 
   Set the host name and domain.
 
-XmlBody: hostname_get
-XmlResult: hostname_get
+XmlBody: hostname_put_request
+XmlResult: hostname_put_response
 
 == DNS
 
@@ -88,8 +111,8 @@ PUT /network/dns
 
   Set the nameservers and DNS search list.
 
-XmlBody: dns_get
-XmlResult: dns_get
+XmlBody: dns_put_request
+XmlResult: dns_put_response
 
 == Routes
 
@@ -112,6 +135,5 @@ PUT /network/routes/<id>
 
   Update a route.
 
-
-XmlBody: routes_default_get
-XmlResult: routes_default_get
+XmlBody: routes_put_request_default
+XmlResult: routes_put_response_default
