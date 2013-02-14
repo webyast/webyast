@@ -76,10 +76,10 @@
   </script>
 <% end %>
 
-<% disabled = cannot?(:write, Kerberos) %>
+<% disabled = @kerberos_missing || cannot?(:write, Kerberos) %>
 
 <div class="plugin-content plugin-border">
-  <%= render :partial => 'shared/missing_write_permissions' if disabled %>
+  <%= render :partial => 'shared/missing_write_permissions' if cannot?(:write, Kerberos) %>
 
   <%= form_for(@kerberos, :url => { :action => 'update' }, :html => { :method => :put, :id => 'kerberosForm', :class=>"webyast_form"}) do |f| %>
     <div class="plugin-header">
