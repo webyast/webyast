@@ -91,7 +91,7 @@ PUT /graphs/<group-id>
 
   <b>group-id</b>: Graph group id like Memory, CPU, Disk,...
 
-  CURL Example: curl -u user -X PUT -H 'Content-type: application/xml' -d @memory.xml http://localhost:4984/graphs/Memory.xml
+  CURL Example: curl -u user -X PUT -H 'Content-type: application/xml' -d @memory.xml http://localhost:4984/graphs/memory.xml
 
 XmlBody: memory
   
