@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<interface>
+  <id>vlan0</id>
+  <type>vlan</type>
+  <bootproto>none</bootproto>
+  <ipaddr/>
+  <vlan_id>1</vlan_id>
+  <vlan_etherdevice>eth0</vlan_etherdevice>
+</interface>

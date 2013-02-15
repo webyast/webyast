@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<interface>
+  <id>eth0</id>
+  <bootproto>static</bootproto>
+  <hostname>magic</hostname>
+  <domain>castle.com</domain>
+  <nameservers>168.100.10.10</nameservers>
+  <ipaddr>10.100.50.10</ipaddr>
+  <searchdomains>first.domain.com second.domain.com</searchdomains>
+</interface>
