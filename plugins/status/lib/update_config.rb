@@ -1,5 +1,5 @@
 #--
-# Copyright (c) 2009-2012 Novell, Inc.
+# Copyright (c) 2013 Novell, Inc.
 # 
 # All Rights Reserved.
 # 
@@ -30,33 +30,33 @@
 require "yaml"
 
 CONFIGURATION_FILE = "status_configuration.yaml"
-KNOWN_KEYS = ['Network', 'CPU', 'Memory', 'Disk']
 PATH = File.join("/var/lib/webyast", "status", CONFIGURATION_FILE)
 
 def update_config()
   if File.exist?(PATH)
-    config = Hash.new
-    config = YAML.load(File.open(PATH))
+    config = YAML.load_file(PATH)
+    changed = false
 
     # bnc#798322 Smaller traffic can produce confusing graphs
     # if Y axis is rounded
-    if (config.fetch('Network',{}).fetch('y_decimal_places','') == 0)
+    if config['Network'] && config['Network']['y_decimal_places'] == 0
       config['Network']['y_decimal_places'] = 1
+      changed = true
     end
 
     # bnc#798322 Smaller disks (especially in virtual systems) can produce
     # confusing graphs if Y axis is rounded
-    if (config.fetch('Disk',{}).fetch('y_decimal_places','') == 0)
+    if config['Disk'] && config['Disk']['y_decimal_places'] == 0
       config['Disk']['y_decimal_places'] = 1
+      changed = true
     end
 
-    save_config(config)
+    save_config(config) if changed
   end
 end
 
 def save_config(config)
-  file_name = File.join(PATH)
-  File.open(file_name, "w") do |f|
+  File.open(PATH, "w") do |f|
     f.write(config.to_yaml)
   end
 end
