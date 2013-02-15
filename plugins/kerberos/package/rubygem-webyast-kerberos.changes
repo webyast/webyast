@@ -1,4 +1,12 @@
 -------------------------------------------------------------------
+Fri Feb 15 09:41:05 UTC 2013 - jreidinger@suse.com
+
+- detect missing pam plugin in kerberos (BNC#795840)
+- fix enabling kerberos without taking values from DNS
+  (bnc#795840)
+- 0.3.8
+
+-------------------------------------------------------------------
 Wed Dec 12 15:28:42 UTC 2012 - lslezak@suse.cz
 
 - restart webyast after package update
