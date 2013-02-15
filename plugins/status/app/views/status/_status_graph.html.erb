@@ -116,7 +116,7 @@
 </script>
 
 <p>
-  <% measurement_id = "measurement_" + data[:group_id] + "_" + data[:graph_id]%>
+  <% measurement_id = "measurement_" + data[:group_id].to_s + "_" + data[:graph_id].to_s %>
   <%= _("Show last") %> 
     <select name="<%=measurement_id%>" id="<%=measurement_id%>">
         <option value="5" <%= " selected" if data[:minutes]==5 %>><%= _("5 Minutes") %></option>
