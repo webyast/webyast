@@ -65,12 +65,11 @@ public
       return
     end
 
-    @mail.send_test_mail
-
     begin
       response = @mail.save
       notice = _('Mail settings have been written.')
       unless @mail.test_mail_address.blank?
+        @mail.send_test_mail
         notice += " " + _('Test mail was sent to %s.') % @mail.test_mail_address
       end
       flash[:notice] = notice
