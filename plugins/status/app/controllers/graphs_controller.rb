@@ -1,25 +1,24 @@
 #--
 # Copyright (c) 2009-2010 Novell, Inc.
-# 
+#
 # All Rights Reserved.
-# 
+#
 # This program is free software; you can redistribute it and/or modify it
 # under the terms of version 2 of the GNU General Public License
 # as published by the Free Software Foundation.
-# 
+#
 # This program is distributed in the hope that it will be useful,
 # but WITHOUT ANY WARRANTY; without even the implied warranty of
 # MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
 # GNU General Public License for more details.
-# 
+#
 # You should have received a copy of the GNU General Public License
 # along with this program; if not, contact Novell, Inc.
-# 
+#
 # To contact Novell about this file by physical or electronic mail,
 # you may find current contact information at www.novell.com
 #++
 
-include ApplicationHelper
 
 #
 # Controller that exposes graph description in a RESTful
@@ -30,14 +29,29 @@ include ApplicationHelper
 # GET /graphs/id returns one graph description
 #
 class GraphsController < ApplicationController
+  include ApplicationHelper
 
-public
+  rescue_from ServiceNotRunning, CollectdOutOfSyncError do |error|
+    case error
+    when ServiceNotRunning
+      logger.error error.message
+      flash[:error] = _("Status not available.")
+    when CollectdOutOfSyncError
+      logger.error error.message
+      flash[:error] = _("Collectd is out of sync.")
+    end
+    respond_to do |format|
+      format.html { redirect_to :action => :index, :controller => :status }
+      format.xml  { render :xml  => error.to_xml,  :status => 500 }
+      format.json { render :json => error.to_json, :status => 500 }
+    end
+  end
 
   # PUT /graphs
   def update
     authorize! :writelimits, Metric
-    if params.has_key?(:graphs)
-      @graph = Graph.new(params[:id], params[:graphs])
+    if params[:graphs]
+      @graph = Graph.new(params[:graphs][:id], params[:graphs])
       @graph.save
     else
       logger.warn("No argument to update")
