@@ -33,7 +33,7 @@
           <label><%=_("Interface name")%></label>
           <% if action == "create" %>
             <%= text_field_tag(:type, @type) %>
-            <%= select_tag(:number, options_for_select((@number..9).to_a.map{|i| "#{i}"}, @number)) %>
+            <%= select_tag(:number, options_for_select(@available_numbers.map{|i| "#{i}"}, @available_numbers.first)) %>
           <% else %>
             <%= text_field_tag :id, @ifc.id, :disabled => true %>
             <%= hidden_field_tag(:type, @type) %>
@@ -64,7 +64,7 @@
 
           <% if action == "create" %>
               <%= text_field_tag(:type, @type) %>
-              <%= select_tag(:number, options_for_select((@number..9).to_a.map{|i| "#{i}"}, @number)) %>
+              <%= select_tag(:number, options_for_select(@available_numbers.map{|i| "#{i}"}, @available_numbers.first)) %>
           <% else %>
               <%= text_field_tag :id, @ifc.id, :disabled => true %>
               <%= hidden_field_tag(:type, @type) %>
@@ -97,7 +97,7 @@
 
           <% if action == "create" %>
               <%= text_field_tag(:type, @type) %>
-              <%= select_tag(:number, options_for_select((@number..9).to_a.map{|i| "#{i}"}, @number)) %>
+              <%= select_tag(:number, options_for_select(@available_numbers.map{|i| "#{i}"}, @available_numbers.first)) %>
           <% else %>
               <%= text_field_tag :id, @ifc.id, :disabled => true %>
               <%= hidden_field_tag(:type, @type) %>
