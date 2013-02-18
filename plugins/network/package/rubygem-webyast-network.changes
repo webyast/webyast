@@ -1,4 +1,12 @@
 -------------------------------------------------------------------
+Mon Feb 18 16:03:01 UTC 2013 - jreidinger@suse.com
+
+- fix change hostname xor domain (BNC#787535)
+- fix crash with join/split message (BNC#788911)
+- do not allow to add invalid device to bonding (BNC#790202)
+- 0.3.10 
+
+-------------------------------------------------------------------
 Fri Jan 11 14:38:47 UTC 2013 - lslezak@suse.cz
 
 - updated testsuite
