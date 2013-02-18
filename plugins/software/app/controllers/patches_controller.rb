@@ -22,57 +22,7 @@
 class PatchesController < ApplicationController
   include ERB::Util
 
-  before_filter :cache_check, :only => [:index, :show_summary]
-  before_filter :perm_check, :only => [:index]
-  before_filter :perm_check_summary, :only => [:show_summary]
-
-  after_filter :drop_cache
-
-  # include locale in the cache path to cache different translations
-  caches_action :show_summary, :expires_in => Patch::EXPIRATION_TIME, :cache_path => Proc.new {"webyast_patch_summary_#{FastGettext.locale}"}
-  caches_action :index, :expires_in => Patch::EXPIRATION_TIME, :cache_path => Proc.new {"webyast_patch_index_#{FastGettext.locale}"}, :layout => false
-
 private
-
-  # check permission and validate cache content
-  def cache_check
-    cached_mtime = Rails.cache.fetch("webyast_patch_mtime")
-    current_mtime = Patch.mtime
-
-    Rails.logger.info "cached_mtime: #{cached_mtime.inspect}, current_mtime: #{current_mtime.inspect}"
-
-    if current_mtime != cached_mtime
-      Rails.logger.info "Expiring patch cache: cached: #{cached_mtime}, modified: #{current_mtime}"
-      # update the time stamp
-      Rails.cache.write("webyast_patch_mtime", current_mtime)
-      expire_patch_cache
-    end
-  end
-
-  def perm_check
-    authorize! :read, Patch
-  end
-
-  def perm_check_summary
-    if cannot? :read, Patch
-      render :text => _("Status not available (no permissions)")
-    end
-  end
-
-  # drop the cached results (needed in some cases, e.g. an error occured, SW management locked)
-  # to force retry again instead of returning the cached error
-  def drop_cache
-    if @drop_cache
-      Rails.logger.info "Dropping the cache, do full reload next time"
-      expire_patch_cache
-    end
-  end
-
-  def expire_patch_cache
-    # expire all translations
-    expire_fragment(/webyast_patch_summary_/)
-    expire_fragment(/webyast_patch_index_/)
-  end
 
   def collect_done_patches
     return Rails.cache.fetch("patch:installed") || []
@@ -112,7 +62,7 @@ private
   # GET /patches
   # GET /patches.xml
   def index
-    # permission checks are done in the before_filter
+    authorize! :read, Patch
 
     @msgs = read_messages
     if params['messages']
@@ -167,13 +117,10 @@ private
           flash[:error] = ((h _("Cannot read patch updates: GPG key for repository %s is not trusted.")) % "<em>#{h $1}</em>").html_safe
         elsif e.description.match /System management is locked by the application with pid ([0-9]+) \((.*)\)\./
           flash[:warning] = _("Software management is locked by another application ('%s', PID %s).") % [$2, $1]
-          @drop_cache = true
         elsif e.description.match /The ZYpp package manager is locked by process ([0-9]+)\. Retry later\./
           flash[:warning] = _("Software management is locked by another application (PID %s). Available patches cannot be read.") % $1
-          @drop_cache = true
         else
           flash[:error] = e.message
-          @drop_cache = true
         end
         @patch_updates = []
         @error = true
@@ -206,7 +153,9 @@ private
 
   # this action is rendered as a partial, so it can't throw
   def show_summary
-    # permission check is done in before_filter
+    if cannot? :read, Patch
+      render :text => _("Status not available (no permissions)")
+    end
 
     error = nil
     patch_updates = nil
@@ -241,15 +190,12 @@ private
         elsif error.description.match /System management is locked by the application with pid ([0-9]+) \((.*)\)\./
           error_string = _("Software management is locked by another application ('%s', PID %s).") % [$2, $1]
           error_type = :locked
-          @drop_cache = true
         elsif error.description.match /The ZYpp package manager is locked by process ([0-9]+)\. Retry later\./
           error_string = _("Software management is locked by another application (PID %s).") % $1
           error_type = :locked
-          @drop_cache = true
         else
           error_string = error.message
           error_type = :unknown
-          @drop_cache = true
         end
       end
     end
@@ -309,9 +255,6 @@ private
 
     Patch::BM.background_enabled? ? Patch.install_all_background : Patch.install_all
 
-    # force refreshing of the cache
-    expire_patch_cache
-
     show_summary
   end
 
@@ -354,9 +297,6 @@ private
     begin
       if !update_array.empty?
         Patch::BM.background_enabled? ? Patch.install_patches_by_id_background(update_array) : Patch.install_patches_by_id(update_array)
-
-        # force refreshing of the cache
-        expire_patch_cache
       end
     # FIXME: this might hide some errors
     rescue Exception => e
