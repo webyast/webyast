@@ -112,7 +112,7 @@ class Graph
             "y_scale"=>1073741824, 
             "y_label"=>'_("GByte")', 
             "y_max"=>nil,
-            "y_decimal_places"=>0,
+            "y_decimal_places"=>1,
             "single_graphs"=>[]}
     metrics.each do |metric|
       if (metric.type == "df" && !metric.type_instance.start_with?("dev") && 
@@ -136,7 +136,7 @@ class Graph
                "y_scale"=>1, 
                "y_label"=>'_("MByte/s")', 
                "y_max"=>nil,
-               "y_decimal_places"=>0,
+               "y_decimal_places"=>1,
                "single_graphs"=>[]}
     metrics.each do |metric|
       if metric.type == "if_packets" && 
