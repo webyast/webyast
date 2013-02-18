@@ -276,6 +276,8 @@ private
         end
 
         flash[:error] = error_string
+      else
+        raise InstallInProgressException.new(running)
       end
 
       render :show and return
@@ -303,15 +305,21 @@ private
       Rails.logger.info "Some patches are not needed in #{update_array.inspect} anymore: #{e.message}"
     end
 
-    logger.debug "*** Check before redirect: basesystem setup completed -> #{Basesystem.new.load_from_session(session).completed?}"
-    if request.format.html?
-      if Basesystem.new.load_from_session(session).completed?
-        redirect_to :controller => "controlpanel", :action => "index" and return
-      else
-        redirect_to :controller => "controlpanel", :action => "nextstep" and return
-      end
+    respond_to do |format|
+      format.html {
+        logger.debug "*** Check before redirect: basesystem setup completed -> #{Basesystem.new.load_from_session(session).completed?}"
+
+        if Basesystem.new.load_from_session(session).completed?
+          redirect_to :controller => "controlpanel", :action => "index" and return
+        else
+          redirect_to :controller => "controlpanel", :action => "nextstep" and return
+        end
+      }
+
+      # return 202 Accepted (processing in background) or 200 OK (direct processing)
+      format.json { head Patch::BM.background_enabled? ? :accepted : :success }
+      format.xml  { head Patch::BM.background_enabled? ? :accepted : :success }
     end
-    render :show
   end
 
   def message
