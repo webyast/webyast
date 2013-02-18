@@ -50,7 +50,8 @@ class NetworkController < ApplicationController
     @ifc = @ifcs[params[:id]]
 
     @type = params[:id][0..(params[:id].size-2)] || "eth"
-    @number = @ifcs.select{|id, iface| id if id.match(@type)}.count
+    occupied_numbers =  @ifcs.select{|id, iface| id if id.match(@type)}.map {|id,iface| id.sub(/\A\D+(\d+)\Z/,'\\1').to_i}
+    @available_numbers = (0..9).to_a - occupied_numbers
     @physical = @ifcs.select{|k, i| i if k.match(/eth|wlan/)}
 
     @dhcp_hostname_enabled = @hostname.dhcp_hostname_enabled
@@ -72,10 +73,11 @@ class NetworkController < ApplicationController
     @routes = network["routes"]
 
     @type = params[:type]
-    @number = @ifcs.select{|id, iface| id if id.match(@type)}.count
+    occupied_numbers =  @ifcs.select{|id, iface| id if id.match(@type)}.map {|id,iface| id.sub(/\A\D+(\d+)\Z/,'\\1').to_i}
+    @available_numbers = (0..9).to_a - occupied_numbers
     @physical = @ifcs.select{|k, i| i if k.match(/eth|wlan/)}
 
-    @ifc = Interface.new({"type"=>params[:type], "bootproto"=>"dhcp", "startmode"=>"auto"}, "#{@type}#{@number}")
+    @ifc = Interface.new({"type"=>params[:type], "bootproto"=>"dhcp", "startmode"=>"auto"}, "#{@type}#{@available_numbers.first}")
 
     @dhcp_hostname_enabled = @hostname.dhcp_hostname_enabled
 
