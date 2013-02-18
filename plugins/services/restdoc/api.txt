@@ -85,5 +85,13 @@ PUT /service/service_name.xml
 
 XmlBody: stop_cron_request
   
-XmlResult: stop_cron_response
+XmlResult: cron
+
+PUT /service/service_name.xml?execute=<action>
+
+  Alternative way to execute an action with given service. Example of actions are "stop", "start", "restart".
+
+  CURL example: curl -u <user> -X PUT -H 'Content-type: text/xml' -d "" http://localhost:4984/services/cron.xml?execute=stop
+
+XmlResult: cron
 
