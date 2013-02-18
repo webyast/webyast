@@ -64,7 +64,7 @@
 
           <% if action == "create" %>
               <%= text_field_tag(:type, @type) %>
-              <%= select_tag(:number, options_for_select(@available_numbers.map{|i| "#{i}"}, @available_numbers.first)) %>
+              <%= select_tag(:number, options_for_select(@available_numbers.map(&:to_s), @available_numbers.first.to_s)) %>
           <% else %>
               <%= text_field_tag :id, @ifc.id, :disabled => true %>
               <%= hidden_field_tag(:type, @type) %>
