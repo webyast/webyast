@@ -74,9 +74,9 @@
           <label class="tvalign"><%=_("Bridge devices:")%></label>
           <div class="checkbox_container">
             <% @ifcs.each do |id, iface| %>
-              <% next if id.match("br") || iface.bootproto!="none"%>
+              <% next if id.match("br")%>
               <div>
-                <%= check_box :bridge_ports, id, :checked => @ifc.bridge_ports.split(" ").include?(id) %>
+                <%= check_box :bridge_ports, id, :checked => (@ifc.bridge_ports.is_a?(String) ? @ifc.bridge_ports.split(" ") : @ifc.bridge_ports).include?(id) %>
                 <%= id %> - <%= iface.vendor %>
               </div>
             <% end %>
@@ -116,7 +116,7 @@
             <% @ifcs.each do |id, iface| %>
               <% next if id.match("bond") || iface.bootproto!="none" %>
               <div>
-                <%= check_box :bond_slaves, id, :checked => @ifc.bond_slaves.include?(id) %>
+                <%= check_box :bond_slaves, id, :checked => (@ifc.bond_slaves.is_a?(String) ? @ifc.bond_slaves.split(" ") : @ifc.bond_slaves).include?(id) %>
                 <%= id %> <%= "- #{iface.vendor}" if iface.vendor %>
               </div>
             <% end %>
