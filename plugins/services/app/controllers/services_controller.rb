@@ -120,8 +120,24 @@ public
   # TODO FIXME: merge this with 'execute' action
   def update
     authorize! :execute, Service
+    if !params[:execute]
+      response = { "error" => "Missing execute parameter" }
+      respond_to do |format|
+        format.xml  { render :xml => response.to_xml, :status => 400 }
+        format.json { render :json => response.to_json, :status => 400 }
+      end
+      return
+    end
+
     @service = Service.find params[:id]
-    @service.save(params)
+    @service.read_status(params)
+    params[:custom] = @service.custom.to_s
+    res = @service.save(params)
+
+    logger.info "Result of update: #{res.inspect}"
+    #reread status again to get current status
+    @service.read_status(params)
+
 
     respond_to do |format|
       format.xml  { render :xml => @service.to_xml(:root => 'service', :dasherize => false) }
