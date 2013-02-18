@@ -141,9 +141,9 @@ private
     authorize! :read, Patch
     # RORSCAN_INL: User has already read permission for ALL patch info
     @patch_update = Patch.find(params[:id])
-    if @patch_update.nil?
-      logger.error "Patch: #{params[:id]} not found."
-      render ErrorResult.error(404, 1, "Patch: #{params[:id]} not found.") and return
+    if @patch_update.blank?
+      logger.error "Patch #{params[:id]} not found."
+      render ErrorResult.error(404, 1, "Patch #{params[:id]} not found.") and return
     end
     respond_to do |format|
       format.xml { render  :xml => @patch_update.to_xml( :root => "patches", :dasherize => false ) }
