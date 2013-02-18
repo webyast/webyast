@@ -102,5 +102,14 @@ class InterfaceTest < ActiveSupport::TestCase
    iface = Interface.new "id" => "eth7", "bootproto" => "static", "ipaddr" => "1.1.1.1/255.255.255.255", "type" => "eth"
    iface.save!
  end
+
+ def test_netmask_read
+  suffix = Interface.new({}).netmask_to_cidr ("/8")
+  assert_equal "8",suffix
+  suffix = Interface.new({}).netmask_to_cidr ("8")
+  assert_equal "8",suffix
+  suffix = Interface.new({}).netmask_to_cidr ("/32")
+  assert_equal "32",suffix
+ end
 end
 
