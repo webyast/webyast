@@ -87,6 +87,16 @@ class Systemtime < BaseModel::Base
     @timezones.each do |zone|
       zone["entries"] = zone["entries"].collect {|k,v| { "id" => k, "name" => v } } #hack to avoid colission in xml tag
     end
+    #avoid crash when timezone is set to zone that is not in list of timezones
+    if @timezones.none? {|zone| zone["entries"].any? {|z| z["id"] == @timezone } }
+      region = @timezone.gsub(/\A([^\/]+).*\Z/,'\\1')
+      region_entry = @timezones.find {|t| t["name"] == region }
+      if region_entry.nil?
+        region_entry = {"entries" => [], "name" => region }
+        @timezones << region_entry
+      end
+      region_entry["entries"] << {"id" => @timezone, "name" => @timezone }
+    end
   end
 
   # fills time instance with data from YaPI.
@@ -154,11 +164,10 @@ class Systemtime < BaseModel::Base
   end
 
   def load_timezone(params)
-    treg = @timezones.find { |reg| reg["name"] == params[:region] } || Hash.new
-
-    tmz = treg["entries"].find { |e| e["name"] == params[:timezone]}
+    tmz = @timezones.find {|treg| treg["entries"].find { |e| e["name"] == params[:timezone]}}
     @timezone = tmz["id"] if tmz
-    @utcstatus = params[:utc] == "true"
+    #FIXME different parameters for XML and HTML API
+    @utcstatus = (params[:utc] == "true" || params[:utcstatus] == true)
   end
 
   def load_time(params)

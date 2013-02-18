@@ -1,0 +1,82 @@
+= YaST REST Service Documentation
+  Copyright © 2009-10 Novell, Inc.
+
+  Permission is granted to copy, distribute and/or modify this document under the terms of the GNU Free Documentation License, Version 1.2 or (at your option) version 1.3; with the Invariant Section being this copyright notice and license. A copy of the license version 1.2 is included in the section entitled "GNU Free Documentation License". 
+
+== Time Service
+
+  Only authenticated users are allowed to access the API. Authentication is done
+  by sending a Basic HTTP Authorisation header.
+
+  All names aren't allowed to contain spaces, slashes or colons.
+
+
+== Table of Contents
+
+Contents:
+
+== Formats
+
+  The Time REST service supports only XML and JSON input/output formats.
+
+== Overview
+
+  This module provides access to time related settings. Curretly it way to set 
+  time via various method, set timezone and set if pc use utc timezone for system time.
+
+== PolicyKit Access Rights
+
+  The following PolicyKit permissions are needed to execute read:
+
+  Read: org.opensuse.yast.modules.yapi.time.read
+
+  The following PolicyKit permissions are needed to execute write:
+
+  Write: org.opensuse.yast.modules.yapi.time.write
+  Execute: org.opensuse.yast.modules.yapi.service.execute ( if ntp available )
+  Synchronize: org.opensuse.yast.modules.yapi.ntp.synchronize ( if ntp available )
+  SetServer: org.opensuse.yast.modules.yapi.ntp.setserver ( if ntp available )
+
+== System Actions
+
+
+GET /time
+
+  Get current time settings together with list of available timezones and if 
+  hwclock is set or not ( cannot be change, it is done automatic on system that support it)
+
+  CURL Example: curl -u &lt;user&gt; http://localhost:4984/time.xml
+
+XmlResult: time
+
+
+POST /time
+
+  Get new settings. timezones and hwclock values is ignored and need not to be
+  part of request ( especially for timezones list it can save space).
+  Returns new setttings in same format as GET action.
+  To change time use key timeconfig with value "manual" and time and date for
+  manual set of time or "ntp_sync" and server_name to set time via ntp. Ntp_sync
+  and manual start respective stop ntp service if service webyast plugin is installed.
+  If timeconfig is not present, then time is not changed at all.
+
+  CURL example that manually set new time: curl -u &lt;user&gt; -X PUT -H 'Content-type: text/xml' -d @time-new.xml http://localhost:4984/time.xml
+
+XmlBody: time-new
+
+XmlResult: time
+
+
+  CURL example that set time with NTP: curl -u &lt;user&gt; -X PUT -H 'Content-type: text/xml' -d @time-ntp.xml http://localhost:4984/time.xml
+
+XmlBody: time-ntp
+
+XmlResult: time
+
+
+  CURL example change only timezone and not affect time: curl -u &lt;user&gt; -X PUT -H 'Content-type: text/xml' -d @timezone-new.xml http://localhost:4984/time.xml
+
+XmlBody: timezone-new
+
+XmlResult: time
+
