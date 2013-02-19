@@ -134,9 +134,9 @@ class NetworkController < ApplicationController
       dirty_hostname = true
     end
 
-    if params["dhcp_hostname_enabled"] == "true"
+    # check if dhcp hostname value changed, dhcp_hostname_enabled has "true", "false value, dhcp_hostname is "1" or nil
+    if (params["dhcp_hostname_enabled"] == "true") != (!params["dhcp_hostname"].nil?)
       hostname.dhcp_hostname = params["dhcp_hostname"] || "0"
-      #params["dhcp_hostname"]==nil ? params["dhcp_hostname"]="0" : pass
       dirty_hostname = true #Set dirty to true (bnc#692594)
     end
     ### END HOSTNAME ###
