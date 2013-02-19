@@ -67,13 +67,12 @@ class PatchesControllerTest < ActionController::TestCase
     assert_equal mime.to_s, @response.content_type
   end
  
-# Due a bug (https://rails.lighthouseapp.com/projects/8994/tickets/4547-activesupport-to_json-doesnt-work-with-dm) this does not work
-#  test "access index json" do
-#    mime = Mime::JSON
-#    @request.accept = mime.to_s
-#    get :index
-#    assert_equal mime.to_s, @response.content_type
-#  end
+  test "access index json" do
+    mime = Mime::JSON
+    @request.accept = mime.to_s
+    get :index
+    assert_equal mime.to_s, @response.content_type
+  end
 
   test "access show xml" do
     mime = Mime::XML
