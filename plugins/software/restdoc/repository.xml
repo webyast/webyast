@@ -5,6 +5,6 @@
   <keep_packages type="boolean">false</keep_packages>
   <autorefresh type="boolean">true</autorefresh>
   <url>https://nu.novell.com/repo/$RCE/SLES11-SP2-Updates/sle-11-x86_64?credentials=NCCcredentials</url>
-  <enabled type="boolean">true</enabled>
-  <id>nu_novell_com:SLES11-SP2-Updates</id>
+  <enabled type="boolean">false</enabled>
+  <id>nu_novell_com:SLES11-SP2-Updates:test</id>
 </repository>

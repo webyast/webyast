@@ -92,15 +92,15 @@ PUT /repositories/repo_id.xml
 
   Update repository properties
 
-  CURL Example: curl -u &lt;user&gt; -X PUT -H 'Content-type: text/xml' -d @repository_body.xml https://localhost:4984/repositories/nu_novell_com:SLES11-SP2-Updates.xml
+  CURL Example: curl -u &lt;user&gt; -X PUT -H 'Content-type: text/xml' -d @repository.xml https://localhost:4984/repositories/nu_novell_com:SLES11-SP2-Updates.xml
 
-XmlBody: repository_body
+XmlBody: repository
 
 
 POST /repositories
 
   Create a new repository
 
-  CURL Example: curl -u &lt;user&gt; -X POST -H 'Content-type: text/xml' -d @repository_body.xml https://localhost:4984/repositories.xml
+  CURL Example: curl -u &lt;user&gt; -X POST -H 'Content-type: text/xml' -d @repository.xml https://localhost:4984/repositories.xml
 
-XmlBody: repository_body
+XmlBody: repository
