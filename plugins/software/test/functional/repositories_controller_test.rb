@@ -130,8 +130,8 @@ class RepositoriesControllerTest < ActionController::TestCase
   test "create html" do
     Repository.any_instance.expects(:update).returns(true)
     put :create, :id => "factory-oss", :repository => @repo_opts
-    assert flash[:message] == "Repository 'name' has been updated."
-    assert_response :redirect 
+    assert flash[:message] == "Repository 'name' has been created."
+    assert_response :redirect
   end
 
 
