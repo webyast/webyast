@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<role>
+  <users type="array">
+    <user>foxy</user>
+    <user>mousy</user>
+  </users>
+  <permissions type="array">
+    <permission>org.opensuse.yast.modules.logfile.read</permission>
+  </permissions>
+</role>
