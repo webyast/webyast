@@ -54,7 +54,7 @@ GET /patches/patch_id.xml
 
   Return information about patch with given ID.
 
-  CURL Example: curl -u &lt;user> 'https://localhost:4984/patches/slessp2-PackageKit;7256;noarch;nu_novell_com:SLES11-SP2-Updates.xml'
+  CURL Example: curl -u &lt;user&gt; 'https://localhost:4984/patches/slessp2-PackageKit;7256;noarch;nu_novell_com:SLES11-SP2-Updates.xml'
 
 
 XmlResult: patch
