@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Tue Feb 19 10:17:31 UTC 2013 - jreidinger@suse.com
+
+- fix passing checkbox value to controller (BNC#789533)
+- 0.3.10
+
+-------------------------------------------------------------------
 Wed Dec 19 14:14:32 UTC 2012 - lslezak@suse.cz
 
 - make webyast-base dependency versioned
