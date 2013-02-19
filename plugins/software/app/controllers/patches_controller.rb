@@ -20,6 +20,7 @@
 #++
 
 require "install_in_progress_exception"
+require "license_required_exception"
 
 class PatchesController < ApplicationController
   include ERB::Util
@@ -83,13 +84,16 @@ private
       flash[:warning] = _("There are patch installation messages available") + details(@message)
     end
 
-    #checking if a license is requiredrequired
+    # check if a license is required
     if PatchesState.read[:message_id] == "PATCH_EULA"
-      if request.format.html?
-        redirect_to :action => "license" #move to page for license confirmation
-      else
-        raise LicenseRequiredException.new
+      respond_to do |format|
+         #move to page for license confirmation
+        format.html { redirect_to :action => "license" }
+        format.xml  { render :xml => LicenseRequiredException.new.to_xml }
+        format.json { render :json => LicenseRequiredException.new.to_json }
       end
+
+      return
     end
 
     #checking if an installation is running
