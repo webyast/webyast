@@ -105,6 +105,10 @@ class Systemtime < BaseModel::Base
     end
   end
 
+  def region_timezones
+    zone_available = system_time.timezones.find { |zone| zone[:region] == system_time.region }
+  end
+
   private
 
   def load_default_data
@@ -173,7 +177,11 @@ class Systemtime < BaseModel::Base
     regional_zones = yapi_response['zones'].find do |zone|
       zone['entries'].find {|detail, timezone| detail == yapi_timezone }
     end
-    regional_zones['entries'][yapi_timezone]
+    if regional_zones
+      regional_zones['entries'][yapi_timezone]
+    else
+      "#{yapi_timezone} (Unknown)"
+    end
   end
 
   def parse_yapi_zones
@@ -183,9 +191,14 @@ class Systemtime < BaseModel::Base
   end
 
   def parse_yapi_region
-    timezones.find do |tzone|
+    zones = timezones.find do |tzone|
       tzone[:zones].find {|zone| zone == timezone }
-    end[:region]
+    end
+    if zones.present?
+      zones[:region]
+    else
+      _('Unknown')
+    end
   end
 
   def render_attributes
