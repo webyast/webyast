@@ -4,4 +4,5 @@
   <region>Europe</region>
   <time>12:00:00</time>
   <date>01/02/2013</date>
+  <hwclock type="boolean">true</hwclock>
 </systemtime>
