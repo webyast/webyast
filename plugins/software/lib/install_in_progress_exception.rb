@@ -24,7 +24,7 @@ require 'builder'
 class InstallInProgressException < BackendException
   def initialize(count)
     @count = count
-    super "Cannot obtain patches, installation in progress. Remain #{@count} packages."
+    super "Cannot obtain available patches, installation is in progress. #{@count} patches remain to install."
   end
 
   def to_xml(options = { :indent => 2 })
