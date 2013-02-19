@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<patch_update>
+  <resolvable_id>slessp2-PackageKit;7256;noarch;nu_novell_com:SLES11-SP2-Updates</resolvable_id>
+  <kind>important</kind>
+  <name>slessp2-PackageKit</name>
+  <version>7256</version>
+  <arch>noarch</arch>
+  <repo>nu_novell_com:SLES11-SP2-Updates</repo>
+  <summary>YOU update for PackageKit</summary>
+  <installed type="boolean">false</installed>
+</patch_update>
