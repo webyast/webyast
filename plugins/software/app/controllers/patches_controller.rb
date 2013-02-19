@@ -146,8 +146,8 @@ private
       render ErrorResult.error(404, 1, "Patch #{params[:id]} not found.") and return
     end
     respond_to do |format|
-      format.xml { render  :xml => @patch_update.to_xml( :root => "patches", :dasherize => false ) }
-      format.json { render :json => @patch_update.to_json( :root => "patches", :dasherize => false ) }
+      format.xml { render  :xml => @patch_update.to_xml(:dasherize => false, :indent => 2) }
+      format.json { render :json => @patch_update.to_json(:dasherize => false, :indent => 2) }
     end
   end
 
