@@ -26,8 +26,11 @@ require 'systemtime' # RORSCAN_ITL
 # Main goal is checking permissions.
 class TimeController < ApplicationController
 
+  private
+
   attr_accessor :ntp, :ntp_available, :service_available
-  private       :ntp, :ntp_available, :service_available
+
+  public
 
   before_filter :init
 
@@ -59,42 +62,42 @@ class TimeController < ApplicationController
 
   def update
     authorize! :write, Time
-    raise InvalidParameters.new :time => "Missing parameter 'systemtime'" unless params[:systemtime]
+    raise InvalidParameters.new _("Missing parameter 'systemtime'") unless params[:systemtime]
     system_time = Systemtime.new params[:systemtime]
-    if system_time.valid?
-      if params[:systemtime][:config]
-        case params[:systemtime][:config]
-        when "manual"
-          if service_available && ntp_available
-            authorize! :execute, Service
-            service = Service.new("ntp")
-            service.save({:execute => "stop" })
-          end
-          system_time.time = params[:systemtime][:time]
-          system_time.date = params[:systemtime][:date]
-        when "ntp_sync"
-          if ntp_available
-            authorize! :synchronize, Ntp
-            authorize! :setserver,   Ntp
-            ntp = Ntp.find
-            ntp.actions[:synchronize] = true
-            ntp.actions[:synchronize_utc] = system_time.utcstatus
-            ntp.actions[:ntp_server] = params[:ntp_server]
-            ntp.update
-            Service.new('ntp').save(:execute=>'start') if service_available
-          end
+    raise InvalidParameters.new _(system_time.errors.full_messages.join(', ')) unless system_time.valid?
+
+    if params[:systemtime][:config]
+      case params[:systemtime][:config]
+      when "manual"
+        if service_available && ntp_available
+          authorize! :execute, Service
+          service = Service.new("ntp")
+          service.save({:execute => "stop" })
         end
-      else
-        system_time.time = nil
-        system_time.date = nil
+        system_time.time = params[:systemtime][:time]
+        system_time.date = params[:systemtime][:date]
+      when "ntp_sync"
+        if ntp_available
+          authorize! :synchronize, Ntp
+          authorize! :setserver,   Ntp
+          ntp = Ntp.find
+          ntp.actions[:synchronize] = true
+          ntp.actions[:synchronize_utc] = system_time.utcstatus
+          ntp.actions[:ntp_server] = params[:ntp_server]
+          ntp.update
+          Service.new('ntp').save(:execute=>'start') if service_available
+        end
       end
-      system_time.region    = params[:systemtime][:region]
-      system_time.timezone  = params[:systemtime][:timezone]
-      system_time.utcstatus = params[:systemtime][:utcstatus]
-      system_time.save
     else
-      raise InvalidParameters.new :time => system_time.errors.full_messages.join(', ')
+      system_time.time = nil
+      system_time.date = nil
     end
+
+    system_time.region    = params[:systemtime][:region]
+    system_time.timezone  = params[:systemtime][:timezone]
+    system_time.utcstatus = params[:systemtime][:utcstatus]
+    system_time.save
+
     respond_to do |format|
       format.html do
         flash[:notice] = _('Time settings have been written.')

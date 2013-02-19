@@ -20,6 +20,6 @@
 # you may find current contact information at www.novell.com
 #++
 %>
-<% timezones = system_time.timezones.find { |zone| zone[:region] == system_time.region }[:timezones].sort %>
+<% timezones = system_time.timezones.find { |zone| zone[:region] == system_time.region }[:zones].sort %>
 <%= select_tag "systemtime[timezone]", options_for_select(timezones, system_time.timezone), :disabled=> disabled %>
 
