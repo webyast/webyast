@@ -101,8 +101,8 @@ private
     if running #there is process which runs installation
       unless request.format.html?
         respond_to do |format|
-          format.xml  { render :xml => InstallInProgressException.new(running).to_xml }
-          format.json { render :json => InstallInProgressException.new(running).to_json }
+          format.xml  { render :xml => InstallInProgressException.new(remaining).to_xml }
+          format.json { render :json => InstallInProgressException.new(remaining).to_json }
         end
 
         return
@@ -293,8 +293,8 @@ private
         render :show
       else
         respond_to do |format|
-          format.xml  { render :xml => InstallInProgressException.new(running).to_xml }
-          format.json { render :json => InstallInProgressException.new(running).to_json }
+          format.xml  { render :xml => InstallInProgressException.new(remaining).to_xml }
+          format.json { render :json => InstallInProgressException.new(remaining).to_json }
         end
       end
 
