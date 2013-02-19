@@ -35,7 +35,7 @@
   
   <div id="create_role_dialog" style="display: none">
     <%= form_tag '/roles/create', {:id=>'rolesForm', :class => 'container'} do %>
-      <label for="role_name">Name</label><%= text_field_tag "role_name", "", :class=>"required"%>
+      <label for="role_name">Name</label><%= text_field_tag "role[name]", "", :class=>"required"%>
     <% end %>
   </div>
 
