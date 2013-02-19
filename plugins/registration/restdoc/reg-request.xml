@@ -1,0 +1,8 @@
+<?xml version="1.0"?>
+<registration>
+  <arguments>
+    <regcode-sles>your reg code</regcode-sles>
+    <email>email for registration</email>
+    <moniker>zofka</moniker>
+  </arguments>
+</registration>
