@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Tue Feb 19 14:55:11 UTC 2013 - jreidinger@suse.com
+
+- fix disable of dhcp based hostname (BNC#787535#c8)
+- 0.3.11
+
+-------------------------------------------------------------------
 Mon Feb 18 16:03:01 UTC 2013 - jreidinger@suse.com
 
 - fix change hostname xor domain (BNC#787535)
