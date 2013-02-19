@@ -19,6 +19,8 @@
 # you may find current contact information at www.novell.com
 #++
 
+require "install_in_progress_exception"
+
 class PatchesController < ApplicationController
   include ERB::Util
 
@@ -93,7 +95,15 @@ private
     #checking if an installation is running
     running, remaining = Patch.installing
     if running #there is process which runs installation
-      raise InstallInProgressException.new( running )unless request.format.html?
+      unless request.format.html?
+        respond_to do |format|
+          format.xml  { render :xml => InstallInProgressException.new(running).to_xml }
+          format.json { render :json => InstallInProgressException.new(running).to_json }
+        end
+
+        return
+      end
+
       # patch update installation in progress
       # display the message and reload after a while
       @flash_message = h _("Cannot read available patches, patch installation is in progress.")
@@ -276,11 +286,15 @@ private
         end
 
         flash[:error] = error_string
+        render :show
       else
-        raise InstallInProgressException.new(running)
+        respond_to do |format|
+          format.xml  { render :xml => InstallInProgressException.new(running).to_xml }
+          format.json { render :json => InstallInProgressException.new(running).to_json }
+        end
       end
 
-      render :show and return
+      return
     end
 
     update_array = []

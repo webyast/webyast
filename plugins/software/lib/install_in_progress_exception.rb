@@ -26,8 +26,8 @@ class InstallInProgressException < BackendException
     @count = count
   end
 
-  def to_xml
-    xml = Builder::XmlMarkup.new({})
+  def to_xml(options = { :indent => 2 })
+    xml = Builder::XmlMarkup.new(options)
     xml.instruct!
 
     xml.error do
