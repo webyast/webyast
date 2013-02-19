@@ -416,7 +416,7 @@ private
         if @text =~ /DT:Rich/ #text is richtext for packager
           @text = @text.html_safe
         else
-          (h @text).gsub!(/^\n\n$/, '<p class="eula_paragraph">').html_safe
+          (h @text).gsub(/^\n\n$/, '<p class="eula_paragraph">').html_safe
         end
         render
       }
