@@ -31,10 +31,18 @@ require 'yast/paths'
 # Main goal is handle roles management. Use BaseModel.
 class Role < BaseModel::Base
 
+ROLE_NAME_PATTERN = /\A[a-zA-Z0-9_\-.]+\Z/
+
 attr_accessor :users
 attr_accessor :permissions
 attr_accessor :name
 attr_accessor :new_record
+
+validates :name, :format => {
+  :with => ROLE_NAME_PATTERN,
+  :message => _("Role name is invalid. Allowed is combination " +
+                "of a-z, A-Z, numbers, dash and underscore only.") }
+
 #specify serialized attributes to prevent new_record serialization
 attr_serialized :users, :permissions, :name
 
@@ -77,7 +85,7 @@ def self.find(what=:all,options={})
   when :all then
     result.values || []
   else
-    v = result.find { |k,v| k.to_sym == what.to_sym }
+    v = result.find { |k,v| k == what }
     v[1] if v #return value, not key
   end
 end
@@ -85,6 +93,7 @@ end
 # Updates roles and permissions for users which loose, gain role or role
 # change its permission
 def update
+  return false unless valid?
   roles = Role.find_all
   old = roles[name]
   roles[name] = self
@@ -106,10 +115,12 @@ def update
 
   Role.write_definitions roles.values
   Role.write_assigns roles.values
+  true
 end
 
 # Creates a new role and assign permissions for users which is in the role
 def create
+  return false unless valid?
   roles = Role.find_all
   roles[name] = self
 #set permission for users of new role
