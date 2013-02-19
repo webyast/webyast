@@ -160,10 +160,6 @@ public
     end
   end
 
-  # Deletes roles.
-  # FIXME problem is that webui uses different parameters as the rest api
-  # can use; the same is valid for the update action where an array of params
-  # is being passed from web-ui which is hard acceptable in the rest api
   def destroy
     # RORSCAN_INL: User has already write permission for ALL roles here
     check_role_exists
