@@ -168,4 +168,38 @@ class PatchesControllerTest < ActionController::TestCase
     assert_response :success
   end
 
+  test "patch installation in progress" do
+    # 42 patches to install
+    Patch.stubs(:installing).returns([true, 42])
+
+    get :index
+    assert_response :success
+    assert_match /There are 42 patches to install/, @response.body
+  end
+
+  test "patch installation in progress XML" do
+    # 42 patches to install
+    Patch.stubs(:installing).returns([true, 42])
+    mime = Mime::XML
+    @request.accept = mime.to_s
+
+    get :index
+    assert_response :success
+    error = Hash.from_xml(@response.body)["error"]
+    assert_equal 42, error["count"]
+    assert_match /42 patches remain to install/, error["description"]
+  end
+
+  test "patch installation in progress JSON" do
+    # 42 patches to install
+    Patch.stubs(:installing).returns([true, 42])
+    mime = Mime::JSON
+    @request.accept = mime.to_s
+
+    get :index
+    assert_response :success
+    # TODO in Ruby 1.9 we could use JSON from stdlib to parse the string
+    assert_match /42 patches remain to install/, @response.body
+  end
+
 end
