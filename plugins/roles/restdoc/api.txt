@@ -122,7 +122,3 @@ DELETE /roles/<role_name>
   CURL example:
 
   curl -u <user>:<password> -H "Accept: application/xml" -X DELETE http://localhost:4984/roles/bamboo
-
-XmlResult: interfaces_vlan0_delete_response
-
-
