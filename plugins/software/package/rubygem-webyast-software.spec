@@ -93,7 +93,7 @@ needed at runtime.
 # PackageKit/DBus need /proc and thus don't run in build environment.
 # But both are required for testing :-/
 # reference: bnc#597868
-# -percent-webyast_check
+# %%webyast_run_plugin_tests
 
 %install
 %gem_install %{S:0}
