@@ -168,7 +168,7 @@ private
   # this action is rendered as a partial, so it can't throw
   def show_summary
     if cannot? :read, Patch
-      render :text => _("Status not available (no permissions)")
+      render :text => _("Status not available (no permissions)") and return
     end
 
     error = nil
