@@ -204,11 +204,13 @@ class RepositoriesController < ApplicationController
       end
     end
 
-    unless request.format.html?
-      render :show
-    else
-      flash[:message] = _("Repository '%s' has been deleted.") % @repo.name
-      redirect_to :action => :index and return
+    respond_to do |format|
+      format.html do
+        flash[:message] = _("Repository '%s' has been deleted.") % @repo.name
+        redirect_to :action => :index
+      end
+      format.xml  { head :ok }
+      format.json { head :ok }
     end
   end
 
