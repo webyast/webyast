@@ -106,7 +106,12 @@ class Systemtime < BaseModel::Base
   end
 
   def region_timezones
-    zone_available = system_time.timezones.find { |zone| zone[:region] == system_time.region }
+    region_zones_available = timezones.any? { |zone| zone[:region] == region }
+    if region_zones_available
+      timezones.find {|zone| zone[:region] == region }[:zones].sort
+    else
+      timezones.first[:zones]
+    end
   end
 
   private
@@ -134,7 +139,7 @@ class Systemtime < BaseModel::Base
   end
 
   def load_yapi_response
-    self.yapi_response = YastService.Call("YaPI::TIME::Read", TIMEZONE_KEYS)
+    self.yapi_response = YastService.Call "YaPI::TIME::Read", TIMEZONE_KEYS
   end
 
   def map_yapi_to_attributes
@@ -180,7 +185,9 @@ class Systemtime < BaseModel::Base
     if regional_zones
       regional_zones['entries'][yapi_timezone]
     else
-      "#{yapi_timezone} (Unknown)"
+      # bnc#787113
+      Rails.logger.error "Unknown timezone got from yapi/sysconfig: #{yapi_timezone}"
+      "(#{_('Unknown')}) #{yapi_timezone} "
     end
   end
 
@@ -197,6 +204,7 @@ class Systemtime < BaseModel::Base
     if zones.present?
       zones[:region]
     else
+      Rails.logger.error "Region could not have been recognized"
       _('Unknown')
     end
   end

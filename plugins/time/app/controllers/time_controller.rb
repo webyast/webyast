@@ -66,6 +66,13 @@ class TimeController < ApplicationController
     system_time = Systemtime.new params[:systemtime]
     raise InvalidParameters.new _(system_time.errors.full_messages.join(', ')) unless system_time.valid?
 
+    system_time.region    = params[:systemtime][:region]
+    system_time.timezone  = params[:systemtime][:timezone]
+    system_time.utcstatus = params[:systemtime][:utcstatus]
+    system_time.time      = nil # set time below
+    system_time.date      = nil # set date below
+    system_time.save # save the timezone stuff before proceeding to time settings
+
     if params[:systemtime][:config]
       case params[:systemtime][:config]
       when "manual"
@@ -88,15 +95,8 @@ class TimeController < ApplicationController
           Service.new('ntp').save(:execute=>'start') if service_available
         end
       end
-    else
-      system_time.time = nil
-      system_time.date = nil
+      system_time.save
     end
-
-    system_time.region    = params[:systemtime][:region]
-    system_time.timezone  = params[:systemtime][:timezone]
-    system_time.utcstatus = params[:systemtime][:utcstatus]
-    system_time.save
 
     respond_to do |format|
       format.html do

@@ -39,7 +39,7 @@
         $.each($('body').data('zones'), function(index,timezone) {
           if(timezone.region == region_name) {
             $timezone_options.empty();
-            $.each(timezone.timezones, function(index,zone) {
+            $.each(timezone.zones, function(index,zone) {
               $timezone_options.append($("<option />").val(zone).text(zone));
             });
           }
