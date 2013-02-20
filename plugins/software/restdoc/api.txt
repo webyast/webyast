@@ -104,3 +104,12 @@ POST /repositories
   CURL Example: curl -u &lt;user&gt; -X POST -H 'Content-type: text/xml' -d @repository.xml https://localhost:4984/repositories.xml
 
 XmlBody: repository
+
+
+DELETE /repositories/repo_id
+
+  Delete an existing repository.
+
+  CURL Example: curl -u &lt;user&gt; -X DELETE https://localhost:4984/repositories/nu_novell_com:SLES11-SP2-Updates.xml
+
+
