@@ -92,6 +92,28 @@ class NetworkController < ApplicationController
   def create
     authorize! :write, Network
 
+    # bnc#790219 All bonded (selected) slaves need to be configured with bootproto=none
+    params["bond_slaves"].each do |slave, selected|
+      next if selected != "1"
+
+      slave_ifc = Interface.find slave
+      unless slave_ifc
+        Rails.logger.error "Cannot find slave interface #{slave}"
+        next
+      end
+      Rails.logger.info "Found slave #{slave_ifc.inspect}"
+
+      # Already configured
+      next if slave_ifc.bootproto
+
+      Rails.logger.info "Configuring interface #{slave}"
+      slave_ifc.type = "eth"
+      slave_ifc.bootproto = "none"
+      unless slave_ifc.save
+        Rails.logger.error "Cannot save #{slave_ifc.inspect} configuration"
+      end
+    end
+
     hash = {}
     hash["type"] = params[:type] if  params[:type]
     hash["bootproto"] = params[:bootproto]
