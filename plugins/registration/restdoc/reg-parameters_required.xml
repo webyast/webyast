@@ -7,29 +7,8 @@
   Driver Info #0:
     Driver Status: thermal,fan are not active
     Driver Activation Cmd: "modprobe thermal; modprobe fan"
-  Config Status: cfg=new, avail=yes, need=no, active=unknown</value><flag>a</flag><kind>optional</kind></argument><argument><name>sound</name><value></value><flag>a</flag><kind>optional</kind></argument><argument><name>hostname</name><value>linux-webyast</value><flag>a</flag><kind>optional</kind></argument><argument><name>regcode-sles</name><value></value><flag>m</flag><kind>optional</kind></argument><argument><name>dsl</name><value></value><flag>a</flag><kind>optional</kind></argument><argument><name>disk</name><value>12: None 00.0: 10600 Disk
-  [Created at block.243]
-  UDI: /org/freedesktop/Hal/devices/pci_1af4_1001_storage_pci_disk
-  Unique ID: KSbE.Fxp0d3BezAE
-  Parent ID: sNGd.+FFPFBVXZu6
-  SysFS ID: /class/block/vda
-  SysFS BusID: virtio1
-  SysFS Device Link: /devices/pci0000:00/0000:00:04.0/virtio1
-  Hardware Class: disk
-  Model: "Disk"
-  Driver: "virtio-pci", "virtio_blk"
-  Driver Modules: "virtio_pci", "virtio_blk"
-  Device File: /dev/vda
-  Device Files: /dev/vda, /dev/block/253:0, /dev/disk/by-path/pci-0000:00:04.0-virtio-pci-virtio1
-  Device Number: block 253:0-253:15
-  BIOS id: 0x80
-  Geometry (Logical): CHS 18724/16/63
-  Size: 18874368 sectors a 512 bytes
-  Geometry (BIOS EDD): CHS 18724/16/63
-  Size (BIOS EDD): 18874368 sectors
-  Geometry (BIOS Legacy): CHS 1023/255/63
-  Config Status: cfg=new, avail=yes, need=no, active=unknown
-  Attached to: #11 (Storage controller)</value><flag>a</flag><kind>optional</kind></argument><argument><name>cpu</name><value>01: None 00.0: 10103 CPU
+  Config Status: cfg=new, avail=yes, need=no, active=unknown</value><flag>a</flag><kind>optional</kind></argument><argument><name>sound</name><value></value><flag>a</flag><kind>optional</kind></argument><argument><name>hostname</name><value>linux-webyast</value><flag>a</flag><kind>optional</kind></argument><argument><name>regcode-sles</name><value></value><flag>m</flag><kind>optional</kind></argument><argument><name>dsl</name><value></value><flag>a</flag><kind>optional</kind></argument>
+<argument><name>cpu</name><value>01: None 00.0: 10103 CPU
   [Created at cpu.301]
   Unique ID: rdCR.j8NaKXDZtZ6
   Hardware Class: cpu
@@ -40,78 +19,16 @@
   Clock: 2133 MHz
   BogoMips: 4262.40
   Cache: 4096 kb
-  Config Status: cfg=new, avail=yes, need=no, active=unknown</value><flag>a</flag><kind>optional</kind></argument><argument><name>timezone</name><value>Euro/Berl</value><flag>i</flag><kind>mandatory</kind></argument><argument><name>platform</name><value>x86_64</value><flag>i</flag><kind>mandatory</kind></argument><argument><name>email</name><value></value><flag>m</flag><kind>mandatory</kind></argument><argument><name>secret</name><value>c8db51334bef4320b4a2c040f5895af3</value><flag>a</flag><kind>mandatory</kind></argument><argument><name>netcard</name><value>16: PCI 03.0: 0200 Ethernet controller
-  [Created at pci.323]
-  UDI: /org/freedesktop/Hal/devices/pci_1af4_1000
-  Unique ID: 3hqH.pkM7KXDR457
-  SysFS ID: /devices/pci0000:00/0000:00:03.0
-  SysFS BusID: 0000:00:03.0
-  Hardware Class: network
-  Model: "Qumranet Virtio network device"
-  Vendor: pci 0x1af4 "Qumranet, Inc."
-  Device: pci 0x1000 "Virtio network device"
-  SubVendor: pci 0x1af4 "Qumranet, Inc."
-  SubDevice: pci 0x0001 
-  Driver: "virtio-pci"
-  Driver Modules: "virtio_pci"
-  I/O Ports: 0xc060-0xc07f (rw)
-  Memory Range: 0xfebf0000-0xfebf0fff (rw,non-prefetchable)
-  Memory Range: 0xfebe0000-0xfebeffff (ro,non-prefetchable,disabled)
-  IRQ: 10 (no events)
-  Module Alias: "pci:v00001AF4d00001000sv00001AF4sd00000001bc02sc00i00"
-  Driver Info #0:
-    Driver Status: virtio_pci is active
-    Driver Activation Cmd: "modprobe virtio_pci"
-  Config Status: cfg=no, avail=yes, need=no, active=unknown
-
-18: Virtio 00.0: 0200 Ethernet controller
-  [Created at pci.1495]
-  UDI: /org/freedesktop/Hal/devices/virtio_virtio0
-  Unique ID: vWuh.VIRhsc57kTD
-  SysFS ID: /devices/pci0000:00/0000:00:03.0/virtio0
-  SysFS BusID: virtio0
-  Hardware Class: network
-  Model: "Virtio Ethernet Card 0"
-  Vendor: int 0x6014 "Virtio"
-  Device: int 0x0001 "Ethernet Card 0"
-  Driver: "virtio_net"
-  Driver Modules: "virtio_net"
-  Device File: eth0
-  HW Address: 52:54:00:12:34:56
-  Link detected: yes
-  Module Alias: "virtio:d00000001v00001AF4"
-  Driver Info #0:
-    Driver Status: virtio_net is active
-    Driver Activation Cmd: "modprobe virtio_net"
-  Config Status: cfg=no, avail=yes, need=no, active=unknown</value><flag>a</flag><kind>optional</kind></argument><argument><name>isdn</name><value></value><flag>a</flag><kind>optional</kind></argument><argument><name>installed-langs</name><value>en_US</value><flag>a</flag><kind>optional</kind></argument><argument><name>ostarget</name><value>sle-11-x86_64</value><flag>i</flag><kind>mandatory</kind></argument><argument><name>moniker</name><value></value><flag>m</flag><kind>optional</kind></argument><argument><name>memory</name><value>01: None 00.0: 10102 Main Memory
+  Config Status: cfg=new, avail=yes, need=no, active=unknown</value><flag>a</flag><kind>optional</kind></argument><argument><name>timezone</name><value>Euro/Berl</value><flag>i</flag><kind>mandatory</kind></argument><argument><name>platform</name><value>x86_64</value><flag>i</flag><kind>mandatory</kind></argument><argument><name>email</name><value></value><flag>m</flag><kind>mandatory</kind></argument>
+ <argument><name>isdn</name><value></value><flag>a</flag><kind>optional</kind></argument><argument><name>installed-langs</name><value>en_US</value><flag>a</flag><kind>optional</kind></argument><argument><name>ostarget</name><value>sle-11-x86_64</value><flag>i</flag><kind>mandatory</kind></argument><argument><name>moniker</name><value></value><flag>m</flag><kind>optional</kind></argument><argument><name>memory</name><value>01: None 00.0: 10102 Main Memory
   [Created at memory.66]
   Unique ID: rdCR.CxwsZFjVASF
   Hardware Class: memory
   Model: "Main Memory"
   Memory Range: 0x00000000-0x3ff9bbff (rw)
   Memory Size: 1 GB
-  Config Status: cfg=new, avail=yes, need=no, active=unknown</value><flag>a</flag><kind>optional</kind></argument><argument><name>scsi</name><value>12: SCSI 100.0: 10602 CD-ROM (DVD)
-  [Created at block.247]
-  UDI: /org/freedesktop/Hal/devices/storage_model_QEMU_DVD_ROM
-  Unique ID: KD9E.53N0UD4ozwD
-  Parent ID: mnDB.3sKqaxiizg6
-  SysFS ID: /class/block/sr0
-  SysFS BusID: 1:0:0:0
-  SysFS Device Link: /devices/pci0000:00/0000:00:01.1/host1/target1:0:0/1:0:0:0
-  Hardware Class: cdrom
-  Model: "QEMU DVD-ROM"
-  Vendor: "QEMU"
-  Device: "QEMU DVD-ROM"
-  Revision: "1.1."
-  Driver: "ata_piix", "sr"
-  Driver Modules: "ata_piix"
-  Device File: /dev/sr0 (/dev/sg0)
-  Device Files: /dev/sr0, /dev/block/11:0, /dev/scd0, /dev/disk/by-path/pci-0000:00:01.1-scsi-1:0:0:0, /dev/cdrom, /dev/dvd
-  Device Number: block 11:0 (char 21:0)
-  Features: DVD
-  Config Status: cfg=new, avail=yes, need=no, active=unknown
-  Attached to: #3 (IDE interface)
-  Drive Speed: 4</value><flag>a</flag><kind>optional</kind></argument><argument><name>processor</name><value>x86_64</value><flag>i</flag><kind>mandatory</kind></argument><argument><name>ostarget-bak</name><value>"SUSE Linux Enterprise Server 11 (x86_64)"</value><flag>a</flag><kind>mandatory</kind></argument><argument><name>gfxcard</name><value>15: PCI 02.0: 0300 VGA compatible controller (VGA)
+  Config Status: cfg=new, avail=yes, need=no, active=unknown</value><flag>a</flag><kind>optional</kind></argument>
+ <argument><name>processor</name><value>x86_64</value><flag>i</flag><kind>mandatory</kind></argument><argument><name>ostarget-bak</name><value>"SUSE Linux Enterprise Server 11 (x86_64)"</value><flag>a</flag><kind>mandatory</kind></argument><argument><name>gfxcard</name><value>15: PCI 02.0: 0300 VGA compatible controller (VGA)
   [Created at pci.323]
   UDI: /org/freedesktop/Hal/devices/pci_1234_1111
   Unique ID: _Znp.UD4YEmG87c2
