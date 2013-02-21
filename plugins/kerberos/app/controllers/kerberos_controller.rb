@@ -114,7 +114,10 @@ class KerberosController < ApplicationController
 private 
 
   def running_64bit?
-    `uname --hardware-platform`.chomp == 'x86_64'
+    # constant boolean
+    return @arch64 unless @arch64.nil?
+
+    @arch64 = `uname --hardware-platform`.chomp == 'x86_64'
   end
 
   def missing_packages_text
