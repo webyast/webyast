@@ -1,4 +1,9 @@
 -------------------------------------------------------------------
+Thu Feb 21 09:58:51 UTC 2013 - vmoravec@suse.cz
+
+- fixed REST API (bnc#790164)
+
+-------------------------------------------------------------------
 Fri Jan  4 16:30:14 UTC 2013 - lslezak@suse.cz
 
 - fixed broken layout (invalid JS code) resulting in unfunctional
