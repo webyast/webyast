@@ -114,7 +114,8 @@
           <label class="tvalign"><%=_("Bond slaves")%></label>
           <div class="checkbox_container">
             <% @ifcs.each do |id, iface| %>
-              <% next if id.match("bond") || iface.bootproto!="none" %>
+              <%# Offering only interfaces that are not configured or have empty configuration %>
+              <% next if id.match("bond") || (iface.bootproto && iface.bootproto!="none") %>
               <div>
                 <%= check_box :bond_slaves, id, :checked => (@ifc.bond_slaves.is_a?(String) ? @ifc.bond_slaves.split(" ") : @ifc.bond_slaves).include?(id) %>
                 <%= id %> <%= "- #{iface.vendor}" if iface.vendor %>
