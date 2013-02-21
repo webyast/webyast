@@ -69,13 +69,13 @@ class UsersControllerTest < ActionController::TestCase
     u.load_attributes({:uid => "schubi5"})
     User.stubs(:find).with("schubi5").returns(u)
     get :show, :format => "html", :id => "schubi5"
-    assert_response :success
+    assert_redirected_to :controller => :users, :action => :index
   end
 
   test "access show with wrong user" do
     User.stubs(:find).with("schubi_not_found").returns(nil)
     get :show, :id => "schubi_not_found"
-    assert_response 404
+    assert_redirected_to :controller => :users, :action => :index
   end
 
   def test_update_user
