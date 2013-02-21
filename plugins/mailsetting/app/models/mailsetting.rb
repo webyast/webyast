@@ -142,17 +142,30 @@ class MailError < BackendException
 end
 
 class MailsettingNotifier < ActionMailer::Base
-  def self.send_test_notification options
-    self.smtp_settings = options[:smtp_settings]
-    send_test_mail options[:address_to], options[:hostname]
+  def self.server_settings options
+    ActionMailer.smtp_settings = {
+      :address   => options[:smtp_server],
+      :port      => 25,
+      :domain    => options[:domain],
+      :tls       => options[:transport_layer_security],
+      :user_name => options[:user_name],
+      :password  => options[:password],
+      :authentication => :plain
+    }
+
+    self.delivery_method       = :smtp
+    self.perform_deliveries    = true
+    self.raise_delivery_errors = false
   end
 
-  def send_test_mail address_to, hostname
+  def test_mail address_to, hostname
+    @from     = "root@#{hostname}"
+    @to       = address_to
+    @subject  = "WebYaST Test Mail"
+    @sent_at  = Time.new.strftime "%Y-%m-%d %H-%M-%S"
     @hostname = hostname
-    @address_to = address_to
-    @address_from = "root@#{hostname}"
-    mail :to => @address_to, :subject => "WebYaST Test Mail"
+    mail :to => @to, :subject => @subject, :from => @from,
+         :template_name => 'test_mail', :template_path => 'mailsetting',
+         :content_type => 'text/html'
   end
 end
-
-

@@ -102,8 +102,16 @@ class MailsettingController < ApplicationController
     update
   end
 
-  def send_test_email
-    render :text => request.host
+  def send_test_mail
+    address_to = params[:mailsetting].delete [:test_mail_address]
+    settings = params[:mailsettings] #TODO change the params as needed by the mailer
+    MailsettingNotifier.smtp_settings settings
+    email = MailsettingNotifier.send_test_email :settings => params[:mailsettings]
+    if email.errors.present?
+      render :json => { :message => _("Sending of email failed"), :errors => email.errors}, :status => 400
+    else
+      render :json => { :message => _("Email has been sent")    }, :status => 200
+    end
   end
 
 private

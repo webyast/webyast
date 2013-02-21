@@ -53,6 +53,24 @@
       });
 
       $("#mailsetting_password_confirmation").validate({keyup : true});
+
+      // send test email via ajax
+      $("#send_mail").click(function(e) {
+          var $form_data = $("#mailForm").find('input[type=text], input[type=password], select');
+          var test_mail_data = {};
+          $form_data.each(function(index, element) {
+            test_mail_data[element.name] = element.value;
+          });
+          console.log(test_mail_data);
+          $.ajax({
+            type: 'POST',
+            url: 'mailsetting/send_test_mail',
+            dataType: 'json',
+            accepts: 'json',
+            data: test_mail_data
+          });
+        }
+      );
     });
   </script>
 <% end %>
@@ -118,8 +136,8 @@ relay.example.com:26. Use square brackets around the host name to prevent from D
         <div class="row lastrow">
           <label id="mail_test_mail_label"><%=_("Send test mail to")%></label>
           <%= f.text_field :test_mail_address, :disabled => disabled, :class => "email" %>
-          <%= f.submit _("Send Mail"), :name => "send_mail" %>
-          <label for="mail_test_mail_address" generated="true" class="error"></label>
+          <%= submit_tag _("Send test email"), :id => "send_mail", :type => :button %>
+          <label for="mail_test_mail_address" generated="true" class="error"> </label>
         </div>
       </div>
     </fieldset>
