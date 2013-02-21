@@ -23,11 +23,11 @@ Contents:
 
 == Overview
 
-  This module provides access to system registration service.
+  This module provides access to the system registration service.
 
-  It works on request, response princliple and it is not stateless. In general
-  API post list of missing arguments to register products installed on machine.
-  After sending such arguments service require others or finish successfully.
+  It works on request/response principle and it is not stateless. In general
+  API post list of missing arguments to register products installed on the machine.
+  After sending these arguments service require others or finishes successfully.
 
 
 == PolicyKit Access Rights
@@ -43,24 +43,28 @@ Example workflow:
 
 GET /registration
 
-  Get List of required arguments or guid given by previous registration. Array
-  of missingarguments list all arguments. Only arguments with kind "mandatory"
-  and empty "value" must by filled. Others are already filled or optional.
 
-  CURL Example: curl -u &lt;user> -H 'Content-type: text/xml' http://localhost:4984/registration.xml
+  Get the list of required arguments, or GUID given by the previous
+  registration. Array <i>missingarguments</i> in the response lists all the
+  required arguments. Only the arguments of "mandatory" type and empty "value"
+  must by specified. Others are already specified or optional.
 
-  Result when some parameters required:
+  CURL Example: curl -u &lt;user&gt; -H 'Content-type: text/xml' https://&lt;hostname&gt;:4984/registration.xml
+
+
+  Result when some parameters are required:
+
 XmlResult: reg-parameters_required
 
-  Result when everything registered:
+  Result when everything is registered:
 XmlResult: reg-registered
 
 POST /registration/register
 
-  Send arguments to registration. All arguments that is mandatory and missing
-  value must be send. Other can be send as well, but it is not neccessary.
+  Send arguments for registration. All mandatory arguments and missing values
+  must be send. Others can be send as well, but it is not neccessary.
 
-  CURL example: curl -u <user> -X POST -H 'Content-type: text/xml' -d @reg-request.xml http://localhost:4984/registration/register.xml
+  CURL example: curl -u &lt;user&gt; -X POST -H 'Content-type: text/xml' -d @reg-request.xml https://&lt;hostname&gt;:4984/registration/register.xml
 
 XmlBody: reg-request
 
