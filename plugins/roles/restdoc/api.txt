@@ -18,55 +18,11 @@ Contents
 
 == PolicyKit Access Rights
 
-  The following PolicyKit permissions are defined:
+  The following PolicyKit permission is needed to perform configutation actions:
 
-  org.opensuse.yast.modules.logfile
+  org.opensuse.yast.modules.yapi.roles.read
 
-  org.opensuse.yast.modules.yapi.activedirectory
-
-  org.opensuse.yast.modules.yapi.administrator
-
-  org.opensuse.yast.modules.yapi.firewall
-
-  org.opensuse.yast.modules.yapi.kerberos
-
-  org.opensuse.yast.modules.yapi.language
-
-  org.opensuse.yast.modules.yapi.ldap
-
-  org.opensuse.yast.modules.yapi.licenses
-
-  org.opensuse.yast.modules.yapi.mailsettings
-
-  org.opensuse.yast.modules.yapi.metrics
-
-  org.opensuse.yast.modules.yapi.mirrorcredentials
-
-  org.opensuse.yast.modules.yapi.network
-
-  org.opensuse.yast.modules.yapi.ntp
-
-  org.opensuse.yast.modules.yapi.packages
-
-  org.opensuse.yast.modules.yapi.patches
-
-  org.opensuse.yast.modules.yapi.register
-
-  org.opensuse.yast.modules.yapi.repositories
-
-  org.opensuse.yast.modules.yapi.roles
-
-  org.opensuse.yast.modules.yapi.services
-
-  org.opensuse.yast.modules.yapi.system
-
-  org.opensuse.yast.modules.yapi.time
-
-  org.opensuse.yast.modules.yapi.users
-
-  org.opensuse.yast.modules.ysr
-
-  org.opensuse.yast.permissions
+  org.opensuse.yast.modules.yapi.roles.write
 
 
 GET /roles

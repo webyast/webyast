@@ -41,6 +41,7 @@ class RolesController < ApplicationController
 
   private
 
+  #FIXME consider moving this validation methods to model
   def check_role_param
     raise InvalidParameters.new _("Missing parameter 'role'") unless params[:role]
   end
@@ -103,6 +104,7 @@ public
 
   def update
     if params[:role] #REST interfce
+      #FIXME model should be responsible for validation
       check_role_exists
       check_role_name_uniqueness
       # RORSCAN_INL: Is not a Information Exposure cause all data can be read (indepent from user)
@@ -145,6 +147,7 @@ public
   # FIXME it is possible to create a role with non-existent user
   def create
     # RORSCAN_INL: Protected by attr_accessible in Role model
+    #FIXME model should be responsible for validation
     check_role_param
     check_role_name_uniqueness
     @role = Role.new.load params[:role]
@@ -167,7 +170,7 @@ public
     Role.delete role_name
     respond_to do |format|
       format.html do
-        flash[:notice] = _("Role \'%s\' was successfully removed.") % role_name
+        flash[:notice] = _("Role '%s' was successfully removed.") % role_name
         redirect_to :action => :index
       end
       format.xml  { render :nothing => true, :status => 204 }
