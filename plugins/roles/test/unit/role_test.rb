@@ -1,20 +1,20 @@
 #--
 # Copyright (c) 2009-2010 Novell, Inc.
-# 
+#
 # All Rights Reserved.
-# 
+#
 # This program is free software; you can redistribute it and/or modify it
 # under the terms of version 2 of the GNU General Public License
 # as published by the Free Software Foundation.
-# 
+#
 # This program is distributed in the hope that it will be useful,
 # but WITHOUT ANY WARRANTY; without even the implied warranty of
 # MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
 # GNU General Public License for more details.
-# 
+#
 # You should have received a copy of the GNU General Public License
 # along with this program; if not, contact Novell, Inc.
-# 
+#
 # To contact Novell about this file by physical or electronic mail,
 # you may find current contact information at www.novell.com
 #++
@@ -46,14 +46,17 @@ class RoleTest < ActiveSupport::TestCase
   end
 
   def test_find_id
-    test_role = Role.find :test
+    test_role = Role.find 'test'
     assert test_role
     assert_equal 3,test_role.users.size
     assert_equal 2,test_role.permissions.size
   end
 
-TEST_DATA = { :name => "create_test", :permissions => ["org.opensuse.test.lest"],
-							:users => ["tux"] }
+  TEST_DATA = {
+    :name => "create_test",
+    :permissions => ["org.opensuse.test.lest"],
+    :users => ["tux"]
+  }
   def test_create_role
     r = Role.new.load(TEST_DATA)
     assert r.new_record?
@@ -67,27 +70,27 @@ TEST_DATA = { :name => "create_test", :permissions => ["org.opensuse.test.lest"]
   end
 
   def test_update_role
-    r = Role.find(:test)
+    r = Role.find 'test'
     assert !r.new_record?
 		r.users = TEST_DATA[:users]
 		r.permissions = TEST_DATA[:permissions]
 		r.save
     roles = Role.find
     assert_equal 3,roles.size
-    test_role = roles.find { |r| r.name.to_sym == :test }
+    test_role = roles.find { |r| r.name == 'test' }
     assert test_role
     assert_equal TEST_DATA[:users],test_role.users
     assert_equal TEST_DATA[:permissions],test_role.permissions
   end
 
   def test_delete_role
-    Role.delete(:test)
+    Role.delete 'test'
     roles = Role.find
     assert_equal 2,roles.size
   end
 
   def test_changed
-    r = Role.find(:test)
+    r = Role.find 'test'
     assert !r.changed_users?
     assert !r.changed_permissions?
     r.users << "nonexist"
