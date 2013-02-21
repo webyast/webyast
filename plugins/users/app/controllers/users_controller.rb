@@ -34,28 +34,15 @@ class UsersController < ApplicationController
   end
 
   def save_roles (userid,roles_string)
-    all_roles = Role.find :all
-    roles = roles_string.split(",")
-    my_roles=[]
-    all_roles.each do |role|
-      if role.users.include?(userid)
-       if roles.include?(role.name)
-        # already written - do nothing
-        roles.delete(role.name)
-       else
-        # remove item
+    user_roles = roles_string.split(",")
+    Role.find(:all).each do |role|
+      if role.users.include?(userid) && !user_roles.include?(role.name)
         role.users.delete(userid)
         role.save
-        roles.delete(role.name)
-       end
+      elsif !role.users.include?(userid) && user_roles.include?(role.name)
+        role.users << userid
+        role.save
       end
-    end
-    roles.each do |role|
-      # this should be added
-      r = Role.find(role)
-      r.id=r.name
-      r.users << userid
-      r.save
     end
   end
 
@@ -94,7 +81,6 @@ class UsersController < ApplicationController
           render  :xml => @users.to_xml(:root => "users",
                   :dasherize => false )
         end
-        return
       }
       format.json {
         if @users.nil?
@@ -102,7 +88,6 @@ class UsersController < ApplicationController
         else
           render :json => @users.to_json
         end
-        return
       }
       format.html {
         if @users.nil?
@@ -140,33 +125,29 @@ class UsersController < ApplicationController
     end
   end
 
-  # GET /users/1
-  # GET /users/1.xml
+  # GET /users/:user_id.xml
   def show
     authorize! :userget, User
     if params[:id].blank?
-      render ErrorResult.error(404, 2, "empty parameter") and return
+      problem :client_error, 400, _("No user id given")
+      return
     end
-
-    begin
-      # try to find the user, and 404 if it does not exist
-      @user = User.find(params[:id])
-      if @user.nil?
-        render ErrorResult.error(404, 2, "user not found") and return
-      end
-    rescue Exception => e
-      render ErrorResult.error(500, 2, e.message) and return
+    @user = User.find(params[:id])
+    if @user.nil?
+      problem :client_error, 404, _("User '#{params[:id]}' not found")
+      return
     end
-
     respond_to do |format|
-      format.html
-      format.xml { render  :xml => @user.to_xml( :dasherize => false ) }
-      format.json { render :json => @user.to_json }
+      format.html { redirect_to :index    }
+      format.xml  { render  :xml => @user }
+      format.json { render :json => @user }
     end
+  rescue => e
+    Rails.logger.error e.message
+    problem :server_error, 500, e.message
   end
 
-  # Get /users/new
-  # Get /users/new.xml
+  # GET /users/new
   def new
     authorize! :useradd, User
     @user = User.new()
@@ -196,7 +177,7 @@ class UsersController < ApplicationController
   end
 
 
-  # GET /users/1/edit
+  # GET /users/:user_id/edit
   def edit
     authorize! :usermodify, User
     @user = User.find(params[:id])
@@ -231,105 +212,102 @@ class UsersController < ApplicationController
   # POST /users.json
   def create
     authorize! :useradd, User
-    error = nil
-    begin
-      @user = User.create(params[:user])
-      if @user.roles_string!=nil
-        save_roles(@user.id,@user.roles_string)
-      end
-    rescue Exception => error
-      logger.error(error.message)
-      @user = User.new params[:user]
+    user_params = params[:user]
+    unless user_params
+      problem :client_error, 400, _("New user details not specified")
+      return
     end
-    if error
-      respond_to do |format|
-        format.xml  { render ErrorResult.error(404, 2, error.message) }
-        format.json { render ErrorResult.error(404, 2, error.message) }
-        format.html { flash[:error] = error.message
-                      render :action => "new"
-                    }
-      end
-    else
-      respond_to do |format|
-        format.xml  { render :show }
-        format.json { render :show }
-        format.html { flash[:notice] = _("User %s was successfully created.") % @user.uid
-                      redirect_to :action => "index"
-                    }
-      end
+    roles = user_params[:roles_string] || ''
+    if User.find(user_params[:id])
+      problem :client_error, 409, _("User '#{user_params[:id]}' already exists")
+      return
     end
-  end
-
-  # PUT /users/1
-  # PUT /users/1.xml
-  def update
-    authorize! :usermodify, User
-    error = nil
-    begin
-      begin
-        @user = User.find(params[:user][:id])
-      rescue Exception => error
-        logger.error(error.message)
-      end
-      unless error
-        if params["user"]["roles_string"]!=nil
-          save_roles(@user.id,params["user"]["roles_string"])
-        end
-        @user.load_attributes(params[:user])
-        @user.type = "local"
-        @user.grouplist = {}
-        params[:user][:grp_string].split(",").each do |groupname|
-         @user.grouplist[groupname.strip] = "1"
-        end unless params[:user][:grp_string].blank?
-        @user.save(params[:user][:id])
-      end
-    rescue Exception => error
-      logger.error(error.message)
-    end
-    if error
-      respond_to do |format|
-        format.xml  { render ErrorResult.error(404, 2, error.message) }
-        format.json { render ErrorResult.error(404, 2, error.message) }
-        format.html { flash[:error] = error.message
-                      redirect_to :action => "index"
-                    }
-      end
-    else
-      respond_to do |format|
-        format.xml  { render :show }
-        format.json { render :show }
-        format.html { flash[:notice] = _("User %s was successfully updated.") % @user.uid
-                      redirect_to :action => "index"
-                    }
-      end
-    end
-  end
-
-  # DELETE /users/1
-  # DELETE /users/1.xml
-  # DELETE /users/1.json
-  def destroy
-    authorize! :userdelete, User
-    begin
-      @user = User.find(params[:id])
-      @user.destroy
-    rescue Exception => e
-      respond_to do |format|
-        format.xml  { render ErrorResult.error(404, 2, error.message) }
-        format.json { render ErrorResult.error(404, 2, e.message) }
-        format.html { flash[:error] = _("Error: Could not remove user %s.") % @user.uid
-                      redirect_to :action => "index"
-                    }
-       end
-       return
+    @user = User.create user_params
+    if roles.present?
+      save_roles @user.id, roles
     end
     respond_to do |format|
-      format.xml  { render :show }
-      format.json { render :show }
-      format.html { flash[:notice] = _("User %s was successfully removed.") % @user.uid
-                    redirect_to :action => "index"
-                  }
+      format.xml  { render :xml  => @user }
+      format.json { render :json => @user }
+      format.html do
+        flash[:notice] = _("User %s was successfully created.") % @user.uid
+        redirect_to :action => "index", :controller=>'users'
       end
+    end
+  rescue => e
+    Rails.logger.error e.message
+    problem :server_error, 500, e.message
   end
 
+  # PUT /users/:user_id
+  # PUT /users/:user_id.xml
+  def update
+    authorize! :usermodify, User
+    user_params = params[:user] || {}
+    user_params[:id] ||= params[:id]
+    @user = User.find(user_params[:id])
+    if !@user
+      problem :client_error, 404, _("User '#{user_params[:id]}' not found")
+      return
+    end
+    roles = user_params[:roles_string] || ''
+    save_roles @user.id, roles
+    @user.load_attributes(user_params)
+    @user.type = "local"
+    @user.grouplist = {}
+    user_params[:grp_string].split(",").each do |groupname|
+      @user.grouplist[groupname.strip] = "1"
+    end unless user_params[:grp_string].blank?
+    @user.groupname = user_params[:groupname]
+    @user.save(user_params[:id])
+    respond_to do |format|
+      format.xml  { render :xml  => @user }
+      format.json { render :json => @user }
+      format.html do
+        flash[:notice] = _("User %s was successfully updated.") % @user.uid
+        redirect_to :action => "index"
+      end
+    end
+  rescue => error
+    Rails.logger.error error.message
+    problem :server_error, 500, error.message
+  end
+
+  # DELETE /users/:user_id
+  # DELETE /users/:user_id.xml
+  # DELETE /users/:user_id.json
+  def destroy
+    authorize! :userdelete, User
+    @user = User.find(params[:id])
+    if @user
+      @user.destroy
+      respond_to do |format|
+        format.xml  { render :xml  => @user }
+        format.json { render :json => @user }
+        format.html do
+          flash[:notice] = _("User %s was successfully removed.") % @user.uid
+          redirect_to :action=>:index, :controller=>:users
+        end
+      end
+    else
+      problem :client_error, 404, _("User '#{params[:id]}' not found")
+    end
+  rescue => e
+    Rails.logger.error e.message
+    problem :server_error, 500, _("Error: Could not remove user '#{params[:id]}")
+  end
+
+  private
+
+  def problem type, code, message
+    response = {:type=>type.to_s.capitalize, :messsage=>message, :id=>'User'}
+    respond_to do |format|
+      format.xml  { render :xml  => response.to_xml(:root=>:error), :status => code }
+      format.json { render :json => {:error=>response}, :status => code }
+      format.html do
+        flash[:error] = message
+        redirect_to :action => "index"
+      end
+    end
+  end
 end
