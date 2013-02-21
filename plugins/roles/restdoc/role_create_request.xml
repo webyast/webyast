@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<role>
+  <permissions type="array">
+    <permission>org.opensuse.yast.modules.yapi.firewall.read</permission>
+    <permission>org.opensuse.yast.modules.yapi.firewall.write</permission>
+    <permission>org.opensuse.yast.modules.yapi.network.read</permission>
+    <permission>org.opensuse.yast.modules.yapi.network.write</permission>
+  </permissions>
+  <name>bamboo</name>
+  <users type="array">
+    <user>emela</user>
+    <user>enter</user>
+  </users>
+</role>

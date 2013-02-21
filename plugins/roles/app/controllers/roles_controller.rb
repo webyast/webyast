@@ -25,14 +25,38 @@ require 'exceptions'
 # Main goal is checking permissions, validate id and pass request to model.
 class RolesController < ApplicationController
 
-  before_filter :check_role_name, :only => [:delete, :show]
   before_filter :check_read_permission
   before_filter :check_write_permission, :only => [:update,:delete]
 
-private
+  rescue_from InvalidParameters do |error|
+    respond_to do |format|
+      format.html do
+        flash[:error] = error.message
+        redirect_to :action => :index
+      end
+      format.xml  { render :xml => error,  :status => 400 }
+      format.json { render :json => error, :status => 400 }
+    end
+  end
 
-  def check_role_name(id=params[:id])
-    raise InvalidParameters.new(:id => "INVALID") if id.nil? or id.match(/^[a-zA-Z0-9_\-. ]+$/).nil?
+  private
+
+  #FIXME consider moving this validation methods to model
+  def check_role_param
+    raise InvalidParameters.new _("Missing parameter 'role'") unless params[:role]
+  end
+
+  def check_role_name_uniqueness
+    raise InvalidParameters.new _("Role name already exists") if Role.find params[:role][:name]
+  end
+
+  def check_role_valid
+    raise InvalidParameters.new role.errors.full_messages.join unless @role.valid?
+  end
+
+  def check_role_exists
+    role_name = params[:id]
+    raise InvalidParameters.new _("Role with name '#{role_name}' does not exist.") unless Role.find(role_name)
   end
 
   def check_write_permission
@@ -64,10 +88,10 @@ public
   # There are two kind of parameters while an update call:
   #
   # REST:
-  # Parameters: {"id"=>"tester2", "roles"=>{"name"=>"tester2", "id"=>"tester2", "users"=>[],
-  #                                         "permissions"=>["org.opensuse.yast.modules.yapi.firewall.read",
-  #                                                         "org.opensuse.yast.modules.yapi.firewall.write"]}}
-  # VIA UI (JavaScript):
+  # Parameters: {"role"=>{"name"=>"tester2", "users"=>[],
+#                "permissions"=>["org.opensuse.yast.modules.yapi.firewall.read",
+#                "org.opensuse.yast.modules.yapi.firewall.write"]}}
+  # WEB-UI:
   # Parameters: {"org.opensuse.yast.modules.yapi.firewall.write:permission_of:tester2"=>"1",
   #              "org.opensuse.yast.modules.yapi.kerberos:permission_of:tester"=>"1",
   #              "users_of_tester2"=>"",
@@ -79,15 +103,20 @@ public
   #
 
   def update
-    unless params[:roles].nil? #REST interfce
-      check_role_name
+    if params[:role] #REST interfce
+      #FIXME model should be responsible for validation
+      check_role_exists
+      check_role_name_uniqueness
       # RORSCAN_INL: Is not a Information Exposure cause all data can be read (indepent from user)
-      role = Role.find(params[:id])
-      raise InvalidParameters.new(:id => "NONEXIST") if role.nil?
-      role.load(params[:roles])
-      logger.info "update role #{params[:id]}. New record? #{role.new_record?}"
-      role.save
-      show
+      @role = Role.find params[:id]
+      @role.users = params[:role][:users] || []
+      @role.permissions = params[:role][:permissions] || []
+      check_role_valid
+      @role.save
+      respond_to do |format|
+        format.xml  { render :xml =>  @role }
+        format.json { render :json => @role }
+      end
     else #JavaScript
       all_permissions = Permission.find(:all).collect {|p| p[:id] }
       changed_roles = []
@@ -106,92 +135,80 @@ public
       end
       changed_roles.each {|role| role.save }
       respond_to do |format|
-        format.xml  { render :xml => Role.new.to_xml( :dasherize => false ) }
-        format.json { render :json => Role.new.to_json( :dasherize => false ) }
-        format.html { redirect_to :action => :index }
+        format.html do
+          flash[:notice] = _("Roles have been updated")
+          redirect_to :action => :index
+        end
       end
     end
   end
 
   # Create new role.
+  # FIXME it is possible to create a role with non-existent user
   def create
-    error = nil
-    begin
-      check_role_name params[:role_name]
-    rescue Exception => error
-      logger.error "Wrong role name"
-      respond_to do |format|
-        format.xml  { raise error }
-        format.json { raise error }
-        format.html { flash[:warning] = _("Role name is invalid. Allowed is combination of a-z, A-Z, numbers, space, dash and underscore only.")
-                      redirect_to "/roles/" }
-      end
-      return
-    end
-    role = Role.find(params[:role_name])
-    unless role.nil? #role already exists
-      respond_to do |format|
-        format.xml  { raise InvalidParameters.new(:id => "EXIST") }
-        format.json { raise InvalidParameters.new(:id => "EXIST") }
-        format.html { flash[:warning] = _("Role name is already used.")
-                      redirect_to "/roles/" }
-      end
-      return
-    end
     # RORSCAN_INL: Protected by attr_accessible in Role model
-    role = Role.new(params[:role_name])
-    role.save
+    #FIXME model should be responsible for validation
+    check_role_param
+    check_role_name_uniqueness
+    @role = Role.new.load params[:role]
+    check_role_valid
+    @role.save
     respond_to do |format|
-      format.xml { render :xml => role.to_xml( :dasherize => false ) }
-      format.json { render :json => role.to_json( :dasherize => false ) }
-      format.html { redirect_to "/roles/" }
+      format.xml  { render :xml =>  @role.to_xml( :dasherize => false )  }
+      format.json { render :json => @role.to_json( :dasherize => false ) }
+      format.html do
+        flash[:notice] = _("Role '#{@role.name}' has been created")
+        redirect_to :action => :index
+      end
     end
   end
 
-  # Deletes roles.
   def destroy
     # RORSCAN_INL: User has already write permission for ALL roles here
-    Role.delete params[:id]
-    flash[:notice] = _("Role \'%s\' was successfully removed.") % params[:id] if request.format.html?
-    index
+    check_role_exists
+    role_name = params[:id]
+    Role.delete role_name
+    respond_to do |format|
+      format.html do
+        flash[:notice] = _("Role '%s' was successfully removed.") % role_name
+        redirect_to :action => :index
+      end
+      format.xml  { render :nothing => true, :status => 204 }
+      format.json { render :nothing => true, :status => 204 }
+    end
   end
 
-  # shows information about role with name.
   def show
     # RORSCAN_INL: User has already write permission for ALL roles here
-    role = Role.find params[:id]
-    unless role
-      raise InvalidParameters.new :id => "NONEXIST"
-    end
-
+    check_role_exists
+    @role = Role.find params[:id]
+    # no need for html format as only index is being rendered
     respond_to do |format|
-      format.xml { render :xml => role.to_xml( :dasherize => false ) }
-      format.json { render :json => role.to_json( :dasherize => false ) }
+      format.xml  { render :xml => @role.to_xml( :dasherize => false ) }
+      format.json { render :json => @role.to_json( :dasherize => false ) }
     end
   end
 
-  # Shows all roles
   def index
     @roles = Role.find
-
     respond_to do |format|
       format.xml  { render :xml => @roles.to_xml( :dasherize => false ) }
       format.json { render :json => @roles.to_json( :dasherize => false ) }
-      format.html {
-                    @roles.sort! {|r1,r2| r1.name <=> r2.name}
-                    all_permissions = Permission.find :all, { :with_description => "1" }
-                    all_permissions = all_permissions.collect {|p| PrefixedPermission.new(p[:id], p[:description])}
-                      # create an [[key,value]] array of prefixed permissions, where key is the prefix
-                      @prefixed_permissions = PrefixedPermissions.new(all_permissions).sort
-                      @users =  GetentPasswd.find.collect {|u|
-                      if u.respond_to?('full_name')
-                        [u.login, u.full_name ]
-                      else
-                        [u.login, "" ]
-                      end
-                    }.sort
-                    render :index
-                  }
+      format.html do
+        @roles.sort! {|r1,r2| r1.name <=> r2.name}
+        all_permissions = Permission.find :all, { :with_description => "1" }
+        all_permissions = all_permissions.collect {|p| PrefixedPermission.new(p[:id], p[:description])}
+          # create an [[key,value]] array of prefixed permissions, where key is the prefix
+          @prefixed_permissions = PrefixedPermissions.new(all_permissions).sort
+          @users =  GetentPasswd.find.collect do |user|
+            if user.respond_to?('full_name')
+              [user.login, user.full_name ]
+            else
+              [user.login, "" ]
+            end
+          end.sort
+        render :index
+      end
     end
   end
 
