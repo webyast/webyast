@@ -2,42 +2,6 @@
 <repositories type="array">
   <repository>
     <priority type="integer">99</priority>
-    <name>SLE11-SP1-Debuginfo-Pool</name>
-    <keep_packages type="boolean">false</keep_packages>
-    <autorefresh type="boolean">true</autorefresh>
-    <url>https://nu.novell.com/repo/$RCE/SLE11-SP1-Debuginfo-Pool/sle-11-x86_64?credentials=NCCcredentials</url>
-    <enabled type="boolean">false</enabled>
-    <id>nu_novell_com:SLE11-SP1-Debuginfo-Pool</id>
-  </repository>
-  <repository>
-    <priority type="integer">99</priority>
-    <name>SLE11-SP1-Debuginfo-Updates</name>
-    <keep_packages type="boolean">false</keep_packages>
-    <autorefresh type="boolean">true</autorefresh>
-    <url>https://nu.novell.com/repo/$RCE/SLE11-SP1-Debuginfo-Updates/sle-11-x86_64?credentials=NCCcredentials</url>
-    <enabled type="boolean">false</enabled>
-    <id>nu_novell_com:SLE11-SP1-Debuginfo-Updates</id>
-  </repository>
-  <repository>
-    <priority type="integer">99</priority>
-    <name>SLE11-SP2-Debuginfo-Core</name>
-    <keep_packages type="boolean">false</keep_packages>
-    <autorefresh type="boolean">true</autorefresh>
-    <url>https://nu.novell.com/repo/$RCE/SLE11-SP2-Debuginfo-Core/sle-11-x86_64?credentials=NCCcredentials</url>
-    <enabled type="boolean">false</enabled>
-    <id>nu_novell_com:SLE11-SP2-Debuginfo-Core</id>
-  </repository>
-  <repository>
-    <priority type="integer">99</priority>
-    <name>SLE11-SP2-Debuginfo-Updates</name>
-    <keep_packages type="boolean">false</keep_packages>
-    <autorefresh type="boolean">true</autorefresh>
-    <url>https://nu.novell.com/repo/$RCE/SLE11-SP2-Debuginfo-Updates/sle-11-x86_64?credentials=NCCcredentials</url>
-    <enabled type="boolean">false</enabled>
-    <id>nu_novell_com:SLE11-SP2-Debuginfo-Updates</id>
-  </repository>
-  <repository>
-    <priority type="integer">99</priority>
     <name>SLE11-WebYaST-SP2-Pool</name>
     <keep_packages type="boolean">true</keep_packages>
     <autorefresh type="boolean">true</autorefresh>
@@ -56,48 +20,12 @@
   </repository>
   <repository>
     <priority type="integer">99</priority>
-    <name>SLES11-Extras</name>
-    <keep_packages type="boolean">false</keep_packages>
-    <autorefresh type="boolean">true</autorefresh>
-    <url>https://nu.novell.com/repo/$RCE/SLES11-Extras/sle-11-x86_64?credentials=NCCcredentials</url>
-    <enabled type="boolean">false</enabled>
-    <id>nu_novell_com:SLES11-Extras</id>
-  </repository>
-  <repository>
-    <priority type="integer">99</priority>
-    <name>SLES11-SP1-Pool</name>
-    <keep_packages type="boolean">false</keep_packages>
-    <autorefresh type="boolean">true</autorefresh>
-    <url>https://nu.novell.com/repo/$RCE/SLES11-SP1-Pool/sle-11-x86_64?credentials=NCCcredentials</url>
-    <enabled type="boolean">true</enabled>
-    <id>nu_novell_com:SLES11-SP1-Pool</id>
-  </repository>
-  <repository>
-    <priority type="integer">99</priority>
-    <name>SLES11-SP1-Updates</name>
-    <keep_packages type="boolean">false</keep_packages>
-    <autorefresh type="boolean">true</autorefresh>
-    <url>https://nu.novell.com/repo/$RCE/SLES11-SP1-Updates/sle-11-x86_64?credentials=NCCcredentials</url>
-    <enabled type="boolean">true</enabled>
-    <id>nu_novell_com:SLES11-SP1-Updates</id>
-  </repository>
-  <repository>
-    <priority type="integer">99</priority>
     <name>SLES11-SP2-Core</name>
     <keep_packages type="boolean">false</keep_packages>
     <autorefresh type="boolean">true</autorefresh>
     <url>https://nu.novell.com/repo/$RCE/SLES11-SP2-Core/sle-11-x86_64?credentials=NCCcredentials</url>
     <enabled type="boolean">true</enabled>
     <id>nu_novell_com:SLES11-SP2-Core</id>
-  </repository>
-  <repository>
-    <priority type="integer">99</priority>
-    <name>SLES11-SP2-Extension-Store</name>
-    <keep_packages type="boolean">false</keep_packages>
-    <autorefresh type="boolean">true</autorefresh>
-    <url>https://nu.novell.com/repo/$RCE/SLES11-SP2-Extension-Store/sle-11-x86_64?credentials=NCCcredentials</url>
-    <enabled type="boolean">true</enabled>
-    <id>nu_novell_com:SLES11-SP2-Extension-Store</id>
   </repository>
   <repository>
     <priority type="integer">99</priority>
