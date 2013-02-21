@@ -106,7 +106,6 @@ public
     if params[:role] #REST interfce
       #FIXME model should be responsible for validation
       check_role_exists
-      check_role_name_uniqueness
       # RORSCAN_INL: Is not a Information Exposure cause all data can be read (indepent from user)
       @role = Role.find params[:id]
       @role.users = params[:role][:users] || []
