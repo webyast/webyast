@@ -35,6 +35,7 @@ Contents:
   The following PolicyKit permission is needed to perform read/write actions:
 
   <i>org.opensuse.yast.modules.yapi.registration.getregistrationconfig</i>
+
   <i>org.opensuse.yast.modules.yapi.registration.statelessregister</i>
 
 == Actions
