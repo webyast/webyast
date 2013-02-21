@@ -24,8 +24,6 @@
 
 class MailsettingController < ApplicationController
 
-public
-
   def show
     authorize! :read, Mailsetting
 
@@ -102,6 +100,10 @@ public
 
   def create
     update
+  end
+
+  def send_test_email
+    render :text => request.host
   end
 
 private

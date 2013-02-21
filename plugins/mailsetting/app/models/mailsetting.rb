@@ -141,5 +141,9 @@ class MailError < BackendException
   end
 end
 
-class TestMailer < ActionMailer
+class MailsettingTestMailer < ActionMailer::Base
+
+  def send_test_mail address_to
+    mail :to => address_to, :subject => "WebYaST Test Mail"
+  end
 end
