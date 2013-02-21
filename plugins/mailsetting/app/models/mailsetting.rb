@@ -141,9 +141,18 @@ class MailError < BackendException
   end
 end
 
-class MailsettingTestMailer < ActionMailer::Base
+class MailsettingNotifier < ActionMailer::Base
+  def self.send_test_notification options
+    self.smtp_settings = options[:smtp_settings]
+    send_test_mail options[:address_to], options[:hostname]
+  end
 
-  def send_test_mail address_to
-    mail :to => address_to, :subject => "WebYaST Test Mail"
+  def send_test_mail address_to, hostname
+    @hostname = hostname
+    @address_to = address_to
+    @address_from = "root@#{hostname}"
+    mail :to => @address_to, :subject => "WebYaST Test Mail"
   end
 end
+
+
