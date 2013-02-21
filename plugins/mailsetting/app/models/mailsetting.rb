@@ -140,3 +140,6 @@ class MailError < BackendException
     end
   end
 end
+
+class TestMailer < ActionMailer
+end
