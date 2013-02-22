@@ -2,6 +2,7 @@
 Fri Feb 22 08:29:38 UTC 2013 - jreidinger@suse.com
 
 - Fixed creating bond interface (slaves) (BNC#790219) 
+- 0.3.12
 
 -------------------------------------------------------------------
 Tue Feb 19 14:55:11 UTC 2013 - jreidinger@suse.com
