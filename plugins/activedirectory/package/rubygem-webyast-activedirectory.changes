@@ -1,4 +1,11 @@
 -------------------------------------------------------------------
+Fri Feb 22 09:35:24 UTC 2013 - jreidinger@suse.com
+
+- conform return value when user is not member of domain according
+  to rest documentation (BNC#790383)
+- 0.3.11
+
+-------------------------------------------------------------------
 Tue Feb 19 10:17:31 UTC 2013 - jreidinger@suse.com
 
 - fix passing checkbox value to controller (BNC#789533)
