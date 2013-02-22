@@ -142,9 +142,9 @@ class ActivedirectoryError < BackendException
     @message = message
   end
 
-  def to_xml
+  def to_xml options = {}
     Rails.logger.debug "TO XML"
-    xml = Builder::XmlMarkup.new({})
+    xml = Builder::XmlMarkup.new(options)
     xml.instruct!
 
     xml.error do
@@ -152,5 +152,14 @@ class ActivedirectoryError < BackendException
       xml.id @id
       xml.message @message
     end
+  end
+
+  def to_json options={}
+    {"error" => {
+          "type" => "ACTIVEDIRECTORY_ERROR",
+          "id" => @id,
+          "message" => @message
+          }
+    }.to_json(options)
   end
 end
