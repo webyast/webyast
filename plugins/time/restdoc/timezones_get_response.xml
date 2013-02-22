@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<timezones type="array">
+  <timezone>
+    <zones type="array">
+      <zone>Moscow</zone>
+      <zone>Kaliningrad</zone>
+      <zone>Sakhalin</zone>
+      <zone>Anadyr</zone>
+      <zone>Volgograd</zone>
+      <zone>Yekaterinburg</zone>
+    </zones>
+    <region>Russia</region>
+  </timezone>
+  <timezone>
+    <zones type="array">
+      <zone>North Dakota (New Salem)</zone>
+      <zone>Indiana Starke (Knox)</zone>
+      <zone>Mountain (Denver)</zone>
+      <zone>Aleutian (Adak)</zone>
+      <zone>Menominee</zone>
+      <zone>Indiana (Petersburg)</zone>
+      <zone>Michigan (Detroit)</zone>
+      <zone>Hawaii (Honolulu)</zone>
+      <zone>Virgin Islands (St Thomas)</zone>
+      <zone>Arizona (Phoenix)</zone>
+      <zone>North Dakota (Center)</zone>
+      <zone>Kentucky (Louisville)</zone>
+      <zone>Indiana (Vincennes)</zone>
+      <zone>Boise</zone>
+      <zone>Samoa (Pago Pago)</zone>
+    </zones>
+    <region>USA</region>
+  </timezone>
+</timezones>
+
