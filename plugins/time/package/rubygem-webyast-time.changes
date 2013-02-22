@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Fri Feb 22 16:17:38 UTC 2013 - locilka@suse.com
+
+- Fixed restdoc build (bnc#805282)
+- 0.3.10
+
+-------------------------------------------------------------------
 Fri Feb 22 11:28:56 UTC 2013 - jreidinger@suse.com
 
 - fix crash if timezone on system is unknown (BNC#787113)
