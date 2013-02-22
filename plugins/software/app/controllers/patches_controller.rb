@@ -19,60 +19,13 @@
 # you may find current contact information at www.novell.com
 #++
 
+require "install_in_progress_exception"
+require "license_required_exception"
+
 class PatchesController < ApplicationController
   include ERB::Util
 
-  before_filter :cache_check, :only => [:index, :show_summary]
-  before_filter :perm_check, :only => [:index]
-  before_filter :perm_check_summary, :only => [:show_summary]
-
-  after_filter :drop_cache
-
-  # include locale in the cache path to cache different translations
-  caches_action :show_summary, :expires_in => Patch::EXPIRATION_TIME, :cache_path => Proc.new {"webyast_patch_summary_#{FastGettext.locale}"}
-  caches_action :index, :expires_in => Patch::EXPIRATION_TIME, :cache_path => Proc.new {"webyast_patch_index_#{FastGettext.locale}"}, :layout => false
-
 private
-
-  # check permission and validate cache content
-  def cache_check
-    cached_mtime = Rails.cache.fetch("webyast_patch_mtime")
-    current_mtime = Patch.mtime
-
-    Rails.logger.info "cached_mtime: #{cached_mtime.inspect}, current_mtime: #{current_mtime.inspect}"
-
-    if current_mtime != cached_mtime
-      Rails.logger.info "Expiring patch cache: cached: #{cached_mtime}, modified: #{current_mtime}"
-      # update the time stamp
-      Rails.cache.write("webyast_patch_mtime", current_mtime)
-      expire_patch_cache
-    end
-  end
-
-  def perm_check
-    authorize! :read, Patch
-  end
-
-  def perm_check_summary
-    if cannot? :read, Patch
-      render :text => _("Status not available (no permissions)")
-    end
-  end
-
-  # drop the cached results (needed in some cases, e.g. an error occured, SW management locked)
-  # to force retry again instead of returning the cached error
-  def drop_cache
-    if @drop_cache
-      Rails.logger.info "Dropping the cache, do full reload next time"
-      expire_patch_cache
-    end
-  end
-
-  def expire_patch_cache
-    # expire all translations
-    expire_fragment(/webyast_patch_summary_/)
-    expire_fragment(/webyast_patch_index_/)
-  end
 
   def collect_done_patches
     return Rails.cache.fetch("patch:installed") || []
@@ -112,7 +65,7 @@ private
   # GET /patches
   # GET /patches.xml
   def index
-    # permission checks are done in the before_filter
+    authorize! :read, Patch
 
     @msgs = read_messages
     if params['messages']
@@ -131,19 +84,30 @@ private
       flash[:warning] = _("There are patch installation messages available") + details(@message)
     end
 
-    #checking if a license is requiredrequired
+    # check if a license is required
     if PatchesState.read[:message_id] == "PATCH_EULA"
-      if request.format.html?
-        redirect_to :action => "license" #move to page for license confirmation
-      else
-        raise LicenseRequiredException.new
+      respond_to do |format|
+         #move to page for license confirmation
+        format.html { redirect_to :action => "license" }
+        format.xml  { render :xml => LicenseRequiredException.new.to_xml }
+        format.json { render :json => LicenseRequiredException.new.to_json }
       end
+
+      return
     end
 
     #checking if an installation is running
     running, remaining = Patch.installing
     if running #there is process which runs installation
-      raise InstallInProgressException.new( running )unless request.format.html?
+      unless request.format.html?
+        respond_to do |format|
+          format.xml  { render :xml => InstallInProgressException.new(remaining).to_xml }
+          format.json { render :json => InstallInProgressException.new(remaining).to_json }
+        end
+
+        return
+      end
+
       # patch update installation in progress
       # display the message and reload after a while
       @flash_message = h _("Cannot read available patches, patch installation is in progress.")
@@ -167,13 +131,10 @@ private
           flash[:error] = ((h _("Cannot read patch updates: GPG key for repository %s is not trusted.")) % "<em>#{h $1}</em>").html_safe
         elsif e.description.match /System management is locked by the application with pid ([0-9]+) \((.*)\)\./
           flash[:warning] = _("Software management is locked by another application ('%s', PID %s).") % [$2, $1]
-          @drop_cache = true
         elsif e.description.match /The ZYpp package manager is locked by process ([0-9]+)\. Retry later\./
           flash[:warning] = _("Software management is locked by another application (PID %s). Available patches cannot be read.") % $1
-          @drop_cache = true
         else
           flash[:error] = e.message
-          @drop_cache = true
         end
         @patch_updates = []
         @error = true
@@ -194,19 +155,21 @@ private
     authorize! :read, Patch
     # RORSCAN_INL: User has already read permission for ALL patch info
     @patch_update = Patch.find(params[:id])
-    if @patch_update.nil?
-      logger.error "Patch: #{params[:id]} not found."
-      render ErrorResult.error(404, 1, "Patch: #{params[:id]} not found.") and return
+    if @patch_update.blank?
+      logger.error "Patch #{params[:id]} not found."
+      render ErrorResult.error(404, 1, "Patch #{params[:id]} not found.") and return
     end
     respond_to do |format|
-      format.xml { render  :xml => @patch_update.to_xml( :root => "patches", :dasherize => false ) }
-      format.json { render :json => @patch_update.to_json( :root => "patches", :dasherize => false ) }
+      format.xml { render  :xml => @patch_update.to_xml(:dasherize => false, :indent => 2) }
+      format.json { render :json => @patch_update.to_json(:dasherize => false, :indent => 2) }
     end
   end
 
   # this action is rendered as a partial, so it can't throw
   def show_summary
-    # permission check is done in before_filter
+    if cannot? :read, Patch
+      render :text => _("Status not available (no permissions)") and return
+    end
 
     error = nil
     patch_updates = nil
@@ -241,15 +204,12 @@ private
         elsif error.description.match /System management is locked by the application with pid ([0-9]+) \((.*)\)\./
           error_string = _("Software management is locked by another application ('%s', PID %s).") % [$2, $1]
           error_type = :locked
-          @drop_cache = true
         elsif error.description.match /The ZYpp package manager is locked by process ([0-9]+)\. Retry later\./
           error_string = _("Software management is locked by another application (PID %s).") % $1
           error_type = :locked
-          @drop_cache = true
         else
           error_string = error.message
           error_type = :unknown
-          @drop_cache = true
         end
       end
     end
@@ -309,9 +269,6 @@ private
 
     Patch::BM.background_enabled? ? Patch.install_all_background : Patch.install_all
 
-    # force refreshing of the cache
-    expire_patch_cache
-
     show_summary
   end
 
@@ -333,9 +290,15 @@ private
         end
 
         flash[:error] = error_string
+        render :show
+      else
+        respond_to do |format|
+          format.xml  { render :xml => InstallInProgressException.new(remaining).to_xml }
+          format.json { render :json => InstallInProgressException.new(remaining).to_json }
+        end
       end
 
-      render :show and return
+      return
     end
 
     update_array = []
@@ -354,24 +317,27 @@ private
     begin
       if !update_array.empty?
         Patch::BM.background_enabled? ? Patch.install_patches_by_id_background(update_array) : Patch.install_patches_by_id(update_array)
-
-        # force refreshing of the cache
-        expire_patch_cache
       end
     # FIXME: this might hide some errors
     rescue Exception => e
       Rails.logger.info "Some patches are not needed in #{update_array.inspect} anymore: #{e.message}"
     end
 
-    logger.debug "*** Check before redirect: basesystem setup completed -> #{Basesystem.new.load_from_session(session).completed?}"
-    if request.format.html?
-      if Basesystem.new.load_from_session(session).completed?
-        redirect_to :controller => "controlpanel", :action => "index" and return
-      else
-        redirect_to :controller => "controlpanel", :action => "nextstep" and return
-      end
+    respond_to do |format|
+      format.html {
+        logger.debug "*** Check before redirect: basesystem setup completed -> #{Basesystem.new.load_from_session(session).completed?}"
+
+        if Basesystem.new.load_from_session(session).completed?
+          redirect_to :controller => "controlpanel", :action => "index" and return
+        else
+          redirect_to :controller => "controlpanel", :action => "nextstep" and return
+        end
+      }
+
+      # return 202 Accepted (processing in background) or 200 OK (direct processing)
+      format.json { head Patch::BM.background_enabled? ? :accepted : :success }
+      format.xml  { head Patch::BM.background_enabled? ? :accepted : :success }
     end
-    render :show
   end
 
   def message
@@ -450,7 +416,7 @@ private
         if @text =~ /DT:Rich/ #text is richtext for packager
           @text = @text.html_safe
         else
-          (h @text).gsub!(/^\n\n$/, '<p class="eula_paragraph">').html_safe
+          (h @text).gsub(/^\n\n$/, '<p class="eula_paragraph">').html_safe
         end
         render
       }

@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<repositories type="array">
+  <repository>
+    <priority type="integer">99</priority>
+    <name>SLE11-WebYaST-SP2-Pool</name>
+    <keep_packages type="boolean">true</keep_packages>
+    <autorefresh type="boolean">true</autorefresh>
+    <url>https://nu.novell.com/repo/$RCE/SLE11-WebYaST-SP2-Pool/sle-11-x86_64?credentials=NCCcredentials</url>
+    <enabled type="boolean">true</enabled>
+    <id>nu_novell_com:SLE11-WebYaST-SP2-Pool</id>
+  </repository>
+  <repository>
+    <priority type="integer">99</priority>
+    <name>SLE11-WebYaST-SP2-Updates</name>
+    <keep_packages type="boolean">true</keep_packages>
+    <autorefresh type="boolean">true</autorefresh>
+    <url>https://nu.novell.com/repo/$RCE/SLE11-WebYaST-SP2-Updates/sle-11-x86_64?credentials=NCCcredentials</url>
+    <enabled type="boolean">true</enabled>
+    <id>nu_novell_com:SLE11-WebYaST-SP2-Updates</id>
+  </repository>
+  <repository>
+    <priority type="integer">99</priority>
+    <name>SLES11-SP2-Core</name>
+    <keep_packages type="boolean">false</keep_packages>
+    <autorefresh type="boolean">true</autorefresh>
+    <url>https://nu.novell.com/repo/$RCE/SLES11-SP2-Core/sle-11-x86_64?credentials=NCCcredentials</url>
+    <enabled type="boolean">true</enabled>
+    <id>nu_novell_com:SLES11-SP2-Core</id>
+  </repository>
+  <repository>
+    <priority type="integer">99</priority>
+    <name>SLES11-SP2-Updates</name>
+    <keep_packages type="boolean">false</keep_packages>
+    <autorefresh type="boolean">true</autorefresh>
+    <url>https://nu.novell.com/repo/$RCE/SLES11-SP2-Updates/sle-11-x86_64?credentials=NCCcredentials</url>
+    <enabled type="boolean">true</enabled>
+    <id>nu_novell_com:SLES11-SP2-Updates</id>
+  </repository>
+</repositories>

@@ -26,6 +26,7 @@ Release:        0
 BuildRoot:      %{_tmppath}/%{name}-%{version}-build
 BuildRequires:  rubygems_with_buildroot_patch
 %rubygems_requires
+BuildRequires:  rubygem-restility
 BuildRequires:  webyast-base >= 0.3.31
 BuildRequires:  webyast-base-testsuite
 PreReq:         webyast-base >= 0.3.31
@@ -93,7 +94,7 @@ needed at runtime.
 # PackageKit/DBus need /proc and thus don't run in build environment.
 # But both are required for testing :-/
 # reference: bnc#597868
-# -percent-webyast_check
+# %%webyast_run_plugin_tests
 
 %install
 %gem_install %{S:0}
@@ -105,6 +106,8 @@ install -m 0644 %SOURCE2 $RPM_BUILD_ROOT/usr/share/%{webyast_polkit_dir}
 install -m 0644 %SOURCE3 $RPM_BUILD_ROOT/usr/share/%{webyast_polkit_dir}
 
 mkdir -p $RPM_BUILD_ROOT/var/lib/webyast/software/licenses/accepted
+
+%webyast_build_restdoc
 
 %webyast_build_plugin_assets
 
