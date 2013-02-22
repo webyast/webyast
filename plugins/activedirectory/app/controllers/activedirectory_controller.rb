@@ -113,14 +113,7 @@ class ActivedirectoryController < ApplicationController
       begin
         @activedirectory.save
       rescue ActivedirectoryError => e
-        # credentials required for joining the domain
-        if e.id == "not_member"
-          @activedirectory.administrator = ""
-          @activedirectory.password = ""
-          @activedirectory.machine = ""
-        else
-          @error = e
-        end
+        @error = e
       end
       if @error
         respond_to do |format|
