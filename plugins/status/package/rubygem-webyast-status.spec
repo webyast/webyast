@@ -144,23 +144,26 @@ ruby %{_libdir}/ruby/gems/%{rb_ver}/gems/%{mod_full_name}/lib/update_config.rb
 #
 grep -q "^Hostname[ \t]*\"WebYaST\"" /etc/collectd.conf
 if [ $? = 1 ] ; then
-  sed -i "s/^#Hostname[[:space:]].*/#If you change hostname please delete \/var\/lib\/collectd\/WebYaST\nHostname \"WebYaST\"/" "/etc/collectd.conf"
-  # remove already generated old log files for the old hostname
+  WARNING="# If you change hostname please delete /var/lib/collectd/WebYaST"
+  sed -i "s@^#Hostname[[:space:]].*@$WARNING\nHostname \"WebYaST\"@" /etc/collectd.conf
+
+  # We need to remove old logs because Webyast displays the first found log
+  # which could be accidentally the old (no longer) updated log.
+  #
+  # FIXME: find the latest database in webyast instead of complete removal here
+  #
+  # The removal might accidentaly fail if collectd is running and writes a log during removal,
+  # it would be a good idea to stop it first but unfortunately also stopping sometimes fails
+  # and that would cause build failure during RPM build :-(
   rm -rf /var/lib/collectd/*
 fi
 
 #
-# enable and restart if running collectd. On new install always start
+# enable and restart collectd
 #
 # FIXME: move collectd handling to webyast initscript or to WebUI
 %{fillup_and_insserv -Y collectd}
-if test "$1" = "1" -o "$1" = ""; then
-  # installation
-  rccollectd start
-else
-  # upgrade
-  rccollectd try-restart
-fi
+rccollectd restart
 
 %restart_webyast
 
