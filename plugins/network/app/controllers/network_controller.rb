@@ -93,7 +93,8 @@ class NetworkController < ApplicationController
     authorize! :write, Network
 
     # bnc#790219 All bonded (selected) slaves need to be configured with bootproto=none
-    params["bond_slaves"].each do |slave, selected|
+    # use try, because create is also used for other types, that doesn't have parameter bond_slaves
+    params["bond_slaves"].try(:each) do |slave, selected|
       next if selected != "1"
 
       slave_ifc = Interface.find slave
