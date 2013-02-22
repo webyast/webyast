@@ -37,21 +37,20 @@ Contents:
 == Actions
 
 
-GET /mail
+GET /mailsetting
 
   Get the information about current system mail settings.
 
-  CURL Example: curl -u &lt;user> http://localhost:4984/mail.xml
+  CURL Example: curl -u &lt;user&gt;:&lt;password&gt; http://hostname:4984/mailsetting.xml
 
 XmlResult: mail
 
 
-PUT /mail
+POST /mailsetting
 
   Update current system mail settings. Password must be in plain text.
 
-  CURL example: curl -u <user> -X PUT -H 'Content-type: text/xml' -d @save_mail_request.xml http://localhost:4984/mail.xml
+  CURL example: curl -u &lt;user&gt;:&lt;password&gt; -X POST -H 'Content-type: text/xml' -d @save_mail_request.xml http://hostname:4984/mailsetting.xml
 
 XmlBody: save_mail_request
-  
-XmlResult: save_mail_response
+
