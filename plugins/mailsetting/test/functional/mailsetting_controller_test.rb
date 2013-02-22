@@ -1,20 +1,20 @@
 #--
 # Copyright (c) 2009-2010 Novell, Inc.
-# 
+#
 # All Rights Reserved.
-# 
+#
 # This program is free software; you can redistribute it and/or modify it
 # under the terms of version 2 of the GNU General Public License
 # as published by the Free Software Foundation.
-# 
+#
 # This program is distributed in the hope that it will be useful,
 # but WITHOUT ANY WARRANTY; without even the implied warranty of
 # MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
 # GNU General Public License for more details.
-# 
+#
 # You should have received a copy of the GNU General Public License
 # along with this program; if not, contact Novell, Inc.
-# 
+#
 # To contact Novell about this file by physical or electronic mail,
 # you may find current contact information at www.novell.com
 #++
@@ -30,7 +30,7 @@ class MailsettingControllerTest < ActionController::TestCase
     devise_sign_in
     Mailsetting.stubs(:find).returns Mailsetting.new({:smtp_server => "oldserver", :user => "foo", :password => "bar", :password_confirmation => "bar", :transport_layer_security => "no"})
   end
-  
+
   test "check 'show' result" do
     ret = get :show, :format => "xml"
     # success (200 OK)
@@ -43,13 +43,17 @@ class MailsettingControllerTest < ActionController::TestCase
     assert ret_hash["mail"].has_key?("smtp_server")
   end
 
-  test "put success" do
-    Mailsetting.any_instance.stubs(:save).returns(true).once
-    ret = put :update, :mail => {:smtp_server => "newserver"}, :format => "xml"
-    ret_hash = Hash.from_xml(ret.body)
+  test "xml put success" do
+    Mailsetting.any_instance.stubs(:update).returns(true)
+    request.env['HTTP_REFERER'] = 'mailsetting'
+    ret = post :update, :mailsetting => {
+      :smtp_server => "newserver",
+      :user=>"User",
+      :password => 'password',
+      :password_confirmation => 'password'
+    }, :format => "xml"
 
     assert_response :success
-    assert_equal ret_hash["mail"]["smtp_server"], "newserver"
   end
 
 # shame, YaPI currently always succeedes
