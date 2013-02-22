@@ -93,7 +93,18 @@ class RepositoriesController < ApplicationController
 
     # Cannot be CWE-285 cause id does not depend on user authent.
     # RORSCAN_INL: Cannot be a mass_assignment cause they are strings only
-    @repo = Repository.new(rep_id , param[:name], param[:enabled])
+    @repo = @create ? Repository.new(rep_id , param[:name], param[:enabled]) : Repository.find(rep_id).first
+
+    if @repo.nil?
+      if request.format.html?
+        flash[:error] = _("Cannot update repository '%s', repository not found") % rep_id
+        redirect_to :action => :index
+      else
+        render ErrorResult.error(404, 30, "Repository #{rep_id} not found")
+      end
+
+      return
+    end
 
     raise InvalidParameters.new({:autorefresh => 'wrong'}) unless ["true","false"].include?(param[:autorefresh].to_s)
     raise InvalidParameters.new({:enabled => 'wrong'}) unless ["true","false"].include?(param[:enabled].to_s)
@@ -193,11 +204,13 @@ class RepositoriesController < ApplicationController
       end
     end
 
-    unless request.format.html?
-      render :show
-    else
-      flash[:message] = _("Repository '%s' has been deleted.") % @repo.name
-      redirect_to :action => :index and return
+    respond_to do |format|
+      format.html do
+        flash[:message] = _("Repository '%s' has been deleted.") % @repo.name
+        redirect_to :action => :index
+      end
+      format.xml  { head :ok }
+      format.json { head :ok }
     end
   end
 
