@@ -30,10 +30,6 @@ BuildRequires:  rubygem-restility
 BuildRequires:  webyast-base >= 0.3.31
 BuildRequires:  webyast-base-testsuite
 
-# start of collectd in post script cause break of cleaning, TODO complain to BS guys
-# buildrequire with '-' before package name means remove from build environment
-# see http://en.opensuse.org/openSUSE:Packaging_checks#Disable_post-build-checks
-BuildRequires:  -post-build-checks
 PreReq:         webyast-base >= 0.3.31
 
 # /usr/bin/pgrep
@@ -144,20 +140,30 @@ ruby %{_libdir}/ruby/gems/%{rb_ver}/gems/%{mod_full_name}/lib/configcheck.rb
 ruby %{_libdir}/ruby/gems/%{rb_ver}/gems/%{mod_full_name}/lib/update_config.rb
 
 #
-# set "Hostname" to WebYaST and remove already generated old log files
+# set "Hostname" to WebYaST
 #
-sed -i "s/^#Hostname[[:space:]].*/#If you change hostname please delete \/var\/lib\/collectd\/WebYaST\nHostname \"WebYaST\"/" "/etc/collectd.conf"
-rm -rf /var/lib/collectd/*
+grep -q "^Hostname[ \t]*\"WebYaST\"" /etc/collectd.conf
+if [ $? = 1 ] ; then
+  WARNING="# If you change hostname please delete /var/lib/collectd/WebYaST"
+  sed -i "s@^#Hostname[[:space:]].*@$WARNING\nHostname \"WebYaST\"@" /etc/collectd.conf
+
+  # We need to remove old logs because Webyast displays the first found log
+  # which could be accidentally the old (no longer) updated log.
+  #
+  # FIXME: find the latest database in webyast instead of complete removal here
+  #
+  # The removal might accidentaly fail if collectd is running and writes a log during removal,
+  # it would be a good idea to stop it first but unfortunately also stopping sometimes fails
+  # and that would cause build failure during RPM build :-(
+  rm -rf /var/lib/collectd/*
+fi
 
 #
-# enable and restart if running collectd. On new install always start
-# 
+# enable and restart collectd
+#
+# FIXME: move collectd handling to webyast initscript or to WebUI
 %{fillup_and_insserv -Y collectd}
-if test $1 -ge 1 ; then
-  rccollectd try-restart
-else
-  rccollectd start
-fi
+rccollectd restart
 
 %restart_webyast
 
