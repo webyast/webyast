@@ -142,18 +142,20 @@ ruby %{_libdir}/ruby/gems/%{rb_ver}/gems/%{mod_full_name}/lib/update_config.rb
 #
 # set "Hostname" to WebYaST
 #
-sed -i "s/^#Hostname[[:space:]].*/#If you change hostname please delete \/var\/lib\/collectd\/WebYaST\nHostname \"WebYaST\"/" "/etc/collectd.conf"
+grep -q "^Hostname[ \t]*\"WebYaST\"" /etc/collectd.conf
+if [ $? = 1 ] ; then
+  sed -i "s/^#Hostname[[:space:]].*/#If you change hostname please delete \/var\/lib\/collectd\/WebYaST\nHostname \"WebYaST\"/" "/etc/collectd.conf"
+  # remove already generated old log files for the old hostname
+  rm -rf /var/lib/collectd/*
+fi
 
 #
 # enable and restart if running collectd. On new install always start
-# 
+#
+# FIXME: move collectd handling to webyast initscript or to WebUI
 %{fillup_and_insserv -Y collectd}
 if test "$1" = "1" -o "$1" = ""; then
   # installation
-  # stop the service before data cleanup to avoid race conditions
-  rccollectd stop
-  # remove already generated old log files
-  rm -rf /var/lib/collectd/*
   rccollectd start
 else
   # upgrade
