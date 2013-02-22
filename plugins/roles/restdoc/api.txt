@@ -25,39 +25,42 @@ Contents
   org.opensuse.yast.modules.yapi.roles.write
 
 
+== Role Management
+
 GET /roles
 
   Get the list of interfaces.
 
   CURL example:
 
-  curl -u <user>:<password> -H "Accept: application/xml" http://localhost:4984/roles
+  curl -u &lt;user&gt; -H "Accept: application/xml" https://&lt;hostname&gt;:4984/roles
 
 XmlResult: roles_get
 
 GET /roles/<role_name>
 
-  <role_name>: name of the role
+<role_name>: name of the role
 
   Get the details of a role.
 
   CURL example:
 
-  curl -u <user>:<password> -H "Accept: application/xml" http://localhost:4984/roles/bamboo
+  curl -u &lt;user&gt; -H "Accept: application/xml" https://&lt;hostname&gt;:4984/roles/bamboo
 
 XmlResult: role_get
 
 PUT /roles/<role_name>
 
-  <role_name>: name of the role
+<role_name>: name of the role
 
   Update an role specification, modify users or permissions
 
   CURL example:
 
-  curl -u <user>:<password> -H "Accept: application/xml" -H "Content-Type: application/xml" --data @role_update.xml -X PUT http://localhost:4984/roles/bamboo
+  curl -u &lt;user&gt; -H "Accept: application/xml" -H "Content-Type: application/xml" --data @role_update.xml -X PUT https://&lt;hostname&gt;:4984/roles/bamboo
 
-XmlBody:   role_update_request
+XmlBody: role_update_request
+
 XmlResult: role_update_response
 
 POST /roles
@@ -66,15 +69,20 @@ POST /roles
 
   CURL example:
 
-  curl -u <user>:<password> -X POST -H "Accept: application/xml" -H "Content-Type: application/xml" --data @role_create_request.xml http://localhost:4984/roles/bamboo
+  curl -u &lt;user&gt; -X POST -H "Accept: application/xml" -H "Content-Type: application/xml" --data @role_create_request.xml https://&lt;hostname&gt;:4984/roles/bamboo
 
-XmlBody:   role_create_request
+XmlBody: role_create_request
+
 XmlResult: role_create_response
 
 DELETE /roles/<role_name>
+
+<role_name>: name of the role
 
   Remove existing role.
 
   CURL example:
 
-  curl -u <user>:<password> -H "Accept: application/xml" -X DELETE http://localhost:4984/roles/bamboo
+  curl -u &lt;user&gt; -H "Accept: application/xml" -X DELETE https://&lt;hostname&gt;:4984/roles/bamboo
+
+
