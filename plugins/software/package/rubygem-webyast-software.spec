@@ -17,7 +17,7 @@
 
 
 Name:           rubygem-webyast-software
-Version:        0.3.35
+Version:        0.3.36
 Release:        0
 %define mod_name webyast-software
 %define mod_full_name %{mod_name}-%{version}
