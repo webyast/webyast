@@ -98,10 +98,10 @@ class MailsettingController < ApplicationController
       end
     end
 
-    if request.format.html?
-      redirect_success # redirect to next step
-    else
-      redirect_to :back
+    respond_to do |format|
+      format.html { redirect :back }
+      format.xml  { render :nothing => true, :status => 200 }
+      format.json { render :nothing => true, :status => 200 }
     end
   end
 
@@ -141,9 +141,9 @@ private
       flash[:error] = message
       redirect_to :back
     else #REST request
-      error = { "error" => { "type" => "ADMINISTRATOR_ERROR", "messsage" => message, "id" => "ADMINISTRATOR" }}
+      error = { "error" => { "type" => "Application error", "messsage" => message, }}
       respond_to do |format|
-        format.xml  { render :xml => error, :status => 400 }
+        format.xml  { render :xml  => error.to_xml(:root => :errors), :status => 400 }
         format.json { render :json => error, :status => 400 }
       end
     end

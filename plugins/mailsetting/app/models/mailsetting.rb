@@ -108,6 +108,8 @@ class Mailsetting < BaseModel::Base
     end
   end
 
+  alias_method :create, :update
+
   def send_test_mail
     self.class.send_test_mail test_mail_address
   end
