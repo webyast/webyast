@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?><registration><status>missinginfo</status><exitcode>4</exitcode><guid></guid><missingarguments type="array"><argument><name>tape</name><value></value><flag>a</flag><kind>optional</kind></argument><argument><name>sys</name><value>02: None 00.0: 10107 System
+  [Created at sys.63]
+  Unique ID: rdCR.n_7QNeEnh23
+  Hardware Class: system
+  Model: "System"
+  Formfactor: "unknown"
+  Driver Info #0:
+    Driver Status: thermal,fan are not active
+    Driver Activation Cmd: "modprobe thermal; modprobe fan"
+  Config Status: cfg=new, avail=yes, need=no, active=unknown</value><flag>a</flag><kind>optional</kind></argument><argument><name>sound</name><value></value><flag>a</flag><kind>optional</kind></argument><argument><name>hostname</name><value>linux-webyast</value><flag>a</flag><kind>optional</kind></argument><argument><name>regcode-sles</name><value></value><flag>m</flag><kind>optional</kind></argument><argument><name>dsl</name><value></value><flag>a</flag><kind>optional</kind></argument>
+<argument><name>cpu</name><value>01: None 00.0: 10103 CPU
+  [Created at cpu.301]
+  Unique ID: rdCR.j8NaKXDZtZ6
+  Hardware Class: cpu
+  Arch: X86-64
+  Vendor: "GenuineIntel"
+  Model: 6.15.6 "Intel(R) Core(TM)2 CPU          6420  @ 2.13GHz"
+  Features: fpu,vme,de,pse,tsc,msr,pae,mce,cx8,apic,sep,mtrr,pge,mca,cmov,pat,pse36,clflush,mmx,fxsr,sse,sse2,ss,syscall,nx,lm,constant_tsc,up,arch_perfmon,rep_good,nopl,pni,monitor,ssse3,cx16,hypervisor,lahf_lm
+  Clock: 2133 MHz
+  BogoMips: 4262.40
+  Cache: 4096 kb
+  Config Status: cfg=new, avail=yes, need=no, active=unknown</value><flag>a</flag><kind>optional</kind></argument><argument><name>timezone</name><value>Euro/Berl</value><flag>i</flag><kind>mandatory</kind></argument><argument><name>platform</name><value>x86_64</value><flag>i</flag><kind>mandatory</kind></argument><argument><name>email</name><value></value><flag>m</flag><kind>mandatory</kind></argument>
+ <argument><name>isdn</name><value></value><flag>a</flag><kind>optional</kind></argument><argument><name>installed-langs</name><value>en_US</value><flag>a</flag><kind>optional</kind></argument><argument><name>ostarget</name><value>sle-11-x86_64</value><flag>i</flag><kind>mandatory</kind></argument><argument><name>moniker</name><value></value><flag>m</flag><kind>optional</kind></argument><argument><name>memory</name><value>01: None 00.0: 10102 Main Memory
+  [Created at memory.66]
+  Unique ID: rdCR.CxwsZFjVASF
+  Hardware Class: memory
+  Model: "Main Memory"
+  Memory Range: 0x00000000-0x3ff9bbff (rw)
+  Memory Size: 1 GB
+  Config Status: cfg=new, avail=yes, need=no, active=unknown</value><flag>a</flag><kind>optional</kind></argument>
+ <argument><name>processor</name><value>x86_64</value><flag>i</flag><kind>mandatory</kind></argument><argument><name>ostarget-bak</name><value>"SUSE Linux Enterprise Server 11 (x86_64)"</value><flag>a</flag><kind>mandatory</kind></argument><argument><name>gfxcard</name><value>15: PCI 02.0: 0300 VGA compatible controller (VGA)
+  [Created at pci.323]
+  UDI: /org/freedesktop/Hal/devices/pci_1234_1111
+  Unique ID: _Znp.UD4YEmG87c2
+  SysFS ID: /devices/pci0000:00/0000:00:02.0
+  SysFS BusID: 0000:00:02.0
+  Hardware Class: graphics card
+  Model: "Technical VGA compatible controller"
+  Vendor: pci 0x1234 "Technical Corp."
+  Device: pci 0x1111 
+  SubVendor: pci 0x1af4 "Qumranet, Inc."
+  SubDevice: pci 0x1100 
+  Memory Range: 0xfd000000-0xfdffffff (ro,non-prefetchable)
+  Memory Range: 0xfebd0000-0xfebdffff (ro,non-prefetchable,disabled)
+  I/O Ports: 0x3c0-0x3df (rw)
+  Module Alias: "pci:v00001234d00001111sv00001AF4sd00001100bc03sc00i00"
+  Config Status: cfg=new, avail=yes, need=no, active=unknown
+
+Primary display adapter: #15</value><flag>a</flag><kind>optional</kind></argument><argument><name>cpu-count</name><value>CPUSockets: 1
+</value><flag>a</flag><kind>optional</kind></argument></missingarguments></registration>
