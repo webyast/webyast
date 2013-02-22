@@ -1,4 +1,11 @@
 -------------------------------------------------------------------
+Fri Feb 22 11:28:56 UTC 2013 - jreidinger@suse.com
+
+- fix crash if timezone on system is unknown (BNC#787113)
+- fixes for time REST API (BNC#794923)
+- 0.3.9
+
+-------------------------------------------------------------------
 Wed Dec 12 15:48:54 UTC 2012 - lslezak@suse.cz
 
 - restart webyast after package update
