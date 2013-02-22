@@ -34,7 +34,7 @@ class Interface < BaseModel::Base
 
   attr_accessor :id, :bootproto, :ipaddr, :vendor, :type
   attr_accessor :bridge_ports # default: set BRIDGE to "yes" in NETWORK.pm
-  attr_accessor :vlan_etherdevice, :vlan_id, :host_name, :domain
+  attr_accessor :vlan_etherdevice, :vlan_id
   attr_accessor :bond_mode, :bond_miimon, :bond_option, :bond_slaves
 
   $bond_options = [
@@ -143,19 +143,13 @@ class Interface < BaseModel::Base
       when "vlan"
         settings[@id]["vlan_id"] =  self.vlan_id || ""
         settings[@id]["vlan_etherdevice"] = self.vlan_etherdevice || ""
-        settings[@id]["hostname"] = self.hostname || ""
-        settings[@id]["domain"] = self.domain || ""
       when "br"
         settings[@id]["bridge"] = "yes"
         settings[@id]["bridge_ports"] = (@bridge_ports.is_a? Array) ? @bridge_ports.join(' ') : @bridge_ports
-        settings[@id]["hostname"] = self.hostname || ""
-        settings[@id]["domain"] = self.domain || ""
       when "bond"
         settings[@id]["bond"] = "yes"
         settings[@id]["bond_option"] = @bond_option || ""
         settings[@id]["bond_slaves"] = (@bond_slaves.is_a? Array) ? @bond_slaves.join(' ') : @bond_slaves
-        settings[@id]["hostname"] = self.hostname || ""
-        settings[@id]["domain"] = self.domain || ""
       when "eth"
         # save only bootproto and ip/netmask
         Rails.logger.info "ETHERNET"
