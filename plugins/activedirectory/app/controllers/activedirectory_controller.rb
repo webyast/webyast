@@ -113,19 +113,14 @@ class ActivedirectoryController < ApplicationController
       begin
         @activedirectory.save
       rescue ActivedirectoryError => e
-        # credentials required for joining the domain
-        if e.id == "not_member"
-          @activedirectory.administrator = ""
-          @activedirectory.password = ""
-          @activedirectory.machine = ""
-        else
-          @error = e
-        end
+        @error = e
       end
       if @error
+        #missing argument to join is customer problem, otherwise something happen in server
+        status = @error.id == "not_member" ? 400 : 500
         respond_to do |format|
-          format.xml  { render :xml => @activedirectory.to_xml(:dasherize => false), :status => 500 }
-          format.json { render :json => @activedirectory, :status => 500 }
+          format.xml  { render :xml => @activedirectory.to_xml(:dasherize => false), :status => status }
+          format.json { render :json => @activedirectory, :status => status }
         end
       else
         respond_to do |format|
