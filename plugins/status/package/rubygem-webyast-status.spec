@@ -29,6 +29,11 @@ BuildRequires:  rubygems_with_buildroot_patch
 BuildRequires:  rubygem-restility
 BuildRequires:  webyast-base >= 0.3.31
 BuildRequires:  webyast-base-testsuite
+
+# start of collectd in post script cause break of cleaning, TODO complain to BS guys
+# buildrequire with '-' before package name means remove from build environment
+# see http://en.opensuse.org/openSUSE:Packaging_checks#Disable_post-build-checks
+BuildRequires:  -post-build-checks
 PreReq:         webyast-base >= 0.3.31
 
 # /usr/bin/pgrep
@@ -145,10 +150,14 @@ sed -i "s/^#Hostname[[:space:]].*/#If you change hostname please delete \/var\/l
 rm -rf /var/lib/collectd/*
 
 #
-# enable and restart collectd
+# enable and restart if running collectd. On new install always start
 # 
 %{fillup_and_insserv -Y collectd}
-rccollectd restart
+if test $1 -ge 1 ; then
+  rccollectd try-restart
+else
+  rccollectd start
+fi
 
 %restart_webyast
 
