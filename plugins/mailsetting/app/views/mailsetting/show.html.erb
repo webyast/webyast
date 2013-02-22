@@ -61,14 +61,27 @@
           $form_data.each(function(index, element) {
             test_mail_data[element.name] = element.value;
           });
-          console.log(test_mail_data);
+          var $mail_waiting = $("#mail_waiting");
+          var $mail_notification = $("#mail_result");
+          $mail_notification.css({color:'black'});
+          $mail_notification.show().html('<%=_("Sending email, please wait..") %>');
+          $mail_waiting.show();
           $.ajax({
             type: 'POST',
             url: 'mailsetting/send_test_mail',
             dataType: 'json',
             accepts: 'json',
             data: test_mail_data
-          });
+            })
+          .success(function(data)  {
+            $mail_notification.html(data.message).css({color:'green', display: 'inline-block'});
+            $mail_waiting.hide();
+            })
+          .error(function(data) {
+            var response = JSON.parse(data.responseText);
+            $mail_notification.html(response.message).css({color:'red', display: 'inline-block'});
+            $mail_waiting.hide();
+            });
         }
       );
     });
@@ -136,7 +149,9 @@ relay.example.com:26. Use square brackets around the host name to prevent from D
         <div class="row lastrow">
           <label id="mail_test_mail_label"><%=_("Send test mail to")%></label>
           <%= f.text_field :test_mail_address, :disabled => disabled, :class => "email" %>
-          <%= submit_tag _("Send test email"), :id => "send_mail", :type => :button %>
+          <%= submit_tag _("Send email"), :id => "send_mail", :type => :button %>
+          <%= image_tag("working.gif", :id=>:mail_waiting, :alt=>"Sending email", :height=>"20", :width=>"20",:style=>['padding-left: 10px; display: none']) %>
+          <span id="mail_result" style="display: none; padding-left: 1em; width: 330px"></span>
           <label for="mail_test_mail_address" generated="true" class="error"> </label>
         </div>
       </div>

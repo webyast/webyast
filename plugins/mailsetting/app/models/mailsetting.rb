@@ -143,19 +143,22 @@ end
 
 class MailsettingNotifier < ActionMailer::Base
   def self.server_settings options
-    ActionMailer.smtp_settings = {
+    from = "root@#{options[:hostname]}"
+    self.default :from => from, :return_path => from
+    self.smtp_settings = {
       :address   => options[:server],
       :port      => options[:port],
-      :domain    => options[:domain],
       :user_name => options[:user],
       :password  => options[:password],
+      :domain    => options[:domain],
       :enable_starttls_auto => options[:tls],
-      :authentication => :plain
+      :authentication => :login,
+      :openssl_verify_mode => OpenSSL::SSL::VERIFY_NONE
     }
 
-    ActionMailer.delivery_method       = :smtp
-    ActionMailer.perform_deliveries    = true
-    ActionMailer.raise_delivery_errors = true
+    self.delivery_method       = :smtp
+    self.perform_deliveries    = true
+    self.raise_delivery_errors = true
   end
 
   def test_mail options

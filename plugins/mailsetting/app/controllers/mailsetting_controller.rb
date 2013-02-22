@@ -24,6 +24,13 @@
 
 class MailsettingController < ApplicationController
 
+  rescue_from Timeout::Error do |error|
+    respond_to do |format|
+      format.json { render :json => { :message => error.message }, :status => 400 }
+      format.xml  { render :xml  => { :message => error.message }, :status => 400 }
+    end
+  end
+
   def show
     authorize! :read, Mailsetting
 
@@ -94,7 +101,7 @@ class MailsettingController < ApplicationController
     if request.format.html?
       redirect_success # redirect to next step
     else
-      show
+      redirect_to :back
     end
   end
 
@@ -108,14 +115,13 @@ class MailsettingController < ApplicationController
       :server   => smtp_server,
       :port     => (port || 25).to_i,
       :to       => params[:mailsetting][:test_mail_address],
-      :tls      => params[:transport_layer_security] == 'no' ? false : true,
+      :tls      => params[:mailsetting][:transport_layer_security] == 'no' ? false : true,
       :hostname => request.host,
       :domain   => request.domain,
       :user     => params[:mailsetting][:user],
       :password => params[:mailsetting][:password]
     }
-    Rails.logger.error "Settings: #{settings.inspect}"
-    MailsettingNotifier.smtp_settings settings
+    MailsettingNotifier.server_settings   settings
     email = MailsettingNotifier.test_mail settings
     email.deliver
   rescue => error
@@ -133,7 +139,7 @@ private
   def problem message
     if request.format.html?
       flash[:error] = message
-      render :action => "show"
+      redirect_to :back
     else #REST request
       error = { "error" => { "type" => "ADMINISTRATOR_ERROR", "messsage" => message, "id" => "ADMINISTRATOR" }}
       respond_to do |format|
