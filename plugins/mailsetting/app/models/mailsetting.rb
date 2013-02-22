@@ -144,26 +144,26 @@ end
 class MailsettingNotifier < ActionMailer::Base
   def self.server_settings options
     ActionMailer.smtp_settings = {
-      :address   => options[:smtp_server],
-      :port      => 25,
+      :address   => options[:server],
+      :port      => options[:port],
       :domain    => options[:domain],
-      :tls       => options[:transport_layer_security],
-      :user_name => options[:user_name],
+      :user_name => options[:user],
       :password  => options[:password],
+      :enable_starttls_auto => options[:tls],
       :authentication => :plain
     }
 
-    self.delivery_method       = :smtp
-    self.perform_deliveries    = true
-    self.raise_delivery_errors = false
+    ActionMailer.delivery_method       = :smtp
+    ActionMailer.perform_deliveries    = true
+    ActionMailer.raise_delivery_errors = true
   end
 
-  def test_mail address_to, hostname
-    @from     = "root@#{hostname}"
-    @to       = address_to
+  def test_mail options
+    @from     = "root@#{options[:hostname]}"
+    @to       = options[:to]
     @subject  = "WebYaST Test Mail"
     @sent_at  = Time.new.strftime "%Y-%m-%d %H-%M-%S"
-    @hostname = hostname
+    @hostname = options[:hostname]
     mail :to => @to, :subject => @subject, :from => @from,
          :template_name => 'test_mail', :template_path => 'mailsetting',
          :content_type => 'text/html'

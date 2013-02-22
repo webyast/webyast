@@ -103,14 +103,28 @@ class MailsettingController < ApplicationController
   end
 
   def send_test_mail
-    address_to = params[:mailsetting].delete [:test_mail_address]
-    settings = params[:mailsettings] #TODO change the params as needed by the mailer
+    smtp_server, port = params[:mailsetting][:smtp_server].split(':')
+    settings = {
+      :server   => smtp_server,
+      :port     => (port || 25).to_i,
+      :to       => params[:mailsetting][:test_mail_address],
+      :tls      => params[:transport_layer_security] == 'no' ? false : true,
+      :hostname => request.host,
+      :domain   => request.domain,
+      :user     => params[:mailsetting][:user],
+      :password => params[:mailsetting][:password]
+    }
+    Rails.logger.error "Settings: #{settings.inspect}"
     MailsettingNotifier.smtp_settings settings
-    email = MailsettingNotifier.send_test_email :settings => params[:mailsettings]
-    if email.errors.present?
-      render :json => { :message => _("Sending of email failed"), :errors => email.errors}, :status => 400
+    email = MailsettingNotifier.test_mail settings
+    email.deliver
+  rescue => error
+    Rails.logger.error error.message
+  ensure
+    if error.present?
+      render :json => { :message => _("Sending of email failed. #{error.message}") }, :status => 400
     else
-      render :json => { :message => _("Email has been sent")    }, :status => 200
+      render :json => { :message => _("Email has been sent") }, :status => 200
     end
   end
 
