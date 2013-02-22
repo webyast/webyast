@@ -17,7 +17,7 @@
 
 
 Name:           rubygem-webyast-status
-Version:        0.3.15
+Version:        0.3.16
 Release:        0
 %define mod_name webyast-status
 %define mod_full_name %{mod_name}-%{version}
@@ -145,10 +145,10 @@ sed -i "s/^#Hostname[[:space:]].*/#If you change hostname please delete \/var\/l
 rm -rf /var/lib/collectd/*
 
 #
-# enable and restart  collectd if it running
+# enable and restart collectd
 # 
 %{fillup_and_insserv -Y collectd}
-rccollectd try-restart
+rccollectd restart
 
 %restart_webyast
 
