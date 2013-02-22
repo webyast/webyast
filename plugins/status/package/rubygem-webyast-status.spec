@@ -31,6 +31,8 @@ BuildRequires:  webyast-base >= 0.3.31
 BuildRequires:  webyast-base-testsuite
 
 # start of collectd in post script cause break of cleaning, TODO complain to BS guys
+# buildrequire with '-' before package name means remove from build environment
+# see http://en.opensuse.org/openSUSE:Packaging_checks#Disable_post-build-checks
 BuildRequires:  -post-build-checks
 PreReq:         webyast-base >= 0.3.31
 
