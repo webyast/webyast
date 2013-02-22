@@ -92,6 +92,39 @@ class NetworkController < ApplicationController
   def create
     authorize! :write, Network
 
+    # bnc#790219 All bonded (selected) slaves need to be configured with bootproto=none
+    params["bond_slaves"].each do |slave, selected|
+      next if selected != "1"
+
+      slave_ifc = Interface.find slave
+      unless slave_ifc
+        Rails.logger.error "Cannot find slave interface #{slave}"
+        flash[:error] = _("Cannot find interface %s to be bonded.") % slave
+        redirect_to :controller => "network", :action => "index" and return
+      end
+      Rails.logger.info "Found slave #{slave_ifc.inspect}"
+
+      # Already correctly configured
+      next if slave_ifc.bootproto == "none"
+
+      # Configured but incorrectly for bonding
+      if slave_ifc.bootproto
+        Rails.logger.error "User tries to bond configured interface #{slave} with config mode #{slave_ifc.bootproto}"
+        flash[:error] = _("Cannot bond interface %s. Its configuration mode must be %s instead of %s.") % [slave, 'NONE', slave_ifc.bootproto.upcase]
+        redirect_to :controller => "network", :action => "index" and return
+      end
+
+      Rails.logger.info "Configuring interface #{slave}"
+      # Only network cards can be without any configuration
+      slave_ifc.type = "eth"
+      slave_ifc.bootproto = "none"
+      unless slave_ifc.save
+        Rails.logger.error "Cannot save #{slave_ifc.inspect} configuration"
+        flash[:error] = _("Cannot save %s configuration. Please, set it up with configuration mode %s before bonding.") % [slave, 'NONE']
+        redirect_to :controller => "network", :action => "index" and return
+      end
+    end
+
     hash = {}
     hash["type"] = params[:type] if  params[:type]
     hash["bootproto"] = params[:bootproto]
@@ -124,7 +157,7 @@ class NetworkController < ApplicationController
 
     network = Network.find
 
-    ### HOSTANEM ###
+    ### HOSTNAME ###
     hostname = network["hostname"]
 
     if hostname.name != params["hostname"] || hostname.domain != params["domain"]
