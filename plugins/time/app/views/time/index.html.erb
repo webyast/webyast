@@ -163,9 +163,8 @@
         <div class="fieldset_body">
           <fieldset class="time_filedset" >
             <legend>
-              <input type="radio" name="systemtime[config]" value="manual" id="timeconfig_manual"
-              <%= "disabled='disabled'" if disabled%>
-              <%= label_tag "timeconfig_manual", _("Manually configure time"), :class => "description" %> />
+              <input type="radio" name="systemtime[config]" value="manual" id="timeconfig_manual" <%= "disabled='disabled'" if disabled%> />
+              <%= label_tag "timeconfig_manual", _("Manually configure time"), :class => "description" %>
             </legend>
 
             <div class="time_subsection">

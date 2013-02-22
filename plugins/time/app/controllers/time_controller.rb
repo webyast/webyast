@@ -38,7 +38,7 @@ class TimeController < ApplicationController
     respond_to do |format|
       format.html do
         flash[:error] = error.message
-        redirect_to :root
+        redirect_to :index
       end
       format.xml  { render :xml  => error.to_xml  }
       format.json { render :json => error.to_json }
@@ -101,7 +101,7 @@ class TimeController < ApplicationController
     respond_to do |format|
       format.html do
         flash[:notice] = _('Time settings have been written.')
-        redirect_to :action => 'index', :controller => :time
+        redirect_to :action => 'index'
       end
       format.xml  { render :xml  => system_time }
       format.json { render :json => system_time }

@@ -96,12 +96,12 @@ class Systemtime < BaseModel::Base
 
   def utcstatus= status
     @utcstatus = case status
-    when 'true', true
-      true
-    when 'false', false, nil
-      false
-    else
-      raise ArgumentError, "Value '#{status}' is not allowed for utc status"
+      when 'true', true
+        true
+      when 'false', false, nil
+        false
+      else
+        raise ArgumentError, "Value '#{status}' is not allowed for utc status"
     end
   end
 
@@ -148,17 +148,16 @@ class Systemtime < BaseModel::Base
     self.timezone         = parse_yapi_timezone
     self.region           = parse_yapi_region
     self.timezone_details = yapi_response['timezone']
-    self.utcstatus =
-    case yapi_response["utcstatus"]
-    when "UTC"
-      true
-    when "localtime", 'local'
-      false
-    when "UTCOnly"
-      true
-    else
-      Rails.logger.warn "Unknown key in utcstatus #{yapi_response["utcstatus"]}"
-      nil
+    self.utcstatus = case yapi_response["utcstatus"]
+      when "UTC"
+        true
+      when "localtime", 'local'
+        false
+      when "UTCOnly"
+        true
+      else
+        Rails.logger.warn "Unknown key in utcstatus #{yapi_response["utcstatus"]}"
+        nil
     end
     self
   end
