@@ -99,7 +99,7 @@ class MailsettingController < ApplicationController
     end
 
     respond_to do |format|
-      format.html { redirect :back }
+      format.html { redirect_to :back }
       format.xml  { render :nothing => true, :status => 200 }
       format.json { render :nothing => true, :status => 200 }
     end
