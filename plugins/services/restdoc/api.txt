@@ -64,7 +64,7 @@ XmlResult: services
 
   The information about service status is read with read_status=true argument.
 
-  CURL Example: curl -u &lt;user&gt; http://&lt;hostname&gt;:4984/services.xml?read_status=true
+  CURL Example: curl -u &lt;user&gt; https://&lt;hostname&gt;:4984/services.xml?read_status=true
 
 XmlResult: services-with-status
 
@@ -73,9 +73,9 @@ GET /services/service_name.xml
 
   Returns information about service with given name, including service status.
 
-  CURL Example: curl -u &lt;user&gt; http://&lt;hostname&gt;:4984/services/database.xml?custom=true
+  CURL Example: curl -u &lt;user&gt; https://&lt;hostname&gt;:4984/services/database.xml?custom=true
 
-  CURL Example: curl -u &lt;user&gt; http://&lt;hostname&gt;:4984/services/cron.xml
+  CURL Example: curl -u &lt;user&gt; https://&lt;hostname&gt;:4984/services/cron.xml
 
 XmlResult: cron
 
@@ -84,7 +84,7 @@ PUT /service/service_name.xml
 
   Executes an action with given service. Example of actions are "stop", "start", "restart".
 
-  CURL example: curl -u &lt;user&gt; -X PUT -H "Content-type: text/xml" -d @stop_cron_request.xml http://&lt;hostname&gt;:4984/services/cron.xml
+  CURL example: curl -u &lt;user&gt; -X PUT -H "Content-type: text/xml" -d @stop_cron_request.xml https://&lt;hostname&gt;:4984/services/cron.xml
 
 XmlBody: stop_cron_request
   
@@ -94,7 +94,7 @@ PUT /service/service_name.xml?execute=<action>
 
   Alternative way to execute an action with given service. Example of actions are "stop", "start", "restart".
 
-  CURL example: curl -u &lt;user&gt; -X PUT -H "Content-type: text/xml" -d "" http://&lt;hostname&gt;:4984/services/cron.xml?execute=stop
+  CURL example: curl -u &lt;user&gt; -X PUT -H "Content-type: text/xml" -d "" https://&lt;hostname&gt;:4984/services/cron.xml?execute=stop
 
 XmlResult: cron
 
