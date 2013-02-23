@@ -1,4 +1,15 @@
 -------------------------------------------------------------------
+Sat Feb 23 13:53:50 UTC 2013 - vmoravec@suse.com
+
+- fixed errors in controller and view 
+
+-------------------------------------------------------------------
+Fri Feb 22 17:42:15 UTC 2013 - vmoravec@suse.com
+
+- Mailsettings bnc#784360 
+- 0.3.14
+
+-------------------------------------------------------------------
 Fri Jan 11 14:58:23 UTC 2013 - lslezak@suse.cz
 
 - updated testsuite
