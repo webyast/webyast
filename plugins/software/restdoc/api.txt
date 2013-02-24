@@ -44,7 +44,7 @@ GET /patches
 
   Return all available or installed patches (the status is set in "installed" value)
 
-  CURL Example: curl -u &lt;user&gt; https://localhost:4984/patches.xml
+  CURL Example: curl -u &lt;user&gt; https://&lt;hostname&gt;:4984/patches.xml
 
 
 XmlResult: patches
@@ -54,7 +54,7 @@ GET /patches/patch_id.xml
 
   Return information about patch with given ID.
 
-  CURL Example: curl -u &lt;user&gt; 'https://localhost:4984/patches/slessp2-PackageKit;7256;noarch;nu_novell_com:SLES11-SP2-Updates.xml'
+  CURL Example: curl -u &lt;user&gt; 'https://&lt;hostname&gt;:4984/patches/slessp2-PackageKit;7256;noarch;nu_novell_com:SLES11-SP2-Updates.xml'
 
 
 XmlResult: patch
@@ -65,7 +65,7 @@ POST /patches/patch_id.xml
   Install the patch with given ID. Patch installation runs in background, the response code is 202 Accepted when patch installation started.
   Then the patch index has to be queried to get the actual patch installation result.
 
-  CURL example: curl -u &lt;user&gt; -X POST 'https://localhost:4984/patches/slessp2-PackageKit;7256;noarch;nu_novell_com:SLES11-SP2-Updates.xml'
+  CURL example: curl -u &lt;user&gt; -X POST 'https://&lt;hostname&gt;:4984/patches/slessp2-PackageKit;7256;noarch;nu_novell_com:SLES11-SP2-Updates.xml'
 
 
 == Repository Management Actions
@@ -74,7 +74,7 @@ GET /repositories
 
   Return all configured software repositories
 
-  CURL Example: curl -u &lt;user&gt; https://localhost:4984/repositories.xml
+  CURL Example: curl -u &lt;user&gt; https://&lt;hostname&gt;:4984/repositories.xml
 
 XmlResult: repositories
 
@@ -83,7 +83,7 @@ GET /repositories/repo_id.xml
 
   Return details of the specified repository
 
-  CURL Example: curl -u &lt;user&gt; https://localhost:4984/nu_novell_com:SLES11-SP2-Updates.xml
+  CURL Example: curl -u &lt;user&gt; 'https://&lt;hostname&gt;:4984/nu_novell_com:SLES11-SP2-Updates.xml'
 
 XmlResult: repository
 
@@ -92,7 +92,7 @@ PUT /repositories/repo_id.xml
 
   Update repository properties
 
-  CURL Example: curl -u &lt;user&gt; -X PUT -H 'Content-type: text/xml' -d @repository.xml https://localhost:4984/repositories/nu_novell_com:SLES11-SP2-Updates.xml
+  CURL Example: curl -u &lt;user&gt; -X PUT -H 'Content-type: text/xml' -d @repository.xml 'https://&lt;hostname&gt;:4984/repositories/nu_novell_com:SLES11-SP2-Updates.xml'
 
 XmlBody: repository
 
@@ -101,7 +101,7 @@ POST /repositories
 
   Create a new repository
 
-  CURL Example: curl -u &lt;user&gt; -X POST -H 'Content-type: text/xml' -d @repository.xml https://localhost:4984/repositories.xml
+  CURL Example: curl -u &lt;user&gt; -X POST -H 'Content-type: text/xml' -d @repository.xml https://&lt;hostname&gt;:4984/repositories.xml
 
 XmlBody: repository
 
@@ -110,6 +110,6 @@ DELETE /repositories/repo_id
 
   Delete an existing repository.
 
-  CURL Example: curl -u &lt;user&gt; -X DELETE https://localhost:4984/repositories/nu_novell_com:SLES11-SP2-Updates.xml
+  CURL Example: curl -u &lt;user&gt; -X DELETE 'https://&lt;hostname&gt;:4984/repositories/nu_novell_com:SLES11-SP2-Updates.xml'
 
 
