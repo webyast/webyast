@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Mon Feb 25 11:30:24 UTC 2013 - jreidinger@suse.com
+
+- fixes to restdoc to contain all necessary info (bnc#805282)
+- 0.3.11
+
+-------------------------------------------------------------------
 Fri Feb 22 16:17:38 UTC 2013 - locilka@suse.com
 
 - Fixed restdoc build (bnc#805282)

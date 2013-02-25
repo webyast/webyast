@@ -30,7 +30,7 @@ GET /time
 
   CURL example:
 
-  curl -u &lt;user&gt;:&lt;password&gt; -H "Accept: application/xml" http://hostname:4984/time
+  curl -u &lt;user&gt; https://&lt;hostname&gt;:4984/time.xml
 
 XmlResult: time_get
 
@@ -46,7 +46,7 @@ POST /time
 
   CURL example - manual time and date configuration:
 
-  curl -u &lt;user&gt;:&lt;password&gt; -H "Accept: text/xml" -X POST --data @time_post_request.xml -H "Content-Type: text/xml" http://hostname:4984/time
+  curl -u &lt;user&gt; -X POST --data @time_post_request.xml -H "Content-Type: text/xml" https://&lt;hostname&gt;:4984/time.xml
 
 
 XmlBody: time_post_request
@@ -58,4 +58,9 @@ GET /time/timezones
 
   CURL example:
 
-  curl -u &lt;user&gt;:&lt;password&gt; -H "Accept: application/xml" http://hostname:4984/time/timezones
+  curl -u &lt;user&gt; https://&lt;hostname&gt;:4984/time/timezones.xml
+
+
+XmlResult: timezones_get_response
+
+
