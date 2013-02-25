@@ -78,10 +78,9 @@
             $mail_notification.html(data.message).css({color:'green', display: 'inline-block'});
             $mail_waiting.hide();
             })
-          .error(function(data) {
-            var response = JSON.parse(data.responseText);
+          .error(function(response) {
             //FIXME use css class for styling
-            $mail_notification.html(response.message).css({color:'red', display: 'inline-block'});
+            $mail_notification.html(JSON.parse(response.responseText).message).css({color:'red', display: 'inline-block'});
             $mail_waiting.hide();
             });
         }

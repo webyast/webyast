@@ -24,13 +24,6 @@
 
 class MailsettingController < ApplicationController
 
-  rescue_from Timeout::Error do |error|
-    respond_to do |format|
-      format.json { render :json => { :message => error.message }, :status => 400 }
-      format.xml  { render :xml  => { :message => error.message }, :status => 400 }
-    end
-  end
-
   def show
     authorize! :read, Mailsetting
 
@@ -129,7 +122,7 @@ class MailsettingController < ApplicationController
     MailsettingNotifier.server_settings   settings
     email = MailsettingNotifier.test_mail settings
     email.deliver
-  rescue => error
+  rescue Exception => error
     Rails.logger.error error.message
   ensure
     if error.present?
