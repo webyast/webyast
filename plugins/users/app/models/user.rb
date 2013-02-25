@@ -217,16 +217,8 @@ ATTR_ACCESSIBLE = [:cn, :uid, :uid_number, :gid_number, :grouplist, :groupname,
     config = {}
     user = User.new
     user.load_attributes(attrs)
-    user.grouplist = {}
-    unless user.grp_string.blank?
-       user.grp_string.split(",").each do |groupname|
-	  group = { "cn" => groupname.strip }
-	  user.grouplist.push group
-       end
-    end
-
+    user.grouplist = attrs[:grp_string].split(',').inject({}) { |grouplist,group| grouplist.update group => '1' }
     data = user.retrieve_data
-
     config.store("type", [ "s", "local" ])
     data.store("uid", [ "s", user.uid])
 
