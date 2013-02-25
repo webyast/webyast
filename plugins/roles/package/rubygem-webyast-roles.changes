@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Mon Feb 25 13:08:00 UTC 2013 - vmoravec@suse.com
+
+- Fixed creating role with empty users
+- 0.3.14
+
+-------------------------------------------------------------------
 Fri Feb 22 17:51:43 UTC 2013 - vmoravec@suse.com
 
 - Fixed restdocs build (bnc#805282)

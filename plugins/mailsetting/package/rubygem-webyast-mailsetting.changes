@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Mon Feb 25 11:48:28 UTC 2013 - vmoravec@suse.com
+
+- fixed double render error and ajax response parsing 
+- 0.3.15
+
+-------------------------------------------------------------------
 Sat Feb 23 13:53:50 UTC 2013 - vmoravec@suse.com
 
 - fixed errors in controller and view 
