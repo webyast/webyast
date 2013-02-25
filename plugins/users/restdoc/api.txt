@@ -1,0 +1,60 @@
+= YaST REST Service Documentation
+
+== Users and Groups Management
+
+  Only authenticated users are allowed to access the API. Authentication is done
+  by sending a Basic HTTP Authorisation header.
+
+  The Users WebYaST module allows you to manage local non-system users.
+  You can view the list of users, edit them, or add new users. 
+
+== Overview
+
+  User and group management
+
+== PolicyKit Access Rights
+
+  The following PolicyKit permissions are defined:
+
+  org.opensuse.yast.modules.yapi.users
+
+  org.opensuse.yast.modules.yapi.groups
+
+== Users
+
+  View a single or several users, update, create or delete a specific user
+
+GET /users
+
+  Get the list of all users
+
+  CURL example:
+
+  curl -u &lt;user&gt; https://&lt;hostname&gt;:4984/users.xml
+
+XmlResult: users_get
+
+POST /users
+
+  Create a user
+
+  CURL example:
+
+  curl -u &lt;user&gt; -X POST --data @user_post_request.xml -H "Content-Type: text/xml" https://&lt;hostname&gt;:4984/users.xml
+
+
+XmlBody: user_post_request
+XmlResult: user_post_response
+
+GET /users/<user_name>
+
+  View details about a specific user
+
+  CURL example:
+
+  curl -u &lt;user&gt; https://&lt;hostname&gt;:4984/users/user_name.xml
+
+
+XmlResult: user_name_get_response
+
+
