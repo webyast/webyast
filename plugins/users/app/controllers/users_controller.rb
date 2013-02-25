@@ -254,7 +254,8 @@ class UsersController < ApplicationController
     save_roles @user.id, roles
     @user.load_attributes(user_params)
     @user.type = "local"
-    @user.grouplist = {}
+    group_list = user_params[:grouplist] || []
+    @user.grouplist = group_list.inject({}) {|groups,group| groups.update group => 1 }
     user_params[:grp_string].split(",").each do |groupname|
       @user.grouplist[groupname.strip] = "1"
     end unless user_params[:grp_string].blank?
