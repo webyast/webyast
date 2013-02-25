@@ -121,6 +121,11 @@ class MailsettingController < ApplicationController
       :user     => params[:mailsetting][:user],
       :password => params[:mailsetting][:password]
     }
+
+    log_settings = settings.dup
+    log_settings[:password] = "[FILTERED]" if log_settings[:password]
+    Rails.logger.info "Sending testing e-mail using settings #{log_settings.inspect}"
+
     MailsettingNotifier.server_settings   settings
     email = MailsettingNotifier.test_mail settings
     email.deliver
