@@ -150,6 +150,8 @@ public
     check_role_param
     check_role_name_uniqueness
     @role = Role.new.load params[:role]
+    @role.users = params[:role][:users] || []
+    @role.permissions = params[:role][:permissions] || []
     check_role_valid
     @role.save
     respond_to do |format|
