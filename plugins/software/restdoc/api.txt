@@ -14,7 +14,7 @@
   by sending a Basic HTTP Authorisation header, authentication cookie or using
   token authentication.
 
-== Table of Contents
+Contents
 
 == Formats
 
@@ -42,7 +42,7 @@
 
 GET /patches
 
-  Return all available or installed patches (the status is set in "installed" value)
+  Return all available and recently installed patches (the status is set in "installed" value)
 
   CURL Example: curl -u &lt;user&gt; https://&lt;hostname&gt;:4984/patches.xml
 
@@ -60,12 +60,12 @@ GET /patches/patch_id.xml
 XmlResult: patch
 
 
-POST /patches/patch_id.xml
+POST /patches/install/patch_id.xml
 
   Install the patch with given ID. Patch installation runs in background, the response code is 202 Accepted when patch installation started.
   Then the patch index has to be queried to get the actual patch installation result.
 
-  CURL example: curl -u &lt;user&gt; -X POST 'https://&lt;hostname&gt;:4984/patches/slessp2-PackageKit;7256;noarch;nu_novell_com:SLES11-SP2-Updates.xml'
+  CURL example: curl -u &lt;user&gt; -X POST 'https://&lt;hostname&gt;:4984/patches/install/slessp2-PackageKit;7256;noarch;nu_novell_com:SLES11-SP2-Updates.xml'
 
 
 == Repository Management Actions
