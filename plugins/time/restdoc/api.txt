@@ -59,3 +59,5 @@ GET /time/timezones
   CURL example:
 
   curl -u &lt;user&gt;:&lt;password&gt; -H "Accept: application/xml" http://hostname:4984/time/timezones
+
+
