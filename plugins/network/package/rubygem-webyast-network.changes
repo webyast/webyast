@@ -1,7 +1,8 @@
 -------------------------------------------------------------------
 Tue Feb 26 08:10:39 UTC 2013 - lslezak@suse.cz
 
-- FIXME: testing version, unified create/update behavior
+- unified create/update behavior, use all form value when creating
+  a new interface (bnc#788063)
 - 0.3.14
 
 -------------------------------------------------------------------
