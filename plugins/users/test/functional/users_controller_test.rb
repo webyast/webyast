@@ -35,7 +35,6 @@ class UsersControllerTest < ActionController::TestCase
     mime = Mime::HTML
     @request.accept = mime.to_s
     get :index
-    assert_valid_markup
     assert_response :success
   end
 
@@ -85,7 +84,7 @@ class UsersControllerTest < ActionController::TestCase
    User.stubs(:find_all).returns(u)
    User.any_instance.stubs(:save).with("schubi5").returns(true)
 
-   post :update, {:user => { :id => "schubi5", :cn => "schubi5" }}
+   post :update, {:user => { :id => "schubi5", :uid => "schubi5", :cn => "schubi5" }}
    assert !flash.empty?
    assert_response 302
   end
