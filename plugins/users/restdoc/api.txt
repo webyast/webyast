@@ -57,4 +57,26 @@ GET /users/<user_name>
 
 XmlResult: user_get
 
+PUT /users/<user_name>
+
+  Update attributes of a user. If attributes 'groupname' or 'grouplist' are not provided they are set to their default values.
+
+  CURL example:
+
+  curl -u &lt;user&gt; -X PUT --data @user_put_request.xml -H "Content-Type: text/xml" https://&lt;hostname&gt;:4984/users/user_name.xml
+
+
+XmlBody: user_put_request
+XmlResult: user_put_response
+
+DELETE /users/<user_name>
+
+  Delete the user.
+
+  CURL example:
+
+  curl -u &lt;user&gt; -X DELETE https://&lt;hostname&gt;:4984/users/user_name.xml
+
+
+
 
