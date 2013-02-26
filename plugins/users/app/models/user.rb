@@ -211,8 +211,13 @@ ATTR_ACCESSIBLE = [:cn, :uid, :uid_number, :gid_number, :grouplist, :groupname,
     user = User.new
     user.load_attributes(attrs)
     if attrs[:grp_string]
-      user.grouplist = attrs[:grp_string].split(',').inject({}) { |grouplist,group| grouplist.update group => '1' }
+      groups = attrs[:grp_string].split(',')
+    elsif attrs[:grouplist]
+      groups = attrs[:grouplist]
+    else
+      groups = []
     end
+    user.grouplist = groups.inject({}) { |grouplist,group| grouplist.update group => '1' }
     data = user.retrieve_data
     config.store("type", [ "s", "local" ])
     data.store("uid", [ "s", user.uid])
