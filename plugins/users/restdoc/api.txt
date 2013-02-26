@@ -36,7 +36,7 @@ XmlResult: users_get
 
 POST /users
 
-  Create a user
+  Create a new user
 
   CURL example:
 
@@ -55,6 +55,6 @@ GET /users/<user_name>
   curl -u &lt;user&gt; https://&lt;hostname&gt;:4984/users/user_name.xml
 
 
-XmlResult: user_name_get_response
+XmlResult: user_get
 
 

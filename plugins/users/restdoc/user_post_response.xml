@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<user>
+  <id>jbond</id>
+  <cn>James Bond</cn>
+  <groupname>users</groupname>
+  <gid_number type="integer"></gid_number>
+  <home_directory>/home/jbond</home_directory>
+  <login_shell>/bin/bash</login_shell>
+  <uid>jbond</uid>
+  <uid_number>1007</uid_number>
+  <user_password>linux</user_password>
+  <type>local</type>
+  <grouplist type="array">
+    <group><cn>hollywood</cn></group>
+  </grouplist>
+</user>
+
