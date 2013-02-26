@@ -29,8 +29,8 @@ class UsersController < ApplicationController
         redirect_to :action => :index
       end
 
-      format.xml { render :xml => error }
-      format.json { render :xml => error }
+      format.xml { render :xml => error,  :status => 400 }
+      format.json { render :xml => error, :status => 400 }
     end
   end
 
