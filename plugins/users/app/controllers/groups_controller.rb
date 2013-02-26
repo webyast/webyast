@@ -103,6 +103,7 @@ class GroupsController < ApplicationController
 
   def update
     group_params = params[:group] || {}
+    group_params[:members] ||= []
     @group = Group.new group_params
     @group.members = group_params[:members_string].split(",").collect {|cn| cn.strip} unless group_params[:members_string].blank?
     result = @group.save
@@ -110,8 +111,8 @@ class GroupsController < ApplicationController
       flash[:message] = (_("Group <i>%s</i> has been updated.") % h(@group.cn)).html_safe
       respond_to do |format|
         format.html { redirect_to :action => :index }
-        format.xml  { render :show }
-        format.json { render :show }
+        format.xml  { render :xml  => @group, :dasherize => false }
+        format.json { render :json => @group, :dasherize => false }
       end
     else
       Rails.logger.error "Cannot update group '#{@group.cn}' (#{@group.inspect}): #{result}"
@@ -136,7 +137,6 @@ class GroupsController < ApplicationController
    #validate_members( :new ) or return
    #validate_group_type( :new ) or return
     @group = Group.new group_params
-    logger.error @group.inspect
     @group.members = group_params[:members_string].split(",").collect {|cn| cn.strip} unless group_params[:members_string].blank?
     result = @group.save
     Rails.logger.error "Cannot create group '#{@group.cn}': #{result}" unless result.blank?
@@ -152,13 +152,13 @@ class GroupsController < ApplicationController
       format.xml  { unless result.blank?
                       render ErrorResult.error(404, 2, "Group create error:'"+result+"'")
                     else
-                      render :show
+                      render :nothing => true, :status => 201
                     end
                   }
       format.json { unless result.blank?
                       render ErrorResult.error(404, 2, "Group create error:'"+result+"'")
                     else
-                      render :show
+                      render :nothing => true, :status => 201
                     end
                   }
     end
@@ -190,13 +190,13 @@ class GroupsController < ApplicationController
       format.xml  { if result.present?
                       render ErrorResult.error(404, 2, "Group destroy error:'"+result+"'")
                     else
-                      render :show
+                      render :nothing => true, :status => 204
                     end
                   }
       format.json { if result.present?
                       render ErrorResult.error(404, 2, "Group destroy error:'"+result+"'")
                     else
-                      render :show
+                      render :nothing => true, :status => 204
                     end
                   }
     end
