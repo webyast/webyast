@@ -196,12 +196,8 @@ ATTR_ACCESSIBLE = [:cn, :uid, :uid_number, :gid_number, :grouplist, :groupname,
   def retrieve_data
     data = { }
     if self.respond_to?(:grouplist)
-	attr = self.grouplist
-	groups	= {}
-	attr.keys.each do |cn|
-	  groups[cn]	= ["i",1]
-	end
-	data.store("grouplist", ["a{sv}",groups])
+      groups = grouplist.inject({}) { |grouplist,group| grouplist.update group => ['i', 1] }
+      data.store("grouplist", ["a{sv}",groups])
     end
     [ :cn, :uid, :uid_number, :gid_number, :groupname, :home_directory, :login_shell, :user_password, :addit_data, :type ].each do |attr_name|
       if self.respond_to?(attr_name)
@@ -217,7 +213,9 @@ ATTR_ACCESSIBLE = [:cn, :uid, :uid_number, :gid_number, :grouplist, :groupname,
     config = {}
     user = User.new
     user.load_attributes(attrs)
-    user.grouplist = attrs[:grp_string].split(',').inject({}) { |grouplist,group| grouplist.update group => '1' }
+    if attrs[:grp_string]
+      user.grouplist = attrs[:grp_string].split(',').inject({}) { |grouplist,group| grouplist.update group => '1' }
+    end
     data = user.retrieve_data
     config.store("type", [ "s", "local" ])
     data.store("uid", [ "s", user.uid])
@@ -225,7 +223,7 @@ ATTR_ACCESSIBLE = [:cn, :uid, :uid_number, :gid_number, :grouplist, :groupname,
     ret = YastService.Call("YaPI::USERS::UserAdd", config, data)
 
     Rails.logger.debug "Command returns: #{ret.inspect}"
-    raise ret if not ret.blank?
+    raise InvalidParameters.new ret if not ret.blank?
     user
   end
 

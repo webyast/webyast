@@ -22,6 +22,17 @@
 include ApplicationHelper
 
 class UsersController < ApplicationController
+  rescue_from InvalidParameters do |error|
+    respond_to do |format|
+      format.html do
+        flash[:error] = error.message
+        redirect_to :index
+      end
+
+      format.xml { render :xml => error }
+      format.json { render :xml => error }
+    end
+  end
 
   private
 
@@ -218,7 +229,7 @@ class UsersController < ApplicationController
       return
     end
     roles = user_params[:roles_string] || ''
-    if User.find(user_params[:id])
+    if User.find(user_params[:uid])
       problem :client_error, 409, _("User '#{user_params[:id]}' already exists")
       return
     end
@@ -234,9 +245,6 @@ class UsersController < ApplicationController
         redirect_to :action => "index", :controller=>'users'
       end
     end
-  rescue => e
-    Rails.logger.error e.message
-    problem :server_error, 500, e.message
   end
 
   # PUT /users/:user_id

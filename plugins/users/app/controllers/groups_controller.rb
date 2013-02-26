@@ -136,6 +136,7 @@ class GroupsController < ApplicationController
    #validate_members( :new ) or return
    #validate_group_type( :new ) or return
     @group = Group.new group_params
+    logger.error @group.inspect
     @group.members = group_params[:members_string].split(",").collect {|cn| cn.strip} unless group_params[:members_string].blank?
     result = @group.save
     Rails.logger.error "Cannot create group '#{@group.cn}': #{result}" unless result.blank?
