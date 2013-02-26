@@ -1,0 +1,138 @@
+= YaST REST Service Documentation
+
+== Users and Groups Management
+
+  Only authenticated users are allowed to access the API. Authentication is done
+  by sending a Basic HTTP Authorisation header.
+
+  The Users WebYaST module allows you to manage local non-system users.
+  You can view the list of users, edit them, or add new users. 
+
+== Overview
+
+  User and group management
+
+== PolicyKit Access Rights
+
+  The following PolicyKit permissions are defined:
+
+  org.opensuse.yast.modules.yapi.users
+
+  org.opensuse.yast.modules.yapi.groups
+
+== Users
+
+  View a single or several users, update, create or delete a specific user
+
+GET /users
+
+  Get the list of all users
+
+  CURL example:
+
+  curl -u &lt;user&gt; https://&lt;hostname&gt;:4984/users.xml
+
+XmlResult: users_get
+
+POST /users
+
+  Create a new user
+
+  CURL example:
+
+  curl -u &lt;user&gt; -X POST --data @user_post_request.xml -H "Content-Type: text/xml" https://&lt;hostname&gt;:4984/users.xml
+
+
+XmlBody: user_post_request
+XmlResult: user_post_response
+
+GET /users/<user_name>
+
+  View details about a specific user
+
+  CURL example:
+
+  curl -u &lt;user&gt; https://&lt;hostname&gt;:4984/users/&lt;user_name&lt;.xml
+
+
+XmlResult: user_get
+
+PUT /users/<user_name>
+
+  Update attributes of a user. If attributes 'groupname' or 'grouplist' are not provided they are set to their default values.
+
+  CURL example:
+
+  curl -u &lt;user&gt; -X PUT --data @user_put_request.xml -H "Content-Type: text/xml" https://&lt;hostname&gt;:4984/users/&lt;user_name&lt;.xml
+
+
+XmlBody: user_put_request
+XmlResult: user_put_response
+
+DELETE /users/<user_name>
+
+  Delete the user.
+
+  CURL example:
+
+  curl -u &lt;user&gt; -X DELETE https://&lt;hostname&gt;:4984/users/&lt;user_name&lt;.xml
+
+
+== Groups
+
+  View a single or several groups, update, create or delete a specific group
+
+GET /groups
+
+  Get the list of all groups
+
+  CURL example:
+
+  curl -u &lt;user&gt; https://&lt;hostname&gt;:4984/groups.xml
+
+XmlResult: groups_get
+
+POST /groups
+
+  Create a new group. If adding members to that group, those must already exists. Two types of groups can
+  be created: system and local. If created successfuly, code 201 is returned.
+
+  CURL example:
+
+  curl -u &lt;user&gt; -X POST --data @group_post_request.xml -H "Content-Type: text/xml" https://&lt;hostname&gt;:4984/groups.xml
+
+
+XmlBody: group_post_request
+
+GET /groups/<group_name>
+
+  View details about a specific group
+
+  CURL example:
+
+  curl -u &lt;user&gt; https://&lt;hostname&gt;:4984/groups/&lt;group_name&lt;.xml
+
+
+XmlResult: group_get
+
+PUT /groups/<group_name>
+
+  Update attributes of a group.
+
+  CURL example:
+
+  curl -u &lt;user&gt; -X PUT --data @group_put_request.xml -H "Content-Type: text/xml" https://&lt;hostname&gt;:4984/groups/&lt;group_name&lt;.xml
+
+
+XmlBody: group_put_request
+XmlResult: group_put_response
+
+DELETE /groups/<group_name>
+
+  Delete a group. The group must not have any members, otherwise an error will be returned.
+
+  CURL example:
+
+  curl -u &lt;user&gt; -X DELETE https://&lt;hostname&gt;:4984/groups/&lt;group_name&lt;.xml
+
+

@@ -22,6 +22,17 @@
 include ApplicationHelper
 
 class UsersController < ApplicationController
+  rescue_from InvalidParameters do |error|
+    respond_to do |format|
+      format.html do
+        flash[:error] = error.message
+        redirect_to :action => :index
+      end
+
+      format.xml { render :xml => error }
+      format.json { render :xml => error }
+    end
+  end
 
   private
 
@@ -218,8 +229,8 @@ class UsersController < ApplicationController
       return
     end
     roles = user_params[:roles_string] || ''
-    if User.find(user_params[:id])
-      problem :client_error, 409, _("User '#{user_params[:id]}' already exists")
+    if User.find(user_params[:uid])
+      problem :client_error, 409, _("User '#{user_params[:uid]}' already exists")
       return
     end
     @user = User.create user_params
@@ -234,9 +245,6 @@ class UsersController < ApplicationController
         redirect_to :action => "index", :controller=>'users'
       end
     end
-  rescue => e
-    Rails.logger.error e.message
-    problem :server_error, 500, e.message
   end
 
   # PUT /users/:user_id
@@ -254,7 +262,8 @@ class UsersController < ApplicationController
     save_roles @user.id, roles
     @user.load_attributes(user_params)
     @user.type = "local"
-    @user.grouplist = {}
+    group_list = user_params[:grouplist] || []
+    @user.grouplist = group_list.inject({}) {|groups,group| groups.update group => 1 }
     user_params[:grp_string].split(",").each do |groupname|
       @user.grouplist[groupname.strip] = "1"
     end unless user_params[:grp_string].blank?
@@ -268,9 +277,6 @@ class UsersController < ApplicationController
         redirect_to :action => "index"
       end
     end
-  rescue => error
-    Rails.logger.error error.message
-    problem :server_error, 500, error.message
   end
 
   # DELETE /users/:user_id
