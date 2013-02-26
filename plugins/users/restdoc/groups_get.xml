@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<groups type="array">
+  <group>
+    <old_cn>audio</old_cn>
+    <gid type="integer">17</gid>
+    <members type="array"/>
+    <cn>audio</cn>
+    <default_members type="array"/>
+    <group_type>system</group_type>
+  </group>
+  <group>
+    <old_cn>bin</old_cn>
+    <gid type="integer">1</gid>
+    <members_string>daemon</members_string>
+    <members type="array">
+      <member>daemon</member>
+    </members>
+    <cn>bin</cn>
+    <default_members type="array">
+      <default_member>bin</default_member>
+    </default_members>
+    <group_type>system</group_type>
+  </group>
+  <group>
+    <old_cn>hollywood</old_cn>
+    <gid type="integer">1000</gid>
+    <members_string>jbond</members_string>
+    <members type="array">
+      <member>jbond</member>
+    </members>
+    <cn>hollywood</cn>
+    <default_members type="array"/>
+    <group_type>local</group_type>
+  </group>
+</groups>
+

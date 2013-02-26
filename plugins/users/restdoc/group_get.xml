@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<group>
+  <old_cn>hollywood</old_cn>
+  <gid type="integer">1000</gid>
+  <members_string>jbond</members_string>
+  <members type="array">
+    <member>jbond</member>
+  </members>
+  <cn>hollywood</cn>
+  <default_members type="array"/>
+  <group_type>local</group_type>
+</group>

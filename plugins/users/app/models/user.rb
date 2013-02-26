@@ -195,14 +195,7 @@ ATTR_ACCESSIBLE = [:cn, :uid, :uid_number, :gid_number, :grouplist, :groupname,
   # hash with camel-cased values
   def retrieve_data
     data = { }
-    if self.respond_to?(:grouplist)
-	attr = self.grouplist
-	groups	= {}
-	attr.keys.each do |cn|
-	  groups[cn]	= ["i",1]
-	end
-	data.store("grouplist", ["a{sv}",groups])
-    end
+    data["grouplist"] =  ["a{sv}", grouplist]
     [ :cn, :uid, :uid_number, :gid_number, :groupname, :home_directory, :login_shell, :user_password, :addit_data, :type ].each do |attr_name|
       if self.respond_to?(attr_name)
         attr = self.send(attr_name)
@@ -217,23 +210,22 @@ ATTR_ACCESSIBLE = [:cn, :uid, :uid_number, :gid_number, :grouplist, :groupname,
     config = {}
     user = User.new
     user.load_attributes(attrs)
-    user.grouplist = {}
-    unless user.grp_string.blank?
-       user.grp_string.split(",").each do |groupname|
-	  group = { "cn" => groupname.strip }
-	  user.grouplist.push group
-       end
+    if attrs[:grp_string]
+      groups = attrs[:grp_string].split(',')
+    elsif attrs[:grouplist]
+      groups = attrs[:grouplist]
+    else
+      groups = []
     end
-
+    user.grouplist = groups.inject({}) { |grouplist,group| grouplist.update group => '1' }
     data = user.retrieve_data
-
     config.store("type", [ "s", "local" ])
     data.store("uid", [ "s", user.uid])
 
     ret = YastService.Call("YaPI::USERS::UserAdd", config, data)
 
     Rails.logger.debug "Command returns: #{ret.inspect}"
-    raise ret if not ret.blank?
+    raise InvalidParameters.new ret if not ret.blank?
     user
   end
 

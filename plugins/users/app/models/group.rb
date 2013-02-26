@@ -36,7 +36,7 @@ class Group < BaseModel::Base
   validates_inclusion_of :group_type, :in => ["system","local"], :message=>"valid values are 'local' and 'system'"
   validates_format_of    :cn, :with => /[a-z]+/
   validates_format_of    :old_cn, :with => /[a-z]+/
-  validates_numericality_of :gid, :only_integer=>true,
+  validates_numericality_of :gid, :only_integer=>true, :allow_nil => true,
     :greater_than_or_equal_to => 0, :less_than_or_equal_to => 65536 # cat /proc/sys/kernel/ngroups_max
 
   def members
