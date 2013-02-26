@@ -195,10 +195,7 @@ ATTR_ACCESSIBLE = [:cn, :uid, :uid_number, :gid_number, :grouplist, :groupname,
   # hash with camel-cased values
   def retrieve_data
     data = { }
-    if self.respond_to?(:grouplist)
-      groups = grouplist.inject({}) { |grouplist,group| grouplist.update group => ['i', 1] }
-      data.store("grouplist", ["a{sv}",groups])
-    end
+    data.store("grouplist", ["a{sv}",grouplist])
     [ :cn, :uid, :uid_number, :gid_number, :groupname, :home_directory, :login_shell, :user_password, :addit_data, :type ].each do |attr_name|
       if self.respond_to?(attr_name)
         attr = self.send(attr_name)

@@ -277,9 +277,6 @@ class UsersController < ApplicationController
         redirect_to :action => "index"
       end
     end
-  rescue => error
-    Rails.logger.error error.message
-    problem :server_error, 500, error.message
   end
 
   # DELETE /users/:user_id
