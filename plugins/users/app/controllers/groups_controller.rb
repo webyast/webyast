@@ -152,13 +152,13 @@ class GroupsController < ApplicationController
       format.xml  { unless result.blank?
                       render ErrorResult.error(404, 2, "Group create error:'"+result+"'")
                     else
-                      render :nothing => true, :status => 201
+                      head :created
                     end
                   }
       format.json { unless result.blank?
                       render ErrorResult.error(404, 2, "Group create error:'"+result+"'")
                     else
-                      render :nothing => true, :status => 201
+                      head :created
                     end
                   }
     end
