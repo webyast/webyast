@@ -163,7 +163,7 @@ public
     ret = YastService.Call("YaPI::USERS::UserModify", config, data)
 
     Rails.logger.debug "Command returns: #{ret.inspect}"
-    raise ret if not ret.blank?
+    raise InvalidParameters.new ret unless ret.blank?
     true
   end
 

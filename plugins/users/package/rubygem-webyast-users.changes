@@ -1,4 +1,11 @@
 -------------------------------------------------------------------
+Tue Feb 26 17:00:24 UTC 2013 - vmoravec@suse.com
+
+- catch error in User model
+- typos in restdoc
+- 0.3.12
+
+-------------------------------------------------------------------
 Tue Feb 26 15:23:29 UTC 2013 - vmoravec@suse.com
 
 - add rake task for restdoc
