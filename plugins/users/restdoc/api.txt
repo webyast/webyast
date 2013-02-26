@@ -52,7 +52,7 @@ GET /users/<user_name>
 
   CURL example:
 
-  curl -u &lt;user&gt; https://&lt;hostname&gt;:4984/users/user_name.xml
+  curl -u &lt;user&gt; https://&lt;hostname&gt;:4984/users/&lt;user_name&lt;.xml
 
 
 XmlResult: user_get
@@ -63,7 +63,7 @@ PUT /users/<user_name>
 
   CURL example:
 
-  curl -u &lt;user&gt; -X PUT --data @user_put_request.xml -H "Content-Type: text/xml" https://&lt;hostname&gt;:4984/users/user_name.xml
+  curl -u &lt;user&gt; -X PUT --data @user_put_request.xml -H "Content-Type: text/xml" https://&lt;hostname&gt;:4984/users/&lt;user_name&lt;.xml
 
 
 XmlBody: user_put_request
@@ -75,7 +75,7 @@ DELETE /users/<user_name>
 
   CURL example:
 
-  curl -u &lt;user&gt; -X DELETE https://&lt;hostname&gt;:4984/users/user_name.xml
+  curl -u &lt;user&gt; -X DELETE https://&lt;hostname&gt;:4984/users/&lt;user_name&lt;.xml
 
 
 == Groups
@@ -110,7 +110,7 @@ GET /groups/<group_name>
 
   CURL example:
 
-  curl -u &lt;user&gt; https://&lt;hostname&gt;:4984/groups/group_name.xml
+  curl -u &lt;user&gt; https://&lt;hostname&gt;:4984/groups/&lt;group_name&lt;.xml
 
 
 XmlResult: group_get
@@ -121,7 +121,7 @@ PUT /groups/<group_name>
 
   CURL example:
 
-  curl -u &lt;user&gt; -X PUT --data @group_put_request.xml -H "Content-Type: text/xml" https://&lt;hostname&gt;:4984/groups/group_name.xml
+  curl -u &lt;user&gt; -X PUT --data @group_put_request.xml -H "Content-Type: text/xml" https://&lt;hostname&gt;:4984/groups/&lt;group_name&lt;.xml
 
 
 XmlBody: group_put_request
@@ -133,6 +133,6 @@ DELETE /groups/<group_name>
 
   CURL example:
 
-  curl -u &lt;user&gt; -X DELETE https://&lt;hostname&gt;:4984/groups/group_name.xml
+  curl -u &lt;user&gt; -X DELETE https://&lt;hostname&gt;:4984/groups/&lt;group_name&lt;.xml
 
 
