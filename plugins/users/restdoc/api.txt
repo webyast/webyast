@@ -78,5 +78,61 @@ DELETE /users/<user_name>
   curl -u &lt;user&gt; -X DELETE https://&lt;hostname&gt;:4984/users/user_name.xml
 
 
+== Groups
+
+  View a single or several groups, update, create or delete a specific group
+
+GET /groups
+
+  Get the list of all groups
+
+  CURL example:
+
+  curl -u &lt;user&gt; https://&lt;hostname&gt;:4984/groups.xml
+
+XmlResult: groups_get
+
+POST /groups
+
+  Create a new group. If adding members to that group, those must already exists. Two types of groups can
+  be created: system and local. If created successfuly, code 201 is returned.
+
+  CURL example:
+
+  curl -u &lt;user&gt; -X POST --data @group_post_request.xml -H "Content-Type: text/xml" https://&lt;hostname&gt;:4984/groups.xml
+
+
+XmlBody: group_post_request
+
+GET /groups/<group_name>
+
+  View details about a specific group
+
+  CURL example:
+
+  curl -u &lt;user&gt; https://&lt;hostname&gt;:4984/groups/group_name.xml
+
+
+XmlResult: group_get
+
+PUT /groups/<group_name>
+
+  Update attributes of a group.
+
+  CURL example:
+
+  curl -u &lt;user&gt; -X PUT --data @group_put_request.xml -H "Content-Type: text/xml" https://&lt;hostname&gt;:4984/groups/group_name.xml
+
+
+XmlBody: group_put_request
+XmlResult: group_put_response
+
+DELETE /groups/<group_name>
+
+  Delete a group. The group must not have any members, otherwise an error will be returned.
+
+  CURL example:
+
+  curl -u &lt;user&gt; -X DELETE https://&lt;hostname&gt;:4984/groups/group_name.xml
 
 
