@@ -111,8 +111,8 @@ class GroupsController < ApplicationController
       flash[:message] = (_("Group <i>%s</i> has been updated.") % h(@group.cn)).html_safe
       respond_to do |format|
         format.html { redirect_to :action => :index }
-        format.xml  { render :xml  => @group, :dasherize => false }
-        format.json { render :json => @group, :dasherize => false }
+        format.xml  { render :xml  => @group }
+        format.json { render :json => @group }
       end
     else
       Rails.logger.error "Cannot update group '#{@group.cn}' (#{@group.inspect}): #{result}"
