@@ -90,60 +90,9 @@ class NetworkController < ApplicationController
   end
 
   def create
-    authorize! :write, Network
-
-    # bnc#790219 All bonded (selected) slaves need to be configured with bootproto=none
-    # use try, because create is also used for other types, that doesn't have parameter bond_slaves
-    params["bond_slaves"].try(:each) do |slave, selected|
-      next if selected != "1"
-
-      slave_ifc = Interface.find slave
-      unless slave_ifc
-        Rails.logger.error "Cannot find slave interface #{slave}"
-        flash[:error] = _("Cannot find interface %s to be bonded.") % slave
-        redirect_to :controller => "network", :action => "index" and return
-      end
-      Rails.logger.info "Found slave #{slave_ifc.inspect}"
-
-      # Already correctly configured
-      next if slave_ifc.bootproto == "none"
-
-      # Configured but incorrectly for bonding
-      if slave_ifc.bootproto
-        Rails.logger.error "User tries to bond configured interface #{slave} with config mode #{slave_ifc.bootproto}"
-        flash[:error] = _("Cannot bond interface %s. Its configuration mode must be %s instead of %s.") % [slave, 'NONE', slave_ifc.bootproto.upcase]
-        redirect_to :controller => "network", :action => "index" and return
-      end
-
-      Rails.logger.info "Configuring interface #{slave}"
-      # Only network cards can be without any configuration
-      slave_ifc.type = "eth"
-      slave_ifc.bootproto = "none"
-      unless slave_ifc.save
-        Rails.logger.error "Cannot save #{slave_ifc.inspect} configuration"
-        flash[:error] = _("Cannot save %s configuration. Please, set it up with configuration mode %s before bonding.") % [slave, 'NONE']
-        redirect_to :controller => "network", :action => "index" and return
-      end
-    end
-
-    hash = {}
-    hash["type"] = params[:type] if  params[:type]
-    hash["bootproto"] = params[:bootproto]
-    hash["ipaddr"] = params[:ipaddr] || ""
-    hash["vlan_id"] = params[:vlan_id] if  params[:vlan_id]
-    hash["vlan_etherdevice"] = params[:vlan_etherdevice] if  params[:vlan_etherdevice]
-    hash["bridge_ports"] = params["bridge_ports"].map{|k,v| k if v=="1"}.compact.join(' ').to_s || "" if params["bridge_ports"]
-    hash["bond_slaves"] = params["bond_slaves"].map{|k,v| k if v=="1"}.compact.join(' ').to_s if params["bond_slaves"]
-
-    if params["bond_mode"] && params["bond_miimon"]
-      bond_option = "#{params["bond_mode"]} #{params["bond_miimon"].gsub(/ /,'')}"
-      hash["bond_option"] = bond_option
-    end
-    
-    ifc = Interface.new(hash, "#{params["type"]}#{params["number"]}")
-    ifc.save
-
-    redirect_to :controller => "network", :action => "index"
+    # create is handled via update
+    @create = true
+    update
   end
 
   # PUT /users/1
@@ -195,8 +144,20 @@ class NetworkController < ApplicationController
 
 
     ### INTERFACE ###
-    ifc = Interface.find params["interface"]
-    ifc.type = params["type"]
+
+    # create Interface object (depending on update/create request)
+    if @create
+      data = {}
+      data["type"] = params[:type] if params[:type]
+
+      ifc = Interface.new(data, "#{params["type"]}#{params["number"]}")
+
+      # make sure the new interface is saved
+      dirty_ifc = true
+    else
+      ifc = Interface.find params["interface"]
+      ifc.type = params["type"]
+    end
 
     dirty_ifc = true unless (ifc.bootproto == params["bootproto"])
 
@@ -223,6 +184,40 @@ class NetworkController < ApplicationController
     end
     
     if params["bond_slaves"] && ifc.bond_slaves != params["bond_slaves"]
+      # bnc#790219 All bonded (selected) slaves need to be configured with bootproto=none
+      # use try, because create is also used for other types, that doesn't have parameter bond_slaves
+      params["bond_slaves"].each do |slave, selected|
+        next if selected != "1"
+
+        slave_ifc = Interface.find slave
+        unless slave_ifc
+          Rails.logger.error "Cannot find slave interface #{slave}"
+          flash[:error] = _("Cannot find interface %s to be bonded.") % slave
+          redirect_to :controller => "network", :action => "index" and return
+        end
+        Rails.logger.info "Found slave #{slave_ifc.inspect}"
+
+        # Already correctly configured
+        next if slave_ifc.bootproto == "none"
+
+        # Configured but incorrectly for bonding
+        if slave_ifc.bootproto
+          Rails.logger.error "User tries to bond configured interface #{slave} with config mode #{slave_ifc.bootproto}"
+          flash[:error] = _("Cannot bond interface %s. Its configuration mode must be %s instead of %s.") % [slave, 'NONE', slave_ifc.bootproto.upcase]
+          redirect_to :controller => "network", :action => "index" and return
+        end
+
+        Rails.logger.info "Configuring interface #{slave}"
+        # Only network cards can be without any configuration
+        slave_ifc.type = "eth"
+        slave_ifc.bootproto = "none"
+        unless slave_ifc.save
+          Rails.logger.error "Cannot save #{slave_ifc.inspect} configuration"
+          flash[:error] = _("Cannot save %s configuration. Please, set it up with configuration mode %s before bonding.") % [slave, 'NONE']
+          redirect_to :controller => "network", :action => "index" and return
+        end
+      end
+
       ifc.bond_slaves = params["bond_slaves"].map{|k,v| k if v=="1"}.compact.join(' ').to_s
       dirty_ifc = true
     end
@@ -235,9 +230,6 @@ class NetworkController < ApplicationController
        end
     end
     
-    if params["bond_mode"] && ifc.bond_option != params["bond_mode"]
-       ifc.bond_option
-    end
    ### END INTERFACE ###
 
 
