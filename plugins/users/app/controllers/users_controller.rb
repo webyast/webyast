@@ -26,7 +26,7 @@ class UsersController < ApplicationController
     respond_to do |format|
       format.html do
         flash[:error] = error.message
-        redirect_to :index
+        redirect_to :action => :index
       end
 
       format.xml { render :xml => error }
@@ -230,7 +230,7 @@ class UsersController < ApplicationController
     end
     roles = user_params[:roles_string] || ''
     if User.find(user_params[:uid])
-      problem :client_error, 409, _("User '#{user_params[:id]}' already exists")
+      problem :client_error, 409, _("User '#{user_params[:uid]}' already exists")
       return
     end
     @user = User.create user_params
