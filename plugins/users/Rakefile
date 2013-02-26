@@ -51,3 +51,14 @@ task :build => [:"gettext:pack", :clean_gems]
 create_online_help_task "Users"
 create_online_help_task "Groups"
 
+task :restdoc_dir do
+  restdoc_target = "public/restdoc/users"
+  if !File.exist? restdoc_target
+    puts "Creating directory #{restdoc_target}"
+    FileUtils.mkdir_p restdoc_target
+  end
+end
+
+task :restdoc => :restdoc_dir
+
+
