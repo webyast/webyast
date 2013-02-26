@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Tue Feb 26 13:27:43 UTC 2013 - vmoravec@suse.com
+
+- add restdoc and rest api fixes
+- 0.3.10
+
+-------------------------------------------------------------------
 Wed Jan 16 14:28:48 UTC 2013 - lslezak@suse.cz
 
 - fix updating user roles (bnc#789731)
