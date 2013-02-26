@@ -149,7 +149,7 @@ class UsersController < ApplicationController
       return
     end
     respond_to do |format|
-      format.html { redirect_to :index    }
+      format.html { redirect_to :action => :index    }
       format.xml  { render  :xml => @user }
       format.json { render :json => @user }
     end
