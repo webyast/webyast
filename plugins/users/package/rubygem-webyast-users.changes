@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Tue Feb 26 15:23:29 UTC 2013 - vmoravec@suse.com
+
+- add rake task for restdoc
+- 0.3.11
+
+-------------------------------------------------------------------
 Tue Feb 26 13:27:43 UTC 2013 - vmoravec@suse.com
 
 - add restdoc and rest api fixes
