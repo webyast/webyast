@@ -46,7 +46,7 @@ class UsersController < ApplicationController
 
   def save_roles (userid,roles_string)
     user_roles = roles_string.split(",")
-    Role.find(:all).each do |role|
+    ::Role.find(:all).each do |role|
       if role.users.include?(userid) && !user_roles.include?(role.name)
         role.users.delete(userid)
         role.save
