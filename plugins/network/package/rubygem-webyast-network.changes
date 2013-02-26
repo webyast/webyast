@@ -1,7 +1,7 @@
 -------------------------------------------------------------------
 Tue Feb 26 08:10:39 UTC 2013 - lslezak@suse.cz
 
-- unified create/update behavior, use all form value when creating
+- unified create/update behavior, use all form values when creating
   a new interface (bnc#788063)
 - 0.3.14
 
