@@ -1,4 +1,9 @@
 -------------------------------------------------------------------
+Wed Feb 27 09:00:42 UTC 2013 - lslezak@suse.cz
+
+- VLANs cannot be added to bond interface (bnc#790219#c22)
+
+-------------------------------------------------------------------
 Tue Feb 26 08:10:39 UTC 2013 - lslezak@suse.cz
 
 - unified create/update behavior, use all form values when creating
