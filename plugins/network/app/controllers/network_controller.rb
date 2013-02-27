@@ -169,6 +169,21 @@ class NetworkController < ApplicationController
     end
 
     if params[:vlan_id] && ifc.vlan_id != params[:vlan_id]
+      ifcs = Interface.find :all
+      used_vlan_id = ifcs.find {|k, v| k.match(/^vlan/) && v.vlan_id == params[:vlan_id]}
+
+      if used_vlan_id.present?
+        flash[:error] = _("VLAN ID %s is already used by interface %s") % [params[:vlan_id], used_vlan_id.first]
+
+        if @create
+          redirect_to :action => :new, :type => "vlan"
+        else
+          redirect_to :action => :edit, :id => params["interface"]
+        end
+
+        return
+      end
+
       ifc.vlan_id = params[:vlan_id]
       dirty_ifc = true
     end
