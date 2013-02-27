@@ -27,8 +27,8 @@ class NetworkController < ApplicationController
     authorize! :read, Network
 
     @ifcs = Interface.find(:all)
-    @physical = @ifcs.select{|k, i| i if k.match(/eth|wlan/)}
-    @virtual = @ifcs.select{|k, i| i unless k.match(/eth|wlan/)}
+    @physical = @ifcs.select{|k, i| i if k.match(/eth|wlan|ath/)}
+    @virtual = @ifcs.select{|k, i| i unless k.match(/eth|wlan|ath/)}
 
     respond_to do |format|
       format.html # index.html.erb
@@ -52,7 +52,7 @@ class NetworkController < ApplicationController
     @type = params[:id][0..(params[:id].size-2)] || "eth"
     occupied_numbers =  @ifcs.select{|id, iface| id if id.match(@type)}.map {|id,iface| id.sub(/\A\D+(\d+)\Z/,'\\1').to_i}
     @available_numbers = (0..9).to_a - occupied_numbers
-    @physical = @ifcs.select{|k, i| i if k.match(/eth|wlan/)}
+    @physical = @ifcs.select{|k, i| i if k.match(/eth|wlan|ath/)}
 
     @dhcp_hostname_enabled = @hostname.dhcp_hostname_enabled
 
