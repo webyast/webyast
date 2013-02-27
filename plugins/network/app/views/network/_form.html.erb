@@ -115,7 +115,7 @@
           <div class="checkbox_container">
             <% @ifcs.each do |id, iface| %>
               <%# Offering only interfaces that are not configured or have empty configuration %>
-              <% next if id.match("bond") || (iface.bootproto && iface.bootproto!="none") %>
+              <% next if id.match("bond") || id.match("vlan") || (iface.bootproto && iface.bootproto!="none") %>
               <div>
                 <%= check_box :bond_slaves, id, :checked => (@ifc.bond_slaves.is_a?(String) ? @ifc.bond_slaves.split(" ") : @ifc.bond_slaves).include?(id) %>
                 <%= id %> <%= "- #{iface.vendor}" if iface.vendor %>

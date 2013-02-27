@@ -27,8 +27,8 @@ class NetworkController < ApplicationController
     authorize! :read, Network
 
     @ifcs = Interface.find(:all)
-    @physical = @ifcs.select{|k, i| i if k.match(/eth|wlan/)}
-    @virtual = @ifcs.select{|k, i| i unless k.match(/eth|wlan/)}
+    @physical = @ifcs.select{|k, i| i if k.match(/eth|wlan|ath/)}
+    @virtual = @ifcs.select{|k, i| i unless k.match(/eth|wlan|ath/)}
 
     respond_to do |format|
       format.html # index.html.erb
@@ -52,7 +52,7 @@ class NetworkController < ApplicationController
     @type = params[:id][0..(params[:id].size-2)] || "eth"
     occupied_numbers =  @ifcs.select{|id, iface| id if id.match(@type)}.map {|id,iface| id.sub(/\A\D+(\d+)\Z/,'\\1').to_i}
     @available_numbers = (0..9).to_a - occupied_numbers
-    @physical = @ifcs.select{|k, i| i if k.match(/eth|wlan/)}
+    @physical = @ifcs.select{|k, i| i if k.match(/eth|wlan|ath/)}
 
     @dhcp_hostname_enabled = @hostname.dhcp_hostname_enabled
 
@@ -169,6 +169,21 @@ class NetworkController < ApplicationController
     end
 
     if params[:vlan_id] && ifc.vlan_id != params[:vlan_id]
+      ifcs = Interface.find :all
+      used_vlan_id = ifcs.find {|k, v| k.begins_with?("vlan") && v.vlan_id == params[:vlan_id]}
+
+      if used_vlan_id.present?
+        flash[:error] = _("VLAN ID %s is already used by interface %s") % [params[:vlan_id], used_vlan_id.first]
+
+        if @create
+          redirect_to :action => :new, :type => "vlan"
+        else
+          redirect_to :action => :edit, :id => params["interface"]
+        end
+
+        return
+      end
+
       ifc.vlan_id = params[:vlan_id]
       dirty_ifc = true
     end
@@ -220,6 +235,18 @@ class NetworkController < ApplicationController
 
       ifc.bond_slaves = params["bond_slaves"].map{|k,v| k if v=="1"}.compact.join(' ').to_s
       dirty_ifc = true
+    end
+
+    if ifc.type == "bond" && ifc.bond_slaves.blank?
+      flash[:error] = _("Bond interface requires at least one slave interface.")
+
+      if @create
+        redirect_to :action => :new, :type => "bond"
+      else
+        redirect_to :action => :edit, :id => params["interface"]
+      end
+
+      return
     end
     
     if params["bond_mode"] && params["bond_miimon"]
