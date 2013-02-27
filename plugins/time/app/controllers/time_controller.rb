@@ -90,7 +90,7 @@ class TimeController < ApplicationController
           ntp = Ntp.find
           ntp.actions[:synchronize] = true
           ntp.actions[:synchronize_utc] = system_time.utcstatus
-          ntp.actions[:ntp_server] = params[:ntp_server]
+          ntp.actions[:ntp_server] = params[:systemtime][:ntp_server]
           ntp.update
           Service.new('ntp').save(:execute=>'start') if service_available
         end
