@@ -1,7 +1,12 @@
 -------------------------------------------------------------------
-Wed Feb 27 09:00:42 UTC 2013 - lslezak@suse.cz
+Wed Feb 27 16:01:03 UTC 2013 - lslezak@suse.cz
 
-- VLANs cannot be added to bond interface (bnc#790219#c22)
+- VLAN cannot be added to bond interface (bnc#790219#c22)
+- check VLAN ID (integer in 0..4094 range) (bnc#790219#c28)
+- check for unique VLAN ID (bnc#790219#c19)
+- bond cannot be empty, at least one slave has to be present
+  (bnc#790219#c37)
+- 0.3.15
 
 -------------------------------------------------------------------
 Tue Feb 26 08:10:39 UTC 2013 - lslezak@suse.cz
