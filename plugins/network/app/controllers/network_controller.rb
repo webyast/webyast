@@ -170,7 +170,7 @@ class NetworkController < ApplicationController
 
     if params[:vlan_id] && ifc.vlan_id != params[:vlan_id]
       ifcs = Interface.find :all
-      used_vlan_id = ifcs.find {|k, v| k.match(/^vlan/) && v.vlan_id == params[:vlan_id]}
+      used_vlan_id = ifcs.find {|k, v| k.begins_with?("vlan") && v.vlan_id == params[:vlan_id]}
 
       if used_vlan_id.present?
         flash[:error] = _("VLAN ID %s is already used by interface %s") % [params[:vlan_id], used_vlan_id.first]
