@@ -221,6 +221,18 @@ class NetworkController < ApplicationController
       ifc.bond_slaves = params["bond_slaves"].map{|k,v| k if v=="1"}.compact.join(' ').to_s
       dirty_ifc = true
     end
+
+    if ifc.type == "bond" && ifc.bond_slaves.blank?
+      flash[:error] = _("Bond interface requires at least one slave interface.")
+
+      if @create
+        redirect_to :action => :new, :type => "bond"
+      else
+        redirect_to :action => :edit, :id => params["interface"]
+      end
+
+      return
+    end
     
     if params["bond_mode"] && params["bond_miimon"]
       bond_option = "#{params["bond_mode"]} #{params["bond_miimon"].gsub(/ /,'')}"
