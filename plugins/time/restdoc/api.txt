@@ -39,7 +39,7 @@ POST /time
   Change the system time configuration manually. Value 'hwclock' is read-only.
   When setting the date and time you need to provide
   the value 'config' in the request parameters with the further details.
-  The field config must have value 'manual'. Time and date details are mandatory.
+  The field 'config' must have value 'manual'. Entries 'time' and 'date' are mandatory.
   The date format must be in the format DD/MM/YYYY.
 
   CURL example - manual time and date configuration:
@@ -54,7 +54,7 @@ POST /time
 
   Change the system time configuration by providing an ntp server. Value 'hwclock' is read-only.
   When setting the date and time you need to provide the value 'config' in the request parameters.
-  The field config must have value 'ntp_sync'.
+  The field 'config' must be set to 'ntp_sync'.
 
   CURL example - ntp configuration:
 
