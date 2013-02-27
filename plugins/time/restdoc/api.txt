@@ -36,21 +36,33 @@ XmlResult: time_get
 
 POST /time
 
-  Change the system time configuration. Value 'hwclock' is read-only.
+  Change the system time configuration manually. Value 'hwclock' is read-only.
   When setting the date and time you need to provide
   the value 'config' in the request parameters with the further details.
-  The field config can have values 'manual' or 'ntp_sync'.
-  You need to supply the time and date details for the former and
-  an ntp server name or address for the latter.
-  The date format must be provided in the format DD/MM/YYYY.
+  The field 'config' must have value 'manual'. Entries 'time' and 'date' are mandatory.
+  The date format must be in the format DD/MM/YYYY.
 
   CURL example - manual time and date configuration:
 
-  curl -u &lt;user&gt; -X POST --data @time_post_request.xml -H "Content-Type: text/xml" https://&lt;hostname&gt;:4984/time.xml
+  curl -u &lt;user&gt; -X POST --data @time_manual_post_request.xml -H "Content-Type: text/xml" https://&lt;hostname&gt;:4984/time.xml
+
+XmlBody: time_manual_post_request
+XmlResult: time_manual_post_response
 
 
-XmlBody: time_post_request
-XmlResult: time_post_response
+POST /time
+
+  Change the system time configuration by providing an ntp server. Value 'hwclock' is read-only.
+  When setting the date and time you need to provide the value 'config' in the request parameters.
+  The field 'config' must be set to 'ntp_sync'.
+
+  CURL example - ntp configuration:
+
+  curl -u &lt;user&gt; -X POST --data @time_ntp_post_request.xml -H "Content-Type: text/xml" https://&lt;hostname&gt;:4984/time.xml
+
+XmlBody: time_ntp_post_request
+XmlResult: time_ntp_post_response
+
 
 GET /time/timezones
 

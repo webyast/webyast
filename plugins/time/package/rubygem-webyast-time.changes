@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Wed Feb 27 12:30:05 UTC 2013 - vmoravec@suse.com
+
+- Update restdocs for ntp server configuration
+- 0.3.12
+
+-------------------------------------------------------------------
 Mon Feb 25 11:30:24 UTC 2013 - jreidinger@suse.com
 
 - fixes to restdoc to contain all necessary info (bnc#805282)

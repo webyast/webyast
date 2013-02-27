@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<systemtime>
+  <region>Europe</region>
+  <timezone>Austria</timezone>
+  <utcstatus type="boolean">false</utcstatus>
+  <date>27/02/2013</date>
+  <time>12:22:02</time>
+  <hwclock type="boolean">true</hwclock>
+</systemtime>
+
