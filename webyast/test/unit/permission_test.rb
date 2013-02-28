@@ -46,6 +46,13 @@ class PermissionTest < ActiveSupport::TestCase
     Permission.stubs(:find).with(:all, {:user_id => @user}).returns(TEST_DATA_ACTIONS)
     Permission.stubs(:find).with("org.opensuse.yast.modules.yapi.patches.read", {:user_id => @user}).returns(PATCHES_READ)
     Permission.stubs(:find).with(:all).returns(TEST_DATA_ACTIONS)
+    File.stubs(:mtime).with('/etc/polkit-1').returns(0)
+    File.stubs(:mtime).with('/var/lib/polkit-1/').returns(0)
+    File.stubs(:mtime).with('/usr/share/polkit-1/').returns(0)
+    File.stubs(:mtime).with('/etc/PolicyKit/PolicyKit.conf').returns(0)
+    File.stubs(:mtime).with('/usr/share/PolicyKit/policy/').returns(0)
+    File.stubs(:mtime).with('/var/lib/PolicyKit/').returns(0)
+    File.stubs(:mtime).with('/var/lib/PolicyKit-public/').returns(0)
   end
 
   def test_find_all
