@@ -192,13 +192,6 @@ rccollectd restart
 %attr(644,root,root) %config /usr/share/%{webyast_polkit_dir}/org.opensuse.yast.modules.logfile.policy
 %dir /etc/webyast/vendor
 %config /etc/webyast/logs.yml
-<<<<<<< HEAD
-# File is created in %post script
-%ghost %config %{webyast_vardir}/status/status_configuration.yaml
-=======
-# File is created in %post script, but doesn't exist in build or install, so cannot be ghost
-# %ghost %config %{webyast_vardir}/status/status_configuration.yaml
->>>>>>> Webyast-1.3
 
 %restart_script_name
 
