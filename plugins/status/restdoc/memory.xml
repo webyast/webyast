@@ -1,13 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <graphs>
    <id>Memory</id>
+   <headline>Memory</headline>
    <y_scale>1048567</y_scale>
    <y_label>MByte</y_label>
+   <y_decimal_places>0</y_decimal_places>
    <single_graphs type="array">
        <single_graph>
+         <headline>Memory consumption</headline>
           <cummulated>true</cummulated>
           <linegraph>false</linegraph>
-          <headline>Memory</headline>
           <lines type="array">
              <line>
                 <metric_id>memory+memory-free</metric_id>

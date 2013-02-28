@@ -53,6 +53,38 @@
       });
 
       $("#mailsetting_password_confirmation").validate({keyup : true});
+
+      // send test email via ajax
+      $("#send_mail").click(function(e) {
+          var $form_data = $("#mailForm").find('input[type=text], input[type=password], select');
+          var test_mail_data = {};
+          //FIXME use $("#mailForm").serialize() to get the form elements
+          $form_data.each(function(index, element) {
+            test_mail_data[element.name] = element.value;
+          });
+          var $mail_waiting = $("#mail_waiting");
+          var $mail_notification = $("#mail_result");
+          $mail_notification.css({color:'black'});
+          $mail_notification.show().html('<%=_("Sending email, please wait..") %>');
+          $mail_waiting.show();
+          $.ajax({
+            type: 'POST',
+            url: 'mailsetting/send_test_mail',
+            dataType: 'json',
+            data: test_mail_data
+            })
+          .success(function(data)  {
+            //FIXME use css class for styling
+            $mail_notification.html(data.message).css({color:'green', display: 'inline-block'});
+            $mail_waiting.hide();
+            })
+          .error(function(response) {
+            //FIXME use css class for styling
+            $mail_notification.html(JSON.parse(response.responseText).message).css({color:'red', display: 'inline-block'});
+            $mail_waiting.hide();
+            });
+        }
+      );
     });
   </script>
 <% end %>
@@ -118,8 +150,10 @@ relay.example.com:26. Use square brackets around the host name to prevent from D
         <div class="row lastrow">
           <label id="mail_test_mail_label"><%=_("Send test mail to")%></label>
           <%= f.text_field :test_mail_address, :disabled => disabled, :class => "email" %>
-          <%= f.submit _("Send Mail"), :name => "send_mail" %>
-          <label for="mail_test_mail_address" generated="true" class="error"></label>
+          <%= submit_tag _("Send email"), :id => "send_mail", :type => :button %>
+          <%= image_tag("working.gif", :id=>:mail_waiting, :alt=>_("Sending email"), :size=>"20x20", :style=>'padding-left: 10px; display: none') %>
+          <span id="mail_result" style="display: none; padding-left: 1em; width: 330px"></span>
+          <label for="mail_test_mail_address" generated="true" class="error"> </label>
         </div>
       </div>
     </fieldset>

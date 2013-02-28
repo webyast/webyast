@@ -177,6 +177,8 @@ class Patch < Resolvable
     update_id = self.resolvable_id
 
     Rails.logger.info("Installing update #{update_id}")
+    # get details of the patch (to store it in the cache)
+    patch = Patch.find(update_id)
     ret, error = Patch.install(update_id)
 
     if error.blank?
@@ -184,8 +186,8 @@ class Patch < Resolvable
       Rails.logger.info "Updating installed cache"
       i = Rails.cache.fetch("patch:installed") || []
       installed = i.dup #cache is frozen
-      self.installed = true
-      installed << self
+      patch.installed = true
+      installed << patch
       Rails.logger.debug "Cached installed patches: #{installed.inspect}"
       Rails.cache.write("patch:installed", installed)
     else

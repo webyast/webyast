@@ -1,0 +1,7 @@
+interface: org.opensuse.yast.modules.yapi.time
+controller: time
+singular: true
+cache:
+  enabled: false
+
+

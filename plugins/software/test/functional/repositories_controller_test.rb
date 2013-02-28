@@ -39,6 +39,10 @@ class RepositoriesControllerTest < ActionController::TestCase
       :enabled => true, :autorefresh => true
     }
   end
+
+  def teardown
+    Mocha::Mockery.instance.stubba.unstub_all
+  end
   
   test "access index" do
     get :index
@@ -113,6 +117,14 @@ class RepositoriesControllerTest < ActionController::TestCase
     assert_response :success
   end
 
+  test "update non-existing" do
+    Repository.stubs(:find).returns([])
+    mime = Mime::XML
+    @request.accept = mime.to_s
+    put :update, :format => :xml, :id => "non-existing", :repository => @repo_opts
+    assert_response :not_found
+  end
+
   test "update - save failed" do
     Repository.any_instance.expects(:update).returns(false)
     mime = Mime::XML
@@ -130,8 +142,8 @@ class RepositoriesControllerTest < ActionController::TestCase
   test "create html" do
     Repository.any_instance.expects(:update).returns(true)
     put :create, :id => "factory-oss", :repository => @repo_opts
-    assert flash[:message] == "Repository 'name' has been updated."
-    assert_response :redirect 
+    assert flash[:message] == "Repository 'name' has been created."
+    assert_response :redirect
   end
 
 

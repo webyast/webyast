@@ -1,4 +1,47 @@
 -------------------------------------------------------------------
+Wed Feb 27 16:01:03 UTC 2013 - lslezak@suse.cz
+
+- VLAN cannot be added to bond interface (bnc#790219#c22)
+- check VLAN ID (integer in 0..4094 range) (bnc#790219#c28)
+- check for unique VLAN ID (bnc#790219#c19)
+- bond cannot be empty, at least one slave has to be present
+  (bnc#790219#c37)
+- 0.3.15
+
+-------------------------------------------------------------------
+Tue Feb 26 08:10:39 UTC 2013 - lslezak@suse.cz
+
+- unified create/update behavior, use all form values when creating
+  a new interface (bnc#788063)
+- 0.3.14
+
+-------------------------------------------------------------------
+Fri Feb 22 11:57:10 UTC 2013 - jreidinger@suse.com
+
+- fix regression caused by last fix
+- 0.3.13
+
+-------------------------------------------------------------------
+Fri Feb 22 08:29:38 UTC 2013 - jreidinger@suse.com
+
+- Fixed creating bond interface (slaves) (BNC#790219) 
+- 0.3.12
+
+-------------------------------------------------------------------
+Tue Feb 19 14:55:11 UTC 2013 - jreidinger@suse.com
+
+- fix disable of dhcp based hostname (BNC#787535#c8)
+- 0.3.11
+
+-------------------------------------------------------------------
+Mon Feb 18 16:03:01 UTC 2013 - jreidinger@suse.com
+
+- fix change hostname xor domain (BNC#787535)
+- fix crash with join/split message (BNC#788911)
+- do not allow to add invalid device to bonding (BNC#790202)
+- 0.3.10 
+
+-------------------------------------------------------------------
 Fri Jan 11 14:38:47 UTC 2013 - lslezak@suse.cz
 
 - updated testsuite

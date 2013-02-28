@@ -1,4 +1,16 @@
 -------------------------------------------------------------------
+Mon Feb 25 13:06:09 UTC 2013 - lslezak@suse.cz
+
+- updated REST API documentation (patch installation) (bnc#790159)
+- 0.3.37
+
+-------------------------------------------------------------------
+Wed Feb 20 11:44:07 UTC 2013 - lslezak@suse.cz
+
+- fixed REST API (bnc#790159)
+- 0.3.36
+
+-------------------------------------------------------------------
 Thu Jan  3 14:57:46 UTC 2013 - lslezak@suse.cz
 
 - fixed "Select All" check box functionality at patch index page

@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<group>
+  <old_cn>hollywood</old_cn>
+  <cn>bollywood</cn>
+  <gid type="integer">1000</gid>
+  <members type="array">
+    <member>jdean</member>
+  </members>
+  <group_type>local</group_type>
+</group>

@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+  <user>
+    <uid>jdean</uid>
+    <cn>James Dean</cn>
+    <uid_number>1077</uid_number>
+    <user_password>windows</user_password>
+    <groupname>users</groupname>
+    <grouplist type="array">
+      <group>hollywood</group>
+    </grouplist>
+</user>

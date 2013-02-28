@@ -17,7 +17,7 @@
 
 
 Name:           rubygem-webyast-status
-Version:        0.3.15
+Version:        0.3.16
 Release:        0
 %define mod_name webyast-status
 %define mod_full_name %{mod_name}-%{version}
@@ -29,6 +29,7 @@ BuildRequires:  rubygems_with_buildroot_patch
 BuildRequires:  rubygem-restility
 BuildRequires:  webyast-base >= 0.3.31
 BuildRequires:  webyast-base-testsuite
+
 PreReq:         webyast-base >= 0.3.31
 
 # /usr/bin/pgrep
@@ -139,16 +140,30 @@ ruby %{_libdir}/ruby/gems/%{rb_ver}/gems/%{mod_full_name}/lib/configcheck.rb
 ruby %{_libdir}/ruby/gems/%{rb_ver}/gems/%{mod_full_name}/lib/update_config.rb
 
 #
-# set "Hostname" to WebYaST and remove already generated old log files
+# set "Hostname" to WebYaST
 #
-sed -i "s/^#Hostname[[:space:]].*/#If you change hostname please delete \/var\/lib\/collectd\/WebYaST\nHostname \"WebYaST\"/" "/etc/collectd.conf"
-rm -rf /var/lib/collectd/*
+grep -q "^Hostname[ \t]*\"WebYaST\"" /etc/collectd.conf
+if [ $? = 1 ] ; then
+  WARNING="# If you change hostname please delete /var/lib/collectd/WebYaST"
+  sed -i "s@^#Hostname[[:space:]].*@$WARNING\nHostname \"WebYaST\"@" /etc/collectd.conf
+
+  # We need to remove old logs because Webyast displays the first found log
+  # which could be accidentally the old (no longer) updated log.
+  #
+  # FIXME: find the latest database in webyast instead of complete removal here
+  #
+  # The removal might accidentaly fail if collectd is running and writes a log during removal,
+  # it would be a good idea to stop it first but unfortunately also stopping sometimes fails
+  # and that would cause build failure during RPM build :-(
+  rm -rf /var/lib/collectd/*
+fi
 
 #
-# enable and restart  collectd if it running
-# 
+# enable and restart collectd
+#
+# FIXME: move collectd handling to webyast initscript or to WebUI
 %{fillup_and_insserv -Y collectd}
-rccollectd try-restart
+rccollectd restart
 
 %restart_webyast
 
@@ -177,8 +192,13 @@ rccollectd try-restart
 %attr(644,root,root) %config /usr/share/%{webyast_polkit_dir}/org.opensuse.yast.modules.logfile.policy
 %dir /etc/webyast/vendor
 %config /etc/webyast/logs.yml
+<<<<<<< HEAD
 # File is created in %post script
 %ghost %config %{webyast_vardir}/status/status_configuration.yaml
+=======
+# File is created in %post script, but doesn't exist in build or install, so cannot be ghost
+# %ghost %config %{webyast_vardir}/status/status_configuration.yaml
+>>>>>>> Webyast-1.3
 
 %restart_script_name
 

@@ -24,17 +24,22 @@ require 'builder'
 class InstallInProgressException < BackendException
   def initialize(count)
     @count = count
+    super "Cannot obtain available patches, installation is in progress. #{@count} patches remain to install."
   end
 
-  def to_xml
-    xml = Builder::XmlMarkup.new({})
+  def to_xml(options = { :indent => 2 })
+    xml = Builder::XmlMarkup.new(options)
     xml.instruct!
 
     xml.error do
       xml.type "PACKAGEKIT_INSTALL"
-      xml.description "Cannot obtain patches, installation in progress. Remain #{@count} packages."
+      xml.description message
       xml.count @count, :type => "integer"
       xml.bug false, :type => "boolean"
     end
+  end
+
+  def to_json
+    { :error => message, :count => @count }.to_json
   end
 end

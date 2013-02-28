@@ -1,4 +1,35 @@
 -------------------------------------------------------------------
+Wed Feb 27 14:01:17 UTC 2013 - vmoravec@suse.com
+
+- Fix wrong parameter key for ntp server config
+- 0.3.13
+
+-------------------------------------------------------------------
+Wed Feb 27 12:30:05 UTC 2013 - vmoravec@suse.com
+
+- Update restdocs for ntp server configuration
+- 0.3.12
+
+-------------------------------------------------------------------
+Mon Feb 25 11:30:24 UTC 2013 - jreidinger@suse.com
+
+- fixes to restdoc to contain all necessary info (bnc#805282)
+- 0.3.11
+
+-------------------------------------------------------------------
+Fri Feb 22 16:17:38 UTC 2013 - locilka@suse.com
+
+- Fixed restdoc build (bnc#805282)
+- 0.3.10
+
+-------------------------------------------------------------------
+Fri Feb 22 11:28:56 UTC 2013 - jreidinger@suse.com
+
+- fix crash if timezone on system is unknown (BNC#787113)
+- fixes for time REST API (BNC#794923)
+- 0.3.9
+
+-------------------------------------------------------------------
 Wed Dec 12 15:48:54 UTC 2012 - lslezak@suse.cz
 
 - restart webyast after package update

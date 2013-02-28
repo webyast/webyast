@@ -1,4 +1,23 @@
 -------------------------------------------------------------------
+Tue Feb 26 17:00:24 UTC 2013 - vmoravec@suse.com
+
+- catch error in User model
+- typos in restdoc
+- 0.3.12
+
+-------------------------------------------------------------------
+Tue Feb 26 15:23:29 UTC 2013 - vmoravec@suse.com
+
+- add rake task for restdoc
+- 0.3.11
+
+-------------------------------------------------------------------
+Tue Feb 26 13:27:43 UTC 2013 - vmoravec@suse.com
+
+- add restdoc and rest api fixes
+- 0.3.10
+
+-------------------------------------------------------------------
 Wed Jan 16 14:28:48 UTC 2013 - lslezak@suse.cz
 
 - fix updating user roles (bnc#789731)

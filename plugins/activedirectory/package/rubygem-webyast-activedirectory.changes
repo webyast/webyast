@@ -1,4 +1,24 @@
 -------------------------------------------------------------------
+Fri Feb 22 11:33:37 UTC 2013 - jreidinger@suse.com
+
+- return error if something wrong happen during update and not read
+  data (BNC#790383)
+- 0.3.12
+
+-------------------------------------------------------------------
+Fri Feb 22 09:35:24 UTC 2013 - jreidinger@suse.com
+
+- conform return value when user is not member of domain according
+  to rest documentation (BNC#790383)
+- 0.3.11
+
+-------------------------------------------------------------------
+Tue Feb 19 10:17:31 UTC 2013 - jreidinger@suse.com
+
+- fix passing checkbox value to controller (BNC#789533)
+- 0.3.10
+
+-------------------------------------------------------------------
 Wed Dec 19 14:14:32 UTC 2012 - lslezak@suse.cz
 
 - make webyast-base dependency versioned

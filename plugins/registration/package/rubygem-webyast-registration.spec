@@ -11,7 +11,7 @@
 
 # norootforbuild
 Name:           rubygem-webyast-registration
-Version:        0.3.17
+Version:        0.3.18
 Release:        0
 %define mod_name webyast-registration
 %define mod_full_name %{mod_name}-%{version}
@@ -22,6 +22,7 @@ License:        GPL-2.0
 BuildRoot:      %{_tmppath}/%{name}-%{version}-build
 BuildRequires:  rubygems_with_buildroot_patch
 %rubygems_requires
+BuildRequires:  rubygem-restility
 BuildRequires:	webyast-base >= 0.3.31
 BuildRequires:	webyast-base-testsuite
 PreReq:	        webyast-base >= 0.3.31
@@ -99,6 +100,8 @@ install -m 0644 %SOURCE2 $RPM_BUILD_ROOT/usr/share/%{webyast_polkit_dir}
 
 mkdir -p $RPM_BUILD_ROOT/usr/share/YaST2/modules/YaPI/
 cp %{SOURCE3} $RPM_BUILD_ROOT/usr/share/YaST2/modules/YaPI/
+
+%webyast_build_restdoc
 
 %webyast_build_plugin_assets
 

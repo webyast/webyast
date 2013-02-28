@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<systemtime>
+  <timezone>Austria</timezone>
+  <region>Europe</region>
+  <config>ntp_sync</config>
+  <ntp_server>ntp.server.com</ntp_server>
+</systemtime>

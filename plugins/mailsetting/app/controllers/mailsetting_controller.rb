@@ -24,8 +24,6 @@
 
 class MailsettingController < ApplicationController
 
-public
-
   def show
     authorize! :read, Mailsetting
 
@@ -57,22 +55,6 @@ public
   def update
     authorize! :write, Mailsetting
     mail_params = params[:mailsetting] || params[:mail] #keep mail for backwards compatibility with old REST API
-
-    if params.has_key? :send_mail
-      if request.format.html?
-        if Mailsetting.valid_mail_address?(mail_params[:test_mail_address])
-          Mailsetting.send_test_mail mail_params[:test_mail_address]
-          flash[:notice] = _("A test message has been sent to email address %s") % mail_params[:test_mail_address]
-          redirect_to :action => "show", :email => mail_params[:test_mail_address].to_s
-          return
-        else
-          flash[:error] = _("Wrong format for email address")
-          render :show
-          return
-        end
-      end
-    end
-
     @mail = Mailsetting.find
     @mail.load mail_params
 
@@ -85,13 +67,14 @@ public
       response = @mail.save
       notice = _('Mail settings have been written.')
       unless @mail.test_mail_address.blank?
+        @mail.send_test_mail
         notice += " " + _('Test mail was sent to %s.') % @mail.test_mail_address
       end
       flash[:notice] = notice
 
     rescue Exception => error
-      problem _("Error while saving mail settings.")
-      Rails.logger.error "ERROR: #{error.inspect}"
+      problem _("Error while saving mail settings. #{error.message}")
+      Rails.logger.error "ERROR: #{error.message}"
       return
     end
 
@@ -108,10 +91,10 @@ public
       end
     end
 
-    if request.format.html?
-      redirect_success # redirect to next step
-    else
-      show
+    respond_to do |format|
+      format.html { redirect_to :back }
+      format.xml  { render :nothing => true, :status => 200 }
+      format.json { render :nothing => true, :status => 200 }
     end
   end
 
@@ -119,16 +102,46 @@ public
     update
   end
 
+  def send_test_mail
+    smtp_server, port = params[:mailsetting][:smtp_server].split(':')
+    settings = {
+      :server   => smtp_server,
+      :port     => (port || 25).to_i,
+      :to       => params[:mailsetting][:test_mail_address],
+      :tls      => params[:mailsetting][:transport_layer_security] == 'no' ? false : true,
+      :hostname => request.host,
+      :domain   => request.domain,
+      :user     => params[:mailsetting][:user],
+      :password => params[:mailsetting][:password]
+    }
+
+    log_settings = settings.dup
+    log_settings[:password] = "[FILTERED]" if log_settings[:password]
+    Rails.logger.info "Sending testing e-mail using settings #{log_settings.inspect}"
+
+    MailsettingNotifier.server_settings   settings
+    email = MailsettingNotifier.test_mail settings
+    email.deliver
+  rescue Exception => error
+    Rails.logger.error error.message
+  ensure
+    if error.present?
+      render :json => { :message => _("Sending of email failed. #{error.message}") }, :status => 400
+    else
+      render :json => { :message => _("Email has been sent") }, :status => 200
+    end
+  end
+
 private
 
   def problem message
     if request.format.html?
       flash[:error] = message
-      render :action => "show"
+      redirect_to :back
     else #REST request
-      error = { "error" => { "type" => "ADMINISTRATOR_ERROR", "messsage" => message, "id" => "ADMINISTRATOR" }}
+      error = { "error" => { "type" => "Application error", "messsage" => message, }}
       respond_to do |format|
-        format.xml  { render :xml => error, :status => 400 }
+        format.xml  { render :xml  => error.to_xml(:root => :errors), :status => 400 }
         format.json { render :json => error, :status => 400 }
       end
     end

@@ -54,6 +54,10 @@ class PatchesControllerTest < ActionController::TestCase
 
     @p1.stubs(:install).returns(true)
   end
+
+  def teardown
+    Mocha::Mockery.instance.stubba.unstub_all
+  end
   
   test "access index" do
     get :index
@@ -67,13 +71,12 @@ class PatchesControllerTest < ActionController::TestCase
     assert_equal mime.to_s, @response.content_type
   end
  
-# Due a bug (https://rails.lighthouseapp.com/projects/8994/tickets/4547-activesupport-to_json-doesnt-work-with-dm) this does not work
-#  test "access index json" do
-#    mime = Mime::JSON
-#    @request.accept = mime.to_s
-#    get :index
-#    assert_equal mime.to_s, @response.content_type
-#  end
+  test "access index json" do
+    mime = Mime::JSON
+    @request.accept = mime.to_s
+    get :index
+    assert_equal mime.to_s, @response.content_type
+  end
 
   test "access show xml" do
     mime = Mime::XML
@@ -139,9 +142,64 @@ class PatchesControllerTest < ActionController::TestCase
     assert_redirected_to :action => "license"
   end
 
+  test "license required XML" do
+    PatchesState.stubs(:read).returns(:message_id => "PATCH_EULA").once
+    mime = Mime::XML
+    @request.accept = mime.to_s
+
+    get :index
+    assert_response :success
+    assert_equal "PACKAGEKIT_LICENSE", Hash.from_xml(@response.body)["error"]["type"]
+  end
+
+  test "license required JSON" do
+    PatchesState.stubs(:read).returns(:message_id => "PATCH_EULA").once
+    mime = Mime::JSON
+    @request.accept = mime.to_s
+
+    get :index
+    assert_response :success
+    # TODO in Ruby 1.9 we could use JSON from stdlib to parse the string
+    assert_match /license confirmation/, @response.body
+  end
+
   def test_show_license
     get :license
     assert_response :success
+  end
+
+  test "patch installation in progress" do
+    # 42 patches to install
+    Patch.stubs(:installing).returns([true, 42])
+
+    get :index
+    assert_response :success
+    assert_match /There are 42 patches to install/, @response.body
+  end
+
+  test "patch installation in progress XML" do
+    # 42 patches to install
+    Patch.stubs(:installing).returns([true, 42])
+    mime = Mime::XML
+    @request.accept = mime.to_s
+
+    get :index
+    assert_response :success
+    error = Hash.from_xml(@response.body)["error"]
+    assert_equal 42, error["count"]
+    assert_match /42 patches remain to install/, error["description"]
+  end
+
+  test "patch installation in progress JSON" do
+    # 42 patches to install
+    Patch.stubs(:installing).returns([true, 42])
+    mime = Mime::JSON
+    @request.accept = mime.to_s
+
+    get :index
+    assert_response :success
+    # TODO in Ruby 1.9 we could use JSON from stdlib to parse the string
+    assert_match /42 patches remain to install/, @response.body
   end
 
 end

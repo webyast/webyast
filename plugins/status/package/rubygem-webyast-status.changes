@@ -1,4 +1,15 @@
 -------------------------------------------------------------------
+Fri Feb 22 07:54:43 UTC 2013 - lslezak@suse.cz
+
+- (re)start collect after package installation (bnc#792841)
+- 0.3.16
+
+-------------------------------------------------------------------
+Fri Feb 15 09:49:41 UTC 2013 - jreidinger@suse.com
+
+- fixes for status REST API (BNC#789343)
+
+-------------------------------------------------------------------
 Thu Feb 14 12:56:46 CET 2013 - locilka@suse.com
 
 - Using more precise scale for Y axis for Network and Disk graphs

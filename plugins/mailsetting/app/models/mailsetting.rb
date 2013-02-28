@@ -43,8 +43,11 @@ class Mailsetting < BaseModel::Base
   validates :password_confirmation,    :presence=>true
   validates :transport_layer_security, :presence=>true
 
+  validate :email_address_format
+
   TEST_MAIL_FILE = File.join(YaST::Paths::VAR,"mailsetting","test_sent")
   CACHE_ID = "webyast_mailsetting"
+  EMAIL_FORMAT_PATTERN = /\A[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]+\z/
 
   # read the settings from system
   def self.find
@@ -77,7 +80,7 @@ class Mailsetting < BaseModel::Base
   end
 
   def self.valid_mail_address? (address)
-    return !!address.match(/\A[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]+\z/)
+    return !!address.match(EMAIL_FORMAT_PATTERN)
   end
 
   def self.send_test_mail(to)
@@ -104,6 +107,20 @@ class Mailsetting < BaseModel::Base
       Rails.logger.error e
     end
   end
+
+  alias_method :create, :update
+
+  def send_test_mail
+    self.class.send_test_mail test_mail_address
+  end
+
+  private
+
+  def email_address_format
+    if test_mail_address.present?
+      errors.add :test_mail_address, _("is not valid") unless test_mail_address.match(EMAIL_FORMAT_PATTERN)
+    end
+  end
 end
 
 require 'exceptions'
@@ -123,5 +140,37 @@ class MailError < BackendException
       xml.description message
       xml.output @message
     end
+  end
+end
+
+class MailsettingNotifier < ActionMailer::Base
+  def self.server_settings options
+    from = "root@#{options[:hostname]}"
+    self.default :from => from, :return_path => from
+    self.smtp_settings = {
+      :address   => options[:server],
+      :port      => options[:port],
+      :user_name => options[:user],
+      :password  => options[:password],
+      :domain    => options[:domain],
+      :enable_starttls_auto => options[:tls],
+      :authentication => :login,
+      :openssl_verify_mode => OpenSSL::SSL::VERIFY_NONE
+    }
+
+    self.delivery_method       = :smtp
+    self.perform_deliveries    = true
+    self.raise_delivery_errors = true
+  end
+
+  def test_mail options
+    @from     = "root@#{options[:hostname]}"
+    @to       = options[:to]
+    @subject  = "WebYaST Test Mail"
+    @sent_at  = Time.new.strftime "%Y-%m-%d %H-%M-%S"
+    @hostname = options[:hostname]
+    mail :to => @to, :subject => @subject, :from => @from,
+         :template_name => 'test_mail', :template_path => 'mailsetting',
+         :content_type => 'text/html'
   end
 end

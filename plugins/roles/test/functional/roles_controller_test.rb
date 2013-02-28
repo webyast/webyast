@@ -1,20 +1,20 @@
 #--
 # Copyright (c) 2009-2010 Novell, Inc.
-# 
+#
 # All Rights Reserved.
-# 
+#
 # This program is free software; you can redistribute it and/or modify it
 # under the terms of version 2 of the GNU General Public License
 # as published by the Free Software Foundation.
-# 
+#
 # This program is distributed in the hope that it will be useful,
 # but WITHOUT ANY WARRANTY; without even the implied warranty of
 # MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
 # GNU General Public License for more details.
-# 
+#
 # You should have received a copy of the GNU General Public License
 # along with this program; if not, contact Novell, Inc.
-# 
+#
 # To contact Novell about this file by physical or electronic mail,
 # you may find current contact information at www.novell.com
 #++
@@ -35,7 +35,7 @@ class RolesControllerTest < ActionController::TestCase
     Role.const_set(:ROLES_ASSIGN_PATH, File.join( @test_path, "roles_assign.yml"))
     @model_class = Role
     #data for test update
-    @data = {"roles" => { "name" => "test", "roles"=> [], "permissions" => []}}
+    @data = {"role" => { "name" => "test", "users"=> [], "permissions" => []}}
     #stub DBus
     @dbus_obj = FakeDbus.new
     Permission.stubs(:dbus_obj).returns(@dbus_obj)
@@ -85,27 +85,25 @@ class RolesControllerTest < ActionController::TestCase
 
   def test_show_nonexist
     get :show, :format => 'xml', :id => "nonexist"
-    assert_response 422
+    assert_response 400
   end
 
   def test_destroy
     @request.accept = Mime::XML
     post :destroy, :id => "test", :format => 'xml'
-    assert_response :success
-    h=Hash.from_xml @response.body
-    assert_equal 2, h['roles'].size
+    assert_response 204
   end
 
   def test_create
     @request.accept = Mime::XML
-    post :create, :role_name => "role02._-  test", :format => 'xml'
+    post :create, {:role => { :name => "role02._-test"}}, :format => 'xml'
     assert_response :success
   end
 
   def test_create_bad_name
     @request.accept = Mime::XML
-    post :create, :role_name => "role02._-<dangerscript/>  test", :format => 'xml'
-    assert_response 422
+    post :create, :name => "role02._-<dangerscript/>  test", :format => 'xml'
+    assert_response 400
   end
 
   def test_update

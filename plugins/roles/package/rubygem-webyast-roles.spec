@@ -17,7 +17,7 @@
 
 
 Name:           rubygem-webyast-roles
-Version:        0.3.11
+Version:        0.3.14
 Release:        0
 %define mod_name webyast-roles
 %define mod_full_name %{mod_name}-%{version}
@@ -28,6 +28,8 @@ BuildRequires:  rubygems_with_buildroot_patch
 %rubygems_requires
 BuildRequires:  webyast-base >= 0.3.31
 BuildRequires:  webyast-base-testsuite
+BuildRequires:  rubygem-restility
+
 PreReq:         webyast-base >= 0.3.31
 
 Obsoletes:      webyast-roles-ui < %{version}
@@ -89,6 +91,7 @@ cp %{SOURCE1} %{SOURCE2} $RPM_BUILD_ROOT%{webyast_vardir}/roles
 mkdir -p $RPM_BUILD_ROOT/usr/share/%{webyast_polkit_dir}
 install -m 0644 %SOURCE3 $RPM_BUILD_ROOT/usr/share/%{webyast_polkit_dir}
 
+%webyast_build_restdoc
 %webyast_build_plugin_assets
 
 %clean

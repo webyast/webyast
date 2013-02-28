@@ -83,8 +83,8 @@ class InterfaceTest < ActiveSupport::TestCase
  def test_bridge
    iface=Interface.find('br0')
    assert_equal 'none', iface.bootproto
-   assert_equal 2, iface.bridge_ports.split(" ").count
-   assert iface.bridge_ports.split(" ").include?('vlan0')
+   assert_equal 2, iface.bridge_ports.count
+   assert iface.bridge_ports.include?('vlan0')
    assert_equal 'br0', iface.id   
  end
  
@@ -101,6 +101,15 @@ class InterfaceTest < ActiveSupport::TestCase
    YastService.stubs(:Call).with("YaPI::NETWORK::Write",  {'interface' => ['a{sa{ss}}', {'eth7' => {'bootproto' => 'static', 'ipaddr' => '1.1.1.1/255.255.255.255'}}]}).returns true
    iface = Interface.new "id" => "eth7", "bootproto" => "static", "ipaddr" => "1.1.1.1/255.255.255.255", "type" => "eth"
    iface.save!
+ end
+
+ def test_netmask_read
+  suffix = Interface.new({}).netmask_to_cidr ("/8")
+  assert_equal "8",suffix
+  suffix = Interface.new({}).netmask_to_cidr ("8")
+  assert_equal "8",suffix
+  suffix = Interface.new({}).netmask_to_cidr ("/32")
+  assert_equal "32",suffix
  end
 end
 

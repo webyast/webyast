@@ -1,4 +1,22 @@
 -------------------------------------------------------------------
+Mon Feb 25 13:08:00 UTC 2013 - vmoravec@suse.com
+
+- Fixed creating role with empty users
+- 0.3.14
+
+-------------------------------------------------------------------
+Fri Feb 22 17:51:43 UTC 2013 - vmoravec@suse.com
+
+- Fixed restdocs build (bnc#805282)
+- 0.3.13
+
+-------------------------------------------------------------------
+Thu Feb 21 09:58:51 UTC 2013 - vmoravec@suse.cz
+
+- fixed REST API (bnc#790164)
+- 0.3.12
+
+-------------------------------------------------------------------
 Fri Jan  4 16:30:14 UTC 2013 - lslezak@suse.cz
 
 - fixed broken layout (invalid JS code) resulting in unfunctional

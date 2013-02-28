@@ -26,8 +26,8 @@ class LicenseRequiredException < BackendException
     super "License confirm required to continue with installation. Please go to patch module, where you can decide about license confirmation."
 	end
 
-	def to_xml
-    xml = Builder::XmlMarkup.new({})
+  def to_xml(options = { :indent => 2 })
+    xml = Builder::XmlMarkup.new(options)
     xml.instruct!
 
     xml.error do
@@ -36,4 +36,8 @@ class LicenseRequiredException < BackendException
       xml.bug false, :type => "boolean"
     end
 	end
+
+  def to_json
+    { :error => message }.to_json
+  end
 end

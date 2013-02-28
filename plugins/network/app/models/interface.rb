@@ -56,7 +56,13 @@ class Interface < BaseModel::Base
   public
 
   def netmask_to_cidr(netmask)
-    return IPAddr.new(netmask).to_i.to_s(2).count("1")
+    if netmask =~ /\A\d{1,2}\Z/
+      return netmask #we get already cidr
+    elsif netmask =~ /\A\/\d{1,2}\Z/
+      return netmask[1..-1] #we already get it with starting slash
+    else
+      return IPAddr.new(netmask).to_i.to_s(2).count("1")
+    end
   end
 
   def self.cidr_to_netmask(cidr)
@@ -139,11 +145,11 @@ class Interface < BaseModel::Base
         settings[@id]["vlan_etherdevice"] = self.vlan_etherdevice || ""
       when "br"
         settings[@id]["bridge"] = "yes"
-        settings[@id]["bridge_ports"] = @bridge_ports.join(' ')
+        settings[@id]["bridge_ports"] = (@bridge_ports.is_a? Array) ? @bridge_ports.join(' ') : @bridge_ports
       when "bond"
         settings[@id]["bond"] = "yes"
         settings[@id]["bond_option"] = @bond_option || ""
-        settings[@id]["bond_slaves"] = @bond_slaves.join(' ')
+        settings[@id]["bond_slaves"] = (@bond_slaves.is_a? Array) ? @bond_slaves.join(' ') : @bond_slaves
       when "eth"
         # save only bootproto and ip/netmask
         Rails.logger.info "ETHERNET"

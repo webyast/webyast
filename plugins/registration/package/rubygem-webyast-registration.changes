@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Fri Feb 22 06:40:31 UTC 2013 - jreidinger@suse.com
+
+- add rest documentation so it is clear how to use it (BNC#790162)
+- 0.3.18
+
+-------------------------------------------------------------------
 Wed Dec 12 15:34:58 UTC 2012 - lslezak@suse.cz
 
 - restart webyast after package update
