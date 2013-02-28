@@ -38,11 +38,14 @@ class Systemtime < BaseModel::Base
   attr_reader   :utcstatus
   attr_accessor :region
   attr_reader   :timezone_details, :timezones, :hwclock
+  attr_reader   :ntpd_running, :ntp_available, :ntp, :ntp_server
+  attr_accessor :config
 
   private
 
   attr_writer   :timezone_details, :timezones, :hwclock
-  attr_accessor :yapi_response
+  attr_writer   :ntpd_running, :ntp_available, :ntp, :ntp_server
+  attr_accessor :yapi_response, :service_available
 
   public
 
@@ -52,6 +55,7 @@ class Systemtime < BaseModel::Base
   # time settings format is hh:mm:ss
   validates_format_of :time, :with => /\A\d{2}:\d{2}:\d{2}\Z/, :allow_nil => true
   validates_inclusion_of :utcstatus, :in => [true, false], :allow_nil => true
+  validates_inclusion_of :config, :in => ['manual', 'ntp_sync']
 
   attr_protected :timezones, :hwclock, :yapi_response
 
@@ -74,6 +78,7 @@ class Systemtime < BaseModel::Base
       load_default_data
     end
     self.hwclock = File.exist? "/sbin/hwclock"
+    load_time_config
     super
   end
 
@@ -91,7 +96,7 @@ class Systemtime < BaseModel::Base
 
   def inspect
     "<##{self.class}:0x#{"%x" % (object_id.abs*2)} @region=#{region} @timezone=#{timezone} @time=#{time} " +
-    "@date=#{date} @utcstatus=#{utcstatus} >"
+    "@date=#{date} @utcstatus=#{utcstatus} @config=#{config} @ntpd_running=#{ntpd_running} @ntp_server=#{ntp_server}>"
   end
 
   def utcstatus= status
@@ -120,6 +125,7 @@ class Systemtime < BaseModel::Base
     self.region   = ''
     self.timezone = ''
     self.time     = ''
+    self.config = ''
     self.yapi_response = {'zones'=>[]}
   end
 
@@ -137,6 +143,8 @@ class Systemtime < BaseModel::Base
     end
     Rails.logger.error "Validation failed: #{errors.full_messages.join ','}" if errors.present?
   end
+
+  TIME_CONFIG = { :ntp => 'ntp_sync', :manual => 'manual' }
 
   def load_yapi_response
     self.yapi_response = YastService.Call "YaPI::TIME::Read", TIMEZONE_KEYS
@@ -250,6 +258,7 @@ class Systemtime < BaseModel::Base
     }
     # do not specify the currenttime key if we want no change
     updated_params.delete 'currenttime' unless updated_params['currenttime']
+    set_time_config
     Rails.logger.info "Going to write new time settings with: #{updated_params.inspect}"
     begin
       YastService.Call "YaPI::TIME::Write", updated_params
@@ -276,6 +285,56 @@ class Systemtime < BaseModel::Base
       #restarting collectd is optional, so it should not do anything
     end
     true
+  end
+
+  def class_exists?(class_name)
+    begin
+      cl = Module.const_get(class_name)
+      return cl.is_a?(Class)
+    rescue NameError
+      return false
+    end
+  end
+
+  def load_time_config
+    ntp_check
+    if ntp_available && ntpd_running
+      self.config = TIME_CONFIG[:ntp]
+    else
+      self.config = TIME_CONFIG[:manual]
+    end
+  end
+
+  def ntp_check
+    self.ntp_available     = class_exists?("Ntp")
+    self.service_available = class_exists?("Service")
+    if ntp_available
+      `pgrep -f /usr/sbin/ntpd`
+      Rails.logger.info "Checking ntpd... #{'not ' unless $?.exitstatus == 0}running."
+      self.ntpd_running = $?.exitstatus == 0
+      self.ntp = Ntp.find
+      self.ntp_server = ntp.actions[:ntp_server]
+    end
+  end
+
+  def set_time_config
+    case config
+    when "manual"
+      if service_available && ntp_available
+        service = Service.new("ntp")
+        Rails.logger.info "Stopping ntpd service.."
+        service.save({:execute => "stop" })
+        self.ntpd_running = false
+      end
+    when "ntp_sync"
+      if ntp_available
+        ntp.actions[:synchronize] = true
+        ntp.actions[:synchronize_utc] = system_time.utcstatus
+        ntp.update
+        Rails.logger.info "Starting ntpd service.."
+        Service.new('ntp').save(:execute=>'start') if service_available
+      end
+    end
   end
 
 end
