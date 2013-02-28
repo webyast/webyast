@@ -51,10 +51,11 @@ class TimeController < ApplicationController
     authorize! :write, Time
     system_time = Systemtime.new params[:systemtime]
     raise InvalidParameters.new system_time.errors.full_messages.join(', ') unless system_time.valid?
-    if system_time.config == 'ntp_sync' && system_time.ntp_available
+    if system_time.config_ntp_sync?
+      authorize! :execute, Service
       authorize! :synchronize, Ntp
       authorize! :setserver,   Ntp
-    elsif system_time.config == 'manual' && system_time.ntp_available
+    elsif system_time.config_manual?
       authorize! :execute, Service
     end
     system_time.save

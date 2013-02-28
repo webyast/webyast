@@ -119,6 +119,14 @@ class Systemtime < BaseModel::Base
     end
   end
 
+  def config_ntp_sync?
+    TIME_CONFIG[:ntp] == config && ntp_available
+  end
+
+  def config_manual?
+    TIME_CONFIG[:manual] == config && ntp_available
+  end
+
   private
 
   def load_default_data
@@ -308,6 +316,7 @@ class Systemtime < BaseModel::Base
   def ntp_check
     self.ntp_available     = class_exists?("Ntp")
     self.service_available = class_exists?("Service")
+    #FIXME is condition for available service not needed?
     if ntp_available
       `pgrep -f /usr/sbin/ntpd`
       Rails.logger.info "Checking ntpd... #{'not ' unless $?.exitstatus == 0}running."
