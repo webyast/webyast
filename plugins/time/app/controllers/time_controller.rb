@@ -39,6 +39,7 @@ class TimeController < ApplicationController
 
   def index
     authorize! :read, Time
+    authorize! :synchronize, Ntp
     @system_time = Systemtime.find
     respond_to do |format|
       format.html
