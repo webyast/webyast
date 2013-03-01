@@ -231,7 +231,8 @@ class Systemtime < BaseModel::Base
       :utcstatus => utcstatus,
       :hwclock   => hwclock,
       :date      => date,
-      :time      => time
+      :time      => time,
+      :config    => config
     }
   end
 
@@ -322,7 +323,7 @@ class Systemtime < BaseModel::Base
       Rails.logger.info "Checking ntpd... #{'not ' unless $?.exitstatus == 0}running."
       self.ntpd_running = $?.exitstatus == 0
       self.ntp = Ntp.find
-      self.ntp_server = ntp.actions[:ntp_server]
+      self.ntp_server = ntp.actions[:ntp_server].strip
     end
   end
 
@@ -330,18 +331,22 @@ class Systemtime < BaseModel::Base
     case config
     when "manual"
       if service_available && ntp_available
-        service = Service.new("ntp")
+        service = Service.new "ntp"
         Rails.logger.info "Stopping ntpd service.."
-        service.save({:execute => "stop" })
-        self.ntpd_running = false
+        service_result    = service.save :execute => "stop"
+        self.ntpd_running = !(service_result['exit'] == '0')
       end
     when "ntp_sync"
       if ntp_available
-        ntp.actions[:synchronize] = true
-        ntp.actions[:synchronize_utc] = system_time.utcstatus
+        ntp.actions[:synchronize]     = true
+        ntp.actions[:synchronize_utc] = utcstatus
+        ntp.actions[:ntp_server]      = ntp_server
         ntp.update
         Rails.logger.info "Starting ntpd service.."
-        Service.new('ntp').save(:execute=>'start') if service_available
+        if service_available
+          service_result = Service.new('ntp').save :execute=>'start'
+          self.ntpd_running = service_result['exit'] == '0'
+        end
       end
     end
   end
