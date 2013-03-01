@@ -51,7 +51,7 @@ class RolesController < ApplicationController
   end
 
   def check_role_valid
-    raise InvalidParameters.new(:error => role.errors.full_messages.join) unless @role.valid?
+    raise InvalidParameters.new(@role.errors.messages) unless @role.valid?
   end
 
   def check_role_exists
