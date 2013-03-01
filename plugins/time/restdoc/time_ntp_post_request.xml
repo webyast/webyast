@@ -3,5 +3,5 @@
   <timezone>Austria</timezone>
   <region>Europe</region>
   <config>ntp_sync</config>
-  <ntp_server>ntp.server.com</ntp_server>
+  <ntp_server>ntp.ubuntu.com</ntp_server>
 </systemtime>
