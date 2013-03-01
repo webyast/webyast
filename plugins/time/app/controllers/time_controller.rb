@@ -49,8 +49,11 @@ class TimeController < ApplicationController
     authorize! :read, Time
     if ntp_available
       self.ntp = Ntp.find
-      `pgrep -f /usr/sbin/ntpd`
-      Rails.logger.info "ntpd is running: #{$?.exitstatus == 0}"
+      begin
+        `pgrep -f /usr/sbin/ntpd`
+        Rails.logger.info "ntpd is running: #{$?.exitstatus == 0}"
+      rescue Errno::ENOENT
+      end
     end
     @system_time = Systemtime.find
     respond_to do |format|
