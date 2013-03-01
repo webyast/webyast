@@ -65,9 +65,9 @@ class TimeController < ApplicationController
 
   def update
     authorize! :write, Time
-    raise InvalidParameters.new _("Missing parameter 'systemtime'") unless params[:systemtime]
+    raise InvalidParameters.new( :systemtime => _("Missing parameter 'systemtime'")) unless params[:systemtime]
     system_time = Systemtime.new params[:systemtime]
-    raise InvalidParameters.new _(system_time.errors.full_messages.join(', ')) unless system_time.valid?
+    raise InvalidParameters.new(system_time.errors.messages) unless system_time.valid?
 
     system_time.region    = params[:systemtime][:region]
     system_time.timezone  = params[:systemtime][:timezone]
