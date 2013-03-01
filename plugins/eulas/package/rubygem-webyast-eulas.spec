@@ -17,7 +17,7 @@
 
 
 Name:           rubygem-webyast-eulas
-Version:        0.3.10
+Version:        0.3.11
 Release:        0
 %define mod_name webyast-eulas
 %define mod_full_name %{mod_name}-%{version}
@@ -42,7 +42,7 @@ Group:          Productivity/Networking/Web/Utilities
 Source:         %{mod_full_name}.gem
 Source1:        eulas-sles11.yml
 Source2:        org.opensuse.yast.modules.yapi.licenses.policy
-Source3:        eulas-opensuse11_1.yml
+Source3:        eulas-opensuse12_3.yml
 
 #
 %define plugin_name eulas
@@ -113,7 +113,7 @@ case "%{_project}" in
  *)
   # use a sles11 license by default
   SOURCE_CONFIG=%SOURCE1
-  rm -r $RPM_BUILD_ROOT/%{_libdir}/ruby/gems/%{rb_ver}/gems/%{mod_full_name}/config/resources/licenses/openSUSE-11.1
+  rm -r $RPM_BUILD_ROOT/%{_libdir}/ruby/gems/%{rb_ver}/gems/%{mod_full_name}/config/resources/licenses/openSUSE-12.3
   ;;
 esac
 mv $RPM_BUILD_ROOT/%{_libdir}/ruby/gems/%{rb_ver}/gems/%{mod_full_name}/config/resources/licenses $RPM_BUILD_ROOT/usr/share/%{webyast_user}/%{plugin_name}/

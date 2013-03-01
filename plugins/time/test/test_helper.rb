@@ -50,7 +50,7 @@ module SystemtimeHelpers
   def stub_yapi_write params
     YastService.stubs(:Call).with("YaPI::TIME::Write", params[:with]).returns(true).once
     YastService.stubs(:Call).with("YaPI::SERVICES::Execute",
-      { "name" => ["s","collectd"], "action" => ["s","restart"] }).once
+      { "name" => ["s","collectd"], "action" => ["s","restart"] })
   end
 
 end

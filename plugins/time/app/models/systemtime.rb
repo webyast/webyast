@@ -317,9 +317,8 @@ class Systemtime < BaseModel::Base
   def ntp_check
     self.ntp_available     = class_exists?("Ntp")
     self.service_available = class_exists?("Service")
-    #FIXME is condition for available service not needed?
-    if ntp_available
-      `pgrep -f /usr/sbin/ntpd`
+    if ntp_available && service_available
+      `pgrep -f /usr/sbin/ntpd` rescue nil
       Rails.logger.info "Checking ntpd... #{'not ' unless $?.exitstatus == 0}running."
       self.ntpd_running = $?.exitstatus == 0
       self.ntp = Ntp.find

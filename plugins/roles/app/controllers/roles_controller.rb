@@ -43,20 +43,20 @@ class RolesController < ApplicationController
 
   #FIXME consider moving this validation methods to model
   def check_role_param
-    raise InvalidParameters.new _("Missing parameter 'role'") unless params[:role]
+    raise InvalidParameters.new(:role=> _("Missing parameter 'role'")) unless params[:role]
   end
 
   def check_role_name_uniqueness
-    raise InvalidParameters.new _("Role name already exists") if Role.find params[:role][:name]
+    raise InvalidParameters.new(:role => _("Role name already exists")) if Role.find params[:role][:name]
   end
 
   def check_role_valid
-    raise InvalidParameters.new role.errors.full_messages.join unless @role.valid?
+    raise InvalidParameters.new(@role.errors.messages) unless @role.valid?
   end
 
   def check_role_exists
     role_name = params[:id]
-    raise InvalidParameters.new _("Role with name '#{role_name}' does not exist.") unless Role.find(role_name)
+    raise InvalidParameters.new(:role => _("Role with name '#{role_name}' does not exist.")) unless Role.find(role_name)
   end
 
   def check_write_permission
