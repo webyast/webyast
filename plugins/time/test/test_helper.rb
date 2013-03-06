@@ -38,7 +38,8 @@ module SystemtimeHelpers
       :date      => '02/02/2012',
       :utcstatus => true,
       :region    => 'Europe',
-      :timezone  => 'Czech Republic'
+      :timezone  => 'Czech Republic',
+      :config    => 'manual'
     }
   }
 
@@ -51,6 +52,13 @@ module SystemtimeHelpers
     YastService.stubs(:Call).with("YaPI::TIME::Write", params[:with]).returns(true).once
     YastService.stubs(:Call).with("YaPI::SERVICES::Execute",
       { "name" => ["s","collectd"], "action" => ["s","restart"] })
+  end
+
+  def stub_ntp_service action
+    YastService.stubs(:Call).with('YaPI::SERVICES::Execute',
+      {'custom' => ['b', false],
+       'action' => ['s', "#{action.to_s}"],
+       'name' => ['s', 'ntp']})
   end
 
 end
