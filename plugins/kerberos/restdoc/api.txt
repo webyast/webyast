@@ -41,7 +41,7 @@ GET /kerberos
 
   Get Kerberos client configuration data.
 
-  CURL Example: curl -u &lt;user&gt; https://hostname:4984/kerberos.xml
+  CURL Example: curl -u &lt;user&gt; https://&lt;hostname&gt;:4984/kerberos.xml
 
 XmlResult: kerberos
 
@@ -50,7 +50,7 @@ POST /kerberos
 
   Update the Kerberos client configuration. New configuration is returned as a result.
 
-  CURL example: curl -u &lt;user&gt; -X POST -H 'Content-type: text/xml' -d @save_request.xml https://hostname:4984/kerberos.xml
+  CURL example: curl -u &lt;user&gt; -X POST -H 'Content-type: text/xml' -d @save_request.xml https://&lt;hostname&gt;:4984/kerberos.xml
 
 XmlBody: save_request
 
