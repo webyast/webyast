@@ -333,7 +333,7 @@ class Systemtime < BaseModel::Base
       if service_available && ntp_available
         service = Service.new "ntp"
         Rails.logger.info "Stopping ntpd service.."
-        service_result    = service.save :execute => "stop"
+        service_result    = service.save(:execute => "stop") || {}
         self.ntpd_running = !(service_result['exit'] == '0')
       end
     when "ntp_sync"
@@ -344,7 +344,7 @@ class Systemtime < BaseModel::Base
         ntp.update
         Rails.logger.info "Starting ntpd service.."
         if service_available
-          service_result = Service.new('ntp').save :execute=>'start'
+          service_result = Service.new('ntp').save(:execute=>'start') || {}
           self.ntpd_running = service_result['exit'] == '0'
         end
       end
