@@ -57,7 +57,7 @@ private
   end
 
   def self.wbinfo
-    wbinfo = `wbinfo -u --domain . 2> /dev/null`
+    wbinfo = `wbinfo -u --domain . 2> /dev/null`.split "\n"
   rescue Errno::ENOENT
     wbinfo = []
   end
