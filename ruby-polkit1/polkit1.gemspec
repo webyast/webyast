@@ -20,8 +20,6 @@ Gem::Specification.new do |s|
   # specify any dependencies here; for example:
   s.add_development_dependency 'rake-compiler', '> 0.4.1'
   s.add_development_dependency 'yard'
-
-  s.add_runtime_dependency 'inifile'
 end
 
 
