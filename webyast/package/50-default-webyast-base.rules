@@ -1,0 +1,14 @@
+
+// default permissions for "webyast" user
+
+polkit.addRule(function(action, subject) {
+  if ((action.id == "org.opensuse.yast.module-manager.import"
+    || action.id == "org.opensuse.yast.permissions.read"
+    || action.id == "org.opensuse.yast.permissions.write"
+    ) && subject.user == "webyast")
+  {
+    return polkit.Result.YES;
+  }
+});    
+
+// vim: syntax=javascript

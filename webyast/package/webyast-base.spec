@@ -136,6 +136,7 @@ Source13:       control_panel.yml
 Source14:       config.yml
 Source15:       config.yml.new
 Source16:       update_webyast_service
+Source17:       50-default-webyast-base.rules
 
 BuildRoot:      %{_tmppath}/%{name}-%{version}-build
 BuildRequires:  pkg-config
@@ -349,6 +350,7 @@ mkdir -p $RPM_BUILD_ROOT/usr/share/%{webyast_polkit_dir}
 install -m 0644 %SOURCE4 $RPM_BUILD_ROOT/usr/share/%{webyast_polkit_dir}
 install -m 0644 %SOURCE6 $RPM_BUILD_ROOT/etc/
 install -m 0555 %SOURCE5 $RPM_BUILD_ROOT/usr/sbin/
+install -m 0644 %SOURCE17 $RPM_BUILD_ROOT/etc/polkit-1/rules.d/
 
 # firewall service definition, bnc#545627
 mkdir -p $RPM_BUILD_ROOT/etc/sysconfig/SuSEfirewall2.d/services
@@ -466,14 +468,19 @@ exit 0
 #---------------------------------------------------------------
 %post
 %fillup_and_insserv %{webyast_service}
+
+%if %suse_version <= 1230
 #
 #granting permissions for webyast
 #
 /usr/sbin/grantwebyastrights --user %{webyast_user} --action grant --policy org.opensuse.yast.module-manager.import > /dev/null ||:
+
 #
 # granting all permissions for root
 #
 /usr/sbin/grantwebyastrights --user root --action grant > /dev/null ||:
+%endif
+
 #
 # create database
 #
