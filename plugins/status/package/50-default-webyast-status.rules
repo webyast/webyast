@@ -1,0 +1,13 @@
+// default permissions for "root" user
+
+polkit.addRule(function(action, subject) {
+  if ((action.id == "org.opensuse.yast.modules.logfile.read"
+    || action.id == "org.opensuse.yast.modules.yapi.metrics.read"
+    || action.id == "org.opensuse.yast.modules.yapi.metrics.writelimits"
+    ) && subject.user == "root")
+  {
+    return polkit.Result.YES;
+  }
+});    
+
+// vim: syntax=javascript

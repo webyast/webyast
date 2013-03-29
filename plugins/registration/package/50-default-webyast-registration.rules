@@ -1,0 +1,14 @@
+// default permissions for "webyast" and "root" users
+
+polkit.addRule(function(action, subject) {
+  if ((action.id == "org.opensuse.yast.modules.yapi.mirrorcredentials.read"
+    || action.id == "org.opensuse.yast.modules.yapi.register.statelessregister"
+    || action.id == "org.opensuse.yast.modules.yapi.register.getregistrationconfig"
+    || action.id == "org.opensuse.yast.modules.yapi.register.setregistrationconfig"
+    ) && (subject.user == "webyast" || subject.user == "root"))
+  {
+    return polkit.Result.YES;
+  }
+});    
+
+// vim: syntax=javascript

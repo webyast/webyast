@@ -1,0 +1,20 @@
+// default permissions for "webyast" and "root" users
+
+polkit.addRule(function(action, subject) {
+  if ((action.id == "org.opensuse.yast.modules.yapi.users.groupsget"
+    || action.id == "org.opensuse.yast.modules.yapi.users.groupget"
+    || action.id == "org.opensuse.yast.modules.yapi.users.groupadd"
+    || action.id == "org.opensuse.yast.modules.yapi.users.groupmodify"
+    || action.id == "org.opensuse.yast.modules.yapi.users.groupdelete"
+    || action.id == "org.opensuse.yast.modules.yapi.users.usersget"
+    || action.id == "org.opensuse.yast.modules.yapi.users.userget"
+    || action.id == "org.opensuse.yast.modules.yapi.users.usermodify"
+    || action.id == "org.opensuse.yast.modules.yapi.users.useradd"
+    || action.id == "org.opensuse.yast.modules.yapi.users.userdelete"
+    ) && (subject.user == "webyast" || subject.user == "root"))
+  {
+    return polkit.Result.YES;
+  }
+});    
+
+// vim: syntax=javascript
