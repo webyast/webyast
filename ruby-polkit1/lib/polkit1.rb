@@ -4,7 +4,8 @@ require 'etc'
 
 module PolKit1
   POLKIT_PATH = "/etc/polkit-1/rules.d/"
-  FILE_PREFIX = "10-webyast-"
+  # defaults are "50-default-webyast-*", use something lower to override the defaults
+  FILE_PREFIX = "40-webyast-"
 
   def self.polkit1_check(perm, user_name)
     raise "invalid user name" if (user_name =~ /\\$/ or user_name.include? "'")
@@ -12,12 +13,12 @@ module PolKit1
   end
 
   def self.polkit1_write(section, perm, granted, user_name)
-    raise "invalid user name" if (user_name =~ /\\$/ or user_name.include? "'")
-    #raise "section name required" if section.empty?
-    raise "user name required" if user_name.empty?
+    raise "User name required" if user_name.nil? || user_name.empty?
+    raise "Invalid user name" if (user_name =~ /\\$/ or user_name.include? "'")
+    raise "Action name required" if perm.nil? || perm.empty?
 
     # TODO: is section (subdir) supported by new polkit??
-    file = File.join(POLKIT_PATH, FILE_PREFIX + perm.gsub(".", "_") + ".rule")
+    file = File.join(POLKIT_PATH, "#{FILE_PREFIX}-#{user_name}-#{perm}.rules")
 
     if granted
       content = "
