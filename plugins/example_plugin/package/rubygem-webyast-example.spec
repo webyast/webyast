@@ -37,6 +37,7 @@ Source2:        exampleService.rb
 Source3:        example.service.service
 Source4:        org.opensuse.yast.modules.yapi.example.policy
 Source5:        wicd-rpmlintrc
+Source6:        50-default-webyast-example.rules
 
 %package doc
 Summary:        RDoc documentation for %{mod_name}
@@ -92,6 +93,9 @@ cp %{SOURCE3} $RPM_BUILD_ROOT/usr/share/dbus-1/system-services/
 #policies
 mkdir -p $RPM_BUILD_ROOT/usr/share/%{webyast_polkit_dir}
 cp %{SOURCE4} $RPM_BUILD_ROOT/usr/share/%{webyast_polkit_dir}
+%if %suse_version >= 1230
+install -m 0644 %SOURCE6 $RPM_BUILD_ROOT/etc/polkit-1/rules.d/
+%endif
 
 # remove empty public
 rm -rf $RPM_BUILD_ROOT/%{_libdir}/ruby/gems/%{rb_ver}/gems/%{mod_full_name}/public
@@ -102,11 +106,13 @@ rm -rf $RPM_BUILD_ROOT/%{_libdir}/ruby/gems/%{rb_ver}/gems/%{mod_full_name}/publ
 %{__rm} -rf $RPM_BUILD_ROOT
 
 %post
+%if %suse_version < 1230
 # granting all permissions for the webyast user and root
 /usr/sbin/grantwebyastrights --user root --action grant --policy org.opensuse.yast.system.example.read > /dev/null || :
 /usr/sbin/grantwebyastrights --user root --action grant --policy org.opensuse.yast.system.example.write > /dev/null || :
 /usr/sbin/grantwebyastrights --user %{webyast_user} --action grant --policy org.opensuse.yast.system.example.read > /dev/null || :
 /usr/sbin/grantwebyastrights --user %{webyast_user} --action grant --policy org.opensuse.yast.system.example.write > /dev/null || :
+%endif
 
 %restart_webyast
 

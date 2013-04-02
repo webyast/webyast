@@ -55,6 +55,7 @@ Source:         %{mod_full_name}.gem
 Source1:        org.opensuse.yast.modules.yapi.patches.policy
 Source2:        org.opensuse.yast.modules.yapi.packages.policy
 Source3:        org.opensuse.yast.modules.yapi.repositories.policy
+Source4:        50-default-webyast-software.rules
 
 %package doc
 Summary:        RDoc documentation for %{mod_name}
@@ -104,6 +105,9 @@ mkdir -p $RPM_BUILD_ROOT/usr/share/%{webyast_polkit_dir}
 install -m 0644 %SOURCE1 $RPM_BUILD_ROOT/usr/share/%{webyast_polkit_dir}
 install -m 0644 %SOURCE2 $RPM_BUILD_ROOT/usr/share/%{webyast_polkit_dir}
 install -m 0644 %SOURCE3 $RPM_BUILD_ROOT/usr/share/%{webyast_polkit_dir}
+%if %suse_version >= 1230
+install -m 0644 %SOURCE4 $RPM_BUILD_ROOT/etc/polkit-1/rules.d/
+%endif
 
 mkdir -p $RPM_BUILD_ROOT/var/lib/webyast/software/licenses/accepted
 
@@ -115,6 +119,7 @@ mkdir -p $RPM_BUILD_ROOT/var/lib/webyast/software/licenses/accepted
 %{__rm} -rf $RPM_BUILD_ROOT
 
 %post
+%if %suse_version < 1230
 #
 # granting all permissions for root
 #
@@ -125,6 +130,7 @@ mkdir -p $RPM_BUILD_ROOT/var/lib/webyast/software/licenses/accepted
 /usr/sbin/grantwebyastrights --user %{webyast_user} --action grant --policy org.freedesktop.packagekit.system-sources-configure >& /dev/null || true
 /usr/sbin/grantwebyastrights --user %{webyast_user} --action grant --policy org.freedesktop.packagekit.system-update >& /dev/null || true
 /usr/sbin/grantwebyastrights --user %{webyast_user} --action grant --policy org.freedesktop.packagekit.package-eula-accept >& /dev/null || true
+%endif
 
 %restart_webyast
 

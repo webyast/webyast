@@ -45,6 +45,7 @@ Source:         %{mod_full_name}.gem
 Source1:        roles.yml
 Source2:        roles_assign.yml
 Source3:        org.opensuse.yast.modules.yapi.roles.policy
+Source4:        50-default-webyast-roles.rules
 
 %package doc
 Summary:        RDoc documentation for %{mod_name}
@@ -90,6 +91,9 @@ cp %{SOURCE1} %{SOURCE2} $RPM_BUILD_ROOT%{webyast_vardir}/roles
 # Policies
 mkdir -p $RPM_BUILD_ROOT/usr/share/%{webyast_polkit_dir}
 install -m 0644 %SOURCE3 $RPM_BUILD_ROOT/usr/share/%{webyast_polkit_dir}
+%if %suse_version >= 1230
+install -m 0644 %SOURCE4 $RPM_BUILD_ROOT/etc/polkit-1/rules.d/
+%endif
 
 %webyast_build_restdoc
 %webyast_build_plugin_assets
@@ -98,12 +102,14 @@ install -m 0644 %SOURCE3 $RPM_BUILD_ROOT/usr/share/%{webyast_polkit_dir}
 %{__rm} -rf $RPM_BUILD_ROOT
 
 %post
+%if %suse_version < 1230
 #
 # granting all permissions for root 
 #
 /usr/sbin/grantwebyastrights --user root --action grant > /dev/null
 # XXX not nice to get webyast all permissions, but now not better solution
 /usr/sbin/grantwebyastrights --user %{webyast_user} --action grant > /dev/null
+%endif
 
 %restart_webyast
 

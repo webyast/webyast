@@ -39,6 +39,7 @@ Source:         %{mod_full_name}.gem
 Source1:        org.opensuse.yast.modules.yapi.register.policy
 Source2:        org.opensuse.yast.modules.yapi.mirrorcredentials.policy
 Source3:	MirrorCredentials.pm
+Source4:        50-default-webyast-registration.rules
 
 # YaST2/modules/YSR.pm  
 %if 0%{?suse_version} == 0 || 0%{?suse_version} > 1120
@@ -97,6 +98,9 @@ needed at runtime.
 mkdir -p $RPM_BUILD_ROOT/usr/share/%{webyast_polkit_dir}
 install -m 0644 %SOURCE1 $RPM_BUILD_ROOT/usr/share/%{webyast_polkit_dir}
 install -m 0644 %SOURCE2 $RPM_BUILD_ROOT/usr/share/%{webyast_polkit_dir}
+%if %suse_version >= 1230
+install -m 0644 %SOURCE4 $RPM_BUILD_ROOT/etc/polkit-1/rules.d/
+%endif
 
 mkdir -p $RPM_BUILD_ROOT/usr/share/YaST2/modules/YaPI/
 cp %{SOURCE3} $RPM_BUILD_ROOT/usr/share/YaST2/modules/YaPI/
@@ -109,11 +113,13 @@ cp %{SOURCE3} $RPM_BUILD_ROOT/usr/share/YaST2/modules/YaPI/
 %{__rm} -rf $RPM_BUILD_ROOT
 
 %post
+%if %suse_version < 1230
 #
 # granting all permissions for root and webyast
 #
 /usr/sbin/grantwebyastrights --user root --action grant > /dev/null
 /usr/sbin/grantwebyastrights --user %{webyast_user} --action grant > /dev/null
+%endif
 
 %restart_webyast
 

@@ -44,6 +44,7 @@ Source:         %{mod_full_name}.gem
 Source1:        MailSettings.pm
 Source2:        org.opensuse.yast.modules.yapi.mailsettings.policy
 Source3:        postfix-update-hostname
+Source4:        50-default-webyast-mailsetting.rules
 BuildRoot:      %{_tmppath}/%{name}-%{version}-build
 
 # install these packages into Hudson chroot environment
@@ -115,6 +116,9 @@ install -m 0644 %SOURCE2 $RPM_BUILD_ROOT/usr/share/%{webyast_polkit_dir}
 #YaPI
 mkdir -p $RPM_BUILD_ROOT/usr/share/YaST2/modules/YaPI/
 cp %{SOURCE1} $RPM_BUILD_ROOT/usr/share/YaST2/modules/YaPI/
+%if %suse_version >= 1230
+install -m 0644 %SOURCE4 $RPM_BUILD_ROOT/etc/polkit-1/rules.d/
+%endif
 
 #hook script
 mkdir -p $RPM_BUILD_ROOT/etc/sysconfig/network/scripts/
@@ -128,9 +132,11 @@ install -m 0755 %SOURCE3 $RPM_BUILD_ROOT/etc/sysconfig/network/scripts/
 %{__rm} -rf $RPM_BUILD_ROOT
 
 %post
+%if %suse_version < 1230
 # granting all permissions for the web user
 /usr/sbin/grantwebyastrights --user root --action grant > /dev/null ||:
 /usr/sbin/grantwebyastrights --user %{webyast_user} --action grant > /dev/null ||:
+%endif
 
 %restart_webyast
 

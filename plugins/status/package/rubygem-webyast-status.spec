@@ -48,6 +48,8 @@ Source:         %{mod_full_name}.gem
 Source1:        org.opensuse.yast.modules.yapi.metrics.policy
 Source2:        org.opensuse.yast.modules.logfile.policy
 Source3:        LogFile.rb
+Source4:        50-default-webyast-status.rules
+
 PreReq:         collectd, %insserv_prereq
 Requires:       rrdtool
 # for calling ruby module via YastService:
@@ -97,6 +99,9 @@ needed at runtime.
 mkdir -p $RPM_BUILD_ROOT/usr/share/%{webyast_polkit_dir}
 install -m 0644 %SOURCE1 $RPM_BUILD_ROOT/usr/share/%{webyast_polkit_dir}
 install -m 0644 %SOURCE2 $RPM_BUILD_ROOT/usr/share/%{webyast_polkit_dir}
+%if %suse_version >= 1230
+install -m 0644 %SOURCE4 $RPM_BUILD_ROOT/etc/polkit-1/rules.d/
+%endif
 
 #metrics configuration
 mkdir -p $RPM_BUILD_ROOT%{webyast_vardir}/status
@@ -116,11 +121,13 @@ cp $RPM_BUILD_ROOT/%{_libdir}/ruby/gems/%{rb_ver}/gems/%{mod_full_name}/doc/logs
 %{__rm} -rf $RPM_BUILD_ROOT
 
 %post
+%if %suse_version < 1230
 #
 # granting all permissions for root
 #
 /usr/sbin/grantwebyastrights --user root --action grant > /dev/null
 /usr/sbin/grantwebyastrights --user %{webyast_user} --action grant > /dev/null
+%endif
 
 #
 # nslookup of static hostnames can result to an error. Due this error collectd
