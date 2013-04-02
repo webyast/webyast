@@ -351,6 +351,7 @@ install -m 0644 %SOURCE4 $RPM_BUILD_ROOT/usr/share/%{webyast_polkit_dir}
 install -m 0644 %SOURCE6 $RPM_BUILD_ROOT/etc/
 install -m 0555 %SOURCE5 $RPM_BUILD_ROOT/usr/sbin/
 %if %suse_version >= 1230
+mkdir -p $RPM_BUILD_ROOT/etc/polkit-1/rules.d/
 install -m 0644 %SOURCE17 $RPM_BUILD_ROOT/etc/polkit-1/rules.d/
 %endif
 
@@ -624,6 +625,7 @@ mkdir -p /var/lib/webyast
 
 %config /etc/sysconfig/SuSEfirewall2.d/services/webyast
 %config /usr/share/%{webyast_polkit_dir}/org.opensuse.yast.permissions.policy
+/etc/polkit-1/rules.d/50-default-webyast-base.rules
 %config %{webyast_dir}/config/initializers/secret_token.rb
 %config %{webyast_dir}/config/environment.rb
 %config(noreplace) /etc/yast_user_roles
