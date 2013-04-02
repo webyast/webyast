@@ -146,6 +146,7 @@ cp %{SOURCE3} $RPM_BUILD_ROOT/usr/share/YaST2/modules/YaPI/
 %dir /usr/share/%{webyast_polkit_dir}
 %attr(644,root,root) %config /usr/share/%{webyast_polkit_dir}/org.opensuse.yast.modules.yapi.register.policy
 %attr(644,root,root) %config /usr/share/%{webyast_polkit_dir}/org.opensuse.yast.modules.yapi.mirrorcredentials.policy
+/etc/polkit-1/rules.d/50-default-webyast-registration.rules
 
 %restart_script_name
 

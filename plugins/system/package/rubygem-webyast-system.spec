@@ -132,6 +132,7 @@ fi
 
 %dir /usr/share/%{webyast_polkit_dir}
 %attr(644,root,root) %config /usr/share/%{webyast_polkit_dir}/org.opensuse.yast.modules.yapi.system.policy
+/etc/polkit-1/rules.d/50-default-webyast-system.rules
 
 %restart_script_name
 

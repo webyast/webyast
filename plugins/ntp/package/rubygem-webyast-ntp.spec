@@ -128,6 +128,7 @@ mkdir -p $RPM_BUILD_ROOT/%{_libdir}/ruby/gems/%{rb_ver}/gems/%{mod_full_name}/lo
 %dir /usr/share/YaST2/modules/YaPI/
 %attr(644,root,root) /usr/share/YaST2/modules/YaPI/NTP.pm
 %attr(644,root,root) /usr/share/%{webyast_polkit_dir}/org.opensuse.yast.modules.yapi.ntp.policy
+/etc/polkit-1/rules.d/50-default-webyast-ntp.rules
 
 %restart_script_name
 

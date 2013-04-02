@@ -197,6 +197,7 @@ rccollectd restart
 %attr(0700,%{webyast_user},%{webyast_user}) %dir %{webyast_vardir}/status
 %attr(644,root,root) %config /usr/share/%{webyast_polkit_dir}/org.opensuse.yast.modules.yapi.metrics.policy
 %attr(644,root,root) %config /usr/share/%{webyast_polkit_dir}/org.opensuse.yast.modules.logfile.policy
+/etc/polkit-1/rules.d/50-default-webyast-status.rules
 %dir /etc/webyast/vendor
 %config /etc/webyast/logs.yml
 

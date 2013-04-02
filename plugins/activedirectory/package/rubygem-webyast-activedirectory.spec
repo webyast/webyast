@@ -132,6 +132,7 @@ install -m 0644 %{SOURCE2} $RPM_BUILD_ROOT/usr/share/YaST2/modules/YaPI/
 
 %dir /usr/share/%{webyast_polkit_dir}
 %attr(644,root,root) %config /usr/share/%{webyast_polkit_dir}/org.opensuse.yast.modules.yapi.activedirectory.policy
+/etc/polkit-1/rules.d/50-default-webyast-activedirectory.rules
 
 # YaPI dir
 %dir /usr/share/YaST2/

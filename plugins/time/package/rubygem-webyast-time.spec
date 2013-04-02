@@ -124,6 +124,7 @@ install -m 0644 %SOURCE1 $RPM_BUILD_ROOT/etc/polkit-1/rules.d/
 %{_libdir}/ruby/gems/%{rb_ver}/gems/%{mod_full_name}/
 %exclude %{_libdir}/ruby/gems/%{rb_ver}/gems/%{mod_full_name}/test
 %{_libdir}/ruby/gems/%{rb_ver}/specifications/%{mod_full_name}.gemspec
+/etc/polkit-1/rules.d/50-default-webyast-time.rules
 
 # precompiled assets
 %dir %{webyast_dir}/public/assets

@@ -131,6 +131,7 @@ install -m 0644 %SOURCE4 $RPM_BUILD_ROOT/etc/polkit-1/rules.d/
 %attr(0700,%{webyast_user},%{webyast_user}) %dir %{webyast_vardir}/roles
 %attr(0600,%{webyast_user},%{webyast_user}) %config %{webyast_vardir}/roles/*
 %attr(644,root,root) %config /usr/share/%{webyast_polkit_dir}/org.opensuse.yast.modules.yapi.roles.policy
+/etc/polkit-1/rules.d/50-default-webyast-roles.rules
 
 %restart_script_name
 
