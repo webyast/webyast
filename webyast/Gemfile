@@ -23,6 +23,7 @@ gem "builder"
 #checking which policykit is used
 WEBYAST_CONFIG_FILE = "/etc/webyast/config.yml"
 if File.exist?(WEBYAST_CONFIG_FILE)
+  require 'yaml'
   values = YAML::load(File.open(WEBYAST_CONFIG_FILE, 'r').read)
   ENV['WEBYAST_POLICYKIT']= 'true' if values["polkit1"] == false
 end
