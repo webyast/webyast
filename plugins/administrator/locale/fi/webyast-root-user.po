@@ -1,69 +1,96 @@
 # translation of yast_webclient_administrator.fi.po to suomi
 # Jyri Palokangas <jyri.palokangas@opensuse.org>, 2009.
+# Jyri Palokangas <jmp@opensuse.org>, 2010, 2012.
+# Katariina Kemppainen <katariina@opensuse.fi>, 2010, 2011.
 msgid ""
 msgstr ""
 "Project-Id-Version: yast_webclient_administrator.fi\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-11-20 14:34+0100\n"
-"PO-Revision-Date: 2009-10-29 21:05+0200\n"
+"POT-Creation-Date: 2012-06-07 15:20+0200\n"
+"PO-Revision-Date: 2012-06-24 19:56+0300\n"
 "Last-Translator: Jyri Palokangas <jyri.palokangas@opensuse.org>\n"
-"Language-Team: suomi <fi@li.org>\n"
+"Language-Team: Finnish <kde-i18n-doc@kde.org>\n"
+"Language: fi\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: KBabel 1.11.4\n"
+"X-Generator: Lokalize 1.2\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
 
-#: app/controllers/administrator_controller.rb:35
-#: app/views/administrator/index.html.erb:28
-msgid "Enter a valid e-mail address."
-msgstr "Anna toimiva sähköposti osoite."
+msgid "A password is required."
+msgstr "Salasana on pakollinen."
 
-#: app/controllers/administrator_controller.rb:43
-msgid "Passwords do not match."
-msgstr "Salasanat eivät täsmää."
-
-#: app/controllers/administrator_controller.rb:60
-msgid "Administrator settings have been written."
-msgstr "Järjestelmävalvojan asetukset kirjoitettiin."
-
-#: app/controllers/administrator_controller.rb:70
-msgid "Error while saving administrator settings: %s"
-msgstr "Virhe tallennettaessa järjestelmävalvojan asetuksia: %s"
-
-#: app/views/administrator/index.html.erb:1
 msgid "Administrator Settings"
 msgstr "Järjestelmävalvojan asetukset"
 
-#: app/views/administrator/index.html.erb:36
+msgid "Administrator settings have been written."
+msgstr "Järjestelmävalvojan asetukset kirjoitettiin."
+
+msgid "Confirm Password"
+msgstr "Vahvista salasana"
+
+msgid "Enter a valid e-mail address."
+msgstr "Anna toimiva sähköpostiosoite."
+
+msgid "Error while saving administrator settings."
+msgstr "Virhe tallennettaessa järjestelmävalvojan asetuksia."
+
+msgid "Forward system mail to"
+msgstr "Ohjaa järjestelmän sähköpostiosoitteeseen"
+
+msgid "Mail Setup for User 'root'"
+msgstr "Sähköpostiasetus käyttäjälle 'root'"
+
+msgid "Mail alias was set but outgoing mail server is not configured (%s<i>change</i>%s)."
+msgstr "Sähköposti alias on asetettu mutta lähtevän postin palvelinta ei ole määritetty (%s<i>muuta</i>%s)."
+
+msgid "New Password"
+msgstr "Uusi salasana"
+
+msgid "Password Setup for User 'root'"
+msgstr "Salasanan asetus käyttäjälle 'root'"
+
+msgid "Passwords do not match."
+msgstr "Salasanat eivät täsmää."
+
+msgid "Please wait"
+msgstr "Odota hetki..."
+
+msgid "Save Mail Only"
+msgstr "Tallenna vain sähköposti"
+
 msgid "The passwords do not match."
 msgstr "Salasanat eivät täsmää."
 
-#: app/views/administrator/index.html.erb:51
-msgid "Here, configure the settings for system administrator ('root')."
-msgstr ""
+#~ msgid "Password Strength:"
+#~ msgstr "Salasanan vahvuus:"
+
+#~ msgid "Weak"
+#~ msgstr "Heikko"
+
+#~ msgid "Normal"
+#~ msgstr "Normaali"
+
+#~ msgid "Medium"
+#~ msgstr "Keskitasoinen"
+
+#~ msgid "Strong"
+#~ msgstr "Vahva"
+
+#~ msgid "Very Strong"
+#~ msgstr "Erittäin vahva"
+
+#~ msgid "Manage system administrator"
+#~ msgstr "Hallitse järjestelmänvalvojia"
 
 # password dialog title
-#: app/views/administrator/index.html.erb:58
-msgid "Password"
-msgstr "Salasana"
+#~ msgid "Password"
+#~ msgstr "Salasana"
 
-#: app/views/administrator/index.html.erb:63
-msgid "Confirm password"
-msgstr "Vahvista salasana"
+#~ msgid "Confirm password"
+#~ msgstr "Vahvista salasana"
 
-#: app/views/administrator/index.html.erb:65
 #, fuzzy
-#| msgid "Change Password"
-msgid "Save Password"
-msgstr "Vaihda salasana"
-
-#: app/views/administrator/index.html.erb:70
-msgid "Forward mail to"
-msgstr "Ohjaa sähköposti osoitteeseen"
-
-#: app/views/administrator/index.html.erb:72
-#, fuzzy
-#| msgid "Save"
-msgid "Save Mail"
-msgstr "Tallenna"
+#~| msgid "Change Password"
+#~ msgid "Save Password"
+#~ msgstr "Vaihda salasana"

@@ -1,104 +1,83 @@
-# Copyright (C) 2006 SuSE Linux Products GmbH, Nuernberg
-# This file is distributed under the same license as the package.
-#
+# Fabien Crespel <fabien@crespel.net>, 2009, 2010.
+# Guillaume GARDET <guillaume.gardet@opensuse.org>, 2011, 2013.
 msgid ""
 msgstr ""
-"Project-Id-Version: webyast-root-user-ui\n"
-"POT-Creation-Date: 2010-08-18 10:18+0200\n"
-"PO-Revision-Date: 2010-08-26 09:25\n"
-"Last-Translator: Novell Language <language@novell.com>\n"
-"Language-Team: Novell Language <language@novell.com>\n"
+"Project-Id-Version: @PACKAGE@\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2012-06-07 15:20+0200\n"
+"PO-Revision-Date: 2013-01-10 16:01+0100\n"
+"Last-Translator: Guillaume GARDET <guillaume.gardet@opensuse.org>\n"
+"Language-Team: French <opensuse-fr@opensuse.org>\n"
+"Language: fr\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Lokalize 1.4\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 
-#: app/controllers/administrator_controller.rb:53 app/views/administrator/index.html.erb:56
-#: ./app/controllers/administrator_controller.rb:53 ./app/views/administrator/index.html.erb:56
-msgid "Enter a valid e-mail address."
-msgstr "Saisissez une adresse électronique valide."
-
-#: app/controllers/administrator_controller.rb:61 ./app/controllers/administrator_controller.rb:61
-msgid "Passwords do not match."
-msgstr "Les mots de passe ne correspondent pas."
-
-#: app/controllers/administrator_controller.rb:74 ./app/controllers/administrator_controller.rb:74
-msgid "Administrator settings have been written."
-msgstr "Les paramètres de l'administrateur ont été écrits."
-
-#: app/controllers/administrator_controller.rb:84 ./app/controllers/administrator_controller.rb:84
-msgid "Error while saving administrator settings: %s"
-msgstr "Erreur lors de l'enregistrement des paramètres de l'administrateur : %s"
-
-#: app/controllers/administrator_controller.rb:96 ./app/controllers/administrator_controller.rb:96
-msgid "Mail alias was set but outgoing mail server is not configured (%s<i>change</i>%s)."
-msgstr "Alias de messagerie défini mais serveur de messagerie sortant non configuré (%s<i>change</i>%s)."
-
-#: app/views/administrator/index.html.erb:22 ./app/views/administrator/index.html.erb:22 ./shortcuts.yml:6
-msgid "Administrator Settings"
-msgstr "Paramètres de l'administrateur"
-
-#: app/views/administrator/index.html.erb:63 ./app/views/administrator/index.html.erb:63
-msgid "Please wait"
-msgstr "Veuillez patienter"
-
-#: app/views/administrator/index.html.erb:71 ./app/views/administrator/index.html.erb:71
-msgid "The passwords do not match."
-msgstr "Les mots de passe ne correspondent pas."
-
-#: app/views/administrator/index.html.erb:72 ./app/views/administrator/index.html.erb:72
 msgid "A password is required."
-msgstr "Mot de passe requis."
+msgstr "Un mot de passe est requis."
 
-#: app/views/administrator/index.html.erb:77 ./app/views/administrator/index.html.erb:77
-msgid "Password Strength:"
-msgstr "Niveau de sécurité du mot de passe :"
+msgid "Administrator Settings"
+msgstr "Paramètres administrateur"
 
-#: app/views/administrator/index.html.erb:79 ./app/views/administrator/index.html.erb:79
-msgid "Weak"
-msgstr "Faible"
+msgid "Administrator settings have been written."
+msgstr "Les paramètres administrateur ont été écrits."
 
-#: app/views/administrator/index.html.erb:80 ./app/views/administrator/index.html.erb:80
-msgid "Normal"
-msgstr "Normal"
+msgid "Confirm Password"
+msgstr "Confirmez le mot de passe"
 
-#: app/views/administrator/index.html.erb:81 ./app/views/administrator/index.html.erb:81
-msgid "Medium"
-msgstr "Moyen"
+# TLABEL lan_2002_01_04_0147__56
+msgid "Enter a valid e-mail address."
+msgstr "Entrez une adresse e-mail valide."
 
-#: app/views/administrator/index.html.erb:82 ./app/views/administrator/index.html.erb:82
-msgid "Strong"
-msgstr "Fort"
+msgid "Error while saving administrator settings."
+msgstr "Erreur lors de l'enregistrement des paramètres de l'administrateur."
 
-#: app/views/administrator/index.html.erb:83 ./app/views/administrator/index.html.erb:83
-msgid "Very Strong"
-msgstr "Très fort"
+msgid "Forward system mail to"
+msgstr "Transférer les mails système à"
 
-#: app/views/administrator/index.html.erb:113 ./app/views/administrator/index.html.erb:113
-msgid "Password Setup for User 'root'"
-msgstr "Définition de mot de passe pour utilisateur 'root'"
+msgid "Mail Setup for User 'root'"
+msgstr "Configuration du courrier pour l'utilisateur 'root'"
 
-#: app/views/administrator/index.html.erb:114 ./app/views/administrator/index.html.erb:114
+msgid "Mail alias was set but outgoing mail server is not configured (%s<i>change</i>%s)."
+msgstr "L'alias mail a été défini mais le serveur de courrier sortant n'est pas configuré (%s<i>modifier</i>%s)."
+
 msgid "New Password"
 msgstr "Nouveau mot de passe"
 
-#: app/views/administrator/index.html.erb:118 ./app/views/administrator/index.html.erb:118
-msgid "Confirm Password"
-msgstr "Confirmer le mot de passe"
+msgid "Password Setup for User 'root'"
+msgstr "Configuration du mot de passe pour l'utilisateur 'root'"
 
-#: app/views/administrator/index.html.erb:127 ./app/views/administrator/index.html.erb:127
-msgid "Mail Setup for User 'root'"
-msgstr "Définition de messagerie pour utilisateur 'root'"
+msgid "Passwords do not match."
+msgstr "Les mots de passe ne correspondent pas."
 
-#: app/views/administrator/index.html.erb:129 ./app/views/administrator/index.html.erb:129
-msgid "Forward system mail to"
-msgstr "Transférer le message système à"
+msgid "Please wait"
+msgstr "Veuillez patienter"
 
-#: app/views/administrator/index.html.erb:132 ./app/views/administrator/index.html.erb:132
 msgid "Save Mail Only"
-msgstr "Enregistrer courrier électronique uniquement"
+msgstr "Enregistrer le courrier uniquement"
 
-#: ./shortcuts.yml:7
-msgid "Manage system administrator"
-msgstr "Gérer l'administrateur système"
+msgid "The passwords do not match."
+msgstr "Les mots de passe ne correspondent pas."
 
+#~ msgid "Password Strength:"
+#~ msgstr "Force du mot de passe :"
+
+#~ msgid "Weak"
+#~ msgstr "Faible"
+
+#~ msgid "Normal"
+#~ msgstr "Normal"
+
+#~ msgid "Medium"
+#~ msgstr "Moyen"
+
+#~ msgid "Strong"
+#~ msgstr "Fort"
+
+#~ msgid "Very Strong"
+#~ msgstr "Très fort"
+
+#~ msgid "Manage system administrator"
+#~ msgstr "Gérer l'administrateur système"
