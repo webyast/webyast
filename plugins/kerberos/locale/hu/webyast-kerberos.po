@@ -1,0 +1,67 @@
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+#
+# Kalman Kemenczy <kkemenczy@opensuse.org>, 2011, 2013.
+msgid ""
+msgstr ""
+"Project-Id-Version: webyast-kerberos-ui 1.0.0\n"
+"POT-Creation-Date: 2012-06-07 15:20+0200\n"
+"PO-Revision-Date: 2013-02-25 09:28+0100\n"
+"Last-Translator: Kalman Kemenczy <kkemenczy@opensuse.org>\n"
+"Language-Team: Hungarian <kde-l10n-hu@kde.org>\n"
+"Language: hu\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Lokalize 1.2\n"
+
+#: app/controllers/kerberos_controller.rb:30
+msgid "Cannot read Kerberos client configuraton."
+msgstr "Nem olvashatók be a Kerberos kliens beállításai."
+
+#: app/controllers/kerberos_controller.rb:45
+msgid "Kerberos client configuraton successfully written."
+msgstr "A Kerberos kliens beállításai sikeresen elmentve."
+
+#: app/controllers/kerberos_controller.rb:47
+msgid "Error while saving Kerberos client configuration."
+msgstr "Hiba történt a Kerberos kliens beállítások mentésekor."
+
+#: app/views/kerberos/index.html.erb:32
+msgid "This field is required."
+msgstr "A mező megadása kötelező."
+
+#: app/views/kerberos/index.html.erb:33
+msgid "Enter a valid domain name or an IP address."
+msgstr "Adjon meg egy érvényes tartománynevet vagy IP-címet."
+
+#: app/views/kerberos/index.html.erb:60
+msgid "Please wait"
+msgstr "Kérem, várjon…"
+
+#: app/views/kerberos/index.html.erb:78
+msgid "Kerberos client"
+msgstr "Kerberos kliens"
+
+#: app/views/kerberos/index.html.erb:91
+msgid "Enable Kerberos Authentication"
+msgstr "Kerberos-hitelesítés engedélyezése"
+
+#: app/views/kerberos/index.html.erb:98
+msgid "Default Domain"
+msgstr "Alapértelmezett tartomány"
+
+#: app/views/kerberos/index.html.erb:103
+msgid "Default Realm"
+msgstr "Alapértelmezett terület"
+
+#: app/views/kerberos/index.html.erb:108
+msgid "KDC Server Address"
+msgstr "KDC-kiszolgáló címe"
+
+#~ msgid "Kerberos"
+#~ msgstr "Kerberos"
+
+#~ msgid "Configure Kerberos client"
+#~ msgstr "Kerberos kliens beállítása"

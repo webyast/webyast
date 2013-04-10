@@ -1,0 +1,70 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: desktop-translations 20090902\n"
+"POT-Creation-Date: 2012-06-07 15:20+0200\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: app/controllers/kerberos_controller.rb:30
+#, fuzzy
+#| msgctxt "Comment(x-ica.desktop)"
+#| msgid "Citrix ICA Client Configuration"
+msgid "Cannot read Kerberos client configuraton."
+msgstr "Танзимоти коргири Citrix ICA"
+
+#: app/controllers/kerberos_controller.rb:45
+msgid "Kerberos client configuraton successfully written."
+msgstr ""
+
+#: app/controllers/kerberos_controller.rb:47
+msgid "Error while saving Kerberos client configuration."
+msgstr ""
+
+#: app/views/kerberos/index.html.erb:32
+msgid "This field is required."
+msgstr ""
+
+#: app/views/kerberos/index.html.erb:33
+msgid "Enter a valid domain name or an IP address."
+msgstr ""
+
+#: app/views/kerberos/index.html.erb:60
+msgid "Please wait"
+msgstr ""
+
+#: app/views/kerberos/index.html.erb:78
+msgid "Kerberos client"
+msgstr ""
+
+#: app/views/kerberos/index.html.erb:91
+msgid "Enable Kerberos Authentication"
+msgstr ""
+
+#: app/views/kerberos/index.html.erb:98
+#, fuzzy
+#| msgctxt "Name(entry.desktop)"
+#| msgid "Default"
+msgid "Default Domain"
+msgstr "Стандартӣ"
+
+#: app/views/kerberos/index.html.erb:103
+#, fuzzy
+#| msgctxt "Name(default_blue.jpg.desktop)"
+#| msgid "Default Blue"
+msgid "Default Realm"
+msgstr "Синий по умолчанию"
+
+#: app/views/kerberos/index.html.erb:108
+msgid "KDC Server Address"
+msgstr ""
+
+#, fuzzy
+#~| msgctxt "Comment(khtml_plugins.desktop)"
+#~| msgid "Configure the browser plugins"
+#~ msgid "Configure Kerberos client"
+#~ msgstr "Настройка модулей браузера"

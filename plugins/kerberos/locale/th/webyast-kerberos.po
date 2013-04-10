@@ -1,0 +1,86 @@
+# Thai message file for YaST2 (@memory@).
+# Copyright (C) 2008 SUSE Linux Products GmbH.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: YaST (@memory@)\n"
+"Report-Msgid-Bugs-To: i18n@suse.de\n"
+"POT-Creation-Date: 2012-06-07 15:20+0200\n"
+"PO-Revision-Date: 2008-01-04 08:58+0100\n"
+"Last-Translator: i18n@suse.de\n"
+"Language-Team: Thai <i18n@suse.de>\n"
+"Language: th\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+
+#: app/controllers/kerberos_controller.rb:30
+#, fuzzy
+#| msgid "Cannot read the configuration."
+msgid "Cannot read Kerberos client configuraton."
+msgstr "ไม่สามารถอ่านค่าปรับแต่งได้"
+
+#: app/controllers/kerberos_controller.rb:45
+#, fuzzy
+#| msgid "Provider Configuration Successfully Saved"
+msgid "Kerberos client configuraton successfully written."
+msgstr "การปรับแต่งค่าผู้ให้บริการถูกจัดเก็บเรียบร้อยแล้ว"
+
+#: app/controllers/kerberos_controller.rb:47
+#, fuzzy
+#| msgid "Error creating HTTPD configuration."
+msgid "Error while saving Kerberos client configuration."
+msgstr "เกิดข้อผิดพลาดในการสร้างการปรับแต่งค่าของ HTTPD"
+
+#: app/views/kerberos/index.html.erb:32
+msgid "This field is required."
+msgstr ""
+
+#: app/views/kerberos/index.html.erb:33
+#, fuzzy
+#| msgid "Enter a valid device and filename."
+msgid "Enter a valid domain name or an IP address."
+msgstr "ป้อนชื่อแฟ้มและอุปกรณ์ที่ใช้งานได้"
+
+#: app/views/kerberos/index.html.erb:60
+msgid "Please wait"
+msgstr ""
+
+#: app/views/kerberos/index.html.erb:78
+#, fuzzy
+#| msgid "Kerberos"
+msgid "Kerberos client"
+msgstr "Kerberos"
+
+#: app/views/kerberos/index.html.erb:91
+#, fuzzy
+#| msgid "Set Up &Kerberos Authentication"
+msgid "Enable Kerberos Authentication"
+msgstr "ตั้งค่าการตรวจสอบสิทธิ์กับ &Kerberos"
+
+#: app/views/kerberos/index.html.erb:98
+#, fuzzy
+#| msgid "Default language"
+msgid "Default Domain"
+msgstr "ภาษาปริยาย"
+
+#: app/views/kerberos/index.html.erb:103
+#, fuzzy
+#| msgid "Default Value"
+msgid "Default Realm"
+msgstr "ค่าปริยาย"
+
+#: app/views/kerberos/index.html.erb:108
+#, fuzzy
+#| msgid "Server Address"
+msgid "KDC Server Address"
+msgstr "ที่อยู่เครื่องแม่ข่าย"
+
+#~ msgid "Kerberos"
+#~ msgstr "Kerberos"
+
+#, fuzzy
+#~| msgid "Configuration of NFS client"
+#~ msgid "Configure Kerberos client"
+#~ msgstr "การปรับแต่งค่าของไคลเอนต์ NFS"

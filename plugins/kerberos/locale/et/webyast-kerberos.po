@@ -1,0 +1,75 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: autoinst.fi\n"
+"POT-Creation-Date: 2012-06-07 15:20+0200\n"
+"PO-Revision-Date: 2003-09-22 13:26+0200\n"
+"Last-Translator: Ain Vagula <avagula@gmail.com>\n"
+"Language-Team: Estonian <et@li.org>\n"
+"Language: et\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: app/controllers/kerberos_controller.rb:30
+#, fuzzy
+#| msgid "Base fonts and font configuration."
+msgid "Cannot read Kerberos client configuraton."
+msgstr "Põhifondid ja fontide häälestamine."
+
+#: app/controllers/kerberos_controller.rb:45
+msgid "Kerberos client configuraton successfully written."
+msgstr ""
+
+#: app/controllers/kerberos_controller.rb:47
+#, fuzzy
+#| msgid "Error while parsing the certificate."
+msgid "Error while saving Kerberos client configuration."
+msgstr "Viga sertifikaadi parsimisel."
+
+#: app/views/kerberos/index.html.erb:32
+#, fuzzy
+#| msgid "The filename is required."
+msgid "This field is required."
+msgstr "Faili nimi on vajalik."
+
+#: app/views/kerberos/index.html.erb:33
+#, fuzzy
+#| msgid "Enter your IP address."
+msgid "Enter a valid domain name or an IP address."
+msgstr "Sisesta oma IP-aadress."
+
+#: app/views/kerberos/index.html.erb:60
+msgid "Please wait"
+msgstr ""
+
+#: app/views/kerberos/index.html.erb:78
+msgid "Kerberos client"
+msgstr ""
+
+#: app/views/kerberos/index.html.erb:91
+msgid "Enable Kerberos Authentication"
+msgstr ""
+
+#: app/views/kerberos/index.html.erb:98
+#, fuzzy
+#| msgid "Default Route"
+msgid "Default Domain"
+msgstr "Vaikemarsruut"
+
+#: app/views/kerberos/index.html.erb:103
+#, fuzzy
+#| msgid "Default Route"
+msgid "Default Realm"
+msgstr "Vaikemarsruut"
+
+#: app/views/kerberos/index.html.erb:108
+#, fuzzy
+#| msgid "Name Server Address"
+msgid "KDC Server Address"
+msgstr "Nimeserveri aadress"
+
+#, fuzzy
+#~| msgid "Configure KPowersave..."
+#~ msgid "Configure Kerberos client"
+#~ msgstr "KPowersave häälestamine..."

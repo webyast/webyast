@@ -1,0 +1,65 @@
+# Manuel A. Vazquez <xixirei@yahoo.es>, 2011.
+msgid ""
+msgstr ""
+"Project-Id-Version: @PACKAGE@\n"
+"Report-Msgid-Bugs-To: translation@suse.de\n"
+"POT-Creation-Date: 2012-06-07 15:20+0200\n"
+"PO-Revision-Date: 2011-10-24 20:47+0200\n"
+"Last-Translator: Manuel A. Vazquez <xixirei@yahoo.es>\n"
+"Language-Team: Galego <proxecto@trasno.net>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n!=1);\n"
+"X-Generator: Lokalize 1.0\n"
+
+#: app/controllers/kerberos_controller.rb:30
+msgid "Cannot read Kerberos client configuraton."
+msgstr "Non se pode ler a configuración do cliente Kerberos."
+
+#: app/controllers/kerberos_controller.rb:45
+msgid "Kerberos client configuraton successfully written."
+msgstr "Gravouse correctamente a configuración do cliente Kerberos."
+
+#: app/controllers/kerberos_controller.rb:47
+msgid "Error while saving Kerberos client configuration."
+msgstr "Erro ao gravar a configuración do cliente Kerberos."
+
+#: app/views/kerberos/index.html.erb:32
+msgid "This field is required."
+msgstr "Este campo é necesario."
+
+#: app/views/kerberos/index.html.erb:33
+msgid "Enter a valid domain name or an IP address."
+msgstr "Introducir un nome de dominio válido ou un enderezo IP."
+
+#: app/views/kerberos/index.html.erb:60
+msgid "Please wait"
+msgstr "Agarde"
+
+#: app/views/kerberos/index.html.erb:78
+msgid "Kerberos client"
+msgstr "Cliente Kerberos"
+
+#: app/views/kerberos/index.html.erb:91
+msgid "Enable Kerberos Authentication"
+msgstr "Activar a autentificación Kerberos"
+
+#: app/views/kerberos/index.html.erb:98
+msgid "Default Domain"
+msgstr "Dominio predeterminado"
+
+#: app/views/kerberos/index.html.erb:103
+msgid "Default Realm"
+msgstr "Dominio Realm predeterminado"
+
+#: app/views/kerberos/index.html.erb:108
+msgid "KDC Server Address"
+msgstr "Enderezo do servidor KDC"
+
+#~ msgid "Kerberos"
+#~ msgstr "Kerberos"
+
+#~ msgid "Configure Kerberos client"
+#~ msgstr "Configure o cliente Kerberos"

@@ -1,0 +1,66 @@
+# Translator(s):
+#
+# strainu <narro@strainu.ro>
+# Lucian Oprea <oprea.luci@gmail.com>
+#
+# Reviewer(s):
+#
+# Lucian Oprea <oprea.luci@gmail.com>
+#
+msgid ""
+msgstr ""
+"X-Generator: Narro 2.0 on http://tradu.softwareliber.ro\n"
+"Project-Id-Version: OpenSUSE\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Last-Translator: Lucian Oprea <oprea.luci@gmail.com>\n"
+"Language-Team: Romanian <LL@li.org>\n"
+"PO-Revision-Date: 2012-11-19 15:00+0200\n"
+"MIME-Version: 1.0\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms:  nplurals=3; plural=n==1 ? 0 : (n==0 || (n%100 > 0 && n%100 < "
+"20)) ? 1 : 2;\n"
+"X-Generator: Narro 2.0 on http://tradu.softwareliber.ro\n"
+
+#: app/controllers/kerberos_controller.rb:30
+msgid "Cannot read Kerberos client configuraton."
+msgstr "Nu se poate citi configurația clientului Kerberos."
+
+#: app/controllers/kerberos_controller.rb:45
+msgid "Kerberos client configuraton successfully written."
+msgstr "Configurația clientului Kerberos a fost scrisă."
+
+#: app/controllers/kerberos_controller.rb:47
+msgid "Error while saving Kerberos client configuration."
+msgstr "Eroare la salvarea configurației clientului Kerberos."
+
+#: app/views/kerberos/index.html.erb:32
+msgid "This field is required."
+msgstr "Acest câmp este obligatoriu."
+
+#: app/views/kerberos/index.html.erb:33
+msgid "Enter a valid domain name or an IP address."
+msgstr "Introduceți un nume de domeniu valid sau o adresă IP."
+
+#: app/views/kerberos/index.html.erb:60
+msgid "Please wait"
+msgstr "Vă rugăm să așteptați"
+
+#: app/views/kerberos/index.html.erb:78
+msgid "Kerberos client"
+msgstr "Client Kerberos"
+
+#: app/views/kerberos/index.html.erb:91
+msgid "Enable Kerberos Authentication"
+msgstr "Activează autentificarea Kerberos"
+
+#: app/views/kerberos/index.html.erb:98
+msgid "Default Domain"
+msgstr "Domeniu implicit"
+
+#: app/views/kerberos/index.html.erb:103
+msgid "Default Realm"
+msgstr "Realm implicit"
+
+#: app/views/kerberos/index.html.erb:108
+msgid "KDC Server Address"
+msgstr "Adresa serverului KDC"

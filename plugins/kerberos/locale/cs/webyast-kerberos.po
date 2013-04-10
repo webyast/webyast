@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: @PACKAGE@\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-05-30 16:17+0200\n"
+"POT-Creation-Date: 2012-06-07 15:20+0200\n"
 "PO-Revision-Date: 2011-06-02 17:05+0200\n"
 "Last-Translator: Jiri Srain <jsrain@suse.cz>\n"
 "Language-Team: American English <kde-i18n-doc@kde.org>\n"
@@ -14,70 +14,53 @@ msgstr ""
 "X-Generator: Lokalize 1.0\n"
 "Plural-Forms: nplurals=3; plural=(n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2;\n"
 
-#: app/controllers/kerberos_controller.rb:39
-#: app/controllers/kerberos_controller.rb:39
-#| msgid "Cannot write repository configuration"
+#: app/controllers/kerberos_controller.rb:30
 msgid "Cannot read Kerberos client configuraton."
 msgstr "Nelze zapsat konfiguraci Kerberos"
 
-#: app/controllers/kerberos_controller.rb:55
-#: app/controllers/kerberos_controller.rb:55
+#: app/controllers/kerberos_controller.rb:45
 msgid "Kerberos client configuraton successfully written."
 msgstr "Konfigurace klienta Kerberos byla úspěšně zapsána."
 
-#: app/controllers/kerberos_controller.rb:60
-#: app/controllers/kerberos_controller.rb:60
-#| msgid "Error while parsing the certificate."
+#: app/controllers/kerberos_controller.rb:47
 msgid "Error while saving Kerberos client configuration."
 msgstr "Pri ukládání nastavení klienta Kerberos došlo k chybě."
 
 # 50168 AttribValues/delnotify
-#: app/views/kerberos/index.html.erb:37 app/views/kerberos/index.html.erb:37
-#| msgid "The filename is required."
+#: app/views/kerberos/index.html.erb:32
 msgid "This field is required."
 msgstr "Toto políčko je vyžadováno."
 
-#: app/views/kerberos/index.html.erb:38 app/views/kerberos/index.html.erb:38
-#| msgid "Enter a valid e-mail address."
+#: app/views/kerberos/index.html.erb:33
 msgid "Enter a valid domain name or an IP address."
 msgstr "Zadejte platné doménové jméno nebo IP adresu."
 
-#: app/views/kerberos/index.html.erb:65 app/views/kerberos/index.html.erb:65
-#| msgid "Please wait..."
+#: app/views/kerberos/index.html.erb:60
 msgid "Please wait"
 msgstr "Čekejte prosím"
 
-#: app/views/kerberos/index.html.erb:77 app/views/kerberos/index.html.erb:85
-#: app/views/kerberos/index.html.erb:77 app/views/kerberos/index.html.erb:85
+#: app/views/kerberos/index.html.erb:78
 msgid "Kerberos client"
 msgstr "Klient Kerberos"
 
-#: app/views/kerberos/index.html.erb:97 app/views/kerberos/index.html.erb:97
-#| msgid "Authentication"
+#: app/views/kerberos/index.html.erb:91
 msgid "Enable Kerberos Authentication"
 msgstr "Povolit autentifikace prostřednictvím Kerberos"
 
-#: app/views/kerberos/index.html.erb:104 app/views/kerberos/index.html.erb:104
-#| msgid "Default Hat"
+#: app/views/kerberos/index.html.erb:98
 msgid "Default Domain"
 msgstr "Výchozí doména"
 
-#: app/views/kerberos/index.html.erb:109 app/views/kerberos/index.html.erb:109
-#| msgid "Default Route"
+#: app/views/kerberos/index.html.erb:103
 msgid "Default Realm"
 msgstr "Výchozí Realm"
 
-#: app/views/kerberos/index.html.erb:114 app/views/kerberos/index.html.erb:114
-#| msgid "Name Server Address"
+#: app/views/kerberos/index.html.erb:108
 msgid "KDC Server Address"
 msgstr "Adresa KDC serveru"
 
-#: shortcuts.yml:6
-msgid "Kerberos"
-msgstr "Kerberos"
+#~ msgid "Kerberos"
+#~ msgstr "Kerberos"
 
-#: shortcuts.yml:7
-#| msgid "Configure KPowersave..."
-msgid "Configure Kerberos client"
-msgstr "Nastavit klienta Kerberos"
-
+#~ msgid "Configure Kerberos client"
+#~ msgstr "Nastavit klienta Kerberos"
