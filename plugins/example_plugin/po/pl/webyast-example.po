@@ -1,0 +1,37 @@
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+#
+# Piotr Krakowiak <piotr.krakowiak@opensuse.biz>, 2011.
+# Mariusz Fik <fisiu@opensuse.org>, 2011.
+msgid ""
+msgstr ""
+"Project-Id-Version: yast-example-ui 1.0.0\n"
+"POT-Creation-Date: 2012-06-07 15:20+0200\n"
+"PO-Revision-Date: 2011-10-18 14:04+0200\n"
+"Last-Translator: Mariusz Fik <fisiu@opensuse.org>\n"
+"Language-Team: Polish <opensuse-pl@opensuse.org>\n"
+"Language: pl\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=3; plural=n==1 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
+"X-Generator: Lokalize 1.2\n"
+
+#: app/controllers/example_controller.rb:56
+msgid "File saved"
+msgstr "Plik został zapisany"
+
+#: app/controllers/example_controller.rb:58
+msgid "Error while saving file: %s"
+msgstr "Błąd podczas zapisywania pliku: %s"
+
+#: app/views/example/index.erb:29
+msgid "Example"
+msgstr "Przykład"
+
+#: app/views/example/index.erb:41
+msgid "Content of /var/log/YaST2/example_file"
+msgstr "Zawartość /var/log/YaST2/example_file"
+
+#~ msgid "This is an example plugin only"
+#~ msgstr "To jest tylko przykładowa wtyczka"

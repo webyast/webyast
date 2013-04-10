@@ -1,0 +1,36 @@
+# Russian translations for version package
+# Английские переводы для пакета version.
+# Copyright (C) 2013 THE version'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the version package.
+# Automatically generated, 2013.
+# محمد الحرقان <malham1@gmail.com>, 2013.
+msgid ""
+msgstr ""
+"Project-Id-Version: version 0.0.1\n"
+"POT-Creation-Date: 2012-06-07 15:20+0200\n"
+"PO-Revision-Date: 2013-03-03 10:42+0300\n"
+"Last-Translator: محمد الحرقان <malham1@gmail.com>\n"
+"Language-Team: http://www.vertaal.com.ar/files/factory/ar/list/\n"
+"Language: ru\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%"
+"10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
+"X-Generator: Virtaal 0.7.1\n"
+
+#: app/controllers/example_controller.rb:56
+msgid "File saved"
+msgstr "تم حفظ الملف"
+
+#: app/controllers/example_controller.rb:58
+msgid "Error while saving file: %s"
+msgstr "خطأ أثناء حفظ الملف: %s"
+
+#: app/views/example/index.erb:29
+msgid "Example"
+msgstr "مثال"
+
+#: app/views/example/index.erb:41
+msgid "Content of /var/log/YaST2/example_file"
+msgstr "محتوى /var/log/YaST2/example_file"
