@@ -2,11 +2,325 @@ msgid ""
 msgstr ""
 "Project-Id-Version: @PACKAGE@\n"
 "Report-Msgid-Bugs-To: translation@suse.de\n"
-"POT-Creation-Date: 2006-05-15 15:07+0200\n"
+"POT-Creation-Date: 2012-06-07 15:19+0200\n"
 "PO-Revision-Date: 2003-09-23 10:33+0200\n"
 "Last-Translator: Kevin Donnelly <kevin@dotmon.com>\n"
 "Language-Team: Welsh <i18n@suse.de>\n"
+"Language: cy\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=5; plural=(n == 0 ? 0 : n == 1 ? 1 : n < 6 ? 2 : n == 6 ? 3 : 4);\n"
+
+#: app/helpers/application_helper.rb:47
+msgid " - "
+msgstr ""
+
+#: app/helpers/application_helper.rb:43
+msgid " or "
+msgstr ""
+
+#: app/views/shared/exception_trap.html.erb:13
+msgid "(report link)"
+msgstr ""
+
+#: app/views/layouts/application.html.erb:129
+msgid "...Wait..."
+msgstr ""
+
+#: locale/model_attributes.rb:9
+msgid "Account|Current sign in at"
+msgstr ""
+
+#: locale/model_attributes.rb:11
+msgid "Account|Current sign in ip"
+msgstr ""
+
+#: locale/model_attributes.rb:10
+msgid "Account|Last sign in at"
+msgstr ""
+
+#: locale/model_attributes.rb:12
+msgid "Account|Last sign in ip"
+msgstr ""
+
+#: locale/model_attributes.rb:6
+msgid "Account|Remember created at"
+msgstr ""
+
+#: locale/model_attributes.rb:5
+msgid "Account|Remember token"
+msgstr ""
+
+#: locale/model_attributes.rb:7
+msgid "Account|Remote ip"
+msgstr ""
+
+#: locale/model_attributes.rb:4
+msgid "Account|Salt"
+msgstr ""
+
+#: locale/model_attributes.rb:8
+msgid "Account|Sign in count"
+msgstr ""
+
+#: locale/model_attributes.rb:3
+msgid "Account|Username"
+msgstr ""
+
+#: app/helpers/view_helpers/label_helper.rb:23
+msgid "Add"
+msgstr ""
+
+#: app/views/controlpanel/index.html.erb:136
+msgid "All"
+msgstr ""
+
+#: app/helpers/view_helpers/html_helper.rb:27
+msgid "Are you sure?"
+msgstr ""
+
+#: app/helpers/application_helper.rb:56 app/helpers/application_helper.rb:70
+#: app/helpers/application_helper.rb:94
+msgid "Back"
+msgstr ""
+
+#: app/views/controlpanel/basesystem.haml:21
+msgid "Base system setup"
+msgstr ""
+
+#: app/helpers/application_helper.rb:60
+#, fuzzy
+#| msgid "France"
+msgid "Cancel"
+msgstr "Ffrainc"
+
+#: app/views/controlpanel/index.html.erb:128
+msgid "Configuration"
+msgstr "Ffurweddiad"
+
+#: app/views/controlpanel/basesystem.haml:2
+msgid "Continue initial system setup"
+msgstr ""
+
+#: app/views/shared/cookies_disabled.html.erb:8
+msgid "Cookies disabled ?"
+msgstr ""
+
+#: app/helpers/view_helpers/label_helper.rb:31
+msgid "Delete"
+msgstr ""
+
+#: app/views/shared/exception_trap.html.erb:14
+msgid "Don't forget to include the bug details."
+msgstr ""
+
+#: app/helpers/view_helpers/label_helper.rb:27
+msgid "Edit"
+msgstr ""
+
+#: app/views/controlpanel/index.html.erb:21
+#: app/views/controlpanel/index.html.erb:40
+msgid "Error: Cannot check the current status."
+msgstr ""
+
+#: app/helpers/application_helper.rb:78 app/helpers/application_helper.rb:90
+msgid "Finish"
+msgstr ""
+
+#: app/views/controlpanel/index.html.erb:133
+msgid "Frequently used modules:"
+msgstr ""
+
+#: app/views/layouts/application.html.erb:75
+msgid "Home"
+msgstr ""
+
+#: app/views/layouts/application.html.erb:50
+msgid "JavaScript support is missing or disabled. Please turn JavaScript on or use a supported browser (%sFireFox 3.5%s or %sInternet Explorer 8%s)."
+msgstr ""
+
+#: app/views/controlpanel/index.html.erb:99
+msgid "Loading patch information"
+msgstr ""
+
+#: app/views/controlpanel/index.html.erb:73
+msgid "Loading system information"
+msgstr ""
+
+#: app/views/layouts/application.html.erb:88
+msgid "Logout"
+msgstr ""
+
+#: app/views/layouts/application.html.erb:57
+msgid "My Appliance"
+msgstr ""
+
+#: app/helpers/application_helper.rb:77 app/helpers/application_helper.rb:90
+msgid "Next"
+msgstr ""
+
+#: app/helpers/view_helpers/html_helper.rb:157
+#: app/views/shared/exception_trap.html.erb:17
+msgid "No information available"
+msgstr ""
+
+#: lib/yast_service.rb:118
+msgid "Not authorized! (%s)"
+msgstr ""
+
+#: app/controllers/application_controller.rb:73
+msgid "Operation is forbidden. If you have to do it, please contact system administrator"
+msgstr ""
+
+#: app/views/controlpanel/index.html.erb:109
+msgid "Patch plugin is not installed."
+msgstr ""
+
+#: app/views/controlpanel/index.html.erb:104
+msgid "Patch status summary is disabled in the config file."
+msgstr ""
+
+#: app/views/shared/exception_trap.html.erb:13
+msgid "Please Report a bug so we can fix the problem!."
+msgstr ""
+
+#: app/views/shared/cookies_disabled.html.erb:12
+msgid "Please enable cookies in your browser and <a href=\"/session\">login again</a>"
+msgstr ""
+
+#: app/views/shared/exception_trap.html.erb:7
+msgid "Problem:"
+msgstr ""
+
+#: app/views/controlpanel/index.html.erb:118
+msgid "Really reboot the machine?"
+msgstr ""
+
+#: app/views/controlpanel/index.html.erb:121
+msgid "Really shutdown the machine?"
+msgstr ""
+
+#: app/views/controlpanel/index.html.erb:118
+msgid "Reboot"
+msgstr ""
+
+#: app/helpers/application_helper.rb:75
+msgid "Save"
+msgstr ""
+
+#: app/views/shared/exception_trap.html.erb:22
+#, fuzzy
+#| msgid "Details"
+msgid "Show details..."
+msgstr "Manylion"
+
+#: app/views/controlpanel/index.html.erb:121
+msgid "Shutdown"
+msgstr ""
+
+#: app/views/sessions/new.html.haml:1 app/views/sessions/new.html.haml:19
+msgid "Sign in"
+msgstr ""
+
+#: app/views/controlpanel/index.html.erb:83
+msgid "Status plugin is not installed."
+msgstr ""
+
+#: app/views/controlpanel/index.html.erb:66
+#, fuzzy
+#| msgid "System"
+msgid "System status"
+msgstr "Cysawd"
+
+#: app/views/controlpanel/index.html.erb:78
+msgid "System status summary is disabled in the config file."
+msgstr ""
+
+#: app/views/controlpanel/index.html.erb:92
+#, fuzzy
+#| msgid "System"
+msgid "System updates"
+msgstr "Cysawd"
+
+#: app/helpers/view_helpers/html_helper.rb:160
+msgid "There was a problem retrieving information from the server."
+msgstr ""
+
+#: app/views/shared/exception_trap.html.erb:3
+msgid "This is embarrassing...."
+msgstr ""
+
+#: app/helpers/view_helpers/html_helper.rb:153
+#, fuzzy
+#| msgid "Unknown"
+msgid "Unknown error"
+msgstr "Anhysbys"
+
+#: app/views/shared/exception_trap.html.erb:5
+msgid "We are sorry, but there are some problems."
+msgstr ""
+
+#: app/views/layouts/application.html.erb:35
+msgid "WebYaST"
+msgstr ""
+
+#: app/views/controlpanel/index.html.erb:149
+msgid "WebYaST modules are not installed on your system!"
+msgstr ""
+
+#: app/views/shared/cookies_disabled.html.erb:10
+msgid "WebYaST tried to establish and save a session in your web browser but failed."
+msgstr ""
+
+#: app/views/layouts/application.html.erb:43
+msgid "You are using an unsupported browser. Please switch to %sFireFox 3.5 or better%s or %sInternet Explorer 8%s. Thanks! [%sclose%s]"
+msgstr ""
+
+#: app/views/shared/_missing_write_permissions.html.erb:1
+msgid "You do not have permissions to modify the settings."
+msgstr ""
+
+#: app/views/controlpanel/index.html.erb:154
+msgid "You have no permissions to see or change the modules, please contact the administrator to set up permissions first!"
+msgstr ""
+
+#: app/views/layouts/application.html.erb:98
+msgid "You will be logged off in"
+msgstr ""
+
+#: app/views/controlpanel/basesystem.haml:1
+msgid "Your initial system setup was not completed. Please continue with setting up the modules."
+msgstr ""
+
+#: locale/model_attributes.rb:2
+msgid "account"
+msgstr ""
+
+#: app/views/layouts/application.html.erb:98
+msgid "seconds due to session timeout. "
+msgstr ""
+
+#, fuzzy
+#~| msgid "Details"
+#~ msgid "Hide Details"
+#~ msgstr "Manylion"
+
+#~ msgid "Description"
+#~ msgstr "Disgrifiad"
+
+#~ msgid "Ok"
+#~ msgstr "Iawn"
+
+#~ msgid "Status"
+#~ msgstr "Cyflwr"
+
+#, fuzzy
+#~| msgid "Connections"
+#~ msgid "Connected host:"
+#~ msgstr "Cysylltiadau"
+
+#, fuzzy
+#~| msgid "Description"
+#~ msgid "Host|Description"
+#~ msgstr "Disgrifiad"
