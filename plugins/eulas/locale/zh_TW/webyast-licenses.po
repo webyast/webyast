@@ -1,48 +1,56 @@
-# Copyright (C) 2006 SuSE Linux Products GmbH, Nuernberg
-# This file is distributed under the same license as the package.
+# translation of yast_webclient_eulas.po to Chinese Traditional
+# @TITLE@
+# Copyright (C) 2006, SUSE Linux GmbH, Nuremberg
 #
+# This file is distributed under the same license as @PACKAGE@ package. FIRST
+#
+# swyear <swyear@gmail.com>, 2009, 2011.
 msgid ""
 msgstr ""
-"Project-Id-Version: webyast-licenses-ui\n"
-"POT-Creation-Date: 2010-08-18 10:19+0200\n"
-"PO-Revision-Date: 2010-08-26 09:34\n"
-"Last-Translator: Novell Language <language@novell.com>\n"
-"Language-Team: Novell Language <language@novell.com>\n"
+"Project-Id-Version: yast_webclient_eulas\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2012-06-07 15:19+0200\n"
+"PO-Revision-Date: 2011-10-10 22:58+0800\n"
+"Last-Translator: \n"
+"Language-Team: Chinese Traditional <zh@li.org>\n"
+"Language: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Lokalize 1.2\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
 
-#: app/controllers/eulas_controller.rb:93 ./app/controllers/eulas_controller.rb:93
+#: app/controllers/eulas_controller.rb:122
 msgid "You must accept all licences before using this product!"
-msgstr "使用此產品前必須接受所有授權！"
+msgstr "在使用此產品前，您必須同意授權合約！"
 
-#: app/views/eulas/no_licenses.erb:1 app/views/eulas/all_accepted.erb:1
-#: ./app/views/eulas/no_licenses.erb:1 ./app/views/eulas/all_accepted.erb:1
-msgid "Accept End User License Agreement"
-msgstr "接受終端使用者授權合約"
+#: app/views/eulas/all_accepted.erb:26 app/views/eulas/no_licenses.erb:26
+msgid "Accept End User Licence Agreement"
+msgstr "同意接受終端使用者授權聲明"
 
-#: app/views/eulas/no_licenses.erb:2 ./app/views/eulas/no_licenses.erb:2
-msgid "There are no licenses to accept."
-msgstr "沒有可接受的授權。"
+#: app/views/eulas/all_accepted.erb:37
+msgid "All licenses have already been accepted"
+msgstr "所有的授權合約已被接受"
 
-#: app/views/eulas/show.html.erb:24 ./app/views/eulas/show.html.erb:24
-msgid "License Agreement"
-msgstr "授權合約"
+#: app/views/eulas/show.html.erb:30
+msgid "Licence Agreement"
+msgstr "同意授權聲明"
 
-#: app/views/eulas/show.html.erb:42 ./app/views/eulas/show.html.erb:42
+#: app/views/eulas/show.html.erb:50
 msgid "Yes, I agree to the license agreement."
-msgstr "是，我同意授權合約。"
+msgstr "是的，我同意授權合約。"
 
-#: app/views/eulas/show.html.erb:45 ./app/views/eulas/show.html.erb:45
+#: app/views/eulas/show.html.erb:54
 msgid "No, I do not agree."
-msgstr "否，我不同意。"
+msgstr "不，我不同意。"
 
-#: app/views/eulas/show.html.erb:57 ./app/views/eulas/show.html.erb:57
+#: app/views/eulas/show.html.erb:71
 msgid "Back"
 msgstr "上一步"
 
-#: app/views/eulas/all_accepted.erb:2 ./app/views/eulas/all_accepted.erb:2
-msgid "All licenses have already been accepted"
-msgstr "已接受所有授權"
+#: app/views/eulas/no_licenses.erb:36
+msgid "There are no licenses to accept."
+msgstr "沒有授權聲明可接受。"
 
+#~ msgid "Available translations:"
+#~ msgstr "可用的翻譯："

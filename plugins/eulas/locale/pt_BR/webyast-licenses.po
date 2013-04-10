@@ -1,48 +1,58 @@
-# Copyright (C) 2006 SuSE Linux Products GmbH, Nuernberg
-# This file is distributed under the same license as the package.
+# @TITLE@
+# Copyright (C) 2006, SUSE Linux GmbH, Nuremberg
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+# This file is distributed under the same license as @PACKAGE@ package. FIRST
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: webyast-licenses-ui\n"
-"POT-Creation-Date: 2010-08-18 10:19+0200\n"
-"PO-Revision-Date: 2010-08-26 09:31\n"
-"Last-Translator: Novell Language <language@novell.com>\n"
-"Language-Team: Novell Language <language@novell.com>\n"
+"Project-Id-Version: @PACKAGE@\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2012-06-07 15:19+0200\n"
+"PO-Revision-Date: 2010-03-18 14:26-0300\n"
+"Last-Translator: Luiz Fernando Ranghetti <elchevive@opensuse.org>\n"
+"Language-Team: Brazilian Portuguese <opensuse-pt@opensuse.org>\n"
+"Language: pt_BR\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"X-Generator: KBabel 1.9\n"
 "Plural-Forms: nplurals=2; plural=n>1;\n"
 
-#: app/controllers/eulas_controller.rb:93 ./app/controllers/eulas_controller.rb:93
+#: app/controllers/eulas_controller.rb:122
 msgid "You must accept all licences before using this product!"
 msgstr "Você deve aceitar todas as licenças antes de usar este produto!"
 
-#: app/views/eulas/no_licenses.erb:1 app/views/eulas/all_accepted.erb:1
-#: ./app/views/eulas/no_licenses.erb:1 ./app/views/eulas/all_accepted.erb:1
-msgid "Accept End User License Agreement"
-msgstr "Aceitar o Contrato de Licença do Usuário Final"
+#: app/views/eulas/all_accepted.erb:26 app/views/eulas/no_licenses.erb:26
+msgid "Accept End User Licence Agreement"
+msgstr "Aceitar contrato de licença para usuário final"
 
-#: app/views/eulas/no_licenses.erb:2 ./app/views/eulas/no_licenses.erb:2
-msgid "There are no licenses to accept."
-msgstr "Não há licenças para aceitar."
-
-#: app/views/eulas/show.html.erb:24 ./app/views/eulas/show.html.erb:24
-msgid "License Agreement"
-msgstr "Contrato de Licença"
-
-#: app/views/eulas/show.html.erb:42 ./app/views/eulas/show.html.erb:42
-msgid "Yes, I agree to the license agreement."
-msgstr "Sim, aceito o contrato de licença."
-
-#: app/views/eulas/show.html.erb:45 ./app/views/eulas/show.html.erb:45
-msgid "No, I do not agree."
-msgstr "Não aceito."
-
-#: app/views/eulas/show.html.erb:57 ./app/views/eulas/show.html.erb:57
-msgid "Back"
-msgstr "Voltar"
-
-#: app/views/eulas/all_accepted.erb:2 ./app/views/eulas/all_accepted.erb:2
+#: app/views/eulas/all_accepted.erb:37
 msgid "All licenses have already been accepted"
 msgstr "Todas as licenças já foram aceitas"
 
+#: app/views/eulas/show.html.erb:30
+msgid "Licence Agreement"
+msgstr "Contrato de licença"
+
+#: app/views/eulas/show.html.erb:50
+msgid "Yes, I agree to the license agreement."
+msgstr "Sim, eu concordo com o contrado de licença."
+
+#: app/views/eulas/show.html.erb:54
+msgid "No, I do not agree."
+msgstr "Não, eu não concordo."
+
+#: app/views/eulas/show.html.erb:71
+msgid "Back"
+msgstr "Voltar"
+
+#: app/views/eulas/no_licenses.erb:36
+msgid "There are no licenses to accept."
+msgstr "Não existem mais licenças para aceitar."
+
+#~ msgid "You cannot reject a license once it has been accepted!"
+#~ msgstr "Você não pode rejeitar uma licença que já foi aceita!"
+
+#~ msgid "Available translations:"
+#~ msgstr "Traduções disponíveis"
