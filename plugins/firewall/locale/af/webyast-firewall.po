@@ -3,58 +3,75 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: webyast-firewall-ui 1.0.0\n"
+"Project-Id-Version: installation\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-08-02 09:18+0200\n"
+"POT-Creation-Date: 2012-06-07 15:20+0200\n"
 "PO-Revision-Date: 2006-11-03 14:26\n"
-"Last-Translator: Novell Language <language@novell.com>\n"
-"Language-Team: Novell Language <language@novell.com>\n"
+"Last-Translator: i18n@suse.de\n"
+"Language-Team: i18n@suse.de\n"
+"Language: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: app/controllers/firewall_controller.rb:72
-#: app/controllers/firewall_controller.rb:72
+#: app/controllers/firewall_controller.rb:91
 msgid "Firewall settings have been written."
 msgstr ""
 
-#: app/views/firewall/index.rhtml:53 app/views/firewall/index.rhtml:53
-msgid ""
-"Some of needed services (%s) are going to be blocked. WebYaST may not be "
-"usable anymore. Do you really want to block them?"
-msgstr ""
+#: app/views/firewall/index.html.erb:45 app/views/firewall/index.html.erb:49
+msgid "Enabled"
+msgstr "Ontsper"
 
-#: app/views/firewall/index.rhtml:80 app/views/firewall/index.rhtml:80
-#: shortcuts.yml:6
-#, fuzzy
-msgid "Firewall"
-msgstr "SuSE-brandmuur 2"
+#: app/views/firewall/index.html.erb:46 app/views/firewall/index.html.erb:50
+msgid "Disabled"
+msgstr "Versper"
 
-#: app/views/firewall/index.rhtml:98 app/views/firewall/index.rhtml:98
+#: app/views/firewall/index.html.erb:74
 #, fuzzy
-msgid "General settings"
-msgstr "Algemene instellings"
-
-#: app/views/firewall/index.rhtml:105 app/views/firewall/index.rhtml:105
-#, fuzzy
-msgid "Use Firewall"
-msgstr "SuSE-brandmuur 2"
-
-#: app/views/firewall/index.rhtml:110 app/views/firewall/index.rhtml:110
-#, fuzzy
+#| msgid "inetd service"
 msgid "Allowed services"
 msgstr "inetd-diens"
 
-#: app/views/firewall/index.rhtml:120 app/views/firewall/index.rhtml:120
+#: app/views/firewall/index.html.erb:88
 #, fuzzy
+#| msgid "nfslock service"
 msgid "Blocked services"
 msgstr "nfslock-diens"
 
-#: shortcuts.yml:7
+#: app/views/firewall/index.html.erb:126
+msgid "Some of needed services (%s) are going to be blocked. WebYaST may not be usable anymore. Do you really want to block them?"
+msgstr ""
+
+#: app/views/firewall/index.html.erb:145
 #, fuzzy
-msgid "Firewall settings"
-msgstr "Algemene instellings"
+#| msgid "Please wait..."
+msgid "Please wait"
+msgstr "Wag, asseblief ..."
+
+#: app/views/firewall/index.html.erb:150
+msgid "You have unsaved changes. Do you want to save your changes?"
+msgstr ""
+
+#, fuzzy
+#~| msgid "SuSE Firewall 2"
+#~ msgid "Firewall"
+#~ msgstr "SuSE-brandmuur 2"
+
+#, fuzzy
+#~| msgid "General Settings"
+#~ msgid "Firewall settings"
+#~ msgstr "Algemene instellings"
+
+#, fuzzy
+#~| msgid "SuSE Firewall 2"
+#~ msgid "Use Firewall"
+#~ msgstr "SuSE-brandmuur 2"
+
+#, fuzzy
+#~| msgid "General Settings"
+#~ msgid "General settings"
+#~ msgstr "Algemene instellings"
 
 #, fuzzy
 #~| msgid "xlock"

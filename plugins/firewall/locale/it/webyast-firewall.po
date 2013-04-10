@@ -1,51 +1,67 @@
-# Copyright (C) 2006 SuSE Linux Products GmbH, Nuernberg
-# This file is distributed under the same license as the package.
-#
 msgid ""
 msgstr ""
-"Project-Id-Version: webyast-firewall-ui\n"
-"POT-Creation-Date: 2010-08-18 10:18+0200\n"
-"PO-Revision-Date: 2010-08-26 09:27\n"
-"Last-Translator: Novell Language <language@novell.com>\n"
-"Language-Team: Novell Language <language@novell.com>\n"
+"Project-Id-Version: @PACKAGE@\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2012-06-07 15:20+0200\n"
+"PO-Revision-Date: 2012-06-17 09:00+0100\n"
+"Last-Translator: Andrea Turrini <andrea.turrini@gmail.com>\n"
+"Language-Team: Italian <opensuse-translation@opensuse.org>\n"
+"Language: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"X-Generator: KBabel 1.9\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Poedit-Language: Italian\n"
 
-#: app/controllers/firewall_controller.rb:72 ./app/controllers/firewall_controller.rb:72
+#: app/controllers/firewall_controller.rb:91
 msgid "Firewall settings have been written."
 msgstr "Le impostazioni del firewall sono state scritte."
 
-#: app/views/firewall/index.rhtml:50 ./app/views/firewall/index.rhtml:50
-msgid "Please wait"
-msgstr "Attendere"
+#: app/views/firewall/index.html.erb:45
+#: app/views/firewall/index.html.erb:49
+msgid "Enabled"
+msgstr "Abilitato"
 
-#: app/views/firewall/index.rhtml:58 ./app/views/firewall/index.rhtml:58
-msgid "Some of needed services (%s) are going to be blocked. WebYaST may not be usable anymore. Do you really want to block them?"
-msgstr "Alcuni servizi necessari (%s) stanno per essere bloccati, WebYast potrebbe quindi non essere più utilizzabile. Bloccare questi servizi?"
+#: app/views/firewall/index.html.erb:46
+#: app/views/firewall/index.html.erb:50
+msgid "Disabled"
+msgstr "Disabilitato"
 
-#: app/views/firewall/index.rhtml:85 ./app/views/firewall/index.rhtml:85 ./shortcuts.yml:6
-msgid "Firewall"
-msgstr "Firewall"
-
-#: app/views/firewall/index.rhtml:103 ./app/views/firewall/index.rhtml:103
-msgid "General settings"
-msgstr "Impostazioni generali"
-
-#: app/views/firewall/index.rhtml:106 ./app/views/firewall/index.rhtml:106
-msgid "Use Firewall"
-msgstr "Usa firewall"
-
-#: app/views/firewall/index.rhtml:116 ./app/views/firewall/index.rhtml:116
+#: app/views/firewall/index.html.erb:74
 msgid "Allowed services"
-msgstr "Servizi consentiti"
+msgstr "Servizi permessi"
 
-#: app/views/firewall/index.rhtml:126 ./app/views/firewall/index.rhtml:126
+#: app/views/firewall/index.html.erb:88
 msgid "Blocked services"
 msgstr "Servizi bloccati"
 
-#: ./shortcuts.yml:7
-msgid "Firewall settings"
-msgstr "Impostazioni firewall"
+#: app/views/firewall/index.html.erb:126
+msgid "Some of needed services (%s) are going to be blocked. WebYaST may not be usable anymore. Do you really want to block them?"
+msgstr "Alcuni dei servizi richiesti (%s) verranno bloccati. WebYaST potrebbe non essere più usabile. Bloccarli veramente?"
 
+#: app/views/firewall/index.html.erb:145
+msgid "Please wait"
+msgstr "Attendere..."
+
+#: app/views/firewall/index.html.erb:150
+msgid "You have unsaved changes. Do you want to save your changes?"
+msgstr "Ci sono delle modifiche non salvate. Si vuole salvare tali modifiche?"
+
+#~ msgid "Firewall"
+#~ msgstr "Firewall"
+
+#~ msgid "Firewall settings"
+#~ msgstr "Impostazioni del firewall"
+
+#~ msgid "Use Firewall"
+#~ msgstr "Usa firewall"
+
+#~ msgid "General settings"
+#~ msgstr "Impostazioni generali"
+
+#~ msgid "Block"
+#~ msgstr "Blocca"
+
+#~ msgid "Allow"
+#~ msgstr "Permetti"
