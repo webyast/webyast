@@ -1,164 +1,177 @@
+# Translator(s):
+#
+# Lucian Oprea <oprea.luci@gmail.com>
+# Alexandru Szasz <alexxed@gmail.com>
+# strainu <narro@strainu.ro>
+# npclau <npclau@gmail.com>
+#
+# Reviewer(s):
+#
+# Lucian Oprea <oprea.luci@gmail.com>
+#
+# Lucian Oprea <oprea.luci@gmail.com>, 2011.
 msgid ""
 msgstr ""
-"Project-Id-Version: webyast-registration-ui 1.0.0\n"
-"Report-Msgid-Bugs-To: translation@suse.de\n"
-"POT-Creation-Date: 2010-08-02 09:19+0200\n"
-"PO-Revision-Date: 2010-04-30 16:32+0300\n"
-"Last-Translator: Lucian Oprea <oprea.luci@gmail.com>\n"
-"Language-Team: Comunitatea traducatorilor openSUSE Romania. Contact: <oprea."
-"luci@gmail.com><strainu10@gmail.com><traduceri@suseromania.ro>\n"
-"MIME-Version: 1.0\n"
+"X-Generator: Narro 2.0 on http://tradu.softwareliber.ro\n"
+"Project-Id-Version: OpenSUSE\n"
 "Content-Type: text/plain; charset=UTF-8\n"
+"Last-Translator: Lucian Oprea <oprea.luci@gmail.com>\n"
+"Language-Team: Romanian <LL@li.org>\n"
+"PO-Revision-Date: 2012-11-19 15:00+0200\n"
+"MIME-Version: 1.0\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms:  nplurals=3; plural=n==1 ? 0 : (n==0 || (n%100 > 0 && n%100 < "
 "20)) ? 1 : 2;\n"
-"X-Generator: Narro 0.9.4 on http://tradu.softwareliber.ro\n"
+"X-Generator: Narro 2.0 on http://tradu.softwareliber.ro\n"
 
-#: app/controllers/registration_controller.rb:32
-#: app/controllers/registration_controller.rb:32
+#: app/models/registration_state.rb:27
+msgid "Registration is missing"
+msgstr "Registration is missing"
+
+#: app/models/registration_state.rb:28
+msgid "Please register your system in order to get updates."
+msgstr ""
+"Vă rugăm să înregistrați sistemul dumneavoastră pentru a obține actualizări."
+
+#: app/models/registration_state.rb:30
+#| msgid "register plugin"
+msgid "register"
+msgstr "înregistrare"
+
+#: app/controllers/registration_controller.rb:29
 msgid "Email"
 msgstr "Email"
 
-#: app/controllers/registration_controller.rb:33
-#: app/controllers/registration_controller.rb:33
+#: app/controllers/registration_controller.rb:30
 msgid "System name"
 msgstr "Nume sistem"
 
-#: app/controllers/registration_controller.rb:34
-#: app/controllers/registration_controller.rb:34
+#: app/controllers/registration_controller.rb:31
 msgid "SLES registration code"
 msgstr "Cod de înregistrare SLES"
 
-#: app/controllers/registration_controller.rb:35
-#: app/controllers/registration_controller.rb:35
+#: app/controllers/registration_controller.rb:32
 msgid "SLED registration code"
 msgstr "Cod de înregistrare SLED"
 
-#: app/controllers/registration_controller.rb:36
-#: app/controllers/registration_controller.rb:36
+#: app/controllers/registration_controller.rb:33
+msgid "SLMS registration code"
+msgstr "Cod înregistrare SLMS"
+
+#: app/controllers/registration_controller.rb:34
 msgid "Appliance registration code"
 msgstr "Aparat de înregistrare cod"
 
 # dialog title for ftp installation
-#: app/controllers/registration_controller.rb:37
-#: app/controllers/registration_controller.rb:37
+#: app/controllers/registration_controller.rb:35
 msgid "WebYaST registration code"
 msgstr "Cod de înregistrare WebYaST"
 
-#: app/controllers/registration_controller.rb:38
-#: app/controllers/registration_controller.rb:38
+#: app/controllers/registration_controller.rb:36
 msgid "Registration code"
 msgstr "Cod de înregistrare"
 
-#: app/controllers/registration_controller.rb:39
-#: app/controllers/registration_controller.rb:39
+#: app/controllers/registration_controller.rb:37
 msgid "Hostname"
-msgstr "Nume gazdă"
+msgstr "Nume de gazdă"
 
-#: app/controllers/registration_controller.rb:40
-#: app/controllers/registration_controller.rb:40
+#: app/controllers/registration_controller.rb:38
 msgid "Device name"
 msgstr "Nume dispozitiv"
 
-#: app/controllers/registration_controller.rb:41
-#: app/controllers/registration_controller.rb:41
+#: app/controllers/registration_controller.rb:39
 msgid "Appliance name"
-msgstr "Numele dispozitivului"
+msgstr "Nume dispozitiv"
 
-#: app/controllers/registration_controller.rb:42
-#: app/controllers/registration_controller.rb:42
+#: app/controllers/registration_controller.rb:40
 msgid "registration code"
 msgstr "cod de înregistrare"
 
-#: app/controllers/registration_controller.rb:52
-#: app/controllers/registration_controller.rb:52
-msgid "Invalid session, please login again."
-msgstr "Sesiune invalidă, vă rugăm să vă reconectati."
-
-#: app/controllers/registration_controller.rb:62
-#: app/controllers/registration_controller.rb:62
-msgid "No permissions for registration"
-msgstr "Nu aveţi permisiunea pentru a vă înregistra"
-
-#: app/controllers/registration_controller.rb:111
-#: app/controllers/registration_controller.rb:111
+#: app/controllers/registration_controller.rb:81
 msgid "Please try to register again later."
-msgstr "Vă rugăm să încercaţi să vă înregistraţi din nou mai târziu."
+msgstr "Vă rugăm să încercați să vă înregistrați din nou mai târziu."
 
-#: app/controllers/registration_controller.rb:115
-#: app/controllers/registration_controller.rb:115
+#: app/controllers/registration_controller.rb:85
 msgid "Registration did not succeed."
 msgstr "Înregistrarea nu s-a efectuat cu succes."
 
-#: app/controllers/registration_controller.rb:119
-#: app/controllers/registration_controller.rb:119
+#: app/controllers/registration_controller.rb:89
 msgid "Registration was skipped."
 msgstr "Înregistrarea a fost omisă."
 
-#: app/controllers/registration_controller.rb:123
-#: app/controllers/registration_controller.rb:123
+#: app/controllers/registration_controller.rb:93
 msgid "This may be a temporary issue."
-msgstr "Înregistrarea nu s-a efectuat cu succes."
+msgstr "Acest lucru poate fi o problemă temporară."
 
-#: app/controllers/registration_controller.rb:127
-#: app/controllers/registration_controller.rb:127
+#: app/controllers/registration_controller.rb:97
 msgid "The system might not receive necessary updates."
-msgstr ""
+msgstr "Este posibil ca sistemul să nu primească actualizările necesare."
 
-#: app/controllers/registration_controller.rb:143
-#: app/controllers/registration_controller.rb:143
+#: app/controllers/registration_controller.rb:113
 msgid "The registration server returned invalid or incomplete data."
 msgstr "Serverul de înregistrare a primit date incorecte sau incomplete."
 
-#: app/controllers/registration_controller.rb:151
-#: app/controllers/registration_controller.rb:151
+#: app/controllers/registration_controller.rb:121
 msgid "Could not read the registration configuration."
-msgstr ""
+msgstr "Nu poate fi citită configurare pentru înregistrare."
 
-#: app/controllers/registration_controller.rb:151
-#: app/controllers/registration_controller.rb:151
+#: app/controllers/registration_controller.rb:121
 msgid "The registration backend is not installed correctly"
-msgstr ""
+msgstr "Backend-ul de înregistrare nu este instalat corect"
 
-#: app/controllers/registration_controller.rb:152
-#: app/controllers/registration_controller.rb:152
+#: app/controllers/registration_controller.rb:122
 msgid "Please refer to your support contact."
-msgstr ""
+msgstr "Vă rugăm să dați datele de contact."
 
-#: app/controllers/registration_controller.rb:181
-#: app/controllers/registration_controller.rb:181
+#: app/controllers/registration_controller.rb:151
 msgid "Please fill out missing entries."
-msgstr "Vă rugăm să completaţi câmpurile libere."
+msgstr "Vă rugăm să completați câmpurile libere."
 
-#: app/controllers/registration_controller.rb:213
-#: app/controllers/registration_controller.rb:213
+#: app/controllers/registration_controller.rb:183
 msgid "Service added:"
 msgstr "Serviciu adăugat:"
 
-#: app/controllers/registration_controller.rb:217
-#: app/controllers/registration_controller.rb:223
-#: app/controllers/registration_controller.rb:217
-#: app/controllers/registration_controller.rb:223
+#: app/controllers/registration_controller.rb:189
 msgid "Catalog enabled:"
 msgstr "Catalog activat:"
 
-#: app/controllers/registration_controller.rb:250
-#: app/controllers/registration_controller.rb:250
+#: app/controllers/registration_controller.rb:215
 msgid "Repository added:"
 msgstr "Sursa de instalare adăugată:"
 
-#: app/controllers/registration_controller.rb:326
-#: app/controllers/registration_controller.rb:326
+#: app/controllers/registration_controller.rb:357
 msgid "This system is already registered."
 msgstr "Acest sistem este deja înregistrat."
 
-#: app/controllers/registration_controller.rb:355
-#: app/controllers/registration_controller.rb:355
+#: app/controllers/registration_controller.rb:382
 msgid "Registration finished successfully."
 msgstr "Înregistrarea s-a finalizat cu succes."
 
-#: app/controllers/registration_controller.rb:365
-#: app/controllers/registration_controller.rb:365
+#: app/controllers/registration_controller.rb:396
+msgid "A connection to the registration server could not be established."
+msgstr "Nu a putut fi stabilită o conexiune cu serverul de înregistrare."
+
+#: app/controllers/registration_controller.rb:400
+msgid "The supplied registration data was invalid."
+msgstr "Datele de înregistrare furnizate sunt invalide."
+
+#: app/controllers/registration_controller.rb:404
+msgid "The registration code you entered was invalid."
+msgstr "Codul de înregistrare introdus este invalid."
+
+#: app/controllers/registration_controller.rb:410
+msgid "The transmitted registration data created a conflict."
+msgstr "Datele de înregistrare transmise au creat un conflict."
+
+#: app/controllers/registration_controller.rb:418
+msgid ""
+"Registration can not be performed. There is no product installed that can be "
+"registered."
+msgstr ""
+"Înregistrarea nu poate fi efectuată. Nu există nici un produs instalat care "
+"pot fi înregistrat."
+
+#: app/controllers/registration_controller.rb:442
 msgid ""
 "<p><b>Repositories were not modified during the registration process.</b></"
 "p><p>It is likely that an incorrect registration code was used. If this is "
@@ -166,118 +179,59 @@ msgid ""
 "repository.</p><p>Please make sure that this system has an update repository "
 "configured, otherwise it will not receive updates.</p>"
 msgstr ""
-"<p><b>Sursele de instalare nu au fost modificate în timpul procesului de "
-"înregistrare.</b></p>Este probabil ca un cod de înregistrare incorect să fi "
-"fost folosit. Dacă este aşa, vă rugăm să încercaţi din nou procesul de "
-"înregistrare pentru a obţine o sursă de instalare nouă.</p><p>Vă rugăm să vă "
-"asiguraţi că acest sistem are o sursă de instalare configurată, deoarece în "
+"<p><b>Sursele de instalarea nu au fost modificate în timpul procesului de "
+"înregistrare.</b></p>Este posibil ca un cod de înregistrare să fi fost "
+"folosit incorect. Dacă este așa, vă rugăm să încercați din nou procesul de "
+"înregistrare pentru a obține o sursă de instalare nouă.</p><p>Vă rugăm să vă "
+"asigurați că acest sistem are o sursă de instalare configurată, deoarece în "
 "caz contrar nu va primi actualizări.</p>"
 
-#: app/controllers/registration_controller.rb:399
-#: app/controllers/registration_controller.rb:399
-msgid "A connection to the registration server could not be established."
-msgstr "Nu a putut fi stabilită o conexiune cu serverul de înregistrare."
-
-#: app/controllers/registration_controller.rb:403
-#: app/controllers/registration_controller.rb:403
-#, fuzzy
-msgid "The supplied registration data was invalid."
-msgstr "Datele de înregistrare transmise au creat un conflict."
-
-#: app/controllers/registration_controller.rb:407
-#: app/controllers/registration_controller.rb:407
-#, fuzzy
-msgid "The registration code you entered was invalid."
-msgstr "Serverului de înregistrare a returnat date invalide."
-
-#: app/controllers/registration_controller.rb:413
-#: app/controllers/registration_controller.rb:413
-msgid "The transmitted registration data created a conflict."
-msgstr "Datele de înregistrare transmise au creat un conflict."
-
-#: app/controllers/registration_controller.rb:421
-#: app/controllers/registration_controller.rb:421
-msgid ""
-"Registration can not be performed. There is no product installed that can be "
-"registered."
-msgstr ""
-"Înregistrarea nu poate fi efectuată. Nu există nici un produs instalat care "
-"să poată fi înregistrat."
-
-#: app/controllers/registration_controller.rb:436
-#: app/controllers/registration_controller.rb:436
-msgid ""
-"A connection to the registration server could not be established or it did "
-"not reply."
-msgstr ""
-"O conexiune la serverul de înregistrare nu a putut fi stabilită sau acesta "
-"nu a răspuns."
-
-#: app/controllers/registration_controller.rb:453
-#: app/controllers/registration_controller.rb:453
+#: app/controllers/registration_controller.rb:454
 msgid "The registration server returned invalid data."
-msgstr "Serverului de înregistrare a returnat date invalide."
+msgstr "Serverul de înregistrare a returnat date invalide."
 
-#: app/views/registration/index.rhtml:53 app/views/registration/index.rhtml:54
-#: app/views/registration/index.rhtml:53 app/views/registration/index.rhtml:54
+#: app/views/registration/index.html.erb:42
+#: app/views/registration/index.html.erb:57
+msgid "Please wait"
+msgstr "Vă rugăm să așteptați"
+
+#: app/views/registration/index.html.erb:64
+#: app/views/registration/index.html.erb:65
 msgid "Please enter a valid Email address."
-msgstr "Vă rugăm să introduceţi o adresă de e-mail validă."
+msgstr "Vă rugăm să introduceți o adresă de e-mail validă."
 
-#: app/views/registration/index.rhtml:61 app/views/registration/index.rhtml:61
-msgid "register plugin"
-msgstr "modul de înregistrare"
-
-#: app/views/registration/index.rhtml:61 app/views/registration/index.rhtml:61
-#: shortcuts.yml:6
+#: app/views/registration/index.html.erb:80
 msgid "Registration"
 msgstr "Înregistrare"
 
-#: app/views/registration/index.rhtml:69 app/views/registration/index.rhtml:69
+#: app/views/registration/index.html.erb:93
 msgid "Registration Information"
-msgstr "Informaţii de înregistrare"
+msgstr "Informații de înregistrare"
 
-#: app/views/registration/index.rhtml:70 app/views/registration/index.rhtml:70
+#: app/views/registration/index.html.erb:99
 msgid "This system is registered"
 msgstr "Acest sistem este înregistrat"
 
-#: app/views/registration/index.rhtml:71 app/views/registration/index.rhtml:71
+#: app/views/registration/index.html.erb:102
 msgid "System number (GUID)"
-msgstr "Număr de sistem (GUID)"
+msgstr "Număr sistem (GUID)"
 
-#: app/views/registration/index.rhtml:72 app/views/registration/index.rhtml:72
+#: app/views/registration/index.html.erb:105
 msgid "Register again"
-msgstr "Înregistrează-te din nou"
+msgstr "Înregistrare din nou"
 
-#: app/views/registration/index.rhtml:79 app/views/registration/index.rhtml:79
+#: app/views/registration/index.html.erb:118
 msgid "Next"
 msgstr "Înainte"
 
-#: app/views/registration/index.rhtml:89 app/views/registration/index.rhtml:89
+#: app/views/registration/index.html.erb:131
 msgid "Mandatory Information"
-msgstr "Informaţie obligatorie"
+msgstr "Informație obligatorie"
 
-#: app/views/registration/index.rhtml:104
-#: app/views/registration/index.rhtml:104
+#: app/views/registration/index.html.erb:151
 msgid "Details"
 msgstr "Detalii"
 
-#: app/views/registration/index.rhtml:128
-#: app/views/registration/index.rhtml:128
+#: app/views/registration/index.html.erb:179
 msgid "Postpone"
-msgstr "Amână"
-
-#: shortcuts.yml:7
-#, fuzzy
-msgid "System Registration"
-msgstr "Înregistrare"
-
-#~| msgid "Registration finished successfully."
-#~ msgid "Registration did not finish."
-#~ msgstr "Înregistrarea nu s-a terminat."
-
-#~ msgid "Skip"
-#~ msgstr "Sari peste"
-
-#~| msgid "Sort"
-#~ msgid "or"
-#~ msgstr "sau"
+msgstr "Amânare"

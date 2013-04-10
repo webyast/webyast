@@ -1,0 +1,89 @@
+# @TITLE@
+# Copyright (C) 2006, SUSE Linux GmbH, Nuremberg
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+# This file is distributed under the same license as @PACKAGE@ package. FIRST
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: @PACKAGE@\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2012-06-07 15:20+0200\n"
+"PO-Revision-Date: 2005-09-18 19:09+0200\n"
+"Last-Translator: Mattias Newzella <newzella@linux.se>\n"
+"Language-Team: Swedish <sv@li.org>\n"
+"Language: sv\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: KBabel 1.10.1\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: app/controllers/ldap_controller.rb:38
+#, fuzzy
+#| msgid "Base fonts and font configuration."
+msgid "Cannot read LDAP client configuraton."
+msgstr "Grundläggande teckensnitt och teckensnittsinställningar."
+
+#: app/controllers/ldap_controller.rb:63
+msgid "LDAP client configuraton successfully written."
+msgstr ""
+
+#: app/controllers/ldap_controller.rb:65
+#, fuzzy
+#| msgid "Error while parsing the certificate."
+msgid "Error while saving LDAP client configuration."
+msgstr "Ett fel uppstod när certifikatet skulle tolkas."
+
+#: app/views/ldap/index.html.erb:33
+#, fuzzy
+#| msgid "The filename is required."
+msgid "This field is required."
+msgstr "Filnamnet krävs."
+
+#: app/views/ldap/index.html.erb:34
+#, fuzzy
+#| msgid "Enter your IP address."
+msgid "Enter a valid domain name or an IP address."
+msgstr "Ange IP-adress."
+
+#: app/views/ldap/index.html.erb:70
+msgid "Please wait"
+msgstr ""
+
+#: app/views/ldap/index.html.erb:88
+#, fuzzy
+#| msgid "LDAP client service"
+msgid "LDAP client"
+msgstr "LDAP-klienttjänst"
+
+#: app/views/ldap/index.html.erb:101
+#, fuzzy
+#| msgid "Select WEP authentication mode:"
+msgid "Enable LDAP Authentication"
+msgstr "Välj WEP-autentiseringsläge:"
+
+#: app/views/ldap/index.html.erb:108
+#, fuzzy
+#| msgid "Name Server Address"
+msgid "LDAP Server Address"
+msgstr "Namnserveradress"
+
+#: app/views/ldap/index.html.erb:113
+msgid "Base DN"
+msgstr ""
+
+#: app/views/ldap/index.html.erb:115
+msgid "Fetch DN"
+msgstr ""
+
+#: app/views/ldap/index.html.erb:127
+#, fuzzy
+#| msgid "Current Connection"
+msgid "Secure Connection"
+msgstr "Aktuell anslutning"
+
+#, fuzzy
+#~| msgid "Configure Applet..."
+#~ msgid "Configure LDAP client"
+#~ msgstr "Ställ in miniprogram..."

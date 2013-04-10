@@ -1,184 +1,175 @@
-# Copyright (C) 2006 SuSE Linux Products GmbH, Nuernberg
-# This file is distributed under the same license as the package.
-#
+# translation of webyast-status.po to Japanese
+# Yasuhiko Kamata <belphegor@belbel.or.jp>, 2009, 2010, 2011, 2012.
 msgid ""
 msgstr ""
-"Project-Id-Version: webyast-status-ui\n"
-"POT-Creation-Date: 2010-08-18 10:18+0200\n"
-"PO-Revision-Date: 2010-08-27 09:29\n"
-"Last-Translator: Novell Language <language@novell.com>\n"
-"Language-Team: Novell Language <language@novell.com>\n"
+"Project-Id-Version: webyast-status\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2012-06-07 15:20+0200\n"
+"PO-Revision-Date: 2012-06-14 20:47+0900\n"
+"Last-Translator: Yasuhiko Kamata <belphegor@belbel.or.jp>\n"
+"Language-Team: Japanese <opensuse-ja@opensuse.org>\n"
+"Language: ja\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"X-Generator: KBabel 1.11.4\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
 
-#: app/controllers/status_controller.rb:149 ./app/controllers/status_controller.rb:149
-msgid "No data found for showing system status."
-msgstr "システムステータスを表示するためのデータが見つかりません。"
-
-#: app/controllers/status_controller.rb:157 ./app/controllers/status_controller.rb:157
-msgid "Status not available."
-msgstr "ステータスを利用できません。"
-
-#: app/controllers/status_controller.rb:176 ./app/controllers/status_controller.rb:176
-msgid "Can't connect to host"
-msgstr "ホストに接続できません"
-
-#: app/controllers/status_controller.rb:178 ./app/controllers/status_controller.rb:178
-msgid "Can't connect to host %s."
-msgstr "ホスト %s へ接続できませんでした。"
-
-#: app/controllers/status_controller.rb:217 ./app/controllers/status_controller.rb:217
-msgid "Limits exceeded for "
-msgstr "制限を超過しています "
-
-#: app/controllers/status_controller.rb:242 ./app/controllers/status_controller.rb:242
-msgid "Status not available"
-msgstr "ステータスを利用できません"
-
-#: app/controllers/status_controller.rb:266 ./app/controllers/status_controller.rb:266
-msgid "Status not available (no permissions)"
-msgstr "ステータスを利用できません(許可なし)"
-
-#: app/controllers/status_controller.rb:328 ./app/controllers/status_controller.rb:328
-msgid "exceeded"
-msgstr "大きすぎます"
-
-#: app/controllers/status_controller.rb:342 ./app/controllers/status_controller.rb:342
-msgid "undercut"
-msgstr "未満"
-
-#: app/controllers/status_controller.rb:444 ./app/controllers/status_controller.rb:444
-msgid "Limits have been written."
-msgstr "制限はすでに保存されています。"
-
-#: app/views/status/edit.html.erb:48 ./app/views/status/edit.html.erb:48
-msgid "Only numbers are valid !"
-msgstr "数値のみが有効です!"
-
-#: app/views/status/edit.html.erb:75 app/views/status/index.html.erb:52
-#: ./app/views/status/edit.html.erb:75 ./app/views/status/index.html.erb:52 ./shortcuts.yml:6
-msgid "Status"
-msgstr "状況"
-
-#: app/views/status/edit.html.erb:75 ./app/views/status/edit.html.erb:75
-msgid "Settings"
-msgstr "設定"
-
-#: app/views/status/edit.html.erb:89 ./app/views/status/edit.html.erb:89
-msgid "undercuts"
-msgstr "小さすぎます"
-
-#: app/views/status/edit.html.erb:89 ./app/views/status/edit.html.erb:89
-msgid "exceeds"
-msgstr "大きすぎます"
-
-#: app/views/status/index.html.erb:103 ./app/views/status/index.html.erb:103
-msgid "details"
-msgstr "詳細"
-
-#: app/views/status/index.html.erb:119 ./app/views/status/index.html.erb:119
-msgid "Details"
-msgstr "詳細情報"
-
-#: app/views/status/index.html.erb:187 ./app/views/status/index.html.erb:187
-msgid "Edit Limits"
-msgstr "制限の編集"
-
-#: app/views/status/_status_graph.html.erb:2 ./app/views/status/_status_graph.html.erb:2
-msgid "A problem occured when loading status information."
-msgstr "ステータス情報を読み込む際に問題が発生しました。"
-
-#: app/views/status/_status_graph.html.erb:90 ./app/views/status/_status_graph.html.erb:90
-msgid "Show last"
-msgstr "直前の表示"
-
-#: app/views/status/_status_graph.html.erb:91 ./app/views/status/_status_graph.html.erb:91
-msgid "5 Minutes"
-msgstr "5分"
-
-#: app/views/status/_status_graph.html.erb:92 ./app/views/status/_status_graph.html.erb:92
-msgid "15 Minutes"
-msgstr "15分"
-
-#: app/views/status/_status_graph.html.erb:93 ./app/views/status/_status_graph.html.erb:93
-msgid "30 Minutes"
-msgstr "30分"
-
-#: app/views/status/_status_graph.html.erb:94 ./app/views/status/_status_graph.html.erb:94
-msgid "1 Hour"
-msgstr "1時間"
-
-#: app/views/status/_status_graph.html.erb:95 ./app/views/status/_status_graph.html.erb:95
-msgid "6 Hours"
-msgstr "6時間"
-
-#: app/views/status/_status_graph.html.erb:96 ./app/views/status/_status_graph.html.erb:96
-msgid "12 Hours"
-msgstr "12時間"
-
-#: app/views/status/_status_summary.html.erb:6 ./app/views/status/_status_summary.html.erb:6
-msgid "An problem occured when loading status information."
-msgstr "ステータス情報を読み込む際に問題が発生しました。"
-
-#: app/views/status/_status_summary.html.erb:13 ./app/views/status/_status_summary.html.erb:13
-msgid "Cannot read system status - you have been logged out."
-msgstr "システムの状態を読み込めません - ログアウトしました。"
-
-#: app/views/status/_status_summary.html.erb:16 ./app/views/status/_status_summary.html.erb:16
-msgid "Your system is healthy."
-msgstr "システムは健全な状態です。"
-
-#: app/views/status/_status_summary.html.erb:26 ./app/views/status/_status_summary.html.erb:26
-msgid "Loading system information"
-msgstr "システム情報を読み込んでいます"
-
-#: app/views/status/_status_progress.html.erb:8 ./app/views/status/_status_progress.html.erb:8
-msgid "Checking system status"
-msgstr "システムステータスを確認しています"
-
-#: ./shortcuts.yml:7
-msgid "Show system status"
-msgstr "システムステータスを表示する"
-
-#: app/models/graph.rb:116 config/status_configuration.yaml:64 ./app/models/graph.rb:116
-#: ./config/status_configuration.yaml:64
+#: app/models/graph.rb:109
 msgid "GByte"
-msgstr "Gバイト"
+msgstr "ギガバイト"
 
-#: app/models/graph.rb:117 config/status_configuration.yaml:63 ./app/models/graph.rb:117
-#: ./config/status_configuration.yaml:63
+#: app/models/graph.rb:110
 msgid "Disk"
 msgstr "ディスク"
 
-#: app/models/graph.rb:140 config/status_configuration.yaml:6 ./app/models/graph.rb:140
-#: ./config/status_configuration.yaml:6
+#: app/models/graph.rb:133
 msgid "MByte/s"
-msgstr "Mバイト/秒"
+msgstr "メガバイト毎秒"
 
-#: app/models/graph.rb:141 config/status_configuration.yaml:5 ./app/models/graph.rb:141
-#: ./config/status_configuration.yaml:5
+#: app/models/graph.rb:134
 msgid "Network"
 msgstr "ネットワーク"
 
-#: app/models/graph.rb:163 config/status_configuration.yaml:87 ./app/models/graph.rb:163
-#: ./config/status_configuration.yaml:87
+#: app/models/graph.rb:157
 msgid "MByte"
-msgstr "Mバイト"
+msgstr "メガバイト"
 
-#: app/models/graph.rb:164 config/status_configuration.yaml:86 ./app/models/graph.rb:164
-#: ./config/status_configuration.yaml:86
+#: app/models/graph.rb:158
 msgid "Memory"
 msgstr "メモリ"
 
-#: app/models/graph.rb:185 config/status_configuration.yaml:29 ./app/models/graph.rb:185
-#: ./config/status_configuration.yaml:29
+#: app/models/graph.rb:179
 msgid "Percent"
 msgstr "パーセント"
 
-#: app/models/graph.rb:186 config/status_configuration.yaml:28 ./app/models/graph.rb:186
-#: ./config/status_configuration.yaml:28
+#: app/models/graph.rb:180
 msgid "CPU"
 msgstr "CPU"
 
+#: app/helpers/status_helper.rb:57 app/views/status/_status_graph.html.erb:125
+#: app/views/status/index.html.erb:53 app/views/status/index.html.erb:68
+#: app/views/status/index.html.erb:88 app/views/status/index.html.erb:237
+msgid "Error: Cannot get information."
+msgstr "エラー: 情報を取得できません。"
+
+#: app/controllers/status_controller.rb:119
+msgid "No data found for showing system status."
+msgstr "システム情報を表示するためのデータが見つかりません。"
+
+#: app/controllers/status_controller.rb:122
+#: app/controllers/status_controller.rb:160
+#: app/controllers/status_controller.rb:162
+#: app/controllers/status_controller.rb:164
+msgid "Status not available."
+msgstr "状態が利用できません。"
+
+#: app/controllers/status_controller.rb:125
+#: app/controllers/status_controller.rb:169
+msgid "Collectd is out of sync."
+msgstr "Collectd の同期ができていません。"
+
+#: app/controllers/status_controller.rb:140
+#: app/controllers/status_controller.rb:198
+msgid "Status not available (no permissions)"
+msgstr "状態が利用できません (権限がありません)"
+
+#: app/controllers/status_controller.rb:150
+msgid "Limits exceeded for "
+msgstr "以下のものに対する制限が超過しています "
+
+#: app/controllers/status_controller.rb:263
+msgid "exceeded"
+msgstr "超過"
+
+#: app/controllers/status_controller.rb:277
+msgid "undercut"
+msgstr "不足"
+
+#: app/controllers/status_controller.rb:376
+msgid "Limits have been written."
+msgstr "制限を書き込みました。"
+
+#: app/views/status/_status_graph.html.erb:2
+msgid "A problem occured when loading status information."
+msgstr "状態情報を読み込む際に問題が発生しました。"
+
+#: app/views/status/_status_graph.html.erb:11
+msgid "No data available"
+msgstr "データがありません"
+
+#: app/views/status/_status_graph.html.erb:100
+msgid "Show last"
+msgstr "以下の間隔で最新を表示"
+
+#: app/views/status/_status_graph.html.erb:102
+msgid "5 Minutes"
+msgstr "5 分"
+
+#: app/views/status/_status_graph.html.erb:103
+msgid "15 Minutes"
+msgstr "15 分"
+
+#: app/views/status/_status_graph.html.erb:104
+msgid "30 Minutes"
+msgstr "30 分"
+
+#: app/views/status/_status_graph.html.erb:105
+msgid "1 Hour"
+msgstr "1 時間"
+
+#: app/views/status/_status_graph.html.erb:106
+msgid "6 Hours"
+msgstr "6 時間"
+
+#: app/views/status/_status_graph.html.erb:107
+msgid "12 Hours"
+msgstr "12 時間"
+
+#: app/views/status/edit.html.erb:49
+msgid "Only numbers are valid !"
+msgstr "数字だけを指定してください！"
+
+#: app/views/status/edit.html.erb:81 app/views/status/index.html.erb:108
+msgid "Status"
+msgstr "状態"
+
+#: app/views/status/edit.html.erb:81
+msgid "Settings"
+msgstr "設定"
+
+#: app/views/status/edit.html.erb:102
+msgid "undercuts"
+msgstr "不足"
+
+#: app/views/status/edit.html.erb:102
+msgid "exceeds"
+msgstr "超過"
+
+#: app/views/status/_status_summary.html.erb:4
+msgid "An problem occured when loading status information."
+msgstr "状態情報を読み込む際に問題が発生しました。"
+
+#: app/views/status/_status_summary.html.erb:38
+msgid "Your system is healthy."
+msgstr "システムは健全な状態です。"
+
+#: app/views/status/_status_summary.html.erb:49
+msgid "Loading system information"
+msgstr "システム情報を読み込んでいます"
+
+#: app/views/status/_status_summary.html.erb:57
+msgid "Error: Cannot check the current status."
+msgstr "エラー: 現在の状態を確認できません。"
+
+#: app/views/status/index.html.erb:157
+msgid "details"
+msgstr "詳細"
+
+#: app/views/status/index.html.erb:173
+msgid "Details"
+msgstr "詳細"
+
+#: app/views/status/index.html.erb:218
+msgid "Edit Limits"
+msgstr "制限の編集"

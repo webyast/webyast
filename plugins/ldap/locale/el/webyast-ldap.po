@@ -1,0 +1,71 @@
+#
+# Efstathios Iosifidis <iosifidis@opensuse.org>, 2011, 2012.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: @PACKAGE@\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2012-06-07 15:20+0200\n"
+"PO-Revision-Date: 2012-03-15 13:42+0200\n"
+"Last-Translator: Efstathios Iosifidis <iosifidis@opensuse.org>\n"
+"Language-Team: Ελληνικά, Σύγχρονα <opensuse-translation-el@opensuse.org>\n"
+"Language: el\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bits\n"
+"X-Generator: Lokalize 1.2\n"
+"Plural-Forms: nplurals=2; plural=(n!=1);\n"
+
+#: app/controllers/ldap_controller.rb:38
+msgid "Cannot read LDAP client configuraton."
+msgstr "Αδυναμία ανάγνωσης ρυθμίσεων πελάτη LDAP."
+
+#: app/controllers/ldap_controller.rb:63
+msgid "LDAP client configuraton successfully written."
+msgstr "Οι ρυθμίσεις του πελάτη LDAP καταχωρήθηκαν επιτυχώς."
+
+#: app/controllers/ldap_controller.rb:65
+msgid "Error while saving LDAP client configuration."
+msgstr "Σφάλμα κατά την αποθήκευση των ρυθμίσεων πελάτη LDAP."
+
+#: app/views/ldap/index.html.erb:33
+msgid "This field is required."
+msgstr "Αυτό το πεδίο απαιτείται."
+
+#: app/views/ldap/index.html.erb:34
+msgid "Enter a valid domain name or an IP address."
+msgstr "Εισάγετε έγκυρο όνομα τομέα ή μια διεύθυνση ΙΡ."
+
+#: app/views/ldap/index.html.erb:70
+msgid "Please wait"
+msgstr "Παρακαλώ περιμένετε"
+
+#: app/views/ldap/index.html.erb:88
+msgid "LDAP client"
+msgstr "Πελάτης LDAP"
+
+#: app/views/ldap/index.html.erb:101
+msgid "Enable LDAP Authentication"
+msgstr "Ενεργοποίηση Πιστοποίησης LDAP"
+
+#: app/views/ldap/index.html.erb:108
+msgid "LDAP Server Address"
+msgstr "Διεύθυνση εξυπηρετητή LDAP"
+
+#: app/views/ldap/index.html.erb:113
+msgid "Base DN"
+msgstr "Βάση DN"
+
+#: app/views/ldap/index.html.erb:115
+msgid "Fetch DN"
+msgstr "Ανάκτηση DN"
+
+#: app/views/ldap/index.html.erb:127
+msgid "Secure Connection"
+msgstr "Ασφαλή Σύνδεση"
+
+#~ msgid "LDAP"
+#~ msgstr "LDAP"
+
+#~ msgid "Configure LDAP client"
+#~ msgstr "Ρύθμιση πελάτη LDAP"

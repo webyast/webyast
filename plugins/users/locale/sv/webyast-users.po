@@ -1,208 +1,486 @@
-# Copyright (C) 2006 SuSE Linux Products GmbH, Nuernberg
-# This file is distributed under the same license as the package.
+# @TITLE@
+# Copyright (C) 2006, SUSE Linux GmbH, Nuremberg
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+# This file is distributed under the same license as @PACKAGE@ package. FIRST
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: yast_webclient_users\n"
-"POT-Creation-Date: 2010-04-13 13:36+0200\n"
-"PO-Revision-Date: 2010-04-20 09:47\n"
-"Last-Translator: Novell Language <language@novell.com>\n"
-"Language-Team: Novell Language <language@novell.com>\n"
+"Project-Id-Version: @PACKAGE@\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2012-06-07 15:19+0200\n"
+"PO-Revision-Date: 2005-09-18 19:09+0200\n"
+"Last-Translator: Mattias Newzella <newzella@linux.se>\n"
+"Language-Team: Swedish <sv@li.org>\n"
+"Language: sv\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"X-Generator: KBabel 1.10.1\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: app/controllers/groups_controller.rb:15
+#: app/controllers/groups_controller.rb:31
 msgid "Missing group name parameter"
-msgstr "Det saknas en gruppnamnsparameter"
-
-#: app/controllers/groups_controller.rb:27
-msgid "Missing group parameters"
-msgstr "Saknade grupparametrar"
-
-#: app/controllers/groups_controller.rb:37
-msgid "Please enter a valid group name"
-msgstr "Ange ett giltigt gruppnamn"
+msgstr ""
 
 #: app/controllers/groups_controller.rb:47
+#, fuzzy
+#| msgid "Missing argument for "
+msgid "Missing group parameters"
+msgstr "Argument saknas för "
+
+#: app/controllers/groups_controller.rb:61
+#, fuzzy
+#| msgid "Please enter server name below"
+msgid "Please enter a valid group name"
+msgstr "Ange servernamn nedan"
+
+#: app/controllers/groups_controller.rb:75
 msgid "Please enter a valid GID"
-msgstr "Ange ett giltigt GID"
+msgstr ""
 
-#: app/controllers/groups_controller.rb:57
+#: app/controllers/groups_controller.rb:89
 msgid "Please enter a valid group type. Only \"system\" or \"local\" are allowed."
-msgstr "Ange en giltig grupptyp. Endast \"system\" eller \"lokal\" är tillåtna."
+msgstr ""
 
-#: app/controllers/groups_controller.rb:68
+#: app/controllers/groups_controller.rb:104
 msgid "Please enter a valid list of members"
-msgstr "Ange en giltig lista med medlemmar"
+msgstr ""
 
-#: app/controllers/groups_controller.rb:82
-msgid "Cannot read users list."
-msgstr "Det går inte att läsa användarlistan."
+#: app/controllers/groups_controller.rb:231
+#, fuzzy
+#| msgid "Error reading repositories:"
+msgid "Cannot update group <i>%s</i>"
+msgstr "Fel vid läsning av arkiv:"
 
-#: app/controllers/groups_controller.rb:118
-msgid "Cannot read groups list."
-msgstr "Det går inte att läsa grupplistan."
+#: app/controllers/groups_controller.rb:234
+msgid "Group <i>%s</i> has been updated."
+msgstr ""
 
-#: app/controllers/groups_controller.rb:209
-msgid "Unknown backend error"
-msgstr "Okänt fel vid bakände"
+#: app/controllers/groups_controller.rb:268
+#, fuzzy
+#| msgid "Cannot read from file %1."
+msgid "Cannot create group <i>%s</i>"
+msgstr "Det går inte att läsa från filen %1."
 
-#: app/controllers/users_controller.rb:154
-msgid "User <i>%s</i> was successfully created."
-msgstr "Användaren <i>%s</i> skapades."
+#: app/controllers/groups_controller.rb:271
+msgid "Group <i>%s</i> has been added."
+msgstr ""
 
-#: app/controllers/users_controller.rb:196
-msgid "User <i>%s</i> was successfully updated."
-msgstr "Användaren <i>%s</i> uppdaterades."
+#: app/controllers/groups_controller.rb:306
+msgid "Cannot remove group <i>%{name}</i>: %{result}"
+msgstr ""
 
-#: app/controllers/users_controller.rb:217
-msgid "User <i>%s</i> was successfully removed."
-msgstr "Användaren <i>%s</i> togs bort."
+#: app/controllers/groups_controller.rb:308
+msgid "Group <i>%s</i> has been deleted."
+msgstr ""
 
-#: app/controllers/users_controller.rb:219
-msgid "Error: Could not remove user <i>%s</i>."
-msgstr "Fel: Det gick inte att ta bort användaren <i>%s</i>."
+#: app/controllers/users_controller.rb:110
+#, fuzzy
+#| msgid "No errors found."
+msgid "No users found."
+msgstr "Inga fel hittades."
 
-#: app/views/groups/edit.html.erb:33 app/views/groups/index.html.erb:68
-#: app/views/users/_user_form.erb:30 app/views/users/_user_form.erb:33
-msgid "Groups"
-msgstr "Grupper"
+#: app/controllers/users_controller.rb:254
+#, fuzzy
+#| msgid "Repository %s has been sucessfully modified."
+msgid "User %s was successfully created."
+msgstr "Arkivet %s har ändrats."
 
-#: app/views/groups/edit.html.erb:35
-msgid "Add new group"
-msgstr "Lägg till ny grupp"
+#: app/controllers/users_controller.rb:299
+#, fuzzy
+#| msgid "Repository %s has been sucessfully modified."
+msgid "User %s was successfully updated."
+msgstr "Arkivet %s har ändrats."
 
-#: app/views/groups/edit.html.erb:37
-msgid "Modify group"
-msgstr "Ändra grupp"
+#: app/controllers/users_controller.rb:318
+#, fuzzy
+#| msgid "Error: Could not read profile %s: %s.\n"
+msgid "Error: Could not remove user %s."
+msgstr "Fel: Kunde inte läsa profil %s: %s.\n"
 
-#: app/views/groups/edit.html.erb:51 app/views/groups/index.html.erb:94
-msgid "Group Name"
-msgstr "Gruppnamn"
+#: app/controllers/users_controller.rb:327
+#, fuzzy
+#| msgid "Repository %s has been sucessfully modified."
+msgid "User %s was successfully removed."
+msgstr "Arkivet %s har ändrats."
 
-#: app/views/groups/edit.html.erb:55 app/views/groups/index.html.erb:98
-msgid "Group ID"
-msgstr "Grupp-ID"
+#: app/views/users/new.html.erb:71 app/views/users/index.html.erb:48
+#, fuzzy
+#| msgid "Default Route"
+msgid "Select Groups"
+msgstr "Standardrutt"
 
-#: app/views/groups/edit.html.erb:59 app/views/groups/index.html.erb:102
-msgid "Default members"
-msgstr "Standardmedlemmar"
+#: app/views/users/new.html.erb:72 app/views/users/index.html.erb:49
+#, fuzzy
+#| msgid "Selected Resource"
+msgid "Selected Groups"
+msgstr "Valda resurser"
 
-#: app/views/groups/edit.html.erb:63 app/views/groups/index.html.erb:106
-msgid "Members"
-msgstr "Medlemmar"
+#: app/views/users/new.html.erb:73 app/views/users/index.html.erb:50
+#, fuzzy
+#| msgid "Available profiles"
+msgid "Available Groups"
+msgstr "Tillgängliga profiler"
 
-#: app/views/groups/index.html.erb:62 app/views/users/index.html.erb:37
-msgid "Processing ..."
-msgstr "Bearbetar..."
+#: app/views/users/new.html.erb:74 app/views/users/index.html.erb:51
+msgid "Click group names to select/unselect groups"
+msgstr ""
 
-#: app/views/groups/index.html.erb:72 app/views/users/index.html.erb:47
+#: app/views/users/new.html.erb:91 app/views/users/index.html.erb:68
+#: app/views/users/_user_form.erb:91
+#, fuzzy
+#| msgid "Default Route"
+msgid "Select Default Group"
+msgstr "Standardrutt"
+
+#: app/views/users/new.html.erb:92 app/views/users/index.html.erb:69
+msgid "Click a group name to choose users default group"
+msgstr ""
+
+#: app/views/users/new.html.erb:106 app/views/users/index.html.erb:83
+#, fuzzy
+#| msgid "Default Route"
+msgid "Select Roles"
+msgstr "Standardrutt"
+
+#: app/views/users/new.html.erb:107 app/views/users/index.html.erb:84
+#, fuzzy
+#| msgid "Selected Resource"
+msgid "Selected Roles"
+msgstr "Valda resurser"
+
+#: app/views/users/new.html.erb:108 app/views/users/index.html.erb:85
+#, fuzzy
+#| msgid "Available profiles"
+msgid "Available Roles"
+msgstr "Tillgängliga profiler"
+
+#: app/views/users/new.html.erb:109 app/views/users/index.html.erb:86
+msgid "Click group names to select/unselect roles"
+msgstr ""
+
+#: app/views/users/new.html.erb:138
+#, fuzzy
+#| msgid "Passwords do not match."
+msgid "The passwords do not match."
+msgstr "Lösenorden stämmer inte överens."
+
+#: app/views/users/new.html.erb:139 app/views/users/index.html.erb:110
+#, fuzzy
+#| msgid "The filename is required."
+msgid "This field is required."
+msgstr "Filnamnet krävs."
+
+#: app/views/users/new.html.erb:150 app/views/users/index.html.erb:101
+#: app/views/users/index.html.erb:126 app/views/users/_user_form.erb:153
+#: app/views/groups/new.html.erb:131 app/views/groups/index.html.erb:162
+#: app/views/groups/index.html.erb:173
+#, fuzzy
+#| msgid "Please wait..."
+msgid "Please wait"
+msgstr "Vänta..."
+
+#: app/views/users/new.html.erb:160 app/views/users/index.html.erb:134
+#, fuzzy
+#| msgid "Password:"
+msgid "Password Strength:"
+msgstr "Lösenord:"
+
+#: app/views/users/new.html.erb:162 app/views/users/index.html.erb:136
+msgid "Weak"
+msgstr ""
+
+#: app/views/users/new.html.erb:163 app/views/users/index.html.erb:137
+msgid "Normal"
+msgstr "Normal"
+
+#: app/views/users/new.html.erb:164 app/views/users/index.html.erb:138
+#, fuzzy
+#| msgid "Media"
+msgid "Medium"
+msgstr "Media"
+
+#: app/views/users/new.html.erb:165 app/views/users/index.html.erb:139
+msgid "Strong"
+msgstr ""
+
+#: app/views/users/new.html.erb:166 app/views/users/index.html.erb:140
+msgid "Very Strong"
+msgstr ""
+
+#: app/views/users/new.html.erb:204 app/views/users/index.html.erb:173
+#, fuzzy
+#| msgid "Create New User?"
+msgid "Users"
+msgstr "Skapa ny användare?"
+
+#: app/views/users/new.html.erb:204
+#, fuzzy
+#| msgid "Create New User?"
+msgid "Add new user"
+msgstr "Skapa ny användare?"
+
+#: app/views/users/index.html.erb:109
+#, fuzzy
+#| msgid "Passwords do not match."
+msgid " The passwords do not match."
+msgstr "Lösenorden stämmer inte överens."
+
+#: app/views/users/index.html.erb:184 app/views/groups/index.html.erb:115
+#, fuzzy
+#| msgid "Filter"
 msgid "Filter:"
-msgstr "Filter:"
+msgstr "Filter"
 
-#: app/views/groups/index.html.erb:78
-msgid "Add New Group"
-msgstr "Lägg till ny grupp"
+#: app/views/users/index.html.erb:190
+#, fuzzy
+#| msgid "Create New User?"
+msgid "New User"
+msgstr "Skapa ny användare?"
 
-#: app/views/groups/index.html.erb:110
-msgid "Save"
-msgstr "Spara"
+#: app/views/users/index.html.erb:192 app/views/users/index.html.erb:227
+#: app/views/users/_user_form.erb:72
+#, fuzzy
+#| msgid "manage backups"
+msgid "Manage Groups"
+msgstr "hantera säkerhetskopior"
 
-#: app/views/groups/index.html.erb:112
-msgid "Delete"
-msgstr "Ta bort"
-
-#: app/views/groups/index.html.erb:114
-msgid "Are you sure to delete group '%s'?"
-msgstr "Vill du ta bort gruppen %s?"
-
-#: app/views/users/_user_form.erb:5
+#: app/views/users/_user_form.erb:25
+#, fuzzy
+#| msgid "Monitor Settings"
 msgid "Login Settings"
-msgstr "Inloggningsinställningar"
+msgstr "Bildskärmsinställningar"
 
-#: app/views/users/_user_form.erb:8
+#: app/views/users/_user_form.erb:28
+#, fuzzy
+#| msgid "Name"
 msgid "Full Name"
-msgstr "Fullständigt namn"
+msgstr "Namn"
 
-#: app/views/users/_user_form.erb:12
+#: app/views/users/_user_form.erb:34
+#, fuzzy
+#| msgid "Login"
 msgid "Login Name"
-msgstr "Inloggningsnamn"
+msgstr "Inloggning"
 
-#: app/views/users/_user_form.erb:17
+#: app/views/users/_user_form.erb:38
+#, fuzzy
+#| msgid "File already exist."
+msgid "User already exists."
+msgstr "Filen finns redan."
+
+# password dialog title
+#: app/views/users/_user_form.erb:43
 msgid "Password"
 msgstr "Lösenord"
 
-#: app/views/users/_user_form.erb:21
+#: app/views/users/_user_form.erb:50
+#, fuzzy
+#| msgid "_Confirm Password:"
 msgid "Confirm Password"
-msgstr "Bekräfta lösenord"
+msgstr "_Bekräfta lösenord"
 
-#: app/views/users/_user_form.erb:39
+#: app/views/users/_user_form.erb:59 app/views/users/_user_form.erb:63
+#: app/views/groups/new.html.erb:91 app/views/groups/index.html.erb:104
+msgid "Groups"
+msgstr "Grupper"
+
+#: app/views/users/_user_form.erb:82
+#, fuzzy
+#| msgid "Default Route"
 msgid "Default Group"
-msgstr "Standardgrupp"
+msgstr "Standardrutt"
 
-#: app/views/users/_user_form.erb:61
+#: app/views/users/_user_form.erb:103
 msgid "Advanced"
 msgstr "Avancerat"
 
-#: app/views/users/_user_form.erb:64
+#: app/views/users/_user_form.erb:106
+#, fuzzy
+#| msgid "Directory\n"
 msgid "Home Directory"
-msgstr "Hemkatalog"
+msgstr "Katalog\n"
 
-#: app/views/users/_user_form.erb:68
+#: app/views/users/_user_form.erb:112
+#, fuzzy
+#| msgid "Login"
 msgid "Login Shell"
-msgstr "Inloggningsskal"
+msgstr "Inloggning"
 
-#: app/views/users/_user_form.erb:72
+#: app/views/users/_user_form.erb:118
 msgid "UID Number"
-msgstr "UID-nummer"
+msgstr ""
 
-#: app/views/users/edit.html.erb:55 app/views/users/new.html.erb:58
-msgid "Weak"
-msgstr "Svagt"
+#: app/views/users/_user_form.erb:127
+msgid "Roles"
+msgstr ""
 
-#: app/views/users/edit.html.erb:56 app/views/users/new.html.erb:59
-msgid "Normal"
-msgstr "Normalt"
+#: app/views/users/_user_form.erb:136
+#, fuzzy
+#| msgid "manage backups"
+msgid "Manage Roles"
+msgstr "hantera säkerhetskopior"
 
-#: app/views/users/edit.html.erb:57 app/views/users/new.html.erb:60
-msgid "Medium"
-msgstr "Mellan"
+#: app/views/users/_user_form.erb:151 app/views/groups/new.html.erb:132
+#: app/views/groups/index.html.erb:163
+msgid "Save"
+msgstr "Spara"
 
-#: app/views/users/edit.html.erb:58 app/views/users/new.html.erb:61
-msgid "Strong"
-msgstr "Starkt"
+#: app/views/users/_user_form.erb:154 app/views/groups/index.html.erb:174
+msgid "Delete"
+msgstr "Ta bort"
 
-#: app/views/users/edit.html.erb:59 app/views/users/new.html.erb:62
-msgid "Very Strong"
-msgstr "Mycket starkt"
-
-#: app/views/users/edit.html.erb:80 app/views/users/index.html.erb:43 app/views/users/new.html.erb:86
-msgid "Users"
-msgstr "Användare"
-
-#: app/views/users/edit.html.erb:80
-msgid "Edit user %s"
-msgstr "Redigera användaren %s"
-
-#: app/views/users/index.html.erb:52
-msgid "Add New User"
-msgstr "Lägg till ny användare"
-
-#: app/views/users/index.html.erb:68
+#: app/views/users/_user_form.erb:156
+#, fuzzy
+#| msgid "Do you really want to delete the %1 scheme?"
 msgid "Are you sure to delete user '%s'?"
-msgstr "Vill du ta bort användaren '%s'?"
+msgstr "Vill du verkligen ta bort schemat %1?"
 
-#: app/views/users/index.html.erb:68
-msgid "Home directory will be deleted as well."
-msgstr "Hemkatalogen tas också bort."
+#: app/views/groups/new.html.erb:59 app/views/groups/index.html.erb:53
+#, fuzzy
+#| msgid "Default Schemes"
+msgid "Select Members"
+msgstr "Standardscheman"
 
-#: app/views/users/index.html.erb:81
-msgid "Manage Groups"
-msgstr "Hantera grupper"
+#: app/views/groups/new.html.erb:60 app/views/groups/index.html.erb:54
+#, fuzzy
+#| msgid "Selected Resource"
+msgid "Selected Members"
+msgstr "Valda resurser"
 
-#: app/views/users/new.html.erb:86
-msgid "Add new user"
-msgstr "Lägg till ny användare"
+#: app/views/groups/new.html.erb:61 app/views/groups/index.html.erb:55
+#, fuzzy
+#| msgid "Available Memory"
+msgid "Available Members"
+msgstr "Tillgängligt minne"
 
+#: app/views/groups/new.html.erb:62 app/views/groups/index.html.erb:56
+msgid "Click user names to select/unselect members"
+msgstr ""
+
+#: app/views/groups/new.html.erb:91 app/views/groups/new.html.erb:102
+msgid "Add new group"
+msgstr ""
+
+#: app/views/groups/new.html.erb:109 app/views/groups/index.html.erb:143
+#, fuzzy
+#| msgid "Name"
+msgid "Group Name"
+msgstr "Namn"
+
+#: app/views/groups/new.html.erb:113 app/views/groups/index.html.erb:151
+msgid "Members"
+msgstr ""
+
+#: app/views/groups/new.html.erb:116 app/views/groups/index.html.erb:154
+#, fuzzy
+#| msgid "manage backups"
+msgid "Manage Members"
+msgstr "hantera säkerhetskopior"
+
+#: app/views/groups/index.html.erb:121
+#, fuzzy
+#| msgid "Groups"
+msgid "New Group"
+msgstr "Grupper"
+
+#: app/views/groups/index.html.erb:123 app/views/groups/index.html.erb:192
+#, fuzzy
+#| msgid "manage backups"
+msgid "Manage Users"
+msgstr "hantera säkerhetskopior"
+
+#: app/views/groups/index.html.erb:147
+#, fuzzy
+#| msgid "Groups"
+msgid "Group ID"
+msgstr "Grupper"
+
+#: app/views/groups/index.html.erb:176
+msgid "Are you sure to delete group '%s'?"
+msgstr ""
+
+#, fuzzy
+#~| msgid "Cannot read from file %1."
+#~ msgid "Cannot read users list."
+#~ msgstr "Det går inte att läsa från filen %1."
+
+#, fuzzy
+#~| msgid "Host %s was not found."
+#~ msgid "Group named <i>%s</i> was not found."
+#~ msgstr "Datorn %s hittades inte."
+
+#, fuzzy
+#~| msgid "No errors found."
+#~ msgid "No groups found."
+#~ msgstr "Inga fel hittades."
+
+#, fuzzy
+#~| msgid "Unknown error\n"
+#~ msgid "Unknown backend error"
+#~ msgstr "Okänt fel\n"
+
+#, fuzzy
+#~| msgid "manage backups"
+#~ msgid "Manage user accounts"
+#~ msgstr "hantera säkerhetskopior"
+
+#, fuzzy
+#~| msgid "manage backups"
+#~ msgid "Manage groups"
+#~ msgstr "hantera säkerhetskopior"
+
+#, fuzzy
+#~| msgid "Modified resources"
+#~ msgid "Modify group"
+#~ msgstr "Ändrade resurser"
+
+#, fuzzy
+#~| msgid "Processor %1"
+#~ msgid "Processing ..."
+#~ msgstr "Processor %1"
+
+#, fuzzy
+#~| msgid "Empty CA name."
+#~ msgid "Empty UID value"
+#~ msgstr "CA-namnet är tomt."
+
+#, fuzzy
+#~| msgid "Local Network"
+#~ msgid "Local User"
+#~ msgstr "Lokalt nätverk"
+
+#~ msgid "Login"
+#~ msgstr "Inloggning"
+
+#, fuzzy
+#~| msgid "&Edit"
+#~ msgid "Edit"
+#~ msgstr "R&edigera"
+
+#, fuzzy
+#~| msgid "You are <strong>online</strong>"
+#~ msgid "<strong>[New User]</strong>"
+#~ msgstr "Du är <strong>ansluten</strong>"
+
+#~ msgid "Back"
+#~ msgstr "Tillbaka"
+
+#~ msgid "Update"
+#~ msgstr "Uppdatera"
+
+#, fuzzy
+#~| msgid "Default route ok."
+#~ msgid "Default Group (GID)"
+#~ msgstr "Standardrutt OK."
+
+#, fuzzy
+#~| msgid "Cannot create directory %1: %2."
+#~ msgid "Do not create home directory"
+#~ msgstr "Det gick inte att skapa katalogen %1: %2."
+
+#, fuzzy
+#~| msgid "Created On: "
+#~ msgid "Create"
+#~ msgstr "Skapad den: "

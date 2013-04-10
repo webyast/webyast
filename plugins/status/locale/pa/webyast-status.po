@@ -6,194 +6,247 @@
 # A S Alam <aalam@users.sf.net>, 2009.
 msgid ""
 msgstr ""
-"Project-Id-Version: webyast-status-ui 1.0.0\n"
+"Project-Id-Version: @PACKAGE@\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-08-02 09:18+0200\n"
+"POT-Creation-Date: 2012-06-07 15:20+0200\n"
 "PO-Revision-Date: 2009-10-10 22:47+0530\n"
 "Last-Translator: A S Alam <aalam@users.sf.net>\n"
 "Language-Team: Punjabi/Panjabi <punjabi-users@lists.sf.net>\n"
+"Language: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: Lokalize 1.0\n"
 "Plural-Forms: Plural-Forms: Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: app/controllers/status_controller.rb:149
-#: app/controllers/status_controller.rb:149
+#: app/models/graph.rb:109
+msgid "GByte"
+msgstr ""
+
+#: app/models/graph.rb:110
+#, fuzzy
+#| msgid "Disks"
+msgid "Disk"
+msgstr "ਡਿਸਕਾਂ"
+
+#: app/models/graph.rb:133
+msgid "MByte/s"
+msgstr ""
+
+#: app/models/graph.rb:134
+msgid "Network"
+msgstr "ਨੈੱਟਵਰਕ"
+
+#: app/models/graph.rb:157
+msgid "MByte"
+msgstr ""
+
+#: app/models/graph.rb:158
+msgid "Memory"
+msgstr "ਮੈਮੋਰੀ"
+
+#: app/models/graph.rb:179
+msgid "Percent"
+msgstr ""
+
+#: app/models/graph.rb:180
+#, fuzzy
+#| msgid "CPUs"
+msgid "CPU"
+msgstr "CPU"
+
+#: app/helpers/status_helper.rb:57 app/views/status/_status_graph.html.erb:125
+#: app/views/status/index.html.erb:53 app/views/status/index.html.erb:68
+#: app/views/status/index.html.erb:88 app/views/status/index.html.erb:237
+#, fuzzy
+#| msgid "Loading patch information"
+msgid "Error: Cannot get information."
+msgstr "ਪੈਂਚ ਜਾਣਕਾਰੀ ਲੋਡ ਕੀਤੀ ਜਾ ਰਹੀ ਹੈ"
+
+#: app/controllers/status_controller.rb:119
 msgid "No data found for showing system status."
 msgstr ""
 
-#: app/controllers/status_controller.rb:157
-#: app/controllers/status_controller.rb:157
+#: app/controllers/status_controller.rb:122
+#: app/controllers/status_controller.rb:160
+#: app/controllers/status_controller.rb:162
+#: app/controllers/status_controller.rb:164
 #, fuzzy
+#| msgid "SCPM not available"
 msgid "Status not available."
-msgstr "ਕੋਈ ਜਾਣਕਾਰੀ ਉਪਲੱਬਧ ਨਹੀ ਹੈ"
+msgstr "SCPM ਉਪਲੱਬਧ ਨਹੀਂ"
 
-#: app/controllers/status_controller.rb:176
-#: app/controllers/status_controller.rb:176
-msgid "Can't connect to host"
+#: app/controllers/status_controller.rb:125
+#: app/controllers/status_controller.rb:169
+msgid "Collectd is out of sync."
 msgstr ""
 
-#: app/controllers/status_controller.rb:178
-#: app/controllers/status_controller.rb:178
-msgid "Can't connect to host %s."
-msgstr ""
-
-#: app/controllers/status_controller.rb:217
-#: app/controllers/status_controller.rb:217
+#: app/controllers/status_controller.rb:140
+#: app/controllers/status_controller.rb:198
 #, fuzzy
+#| msgid "SCPM not available"
+msgid "Status not available (no permissions)"
+msgstr "SCPM ਉਪਲੱਬਧ ਨਹੀਂ"
+
+#: app/controllers/status_controller.rb:150
+#, fuzzy
+#| msgid "Removal succeeded for \"%s\".\n"
 msgid "Limits exceeded for "
 msgstr "ਸਫ਼ਲ \"%s\" ਲਈ ਹਟਾਉਣਾ\n"
 
-#: app/controllers/status_controller.rb:242
-#: app/controllers/status_controller.rb:242
+#: app/controllers/status_controller.rb:263
 #, fuzzy
-msgid "Status not available"
-msgstr "ਕੋਈ ਜਾਣਕਾਰੀ ਉਪਲੱਬਧ ਨਹੀ ਹੈ"
-
-#: app/controllers/status_controller.rb:266
-#: app/controllers/status_controller.rb:266
-#, fuzzy
-msgid "Status not available (no permissions)"
-msgstr "ਕੋਈ ਜਾਣਕਾਰੀ ਉਪਲੱਬਧ ਨਹੀ ਹੈ"
-
-#: app/controllers/status_controller.rb:328
-#: app/controllers/status_controller.rb:328
-#, fuzzy
+#| msgid "Needed"
 msgid "exceeded"
 msgstr "ਲੋੜ ਹੈ"
 
-#: app/controllers/status_controller.rb:342
-#: app/controllers/status_controller.rb:342
+#: app/controllers/status_controller.rb:277
 msgid "undercut"
 msgstr ""
 
-#: app/controllers/status_controller.rb:444
-#: app/controllers/status_controller.rb:444
+#: app/controllers/status_controller.rb:376
 msgid "Limits have been written."
 msgstr ""
 
-#: app/views/status/edit.html.erb:48 app/views/status/edit.html.erb:48
-msgid "Only numbers are valid !"
-msgstr ""
-
-#: app/views/status/edit.html.erb:75 app/views/status/index.html.erb:52
-#: app/views/status/edit.html.erb:75 app/views/status/index.html.erb:52
-#: shortcuts.yml:6
-msgid "Status"
-msgstr "ਹਾਲਤ"
-
-#: app/views/status/edit.html.erb:75 app/views/status/edit.html.erb:75
-msgid "Settings"
-msgstr "ਸੈਟਿੰਗ"
-
-#: app/views/status/edit.html.erb:89 app/views/status/edit.html.erb:89
-msgid "undercuts"
-msgstr ""
-
-#: app/views/status/edit.html.erb:89 app/views/status/edit.html.erb:89
-#, fuzzy
-msgid "exceeds"
-msgstr "ਫੀਡ"
-
-#: app/views/status/index.html.erb:94 app/views/status/index.html.erb:94
-#, fuzzy
-msgid "details"
-msgstr "ਵੇਰਵਾ"
-
-#: app/views/status/index.html.erb:110 app/views/status/index.html.erb:110
-msgid "Details"
-msgstr "ਵੇਰਵਾ"
-
-#: app/views/status/index.html.erb:178 app/views/status/index.html.erb:178
-msgid "Edit Limits"
-msgstr "ਲਿਮਟ ਸੋਧ"
-
-#: app/views/status/_status_graph.html.erb:2
 #: app/views/status/_status_graph.html.erb:2
 #, fuzzy
+#| msgid "An error occured when loading status information."
 msgid "A problem occured when loading status information."
 msgstr "ਹਾਲਤ ਜਾਣਕਾਰੀ ਲੋਡ ਕਰਨ ਦੇ ਦੌਰਾਨ ਗਲਤੀ ਆਈ ਹੈ।"
 
-#: app/views/status/_status_graph.html.erb:90
-#: app/views/status/_status_graph.html.erb:90
+#: app/views/status/_status_graph.html.erb:11
 #, fuzzy
+#| msgid "%1 Patches available"
+msgid "No data available"
+msgstr "%1 ਪੈਂਚ ਉਪਲੱਬਧ ਹਨ"
+
+#: app/views/status/_status_graph.html.erb:100
+#, fuzzy
+#| msgid "Show Desktop"
 msgid "Show last"
 msgstr "ਡੈਸਕਟਾਪ ਵੇਖੋ"
 
-#: app/views/status/_status_graph.html.erb:91
-#: app/views/status/_status_graph.html.erb:91
+#: app/views/status/_status_graph.html.erb:102
 #, fuzzy
+#| msgid " Minutes"
 msgid "5 Minutes"
 msgstr " ਮਿੰਟ"
 
-#: app/views/status/_status_graph.html.erb:92
-#: app/views/status/_status_graph.html.erb:92
+#: app/views/status/_status_graph.html.erb:103
 #, fuzzy
+#| msgid " Minutes"
 msgid "15 Minutes"
 msgstr " ਮਿੰਟ"
 
-#: app/views/status/_status_graph.html.erb:93
-#: app/views/status/_status_graph.html.erb:93
+#: app/views/status/_status_graph.html.erb:104
 #, fuzzy
+#| msgid " Minutes"
 msgid "30 Minutes"
 msgstr " ਮਿੰਟ"
 
-#: app/views/status/_status_graph.html.erb:94
-#: app/views/status/_status_graph.html.erb:94
+#: app/views/status/_status_graph.html.erb:105
 #, fuzzy
+#| msgid " Hours"
 msgid "1 Hour"
 msgstr " ਘੰਟੇ"
 
-#: app/views/status/_status_graph.html.erb:95
-#: app/views/status/_status_graph.html.erb:95
+#: app/views/status/_status_graph.html.erb:106
 #, fuzzy
+#| msgid " Hours"
 msgid "6 Hours"
 msgstr " ਘੰਟੇ"
 
-#: app/views/status/_status_graph.html.erb:96
-#: app/views/status/_status_graph.html.erb:96
+#: app/views/status/_status_graph.html.erb:107
 #, fuzzy
+#| msgid " Hours"
 msgid "12 Hours"
 msgstr " ਘੰਟੇ"
 
-#: app/views/status/_status_summary.html.erb:6
-#: app/views/status/_status_summary.html.erb:6
+#: app/views/status/edit.html.erb:49
+msgid "Only numbers are valid !"
+msgstr ""
+
+#: app/views/status/edit.html.erb:81 app/views/status/index.html.erb:108
+msgid "Status"
+msgstr "ਹਾਲਤ"
+
+#: app/views/status/edit.html.erb:81
+msgid "Settings"
+msgstr "ਸੈਟਿੰਗ"
+
+#: app/views/status/edit.html.erb:102
+msgid "undercuts"
+msgstr ""
+
+#: app/views/status/edit.html.erb:102
 #, fuzzy
+#| msgid "Feeds"
+msgid "exceeds"
+msgstr "ਫੀਡ"
+
+#: app/views/status/_status_summary.html.erb:4
+#, fuzzy
+#| msgid "An error occured when loading status information."
 msgid "An problem occured when loading status information."
 msgstr "ਹਾਲਤ ਜਾਣਕਾਰੀ ਲੋਡ ਕਰਨ ਦੇ ਦੌਰਾਨ ਗਲਤੀ ਆਈ ਹੈ।"
 
-#: app/views/status/_status_summary.html.erb:13
-#: app/views/status/_status_summary.html.erb:13
-msgid "Cannot read system status - you have been logged out."
-msgstr ""
-
-#: app/views/status/_status_summary.html.erb:16
-#: app/views/status/_status_summary.html.erb:16
+#: app/views/status/_status_summary.html.erb:38
 msgid "Your system is healthy."
 msgstr "ਤੁਹਾਡਾ ਸਿਸਟਮ ਠੀਕ ਹੈ।"
 
-#: app/views/status/_status_summary.html.erb:26
-#: app/views/status/_status_summary.html.erb:26
+#: app/views/status/_status_summary.html.erb:49
 #, fuzzy
+#| msgid "System Information"
 msgid "Loading system information"
 msgstr "ਸਿਸਟਮ ਜਾਣਕਾਰੀ"
 
-#: app/views/status/_status_progress.html.erb:8
-#: app/views/status/_status_progress.html.erb:8
-msgid "Checking system status"
+#: app/views/status/_status_summary.html.erb:57
+msgid "Error: Cannot check the current status."
 msgstr ""
 
-#: shortcuts.yml:7
-msgid "Show system status"
-msgstr ""
+#: app/views/status/index.html.erb:157
+#, fuzzy
+#| msgid "Details"
+msgid "details"
+msgstr "ਵੇਰਵਾ"
+
+#: app/views/status/index.html.erb:173
+msgid "Details"
+msgstr "ਵੇਰਵਾ"
+
+#: app/views/status/index.html.erb:218
+msgid "Edit Limits"
+msgstr "ਲਿਮਟ ਸੋਧ"
 
 #, fuzzy
+#~| msgid "Status connected color"
+#~ msgid "Can't connect to host"
+#~ msgstr "ਹਾਲਤ ਕੁਨੈਕਟਡ ਰੰਗ"
+
+# %s is FTP or HTTP
+#, fuzzy
+#~| msgid "Trying to connect to the %s server..."
+#~ msgid "Can't connect to host %s."
+#~ msgstr "ਸਰਵਰ %s ਨਾਲ ਜੁੜਨ ਦੀ ਕੋਸ਼ਸ਼ ਕੀਤੀ ਜਾ ਰਹੀ ਹੈ..."
+
+#, fuzzy
+#~| msgid "SCPM not available"
+#~ msgid "Status not available"
+#~ msgstr "SCPM ਉਪਲੱਬਧ ਨਹੀਂ"
+
+#, fuzzy
+#~| msgid "Base system setup"
+#~ msgid "Show system status"
+#~ msgstr "ਬੇਸ ਸਿਸਟਮ ਸੈਟਅੱਪ"
+
+#, fuzzy
+#~| msgid "Required file is missing: "
 #~ msgid "Registration is missing"
 #~ msgstr "ਲੋੜੀ ਫਾਇਲ ਗੁੰਮ ਹੈ: "
 
 # %s is either BOOTP or DHCP
 #, fuzzy
+#~| msgid "The configuration is not initialized."
 #~ msgid "Mail configuration test not confirmed"
 #~ msgstr "ਸੰਰਚਨਾ ਸ਼ੁਰੂ ਨਹੀਂ ਕੀਤੀ ਜਾ ਸਕਦੀ ਹੈ।"
 
@@ -234,6 +287,11 @@ msgstr ""
 
 #~ msgid "Save"
 #~ msgstr "ਸੰਭਾਲੋ"
+
+#, fuzzy
+#~| msgid "No information available."
+#~ msgid "No status information available"
+#~ msgstr "ਕੋਈ ਜਾਣਕਾਰੀ ਉਪਲੱਬਧ ਨਹੀ ਹੈ"
 
 #~ msgid "Events"
 #~ msgstr "ਈਵੈਂਟ"

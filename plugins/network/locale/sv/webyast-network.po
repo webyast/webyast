@@ -1,123 +1,324 @@
-# Copyright (C) 2006 SuSE Linux Products GmbH, Nuernberg
-# This file is distributed under the same license as the package.
+# @TITLE@
+# Copyright (C) 2006, SUSE Linux GmbH, Nuremberg
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+# This file is distributed under the same license as @PACKAGE@ package. FIRST
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: yast_webclient_network\n"
-"POT-Creation-Date: 2010-04-13 13:36+0200\n"
-"PO-Revision-Date: 2010-04-20 09:47\n"
-"Last-Translator: Novell Language <language@novell.com>\n"
-"Language-Team: Novell Language <language@novell.com>\n"
+"Project-Id-Version: @PACKAGE@\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2012-06-07 15:19+0200\n"
+"PO-Revision-Date: 2005-09-18 19:09+0200\n"
+"Last-Translator: Mattias Newzella <newzella@linux.se>\n"
+"Language-Team: Swedish <sv@li.org>\n"
+"Language: sv\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"X-Generator: KBabel 1.10.1\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: app/controllers/network_controller.rb:64
-msgid "Not configured"
-msgstr "Inte konfigurerad"
-
-#: app/controllers/network_controller.rb:64
-msgid "Manual"
-msgstr "Manuellt"
-
-#: app/controllers/network_controller.rb:64
-msgid "Automatic"
-msgstr "Automatiskt"
-
-#: app/controllers/network_controller.rb:134
+#: app/controllers/network_controller.rb:235
 msgid "Network settings have been written."
-msgstr "Nätverksinställningarna har skrivits."
+msgstr ""
 
-#: app/views/network/index.html.erb:118
-msgid "whitespace - invalid character."
-msgstr "blanksteg - ogiltigt tecken."
-
-#: app/views/network/index.html.erb:120
-msgid " - can not start with a digit."
-msgstr " - kan inte börja med en siffra."
-
-#: app/views/network/index.html.erb:122
-msgid "periodic '-' is not allowed."
-msgstr "tankstreck, \"-\", är inte tillåtna."
-
-#: app/views/network/index.html.erb:124
-msgid "can not end with (-) hyphen."
-msgstr "kan inte sluta med ett bindestreck (-)."
-
-#: app/views/network/index.html.erb:127
-msgid "can not start with (-) hyphen."
-msgstr "kan inte börja med ett bindestreck (-)."
-
-#: app/views/network/index.html.erb:129
-msgid " - is invalid character for hostname."
-msgstr " - är ett ogiltigt tecken för värdnamn."
-
-#: app/views/network/index.html.erb:154
-msgid "Invalid IP address format. The correct one is nnn.nnn.nnn.nnn for nnn between 0 and 255."
-msgstr "Ogiltigt format för IP-adress. Det korrekta formatet är nnn.nnn.nnn.nnn där nnn är mellan 0 och 255."
-
-#: app/views/network/index.html.erb:163
-msgid "Invalid Prefix format. The correct one /nn where nn is between 0-32 (CIDR format)."
-msgstr "Ogiltigt prefixformat. Det korrekta formatet är /nn där nn är mellan 0 och 32 (CIDR-format)."
-
-#: app/views/network/index.html.erb:169
-msgid "Invalid default route format. The correct one is nnn.nnn.nnn.nnn for nnn between 0 and 255."
-msgstr "Ogiltigt format för standardroute. Det korrekta formatet är nnn.nnn.nnn.nnn där nnn är mellan 0 och 255."
-
-#: app/views/network/index.html.erb:175
-msgid "Name servers are required. There must be at least one specified."
-msgstr "Det krävs namnservrar. Ange minst en namnserver."
-
-#: app/views/network/index.html.erb:181
-msgid "Hostname is required. It must be specified."
-msgstr "Det krävs ett värdnamn. Ange ett värdnamn."
-
-#: app/views/network/index.html.erb:187
-msgid "Domain is required. An empty domain is not supported."
-msgstr "Domän krävs. Tomma domäner fungerar inte."
-
-#: app/views/network/index.html.erb:210
+#: app/views/network/edit.html.erb:36 app/views/network/new.html.erb:36
+#: app/views/network/index.html.erb:18
 msgid "Network"
 msgstr "Nätverk"
 
-#: app/views/network/index.html.erb:221
+#: app/views/network/_form.html.erb:15 app/views/network/_form.html.erb:45
+#: app/views/network/_form.html.erb:79 app/views/network/_form.html.erb:121
+#, fuzzy
+#| msgid "Interface"
+msgid "Interface name"
+msgstr "Gränssnitt"
+
+#: app/views/network/_form.html.erb:26 app/views/network/index.html.erb:80
+msgid "Physical interface"
+msgstr ""
+
+#: app/views/network/_form.html.erb:31
+msgid "VLAN ID"
+msgstr ""
+
+#: app/views/network/_form.html.erb:56
+#, fuzzy
+#| msgid "inetd service"
+msgid "Bridge devices:"
+msgstr "Tjänster för e-post och diskussionsgrupper"
+
+#: app/views/network/_form.html.erb:91
+msgid "Bond driver options"
+msgstr ""
+
+#: app/views/network/_form.html.erb:97 app/views/network/index.html.erb:89
+msgid "Bond slaves"
+msgstr ""
+
+#: app/views/network/_form.html.erb:132
+#, fuzzy
+#| msgid "Configuration"
+msgid "Configuration mode"
+msgstr "Inställningar"
+
+#: app/views/network/_form.html.erb:162
+#, fuzzy
+#| msgid "Configuration"
+msgid "DNS configuration"
+msgstr "Inställningar"
+
+#: app/views/network/_form.html.erb:168
+#, fuzzy
+#| msgid "Host Names"
+msgid "Hostname"
+msgstr "Värddatornamn"
+
+# as in Windows Authentication Domain
+#: app/views/network/_form.html.erb:172
+#, fuzzy
+#| msgid "Domain\n"
+msgid "Domain"
+msgstr "Domän\n"
+
+#: app/views/network/_form.html.erb:177
+#, fuzzy
+#| msgid "Name Server"
+msgid "Name servers"
+msgstr "Namnserver"
+
+#: app/views/network/_form.html.erb:182
+#, fuzzy
+#| msgid "Search Index"
+msgid "Search domains"
+msgstr "Sökindex"
+
+#: app/views/network/_form.html.erb:187
+msgid "Change hostname by DHCP"
+msgstr ""
+
+#: app/views/network/_form.html.erb:202
+#, fuzzy
+#| msgid "Configuration"
+msgid "IP configuration"
+msgstr "Inställningar"
+
+#: app/views/network/_form.html.erb:209 app/views/network/index.html.erb:50
+#, fuzzy
+#| msgid "Own Address"
+msgid "IP address"
+msgstr "Egen adress"
+
+#: app/views/network/_form.html.erb:213
+#, fuzzy
+#| msgid "Dial Prefix"
+msgid "Subnet mask/Prefixlen"
+msgstr "Uppringningsprefix"
+
+#: app/views/network/_form.html.erb:217
+#, fuzzy
+#| msgid "Default Route"
+msgid "Default route"
+msgstr "Standardrutt"
+
+#: app/views/network/_form.html.erb:227
+msgid "Save"
+msgstr "Spara"
+
+#: app/views/network/_form.html.erb:229 app/views/network/index.html.erb:184
+msgid "back"
+msgstr ""
+
+#: app/views/network/_validation.html.erb:54
+#: app/views/network/_validation.html.erb:58
+#: app/views/network/_validation.html.erb:62
+#: app/views/network/_validation.html.erb:66
+#: app/views/network/_validation.html.erb:70
+#: app/views/network/_validation.html.erb:74
+#: app/views/network/_validation.html.erb:78
+#, fuzzy
+#| msgid "The filename is required."
+msgid "This field is required"
+msgstr "Filnamnet krävs."
+
+#: app/views/network/_validation.html.erb:55
+#: app/views/network/_validation.html.erb:63
+#: app/views/network/_validation.html.erb:75
+#, fuzzy
+#| msgid "Enter your IP address."
+msgid "Enter a valid IP address"
+msgstr "Ange IP-adress."
+
+#: app/views/network/_validation.html.erb:59
+msgid "Enter a valid subnet mask or prefix"
+msgstr ""
+
+#: app/views/network/_validation.html.erb:67
+#, fuzzy
+#| msgid "Invalid device name."
+msgid "Enter a valid hostname"
+msgstr "Enhetsnamnet är ogiltigt."
+
+#: app/views/network/_validation.html.erb:71
+#: app/views/network/_validation.html.erb:79
+#, fuzzy
+#| msgid "Invalid device name."
+msgid "Enter a valid domain name"
+msgstr "Enhetsnamnet är ogiltigt."
+
+#: app/views/network/_validation.html.erb:83
+#, fuzzy
+#| msgid "Please wait..."
+msgid "Please wait"
+msgstr "Vänta..."
+
+#: app/views/network/index.html.erb:36
+#, fuzzy
+#| msgid "Interface"
+msgid "Physical Interfaces"
+msgstr "Gränssnitt"
+
+#: app/views/network/index.html.erb:49 app/views/network/index.html.erb:75
 msgid "Interface"
 msgstr "Gränssnitt"
 
-#: app/views/network/index.html.erb:226
-msgid "Select"
-msgstr "Välj"
+#: app/views/network/index.html.erb:51
+msgid "Mode"
+msgstr ""
 
-#: app/views/network/index.html.erb:243
-msgid "Configuration mode"
-msgstr "Konfigurationsläge"
+#: app/views/network/index.html.erb:54 app/views/network/index.html.erb:95
+#, fuzzy
+#| msgid "Not configured"
+msgid "configure"
+msgstr "Inte inställd"
 
-#: app/views/network/index.html.erb:252
-msgid "IP address"
-msgstr "IP-adress"
+#: app/views/network/index.html.erb:64
+#, fuzzy
+#| msgid "Interface"
+msgid "Virtual Interfaces"
+msgstr "Gränssnitt"
 
-#: app/views/network/index.html.erb:256
-msgid "Subnet mask / Prefixlen"
-msgstr "Delnätsmask/prefixlen"
+#: app/views/network/index.html.erb:79
+msgid "Vlan ID"
+msgstr ""
 
-#: app/views/network/index.html.erb:260
-msgid "Default route"
-msgstr "Standardroute"
+#: app/views/network/index.html.erb:84
+msgid "Bridge ports"
+msgstr ""
 
-#: app/views/network/index.html.erb:269
-msgid "Hostname"
-msgstr "Värdnamn"
+#: app/views/network/index.html.erb:88
+msgid "Bond option"
+msgstr ""
 
-#: app/views/network/index.html.erb:274
-msgid "Domain"
-msgstr "Domän"
+#: app/views/network/index.html.erb:98
+#, fuzzy
+#| msgid "Delete"
+msgid "delete"
+msgstr "Ta bort"
 
-#: app/views/network/index.html.erb:278
-msgid "Name servers"
-msgstr "Namnservrar"
+#: app/views/network/index.html.erb:108
+msgid "New virtual interface"
+msgstr ""
 
-#: app/views/network/index.html.erb:282
-msgid "Search domains"
-msgstr "Sök domäner"
+#: app/views/network/index.html.erb:119
+msgid "Please select one of the virtual interfaces"
+msgstr ""
 
+#: app/views/network/index.html.erb:144
+msgid "BRIDGE"
+msgstr ""
+
+#: app/views/network/index.html.erb:164
+msgid "BOND"
+msgstr ""
+
+#: app/views/network/index.html.erb:185
+msgid "next"
+msgstr ""
+
+#, fuzzy
+#~| msgid "Manual Mode"
+#~ msgid "Manual"
+#~ msgstr "Manuellt läge"
+
+#, fuzzy
+#~| msgid "Automatic Mode"
+#~ msgid "Automatic"
+#~ msgstr "Automatiskt läge"
+
+#, fuzzy
+#~| msgid "Choose the network device."
+#~ msgid "Manage network devices"
+#~ msgstr "Välj nätverksenhet."
+
+#, fuzzy
+#~| msgid "The VM's name cannot start with a digit."
+#~ msgid " - can not start with a digit."
+#~ msgstr "VM-namnet får inte börja med en siffra."
+
+#, fuzzy
+#~| msgid "The option 'flush' is not allowed"
+#~ msgid "periodic '-' is not allowed."
+#~ msgstr "Alternativet \"flush\" tillåts inte"
+
+#, fuzzy
+#~| msgid "General Settings"
+#~ msgid "General settings"
+#~ msgstr "Allmänna inställningar"
+
+#, fuzzy
+#~| msgid "Own Address"
+#~ msgid "IP Address"
+#~ msgstr "Egen adress"
+
+#, fuzzy
+#~| msgid "No valid request file specified."
+#~ msgid "Hostname is required. It must be specified."
+#~ msgstr "Ingen giltig begärandefil har angetts."
+
+#, fuzzy
+#~| msgid "Select Script"
+#~ msgid "Select"
+#~ msgstr "Välj skript"
+
+#, fuzzy
+#~| msgid "Do not start"
+#~ msgid "not set"
+#~ msgstr "Starta inte"
+
+#~ msgid "dhcp"
+#~ msgstr "dhcp"
+
+# cancel button label
+#~ msgid "Cancel"
+#~ msgstr "Avbryt"
+
+#, fuzzy
+#~| msgid "Choose the network device."
+#~ msgid "Edit Network Device"
+#~ msgstr "Välj nätverksenhet."
+
+#~ msgid "Description"
+#~ msgstr "Beskrivning"
+
+#, fuzzy
+#~| msgid "DMA"
+#~ msgid "MAC"
+#~ msgstr "DMA"
+
+#, fuzzy
+#~| msgid "Device"
+#~ msgid "Device Name"
+#~ msgstr "Enhet"
+
+#, fuzzy
+#~| msgid "Start-Up"
+#~ msgid "Startup"
+#~ msgstr "Start"
+
+#~ msgid "Update"
+#~ msgstr "Uppdatera"
+
+#~ msgid "Back"
+#~ msgstr "Tillbaka"

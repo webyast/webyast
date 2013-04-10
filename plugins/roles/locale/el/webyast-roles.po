@@ -1,62 +1,110 @@
+#
+# Efstathios Iosifidis <iosifidis@opensuse.org>, 2011, 2012.
+#
 msgid ""
 msgstr ""
-"Project-Id-Version: webyast-roles-ui 1.0.0\n"
+"Project-Id-Version: @PACKAGE@\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-08-02 09:18+0200\n"
-"PO-Revision-Date: 2005-08-24 17:53+0300\n"
-"Last-Translator: Hellenic SuSE Translation Team <hstg@billg.gr>\n"
-"Language-Team: Hellenic-Ελληνικά-Greek <hstg@billg.gr>\n"
+"POT-Creation-Date: 2012-06-07 15:19+0200\n"
+"PO-Revision-Date: 2012-06-14 18:29+0300\n"
+"Last-Translator: Efstathios Iosifidis <iosifidis@opensuse.org>\n"
+"Language-Team: Ελληνικά, Σύγχρονα <opensuse-translation-el@opensuse.org>\n"
+"Language: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
-"Content-Transfer-Encoding: 8bit\n"
+"Content-Transfer-Encoding: 8bits\n"
 "X-Generator: KBabel 1.10\n"
-"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"Plural-Forms: nplurals=2; plural=(n!=1);\n"
 
-#: app/controllers/roles_controller.rb:97
-#: app/controllers/roles_controller.rb:97
-msgid "Cannot find roles"
-msgstr ""
+#: app/controllers/roles_controller.rb:126
+msgid "Role name is invalid. Allowed is combination of a-z, A-Z, numbers, space, dash and underscore only."
+msgstr "Μη έγκυρο όνομα ρόλου. Επιτρέπεται συνδυασμός μόνο a-z, A-Z, αριθμού, κενού, παύλας και κάτω παύλας."
 
-#: app/views/roles/index.rhtml:61 app/views/roles/index.rhtml:207
-#: app/views/roles/index.rhtml:213 app/views/roles/index.rhtml:61
-#: app/views/roles/index.rhtml:207 app/views/roles/index.rhtml:213
-msgid "Assign Users"
-msgstr ""
+#: app/controllers/roles_controller.rb:136
+msgid "Role name is already used."
+msgstr "Το σύστημα είναι ήδη σε χρήση."
 
-#: app/views/roles/index.rhtml:62 app/views/roles/index.rhtml:62
-msgid "Selected Users"
-msgstr ""
+#: app/controllers/roles_controller.rb:155
+msgid "Role '%s' was successfully removed."
+msgstr "Ο ρόλος '%s' αφαιρέθηκε με επιτυχία."
 
-#: app/views/roles/index.rhtml:63 app/views/roles/index.rhtml:63
-#, fuzzy
-msgid "Available Users"
-msgstr "Διαθέσιμοι Επεξεργαστές"
-
-#: app/views/roles/index.rhtml:64 app/views/roles/index.rhtml:64
-msgid "Click user names to assign/remove users"
-msgstr ""
-
-#: app/views/roles/index.rhtml:149 app/views/roles/index.rhtml:149
-#: shortcuts.yml:6
+#: app/views/roles/index.html.erb:7
 msgid "Roles"
-msgstr ""
+msgstr "Ρόλοι"
 
-#: app/views/roles/index.rhtml:153 app/views/roles/index.rhtml:153
+#: app/views/roles/index.html.erb:25
+msgid "In order to assign the user to roles,"
+msgstr "Σε περίπτωση ανάθεσης χρήστη σε ρόλους,"
+
+#: app/views/roles/index.html.erb:26
+msgid "Drag and Drop the user labels into Role containers"
+msgstr "Μεταφορά και Απόθεση ετικετών χρήστη στα περιεχόμενα Ρόλων"
+
+#: app/views/roles/index.html.erb:27
+msgid "Don't show this again"
+msgstr "Μην το εμφανίσεις αυτό ξανά"
+
+#: app/views/roles/index.html.erb:38
 msgid "Create Role"
-msgstr ""
+msgstr "Δημιουργία Ρόλου"
 
-#: app/views/roles/index.rhtml:165 app/views/roles/index.rhtml:165
-#, fuzzy
+#: app/views/roles/index.html.erb:43
+msgid "Assign Users"
+msgstr "Αντιστοίχιση Χρηστών"
+
+#: app/views/roles/index.html.erb:53
+msgid "User already assigned"
+msgstr "Ο χρήστης ανατέθηκε ήδη"
+
+#: app/views/roles/index.html.erb:104
 msgid "Assign Permissions"
-msgstr "Διαθέσιμοι Επεξεργαστές"
+msgstr "Αντιστοίχιση Δικαιωμάτων"
 
-#: app/views/roles/index.rhtml:168 app/views/roles/index.rhtml:168
+#: app/views/roles/index.html.erb:107
 msgid "collapse all"
-msgstr ""
+msgstr "σύμπτυξη όλων"
 
-#: shortcuts.yml:7
-msgid "Set permissions in roles and assign users to roles"
-msgstr ""
+#: app/views/roles/index.html.erb:169
+msgid "This field is required"
+msgstr "Αυτό το πεδίο απαιτείται"
+
+#: app/views/roles/index.html.erb:169
+msgid "Allowed is combination of a-z, A-Z, numbers, space, dash and underscore only."
+msgstr "Επιτρέπεται συνδυασμός μόνο a-z, Α-Ζ, αριθμοί, κενό, παύλα και κάτω παύλα."
+
+#: app/views/roles/index.html.erb:235
+msgid "Please wait"
+msgstr "Παρακαλώ περιμένετε"
+
+#~ msgid "Error: Could not remove role <i>%s</i>."
+#~ msgstr "Σφάλμα: Αδυναμία απομάκρυνσης ρόλου <i>%s</i>."
+
+#~ msgid "Cannot find roles"
+#~ msgstr "Αδυναμία εύρεσης ρόλων"
+
+#~ msgid "Set permissions in roles and assign users to roles"
+#~ msgstr "Ορίστε δικαιώματα στους ρόλους και αντιστοιχίστε χρήστες στους ρόλους"
+
+#~| msgid "Selected Resource"
+#~ msgid "Selected Users"
+#~ msgstr "Επιλεγμένοι Χρήστες"
+
+#~| msgid "Available Updates"
+#~ msgid "Available Users"
+#~ msgstr "Διαθέσιμοι Χρήστες"
+
+#~ msgid "Click user names to assign/remove users"
+#~ msgstr "Κλικ στα ονόματα χρήστη για επιλογή/αποεπιλογή χρηστών"
+
+#, fuzzy
+#~| msgid "Invalid device name."
+#~ msgid "Invalid role name"
+#~ msgstr "Μη έγκυρο όνομα συσκευής."
+
+#, fuzzy
+#~| msgid "Permissions denied"
+#~ msgid "Permissions contained in role"
+#~ msgstr "Απαγορεύονται Δικαιώματα"
 
 #, fuzzy
 #~| msgid "Permissions denied"
@@ -72,6 +120,11 @@ msgstr ""
 #~| msgid "description"
 #~ msgid ")}-description"
 #~ msgstr "περιγραφή"
+
+#, fuzzy
+#~| msgid "Remaining Software"
+#~ msgid "Remaining users"
+#~ msgstr "Υπολοιπόμενο Λογισμικό"
 
 #~ msgid "Save"
 #~ msgstr "&Αποθήκευση"

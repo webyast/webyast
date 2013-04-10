@@ -4,7 +4,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: webyast-reboot-ui\n"
-"POT-Creation-Date: 2011-05-30 16:16+0200\n"
+"POT-Creation-Date: 2012-06-07 15:20+0200\n"
 "PO-Revision-Date: 2010-08-26 08:58\n"
 "Last-Translator: Novell Lang <language@novell.com>\n"
 "Language-Team: Novell Lang <language@novell.com>\n"
@@ -14,26 +14,18 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: app/controllers/system_controller.rb:36
-#: app/controllers/system_controller.rb:36
+#: app/controllers/system_controller.rb:77
 msgid "Rebooting the machine..."
 msgstr "Der Computer wird neu gestartet..."
 
-#: app/controllers/system_controller.rb:40
-#: app/controllers/system_controller.rb:44
-#: app/controllers/system_controller.rb:40
-#: app/controllers/system_controller.rb:44
+#: app/controllers/system_controller.rb:81
 msgid "Cannot reboot the machine!"
 msgstr "Der Computer kann nicht neu gestartet werden!"
 
-#: app/controllers/system_controller.rb:57
-#: app/controllers/system_controller.rb:57
+#: app/controllers/system_controller.rb:94
 msgid "Shuting down the machine..."
 msgstr "Der Computer wird heruntergefahren..."
 
-#: app/controllers/system_controller.rb:61
-#: app/controllers/system_controller.rb:65
-#: app/controllers/system_controller.rb:61
-#: app/controllers/system_controller.rb:65
+#: app/controllers/system_controller.rb:98
 msgid "Cannot shutdown the machine!"
 msgstr "Der Computer kann nicht heruntergefahren werden!"

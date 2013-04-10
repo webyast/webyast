@@ -1,0 +1,38 @@
+# Jyri Palokangas <jyri.palokangas@opensuse.org>, 2011, 2012.
+msgid ""
+msgstr ""
+"Project-Id-Version: @PACKAGE@\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2012-06-07 15:20+0200\n"
+"PO-Revision-Date: 2012-06-24 20:03+0300\n"
+"Last-Translator: Jyri Palokangas <jyri.palokangas@opensuse.org>\n"
+"Language-Team: Finnish <kde-i18n-doc@kde.org>\n"
+"Language: fi\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Lokalize 1.2\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+
+#: app/controllers/terminal_controller.rb:41
+msgid ""
+"Terminal service is not running. Please start with: 'rcshellinabox start'"
+msgstr ""
+"Pääteohjelma ei ole käynnissä. Käynnistä se komennolla: 'rcshellinabox start'"
+
+#: app/views/terminal/index.html.erb:50
+msgid "Terminal Client"
+msgstr "Pääteohjelma"
+
+#: app/views/terminal/index.html.erb:64
+msgid "Web based terminal client"
+msgstr "Web-pohjainen pääteohjelma"
+
+#: app/views/terminal/index.html.erb:67
+msgid "fullscreen"
+msgstr "kokoruutu"
+
+#: app/views/terminal/index.html.erb:75
+msgid "close"
+msgstr "sulje"
+

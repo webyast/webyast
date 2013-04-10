@@ -1,91 +1,131 @@
-# Copyright (C) 2006 SuSE Linux Products GmbH, Nuernberg
-# This file is distributed under the same license as the package.
+# Dutch translations for PACKAGE package
+# Engelse vertalingen voor het pakket PACKAGE.
+# Copyright (C) 2010 THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
 #
+# Automatically generated, 2010.
+# Freek de Kruijf <freek@opensuse.org>, 2010, 2011, 2012.
 msgid ""
 msgstr ""
-"Project-Id-Version: yast_webclient_mail\n"
-"POT-Creation-Date: 2010-04-13 13:36+0200\n"
-"PO-Revision-Date: 2010-04-22 12:39\n"
-"Last-Translator: Novell Language <language@novell.com>\n"
-"Language-Team: Novell Language <language@novell.com>\n"
+"Project-Id-Version: webyast-mail-ws 1.0.0\n"
+"POT-Creation-Date: 2012-06-07 15:20+0200\n"
+"PO-Revision-Date: 2012-06-15 10:02+0200\n"
+"Last-Translator: Freek de Kruijf <freek@opensuse.org>\n"
+"Language-Team: Dutch <opensuse-nl@opensuse.org>\n"
+"Language: nl\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Lokalize 1.2\n"
 
-#: app/controllers/mail_controller.rb:29
+#: app/models/mail_state.rb:37
+msgid "It was not possible to retrieve the full hostname of the machine. If the mail could not be delivered, consult the network and/or mail configuration with your network administrator."
+msgstr "Het was niet mogelijk om de volledige hostname van de machine op te halen. Als de e-mail niet afgeleverd kon worden, bekijk dan de netwerk- en/of de e-mailconfiguration met uw netwerkbeheerder."
+
+#: app/models/mail_state.rb:42
+msgid "Mail configuration test not confirmed"
+msgstr "Test van de e-mailconfiguratie heeft nog geen OK opgeleverd"
+
+#: app/models/mail_state.rb:43
+msgid "While configuring mail, a test mail was sent to %s . Was the mail delivered to this address?<br>If so, confirm it by pressing the button. Otherwise check your mail configuration again."
+msgstr "Bij de e-mailconfiguratie is er een test-e-mail verzonden naar %s. Is het bericht op dit adres afgeleverd?<br>Zo ja, bevestig dat dan door op de knop te drukken. In het andere geval dient u de e-mailconfiguratie nog eens te controleren."
+
+#: app/models/mail_state.rb:46
+msgid "Test mail received"
+msgstr "Test-e-mail ontvangen"
+
+#: app/controllers/mailsetting_controller.rb:58
 msgid "Passwords do not match."
 msgstr "Wachtwoorden komen niet overeen."
 
-#: app/controllers/mail_controller.rb:36
+#: app/controllers/mailsetting_controller.rb:65
 msgid "Mail settings have been written."
-msgstr "Mailinstellingen zijn opgeslagen."
+msgstr "E-mail-instellingen zijn weggeschreven."
 
-#: app/controllers/mail_controller.rb:38
+#: app/controllers/mailsetting_controller.rb:67
 msgid "Test mail was sent to %s."
-msgstr "Testmail verzonden naar %s."
+msgstr "Test-e-mail is verzonden naar %s."
 
-#: app/controllers/mail_controller.rb:50
-msgid "Error while saving mail settings: %s"
-msgstr "Fout tijdens het opslaan van mailinstellingen: %s"
+#: app/controllers/mailsetting_controller.rb:72
+msgid "Error while saving mail settings."
+msgstr "Fout bij het opslaan van instellingen voor e-mail."
 
-#: app/controllers/mail_controller.rb:67
-msgid "No outgoing mail server is set, but administrator has mail forwarders defined.\nChange %s<i>administrator</i>%s or %s<i>mail</i>%s configuration."
-msgstr "Er is geen server voor uitgaande mail ingesteld, maar de beheerder heeft doorstuuradressen opgegeven. \nWijzig de configuratie voor %s<i>administrator</i>%s of %s<i>mail</i>%s."
+#: app/controllers/mailsetting_controller.rb:85
+msgid ""
+"No outgoing mail server is set, but administrator has mail forwarders defined.\n"
+"        Change %s<i>administrator</i>%s or %s<i>mail</i>%s configuration."
+msgstr ""
+"Er is geen uitgaande mailserver ingesteld, echter de systeembeheerder heeft e-mail doorsturen gedefinieerd.\n"
+"        Wijzig instellingen voor %s<i>systeembeheerder</i>%s of %s<i>e-mail</i>%s."
 
-#: app/views/mail/index.html.erb:16
+#: app/views/mailsetting/index.html.erb:32
+msgid "Please wait"
+msgstr "Een ogenblik geduld"
+
+#: app/views/mailsetting/index.html.erb:40
 msgid "The passwords do not match."
 msgstr "De wachtwoorden komen niet overeen."
 
-#: app/views/mail/index.html.erb:17
+#: app/views/mailsetting/index.html.erb:41
 msgid "Enter a valid e-mail address."
 msgstr "Geef een geldig e-mailadres op."
 
-#: app/views/mail/index.html.erb:18
+#: app/views/mailsetting/index.html.erb:42
 msgid "Enter a valid domain name or an IP address."
-msgstr "Voer een geldige domeinnaam of een IP-adres in."
+msgstr "Voer een geldige domeinnaam in of een IP-adres."
 
-#: app/views/mail/index.html.erb:35
+#: app/views/mailsetting/index.html.erb:68
 msgid "Mail Settings"
 msgstr "Mailinstellingen"
 
-#: app/views/mail/index.html.erb:47
+#: app/views/mailsetting/index.html.erb:81
+msgid "Outgoing mail server settings"
+msgstr "Instellingen voor uitgaande mailserver"
+
+#: app/views/mailsetting/index.html.erb:86
 msgid "Outgoing mail server"
-msgstr "Server voor uitgaande mail"
+msgstr "Uitgaande mailserver"
 
-#: app/views/mail/index.html.erb:50
+#: app/views/mailsetting/index.html.erb:91
 msgid "Use secure connection (TLS)"
-msgstr "Beveiligde verbinding (TLS) gebruiken"
+msgstr "Beveiligde verbinding gebruiken (TLS)"
 
-#: app/views/mail/index.html.erb:51
+#: app/views/mailsetting/index.html.erb:92
 msgid "Never"
 msgstr "Nooit"
 
-#: app/views/mail/index.html.erb:51
+#: app/views/mailsetting/index.html.erb:92
 msgid "If available"
 msgstr "Indien beschikbaar"
 
-#: app/views/mail/index.html.erb:51
+#: app/views/mailsetting/index.html.erb:92
 msgid "Always"
 msgstr "Altijd"
 
-#: app/views/mail/index.html.erb:53
+#: app/views/mailsetting/index.html.erb:96
 msgid "User name"
 msgstr "Gebruikersnaam"
 
-#: app/views/mail/index.html.erb:56
+#: app/views/mailsetting/index.html.erb:101
 msgid "Password"
 msgstr "Wachtwoord"
 
-#: app/views/mail/index.html.erb:59
+#: app/views/mailsetting/index.html.erb:106
 msgid "Confirm password"
 msgstr "Wachtwoord bevestigen"
 
-#: app/views/mail/index.html.erb:67
+#: app/views/mailsetting/index.html.erb:114
+msgid "Check mail server settings"
+msgstr "Instellingen voor mailserver controleren"
+
+#: app/views/mailsetting/index.html.erb:118
 msgid "Send test mail to"
-msgstr "Testmail verzenden naar"
+msgstr "Test-e-mail verzenden naar"
 
-#: app/views/mail/index.html.erb:69
+#: app/views/mailsetting/index.html.erb:120
 msgid "Send Mail"
-msgstr "E-mail sturen"
+msgstr "Berichten verzenden"
 
+#~ msgid "Manage outgoing mail settings"
+#~ msgstr "Instellingen voor uitgaande e-mail beheren"

@@ -1,0 +1,73 @@
+# Translation into the walloon language.
+# Copyright (C) 2007 SUSE Linux Products GmbH.
+#
+# Pablo Saratxaga <pablo@walon.org>, 2001, 2004.
+# Jean Cayron <jean.cayron@base.be>, 2007, 2012.
+msgid ""
+msgstr ""
+"Project-Id-Version: yast memory\n"
+"POT-Creation-Date: 2012-06-07 15:20+0200\n"
+"PO-Revision-Date: 2012-08-19 14:59+0200\n"
+"Last-Translator: Jean Cayron <jean.cayron@base.be>\n"
+"Language-Team: Walloon <linux-wa@walon.org>\n"
+"Language: wa\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+"X-Generator: Lokalize 1.4\n"
+
+#: app/controllers/ldap_controller.rb:38
+#, fuzzy
+#| msgid "Base fonts and font configuration."
+msgid "Cannot read LDAP client configuraton."
+msgstr "Fontes di båze pol sicrijhaedje eyet apontiaedje des fontes."
+
+#: app/controllers/ldap_controller.rb:63
+msgid "LDAP client configuraton successfully written."
+msgstr ""
+
+#: app/controllers/ldap_controller.rb:65
+msgid "Error while saving LDAP client configuration."
+msgstr ""
+
+#: app/views/ldap/index.html.erb:33
+msgid "This field is required."
+msgstr ""
+
+#: app/views/ldap/index.html.erb:34
+msgid "Enter a valid domain name or an IP address."
+msgstr "Tapez on no d' dominne valåbe ou ene adresse IP."
+
+#: app/views/ldap/index.html.erb:70
+msgid "Please wait"
+msgstr "Tårdjîz s' i vs plait"
+
+#: app/views/ldap/index.html.erb:88
+msgid "LDAP client"
+msgstr "Cliyint LDAP"
+
+#: app/views/ldap/index.html.erb:101
+msgid "Enable LDAP Authentication"
+msgstr "Mete e-n alaedje l' otintifiaedje LDAP"
+
+#: app/views/ldap/index.html.erb:108
+msgid "LDAP Server Address"
+msgstr "Adresse do sierveu LDAP"
+
+#: app/views/ldap/index.html.erb:113
+msgid "Base DN"
+msgstr "DN raecene"
+
+#: app/views/ldap/index.html.erb:115
+msgid "Fetch DN"
+msgstr "DN purdant"
+
+#: app/views/ldap/index.html.erb:127
+msgid "Secure Connection"
+msgstr "Raloyaedje såve"
+
+#, fuzzy
+#~| msgid "Configure Applet..."
+#~ msgid "Configure LDAP client"
+#~ msgstr "Apontyî l' applet ..."

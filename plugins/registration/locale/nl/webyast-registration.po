@@ -1,191 +1,249 @@
-# Copyright (C) 2006 SuSE Linux Products GmbH, Nuernberg
-# This file is distributed under the same license as the package.
+# translation of yast_webclient_registration.nl.po to Dutch
+# @TITLE@
+# Copyright (C) 2006, SUSE Linux GmbH, Nuremberg
 #
+# This file is distributed under the same license as @PACKAGE@ package. FIRST
+#
+# Freek de Kruijf <freek@opensuse.org>, 2009, 2010, 2011.
 msgid ""
 msgstr ""
-"Project-Id-Version: yast_webclient_registration\n"
-"POT-Creation-Date: 2010-03-30 10:01+0200\n"
-"PO-Revision-Date: 2010-04-08 12:01\n"
-"Last-Translator: Novell Language <language@novell.com>\n"
-"Language-Team: Novell Language <language@novell.com>\n"
+"Project-Id-Version: yast_webclient_registration.nl\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2012-06-07 15:20+0200\n"
+"PO-Revision-Date: 2011-03-08 18:20-0400\n"
+"Last-Translator: Freek de Kruijf <freek@opensuse.org>\n"
+"Language-Team: Dutch <opensuse-nl@opensuse.org>\n"
+"Language: nl\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Lokalize 1.1\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
 
-#: app/controllers/registration_controller.rb:11
+#: app/models/registration_state.rb:27
+msgid "Registration is missing"
+msgstr "Registratie ontbreekt"
+
+#: app/models/registration_state.rb:28
+msgid "Please register your system in order to get updates."
+msgstr "Gaarne uw systeem registreren zodat u het kunt bijwerken."
+
+#: app/models/registration_state.rb:30
+msgid "register"
+msgstr "registreren"
+
+#: app/controllers/registration_controller.rb:29
 msgid "Email"
 msgstr "E-mail"
 
-#: app/controllers/registration_controller.rb:12
+#: app/controllers/registration_controller.rb:30
 msgid "System name"
 msgstr "Systeemnaam"
 
-#: app/controllers/registration_controller.rb:13
+#: app/controllers/registration_controller.rb:31
 msgid "SLES registration code"
-msgstr "Registratiecode SLES"
+msgstr "SLES-registratiecode"
 
-#: app/controllers/registration_controller.rb:14
+#: app/controllers/registration_controller.rb:32
 msgid "SLED registration code"
-msgstr "Registratiecode SLED"
+msgstr "SLED-registratiecode"
 
-#: app/controllers/registration_controller.rb:15
+#: app/controllers/registration_controller.rb:33
+msgid "SLMS registration code"
+msgstr "SLMS-registratiecode"
+
+#: app/controllers/registration_controller.rb:34
 msgid "Appliance registration code"
-msgstr "Registratiecode toepassing"
+msgstr "Appliance-registratiecode"
 
-#: app/controllers/registration_controller.rb:16
+#: app/controllers/registration_controller.rb:35
 msgid "WebYaST registration code"
-msgstr "Registratiecode WebYaST"
+msgstr "WebYaST-registratiecode"
 
-#: app/controllers/registration_controller.rb:17
+#: app/controllers/registration_controller.rb:36
 msgid "Registration code"
 msgstr "Registratiecode"
 
-#: app/controllers/registration_controller.rb:18
+#: app/controllers/registration_controller.rb:37
 msgid "Hostname"
 msgstr "Hostnaam"
 
-#: app/controllers/registration_controller.rb:19
+#: app/controllers/registration_controller.rb:38
 msgid "Device name"
 msgstr "Apparaatnaam"
 
-#: app/controllers/registration_controller.rb:20
+#: app/controllers/registration_controller.rb:39
 msgid "Appliance name"
-msgstr "Toepassingsnaam"
+msgstr "Appliancenaam"
 
-#: app/controllers/registration_controller.rb:21
+#: app/controllers/registration_controller.rb:40
 msgid "registration code"
 msgstr "registratiecode"
 
-#: app/controllers/registration_controller.rb:30
-msgid "Invalid session, please login again."
-msgstr "Ongeldige sessie, meld u opnieuw aan."
-
-#: app/controllers/registration_controller.rb:41
-msgid "No permissions for registration"
-msgstr "Geen toestemming voor registratie"
-
-#: app/controllers/registration_controller.rb:84
+#: app/controllers/registration_controller.rb:81
 msgid "Please try to register again later."
-msgstr "Probeer u later nogmaals te registreren."
+msgstr "Gaarne later nog eens proberen te registreren."
 
-#: app/controllers/registration_controller.rb:88
-msgid "Registration was skipped."
-msgstr "Registratie is overgeslagen"
-
-#: app/controllers/registration_controller.rb:94
-msgid "Registration did not finish."
-msgstr "Registratie niet voltooid."
-
-#: app/controllers/registration_controller.rb:95
+#: app/controllers/registration_controller.rb:85
 msgid "Registration did not succeed."
-msgstr "Registratie is mislukt."
+msgstr "Registratie zonder succes."
+
+#: app/controllers/registration_controller.rb:89
+msgid "Registration was skipped."
+msgstr "Registratie was overgeslagen."
+
+#: app/controllers/registration_controller.rb:93
+msgid "This may be a temporary issue."
+msgstr "Dit kan een tijdelijke zaak zijn."
 
 #: app/controllers/registration_controller.rb:97
-msgid "This may be a temporary issue."
-msgstr "Dit is mogelijk een tijdelijk probleem."
+msgid "The system might not receive necessary updates."
+msgstr "Het systeem kan mogelijk de noodzakelijke dingen voor bijwerken niet ontvangen."
 
-#: app/controllers/registration_controller.rb:102
+#: app/controllers/registration_controller.rb:113
 msgid "The registration server returned invalid or incomplete data."
-msgstr "De registratieserver retourneerde ongeldige of onvolledige gegevens."
+msgstr "De registratieserver gaf ongeldige of niet-complete gegevens terug."
 
-#: app/controllers/registration_controller.rb:134
+#: app/controllers/registration_controller.rb:121
+msgid "Could not read the registration configuration."
+msgstr "Kon de registratie-configuratie niet lezen."
+
+#: app/controllers/registration_controller.rb:121
+msgid "The registration backend is not installed correctly"
+msgstr "De registratie-backend is niet juist geïnstalleerd"
+
+#: app/controllers/registration_controller.rb:122
+msgid "Please refer to your support contact."
+msgstr "Gaarne naar uw ondersteuningscontract kijken"
+
+#: app/controllers/registration_controller.rb:151
 msgid "Please fill out missing entries."
-msgstr "Vul de ontbrekende items in."
+msgstr "Gaarne de ontbrekende items invullen."
 
-#: app/controllers/registration_controller.rb:155
+#: app/controllers/registration_controller.rb:183
 msgid "Service added:"
 msgstr "Service toegevoegd:"
 
-#: app/controllers/registration_controller.rb:159 app/controllers/registration_controller.rb:164
+#: app/controllers/registration_controller.rb:189
 msgid "Catalog enabled:"
 msgstr "Catalogus ingeschakeld:"
 
-#: app/controllers/registration_controller.rb:188
+#: app/controllers/registration_controller.rb:215
 msgid "Repository added:"
-msgstr "Opslagruimte toegevoegd:"
+msgstr "Installatiebron toegevoegd:"
 
-#: app/controllers/registration_controller.rb:248
+#: app/controllers/registration_controller.rb:357
 msgid "This system is already registered."
-msgstr "Dit systeem is al geregistreerd"
+msgstr "Dit systeem is al geregistreerd."
 
-#: app/controllers/registration_controller.rb:277
+#: app/controllers/registration_controller.rb:382
 msgid "Registration finished successfully."
-msgstr "Registratie is gelukt."
+msgstr "Registratie met succes beëindigd."
 
-#: app/controllers/registration_controller.rb:290
-msgid "<p><b>Repositories were not modified during the registration process.</b></p><p>It is likely that an incorrect registration code was used. If this is the case, please attempt the registration process again to get an update repository.</p><p>Please make sure that this system has an update repository configured, otherwise it will not receive updates.</p>"
-msgstr "<p><b>Opslagruimten zijn niet gewijzigd tijdens de registratieprocedure.</b></p><p>Er is waarschijnlijk een onjuiste registratiecode gebruikt. Als dat het geval us, probeer dan de registratieprocedure opnieuw te doorlopen om de opslagruimte bij te werken.</p><p>Zorg ervoor dat op dit systeem een bijgewerkte opslagruimte is geconfigureerd, anders kunnen er geen updates worden ontvangen.</p>"
-
-#: app/controllers/registration_controller.rb:324
+#: app/controllers/registration_controller.rb:396
 msgid "A connection to the registration server could not be established."
-msgstr "Er kan geen verbinding met de registratieserver tot stand worden gebracht."
+msgstr "Er kon geen verbinding met de registratieserver worden opgebouwd."
 
-#: app/controllers/registration_controller.rb:328
+#: app/controllers/registration_controller.rb:400
+msgid "The supplied registration data was invalid."
+msgstr "De opgegeven registratiegegevens waren ongeldig."
+
+#: app/controllers/registration_controller.rb:404
+msgid "The registration code you entered was invalid."
+msgstr "De door u ingevoerde registratiecode was ongeldig."
+
+#: app/controllers/registration_controller.rb:410
 msgid "The transmitted registration data created a conflict."
-msgstr "De verzonden registratiegegevens hebben een conflict veroorzaakt."
+msgstr "De overgedragen registratiegegevens hebben een conflict veroorzaakt."
 
-#: app/controllers/registration_controller.rb:336
+#: app/controllers/registration_controller.rb:418
 msgid "Registration can not be performed. There is no product installed that can be registered."
-msgstr "De registratie kan niet worden uitgevoerd. Er is geen product geïnstalleerd dat kan worden geregistreerd."
+msgstr "Registratie kan niet worden uitgevoerd. Er is geen product geïnstalleerd dat geregistreerd kan worden."
 
-#: app/controllers/registration_controller.rb:351
-msgid "A connection to the registration server could not be established or it did not reply."
-msgstr "Er kon geen verbinding worden gemaakt met de registratieserver of de server reageerde niet."
+#: app/controllers/registration_controller.rb:442
+msgid "<p><b>Repositories were not modified during the registration process.</b></p><p>It is likely that an incorrect registration code was used. If this is the case, please attempt the registration process again to get an update repository.</p><p>Please make sure that this system has an update repository configured, otherwise it will not receive updates.</p>"
+msgstr "<p><b>Er zijn geen installatiebronnen gewijzigd bij het registratieproces.</b></p><p>Het is waarschijnlijk dat een onjuiste registratiecode is gebruikt. Als dat het geval is, probeer dan het registratieproces opnieuw om een installatiebron voor bijwerken te krijgen.</p><p>Verzeker u ervan dat dit systeem een installatiebron voor bijwerken heeft ingesteld, anders zal het geen bijwerkinformatie ontvangen.</p>"
 
-#: app/controllers/registration_controller.rb:368
+#: app/controllers/registration_controller.rb:454
 msgid "The registration server returned invalid data."
-msgstr "De registratieserver retourneerde ongeldige gegevens."
+msgstr "De registratieserver gaf ongeldige data terug."
 
-#: app/views/registration/index.rhtml:28 app/views/registration/index.rhtml:29
+#: app/views/registration/index.html.erb:42
+#: app/views/registration/index.html.erb:57
+msgid "Please wait"
+msgstr "Een ogenblik geduld"
+
+#: app/views/registration/index.html.erb:64
+#: app/views/registration/index.html.erb:65
 msgid "Please enter a valid Email address."
 msgstr "Geef een geldig e-mailadres op."
 
-#: app/views/registration/index.rhtml:36
-msgid "register plugin"
-msgstr "register-plug-in"
-
-#: app/views/registration/index.rhtml:36
+#: app/views/registration/index.html.erb:80
 msgid "Registration"
 msgstr "Registratie"
 
-#: app/views/registration/index.rhtml:44
+#: app/views/registration/index.html.erb:93
 msgid "Registration Information"
 msgstr "Registratie-informatie"
 
-#: app/views/registration/index.rhtml:45
+#: app/views/registration/index.html.erb:99
 msgid "This system is registered"
 msgstr "Dit systeem is geregistreerd"
 
-#: app/views/registration/index.rhtml:46
+#: app/views/registration/index.html.erb:102
 msgid "System number (GUID)"
 msgstr "Systeemnummer (GUID)"
 
-#: app/views/registration/index.rhtml:47
+#: app/views/registration/index.html.erb:105
 msgid "Register again"
 msgstr "Opnieuw registreren"
 
-#: app/views/registration/index.rhtml:54
+#: app/views/registration/index.html.erb:118
 msgid "Next"
 msgstr "Volgende"
 
-#: app/views/registration/index.rhtml:64
+#: app/views/registration/index.html.erb:131
 msgid "Mandatory Information"
 msgstr "Verplichte informatie"
 
-#: app/views/registration/index.rhtml:79
+#: app/views/registration/index.html.erb:151
 msgid "Details"
 msgstr "Details"
 
-#: app/views/registration/index.rhtml:104
-msgid "Skip"
-msgstr "Overslaan"
-
-#: app/views/registration/index.rhtml:105
+#: app/views/registration/index.html.erb:179
 msgid "Postpone"
 msgstr "Uitstellen"
 
-#: app/views/registration/index.rhtml:106
-msgid "or"
-msgstr "of"
+#~ msgid "Invalid session, please login again."
+#~ msgstr "Ongeldige sessie, gaarne opnieuw aanmelden."
 
+#~ msgid "No permissions for registration"
+#~ msgstr "Geen toestemming voor registratie"
+
+#~ msgid "A connection to the registration server could not be established or it did not reply."
+#~ msgstr "Er kon geen verbinding met de registratieserver worden opgebouwd of deze gaf geen antwoord."
+
+#~ msgid "register plugin"
+#~ msgstr "plugin voor registratie"
+
+#~ msgid "System Registration"
+#~ msgstr "Systeemregistratie"
+
+#~ msgid "Registration did not finish."
+#~ msgstr "Registratie niet beëindigd."
+
+#~ msgid "Skip"
+#~ msgstr "Overslaan"
+
+#~ msgid "or"
+#~ msgstr "of"
+
+#~ msgid "Arguments for registration cannot be evaluated."
+#~ msgstr "Argumenten voor registratie kunnen niet worden geëvalueerd."
+
+#~| msgid "An error occurred during the installation."
+#~ msgid "An error occurred during registration. Please try again."
+#~ msgstr "Er is een fout opgetreden tijdens de registratie. Probeer opnieuw."
+
+#~ msgid "Error occured while connecting to registration server."
+#~ msgstr "Er is een fout opgetreden bij het verbinden met de registratieserver."

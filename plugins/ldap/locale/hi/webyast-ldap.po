@@ -1,0 +1,86 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: @PACKAGE@\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2012-06-07 15:20+0200\n"
+"PO-Revision-Date: 2005-07-29 15:37+0530\n"
+"Last-Translator: Prasanth Kurian <prasanth.kurian@agreeya.com>\n"
+"Language-Team: Hindi <i18n@suse.de>\n"
+"Language: hi\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"\n"
+"\n"
+"\n"
+"Plural-Forms: nplurals=2; plural=(n!=1);\n"
+"\n"
+
+#: app/controllers/ldap_controller.rb:38
+#, fuzzy
+#| msgid "Could not load the global configuration."
+msgid "Cannot read LDAP client configuraton."
+msgstr "वैश्विक कॉन्फिगरेशन को लोड नहीं कर सकता।"
+
+#: app/controllers/ldap_controller.rb:63
+msgid "LDAP client configuraton successfully written."
+msgstr ""
+
+#: app/controllers/ldap_controller.rb:65
+#, fuzzy
+#| msgid "Error while parsing the certificate."
+msgid "Error while saving LDAP client configuration."
+msgstr "प्रमाण पत्र को पार्जिंग करते समय त्रुटि।"
+
+#: app/views/ldap/index.html.erb:33
+#, fuzzy
+#| msgid "The filename is required."
+msgid "This field is required."
+msgstr "फाइलनाम की आवश्यकता है।"
+
+#: app/views/ldap/index.html.erb:34
+#, fuzzy
+#| msgid "Enter your IP address."
+msgid "Enter a valid domain name or an IP address."
+msgstr "अपना आईपी पता प्रविष्ट करें।"
+
+#: app/views/ldap/index.html.erb:70
+msgid "Please wait"
+msgstr ""
+
+#: app/views/ldap/index.html.erb:88
+#, fuzzy
+#| msgid "LDAP client service"
+msgid "LDAP client"
+msgstr "एलडीएपी क्लाइंट सेवा"
+
+#: app/views/ldap/index.html.erb:101
+#, fuzzy
+#| msgid "Select WEP authentication mode:"
+msgid "Enable LDAP Authentication"
+msgstr "WEP प्रमाणीकरण मोड का चयन करें :"
+
+#: app/views/ldap/index.html.erb:108
+#, fuzzy
+#| msgid "Name Server Address"
+msgid "LDAP Server Address"
+msgstr "नाम सर्वर पता"
+
+#: app/views/ldap/index.html.erb:113
+msgid "Base DN"
+msgstr ""
+
+#: app/views/ldap/index.html.erb:115
+msgid "Fetch DN"
+msgstr ""
+
+#: app/views/ldap/index.html.erb:127
+#, fuzzy
+#| msgid "Current Connection"
+msgid "Secure Connection"
+msgstr "वर्तमान कनेक्शन"
+
+#, fuzzy
+#~| msgid "Configure scanner?"
+#~ msgid "Configure LDAP client"
+#~ msgstr "स्कैनर समरूपित करें?"

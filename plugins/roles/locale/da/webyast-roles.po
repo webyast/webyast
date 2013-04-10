@@ -1,68 +1,117 @@
+# Martin Schlander <mschlander@opensuse.org>, 2011, 2012.
 msgid ""
 msgstr ""
-"Project-Id-Version: webyast-roles-ui 1.0.0\n"
+"Project-Id-Version: @PACKAGE@\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-08-02 09:18+0200\n"
-"PO-Revision-Date: 2005-08-16 20:00+0200\n"
-"Last-Translator: Martin Møller <martin@martinm-76.dk>\n"
-"Language-Team: Dansk <da@li.org>\n"
+"POT-Creation-Date: 2012-06-07 15:19+0200\n"
+"PO-Revision-Date: 2012-08-13 19:41+0200\n"
+"Last-Translator: Martin Schlander <mschlander@opensuse.org>\n"
+"Language-Team: Danish <opensuse-translation@opensuse.org>\n"
+"Language: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: KBabel 1.10.1\n"
+"X-Generator: Lokalize 1.2\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: app/controllers/roles_controller.rb:97
-#: app/controllers/roles_controller.rb:97
-msgid "Cannot find roles"
-msgstr ""
+#: app/controllers/roles_controller.rb:126
+msgid "Role name is invalid. Allowed is combination of a-z, A-Z, numbers, space, dash and underscore only."
+msgstr "Rollenavnet er ugyldigt. Kun en kombination af a-z, A-Z, tal, mellemrum, bindestreg og underscore er tilladt."
 
-#: app/views/roles/index.rhtml:61 app/views/roles/index.rhtml:207
-#: app/views/roles/index.rhtml:213 app/views/roles/index.rhtml:61
-#: app/views/roles/index.rhtml:207 app/views/roles/index.rhtml:213
-msgid "Assign Users"
-msgstr ""
+#: app/controllers/roles_controller.rb:136
+msgid "Role name is already used."
+msgstr "Rollenavnet bruges allerede."
 
-#: app/views/roles/index.rhtml:62 app/views/roles/index.rhtml:62
-msgid "Selected Users"
-msgstr ""
+#: app/controllers/roles_controller.rb:155
+msgid "Role '%s' was successfully removed."
+msgstr "Rollen \"%s\" blev fjernet."
 
-#: app/views/roles/index.rhtml:63 app/views/roles/index.rhtml:63
-#, fuzzy
-msgid "Available Users"
-msgstr "Tilgængelige processorer"
-
-#: app/views/roles/index.rhtml:64 app/views/roles/index.rhtml:64
-msgid "Click user names to assign/remove users"
-msgstr ""
-
-#: app/views/roles/index.rhtml:149 app/views/roles/index.rhtml:149
-#: shortcuts.yml:6
-#, fuzzy
+#: app/views/roles/index.html.erb:7
 msgid "Roles"
-msgstr "Rolle"
+msgstr "Roller"
 
-#: app/views/roles/index.rhtml:153 app/views/roles/index.rhtml:153
+#: app/views/roles/index.html.erb:25
+msgid "In order to assign the user to roles,"
+msgstr "For at tildele brugeren roller,"
+
+#: app/views/roles/index.html.erb:26
+msgid "Drag and Drop the user labels into Role containers"
+msgstr "Træk og slip brugeretiketterne ind i rollebeholdere"
+
+#: app/views/roles/index.html.erb:27
+msgid "Don't show this again"
+msgstr "Vis ikke dette igen"
+
+#: app/views/roles/index.html.erb:38
 msgid "Create Role"
-msgstr ""
+msgstr "Opret rolle"
 
-#: app/views/roles/index.rhtml:165 app/views/roles/index.rhtml:165
-#, fuzzy
+#: app/views/roles/index.html.erb:43
+msgid "Assign Users"
+msgstr "Tildel brugere"
+
+#: app/views/roles/index.html.erb:53
+msgid "User already assigned"
+msgstr "Bruger allerede tildelt"
+
+#: app/views/roles/index.html.erb:104
 msgid "Assign Permissions"
-msgstr "Tilgængelige processorer"
+msgstr "Tildel rettigheder"
 
-#: app/views/roles/index.rhtml:168 app/views/roles/index.rhtml:168
+#: app/views/roles/index.html.erb:107
 msgid "collapse all"
-msgstr ""
+msgstr "fold alle sammen"
 
-#: shortcuts.yml:7
-msgid "Set permissions in roles and assign users to roles"
-msgstr ""
+#: app/views/roles/index.html.erb:169
+msgid "This field is required"
+msgstr "Dette felt er påkrævet"
+
+#: app/views/roles/index.html.erb:169
+msgid "Allowed is combination of a-z, A-Z, numbers, space, dash and underscore only."
+msgstr "Kun en kombination af a-z, A-Z, tal, mellemrum, bindestreg og underscore er tilladt."
+
+#: app/views/roles/index.html.erb:235
+msgid "Please wait"
+msgstr "Vent venligst"
+
+#~ msgid "Error: Could not remove role <i>%s</i>."
+#~ msgstr "Fejl: Kunne ikke fjerne rollen <i>%s</i>."
+
+#~ msgid "Cannot find roles"
+#~ msgstr "Kan ikke finde roller"
+
+#~ msgid "Set permissions in roles and assign users to roles"
+#~ msgstr "Angiv rettigheder i roller og tildel brugere til roller"
+
+#, fuzzy
+#~| msgid "Selected Resource"
+#~ msgid "Selected Users"
+#~ msgstr "Valgte ressourcer"
+
+#, fuzzy
+#~| msgid "Available Updates"
+#~ msgid "Available Users"
+#~ msgstr "Tilgængelige opdateringer"
+
+#, fuzzy
+#~| msgid "Invalid principal name"
+#~ msgid "Invalid role name"
+#~ msgstr "Ugyldigt principal-navn"
+
+#, fuzzy
+#~| msgid "Permissions denied"
+#~ msgid "Permissions contained in role"
+#~ msgstr "Tilladelse nægtet"
 
 #, fuzzy
 #~| msgid "Permissions denied"
 #~ msgid "Permissions granted by role"
 #~ msgstr "Tilladelse nægtet"
+
+#, fuzzy
+#~| msgid "Available Processors"
+#~ msgid "Available permissions"
+#~ msgstr "Tilgængelige processorer"
 
 #, fuzzy
 #~| msgid "Description: "
@@ -73,6 +122,11 @@ msgstr ""
 #~| msgid "description"
 #~ msgid ")}-description"
 #~ msgstr "beskrivelse"
+
+#, fuzzy
+#~| msgid "Remaining time: %s"
+#~ msgid "Remaining users"
+#~ msgstr "Tid tilbage: %s"
 
 #~ msgid "Save"
 #~ msgstr "Gem"

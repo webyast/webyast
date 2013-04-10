@@ -1,61 +1,115 @@
 msgid ""
 msgstr ""
-"Project-Id-Version: webyast-roles-ui 1.0.0\n"
+"Project-Id-Version: @PACKAGE@\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-08-02 09:18+0200\n"
+"POT-Creation-Date: 2012-06-07 15:19+0200\n"
 "PO-Revision-Date: 2004-08-09 10:24+0200\n"
 "Last-Translator: xxx <yyy@example.org>\n"
 "Language-Team: Bengali <i18n@suse.de>\n"
+"Language: bn\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
 
-#: app/controllers/roles_controller.rb:97
-#: app/controllers/roles_controller.rb:97
-msgid "Cannot find roles"
+#: app/controllers/roles_controller.rb:126
+msgid "Role name is invalid. Allowed is combination of a-z, A-Z, numbers, space, dash and underscore only."
 msgstr ""
 
-#: app/views/roles/index.rhtml:61 app/views/roles/index.rhtml:207
-#: app/views/roles/index.rhtml:213 app/views/roles/index.rhtml:61
-#: app/views/roles/index.rhtml:207 app/views/roles/index.rhtml:213
-msgid "Assign Users"
-msgstr ""
-
-#: app/views/roles/index.rhtml:62 app/views/roles/index.rhtml:62
-msgid "Selected Users"
-msgstr ""
-
-#: app/views/roles/index.rhtml:63 app/views/roles/index.rhtml:63
+#: app/controllers/roles_controller.rb:136
 #, fuzzy
-msgid "Available Users"
-msgstr "উপলভ্য প্রোফাইলগুলি"
+#| msgid "The request already exists."
+msgid "Role name is already used."
+msgstr "ইতিমধ্যে এই অনুরোধ করা হয়ে গিয়েছে"
 
-#: app/views/roles/index.rhtml:64 app/views/roles/index.rhtml:64
-msgid "Click user names to assign/remove users"
-msgstr ""
+#: app/controllers/roles_controller.rb:155
+#, fuzzy
+#| msgid "Module \"%s\" loaded successfully."
+msgid "Role '%s' was successfully removed."
+msgstr "মডিউল\"%s\" সফলভাবে লোড করা হয়েছে।"
 
-#: app/views/roles/index.rhtml:149 app/views/roles/index.rhtml:149
-#: shortcuts.yml:6
+#: app/views/roles/index.html.erb:7
 msgid "Roles"
 msgstr ""
 
-#: app/views/roles/index.rhtml:153 app/views/roles/index.rhtml:153
-msgid "Create Role"
+#: app/views/roles/index.html.erb:25
+#, fuzzy
+#| msgid "Permissions denied"
+msgid "In order to assign the user to roles,"
+msgstr "অনুমতি প্রত্যাখ্যাত"
+
+#: app/views/roles/index.html.erb:26
+msgid "Drag and Drop the user labels into Role containers"
 msgstr ""
 
-#: app/views/roles/index.rhtml:165 app/views/roles/index.rhtml:165
+#: app/views/roles/index.html.erb:27
+msgid "Don't show this again"
+msgstr ""
+
+#: app/views/roles/index.html.erb:38
 #, fuzzy
+#| msgid "Create a new profile"
+msgid "Create Role"
+msgstr "একটি নতুন প্রোফাইল তৈরি করুন"
+
+#: app/views/roles/index.html.erb:43
+msgid "Assign Users"
+msgstr ""
+
+#: app/views/roles/index.html.erb:53
+#, fuzzy
+#| msgid "Permissions denied"
+msgid "User already assigned"
+msgstr "অনুমতি প্রত্যাখ্যাত"
+
+#: app/views/roles/index.html.erb:104
+#, fuzzy
+#| msgid "Available profiles"
 msgid "Assign Permissions"
 msgstr "উপলভ্য প্রোফাইলগুলি"
 
-#: app/views/roles/index.rhtml:168 app/views/roles/index.rhtml:168
+#: app/views/roles/index.html.erb:107
 msgid "collapse all"
 msgstr ""
 
-#: shortcuts.yml:7
-msgid "Set permissions in roles and assign users to roles"
+#: app/views/roles/index.html.erb:169
+#, fuzzy
+#| msgid "The filename is required."
+msgid "This field is required"
+msgstr "ফাইলনাম প্রয়োজন৷"
+
+#: app/views/roles/index.html.erb:169
+msgid "Allowed is combination of a-z, A-Z, numbers, space, dash and underscore only."
 msgstr ""
+
+#: app/views/roles/index.html.erb:235
+msgid "Please wait"
+msgstr ""
+
+#, fuzzy
+#~| msgid "Can't find %s."
+#~ msgid "Cannot find roles"
+#~ msgstr "%s খুঁজে পায় না।"
+
+#, fuzzy
+#~| msgid "Selected Resource"
+#~ msgid "Selected Users"
+#~ msgstr "নির্বাচিত সংস্থান"
+
+#, fuzzy
+#~| msgid "Available space"
+#~ msgid "Available Users"
+#~ msgstr "প্রাপ্তিসাধ্য স্পেস (শূণ্যস্থান)"
+
+#, fuzzy
+#~| msgid "Invalid device name."
+#~ msgid "Invalid role name"
+#~ msgstr "অকার্যকর ডিভাইস নাম।"
+
+#, fuzzy
+#~| msgid "Permissions denied"
+#~ msgid "Permissions contained in role"
+#~ msgstr "অনুমতি প্রত্যাখ্যাত"
 
 #, fuzzy
 #~| msgid "Permissions denied"

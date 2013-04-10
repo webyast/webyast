@@ -1,71 +1,125 @@
+# Manuel A. Vazquez <xixirei@yahoo.es>, 2010, 2011.
 msgid ""
 msgstr ""
-"Project-Id-Version: webyast-roles-ui 1.0.0\n"
+"Project-Id-Version: @PACKAGE@\n"
 "Report-Msgid-Bugs-To: translation@suse.de\n"
-"POT-Creation-Date: 2010-08-02 09:18+0200\n"
-"PO-Revision-Date: 2002-07-23 11:51+0200\n"
-"Last-Translator: Jesús Bravo Álvarez <jba@pobox.com>\n"
-"Language-Team: Galician <i18n@suse.de>\n"
+"POT-Creation-Date: 2012-06-07 15:19+0200\n"
+"PO-Revision-Date: 2011-10-24 20:57+0200\n"
+"Last-Translator: Manuel A. Vazquez <xixirei@yahoo.es>\n"
+"Language-Team: Galego <proxecto@trasno.net>\n"
+"Language: gl\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n!=1);\n"
+"X-Generator: Lokalize 1.0\n"
 
-#: app/controllers/roles_controller.rb:97
-#: app/controllers/roles_controller.rb:97
-msgid "Cannot find roles"
-msgstr ""
-
-#: app/views/roles/index.rhtml:61 app/views/roles/index.rhtml:207
-#: app/views/roles/index.rhtml:213 app/views/roles/index.rhtml:61
-#: app/views/roles/index.rhtml:207 app/views/roles/index.rhtml:213
-msgid "Assign Users"
-msgstr ""
-
-#: app/views/roles/index.rhtml:62 app/views/roles/index.rhtml:62
-msgid "Selected Users"
-msgstr ""
-
-#: app/views/roles/index.rhtml:63 app/views/roles/index.rhtml:63
+#: app/controllers/roles_controller.rb:126
 #, fuzzy
-msgid "Available Users"
-msgstr "Perfís dispoñibles"
+#| msgid "Role name is already used or invalid. Allowed is combination of a-z, A-Z, numbers, space, dash and underscore only."
+msgid "Role name is invalid. Allowed is combination of a-z, A-Z, numbers, space, dash and underscore only."
+msgstr "O nome do rol xa está en uso ou é incorrecto. Permítense só combinacións de letras da a-z, A-Z, números, espazo guion e guion baixo."
 
-#: app/views/roles/index.rhtml:64 app/views/roles/index.rhtml:64
-msgid "Click user names to assign/remove users"
-msgstr ""
+#: app/controllers/roles_controller.rb:136
+#, fuzzy
+#| msgid "This system is already registered."
+msgid "Role name is already used."
+msgstr "O sistema xa está rexistrado."
 
-#: app/views/roles/index.rhtml:149 app/views/roles/index.rhtml:149
-#: shortcuts.yml:6
+#: app/controllers/roles_controller.rb:155
+#, fuzzy
+#| msgid "Role <i>%s</i> was successfully removed."
+msgid "Role '%s' was successfully removed."
+msgstr "O rol <i>%s</i> foi eliminado correctamente."
+
+#: app/views/roles/index.html.erb:7
 msgid "Roles"
-msgstr ""
+msgstr "Roles"
 
-#: app/views/roles/index.rhtml:153 app/views/roles/index.rhtml:153
+#: app/views/roles/index.html.erb:25
+msgid "In order to assign the user to roles,"
+msgstr "En orde a asignar o usuario aos roles,"
+
+#: app/views/roles/index.html.erb:26
+msgid "Drag and Drop the user labels into Role containers"
+msgstr "Arrastre e solte as etiquetas dos usuarios nos contedores de rol"
+
+#: app/views/roles/index.html.erb:27
+msgid "Don't show this again"
+msgstr "Non amosar isto agora"
+
+#: app/views/roles/index.html.erb:38
 msgid "Create Role"
-msgstr ""
+msgstr "Crear roles"
 
-#: app/views/roles/index.rhtml:165 app/views/roles/index.rhtml:165
-#, fuzzy
+#: app/views/roles/index.html.erb:43
+msgid "Assign Users"
+msgstr "Asignar usuarios"
+
+#: app/views/roles/index.html.erb:53
+msgid "User already assigned"
+msgstr "Usuarios xa asignados"
+
+#: app/views/roles/index.html.erb:104
 msgid "Assign Permissions"
-msgstr "Perfís dispoñibles"
+msgstr "Asignar permisos"
 
-#: app/views/roles/index.rhtml:168 app/views/roles/index.rhtml:168
+#: app/views/roles/index.html.erb:107
 msgid "collapse all"
-msgstr ""
+msgstr "colapsar todo"
 
-#: shortcuts.yml:7
-msgid "Set permissions in roles and assign users to roles"
-msgstr ""
+#: app/views/roles/index.html.erb:169
+msgid "This field is required"
+msgstr "Este campo é necesario"
 
-#, fuzzy
-#~| msgid "Description: "
+#: app/views/roles/index.html.erb:169
+msgid "Allowed is combination of a-z, A-Z, numbers, space, dash and underscore only."
+msgstr "Permítense só combinacións de letras da a-z, A-Z, números, espazo guion e guion baixo."
+
+#: app/views/roles/index.html.erb:235
+msgid "Please wait"
+msgstr "Agarde"
+
+#~ msgid "Error: Could not remove role <i>%s</i>."
+#~ msgstr "Erro: non foi posible eliminar o rol <i>%s</i>."
+
+#~ msgid "Cannot find roles"
+#~ msgstr "Non foi posible atopar roles"
+
+#~ msgid "Set permissions in roles and assign users to roles"
+#~ msgstr "Establecer permisos para os roles e asignar usuarios aos roles"
+
+#~| msgid "Select"
+#~ msgid "Selected Users"
+#~ msgstr "Usuarios seleccionados"
+
+#~| msgid "Available Updates"
+#~ msgid "Available Users"
+#~ msgstr "Usuarios dispoñibles"
+
+#~ msgid "Click user names to assign/remove users"
+#~ msgstr "Prema nos nomes de usuarios para engadilos ou eliminalos"
+
+#~ msgid "Invalid role name"
+#~ msgstr "Nome de rol non válido"
+
+#~ msgid "Permissions contained in role"
+#~ msgstr "Permisos contidos no rol"
+
+#~ msgid "Permissions granted by role"
+#~ msgstr "Permisos garantidos polo rol"
+
+#~ msgid "Available permissions"
+#~ msgstr "Permisos dispoñibles"
+
 #~ msgid "Description of permissions"
-#~ msgstr "Descrición: "
+#~ msgstr "Descrición dos permisos"
 
-#, fuzzy
-#~| msgid "description"
 #~ msgid ")}-description"
-#~ msgstr "descrición"
+#~ msgstr ")}-descrición"
+
+#~ msgid "Remaining users"
+#~ msgstr "Usuarios restantes"
 
 #~ msgid "Save"
 #~ msgstr "Gardar"

@@ -6,12 +6,13 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: webyast-reboot-ui 1.0.0\n"
+"Project-Id-Version: @PACKAGE@\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-08-02 09:18+0200\n"
+"POT-Creation-Date: 2012-06-07 15:20+0200\n"
 "PO-Revision-Date: 2009-09-25 09:38+0100\n"
 "Last-Translator: Rastislav Krupanský <rastislav.krupansky@gmail.com>\n"
 "Language-Team: Slovak <sk-i18n@linux.sk>\n"
+"Language: sk\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -20,26 +21,18 @@ msgstr ""
 "X-Poedit-Language: Slovak\n"
 "X-Poedit-Country: SLOVAKIA\n"
 
-#: app/controllers/system_controller.rb:36
-#: app/controllers/system_controller.rb:36
+#: app/controllers/system_controller.rb:77
 msgid "Rebooting the machine..."
 msgstr "Reštartujem počítač..."
 
-#: app/controllers/system_controller.rb:40
-#: app/controllers/system_controller.rb:44
-#: app/controllers/system_controller.rb:40
-#: app/controllers/system_controller.rb:44
+#: app/controllers/system_controller.rb:81
 msgid "Cannot reboot the machine!"
 msgstr "Nedá sa reštartnúť počítač!"
 
-#: app/controllers/system_controller.rb:57
-#: app/controllers/system_controller.rb:57
+#: app/controllers/system_controller.rb:94
 msgid "Shuting down the machine..."
 msgstr "Vypínam počítač..."
 
-#: app/controllers/system_controller.rb:61
-#: app/controllers/system_controller.rb:65
-#: app/controllers/system_controller.rb:61
-#: app/controllers/system_controller.rb:65
+#: app/controllers/system_controller.rb:98
 msgid "Cannot shutdown the machine!"
 msgstr "Nedá sa vypnúť počítač!"

@@ -2,92 +2,124 @@ msgid ""
 msgstr ""
 "Project-Id-Version: @PACKAGE@\n"
 "Report-Msgid-Bugs-To: translation@suse.de\n"
-"POT-Creation-Date: 2010-04-13 13:36+0200\n"
+"POT-Creation-Date: 2012-06-07 15:20+0200\n"
 "PO-Revision-Date: 2002-07-23 18:27+0200\n"
 "Last-Translator: Damir Bjelobradic <Nagual@lugbih.org>\n"
 "Language-Team: Bosnian <i18n@suse.de>\n"
+"Language: bs\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
 
-#: app/controllers/mail_controller.rb:29
+#: app/models/mail_state.rb:37
+msgid "It was not possible to retrieve the full hostname of the machine. If the mail could not be delivered, consult the network and/or mail configuration with your network administrator."
+msgstr ""
+
+# %s is either BOOTP or DHCP
+#: app/models/mail_state.rb:42
+#, fuzzy
+#| msgid "%s configuration failed."
+msgid "Mail configuration test not confirmed"
+msgstr "%s podešavanje nije uspjelo."
+
+#: app/models/mail_state.rb:43
+msgid "While configuring mail, a test mail was sent to %s . Was the mail delivered to this address?<br>If so, confirm it by pressing the button. Otherwise check your mail configuration again."
+msgstr ""
+
+#: app/models/mail_state.rb:46
+msgid "Test mail received"
+msgstr ""
+
+#: app/controllers/mailsetting_controller.rb:58
 msgid "Passwords do not match."
 msgstr ""
 
-#: app/controllers/mail_controller.rb:36
+#: app/controllers/mailsetting_controller.rb:65
 msgid "Mail settings have been written."
 msgstr ""
 
-#: app/controllers/mail_controller.rb:38
+#: app/controllers/mailsetting_controller.rb:67
 msgid "Test mail was sent to %s."
 msgstr ""
 
-#: app/controllers/mail_controller.rb:50
-msgid "Error while saving mail settings: %s"
+#: app/controllers/mailsetting_controller.rb:72
+msgid "Error while saving mail settings."
 msgstr ""
 
-#: app/controllers/mail_controller.rb:67
+#: app/controllers/mailsetting_controller.rb:85
 msgid ""
 "No outgoing mail server is set, but administrator has mail forwarders defined.\n"
-"Change %s<i>administrator</i>%s or %s<i>mail</i>%s configuration."
+"        Change %s<i>administrator</i>%s or %s<i>mail</i>%s configuration."
 msgstr ""
 
-#: app/views/mail/index.html.erb:16
+#: app/views/mailsetting/index.html.erb:32
+msgid "Please wait"
+msgstr ""
+
+#: app/views/mailsetting/index.html.erb:40
 msgid "The passwords do not match."
 msgstr ""
 
-#: app/views/mail/index.html.erb:17
+#: app/views/mailsetting/index.html.erb:41
 msgid "Enter a valid e-mail address."
 msgstr ""
 
-#: app/views/mail/index.html.erb:18
+#: app/views/mailsetting/index.html.erb:42
 msgid "Enter a valid domain name or an IP address."
 msgstr ""
 
-#: app/views/mail/index.html.erb:35
+#: app/views/mailsetting/index.html.erb:68
 #, fuzzy
 #| msgid "Settings"
 msgid "Mail Settings"
 msgstr "Postavke"
 
-#: app/views/mail/index.html.erb:47
+#: app/views/mailsetting/index.html.erb:81
+msgid "Outgoing mail server settings"
+msgstr ""
+
+#: app/views/mailsetting/index.html.erb:86
 msgid "Outgoing mail server"
 msgstr ""
 
-#: app/views/mail/index.html.erb:50
+#: app/views/mailsetting/index.html.erb:91
 msgid "Use secure connection (TLS)"
 msgstr ""
 
-#: app/views/mail/index.html.erb:51
+#: app/views/mailsetting/index.html.erb:92
 msgid "Never"
 msgstr ""
 
-#: app/views/mail/index.html.erb:51
+#: app/views/mailsetting/index.html.erb:92
 msgid "If available"
 msgstr ""
 
-#: app/views/mail/index.html.erb:51
+#: app/views/mailsetting/index.html.erb:92
 msgid "Always"
 msgstr ""
 
-#: app/views/mail/index.html.erb:53
+#: app/views/mailsetting/index.html.erb:96
 msgid "User name"
 msgstr ""
 
-#: app/views/mail/index.html.erb:56
+#: app/views/mailsetting/index.html.erb:101
 msgid "Password"
 msgstr ""
 
-#: app/views/mail/index.html.erb:59
+#: app/views/mailsetting/index.html.erb:106
 msgid "Confirm password"
 msgstr ""
 
-#: app/views/mail/index.html.erb:67
+#: app/views/mailsetting/index.html.erb:114
+msgid "Check mail server settings"
+msgstr ""
+
+#: app/views/mailsetting/index.html.erb:118
 msgid "Send test mail to"
 msgstr ""
 
-#: app/views/mail/index.html.erb:69
+#: app/views/mailsetting/index.html.erb:120
 #, fuzzy
 #| msgid "Send Data"
 msgid "Send Mail"

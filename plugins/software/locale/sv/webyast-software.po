@@ -1,345 +1,666 @@
-# Copyright (C) 2006 SuSE Linux Products GmbH, Nuernberg
-# This file is distributed under the same license as the package.
+# @TITLE@
+# Copyright (C) 2006, SUSE Linux GmbH, Nuremberg
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+# This file is distributed under the same license as @PACKAGE@ package. FIRST
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: yast_webclient_software\n"
-"POT-Creation-Date: 2010-04-13 13:37+0200\n"
-"PO-Revision-Date: 2010-04-20 09:47\n"
-"Last-Translator: Novell Language <language@novell.com>\n"
-"Language-Team: Novell Language <language@novell.com>\n"
+"Project-Id-Version: @PACKAGE@\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2012-06-07 15:20+0200\n"
+"PO-Revision-Date: 2005-09-18 19:09+0200\n"
+"Last-Translator: Mattias Newzella <newzella@linux.se>\n"
+"Language-Team: Swedish <sv@li.org>\n"
+"Language: sv\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"X-Generator: KBabel 1.10.1\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: app/helpers/repositories_helper.rb:5
+#: app/models/patch.rb:150
+msgid "Please reboot your system."
+msgstr ""
+
+#: app/models/patches_state.rb:30
+msgid "EULA accept required"
+msgstr ""
+
+#: app/models/patches_state.rb:31
+msgid "Package require accept specific EULA before its installation. Please follow the link."
+msgstr ""
+
+#: app/models/patches_state.rb:34
+msgid "decide"
+msgstr ""
+
+#: app/models/patches_state.rb:43
+#, fuzzy
+#| msgid "The installation source was not found."
+msgid "Patch installation messages not confirmed"
+msgstr "Det gick inte att hitta installationskällan."
+
+# ok button label
+#: app/models/patches_state.rb:47
+msgid "OK"
+msgstr "OK"
+
+#: app/helpers/repositories_helper.rb:25
 msgid "Highest"
-msgstr "Högsta"
+msgstr ""
 
-#: app/helpers/repositories_helper.rb:6
+#: app/helpers/repositories_helper.rb:26
 msgid "Higher"
-msgstr "Högre"
+msgstr ""
 
-#: app/helpers/repositories_helper.rb:7
+#: app/helpers/repositories_helper.rb:27
 msgid "Default"
 msgstr "Standard"
 
-#: app/helpers/repositories_helper.rb:8
+#: app/helpers/repositories_helper.rb:28
 msgid "Low"
 msgstr "Låg"
 
-#: app/helpers/repositories_helper.rb:9
-msgid "Lowest"
-msgstr "Lägsta"
-
-#: app/helpers/repositories_helper.rb:15
-msgid "Highest priority"
-msgstr "Högsta prioritet"
-
-#: app/helpers/repositories_helper.rb:16
-msgid "Higher priority"
-msgstr "Högre prioritet"
-
-#: app/helpers/repositories_helper.rb:18
-msgid "Low priority"
-msgstr "Låg prioritet"
-
-#: app/helpers/repositories_helper.rb:19
-msgid "Lowest priority"
-msgstr "Lägsta prioritet"
-
-#: app/helpers/repositories_helper.rb:24
-msgid "Custom priority"
-msgstr "Egen prioritering"
-
 #: app/helpers/repositories_helper.rb:29
+#, fuzzy
+#| msgid "Lower"
+msgid "Lowest"
+msgstr "Små"
+
+#: app/helpers/repositories_helper.rb:35
+msgid "Highest priority"
+msgstr ""
+
+#: app/helpers/repositories_helper.rb:36
+msgid "Higher priority"
+msgstr ""
+
+#: app/helpers/repositories_helper.rb:38
+msgid "Low priority"
+msgstr ""
+
+#: app/helpers/repositories_helper.rb:39
+msgid "Lowest priority"
+msgstr ""
+
+#: app/helpers/repositories_helper.rb:44
+msgid "Custom priority"
+msgstr ""
+
+#: app/helpers/repositories_helper.rb:49
 msgid "Custom"
-msgstr "Egen"
+msgstr ""
 
-#: app/helpers/repositories_helper.rb:41 app/views/repositories/index.html.erb:119
-#: app/views/repositories/add.html.erb:42
+#: app/helpers/repositories_helper.rb:61
+#: app/views/repositories/new.html.erb:67
+#: app/views/repositories/index.html.erb:264
+#, fuzzy
+#| msgid "enabled"
 msgid "enable"
-msgstr "aktivera"
+msgstr "aktiverad"
 
-#: app/helpers/repositories_helper.rb:41 app/views/repositories/index.html.erb:124
-#: app/views/repositories/add.html.erb:49
+#: app/helpers/repositories_helper.rb:61
+#: app/views/repositories/new.html.erb:74
+#: app/views/repositories/index.html.erb:267
+#, fuzzy
+#| msgid "Disable"
 msgid "disable"
-msgstr "inaktivera"
+msgstr "Inaktivera"
 
-#: app/helpers/repositories_helper.rb:46
+#: app/helpers/repositories_helper.rb:66
 msgid "enabled"
 msgstr "aktiverad"
 
-#: app/helpers/repositories_helper.rb:46
+#: app/helpers/repositories_helper.rb:66
+#, fuzzy
+#| msgid "Disabled"
 msgid "disabled"
-msgstr "inaktiverad"
+msgstr "Inaktiverad"
 
-#: app/controllers/repositories_controller.rb:14
+#: app/helpers/repositories_helper.rb:83
+#, fuzzy
+#| msgid "Repository Error"
+msgid "Repository is currently %senabled%s."
+msgstr "Arkivfel"
+
+#: app/helpers/repositories_helper.rb:85
+#, fuzzy
+#| msgid "Repository Error"
+msgid "Repository is currently %sdisabled%s."
+msgstr "Arkivfel"
+
+#: app/helpers/repositories_helper.rb:90
+#, fuzzy
+#| msgid "Autorefresh"
+msgid "Autorefresh is currently %senabled%s."
+msgstr "Automatisk uppdatering"
+
+#: app/helpers/repositories_helper.rb:92
+#, fuzzy
+#| msgid "Autorefresh"
+msgid "Autorefresh is currently %sdisabled %s."
+msgstr "Automatisk uppdatering"
+
+#: app/helpers/repositories_helper.rb:97
+#, fuzzy
+#| msgid "Kernel development packages"
+msgid "Keeping downloaded packages is currently %senabled%s."
+msgstr "Kärnutvecklingspaket"
+
+#: app/helpers/repositories_helper.rb:99
+#, fuzzy
+#| msgid "Kernel development packages"
+msgid "Keeping downloaded packages is currently %sdisabled%s."
+msgstr "Kärnutvecklingspaket"
+
+#: app/helpers/repositories_helper.rb:103
+#, fuzzy
+#| msgid "Repository: "
+msgid "Repository will be enabled."
+msgstr "Arkiv:  "
+
+#: app/helpers/repositories_helper.rb:103
+#, fuzzy
+#| msgid "Repository: "
+msgid "Repository will be disabled."
+msgstr "Arkiv:  "
+
+#: app/helpers/repositories_helper.rb:107
+#, fuzzy
+#| msgid "Autorefresh"
+msgid "Autorefresh will be enabled."
+msgstr "Automatisk uppdatering"
+
+#: app/helpers/repositories_helper.rb:107
+#, fuzzy
+#| msgid "Autorefresh"
+msgid "Autorefresh will be disabled."
+msgstr "Automatisk uppdatering"
+
+#: app/helpers/repositories_helper.rb:111
+#, fuzzy
+#| msgid "After the operation, %s will be freed."
+msgid "Keep packages option will be enabled."
+msgstr "Efter operationen kommer %s att frigöras."
+
+#: app/helpers/repositories_helper.rb:111
+#, fuzzy
+#| msgid "The following packages will be installed:\n"
+msgid "Keep packages option will be disabled."
+msgstr "Följande paket kommer att installeras:\n"
+
+#: app/controllers/patches_controller.rb:101
+#, fuzzy
+#| msgid "The installation source is unusable."
+msgid "There are patch installation messages available"
+msgstr "Det går inte att använda installationskällan."
+
+#: app/controllers/patches_controller.rb:119
+msgid "Cannot obtain patches, installation in progress. Remain %d packages."
+msgstr ""
+
+#: app/controllers/patches_controller.rb:129
+#: app/controllers/patches_controller.rb:182
+msgid "Cannot read patch updates: GPG key for repository <em>%s</em> is not trusted."
+msgstr ""
+
+#: app/controllers/patches_controller.rb:170
+msgid "Cannot obtain patches, installation in progress. Remain %d patches."
+msgstr ""
+
+#: app/controllers/repositories_controller.rb:50
+#, fuzzy
+#| msgid "Error reading repositories:"
+msgid "Cannot read repository list."
+msgstr "Fel vid läsning av arkiv:"
+
+#: app/controllers/repositories_controller.rb:117
+#: app/controllers/repositories_controller.rb:126
+#, fuzzy
+#| msgid "Error reading repositories:"
+msgid "Cannot update repository '%s': missing parameters."
+msgstr "Fel vid läsning av arkiv:"
+
+#: app/controllers/repositories_controller.rb:134
+#, fuzzy
+#| msgid "Repository '%s' is up to date."
+msgid "Repository '%s' has been updated."
+msgstr "Arkivet \"%s\" är uppdaterat."
+
+#: app/controllers/repositories_controller.rb:172
+#, fuzzy
+#| msgid "Repository %s not found."
+msgid "Repository '%s' was not found."
+msgstr "Arkivet %s hittades inte."
+
+#: app/controllers/repositories_controller.rb:189
+#: app/controllers/repositories_controller.rb:196
+#, fuzzy
+#| msgid "Error reading repositories:"
+msgid "Cannot remove repository '%s'"
+msgstr "Fel vid läsning av arkiv:"
+
+#: app/controllers/repositories_controller.rb:203
+#, fuzzy
+#| msgid "Repository '%s' is invalid."
+msgid "Repository '%s' has been deleted."
+msgstr "Arkivet \"%s\" är ogiltigt."
+
+#: app/views/repositories/new.html.erb:32
+#: app/views/repositories/index.html.erb:167
+#, fuzzy
+#| msgid "No url in repository."
+msgid "Enter a valid repository URL."
+msgstr "Ingen URL i arkiv."
+
+#: app/views/repositories/new.html.erb:40
+#: app/views/repositories/index.html.erb:175
+msgid "Symbols <b>%s</b> are not allowed in repository alias."
+msgstr ""
+
+#: app/views/repositories/new.html.erb:47
+#: app/views/repositories/index.html.erb:78
+#: app/views/repositories/index.html.erb:222
+#: app/views/repositories/index.html.erb:240
+#: app/views/patches/license.html.erb:32 app/views/patches/license.html.erb:41
+#: app/views/patches/index.html.erb:37 app/views/patches/index.html.erb:141
+#: app/views/patches/index.html.erb:150
+#, fuzzy
+#| msgid "Please wait..."
+msgid "Please wait"
+msgstr "Vänta..."
+
+#: app/views/repositories/new.html.erb:56
+#: app/views/repositories/index.html.erb:179
+#, fuzzy
+#| msgid "The idmapd section name may not be empty."
+msgid "This value cannot be empty."
+msgstr "Idmapd-sektionsnamnet får inte vara tomt."
+
+#: app/views/repositories/new.html.erb:102
+msgid ""
+"A repository with this URL already exists.\n"
+"Create a duplicate?"
+msgstr ""
+
+#: app/views/repositories/new.html.erb:136
+#: app/views/repositories/index.html.erb:30
+#, fuzzy
+#| msgid "Software Update"
+msgid "Software Repositories"
+msgstr "Programuppdatering"
+
+#: app/views/repositories/new.html.erb:138
+#: app/views/repositories/new.html.erb:152
+#, fuzzy
+#| msgid "Adding repository '%s'"
+msgid "Add a new repository"
+msgstr "Lägger till arkiv \"%s\""
+
+#: app/views/repositories/new.html.erb:158
 msgid "Alias"
 msgstr "Alias"
 
-#: app/controllers/repositories_controller.rb:15 app/views/repositories/index.html.erb:151
-msgid "Enabled"
-msgstr "Aktiverad"
-
-#: app/controllers/repositories_controller.rb:16
-msgid "Autorefresh"
-msgstr "Automatisk uppdatering"
-
-#: app/controllers/repositories_controller.rb:17 app/views/patch_updates/_patches.html.erb:14
+#: app/views/repositories/new.html.erb:162
+#: app/views/patches/_patches.html.erb:22
 msgid "Name"
 msgstr "Namn"
 
-#: app/controllers/repositories_controller.rb:18
+#: app/views/repositories/new.html.erb:166
 msgid "URL"
-msgstr "Webbadress"
+msgstr ""
 
-#: app/controllers/repositories_controller.rb:19
-msgid "Priority"
-msgstr "Prioritet"
+#: app/views/repositories/new.html.erb:174
+#, fuzzy
+#| msgid "Repository: "
+msgid "Repository will be %s."
+msgstr "Arkiv:  "
 
-#: app/controllers/repositories_controller.rb:20
-msgid "Keep downloaded packages"
-msgstr "Spara hämtade paket"
+#: app/views/repositories/new.html.erb:179
+#, fuzzy
+#| msgid "Autorefresh"
+msgid "Autorefresh will be %s."
+msgstr "Automatisk uppdatering"
 
-#: app/controllers/repositories_controller.rb:30
-msgid "Cannot read repository list."
-msgstr "Det går inte att läsa listan över lagringsplatser."
+#: app/views/repositories/new.html.erb:184
+msgid "Keep packages option will be %s."
+msgstr ""
 
-#: app/controllers/repositories_controller.rb:47 app/controllers/repositories_controller.rb:74
-msgid "Missing repository parameter"
-msgstr "Det saknas en parameter för lagringsplats"
+#: app/views/repositories/index.html.erb:44
+#, fuzzy
+#| msgid "Search:"
+msgid "Quick Search"
+msgstr "Sökning:"
 
-#: app/controllers/repositories_controller.rb:102 app/controllers/repositories_controller.rb:183
-msgid "Invalid priority"
-msgstr "Ogiltig prioritet"
-
-#: app/controllers/repositories_controller.rb:171
-msgid "Missing repository parameters"
-msgstr "Saknade parametrar för lagringsplats"
-
-#: app/controllers/repositories_controller.rb:209
-msgid "Unknown backend error"
-msgstr "Okänt backend-fel"
-
-#: app/controllers/patch_updates_controller.rb:45 app/controllers/patch_updates_controller.rb:48
-#: app/views/patch_updates/_patch_progress.html.erb:1
-msgid "A problem occured when loading patch information."
-msgstr "Ett fel inträffade när korrigeringsinformationen lästes in."
-
-#: app/controllers/patch_updates_controller.rb:105
-msgid "Installing all patches..."
-msgstr "Installerar alla korrigeringar..."
-
-#: app/controllers/patch_updates_controller.rb:113
-msgid "Installation stopped"
-msgstr "Installationen avbröts"
-
-#: app/controllers/patch_updates_controller.rb:150
-msgid "Installation finished"
-msgstr "Installationen är slutförd"
-
-#: app/controllers/patch_updates_controller.rb:152
-msgid "%s installed."
-msgstr "%s har installerats."
-
-#: app/controllers/patch_updates_controller.rb:181
-msgid "Patch has been installed."
-msgstr "Korrigeringen har installerats."
-
-#: app/views/repositories/index.html.erb:20 app/views/repositories/add.html.erb:16
-msgid "Enter a valid repository URL."
-msgstr "Ange en giltig webbadress till en lagringsplats."
-
-#: app/views/repositories/index.html.erb:28 app/views/repositories/add.html.erb:24
-msgid "Symbols <b>%s</b> are not allowed in repository alias."
-msgstr "Symbolerna <b>%s</b> är inte tillåtna i ett alias till en lagringsplats."
-
-#: app/views/repositories/index.html.erb:32 app/views/repositories/add.html.erb:31
-msgid "This value cannot be empty."
-msgstr "Detta värde får inte vara tomt."
-
-#: app/views/repositories/index.html.erb:140 app/views/repositories/add.html.erb:105
-msgid "Software Repositories"
-msgstr "Lagringsplats för programvara"
-
-#: app/views/repositories/index.html.erb:145
-msgid "Configured software repositories"
-msgstr "Konfigurerade lagringsplatser för programvara"
-
-#: app/views/repositories/index.html.erb:148
+#: app/views/repositories/index.html.erb:49
+#, fuzzy
+#| msgid "Error reading repositories:"
 msgid "Filter repositories"
-msgstr "Filtrera arkiv"
+msgstr "Fel vid läsning av arkiv:"
 
-#: app/views/repositories/index.html.erb:150
+#: app/views/repositories/index.html.erb:52
+#, fuzzy
+#| msgid "all"
 msgid "All"
-msgstr "Alla"
+msgstr "alla"
 
-#: app/views/repositories/index.html.erb:152
+#: app/views/repositories/index.html.erb:52
+msgid "Enabled"
+msgstr "Aktiverad"
+
+#: app/views/repositories/index.html.erb:52
 msgid "Disabled"
 msgstr "Inaktiverad"
 
-#: app/views/repositories/index.html.erb:159
-msgid "Quick Search"
-msgstr "Snabbsökning"
+#: app/views/repositories/index.html.erb:56
+#, fuzzy
+#| msgid "Repository"
+msgid "New Repository"
+msgstr "Arkiv"
 
-#: app/views/repositories/index.html.erb:165
-msgid "Add New Repository"
-msgstr "Lägg till nytt arkiv"
-
-#: app/views/repositories/index.html.erb:208
-msgid "Repository is currently"
-msgstr "Arkivet är för närvarande"
-
-#: app/views/repositories/index.html.erb:211 app/views/repositories/add.html.erb:128
-#: app/views/repositories/add.html.erb:129
-msgid "Repository will be %s."
-msgstr "Lagringsplats kommer att vara %s."
-
-#: app/views/repositories/index.html.erb:215
-msgid "Autorefresh is currently"
-msgstr "Automatisk uppdatering är för närvarande"
-
-#: app/views/repositories/index.html.erb:218 app/views/repositories/add.html.erb:133
-#: app/views/repositories/add.html.erb:134
-msgid "Autorefresh will be %s."
-msgstr "Automatisk uppdatering kommer att vara %s."
-
-#: app/views/repositories/index.html.erb:222
-msgid "Keeping downloaded packages is currently"
-msgstr "Spara hämtade paket är för närvarande"
-
-#: app/views/repositories/index.html.erb:225 app/views/repositories/add.html.erb:140
-#: app/views/repositories/add.html.erb:141
-msgid "Keep packages option will be %s."
-msgstr "Alternativ för att behålla paket kommer att vara %s."
-
-#: app/views/repositories/index.html.erb:232 app/views/repositories/add.html.erb:149
+#: app/views/repositories/index.html.erb:131
 msgid "Save"
 msgstr "Spara"
 
-#: app/views/repositories/index.html.erb:233
+#: app/views/repositories/index.html.erb:132
 msgid "Delete"
 msgstr "Ta bort"
 
-#: app/views/repositories/index.html.erb:235
+#: app/views/repositories/index.html.erb:134
+#, fuzzy
+#| msgid "Reading repository '%s' cache"
 msgid "Really delete repository '%s'?"
-msgstr "Vill du ta bort lagringsplatsen %s?"
+msgstr "Läser cache för arkiv \"%s\""
 
-#: app/views/repositories/add.html.erb:77
-msgid "A repository with this URL already exists.\nCreate a duplicate?"
-msgstr "Det finns redan ett arkiv med denna URL.\nSkapa en kopia?"
+#: app/views/patches/_patch_summary.html.erb:17
+#, fuzzy
+#| msgid "No information about battery and AC status available"
+msgid "No information about patches available"
+msgstr "Ingen statusinformation om batteri och strömförsörjning tillgänglig"
 
-#: app/views/repositories/add.html.erb:107
-msgid "Add a new repository"
-msgstr "Lägg till ny lagringsplats"
+#: app/views/patches/_patch_summary.html.erb:24
+msgid "Update needs EULA license confirmation. Please follow to patch module to decide about license."
+msgstr ""
 
-#: app/views/repositories/add.html.erb:116
-msgid "New Repository"
-msgstr "Nytt arkiv"
+#: app/views/patches/_patch_summary.html.erb:56
+#, fuzzy
+#| msgid "Security Options"
+msgid "Security Updates: %d"
+msgstr "Säkerhetsalternativ"
 
-#: app/views/repositories/add.html.erb:137
-msgid "Priority for packages:"
-msgstr "Prioritet för paket:"
+#: app/views/patches/_patch_summary.html.erb:66
+msgid "Important Updates: %d"
+msgstr ""
 
-#: app/views/patch_updates/_patch_installation.html.erb:7
-msgid "An error occured while installing patches."
-msgstr "Ett fel inträffade när korrigeringarna installerades."
+#: app/views/patches/_patch_summary.html.erb:76
+msgid "Optional Updates: %d"
+msgstr ""
 
-#: app/views/patch_updates/_patch_installation.html.erb:19
-msgid "Stop"
-msgstr "Stopp"
-
-#: app/views/patch_updates/_patch_installation.html.erb:19
-msgid "Are you sure?"
-msgstr "Är du säker?"
-
-#: app/views/patch_updates/index.html.erb:11
-msgid "Updates"
-msgstr "Uppdateringar"
-
-#: app/views/patch_updates/index.html.erb:16 app/views/patch_updates/_patch_summary.html.erb:35
+#: app/views/patches/_patch_summary.html.erb:84
+#: app/views/patches/index.html.erb:180
+#, fuzzy
+#| msgid "Repository '%s' is up to date."
 msgid "Your system is up to date."
-msgstr "Systemet är uppdaterat."
+msgstr "Arkivet \"%s\" är uppdaterat."
 
-#: app/views/patch_updates/index.html.erb:21
-msgid "Updates available"
-msgstr "Det finns tillgängliga uppdateringar"
+#: app/views/patches/_patch_summary.html.erb:91
+#, fuzzy
+#| msgid "Install"
+msgid "Install all"
+msgstr "Installera"
 
-#: app/views/patch_updates/index.html.erb:38
-msgid "Update"
-msgstr "Uppdatera"
+#: app/views/patches/_patch_summary.html.erb:100
+#, fuzzy
+#| msgid "Switch information"
+msgid "Loading patch information"
+msgstr "Bytinformation"
 
-#: app/views/patch_updates/_patch_progress.html.erb:5
-msgid "Refreshing package cache"
-msgstr "Uppdaterar paketcache"
+#: app/views/patches/_patch_summary.html.erb:108
+#: app/views/patches/_patch_installation.html.erb:13
+#: app/views/patches/index.html.erb:56 app/views/patches/index.html.erb:75
+#: app/views/patches/index.html.erb:94 app/views/patches/index.html.erb:113
+#: app/views/patches/index.html.erb:132
+#, fuzzy
+#| msgid "Switch information"
+msgid "Error: Cannot get information."
+msgstr "Bytinformation"
 
-#: app/views/patch_updates/_patch_progress.html.erb:6
-msgid "Starting package manager"
-msgstr "Startar pakethanterare"
+#: app/views/patches/_patch_installation.html.erb:22
+#, fuzzy
+#| msgid "An error occurred during the installation."
+msgid "An error occured while installing patches."
+msgstr "Ett fel uppstod under installationen."
 
-#: app/views/patch_updates/_patch_progress.html.erb:7
-msgid "Waiting for the package manager lock"
-msgstr "Väntar på lås för pakethanterare"
+#: app/views/patches/_patch_installation.html.erb:49
+#, fuzzy
+#| msgid "Package Installation"
+msgid "Patch Installation"
+msgstr "Paketinstallation"
 
-#: app/views/patch_updates/_patch_progress.html.erb:8 app/views/patch_updates/_patch_progress.html.erb:18
-msgid "Evaluating available patches"
-msgstr "Utvärderar tillgängliga korrigeringar"
+#: app/views/patches/_patch_installation.html.erb:59
+msgid "Stop"
+msgstr ""
 
-#: app/views/patch_updates/_patch_progress.html.erb:9
-msgid "Finished reading patches"
-msgstr "Läsning av korrigeringar avslutad"
+#: app/views/patches/_patch_installation.html.erb:59
+msgid "Are you sure?"
+msgstr ""
 
-#: app/views/patch_updates/_patches.html.erb:11
-msgid "Check"
-msgstr "Kontrollera"
+#: app/views/patches/_patches.html.erb:10
+msgid ""
+"One of the patches seems to update WebYaST itself.\n"
+"You may need to reload the page after applying the patch."
+msgstr ""
 
-#: app/views/patch_updates/_patches.html.erb:13
+#: app/views/patches/_patches.html.erb:16
+#, fuzzy
+#| msgid "%1 Patches available"
+msgid "No patches available"
+msgstr "%1 programfixar tillgängliga"
+
+#: app/views/patches/_patches.html.erb:21
 msgid "Kind"
-msgstr "Typ"
+msgstr ""
 
-#: app/views/patch_updates/_patches.html.erb:15
-msgid "Summary"
-msgstr "Sammanfattning"
-
-#: app/views/patch_updates/_patches.html.erb:17 app/views/patch_updates/_patches.html.erb:20
+#: app/views/patches/_patches.html.erb:24
+#: app/views/patches/_patches.html.erb:27
 msgid "Source"
 msgstr "Källa"
 
-#: app/views/patch_updates/_patches.html.erb:18
+#: app/views/patches/_patches.html.erb:25
 msgid "Install"
 msgstr "Installera"
 
-#: app/views/patch_updates/_patch_summary.html.erb:9
-msgid "Cannot read patch updates - you have been logged out."
-msgstr "Det går inte att läsa korrigeringsuppdateringarna. Du har loggats ut."
+#: app/views/patches/license.html.erb:63
+msgid "Accept"
+msgstr ""
 
-#: app/views/patch_updates/_patch_summary.html.erb:12
-msgid "No information about patches available"
-msgstr "Det finns ingen tillgänglig information om korrigeringar"
+#: app/views/patches/license.html.erb:64
+msgid "Reject"
+msgstr ""
 
-#: app/views/patch_updates/_patch_summary.html.erb:26
-msgid "Security Updates: %d"
-msgstr "Säkerhetsuppdateringar: %d"
+#: app/views/patches/index.html.erb:166 app/views/patches/index.html.erb:226
+#, fuzzy
+#| msgid "Update"
+msgid "Updates"
+msgstr "Uppdatera"
 
-#: app/views/patch_updates/_patch_summary.html.erb:29
-msgid "Important Updates: %d"
-msgstr "Viktiga uppdateringar: %d"
+#: app/views/patches/index.html.erb:240
+#, fuzzy
+#| msgid "Available Updates"
+msgid "All updates"
+msgstr "Tillgängliga uppdateringar"
 
-#: app/views/patch_updates/_patch_summary.html.erb:32
-msgid "Optional Updates: %d"
-msgstr "Valfria uppdateringar: %d"
+#: app/views/patches/index.html.erb:243
+#, fuzzy
+#| msgid "Severity"
+msgid "Security"
+msgstr "Allvarlighetsgrad"
 
-#: app/views/patch_updates/_patch_summary.html.erb:40
-msgid "Update All"
-msgstr "Uppdatera alla"
+#: app/views/patches/index.html.erb:245
+#, fuzzy
+#| msgid " Important!"
+msgid "Important"
+msgstr "Viktigt!"
 
-#: app/views/patch_updates/_patch_summary.html.erb:40
-msgid "Updating all. Are you sure?"
-msgstr "Alla kommer att uppdateras. Vill du fortsätta?"
+#: app/views/patches/index.html.erb:248
+#, fuzzy
+#| msgid "Recommends"
+msgid "Recommended"
+msgstr "Rekommenderar"
 
-#: app/views/patch_updates/_patch_summary.html.erb:47
-msgid "Loading patch information"
-msgstr "Läser in korrigeringsinformation"
+#: app/views/patches/index.html.erb:251
+#, fuzzy
+#| msgid "Options"
+msgid "Optional"
+msgstr "Alternativ"
 
+#: app/views/patches/index.html.erb:269
+msgid "Update"
+msgstr "Uppdatera"
+
+#~ msgid "Autorefresh"
+#~ msgstr "Automatisk uppdatering"
+
+#, fuzzy
+#~| msgid "Kernel development packages"
+#~ msgid "Keep downloaded packages"
+#~ msgstr "Kärnutvecklingspaket"
+
+#, fuzzy
+#~| msgid "Error parsing repository profile."
+#~ msgid "Missing repository parameter"
+#~ msgstr "Fel när arkivprofilen skulle tydas."
+
+#, fuzzy
+#~| msgid "Invalid network entry."
+#~ msgid "Invalid priority"
+#~ msgstr "Ogiltig nätverkspost."
+
+#, fuzzy
+#~| msgid "Error reading repositories:"
+#~ msgid "Cannot update repository '%s'"
+#~ msgstr "Fel vid läsning av arkiv:"
+
+#, fuzzy
+#~| msgid "Unknown error\n"
+#~ msgid "Unknown backend error: %s"
+#~ msgstr "Okänt fel\n"
+
+#, fuzzy
+#~| msgid "Adding repository '%s'"
+#~ msgid "Missing repository parameters"
+#~ msgstr "Lägger till arkiv \"%s\""
+
+#, fuzzy
+#~| msgid "Repository '%s' is invalid."
+#~ msgid "Repository '%s' has been added."
+#~ msgstr "Arkivet \"%s\" är ogiltigt."
+
+#, fuzzy
+#~| msgid "Cannot create directory %1: %2."
+#~ msgid "Cannot create repository '%s': Unknown error"
+#~ msgstr "Det gick inte att skapa katalogen %1: %2."
+
+#, fuzzy
+#~| msgid "Error reading repositories:"
+#~ msgid "Cannot create repository '%s'"
+#~ msgstr "Fel vid läsning av arkiv:"
+
+#, fuzzy
+#~| msgid "Unknown error\n"
+#~ msgid "Unknown backend error"
+#~ msgstr "Okänt fel\n"
+
+#, fuzzy
+#~| msgid "An error occurred during the installation."
+#~ msgid "A problem occured when loading patch information."
+#~ msgstr "Ett fel uppstod under installationen."
+
+#, fuzzy
+#~| msgid "Starting card manager..."
+#~ msgid "Starting package manager"
+#~ msgstr "Startar korthanterare..."
+
+#, fuzzy
+#~| msgid "Available Updates"
+#~ msgid "Evaluating available patches"
+#~ msgstr "Tillgängliga uppdateringar"
+
+#, fuzzy
+#~| msgid "Finished generating profile for %s."
+#~ msgid "Finished reading patches"
+#~ msgstr "Profilen för %s har genererats."
+
+#, fuzzy
+#~| msgid "Please wait..."
+#~ msgid "Please wait ..."
+#~ msgstr "Vänta..."
+
+#, fuzzy
+#~| msgid "Error reading repositories:"
+#~ msgid "See and manage configured software repositories"
+#~ msgstr "Fel vid läsning av arkiv:"
+
+#, fuzzy
+#~| msgid "Error reading repositories:"
+#~ msgid "Configured software repositories"
+#~ msgstr "Fel vid läsning av arkiv:"
+
+#, fuzzy
+#~| msgid "Repository"
+#~ msgid "Add New Repository"
+#~ msgstr "Arkiv"
+
+#, fuzzy
+#~| msgid "No Updates Available"
+#~ msgid "Updates available"
+#~ msgstr "Inga uppdateringar tillgängliga"
+
+#, fuzzy
+#~| msgid "DNS Check"
+#~ msgid "Check"
+#~ msgstr "DNS-kontroll"
+
+#~ msgid "Summary"
+#~ msgstr "Sammanfattning"
+
+#, fuzzy
+#~| msgid "Update"
+#~ msgid "Update All"
+#~ msgstr "Uppdatera"
+
+#, fuzzy
+#~| msgid "Installing Packages..."
+#~ msgid "Installing all patches..."
+#~ msgstr "Installerar paket..."
+
+#, fuzzy
+#~| msgid "Installation Source"
+#~ msgid "Installation stopped"
+#~ msgstr "Installationskälla"
+
+#, fuzzy
+#~| msgid "Installation"
+#~ msgid "Installation finished"
+#~ msgstr "Installation"
+
+#, fuzzy
+#~| msgid "%s installed ok"
+#~ msgid "%s installed."
+#~ msgstr "%s har installerats"
+
+#, fuzzy
+#~| msgid "Choose the updates to be installed:"
+#~ msgid "Patch has been installed. "
+#~ msgstr "Välj uppdateringarna som ska installeras:"
+
+#, fuzzy
+#~| msgid "Choose the updates to be installed:"
+#~ msgid "All Patches have been installed. "
+#~ msgstr "Välj uppdateringarna som ska installeras:"
+
+#, fuzzy
+#~| msgid "Proprietary Java packages."
+#~ msgid "Priority for packages:"
+#~ msgstr "Icke öppen källkods-Javapaket."

@@ -1,184 +1,302 @@
-# Copyright (C) 2006 SuSE Linux Products GmbH, Nuernberg
-# This file is distributed under the same license as the package.
-#
 msgid ""
 msgstr ""
-"Project-Id-Version: webyast-status-ui\n"
-"POT-Creation-Date: 2010-08-18 10:18+0200\n"
-"PO-Revision-Date: 2010-08-26 09:28\n"
-"Last-Translator: Novell Language <language@novell.com>\n"
-"Language-Team: Novell Language <language@novell.com>\n"
+"Project-Id-Version: yast_webclient_status.ko\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2012-06-07 15:20+0200\n"
+"PO-Revision-Date: 2010-03-09 16:06+0900\n"
+"Last-Translator: Yunseok Choi <xein@naver.com>\n"
+"Language-Team: Korean <xein@naver.com>\n"
+"Language: ko\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
+"X-Poedit-Language: Korean\n"
+"X-Poedit-Country: KOREA, REPUBLIC OF\n"
+"X-Poedit-SourceCharset: utf-8\n"
 
-#: app/controllers/status_controller.rb:149 ./app/controllers/status_controller.rb:149
-msgid "No data found for showing system status."
-msgstr "시스템 상태를 표시하는 데이터가 없습니다."
-
-#: app/controllers/status_controller.rb:157 ./app/controllers/status_controller.rb:157
-msgid "Status not available."
-msgstr "상태가 사용 불가능합니다."
-
-#: app/controllers/status_controller.rb:176 ./app/controllers/status_controller.rb:176
-msgid "Can't connect to host"
-msgstr "호스트에 연결할 수 없습니다"
-
-#: app/controllers/status_controller.rb:178 ./app/controllers/status_controller.rb:178
-msgid "Can't connect to host %s."
-msgstr "호스트 %s에 연결할 수 없습니다."
-
-#: app/controllers/status_controller.rb:217 ./app/controllers/status_controller.rb:217
-msgid "Limits exceeded for "
-msgstr "한도 초과됨 "
-
-#: app/controllers/status_controller.rb:242 ./app/controllers/status_controller.rb:242
-msgid "Status not available"
-msgstr "상태 사용 불가능"
-
-#: app/controllers/status_controller.rb:266 ./app/controllers/status_controller.rb:266
-msgid "Status not available (no permissions)"
-msgstr "상태 사용 불가능(권한 없음)"
-
-#: app/controllers/status_controller.rb:328 ./app/controllers/status_controller.rb:328
-msgid "exceeded"
-msgstr "초과됨"
-
-#: app/controllers/status_controller.rb:342 ./app/controllers/status_controller.rb:342
-msgid "undercut"
-msgstr "언더컷"
-
-#: app/controllers/status_controller.rb:444 ./app/controllers/status_controller.rb:444
-msgid "Limits have been written."
-msgstr "한도가 기록되었습니다."
-
-#: app/views/status/edit.html.erb:48 ./app/views/status/edit.html.erb:48
-msgid "Only numbers are valid !"
-msgstr "숫자만 사용할 수 있습니다."
-
-#: app/views/status/edit.html.erb:75 app/views/status/index.html.erb:52
-#: ./app/views/status/edit.html.erb:75 ./app/views/status/index.html.erb:52 ./shortcuts.yml:6
-msgid "Status"
-msgstr "상태"
-
-#: app/views/status/edit.html.erb:75 ./app/views/status/edit.html.erb:75
-msgid "Settings"
-msgstr "설정"
-
-#: app/views/status/edit.html.erb:89 ./app/views/status/edit.html.erb:89
-msgid "undercuts"
-msgstr "언더컷"
-
-#: app/views/status/edit.html.erb:89 ./app/views/status/edit.html.erb:89
-msgid "exceeds"
-msgstr "초과"
-
-#: app/views/status/index.html.erb:103 ./app/views/status/index.html.erb:103
-msgid "details"
-msgstr "자세히"
-
-#: app/views/status/index.html.erb:119 ./app/views/status/index.html.erb:119
-msgid "Details"
-msgstr "자세히"
-
-#: app/views/status/index.html.erb:187 ./app/views/status/index.html.erb:187
-msgid "Edit Limits"
-msgstr "제한 편집"
-
-#: app/views/status/_status_graph.html.erb:2 ./app/views/status/_status_graph.html.erb:2
-msgid "A problem occured when loading status information."
-msgstr "상태 정보를 로드하는 동안 문제가 발생했습니다."
-
-#: app/views/status/_status_graph.html.erb:90 ./app/views/status/_status_graph.html.erb:90
-msgid "Show last"
-msgstr "마지막 표시"
-
-#: app/views/status/_status_graph.html.erb:91 ./app/views/status/_status_graph.html.erb:91
-msgid "5 Minutes"
-msgstr "5분"
-
-#: app/views/status/_status_graph.html.erb:92 ./app/views/status/_status_graph.html.erb:92
-msgid "15 Minutes"
-msgstr "15분"
-
-#: app/views/status/_status_graph.html.erb:93 ./app/views/status/_status_graph.html.erb:93
-msgid "30 Minutes"
-msgstr "30분"
-
-#: app/views/status/_status_graph.html.erb:94 ./app/views/status/_status_graph.html.erb:94
-msgid "1 Hour"
-msgstr "1시간"
-
-#: app/views/status/_status_graph.html.erb:95 ./app/views/status/_status_graph.html.erb:95
-msgid "6 Hours"
-msgstr "6시간"
-
-#: app/views/status/_status_graph.html.erb:96 ./app/views/status/_status_graph.html.erb:96
-msgid "12 Hours"
-msgstr "12시간"
-
-#: app/views/status/_status_summary.html.erb:6 ./app/views/status/_status_summary.html.erb:6
-msgid "An problem occured when loading status information."
-msgstr "상태 정보를 로드하는 동안 문제가 발생했습니다."
-
-#: app/views/status/_status_summary.html.erb:13 ./app/views/status/_status_summary.html.erb:13
-msgid "Cannot read system status - you have been logged out."
-msgstr "시스템 상태를 읽을 수 없음 - 사용자가 로그아웃했습니다."
-
-#: app/views/status/_status_summary.html.erb:16 ./app/views/status/_status_summary.html.erb:16
-msgid "Your system is healthy."
-msgstr "시스템 상태가 양호합니다."
-
-#: app/views/status/_status_summary.html.erb:26 ./app/views/status/_status_summary.html.erb:26
-msgid "Loading system information"
-msgstr "시스템 정보 로드 중"
-
-#: app/views/status/_status_progress.html.erb:8 ./app/views/status/_status_progress.html.erb:8
-msgid "Checking system status"
-msgstr "시스템 상태 확인 중"
-
-#: ./shortcuts.yml:7
-msgid "Show system status"
-msgstr "시스템 상태 표시"
-
-#: app/models/graph.rb:116 config/status_configuration.yaml:64 ./app/models/graph.rb:116
-#: ./config/status_configuration.yaml:64
+#: app/models/graph.rb:109
 msgid "GByte"
-msgstr "GB"
+msgstr ""
 
-#: app/models/graph.rb:117 config/status_configuration.yaml:63 ./app/models/graph.rb:117
-#: ./config/status_configuration.yaml:63
+#: app/models/graph.rb:110
+#, fuzzy
+#| msgid "Disks"
 msgid "Disk"
 msgstr "디스크"
 
-#: app/models/graph.rb:140 config/status_configuration.yaml:6 ./app/models/graph.rb:140
-#: ./config/status_configuration.yaml:6
+#: app/models/graph.rb:133
 msgid "MByte/s"
-msgstr "MB/초"
+msgstr ""
 
-#: app/models/graph.rb:141 config/status_configuration.yaml:5 ./app/models/graph.rb:141
-#: ./config/status_configuration.yaml:5
+#: app/models/graph.rb:134
 msgid "Network"
 msgstr "네트워크"
 
-#: app/models/graph.rb:163 config/status_configuration.yaml:87 ./app/models/graph.rb:163
-#: ./config/status_configuration.yaml:87
+#: app/models/graph.rb:157
 msgid "MByte"
-msgstr "MB"
+msgstr ""
 
-#: app/models/graph.rb:164 config/status_configuration.yaml:86 ./app/models/graph.rb:164
-#: ./config/status_configuration.yaml:86
+#: app/models/graph.rb:158
 msgid "Memory"
 msgstr "메모리"
 
-#: app/models/graph.rb:185 config/status_configuration.yaml:29 ./app/models/graph.rb:185
-#: ./config/status_configuration.yaml:29
+#: app/models/graph.rb:179
 msgid "Percent"
-msgstr "퍼센트"
+msgstr ""
 
-#: app/models/graph.rb:186 config/status_configuration.yaml:28 ./app/models/graph.rb:186
-#: ./config/status_configuration.yaml:28
+#: app/models/graph.rb:180
+#, fuzzy
+#| msgid "CPUs"
 msgid "CPU"
-msgstr "CPU"
+msgstr "CPUs"
 
+#: app/helpers/status_helper.rb:57 app/views/status/_status_graph.html.erb:125
+#: app/views/status/index.html.erb:53 app/views/status/index.html.erb:68
+#: app/views/status/index.html.erb:88 app/views/status/index.html.erb:237
+#, fuzzy
+#| msgid "Loading patch information"
+msgid "Error: Cannot get information."
+msgstr "패치 정보 불러오는 중"
+
+#: app/controllers/status_controller.rb:119
+msgid "No data found for showing system status."
+msgstr "표시되는 시스템 상태에는 데이터가 없습니다."
+
+#: app/controllers/status_controller.rb:122
+#: app/controllers/status_controller.rb:160
+#: app/controllers/status_controller.rb:162
+#: app/controllers/status_controller.rb:164
+#, fuzzy
+#| msgid "SCPM not available"
+msgid "Status not available."
+msgstr "SCPM 사용 할 수 없음"
+
+#: app/controllers/status_controller.rb:125
+#: app/controllers/status_controller.rb:169
+msgid "Collectd is out of sync."
+msgstr ""
+
+#: app/controllers/status_controller.rb:140
+#: app/controllers/status_controller.rb:198
+#, fuzzy
+#| msgid "SCPM not available"
+msgid "Status not available (no permissions)"
+msgstr "SCPM 사용 할 수 없음"
+
+#: app/controllers/status_controller.rb:150
+#, fuzzy
+#| msgid "Limits exceeded for %s"
+msgid "Limits exceeded for "
+msgstr "%s 에 대한 제한을 초과함"
+
+#: app/controllers/status_controller.rb:263
+#, fuzzy
+#| msgid "Needed"
+msgid "exceeded"
+msgstr "필요함"
+
+#: app/controllers/status_controller.rb:277
+msgid "undercut"
+msgstr ""
+
+#: app/controllers/status_controller.rb:376
+msgid "Limits have been written."
+msgstr ""
+
+#: app/views/status/_status_graph.html.erb:2
+#, fuzzy
+#| msgid "An problem occured when loading status information."
+msgid "A problem occured when loading status information."
+msgstr "상태 정보를 불러오는 도중 오류가 발생 했습니다."
+
+#: app/views/status/_status_graph.html.erb:11
+#, fuzzy
+#| msgid "No Updates Available"
+msgid "No data available"
+msgstr "업데이트 사용 가능"
+
+#: app/views/status/_status_graph.html.erb:100
+#, fuzzy
+#| msgid "Show Desktop"
+msgid "Show last"
+msgstr "데스크탑 표시"
+
+#: app/views/status/_status_graph.html.erb:102
+#, fuzzy
+#| msgid " Minutes"
+msgid "5 Minutes"
+msgstr " 분"
+
+#: app/views/status/_status_graph.html.erb:103
+#, fuzzy
+#| msgid " Minutes"
+msgid "15 Minutes"
+msgstr " 분"
+
+#: app/views/status/_status_graph.html.erb:104
+#, fuzzy
+#| msgid "30 minutes"
+msgid "30 Minutes"
+msgstr "30 분"
+
+#: app/views/status/_status_graph.html.erb:105
+#, fuzzy
+#| msgid " Hours"
+msgid "1 Hour"
+msgstr " 시간"
+
+#: app/views/status/_status_graph.html.erb:106
+#, fuzzy
+#| msgid " Hours"
+msgid "6 Hours"
+msgstr " 시간"
+
+#: app/views/status/_status_graph.html.erb:107
+#, fuzzy
+#| msgid " Hours"
+msgid "12 Hours"
+msgstr " 시간"
+
+#: app/views/status/edit.html.erb:49
+msgid "Only numbers are valid !"
+msgstr ""
+
+#: app/views/status/edit.html.erb:81 app/views/status/index.html.erb:108
+msgid "Status"
+msgstr "상태"
+
+#: app/views/status/edit.html.erb:81
+msgid "Settings"
+msgstr "설정"
+
+#: app/views/status/edit.html.erb:102
+msgid "undercuts"
+msgstr ""
+
+#: app/views/status/edit.html.erb:102
+#, fuzzy
+#| msgid "Feeds"
+msgid "exceeds"
+msgstr "피드"
+
+#: app/views/status/_status_summary.html.erb:4
+msgid "An problem occured when loading status information."
+msgstr "상태 정보를 불러오는 도중 오류가 발생 했습니다."
+
+#: app/views/status/_status_summary.html.erb:38
+msgid "Your system is healthy."
+msgstr "귀하의 시스템은 이상이 없습니다."
+
+#: app/views/status/_status_summary.html.erb:49
+#, fuzzy
+#| msgid "Downloading update information"
+msgid "Loading system information"
+msgstr "업데이트 정보 다운로드 중"
+
+#: app/views/status/_status_summary.html.erb:57
+msgid "Error: Cannot check the current status."
+msgstr ""
+
+#: app/views/status/index.html.erb:157
+#, fuzzy
+#| msgid "Details"
+msgid "details"
+msgstr "자세히"
+
+#: app/views/status/index.html.erb:173
+msgid "Details"
+msgstr "자세히"
+
+#: app/views/status/index.html.erb:218
+msgid "Edit Limits"
+msgstr "제한 편집"
+
+#, fuzzy
+#~| msgid "Can't connect to host %s."
+#~ msgid "Can't connect to host"
+#~ msgstr "%s 호스트에 연결할 수 없습니다."
+
+#~ msgid "Can't connect to host %s."
+#~ msgstr "%s 호스트에 연결할 수 없습니다."
+
+#, fuzzy
+#~| msgid "SCPM not available"
+#~ msgid "Status not available"
+#~ msgstr "SCPM 사용 할 수 없음"
+
+#, fuzzy
+#~| msgid "Checking signatures"
+#~ msgid "Checking system status"
+#~ msgstr "서명 확인 중"
+
+#, fuzzy
+#~| msgid "Checking signatures"
+#~ msgid "Show system status"
+#~ msgstr "서명 확인 중"
+
+#, fuzzy
+#~| msgid "Required attribute '%s' is missing."
+#~ msgid "Registration is missing"
+#~ msgstr "필요한 '%s' 속성이 빠졌습니다."
+
+#, fuzzy
+#~| msgid "Please restart your system as soon as possible."
+#~ msgid "Please register your system in order to get updates."
+#~ msgstr "가능하면 시스템을 재시작 하는것이 좋습니다."
+
+#, fuzzy
+#~| msgid "The configuration is not initialized."
+#~ msgid "Mail configuration test not confirmed"
+#~ msgstr "설정은 초기화 되지 않았습니다."
+
+#, fuzzy
+#~| msgid "Start VPN connection"
+#~ msgid "Start collectd"
+#~ msgstr "VPN 연결 시작"
+
+#~ msgid "Invalid session, please login again."
+#~ msgstr "잘못된 세션입니다. 다시 로그인 해주세요."
+
+#~ msgid "Disk free limits exceeded;"
+#~ msgstr "디스크 여유공간 제한을 초과;"
+
+#~| msgid "Saving the changes failed"
+#~ msgid "Saving limits failed!"
+#~ msgstr "제한 저장에 실패했습니다!"
+
+#~ msgid "Disk usage"
+#~ msgstr "디스크 사용량"
+
+#~ msgid "Back"
+#~ msgstr "뒤로"
+
+#~ msgid "free"
+#~ msgstr "여유공간"
+
+#~| msgid "Last used"
+#~ msgid "used"
+#~ msgstr "사용됨"
+
+#~| msgid "Configure IP Settings"
+#~ msgid "Configure Status Limits"
+#~ msgstr "상태 제한 설정"
+
+#~| msgid "Status: "
+#~ msgid "Status Path"
+#~ msgstr "상태경로"
+
+#~ msgid "Minimum Value"
+#~ msgstr "최소치"
+
+#  combo box item
+#~| msgid "Maximum Memory"
+#~ msgid "Maximum Value"
+#~ msgstr "최대치"
+
+#~ msgid "Save"
+#~ msgstr "저장"
+
+#~| msgid "No information available."
+#~ msgid "No status information available"
+#~ msgstr "사용 가능한 상태 정보가 없습니다."

@@ -6,108 +6,149 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: webyast-mail-ui 1.0.0\n"
+"Project-Id-Version: @PACKAGE@\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-08-02 09:18+0200\n"
+"POT-Creation-Date: 2012-06-07 15:20+0200\n"
 "PO-Revision-Date: 2005-08-24 17:37+0200\n"
 "Last-Translator: Janez Krek <janez.krek@euroteh.si>\n"
 "Language-Team: Slovenščina <sl@li.org>\n"
+"Language: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: KBabel 1.3.1\n"
-"Plural-Forms: nplurals=4; plural=(n%100==1 ? 0 : n%100==2 ? 1 : n%100==3 || n"
-"%100==4 ? 2 : 3);\n"
+"Plural-Forms: nplurals=4; plural=(n%100==1 ? 0 : n%100==2 ? 1 : n%100==3 || n%100==4 ? 2 : 3);\n"
 
-#: app/controllers/mail_controller.rb:50 app/controllers/mail_controller.rb:50
+#: app/models/mail_state.rb:37
+msgid "It was not possible to retrieve the full hostname of the machine. If the mail could not be delivered, consult the network and/or mail configuration with your network administrator."
+msgstr ""
+
+# %s is either BOOTP or DHCP
+#: app/models/mail_state.rb:42
+#, fuzzy
+#| msgid "%s configuration failed."
+msgid "Mail configuration test not confirmed"
+msgstr "Prilagoditev %s ni bila uspešna."
+
+#: app/models/mail_state.rb:43
+msgid "While configuring mail, a test mail was sent to %s . Was the mail delivered to this address?<br>If so, confirm it by pressing the button. Otherwise check your mail configuration again."
+msgstr ""
+
+#: app/models/mail_state.rb:46
+msgid "Test mail received"
+msgstr ""
+
+#: app/controllers/mailsetting_controller.rb:58
 msgid "Passwords do not match."
 msgstr ""
 
-#: app/controllers/mail_controller.rb:57 app/controllers/mail_controller.rb:57
+#: app/controllers/mailsetting_controller.rb:65
 msgid "Mail settings have been written."
 msgstr ""
 
-#: app/controllers/mail_controller.rb:59 app/controllers/mail_controller.rb:59
+#: app/controllers/mailsetting_controller.rb:67
 msgid "Test mail was sent to %s."
 msgstr ""
 
-#: app/controllers/mail_controller.rb:71 app/controllers/mail_controller.rb:71
-msgid "Error while saving mail settings: %s"
-msgstr ""
+#: app/controllers/mailsetting_controller.rb:72
+#, fuzzy
+#| msgid "Try loading the default configuration."
+msgid "Error while saving mail settings."
+msgstr "Poizkus naložiti privzeto nastavitev."
 
-#: app/controllers/mail_controller.rb:88 app/controllers/mail_controller.rb:88
+#: app/controllers/mailsetting_controller.rb:85
 msgid ""
-"No outgoing mail server is set, but administrator has mail forwarders "
-"defined.\n"
-"Change %s<i>administrator</i>%s or %s<i>mail</i>%s configuration."
+"No outgoing mail server is set, but administrator has mail forwarders defined.\n"
+"        Change %s<i>administrator</i>%s or %s<i>mail</i>%s configuration."
 msgstr ""
 
-#: app/views/mail/index.html.erb:44 app/views/mail/index.html.erb:44
+#: app/views/mailsetting/index.html.erb:32
+msgid "Please wait"
+msgstr ""
+
+#: app/views/mailsetting/index.html.erb:40
 msgid "The passwords do not match."
 msgstr ""
 
 # e.g 'not a SUSE LINUX CD-ROM'
-#: app/views/mail/index.html.erb:45 app/views/mail/index.html.erb:45
+#: app/views/mailsetting/index.html.erb:41
 #, fuzzy
+#| msgid "This is not a valid CCW address."
 msgid "Enter a valid e-mail address."
 msgstr "To ni veljaven CCW naslov."
 
-#: app/views/mail/index.html.erb:46 app/views/mail/index.html.erb:46
+#: app/views/mailsetting/index.html.erb:42
 #, fuzzy
+#| msgid "Enter your IP address."
 msgid "Enter a valid domain name or an IP address."
 msgstr "Vnesite vaš IP naslov."
 
-#: app/views/mail/index.html.erb:63 app/views/mail/index.html.erb:63
-#: shortcuts.yml:6
+#: app/views/mailsetting/index.html.erb:68
 #, fuzzy
+#| msgid "Manual Settings"
 msgid "Mail Settings"
 msgstr "Ročne nastavitve"
 
-#: app/views/mail/index.html.erb:75 app/views/mail/index.html.erb:75
+#: app/views/mailsetting/index.html.erb:81
+#, fuzzy
+#| msgid "Manual Settings"
+msgid "Outgoing mail server settings"
+msgstr "Ročne nastavitve"
+
+#: app/views/mailsetting/index.html.erb:86
 msgid "Outgoing mail server"
 msgstr ""
 
-#: app/views/mail/index.html.erb:80 app/views/mail/index.html.erb:80
+#: app/views/mailsetting/index.html.erb:91
 msgid "Use secure connection (TLS)"
 msgstr ""
 
-#: app/views/mail/index.html.erb:81 app/views/mail/index.html.erb:81
+#: app/views/mailsetting/index.html.erb:92
 msgid "Never"
 msgstr "Nikoli"
 
-#: app/views/mail/index.html.erb:81 app/views/mail/index.html.erb:81
+#: app/views/mailsetting/index.html.erb:92
 #, fuzzy
+#| msgid "SCPM not available"
 msgid "If available"
 msgstr "SCPM ni na voljo"
 
-#: app/views/mail/index.html.erb:81 app/views/mail/index.html.erb:81
+#: app/views/mailsetting/index.html.erb:92
 msgid "Always"
 msgstr ""
 
-#: app/views/mail/index.html.erb:84 app/views/mail/index.html.erb:84
+#: app/views/mailsetting/index.html.erb:96
 #, fuzzy
+#| msgid "&Username:"
 msgid "User name"
 msgstr "&Uporabniško ime:"
 
 # password dialog title
-#: app/views/mail/index.html.erb:88 app/views/mail/index.html.erb:88
+#: app/views/mailsetting/index.html.erb:101
 msgid "Password"
 msgstr "Geslo"
 
-#: app/views/mail/index.html.erb:92 app/views/mail/index.html.erb:92
+#: app/views/mailsetting/index.html.erb:106
 #, fuzzy
+#| msgid "<Change password>"
 msgid "Confirm password"
 msgstr "<Spremenite geslo>"
 
-#: app/views/mail/index.html.erb:100 app/views/mail/index.html.erb:100
+#: app/views/mailsetting/index.html.erb:114
+msgid "Check mail server settings"
+msgstr ""
+
+#: app/views/mailsetting/index.html.erb:118
 msgid "Send test mail to"
 msgstr ""
 
-#: app/views/mail/index.html.erb:102 app/views/mail/index.html.erb:102
+#: app/views/mailsetting/index.html.erb:120
 #, fuzzy
+#| msgid "Suspend failed"
 msgid "Send Mail"
 msgstr "Zaustavitev ni uspela"
 
-#: shortcuts.yml:7
-msgid "Manage outgoing mail settings"
-msgstr ""
+#, fuzzy
+#~| msgid "Manual Settings"
+#~ msgid "Manage outgoing mail settings"
+#~ msgstr "Ročne nastavitve"

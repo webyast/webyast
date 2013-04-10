@@ -2,43 +2,141 @@ msgid ""
 msgstr ""
 "Project-Id-Version: @PACKAGE@\n"
 "Report-Msgid-Bugs-To: translation@suse.de\n"
-"POT-Creation-Date: 2010-04-13 13:36+0200\n"
+"POT-Creation-Date: 2012-06-07 15:19+0200\n"
 "PO-Revision-Date: 2001-07-17 16:27+0200\n"
 "Last-Translator: James Ogley <ogley@suse.co.uk>\n"
 "Language-Team: English <i18n@suse.de>\n"
+"Language: en\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8-bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
 
-#: app/views/roles/_role_edit.erb:31
+#: app/controllers/roles_controller.rb:126
+msgid "Role name is invalid. Allowed is combination of a-z, A-Z, numbers, space, dash and underscore only."
+msgstr ""
+
+#: app/controllers/roles_controller.rb:136
 #, fuzzy
-#| msgid "Permissions denied"
-msgid "Permissions granted by role"
-msgstr "Permissions denied"
+#| msgid "Device is already mounted."
+msgid "Role name is already used."
+msgstr "Device is already mounted."
 
-#: app/views/roles/_role_edit.erb:44
+#: app/controllers/roles_controller.rb:155
 #, fuzzy
-#| msgid "Available Processors"
-msgid "Available permissions"
-msgstr "Available Processors"
+#| msgid "Repository %s has been sucessfully modified."
+msgid "Role '%s' was successfully removed."
+msgstr "Repository %s has been successfully modified."
 
-#: app/views/roles/_role_edit.erb:56
-#, fuzzy
-#| msgid "Description: "
-msgid "Description of permissions"
-msgstr "Description: "
-
-#: app/views/roles/_role_edit.erb:58
-#, fuzzy
-#| msgid "description"
-msgid ")}-description"
-msgstr "description"
-
-#: app/views/roles/_role_edit.erb:64
-msgid "Save"
-msgstr "Save"
-
-#: app/views/roles/index.rhtml:12
+#: app/views/roles/index.html.erb:7
 msgid "Roles"
 msgstr ""
+
+#: app/views/roles/index.html.erb:25
+#, fuzzy
+#| msgid "Permissions denied"
+msgid "In order to assign the user to roles,"
+msgstr "Permissions denied"
+
+#: app/views/roles/index.html.erb:26
+msgid "Drag and Drop the user labels into Role containers"
+msgstr ""
+
+#: app/views/roles/index.html.erb:27
+msgid "Don't show this again"
+msgstr ""
+
+#: app/views/roles/index.html.erb:38
+#, fuzzy
+#| msgid "Create a new profile"
+msgid "Create Role"
+msgstr "Create a new profile"
+
+#: app/views/roles/index.html.erb:43
+msgid "Assign Users"
+msgstr ""
+
+#: app/views/roles/index.html.erb:53
+#, fuzzy
+#| msgid "Permissions denied"
+msgid "User already assigned"
+msgstr "Permissions denied"
+
+#: app/views/roles/index.html.erb:104
+#, fuzzy
+#| msgid "Available Processors"
+msgid "Assign Permissions"
+msgstr "Available Processors"
+
+#: app/views/roles/index.html.erb:107
+msgid "collapse all"
+msgstr ""
+
+#: app/views/roles/index.html.erb:169
+#, fuzzy
+#| msgid "The filename is required."
+msgid "This field is required"
+msgstr "The filename is required."
+
+#: app/views/roles/index.html.erb:169
+msgid "Allowed is combination of a-z, A-Z, numbers, space, dash and underscore only."
+msgstr ""
+
+#: app/views/roles/index.html.erb:235
+#, fuzzy
+#| msgid "Please wait..."
+msgid "Please wait"
+msgstr "Please wait..."
+
+#, fuzzy
+#~| msgid "Error: Could not read profile %s: %s.\n"
+#~ msgid "Error: Could not remove role <i>%s</i>."
+#~ msgstr "Error: Could not read profile %s: %s.\n"
+
+#, fuzzy
+#~| msgid "Can't find %s."
+#~ msgid "Cannot find roles"
+#~ msgstr "Can't find %s."
+
+#, fuzzy
+#~| msgid "Selected Resource"
+#~ msgid "Selected Users"
+#~ msgstr "Selected Resource"
+
+#, fuzzy
+#~| msgid "Available Updates"
+#~ msgid "Available Users"
+#~ msgstr "Available Updates"
+
+#, fuzzy
+#~| msgid "Invalid device name."
+#~ msgid "Invalid role name"
+#~ msgstr "Invalid device name."
+
+#, fuzzy
+#~| msgid "Permissions denied"
+#~ msgid "Permissions contained in role"
+#~ msgstr "Permissions denied"
+
+#, fuzzy
+#~| msgid "Permissions denied"
+#~ msgid "Permissions granted by role"
+#~ msgstr "Permissions denied"
+
+#, fuzzy
+#~| msgid "Description: "
+#~ msgid "Description of permissions"
+#~ msgstr "Description: "
+
+#, fuzzy
+#~| msgid "description"
+#~ msgid ")}-description"
+#~ msgstr "description"
+
+#, fuzzy
+#~| msgid "Remaining Software"
+#~ msgid "Remaining users"
+#~ msgstr "Remaining Software"
+
+#~ msgid "Save"
+#~ msgstr "Save"

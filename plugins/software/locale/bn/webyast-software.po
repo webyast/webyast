@@ -1,533 +1,570 @@
 msgid ""
 msgstr ""
-"Project-Id-Version: webyast-software-ui 1.0.0\n"
+"Project-Id-Version: @PACKAGE@\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-08-02 09:19+0200\n"
+"POT-Creation-Date: 2012-06-07 15:20+0200\n"
 "PO-Revision-Date: 2004-08-09 10:24+0200\n"
 "Last-Translator: xxx <yyy@example.org>\n"
 "Language-Team: Bengali <i18n@suse.de>\n"
+"Language: bn\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
 
-#: app/helpers/repositories_helper.rb:25 app/helpers/repositories_helper.rb:25
+#: app/models/patch.rb:150
+#, fuzzy
+#| msgid "Please file a bug report about this."
+msgid "Please reboot your system."
+msgstr "এই বিষয়ে অনুগ্রহ করে একটি ত্রুটি রিপোর্ট ফাইল করুন।"
+
+#: app/models/patches_state.rb:30
+msgid "EULA accept required"
+msgstr ""
+
+#: app/models/patches_state.rb:31
+msgid "Package require accept specific EULA before its installation. Please follow the link."
+msgstr ""
+
+#: app/models/patches_state.rb:34
+msgid "decide"
+msgstr ""
+
+#: app/models/patches_state.rb:43
+msgid "Patch installation messages not confirmed"
+msgstr ""
+
+#: app/models/patches_state.rb:47
+msgid "OK"
+msgstr "OK"
+
+#: app/helpers/repositories_helper.rb:25
 msgid "Highest"
 msgstr ""
 
-#: app/helpers/repositories_helper.rb:26 app/helpers/repositories_helper.rb:26
+#: app/helpers/repositories_helper.rb:26
 msgid "Higher"
 msgstr ""
 
-#: app/helpers/repositories_helper.rb:27 app/helpers/repositories_helper.rb:27
+#: app/helpers/repositories_helper.rb:27
 #, fuzzy
+#| msgid "Default Hat"
 msgid "Default"
 msgstr "ডিফল্ট Hat"
 
-#: app/helpers/repositories_helper.rb:28 app/helpers/repositories_helper.rb:28
+#: app/helpers/repositories_helper.rb:28
 msgid "Low"
 msgstr "নিম্ন"
 
-#: app/helpers/repositories_helper.rb:29 app/helpers/repositories_helper.rb:29
+#: app/helpers/repositories_helper.rb:29
 #, fuzzy
+#| msgid "Lower"
 msgid "Lowest"
 msgstr "ছোট"
 
-#: app/helpers/repositories_helper.rb:35 app/helpers/repositories_helper.rb:35
+#: app/helpers/repositories_helper.rb:35
 msgid "Highest priority"
 msgstr ""
 
-#: app/helpers/repositories_helper.rb:36 app/helpers/repositories_helper.rb:36
+#: app/helpers/repositories_helper.rb:36
 msgid "Higher priority"
 msgstr ""
 
-#: app/helpers/repositories_helper.rb:38 app/helpers/repositories_helper.rb:38
+#: app/helpers/repositories_helper.rb:38
 msgid "Low priority"
 msgstr ""
 
-#: app/helpers/repositories_helper.rb:39 app/helpers/repositories_helper.rb:39
+#: app/helpers/repositories_helper.rb:39
 msgid "Lowest priority"
 msgstr ""
 
-#: app/helpers/repositories_helper.rb:44 app/helpers/repositories_helper.rb:44
+#: app/helpers/repositories_helper.rb:44
 msgid "Custom priority"
 msgstr ""
 
-#: app/helpers/repositories_helper.rb:49 app/helpers/repositories_helper.rb:49
+#: app/helpers/repositories_helper.rb:49
 msgid "Custom"
 msgstr ""
 
 #: app/helpers/repositories_helper.rb:61
-#: app/views/repositories/index.html.erb:143
-#: app/views/repositories/add.html.erb:85
-#: app/helpers/repositories_helper.rb:61
-#: app/views/repositories/index.html.erb:143
-#: app/views/repositories/add.html.erb:85
+#: app/views/repositories/new.html.erb:67
+#: app/views/repositories/index.html.erb:264
 #, fuzzy
+#| msgid "enabled"
 msgid "enable"
 msgstr "সক্ষম করা হয়েছে"
 
 #: app/helpers/repositories_helper.rb:61
-#: app/views/repositories/index.html.erb:148
-#: app/views/repositories/add.html.erb:92
-#: app/helpers/repositories_helper.rb:61
-#: app/views/repositories/index.html.erb:148
-#: app/views/repositories/add.html.erb:92
+#: app/views/repositories/new.html.erb:74
+#: app/views/repositories/index.html.erb:267
 #, fuzzy
+#| msgid "Disable"
 msgid "disable"
 msgstr "নিষ্ক্রিয় করুন"
 
-#: app/helpers/repositories_helper.rb:66 app/helpers/repositories_helper.rb:66
+#: app/helpers/repositories_helper.rb:66
 msgid "enabled"
 msgstr "সক্ষম করা হয়েছে"
 
-#: app/helpers/repositories_helper.rb:66 app/helpers/repositories_helper.rb:66
+#: app/helpers/repositories_helper.rb:66
 #, fuzzy
+#| msgid "Disabled"
 msgid "disabled"
 msgstr " অক্ষম "
 
-#: app/controllers/repositories_controller.rb:35
-#: app/controllers/repositories_controller.rb:35
-msgid "Alias"
+#: app/helpers/repositories_helper.rb:83
+msgid "Repository is currently %senabled%s."
 msgstr ""
 
-#: app/controllers/repositories_controller.rb:36
-#: app/views/repositories/index.html.erb:199
-#: app/controllers/repositories_controller.rb:36
-#: app/views/repositories/index.html.erb:199
-msgid "Enabled"
-msgstr "সক্রিয় হয়েছে"
+#: app/helpers/repositories_helper.rb:85
+msgid "Repository is currently %sdisabled%s."
+msgstr ""
 
-#: app/controllers/repositories_controller.rb:37
-#: app/controllers/repositories_controller.rb:37
+#: app/helpers/repositories_helper.rb:90
 #, fuzzy
-msgid "Autorefresh"
+#| msgid "Auto refresh"
+msgid "Autorefresh is currently %senabled%s."
 msgstr "স্বয়ং রিফ্রেশ"
 
-#: app/controllers/repositories_controller.rb:38
-#: app/views/patch_updates/_patches.html.erb:21
-#: app/controllers/repositories_controller.rb:38
-#: app/views/patch_updates/_patches.html.erb:21
-msgid "Name"
-msgstr "নাম"
-
-#: app/controllers/repositories_controller.rb:39
-#: app/controllers/repositories_controller.rb:39
-msgid "URL"
-msgstr ""
-
-#: app/controllers/repositories_controller.rb:40
-#: app/controllers/repositories_controller.rb:40
-msgid "Priority"
-msgstr ""
-
-#: app/controllers/repositories_controller.rb:41
-#: app/controllers/repositories_controller.rb:41
-msgid "Keep downloaded packages"
-msgstr ""
-
-#: app/controllers/repositories_controller.rb:51
-#: app/controllers/repositories_controller.rb:51
+#: app/helpers/repositories_helper.rb:92
 #, fuzzy
+#| msgid "Auto refresh"
+msgid "Autorefresh is currently %sdisabled %s."
+msgstr "স্বয়ং রিফ্রেশ"
+
+#: app/helpers/repositories_helper.rb:97
+msgid "Keeping downloaded packages is currently %senabled%s."
+msgstr ""
+
+#: app/helpers/repositories_helper.rb:99
+msgid "Keeping downloaded packages is currently %sdisabled%s."
+msgstr ""
+
+#: app/helpers/repositories_helper.rb:103
+msgid "Repository will be enabled."
+msgstr ""
+
+#: app/helpers/repositories_helper.rb:103
+msgid "Repository will be disabled."
+msgstr ""
+
+#: app/helpers/repositories_helper.rb:107
+#, fuzzy
+#| msgid "Auto refresh"
+msgid "Autorefresh will be enabled."
+msgstr "স্বয়ং রিফ্রেশ"
+
+#: app/helpers/repositories_helper.rb:107
+#, fuzzy
+#| msgid "Auto refresh"
+msgid "Autorefresh will be disabled."
+msgstr "স্বয়ং রিফ্রেশ"
+
+#: app/helpers/repositories_helper.rb:111
+msgid "Keep packages option will be enabled."
+msgstr ""
+
+#: app/helpers/repositories_helper.rb:111
+msgid "Keep packages option will be disabled."
+msgstr ""
+
+#: app/controllers/patches_controller.rb:101
+msgid "There are patch installation messages available"
+msgstr ""
+
+#: app/controllers/patches_controller.rb:119
+msgid "Cannot obtain patches, installation in progress. Remain %d packages."
+msgstr ""
+
+#: app/controllers/patches_controller.rb:129
+#: app/controllers/patches_controller.rb:182
+msgid "Cannot read patch updates: GPG key for repository <em>%s</em> is not trusted."
+msgstr ""
+
+#: app/controllers/patches_controller.rb:170
+msgid "Cannot obtain patches, installation in progress. Remain %d patches."
+msgstr ""
+
+#: app/controllers/repositories_controller.rb:50
+#, fuzzy
+#| msgid "Cannot create directory %1: %2."
 msgid "Cannot read repository list."
 msgstr "ডায়রেক্টরি %1: %2 তৈরী করা যাচ্ছে না"
 
-#: app/controllers/repositories_controller.rb:68
-#: app/controllers/repositories_controller.rb:95
-#: app/controllers/repositories_controller.rb:68
-#: app/controllers/repositories_controller.rb:95
-msgid "Missing repository parameter"
-msgstr ""
-
-#: app/controllers/repositories_controller.rb:123
-#: app/controllers/repositories_controller.rb:204
-#: app/controllers/repositories_controller.rb:123
-#: app/controllers/repositories_controller.rb:204
+#: app/controllers/repositories_controller.rb:117
+#: app/controllers/repositories_controller.rb:126
 #, fuzzy
-msgid "Invalid priority"
-msgstr "অবৈধ উদ্দেশ্য %1."
+#| msgid "Cannot create directory %1: %2."
+msgid "Cannot update repository '%s': missing parameters."
+msgstr "ডায়রেক্টরি %1: %2 তৈরী করা যাচ্ছে না"
 
-#: app/controllers/repositories_controller.rb:192
-#: app/controllers/repositories_controller.rb:192
-msgid "Missing repository parameters"
+#: app/controllers/repositories_controller.rb:134
+msgid "Repository '%s' has been updated."
 msgstr ""
 
-#: app/controllers/repositories_controller.rb:230
-#: app/controllers/repositories_controller.rb:230
+#: app/controllers/repositories_controller.rb:172
 #, fuzzy
-msgid "Unknown backend error"
-msgstr "অজানা ভুল\n"
+#| msgid "Host %s was not found."
+msgid "Repository '%s' was not found."
+msgstr "হস্ট %s পাওয়া যায় নি।"
 
-#: app/controllers/patch_updates_controller.rb:42
-#: app/controllers/patch_updates_controller.rb:42
-msgid "<p>Please reboot your system after all patches have been installed.</p>"
-msgstr ""
-
-#: app/controllers/patch_updates_controller.rb:44
-#: app/controllers/patch_updates_controller.rb:44
-msgid ""
-"<p>Please logout and login again after all patches have been installed.</p>"
-msgstr ""
-
-#: app/controllers/patch_updates_controller.rb:64
-#: app/views/patch_updates/_patch_summary.html.erb:30
-#: app/controllers/patch_updates_controller.rb:64
-#: app/views/patch_updates/_patch_summary.html.erb:30
-msgid ""
-"Cannot read patch updates: GPG key for repository %s is not trusted."
-msgstr ""
-
-#: app/controllers/patch_updates_controller.rb:97
-#: app/controllers/patch_updates_controller.rb:100
-#: app/views/patch_updates/_patch_progress.html.erb:2
-#: app/controllers/patch_updates_controller.rb:97
-#: app/controllers/patch_updates_controller.rb:100
-#: app/views/patch_updates/_patch_progress.html.erb:2
+#: app/controllers/repositories_controller.rb:189
+#: app/controllers/repositories_controller.rb:196
 #, fuzzy
-msgid "A problem occured when loading patch information."
-msgstr "ইন্সটল করার সময় একটি ভুল হয়েছে।"
+#| msgid "Cannot create directory %1: %2."
+msgid "Cannot remove repository '%s'"
+msgstr "ডায়রেক্টরি %1: %2 তৈরী করা যাচ্ছে না"
 
-#: app/views/repositories/index.html.erb:43
-#: app/views/repositories/add.html.erb:56
-#: app/views/repositories/index.html.erb:43
-#: app/views/repositories/add.html.erb:56
+#: app/controllers/repositories_controller.rb:203
+msgid "Repository '%s' has been deleted."
+msgstr ""
+
+#: app/views/repositories/new.html.erb:32
+#: app/views/repositories/index.html.erb:167
 msgid "Enter a valid repository URL."
 msgstr ""
 
-#: app/views/repositories/index.html.erb:51
-#: app/views/repositories/add.html.erb:64
-#: app/views/repositories/index.html.erb:51
-#: app/views/repositories/add.html.erb:64
+#: app/views/repositories/new.html.erb:40
+#: app/views/repositories/index.html.erb:175
 msgid "Symbols <b>%s</b> are not allowed in repository alias."
 msgstr ""
 
-#: app/views/repositories/index.html.erb:55
-#: app/views/repositories/add.html.erb:74
-#: app/views/repositories/index.html.erb:55
-#: app/views/repositories/add.html.erb:74
+#: app/views/repositories/new.html.erb:47
+#: app/views/repositories/index.html.erb:78
+#: app/views/repositories/index.html.erb:222
+#: app/views/repositories/index.html.erb:240
+#: app/views/patches/license.html.erb:32 app/views/patches/license.html.erb:41
+#: app/views/patches/index.html.erb:37 app/views/patches/index.html.erb:141
+#: app/views/patches/index.html.erb:150
+msgid "Please wait"
+msgstr ""
+
+#: app/views/repositories/new.html.erb:56
+#: app/views/repositories/index.html.erb:179
 #, fuzzy
+#| msgid "The idmapd section name may not be empty."
 msgid "This value cannot be empty."
 msgstr "idmapd এন্ট্রি বিভাগের নাম শূণ্য থাকবে না৷"
 
-#: app/views/repositories/index.html.erb:164
-#: app/views/repositories/add.html.erb:148
-#: app/views/repositories/index.html.erb:164
-#: app/views/repositories/add.html.erb:148 shortcuts.yml:15
-#, fuzzy
-msgid "Software Repositories"
-msgstr "সফটওয়্যার আপডেট"
-
-#: app/views/repositories/index.html.erb:169
-#: app/views/repositories/index.html.erb:169
-msgid "Configured software repositories"
-msgstr ""
-
-#: app/views/repositories/index.html.erb:180
-#: app/views/repositories/index.html.erb:180
-#, fuzzy
-msgid "Quick Search"
-msgstr "খোঁজো (&h):"
-
-#: app/views/repositories/index.html.erb:188
-#: app/views/repositories/index.html.erb:188
-msgid "Add New Repository"
-msgstr ""
-
-#: app/views/repositories/index.html.erb:194
-#: app/views/repositories/index.html.erb:194
-msgid "Filter repositories"
-msgstr ""
-
-#: app/views/repositories/index.html.erb:198
-#: app/views/repositories/index.html.erb:198
-#, fuzzy
-msgid "All"
-msgstr "ইনস্টল করো"
-
-#: app/views/repositories/index.html.erb:200
-#: app/views/repositories/index.html.erb:200
-msgid "Disabled"
-msgstr " অক্ষম "
-
-#: app/views/repositories/index.html.erb:245
-#: app/views/repositories/index.html.erb:245
-msgid "Repository is currently"
-msgstr ""
-
-#: app/views/repositories/index.html.erb:248
-#: app/views/repositories/add.html.erb:171
-#: app/views/repositories/add.html.erb:172
-#: app/views/repositories/index.html.erb:248
-#: app/views/repositories/add.html.erb:171
-#: app/views/repositories/add.html.erb:172
-msgid "Repository will be %s."
-msgstr ""
-
-#: app/views/repositories/index.html.erb:252
-#: app/views/repositories/index.html.erb:252
-#, fuzzy
-msgid "Autorefresh is currently"
-msgstr "স্বয়ং রিফ্রেশ"
-
-#: app/views/repositories/index.html.erb:255
-#: app/views/repositories/add.html.erb:176
-#: app/views/repositories/add.html.erb:177
-#: app/views/repositories/index.html.erb:255
-#: app/views/repositories/add.html.erb:176
-#: app/views/repositories/add.html.erb:177
-#, fuzzy
-msgid "Autorefresh will be %s."
-msgstr "স্বয়ং রিফ্রেশ"
-
-#: app/views/repositories/index.html.erb:259
-#: app/views/repositories/index.html.erb:259
-msgid "Keeping downloaded packages is currently"
-msgstr ""
-
-#: app/views/repositories/index.html.erb:262
-#: app/views/repositories/add.html.erb:181
-#: app/views/repositories/add.html.erb:182
-#: app/views/repositories/index.html.erb:262
-#: app/views/repositories/add.html.erb:181
-#: app/views/repositories/add.html.erb:182
-msgid "Keep packages option will be %s."
-msgstr ""
-
-#: app/views/repositories/index.html.erb:269
-#: app/views/repositories/add.html.erb:190
-#: app/views/repositories/index.html.erb:269
-#: app/views/repositories/add.html.erb:190
-msgid "Save"
-msgstr "সংরক্ষণ করুন"
-
-#: app/views/repositories/index.html.erb:270
-#: app/views/repositories/index.html.erb:270
-msgid "Delete"
-msgstr "মোছো"
-
-#: app/views/repositories/index.html.erb:272
-#: app/views/repositories/index.html.erb:272
-msgid "Really delete repository '%s'?"
-msgstr ""
-
-#: app/views/repositories/add.html.erb:120
-#: app/views/repositories/add.html.erb:120
+#: app/views/repositories/new.html.erb:102
 msgid ""
 "A repository with this URL already exists.\n"
 "Create a duplicate?"
 msgstr ""
 
-#: app/views/repositories/add.html.erb:150
-#: app/views/repositories/add.html.erb:150
+#: app/views/repositories/new.html.erb:136
+#: app/views/repositories/index.html.erb:30
+#, fuzzy
+#| msgid "Software Update"
+msgid "Software Repositories"
+msgstr "সফটওয়্যার আপডেট"
+
+#: app/views/repositories/new.html.erb:138
+#: app/views/repositories/new.html.erb:152
 msgid "Add a new repository"
 msgstr ""
 
-#: app/views/repositories/add.html.erb:159
-#: app/views/repositories/add.html.erb:159
+#: app/views/repositories/new.html.erb:158
+msgid "Alias"
+msgstr ""
+
+#: app/views/repositories/new.html.erb:162
+#: app/views/patches/_patches.html.erb:22
+msgid "Name"
+msgstr "নাম"
+
+#: app/views/repositories/new.html.erb:166
+msgid "URL"
+msgstr ""
+
+#: app/views/repositories/new.html.erb:174
+msgid "Repository will be %s."
+msgstr ""
+
+#: app/views/repositories/new.html.erb:179
+#, fuzzy
+#| msgid "Auto refresh"
+msgid "Autorefresh will be %s."
+msgstr "স্বয়ং রিফ্রেশ"
+
+#: app/views/repositories/new.html.erb:184
+msgid "Keep packages option will be %s."
+msgstr ""
+
+#: app/views/repositories/index.html.erb:44
+#, fuzzy
+#| msgid "Search:"
+msgid "Quick Search"
+msgstr "খোঁজো (&h):"
+
+#: app/views/repositories/index.html.erb:49
+#, fuzzy
+#| msgid "inetd service"
+msgid "Filter repositories"
+msgstr "সার্ভিস"
+
+#: app/views/repositories/index.html.erb:52
+#, fuzzy
+#| msgid "all"
+msgid "All"
+msgstr "ইনস্টল করো"
+
+#: app/views/repositories/index.html.erb:52
+msgid "Enabled"
+msgstr "সক্রিয় হয়েছে"
+
+#: app/views/repositories/index.html.erb:52
+msgid "Disabled"
+msgstr " অক্ষম "
+
+#: app/views/repositories/index.html.erb:56
 msgid "New Repository"
 msgstr ""
 
-#: app/views/patch_updates/_patch_installation.html.erb:8
-#: app/views/patch_updates/_patch_installation.html.erb:8
-#, fuzzy
-msgid "An error occured while installing patches."
-msgstr "ইন্সটল করার সময় একটি ভুল হয়েছে।"
+#: app/views/repositories/index.html.erb:131
+msgid "Save"
+msgstr "সংরক্ষণ করুন"
 
-#: app/views/patch_updates/_patch_installation.html.erb:35
-#: app/views/patch_updates/_patch_installation.html.erb:35
-#, fuzzy
-msgid "Patch Installation"
-msgstr "স্থাপন"
+#: app/views/repositories/index.html.erb:132
+msgid "Delete"
+msgstr "মোছো"
 
-#: app/views/patch_updates/_patch_installation.html.erb:45
-#: app/views/patch_updates/_patch_installation.html.erb:45
-msgid "Stop"
+#: app/views/repositories/index.html.erb:134
+msgid "Really delete repository '%s'?"
 msgstr ""
 
-#: app/views/patch_updates/_patch_installation.html.erb:45
-#: app/views/patch_updates/_patch_installation.html.erb:45
-msgid "Are you sure?"
+#: app/views/patches/_patch_summary.html.erb:17
+#, fuzzy
+#| msgid "No information about battery and AC status available"
+msgid "No information about patches available"
+msgstr "ব্যাটারি এবং AC অবস্থার বিষয়ে কোনো তথ্য উপলব্ধ নেই।"
+
+#: app/views/patches/_patch_summary.html.erb:24
+msgid "Update needs EULA license confirmation. Please follow to patch module to decide about license."
 msgstr ""
 
-#  Proposal for installation mode
-#: app/views/patch_updates/index.html.erb:36
-#: app/views/patch_updates/index.html.erb:36
+#: app/views/patches/_patch_summary.html.erb:56
 #, fuzzy
-msgid "Updates"
-msgstr "পরিবর্ধন"
+#| msgid "Driver Updates added"
+msgid "Security Updates: %d"
+msgstr "ড্রাইভার আপডেটগুলি যুক্ত করা হয়েছে"
 
-#: app/views/patch_updates/index.html.erb:41
-#: app/views/patch_updates/_patch_summary.html.erb:55
-#: app/views/patch_updates/index.html.erb:41
-#: app/views/patch_updates/_patch_summary.html.erb:55
+#: app/views/patches/_patch_summary.html.erb:66
+msgid "Important Updates: %d"
+msgstr ""
+
+#: app/views/patches/_patch_summary.html.erb:76
+msgid "Optional Updates: %d"
+msgstr ""
+
+#: app/views/patches/_patch_summary.html.erb:84
+#: app/views/patches/index.html.erb:180
 msgid "Your system is up to date."
 msgstr ""
 
-#: app/views/patch_updates/index.html.erb:60
-#: app/views/patch_updates/index.html.erb:60
-msgid "Please wait ..."
-msgstr ""
-
-#: app/views/patch_updates/index.html.erb:64
-#: app/views/patch_updates/index.html.erb:64
+# ইনস্টল
+#: app/views/patches/_patch_summary.html.erb:91
 #, fuzzy
-msgid "Updates available"
-msgstr "scdb উপলব্ধ নয়"
+#| msgid "Install"
+msgid "Install all"
+msgstr "ইনস্টল করো"
 
-#  Proposal for installation mode
-#: app/views/patch_updates/index.html.erb:69
-#: app/views/patch_updates/index.html.erb:69
+#: app/views/patches/_patch_summary.html.erb:100
 #, fuzzy
-msgid "All updates"
-msgstr "পরিবর্ধন"
+#| msgid "Switch information"
+msgid "Loading patch information"
+msgstr "তথ্য পালটান"
 
-#: app/views/patch_updates/index.html.erb:74
-#: app/views/patch_updates/index.html.erb:74
-msgid "Security"
-msgstr ""
-
-#: app/views/patch_updates/index.html.erb:78
-#: app/views/patch_updates/index.html.erb:78
-msgid "Important"
-msgstr ""
-
-#: app/views/patch_updates/index.html.erb:83
-#: app/views/patch_updates/index.html.erb:83
-msgid "Recommended"
-msgstr ""
-
-#: app/views/patch_updates/index.html.erb:88
-#: app/views/patch_updates/index.html.erb:88
-msgid "Optional"
-msgstr ""
-
-#  Proposal for installation mode
-#: app/views/patch_updates/index.html.erb:99
-#: app/views/patch_updates/index.html.erb:99
-msgid "Update"
-msgstr "পরিবর্ধন"
-
-#: app/views/patch_updates/_patch_progress.html.erb:6
-#: app/views/patch_updates/_patch_progress.html.erb:6
-msgid "Refreshing package cache"
-msgstr ""
-
-#: app/views/patch_updates/_patch_progress.html.erb:7
-#: app/views/patch_updates/_patch_progress.html.erb:7
+#: app/views/patches/_patch_summary.html.erb:108
+#: app/views/patches/_patch_installation.html.erb:13
+#: app/views/patches/index.html.erb:56 app/views/patches/index.html.erb:75
+#: app/views/patches/index.html.erb:94 app/views/patches/index.html.erb:113
+#: app/views/patches/index.html.erb:132
 #, fuzzy
-msgid "Starting package manager"
-msgstr "কার্ড পরিচালক শুরু করছে ..."
+#| msgid "Switch information"
+msgid "Error: Cannot get information."
+msgstr "তথ্য পালটান"
 
-#: app/views/patch_updates/_patch_progress.html.erb:8
-#: app/views/patch_updates/_patch_progress.html.erb:8
-msgid "Waiting for the package manager lock"
+#: app/views/patches/_patch_installation.html.erb:22
+#, fuzzy
+#| msgid "An error occurred during the installation."
+msgid "An error occured while installing patches."
+msgstr "ইন্সটল করার সময় একটি ভুল হয়েছে।"
+
+#: app/views/patches/_patch_installation.html.erb:49
+#, fuzzy
+#| msgid "Package Installation"
+msgid "Patch Installation"
+msgstr "প্যাকেজ স্থাপনা"
+
+#: app/views/patches/_patch_installation.html.erb:59
+msgid "Stop"
 msgstr ""
 
-#: app/views/patch_updates/_patch_progress.html.erb:9
-#: app/views/patch_updates/_patch_progress.html.erb:19
-#: app/views/patch_updates/_patch_progress.html.erb:9
-#: app/views/patch_updates/_patch_progress.html.erb:19
-#, fuzzy
-msgid "Evaluating available patches"
-msgstr "প্রাপ্তিসাধ্য স্পেস (শূণ্যস্থান)"
+#: app/views/patches/_patch_installation.html.erb:59
+msgid "Are you sure?"
+msgstr ""
 
-#: app/views/patch_updates/_patch_progress.html.erb:10
-#: app/views/patch_updates/_patch_progress.html.erb:10
-#, fuzzy
-msgid "Finished reading patches"
-msgstr "%s এর জন্যে প্রোফাইল তৈরি করা সমাপ্ত হয়েছে।"
-
-#: app/views/patch_updates/_patches.html.erb:10
-#: app/views/patch_updates/_patches.html.erb:10
+#: app/views/patches/_patches.html.erb:10
 msgid ""
 "One of the patches seems to update WebYaST itself.\n"
 "You may need to reload the page after applying the patch."
 msgstr ""
 
-#: app/views/patch_updates/_patches.html.erb:18
-#: app/views/patch_updates/_patches.html.erb:18
+#: app/views/patches/_patches.html.erb:16
 #, fuzzy
-msgid "Check"
-msgstr "DNS যাচাই"
+#| msgid "scdb not available"
+msgid "No patches available"
+msgstr "scdb উপলব্ধ নয়"
 
-#: app/views/patch_updates/_patches.html.erb:20
-#: app/views/patch_updates/_patches.html.erb:20
+#: app/views/patches/_patches.html.erb:21
 msgid "Kind"
 msgstr ""
 
-#: app/views/patch_updates/_patches.html.erb:22
-#: app/views/patch_updates/_patches.html.erb:22
-msgid "Summary"
-msgstr "সারসংক্ষেপ"
-
 # or 
 # সোর্স
-#: app/views/patch_updates/_patches.html.erb:24
-#: app/views/patch_updates/_patches.html.erb:27
-#: app/views/patch_updates/_patches.html.erb:24
-#: app/views/patch_updates/_patches.html.erb:27
+#: app/views/patches/_patches.html.erb:24
+#: app/views/patches/_patches.html.erb:27
 msgid "Source"
 msgstr "উত্‍স"
 
 # ইনস্টল
-#: app/views/patch_updates/_patches.html.erb:25
-#: app/views/patch_updates/_patches.html.erb:25
+#: app/views/patches/_patches.html.erb:25
 msgid "Install"
 msgstr "ইনস্টল করো"
 
-#: app/views/patch_updates/_patch_summary.html.erb:25
-#: app/views/patch_updates/_patch_summary.html.erb:25
-msgid "Cannot read patch updates - you have been logged out."
+#: app/views/patches/license.html.erb:63
+msgid "Accept"
 msgstr ""
 
-#: app/views/patch_updates/_patch_summary.html.erb:28
-#: app/views/patch_updates/_patch_summary.html.erb:28
-#, fuzzy
-msgid "No information about patches available"
-msgstr "ব্যাটারি এবং AC অবস্থার বিষয়ে কোনো তথ্য উপলব্ধ নেই।"
-
-#: app/views/patch_updates/_patch_summary.html.erb:46
-#: app/views/patch_updates/_patch_summary.html.erb:46
-#, fuzzy
-msgid "Security Updates: %d"
-msgstr "ড্রাইভার আপডেটগুলি যুক্ত করা হয়েছে"
-
-#: app/views/patch_updates/_patch_summary.html.erb:49
-#: app/views/patch_updates/_patch_summary.html.erb:49
-msgid "Important Updates: %d"
-msgstr ""
-
-#: app/views/patch_updates/_patch_summary.html.erb:52
-#: app/views/patch_updates/_patch_summary.html.erb:52
-msgid "Optional Updates: %d"
+#: app/views/patches/license.html.erb:64
+msgid "Reject"
 msgstr ""
 
 #  Proposal for installation mode
-#: app/views/patch_updates/_patch_summary.html.erb:60
-#: app/views/patch_updates/_patch_summary.html.erb:60
+#: app/views/patches/index.html.erb:166 app/views/patches/index.html.erb:226
 #, fuzzy
-msgid "Update All"
+#| msgid "Update"
+msgid "Updates"
 msgstr "পরিবর্ধন"
 
-#: app/views/patch_updates/_patch_summary.html.erb:60
-#: app/views/patch_updates/_patch_summary.html.erb:60
-msgid "Updating all. Are you sure?"
-msgstr ""
-
-#: app/views/patch_updates/_patch_summary.html.erb:67
-#: app/views/patch_updates/_patch_summary.html.erb:67
+#  Proposal for installation mode
+#: app/views/patches/index.html.erb:240
 #, fuzzy
-msgid "Loading patch information"
-msgstr "তথ্য পালটান"
+#| msgid "Update"
+msgid "All updates"
+msgstr "পরিবর্ধন"
 
-#: shortcuts.yml:16
-msgid "See and manage configured software repositories"
+#: app/views/patches/index.html.erb:243
+#, fuzzy
+#| msgid "Severity"
+msgid "Security"
+msgstr "কঠোরতা"
+
+#: app/views/patches/index.html.erb:245
+#, fuzzy
+#| msgid " Important!"
+msgid "Important"
+msgstr "জরুরি!"
+
+#: app/views/patches/index.html.erb:248
+msgid "Recommended"
 msgstr ""
+
+#: app/views/patches/index.html.erb:251
+#, fuzzy
+#| msgid "Options"
+msgid "Optional"
+msgstr "বিকল্পগুলি"
+
+#  Proposal for installation mode
+#: app/views/patches/index.html.erb:269
+msgid "Update"
+msgstr "পরিবর্ধন"
+
+#, fuzzy
+#~| msgid "Auto refresh"
+#~ msgid "Autorefresh"
+#~ msgstr "স্বয়ং রিফ্রেশ"
+
+#, fuzzy
+#~| msgid "Invalid purpose %1."
+#~ msgid "Invalid priority"
+#~ msgstr "অবৈধ উদ্দেশ্য %1."
+
+#, fuzzy
+#~| msgid "Cannot create directory %1: %2."
+#~ msgid "Cannot update repository '%s'"
+#~ msgstr "ডায়রেক্টরি %1: %2 তৈরী করা যাচ্ছে না"
+
+#, fuzzy
+#~| msgid "Unknown error\n"
+#~ msgid "Unknown backend error: %s"
+#~ msgstr "অজানা ভুল\n"
+
+#, fuzzy
+#~| msgid "Cannot create directory %1: %2."
+#~ msgid "Cannot create repository '%s': Unknown error"
+#~ msgstr "ডায়রেক্টরি %1: %2 তৈরী করা যাচ্ছে না"
+
+#, fuzzy
+#~| msgid "Cannot create directory %1: %2."
+#~ msgid "Cannot create repository '%s'"
+#~ msgstr "ডায়রেক্টরি %1: %2 তৈরী করা যাচ্ছে না"
+
+#, fuzzy
+#~| msgid "Unknown error\n"
+#~ msgid "Unknown backend error"
+#~ msgstr "অজানা ভুল\n"
+
+#, fuzzy
+#~| msgid "An error occurred during the installation."
+#~ msgid "A problem occured when loading patch information."
+#~ msgstr "ইন্সটল করার সময় একটি ভুল হয়েছে।"
+
+#, fuzzy
+#~| msgid "Starting card manager..."
+#~ msgid "Starting package manager"
+#~ msgstr "কার্ড পরিচালক শুরু করছে ..."
+
+#, fuzzy
+#~| msgid "Available space"
+#~ msgid "Evaluating available patches"
+#~ msgstr "প্রাপ্তিসাধ্য স্পেস (শূণ্যস্থান)"
+
+#, fuzzy
+#~| msgid "Finished generating profile for %s."
+#~ msgid "Finished reading patches"
+#~ msgstr "%s এর জন্যে প্রোফাইল তৈরি করা সমাপ্ত হয়েছে।"
+
+#, fuzzy
+#~| msgid "scdb not available"
+#~ msgid "Updates available"
+#~ msgstr "scdb উপলব্ধ নয়"
+
+#, fuzzy
+#~| msgid "DNS Check"
+#~ msgid "Check"
+#~ msgstr "DNS যাচাই"
+
+#~ msgid "Summary"
+#~ msgstr "সারসংক্ষেপ"
+
+#  Proposal for installation mode
+#, fuzzy
+#~| msgid "Update"
+#~ msgid "Update All"
+#~ msgstr "পরিবর্ধন"
 
 #, fuzzy
 #~| msgid "Saving all changes."
 #~ msgid "Installing all patches..."
 #~ msgstr "সকল পরিবর্তনগুলি সংরক্ষণ করছে।"
+
+#, fuzzy
+#~| msgid "Installation"
+#~ msgid "Installation stopped"
+#~ msgstr "স্থাপন"
 
 #, fuzzy
 #~| msgid "Installation"
@@ -537,4 +574,9 @@ msgstr ""
 #, fuzzy
 #~| msgid "%s installed ok"
 #~ msgid "%s installed."
+#~ msgstr "%s ইন্সটল ঠিক আছে"
+
+#, fuzzy
+#~| msgid "%s installed ok"
+#~ msgid "Patch has been installed. "
 #~ msgstr "%s ইন্সটল ঠিক আছে"

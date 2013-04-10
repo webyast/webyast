@@ -1,99 +1,256 @@
 # translation of yast_webclient_registration.fi.po to suomi
 # Jyri Palokangas <jyri.palokangas@opensuse.org>, 2009.
+# Jyri Palokangas <jmp@opensuse.org>, 2010.
+# Harri Miettinen <harri.miettinen@opensuse.fi>, 2010.
+# Katariina Kemppainen <katariina@opensuse.fi>, 2010, 2011.
 msgid ""
 msgstr ""
 "Project-Id-Version: yast_webclient_registration.fi\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-11-20 14:35+0100\n"
-"PO-Revision-Date: 2009-11-17 22:29+0200\n"
-"Last-Translator: Jyri Palokangas <jyri.palokangas@opensuse.org>\n"
-"Language-Team: suomi <fi@li.org>\n"
+"POT-Creation-Date: 2012-06-07 15:20+0200\n"
+"PO-Revision-Date: 2011-03-10 18:44+0200\n"
+"Last-Translator: Katariina Kemppainen <katariina@opensuse.fi>\n"
+"Language-Team: Finnish <kde-i18n-doc@kde.org>\n"
+"Language: fi\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: KBabel 1.11.4\n"
+"X-Generator: Lokalize 1.0\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
 
-#: app/controllers/registration_controller.rb:15
-msgid "Invalid session, please login again."
-msgstr "Virheellinen istunto, kirjaudu uudelleen."
+#: app/models/registration_state.rb:27
+msgid "Registration is missing"
+msgstr "Rekisteröintiä ei ole suoritettu"
+
+#: app/models/registration_state.rb:28
+msgid "Please register your system in order to get updates."
+msgstr "Rekisteröi koneesi saadaksesi päivityksiä."
+
+#: app/models/registration_state.rb:30
+msgid "register"
+msgstr "rekisteröidy"
+
+#: app/controllers/registration_controller.rb:29
+msgid "Email"
+msgstr "Sähköposti"
+
+#: app/controllers/registration_controller.rb:30
+msgid "System name"
+msgstr "Järjestelmän nimi"
+
+#: app/controllers/registration_controller.rb:31
+msgid "SLES registration code"
+msgstr "SLES-rekisteröintikoodi"
+
+#: app/controllers/registration_controller.rb:32
+msgid "SLED registration code"
+msgstr "SLED-rekisteröintikoodi"
+
+#: app/controllers/registration_controller.rb:33
+msgid "SLMS registration code"
+msgstr "SLMS-rekisteröintikoodi"
+
+#: app/controllers/registration_controller.rb:34
+msgid "Appliance registration code"
+msgstr "Sovelman rekisteröintikoodi"
+
+#: app/controllers/registration_controller.rb:35
+msgid "WebYaST registration code"
+msgstr "WebYaST-rekisteröintikoodi"
+
+#: app/controllers/registration_controller.rb:36
+msgid "Registration code"
+msgstr "Rekisteröintikoodi"
+
+#: app/controllers/registration_controller.rb:37
+msgid "Hostname"
+msgstr "Konenimi"
+
+#: app/controllers/registration_controller.rb:38
+msgid "Device name"
+msgstr "Laitteen nimi"
 
 #: app/controllers/registration_controller.rb:39
+msgid "Appliance name"
+msgstr "Sovelman nimi"
+
+#: app/controllers/registration_controller.rb:40
+msgid "registration code"
+msgstr "rekisteröintikoodi"
+
+# %s is FTP or HTTP
+#: app/controllers/registration_controller.rb:81
+msgid "Please try to register again later."
+msgstr "Yritä rekisteröityä myöhemmin uudelleen."
+
+#: app/controllers/registration_controller.rb:85
+msgid "Registration did not succeed."
+msgstr "Rekisteröinti ei onnistunut."
+
 #: app/controllers/registration_controller.rb:89
-msgid "No permissions for registration"
-msgstr "Ei oikeuksia rekisteröitymiseen"
+msgid "Registration was skipped."
+msgstr "Rekisteröinti ohitettiin."
 
-#: app/controllers/registration_controller.rb:68
-msgid "Arguments for registration cannot be evaluated."
-msgstr "Rekisteröinnin arvoja ei voida tunnistaa."
+#: app/controllers/registration_controller.rb:93
+msgid "This may be a temporary issue."
+msgstr "Tämä voi olla väliaikainen ongelma."
 
-#: app/controllers/registration_controller.rb:69
-#, fuzzy
-#| msgid "An error occurred during the installation."
-msgid "An error occurred during registration. Please try again."
-msgstr "Tapahtui virhe asennuksen aikana."
+#: app/controllers/registration_controller.rb:97
+msgid "The system might not receive necessary updates."
+msgstr "Järjestelmä ei ehkä saa tarvittavia päivityksiä."
 
-#: app/controllers/registration_controller.rb:111
-msgid "Registration finished successfully."
-msgstr "Rekisteröinti suoritettiin onnistuneesti."
+#: app/controllers/registration_controller.rb:113
+msgid "The registration server returned invalid or incomplete data."
+msgstr "Rekisteröintipalvelin palautti virheellistä tai keskeneräistä dataa."
 
-#: app/controllers/registration_controller.rb:119
-#, fuzzy
-#| msgid "Service pack"
-msgid "Service added:"
-msgstr "Palvelupaketti"
+#: app/controllers/registration_controller.rb:121
+msgid "Could not read the registration configuration."
+msgstr "Rekisteröinnin määritystä ei voi lukea."
 
-# TODO Better translation?
-#: app/controllers/registration_controller.rb:123
-#: app/controllers/registration_controller.rb:128
-#, fuzzy
-#| msgid "Catalog Installer"
-msgid "Catalog enabled:"
-msgstr "Ohjelmistokatalogien asennin"
+#: app/controllers/registration_controller.rb:121
+msgid "The registration backend is not installed correctly"
+msgstr "Rekisteröinnin taustaosaa ei ole asennettu kunnolla"
 
-#: app/controllers/registration_controller.rb:143
-#, fuzzy
-#| msgid "Repository name:"
-msgid "Repository added:"
-msgstr "Asennuslähteen nimi:"
+#: app/controllers/registration_controller.rb:122
+msgid "Please refer to your support contact."
+msgstr "Viittaa tukiyhteystietoihisi."
 
-#: app/controllers/registration_controller.rb:173
+#: app/controllers/registration_controller.rb:151
 msgid "Please fill out missing entries."
 msgstr "Täytä puuttuvat kohdat."
 
-#: app/controllers/registration_controller.rb:176
-msgid "Error occured while connecting to registration server."
-msgstr "Tapahtui virhe yhdistettäessä rekisteröintipalvelimeen."
+#: app/controllers/registration_controller.rb:183
+msgid "Service added:"
+msgstr "Palvelu lisättiin:"
 
-#: app/views/registration/index.rhtml:1
-msgid "register plugin"
-msgstr "rekisteröinti-liitännäinen"
+# TODO Better translation?
+#: app/controllers/registration_controller.rb:189
+msgid "Catalog enabled:"
+msgstr "Ohjelmistokatalogi otettiin käyttöön:"
 
-#: app/views/registration/index.rhtml:1
+#: app/controllers/registration_controller.rb:215
+msgid "Repository added:"
+msgstr "Lisättiin asennuslähde:"
+
+#: app/controllers/registration_controller.rb:357
+msgid "This system is already registered."
+msgstr "Tämä järjestelmä on jo rekisteröity."
+
+#: app/controllers/registration_controller.rb:382
+msgid "Registration finished successfully."
+msgstr "Rekisteröinti suoritettiin onnistuneesti."
+
+#: app/controllers/registration_controller.rb:396
+msgid "A connection to the registration server could not be established."
+msgstr "Yhteyttä rekisteröintipalvelimeen ei voitu vakiinnuttaa."
+
+#: app/controllers/registration_controller.rb:400
+msgid "The supplied registration data was invalid."
+msgstr "Toimitettu rekisteröintidata oli virheellistä"
+
+#: app/controllers/registration_controller.rb:404
+msgid "The registration code you entered was invalid."
+msgstr "Antamasi rekisteröintikoodi oli virheellinen."
+
+#: app/controllers/registration_controller.rb:410
+msgid "The transmitted registration data created a conflict."
+msgstr "Lähetetty rekisteröintidata aiheutti ristiriidan."
+
+#: app/controllers/registration_controller.rb:418
+msgid "Registration can not be performed. There is no product installed that can be registered."
+msgstr "Rekisteröintiä ei voitu suorittaa. Mitään rekisteröitävää tuotetta ei ole asennettu."
+
+#: app/controllers/registration_controller.rb:442
+msgid "<p><b>Repositories were not modified during the registration process.</b></p><p>It is likely that an incorrect registration code was used. If this is the case, please attempt the registration process again to get an update repository.</p><p>Please make sure that this system has an update repository configured, otherwise it will not receive updates.</p>"
+msgstr "<p><b>Asennuslähteitä ei muokattu rekisteröintitapahtuman aikana.</b></p><p>On mahdollista, että käytettiin toimimatonta rekisteröintikoodia. Tällaisessa tapauksessa, yritä suorittaa rekisteröinti uudestaan saadaksesi päivitysasennuslähde käyttöön..</p><p>Varmista, että tämän järjestelmän päivitysasennuslähde on määritetty, muuten kone ei saa päivityksiä.</p>"
+
+#: app/controllers/registration_controller.rb:454
+msgid "The registration server returned invalid data."
+msgstr "Rekisteröintipalvelin palautti virheellistä dataa."
+
+#: app/views/registration/index.html.erb:42
+#: app/views/registration/index.html.erb:57
+msgid "Please wait"
+msgstr "Odota hetki..."
+
+#: app/views/registration/index.html.erb:64
+#: app/views/registration/index.html.erb:65
+msgid "Please enter a valid Email address."
+msgstr "Anna toimiva sähköpostiosoite."
+
+#: app/views/registration/index.html.erb:80
 msgid "Registration"
 msgstr "Rekisteröinti"
 
-#: app/views/registration/index.rhtml:9
-#, fuzzy
-#| msgid "A system restart is required"
+#: app/views/registration/index.html.erb:93
+msgid "Registration Information"
+msgstr "Rekisteröintitietoja"
+
+#: app/views/registration/index.html.erb:99
 msgid "This system is registered"
-msgstr "Järjestelmä on käynnistettävä uudelleen"
+msgstr "Tämä järjestelmä on rekisteröity"
 
-#: app/views/registration/index.rhtml:10
-#, fuzzy
-#| msgid "System:"
-msgid "System's GUID:"
-msgstr "Järjestelmä:"
+#: app/views/registration/index.html.erb:102
+msgid "System number (GUID)"
+msgstr "Järjestelmänumero (GUID)"
 
-#: app/views/registration/index.rhtml:11
-#, fuzzy
-#| msgid "Registration"
+#: app/views/registration/index.html.erb:105
 msgid "Register again"
-msgstr "Rekisteröinti"
+msgstr "Rekisteröidy uudestaan"
 
-#: app/views/registration/index.rhtml:39
-msgid "Detail"
+#: app/views/registration/index.html.erb:118
+msgid "Next"
+msgstr "Seuraava"
+
+#: app/views/registration/index.html.erb:131
+msgid "Mandatory Information"
+msgstr "Pakollisia tietoja"
+
+#: app/views/registration/index.html.erb:151
+msgid "Details"
 msgstr "Tiedot"
+
+#: app/views/registration/index.html.erb:179
+msgid "Postpone"
+msgstr "Siirrä"
+
+#~ msgid "Invalid session, please login again."
+#~ msgstr "Virheellinen istunto, kirjaudu uudelleen."
+
+#~ msgid "No permissions for registration"
+#~ msgstr "Ei oikeuksia rekisteröitymiseen"
+
+#~ msgid "A connection to the registration server could not be established or it did not reply."
+#~ msgstr "Yhteyttä rekisteröintipalvelimeen ei voitu muodostaa tai se ei vastaa."
+
+#~ msgid "register plugin"
+#~ msgstr "rekisteröintiliitännäinen"
+
+#~ msgid "System Registration"
+#~ msgstr "Järjestelmän rekisteröinti"
+
+#~ msgid "Registration did not finish."
+#~ msgstr "Rekisteröintiä ei suoritettu loppuun."
+
+#~ msgid "Skip"
+#~ msgstr "Ohita"
+
+#~ msgid "or"
+#~ msgstr "tai"
+
+#~ msgid "Arguments for registration cannot be evaluated."
+#~ msgstr "Rekisteröinnin arvoja ei voida tunnistaa."
+
+#, fuzzy
+#~| msgid "An error occurred during the installation."
+#~ msgid "An error occurred during registration. Please try again."
+#~ msgstr "Tapahtui virhe asennuksen aikana."
+
+#~ msgid "Error occured while connecting to registration server."
+#~ msgstr "Tapahtui virhe yhdistettäessä rekisteröintipalvelimeen."
+
+#~ msgid "Detail"
+#~ msgstr "Tiedot"
 
 #~ msgid "This table gives registration settings."
 #~ msgstr "Tämä taulu näyttää rekisteröinti asetukset."

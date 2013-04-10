@@ -1,31 +1,40 @@
-# Copyright (C) 2006 SuSE Linux Products GmbH, Nuernberg
-# This file is distributed under the same license as the package.
+# @TITLE@
+# Copyright (C) 2006, SUSE Linux GmbH, Nuremberg
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+# This file is distributed under the same license as @PACKAGE@ package. FIRST
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: yast_webclient_system\n"
-"POT-Creation-Date: 2009-11-20 14:34+0100\n"
-"PO-Revision-Date: 2010-02-02 11:19\n"
-"Last-Translator: Novell Language <language@novell.com>\n"
-"Language-Team: Novell Language <language@novell.com>\n"
+"Project-Id-Version: @PACKAGE@\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2012-06-07 15:20+0200\n"
+"PO-Revision-Date: 2005-09-18 19:09+0200\n"
+"Last-Translator: Mattias Newzella <newzella@linux.se>\n"
+"Language-Team: Swedish <sv@li.org>\n"
+"Language: sv\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"X-Generator: KBabel 1.10.1\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: app/controllers/system_controller.rb:16
+#: app/controllers/system_controller.rb:77
+#, fuzzy
+#| msgid "Creating the Virtual Machine"
 msgid "Rebooting the machine..."
-msgstr "Startar om maskinen..."
+msgstr "Den virtuella maskinen skapas"
 
-#: app/controllers/system_controller.rb:20 app/controllers/system_controller.rb:23
+#: app/controllers/system_controller.rb:81
+#, fuzzy
+#| msgid "Cannot create the file."
 msgid "Cannot reboot the machine!"
-msgstr "Det går inte att starta om maskinen."
+msgstr "Det gick inte att skapa filen."
 
-#: app/controllers/system_controller.rb:36
+#: app/controllers/system_controller.rb:94
 msgid "Shuting down the machine..."
-msgstr "Stänger av maskinen..."
+msgstr ""
 
-#: app/controllers/system_controller.rb:40 app/controllers/system_controller.rb:43
+#: app/controllers/system_controller.rb:98
 msgid "Cannot shutdown the machine!"
-msgstr "Det går inte att stänga av maskinen."
-
+msgstr ""

@@ -1,544 +1,534 @@
 # @TITLE@
 # Copyright (C) 2006, SUSE Linux GmbH, Nuremberg
-# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 #
 # This file is distributed under the same license as @PACKAGE@ package. FIRST
 #
+# Mindaugas Baranauskas <opensuse.lietuviu.kalba@gmail.com>, 2010, 2011, 2012.
+# Mantas Kondrotas <dalelemanes@gmail.com>, 2010.
 msgid ""
 msgstr ""
-"Project-Id-Version: webyast-software-ui 1.0.0\n"
+"Project-Id-Version: @PACKAGE@\n"
 "Report-Msgid-Bugs-To: translation@suse.de\n"
-"POT-Creation-Date: 2010-08-02 09:19+0200\n"
-"PO-Revision-Date: 2001-10-18 09:54+0200\n"
-"Last-Translator: Jonas Gocentas <jonasgocentas@florida.usa.com>\n"
-"Language-Team: Lithuanian <i18n@suse.de>\n"
+"POT-Creation-Date: 2012-06-07 15:20+0200\n"
+"PO-Revision-Date: 2012-07-31 18:13+0300\n"
+"Last-Translator: Mindaugas Baranauskas <opensuse.lietuviu.kalba@gmail.com>\n"
+"Language-Team: Lithuanian <komp_lt@konferencijos.lt>\n"
+"Language: lt\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=3; plural=n%10==1 && n%100!=11 ? 0 : n%10>=2 && (n%"
-"100<10 || n%100>=20) ? 1 : 2;\n"
+"Plural-Forms: nplurals=4; plural=(n%10==1 ? 0 : n%10==1 && n%100!=11 ? 1 : n%10>=2 && (n%100<10 || n%100>=20) ? 2 : 3);\n"
+"X-Generator: Lokalize 1.4\n"
 
-#: app/helpers/repositories_helper.rb:25 app/helpers/repositories_helper.rb:25
+#: app/models/patch.rb:150
+msgid "Please reboot your system."
+msgstr "Iš naujo paleiskite sistemą."
+
+#: app/models/patches_state.rb:30
+msgid "EULA accept required"
+msgstr "Reikia sutikti su licenzija"
+
+#: app/models/patches_state.rb:31
+msgid "Package require accept specific EULA before its installation. Please follow the link."
+msgstr "Prieš diegiant paketą reikia sutikti su licenzijos sutartimi. "
+
+#: app/models/patches_state.rb:34
+msgid "decide"
+msgstr "spręsti"
+
+#: app/models/patches_state.rb:43
+msgid "Patch installation messages not confirmed"
+msgstr "Pataisų diegimo pranešimai nepatvirtinti"
+
+#: app/models/patches_state.rb:47
+msgid "OK"
+msgstr "Gerai"
+
+#: app/helpers/repositories_helper.rb:25
 msgid "Highest"
-msgstr ""
+msgstr "Didžiausias"
 
-#: app/helpers/repositories_helper.rb:26 app/helpers/repositories_helper.rb:26
+#: app/helpers/repositories_helper.rb:26
 msgid "Higher"
-msgstr ""
+msgstr "Didelis"
 
-#: app/helpers/repositories_helper.rb:27 app/helpers/repositories_helper.rb:27
+#: app/helpers/repositories_helper.rb:27
 msgid "Default"
 msgstr "Numatytas"
 
-#: app/helpers/repositories_helper.rb:28 app/helpers/repositories_helper.rb:28
+#: app/helpers/repositories_helper.rb:28
 msgid "Low"
-msgstr "Žema"
+msgstr "Žemas"
 
-#: app/helpers/repositories_helper.rb:29 app/helpers/repositories_helper.rb:29
+#: app/helpers/repositories_helper.rb:29
 msgid "Lowest"
-msgstr ""
+msgstr "Žemiausias"
 
-#: app/helpers/repositories_helper.rb:35 app/helpers/repositories_helper.rb:35
+#: app/helpers/repositories_helper.rb:35
 msgid "Highest priority"
-msgstr ""
+msgstr "Didžiausias prioritetas"
 
-#: app/helpers/repositories_helper.rb:36 app/helpers/repositories_helper.rb:36
+#: app/helpers/repositories_helper.rb:36
 msgid "Higher priority"
-msgstr ""
+msgstr "Didelis prioritetas"
 
-#: app/helpers/repositories_helper.rb:38 app/helpers/repositories_helper.rb:38
+#: app/helpers/repositories_helper.rb:38
 msgid "Low priority"
-msgstr ""
+msgstr "Žemas prioritetas"
 
-#: app/helpers/repositories_helper.rb:39 app/helpers/repositories_helper.rb:39
+#: app/helpers/repositories_helper.rb:39
 msgid "Lowest priority"
-msgstr ""
+msgstr "Žemiausias prioritetas"
 
-#: app/helpers/repositories_helper.rb:44 app/helpers/repositories_helper.rb:44
+#: app/helpers/repositories_helper.rb:44
 msgid "Custom priority"
-msgstr ""
+msgstr "Savitas prioritetas"
 
-#: app/helpers/repositories_helper.rb:49 app/helpers/repositories_helper.rb:49
+#: app/helpers/repositories_helper.rb:49
 msgid "Custom"
-msgstr ""
+msgstr "Savitas"
 
 #: app/helpers/repositories_helper.rb:61
-#: app/views/repositories/index.html.erb:143
-#: app/views/repositories/add.html.erb:85
-#: app/helpers/repositories_helper.rb:61
-#: app/views/repositories/index.html.erb:143
-#: app/views/repositories/add.html.erb:85
-#, fuzzy
+#: app/views/repositories/new.html.erb:67
+#: app/views/repositories/index.html.erb:264
 msgid "enable"
-msgstr "įgalinta"
+msgstr "įgalinti"
 
 #: app/helpers/repositories_helper.rb:61
-#: app/views/repositories/index.html.erb:148
-#: app/views/repositories/add.html.erb:92
-#: app/helpers/repositories_helper.rb:61
-#: app/views/repositories/index.html.erb:148
-#: app/views/repositories/add.html.erb:92
-#, fuzzy
+#: app/views/repositories/new.html.erb:74
+#: app/views/repositories/index.html.erb:267
 msgid "disable"
-msgstr "Uždrausti"
+msgstr "uždrausti"
 
-#: app/helpers/repositories_helper.rb:66 app/helpers/repositories_helper.rb:66
+#: app/helpers/repositories_helper.rb:66
 msgid "enabled"
 msgstr "įgalinta"
 
-#: app/helpers/repositories_helper.rb:66 app/helpers/repositories_helper.rb:66
-#, fuzzy
+#: app/helpers/repositories_helper.rb:66
 msgid "disabled"
-msgstr "Uždrausta"
+msgstr "uždrausta"
 
-#: app/controllers/repositories_controller.rb:35
-#: app/controllers/repositories_controller.rb:35
-msgid "Alias"
-msgstr "Pseudonimas"
+#: app/helpers/repositories_helper.rb:83
+msgid "Repository is currently %senabled%s."
+msgstr "Saugykla yra %sįgalinta%s"
 
-#: app/controllers/repositories_controller.rb:36
-#: app/views/repositories/index.html.erb:199
-#: app/controllers/repositories_controller.rb:36
-#: app/views/repositories/index.html.erb:199
-msgid "Enabled"
-msgstr "Įgalinta"
+#: app/helpers/repositories_helper.rb:85
+msgid "Repository is currently %sdisabled%s."
+msgstr "Saugykla yra %suždrausta%s"
 
-#: app/controllers/repositories_controller.rb:37
-#: app/controllers/repositories_controller.rb:37
-#, fuzzy
-msgid "Autorefresh"
-msgstr "Atnaujinti"
+#: app/helpers/repositories_helper.rb:90
+msgid "Autorefresh is currently %senabled%s."
+msgstr "Savaiminis atnaujinimas yra %sįgalintas%s"
 
-#: app/controllers/repositories_controller.rb:38
-#: app/views/patch_updates/_patches.html.erb:21
-#: app/controllers/repositories_controller.rb:38
-#: app/views/patch_updates/_patches.html.erb:21
-msgid "Name"
-msgstr "Pavadinimas"
+#: app/helpers/repositories_helper.rb:92
+msgid "Autorefresh is currently %sdisabled %s."
+msgstr "Savaiminis atnaujinimas yra %suždraustas%s"
 
-#: app/controllers/repositories_controller.rb:39
-#: app/controllers/repositories_controller.rb:39
-msgid "URL"
-msgstr ""
+#: app/helpers/repositories_helper.rb:97
+msgid "Keeping downloaded packages is currently %senabled%s."
+msgstr "Atsisiųstų paketai išlaikymas yra %sįgalintas%s."
 
-#: app/controllers/repositories_controller.rb:40
-#: app/controllers/repositories_controller.rb:40
-msgid "Priority"
-msgstr ""
+#: app/helpers/repositories_helper.rb:99
+msgid "Keeping downloaded packages is currently %sdisabled%s."
+msgstr "Atsisiųstų paketai išlaikymas yra %suždraustas%s."
 
-#: app/controllers/repositories_controller.rb:41
-#: app/controllers/repositories_controller.rb:41
-#, fuzzy
-msgid "Keep downloaded packages"
-msgstr "Branduolio vystymo paketai"
+#: app/helpers/repositories_helper.rb:103
+msgid "Repository will be enabled."
+msgstr "Saugykla bus įgalinta."
 
-#: app/controllers/repositories_controller.rb:51
-#: app/controllers/repositories_controller.rb:51
-#, fuzzy
+#: app/helpers/repositories_helper.rb:103
+msgid "Repository will be disabled."
+msgstr "Saugykla bus uždrausta."
+
+#: app/helpers/repositories_helper.rb:107
+msgid "Autorefresh will be enabled."
+msgstr "Savaiminis atnaujinimas bus įgalintas."
+
+#: app/helpers/repositories_helper.rb:107
+msgid "Autorefresh will be disabled."
+msgstr "Savaiminis atnaujinimas bus uždraustas."
+
+#: app/helpers/repositories_helper.rb:111
+msgid "Keep packages option will be enabled."
+msgstr "Paketų išlaikymo parinktis bus įgalinta."
+
+#: app/helpers/repositories_helper.rb:111
+msgid "Keep packages option will be disabled."
+msgstr "Paketų išlaikymo parinktis bus uždrausta."
+
+#: app/controllers/patches_controller.rb:101
+msgid "There are patch installation messages available"
+msgstr "Yra pataisų diegimo pranešimų"
+
+#: app/controllers/patches_controller.rb:119
+msgid "Cannot obtain patches, installation in progress. Remain %d packages."
+msgstr "Nepavyksta gauti pataisų, nes diegiama. Liko paketų: %d."
+
+#: app/controllers/patches_controller.rb:129
+#: app/controllers/patches_controller.rb:182
+msgid "Cannot read patch updates: GPG key for repository <em>%s</em> is not trusted."
+msgstr "Nepavyksta nuskaityti atnaujinimo pataisų: GPG saugyklos raktas <em>%s</em> yra nepatikimas."
+
+#: app/controllers/patches_controller.rb:170
+msgid "Cannot obtain patches, installation in progress. Remain %d patches."
+msgstr "Nepavyksta gauti pataisų, nes diegiama. Liko pataisų: %d."
+
+#: app/controllers/repositories_controller.rb:50
 msgid "Cannot read repository list."
-msgstr "Nepavyksta sukurti aplanko %1: %2."
+msgstr "Nepavyksta nuskaityti saugyklų sąrašo."
 
-#: app/controllers/repositories_controller.rb:68
-#: app/controllers/repositories_controller.rb:95
-#: app/controllers/repositories_controller.rb:68
-#: app/controllers/repositories_controller.rb:95
-msgid "Missing repository parameter"
-msgstr ""
+#: app/controllers/repositories_controller.rb:117
+#: app/controllers/repositories_controller.rb:126
+msgid "Cannot update repository '%s': missing parameters."
+msgstr "Nepavyksta atnaujinti saugyklos „%s“: trūksta parametrų."
 
-#: app/controllers/repositories_controller.rb:123
-#: app/controllers/repositories_controller.rb:204
-#: app/controllers/repositories_controller.rb:123
-#: app/controllers/repositories_controller.rb:204
-#, fuzzy
-msgid "Invalid priority"
-msgstr "Netinkamas slaptažodis."
+#: app/controllers/repositories_controller.rb:134
+msgid "Repository '%s' has been updated."
+msgstr "Saugykla „%s“ atnaujinta."
 
-#: app/controllers/repositories_controller.rb:192
-#: app/controllers/repositories_controller.rb:192
-msgid "Missing repository parameters"
-msgstr ""
+#: app/controllers/repositories_controller.rb:172
+msgid "Repository '%s' was not found."
+msgstr "Saugykla „%s“ nerasta."
 
-#: app/controllers/repositories_controller.rb:230
-#: app/controllers/repositories_controller.rb:230
-#, fuzzy
-msgid "Unknown backend error"
-msgstr "Nežinomas klaida\n"
+#: app/controllers/repositories_controller.rb:189
+#: app/controllers/repositories_controller.rb:196
+msgid "Cannot remove repository '%s'"
+msgstr "Nepavyksta pašalinti saugyklos „%s“."
 
-#: app/controllers/patch_updates_controller.rb:42
-#: app/controllers/patch_updates_controller.rb:42
-msgid "<p>Please reboot your system after all patches have been installed.</p>"
-msgstr ""
+#: app/controllers/repositories_controller.rb:203
+msgid "Repository '%s' has been deleted."
+msgstr "Saugykla „%s“ pašalinta."
 
-#: app/controllers/patch_updates_controller.rb:44
-#: app/controllers/patch_updates_controller.rb:44
-msgid ""
-"<p>Please logout and login again after all patches have been installed.</p>"
-msgstr ""
-
-#: app/controllers/patch_updates_controller.rb:64
-#: app/views/patch_updates/_patch_summary.html.erb:30
-#: app/controllers/patch_updates_controller.rb:64
-#: app/views/patch_updates/_patch_summary.html.erb:30
-msgid ""
-"Cannot read patch updates: GPG key for repository %s is not trusted."
-msgstr ""
-
-#: app/controllers/patch_updates_controller.rb:97
-#: app/controllers/patch_updates_controller.rb:100
-#: app/views/patch_updates/_patch_progress.html.erb:2
-#: app/controllers/patch_updates_controller.rb:97
-#: app/controllers/patch_updates_controller.rb:100
-#: app/views/patch_updates/_patch_progress.html.erb:2
-msgid "A problem occured when loading patch information."
-msgstr ""
-
-#: app/views/repositories/index.html.erb:43
-#: app/views/repositories/add.html.erb:56
-#: app/views/repositories/index.html.erb:43
-#: app/views/repositories/add.html.erb:56
+#: app/views/repositories/new.html.erb:32
+#: app/views/repositories/index.html.erb:167
 msgid "Enter a valid repository URL."
-msgstr ""
+msgstr "Įveskite galiojantį saugyklos URL."
 
-#: app/views/repositories/index.html.erb:51
-#: app/views/repositories/add.html.erb:64
-#: app/views/repositories/index.html.erb:51
-#: app/views/repositories/add.html.erb:64
+#: app/views/repositories/new.html.erb:40
+#: app/views/repositories/index.html.erb:175
 msgid "Symbols <b>%s</b> are not allowed in repository alias."
-msgstr ""
+msgstr "Saugyklos alternatyviame varde simboliai <b>%s</b> nėra leistini."
 
-#: app/views/repositories/index.html.erb:55
-#: app/views/repositories/add.html.erb:74
-#: app/views/repositories/index.html.erb:55
-#: app/views/repositories/add.html.erb:74
-#, fuzzy
+#: app/views/repositories/new.html.erb:47
+#: app/views/repositories/index.html.erb:78
+#: app/views/repositories/index.html.erb:222
+#: app/views/repositories/index.html.erb:240
+#: app/views/patches/license.html.erb:32 app/views/patches/license.html.erb:41
+#: app/views/patches/index.html.erb:37 app/views/patches/index.html.erb:141
+#: app/views/patches/index.html.erb:150
+msgid "Please wait"
+msgstr "Palaukite"
+
+#: app/views/repositories/new.html.erb:56
+#: app/views/repositories/index.html.erb:179
 msgid "This value cannot be empty."
-msgstr "idpamp įrašo pavadinimas negali bxti tuščias."
+msgstr "Ši reikšmė negali būti tuščia."
 
-#: app/views/repositories/index.html.erb:164
-#: app/views/repositories/add.html.erb:148
-#: app/views/repositories/index.html.erb:164
-#: app/views/repositories/add.html.erb:148 shortcuts.yml:15
-#, fuzzy
-msgid "Software Repositories"
-msgstr "Programinės įrangos atnaujinimas"
-
-#: app/views/repositories/index.html.erb:169
-#: app/views/repositories/index.html.erb:169
-msgid "Configured software repositories"
-msgstr ""
-
-#: app/views/repositories/index.html.erb:180
-#: app/views/repositories/index.html.erb:180
-#, fuzzy
-msgid "Quick Search"
-msgstr "Paieška:"
-
-#: app/views/repositories/index.html.erb:188
-#: app/views/repositories/index.html.erb:188
-msgid "Add New Repository"
-msgstr ""
-
-#: app/views/repositories/index.html.erb:194
-#: app/views/repositories/index.html.erb:194
-msgid "Filter repositories"
-msgstr ""
-
-#: app/views/repositories/index.html.erb:198
-#: app/views/repositories/index.html.erb:198
-msgid "All"
-msgstr ""
-
-#: app/views/repositories/index.html.erb:200
-#: app/views/repositories/index.html.erb:200
-msgid "Disabled"
-msgstr "Uždrausta"
-
-#: app/views/repositories/index.html.erb:245
-#: app/views/repositories/index.html.erb:245
-msgid "Repository is currently"
-msgstr ""
-
-#: app/views/repositories/index.html.erb:248
-#: app/views/repositories/add.html.erb:171
-#: app/views/repositories/add.html.erb:172
-#: app/views/repositories/index.html.erb:248
-#: app/views/repositories/add.html.erb:171
-#: app/views/repositories/add.html.erb:172
-msgid "Repository will be %s."
-msgstr ""
-
-#: app/views/repositories/index.html.erb:252
-#: app/views/repositories/index.html.erb:252
-msgid "Autorefresh is currently"
-msgstr ""
-
-#: app/views/repositories/index.html.erb:255
-#: app/views/repositories/add.html.erb:176
-#: app/views/repositories/add.html.erb:177
-#: app/views/repositories/index.html.erb:255
-#: app/views/repositories/add.html.erb:176
-#: app/views/repositories/add.html.erb:177
-msgid "Autorefresh will be %s."
-msgstr ""
-
-#: app/views/repositories/index.html.erb:259
-#: app/views/repositories/index.html.erb:259
-msgid "Keeping downloaded packages is currently"
-msgstr ""
-
-#: app/views/repositories/index.html.erb:262
-#: app/views/repositories/add.html.erb:181
-#: app/views/repositories/add.html.erb:182
-#: app/views/repositories/index.html.erb:262
-#: app/views/repositories/add.html.erb:181
-#: app/views/repositories/add.html.erb:182
-msgid "Keep packages option will be %s."
-msgstr ""
-
-#: app/views/repositories/index.html.erb:269
-#: app/views/repositories/add.html.erb:190
-#: app/views/repositories/index.html.erb:269
-#: app/views/repositories/add.html.erb:190
-msgid "Save"
-msgstr "Išsaugoti"
-
-#: app/views/repositories/index.html.erb:270
-#: app/views/repositories/index.html.erb:270
-msgid "Delete"
-msgstr "Trinti"
-
-#: app/views/repositories/index.html.erb:272
-#: app/views/repositories/index.html.erb:272
-msgid "Really delete repository '%s'?"
-msgstr ""
-
-#: app/views/repositories/add.html.erb:120
-#: app/views/repositories/add.html.erb:120
+#: app/views/repositories/new.html.erb:102
 msgid ""
 "A repository with this URL already exists.\n"
 "Create a duplicate?"
 msgstr ""
+"Saugykla su tokiu URL jau yra.\n"
+"Ar kurti atsarginę kopiją?"
 
-#: app/views/repositories/add.html.erb:150
-#: app/views/repositories/add.html.erb:150
+#: app/views/repositories/new.html.erb:136
+#: app/views/repositories/index.html.erb:30
+msgid "Software Repositories"
+msgstr "Programinės įrangos saugyklos"
+
+#: app/views/repositories/new.html.erb:138
+#: app/views/repositories/new.html.erb:152
 msgid "Add a new repository"
-msgstr ""
+msgstr "Pridėti naują saugyklą"
 
-#: app/views/repositories/add.html.erb:159
-#: app/views/repositories/add.html.erb:159
-#, fuzzy
+#: app/views/repositories/new.html.erb:158
+msgid "Alias"
+msgstr "Alternatyvusis vardas"
+
+#: app/views/repositories/new.html.erb:162
+#: app/views/patches/_patches.html.erb:22
+msgid "Name"
+msgstr "Pavadinimas"
+
+#: app/views/repositories/new.html.erb:166
+msgid "URL"
+msgstr "URL"
+
+#: app/views/repositories/new.html.erb:174
+msgid "Repository will be %s."
+msgstr "Saugykla bus %s."
+
+#: app/views/repositories/new.html.erb:179
+msgid "Autorefresh will be %s."
+msgstr "Atnaujinimas bus %s."
+
+#: app/views/repositories/new.html.erb:184
+msgid "Keep packages option will be %s."
+msgstr "Paketų išlaikymo parinktis bus %s."
+
+#: app/views/repositories/index.html.erb:44
+msgid "Quick Search"
+msgstr "Sparčioji paieška"
+
+#: app/views/repositories/index.html.erb:49
+msgid "Filter repositories"
+msgstr "Filtruoti saugyklas"
+
+#: app/views/repositories/index.html.erb:52
+msgid "All"
+msgstr "Visos"
+
+#: app/views/repositories/index.html.erb:52
+msgid "Enabled"
+msgstr "Įgalinta"
+
+#: app/views/repositories/index.html.erb:52
+msgid "Disabled"
+msgstr "Uždraustos"
+
+#: app/views/repositories/index.html.erb:56
 msgid "New Repository"
-msgstr "Nauja versija"
+msgstr "Nauja saugykla"
 
-#: app/views/patch_updates/_patch_installation.html.erb:8
-#: app/views/patch_updates/_patch_installation.html.erb:8
-msgid "An error occured while installing patches."
-msgstr ""
+#: app/views/repositories/index.html.erb:131
+msgid "Save"
+msgstr "Įrašyti"
 
-#: app/views/patch_updates/_patch_installation.html.erb:35
-#: app/views/patch_updates/_patch_installation.html.erb:35
-#, fuzzy
-msgid "Patch Installation"
-msgstr "Diegimo šaltinis"
+#: app/views/repositories/index.html.erb:132
+msgid "Delete"
+msgstr "Šalinti"
 
-#: app/views/patch_updates/_patch_installation.html.erb:45
-#: app/views/patch_updates/_patch_installation.html.erb:45
-msgid "Stop"
-msgstr ""
+#: app/views/repositories/index.html.erb:134
+msgid "Really delete repository '%s'?"
+msgstr "Ar tikrai pašalinti saugyklą „%s“?"
 
-#: app/views/patch_updates/_patch_installation.html.erb:45
-#: app/views/patch_updates/_patch_installation.html.erb:45
-msgid "Are you sure?"
-msgstr ""
+#: app/views/patches/_patch_summary.html.erb:17
+msgid "No information about patches available"
+msgstr "Nėra informacijos apie prieinamas pataisas"
 
-#: app/views/patch_updates/index.html.erb:36
-#: app/views/patch_updates/index.html.erb:36
-#, fuzzy
-msgid "Updates"
-msgstr "Atnaujinta"
+#: app/views/patches/_patch_summary.html.erb:24
+msgid "Update needs EULA license confirmation. Please follow to patch module to decide about license."
+msgstr "Atnaujinant reikia sutikti su licenzija. "
 
-#: app/views/patch_updates/index.html.erb:41
-#: app/views/patch_updates/_patch_summary.html.erb:55
-#: app/views/patch_updates/index.html.erb:41
-#: app/views/patch_updates/_patch_summary.html.erb:55
-#, fuzzy
+#: app/views/patches/_patch_summary.html.erb:56
+msgid "Security Updates: %d"
+msgstr "Saugumo atnaujinimų: %d"
+
+#: app/views/patches/_patch_summary.html.erb:66
+msgid "Important Updates: %d"
+msgstr "Svarbių atnaujinimų: %d"
+
+#: app/views/patches/_patch_summary.html.erb:76
+msgid "Optional Updates: %d"
+msgstr "Pasirinktinų atnaujinimų: %d"
+
+#: app/views/patches/_patch_summary.html.erb:84
+#: app/views/patches/index.html.erb:180
 msgid "Your system is up to date."
-msgstr "Turėkite visuomet saugią ir atnaujintą sistemą"
+msgstr "Jūsų sistema atnaujinta."
 
-#: app/views/patch_updates/index.html.erb:60
-#: app/views/patch_updates/index.html.erb:60
-msgid "Please wait ..."
-msgstr ""
+#: app/views/patches/_patch_summary.html.erb:91
+msgid "Install all"
+msgstr "Viską įdiegti"
 
-#: app/views/patch_updates/index.html.erb:64
-#: app/views/patch_updates/index.html.erb:64
-#, fuzzy
-msgid "Updates available"
-msgstr "Nėra prieinamų atnaujinimų"
+#: app/views/patches/_patch_summary.html.erb:100
+msgid "Loading patch information"
+msgstr "Įkeliama pataisos informacija"
 
-#: app/views/patch_updates/index.html.erb:69
-#: app/views/patch_updates/index.html.erb:69
-#, fuzzy
-msgid "All updates"
-msgstr "Atnaujinta"
+#: app/views/patches/_patch_summary.html.erb:108
+#: app/views/patches/_patch_installation.html.erb:13
+#: app/views/patches/index.html.erb:56 app/views/patches/index.html.erb:75
+#: app/views/patches/index.html.erb:94 app/views/patches/index.html.erb:113
+#: app/views/patches/index.html.erb:132
+msgid "Error: Cannot get information."
+msgstr "Klaida: nepavyksta gauti informacijos."
 
-#: app/views/patch_updates/index.html.erb:74
-#: app/views/patch_updates/index.html.erb:74
-msgid "Security"
-msgstr ""
+#: app/views/patches/_patch_installation.html.erb:22
+msgid "An error occured while installing patches."
+msgstr "Diegiant pataisas įvyko klaida."
 
-#: app/views/patch_updates/index.html.erb:78
-#: app/views/patch_updates/index.html.erb:78
-msgid "Important"
-msgstr ""
+#: app/views/patches/_patch_installation.html.erb:49
+msgid "Patch Installation"
+msgstr "Pataisų diegimas"
 
-#: app/views/patch_updates/index.html.erb:83
-#: app/views/patch_updates/index.html.erb:83
-msgid "Recommended"
-msgstr ""
+#: app/views/patches/_patch_installation.html.erb:59
+msgid "Stop"
+msgstr "Stabdyti"
 
-#: app/views/patch_updates/index.html.erb:88
-#: app/views/patch_updates/index.html.erb:88
-msgid "Optional"
-msgstr ""
+#: app/views/patches/_patch_installation.html.erb:59
+msgid "Are you sure?"
+msgstr "Ar jūs įsitikinęs(usi)?"
 
-#: app/views/patch_updates/index.html.erb:99
-#: app/views/patch_updates/index.html.erb:99
-msgid "Update"
-msgstr "Atnaujinta"
-
-#: app/views/patch_updates/_patch_progress.html.erb:6
-#: app/views/patch_updates/_patch_progress.html.erb:6
-msgid "Refreshing package cache"
-msgstr ""
-
-#: app/views/patch_updates/_patch_progress.html.erb:7
-#: app/views/patch_updates/_patch_progress.html.erb:7
-msgid "Starting package manager"
-msgstr ""
-
-#: app/views/patch_updates/_patch_progress.html.erb:8
-#: app/views/patch_updates/_patch_progress.html.erb:8
-msgid "Waiting for the package manager lock"
-msgstr ""
-
-#: app/views/patch_updates/_patch_progress.html.erb:9
-#: app/views/patch_updates/_patch_progress.html.erb:19
-#: app/views/patch_updates/_patch_progress.html.erb:9
-#: app/views/patch_updates/_patch_progress.html.erb:19
-#, fuzzy
-msgid "Evaluating available patches"
-msgstr "Prieinami atnaujinimai"
-
-#: app/views/patch_updates/_patch_progress.html.erb:10
-#: app/views/patch_updates/_patch_progress.html.erb:10
-msgid "Finished reading patches"
-msgstr ""
-
-#: app/views/patch_updates/_patches.html.erb:10
-#: app/views/patch_updates/_patches.html.erb:10
+#: app/views/patches/_patches.html.erb:10
 msgid ""
 "One of the patches seems to update WebYaST itself.\n"
 "You may need to reload the page after applying the patch."
 msgstr ""
+"Viena iš pataisų atnaujina patį WebYaST.\n"
+"Pritaikius pataisą gali tekti atnaujinti puslapį."
 
-#: app/views/patch_updates/_patches.html.erb:18
-#: app/views/patch_updates/_patches.html.erb:18
-#, fuzzy
-msgid "Check"
-msgstr "DNS tikrinimas"
+#: app/views/patches/_patches.html.erb:16
+msgid "No patches available"
+msgstr "Nėra prieinamų pataisų"
 
-#: app/views/patch_updates/_patches.html.erb:20
-#: app/views/patch_updates/_patches.html.erb:20
+#: app/views/patches/_patches.html.erb:21
 msgid "Kind"
-msgstr ""
+msgstr "Rūšis"
 
-#: app/views/patch_updates/_patches.html.erb:22
-#: app/views/patch_updates/_patches.html.erb:22
-msgid "Summary"
-msgstr "Santrauka"
-
-#: app/views/patch_updates/_patches.html.erb:24
-#: app/views/patch_updates/_patches.html.erb:27
-#: app/views/patch_updates/_patches.html.erb:24
-#: app/views/patch_updates/_patches.html.erb:27
+#: app/views/patches/_patches.html.erb:24
+#: app/views/patches/_patches.html.erb:27
 msgid "Source"
-msgstr "Resursas"
+msgstr "Šaltinis"
 
-#: app/views/patch_updates/_patches.html.erb:25
-#: app/views/patch_updates/_patches.html.erb:25
+#: app/views/patches/_patches.html.erb:25
 msgid "Install"
 msgstr "Įdiegti"
 
-#: app/views/patch_updates/_patch_summary.html.erb:25
-#: app/views/patch_updates/_patch_summary.html.erb:25
-msgid "Cannot read patch updates - you have been logged out."
-msgstr ""
+#: app/views/patches/license.html.erb:63
+msgid "Accept"
+msgstr "Priimti"
 
-#: app/views/patch_updates/_patch_summary.html.erb:28
-#: app/views/patch_updates/_patch_summary.html.erb:28
-#, fuzzy
-msgid "No information about patches available"
-msgstr "Nėra informacijos apie bateriją ir kintamąją srovę"
+#: app/views/patches/license.html.erb:64
+msgid "Reject"
+msgstr "Atmesti"
 
-#: app/views/patch_updates/_patch_summary.html.erb:46
-#: app/views/patch_updates/_patch_summary.html.erb:46
-#, fuzzy
-msgid "Security Updates: %d"
-msgstr "Saugumas:"
+#: app/views/patches/index.html.erb:166 app/views/patches/index.html.erb:226
+msgid "Updates"
+msgstr "Atnaujinimai"
 
-#: app/views/patch_updates/_patch_summary.html.erb:49
-#: app/views/patch_updates/_patch_summary.html.erb:49
-msgid "Important Updates: %d"
-msgstr ""
+#: app/views/patches/index.html.erb:240
+msgid "All updates"
+msgstr "Visi atnaujinimai"
 
-#: app/views/patch_updates/_patch_summary.html.erb:52
-#: app/views/patch_updates/_patch_summary.html.erb:52
-msgid "Optional Updates: %d"
-msgstr ""
+#: app/views/patches/index.html.erb:243
+msgid "Security"
+msgstr "Saugumas"
 
-#: app/views/patch_updates/_patch_summary.html.erb:60
-#: app/views/patch_updates/_patch_summary.html.erb:60
-#, fuzzy
-msgid "Update All"
-msgstr "Atnaujinta"
+#: app/views/patches/index.html.erb:245
+msgid "Important"
+msgstr "Svarbūs"
 
-#: app/views/patch_updates/_patch_summary.html.erb:60
-#: app/views/patch_updates/_patch_summary.html.erb:60
-msgid "Updating all. Are you sure?"
-msgstr ""
+#: app/views/patches/index.html.erb:248
+msgid "Recommended"
+msgstr "Patartini"
 
-#: app/views/patch_updates/_patch_summary.html.erb:67
-#: app/views/patch_updates/_patch_summary.html.erb:67
-#, fuzzy
-msgid "Loading patch information"
-msgstr "Gaunama CPU informacijos..."
+#: app/views/patches/index.html.erb:251
+msgid "Optional"
+msgstr "Papildomi"
 
-#: shortcuts.yml:16
-msgid "See and manage configured software repositories"
-msgstr ""
+#: app/views/patches/index.html.erb:269
+msgid "Update"
+msgstr "Atnaujinti"
 
-#, fuzzy
-#~| msgid "Installing Packages..."
+#~ msgid "Autorefresh"
+#~ msgstr "Atnaujinimas"
+
+#~ msgid "Priority"
+#~ msgstr "Prioritetas"
+
+#~ msgid "Keep downloaded packages"
+#~ msgstr "Išlaikyti atsisiųstus paketus"
+
+#~ msgid "Missing repository parameter"
+#~ msgstr "Trūksta saugyklos parametro"
+
+#~ msgid "Invalid priority"
+#~ msgstr "Negaliojantis prioritetas"
+
+#~ msgid "Cannot update repository '%s': Unknown error"
+#~ msgstr "Nepavyksta atnaujinti saugyklos „%s“: nežinoma klaida"
+
+#~ msgid "Cannot update repository '%s'"
+#~ msgstr "Nepavyksta atnaujinti saugyklos „%s“"
+
+#~ msgid "Unknown backend error: %s"
+#~ msgstr "Nežinoma variklio klaida: %s"
+
+#~ msgid "Missing repository parameters"
+#~ msgstr "Trūksta saugyklos parametrų"
+
+#~ msgid "Repository '%s' has been added."
+#~ msgstr "Pridėta saugykla „%s“."
+
+#~ msgid "Cannot create repository '%s': Unknown error"
+#~ msgstr "Nepavyksta sukurti saugyklos „%s“: nežinoma klaida"
+
+#~ msgid "Cannot create repository '%s'"
+#~ msgstr "Nepavyksta sukurti saugyklos „%s“"
+
+#~ msgid "Unknown backend error"
+#~ msgstr "Nežinoma galinės sąsajos klaida"
+
+#~ msgid "A problem occured when loading patch information."
+#~ msgstr "Įkeliant pataisų informaciją įvyko klaida."
+
+#~ msgid "Refreshing package cache"
+#~ msgstr "Atnaujinamas paketų podėlis"
+
+#~ msgid "Starting package manager"
+#~ msgstr "Paleidžiama paketų tvarkytuvė"
+
+#~ msgid "Waiting for the package manager lock"
+#~ msgstr "Laukiama paketų tvarkytuvės užrakto"
+
+#~ msgid "Evaluating available patches"
+#~ msgstr "Įvertinamos prieinamos pataisos"
+
+#~ msgid "Finished reading patches"
+#~ msgstr "Užbaigtas pataisų skaitymas"
+
+#~ msgid "Please wait ..."
+#~ msgstr "Palaukite ..."
+
+#~ msgid "Cannot read patch updates - you have been logged out."
+#~ msgstr "Nepavyksta perskaityti atnaujinimo pataisų - buvote atsijungęs(usi)."
+
+#~ msgid "Updating all. Are you sure?"
+#~ msgstr "Viskas atnaujinama. Ar tikrai?"
+
+#~ msgid "See and manage configured software repositories"
+#~ msgstr "Peržiūrėti ir tvarkyti programinės įrangos saugyklas"
+
+#~ msgid "Configured software repositories"
+#~ msgstr "Sukonfigūruotos programinės įrangos saugyklos"
+
+#~ msgid "Add New Repository"
+#~ msgstr "Pridėti naują saugyklą"
+
+#~ msgid "Updates available"
+#~ msgstr "Prieinami atnaujinimai"
+
+#~ msgid "Check"
+#~ msgstr "Tikrinti"
+
+#~ msgid "Summary"
+#~ msgstr "Santrauka"
+
+#~ msgid "Update All"
+#~ msgstr "Atnaujinti viską"
+
+#~ msgid "<p>Please logout and login again.</p>"
+#~ msgstr "<p>Prašome atsijungti ir prisijungti iš naujo.</p>"
+
 #~ msgid "Installing all patches..."
-#~ msgstr "Diegiami paketai..."
+#~ msgstr "Diegiamos visos pataisos..."
 
-#, fuzzy
-#~| msgid "Installation"
+#~ msgid "Installation stopped"
+#~ msgstr "Diegimas sustabdytas"
+
 #~ msgid "Installation finished"
-#~ msgstr "Diegimas"
+#~ msgstr "Diegimas baigtas"
 
-#, fuzzy
-#~| msgid "%s installed ok"
 #~ msgid "%s installed."
-#~ msgstr "%s įdiegtas sėkmingai"
+#~ msgstr "%s įdiegtas."
 
-#, fuzzy
-#~| msgid "Packages Are Being Installed..."
-#~ msgid "Patch has been installed."
-#~ msgstr "Diegiami paketai..."
+#~ msgid "Patch has been installed. "
+#~ msgstr "Pataisos buvo įdiegtos. "
 
-#, fuzzy
+#~ msgid "All Patches have been installed. "
+#~ msgstr "Visos pataisos buvo įdiegtos. "
+
 #~| msgid "Misc. Proprietary Packages"
 #~ msgid "Priority for packages:"
-#~ msgstr "Įvairūs firminiai paketai"
+#~ msgstr "Paketų prioritetai:"

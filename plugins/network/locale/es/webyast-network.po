@@ -1,136 +1,196 @@
-# Copyright (C) 2006 SuSE Linux Products GmbH, Nuernberg
-# This file is distributed under the same license as the package.
-#
+# translation of webyast-network.es.po to Spanish
+# Carlos E. Robinson <carlos.e.r@opensuse.org>, 2009.
+# Carlos E. Robinson M. <carlos.e.r@opensuse.org>, 2010, 2011, 2012, 2013.
 msgid ""
 msgstr ""
-"Project-Id-Version: webyast-network-ui\n"
-"POT-Creation-Date: 2010-08-18 10:18+0200\n"
-"PO-Revision-Date: 2010-08-26 09:24\n"
-"Last-Translator: Novell Language <language@novell.com>\n"
-"Language-Team: Novell Language <language@novell.com>\n"
+"Project-Id-Version: webyast-network.es\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2012-06-07 15:19+0200\n"
+"PO-Revision-Date: 2013-02-20 02:56+0100\n"
+"Last-Translator: Carlos E. Robinson <carlos.e.r@opensuse.org>\n"
+"Language-Team: Spanish <opensuse-translation-es@opensuse.org>\n"
+"Language: es\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Lokalize 1.4\n"
+"Plural-Forms:  nplurals=2; plural=(n != 1);\n"
+"X-Poedit-Language: Spanish\n"
 
-#: app/controllers/network_controller.rb:89 ./app/controllers/network_controller.rb:89
-msgid "Manual"
-msgstr "Manual"
-
-#: app/controllers/network_controller.rb:89 ./app/controllers/network_controller.rb:89
-msgid "Automatic"
-msgstr "Automático"
-
-#: app/controllers/network_controller.rb:163 ./app/controllers/network_controller.rb:163
+#: app/controllers/network_controller.rb:235
 msgid "Network settings have been written."
-msgstr "Los valores de red ya se han escrito."
+msgstr "Se ha escrito la configuración de red."
 
-#: app/views/network/index.html.erb:143 app/views/network/index.html.erb:147
-#: app/views/network/index.html.erb:151 app/views/network/index.html.erb:155
-#: app/views/network/index.html.erb:158 app/views/network/index.html.erb:162
-#: app/views/network/index.html.erb:166 ./app/views/network/index.html.erb:143
-#: ./app/views/network/index.html.erb:147 ./app/views/network/index.html.erb:151
-#: ./app/views/network/index.html.erb:155 ./app/views/network/index.html.erb:158
-#: ./app/views/network/index.html.erb:162 ./app/views/network/index.html.erb:166
-msgid "This field is required"
-msgstr "Este campo es obligatorio."
-
-#: app/views/network/index.html.erb:144 app/views/network/index.html.erb:152
-#: app/views/network/index.html.erb:163 ./app/views/network/index.html.erb:144
-#: ./app/views/network/index.html.erb:152 ./app/views/network/index.html.erb:163
-msgid "Enter a valid IP address"
-msgstr "Escriba una dirección IP válida"
-
-#: app/views/network/index.html.erb:148 ./app/views/network/index.html.erb:148
-msgid "Enter a valid subnet mask or prefix"
-msgstr "Escriba un prefijo o una máscara de subred que sean válidos"
-
-#: app/views/network/index.html.erb:159 app/views/network/index.html.erb:167
-#: ./app/views/network/index.html.erb:159 ./app/views/network/index.html.erb:167
-msgid "Enter a valid domain name"
-msgstr "Escriba un nombre de dominio válido"
-
-#: app/views/network/index.html.erb:171 ./app/views/network/index.html.erb:171
-msgid "Please wait"
-msgstr "Espere"
-
-#: app/views/network/index.html.erb:234 ./app/views/network/index.html.erb:234
-msgid "whitespace - invalid character."
-msgstr "no es válido usar un espacio en blanco más guión (-)."
-
-#: app/views/network/index.html.erb:236 ./app/views/network/index.html.erb:236
-msgid " - can not start with a digit."
-msgstr " - no puede empezar por un dígito."
-
-#: app/views/network/index.html.erb:238 ./app/views/network/index.html.erb:238
-msgid "periodic '-' is not allowed."
-msgstr "no se permiten guiones (-) periódicos."
-
-#: app/views/network/index.html.erb:240 ./app/views/network/index.html.erb:240
-msgid "can not end with (-) hyphen."
-msgstr "no puede terminar en guión (-=."
-
-#: app/views/network/index.html.erb:243 ./app/views/network/index.html.erb:243
-msgid "can not start with (-) hyphen."
-msgstr "no puede empezar por un guión (-)."
-
-#: app/views/network/index.html.erb:245 ./app/views/network/index.html.erb:245
-msgid " - is invalid character for hostname."
-msgstr " el guión (-) no es un carácter válido para el nombre de host."
-
-#: app/views/network/index.html.erb:288 ./app/views/network/index.html.erb:288 ./shortcuts.yml:6
+#: app/views/network/edit.html.erb:36 app/views/network/new.html.erb:36
+#: app/views/network/index.html.erb:18
 msgid "Network"
 msgstr "Red"
 
-#: app/views/network/index.html.erb:298 ./app/views/network/index.html.erb:298
-msgid "General settings"
-msgstr "Configuración general"
+#: app/views/network/_form.html.erb:15 app/views/network/_form.html.erb:45
+#: app/views/network/_form.html.erb:79 app/views/network/_form.html.erb:121
+msgid "Interface name"
+msgstr "Nombre de la interfaz"
 
-#: app/views/network/index.html.erb:300 ./app/views/network/index.html.erb:300
+#: app/views/network/_form.html.erb:26 app/views/network/index.html.erb:80
+msgid "Physical interface"
+msgstr "Interfaz física"
+
+#: app/views/network/_form.html.erb:31
+msgid "VLAN ID"
+msgstr "VLAN ID"
+
+#: app/views/network/_form.html.erb:56
+msgid "Bridge devices:"
+msgstr "Dispositivos puente:"
+
+#: app/views/network/_form.html.erb:91
+msgid "Bond driver options"
+msgstr "Opciones del controlador vinculado"
+
+#: app/views/network/_form.html.erb:97 app/views/network/index.html.erb:89
+msgid "Bond slaves"
+msgstr "Esclavos vinculados"
+
+#: app/views/network/_form.html.erb:132
 msgid "Configuration mode"
 msgstr "Modo de configuración"
 
-#: app/views/network/index.html.erb:306 ./app/views/network/index.html.erb:306
-msgid "IP Address"
-msgstr "Dirección IP"
+#: app/views/network/_form.html.erb:162
+msgid "DNS configuration"
+msgstr "Configuración de DNS"
 
-#: app/views/network/index.html.erb:309 ./app/views/network/index.html.erb:309
-msgid "IP address"
-msgstr "Dirección IP"
-
-#: app/views/network/index.html.erb:314 ./app/views/network/index.html.erb:314
-msgid "Subnet mask/Prefixlen"
-msgstr "Máscara de subred/Prefixlen"
-
-#: app/views/network/index.html.erb:319 ./app/views/network/index.html.erb:319
-msgid "Default route"
-msgstr "Ruta por defecto"
-
-#: app/views/network/index.html.erb:326 ./app/views/network/index.html.erb:326
-msgid "DNS"
-msgstr "DNS"
-
-#: app/views/network/index.html.erb:329 ./app/views/network/index.html.erb:329
+#: app/views/network/_form.html.erb:168
 msgid "Hostname"
-msgstr "Nombre de host"
+msgstr "Nombre de equipo"
 
-#: app/views/network/index.html.erb:336 ./app/views/network/index.html.erb:336
+# as in Windows Authentication Domain
+#  msgid "Domain\n
+# CER, 2009, 11.2: ¿es eso cierto?
+#: app/views/network/_form.html.erb:172
 msgid "Domain"
 msgstr "Dominio"
 
-#: app/views/network/index.html.erb:341 ./app/views/network/index.html.erb:341
-msgid "Change hostname by DHCP"
-msgstr "Cambiar nombre de host mediante DHCP"
-
-#: app/views/network/index.html.erb:346 ./app/views/network/index.html.erb:346
+#: app/views/network/_form.html.erb:177
 msgid "Name servers"
 msgstr "Servidores de nombres"
 
-#: app/views/network/index.html.erb:351 ./app/views/network/index.html.erb:351
+#: app/views/network/_form.html.erb:182
 msgid "Search domains"
 msgstr "Dominios de búsqueda"
 
-#: ./shortcuts.yml:7
-msgid "Manage network devices"
-msgstr "Gestionar dispositivos de red"
+#: app/views/network/_form.html.erb:187
+msgid "Change hostname by DHCP"
+msgstr "Cambiar el nombre de equipo por DHCP"
 
+#: app/views/network/_form.html.erb:202
+msgid "IP configuration"
+msgstr "Configuración IP"
+
+#: app/views/network/_form.html.erb:209 app/views/network/index.html.erb:50
+msgid "IP address"
+msgstr "Dirección IP"
+
+#: app/views/network/_form.html.erb:213
+msgid "Subnet mask/Prefixlen"
+msgstr "Máscara de subred/longitud del prefijo"
+
+#: app/views/network/_form.html.erb:217
+msgid "Default route"
+msgstr "Ruta por defecto"
+
+#: app/views/network/_form.html.erb:227
+msgid "Save"
+msgstr "Guardar"
+
+#: app/views/network/_form.html.erb:229 app/views/network/index.html.erb:184
+msgid "back"
+msgstr "atrás"
+
+#: app/views/network/_validation.html.erb:54
+#: app/views/network/_validation.html.erb:58
+#: app/views/network/_validation.html.erb:62
+#: app/views/network/_validation.html.erb:66
+#: app/views/network/_validation.html.erb:70
+#: app/views/network/_validation.html.erb:74
+#: app/views/network/_validation.html.erb:78
+msgid "This field is required"
+msgstr "Se requiere éste campo"
+
+#: app/views/network/_validation.html.erb:55
+#: app/views/network/_validation.html.erb:63
+#: app/views/network/_validation.html.erb:75
+msgid "Enter a valid IP address"
+msgstr "Introduzca una dirección IP válida"
+
+#: app/views/network/_validation.html.erb:59
+msgid "Enter a valid subnet mask or prefix"
+msgstr "Introduzca una máscara de subred o prefijo válidos"
+
+#: app/views/network/_validation.html.erb:67
+msgid "Enter a valid hostname"
+msgstr "Introduzca un nombre de equipo válido"
+
+#: app/views/network/_validation.html.erb:71
+#: app/views/network/_validation.html.erb:79
+msgid "Enter a valid domain name"
+msgstr "Introduzca un nombre de dominio válido"
+
+#: app/views/network/_validation.html.erb:83
+msgid "Please wait"
+msgstr "Por favor, espere"
+
+#: app/views/network/index.html.erb:36
+msgid "Physical Interfaces"
+msgstr "Interfaces físicas"
+
+#: app/views/network/index.html.erb:49 app/views/network/index.html.erb:75
+msgid "Interface"
+msgstr "Interfaz"
+
+#: app/views/network/index.html.erb:51
+msgid "Mode"
+msgstr "Modo"
+
+#: app/views/network/index.html.erb:54 app/views/network/index.html.erb:95
+msgid "configure"
+msgstr "configurar"
+
+#: app/views/network/index.html.erb:64
+msgid "Virtual Interfaces"
+msgstr "Interfaces virtuales"
+
+#: app/views/network/index.html.erb:79
+msgid "Vlan ID"
+msgstr "ID VLAN"
+
+#: app/views/network/index.html.erb:84
+msgid "Bridge ports"
+msgstr "Puertos del puente"
+
+#: app/views/network/index.html.erb:88
+msgid "Bond option"
+msgstr "Opción vinculada"
+
+#: app/views/network/index.html.erb:98
+msgid "delete"
+msgstr "borrar"
+
+#: app/views/network/index.html.erb:108
+msgid "New virtual interface"
+msgstr "Nueva interfaz virtual"
+
+#: app/views/network/index.html.erb:119
+msgid "Please select one of the virtual interfaces"
+msgstr "Por favor seleccione una de las interfaces virtuales"
+
+#: app/views/network/index.html.erb:144
+msgid "BRIDGE"
+msgstr "PUENTE"
+
+#: app/views/network/index.html.erb:164
+msgid "BOND"
+msgstr "VINCULADO"
+
+#: app/views/network/index.html.erb:185
+msgid "next"
+msgstr "siguiente"

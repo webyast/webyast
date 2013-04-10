@@ -1,115 +1,132 @@
-# Copyright (C) 2006 SuSE Linux Products GmbH, Nuernberg
-# This file is distributed under the same license as the package.
+# @TITLE@
+# Copyright (C) 2006, SUSE Linux GmbH, Nuremberg
 #
+# This file is distributed under the same license as @PACKAGE@ package. FIRST
+#
+# hillwood <hillwoodroc@gmail.com>, 2012.
 msgid ""
 msgstr ""
-"Project-Id-Version: webyast-mail-ui\n"
-"POT-Creation-Date: 2010-08-18 10:19+0200\n"
-"PO-Revision-Date: 2010-08-26 09:33\n"
-"Last-Translator: Novell Language <language@novell.com>\n"
-"Language-Team: Novell Language <language@novell.com>\n"
+"Project-Id-Version: @PACKAGE@\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2012-06-07 15:20+0200\n"
+"PO-Revision-Date: 2012-07-05 16:31+0800\n"
+"Last-Translator: Marguerite Su\n"
+"Language-Team: Chinese Simplified <kde-i18n-doc@kde.org>\n"
+"Language: zh_CN\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=1; plural=0;\n"
+"X-Generator: Lokalize 1.4\n"
+"Plural-Forms: nplurals=2; plural=(n!=1);\n"
 
-#: app/controllers/mail_controller.rb:50 ./app/controllers/mail_controller.rb:50
-msgid "Passwords do not match."
-msgstr "口令不匹配。"
-
-#: app/controllers/mail_controller.rb:57 ./app/controllers/mail_controller.rb:57
-msgid "Mail settings have been written."
-msgstr "邮件设置已写入。"
-
-#: app/controllers/mail_controller.rb:59 ./app/controllers/mail_controller.rb:59
-msgid "Test mail was sent to %s."
-msgstr "测试邮件已发送至 %s。"
-
-#: app/controllers/mail_controller.rb:71 ./app/controllers/mail_controller.rb:71
-msgid "Error while saving mail settings: %s"
-msgstr "保存邮件设置时出错：%s"
-
-#: app/controllers/mail_controller.rb:88 ./app/controllers/mail_controller.rb:88
-msgid "No outgoing mail server is set, but administrator has mail forwarders defined.\nChange %s<i>administrator</i>%s or %s<i>mail</i>%s configuration."
-msgstr "未设置出局邮件服务器，但管理员定义了邮件转发器。\n请更改%s<i>管理员</i>%s或%s<i>邮件</i>%s配置。"
-
-#: app/views/mail/index.html.erb:42 ./app/views/mail/index.html.erb:42
-msgid "Please wait"
-msgstr "请稍候"
-
-#: app/views/mail/index.html.erb:49 ./app/views/mail/index.html.erb:49
-msgid "The passwords do not match."
-msgstr "密码不匹配。"
-
-#: app/views/mail/index.html.erb:50 ./app/views/mail/index.html.erb:50
-msgid "Enter a valid e-mail address."
-msgstr "请输入有效的电子邮件地址。"
-
-#: app/views/mail/index.html.erb:51 ./app/views/mail/index.html.erb:51
-msgid "Enter a valid domain name or an IP address."
-msgstr "请输入有效的域名或 IP 地址。"
-
-#: app/views/mail/index.html.erb:68 ./app/views/mail/index.html.erb:68 ./shortcuts.yml:6
-msgid "Mail Settings"
-msgstr "邮件设置"
-
-#: app/views/mail/index.html.erb:80 ./app/views/mail/index.html.erb:80
-msgid "Outgoing mail server"
-msgstr "外发邮件服务器"
-
-#: app/views/mail/index.html.erb:85 ./app/views/mail/index.html.erb:85
-msgid "Use secure connection (TLS)"
-msgstr "使用安全连接 (TLS)"
-
-#: app/views/mail/index.html.erb:86 ./app/views/mail/index.html.erb:86
-msgid "Never"
-msgstr "从不"
-
-#: app/views/mail/index.html.erb:86 ./app/views/mail/index.html.erb:86
-msgid "If available"
-msgstr "如果可用"
-
-#: app/views/mail/index.html.erb:86 ./app/views/mail/index.html.erb:86
-msgid "Always"
-msgstr "总是"
-
-#: app/views/mail/index.html.erb:89 ./app/views/mail/index.html.erb:89
-msgid "User name"
-msgstr "用户名"
-
-#: app/views/mail/index.html.erb:93 ./app/views/mail/index.html.erb:93
-msgid "Password"
-msgstr "口令"
-
-#: app/views/mail/index.html.erb:97 ./app/views/mail/index.html.erb:97
-msgid "Confirm password"
-msgstr "确认密码"
-
-#: app/views/mail/index.html.erb:105 ./app/views/mail/index.html.erb:105
-msgid "Send test mail to"
-msgstr "将测试邮件发送到"
-
-#: app/views/mail/index.html.erb:107 ./app/views/mail/index.html.erb:107
-msgid "Send Mail"
-msgstr "发送邮件"
-
-#: ./shortcuts.yml:7
-msgid "Manage outgoing mail settings"
-msgstr "管理出去的邮件设置"
-
-#: app/models/mail_state.rb:40 ./app/models/mail_state.rb:40
+#: app/models/mail_state.rb:37
 msgid "It was not possible to retrieve the full hostname of the machine. If the mail could not be delivered, consult the network and/or mail configuration with your network administrator."
-msgstr "无法获取完整的计算机主机名。如果邮件无法递送，请向网络管理员咨询有关网络和/或邮件配置问题。"
+msgstr "不可能检索机器的完整主机名。如果邮件无法送达，请联系管理员以咨询网络和/或邮件配置。"
 
-#: app/models/mail_state.rb:45 ./app/models/mail_state.rb:45
+#: app/models/mail_state.rb:42
 msgid "Mail configuration test not confirmed"
-msgstr "邮件配置测试未确认"
+msgstr "邮件测试未被验证"
 
-#: app/models/mail_state.rb:46 ./app/models/mail_state.rb:46
+#: app/models/mail_state.rb:43
 msgid "While configuring mail, a test mail was sent to %s . Was the mail delivered to this address?<br>If so, confirm it by pressing the button. Otherwise check your mail configuration again."
-msgstr "在邮件配置过程中，已将测试邮件发送至 %s。邮件是否已发送到此地址？<br>如果是，请按按钮确认。否则，请重新检查您的邮件配置。"
+msgstr "配置邮件时，一封测试邮件会被发送到 %s 。邮件是发送到这个地址吗？<br>如果是这样，请点击“确认”。否则请再次检查您的邮件配置。"
 
-#: app/models/mail_state.rb:50 ./app/models/mail_state.rb:50
+#: app/models/mail_state.rb:46
 msgid "Test mail received"
 msgstr "测试邮件已收到"
 
+#: app/controllers/mailsetting_controller.rb:58
+msgid "Passwords do not match."
+msgstr "密码不匹配。"
+
+#: app/controllers/mailsetting_controller.rb:65
+msgid "Mail settings have been written."
+msgstr "已写入邮件设置。"
+
+#: app/controllers/mailsetting_controller.rb:67
+msgid "Test mail was sent to %s."
+msgstr "测试邮件已发送到 %s 。"
+
+#: app/controllers/mailsetting_controller.rb:72
+msgid "Error while saving mail settings."
+msgstr "保存邮件设置时出错。"
+
+#: app/controllers/mailsetting_controller.rb:85
+msgid ""
+"No outgoing mail server is set, but administrator has mail forwarders defined.\n"
+"        Change %s<i>administrator</i>%s or %s<i>mail</i>%s configuration."
+msgstr ""
+"没有发送邮件服务器被设置，但管理员可以定义邮件转发。\n"
+"         更改%s<i>管理员</i>%s 或 %s<i>邮件</i>%s 设置。"
+
+#: app/views/mailsetting/index.html.erb:32
+msgid "Please wait"
+msgstr "请稍候"
+
+#: app/views/mailsetting/index.html.erb:40
+msgid "The passwords do not match."
+msgstr "密码不匹配。"
+
+#: app/views/mailsetting/index.html.erb:41
+msgid "Enter a valid e-mail address."
+msgstr "输入一个有效的 E-mail 地址。"
+
+#: app/views/mailsetting/index.html.erb:42
+msgid "Enter a valid domain name or an IP address."
+msgstr "输入一个有效的域名或者 IP 地址。"
+
+#: app/views/mailsetting/index.html.erb:68
+msgid "Mail Settings"
+msgstr "邮件设置"
+
+#: app/views/mailsetting/index.html.erb:81
+msgid "Outgoing mail server settings"
+msgstr "发送邮件服务器设置"
+
+#: app/views/mailsetting/index.html.erb:86
+msgid "Outgoing mail server"
+msgstr "发送邮件服务器"
+
+#: app/views/mailsetting/index.html.erb:91
+msgid "Use secure connection (TLS)"
+msgstr "使用安全连接(TLS)"
+
+#: app/views/mailsetting/index.html.erb:92
+msgid "Never"
+msgstr "从不"
+
+#: app/views/mailsetting/index.html.erb:92
+msgid "If available"
+msgstr "如果可用"
+
+#: app/views/mailsetting/index.html.erb:92
+msgid "Always"
+msgstr "总是"
+
+#: app/views/mailsetting/index.html.erb:96
+msgid "User name"
+msgstr "用户名"
+
+# password dialog title
+#: app/views/mailsetting/index.html.erb:101
+msgid "Password"
+msgstr "密码"
+
+#: app/views/mailsetting/index.html.erb:106
+msgid "Confirm password"
+msgstr "确认密码"
+
+#: app/views/mailsetting/index.html.erb:114
+msgid "Check mail server settings"
+msgstr "检查邮件服务器设置"
+
+#: app/views/mailsetting/index.html.erb:118
+msgid "Send test mail to"
+msgstr "发送测试邮件到"
+
+#: app/views/mailsetting/index.html.erb:120
+msgid "Send Mail"
+msgstr "发送邮件"
+
+#~ msgid "Manage outgoing mail settings"
+#~ msgstr "管理发送邮件服务器设置"
