@@ -1,0 +1,64 @@
+# Manuel A. Vazquez <xixirei@yahoo.es>, 2011.
+msgid ""
+msgstr ""
+"Project-Id-Version: @PACKAGE@\n"
+"Report-Msgid-Bugs-To: translation@suse.de\n"
+"POT-Creation-Date: 2012-06-07 15:20+0200\n"
+"PO-Revision-Date: 2011-10-24 20:44+0200\n"
+"Last-Translator: Manuel A. Vazquez <xixirei@yahoo.es>\n"
+"Language-Team: Galego <proxecto@trasno.net>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n!=1);\n"
+"X-Generator: Lokalize 1.0\n"
+
+msgid "Account settings"
+msgstr "Configuración da conta"
+
+msgid "Active Directory"
+msgstr "Directorio Activo"
+
+msgid "Active Directory Domain"
+msgstr "Dominio de Directorio Activo"
+
+msgid "Active Directory client configuraton successfully written."
+msgstr "Gravouse con éxito a configuración do cliente de Directorio Activo."
+
+msgid "Administrator User Name"
+msgstr "Nome de usuario do administrador"
+
+msgid "Cannot read Active Directory client configuraton."
+msgstr "Non se pode ler a configuración do cliente de Directorio Activo."
+
+msgid "Enable Authentication of AD users"
+msgstr "Activar autenticación de usuarios AD"
+
+msgid "Error while joining Active Directory domain: %s"
+msgstr "Erro mentes se unía ao dominio de Directorio Activo: %s"
+
+msgid "Error while leaving Active Directory domain: %s"
+msgstr "Erro mentres deixaba o dominio de Directorio Activo: %s"
+
+msgid "Error while saving Active Directory client configuration."
+msgstr "Erro ao gardar a configuració do cliente de Directorio Activo."
+
+msgid "Machine Account"
+msgstr "Conta da máquina"
+
+msgid "Machine is not member of given domain. Enter the credentials needed for join."
+msgstr "A máquina non é membro do dominio dado. Introduza as credenciais necesarias para unirse."
+
+# password dialog title
+msgid "Password"
+msgstr "Contrasinal"
+
+msgid "Please wait"
+msgstr "Agarde"
+
+msgid "This field is required."
+msgstr "Este campo é necesario."
+
+#~ msgid "Configure the connection to Active Directory"
+#~ msgstr "Configurar a conexión ao Directorio Activo"

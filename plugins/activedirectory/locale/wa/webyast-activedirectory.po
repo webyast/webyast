@@ -1,0 +1,68 @@
+# Translation into the walloon language.
+# Copyright (C) 2007 SUSE Linux Products GmbH.
+# Pablo Saratxaga <pablo@walon.org>, 2001, 2004.
+# Jean Cayron <jean.cayron@gmail.com>, 2007.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: yast memory\n"
+"POT-Creation-Date: 2012-06-07 15:20+0200\n"
+"PO-Revision-Date: 2004-04-05 17:37+0200\n"
+"Last-Translator: Jean Cayron <jean.cayron@gmail.com>\n"
+"Language-Team: Walloon <i18n@suse.de>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+
+msgid "Account settings"
+msgstr ""
+
+#, fuzzy
+#| msgid "Directory\n"
+msgid "Active Directory"
+msgstr "Ridant\n"
+
+msgid "Active Directory Domain"
+msgstr ""
+
+msgid "Active Directory client configuraton successfully written."
+msgstr ""
+
+#, fuzzy
+#| msgid "Administration"
+msgid "Administrator User Name"
+msgstr "Manaedjmint"
+
+msgid "Cannot read Active Directory client configuraton."
+msgstr ""
+
+#, fuzzy
+#| msgid "Authentication scheme to use"
+msgid "Enable Authentication of AD users"
+msgstr "Sôre d' otintifiaedje as eployî"
+
+msgid "Error while joining Active Directory domain: %s"
+msgstr ""
+
+msgid "Error while leaving Active Directory domain: %s"
+msgstr ""
+
+msgid "Error while saving Active Directory client configuration."
+msgstr ""
+
+msgid "Machine Account"
+msgstr ""
+
+msgid "Machine is not member of given domain. Enter the credentials needed for join."
+msgstr ""
+
+msgid "Password"
+msgstr "Sicret"
+
+msgid "Please wait"
+msgstr "Tårdjîz..."
+
+msgid "This field is required."
+msgstr ""
