@@ -5,7 +5,7 @@ require 'etc'
 module PolKit1
   POLKIT_PATH = "/etc/polkit-1/rules.d/"
   # defaults are "50-default-webyast-*", use something lower to override the defaults
-  FILE_PREFIX = "40-webyast-"
+  FILE_PREFIX = "40-webyast"
 
   def self.polkit1_check(perm, user_name)
     raise "invalid user name" if (user_name =~ /\\$/ or user_name.include? "'")
