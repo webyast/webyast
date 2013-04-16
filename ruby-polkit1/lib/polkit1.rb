@@ -12,12 +12,11 @@ module PolKit1
     polkit1_check_uid perm, Etc.getpwnam(user_name).uid
   end
 
-  def self.polkit1_write(section, perm, granted, user_name)
+  def self.polkit1_write(perm, granted, user_name)
     raise "User name required" if user_name.nil? || user_name.empty?
     raise "Invalid user name" if (user_name =~ /\\$/ or user_name.include? "'")
     raise "Action name required" if perm.nil? || perm.empty?
 
-    # TODO: is section (subdir) supported by new polkit??
     file = File.join(POLKIT_PATH, "#{FILE_PREFIX}-#{user_name}-#{perm}.rules")
 
     if granted
