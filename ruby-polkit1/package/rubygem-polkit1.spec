@@ -23,7 +23,8 @@ Release:        0
 #
 Group:          Development/Languages/Ruby
 License:        GPL-2.0+
-Requires:       polkit
+# new polkit with JS rule files
+Requires:       polkit >= 0.107
 #
 BuildRoot:      %{_tmppath}/%{name}-%{version}-build
 BuildRequires:  rubygems_with_buildroot_patch
