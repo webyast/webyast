@@ -61,9 +61,10 @@ Requires:       nginx >= 1.0.15
 Requires:       rubygem-ruby-dbus
 Requires:       syslog
 Requires:       yast2-dbus-server
-
 Requires:       rubygem-webyast-rake-tasks >= 0.3.5
 Requires:       webyast-base-branding
+Requires:       pam-modules
+
 PreReq:         rubygem-bundler
 # 634404
 Recommends:     logrotate
