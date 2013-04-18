@@ -240,9 +240,9 @@ case "$1" in
 		HNAME=" (https://$HNAME:$PORT/)"
 	    fi
 
-            WEB_UI_ENABLED = `grep "web_ui_enabled" "/etc/webyast/config.yml" | cut -f2 -d : | tr -d ' '`
+            WEB_UI_ENABLED=`grep "web_ui_enabled" "/etc/webyast/config.yml" | cut -f2 -d : | tr -d ' '`
 
-            if [ $WEB_UI_ENABLED = 'true' ]; then
+            if [ $WEB_UI_ENABLED == 'true' ]; then
 
                 if [ -n "$IP" ]; then
                     echo -e "\t${done}WebYaST is running at https://$IP:$PORT/${HNAME}${norm}\n"
