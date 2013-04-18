@@ -1,20 +1,20 @@
 #--
 # Copyright (c) 2009-2010 Novell, Inc.
-# 
+#
 # All Rights Reserved.
-# 
+#
 # This program is free software; you can redistribute it and/or modify it
 # under the terms of version 2 of the GNU General Public License
 # as published by the Free Software Foundation.
-# 
+#
 # This program is distributed in the hope that it will be useful,
 # but WITHOUT ANY WARRANTY; without even the implied warranty of
 # MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
 # GNU General Public License for more details.
-# 
+#
 # You should have received a copy of the GNU General Public License
 # along with this program; if not, contact Novell, Inc.
-# 
+#
 # To contact Novell about this file by physical or electronic mail,
 # you may find current contact information at www.novell.com
 #++
@@ -28,7 +28,7 @@ class RepositoriesController < ApplicationController
   def isint(str)
     str.match /\A[0-9]+\z/
   end
-  
+
   public
 
   # GET /repositories.xml
@@ -43,6 +43,8 @@ class RepositoriesController < ApplicationController
         render ErrorResult.error(404, 20, "DBus Error: #{exception.dbus_message.error_name}") and return
       else
         flash[:error] = _("Cannot read repository list.")
+        flash[:error] << (exception.dbus_message || exception.message)
+
         @repos = []
         render :index and return
       end
@@ -144,12 +146,18 @@ class RepositoriesController < ApplicationController
   end
 
   def new
-
     # load URLs of all existing repositories
     repos = Repository.find :all
     @repo = Repository.new
     @repo_urls = repos.map {|r| r.url}
     @repo_urls.reject! {|u| u.blank? }
+  rescue DBus::Error => e
+    if request.format.html?
+      flash[:error] = _("Cannot create a new repository. %s.") % (e.dbus_message || e.message)
+      redirect_to :action => :index
+    else
+      render ErrorResult.error(503, 2, "Cannot create a new repository. #{e.dbus_message || e.message}") and return
+    end
   end
 
 
@@ -167,7 +175,7 @@ class RepositoriesController < ApplicationController
       repos = Repository.find(params[:id])
     rescue DBus::Error => exception
       unless request.format.html?
-        render ErrorResult.error(404, 20, "DBus Error: #{exception.dbus_message.error_name}") and return     
+        render ErrorResult.error(404, 20, "DBus Error: #{exception.dbus_message.error_name}") and return
       end
     end
 
