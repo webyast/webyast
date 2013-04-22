@@ -68,7 +68,7 @@ PreReq:         rubygem-bundler
 # 634404
 Recommends:     logrotate
 %if 0%{?suse_version} == 0 || %suse_version > 1110
-PreReq:         polkit, rubygem-polkit1
+PreReq:         polkit, rubygem-polkit1 >= 0.1.0
 PreReq:         rubygem-rake
 %else
 # <11.1 or SLES11
