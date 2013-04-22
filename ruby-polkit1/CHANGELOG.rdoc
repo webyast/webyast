@@ -1,4 +1,9 @@
+=0.1.0
 
-=0.1
+* Support polkit >= 0.107 (Javascript rules files)
+* PolKit1::polkit1_write - changed method signature
+
+=0.0.1
 
 * Initial release
+
