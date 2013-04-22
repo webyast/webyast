@@ -43,7 +43,6 @@ This extension provides polkit integration. The library provides a stable API fo
 %package doc
 Summary:        RDoc documentation for %{mod_name}
 Group:          Development/Languages/Ruby
-License:        GPL-2.0+ or Ruby
 Requires:       %{name} = %{version}
 %description doc
 Documentation generated at gem installation time.
