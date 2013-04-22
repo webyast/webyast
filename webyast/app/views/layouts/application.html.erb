@@ -122,7 +122,7 @@
               <%= link_to _("Home"), '/controlpanel'%>
             </span>
             <span class="userbar-icon user-icon">
-              <% if WebyastEngine.find "Users" %>
+              <% if WebyastEngine.find("Users").present? %>
                 <%= link_to(current_account.username, :controller => :users) %>
               <% else %>
                 <%= current_account.username %>
