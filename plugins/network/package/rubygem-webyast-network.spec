@@ -131,7 +131,9 @@ install -m 0644 %SOURCE2 $RPM_BUILD_ROOT/etc/polkit-1/rules.d/
 
 %dir /usr/share/%{webyast_polkit_dir}
 %attr(644,root,root) %config /usr/share/%{webyast_polkit_dir}/org.opensuse.yast.modules.yapi.network.policy
+%if %suse_version >= 1230
 /etc/polkit-1/rules.d/50-default-webyast-network.rules
+%endif
 
 %restart_script_name
 

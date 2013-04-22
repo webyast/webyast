@@ -625,7 +625,9 @@ mkdir -p /var/lib/webyast
 
 %config /etc/sysconfig/SuSEfirewall2.d/services/webyast
 %config /usr/share/%{webyast_polkit_dir}/org.opensuse.yast.permissions.policy
+%if %suse_version >= 1230
 /etc/polkit-1/rules.d/50-default-webyast-base.rules
+%endif
 %config %{webyast_dir}/config/initializers/secret_token.rb
 %config %{webyast_dir}/config/environment.rb
 %config(noreplace) /etc/yast_user_roles

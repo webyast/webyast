@@ -148,7 +148,9 @@ cp %SOURCE3 $RPM_BUILD_ROOT/etc/webyast/
 
 %dir /usr/share/%{webyast_polkit_dir}
 %attr(644,root,root) %config /usr/share/%{webyast_polkit_dir}/org.opensuse.yast.modules.yapi.services.policy
+%if %suse_version >= 1230
 /etc/polkit-1/rules.d/50-default-webyast-services.rules
+%endif
 
 %dir /etc/webyast/
 %config /etc/webyast/filter_services.yml

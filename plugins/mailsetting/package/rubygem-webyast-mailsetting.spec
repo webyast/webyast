@@ -167,7 +167,9 @@ install -m 0755 %SOURCE3 $RPM_BUILD_ROOT/etc/sysconfig/network/scripts/
 
 %dir /usr/share/%{webyast_polkit_dir}
 %attr(644,root,root) %config /usr/share/%{webyast_polkit_dir}/org.opensuse.yast.modules.yapi.mailsettings.policy
+%if %suse_version >= 1230
 /etc/polkit-1/rules.d/50-default-webyast-mailsetting.rules
+%endif
 
 %restart_script_name
 

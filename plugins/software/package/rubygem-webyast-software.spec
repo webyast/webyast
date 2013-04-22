@@ -153,7 +153,9 @@ mkdir -p $RPM_BUILD_ROOT/var/lib/webyast/software/licenses/accepted
 %attr(644,root,root) %config /usr/share/%{webyast_polkit_dir}/org.opensuse.yast.modules.yapi.patches.policy
 %attr(644,root,root) %config /usr/share/%{webyast_polkit_dir}/org.opensuse.yast.modules.yapi.packages.policy
 %attr(644,root,root) %config /usr/share/%{webyast_polkit_dir}/org.opensuse.yast.modules.yapi.repositories.policy
+%if %suse_version >= 1230
 /etc/polkit-1/rules.d/50-default-webyast-software.rules
+%endif
 %attr(775,%{webyast_user},root) /var/lib/webyast/software
 
 %restart_script_name
