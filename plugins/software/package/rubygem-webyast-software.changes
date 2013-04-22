@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Mon Apr 22 13:49:04 UTC 2013 - lslezak@suse.cz
+
+- support for the new polkit (Javascript rules file) (bnc#816478)
+- 0.3.38
+
+-------------------------------------------------------------------
 Mon Feb 25 13:06:09 UTC 2013 - lslezak@suse.cz
 
 - updated REST API documentation (patch installation) (bnc#790159)

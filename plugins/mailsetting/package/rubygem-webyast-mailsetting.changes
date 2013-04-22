@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Mon Apr 22 13:49:04 UTC 2013 - lslezak@suse.cz
+
+- support for the new polkit (Javascript rules file) (bnc#816478)
+- 0.3.16
+
+-------------------------------------------------------------------
 Mon Feb 25 11:48:28 UTC 2013 - vmoravec@suse.com
 
 - fixed double render error and ajax response parsing 

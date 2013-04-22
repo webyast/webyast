@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Mon Apr 22 13:49:04 UTC 2013 - lslezak@suse.cz
+
+- support for the new polkit (Javascript rules file) (bnc#816478)
+- 0.3.17
+
+-------------------------------------------------------------------
 Fri Feb 22 07:54:43 UTC 2013 - lslezak@suse.cz
 
 - (re)start collect after package installation (bnc#792841)

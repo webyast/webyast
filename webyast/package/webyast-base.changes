@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Mon Apr 22 13:35:07 UTC 2013 - lslezak@suse.cz
+
+- support for the new polkit (bnc#808762, bnc#816478)
+- 0.3.45
+
+-------------------------------------------------------------------
 Fri Feb 22 14:34:06 UTC 2013 - locilka@suse.cz
 
 - Sorting restdoc documents alphabetically (bnc#805246)
