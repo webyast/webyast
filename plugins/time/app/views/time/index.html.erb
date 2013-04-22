@@ -165,6 +165,9 @@
             <legend>
               <input type="radio" name="systemtime[config]" value="manual" id="timeconfig_manual" <%= "disabled='disabled'" if disabled%> />
               <%= label_tag "timeconfig_manual", _("Manually configure time"), :class => "description" %>
+              <%- if @system_time.config_manual? %>
+                <%= label_tag "timeconfig_manual", _("[ Active ]"), :class => "current_time_config description" %>
+              <% end %>
             </legend>
 
             <div class="time_subsection">
@@ -180,18 +183,21 @@
             </div>
           </fieldset>
 
-          <%- if can?(:setserver, Ntp) && @ntp_available %>
+          <%- if can?(:setserver, Ntp) && @system_time.ntp_available %>
             <fieldset class="time_filedset" >
               <legend>
                 <input id="ntp_sync" type="radio" name="systemtime[config]" value="ntp_sync"
-                <%=  "disabled=\"disabled\"" if disabled || !@ntp_available %> />
-                <%= label_tag "ntp_sync", _("Synchronize via Network Time Protocol (NTP)"), :class => "description" %>
+                <%=  "disabled=\"disabled\"" if disabled || !@system_time.ntp_available %>
+                <%= label_tag "ntp_sync", _("Synchronize via Network Time Protocol"), :class => "description" %>
+              <%- if @system_time.config_ntp_sync? %>
+                <%= label_tag "ntp_sync", _("[ Active ]"), :class => "current_time_config description" %>
+              <% end %>
               </legend>
 
               <div class="time_subsection">
                 <div class="row">
                 <label for="ntp_server"><%= _("NTP server") %></label>
-                <%= text_field "systemtime", "ntp_server", :id => :ntp_server, :disabled=>true, :value => @ntp.actions[:ntp_server] %>
+                <%= text_field "systemtime", "ntp_server", :id => :ntp_server, :disabled=>true, :value => @system_time.ntp_server %>
                  </div>
                </div>
             </fieldset>

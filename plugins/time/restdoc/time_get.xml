@@ -6,5 +6,6 @@
   <utcstatus type="boolean">false</utcstatus>
   <timezone>Germany</timezone>
   <region>Europe</region>
+  <config>manual</config>
 </systemtime>
 

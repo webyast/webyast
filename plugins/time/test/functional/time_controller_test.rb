@@ -55,8 +55,9 @@ class TimeControllerTest < ActionController::TestCase
 
   def test_update_timezone
     stub_yapi_read
-    stub_yapi_write :with => TIMEZONE[:yapi]
-    post :create, :systemtime => TIMEZONE[:model]
+    stub_yapi_write :with => TIMEZONE[:yapi].merge(TIME_MANUAL[:yapi])
+    stub_ntp_service :stop
+    post :create, :systemtime => TIMEZONE[:model].merge(TIME_MANUAL[:model])
     assert_response :redirect
     assert_redirected_to :controller => :time, :action => :index
   end
@@ -74,9 +75,7 @@ class TimeControllerTest < ActionController::TestCase
   def test_update_manual_time
     stub_yapi_read
     stub_yapi_write :with  => TIMEZONE[:yapi].merge(TIME_MANUAL[:yapi])
-    YastService.stubs(:Call).with("YaPI::SERVICES::Execute",
-    {"name"=>["s", "ntp"], "action"=>["s", "stop"], "custom"=>["b", false]}).once.returns(true)
-    Ntp.expects(:save).never
+    stub_ntp_service :stop
     post :create, :systemtime => TIMEZONE[:model].merge(TIME_MANUAL[:model])
     assert_response :redirect
     assert_redirected_to :controller => :time, :action => :index
@@ -85,17 +84,16 @@ class TimeControllerTest < ActionController::TestCase
   TIME_NTP = {
     :model => {
       :config     => 'ntp_sync',
-      :ntp_server => 'time.ntpserver.com'
+      :ntp_server => 'ntp.ubuntu.com'
     },
     :yapi  => {
-      'ntp_server' => 'time.ntpserver.com'
+      'ntp_server' => 'ntp.ubuntu.com'
     }
   }
 
   def test_update_ntp_time
     stub_yapi_read
-    YastService.stubs(:Call).with("YaPI::SERVICES::Execute",
-      {"name"=>["s", "ntp"], "action"=>["s", "start"], "custom"=>["b", false]}).once.returns(true)
+    stub_ntp_service :start
     Ntp.any_instance.stubs(:update).once
     post :create, :systemtime => TIMEZONE[:model].merge(TIME_NTP[:model])
     assert_response :redirect
