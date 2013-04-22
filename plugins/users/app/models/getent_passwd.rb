@@ -54,8 +54,8 @@ private
     entries = `getent passwd`.split "\n"
     Rails.logger.warning "Command 'getent passwd' returned no entries." if entries.empty?
     entries
-  rescue Errno::ENOENT
-    Rails.logger.error "Execution of command 'getent passwd' failed."
+  rescue Errno::ENOENT => e
+    Rails.logger.error "Execution of command 'getent passwd' failed: #{e.message}"
     entries = []
   end
 
@@ -63,8 +63,8 @@ private
     wbinfo = `wbinfo -u --domain . 2> /dev/null`.split "\n"
     Rails.logger.info "Command 'wbinfo -u --domain .' returned no entries." if wbinfo.empty?
     wbinfo
-  rescue Errno::ENOENT
-    Rails.logger.error "Execution of command 'wbinfo -u --domain .' failed."
+  rescue Errno::ENOENT => e
+    Rails.logger.error "Execution of command 'wbinfo -u --domain .' failed: #{e.message}"
     wbinfo = []
   end
 
