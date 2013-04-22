@@ -2,73 +2,84 @@
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
 #
-# Freek de Kruijf <freek@opensuse.org>, 2010.
+# Freek de Kruijf <freek@opensuse.org>, 2010, 2011, 2012.
 msgid ""
 msgstr ""
 "Project-Id-Version: yast_webclient_time.nl\n"
-"POT-Creation-Date: 2010-05-03 16:31+0200\n"
-"PO-Revision-Date: 2010-04-23 14:45+0200\n"
+"POT-Creation-Date: 2012-06-07 15:20+0200\n"
+"PO-Revision-Date: 2012-06-15 10:16+0200\n"
 "Last-Translator: Freek de Kruijf <freek@opensuse.org>\n"
-"Language-Team: Dutch <yast-nl-l10n@lists.sf.kovoks.nl>\n"
+"Language-Team: Dutch <opensuse-nl@opensuse.org>\n"
+"Language: nl\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Lokalize 1.0\n"
+"X-Generator: Lokalize 1.2\n"
 
-#: app/controllers/time_controller.rb:98
-#: app/controllers/time_controller.rb:102
+#: app/controllers/time_controller.rb:117
 msgid "Time settings have been written."
 msgstr "Tijdinstellingen zijn weggeschreven."
 
-#: app/models/systemtime.rb:29
-msgid "Unknown timezone %s on host"
-msgstr "Onbekende tijdzone %s op de host "
+#: app/views/time/index.html.erb:54
+msgid "Error: Cannot get information."
+msgstr "Fout: kan geen informatie ophalen"
 
-#: app/views/time/index.rhtml:69 app/views/time/index.rhtml:73
-#: app/views/time/index.rhtml:97
+#: app/views/time/index.html.erb:79
+msgid "Please wait"
+msgstr "Een ogenblik geduld"
+
+#: app/views/time/index.html.erb:86 app/views/time/index.html.erb:90
+#: app/views/time/index.html.erb:111
 msgid "This field is required"
 msgstr "Dit veld is vereist"
 
-#: app/views/time/index.rhtml:70 app/views/time/index.rhtml:98
+#: app/views/time/index.html.erb:87 app/views/time/index.html.erb:112
 msgid "Enter a valid domain name or an IP address"
 msgstr "Voer een geldige domeinnaam in of een IP-adres"
 
-#: app/views/time/index.rhtml:74
+#: app/views/time/index.html.erb:91
 msgid "Invalid time format. Correct one is hh:mm:ss"
 msgstr "Ongeldige tijdopmaak. De juiste is hh:mm:ss"
 
-#: app/views/time/index.rhtml:131 app/views/time/index.rhtml:178
+#: app/views/time/index.html.erb:154 app/views/time/index.html.erb:198
+#: app/views/time/index.html.erb:216
 msgid "Time"
 msgstr "Tijd"
 
-#: app/views/time/index.rhtml:140
-msgid "Region"
-msgstr "Regio"
-
-#: app/views/time/index.rhtml:144
+#: app/views/time/index.html.erb:167 app/views/time/index.html.erb:177
 msgid "Timezone"
 msgstr "Tijdzone"
 
-#: app/views/time/index.rhtml:158
+#: app/views/time/index.html.erb:172
+msgid "Region"
+msgstr "Regio"
+
+#: app/views/time/index.html.erb:186
 msgid "Hardware clock is set to UTC"
 msgstr "Hardware klok is ingesteld op UTC"
 
-#: app/views/time/index.rhtml:168
+#: app/views/time/index.html.erb:207
 msgid "Manually configure time"
 msgstr "Handmatige configuratie van de tijd"
 
-#: app/views/time/index.rhtml:174
+#: app/views/time/index.html.erb:211
 msgid "Date"
 msgstr "Datum"
 
-#: app/views/time/index.rhtml:186
+#: app/views/time/index.html.erb:226
 msgid "Synchronize via Network Time Protocol (NTP)"
 msgstr "Synchroniseren via Network Time Protocol (NTP)"
 
-#: app/views/time/index.rhtml:191
+#: app/views/time/index.html.erb:231
 msgid "NTP server"
 msgstr "NTP-server"
+
+#~ msgid "Unknown timezone %s on host"
+#~ msgstr "Onbekende tijdzone %s op de host "
+
+#~ msgid "Set the clock"
+#~ msgstr "Stel de klok in"
 
 #~ msgid "Invalid date format. Correct one is dd/mm/yyyy"
 #~ msgstr "Ongeldige datumopmaak. De juiste is dd/mm/yyyy"

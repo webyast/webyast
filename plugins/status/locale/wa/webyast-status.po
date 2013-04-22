@@ -5,189 +5,234 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: webyast-status-ui 1.0.0\n"
-"POT-Creation-Date: 2010-08-02 09:18+0200\n"
+"Project-Id-Version: yast memory\n"
+"POT-Creation-Date: 2012-06-07 15:20+0200\n"
 "PO-Revision-Date: 2004-04-05 17:37+0200\n"
 "Last-Translator: Jean Cayron <jean.cayron@gmail.com>\n"
 "Language-Team: Walloon <i18n@suse.de>\n"
+"Language: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 
-#: app/controllers/status_controller.rb:149
-#: app/controllers/status_controller.rb:149
+#: app/models/graph.rb:109
+msgid "GByte"
+msgstr ""
+
+#: app/models/graph.rb:110
+#, fuzzy
+#| msgid "Hard Disk"
+msgid "Disk"
+msgstr "Deure plake"
+
+#: app/models/graph.rb:133
+msgid "MByte/s"
+msgstr ""
+
+#: app/models/graph.rb:134
+msgid "Network"
+msgstr "Rantoele"
+
+#: app/models/graph.rb:157
+msgid "MByte"
+msgstr ""
+
+#: app/models/graph.rb:158
+#, fuzzy
+#| msgid "Memory Test"
+msgid "Memory"
+msgstr "Saye di memwere"
+
+#: app/models/graph.rb:179
+msgid "Percent"
+msgstr ""
+
+#: app/models/graph.rb:180
+msgid "CPU"
+msgstr ""
+
+#: app/helpers/status_helper.rb:57 app/views/status/_status_graph.html.erb:125
+#: app/views/status/index.html.erb:53 app/views/status/index.html.erb:68
+#: app/views/status/index.html.erb:88 app/views/status/index.html.erb:237
+#, fuzzy
+#| msgid "Loading patch information"
+msgid "Error: Cannot get information."
+msgstr "Dji tchedje les informåcions sol coridjaedje"
+
+#: app/controllers/status_controller.rb:119
 msgid "No data found for showing system status."
 msgstr ""
 
-#: app/controllers/status_controller.rb:157
-#: app/controllers/status_controller.rb:157
+#: app/controllers/status_controller.rb:122
+#: app/controllers/status_controller.rb:160
+#: app/controllers/status_controller.rb:162
+#: app/controllers/status_controller.rb:164
 #, fuzzy
+#| msgid "No optional updates available"
 msgid "Status not available."
 msgstr "Pont d' coridjaedje nén oblidjî di disponibe"
 
-#: app/controllers/status_controller.rb:176
-#: app/controllers/status_controller.rb:176
-msgid "Can't connect to host"
+#: app/controllers/status_controller.rb:125
+#: app/controllers/status_controller.rb:169
+msgid "Collectd is out of sync."
 msgstr ""
 
-#: app/controllers/status_controller.rb:178
-#: app/controllers/status_controller.rb:178
-msgid "Can't connect to host %s."
-msgstr ""
-
-#: app/controllers/status_controller.rb:217
-#: app/controllers/status_controller.rb:217
-msgid "Limits exceeded for "
-msgstr ""
-
-#: app/controllers/status_controller.rb:242
-#: app/controllers/status_controller.rb:242
+#: app/controllers/status_controller.rb:140
+#: app/controllers/status_controller.rb:198
 #, fuzzy
-msgid "Status not available"
-msgstr "Pont d' coridjaedje nén oblidjî di disponibe"
-
-#: app/controllers/status_controller.rb:266
-#: app/controllers/status_controller.rb:266
-#, fuzzy
+#| msgid "No optional updates available"
 msgid "Status not available (no permissions)"
 msgstr "Pont d' coridjaedje nén oblidjî di disponibe"
 
-#: app/controllers/status_controller.rb:328
-#: app/controllers/status_controller.rb:328
+#: app/controllers/status_controller.rb:150
+msgid "Limits exceeded for "
+msgstr ""
+
+#: app/controllers/status_controller.rb:263
 #, fuzzy
+#| msgid "Needed"
 msgid "exceeded"
 msgstr "Dj' end a dandjî"
 
-#: app/controllers/status_controller.rb:342
-#: app/controllers/status_controller.rb:342
+#: app/controllers/status_controller.rb:277
 msgid "undercut"
 msgstr ""
 
-#: app/controllers/status_controller.rb:444
-#: app/controllers/status_controller.rb:444
+#: app/controllers/status_controller.rb:376
 msgid "Limits have been written."
 msgstr ""
 
-#: app/views/status/edit.html.erb:48 app/views/status/edit.html.erb:48
-msgid "Only numbers are valid !"
-msgstr ""
-
-#: app/views/status/edit.html.erb:75 app/views/status/index.html.erb:52
-#: app/views/status/edit.html.erb:75 app/views/status/index.html.erb:52
-#: shortcuts.yml:6
-msgid "Status"
-msgstr "Estat"
-
-#: app/views/status/edit.html.erb:75 app/views/status/edit.html.erb:75
-msgid "Settings"
-msgstr "Tchuzes"
-
-#: app/views/status/edit.html.erb:89 app/views/status/edit.html.erb:89
-msgid "undercuts"
-msgstr ""
-
-#: app/views/status/edit.html.erb:89 app/views/status/edit.html.erb:89
-#, fuzzy
-msgid "exceeds"
-msgstr "A dandjî di"
-
-#: app/views/status/index.html.erb:94 app/views/status/index.html.erb:94
-#, fuzzy
-msgid "details"
-msgstr "Detays"
-
-#: app/views/status/index.html.erb:110 app/views/status/index.html.erb:110
-msgid "Details"
-msgstr "Detays"
-
-#: app/views/status/index.html.erb:178 app/views/status/index.html.erb:178
-msgid "Edit Limits"
-msgstr ""
-
-#: app/views/status/_status_graph.html.erb:2
 #: app/views/status/_status_graph.html.erb:2
 msgid "A problem occured when loading status information."
 msgstr ""
 
-#: app/views/status/_status_graph.html.erb:90
-#: app/views/status/_status_graph.html.erb:90
+#: app/views/status/_status_graph.html.erb:11
 #, fuzzy
+#| msgid "%1 Patches available"
+msgid "No data available"
+msgstr "Gn a %1coridjaedjes di disponibes"
+
+#: app/views/status/_status_graph.html.erb:100
+#, fuzzy
+#| msgid "Show caps"
 msgid "Show last"
 msgstr "Moster les difinmints"
 
-#: app/views/status/_status_graph.html.erb:91
-#: app/views/status/_status_graph.html.erb:91
+#: app/views/status/_status_graph.html.erb:102
 #, fuzzy
+#| msgid " Minutes"
 msgid "5 Minutes"
 msgstr " Munutes"
 
-#: app/views/status/_status_graph.html.erb:92
-#: app/views/status/_status_graph.html.erb:92
+#: app/views/status/_status_graph.html.erb:103
 #, fuzzy
+#| msgid " Minutes"
 msgid "15 Minutes"
 msgstr " Munutes"
 
-#: app/views/status/_status_graph.html.erb:93
-#: app/views/status/_status_graph.html.erb:93
+#: app/views/status/_status_graph.html.erb:104
 #, fuzzy
+#| msgid " Minutes"
 msgid "30 Minutes"
 msgstr " Munutes"
 
-#: app/views/status/_status_graph.html.erb:94
-#: app/views/status/_status_graph.html.erb:94
+#: app/views/status/_status_graph.html.erb:105
 #, fuzzy
+#| msgid " Hours"
 msgid "1 Hour"
 msgstr "Eures"
 
-#: app/views/status/_status_graph.html.erb:95
-#: app/views/status/_status_graph.html.erb:95
+#: app/views/status/_status_graph.html.erb:106
 #, fuzzy
+#| msgid " Hours"
 msgid "6 Hours"
 msgstr "Eures"
 
-#: app/views/status/_status_graph.html.erb:96
-#: app/views/status/_status_graph.html.erb:96
+#: app/views/status/_status_graph.html.erb:107
 #, fuzzy
+#| msgid " Hours"
 msgid "12 Hours"
 msgstr "Eures"
 
-#: app/views/status/_status_summary.html.erb:6
-#: app/views/status/_status_summary.html.erb:6
+#: app/views/status/edit.html.erb:49
+msgid "Only numbers are valid !"
+msgstr ""
+
+#: app/views/status/edit.html.erb:81 app/views/status/index.html.erb:108
+msgid "Status"
+msgstr "Estat"
+
+#: app/views/status/edit.html.erb:81
+msgid "Settings"
+msgstr "Tchuzes"
+
+#: app/views/status/edit.html.erb:102
+msgid "undercuts"
+msgstr ""
+
+#: app/views/status/edit.html.erb:102
+#, fuzzy
+#| msgid "Needs"
+msgid "exceeds"
+msgstr "A dandjî di"
+
+#: app/views/status/_status_summary.html.erb:4
 msgid "An problem occured when loading status information."
 msgstr ""
 
-#: app/views/status/_status_summary.html.erb:13
-#: app/views/status/_status_summary.html.erb:13
-msgid "Cannot read system status - you have been logged out."
-msgstr ""
-
-#: app/views/status/_status_summary.html.erb:16
-#: app/views/status/_status_summary.html.erb:16
+#: app/views/status/_status_summary.html.erb:38
 #, fuzzy
+#| msgid "Your system is up-to-date."
 msgid "Your system is healthy."
 msgstr "Vosse sistinme est a djoû."
 
-#: app/views/status/_status_summary.html.erb:26
-#: app/views/status/_status_summary.html.erb:26
+#: app/views/status/_status_summary.html.erb:49
 #, fuzzy
+#| msgid "System Information"
 msgid "Loading system information"
 msgstr "Informåcion sol sistinme"
 
-#: app/views/status/_status_progress.html.erb:8
-#: app/views/status/_status_progress.html.erb:8
-msgid "Checking system status"
+#: app/views/status/_status_summary.html.erb:57
+msgid "Error: Cannot check the current status."
 msgstr ""
 
-#: shortcuts.yml:7
-msgid "Show system status"
+#: app/views/status/index.html.erb:157
+#, fuzzy
+#| msgid "Details"
+msgid "details"
+msgstr "Detays"
+
+#: app/views/status/index.html.erb:173
+msgid "Details"
+msgstr "Detays"
+
+#: app/views/status/index.html.erb:218
+msgid "Edit Limits"
 msgstr ""
 
 #, fuzzy
+#~| msgid "Status connected color"
+#~ msgid "Can't connect to host"
+#~ msgstr "Coleur di l' estat raloyî"
+
+#, fuzzy
+#~| msgid "No optional updates available"
+#~ msgid "Status not available"
+#~ msgstr "Pont d' coridjaedje nén oblidjî di disponibe"
+
+#, fuzzy
+#~| msgid "Your system is up-to-date"
+#~ msgid "Show system status"
+#~ msgstr "Vosse sistinme est a djoû"
+
+#, fuzzy
+#~| msgid "Please restart your system as soon as possible."
 #~ msgid "Please register your system in order to get updates."
 #~ msgstr "Renondez vosse sistinme ossu rade ki possibe."
 
 #, fuzzy
+#~| msgid "Running the configuration tool failed"
 #~ msgid "Mail configuration test not confirmed"
 #~ msgstr "L' enondaedje di l' usteye d' apontiaedje a fwait berwete"
 

@@ -1,76 +1,133 @@
-# Copyright (C) 2006 SuSE Linux Products GmbH, Nuernberg
-# This file is distributed under the same license as the package.
+# @TITLE@
+# Copyright (C) 2006, SUSE Linux GmbH, Nuremberg
 #
+# This file is distributed under the same license as @PACKAGE@ package. FIRST
+#
+# Isis Binder <isis.binder@gmail.com>, 2010, 2011, 2012.
+# Luiz Fernando Ranghetti <elchevive@opensuse.org>, 2011, 2012.
 msgid ""
 msgstr ""
-"Project-Id-Version: webyast-roles-ui\n"
-"POT-Creation-Date: 2010-08-23 14:39+0200\n"
-"PO-Revision-Date: 2010-08-26 09:31\n"
-"Last-Translator: Novell Language <language@novell.com>\n"
-"Language-Team: Novell Language <language@novell.com>\n"
+"Project-Id-Version: yast_webclient_roles\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2012-06-07 15:19+0200\n"
+"PO-Revision-Date: 2012-10-01 11:15-0300\n"
+"Last-Translator: Isis Binder <isis.binder@gmail.com>\n"
+"Language-Team: Brazilian Portuguese <opensuse-pt@opensuse.org>\n"
+"Language: pt_BR\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Lokalize 1.2\n"
 "Plural-Forms: nplurals=2; plural=n>1;\n"
+"X-Poedit-Language: Portuguese\n"
+"X-Poedit-Country: BRAZIL\n"
+"X-Poedit-SourceCharset: utf-8\n"
 
-#: app/controllers/roles_controller.rb:85 ./app/controllers/roles_controller.rb:85
-msgid "Role name is already used or invalid. Allowed is combination of a-z, A-Z, numbers, space, dash and underscore only."
-msgstr "Nome de função já usado ou inválido. Só é permitida uma combinação de a-z, A-Z, números, espaço, hífen e sublinhado."
+#: app/controllers/roles_controller.rb:126
+msgid ""
+"Role name is invalid. Allowed is combination of a-z, A-Z, numbers, space, "
+"dash and underscore only."
+msgstr ""
+"O nome da função é inválido. Somente é permitido a combinação de a-z, A-Z, "
+"números, espaço, barra e sublinhado."
 
-#: app/controllers/roles_controller.rb:103 ./app/controllers/roles_controller.rb:103
-msgid "Role <i>%s</i> was successfully removed."
-msgstr "Função <i>%s</i> removida com êxito."
+#: app/controllers/roles_controller.rb:136
+msgid "Role name is already used."
+msgstr "O nome da função já está em uso."
 
-#: app/controllers/roles_controller.rb:105 ./app/controllers/roles_controller.rb:105
-msgid "Error: Could not remove role <i>%s</i>."
-msgstr "Erro: não foi possível remover a função <i>%s</i>."
+#: app/controllers/roles_controller.rb:155
+msgid "Role '%s' was successfully removed."
+msgstr "A função '%s' foi removida com sucesso."
 
-#: app/controllers/roles_controller.rb:118 ./app/controllers/roles_controller.rb:118
-msgid "Cannot find roles"
-msgstr "Impossível localizar funções"
-
-#: app/views/roles/index.rhtml:61 app/views/roles/index.rhtml:217 app/views/roles/index.rhtml:223
-#: ./app/views/roles/index.rhtml:61 ./app/views/roles/index.rhtml:217 ./app/views/roles/index.rhtml:223
-msgid "Assign Users"
-msgstr "Atribuir Usuários"
-
-#: app/views/roles/index.rhtml:62 ./app/views/roles/index.rhtml:62
-msgid "Selected Users"
-msgstr "Usuários Selecionados"
-
-#: app/views/roles/index.rhtml:63 ./app/views/roles/index.rhtml:63
-msgid "Available Users"
-msgstr "Usuários Disponíveis"
-
-#: app/views/roles/index.rhtml:64 ./app/views/roles/index.rhtml:64
-msgid "Click user names to assign/remove users"
-msgstr "Clique nos nomes de usuário para atribuir/remover usuários"
-
-#: app/views/roles/index.rhtml:121 ./app/views/roles/index.rhtml:121
-msgid "Please wait"
-msgstr "Aguarde"
-
-#: app/views/roles/index.rhtml:159 ./app/views/roles/index.rhtml:159 ./shortcuts.yml:6
+#: app/views/roles/index.html.erb:7
 msgid "Roles"
 msgstr "Funções"
 
-#: app/views/roles/index.rhtml:163 ./app/views/roles/index.rhtml:163
+#: app/views/roles/index.html.erb:25
+msgid "In order to assign the user to roles,"
+msgstr "Para associar o usuário com as funções,"
+
+#: app/views/roles/index.html.erb:26
+msgid "Drag and Drop the user labels into Role containers"
+msgstr "Arraste e solte os rótulos de usuário nos conteineres de função"
+
+#: app/views/roles/index.html.erb:27
+msgid "Don't show this again"
+msgstr "Não exibir isto novamente"
+
+#: app/views/roles/index.html.erb:38
 msgid "Create Role"
-msgstr "Criar Função"
+msgstr "Criar função"
 
-#: app/views/roles/index.rhtml:175 ./app/views/roles/index.rhtml:175
+#: app/views/roles/index.html.erb:43
+msgid "Assign Users"
+msgstr "Atribuir usuários"
+
+#: app/views/roles/index.html.erb:53
+msgid "User already assigned"
+msgstr "Usuário já atribuído"
+
+#: app/views/roles/index.html.erb:104
 msgid "Assign Permissions"
-msgstr "Atribuir Permissões"
+msgstr "Atribuir permissões"
 
-#: app/views/roles/index.rhtml:178 ./app/views/roles/index.rhtml:178
+#: app/views/roles/index.html.erb:107
 msgid "collapse all"
 msgstr "recolher tudo"
 
-#: app/views/roles/index.rhtml:224 ./app/views/roles/index.rhtml:224
-msgid "Delete"
-msgstr "Apagar"
+#: app/views/roles/index.html.erb:169
+msgid "This field is required"
+msgstr "É necessário preencher este campo"
 
-#: ./shortcuts.yml:7
-msgid "Set permissions in roles and assign users to roles"
-msgstr "Definir permissões em funções e atribuir usuários a funções"
+#: app/views/roles/index.html.erb:169
+msgid ""
+"Allowed is combination of a-z, A-Z, numbers, space, dash and underscore only."
+msgstr ""
+"É permitido somente a combinação de a-z, A-Z, números, espaço, barra e "
+"sublinhado."
 
+#: app/views/roles/index.html.erb:235
+msgid "Please wait"
+msgstr "Por favor, aguarde"
+
+#~ msgid "Error: Could not remove role <i>%s</i>."
+#~ msgstr "Erro: não foi possível remover a função <i>%s</i>."
+
+#~ msgid "Cannot find roles"
+#~ msgstr "Não foi possível encontrar as funções"
+
+#~ msgid "Set permissions in roles and assign users to roles"
+#~ msgstr "Configurar permissões nas funçõese atribuir usuários às funções"
+
+#~ msgid "Selected Users"
+#~ msgstr "Usuários selecionados"
+
+#~ msgid "Available Users"
+#~ msgstr "Usuários disponíveis"
+
+#~ msgid "Click user names to assign/remove users"
+#~ msgstr "Clique nos nomes de usuário para atribuir/remover usuários"
+
+#~ msgid "Invalid role name"
+#~ msgstr "Nome da regra inválido"
+
+#~ msgid "Permissions contained in role"
+#~ msgstr "Permissões contidas na regra"
+
+#~ msgid "Permissions granted by role"
+#~ msgstr "Permissões concedidas pela regra"
+
+#~ msgid "Available permissions"
+#~ msgstr "Permissões disponíveis"
+
+#~ msgid "Description of permissions"
+#~ msgstr "Descrição das permissões"
+
+#~ msgid ")}-description"
+#~ msgstr ")}-descrição"
+
+#~ msgid "Remaining users"
+#~ msgstr "Usuários restantes"
+
+#~ msgid "Save"
+#~ msgstr "Salvar"

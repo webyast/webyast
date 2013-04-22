@@ -1,81 +1,91 @@
-# Copyright (C) 2006 SuSE Linux Products GmbH, Nuernberg
-# This file is distributed under the same license as the package.
+# @TITLE@
+# Copyright (C) 2006, SUSE Linux GmbH, Nuremberg
 #
+# This file is distributed under the same license as @PACKAGE@ package. FIRST
+#
+# Isis Binder <isis.binder@gmail.com>, 2010, 2012.
+# Luiz Fernando Ranghetti <elchevive@opensuse.org>, 2011, 2012.
 msgid ""
 msgstr ""
-"Project-Id-Version: webyast-time-ui\n"
-"POT-Creation-Date: 2010-08-18 10:18+0200\n"
-"PO-Revision-Date: 2010-08-26 09:31\n"
-"Last-Translator: Novell Language <language@novell.com>\n"
-"Language-Team: Novell Language <language@novell.com>\n"
+"Project-Id-Version: yast_webclient_time\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2012-06-07 15:20+0200\n"
+"PO-Revision-Date: 2012-10-01 12:20-0300\n"
+"Last-Translator: Isis Binder <isis.binder@gmail.com>\n"
+"Language-Team: Brazilian Portuguese <opensuse-pt@opensuse.org>\n"
+"Language: pt_BR\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Lokalize 1.2\n"
 "Plural-Forms: nplurals=2; plural=n>1;\n"
+"X-Poedit-Language: Portuguese\n"
+"X-Poedit-Country: BRAZIL\n"
+"X-Poedit-SourceCharset: utf-8\n"
 
-#: app/controllers/time_controller.rb:99 app/controllers/time_controller.rb:103
-#: ./app/controllers/time_controller.rb:99 ./app/controllers/time_controller.rb:103
+#: app/controllers/time_controller.rb:117
 msgid "Time settings have been written."
-msgstr "As configurações de horário já foram gravadas."
+msgstr "As configurações de horário foram gravadas."
 
-#: app/models/systemtime.rb:29 ./app/models/systemtime.rb:29
-msgid "Unknown timezone %s on host"
-msgstr "Fuso horário desconhecido %s no host"
+#: app/views/time/index.html.erb:54
+msgid "Error: Cannot get information."
+msgstr "Erro: não foi possível obter informações."
 
-#: app/views/time/index.rhtml:71 ./app/views/time/index.rhtml:71
+#: app/views/time/index.html.erb:79
 msgid "Please wait"
-msgstr "Aguarde"
+msgstr "Por favor, aguarde"
 
-#: app/views/time/index.rhtml:78 app/views/time/index.rhtml:82 app/views/time/index.rhtml:107
-#: ./app/views/time/index.rhtml:78 ./app/views/time/index.rhtml:82 ./app/views/time/index.rhtml:107
+#: app/views/time/index.html.erb:86 app/views/time/index.html.erb:90
+#: app/views/time/index.html.erb:111
 msgid "This field is required"
-msgstr "Este campo é obrigatório"
+msgstr "É necessário preencher este campo"
 
-#: app/views/time/index.rhtml:79 app/views/time/index.rhtml:108 ./app/views/time/index.rhtml:79
-#: ./app/views/time/index.rhtml:108
+#: app/views/time/index.html.erb:87 app/views/time/index.html.erb:112
 msgid "Enter a valid domain name or an IP address"
-msgstr "Digitar um nome de domínio ou um endereço IP válido"
+msgstr "Digite um nome de domínio válido ou um endereço IP"
 
-#: app/views/time/index.rhtml:83 ./app/views/time/index.rhtml:83
+#: app/views/time/index.html.erb:91
 msgid "Invalid time format. Correct one is hh:mm:ss"
 msgstr "Formato de horário inválido. O correto é hh:mm:ss"
 
-#: app/views/time/index.rhtml:142 app/views/time/index.rhtml:176 app/views/time/index.rhtml:190
-#: ./app/views/time/index.rhtml:142 ./app/views/time/index.rhtml:176 ./app/views/time/index.rhtml:190
-#: ./shortcuts.yml:6
+#: app/views/time/index.html.erb:154 app/views/time/index.html.erb:198
+#: app/views/time/index.html.erb:216
 msgid "Time"
-msgstr "Tempo"
+msgstr "Horário"
 
-#: app/views/time/index.rhtml:150 app/views/time/index.rhtml:157 ./app/views/time/index.rhtml:150
-#: ./app/views/time/index.rhtml:157
+#: app/views/time/index.html.erb:167 app/views/time/index.html.erb:177
 msgid "Timezone"
 msgstr "Fuso horário"
 
-#: app/views/time/index.rhtml:152 ./app/views/time/index.rhtml:152
+#: app/views/time/index.html.erb:172
 msgid "Region"
 msgstr "Região"
 
-#: app/views/time/index.rhtml:167 ./app/views/time/index.rhtml:167
+#: app/views/time/index.html.erb:186
 msgid "Hardware clock is set to UTC"
-msgstr "Relógio do hardware definido como UTC"
+msgstr "O relógio de hardware está definido para UTC"
 
-#: app/views/time/index.rhtml:181 ./app/views/time/index.rhtml:181
+#: app/views/time/index.html.erb:207
 msgid "Manually configure time"
-msgstr "Configurar horário manualmente"
+msgstr "Configurar o horário manualmente"
 
-#: app/views/time/index.rhtml:186 ./app/views/time/index.rhtml:186
+#: app/views/time/index.html.erb:211
 msgid "Date"
 msgstr "Data"
 
-#: app/views/time/index.rhtml:197 ./app/views/time/index.rhtml:197
+#: app/views/time/index.html.erb:226
 msgid "Synchronize via Network Time Protocol (NTP)"
 msgstr "Sincronizar via NTP (Network Time Protocol)"
 
-#: app/views/time/index.rhtml:201 ./app/views/time/index.rhtml:201
+#: app/views/time/index.html.erb:231
 msgid "NTP server"
 msgstr "Servidor NTP"
 
-#: ./shortcuts.yml:7
-msgid "Set the clock"
-msgstr "Definir o relógio"
+#~ msgid "Unknown timezone %s on host"
+#~ msgstr "Fuso horário desconhecido %s na máquina"
 
+#~ msgid "Set the clock"
+#~ msgstr "Configurar o relógio"
+
+#~ msgid "Invalid date format. Correct one is dd/mm/yyyy"
+#~ msgstr "Formato de data inválido. O correto é dd/mm/aaaa"

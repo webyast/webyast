@@ -1,0 +1,71 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: desktop-translations 20090902\n"
+"POT-Creation-Date: 2012-06-07 15:20+0200\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+msgid "Account settings"
+msgstr ""
+
+#, fuzzy
+#| msgctxt "Name(dmoz.desktop)"
+#| msgid "Open Directory"
+msgid "Active Directory"
+msgstr "Кушодани феҳрист"
+
+msgid "Active Directory Domain"
+msgstr ""
+
+msgid "Active Directory client configuraton successfully written."
+msgstr ""
+
+msgid "Administrator User Name"
+msgstr ""
+
+msgid "Cannot read Active Directory client configuraton."
+msgstr ""
+
+msgid "Enable Authentication of AD users"
+msgstr ""
+
+msgid "Error while joining Active Directory domain: %s"
+msgstr ""
+
+msgid "Error while leaving Active Directory domain: %s"
+msgstr ""
+
+msgid "Error while saving Active Directory client configuration."
+msgstr ""
+
+#, fuzzy
+#| msgctxt "Name(knode_config_accounts.desktop)"
+#| msgid "Accounts"
+msgid "Machine Account"
+msgstr "Қайдҳои баҳисобгирӣ"
+
+msgid "Machine is not member of given domain. Enter the credentials needed for join."
+msgstr ""
+
+#, fuzzy
+#| msgctxt "Name(kdepasswd.desktop)"
+#| msgid "Change Password"
+msgid "Password"
+msgstr "Ивази парол"
+
+msgid "Please wait"
+msgstr ""
+
+msgid "This field is required."
+msgstr ""
+
+#, fuzzy
+#~| msgctxt "Comment(kwinoptions.desktop)"
+#~| msgid "Configure the window behavior"
+#~ msgid "Configure the connection to Active Directory"
+#~ msgstr "Танзимоти ҳолати тиреза"

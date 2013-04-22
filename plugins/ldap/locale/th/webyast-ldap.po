@@ -1,0 +1,94 @@
+# Thai message file for YaST2 (@memory@).
+# Copyright (C) 2008 SUSE Linux Products GmbH.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: YaST (@memory@)\n"
+"Report-Msgid-Bugs-To: i18n@suse.de\n"
+"POT-Creation-Date: 2012-06-07 15:20+0200\n"
+"PO-Revision-Date: 2008-01-04 08:58+0100\n"
+"Last-Translator: i18n@suse.de\n"
+"Language-Team: Thai <i18n@suse.de>\n"
+"Language: th\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+
+#: app/controllers/ldap_controller.rb:38
+#, fuzzy
+#| msgid "Cannot read the configuration."
+msgid "Cannot read LDAP client configuraton."
+msgstr "ไม่สามารถอ่านค่าปรับแต่งได้"
+
+#: app/controllers/ldap_controller.rb:63
+#, fuzzy
+#| msgid "NTP client configuration module."
+msgid "LDAP client configuraton successfully written."
+msgstr "มอดูลปรับแต่งไคลเอนต์ของบริการ NTP"
+
+#: app/controllers/ldap_controller.rb:65
+#, fuzzy
+#| msgid "Error creating HTTPD configuration."
+msgid "Error while saving LDAP client configuration."
+msgstr "เกิดข้อผิดพลาดในการสร้างการปรับแต่งค่าของ HTTPD"
+
+#: app/views/ldap/index.html.erb:33
+msgid "This field is required."
+msgstr ""
+
+#: app/views/ldap/index.html.erb:34
+#, fuzzy
+#| msgid "Enter a valid device and filename."
+msgid "Enter a valid domain name or an IP address."
+msgstr "ป้อนชื่อแฟ้มและอุปกรณ์ที่ใช้งานได้"
+
+#: app/views/ldap/index.html.erb:70
+msgid "Please wait"
+msgstr ""
+
+#: app/views/ldap/index.html.erb:88
+#, fuzzy
+#| msgid "LDAP Client"
+msgid "LDAP client"
+msgstr "ไคลเอนต์ของ LDAP"
+
+#: app/views/ldap/index.html.erb:101
+#, fuzzy
+#| msgid "Enable fingerprint authentication"
+msgid "Enable LDAP Authentication"
+msgstr "เปิดการใช้งาน การตรวจสอบสิทธิ์ด้วยลายนิ้วมือ"
+
+#: app/views/ldap/index.html.erb:108
+#, fuzzy
+#| msgid "NTP Server Address"
+msgid "LDAP Server Address"
+msgstr "ที่อยู่ของแม่ข่ายบริการ NTP"
+
+#: app/views/ldap/index.html.erb:113
+#, fuzzy
+#| msgid "LDAP Base &DN"
+msgid "Base DN"
+msgstr "&DN ฐานของ LDAP "
+
+#: app/views/ldap/index.html.erb:115
+#, fuzzy
+#| msgid "F&etch DN"
+msgid "Fetch DN"
+msgstr "รับค่า DN"
+
+#: app/views/ldap/index.html.erb:127
+#, fuzzy
+#| msgid "Current Connection"
+msgid "Secure Connection"
+msgstr "การเชื่อมต่อปัจจุบัน"
+
+#, fuzzy
+#~| msgid "&Use LDAP"
+#~ msgid "LDAP"
+#~ msgstr "ใช้บริการ LDAP"
+
+#, fuzzy
+#~| msgid "Configuration of NFS client"
+#~ msgid "Configure LDAP client"
+#~ msgstr "การปรับแต่งค่าของไคลเอนต์ NFS"

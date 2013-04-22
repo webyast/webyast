@@ -5,94 +5,284 @@ msgid ""
 msgstr ""
 "Project-Id-Version: base\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-11-20 14:35+0100\n"
+"POT-Creation-Date: 2012-06-07 15:20+0200\n"
 "PO-Revision-Date: 2006-11-03 14:26\n"
-"Last-Translator: Novell Language <language@novell.com>\n"
-"Language-Team: Novell Language <language@novell.com>\n"
+"Last-Translator: i18n@suse.de\n"
+"Language-Team: i18n@suse.de\n"
+"Language: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: app/controllers/registration_controller.rb:15
-msgid "Invalid session, please login again."
+#: app/models/registration_state.rb:27
+msgid "Registration is missing"
 msgstr ""
+
+#: app/models/registration_state.rb:28
+msgid "Please register your system in order to get updates."
+msgstr ""
+
+#: app/models/registration_state.rb:30
+#, fuzzy
+#| msgid "&Administration"
+msgid "register"
+msgstr "&Ulawulo"
+
+#: app/controllers/registration_controller.rb:29
+msgid "Email"
+msgstr ""
+
+#: app/controllers/registration_controller.rb:30
+#, fuzzy
+#| msgid "System"
+msgid "System name"
+msgstr "Isixokelelwano"
+
+#: app/controllers/registration_controller.rb:31
+#, fuzzy
+#| msgid "&Administration"
+msgid "SLES registration code"
+msgstr "&Ulawulo"
+
+#: app/controllers/registration_controller.rb:32
+#, fuzzy
+#| msgid "&Administration"
+msgid "SLED registration code"
+msgstr "&Ulawulo"
+
+#: app/controllers/registration_controller.rb:33
+#, fuzzy
+#| msgid "&Administration"
+msgid "SLMS registration code"
+msgstr "&Ulawulo"
+
+#: app/controllers/registration_controller.rb:34
+#, fuzzy
+#| msgid "Application Browser"
+msgid "Appliance registration code"
+msgstr "Isikhangeli Senkqubo"
+
+#: app/controllers/registration_controller.rb:35
+msgid "WebYaST registration code"
+msgstr ""
+
+#: app/controllers/registration_controller.rb:36
+#, fuzzy
+#| msgid "&Administration"
+msgid "Registration code"
+msgstr "&Ulawulo"
+
+#: app/controllers/registration_controller.rb:37
+#, fuzzy
+#| msgid "Host Names"
+msgid "Hostname"
+msgstr "Amagama Omamkeli"
+
+#: app/controllers/registration_controller.rb:38
+#, fuzzy
+#| msgid "Modem device name"
+msgid "Device name"
+msgstr "Igama lesixhobo se-modem"
 
 #: app/controllers/registration_controller.rb:39
-#: app/controllers/registration_controller.rb:89
-msgid "No permissions for registration"
+msgid "Appliance name"
 msgstr ""
 
-#: app/controllers/registration_controller.rb:68
-msgid "Arguments for registration cannot be evaluated."
-msgstr ""
-
-#: app/controllers/registration_controller.rb:69
+#: app/controllers/registration_controller.rb:40
 #, fuzzy
-#| msgid "An error occurred during the installation."
-msgid "An error occurred during registration. Please try again."
-msgstr "Kwenzeke impazamo ngethuba lokuhlohla."
+#| msgid "&Administration"
+msgid "registration code"
+msgstr "&Ulawulo"
 
-#: app/controllers/registration_controller.rb:111
-msgid "Registration finished successfully."
+#: app/controllers/registration_controller.rb:81
+msgid "Please try to register again later."
 msgstr ""
 
-#: app/controllers/registration_controller.rb:119
+#: app/controllers/registration_controller.rb:85
+msgid "Registration did not succeed."
+msgstr ""
+
+#: app/controllers/registration_controller.rb:89
+#, fuzzy
+#| msgid "&Administration"
+msgid "Registration was skipped."
+msgstr "&Ulawulo"
+
+#: app/controllers/registration_controller.rb:93
+msgid "This may be a temporary issue."
+msgstr ""
+
+#: app/controllers/registration_controller.rb:97
+msgid "The system might not receive necessary updates."
+msgstr ""
+
+#: app/controllers/registration_controller.rb:113
+msgid "The registration server returned invalid or incomplete data."
+msgstr ""
+
+#: app/controllers/registration_controller.rb:121
+#, fuzzy
+#| msgid "Could not load the global configuration."
+msgid "Could not read the registration configuration."
+msgstr "Alukwazanga kulayisheka ubumbeko lwehlabathi."
+
+#: app/controllers/registration_controller.rb:121
+msgid "The registration backend is not installed correctly"
+msgstr ""
+
+#: app/controllers/registration_controller.rb:122
+#, fuzzy
+#| msgid "Please file a bug report about this."
+msgid "Please refer to your support contact."
+msgstr "Nceda fayilisha ingxelo ye-bug malunga noku."
+
+#: app/controllers/registration_controller.rb:151
+msgid "Please fill out missing entries."
+msgstr ""
+
+#: app/controllers/registration_controller.rb:183
 msgid "Service added:"
 msgstr ""
 
-#: app/controllers/registration_controller.rb:123
-#: app/controllers/registration_controller.rb:128
+#: app/controllers/registration_controller.rb:189
 #, fuzzy
 #| msgid "Catalog: "
 msgid "Catalog enabled:"
 msgstr "Ikhathalog:"
 
-#: app/controllers/registration_controller.rb:143
+#: app/controllers/registration_controller.rb:215
 msgid "Repository added:"
 msgstr ""
 
-#: app/controllers/registration_controller.rb:173
-msgid "Please fill out missing entries."
-msgstr ""
-
-#: app/controllers/registration_controller.rb:176
+#: app/controllers/registration_controller.rb:357
 #, fuzzy
-#| msgid "An error occurred while reading from the installation source."
-msgid "Error occured while connecting to registration server."
-msgstr "Kwenzeke imposiso xa bekufundwa kukavimba wokuhlohla."
+#| msgid "The request already exists."
+msgid "This system is already registered."
+msgstr "Isicelo sesikhona kakade."
 
-#: app/views/registration/index.rhtml:1
-msgid "register plugin"
+#: app/controllers/registration_controller.rb:382
+msgid "Registration finished successfully."
 msgstr ""
 
-#: app/views/registration/index.rhtml:1
+#: app/controllers/registration_controller.rb:396
+msgid "A connection to the registration server could not be established."
+msgstr ""
+
+#: app/controllers/registration_controller.rb:400
+msgid "The supplied registration data was invalid."
+msgstr ""
+
+#: app/controllers/registration_controller.rb:404
+msgid "The registration code you entered was invalid."
+msgstr ""
+
+#: app/controllers/registration_controller.rb:410
+msgid "The transmitted registration data created a conflict."
+msgstr ""
+
+#: app/controllers/registration_controller.rb:418
+msgid "Registration can not be performed. There is no product installed that can be registered."
+msgstr ""
+
+#: app/controllers/registration_controller.rb:442
+msgid "<p><b>Repositories were not modified during the registration process.</b></p><p>It is likely that an incorrect registration code was used. If this is the case, please attempt the registration process again to get an update repository.</p><p>Please make sure that this system has an update repository configured, otherwise it will not receive updates.</p>"
+msgstr ""
+
+#: app/controllers/registration_controller.rb:454
+msgid "The registration server returned invalid data."
+msgstr ""
+
+#: app/views/registration/index.html.erb:42
+#: app/views/registration/index.html.erb:57
+#, fuzzy
+#| msgid "Please wait..."
+msgid "Please wait"
+msgstr "Nceda Linda…"
+
+#: app/views/registration/index.html.erb:64
+#: app/views/registration/index.html.erb:65
+#, fuzzy
+#| msgid "`%s' is not a valid ip address."
+msgid "Please enter a valid Email address."
+msgstr "`%s' asiyodilesi engasebenzisekiyo ye-ip."
+
+#: app/views/registration/index.html.erb:80
 #, fuzzy
 #| msgid "&Administration"
 msgid "Registration"
 msgstr "&Ulawulo"
 
-#: app/views/registration/index.rhtml:9
+#: app/views/registration/index.html.erb:93
+#, fuzzy
+#| msgid "Disk Information"
+msgid "Registration Information"
+msgstr "Ulwazi Ngediski"
+
+#: app/views/registration/index.html.erb:99
 msgid "This system is registered"
 msgstr ""
 
-#: app/views/registration/index.rhtml:10
+#: app/views/registration/index.html.erb:102
 #, fuzzy
 #| msgid "System:"
-msgid "System's GUID:"
+msgid "System number (GUID)"
 msgstr "Isixokelelwano:"
 
-#: app/views/registration/index.rhtml:11
+#: app/views/registration/index.html.erb:105
 #, fuzzy
 #| msgid "&Administration"
 msgid "Register again"
 msgstr "&Ulawulo"
 
-#: app/views/registration/index.rhtml:39
+#: app/views/registration/index.html.erb:118
+#, fuzzy
+#| msgid "&Next"
+msgid "Next"
+msgstr "&Okulandelayo"
+
+#: app/views/registration/index.html.erb:131
+#, fuzzy
+#| msgid "Memory Information"
+msgid "Mandatory Information"
+msgstr "Ulwazi Ngovimba Wolwazi"
+
+#: app/views/registration/index.html.erb:151
 #, fuzzy
 #| msgid "&Details"
-msgid "Detail"
+msgid "Details"
 msgstr "&Iinkcukacha"
+
+#: app/views/registration/index.html.erb:179
+#, fuzzy
+#| msgid "Poststop"
+msgid "Postpone"
+msgstr "Ukuyekisa kwasemva"
+
+#, fuzzy
+#~| msgid "&Administration"
+#~ msgid "System Registration"
+#~ msgstr "&Ulawulo"
+
+#, fuzzy
+#~| msgid "&Administration"
+#~ msgid "Registration did not finish."
+#~ msgstr "&Ulawulo"
+
+#, fuzzy
+#~| msgid "An error occurred during the installation."
+#~ msgid "An error occurred during registration. Please try again."
+#~ msgstr "Kwenzeke impazamo ngethuba lokuhlohla."
+
+#, fuzzy
+#~| msgid "An error occurred while reading from the installation source."
+#~ msgid "Error occured while connecting to registration server."
+#~ msgstr "Kwenzeke imposiso xa bekufundwa kukavimba wokuhlohla."
+
+#, fuzzy
+#~| msgid "&Details"
+#~ msgid "Detail"
+#~ msgstr "&Iinkcukacha"
 
 #, fuzzy
 #~| msgid "Change &Position"

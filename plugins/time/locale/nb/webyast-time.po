@@ -2,15 +2,16 @@
 # Copyright (C) 2006, SUSE Linux GmbH, Nuremberg
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 # This file is distributed under the same license as @PACKAGE@ package. FIRST
-#
+# 
 msgid ""
 msgstr ""
-"Project-Id-Version: webyast-time-ui 1.0.0\n"
+"Project-Id-Version: @PACKAGE@\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-08-02 09:18+0200\n"
+"POT-Creation-Date: 2012-06-07 15:20+0200\n"
 "PO-Revision-Date: 2005-08-11 20:37+0200\n"
 "Last-Translator: Olav Pettershagen <olav.pet@online.no>\n"
 "Language-Team:  <nb@li.org>\n"
+"Language: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -18,71 +19,69 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 # %s is either BOOTP or DHCP
-#: app/controllers/time_controller.rb:99
-#: app/controllers/time_controller.rb:103
-#: app/controllers/time_controller.rb:99
-#: app/controllers/time_controller.rb:103
+#: app/controllers/time_controller.rb:117
 msgid "Time settings have been written."
 msgstr "Tidsinnstillingene er lagret."
 
-#: app/models/systemtime.rb:29 app/models/systemtime.rb:29
-msgid "Unknown timezone %s on host"
-msgstr "Ukjent tidssone %s på vertsmaskin"
+#: app/views/time/index.html.erb:54
+msgid "Error: Cannot get information."
+msgstr "Feil: Kan ikke hente informasjon."
 
-#: app/views/time/index.rhtml:73 app/views/time/index.rhtml:77
-#: app/views/time/index.rhtml:102 app/views/time/index.rhtml:73
-#: app/views/time/index.rhtml:77 app/views/time/index.rhtml:102
+#: app/views/time/index.html.erb:79
+msgid "Please wait"
+msgstr "Vent"
+
+#: app/views/time/index.html.erb:86 app/views/time/index.html.erb:90
+#: app/views/time/index.html.erb:111
 msgid "This field is required"
-msgstr ""
+msgstr "Dette feltet er obligatorisk"
 
-#: app/views/time/index.rhtml:74 app/views/time/index.rhtml:103
-#: app/views/time/index.rhtml:74 app/views/time/index.rhtml:103
+#: app/views/time/index.html.erb:87 app/views/time/index.html.erb:112
 msgid "Enter a valid domain name or an IP address"
-msgstr ""
+msgstr "Angi et gyldig domenenavn eller en IP-adresse"
 
-#: app/views/time/index.rhtml:78 app/views/time/index.rhtml:78
+#: app/views/time/index.html.erb:91
 msgid "Invalid time format. Correct one is hh:mm:ss"
 msgstr "Ugyldig tidsformat. Riktig format er tt:mm:ss"
 
-#: app/views/time/index.rhtml:137 app/views/time/index.rhtml:171
-#: app/views/time/index.rhtml:185 app/views/time/index.rhtml:137
-#: app/views/time/index.rhtml:171 app/views/time/index.rhtml:185
-#: shortcuts.yml:6
+#: app/views/time/index.html.erb:154 app/views/time/index.html.erb:198
+#: app/views/time/index.html.erb:216
 msgid "Time"
 msgstr "Tid"
 
-#: app/views/time/index.rhtml:145 app/views/time/index.rhtml:152
-#: app/views/time/index.rhtml:145 app/views/time/index.rhtml:152
+#: app/views/time/index.html.erb:167 app/views/time/index.html.erb:177
 msgid "Timezone"
 msgstr "Tidssone"
 
-#: app/views/time/index.rhtml:147 app/views/time/index.rhtml:147
+#: app/views/time/index.html.erb:172
 msgid "Region"
 msgstr "Region"
 
-#: app/views/time/index.rhtml:162 app/views/time/index.rhtml:162
+#: app/views/time/index.html.erb:186
 msgid "Hardware clock is set to UTC"
 msgstr "Maskinvareklokken er satt til UTC"
 
-#: app/views/time/index.rhtml:176 app/views/time/index.rhtml:176
+#: app/views/time/index.html.erb:207
 msgid "Manually configure time"
 msgstr "Still inn tiden manuelt"
 
-#: app/views/time/index.rhtml:181 app/views/time/index.rhtml:181
+#: app/views/time/index.html.erb:211
 msgid "Date"
 msgstr "Dato"
 
-#: app/views/time/index.rhtml:192 app/views/time/index.rhtml:192
+#: app/views/time/index.html.erb:226
 msgid "Synchronize via Network Time Protocol (NTP)"
 msgstr "Synkroniser via Network Time Protocol (NTP)"
 
-#: app/views/time/index.rhtml:196 app/views/time/index.rhtml:196
+#: app/views/time/index.html.erb:231
 msgid "NTP server"
 msgstr "NTP-server"
 
-#: shortcuts.yml:7
-msgid "Set the clock"
-msgstr ""
+#~ msgid "Unknown timezone %s on host"
+#~ msgstr "Ukjent tidssone %s på vertsmaskin"
+
+#~ msgid "Set the clock"
+#~ msgstr "Still klokken"
 
 #~ msgid "Invalid date format. Correct one is dd/mm/yyyy"
 #~ msgstr "Ugyldig datoformat. Riktig format er dd/mm/åååå"

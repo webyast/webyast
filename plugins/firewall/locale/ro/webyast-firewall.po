@@ -1,62 +1,59 @@
+# Translator(s):
+#
+# Lucian Oprea <oprea.luci@gmail.com>
+# xdaiana <xdaiana@yahoo.com>
+#
+# Reviewer(s):
+#
+# Lucian Oprea <oprea.luci@gmail.com>
+#
+# Lucian Oprea <oprea.luci@gmail.com>, 2011.
 msgid ""
 msgstr ""
-"Project-Id-Version: webyast-firewall-ui 1.0.0\n"
-"Report-Msgid-Bugs-To: translation@suse.de\n"
-"POT-Creation-Date: 2010-08-02 09:18+0200\n"
-"PO-Revision-Date: 2010-04-30 16:32+0300\n"
-"Last-Translator: Lucian Oprea <oprea.luci@gmail.com>\n"
-"Language-Team: Comunitatea traducatorilor openSUSE Romania. Contact: <oprea."
-"luci@gmail.com><strainu10@gmail.com><traduceri@suseromania.ro>\n"
-"MIME-Version: 1.0\n"
+"X-Generator: Narro 2.0 on http://tradu.softwareliber.ro\n"
+"Project-Id-Version: OpenSUSE\n"
 "Content-Type: text/plain; charset=UTF-8\n"
+"Last-Translator: Lucian Oprea <oprea.luci@gmail.com>\n"
+"Language-Team: Romanian <LL@li.org>\n"
+"PO-Revision-Date: 2012-11-19 15:00+0200\n"
+"MIME-Version: 1.0\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms:  nplurals=3; plural=n==1 ? 0 : (n==0 || (n%100 > 0 && n%100 < "
 "20)) ? 1 : 2;\n"
-"X-Generator: Narro 0.9.4 on http://tradu.softwareliber.ro\n"
+"X-Generator: Narro 2.0 on http://tradu.softwareliber.ro\n"
 
-#: app/controllers/firewall_controller.rb:72
-#: app/controllers/firewall_controller.rb:72
+#: app/controllers/firewall_controller.rb:91
 msgid "Firewall settings have been written."
-msgstr "Setările paravanului de protecţie au fost scrise."
+msgstr "Setările paravanului de protecție au fost scrise."
 
-#: app/views/firewall/index.rhtml:53 app/views/firewall/index.rhtml:53
-#, fuzzy
+#: app/views/firewall/index.html.erb:45 app/views/firewall/index.html.erb:49
+msgid "Enabled"
+msgstr "Activ"
+
+#: app/views/firewall/index.html.erb:46 app/views/firewall/index.html.erb:50
+msgid "Disabled"
+msgstr "Inactiv"
+
+#: app/views/firewall/index.html.erb:74
+msgid "Allowed services"
+msgstr "Servicii permise"
+
+#: app/views/firewall/index.html.erb:88
+msgid "Blocked services"
+msgstr "Servicii blocate"
+
+#: app/views/firewall/index.html.erb:126
 msgid ""
 "Some of needed services (%s) are going to be blocked. WebYaST may not be "
 "usable anymore. Do you really want to block them?"
 msgstr ""
-"Unele din serviciile necesare vor fi blocate. WebYaST ar putea să nu mai fie "
-"utilizabil."
+"Unele servicii de bază (%s) urmează a fi blocate. WebYaST nu va mai putea fi "
+"utilizat. Chiar dorești să blochez?"
 
-#: app/views/firewall/index.rhtml:80 app/views/firewall/index.rhtml:80
-#: shortcuts.yml:6
-msgid "Firewall"
-msgstr "Paravan de protecţie"
+#: app/views/firewall/index.html.erb:145
+msgid "Please wait"
+msgstr "Vă rugăm să așteptați"
 
-#: app/views/firewall/index.rhtml:98 app/views/firewall/index.rhtml:98
-msgid "General settings"
-msgstr "Setări generale"
-
-#: app/views/firewall/index.rhtml:105 app/views/firewall/index.rhtml:105
-msgid "Use Firewall"
-msgstr "Utilizaţi Paravanul de protecţie"
-
-#: app/views/firewall/index.rhtml:110 app/views/firewall/index.rhtml:110
-msgid "Allowed services"
-msgstr "Servicii permise"
-
-#: app/views/firewall/index.rhtml:120 app/views/firewall/index.rhtml:120
-msgid "Blocked services"
-msgstr "Servicii blocate"
-
-#: shortcuts.yml:7
-#, fuzzy
-msgid "Firewall settings"
-msgstr "Setări generale"
-
-#~| msgid "xlock"
-#~ msgid "Block"
-#~ msgstr "Blochează"
-
-#~ msgid "Allow"
-#~ msgstr "Permite"
+#: app/views/firewall/index.html.erb:150
+msgid "You have unsaved changes. Do you want to save your changes?"
+msgstr "Există modificări nesalvate. Doriți să le salvați?"

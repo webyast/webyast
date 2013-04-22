@@ -1,96 +1,128 @@
-# translation of yast_webclient_mail.km.po to Khmer
-# Khoem Sokhem <khoemsokhem@khmeros.info>, 2010.
+# translation of webyast-mail.km.po to Khmer
+# Khoem Sokhem <khoemsokhem@khmeros.info>, 2011, 2012.
+# Chan Sambathratanak <ratanak@khmeros.info>, 2011.
 msgid ""
 msgstr ""
-"Project-Id-Version: yast_webclient_mail.km\n"
+"Project-Id-Version: webyast-mail.km\n"
 "Report-Msgid-Bugs-To: translation@suse.de\n"
-"POT-Creation-Date: 2010-04-13 13:36+0200\n"
-"PO-Revision-Date: 2010-04-20 08:03+0700\n"
+"POT-Creation-Date: 2012-06-07 15:20+0200\n"
+"PO-Revision-Date: 2012-06-15 09:19+0700\n"
 "Last-Translator: Khoem Sokhem <khoemsokhem@khmeros.info>\n"
 "Language-Team: Khmer <support@khmeros.info>\n"
+"Language: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
 "X-Generator: KBabel 1.11.4\n"
+"X-Language: km-KH\n"
 
-#: app/controllers/mail_controller.rb:29
+#: app/models/mail_state.rb:37
+msgid "It was not possible to retrieve the full hostname of the machine. If the mail could not be delivered, consult the network and/or mail configuration with your network administrator."
+msgstr "វា​មិន​អាច​ទៅ​យក​ឈ្មោះ​ម៉ាស៊ីន​ពេញលេញ​របស់​ម៉ាស៊ីន​បាន​ទេ ។ ប្រសិនបើ​សំបុត្រ​មិន​អាច​ត្រូវ​បាន​បញ្ជូន​ទេ ពិគ្រោះ​អំពី​​បណ្ដាញ និង/ឬ ការកំណត់​រចនាសម្ព័ន្ធ​សំបុត្រ ជា​មួយ​នឹង​អ្នក​គ្រប់គ្រង​បណ្ដាញ​របស់​អ្នក ។"
+
+# %s is either BOOTP or DHCP
+#: app/models/mail_state.rb:42
+msgid "Mail configuration test not confirmed"
+msgstr "ការ​សាកល្បង​កំណត់​រចនាសម្ព័ន្ធ​សំបុត្រ​មិនបាន​បញ្ជាក់​ទេ"
+
+#: app/models/mail_state.rb:43
+msgid "While configuring mail, a test mail was sent to %s . Was the mail delivered to this address?<br>If so, confirm it by pressing the button. Otherwise check your mail configuration again."
+msgstr "ខណៈ​ពេល​កំណត់​រចនាសម្ព័ន្ធ​សំបុត្រ សំបុត្រ​សាកល្បង​ត្រូវ​បាន​ផ្ញើ​ទៅកាន់ %s ។ តើ​សំបុត្រ​ត្រូវ​បាន​បញ្ជូន​ដល់​អាសយដ្ឋាន​នេះ​ដែរ​ឬទេ ?<br>ប្រសិនបើ​ដូច្នេះ អះអាង​វា​ដោយ​ចុច​ប៊ូតុង ។ បើ​មិន​ដូច្នេះ​ទេ ពិនិត្យ​មើល​ការកំណត់​រចនាសម្ព័ន្ធ​សំបុត្រ​របស់​អ្នក​ម្ដង​ទៀត ។"
+
+#: app/models/mail_state.rb:46
+msgid "Test mail received"
+msgstr "បាន​ទទួល​សំបុត្រ​សាកល្បង"
+
+#: app/controllers/mailsetting_controller.rb:58
 msgid "Passwords do not match."
-msgstr "ពាក្យ​សម្ងាត់​មិន​ដូច​គ្នា​ទេ ។"
+msgstr "ពាក្យសម្ងាត់​មិន​ផ្គូផ្គង​ទេ ។"
 
-#: app/controllers/mail_controller.rb:36
+#: app/controllers/mailsetting_controller.rb:65
 msgid "Mail settings have been written."
-msgstr "ការ​កំណត់​សំបុត្រ​ត្រូវ​បាន​សរសេរ ។"
+msgstr "ការ​កំណត់​សំបុត្រ​ត្រូវ​បាន​សរសេរ ។"
 
-#: app/controllers/mail_controller.rb:38
+#: app/controllers/mailsetting_controller.rb:67
 msgid "Test mail was sent to %s."
-msgstr "សំបុត្រ​សាកល្បង​ត្រូវបាន​ផ្ញើ​ទៅកាន់ %s ។"
+msgstr "សំបុត្រ​សាកល្បង​ត្រូវ​បាន​ផ្ញើ​ទៅកាន់ %s ។"
 
-#: app/controllers/mail_controller.rb:50
-msgid "Error while saving mail settings: %s"
-msgstr "មាន​កំហុសខណៈពេល​រក្សាទុក​ការ​កំណត់​សំបុត្រ ៖ %s"
+#: app/controllers/mailsetting_controller.rb:72
+msgid "Error while saving mail settings."
+msgstr "​​កំហុស​ខណៈ​ពេល​រក្សាទុក​ការ​កំណត់​សំបុត្រ"
 
-#: app/controllers/mail_controller.rb:67
+#: app/controllers/mailsetting_controller.rb:85
 msgid ""
 "No outgoing mail server is set, but administrator has mail forwarders defined.\n"
-"Change %s<i>administrator</i>%s or %s<i>mail</i>%s configuration."
+"        Change %s<i>administrator</i>%s or %s<i>mail</i>%s configuration."
 msgstr ""
-"គ្មាន​ម៉ាស៊ីន​បម្រើ​សំបុត្រ​ចេញ​ត្រូវបានកំណត់​ទេ ប៉ុន្តែ​អ្នក​គ្រប់គ្រង​បាន​កំណត់​អ្នក​បញ្ជូន​សំបុត្រ​បន្ត ។\n"
-"ផ្លាស់ប្ដូរ %s<i>អ្នក​គ្រប់គ្រង</i>%s ឬ​ការ​កំណត់​រចនាសម្ព័ន្ធ %s<i>សំបុត្រ</i>%s ។"
+"គ្មាន​ម៉ាស៊ីន​បម្រើ​សំបុត្រ​ចេញ​ត្រូវ​បាន​កំណត់​ទេ ប៉ុន្តែ​អ្នក​គ្រប់គ្រង​បាន​កំណត់​អ្នក​បញ្ជូន​សំបុត្រ​បន្ត ។\n"
+"        ផ្លាស់ប្ដូរ​ការ​កំណត់​រចនាសម្ព័ន្ធ %s<i>អ្នក​គ្រប់គ្រង</i>%s ឬ %s<i>សំបុត្រ</i>%s ។"
 
-#: app/views/mail/index.html.erb:16
+#: app/views/mailsetting/index.html.erb:32
+msgid "Please wait"
+msgstr "សូម​រង់​ចាំ"
+
+#: app/views/mailsetting/index.html.erb:40
 msgid "The passwords do not match."
-msgstr "ពាក្យ​សម្ងាត់​មិន​ដូច​គ្នា​ទេ ។"
+msgstr "ពាក្យសម្ងាត់​មិន​ផ្គូផ្គង​ទេ ។"
 
-#: app/views/mail/index.html.erb:17
+#: app/views/mailsetting/index.html.erb:41
 msgid "Enter a valid e-mail address."
 msgstr "បញ្ចូល​អាសយដ្ឋាន​អ៊ីមែល​ត្រឹមត្រូវ ។"
 
-#: app/views/mail/index.html.erb:18
+#: app/views/mailsetting/index.html.erb:42
 msgid "Enter a valid domain name or an IP address."
-msgstr "បញ្ចូល​ឈ្មោះ​ដែន​ត្រឹមត្រូវ ឬ​អាសយដ្ឋាន IP ។"
+msgstr "បញ្ចូល​ឈ្មោះ​ដែន ឬ​អាសយដ្ឋាន IP ដែល​ត្រឹមត្រូវ ។"
 
-#: app/views/mail/index.html.erb:35
+#: app/views/mailsetting/index.html.erb:68
 msgid "Mail Settings"
 msgstr "ការ​កំណត់​សំបុត្រ"
 
-#: app/views/mail/index.html.erb:47
+#: app/views/mailsetting/index.html.erb:81
+msgid "Outgoing mail server settings"
+msgstr "ការ​កំណត់​ម៉ាស៊ីន​បម្រើ​សំបុត្រ​ចេញ"
+
+#: app/views/mailsetting/index.html.erb:86
 msgid "Outgoing mail server"
 msgstr "ម៉ាស៊ីន​បម្រើ​សំបុត្រ​ចេញ"
 
-#: app/views/mail/index.html.erb:50
+#: app/views/mailsetting/index.html.erb:91
 msgid "Use secure connection (TLS)"
-msgstr "ប្រើ​កា​រតភ្ជាប់ដែលមាន​សុវត្ថិភាព (TLS)"
+msgstr "ប្រើ​កា​រ​តភ្ជាប់​ដែល​មាន​សុវត្ថិភាព (TLS)"
 
-#: app/views/mail/index.html.erb:51
+#: app/views/mailsetting/index.html.erb:92
 msgid "Never"
 msgstr "កុំ"
 
-#: app/views/mail/index.html.erb:51
+#: app/views/mailsetting/index.html.erb:92
 msgid "If available"
-msgstr "ប្រសិន​បើ​អាច​ប្រើបាន"
+msgstr "ប្រសិន​បើ​អាច​ប្រើ​បាន"
 
-#: app/views/mail/index.html.erb:51
+#: app/views/mailsetting/index.html.erb:92
 msgid "Always"
 msgstr "ជានិច្ច"
 
-#: app/views/mail/index.html.erb:53
+#: app/views/mailsetting/index.html.erb:96
 msgid "User name"
 msgstr "ឈ្មោះ​អ្នក​ប្រើ"
 
 # password dialog title
-#: app/views/mail/index.html.erb:56
+#: app/views/mailsetting/index.html.erb:101
 msgid "Password"
 msgstr "ពាក្យសម្ងាត់"
 
-#: app/views/mail/index.html.erb:59
+#: app/views/mailsetting/index.html.erb:106
 msgid "Confirm password"
-msgstr "បញ្ជាក់​ពាក្យ​សម្ងាត់"
+msgstr "អះអាង​ពាក្យសម្ងាត់"
 
-#: app/views/mail/index.html.erb:67
+#: app/views/mailsetting/index.html.erb:114
+msgid "Check mail server settings"
+msgstr "ពិនិត្យមើល​ការ​កំណត់​ម៉ាស៊ីន​បម្រើ​សំបុត្រ"
+
+#: app/views/mailsetting/index.html.erb:118
 msgid "Send test mail to"
 msgstr "ផ្ញើ​សំបុត្រ​សាកល្បង​ទៅកាន់"
 
-#: app/views/mail/index.html.erb:69
+#: app/views/mailsetting/index.html.erb:120
 msgid "Send Mail"
 msgstr "ផ្ញើ​សំបុត្រ"

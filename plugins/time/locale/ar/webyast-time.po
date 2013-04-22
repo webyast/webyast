@@ -1,63 +1,80 @@
-# Copyright (C) 2006 SuSE Linux Products GmbH, Nuernberg
-# This file is distributed under the same license as the package.
-#
+# Mohammad Alhargan <malham1@hotmail.com>, 2012.
+# mohammad <malham1@gmail.com>, 2012.
 msgid ""
 msgstr ""
-"Project-Id-Version: yast_webclient_time\n"
-"POT-Creation-Date: 2010-04-13 13:36+0200\n"
-"PO-Revision-Date: 2010-04-22 11:47\n"
-"Last-Translator: Novell Language <language@novell.com>\n"
-"Language-Team: Novell Language <language@novell.com>\n"
+"Project-Id-Version: @PACKAGE@\n"
+"Report-Msgid-Bugs-To: translation@suse.de\n"
+"POT-Creation-Date: 2012-06-07 15:20+0200\n"
+"PO-Revision-Date: 2012-08-09 01:35+0300\n"
+"Last-Translator: mohammad <malham1@gmail.com>\n"
+"Language-Team: http://www.vertaal.com.ar/files/factory/ar/list/\n"
+"Language: ar\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Plural-Forms: nplurals=6; plural=n==0 ? 0 : n==1 ? 1 : n==2 ? 2 : n%100>=3 && n%100<=10 ? 3 : n%100>=11 ? 4 : 5;\n"
+"X-Generator: Virtaal 0.7.1\n"
 
-#: app/controllers/time_controller.rb:77 app/controllers/time_controller.rb:81
+#: app/controllers/time_controller.rb:117
 msgid "Time settings have been written."
 msgstr "تمت كتابة إعدادات الوقت."
 
-#: app/models/systemtime.rb:8
-msgid "Unknown timezone %s on host"
-msgstr "المنطقة الزمنية %s على المضيف غير معروفة"
+#: app/views/time/index.html.erb:54
+msgid "Error: Cannot get information."
+msgstr "خطأ: تعذر الحصول على معلومات."
 
-#: app/views/time/index.rhtml:56
-msgid "Invalid date format. Correct one is dd/mm/yyyy"
-msgstr "تنسيق البيانات غير صالح. والتنسيق الصحيح هو ي ي/ش ش/س س س س"
+#: app/views/time/index.html.erb:79
+msgid "Please wait"
+msgstr "الرجاء الانتظار"
 
-#: app/views/time/index.rhtml:60
+#: app/views/time/index.html.erb:86 app/views/time/index.html.erb:90
+#: app/views/time/index.html.erb:111
+msgid "This field is required"
+msgstr "هذا الحقل مطلوب"
+
+#: app/views/time/index.html.erb:87 app/views/time/index.html.erb:112
+msgid "Enter a valid domain name or an IP address"
+msgstr "أدخل اسم مجال صالح أو عنوان IP"
+
+#: app/views/time/index.html.erb:91
 msgid "Invalid time format. Correct one is hh:mm:ss"
-msgstr "تنسيق الوقت غير صالح. والتنسيق الصحيح هو س س:د د: ث ث"
+msgstr "تنسيق الوقت غير صالح. الصحيح هو ث ث:دد:س س"
 
-#: app/views/time/index.rhtml:84 app/views/time/index.rhtml:128
+#: app/views/time/index.html.erb:154 app/views/time/index.html.erb:198
+#: app/views/time/index.html.erb:216
 msgid "Time"
 msgstr "الوقت"
 
-#: app/views/time/index.rhtml:92
-msgid "Region"
-msgstr "المنطقة"
-
-#: app/views/time/index.rhtml:96
+#: app/views/time/index.html.erb:167 app/views/time/index.html.erb:177
 msgid "Timezone"
 msgstr "المنطقة الزمنية"
 
-#: app/views/time/index.rhtml:110
+#: app/views/time/index.html.erb:172
+msgid "Region"
+msgstr "المنطقة"
+
+#: app/views/time/index.html.erb:186
 msgid "Hardware clock is set to UTC"
-msgstr "تعيين ساعة الأجهزة على توقيت UTC"
+msgstr "يتم تعيين ساعة الأجهزة إلى UTC التوقيت العالمي المنسق"
 
-#: app/views/time/index.rhtml:119
+#: app/views/time/index.html.erb:207
 msgid "Manually configure time"
-msgstr "تكوين الوقت يدويًا"
+msgstr "إعداد الوقت يدوياً"
 
-#: app/views/time/index.rhtml:124
+#: app/views/time/index.html.erb:211
 msgid "Date"
 msgstr "التاريخ"
 
-#: app/views/time/index.rhtml:135
+#: app/views/time/index.html.erb:226
 msgid "Synchronize via Network Time Protocol (NTP)"
-msgstr "المزامنة عبر بروتوكول وقت الشبكة (NTP)"
+msgstr "مزامنة عبر بروتوكول وقت الشبكة (NTP)"
 
-#: app/views/time/index.rhtml:139
+#: app/views/time/index.html.erb:231
 msgid "NTP server"
-msgstr "خادم NTP"
+msgstr "خادوم NTP"
 
+#~ msgid "Unknown timezone %s on host"
+#~ msgstr "المنطقة الزمنية غير معروفة %s على المضيف"
+
+#~ msgid "Set the clock"
+#~ msgstr "تعيين الساعة"

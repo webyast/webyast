@@ -1,163 +1,244 @@
+#
+# Efstathios Iosifidis <iosifidis@opensuse.org>, 2011, 2012.
+#
 msgid ""
 msgstr ""
-"Project-Id-Version: webyast-network-ui 1.0.0\n"
+"Project-Id-Version: @PACKAGE@\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-08-02 09:18+0200\n"
-"PO-Revision-Date: 2005-08-24 17:53+0300\n"
-"Last-Translator: Hellenic SuSE Translation Team <hstg@billg.gr>\n"
-"Language-Team: Hellenic-Ελληνικά-Greek <hstg@billg.gr>\n"
+"POT-Creation-Date: 2012-06-07 15:19+0200\n"
+"PO-Revision-Date: 2012-06-22 21:11+0300\n"
+"Last-Translator: Efstathios Iosifidis <iosifidis@opensuse.org>\n"
+"Language-Team: Ελληνικά, Σύγχρονα <opensuse-translation-el@opensuse.org>\n"
+"Language: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
-"Content-Transfer-Encoding: 8bit\n"
+"Content-Transfer-Encoding: 8bits\n"
 "X-Generator: KBabel 1.10\n"
-"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"Plural-Forms: nplurals=2; plural=(n!=1);\n"
 
-#: app/controllers/network_controller.rb:89
-#: app/controllers/network_controller.rb:89
-#, fuzzy
-msgid "Manual"
-msgstr "Χειροκίνητη Κατάσταση"
-
-#: app/controllers/network_controller.rb:89
-#: app/controllers/network_controller.rb:89
-#, fuzzy
-msgid "Automatic"
-msgstr "Αυτόματο Κατάσταση"
-
-#: app/controllers/network_controller.rb:163
-#: app/controllers/network_controller.rb:163
+#: app/controllers/network_controller.rb:235
 msgid "Network settings have been written."
-msgstr ""
+msgstr "Οι ρυθμίσεις δικτύου έχουν εγγραφεί."
 
-#: app/views/network/index.html.erb:143 app/views/network/index.html.erb:147
-#: app/views/network/index.html.erb:151 app/views/network/index.html.erb:155
-#: app/views/network/index.html.erb:158 app/views/network/index.html.erb:162
-#: app/views/network/index.html.erb:166 app/views/network/index.html.erb:143
-#: app/views/network/index.html.erb:147 app/views/network/index.html.erb:151
-#: app/views/network/index.html.erb:155 app/views/network/index.html.erb:158
-#: app/views/network/index.html.erb:162 app/views/network/index.html.erb:166
-msgid "This field is required"
-msgstr ""
-
-#: app/views/network/index.html.erb:144 app/views/network/index.html.erb:152
-#: app/views/network/index.html.erb:163 app/views/network/index.html.erb:144
-#: app/views/network/index.html.erb:152 app/views/network/index.html.erb:163
-msgid "Enter a valid IP address"
-msgstr ""
-
-#: app/views/network/index.html.erb:148 app/views/network/index.html.erb:148
-msgid "Enter a valid subnet mask or prefix"
-msgstr ""
-
-#: app/views/network/index.html.erb:159 app/views/network/index.html.erb:167
-#: app/views/network/index.html.erb:159 app/views/network/index.html.erb:167
-msgid "Enter a valid domain name"
-msgstr ""
-
-#: app/views/network/index.html.erb:229 app/views/network/index.html.erb:229
-msgid "whitespace - invalid character."
-msgstr ""
-
-#: app/views/network/index.html.erb:231 app/views/network/index.html.erb:231
-#, fuzzy
-msgid " - can not start with a digit."
-msgstr "ΤΟ όνομα της VM δε μπορεί να ξεκινά με έναν αριθμό."
-
-#: app/views/network/index.html.erb:233 app/views/network/index.html.erb:233
-#, fuzzy
-msgid "periodic '-' is not allowed."
-msgstr "Η επιλογή 'flush' δεν επιτρέπεται"
-
-#: app/views/network/index.html.erb:235 app/views/network/index.html.erb:235
-msgid "can not end with (-) hyphen."
-msgstr ""
-
-#: app/views/network/index.html.erb:238 app/views/network/index.html.erb:238
-msgid "can not start with (-) hyphen."
-msgstr ""
-
-#: app/views/network/index.html.erb:240 app/views/network/index.html.erb:240
-msgid " - is invalid character for hostname."
-msgstr ""
-
-#: app/views/network/index.html.erb:283 app/views/network/index.html.erb:283
-#: shortcuts.yml:6
+#: app/views/network/edit.html.erb:36 app/views/network/new.html.erb:36
+#: app/views/network/index.html.erb:18
 msgid "Network"
 msgstr "Δίκτυο"
 
-#: app/views/network/index.html.erb:293 app/views/network/index.html.erb:293
-msgid "General settings"
-msgstr ""
+#: app/views/network/_form.html.erb:15 app/views/network/_form.html.erb:45
+#: app/views/network/_form.html.erb:79 app/views/network/_form.html.erb:121
+msgid "Interface name"
+msgstr "Όνομα διεπαφής"
 
-#: app/views/network/index.html.erb:295 app/views/network/index.html.erb:295
-#, fuzzy
+#: app/views/network/_form.html.erb:26 app/views/network/index.html.erb:80
+msgid "Physical interface"
+msgstr "Φυσική διεπαφή"
+
+#: app/views/network/_form.html.erb:31
+msgid "VLAN ID"
+msgstr "VLAN ID"
+
+#: app/views/network/_form.html.erb:56
+msgid "Bridge devices:"
+msgstr "Συσκευές γεφύρωσης:"
+
+#: app/views/network/_form.html.erb:91
+msgid "Bond driver options"
+msgstr "Επιλογές οδηγού δεσμού"
+
+#: app/views/network/_form.html.erb:97 app/views/network/index.html.erb:89
+msgid "Bond slaves"
+msgstr "Δευτερεύοντες δεσμοί"
+
+#: app/views/network/_form.html.erb:132
 msgid "Configuration mode"
-msgstr "Ρύθμιση"
+msgstr "Κατάσταση ρύθμισης"
 
-#: app/views/network/index.html.erb:301 app/views/network/index.html.erb:301
-#, fuzzy
-msgid "IP Address"
-msgstr "Τοπική διεύθυνση"
+#: app/views/network/_form.html.erb:162
+msgid "DNS configuration"
+msgstr "Ρύθμιση DNS"
 
-#: app/views/network/index.html.erb:304 app/views/network/index.html.erb:304
-#, fuzzy
+#: app/views/network/_form.html.erb:168
+msgid "Hostname"
+msgstr "Όνομα Κόμβου"
+
+# as in Windows Authentication Domain
+#: app/views/network/_form.html.erb:172
+msgid "Domain"
+msgstr "Τομέας"
+
+#: app/views/network/_form.html.erb:177
+msgid "Name servers"
+msgstr "Εξυπηρετητές Ονομάτων"
+
+#: app/views/network/_form.html.erb:182
+msgid "Search domains"
+msgstr "Αναζήτηση τομέων"
+
+#: app/views/network/_form.html.erb:187
+msgid "Change hostname by DHCP"
+msgstr "Αλλαγή ονόματος κόμβου από DHCP"
+
+#: app/views/network/_form.html.erb:202
+msgid "IP configuration"
+msgstr "Ρύθμιση IP"
+
+#: app/views/network/_form.html.erb:209 app/views/network/index.html.erb:50
 msgid "IP address"
-msgstr "Τοπική διεύθυνση"
+msgstr "Διεύθυνση IP"
 
-#: app/views/network/index.html.erb:309 app/views/network/index.html.erb:309
-#, fuzzy
+#: app/views/network/_form.html.erb:213
 msgid "Subnet mask/Prefixlen"
-msgstr "Πρόθεμα Κλήσης"
+msgstr "Μάσκα/πρόθεμα υπό-δικτύου"
 
-#: app/views/network/index.html.erb:314 app/views/network/index.html.erb:314
-#, fuzzy
+#: app/views/network/_form.html.erb:217
 msgid "Default route"
 msgstr "Προεπιλεγμένη Ανακατεύθυνση"
 
-#: app/views/network/index.html.erb:321 app/views/network/index.html.erb:321
-msgid "DNS"
-msgstr ""
+#: app/views/network/_form.html.erb:227
+msgid "Save"
+msgstr "&Αποθήκευση"
 
-#: app/views/network/index.html.erb:324 app/views/network/index.html.erb:324
-#, fuzzy
-msgid "Hostname"
-msgstr "Ονόματα Κόμβων"
+#: app/views/network/_form.html.erb:229 app/views/network/index.html.erb:184
+msgid "back"
+msgstr "πίσω"
 
-# as in Windows Authentication Domain
-#: app/views/network/index.html.erb:331 app/views/network/index.html.erb:331
-#, fuzzy
-msgid "Domain"
-msgstr "Περιοχή\n"
+#: app/views/network/_validation.html.erb:54
+#: app/views/network/_validation.html.erb:58
+#: app/views/network/_validation.html.erb:62
+#: app/views/network/_validation.html.erb:66
+#: app/views/network/_validation.html.erb:70
+#: app/views/network/_validation.html.erb:74
+#: app/views/network/_validation.html.erb:78
+msgid "This field is required"
+msgstr "Αυτό το πεδίο είναι υποχρεωτικό"
 
-#: app/views/network/index.html.erb:336 app/views/network/index.html.erb:336
-msgid "Change hostname by DHCP"
-msgstr ""
+#: app/views/network/_validation.html.erb:55
+#: app/views/network/_validation.html.erb:63
+#: app/views/network/_validation.html.erb:75
+msgid "Enter a valid IP address"
+msgstr "Εισάγετε μια έγκυρη διεύθυνση ΙP"
 
-#: app/views/network/index.html.erb:341 app/views/network/index.html.erb:341
-#, fuzzy
-msgid "Name servers"
-msgstr "Διακομιστής Ονομάτων"
+#: app/views/network/_validation.html.erb:59
+msgid "Enter a valid subnet mask or prefix"
+msgstr "Εισάγετε μια έγκυρη μάσκα υπό-δικτύου η πρόθεμα"
 
-#: app/views/network/index.html.erb:346 app/views/network/index.html.erb:346
-#, fuzzy
-msgid "Search domains"
-msgstr "Ευρετήριο Έρευνας"
+#: app/views/network/_validation.html.erb:67
+msgid "Enter a valid hostname"
+msgstr "Εισάγετε ένα έγκυρο όνομα συστήματος"
 
-#: shortcuts.yml:7
-#, fuzzy
-msgid "Manage network devices"
-msgstr "Επιλέξτε την συσκευή δικτύου."
+#: app/views/network/_validation.html.erb:71
+#: app/views/network/_validation.html.erb:79
+msgid "Enter a valid domain name"
+msgstr "Εισάγετε ένα έγκυρο όνομα διεύθυνσης διαδικτύου"
 
-#~ msgid "Not configured"
-#~ msgstr "Δεν έχει ρυθμιστεί"
+#: app/views/network/_validation.html.erb:83
+msgid "Please wait"
+msgstr "Παρακαλώ περιμένετε"
+
+#: app/views/network/index.html.erb:36
+msgid "Physical Interfaces"
+msgstr "Φυσικές Διεπαφές"
+
+#: app/views/network/index.html.erb:49 app/views/network/index.html.erb:75
+msgid "Interface"
+msgstr "Διεπαφή δικτύου"
+
+#: app/views/network/index.html.erb:51
+msgid "Mode"
+msgstr "Κατάσταση"
+
+#: app/views/network/index.html.erb:54 app/views/network/index.html.erb:95
+msgid "configure"
+msgstr "ρύθμιση"
+
+#: app/views/network/index.html.erb:64
+msgid "Virtual Interfaces"
+msgstr "Εικονικές Διεπαφές"
+
+#: app/views/network/index.html.erb:79
+msgid "Vlan ID"
+msgstr "Vlan ID"
+
+#: app/views/network/index.html.erb:84
+msgid "Bridge ports"
+msgstr "Θύρες γέφυρας"
+
+#: app/views/network/index.html.erb:88
+msgid "Bond option"
+msgstr "Επιλογές δεσμού"
+
+#: app/views/network/index.html.erb:98
+msgid "delete"
+msgstr "διαγραφή"
+
+#: app/views/network/index.html.erb:108
+msgid "New virtual interface"
+msgstr "Νέα εικονική διεπαφή"
+
+#: app/views/network/index.html.erb:119
+msgid "Please select one of the virtual interfaces"
+msgstr "Παρακαλώ επιλέξτε μια από τις εικονικές διεπαφές"
+
+#: app/views/network/index.html.erb:144
+msgid "BRIDGE"
+msgstr "ΓΕΦΥΡΑ"
+
+#: app/views/network/index.html.erb:164
+msgid "BOND"
+msgstr "ΔΕΣΜΟΣ"
+
+#: app/views/network/index.html.erb:185
+msgid "next"
+msgstr "επόμενο"
+
+#~ msgid "Manual"
+#~ msgstr "Χειροκίνητη Κατάσταση"
+
+#~ msgid "Automatic"
+#~ msgstr "Αυτόματη Κατάσταση"
+
+#~ msgid "Current IP address (DHCP)"
+#~ msgstr "Τρέχουσα διεύθυνση IP (DHCP)"
+
+#~ msgid "Manage network devices"
+#~ msgstr "Διαχείριση συσκευών δικτύου"
+
+#~ msgid "whitespace - invalid character."
+#~ msgstr "κενό - μη έγκυρος χαρακτήρας"
+
+#~| msgid "The VM's name cannot start with a digit."
+#~ msgid " - can not start with a digit."
+#~ msgstr " - δεν μπορεί να αρχίσει με ένα ψηφίο."
+
+#~| msgid "The option 'flush' is not allowed"
+#~ msgid "periodic '-' is not allowed."
+#~ msgstr "περιοδική '-' δεν επιτρέπεται"
+
+#~ msgid "can not end with (-) hyphen."
+#~ msgstr "δεν μπορεί να τελειώσει με το πρόθεμα (-)."
+
+#~ msgid "can not start with (-) hyphen."
+#~ msgstr "δεν μπορεί να αρχίσει με το πρόθεμα (-)."
+
+#~ msgid " - is invalid character for hostname."
+#~ msgstr " - είναι μη έγκυρος χαρακτήρας για όνομα κόμβου"
+
+#~| msgid "General Settings"
+#~ msgid "General settings"
+#~ msgstr "Γενικές Ρυθμίσεις"
+
+#~| msgid "Own Address"
+#~ msgid "IP Address"
+#~ msgstr "Διεύθυνση IP"
+
+#~ msgid "DNS"
+#~ msgstr "DNS"
 
 #, fuzzy
 #~| msgid "No valid request file specified."
 #~ msgid "Hostname is required. It must be specified."
 #~ msgstr "Δεν καθορίστηκε έγκυρο αρχείο αίτησης."
-
-#~ msgid "Interface"
-#~ msgstr "Διεπαφή δικτύου"
 
 #, fuzzy
 #~| msgid "Select Script"
@@ -172,15 +253,14 @@ msgstr "Επιλέξτε την συσκευή δικτύου."
 #~ msgid "dhcp"
 #~ msgstr "dhcp"
 
-#~ msgid "Save"
-#~ msgstr "&Αποθήκευση"
-
 # cancel button label
 #~ msgid "Cancel"
 #~ msgstr "Ακύρωση"
 
-#~ msgid "Configuration"
-#~ msgstr "Ρύθμιση"
+#, fuzzy
+#~| msgid "Choose the network device."
+#~ msgid "Edit Network Device"
+#~ msgstr "Επιλέξτε την συσκευή δικτύου."
 
 #~ msgid "Description"
 #~ msgstr "Περιγραφή"

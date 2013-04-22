@@ -1,359 +1,401 @@
-# Copyright (C) 2006 SuSE Linux Products GmbH, Nuernberg
-# This file is distributed under the same license as the package.
+# translation of yast_webclient_users.po to Chinese Traditional
+# @TITLE@
+# Copyright (C) 2006, SUSE Linux GmbH, Nuremberg
 #
+# This file is distributed under the same license as @PACKAGE@ package. FIRST
+#
+# swyear <swyear@gmail.com>, 2009, 2011.
 msgid ""
 msgstr ""
-"Project-Id-Version: webyast-users-ui\n"
-"POT-Creation-Date: 2010-08-18 10:18+0200\n"
-"PO-Revision-Date: 2010-08-26 09:34\n"
-"Last-Translator: Novell Language <language@novell.com>\n"
-"Language-Team: Novell Language <language@novell.com>\n"
+"Project-Id-Version: yast_webclient_users\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2012-06-07 15:19+0200\n"
+"PO-Revision-Date: 2011-10-12 10:42+0800\n"
+"Last-Translator: \n"
+"Language-Team: Chinese Traditional <zh@li.org>\n"
+"Language: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Lokalize 1.2\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
 
-#: app/controllers/groups_controller.rb:36 ./app/controllers/groups_controller.rb:36
+#: app/controllers/groups_controller.rb:31
 msgid "Missing group name parameter"
-msgstr "缺少群組名稱參數"
+msgstr "遺失群組名稱參數"
 
-#: app/controllers/groups_controller.rb:48 ./app/controllers/groups_controller.rb:48
+#: app/controllers/groups_controller.rb:47
 msgid "Missing group parameters"
-msgstr "缺少群組參數"
+msgstr "遺失群組參數"
 
-#: app/controllers/groups_controller.rb:58 ./app/controllers/groups_controller.rb:58
+#: app/controllers/groups_controller.rb:61
 msgid "Please enter a valid group name"
-msgstr "請輸入有效的群組名稱"
+msgstr "請輸入可用的群組名稱"
 
-#: app/controllers/groups_controller.rb:68 ./app/controllers/groups_controller.rb:68
+#: app/controllers/groups_controller.rb:75
 msgid "Please enter a valid GID"
-msgstr "請輸入有效的 GID"
+msgstr "請輸入一個適用的 GID"
 
-#: app/controllers/groups_controller.rb:78 ./app/controllers/groups_controller.rb:78
+#: app/controllers/groups_controller.rb:89
 msgid "Please enter a valid group type. Only \"system\" or \"local\" are allowed."
-msgstr "請輸入有效的群組類型。只可以是「system」或「local」。"
+msgstr "請輸入一個適用的群組類型。僅能用 \"system\" 或 \"local\"。"
 
-#: app/controllers/groups_controller.rb:89 ./app/controllers/groups_controller.rb:89
+#: app/controllers/groups_controller.rb:104
 msgid "Please enter a valid list of members"
-msgstr "請輸入有效的成員清單"
+msgstr "請輸入成員清單"
 
-#: app/controllers/groups_controller.rb:106 ./app/controllers/groups_controller.rb:106
-msgid "Cannot read users list."
-msgstr "無法讀取使用者清單。"
+#: app/controllers/groups_controller.rb:231
+#, fuzzy
+#| msgid "Cannot update group <i>%s</i>: Unknown error"
+msgid "Cannot update group <i>%s</i>"
+msgstr "無法更新群組 <i>%s</i>：未知錯誤"
 
-#: app/controllers/groups_controller.rb:117 ./app/controllers/groups_controller.rb:117
-msgid "Group named <i>%s</i> was not found."
-msgstr "找不到群組 <i>%s</i>。"
+#: app/controllers/groups_controller.rb:234
+msgid "Group <i>%s</i> has been updated."
+msgstr "群組 <i>%s</i> 已成功更新。"
 
-#: app/controllers/groups_controller.rb:127 ./app/controllers/groups_controller.rb:127
-msgid "No groups found."
-msgstr "找不到群組。"
-
-#: app/controllers/groups_controller.rb:155 ./app/controllers/groups_controller.rb:155
-msgid "Cannot read groups list."
+#: app/controllers/groups_controller.rb:268
+#, fuzzy
+#| msgid "Cannot read groups list."
+msgid "Cannot create group <i>%s</i>"
 msgstr "無法讀取群組清單。"
 
-#: app/controllers/groups_controller.rb:228 ./app/controllers/groups_controller.rb:228
+#: app/controllers/groups_controller.rb:271
 msgid "Group <i>%s</i> has been added."
-msgstr "群組 <i>%s</i> 已新增。"
+msgstr "已新增群組 <i>%s</i> 。"
 
-#: app/controllers/groups_controller.rb:243 ./app/controllers/groups_controller.rb:243
-msgid "Unknown backend error"
-msgstr "未知的後端錯誤"
+#: app/controllers/groups_controller.rb:306
+msgid "Cannot remove group <i>%{name}</i>: %{result}"
+msgstr ""
 
-#: app/controllers/groups_controller.rb:270 ./app/controllers/groups_controller.rb:270
-msgid "Group <i>%s</i> has been updated."
-msgstr "群組 <i>%s</i> 已更新。"
-
-#: app/controllers/groups_controller.rb:276 ./app/controllers/groups_controller.rb:276
-msgid "Cannot update group <i>%s</i>: Unknown error"
-msgstr "無法更新群組 <i>%s</i>︰未知錯誤"
-
-#: app/controllers/groups_controller.rb:310 ./app/controllers/groups_controller.rb:310
+#: app/controllers/groups_controller.rb:308
 msgid "Group <i>%s</i> has been deleted."
-msgstr "群組 <i>%s</i> 已刪除。"
+msgstr "群組 <i>%s</i> 已被刪除 。"
 
-#: app/controllers/users_controller.rb:45 ./app/controllers/users_controller.rb:45
+#: app/controllers/users_controller.rb:110
 msgid "No users found."
-msgstr "找不到使用者。"
+msgstr "沒有發現使用者。"
 
-#: app/controllers/users_controller.rb:266 ./app/controllers/users_controller.rb:266
-msgid "User <i>%s</i> was successfully created."
+#: app/controllers/users_controller.rb:254
+#, fuzzy
+#| msgid "User <i>%s</i> was successfully created."
+msgid "User %s was successfully created."
 msgstr "使用者 <i>%s</i> 已成功建立。"
 
-#: app/controllers/users_controller.rb:309 ./app/controllers/users_controller.rb:309
-msgid "User <i>%s</i> was successfully updated."
+#: app/controllers/users_controller.rb:299
+#, fuzzy
+#| msgid "User <i>%s</i> was successfully updated."
+msgid "User %s was successfully updated."
 msgstr "使用者 <i>%s</i> 已成功更新。"
 
-#: app/controllers/users_controller.rb:327 ./app/controllers/users_controller.rb:327
-msgid "User <i>%s</i> was successfully removed."
-msgstr "使用者 <i>%s</i> 已成功移除。"
-
-#: app/controllers/users_controller.rb:329 ./app/controllers/users_controller.rb:329
-msgid "Error: Could not remove user <i>%s</i>."
+#: app/controllers/users_controller.rb:318
+#, fuzzy
+#| msgid "Error: Could not remove user <i>%s</i>."
+msgid "Error: Could not remove user %s."
 msgstr "錯誤：無法移除使用者 <i>%s</i>。"
 
-#: app/views/groups/index.html.erb:63 app/views/groups/new.html.erb:67
-#: ./app/views/groups/index.html.erb:63 ./app/views/groups/new.html.erb:67
-msgid "Select Members"
-msgstr "選取成員"
+#: app/controllers/users_controller.rb:327
+#, fuzzy
+#| msgid "User <i>%s</i> was successfully removed."
+msgid "User %s was successfully removed."
+msgstr "使用者 <i>%s</i> 已成功移除。"
 
-#: app/views/groups/index.html.erb:64 app/views/groups/new.html.erb:68
-#: ./app/views/groups/index.html.erb:64 ./app/views/groups/new.html.erb:68
-msgid "Selected Members"
-msgstr "已選成員"
+#: app/views/users/new.html.erb:71 app/views/users/index.html.erb:48
+msgid "Select Groups"
+msgstr "選擇群組"
 
-#: app/views/groups/index.html.erb:65 app/views/groups/new.html.erb:69
-#: ./app/views/groups/index.html.erb:65 ./app/views/groups/new.html.erb:69
-msgid "Available Members"
-msgstr "可選成員"
+#: app/views/users/new.html.erb:72 app/views/users/index.html.erb:49
+msgid "Selected Groups"
+msgstr "選取的群組"
 
-#: app/views/groups/index.html.erb:66 app/views/groups/new.html.erb:70
-#: ./app/views/groups/index.html.erb:66 ./app/views/groups/new.html.erb:70
-msgid "Click user names to select/unselect members"
-msgstr "按一下使用者名稱以選取/取消選取成員"
+#: app/views/users/new.html.erb:73 app/views/users/index.html.erb:50
+msgid "Available Groups"
+msgstr "可用的群組"
 
-#: app/views/groups/index.html.erb:105 app/views/groups/new.html.erb:91 app/views/users/_user_form.erb:57
-#: app/views/users/_user_form.erb:61 ./app/views/groups/index.html.erb:105
-#: ./app/views/groups/new.html.erb:91 ./app/views/users/_user_form.erb:57
-#: ./app/views/users/_user_form.erb:61 ./shortcuts.yml:15
-msgid "Groups"
-msgstr "群組"
+#: app/views/users/new.html.erb:74 app/views/users/index.html.erb:51
+msgid "Click group names to select/unselect groups"
+msgstr "點選群組名稱來選擇/取消群組"
 
-#: app/views/groups/index.html.erb:117 app/views/users/index.html.erb:200
-#: ./app/views/groups/index.html.erb:117 ./app/views/users/index.html.erb:200
-msgid "Filter:"
-msgstr "過濾器："
+#: app/views/users/new.html.erb:91 app/views/users/index.html.erb:68
+#: app/views/users/_user_form.erb:91
+msgid "Select Default Group"
+msgstr "選擇預設群組"
 
-#: app/views/groups/index.html.erb:125 app/views/groups/index.html.erb:137
-#: ./app/views/groups/index.html.erb:125 ./app/views/groups/index.html.erb:137
-msgid "Add New Group"
-msgstr "新增新群組"
+#: app/views/users/new.html.erb:92 app/views/users/index.html.erb:69
+msgid "Click a group name to choose users default group"
+msgstr "點選一個群組名稱選擇使用者預設群組"
 
-#: app/views/groups/index.html.erb:128 app/views/groups/index.html.erb:205
-#: ./app/views/groups/index.html.erb:128 ./app/views/groups/index.html.erb:205
-msgid "Manage Users"
-msgstr "管理使用者"
+#: app/views/users/new.html.erb:106 app/views/users/index.html.erb:83
+msgid "Select Roles"
+msgstr "預設角色"
 
-#: app/views/groups/index.html.erb:153 app/views/groups/new.html.erb:105
-#: ./app/views/groups/index.html.erb:153 ./app/views/groups/new.html.erb:105
-msgid "Group Name"
-msgstr "群組名稱"
+#: app/views/users/new.html.erb:107 app/views/users/index.html.erb:84
+msgid "Selected Roles"
+msgstr "選取的角色"
 
-#: app/views/groups/index.html.erb:157 ./app/views/groups/index.html.erb:157
-msgid "Group ID"
-msgstr "群組 ID"
+#: app/views/users/new.html.erb:108 app/views/users/index.html.erb:85
+msgid "Available Roles"
+msgstr "可用的角色"
 
-#: app/views/groups/index.html.erb:161 app/views/groups/new.html.erb:109
-#: ./app/views/groups/index.html.erb:161 ./app/views/groups/new.html.erb:109
-msgid "Members"
-msgstr "成員"
+#: app/views/users/new.html.erb:109 app/views/users/index.html.erb:86
+msgid "Click group names to select/unselect roles"
+msgstr "點選一個群組名稱來選擇/取消角色"
 
-#: app/views/groups/index.html.erb:164 app/views/groups/new.html.erb:113
-#: ./app/views/groups/index.html.erb:164 ./app/views/groups/new.html.erb:113
-msgid "Manage Members"
-msgstr "管理成員"
+#: app/views/users/new.html.erb:138
+msgid "The passwords do not match."
+msgstr "密碼不符合。"
 
-#: app/views/groups/index.html.erb:171 app/views/groups/index.html.erb:186
-#: app/views/groups/new.html.erb:122 app/views/users/_user_form.erb:149
-#: app/views/users/index.html.erb:122 app/views/users/index.html.erb:147 app/views/users/new.html.erb:156
-#: ./app/views/groups/index.html.erb:171 ./app/views/groups/index.html.erb:186
-#: ./app/views/groups/new.html.erb:122 ./app/views/users/_user_form.erb:149
-#: ./app/views/users/index.html.erb:122 ./app/views/users/index.html.erb:147
-#: ./app/views/users/new.html.erb:156
+#: app/views/users/new.html.erb:139 app/views/users/index.html.erb:110
+msgid "This field is required."
+msgstr "此區域是必要的。"
+
+#: app/views/users/new.html.erb:150 app/views/users/index.html.erb:101
+#: app/views/users/index.html.erb:126 app/views/users/_user_form.erb:153
+#: app/views/groups/new.html.erb:131 app/views/groups/index.html.erb:162
+#: app/views/groups/index.html.erb:173
 msgid "Please wait"
 msgstr "請稍候"
 
-#: app/views/groups/index.html.erb:172 app/views/groups/new.html.erb:123
-#: app/views/users/_user_form.erb:147 ./app/views/groups/index.html.erb:172
-#: ./app/views/groups/new.html.erb:123 ./app/views/users/_user_form.erb:147
-msgid "Save"
-msgstr "儲存"
-
-#: app/views/groups/index.html.erb:187 app/views/users/_user_form.erb:150
-#: ./app/views/groups/index.html.erb:187 ./app/views/users/_user_form.erb:150
-msgid "Delete"
-msgstr "刪除"
-
-#: app/views/groups/index.html.erb:189 ./app/views/groups/index.html.erb:189
-msgid "Are you sure to delete group '%s'?"
-msgstr "您確定要刪除群組 %s 嗎？"
-
-#: app/views/groups/new.html.erb:92 ./app/views/groups/new.html.erb:92
-msgid "Add new group"
-msgstr "新增新群組"
-
-#: app/views/users/_user_form.erb:25 ./app/views/users/_user_form.erb:25
-msgid "Login Settings"
-msgstr "登入設定"
-
-#: app/views/users/_user_form.erb:28 ./app/views/users/_user_form.erb:28
-msgid "Full Name"
-msgstr "全名"
-
-#: app/views/users/_user_form.erb:34 ./app/views/users/_user_form.erb:34
-msgid "Login Name"
-msgstr "登入名稱"
-
-#: app/views/users/_user_form.erb:41 ./app/views/users/_user_form.erb:41
-msgid "Password"
-msgstr "密碼"
-
-#: app/views/users/_user_form.erb:48 ./app/views/users/_user_form.erb:48
-msgid "Confirm Password"
-msgstr "確認密碼"
-
-#: app/views/users/_user_form.erb:70 app/views/users/index.html.erb:211
-#: app/views/users/index.html.erb:255 ./app/views/users/_user_form.erb:70
-#: ./app/views/users/index.html.erb:211 ./app/views/users/index.html.erb:255
-msgid "Manage Groups"
-msgstr "管理群組"
-
-#: app/views/users/_user_form.erb:80 ./app/views/users/_user_form.erb:80
-msgid "Default Group"
-msgstr "預設群組"
-
-#: app/views/users/_user_form.erb:89 app/views/users/index.html.erb:89 app/views/users/new.html.erb:96
-#: ./app/views/users/_user_form.erb:89 ./app/views/users/index.html.erb:89
-#: ./app/views/users/new.html.erb:96
-msgid "Select Default Group"
-msgstr "選取預設群組"
-
-#: app/views/users/_user_form.erb:101 ./app/views/users/_user_form.erb:101
-msgid "Advanced"
-msgstr "進階"
-
-#: app/views/users/_user_form.erb:104 ./app/views/users/_user_form.erb:104
-msgid "Home Directory"
-msgstr "主目錄"
-
-#: app/views/users/_user_form.erb:110 ./app/views/users/_user_form.erb:110
-msgid "Login Shell"
-msgstr "登入外圍程序"
-
-#: app/views/users/_user_form.erb:116 ./app/views/users/_user_form.erb:116
-msgid "UID Number"
-msgstr "UID 編號"
-
-#: app/views/users/_user_form.erb:125 ./app/views/users/_user_form.erb:125
-msgid "Roles"
-msgstr "角色"
-
-#: app/views/users/_user_form.erb:134 ./app/views/users/_user_form.erb:134
-msgid "Manage Roles"
-msgstr "管理角色"
-
-#: app/views/users/_user_form.erb:152 ./app/views/users/_user_form.erb:152
-msgid "Are you sure to delete user '%s'?"
-msgstr "您確定要刪除使用者「%s」嗎？"
-
-#: app/views/users/index.html.erb:69 app/views/users/new.html.erb:76 ./app/views/users/index.html.erb:69
-#: ./app/views/users/new.html.erb:76
-msgid "Select Groups"
-msgstr "選取群組"
-
-#: app/views/users/index.html.erb:70 app/views/users/new.html.erb:77 ./app/views/users/index.html.erb:70
-#: ./app/views/users/new.html.erb:77
-msgid "Selected Groups"
-msgstr "已選群組"
-
-#: app/views/users/index.html.erb:71 app/views/users/new.html.erb:78 ./app/views/users/index.html.erb:71
-#: ./app/views/users/new.html.erb:78
-msgid "Available Groups"
-msgstr "可選群組"
-
-#: app/views/users/index.html.erb:72 app/views/users/new.html.erb:79 ./app/views/users/index.html.erb:72
-#: ./app/views/users/new.html.erb:79
-msgid "Click group names to select/unselect groups"
-msgstr "按一下群組名稱以選取/取消選取群組"
-
-#: app/views/users/index.html.erb:90 app/views/users/new.html.erb:97 ./app/views/users/index.html.erb:90
-#: ./app/views/users/new.html.erb:97
-msgid "Click a group name to choose users default group"
-msgstr "按一下群組名稱以選擇使用者預設群組"
-
-#: app/views/users/index.html.erb:104 app/views/users/new.html.erb:111
-#: ./app/views/users/index.html.erb:104 ./app/views/users/new.html.erb:111
-msgid "Select Roles"
-msgstr "選取角色"
-
-#: app/views/users/index.html.erb:105 app/views/users/new.html.erb:112
-#: ./app/views/users/index.html.erb:105 ./app/views/users/new.html.erb:112
-msgid "Selected Roles"
-msgstr "選定角色"
-
-#: app/views/users/index.html.erb:106 app/views/users/new.html.erb:113
-#: ./app/views/users/index.html.erb:106 ./app/views/users/new.html.erb:113
-msgid "Available Roles"
-msgstr "可用角色"
-
-#: app/views/users/index.html.erb:107 app/views/users/new.html.erb:114
-#: ./app/views/users/index.html.erb:107 ./app/views/users/new.html.erb:114
-msgid "Click group names to select/unselect roles"
-msgstr "按一下群組名稱以選取/取消選取角色"
-
-#: app/views/users/index.html.erb:130 ./app/views/users/index.html.erb:130
-msgid " The passwords do not match."
-msgstr " 密碼不符。"
-
-#: app/views/users/index.html.erb:131 app/views/users/new.html.erb:145
-#: ./app/views/users/index.html.erb:131 ./app/views/users/new.html.erb:145
-msgid "This field is required."
-msgstr "此欄位是必要的。"
-
-#: app/views/users/index.html.erb:155 app/views/users/new.html.erb:165
-#: ./app/views/users/index.html.erb:155 ./app/views/users/new.html.erb:165
+#: app/views/users/new.html.erb:160 app/views/users/index.html.erb:134
 msgid "Password Strength:"
-msgstr "密碼長度︰"
+msgstr "密碼強度："
 
-#: app/views/users/index.html.erb:157 app/views/users/new.html.erb:167
-#: ./app/views/users/index.html.erb:157 ./app/views/users/new.html.erb:167
+#: app/views/users/new.html.erb:162 app/views/users/index.html.erb:136
 msgid "Weak"
 msgstr "弱"
 
-#: app/views/users/index.html.erb:158 app/views/users/new.html.erb:168
-#: ./app/views/users/index.html.erb:158 ./app/views/users/new.html.erb:168
+#: app/views/users/new.html.erb:163 app/views/users/index.html.erb:137
 msgid "Normal"
 msgstr "一般"
 
-#: app/views/users/index.html.erb:159 app/views/users/new.html.erb:169
-#: ./app/views/users/index.html.erb:159 ./app/views/users/new.html.erb:169
+#: app/views/users/new.html.erb:164 app/views/users/index.html.erb:138
 msgid "Medium"
-msgstr "中"
+msgstr "中等"
 
-#: app/views/users/index.html.erb:160 app/views/users/new.html.erb:170
-#: ./app/views/users/index.html.erb:160 ./app/views/users/new.html.erb:170
+#: app/views/users/new.html.erb:165 app/views/users/index.html.erb:139
 msgid "Strong"
-msgstr "嚴密"
+msgstr "強"
 
-#: app/views/users/index.html.erb:161 app/views/users/new.html.erb:171
-#: ./app/views/users/index.html.erb:161 ./app/views/users/new.html.erb:171
+#: app/views/users/new.html.erb:166 app/views/users/index.html.erb:140
 msgid "Very Strong"
-msgstr "非常嚴密"
+msgstr "非常強"
 
-#: app/views/users/index.html.erb:188 app/views/users/new.html.erb:204
-#: ./app/views/users/index.html.erb:188 ./app/views/users/new.html.erb:204 ./shortcuts.yml:6
+#: app/views/users/new.html.erb:204 app/views/users/index.html.erb:173
 msgid "Users"
 msgstr "使用者"
 
-#: app/views/users/index.html.erb:208 app/views/users/index.html.erb:220
-#: ./app/views/users/index.html.erb:208 ./app/views/users/index.html.erb:220
-msgid "Add New User"
-msgstr "新增新使用者"
-
-#: app/views/users/new.html.erb:144 ./app/views/users/new.html.erb:144
-msgid "The passwords do not match."
-msgstr "密碼不符。"
-
-#: app/views/users/new.html.erb:204 ./app/views/users/new.html.erb:204
+#: app/views/users/new.html.erb:204
 msgid "Add new user"
-msgstr "新增新的使用者"
+msgstr "新增使用者"
 
-#: ./shortcuts.yml:7
-msgid "Manage user accounts"
-msgstr "管理使用者帳戶"
+#: app/views/users/index.html.erb:109
+msgid " The passwords do not match."
+msgstr " 密碼不符合。"
 
-#: ./shortcuts.yml:16
-msgid "Manage groups"
+#: app/views/users/index.html.erb:184 app/views/groups/index.html.erb:115
+msgid "Filter:"
+msgstr "過濾："
+
+#: app/views/users/index.html.erb:190
+msgid "New User"
+msgstr "新使用者"
+
+#: app/views/users/index.html.erb:192 app/views/users/index.html.erb:227
+#: app/views/users/_user_form.erb:72
+msgid "Manage Groups"
 msgstr "管理群組"
 
+#: app/views/users/_user_form.erb:25
+msgid "Login Settings"
+msgstr "登入設定"
+
+#: app/views/users/_user_form.erb:28
+msgid "Full Name"
+msgstr "完整名稱"
+
+#: app/views/users/_user_form.erb:34
+msgid "Login Name"
+msgstr "登入名稱"
+
+#: app/views/users/_user_form.erb:38
+msgid "User already exists."
+msgstr "使用者已存在。"
+
+# password dialog title
+#: app/views/users/_user_form.erb:43
+msgid "Password"
+msgstr "密碼"
+
+#: app/views/users/_user_form.erb:50
+msgid "Confirm Password"
+msgstr "確認密碼"
+
+#: app/views/users/_user_form.erb:59 app/views/users/_user_form.erb:63
+#: app/views/groups/new.html.erb:91 app/views/groups/index.html.erb:104
+msgid "Groups"
+msgstr "群組"
+
+#: app/views/users/_user_form.erb:82
+msgid "Default Group"
+msgstr "預設群組"
+
+#: app/views/users/_user_form.erb:103
+msgid "Advanced"
+msgstr "進階"
+
+#: app/views/users/_user_form.erb:106
+msgid "Home Directory"
+msgstr "家目錄"
+
+#: app/views/users/_user_form.erb:112
+msgid "Login Shell"
+msgstr "登入 Shell"
+
+#: app/views/users/_user_form.erb:118
+msgid "UID Number"
+msgstr "UID 編號"
+
+#: app/views/users/_user_form.erb:127
+msgid "Roles"
+msgstr "角色"
+
+#: app/views/users/_user_form.erb:136
+msgid "Manage Roles"
+msgstr "管理角色"
+
+#: app/views/users/_user_form.erb:151 app/views/groups/new.html.erb:132
+#: app/views/groups/index.html.erb:163
+msgid "Save"
+msgstr "儲存"
+
+#: app/views/users/_user_form.erb:154 app/views/groups/index.html.erb:174
+msgid "Delete"
+msgstr "刪除"
+
+#: app/views/users/_user_form.erb:156
+msgid "Are you sure to delete user '%s'?"
+msgstr "您確定要刪除使用者 '%s'？"
+
+#: app/views/groups/new.html.erb:59 app/views/groups/index.html.erb:53
+msgid "Select Members"
+msgstr "選取成員"
+
+#: app/views/groups/new.html.erb:60 app/views/groups/index.html.erb:54
+msgid "Selected Members"
+msgstr "選取的成員"
+
+#: app/views/groups/new.html.erb:61 app/views/groups/index.html.erb:55
+msgid "Available Members"
+msgstr "可用的成員"
+
+#: app/views/groups/new.html.erb:62 app/views/groups/index.html.erb:56
+msgid "Click user names to select/unselect members"
+msgstr "點選使用者名稱來選擇/取消成員"
+
+#: app/views/groups/new.html.erb:91 app/views/groups/new.html.erb:102
+msgid "Add new group"
+msgstr "新增群組"
+
+#: app/views/groups/new.html.erb:109 app/views/groups/index.html.erb:143
+msgid "Group Name"
+msgstr "群組名稱"
+
+#: app/views/groups/new.html.erb:113 app/views/groups/index.html.erb:151
+msgid "Members"
+msgstr "成員"
+
+#: app/views/groups/new.html.erb:116 app/views/groups/index.html.erb:154
+msgid "Manage Members"
+msgstr "管理成員"
+
+#: app/views/groups/index.html.erb:121
+msgid "New Group"
+msgstr "新群組"
+
+#: app/views/groups/index.html.erb:123 app/views/groups/index.html.erb:192
+msgid "Manage Users"
+msgstr "管理使用者"
+
+#: app/views/groups/index.html.erb:147
+msgid "Group ID"
+msgstr "群組 ID"
+
+#: app/views/groups/index.html.erb:176
+msgid "Are you sure to delete group '%s'?"
+msgstr "您確定要刪除群組 '%s'？"
+
+#~ msgid "Cannot read users list."
+#~ msgstr "無法讀取使用者清單。"
+
+#~ msgid "Group named <i>%s</i> was not found."
+#~ msgstr "群組名稱 <i>%s</i> 找不到。"
+
+#~ msgid "No groups found."
+#~ msgstr "沒有發現群組。"
+
+#~ msgid "Unknown backend error"
+#~ msgstr "未知的後端錯誤"
+
+#~ msgid "Manage user accounts"
+#~ msgstr "管理使用者帳戶"
+
+#~ msgid "Manage groups"
+#~ msgstr "管理群組"
+
+#, fuzzy
+#~| msgid "Downloading groups"
+#~ msgid "Modify group"
+#~ msgstr "正在下載群組"
+
+#, fuzzy
+#~| msgid "Default Schemes"
+#~ msgid "Default members"
+#~ msgstr "預設規劃"
+
+#, fuzzy
+#~| msgid "Processor %1"
+#~ msgid "Processing ..."
+#~ msgstr "處理器 %1"
+
+#, fuzzy
+#~| msgid "Edit User %s"
+#~ msgid "Edit user %s"
+#~ msgstr "編輯使用者 %s"
+
+#~ msgid "Invalid session, please login again."
+#~ msgstr "不適用的工作階段，請重新登入。"
+
+#~ msgid "Empty UID value"
+#~ msgstr "空白的 UID 值"
+
+#~ msgid "UID: value >= 1000 is valid for local user only"
+#~ msgstr "UID： 數值 >= 1000 僅適用於本地使用者"
+
+#~ msgid "Local User"
+#~ msgstr "本地使用者"
+
+#~ msgid "Login"
+#~ msgstr "登入"
+
+#~ msgid "Edit"
+#~ msgstr "編輯"
+
+#~ msgid "<strong>[New User]</strong>"
+#~ msgstr "<strong>[新使用者]</strong>"
+
+#~ msgid "Back"
+#~ msgstr "上一步"
+
+#~ msgid "Update"
+#~ msgstr "更新"
+
+#~ msgid "Default Group (GID)"
+#~ msgstr "預設群組 (GID)"
+
+#, fuzzy
+#~| msgid "do NOT create home directory"
+#~ msgid "Do not create home directory"
+#~ msgstr "不要建立家目錄"
+
+#~ msgid "Create"
+#~ msgstr "建立"

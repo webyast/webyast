@@ -1,104 +1,63 @@
-# Copyright (C) 2006 SuSE Linux Products GmbH, Nuernberg
-# This file is distributed under the same license as the package.
+# translation of webyast-root-user.es.po to Spanish
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE webyast-root-user.
 #
+# Carlos E. Robinson M. <carlos.e.r@opensuse.org>, 2010, 2011, 2012.
 msgid ""
 msgstr ""
-"Project-Id-Version: webyast-root-user-ui\n"
-"POT-Creation-Date: 2010-08-18 10:18+0200\n"
-"PO-Revision-Date: 2010-08-26 09:24\n"
-"Last-Translator: Novell Language <language@novell.com>\n"
-"Language-Team: Novell Language <language@novell.com>\n"
+"Project-Id-Version: webyast-root-user.es\n"
+"POT-Creation-Date: 2012-06-07 15:20+0200\n"
+"PO-Revision-Date: 2012-06-17 00:47+0200\n"
+"Last-Translator: Carlos E. Robinson <carlos.e.r@opensuse.org>\n"
+"Language-Team: Spanish <opensuse-translation-es@opensuse.org>\n"
+"Language: es\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Plural-Forms:  nplurals=2; plural=(n != 1);\n"
+"X-Generator: Lokalize 1.2\n"
 
-#: app/controllers/administrator_controller.rb:53 app/views/administrator/index.html.erb:56
-#: ./app/controllers/administrator_controller.rb:53 ./app/views/administrator/index.html.erb:56
-msgid "Enter a valid e-mail address."
-msgstr "Escriba una dirección de correo electrónico válida."
+msgid "A password is required."
+msgstr "Se requiere una contraseña."
 
-#: app/controllers/administrator_controller.rb:61 ./app/controllers/administrator_controller.rb:61
-msgid "Passwords do not match."
-msgstr "Las contraseñas no coinciden."
-
-#: app/controllers/administrator_controller.rb:74 ./app/controllers/administrator_controller.rb:74
-msgid "Administrator settings have been written."
-msgstr "Los valores de configuración del administrador están ya escritos."
-
-#: app/controllers/administrator_controller.rb:84 ./app/controllers/administrator_controller.rb:84
-msgid "Error while saving administrator settings: %s"
-msgstr "Error al guardar los valores de configuración del administrador: %s"
-
-#: app/controllers/administrator_controller.rb:96 ./app/controllers/administrator_controller.rb:96
-msgid "Mail alias was set but outgoing mail server is not configured (%s<i>change</i>%s)."
-msgstr "El alias del correo se ha definido, pero el servidor de correo saliente no está configurado (%s<i>change</i>%s)."
-
-#: app/views/administrator/index.html.erb:22 ./app/views/administrator/index.html.erb:22 ./shortcuts.yml:6
 msgid "Administrator Settings"
 msgstr "Configuración del administrador"
 
-#: app/views/administrator/index.html.erb:63 ./app/views/administrator/index.html.erb:63
-msgid "Please wait"
-msgstr "Espere"
+msgid "Administrator settings have been written."
+msgstr "Los ajustes del administrador han sido escritos."
 
-#: app/views/administrator/index.html.erb:71 ./app/views/administrator/index.html.erb:71
-msgid "The passwords do not match."
-msgstr "Las contraseñas no coinciden."
+msgid "Confirm Password"
+msgstr "Confirme la contraseña"
 
-#: app/views/administrator/index.html.erb:72 ./app/views/administrator/index.html.erb:72
-msgid "A password is required."
-msgstr "Se requiere contraseña."
+msgid "Enter a valid e-mail address."
+msgstr "Introduzca una dirección de correo electrónico válida."
 
-#: app/views/administrator/index.html.erb:77 ./app/views/administrator/index.html.erb:77
-msgid "Password Strength:"
-msgstr "Nivel de seguridad de la contraseña:"
+msgid "Error while saving administrator settings."
+msgstr "Error mientras se guardaban las configuraciones del administrador."
 
-#: app/views/administrator/index.html.erb:79 ./app/views/administrator/index.html.erb:79
-msgid "Weak"
-msgstr "Débil"
+msgid "Forward system mail to"
+msgstr "Reenvíe el correo de sistema a"
 
-#: app/views/administrator/index.html.erb:80 ./app/views/administrator/index.html.erb:80
-msgid "Normal"
-msgstr "Normal"
+msgid "Mail Setup for User 'root'"
+msgstr "Configuración de correo para usuario 'root'"
 
-#: app/views/administrator/index.html.erb:81 ./app/views/administrator/index.html.erb:81
-msgid "Medium"
-msgstr "Medio"
+msgid "Mail alias was set but outgoing mail server is not configured (%s<i>change</i>%s)."
+msgstr "Se puso el alias de correo pero no está configurado el servidor de correo saliente (%s<i>cambiar</i>%s)."
 
-#: app/views/administrator/index.html.erb:82 ./app/views/administrator/index.html.erb:82
-msgid "Strong"
-msgstr "Fuerte"
-
-#: app/views/administrator/index.html.erb:83 ./app/views/administrator/index.html.erb:83
-msgid "Very Strong"
-msgstr "Muy fuerte"
-
-#: app/views/administrator/index.html.erb:113 ./app/views/administrator/index.html.erb:113
-msgid "Password Setup for User 'root'"
-msgstr "Configuración de contraseña para el usuario Root"
-
-#: app/views/administrator/index.html.erb:114 ./app/views/administrator/index.html.erb:114
 msgid "New Password"
 msgstr "Nueva contraseña"
 
-#: app/views/administrator/index.html.erb:118 ./app/views/administrator/index.html.erb:118
-msgid "Confirm Password"
-msgstr "Confirmar contraseña"
+msgid "Password Setup for User 'root'"
+msgstr "Configuración de contraseña para usuario 'root'"
 
-#: app/views/administrator/index.html.erb:127 ./app/views/administrator/index.html.erb:127
-msgid "Mail Setup for User 'root'"
-msgstr "Configuración del correo para el usuario Root"
+msgid "Passwords do not match."
+msgstr "Las contraseñas no coinciden."
 
-#: app/views/administrator/index.html.erb:129 ./app/views/administrator/index.html.erb:129
-msgid "Forward system mail to"
-msgstr "Reenviar el correo del sistema a"
+msgid "Please wait"
+msgstr "Por favor, espere"
 
-#: app/views/administrator/index.html.erb:132 ./app/views/administrator/index.html.erb:132
 msgid "Save Mail Only"
-msgstr "Guardar sólo correo"
+msgstr "Sólo guardar el correo"
 
-#: ./shortcuts.yml:7
-msgid "Manage system administrator"
-msgstr "Gestionar administrador del sistema"
-
+msgid "The passwords do not match."
+msgstr "Las contraseñas no coinciden."

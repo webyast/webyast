@@ -1,275 +1,229 @@
 # Galician translation of yast_webclient_registration.gl.po
 # Manuel A. Vázquez <xixirei@yahoo.es>, 2009.
-# Manuel A. Vazquez <xixirei@yahoo.es>, 2010.
+# Manuel A. Vazquez <xixirei@yahoo.es>, 2010, 2011.
 msgid ""
 msgstr ""
-"Project-Id-Version: webyast-registration-ui 1.0.0\n"
+"Project-Id-Version: yast_webclient_registration.gl.po\n"
 "Report-Msgid-Bugs-To: translation@suse.de\n"
-"POT-Creation-Date: 2010-08-02 09:19+0200\n"
-"PO-Revision-Date: 2010-03-19 10:00+0100\n"
+"POT-Creation-Date: 2012-06-07 15:20+0200\n"
+"PO-Revision-Date: 2011-03-08 10:14+0100\n"
 "Last-Translator: Manuel A. Vazquez <xixirei@yahoo.es>\n"
-"Language-Team: Galician <proxecto@trasno.net>\n"
+"Language-Team: Galego <proxecto@trasno.net>\n"
+"Language: gl\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n!=1);\n"
 "X-Generator: Lokalize 1.0\n"
 
-#: app/controllers/registration_controller.rb:32
-#: app/controllers/registration_controller.rb:32
+#: app/models/registration_state.rb:27
+msgid "Registration is missing"
+msgstr "Falta o rexistro"
+
+#: app/models/registration_state.rb:28
+msgid "Please register your system in order to get updates."
+msgstr "Rexistre o seu sistema para poder obter actualizacións."
+
+#: app/models/registration_state.rb:30
+msgid "register"
+msgstr "rexistrar"
+
+#: app/controllers/registration_controller.rb:29
 msgid "Email"
 msgstr "Correo-e"
 
-#: app/controllers/registration_controller.rb:33
-#: app/controllers/registration_controller.rb:33
+#: app/controllers/registration_controller.rb:30
 msgid "System name"
 msgstr "Nome do sistema"
 
-#: app/controllers/registration_controller.rb:34
-#: app/controllers/registration_controller.rb:34
+#: app/controllers/registration_controller.rb:31
 msgid "SLES registration code"
 msgstr "Código de rexistro de SLES"
 
-#: app/controllers/registration_controller.rb:35
-#: app/controllers/registration_controller.rb:35
+#: app/controllers/registration_controller.rb:32
 msgid "SLED registration code"
 msgstr "Código de rexistro de SLES"
 
-#: app/controllers/registration_controller.rb:36
-#: app/controllers/registration_controller.rb:36
+#: app/controllers/registration_controller.rb:33
+msgid "SLMS registration code"
+msgstr "Código de rexistro de SLMS"
+
+#: app/controllers/registration_controller.rb:34
 msgid "Appliance registration code"
 msgstr "Código de rexistro do dispositivo"
 
-#: app/controllers/registration_controller.rb:37
-#: app/controllers/registration_controller.rb:37
+#: app/controllers/registration_controller.rb:35
 msgid "WebYaST registration code"
 msgstr "Código de rexistro de WebYaST"
 
-#: app/controllers/registration_controller.rb:38
-#: app/controllers/registration_controller.rb:38
+#: app/controllers/registration_controller.rb:36
 msgid "Registration code"
 msgstr "Código de rexistro"
 
-#: app/controllers/registration_controller.rb:39
-#: app/controllers/registration_controller.rb:39
+#: app/controllers/registration_controller.rb:37
 msgid "Hostname"
 msgstr "Nome de host"
 
-#: app/controllers/registration_controller.rb:40
-#: app/controllers/registration_controller.rb:40
+#: app/controllers/registration_controller.rb:38
 msgid "Device name"
 msgstr "Nome do dispositivo"
 
-#: app/controllers/registration_controller.rb:41
-#: app/controllers/registration_controller.rb:41
+#: app/controllers/registration_controller.rb:39
 msgid "Appliance name"
 msgstr "Nome do dispositivo"
 
-#: app/controllers/registration_controller.rb:42
-#: app/controllers/registration_controller.rb:42
+#: app/controllers/registration_controller.rb:40
 msgid "registration code"
 msgstr "código de rexistro"
 
-#: app/controllers/registration_controller.rb:52
-#: app/controllers/registration_controller.rb:52
-msgid "Invalid session, please login again."
-msgstr "Sesión non válida, inicie a sesión outra vez."
-
-#: app/controllers/registration_controller.rb:62
-#: app/controllers/registration_controller.rb:62
-msgid "No permissions for registration"
-msgstr "Non se precisan permisos para o rexistro"
-
-#: app/controllers/registration_controller.rb:111
-#: app/controllers/registration_controller.rb:111
+#: app/controllers/registration_controller.rb:81
 msgid "Please try to register again later."
 msgstr "Tente rexistrarse novamente máis tarde."
 
-#: app/controllers/registration_controller.rb:115
-#: app/controllers/registration_controller.rb:115
+#: app/controllers/registration_controller.rb:85
 msgid "Registration did not succeed."
 msgstr "O rexistro non se realizou correctamente."
 
-#: app/controllers/registration_controller.rb:119
-#: app/controllers/registration_controller.rb:119
+#: app/controllers/registration_controller.rb:89
 msgid "Registration was skipped."
 msgstr "O rexistro foi ignorado"
 
-#: app/controllers/registration_controller.rb:123
-#: app/controllers/registration_controller.rb:123
+#: app/controllers/registration_controller.rb:93
 msgid "This may be a temporary issue."
 msgstr "Isto pode ser un problema temporal."
 
-#: app/controllers/registration_controller.rb:127
-#: app/controllers/registration_controller.rb:127
+#: app/controllers/registration_controller.rb:97
 msgid "The system might not receive necessary updates."
-msgstr ""
+msgstr "O sistema podería non recibir as actualizacións necesarias."
 
-#: app/controllers/registration_controller.rb:143
-#: app/controllers/registration_controller.rb:143
+#: app/controllers/registration_controller.rb:113
 msgid "The registration server returned invalid or incomplete data."
 msgstr "O servidor de rexistro devolveu datos incorrectos ou incompletos."
 
-#: app/controllers/registration_controller.rb:151
-#: app/controllers/registration_controller.rb:151
+#: app/controllers/registration_controller.rb:121
 msgid "Could not read the registration configuration."
-msgstr ""
+msgstr "Non se pode ler a configuración do rexistro."
 
-#: app/controllers/registration_controller.rb:151
-#: app/controllers/registration_controller.rb:151
+#: app/controllers/registration_controller.rb:121
 msgid "The registration backend is not installed correctly"
-msgstr ""
+msgstr "A infraestrutura de rexistro non está instalada correctamente"
 
-#: app/controllers/registration_controller.rb:152
-#: app/controllers/registration_controller.rb:152
+#: app/controllers/registration_controller.rb:122
 msgid "Please refer to your support contact."
-msgstr ""
+msgstr "Por favor, consulte co seu contacto de soporte"
 
-#: app/controllers/registration_controller.rb:181
-#: app/controllers/registration_controller.rb:181
+#: app/controllers/registration_controller.rb:151
 msgid "Please fill out missing entries."
 msgstr "Por favor, encha as entradas que faltan."
 
-#: app/controllers/registration_controller.rb:213
-#: app/controllers/registration_controller.rb:213
+#: app/controllers/registration_controller.rb:183
 msgid "Service added:"
 msgstr "Servizo engadido:"
 
-#: app/controllers/registration_controller.rb:217
-#: app/controllers/registration_controller.rb:223
-#: app/controllers/registration_controller.rb:217
-#: app/controllers/registration_controller.rb:223
+#: app/controllers/registration_controller.rb:189
 msgid "Catalog enabled:"
 msgstr "Catálogo activado: "
 
-#: app/controllers/registration_controller.rb:250
-#: app/controllers/registration_controller.rb:250
+#: app/controllers/registration_controller.rb:215
 msgid "Repository added:"
 msgstr "Repositorio engadido:'"
 
-#: app/controllers/registration_controller.rb:326
-#: app/controllers/registration_controller.rb:326
+#: app/controllers/registration_controller.rb:357
 msgid "This system is already registered."
 msgstr "O sistema xa está rexistrado."
 
-#: app/controllers/registration_controller.rb:355
-#: app/controllers/registration_controller.rb:355
+#: app/controllers/registration_controller.rb:382
 msgid "Registration finished successfully."
 msgstr "Rexistro finalizado correctamente."
 
-#: app/controllers/registration_controller.rb:365
-#: app/controllers/registration_controller.rb:365
-msgid ""
-"<p><b>Repositories were not modified during the registration process.</b></"
-"p><p>It is likely that an incorrect registration code was used. If this is "
-"the case, please attempt the registration process again to get an update "
-"repository.</p><p>Please make sure that this system has an update repository "
-"configured, otherwise it will not receive updates.</p>"
-msgstr ""
-"<p><b>Os repositorios foron modificados durante o processo de rexistro.</"
-"b>< /p><p>É probable que se empregase un código de rexistro non válido. De "
-"seren este o caso, execute de novo o proceso de rexistro para obter un "
-"repositorio de actualización.</p><p>Asegúrese que o sistema ten un "
-"repositorio de actualización configurado, en caso contrario non recibirá "
-"actualizacións</p>"
-
-#: app/controllers/registration_controller.rb:399
-#: app/controllers/registration_controller.rb:399
+#: app/controllers/registration_controller.rb:396
 msgid "A connection to the registration server could not be established."
 msgstr "Non foi posible establecer a conexión co servidor de rexistro."
 
-#: app/controllers/registration_controller.rb:403
-#: app/controllers/registration_controller.rb:403
-#, fuzzy
+#: app/controllers/registration_controller.rb:400
 msgid "The supplied registration data was invalid."
-msgstr "Os datos transmitidos crearán un conflito."
+msgstr "Os datos de rexistro fornecidos eran incorrectos."
 
-#: app/controllers/registration_controller.rb:407
-#: app/controllers/registration_controller.rb:407
-#, fuzzy
+#: app/controllers/registration_controller.rb:404
 msgid "The registration code you entered was invalid."
-msgstr "O servidor de rexistro devolveu datos non válidos."
+msgstr "O código de rexistro introducido era incorrecto."
 
-#: app/controllers/registration_controller.rb:413
-#: app/controllers/registration_controller.rb:413
+#: app/controllers/registration_controller.rb:410
 msgid "The transmitted registration data created a conflict."
 msgstr "Os datos transmitidos crearán un conflito."
 
-#: app/controllers/registration_controller.rb:421
-#: app/controllers/registration_controller.rb:421
-msgid ""
-"Registration can not be performed. There is no product installed that can be "
-"registered."
-msgstr ""
-"O rexistro non pode ser executado. Non existe un produto instalado que poida "
-"seren rexistrado."
+#: app/controllers/registration_controller.rb:418
+msgid "Registration can not be performed. There is no product installed that can be registered."
+msgstr "O rexistro non pode ser executado. Non existe un produto instalado que poida seren rexistrado."
 
-#: app/controllers/registration_controller.rb:436
-#: app/controllers/registration_controller.rb:436
-msgid ""
-"A connection to the registration server could not be established or it did "
-"not reply."
-msgstr ""
-"Non foi posible unha conexión co servidor de rexistro ou o servidor non "
-"respondeu."
+#: app/controllers/registration_controller.rb:442
+msgid "<p><b>Repositories were not modified during the registration process.</b></p><p>It is likely that an incorrect registration code was used. If this is the case, please attempt the registration process again to get an update repository.</p><p>Please make sure that this system has an update repository configured, otherwise it will not receive updates.</p>"
+msgstr "<p><b>Os repositorios foron modificados durante o processo de rexistro.</b>< /p><p>É probable que se empregase un código de rexistro non válido. De seren este o caso, execute de novo o proceso de rexistro para obter un repositorio de actualización.</p><p>Asegúrese que o sistema ten un repositorio de actualización configurado, en caso contrario non recibirá actualizacións</p>"
 
-#: app/controllers/registration_controller.rb:453
-#: app/controllers/registration_controller.rb:453
+#: app/controllers/registration_controller.rb:454
 msgid "The registration server returned invalid data."
 msgstr "O servidor de rexistro devolveu datos non válidos."
 
-#: app/views/registration/index.rhtml:53 app/views/registration/index.rhtml:54
-#: app/views/registration/index.rhtml:53 app/views/registration/index.rhtml:54
+#: app/views/registration/index.html.erb:42
+#: app/views/registration/index.html.erb:57
+msgid "Please wait"
+msgstr "Agarde"
+
+#: app/views/registration/index.html.erb:64
+#: app/views/registration/index.html.erb:65
 msgid "Please enter a valid Email address."
 msgstr "Introduza un enderezo de correo-e válido."
 
-#: app/views/registration/index.rhtml:61 app/views/registration/index.rhtml:61
-msgid "register plugin"
-msgstr "extensión de rexistro"
-
-#: app/views/registration/index.rhtml:61 app/views/registration/index.rhtml:61
-#: shortcuts.yml:6
+#: app/views/registration/index.html.erb:80
 msgid "Registration"
 msgstr "Rexistro"
 
-#: app/views/registration/index.rhtml:69 app/views/registration/index.rhtml:69
+#: app/views/registration/index.html.erb:93
 msgid "Registration Information"
 msgstr "Información de rexistro"
 
-#: app/views/registration/index.rhtml:70 app/views/registration/index.rhtml:70
+#: app/views/registration/index.html.erb:99
 msgid "This system is registered"
 msgstr "Este sistema está rexistrado"
 
-#: app/views/registration/index.rhtml:71 app/views/registration/index.rhtml:71
+#: app/views/registration/index.html.erb:102
 msgid "System number (GUID)"
 msgstr "Número do sistema (GUID)"
 
-#: app/views/registration/index.rhtml:72 app/views/registration/index.rhtml:72
+#: app/views/registration/index.html.erb:105
 msgid "Register again"
 msgstr "Rexistrar de novo"
 
-#: app/views/registration/index.rhtml:79 app/views/registration/index.rhtml:79
+#: app/views/registration/index.html.erb:118
 msgid "Next"
 msgstr "Seguinte"
 
-#: app/views/registration/index.rhtml:89 app/views/registration/index.rhtml:89
+#: app/views/registration/index.html.erb:131
 msgid "Mandatory Information"
 msgstr "Información obrigatoria"
 
-#: app/views/registration/index.rhtml:104
-#: app/views/registration/index.rhtml:104
+#: app/views/registration/index.html.erb:151
 msgid "Details"
 msgstr "Detalles"
 
-#: app/views/registration/index.rhtml:128
-#: app/views/registration/index.rhtml:128
+#: app/views/registration/index.html.erb:179
 msgid "Postpone"
 msgstr "Adiar"
 
-#: shortcuts.yml:7
-#, fuzzy
-msgid "System Registration"
-msgstr "Rexistro"
+#~ msgid "Invalid session, please login again."
+#~ msgstr "Sesión non válida, inicie a sesión outra vez."
+
+#~ msgid "No permissions for registration"
+#~ msgstr "Non se precisan permisos para o rexistro"
+
+#~ msgid "A connection to the registration server could not be established or it did not reply."
+#~ msgstr "Non foi posible unha conexión co servidor de rexistro ou o servidor non respondeu."
+
+#~ msgid "register plugin"
+#~ msgstr "extensión de rexistro"
+
+#~ msgid "System Registration"
+#~ msgstr "Rexistro do sistema"
 
 #~ msgid "Registration did not finish."
 #~ msgstr "Non finalizou o rexistro."

@@ -1,0 +1,66 @@
+# Chan Sambathratanak <ratanak@khmeros.info>, 2011.
+msgid ""
+msgstr ""
+"Project-Id-Version: @PACKAGE@\n"
+"Report-Msgid-Bugs-To: translation@suse.de\n"
+"POT-Creation-Date: 2012-06-07 15:20+0200\n"
+"PO-Revision-Date: 2011-10-03 08:50+0700\n"
+"Last-Translator: Chan Sambathratanak <ratanak@khmeros.info>\n"
+"Language-Team: Khmer <support@khmeros.info>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"X-Generator: WordForge 0.8 RC1\n"
+"X-Language: km-KH\n"
+
+#: app/controllers/kerberos_controller.rb:30
+msgid "Cannot read Kerberos client configuraton."
+msgstr "មិន​អាច​អាន​ការ​កំណត់​រចនា​សម្ព័ន្ធ​ម៉ាស៊ីន​ភ្ញៀវ​ Kerberos បាន​ទេ ។"
+
+#: app/controllers/kerberos_controller.rb:45
+msgid "Kerberos client configuraton successfully written."
+msgstr "បាន​សរសេរ​ការ​កំណត់​រចនា​សម្ព័ន្ធ​ម៉ាស៊ីន​ភ្ញៀវ​ Kerberos ដោយ​ជោគជ័យ ។​"
+
+#: app/controllers/kerberos_controller.rb:47
+msgid "Error while saving Kerberos client configuration."
+msgstr "កំហុស​ខណៈ​ពេល​ដែល​កំពុង​រក្សាទុក​ការ​កំណត់​រចនា​សម្ព័ន្ធ​ម៉ាស៊ីន​ភ្ញៀវ​ Kerberos ។"
+
+#: app/views/kerberos/index.html.erb:32
+msgid "This field is required."
+msgstr "វាល​នេះ​ត្រូវ​បាន​ទាមទារ ។​"
+
+#: app/views/kerberos/index.html.erb:33
+msgid "Enter a valid domain name or an IP address."
+msgstr "បញ្ចូល​ឈ្មោះ​ដែន ឬ​អាសយដ្ឋាន IP ដែល​ត្រឹមត្រូវ ។"
+
+#: app/views/kerberos/index.html.erb:60
+msgid "Please wait"
+msgstr "សូម​រង់ចាំ"
+
+#: app/views/kerberos/index.html.erb:78
+msgid "Kerberos client"
+msgstr "ម៉ាស៊ីន​ភ្ញៀវ Kerberos"
+
+#: app/views/kerberos/index.html.erb:91
+msgid "Enable Kerberos Authentication"
+msgstr "បើក​ការ​ផ្ទៀងផ្ទាត់​ភាព​ត្រឹមត្រូវ​ Kerberos"
+
+#: app/views/kerberos/index.html.erb:98
+msgid "Default Domain"
+msgstr "ដែន​លំនាំដើម"
+
+#: app/views/kerberos/index.html.erb:103
+msgid "Default Realm"
+msgstr "តំបន់​លំនាំដើម​"
+
+#: app/views/kerberos/index.html.erb:108
+msgid "KDC Server Address"
+msgstr "អាសយដ្ឋាន​ម៉ាស៊ីន​បម្រើ KDC"
+
+#~ msgid "Kerberos"
+#~ msgstr "Kerberos"
+
+#~ msgid "Configure Kerberos client"
+#~ msgstr "កំណត់​រចនា​សម្ព័ន្ធ​ម៉ាស៊ីន​ភ្ញៀវ Kerberos"

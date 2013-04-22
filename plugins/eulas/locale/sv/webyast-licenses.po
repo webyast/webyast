@@ -1,55 +1,57 @@
-# Copyright (C) 2006 SuSE Linux Products GmbH, Nuernberg
-# This file is distributed under the same license as the package.
+# @TITLE@
+# Copyright (C) 2006, SUSE Linux GmbH, Nuremberg
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+# This file is distributed under the same license as @PACKAGE@ package. FIRST
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: yast_webclient_eulas\n"
-"POT-Creation-Date: 2010-03-30 10:01+0200\n"
-"PO-Revision-Date: 2010-04-08 08:13\n"
-"Last-Translator: Novell Language <language@novell.com>\n"
-"Language-Team: Novell Language <language@novell.com>\n"
+"Project-Id-Version: @PACKAGE@\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2012-06-07 15:19+0200\n"
+"PO-Revision-Date: 2005-09-18 19:09+0200\n"
+"Last-Translator: Mattias Newzella <newzella@linux.se>\n"
+"Language-Team: Swedish <sv@li.org>\n"
+"Language: sv\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"X-Generator: KBabel 1.10.1\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: app/controllers/eulas_controller.rb:72
-msgid "You cannot reject a license once it has been accepted!"
-msgstr "Det går inte att avvisa en licens när den har accepterats."
-
-#: app/controllers/eulas_controller.rb:75
+#: app/controllers/eulas_controller.rb:122
 msgid "You must accept all licences before using this product!"
-msgstr "Du måste acceptera alla licenser innan du kan använda produkten."
+msgstr ""
 
-#: app/views/eulas/no_licenses.erb:1 app/views/eulas/all_accepted.erb:1
-msgid "Accept End User License Agreement"
-msgstr "Acceptera licensavtal för slutanvändare"
+#: app/views/eulas/all_accepted.erb:26 app/views/eulas/no_licenses.erb:26
+msgid "Accept End User Licence Agreement"
+msgstr ""
 
-#: app/views/eulas/no_licenses.erb:2
-msgid "There are no licenses to accept."
-msgstr "Det finns inga licenser att acceptera."
+#: app/views/eulas/all_accepted.erb:37
+msgid "All licenses have already been accepted"
+msgstr ""
 
-#: app/views/eulas/show.html.erb:2
-msgid "License Agreement"
-msgstr "Licensavtal"
+#: app/views/eulas/show.html.erb:30
+msgid "Licence Agreement"
+msgstr ""
 
-#: app/views/eulas/show.html.erb:8
-msgid "Available translations:"
-msgstr "Tillgängliga översättningar:"
-
-#: app/views/eulas/show.html.erb:26
+#: app/views/eulas/show.html.erb:50
 msgid "Yes, I agree to the license agreement."
-msgstr "Ja, jag accepterar licensavtalet."
+msgstr ""
 
-#: app/views/eulas/show.html.erb:32
+#: app/views/eulas/show.html.erb:54
 msgid "No, I do not agree."
-msgstr "Nej, jag accepterar inte."
+msgstr ""
 
-#: app/views/eulas/show.html.erb:43
+#: app/views/eulas/show.html.erb:71
 msgid "Back"
 msgstr "Tillbaka"
 
-#: app/views/eulas/all_accepted.erb:2
-msgid "All licenses have already been accepted"
-msgstr "Alla licenser har redan accepterats"
+#: app/views/eulas/no_licenses.erb:36
+msgid "There are no licenses to accept."
+msgstr ""
 
+#, fuzzy
+#~| msgid "Available Processors"
+#~ msgid "Available translations:"
+#~ msgstr "Tillgängliga processorer"

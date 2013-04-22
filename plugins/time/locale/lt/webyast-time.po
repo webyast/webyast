@@ -1,90 +1,88 @@
 # @TITLE@
 # Copyright (C) 2006, SUSE Linux GmbH, Nuremberg
-# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 #
 # This file is distributed under the same license as @PACKAGE@ package. FIRST
 #
+# Mindaugas Baranauskas <opensuse.lietuviu.kalba@gmail.com>, 2010, 2011, 2012.
+# Mantas Kondrotas <dalelemanes@gmail.com>, 2010.
 msgid ""
 msgstr ""
-"Project-Id-Version: webyast-time-ui 1.0.0\n"
+"Project-Id-Version: @PACKAGE@\n"
 "Report-Msgid-Bugs-To: translation@suse.de\n"
-"POT-Creation-Date: 2010-08-02 09:18+0200\n"
-"PO-Revision-Date: 2001-10-18 09:54+0200\n"
-"Last-Translator: Jonas Gocentas <jonasgocentas@florida.usa.com>\n"
-"Language-Team: Lithuanian <i18n@suse.de>\n"
+"POT-Creation-Date: 2012-06-07 15:20+0200\n"
+"PO-Revision-Date: 2012-07-31 17:59+0300\n"
+"Last-Translator: Mindaugas Baranauskas <opensuse.lietuviu.kalba@gmail.com>\n"
+"Language-Team: Lithuanian <komp_lt@konferencijos.lt>\n"
+"Language: lt\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=3; plural=n%10==1 && n%100!=11 ? 0 : n%10>=2 && (n%"
-"100<10 || n%100>=20) ? 1 : 2;\n"
+"Plural-Forms: nplurals=4; plural=(n%10==1 ? 0 : n%10==1 && n%100!=11 ? 1 : n%10>=2 && (n%100<10 || n%100>=20) ? 2 : 3);\n"
+"X-Generator: Lokalize 1.4\n"
 
-#: app/controllers/time_controller.rb:99
-#: app/controllers/time_controller.rb:103
-#: app/controllers/time_controller.rb:99
-#: app/controllers/time_controller.rb:103
+#: app/controllers/time_controller.rb:117
 msgid "Time settings have been written."
-msgstr ""
+msgstr "Laiko nuostatos buvo įrašytos."
 
-#: app/models/systemtime.rb:29 app/models/systemtime.rb:29
-#, fuzzy
-msgid "Unknown timezone %s on host"
-msgstr "Nežinomas parametras "
+#: app/views/time/index.html.erb:54
+msgid "Error: Cannot get information."
+msgstr "Klaida: nepavyksta gauti informacijos."
 
-#: app/views/time/index.rhtml:73 app/views/time/index.rhtml:77
-#: app/views/time/index.rhtml:102 app/views/time/index.rhtml:73
-#: app/views/time/index.rhtml:77 app/views/time/index.rhtml:102
+#: app/views/time/index.html.erb:79
+msgid "Please wait"
+msgstr "Palaukite"
+
+#: app/views/time/index.html.erb:86 app/views/time/index.html.erb:90
+#: app/views/time/index.html.erb:111
 msgid "This field is required"
-msgstr ""
+msgstr "Šis laukelis yra privalomas"
 
-#: app/views/time/index.rhtml:74 app/views/time/index.rhtml:103
-#: app/views/time/index.rhtml:74 app/views/time/index.rhtml:103
+#: app/views/time/index.html.erb:87 app/views/time/index.html.erb:112
 msgid "Enter a valid domain name or an IP address"
-msgstr ""
+msgstr "Įveskite galiojantį srities vardą arba IP adresą"
 
-#: app/views/time/index.rhtml:78 app/views/time/index.rhtml:78
+#: app/views/time/index.html.erb:91
 msgid "Invalid time format. Correct one is hh:mm:ss"
-msgstr ""
+msgstr "Negaliojantis laiko formatas. Turi būti hh:mm:ss"
 
-#: app/views/time/index.rhtml:137 app/views/time/index.rhtml:171
-#: app/views/time/index.rhtml:185 app/views/time/index.rhtml:137
-#: app/views/time/index.rhtml:171 app/views/time/index.rhtml:185
-#: shortcuts.yml:6
+#: app/views/time/index.html.erb:154 app/views/time/index.html.erb:198
+#: app/views/time/index.html.erb:216
 msgid "Time"
-msgstr ""
+msgstr "Laikas"
 
-#: app/views/time/index.rhtml:145 app/views/time/index.rhtml:152
-#: app/views/time/index.rhtml:145 app/views/time/index.rhtml:152
+#: app/views/time/index.html.erb:167 app/views/time/index.html.erb:177
 msgid "Timezone"
-msgstr ""
+msgstr "Laiko juosta"
 
-#: app/views/time/index.rhtml:147 app/views/time/index.rhtml:147
+#: app/views/time/index.html.erb:172
 msgid "Region"
-msgstr ""
+msgstr "Regionas"
 
-#: app/views/time/index.rhtml:162 app/views/time/index.rhtml:162
+#: app/views/time/index.html.erb:186
 msgid "Hardware clock is set to UTC"
-msgstr ""
+msgstr "Aparatinės įrangos laikrodis nustatytas kaip UTC"
 
-#: app/views/time/index.rhtml:176 app/views/time/index.rhtml:176
-#, fuzzy
+#: app/views/time/index.html.erb:207
 msgid "Manually configure time"
-msgstr "Rankinis IP konfigūravimas"
+msgstr "Rankinis laiko konfigūravimas"
 
-#: app/views/time/index.rhtml:181 app/views/time/index.rhtml:181
-#, fuzzy
+#: app/views/time/index.html.erb:211
 msgid "Date"
-msgstr "Data: %1"
+msgstr "Data"
 
-#: app/views/time/index.rhtml:192 app/views/time/index.rhtml:192
-#, fuzzy
+#: app/views/time/index.html.erb:226
 msgid "Synchronize via Network Time Protocol (NTP)"
-msgstr "Tinklo laiko protokolo demonas"
+msgstr "Suvienodinti per Tinklo laiko protokolą (NTP)"
 
-#: app/views/time/index.rhtml:196 app/views/time/index.rhtml:196
-#, fuzzy
+#: app/views/time/index.html.erb:231
 msgid "NTP server"
-msgstr "NFS serveris"
+msgstr "NTP serveris"
 
-#: shortcuts.yml:7
-msgid "Set the clock"
-msgstr ""
+#~ msgid "Unknown timezone %s on host"
+#~ msgstr "Nežinoma laiko juosta %s pagrindiniame kompiuteryje"
+
+#~ msgid "Set the clock"
+#~ msgstr "Nustatyti laiką"
+
+#~ msgid "Invalid date format. Correct one is dd/mm/yyyy"
+#~ msgstr "Netinkamas datos formatas. Turi būti dd/mm/MMMM"

@@ -6,286 +6,279 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: webyast-registration-ui 1.0.0\n"
+"Project-Id-Version: @PACKAGE@\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-08-02 09:19+0200\n"
+"POT-Creation-Date: 2012-06-07 15:20+0200\n"
 "PO-Revision-Date: 2005-08-15 12:20+0530\n"
 "Last-Translator: Amanpreet Singh Alam <amanpreetalam@yahoo.com>\n"
 "Language-Team: Punjabi <fedora-trans-pa@redhat.com>\n"
+"Language: pa\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: KBabel 1.10.1\n"
 "Plural-Forms: Plural-Forms: Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: app/controllers/registration_controller.rb:32
-#: app/controllers/registration_controller.rb:32
+#: app/models/registration_state.rb:27
 #, fuzzy
+#| msgid "Required file is missing: "
+msgid "Registration is missing"
+msgstr "ਲੋੜੀ ਫਾਇਲ ਗੁੰਮ ਹੈ: "
+
+#: app/models/registration_state.rb:28
+msgid "Please register your system in order to get updates."
+msgstr ""
+
+#: app/models/registration_state.rb:30
+#, fuzzy
+#| msgid "Administration"
+msgid "register"
+msgstr "ਪਰਸ਼ਾਸ਼ਨ"
+
+#: app/controllers/registration_controller.rb:29
+#, fuzzy
+#| msgid "Emails"
 msgid "Email"
 msgstr "ਈਮੇਲਾਂ"
 
-#: app/controllers/registration_controller.rb:33
-#: app/controllers/registration_controller.rb:33
+#: app/controllers/registration_controller.rb:30
 #, fuzzy
+#| msgid "System"
 msgid "System name"
 msgstr "ਸਿਸਟਮ"
 
-#: app/controllers/registration_controller.rb:34
-#: app/controllers/registration_controller.rb:34
+#: app/controllers/registration_controller.rb:31
 #, fuzzy
+#| msgid "Administration"
 msgid "SLES registration code"
 msgstr "ਪਰਸ਼ਾਸ਼ਨ"
 
-#: app/controllers/registration_controller.rb:35
-#: app/controllers/registration_controller.rb:35
+#: app/controllers/registration_controller.rb:32
 #, fuzzy
+#| msgid "Administration"
 msgid "SLED registration code"
 msgstr "ਪਰਸ਼ਾਸ਼ਨ"
 
-#: app/controllers/registration_controller.rb:36
-#: app/controllers/registration_controller.rb:36
+#: app/controllers/registration_controller.rb:33
 #, fuzzy
+#| msgid "Administration"
+msgid "SLMS registration code"
+msgstr "ਪਰਸ਼ਾਸ਼ਨ"
+
+#: app/controllers/registration_controller.rb:34
+#, fuzzy
+#| msgid "Application Browser"
 msgid "Appliance registration code"
 msgstr "ਐਪਲੀਕੇਸ਼ਨ ਬਰਾਊਜ਼ਰ"
 
-#: app/controllers/registration_controller.rb:37
-#: app/controllers/registration_controller.rb:37
+#: app/controllers/registration_controller.rb:35
 #, fuzzy
+#| msgid "YaST installation source"
 msgid "WebYaST registration code"
 msgstr "YaST ਇੰਸਟਾਲੇਸ਼ਨ ਸਰੋਤ"
 
-#: app/controllers/registration_controller.rb:38
-#: app/controllers/registration_controller.rb:38
+#: app/controllers/registration_controller.rb:36
 #, fuzzy
+#| msgid "Administration"
 msgid "Registration code"
 msgstr "ਪਰਸ਼ਾਸ਼ਨ"
 
-#: app/controllers/registration_controller.rb:39
-#: app/controllers/registration_controller.rb:39
+#: app/controllers/registration_controller.rb:37
 #, fuzzy
+#| msgid "Host Names"
 msgid "Hostname"
 msgstr "ਹੋਸਟ ਨਾਂ"
 
-#: app/controllers/registration_controller.rb:40
-#: app/controllers/registration_controller.rb:40
+#: app/controllers/registration_controller.rb:38
 #, fuzzy
+#| msgid "Modem device name"
 msgid "Device name"
 msgstr "ਮਾਡਮ ਜੰਤਰ ਨਾਂ"
 
-#: app/controllers/registration_controller.rb:41
-#: app/controllers/registration_controller.rb:41
+#: app/controllers/registration_controller.rb:39
 msgid "Appliance name"
 msgstr ""
 
-#: app/controllers/registration_controller.rb:42
-#: app/controllers/registration_controller.rb:42
+#: app/controllers/registration_controller.rb:40
 #, fuzzy
+#| msgid "Administration"
 msgid "registration code"
 msgstr "ਪਰਸ਼ਾਸ਼ਨ"
 
-#: app/controllers/registration_controller.rb:52
-#: app/controllers/registration_controller.rb:52
-msgid "Invalid session, please login again."
-msgstr ""
-
-#: app/controllers/registration_controller.rb:62
-#: app/controllers/registration_controller.rb:62
-msgid "No permissions for registration"
-msgstr ""
-
 # %s is FTP or HTTP
-#: app/controllers/registration_controller.rb:111
-#: app/controllers/registration_controller.rb:111
+#: app/controllers/registration_controller.rb:81
 #, fuzzy
+#| msgid "Please connect to the internet."
 msgid "Please try to register again later."
 msgstr "ਇੰਟਰਨੈੱਟ ਨਾਲ ਕੁਨੈਕਟ ਕਰੋ ਜੀ।"
 
-#: app/controllers/registration_controller.rb:115
-#: app/controllers/registration_controller.rb:115
+#: app/controllers/registration_controller.rb:85
 msgid "Registration did not succeed."
 msgstr ""
 
-#: app/controllers/registration_controller.rb:119
-#: app/controllers/registration_controller.rb:119
+#: app/controllers/registration_controller.rb:89
 #, fuzzy
+#| msgid "Administration"
 msgid "Registration was skipped."
 msgstr "ਪਰਸ਼ਾਸ਼ਨ"
 
-#: app/controllers/registration_controller.rb:123
-#: app/controllers/registration_controller.rb:123
+#: app/controllers/registration_controller.rb:93
 msgid "This may be a temporary issue."
 msgstr ""
 
-#: app/controllers/registration_controller.rb:127
-#: app/controllers/registration_controller.rb:127
+#: app/controllers/registration_controller.rb:97
 msgid "The system might not receive necessary updates."
 msgstr ""
 
-#: app/controllers/registration_controller.rb:143
-#: app/controllers/registration_controller.rb:143
+#: app/controllers/registration_controller.rb:113
 msgid "The registration server returned invalid or incomplete data."
 msgstr ""
 
-#: app/controllers/registration_controller.rb:151
-#: app/controllers/registration_controller.rb:151
+#: app/controllers/registration_controller.rb:121
+#, fuzzy
+#| msgid "Could not load the global configuration."
 msgid "Could not read the registration configuration."
-msgstr ""
+msgstr "ਗਲੋਬਲ ਸੰਰਚਨਾ ਲੋਡ ਨਹੀਂ ਹੋ ਸਕੀ ਹੈ।"
 
-#: app/controllers/registration_controller.rb:151
-#: app/controllers/registration_controller.rb:151
+#: app/controllers/registration_controller.rb:121
 msgid "The registration backend is not installed correctly"
 msgstr ""
 
-#: app/controllers/registration_controller.rb:152
-#: app/controllers/registration_controller.rb:152
+#: app/controllers/registration_controller.rb:122
 msgid "Please refer to your support contact."
 msgstr ""
 
-#: app/controllers/registration_controller.rb:181
-#: app/controllers/registration_controller.rb:181
+#: app/controllers/registration_controller.rb:151
 msgid "Please fill out missing entries."
 msgstr ""
 
-#: app/controllers/registration_controller.rb:213
-#: app/controllers/registration_controller.rb:213
+#: app/controllers/registration_controller.rb:183
 #, fuzzy
+#| msgid "Service pack"
 msgid "Service added:"
 msgstr "ਸਰਵਿਸ ਪੈਕ"
 
-#: app/controllers/registration_controller.rb:217
-#: app/controllers/registration_controller.rb:223
-#: app/controllers/registration_controller.rb:217
-#: app/controllers/registration_controller.rb:223
+#: app/controllers/registration_controller.rb:189
 #, fuzzy
+#| msgid "Catalog: "
 msgid "Catalog enabled:"
 msgstr "ਕੈਟਾਲਾਗ: "
 
-#: app/controllers/registration_controller.rb:250
-#: app/controllers/registration_controller.rb:250
+#: app/controllers/registration_controller.rb:215
 #, fuzzy
+#| msgid "Repository name:"
 msgid "Repository added:"
 msgstr "ਰਿਪੋਜ਼ਟਰੀ ਨਾਂ:"
 
-#: app/controllers/registration_controller.rb:326
-#: app/controllers/registration_controller.rb:326
+#: app/controllers/registration_controller.rb:357
 #, fuzzy
+#| msgid "The request already exists."
 msgid "This system is already registered."
 msgstr "ਮੰਗ ਪਹਿਲਾਂ ਹੀ ਮੌਜੂਦ ਹੈ।"
 
-#: app/controllers/registration_controller.rb:355
-#: app/controllers/registration_controller.rb:355
+#: app/controllers/registration_controller.rb:382
 msgid "Registration finished successfully."
 msgstr ""
 
-#: app/controllers/registration_controller.rb:365
-#: app/controllers/registration_controller.rb:365
-msgid ""
-"<p><b>Repositories were not modified during the registration process.</b></"
-"p><p>It is likely that an incorrect registration code was used. If this is "
-"the case, please attempt the registration process again to get an update "
-"repository.</p><p>Please make sure that this system has an update repository "
-"configured, otherwise it will not receive updates.</p>"
-msgstr ""
-
-#: app/controllers/registration_controller.rb:399
-#: app/controllers/registration_controller.rb:399
+#: app/controllers/registration_controller.rb:396
 msgid "A connection to the registration server could not be established."
 msgstr ""
 
-#: app/controllers/registration_controller.rb:403
-#: app/controllers/registration_controller.rb:403
+#: app/controllers/registration_controller.rb:400
 msgid "The supplied registration data was invalid."
 msgstr ""
 
-#: app/controllers/registration_controller.rb:407
-#: app/controllers/registration_controller.rb:407
+#: app/controllers/registration_controller.rb:404
 msgid "The registration code you entered was invalid."
 msgstr ""
 
-#: app/controllers/registration_controller.rb:413
-#: app/controllers/registration_controller.rb:413
+#: app/controllers/registration_controller.rb:410
 msgid "The transmitted registration data created a conflict."
 msgstr ""
 
-#: app/controllers/registration_controller.rb:421
-#: app/controllers/registration_controller.rb:421
-msgid ""
-"Registration can not be performed. There is no product installed that can be "
-"registered."
+#: app/controllers/registration_controller.rb:418
+msgid "Registration can not be performed. There is no product installed that can be registered."
 msgstr ""
 
-#: app/controllers/registration_controller.rb:436
-#: app/controllers/registration_controller.rb:436
-msgid ""
-"A connection to the registration server could not be established or it did "
-"not reply."
+#: app/controllers/registration_controller.rb:442
+msgid "<p><b>Repositories were not modified during the registration process.</b></p><p>It is likely that an incorrect registration code was used. If this is the case, please attempt the registration process again to get an update repository.</p><p>Please make sure that this system has an update repository configured, otherwise it will not receive updates.</p>"
 msgstr ""
 
-#: app/controllers/registration_controller.rb:453
-#: app/controllers/registration_controller.rb:453
+#: app/controllers/registration_controller.rb:454
 msgid "The registration server returned invalid data."
 msgstr ""
 
-#: app/views/registration/index.rhtml:53 app/views/registration/index.rhtml:54
-#: app/views/registration/index.rhtml:53 app/views/registration/index.rhtml:54
+#: app/views/registration/index.html.erb:42
+#: app/views/registration/index.html.erb:57
 #, fuzzy
+#| msgid "Please wait..."
+msgid "Please wait"
+msgstr "ਉਡੀਕੋ ਜੀ..."
+
+#: app/views/registration/index.html.erb:64
+#: app/views/registration/index.html.erb:65
+#, fuzzy
+#| msgid "`%s' is not a valid ip address."
 msgid "Please enter a valid Email address."
 msgstr "`%s' ਇੱਕ ਵੈਧ IP ਐਡਰੈੱਸ ਨਹੀਂ ਹੈ।"
 
-#: app/views/registration/index.rhtml:61 app/views/registration/index.rhtml:61
-msgid "register plugin"
-msgstr ""
-
-#: app/views/registration/index.rhtml:61 app/views/registration/index.rhtml:61
-#: shortcuts.yml:6
+#: app/views/registration/index.html.erb:80
 #, fuzzy
+#| msgid "Administration"
 msgid "Registration"
 msgstr "ਪਰਸ਼ਾਸ਼ਨ"
 
-#: app/views/registration/index.rhtml:69 app/views/registration/index.rhtml:69
+#: app/views/registration/index.html.erb:93
 #, fuzzy
+#| msgid "Disk Information"
 msgid "Registration Information"
 msgstr "ਡਿਸਕ ਜਾਣਕਾਰੀ"
 
-#: app/views/registration/index.rhtml:70 app/views/registration/index.rhtml:70
+#: app/views/registration/index.html.erb:99
 msgid "This system is registered"
 msgstr ""
 
-#: app/views/registration/index.rhtml:71 app/views/registration/index.rhtml:71
+#: app/views/registration/index.html.erb:102
 #, fuzzy
+#| msgid "System:"
 msgid "System number (GUID)"
 msgstr "ਸਿਸਟਮ:"
 
-#: app/views/registration/index.rhtml:72 app/views/registration/index.rhtml:72
+#: app/views/registration/index.html.erb:105
 #, fuzzy
+#| msgid "Administration"
 msgid "Register again"
 msgstr "ਪਰਸ਼ਾਸ਼ਨ"
 
-#: app/views/registration/index.rhtml:79 app/views/registration/index.rhtml:79
+#: app/views/registration/index.html.erb:118
 #, fuzzy
+#| msgid "&Next"
 msgid "Next"
 msgstr "ਅੱਗੇ(&N)"
 
-#: app/views/registration/index.rhtml:89 app/views/registration/index.rhtml:89
+#: app/views/registration/index.html.erb:131
 #, fuzzy
+#| msgid "Memory Information"
 msgid "Mandatory Information"
 msgstr "ਮੈਮੋਰੀ ਜਾਣਕਾਰੀ"
 
-#: app/views/registration/index.rhtml:104
-#: app/views/registration/index.rhtml:104
+#: app/views/registration/index.html.erb:151
 msgid "Details"
 msgstr "ਵੇਰਵਾ"
 
-#: app/views/registration/index.rhtml:128
-#: app/views/registration/index.rhtml:128
+#: app/views/registration/index.html.erb:179
 #, fuzzy
+#| msgid "Poststop"
 msgid "Postpone"
 msgstr "ਪੋਸਟ-ਸਟਾਪ"
 
-#: shortcuts.yml:7
+#~ msgid "Invalid session, please login again."
+#~ msgstr "ਗਲਤ ਸ਼ੈਸ਼ਨ, ਫੇਰ ਲਾਗਇਨ ਕਰੋ ਜੀ"
+
 #, fuzzy
-msgid "System Registration"
-msgstr "ਪਰਸ਼ਾਸ਼ਨ"
+#~| msgid "Administration"
+#~ msgid "System Registration"
+#~ msgstr "ਪਰਸ਼ਾਸ਼ਨ"
 
 #, fuzzy
 #~| msgid "Administration"

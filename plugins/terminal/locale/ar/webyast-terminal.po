@@ -1,0 +1,39 @@
+# mohammad <malham1@gmail.com>, 2012.
+# محمد الحرقان <malham1@gmail.com>, 2012.
+msgid ""
+msgstr ""
+"Project-Id-Version: @PACKAGE@\n"
+"Report-Msgid-Bugs-To: translation@suse.de\n"
+"POT-Creation-Date: 2012-06-07 15:20+0200\n"
+"PO-Revision-Date: 2012-10-16 15:08+0300\n"
+"Last-Translator: محمد الحرقان <malham1@gmail.com>\n"
+"Language-Team: http://www.vertaal.com.ar/files/factory/ar/list/\n"
+"Language: ar\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=6; plural=n==0 ? 0 : n==1 ? 1 : n==2 ? 2 : n%100>=3 "
+"&& n%100<=10 ? 3 : n%100>=11 ? 4 : 5;\n"
+"X-Generator: Virtaal 0.7.1\n"
+
+#: app/controllers/terminal_controller.rb:41
+msgid ""
+"Terminal service is not running. Please start with: 'rcshellinabox start'"
+msgstr ""
+"لم يتم تشغيل خدمات المحطة الطرفية. الرجاء التشغيل مع: 'rcshellinabox start'"
+
+#: app/views/terminal/index.html.erb:50
+msgid "Terminal Client"
+msgstr "عميل المحطة الطرفية"
+
+#: app/views/terminal/index.html.erb:64
+msgid "Web based terminal client"
+msgstr "عميل المحطة الطرفية على الإنترنت"
+
+#: app/views/terminal/index.html.erb:67
+msgid "fullscreen"
+msgstr "ملئ الشاشة"
+
+#: app/views/terminal/index.html.erb:75
+msgid "close"
+msgstr "إغلاق"

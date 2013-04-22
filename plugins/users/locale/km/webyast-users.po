@@ -1,158 +1,311 @@
+# translation of webyast-users.km.po to Khmer
+# Seng Sutha <sutha@khmeros.info>, 2010.
+# Khoem Sokhem <khoemsokhem@khmeros.info>, 2010, 2012.
+# Chan Sambathratanak <ratanak@khmeros.info>, 2011.
 msgid ""
 msgstr ""
-"Project-Id-Version: @PACKAGE@\n"
+"Project-Id-Version: webyast-users.km\n"
 "Report-Msgid-Bugs-To: translation@suse.de\n"
-"POT-Creation-Date: 2009-11-20 14:34+0100\n"
-"PO-Revision-Date: 2006-02-18 09:47+0700\n"
-"Last-Translator: Keo Sophon <keosophon@khmeros.info>\n"
+"POT-Creation-Date: 2012-06-07 15:19+0200\n"
+"PO-Revision-Date: 2012-06-15 09:18+0700\n"
+"Last-Translator: Khoem Sokhem <khoemsokhem@khmeros.info>\n"
 "Language-Team: Khmer <support@khmeros.info>\n"
+"Language: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
+"X-Generator: KBabel 1.11.4\n"
+"X-Language: km-KH\n"
 
-#: app/controllers/users_controller.rb:18
-msgid "Invalid session, please login again."
-msgstr ""
+#: app/controllers/groups_controller.rb:31
+msgid "Missing group name parameter"
+msgstr "​បាត់​ប៉ារ៉ាម៉ែត្រ​ឈ្មោះ​ក្រុម"
 
-#: app/controllers/users_controller.rb:144
-#, fuzzy
-#| msgid "Service '%s' has been successfully added."
-msgid "User <i>%s</i> was successfully created."
-msgstr "សេវា '%s' ត្រូវ​បាន​បន្ថែម​ដោយ​ជោគជ័យ ។"
+#: app/controllers/groups_controller.rb:47
+msgid "Missing group parameters"
+msgstr "បាត់​ប៉ារ៉ាម៉ែត្រ​ក្រុម"
 
-#: app/controllers/users_controller.rb:148
-#, fuzzy
-#| msgid "Empty CA name."
-msgid "Empty UID value"
-msgstr "ឈ្មោះ CA ទទេ ។"
+#: app/controllers/groups_controller.rb:61
+msgid "Please enter a valid group name"
+msgstr "សូម​បញ្ចូល​ឈ្មោះ​ក្រុម​ដែល​ត្រឹមត្រូវ"
 
-#: app/controllers/users_controller.rb:152
-msgid "UID: value >= 1000 is valid for local user only"
-msgstr ""
+#: app/controllers/groups_controller.rb:75
+msgid "Please enter a valid GID"
+msgstr "សូម​បញ្ចូល​ GID ដែល​ត្រឹមត្រូវ"
 
-#: app/controllers/users_controller.rb:197
-#, fuzzy
-#| msgid "Service '%s' has been successfully added."
-msgid "User <i>%s</i> was successfully updated."
-msgstr "សេវា '%s' ត្រូវ​បាន​បន្ថែម​ដោយ​ជោគជ័យ ។"
+#: app/controllers/groups_controller.rb:89
+msgid "Please enter a valid group type. Only \"system\" or \"local\" are allowed."
+msgstr "សូម​បញ្ចូល​ប្រភេទ​ក្រុម​ដែល​ត្រឹមត្រូវ ។ អនុញ្ញាត​​តែ \"system\" ឬ \"local\" ប៉ុណ្ណោះ ។"
 
-#: app/controllers/users_controller.rb:218
-#, fuzzy
-#| msgid "Specified lock has been successfully removed."
-msgid "User <i>%s</i> was successfully removed."
-msgstr "សោ​ដែលបាន​បញ្ជាក់ ត្រូវបាន​យកចេញ​ដោយ​ជោគជ័យ ។"
+#: app/controllers/groups_controller.rb:104
+msgid "Please enter a valid list of members"
+msgstr "សូម​បញ្ចូល​បញ្ជី​សមាជិក​ដែល​ត្រឹមត្រូវ"
 
-#: app/controllers/users_controller.rb:220
-#, fuzzy
-#| msgid "Error: Could not read profile %s: %s.\n"
-msgid "Error: Could not remove user <i>%s</i>."
-msgstr "កំហុស ៖ មិនអាច​អាន​ទម្រង់ %s: %s ។\n"
+#: app/controllers/groups_controller.rb:231
+msgid "Cannot update group <i>%s</i>"
+msgstr "មិន​អាច​ធ្វើ​បច្ចុប្បន្នភាព​ក្រុម <i>%s</i> បាន​ទេ"
 
-#: app/views/users/index.html.erb:1
-#, fuzzy
-#| msgid "Local Network"
-msgid "Local User"
-msgstr "បណ្តាញ​មូលដ្ឋាន"
+#: app/controllers/groups_controller.rb:234
+msgid "Group <i>%s</i> has been updated."
+msgstr "ក្រុម <i>%s</i> ត្រូវ​បាន​ធ្វើ​បច្ចុប្បន្នភាព ។"
 
-#: app/views/users/index.html.erb:6
-msgid "Login"
-msgstr "ចូល"
+#: app/controllers/groups_controller.rb:268
+msgid "Cannot create group <i>%s</i>"
+msgstr "មិន​អាច​បង្កើត​ក្រុម <i>%s</i> បាន​ទេ"
 
-#: app/views/users/index.html.erb:7 app/views/users/edit.html.erb:11
-#: app/views/users/new.html.erb:8
-#, fuzzy
-#| msgid "Name"
+#: app/controllers/groups_controller.rb:271
+msgid "Group <i>%s</i> has been added."
+msgstr "ក្រុម <i>%s</i> ត្រូវ​បាន​បន្ថែម ។"
+
+#: app/controllers/groups_controller.rb:306
+msgid "Cannot remove group <i>%{name}</i>: %{result}"
+msgstr "មិន​អាច​យក​ក្រុម <i>%{name}</i> ចេញ​បាន​ទេ ៖  %{result}"
+
+#: app/controllers/groups_controller.rb:308
+msgid "Group <i>%s</i> has been deleted."
+msgstr "ក្រុម <i>%s</i> ត្រូវ​បាន​លុប ។"
+
+#: app/controllers/users_controller.rb:110
+msgid "No users found."
+msgstr "រក​មិន​ឃើញ​អ្នកប្រើ​នោះ​ទេ ។"
+
+#: app/controllers/users_controller.rb:254
+msgid "User %s was successfully created."
+msgstr "អ្នកប្រើ​​ <i>%s</i> ត្រូវ​បាន​បង្កើត​ដោយ​ជោគជ័យ​ ។"
+
+#: app/controllers/users_controller.rb:299
+msgid "User %s was successfully updated."
+msgstr "អ្នកប្រើ %s ត្រូវ​បាន​ធ្វើ​បច្ចុប្បន្នភាព​​ដោយ​ជោគជ័យ ។"
+
+#: app/controllers/users_controller.rb:318
+msgid "Error: Could not remove user %s."
+msgstr "កំហុស ៖ មិន​អាច​​យក​អ្នក​ប្រើ​​ %s ​ចេញ​បាន​ឡើយ ។"
+
+#: app/controllers/users_controller.rb:327
+msgid "User %s was successfully removed."
+msgstr "អ្នក​ប្រើ​​ %s ត្រូវ​បាន​យកចេញ​ដោយ​ជោគជ័យ​ ។"
+
+#: app/views/users/new.html.erb:71 app/views/users/index.html.erb:48
+msgid "Select Groups"
+msgstr "ជ្រើស​ក្រុម"
+
+#: app/views/users/new.html.erb:72 app/views/users/index.html.erb:49
+msgid "Selected Groups"
+msgstr "ក្រុម​ដែល​បាន​ជ្រើស"
+
+#: app/views/users/new.html.erb:73 app/views/users/index.html.erb:50
+msgid "Available Groups"
+msgstr "ក្រុម​ដែល​មាន"
+
+#: app/views/users/new.html.erb:74 app/views/users/index.html.erb:51
+msgid "Click group names to select/unselect groups"
+msgstr "ចុច​ឈ្មោះ​ក្រុម ដើម្បី​ជ្រើស/មិន​ជ្រើស​ក្រុម"
+
+#: app/views/users/new.html.erb:91 app/views/users/index.html.erb:68
+#: app/views/users/_user_form.erb:91
+msgid "Select Default Group"
+msgstr "ជ្រើស​ក្រុម​លំនាំដើម"
+
+#: app/views/users/new.html.erb:92 app/views/users/index.html.erb:69
+msgid "Click a group name to choose users default group"
+msgstr "ចុច​ឈ្មោះ​ក្រុម ដើម្បី​ជ្រើស​ក្រុម​លំនាំដើម​របស់​​អ្នកប្រើ"
+
+#: app/views/users/new.html.erb:106 app/views/users/index.html.erb:83
+msgid "Select Roles"
+msgstr "ជ្រើស​​តួនាទី​"
+
+#: app/views/users/new.html.erb:107 app/views/users/index.html.erb:84
+msgid "Selected Roles"
+msgstr "តួនាទី​ដែល​បាន​ជ្រើស​"
+
+#: app/views/users/new.html.erb:108 app/views/users/index.html.erb:85
+msgid "Available Roles"
+msgstr "តួនាទី​ដែល​មាន​"
+
+#: app/views/users/new.html.erb:109 app/views/users/index.html.erb:86
+msgid "Click group names to select/unselect roles"
+msgstr "ចុច​ឈ្មោះ​ក្រុម ដើម្បី​ជ្រើស/​មិន​ជ្រើស​តួនាទី​"
+
+#: app/views/users/new.html.erb:138
+msgid "The passwords do not match."
+msgstr "ពាក្យសម្ងាត់​មិន​ផ្គូផ្គង​ទេ ។"
+
+#: app/views/users/new.html.erb:139 app/views/users/index.html.erb:110
+msgid "This field is required."
+msgstr "វាល​​នេះ​ត្រូវ​បានទាមទារ  ។"
+
+#: app/views/users/new.html.erb:150 app/views/users/index.html.erb:101
+#: app/views/users/index.html.erb:126 app/views/users/_user_form.erb:153
+#: app/views/groups/new.html.erb:131 app/views/groups/index.html.erb:162
+#: app/views/groups/index.html.erb:173
+msgid "Please wait"
+msgstr "សូម​រង់ចាំ"
+
+#: app/views/users/new.html.erb:160 app/views/users/index.html.erb:134
+msgid "Password Strength:"
+msgstr "ភាព​ខ្លាំង​របស់​ពាក្យ​សម្ងាត់ ៖"
+
+#: app/views/users/new.html.erb:162 app/views/users/index.html.erb:136
+msgid "Weak"
+msgstr "ខ្សោយ"
+
+#: app/views/users/new.html.erb:163 app/views/users/index.html.erb:137
+msgid "Normal"
+msgstr "ធម្មតា"
+
+#: app/views/users/new.html.erb:164 app/views/users/index.html.erb:138
+msgid "Medium"
+msgstr "មធ្យម​"
+
+#: app/views/users/new.html.erb:165 app/views/users/index.html.erb:139
+msgid "Strong"
+msgstr "ខ្លាំង"
+
+#: app/views/users/new.html.erb:166 app/views/users/index.html.erb:140
+msgid "Very Strong"
+msgstr "ខ្លាំង​ណាស់"
+
+#: app/views/users/new.html.erb:204 app/views/users/index.html.erb:173
+msgid "Users"
+msgstr "អ្នក​ប្រើ​"
+
+#: app/views/users/new.html.erb:204
+msgid "Add new user"
+msgstr "បន្ថែម​អ្នកប្រើ​ថ្មី"
+
+#: app/views/users/index.html.erb:109
+msgid " The passwords do not match."
+msgstr " ពាក្យសម្ងាត់​មិន​ផ្គូផ្គង​ទេ ។"
+
+#: app/views/users/index.html.erb:184 app/views/groups/index.html.erb:115
+msgid "Filter:"
+msgstr "តម្រង ៖"
+
+#: app/views/users/index.html.erb:190
+msgid "New User"
+msgstr "អ្នកប្រើ​ថ្មី"
+
+#: app/views/users/index.html.erb:192 app/views/users/index.html.erb:227
+#: app/views/users/_user_form.erb:72
+msgid "Manage Groups"
+msgstr "គ្រប់គ្រង​ក្រុម​"
+
+#: app/views/users/_user_form.erb:25
+msgid "Login Settings"
+msgstr "ការ​កំណត់​ការ​ចូល"
+
+#: app/views/users/_user_form.erb:28
 msgid "Full Name"
-msgstr "ឈ្មោះ"
+msgstr "ឈ្មោះពេញ​"
 
-#: app/views/users/index.html.erb:8
-#, fuzzy
-#| msgid "&Edit"
-msgid "Edit"
-msgstr "កែសម្រួល"
-
-#: app/views/users/index.html.erb:27
-#, fuzzy
-#| msgid "You are <strong>online</strong>"
-msgid "<strong>[New User]</strong>"
-msgstr "អ្នក​នៅ <strong>លើ​បណ្ដាញ</strong>"
-
-#: app/views/users/index.html.erb:31 app/views/users/edit.html.erb:43
-#: app/views/users/new.html.erb:44
-msgid "Back"
-msgstr "ថយក្រោយ"
-
-#: app/views/users/edit.html.erb:1
-msgid "Edit user %s"
-msgstr ""
-
-#: app/views/users/edit.html.erb:15 app/views/users/new.html.erb:12
-msgid "Groups"
-msgstr "ក្រុម"
-
-#: app/views/users/edit.html.erb:19
-#, fuzzy
-#| msgid "Default Route"
-msgid "Default Group"
-msgstr "ផ្លូវ​លំនាំដើ៼ម"
-
-#: app/views/users/edit.html.erb:23 app/views/users/new.html.erb:20
-#, fuzzy
-#| msgid "Directory\n"
-msgid "Home Directory"
-msgstr "ថត\n"
-
-#: app/views/users/edit.html.erb:27 app/views/users/new.html.erb:28
-#, fuzzy
-#| msgid "Login"
-msgid "Login Shell"
-msgstr "ចូល"
-
-#: app/views/users/edit.html.erb:31 app/views/users/new.html.erb:32
-#, fuzzy
-#| msgid "Location Name"
+#: app/views/users/_user_form.erb:34
 msgid "Login Name"
-msgstr "ឈ្មោះ​ទីតាំង"
+msgstr "ឈ្មោះ​ចូល"
 
-#: app/views/users/edit.html.erb:35 app/views/users/new.html.erb:36
-#, fuzzy
-#| msgid "Numbers"
-msgid "UID Number"
-msgstr "លេខ"
+#: app/views/users/_user_form.erb:38
+msgid "User already exists."
+msgstr "អ្នក​ប្រើ​មាន​ហើយ ។"
 
 # password dialog title
-#: app/views/users/edit.html.erb:39 app/views/users/new.html.erb:40
+#: app/views/users/_user_form.erb:43
 msgid "Password"
 msgstr "ពាក្យសម្ងាត់"
 
-#: app/views/users/edit.html.erb:43
-msgid "Update"
-msgstr "ធ្វើ​ឲ្យ​ទាន់សម័យ"
+#: app/views/users/_user_form.erb:50
+msgid "Confirm Password"
+msgstr "អះអាង​ពាក្យ​សម្ងាត់"
 
-#: app/views/users/new.html.erb:1
-#, fuzzy
-#| msgid "Create New User?"
-msgid "New User"
-msgstr "បង្កើត​អ្នក​ប្រើថ្មី ?"
+#: app/views/users/_user_form.erb:59 app/views/users/_user_form.erb:63
+#: app/views/groups/new.html.erb:91 app/views/groups/index.html.erb:104
+msgid "Groups"
+msgstr "ក្រុម"
 
-#: app/views/users/new.html.erb:16
-#, fuzzy
-#| msgid "Default route ok."
-msgid "Default Group (GID)"
-msgstr "ផ្លូវ​លំនាំដើម​គ្មាន​បញ្ហា ។"
+#: app/views/users/_user_form.erb:82
+msgid "Default Group"
+msgstr "ក្រុម​លំនាំដើ៼ម"
 
-#: app/views/users/new.html.erb:24
-#, fuzzy
-#| msgid "Cannot create directory %1: %2."
-msgid "Do not create home directory"
-msgstr "មិន​អាច​បង្កើត​ថត %1 ៖ %2 ។"
+#: app/views/users/_user_form.erb:103
+msgid "Advanced"
+msgstr "កម្រិត​ខ្ពស់"
 
-#: app/views/users/new.html.erb:44
-msgid "Create"
-msgstr "បង្កើត"
+#: app/views/users/_user_form.erb:106
+msgid "Home Directory"
+msgstr "ថត​ផ្ទះ"
 
-#, fuzzy
-#~| msgid "&Username"
-#~ msgid "User"
-#~ msgstr "ឈ្មោះអ្នក​ប្រើ​"
+#: app/views/users/_user_form.erb:112
+msgid "Login Shell"
+msgstr "សែល​ចូល"
+
+#: app/views/users/_user_form.erb:118
+msgid "UID Number"
+msgstr "លេខ UID"
+
+#: app/views/users/_user_form.erb:127
+msgid "Roles"
+msgstr "តួនាទី"
+
+#: app/views/users/_user_form.erb:136
+msgid "Manage Roles"
+msgstr "គ្រប់គ្រង​តួនាទី"
+
+#: app/views/users/_user_form.erb:151 app/views/groups/new.html.erb:132
+#: app/views/groups/index.html.erb:163
+msgid "Save"
+msgstr "រក្សា​ទុក"
+
+#: app/views/users/_user_form.erb:154 app/views/groups/index.html.erb:174
+msgid "Delete"
+msgstr "លុប"
+
+#: app/views/users/_user_form.erb:156
+msgid "Are you sure to delete user '%s'?"
+msgstr "តើ​អ្នក​ប្រាកដ​ជា​លុប​អ្នកប្រើ '%s' ឬ ?"
+
+#: app/views/groups/new.html.erb:59 app/views/groups/index.html.erb:53
+msgid "Select Members"
+msgstr "ជ្រើស​សមាជិក"
+
+#: app/views/groups/new.html.erb:60 app/views/groups/index.html.erb:54
+msgid "Selected Members"
+msgstr "សមាជិក​ដែល​បាន​ជ្រើស"
+
+#: app/views/groups/new.html.erb:61 app/views/groups/index.html.erb:55
+msgid "Available Members"
+msgstr "សមាជិក​ដែល​មាន"
+
+#: app/views/groups/new.html.erb:62 app/views/groups/index.html.erb:56
+msgid "Click user names to select/unselect members"
+msgstr "ចុច​ឈ្មោះ​អ្នកប្រើ ដើម្បី​ជ្រើស/មិន​ជ្រើស​សមាជិក"
+
+#: app/views/groups/new.html.erb:91 app/views/groups/new.html.erb:102
+msgid "Add new group"
+msgstr "បន្ថែម​ក្រុម​ថ្មី"
+
+#: app/views/groups/new.html.erb:109 app/views/groups/index.html.erb:143
+msgid "Group Name"
+msgstr "ឈ្មោះ​ក្រុម"
+
+#: app/views/groups/new.html.erb:113 app/views/groups/index.html.erb:151
+msgid "Members"
+msgstr "សមាជិក"
+
+#: app/views/groups/new.html.erb:116 app/views/groups/index.html.erb:154
+msgid "Manage Members"
+msgstr "គ្រប់គ្រង​សមាជិក"
+
+#: app/views/groups/index.html.erb:121
+msgid "New Group"
+msgstr "ក្រុម​ថ្មី"
+
+#: app/views/groups/index.html.erb:123 app/views/groups/index.html.erb:192
+msgid "Manage Users"
+msgstr "គ្រប់គ្រង​អ្នកប្រើ​"
+
+#: app/views/groups/index.html.erb:147
+msgid "Group ID"
+msgstr "លេខ​សម្គាល់​ក្រុម"
+
+#: app/views/groups/index.html.erb:176
+msgid "Are you sure to delete group '%s'?"
+msgstr "តើ​អ្នក​ប្រាកដ​ជា​លុប​ក្រុម '%s' ឬ ?"

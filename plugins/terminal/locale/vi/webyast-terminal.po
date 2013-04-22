@@ -1,0 +1,39 @@
+# @TITLE@
+# Copyright (C) 2006, SUSE Linux GmbH, Nuremberg
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+# This file is distributed under the same license as @PACKAGE@ package. FIRST
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: @PACKAGE@\n"
+"Report-Msgid-Bugs-To: Vietnamese <i18n@suse.de>\n"
+"POT-Creation-Date: 2012-06-07 15:20+0200\n"
+"PO-Revision-Date: 2006-07-12 07:32+0200\n"
+"Last-Translator: Phan Vĩnh Thịnh <teppi82@gmail.com>\n"
+"Language-Team: Vietnamese <i18n@suse.de>\n"
+"Language: vi\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0\n"
+
+#: app/controllers/terminal_controller.rb:41
+msgid "Terminal service is not running. Please start with: 'rcshellinabox start'"
+msgstr ""
+
+#: app/views/terminal/index.html.erb:50
+msgid "Terminal Client"
+msgstr ""
+
+#: app/views/terminal/index.html.erb:64
+msgid "Web based terminal client"
+msgstr ""
+
+#: app/views/terminal/index.html.erb:67
+msgid "fullscreen"
+msgstr ""
+
+#: app/views/terminal/index.html.erb:75
+msgid "close"
+msgstr ""

@@ -1,12 +1,300 @@
+# translation of webyast-base.km.po to Khmer
+# Seng Sutha <sutha@khmeros.info>, 2010.
+# Khoem Sokhem <khoemsokhem@khmeros.info>, 2010, 2012.
+# Chan Sambathratanak <ratanak@khmeros.info>, 2011.
 msgid ""
 msgstr ""
-"Project-Id-Version: @PACKAGE@\n"
+"Project-Id-Version: webyast-base.km\n"
 "Report-Msgid-Bugs-To: translation@suse.de\n"
-"POT-Creation-Date: 2006-05-15 15:07+0200\n"
-"PO-Revision-Date: 2006-02-18 09:47+0700\n"
-"Last-Translator: Keo Sophon <keosophon@khmeros.info>\n"
+"POT-Creation-Date: 2012-06-07 15:19+0200\n"
+"PO-Revision-Date: 2012-06-15 09:36+0700\n"
+"Last-Translator: Khoem Sokhem <khoemsokhem@khmeros.info>\n"
 "Language-Team: Khmer <support@khmeros.info>\n"
+"Language: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
+"X-Generator: KBabel 1.11.4\n"
+"X-Language: km-KH\n"
+
+#: app/helpers/application_helper.rb:47
+msgid " - "
+msgstr " - "
+
+#: app/helpers/application_helper.rb:43
+msgid " or "
+msgstr " ឬ "
+
+#: app/views/shared/exception_trap.html.erb:13
+msgid "(report link)"
+msgstr "(តំណ​របាយការណ៍)"
+
+#: app/views/layouts/application.html.erb:129
+msgid "...Wait..."
+msgstr "...រង់​ចាំ​..."
+
+#: locale/model_attributes.rb:9
+msgid "Account|Current sign in at"
+msgstr "គណនី|ចូល​បច្ចុប្បន្ន​នៅ"
+
+#: locale/model_attributes.rb:11
+msgid "Account|Current sign in ip"
+msgstr "គណនី| ip ចូល​បច្ចុប្បន្ន"
+
+#: locale/model_attributes.rb:10
+msgid "Account|Last sign in at"
+msgstr "គណនី|ចូលចុងក្រោយ​នៅ"
+
+#: locale/model_attributes.rb:12
+msgid "Account|Last sign in ip"
+msgstr "គណនី| ip ចូល​​ចុងក្រោយ"
+
+#: locale/model_attributes.rb:6
+msgid "Account|Remember created at"
+msgstr "គណនី|ចងចាំ​អ្វី​ដែល​បាន​បង្កើត​នៅ"
+
+#: locale/model_attributes.rb:5
+msgid "Account|Remember token"
+msgstr "គណនី|ចងចាំ​ថូខឹន"
+
+#: locale/model_attributes.rb:7
+msgid "Account|Remote ip"
+msgstr "គណនី|ip ពី​ចម្ងាយ"
+
+#: locale/model_attributes.rb:4
+msgid "Account|Salt"
+msgstr "គណនី|គាំង"
+
+#: locale/model_attributes.rb:8
+msgid "Account|Sign in count"
+msgstr "គណនី|ចំនួន​ចូល"
+
+#: locale/model_attributes.rb:3
+msgid "Account|Username"
+msgstr "គណនី|ឈ្មោះ​អ្នកប្រើ"
+
+#: app/helpers/view_helpers/label_helper.rb:23
+msgid "Add"
+msgstr "បន្ថែម"
+
+#: app/views/controlpanel/index.html.erb:136
+msgid "All"
+msgstr "ទាំងអស់"
+
+#: app/helpers/view_helpers/html_helper.rb:27
+msgid "Are you sure?"
+msgstr "តើ​អ្នក​ប្រាកដ​ឬ ?"
+
+#: app/helpers/application_helper.rb:56 app/helpers/application_helper.rb:70
+#: app/helpers/application_helper.rb:94
+msgid "Back"
+msgstr "ថយក្រោយ"
+
+#: app/views/controlpanel/basesystem.haml:21
+msgid "Base system setup"
+msgstr "ការ​រៀប​​ចំ​ប្រ​ព័ន្ធ​គោល​"
+
+# cancel button label
+#: app/helpers/application_helper.rb:60
+msgid "Cancel"
+msgstr "បោះបង់"
+
+#: app/views/controlpanel/index.html.erb:128
+msgid "Configuration"
+msgstr "ការ​កំណត់​រចនាសម្ព័ន្ធ"
+
+#: app/views/controlpanel/basesystem.haml:2
+msgid "Continue initial system setup"
+msgstr "បន្ត​ការ​រៀបចំ​ប្រព័ន្ធ​ដំបូង​"
+
+#: app/views/shared/cookies_disabled.html.erb:8
+msgid "Cookies disabled ?"
+msgstr "បាន​បិទ​ខូឃី ?"
+
+#: app/helpers/view_helpers/label_helper.rb:31
+msgid "Delete"
+msgstr "លុប"
+
+#: app/views/shared/exception_trap.html.erb:14
+msgid "Don't forget to include the bug details."
+msgstr "កុំ​ភ្លេច​​រួមបញ្ចូល​សេចក្ដី​លម្អិត​របស់​កំហុស ។"
+
+#: app/helpers/view_helpers/label_helper.rb:27
+msgid "Edit"
+msgstr "កែសម្រួល"
+
+#: app/views/controlpanel/index.html.erb:21
+#: app/views/controlpanel/index.html.erb:40
+msgid "Error: Cannot check the current status."
+msgstr "កំហុស ៖ មិន​អាច​ពិនិត្យ​ស្ថានភាព​បច្ចុប្បន្ន​បាន​ទេ ។"
+
+#: app/helpers/application_helper.rb:78 app/helpers/application_helper.rb:90
+msgid "Finish"
+msgstr "បញ្ចប់"
+
+#: app/views/controlpanel/index.html.erb:133
+msgid "Frequently used modules:"
+msgstr "ម៉ូឌុល​ដែលបានសួរ​ញឹកញាប់ ៖"
+
+#: app/views/layouts/application.html.erb:75
+msgid "Home"
+msgstr "ដើម"
+
+#: app/views/layouts/application.html.erb:50
+msgid "JavaScript support is missing or disabled. Please turn JavaScript on or use a supported browser (%sFireFox 3.5%s or %sInternet Explorer 8%s)."
+msgstr "ការ​គាំទ្រ JavaScript បាន​បាត់ ឬ​បានបិទ ។ សូម​បើក JavaScript ឬ​ប្រើ​កម្មវិធី​រុករក​ដែល​បាន​គាំទ្រ (%sFireFox 3.5%s ឬ %sInternet Explorer 8%s) ។"
+
+#: app/views/controlpanel/index.html.erb:99
+msgid "Loading patch information"
+msgstr "ផ្ទុក​ព័ត៌មាន​បំណះ"
+
+#: app/views/controlpanel/index.html.erb:73
+msgid "Loading system information"
+msgstr "ផ្ទុក​ព័ត៌មាន​ប្រព័ន្ធ"
+
+#: app/views/layouts/application.html.erb:88
+msgid "Logout"
+msgstr "ចេញ"
+
+#: app/views/layouts/application.html.erb:57
+msgid "My Appliance"
+msgstr "ឧបករណ៍​ប្រើ​ប្រាស់​របស់​ខ្ញុំ"
+
+#: app/helpers/application_helper.rb:77 app/helpers/application_helper.rb:90
+msgid "Next"
+msgstr "បន្ទាប់"
+
+#: app/helpers/view_helpers/html_helper.rb:157
+#: app/views/shared/exception_trap.html.erb:17
+msgid "No information available"
+msgstr "មិន​មាន​ព័ត៌មាន​ទេ"
+
+#: lib/yast_service.rb:118
+msgid "Not authorized! (%s)"
+msgstr "មិនបាន​ផ្ដល់សិទ្ធិ ! (%s)"
+
+#: app/controllers/application_controller.rb:73
+msgid "Operation is forbidden. If you have to do it, please contact system administrator"
+msgstr "ប្រតិបត្តិការ​ត្រូវ​បាន​ហាមឃាត់ ។ ប្រសិនបើ​អ្នក​ត្រូវ​ធ្វើ​វា សូម​ទាក់ទង​អ្នក​គ្រប់គ្រង​ប្រព័ន្ធ"
+
+#: app/views/controlpanel/index.html.erb:109
+msgid "Patch plugin is not installed."
+msgstr "កម្មវិធី​ជំនួយ​បំណះ​មិន​ត្រូវ​បាន​ដំឡើង​ទេ ។"
+
+#: app/views/controlpanel/index.html.erb:104
+msgid "Patch status summary is disabled in the config file."
+msgstr "សេចក្ដី​សង្ខេប​ស្ថានភាព​បំណះ​ត្រូវ​បាន​បិទ​នៅ​ក្នុង​ឯកសារ​កំណត់​រចនាសម្ព័ន្ធ ។"
+
+#: app/views/shared/exception_trap.html.erb:13
+msgid "Please Report a bug so we can fix the problem!."
+msgstr "សូម​រាយការណ៍​កំហុស ដូច្នេះ​យើង​អាច​កែ​បញ្ហា​បាន !."
+
+#: app/views/shared/cookies_disabled.html.erb:12
+msgid "Please enable cookies in your browser and <a href=\"/session\">login again</a>"
+msgstr "សូម​បើក​ខូឃី​ក្នុងកម្មវិធីរុករក​របស់​អ្នក ហើយ <a href=\"/session\">ចូល​ម្ដង​ទៀត</a>"
+
+#: app/views/shared/exception_trap.html.erb:7
+msgid "Problem:"
+msgstr "បញ្ហា ៖"
+
+#: app/views/controlpanel/index.html.erb:118
+msgid "Really reboot the machine?"
+msgstr "ពិត​ជា​ចាប់ផ្ដើម​ម៉ាស៊ីន​ឡើងវិញ ?"
+
+#: app/views/controlpanel/index.html.erb:121
+msgid "Really shutdown the machine?"
+msgstr "ពិត​ជា​បិទ​ម៉ាស៊ីន ?"
+
+# reboot button label
+#: app/views/controlpanel/index.html.erb:118
+msgid "Reboot"
+msgstr "ចាប់​ផ្ដើម​ឡើង​វិញ"
+
+#: app/helpers/application_helper.rb:75
+msgid "Save"
+msgstr "រក្សា​ទុក"
+
+#: app/views/shared/exception_trap.html.erb:22
+msgid "Show details..."
+msgstr "បង្ហាញ​សេចក្ដី​លម្អិត..."
+
+#: app/views/controlpanel/index.html.erb:121
+msgid "Shutdown"
+msgstr "បិទ"
+
+#: app/views/sessions/new.html.haml:1 app/views/sessions/new.html.haml:19
+msgid "Sign in"
+msgstr "ចូល"
+
+#: app/views/controlpanel/index.html.erb:83
+msgid "Status plugin is not installed."
+msgstr "កម្មវិធី​ជំនួយ​ស្ថានភាព​មិន​ត្រូវ​បាន​ដំឡើង​ទេ ។"
+
+#: app/views/controlpanel/index.html.erb:66
+msgid "System status"
+msgstr "បង្ហាញ​ស្ថានភាព​"
+
+#: app/views/controlpanel/index.html.erb:78
+msgid "System status summary is disabled in the config file."
+msgstr "សេចក្ដី​សង្ខេប​ស្ថានភាព​ប្រព័ន្ធ​ត្រូវ​បាន​បិទ​នៅ​ក្នុង​ឯកសារ​កំណត់​រចនាសម្ព័ន្ធ ។"
+
+#: app/views/controlpanel/index.html.erb:92
+msgid "System updates"
+msgstr "បច្ចុប្បន្នភាព​ប្រព័ន្ធ"
+
+#: app/helpers/view_helpers/html_helper.rb:160
+msgid "There was a problem retrieving information from the server."
+msgstr "មាន​បញ្ហា​ក្នុង​ការ​ទៅ​យក​ព័ត៌មាន​ពី​ម៉ាស៊ីន​បម្រើ ។"
+
+#: app/views/shared/exception_trap.html.erb:3
+msgid "This is embarrassing...."
+msgstr "នេះ​គួរ​ឲ្យ​ស្មុគស្មាញ​ណាស់...."
+
+#: app/helpers/view_helpers/html_helper.rb:153
+msgid "Unknown error"
+msgstr "មិន​ស្គាល់​កំហុស​"
+
+#: app/views/shared/exception_trap.html.erb:5
+msgid "We are sorry, but there are some problems."
+msgstr "យើង​សូម​ទោស​ ប៉ុន្តែ​មាន​បញ្ហា​មួយ​ចំនួន​ ។"
+
+#: app/views/layouts/application.html.erb:35
+msgid "WebYaST"
+msgstr "WebYaST"
+
+#: app/views/controlpanel/index.html.erb:149
+msgid "WebYaST modules are not installed on your system!"
+msgstr "ម៉ូឌុល WebYaST មិន​ត្រូវ​បាន​ដំឡើង​ក្នុង​ប្រព័ន្ធ​របស់​អ្នក​ទេ !"
+
+#: app/views/shared/cookies_disabled.html.erb:10
+msgid "WebYaST tried to establish and save a session in your web browser but failed."
+msgstr "WebYaST ព្យាយាម​បង្កើត​ និង​រក្សាទុក​សម័យ​ក្នុង​កម្មវិធី​រុករក​បណ្ដាញ​របស់​​អ្នក​ ប៉ុន្តែ​បាន​បរាជ័យ ។"
+
+#: app/views/layouts/application.html.erb:43
+msgid "You are using an unsupported browser. Please switch to %sFireFox 3.5 or better%s or %sInternet Explorer 8%s. Thanks! [%sclose%s]"
+msgstr "អ្នក​កំពុង​តែ​ប្រើ​កម្មវិធី​រុករក​ដែល​មិន​បាន​គាំទ្រ​​ ។ សូម​ប្ដូរ​ទៅ %sFireFox 3.5 ឬ ខ្ពស់​ជាង%s ឬ %sInternet Explorer 8%s ។ សូម​អរគុណ ! [%sclose%s]"
+
+#: app/views/shared/_missing_write_permissions.html.erb:1
+msgid "You do not have permissions to modify the settings."
+msgstr "អ្នក​មិន​មាន​សិទ្ធិ​ដើម្បី​កែប្រែ​ការ​កំណត់​នោះ​ទេ ។"
+
+#: app/views/controlpanel/index.html.erb:154
+msgid "You have no permissions to see or change the modules, please contact the administrator to set up permissions first!"
+msgstr "អ្នក​មិនមាន​សិទ្ធិ ដើម្បីមើល​ ឬ​ផ្លាស់ប្ដូរ​ម៉ូឌុល​ទេ សូម​ទាក់ទង​អ្នក​គ្រប់គ្រង ដើម្បី​រៀបចំ​សិទ្ធិ​សិន !"
+
+#: app/views/layouts/application.html.erb:98
+msgid "You will be logged off in"
+msgstr "អ្នក​ត្រូ​វ​បាន​ចេញ"
+
+#: app/views/controlpanel/basesystem.haml:1
+msgid "Your initial system setup was not completed. Please continue with setting up the modules."
+msgstr "ការ​រៀបចំ​ប្រព័ន្ធ​ដំបូង​មិន​ទាន់​ចប់​ទេ ។ សូម​បន្ត​ជា​មួយ​នឹង​ការ​រៀបចំ​ម៉ូឌុល ។"
+
+#: locale/model_attributes.rb:2
+msgid "account"
+msgstr "គណនី​​"
+
+#: app/views/layouts/application.html.erb:98
+msgid "seconds due to session timeout. "
+msgstr "លើក​ទី​ពីរ ដោយ​សារ​តែ​សម័យ​អស់​ពេល ។"

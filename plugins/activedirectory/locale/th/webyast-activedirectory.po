@@ -1,0 +1,86 @@
+# Thai message file for YaST2 (@memory@).
+# Copyright (C) 2008 SUSE Linux Products GmbH.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: YaST (@memory@)\n"
+"Report-Msgid-Bugs-To: i18n@suse.de\n"
+"POT-Creation-Date: 2012-06-07 15:20+0200\n"
+"PO-Revision-Date: 2008-01-04 08:58+0100\n"
+"Last-Translator: i18n@suse.de\n"
+"Language-Team: Thai <i18n@suse.de>\n"
+"Language: th\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+
+msgid "Account settings"
+msgstr ""
+
+#, fuzzy
+#| msgid "Remote Directory"
+msgid "Active Directory"
+msgstr "ไดเรกทอรีระยะไกล"
+
+#, fuzzy
+#| msgid "Selected Directory:"
+msgid "Active Directory Domain"
+msgstr "ไดเรกทอรีที่เลือกไว้:"
+
+#, fuzzy
+#| msgid "Provider Configuration Successfully Saved"
+msgid "Active Directory client configuraton successfully written."
+msgstr "การปรับแต่งค่าผู้ให้บริการถูกจัดเก็บเรียบร้อยแล้ว"
+
+#, fuzzy
+#| msgid "&Administrator's Mail"
+msgid "Administrator User Name"
+msgstr "ที่อยู่อีเมลของผู้ดูแลระบบ"
+
+#, fuzzy
+#| msgid "Cannot read the configuration."
+msgid "Cannot read Active Directory client configuraton."
+msgstr "ไม่สามารถอ่านค่าปรับแต่งได้"
+
+#, fuzzy
+#| msgid "Authenticated users"
+msgid "Enable Authentication of AD users"
+msgstr "ผู้ใช้ที่่ผ่านการตรวจสอบสิทธิ์"
+
+#, fuzzy
+#| msgid "Error while moving repository content."
+msgid "Error while joining Active Directory domain: %s"
+msgstr "เกิดข้อผิดพลาดระหว่างทำการย้ายข้อมูลภายในของคลังแพ็กเกจ"
+
+#, fuzzy
+#| msgid "Error while moving repository content."
+msgid "Error while leaving Active Directory domain: %s"
+msgstr "เกิดข้อผิดพลาดระหว่างทำการย้ายข้อมูลภายในของคลังแพ็กเกจ"
+
+#, fuzzy
+#| msgid "Error while moving repository content."
+msgid "Error while saving Active Directory client configuration."
+msgstr "เกิดข้อผิดพลาดระหว่างทำการย้ายข้อมูลภายในของคลังแพ็กเกจ"
+
+#, fuzzy
+#| msgid "Games Account"
+msgid "Machine Account"
+msgstr "บัญชีผู้ใช้ของเกมส์"
+
+msgid "Machine is not member of given domain. Enter the credentials needed for join."
+msgstr ""
+
+msgid "Password"
+msgstr "รหัสผ่าน"
+
+msgid "Please wait"
+msgstr ""
+
+msgid "This field is required."
+msgstr ""
+
+#, fuzzy
+#~| msgid "Configure the current scheme."
+#~ msgid "Configure the connection to Active Directory"
+#~ msgstr "ปรับแต่งชุดรูปแบบปัจจุบัน"

@@ -1,110 +1,128 @@
+# Martin Schlander <mschlander@opensuse.org>, 2011, 2012.
 msgid ""
 msgstr ""
-"Project-Id-Version: webyast-mail-ui 1.0.0\n"
+"Project-Id-Version: @PACKAGE@\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-08-02 09:18+0200\n"
-"PO-Revision-Date: 2005-08-16 20:00+0200\n"
-"Last-Translator: Martin Møller <martin@martinm-76.dk>\n"
-"Language-Team: Dansk <da@li.org>\n"
+"POT-Creation-Date: 2012-06-07 15:20+0200\n"
+"PO-Revision-Date: 2012-08-13 19:42+0200\n"
+"Last-Translator: Martin Schlander <mschlander@opensuse.org>\n"
+"Language-Team: Danish <opensuse-translation@opensuse.org>\n"
+"Language: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: KBabel 1.10.1\n"
+"X-Generator: Lokalize 1.2\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: app/controllers/mail_controller.rb:50 app/controllers/mail_controller.rb:50
+#: app/models/mail_state.rb:37
+msgid "It was not possible to retrieve the full hostname of the machine. If the mail could not be delivered, consult the network and/or mail configuration with your network administrator."
+msgstr "Det var ikke muligt at hente maskinens fulde værtsnavn. Hvis mailen ikke kunne leveres, så tal med netværksadministratoren om konfiguration af netværk og/eller mail."
+
+# %s is either BOOTP or DHCP
+#: app/models/mail_state.rb:42
+msgid "Mail configuration test not confirmed"
+msgstr "Test af mail-konfigurationen ikke bekræftet"
+
+#: app/models/mail_state.rb:43
+msgid "While configuring mail, a test mail was sent to %s . Was the mail delivered to this address?<br>If so, confirm it by pressing the button. Otherwise check your mail configuration again."
+msgstr "Under konfiguration af mail blev en test sendt til %s. Blev e-mailen modtaget på denne adresse?<br>Hvis ja, så bekræft ved at trykke på knappen. Hvis nej, så tjek din mail-konfiguration igen."
+
+#: app/models/mail_state.rb:46
+msgid "Test mail received"
+msgstr "Testmail modtaget"
+
+#: app/controllers/mailsetting_controller.rb:58
 msgid "Passwords do not match."
 msgstr "Adgangskoderne stemmer ikke overens."
 
-#: app/controllers/mail_controller.rb:57 app/controllers/mail_controller.rb:57
-#, fuzzy
+#: app/controllers/mailsetting_controller.rb:65
 msgid "Mail settings have been written."
-msgstr "Alle tjenester blev genopfrisket."
+msgstr "Mailindstillingerne er blevet skrevet."
 
-#: app/controllers/mail_controller.rb:59 app/controllers/mail_controller.rb:59
+#: app/controllers/mailsetting_controller.rb:67
 msgid "Test mail was sent to %s."
-msgstr ""
+msgstr "Test-mail sendt til %s."
 
-#: app/controllers/mail_controller.rb:71 app/controllers/mail_controller.rb:71
-#, fuzzy
-msgid "Error while saving mail settings: %s"
-msgstr "Der opstod fejl ved lukning af gammel opasswd fil: %s"
+#: app/controllers/mailsetting_controller.rb:72
+msgid "Error while saving mail settings."
+msgstr "Fejl under gemning af mail-indstillinger."
 
-#: app/controllers/mail_controller.rb:88 app/controllers/mail_controller.rb:88
+#: app/controllers/mailsetting_controller.rb:85
 msgid ""
-"No outgoing mail server is set, but administrator has mail forwarders "
-"defined.\n"
-"Change %s<i>administrator</i>%s or %s<i>mail</i>%s configuration."
+"No outgoing mail server is set, but administrator has mail forwarders defined.\n"
+"        Change %s<i>administrator</i>%s or %s<i>mail</i>%s configuration."
 msgstr ""
+"Ingen udgående mail-server er angivet, men administratoren har defineret mail-videresendelser. \n"
+"Ændr konfiguration af %s<i>administrator</i>%s eller %s<i>mail</i>%s."
 
-#: app/views/mail/index.html.erb:44 app/views/mail/index.html.erb:44
-#, fuzzy
+#: app/views/mailsetting/index.html.erb:32
+msgid "Please wait"
+msgstr "Vent venligst"
+
+#: app/views/mailsetting/index.html.erb:40
 msgid "The passwords do not match."
-msgstr "Adgangskoderne stemmer ikke overens."
+msgstr "Adgangskoderne er ikke ens."
 
-#: app/views/mail/index.html.erb:45 app/views/mail/index.html.erb:45
-#, fuzzy
+#: app/views/mailsetting/index.html.erb:41
 msgid "Enter a valid e-mail address."
-msgstr "'%s' er ikke en gyldig IP-adresse."
+msgstr "Angiv en gyldig IP-adresse."
 
-#: app/views/mail/index.html.erb:46 app/views/mail/index.html.erb:46
-#, fuzzy
+#: app/views/mailsetting/index.html.erb:42
 msgid "Enter a valid domain name or an IP address."
-msgstr "Indtast din IP-adresse."
+msgstr "Angiv et gyldigt domænenavn eller en IP-adresse."
 
-#: app/views/mail/index.html.erb:63 app/views/mail/index.html.erb:63
-#: shortcuts.yml:6
-#, fuzzy
+#: app/views/mailsetting/index.html.erb:68
 msgid "Mail Settings"
-msgstr "Manuelle indstillinger"
+msgstr "Mail-indstillinger"
 
-#: app/views/mail/index.html.erb:75 app/views/mail/index.html.erb:75
+#: app/views/mailsetting/index.html.erb:81
+msgid "Outgoing mail server settings"
+msgstr "Indstilling af server til udgående mail"
+
+#: app/views/mailsetting/index.html.erb:86
 msgid "Outgoing mail server"
-msgstr ""
+msgstr "Server til udgående mail"
 
-#: app/views/mail/index.html.erb:80 app/views/mail/index.html.erb:80
+#: app/views/mailsetting/index.html.erb:91
 msgid "Use secure connection (TLS)"
-msgstr ""
+msgstr "Brug sikker forbindelse (TLS)"
 
-#: app/views/mail/index.html.erb:81 app/views/mail/index.html.erb:81
+#: app/views/mailsetting/index.html.erb:92
 msgid "Never"
 msgstr "Aldrig"
 
-#: app/views/mail/index.html.erb:81 app/views/mail/index.html.erb:81
-#, fuzzy
+#: app/views/mailsetting/index.html.erb:92
 msgid "If available"
-msgstr "(%1 tilgængelig)"
+msgstr "Hvis tilgængelig"
 
-#: app/views/mail/index.html.erb:81 app/views/mail/index.html.erb:81
-#, fuzzy
+#: app/views/mailsetting/index.html.erb:92
 msgid "Always"
-msgstr "Alt&id"
+msgstr "Altid"
 
-#: app/views/mail/index.html.erb:84 app/views/mail/index.html.erb:84
-#, fuzzy
+#: app/views/mailsetting/index.html.erb:96
 msgid "User name"
-msgstr "Brugernavn: "
+msgstr "Brugernavn"
 
 # password dialog title
-#: app/views/mail/index.html.erb:88 app/views/mail/index.html.erb:88
+#: app/views/mailsetting/index.html.erb:101
 msgid "Password"
 msgstr "Adgangskode"
 
-#: app/views/mail/index.html.erb:92 app/views/mail/index.html.erb:92
-#, fuzzy
+#: app/views/mailsetting/index.html.erb:106
 msgid "Confirm password"
-msgstr "_Bekræft adgangskode:"
+msgstr "Bekræft adgangskode"
 
-#: app/views/mail/index.html.erb:100 app/views/mail/index.html.erb:100
-#, fuzzy
+#: app/views/mailsetting/index.html.erb:114
+msgid "Check mail server settings"
+msgstr "Tjek indstilling af mail-server"
+
+#: app/views/mailsetting/index.html.erb:118
 msgid "Send test mail to"
-msgstr "Send e-mail til %1"
+msgstr "Send test-mail til"
 
-#: app/views/mail/index.html.erb:102 app/views/mail/index.html.erb:102
-#, fuzzy
+#: app/views/mailsetting/index.html.erb:120
 msgid "Send Mail"
-msgstr "Send data"
+msgstr "Send e-mail"
 
-#: shortcuts.yml:7
-msgid "Manage outgoing mail settings"
-msgstr ""
+#~ msgid "Manage outgoing mail settings"
+#~ msgstr "Håndtér indstilling af udgående e-mails"

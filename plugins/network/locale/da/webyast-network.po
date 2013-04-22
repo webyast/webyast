@@ -1,164 +1,239 @@
 # Jan Madsen <jan-portugal@opensuse.org>, 2009.
+# Martin Schlander <mschlander@opensuse.org>, 2011, 2012.
 msgid ""
 msgstr ""
-"Project-Id-Version: webyast-network-ui 1.0.0\n"
+"Project-Id-Version: @PACKAGE@\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-08-02 09:18+0200\n"
-"PO-Revision-Date: 2009-10-06 22:28+0100\n"
-"Last-Translator: Jan Madsen <jan-portugal@opensuse.org>\n"
-"Language-Team: Danish <opensuse-da@opensuse.org>\n"
+"POT-Creation-Date: 2012-06-07 15:19+0200\n"
+"PO-Revision-Date: 2012-08-13 19:51+0200\n"
+"Last-Translator: Martin Schlander <mschlander@opensuse.org>\n"
+"Language-Team: Danish <opensuse-translation@opensuse.org>\n"
+"Language: da\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Lokalize 0.3\n"
+"X-Generator: Lokalize 1.2\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: app/controllers/network_controller.rb:89
-#: app/controllers/network_controller.rb:89
-msgid "Manual"
-msgstr "Manuelt"
-
-#: app/controllers/network_controller.rb:89
-#: app/controllers/network_controller.rb:89
-#, fuzzy
-msgid "Automatic"
-msgstr "Automatisk tilstand"
-
 # %s is either BOOTP or DHCP
-#: app/controllers/network_controller.rb:163
-#: app/controllers/network_controller.rb:163
-#, fuzzy
+#: app/controllers/network_controller.rb:235
 msgid "Network settings have been written."
-msgstr "Indstillingerne blev skrevet."
+msgstr "Netværksindstillingerne blev skrevet."
 
-#: app/views/network/index.html.erb:143 app/views/network/index.html.erb:147
-#: app/views/network/index.html.erb:151 app/views/network/index.html.erb:155
-#: app/views/network/index.html.erb:158 app/views/network/index.html.erb:162
-#: app/views/network/index.html.erb:166 app/views/network/index.html.erb:143
-#: app/views/network/index.html.erb:147 app/views/network/index.html.erb:151
-#: app/views/network/index.html.erb:155 app/views/network/index.html.erb:158
-#: app/views/network/index.html.erb:162 app/views/network/index.html.erb:166
-msgid "This field is required"
-msgstr ""
-
-#: app/views/network/index.html.erb:144 app/views/network/index.html.erb:152
-#: app/views/network/index.html.erb:163 app/views/network/index.html.erb:144
-#: app/views/network/index.html.erb:152 app/views/network/index.html.erb:163
-msgid "Enter a valid IP address"
-msgstr ""
-
-#: app/views/network/index.html.erb:148 app/views/network/index.html.erb:148
-msgid "Enter a valid subnet mask or prefix"
-msgstr ""
-
-#: app/views/network/index.html.erb:159 app/views/network/index.html.erb:167
-#: app/views/network/index.html.erb:159 app/views/network/index.html.erb:167
-msgid "Enter a valid domain name"
-msgstr ""
-
-#: app/views/network/index.html.erb:229 app/views/network/index.html.erb:229
-#, fuzzy
-msgid "whitespace - invalid character."
-msgstr "Søgeteksten indeholder ugyldige tegn"
-
-#: app/views/network/index.html.erb:231 app/views/network/index.html.erb:231
-#, fuzzy
-msgid " - can not start with a digit."
-msgstr "VM'ens navn må ikke starte med et ciffer."
-
-#: app/views/network/index.html.erb:233 app/views/network/index.html.erb:233
-#, fuzzy
-msgid "periodic '-' is not allowed."
-msgstr "Valgmuligheden 'flush' er ikke tilladt"
-
-#: app/views/network/index.html.erb:235 app/views/network/index.html.erb:235
-msgid "can not end with (-) hyphen."
-msgstr ""
-
-#: app/views/network/index.html.erb:238 app/views/network/index.html.erb:238
-msgid "can not start with (-) hyphen."
-msgstr ""
-
-#: app/views/network/index.html.erb:240 app/views/network/index.html.erb:240
-msgid " - is invalid character for hostname."
-msgstr ""
-
-#: app/views/network/index.html.erb:283 app/views/network/index.html.erb:283
-#: shortcuts.yml:6
+#: app/views/network/edit.html.erb:36 app/views/network/new.html.erb:36
+#: app/views/network/index.html.erb:18
 msgid "Network"
 msgstr "Netværk"
 
-#: app/views/network/index.html.erb:293 app/views/network/index.html.erb:293
-msgid "General settings"
-msgstr ""
+#: app/views/network/_form.html.erb:15 app/views/network/_form.html.erb:45
+#: app/views/network/_form.html.erb:79 app/views/network/_form.html.erb:121
+msgid "Interface name"
+msgstr "Grænsefladenavn"
 
-#: app/views/network/index.html.erb:295 app/views/network/index.html.erb:295
-#, fuzzy
+#: app/views/network/_form.html.erb:26 app/views/network/index.html.erb:80
+msgid "Physical interface"
+msgstr "Fysisk grænseflade"
+
+#: app/views/network/_form.html.erb:31
+msgid "VLAN ID"
+msgstr "VLAN-id"
+
+#: app/views/network/_form.html.erb:56
+msgid "Bridge devices:"
+msgstr "Sæt enheder i brotilstand:"
+
+#: app/views/network/_form.html.erb:91
+msgid "Bond driver options"
+msgstr "Tilvalg for bond-driver"
+
+#: app/views/network/_form.html.erb:97 app/views/network/index.html.erb:89
+msgid "Bond slaves"
+msgstr "Bond-slaver"
+
+#: app/views/network/_form.html.erb:132
 msgid "Configuration mode"
 msgstr "Konfigurationstilstand"
 
-#: app/views/network/index.html.erb:301 app/views/network/index.html.erb:301
-#, fuzzy
-msgid "IP Address"
-msgstr "IP-adresse"
+#: app/views/network/_form.html.erb:162
+msgid "DNS configuration"
+msgstr "Konfiguration af DNS"
 
-#: app/views/network/index.html.erb:304 app/views/network/index.html.erb:304
-#, fuzzy
-msgid "IP address"
-msgstr "IP-adresse"
-
-#: app/views/network/index.html.erb:309 app/views/network/index.html.erb:309
-#, fuzzy
-msgid "Subnet mask/Prefixlen"
-msgstr "Prefixlen"
-
-#: app/views/network/index.html.erb:314 app/views/network/index.html.erb:314
-#, fuzzy
-msgid "Default route"
-msgstr "Standard-rute"
-
-#: app/views/network/index.html.erb:321 app/views/network/index.html.erb:321
-msgid "DNS"
-msgstr "DNS"
-
-#: app/views/network/index.html.erb:324 app/views/network/index.html.erb:324
+#: app/views/network/_form.html.erb:168
 msgid "Hostname"
 msgstr "Værtsnavn"
 
 # as in Windows Authentication Domain
-#: app/views/network/index.html.erb:331 app/views/network/index.html.erb:331
+#: app/views/network/_form.html.erb:172
 msgid "Domain"
 msgstr "Domæne"
 
-#: app/views/network/index.html.erb:336 app/views/network/index.html.erb:336
-msgid "Change hostname by DHCP"
-msgstr ""
-
-#: app/views/network/index.html.erb:341 app/views/network/index.html.erb:341
-#, fuzzy
+#: app/views/network/_form.html.erb:177
 msgid "Name servers"
 msgstr "Navneservere"
 
-#: app/views/network/index.html.erb:346 app/views/network/index.html.erb:346
-#, fuzzy
+#: app/views/network/_form.html.erb:182
 msgid "Search domains"
-msgstr "Gennem&søg domæner:"
+msgstr "Søgedomæner"
 
-#: shortcuts.yml:7
+#: app/views/network/_form.html.erb:187
+msgid "Change hostname by DHCP"
+msgstr "Ændr værtsnavn via DHCP"
+
+#: app/views/network/_form.html.erb:202
+msgid "IP configuration"
+msgstr "Konfiguration af IP"
+
+#: app/views/network/_form.html.erb:209 app/views/network/index.html.erb:50
+msgid "IP address"
+msgstr "IP-adresse"
+
+#: app/views/network/_form.html.erb:213
+msgid "Subnet mask/Prefixlen"
+msgstr "Subnetmaske/prefixlen"
+
+#: app/views/network/_form.html.erb:217
+msgid "Default route"
+msgstr "Standardrute"
+
+#: app/views/network/_form.html.erb:227
+msgid "Save"
+msgstr "Gem"
+
+#: app/views/network/_form.html.erb:229 app/views/network/index.html.erb:184
+msgid "back"
+msgstr "tilbage"
+
+#: app/views/network/_validation.html.erb:54
+#: app/views/network/_validation.html.erb:58
+#: app/views/network/_validation.html.erb:62
+#: app/views/network/_validation.html.erb:66
+#: app/views/network/_validation.html.erb:70
+#: app/views/network/_validation.html.erb:74
+#: app/views/network/_validation.html.erb:78
+msgid "This field is required"
+msgstr "Dette felt er påkrævet"
+
+#: app/views/network/_validation.html.erb:55
+#: app/views/network/_validation.html.erb:63
+#: app/views/network/_validation.html.erb:75
+msgid "Enter a valid IP address"
+msgstr "Angiv en gyldig IP-adresse."
+
+#: app/views/network/_validation.html.erb:59
+msgid "Enter a valid subnet mask or prefix"
+msgstr "Angiv en gyldig subnetmaske eller præfiks"
+
+#: app/views/network/_validation.html.erb:67
+msgid "Enter a valid hostname"
+msgstr "Angiv et gyldigt værtsnavn"
+
+#: app/views/network/_validation.html.erb:71
+#: app/views/network/_validation.html.erb:79
+msgid "Enter a valid domain name"
+msgstr "Angiv et gyldigt domænenavn"
+
+#: app/views/network/_validation.html.erb:83
+msgid "Please wait"
+msgstr "Vent venligst"
+
+#: app/views/network/index.html.erb:36
+msgid "Physical Interfaces"
+msgstr "Fysiske grænseflader"
+
+#: app/views/network/index.html.erb:49 app/views/network/index.html.erb:75
+msgid "Interface"
+msgstr "Grænseflade"
+
+#: app/views/network/index.html.erb:51
+msgid "Mode"
+msgstr "Tilstand"
+
+#: app/views/network/index.html.erb:54 app/views/network/index.html.erb:95
+msgid "configure"
+msgstr "konfigurér"
+
+#: app/views/network/index.html.erb:64
+msgid "Virtual Interfaces"
+msgstr "Virtuelle grænseflader"
+
+#: app/views/network/index.html.erb:79
+msgid "Vlan ID"
+msgstr "Vlan-id"
+
+#: app/views/network/index.html.erb:84
+msgid "Bridge ports"
+msgstr "Sæt porte brotilstand"
+
+#: app/views/network/index.html.erb:88
+msgid "Bond option"
+msgstr "Bond-tilvalg"
+
+#: app/views/network/index.html.erb:98
+msgid "delete"
+msgstr "slet"
+
+#: app/views/network/index.html.erb:108
+msgid "New virtual interface"
+msgstr "Ny virtuel grænseflade"
+
+#: app/views/network/index.html.erb:119
+msgid "Please select one of the virtual interfaces"
+msgstr "Vælg en af de virtuelle grænseflader"
+
+#: app/views/network/index.html.erb:144
+msgid "BRIDGE"
+msgstr "BROTILSTAND"
+
+#: app/views/network/index.html.erb:164
+msgid "BOND"
+msgstr "BOND"
+
+#: app/views/network/index.html.erb:185
+msgid "next"
+msgstr "næste"
+
+#~ msgid "Manual"
+#~ msgstr "Manuelt"
+
+#~ msgid "Automatic"
+#~ msgstr "Automatisk"
+
+#~ msgid "Current IP address (DHCP)"
+#~ msgstr "Aktuel IP-adresse (DHCP)"
+
+#~ msgid "Manage network devices"
+#~ msgstr "Håndtér netværksenheder"
+
 #, fuzzy
-msgid "Manage network devices"
-msgstr "Redigér netværksenhed"
+#~| msgid "The search text contains invalid characters"
+#~ msgid "whitespace - invalid character."
+#~ msgstr "Søgeteksten indeholder ugyldige tegn"
 
-#~ msgid "Not configured"
-#~ msgstr "Ikke konfigureret"
+#, fuzzy
+#~| msgid "The VM's name cannot start with a digit."
+#~ msgid " - can not start with a digit."
+#~ msgstr "VM'ens navn må ikke starte med et ciffer."
+
+#, fuzzy
+#~| msgid "The option 'flush' is not allowed"
+#~ msgid "periodic '-' is not allowed."
+#~ msgstr "Valgmuligheden 'flush' er ikke tilladt"
+
+#, fuzzy
+#~| msgid "General Settings"
+#~ msgid "General settings"
+#~ msgstr "Generelle indstillinger"
+
+#~ msgid "IP Address"
+#~ msgstr "IP-adresse"
+
+#~ msgid "DNS"
+#~ msgstr "DNS"
 
 #, fuzzy
 #~| msgid "No valid request file specified."
 #~ msgid "Hostname is required. It must be specified."
 #~ msgstr "Der er ikke angivet en gyldig efterspørgselsfil."
-
-#~ msgid "Interface"
-#~ msgstr "Grænseflade"
 
 #, fuzzy
 #~| msgid "Select item"
@@ -184,15 +259,12 @@ msgstr "Redigér netværksenhed"
 #~ msgid "Routing"
 #~ msgstr "Rutning"
 
-#~ msgid "Save"
-#~ msgstr "Gem"
-
 # cancel button label
 #~ msgid "Cancel"
 #~ msgstr "Annullér"
 
-#~ msgid "Configuration"
-#~ msgstr "Konfiguration"
+#~ msgid "Edit Network Device"
+#~ msgstr "Redigér netværksenhed"
 
 #~ msgid "ID"
 #~ msgstr "Id"

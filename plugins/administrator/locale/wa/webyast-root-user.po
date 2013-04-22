@@ -1,137 +1,87 @@
 # Translation into the walloon language.
 # Copyright (C) 2007 SUSE Linux Products GmbH.
-# Pablo Saratxaga <pablo@walon.org>, 2001, 2004.
-# Jean Cayron <jean.cayron@gmail.com>, 2007.
 #
+# Pablo Saratxaga <pablo@walon.org>, 2001, 2004.
+# Jean Cayron <jean.cayron@base.be>, 2007, 2011, 2012.
 msgid ""
 msgstr ""
-"Project-Id-Version: webyast-root-user-ui 1.0.0\n"
-"POT-Creation-Date: 2010-08-02 09:18+0200\n"
-"PO-Revision-Date: 2004-04-05 17:37+0200\n"
-"Last-Translator: Jean Cayron <jean.cayron@gmail.com>\n"
-"Language-Team: Walloon <i18n@suse.de>\n"
+"Project-Id-Version: yast memory\n"
+"POT-Creation-Date: 2012-06-07 15:20+0200\n"
+"PO-Revision-Date: 2012-08-19 15:05+0200\n"
+"Last-Translator: Jean Cayron <jean.cayron@base.be>\n"
+"Language-Team: Walloon <linux-wa@walon.org>\n"
+"Language: wa\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
+"X-Generator: Lokalize 1.4\n"
 
-#: app/controllers/administrator_controller.rb:53
-#: app/views/administrator/index.html.erb:56
-#: app/controllers/administrator_controller.rb:53
-#: app/views/administrator/index.html.erb:56
-msgid "Enter a valid e-mail address."
-msgstr ""
-
-#: app/controllers/administrator_controller.rb:61
-#: app/controllers/administrator_controller.rb:61
-#, fuzzy
-msgid "Passwords do not match."
-msgstr "Les screts n' sont nén les minmes"
-
-#: app/controllers/administrator_controller.rb:74
-#: app/controllers/administrator_controller.rb:74
-#, fuzzy
-msgid "Administrator settings have been written."
-msgstr "Manaedjmint"
-
-#: app/controllers/administrator_controller.rb:84
-#: app/controllers/administrator_controller.rb:84
-msgid "Error while saving administrator settings: %s"
-msgstr ""
-
-#: app/controllers/administrator_controller.rb:96
-#: app/controllers/administrator_controller.rb:96
-msgid ""
-"Mail alias was set but outgoing mail server is not configured (%s<i>change</"
-"i>%s)."
-msgstr ""
-
-#: app/views/administrator/index.html.erb:22
-#: app/views/administrator/index.html.erb:22 shortcuts.yml:6
-#, fuzzy
-msgid "Administrator Settings"
-msgstr "Manaedjmint"
-
-#: app/views/administrator/index.html.erb:64
-#: app/views/administrator/index.html.erb:64
-#, fuzzy
-msgid "The passwords do not match."
-msgstr "Les screts n' sont nén les minmes"
-
-#: app/views/administrator/index.html.erb:65
-#: app/views/administrator/index.html.erb:65
 msgid "A password is required."
-msgstr ""
+msgstr "I gn a mezåjhe d' on scret."
 
-#: app/views/administrator/index.html.erb:70
-#: app/views/administrator/index.html.erb:70
-#, fuzzy
-msgid "Password Strength:"
-msgstr "Les screts sont les minmes"
+msgid "Administrator Settings"
+msgstr "Tchuzes do manaedjeu"
 
-#: app/views/administrator/index.html.erb:72
-#: app/views/administrator/index.html.erb:72
-msgid "Weak"
-msgstr ""
+msgid "Administrator settings have been written."
+msgstr "Les tchuzes do manaedjeu ont stî scrîtes"
 
-#: app/views/administrator/index.html.erb:73
-#: app/views/administrator/index.html.erb:73
-msgid "Normal"
-msgstr ""
-
-#: app/views/administrator/index.html.erb:74
-#: app/views/administrator/index.html.erb:74
-#, fuzzy
-msgid "Medium"
-msgstr "Media"
-
-#: app/views/administrator/index.html.erb:75
-#: app/views/administrator/index.html.erb:75
-msgid "Strong"
-msgstr ""
-
-#: app/views/administrator/index.html.erb:76
-#: app/views/administrator/index.html.erb:76
-#, fuzzy
-msgid "Very Strong"
-msgstr "Foirt rade"
-
-#: app/views/administrator/index.html.erb:104
-#: app/views/administrator/index.html.erb:104
-msgid "Password Setup for User 'root'"
-msgstr ""
-
-#: app/views/administrator/index.html.erb:105
-#: app/views/administrator/index.html.erb:105
-#, fuzzy
-msgid "New Password"
-msgstr "_Novea scret:"
-
-#: app/views/administrator/index.html.erb:110
-#: app/views/administrator/index.html.erb:110
-#, fuzzy
 msgid "Confirm Password"
-msgstr "_Racertiner l' sicret:"
+msgstr "Racertiner l' sicret"
 
-#: app/views/administrator/index.html.erb:119
-#: app/views/administrator/index.html.erb:119
-msgid "Mail Setup for User 'root'"
-msgstr ""
+msgid "Enter a valid e-mail address."
+msgstr "Tapez ene adresse emile valåbe."
 
-#: app/views/administrator/index.html.erb:121
-#: app/views/administrator/index.html.erb:121
+msgid "Error while saving administrator settings."
+msgstr "Åk n' a nén stî come dji schapéve les tchuzes do manaedjeu."
+
 msgid "Forward system mail to"
-msgstr ""
+msgstr "Ricassî les emiles do sistinme a"
 
-#: app/views/administrator/index.html.erb:124
-#: app/views/administrator/index.html.erb:124
-#, fuzzy
+msgid "Mail Setup for User 'root'"
+msgstr "Apontiaedje di l' emile po l' uzeu « root »"
+
+msgid "Mail alias was set but outgoing mail server is not configured (%s<i>change</i>%s)."
+msgstr "Li no metou di l' emile a stî defini mins l' sierveu d' emilaedje rexhant n' est nén apontyî (%s<i>candjî</i>%s)."
+
+msgid "New Password"
+msgstr "Novea scret"
+
+msgid "Password Setup for User 'root'"
+msgstr "Apontiaedje do scret po l' uzeu « root »"
+
+msgid "Passwords do not match."
+msgstr "Les screts n' sont nén les minmes."
+
+msgid "Please wait"
+msgstr "Tårdjîz s' i vs plait"
+
 msgid "Save Mail Only"
-msgstr "&Schaper"
+msgstr "Èn fé k' schaper les emiles"
 
-#: shortcuts.yml:7
-msgid "Manage system administrator"
-msgstr ""
+msgid "The passwords do not match."
+msgstr "Les screts n' sont nén les minmes."
+
+#~ msgid "Password Strength:"
+#~ msgstr "Foice do scret :"
+
+#~ msgid "Weak"
+#~ msgstr "Flåwe"
+
+#~ msgid "Normal"
+#~ msgstr "Normåle"
+
+#~ msgid "Medium"
+#~ msgstr "Moyene"
+
+#~ msgid "Strong"
+#~ msgstr "Foite"
+
+#~ msgid "Very Strong"
+#~ msgstr "Mo foite"
+
+#~ msgid "Manage system administrator"
+#~ msgstr "Manaedjî l' manaedjeu do sistinme"
 
 #~ msgid "Password"
 #~ msgstr "Sicret"

@@ -1,106 +1,128 @@
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
 #
-# Kalman Kemenczy <kkemenczy@novell.com>, 2010.
+# Kalman Kemenczy <kkemenczy@novell.com>, 2010, 2012.
 msgid ""
 msgstr ""
-"Project-Id-Version: webyast-mail-ui 1.0.0\n"
-"POT-Creation-Date: 2010-08-02 09:18+0200\n"
-"PO-Revision-Date: 2010-05-18 08:20+0200\n"
-"Last-Translator: kalman <kkemenczy@gmail.com>\n"
-"Language-Team: collection <kde-i18n-doc@kde.org>\n"
+"Project-Id-Version: webyast-mail-ws 1.0.0\n"
+"POT-Creation-Date: 2012-06-07 15:20+0200\n"
+"PO-Revision-Date: 2012-06-15 23:31+0200\n"
+"Last-Translator: Kalman Kemenczy <kkemenczy@opensuse.org>\n"
+"Language-Team: Hungarian <kde-l10n-hu@kde.org>\n"
+"Language: hu\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Language: hu\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Pootle 2.0.2\n"
+"X-Generator: Lokalize 1.2\n"
 
-#: app/controllers/mail_controller.rb:50 app/controllers/mail_controller.rb:50
+#: app/models/mail_state.rb:37
+msgid "It was not possible to retrieve the full hostname of the machine. If the mail could not be delivered, consult the network and/or mail configuration with your network administrator."
+msgstr "Nem lehet lekérni a gép teljes nevét. Ha a levél nem érkezett meg, egyeztessen a hálózati rendszergazdával a hálózati és/vagy levelezőrendszeri beállításokról."
+
+#: app/models/mail_state.rb:42
+msgid "Mail configuration test not confirmed"
+msgstr "A levelezés beállításának vizsgálata nincs ellenőrizve"
+
+#: app/models/mail_state.rb:43
+msgid "While configuring mail, a test mail was sent to %s . Was the mail delivered to this address?<br>If so, confirm it by pressing the button. Otherwise check your mail configuration again."
+msgstr "A levelezés beállításakor egy próbalevél került elküldésre a következő címre: %s. Megérkezett ez a levél?<br> Amennyiben igen, akkor nyomja meg a gombot. Ellenkező esetben ellenőrizze újra a levelezési beállításokat."
+
+#: app/models/mail_state.rb:46
+msgid "Test mail received"
+msgstr "A tesztlevél megérkezett"
+
+#: app/controllers/mailsetting_controller.rb:58
 msgid "Passwords do not match."
 msgstr "A jelszavak nem egyeznek."
 
-#: app/controllers/mail_controller.rb:57 app/controllers/mail_controller.rb:57
+#: app/controllers/mailsetting_controller.rb:65
 msgid "Mail settings have been written."
 msgstr "A levelezőbeállítások mentése megtörtént."
 
-#: app/controllers/mail_controller.rb:59 app/controllers/mail_controller.rb:59
+#: app/controllers/mailsetting_controller.rb:67
 msgid "Test mail was sent to %s."
 msgstr "A tesztlevél elküldve a következőnek: %s."
 
-#: app/controllers/mail_controller.rb:71 app/controllers/mail_controller.rb:71
-msgid "Error while saving mail settings: %s"
-msgstr "Hiba történt a levelezés beállításainak mentése közben: %s"
+#: app/controllers/mailsetting_controller.rb:72
+msgid "Error while saving mail settings."
+msgstr "Hiba történt a levelezés beállításainak mentése közben."
 
-#: app/controllers/mail_controller.rb:88 app/controllers/mail_controller.rb:88
+#: app/controllers/mailsetting_controller.rb:85
 msgid ""
-"No outgoing mail server is set, but administrator has mail forwarders "
-"defined.\n"
-"Change %s<i>administrator</i>%s or %s<i>mail</i>%s configuration."
+"No outgoing mail server is set, but administrator has mail forwarders defined.\n"
+"        Change %s<i>administrator</i>%s or %s<i>mail</i>%s configuration."
 msgstr ""
-"Nincs kimenő levelezőkiszolgáló beállítva, de az adminisztrátor beállított "
-"levéltovábbítást. \n"
-"Módosítsa az %s<i>adminisztrátor</i>%s vagy a %s<i>levelezés</i>%s "
-"beállításait."
+"Nincs kimenő levelezőkiszolgáló beállítva, de az adminisztrátor beállított levéltovábbítást.\n"
+"Módosítsa az %s<i>adminisztrátor</i>%s vagy a %s<i>levelezés</i>%s beállításait."
 
-#: app/views/mail/index.html.erb:44 app/views/mail/index.html.erb:44
+#: app/views/mailsetting/index.html.erb:32
+msgid "Please wait"
+msgstr "Kérem, várjon…"
+
+#: app/views/mailsetting/index.html.erb:40
 msgid "The passwords do not match."
 msgstr "A jelszavak nem egyeznek."
 
-#: app/views/mail/index.html.erb:45 app/views/mail/index.html.erb:45
+#: app/views/mailsetting/index.html.erb:41
 msgid "Enter a valid e-mail address."
 msgstr "Adjon meg érvényes e-mail címet."
 
-#: app/views/mail/index.html.erb:46 app/views/mail/index.html.erb:46
+#: app/views/mailsetting/index.html.erb:42
 msgid "Enter a valid domain name or an IP address."
-msgstr "Adjon meg egy tartománynevet vagy IP-címet."
+msgstr "Adjon meg egy érvényes tartománynevet vagy IP-címet."
 
-#: app/views/mail/index.html.erb:63 app/views/mail/index.html.erb:63
-#: shortcuts.yml:6
+#: app/views/mailsetting/index.html.erb:68
 msgid "Mail Settings"
 msgstr "Levelezés beállításai"
 
-#: app/views/mail/index.html.erb:75 app/views/mail/index.html.erb:75
+#: app/views/mailsetting/index.html.erb:81
+msgid "Outgoing mail server settings"
+msgstr "Kimenő levéltovábbító-kiszolgáló beállításai"
+
+#: app/views/mailsetting/index.html.erb:86
 msgid "Outgoing mail server"
 msgstr "Kimenő levéltovábbító-kiszolgáló"
 
-#: app/views/mail/index.html.erb:80 app/views/mail/index.html.erb:80
+#: app/views/mailsetting/index.html.erb:91
 msgid "Use secure connection (TLS)"
 msgstr "Biztonságos kapcsolat használata (TLS)"
 
-#: app/views/mail/index.html.erb:81 app/views/mail/index.html.erb:81
+#: app/views/mailsetting/index.html.erb:92
 msgid "Never"
 msgstr "Soha"
 
-#: app/views/mail/index.html.erb:81 app/views/mail/index.html.erb:81
+#: app/views/mailsetting/index.html.erb:92
 msgid "If available"
 msgstr "Ha elérhető"
 
-#: app/views/mail/index.html.erb:81 app/views/mail/index.html.erb:81
+#: app/views/mailsetting/index.html.erb:92
 msgid "Always"
 msgstr "Mindig"
 
-#: app/views/mail/index.html.erb:84 app/views/mail/index.html.erb:84
+#: app/views/mailsetting/index.html.erb:96
 msgid "User name"
 msgstr "Felhasználónév"
 
-#: app/views/mail/index.html.erb:88 app/views/mail/index.html.erb:88
+#: app/views/mailsetting/index.html.erb:101
 msgid "Password"
 msgstr "Jelszó"
 
-#: app/views/mail/index.html.erb:92 app/views/mail/index.html.erb:92
+#: app/views/mailsetting/index.html.erb:106
 msgid "Confirm password"
 msgstr "Jelszó megerősítése"
 
-#: app/views/mail/index.html.erb:100 app/views/mail/index.html.erb:100
+#: app/views/mailsetting/index.html.erb:114
+msgid "Check mail server settings"
+msgstr "Levéltovábbító-kiszolgáló beállításainak ellenőrzése"
+
+#: app/views/mailsetting/index.html.erb:118
 msgid "Send test mail to"
 msgstr "Tesztlevél küldése a következőnek:"
 
-#: app/views/mail/index.html.erb:102 app/views/mail/index.html.erb:102
+#: app/views/mailsetting/index.html.erb:120
 msgid "Send Mail"
 msgstr "Levélküldés"
 
-#: shortcuts.yml:7
-#, fuzzy
-msgid "Manage outgoing mail settings"
-msgstr "Kimenő levéltovábbító-kiszolgáló"
+#~ msgid "Manage outgoing mail settings"
+#~ msgstr "Kimenő levéltovábbító-kiszolgáló"

@@ -1,63 +1,71 @@
-# Copyright (C) 2006 SuSE Linux Products GmbH, Nuernberg
-# This file is distributed under the same license as the package.
+# @TITLE@
+# Copyright (C) 2006, SUSE Linux GmbH, Nuremberg
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+# This file is distributed under the same license as @PACKAGE@ package. FIRST
+# hillwood <hillwoodroc@gmail.com>, 2012.
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: webyast-kerberos-ui\n"
-"POT-Creation-Date: 2010-08-18 10:19+0200\n"
-"PO-Revision-Date: 2010-08-26 09:33\n"
-"Last-Translator: Novell Language <language@novell.com>\n"
-"Language-Team: Novell Language <language@novell.com>\n"
+"Project-Id-Version: @PACKAGE@\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2012-06-07 15:20+0200\n"
+"PO-Revision-Date: 2012-03-03 21:27+0800\n"
+"Last-Translator: hillwood <hillwoodroc@gmail.com>\n"
+"Language-Team: Simplified Chinese <>\n"
+"Language: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=1; plural=0;\n"
+"X-Generator: KBabel 1.9\n"
+"Plural-Forms: nplurals=2; plural=(n!=1);\n"
 
-#: app/controllers/kerberos_controller.rb:39 ./app/controllers/kerberos_controller.rb:39
+#: app/controllers/kerberos_controller.rb:30
 msgid "Cannot read Kerberos client configuraton."
-msgstr "无法读取 Kerberos 客户端配置。"
+msgstr "无法读取 Kerberos 客户端配置"
 
-#: app/controllers/kerberos_controller.rb:55 ./app/controllers/kerberos_controller.rb:55
+#: app/controllers/kerberos_controller.rb:45
 msgid "Kerberos client configuraton successfully written."
-msgstr "Kerberos 客户端配置写入成功。"
+msgstr "成功写入 Kerberos 客户端配置"
 
-#: app/controllers/kerberos_controller.rb:60 ./app/controllers/kerberos_controller.rb:60
+#: app/controllers/kerberos_controller.rb:47
 msgid "Error while saving Kerberos client configuration."
-msgstr "保存 Kerberos 客户端配置时出错。"
+msgstr "保存 Kerberos 客户端设置错误"
 
-#: app/views/kerberos/index.html.erb:33 ./app/views/kerberos/index.html.erb:33
+#: app/views/kerberos/index.html.erb:32
 msgid "This field is required."
-msgstr "此字段是必需的。"
+msgstr "该字段不能为空。"
 
-#: app/views/kerberos/index.html.erb:34 ./app/views/kerberos/index.html.erb:34
+#: app/views/kerberos/index.html.erb:33
 msgid "Enter a valid domain name or an IP address."
-msgstr "请输入有效的域名或 IP 地址。"
+msgstr "请输入一个有效的域名或 IP 地址。"
 
-#: app/views/kerberos/index.html.erb:64 ./app/views/kerberos/index.html.erb:64
+#: app/views/kerberos/index.html.erb:60
+msgid "Please wait"
+msgstr "请稍候"
+
+#: app/views/kerberos/index.html.erb:78
 msgid "Kerberos client"
 msgstr "Kerberos 客户端"
 
-#: app/views/kerberos/index.html.erb:76 ./app/views/kerberos/index.html.erb:76
+#: app/views/kerberos/index.html.erb:91
 msgid "Enable Kerberos Authentication"
-msgstr "启用 Kerberos 身份验证"
+msgstr "启用 Kerberos 认证"
 
-#: app/views/kerberos/index.html.erb:79 ./app/views/kerberos/index.html.erb:79
+#: app/views/kerberos/index.html.erb:98
 msgid "Default Domain"
-msgstr "默认域"
+msgstr "默认主机"
 
-#: app/views/kerberos/index.html.erb:83 ./app/views/kerberos/index.html.erb:83
+#: app/views/kerberos/index.html.erb:103
 msgid "Default Realm"
-msgstr "默认领域"
+msgstr "预设范围"
 
-#: app/views/kerberos/index.html.erb:87 ./app/views/kerberos/index.html.erb:87
+#: app/views/kerberos/index.html.erb:108
 msgid "KDC Server Address"
-msgstr "KDC 服务器地址"
+msgstr "KDC 服务地址"
 
-#: ./shortcuts.yml:6
-msgid "Kerberos"
-msgstr "Kerberos"
+#~ msgid "Kerberos"
+#~ msgstr "Kerberos"
 
-#: ./shortcuts.yml:7
-msgid "Configure Kerberos client"
-msgstr "配置 Kerberos 客户端"
-
+#~ msgid "Configure Kerberos client"
+#~ msgstr "配置 Kerberos 客户端"

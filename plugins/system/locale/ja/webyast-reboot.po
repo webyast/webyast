@@ -1,33 +1,32 @@
-# Copyright (C) 2006 SuSE Linux Products GmbH, Nuernberg
-# This file is distributed under the same license as the package.
-#
+# translation of yast_webclient_system.po to Japanese
+# Yasuhiko Kamata <belphegor@belbel.or.jp>, 2009.
 msgid ""
 msgstr ""
-"Project-Id-Version: webyast-reboot-ui\n"
-"POT-Creation-Date: 2010-08-18 10:18+0200\n"
-"PO-Revision-Date: 2010-08-27 09:29\n"
-"Last-Translator: Novell Language <language@novell.com>\n"
-"Language-Team: Novell Language <language@novell.com>\n"
+"Project-Id-Version: yast_webclient_system\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2012-06-07 15:20+0200\n"
+"PO-Revision-Date: 2009-09-26 10:02+0900\n"
+"Last-Translator: Yasuhiko Kamata <belphegor@belbel.or.jp>\n"
+"Language-Team: Japanese <opensuse-ja@opensuse.org>\n"
+"Language: ja\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"X-Generator: KBabel 1.11.4\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
 
-#: app/controllers/system_controller.rb:36 ./app/controllers/system_controller.rb:36
+#: app/controllers/system_controller.rb:77
 msgid "Rebooting the machine..."
-msgstr "マシンをリブートしています..."
+msgstr "マシンを再起動しています..."
 
-#: app/controllers/system_controller.rb:40 app/controllers/system_controller.rb:44
-#: ./app/controllers/system_controller.rb:40 ./app/controllers/system_controller.rb:44
+#: app/controllers/system_controller.rb:81
 msgid "Cannot reboot the machine!"
-msgstr "マシンをリブートできません!"
+msgstr "マシンを再起動できません！"
 
-#: app/controllers/system_controller.rb:57 ./app/controllers/system_controller.rb:57
+#: app/controllers/system_controller.rb:94
 msgid "Shuting down the machine..."
 msgstr "マシンをシャットダウンしています..."
 
-#: app/controllers/system_controller.rb:61 app/controllers/system_controller.rb:65
-#: ./app/controllers/system_controller.rb:61 ./app/controllers/system_controller.rb:65
+#: app/controllers/system_controller.rb:98
 msgid "Cannot shutdown the machine!"
-msgstr "マシンをシャットダウンできません!"
-
+msgstr "マシンをシャットダウンできません！"

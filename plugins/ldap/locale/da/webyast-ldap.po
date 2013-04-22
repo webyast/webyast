@@ -1,0 +1,70 @@
+# Martin Schlander <mschlander@opensuse.org>, 2011.
+msgid ""
+msgstr ""
+"Project-Id-Version: @PACKAGE@\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2012-06-07 15:20+0200\n"
+"PO-Revision-Date: 2011-09-28 20:12+0200\n"
+"Last-Translator: Martin Schlander <mschlander@opensuse.org>\n"
+"Language-Team: Danish <opensuse-translation@opensuse.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Lokalize 1.2\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: app/controllers/ldap_controller.rb:38
+msgid "Cannot read LDAP client configuraton."
+msgstr "Kan ikke læse konfiguration af LDAP-klient."
+
+# %s is either BOOTP or DHCP
+#: app/controllers/ldap_controller.rb:63
+msgid "LDAP client configuraton successfully written."
+msgstr "Konfiguration af LDAP-klient blev skrevet."
+
+#: app/controllers/ldap_controller.rb:65
+msgid "Error while saving LDAP client configuration."
+msgstr "Fejl under gemning af konfiguration af LDAP-klient."
+
+#: app/views/ldap/index.html.erb:33
+msgid "This field is required."
+msgstr "Dette felt er påkrævet."
+
+#: app/views/ldap/index.html.erb:34
+msgid "Enter a valid domain name or an IP address."
+msgstr "Angiv et gyldigt domænenavn eller en IP-adresse."
+
+#: app/views/ldap/index.html.erb:70
+msgid "Please wait"
+msgstr "Vent venligst"
+
+#: app/views/ldap/index.html.erb:88
+msgid "LDAP client"
+msgstr "LDAP-klient"
+
+#: app/views/ldap/index.html.erb:101
+msgid "Enable LDAP Authentication"
+msgstr "Aktivér LDAP-autentificering"
+
+#: app/views/ldap/index.html.erb:108
+msgid "LDAP Server Address"
+msgstr "LDAP-serveradresse"
+
+#: app/views/ldap/index.html.erb:113
+msgid "Base DN"
+msgstr "Base-DN"
+
+#: app/views/ldap/index.html.erb:115
+msgid "Fetch DN"
+msgstr "Hent DN"
+
+#: app/views/ldap/index.html.erb:127
+msgid "Secure Connection"
+msgstr "Sikker forbindelse"
+
+#~ msgid "LDAP"
+#~ msgstr "LDAP"
+
+#~ msgid "Configure LDAP client"
+#~ msgstr "Konfigurér LDAP-klient"

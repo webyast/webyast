@@ -1,39 +1,93 @@
-# Copyright (C) 2006 SuSE Linux Products GmbH, Nuernberg
-# This file is distributed under the same license as the package.
-#
+# Mohammad Alhargan <malham1@hotmail.com>, 2012.
+# mohammad <malham1@gmail.com>, 2012.
+# محمد الحرقان <malham1@gmail.com>, 2012.
 msgid ""
 msgstr ""
-"Project-Id-Version: yast_webclient_roles\n"
-"POT-Creation-Date: 2010-03-11 15:45+0100\n"
-"PO-Revision-Date: 2010-03-25 08:23\n"
-"Last-Translator: Novell Language <language@novell.com>\n"
-"Language-Team: Novell Language <language@novell.com>\n"
+"Project-Id-Version: @PACKAGE@\n"
+"Report-Msgid-Bugs-To: translation@suse.de\n"
+"POT-Creation-Date: 2012-06-07 15:19+0200\n"
+"PO-Revision-Date: 2012-10-16 14:53+0300\n"
+"Last-Translator: محمد الحرقان <malham1@gmail.com>\n"
+"Language-Team: http://www.vertaal.com.ar/files/factory/ar/list/\n"
+"Language: ar\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Plural-Forms: nplurals=6; plural=n==0 ? 0 : n==1 ? 1 : n==2 ? 2 : n%100>=3 "
+"&& n%100<=10 ? 3 : n%100>=11 ? 4 : 5;\n"
+"X-Generator: Virtaal 0.7.1\n"
 
-#: app/views/roles/_role_edit.erb:31
-msgid "Permissions granted by role"
-msgstr "يتم منح الأذونات حسب الدور"
+#: app/controllers/roles_controller.rb:126
+msgid ""
+"Role name is invalid. Allowed is combination of a-z, A-Z, numbers, space, "
+"dash and underscore only."
+msgstr ""
+"اسم الوظيفة مستخدم بالفعل أو غير صالح. يسمح بالجمع بين أرقام, a-z, A-z، "
+"والمسافة، والشرطة والتسطير السفلي فقط."
 
-#: app/views/roles/_role_edit.erb:44
-msgid "Available permissions"
-msgstr "الإصدار المتوفر"
+#: app/controllers/roles_controller.rb:136
+msgid "Role name is already used."
+msgstr "اسم الوظيفة مستخدم مسبقاً."
 
-#: app/views/roles/_role_edit.erb:56
-msgid "Description of permissions"
-msgstr "وصف الأذونات"
+#: app/controllers/roles_controller.rb:155
+msgid "Role '%s' was successfully removed."
+msgstr "تمت إزالة الوظيفة '%s' بنجاح."
 
-#: app/views/roles/_role_edit.erb:58
-msgid ")}-description"
-msgstr "الوصف"
-
-#: app/views/roles/_role_edit.erb:64
-msgid "Save"
-msgstr "حفظ"
-
-#: app/views/roles/index.rhtml:12
+#: app/views/roles/index.html.erb:7
 msgid "Roles"
-msgstr "الدور"
+msgstr "وظائف"
 
+#: app/views/roles/index.html.erb:25
+msgid "In order to assign the user to roles,"
+msgstr "لتعيين المستخدم للوظائف،"
+
+#: app/views/roles/index.html.erb:26
+msgid "Drag and Drop the user labels into Role containers"
+msgstr "سحب وإفلات تسميات المستخدم في حاويات الوظائف"
+
+#: app/views/roles/index.html.erb:27
+msgid "Don't show this again"
+msgstr "عدم إظهار هذا مرة أخرى"
+
+#: app/views/roles/index.html.erb:38
+msgid "Create Role"
+msgstr "إنشاء وظيفة"
+
+#: app/views/roles/index.html.erb:43
+msgid "Assign Users"
+msgstr "تعيين المستخدمين"
+
+#: app/views/roles/index.html.erb:53
+msgid "User already assigned"
+msgstr "المستخدم الذي تم تعيينه بالفعل"
+
+#: app/views/roles/index.html.erb:104
+msgid "Assign Permissions"
+msgstr "تعيين اذونات"
+
+#: app/views/roles/index.html.erb:107
+msgid "collapse all"
+msgstr "إغلاق الكل"
+
+#: app/views/roles/index.html.erb:169
+msgid "This field is required"
+msgstr "هذا الحقل مطلوب"
+
+#: app/views/roles/index.html.erb:169
+msgid ""
+"Allowed is combination of a-z, A-Z, numbers, space, dash and underscore only."
+msgstr ""
+"المسموح به الجمع بين أرقام, a-z, A-z، والمسافة، والشرطة والتسطير السفلي فقط."
+
+#: app/views/roles/index.html.erb:235
+msgid "Please wait"
+msgstr "الرجاء الانتظار"
+
+#~ msgid "Error: Could not remove role <i>%s</i>."
+#~ msgstr "خطأ: تعذر إزالة الدور <i>%s</i>."
+
+#~ msgid "Cannot find roles"
+#~ msgstr "لا يمكن العثور على الأدوار"
+
+#~ msgid "Set permissions in roles and assign users to roles"
+#~ msgstr "تعيين الأذونات في الأدوار وتعيين مستخدمين إلى الأدوار"

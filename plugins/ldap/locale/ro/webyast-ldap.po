@@ -1,0 +1,72 @@
+# Translator(s):
+#
+# strainu <narro@strainu.ro>
+# Lucian Oprea <oprea.luci@gmail.com>
+# raulmalea <raul.malea@gmail.com>
+# Alexandru Szasz <alexxed@gmail.com>
+#
+# Reviewer(s):
+#
+# Lucian Oprea <oprea.luci@gmail.com>
+#
+msgid ""
+msgstr ""
+"X-Generator: Narro 2.0 on http://tradu.softwareliber.ro\n"
+"Project-Id-Version: OpenSUSE\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Last-Translator: Lucian Oprea <oprea.luci@gmail.com>\n"
+"Language-Team: Romanian <LL@li.org>\n"
+"PO-Revision-Date: 2012-11-19 15:00+0200\n"
+"MIME-Version: 1.0\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms:  nplurals=3; plural=n==1 ? 0 : (n==0 || (n%100 > 0 && n%100 < "
+"20)) ? 1 : 2;\n"
+"X-Generator: Narro 2.0 on http://tradu.softwareliber.ro\n"
+
+#: app/controllers/ldap_controller.rb:38
+msgid "Cannot read LDAP client configuraton."
+msgstr "Nu se poate citi configurația clientului LDAP."
+
+#: app/controllers/ldap_controller.rb:63
+msgid "LDAP client configuraton successfully written."
+msgstr "Configurația clientului LDAP a fost scrisă cu succes."
+
+#: app/controllers/ldap_controller.rb:65
+msgid "Error while saving LDAP client configuration."
+msgstr "Eroare la salvarea configurației clientului LDAP."
+
+#: app/views/ldap/index.html.erb:33
+msgid "This field is required."
+msgstr "Acest câmp este obligatoriu."
+
+#: app/views/ldap/index.html.erb:34
+msgid "Enter a valid domain name or an IP address."
+msgstr "Introduceți un nume de domeniu valid sau o adresă IP."
+
+#: app/views/ldap/index.html.erb:70
+msgid "Please wait"
+msgstr "Vă rugăm așteptați"
+
+#: app/views/ldap/index.html.erb:88
+msgid "LDAP client"
+msgstr "Client LDAP"
+
+#: app/views/ldap/index.html.erb:101
+msgid "Enable LDAP Authentication"
+msgstr "Activează autentificarea LDAP"
+
+#: app/views/ldap/index.html.erb:108
+msgid "LDAP Server Address"
+msgstr "Adresa serverului LDAP"
+
+#: app/views/ldap/index.html.erb:113
+msgid "Base DN"
+msgstr "DN de bază"
+
+#: app/views/ldap/index.html.erb:115
+msgid "Fetch DN"
+msgstr "Obține DN"
+
+#: app/views/ldap/index.html.erb:127
+msgid "Secure Connection"
+msgstr "Conexiune securizată"

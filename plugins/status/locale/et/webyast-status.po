@@ -1,183 +1,232 @@
 msgid ""
 msgstr ""
-"Project-Id-Version: webyast-status-ui 1.0.0\n"
-"POT-Creation-Date: 2010-08-02 09:18+0200\n"
+"Project-Id-Version: autoinst.fi\n"
+"POT-Creation-Date: 2012-06-07 15:20+0200\n"
 "PO-Revision-Date: 2003-09-22 13:26+0200\n"
 "Last-Translator: Ain Vagula <avagula@gmail.com>\n"
 "Language-Team: Estonian <et@li.org>\n"
+"Language: et\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: app/controllers/status_controller.rb:149
-#: app/controllers/status_controller.rb:149
+#: app/models/graph.rb:109
+msgid "GByte"
+msgstr ""
+
+# menu entry for hard disk installation
+#: app/models/graph.rb:110
+#, fuzzy
+#| msgid "Hard Disk"
+msgid "Disk"
+msgstr "Kõvaketas"
+
+#: app/models/graph.rb:133
+msgid "MByte/s"
+msgstr ""
+
+#: app/models/graph.rb:134
+msgid "Network"
+msgstr "Võrk"
+
+#: app/models/graph.rb:157
+msgid "MByte"
+msgstr ""
+
+#: app/models/graph.rb:158
+msgid "Memory"
+msgstr "Mälu"
+
+#: app/models/graph.rb:179
+msgid "Percent"
+msgstr ""
+
+#: app/models/graph.rb:180
+#, fuzzy
+#| msgid "CPUs"
+msgid "CPU"
+msgstr "CPUd"
+
+#: app/helpers/status_helper.rb:57 app/views/status/_status_graph.html.erb:125
+#: app/views/status/index.html.erb:53 app/views/status/index.html.erb:68
+#: app/views/status/index.html.erb:88 app/views/status/index.html.erb:237
+#, fuzzy
+#| msgid "Looking for CPU information..."
+msgid "Error: Cannot get information."
+msgstr "CPU teabe otsimine..."
+
+#: app/controllers/status_controller.rb:119
 msgid "No data found for showing system status."
 msgstr ""
 
-#: app/controllers/status_controller.rb:157
-#: app/controllers/status_controller.rb:157
+#: app/controllers/status_controller.rb:122
+#: app/controllers/status_controller.rb:160
+#: app/controllers/status_controller.rb:162
+#: app/controllers/status_controller.rb:164
 #, fuzzy
+#| msgid "SCPM not available"
 msgid "Status not available."
-msgstr "Info puudub."
+msgstr "SCPM pole saadaval"
 
-#: app/controllers/status_controller.rb:176
-#: app/controllers/status_controller.rb:176
-msgid "Can't connect to host"
+#: app/controllers/status_controller.rb:125
+#: app/controllers/status_controller.rb:169
+msgid "Collectd is out of sync."
 msgstr ""
 
-#: app/controllers/status_controller.rb:178
-#: app/controllers/status_controller.rb:178
-msgid "Can't connect to host %s."
-msgstr ""
-
-#: app/controllers/status_controller.rb:217
-#: app/controllers/status_controller.rb:217
+#: app/controllers/status_controller.rb:140
+#: app/controllers/status_controller.rb:198
 #, fuzzy
+#| msgid "SCPM not available"
+msgid "Status not available (no permissions)"
+msgstr "SCPM pole saadaval"
+
+#: app/controllers/status_controller.rb:150
+#, fuzzy
+#| msgid "Removal succeeded for \"%s\".\n"
 msgid "Limits exceeded for "
 msgstr "\"%s\" eemaldamine õnnestus.\n"
 
-#: app/controllers/status_controller.rb:242
-#: app/controllers/status_controller.rb:242
+#: app/controllers/status_controller.rb:263
 #, fuzzy
-msgid "Status not available"
-msgstr "Info puudub."
-
-#: app/controllers/status_controller.rb:266
-#: app/controllers/status_controller.rb:266
-#, fuzzy
-msgid "Status not available (no permissions)"
-msgstr "Info puudub."
-
-#: app/controllers/status_controller.rb:328
-#: app/controllers/status_controller.rb:328
-#, fuzzy
+#| msgid "Needed"
 msgid "exceeded"
 msgstr "Vajalik"
 
-#: app/controllers/status_controller.rb:342
-#: app/controllers/status_controller.rb:342
+#: app/controllers/status_controller.rb:277
 msgid "undercut"
 msgstr ""
 
-#: app/controllers/status_controller.rb:444
-#: app/controllers/status_controller.rb:444
+#: app/controllers/status_controller.rb:376
 msgid "Limits have been written."
 msgstr ""
 
-#: app/views/status/edit.html.erb:48 app/views/status/edit.html.erb:48
-msgid "Only numbers are valid !"
-msgstr ""
-
-#: app/views/status/edit.html.erb:75 app/views/status/index.html.erb:52
-#: app/views/status/edit.html.erb:75 app/views/status/index.html.erb:52
-#: shortcuts.yml:6
-msgid "Status"
-msgstr "Olek"
-
-#: app/views/status/edit.html.erb:75 app/views/status/edit.html.erb:75
-msgid "Settings"
-msgstr "Sätted"
-
-#: app/views/status/edit.html.erb:89 app/views/status/edit.html.erb:89
-msgid "undercuts"
-msgstr ""
-
-#: app/views/status/edit.html.erb:89 app/views/status/edit.html.erb:89
-#, fuzzy
-msgid "exceeds"
-msgstr "Uudisvood"
-
-#: app/views/status/index.html.erb:94 app/views/status/index.html.erb:94
-#, fuzzy
-msgid "details"
-msgstr "Üksikasjad"
-
-#: app/views/status/index.html.erb:110 app/views/status/index.html.erb:110
-msgid "Details"
-msgstr "Üksikasjad"
-
-#: app/views/status/index.html.erb:178 app/views/status/index.html.erb:178
-msgid "Edit Limits"
-msgstr ""
-
-#: app/views/status/_status_graph.html.erb:2
 #: app/views/status/_status_graph.html.erb:2
 #, fuzzy
+#| msgid "An error occurred during the installation."
 msgid "A problem occured when loading status information."
 msgstr "Paigaldamise käigus tekkis viga."
 
-#: app/views/status/_status_graph.html.erb:90
-#: app/views/status/_status_graph.html.erb:90
+#: app/views/status/_status_graph.html.erb:11
 #, fuzzy
+#| msgid "%1 Patches available"
+msgid "No data available"
+msgstr "%1 paika on saadaval"
+
+#: app/views/status/_status_graph.html.erb:100
+#, fuzzy
+#| msgid "&Show changes"
 msgid "Show last"
 msgstr "&Näita muudatusi"
 
-#: app/views/status/_status_graph.html.erb:91
-#: app/views/status/_status_graph.html.erb:91
+#: app/views/status/_status_graph.html.erb:102
 #, fuzzy
+#| msgid " Minutes"
 msgid "5 Minutes"
 msgstr " minutit"
 
-#: app/views/status/_status_graph.html.erb:92
-#: app/views/status/_status_graph.html.erb:92
+#: app/views/status/_status_graph.html.erb:103
 #, fuzzy
+#| msgid " Minutes"
 msgid "15 Minutes"
 msgstr " minutit"
 
-#: app/views/status/_status_graph.html.erb:93
-#: app/views/status/_status_graph.html.erb:93
+#: app/views/status/_status_graph.html.erb:104
 #, fuzzy
+#| msgid " Minutes"
 msgid "30 Minutes"
 msgstr " minutit"
 
-#: app/views/status/_status_graph.html.erb:94
-#: app/views/status/_status_graph.html.erb:94
+#: app/views/status/_status_graph.html.erb:105
 msgid "1 Hour"
 msgstr ""
 
-#: app/views/status/_status_graph.html.erb:95
-#: app/views/status/_status_graph.html.erb:95
+#: app/views/status/_status_graph.html.erb:106
 msgid "6 Hours"
 msgstr ""
 
-#: app/views/status/_status_graph.html.erb:96
-#: app/views/status/_status_graph.html.erb:96
+#: app/views/status/_status_graph.html.erb:107
 msgid "12 Hours"
 msgstr ""
 
-#: app/views/status/_status_summary.html.erb:6
-#: app/views/status/_status_summary.html.erb:6
+#: app/views/status/edit.html.erb:49
+msgid "Only numbers are valid !"
+msgstr ""
+
+#: app/views/status/edit.html.erb:81 app/views/status/index.html.erb:108
+msgid "Status"
+msgstr "Olek"
+
+#: app/views/status/edit.html.erb:81
+msgid "Settings"
+msgstr "Sätted"
+
+#: app/views/status/edit.html.erb:102
+msgid "undercuts"
+msgstr ""
+
+#: app/views/status/edit.html.erb:102
 #, fuzzy
+#| msgid "Feeds"
+msgid "exceeds"
+msgstr "Uudisvood"
+
+#: app/views/status/_status_summary.html.erb:4
+#, fuzzy
+#| msgid "An error occurred during the installation."
 msgid "An problem occured when loading status information."
 msgstr "Paigaldamise käigus tekkis viga."
 
-#: app/views/status/_status_summary.html.erb:13
-#: app/views/status/_status_summary.html.erb:13
-msgid "Cannot read system status - you have been logged out."
-msgstr ""
-
-#: app/views/status/_status_summary.html.erb:16
-#: app/views/status/_status_summary.html.erb:16
+#: app/views/status/_status_summary.html.erb:38
 msgid "Your system is healthy."
 msgstr ""
 
-#: app/views/status/_status_summary.html.erb:26
-#: app/views/status/_status_summary.html.erb:26
+#: app/views/status/_status_summary.html.erb:49
 #, fuzzy
+#| msgid "System Information"
 msgid "Loading system information"
 msgstr "Süsteemi info"
 
-#: app/views/status/_status_progress.html.erb:8
-#: app/views/status/_status_progress.html.erb:8
-msgid "Checking system status"
+#: app/views/status/_status_summary.html.erb:57
+msgid "Error: Cannot check the current status."
 msgstr ""
 
-#: shortcuts.yml:7
-msgid "Show system status"
+#: app/views/status/index.html.erb:157
+#, fuzzy
+#| msgid "Details"
+msgid "details"
+msgstr "Üksikasjad"
+
+#: app/views/status/index.html.erb:173
+msgid "Details"
+msgstr "Üksikasjad"
+
+#: app/views/status/index.html.erb:218
+msgid "Edit Limits"
 msgstr ""
 
 #, fuzzy
+#~| msgid "Connected to: %s"
+#~ msgid "Can't connect to host"
+#~ msgstr "Ühendatud: %s"
+
+#, fuzzy
+#~| msgid "Connected to: %s"
+#~ msgid "Can't connect to host %s."
+#~ msgstr "Ühendatud: %s"
+
+#, fuzzy
+#~| msgid "SCPM not available"
+#~ msgid "Status not available"
+#~ msgstr "SCPM pole saadaval"
+
+#, fuzzy
+#~| msgid "System Settings"
+#~ msgid "Show system status"
+#~ msgstr "Süsteemi sätted"
+
+#, fuzzy
+#~| msgid "The configuration is not initialized."
 #~ msgid "Mail configuration test not confirmed"
 #~ msgstr "Häälestus on initsialiseerimata."
 
@@ -201,6 +250,11 @@ msgstr ""
 
 #~ msgid "Save"
 #~ msgstr "Salvesta"
+
+#, fuzzy
+#~| msgid "No information available."
+#~ msgid "No status information available"
+#~ msgstr "Info puudub."
 
 #, fuzzy
 #~| msgid "Details..."

@@ -1,82 +1,131 @@
 # Translation into the walloon language.
 # Copyright (C) 2007 SUSE Linux Products GmbH.
-# Pablo Saratxaga <pablo@walon.org>, 2001, 2004.
-# Jean Cayron <jean.cayron@gmail.com>, 2007.
 #
+# Pablo Saratxaga <pablo@walon.org>, 2001, 2004.
+# Jean Cayron <jean.cayron@gmail.com>, 2007, 2011.
 msgid ""
 msgstr ""
-"Project-Id-Version: webyast-roles-ui 1.0.0\n"
-"POT-Creation-Date: 2010-08-02 09:18+0200\n"
-"PO-Revision-Date: 2004-04-05 17:37+0200\n"
+"Project-Id-Version: yast memory\n"
+"POT-Creation-Date: 2012-06-07 15:19+0200\n"
+"PO-Revision-Date: 2011-03-02 11:06+0100\n"
 "Last-Translator: Jean Cayron <jean.cayron@gmail.com>\n"
 "Language-Team: Walloon <i18n@suse.de>\n"
+"Language: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
+"X-Generator: Lokalize 1.2\n"
 
-#: app/controllers/roles_controller.rb:97
-#: app/controllers/roles_controller.rb:97
-msgid "Cannot find roles"
+#: app/controllers/roles_controller.rb:126
+msgid "Role name is invalid. Allowed is combination of a-z, A-Z, numbers, space, dash and underscore only."
 msgstr ""
 
-#: app/views/roles/index.rhtml:61 app/views/roles/index.rhtml:207
-#: app/views/roles/index.rhtml:213 app/views/roles/index.rhtml:61
-#: app/views/roles/index.rhtml:207 app/views/roles/index.rhtml:213
-msgid "Assign Users"
-msgstr ""
-
-#: app/views/roles/index.rhtml:62 app/views/roles/index.rhtml:62
-msgid "Selected Users"
-msgstr ""
-
-#: app/views/roles/index.rhtml:63 app/views/roles/index.rhtml:63
+#: app/controllers/roles_controller.rb:136
 #, fuzzy
-msgid "Available Users"
-msgstr "Ponts d' accès k' i gn a"
+#| msgid "This system is already registered."
+msgid "Role name is already used."
+msgstr "Ci sistinme ci a ddja stî edjîstré."
 
-#: app/views/roles/index.rhtml:64 app/views/roles/index.rhtml:64
-msgid "Click user names to assign/remove users"
-msgstr ""
+#: app/controllers/roles_controller.rb:155
+#, fuzzy
+#| msgid "Share '%s' has been successfully deleted."
+msgid "Role '%s' was successfully removed."
+msgstr "Li pårtaedje « %s » a stî disfacé comifåt."
 
-#: app/views/roles/index.rhtml:149 app/views/roles/index.rhtml:149
-#: shortcuts.yml:6
+#: app/views/roles/index.html.erb:7
 msgid "Roles"
+msgstr "Roles"
+
+#: app/views/roles/index.html.erb:25
+#, fuzzy
+#| msgid "Users assigned to role"
+msgid "In order to assign the user to roles,"
+msgstr "Uzeus aroyîs å role"
+
+#: app/views/roles/index.html.erb:26
+msgid "Drag and Drop the user labels into Role containers"
 msgstr ""
 
-#: app/views/roles/index.rhtml:153 app/views/roles/index.rhtml:153
+#: app/views/roles/index.html.erb:27
+msgid "Don't show this again"
+msgstr ""
+
+#: app/views/roles/index.html.erb:38
 msgid "Create Role"
 msgstr ""
 
-#: app/views/roles/index.rhtml:165 app/views/roles/index.rhtml:165
-#, fuzzy
-msgid "Assign Permissions"
-msgstr "Ponts d' accès k' i gn a"
+#: app/views/roles/index.html.erb:43
+msgid "Assign Users"
+msgstr ""
 
-#: app/views/roles/index.rhtml:168 app/views/roles/index.rhtml:168
+#: app/views/roles/index.html.erb:53
+#, fuzzy
+#| msgid "Users assigned to role"
+msgid "User already assigned"
+msgstr "Uzeus aroyîs å role"
+
+#: app/views/roles/index.html.erb:104
+#, fuzzy
+#| msgid "Available permissions"
+msgid "Assign Permissions"
+msgstr "Droets k' i gn a"
+
+#: app/views/roles/index.html.erb:107
 msgid "collapse all"
 msgstr ""
 
-#: shortcuts.yml:7
-msgid "Set permissions in roles and assign users to roles"
+#: app/views/roles/index.html.erb:169
+msgid "This field is required"
+msgstr "I fåt rimpli c' tchamp la"
+
+#: app/views/roles/index.html.erb:169
+msgid "Allowed is combination of a-z, A-Z, numbers, space, dash and underscore only."
 msgstr ""
 
+#: app/views/roles/index.html.erb:235
 #, fuzzy
+#| msgid "Please wait..."
+msgid "Please wait"
+msgstr "Riwaitî,s' i vs plait bén..."
+
+#~ msgid "Set permissions in roles and assign users to roles"
+#~ msgstr "Defini les droets dvins des roles eyet aroyî des uzeus a des roles"
+
+#, fuzzy
+#~| msgid "Select item"
+#~ msgid "Selected Users"
+#~ msgstr "Tchoezi cayet"
+
+#, fuzzy
+#~| msgid "Available Updates"
+#~ msgid "Available Users"
+#~ msgstr "Metaedje a djoû d' disponibes"
+
+#~| msgid "Invalid filesystem type"
+#~ msgid "Invalid role name"
+#~ msgstr "Mwais no d' role"
+
+#~| msgid "Permissions denied"
+#~ msgid "Permissions contained in role"
+#~ msgstr "Droets k' i gn a dvins l' role"
+
 #~| msgid "Permissions denied"
 #~ msgid "Permissions granted by role"
-#~ msgstr "Droets rifuzés"
+#~ msgstr "Droets dinés pal role"
 
-#, fuzzy
 #~| msgid "Description: "
 #~ msgid "Description of permissions"
-#~ msgstr "Discrijhaedje:"
+#~ msgstr "Discrijhaedje des droets"
 
-#, fuzzy
 #~| msgid "Description"
 #~ msgid ")}-description"
-#~ msgstr "Discrijhaedje"
+#~ msgstr ")}-discrijhaedje"
 
-#, fuzzy
+#~| msgid "Remaining Software"
+#~ msgid "Remaining users"
+#~ msgstr "Uzeus k' dimorèt"
+
 #~| msgid "&Save"
 #~ msgid "Save"
-#~ msgstr "&Schaper"
+#~ msgstr "Schaper"

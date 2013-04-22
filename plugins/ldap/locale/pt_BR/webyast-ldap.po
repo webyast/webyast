@@ -1,67 +1,75 @@
-# Copyright (C) 2006 SuSE Linux Products GmbH, Nuernberg
-# This file is distributed under the same license as the package.
+# @TITLE@
+# Copyright (C) 2006, SUSE Linux GmbH, Nuremberg
 #
+# This file is distributed under the same license as @PACKAGE@ package. FIRST
+#
+# Luiz Fernando Ranghetti <elchevive@opensuse.org>, 2011.
+# Isis Binder <isis.binder@gmail.com>, 2012.
 msgid ""
 msgstr ""
-"Project-Id-Version: webyast-ldap-ui\n"
-"POT-Creation-Date: 2010-08-18 10:19+0200\n"
-"PO-Revision-Date: 2010-08-26 09:31\n"
-"Last-Translator: Novell Language <language@novell.com>\n"
-"Language-Team: Novell Language <language@novell.com>\n"
+"Project-Id-Version: @PACKAGE@\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2012-06-07 15:20+0200\n"
+"PO-Revision-Date: 2012-10-01 12:10-0300\n"
+"Last-Translator: Isis Binder <isis.binder@gmail.com>\n"
+"Language-Team: Brazilian Portuguese <opensuse-pt@opensuse.org>\n"
+"Language: pt_BR\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Lokalize 1.2\n"
 "Plural-Forms: nplurals=2; plural=n>1;\n"
 
-#: app/controllers/ldap_controller.rb:39 ./app/controllers/ldap_controller.rb:39
+#: app/controllers/ldap_controller.rb:38
 msgid "Cannot read LDAP client configuraton."
-msgstr "Impossível ler configuração do cliente LDAP."
+msgstr "Não foi possível ler a configuração do cliente LDAP."
 
-#: app/controllers/ldap_controller.rb:62 ./app/controllers/ldap_controller.rb:62
+#: app/controllers/ldap_controller.rb:63
 msgid "LDAP client configuraton successfully written."
-msgstr "Configuração do cliente LDAP gravada com êxito."
+msgstr "A configuração do cliente LDAP foi salva com sucesso."
 
-#: app/controllers/ldap_controller.rb:67 ./app/controllers/ldap_controller.rb:67
+#: app/controllers/ldap_controller.rb:65
 msgid "Error while saving LDAP client configuration."
-msgstr "Erro ao gravar configuração do cliente LDAP."
+msgstr "Erro ao salvar a configuração do cliente LDAP."
 
-#: app/views/ldap/index.html.erb:33 ./app/views/ldap/index.html.erb:33
+#: app/views/ldap/index.html.erb:33
 msgid "This field is required."
-msgstr "Este campo é obrigatório."
+msgstr "É necessário preecher este campo."
 
-#: app/views/ldap/index.html.erb:34 ./app/views/ldap/index.html.erb:34
+#: app/views/ldap/index.html.erb:34
 msgid "Enter a valid domain name or an IP address."
-msgstr "Digite um nome de domínio ou um endereço IP válido."
+msgstr "Digite um nome de domínio válido ou um endereço IP."
 
-#: app/views/ldap/index.html.erb:77 ./app/views/ldap/index.html.erb:77
+#: app/views/ldap/index.html.erb:70
+msgid "Please wait"
+msgstr "Por favor, aguarde"
+
+#: app/views/ldap/index.html.erb:88
 msgid "LDAP client"
 msgstr "Cliente LDAP"
 
-#: app/views/ldap/index.html.erb:89 ./app/views/ldap/index.html.erb:89
+#: app/views/ldap/index.html.erb:101
 msgid "Enable LDAP Authentication"
-msgstr "Habilitar Autenticação LDAP"
+msgstr "Habilitar a autenticação LDAP"
 
-#: app/views/ldap/index.html.erb:92 ./app/views/ldap/index.html.erb:92
+#: app/views/ldap/index.html.erb:108
 msgid "LDAP Server Address"
-msgstr "Endereço do Servidor LDAP"
+msgstr "Endereço do servidor LDAP"
 
-#: app/views/ldap/index.html.erb:96 ./app/views/ldap/index.html.erb:96
+#: app/views/ldap/index.html.erb:113
 msgid "Base DN"
-msgstr "DN de Base"
+msgstr "Nome de domínio (DN) base"
 
-#: app/views/ldap/index.html.erb:99 ./app/views/ldap/index.html.erb:99
+#: app/views/ldap/index.html.erb:115
 msgid "Fetch DN"
-msgstr "Pesquisar DN"
+msgstr "Obter DN"
 
-#: app/views/ldap/index.html.erb:118 ./app/views/ldap/index.html.erb:118
+#: app/views/ldap/index.html.erb:127
 msgid "Secure Connection"
-msgstr "Conexão Segura"
+msgstr "Conexão segura"
 
-#: ./shortcuts.yml:6
-msgid "LDAP"
-msgstr "LDAP"
+#~ msgid "LDAP"
+#~ msgstr "LDAP"
 
-#: ./shortcuts.yml:7
-msgid "Configure LDAP client"
-msgstr "Configurar cliente LDAP"
-
+#~ msgid "Configure LDAP client"
+#~ msgstr "Configurar o cliente LDAP"

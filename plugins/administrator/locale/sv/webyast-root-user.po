@@ -1,95 +1,117 @@
-# Copyright (C) 2006 SuSE Linux Products GmbH, Nuernberg
-# This file is distributed under the same license as the package.
+# @TITLE@
+# Copyright (C) 2006, SUSE Linux GmbH, Nuremberg
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+# This file is distributed under the same license as @PACKAGE@ package. FIRST
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: yast_webclient_administrator\n"
-"POT-Creation-Date: 2010-04-13 13:36+0200\n"
-"PO-Revision-Date: 2010-04-20 09:47\n"
-"Last-Translator: Novell Language <language@novell.com>\n"
-"Language-Team: Novell Language <language@novell.com>\n"
+"Project-Id-Version: @PACKAGE@\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2012-06-07 15:20+0200\n"
+"PO-Revision-Date: 2005-09-18 19:09+0200\n"
+"Last-Translator: Mattias Newzella <newzella@linux.se>\n"
+"Language-Team: Swedish <sv@li.org>\n"
+"Language: sv\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"X-Generator: KBabel 1.10.1\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: app/controllers/administrator_controller.rb:32 app/views/administrator/index.html.erb:24
-msgid "Enter a valid e-mail address."
-msgstr "Ange en giltig e-postadress."
-
-#: app/controllers/administrator_controller.rb:40
-msgid "Passwords do not match."
-msgstr "Lösenorden överensstämmer inte."
-
-#: app/controllers/administrator_controller.rb:53
-msgid "Administrator settings have been written."
-msgstr "Administratörsinställningarna har skrivits."
-
-#: app/controllers/administrator_controller.rb:63
-msgid "Error while saving administrator settings: %s"
-msgstr "Ett fel inträffade när administratörsinställningarna sparades: %s"
-
-#: app/controllers/administrator_controller.rb:75
-msgid "Mail alias was set but outgoing mail server is not configured (%s<i>change</i>%s)."
-msgstr "Ett e-postalias har angetts men servern för utgående e-post har inte konfigurerats (%s<i>ändra</i>%s)."
-
-#: app/views/administrator/index.html.erb:1
-msgid "Administrator Settings"
-msgstr "Administratörsinställningar"
-
-#: app/views/administrator/index.html.erb:32
-msgid "The passwords do not match."
-msgstr "Lösenorden överensstämmer inte."
-
-#: app/views/administrator/index.html.erb:33
+#, fuzzy
+#| msgid "The PKCS12 password is required."
 msgid "A password is required."
-msgstr "Lösenord krävs."
+msgstr "PKCS12-lösenordet krävs."
 
-#: app/views/administrator/index.html.erb:38
-msgid "Password Strength:"
-msgstr "Säkert lösenord:"
+#, fuzzy
+#| msgid "Monitor Settings"
+msgid "Administrator Settings"
+msgstr "Bildskärmsinställningar"
 
-#: app/views/administrator/index.html.erb:40
-msgid "Weak"
-msgstr "Svagt"
+#, fuzzy
+#| msgid "Monitor Settings"
+msgid "Administrator settings have been written."
+msgstr "Bildskärmsinställningar"
 
-#: app/views/administrator/index.html.erb:41
-msgid "Normal"
-msgstr "Normalt"
-
-#: app/views/administrator/index.html.erb:42
-msgid "Medium"
-msgstr "Mellan"
-
-#: app/views/administrator/index.html.erb:43
-msgid "Strong"
-msgstr "Starkt"
-
-#: app/views/administrator/index.html.erb:44
-msgid "Very Strong"
-msgstr "Mycket starkt"
-
-#: app/views/administrator/index.html.erb:63
-msgid "Password Setup for User 'root'"
-msgstr "Installera lösenord för root-användare"
-
-#: app/views/administrator/index.html.erb:64
-msgid "New Password"
-msgstr "Nytt lösenord"
-
-#: app/views/administrator/index.html.erb:69
+#, fuzzy
+#| msgid "_Confirm Password:"
 msgid "Confirm Password"
-msgstr "Bekräfta lösenord"
+msgstr "_Bekräfta lösenord"
 
-#: app/views/administrator/index.html.erb:76
-msgid "Mail Setup for User 'root'"
-msgstr "Installera post för root-användare"
+#, fuzzy
+#| msgid "`%s' is not a valid ip address."
+msgid "Enter a valid e-mail address."
+msgstr "`%s' är inte en giltig ip-adress."
 
-#: app/views/administrator/index.html.erb:78
+#, fuzzy
+#| msgid "Error while closing old shadow file: %m"
+msgid "Error while saving administrator settings."
+msgstr "Ett fel uppstod när den gamla skuggfilen skulle stängas: %m"
+
 msgid "Forward system mail to"
-msgstr "Vidarebefordra systempost till"
+msgstr ""
 
-#: app/views/administrator/index.html.erb:81
+msgid "Mail Setup for User 'root'"
+msgstr ""
+
+msgid "Mail alias was set but outgoing mail server is not configured (%s<i>change</i>%s)."
+msgstr ""
+
+#, fuzzy
+#| msgid "_New Password:"
+msgid "New Password"
+msgstr "_Nytt lösenord:"
+
+msgid "Password Setup for User 'root'"
+msgstr ""
+
+msgid "Passwords do not match."
+msgstr "Lösenorden stämmer inte överens."
+
+#, fuzzy
+#| msgid "Please wait..."
+msgid "Please wait"
+msgstr "Vänta..."
+
+#, fuzzy
+#| msgid "Save"
 msgid "Save Mail Only"
-msgstr "Spara endast e-post"
+msgstr "Spara"
 
+#, fuzzy
+#| msgid "Passwords do not match."
+msgid "The passwords do not match."
+msgstr "Lösenorden stämmer inte överens."
+
+#, fuzzy
+#~| msgid "Passwords match"
+#~ msgid "Password Strength:"
+#~ msgstr "Lösenorden stämmer överens"
+
+#~ msgid "Normal"
+#~ msgstr "Normal"
+
+#, fuzzy
+#~| msgid "Media"
+#~ msgid "Medium"
+#~ msgstr "Media"
+
+#, fuzzy
+#~| msgid "YaST System Administration"
+#~ msgid "Manage system administrator"
+#~ msgstr "YaST-systemadministration"
+
+# password dialog title
+#~ msgid "Password"
+#~ msgstr "Lösenord"
+
+#, fuzzy
+#~| msgid "_Confirm Password:"
+#~ msgid "Confirm password"
+#~ msgstr "_Bekräfta lösenord"
+
+#, fuzzy
+#~| msgid "Change Password"
+#~ msgid "Save Password"
+#~ msgstr "Ändra lösenord"

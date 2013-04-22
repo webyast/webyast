@@ -3,191 +3,223 @@
 #
 # This file is distributed under the same license as @PACKAGE@ package. FIRST
 #
-# Mindaugas Baranauskas <embar@users.berlios.de>, 2010.
+# Mindaugas Baranauskas <opensuse.lietuviu.kalba@gmail.com>, 2010, 2011, 2012, 2013.
+# Mantas Kondrotas <dalelemanes@gmail.com>, 2010.
 msgid ""
 msgstr ""
-"Project-Id-Version: webyast-status-ui 1.0.0\n"
+"Project-Id-Version: @PACKAGE@\n"
 "Report-Msgid-Bugs-To: translation@suse.de\n"
-"POT-Creation-Date: 2010-08-02 09:18+0200\n"
-"PO-Revision-Date: 2010-01-04 13:00+0200\n"
-"Last-Translator: Mindaugas Baranauskas <embar@users.berlios.de>\n"
-"Language-Team: Lithuanian <kde-i18n-doc@kde.org>\n"
+"POT-Creation-Date: 2012-06-07 15:20+0200\n"
+"PO-Revision-Date: 2013-02-05 17:01+0200\n"
+"Last-Translator: Mindaugas Baranauskas <opensuse.lietuviu.kalba@gmail.com>\n"
+"Language-Team: Lithuanian <komp_lt@konferencijos.lt>\n"
+"Language: lt\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=3; plural=n%10==1 && n%100!=11 ? 0 : n%10>=2 && (n%"
-"100<10 || n%100>=20) ? 1 : 2;\n"
-"X-Generator: Lokalize 1.0\n"
+"Plural-Forms: nplurals=4; plural=(n%10==1 ? 0 : n%10==1 && n%100!=11 ? 1 : n%10>=2 && (n%100<10 || n%100>=20) ? 2 : 3);\n"
+"X-Generator: Lokalize 1.5\n"
 
-#: app/controllers/status_controller.rb:149
-#: app/controllers/status_controller.rb:149
+#: app/models/graph.rb:109
+msgid "GByte"
+msgstr "GBaitų"
+
+#: app/models/graph.rb:110
+msgid "Disk"
+msgstr "Diskas"
+
+#: app/models/graph.rb:133
+msgid "MByte/s"
+msgstr "Mbaitų/s"
+
+#: app/models/graph.rb:134
+msgid "Network"
+msgstr "Tinklas"
+
+#: app/models/graph.rb:157
+msgid "MByte"
+msgstr "Mbaitų"
+
+#: app/models/graph.rb:158
+msgid "Memory"
+msgstr "Atmintis"
+
+#: app/models/graph.rb:179
+msgid "Percent"
+msgstr "Procentų"
+
+#: app/models/graph.rb:180
+msgid "CPU"
+msgstr "Centrinis procesorius"
+
+#: app/helpers/status_helper.rb:57 app/views/status/_status_graph.html.erb:125
+#: app/views/status/index.html.erb:53 app/views/status/index.html.erb:68
+#: app/views/status/index.html.erb:88 app/views/status/index.html.erb:237
+msgid "Error: Cannot get information."
+msgstr "Klaida: nepavyksta gauti informacijos."
+
+#: app/controllers/status_controller.rb:119
 msgid "No data found for showing system status."
-msgstr "Nerasta duomenų apie sistemos būseną."
+msgstr "Nerasta duomenų apie parodomą sistemos būseną."
 
-#: app/controllers/status_controller.rb:157
-#: app/controllers/status_controller.rb:157
-#, fuzzy
+#: app/controllers/status_controller.rb:122
+#: app/controllers/status_controller.rb:160
+#: app/controllers/status_controller.rb:162
+#: app/controllers/status_controller.rb:164
 msgid "Status not available."
-msgstr "Būsenos informacija neprieinama"
+msgstr "Būklės peržiūra neprieinama."
 
-#: app/controllers/status_controller.rb:176
-#: app/controllers/status_controller.rb:176
-msgid "Can't connect to host"
-msgstr ""
+#: app/controllers/status_controller.rb:125
+#: app/controllers/status_controller.rb:169
+msgid "Collectd is out of sync."
+msgstr "Collectd nesusinchronizuota."
 
-#: app/controllers/status_controller.rb:178
-#: app/controllers/status_controller.rb:178
-msgid "Can't connect to host %s."
-msgstr ""
-
-#: app/controllers/status_controller.rb:217
-#: app/controllers/status_controller.rb:217
-#, fuzzy
-msgid "Limits exceeded for "
-msgstr "Ribas viršijo %s"
-
-#: app/controllers/status_controller.rb:242
-#: app/controllers/status_controller.rb:242
-#, fuzzy
-msgid "Status not available"
-msgstr "Būsenos informacija neprieinama"
-
-#: app/controllers/status_controller.rb:266
-#: app/controllers/status_controller.rb:266
-#, fuzzy
+#: app/controllers/status_controller.rb:140
+#: app/controllers/status_controller.rb:198
 msgid "Status not available (no permissions)"
-msgstr "Būsenos informacija neprieinama"
+msgstr "Būklės peržiūra neprieinama (neturima leidimų)."
 
-#: app/controllers/status_controller.rb:328
-#: app/controllers/status_controller.rb:328
-#, fuzzy
+#: app/controllers/status_controller.rb:150
+msgid "Limits exceeded for "
+msgstr "Ribas viršijo "
+
+#: app/controllers/status_controller.rb:263
 msgid "exceeded"
-msgstr "Reikalinga"
+msgstr "viršijo"
 
-#: app/controllers/status_controller.rb:342
-#: app/controllers/status_controller.rb:342
+#: app/controllers/status_controller.rb:277
 msgid "undercut"
-msgstr ""
+msgstr "nesukomplektavimas"
 
-#: app/controllers/status_controller.rb:444
-#: app/controllers/status_controller.rb:444
+#: app/controllers/status_controller.rb:376
 msgid "Limits have been written."
-msgstr ""
+msgstr "Ribos buvo įrašytos."
 
-#: app/views/status/edit.html.erb:48 app/views/status/edit.html.erb:48
+#: app/views/status/_status_graph.html.erb:2
+msgid "A problem occured when loading status information."
+msgstr "Įkeliant būsenos informaciją iškilo nesklandumų."
+
+#: app/views/status/_status_graph.html.erb:11
+msgid "No data available"
+msgstr "Nėra prieinamų duomenų"
+
+#: app/views/status/_status_graph.html.erb:100
+msgid "Show last"
+msgstr "Rodyti paskutines"
+
+#: app/views/status/_status_graph.html.erb:102
+msgid "5 Minutes"
+msgstr "5 minutes"
+
+#: app/views/status/_status_graph.html.erb:103
+msgid "15 Minutes"
+msgstr "15 minučių"
+
+#: app/views/status/_status_graph.html.erb:104
+msgid "30 Minutes"
+msgstr "30 minučių"
+
+#: app/views/status/_status_graph.html.erb:105
+msgid "1 Hour"
+msgstr "1 valandą"
+
+#: app/views/status/_status_graph.html.erb:106
+msgid "6 Hours"
+msgstr "6 valandas"
+
+#: app/views/status/_status_graph.html.erb:107
+msgid "12 Hours"
+msgstr "12 valandų"
+
+#: app/views/status/edit.html.erb:49
 msgid "Only numbers are valid !"
-msgstr ""
+msgstr "Leidžiami tik skaičiai !"
 
-#: app/views/status/edit.html.erb:75 app/views/status/index.html.erb:52
-#: app/views/status/edit.html.erb:75 app/views/status/index.html.erb:52
-#: shortcuts.yml:6
+#: app/views/status/edit.html.erb:81 app/views/status/index.html.erb:108
 msgid "Status"
 msgstr "Būsena"
 
-#: app/views/status/edit.html.erb:75 app/views/status/edit.html.erb:75
+#: app/views/status/edit.html.erb:81
 msgid "Settings"
-msgstr "Nustatymai"
+msgstr "Nuostatos"
 
-#: app/views/status/edit.html.erb:89 app/views/status/edit.html.erb:89
+#: app/views/status/edit.html.erb:102
 msgid "undercuts"
-msgstr ""
+msgstr "nesukomplektavimai"
 
-#: app/views/status/edit.html.erb:89 app/views/status/edit.html.erb:89
-#, fuzzy
+#: app/views/status/edit.html.erb:102
 msgid "exceeds"
-msgstr "Kanalai"
+msgstr "viršija"
 
-#: app/views/status/index.html.erb:94 app/views/status/index.html.erb:94
-#, fuzzy
-msgid "details"
-msgstr "Detalės"
-
-#: app/views/status/index.html.erb:110 app/views/status/index.html.erb:110
-msgid "Details"
-msgstr "Detalės"
-
-#: app/views/status/index.html.erb:178 app/views/status/index.html.erb:178
-msgid "Edit Limits"
-msgstr "Keisti ribas"
-
-#: app/views/status/_status_graph.html.erb:2
-#: app/views/status/_status_graph.html.erb:2
-#, fuzzy
-msgid "A problem occured when loading status information."
-msgstr "Įkeliant būsenos informaciją kilo nesklandumų."
-
-#: app/views/status/_status_graph.html.erb:90
-#: app/views/status/_status_graph.html.erb:90
-#, fuzzy
-msgid "Show last"
-msgstr "Rodyti darbastalį"
-
-#: app/views/status/_status_graph.html.erb:91
-#: app/views/status/_status_graph.html.erb:91
-#, fuzzy
-msgid "5 Minutes"
-msgstr " Minutės"
-
-#: app/views/status/_status_graph.html.erb:92
-#: app/views/status/_status_graph.html.erb:92
-#, fuzzy
-msgid "15 Minutes"
-msgstr " Minutės"
-
-#: app/views/status/_status_graph.html.erb:93
-#: app/views/status/_status_graph.html.erb:93
-#, fuzzy
-msgid "30 Minutes"
-msgstr " Minutės"
-
-#: app/views/status/_status_graph.html.erb:94
-#: app/views/status/_status_graph.html.erb:94
-msgid "1 Hour"
-msgstr ""
-
-#: app/views/status/_status_graph.html.erb:95
-#: app/views/status/_status_graph.html.erb:95
-msgid "6 Hours"
-msgstr ""
-
-#: app/views/status/_status_graph.html.erb:96
-#: app/views/status/_status_graph.html.erb:96
-msgid "12 Hours"
-msgstr ""
-
-#: app/views/status/_status_summary.html.erb:6
-#: app/views/status/_status_summary.html.erb:6
+#: app/views/status/_status_summary.html.erb:4
 msgid "An problem occured when loading status information."
-msgstr "Įkeliant būsenos informaciją kilo nesklandumų."
+msgstr "Įkeliant būsenos informaciją iškilo nesklandumų."
 
-#: app/views/status/_status_summary.html.erb:13
-#: app/views/status/_status_summary.html.erb:13
-msgid "Cannot read system status - you have been logged out."
-msgstr ""
-
-#: app/views/status/_status_summary.html.erb:16
-#: app/views/status/_status_summary.html.erb:16
+#: app/views/status/_status_summary.html.erb:38
 msgid "Your system is healthy."
 msgstr "Jūsų sistema tvarkinga."
 
-#: app/views/status/_status_summary.html.erb:26
-#: app/views/status/_status_summary.html.erb:26
-#, fuzzy
+#: app/views/status/_status_summary.html.erb:49
 msgid "Loading system information"
-msgstr "Sistemos informacija"
+msgstr "Įkeliama sistemos informacija"
 
-#: app/views/status/_status_progress.html.erb:8
-#: app/views/status/_status_progress.html.erb:8
-msgid "Checking system status"
-msgstr ""
+#: app/views/status/_status_summary.html.erb:57
+msgid "Error: Cannot check the current status."
+msgstr "Klaida: nepavyksta patikrinti dabartinės būsenos."
 
-#: shortcuts.yml:7
-msgid "Show system status"
-msgstr ""
+#: app/views/status/index.html.erb:157
+msgid "details"
+msgstr "išsamiau"
 
-#, fuzzy
+#: app/views/status/index.html.erb:173
+msgid "Details"
+msgstr "Išsamiau"
+
+#: app/views/status/index.html.erb:218
+msgid "Edit Limits"
+msgstr "Taisyti ribas"
+
+#~ msgid "Can't connect to host"
+#~ msgstr "Nepavyksta prisijungti prie pagrindinio kompiuterio"
+
+#~ msgid "Can't connect to host %s."
+#~ msgstr "Nepavyksta prisijungti prie pagrindinio kompiuterio %s."
+
+#~ msgid "Status not available"
+#~ msgstr "Būklės peržiūra neprieinama."
+
+#~ msgid "Cannot read system status - you have been logged out."
+#~ msgstr "Dabartinė sistemos būsena nežinoma - buvote atsijungęs(usi)."
+
+#~ msgid "Checking system status"
+#~ msgstr "Tikrinama sistemos būsena"
+
+#~ msgid "Show system status"
+#~ msgstr "Rodyti sistemos būseną"
+
+#~ msgid "Registration is missing"
+#~ msgstr "Trūksta registracijos"
+
+#~ msgid "Please register your system in order to get updates."
+#~ msgstr "Jei norite gauti atnaujinimus, prašome užsiregistruoti."
+
+#~ msgid "register"
+#~ msgstr "registruotis"
+
 #~ msgid "Mail configuration test not confirmed"
-#~ msgstr "%s konfigūracija nepavyko."
+#~ msgstr "Pašto konfigūravimo testas nepatvirtintas"
+
+#~ msgid "While configuring mail, a test mail was sent to %s . Was the mail delivered to this address?<br>If so, confirm it by pressing the button. Otherwise check your mail configuration again."
+#~ msgstr "Kol vyko pašto konfigūravimas, bandomasis laiškas buvo išsiųstas į %s . Ar šiuo adresu buvo pristatytas laiškas?<br>Jei taip, patvirtinkite jį paspausdami mygtuką. Priešingu atveju dar kartą patikrinkite pašto konfigūraciją."
+
+#~ msgid "It was not possible to retrieve the full hostname of the machine. If the mail could not be delivered, consult the network and/or mail configuration with your network administrator."
+#~ msgstr "Nebuvo įmanoma nuskaityti viso pagrindinio kompiuterio pavadinimo. Jei laiškas nebuvo įteiktas, pasikonsultuokite dėl tinklo ir/ar pašto konfigūracijos su tinko administratoriumi."
+
+#~ msgid "Test mail received"
+#~ msgstr "Bandomasis laiškas priimtas"
+
+#~ msgid "Start collectd"
+#~ msgstr "Paleisti collectd"
 
 #~ msgid "Invalid session, please login again."
 #~ msgstr "Negalima sesija, prisijunkite iš naujo."
@@ -229,6 +261,10 @@ msgstr ""
 
 #~ msgid "Save"
 #~ msgstr "Įrašyti"
+
+#~| msgid "No information available."
+#~ msgid "No status information available"
+#~ msgstr "Būsenos informacija neprieinama"
 
 #, fuzzy
 #~| msgid "Details..."

@@ -1,45 +1,121 @@
-# Jyri Palokangas <jmp@opensuse.org>, 2010.
+# Jyri Palokangas <jmp@opensuse.org>, 2010, 2011, 2012.
+# Harri Miettinen <harri.miettinen@opensuse.fi>, 2010.
+# Harri Miettinen <harmie@opensuse.fi>, 2011.
 msgid ""
 msgstr ""
 "Project-Id-Version: @PACKAGE@\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-04-13 13:36+0200\n"
-"PO-Revision-Date: 2010-05-04 15:15+0300\n"
-"Last-Translator: Jyri Palokangas <jmp@opensuse.org>\n"
-"Language-Team: TRANSLATIONS <kde-i18n-doc@kde.org>\n"
+"POT-Creation-Date: 2012-06-07 15:19+0200\n"
+"PO-Revision-Date: 2012-06-24 20:07+0300\n"
+"Last-Translator: Jyri Palokangas <jyri.palokangas@opensuse.org>\n"
+"Language-Team: Finnish <kde-i18n-doc@kde.org>\n"
+"Language: fi\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Lokalize 1.0\n"
+"X-Generator: Lokalize 1.2\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
 
-#: app/views/roles/_role_edit.erb:31
-#| msgid "Permissions denied"
-msgid "Permissions granted by role"
-msgstr "Rooli myönsi oikeudet"
+#: app/controllers/roles_controller.rb:126
+msgid "Role name is invalid. Allowed is combination of a-z, A-Z, numbers, space, dash and underscore only."
+msgstr "Roolin nimi ei kelpaa. Sallittuja yhdistelmiä ovat vain a-z, A-Z, numerot, välilyönti, väliviiva ja alaviiva."
 
-#: app/views/roles/_role_edit.erb:44
-#| msgid "Available Processors"
-msgid "Available permissions"
-msgstr "Käytettävissä olevat oikeudet"
+#: app/controllers/roles_controller.rb:136
+msgid "Role name is already used."
+msgstr "Roolin nimi on jo käytössä."
 
-#: app/views/roles/_role_edit.erb:56
-#| msgid "Description: "
-msgid "Description of permissions"
-msgstr "Oikeuksien kuvaus"
+#: app/controllers/roles_controller.rb:155
+msgid "Role '%s' was successfully removed."
+msgstr "Rooli '%s' poistettiin onnistuneesti."
 
-#: app/views/roles/_role_edit.erb:58
-#| msgid "description"
-msgid ")}-description"
-msgstr ")}-kuvaus"
-
-#: app/views/roles/_role_edit.erb:64
-msgid "Save"
-msgstr "Tallenna"
-
-#: app/views/roles/index.rhtml:12
-#| msgid "Role"
+#: app/views/roles/index.html.erb:7
 msgid "Roles"
 msgstr "Roolit"
 
+#: app/views/roles/index.html.erb:25
+msgid "In order to assign the user to roles,"
+msgstr "Määrätäksesi käyttäjille rooleja, "
 
+#: app/views/roles/index.html.erb:26
+msgid "Drag and Drop the user labels into Role containers"
+msgstr "Vedä ja pudota käyttäjiä Rooleihin"
+
+#: app/views/roles/index.html.erb:27
+msgid "Don't show this again"
+msgstr "Älä näytä tätä uudelleen"
+
+#: app/views/roles/index.html.erb:38
+msgid "Create Role"
+msgstr "Luo rooli"
+
+#: app/views/roles/index.html.erb:43
+msgid "Assign Users"
+msgstr "Määrää käyttäjille"
+
+#: app/views/roles/index.html.erb:53
+msgid "User already assigned"
+msgstr "Käyttäjä on jo määrätty"
+
+#: app/views/roles/index.html.erb:104
+msgid "Assign Permissions"
+msgstr "Määrää oikeudet"
+
+#: app/views/roles/index.html.erb:107
+msgid "collapse all"
+msgstr "pienennä kaikki"
+
+#: app/views/roles/index.html.erb:169
+msgid "This field is required"
+msgstr "Tämä kenttä vaaditaan"
+
+#: app/views/roles/index.html.erb:169
+msgid "Allowed is combination of a-z, A-Z, numbers, space, dash and underscore only."
+msgstr "Sallitut yhdistelmät ovat ainoastaan a-z, A-Z, numerot, välilyönti, väliviiva ja alaviiva."
+
+#: app/views/roles/index.html.erb:235
+msgid "Please wait"
+msgstr "Odota hetki"
+
+#~ msgid "Error: Could not remove role <i>%s</i>."
+#~ msgstr "Virhe: Roolin <i>%s</i> poistaminen ei onnistu."
+
+#~ msgid "Cannot find roles"
+#~ msgstr "Rooleja ei löydy"
+
+#~ msgid "Set permissions in roles and assign users to roles"
+#~ msgstr "Aseta roolien käyttöoikeudet ja määritä käyttäjille roolit"
+
+#~| msgid "Selected Resource"
+#~ msgid "Selected Users"
+#~ msgstr "Valitut käyttäjät"
+
+#~| msgid "Available Updates"
+#~ msgid "Available Users"
+#~ msgstr "Käytettävissä olevat käyttäjät"
+
+#~ msgid "Click user names to assign/remove users"
+#~ msgstr "Napsauta käyttäjän nimeä määrätäksesi/poistaaksesi käyttäjiä"
+
+#~ msgid "Invalid role name"
+#~ msgstr "Virheellinen roolin nimi"
+
+#~ msgid "Permissions contained in role"
+#~ msgstr "Oikeudet sisältyvät rooliin"
+
+#~ msgid "Permissions granted by role"
+#~ msgstr "Rooli myönsi oikeudet"
+
+#~ msgid "Available permissions"
+#~ msgstr "Käytettävissä olevat oikeudet"
+
+#~ msgid "Description of permissions"
+#~ msgstr "Oikeuksien kuvaus"
+
+#~ msgid ")}-description"
+#~ msgstr ")}-kuvaus"
+
+#~ msgid "Remaining users"
+#~ msgstr "Jäljellä olevat käyttäjät"
+
+#~ msgid "Save"
+#~ msgstr "Tallenna"

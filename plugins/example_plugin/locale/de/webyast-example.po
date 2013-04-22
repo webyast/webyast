@@ -1,37 +1,40 @@
-# SOME DESCRIPTIVE TITLE.
-# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
-# This file is distributed under the same license as the PACKAGE package.
-# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+# German translations for webyast-example-ui package.
+# Copyright (C) 2012 THE webyast-example-ui'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the webyast-example-ui package.
 #
-#, fuzzy
+# Automatically generated, 2012.
+# Michael Skiba <trans@michael-skiba.de>, 2012.
 msgid ""
 msgstr ""
 "Project-Id-Version: webyast-example-ui 1.0.0\n"
-"POT-Creation-Date: 2011-09-02 12:41+0200\n"
-"PO-Revision-Date: 2011-09-02 12:41+0200\n"
-"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
-"Language-Team: LANGUAGE <LL@li.org>\n"
+"POT-Creation-Date: 2012-06-07 15:20+0200\n"
+"PO-Revision-Date: 2012-04-10 07:47+0200\n"
+"Last-Translator: Michael Skiba <trans@michael-skiba.de>\n"
+"Language-Team: German <opensuse-translation-de@opensuse.org>\n"
+"Language: de\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Lokalize 1.2\n"
 
-#: app/controllers/example_controller.rb:26 ./app/controllers/example_controller.rb:26
+#: app/controllers/example_controller.rb:56
 msgid "File saved"
 msgstr "Datei gespeichert"
 
-#: app/controllers/example_controller.rb:28 ./app/controllers/example_controller.rb:28
+#: app/controllers/example_controller.rb:58
 msgid "Error while saving file: %s"
-msgstr "Fehler beim Speichern:"
+msgstr "Fehler beim Speichern der Datei: %s"
 
-#: app/views/example/index.erb:6 ./app/views/example/index.erb:6 ./shortcuts.yml:5
+#: app/views/example/index.erb:29
 msgid "Example"
 msgstr "Beispiel"
 
-#: app/views/example/index.erb:18 ./app/views/example/index.erb:18
+# Der Dateiname/-pfad bezieht sich wohl auf diesen Wiki-Artikel[0], sofern es keine deutsche Version mit deutschen Dateinamen gibt, sollte dieser hier nicht übersetzt werden.
+# [0] http://en.opensuse.org/openSUSE:WebYaST_ExamplePlugin
+#: app/views/example/index.erb:41
 msgid "Content of /var/log/YaST2/example_file"
 msgstr "Inhalt von /var/log/YaST2/example_file"
 
-#: ./shortcuts.yml:6
-msgid "This is an example plugin only"
-msgstr ""
+#~ msgid "This is an example plugin only"
+#~ msgstr "Dies ist nur ein Beispiel-Modul"

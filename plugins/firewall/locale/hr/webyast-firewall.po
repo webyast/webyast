@@ -1,60 +1,64 @@
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
 #
-# Krešimir Jozić <kjozic@gmail.com>, 2010.
+# Krešimir Jozić <kjozic@gmail.com>, 2010, 2011.
 msgid ""
 msgstr ""
-"Project-Id-Version: webyast-firewall-ui 1.0.0\n"
-"POT-Creation-Date: 2010-08-02 09:18+0200\n"
-"PO-Revision-Date: 2010-04-13 21:58+0200\n"
+"Project-Id-Version: yast_webclient firewall 1.0.0\n"
+"POT-Creation-Date: 2012-06-07 15:20+0200\n"
+"PO-Revision-Date: 2011-08-18 21:02+0200\n"
 "Last-Translator: Krešimir Jozić <kjozic@gmail.com>\n"
 "Language-Team: Croatian <kde-i18n-doc@kde.org>\n"
+"Language: hr\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%"
-"10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
-"X-Generator: Lokalize 1.0\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
+"X-Generator: Lokalize 1.2\n"
 
-#: app/controllers/firewall_controller.rb:72
-#: app/controllers/firewall_controller.rb:72
+#: app/controllers/firewall_controller.rb:91
 msgid "Firewall settings have been written."
 msgstr "Postavke vatrozida su sačuvane."
 
-#: app/views/firewall/index.rhtml:53 app/views/firewall/index.rhtml:53
-#, fuzzy
-msgid ""
-"Some of needed services (%s) are going to be blocked. WebYaST may not be "
-"usable anymore. Do you really want to block them?"
-msgstr ""
-"Neki od dozvoljenih servisa će biti blokirani. WebYaST se možda više neće "
-"moći koristiti."
+#: app/views/firewall/index.html.erb:45 app/views/firewall/index.html.erb:49
+msgid "Enabled"
+msgstr "Omogućeno"
 
-#: app/views/firewall/index.rhtml:80 app/views/firewall/index.rhtml:80
-#: shortcuts.yml:6
-msgid "Firewall"
-msgstr "Vatrozid"
+#: app/views/firewall/index.html.erb:46 app/views/firewall/index.html.erb:50
+msgid "Disabled"
+msgstr "Onemogućeno"
 
-#: app/views/firewall/index.rhtml:98 app/views/firewall/index.rhtml:98
-msgid "General settings"
-msgstr "Opće postavke"
-
-#: app/views/firewall/index.rhtml:105 app/views/firewall/index.rhtml:105
-msgid "Use Firewall"
-msgstr "Koristi vatrozid"
-
-#: app/views/firewall/index.rhtml:110 app/views/firewall/index.rhtml:110
+#: app/views/firewall/index.html.erb:74
 msgid "Allowed services"
 msgstr "Dozvoljeni servisi"
 
-#: app/views/firewall/index.rhtml:120 app/views/firewall/index.rhtml:120
+#: app/views/firewall/index.html.erb:88
 msgid "Blocked services"
 msgstr "Blokirani servisi"
 
-#: shortcuts.yml:7
-#, fuzzy
-msgid "Firewall settings"
-msgstr "Opće postavke"
+#: app/views/firewall/index.html.erb:126
+msgid "Some of needed services (%s) are going to be blocked. WebYaST may not be usable anymore. Do you really want to block them?"
+msgstr "Neki od potrebnih servisa (%s) će biti blokirani. WebYaST se možda više neće moći koristiti. Da li ih zaista želite blokirati?"
+
+#: app/views/firewall/index.html.erb:145
+msgid "Please wait"
+msgstr "Molim pričekajte"
+
+#: app/views/firewall/index.html.erb:150
+msgid "You have unsaved changes. Do you want to save your changes?"
+msgstr "Imate promjena koje nisu sačuvane. Da li ih želite sačuvati?"
+
+#~ msgid "Firewall"
+#~ msgstr "Vatrozid"
+
+#~ msgid "Firewall settings"
+#~ msgstr "Postavke vatrozida"
+
+#~ msgid "Use Firewall"
+#~ msgstr "Koristi vatrozid"
+
+#~ msgid "General settings"
+#~ msgstr "Opće postavke"
 
 #~ msgid "Block"
 #~ msgstr "Blokiraj"

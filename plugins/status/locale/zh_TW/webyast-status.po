@@ -1,184 +1,274 @@
-# Copyright (C) 2006 SuSE Linux Products GmbH, Nuernberg
-# This file is distributed under the same license as the package.
+# translation of yast_webclient_status.po to Chinese Traditional
+# @TITLE@
+# Copyright (C) 2006, SUSE Linux GmbH, Nuremberg
 #
+# This file is distributed under the same license as @PACKAGE@ package. FIRST
+#
+# swyear <swyear@gmail.com>, 2009, 2011.
 msgid ""
 msgstr ""
-"Project-Id-Version: webyast-status-ui\n"
-"POT-Creation-Date: 2010-08-18 10:18+0200\n"
-"PO-Revision-Date: 2010-08-26 09:34\n"
-"Last-Translator: Novell Language <language@novell.com>\n"
-"Language-Team: Novell Language <language@novell.com>\n"
+"Project-Id-Version: yast_webclient_status\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2012-06-07 15:20+0200\n"
+"PO-Revision-Date: 2011-10-12 10:20+0800\n"
+"Last-Translator: \n"
+"Language-Team: Chinese Traditional <zh@li.org>\n"
+"Language: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Lokalize 1.2\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
 
-#: app/controllers/status_controller.rb:149 ./app/controllers/status_controller.rb:149
-msgid "No data found for showing system status."
-msgstr "找不到可顯示系統狀態的資料。"
-
-#: app/controllers/status_controller.rb:157 ./app/controllers/status_controller.rb:157
-msgid "Status not available."
-msgstr "無法取得狀態。"
-
-#: app/controllers/status_controller.rb:176 ./app/controllers/status_controller.rb:176
-msgid "Can't connect to host"
-msgstr "無法連接至主機"
-
-#: app/controllers/status_controller.rb:178 ./app/controllers/status_controller.rb:178
-msgid "Can't connect to host %s."
-msgstr "無法連接到主機 %s。"
-
-#: app/controllers/status_controller.rb:217 ./app/controllers/status_controller.rb:217
-msgid "Limits exceeded for "
-msgstr "超出限制 "
-
-#: app/controllers/status_controller.rb:242 ./app/controllers/status_controller.rb:242
-msgid "Status not available"
-msgstr "無法取得狀態"
-
-#: app/controllers/status_controller.rb:266 ./app/controllers/status_controller.rb:266
-msgid "Status not available (no permissions)"
-msgstr "無法取得狀態 (無許可權)"
-
-#: app/controllers/status_controller.rb:328 ./app/controllers/status_controller.rb:328
-msgid "exceeded"
-msgstr "超過"
-
-#: app/controllers/status_controller.rb:342 ./app/controllers/status_controller.rb:342
-msgid "undercut"
-msgstr "低於"
-
-#: app/controllers/status_controller.rb:444 ./app/controllers/status_controller.rb:444
-msgid "Limits have been written."
-msgstr "已經寫入限制。"
-
-#: app/views/status/edit.html.erb:48 ./app/views/status/edit.html.erb:48
-msgid "Only numbers are valid !"
-msgstr "只有數字才是有效值！"
-
-#: app/views/status/edit.html.erb:75 app/views/status/index.html.erb:52
-#: ./app/views/status/edit.html.erb:75 ./app/views/status/index.html.erb:52 ./shortcuts.yml:6
-msgid "Status"
-msgstr "狀態"
-
-#: app/views/status/edit.html.erb:75 ./app/views/status/edit.html.erb:75
-msgid "Settings"
-msgstr "設定"
-
-#: app/views/status/edit.html.erb:89 ./app/views/status/edit.html.erb:89
-msgid "undercuts"
-msgstr "低於"
-
-#: app/views/status/edit.html.erb:89 ./app/views/status/edit.html.erb:89
-msgid "exceeds"
-msgstr "超過"
-
-#: app/views/status/index.html.erb:103 ./app/views/status/index.html.erb:103
-msgid "details"
-msgstr "詳細資料"
-
-#: app/views/status/index.html.erb:119 ./app/views/status/index.html.erb:119
-msgid "Details"
-msgstr "詳細資料"
-
-#: app/views/status/index.html.erb:187 ./app/views/status/index.html.erb:187
-msgid "Edit Limits"
-msgstr "編輯限制"
-
-#: app/views/status/_status_graph.html.erb:2 ./app/views/status/_status_graph.html.erb:2
-msgid "A problem occured when loading status information."
-msgstr "載入狀態資訊時發生問題。"
-
-#: app/views/status/_status_graph.html.erb:90 ./app/views/status/_status_graph.html.erb:90
-msgid "Show last"
-msgstr "顯示最後"
-
-#: app/views/status/_status_graph.html.erb:91 ./app/views/status/_status_graph.html.erb:91
-msgid "5 Minutes"
-msgstr "5 分鐘"
-
-#: app/views/status/_status_graph.html.erb:92 ./app/views/status/_status_graph.html.erb:92
-msgid "15 Minutes"
-msgstr "15 分鐘"
-
-#: app/views/status/_status_graph.html.erb:93 ./app/views/status/_status_graph.html.erb:93
-msgid "30 Minutes"
-msgstr "30 分鐘"
-
-#: app/views/status/_status_graph.html.erb:94 ./app/views/status/_status_graph.html.erb:94
-msgid "1 Hour"
-msgstr "1 小時"
-
-#: app/views/status/_status_graph.html.erb:95 ./app/views/status/_status_graph.html.erb:95
-msgid "6 Hours"
-msgstr "6 小時"
-
-#: app/views/status/_status_graph.html.erb:96 ./app/views/status/_status_graph.html.erb:96
-msgid "12 Hours"
-msgstr "12 小時"
-
-#: app/views/status/_status_summary.html.erb:6 ./app/views/status/_status_summary.html.erb:6
-msgid "An problem occured when loading status information."
-msgstr "載入狀態資訊時發生問題。"
-
-#: app/views/status/_status_summary.html.erb:13 ./app/views/status/_status_summary.html.erb:13
-msgid "Cannot read system status - you have been logged out."
-msgstr "無法讀取系統狀態，系統已將您登出。"
-
-#: app/views/status/_status_summary.html.erb:16 ./app/views/status/_status_summary.html.erb:16
-msgid "Your system is healthy."
-msgstr "您的系統狀態良好。"
-
-#: app/views/status/_status_summary.html.erb:26 ./app/views/status/_status_summary.html.erb:26
-msgid "Loading system information"
-msgstr "正在載入系統資訊"
-
-#: app/views/status/_status_progress.html.erb:8 ./app/views/status/_status_progress.html.erb:8
-msgid "Checking system status"
-msgstr "正在檢查狀態"
-
-#: ./shortcuts.yml:7
-msgid "Show system status"
-msgstr "顯示系統狀態"
-
-#: app/models/graph.rb:116 config/status_configuration.yaml:64 ./app/models/graph.rb:116
-#: ./config/status_configuration.yaml:64
+#: app/models/graph.rb:109
 msgid "GByte"
-msgstr "GB"
+msgstr ""
 
-#: app/models/graph.rb:117 config/status_configuration.yaml:63 ./app/models/graph.rb:117
-#: ./config/status_configuration.yaml:63
+#: app/models/graph.rb:110
 msgid "Disk"
 msgstr "磁碟"
 
-#: app/models/graph.rb:140 config/status_configuration.yaml:6 ./app/models/graph.rb:140
-#: ./config/status_configuration.yaml:6
+#: app/models/graph.rb:133
 msgid "MByte/s"
-msgstr "MB/s"
+msgstr ""
 
-#: app/models/graph.rb:141 config/status_configuration.yaml:5 ./app/models/graph.rb:141
-#: ./config/status_configuration.yaml:5
+#: app/models/graph.rb:134
 msgid "Network"
 msgstr "網路"
 
-#: app/models/graph.rb:163 config/status_configuration.yaml:87 ./app/models/graph.rb:163
-#: ./config/status_configuration.yaml:87
+#: app/models/graph.rb:157
 msgid "MByte"
-msgstr "MB"
+msgstr ""
 
-#: app/models/graph.rb:164 config/status_configuration.yaml:86 ./app/models/graph.rb:164
-#: ./config/status_configuration.yaml:86
+#: app/models/graph.rb:158
 msgid "Memory"
 msgstr "記憶體"
 
-#: app/models/graph.rb:185 config/status_configuration.yaml:29 ./app/models/graph.rb:185
-#: ./config/status_configuration.yaml:29
+#: app/models/graph.rb:179
 msgid "Percent"
 msgstr "百分比"
 
-#: app/models/graph.rb:186 config/status_configuration.yaml:28 ./app/models/graph.rb:186
-#: ./config/status_configuration.yaml:28
+#: app/models/graph.rb:180
 msgid "CPU"
 msgstr "CPU"
 
+#: app/helpers/status_helper.rb:57 app/views/status/_status_graph.html.erb:125
+#: app/views/status/index.html.erb:53 app/views/status/index.html.erb:68
+#: app/views/status/index.html.erb:88 app/views/status/index.html.erb:237
+#, fuzzy
+#| msgid "Loading patch information"
+msgid "Error: Cannot get information."
+msgstr "載入修正資訊"
+
+#: app/controllers/status_controller.rb:119
+msgid "No data found for showing system status."
+msgstr "顯示系統狀態沒有發現資料。"
+
+#: app/controllers/status_controller.rb:122
+#: app/controllers/status_controller.rb:160
+#: app/controllers/status_controller.rb:162
+#: app/controllers/status_controller.rb:164
+msgid "Status not available."
+msgstr "狀態無法使用。"
+
+#: app/controllers/status_controller.rb:125
+#: app/controllers/status_controller.rb:169
+msgid "Collectd is out of sync."
+msgstr ""
+
+#: app/controllers/status_controller.rb:140
+#: app/controllers/status_controller.rb:198
+msgid "Status not available (no permissions)"
+msgstr "狀態無法使用(不允許)"
+
+#: app/controllers/status_controller.rb:150
+msgid "Limits exceeded for "
+msgstr "超出限制 "
+
+#: app/controllers/status_controller.rb:263
+msgid "exceeded"
+msgstr "超出"
+
+#: app/controllers/status_controller.rb:277
+msgid "undercut"
+msgstr "刪除下方"
+
+#: app/controllers/status_controller.rb:376
+msgid "Limits have been written."
+msgstr "限制已被寫入。"
+
+#: app/views/status/_status_graph.html.erb:2
+msgid "A problem occured when loading status information."
+msgstr "載入狀態資訊時發生問題。"
+
+#: app/views/status/_status_graph.html.erb:11
+#, fuzzy
+#| msgid "No patches available"
+msgid "No data available"
+msgstr "沒有可用的修補程式"
+
+#: app/views/status/_status_graph.html.erb:100
+msgid "Show last"
+msgstr "顯示最末筆"
+
+#: app/views/status/_status_graph.html.erb:102
+msgid "5 Minutes"
+msgstr "5 分鐘"
+
+#: app/views/status/_status_graph.html.erb:103
+msgid "15 Minutes"
+msgstr "15 分鐘"
+
+#: app/views/status/_status_graph.html.erb:104
+msgid "30 Minutes"
+msgstr "30 分鐘"
+
+#: app/views/status/_status_graph.html.erb:105
+msgid "1 Hour"
+msgstr "1 小時"
+
+#: app/views/status/_status_graph.html.erb:106
+msgid "6 Hours"
+msgstr "6 小時"
+
+#: app/views/status/_status_graph.html.erb:107
+msgid "12 Hours"
+msgstr "12 小時"
+
+#: app/views/status/edit.html.erb:49
+msgid "Only numbers are valid !"
+msgstr "只可以用數字！"
+
+#: app/views/status/edit.html.erb:81 app/views/status/index.html.erb:108
+msgid "Status"
+msgstr "狀態"
+
+#: app/views/status/edit.html.erb:81
+msgid "Settings"
+msgstr "設定"
+
+#: app/views/status/edit.html.erb:102
+msgid "undercuts"
+msgstr "下方刪除"
+
+#: app/views/status/edit.html.erb:102
+msgid "exceeds"
+msgstr "超出"
+
+#: app/views/status/_status_summary.html.erb:4
+msgid "An problem occured when loading status information."
+msgstr "載入狀態資訊時發生問題。"
+
+#: app/views/status/_status_summary.html.erb:38
+msgid "Your system is healthy."
+msgstr "您的系統狀態良好。"
+
+#: app/views/status/_status_summary.html.erb:49
+msgid "Loading system information"
+msgstr "載入系統資訊"
+
+#: app/views/status/_status_summary.html.erb:57
+msgid "Error: Cannot check the current status."
+msgstr ""
+
+#: app/views/status/index.html.erb:157
+msgid "details"
+msgstr "詳細資料"
+
+#: app/views/status/index.html.erb:173
+msgid "Details"
+msgstr "詳細資料"
+
+#: app/views/status/index.html.erb:218
+msgid "Edit Limits"
+msgstr "編輯限制"
+
+#~ msgid "Can't connect to host"
+#~ msgstr "無法連線到主機"
+
+#~ msgid "Can't connect to host %s."
+#~ msgstr "無法連線到主機 %s。"
+
+#~ msgid "Status not available"
+#~ msgstr "狀態無法使用"
+
+#~ msgid "Cannot read system status - you have been logged out."
+#~ msgstr "無法讀取系統狀態 - 您已經被登出。"
+
+#~ msgid "Checking system status"
+#~ msgstr "檢查系統狀態"
+
+#~ msgid "Show system status"
+#~ msgstr "顯示系統狀態"
+
+#, fuzzy
+#~| msgid "Required file is missing: "
+#~ msgid "Registration is missing"
+#~ msgstr "缺少需要的檔案："
+
+#, fuzzy
+#~| msgid "Please restart your system as soon as possible."
+#~ msgid "Please register your system in order to get updates."
+#~ msgstr "請儘快重新啟動您的系統。"
+
+#, fuzzy
+#~| msgid "The configuration is not initialized."
+#~ msgid "Mail configuration test not confirmed"
+#~ msgstr "組態未初始化。"
+
+#, fuzzy
+#~| msgid "Start VPN connection"
+#~ msgid "Start collectd"
+#~ msgstr "開始 VPN 連線"
+
+#~ msgid "Invalid session, please login again."
+#~ msgstr "不適用的工作階段，請重新登入。"
+
+#~ msgid "Disk free limits exceeded;"
+#~ msgstr "超出磁碟可用空間限制;"
+
+#, fuzzy
+#~| msgid "Saving the changes failed"
+#~ msgid "Saving limits failed!"
+#~ msgstr "儲存變更失敗"
+
+#~ msgid "Disk usage"
+#~ msgstr "磁碟用量"
+
+#~ msgid "Back"
+#~ msgstr "上一步"
+
+#~ msgid "free"
+#~ msgstr "可用"
+
+#~ msgid "used"
+#~ msgstr "已使用"
+
+#~ msgid "Configure Status Limits"
+#~ msgstr "設定狀態限制"
+
+#~ msgid "Status Path"
+#~ msgstr "狀態路徑"
+
+#~ msgid "Minimum Value"
+#~ msgstr "最小值"
+
+#~ msgid "Maximum Value"
+#~ msgstr "最大值"
+
+#~ msgid "Save"
+#~ msgstr "儲存"
+
+#, fuzzy
+#~| msgid "No information available."
+#~ msgid "No status information available"
+#~ msgstr "沒有可用的資訊。"
+
+#~ msgid "Events"
+#~ msgstr "事件"
+
+#~ msgid "These values have been evaluated the last 5 minutes."
+#~ msgstr "此數值為最近 5 分鐘的評估。"
+
+#~ msgid "Show details..."
+#~ msgstr "顯示詳細資料..."

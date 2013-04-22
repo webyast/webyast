@@ -1,0 +1,65 @@
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+#
+# Krešimir Jozić <kjozic@gmail.com>, 2011.
+msgid ""
+msgstr ""
+"Project-Id-Version: webyast-activedirectory-ui 1.0.0\n"
+"POT-Creation-Date: 2012-06-07 15:20+0200\n"
+"PO-Revision-Date: 2011-08-18 21:00+0200\n"
+"Last-Translator: Krešimir Jozić <kjozic@gmail.com>\n"
+"Language-Team: Croatian <kde-i18n-doc@kde.org>\n"
+"Language: hr\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
+"X-Generator: Lokalize 1.2\n"
+
+msgid "Account settings"
+msgstr "Postavke računa"
+
+msgid "Active Directory"
+msgstr "Aktivni direktorij"
+
+msgid "Active Directory Domain"
+msgstr "Domena aktivnog direktorija"
+
+msgid "Active Directory client configuraton successfully written."
+msgstr "Postavke klijenta aktivnog direktorija su uspješno sačuvane."
+
+msgid "Administrator User Name"
+msgstr "Administratorsko korisničko ime"
+
+msgid "Cannot read Active Directory client configuraton."
+msgstr "Ne mogu učitati postavke klijenta aktivnog direktorija."
+
+msgid "Enable Authentication of AD users"
+msgstr "Omogući autorizaciju AD korisnika"
+
+msgid "Error while joining Active Directory domain: %s"
+msgstr "Dogodila se greška prilikom pridruživanja domeni aktivnog direktorija: %s"
+
+msgid "Error while leaving Active Directory domain: %s"
+msgstr "Dogodila se greška prilikom napuštanja domene aktivnog direktorija: %s"
+
+msgid "Error while saving Active Directory client configuration."
+msgstr "Dogodila se greška prilikom spremanja postavki klijenta aktivnog direktorija."
+
+msgid "Machine Account"
+msgstr "Korisnički račun računala"
+
+msgid "Machine is not member of given domain. Enter the credentials needed for join."
+msgstr "Računalo nije član zadane domene. Unesite ovlasti potrebne za pridruživanje."
+
+msgid "Password"
+msgstr "Lozinka"
+
+msgid "Please wait"
+msgstr "Molimo pričekajte"
+
+msgid "This field is required."
+msgstr "Polje je obavezno."
+
+#~ msgid "Configure the connection to Active Directory"
+#~ msgstr "Postavi vezu prema aktivnom direktoriju"

@@ -1,0 +1,78 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: @PACKAGE@\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2012-06-07 15:20+0200\n"
+"PO-Revision-Date: 2005-08-18 21:16+0300\n"
+"Last-Translator: Borislav Mitev <morbid_viper@tkzs.org>\n"
+"Language-Team: Bulgarian <bg@li.org>\n"
+"Language: bg\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: app/controllers/ldap_controller.rb:38
+#, fuzzy
+#| msgid "Could not load the global configuration."
+msgid "Cannot read LDAP client configuraton."
+msgstr "Не могат да се заредят глобалните настройки."
+
+#: app/controllers/ldap_controller.rb:63
+msgid "LDAP client configuraton successfully written."
+msgstr ""
+
+#: app/controllers/ldap_controller.rb:65
+#, fuzzy
+#| msgid "Try loading the default configuration."
+msgid "Error while saving LDAP client configuration."
+msgstr "Опитайте да заредите стандартните настройки."
+
+#: app/views/ldap/index.html.erb:33
+msgid "This field is required."
+msgstr ""
+
+#: app/views/ldap/index.html.erb:34
+#, fuzzy
+#| msgid "Enter your IP address."
+msgid "Enter a valid domain name or an IP address."
+msgstr "Въведете Вашия IP адрес."
+
+#: app/views/ldap/index.html.erb:70
+msgid "Please wait"
+msgstr ""
+
+#: app/views/ldap/index.html.erb:88
+msgid "LDAP client"
+msgstr ""
+
+#: app/views/ldap/index.html.erb:101
+#, fuzzy
+#| msgid "Authentication"
+msgid "Enable LDAP Authentication"
+msgstr "Автентификация"
+
+#: app/views/ldap/index.html.erb:108
+#, fuzzy
+#| msgid "Name Server Address"
+msgid "LDAP Server Address"
+msgstr "Адрес на сървъра за имена"
+
+#: app/views/ldap/index.html.erb:113
+msgid "Base DN"
+msgstr ""
+
+#: app/views/ldap/index.html.erb:115
+msgid "Fetch DN"
+msgstr ""
+
+#: app/views/ldap/index.html.erb:127
+#, fuzzy
+#| msgid "Current Connection"
+msgid "Secure Connection"
+msgstr "Текуща връзка"
+
+#, fuzzy
+#~| msgid "Configure Applet..."
+#~ msgid "Configure LDAP client"
+#~ msgstr "Настройка на аплет..."

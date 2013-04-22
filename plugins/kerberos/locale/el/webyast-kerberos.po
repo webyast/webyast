@@ -1,0 +1,67 @@
+#
+# Efstathios Iosifidis <diamond_gr@freemail.gr>, 2011.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: @PACKAGE@\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2012-06-07 15:20+0200\n"
+"PO-Revision-Date: 2011-08-14 12:33+0300\n"
+"Last-Translator: Efstathios Iosifidis <diamond_gr@freemail.gr>\n"
+"Language-Team: Ελληνικά, Σύγχρονα <opensuse-translation-el@opensuse.org>\n"
+"Language: el\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bits\n"
+"X-Generator: Lokalize 1.2\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: app/controllers/kerberos_controller.rb:30
+msgid "Cannot read Kerberos client configuraton."
+msgstr "Αδυναμία ανάγνωσης ρυθμίσεων πελάτη Kerberos."
+
+#: app/controllers/kerberos_controller.rb:45
+msgid "Kerberos client configuraton successfully written."
+msgstr "Επιτυχής εγγραφή ρυθμίσεων πελάτη Kerberos."
+
+#: app/controllers/kerberos_controller.rb:47
+msgid "Error while saving Kerberos client configuration."
+msgstr "Σφάλμα κατά την αποθήκευση ρυθμίσεων πελάτη Kerberos."
+
+#: app/views/kerberos/index.html.erb:32
+msgid "This field is required."
+msgstr "Αυτό το πεδίο απαιτείται."
+
+#: app/views/kerberos/index.html.erb:33
+msgid "Enter a valid domain name or an IP address."
+msgstr "Εισάγετε έγκυρο όνομα τομέα ή μια διεύθυνση ΙΡ."
+
+#: app/views/kerberos/index.html.erb:60
+msgid "Please wait"
+msgstr "Παρακαλώ περιμένετε"
+
+#: app/views/kerberos/index.html.erb:78
+msgid "Kerberos client"
+msgstr "Πελάτης Kerberos"
+
+#: app/views/kerberos/index.html.erb:91
+msgid "Enable Kerberos Authentication"
+msgstr "Ενεργοποίηση Πιστοποίησης Kerberos"
+
+#: app/views/kerberos/index.html.erb:98
+msgid "Default Domain"
+msgstr "Προκαθορισμένος Τομέας"
+
+#: app/views/kerberos/index.html.erb:103
+msgid "Default Realm"
+msgstr "Προεπιλεγμένη περιοχή"
+
+#: app/views/kerberos/index.html.erb:108
+msgid "KDC Server Address"
+msgstr "Διεύθυνση εξυπηρετητή KDC"
+
+#~ msgid "Kerberos"
+#~ msgstr "Kerberos"
+
+#~ msgid "Configure Kerberos client"
+#~ msgstr "Ρύθμιση πελάτη Kerberos"

@@ -1,294 +1,243 @@
 # Translation into the walloon language.
 # Copyright (C) 2007 SUSE Linux Products GmbH.
-# Pablo Saratxaga <pablo@walon.org>, 2001, 2004.
-# Jean Cayron <jean.cayron@gmail.com>, 2007.
 #
+# Pablo Saratxaga <pablo@walon.org>, 2001, 2004.
+# Jean Cayron <jean.cayron@gmail.com>, 2007, 2011.
 msgid ""
 msgstr ""
-"Project-Id-Version: webyast-registration-ui 1.0.0\n"
-"POT-Creation-Date: 2010-08-02 09:19+0200\n"
-"PO-Revision-Date: 2004-04-05 17:37+0200\n"
+"Project-Id-Version: yast memory\n"
+"POT-Creation-Date: 2012-06-07 15:20+0200\n"
+"PO-Revision-Date: 2011-03-02 11:02+0100\n"
 "Last-Translator: Jean Cayron <jean.cayron@gmail.com>\n"
 "Language-Team: Walloon <i18n@suse.de>\n"
+"Language: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
+"X-Generator: Lokalize 1.2\n"
 
-#: app/controllers/registration_controller.rb:32
-#: app/controllers/registration_controller.rb:32
+#: app/models/registration_state.rb:27
+msgid "Registration is missing"
+msgstr "I manke l' edjîstraedje"
+
+#: app/models/registration_state.rb:28
+msgid "Please register your system in order to get updates."
+msgstr "Edjîstrez vosse sistinme s' i vs plait po sawè rçure les metaedjes a djoû."
+
+#: app/models/registration_state.rb:30
 #, fuzzy
+#| msgid "register plugin"
+msgid "register"
+msgstr "edjîstrer tchôke-divins"
+
+#: app/controllers/registration_controller.rb:29
 msgid "Email"
-msgstr "Emiles"
+msgstr "Emile"
 
-#: app/controllers/registration_controller.rb:33
-#: app/controllers/registration_controller.rb:33
-#, fuzzy
+#: app/controllers/registration_controller.rb:30
 msgid "System name"
-msgstr "Sistinme"
+msgstr "No do sistinme"
 
-#: app/controllers/registration_controller.rb:34
-#: app/controllers/registration_controller.rb:34
-#, fuzzy
+#: app/controllers/registration_controller.rb:31
 msgid "SLES registration code"
-msgstr "Manaedjmint"
+msgstr "Côde d' edjîstraedje di SLES"
 
-#: app/controllers/registration_controller.rb:35
-#: app/controllers/registration_controller.rb:35
-#, fuzzy
+#: app/controllers/registration_controller.rb:32
 msgid "SLED registration code"
-msgstr "Manaedjmint"
+msgstr "Côde d' edjîstraedje di SLED"
 
-#: app/controllers/registration_controller.rb:36
-#: app/controllers/registration_controller.rb:36
+#: app/controllers/registration_controller.rb:33
 #, fuzzy
+#| msgid "SLES registration code"
+msgid "SLMS registration code"
+msgstr "Côde d' edjîstraedje di SLES"
+
+#: app/controllers/registration_controller.rb:34
 msgid "Appliance registration code"
-msgstr "Naivieu d' programes"
+msgstr "Côde d' edjîstraedje di l' éndjole"
 
-#: app/controllers/registration_controller.rb:37
-#: app/controllers/registration_controller.rb:37
-#, fuzzy
+#: app/controllers/registration_controller.rb:35
 msgid "WebYaST registration code"
-msgstr "Sourdant d' astalaedje di YaST"
+msgstr "Côde d' edjîstraedje di WebYast"
 
-#: app/controllers/registration_controller.rb:38
-#: app/controllers/registration_controller.rb:38
-#, fuzzy
+#: app/controllers/registration_controller.rb:36
 msgid "Registration code"
-msgstr "Manaedjmint"
+msgstr "Côde d' edjîstraedje"
 
-#: app/controllers/registration_controller.rb:39
-#: app/controllers/registration_controller.rb:39
-#, fuzzy
+#: app/controllers/registration_controller.rb:37
 msgid "Hostname"
-msgstr "Nos des lodjoes"
+msgstr "No do lodjoe"
 
-#: app/controllers/registration_controller.rb:40
-#: app/controllers/registration_controller.rb:40
-#, fuzzy
+#: app/controllers/registration_controller.rb:38
 msgid "Device name"
-msgstr "No do modem"
+msgstr "No d' l' éndjin"
 
-#: app/controllers/registration_controller.rb:41
-#: app/controllers/registration_controller.rb:41
+#: app/controllers/registration_controller.rb:39
 msgid "Appliance name"
-msgstr ""
+msgstr "No di l' éndjole"
 
-#: app/controllers/registration_controller.rb:42
-#: app/controllers/registration_controller.rb:42
-#, fuzzy
+#: app/controllers/registration_controller.rb:40
 msgid "registration code"
-msgstr "Manaedjmint"
+msgstr "côde d' edjîstraedje"
 
-#: app/controllers/registration_controller.rb:52
-#: app/controllers/registration_controller.rb:52
-msgid "Invalid session, please login again."
-msgstr ""
-
-#: app/controllers/registration_controller.rb:62
-#: app/controllers/registration_controller.rb:62
-msgid "No permissions for registration"
-msgstr ""
-
-#: app/controllers/registration_controller.rb:111
-#: app/controllers/registration_controller.rb:111
-#, fuzzy
+#: app/controllers/registration_controller.rb:81
 msgid "Please try to register again later."
-msgstr "Raloyîz vs al daegntoele, s' i vs plait."
+msgstr "Rissayîz di vs edjîstrer pus tård s' i vs plait."
 
-#: app/controllers/registration_controller.rb:115
-#: app/controllers/registration_controller.rb:115
+#: app/controllers/registration_controller.rb:85
 msgid "Registration did not succeed."
-msgstr ""
+msgstr "L' edjîstraedje n' a nén fwait kine."
 
-#: app/controllers/registration_controller.rb:119
-#: app/controllers/registration_controller.rb:119
-#, fuzzy
+#: app/controllers/registration_controller.rb:89
 msgid "Registration was skipped."
-msgstr "Manaedjmint"
+msgstr "L' edjîstraedje a stî passé."
 
-#: app/controllers/registration_controller.rb:123
-#: app/controllers/registration_controller.rb:123
+#: app/controllers/registration_controller.rb:93
 msgid "This may be a temporary issue."
-msgstr ""
+msgstr "C' est motoit on problinme ki pasrè."
 
-#: app/controllers/registration_controller.rb:127
-#: app/controllers/registration_controller.rb:127
+#: app/controllers/registration_controller.rb:97
 msgid "The system might not receive necessary updates."
 msgstr ""
 
-#: app/controllers/registration_controller.rb:143
-#: app/controllers/registration_controller.rb:143
+#: app/controllers/registration_controller.rb:113
 msgid "The registration server returned invalid or incomplete data."
-msgstr ""
+msgstr "Li sierveu d' edjpîstraedje a rtourné des mwaijhès dnêyes ou des dnêyes nén completes."
 
-#: app/controllers/registration_controller.rb:151
-#: app/controllers/registration_controller.rb:151
+#: app/controllers/registration_controller.rb:121
 msgid "Could not read the registration configuration."
-msgstr ""
+msgstr "Dji n' a sepou lére l' apontiaedje di l' edjîstraedje."
 
-#: app/controllers/registration_controller.rb:151
-#: app/controllers/registration_controller.rb:151
+#: app/controllers/registration_controller.rb:121
 msgid "The registration backend is not installed correctly"
 msgstr ""
 
-#: app/controllers/registration_controller.rb:152
-#: app/controllers/registration_controller.rb:152
+#: app/controllers/registration_controller.rb:122
 msgid "Please refer to your support contact."
 msgstr ""
 
-#: app/controllers/registration_controller.rb:181
-#: app/controllers/registration_controller.rb:181
+#: app/controllers/registration_controller.rb:151
 msgid "Please fill out missing entries."
 msgstr ""
 
-#: app/controllers/registration_controller.rb:213
-#: app/controllers/registration_controller.rb:213
-#, fuzzy
+#: app/controllers/registration_controller.rb:183
 msgid "Service added:"
-msgstr "Siervice oisté"
+msgstr "Siervice radjouté :"
 
-#: app/controllers/registration_controller.rb:217
-#: app/controllers/registration_controller.rb:223
-#: app/controllers/registration_controller.rb:217
-#: app/controllers/registration_controller.rb:223
-#, fuzzy
+#: app/controllers/registration_controller.rb:189
 msgid "Catalog enabled:"
-msgstr "Catalogue"
+msgstr "Catalogue èn alaedje :"
 
-#: app/controllers/registration_controller.rb:250
-#: app/controllers/registration_controller.rb:250
-#, fuzzy
+#: app/controllers/registration_controller.rb:215
 msgid "Repository added:"
-msgstr "Depot"
+msgstr "Depot radjouté :"
 
-#: app/controllers/registration_controller.rb:326
-#: app/controllers/registration_controller.rb:326
-#, fuzzy
+#: app/controllers/registration_controller.rb:357
 msgid "This system is already registered."
-msgstr "L' éndjin est ddja monté."
+msgstr "Ci sistinme ci a ddja stî edjîstré."
 
-#: app/controllers/registration_controller.rb:355
-#: app/controllers/registration_controller.rb:355
+#: app/controllers/registration_controller.rb:382
 msgid "Registration finished successfully."
-msgstr ""
+msgstr "L' edjîstraedje est tot fwait comifåt."
 
-#: app/controllers/registration_controller.rb:365
-#: app/controllers/registration_controller.rb:365
-msgid ""
-"<p><b>Repositories were not modified during the registration process.</b></"
-"p><p>It is likely that an incorrect registration code was used. If this is "
-"the case, please attempt the registration process again to get an update "
-"repository.</p><p>Please make sure that this system has an update repository "
-"configured, otherwise it will not receive updates.</p>"
-msgstr ""
-
-#: app/controllers/registration_controller.rb:399
-#: app/controllers/registration_controller.rb:399
+#: app/controllers/registration_controller.rb:396
 msgid "A connection to the registration server could not be established."
 msgstr ""
 
-#: app/controllers/registration_controller.rb:403
-#: app/controllers/registration_controller.rb:403
+#: app/controllers/registration_controller.rb:400
 msgid "The supplied registration data was invalid."
 msgstr ""
 
-#: app/controllers/registration_controller.rb:407
-#: app/controllers/registration_controller.rb:407
+#: app/controllers/registration_controller.rb:404
+#, fuzzy
+#| msgid "The registration server returned invalid or incomplete data."
 msgid "The registration code you entered was invalid."
-msgstr ""
+msgstr "Li sierveu d' edjpîstraedje a rtourné des mwaijhès dnêyes ou des dnêyes nén completes."
 
-#: app/controllers/registration_controller.rb:413
-#: app/controllers/registration_controller.rb:413
+#: app/controllers/registration_controller.rb:410
 msgid "The transmitted registration data created a conflict."
 msgstr ""
 
-#: app/controllers/registration_controller.rb:421
-#: app/controllers/registration_controller.rb:421
-msgid ""
-"Registration can not be performed. There is no product installed that can be "
-"registered."
+#: app/controllers/registration_controller.rb:418
+msgid "Registration can not be performed. There is no product installed that can be registered."
 msgstr ""
 
-#: app/controllers/registration_controller.rb:436
-#: app/controllers/registration_controller.rb:436
-msgid ""
-"A connection to the registration server could not be established or it did "
-"not reply."
+#: app/controllers/registration_controller.rb:442
+msgid "<p><b>Repositories were not modified during the registration process.</b></p><p>It is likely that an incorrect registration code was used. If this is the case, please attempt the registration process again to get an update repository.</p><p>Please make sure that this system has an update repository configured, otherwise it will not receive updates.</p>"
 msgstr ""
 
-#: app/controllers/registration_controller.rb:453
-#: app/controllers/registration_controller.rb:453
+#: app/controllers/registration_controller.rb:454
 msgid "The registration server returned invalid data."
 msgstr ""
 
-#: app/views/registration/index.rhtml:53 app/views/registration/index.rhtml:54
-#: app/views/registration/index.rhtml:53 app/views/registration/index.rhtml:54
+#: app/views/registration/index.html.erb:42
+#: app/views/registration/index.html.erb:57
+#, fuzzy
+#| msgid "Please wait..."
+msgid "Please wait"
+msgstr "Riwaitî,s' i vs plait bén..."
+
+#: app/views/registration/index.html.erb:64
+#: app/views/registration/index.html.erb:65
 msgid "Please enter a valid Email address."
 msgstr ""
 
-#: app/views/registration/index.rhtml:61 app/views/registration/index.rhtml:61
-msgid "register plugin"
-msgstr ""
-
-#: app/views/registration/index.rhtml:61 app/views/registration/index.rhtml:61
-#: shortcuts.yml:6
-#, fuzzy
+#: app/views/registration/index.html.erb:80
 msgid "Registration"
-msgstr "Manaedjmint"
+msgstr "Edjîstraedje"
 
-#: app/views/registration/index.rhtml:69 app/views/registration/index.rhtml:69
-#, fuzzy
+#: app/views/registration/index.html.erb:93
 msgid "Registration Information"
-msgstr "Informåcion so les plakes"
+msgstr "Informåcion so l' edjîstraedje"
 
-#: app/views/registration/index.rhtml:70 app/views/registration/index.rhtml:70
+#: app/views/registration/index.html.erb:99
 msgid "This system is registered"
-msgstr ""
+msgstr "Ci sistinme ci est edjîstré"
 
-#: app/views/registration/index.rhtml:71 app/views/registration/index.rhtml:71
-#, fuzzy
+#: app/views/registration/index.html.erb:102
 msgid "System number (GUID)"
-msgstr "Sistinme:"
+msgstr "Limero do sistinme (GUID)"
 
-#: app/views/registration/index.rhtml:72 app/views/registration/index.rhtml:72
-#, fuzzy
+#: app/views/registration/index.html.erb:105
 msgid "Register again"
-msgstr "Manaedjmint"
+msgstr "Redjîstrez vs cor on côp"
 
-#: app/views/registration/index.rhtml:79 app/views/registration/index.rhtml:79
+#: app/views/registration/index.html.erb:118
 msgid "Next"
 msgstr "Shuvant"
 
-#: app/views/registration/index.rhtml:89 app/views/registration/index.rhtml:89
-#, fuzzy
+#: app/views/registration/index.html.erb:131
 msgid "Mandatory Information"
-msgstr "Informåcion sol memwere"
+msgstr "Informåcion rekise"
 
-#: app/views/registration/index.rhtml:104
-#: app/views/registration/index.rhtml:104
+#: app/views/registration/index.html.erb:151
 msgid "Details"
 msgstr "Detays"
 
-#: app/views/registration/index.rhtml:128
-#: app/views/registration/index.rhtml:128
+#: app/views/registration/index.html.erb:179
 msgid "Postpone"
-msgstr ""
+msgstr "Rimete a pus tård"
 
-#: shortcuts.yml:7
-#, fuzzy
-msgid "System Registration"
-msgstr "Manaedjmint"
+#~ msgid "Invalid session, please login again."
+#~ msgstr "Session nén valåbe, relodjîz vs s' i vs plait bén."
 
-#, fuzzy
+#~ msgid "No permissions for registration"
+#~ msgstr "Pont d' droet a l' edjîstraedje"
+
+#~ msgid "System Registration"
+#~ msgstr "Edjîstraedje do sistinme"
+
 #~| msgid "Administration"
 #~ msgid "Registration did not finish."
-#~ msgstr "Manaedjmint"
+#~ msgstr "L' edjîstraedje n' a nén stî fini."
 
-#, fuzzy
+#~ msgid "Skip"
+#~ msgstr "Passer"
+
 #~| msgid "Form"
 #~ msgid "or"
-#~ msgstr "Fôme"
+#~ msgstr "oudonbén"
 
 #, fuzzy
 #~| msgid "Details"

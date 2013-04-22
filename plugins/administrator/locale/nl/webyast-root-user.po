@@ -1,95 +1,95 @@
-# Copyright (C) 2006 SuSE Linux Products GmbH, Nuernberg
-# This file is distributed under the same license as the package.
+# translation of yast_webclient_administrator.nl.po to Dutch
+# @TITLE@
+# Copyright (C) 2006, SUSE Linux GmbH, Nuremberg
 #
+# This file is distributed under the same license as @PACKAGE@ package. FIRST
+#
+# Freek de Kruijf <freek@opensuse.org>, 2009, 2010, 2011, 2012.
 msgid ""
 msgstr ""
-"Project-Id-Version: yast_webclient_administrator\n"
-"POT-Creation-Date: 2010-04-13 13:36+0200\n"
-"PO-Revision-Date: 2010-04-22 12:39\n"
-"Last-Translator: Novell Language <language@novell.com>\n"
-"Language-Team: Novell Language <language@novell.com>\n"
+"Project-Id-Version: yast_webclient_administrator.nl\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2012-06-07 15:20+0200\n"
+"PO-Revision-Date: 2012-06-18 21:25+0200\n"
+"Last-Translator: Freek de Kruijf <freek@opensuse.org>\n"
+"Language-Team: Dutch <opensuse-nl@opensuse.org>\n"
+"Language: nl\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Lokalize 1.2\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
 
-#: app/controllers/administrator_controller.rb:32 app/views/administrator/index.html.erb:24
-msgid "Enter a valid e-mail address."
-msgstr "Geef een geldig e-mailadres op."
-
-#: app/controllers/administrator_controller.rb:40
-msgid "Passwords do not match."
-msgstr "Wachtwoorden komen niet overeen."
-
-#: app/controllers/administrator_controller.rb:53
-msgid "Administrator settings have been written."
-msgstr "Systeembeheerderinstellingen zijn opgeslagen."
-
-#: app/controllers/administrator_controller.rb:63
-msgid "Error while saving administrator settings: %s"
-msgstr "Fout bij het opslaan van beheerdersinstellingen: %s"
-
-#: app/controllers/administrator_controller.rb:75
-msgid "Mail alias was set but outgoing mail server is not configured (%s<i>change</i>%s)."
-msgstr "Mailalias is ingesteld, maar server voor uitgaande mail is niet geconfigureerd (%s<i>wijzigen</i>%s)."
-
-#: app/views/administrator/index.html.erb:1
-msgid "Administrator Settings"
-msgstr "Beheerderinstellingen"
-
-#: app/views/administrator/index.html.erb:32
-msgid "The passwords do not match."
-msgstr "De wachtwoorden komen niet overeen."
-
-#: app/views/administrator/index.html.erb:33
 msgid "A password is required."
 msgstr "Wachtwoord is vereist."
 
-#: app/views/administrator/index.html.erb:38
-msgid "Password Strength:"
-msgstr "Wachtwoordsterkte:"
+msgid "Administrator Settings"
+msgstr "Systeembeheerderinstellingen"
 
-#: app/views/administrator/index.html.erb:40
-msgid "Weak"
-msgstr "Zwak"
+msgid "Administrator settings have been written."
+msgstr "Systeembeheerderinstellingen zijn weggeschreven."
 
-#: app/views/administrator/index.html.erb:41
-msgid "Normal"
-msgstr "Normaal"
-
-#: app/views/administrator/index.html.erb:42
-msgid "Medium"
-msgstr "Medium"
-
-#: app/views/administrator/index.html.erb:43
-msgid "Strong"
-msgstr "Sterk"
-
-#: app/views/administrator/index.html.erb:44
-msgid "Very Strong"
-msgstr "Zeer sterk"
-
-#: app/views/administrator/index.html.erb:63
-msgid "Password Setup for User 'root'"
-msgstr "Wachtwoord instellen voor hoofdgebruiker"
-
-#: app/views/administrator/index.html.erb:64
-msgid "New Password"
-msgstr "Nieuw wachtwoord"
-
-#: app/views/administrator/index.html.erb:69
 msgid "Confirm Password"
 msgstr "Wachtwoord bevestigen"
 
-#: app/views/administrator/index.html.erb:76
-msgid "Mail Setup for User 'root'"
-msgstr "Mail instellen voor hoofdgebruiker"
+msgid "Enter a valid e-mail address."
+msgstr "Geef een geldig e-mailadres op."
 
-#: app/views/administrator/index.html.erb:78
+msgid "Error while saving administrator settings."
+msgstr "Fout bij het opslaan van beheerdersinstellingen."
+
 msgid "Forward system mail to"
-msgstr "Systeeme-mail doorsturen naar"
+msgstr "Systeem e-mail doorsturen naar"
 
-#: app/views/administrator/index.html.erb:81
+msgid "Mail Setup for User 'root'"
+msgstr "E-mail-instelling voor gebruiker 'root'"
+
+msgid "Mail alias was set but outgoing mail server is not configured (%s<i>change</i>%s)."
+msgstr "E-mail-alias was ingesteld maar de uitgaande mailserver is niet geconfigureerd (%s<i>wijziging</i>%s)."
+
+# password dialog title
+msgid "New Password"
+msgstr "Nieuw wachtwoord"
+
+msgid "Password Setup for User 'root'"
+msgstr "Wachtwoordinstellingen van 'root'"
+
+msgid "Passwords do not match."
+msgstr "Wachtwoorden komen niet overeen."
+
+msgid "Please wait"
+msgstr "Een ogenblik geduld"
+
 msgid "Save Mail Only"
-msgstr "Alleen mail opslaan"
+msgstr "Aleen e-mail opslaan"
 
+msgid "The passwords do not match."
+msgstr "De wachtwoorden komen niet overeen."
+
+#~ msgid "Password Strength:"
+#~ msgstr "Wachtwoordsterkte:"
+
+#~ msgid "Weak"
+#~ msgstr "Zwak"
+
+#~ msgid "Normal"
+#~ msgstr "Normaal"
+
+#~ msgid "Medium"
+#~ msgstr "Middel"
+
+#~ msgid "Strong"
+#~ msgstr "Sterk"
+
+#~ msgid "Very Strong"
+#~ msgstr "Erg sterk"
+
+#~ msgid "Manage system administrator"
+#~ msgstr "Beheer de systeembeheerder"
+
+#~ msgid "Here, configure the settings for system administrator ('root')."
+#~ msgstr "Hier de instellingen voor de systeembeheerder ('root') configureren."
+
+#~| msgid "Change Password"
+#~ msgid "Save Password"
+#~ msgstr "Wachtwoord opslaan"

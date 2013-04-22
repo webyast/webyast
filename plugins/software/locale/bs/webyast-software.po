@@ -2,374 +2,432 @@ msgid ""
 msgstr ""
 "Project-Id-Version: @PACKAGE@\n"
 "Report-Msgid-Bugs-To: translation@suse.de\n"
-"POT-Creation-Date: 2010-04-13 13:37+0200\n"
+"POT-Creation-Date: 2012-06-07 15:20+0200\n"
 "PO-Revision-Date: 2002-07-23 18:27+0200\n"
 "Last-Translator: Damir Bjelobradic <Nagual@lugbih.org>\n"
 "Language-Team: Bosnian <i18n@suse.de>\n"
+"Language: bs\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
 
-#: app/helpers/repositories_helper.rb:5
+#: app/models/patch.rb:150
+msgid "Please reboot your system."
+msgstr ""
+
+#: app/models/patches_state.rb:30
+msgid "EULA accept required"
+msgstr ""
+
+#: app/models/patches_state.rb:31
+msgid "Package require accept specific EULA before its installation. Please follow the link."
+msgstr ""
+
+#: app/models/patches_state.rb:34
+msgid "decide"
+msgstr ""
+
+#: app/models/patches_state.rb:43
+msgid "Patch installation messages not confirmed"
+msgstr ""
+
+#: app/models/patches_state.rb:47
+msgid "OK"
+msgstr "U redu"
+
+#: app/helpers/repositories_helper.rb:25
 msgid "Highest"
 msgstr ""
 
-#: app/helpers/repositories_helper.rb:6
+#: app/helpers/repositories_helper.rb:26
 msgid "Higher"
 msgstr ""
 
-#: app/helpers/repositories_helper.rb:7
+#: app/helpers/repositories_helper.rb:27
 msgid "Default"
 msgstr ""
 
-#: app/helpers/repositories_helper.rb:8
+#: app/helpers/repositories_helper.rb:28
 msgid "Low"
 msgstr ""
 
-#: app/helpers/repositories_helper.rb:9
+#: app/helpers/repositories_helper.rb:29
 msgid "Lowest"
 msgstr ""
 
-#: app/helpers/repositories_helper.rb:15
+#: app/helpers/repositories_helper.rb:35
 msgid "Highest priority"
 msgstr ""
 
-#: app/helpers/repositories_helper.rb:16
+#: app/helpers/repositories_helper.rb:36
 msgid "Higher priority"
 msgstr ""
 
-#: app/helpers/repositories_helper.rb:18
+#: app/helpers/repositories_helper.rb:38
 msgid "Low priority"
 msgstr ""
 
-#: app/helpers/repositories_helper.rb:19
+#: app/helpers/repositories_helper.rb:39
 msgid "Lowest priority"
 msgstr ""
 
-#: app/helpers/repositories_helper.rb:24
+#: app/helpers/repositories_helper.rb:44
 msgid "Custom priority"
 msgstr ""
 
-#: app/helpers/repositories_helper.rb:29
+#: app/helpers/repositories_helper.rb:49
 msgid "Custom"
 msgstr ""
 
-#: app/helpers/repositories_helper.rb:41
-#: app/views/repositories/index.html.erb:119
-#: app/views/repositories/add.html.erb:42
+#: app/helpers/repositories_helper.rb:61
+#: app/views/repositories/new.html.erb:67
+#: app/views/repositories/index.html.erb:264
 msgid "enable"
 msgstr ""
 
-#: app/helpers/repositories_helper.rb:41
-#: app/views/repositories/index.html.erb:124
-#: app/views/repositories/add.html.erb:49
+#: app/helpers/repositories_helper.rb:61
+#: app/views/repositories/new.html.erb:74
+#: app/views/repositories/index.html.erb:267
 msgid "disable"
 msgstr ""
 
-#: app/helpers/repositories_helper.rb:46
+#: app/helpers/repositories_helper.rb:66
 msgid "enabled"
 msgstr ""
 
-#: app/helpers/repositories_helper.rb:46
+#: app/helpers/repositories_helper.rb:66
 msgid "disabled"
 msgstr ""
 
-#: app/controllers/repositories_controller.rb:14
-msgid "Alias"
+#: app/helpers/repositories_helper.rb:83
+msgid "Repository is currently %senabled%s."
 msgstr ""
 
-#: app/controllers/repositories_controller.rb:15
-#: app/views/repositories/index.html.erb:151
-msgid "Enabled"
+#: app/helpers/repositories_helper.rb:85
+msgid "Repository is currently %sdisabled%s."
 msgstr ""
 
-#: app/controllers/repositories_controller.rb:16
-msgid "Autorefresh"
+#: app/helpers/repositories_helper.rb:90
+msgid "Autorefresh is currently %senabled%s."
 msgstr ""
 
-#: app/controllers/repositories_controller.rb:17
-#: app/views/patch_updates/_patches.html.erb:14
-msgid "Name"
-msgstr "Naziv"
-
-#: app/controllers/repositories_controller.rb:18
-msgid "URL"
+#: app/helpers/repositories_helper.rb:92
+msgid "Autorefresh is currently %sdisabled %s."
 msgstr ""
 
-#: app/controllers/repositories_controller.rb:19
-msgid "Priority"
+#: app/helpers/repositories_helper.rb:97
+msgid "Keeping downloaded packages is currently %senabled%s."
 msgstr ""
 
-#: app/controllers/repositories_controller.rb:20
-msgid "Keep downloaded packages"
+#: app/helpers/repositories_helper.rb:99
+msgid "Keeping downloaded packages is currently %sdisabled%s."
 msgstr ""
 
-#: app/controllers/repositories_controller.rb:30
+#: app/helpers/repositories_helper.rb:103
+msgid "Repository will be enabled."
+msgstr ""
+
+#: app/helpers/repositories_helper.rb:103
+msgid "Repository will be disabled."
+msgstr ""
+
+#: app/helpers/repositories_helper.rb:107
+msgid "Autorefresh will be enabled."
+msgstr ""
+
+#: app/helpers/repositories_helper.rb:107
+msgid "Autorefresh will be disabled."
+msgstr ""
+
+#: app/helpers/repositories_helper.rb:111
+msgid "Keep packages option will be enabled."
+msgstr ""
+
+#: app/helpers/repositories_helper.rb:111
+msgid "Keep packages option will be disabled."
+msgstr ""
+
+#: app/controllers/patches_controller.rb:101
+msgid "There are patch installation messages available"
+msgstr ""
+
+#: app/controllers/patches_controller.rb:119
+msgid "Cannot obtain patches, installation in progress. Remain %d packages."
+msgstr ""
+
+#: app/controllers/patches_controller.rb:129
+#: app/controllers/patches_controller.rb:182
+msgid "Cannot read patch updates: GPG key for repository <em>%s</em> is not trusted."
+msgstr ""
+
+#: app/controllers/patches_controller.rb:170
+msgid "Cannot obtain patches, installation in progress. Remain %d patches."
+msgstr ""
+
+#: app/controllers/repositories_controller.rb:50
 msgid "Cannot read repository list."
 msgstr ""
 
-#: app/controllers/repositories_controller.rb:47
-#: app/controllers/repositories_controller.rb:74
-msgid "Missing repository parameter"
+#: app/controllers/repositories_controller.rb:117
+#: app/controllers/repositories_controller.rb:126
+msgid "Cannot update repository '%s': missing parameters."
 msgstr ""
 
-#: app/controllers/repositories_controller.rb:102
-#: app/controllers/repositories_controller.rb:183
-msgid "Invalid priority"
+#: app/controllers/repositories_controller.rb:134
+msgid "Repository '%s' has been updated."
 msgstr ""
 
-#: app/controllers/repositories_controller.rb:171
-msgid "Missing repository parameters"
+#: app/controllers/repositories_controller.rb:172
+msgid "Repository '%s' was not found."
 msgstr ""
 
-#: app/controllers/repositories_controller.rb:209
-msgid "Unknown backend error"
+#: app/controllers/repositories_controller.rb:189
+#: app/controllers/repositories_controller.rb:196
+msgid "Cannot remove repository '%s'"
 msgstr ""
 
-#: app/controllers/patch_updates_controller.rb:45
-#: app/controllers/patch_updates_controller.rb:48
-#: app/views/patch_updates/_patch_progress.html.erb:1
-msgid "A problem occured when loading patch information."
+#: app/controllers/repositories_controller.rb:203
+msgid "Repository '%s' has been deleted."
 msgstr ""
 
-#: app/controllers/patch_updates_controller.rb:105
-#, fuzzy
-#| msgid "Initializing parallel port..."
-msgid "Installing all patches..."
-msgstr "Inicijaliziram paralelni port..."
-
-#: app/controllers/patch_updates_controller.rb:113
-msgid "Installation stopped"
-msgstr ""
-
-#: app/controllers/patch_updates_controller.rb:150
-msgid "Installation finished"
-msgstr ""
-
-#: app/controllers/patch_updates_controller.rb:152
-msgid "%s installed."
-msgstr ""
-
-#: app/controllers/patch_updates_controller.rb:181
-msgid "Patch has been installed."
-msgstr ""
-
-#: app/views/repositories/index.html.erb:20
-#: app/views/repositories/add.html.erb:16
+#: app/views/repositories/new.html.erb:32
+#: app/views/repositories/index.html.erb:167
 msgid "Enter a valid repository URL."
 msgstr ""
 
-#: app/views/repositories/index.html.erb:28
-#: app/views/repositories/add.html.erb:24
+#: app/views/repositories/new.html.erb:40
+#: app/views/repositories/index.html.erb:175
 msgid "Symbols <b>%s</b> are not allowed in repository alias."
 msgstr ""
 
-#: app/views/repositories/index.html.erb:32
-#: app/views/repositories/add.html.erb:31
+#: app/views/repositories/new.html.erb:47
+#: app/views/repositories/index.html.erb:78
+#: app/views/repositories/index.html.erb:222
+#: app/views/repositories/index.html.erb:240
+#: app/views/patches/license.html.erb:32 app/views/patches/license.html.erb:41
+#: app/views/patches/index.html.erb:37 app/views/patches/index.html.erb:141
+#: app/views/patches/index.html.erb:150
+msgid "Please wait"
+msgstr ""
+
+#: app/views/repositories/new.html.erb:56
+#: app/views/repositories/index.html.erb:179
 msgid "This value cannot be empty."
 msgstr ""
 
-#: app/views/repositories/index.html.erb:140
-#: app/views/repositories/add.html.erb:105
-msgid "Software Repositories"
-msgstr ""
-
-#: app/views/repositories/index.html.erb:145
-msgid "Configured software repositories"
-msgstr ""
-
-#: app/views/repositories/index.html.erb:148
-msgid "Filter repositories"
-msgstr ""
-
-#: app/views/repositories/index.html.erb:150
-msgid "All"
-msgstr ""
-
-#: app/views/repositories/index.html.erb:152
-msgid "Disabled"
-msgstr ""
-
-#: app/views/repositories/index.html.erb:159
-#, fuzzy
-#| msgid "Search"
-msgid "Quick Search"
-msgstr "Traži"
-
-#: app/views/repositories/index.html.erb:165
-msgid "Add New Repository"
-msgstr ""
-
-#: app/views/repositories/index.html.erb:208
-msgid "Repository is currently"
-msgstr ""
-
-#: app/views/repositories/index.html.erb:211
-#: app/views/repositories/add.html.erb:128
-#: app/views/repositories/add.html.erb:129
-msgid "Repository will be %s."
-msgstr ""
-
-#: app/views/repositories/index.html.erb:215
-msgid "Autorefresh is currently"
-msgstr ""
-
-#: app/views/repositories/index.html.erb:218
-#: app/views/repositories/add.html.erb:133
-#: app/views/repositories/add.html.erb:134
-msgid "Autorefresh will be %s."
-msgstr ""
-
-#: app/views/repositories/index.html.erb:222
-msgid "Keeping downloaded packages is currently"
-msgstr ""
-
-#: app/views/repositories/index.html.erb:225
-#: app/views/repositories/add.html.erb:140
-#: app/views/repositories/add.html.erb:141
-msgid "Keep packages option will be %s."
-msgstr ""
-
-#: app/views/repositories/index.html.erb:232
-#: app/views/repositories/add.html.erb:149
-msgid "Save"
-msgstr ""
-
-#: app/views/repositories/index.html.erb:233
-msgid "Delete"
-msgstr "Izbrii"
-
-#: app/views/repositories/index.html.erb:235
-msgid "Really delete repository '%s'?"
-msgstr ""
-
-#: app/views/repositories/add.html.erb:77
+#: app/views/repositories/new.html.erb:102
 msgid ""
 "A repository with this URL already exists.\n"
 "Create a duplicate?"
 msgstr ""
 
-#: app/views/repositories/add.html.erb:107
+#: app/views/repositories/new.html.erb:136
+#: app/views/repositories/index.html.erb:30
+msgid "Software Repositories"
+msgstr ""
+
+#: app/views/repositories/new.html.erb:138
+#: app/views/repositories/new.html.erb:152
 msgid "Add a new repository"
 msgstr ""
 
-#: app/views/repositories/add.html.erb:116
+#: app/views/repositories/new.html.erb:158
+msgid "Alias"
+msgstr ""
+
+#: app/views/repositories/new.html.erb:162
+#: app/views/patches/_patches.html.erb:22
+msgid "Name"
+msgstr "Naziv"
+
+#: app/views/repositories/new.html.erb:166
+msgid "URL"
+msgstr ""
+
+#: app/views/repositories/new.html.erb:174
+msgid "Repository will be %s."
+msgstr ""
+
+#: app/views/repositories/new.html.erb:179
+msgid "Autorefresh will be %s."
+msgstr ""
+
+#: app/views/repositories/new.html.erb:184
+msgid "Keep packages option will be %s."
+msgstr ""
+
+#: app/views/repositories/index.html.erb:44
+#, fuzzy
+#| msgid "Search"
+msgid "Quick Search"
+msgstr "Traži"
+
+#: app/views/repositories/index.html.erb:49
+msgid "Filter repositories"
+msgstr ""
+
+#: app/views/repositories/index.html.erb:52
+msgid "All"
+msgstr ""
+
+#: app/views/repositories/index.html.erb:52
+msgid "Enabled"
+msgstr ""
+
+#: app/views/repositories/index.html.erb:52
+msgid "Disabled"
+msgstr ""
+
+#: app/views/repositories/index.html.erb:56
 msgid "New Repository"
 msgstr ""
 
-#: app/views/repositories/add.html.erb:137
-msgid "Priority for packages:"
+#: app/views/repositories/index.html.erb:131
+msgid "Save"
 msgstr ""
 
-#: app/views/patch_updates/_patch_installation.html.erb:7
-msgid "An error occured while installing patches."
+#: app/views/repositories/index.html.erb:132
+msgid "Delete"
+msgstr "Izbrii"
+
+#: app/views/repositories/index.html.erb:134
+msgid "Really delete repository '%s'?"
 msgstr ""
 
-#: app/views/patch_updates/_patch_installation.html.erb:19
-msgid "Stop"
-msgstr ""
-
-#: app/views/patch_updates/_patch_installation.html.erb:19
-msgid "Are you sure?"
-msgstr ""
-
-# US
-#: app/views/patch_updates/index.html.erb:11
-#, fuzzy
-#| msgid "United States"
-msgid "Updates"
-msgstr "SAD"
-
-#: app/views/patch_updates/index.html.erb:16
-#: app/views/patch_updates/_patch_summary.html.erb:35
-msgid "Your system is up to date."
-msgstr ""
-
-#: app/views/patch_updates/index.html.erb:21
-msgid "Updates available"
-msgstr ""
-
-#: app/views/patch_updates/index.html.erb:38
-#, fuzzy
-#| msgid "U_pdate every:"
-msgid "Update"
-msgstr "_Ažuriraj svakih:"
-
-#: app/views/patch_updates/_patch_progress.html.erb:5
-msgid "Refreshing package cache"
-msgstr ""
-
-#: app/views/patch_updates/_patch_progress.html.erb:6
-#, fuzzy
-#| msgid "Starting card manager..."
-msgid "Starting package manager"
-msgstr "Pokrećem menadžera za karte..."
-
-#: app/views/patch_updates/_patch_progress.html.erb:7
-msgid "Waiting for the package manager lock"
-msgstr ""
-
-#: app/views/patch_updates/_patch_progress.html.erb:8
-#: app/views/patch_updates/_patch_progress.html.erb:18
-msgid "Evaluating available patches"
-msgstr ""
-
-#: app/views/patch_updates/_patch_progress.html.erb:9
-msgid "Finished reading patches"
-msgstr ""
-
-#: app/views/patch_updates/_patches.html.erb:11
-msgid "Check"
-msgstr ""
-
-#: app/views/patch_updates/_patches.html.erb:13
-msgid "Kind"
-msgstr ""
-
-#: app/views/patch_updates/_patches.html.erb:15
-msgid "Summary"
-msgstr ""
-
-#: app/views/patch_updates/_patches.html.erb:17
-#: app/views/patch_updates/_patches.html.erb:20
-msgid "Source"
-msgstr ""
-
-#: app/views/patch_updates/_patches.html.erb:18
-msgid "Install"
-msgstr ""
-
-#: app/views/patch_updates/_patch_summary.html.erb:9
-msgid "Cannot read patch updates - you have been logged out."
-msgstr ""
-
-#: app/views/patch_updates/_patch_summary.html.erb:12
+#: app/views/patches/_patch_summary.html.erb:17
 #, fuzzy
 #| msgid "No information available."
 msgid "No information about patches available"
 msgstr "Nema dostupnih informacija."
 
-#: app/views/patch_updates/_patch_summary.html.erb:26
+#: app/views/patches/_patch_summary.html.erb:24
+msgid "Update needs EULA license confirmation. Please follow to patch module to decide about license."
+msgstr ""
+
+#: app/views/patches/_patch_summary.html.erb:56
 msgid "Security Updates: %d"
 msgstr ""
 
-#: app/views/patch_updates/_patch_summary.html.erb:29
+#: app/views/patches/_patch_summary.html.erb:66
 msgid "Important Updates: %d"
 msgstr ""
 
-#: app/views/patch_updates/_patch_summary.html.erb:32
+#: app/views/patches/_patch_summary.html.erb:76
 msgid "Optional Updates: %d"
 msgstr ""
 
-#: app/views/patch_updates/_patch_summary.html.erb:40
-msgid "Update All"
+#: app/views/patches/_patch_summary.html.erb:84
+#: app/views/patches/index.html.erb:180
+msgid "Your system is up to date."
 msgstr ""
 
-#: app/views/patch_updates/_patch_summary.html.erb:40
-msgid "Updating all. Are you sure?"
-msgstr ""
+#: app/views/patches/_patch_summary.html.erb:91
+#, fuzzy
+#| msgid "Initializing parallel port..."
+msgid "Install all"
+msgstr "Inicijaliziram paralelni port..."
 
-#: app/views/patch_updates/_patch_summary.html.erb:47
+#: app/views/patches/_patch_summary.html.erb:100
 msgid "Loading patch information"
 msgstr ""
+
+#: app/views/patches/_patch_summary.html.erb:108
+#: app/views/patches/_patch_installation.html.erb:13
+#: app/views/patches/index.html.erb:56 app/views/patches/index.html.erb:75
+#: app/views/patches/index.html.erb:94 app/views/patches/index.html.erb:113
+#: app/views/patches/index.html.erb:132
+msgid "Error: Cannot get information."
+msgstr ""
+
+#: app/views/patches/_patch_installation.html.erb:22
+msgid "An error occured while installing patches."
+msgstr ""
+
+#: app/views/patches/_patch_installation.html.erb:49
+#, fuzzy
+#| msgid "Preparing installation..."
+msgid "Patch Installation"
+msgstr "Pripremam instalaciju..."
+
+#: app/views/patches/_patch_installation.html.erb:59
+msgid "Stop"
+msgstr ""
+
+#: app/views/patches/_patch_installation.html.erb:59
+msgid "Are you sure?"
+msgstr ""
+
+#: app/views/patches/_patches.html.erb:10
+msgid ""
+"One of the patches seems to update WebYaST itself.\n"
+"You may need to reload the page after applying the patch."
+msgstr ""
+
+#: app/views/patches/_patches.html.erb:16
+#, fuzzy
+#| msgid "No information available."
+msgid "No patches available"
+msgstr "Nema dostupnih informacija."
+
+#: app/views/patches/_patches.html.erb:21
+msgid "Kind"
+msgstr ""
+
+#: app/views/patches/_patches.html.erb:24
+#: app/views/patches/_patches.html.erb:27
+msgid "Source"
+msgstr ""
+
+#: app/views/patches/_patches.html.erb:25
+msgid "Install"
+msgstr ""
+
+#: app/views/patches/license.html.erb:63
+msgid "Accept"
+msgstr ""
+
+#: app/views/patches/license.html.erb:64
+msgid "Reject"
+msgstr ""
+
+# US
+#: app/views/patches/index.html.erb:166 app/views/patches/index.html.erb:226
+#, fuzzy
+#| msgid "United States"
+msgid "Updates"
+msgstr "SAD"
+
+# US
+#: app/views/patches/index.html.erb:240
+#, fuzzy
+#| msgid "United States"
+msgid "All updates"
+msgstr "SAD"
+
+#: app/views/patches/index.html.erb:243
+msgid "Security"
+msgstr ""
+
+#: app/views/patches/index.html.erb:245
+msgid "Important"
+msgstr ""
+
+#: app/views/patches/index.html.erb:248
+msgid "Recommended"
+msgstr ""
+
+#: app/views/patches/index.html.erb:251
+msgid "Optional"
+msgstr ""
+
+#: app/views/patches/index.html.erb:269
+#, fuzzy
+#| msgid "U_pdate every:"
+msgid "Update"
+msgstr "_Ažuriraj svakih:"
+
+#, fuzzy
+#~| msgid "Starting card manager..."
+#~ msgid "Starting package manager"
+#~ msgstr "Pokrećem menadžera za karte..."

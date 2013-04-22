@@ -1,39 +1,149 @@
-# Copyright (C) 2006 SuSE Linux Products GmbH, Nuernberg
-# This file is distributed under the same license as the package.
+# @TITLE@
+# Copyright (C) 2006, SUSE Linux GmbH, Nuremberg
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+# This file is distributed under the same license as @PACKAGE@ package. FIRST
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: yast_webclient_roles\n"
-"POT-Creation-Date: 2010-03-11 15:45+0100\n"
-"PO-Revision-Date: 2010-03-25 09:19\n"
-"Last-Translator: Novell Language <language@novell.com>\n"
-"Language-Team: Novell Language <language@novell.com>\n"
+"Project-Id-Version: @PACKAGE@\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2012-06-07 15:19+0200\n"
+"PO-Revision-Date: 2005-09-18 19:09+0200\n"
+"Last-Translator: Mattias Newzella <newzella@linux.se>\n"
+"Language-Team: Swedish <sv@li.org>\n"
+"Language: sv\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"X-Generator: KBabel 1.10.1\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: app/views/roles/_role_edit.erb:31
-msgid "Permissions granted by role"
-msgstr "Behörigheter som beviljats genom rollen"
+#: app/controllers/roles_controller.rb:126
+msgid "Role name is invalid. Allowed is combination of a-z, A-Z, numbers, space, dash and underscore only."
+msgstr ""
 
-#: app/views/roles/_role_edit.erb:44
-msgid "Available permissions"
-msgstr "Tillgängliga behörigheter"
+#: app/controllers/roles_controller.rb:136
+#, fuzzy
+#| msgid "File already exist."
+msgid "Role name is already used."
+msgstr "Filen finns redan."
 
-#: app/views/roles/_role_edit.erb:56
-msgid "Description of permissions"
-msgstr "Beskrivning av behörigheter"
+#: app/controllers/roles_controller.rb:155
+#, fuzzy
+#| msgid "Repository %s has been sucessfully modified."
+msgid "Role '%s' was successfully removed."
+msgstr "Arkivet %s har ändrats."
 
-#: app/views/roles/_role_edit.erb:58
-msgid ")}-description"
-msgstr ")}-beskrivning"
-
-#: app/views/roles/_role_edit.erb:64
-msgid "Save"
-msgstr "Spara"
-
-#: app/views/roles/index.rhtml:12
+#: app/views/roles/index.html.erb:7
 msgid "Roles"
-msgstr "Roller"
+msgstr ""
 
+#: app/views/roles/index.html.erb:25
+#, fuzzy
+#| msgid "Permissions denied"
+msgid "In order to assign the user to roles,"
+msgstr "Åtkomst nekas"
+
+#: app/views/roles/index.html.erb:26
+msgid "Drag and Drop the user labels into Role containers"
+msgstr ""
+
+#: app/views/roles/index.html.erb:27
+msgid "Don't show this again"
+msgstr ""
+
+#: app/views/roles/index.html.erb:38
+#, fuzzy
+#| msgid "Create a new profile"
+msgid "Create Role"
+msgstr "Skapa en ny profil"
+
+#: app/views/roles/index.html.erb:43
+msgid "Assign Users"
+msgstr ""
+
+#: app/views/roles/index.html.erb:53
+#, fuzzy
+#| msgid "Permissions denied"
+msgid "User already assigned"
+msgstr "Åtkomst nekas"
+
+#: app/views/roles/index.html.erb:104
+#, fuzzy
+#| msgid "Available Processors"
+msgid "Assign Permissions"
+msgstr "Tillgängliga processorer"
+
+#: app/views/roles/index.html.erb:107
+msgid "collapse all"
+msgstr ""
+
+#: app/views/roles/index.html.erb:169
+#, fuzzy
+#| msgid "The filename is required."
+msgid "This field is required"
+msgstr "Filnamnet krävs."
+
+#: app/views/roles/index.html.erb:169
+msgid "Allowed is combination of a-z, A-Z, numbers, space, dash and underscore only."
+msgstr ""
+
+#: app/views/roles/index.html.erb:235
+#, fuzzy
+#| msgid "Please wait..."
+msgid "Please wait"
+msgstr "Vänta..."
+
+#, fuzzy
+#~| msgid "Error: Could not read profile %s: %s.\n"
+#~ msgid "Error: Could not remove role <i>%s</i>."
+#~ msgstr "Fel: Kunde inte läsa profil %s: %s.\n"
+
+#, fuzzy
+#~| msgid "Can't find %s."
+#~ msgid "Cannot find roles"
+#~ msgstr "Kan inte hitta %s."
+
+#, fuzzy
+#~| msgid "Selected Resource"
+#~ msgid "Selected Users"
+#~ msgstr "Valda resurser"
+
+#, fuzzy
+#~| msgid "Available Updates"
+#~ msgid "Available Users"
+#~ msgstr "Tillgängliga uppdateringar"
+
+#, fuzzy
+#~| msgid "Invalid device name."
+#~ msgid "Invalid role name"
+#~ msgstr "Enhetsnamnet är ogiltigt."
+
+#, fuzzy
+#~| msgid "Permissions denied"
+#~ msgid "Permissions contained in role"
+#~ msgstr "Åtkomst nekas"
+
+#, fuzzy
+#~| msgid "Permissions denied"
+#~ msgid "Permissions granted by role"
+#~ msgstr "Åtkomst nekas"
+
+#, fuzzy
+#~| msgid "Description: "
+#~ msgid "Description of permissions"
+#~ msgstr "Beskrivning: "
+
+#, fuzzy
+#~| msgid "description"
+#~ msgid ")}-description"
+#~ msgstr "beskrivning"
+
+#, fuzzy
+#~| msgid "Remaining Software"
+#~ msgid "Remaining users"
+#~ msgstr "Återstående mjukvara"
+
+#~ msgid "Save"
+#~ msgstr "Spara"

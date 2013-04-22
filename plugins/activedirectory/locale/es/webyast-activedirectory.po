@@ -1,71 +1,67 @@
-# Copyright (C) 2006 SuSE Linux Products GmbH, Nuernberg
-# This file is distributed under the same license as the package.
+# translation of webyast-activedirectory.es.po to Spanish
+# Spanish translations for PACKAGE package
+# Traducciones al español para el paquete PACKAGE.
+# Copyright (C) 2011 THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
 #
+# Automatically generated, 2011.
+# Carlos E. Robinson <carlos.e.r@opensuse.org>, 2011, 2012.
 msgid ""
 msgstr ""
-"Project-Id-Version: webyast-activedirectory-ui\n"
-"POT-Creation-Date: 2010-08-18 10:18+0200\n"
-"PO-Revision-Date: 2010-08-26 09:24\n"
-"Last-Translator: Novell Language <language@novell.com>\n"
-"Language-Team: Novell Language <language@novell.com>\n"
+"Project-Id-Version: webyast-activedirectory.es\n"
+"POT-Creation-Date: 2012-06-07 15:20+0200\n"
+"PO-Revision-Date: 2012-06-15 04:19+0200\n"
+"Last-Translator: Carlos E. Robinson <carlos.e.r@opensuse.org>\n"
+"Language-Team: Spanish <opensuse-translation-es@opensuse.org>\n"
+"Language: es\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Plural-Forms:  nplurals=2; plural=(n != 1);\n"
+"X-Generator: KBabel 1.11.4\n"
 
-#: app/controllers/activedirectory_controller.rb:40 ./app/controllers/activedirectory_controller.rb:40
-msgid "Cannot read Active Directory client configuraton."
-msgstr "No es posible leer la configuración del cliente de Active Directory."
+msgid "Account settings"
+msgstr "Ajustes de la cuenta"
 
-#: app/controllers/activedirectory_controller.rb:55 ./app/controllers/activedirectory_controller.rb:55
-msgid "Active Directory client configuraton successfully written."
-msgstr "La configuración del cliente de Active Directory se ha escrito correctamente."
-
-#: app/controllers/activedirectory_controller.rb:64 ./app/controllers/activedirectory_controller.rb:64
-msgid "Machine is not member of given domain. Enter the credentials needed for join."
-msgstr "La máquina no es miembro del dominio proporcionado. Introduzca las credenciales necesarias para unirse."
-
-#: app/controllers/activedirectory_controller.rb:70 ./app/controllers/activedirectory_controller.rb:70
-msgid "Error while joining Active Directory domain: %s"
-msgstr "Error al unirse al dominio de Active Directory: %s"
-
-#: app/controllers/activedirectory_controller.rb:73 ./app/controllers/activedirectory_controller.rb:73
-msgid "Error while leaving Active Directory domain: %s"
-msgstr "Error al abandonar el dominio de Active Directory: %s"
-
-#: app/controllers/activedirectory_controller.rb:76 ./app/controllers/activedirectory_controller.rb:76
-msgid "Error while saving Active Directory client configuration."
-msgstr "Error al guardar la configuración del cliente de Active Directory."
-
-#: app/views/activedirectory/index.html.erb:32 ./app/views/activedirectory/index.html.erb:32
-msgid "This field is required."
-msgstr "Este campo es obligatorio."
-
-#: app/views/activedirectory/index.html.erb:57 ./app/views/activedirectory/index.html.erb:57 ./shortcuts.yml:6
 msgid "Active Directory"
-msgstr "Active Directory"
+msgstr "Directorio Activo"
 
-#: app/views/activedirectory/index.html.erb:69 ./app/views/activedirectory/index.html.erb:69
-msgid "Enable Authentication of AD users"
-msgstr "Habilitar autenticación de usuarios de Active Directory"
-
-#: app/views/activedirectory/index.html.erb:72 ./app/views/activedirectory/index.html.erb:72
 msgid "Active Directory Domain"
-msgstr "Dominio de Active Directory"
+msgstr "Dominio de Directorio Activo"
 
-#: app/views/activedirectory/index.html.erb:79 ./app/views/activedirectory/index.html.erb:79
-msgid "Adminstrator User Name"
-msgstr "Nombre del usuario administrador"
+msgid "Active Directory client configuraton successfully written."
+msgstr "Configuración del cliente de Directorio Activo grabada con éxito."
 
-#: app/views/activedirectory/index.html.erb:83 ./app/views/activedirectory/index.html.erb:83
+msgid "Administrator User Name"
+msgstr "Nombre de usuario del Administrador"
+
+msgid "Cannot read Active Directory client configuraton."
+msgstr "No se puede leer la configuración del cliente de Directorio Activo."
+
+msgid "Enable Authentication of AD users"
+msgstr "Activar autentificación de usuarios de AD"
+
+msgid "Error while joining Active Directory domain: %s"
+msgstr "Error al unirse al dominio de Directorio Activo: %s"
+
+msgid "Error while leaving Active Directory domain: %s"
+msgstr "Error al irse del dominio de Directorio Activo: %s"
+
+msgid "Error while saving Active Directory client configuration."
+msgstr "Error al grabar la configuración de Directorio Activo."
+
+msgid "Machine Account"
+msgstr "Cuenta de la máquina"
+
+msgid "Machine is not member of given domain. Enter the credentials needed for join."
+msgstr "La máquina no miembro del dominio dado. Introduzca las credenciales necesarias para unirse."
+
 msgid "Password"
 msgstr "Contraseña"
 
-#: app/views/activedirectory/index.html.erb:87 ./app/views/activedirectory/index.html.erb:87
-msgid "Machine Account"
-msgstr "Cuenta de máquina"
+msgid "Please wait"
+msgstr "Por favor, espere"
 
-#: ./shortcuts.yml:7
-msgid "Configure the connection to Active Directory"
-msgstr "Configurar la conexión con Active Directory"
+msgid "This field is required."
+msgstr "Este campo es necesario."
 

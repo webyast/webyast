@@ -1,75 +1,121 @@
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
 #
-# Krešimir Jozić <kjozic@gmail.com>, 2010.
+# Krešimir Jozić <kjozic@gmail.com>, 2010, 2011, 2012.
 msgid ""
 msgstr ""
-"Project-Id-Version: webyast-roles-ui 1.0.0\n"
-"POT-Creation-Date: 2010-08-02 09:18+0200\n"
-"PO-Revision-Date: 2010-04-13 22:00+0200\n"
+"Project-Id-Version: yast_webclient roles 1.0.0\n"
+"POT-Creation-Date: 2012-06-07 15:19+0200\n"
+"PO-Revision-Date: 2012-06-17 15:20+0200\n"
 "Last-Translator: Krešimir Jozić <kjozic@gmail.com>\n"
 "Language-Team: Croatian <kde-i18n-doc@kde.org>\n"
+"Language: hr\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%"
-"10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
-"X-Generator: Lokalize 1.0\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
+"X-Generator: Lokalize 1.2\n"
 
-#: app/controllers/roles_controller.rb:97
-#: app/controllers/roles_controller.rb:97
-msgid "Cannot find roles"
-msgstr ""
+#: app/controllers/roles_controller.rb:126
+msgid "Role name is invalid. Allowed is combination of a-z, A-Z, numbers, space, dash and underscore only."
+msgstr "Naziv uloge je neispravan. Dozvoljena je samo kombinacija slova a-z, A-Z, brojeva, razmaka, crtice i podvlake."
 
-#: app/views/roles/index.rhtml:61 app/views/roles/index.rhtml:207
-#: app/views/roles/index.rhtml:213 app/views/roles/index.rhtml:61
-#: app/views/roles/index.rhtml:207 app/views/roles/index.rhtml:213
-msgid "Assign Users"
-msgstr ""
+#: app/controllers/roles_controller.rb:136
+msgid "Role name is already used."
+msgstr "Naziv uloge se već koristi."
 
-#: app/views/roles/index.rhtml:62 app/views/roles/index.rhtml:62
-msgid "Selected Users"
-msgstr ""
+#: app/controllers/roles_controller.rb:155
+msgid "Role '%s' was successfully removed."
+msgstr "Uloga '%s' je uspješno uklonjena."
 
-#: app/views/roles/index.rhtml:63 app/views/roles/index.rhtml:63
-#, fuzzy
-msgid "Available Users"
-msgstr "Dostupne dozvole"
-
-#: app/views/roles/index.rhtml:64 app/views/roles/index.rhtml:64
-msgid "Click user names to assign/remove users"
-msgstr ""
-
-#: app/views/roles/index.rhtml:149 app/views/roles/index.rhtml:149
-#: shortcuts.yml:6
+#: app/views/roles/index.html.erb:7
 msgid "Roles"
 msgstr "Uloge"
 
-#: app/views/roles/index.rhtml:153 app/views/roles/index.rhtml:153
+#: app/views/roles/index.html.erb:25
+msgid "In order to assign the user to roles,"
+msgstr "Da bi bilo moguće pridjeliti korisnika ulogama,"
+
+#: app/views/roles/index.html.erb:26
+msgid "Drag and Drop the user labels into Role containers"
+msgstr "Povucite i spustite korisničke oznake u kontejner s ulogama"
+
+#: app/views/roles/index.html.erb:27
+msgid "Don't show this again"
+msgstr "Ne prikazuj ovo ponovno"
+
+#: app/views/roles/index.html.erb:38
 msgid "Create Role"
-msgstr ""
+msgstr "Napravi ulogu"
 
-#: app/views/roles/index.rhtml:165 app/views/roles/index.rhtml:165
-#, fuzzy
+#: app/views/roles/index.html.erb:43
+msgid "Assign Users"
+msgstr "Dodijeli korisnike"
+
+#: app/views/roles/index.html.erb:53
+msgid "User already assigned"
+msgstr "Korisnik je već pridružen"
+
+#: app/views/roles/index.html.erb:104
 msgid "Assign Permissions"
-msgstr "Dostupne dozvole"
+msgstr "Dodijeli dozvole"
 
-#: app/views/roles/index.rhtml:168 app/views/roles/index.rhtml:168
+#: app/views/roles/index.html.erb:107
 msgid "collapse all"
-msgstr ""
+msgstr "sažmi sve"
 
-#: shortcuts.yml:7
-msgid "Set permissions in roles and assign users to roles"
-msgstr ""
+#: app/views/roles/index.html.erb:169
+msgid "This field is required"
+msgstr "Ovo polje je obavezno"
+
+#: app/views/roles/index.html.erb:169
+msgid "Allowed is combination of a-z, A-Z, numbers, space, dash and underscore only."
+msgstr "Dozvoljena je samo kombinacija slova a-z, A-Z, brojeva, razmaka, crtice i podvlake."
+
+#: app/views/roles/index.html.erb:235
+msgid "Please wait"
+msgstr "Molim pričekajte"
+
+#~ msgid "Error: Could not remove role <i>%s</i>."
+#~ msgstr "Greška: Ne mogu ukloniti ulogu <i>%s</i>."
+
+#~ msgid "Cannot find roles"
+#~ msgstr "Ne mogu pronaći uloge"
+
+#~ msgid "Set permissions in roles and assign users to roles"
+#~ msgstr "POstavi dozvole ulogama i dodijeli uloge korisnicima"
+
+#~| msgid "Select"
+#~ msgid "Selected Users"
+#~ msgstr "Odabrani korisnici"
+
+#~| msgid "Available Updates"
+#~ msgid "Available Users"
+#~ msgstr "Dostupni korisnici"
+
+#~ msgid "Click user names to assign/remove users"
+#~ msgstr "Kliknite na korisnička imena da biste dodijelili/uklonili korisnike"
+
+#~ msgid "Invalid role name"
+#~ msgstr "Neispravan naziv uloge"
+
+#~ msgid "Permissions contained in role"
+#~ msgstr "Dozvole sadržane u ulozi"
 
 #~ msgid "Permissions granted by role"
 #~ msgstr "Dozvole odobrene preko uloge"
+
+#~ msgid "Available permissions"
+#~ msgstr "Dostupne dozvole"
 
 #~ msgid "Description of permissions"
 #~ msgstr "Opisi dozvola"
 
 #~ msgid ")}-description"
 #~ msgstr ")}-opis"
+
+#~ msgid "Remaining users"
+#~ msgstr "Preostali korisnici"
 
 #~ msgid "Save"
 #~ msgstr "Sačuvaj"

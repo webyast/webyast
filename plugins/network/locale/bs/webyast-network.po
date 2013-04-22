@@ -2,110 +2,219 @@ msgid ""
 msgstr ""
 "Project-Id-Version: @PACKAGE@\n"
 "Report-Msgid-Bugs-To: translation@suse.de\n"
-"POT-Creation-Date: 2009-11-20 14:34+0100\n"
+"POT-Creation-Date: 2012-06-07 15:19+0200\n"
 "PO-Revision-Date: 2002-07-23 18:27+0200\n"
 "Last-Translator: Damir Bjelobradic <Nagual@lugbih.org>\n"
 "Language-Team: Bosnian <i18n@suse.de>\n"
+"Language: bs\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
 
-#: app/controllers/network_controller.rb:43
-msgid "No permissions for network module"
-msgstr ""
-
-#: app/controllers/network_controller.rb:66
-msgid "Not configured"
-msgstr ""
-
-# VU
-#: app/controllers/network_controller.rb:66
-#, fuzzy
-#| msgid "Vanuatu"
-msgid "Manual"
-msgstr "Vanuatu"
-
-#: app/controllers/network_controller.rb:66
-msgid "Automatic"
-msgstr ""
-
-#: app/controllers/network_controller.rb:105
+#: app/controllers/network_controller.rb:235
 msgid "Network settings have been written."
 msgstr ""
 
-#: app/views/network/index.html.erb:88
-msgid "Invalid IP address format. The correct one is nnn.nnn.nnn.nnn for nnn between 0 and 255."
-msgstr ""
-
-#: app/views/network/index.html.erb:97
-msgid "Invalid Prefix format. The correct one /nn where nn is between 0-32 (CIDR format)."
-msgstr ""
-
-#: app/views/network/index.html.erb:103
-msgid "Invalid default route format. The correct one is nnn.nnn.nnn.nnn for nnn between 0 and 255."
-msgstr ""
-
-#: app/views/network/index.html.erb:109
-msgid "Name servers are required. There must be at least one specified."
-msgstr ""
-
-#: app/views/network/index.html.erb:115
-msgid "Hostname is required. It must be specified."
-msgstr ""
-
-#: app/views/network/index.html.erb:121
-msgid "Domain is required. It is not supported empty domain."
-msgstr ""
-
-#: app/views/network/index.html.erb:131
+#: app/views/network/edit.html.erb:36 app/views/network/new.html.erb:36
+#: app/views/network/index.html.erb:18
 msgid "Network"
 msgstr "Mreža"
 
-#: app/views/network/index.html.erb:140
-msgid "Interface"
+#: app/views/network/_form.html.erb:15 app/views/network/_form.html.erb:45
+#: app/views/network/_form.html.erb:79 app/views/network/_form.html.erb:121
+#, fuzzy
+#| msgid "Modem device name"
+msgid "Interface name"
+msgstr "Ime modema"
+
+#: app/views/network/_form.html.erb:26 app/views/network/index.html.erb:80
+msgid "Physical interface"
 msgstr ""
 
-#: app/views/network/index.html.erb:145
-msgid "Select"
+#: app/views/network/_form.html.erb:31
+msgid "VLAN ID"
+msgstr ""
+
+#: app/views/network/_form.html.erb:56
+msgid "Bridge devices:"
+msgstr ""
+
+#: app/views/network/_form.html.erb:91
+msgid "Bond driver options"
+msgstr ""
+
+#: app/views/network/_form.html.erb:97 app/views/network/index.html.erb:89
+msgid "Bond slaves"
 msgstr ""
 
 # %s is either BOOTP or DHCP
-#: app/views/network/index.html.erb:166
+#: app/views/network/_form.html.erb:132
 #, fuzzy
 #| msgid "%s configuration failed."
 msgid "Configuration mode"
 msgstr "%s podešavanje nije uspjelo."
 
-#: app/views/network/index.html.erb:170
-msgid "IP address"
-msgstr ""
+# %s is either BOOTP or DHCP
+#: app/views/network/_form.html.erb:162
+#, fuzzy
+#| msgid "%s configuration failed."
+msgid "DNS configuration"
+msgstr "%s podešavanje nije uspjelo."
 
-#: app/views/network/index.html.erb:174
-msgid "Subnet mask / Prefixlen"
-msgstr ""
-
-#: app/views/network/index.html.erb:181
+#: app/views/network/_form.html.erb:168
 msgid "Hostname"
 msgstr ""
 
-#: app/views/network/index.html.erb:185
+#: app/views/network/_form.html.erb:172
 msgid "Domain"
 msgstr ""
 
-#: app/views/network/index.html.erb:189
+#: app/views/network/_form.html.erb:177
 msgid "Name servers"
 msgstr ""
 
-#: app/views/network/index.html.erb:193
+#: app/views/network/_form.html.erb:182
 #, fuzzy
 #| msgid "Search"
 msgid "Search domains"
 msgstr "Traži"
 
-#: app/views/network/index.html.erb:201
+#: app/views/network/_form.html.erb:187
+msgid "Change hostname by DHCP"
+msgstr ""
+
+# %s is either BOOTP or DHCP
+#: app/views/network/_form.html.erb:202
+#, fuzzy
+#| msgid "%s configuration failed."
+msgid "IP configuration"
+msgstr "%s podešavanje nije uspjelo."
+
+#: app/views/network/_form.html.erb:209 app/views/network/index.html.erb:50
+msgid "IP address"
+msgstr ""
+
+#: app/views/network/_form.html.erb:213
+msgid "Subnet mask/Prefixlen"
+msgstr ""
+
+#: app/views/network/_form.html.erb:217
 msgid "Default route"
 msgstr ""
+
+#: app/views/network/_form.html.erb:227
+msgid "Save"
+msgstr ""
+
+#: app/views/network/_form.html.erb:229 app/views/network/index.html.erb:184
+msgid "back"
+msgstr ""
+
+#: app/views/network/_validation.html.erb:54
+#: app/views/network/_validation.html.erb:58
+#: app/views/network/_validation.html.erb:62
+#: app/views/network/_validation.html.erb:66
+#: app/views/network/_validation.html.erb:70
+#: app/views/network/_validation.html.erb:74
+#: app/views/network/_validation.html.erb:78
+msgid "This field is required"
+msgstr ""
+
+#: app/views/network/_validation.html.erb:55
+#: app/views/network/_validation.html.erb:63
+#: app/views/network/_validation.html.erb:75
+msgid "Enter a valid IP address"
+msgstr ""
+
+#: app/views/network/_validation.html.erb:59
+msgid "Enter a valid subnet mask or prefix"
+msgstr ""
+
+#: app/views/network/_validation.html.erb:67
+msgid "Enter a valid hostname"
+msgstr ""
+
+#: app/views/network/_validation.html.erb:71
+#: app/views/network/_validation.html.erb:79
+msgid "Enter a valid domain name"
+msgstr ""
+
+#: app/views/network/_validation.html.erb:83
+msgid "Please wait"
+msgstr ""
+
+#: app/views/network/index.html.erb:36
+msgid "Physical Interfaces"
+msgstr ""
+
+#: app/views/network/index.html.erb:49 app/views/network/index.html.erb:75
+msgid "Interface"
+msgstr ""
+
+#: app/views/network/index.html.erb:51
+msgid "Mode"
+msgstr ""
+
+# %s is either BOOTP or DHCP
+#: app/views/network/index.html.erb:54 app/views/network/index.html.erb:95
+#, fuzzy
+#| msgid "%s configuration failed."
+msgid "configure"
+msgstr "%s podešavanje nije uspjelo."
+
+#: app/views/network/index.html.erb:64
+msgid "Virtual Interfaces"
+msgstr ""
+
+#: app/views/network/index.html.erb:79
+msgid "Vlan ID"
+msgstr ""
+
+#: app/views/network/index.html.erb:84
+msgid "Bridge ports"
+msgstr ""
+
+#: app/views/network/index.html.erb:88
+msgid "Bond option"
+msgstr ""
+
+#: app/views/network/index.html.erb:98
+#, fuzzy
+#| msgid "Delete"
+msgid "delete"
+msgstr "Izbrii"
+
+#: app/views/network/index.html.erb:108
+msgid "New virtual interface"
+msgstr ""
+
+#: app/views/network/index.html.erb:119
+msgid "Please select one of the virtual interfaces"
+msgstr ""
+
+#: app/views/network/index.html.erb:144
+msgid "BRIDGE"
+msgstr ""
+
+#: app/views/network/index.html.erb:164
+msgid "BOND"
+msgstr ""
+
+#: app/views/network/index.html.erb:185
+msgid "next"
+msgstr ""
+
+# VU
+#, fuzzy
+#~| msgid "Vanuatu"
+#~ msgid "Manual"
+#~ msgstr "Vanuatu"
+
+#, fuzzy
+#~| msgid "arcnet network card"
+#~ msgid "Manage network devices"
+#~ msgstr "arcnet mrežna karta"
 
 #, fuzzy
 #~| msgid "not connected"
@@ -116,12 +225,6 @@ msgstr ""
 #~| msgid "France"
 #~ msgid "Cancel"
 #~ msgstr "Francuska"
-
-# %s is either BOOTP or DHCP
-#, fuzzy
-#~| msgid "%s configuration failed."
-#~ msgid "Configuration"
-#~ msgstr "%s podešavanje nije uspjelo."
 
 #~ msgid "Description"
 #~ msgstr "Opis"

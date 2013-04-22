@@ -1,163 +1,213 @@
-# Copyright (C) 2006 SuSE Linux Products GmbH, Nuernberg
-# This file is distributed under the same license as the package.
+# translation of yast_webclient_services.nl.po to Dutch
+# @TITLE@
+# Copyright (C) 2006, SUSE Linux GmbH, Nuremberg
 #
+# This file is distributed under the same license as @PACKAGE@ package. FIRST
+#
+# Freek de Kruijf <freek@opensuse.org>, 2009, 2010, 2011, 2012.
 msgid ""
 msgstr ""
-"Project-Id-Version: yast_webclient_services\n"
-"POT-Creation-Date: 2010-04-13 13:37+0200\n"
-"PO-Revision-Date: 2010-04-22 12:39\n"
-"Last-Translator: Novell Language <language@novell.com>\n"
-"Language-Team: Novell Language <language@novell.com>\n"
+"Project-Id-Version: yast_webclient_services.nl\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2012-06-07 15:19+0200\n"
+"PO-Revision-Date: 2012-06-15 10:09+0200\n"
+"Last-Translator: Freek de Kruijf <freek@opensuse.org>\n"
+"Language-Team: Dutch <opensuse-nl@opensuse.org>\n"
+"Language: nl\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Lokalize 1.2\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
 
-#: app/controllers/services_controller.rb:23
-msgid "(cannot read status)"
-msgstr "(kan de status niet lezen)"
-
-#: app/controllers/services_controller.rb:70
+#: app/controllers/services_controller.rb:88
 msgid "success"
-msgstr "succes"
+msgstr "geslaagd"
 
-#: app/controllers/services_controller.rb:71
+#: app/controllers/services_controller.rb:89
 msgid "unspecified error"
-msgstr "niet-gespecificeerde foutmelding"
+msgstr "niet gespecificeerde fout"
 
-#: app/controllers/services_controller.rb:72
+#: app/controllers/services_controller.rb:90
 msgid "invalid or excess argument(s)"
-msgstr "ongeldige of te veel argumenten"
+msgstr "ongeldige of teveel argument(en)"
 
-#: app/controllers/services_controller.rb:73
+#: app/controllers/services_controller.rb:91
 msgid "unimplemented feature"
 msgstr "niet-geïmplementeerde optie"
 
-#: app/controllers/services_controller.rb:74
+#: app/controllers/services_controller.rb:92
 msgid "user had insufficient privilege"
 msgstr "gebruiker heeft onvoldoende privileges"
 
-#: app/controllers/services_controller.rb:75
+#: app/controllers/services_controller.rb:93
 msgid "program is not installed"
 msgstr "programma is niet geïnstalleerd"
 
-#: app/controllers/services_controller.rb:76
+#: app/controllers/services_controller.rb:94
 msgid "program is not configured"
 msgstr "programma is niet geconfigureerd"
 
-#: app/controllers/services_controller.rb:77
-msgid "program is not runnning"
-msgstr "programma draait niet"
+#: app/controllers/services_controller.rb:95
+msgid "program is not running"
+msgstr "programma is niet actief"
 
-#: app/views/services/_result.rhtml:6
+#: app/views/services/_result.html.erb:9
 msgid "Service Call Result"
-msgstr "Resultaat van service-call"
+msgstr "Resultaat ban service-call"
 
-#: app/views/services/_result.rhtml:9
+#: app/views/services/_result.html.erb:12
 msgid "Result"
 msgstr "Resultaat"
 
-#: app/views/services/_result.rhtml:14
+#: app/views/services/_result.html.erb:18
 msgid "Description"
 msgstr "Beschrijving"
 
-#: app/views/services/index.rhtml:141
-msgid "System Services"
-msgstr "Systeemservices"
-
-#: app/views/services/index.rhtml:147
-msgid "You do not have permission to execute the services."
-msgstr "U heeft geen toestemming voor het uitvoeren van services."
-
-#: app/views/services/index.rhtml:151
-msgid "Filter services"
-msgstr "Services filteren"
-
-#: app/views/services/index.rhtml:153
-msgid "All"
-msgstr "Alles"
-
-#: app/views/services/index.rhtml:154
-msgid "Running"
-msgstr "Actief"
-
-#: app/views/services/index.rhtml:155
-msgid "Not Running"
-msgstr "Niet actief"
-
-#: app/views/services/index.rhtml:156
-msgid "Dead"
-msgstr "Dood"
-
-#: app/views/services/index.rhtml:157
-msgid "Started on Boot"
-msgstr "Gestart bij opstarten"
-
-#: app/views/services/index.rhtml:158
-msgid "Not Started on Boot"
-msgstr "Niet gestart bij opstarten"
-
-#: app/views/services/index.rhtml:165
-msgid "Quick Search"
-msgstr "Snelzoeken"
-
-#: app/views/services/index.rhtml:180
-msgid "Description for service is not available"
-msgstr "Beschrijving voor service is niet beschikbaar"
-
-#: app/views/services/index.rhtml:203
-msgid "(refresh)"
-msgstr "(verversen)"
-
-#: app/views/services/index.rhtml:234
-msgid "Start"
-msgstr "Starten"
-
-#: app/views/services/index.rhtml:235
-msgid "Stop"
-msgstr "Stoppen"
-
-#: app/views/services/index.rhtml:236
-msgid "Restart"
-msgstr "Herstarten"
-
-#: app/views/services/index.rhtml:237
-msgid "Start on Boot"
-msgstr "Starten bij opstarten"
-
-#: app/views/services/index.rhtml:238
-msgid "Do Not Start on Boot"
-msgstr "Niet starten bij opstarten"
-
-#: app/views/services/_status.rhtml:6
+#: app/views/services/_status.html.erb:7
 msgid "Service will be started on boot."
-msgstr "Dienst wordt gestart bij opstarten."
+msgstr "Service zal aan het begin worden opgestart."
 
-#: app/views/services/_status.rhtml:8
+#: app/views/services/_status.html.erb:9
 msgid "Service will not be started on boot."
-msgstr "Dienst wordt niet gestart bij opstarten."
+msgstr "Service zal niet aan het begin worden opgestart."
 
-#: app/views/services/_status.rhtml:31
+#: app/views/services/_status.html.erb:32
 msgid "status unknown"
 msgstr "status onbekend"
 
-#: app/views/services/_status.rhtml:33
+#: app/views/services/_status.html.erb:34
 msgid "running"
-msgstr "wordt uitgevoerd"
+msgstr "actief"
 
-#: app/views/services/_status.rhtml:37
+#: app/views/services/_status.html.erb:38
 msgid "dead"
 msgstr "dood"
 
-#: app/views/services/_status.rhtml:41
+#: app/views/services/_status.html.erb:42
 msgid "not running"
 msgstr "niet actief"
 
-#: app/views/services/_status.rhtml:45
+#: app/views/services/_status.html.erb:46
 msgid "status unknown: %d"
 msgstr "status onbekend: %d"
 
-#: app/views/services/_status.rhtml:48
+#: app/views/services/_status.html.erb:49
 msgid "Current status of the service:"
-msgstr "Huidige status van dienst:"
+msgstr "Huidige status van de service"
 
+#: app/views/services/index.html.erb:48
+msgid "System Services"
+msgstr "Systeemservices"
+
+#: app/views/services/index.html.erb:58
+msgid "You do not have permission to execute the services."
+msgstr "U hebt geen toestemming om de services uit te voeren."
+
+#: app/views/services/index.html.erb:66
+msgid "Quick Search"
+msgstr "Snelzoeken"
+
+#: app/views/services/index.html.erb:71
+msgid "Filter services"
+msgstr "Services filteren"
+
+#: app/views/services/index.html.erb:76
+msgid "All"
+msgstr "Alles"
+
+#: app/views/services/index.html.erb:77
+msgid "Running"
+msgstr "Actief"
+
+#: app/views/services/index.html.erb:78
+msgid "Not Running"
+msgstr "Niet actief"
+
+#: app/views/services/index.html.erb:79
+msgid "Dead"
+msgstr "Dood"
+
+#: app/views/services/index.html.erb:80
+msgid "Started on Boot"
+msgstr "Aan het begin opgestart"
+
+#: app/views/services/index.html.erb:81
+msgid "Not Started on Boot"
+msgstr "Niet aan het begin opgestart"
+
+#: app/views/services/index.html.erb:97
+msgid "Description for service is not available"
+msgstr "Beschrijving van de service is niet beschikbaar"
+
+#: app/views/services/index.html.erb:121
+msgid "(refresh)"
+msgstr "(verversen)"
+
+#: app/views/services/index.html.erb:151
+msgid "Start"
+msgstr "Starten"
+
+#: app/views/services/index.html.erb:152
+msgid "Stop"
+msgstr "Stoppen"
+
+#: app/views/services/index.html.erb:153
+msgid "Restart"
+msgstr "Herstarten"
+
+#: app/views/services/index.html.erb:154
+msgid "Start on Boot"
+msgstr "Bij begin starten"
+
+#: app/views/services/index.html.erb:155
+msgid "Do Not Start on Boot"
+msgstr "Niet bij begin starten"
+
+#: app/views/services/_execute_ajax.haml:8
+#: app/views/services/_refresh_ajax.haml:4
+msgid "Error: Refresh failed"
+msgstr "Fout: verversen is mislukt"
+
+#~ msgid "(cannot read status)"
+#~ msgstr "(kan de status niet lezen)"
+
+#~ msgid "List of services could not be read"
+#~ msgstr "Lijst met services kon niet worden gelezen"
+
+#~ msgid "List of custom services could not be read"
+#~ msgstr "Lijst met eigen services kon niet worden gelezen"
+
+#~ msgid "Unknown error on server side"
+#~ msgstr "Onbekende fout aan de kant van de server"
+
+#~ msgid "Manage the LSB init scripts"
+#~ msgstr "De LSB-init-scripts beheren"
+
+#~ msgid "Add New Repository"
+#~ msgstr "Een nieuwe installatiebron toevoegen"
+
+#~ msgid "Filter repositories"
+#~ msgstr "Installatiebronnen filteren"
+
+#~ msgid "Enabled"
+#~ msgstr "Ingeschakeld"
+
+#~ msgid "Disabled"
+#~ msgstr "Uitgeschakeld"
+
+#~ msgid "Invalid session, please login again."
+#~ msgstr "Ongeldige sessie, gaarne opnieuw aanmelden."
+
+#~ msgid "Back"
+#~ msgstr "Terug"
+
+#~ msgid "Custom Services"
+#~ msgstr "Klantenservices"
+
+#~ msgid "No custom service is defined on target machine."
+#~ msgstr "Geen aangepaste service gedefinieerd op de doelmachine."
+
+# /usr/lib/YaST2/clients/lan_inetd_custom.ycp:754
+#~ msgid "status"
+#~ msgstr "status"

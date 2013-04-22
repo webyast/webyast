@@ -1,112 +1,238 @@
+# translation of webyast-registration-ui.km.po to Khmer
+# Seng Sutha <sutha@khmeros.info>, 2010.
+# Khoem Sokhem <khoemsokhem@khmeros.info>, 2010.
+# Chan Sambathratanak <ratanak@khmeros.info>, 2011.
 msgid ""
 msgstr ""
-"Project-Id-Version: @PACKAGE@\n"
+"Project-Id-Version: webyast-registration-ui.km\n"
 "Report-Msgid-Bugs-To: translation@suse.de\n"
-"POT-Creation-Date: 2009-11-20 14:35+0100\n"
-"PO-Revision-Date: 2006-02-18 09:47+0700\n"
-"Last-Translator: Keo Sophon <keosophon@khmeros.info>\n"
+"POT-Creation-Date: 2012-06-07 15:20+0200\n"
+"PO-Revision-Date: 2011-10-03 16:54+0700\n"
+"Last-Translator: Chan Sambathratanak <ratanak@khmeros.info>\n"
 "Language-Team: Khmer <support@khmeros.info>\n"
+"Language: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
+"X-Generator: WordForge 0.8 RC1\n"
+"X-Language: km-KH\n"
 
-#: app/controllers/registration_controller.rb:15
-msgid "Invalid session, please login again."
-msgstr ""
+#: app/models/registration_state.rb:27
+msgid "Registration is missing"
+msgstr "បាត់​កា​រ​ចុះឈ្មោះ"
+
+#: app/models/registration_state.rb:28
+msgid "Please register your system in order to get updates."
+msgstr "សូម​ចុះឈ្មោះ​ប្រព័ន្ធ​របស់​អ្នក ដើម្បី​ទទួល​បានបច្ចុប្បន្នភាព ។"
+
+#: app/models/registration_state.rb:30
+msgid "register"
+msgstr "ចុះឈ្មោះ"
+
+#: app/controllers/registration_controller.rb:29
+msgid "Email"
+msgstr "អ៊ីមែល​"
+
+#: app/controllers/registration_controller.rb:30
+msgid "System name"
+msgstr "ឈ្មោះ​ប្រព័ន្ធ​"
+
+#: app/controllers/registration_controller.rb:31
+msgid "SLES registration code"
+msgstr "កូដ​ចុះឈ្មោះ​របស់ SLES"
+
+#: app/controllers/registration_controller.rb:32
+msgid "SLED registration code"
+msgstr "កូដ​ចុះឈ្មោះ​របស់ SLED"
+
+#: app/controllers/registration_controller.rb:33
+msgid "SLMS registration code"
+msgstr "កូដ​ចុះឈ្មោះ​របស់ SLMS"
+
+#: app/controllers/registration_controller.rb:34
+msgid "Appliance registration code"
+msgstr "កូដ​ចុះឈ្មោះ​ឧបករណ៍​ប្រើប្រាស់​"
+
+#: app/controllers/registration_controller.rb:35
+msgid "WebYaST registration code"
+msgstr "កូដ​ចុះឈ្មោះ​របស់ WebYaST"
+
+#: app/controllers/registration_controller.rb:36
+msgid "Registration code"
+msgstr "កូដ​​ចុះឈ្មោះ​"
+
+#: app/controllers/registration_controller.rb:37
+msgid "Hostname"
+msgstr "ឈ្មោះ​ម៉ាស៊ីន"
+
+#: app/controllers/registration_controller.rb:38
+msgid "Device name"
+msgstr "ឈ្មោះ​ឧបករណ៍​"
 
 #: app/controllers/registration_controller.rb:39
+msgid "Appliance name"
+msgstr "ឈ្មោះ​ឧបករណ៍​ប្រើប្រាស់"
+
+#: app/controllers/registration_controller.rb:40
+msgid "registration code"
+msgstr "កូដ​ចុះឈ្មោះ"
+
+# %s is FTP or HTTP
+#: app/controllers/registration_controller.rb:81
+msgid "Please try to register again later."
+msgstr "សូម​ព្យាយាម​ចុះឈ្មោះ​ម្ដងទៀត​នៅ​ពេល​ក្រោយ ។"
+
+#: app/controllers/registration_controller.rb:85
+msgid "Registration did not succeed."
+msgstr "កា​រ​ចុះ​ឈ្មោះ​មិន​បាន​ជោគជ័យ​ទេ ។"
+
 #: app/controllers/registration_controller.rb:89
-msgid "No permissions for registration"
-msgstr ""
+msgid "Registration was skipped."
+msgstr "ការ​ចុះឈ្មោះ​ត្រូវ​បាន​រំលង ។​"
 
-#: app/controllers/registration_controller.rb:68
-msgid "Arguments for registration cannot be evaluated."
-msgstr ""
+#: app/controllers/registration_controller.rb:93
+msgid "This may be a temporary issue."
+msgstr "វា​​អាច​ជា​បញ្ហា​បណ្ដោះអាសន្ន ។"
 
-#: app/controllers/registration_controller.rb:69
-#, fuzzy
-#| msgid "An error occurred during the installation."
-msgid "An error occurred during registration. Please try again."
-msgstr "កំហុស​មួយ​បាន​កើត​ឡើង កំឡុង​ពេល​ដំឡើង ។"
+#: app/controllers/registration_controller.rb:97
+msgid "The system might not receive necessary updates."
+msgstr "ប្រព័ន្ធ​អាច​មិន​ទទួល​បាន​​​ការ​ធ្វើ​បច្ចុប្បន្នភាព​ដែល​ចាំបាច់​ឡើយ​ ។"
 
-#: app/controllers/registration_controller.rb:111
-msgid "Registration finished successfully."
-msgstr ""
+#: app/controllers/registration_controller.rb:113
+msgid "The registration server returned invalid or incomplete data."
+msgstr "ម៉ាស៊ីន​បម្រើ​ចុះឈ្មោះ​បាន​ត្រឡប់​ទិន្នន័យ​មិន​ពេញលេញ ឬ​មិន​ត្រឹមត្រូវ ។"
 
-#: app/controllers/registration_controller.rb:119
-#, fuzzy
-#| msgid "Service pack"
-msgid "Service added:"
-msgstr "កញ្ចប់​សេវា"
+#: app/controllers/registration_controller.rb:121
+msgid "Could not read the registration configuration."
+msgstr "មិន​​អាច​អាន​ការ​កំណត់​រចនាសម្ព័ន្ធ​ចុះឈ្មោះ​បាន​ទេ ។"
 
-#: app/controllers/registration_controller.rb:123
-#: app/controllers/registration_controller.rb:128
-#, fuzzy
-#| msgid "Catalog Installer"
-msgid "Catalog enabled:"
-msgstr "កម្មវិធី​ដំឡើង​កាតាឡុក"
+#: app/controllers/registration_controller.rb:121
+msgid "The registration backend is not installed correctly"
+msgstr "កម្មវិធី​ផ្នែក​ខាងក្រោយ​នៃ​ការ​ចុះឈ្មោះ​មិន​ត្រូវ​បាន​ដំឡើង​ត្រឹមត្រូវ​ទេ"
 
-#: app/controllers/registration_controller.rb:143
-#, fuzzy
-#| msgid "Repository name:"
-msgid "Repository added:"
-msgstr "ឈ្មោះ​ឃ្លាំង ៖"
+#: app/controllers/registration_controller.rb:122
+msgid "Please refer to your support contact."
+msgstr "សូម​យោង​តាម​ទំនាក់ទំនង​ដែល​គាំទ្រ​របស់​អ្នក ។"
 
-#: app/controllers/registration_controller.rb:173
+#: app/controllers/registration_controller.rb:151
 msgid "Please fill out missing entries."
-msgstr ""
+msgstr "សូម​បំពេញ​ធាតុ​បាត់​ ។"
 
-#: app/controllers/registration_controller.rb:176
-#, fuzzy
-#| msgid "An error occurred while reading from the installation source."
-msgid "Error occured while connecting to registration server."
-msgstr "កំហុស​បាន​កើតឡើង​នៅ​ខណៈ​ដែល​កំពុងអាន​ពី​ប្រភព​ដំឡើង ។"
+#: app/controllers/registration_controller.rb:183
+msgid "Service added:"
+msgstr "បាន​បន្ថែម​សេវា ៖"
 
-#: app/views/registration/index.rhtml:1
-msgid "register plugin"
-msgstr ""
+#: app/controllers/registration_controller.rb:189
+msgid "Catalog enabled:"
+msgstr "បានបើកកាតាឡុក ៖"
 
-#: app/views/registration/index.rhtml:1
-#, fuzzy
-#| msgid "Administration"
+#: app/controllers/registration_controller.rb:215
+msgid "Repository added:"
+msgstr "បាន​បន្ថែម​ឃ្លាំង ៖"
+
+#: app/controllers/registration_controller.rb:357
+msgid "This system is already registered."
+msgstr "ប្រព័ន្ធ​នេះ​ត្រូវ​បាន​ចុះឈ្មោះ​រួច​ហើយ ។"
+
+#: app/controllers/registration_controller.rb:382
+msgid "Registration finished successfully."
+msgstr "បាន​បញ្ចប់​ការ​ចុះឈ្មោះ​ដោយ​ជោគជ័យ ។"
+
+#: app/controllers/registration_controller.rb:396
+msgid "A connection to the registration server could not be established."
+msgstr "ការ​តភ្ជាប់​ទៅ​កាន់​ម៉ាស៊ីន​បម្រើ​ចុះឈ្មោះ មិន​អាច​ត្រូវ​បាន​បង្កើត​បាន​ទេ ។"
+
+#: app/controllers/registration_controller.rb:400
+msgid "The supplied registration data was invalid."
+msgstr "ទិន្នន័យ​​ចុះឈ្មោះ​​​ដែល​បាន​ផ្ដល់ មិន​ត្រឹមត្រូវ​ទេ ។"
+
+#: app/controllers/registration_controller.rb:404
+msgid "The registration code you entered was invalid."
+msgstr "កូដ​ចុះ​ឈ្មោះ​ដែល​អ្នក​បាន​បញ្ចូល​មិន​ត្រឹមត្រូវ ។"
+
+#: app/controllers/registration_controller.rb:410
+msgid "The transmitted registration data created a conflict."
+msgstr "ទិន្នន័យ​ចុះឈ្មោះ​ដែល​បាន​បញ្ជូន បាន​បង្កើត​នូវ​ការ​ប៉ះទង្គិច ។"
+
+#: app/controllers/registration_controller.rb:418
+msgid "Registration can not be performed. There is no product installed that can be registered."
+msgstr "ការ​ចុះឈ្មោះ​មិន​អាច​ត្រូវ​បាន​អនុវត្ត​បាន​ទេ ។ មិន​មាន​ផលិតផល​បាន​ដំឡើង ដែល​អាច​ត្រូវ​បាន​ចុះឈ្មោះ​នោះ​ទេ ។"
+
+#: app/controllers/registration_controller.rb:442
+msgid "<p><b>Repositories were not modified during the registration process.</b></p><p>It is likely that an incorrect registration code was used. If this is the case, please attempt the registration process again to get an update repository.</p><p>Please make sure that this system has an update repository configured, otherwise it will not receive updates.</p>"
+msgstr "<p><b>ឃ្លាំង​មិន​ត្រូវ​បាន​កែប្រែ​ទេ អំឡុង​ពេល​ដំណើរការ​ចុះឈ្មោះ ។</b></p><p>វា​ទំនង​ជា​បាន​ប្រើ​កូដ​ចុះឈ្មោះ​មិន​ត្រឹមត្រូវ ។ ប្រសិនបើ​​ជា​ករណី​នេះ​មែន សូម​សាកល្បង​ដំណើរការ​ចុះឈ្មោះ​ម្ដង​ទៀត ដើម្បី​ទទួល​បាន​ឃ្លាំង​បច្ចុប្បន្នភាព ។</p><p>សូម​ប្រាកដ​ថា ប្រព័ន្ធ​នេះ​​បាន​កំណត់​រចនាសម្ព័ន្ធ​ឃ្លាំង​បច្ចុប្បន្នភាព បើ​មិន​ដូច្នេះ​ទេ វា​នឹង​មិន​ទទួល​បាន​បច្ចុប្បន្នភាព​​ទេ ។</p>​​​"
+
+#: app/controllers/registration_controller.rb:454
+msgid "The registration server returned invalid data."
+msgstr "ម៉ាស៊ីន​បម្រើ​ចុះឈ្មោះ បាន​ត្រឡប់​​ទិន្នន័យ​មិន​ត្រឹមត្រូវ ។"
+
+#: app/views/registration/index.html.erb:42
+#: app/views/registration/index.html.erb:57
+msgid "Please wait"
+msgstr "សូម​រង់ចាំ"
+
+#: app/views/registration/index.html.erb:64
+#: app/views/registration/index.html.erb:65
+msgid "Please enter a valid Email address."
+msgstr "សូម​បញ្ចូល​អាសយដ្ឋាន​អ៊ីមែល​ដែល​ត្រឹមត្រូវ ។"
+
+#: app/views/registration/index.html.erb:80
 msgid "Registration"
-msgstr "ការ​គ្រប់​គ្រង"
+msgstr "ការ​ចុះឈ្មោះ​"
 
-#: app/views/registration/index.rhtml:9
-#, fuzzy
-#| msgid "A system restart is required"
+#: app/views/registration/index.html.erb:93
+msgid "Registration Information"
+msgstr "ព័ត៌មាន​ចុះឈ្មោះ"
+
+#: app/views/registration/index.html.erb:99
 msgid "This system is registered"
-msgstr "តម្រូវ​ឲ្យ​ចាប់ផ្ដើម​ប្រព័ន្ធ​ឡើង​វិញ"
+msgstr "ប្រ​ព័ន្ធ​នេះ​ត្រូវ​បាន​ចុះឈ្មោះ​"
 
-#: app/views/registration/index.rhtml:10
-#, fuzzy
-#| msgid "System:"
-msgid "System's GUID:"
-msgstr "ប្រព័ន្ធ ៖"
+#: app/views/registration/index.html.erb:102
+msgid "System number (GUID)"
+msgstr "លេខ​ប្រព័ន្ធ (GUID)"
 
-#: app/views/registration/index.rhtml:11
-#, fuzzy
-#| msgid "Administration"
+#: app/views/registration/index.html.erb:105
 msgid "Register again"
-msgstr "ការ​គ្រប់​គ្រង"
+msgstr "ចុះឈ្មោះ​​ម្តង​ទៀត​"
 
-#: app/views/registration/index.rhtml:39
-#, fuzzy
-#| msgid "Details"
-msgid "Detail"
+#: app/views/registration/index.html.erb:118
+msgid "Next"
+msgstr "បន្ទាប់"
+
+#: app/views/registration/index.html.erb:131
+msgid "Mandatory Information"
+msgstr "ព័ត៌មាន​​​សំខាន់"
+
+#: app/views/registration/index.html.erb:151
+msgid "Details"
 msgstr "សេចក្ដី​លម្អិត"
 
-#, fuzzy
-#~| msgid "Error reading repositories:"
-#~ msgid "Changed Repositories"
-#~ msgstr "កំហុស​ខណៈពេល​អាន​ឃ្លាំង ៖"
+#: app/views/registration/index.html.erb:179
+msgid "Postpone"
+msgstr "ផ្អាក"
 
-#, fuzzy
-#~| msgid "Changed profiles"
-#~ msgid "Changed Services"
-#~ msgstr "ទម្រង់​បាន​ផ្លាស់ប្ដូរ"
+#~ msgid "Invalid session, please login again."
+#~ msgstr "សម័យ​មិន​ត្រឹមត្រូវ​ សូម​ចូល​ម្ដងទៀត​ ។"
 
-# cancel button label
-#~ msgid "Cancel"
-#~ msgstr "បោះបង់"
+#~ msgid "No permissions for registration"
+#~ msgstr "គ្មាន​សិទ្ធិ​សម្រាប់​ការ​ចុះឈ្មោះ​ឡើយ"
+
+#~ msgid "A connection to the registration server could not be established or it did not reply."
+#~ msgstr "ការ​​តភ្ជាប់​ទៅ​កាន់​ម៉ាស៊ីន​បម្រើ​ចុះឈ្មោះ មិន​អាច​ត្រូវ​បាន​បង្កើត​បាន​ទេ ឬ​វា​មិន​បាន​ឆ្លើយ​តប ។"
+
+#~ msgid "register plugin"
+#~ msgstr "កម្មវិធី​ជំនួយ​ចុះឈ្មោះ​"
+
+#~ msgid "System Registration"
+#~ msgstr "ការ​ចុះឈ្មោះ​ប្រព័ន្ធ"
+
+#~ msgid "Registration did not finish."
+#~ msgstr "មិនទាន់​បាន​បញ្ចប់​ការ​ចុះ​ឈ្មោះ​នៅ​ឡើយ​ទេ​ ។"
+
+#~ msgid "Skip"
+#~ msgstr "រំលង"
+
+#~ msgid "or"
+#~ msgstr "ឬ"

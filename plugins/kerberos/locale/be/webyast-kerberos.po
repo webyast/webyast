@@ -1,0 +1,64 @@
+# Belarusian message file for YaST2 (@memory@).
+# Copyright (C) 2007 SUSE Linux Products GmbH.
+# Alexander Nyakhaychyk <nyakhaychyk@gmail.com>, 2007
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: YaST (@memory@)\n"
+"POT-Creation-Date: 2012-06-07 15:20+0200\n"
+"PO-Revision-Date: 2006-01-04 08:58+0100\n"
+"Last-Translator: Alexander Nyakhaychyk <nyakhaychyk@gmail.com>\n"
+"Language-Team: Belarusian <i18n@suse.de>\n"
+"Language: be\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
+
+#: app/controllers/kerberos_controller.rb:30
+msgid "Cannot read Kerberos client configuraton."
+msgstr ""
+
+#: app/controllers/kerberos_controller.rb:45
+msgid "Kerberos client configuraton successfully written."
+msgstr ""
+
+#: app/controllers/kerberos_controller.rb:47
+#, fuzzy
+#| msgid "Saving console configuration..."
+msgid "Error while saving Kerberos client configuration."
+msgstr "Захаванне канфігураці кансолі..."
+
+#: app/views/kerberos/index.html.erb:32
+msgid "This field is required."
+msgstr ""
+
+#: app/views/kerberos/index.html.erb:33
+msgid "Enter a valid domain name or an IP address."
+msgstr ""
+
+#: app/views/kerberos/index.html.erb:60
+msgid "Please wait"
+msgstr ""
+
+#: app/views/kerberos/index.html.erb:78
+msgid "Kerberos client"
+msgstr ""
+
+#: app/views/kerberos/index.html.erb:91
+msgid "Enable Kerberos Authentication"
+msgstr ""
+
+#: app/views/kerberos/index.html.erb:98
+msgid "Default Domain"
+msgstr ""
+
+#: app/views/kerberos/index.html.erb:103
+#, fuzzy
+#| msgid "Default &Gateway IP"
+msgid "Default Realm"
+msgstr "&Шлюз IP па змоўчанні"
+
+#: app/views/kerberos/index.html.erb:108
+msgid "KDC Server Address"
+msgstr ""

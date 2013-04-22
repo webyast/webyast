@@ -1,0 +1,74 @@
+# @TITLE@
+# Copyright (C) 2006, SUSE Linux GmbH, Nuremberg
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+# This file is distributed under the same license as @PACKAGE@ package. FIRST
+# 
+msgid ""
+msgstr ""
+"Project-Id-Version: @PACKAGE@\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2012-06-07 15:20+0200\n"
+"PO-Revision-Date: 2005-08-11 20:37+0200\n"
+"Last-Translator: Olav Pettershagen <olav.pet@gmail.com>\n"
+"Language-Team:  <nb@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: KBabel 1.10.2\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: app/controllers/ldap_controller.rb:38
+msgid "Cannot read LDAP client configuraton."
+msgstr "Kan ikke lese klientoppsett for LDAP."
+
+# %s is either BOOTP or DHCP
+#: app/controllers/ldap_controller.rb:63
+msgid "LDAP client configuraton successfully written."
+msgstr "Klientoppsett for LDAP er lagret."
+
+#: app/controllers/ldap_controller.rb:65
+msgid "Error while saving LDAP client configuration."
+msgstr "Feil ved lagring av klientoppsett for LDAP."
+
+#: app/views/ldap/index.html.erb:33
+msgid "This field is required."
+msgstr "Dette feltet er obligatorisk."
+
+#: app/views/ldap/index.html.erb:34
+msgid "Enter a valid domain name or an IP address."
+msgstr "Angi et gyldig domenenavn eller en IP-adresse."
+
+#: app/views/ldap/index.html.erb:70
+msgid "Please wait"
+msgstr "Vent"
+
+#: app/views/ldap/index.html.erb:88
+msgid "LDAP client"
+msgstr "LDAP-klient"
+
+#: app/views/ldap/index.html.erb:101
+msgid "Enable LDAP Authentication"
+msgstr "Tillat LDAP-autentisering"
+
+#: app/views/ldap/index.html.erb:108
+msgid "LDAP Server Address"
+msgstr "LDAP-serveradresse"
+
+#: app/views/ldap/index.html.erb:113
+msgid "Base DN"
+msgstr "Base-DN"
+
+#: app/views/ldap/index.html.erb:115
+msgid "Fetch DN"
+msgstr "Hent DN"
+
+#: app/views/ldap/index.html.erb:127
+msgid "Secure Connection"
+msgstr "Sikker tilkobling"
+
+#~ msgid "LDAP"
+#~ msgstr "LDAP"
+
+#~ msgid "Configure LDAP client"
+#~ msgstr "Sett opp LDAP-klient"
