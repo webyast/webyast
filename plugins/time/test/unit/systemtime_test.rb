@@ -52,18 +52,12 @@ class SystemtimeTest < ActiveSupport::TestCase
     assert_equal READ_RESPONSE[:model][:utcstatus], system_time.utcstatus
   end
 
-  def test_writing_system_time
+  def test_manual_change_system_time
     stub_yapi_read
-    system_time = Systemtime.new WRITE_TIME_ARGS[:model]
     stub_yapi_write :with => WRITE_TIME_ARGS[:yapi]
+    system_time = Systemtime.new WRITE_TIME_ARGS[:model]
+    stub_ntp_service :stop if system_time.ntpd_running
     assert system_time.save, "Model is not valid, errors: #{system_time.errors.full_messages}"
-  end
-
-  def test_change_date
-    stub_yapi_read
-    system_time = Systemtime.find
-    system_time.date = '01/01/2022'
-    assert system_time.save, "Saving failed, errors: #{system_time.errors.full_messages}"
   end
 
   def test_loading_without_set_timezone #bnc#582166
@@ -72,15 +66,15 @@ class SystemtimeTest < ActiveSupport::TestCase
     assert_equal "Czech Republic", system_time.timezone
   end
 
-  def test_saving_without_time
+  def test_saving_without_time_manual
     stub_yapi_read
-    system_time = Systemtime.find
+    system_time = Systemtime.new WRITE_TIME_ARGS[:model]
     system_time.time = ''
     assert !system_time.save
     assert system_time.errors[:time].present?, "Expected error message for time attribute"
   end
 
-  def test_setter_without_timezone
+  def test_setter_without_timezone_manual
     stub_yapi_read
     system_time = Systemtime.find
     system_time.timezone = ''
@@ -88,7 +82,7 @@ class SystemtimeTest < ActiveSupport::TestCase
     assert system_time.errors[:timezone].present?
   end
 
-  def test_setter_with_unknown_region
+  def test_setter_with_unknown_region_manual
     stub_yapi_read
     system_time = Systemtime.find
     system_time.region = 'Vysocany'
@@ -96,7 +90,7 @@ class SystemtimeTest < ActiveSupport::TestCase
     assert system_time.errors[:region].present?
   end
 
-  def test_xml
+  def test_xml_manual
     stub_yapi_read
     system_time = Systemtime.find
     xml_attributes = Hash.from_xml system_time.to_xml
@@ -104,6 +98,14 @@ class SystemtimeTest < ActiveSupport::TestCase
       assert system_time.respond_to?(attr), "Attribute '#{attr}' does not exist"
       assert_equal value, system_time.__send__(attr)
     end
+  end
+
+  def change_time_ntp_sync
+    stub_yapi_read
+    stub_yapi_write :with => WRITE_TIME_ARGS[:yapi]
+    system_time = Systemtime.new WRITE_TIME_ARGS[:model].update(:config=>'ntp_sync')
+    stub_ntp_service :start unless system_time.ntpd_running
+    assert system_time.save
   end
 
 end

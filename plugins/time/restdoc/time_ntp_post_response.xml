@@ -6,5 +6,6 @@
   <date>27/02/2013</date>
   <time>12:22:02</time>
   <hwclock type="boolean">true</hwclock>
+  <config>ntp_sync</config>
 </systemtime>
 
